@@ -9,22 +9,89 @@
 
 DROP TABLE IF EXISTS objects;
 CREATE TABLE objects (
-  objectID				int(11) NOT NULL auto_increment,
-  objectTypeID			int(11) NOT NULL default '0',
-  objectPermissionID	int(11) NOT NULL default '0',
-  objectUserID			int(11) NOT NULL default '0',
-  objectTitle			text,
-  objectCreator			text,
-  objectSubject			text,
-  objectDescription		text,
-  objectDate			text,
-  objectData			text,
-  objectModified		timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  objectAdded			timestamp NOT NULL default '0000-00-00 00:00:00',
-  objectActive			int(1) NOT NULL default '0',
-  PRIMARY KEY  (objectID),
-  FULLTEXT KEY objectTitle (objectTitle,objectDescription,objectData,objectCreator,objectSubject,objectDate)
+  object_id					int(11) NOT NULL auto_increment,
+  objectType_id				int(11) NOT NULL default '0',
+  object_permission_id		int(11) NOT NULL default '0',
+  object_user_id			int(11) NOT NULL default '0',
+  object_title				text,
+  object_creator			text,
+  object_subject			text,
+  object_description		text,
+  object_date				text,
+  object_data				text,
+  object_modified			timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  object_added				timestamp NOT NULL default '0000-00-00 00:00:00',
+  object_active				tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (object_id),
+  FULLTEXT KEY object_title (object_title, object_description, object_data, object_creator, object_subject, object_date)
+) ENGINE=INNODB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `objectCategories`;
+CREATE TABLE `objectCategories` (
+  `objectCategoryID` int(11) NOT NULL auto_increment,
+  `objectCategoryParentID` int(11) default '0',
+  `objectCategoryName` tinytext NOT NULL,
+  `objectCategoryDescription` text,
+  `objectCategoryOrder` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`objectCategoryID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+DROP TABLE IF EXISTS `objectFiles`;
+CREATE TABLE `objectFiles` (
+  `objectFileID` int(11) NOT NULL auto_increment,
+  `objectFileObjectID` int(11) NOT NULL default '0',
+  `objectFileName` text NOT NULL,
+  `objectFileOriginalName` text NOT NULL,
+  `objectFileDescription` text,
+  `objectFileType` tinytext NOT NULL,
+  `objectFileSize` int(11) NOT NULL default '0',
+  `objectFileModified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `objectFileAdded` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `objectFileActive` int(1) NOT NULL default '0',
+  PRIMARY KEY  (`objectFileID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+DROP TABLE IF EXISTS `objectNotes`;
+CREATE TABLE `objectNotes` (
+  `objectNoteID` int(11) NOT NULL auto_increment,
+  `objectNoteObjectID` int(11) NOT NULL default '0',
+  `objectNoteUserID` int(11) NOT NULL default '0',
+  `objectNotePermissionID` int(11) NOT NULL default '0',
+  `objectNoteText` text NOT NULL,
+  `objectNoteModified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `objectNoteAdded` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`objectNoteID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+DROP TABLE IF EXISTS `objects_objectCategories`;
+CREATE TABLE `objects_objectCategories` (
+  `objectID` int(11) NOT NULL default '0',
+  `objectCategoryID` int(11) NOT NULL default '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE `permissions` (
+  `permissionID` int(11) NOT NULL default '0',
+  `permissionName` tinytext NOT NULL,
+  `permissionDescription` text,
+  PRIMARY KEY  (`permissionID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `userID` int(11) NOT NULL auto_increment,
+  `userUsername` varchar(30) NOT NULL default '',
+  `userPassword` varchar(32) NOT NULL default '',
+  `userFName` tinytext,
+  `userLName` tinytext,
+  `userEmail` tinytext,
+  `userInstitution` text,
+  `userPermissionID` int(11) NOT NULL default '0',
+  `userActive` int(1) NOT NULL default '0',
+  PRIMARY KEY  (`userID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
 
 -- 
 -- Table structure for table 'objectTypes'
@@ -32,17 +99,17 @@ CREATE TABLE objects (
 
 DROP TABLE IF EXISTS objectTypes;
 CREATE TABLE objectTypes (
-  objectTypeID					int(11) NOT NULL auto_increment,
-  objectTypeName				tinytext NOT NULL,
-  objectTypeDescription			text,
-  objectTitleDescription		text,
-  objectDescriptionDescription	text,
-  objectCreatorDescription		text,
-  objectSubjectDescription		text,
-  objectDateDescription			text,
-  objectTypeActive				int(1) NOT NULL default '0',
-  PRIMARY KEY  (objectTypeID)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  objectType_id							int(11) NOT NULL auto_increment,
+  objectType_name						tinytext NOT NULL,
+  objectType_description				text,
+  objectType_title_description			text,
+  objectType_description_description	text,
+  objectType_creator_description		text,
+  objectType_subject_description		text,
+  objectType_date_description			text,
+  objectType_active						tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (objectType_id)
+) ENGINE=INNODB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -69,8 +136,8 @@ CREATE TABLE metaFields (
 DROP TABLE IF EXISTS metaText;
 CREATE TABLE metaText (
 	metaText_id					int(11)			NOT NULL	auto_increment,
-	metaText_metaField_id		int(11)			NOT NULL,
-	metaText_object_id			int(11)			NOT NULL,
+	metaField_id				int(11)			NOT NULL,
+	object_id					int(11)			NOT NULL,
 	metaText_text				text			NULL,
 	PRIMARY KEY (metaText_id)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;

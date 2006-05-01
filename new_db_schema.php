@@ -36,9 +36,4 @@ while( $array2 = $res2->fetch_assoc() ) {
 print_r($array2);
 }
 
-/*
-LEFT JOIN metaFields ON metaFields.metaField_id = objectTypes_metaFields.metaField_id
-LEFT JOIN metaText ON ( metaText.metaText_id = metaFields.metaField_id AND metaText.object_id = objects.objectID )
-WHERE objects.objectID = 1"
-*/
 ?>
