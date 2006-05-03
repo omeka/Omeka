@@ -8,7 +8,7 @@ if( mysqli_connect_errno() ) {
 
 $sql = "SELECT *
 		FROM objects
-		LEFT JOIN objectTypes USING( objectTypeID )
+		INNER JOIN objectTypes USING( objectTypeID )
 		WHERE objects.objectID = 1";
 		
 $sql2 = "SELECT metaField_name, metaField_type, metaText_text
