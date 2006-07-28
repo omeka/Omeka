@@ -1,0 +1,2 @@
+<h3><a href="browse">Browse the Map</a></h3>
+<p>Proin at eros non eros adipiscing mollis. Donec semper turpis sed diam. Sed consequat ligula nec tortor. Integer eget sem. Ut vitae enim eu est vehicula gravida.</p>

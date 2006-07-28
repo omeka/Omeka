@@ -1,0 +1,1 @@
+<a href="<?php echo $_link->to('files', 'edit') . $file->getId(); ?>">Edit File Metadata</a>

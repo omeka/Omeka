@@ -1,0 +1,2 @@
+<h3>About Katrina&#8217;s Jewish Voices</h3>
+<p>Proin at eros non eros adipiscing mollis. Donec semper turpis sed diam. Sed consequat ligula nec tortor. Integer eget sem. <a href="about">More....</a></p>

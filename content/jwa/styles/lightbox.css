@@ -1,0 +1,51 @@
+#lightbox {
+	display:none;
+	position: absolute;
+	top:50%;
+	left:50%;
+	z-index:9999;
+	width:500px;
+	height:400px;
+	margin:-220px 0 0 -250px;
+	border:1px solid #fff;
+	background:#FDFCE9;
+	text-align:left;
+}
+#lightbox[id]{
+	position:fixed;
+}
+
+#overlay{
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:5000;
+	background-color:#000;
+	-moz-opacity: 0.8;
+	opacity:.80;
+	filter: alpha(opacity=80);
+}
+#overlay[id]{
+	position:fixed;
+}
+
+#lightbox.done #lbLoadMessage{
+	display:none;
+}
+#lightbox.done #lbContent{
+	display:block;
+}
+#lightbox.loading #lbContent{
+	display:none;
+}
+#lightbox.loading #lbLoadMessage{
+	display:block;
+}
+
+#lightbox.done img{
+	width:100%;
+	height:100%;
+}

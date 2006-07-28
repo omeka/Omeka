@@ -1,0 +1,3 @@
+<h3>Privacy Policy</h3>
+<p><abbr title="Jewish Women&#8217;s Archive">JWA</abbr> will not sell, trade or share your email address or any of the other personal information accompanying your submission with any third parties, except when we believe, in good faith (i) that the law requires it, or (ii) that disclosure is necessary to protect the rights and property of <abbr title="Jewish Women&#8217;s Archive">JWA</abbr> or others.</p>
+<p>If you have any questions about our privacy policy, the information we have collected from you online, the practices of this site or your interaction with this website, send an email to <a href="mailto:katrina@jwa.org">katrina@jwa.org</a>.</p>
