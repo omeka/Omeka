@@ -27,7 +27,7 @@ class TagsController extends Kea_Action_Controller
 	protected function _getTags( $num = 100 )
 	{
 		$tags = new Tags();
-		return $tags->getTagsAndCount( $num );
+		return $tags->getTagsAndCount( $num , true, false );
 	}
 	
 	protected function _getMaxCount()

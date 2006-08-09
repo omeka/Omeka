@@ -9,7 +9,13 @@
 			<input type="submit" class="submitinput" id="searchbutton" value="Search" />
 		</form>
 		<p id="login-blurb"><?php if (self::$_session->getUser()): ?>
-		Logged in as <span class="user"><superuser><?php echo self::$_session->getUser()->getUserFirstName().' '.self::$_session->getUser()->getUserLastName(); ?></span>. <a href="<?php echo $_link->to('logout'); ?>">Logout</a>
+		Logged in as <span class="user"><superuser><?php 
+		
+			if (self::$_session->getUser()->getUserFirstName() && self::$_session->getUser()->getUserLastName())
+				echo self::$_session->getUser()->getUserFirstName().' '.self::$_session->getUser()->getUserLastName(); 
+			else 
+				echo self::$_session->getUser()->getEmail();
+		?></span>. <a href="<?php echo $_link->to('logout'); ?>">Logout</a>
 		<?php else: ?><a href="<?php echo $_link->to('login'); ?>">Sign up or sign in</a>
 		<?php endif; ?></p>
 	</div>

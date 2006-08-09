@@ -5,6 +5,7 @@
 	<li class="nav-about"><a href="<?php echo $_link->to('about'); ?>">About</a></li>
 	<li class="nav-faq"><a href="<?php echo $_link->to('faq'); ?>"><abbr title="Frequently Asked Questions">FAQ</abbr></a></li>
 	<li class="nav-contact"><a href="<?php echo $_link->to('contact'); ?>">Contact</a></li>
+	<li class="nav-pressroom"><a href="http://www.jwa.org/press/#katrina">Pressroom </a></li>
 	<li class="nav-privacy"><a href="<?php echo $_link->to('privacy'); ?>">Privacy</a></li>
 	<li class="nav-termsofuse"><a href="<?php echo $_link->to('termsofuse'); ?>">Terms of Use</a></li>
 </ul>

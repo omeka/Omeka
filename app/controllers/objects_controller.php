@@ -13,6 +13,60 @@ class ObjectsController extends Kea_Action_Controller
 		);
 	}
 	
+	protected function _getNextObjectID( $id = null )
+	{
+		if( !$id )
+		{
+			$id = self::$_request->getProperty( 'id' ) ?
+					self::$_request->getProperty( 'id' ) : 
+						(isset( self::$_route['pass'][0] ) ?
+						self::$_route['pass'][0] :
+						0);	
+		}
+		
+		$id = (int) $id;
+
+		$mapper = new Object_Mapper;
+		$select = $mapper->find()
+						->where( 'object_id > ?', $id );
+		$this->applyPermissions( $select );
+		$obj = $select->execute()->getObjectAt(0);
+
+		if( $obj )
+		{
+			return $obj;
+		}
+		return false;
+	}
+
+	protected function _getPrevObjectID( $id = null )
+	{
+		if( !$id )
+		{
+			$id = self::$_request->getProperty( 'id' ) ?
+					self::$_request->getProperty( 'id' ) : 
+						(isset( self::$_route['pass'][0] ) ?
+						self::$_route['pass'][0] :
+						0);	
+		}
+		
+		$id = (int) $id;
+
+		$mapper = new Object_Mapper;
+		$select = $mapper->find()
+						->where( 'object_id < ?', $id )
+						->order( array( 'object_id' => 'DESC' ) );
+		$this->applyPermissions( $select );
+		$obj = $select->execute()->getObjectAt(0);
+
+		if( $obj )
+		{
+			return $obj;
+		}
+		return false;
+	}
+
+
 	protected function _findById( $id = null )
 	{
 		if( !$id )
@@ -27,20 +81,23 @@ class ObjectsController extends Kea_Action_Controller
 		$id = (int) $id;
 		
 		$mapper = new Object_Mapper();
-
-		$obj = $mapper->find()
+		$select = $mapper->select()
 					  ->joinLeft( 'categories', 'categories.category_id = objects.category_id' )
-					  ->where( 'objects.object_id = ?', $id )
-					  ->execute();
+					  ->where( 'objects.object_id = ?', $id );
+		$this->applyPermissions( $select );
+		$obj = $mapper->findObjects( $select );
 		
-		$obj->getCategoryMetadata()
-			->getCreator()
-			->getLocation()
-			->getContributor()
-			->getTags()
-			->getFiles();
-					
-		return $obj;
+		if ($obj->object_id):
+			$obj->getCategoryMetadata()
+				->getCreator()
+				->getLocation()
+				->getContributor()
+				->getTags()
+				->getFiles();					
+			return $obj;
+		else:
+			return false;
+		endif;
 	}
 
 	protected function _getPageNum()
@@ -48,6 +105,7 @@ class ObjectsController extends Kea_Action_Controller
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
 		return $page;
 	}
+	
 	protected function _paginate( $short_desc = true, $num_objects = 9, $check_location = false )
 	{	
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
@@ -115,11 +173,22 @@ class ObjectsController extends Kea_Action_Controller
 		
 		if( self::$_request->getProperty( 'search' ) ) {
 			
-			$select->orWhere( 'objects.object_title LIKE ?', '%'.self::$_request->getProperty( 'search' ).'%' );
+/*			$select->orWhere( 'objects.object_title LIKE ?', '%'.self::$_request->getProperty( 'search' ).'%' );
 			$select->orWhere( 'objects.object_description LIKE ?', '%'.self::$_request->getProperty( 'search' ).'%' );
 			$select->join( 'metatext', 'objects.object_id = metatext.object_id');
 			$select->orWhere( 'metatext.metatext_text LIKE ?', '%'.self::$_request->getProperty( 'search' ).'%' );
-			
+			$select->join( 'objects_tags', 'objects.object_id = objects_tags.object_id');
+			$select->join( 'tags', 'objects_tags.tag_id = tags.tag_id');
+			$select->orWhere( 'tags.tag_name LIKE ?', '%'.self::$_request->getProperty( 'search' ).'%' );
+*/
+			$select->join( 'metatext', 'objects.object_id = metatext.object_id');
+			$select->join( 'objects_tags', 'objects.object_id = objects_tags.object_id');
+			$select->join( 'tags', 'objects_tags.tag_id = tags.tag_id');
+
+			$select->where( '( objects.object_title LIKE %'.self::$_request->getProperty( 'search' ).'% 
+			OR objects.object_description LIKE %'.self::$_request->getProperty( 'search' ).'%
+			OR metatext.metatext_text LIKE %'.self::$_request->getProperty( 'search' ).'%
+			OR tags.tag_name LIKE %'.self::$_request->getProperty( 'search' ).'% ) AND objects.object_title != ?', '' );
 		}
 		
 		if( $check_location )
@@ -135,15 +204,15 @@ class ObjectsController extends Kea_Action_Controller
 
 		return $mapper->paginate( $select, $page, $num_objects, 'objectsTotal' );
 	}
-	
+
 	private function applyPermissions( Kea_DB_Select $select )
 	{
 		if( !self::$_session->isAdmin() )
 		{
 			$select->where( 'objects.object_contributor_consent = ?', 'yes' )
-					->where( 'objects.object_contributor_posting = ?', 'yes' )
-					->orWhere( 'objects.object_contributor_posting = ?', 'anonymously' )
-					->where( 'objects.object_status = ?', 'approved' );
+					->where( '(objects.object_contributor_posting = "anonymously" OR objects.object_contributor_posting = "yes") AND objects.object_status = ?', 'approved' );
+				//	->orWhere( 'objects.object_contributor_posting = ?', 'anonymously' )
+				//	->where( 'objects.object_status = ?', 'approved' );
 		}
 				
 		return $select;	
@@ -347,7 +416,11 @@ class ObjectsController extends Kea_Action_Controller
 			$object->contributor_id = 'NULL';
 		}
 		
-		$object->user_id = self::$_session->getUser()->getId();
+		// This is a kludge to make sure that editing an object doesn't destroy its relationship with the user who uploaded it [JMG]
+		if ( !self::$_request->getProperty('object_edit') ) 
+		{
+			$object->user_id = self::$_session->getUser()->getId();
+		}
 
 		if( $this->validates( $object ) )
 		{
@@ -408,6 +481,20 @@ class ObjectsController extends Kea_Action_Controller
 		return $mapper->total();
 	}
 	
+	protected function _totalInCategory( $category_id )
+	{
+		$mapper = new Object_Mapper();
+		return $mapper->totalSliced( $category_id , null);
+	}
+	
+	protected function _totalInCollection( $collection_id )
+	{
+		$mapper = new Object_Mapper();
+		return $mapper->totalSliced( null, $collection_id );
+
+	}
+
+	
 	protected function _deleteCategoryAssociation( $object_id )
 	{
 		$adapter = Kea_DB_Adapter::instance();
@@ -446,18 +533,20 @@ class ObjectsController extends Kea_Action_Controller
 	protected function _findFeatured()
 	{
 		$mapper = new Object_Mapper;
-		return $mapper->find()
-						->where( 'object_featured = ?', '1' )
-						->execute();
+		$featured = $mapper->find()
+							->where( 'object_featured = ?', '1' );
+		$this->applyPermissions( $featured );
+		return $featured->execute(); 
 	}
 
 	protected function _findRandomFeatured()
 	{
 		$mapper = new Object_Mapper;
 		$featured = $mapper->find()
-							->where( 'object_featured = ?', '1' )
-							->execute();
-		return $featured->getObjectAt( mt_rand( 0, $featured->total() - 1 ) );
+							->where( 'object_featured = ?', '1' );
+		$this->applyPermissions( $featured );
+		$all = $featured->execute(); 
+		return $all->getObjectAt( mt_rand( 0, $all->total() - 1 ) );
 	}
 
 	protected function _findRandomFeaturedWithThumb()

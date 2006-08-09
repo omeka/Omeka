@@ -1,5 +1,17 @@
 <?php
-$tags = $__c->tags()->getTags( 30 );
+$temp = new Tags();
+$tags = $temp->getTagsAndCount( 40 , false, true );
+function compare($x, $y)
+{
+ if ( $x['tag_name'] == $y['tag_name'] )
+  return 0;
+ else if ( $x['tag_name'] < $y['tag_name'] )
+  return -1;
+ else
+  return 1;
+}
+
+usort($tags, 'compare');
 $maxCount = $__c->tags()->getMaxCount();
 ?>
 
@@ -30,7 +42,7 @@ $maxCount = $__c->tags()->getMaxCount();
 
 						if ($featObject && $featFile):
 					?>
-					<h3>Featured Contribution: <a href="<?php echo $_link->to('object') . $featObject->object_id; ?>" class="featured-title-link"><?php echo $featObject->object_title; ?></a</h3>
+					<h3>Featured Contribution: <a href="<?php echo $_link->to('object') . $featObject->object_id; ?>" class="featured-title-link"><?php echo $featObject->object_title; ?></a></h3>
 					<div class="featured">
 						<a href="<?php echo $_link->to('object') . $featObject->object_id; ?>"><?php	
 							if( !empty( $featFile ) )
@@ -50,8 +62,10 @@ $maxCount = $__c->tags()->getMaxCount();
 				if( count($tags) == 0 ): ?>
 				<h2 id="notice">No tags have been applied to objects.</h2>
 				<?php else:
-					echo '<h3>Browse Tags</h3>';
+					echo '<h3><a href="'.$_link->to('tags').'">Browse Tags</a></h3>';
 					$_html->tagCloud( $tags, $maxCount, $_link->to('browse'), 2 );
+					echo '<p><a href="'.$_link->to('tags').'">See more tags.</a></p>';
+					
 				endif;
 				?>
 			</div>

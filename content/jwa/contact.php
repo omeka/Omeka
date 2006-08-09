@@ -5,10 +5,6 @@
 <title>Contact JWA | Katrina's Jewish Voices</title>
 <?php include ('inc/metalinks.php'); ?>
 
-<script type="text/javascript" src="<?php echo $_link->in( 'functionAddEvent.js', 'j/ajaxcontact' ); ?>"></script>
-<script type="text/javascript" src="<?php echo $_link->in( 'contact.js', 'j/ajaxcontact' ); ?>"></script>
-<script type="text/javascript" src="<?php echo $_link->in( 'xmlHttp.js', 'j/ajaxcontact' ); ?>"></script>
-
 
 </head>
 
@@ -26,14 +22,12 @@
 			<strong>Sending Email. Hold on just a sec&#8230;</strong>
 			<img src="img/loading.gif" alt="Loading..." title="Sending Email" />
 		</p>
-		<p id="emailSuccess" style="display:none;">
+		<?php if (@$_REQUEST['success']=="true"): ?>
+		<p id="emailSuccess">
 			<strong style="color:#38c;">Success! Your Email has been sent.</strong>
 		</p>
-			<form action="scripts/contact.php" method="post" id="cForm">
-				<fieldset id="message">
-					<label for="posText">Message:</label>
-					<textarea cols="50" rows="5" name="posText" id="posText"></textarea>
-				</fieldset>
+		<?php else: ?>
+			<form action="<?php echo $_link->to( 'contactmail' ); ?>" method="post" id="cForm">
 				<fieldset id="contactinfo">
 					<label for="posName">Name</label>
 					<input class="textinput" type="text" size="25" name="posName" id="posName" />
@@ -44,11 +38,16 @@
 					<label for="selfCC" id="selfCClabel">
 						<input type="checkbox" name="selfCC" id="selfCC" value="send" /> Send CC to self
 					</label>
+				</fieldset>
+					<fieldset id="message">
+						<label for="posText">Message:</label>
+						<textarea cols="50" rows="10" name="posText" id="posText"></textarea>
+					</fieldset>
 					<label>
 						<input class="submit" type="submit" name="sendContactEmail" id="sendContactEmail" value=" Send Email " />
 					</label>
-				</fieldset>
 			</form>
+		<?php endif; ?>
 		</div>
 		<div id="secondary">
 				<div id="jwa-contact">
@@ -67,7 +66,6 @@
 							</div>
 			</div>
 		</div>
-	</div>
 	
 <?php include("inc/footer.php"); ?>
 </div>

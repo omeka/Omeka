@@ -11,6 +11,6 @@ $contributor = $__c->contributors()->add();
 	
 <?php include( 'form.php' ); ?>
 
-<input type="submit" name="contributor_add" value="Add Contributor &gt;&gt;" />
+<input type="submit" class="submitinput" name="contributor_add" value="Add Contributor &gt;&gt;" />
 
 </form>

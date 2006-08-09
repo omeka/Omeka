@@ -5,16 +5,18 @@ define( 'DS', DIRECTORY_SEPARATOR );
 /**
 	DB connection
 */
-/*
-define( 'KEA_MYSQLI_HOST',		'localhost' );
-define( 'KEA_MYSQLI_USERNAME',	'root' );
+
+define( 'KEA_MYSQLI_HOST',		'' );
+define( 'KEA_MYSQLI_USERNAME',	'' );
 define( 'KEA_MYSQLI_PASSWORD',	'' );
-define( 'KEA_MYSQLI_DBNAME',	'jwa2' );
-*/
+define( 'KEA_MYSQLI_DBNAME',	'jwa' );
+
+/*
 define( 'KEA_MYSQLI_HOST',		'mysql.localdomain' );
 define( 'KEA_MYSQLI_USERNAME',	'nagrin' );
 define( 'KEA_MYSQLI_PASSWORD',	'dudeman' );
 define( 'KEA_MYSQLI_DBNAME',	'nagrin_jwa_production' );
+*/
 
 define( 'KEA_MYSQLI_PORT',		null );
 define( 'KEA_MYSQLI_SOCKET',	null );
@@ -43,7 +45,12 @@ define( 'ABS_THUMBNAIL_DIR',	ABS_CONTENT_DIR.DS.THUMBNAIL_DIR_NAME );
 /*
 	Google Maps key
 */
-define( 'GMAPS_KEY',			'ABQIAAAAD-SKaHlA87rO8jrVjT7SHBTRyUU76wBWMZxo-KQapL3-cBQ2IxRCNWSJRK6NhN-YdcMkoYZCCD9bUQ' );
+define( 'GMAPS_KEY',			'ABQIAAAAD-SKaHlA87rO8jrVjT7SHBSEOfja84tcPloLMbnK5ptAw5ZCLxSaU2Xs7_Cpf3i8jTh4vsJ3LIzjZQ' );
+
+/*
+	Path to imagemagick's 'convert' function
+*/
+define( 'PATH_TO_CONVERT', '/usr/local/bin/convert' );
 
 /*
 	Global 404 file for the application
@@ -64,7 +71,8 @@ define( 'KEA_LOG_LOGINS',		false );
 /*
 	Web specific settings for use in linking in files, link generation, etc.
 */
-define( 'WEB_ROOT',				dirname( $_SERVER['PHP_SELF'] ) );
+
+define( 'WEB_ROOT',				chop(dirname( $_SERVER['PHP_SELF'] ), '/') );
 define( 'WEB_CONTENT_DIR',		WEB_ROOT.DS.CONTENT_DIR_NAME );
 define( 'WEB_VAULT_DIR', 		WEB_CONTENT_DIR.DS.VAULT_DIR_NAME );
 define( 'WEB_THUMBNAIL_DIR',	WEB_CONTENT_DIR.DS.THUMBNAIL_DIR_NAME );
@@ -83,7 +91,7 @@ define( 'ADMIN_URI', 'admin' );	// The uri which designates the route to the adm
 /*
 	Debug levels
 */
-define( 'KEA_DEBUG_ERRORS',		1 );
+define( 'KEA_DEBUG_ERRORS',		0 );
 define( 'KEA_DEBUG_TIMER',		false );
 define( 'KEA_DEBUG_SQL',		false );
 define( 'KEA_DEBUG_TEMPLATE',	true );

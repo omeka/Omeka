@@ -13,28 +13,28 @@ else
 	$_form->text( array('class'	=> 'textinput',
 						'name'	=> 'Contributor[contributor_location_during]',
 						'value'	=> $saved['Contributor']['contributor_location_during'] ) );
-?>
+?> <em>city/state/zip</em>
 
 <label>Where did you evacuate to?</label>
 <?php
 	$_form->text( array('class'	=> 'textinput',
 						'name'	=> 'Contributor[contributor_location_evacuation]',
 						'value'	=> $saved['Contributor']['contributor_location_evacuation'] ) );
-?>
+?> <em>city/state/zip</em>
 
 <label>Where do you live now?</label>
 <?php
 	$_form->text( array('class'	=> 'textinput',
 						'name'	=> 'Contributor[contributor_location_current]',
 						'value'	=> $saved['Contributor']['contributor_location_current'] ) );
-?>
+?> <em>city/state/zip</em>
 
-<label>Where did you live in between?<em>Separate multiple locations with semi-colons</em></label>
+<label>Where did you live in between? (Separate multiple locations with semi-colons.)</label>
 <?php
 	$_form->text( array('class'	=> 'textinput',
 						'name'	=> 'Contributor[contributor_location_between]',
 						'value'	=> $saved['Contributor']['contributor_location_between'] ) );
-?>
+?> <em>city/state/zip</em>
 
 <label>Do you plan to return to New Orleans or the Gulf Coast?</label>
 <?php

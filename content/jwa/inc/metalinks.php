@@ -7,12 +7,16 @@
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php echo $_link->style( 'style.css' ); ?>" type="text/css" />
 <link rel="stylesheet" media="print" href="<?php echo $_link->style( 'print.css' ); ?>" type="text/css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $_link->in('niftyCorners.css','j/niftycorners' ); ?>" />
 
 <!-- Only IE6 and below see the following link -->
 <!--[if lte IE 6]>
 	<link rel="stylesheet" media="screen" href="<?php echo $_link->style( 'ie.css' ); ?>" type="text/css" />
 <![endif]-->
 
+<!--[if gt IE 6]>
+		<link rel="stylesheet" media="screen" href="<?php echo $_link->style( 'ie7.css' ); ?>" type="text/css" />
+<![endif]-->
 <!-- JavaScripts -->
 <script type="text/javascript" src="<?php echo $_link->in('global.js','j' ); ?>"></script>
 <script type="text/javascript" src="<?php echo $_link->in('smooth-scroll.js','j' ); ?>"></script>

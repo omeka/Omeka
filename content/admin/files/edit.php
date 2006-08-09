@@ -12,8 +12,8 @@ $file = $__c->files()->edit();
 	fieldset {border:none;}
 	input[type="text"],textarea {border: 1px solid #BBD9EE;width: 300px;padding: 4px; display:block;background: #e7f1f8;}
 	input[type="text"]:focus,textarea:focus {background: #fff;}
-	input.readonly {background:#eee !important; border: 1px solid #eee !important;}
-	input.readonly:focus {background: #eee;}
+	input.readonly {background:#fff !important; border: none !important;}
+	input.readonly:focus {background: #fff;}
 	textarea {height: 200px;}
 	label {display:block;margin-bottom: 4px;}
 	a:link, a:visited {color: #38c;}
@@ -63,6 +63,27 @@ function setDate(y,m,d)
 	$_form->text( array(	'name'	=> 'File[file_date]',
 							'id'	=> 'File[file_date]',
 							'value'	=> $file->file_date ));
+							
+	// Fields to break out dates
+	/*	$_form->text( array(	'name'	=> 'File[file_date_month]',
+								'id'	=> 'File[file_date_month]',
+								'size'		=> 2,
+								'maxlength' => 2,
+								'value'	=> $file->file_date_month ));
+	?>
+	<?php
+		$_form->text( array(	'name'	=> 'File[file_date_day]',
+								'id'	=> 'File[file_date_day]',
+								'size'		=> 2,
+								'maxlength' => 2,
+								'value'	=> $file->file_date_day ));
+	?>
+	<?php
+		$_form->text( array(	'name'	=> 'File[file_date_year]',
+								'id'	=> 'File[file_date_year]',
+								'size'		=> 4,
+								'maxlength' => 4,
+								'value'	=> $file->file_date_year ));	*/									
 ?>
 <a href="javascript:void(0)" name="calAnchor" id="calAnchor" onclick="cal.showCalendar('calAnchor'); return false;">Select a Date</a>
 <div id="calDiv" style="font-size:smaller; position:absolute; margin-left:200px;visibility:hidden;background-color:#fff;"></div>
@@ -256,10 +277,12 @@ function setDate2(y,m,d)
 </fieldset>
 
 <fieldset>
-<label for="File[file_authentication]">Authentication</label>
+<label for="File[file_authentication]">Authentication  <span class="readonly">(read only)</span></label>
 <?php
 	$_form->text( array(	'name'	=> 'File[file_authentication]',
-					'value' => $file->file_authentication ));
+							'readonly' => 'readonly',
+							'class' => 'readonly',
+							'value' => $file->file_authentication ));
 ?>
 </fieldset>
 

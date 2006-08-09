@@ -3,8 +3,8 @@ class LinkHelper
 {
 	public function to( $template = null, $action = null )
 	{
-		$template = !empty( $template ) ? '/' . trim( $template, '/' ) . '/' : null;
-		$action = !empty( $action ) ? trim( $action, '/' ) . '/' : null;
+		$template = !empty( $template ) ? '/' . trim( $template, '/' ) . '/' : '/';
+		$action = !empty( $action ) ? trim( $action, '/' ) . '/' : null;		
 		return BASE_URI . $template . $action;
 	}
 	

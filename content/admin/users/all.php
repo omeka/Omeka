@@ -23,7 +23,6 @@ $users = $__c->users()->all( 'array' , 'alpha');
 <tr>
 <th scope="col">Username</th>
 <th scope="col">Full Name</th>
-<th scope="col">Affiliation</th>
 <th scope="col">Email</th>
 <th scope="col">Level</th>
 <th scope="col" class="hide">Edit User</th>
@@ -35,7 +34,6 @@ $users = $__c->users()->all( 'array' , 'alpha');
 	<tr>
 		<td><?php echo $user['user_username']; ?></td>
 		<td><?php echo $user['user_first_name'].' '.$user['user_last_name']; ?></td>
-		<td><?php echo $user['user_institution']; ?></td>
 		<td><?php echo $user['user_email']; ?></td>
 		<td><?php echo $user['user_permission_id']; ?></td>
 		<td>[<a href="<?php echo $_link->to( 'users', 'edit' ) . $user['user_id']; ?>">edit</a>]</td>

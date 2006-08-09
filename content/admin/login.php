@@ -1,5 +1,5 @@
 <?php
-$__c->users()->login();
+$msg = $__c->users()->login();
 $__c->admin()->protect();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -19,13 +19,14 @@ $__c->admin()->protect();
 	<form method="post" action="login">
 		<fieldset id="login_form">
 			<legend>Login</legend>
-			<?php if( !empty( $e ) ) echo '<h1 id="error">' . $e->getMessage() . '</h1>'; ?>
+			<?php if ($msg): ?><h1 class="error"><?php echo $msg;?></h1><?php endif;?>
 			<label for="username">Username</label>
 			<input type="text" name="username" id="username"/>
 			<label for="password">Password</label>
 			<input type="password" name="password" id="password"/>
 			<input type="submit" name="user_login" value="Login" id="login_submit"/>
 		</fieldset>
+		<p style="text-align:center;">If you have trouble logging in, please <a href="mailto:webmaster@jwa.org">contact us</a></p>
 	</form>
 	<?php else: ?>
 	<form method="post" action="<?php echo $_link->to('logout'); ?>">

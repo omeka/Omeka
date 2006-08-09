@@ -17,10 +17,10 @@ $collections = $__c->collections()->all( 'array' );
 	<div id="content">
 		<?php include("inc/secondarynav.php"); ?>
 		<div id="primary">
-			<h3>Collection</h3>
+			<h3>Collections</h3>
 			<dl class="collectionlist">
 			<?php foreach( $collections as $collection ): ?>
-			<dt><a href="<?php echo $_link->to( 'browse' ); ?>?collection=<?php echo $collection['collection_id']; ?>"><?php echo $collection['collection_name']; ?></a></dt>
+			<dt><a href="<?php echo $_link->to( 'browse' ); ?>?collection=<?php echo $collection['collection_id']; ?>"><?php echo $collection['collection_name']; ?></a> (<?php echo $__c->objects()->totalInCollection( $collection['collection_id'] ); ?>)</dt>
 			<dd><?php echo $collection['collection_description']; ?></dd>
 			<?php endforeach; ?>
 			</dl>

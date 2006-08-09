@@ -123,7 +123,7 @@ function roundCorners() {
 	Nifty("ul.subnav a","transparent");
 	Nifty("#jwa-contact","big");
 	Nifty("ul#faqs","big");
-	Nifty("div.object,div.featured-object,#mytags");
+	Nifty("div.object,div.featured-object,#mytags","medium");
 }
 
 addLoadListener(roundCorners);

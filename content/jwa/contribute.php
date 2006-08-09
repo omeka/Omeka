@@ -1,4 +1,5 @@
 <?php
+
 	$__c->public()->getConsent();
 	
 	if( self::$_request->getProperty( 'contribute_submit' ) )
@@ -185,23 +186,28 @@
 
 	function addFile()
 	{
-		var input = document.createElement("div");
-		input.style.display = "none";
-		document.getElementById('files').appendChild( input );
-		input.innerHTML = '<li><label class="hide">Add another file</label><input name="objectfile[]" class="textinput" type="file" /><a href="javascript:void(0);" onclick="removeFile( parentNode )">Remove</a></li>';
-		Effect.Appear( input, {duration: 0.4} );
+		var filelist = document.getElementById('files');
+		var input = document.createElement('li');
+		//input.style.display = "none";
+		filelist.appendChild( input );
+		
+		input.className = 'foo';
+		input.innerHTML = '<input name="objectfile[]" type="file" /><a href="javascript:void(0);" onclick="removeFile( parentNode )">Remove</a>';
+		
+		
+		//Effect.Appear( input, {duration: 0.4} );
 	}
 
 	function removeFile( node )
 	{
-		Effect.Fade( node, {duration: 0.4} );
-		setTimeout( function() { document.getElementById('files').removeChild( node ) }, 600);
+	//	Effect.Fade( node, {duration: 0.4} );
+	/*  setTimeout( function() { */document.getElementById('files').removeChild( node );/* }, 600);*/
 	}
 	
 	function revealSwitch( field, file )
 	{
 		new Ajax.Updater(	field,
-							'<?php echo $_link->to() . DS; ?>' + file,
+							'<?php echo $_link->to(); ?>' + file,
 							{
 							onComplete: function(t) {
 								new Effect.BlindDown( field, {duration: 0.8} );
@@ -237,10 +243,10 @@
 					<fieldset id="section1">
 						<legend><span class="number">1</span> Choose and Enter Your Contribution</legend>
 						<div id="contribute-choose-inst">
-							<p>You may contribute a story, an image, or any other file.</p>
+							<p>Select your contribution type below. You may contribute a story, an image, or any other file.  If you have previously contributed <a href="<?php echo $_link->to('login'); ?>">please sign in</a> now</p>
 							<ul>
-								<li><a href="javascript:void(0)" onclick="revealSwitch( 'contribute-choice', 'ajaxContributeStory');" >Contribute Your Story</a></li>
-								<li><a href="javascript:void(0)" onclick="revealSwitch( 'contribute-choice', 'ajaxContributeFile');" >Contribute an Image or Other File</a></li>
+								<li><a href="javascript:void(0)" onclick="revealSwitch( 'contribute-choice', 'ajaxContributeStory');" >Type in your contribution</a></li>
+								<li><a href="javascript:void(0)" onclick="revealSwitch( 'contribute-choice', 'ajaxContributeFile');" >Upload a file</a></li>
 							</ul>
 							<?php
 								$_form->displayError( 'Object', 'empty_object_type', $__c->public()->validationErrors() );
@@ -260,7 +266,7 @@
 							}
 							else
 							{
-								echo '<p>Select your contribution type on the left.</p>';
+								//echo '<p>Select your contribution type on the left.</p>';
 							}
 							?>
 						</div>
@@ -301,32 +307,28 @@
 						<div id="dateinput">
 						<h4>Date</h4>
 
-						<label>What date is most relevant to your contribution?  This may be the date it the event or story occurred, or one which it references.</label>
+						<label>What date is most relevant to your contribution?  This may be the date on which the event or story occurred, or one which it references.</label>
+						<a href="javascript:void(0)" name="calAnchor" id="calAnchor" onclick="cal.showCalendar('calAnchor'); return false;">Select a Date</a><br /><br />
 						<?php
 							$_form->text( array('size'	=> 2,
 												'id'	=> 'date_month',
 												'name'	=> 'date[month]',
 												'class' => 'textinput',
-												'readonly'	=> 'readonly',
 												'value'	=> $saved['date']['month'] ) );
 
 							$_form->text( array('size'	=> 2,
 												'id'	=> 'date_day',
 												'name'	=> 'date[day]',
 												'class' => 'textinput',
-												'readonly'	=> 'readonly',
 												'value'	=> $saved['date']['day'] ) );
 
 							$_form->text( array('size'	=> 4,
 												'id'	=> 'date_year',
 												'name'	=> 'date[year]',
 												'class' => 'textinput',
-												'readonly'	=> 'readonly',
 												'value'	=> $saved['date']['year'] ) );
 						?>
-						<a href="javascript:void(0)" name="calAnchor" id="calAnchor" onclick="cal.showCalendar('calAnchor'); return false;">Select a Date</a>
-
-						( mm / dd / yyyy )
+						<em>( mm / dd / yyyy )</em>
 						<div id="calDiv" style="position:absolute;visibility:hidden;background-color:#fff;"></div>
 
 						</div>
@@ -334,9 +336,8 @@
 						<div id="location_info">
 							<h4>Location</h4>
 							
-							<p>What location best represents the location of your text, image, or file?</p>
-							<p>Define the location by using the map on the right to pan and zoom to the location, the click on the map on or near the location.</p>
-							<p><em>You may also include an address and / or zip code if known</em></p>
+							<p>Define the location by using the map on the right to pan and zoom to the location, then click on the map on or near the location.</p>
+							<p>You may also include an address and/or zip code.</p>
 
 							<label for="object_location">Address</label>
 							<?php
@@ -380,13 +381,14 @@
 							?>
 							<br />
 							<input type="button" id="findonmap" class="input-submit" onclick="showAddress()" value="Find Address On Map" />
+							<p><a href="<?php echo $_link->to('maphelp'); ?>" class="popup">Need help with the map?</a></p>
 						</div>
 
 						<div id="map"></div>
 						</div>
 						<div id="tagsinput">
 						<h4>Tags</h4>
-						<label class="instructions">Tags can include more than one word. Put a comma between tags. (<a href="<?php echo $_link->to('whataretags'); ?>" class="popup">What are tags?</a>)</label>
+						<label class="instructions">Separate tags by comma. (<a href="<?php echo $_link->to('whataretags'); ?>" class="popup">What are tags?</a>)</label>
 						<?php
 							$_form->text( array( 	'class'	=> 'textinput',
 													'id'	=> 'object_tags',
@@ -414,7 +416,7 @@
 					<?php if( !self::$_session->getUser() || !self::$_session->getUser()->isContributor() ): ?>
 
 						<p>What is your name?</p>
-						<label for="contributor_first">First Name</label>
+						<label for="contributor_first">First Name <span class="required">(Required)</span></label>
 
 						<?php
 							$_form->text( array(	'class' => 'textinput',
@@ -426,7 +428,7 @@
 							$_form->displayError( 'Contributor', 'contributor_first_name', $__c->public()->validationErrors() );
 						?>
 
-						<label for="contributor_last">Last Name</label>
+						<label for="contributor_last">Last Name <span class="required">(Required)</span></label>
 						<?php
 							$_form->text( array(	'class' => 'textinput',
 							 						'name'	=> 'Contributor[contributor_last_name]',
@@ -437,7 +439,7 @@
 							$_form->displayError( 'Contributor', 'contributor_last_name', $__c->public()->validationErrors() );
 						?>
 						<?php if( !self::$_session->getUser() ): ?>
-						<label for="contributor_email">What is your email address? (Your email address will not be shared.)</label>
+						<label for="contributor_email">What is your email address? <span class="required">(Required)</span> (Your email address will not be shared.)</label>
 
 						<?php
 							$_form->text( array(	'class'	=> 'textinput',
@@ -445,7 +447,7 @@
 													'id'	=> 'contributor_email',
 													'value'	=> $saved['Contributor']['contributor_email'] ) );
 						?>	
-						<label for="contributor_email_check">Please re-enter your email address.  By entering your email address again we can establish an account for you, or find your pre existing account so you may track your contributions.</label>
+						<label for="contributor_email_check">Please re-enter your email address.  By entering your email address again we can establish an account for you, or find your pre-existing account so you may track your contributions. <span class="required">(Required)</span></label>
 						<?php
 								$_form->text(	array(	'class'	=>	'textinput',
 								 						'name'	=>	'contributor_email_check',
@@ -457,14 +459,14 @@
 						
 						<?php endif; ?>
 						
-						<label class="radiolabel">
-						<input type="checkbox" name="contributor_contact_consent" value="yes" checked="checked" /><em>May we contact you about your contribution and with news about this project?</em></label>
+						<label class="radiolabel" id="contact-permission">
+						<input type="checkbox" name="contributor_contact_consent" value="yes" checked="checked" />May we contact you about your contribution and with news about this project?</label>
 
 					</fieldset>
 				</div>
 
 				<div id="form-continue">
-					<p>Please consider providing more information about yourself. Doing so will help future historians understand the events of the summer of 2005 better. You may continue below, or, if you would not like to provide more information you may now submit your contribution.</p>
+					<p>Please consider providing more information about yourself. Doing so will help future historians understand Hurricane Katrina's impact on the American Jewish community.   If you would not like to provide more information, you may submit your contribution now.</p>
 					<input type="button" class="input-submit" value="Continue with Form" onclick="revealSwitch('moreInfo', 'ajaxMoreInfo')" />
 
 				<?php endif; ?>

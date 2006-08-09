@@ -17,6 +17,13 @@ else
 
 <label class="label-checkbox"><input class="checkbox" type="checkbox" name="Contributor[contributor_participate]" value="yes" <?php if( isset( $saved['Contributor']['contributor_participate'] ) && $saved['Contributor']['contributor_participate'] == 'on' ){ echo ' checked="checked" '; }?>/>I participated in direct relief efforts</label>
 
+<div style="margin-left:2em"><label><em>If so, where did you participate in relief efforts? (Separate multiple locations by semi-colon.)</em></label>
+<?php
+	$_form->text( array('class'	=> 'textinput',
+						'name'	=> 'Contributor[contributor_location_participate]',
+						'value'	=> $saved['Contributor']['contributor_location_participate'] ) );
+?> <em>city/state/zip</em>
+</div>
 <label class="label-checkbox" for="contributor_other_relationship">If you have some other relationship to the events surrounding Hurricane Katrina, detail them here:</label>
 <?php
 	$_form->textarea( array('cols'	=> 30,
@@ -31,13 +38,8 @@ else
 	$_form->text( array('class'	=> 'textinput',
 						'name'	=> 'Contributor[contributor_residence]',
 						'value'	=> $saved['Contributor']['contributor_residence'] ) );
-?>
-<label>Where did you participate in relief efforts? (separate multiple locations by semi-colon)</label>
-<?php
-	$_form->text( array('class'	=> 'textinput',
-						'name'	=> 'Contributor[contributor_location_participate]',
-						'value'	=> $saved['Contributor']['contributor_location_participate'] ) );
-?>
+?> <em>city/state/zip</em>
+
 <br/>
 <br/>
 <input type="submit" class="input-submit" value="Enter your Contribution -&gt;" name="contribute_submit" onclick="return confirm('Are you sure you would like to submit your contribution now?');" />

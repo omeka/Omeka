@@ -35,6 +35,7 @@ class UsersController extends Kea_Action_Controller
 	protected function _findByEmail( $email )
 	{
 
+
 		$mapper = new User_Mapper();
 /*		$user = $mapper->find()
 					  ->where( 'user_id = ?', $id )
@@ -42,7 +43,7 @@ class UsersController extends Kea_Action_Controller
 					*/
 		$stmt = $mapper->select()->where( 'user_email = ?', $email );
 		$result = $mapper->query( $stmt );
-		if( $result->num_rows == 1 ) {
+		if( $result->num_rows > 0 ) {
 			return $mapper->load( $result );
 		}			
 	}
@@ -156,7 +157,7 @@ class UsersController extends Kea_Action_Controller
 				$user->user_active = 1;
 				$user->save();
 				
-				$message = "Your account for the Katrina's Jewish Voice's archive has been created.\n  Please login using your user name and password below.\n\n Username: ".$user->getUsername()." \n Password: $password \n\n\n Katrina Jewish Voice Administrator";
+				$message = "Welcome!\n\nYour account for the Katrina's Jewish Voice's archive has been created. Please login using your user name and password below.\n\n     Username: ".$user->getUsername()."\n\n     Password: $password\n\nTo login, please return to the Katrina’s Jewish Voices website, http://kjv.jwa.org (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\nKatrina's Jewish Voices Administrator";
 				$title = "Your account information for the Katrina's Jewish Voices Archive";
 				$header = 'From: webmaster@jwa.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
 
@@ -190,7 +191,7 @@ class UsersController extends Kea_Action_Controller
 			if( !$user->isUnique() )
 			{
 				self::$_session->flash( 'The username or email address you have chosen is already taken.');
-				return 'Sorry, a user already exists with that username and/or e-mail address. Please <a href="">try again</a>.';
+				return 'Sorry, a user already exists with that username and/or e-mail address.';
 			}
 			
 			$user->user_permission_id = 50;
@@ -223,7 +224,7 @@ class UsersController extends Kea_Action_Controller
 		else:
 			$user = $this->findByEmail($user_email);
 			if ($user):
-			
+	
 				// Create new password
 				$new = $user->setRandomPassword(10);
 				
@@ -238,11 +239,14 @@ class UsersController extends Kea_Action_Controller
 					$header = 'From: webmaster@jwa.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
 					mail( $user->getEmail(), $title, $message, $header);
 					
+
 					// Return message
 					return 'A new password has been sent to your e-mail address.';
 				} else {
 					throw new Kea_DB_Mapper_Exception( self::$_adapter->error() );
 				}
+			else :
+				return 'Sorry, couldn\'t find that e-mail address in our records.';
 			endif;
 		endif;
 		

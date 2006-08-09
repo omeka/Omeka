@@ -145,6 +145,7 @@ class File extends Kea_Domain_Model
 						$file_array = array(	'object_id'					=> $obj_id,
 												'file_size'					=> $_FILES[$file_form_name]['size'][$key],
 												'file_mime_browser'			=> $_FILES[$file_form_name]['type'][$key],
+												'file_authentication'		=> md5_file( $new_path ),
 												'file_mime_php'				=> $mime_php,
 												'file_mime_os'				=> $mime_os,
 												'file_type_os'				=> $file_type,
@@ -175,9 +176,17 @@ class File extends Kea_Domain_Model
 	
 	public static function createThumbnail( $file, $percent = null, $new_width = null, $new_height = null, $output = 3 )
 	{
-		if( function_exists( 'gd_info' ) ) {
+		exec( PATH_TO_CONVERT . ' -version', $convert_version, $convert_return );
+		if( $convert_return == 0 )
+		{
+			return self::imCreateThumbnail( $file, $percent, $new_width, $new_height );
+		}
+		elseif( function_exists( 'gd_info' ) )
+		{
 			return self::gdCreateThumbnail( $file, $percent, $new_width, $new_height, $output );
-		} else {
+		}
+		else
+		{
 			throw new Kea_Domain_Exception(
 				'Neither the GD Library nor Imagemagick is available to process thumbnails.'
 			);
@@ -333,7 +342,64 @@ class File extends Kea_Domain_Model
 		return false;
 	}
 	
-	public static function imCreateThumbnail() {}
+	public static function imCreateThumbnail( $file, $percent = null, $new_width = null, $new_height = null )
+	{
+
+		if( file_exists( $file ) && is_readable( $file ) && getimagesize( $file ) )
+		{	
+			list( $width, $height, $type ) = getimagesize( $file );
+			
+			$filename = basename( $file );
+			$new_name = explode( '.', $filename );
+			$new_name[0] .= '_thumb';
+			$thumbname = implode( '.', $new_name );
+			
+			$new_path = rtrim( ABS_THUMBNAIL_DIR, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $thumbname;
+			
+			$file = escapeshellarg( $file );
+			$new_path = escapeshellarg( $new_path );
+
+			if( $percent )
+			{
+				$new_width = ($percent * $width);
+				$new_height = ($percent * $height);
+				
+				// This is the actual convert command
+				$command = PATH_TO_CONVERT . ' ' . $file . ' -resize ' . $percent . '% ' . $new_path;
+			}
+			elseif( $new_width && $new_height )
+			{
+				$command = PATH_TO_CONVERT . ' ' . $file . ' -resize ' . $new_width . 'x' . $new_height . '> ' . $new_path;
+			}
+			elseif( $new_width && !$new_height )
+			{
+				$command = PATH_TO_CONVERT . ' ' . $file . ' -resize ' . $new_width . 'x ' . $new_path;
+			}
+			elseif( !$new_width && $new_height )
+			{
+				$command = PATH_TO_CONVERT . ' ' . $file . ' -resize ' . 'x' . $new_height . ' ' . $new_path;
+			}
+			elseif( !$percent && !$new_width && !$new_height )
+			{
+				throw new Kea_Domain_Exception(
+					'At least one of the following must be specified: percent, new width, new height or both new width and new height.'
+				);
+			}
+
+			exec( $command, $result_array, $result_value );
+			
+			if( $result_value == 0 )
+			{
+				return $thumbname;	
+			}
+			else
+			{
+				throw new Kea_Domain_Exception(
+					'Something went wrong with thumbnail creation.  Ensure that the thumbnail directories have appropriate write permissions.'
+				);
+			}
+		}
+	}
 
 // End class
 }

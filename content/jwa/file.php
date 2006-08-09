@@ -10,7 +10,7 @@ $object = $__c->objects()->findById($file->object_id);
 <head>
 	<title><?php echo $file->file_title; ?></title>
 	<style type="text/css" media="screen">
-	body {padding: 10px; background: #ccc; font: 62.5% Verdana, sans-serif;}
+	body {padding: 10px; width: 420px; margin:0 auto;background: #ccc; font: 62.5% Verdana, sans-serif;}
 	h1 {font-weight:normal;}
 	#wrap {background: #fff;padding: 10px;}
 	p {font-size: 1.1em;}

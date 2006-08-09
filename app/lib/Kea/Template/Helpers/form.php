@@ -9,12 +9,12 @@ class FormHelper
 		{
 			$input .= $key . '="' . htmlentities( $val ) . '" ';
 		}
-		$input .= '>';
+		$input .= '/>';
 		if( $desc )
 		{
 			$input .= htmlentities( $desc );
 		}
-		$input .= ' />' . "\n";
+		$input .= "\n";
 		echo $input;
 	}
 	
@@ -28,7 +28,6 @@ class FormHelper
 		}
 		$select .= '>';
 		$select .= "\t" . '<option value="">Select Below&nbsp;</option>' . "\n";
-		$select .= "\t" . '<option value="">Remove my Selection</option>' . "\n";
 		if( !$value && !$desc )
 		{
 			foreach( $val_array as $k => $v )

@@ -198,8 +198,45 @@ function deleteObjectFromCategory( object_id )
 			<?php if( !empty( $metafield['metatext_id'] ) ): ?>
 			<input type="hidden" name="metadata[<?php echo $i; ?>][metatext_id]" value="<?php echo $metafield['metatext_id']; ?>" />
 			<?php endif; ?>
-			<textarea rows="4" cols="60" name="metadata[<?php echo $i; ?>][metatext_text]"><?php echo $metafield['metatext_text']; ?></textarea>
+			<?php switch ($metafield['metafield_id']) {
+				case ('2'):
+				case ('3'):
+				case ('4'):
+				case ('5'):
+				case ('6'):
+				case ('19'):
+				case ('26'):
+				case ('31'):
+					echo '<textarea rows="4" cols="60" name="metadata['.$i.'][metatext_text]">'.$metafield['metatext_text'].'</textarea>';
+					break;
+				case ('7'):
+				case ('8'):
+				case ('9'):
+				case ('10'):
+				case ('11'):
+				case ('12'):
+				case ('13'):
+				case ('14'):
+				case ('15'):
+				case ('16'):
+				case ('17'):
+				case ('18'):
+				case ('20'):
+				case ('21'):
+				case ('22'):
+				case ('23'):
+				case ('24'):
+				case ('25'):
+				case ('27'):
+				case ('28'):
+				case ('29'):
+				case ('30'):
+				case ('32'):
+					echo '<input type="text" class="textinput" name="metadata['.$i.'][metatext_text]" value="'.$metafield['metatext_text'].'"/>';
+					break;
+		} ?>
 			</fieldset>
+			
 		<?php $i++; endforeach; ?>
 	</fieldset>
 </div>

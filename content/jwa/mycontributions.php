@@ -26,7 +26,7 @@ $result = $__c->accounts()->getMyContributions();
 									$result['per_page'],
 									$result['total'],
 									'5',
-									$_link->to( 'account', 'favorites' ) );
+									$_link->to( 'mycontributions' ) );
 			?>
 			</div>
 			<div id="primary">
@@ -41,8 +41,6 @@ $result = $__c->accounts()->getMyContributions();
 			?>
 
 			<div id="object-<?php echo $object->object_id; ?>" class="object">
-				<span class="object-bar">#<?php echo $object->object_id; ?></span>
-
 			        <h4><a href="<?php echo $_link->to('object') . $object->object_id; ?>"><?php echo htmlentities( $object->object_title ); ?></a></h4>
 					
 					<?php

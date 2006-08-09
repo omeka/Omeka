@@ -205,9 +205,27 @@ class Tags extends Kea_Plugin implements Iterator
 			$select->order( array( 'tagCount' => 'DESC' ) );
 		}
 
+		// Add authentication check here
+		//$select->join( 'objects', 'objects.object_id = objects_tags.object_id' );
+		//$this->applyPermissions( $select );
+
+
 		return $this->_adapter->fetchAssoc( $select );
 	}
 	
+	private function applyPermissions( Kea_DB_Select $select )
+	{
+		if( !self::$_session->isAdmin() )
+		{
+			$select->where( 'objects.object_contributor_consent = ?', 'yes' )
+					->where( '(objects.object_contributor_posting = "anonymously" OR objects.object_contributor_posting = "yes") AND objects.object_status = ?', 'approved' );
+				//	->orWhere( 'objects.object_contributor_posting = ?', 'anonymously' )
+				//	->where( 'objects.object_status = ?', 'approved' );
+		}
+				
+		return $select;	
+	}
+
 	public function getMaxCount( $user_id = null )
 	{
 		$large = $this->getTagsAndCount( 1, false, true, null, $user_id );
@@ -238,6 +256,7 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 		return false;
 	}
+	
 	
 	protected function add( $tag )
 	{

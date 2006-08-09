@@ -9,7 +9,7 @@ class User extends Kea_Domain_Model
 	public $user_last_name;
 	public $user_email;
 	public $user_institution;
-	public $user_permission_id = 100;	// If by some random error a user is created they are public.
+	public $user_permission_id = 50;	// If by some random error a user is created they are public.
 	public $user_active;
 	public $contributor_id;
 	

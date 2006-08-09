@@ -15,7 +15,9 @@ else
 					array(	'reform'		=> 'Reform',
 							'conservative'	=> 'Conservative',
 							'orthodox'		=> 'Orthodox',
-							'secular'		=> 'Secular',
+							'reconstructionist'		=> 'Reconstructionist',
+							'non-denominational'		=> 'Non-denominational',
+							'secular / cultural'		=> 'Secular / Cultural',
 							'other'			=> 'Other' ),
 					$saved['Contributor']['contributor_religious_id'] );
 ?>

@@ -22,7 +22,7 @@ class PublicController extends Kea_Action_Controller
 				
 				// If there is a contributor but its id isn't set, it's new so save it.
 				if( empty( $contributor->contributor_id ) )
-				{
+				{					
 					$contributor->save();
 				}
 
@@ -31,7 +31,13 @@ class PublicController extends Kea_Action_Controller
 					$user = User::newPublicUserFromContributor( $contributor );
 					self::$_session->setValue( 'contributed_user', $user );
 				}
-
+				// If there's a user logged in but the user has no contributor_id, associate the one we just made with the user
+				else
+				{
+					$user->contributor_id = $contributor->getId();
+					$user->save();
+				}
+				
 				// Set the consent to unknown until we get to the consent form
 				$object->object_contributor_consent = 'unknown';
 
@@ -108,7 +114,8 @@ class PublicController extends Kea_Action_Controller
 	
 	// this is called by the consent form
 	protected function _submitContribution()
-	{
+	{		
+		
 		if( $object_consent = self::$_request->getProperty( 'object_contributor_consent' ) )
 		{
 			$object = self::$_session->getValue( 'contributed_object' );
@@ -139,12 +146,30 @@ class PublicController extends Kea_Action_Controller
 			$object->object_contributor_consent = $object_consent;
 			$object->save();
 			
+			
+			// Send e-mail
+			$message = "Thank you for your contribution to Katrina's Jewish Voices. Your contribution has been accepted and will be preserved in the digital archive. For your records, the permanent URL for your contribution is noted at the end of this email. Please note that contributions may not appear immediately on the website while they await processing by project staff. Please pass word of Katrina's Jewish Voices along to family, friends, and associates - it is important to save as much of the historical record as possible.
+
+			Katrina's Jewish Voices
+			An Online Collecting Project of the Jewish Women's Archive
+			138 Harvard Street
+			Brookline, MA 02446
+			617-383-6754
+			www.jwa.org
+
+Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NAME'] . substr($_SERVER['PHP_SELF'] , 0, strrpos($_SERVER['PHP_SELF'], '/')) . DS .'object' . DS .self::$_session->getValue( 'contributed_object' )->object_id;
+			$title = "Your Katrina's Jewish Voices Contribution";
+			$header = 'From: webmaster@jwa.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
+
+			mail( self::$_session->getUser()->getEmail(), $title, $message, $header);
+
 			self::$_session->unsetValue( 'contributed_object' );
 			if( self::$_session->getValue( 'contributed_files' ) )
 			{
 				self::$_session->unsetValue( 'contributed_files' );
 			}
-			$this->redirect( BASE_URI . DS . 'myarchive' );
+
+			$this->redirect( BASE_URI . DS . 'thanks' );
 			return;
 
 		}
@@ -154,6 +179,8 @@ class PublicController extends Kea_Action_Controller
 	{
 			// Get the object being contributed
 			$object = new Object( $params['Object'] );
+			
+			//print_r($_FILES['objectfile']['name']); exit;
 
 			$date = $params['date'];
 			$day = (int) $date['day'];
@@ -171,11 +198,26 @@ class PublicController extends Kea_Action_Controller
 			
 			$this->validates( $object );
 			
-			// Check to see if they have added a story or some files
-			if( empty( $params['online_story_text'] ) && empty( $params['MAX_FILE_SIZE'] ) )
+			// Check to see if they have added a title
+			if( empty( $object->object_title ) )
 			{
-				$this->addError( 'Object', 'empty_object_type', 'Please choose to either submit a story or files for your contribution by clicking a link above.' );
+				$this->addError( 'Object', 'empty_object_title', 'You must enter a title.' );
 			}
+			
+			// Check to see if they have added a story or some files
+			//if( empty( $params['online_story_text'] ) && empty( $params['MAX_FILE_SIZE'] ) )
+			if( empty( $params['online_story_text'] ) && empty( $_FILES['objectfile']['name'][0] ) )
+			{
+				$this->addError( 'Object', 'empty_object_story_text', 'You must enter a story.' );
+				$this->addError( 'Object', 'empty_object_file', 'You must select a file.' );
+			}
+			
+			// Check to see if they've chosen a type to contribute at all
+			if( empty( $params['MAX_FILE_SIZE'] ) && empty( $params['story_form'] ) )
+			{
+				$this->addError( 'Object', 'empty_object_type', 'You must choose a type of contribution.' );
+			}
+			
 			
 			// Contributor issues
 			// First, is the user logged in, and a contributor?

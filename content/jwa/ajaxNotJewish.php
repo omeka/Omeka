@@ -15,7 +15,9 @@ $_form->select(	array(	'name'	=> 'Contributor[contributor_religious_id]',
 				array(	'protestant'	=> 'Protestant',
 						'catholic'		=> 'Catholic',
 						'muslim'		=> 'Muslim',
-						'none'			=> 'No Religious Preference',
+						'buddhist'		=> 'Buddhist',
+						'hindu'			=> 'Hindu',
+						'none'			=> 'No Religion',
 						'other'			=> 'Other' ),
 				$saved['Contributor']['contributor_religious_id'] );
 ?>

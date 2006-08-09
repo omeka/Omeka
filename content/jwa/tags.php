@@ -22,7 +22,7 @@ $max = $__c->tags()->getMaxCount();
 
 		<div id="primary">
 			<h3>Tags</h3>
-			<div id="tagcloud">
+			<div id="tagcloud-full">
 			<?php
 				$_html->tagCloud( $tags, $max, $_link->to( 'browse' ), 4 );
 

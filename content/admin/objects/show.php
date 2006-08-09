@@ -136,8 +136,8 @@ include( 'subnav.php' );
 <div id="object">
 		
 	<ul class="object-nav">
-		<li class="previous"><a href="#">Previous Object</a></li>
-		<li class="next"><a href="#">Next</a></li>
+		<li class="previous"><?php if ($__c->objects()->getPrevObjectID()): ?><a href="<?php echo $_link->to( 'objects' , 'show' ).$__c->objects()->getPrevObjectID()->object_id; ?>">Previous object</a><?php endif; ?></li>
+		<li class="next"><?php if ($__c->objects()->getNextObjectID()): ?><a href="<?php echo $_link->to( 'objects' , 'show' ).$__c->objects()->getNextObjectID()->object_id; ?>">Next object</a><?php endif; ?></li>
 	</ul>
 	
 	<div id="object-main">
@@ -286,11 +286,5 @@ include( 'subnav.php' );
 			<?php endif; ?>
 		</div>	
 	</div>
-	
-	<ul class="object-nav">
-		<li class="previous"><a href="#">Previous Object</a></li>
-		<li class="next"><a href="#">Next</a></li>
-	</ul>
-	
 </div>
 <br class="clear"/>

@@ -9,7 +9,13 @@ else
 	$saved = false;
 }
 ?>
-<label for="object_title">Title:</label>
+
+<?php $_form->displayError( 'Object', 'empty_object_title', $__c->public()->validationErrors() ); ?>
+<label for="object_title">Title <span class="required">(Required)</span></label>
 <input type="text" class="textinput" size="20" name="Object[object_title]" value="<?php echo isset( $saved['Object']['object_title'] ) ? $saved['Object']['object_title'] : null; ?>"></input>
-<label for="object_text">Type or copy and paste your text here:</label>
+
+<?php $_form->displayError( 'Object', 'empty_object_story_text', $__c->public()->validationErrors() ); ?>
+<label for="object_text">Type or copy and paste your text <span class="required">(Required)</span></label>
 <textarea name="online_story_text" id="object_text" cols="30" rows="20"><?php echo $saved['online_story_text']; ?></textarea>
+
+<input type="hidden" name="story_form" value="true" />

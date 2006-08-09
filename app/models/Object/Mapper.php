@@ -67,6 +67,15 @@ class Object_Mapper extends Kea_DB_Mapper
 		return self::$_adapter->fetchOne( $select );
 	}
 	
+	public function totalSliced( $category_id = null, $collection_id = null)
+	{
+		$select = self::$_adapter->select();
+		$select->from( 'objects', 'COUNT(*) as count' );
+		if ( $category_id != null) $select->where( 'objects.category_id = ?', $category_id );
+		if ( $collection_id != null) $select->where( 'objects.collection_id = ?', $collection_id );
+		return self::$_adapter->fetchOne( $select );
+	}
+	
 	/**
 	 *	Foreign key constraints delete object, object-tag relationship, files, and location data
 	 */

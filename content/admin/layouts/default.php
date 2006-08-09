@@ -13,7 +13,7 @@ $__c->admin()->protect();
 	<link rel="stylesheet" href="<?php $_link->style( 'main.css' ); ?>" type="text/css" />
 	<?php $_common->javascripts( 'prototype.js', 'scriptaculous.js','formeffects.js' ); ?>
 </head>
-<body id="">
+<body>
 <div id="page">
 	<div id="header">
 		<?php include( $_partial->file( 'header' ) ); ?>

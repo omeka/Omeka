@@ -2,7 +2,7 @@
 -----------------------------*/
 *,html,body {margin:0; padding:0;}
 
-body {margin:0 auto; width: 780px; background: #fff; font: 62.5% "Myriad Pro",Myriad, Verdana, sans-serif; color: #333;}
+body {margin:0 auto; width: 780px; background: #fff; font: 62.5% Verdana, sans-serif; color: #333;}
 
 a:link, a:visited {color: #369;}
 a:hover,a:active,a:focus {color: #c60;}
@@ -32,11 +32,11 @@ a img {border:none !important; text-decoration:none !important;}
 .odd {background: #BBD9EE;}
 .even {background: #E7F1F8;}
 
-form input.textinput, form textarea, form input[type="file"] {border: 1px solid #BBD9EE; padding: 4px; background: #E7F1F8;}
+form input.textinput, form textarea, form input[type="file"] {border: 1px solid #BBD9EE; padding: 4px; margin-bottom: 10px; background: #E7F1F8;}
 form input.textinput:focus, form textarea:focus {background: #fff;}
-form input {margin-bottom: 10px;}
+form input {}
 
-
+br {display:none;}
 /* vCard Styles
 ---------------------------*/
 .vcard {display:block; font-style:normal;font-size: 1.1em; line-height: 1.75em; margin: 10px 0;}
@@ -60,9 +60,9 @@ img#menorah {display:block;float:left; width:304px; height: 140px;margin:0; padd
 
 /* Second header styles */
 #meta {display:block; float:left; clear:both;font-size: 95%;width: 760px; margin: 0 10px; background: #BBD9EE; color: #369;}
-#meta #quicksearch {display:block; font-size: 95%;float:left; width: 280px; margin-left: 20px; overflow:visible; margin: 10px 0 0 20px;}
-#meta #quicksearch input.textinput {border: 1px solid #77A0C4; background: #fff; font-size: 1.1em; padding: 4px; }
-#meta #quicksearch input.submitinput {border: 1px solid #77A0C4; background: #e7f1f8; padding: 3px; font-size: 1.1em;}
+#meta #quicksearch {display:block; font-size: 95%;float:left; width: 280px; margin-left: 20px; overflow:visible; margin: 10px 0 0 20px; padding-bottom: 10px;}
+#meta #quicksearch input.textinput {border: 1px solid #77A0C4; background: #fff; font-size: 1.1em; padding: 4px;margin-bottom:0; }
+#meta #quicksearch input.submitinput {border: 1px solid #77A0C4; background: #e7f1f8; padding: 3px; margin:0 !important; font-size: 1.1em;}
 #meta p#login-blurb {display:block; float:right; width: 400px; text-align:right; margin-right: 20px; margin-bottom:0;}
 
 /* Third Header styles */
@@ -129,7 +129,7 @@ ul.subnav li a:hover, ul.subnav a:active {color: #369; background: #E7F1F8;}
 	float:right;	width: 414px; 
 	margin:0; 
 	padding:130px 0 0 0;
-	background-image: url("../i/kjv-logo-new.gif");
+	background-image: url("../i/kjv.jpg");
 	background-repeat:no-repeat;
 	overflow:hidden;
 	background-position: center center;
@@ -137,7 +137,7 @@ ul.subnav li a:hover, ul.subnav a:active {color: #369; background: #E7F1F8;}
 	height /**/:130px;
 	color: #369;
 	}
-#kjv-logo {display:block; width: 274px; height: 140px;float:right; margin-right: 30px;}
+#kjv-logo {display:block; width: 414px; height: 130px;float:right; margin-right: 30px;}
 
 
 /* Content
@@ -146,6 +146,10 @@ ul.subnav li a:hover, ul.subnav a:active {color: #369; background: #E7F1F8;}
 
 #primary{width: 426px; display:block; margin-right: 30px;float:right;} 
 #secondary{width:274px;float:left; margin-left: 30px;background: #fff;} 
+
+ul.object-nav {list-style:none;display:block; float:left; margin-right: 30px;}
+ul.object-nav li {display:block; float:left; width: 50%;}
+ul.object-nav li.next {float:right;}
 
 /* Homepage Specific Styles 
 -----------------------------------------------*/
@@ -198,25 +202,26 @@ ul.subnav li a:hover, ul.subnav a:active {color: #369; background: #E7F1F8;}
 #contribute-form #other-info {display:block; float:left; width: 420px;}
 #contribute-form #other-info textarea {width: 390px;}
 #contribute-form #creatorinput {display:block; float:right; width: 272px; }
-
-#contribute-form #form-continue {padding: 8px 0; margin: 8px 0;}
-#contribute-form #form-continue p {font-style:italic; font-size: 1em;}
+#contribute-form div#map {display:block; float:right; width: 440px; border: 1px solid #ccc;height: 300px;}
+#contribute-form #form-continue {padding: 8px; background: #e7f1f8;margin: 8px 0;}
+#contribute-form #form-continue p {font-size: 1.2em; color: #369;}
 #contribute-form #contribute-choose-inst {display:block; float:left; width: 272px;}
 #contribute-form #contribute-choice {display:block; float:right; width: 426px;}
 #contribute-form #contribute-choice textarea {width: 390px;}
-#contribute-form ol#files {list-style:decimal;margin-left: 17px;}
-#contribute-form ol#files input {margin:0; padding:0; line-height:0;}
-#contribute-form ol#files li { padding:0; margin:0; line-height:0; margin-bottom: 5px;}
-#contribute-form ol#files li a {padding-left: 10px;}
-#contribute-form ol#files label {display:none;}
+ol#files {list-style-type:decimal;margin-left: 17px; padding-left: 17px;}
+ol#files ol {background: blue;}
+ol#files input {margin:0;}
+ol#files li{ padding:0 !important; margin:0 !important;line-height:0; margin-bottom: 5px;}
+ol#files li a {padding-left: 10px;}
 #dateinput {display:block;clear:both;width: 720px; padding-top: 10px;}
-
+#dateinput #calAnchor {display:block;margin-bottom: 6px;}
+span.required {color: #c60; font-style:italic;}
 #location_info {display:block; float:left; width: 270px;}
-div#map {width:438px; height:300px; border: 1px solid #ccc; display:block; float:right;}
 #contribute-form div#map {margin-top: 20px;}
-#tagsinput {clear:both; display:block;}
-input#object_tags {width: 710px;} /* width includes 2px for the left and right borders, adn 4px for the left and right padding. */
-
+#tagsinput {clear:both; display:block; padding-top: 10px;}
+input#object_tags {width: 400px;} /* width includes 2px for the left and right borders, adn 4px for the left and right padding. */
+input#findonmap {margin-top: 6px;display:block;}
+#contribute-form h4 {margin-bottom:0;}
 label.radiolabel input {}
 #creatorinput label.radiolabel {}
 label.radiolabel {}
@@ -230,7 +235,6 @@ ol.terms-of-consent li {margin: 10px 0; line-height: 1.5em;}
 -------------------------*/
 #browse #primary {width: 720px; float:left; margin: 0 30px;}
 #page-links {display:block; float:right; text-align:right; margin-right: 30px;}
-#browse #map {width: 720px; height: 370px;float:none;}
 
 #browse div.featured-object {background: #FFF09E; width: 700px; padding: 10px;}
 #browse div.featured-object .featured-thumb {display:block; float:left; margin-right: 10px; padding: 7px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background: #fff;}
@@ -304,6 +308,7 @@ ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
 ------------------------------------------*/
 #login #content {}
 #login #primary {display:block; float:right; width: 274px; padding:0;margin:0;margin-right: 30px;}
+#login #primary.wide {width:578px;}
 #login #secondary {display:block; float:right; width: 284px;padding:0; margin:0; margin-right:20px;}
 #login #tertiary {display:block; float:right; width: 122px;margin:0;margin-right: 20px;}
 #login #content input.textinput {border: 1px solid #BBD9EE; width: 170px;background: #E7F1F8;}
@@ -320,7 +325,7 @@ ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
 #myarchive.myprofile #primary, #myarchive.mycontributions #primary, #myarchive.mytags #primary, #myarchive.myfavorites #primary {width: 720px; float:left; margin: 0 30px;}
 #myarchive.intro #primary {display:block; float:left; margin-right:0; margin-left: 30px;}
 #myarchive.intro #secondary {display:block ;float:right; margin-left:0; margin-right: 30px;}
-#myarchive.intro #primary, #myarchive.intro #secondary {float:left; margin-left: 30px; margin-right: 30px; width: 720px;}
+#myarchive.intro #primary, #myarchive.intro #secondary {float:left; margin:0 30px; width: 720px;}
 #myarchive.myprofile #content fieldset {border:none;}
 #myarchive.myprofile #content legend {display:block; margin-bottom:10px;}
 
@@ -345,4 +350,4 @@ ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
 #footer .secondarynav a {text-decoration:none;}
 
 .alert {background: #fff09e; color: #c60; padding: 10px; font-size: 1.2em;}
-.form-error {color: red; font-size: 1.4em;}
+.form-error {color: #c60; display:block; font-size: 1.4em;}

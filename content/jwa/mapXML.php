@@ -1,5 +1,14 @@
 <?php
-	$map_objects = $__c->objects()->getMapObjects();
+	if (@$_REQUEST['id']):
+		$object = $__c->objects()->findById(@$_REQUEST['id']);
+		$map_objects['page'] = 1;
+		$map_objects['per_page'] = 1; 
+		$map_objects['total'] = 1;
+		$map_objects['objects'][0] = $object;
+		
+	else:
+		$map_objects = $__c->objects()->getMapObjects(40);
+	endif;
 	$featured = $__c->objects()->getRandomMapFeatured();
 	$featured->getTags();
 	$featured->getFilesWithThumbnails();

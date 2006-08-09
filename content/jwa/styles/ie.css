@@ -16,8 +16,8 @@ ONLY IE6 AND EARLIER WILL APPLY THESE STYLES. THIS METHOD KEEPS MAIN STYLESHEET 
 legend {margin-left: -7px;}
 #mainnav li {margin:0;}/* More Double-Margin Bug corrections.*/
 #meta p#login-blurb {margin-right: 10px;}
-#home #primary, #myarchive #primary {margin-right: 15px;}/* More Double-Margin Bug corrections.*/
-#home #secondary, #myarchive #secondary {margin-left: 15px;}/* More Double-Margin Bug corrections.*/
+#home #primary{margin-right: 15px;}/* More Double-Margin Bug corrections.*/
+#home #secondary{margin-left: 15px;}/* More Double-Margin Bug corrections.*/
 #home #featured-blurb {margin: 5px 5px 0 5px;}/* More Double-Margin Bug corrections.*/
 #home #tagcloud {margin: 5px;}/* More Double-Margin Bug corrections.*/
 
@@ -28,13 +28,15 @@ ul.subnav li { width: 10em; margin-top: 10px;}
 img#menorah {margin-left: 5px;}/* More Double-Margin Bug corrections.*/
 
 #contribute #primary, #about #primary, #about #secondary, #browse #primary {margin: 0 15px;}/* More Double-Margin Bug corrections.*/
+
 /* Browse styles */
 #page-links {margin-right: 15px;}
 #about.contact #primary {margin: 0 0 0 15px;}
 #about.contact #secondary {margin: 0 15px 0 0;}
 
 /* MyArchive styles */
-#myarchive.myprofile #primary, #myarchive.mycontributions #primary, #myarchive.mytags #primary, #myarchive.myfavorites #primary {margin: 0 15px;}
+#myarchive.intro #primary, #myarchive.intro #secondary, #myarchive.myprofile #primary, #myarchive.mycontributions #primary, #myarchive.mytags #primary, #myarchive.myfavorites #primary {margin: 0 15px;}
+
 #login #primary {margin-right: 15px;}
 #login #secondary {margin-right: 10px;}
 #login #tertiary {margin-right: 30px;}
@@ -42,6 +44,5 @@ img#menorah {margin-left: 5px;}/* More Double-Margin Bug corrections.*/
 #internalnav li {margin-left: 10px; padding-left: 5px; list-style:square;}
 #footer #copyright {margin-left: 10px;}/* More Double-Margin Bug corrections.*/
 #footer .secondarynav, #footer div.section p {margin-right: 10px;}/* More Double-Margin Bug corrections.*/
-b.niftycorners * {display:inline-block;}
 
 #page-links {float:left; text-align:left; clear:left; margin: 10px 15px;}

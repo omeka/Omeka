@@ -24,7 +24,9 @@ div.container {background: #fff; display:block;float:left;padding: 20px; width: 
 ------------------------------------------*/
 #page { }
 
-
+ul.object-nav {list-style:none;display:block; float:left; margin-right: 30px;}
+ul.object-nav li {display:block; float:left; width: 50%;}
+ul.object-nav li.next {float:right;}
 /* Header styles
 ------------------------------------------*/
 #header { background: #fff; color: #888;display:block;}
@@ -111,8 +113,9 @@ div.object-tags ul.tags {background: #ffffce;padding: 10px;}
 .clear {clear:both;}
 .form-error { color: red; font-size: 1.2em;}
 
-#contributors-form input, #contributors-form label { display:block;  margin: 10px 0;}
+form {padding-bottom: 10px;}
+#contributors-form input, #contributors-form label { display:block;  margin: 10px 0 0 0;}
 #contributors-form input[type="radio"] {display:inline; margin:0; padding:0; }
 #contributors-form label.radiolabel {margin:0;}
 
-input[type="submit"] {margin-left: 20px !important;}
+input[type="submit"], input.submitinput {margin-left: 20px !important;}

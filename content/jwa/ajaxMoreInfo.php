@@ -12,7 +12,7 @@ else
 	<legend><span class="number">4</span> Provide more information about yourself</legend>
 	<label>In what year were you born?</label>
 	<select name="Contributor[contributor_birth_year]">
-		<option value="">Undisclosed</option>
+		<option value="" selected>Select Below</option>
 		<?php
 			for( $g = date( 'Y', time() ); $g > ( date( 'Y', time() ) - 100 ); $g-- )
 			{
@@ -32,10 +32,32 @@ else
 	<?php
 		$_form->select(	array(	'name'	=> 'Contributor[contributor_gender]',
 								'id'	=> 'contributor_gender' ),
-						array(	''		=> 'Undisclosed',
-								'male'	=> 'Male',
+						array(	'male'	=> 'Male',
 								'female'=> 'Female' ),
 						$saved['Contributor']['contributor_gender'] );
+	?>
+
+	<label for="contributor_race">What is your race?</label>	
+	<?php
+		$_form->select(	array(	'name'	=> 'Contributor[contributor_race]',
+								'id'	=> 'contributor_race' ),
+						array(	'Asian / Pacific Islander'	=> 'Asian / Pacific Islander',
+								'Black'						=> 'Black',
+								'Hispanic'					=> 'Hispanic',
+								'Native / American Indian'	=> 'Native / American Indian',
+								'White'						=> 'White',
+								'Other'						=> 'Other' ),
+						$saved['Contributor']['contributor_race']
+					);
+	?>
+	
+	<label for="contributor_race_other"><em>If you selected "other," what is your race?</em></label>
+	<?php
+		$_form->text(
+							array(	'size'	=> '20',
+									'value'	=> $saved['Contributor']['contributor_race_other'],
+									'id'	=> 'contributor_race_other',
+									'name'	=> 'Contributor[contributor_race_other]' ) );
 	?>
 
 	<label for="contributor_occupation">What is your occupation?</label>

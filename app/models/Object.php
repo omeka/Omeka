@@ -211,7 +211,9 @@ class Object extends Kea_Domain_Model
 		endif;
 	}
 
-	public function getCitation() {
+
+	public function getCitation() 
+	{
 		if ( $this->object_contributor_posting != 'anonymously') 
 			$cite = $this->contributor->contributor_first_name . ' ' . $this->contributor->contributor_last_name.', ';
 		else 

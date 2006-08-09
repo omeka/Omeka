@@ -36,6 +36,15 @@
 
 <fieldset class="formElement">
 	<legend>Contributor's Contact Information</legend>
+	<label for="contributor_email">Contributor's email address</label>
+	
+	<?php
+		$_form->text(
+							array(	'size'	=> '20',
+									'value'	=> $contributor->contributor_email,
+									'id'	=> 'contributor_email',
+									'name'	=> 'contributor[contributor_email]' ) );
+	?>
 	<label for="contributor_contact_consent">Contributor's contact consent</label>
 	
 	<?php
@@ -46,15 +55,7 @@
 
 		$_form->displayError( 'Contributor', 'contributor_contact_consent', $__c->contributors()->validationErrors() );
 	?>
-		<label for="contributor_email">Contributor's email address</label>
 		
-		<?php
-			$_form->text(
-								array(	'size'	=> '20',
-										'value'	=> $contributor->contributor_email,
-										'id'	=> 'contributor_email',
-										'name'	=> 'contributor[contributor_email]' ) );
-		?>
 		<label for="contributor_phone">Contributor's phone number</label>
 		
 		<?php
@@ -141,14 +142,13 @@
 	<?php
 		$_form->select(	array(	'name'	=> 'contributor[contributor_race]',
 								'id'	=> 'contributor_race' ),
-						array(	'Asian/Pacific'				=> 'Asian/Pacific',
-						 		'Islander'					=> 'Islander',
-								'African American'			=> 'African American',
-								'Hispanic'					=> 'Hispanic',
-								'Native American / Indian'	=> 'Native American / Indian',
-								'White'						=> 'White',
-								'Other'						=> 'Other',
-								'unknown'					=> 'unknown' ),
+								array(	'Asian / Pacific Islander'	=> 'Asian / Pacific Islander',
+										'Black'						=> 'Black',
+										'Hispanic'					=> 'Hispanic',
+										'Native / American Indian'	=> 'Native / American Indian',
+										'White'						=> 'White',
+										'Other'						=> 'Other',
+										'Unknown'					=> 'unknown' ),
 						$contributor->contributor_race
 					);
 	?>
@@ -188,14 +188,18 @@
 	<?php
 		$_form->select(	array(	'name'	=> 'contributor[contributor_religious_id]',
 								'id'	=> 'contributor_religious_id' ),
-						array(	'reform'		=> 'Jewish / Reform',
-						 		'conservative'	=> 'Jewish / Conservative',
-								'orthodox'		=> 'Jewish / Orthodox',
-								'secular'		=> 'Jewish / Secular',
+						array(	'reform'		=> 'Jewish: Reform',
+						 		'conservative'	=> 'Jewish: Conservative',
+								'orthodox'		=> 'Jewish: Orthodox',
+								'reconstructionist'	=> 'Jewish: Reconstructionist',
+								'non-denominational'=> 'Jewish: Non-denominational',
+								'secular / cultural'=> 'Jewish: Secular / Cultural',
 								'protestant'	=> 'Protestant',
 								'catholic'		=> 'Catholic',
 								'muslim'		=> 'Muslim',
-								'none'			=> 'No Religious Affiliation',
+								'buddhist'		=> 'Buddhist',
+								'hindu'			=> 'Hindu',
+								'none'			=> 'No Religion',
 								'other'			=> 'Other',
 								'unknown' 		=> 'Unknown'),
 						$contributor->contributor_religious_id
@@ -216,10 +220,10 @@
 	<label class="radiolabel">
 		<input type="radio" id="nolaY" name="is_nola" onclick="document.getElementById('not-nola').style.display = 'none'; new Effect.BlindDown( 'is-nola', {duration: 0.8} );" <?php if( isset( $saved['is_nola'] ) && $saved['is_nola'] == 'on' ){ echo ' checked="checked" '; } ?>/>Yes</label>
 		<label class="radiolabel"><input type="radio" id="nolaN" name="is_nola" onclick="document.getElementById('is-nola').style.display = 'none'; new Effect.BlindDown( 'not-nola', {duration: 0.8} );" <?php if( isset( $saved['is_nola'] ) && $saved['is_nola'] == 'on' ){ echo ' checked="checked" '; } ?> />No</label>
-	
-	<fieldset class="formElement" id="is-nola" style="display:none;">
+	</fieldset>
+	<div class="formElement" id="is-nola" style="display:none;">
 		<fieldset class="formElement">
-			<label for="contributor_location_during">Where did the contributor live at the time of the hurricane?</label>
+			<label for="contributor_location_during">Where did the contributor live at the time of the hurricane? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
 			
 			<?php
 				$_form->textarea( 	array(	'rows'	=> '4',
@@ -231,7 +235,7 @@
 		</fieldset>
 
 		<fieldset class="formElement">
-			<label for="contributor_location_evacuation">To where did the contributor evaculate at the time of the hurricane?</label>
+			<label for="contributor_location_evacuation">To where did the contributor evaculate at the time of the hurricane? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
 			<?php
 				$_form->textarea( 	array(	'rows'	=> '4',
 											'cols'	=> '60',
@@ -242,7 +246,7 @@
 		</fieldset>
 
 		<fieldset class="formElement">
-			<label for="contributor_location_between">Where did the contributor live in between? <em>Separate multiple locations with semi-colons</em></label>
+			<label for="contributor_location_between">Where did the contributor live in between? (City/State/<abbr title="Postal Code">ZIP</abbr>) <em>Separate multiple locations with semi-colons</em></label>
 			
 			<?php
 			$_form->textarea( 	array(	'rows'	=> '4',
@@ -252,7 +256,17 @@
 										$contributor->contributor_location_between );
 			?>
 		</fieldset>
-
+		<fieldset class="formElement">
+			<label>Where do you live now? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
+			<?php
+			$_form->textarea( array(	'rows'	=> '4',
+										'cols'	=> '60',
+										'id'	=> 'contributor_location_current',
+										'name'	=> 'contributor[contributor_location_current]'),
+										$contributor->contributor_location_current  );
+			?>
+			
+		</fieldset>
 		<fieldset class="formElement">
 			<label for="contributor_return">Does the contributor plan to return to the Gulf Coast?</label>
 			
@@ -263,9 +277,9 @@
 								$contributor->contributor_return );
 			?>
 		</fieldset>
-	</fieldset>
+	</div>
 
-	<fieldset id="not-nola" style="display:none;">
+	<div id="not-nola" style="display:none;">
 		<fieldset class="formElement">
 			<label for="contributor_family_members">Were the contributor's family or friends affected by Katrina?</label>
 			
@@ -333,5 +347,14 @@
 											$contributor->contributor_other_relationship );
 			?>
 		</fieldset>
-	</fieldset>
-</fieldset>
+			<fieldset class="formElement">
+				<label for="contributor_residence">Where do you live? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
+
+				<?php
+					$_form->text(	array(	'size'	=> '20',
+											'value'	=> $contributor->contributor_residence,
+											'id'	=> 'contributor_residence',
+											'name'	=> 'contributor[contributor_residence]' ) );
+				?>
+			</fieldset>
+	</div>

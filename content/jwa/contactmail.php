@@ -1,9 +1,10 @@
 <?php
+
 // Change the 4 variables below
-$yourName = 'Jeremy Boggs';
-$yourEmail = 'josh@epistemographer.com';
+$yourName = 'Webmaster';
+$yourEmail = 'katrina@jwa.org';
 $yourSubject = 'Katrina\'s Jewish Voices';
-$referringPage = 'http://chnm.gmu.edu/staff/nagrin/jwa/contact/';
+$referringPage = $_link->to( 'contact' );
 // No need to edit below unless you really want to. It's using a simple php mail() function. Use your own if you want
 function cleanPosUrl ($str) {
 return stripslashes($str);

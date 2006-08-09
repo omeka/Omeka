@@ -1,5 +1,9 @@
 <?php 
 	$object = $__c->objects()->findById();
+	if ($object == false):
+		header("Location: ".$_link->to('error'));
+		exit();
+	endif;
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,10 +13,8 @@
 <style type="text/css" media="screen">
 #object-sidebar {display:block; float:right; width: 252px;}
 </style>
-<script type="text/javascript" src="/staff/nagrin/jwa/content/common/javascripts/prototype.js"></script>
-
-<script type="text/javascript" src="/staff/nagrin/jwa/content/common/javascripts/scriptaculous.js"></script>
-<script type="text/javascript" src="/staff/nagrin/jwa/content/common/javascripts/common.js"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=<?php echo GMAPS_KEY;?>" type="text/javascript"></script>
+<?php $_common->javascripts( 'prototype.js', 'scriptaculous.js', 'common.js', 'CalendarPopup.js' ); ?>
 <script type="text/javascript" charset="utf-8">
 	//<![CDATA[
 	
@@ -67,17 +69,52 @@
 		}
 		new Ajax.Request('<?php echo $_link->to('ajaxAddMyTags'); ?>', opt );
 	}
+
+	var map;
+	function load()
+	{
+		<?php if( $object->location->total() > 0 ): ?>
+			if (GBrowserIsCompatible())
+			{
+				mapdiv = document.getElementById("object-map");
+				mapdiv.style.width = "100%";
+				mapdiv.style.height = "240px";
+				map = new GMap2(mapdiv);
+
+				var point = new GLatLng(<?php echo $object->location->latitude; ?>, <?php echo $object->location->longitude; ?>);
+
+				map.setCenter(point, 13);
+				map.addControl(new GSmallMapControl());
+
+				var marker = new GMarker(point);
+
+				  GEvent.addListener(marker, "click", function() {
+				    marker.openInfoWindowHtml("Address: <?php echo $object->location->cleanAddress; ?><br/>Zipcode: <?php echo $object->location->zipcode; ?>" );
+				  });
+
+				map.addOverlay( marker );
+
+			}
+		<?php endif; ?>
+	}
+
     //]]>
 </script>
+
 </head>
 
-<body id="browse" class="single">
+<body onload="load()" onunload="GUnload()" id="browse" class="single">
 <a class="hide" href="#content">Skip to Content</a>
 <div id="wrap">
 <?php include("inc/header.php"); ?>
 	<div id="content">
+		<?php //if ($object): // Make sure there's an object to view '?>
 		<h2>Browse</h2>
 		<div id="primary">
+			<ul class="object-nav">
+				<li class="previous"><?php if ($__c->objects()->getPrevObjectID()): ?><a href="<?php echo $_link->to( 'object' ).$__c->objects()->getPrevObjectID()->object_id; ?>">Previous object</a><?php endif; ?></li>
+				<li class="next"><?php if ($__c->objects()->getNextObjectID()): ?><a href="<?php echo $_link->to( 'object' ).$__c->objects()->getNextObjectID()->object_id; ?>">Next object</a><?php endif; ?></li>
+			</ul>
 			<div id="object">	
 				<div id="object-main">
 					<h3><span id="object_title"><?php echo $object->object_title; ?></span></h3>
@@ -93,6 +130,14 @@
 					<?php $object->getContributor(); ?>			
 					<h3>Contributor: <a href="<?php echo $_link->to( 'browse' ); ?>?contributor=<?php echo $object->contributor_id; ?>"><Anne Brener><?php echo $object->contributor->contributor_first_name.' '.$object->contributor->contributor_last_name; ?></a></h3>
 <?php endif; // end hiding data ?>
+
+<?php if( $object->location->total() > 0): ?>
+<div id="object-location">
+	<h3>Location:</h3>
+	<div id="object-map"></div>
+</div>
+<?php endif; ?>
+
 <h3>Citation Information:</h3>
 <p id="cite-as"><?php echo $object->getCitation(); ?></p>
 
@@ -109,6 +154,11 @@
 						</a>
 					</div>
 					<?php endif; ?>
+					
+					
+					
+					
+					
 					<?php if( $object->files->total() > 0 ): ?>
 						<h3>View Files</h3>
 						<?php foreach( $object->files as $file ): ?>
@@ -193,6 +243,7 @@
 
 			</div> <!-- closes object div -->
 		</div> <!-- closes primary div -->
+		<?php //endif; ?>
 	</div> <!-- closes content div -->
 	
 <?php include("inc/footer.php"); ?>
