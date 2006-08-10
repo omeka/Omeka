@@ -9,17 +9,16 @@ define( 'DS', DIRECTORY_SEPARATOR );
 define( 'KEA_MYSQLI_HOST',		'' );
 define( 'KEA_MYSQLI_USERNAME',	'' );
 define( 'KEA_MYSQLI_PASSWORD',	'' );
-define( 'KEA_MYSQLI_DBNAME',	'jwa' );
-
-/*
-define( 'KEA_MYSQLI_HOST',		'mysql.localdomain' );
-define( 'KEA_MYSQLI_USERNAME',	'nagrin' );
-define( 'KEA_MYSQLI_PASSWORD',	'dudeman' );
-define( 'KEA_MYSQLI_DBNAME',	'nagrin_jwa_production' );
-*/
+define( 'KEA_MYSQLI_DBNAME',	'' );
 
 define( 'KEA_MYSQLI_PORT',		null );
 define( 'KEA_MYSQLI_SOCKET',	null );
+
+/**
+	Site specific details
+*/
+define( 'INFO_TITLE',			'Sitebuilder' );
+
 
 
 /**
