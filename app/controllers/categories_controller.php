@@ -24,6 +24,42 @@ class CategoriesController extends Kea_Action_Controller
 		return false;
 	}
 	
+	protected function _edit()
+	{
+		if( self::$_request->getProperty( 'category_edit' ) ) {
+			if( $this->commitForm() ) {
+				$this->redirect( BASE_URI . DS . 'categories' . DS . 'all' );
+				return;
+			}
+		} else {
+			return $this->_findById();
+		}
+	}
+
+	protected function _delete()
+	{
+		if( $id = self::$_request->getProperty( 'category_id' ) ) {
+			
+			// Delete category
+			$mapper = new Category_Mapper;
+			$mapper->delete( $id );
+			
+			$this->redirect( BASE_URI . DS . 'categories' . DS . 'all' );
+		}
+	}
+
+	private function commitForm()
+	{
+		$category = new Category( self::$_request->getProperty( 'category' ) );
+		if( $this->validates( $category ) ) {
+			
+			return $this->add();
+			//return $category->save();
+			
+		}
+		return false;
+	}
+	
 	protected function _total()
 	{	
 		$mapper = new Category_Mapper;
@@ -56,7 +92,7 @@ class CategoriesController extends Kea_Action_Controller
 	//	Unfinished
 	//
 	
-	protected function _create()
+	protected function _add()
 	{	
 		if( !self::$_request->getProperty( 'category_submitted' ) ) {
 			self::$_session->setValue( 'category_form_saved', null );
@@ -150,8 +186,11 @@ class CategoriesController extends Kea_Action_Controller
 echo 'made it';
 				// Commit the transaction
 				echo $db_adapter->error();
-				$db_adapter->commit();
-				self::$_session->setValue( 'category_form_saved', null );
+				if ($db_adapter->commit()) 
+				{
+					self::$_session->setValue( 'category_form_saved', null );
+					$this->redirect( BASE_URI . DS . 'categories' . DS . 'all' );
+				}
 				
 			} catch( Kea_Exception $e ) {
 				// Rollback the transaction

@@ -37,7 +37,7 @@ $result = $__c->objects()->paginate();
 		<form name="object_limit" method="get" action="<?php echo $_link->to( 'objects' ); ?>" >
 
 		<select name="objectType">
-			<option value="">Show by KJV ObjectType:&nbsp;</option>
+			<option value="">Show by Category:&nbsp;</option>
 			<option value="">All</option>
 			<?php foreach( $__c->categories()->all( 'array' ) as $cat ): ?>
 			<option value="<?php echo $cat['category_id'] ?>" <?php if( $cat['category_id'] ==  self::$_request->getProperty('objectType') ){ echo ' selected '; } ?>><?php echo $cat['category_name'] ?></option>

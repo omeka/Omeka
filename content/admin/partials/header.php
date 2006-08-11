@@ -8,10 +8,11 @@
 			self::$_route['template'] ) ;
 ?>
 <div id="<?php echo $current ?>">
-<h1>Katrina's Jewish Voices</h1>
+<h1><?php echo SITE_TITLE; ?></h1>
 <ul id="navigation">
 	<li id="nav-welcome"><a href="<?php echo $_link->to(); ?>">Home</a></li>
 	<li id="nav-objects"><a href="<?php echo $_link->to( 'objects' ); ?>">Objects</a></li>
+	<li id="nav-categories"><a href="<?php echo $_link->to( 'categories' ); ?>">Categories</a></li>
 	<li id="nav-collections"><a href="<?php echo $_link->to( 'collections' ); ?>">Collections</a></li>
 	<li id="nav-contributors"><a href="<?php echo $_link->to( 'contributors' ); ?>">Contributors</a></li>
 	<li id="nav-tags"><a href="<?php echo $_link->to( 'tags' ); ?>">Tags</a></li>

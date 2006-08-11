@@ -13,7 +13,7 @@ $file_count = $__c->files()->total();
 
 <div id="sub-navigation"></div>
 <br/>
-<div id="welcome-logo"><img src="<?php echo $_link->in( 'jwa-logo.gif', 'images' ); ?>" /></div>
+<div id="welcome-logo"></div>
 <div id="welcome-text">
 	<h1>Currently archiving:</h1>
 	<br/>

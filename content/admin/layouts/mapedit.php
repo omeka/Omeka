@@ -6,7 +6,7 @@ $__c->admin()->protect();
 
 <html>
 <head>
-	<title>Katrina's Jewish Voices -Admin-</title>
+	<title><?php echo SITE_TITLE; ?> -Admin-</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Language" content="en-us" />
 	<meta name="Copyright" content="Copyright (c) CHNM - Center for History and New Media chnm.gmu.edu" />
@@ -138,7 +138,7 @@ $__c->admin()->protect();
 		<?php include( $content_for_layout ); ?>
 	</div>
 	<div id="footer">
-		<p>Developed by <a href="http://chnm.gmu.edu">CHNM</a> for the <a href="http://www.jwa.org">Jewish Women's Archive</a></p>
+		<p>Developed by <a href="http://chnm.gmu.edu">CHNM</a></p>
 	</div>
 </div>
 </body>

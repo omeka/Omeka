@@ -79,7 +79,7 @@ define( 'WEB_THUMBNAIL_DIR',	WEB_CONTENT_DIR.DS.THUMBNAIL_DIR_NAME );
 /*
 	Theme directives, these will become dynamic
 */
-define( 'PUBLIC_THEME_DIR',		DS.'jwa' );
+define( 'PUBLIC_THEME_DIR',		DS.'public' );
 define( 'ADMIN_THEME_DIR',		DS.'admin' );
 
 /*

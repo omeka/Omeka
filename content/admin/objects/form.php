@@ -43,7 +43,7 @@
 </fieldset>
 
 <fieldset class="formElement">
-	<label for="category">Katrina's Jewish Voices Object Type</label><br/>
+	<label for="category">Object Category / Type</label><br/>
 	<?php
 		$_form->select( array(	'name'		=> 'Object[category_id]',
 								'id'		=> 'category_id',

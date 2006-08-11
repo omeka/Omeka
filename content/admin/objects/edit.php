@@ -168,7 +168,7 @@ function deleteObjectFromCategory( object_id )
 <?php if( $object->category_id ): ?>
 <div id="category_add" style="display:none">
 <fieldset class="formElement">
-	<label for="category">Katrina's Jewish Voices Object Type</label><br/>
+	<label for="category">Category</label><br/>
 	<?php
 		$_form->select( array(	'name'		=> 'Object[category_id]',
 								'id'		=> 'category_id',
@@ -183,9 +183,9 @@ function deleteObjectFromCategory( object_id )
 </div>
 
 <div id="category_form">
-	<h2>KJV ObjectType: <?php echo $object->category_name ?></h2>
+	<h2>Object Type: <?php echo $object->category_name ?></h2>
 	<p class="instructionText">If you would like to assign this object to a new category, first remove it from the current category.  After it is removed, you will be able to assign it a new category.</p>
-	<input type="button" value="Remove category &gt; &gt;" onclick="if( confirm( 'Are you sure you want to remove this KJV ObjectType and the associated metadata from this object?  All of the object\'s associated metadata will be lost.') ) { deleteObjectFromCategory('<?php echo $object->getId(); ?>'); }">
+	<input type="button" value="Remove category &gt; &gt;" onclick="if( confirm( 'Are you sure you want to remove this Category and the associated metadata from this object?  All of the object\'s associated metadata will be lost.') ) { deleteObjectFromCategory('<?php echo $object->getId(); ?>'); }">
 	<fieldset class="formElement">
 		<label>Category Description:</label>
 		<p><?php echo $object->category_description; ?></p>
@@ -198,43 +198,7 @@ function deleteObjectFromCategory( object_id )
 			<?php if( !empty( $metafield['metatext_id'] ) ): ?>
 			<input type="hidden" name="metadata[<?php echo $i; ?>][metatext_id]" value="<?php echo $metafield['metatext_id']; ?>" />
 			<?php endif; ?>
-			<?php switch ($metafield['metafield_id']) {
-				case ('2'):
-				case ('3'):
-				case ('4'):
-				case ('5'):
-				case ('6'):
-				case ('19'):
-				case ('26'):
-				case ('31'):
-					echo '<textarea rows="4" cols="60" name="metadata['.$i.'][metatext_text]">'.$metafield['metatext_text'].'</textarea>';
-					break;
-				case ('7'):
-				case ('8'):
-				case ('9'):
-				case ('10'):
-				case ('11'):
-				case ('12'):
-				case ('13'):
-				case ('14'):
-				case ('15'):
-				case ('16'):
-				case ('17'):
-				case ('18'):
-				case ('20'):
-				case ('21'):
-				case ('22'):
-				case ('23'):
-				case ('24'):
-				case ('25'):
-				case ('27'):
-				case ('28'):
-				case ('29'):
-				case ('30'):
-				case ('32'):
-					echo '<input type="text" class="textinput" name="metadata['.$i.'][metatext_text]" value="'.$metafield['metatext_text'].'"/>';
-					break;
-		} ?>
+			<textarea rows="4" cols="60" name="metadata[<?php echo $i; ?>][metatext_text]"><?php echo $metafield['metatext_text']; ?></textarea>
 			</fieldset>
 			
 		<?php $i++; endforeach; ?>
@@ -243,7 +207,7 @@ function deleteObjectFromCategory( object_id )
 
 <?php else: ?>
 <fieldset class="formElement">
-	<label for="category">Katrina's Jewish Voices Object Type</label><br/>
+	<label for="category">Object Type</label><br/>
 	<?php
 		$_form->select( array(	'name'		=> 'Object[category_id]',
 								'id'		=> 'category_id',

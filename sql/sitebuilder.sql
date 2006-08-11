@@ -23,7 +23,7 @@ CREATE TABLE `categories` (
   `category_description` text NOT NULL,
   `category_active` tinyint(1) unsigned NOT NULL default '1',
   PRIMARY KEY  (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `categories`
@@ -111,7 +111,7 @@ CREATE TABLE `collections` (
   `collection_featured` tinyint(1) unsigned NOT NULL default '0',
   `collection_collector` text NOT NULL,
   PRIMARY KEY  (`collection_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `collections`
@@ -145,7 +145,7 @@ CREATE TABLE `contributors` (
   `contributor_occupation` varchar(255) NOT NULL,
   `contributor_location_participate` text NOT NULL,
   PRIMARY KEY  (`contributor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `contributors`
@@ -196,7 +196,7 @@ CREATE TABLE `files` (
   PRIMARY KEY  (`file_id`),
   KEY `object_id` (`object_id`),
   KEY `contributor_id` (`contributor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=149 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `files`
@@ -222,7 +222,7 @@ CREATE TABLE `location` (
   `cleanAddress` varchar(200) NOT NULL,
   PRIMARY KEY  (`location_id`),
   KEY `object_id` (`object_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `location`
@@ -240,7 +240,7 @@ CREATE TABLE `metafields` (
   `metafield_name` varchar(100) NOT NULL,
   `metafield_description` text NOT NULL,
   PRIMARY KEY  (`metafield_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `metafields`
@@ -293,7 +293,7 @@ CREATE TABLE `metatext` (
   PRIMARY KEY  (`metatext_id`),
   KEY `metafield_id` (`metafield_id`),
   KEY `object_id` (`object_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=429 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `metatext`
@@ -337,7 +337,7 @@ CREATE TABLE `objects` (
   KEY `creator_id` (`creator_id`),
   KEY `collection_id` (`collection_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=222 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- 
 -- Dumping data for table `objects`

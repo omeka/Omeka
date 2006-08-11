@@ -128,6 +128,7 @@ class UsersController extends Kea_Action_Controller
 			try {
 				$user = $mapper->login( $username, $password ) ;
 				self::$_session->loginUser( $user );
+				//if (self::$_session->getUser()) exit;
 			} catch ( Kea_Exception $e ) {
 				return 'This username and password don\'t match our records. Please try again.';
 			}
