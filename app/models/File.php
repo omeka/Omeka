@@ -239,7 +239,7 @@ class File extends Kea_Domain_Model
 			function setMemoryForImage($filename)
 			{
 				// DEBUG
-				$debugEmail = 'dstillman@chnm.gmu.edu';
+				//$debugEmail = '';
 				
 				$imageInfo = getimagesize($filename);
 				$MAX_MEMORY = 45; // maximum MB to use -- set this as low as possible, and not above 50!
@@ -254,7 +254,7 @@ class File extends Kea_Domain_Model
 					);
 				
 				// DEBUG
-				mail($debugEmail, 'mem', $memoryNeeded);
+				//mail($debugEmail, 'mem', $memoryNeeded);
 				
 				// Retrieve value from php.ini and trim trailing 'M'
 				// ini_get('memory_limit') only works if compiled with "--enable-memory-limit"
@@ -270,19 +270,19 @@ class File extends Kea_Domain_Model
 					
 					if ($newLimit > $MAX_MEMORY){
 						// DEBUG
-						mail($debugEmail, 'greater than max', '');
+						//mail($debugEmail, 'greater than max', '');
 						
 						return false;
 					}
 					
 					// DEBUG
-					mail($debugEmail, 'allocating', $newLimit);
+					//mail($debugEmail, 'allocating', $newLimit);
 					
 					ini_set('memory_limit', $newLimit . 'M');
 					return true;
 				} else {
 					// DEBUG
-					mail($debugEmail, 'not allocating', '');
+					//mail($debugEmail, 'not allocating', '');
 					
 					return false;
 				}
