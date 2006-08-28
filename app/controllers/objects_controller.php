@@ -2,6 +2,12 @@
 
 class ObjectsController extends Kea_Action_Controller
 {
+	/**
+	 * Constructor
+	 *
+	 * 
+	 * @author Nate Agrin
+	 **/
 	public function __construct()
 	{
 		$this->attachBeforeFilter(
@@ -13,6 +19,13 @@ class ObjectsController extends Kea_Action_Controller
 		);
 	}
 	
+	/**
+	 * Returns the next object in the database 
+	 * 
+	 * @param int $id An object_id
+	 * @return Object Returns the entire object, otherwise returns false
+	 * @author Nate Agrin
+	 **/
 	protected function _getNextObjectID( $id = null )
 	{
 		if( !$id )
@@ -39,6 +52,13 @@ class ObjectsController extends Kea_Action_Controller
 		return false;
 	}
 
+	/**
+	 * Returns the object located immediately prior in the database
+	 *
+	 * @param int $id An object_id 
+	 * @return Object Returns the entire object, otherwise returns false
+	 * @author Nate Agrin
+	 **/
 	protected function _getPrevObjectID( $id = null )
 	{
 		if( !$id )
@@ -66,7 +86,13 @@ class ObjectsController extends Kea_Action_Controller
 		return false;
 	}
 
-
+	/**
+	 * Find an object by ID
+	 *
+	 * @param int $id object_id
+	 * @return Object Returns the entire object, otherwise returns false
+	 * @author Nate Agrin
+	 **/
 	protected function _findById( $id = null )
 	{
 		if( !$id )
@@ -100,12 +126,29 @@ class ObjectsController extends Kea_Action_Controller
 		endif;
 	}
 
+	/**
+	 * Gets the current page number when browsing objects
+	 *
+	 * @return int Page number
+	 * @author Nate Agrin
+	 **/
 	protected function _getPageNum()
 	{
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
 		return $page;
 	}
 	
+	/**
+	 * Chooses a list of objects to display based on $_request data
+	 *
+	 * Handles both search and display of objects within the browse page.
+	 *
+	 * @param bool $short_desc Show a short description of each object 
+	 * @param int $num_objects The number of objects per page
+	 * @param bool $check_location Include objects with valid location coordinates
+	 * @return Object_Collection Returns a collection of objects with the selected criteria
+	 * @author Nate Agrin
+	 **/
 	protected function _paginate( $short_desc = true, $num_objects = 9, $check_location = false )
 	{	
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
@@ -204,7 +247,18 @@ class ObjectsController extends Kea_Action_Controller
 
 		return $mapper->paginate( $select, $page, $num_objects, 'objectsTotal' );
 	}
-
+	
+	/**
+	 * Filters objects based on user access permission
+	 *
+	 * If the user is not an admin, this function will filter objects where the contributor has not given consent,
+	 * has not given permission to post the object (NOTE [KBK]: Current configuration only checks for Admin privileges, 
+	 * we need to reconfigure so that researcher-level users will also be able to access the archives)
+	 *
+	 * @param Kea_DB_Select Select Object containing the parameters for selecting object(s) from the database 
+	 * @return Kea_DB_Select The select object with permission-based filtering
+	 * @author Nate Agrin
+	 **/
 	private function applyPermissions( Kea_DB_Select $select )
 	{
 		if( !self::$_session->isAdmin() )
@@ -218,6 +272,14 @@ class ObjectsController extends Kea_Action_Controller
 		return $select;	
 	}
 	
+	/**
+	 * Add an object to the archive
+	 *
+	 * If the object_add form has been submitted, commit the object to the database and redirect the user to view all objects,
+	 * otherwise reset the saved form to empty
+	 * @return void
+	 * @author Nate Agrin
+	 **/
 	protected function _add()
 	{
 		if( self::$_request->getProperty( 'object_add' ) ) {
@@ -230,6 +292,16 @@ class ObjectsController extends Kea_Action_Controller
 		self::$_session->setValue( 'object_form_saved', null );
 	}
 	
+	/**
+	 * Edit an archived object
+	 *
+	 * If the object_edit form has been submitted, commit the form to the database and redirect the user to that 
+	 * object's entry.  If the form was not submitted, then find the current object and prepare that object's data
+	 * to be displayed on the 'edit' page.
+	 *
+	 * @return Object Returns the object that is going to be edited
+	 * @author Nate Agrin
+	 **/
 	protected function _edit()
 	{
 		if( self::$_request->getProperty( 'object_edit' ) ) {
