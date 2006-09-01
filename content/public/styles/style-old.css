@@ -1,0 +1,383 @@
+/* Generic styles
+-----------------------------*/
+*,html,body {margin:0; padding:0;}
+
+body {margin:0 auto; width: 780px; background: #fff; font: 62.5% "Myriad Pro",Myriad, Verdana, sans-serif; color: #555;}
+
+a:link, a:visited {color: #369;}
+a:hover,a:active,a:focus {color: #c60;}
+a.namedanchor:hover {color: #369;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:normal;}
+h1 {font-size: 2em;}
+h2 {font-size: 1.8em;}
+h3 {font-size: 1.6em; }
+h4 {font-size: 1.4em;color: #369;}
+h5 {font-size: 1.2em; font-weight:bold;}
+h6 {font-size: 1.2em; font-style: italic;}
+
+p,ul,ol,dl,label,address {font-size: 1.2em; font-style:normal;}
+blockquote {font-size: 1em;margin-left: 15px; margin-right: 15px; padding: 10px 15px; background: #E7F1F8;}
+ul,ol,dl {list-style:none;}
+abbr {font-style:normal; border:none; text-decoration:none;}
+
+.hide {display:block; width:0 !important; height:0 !important; overflow:hidden; text-indent: -1000em;}
+
+/* General form styles */
+
+input, textarea {display:block; margin: 10px 0;}
+input.textinput, textarea {border: 1px solid #BBD9EE; padding: 4px; background: #E7F1F8;}
+input.textinput:focus, textarea:focus {background: #fff;}
+/* vCard Styles
+---------------------------*/
+.vcard {display:block; font-style:normal;font-size: 1.2em; margin: 12px 0;}
+.vcard .fn, .vcard .street-address, .vcard .adr, .vcard .tel, .vcard .url, .vcard .tel, .vcard .fax {display:block;}
+.vcard span {}
+.vcard object { width:0; height:0; overflow:hidden;}
+.short .fn, .short .title {display:inline;}
+.short .org, .short .adr, .short .url, .short .tel{height:0; width:0; text-indent:-1000em; overflow:hidden;}
+.short .fn {font-weight:bold;}
+.short {margin-left: 20px;}
+
+/* Tag Cloud
+----------------------------*/
+#tagcloud a {text-decoration:none; margin-right: 8px;}
+a.tag1 {font-size: 1.2em;}
+a.tag2 {font-size: 1.5em;}
+a.tag3 {font-size: 2em;}
+a.tag4 {font-size: 3.0em;}
+a.tag5 {font-size: 4.0em;}
+
+.clear {clear:both;}
+
+/* Wrap styles
+--------------------------*/
+#wrap {display:block; float:left; width: 780px; margin-bottom: 20px; margin-top:0;}
+
+	
+/* Header
+--------------------------*/
+#branding {background: #369 url("../i/shadow-tile-blue.gif") 50% 0 repeat-y; display:block; float:left; width:780px; margin-top:0;}
+
+/* Logos
+--------------------------*/
+#jwa-logo a { 
+	display:block; 
+	float:left;
+	width: 112px;
+	margin: 20px;
+	padding: 78px 0 0 0;
+	overflow:hidden;
+	background-image: url("../i/jwa-logo.gif");
+	background-repeat: no-repeat;
+	height: 0px !important;
+	height /**/:78px;
+	}
+
+#kjv-logo a {
+	display:block;  
+	float:left;	width: 456px; 
+	margin: 0 0 0 10px; 
+	padding:142px 0 0 0;
+	background-image: url("../i/kjv-logo3.gif");
+	background-repeat:no-repeat;
+	overflow:hidden;
+	background-color: #369;
+	background-position: left center;
+	height: 0px !important;
+	height /**/:142px;
+	}
+	
+/* Meta styles
+--------------------------*/
+#meta {background: #369; display:block; float:right; width:304px; margin-top:0;margin-bottom: 0; margin-right: 10px;}
+#meta div.padding { background: #369; display:block; float:right;width: 280px; margin: 0 10px;}
+#meta #searchform {display:block; float:right; width:280px;padding: 10px;}
+
+#searchform input.textinput {border: 1px solid #aaa; padding: 2px;display:block; float:right; margin-left: 4px;}
+#searchform input.submitinput {border: none; padding: 2px; background: #369; font-size: 1.2em; color: #BBD9EE; cursor:pointer;display:block; float:right;}
+#searchform input.submitinput:focus, #searchform input.submitinput:hover {color: #fff;}
+
+#home #meta {display:none;}
+#meta p#login-blurb {display:block; float:right; width: 200px; text-align:center;font-size: 95%;color: #369; background: #7D9EBE;padding: 10px 10px; margin:10px; }
+#meta p#login-blurb a {display:block; font-size: 1.6em; text-decoration:none; margin-top: 10px;}
+
+#mainnav {display:block; float:left; clear:both; width: 760px; background: #BBD9EE; margin: 0 10px; padding:10px 0 0 0; text-align:center;overflow:hidden;}
+#mainnav li {display:block; float:left;}
+#mainnav li a {text-decoration:none; border-bottom: 1px solid #BBD9EE;font-size: 1.1em; width:151px;border-left: 1px solid #BBD9EE;padding: 10px 0;display:block; float:left;}
+#mainnav li a#nav-home {width: 152px; border-left:none;}
+#mainnav a:link, #mainnav a:visited {color: #369; background: #E7F1F8;}
+#mainnav a:hover, #mainnav a:active {color: #c60; background: #fff;}
+
+#mainnav #nav-home a:hover, #mainnav #nav-home a:active, #home #nav-home {color: #333; background: #fff;}
+#mainnav #nav-contribute a:hover, #mainnav #nav-contribute a:active, #contribute #nav-contribute {color: #333; background-color: #fff;}
+#mainnav #nav-browse a:hover, #mainnav #nav-browse a:active, #browse #nav-browse {color: #333; background-color: #fff;}
+#mainnav #nav-search a:hover, #mainnav #nav-search a:active, #search #nav-search {color: #333; background-color: #fff;}
+#mainnav #nav-about a:hover, #mainnav #nav-about a:active, #about #nav-about {color: #333; background-color: #fff;}
+#mainnav #nav-myarchive a:hover, #mainnav #nav-myarchive a:active, #myarchive #nav-myarchive {color: #333; background-color: #fff;}
+
+#home #nav-home {background: #fff; color: #c60; border-bottom: 1px solid #fff;}
+#contribute #nav-contribute {background:#fff; color: #c60; border-bottom: 1px solid #fff;}
+#browse #nav-browse {background: #fff; color: #c60;border-bottom: 1px solid #fff;}
+#about #nav-about {background: #fff; color: #c60;border-bottom: 1px solid #fff;}
+#myarchive #nav-myarchive {background: #fff; color: #c60; border-bottom: 1px solid #fff;}
+
+/* Subnavigation for About and Browse pages */
+ul.subnav {display:none; clear:both; background: #fff;}
+ul.subnav li {display:block; float:left;margin-right: 2px;}
+ul.subnav a {font-size: 1em;display:block; padding: 4px 8px;text-decoration:none;}
+ul.subnav a:link, ul.subnav a:visited {background: #E7F1F8; background: #BBD9EE;color: #369;}
+ul.subnav a:hover, ul.subnav a:active {color: #369; background: #E7F1F8;}
+
+#about ul#subnav-about, #browse ul#subnav-browse, #myarchive ul#subnav-myarchive {display:block;float:left;width: 400px;padding:0;margin-left: 30px;}
+
+/* Login Form in the header */
+#loginform {display:block; float:right; width: 380px; font-size: 0.9em; text-align:right;}
+#loginform label {display:block; margin: 6px 0; width: 160px; float:left;}
+#loginform input.textinput {border: 1px solid #ccc; background: #eee; width: 140px; padding: 2px;}
+#loginform input.textinput:focus {background: #fff;}
+#loginform input.submitinput {border: 1px solid #ccc; background: #eee; padding: 4px;  margin: 6px;font-size: 1em;  text-align:center;margin: 18px 6px;display:block; float:left;}
+#loginform input.submitinput:hover, #loginform input.submitinput:focus { background: #fff; cursor:pointer;}
+
+
+/* Content
+-------------------*/
+#content {background: #fff url("../i/shadow-tile.gif") 50% 0 repeat-y;display:block;padding-top: 10px; float:left; width: 780px;}
+#content h2 {display:block; display:none;color: #369; margin: 0 20px; padding: 20px 10px;text-align:left; font-size: 1.6em; }
+#content p, #content h3, #content ul, #content address, #content dl, #content dt, #content dd {margin: 12px 0; line-height: 2em;}
+#content dt {font-weight:bold;}
+#content ul {list-style:none;}
+#content h3 {display:block; clear:left;}
+
+#primary{width: 436px; display:block; float:left; margin-left: 30px;} 
+#secondary{width:274px;float:right; font-size:98%; margin-left:0; margin-right: 20px; padding: 0 10px;background: #fff;} 
+#secondary p {line-height: 1.75em;}
+
+/* H2s for specific sections. Uses the ID of the <body>. */
+#home #content h2 { display:none;background: #fff/* url("../i/blue-header.gif") 50% 0 repeat-y*/;color: #369;}
+#contribute #content h2, #myarchive #content h2 { background: #fff /*url("../i/orange-header.gif") 50% 0 repeat-y*/;}
+#browse #content h2 { background: #fff/* url("../i/green-header.gif") 50% 0 repeat-y*/;}
+#search #content h2 { background: #fff/* url("../i/green-header.gif") 50% 0 repeat-y*/;}
+#about #content h2 {background: #fff/* url("../i/blue-header.gif") 50% 0 repeat-y*/;}
+
+/* Homepage Specific Styles 
+-----------------------------------------------*/
+
+#home #primary h3 {text-align:left; font-size: 2em;}
+#home #primary h3 a {text-decoration:none; color: #900;}
+
+/* Homepage about blurb */
+#home #about-blurb, #home #featured-blurb {display:block; padding: 0; margin: 20px 0;}
+#home #about-blurb {background: #E7F1F8; padding: 10px;}
+#home #about-blurb h3, #home #featured-blurb h3 { color: #555; margin:0;}
+#home #about-blurb p, #home #featured-blurb p {}
+
+/* Homepage Add Your voice blurb */
+#home #addyourvoice-blurb {background: #fff09e; padding: 0 10px;margin-top: 10px; margin-bottom: 20px;}
+#addyourvoice-blurb h3 {font-size: 2em;}
+#home #addyourvoice-blurb h3 a:link, #home #addyourvoice-blurb h3 a:visited {color: #c60; text-decoration:none;}
+#home #addyourvoice-blurb h3 a:hover, #home #addyourvoice-blurb h3 a:active {color: #336799; text-decoration:none;}
+
+/* Homepage Featured blurb */
+#home div#featured-blurb {margin-bottom: 10px; margin-top: 0;}
+#home div.featured-object {display:block; width: 370px; float:left; margin: 20px 0; padding-bottom: 20px;}
+#home .featured-title {margin:10px 0;font-size: 1.6em; font-weight:bold;}
+#home .featured-title a {text-decoration:none;}
+#home .featured-thumb {display:block; float:left; width: 410px; margin-bottom: 10px;padding: 4px; background: #fff; border: 1px solid #BBD9EE;}
+#home .featured-description {display:block; width: 350px;margin: 10px 0;}
+
+/* Homepage login box */
+#login-box {background: #FFF09E; padding: 10px; margin-top: 10px; font-size: 1.2em;}
+#login-box a {display:block; text-decoration:none;}
+
+/* Homepage tagcloud */
+#home #tagcloud {padding: 0; margin:20px 0; display:block; clear:both; background: #e7f1f8; width: 370px; padding: 10px 20px 20px 20px;}
+#home #tagcloud h3 {color: #555; margin:0; margin-bottom: 20px;}
+#taglist {display:block; float:left;padding: 0;clear:both; background: #ffc;}
+#taglist li {display:inline; margin: 5px; line-height: 3em;}
+
+/* Primary and Secondary section styles */
+#contribute #primary, #about #primary, #browse #primary {width: 720px; float:left; margin: 0 30px;}
+
+/* Contribute page and form in "Add Your Voice" 
+----------------------------------------*/
+#contribute-form {display:block; float:left; clear:both; width: 720px;margin-bottom: 20px;}
+#contribute-form fieldset {display:block; float:left; clear:both; width: 720px; border:none; padding: 8px 0 7px 0; border-top: 1px solid #ccc;}
+#contribute-form legend {display:block; width: 100%;font-size: 1.6em; color: #38c; padding: 8px 8px 8px 0;}
+#contribute-form input.textinput, #contribute-form textarea {border: 1px solid #999; padding: 3px; background: #eee;}
+#contribute-form input.textinput:focus {background: #fff;}
+#contribute-form #contribute-intro {display:block; background: #E7F1F8;  padding: 10px 20px; width: 680px; margin-top: 20px; margin-bottom: 20px;}
+#contribute-form #contribute-choose {display:block; float:right; width: 360px;}
+
+#contribute-form #other-info {display:block; float:left; width: 330px;}
+#contribute-form #form-creator {display:block; float:right; width: 330px;}
+
+#contribute-form input.checkbox {margin-right: 6px; border: 1px solid #999;}
+#contribute-form input.radio{margin-right: 6px;}
+
+#contribute-form input.input-submit {border: 1px solid #999; background: #eee; color: #555; padding: 4px; font-size: 1em;}
+
+#contribute-form #form-continue {padding: 8px 0; margin: 8px 0;}
+#contribute-form #form-continue p {font-style:italic; font-size: 1em;}
+#contribute-form #contribute-choose-inst {display:block; float:left; width: 330px;}
+#contribute-form #contribute-choice {display:block; float:right; width: 330px;}
+
+input#object_tags {width: 710px;}
+
+#contribute #content h3 {font-size: 1.6em; text-align:left;}
+#contribute #content div.section {display:block; float:left; width: 370px; margin-bottom: 20px;}
+#contribute #content form {display:block; clear:both;}
+#contribute #content #contribute-intro h3 {font-size: 2em;}
+
+
+
+/* Browse Pages
+-------------------------*/
+/* Browse splash page */
+#browse.intro h3 {}
+#browse.intro div.object {margin: 20px 0;}
+#browse.intro div.object ul.taglist li {display:inline;}
+#browse.intro div.object-meta {display:block; float:left; width: 100px; margin:0; padding:0;}
+#browse.intro div.object-meta img.thumbnail {margin:0; padding:4px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+#browse.intro div.object-description {display:block; float:right; width: 320px;margin:0; padding:0;}
+#browse.intro div.object h4 {margin-bottom: 20px;}
+
+#browse .featured-object {display:block; float:left; width: 720px; clear:left; margin-bottom: 20px;}
+#browse .featured-title {margin-bottom: 20px;}
+#browse .featured-title a {text-decoration:none;}
+#browse .featured-description {display:block; float:right; width: 550px; margin-top: 0;}
+#browse .featured-thumb {display:block; float:left;}
+
+/* Objects List styles */
+
+#browse #objects-list {display:block;}
+#browse #objects-list div.object {display:block; float:left; width: 680px; clear:left; margin: 10px 0; background: #e7f1f8; padding: 20px;}
+#browse #objects-list .object-title a {text-decoration:none;}
+#browse #objects-list div.object-description {display:block; float:left; width: 520px; font-size: 1.2em;}
+#browse #objects-list div.object-meta {display:block; float:right; width: 120px; margin-bottom: 20px;}
+#browse #objects-list ul.taglist {display:block;float:left; width: 520px;}
+
+
+/* Tags page */
+#browse.tags #tagcloud {width: 720px;margin: 20px 0;}
+#browse.tags h3 {}
+
+/* Collection page */
+#browse.collection h3 {}
+#browse.collection dl.collectionlist {display:block; width: 720px; margin: 20px 0;}
+#browse.collection dl.collectionlist dt, dl.collectionlist dd {}
+#browse.collection dl.collectionlist dt {font-size: 1.4em;}
+
+/* Map page */
+#browse.map #map {width:720px; height:400px; margin: 20px 0;}
+#browse.map h3 {}
+
+/* Single Object Page */
+#object {margin: 0 0 20px 0; display:block; float:left;}
+#object-main {width: 420px; float: left;}
+#object-main h3 {font-size: 1.4em; font-weight:normal; margin-bottom: 10px; color: #555; background: #fff; background-image:none;}
+#object_description {background-color:#E7F1F8; padding: 20px; }
+
+#object_title {font-weight:normal; font-size: 1.8em;}
+
+#object-sidebar {width:270px; float: right;padding:0;margin-top: 20px;}
+#object-sidebar h3 {background: #fff09e; color: #333;display:block; margin: 0;padding: 4px 8px; font-size: 1.4em; font-weight:normal;}
+#object-category span {color: #555; font-weight:bold;}
+
+ul.metadata {list-style:square; color: #eee;margin-left: 8px;}
+ul.metadata li {padding: 8px 2px 7px 2px; margin-left: 8px;border-bottom: 1px solid #ccc; color: #ccc;}
+ul.metadata li span {color:#555;}
+
+#object-dublin-core { border: 1px solid #fff09e; background:#FFF8CF;border-bottom:none;margin-bottom: 20px;}
+#object-dublin-core p { border-bottom: 1px dotted #fff09e; padding-bottom:3px; padding-top:3px;margin-bottom:0;font-size:1.1em;padding-left: 8px; padding-right:8px;}
+
+#object-tags {background: #FFF8CF;}
+#object-tags ul#tags {margin-left:8px; margin-right:8px;margin-bottom: 12px;}
+#object-tags ul#tags li {display:inline;}
+#object-tags ul#tags li a {text-decoration:none;}
+
+#mark-favorite {float:left;}
+
+/* MyArchive Page styles
+------------------------*/
+#myarchive.intro div.object {display:block;}
+#myarchive.intro .object-title {margin-bottom: 20px;}
+#myarchive.intro .object-title a {text-decoration:none;;}
+#myarchive.intro .thumbnail-container {display:block; float:left; margin-right: 20px; margin-bottom: 20px;}
+
+/* MyFavorites styles */
+#myarchive #myfavorites {background: #fff;display:block; width: 420px; display:block; float:left;margin-bottom: 20px;padding: 0;}
+
+/* MyProfile styles */
+#profileform fieldset {border:none; border: 1px solid #ccc; padding: 10px;}
+#profileform legend { font-size: 1.4em; padding: 4px;}
+#profileform label, #profileform input {display:block; font-size: 1.1em; margin: 4px 0 8px 0;}
+#profileform input.textinput, #profileform textarea {border: 1px solid #ccc; background: #eee; padding: 2px;}
+#profileform input.textinput:focus, #profileform textarea:focus {background: #fff;}
+#profileform textarea {width: 320px; height: 160px; font: 1.1em "Myriad Pro", Myriad, Verdana, sans-serif;}
+
+/* MyTags styles */
+#my-tags {background: #fff09e;display:block; width: 252px;margin-top: 0; padding: 10px;}
+#my-tags h3 {margin-top: 0;}
+#my-tags h4 {color: #c60;}
+#mytagcloud li {display:inline; font-size: 90%;margin: 8px;}
+#mytagcloud a {text-decoration:none; color: #c60;}
+
+/* About Page and subpages styles (About,FAQ,Contact,Privacy,Terms of Use,Pressroom)
+------------------------------------------------------------------------------------*/
+
+/* About subnavigation styles */
+
+#about.termsofuse ul.subnav a.nav-termsofuse,
+#about.faq ul.subnav a.nav-faq,
+#about.types ul.subnav a.nav-types,
+#about.privacy ul.subnav a.nav-privacy 
+	{background: #e7f1f8;}
+	
+/* About homepage styles */
+#internalnav {display:block;float:right; width:230px; margin: 10px 0 10px 20px;color: #c60; padding: 10px; background: #FFF09E;}
+#internalnav li {text-indent: -10px; margin: 8px 20px;line-height: 1.75em; padding-left: 10px;font-size: 0.95em; list-style:square;}
+#internalnav a {text-decoration:none;}
+#internalnav a:link, #internalnav a:visited {color: #c60;}
+#internalnav a:hover, #internalnav a:active {color: #c60; text-decoration:underline;}
+
+#jwa-contact {display:block; float:right; width: 180px; margin: 10px;padding: 10px; background: #E7F1F8;}
+#jwa-contact p {font-weight:bold;}
+
+ul#collaborating-list li, ul#supporters-list li {margin-left: 20px;}
+
+/* FAQ Page Styles */
+ul#faqs {margin: 10px 0; background: #FFF09E; padding: 10px 20px;}
+ul#faqs a:link, ul#faqs a:visited {color: #c60; text-decoration:none;}
+ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
+
+/* Contact form */
+#cForm {margin: 10px 0;}
+#cForm fieldset {border:none;}
+#cForm label, #cform input, #cForm textarea {display:block; margin: 10px 0;}
+#cForm input.textinput, #cForm textarea {border: 1px solid #BBD9EE; padding: 4px; background: #E7F1F8;}
+#cForm input.textinput:focus, #cForm textarea:focus {background: #fff;}
+#cForm textarea {width: 350px;}
+#cForm input.textinput {width: 220px;}
+#cForm input.textinput, #cForm textarea {font-family: Verdana, Arial, sans-serif; font-weight:normal; font-size: 1.2em;}
+#cForm input.submit {font-size: 1em; border: 1px solid #777; background: #ddd; padding: 4px;}
+
+/* Signin/Signup page styles */
+
+#login input.textinput {border: 1px solid #BBD9EE; width: 170px;background: #E7F1F8;}
+#login input.textinput:focus {background: #fff;}
+#login input {display:block;padding: 4px; margin: 2px 0 10px 0;}
+#login label {display:block; padding: 4px 0;}
+#login #primary {margin-left: 30px; width: 436px;}
+
+#loginform input.textinput {width: }
+/* Footer
+-------------------*/
+#footer {background: #fff url("../i/footer-bg2.gif") top left no-repeat; display:block; float:left;clear: both; width: 780px; padding: 0;}
+#footer #copyright {display:block; float:left; width: 200px; margin-left: 20px;}
+#footer div.section p {float:right; text-align:right; margin-right: 20px; width: 500px;}
+#footer .secondarynav {display:block; float:right; width: 500px; margin: 20px; text-align:right;}
+#footer .secondarynav li {display:inline; margin-left: 8px;}
+#footer .secondarynav a {text-decoration:none;}
+
+.form-error {color: red; font-size: 1.4em;}

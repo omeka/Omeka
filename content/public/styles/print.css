@@ -1,0 +1,24 @@
+* { float:none !important;}
+body { color: black; background: white; padding: 0 5%; font: 12px "Times New Roman",Times,Georgia,serif; }
+a:link, a:visited { background: white; color: black; text-decoration: underline; }
+h1, h2, h3,h4,h5,h6 { background: white; color: black; padding-bottom: 1px; border-bottom: 1px solid gray; }
+
+#branding {background-image:none;}
+
+#meta,#menorah,#mainnav {display:none;}
+
+h1#kjv-logo {display:block; background:url("../i/kjv-logo-print.gif") top left no-repeat;}
+h1#kjv-logo a {display:none;}
+
+#wrap,#content {width: auto; margin: 0 5%; padding: 0; border: 0; color: black; background: transparent none; background-image:none !important;}
+#primary,#secondary { width: auto; margin-left: 10%;}
+#content a:link:after, #content a:visited:after {
+   content: " (" attr(href) ") ";
+   font-size: 90%;
+   }
+
+#content a[href^="/"]:after {
+   content: " (http://chnm.gmu.edu/jwa/" attr(href) ") ";
+   }
+
+#footer { display:none; }

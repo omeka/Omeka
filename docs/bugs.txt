@@ -1,0 +1,47 @@
+Levels of users
+	super		same as admin
+	
+	admin		can see any objects regardless of status
+					can delete objects
+					can add objects
+					can edit objects ( assign to collections, add / remove tags, etc. )
+					
+	researcher	can see objects of any status whose:
+					contributor consent is yes or unknown
+					contributor posting is yes or unknown
+
+	public		can see their own objects, regardless of status
+
+Objects:
+	All
+		Drop down menus do nothing
+		Search does nothing
+		Select query should be based on user currently logged in
+		
+	Browse by map:
+		Doesn't exist
+	
+	Show:
+		No location information displayed
+
+Files:
+	Edit:
+		No way to edit the file metadata
+		
+Contributor:
+
+		
+Collections:
+	No known issues
+	
+Categories:
+	Cannot see list of categories and metadata for each
+	
+Users:
+	Cannot edit
+	Cannot delete
+	
+My Archive
+	Need to show favorited objects, tags, etc.
+	Need to show 'my tags' on each object.
+	Need way to remove 'my tags' on each object.

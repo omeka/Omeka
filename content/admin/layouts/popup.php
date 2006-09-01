@@ -1,0 +1,1 @@
+<?php include( $content_for_layout ); ?>

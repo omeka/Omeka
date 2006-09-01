@@ -1,0 +1,353 @@
+/* Generic styles
+-----------------------------*/
+*,html,body {margin:0; padding:0;}
+
+body {margin:0 auto; width: 780px; background: #fff; font: 62.5% Verdana, sans-serif; color: #333;}
+
+a:link, a:visited {color: #369;}
+a:hover,a:active,a:focus {color: #c60;}
+a.namedanchor:hover {color: #369;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:normal;}
+h1 {font-size: 1em;}
+h2 {font-size: 1.8em;}
+h3{font-size: 1.6em;color: #369; }
+h4,legend {font-size: 1.4em;color: #369;}
+h5 {font-size: 1.2em; font-weight:bold;}
+h6 {font-size: 1.1em; font-style: italic;}
+
+p,ul,ol,dl,label,address {font-size: 1.1em; font-style:normal;}
+blockquote {font-size: 1em;margin-left: 15px; margin-right: 15px; padding: 10px 15px; background: #E7F1F8;}
+ul,ol,dl {list-style:none;}
+abbr {font-style:normal; border:none; text-decoration:none;}
+
+p,dd {line-height: 2em;}
+.hide, #content h2 {display:none; width:0 !important; height:0 !important; overflow:hidden; text-indent: -1000em;}
+#content h2 {display:none;}
+h2,h3,h4,h5,h6 {margin: 20px 0;}
+p,ul,ol,dl,dd,fieldset {margin: 10px 0;}
+dt {font-weight:bold; margin: 20px 0;}
+
+a img {border:none !important; text-decoration:none !important;}
+.odd {background: #BBD9EE;}
+.even {background: #E7F1F8;}
+
+form input.textinput, form textarea, form input[type="file"] {border: 1px solid #BBD9EE; padding: 4px; margin-bottom: 10px; background: #E7F1F8;}
+form input.textinput:focus, form textarea:focus {background: #fff;}
+form input {}
+
+br {display:none;}
+/* vCard Styles
+---------------------------*/
+.vcard {display:block; font-style:normal;font-size: 1.1em; line-height: 1.75em; margin: 10px 0;}
+.vcard .fn, .vcard .street-address, .vcard .adr, .vcard .tel, .vcard .url, .vcard .tel, .vcard .fax {display:block;}
+.vcard span {}
+.vcard object { width:0; height:0; overflow:hidden;}
+.short .fn, .short .title {display:inline;}
+.short .org, .short .adr, .short .url, .short .tel{display:block;height:0; width:0; text-indent:-1000em; overflow:hidden;}
+.short .fn {font-weight:bold;}
+.short {margin-left: 20px;}
+
+/* Wrap styles
+----------------------------------*/
+#wrap {display:block; float:left; width: 780px; margin-bottom: 20px; margin-top:0;}
+
+/* Branding and Meta styles
+----------------------------------*/
+#branding {background: #369 url("../i/shadow-tile-blue.gif") 50% 0 repeat-y; display:block; float:left; width:780px; margin-top:0; padding:0;}
+
+img#menorah {display:block;float:left; width:304px; height: 140px;margin:0; padding:0; margin-left: 10px;}
+
+/* Second header styles */
+#meta {display:block; float:left; clear:both;font-size: 95%;width: 760px; margin: 0 10px; background: #BBD9EE; color: #369;}
+#meta #quicksearch {display:block; font-size: 95%;float:left; width: 280px; margin-left: 20px; overflow:visible; margin: 10px 0 0 20px; padding-bottom: 10px;}
+#meta #quicksearch input.textinput {border: 1px solid #77A0C4; background: #fff; font-size: 1.1em; padding: 4px;margin-bottom:0; }
+#meta #quicksearch input.submitinput {border: 1px solid #77A0C4; background: #e7f1f8; padding: 3px; margin:0 !important; font-size: 1.1em;}
+#meta p#login-blurb {display:block; float:right; width: 400px; text-align:right; margin-right: 20px; margin-bottom:0;}
+
+/* Third Header styles */
+div#menorah {display:block; float:right; position:relative; width: 272px;height: 140px; margin:0; padding:0; margin-right: 10px;background: #369 url("../i/menorah1.jpg") top right no-repeat;}
+div#menorah #searchform1 {position:absolute; bottom: 20px; right: 20px; background: transparent;display:block; }
+#menorah #searchform1 input.textinput {border: 1px solid #77A0C4; background: #fff; font-size: 1.1em; padding: 4px; }
+#menorah #searchform1 input.submitinput {border: 1px solid #77A0C4; background: #e7f1f8; padding: 3px; font-size: 1.1em;}
+
+/* 4th header styles */
+div#meta2 {display:block; float:right; position:relative; width: 456px;height: 140px; margin:0; padding:0; margin-right: 10px;background: #369;}
+#meta2 #quicksearch {display:block; float:right; text-align:right; margin-top: 20px; margin-right: 20px;width: 300px; }
+#meta2 #quicksearch input.textinput {border: 1px solid #77A0C4; background: #fff; font-size: 1.1em; padding: 4px; }
+#meta2 #quicksearch input.submitinput {border: 1px solid #77A0C4; background: #e7f1f8; padding: 3px; font-size: 1.1em;}
+#meta2 p#login-blurb {display:block; float:right; width: 400px; text-align:right; margin-right: 20px;}
+
+/* Main navigation tabs */
+#mainnav {display:block; float:left; clear:both; width: 760px; background: #BBD9EE; margin: 0 10px; text-align:center;overflow:hidden;}
+#mainnav li {display:block; float:left;margin-top: 1px;}
+#mainnav li a {text-decoration:none; font-size: 1.1em; width:151px;border-left: 1px solid #BBD9EE;padding: 10px 0 11px 0;display:block; float:left;}
+#mainnav li a#nav-home {width: 152px; border-left:none;}
+#mainnav a:link, #mainnav a:visited {color: #369; background: #E7F1F8;border-bottom: 1px solid #BBD9EE;}
+#mainnav a:hover, #mainnav a:active {color: #c60; background: #F3F8FC;border-bottom: 1px solid #BBD9EE;}
+
+#mainnav #nav-home a:hover, #mainnav #nav-home a:active, #home #nav-home {color: #333; background: #fff;}
+#mainnav #nav-contribute a:hover, #mainnav #nav-contribute a:active, #contribute #nav-contribute {color: #333; background-color: #fff;}
+#mainnav #nav-browse a:hover, #mainnav #nav-browse a:active, #browse #nav-browse {color: #333; background-color: #fff;}
+#mainnav #nav-search a:hover, #mainnav #nav-search a:active, #search #nav-search {color: #333; background-color: #fff;}
+#mainnav #nav-about a:hover, #mainnav #nav-about a:active, #about #nav-about {color: #333; background-color: #fff;}
+#mainnav #nav-myarchive a:hover, #mainnav #nav-myarchive a:active, #myarchive #nav-myarchive {color: #333; background-color: #fff;}
+
+#home #nav-home {background: #fff; color: #c60; border-bottom: 1px solid #fff;}
+#contribute #nav-contribute {background:#fff; color: #c60; border-bottom: 1px solid #fff;}
+#browse #nav-browse {background: #fff; color: #c60;border-bottom: 1px solid #fff;}
+#about #nav-about {background: #fff; color: #c60;border-bottom: 1px solid #fff;}
+#myarchive #nav-myarchive {background: #fff; color: #c60; border-bottom: 1px solid #fff;}
+
+/* Subnavigation for About and Browse pages */
+ul.subnav {display:none; clear:both; background: #fff;}
+ul.subnav li {float:left;margin-right: 2px;}
+ul.subnav li.nolink {padding: 8px 0; text-align:right; width: auto;}
+ul.subnav li a {font-size: 1em;display:block; padding: 8px;text-decoration:none; text-align:center;}
+ul.subnav li a:link, ul.subnav a:visited {background: #E7F1F8; background: #BBD9EE;color: #369;}
+ul.subnav li a:hover, ul.subnav a:active {color: #369; background: #E7F1F8;}
+
+#about ul#subnav-about, #browse ul#subnav-browse, #myarchive ul#subnav-myarchive {display:block; padding:0;width: 720px; margin-left: 30px; margin-right: 30px;}
+
+/* Logos
+----------------------------------*/
+#jwa-logo a { 
+	display:block; 
+	float:left;
+	width: 112px;
+	margin: 20px;
+	padding: 78px 0 0 0;
+	overflow:hidden;
+	background-image: url("../i/jwa-logo.gif");
+	background-repeat: no-repeat;
+	height: 0px !important;
+	height /**/:78px;
+	}
+	
+#kjv-logo a {
+	display:block;  
+	float:right;	width: 414px; 
+	margin:0; 
+	padding:130px 0 0 0;
+	background-image: url("../i/kjv.jpg");
+	background-repeat:no-repeat;
+	overflow:hidden;
+	background-position: center center;
+	height: 0px !important;
+	height /**/:130px;
+	color: #369;
+	}
+#kjv-logo {display:block; width: 414px; height: 130px;float:right; margin-right: 30px;}
+
+
+/* Content
+-------------------*/
+#content {background: #fff url("../i/shadow-tile.gif") 50% 0 repeat-y;display:block;padding: 10px 0; float:left; width: 780px;}
+
+#primary{width: 426px; display:block; margin-right: 30px;float:right;} 
+#secondary{width:274px;float:left; margin-left: 30px;background: #fff;} 
+
+ul.object-nav {list-style:none;display:block; float:left; margin-right: 30px;}
+ul.object-nav li {display:block; float:left; width: 50%;}
+ul.object-nav li.next {float:right;}
+
+/* Homepage Specific Styles 
+-----------------------------------------------*/
+
+#home #primary h3 {text-align:left;}
+#home h3 a {text-decoration:none;}
+#home h3 a.featured-title-link {text-decoration:underline;}
+#home h2, #home h3, #home h4 {margin: 10px 0;}
+
+/* Homepage Featured Object */
+#home div.featured-object img.featured-thumb {width: 426px;}
+#home div.featured-object {background:transparent;}
+
+/* Homepage tagcloud */
+#home #tagcloud {padding: 0; margin:20px 0; display:block; clear:both; background: #e7f1f8; width: 406px; padding: 10px;}
+#home #tagcloud h3 {color: #369; margin:0;}
+#taglist {display:block; float:left;padding: 0;clear:both; background: #ffc;}
+#taglist li {display:inline; margin: 5px; line-height: 3em;}
+
+/* Homepage Add Your voice blurb */
+#addyourvoice-blurb {background: #fff09e; padding: 0 10px; margin: 10px 0 20px 0;}
+#addyourvoice-blurb h3 a:link, #home #addyourvoice-blurb h3 a:visited {color: #c60; text-decoration:none;}
+#addyourvoice-blurb h3 a:hover, #home #addyourvoice-blurb h3 a:active {color: #369; text-decoration:none;}
+#addyourvoice-blurb a:link, #addyourvoice-blurb a:visited {color: #c60;}
+#addyourvoice-blurb a:hover, #addyourvoice-blurb a:active {color: #945313;}
+
+/* Homepage login box */
+#login-box {background: #FFF09E; padding: 0 10px; margin:10px 0 20px 0; }
+#login-box a {display:block; text-decoration:none; margin-top: 10px;}
+#login-box a:link, #login-box a:visited {color: #c60;}
+#login-box a:hover, #login-box a:active {color: #945313;}
+
+/* Homepage about blurb */
+#about-blurb {display:block; padding: 0 10px; margin: 10px 0 20px 0; background: #E7F1F8;}
+#about-blurb h3 { color: #369;}
+
+/* Contribute page and form in "Add Your Voice" 
+----------------------------------------*/
+#contribute #primary {width: 720px; float:left; margin: 0 30px;}
+#contribute-form {display:block; clear:both; width: 720px;margin-bottom: 20px;}
+#contribute-form fieldset {display:block; margin: 0 0 10px 0;float:left; background: #fff;clear:both; width: 720px; border:none; padding: 10px 0 9px 0;}
+#contribute-form legend {display:block; font-size: 1.6em; color: #369; padding: 8px 8px 8px 0;}
+#contribute-form legend span.number {font-size: 2em; padding: 4px 9px; margin-top: 10px; background: #e7f1f8;}
+#contribute-form label {display:block;margin: 10px 0; line-height: 2em;}
+#contribute-form input.textinput, #contribute-form textarea {border: 1px solid #BBD9EE; padding: 4px; background: #E7F1F8;}
+#contribute-form input.textinput:focus, #contribute-form textarea:focus {background: #fff;}
+
+#contribute-form #contribute-intro {display:block; background: #E7F1F8;  padding: 0 20px 10px 20px; width: 680px; margin-top: 10px; margin-bottom: 20px;}
+
+#contribute-form #other-info {display:block; float:left; width: 420px;}
+#contribute-form #other-info textarea {width: 390px;}
+#contribute-form #creatorinput {display:block; float:right; width: 272px; }
+#contribute-form div#map {display:block; float:right; width: 440px; border: 1px solid #ccc;height: 300px;}
+#contribute-form #form-continue {padding: 8px; background: #e7f1f8;margin: 8px 0;}
+#contribute-form #form-continue p {font-size: 1.2em; color: #369;}
+#contribute-form #contribute-choose-inst {display:block; float:left; width: 272px;}
+#contribute-form #contribute-choice {display:block; float:right; width: 426px;}
+#contribute-form #contribute-choice textarea {width: 390px;}
+ol#files {list-style-type:decimal;margin-left: 17px; padding-left: 17px;}
+ol#files ol {background: blue;}
+ol#files input {margin:0;}
+ol#files li{ padding:0 !important; margin:0 !important;line-height:0; margin-bottom: 5px;}
+ol#files li a {padding-left: 10px;}
+#dateinput {display:block;clear:both;width: 720px; padding-top: 10px;}
+#dateinput #calAnchor {display:block;margin-bottom: 6px;}
+span.required {color: #c60; font-style:italic;}
+#location_info {display:block; float:left; width: 270px;}
+#contribute-form div#map {margin-top: 20px;}
+#tagsinput {clear:both; display:block; padding-top: 10px;}
+input#object_tags {width: 400px;} /* width includes 2px for the left and right borders, adn 4px for the left and right padding. */
+input#findonmap {margin-top: 6px;display:block;}
+#contribute-form h4 {margin-bottom:0;}
+label.radiolabel input {}
+#creatorinput label.radiolabel {}
+label.radiolabel {}
+ol.terms-of-consent {list-style:decimal; margin-left: 20px;}
+ol.terms-of-consent li {margin: 10px 0; line-height: 1.5em;}
+
+#about.consent label.radiolabel input {display:block; float:left; margin-right: 10px;}
+#about.consent label.radiolabel {display:block; clear:left;}
+
+/* Browse Pages
+-------------------------*/
+#browse #primary {width: 720px; float:left; margin: 0 30px;}
+#page-links {display:block; float:right; text-align:right; margin-right: 30px;}
+
+#browse div.featured-object {background: #FFF09E; width: 700px; padding: 10px;}
+#browse div.featured-object .featured-thumb {display:block; float:left; margin-right: 10px; padding: 7px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background: #fff;}
+#browse div.featured-object p.featured-description {margin-top:0;}
+#browse .featured-title {margin:0 0 10px 0;}
+#browse .featured-title a {text-decoration:none;}
+#browse .featured-title a:link, #browse .featured-title a:visited {color: #c60;}
+#browse .featured-title a:hover, #browse .featured-title a:active {color: #c60; text-decoration:underline;}
+
+#browse div.object {padding: 10px; margin-bottom: 10px; width: 700px;}
+#browse div.object .object-title a {text-decoration:none;}
+#browse div.object .thumbnail {display:block; float:left; margin-right: 10px; padding: 7px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background: #fff;}
+#browse div.object h4 {margin:0; padding:0; margin: 0 0 10px 0;}
+
+ul.taglist {display:block; clear:both; margin-top:0 !important; padding-top:0;}
+ul.taglist li {display:inline;}
+
+#browse.single #object-main {display:block; float:left; width: 400px;}
+#browse.single #object {display:block; float:left;}
+
+#browse.single .metadata-name {font-weight:bold;}
+#browse.single #object-sidebar h3 {margin: 20px 0 10px 0 !important; padding-bottom:0; }
+#browse.single #object-tags {margin-bottom: 10px;}
+#browse.single a.popup img.thumbnail {border: 1px solid #ccc !important; padding: 4px;}
+#browse.single a.popup:hover img.thumbnail {border: 1px solid #369 !important;}
+/* About Page and subpages styles (About,FAQ,Contact,Privacy,Terms of Use,Pressroom)
+------------------------------------------------------------------------------------*/
+#about #primary {width: 720px; float:left; margin: 0 30px;}
+#about.contact #primary {width:426px; display:block; clear:left;float:left;display:block; margin-left:30px; margin-right:0;}
+#about.contact #secondary {float:right; margin-left:0; margin-right: 30px;}
+
+#about.contact #jwa-contact {width: 252px;margin-right:0; float:none;}
+#about.termsofuse ul.subnav a.nav-termsofuse,
+#about.faq ul.subnav a.nav-faq,
+#about.privacy ul.subnav a.nav-privacy,
+#about.contact ul.subnav a.nav-contact 
+{background: #e7f1f8;}
+	
+/* About homepage styles */
+#internalnav {display:block;float:right; width:230px; margin: 0 0 10px 20px;color: #c60; padding: 0 10px 10px 10px; background: #FFF09E;}
+#internalnav li {text-indent: -10px; margin: 8px 15px;line-height: 1.75em; padding-left: 8px; list-style:square;}
+#internalnav a {text-decoration:none;}
+#internalnav a:link, #internalnav a:visited {color: #c60;}
+#internalnav a:hover, #internalnav a:active {color: #c60; text-decoration:underline;}
+#internalnav h3 {color: #c60;}
+
+#jwa-contact {display:block; float:right; width: 180px; margin: 10px;padding: 0 10px; background: #E7F1F8;}
+#jwa-contact p {font-weight:bold;}
+
+ul#collaborating-list li, ul#supporters-list li {margin: 10px 30px; text-indent: -10px; line-height: 1.5em;}
+
+/* FAQ Page Styles */
+ul#faqs {margin: 10px 0; background: #FFF09E; padding: 10px 20px;}
+ul#faqs li {margin: 10px 0;}
+ul#faqs a:link, ul#faqs a:visited {color: #c60; text-decoration:none;}
+ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
+
+/* Contact form */
+#cForm {margin: 10px 0;}
+#cForm fieldset {border:none; margin-bottom: 10px;}
+#cForm label, #cform input, #cForm textarea {display:block;}
+#cForm input.textinput, #cForm textarea {border: 1px solid #BBD9EE; padding: 4px; background: #E7F1F8;}
+#cForm input.textinput:focus, #cForm textarea:focus {background: #fff;}
+#cForm textarea {width: 350px;}
+#cForm input.textinput {width: 220px;}
+#cForm input.textinput, #cForm textarea {font-family: Verdana, Arial, sans-serif; font-weight:normal; font-size: 1.2em;}
+#cForm input.submit {font-size: 1em; border: 1px solid #777; background: #ddd; padding: 4px;}
+
+
+/* Signin/Signup page styles 
+------------------------------------------*/
+#login #content {}
+#login #primary {display:block; float:right; width: 274px; padding:0;margin:0;margin-right: 30px;}
+#login #primary.wide {width:578px;}
+#login #secondary {display:block; float:right; width: 284px;padding:0; margin:0; margin-right:20px;}
+#login #tertiary {display:block; float:right; width: 122px;margin:0;margin-right: 20px;}
+#login #content input.textinput {border: 1px solid #BBD9EE; width: 170px;background: #E7F1F8;}
+#login #content input.textinput:focus {background: #fff;}
+#login #content input{display:block;padding: 4px; margin: 2px 0 10px 0;}
+#login #content label {display:block; padding: 4px 0;}
+
+#login h3 {margin: 10px 0;}
+
+#loginform input.textinput{ width: 110px;}
+
+/* MyArchive pages styles 
+--------------------------------------------*/
+#myarchive.myprofile #primary, #myarchive.mycontributions #primary, #myarchive.mytags #primary, #myarchive.myfavorites #primary {width: 720px; float:left; margin: 0 30px;}
+#myarchive.intro #primary {display:block; float:left; margin-right:0; margin-left: 30px;}
+#myarchive.intro #secondary {display:block ;float:right; margin-left:0; margin-right: 30px;}
+#myarchive.intro #primary, #myarchive.intro #secondary {float:left; margin:0 30px; width: 720px;}
+#myarchive.myprofile #content fieldset {border:none;}
+#myarchive.myprofile #content legend {display:block; margin-bottom:10px;}
+
+#myarchive.myprofile #content input, #myarchive.myprofile #content label {display:block;}
+#myarchive div.object {width: 700px; padding: 10px 10px 0 10px; margin-bottom: 10px;}
+#myarchive div.object .object-title a {text-decoration:none;}
+#myarchive div.object .thumbnail {display:block; float:left; margin-right: 10px; padding: 7px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background: #fff;}
+#myarchive div.object h4 {margin:0; padding:0; margin: 0 0 10px 0;}
+#myarchive div.object h4 a {text-decoration:none;}
+#myarchive div.object ul.tags {display:block; clear:both; padding-top: 10px;}
+#myarchive div.object ul.tags li {display:inline;}
+#myarchive #mytags {background: #E7F1F8; padding: 10px; margin-top: 10px;}
+#myarchive.intro #mytags h3 {margin-top:0;}
+
+/* Footer
+-------------------*/
+#footer {background: #fff url("../i/footer-bg2.gif") top left no-repeat; display:block; float:left;clear: both; width: 780px; padding: 0;}
+#footer #copyright {display:block; float:left; width: 200px; margin-left: 20px;}
+#footer div.section p {float:right; text-align:right; margin-right: 20px; width: 500px;}
+#footer .secondarynav {display:block; float:right; width: 500px; margin: 20px; text-align:right;}
+#footer .secondarynav li {display:inline; margin-left: 8px;}
+#footer .secondarynav a {text-decoration:none;}
+
+.alert {background: #fff09e; color: #c60; padding: 10px; font-size: 1.2em;}
+.form-error {color: #c60; display:block; font-size: 1.4em;}
