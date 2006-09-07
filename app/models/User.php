@@ -49,6 +49,11 @@ class User extends Kea_Domain_Model
 		return $this->user_email;
 	}
 	
+	public function getContributorID()
+	{
+		return $this->contributor_id;
+	}
+	
 	/* Generate password. (i.e. jachudru, cupheki) */
 	// http://www.zend.com/codex.php?id=215&single=1
 	public function setRandomPassword($length)

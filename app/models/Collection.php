@@ -7,7 +7,14 @@ class Collection extends Kea_Domain_Model
 	public $collection_description;
 	public $collection_active;
 	public $collection_collector;
+	public $collection_parent;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @internal Has been modified to incorporate HDMB elements
+	 * @author CHNM
+	 **/
 	public function __construct( $array = null )
 	{
 		if( isset( $array['collection_active'] )
@@ -21,6 +28,14 @@ class Collection extends Kea_Domain_Model
 			$array['collection_active'] = '0';
 		}
 
+		if( isset( $array['collection_parent'] )
+			&& ( $array['collection_parent'] === 0
+				|| $array['collection_parent'] === "") )
+		{
+			$array['collection_parent'] = 'NULL';
+		}
+		
+		
 		parent::__construct( $array );
 	}
 }

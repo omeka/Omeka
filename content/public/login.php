@@ -1,5 +1,7 @@
 <?php
 
+// Layout: default;
+
 //$user = $__c->users()->add();
 
 //if ($user) {
@@ -34,23 +36,13 @@
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Signin/Signup | Katrina's Jewish Voices</title>
-<?php include ('inc/metalinks.php'); ?>
 
-</head>
-
-<body id="login" class="login">
-	
-	
-<a class="hide" href="#content">Skip to Content</a>
-<div id="wrap">
-	<?php include("inc/header.php"); ?>
-	<div id="content">
 		<h2>MyArchive | Sigin/Signup</h2>
+
+			<div id="explanation">
+<!--			<p>Sign up for an account to do more than browse (upload, bookmark, <a href="<?php echo $_link->to('whataretags'); ?>" class="popup">tag</a>, etc.). Questions? <a  href="<?php echo $_link->to('contact'); ?>">Contact us!</a></p>
+			</div> -->
+			
 			<div id="primary" <?php if (self::$_session->getValue( 'contribute_form_need_login' )) echo 'class="wide"'; ?> >
 
 
@@ -106,7 +98,7 @@
 	<div id="secondary">		
 		<h3>Need an Account? Sign up!</h3>
 		<?php if (@$_REQUEST['user_add']): ?><p class="alert"><?php echo $msg; ?></p><?php endif;?>
-		<form method="post" id="signupform">
+		<form method="post" id="signupform" action="<?php echo $_link->to('login'); ?>">
 				<label for="user_name">Choose a Username</label>
 				<?php
 					$_form->text( array('name' 	=> 'user[user_username]',
@@ -125,16 +117,5 @@
 		</form>
 		</div> <!-- closes secondary div -->
 		
-		<div id="tertiary">
-			<div id="explanation">
-			<p>Sign up for an account to bookmark objects, add your own categories (<a href="<?php echo $_link->to('whataretags'); ?>" class="popup">tags</a>), and contribute more quickly to the archive. All accounts are <a  href="<?php echo $_link->to('privacy'); ?>">private</a>. Questions? <a  href="<?php echo $_link->to('contact'); ?>">Contact us!</a></p>
-		</div> <!-- closes tertiary div -->
 	<?php endif; ?>
 	
-	</div> <!-- closes content div -->
-	</div>
-
-<?php include("inc/footer.php"); ?>
-</div>
-</body>
-</html>

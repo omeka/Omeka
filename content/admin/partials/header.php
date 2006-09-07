@@ -1,5 +1,5 @@
-<?php self::$_session->saveLocation() ?>
-<?php $user = self::$_session->getUser() ?>
+<?php self::$_session->saveLocation(); ?>
+<?php $user = self::$_session->getUser(); ?>
 <?php
 	$current = isset( self::$_route['directory'] ) ?
 		self::$_route['directory'] :
@@ -7,8 +7,9 @@
 			'welcome' :
 			self::$_route['template'] ) ;
 ?>
-<div id="<?php echo $current ?>">
+<div id="<?php echo $current; ?>">
 <h1><?php echo SITE_TITLE; ?></h1>
+
 <ul id="navigation">
 	<li id="nav-welcome"><a href="<?php echo $_link->to(); ?>">Home</a></li>
 	<li id="nav-objects"><a href="<?php echo $_link->to( 'objects' ); ?>">Objects</a></li>
@@ -25,4 +26,3 @@
 		<button type="submit">Logout</button>
 	</form>
 </ul>
-</div>

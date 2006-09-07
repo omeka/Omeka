@@ -71,10 +71,10 @@ class CategoriesController extends Kea_Action_Controller
 		if( !$id )
 		{
 			$id = self::$_request->getProperty( 'id' ) ?
-					self::$_request->getProperty( 'id' ) : 
-						(isset( self::$_route['pass'][0] ) ?
-						self::$_route['pass'][0] :
-						0);
+			self::$_request->getProperty( 'id' ) : 
+				(isset( self::$_route['pass'][0] ) ?
+				self::$_route['pass'][0] :
+				0);
 		}
 
 		$mapper = new Category_Mapper();
@@ -84,7 +84,6 @@ class CategoriesController extends Kea_Action_Controller
 					  ->execute();
 		
 		$obj->getMetafields();
-		
 		return $obj;
 	}
 	

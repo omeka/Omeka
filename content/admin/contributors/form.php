@@ -1,10 +1,20 @@
 <fieldset class="formElement">
 	<legend>Contributor's Name and Consent</legend>
+	<label for="contributor_last">Contributor's institution</label>
+	
+	<?php
+		$_form->text( array(	'size'	=> '20',
+									'value'	=> @$contributor->contributor_institution,
+									'id'	=> 'contributor_institution',
+									'name'	=> 'contributor[contributor_institution]' ) );
+
+	?>
+	
 	<label for="contributor_first">Contributor's first name</label>
 	
 	<?php
 		$_form->text( array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_first_name,
+									'value'	=> @$contributor->contributor_first_name,
 									'id'	=> 'contributor_first_name',
 									'name'	=> 'contributor[contributor_first_name]' ) );
 
@@ -15,7 +25,7 @@
 	
 	<?php
 		$_form->text( array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_middle_name,
+									'value'	=> @$contributor->contributor_middle_name,
 									'id'	=> 'contributor_middle_name',
 									'name'	=> 'contributor[contributor_middle_name]' ) );
 	?>
@@ -24,13 +34,14 @@
 	
 	<?php
 		$_form->text( array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_last_name,
+									'value'	=> @$contributor->contributor_last_name,
 									'id'	=> 'contributor_last',
 									'name'	=> 'contributor[contributor_last_name]' ) );
 
 		$_form->displayError( 'Contributor', 'contributor_last_name', $__c->contributors()->validationErrors() );
 	?>
 
+	
 </fieldset>
 
 
@@ -41,7 +52,7 @@
 	<?php
 		$_form->text(
 							array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_email,
+									'value'	=> @$contributor->contributor_email,
 									'id'	=> 'contributor_email',
 									'name'	=> 'contributor[contributor_email]' ) );
 	?>
@@ -51,7 +62,7 @@
 		$_form->radio(	'contributor[contributor_contact_consent]',
 						array( 'yes' => 'Yes', 'no' => 'No', 'unknown' => 'Unknown' ),
 						'unknown',
-						$contributor->contributor_contact_consent );
+						@$contributor->contributor_contact_consent );
 
 		$_form->displayError( 'Contributor', 'contributor_contact_consent', $__c->contributors()->validationErrors() );
 	?>
@@ -61,7 +72,7 @@
 		<?php
 			$_form->text(
 								array(	'size'	=> '20',
-										'value'	=> $contributor->contributor_phone,
+										'value'	=> @$contributor->contributor_phone,
 										'id'	=> 'contributor_phone',
 										'name'	=> 'contributor[contributor_phone]' ) );
 		?>
@@ -71,7 +82,7 @@
 		<?php
 			$_form->text(
 								array(	'size'	=> '20',
-										'value'	=> $contributor->contributor_fax,
+										'value'	=> @$contributor->contributor_fax,
 										'id'	=> 'contributor_fax',
 										'name'	=> 'contributor[contributor_fax]' ) );
 		?>
@@ -80,7 +91,7 @@
 	<?php
 		$_form->text(
 							array(	'size'	=> '40',
-									'value'	=> $contributor->contributor_address,
+									'value'	=> @$contributor->contributor_address,
 									'id'	=> 'contributor_address',
 									'name'	=> 'contributor[contributor_address]' ) );
 	?>
@@ -89,7 +100,7 @@
 	<?php
 		$_form->text(
 							array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_city,
+									'value'	=> @$contributor->contributor_city,
 									'id'	=> 'contributor_city',
 									'name'	=> 'contributor[contributor_city]' ) );
 	?>
@@ -98,7 +109,7 @@
 	<?php
 		$_form->text(
 							array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_state,
+									'value'	=> @$contributor->contributor_state,
 									'id'	=> 'contributor_state',
 									'name'	=> 'contributor[contributor_state]' ) );
 	?>
@@ -109,7 +120,7 @@
 		$_form->text(
 							array(	'size'	=> '10',
 									'maxlength'	=> '10',
-									'value'	=> $contributor->contributor_zipcode,
+									'value'	=> @$contributor->contributor_zipcode,
 									'id'	=> 'contributor_zipcode',
 									'name'	=> 'contributor[contributor_zipcode]' ) );
 	?>
@@ -123,7 +134,7 @@
 		$_form->text(
 							array(	'size'	=> '4',
 									'maxlength'	=> '4',
-									'value'	=> $contributor->contributor_birth_year,
+									'value'	=> @$contributor->contributor_birth_year,
 									'id'	=> 'contributor_birth_year',
 									'name'	=> 'contributor[contributor_birth_year]' ) );
 	?>
@@ -132,9 +143,9 @@
 	
 	<?php
 		$_form->select(	array('name' =>'contributor[contributor_gender]' ),
-						array( 'male' => 'Male', 'female' => 'Female', 'unknown' => 'Unknown' ),
+						array( 'unknown' => 'Unknown', 'male' => 'Male', 'female' => 'Female'),
 					
-						$contributor->contributor_gender );
+						@$contributor->contributor_gender );
 	?>
 
 	<label for="contributor_race">Contributor's race</label>
@@ -142,14 +153,16 @@
 	<?php
 		$_form->select(	array(	'name'	=> 'contributor[contributor_race]',
 								'id'	=> 'contributor_race' ),
-								array(	'Asian / Pacific Islander'	=> 'Asian / Pacific Islander',
-										'Black'						=> 'Black',
-										'Hispanic'					=> 'Hispanic',
-										'Native / American Indian'	=> 'Native / American Indian',
-										'White'						=> 'White',
-										'Other'						=> 'Other',
-										'Unknown'					=> 'unknown' ),
-						$contributor->contributor_race
+						array(	'unknown'					=> 'unknown',
+								'Asian/Pacific'				=> 'Asian/Pacific',
+						 		'Islander'					=> 'Islander',
+								'African American'			=> 'African American',
+								'Hispanic'					=> 'Hispanic',
+								'Native American / Indian'	=> 'Native American / Indian',
+								'White'						=> 'White',
+								'Other'						=> 'Other',
+								 ),
+						@$contributor->contributor_race
 					);
 	?>
 	
@@ -157,7 +170,7 @@
 	<?php
 		$_form->text(
 							array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_race_other,
+									'value'	=> @$contributor->contributor_race_other,
 									'id'	=> 'contributor_race_other',
 									'name'	=> 'contributor[contributor_race_other]' ) );
 	?>
@@ -167,194 +180,17 @@
 	<?php
 		$_form->text(
 							array(	'size'	=> '20',
-									'value'	=> $contributor->contributor_occupation,
+									'value'	=> @$contributor->contributor_occupation,
 									'id'	=> 'contributor_first',
 									'name'	=> 'contributor[contributor_occupation]' ) );
 	?>
-</fieldset>
-
-<fieldset class="formElement">
-	<label for="contributor_jewish">Does the contributor identify themselves as Jewish?</label>
+	
+	<label for="contributor_residence">Where do you live? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
 	
 	<?php
-		$_form->radio(	'contributor[contributor_jewish]',
-						array( 'yes' => 'Yes', 'no' => 'No', 'unknown' => 'Unknown' ),
-						null,
-						$contributor->contributor_jewish );
-	?>
-
-<label for="contributor_religious_id">Contributor's religious identification</label>
-	
-	<?php
-		$_form->select(	array(	'name'	=> 'contributor[contributor_religious_id]',
-								'id'	=> 'contributor_religious_id' ),
-						array(	'reform'		=> 'Jewish: Reform',
-						 		'conservative'	=> 'Jewish: Conservative',
-								'orthodox'		=> 'Jewish: Orthodox',
-								'reconstructionist'	=> 'Jewish: Reconstructionist',
-								'non-denominational'=> 'Jewish: Non-denominational',
-								'secular / cultural'=> 'Jewish: Secular / Cultural',
-								'protestant'	=> 'Protestant',
-								'catholic'		=> 'Catholic',
-								'muslim'		=> 'Muslim',
-								'buddhist'		=> 'Buddhist',
-								'hindu'			=> 'Hindu',
-								'none'			=> 'No Religion',
-								'other'			=> 'Other',
-								'unknown' 		=> 'Unknown'),
-						$contributor->contributor_religious_id
-					);
-	?>
-	
-	<label for="contributor_religious_id_other">Other:</label>
-	<?php
-		$_form->text(	array(	'size'	=> '20',
-								'value'	=> $contributor->contributor_religious_id_other,
-								'id'	=> 'contributor_religious_id_other',
-								'name'	=> 'contributor[contributor_religious_id_other]' ) );
-	?>
-</fieldset>
-
-<fieldset class="formElement">
-	<label>Is the contributor a member of the New Orleans or Gulf Coast communities?</label>
-	<label class="radiolabel">
-		<input type="radio" id="nolaY" name="is_nola" onclick="document.getElementById('not-nola').style.display = 'none'; new Effect.BlindDown( 'is-nola', {duration: 0.8} );" <?php if( isset( $saved['is_nola'] ) && $saved['is_nola'] == 'on' ){ echo ' checked="checked" '; } ?>/>Yes</label>
-		<label class="radiolabel"><input type="radio" id="nolaN" name="is_nola" onclick="document.getElementById('is-nola').style.display = 'none'; new Effect.BlindDown( 'not-nola', {duration: 0.8} );" <?php if( isset( $saved['is_nola'] ) && $saved['is_nola'] == 'on' ){ echo ' checked="checked" '; } ?> />No</label>
-	</fieldset>
-	<div class="formElement" id="is-nola" style="display:none;">
-		<fieldset class="formElement">
-			<label for="contributor_location_during">Where did the contributor live at the time of the hurricane? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
-			
-			<?php
-				$_form->textarea( 	array(	'rows'	=> '4',
-											'cols'	=> '60',
-											'id'	=> 'contributor_location_during',
-											'name'	=> 'contributor[contributor_location_during]' ),
-											$contributor->contributor_location_during );
-			?>
-		</fieldset>
-
-		<fieldset class="formElement">
-			<label for="contributor_location_evacuation">To where did the contributor evaculate at the time of the hurricane? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
-			<?php
-				$_form->textarea( 	array(	'rows'	=> '4',
-											'cols'	=> '60',
-											'id'	=> 'contributor_location_evacuation',
-											'name'	=> 'contributor[contributor_location_evacuation]' ),
-											$contributor->contributor_location_evacuation );
-			?>
-		</fieldset>
-
-		<fieldset class="formElement">
-			<label for="contributor_location_between">Where did the contributor live in between? (City/State/<abbr title="Postal Code">ZIP</abbr>) <em>Separate multiple locations with semi-colons</em></label>
-			
-			<?php
-			$_form->textarea( 	array(	'rows'	=> '4',
-										'cols'	=> '60',
-										'id'	=> 'contributor_location_between',
-										'name'	=> 'contributor[contributor_location_between]' ),
-										$contributor->contributor_location_between );
-			?>
-		</fieldset>
-		<fieldset class="formElement">
-			<label>Where do you live now? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
-			<?php
-			$_form->textarea( array(	'rows'	=> '4',
-										'cols'	=> '60',
-										'id'	=> 'contributor_location_current',
-										'name'	=> 'contributor[contributor_location_current]'),
-										$contributor->contributor_location_current  );
-			?>
-			
-		</fieldset>
-		<fieldset class="formElement">
-			<label for="contributor_return">Does the contributor plan to return to the Gulf Coast?</label>
-			
-			<?php
-				$_form->radio(	'contributor[contributor_return]',
-								array( 'yes' => 'Yes', 'no' => 'No', 'unknown' => 'Unknown' ),
-								null,
-								$contributor->contributor_return );
-			?>
-		</fieldset>
-	</div>
-
-	<div id="not-nola" style="display:none;">
-		<fieldset class="formElement">
-			<label for="contributor_family_members">Were the contributor's family or friends affected by Katrina?</label>
-			
-			<?php
-				$_form->radio(	'contributor[contributor_family_members]',
-								array( 'yes' => 'Yes', 'no' => 'No', 'unknown' => 'Unknown' ),
-								null,
-								$contributor->contributor_family_members );
-			?>
-		</fieldset>
-
-		<fieldset class="formElement">
-			<label for="contributor_former_resident">Was the contributor a former resident of New Orleans?</label>
-			
-			<?php
-				$_form->radio(	'contributor[contributor_former_resident]',
-								array( 'yes' => 'Yes', 'no' => 'No', 'unknown' => 'Unknown' ),
-								null,
-								$contributor->contributor_former_resident );
-			?>
-		</fieldset>
-
-		<fieldset class="formElement">
-			<label for="contributor_community_evacuees">Did the contributor's community take in evacuees?</label>
-			
-			<?php
-				$_form->radio(	'contributor[contributor_community_evacuees]',
-								array( 'yes' => 'Yes', 'no' => 'No', 'unknown' => 'Unknown' ),
-								null,
-								$contributor->contributor_community_evacuees );
-			?>
-		</fieldset>
-
-		<fieldset class="formElement">
-			<label for="contributor_participate">Did the contributor participate in direct relief efforts?</label>
-			
-			<?php
-				$_form->radio(	'contributor[contributor_participate]',
-								array( 'yes' => 'Yes', 'no' => 'No', 'unknown' => 'Unknown' ),
-								null,
-								$contributor->contributor_participate );
-			?>
-			<div id="reliefefforts-yes">
-			<label for="contributor_location_participate">Location where the contributor participated in relief efforts</label>
-			
-			<?php
-				$_form->textarea(
-									array(	'rows'	=> '4',
-											'cols'	=> '60',
-											'id'	=> 'contributor_location_participate',
-											'name'	=> 'contributor[contributor_location_participate]' ),
-											$contributor->contributor_location_participate );
-			?>
-			</div>
-		</fieldset>
-
-		<fieldset class="formElement">
-			<label for="contributor_other_relationship">If the contributor has some other relationship to the events surrounding Hurricane Katrina, detail them here:</label>
-			
-			<?php
-				$_form->textarea( 	array(	'rows'	=> '4',
-											'cols'	=> '60',
-											'id'	=> 'contributor_other_relationship',
-											'name'	=> 'contributor[contributor_other_relationship]' ),
-											$contributor->contributor_other_relationship );
-			?>
-		</fieldset>
-			<fieldset class="formElement">
-				<label for="contributor_residence">Where do you live? (City/State/<abbr title="Postal Code">ZIP</abbr>)</label>
-
-				<?php
 					$_form->text(	array(	'size'	=> '20',
 											'value'	=> $contributor->contributor_residence,
 											'id'	=> 'contributor_residence',
 											'name'	=> 'contributor[contributor_residence]' ) );
 				?>
-			</fieldset>
-	</div>
+</fieldset>

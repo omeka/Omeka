@@ -1,6 +1,14 @@
 <?php
 //Layout: default;
-$collections = $__c->collections()->all( 'object' );
+if ( $collection_id = self::$_request->getProperty('collection_id') )
+{
+	$collections = $__c->collections()->findChildren($collection_id);
+}
+else
+{
+	$collections = $__c->collections()->findChildren();
+}
+//$collections = $__c->collections()->all( 'object' );
 ?>
 <?php include( 'subnav.php' ); ?>
 
@@ -25,6 +33,7 @@ $collections = $__c->collections()->all( 'object' );
 	<th scope="col">Name</th>
 	<th scope="col">Description</th>
 	<th scope="col">Collector</th>
+	<th scope="col">Subcollections</th>
 	<th scope="col">Edit</th>
 	</thead>
 	<tbody>
@@ -38,7 +47,7 @@ $collections = $__c->collections()->all( 'object' );
 		<td><a href="<?php echo $_link->to( 'objects' ); ?>?collection=<?php echo $collection->collection_id; ?>"><?php echo $collection->collection_name; ?></a></td>
 		<td><?php echo $collection->collection_description; ?></td>
 		<td><?php echo $collection->collection_collector; ?></td>
-
+		<td>[<a href="<?php echo $_link->to('collections', 'all')?>?collection_id=<?php echo $collection->collection_id; ?>">view</a>]</td>
 		<?php if( self::$_session->getUser()->getPermissions() <= 10 ): ?>
 		<td>[<a href="<?php echo $_link->to( 'collections', 'edit' ) . $collection->collection_id; ?>">edit</a>]</td>
 		<?php endif; ?>

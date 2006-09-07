@@ -61,7 +61,7 @@ abstract class Kea_DB_Mapper
 		return $this->select( $fields, $this, $use_plugins );
 	}
 	
-	protected function toArray( Kea_Domain_Model $obj )
+	public function toArray( Kea_Domain_Model $obj )
 	{
 		$array = array();
 		$ref = new ReflectionClass( $obj );
@@ -82,9 +82,15 @@ abstract class Kea_DB_Mapper
 	
 	public function insert( Kea_Domain_Model $obj )
 	{
-		$result = self::$_adapter->insert( $this->_table_name, $this->toArray( $obj ) );
-		$obj->setId( self::$_adapter->insertId() );
-		return $obj;
+		try{
+			$result = self::$_adapter->insert( $this->_table_name, $this->toArray( $obj ) );
+			if(self::$_adapter->error()) {throw new Kea_DB_Mapper_Exception ( self::$_adapter->error() ); }
+			$obj->setId( self::$_adapter->insertId() );
+			return $obj;
+		} catch (Kea_DB_Mapper_Exception $e)
+		{
+			die($e->__toString());
+		}
 	}
 	
 	public function update( Kea_Domain_Model $obj )

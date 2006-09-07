@@ -41,6 +41,7 @@ class CollectionsController extends Kea_Action_Controller
 	private function commitForm()
 	{
 		$collection = new Collection( self::$_request->getProperty( 'collection' ) );
+		
 		if( $this->validates( $collection ) ) {
 			return $collection->save();
 		}
@@ -50,8 +51,32 @@ class CollectionsController extends Kea_Action_Controller
 	protected function _delete()
 	{
 		if( $id = self::$_request->getProperty( 'collection_id' ) ) {
+			/**
+			 * Nested functionality (HDMB)
+			 * Rearrange order so that nested child collections have the collection_parent of the current collection
+			 */
+			$collections = $this->_findChildren($id);
+			foreach($collections as $collection)
+			{
+				$collection->collection_parent = $this->_findById($id)->collection_parent;
+				$collection->save();
+			}
+			
+			$deleteObjects = self::$_request->getProperty( 'delete_objects' );
+			if($deleteObjects)
+			{
+				$objMapper = new Object_Mapper;
+				$objects = $objMapper->find()->where('collection_id = ?', $id)->execute();
+				foreach($objects as $object)
+				{
+					$object->delete();
+				}
+			}
+			
 			$mapper = new Collection_Mapper;
 			$mapper->delete( $id );
+			
+			
 			$this->redirect( BASE_URI . DS . 'collections' . DS . 'all' );
 		}
 	}
@@ -74,7 +99,7 @@ class CollectionsController extends Kea_Action_Controller
 					  ->execute();
 	}
 	
-	protected function _all( $type = 'object' )
+	protected function _all( $type = 'object')
 	{
 		$mapper = new Collection_Mapper;
 		switch( $type ) {
@@ -85,7 +110,26 @@ class CollectionsController extends Kea_Action_Controller
 				return $mapper->allArray();
 			break;
 		}
+		
 		return false;
+	}
+	
+	//HDMB specific for nested functionality
+	protected function _findChildren($parent = NULL)
+	{
+		$mapper = new Collection_Mapper();
+		if($parent)
+		{
+		return $mapper->find()
+					  ->where( 'collection_parent = ?', $parent )
+					  ->execute();		
+		}
+		else
+		{
+		return $mapper->find()
+					->where( 'collection_parent IS NULL' )
+					->execute();
+		}
 	}
 	
 	protected function _findActive()
@@ -107,7 +151,26 @@ class CollectionsController extends Kea_Action_Controller
 		} 
 		return $mapper->addToCollection( $obj_id, $coll_id );
 	}
-
+	
+	//HDMB specific
+	public function displayNested($template, $useList = TRUE, $style = NULL, $parent_id = NULL)
+	{
+		$mapper = new Collection_Mapper;
+		$collections = $this->_findChildren($parent_id);
+		if ($collections->total() > 0)
+		{
+			if($useList) echo "\n<ul>\n";
+			foreach( $collections as $collection )
+			{	
+					echo ($useList) ? "\t<li>" : "\t<div style=\"$style\">\n";
+					include($template);
+					$this->displayNested($template, $useList, $style, $collection->collection_id);
+					echo ($useList) ? "\t</li>\n" : "\t</div>\n";
+				
+			}
+			if($useList) echo "\n</ul>\n";
+		}
+	}
 }
 
 ?>

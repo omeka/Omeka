@@ -27,13 +27,13 @@ class FormHelper
 			$select .= $k . '="' . htmlentities( $v ) . '" ';
 		}
 		$select .= '>';
-		$select .= "\t" . '<option value="">Select Below&nbsp;</option>' . "\n";
+		$select .= "\t" . '<option value="">Select Below&nbsp;</option>' . "\n"; 
 		if( !$value && !$desc )
 		{
 			foreach( $val_array as $k => $v )
 			{
 				$select .= "\t" . '<option value="' . htmlentities( $k ) . '"';
-				if( $saved && $saved == $k ) $select .= ' selected ';
+				if( $saved && $saved == $k ) $select .= ' selected="selected" ';
 				$select .= '>' . htmlentities( $v ) . '</option>' . "\n";
 			}
 		}
@@ -42,7 +42,7 @@ class FormHelper
 			foreach( $val_array as $obj_array )
 			{
 				$select .= "\t" . '<option value="' . htmlentities( $obj_array[$value] ) . '"';
-				if( $saved && $saved == $obj_array[$value] ) $select .= ' selected ';
+				if( $saved && $saved == $obj_array[$value] ) $select .= ' selected="selected" ';
 				$select .= '>';
 				if( is_array( $desc ) )
 				{
@@ -80,15 +80,15 @@ class FormHelper
 			$radio = '<label class="' . $label_class . '"><input type="radio" name="' . $name . '" value="' . $k . '"';
 			if( $saved && $saved == $k )
 			{
-				$radio .= ' checked />' . $v . '</label><br/>';
+				$radio .= ' checked="checked" />' . $v . '</label>';
 			}
 			elseif( !$saved && $default == $k )
 			{
-				$radio .= ' checked />' . $v . '</label><br/>';
+				$radio .= ' checked="checked" />' . $v . '</label>';
 			}
 			else
 			{
-				$radio .= ' />' . $v . '</label><br/>';
+				$radio .= ' />' . $v . '</label>';
 			}
 			echo $radio;
 		}

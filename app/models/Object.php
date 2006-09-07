@@ -2,7 +2,7 @@
 
 class Object extends Kea_Domain_Model
 {
-	protected $validate		=	array(	'object_title'					=> array( '/(\w)+/', 'Objects must have a title.' ),
+	protected $validate		=	array(	//'object_title'					=> array( '/(\w)+/', 'Objects must have a title.' ),
 	 									'object_status'					=> array( '/(\w)+/', 'Objects must have a status.' ),
 	 									'object_contributor_consent'	=> array( '/(\w)+/', 'Objects must be given a contributor\'s consent.'),
 	 									'object_contributor_posting'	=> array( '/(\w)+/', 'Objects must have posting consent.' ) );
@@ -61,10 +61,27 @@ class Object extends Kea_Domain_Model
 		}
 	}
 	
-	public function getCategoryMetadata()
+	// Maybe this should be called in the "construct" method above, so that metadata is always available?? [JMG]
+	public function getCategoryMetadata($metafield_name = NULL, $length = -1, $append = '...')
 	{
 		$this->mapper()->getCategoryMetadata( $this );
-		return $this;
+		if (!is_null($metafield_name)) {
+			
+			// There's *got* to be a more elegant way of doing this than this... [JMG]
+			foreach ($this->category_metadata as $meta_field) {
+				if ($meta_field['metafield_name'] == $metafield_name) {
+					if ( ($length > 0) && (strlen($meta_field['metatext_text']) > $length) ) {
+						$short = substr($meta_field['metatext_text'], 0, strrpos($meta_field['metatext_text'], ' ', $length-strlen($meta_field['metatext_text']))).$append;
+						return $short;
+					}
+					else return $meta_field['metatext_text'];
+				}
+			}
+			return false;
+		}
+		else{
+			return $this;
+		}
 	}
 	
 	public function getFiles()
@@ -202,26 +219,31 @@ class Object extends Kea_Domain_Model
 	
 	public function getShortDesc ( $length = 250 , $append = '...')
 	{
-		if (strlen($this->object_description) > $length ):
-			$shortDesc = substr($this->object_description, 0, strrpos($this->object_description, ' ', $length-strlen($this->object_description)));
+		$fullDesc = $this->getDesc();
+		if (strlen($fullDesc) > $length ):
+			$shortDesc = substr($fullDesc, 0, strrpos($fullDesc, ' ', $length-strlen($fullDesc)));
 			$shortDesc = $shortDesc.$append;
 			return $shortDesc;
 		else: 
-			return $this->object_description;
+			return $fullDesc;
 		endif;
 	}
 
 
 	public function getCitation() 
 	{
-		if ( $this->object_contributor_posting != 'anonymously') 
-			$cite = $this->contributor->contributor_first_name . ' ' . $this->contributor->contributor_last_name.', ';
+		$cite = '';
+		if ( $this->object_contributor_posting != 'anonymously') {
+			$cite .= $this->contributor->getName();
+			if ($cite != '') $cite .= ', ';
+		}
 		else 
 		 	$cite = 'Anonymous, ';
-		$cite .= '"'.$this->object_title.'." ';
-		$cite .= '<em>Katrina\'s Jewish Voices</em>, ';
+		$cite .= ($this->object_title) ? '"'.$this->object_title.'." ' : '"Untitled." ';
+		$cite .= '<em>'.INFO_TITLE.'</em>, ';
 		$cite .= 'Object #'.$this->object_id.' ';
-		$cite .= '('.date('F d Y, g:i a').')';
+		$cite .= '(accessed '.date('F d Y, g:i a').') ';
+	//	$cite .= '&lt;'.WEB_CONTENT_DIR.DS.'objects'.DS.$this->object_id.'&gt;';
 		//$cite .= '('.date('F d Y, g:i a', strtotime($this->object_added)).')';
 		return $cite;
 	}
@@ -230,7 +252,50 @@ class Object extends Kea_Domain_Model
 	{
 		return $this->mapper()->delete( $this->getId() );
 	}
-
+	
+	/**
+	 * Implemented for HDMB, find a usable description somewhere in the extended data for the object
+	 *
+	 * Priority is currently chosen in this order: image/file description meta_text, story meta_text, file_description, object_description
+	 * Probably not a good solution, but to find metaDesc it searches metafield names for 'Description'
+	 * Please change in new implementations of Sitebuilder
+	 * 
+	 * Regardless it is good to keep this as a standard accessor method for object descriptions
+	 * 
+	 * @return mixed The string description of the object, otherwise false
+	 * @author Kris Kelly
+	 **/
+	public function getDesc()
+	{
+		$this->getFiles();
+		$this->getCategoryMetadata();
+		$fileDesc = $this->files->getObjectAt(0)->file_description;
+		$objectDesc = $this->object_description;
+		$metaDesc = NULL;
+		foreach($this->category_metadata as $m)
+		{
+			if(strstr($m['metafield_name'], 'Description') || $m['metafield_name'] == 'Story Text')
+			{
+				$metaDesc = $m['metatext_text'];
+			}
+		}
+		if(!empty($metaDesc))
+		{
+			return $metaDesc;
+		}
+		elseif(!empty($fileDesc))
+		{
+			return $fileDesc;
+		}
+		elseif(!empty($objectDesc))
+		{
+			return $objectDesc;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
 
 ?>

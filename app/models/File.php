@@ -82,7 +82,7 @@ class File extends Kea_Domain_Model
 		}
 	}
 	
-	public static function add( $obj_id = null, $contributor_id = null, $file_form_name = null )
+	public static function add( $obj_id = null, $contributor_id = null, $file_form_name = null, $file_info_form = null )
 	{
 		
 		// Bump up memory allocated to PHP so there's space to manipulate big files
@@ -143,6 +143,7 @@ class File extends Kea_Domain_Model
 						$file_type = trim( exec( 'file -b ' . trim( escapeshellarg ( $new_path ) ) ) );
 						
 						$file_array = array(	'object_id'					=> $obj_id,
+												'file_description'			=> isset($file_info_form['file_description']) ? $file_info_form['file_description'] : 'NULL',
 												'file_size'					=> $_FILES[$file_form_name]['size'][$key],
 												'file_mime_browser'			=> $_FILES[$file_form_name]['type'][$key],
 												'file_authentication'		=> md5_file( $new_path ),
@@ -151,7 +152,7 @@ class File extends Kea_Domain_Model
 												'file_type_os'				=> $file_type,
 												'file_archive_filename'		=> $new_name_string,
 												'file_original_filename'	=> $name,
-												'file_thumbnail_name'		=> self::createThumbnail( $new_path, null, 140 ) );				
+												'file_thumbnail_name'		=> self::createThumbnail( $new_path, null, THUMBNAIL_SIZE ) );				
 						$file = new File( $file_array );
 						if( $contributor_id )
 						{
@@ -195,12 +196,21 @@ class File extends Kea_Domain_Model
 	
 	public static function gdCreateThumbnail( $file, $percent = null, $new_width = null, $new_height = null, $output = 3 )
 	{
+		try{
+		//TEMPORARY WORKAROUND UNTIL I CAN FIGURE OUT WHY THE SCRIPT DIES AFTER 60 SECONDS -Kris Kelly, 8/02/06
+		set_time_limit(360);
 
 		if( !function_exists( 'gd_info' ) ) {
 			throw new Kea_Domain_Exception(
 				'The GD Library is not installed and is required for this method.'
 			);
 			return false;
+		}
+		if( !function_exists( 'imagecreatefromjpeg') )
+		{
+			throw new Kea_Domain_Exception(
+				'JPEG support is not installed for GD library.'
+			);
 		}
 		
 		if( file_exists( $file ) && is_readable( $file ) && getimagesize( $file ) ) {
@@ -236,75 +246,31 @@ class File extends Kea_Domain_Model
 			
 			// From php.net, with a few bug fixes and a MAX_MEMORY setting
 			// This function should probably go somewhere else
-			function setMemoryForImage($filename)
-			{
-				// DEBUG
-				//$debugEmail = '';
-				
-				$imageInfo = getimagesize($filename);
-				$MAX_MEMORY = 45; // maximum MB to use -- set this as low as possible, and not above 50!
-				$MB = 1048576;  // number of bytes in 1M
-				$K64 = 65536;    // number of bytes in 64K
-				$TWEAKFACTOR = 1.7;  // adjust as necessary
-				$memoryNeeded = round( ( $imageInfo[0] * $imageInfo[1]
-						* $imageInfo['bits']
-						* $imageInfo['channels'] / 8
-						+ $K64
-						) * $TWEAKFACTOR
-					);
-				
-				// DEBUG
-				//mail($debugEmail, 'mem', $memoryNeeded);
-				
-				// Retrieve value from php.ini and trim trailing 'M'
-				// ini_get('memory_limit') only works if compiled with "--enable-memory-limit"
-				$memoryLimitMB = substr(ini_get('memory_limit'), 0, -1);
-				$memoryLimit = $memoryLimitMB * $MB;
-				if (function_exists('memory_get_usage') &&
-						memory_get_usage() + $memoryNeeded > $memoryLimit){
-					$newLimit = $memoryLimitMB + ceil( ( memory_get_usage()
-						+ $memoryNeeded
-						- $memoryLimit
-						) / $MB
-					);
-					
-					if ($newLimit > $MAX_MEMORY){
-						// DEBUG
-						//mail($debugEmail, 'greater than max', '');
-						
-						return false;
-					}
-					
-					// DEBUG
-					//mail($debugEmail, 'allocating', $newLimit);
-					
-					ini_set('memory_limit', $newLimit . 'M');
-					return true;
-				} else {
-					// DEBUG
-					//mail($debugEmail, 'not allocating', '');
-					
-					return false;
-				}
-			}
-			setMemoryForImage($file);
+
+
+			self::setMemoryForImage($file);
 			
 			switch( $type ) {
 				//GIF
 				case( '1' ):
-					$original = imagecreatefromgif( $file );
+					$original = @imagecreatefromgif( $file );
 				break;
 				//JPG
 				case( '2' ):
-					$original = imagecreatefromjpeg( $file );
+					$original = @imagecreatefromjpeg( $file );
 				break;
 				//PNG
 				case( '3' ):
-					$original = imagecreatefrompng( $file );
+					$original = @imagecreatefrompng( $file );
 				break;
 				default:
 					return false;
 				break;
+			}
+			
+			if(!$original)
+			{
+				throw new Kea_Domain_Exception( "Could not open file: ".basename($file) );
 			}
 
 			imagecopyresampled( $thumb, $original, 0, 0, 0, 0, $new_width, $new_height, $width, $height );
@@ -340,11 +306,14 @@ class File extends Kea_Domain_Model
 			return $thumbname;
 		}
 		return false;
+		} catch(Kea_Exception $e)
+		{
+			die( $e->__toString() );
+		}
 	}
 	
 	public static function imCreateThumbnail( $file, $percent = null, $new_width = null, $new_height = null )
 	{
-
 		if( file_exists( $file ) && is_readable( $file ) && getimagesize( $file ) )
 		{	
 			list( $width, $height, $type ) = getimagesize( $file );
@@ -401,6 +370,97 @@ class File extends Kea_Domain_Model
 		}
 	}
 
+	protected static function setMemoryForImage($filename)
+	{
+		// DEBUG
+		//$debugEmail = '';
+		
+		$imageInfo = getimagesize($filename);
+		$MAX_MEMORY = 45; // maximum MB to use -- set this as low as possible, and not above 50!
+		$MB = 1048576;  // number of bytes in 1M
+		$K64 = 65536;    // number of bytes in 64K
+		$TWEAKFACTOR = 1.7;  // adjust as necessary
+		$memoryNeeded = round( ( $imageInfo[0] * $imageInfo[1]
+				* $imageInfo['bits']
+				* $imageInfo['channels'] / 8
+				+ $K64
+				) * $TWEAKFACTOR
+			);
+		
+		
+		// Retrieve value from php.ini and trim trailing 'M'
+		// ini_get('memory_limit') only works if compiled with "--enable-memory-limit"
+		$memoryLimitMB = substr(ini_get('memory_limit'), 0, -1);
+		$memoryLimit = $memoryLimitMB * $MB;
+		if (function_exists('memory_get_usage') &&
+				memory_get_usage() + $memoryNeeded > $memoryLimit){
+			$newLimit = $memoryLimitMB + ceil( ( memory_get_usage()
+				+ $memoryNeeded
+				- $memoryLimit
+				) / $MB
+			);
+			
+			if ($newLimit > $MAX_MEMORY){
+				return false;
+			}
+			
+			ini_set('memory_limit', $newLimit . 'M');
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static function createArchiveFilename($oldFilename) {
+		$newFilename = explode(".", basename($oldFilename) );
+		$newFilename[0] .= '_' . substr( md5( mt_rand() + microtime( true ) ), 0, 10 );
+		return implode(".", $newFilename);
+	}
+	
+	public static function getIPTCvalues ( $filepath )
+	{
+		if ($size = getimagesize($filepath, $info)):
+			if (isset($info["APP13"])):
+				$iptc = iptcparse($info["APP13"]);
+				$output['description'] = @$iptc["2#120"][0];
+				$output['name'] = ucwords(strtolower(@$iptc["2#005"][0]));
+				$output['creator'] = ucwords(strtolower(@$iptc["2#080"][0]));
+				$output['creation_date'] = @$iptc["2#055"][0];
+				$output['urgency'] = @$iptc["2#010"][0];
+				$output['category'] = @$iptc["2#015"][0];
+				$output['supp_categories'] = @$iptc["2#020"][0];
+				$output['spec_instr'] = @$iptc["2#040"][0];
+				$output['credit_byline_title'] = @$iptc["2#085"][0];
+				$output['city'] = @$iptc["2#090"][0];
+				$output['state'] = @$iptc["2#095"][0];
+				$output['country'] = @$iptc["2#101"][0];
+				$output['location'] = 
+					( ( !empty($output['city']) ) ? $output['city'] : NULL ) . 
+					( ( !empty($output['state']) ) ? ', '.$output['state'] : NULL ) .
+					( ( !empty($output['country']) ) ? ' '.$output['country'] : NULL);
+				$output['country'] = @$iptc["2#101"][0];
+				$output['otr'] = @$iptc["2#103"][0];
+				$output['headline'] = @$iptc["2#105"][0];
+				$output['source'] = @$iptc["2#110"][0];
+				$output['photo_source'] = @$iptc["2#115"][0];
+				return $output;
+			else:
+				return FALSE;
+			endif;
+		endif;
+	}
+	
+	public function getShortDesc ( $length = 250 , $append = '...')
+	{
+		if (strlen($this->file_description) > $length ):
+			$shortDesc = substr($this->file_description, 0, strrpos($this->file_description, ' ', $length-strlen($this->file_description)));
+			$shortDesc = $shortDesc.$append;
+			return $shortDesc;
+		else: 
+			return $this->file_description;
+		endif;
+	}
+	
 // End class
 }
 

@@ -1,28 +1,17 @@
 <?php
+// Layout: default;
+
 $result = $__c->accounts()->getMyContributions();
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>My Archive | Katrina's Jewish Voices</title>
-<?php include ('inc/metalinks.php'); ?>
-
-</head>
-
-<body id="myarchive" class="mycontributions">
-<a class="hide" href="#content">Skip to Content</a>
-<div id="wrap">
-	<?php include("inc/header.php"); ?>
-	<div id="content">
+?>
 		<h2>MyArchive</h2>
-		<?php include ('inc/secondarynav.php')?>
+		<?php include( $_partial->file( 'secondarynav' ) ); ?>
 			<?php if( $result['objects']->total() == 0 ): ?>
 			<div id="primary">
 			<h3 id="notice">You have no contributions.</h3>
 			<?php else: ?>
 			<div id="page-links">
 			<?php 
-				$_link->pagination(	$result['page'],
+				if ( $result['total'] > $result['per_page'] ) $_link->pagination(	$result['page'],
 									$result['per_page'],
 									$result['total'],
 									'5',
@@ -41,7 +30,7 @@ $result = $__c->accounts()->getMyContributions();
 			?>
 
 			<div id="object-<?php echo $object->object_id; ?>" class="object">
-			        <h4><a href="<?php echo $_link->to('object') . $object->object_id; ?>"><?php echo htmlentities( $object->object_title ); ?></a></h4>
+			        <h4><a href="<?php echo $_link->to('object') . $object->object_id; ?>"><?php echo htmlentities( $object->object_title ); ?></a> <span class="editlink">[<a href="<?php echo $_link->to('edit') . $object->object_id; ?>">edit</a>]</span></h4>
 					
 					<?php
 						$file_id = mt_rand( 0, ( $object->files->total() - 1 ) );
@@ -90,9 +79,3 @@ $result = $__c->accounts()->getMyContributions();
 
 			<?php endforeach; endif; ?>	
 			</div>	
-	</div>
-	
-<?php include("inc/footer.php"); ?>
-</div>
-</body>
-</html>
