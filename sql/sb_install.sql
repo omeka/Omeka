@@ -459,12 +459,3 @@ INSERT INTO `categories_metafields` (`category_id`, `metafield_id`) VALUES (2, 2
 (11, 30),
 (12, 31),
 (13, 32);
-
--- --------------------------------------------------------
--- TEST DATA
--- --------------------------------------------------------
-
-
-					( 'admin', SHA1('admin'), 'Nate', 'Agrin', 'n8agrin@yahoo.com', 'CHNM', '10', '1' ),
-					( 're', SHA1('re'), 'Nate', 'Agrin', 'n8agrin@yahoo.com', 'CHNM', '20', '1' ),
-					( 'public', SHA1('public'), 'Nate', 'Agrin', 'n8agrin@yahoo.com', 'CHNM', '50', '1' );
