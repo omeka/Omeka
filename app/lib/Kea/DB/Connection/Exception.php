@@ -1,3 +1,3 @@
 <?php
-class Kea_DB_Connection_Exception extends Exception {}
+class Kea_DB_Connection_Exception extends Kea_Exception {}
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-class Kea_Domain_HelperFactoryException extends Exception {}
+class Kea_Domain_HelperFactoryException extends Kea_Exception {}
 
 class Kea_Domain_HelperFactory
 {
