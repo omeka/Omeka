@@ -329,7 +329,7 @@ class UsersController extends Kea_Action_Controller
 		if( $mapper->query( $sql ) ) {
 			return true;
 		} else {
-			self::$_session->flash('Incorrect old password.');
+			self::$_session->flash( self::$_adapter->error() );
 			return false;
 		}
 	}
