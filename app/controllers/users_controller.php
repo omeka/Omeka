@@ -281,12 +281,14 @@ class UsersController extends Kea_Action_Controller
 			else:
 				$old = self::$_request->getProperty( 'old_password' );		
 				if( empty( $new1 ) || empty( $new2 ) || empty( $old ) ) {
-					throw new Kea_Exception( 'You must enter the information in all fields on the form.' );
+					self::$_session->flash( 'You must enter the information in all fields on the form.' );
+					return;
 				}
 			endif;
 
 			if( $new1 !== $new2 ) {
-				throw new Kea_Exception( 'The new passwords do not match.' );
+				self::$_session->flash('The new passwords do not match.');
+				return;
 			}
 			
 			if ($this->doChangePassword( $id, $old, $new1 )):
@@ -304,7 +306,7 @@ class UsersController extends Kea_Action_Controller
 		}
 	}
 	
-	public function doChangePassword( $user_id, $old, $new )
+	private function doChangePassword( $user_id, $old, $new )
 	{
 		$mapper = new User_Mapper;
 			
@@ -318,7 +320,8 @@ class UsersController extends Kea_Action_Controller
 			$result = self::$_adapter->fetchOne( $select );
 
 			if( $result != $user_id ) {
-				throw new Kea_DB_Mapper_Exception( 'Incorrect old password.' );
+				self::$_session->flash('Incorrect old password.');
+				return false;
 			}
 		endif;
 		
@@ -326,7 +329,8 @@ class UsersController extends Kea_Action_Controller
 		if( $mapper->query( $sql ) ) {
 			return true;
 		} else {
-			throw new Kea_DB_Mapper_Exception( self::$_adapter->error() );
+			self::$_session->flash('Incorrect old password.');
+			return false;
 		}
 	}
 	
