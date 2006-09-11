@@ -1,4 +1,15 @@
 <fieldset>
+<label for="collection_id">This collection is nested under: (top level if blank)</label>
+<?php $_form->select(	array(	'name'	=> 'collection[collection_parent]',
+						'id'	=> 'collection_id' ),
+						$__c->collections()->all('array'),
+						$collection->collection_parent,
+						'collection_id',
+						'collection_name');
+?>
+</fieldset>
+
+<fieldset>
 	<label for="collection_name">Name:</label><br/>
 <?php
 	$_form->text( array(	'id'	=> 'collection_name',
@@ -27,9 +38,9 @@
 	<p class="field-caption">Type in the name of the Collector(s). If there is more than one Collector, separate individuals by a comma.  Background information on each Collector should be entered in the "Contributors" table.</p>
 </fieldset>
 
-<?php if (1==0): // begin masking ?>
+<?php //if (1==0): // begin masking ?>
 <fieldset>
 	<label for="collection_active">Active:</label><br/>
 	The collection is active: <input type="checkbox" name="collection[collection_active]" <?php if( $collection->collection_active != 0 ) echo 'checked'; ?>></input>
 </fieldset>
-<?php endif; // end masking?>
+<?php //endif; // end masking?>

@@ -33,7 +33,7 @@ class Object_Mapper extends Kea_DB_Mapper
 		if( $result = $this->query( $select ) ) {
 			if( $result->num_rows > 0) {
 				while( $row = $result->fetch_assoc() ) {
-					$obj->category_metadata[] = array(	'metafield_id'			=> $row['metafield_id'],
+					$obj->category_metadata[$row['metafield_id']] = array(	'metafield_id'			=> $row['metafield_id'],
 														'metafield_name'		=> $row['metafield_name'],
 														'metafield_description'	=> $row['metafield_description'],
 														'metatext_id'			=> $row['metatext_id'],
@@ -49,7 +49,7 @@ class Object_Mapper extends Kea_DB_Mapper
 							->order( array( 'metafield_id' => 'ASC' ) );;
 				$result = $this->query( $select );
 				while( $row = $result->fetch_assoc() ) {
-					$obj->category_metadata[] = array( 	'metafield_id'			=> $row['metafield_id'],
+					$obj->category_metadata[$row['metafield_id']] = array( 	'metafield_id'			=> $row['metafield_id'],
 														'metafield_name'		=> $row['metafield_name'],
 														'metafield_description'	=> $row['metafield_description'],
 														'metatext_text'			=> null );

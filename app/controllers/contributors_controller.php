@@ -41,7 +41,7 @@ class ContributorsController extends Kea_Action_Controller
 		$mapper = new Contributor_Mapper();
 		return $mapper->findById( $id );
 	}
-	
+		
 	protected function _edit()
 	{
 		if( self::$_request->getProperty( 'contributor_edit' ) )

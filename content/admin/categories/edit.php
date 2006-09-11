@@ -14,7 +14,7 @@ $saved = self::$_session->getValue( 'category_form_saved' );
 
 <input type="hidden" name="category[category_id]" value="<?php echo $category->category_id; ?>">
 
-<?php include( 'form.php' ); ?>
+<?php print_r($saved.'1'); include( 'form.php' ); ?>
 
 <input type="submit" name="category_edit" value="Edit this Category -&gt;"></input>
 

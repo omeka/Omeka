@@ -114,18 +114,78 @@ function stripeObjects() {
 	striper("div","stripe","div","odd,even");
 }
 
+// NiftyCorners
 function roundCorners() {
-	Nifty("ul#mainnav a","medium transparent top");
-	Nifty("ul#taglist","medium");
-	Nifty("#addyourvoice-blurb,#about-blurb,#login-box,div#tagcloud","big");
-	Nifty("#internalnav","big");
-	Nifty("#contribute-intro","big");
-	Nifty("ul.subnav a","transparent");
-	Nifty("#jwa-contact","big");
-	Nifty("ul#faqs","big");
-	Nifty("div.object,div.featured-object,#mytags","medium");
+//	Nifty("ul#mainnav a","top transparent medium");
+	Nifty("div#content","tl transparent medium");
+	Nifty("div#footer","bottom transparent medium");
+	Nifty("div#addyourphotos","tl transparent medium");
+	Nifty("#tellyourstory","transparent medium");
+	Nifty("#quickinfo","bottom transparent medium");
+//	Nifty("#quickcontribute","transparent medium");
+	Nifty("#newsfeed","transparent medium");
 }
 
+// Reusable Scriptaculous functions.
+function reveal(elem)
+{
+	if( document.getElementById(elem).style.display == 'none' )
+	{
+		Effect.BlindDown( elem, {duration: 1});	
+	}
+}
+
+function hide(elem)
+{
+	if( document.getElementById(elem).style.display != 'none' )
+	{
+		Effect.BlindUp(elem, {duration: 0.6});
+	}
+}
+
+function switchXbox( state, id )
+{
+	if( state )
+	{
+		document.getElementById(id).checked = false;
+	}
+}
+
+
+/*function revealSwitch( field, file )
+{
+	alert('<?php echo $_link->to(); ?>' + file);
+	new Ajax.Updater(	field,
+						'<?php echo $_link->to(); ?>' + file,
+						{
+						onComplete: function(t) {
+							new Effect.BlindDown( field, {duration: 0.8} );
+						}
+						});
+}*/
+
+// addFile function adds an input under the "Add a File" section on the contribute form.
+function addFile()
+{
+	var filelist = document.getElementById('files');
+	var input = document.createElement('li');
+	//input.style.display = "none";
+	filelist.appendChild( input );
+	
+	input.className = 'foo';
+	input.innerHTML = '<input name="objectfile[]" type="file" /><a href="javascript:void(0);" onclick="removeFile( parentNode )">Remove</a>';
+	
+	
+	//Effect.Appear( input, {duration: 0.4} );
+}
+
+// removeFile removes the input under the "Add a File" section on the contribute form.
+function removeFile( node )
+{
+//	Effect.Fade( node, {duration: 0.4} );
+/*  setTimeout( function() { */document.getElementById('files').removeChild( node );/* }, 600);*/
+}
+
+// Load Listeners
 addLoadListener(roundCorners);
 addLoadListener(popUps);
-addLoadListener(stripeObjects);

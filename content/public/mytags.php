@@ -1,24 +1,12 @@
 <?php
+// Layout: default;
+
 $t = new Tags;
 $tags = $t->getTagsAndCount( 100, true, false, null, self::$_session->getUser()->getId() );
 $max = $t->getMaxCount( self::$_session->getUser()->getId() );
 $result = $__c->accounts()->findMyTaggedObjects();
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>My Archive | Katrina's Jewish Voices</title>
-<?php include ('inc/metalinks.php'); ?>
-
-</head>
-
-<body id="myarchive" class="mytags">
-<a class="hide" href="#content">Skip to Content</a>
-<div id="wrap">
-	<?php include("inc/header.php"); ?>
-	<div id="content">
-		<h2>MyArchive</h2>
-		<?php include ('inc/secondarynav.php')?>
+?>		<h2>MyArchive</h2>
+		<?php include( $_partial->file( 'secondarynav' ) ); ?>
 		<div id="primary">
 			<h3>MyTags</h3>
 		
@@ -90,9 +78,4 @@ $result = $__c->accounts()->findMyTaggedObjects();
 
 	<?php endif; ?>
 	
-	</div> </div>
-	
-<?php include("inc/footer.php"); ?>
-</div>
-</body>
-</html>
+	</div>

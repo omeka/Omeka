@@ -9,12 +9,14 @@ a:hover,a:active,a:focus {color: #c60;}
 a.namedanchor:hover {color: #369;}
 
 h1,h2,h3,h4,h5,h6 {font-weight:normal;}
-h1 {font-size: 1em;}
+h1 {font-size: 2em;}
 h2 {font-size: 1.8em;}
 h3{font-size: 1.6em;color: #369; }
 h4,legend {font-size: 1.4em;color: #369;}
 h5 {font-size: 1.2em; font-weight:bold;}
 h6 {font-size: 1.1em; font-style: italic;}
+
+h2 {display: none;}
 
 p,ul,ol,dl,label,address {font-size: 1.1em; font-style:normal;}
 blockquote {font-size: 1em;margin-left: 15px; margin-right: 15px; padding: 10px 15px; background: #E7F1F8;}
@@ -22,8 +24,7 @@ ul,ol,dl {list-style:none;}
 abbr {font-style:normal; border:none; text-decoration:none;}
 
 p,dd {line-height: 2em;}
-.hide, #content h2 {display:none; width:0 !important; height:0 !important; overflow:hidden; text-indent: -1000em;}
-#content h2 {display:none;}
+.hide {display:none; width:0 !important; height:0 !important; overflow:hidden; text-indent: -1000em;}
 h2,h3,h4,h5,h6 {margin: 20px 0;}
 p,ul,ol,dl,dd,fieldset {margin: 10px 0;}
 dt {font-weight:bold; margin: 20px 0;}
@@ -36,7 +37,6 @@ form input.textinput, form textarea, form input[type="file"] {border: 1px solid 
 form input.textinput:focus, form textarea:focus {background: #fff;}
 form input {}
 
-br {display:none;}
 /* vCard Styles
 ---------------------------*/
 .vcard {display:block; font-style:normal;font-size: 1.1em; line-height: 1.75em; margin: 10px 0;}
@@ -55,15 +55,17 @@ br {display:none;}
 /* Branding and Meta styles
 ----------------------------------*/
 #branding {background: #369 url("../i/shadow-tile-blue.gif") 50% 0 repeat-y; display:block; float:left; width:780px; margin-top:0; padding:0;}
+#header {width:  100%;}
+#header #title {font-size:  2.5em; margin-left: 20px;}
+#header #subtitle {color:  #999; margin-left: 20px;}
 
-img#menorah {display:block;float:left; width:304px; height: 140px;margin:0; padding:0; margin-left: 10px;}
 
 /* Second header styles */
-#meta {display:block; float:left; clear:both;font-size: 95%;width: 760px; margin: 0 10px; background: #BBD9EE; color: #369;}
+/*#meta {display:block; float:left; clear:both;font-size: 95%;width: 760px; margin: 0 10px; background: #BBD9EE; color: #369;} */
 #meta #quicksearch {display:block; font-size: 95%;float:left; width: 280px; margin-left: 20px; overflow:visible; margin: 10px 0 0 20px; padding-bottom: 10px;}
 #meta #quicksearch input.textinput {border: 1px solid #77A0C4; background: #fff; font-size: 1.1em; padding: 4px;margin-bottom:0; }
 #meta #quicksearch input.submitinput {border: 1px solid #77A0C4; background: #e7f1f8; padding: 3px; margin:0 !important; font-size: 1.1em;}
-#meta p#login-blurb {display:block; float:right; width: 400px; text-align:right; margin-right: 20px; margin-bottom:0;}
+#meta p#login-blurb {display:block; float:right; width: 300px; text-align:right; margin-right: 20px; margin-bottom:0;}
 
 /* Third Header styles */
 div#menorah {display:block; float:right; position:relative; width: 272px;height: 140px; margin:0; padding:0; margin-right: 10px;background: #369 url("../i/menorah1.jpg") top right no-repeat;}
@@ -107,49 +109,27 @@ ul.subnav li a {font-size: 1em;display:block; padding: 8px;text-decoration:none;
 ul.subnav li a:link, ul.subnav a:visited {background: #E7F1F8; background: #BBD9EE;color: #369;}
 ul.subnav li a:hover, ul.subnav a:active {color: #369; background: #E7F1F8;}
 
-#about ul#subnav-about, #browse ul#subnav-browse, #myarchive ul#subnav-myarchive {display:block; padding:0;width: 720px; margin-left: 30px; margin-right: 30px;}
+#about ul#subnav-about, #browse ul#subnav-browse, #myarchive ul#subnav-myarchive { display:block; clear: both; padding:0px; width: 100%; }
 
 /* Logos
 ----------------------------------*/
-#jwa-logo a { 
-	display:block; 
-	float:left;
-	width: 112px;
-	margin: 20px;
-	padding: 78px 0 0 0;
-	overflow:hidden;
-	background-image: url("../i/jwa-logo.gif");
-	background-repeat: no-repeat;
-	height: 0px !important;
-	height /**/:78px;
-	}
-	
-#kjv-logo a {
-	display:block;  
-	float:right;	width: 414px; 
-	margin:0; 
-	padding:130px 0 0 0;
-	background-image: url("../i/kjv.jpg");
-	background-repeat:no-repeat;
-	overflow:hidden;
-	background-position: center center;
-	height: 0px !important;
-	height /**/:130px;
-	color: #369;
-	}
-#kjv-logo {display:block; width: 414px; height: 130px;float:right; margin-right: 30px;}
 
 
 /* Content
 -------------------*/
 #content {background: #fff url("../i/shadow-tile.gif") 50% 0 repeat-y;display:block;padding: 10px 0; float:left; width: 780px;}
-
+#shell {padding: 0px 20px;}
 #primary{width: 426px; display:block; margin-right: 30px;float:right;} 
 #secondary{width:274px;float:left; margin-left: 30px;background: #fff;} 
 
 ul.object-nav {list-style:none;display:block; float:left; margin-right: 30px;}
 ul.object-nav li {display:block; float:left; width: 50%;}
 ul.object-nav li.next {float:right;}
+
+/* Popups
+----------------------------------*/
+#popup { width: 300px; margin-left:  auto; margin-right: auto;}
+#popup #content {background: #fff; width:100%;}
 
 /* Homepage Specific Styles 
 -----------------------------------------------*/
@@ -186,16 +166,19 @@ ul.object-nav li.next {float:right;}
 #about-blurb {display:block; padding: 0 10px; margin: 10px 0 20px 0; background: #E7F1F8;}
 #about-blurb h3 { color: #369;}
 
-/* Contribute page and form in "Add Your Voice" 
+/* Add page
 ----------------------------------------*/
-#contribute #primary {width: 720px; float:left; margin: 0 30px;}
-#contribute-form {display:block; clear:both; width: 720px;margin-bottom: 20px;}
-#contribute-form fieldset {display:block; margin: 0 0 10px 0;float:left; background: #fff;clear:both; width: 720px; border:none; padding: 10px 0 9px 0;}
-#contribute-form legend {display:block; font-size: 1.6em; color: #369; padding: 8px 8px 8px 0;}
-#contribute-form legend span.number {font-size: 2em; padding: 4px 9px; margin-top: 10px; background: #e7f1f8;}
-#contribute-form label {display:block;margin: 10px 0; line-height: 2em;}
-#contribute-form input.textinput, #contribute-form textarea {border: 1px solid #BBD9EE; padding: 4px; background: #E7F1F8;}
-#contribute-form input.textinput:focus, #contribute-form textarea:focus {background: #fff;}
+#add #primary {width: 720px; float:left; margin: 0 30px;}
+#itemform {display:block; clear:both; width: 720px;margin-bottom: 20px;}
+#itemform fieldset {display:block; float:left; background: #fff;clear:both; width: 720px; border:1px solid #CCC; padding: 1em;}
+#itemform legend {display:block; font-size: 1.6em; color: #369; padding: 8px 8px 8px 0;}
+#itemform legend span.number {font-size: 2em; padding: 4px 9px; margin-top: 10px; background: #e7f1f8;}
+#itemform label {display:block;margin: 10px 0; line-height: 2em;}
+#itemform input.textinput, #itemform textarea {border: 1px solid #BBD9EE; padding: 4px; background: #E7F1F8;}
+#itemform input.textinput:focus, #itemform textarea:focus {background: #fff;}
+#itemform #primary, #itemform #secondary { width: 45%; float: right;}
+input#object_tags, input#object_title {width: 90%;}  /* width includes 2px for the left and right borders, adn 4px for the left and right padding. */
+
 
 #contribute-form #contribute-intro {display:block; background: #E7F1F8;  padding: 0 20px 10px 20px; width: 680px; margin-top: 10px; margin-bottom: 20px;}
 
@@ -219,7 +202,7 @@ span.required {color: #c60; font-style:italic;}
 #location_info {display:block; float:left; width: 270px;}
 #contribute-form div#map {margin-top: 20px;}
 #tagsinput {clear:both; display:block; padding-top: 10px;}
-input#object_tags {width: 400px;} /* width includes 2px for the left and right borders, adn 4px for the left and right padding. */
+
 input#findonmap {margin-top: 6px;display:block;}
 #contribute-form h4 {margin-bottom:0;}
 label.radiolabel input {}
@@ -234,7 +217,7 @@ ol.terms-of-consent li {margin: 10px 0; line-height: 1.5em;}
 /* Browse Pages
 -------------------------*/
 #browse #primary {width: 720px; float:left; margin: 0 30px;}
-#page-links {display:block; float:right; text-align:right; margin-right: 30px;}
+.page-links {display:block; float:right; text-align:right; margin-right: 30px;}
 
 #browse div.featured-object {background: #FFF09E; width: 700px; padding: 10px;}
 #browse div.featured-object .featured-thumb {display:block; float:left; margin-right: 10px; padding: 7px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background: #fff;}
@@ -244,7 +227,12 @@ ol.terms-of-consent li {margin: 10px 0; line-height: 1.5em;}
 #browse .featured-title a:link, #browse .featured-title a:visited {color: #c60;}
 #browse .featured-title a:hover, #browse .featured-title a:active {color: #c60; text-decoration:underline;}
 
-#browse div.object {padding: 10px; margin-bottom: 10px; width: 700px;}
+#browse div.object .title {margin-bottom: 0px;}
+#browse div.object .abstract {margin-left: 2em;}
+#browse div.object .details {color: #AAA; float: right;}
+#browse div.object {width: 700px; border-bottom: 1px solid #EEE; margin-bottom:  1em;}
+
+#browse div#objects-list {clear: both; padding-top: .5em;}
 #browse div.object .object-title a {text-decoration:none;}
 #browse div.object .thumbnail {display:block; float:left; margin-right: 10px; padding: 7px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background: #fff;}
 #browse div.object h4 {margin:0; padding:0; margin: 0 0 10px 0;}
@@ -255,11 +243,19 @@ ul.taglist li {display:inline;}
 #browse.single #object-main {display:block; float:left; width: 400px;}
 #browse.single #object {display:block; float:left;}
 
-#browse.single .metadata-name {font-weight:bold;}
-#browse.single #object-sidebar h3 {margin: 20px 0 10px 0 !important; padding-bottom:0; }
-#browse.single #object-tags {margin-bottom: 10px;}
-#browse.single a.popup img.thumbnail {border: 1px solid #ccc !important; padding: 4px;}
-#browse.single a.popup:hover img.thumbnail {border: 1px solid #369 !important;}
+
+/* Object Pages
+-------------------------*/
+#object #object-sidebar, #object #object-main {margin-top: 1em;} 
+#object .metadata-name {font-weight:bold;}
+#object #object-main {float: left; width: 450px;}
+#object #object-sidebar {float: right; padding-left: 1.5em; margin-left: 1.5em; border-left: 1px solid #CCC; width:  250px;}
+#object #object-sidebar h3 {margin: 20px 0 10px 0 !important; padding-bottom:0; }
+#object #object-tags {margin-bottom: 10px;}
+#object a.popup img.thumbnail {border: 1px solid #ccc !important; padding: 4px;}
+#object a.popup:hover img.thumbnail {border: 1px solid #369 !important;}
+#object #object-dublin-core, #object #object-files {border-bottom: 1px solid #CCC;}
+
 /* About Page and subpages styles (About,FAQ,Contact,Privacy,Terms of Use,Pressroom)
 ------------------------------------------------------------------------------------*/
 #about #primary {width: 720px; float:left; margin: 0 30px;}
@@ -307,9 +303,9 @@ ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
 /* Signin/Signup page styles 
 ------------------------------------------*/
 #login #content {}
-#login #primary {display:block; float:right; width: 274px; padding:0;margin:0;margin-right: 30px;}
+#login #primary {display:block; float:right; width: 45%; padding:0;margin:0;margin-right: 30px;}
 #login #primary.wide {width:578px;}
-#login #secondary {display:block; float:right; width: 284px;padding:0; margin:0; margin-right:20px;}
+#login #secondary {display:block; float:right; width: 45%;padding:0; margin:0; margin-right:20px;}
 #login #tertiary {display:block; float:right; width: 122px;margin:0;margin-right: 20px;}
 #login #content input.textinput {border: 1px solid #BBD9EE; width: 170px;background: #E7F1F8;}
 #login #content input.textinput:focus {background: #fff;}
@@ -322,15 +318,15 @@ ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
 
 /* MyArchive pages styles 
 --------------------------------------------*/
-#myarchive.myprofile #primary, #myarchive.mycontributions #primary, #myarchive.mytags #primary, #myarchive.myfavorites #primary {width: 720px; float:left; margin: 0 30px;}
-#myarchive.intro #primary {display:block; float:left; margin-right:0; margin-left: 30px;}
-#myarchive.intro #secondary {display:block ;float:right; margin-left:0; margin-right: 30px;}
-#myarchive.intro #primary, #myarchive.intro #secondary {float:left; margin:0 30px; width: 720px;}
+#myarchive.myprofile #primary, #myarchive.mycontributions #primary, #myarchive.mytags #primary, #myarchive.myfavorites #primary {float:left; margin: 0 30px;}
+#myarchive #primary {display:block; float:left; margin-top: 10px; margin-right:0; width: 40%;}
+#myarchive #secondary {padding-left: 10px; margin-top: 10px; border-left:  1px solid #CCC; display:block ;float:right; margin-left:0; margin-right: 30px;  width: 40%;}
+#myarchive.intro #primary, #myarchive.intro #secondary {float:left; margin:0 30px;}
 #myarchive.myprofile #content fieldset {border:none;}
 #myarchive.myprofile #content legend {display:block; margin-bottom:10px;}
 
 #myarchive.myprofile #content input, #myarchive.myprofile #content label {display:block;}
-#myarchive div.object {width: 700px; padding: 10px 10px 0 10px; margin-bottom: 10px;}
+#myarchive div.object {padding: 10px 10px 0 10px; margin-bottom: 10px;}
 #myarchive div.object .object-title a {text-decoration:none;}
 #myarchive div.object .thumbnail {display:block; float:left; margin-right: 10px; padding: 7px; border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background: #fff;}
 #myarchive div.object h4 {margin:0; padding:0; margin: 0 0 10px 0;}
@@ -339,6 +335,18 @@ ul#faqs a:hover, ul#faqs a:active {color: #c60; text-decoration:underline;}
 #myarchive div.object ul.tags li {display:inline;}
 #myarchive #mytags {background: #E7F1F8; padding: 10px; margin-top: 10px;}
 #myarchive.intro #mytags h3 {margin-top:0;}
+
+.editlink {font-size: smaller;}
+
+#myarchive #addform, #myarchive #editform {clear: both; width: 100%; display: block; padding-top: 1em;}
+#myarchive #addform #secondary .divider, #myarchive #addform #primary .divider {border-top:  1px solid #ccc; padding-top:  .25em;}
+
+
+#myprofile {clear: both; margin-top: 2em; }
+#myprofile fieldset {padding: 1em; width: 300px; margin-left: auto; margin-right: auto;}
+#myprofile fieldset input {float: right; clear: both;}
+#myprofile fieldset label {float: right; clear: both;}
+#myprofile #user_edit {clear: both; width:100px; margin-left: auto; margin-right: auto;}
 
 /* Footer
 -------------------*/

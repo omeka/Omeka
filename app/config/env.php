@@ -17,8 +17,15 @@ function __autoload( $classname ) {
  *	Handle uncaught exceptions by redirecting to a 404 page
  */
 function uncaught_exception_handler( $e ) {
+	$out = ob_get_contents();
 	ob_end_clean();
-	include( ABS_CONTENT_DIR.DS.'404.php');
+	echo $out . $e->__toString();
+	/**
+	 * We can't include this call to the 404 page because that page runs 
+	 * application code, and if there is an application failure, it var_dumps the 
+	 * uncaught exception rather than a nice clean error message - [KBK]
+	 */
+	//include( ABS_CONTENT_DIR.DS.'404.php');
 	exit();
 }
 

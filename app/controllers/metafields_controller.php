@@ -15,6 +15,19 @@ class MetafieldsController extends Kea_Action_Controller
 		}
 		return false;
 	}
+	
+	protected function _findIDByName( $name )
+	{
+
+		$mapper = new Metafield_Mapper();
+		$stmt = $mapper->select()->where( 'metafield_name = ?', $name );
+		$result = $mapper->query( $stmt );
+		if( $result->num_rows == 1 ) {
+			$stuff =  $mapper->load( $result );
+			print_r($stuff); exit;
+		}			
+	}
+	
 }
 
 ?>

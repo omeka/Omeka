@@ -13,12 +13,28 @@ h5 {font-size:1.2em; font-weight:bold;}
 h6 {font-size:1.1em; font-style:italic;}
 
 p,ul,ol,textarea {font-size: 1.3em;}
-label {font-size: 1.2em; font-weight:normal;}
 
 a:link, a:visited {color: #853;}
 a:hover, a:active {color: #8c3;}
 
 div.container {background: #fff; display:block;float:left;padding: 20px; width: 660px;margin:0;}
+
+
+/* Form styles
+-------------------------------------------*/
+.form-error { color: red; font-size: 1.2em;}
+
+form {padding-bottom: 10px;}
+#contributors-form input, #contributors-form label { display:block;  margin: 10px 0 0 0;}
+#contributors-form input[type="radio"] {display:inline; margin:0; padding:0; }
+#contributors-form label.radiolabel {margin:0;}
+input.textinput, label {display:block;}
+input.textinput {margin-bottom: 10px;}
+input[type="submit"], input.submitinput {margin-left: 20px !important;}
+label {font-size: 1.2em; font-weight:normal;}
+label.checkboxlabel {margin-bottom: 10px;}
+select {margin-bottom: 10px;}
+label.radiolabel {margin-bottom:5px;}
 
 /* Page styles
 ------------------------------------------*/
@@ -27,6 +43,8 @@ div.container {background: #fff; display:block;float:left;padding: 20px; width: 
 ul.object-nav {list-style:none;display:block; float:left; margin-right: 30px;}
 ul.object-nav li {display:block; float:left; width: 50%;}
 ul.object-nav li.next {float:right;}
+
+
 /* Header styles
 ------------------------------------------*/
 #header { background: #fff; color: #888;display:block;}
@@ -66,9 +84,9 @@ ul.object-nav li.next {float:right;}
 /* Content styles
 ------------------------------------------*/
 #content {width: 700px; padding: 0; margin: 0 auto;display:block;  background: #fff;}
-#content fieldset {border:none;text-decoration:none; border-top: 1px dotted #ccc; border-left: 1px dotted #ccc; margin-bottom: 20px; padding:20px;}
+#content fieldset {border:none;text-decoration:none; border-top: 1px dotted #ccc; border-left: 1px dotted #ccc; padding:20px;}
 #content textarea, #content input {border: 1px solid #999; padding: 2px 4px;}
-#content p {margin-bottom: 20px;}
+#content p {}
 #content p.instructionText {margin-bottom: 10px; font-style:italic;}
 #content h3 {margin-bottom: 10px;}
 
@@ -100,7 +118,7 @@ div.object-tags ul.tags {background: #ffffce;padding: 10px;}
 #my-favorites div.object {border: 1px solid #ccc; padding: 10px;width: 295px;margin: 10px 0; background: #eee;}
 
 #mark-favorite, #mark-featured {display:block; float:left; width: 120px;margin-bottom: 20px;}
-#object-dublin-core {clear:left; margin-top: 20px;}
+#object-dublin-core, #object-contributor-info {clear:left; margin-top: 20px;}
 
 /* Footer styles
 ------------------------------------------*/
@@ -110,6 +128,7 @@ div.object-tags ul.tags {background: #ffffce;padding: 10px;}
 #flash {display:block; border: 1px solid #8c3; color: #555; font-size: 1.3em;padding: 10px 20px; margin-bottom: 20px;} /* Notice that things went ok */
 #error {display:block; border: 1px solid red; color: red; font-size: 1.3em;padding: 10px 20px; margin-bottom: 20px;} /* things aren't ok...error alert. */
 
+<<<<<<< .working
 .clear {clear:both;}
 .form-error { color: red; font-size: 1.2em;}
 
@@ -118,4 +137,5 @@ form {padding-bottom: 10px;}
 #contributors-form input[type="radio"] {display:inline; margin:0; padding:0; }
 #contributors-form label.radiolabel {margin:0;}
 
-input[type="submit"], input.submitinput {margin-left: 20px !important;}
+input[type="submit"], input.submitinput {margin-left: 20px !important;}=======
+.clear {clear:both;}>>>>>>> .merge-right.r350

@@ -59,6 +59,11 @@ $result = $__c->objects()->paginate();
 			<option value="approved" <?php if( self::$_request->getProperty('status') == "approved"){ echo ' selected '; } ?>>Approved</option>
 			<option value="rejected" <?php if( self::$_request->getProperty('status') == "rejected"){ echo ' selected '; } ?>>Rejected</option>
 		</select>
+		<select name="featured">
+			<option value="">All</option>
+			<option value="0" <?php if( self::$_request->getProperty('featured') == "0"){ echo ' selected '; } ?>>Not featured</option>
+			<option value="1" <?php if( self::$_request->getProperty('featured') == "1"){ echo ' selected '; } ?>>Featured</option>
+		</select>
 		<input type="text" name="search" value="" style="width:100px;" onclick="this.value=''"/>
 		<input type="submit" value="Search"/>
 		</form>
@@ -68,6 +73,7 @@ $result = $__c->objects()->paginate();
 	<h2 id="notice">No objects found.</h2>
 	<?php else: ?>
 	<div id="pagination-links">
+	<h2 id="objects-results"><?php echo $result['total'];?> Results</h2>
 	<?php 
 		$_link->pagination(	$result['page'],
 							$result['per_page'],
@@ -85,7 +91,7 @@ $result = $__c->objects()->paginate();
 	?>
 	
 	<div id="object-<?php echo $object->object_id; ?>" class="object">
-		<div class="object-bar">#<?php echo $object->object_id; ?></div>
+		<div class="object-bar">#<?php echo $object->object_id; ?> [<a href="<?php echo $_link->to('objects', 'edit') . $object->object_id; ?>">edit</a>]</div>
 	    <div class="meta" onclick="loadObject(<?php echo $object->object_id; ?>)" onmouseover="highlight(this)" onmouseout="unHighlight(this)">
 	        <h3><a href="<?php echo $_link->to('objects', 'show') . $object->object_id; ?>"><?php echo htmlentities( $object->object_title ); ?></a></h3>
 			<ul class="object-metadata">
@@ -113,9 +119,9 @@ $result = $__c->objects()->paginate();
 				?>
 				</span>
 				<?php
-					if( $object->object_description )
+					if( $object->getDesc() )
 					{
-						echo htmlentities( $object->short_desc );	
+						echo htmlentities( $object->getShortDesc() );	
 					}
 					else
 					{
@@ -144,4 +150,14 @@ $result = $__c->objects()->paginate();
 
 	<?php endforeach; endif; ?>
 	</div>
+	<div id="pagination-links-bottom">
+	<?php 
+		$_link->pagination(	$result['page'],
+							$result['per_page'],
+							$result['total'],
+							'5',
+							$_link->to( 'objects', 'all' ) );
+	?>
+	</div>
+	
 </div>

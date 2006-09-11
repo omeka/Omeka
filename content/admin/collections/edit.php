@@ -24,6 +24,7 @@ $collection = $__c->collections()->edit();
 <br/>
 <form method="post" action="<?php echo $_link->to('collections', 'delete'); ?>" onsubmit="return confirm('Are you sure you want to delete this collection?')">
 	<input type="hidden" name="collection_id" value="<?php echo $collection->collection_id; ?>"></input>
+	Delete all objects within this collection: <input type="checkbox" name="delete_objects" unchecked>
 	<input type="Submit" value="Delete this Collection -&gt;"></input>
 </form>
 <?php endif; ?>

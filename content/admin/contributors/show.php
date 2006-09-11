@@ -13,7 +13,8 @@ $contributor = $__c->contributors()->findById();
 <br/>
 <div id="contributor-wrapper">
 	<div id="contributor-main">
-		<h3><?php echo $contributor->contributor_first_name; ?> <?php echo $contributor->contributor_last_name; ?> <span class="showByContributor"></span><a href="<?php echo $_link->to( 'objects' ); ?>?contributor=<?php echo $contributor->contributor_id; ?>">show contributions</a></h3>
+		<h3><?php echo $contributor->getName(); ?>
+		 <span class="showByContributor"></span><a href="<?php echo $_link->to( 'objects' ); ?>?contributor=<?php echo $contributor->contributor_id; ?>">show contributions</a></h3>
 		<p>Birth Year: <?php echo $contributor->contributor_birth_year; ?></p>
 		<p>Gender: <?php echo $contributor->contributor_gender; ?></p>
 		<p>Race: <?php echo $contributor->contributor_race; ?></p>
@@ -22,21 +23,9 @@ $contributor = $__c->contributors()->findById();
 
 	<div id="contributor-misc">
 	<p>Occupation: <?php echo $contributor->contributor_occupation; ?></p>
-	<p>Jewish: <?php echo $contributor->contributor_jewish; ?></p>
-	<p>Religious Identification: <?php echo $contributor->contributor_religious_id; ?></p>
-	<p>Religious Identification Other: <?php echo $contributor->contributor_religious_id_other; ?></p>
 	<p>Location During: <?php echo $contributor->contributor_location_during; ?></p>
-	<p>Location of Evacuation: <?php echo $contributor->contributor_location_evacuation; ?></p>
+	<p>Location of Evacuation: <?php echo $contributor->contributor_location_after; ?></p>
 	<p>Current Location: <?php echo $contributor->contributor_location_current; ?></p>
-	<p>Location Between: <?php echo $contributor->contributor_location_between; ?></p>
-	<p>Plan to return: <?php echo $contributor->contributor_return; ?></p>
-	<p>Affected Family Members: <?php echo $contributor->contributor_family_members; ?></p>
-	<p>Former Resident: <?php echo $contributor->contributor_former_resident; ?></p>
-	<p>Did this contributor's community take in evacuees? <?php echo $contributor->contributor_community_evacuees; ?></p>
-	<p>Participate: <?php echo $contributor->contributor_participate; ?></p>
-	<p>Other Relationship: <?php echo $contributor->contributor_other_relationship; ?></p>
-	<p>Residence: <?php echo $contributor->contributor_residence; ?></p>
-	<p>Location Participation: <?php echo $contributor->contributor_location_participate; ?></p>
 	</div>
 </div>
 

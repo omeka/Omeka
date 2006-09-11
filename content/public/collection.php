@@ -1,3 +1,8 @@
+<?php 
+// Layout: default;
+
+//Implementation of non-nested collections (masked as of merge)
+if(1==0):?>
 <?php
 $collections = $__c->collections()->all( 'array' );
 ?>
@@ -32,3 +37,13 @@ $collections = $__c->collections()->all( 'array' );
 </div>
 </body>
 </html>
+
+<?	//END MASKING
+	endif;?>
+
+<?php
+$collections = $__c->collections()->all( 'array' );
+?>
+
+<h2>Collections</h2>
+<?php $__c->collections()->displayNested(ABS_CONTENT_DIR.PUBLIC_THEME_DIR.DS.'partials'.DS.'collection.php'); ?>

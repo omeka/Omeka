@@ -54,7 +54,6 @@ class Kea_DB_Adapter
 		if( KEA_LOG_SQL === true ) {
 			Kea_Logger::logSQL( $sql );
 		}
-		
 		return self::$_db->query( $sql );
     }
 

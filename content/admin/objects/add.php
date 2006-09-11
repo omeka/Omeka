@@ -1,5 +1,5 @@
 <?php
-// Layout: map;
+// Layout: default;
 $__c->objects()->add();
 $saved = self::$_session->getValue( 'object_form_saved' );
 ?>

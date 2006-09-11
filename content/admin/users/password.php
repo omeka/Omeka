@@ -13,10 +13,12 @@ $data = $__c->users()->changePassword();
 
 <div class="container">
 <div id="my-account-edit">
-<?php if (!@$data->user_id): ?>
+<?php $msg = self::$_session->flash();?>
+<?php if (!@$data->user_id && !$msg): ?>
 <p>This password has been changed, and the user has been notified by e-mail.</p>
 <p>Please click <a href="<?php echo $_link->to( 'users' ); ?>">here</a> to return.</p>
 <?php else: ?>
+<?php if($msg): echo $msg; endif;?>
 <h2>Changing password for <?php if ($data->user_first_name) echo $data->user_first_name.' '.$data->user_last_name; ?></h2><br />
 <form method="post" action="<?php echo $_link->to( 'users', 'password' ); ?>">
 	<?php if (!self::$_session->isSuper()):?>

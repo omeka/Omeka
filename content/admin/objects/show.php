@@ -4,40 +4,10 @@ $object = $__c->objects()->findById();
 include( 'subnav.php' );
 ?>
 
-<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=<?php echo GMAPS_KEY;?>" type="text/javascript"></script>
-
 <script type="text/javascript" charset="utf-8">
 	//<![CDATA[
 	
 	addLoadEvent(popUps);
-	
-	var map;
-	function load()
-	{
-		<?php if( $object->location->total() > 0 ): ?>
-			if (GBrowserIsCompatible())
-			{
-				mapdiv = document.getElementById("object-map");
-				mapdiv.style.width = "100%";
-				mapdiv.style.height = "240px";
-				map = new GMap2(mapdiv);
-				
-				var point = new GLatLng(<?php echo $object->location->latitude; ?>, <?php echo $object->location->longitude; ?>);
-				
-				map.setCenter(point, 13);
-				map.addControl(new GSmallMapControl());
-
-				var marker = new GMarker(point);
-
-				  GEvent.addListener(marker, "click", function() {
-				    marker.openInfoWindowHtml("Address: <?php echo $object->location->cleanAddress; ?><br/>Zipcode: <?php echo $object->location->zipcode; ?>" );
-				  });
-
-				map.addOverlay( marker );
-
-			}
-		<?php endif; ?>
-	}
 	
 	function markFav( object_id )
 	{
@@ -161,22 +131,7 @@ include( 'subnav.php' );
 			<?php if( $object->category_metadata ): ?>
 				<ul class="metadata">
 				<?php foreach( $object->category_metadata as $k => $v ): ?>
-					<li><span><strong><?php echo $v['metafield_name']; ?>:</strong><br/><?php echo nl2br( $v['metatext_text'] ); ?></span><!--<?php switch ($v['metafield_id']) {
-						case '28': // Resolution.
-						case '15': // Moving Image Resolution.
-							echo 'dpi'; 
-							break;
-						case '29': // Still Image Width.
-						case '30': // Still Image Height.
-						case '17': // Moving Image Width.
-						case '18': // Moving Image Height.
-							echo 'px';
-							break;
-						case '25': // Bit Depth.
-							echo 'bit';
-							break;
-						} 
-						 ?>--></li>
+					<li><span><strong><?php echo $v['metafield_name']; ?>:</strong><br/><?php echo nl2br( $v['metatext_text'] ); ?></span></li>
 				<?php endforeach; ?>
 				</ul>
 			<?php endif;?>
@@ -222,6 +177,10 @@ include( 'subnav.php' );
 			<p><strong>Language:</strong> <span id="object_language"><?php echo $object->object_language; ?></span></p>
 			<p><strong>Relation:</strong> <span id="object_relation"><?php echo $object->object_relation; ?></span></p>
 			<p><strong>Rights:</strong> <span id="object_rights"><?php echo $object->object_rights; ?></span></p>
+			<p><strong>Consent: <?php echo $object->object_contributor_consent; ?></span></p>
+			<p><strong>Post on Public Site: <?php echo $object->object_contributor_posting; ?></span></p>
+				
+				
 			<?php if( self::$_session->isAdmin() ): ?>
 				<p><strong>Added to Archive:</strong> <span id="object_added"><?php echo $object->object_added; ?></span></p>
 				<p><strong>Status:</strong> <span id="object_added"><?php echo $object->object_status; ?></span></p>
@@ -229,11 +188,15 @@ include( 'subnav.php' );
 			<?php endif; ?>
 		</div>
 		
+		<div id="object-contributor-info">
+			<?php if( $object->contributor->total() > 0 ): ?>
+			<h2>Contributor: <a href="<?php echo $_link->to( 'contributors', 'show' ) . $object->contributor->contributor_id; ?>/"><?php echo $object->contributor->getName(); ?></a></h2>
+			<p><strong>Gender:</strong> <span id="contributor_gender"><?php echo $object->contributor->contributor_gender; ?></span></p>
+			<p><strong>Race:</strong> <span id="contributor_race"><?php echo $object->contributor->contributor_race; ?></span></p>
+			<p><strong>Occupation:</strong> <span id="contributor_occupation"><?php echo $object->contributor->contributor_occupation; ?></span></p>
+		</div>
+		
 		<div id="object-other-meta">
-		<?php if( $object->contributor->total() > 0 ): ?>
-		<h2>Contributor: <a href="<?php echo $_link->to( 'contributors', 'show' ) . $object->contributor->contributor_id; ?>/"><?php echo $object->contributor->contributor_first_name; ?> <?php echo $object->contributor->contributor_last_name; ?></a></h2>
-		<h2>Consent: <?php echo $object->object_contributor_consent; ?></h2>
-		<h2>Post on Public Site: <?php echo $object->object_contributor_posting; ?></h2>
 		<?php endif; ?>
 		
 		<?php if( $object->collection_id ): ?>

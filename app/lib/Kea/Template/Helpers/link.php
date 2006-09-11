@@ -33,9 +33,9 @@ class LinkHelper
 		$html = ' <a href="' . $link . '1' . $link_end . $query . '">First</a> |';
 		
 		if( $page > 1 ) {
-			$html .= ' <a href="' . $link . ($page - 1) . $link_end . $query . '">&lt Prev</a> |';
+			$html .= ' <a href="' . $link . ($page - 1) . $link_end . $query . '">&lt; Prev</a> |';
 		} else {
-			$html .= ' &lt Prev |';
+			$html .= ' &lt; Prev |';
 		}
 
 		$buffer = floor( ( $num_links - 1 ) / 2 );
@@ -59,14 +59,14 @@ class LinkHelper
 		}
 
 		if( $page < $num_pages ) {
-			$html .= ' <a href="' . $link . ($page + 1) . $link_end . $query . '">Next &gt</a> |';
+			$html .= ' <a href="' . $link . ($page + 1) . $link_end . $query . '">Next &gt;</a> |';
 		} else {
-			$html .= ' Next &gt |';
+			$html .= ' Next &gt; |';
 		}
 		
 		$html .= ' <a href="' . $link . $num_pages . $link_end . $query . '">Last</a> ';
 		
-		$html .= '<select id="pagination-link" onchange="location.href = \''.$link.'\' + this.value + \'' . $link_end . $query.'\'">';
+		$html .= '<select class="pagination-link" onchange="location.href = \''.$link.'\' + this.value + \'' . $link_end . $query.'\'">';
 		$html .= '<option>Page:&nbsp;&nbsp;</option>';
 		for( $i = 0; $i < $num_pages; $i++ ) {
 			$html .= '<option value="' . ($i + 1) . '"';
