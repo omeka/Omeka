@@ -371,11 +371,11 @@ class ObjectsController extends Kea_Action_Controller
 			// Send e-mail
 			$contributor_mapper =  new Contributor_Mapper();
 			$email = $contributor_mapper->find()->where('contributor_id = ?', $object->contributor_id)->execute()->contributor_email;
-			$message = "Thank you for your contribution to the Hurricane Digital Memory Bank. Your contribution has been accepted and will be preserved in the digital archive. For your records, the permanent URL for your contribution is noted at the end of this email. Please note that contributions may not appear immediately on the website while they await processing by project staff.
+			$message = "Thank you for your contribution to ".SITE_TITLE.".  Your contribution has been accepted and will be preserved in the digital archive. For your records, the permanent URL for your contribution is noted at the end of this email. Please note that contributions may not appear immediately on the website while they await processing by project staff.
 			
 Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NAME'] . substr($_SERVER['PHP_SELF'] , 0, strrpos($_SERVER['PHP_SELF'], '/')) . DS .'object' . DS .self::$_session->getValue( 'contributed_object' )->object_id;
-			$title = "Your Hurricane Digital Memory Bank Contribution";
-			$header = 'From: info@hurricanearchive.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
+			$title = "Your ".SITE_TITLE." Contribution";
+			$header = 'From: '.EMAIL . "\n" . 'X-Mailer: PHP/' . phpversion();
 			
 			mail( $email, $title, $message, $header);
 			

@@ -17,8 +17,12 @@ define( 'KEA_MYSQLI_SOCKET',	null );
 /**
 	Site specific details
 */
+//I started embedding SITE_TITLE into template pagese, then Josh changed it to INFO_TITLE [KBK]
+
 define( 'INFO_TITLE',			'Sitebuilder' );
+define( 'SITE_TITLE',			INFO_TITLE);
 define( 'THUMBNAIL_SIZE', 250);
+define( 'EMAIL', 'DO_NOT_REPLY@siteurl.com');
 
 
 /**
@@ -75,6 +79,7 @@ define( 'WEB_ROOT',				chop(dirname( $_SERVER['PHP_SELF'] ), '/') );
 define( 'WEB_CONTENT_DIR',		WEB_ROOT.DS.CONTENT_DIR_NAME );
 define( 'WEB_VAULT_DIR', 		WEB_CONTENT_DIR.DS.VAULT_DIR_NAME );
 define( 'WEB_THUMBNAIL_DIR',	WEB_CONTENT_DIR.DS.THUMBNAIL_DIR_NAME );
+define( 'SITE_BASE_URL', 'http://'. $_SERVER['SERVER_NAME'] . substr($_SERVER['PHP_SELF'] , 0, strrpos($_SERVER['PHP_SELF'], '/')) );
 
 /*
 	Theme directives, these will become dynamic

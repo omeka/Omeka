@@ -170,7 +170,7 @@ class UsersController extends Kea_Action_Controller
 				
 				$message = "Welcome!\n\nYour account for the ".SITE_TITLE." archive has been created. Please login using your user name and password below.\n\n     Username: ".$user->getUsername()."\n\n     Password: $password\n\nTo login, please return to the ".SITE_TITLE." website,".SITE_BASE_URL."(or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".SITE_TITLE." Administrator";
 				$title = "Your account information for the ".SITE_TITLE." Archive";
-				$header = 'From: DONOTREPLY@hurricanearchive.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
+				$header = 'From: '.EMAIL. "\n" . 'X-Mailer: PHP/' . phpversion();
 
 				mail( $user->getEmail(), $title, $message, $header);
 				
@@ -215,7 +215,7 @@ class UsersController extends Kea_Action_Controller
 				
 				$message = "Your account for the ".SITE_TITLE." archive has been created.\n  Please login using your user name and password below.\n\n Username: ".$user->getUsername()." \n Password: $password \n\n  Be aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n".SITE_TITLE." Administrator";
 				$title = "Your account information for the ".SITE_TITLE." Archive";
-				$header = 'From: DONOTREPLY@hurricanearchive.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
+				$header = 'From: '.EMAIL. "\n" . 'X-Mailer: PHP/' . phpversion();
 
 				mail( $user->getEmail(), $title, $message, $header);
 				
@@ -248,7 +248,7 @@ class UsersController extends Kea_Action_Controller
 					// Send message
 					$message = "Your password for the ".SITE_TITLE." archive has been reset.\n  Please login using your user name and password below.\n\n Username: ".$user->getUsername()." \n Password: $new \n\n\n ".SITE_TITLE." Administrator";
 					$title = "Your account information for the ".SITE_TITLE." Archive";
-					$header = 'From: DONOTREPLY@hurricanearchive.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
+					$header = 'From: '.EMAIL. "\n" . 'X-Mailer: PHP/' . phpversion();
 					mail( $user->getEmail(), $title, $message, $header);
 					
 
@@ -297,7 +297,7 @@ class UsersController extends Kea_Action_Controller
 				$user = $this->findById($id);
 				$message = "Your password for the ".SITE_TITLE." archive has been reset.\n  Please login using your user name and password below.\n\n Username: ".$user->getUsername()." \n Password: $new1 \n\n\n ".SITE_TITLE." Administrator";
 				$title = "Your account information for the ".SITE_TITLE." Archive";
-				$header = 'From: DONOTREPLY@hurricanearchive.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
+				$header = 'From: '.EMAIL. "\n" . 'X-Mailer: PHP/' . phpversion();
 				mail( $user->getEmail(), $title, $message, $header);
 			endif;
 			
@@ -358,7 +358,6 @@ class UsersController extends Kea_Action_Controller
 				$this->redirect( WEB_ROOT.DS );
 		}
 	}
-	
 
 }
 
