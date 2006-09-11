@@ -146,7 +146,7 @@ class ObjectsController extends Kea_Action_Controller
 	 * @param bool $short_desc Show a short description of each object 
 	 * @param int $num_objects The number of objects per page
 	 * @param bool $check_location Include objects with valid location coordinates
-	 * @return Object_Collection Returns a collection of objects with the selected criteria
+	 * @return array Contains the following keys: 'total' => total # of objects found, 'page' => current page, 'per_page' => # per page, 'objects' => Object_Collection containing the objects found
 	 * @author Nate Agrin
 	 **/
 	protected function _paginate( $short_desc = true, $num_objects = 9, $check_location = false )
@@ -747,23 +747,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 		
 		
 			$files = File::add( $object->getId(), $object->contributor_id, 'objectfile', self::$_request->getProperty('File') );
-		
-			// HDMB HACK to make sure that contributed files get the right object type
-			$cat = $object->category_id;
-			if(empty($cat))
-			{
-				if(!$files)
-				{
-					$object->category_id = 1;
-				}
-				else
-				{
-	
-					if (getimagesize(ABS_VAULT_DIR.'/'.$files[0]->file_archive_filename)) $object->category_id = 3;
-					else $object->category_id = 2;
-				}
-			}
-		
 		
 			$object->save();
 		}

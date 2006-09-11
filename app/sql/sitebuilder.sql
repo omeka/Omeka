@@ -174,6 +174,7 @@ CREATE TABLE collections (
   collection_name			tinytext	NOT NULL,
   collection_description	text		NOT NULL,
   collection_active			tinyint(1)	UNSIGNED NOT NULL default '1', -- This may be switched to 0
+  collection_parent			int(11)		NULL,
   PRIMARY KEY  (collection_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -225,6 +226,7 @@ CREATE TABLE contributors (
 	contributor_other_relationship		text	NOT NULL,
 	contributor_residence				text	NOT NULL,
 	contributor_location_participate	text	NOT NULL,
+	contributor_institution				text	NOT NULL,
 	
 	
 	PRIMARY KEY (contributor_id)

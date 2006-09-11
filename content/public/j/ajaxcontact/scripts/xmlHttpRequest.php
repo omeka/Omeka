@@ -1,9 +1,9 @@
 <?php
 // change the 4 variables below
-$yourName = 'Jeremy Boggs';
-$yourEmail = 'jeremyboggs@gmail.com';
-$yourSubject = 'Katrina\'s Jewish Voices';
-$referringPage = 'http://chnm.gmu.edu/staff/nagrin/jwa/contact/';
+$yourName = '';
+$yourEmail = '';
+$yourSubject = '';
+$referringPage = '';
 // no need to change the rest unless you want to. You could add more error checking but I'm gonna do that later in the official release
 
 header('Content-Type: text/xml');

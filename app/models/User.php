@@ -96,9 +96,9 @@ class User extends Kea_Domain_Model
 			return false;
 		}
 		
-		$message = "Your account for the Katrina's Jewish Voice's archive has been created.\n  Please login using your user name and password below.\n\n Username: ".$this->getUsername()." \n Password: ".$this->nonsha1_password." \n\n\n Katrina Jewish Voice Administrator";
-		$title = "Your account information for the Katrina's Jewish Voices Archive";
-		$header = 'From: webmaster@jwa.org' . "\n" . 'X-Mailer: PHP/' . phpversion();
+		$message = "Your account for the ".INFO_TITLE." archive has been created.\n  Please login using your user name and password below.\n\n Username: ".$this->getUsername()." \n Password: ".$this->nonsha1_password." \n\n\n ".INFO_TITLE." Administrator";
+		$title = "Your account information for the ".INFO_TITLE." Archive";
+		$header = 'From: ' . "\n" . 'X-Mailer: PHP/' . phpversion();
 
 		mail( $this->getEmail(), $title, $message, $header);
 		return true;
@@ -120,22 +120,6 @@ class User extends Kea_Domain_Model
 									->where( 'contributor_id = ?', $this->contributor_id )
 									->execute();
 		return $contributors->getObjectAt(0);
-	}
-	
-	public static function newPublicUserFromContributor( $contributor )
-	{
-		$user = new self;
-		$user->contributor_id = $contributor->getId();
-		$user->user_email = $contributor->contributor_email;
-		$user->user_username = $user->user_email;
-		$user->setRandomPassword( 9 );
-		$user->user_first_name = $contributor->contributor_first_name;
-		$user->user_last_name = $contributor->contributor_last_name;
-		$user->user_active = 1;
-		$user->user_permission_id = 100;
-		$user->save();
-		$user->emailDetails();
-		return $user;
 	}
 	
 }

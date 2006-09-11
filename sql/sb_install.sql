@@ -216,6 +216,7 @@ CREATE TABLE collections (
 	collection_active		tinyint(1)	UNSIGNED NOT NULL default '0',
 	collection_featured		tinyint(1)	UNSIGNED NOT NULL default '0',
 	collection_collector	text		NULL,
+	collection_parent		int(11)		NULL,
 
 	PRIMARY KEY  (collection_id)
 

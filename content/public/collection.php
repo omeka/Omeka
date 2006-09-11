@@ -11,7 +11,7 @@ $collections = $__c->collections()->all( 'array' );
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Collection | Katrina's Jewish Voices</title>
+<title>Collection | <?php echo SITE_TITLE; ?></title>
 <?php include ('inc/metalinks.php'); ?>
 </head>
 
