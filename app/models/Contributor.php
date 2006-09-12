@@ -19,10 +19,6 @@ class Contributor extends Kea_Domain_Model
 	public $contributor_state;
 	public $contributor_zipcode;
 	public $contributor_occupation;
-	public $contributor_location_during;
-	public $contributor_location_before;
-	public $contributor_location_after;
-
 	public $contributor_institution;
 	public $contributor_ip_address;
 	
