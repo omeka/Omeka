@@ -105,6 +105,35 @@ abstract class Kea_Domain_Model
 	{
 		return $this->validationErrors;
 	}
+	
+	/**
+	 * Searches all properties to determine whether object exists in database
+	 * 
+	 * This will return the first match in the database (even with incomplete data, i.e. if only the email address is set, 
+	 * then it will return the first match for that email address).
+	 *
+	 * @return $this The domain object is returned 
+	 * @author Kris Kelly
+	 **/
+	public function findSelf()
+	{
+		if( !$this->getId() )
+		{
+			$select = $this->mapper()->find();
+			foreach( $this as $key => $value )
+			{
+				if( !empty($this->$key) )
+				{
+					$select->where("$key = ?", $value);
+				}
+			}
+			return $select->execute()->getObjectAt(0);
+		}
+		else
+		{
+			return $this;
+		}
+	}
 }
 
 ?>

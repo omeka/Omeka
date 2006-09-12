@@ -911,10 +911,16 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 	{
 		if (self::$_request->getProperty('batch_add_do')) {
 				$contributor = new Contributor(self::$_request->getProperty('contributor'));
-				//print_r($contributor);
 				if( $this->validates($contributor) ) 
 				{
-					$contributor->save();
+					if( $contributor->uniqueNameEmail() )
+					{
+						$contributor->save();	
+					}
+					else
+					{
+						$contributor = $contributor->findSelf();
+					}
 					self::$_request->setProperty('contributor_id', $contributor->contributor_id);
 					//echo self::$_request->getProperty('contributor_id');
 					if(self::$_request->getProperty('collection_id'))
@@ -1110,7 +1116,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 					}
 					
 					throw new Kea_Action_Exception( "Category is not sent for new objects.  Find a way of doing this");
-					
 				
 				
 					//Move the file from the dropbox to the vault directory
