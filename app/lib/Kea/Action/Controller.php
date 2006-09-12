@@ -56,7 +56,9 @@ abstract class Kea_Action_Controller extends Kea_Controller_Base
 	public function redirect( $redirect_to )
 	{
 		header( "Location: " . $redirect_to );
-		exit();
+		//When you comment this out, uncaught exceptions are processed.  If this stays in, they are dropped
+		//after all calls to redirect()
+		//exit();
 	}
 	
 	public function validates( Kea_Domain_Model $object )
