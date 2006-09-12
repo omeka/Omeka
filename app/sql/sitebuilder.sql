@@ -48,7 +48,7 @@ CREATE TABLE objects (
 	user_id						int(11)		UNSIGNED NULL,
 	
 	PRIMARY KEY  (object_id)
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS objectsCount;
 CREATE TABLE objectsCount (
@@ -76,7 +76,7 @@ CREATE TABLE objectTypes (
 	objectType_id						int(11) UNSIGNED NOT NULL auto_increment,
   	objectType_name						tinytext NOT NULL,
 	PRIMARY KEY  (objectType_id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dublin core object types
@@ -109,7 +109,7 @@ CREATE TABLE categories (
 	category_description				text		NOT NULL,
 	category_active						tinyint(1)	UNSIGNED NOT NULL default '1', -- This may be switched to 0
 	PRIMARY KEY  (category_id)
-)   ENGINE = innodb DEFAULT CHARSET=latin1;
+)   ENGINE = innodb DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,7 @@ CREATE TABLE categories (
 	CREATE TABLE objects_categories (
 	  object_id				int(11) UNSIGNED NOT NULL,
 	  category_id			int(11) UNSIGNED NOT NULL
-	) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 */
 
@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS categories_metaFields;
 CREATE TABLE categories_metaFields (
   category_id					int(11) UNSIGNED NOT NULL,
   metaField_id					int(11) UNSIGNED NOT NULL
-) ENGINE = innodb DEFAULT CHARSET=latin1;
+) ENGINE = innodb DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS metaFields;
 CREATE TABLE metaFields (
@@ -148,7 +148,7 @@ CREATE TABLE metaFields (
 #	metaField_type				varchar(100)	NOT NULL,
 	metaField_description		text			NOT NULL,
 	PRIMARY KEY (metaField_id)
-) ENGINE = innodb DEFAULT CHARSET=latin1;
+) ENGINE = innodb DEFAULT CHARSET=utf8;
 
 --
 -- May need to keep this table MyISAM for full-text searches
@@ -160,7 +160,7 @@ CREATE TABLE metaText (
 	object_id					int(11)			UNSIGNED NOT NULL,
 	metaText_text				text			NOT NULL,
 	PRIMARY KEY (metaText_id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -170,19 +170,18 @@ CREATE TABLE metaText (
 DROP TABLE IF EXISTS collections;
 CREATE TABLE collections (
   collection_id				int(11)		UNSIGNED NOT NULL auto_increment,
-  collection_parent_id		int(11)		UNSIGNED NULL,
   collection_name			tinytext	NOT NULL,
   collection_description	text		NOT NULL,
   collection_active			tinyint(1)	UNSIGNED NOT NULL default '1', -- This may be switched to 0
-  collection_parent			int(11)		NULL,
+  collection_parent			int(11)		UNSIGNED NULL,
   PRIMARY KEY  (collection_id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS objects_collections;
 CREATE TABLE objects_collections (
 	object_id				int(11)		UNSIGNED NOT NULL,
 	collection_id			int(11)		UNSIGNED NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -230,7 +229,7 @@ CREATE TABLE contributors (
 	
 	
 	PRIMARY KEY (contributor_id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -293,7 +292,7 @@ CREATE TABLE files (
 	file_added					timestamp	NOT NULL default '0000-00-00 00:00:00',
 #	file_active					int(1)		UNSIGNED NOT NULL default '1',
   PRIMARY KEY  (file_id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -307,7 +306,7 @@ CREATE TABLE permissions (
   permission_name			tinytext	NOT NULL,
   permission_description	text		NOT NULL,
   PRIMARY KEY  (permission_id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -327,7 +326,7 @@ CREATE TABLE users (
   user_permission_id	int(11)		UNSIGNED NOT NULL default '100',
   user_active			int(1)		UNSIGNED NOT NULL default '1',
   PRIMARY KEY  (user_id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Geolocation

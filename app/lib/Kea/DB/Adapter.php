@@ -54,7 +54,17 @@ class Kea_DB_Adapter
 		if( KEA_LOG_SQL === true ) {
 			Kea_Logger::logSQL( $sql );
 		}
-		return self::$_db->query( $sql );
+		
+		$query = self::$_db->query( $sql );
+		echo $this->error();
+		if ( $this->error() )
+		{
+			throw new Kea_DB_Adapter_Exception ( $this->error() );
+		}
+		else
+		{
+			return $query;
+		}
     }
 
 	public function prepSQL( $sql )
