@@ -271,7 +271,7 @@ class Object extends Kea_Domain_Model
 		$this->getFiles();
 		$fileDesc = @$this->files->getObjectAt(0)->file_description;
 		$objectDesc = $this->object_description;
-		elseif(!empty($fileDesc))
+		if(!empty($fileDesc))
 		{
 			return $fileDesc;
 		}

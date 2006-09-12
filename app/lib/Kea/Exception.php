@@ -7,6 +7,9 @@
  */
 class Kea_Exception extends Exception
 {
+	//Should be changed to the site administrator
+	protected $email = 'kkelly7@gmu.edu';
+	
 	public function __toString()
 	{
 		$string = 'Error: ';
@@ -27,6 +30,18 @@ class Kea_Exception extends Exception
 				// Error reporting turned off
 			default:
 			break;
+		}
+		
+		if( KEA_EMAIL_ERRORS )
+		{
+			$msg  = 'Error: '.'Trace: ' . $this->getTraceAsString() . "\n";
+			$msg .= 'In file: ' . $this->getFile() . "\n";
+			$msg .= 'On line: ' . $this->getLine() . "\n";
+			$msg .= $this->getMessage();
+			$header = "From: {$this->email}\nX-Mailer: PHP/" . phpversion();
+			$title = "[".SITE_TITLE."] ".$this->getMessage();
+			mail($this->email, $title, $msg, $header);
+			$string .= "\nError occurred, an administrator has been notified.";
 		}
 		return $string;
 	}

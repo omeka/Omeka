@@ -34,16 +34,17 @@ define( 'CONTROLLER_DIR_NAME',	'controllers' );
 define( 'VAULT_DIR_NAME',		'vault' );
 define( 'THUMBNAIL_DIR_NAME',	'thumbnails' );
 define( 'LOG_DIR_NAME',			'logs' );
+define( 'DROPBOX_DIR_NAME',        'dropbox' );
 
 /*
 	Absolute directory locations
 */
 define( 'ABS_APP_DIR',			ABS_ROOT.DS.APP_DIR_NAME );
 define( 'ABS_CONTROLLER_DIR',	ABS_APP_DIR.DS.CONTROLLER_DIR_NAME );
-
 define( 'ABS_CONTENT_DIR',		ABS_ROOT.DS.CONTENT_DIR_NAME );
 define( 'ABS_VAULT_DIR',		ABS_CONTENT_DIR.DS.VAULT_DIR_NAME );
 define( 'ABS_THUMBNAIL_DIR',	ABS_CONTENT_DIR.DS.THUMBNAIL_DIR_NAME );
+define( 'ABS_DROPBOX_DIR',      ABS_CONTENT_DIR.DS.DROPBOX_DIR_NAME );
 
 /*
 	Google Maps key
@@ -70,6 +71,7 @@ define( 'KEA_LOGINS_LOG',		ABS_LOG_DIR.DS.'logins.log' );
 define( 'KEA_LOG_SQL',			false );
 define( 'KEA_LOG_ERRORS',		false );
 define( 'KEA_LOG_LOGINS',		false );
+define( 'KEA_EMAIL_ERRORS', 	true );
 
 /*
 	Web specific settings for use in linking in files, link generation, etc.
