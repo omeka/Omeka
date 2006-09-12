@@ -43,6 +43,11 @@ class Kea_Exception extends Exception
 			mail($this->email, $title, $msg, $header);
 			$string .= "\nError occurred, an administrator has been notified.";
 		}
+		
+		if( KEA_LOG_ERRORS )
+		{
+			Kea_Logger::logError($this);
+		}
 		return $string;
 	}
 }
