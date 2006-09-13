@@ -41,7 +41,10 @@ class CollectionsController extends Kea_Action_Controller
 	private function commitForm()
 	{
 		$collection = new Collection( self::$_request->getProperty( 'collection' ) );
-		
+		if( empty($collection->collection_parent) )
+		{
+			$collection->collection_parent = 'NULL';
+		}
 		if( $this->validates( $collection ) ) {
 			return $collection->save();
 		}
@@ -160,7 +163,8 @@ class CollectionsController extends Kea_Action_Controller
 
 		$mapper = new Collection_Mapper();
 		if( empty($obj_id) || empty($coll_id) ) {
-			throw new Kea_Exception( 'Please choose a collection to assign the objects.' );
+			self::$_session->flash('Please choose a collection to assign the objects.');
+			return null;
 		} 
 		return $mapper->addToCollection( $obj_id, $coll_id );
 	}

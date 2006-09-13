@@ -1117,7 +1117,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 					
 					throw new Kea_Action_Exception( "Category is not sent for new objects.  Find a way of doing this");
 				
-				
 					//Move the file from the dropbox to the vault directory
 					
 					if(!rename($old_path, $new_path))

@@ -10,11 +10,13 @@ class AccountsController extends Kea_Action_Controller
 			$new2 = self::$_request->getProperty( 'new_password_2' );
 
 			if( empty( $new1 ) || empty( $new2 ) || empty( $old ) ) {
-				throw new Kea_Exception( 'You must enter the information in all fields on the form.' );
+				self::$_session->flash( 'You must enter the information in all fields on the form.' );
+				return;
 			}
 
 			if( $new1 !== $new2 ) {
-				throw new Kea_Exception( 'The new passwords do not match.' );
+				self::$_session->flash( 'The new passwords do not match.' );
+				return;
 			}
 			
 			$mapper = new User_Mapper;

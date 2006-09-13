@@ -96,20 +96,30 @@ class UsersController extends Kea_Action_Controller
 		$user->user_last_name = self::$_request->getProperty( 'user_last_name' );
 		$user->user_institution = self::$_request->getProperty( 'user_institution' );
 		
-		// Update associated contributor
-		$contributor = $user->getContributor();
-		$contributor->contributor_first_name = $user->user_first_name;
-		$contributor->contributor_last_name = $user->user_last_name;
-		$contributor->save();
-		
-		
-		if (self::$_request->getProperty( 'oldPassword' )):
-			if (sha1(self::$_request->getProperty( 'oldPassword' )) == $user->user_password):
-				$user->user_password = sha1(self::$_request->getProperty( 'newPassword' ));
-			endif;
-		endif;
-		
 		$user->save();
+		// Update associated contributor
+		if( $contributor = @$user->getContributor() )
+		{
+			$contributor->contributor_first_name = $user->user_first_name;
+			$contributor->contributor_last_name = $user->user_last_name;
+			$contributor->save();
+		}
+
+		
+		
+		if (self::$_request->getProperty( 'old_password' ))
+		{
+			self::$_request->setProperty('change_password', 1);
+			$this->_changePassword();
+		}
+		
+		$user = $this->findById( $user->getId() );
+		if( self::$_session->getUser()->getId() == $user->getId() )
+		{
+			self::$_session->setValue('logged_in_user', $user);
+		}
+		
+		return $user;
 	}
 
 	protected function _adminEdit()
@@ -269,37 +279,52 @@ class UsersController extends Kea_Action_Controller
 
 		if( self::$_request->getProperty( 'change_password' ) ) {
 			
-			
 			$new1 = self::$_request->getProperty( 'new_password_1' );
 			$new2 = self::$_request->getProperty( 'new_password_2' );
 
+			$id = self::$_request->getProperty( 'user_id' );
+			$user = $this->findById($id);
+			if( empty($id) )
+			{
+				self::$_session->flash('Could not find user to edit');
+				return $user;
+			}
+			if( !self::$_session->isSuper() && $id != self::$_session->getUser()->getId() )
+			{
+				self::$_session->flash('User may not edit information of other users');
+				return $user;
+			}
+			
 			// Superuser doesn't have to enter an old password
-			if (self::$_session->isSuper()):
-				$id = self::$_request->getProperty( 'user_id' );
+			if (self::$_session->isSuper())
+			{
 				//$user = $this->findById($id);
 				$old = null;
-			else:
+			}	
+			else
+			{
 				$old = self::$_request->getProperty( 'old_password' );		
 				if( empty( $new1 ) || empty( $new2 ) || empty( $old ) ) {
 					self::$_session->flash( 'You must enter the information in all fields on the form.' );
-					return;
+					return $user;
 				}
-			endif;
+			}
 
 			if( $new1 !== $new2 ) {
 				self::$_session->flash('The new passwords do not match.');
-				return;
+				return $user;
 			}
 			
-			if ($this->doChangePassword( $id, $old, $new1 )):
-				
+			if ($this->doChangePassword( $id, $old, $new1 ))
+			{
 				// Send message
 				$user = $this->findById($id);
 				$message = "Your password for the ".SITE_TITLE." archive has been reset.\n  Please login using your user name and password below.\n\n Username: ".$user->getUsername()." \n Password: $new1 \n\n\n ".SITE_TITLE." Administrator";
 				$title = "Your account information for the ".SITE_TITLE." Archive";
 				$header = 'From: '.EMAIL. "\n" . 'X-Mailer: PHP/' . phpversion();
 				mail( $user->getEmail(), $title, $message, $header);
-			endif;
+				return $user;
+			}
 			
 		} else {
 				return $this->findById();
@@ -309,29 +334,33 @@ class UsersController extends Kea_Action_Controller
 	private function doChangePassword( $user_id, $old, $new )
 	{
 		$mapper = new User_Mapper;
-			
 		// Superuser doesn't have to enter an old password
-		if (!self::$_session->isSuper()):		
-			$select = $mapper->select();
-			$select->from( 'users', 'user_id' )
-					->where( 'user_id = ?', $user_id )
-					->where( 'user_password = SHA1( ? )', $old );
+		if (!self::$_session->isSuper())
+		{
+			$stmt = $mapper->select()
+				->where( 'user_id = ?', $user_id )
+				->where( 'user_password = SHA1( ? )', $old );
 
-			$result = self::$_adapter->fetchOne( $select );
+			$result = $mapper->query( $stmt );
+			$user = @$mapper->load( $result );
+			$resultId = @$user->getId();
 
-			if( $result != $user_id ) {
+			if( $resultId != $user_id ) {
 				self::$_session->flash('Incorrect old password.');
 				return false;
 			}
-		endif;
-		
-		$sql = "UPDATE users SET user_password = SHA1('$new') WHERE user_id = '$user_id'";
-		if( $mapper->query( $sql ) ) {
-			return true;
-		} else {
-			self::$_session->flash( self::$_adapter->error() );
-			return false;
 		}
+		else
+		{
+			$user = $this->findById($user_id);
+		}
+
+		if( empty($user->contributor_id) ){$user->contributor_id = 'NULL';} 
+		$user->user_password = sha1($new);
+		$user->save();
+		self::$_session->flash( 'User password has been changed successfully.');
+		return true;
+		
 	}
 	
 	
