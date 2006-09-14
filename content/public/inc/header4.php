@@ -1,6 +1,6 @@
 <div id="branding">
 	<div class="padding">
-	<h1 id="kjv-logo"><a href="<?php echo $_link->to(); ?>">Katrina&#8217;s Jewish Voices</a></h1>
+	<h1 id="logo"><a href="<?php echo $_link->to(); ?>"><?php echo SITE_TITLE; ?></a></h1>
 	<div id="meta2">
 		<form id="quicksearch">
 			<label class="hide" for="searchinput">Search</label>

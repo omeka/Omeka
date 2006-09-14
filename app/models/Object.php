@@ -254,13 +254,14 @@ class Object extends Kea_Domain_Model
 	}
 	
 	/**
-	 * Implemented for HDMB, find a usable description somewhere in the extended data for the object
+	 * standard accessor method for object descriptions
 	 *
-	 * Priority is currently chosen in this order: image/file description meta_text, story meta_text, file_description, object_description
-	 * Probably not a good solution, but to find metaDesc it searches metafield names for 'Description'
-	 * Please change in new implementations of Sitebuilder
+	 * Has been changed to support use of the file_description instead of object description,
+	 * provided at least one of them is valid.  Can also be modified to pull descriptions from metadata,
+	 * which is useful for stories, etc. where the main text is not in the object_description.  Basically
+	 * this is a convenience function.
 	 * 
-	 * Regardless it is good to keep this as a standard accessor method for object descriptions
+	 * Priority is currently chosen in this order: file_description, object_description
 	 * 
 	 * @return mixed The string description of the object, otherwise false
 	 * @author Kris Kelly
@@ -268,22 +269,9 @@ class Object extends Kea_Domain_Model
 	public function getDesc()
 	{
 		$this->getFiles();
-		$this->getCategoryMetadata();
-		$fileDesc = $this->files->getObjectAt(0)->file_description;
+		$fileDesc = @$this->files->getObjectAt(0)->file_description;
 		$objectDesc = $this->object_description;
-		$metaDesc = NULL;
-		foreach($this->category_metadata as $m)
-		{
-			if(strstr($m['metafield_name'], 'Description') || $m['metafield_name'] == 'Story Text')
-			{
-				$metaDesc = $m['metatext_text'];
-			}
-		}
-		if(!empty($metaDesc))
-		{
-			return $metaDesc;
-		}
-		elseif(!empty($fileDesc))
+		if(!empty($fileDesc))
 		{
 			return $fileDesc;
 		}

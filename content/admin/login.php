@@ -7,7 +7,7 @@ $__c->admin()->protect();
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Katrina's Jewish Voices -Admin-</title>
+	<title><?php echo SITE_TITLE; ?> -Admin-</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta http-equiv="Content-Language" content="en-us" />
 	<meta name="Copyright" content="Copyright (c) CHNM - Center for History and New Media chnm.gmu.edu" />
@@ -27,7 +27,7 @@ $__c->admin()->protect();
 			<input type="password" name="password" id="password"/>
 			<input type="submit" name="user_login" value="Login" id="login_submit"/>
 		</fieldset>
-		<p style="text-align:center;">If you have trouble logging in, please <a href="mailto:webmaster@jwa.org">contact us</a></p>
+		<p style="text-align:center;">If you have trouble logging in, please <a href="mailto:">contact us</a></p>
 	</form>
 	<?php else: ?>
 	<form method="post" action="<?php echo $_link->to('logout'); ?>">

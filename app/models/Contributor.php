@@ -19,10 +19,6 @@ class Contributor extends Kea_Domain_Model
 	public $contributor_state;
 	public $contributor_zipcode;
 	public $contributor_occupation;
-	public $contributor_location_during;
-	public $contributor_location_before;
-	public $contributor_location_after;
-
 	public $contributor_institution;
 	public $contributor_ip_address;
 	
@@ -38,22 +34,6 @@ class Contributor extends Kea_Domain_Model
 		{
 			$this->parseName($array['contributor_full_name']);
 		}
-		
-		if ( isset( $array['contributor_institution'] ) 
-			&& !empty( $array['contributor_institution'] ) )
-		{
-			if ( isset( $array['contributor_first_name'] )
-				&& empty( $array['contributor_first_name'] ) )
-			{
-				$array['contributor_first_name'] = 'NULL';
-			}
-			if ( isset( $array['contributor_last_name'] )
-			&& empty( $array['contributor_last_name'] ) ) 
-			{
-				$array['contributor_last_name'] = 'NULL';
-			}
-		} 
-		
 		parent::__construct($array);
 	}
 	

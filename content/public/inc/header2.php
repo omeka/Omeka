@@ -1,8 +1,7 @@
 <div id="branding">
 	<div class="padding">
 
-	<h1 id="kjv-logo"><a href="<?php echo $_link->to(); ?>">Katrina&#8217;s Jewish Voices</a></h1>
-	<img id="menorah" src="<?php echo $_link->in('menorah1.jpg','i'); ?>" alt="Image of a broken menorah." />
+	<h1 id="logo"><a href="<?php echo $_link->to(); ?>"><?php echo SITE_TITLE; ?></a></h1>
 	<div id="meta">
 		<form id="quicksearch" method="GET" action="<?php echo $_link->to('browse'); ?>">
 			<label class="hide" for="search">Search</label>

@@ -18,7 +18,7 @@ $users = $__c->users()->all( 'array' , 'alpha');
 
 <br/>
 
-<table id="usertable" summary="A list of users for Katrina's Jewish Voices.">
+<table id="usertable" summary="A list of users">
 <thead>
 <tr>
 <th scope="col">Username</th>

@@ -86,7 +86,7 @@ CREATE TABLE objects (
 	INDEX		(collection_id),
 	INDEX		(user_id)
 
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 CREATE TRIGGER object_added BEFORE INSERT ON objects
 FOR EACH ROW
@@ -95,7 +95,7 @@ FOR EACH ROW
 DROP TABLE IF EXISTS objectsTotal;
 CREATE TABLE objectsTotal (
 	total	int(11)		NOT NULL default 0
-);
+) DEFAULT CHARSET=utf8;
 INSERT INTO objectsTotal (total) VALUES (0);
 
 CREATE TRIGGER objects_plus AFTER INSERT ON objects
@@ -122,7 +122,7 @@ CREATE TABLE categories (
 
 	PRIMARY KEY  (category_id)
 
-)   ENGINE = innodb DEFAULT CHARSET=latin1;
+)   ENGINE = innodb DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -140,7 +140,7 @@ CREATE TABLE metafields (
 
 	PRIMARY KEY (metafield_id)
 
-) ENGINE = innodb DEFAULT CHARSET=latin1;
+) ENGINE = innodb DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS categories_metafields;
 CREATE TABLE categories_metafields (
@@ -150,7 +150,7 @@ CREATE TABLE categories_metafields (
 	INDEX (metafield_id),
 	FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (metafield_id) REFERENCES metafields(metafield_id) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = innodb DEFAULT CHARSET=latin1;
+) ENGINE = innodb DEFAULT CHARSET=utf8;
 
 --
 -- May need to keep this table MyISAM for full-text searches
@@ -169,7 +169,7 @@ CREATE TABLE metatext (
 	FOREIGN KEY (metafield_id) REFERENCES metafields(metafield_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE
 	
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -196,11 +196,12 @@ CREATE TABLE contributors (
 	contributor_state					varchar(16)		NULL,
 	contributor_zipcode					varchar(10)		NULL,
 	contributor_occupation				varchar(255)	NULL,
+-- Specific to HDMB, remove if necessary
 	contributor_institution				varchar(255)    NULL,
-	
+	contributor_ip_address				varchar(15)		NULL,
 	PRIMARY KEY (contributor_id)
 
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -216,10 +217,11 @@ CREATE TABLE collections (
 	collection_active		tinyint(1)	UNSIGNED NOT NULL default '0',
 	collection_featured		tinyint(1)	UNSIGNED NOT NULL default '0',
 	collection_collector	text		NULL,
+	collection_parent		int(11)		UNSIGNED NULL,
 
 	PRIMARY KEY  (collection_id)
 
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -281,7 +283,7 @@ CREATE TABLE files (
 	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE
 
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 CREATE TRIGGER file_added BEFORE INSERT ON files
 FOR EACH ROW
@@ -308,7 +310,7 @@ CREATE TABLE users (
 
   PRIMARY KEY  (user_id)
 
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 --
 -- Geolocation
@@ -330,7 +332,7 @@ CREATE TABLE location(
 	INDEX		(object_id),
 	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE
 
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 --
 -- Tags
@@ -341,7 +343,7 @@ CREATE TABLE tags(
 	tag_id			int(11)			UNSIGNED NOT NULL auto_increment,
 	tag_name		varchar(255)	NOT NULL,
 	PRIMARY KEY(tag_id)
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS objects_tags;
 CREATE TABLE objects_tags(
@@ -354,7 +356,7 @@ CREATE TABLE objects_tags(
 	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=innodb DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS objects_favorites;
 CREATE TABLE objects_favorites(
@@ -365,7 +367,7 @@ CREATE TABLE objects_favorites(
 	INDEX	(user_id),
 	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = innodb DEFAULT CHARSET=latin1;
+) ENGINE = innodb DEFAULT CHARSET=utf8;
 
 CREATE TRIGGER fav_added BEFORE INSERT ON objects_favorites
 FOR EACH ROW

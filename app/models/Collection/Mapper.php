@@ -40,7 +40,8 @@ class Collection_Mapper extends Kea_DB_Mapper
 				array(	'object_id' => $object_id,
 				 		'collection_id' => $collection_id ) );	
 		} else {
-			throw new Kea_DB_Mapper_Exception( 'This object is already in this collection.' );
+			self::$_session->flash( 'This object is already in this collection.' );
+			return null;
 		}
 	}
 

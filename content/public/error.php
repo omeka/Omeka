@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Error | Katrina's Jewish Voices</title>
+<title>Error | <?php echo SITE_TITLE;?></title>
 <?php include ('inc/metalinks.php'); ?>
 <style type="text/css" media="screen">
 #object-sidebar {display:block; float:right; width: 252px;}
