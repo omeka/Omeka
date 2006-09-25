@@ -8,7 +8,7 @@
 class Kea_Exception extends Exception
 {
 	//Should be changed to the site administrator
-	protected $email = 'kkelly7@gmu.edu';
+	protected $email = '';
 	
 	public function __toString()
 	{

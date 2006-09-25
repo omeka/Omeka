@@ -22,10 +22,10 @@ class Contributor extends Kea_Domain_Model
 	public $contributor_institution;
 	public $contributor_ip_address;
 	
-	protected $validate		=	array(//	'contributor_first_name'		=> array( '/(\w)+/', 'Please provide a first name.' ),
-									//	'contributor_last_name'			=> array( '/(\w)+/', 'Please provide a last name.' ),
-									//	'contributor_email'				=> array( '/^([[:alnum:]][-a-zA-Z0-9_%\.]*)?[[:alnum:]]@[[:alnum:]][-a-zA-Z0-9%\.]*\.[[:alpha:]]{2,}$/', 'The email address you provided is not valid.' ),
-									//	'contributor_contact_consent'	=> array( '/^(yes)$|^(no)$|^(unknown)$/', 'Contributors must be assigned valid contact consent [yes, no, or unknown].') 
+	protected $validate		=	array(	'contributor_first_name'		=> array( '/(\w)+/', 'Please provide a first name.' ),
+										'contributor_last_name'			=> array( '/(\w)+/', 'Please provide a last name.' ),
+										'contributor_email'				=> array( '/^([[:alnum:]][-a-zA-Z0-9_%\.]*)?[[:alnum:]]@[[:alnum:]][-a-zA-Z0-9%\.]*\.[[:alpha:]]{2,}$/', 'The email address you provided is not valid.' ),
+										'contributor_contact_consent'	=> array( '/^(yes)$|^(no)$|^(unknown)$/', 'Contributors must be assigned valid contact consent [yes, no, or unknown].') 
 									);
 
 	public function __construct( $array = null )
@@ -69,6 +69,50 @@ class Contributor extends Kea_Domain_Model
 			return false;
 		}
 		return true;
+	}
+	
+	public function uniqueNameEmailInstitution()
+	{
+		$mapper = $this->mapper();
+		$select = $mapper->find();
+		if($this->contributor_email != 'NULL') 			{ $select->where( 'contributor_email = ?', $this->contributor_email ); }
+		if($this->contributor_first_name != 'NULL') 	{ $select->where( 'contributor_first_name = ?', $this->contributor_first_name ); }				
+		if($this->contributor_last_name != 'NULL') 		{ $select->where( 'contributor_last_name = ?', $this->contributor_last_name ); }
+		if( property_exists(get_class($this), 'contributor_institution') 
+			&& !empty( $this->contributor_institution ) ) { $select->where( 'contributor_institution = ?', $this->contributor_institution ); }			
+		echo $select;
+		$res = $select->execute();
+		if( $res->total() > 0 )
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Finds the rest of the database entry given possible unique info
+	 * A typical sequence might be if( !this->uniqueNameEmail() ) $this->findUniqueID();  
+	 * this should really be a part of the above function but it would break existing functionality to combine them 
+	 * 
+	 * @return void
+	 * @author Kris Kelly
+	 **/
+	public function findUnique()
+	{
+		$mapper = $this->mapper();
+		$select = $mapper->find();
+		if($this->contributor_email != 'NULL') 			{ $select->where( 'contributor_email = ?', $this->contributor_email ); }
+		if($this->contributor_first_name != 'NULL') 	{ $select->where( 'contributor_first_name = ?', $this->contributor_first_name ); }				
+		if($this->contributor_last_name != 'NULL') 		{ $select->where( 'contributor_last_name = ?', $this->contributor_last_name ); }
+		if( property_exists(get_class($this), 'contributor_institution') 
+			&& !empty( $this->contributor_institution ) ) { $select->where( 'contributor_institution = ?', $this->contributor_institution ); }			
+		$res = $select->execute();
+		if($res->total() == 1)
+		{
+			return $res->getObjectAt(0);
+			//print_r($this); exit;
+		}
+		else return false;
 	}
 	
 	public function parseName($fullname)
@@ -146,6 +190,7 @@ class Contributor extends Kea_Domain_Model
 			return $this->contributor_first_name . ' ' . $this->contributor_last_name;
 		}
 	}
+
 }
 
 ?>

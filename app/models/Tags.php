@@ -10,8 +10,9 @@ class Tags extends Kea_Plugin implements Iterator
 	public $user_id;
 	public $tags		= array();
 
-	protected $_validate = array(	'object_id' => array( '/([0-9])+/', 'The object_id must be set.' ),
-	 								'user_id'	=> array( '/([0-9]+)/', 'The user_id must be set.' ) );
+	protected $_validate = array(	'object_id' => array( '/([0-9])+/', 'The object_id must be set.' )
+	 						//		'user_id'	=> array( '/([0-9]+)/', 'The user_id must be set.' )
+	 							);
 
 	protected $total	= 0;
 	protected $pointer	= 0;
@@ -127,10 +128,10 @@ class Tags extends Kea_Plugin implements Iterator
 			return false;
 		}
 		
-		if( !isset( $this->user_id ) )
+	/*	if( !isset( $this->user_id ) )
 		{
 			return false;
-		}
+		} */
 		
 		if( count( $this->tags ) == 0 )
 		{

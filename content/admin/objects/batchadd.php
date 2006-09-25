@@ -38,6 +38,19 @@ Contents of dropbox:
 
 ?>
 <form method="post" action="<?php echo $_link->to('objects', 'batchadd'); ?>">
+	<fieldset class="formElement">
+	<label for="category">Object Category / Type</label><br/>
+	<?php
+		$_form->select( array(	'name'		=> 'Object[category_id]',
+								'id'		=> 'category_id',
+								'onchange'	=> 'getData(this.value, "ajax_category_form")' ),
+						$__c->categories()->all( 'array' ),
+						@$saved['Object']['category_id'],
+						'category_id',
+						'category_name' );
+	?>
+	</fieldset>
+	
 	<fieldset>
 	<legend>Collection settings</legend>
 		<label class="checkboxlabel" for="collection_active">New collections are active by default:<input type="checkbox" name="collection[collection_active]" id="collection_active" checked="checked" /></label>
@@ -164,6 +177,36 @@ Contents of dropbox:
 		?>
 	
 	<?php //include( ABS_CONTENT_DIR.ADMIN_THEME_DIR.DS.'contributors'.DS.'form.php' ); ?>
+	</fieldset>
+	<fieldset>
+		<legend>Location info (optional)</legend>
+		<label for="zipcode">Zipcode</label>
+		<?php 
+				$_form->text(
+								array(	'size'	=> '6',
+										'id'	=> 'zipcode',
+										'class' => 'textinput',
+										'name'	=> 'Location[zipcode]' ) );
+				
+		?>
+		<label for="latitude">Latitude</label>
+		<?php 
+				$_form->text(
+								array(	'size'	=> '10',
+										'id'	=> 'latitude',
+										'class' => 'textinput',
+										'name'	=> 'Location[latitude]' ) );
+				
+		?>
+		<label for="longitude">Longitude</label>
+		<?php 
+				$_form->text(
+								array(	'size'	=> '10',
+										'id'	=> 'longitude',
+										'class' => 'textinput',
+										'name'	=> 'Location[longitude]' ) );
+				
+		?>
 	</fieldset>
 		<?php
 		$_form->hidden( array( 'name' => 'Object[object_contributor_posting]',

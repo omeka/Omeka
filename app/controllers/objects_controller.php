@@ -41,7 +41,8 @@ class ObjectsController extends Kea_Action_Controller
 
 		$mapper = new Object_Mapper;
 		$select = $mapper->find()
-						->where( 'object_id > ?', $id );
+						->where( 'object_id > ?', $id )
+						->limit(1);
 		$this->applyPermissions( $select );
 		$obj = $select->execute()->getObjectAt(0);
 
@@ -75,7 +76,8 @@ class ObjectsController extends Kea_Action_Controller
 		$mapper = new Object_Mapper;
 		$select = $mapper->find()
 						->where( 'object_id < ?', $id )
-						->order( array( 'object_id' => 'DESC' ) );
+						->order( array( 'object_id' => 'DESC' ) )
+						->limit(1);
 		$this->applyPermissions( $select );
 		$obj = $select->execute()->getObjectAt(0);
 
@@ -566,75 +568,73 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 		}
 		
 
-		if( empty( $object->contributor_id ) )
+		// Else, try to match contributor by logged-in ID
+		// If the object's contributor ID is not set, then try to grab contributor info from the form.
+		// make a new contributor if its unique, otherwise find the pre-existing one, then take the ID
+		// from the one it found and attach that to the object.  If that doesn't work, then we try to get
+		// or make new contributor info from the user who is logged in [JMG addition]  
+		//If the object's contributor ID is still null, then just go ahead and set it to 'NULL' string
+
+		if( empty($object->contributor_id) )
 		{
-			$object->contributor_id = 'NULL';
-		}		
-		// Create contributor
-		$contributor = new Contributor( self::$_request->getProperty( 'Contributor' ) );
-		
-		if(empty($contributor->contributor_id) && self::$_request->getProperty('object_add'))
-		{
-			
-			// Try to match contributor by e-mail
-			if ($contributor->contributor_email)
+			if( self::$_request->getProperty('object_add') )
 			{
-				$email = $contributor->contributor_email;
-				if( $this->validates($contributor) )
+				if( self::$_request->getProperty('Contributor' ) )
 				{
-					// If the contributor's e-mail is unique, grab the contributor ID of the existing contributor
-					if( $contributor->uniqueNameEmail() )
+					$contributor = new Contributor( self::$_request->getProperty( 'Contributor' ) );
+	
+					$email = $contributor->contributor_email;
+					if( $this->validates($contributor) )
 					{
-						$contributor->save();
-						$object->contributor_id = $contributor->contributor_id;
+						if( $contributor->uniqueNameEmail() )
+						{
+							$contributor->save();
+						}
+						elseif(!empty($email))
+						{
+							$contributor = $contributor->findUnique();
+						}
+					
 					}
-					elseif(!empty($email))
+					if( !empty($contributor->contributor_id) )
 					{
-						$contributor->contributor_id = $contributor->findIDBy('contributor_email', $contributor->contributor_email);
 						$object->contributor_id = $contributor->contributor_id;
-					}	
-					else
-					{
-							$contributor_a = $contributor->mapper()->find( "contributor_id" )
-									->where( "contributor_first_name = ?", $contributor->contributor_first_name )
-									->where( "contributor_last_name = ?", $contributor->contributor_last_name)
-									->execute();
-							$object->contributor_id = $contributor_a->contributor_id;
-					}
-				
-
+					}					
 				}
+				elseif ( $user = self::$_session->getUser() )
+          		{   
+	              // If the user has a contributor ID attached, then hand it to the object
+	              	if ($contributor = $user->getContributor())
+	              	{
+	                   $object->contributor_id = $user->contributor_id;
+	              	}
+	              // If the user doesn't have a contributor ID attached, make a new one
+	            	else
+	             	{
+	                   $contributor = new Contributor();
+	                   $contributor->contributor_first_name = $user->user_first_name;
+	                   $contributor->contributor_last_name = $user->user_last_name;
+	                   $contributor->contributor_email = $user->user_email;
+					   $contributor->contributor_contact_consent = 'no';
+						if( $contributor->validates() )
+						{
+		                   $contributor->save();
+
+		                   // Attach the new contributor to the logged-in user
+		                   $user->contributor_id = $contributor->contributor_id;
+		                   $user->save();                   
+
+		                   // Attach the new contributor to the new object
+		                   $object->contributor_id = $user->contributor_id;							
+						}
+
+	               }
+          		}
 			}
-			
-			// Else, try to match contributor by logged-in ID
-			elseif ( $user = self::$_session->getUser() )
-			{	
-				
-				
-				
-				// If the user has a contributor ID attached, then hand it to the object
-				if ($user->getContributor())
-				{
-					$object->contributor_id = $user->contributor_id;
-				}
-				
-				// If the user doesn't have a contributor ID attached, make a new one
-				else
-				{
-					$contributor = new Contributor();
-					$contributor->contributor_first_name = $user->user_first_name;
-					$contributor->contributor_last_name = $user->user_last_name;
-					$contributor->contributor_email = $user->user_email;
-					$contributor->save();
-					$adapter->commit();
-
-					// Attach the new contributor to the logged-in user
-					$user->contributor_id = $contributor->contributor_id; 
-					$user->save();					
-
-					// Attach the new contributor to the new object
-					$object->contributor_id = $user->contributor_id;
-				}
+	        
+			if( empty($object->contributor_id) )
+			{
+				$object->contributor_id = 'NULL';
 			}
 		}
 		
@@ -684,9 +684,12 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 			$location = new Location( self::$_request->getProperty( 'Location' ) );
 			if( $location->hasValues() )
 			{
+				$object->getLocation();
+				$location_id = $object->location->location_id;
 				$location->object_id = $object->object_id;
 				$location->latitude = round( $location->latitude, 5 );
 				$location->longitude = round( $location->longitude, 5 );
+				if( $location_id ) { $location->location_id = $location_id; }
 				if( $this->validates( $location ) )
 				{
 					$location->save();	
@@ -696,7 +699,7 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 			$tags = new Tags( self::$_request->getProperty( 'tags' ) );
 			$tags->object_id = $object->object_id;
 			if (self::$_session->getUser()) $tags->user_id = self::$_session->getUser()->getId();
-
+			
 			//if( $this->validates( $tags ) )
 			//{
 				$tags->save();
@@ -751,7 +754,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 			$object->save();
 		}
 
-		
 
 		if( count( $this->validationErrors ) > 0 ) {
 			self::$_session->setValue( 'object_form_saved', $_REQUEST );
@@ -906,20 +908,19 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 		return $featured->getObjectAt( mt_rand( 0, $featured->total() - 1 ) );
 	}
 	
-	
 	protected function _ingest()
 	{
 		if (self::$_request->getProperty('batch_add_do')) {
 				$contributor = new Contributor(self::$_request->getProperty('contributor'));
 				if( $this->validates($contributor) ) 
 				{
-					if( $contributor->uniqueNameEmail() )
+					if( $contributor->uniqueNameEmailInstitution() )
 					{
 						$contributor->save();	
 					}
 					else
 					{
-						$contributor = $contributor->findSelf();
+						$contributor = $contributor->findUnique();
 					}
 					self::$_request->setProperty('contributor_id', $contributor->contributor_id);
 					//echo self::$_request->getProperty('contributor_id');
@@ -1011,6 +1012,10 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 						return;
 					}
 					
+					$location = new Location( self::$_request->getProperty('Location') );
+					$location->object_id = $currentObject->getId();
+					if( $location->hasValues() ) {$location->save();}
+					
 					$fileParams = array(
 						'file_title'			=>	$key,
 						'object_id'				=>	$currentObject->object_id,
@@ -1042,24 +1047,9 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 										$exifComments = (isset($exif['IFD0']['Comments'])) ? $exif['IFD0']['Comments'] : NULL;
 										$exifTitle = (isset($exif['IFD0']['Title'])) ? $exif['IFD0']['Title'] : NULL;
 									}
-									//Save the image metadata
-									if ( strlen($exifImageDesc) > strlen($exifComments) )
-									{
-										$imageMeta = new Metatext(
-											array(
-												'metafield_id' => 3, 
-												'object_id' => $currentObject->object_id, 
-												'metatext_text' => $exifImageDesc));
-										$imageMeta->save();
-										$output .= "Metadata saved with metatext_id # {$imageMeta->metatext_id}<br/>\n"; 
-									}
-									elseif ( !empty($exifComments) )
-									{
-										$imageMeta = new Metatext(array('metafield_id' => 3, 'object_id' => $currentObject->object_id, 'metatext_text' => $exifComments));
-										$imageMeta->save();
-										$output .= "Metadata saved with metatext_id # {$imageMeta->metatext_id}<br/>\n"; 
-									}
-
+									if ( strlen($exifImageDesc) > strlen($exifComments) ) { $currentObject->object_description = $exifImageDesc;}
+									elseif ( !empty($exifComments) ) { $currentObject->object_description = $exifComments; }
+									if( !empty($exifTitle) ) {$currentObject->object_title = $exifTitle;}
 								}
 							}
 							else
@@ -1074,40 +1064,15 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 							if ( !empty($iptcdata['name']) )
 							{
 								$currentFile->file_title = $iptcdata['name'];
+								$currentObject->object_title = $currentFile->file_title;
 							}
-							if( !empty($iptcdata['description']) ) 
-							{
-								$imageMeta = new Metatext(array('metafield_id' => 3, 'object_id' => $currentObject->object_id, 'metatext_text' => $iptcdata['description']));
-								$imageMeta->save();
-								$output .= "Metadata saved with metatext_id # {$imageMeta->metatext_id}<br/>\n"; 
-							}
-							if(!empty($iptcdata['location'])) 
-							{
-								//$currentLocation = new Location(array('address' => $iptcdata['location'], 'object_id' => $currentObject->object_id));
-								if ($this->validates($currentLocation)) 
-								{
-									$currentLocation->save();
-								}
-							}
-							if(!empty($iptcdata['creator']))
-							{
-								$currentFile->file_producer = $iptcdata['creator'];
-							}
-							if(!empty($iptcdata['author']))
-							{
-								$currentObject->creator_other = $iptcdata['author'];
-							}
-							if(!empty($iptcdata['source']))
-							{
-								$currentFile->file_publisher = $iptcdata['source'];
-							}
+							if( !empty($iptcdata['description']) ) { $currentObject->object_description = $iptcdata['description']; }
 							if(!empty($iptcdata['creation_date'])) {
 								$fileyear = substr(@$iptcdata['creation_date'], 0, 4);
 								$filemonth =  substr(@$iptcdata['creation_date'], 3, 2);
 								$fileday = substr(@$iptcdata['creation_date'], 5, 2);
 								$currentFile->file_date = "$fileyear:$filemonth:$fileday 00:00:00";
 							}
-
 						break;
 						
 						case 'none':		
@@ -1115,8 +1080,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 						break;
 					}
 					
-					throw new Kea_Action_Exception( "Category is not sent for new objects.  Find a way of doing this");
-				
 					//Move the file from the dropbox to the vault directory
 					
 					if(!rename($old_path, $new_path))
