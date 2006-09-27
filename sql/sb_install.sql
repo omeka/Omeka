@@ -40,7 +40,7 @@ CREATE TABLE objects (
 	object_date					timestamp	NULL,
 	
 	# Status
-	object_status				enum( 'review', 'approved', 'rejected', 'notyet', 'moreinfo' )	NOT NULL default 'notyet',
+	object_status				enum( 'public', 'researcher', 'admin')	NOT NULL default 'admin',
 	
 	# Relation
 	object_relation				text		NULL,
@@ -68,10 +68,6 @@ CREATE TABLE objects (
 #	Other meta data
 	object_coverage_start		timestamp		NULL,
 	object_coverage_end			timestamp		NULL,
-
-#	Object consents
-	object_contributor_consent	enum( 'yes', 'unsure', 'restrict', 'no', 'unknown' ) 	NOT NULL default 'unknown',
-	object_contributor_posting	enum( 'yes', 'no', 'anonymously', 'unknown') 			NOT NULL default 'unknown',
 	
 	object_added				timestamp	NULL,
 	object_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -380,13 +376,11 @@ ALTER TABLE objects ADD CONSTRAINT `contributor_key` FOREIGN KEY (contributor_id
 ALTER TABLE objects ADD CONSTRAINT `collection_key` FOREIGN KEY (collection_id) REFERENCES collections(collection_id) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE objects ADD CONSTRAINT `user_key` FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE;
 
-INSERT INTO `categories` (`category_id`,  `category_name`, `category_description`, `category_active`) VALUES (2,  'Blog', 'A resource containing frequent and chronological comments and throughts published on the web.', 1),
+INSERT INTO `categories` (`category_id`,  `category_name`, `category_description`, `category_active`) VALUES
 (3,  'Document', 'A resource containing textual data.  Note that facsimiles or images of texts are still of the genre text.', 1),
 (4,  'Email', 'A resource containing textual messages and binary attachments sent electronically from one person to another or one person to many people.', 1),
 (5,  'Interactive Resource', 'A resource which requires interaction from the user to be understood, executed, or experienced.', 1),
 (6,  'Moving Image', 'A series of visual representations that, when shown in succession, impart an impression of motion.', 1),
-(7,  'Online File', 'A file and accompanying metadata contributed to JWA through the KJV contribution form.', 1),
-(8,  'Online Text', 'A story, email, blog, or any other textual data contributed to JWA through the KJV contribution form.', 1),
 (9,  'Oral History', 'A resource containing historical information obtained in interviews with persons having firsthand knowledge.', 1),
 (10,  'Sound', 'A resource whose content is primarily intended to be rendered as audio.', 1),
 (11,  'Still Image', 'A static visual representation. Examples of still images are: paintings, drawings, graphic designs, plans and maps.  Recommended best practice is to assign the type "text" to images of textual materials.', 1),
@@ -394,9 +388,7 @@ INSERT INTO `categories` (`category_id`,  `category_name`, `category_description
 (13,  'Website', 'A resource comprising of a web page or web pages and all related assets ( such as images, sound and video files, etc. ).', 1);
 
 
-INSERT INTO `metafields` (`metafield_id`, `metafield_name`, `metafield_description`) VALUES (2, 'Body', 'The main body of the blog post.'),
-(3, 'Comments', 'Any comments made in response to the blog post, including the date.'),
-(4, 'Trackbacks', 'A list of all blog postings that have referenced this blog post.'),
+#INSERT INTO `metafields` (`metafield_id`, `metafield_name`, `metafield_description`) VALUES 
 (5, 'Text', 'Any textual data included in the document.'),
 (6, 'Email Body', 'The main body of the email, including all replied and forwarded text and headers.'),
 (7, 'Subject Line', 'The content of the subject line of the email.'),
@@ -405,30 +397,15 @@ INSERT INTO `metafields` (`metafield_id`, `metafield_name`, `metafield_descripti
 (10, 'Cc', 'The name(s) and email address(es) of the person to whom the email was carbon copied.'),
 (11, 'Bcc', 'The name(s) and email address(es) of the person to whom the email was blind carbon copied.'),
 (12, 'Number of Attachments', 'The number of attachments to the email.'),
-(13, 'Interactive Resource Duration', 'The length in time of the interactive resource.'),
-(14, 'Moving Image Duration', 'The lentgh of time of the moving image.'),
-(15, 'Moving Image Resolution', 'The resolution of the moving image determined by pixel dimensions, pixels per inch or dots per inch.'),
-(16, 'Moving Image Bit Depth', 'The bit depth of the moving image.'),
-(17, 'Moving Image Width', 'The width of the moving image at full size.'),
-(18, 'Moving Image Height', 'The height of the moving image at full size.'),
 (19, 'Oral History Transcription', 'Any written text transcribed from or during the interview.'),
 (20, 'Interviewer', 'The person(s) performing the interview.'),
 (21, 'Interviewee', 'The person(s) being interviewed.'),
 (22, 'Location', 'The location of the interview.'),
-(23, 'Oral History Duration', 'The length of time of the interview.'),
-(24, 'Sample Rate', 'The number of samples recorded per second.  Sample rates are measured in Hz or kHz.'),
-(25, 'Bit Depth', 'The number of bits used to represent each sample in an audio file, determining the accuracy of the sample.'),
 (26, 'Sound Transcription', 'Any written text transcribed from the sound.'),
-(27, 'Sound Duration', 'The length of time of the sound.'),
-(28, 'Resolution', 'The resolution of the still image'),
-(29, 'Still Image Width', 'The width of the still image at full size.'),
-(30, 'Still Image Height', 'The height of the still image at full size.'),
 (31, 'HTML', 'The hypertext markup language used for building the web page.'),
 (32, 'Local URL', 'The URL of the local directory containing all assets of the website.');
 
-INSERT INTO `categories_metafields` (`category_id`, `metafield_id`) VALUES (2, 2),
-(2, 3),
-(2, 4),
+INSERT INTO `categories_metafields` (`category_id`, `metafield_id`) VALUES
 (3, 5),
 (4, 6),
 (4, 7),
@@ -437,27 +414,10 @@ INSERT INTO `categories_metafields` (`category_id`, `metafield_id`) VALUES (2, 2
 (4, 10),
 (4, 11),
 (4, 12),
-(5, 13),
-(6, 14),
-(6, 15),
-(6, 16),
-(6, 17),
-(6, 18),
-(8, 5),
 (9, 19),
 (9, 20),
 (9, 21),
 (9, 22),
-(9, 23),
-(9, 24),
-(9, 25),
 (10, 26),
-(10, 27),
-(10, 24),
-(10, 25),
-(11, 28),
-(11, 25),
-(11, 29),
-(11, 30),
 (12, 31),
 (13, 32);
