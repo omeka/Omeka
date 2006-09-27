@@ -2,6 +2,7 @@
 // Layout: default;
 $category = $__c->categories()->edit();
 $saved = self::$_session->getValue( 'category_form_saved' );
+$more_fields = self::$_request->getProperty('category_metafield_number');
 ?>
 <?php include( 'subnav.php' ); ?>
 <br/>
@@ -10,11 +11,11 @@ $saved = self::$_session->getValue( 'category_form_saved' );
 
 <h1>Edit the Collection</h1>
 
-<form method="post" action="<?php echo $_link->to('categories', 'edit'); ?>">
+<form method="post" action="<?php echo $_link->to('categories', 'edit').$category->getId(); ?>">
 
 <input type="hidden" name="category[category_id]" value="<?php echo $category->category_id; ?>">
 
-<?php print_r($saved.'1'); include( 'form.php' ); ?>
+<?php include( 'form.php' ); ?>
 
 <input type="submit" name="category_edit" value="Edit this Category -&gt;"></input>
 

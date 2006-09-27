@@ -6,8 +6,6 @@ class CategoriesMetafields_Mapper extends Kea_DB_Mapper
 	
 	public function insert( $cat_id, $mf_id )
 	{	
-echo $cat_id;
-echo $mf_id;
 		if( $this->joinExists( $cat_id, $mf_id ) ) {
 			throw new Kea_DB_Mapper_Exception( 'The Category <=> Metafield join already exists.');
 		}
@@ -17,6 +15,21 @@ echo $mf_id;
 
 		$result = self::$_adapter->insert( $this->_table_name, $array );
 
+		if( !$result ){
+			throw new Kea_DB_Mapper_Exception( self::$_adapter->error() );
+		}
+		return true;
+	}
+	
+	public function delete( $cat_id, $mf_id )
+	{
+		if( !$this->joinExists( $cat_id, $mf_id ) )
+		{
+			throw new Kea_DB_Mapper_Exception( 'The Category #'.$cat_id.' <=> Metafield #'.$mf_id.' does not already exist.');
+		}
+		
+		$result = self::$_adapter->delete( $this->_table_name, 'category_id = '.$cat_id.' AND metafield_id = '.$mf_id );
+		
 		if( !$result ){
 			throw new Kea_DB_Mapper_Exception( self::$_adapter->error() );
 		}

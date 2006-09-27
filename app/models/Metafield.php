@@ -15,8 +15,9 @@ class Metafield extends Kea_Domain_Model
 	public static function findBy( $col, $val )
 	{
 		$inst = new self;
-		return 'ping';
-		return $inst->mapper()->find( $col )->where( "$col = ?", $val )->execute();
+		$res = $inst->mapper()->find()->where( "$col = ?", $val )->execute();
+		if($res instanceof Metafield_Collection) return $res->getObjectAt(0);
+		else return $res;
 	}
 
 	public static function findIDBy( $col, $val )
