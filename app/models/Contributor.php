@@ -20,22 +20,12 @@ class Contributor extends Kea_Domain_Model
 	public $contributor_zipcode;
 	public $contributor_occupation;
 	public $contributor_institution;
-	public $contributor_ip_address;
 	
 	protected $validate		=	array(	'contributor_first_name'		=> array( '/(\w)+/', 'Please provide a first name.' ),
 										'contributor_last_name'			=> array( '/(\w)+/', 'Please provide a last name.' ),
 										'contributor_email'				=> array( '/^([[:alnum:]][-a-zA-Z0-9_%\.]*)?[[:alnum:]]@[[:alnum:]][-a-zA-Z0-9%\.]*\.[[:alpha:]]{2,}$/', 'The email address you provided is not valid.' ),
 										'contributor_contact_consent'	=> array( '/^(yes)$|^(no)$|^(unknown)$/', 'Contributors must be assigned valid contact consent [yes, no, or unknown].') 
 									);
-
-	public function __construct( $array = null )
-	{
-		if(isset($array['contributor_full_name']))
-		{
-			$this->parseName($array['contributor_full_name']);
-		}
-		parent::__construct($array);
-	}
 	
 	public static function findIDBy( $col, $val )
 	{
@@ -75,9 +65,9 @@ class Contributor extends Kea_Domain_Model
 	{
 		$mapper = $this->mapper();
 		$select = $mapper->find();
-		if($this->contributor_email != 'NULL') 			{ $select->where( 'contributor_email = ?', $this->contributor_email ); }
-		if($this->contributor_first_name != 'NULL') 	{ $select->where( 'contributor_first_name = ?', $this->contributor_first_name ); }				
-		if($this->contributor_last_name != 'NULL') 		{ $select->where( 'contributor_last_name = ?', $this->contributor_last_name ); }
+		$select->where( 'contributor_email = ?', $this->contributor_email );
+		$select->where( 'contributor_first_name = ?', $this->contributor_first_name );				
+		$select->where( 'contributor_last_name = ?', $this->contributor_last_name );
 		if( property_exists(get_class($this), 'contributor_institution') 
 			&& !empty( $this->contributor_institution ) ) { $select->where( 'contributor_institution = ?', $this->contributor_institution ); }			
 		echo $select;
@@ -101,9 +91,9 @@ class Contributor extends Kea_Domain_Model
 	{
 		$mapper = $this->mapper();
 		$select = $mapper->find();
-		if($this->contributor_email != 'NULL') 			{ $select->where( 'contributor_email = ?', $this->contributor_email ); }
-		if($this->contributor_first_name != 'NULL') 	{ $select->where( 'contributor_first_name = ?', $this->contributor_first_name ); }				
-		if($this->contributor_last_name != 'NULL') 		{ $select->where( 'contributor_last_name = ?', $this->contributor_last_name ); }
+		$select->where( 'contributor_email = ?', $this->contributor_email );
+		$select->where( 'contributor_first_name = ?', $this->contributor_first_name );				
+		$select->where( 'contributor_last_name = ?', $this->contributor_last_name );
 		if( property_exists(get_class($this), 'contributor_institution') 
 			&& !empty( $this->contributor_institution ) ) { $select->where( 'contributor_institution = ?', $this->contributor_institution ); }			
 		$res = $select->execute();
@@ -155,23 +145,16 @@ class Contributor extends Kea_Domain_Model
 					$last = @$name[1];
 				}
 			}
-			$this->contributor_first_name = ($first) ? $first : 'NULL';
-			$this->contributor_middle_name = ($middle) ? $middle : 'NULL';
-			$this->contributor_last_name = ($last) ? $last : 'NULL';
+			$this->contributor_first_name = ($first) ? $first : NULL;
+			$this->contributor_middle_name = ($middle) ? $middle : NULL;
+			$this->contributor_last_name = ($last) ? $last : NULL;
 	}
 	
 	public function isInstitution()
 	{
-		if ( property_exists(get_class($this), 'contributor_institution') )
+		if ( property_exists(get_class($this), 'contributor_institution') && !empty($this->contributor_institution) )
 		{
-			if( !empty($this->contributor_institution) )
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return true;
 		}
 		else
 		{

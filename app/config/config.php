@@ -9,7 +9,7 @@ define( 'DS', DIRECTORY_SEPARATOR );
 define( 'KEA_MYSQLI_HOST',		'mysql.localdomain' );
 define( 'KEA_MYSQLI_USERNAME',	'nagrin' );
 define( 'KEA_MYSQLI_PASSWORD',	'dudeman' );
-define( 'KEA_MYSQLI_DBNAME',	'sitebuilder_v01' );
+define( 'KEA_MYSQLI_DBNAME',	'kris_sb_test' );
 
 define( 'KEA_MYSQLI_PORT',		null );
 define( 'KEA_MYSQLI_SOCKET',	null );

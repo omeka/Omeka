@@ -391,19 +391,6 @@ class ObjectsController extends Kea_Action_Controller
 				$sudo['creator_other'] = null;
 			}
 			
-			if( $object->object_date )
-			{
-				$sudo['object_creation_month'] = date( 'm', strtotime( $object->object_date ) );
-				$sudo['object_creation_day'] = date( 'd', strtotime( $object->object_date ) );
-				$sudo['object_creation_year'] = date( 'Y', strtotime( $object->object_date ) );
-			}
-			else
-			{
-				$sudo['object_creation_month'] = null;
-				$sudo['object_creation_day'] = null;
-				$sudo['object_creation_year'] = null;
-			}
-			
 			$location_a = array(	'address'	=> $object->location->address,
 									'zipcode'	=> $object->location->zipcode,
 									'latitude'	=> $object->location->latitude,
@@ -425,20 +412,6 @@ class ObjectsController extends Kea_Action_Controller
 		$adapter->beginTransaction();
 
 		$object = new Object( self::$_request->getProperty( 'Object' ) );
-		
-		if( self::$_request->getProperty('object_creation_month')
-		 	&& self::$_request->getProperty('object_creation_day')
-			&& self::$_request->getProperty('object_creation_year') )
-		{
-			$create_month = self::$_request->getProperty('object_creation_month');
-			$create_day = self::$_request->getProperty('object_creation_day');
-			$create_year = self::$_request->getProperty('object_creation_year');
-			$object->object_date = $create_year . '-' . $create_month . '-' . $create_day;
-		}
-		else
-		{
-			$object->object_date = 'NULL';
-		}
 
 		// Else, try to match contributor by logged-in ID
 		// If the object's contributor ID is not set, then try to grab contributor info from the form.

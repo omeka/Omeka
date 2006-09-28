@@ -161,7 +161,7 @@ class File extends Kea_Domain_Model
 						$file_type = trim( exec( 'file -b ' . trim( escapeshellarg ( $new_path ) ) ) );
 						
 						$file_array = array(	'object_id'					=> $obj_id,
-												'file_description'			=> isset($file_info_form['file_description']) ? $file_info_form['file_description'] : 'NULL',
+												'file_description'			=> $file_info_form['file_description'],
 												'file_size'					=> $_FILES[$file_form_name]['size'][$key],
 												'file_mime_browser'			=> $_FILES[$file_form_name]['type'][$key],
 												'file_authentication'		=> md5_file( $new_path ),

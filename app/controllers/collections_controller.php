@@ -41,10 +41,7 @@ class CollectionsController extends Kea_Action_Controller
 	private function commitForm()
 	{
 		$collection = new Collection( self::$_request->getProperty( 'collection' ) );
-		if( empty($collection->collection_parent) )
-		{
-			$collection->collection_parent = 'NULL';
-		}
+
 		if( $this->validates( $collection ) ) {
 			return $collection->save();
 		}
@@ -54,23 +51,13 @@ class CollectionsController extends Kea_Action_Controller
 	protected function _delete()
 	{
 		if( $id = self::$_request->getProperty( 'collection_id' ) ) {
-			/**
-			 * Nested functionality
-			 * Rearrange order so that nested child collections have the collection_parent of the current collection
-			 */
-			$collections = $this->_findChildren($id);
-			foreach($collections as $collection)
-			{
-				$collection->collection_parent = $this->_findById($id)->collection_parent;
-				$collection->save();
-			}
 			
 			/**
 			 * This will delete all the objects in the collection if the right $_request variable is set,
 			 * for obvious reasons only a super user should be able to do this.
 			 *
 			 */
-			if( self::$_session->isSuper() )
+			/* if( self::$_session->isSuper() )
 			{
 				$deleteObjects = self::$_request->getProperty( 'delete_objects' );
 				if($deleteObjects)
@@ -82,7 +69,7 @@ class CollectionsController extends Kea_Action_Controller
 						$object->delete();
 					}
 				}
-			}
+			} */
 			
 			$mapper = new Collection_Mapper;
 			$mapper->delete( $id );
@@ -125,29 +112,6 @@ class CollectionsController extends Kea_Action_Controller
 		return false;
 	}
 	
-	/**
-	 * Find the children of the current collection (this only works if collection_parent is implemented)
-	 *
-	 * @return void
-	 * @author Kris Kelly
-	 **/
-	protected function _findChildren($parent = NULL)
-	{
-		$mapper = new Collection_Mapper();
-		if($parent)
-		{
-		return $mapper->find()
-					  ->where( 'collection_parent = ?', $parent )
-					  ->execute();		
-		}
-		else
-		{
-		return $mapper->find()
-					->where( 'collection_parent IS NULL' )
-					->execute();
-		}
-	}
-	
 	protected function _findActive()
 	{
 		$mapper = new Collection_Mapper();
@@ -169,31 +133,6 @@ class CollectionsController extends Kea_Action_Controller
 		return $mapper->addToCollection( $obj_id, $coll_id );
 	}
 	
-	/**
-	 * This is a total hack to display nested collections all at once on the same page using recursive partials.
-	 * It would be better just to use findChildren() and deprecate this.  See content/admin/collections/all.php
-	 *
-	 * @return void
-	 * @author Kris Kelly
-	 **/
-	public function displayNested($template, $useList = TRUE, $style = NULL, $parent_id = NULL)
-	{
-		$mapper = new Collection_Mapper;
-		$collections = $this->_findChildren($parent_id);
-		if ($collections->total() > 0)
-		{
-			if($useList) echo "\n<ul>\n";
-			foreach( $collections as $collection )
-			{	
-					echo ($useList) ? "\t<li>" : "\t<div style=\"$style\">\n";
-					include($template);
-					$this->displayNested($template, $useList, $style, $collection->collection_id);
-					echo ($useList) ? "\t</li>\n" : "\t</div>\n";
-				
-			}
-			if($useList) echo "\n</ul>\n";
-		}
-	}
 }
 
 ?>
