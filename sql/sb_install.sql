@@ -22,29 +22,32 @@ CREATE TABLE objects (
 	object_id					int(11)		UNSIGNED NOT NULL auto_increment,
 
 	# Title
-	object_title				tinytext	NULL,
+	object_title				tinytext	NOT NULL,
 	
 	# Publisher
-	object_publisher			text		NULL,
+	object_publisher			text		NOT NULL,
 
 	# Language
-	object_language				tinytext	NULL,
+	object_language				tinytext	NOT NULL,
 	
 	# Rights
-	object_rights				text		NULL,
+	object_rights				text		NOT NULL,
 	
 	# Description
-	object_description			text		NULL,
+	object_description			text		NOT NULL,
 	
 	# Date
-	object_date					timestamp	NULL,
-	
-	# Status
-	object_status				enum( 'public', 'researcher', 'admin')	NOT NULL default 'admin',
+	object_date					tinytext	NOT	NULL,
 	
 	# Relation
-	object_relation				text		NULL,
+	object_relation				text		NOT NULL,
 
+	# Source
+	object_source				text		NOT NULL,
+	
+	# Subject					
+	object_subject				tinytext	NOT NULL,
+	
 	# Type - aka - KJV object type metadata
 	category_id					int(11)		UNSIGNED NULL,
 	
@@ -55,7 +58,7 @@ CREATE TABLE objects (
 	creator_id					int(11)		UNSIGNED NULL,
 	
 	# Creator other
-	creator_other				text		NULL,
+	creator_other				text		NOT NULL,
 	
 	# Source
 	collection_id				int(11)		UNSIGNED NULL,
@@ -66,15 +69,16 @@ CREATE TABLE objects (
 # Dublin Core End
 	
 #	Other meta data
-	object_coverage_start		timestamp		NULL,
-	object_coverage_end			timestamp		NULL,
+	object_coverage				text		NOT NULL,
 	
-	object_added				timestamp	NULL,
+	object_added				timestamp	NOT NULL,
 	object_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
 #	Object Featured
 	object_featured				int(1)		NOT NULL DEFAULT '0',
 	
+#	Object Published
+	object_published			BOOL 		NOT NULL DEFAULT '0', 
 	PRIMARY KEY	(object_id),
 	INDEX		(category_id),
 	INDEX		(contributor_id),
@@ -113,7 +117,7 @@ DROP TABLE IF EXISTS categories;
 CREATE TABLE categories (
 	category_id							int(11)		UNSIGNED NOT NULL auto_increment,
 	category_name						tinytext	NOT NULL,
-	category_description				text		NULL,
+	category_description				text		NOT NULL,
 	category_active						tinyint(1)	UNSIGNED NOT NULL default '1', -- This may be switched to 0
 
 	PRIMARY KEY  (category_id)
@@ -132,7 +136,7 @@ DROP TABLE IF EXISTS metafields;
 CREATE TABLE metafields (
 	metafield_id				int(11)			UNSIGNED NOT NULL auto_increment,
 	metafield_name				varchar(100)	NOT NULL,
-	metafield_description		text			NULL,
+	metafield_description		text			NOT NULL,
 
 	PRIMARY KEY (metafield_id)
 
@@ -175,26 +179,25 @@ CREATE TABLE metatext (
 DROP TABLE IF EXISTS contributors;
 CREATE TABLE contributors (
 	contributor_id						int(11)								UNSIGNED NOT NULL auto_increment,
-	contributor_first_name				varchar(100)						NULL,
-	contributor_middle_name				varchar(100)						NULL,
-	contributor_last_name				varchar(100)						NULL,
-	contributor_email					varchar(100)						NULL,
-	contributor_phone					varchar(40)							NULL,
-	contributor_birth_year				int(4)								NULL,
+	contributor_first_name				varchar(100)						NOT NULL,
+	contributor_middle_name				varchar(100)						NOT NULL,
+	contributor_last_name				varchar(100)						NOT NULL,
+	contributor_email					varchar(100)						NOT NULL,
+	contributor_phone					varchar(40)							NOT NULL,
+	contributor_birth_year				int(4)								NOT NULL,
 	contributor_gender					enum( 'male', 'female', 'unknown' )	default 'unknown',
 	contributor_race					enum( 'Asian/Pacific', 'Islander', 'African American', 'Hispanic', 'Native American / Indian', 'White', 'Other', 'unknown' )	default 'unknown',
-	contributor_race_other				tinytext							NULL,
+	contributor_race_other				tinytext							NOT NULL,
 	contributor_contact_consent			enum( 'yes', 'no', 'unknown' )		default 'unknown',
 
-	contributor_fax						varchar(14)		NULL,
-	contributor_address					varchar(100)	NULL,
-	contributor_city					varchar(16)		NULL,
-	contributor_state					varchar(16)		NULL,
-	contributor_zipcode					varchar(10)		NULL,
-	contributor_occupation				varchar(255)	NULL,
+	contributor_fax						varchar(14)		NOT NULL,
+	contributor_address					varchar(100)	NOT NULL,
+	contributor_city					varchar(16)		NOT NULL,
+	contributor_state					varchar(16)		NOT NULL,
+	contributor_zipcode					varchar(10)		NOT NULL,
+	contributor_occupation				varchar(255)	NOT NULL,
 -- Specific to HDMB, remove if necessary
-	contributor_institution				varchar(255)    NULL,
-	contributor_ip_address				varchar(15)		NULL,
+	contributor_institution				varchar(255)    NOT NULL,
 	PRIMARY KEY (contributor_id)
 
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
@@ -209,11 +212,10 @@ DROP TABLE IF EXISTS collections;
 CREATE TABLE collections (
 	collection_id			int(11)		UNSIGNED NOT NULL auto_increment,
 	collection_name			tinytext	NOT NULL,
-	collection_description	text		NULL,
+	collection_description	text		NOT NULL,
 	collection_active		tinyint(1)	UNSIGNED NOT NULL default '0',
 	collection_featured		tinyint(1)	UNSIGNED NOT NULL default '0',
-	collection_collector	text		NULL,
-	collection_parent		int(11)		UNSIGNED NULL,
+	collection_collector	text		NOT NULL,
 
 	PRIMARY KEY  (collection_id)
 
@@ -230,46 +232,48 @@ CREATE TABLE files (
 	file_id						int(11)		UNSIGNED NOT NULL auto_increment,
 
 #	Dublin core
-	file_title					varchar(255)	NULL,
+	file_title					varchar(255)	NOT NULL,
 
-	file_publisher				text			NULL,
-	file_language				varchar(255)	NULL,
-	file_relation				text			NULL,
-	file_rights					text			NULL,
-	file_description			text			NULL,
-	file_date					timestamp		NULL,
+	file_publisher				text			NOT NULL,
+	file_language				varchar(255)	NOT NULL,
+	file_relation				text			NOT NULL,
+	file_rights					text			NOT NULL,
+	file_description			text			NOT NULL,
+	file_date					tinytext		NOT NULL,
+	file_source					text			NOT NULL,
+	file_subject				varchar(255)	NOT NULL,
 
 #	Coverage
-	file_coverage_start			timestamp	NULL,
-	file_coverage_end			timestamp	NULL,
+	file_coverage				text		NOT NULL,
 
 #	Dublin core referenced in other tables
 	object_id					int(11)		UNSIGNED NULL,
 	contributor_id				int(11)		UNSIGNED NULL,
 
 #	File preservation and digitization metadata
-	file_transcriber			text	NULL,
-	file_producer				text	NULL,
-	file_render_device			text	NULL,
-	file_render_details			text	NULL,
-	file_capture_date			timestamp	NULL,
-	file_capture_device			text	NULL,
-	file_change_history			text	NULL,
-	file_watermark				text	NULL,
-	file_authentication			text	NULL,
-	file_encryption				text	NULL,
-	file_compression			text	NULL,
-	file_post_processing		text	NULL,
+	file_transcriber			text	NOT NULL,
+	file_producer				text	NOT NULL,
+	file_render_device			text	NOT NULL,
+	file_render_details			text	NOT NULL,
+	file_capture_date			timestamp	NOT NULL,
+	file_capture_device			text	NOT NULL,
+	file_change_history			text	NOT NULL,
+	file_watermark				text	NOT NULL,
+	file_authentication			text	NOT NULL,
+	file_encryption				text	NOT NULL,
+	file_compression			text	NOT NULL,
+	file_post_processing		text	NOT NULL,
 
 #	Physical file related data
 	file_archive_filename		tinytext	NOT NULL,
+	file_fullsize_filename		tinytext	NOT NULL,
 	file_original_filename		tinytext	NOT NULL,
 	file_thumbnail_name			tinytext	NOT NULL,
 	file_size					int(11)		UNSIGNED NOT NULL default '0',	
-	file_mime_browser			tinytext	NULL,
-	file_mime_php				tinytext	NULL,
-	file_mime_os				tinytext	NULL,
-	file_type_os				tinytext	NULL,
+	file_mime_browser			tinytext	NOT NULL,
+	file_mime_php				tinytext	NOT NULL,
+	file_mime_os				tinytext	NOT NULL,
+	file_type_os				tinytext	NOT NULL,
 	
 	file_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	file_added					timestamp	NOT NULL default '0000-00-00 00:00:00',
@@ -296,10 +300,10 @@ CREATE TABLE users (
   user_id				int(11)		UNSIGNED NOT NULL auto_increment,
   user_username			varchar(30) NOT NULL,
   user_password			varchar(40) NOT NULL,
-  user_first_name		tinytext	NULL,
-  user_last_name		tinytext	NULL,
-  user_email			tinytext	NULL,
-  user_institution		text		NULL,
+  user_first_name		tinytext	NOT NULL,
+  user_last_name		tinytext	NOT NULL,
+  user_email			tinytext	NOT NULL,
+  user_institution		text		NOT NULL,
   user_permission_id	int(11)		UNSIGNED NOT NULL default '100',
   user_active			int(1)		UNSIGNED NOT NULL default '0',
 	contributor_id		int(11)		UNSIGNED NULL,
@@ -318,11 +322,11 @@ CREATE TABLE location(
 	object_id		int(11)			UNSIGNED NOT NULL,
 	latitude		double			NULL,
 	longitude		double			NULL,
-	address			varchar(255)	NULL,
-	zipcode			varchar(10)		NULL,
-	zoomLevel		varchar(40)		NULL,
-	mapType			varchar(100)	NULL,
-	cleanAddress	varchar(200)	NULL,
+	address			varchar(255)	NOT NULL,
+	zipcode			varchar(10)		NOT NULL,
+	zoomLevel		varchar(40)		NOT NULL,
+	mapType			varchar(100)	NOT NULL,
+	cleanAddress	varchar(200)	NOT NULL,
 
 	PRIMARY KEY (location_id),
 	INDEX		(object_id),
@@ -388,7 +392,7 @@ INSERT INTO `categories` (`category_id`,  `category_name`, `category_description
 (13,  'Website', 'A resource comprising of a web page or web pages and all related assets ( such as images, sound and video files, etc. ).', 1);
 
 
-#INSERT INTO `metafields` (`metafield_id`, `metafield_name`, `metafield_description`) VALUES 
+INSERT INTO `metafields` (`metafield_id`, `metafield_name`, `metafield_description`) VALUES 
 (5, 'Text', 'Any textual data included in the document.'),
 (6, 'Email Body', 'The main body of the email, including all replied and forwarded text and headers.'),
 (7, 'Subject Line', 'The content of the subject line of the email.'),
@@ -421,3 +425,5 @@ INSERT INTO `categories_metafields` (`category_id`, `metafield_id`) VALUES
 (10, 26),
 (12, 31),
 (13, 32);
+
+INSERT INTO users (`user_username`, `user_password`, `user_permission_id`, `user_active`) VALUES ('super', SHA1('super'), 1, 1);
