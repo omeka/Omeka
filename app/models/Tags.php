@@ -218,10 +218,7 @@ class Tags extends Kea_Plugin implements Iterator
 	{
 		if( !self::$_session->isAdmin() )
 		{
-			$select->where( 'objects.object_contributor_consent = ?', 'yes' )
-					->where( '(objects.object_contributor_posting = "anonymously" OR objects.object_contributor_posting = "yes") AND objects.object_status = ?', 'approved' );
-				//	->orWhere( 'objects.object_contributor_posting = ?', 'anonymously' )
-				//	->where( 'objects.object_status = ?', 'approved' );
+			$select->where( 'objects.object_published = ?', 1 );
 		}
 				
 		return $select;	

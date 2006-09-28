@@ -7,9 +7,10 @@ class File extends Kea_Domain_Model
 	public $file_publisher;
 	public $file_language;
 	public $file_relation;
-	public $file_coverage_start;
-	public $file_coverage_end;
+	public $file_coverage;
 	public $file_rights;
+	public $file_source;
+	public $file_subject;
 	public $file_description;
 	public $file_date;
 	public $object_id;
@@ -33,6 +34,7 @@ class File extends Kea_Domain_Model
 	public $file_mime_os;
 	public $file_type_os;
 	public $file_archive_filename;
+	public $file_fullsize_filename;
 	public $file_original_filename;
 	public $file_thumbnail_name;
 	public $file_added;
@@ -61,6 +63,14 @@ class File extends Kea_Domain_Model
 			{
 				unlink( $thumbnail_path );
 			}
+		}
+		if ( $file->file_fullsize_filename )
+		{
+			$fullsize_path = ABS_FULLSIZE_DIR . DIRECTORY_SEPARATOR . $file->file_fullsize_filename;
+			if( file_exists( $fullsize_path ) )
+			{
+				unlink( $fullsize_path );
+			}
 		}			
 		return $mapper->delete( $file_id );
 	}
@@ -80,6 +90,14 @@ class File extends Kea_Domain_Model
 				unlink( $thumbnail_path );
 			}
 		}
+		if ( $file->file_fullsize_filename )
+		{
+			$fullsize_path = ABS_FULLSIZE_DIR . DIRECTORY_SEPARATOR . $file->file_fullsize_filename;
+			if( file_exists( $fullsize_path ) )
+			{
+				unlink( $fullsize_path );
+			}
+		}		
 	}
 	
 	public static function add( $obj_id = null, $contributor_id = null, $file_form_name = null, $file_info_form = null )
@@ -151,8 +169,10 @@ class File extends Kea_Domain_Model
 												'file_mime_os'				=> $mime_os,
 												'file_type_os'				=> $file_type,
 												'file_archive_filename'		=> $new_name_string,
+												'file_fullsize_filename'	=> self::createImage('fullsize', $new_path, null, FULLSIZE_IMAGE_SIZE ),
 												'file_original_filename'	=> $name,
-												'file_thumbnail_name'		=> self::createThumbnail( $new_path, null, THUMBNAIL_SIZE ) );				
+												'file_thumbnail_name'		=> self::createImage('thumbnail', $new_path, null, THUMBNAIL_SIZE ) );
+				
 						$file = new File( $file_array );
 						if( $contributor_id )
 						{
@@ -175,16 +195,38 @@ class File extends Kea_Domain_Model
 		return false;
 	}
 	
-	public static function createThumbnail( $file, $percent = null, $new_width = null, $new_height = null, $output = 3 )
+	public static function createImage( $type, $file, $percent = null, $new_width = null, $new_height = null, $output = 3 )
 	{
+		if( empty($type) )
+		{
+			throw new Kea_Domain_Exception(
+				'createImg must be passed a type of image to process'
+			);
+		}
+		elseif( $type == 'thumbnail' )
+		{
+			$dir = ABS_THUMBNAIL_DIR;
+		}
+		elseif( $type == 'fullsize' )
+		{
+			$dir = ABS_FULLSIZE_DIR;
+		}
+		else
+		{
+			throw new Kea_Domain_Exception(
+				'createImg was not passed a valid image type, no image created'
+			);
+			return false;
+		}
+		
 		exec( PATH_TO_CONVERT . ' -version', $convert_version, $convert_return );
 		if( $convert_return == 0 )
 		{
-			return self::imCreateThumbnail( $file, $percent, $new_width, $new_height );
+			return self::imCreateImage($file, $dir, $percent, $new_width, $new_height );
 		}
 		elseif( function_exists( 'gd_info' ) )
 		{
-			return self::gdCreateThumbnail( $file, $percent, $new_width, $new_height, $output );
+			return self::gdCreateImage( $file, $dir, $percent, $new_width, $new_height, $output );
 		}
 		else
 		{
@@ -194,140 +236,156 @@ class File extends Kea_Domain_Model
 		}
 	}
 	
-	public static function gdCreateThumbnail( $file, $percent = null, $new_width = null, $new_height = null, $output = 3 )
+	public static function gdCreateImage($file, $dir, $percent = null, $new_width = null, $new_height = null, $output = 3)
 	{
 		try{
-		//TEMPORARY WORKAROUND UNTIL I CAN FIGURE OUT WHY THE SCRIPT DIES AFTER 60 SECONDS -Kris Kelly, 8/02/06
-		set_time_limit(360);
-
-		if( !function_exists( 'gd_info' ) ) {
-			throw new Kea_Domain_Exception(
-				'The GD Library is not installed and is required for this method.'
-			);
-			return false;
-		}
-		if( !function_exists( 'imagecreatefromjpeg') )
-		{
-			throw new Kea_Domain_Exception(
-				'JPEG support is not installed for GD library.'
-			);
-		}
-		
-		if( file_exists( $file ) && is_readable( $file ) && getimagesize( $file ) ) {
+			set_time_limit(360);
 			
-			list( $width, $height, $type ) = getimagesize( $file );
-
-			if( $percent ) {
-				$new_width = ($percent * $width);
-				$new_height = ($percent * $height);
-			} elseif( $new_width && !$new_height ) {
-				if( $new_width < $width ) {
-					$ratio = ( $new_width / $width );
-					$new_height = ( $height * $ratio );
-				} else {
-					$new_width = $width;
-					$new_height = $height;
-				}
-			} elseif( !$new_width && $new_height ) {
-				if( $new_height < $height ) {
-					$ratio = ( $new_height / $height );
-					$new_width = ( $width * $ratio );					
-				} else {
-					$new_height = $height;
-					$new_width = $width;
-				}
-			} elseif( !$percent && !$new_width && !$new_height ) {
+			if ( !is_dir($dir) || !is_readable($dir) )
+			{
 				throw new Kea_Domain_Exception(
-					'At least one of the following must be specified: percent, new width, new height or both new width and new height.'
+					'Image cannot be written to the directory ' . $dir . '.'
+				);
+				return false;
+			}
+			if( !function_exists( 'gd_info' ) ) {
+				throw new Kea_Domain_Exception(
+					'The GD Library is not installed and is required for this method.'
+				);
+				return false;
+			}
+			if( !function_exists( 'imagecreatefromjpeg') )
+			{
+				throw new Kea_Domain_Exception(
+					'JPEG support is not installed for GD library.'
 				);
 			}
-
-			$thumb = imagecreatetruecolor( $new_width, $new_height );
+		
+			if( file_exists( $file ) && is_readable( $file ) && getimagesize( $file ) ) {
 			
-			// From php.net, with a few bug fixes and a MAX_MEMORY setting
-			// This function should probably go somewhere else
+				list( $width, $height, $type ) = getimagesize( $file );
 
-
-			self::setMemoryForImage($file);
-			
-			switch( $type ) {
-				//GIF
-				case( '1' ):
-					$original = @imagecreatefromgif( $file );
-				break;
-				//JPG
-				case( '2' ):
-					$original = @imagecreatefromjpeg( $file );
-				break;
-				//PNG
-				case( '3' ):
-					$original = @imagecreatefrompng( $file );
-				break;
-				default:
-					return false;
-				break;
-			}
-			
-			if(!$original)
-			{
-				throw new Kea_Domain_Exception( "Could not open file: ".basename($file) );
-			}
-
-			imagecopyresampled( $thumb, $original, 0, 0, 0, 0, $new_width, $new_height, $width, $height );
-
-			$filename = basename( $file );
-			$new_name = explode( '.', $filename );
-			$new_name[0] .= '_thumb';
-			$thumbname = implode( '.', $new_name );
-			
-			$new_path = rtrim( ABS_THUMBNAIL_DIR, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $thumbname;
-
-			switch( $output ) {
-				//GIF
-				case( '1' ):
-					imagegif( $thumb, $new_path );
-				break;
-				//JPG
-				case( '2' ):
-					imagejpeg( $thumb, $new_path, 100 );
-				break;
-				//PNG
-				case( '3' ):
-					imagepng( $thumb, $new_path );
-				break;
-				default:
+				if( $percent ) {
+					$new_width = ($percent * $width);
+					$new_height = ($percent * $height);
+				} elseif( $new_width && !$new_height ) {
+					if( $new_width < $width ) {
+						$ratio = ( $new_width / $width );
+						$new_height = ( $height * $ratio );
+					} else {
+						$new_width = $width;
+						$new_height = $height;
+					}
+				} elseif( !$new_width && $new_height ) {
+					if( $new_height < $height ) {
+						$ratio = ( $new_height / $height );
+						$new_width = ( $width * $ratio );					
+					} else {
+						$new_height = $height;
+						$new_width = $width;
+					}
+				} elseif( !$percent && !$new_width && !$new_height ) {
 					throw new Kea_Domain_Exception(
-						'Can only encode thumbnails as png, jpeg, or gif.'
+						'At least one of the following must be specified: percent, new width, new height or both new width and new height.'
 					);
-				break;
+				}
+
+				$img = imagecreatetruecolor( $new_width, $new_height );
+			
+				// From php.net, with a few bug fixes and a MAX_MEMORY setting
+				// This function should probably go somewhere else
+
+				self::setMemoryForImage($file);
+			
+				switch( $type ) {
+					//GIF
+					case( '1' ):
+						$original = @imagecreatefromgif( $file );
+					break;
+					//JPG
+					case( '2' ):
+						$original = @imagecreatefromjpeg( $file );
+					break;
+					//PNG
+					case( '3' ):
+						$original = @imagecreatefrompng( $file );
+					break;
+					default:
+						return false;
+					break;
+				}
+			
+				if(!$original)
+				{
+					throw new Kea_Domain_Exception( "Could not open file: ".basename($file) );
+				}
+
+				imagecopyresampled( $img, $original, 0, 0, 0, 0, $new_width, $new_height, $width, $height );
+
+				$filename = basename( $file );
+				$new_name = explode( '.', $filename );
+				$new_name[0] .= '_' . basename($dir);
+				$imgname = implode( '.', $new_name );
+			
+				$new_path = rtrim( $dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imgname;
+
+				switch( $output ) {
+					//GIF
+					case( '1' ):
+						imagegif( $img, $new_path );
+					break;
+					//JPG
+					case( '2' ):
+						imagejpeg( $img, $new_path, 100 );
+					break;
+					//PNG
+					case( '3' ):
+						imagepng( $img, $new_path );
+					break;
+					default:
+						throw new Kea_Domain_Exception(
+							'Can only encode thumbnails as png, jpeg, or gif.'
+						);
+					break;
+				}
+				imagedestroy( $original );
+				imagedestroy( $img );
+				return $imgname;
 			}
-			imagedestroy( $original );
-			imagedestroy( $thumb );
-			return $thumbname;
-		}
-		return false;
+			return false;
 		} catch(Kea_Exception $e)
 		{
 			die( $e->__toString() );
 		}
 	}
 	
-	public static function imCreateThumbnail( $file, $percent = null, $new_width = null, $new_height = null )
+
+
+	public static function imCreateImage( $file, $dir, $percent = null, $new_width = null, $new_height = null, $no_enlarge = TRUE )
 	{
+		
+		if( !is_dir($dir) )
+		{
+			throw new Kea_Domain_Exception ('Invalid directory to put new image');
+		}
+		if( !is_writeable($dir) )
+		{
+			throw new Kea_Domain_Exception ('Unable to write to '. $dir . ' directory; improper permissions');
+		}
+		
 		if( file_exists( $file ) && is_readable( $file ) && getimagesize( $file ) )
 		{	
 			list( $width, $height, $type ) = getimagesize( $file );
 			
 			$filename = basename( $file );
 			$new_name = explode( '.', $filename );
-			$new_name[0] .= '_thumb';
-			$thumbname = implode( '.', $new_name );
-			
-			$new_path = rtrim( ABS_THUMBNAIL_DIR, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $thumbname;
+			$new_name[0] .= '_' . basename($dir);
+			$imagename = implode( '.', $new_name );
+			$new_path = rtrim( $dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imagename;
 			
 			$file = escapeshellarg( $file );
 			$new_path = escapeshellarg( $new_path );
-
+			
 			if( $percent )
 			{
 				$new_width = ($percent * $width);
@@ -354,12 +412,21 @@ class File extends Kea_Domain_Model
 					'At least one of the following must be specified: percent, new width, new height or both new width and new height.'
 				);
 			}
+			
+			//We probably don't want to make images that are any bigger than the raw file
+			if( $no_enlarge )
+			{
+				if ( ( !empty($new_width) && $new_width > $width ) || ( !empty($new_height) && $new_height > $height ) )
+				{
+					$command = PATH_TO_CONVERT . ' ' . $file . ' ' . $new_path;
+				}
+			}
 
 			exec( $command, $result_array, $result_value );
 			
 			if( $result_value == 0 )
 			{
-				return $thumbname;	
+				return $imagename;	
 			}
 			else
 			{
@@ -369,7 +436,7 @@ class File extends Kea_Domain_Model
 			}
 		}
 	}
-
+	
 	protected static function setMemoryForImage($filename)
 	{
 		// DEBUG

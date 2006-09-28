@@ -124,6 +124,7 @@ class ObjectsController extends Kea_Action_Controller
 				->getFiles();					
 			return $obj;
 		else:
+		throw new Kea_Domain_Exception('Cannot retrieve object with ID # '.$id);
 			return false;
 		endif;
 	}
@@ -169,13 +170,6 @@ class ObjectsController extends Kea_Action_Controller
 			10 - Admin
 			1 - Superuser
 		*/
-
-		// Screen out objects for which consent hasn't been given unless an admin
-/*		if( !self::$_session->isAdmin() ) {
-			$select->where( 'objects.object_contributor_consent = ?', 'yes' );
-		}
-*/		
-		// End consent screening
 		
 		if( self::$_request->getProperty( 'collection' ) ) {
 			$select->where( 'objects.collection_id = ?', self::$_request->getProperty( 'collection' ) );
@@ -192,10 +186,6 @@ class ObjectsController extends Kea_Action_Controller
 		
 		if( self::$_request->getProperty( 'contributor' ) ) {
 			$select->where( 'objects.contributor_id = ?', self::$_request->getProperty( 'contributor' ) );
-		}
-		
-		if( self::$_request->getProperty( 'status' ) ) {
-			$select->where( 'objects.object_status = ?', self::$_request->getProperty( 'status' ) );
 		}
 		
 		if( self::$_request->getProperty( 'type' ) ) {
@@ -238,7 +228,7 @@ class ObjectsController extends Kea_Action_Controller
 		
 		$select->group( 'objects.object_id' );
 		$this->applyPermissions( $select );
-
+		
 		return $mapper->paginate( $select, $page, $num_objects, 'objectsTotal' );
 	}
 	
@@ -290,10 +280,7 @@ class ObjectsController extends Kea_Action_Controller
 	{
 		if( !self::$_session->isAdmin() )
 		{
-			$select->where( 'objects.object_contributor_consent = ?', 'yes' )
-					->where( '(objects.object_contributor_posting = "anonymously" OR objects.object_contributor_posting = "yes") AND objects.object_status = ?', 'approved' );
-				//	->orWhere( 'objects.object_contributor_posting = ?', 'anonymously' )
-				//	->where( 'objects.object_status = ?', 'approved' );
+			$select->where( 'objects.object_published = ?', 1 );
 		}
 				
 		return $select;	
@@ -332,65 +319,6 @@ class ObjectsController extends Kea_Action_Controller
 		}
 		self::$_session->setValue( 'object_form_saved', null );
 	}
-
-	// this is called by the consent form
-	protected function _submitContribution()
-	{
-		if( $object_consent = self::$_request->getProperty( 'object_contributor_consent' ) )
-		{
-			$object = self::$_session->getValue( 'contributed_object' );
-			$files = self::$_session->getValue( 'contributed_files' );
-			
-			if( $object_consent == 'no' )
-			{
-				self::$_session->unsetValue( 'contributed_object' );
-				if( $files )
-				{
-					foreach( $files as $file )
-					{
-						File::delete( $file->getId() );
-					}
-				}
-				
-				$object->delete();
-				$this->redirect( BASE_URI . DS . 'contribute' );
-				return;
-			}
-			
-	/*		if( self::$_session->getValue( 'contributed_user' ) )
-			{
-				self::$_session->loginUser( self::$_session->getValue( 'contributed_user' ) );
-				self::$_session->unsetValue( 'contributed_user' );
-			} */
-			
-			// Stash contributor_id
-			//self::$_session->setValue( 'contributor_id', $object->contributor_id );
-			
-			$object->object_contributor_consent = $object_consent;
-			$object->save();
-
-			
-			// Send e-mail
-			$contributor_mapper =  new Contributor_Mapper();
-			$email = $contributor_mapper->find()->where('contributor_id = ?', $object->contributor_id)->execute()->contributor_email;
-			$message = "Thank you for your contribution to ".SITE_TITLE.".  Your contribution has been accepted and will be preserved in the digital archive. For your records, the permanent URL for your contribution is noted at the end of this email. Please note that contributions may not appear immediately on the website while they await processing by project staff.
-			
-Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NAME'] . substr($_SERVER['PHP_SELF'] , 0, strrpos($_SERVER['PHP_SELF'], '/')) . DS .'object' . DS .self::$_session->getValue( 'contributed_object' )->object_id;
-			$title = "Your ".SITE_TITLE." Contribution";
-			$header = 'From: '.EMAIL . "\n" . 'X-Mailer: PHP/' . phpversion();
-			
-			mail( $email, $title, $message, $header);
-			
-			//self::$_session->unsetValue( 'contributed_object' );
-			if( self::$_session->getValue( 'contributed_files' ) )
-			{
-				self::$_session->unsetValue( 'contributed_files' );
-			}
-			$this->redirect( BASE_URI . DS . 'thankyou' );
-			return;
-
-		}
-	}
 	
 	/**
 	 * Edit an archived object
@@ -425,18 +353,17 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 			
 			$sudo = array();
 			$object_a = array(	'object_id'						=> $object->getId(),
-								'object_status'					=> $object->object_status,
 								'object_title'					=> $object->object_title,
 								'object_description'			=> $object->object_description,
 								'category_id'					=> $object->category_id,
 								'collection_id'					=> $object->collection_id,
 								'object_language'				=> $object->object_language,
 								'contributor_id'				=> $object->contributor_id,
-								'object_contributor_posting'	=> $object->object_contributor_posting,
-								'object_contributor_consent'	=> $object->object_contributor_consent,
 								'object_publisher'				=> $object->object_publisher,
 								'object_rights'					=> $object->object_rights,
 								'object_relation'				=> $object->object_relation,
+								'object_subject'				=> $object->object_subject,
+								'object_source'					=> $object->object_source,
 								'category_metadata'				=> $object->category_metadata );
 
 			$sudo['object_added'] = $object->object_added;
@@ -476,32 +403,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 				$sudo['object_creation_day'] = null;
 				$sudo['object_creation_year'] = null;
 			}
-
-			if( $object->object_coverage_start )
-			{
-				$sudo['object_coverage_start_month'] = date( 'm', strtotime( $object->object_coverage_start ) );
-				$sudo['object_coverage_start_day'] = date( 'd', strtotime( $object->object_coverage_start ) );
-				$sudo['object_coverage_start_year'] = date( 'Y', strtotime( $object->object_coverage_start ) );
-			}
-			else
-			{
-				$sudo['object_coverage_start_month'] = null;
-				$sudo['object_coverage_start_day'] = null;
-				$sudo['object_coverage_start_year'] = null;
-			}
-			
-			if( $object->object_coverage_end )
-			{
-				$sudo['object_coverage_end_month'] = date( 'm', strtotime( $object->object_coverage_end ) );
-				$sudo['object_coverage_end_day'] = date( 'd', strtotime( $object->object_coverage_end ) );
-				$sudo['object_coverage_end_year'] = date( 'Y', strtotime( $object->object_coverage_end ) );
-			}
-			else
-			{
-				$sudo['object_coverage_end_month'] = null;
-				$sudo['object_coverage_end_day'] = null;
-				$sudo['object_coverage_end_year'] = null;
-			}
 			
 			$location_a = array(	'address'	=> $object->location->address,
 									'zipcode'	=> $object->location->zipcode,
@@ -538,35 +439,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 		{
 			$object->object_date = 'NULL';
 		}
-		
-		if( self::$_request->getProperty('object_coverage_start_month')
-			&& self::$_request->getProperty('object_coverage_start_day')
-			&& self::$_request->getProperty('object_coverage_start_year') )
-		{
-			$c_start_month = self::$_request->getProperty('object_coverage_start_month');
-			$c_start_day = self::$_request->getProperty('object_coverage_start_day');
-			$c_start_year = self::$_request->getProperty('object_coverage_start_year');
-			$object->object_coverage_start = $c_start_year . '-' . $c_start_month . '-' . $c_start_day;
-		}
-		else
-		{
-			$object->object_coverage_start = 'NULL';
-		}
-		
-		if( self::$_request->getProperty('object_coverage_end_month') 
-			&& self::$_request->getProperty('object_coverage_end_day') 
-			&& self::$_request->getProperty('object_coverage_end_year') )
-		{
-			$c_end_month = self::$_request->getProperty('object_coverage_end_month');
-			$c_end_day = self::$_request->getProperty('object_coverage_end_day');
-			$c_end_year = self::$_request->getProperty('object_coverage_end_year');
-			$object->object_coverage_end = $c_end_year . '-' . $c_end_month . '-' . $c_end_day;
-		}
-		else
-		{
-			$object->object_coverage_end = 'NULL';
-		}
-		
 
 		// Else, try to match contributor by logged-in ID
 		// If the object's contributor ID is not set, then try to grab contributor info from the form.
@@ -754,7 +626,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 			$object->save();
 		}
 
-
 		if( count( $this->validationErrors ) > 0 ) {
 			self::$_session->setValue( 'object_form_saved', $_REQUEST );
 			$adapter->rollback();
@@ -906,357 +777,6 @@ Contribution URL (pending review by project staff): http://".$_SERVER['SERVER_NA
 							->where( 'location.longitude != ?', '')
 							->execute();
 		return $featured->getObjectAt( mt_rand( 0, $featured->total() - 1 ) );
-	}
-	
-	protected function _ingest()
-	{
-		if (self::$_request->getProperty('batch_add_do')) {
-				$contributor = new Contributor(self::$_request->getProperty('contributor'));
-				if( $this->validates($contributor) ) 
-				{
-					if( $contributor->uniqueNameEmailInstitution() )
-					{
-						$contributor->save();	
-					}
-					else
-					{
-						$contributor = $contributor->findUnique();
-					}
-					self::$_request->setProperty('contributor_id', $contributor->contributor_id);
-					//echo self::$_request->getProperty('contributor_id');
-					if(self::$_request->getProperty('collection_id'))
-					{
-						$this->ingestFileTree($this->getFileTree(), self::$_request->getProperty('collection_id'));
-					}
-					else
-					{
-						$this->ingestFileTree($this->getFileTree());
-					}
-				}
-				else 
-				{
-					return;
-				}
-		}
-		
-		
-		return;
-	}
-	
-	private function ingestFileTree( $tree , $parent_collection_id=null, $output=null ) 
-	{
-	try{
-		$output = "";
-		//print_r(self::$_request->getProperties());
-		if(self::$_request->getProperty('contributor_id'))
-		{
-			$contributor_id = self::$_request->getProperty('contributor_id');
-			foreach ( $tree as $key => $value  )
-			{
-				if ( is_array( $value ) && is_readable($key) && is_writeable($key) ) 
-				{
-					// It's a folder:
-					// 1. Make a collection
-					// parent_collection_id ===> collection_parent
-					// $key ===> collection_name
-					// 2. Call ingestFileTree( $value , last_mysql_collection_id_created)
-					$collParams = array( 
-						'collection_name'			=>	basename($key),
-						'collection_collector'		=>	NULL,	//How to get contributor name from the API?
-						'collection_description'	=>	NULL,	//Get this value somehow
-						'collection_active'			=>  0, 		//Safe to assume this collection is active?
-						'collection_featured'		=>	0,		//Not featured by default
-						'collection_parent'			=>	$parent_collection_id);
-				
-					$currentCollection = new Collection($collParams);
-				
-					if( !($this->validates($currentCollection)) ) 
-					{
-						return;
-					}
-					else 
-					{
-						$currentCollection->save();
-						$output .= "<ul>Collection named: " . $currentCollection->collection_name . " created successfully!</ul>\n";
-						$output .= $this->ingestFileTree($value, $currentCollection->collection_id, $output);
-					
-						//Delete the directory if it is empty, first make sure to delete Thumbs.db
-						$dir = $key;
-						@unlink($dir.DIRECTORY_SEPARATOR.'Thumbs.db');
-
-						if( $this->is_empty_dir($dir) ) 
-						{
-							if( !rmdir($dir) ) {
-								throw new Kea_Action_Exception("Empty Directory: $dir could not be deleted");
-							}
-
-						}
-					}
-				}	
-				elseif( is_readable($value) && is_writeable($value) )
-				{
-				
-					$objParams = array(
-						'object_title'				=>	$key,
-						'contributor_id'			=>	$contributor_id,
-						'creator_id'				=>	$contributor_id,
-						'collection_id'				=>	($parent_collection_id) ? $parent_collection_id : 'NULL'); 
-					$currentObject = new Object(array_merge($objParams, self::$_request->getProperty('Object')));
-					
-					if($this->validates($currentObject))
-					{
-						$currentObject->save();
-					}
-					else
-					{
-						return;
-					}
-					
-					$location = new Location( self::$_request->getProperty('Location') );
-					$location->object_id = $currentObject->getId();
-					if( $location->hasValues() ) {$location->save();}
-					
-					$fileParams = array(
-						'file_title'			=>	$key,
-						'object_id'				=>	$currentObject->object_id,
-						'contributor_id'		=>	$contributor_id,
-						'file_original_filename'=>	basename($value),
-						'file_archive_filename'	=>	File::createArchiveFilename(basename($value)),
-						'file_added'			=>	date("Y-m-d H:i:s") );
-					
-					$currentFile = new File($fileParams);
-					
-					//print_r($currentFile);
-					$old_path = $value;
-					$new_path = ABS_VAULT_DIR . DIRECTORY_SEPARATOR . $currentFile->file_archive_filename;
-				
-					//Extraction of header data
-					switch ( self::$_request->getProperty('use_image_headers') )
-					{
-						case 'exif':
-							if(function_exists('exif_imagetype') && function_exists('exif_read_data'))
-							{
-								$fileimagetype = exif_imagetype($old_path);
-						
-								if( ($fileimagetype == IMAGETYPE_JPEG) || ($fileimagetype == IMAGETYPE_TIFF_II) || ($fileimagetype == IMAGETYPE_TIFF_MM) ) 
-								{
-									$exif = @exif_read_data($old_path, 0, true);
-									$exif = $this->windowsToAscii($exif);
-									if($exif) {
-										$exifImageDesc = (isset($exif['IFD0']['ImageDescription'])) ? $exif['IFD0']['ImageDescription'] : NULL;
-										$exifComments = (isset($exif['IFD0']['Comments'])) ? $exif['IFD0']['Comments'] : NULL;
-										$exifTitle = (isset($exif['IFD0']['Title'])) ? $exif['IFD0']['Title'] : NULL;
-									}
-									if ( strlen($exifImageDesc) > strlen($exifComments) ) { $currentObject->object_description = $exifImageDesc;}
-									elseif ( !empty($exifComments) ) { $currentObject->object_description = $exifComments; }
-									if( !empty($exifTitle) ) {$currentObject->object_title = $exifTitle;}
-								}
-							}
-							else
-							{
-								throw new Kea_Action_Exception("Unable to process EXIF data in image headers (application needs PHP Exif library installed)");
-							}
-						break;
-						
-						case 'iptc':
-							$iptcdata = File::getIPTCvalues($old_path);
-							$iptcdata = $this->windowsToAscii($iptcdata);
-							if ( !empty($iptcdata['name']) )
-							{
-								$currentFile->file_title = $iptcdata['name'];
-								$currentObject->object_title = $currentFile->file_title;
-							}
-							if( !empty($iptcdata['description']) ) { $currentObject->object_description = $iptcdata['description']; }
-							if(!empty($iptcdata['creation_date'])) {
-								$fileyear = substr(@$iptcdata['creation_date'], 0, 4);
-								$filemonth =  substr(@$iptcdata['creation_date'], 3, 2);
-								$fileday = substr(@$iptcdata['creation_date'], 5, 2);
-								$currentFile->file_date = "$fileyear:$filemonth:$fileday 00:00:00";
-							}
-						break;
-						
-						case 'none':		
-						default:
-						break;
-					}
-					
-					//Move the file from the dropbox to the vault directory
-					
-					if(!rename($old_path, $new_path))
-					{
-						throw new Kea_Action_Exception("File: {$currentFile->file_original_filename} cannot be moved, possible permissions error");
-					}
-					else {
-							$currentFile->file_mime_php = mime_content_type( $new_path );
-							$currentFile->file_mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $new_path ) ) ) );
-							$currentFile->file_type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $new_path ) ) ) );
-							$currentFile->file_size = filesize($new_path);
-							$currentFile->file_thumbnail_name = File::createThumbnail( $new_path, null, THUMBNAIL_SIZE );
-					}
-				
-					 
-					if( $this->validates($currentFile) ) 
-					{
-						$currentFile->save();
-					}
-					else
-					{
-						throw new Kea_Domain_Exception("File named {$currentFile->file_original_filename} could not be saved in DB!");
-					}
-				
-					//$currentObject->category_id = categoryFromFileMimeType($currentFile->file_mime_os);
-				
-					if( $this->validates($currentObject) ) 
-					{
-						$currentObject->save();
-					}
-				
-					$output .= "<li>Object # {$currentObject->object_id}: {$currentObject->object_title} created successfully!</li>";
-					// It's a file:
-					// 1. create an object
-					// 2. Create new file attached to object
-					// parent_collection_id ===> object_collection_id
-					// $key ===> object_name
-					// $value ===> file path
-				}
-			}
-
-		}	
-		self::$_request->setProperty('batch_output', $output);
-		return $output;
-	} catch(Exception $e) {
-		//die($e->__toString());
-		echo $output . $e->__toString();
-	}
-	}
-	
-	protected function _displayDropbox()
-	{
-		$tree = $this->getFileTree();
-		
-		$displayExif = ( self::$_request->getProperty('preview_exif') ) ? TRUE : FALSE;
-		$displayIPTC = ( self::$_request->getProperty('preview_iptc') ) ? TRUE : FALSE;
-		
-		$output = $this->displayFileTree($tree, 0, $displayExif, $displayIPTC);
-		
-		echo $output;
-	}
-	
-	private function displayFileTree($tree, $filenum = 0, $displayEXIF = FALSE, $displayIPTC = FALSE)
-	{
-		$output = "\n\t";
-		foreach ( $tree as $key => $value  )
-		{
-			if ( is_array( $value ) )
-			{
-				$filenum = 0;
-				$output .= "<ul class=\"directory\">".basename($key).$this->displayFileTree( $value, $filenum, $displayEXIF, $displayIPTC )."</ul>";
-				if( !is_readable($key) || !is_writeable($key) )
-				{
-					$output .= "<div class=\"error\">Warning: Batch ingest does not have access to directory $key Improper file/directory permissions.";
-					$output .= "Have an administrator fix this before uploading.</div>";
-					 	
-				}
-			}
-			else
-			{
-				$filenum++;
-				if( !is_readable($value) || !is_writeable($value) )
-				{
-						$output .= "<div class=\"error\">Warning: Batch ingest does not have access to file ".basename($value).": ";
-						$output .= "Improper file/directory permissions.  Have an administrator fix this before uploading.</div>";
-				}
-				$output .= "<li class=\"file\">";
-				
-				if ( $displayEXIF || $displayIPTC )
-				{
-					//Let's make a table that displays all the header info
-					$output .= "\n<table class=\"file\">";
-					$output .= "<tr>\n\t<td>$filenum ) $key</td>";
-					$output .= "</tr><tr>\n\t<td>";
-					if ( $displayEXIF )
-					{
-						//Preview exif data
-						$exif = exif_read_data($value, 0, true);
-						if($exif) {
-							$output .= ( ( isset($exif['IFD0']['Title']) ) ? "EXIF Title: ".$this->windowsToAscii($exif['IFD0']['Title'])."<br/>" : "&nbsp;" );
-							$output .= ( ( isset($exif['IFD0']['ImageDescription']) ) ? "EXIF ImageDescription: " . $this->windowsToAscii($exif['IFD0']['ImageDescription']) : "&nbsp;" );
-							$output .= ( ( isset($exif['IFD0']['Comments'] ) ) ? "EXIF Comments: " . $this->windowsToAscii($exif['IFD0']['Comments']) : "&nbsp;");
-						}
-						else{
-							$output .= "No EXIF header data";
-						}
-					
-						$output .= "</td>\n\t<td>";
-					}
-					
-					if ( $displayIPTC )
-					{
-						$iptc = File::getIPTCValues($value);
-						$iptc = $this->windowsToAscii($iptc);
-
-						if( !empty($iptc['name']) || !empty($iptc['description']) )
-						{
-							$output .= "IPTC Title: ".$this->windowsToAscii($iptc['name'])."<br/>";
-							$output .= "IPTC Description: ".$this->windowsToAscii($iptc['description']);
-						}
-					}
-
-					$output .= "</td>\n</tr>\n</table>";
-				}
-				else
-				{
-					$output .= "$filenum ) $key";
-				}
-				$output .= "</li>\n";
-			}
-		}
-
-		return $output;
-	}
-	
-	private function getFileTree($rootPath = ABS_DROPBOX_DIR)
-	{
-	   $pathStack = array($rootPath);
-	   $contentsRoot = array();
-	   $contents = &$contentsRoot;
-	   while ($path = array_pop($pathStack)) {
-	       $contents[basename($path)] = array();
-	       $contents = &$contents[basename($path)];
-	       foreach (scandir($path) as $filename) {
-	           if ('.' != substr($filename, 0, 1)) {
-	               $newPath = $path.'/'.$filename;
-	               if (is_dir($newPath)) {
-	                   //$contents[basename($newPath)] = getFileTree($newPath);
-						$contents[$newPath] = $this->getFileTree($newPath);
-	               } else {
-						// screen out files we know we don't want
-	                   if (!strpos($newPath, 'umbs.db') )
-						$contents[basename($filename)] = $newPath;
-	               }
-	           }
-	       }
-	   }
-	   return $contentsRoot[basename($rootPath)];
-	}
-	
-	private function is_empty_dir($dirname){
-
-		// Returns true if  $dirname is a directory and it is empty
-
-		   $result=false;                      // Assume it is not a directory
-		   if(is_dir($dirname) ){
-		       $result=true;                  // It is a directory
-		       $handle = opendir($dirname);
-		       while( ( $name = readdir($handle)) !== false){
-		               if ($name!= "." && $name !=".."){
-		             $result=false;        // directory not empty
-		             break;                  // no need to test more
-		           }
-		       }
-		       closedir($handle);
-		   }
-		   return $result;
 	}
 	
 	public function windowsToAscii($text, $replace_single_quotes = true, $replace_double_quotes = true, $replace_emdash = true, $use_entities = false)

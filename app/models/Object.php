@@ -2,30 +2,26 @@
 
 class Object extends Kea_Domain_Model
 {
-	protected $validate		=	array(	//'object_title'					=> array( '/(\w)+/', 'Objects must have a title.' ),
-	 									'object_status'					=> array( '/(\w)+/', 'Objects must have a status.' ),
-	 									'object_contributor_consent'	=> array( '/(\w)+/', 'Objects must be given a contributor\'s consent.'),
-	 									'object_contributor_posting'	=> array( '/(\w)+/', 'Objects must have posting consent.' ) );
+	protected $validate		=	array(	'object_title'					=> array( '/(\w)+/', 'Objects must have a title.' ) );
 	
 	public $object_id;
 	public $object_title;
 	public $object_publisher;
 	public $object_language;
 	public $object_relation;
-	public $object_coverage_start;
-	public $object_coverage_end;
+	public $object_coverage;
 	public $object_rights;
 	public $object_description;
+	public $object_source;
+	public $object_subject;
 	
 	public $object_date;
-	public $object_status;
-	public $object_contributor_consent;
-	public $object_contributor_posting;
 	
 	public $object_added;
 	public $object_modified;
 	public $objectType_id;
 	public $object_featured;
+	public $object_published;
 	
 	public $user_id;
 	
@@ -233,12 +229,8 @@ class Object extends Kea_Domain_Model
 	public function getCitation() 
 	{
 		$cite = '';
-		if ( $this->object_contributor_posting != 'anonymously') {
-			$cite .= $this->contributor->getName();
-			if ($cite != '') $cite .= ', ';
-		}
-		else 
-		 	$cite = 'Anonymous, ';
+		$cite .= $this->contributor->getName();
+		if ($cite != '') $cite .= ', ';
 		$cite .= ($this->object_title) ? '"'.$this->object_title.'." ' : '"Untitled." ';
 		$cite .= '<em>'.INFO_TITLE.'</em>, ';
 		$cite .= 'Object #'.$this->object_id.' ';

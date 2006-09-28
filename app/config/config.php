@@ -6,10 +6,10 @@ define( 'DS', DIRECTORY_SEPARATOR );
 	DB connection
 */
 
-define( 'KEA_MYSQLI_HOST',		'' );
-define( 'KEA_MYSQLI_USERNAME',	'' );
-define( 'KEA_MYSQLI_PASSWORD',	'' );
-define( 'KEA_MYSQLI_DBNAME',	'' );
+define( 'KEA_MYSQLI_HOST',		'mysql.localdomain' );
+define( 'KEA_MYSQLI_USERNAME',	'nagrin' );
+define( 'KEA_MYSQLI_PASSWORD',	'dudeman' );
+define( 'KEA_MYSQLI_DBNAME',	'sitebuilder_v01' );
 
 define( 'KEA_MYSQLI_PORT',		null );
 define( 'KEA_MYSQLI_SOCKET',	null );
@@ -21,10 +21,14 @@ define( 'KEA_MYSQLI_SOCKET',	null );
 
 define( 'INFO_TITLE',			'Sitebuilder' );
 define( 'SITE_TITLE',			INFO_TITLE);
-define( 'THUMBNAIL_SIZE', 250);
+define( 'THUMBNAIL_SIZE', 150);
 define( 'EMAIL', 'DO_NOT_REPLY@siteurl.com');
-
-
+define( 'FULLSIZE_IMAGE_SIZE', 600);
+/*
+	Google Maps key
+*/
+//define( 'GMAPS_KEY',			'ABQIAAAAD-SKaHlA87rO8jrVjT7SHBQ22YnqeXddIs-jHkCCm8C4K5z8GBTo29raXitwn3YbLGstzhF1Yn4Ctg' );
+define( 'GMAPS_KEY',			'ABQIAAAAhxrOVZoPjvFB090WXAmN1hQ9iUszHZcPL8-0fTCLlz8-XEDUHhQ4FiFVo8WO6-J8nMxNiJOqnbZQUg');
 /**
 	Dir names
 */
@@ -35,6 +39,7 @@ define( 'VAULT_DIR_NAME',		'vault' );
 define( 'THUMBNAIL_DIR_NAME',	'thumbnails' );
 define( 'LOG_DIR_NAME',			'logs' );
 define( 'DROPBOX_DIR_NAME',        'dropbox' );
+define( 'FULLSIZE_DIR_NAME',	'fullsize' );
 
 /*
 	Absolute directory locations
@@ -45,6 +50,7 @@ define( 'ABS_CONTENT_DIR',		ABS_ROOT.DS.CONTENT_DIR_NAME );
 define( 'ABS_VAULT_DIR',		ABS_CONTENT_DIR.DS.VAULT_DIR_NAME );
 define( 'ABS_THUMBNAIL_DIR',	ABS_CONTENT_DIR.DS.THUMBNAIL_DIR_NAME );
 define( 'ABS_DROPBOX_DIR',      ABS_CONTENT_DIR.DS.DROPBOX_DIR_NAME );
+define( 'ABS_FULLSIZE_DIR',		ABS_CONTENT_DIR.DS.FULLSIZE_DIR_NAME );
 
 /*
 	Google Maps key
@@ -82,6 +88,7 @@ define( 'WEB_CONTENT_DIR',		WEB_ROOT.DS.CONTENT_DIR_NAME );
 define( 'WEB_VAULT_DIR', 		WEB_CONTENT_DIR.DS.VAULT_DIR_NAME );
 define( 'WEB_THUMBNAIL_DIR',	WEB_CONTENT_DIR.DS.THUMBNAIL_DIR_NAME );
 define( 'SITE_BASE_URL', 'http://'. $_SERVER['SERVER_NAME'] . substr($_SERVER['PHP_SELF'] , 0, strrpos($_SERVER['PHP_SELF'], '/')) );
+define( 'WEB_FULLSIZE_DIR', 	WEB_CONTENT_DIR.DS.FULLSIZE_DIR_NAME );
 
 /*
 	Theme directives, these will become dynamic
@@ -97,7 +104,7 @@ define( 'ADMIN_URI', 'admin' );	// The uri which designates the route to the adm
 /*
 	Debug levels
 */
-define( 'KEA_DEBUG_ERRORS',		0 );
+define( 'KEA_DEBUG_ERRORS',		1 );
 define( 'KEA_DEBUG_TIMER',		false );
 define( 'KEA_DEBUG_SQL',		false );
 define( 'KEA_DEBUG_TEMPLATE',	true );

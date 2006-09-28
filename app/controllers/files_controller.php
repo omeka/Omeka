@@ -44,8 +44,6 @@ class FilesController extends Kea_Action_Controller
 			
 		}
 		$this->scrubDate( $file->file_date );
-		$this->scrubDate( $file->file_coverage_start );
-		$this->scrubDate( $file->file_coverage_end );
 		$this->scrubDate( $file->file_capture_date );
 		
 		$file->save();
