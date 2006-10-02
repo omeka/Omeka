@@ -1,5 +1,10 @@
 <fieldset>
 	<legend>Core Metadata</legend>
+
+	
+	<label for="object_public">This object is publicly viewable.
+	<input type="checkbox" name="Object[object_public]" id="object_public" value="1" <?php echo (@$saved['Object']['object_public']) ? 'checked="checked"' : '';?>></label>
+	
 	<label class="readonly" for="object_id">Object's Database ID (read only)</label>
 
 	<?php
@@ -26,10 +31,10 @@
 
 	<?php
 		$_form->text(	array(	'size'	=> 20,
-								'name'	=> 'creator_other',
-								'id'	=> 'creator_other',
+								'name'	=> 'Object[object_creator]',
+								'id'	=> 'object_creator',
 								'class'		=> 'textinput',
-								'value'	=> @$saved['creator_other'] ) );
+								'value'	=> @$saved['Object']['object_creator'] ) );
 	?>
 
 
@@ -62,17 +67,18 @@
 		$_form->text( 	array(	'size'	=> 40,
 								'name'	=> 'Object[object_publisher]',
 								'class'		=> 'textinput',
-								'id'	=> 'object_publisher' ),
-								@$saved['Object']['object_publisher'] );
+								'id'	=> 'object_publisher',
+								'value'	=> @$saved['Object']['object_publisher'] )
+								 );
 	?>
 
 	<label for="object_creator_other">Other Creator</label>
 	
 	<?php
-		$_form->text( array(	'name'		=> 'Object[object_creator_other]',
-		 						'id'		=> 'object_creator_other',
+		$_form->text( array(	'name'		=> 'Object[object_additional_creator]',
+		 						'id'		=> 'object_additional_creator',
 								'class'		=> 'textinput',
-								'value'		=> @$saved['Object']['object_creator_other'],
+								'value'		=> @$saved['Object']['object_additional_creator'],
 								'size'		=> 40,
 								) );
 	?>
@@ -171,8 +177,8 @@
 			$_form->textarea( 	array(	'rows'	=> '2',
 										'cols'	=> '60',
 										'id'	=> 'tags',
-										'name'	=> 'Object[object_tags]' ),
-										@$saved['Object']['object_tags'] );
+										'name'	=> 'tags' ),
+										@$saved['tags'] );
 		?>
 </fieldset>
 <fieldset>

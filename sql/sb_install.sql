@@ -10,6 +10,9 @@
  * @copywrite GPL http://www.gnu.org/licenses/gpl.txt
  */
 
+-- Necessary to avoid foreign key errors when reloading
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- 
 -- Objects
 --
@@ -51,14 +54,20 @@ CREATE TABLE objects (
 	# Type - aka - KJV object type metadata
 	category_id					int(11)		UNSIGNED NULL,
 	
+	# Creator
+	object_creator				text		NOT NULL,
+	
+	# Additional creator info
+	object_additional_creator	text		NOT NULL,
+	
 	# Contributor
-	contributor_id				int(11)		UNSIGNED NULL,
+	#contributor_id				int(11)		UNSIGNED NULL,
 	
 	# Creator
-	creator_id					int(11)		UNSIGNED NULL,
+	#creator_id					int(11)		UNSIGNED NULL,
 	
 	# Creator other
-	creator_other				text		NOT NULL,
+	#creator_other				text		NOT NULL,
 	
 	# Source
 	collection_id				int(11)		UNSIGNED NULL,
@@ -71,18 +80,18 @@ CREATE TABLE objects (
 #	Other meta data
 	object_coverage				text		NOT NULL,
 	
-	object_added				timestamp	NOT NULL default '0000-00-00 00:00:00',
+	object_added				timestamp	NULL default NULL,
 	object_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
 #	Object Featured
 	object_featured				int(1)		NOT NULL DEFAULT '0',
 	
 #	Object Published
-	object_published			BOOL 		NOT NULL DEFAULT '0', 
+	object_public			BOOL 		NOT NULL DEFAULT '0', 
 	PRIMARY KEY	(object_id),
 	INDEX		(category_id),
-	INDEX		(contributor_id),
-	INDEX		(creator_id),
+	#INDEX		(contributor_id),
+	#INDEX		(creator_id),
 	INDEX		(collection_id),
 	INDEX		(user_id)
 
@@ -242,13 +251,15 @@ CREATE TABLE files (
 	file_date					tinytext		NOT NULL,
 	file_source					text			NOT NULL,
 	file_subject				varchar(255)	NOT NULL,
+	file_creator				text			NOT NULL,
+	file_additional_creator		text			NOT NULL,
 
 #	Coverage
 	file_coverage				text		NOT NULL,
 
 #	Dublin core referenced in other tables
 	object_id					int(11)		UNSIGNED NULL,
-	contributor_id				int(11)		UNSIGNED NULL,
+	#contributor_id				int(11)		UNSIGNED NULL,
 
 #	File preservation and digitization metadata
 	file_transcriber			text	NOT NULL,
@@ -276,12 +287,12 @@ CREATE TABLE files (
 	file_type_os				tinytext	NOT NULL,
 	
 	file_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	file_added					timestamp	NOT NULL default '0000-00-00 00:00:00',
+	file_added					timestamp	NULL default NULL,
 
   PRIMARY KEY  (file_id),
 	INDEX		(object_id),
-	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE
+	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE
+	#FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE
 
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -376,7 +387,7 @@ FOR EACH ROW
 
 
 ALTER TABLE objects ADD CONSTRAINT `category_key` FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE objects ADD CONSTRAINT `contributor_key` FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE;
+#ALTER TABLE objects ADD CONSTRAINT `contributor_key` FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE objects ADD CONSTRAINT `collection_key` FOREIGN KEY (collection_id) REFERENCES collections(collection_id) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE objects ADD CONSTRAINT `user_key` FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -427,3 +438,5 @@ INSERT INTO `categories_metafields` (`category_id`, `metafield_id`) VALUES
 (13, 32);
 
 INSERT INTO users (`user_username`, `user_password`, `user_permission_id`, `user_active`) VALUES ('super', SHA1('super'), 1, 1);
+
+SET FOREIGN_KEY_CHECKS = 1;

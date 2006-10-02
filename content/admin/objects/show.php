@@ -8,6 +8,16 @@ include( 'subnav.php' );
 	
 	addLoadEvent(popUps);
 	
+	function markPublic( object_id )
+	{
+		var opt = {
+			parameters:'id=' + object_id,
+			method:'post'
+		}
+		
+		ajax = new Ajax.Updater('mark-public','<?php echo $_link->to( "objects", "ajaxMarkPublic" ); ?>', opt);
+	}
+	
 	function markFav( object_id )
 	{
 		var opt = {
@@ -81,15 +91,15 @@ include( 'subnav.php' );
 	<div id="primary">
 		<div id="object-dublin-core" class="metadata-list">
 			<h3>Core Metadata</h3>
-			<dl id="object-identifier"><dt>Identifier</dt> <dd>0001234</dd></dl>
-			<dl id="object-title"><dt>Title:</dt> <dd>Lorem Ipsum</dd></dl>
-			<dl id="object-creator"><dt>Creator:</dt> <dd>John Doe</dd></dl>
-			<dl id="object-subject"><dt>Subject:</dt> <dd>Trees</dd></dl>
-			<dl id="object-description"><dt>Description:</dt> <dd>Lorem ipsum dolor sit amet.</dd></dl>
+			<dl id="object-identifier"><dt>Identifier</dt> <dd><?php echo $object->object_id; ?></dd></dl>
+			<dl id="object-title"><dt>Title:</dt> <dd><?php echo $object->object_subject; ?></dd></dl>
+			<dl id="object-creator"><dt>Creator:</dt> <dd><?php echo $object->object_creator; ?></dd></dl>
+			<dl id="object-subject"><dt>Subject:</dt> <dd><?php echo $object->object_subject; ?></dd></dl>
+			<dl id="object-description"><dt>Description:</dt> <dd><?php echo $object->object_description; ?></dd></dl>
 			<dl id="object_publisher"><dt>Publisher:</dt> <dd><?php echo $object->object_publisher; ?></dd></dl>
-			<dl id="object-creator-other"><dt>Creator (Other):</dt> <dd>Jane Doe</dd></dl>
+			<dl id="object-creator-other"><dt>Additional Creator Info:</dt> <dd><?php echo $object->object_additional_creator; ?></dd></dl>
 			<dl id="object-date"><dt>Date:</dt> <dd><?php echo $object->object_date ?></dd></dl>
-			<dl id="object-source"><dt>Source:</dt> <dd>National Geographic</dd></dl>
+			<dl id="object-source"><dt>Source:</dt> <dd><?php echo $object->object_source; ?></dd></dl>
 			<dl id="object_language"><dt>Language:</dt> <dd><?php echo $object->object_language; ?></dd></dl>
 			<dl id="object_relation"><dt>Relation:</dt> <dd><?php echo $object->object_relation; ?></dd></dl>
 			<dl id="object-coverage"><dt>Coverage:</dt> <dd><?php echo $object->object_coverage; ?></dd></dl>
@@ -130,7 +140,12 @@ Make Featured			<?php endif; ?>
 			</a>
 		</div>
 		<div id="mark-public">
-			<a href="#" class="mark">Make Public</a>
+			<a class="mark<?php if( $object->object_public ): ?>
+			 public<?php endif; ?>" href="javascript:void(0)" onclick="markPublic('<?php echo $object->getId(); ?>');" >
+			<?php if( $object->object_public ): ?>
+Public			<?php else: ?>
+Make Public			<?php endif; ?>
+</a>
 		</div>
 		
 		<div id="object-contributor-info">
@@ -168,7 +183,7 @@ Make Featured			<?php endif; ?>
 					<?php if( self::$_session->isAdmin() ): ?>
 						<dl><dt>Added to Archive:</dt> <dd><?php echo $object->object_added; ?></dd></dl>
 						<dl><dt>Last Modified On:</dt> <dd><?php echo $object->object_modified; ?></dd></dl>
-						<dl><dt>Status ( Public | Not Public ):</dt> <dd>Public</dd></dl>
+						<dl><dt>Status ( Public | Not Public ):</dt> <dd><?php echo ($object->object_public) ? 'Public' : 'Not Public';?></dd></dl>
 
 					<?php endif; ?>
 

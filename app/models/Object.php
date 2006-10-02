@@ -14,14 +14,15 @@ class Object extends Kea_Domain_Model
 	public $object_description;
 	public $object_source;
 	public $object_subject;
-	
+	public $object_creator;
+	public $object_additional_creator;
 	public $object_date;
 	
 	public $object_added;
 	public $object_modified;
 	public $objectType_id;
 	public $object_featured;
-	public $object_published;
+	public $object_public;
 	
 	public $user_id;
 	
@@ -29,9 +30,10 @@ class Object extends Kea_Domain_Model
 	public $collection_id;
 	
 	// Contributor data
-	public $contributor_id;
+	// Contributor system is being removed/revised in future revisions [KBK]
+	//public $contributor_id;
 	
-	public $creator_id;
+	//public $creator_id;
 	
 	public $creator_other;
 	
@@ -209,6 +211,24 @@ class Object extends Kea_Domain_Model
 		elseif( $this->isFeatured() )
 		{
 			return $adapter->update( 'objects', array( 'object_featured'	=> '0' ), 'objects.object_id = \'' . $this->getId() . '\'' );
+		}
+		return false;
+	}
+	
+	public function flip( $field )
+	{
+		$adapter = Kea_DB_Adapter::instance();
+		if( $this->$field == 0)
+		{
+			$res = $adapter->update( 'objects', array( $field	=> '1' ), 'objects.object_id = \'' . $this->getId() . '\'' );
+			if($res) $this->$field = 1;
+			return $res;
+		}
+		elseif( $this->$field == 1 )
+		{
+			$res = $adapter->update( 'objects', array( $field	=> '0' ), 'objects.object_id = \'' . $this->getId() . '\'' );
+			if($res) $this->$field = 0;
+			return $res;
 		}
 		return false;
 	}

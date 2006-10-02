@@ -356,12 +356,17 @@ class ObjectsController extends Kea_Action_Controller
 								'category_id'					=> $object->category_id,
 								'collection_id'					=> $object->collection_id,
 								'object_language'				=> $object->object_language,
-								'contributor_id'				=> $object->contributor_id,
+								//'contributor_id'				=> $object->contributor_id,
 								'object_publisher'				=> $object->object_publisher,
 								'object_rights'					=> $object->object_rights,
+								'object_date'					=> $object->object_date,
+								'object_coverage'				=> $object->object_coverage,
+								'object_creator'				=> $object->object_creator,
+								'object_additional_creator'		=> $object->object_additional_creator,
 								'object_relation'				=> $object->object_relation,
 								'object_subject'				=> $object->object_subject,
 								'object_source'					=> $object->object_source,
+								'object_public'					=> $object->object_public,
 								'category_metadata'				=> $object->category_metadata );
 
 			$sudo['object_added'] = $object->object_added;
@@ -377,7 +382,7 @@ class ObjectsController extends Kea_Action_Controller
 				$object_a['object_language'] = $object->object_language;
 				$sudo['object_language_other'] = null;
 			}
-			
+/*			
 			if( $object->creator_id != $object->contributor_id )
 			{
 				$sudo['creator'] = 'no';
@@ -388,6 +393,7 @@ class ObjectsController extends Kea_Action_Controller
 				$sudo['creator'] = 'yes';
 				$sudo['creator_other'] = null;
 			}
+*/
 			
 			$location_a = array(	'address'	=> $object->location->address,
 									'zipcode'	=> $object->location->zipcode,
@@ -410,14 +416,14 @@ class ObjectsController extends Kea_Action_Controller
 		$adapter->beginTransaction();
 
 		$object = new Object( self::$_request->getProperty( 'Object' ) );
-
+		
 		// Else, try to match contributor by logged-in ID
 		// If the object's contributor ID is not set, then try to grab contributor info from the form.
 		// make a new contributor if its unique, otherwise find the pre-existing one, then take the ID
 		// from the one it found and attach that to the object.  If that doesn't work, then we try to get
 		// or make new contributor info from the user who is logged in [JMG addition]  
 		//If the object's contributor ID is still null, then just go ahead and set it to 'NULL' string
-
+/*
 		if( empty($object->contributor_id) )
 		{
 			if( self::$_request->getProperty('object_add') )
@@ -480,8 +486,8 @@ class ObjectsController extends Kea_Action_Controller
 				$object->contributor_id = 'NULL';
 			}
 		}
-		
-
+*/		
+/*
 		if( self::$_request->getProperty( 'creator' ) == 'yes' && !empty( $object->contributor_id ) )
 		{
 			$object->creator_id = $object->contributor_id;
@@ -496,7 +502,7 @@ class ObjectsController extends Kea_Action_Controller
 			$object->creator_id = null;
 			$object->creator_other = null;
 		}
-		
+*/		
 		if( $object->object_language == 'other' && self::$_request->getProperty('object_language_other') )
 		{
 			$object->object_language = self::$_request->getProperty('object_language_other');
@@ -507,8 +513,20 @@ class ObjectsController extends Kea_Action_Controller
 			$object->collection_id = 'NULL';
 		}
 		
+		if ( empty( $object->object_added) )
+		{
+			$object->object_added = null;
+		}
 		
-
+		if ( empty( $object->object_modified) )
+		{
+			$object->object_modified = 'NULL';
+		}
+		
+		if ( empty( $object->object_public) )
+		{
+			$object->object_public = 0;
+		}
 		
 		// This is a kludge to make sure that editing an object doesn't destroy its relationship with the user who uploaded it [JMG]
 		if ( !self::$_request->getProperty('object_edit') ) 

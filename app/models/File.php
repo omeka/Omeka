@@ -13,8 +13,10 @@ class File extends Kea_Domain_Model
 	public $file_subject;
 	public $file_description;
 	public $file_date;
+	public $file_creator;
+	public $file_additional_creator;
 	public $object_id;
-	public $contributor_id;
+	//public $contributor_id;
 	
 	public $file_transcriber;
 	public $file_producer;

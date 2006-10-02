@@ -8,8 +8,6 @@ $result = $__c->objects()->paginate();
 	<li<?php if(self::$_route['template'] == 'add') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects', 'add'); ?>">Add Item</a></li>
 </ul>
 
-<?php var_dump(self::$_route['template']); ?>
-
 <div id="object-all">
 		<form name="object_limit" id="object-limit" method="get" action="<?php echo $_link->to( 'objects' ); ?>" >
 			<label for="objectType">Object Category</label>
