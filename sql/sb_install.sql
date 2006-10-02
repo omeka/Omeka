@@ -71,7 +71,7 @@ CREATE TABLE objects (
 #	Other meta data
 	object_coverage				text		NOT NULL,
 	
-	object_added				timestamp	NOT NULL,
+	object_added				timestamp	NOT NULL default '0000-00-00 00:00:00',
 	object_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
 #	Object Featured
@@ -255,7 +255,7 @@ CREATE TABLE files (
 	file_producer				text	NOT NULL,
 	file_render_device			text	NOT NULL,
 	file_render_details			text	NOT NULL,
-	file_capture_date			timestamp	NOT NULL,
+	file_capture_date			timestamp	NOT NULL default '0000-00-00 00:00:00',
 	file_capture_device			text	NOT NULL,
 	file_change_history			text	NOT NULL,
 	file_watermark				text	NOT NULL,
