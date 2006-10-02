@@ -1,41 +1,18 @@
 <?php
-// Layout: default;
+// Layout: show;
 
 $result = $__c->objects()->paginate();
 ?>
+<ul id="sub-navigation" class="navigation subnav">
+	<li<?php if(self::$_route['template'] == 'all') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects'); ?>">Show Items</a></li>
+	<li<?php if(self::$_route['template'] == 'add') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects', 'add'); ?>">Add Item</a></li>
+</ul>
 
-<script type="text/javascript" charset="utf-8">
-// <![CDATA[
-	function highlight( element ) {
-		element.style.cursor = 'pointer';
-		element.style.background = '#FFFDCE';
-	}
+<?php var_dump(self::$_route['template']); ?>
 
-	function unHighlight( element ) {
-		element.style.background = '#fff';
-	}
-	
-	function cursorIt( element ) {
-		element.style.cursor = 'pointer';
-	}
-
-	function loadObject( id ) {
-		window.location = '<?php echo $_link->to( "objects", "show" ); ?>' +id ;
-	}
-	
-	function showView() {
-		this.style.display = 'visible';
-	}
-
-// ]]>
-</script>
-
-
-<?php include( 'subnav.php' ); ?>
 <div id="object-all">
-	<div id="object-nav-wrapper">
-		<form name="object_limit" method="get" action="<?php echo $_link->to( 'objects' ); ?>" >
-
+		<form name="object_limit" id="object-limit" method="get" action="<?php echo $_link->to( 'objects' ); ?>" >
+			<label for="objectType">Object Category</label>
 		<select name="objectType">
 			<option value="">Show by Category:&nbsp;</option>
 			<option value="">All</option>
@@ -43,6 +20,7 @@ $result = $__c->objects()->paginate();
 			<option value="<?php echo $cat['category_id'] ?>" <?php if( $cat['category_id'] ==  self::$_request->getProperty('objectType') ){ echo ' selected '; } ?>><?php echo $cat['category_name'] ?></option>
 			<?php endforeach; ?>
 		</select>
+		<label for="collection">Collection</label>
 		<select name="collection">
 			<option value="">Show by Collection:&nbsp;</option>
 			<option value="">All</option>
@@ -50,16 +28,16 @@ $result = $__c->objects()->paginate();
 			<option value="<?php echo $coll['collection_id']; ?>" <?php if( $coll['collection_id'] ==  self::$_request->getProperty('collection') ){ echo ' selected '; } ?>><?php echo $coll['collection_name']; ?></option>
 			<?php endforeach; ?>
 		</select>
+		<label for="status">Status</label>
 		<select name="status">
 			<option value="">Show by status:&nbsp;</option>
 			<option value="">All</option>
-			<option value="notyet" <?php if( self::$_request->getProperty('status') == "notyet"){ echo ' selected '; } ?>>Not yet considered</option>
-			<option value="moreinfo" <?php if( self::$_request->getProperty('status') == "moreinfo"){ echo ' selected '; } ?>>Additional contributor information needed</option>
-			<option value="review" <?php if( self::$_request->getProperty('status') == "review"){ echo ' selected '; } ?>>Administrative review needed</option>
-			<option value="approved" <?php if( self::$_request->getProperty('status') == "approved"){ echo ' selected '; } ?>>Approved</option>
-			<option value="rejected" <?php if( self::$_request->getProperty('status') == "rejected"){ echo ' selected '; } ?>>Rejected</option>
+			<option value="notyet" <?php if( self::$_request->getProperty('status') == "notyet"){ echo ' selected '; } ?>>Not Pubic</option>
+			<option value="approved" <?php if( self::$_request->getProperty('status') == "approved"){ echo ' selected '; } ?>>Public</option>
+
 		</select>
-		<select name="featured">
+		<label for="featured">Featured</label>
+		<select id="featured" name="featured">
 			<option value="">All</option>
 			<option value="0" <?php if( self::$_request->getProperty('featured') == "0"){ echo ' selected '; } ?>>Not featured</option>
 			<option value="1" <?php if( self::$_request->getProperty('featured') == "1"){ echo ' selected '; } ?>>Featured</option>
@@ -67,13 +45,14 @@ $result = $__c->objects()->paginate();
 		<input type="text" name="search" value="" style="width:100px;" onclick="this.value=''"/>
 		<input type="submit" value="Search"/>
 		</form>
-	</div>
+
 
 	<?php if( $result['objects']->total() == 0 ): ?>
 	<h2 id="notice">No objects found.</h2>
 	<?php else: ?>
-	<div id="pagination-links">
 	<h2 id="objects-results"><?php echo $result['total'];?> Results</h2>
+	
+	<div class="pagination navigation">
 	<?php 
 		$_link->pagination(	$result['page'],
 							$result['per_page'],
@@ -82,7 +61,7 @@ $result = $__c->objects()->paginate();
 							$_link->to( 'objects', 'all' ) );
 	?>
 	</div>
-	<div id="objects-wrapper">
+	<div id="objects">
 	<?php
 		foreach( $result['objects'] as $object ):
 		$object->getFilesWithThumbnails()
@@ -91,33 +70,34 @@ $result = $__c->objects()->paginate();
 	?>
 	
 	<div id="object-<?php echo $object->object_id; ?>" class="object">
-		<div class="object-bar">#<?php echo $object->object_id; ?> [<a href="<?php echo $_link->to('objects', 'edit') . $object->object_id; ?>">edit</a>]</div>
-	    <div class="meta" onclick="loadObject(<?php echo $object->object_id; ?>)" onmouseover="highlight(this)" onmouseout="unHighlight(this)">
-	        <h3><a href="<?php echo $_link->to('objects', 'show') . $object->object_id; ?>"><?php echo htmlentities( $object->object_title ); ?></a></h3>
+		<div class="object-title">
+		<h3><a href="<?php echo $_link->to('objects', 'show') . $object->object_id; ?>">Item #<?php echo $object->object_id; ?>: <?php echo htmlentities( $object->object_title ); ?></a></h3>
+
+		</div>
+	        
 			<ul class="object-metadata">
 				<?php if( $object->category_name ): ?>
-				<li class="object-type">Object Type: <?php echo $object->category_name; ?></li>
+				<li class="object-type">Item Type: <?php echo $object->category_name; ?></li>
 				<?php else: ?>
-				<li class="object-type">Object Type: None</li>
+				<li class="object-type">Item Type: None</li>
 				<?php endif; ?>
 				<li>Files: <?php echo $object->getFileTotal(); ?></li>
 	        </ul>
-	    </div>
 		<div class="details">
+			<span class="thumbnail-container">
+			<?php
+				$file_id = mt_rand( 0, ( $object->files->total() - 1 ) );
+				$file = $object->files->getObjectAt( $file_id );
+				if( !empty( $file->file_thumbnail_name ) ) {
+					$_html->thumbnail( $file->file_thumbnail_name,
+										array(	'class' => 'thumbnail',
+										 		'alt'	=> $file->file_description,
+										 		'title'	=> $file->file_title ),
+										100 );
+				}
+			?>
+			</span>
 	        <p class="description">
-				<span class="thumbnail-container">
-				<?php
-					$file_id = mt_rand( 0, ( $object->files->total() - 1 ) );
-					$file = $object->files->getObjectAt( $file_id );
-					if( !empty( $file->file_thumbnail_name ) ) {
-						$_html->thumbnail( $file->file_thumbnail_name,
-											array(	'class' => 'thumbnail',
-											 		'alt'	=> $file->file_description,
-											 		'title'	=> $file->file_title ),
-											100 );
-					}
-				?>
-				</span>
 				<?php
 					if( $object->getDesc() )
 					{
@@ -130,7 +110,6 @@ $result = $__c->objects()->paginate();
 				?>
 			</p>
 		</div>
-		<div class="object-tags">
 			<ul class="tags">
 				<?php
 					$object->getTags();
@@ -144,13 +123,12 @@ $result = $__c->objects()->paginate();
 					<li>Not Tagged.</li>
 				<?php endif; ?>
 			</ul>
-		</div>
 	</div>
     
 
 	<?php endforeach; endif; ?>
 	</div>
-	<div id="pagination-links-bottom">
+	<div class="pagination navigation">
 	<?php 
 		$_link->pagination(	$result['page'],
 							$result['per_page'],

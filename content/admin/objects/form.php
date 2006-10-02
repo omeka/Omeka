@@ -1,38 +1,53 @@
-<fieldset class="formElement">
-	<label for="object_status">The object's status as set by an authorized user.</label>
-	<p class="instructionText">(required)</p>	
-	<?php
-		$_form->select(	array(	'name'	=> 'Object[object_status]',
-								'id'	=> 'object_status' ),
-						array(	'notyet'	=> 'Not yet considered',
-						 		'moreinfo'	=> 'Additional contributor information needed',
-								'review'	=> 'Administrative review needed',
-								'approved'	=> 'Approved',
-								'rejected'	=> 'Rejected' ),
-						@$saved['Object']['object_status']
-					);
-		$_form->displayError( 'Object', 'object_status', $__c->objects()->validationErrors() );
-	?>
-	
-	
-</fieldset>
+<fieldset>
+	<legend>Core Metadata</legend>
+	<label class="readonly" for="object_id">Object's Database ID (read only)</label>
 
-<fieldset class="formElement">
-	<label for="object_title">Title or Name</label>
-	<p class="instructionText">(optional)</p>
+	<?php
+		$_form->text(	array(	'name'	=> 'Object[object_id]',
+								'id'	=> 'object_id',
+								'readonly' => 'readonly',
+								'value' => @$saved['Object']['object_id'],
+								'class'		=> 'textinput' ) );
+	?>
+
+	
+	<label for="object_title">Title</label>
 	<?php
 		$_form->text(	array(	'name'		=> 'Object[object_title]',
 								'id'		=> 'object_title',
+								'class'		=> 'textinput',
 								'size'		=> 40,
 								'value'		=> @$saved['Object']['object_title'] ) );
 
 		$_form->displayError( 'Object', 'object_title', $__c->objects()->validationErrors() );
 	?>
-</fieldset>
 
-<fieldset class="formElement">
-	<label for="object_description">Description</label>
+	<label for="object_creator">Creator</label>
+
+	<?php
+		$_form->text(	array(	'size'	=> 20,
+								'name'	=> 'creator_other',
+								'id'	=> 'creator_other',
+								'class'		=> 'textinput',
+								'value'	=> @$saved['creator_other'] ) );
+	?>
+
+
+	<label for="object_subject">Subject</label>
 	<p class="instructionText"></p>
+	<?php
+		$_form->text(	array(	'name'		=> 'Object[object_subject]',
+								'id'		=> 'object_subject',
+								'class'		=> 'textinput',
+								'size'		=> 40,
+								'value'		=> @$saved['Object']['object_subject'] ) );
+
+		$_form->displayError( 'Object', 'object_subject', $__c->objects()->validationErrors() );
+	?>
+
+
+
+	<label for="object_description">Description</label>
 	<?php 
 		$_form->textarea( 	array(	'rows'	=> '8',
 									'cols'	=> '60',
@@ -40,10 +55,129 @@
 									'name'	=> 'Object[object_description]' ),
 									@$saved['Object']['object_description'] );
 	?>
-</fieldset>
 
-<fieldset class="formElement">
-	<label for="category">Object Category / Type</label><br/>
+	<label for="object_publisher">Publisher</label>
+	<p>An entity responsible for making the resource available.</p>
+	<?php 
+		$_form->text( 	array(	'size'	=> 40,
+								'name'	=> 'Object[object_publisher]',
+								'class'		=> 'textinput',
+								'id'	=> 'object_publisher' ),
+								@$saved['Object']['object_publisher'] );
+	?>
+
+	<label for="object_creator_other">Other Creator</label>
+	
+	<?php
+		$_form->text( array(	'name'		=> 'Object[object_creator_other]',
+		 						'id'		=> 'object_creator_other',
+								'class'		=> 'textinput',
+								'value'		=> @$saved['Object']['object_creator_other'],
+								'size'		=> 40,
+								) );
+	?>
+		<?php
+		$_form->displayError( 'Object', 'object_date', $__c->objects()->validationErrors() );
+	?>
+
+
+	<label for="object_date">Date</label>
+	
+	<?php
+		$_form->text( array(	'name'		=> 'Object[object_date]',
+		 						'id'		=> 'object_date',
+								'class'		=> 'textinput',
+								'value'		=> @$saved['Object']['object_date'],
+								'size'		=> 40,
+								) );
+	?>
+		<?php
+		$_form->displayError( 'Object', 'object_date', $__c->objects()->validationErrors() );
+	?>
+	<label for="object_source">Source</label>
+	<?php
+		$_form->textarea( 	array(	'rows'	=> '8',
+									'cols'	=> '60',
+									'id'	=> 'object_source',
+									'name'	=> 'Object[object_source]' ),
+									@$saved['Object']['object_source'] );
+	?>
+
+
+		<?php if(1==0):?>
+
+
+		<label for="object_language">Language</label>
+		<?php
+			$_form->radio(	'Object[object_language]',
+							array( 'eng' => 'English', 'fra' => 'French', 'other' => 'Other' ),
+							'eng',
+							@$saved['Object']['object_language'] );
+
+			$_form->text(	array(	'name'	=> 'object_language_other',
+									'class'		=> 'textinput',
+			 						'value'	=> @$saved['object_language_other'] ) );
+		?>
+		<?php else:?>
+		<?php $_form->hidden( array(	'id'	=> 'object_language', 
+										'name'	=> 'Object[object_language]', 
+										'value'	=>	'eng' ) );?>
+		<?php endif;?>
+
+
+
+
+
+
+
+
+		<label for="object_relation">Relation</label>
+		<p></p>
+		<?php
+			$_form->textarea( 	array(	'rows'	=> '8',
+										'cols'	=> '60',
+										'id'	=> 'object_relation',
+										'name'	=> 'Object[object_relation]' ),
+										@$saved['Object']['object_relation'] );
+		?>
+
+
+
+
+
+		<label for="object_coverage">Coverage</label>
+			<?php
+			$_form->textarea( 	array(	'rows'	=> '8',
+										'cols'	=> '60',
+										'id'	=> 'object_coverage',
+										'name'	=> 'Object[object_coverage]' ),
+										@$saved['Object']['object_coverage'] );
+			?>
+			<label for="object_rights">Rights</label>
+			<p>Rights binding the object or legal conditions pertaining to the object.</p>
+			<?php
+				$_form->textarea( 	array(	'rows'	=> '8',
+											'cols'	=> '60',
+											'id'	=> 'object_rights',
+											'name'	=> 'Object[object_rights]' ),
+											@$saved['Object']['object_rights'] );
+			?>
+
+
+
+		<label for="tags">Tags</label>
+		<p class="instructionText">Words or phrases, separated by commas. (eg. katrina, south port, levy)</p>
+		<?php
+			$_form->textarea( 	array(	'rows'	=> '2',
+										'cols'	=> '60',
+										'id'	=> 'tags',
+										'name'	=> 'Object[object_tags]' ),
+										@$saved['Object']['object_tags'] );
+		?>
+</fieldset>
+<fieldset>
+	<legend>Format Metadata</legend>
+	<label for="category_id">Object Type</label>
 	<?php
 		$_form->select( array(	'name'		=> 'Object[category_id]',
 								'id'		=> 'category_id',
@@ -53,301 +187,57 @@
 						'category_id',
 						'category_name' );
 	?>
-</fieldset>
-<div id="ajax_category_form" style=""><?php
+
+<div id="ajax_category_form"><?php
 
 if (@$saved['Object']['category_id']) {
 	$cat = $__c->categories()->findById(@$saved['Object']['category_id']); ?> 
-	<h2>Category: <?php echo $cat->category_name ?></h2>
-	<fieldset class="formElement">
-		<label>Category Description:</label>
+	<h3>Category: <?php echo $cat->category_name ?></h3>
+	
+		<h4>Description:</h4>
 		<p><?php echo $cat->category_description; ?></p>
 
 		<?php $i=0; foreach( $cat->metafields as $metafield ): ?>
-			<fieldset class="formElement">
+			
 			<label><?php echo $metafield->metafield_name ?></label>
 			<p><?php echo $metafield->metafield_description ?></p>
 			<input type="hidden" name="metadata[<?php echo $i; ?>][metafield_id]" value="<?php echo $metafield->metafield_id; ?>" />
-			<textarea rows="4" cols="60" name="metadata[<?php echo $i; ?>][metatext_text]"><?php echo @$saved['Object']['category_metadata'][$metafield->metafield_id]['metatext_text']?></textarea>
-			</fieldset>
+			<?php
+				$_form->hidden( array('name' => 'metadata['.$i.'][metatext_id]', 'value' => @$saved['Object']['category_metadata'][$metafield->metafield_id]['metatext_id']) );
+			?>
+			<textarea rows="4" cols="30" name="metadata[<?php echo $i; ?>][metatext_text]"><?php echo @$saved['Object']['category_metadata'][$metafield->metafield_id]['metatext_text']?></textarea>
+			
 		<?php $i++; endforeach; ?>
-	</fieldset>
+	
 <?	} ?></div>
-
-<fieldset class="formElement">
-	<?php if(1==0):?>
-	<label for="object_language">Language</label><br/>
-	<?php
-		$_form->radio(	'Object[object_language]',
-						array( 'eng' => 'English', 'fra' => 'French', 'other' => 'Other' ),
-						'eng',
-						@$saved['Object']['object_language'] );
-
-		$_form->text(	array(	'name'	=> 'object_language_other',
-		 						'value'	=> @$saved['object_language_other'] ) );
-	?>
-	<?php else:?>
-	<?php $_form->hidden( array(	'id'	=> 'object_language', 
-									'name'	=> 'Object[object_language]', 
-									'value'	=>	'eng' ) );?>
-	<?php endif;?>
 </fieldset>
 
-<fieldset class="formElement">
-	<label for="contributor_id">Select the contributor from the list below:</label><br/>
-	<p class="instructionText"></p>
-	<?php		
-		$_form->select(	array(	'name'	=> 'Object[contributor_id]',
-								'id'	=> 'contributor_id' ),
-						$__c->contributors()->all( 'array' , 'alpha'),
-						@$saved['Object']['contributor_id'],
-						'contributor_id',
-						array( 'contributor_first_name', 'contributor_last_name') );
-	?>
-</fieldset>
+<fieldset>
+	<legend>Object History</legend>
+	<label class="readonly" for="object_added">Date object added (read only)</label>
 
-<fieldset class="formElement">
-	<label for="object_contributor_consent">The contributor's consent for submitting this object.</label><br/>
-	<p class="instructionText">(required)</p>
 	<?php
-		$_form->radio(	'Object[object_contributor_consent]',
-						array( 'yes' => 'Yes', 'unsure' => 'Unsure', 'restrict' => 'Restrict', 'no' => 'No', 'unknown' => 'Unknown' ),
-						'unknown',
-						@$saved['Object']['object_contributor_consent'] );
-		$_form->displayError( 'Object', 'object_contributor_consent', $__c->objects()->validationErrors() );	
+		$_form->text(	array(	'name'	=> 'Object[object_added]',
+								'id'	=>	'object_added',
+								'readonly' => 'readonly',
+								'value' => @$saved['object_added'],
+								'class'		=> 'textinput' ) );
 	?>
 
-</fieldset>
 
-<fieldset class="formElement">
-	<label for="object_contributor_posting">The contributor's consent for posting this object online.</label><br/>
-	<p class="instructionText">(required)</p>
-	<?php
-	$_form->radio(	'Object[object_contributor_posting]',
-					array( 'yes' => 'Yes', 'no' => 'No', 'anonymously' => 'Anonymously', 'unknown' => 'Unknown' ),
-					'unknown',
-					@$saved['Object']['object_contributor_posting'] );
-		$_form->displayError( 'Object', 'object_contributor_posting', $__c->objects()->validationErrors() );
-	?>
-</fieldset>
+	<label class="readonly" for="object_modified">Date object modified (read only)</label>
 
-<fieldset class="formElement">
-	<label for="collection_id">Collection</label><br/>
-	<p class="instructionText">If this object belongs to a collection, select it below.</p>
 	<?php
-		$_form->select(	array(	'name'	=> 'Object[collection_id]',
-								'id'	=> 'collection_id' ),
-						$__c->collections()->all( 'array' ),
-						@$saved['Object']['collection_id'],
-						'collection_id',
-						'collection_name' );
-	?>
-</fieldset>
-
-<fieldset class="formElement">
-	<label for="object_creator">Creator</label>
-	<p class="instructionText">Did the contributor create this object?</p>
-	<?php
-		$_form->radio(	'creator',
-						array( 'yes' => 'Yes', 'no' => 'No' ),
-						'yes',
-						@$saved['creator'] );
-	?>
-	<p class="instructionText">If no, enter the creator's name:</p>
-	<?php
-		$_form->text(	array(	'size'	=> 20,
-								'name'	=> 'creator_other',
-								'id'	=> 'creator_other',
-								'value'	=> @$saved['creator_other'] ) );
-	?>
-</fieldset>
-	
-<fieldset class="formElement">
-	<label for="object_publisher">Publisher</label>
-	<p>An entity responsible for making the resource available.</p>
-	<?php 
-		$_form->text( 	array(	'size'	=> 40,
-								'name'	=> 'Object[object_publisher]',
-								'id'	=> 'object_publisher' ),
-								@$saved['Object']['object_publisher'] );
+		$_form->text(	array(	'name'	=> 'Object[object_modified]',
+								'id' 	=> 'object_modified',
+								'readonly' => 'readonly',
+								'value' => @$saved['object_modified'],
+								'class'		=> 'textinput' ) );
 	?>
 </fieldset>
 
 <fieldset>
-	<label for="object_rights">Rights</label>
-	<p>Rights binding the object or legal conditions pertaining to the object.</p>
-	<?php
-		$_form->textarea( 	array(	'rows'	=> '8',
-									'cols'	=> '60',
-									'id'	=> 'object_rights',
-									'name'	=> 'Object[object_rights]' ),
-									@$saved['Object']['object_rights'] );
-	?>
-</fieldset>
-
-<fieldset>
-	<label for="object_relation">Relation</label>
-	<p></p>
-	<?php
-		$_form->textarea( 	array(	'rows'	=> '8',
-									'cols'	=> '60',
-									'id'	=> 'object_relation',
-									'name'	=> 'Object[object_relation]' ),
-									@$saved['Object']['object_relation'] );
-	?>
-</fieldset>
-
-<fieldset>
-	<label for="object_date">Object Creation Date</label>
-	<br/>
-	<?php
-		$_form->text( array(	'name'		=> 'object_creation_month',
-		 						'id'		=> 'object_creation_month',
-								'value'		=> @$saved['object_creation_month'],
-								'size'		=> 2,
-								'maxlength' => 2,
-								'onclick'	=> 'cal1.showCalendar( "object_creation_month" ); return false;'), ' / ' );
-
-		$_form->text( array(	'name'		=> 'object_creation_day',
-		 						'id'		=> 'object_creation_day',
-								'value'		=> @$saved['object_creation_day'],
-								'size'		=> 2,
-								'maxlength' => 2,
-								'onclick'	=> 'cal1.showCalendar( "object_creation_day" ); return false;'), ' / ' );
-
-		$_form->text( array(	'name'		=> 'object_creation_year',
-		 						'id'		=> 'object_creation_year',
-								'value'		=> @$saved['object_creation_year'],
-								'size'		=> 4,
-								'maxlength' => 4,
-								'onclick'	=> 'cal1.showCalendar( "object_creation_year" ); return false;') );
-	?>
-	<p>Month / Day / Year</p>
-	<div id="cal1Div" style="position:absolute;visibility:hidden;background-color:#fff;z-index:10002;" ></div>
-	<?php
-		$_form->displayError( 'Object', 'object_date', $__c->objects()->validationErrors() );
-	?>
-</fieldset>
-
-<fieldset>
-	<label for="object_coverage">Object Date Range</label>
-
-	<p>Start</p>
-	<?php
-		$_form->text( array(	'name'		=> 'object_coverage_start_month',
-		 						'id'		=> 'object_coverage_start_month',
-								'value'		=> @$saved['object_coverage_start_month'],
-								'size'		=> 2,
-								'maxlength' => 2,
-								'onclick'	=> 'cal2.showCalendar( "object_coverage_start_month" ); return false;'), ' / ' );
-
-		$_form->text( array(	'name'		=> 'object_coverage_start_day',
-		 						'id'		=> 'object_coverage_start_day',
-								'value'		=> @$saved['object_coverage_start_day'],
-								'size'		=> 2,
-								'maxlength' => 2,
-								'onclick'	=> 'cal2.showCalendar( "object_coverage_start_day" ); return false;'), ' / ' );
-
-		$_form->text( array(	'name'		=> 'object_coverage_start_year',
-		 						'id'		=> 'object_coverage_start_year',
-								'value'		=> @$saved['object_coverage_start_year'],
-								'size'		=> 4,
-								'maxlength' => 4,
-								'onclick'	=> 'cal2.showCalendar( "object_coverage_start_year" ); return false;') );
-	?>
-	<p>Month / Day / Year</p>
-	
-	<p>End</p>
-	<?php
-		$_form->text( array(	'name'		=> 'object_coverage_end_month',
-		 						'id'		=> 'object_coverage_end_month',
-								'value'		=> @$saved['object_coverage_end_month'],
-								'size'		=> 2,
-								'maxlength' => 2,
-								'onclick'	=> 'cal3.showCalendar( "object_coverage_end_month" ); return false;'), ' / ' );
-
-		$_form->text( array(	'name'		=> 'object_coverage_end_day',
-		 						'id'		=> 'object_coverage_end_day',
-								'value'		=> @$saved['object_coverage_end_day'],
-								'size'		=> 2,
-								'maxlength' => 2,
-								'onclick'	=> 'cal3.showCalendar( "object_coverage_end_day" ); return false;'), ' / ' );
-
-		$_form->text( array(	'name'		=> 'object_coverage_end_year',
-		 						'id'		=> 'object_coverage_end_year',
-								'value'		=> @$saved['object_coverage_end_year'],
-								'size'		=> 4,
-								'maxlength' => 4,
-								'onclick'	=> 'cal3.showCalendar( "object_coverage_end_year" ); return false;') );
-	?>
-	<p>Month / Day / Year</p>
-	
-	<div id="cal2Div" style="position:absolute;visibility:hidden;background-color:#fff;z-index:10001;" ></div>
-	<div id="cal3Div" style="position:absolute;visibility:hidden;background-color:#fff;z-index:10000;" ></div>
-</fieldset>
-
-<fieldset>
-	<label for="object_location">Select the location from the map</label>
-	<br/>
-    <div id="map" style="width: 620px; height: 300px"></div>
-	<br/>
-	<?php
-	$_form->text( 	array(	'size'	=> 20,
-							'name'	=> 'Location[address]',
-							'id'	=> 'address',
-							'value'	=> @$saved['Location']['address'] ), 'Address (optional)' );
-	?>
-	<br/>
-	<?php
-	$_form->text( 	array(	'size'	=> 5,
-							'name'	=> 'Location[zipcode]',
-							'id'	=> 'zipcode',
-							'value'	=> @$saved['Location']['zipcode'] ), 'Zipcode (optional)' );
-	?>
-	<br/>
-	<input type="button" value="Find by Address" onclick="showAddress()">
-	<br/>
-	<?php
-	$_form->text( 	array(	'size'	=> 20,
-							'name'	=> 'Location[latitude]',
-							'id'	=> 'latitude',
-							'value'	=> @$saved['Location']['latitude'] ), 'Latitude' );
-	?>
-	<br/>
-	<?php
-	$_form->text( 	array(	'size'	=> 20,
-							'name'	=> 'Location[longitude]',
-							'id'	=> 'longitude',
-							'value'	=> @$saved['Location']['longitude'] ), 'Longitude' );
-							
-	$_form->hidden( array(	'name'	=> 'Location[mapType]',
-							'id'	=> 'mapType',
-							'value'	=> @$saved['Location']['mapType'] ) );
-
-	$_form->hidden( array(	'name'	=> 'Location[zoomLevel]',
-							'id'	=> 'zoomLevel',
-							'value'	=> @$saved['Location']['zoomLevel'] ) );
-
-	$_form->hidden( array(	'name'	=> 'Location[cleanAddress]',
-							'id'	=> 'cleanAddress',
-							'value'	=> @$saved['Location']['cleanAddress'] ) );
-	?>
-</fieldset>
-
-<fieldset>
-	<label for="tags">Tags</label>
-	<p class="instructionText">Words or phrases, separated by commas. (eg. katrina, south port, levy)</p>
-	<?php
-		$_form->textarea( 	array(	'rows'	=> '2',
-									'cols'	=> '60',
-									'id'	=> 'tags',
-									'name'	=> 'tags' ),
-									@$saved['tags'] );
-	?>
-</fieldset>
-
-<fieldset class="formElement">
-<h1>Files</h1>
+	<legend>Files</legend>
 <!-- MAX_FILE_SIZE must precede the file input field -->
 <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 <!-- Name of input element determines name in $_FILES array -->

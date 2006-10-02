@@ -13,7 +13,7 @@ $__c->admin()->protect();
 	<link rel="stylesheet" href="<?php $_link->style( 'main.css' ); ?>" type="text/css" />
 	<?php $_common->javascripts( 'prototype.js', 'scriptaculous.js', 'common.js' ); ?>
 </head>
-<body id="" onload="load()" onunload="GUnload()">
+<body>
 <div id="page">
 	<div id="header">
 		<?php include( $_partial->file( 'header' ) ); ?>

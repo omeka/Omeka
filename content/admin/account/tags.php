@@ -7,9 +7,7 @@ $max = $t->getMaxCount( self::$_session->getUser()->getId() );
 $result = $__c->accounts()->findMyTaggedObjects();
 
 ?>
-<div class="container">
-
-
+<h2>My Tags</h2>
 <div id="mytags">
 	<?php
 		$_html->tagCloud( $tags, $max, $_link->to('account', 'tags'), 3, 1);

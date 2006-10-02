@@ -125,7 +125,7 @@
 						<h3>Files:</h3>
 						<?php foreach( $object->files as $file ): ?>
 							<?php if( $file->file_thumbnail_name ): ?>
-							<a href="<?php echo $_link->to('files', 'show') . $file->getId(); ?>" class="popup"><?php $_html->thumbnail( $file->file_thumbnail_name,
+							<a href="<?php echo WEB_VAULT_DIR.DS.$file->file_archive_filename; ?>" class="popup"><?php $_html->thumbnail( $file->file_thumbnail_name,
 												array(	'class' => 'thumbnail',
 												 		'alt'	=> $file->file_description,
 												 		'title'	=> $file->file_title,

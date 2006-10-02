@@ -44,20 +44,19 @@ function isEnter(event)
 	}
 }
 </script>
-
-<fieldset class="formElement">
-	<label for="category_name">Category Name:</label>
+<fieldset>
+	<legend>General Type Information</legend>
+<label for="category_name">Type Name:</label>
 	<p class="instructionText">Be descriptive yet concise; no punctuation.</p>
 	<?php
 		$_form->text(	array(	'size'	=> '20',
 									'value'	=> $category->category_name,
 									'id'	=> 'category_name',
+									'class' => 'textinput',
 									'name'	=> 'category[category_name]' ) );
 	?>
-</fieldset>
 
-<fieldset class="formElement">
-	<label for="category_description">Category Description:</label>
+<label for="category_description">Type Description:</label>
 	<p class="instructionText">Describe the object type and enter any further description/instruction concerning default object metadata.</p>
 	<?php 
 		$_form->textarea(	array(	'rows'	=> '4',
@@ -67,9 +66,8 @@ function isEnter(event)
 							 		issetor($saved['category']['category_description'], $category->category_description ));
 	?>
 </fieldset>
-
-<h3>Category Extended Metafield Elements</h3>
-
+<fieldset>
+<legend>Type Extended Metafield Elements</legend>
 <?php 
 	$i = 0;
 	// Get the old metafield names and ids
@@ -79,9 +77,8 @@ function isEnter(event)
 	//	print_r($category->metafields); exit;
 		foreach ($category->metafields as $meta) {
 ?>
-	<fieldset class="formElement">
 
-		<input type="hidden" name="metafields[<?php echo $i; ?>][metafield_id]" value="<?php echo $meta->metafield_id; ?>">
+		<input type="hidden" name="metafields[<?php echo $i; ?>][metafield_id]" value="<?php echo $meta->metafield_id; ?>" />
 		<label for="metafields[<?php echo $i; ?>][metafield_name]"><?php echo $i + 1; ?>) Extended Element Field Name</label>
 		<p class="instructionText">Choose an earlier defined meta field or create your own:</p>
 		<select name="metafields[<?php echo $i; ?>][metafield_name]" id="metafields[<?php echo $i; ?>][metafield_name]">
@@ -96,25 +93,20 @@ function isEnter(event)
 										'value'	=> issetor( $saved['metafields'][$i]['metafield_name_new'], null ),
 										'name'	=> 'metafields['.$i.'][metafield_name_new]') );
 		?>
-		<br />
+
 		<?php $i++;?>
-	</fieldset>
 <?php } endif; ?>
-<fieldset class="formElement">
 	<label for="category_metafield_number">How many extended element fields does the object type need?</label>
-	<p class="instructionText">Click 'Add more fields' after entering a number in the box below.</p>
+	<p class="instructionText">Click &#8216;Add more fields&#8217; after entering a number in the box below.</p>
 	<p class="instructionText">Fields not filled in will be ignored.</p>
 	<input type="text" name="category_metafield_number" id="category_metafield_number" value="<?php echo htmlentities( @$saved['category_metafield_number'] ) ?>" size="3" onkeypress="isEnter(event)" />
-	<input type="submit" name="add_fields" value="Add more fields -&gt;"></input>
+	<input type="submit" name="add_fields" value="Add more fields -&gt;" />
 	<a href="#" onclick="getExtendedForm()">Get extended fields</a>||<a href="#" onclick="removeExtendedForm()">Remove Extended Fields</a>
 	<div id="extended_elements"></div>
-	
-</fieldset>
 
 	<?php if(!empty($more_fields)): 
 
 for($j=$category->metafields->total(); $j<($category->metafields->total()+$more_fields); $j++): ?>
-<fieldset class="formElement">
 	<label for="metafields[<?php echo $j; ?>][metafield_name]"><?php echo $j + 1 ?>) Extended Element Field Name</label>
 	<p class="instructionText">Choose an earlier defined meta field or create your own:</p>
 	<select name="metafields[<?php echo $j; ?>][metafield_name]" id="metafields[<?php echo $j; ?>][metafield_name]">
@@ -123,16 +115,15 @@ for($j=$category->metafields->total(); $j<($category->metafields->total()+$more_
 		<option value="<?php echo $metafield->metafield_name; ?>"<?php if( $metafield->metafield_name == @$saved['metafields'][$j]['metafield_name']) echo ' selected '; ?>><?php echo htmlentities( $metafield->metafield_name ); ?></option>
 		<?php endforeach; ?>
 	</select>
-	<p class="instructionText">You may add your own meta field name here:</p>
+	<label for="metafield_name_new">You may add your own meta field name here:</label>
 	<?php
 		$_form->text(array(	'size'	=> '20',
 									'value'	=> issetor( $saved['metafields'][$j]['metafield_name_new'], null ),
+									'class' => 'textinput',
+									'id' => 'metafield_name_new',
 									'name'	=> 'metafields['.$j.'][metafield_name_new]') );
 	?>
-	<br />
-</fieldset>
-
-<fieldset class="formElement">
+	
 	<label for="metafields[<?php echo $j; ?>][metafield_description]">Description of Field Name</label>
 	<p class="instructionText">Please describe the metafield, it's contents, and / or reason for existing:</p>
 	<p class="instructionText">If using a predefined metafield name, you do not need to fill this out.</p>
@@ -143,5 +134,5 @@ for($j=$category->metafields->total(); $j<($category->metafields->total()+$more_
 									'name'	=> 'metafields['.$j.'][metafield_description]'),
 									issetor( $saved['metafields'][$j]['metafield_description'], null ) );
 	?>
-</fieldset>
 <?php endfor; endif;?>
+</fieldset>

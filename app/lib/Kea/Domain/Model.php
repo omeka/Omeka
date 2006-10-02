@@ -106,6 +106,43 @@ abstract class Kea_Domain_Model
 		return $this->validationErrors;
 	}
 	
+	/**
+	 * This boils an instance of Kea_Domain_Model down to its possible unique variables, searches the database for that combination and, if its unique, loads the entire entry.
+	 * If the entry is not unique it returns null
+	 *
+	 * @return mixed Returns the found entry, otherwise null
+	 * @author Kris Kelly
+	 **/
+	public function findExisting()
+	{
+		$vars = get_object_vars($this);
+		$uniquevars = array_diff_key( $vars, get_class_vars('Kea_Domain_Model') );
+		$id_name = strtolower( get_class( $this ) ) . '_id';
+		unset($uniquevars[$id_name]);
+		
+		$mapper = $this->mapper();
+		$select = $mapper->find();
+		foreach( $uniquevars as $key => $value )
+		{
+			if( !empty($value) ) $select->where($key.' = ?', $value);
+		}
+		
+		$res = $mapper->query( $select );
+
+		if( $res->num_rows == 1 ) 
+		{
+			$row = $res->fetch_assoc();
+			foreach( $row as $key => $value )
+			{
+				$this->$key = $value;
+			}
+			return $this;
+		}
+		else
+		{
+			return null;
+		}
+	}
 }
 
 ?>

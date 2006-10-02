@@ -92,52 +92,28 @@ function deleteObjectFromCategory( object_id )
 }
 </script>
 
-<style type="text/css" media="screen">
-	.form-error { color: red; font-size: 1.2em;}
-	.inputReadOnly { background-color: #eee; cursor: pointer;}
-</style>
-
 
 <?php include( 'subnav.php' ); ?>
 
-<br/>
-
-<h1>Edit Object</h1>
+<h2>Edit Item #<?php echo $object->object_id; ?>: <?php echo $object->object_title; ?></h2>
 <?php  ?>
-<form method="post" action="<?php echo $_link->to( 'objects', 'edit' ).$object->object_id; ?>" enctype="multipart/form-data">
-
-<fieldset>
-<p class="instructionText">Object's Database ID (read only)</p>
-<input type="text" class="inputReadOnly" name="Object[object_id]" value="<?php echo $saved['Object']['object_id']; ?>" readonly></input>
-</fieldset>
-
-<fieldset>
-<p class="instructionText">Date object added (read only)</p>
-<input type="text" class="inputReadOnly" name="object_added" value="<?php echo $saved['object_added']; ?>" readonly></input>
-</fieldset>
-
-<fieldset>
-<p class="instructionText">Date object modified (read only)</p>
-<input type="text" class="inputReadOnly" name="object_modified" value="<?php echo $saved['object_modified']; ?>" readonly></input>
-</fieldset>
-
-<input type="submit" value="Edit Object &gt;&gt;" name="object_edit" />
+<form method="post" id="object-addedit" action="<?php echo $_link->to( 'objects', 'edit' ).$object->object_id; ?>" enctype="multipart/form-data">
 
 <?php include( 'form.php' ); ?>
 
-<fieldset class="formElement">
-	<p class="instructionText">These are the associated files with this object</p>
-	<ul>
+<fieldset>
+	<legend>Associated Files</legend>
+	<label>These are the associated files with this object</label>
+	<ul class="filelist">
 	<?php foreach( $object->files as $file ): ?>
 		<li id="file-<?php echo $file->getId(); ?>"><a href="javascript:void(0)" onclick="window.open();"><?php echo $file->file_original_filename; ?></a><input type="button" value="X" onclick="if( confirm( 'Are you sure you want to permanently remove this file from the object as well as the archive?' ) ){ deleteFile( '<?php echo $file->getId(); ?>' )}"></li>
 	<?php endforeach; ?>
 	</ul>
-</fieldset>
 
+</fieldset>
 <input type="submit" value="Edit Object &gt;&gt;" name="object_edit" />
 
 </form>
-<br/>
 <form method="post" action="<?php echo $_link->to( 'objects', 'delete'); ?>">
 	<input type="hidden" value="<?php echo $object->getId(); ?>" name="object_id" />
 	<input type="submit" value="Delete Object &gt;&gt;" name="object_delete" onclick="return confirm( 'Are you sure you want to delete this object, all of it\'s files, tags, and other data from the archive?' );"></input>

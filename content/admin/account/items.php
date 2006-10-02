@@ -2,9 +2,8 @@
 //Layout: default;
 include( 'subnav.php' );
 
-$result = $__c->accounts()->getMyFavorites();
+$result = $__c->accounts()->getMyContributions();
 ?>
-<div class="container">
 
 <?php /*
 <script type="text/javascript" charset="utf-8">
@@ -23,7 +22,8 @@ $result = $__c->accounts()->getMyFavorites();
 	}
 </script>
 */ ?>
-<h2>My Favorites</h2>
+<h2>My Items</h2>
+
 <?php if( $result['objects']->total() == 0 ): ?>
 <h3 class="notice">You have no favorites.</h3>
 <?php else: ?>
@@ -36,7 +36,6 @@ $result = $__c->accounts()->getMyFavorites();
 						$_link->to( 'account', 'favorites' ) );
 ?>
 </div>
-
 <?php
 	foreach( $result['objects'] as $object ):
 	$object->getFilesWithThumbnails()
@@ -100,4 +99,3 @@ $result = $__c->accounts()->getMyFavorites();
 </div>
 
 <?php endforeach; endif; ?>
-</div>

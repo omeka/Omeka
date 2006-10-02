@@ -1,5 +1,5 @@
 <?php
-// Layout: default;
+// Layout: show;
 $__c->objects()->add();
 $saved = self::$_session->getValue( 'object_form_saved' );
 ?>
@@ -41,22 +41,17 @@ function showResponse(div) {
 	Effect.BlindDown(div);
 }
 </script>
+<ul id="sub-navigation" class="navigation subnav">
+	<li<?php if(self::$_route['template'] == 'index') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects'); ?>">Show Items</a></li>
+	<li<?php if(self::$_route['template'] == 'add') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects', 'add'); ?>">Add Item</a></li>
+</ul>
 
-<style type="text/css" media="screen">
-	.form-error { color: red; font-size: 1.2em;}
-</style>
+<h2>Add an Item</h2>
 
-
-<?php include( 'subnav.php' ); ?>
-
-<br/>
-
-<h1>Add an Object</h1>
-
-<form method="post" action="<?php echo $_link->to( 'objects', 'add' ); ?>" enctype="multipart/form-data">
+<form method="post" id="object-addedit" action="<?php echo $_link->to( 'objects', 'add' ); ?>" enctype="multipart/form-data">
 
 <?php include( 'form.php' ); ?>
 
-<input type="submit" value="Insert Object &gt;&gt;" name="object_add" />
+<input type="submit" value="Insert Item &gt;&gt;" name="object_add" />
 
 </form>

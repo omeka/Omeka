@@ -175,7 +175,9 @@ class ObjectsController extends Kea_Action_Controller
 			$select->where( 'objects.collection_id = ?', self::$_request->getProperty( 'collection' ) );
 		}
 		
-		if( $cat = self::$_request->getProperty( 'objectType' ) )
+		if( ( $cat = self::$_request->getProperty( 'objectType' ) )  
+			|| ( $cat = self::$_request->getProperty( 'type' ) )
+			|| ( $cat = self::$_request->getProperty( 'category' ) ) )
 		{
 			$select->where( 'objects.category_id = ?', $cat );
 		}
@@ -186,10 +188,6 @@ class ObjectsController extends Kea_Action_Controller
 		
 		if( self::$_request->getProperty( 'contributor' ) ) {
 			$select->where( 'objects.contributor_id = ?', self::$_request->getProperty( 'contributor' ) );
-		}
-		
-		if( self::$_request->getProperty( 'type' ) ) {
-			$select->where( 'objects.category_id = ?', self::$_request->getProperty( 'type' ) );
 		}
 		
 		if( $tags = self::$_request->getProperty( 'tags' ) )
@@ -228,7 +226,7 @@ class ObjectsController extends Kea_Action_Controller
 		
 		$select->group( 'objects.object_id' );
 		$this->applyPermissions( $select );
-		
+
 		return $mapper->paginate( $select, $page, $num_objects, 'objectsTotal' );
 	}
 	

@@ -97,36 +97,6 @@ $__c->admin()->protect();
 	      }
 	    }
 	
-		var cal1 = new CalendarPopup('cal1Div');
-		cal1.showNavigationDropdowns();
-		cal1.setReturnFunction('setMultiple1');
-		function setMultiple1(y,m,d)
-		{
-			document.getElementById('object_creation_month').value = LZ(m);
-			document.getElementById('object_creation_day').value = LZ(d);
-			document.getElementById('object_creation_year').value = y;
-		}
-		
-		var cal2 = new CalendarPopup('cal2Div');
-		cal2.showNavigationDropdowns();
-		cal2.setReturnFunction('setMultiple2');
-		function setMultiple2(y,m,d)
-		{
-			document.getElementById('object_coverage_start_month').value = LZ(m);
-			document.getElementById('object_coverage_start_day').value = LZ(d);
-			document.getElementById('object_coverage_start_year').value = y;
-		}
-		
-		var cal3 = new CalendarPopup('cal3Div');
-		cal3.showNavigationDropdowns();
-		cal3.setReturnFunction('setMultiple3');
-		function setMultiple3(y,m,d)
-		{
-			document.getElementById('object_coverage_end_month').value = LZ(m);
-			document.getElementById('object_coverage_end_day').value = LZ(d);
-			document.getElementById('object_coverage_end_year').value = y;
-		}
-
 	    //]]>
 	    </script>
 </head>

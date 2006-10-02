@@ -3,139 +3,121 @@
 
 *, html, body {margin:0; padding:0;}
 
-body { margin: 0 auto; font: 62.5% Verdana,Helvetica, Arial, sans-serif; color: #555; background: #999; border-top: 6px solid #8c3;}
+body { margin: 0 auto; font: 62.5% Verdana,Helvetica, Arial, sans-serif; color: #555; padding-top: 20px;background: #BEE390; background: #e5e5e5; width: 96em;}
 h1,h2,h3,h4,h5,h6 {font-weight:normal;}
-h1 {font-size:2em;}
-h2 {font-size:1.8em;}
-h3 {font-size:1.6em; font-weight:bold;}
-h4 {font-size:1.4em;}
-h5 {font-size:1.2em; font-weight:bold;}
-h6 {font-size:1.1em; font-style:italic;}
-
+h1 {font-size:2.4em;}
+h2 {font-size:2em; margin: 0.5em 0;}
+h3 {font-size:1.6em; font-family: "Century Gothic", Verdana, sans-serif; text-transform: lowercase;line-height: 1em; border-left: 1em solid #ddd; padding-left: 0.25em; margin: 1em 0 0.25em;}
+h4 {font-size:1.5em;}
+h5 {font-size:1.3em; font-weight:bold;}
+h6 {font-size:1.3em; font-style:italic;}
 p,ul,ol,textarea {font-size: 1.3em;}
+a:link, a:visited {color: #5A9433;}
+a:hover, a:active {color: #71B033;}
+ul,ol {list-style: none;}
 
-a:link, a:visited {color: #853;}
-a:hover, a:active {color: #8c3;}
+h1, h2,legend {font-family: "Century Gothic", sans-serif;}
+a img, :visited img {border: none;}
 
-div.container {background: #fff; display:block;float:left;padding: 20px; width: 660px;margin:0;}
-
-
-/* Form styles
--------------------------------------------*/
 .form-error { color: red; font-size: 1.2em;}
 
-form {padding-bottom: 10px;}
-#contributors-form input, #contributors-form label { display:block;  margin: 10px 0 0 0;}
-#contributors-form input[type="radio"] {display:inline; margin:0; padding:0; }
-#contributors-form label.radiolabel {margin:0;}
-input.textinput, label {display:block;}
-input.textinput {margin-bottom: 10px;}
-input[type="submit"], input.submitinput {margin-left: 20px !important;}
-label {font-size: 1.2em; font-weight:normal;}
-label.checkboxlabel {margin-bottom: 10px;}
-select {margin-bottom: 10px;}
-label.radiolabel {margin-bottom:5px;}
+table {font-size: 1.2em; width: 70em; margin: 0 1em 1em;}
+th {text-align:left;padding: 1em;}
+thead {padding: 1em 0; background: #FFF09E;}
+td {text-align:left; padding: 1em; border-bottom: 1px solid #fff;}
+tbody tr { background: #f3f3f3;padding: 1em 0;}
 
-/* Page styles
-------------------------------------------*/
-#page { }
+/* Tags */
+ul.tags {list-style: none;}
+ul.tags li {display: inline;}
 
-ul.object-nav {list-style:none;display:block; float:left; margin-right: 30px;}
-ul.object-nav li {display:block; float:left; width: 50%;}
-ul.object-nav li.next {float:right;}
+ul.tags span.remove-tag {vertical-align: super;}
+span.remove-tag a {text-decoration: none; padding: 0;line-height: 0; background: #fff;}
 
+ul#navigation, ul.navigation, ul.object-nav {list-style: none; display: block; width: auto;}
+ul#navigation li, ul.navigation li, ul.object-nav li {display: inline;}
+ul#navigation li.current a {background: #DBF0C2;}
+ul.navigation a {text-decoration: none;}
+ul.subnav {display: block;padding: 0.75em 2em; background: #DBF0C2;margin-bottom: 1em;font-size: 1.1em;}
+ul.subnav li {margin-right: .2em;}
+ul.subnav a {color: #333; padding: 0.75em 1.25em; text-decoration: none;}
+ul.subnav a:link, ul.subnav a:visited {background: transparent;}
+ul.subnav a:hover, ul.subnav a:active {background: #CCE9A8;}
+ul.subnav li.current a {background: #fff;}
 
-/* Header styles
-------------------------------------------*/
-#header { background: #fff; color: #888;display:block;}
-#header h1 {margin:0 auto;width: 700px;text-transform:uppercase; background: #fff;font-size: 3em;display:block; padding: 40px 0; text-align:right; color: #888; font-family: "Century Gothic", Verdana, sans-serif;}
-#navigation {margin:0 auto;width: 660px; display:block;background: #38c; padding: 6px 20px; font-size: 1.1em;}
-#navigation li {display:inline;margin:0; padding:0;}
-#navigation li a {padding: 8px; color: #fff; text-decoration:none; border:1px solid #38c;}
-#navigation a:link, #navigation a:visited {color: #fff;border:1px solid #38c;}
-#navigation a:hover, #navigation a:active {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
+ul.object-nav {display: block; float: left; clear: both; padding: 1em 0;width: 35em;}
+ul.object-nav .previous {float: left;}
+ul.object-nav .next {float: right; }
 
-#navigation form { display: inline; }
-#navigation button { color: #fff; padding: 6px; border: 1px solid #38c; background: #38c; font-size: 1em; cursor:pointer;}
-#navigation button:hover { color: #fff; font-size: 1em; background: #4693D1;border-top: 1px solid #38c; cursor:pointer;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1; }
+/* Forms */
+fieldset {border: none; margin: 1em 0;}
+legend {display: block; text-transform: lowercase;font-size: 1.8em; margin-bottom: 0.5em;line-height: 1em; border-left: 1em solid #ddd; padding-left: 0.25em;}
+input.textinput, textarea,label {display: block;}
+label {width: 20em;}
+input.textinput, textarea {width: 18em; border: 1px solid #d7d7d7; font:1.3em Verdana,sans-serif; padding: 5px;background: #f9f9f9;}
+input.textinput:focus, textarea:focus {background: #fff;}
+textarea {height: 10em;font: 1.3em Verdana, sans-serif;}
+.inputReadOnly { background-color: #eee; cursor: none; border: 1px solid #ccc; padding: 4px;}
 
-#welcome #navigation #nav-welcome a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
-#categories #navigation #nav-categories a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
-#objects #navigation #nav-objects a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
-#collections #navigation #nav-collections a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
-#contributors #navigation #nav-contributors a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
-#users #navigation #nav-users a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
-#tags #navigation #nav-tags a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
-#account #navigation #nav-myarchive a {color: #fff; background: #4693D1;border-right: 1px solid #3379B0; border-bottom: 1px solid #3379B0;border-top: 1px solid #4693D1; border-left: 1px solid #4693D1;}
+select#featured {width:150px;}
+#editfile fieldset, #object-addedit fieldset {display: block;float: left;width: 30em; margin: 2em;}
 
-#header #loginform {display:block; background: #eed; border: 1px solid #333; display:none;}
-#loginform label, #loginform input {display:block;}
+#object-limit label {display: none;}
 
-#object-all {display:block; float:left; width: 660px; background: #fff; padding: 10px 20px;}
-/* Sub Navigation
-------------------------------------------*/
-#sub-navigation {margin:0; width: 660px; height: 12px; display:block;background: #333; padding: 10px 20px; font-size: 0.9em;}
-#sub-navigation li {display:block; float:left;margin:0; padding:0;margin-right: 8px;}
-#sub-navigation li a {padding: 2px; display:block; float:left;color: #fff; text-decoration:none;}
-#sub-navigation li a:link, #sub-navigation li a:visited {color: #fff;}
-#sub-navigation li a:hover, #sub-navigation li a:active {color: #fff; }
-#sub-navigation li.selected a {border-bottom: 5px solid #fff;}
+/* Page
+--------------*/
+#page {width: 94em;display: block;float: left; padding: 1em;background: #fff;}
 
-/* Content styles
-------------------------------------------*/
-#content {width: 700px; padding: 0; margin: 0 auto;display:block;  background: #fff;}
-#content fieldset {border:none;text-decoration:none; border-top: 1px dotted #ccc; border-left: 1px dotted #ccc; padding:20px;}
-#content textarea, #content input {border: 1px solid #999; padding: 2px 4px;}
-#content p {}
-#content p.instructionText {margin-bottom: 10px; font-style:italic;}
-#content h3 {margin-bottom: 10px;}
+/* Header 
+-----------------*/
+#header {background:#8c3; padding: 2em 2em 0; border-bottom: 1em solid #DBF0C2;}
+#header h1 {margin-bottom: 1em; font-size: 3em; color: #fff; text-transform: uppercase;}
+#navigation {padding: 0.5em 0;}
+#navigation a {text-decoration: none;padding: 0.5em 1em; color: #363;}
+#navigation a:link, #navigation a:visited {background: #A0D65C;}
+#navigation a:hover, #navigation a:active {background: #B8E085;}
+#navigation li.current a
+ {background: #fff;}
 
-div.object {display:block; margin: 20px 0; border: 1px solid #BBD9EE; float:left;}
-div.object h3 a {color:#36c; text-decoration:none;}
-div.object h3 a:hover {color:#38c; text-decoration:underline;}
-div.object-bar {background: #BBD9EE; padding: 4px; color: #369;}
-div.meta, div.details {display:block;}
-div.meta {background: #E7F1F8; width: 160px; float:left; padding: 4px; border: 1px solid #ccc; margin: 8px; }
-div.meta h3 {font-weight:normal; font-size: 2em; margin-bottom: 10px; color: #36c;}
-ul.object-metadata { margin: 6px 0;}
-ul.object-metadata li, ul.tags li {list-style-type: none;}
-ul.tags li {font-size: 1em; margin-bottom: 10px; display:inline;}
-div.details {width: 452px; float:right; background: #fff;margin: 8px;}
-div.details img.thumbnail {display:block; margin-bottom: 10px; background: #eee; margin-left: 10px;}
-p.description {line-height: 2em; font-size: 1.2em; background: transparent; padding:10px; margin: 8px;}
-p,h3,li {margin-bottom: 10px;}
-span.thumbnail-container {float:right;}
-img.thumbnail {background: #eee; margin-left: 10px;}
-div.object-tags {clear:both; margin: 6px;}
-div.object-tags ul.tags {background: #ffffce;padding: 10px;}
-#object-nav-wrapper {margin: 20px 0;}
-#mytags {width: 620px; clear:both; background:#FFF09E; display:block; float:left;margin: 0;padding:10px 20px; margin-bottom: 10px;}
-#my-tags {width: 226px; clear:both; background:#ffffce;margin: 10px 0;padding:10px;}
-#my-contributions {width:318px; float:left;}
-#my-favorites {width:318px; float:right;}
+/* Content 
+-----------------*/
+#content {display: block;float: left; width: 94em;padding: 0;background: #fff;clear: both;}
+#primary, #secondary {display: block;}
+#primary {float: left; width: 45em;}
+#secondary {float: right;width: 45em;}
 
-#my-contributions div.object {border: 1px solid #BBD9EE; padding: 10px;margin: 10px 0; width: 295px;background: #E7F1F8;}
-#my-favorites div.object {border: 1px solid #ccc; padding: 10px;width: 295px;margin: 10px 0; background: #eee;}
+/* Objects View page */
 
-#mark-favorite, #mark-featured {display:block; float:left; width: 120px;margin-bottom: 20px;}
-#object-dublin-core, #object-contributor-info {clear:left; margin-top: 20px;}
+.object {padding: 1em; border-bottom: 1px solid #8c3;margin: 0.5em 0;}
+.object h3 {margin: 0; border-left: 1em solid #71B033; text-transform: none;}
+.object h3 a {text-decoration: none;}
+.object-title {display: block;margin-bottom: 0.5em;}
+.object-title h3, .object-title span.edit {display: inline;}
+.object-title .edit a {padding: 0.25em; color: #fff; background: #606060; text-decoration: none;}
+.object-title .edit a:hover {background: #777;}
 
-/* Footer styles
-------------------------------------------*/
-#footer {display:block; width: 660px; clear:left;background: #fff; padding: 10px 20px; border-top: 1px dotted #ccc !important; margin:0 auto;}
-#footer p { padding: 10px;}
+/* Individula object show page */
+#object {clear: both;}
+.metadata-list dl {display: block; padding: 0.5em 0.25em; background: #eee; width: auto;margin-bottom: 1px; font-size: 1.2em;}
+.metadata-list dt, .metadata-list dd {display: inline;}
+.metadata-list dd {font-weight: bold;}
 
-#flash {display:block; border: 1px solid #8c3; color: #555; font-size: 1.3em;padding: 10px 20px; margin-bottom: 20px;} /* Notice that things went ok */
-#error {display:block; border: 1px solid red; color: red; font-size: 1.3em;padding: 10px 20px; margin-bottom: 20px;} /* things aren't ok...error alert. */
+.tags {background: #eee; padding: 0.5em 0.25em;}
+.tags a {}
 
-<<<<<<< .working
-.clear {clear:both;}
-.form-error { color: red; font-size: 1.2em;}
+a.mark {font-size: 1.5em; text-decoration: none;}
+#mark-favorite,#mark-featured,#mark-public {margin: 1em 0;}
+/* File view page */
+#image {display: block;float: right;}
+div.section dl {font-size: 1.3em; clear: both;display: block;float: left; width: 34em;padding: 0.5em 0; border-bottom: 1px dotted #ccc;}
+div.section dt {font-weight: bold;float: left;}
+div.section dd {width: 22em; float: right;}
 
-form {padding-bottom: 10px;}
-#contributors-form input, #contributors-form label { display:block;  margin: 10px 0 0 0;}
-#contributors-form input[type="radio"] {display:inline; margin:0; padding:0; }
-#contributors-form label.radiolabel {margin:0;}
+#core-metadata,#format-metadata, #type-metadata {display: block; clear: left;float: left; width: 40em;}
+#file-history {display: block; float: right; width: 40em;clear: left;}
 
-input[type="submit"], input.submitinput {margin-left: 20px !important;}=======
-.clear {clear:both;}>>>>>>> .merge-right.r350
+/* Footer
+---------------*/
+#footer {clear: both; padding: 2em; background: #8c3; border-top: 0.5em solid #363;color: #555;}
+#footer p {margin: 0; padding: 0;}
+#footer a {color: #555;}

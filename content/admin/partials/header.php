@@ -7,22 +7,17 @@
 			'welcome' :
 			self::$_route['template'] ) ;
 ?>
-<div id="<?php echo $current; ?>">
 <h1><?php echo SITE_TITLE; ?></h1>
 
 <ul id="navigation">
-	<li id="nav-welcome"><a href="<?php echo $_link->to(); ?>">Home</a></li>
-	<li id="nav-objects"><a href="<?php echo $_link->to( 'objects' ); ?>">Objects</a></li>
-	<li id="nav-categories"><a href="<?php echo $_link->to( 'categories' ); ?>">Categories</a></li>
-	<li id="nav-collections"><a href="<?php echo $_link->to( 'collections' ); ?>">Collections</a></li>
-	<li id="nav-contributors"><a href="<?php echo $_link->to( 'contributors' ); ?>">Contributors</a></li>
-	<li id="nav-tags"><a href="<?php echo $_link->to( 'tags' ); ?>">Tags</a></li>
-	<li id="nav-myarchive"><a href="<?php echo $_link->to( 'account' ); ?>">My Archive</a></li>
+	<li id="nav-welcome"<?php if(self::$_route['template'] == '') {echo ' class="current"';} ?>><a href="<?php echo $_link->to(); ?>">Home</a></li>
+	<li id="nav-objects"<?php if($current == 'objects' || $current == 'files') { echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'objects' ); ?>">Objects</a></li>
+	<li id="nav-categories"<?php if($current == 'categories') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'categories' ); ?>">Types</a></li>
+	<li id="nav-collections"<?php if($current == 'collections') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'collections' ); ?>">Collections</a></li>
+	<li id="nav-tags"<?php if($current == 'tags') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'tags' ); ?>">Tags</a></li>
+	<li id="nav-myarchive"<?php if($current == 'account') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'account' ); ?>">My Archive</a></li>
 	<?php if( self::$_session->getUser()->getPermissions() == 1 ): ?>
-	<li id="nav-users"><a href="<?php echo $_link->to( 'users' ); ?>">Users</a></li>
+	<li id="nav-people"<?php if($current == 'users') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'users' ); ?>">People</a></li>
+		<li id="nav-settings"<?php if($current == 'settings') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'settings' ); ?>">Settings</a></li>
 	<?php endif; ?>
-
-	<form method="post" action="<?php echo $_link->to( 'logout' ); ?>">
-		<button type="submit">Logout</button>
-	</form>
 </ul>
