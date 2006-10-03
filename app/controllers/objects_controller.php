@@ -522,12 +522,12 @@ class ObjectsController extends Kea_Action_Controller
 		{
 			$object->object_modified = 'NULL';
 		}
-		
+
 		if ( empty( $object->object_public) )
 		{
-			$object->object_public = 0;
+			$object->object_public = '0';
 		}
-		
+
 		// This is a kludge to make sure that editing an object doesn't destroy its relationship with the user who uploaded it [JMG]
 		if ( !self::$_request->getProperty('object_edit') ) 
 		{
