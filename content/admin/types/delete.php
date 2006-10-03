@@ -1,4 +1,4 @@
 <?php
 $__c->admin()->protect();
-$__c->categories()->delete();
+$__c->types()->delete();
 ?>

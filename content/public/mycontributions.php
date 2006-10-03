@@ -25,7 +25,7 @@ $result = $__c->accounts()->getMyContributions();
 			<?php
 				foreach( $result['objects'] as $object ):
 				$object->getFilesWithThumbnails()
-					   ->getCategoryMetadata()
+					   ->getTypeMetadata()
 					   ->getContributor();
 			?>
 

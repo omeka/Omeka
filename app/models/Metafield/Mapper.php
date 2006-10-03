@@ -30,11 +30,11 @@ class Metafield_Mapper extends Kea_DB_Mapper
 		return parent::insert( $obj );
 	}
 	
-	public function findByCategory( $id )
+	public function findByType( $id )
 	{
 		return $this->find()
-					->joinLeft( 'categories_metafields', 'categories_metafields.metafield_id = metafields.metafield_id')
-					->where( 'categories_metafields.category_id = ?', $id )
+					->joinLeft( 'types_metafields', 'types_metafields.metafield_id = metafields.metafield_id')
+					->where( 'types_metafields.type_id = ?', $id )
 					->execute();
 	}
 }

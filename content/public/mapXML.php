@@ -100,36 +100,36 @@ function htmlnumericentities($str){
 	<item id="<?php echo $object->getId(); ?>" latitude="<?php echo $object->latitude; ?>" longitude="<?php echo $object->longitude; ?>">
 		<short_desc><?php 
 
-			if ($object->category_name=='Online Stories'){
+			if ($object->type_name=='Online Stories'){
 
-				if ($object->getCategoryMetadata('Story Text')) echo windowsToAscii($object->getCategoryMetadata('Story Text', 150));
+				if ($object->getTypeMetadata('Story Text')) echo windowsToAscii($object->getTypeMetadata('Story Text', 150));
 				elseif ($object->object_title) echo windowsToAscii($object->object_title);
 				elseif ($object->object_description) echo windowsToAscii($object->object_description);
 				else echo 'Contributed Story';
 			}
 
-			else if ($object->category_name=='Online Images'){
-				if ($object->getCategoryMetadata('Image Description')) echo windowsToAscii($object->getCategoryMetadata('Image Description', 150));
+			else if ($object->type_name=='Online Images'){
+				if ($object->getTypeMetadata('Image Description')) echo windowsToAscii($object->getTypeMetadata('Image Description', 150));
 				elseif ($object->object_description) echo windowsToAscii($object->object_description);
 				elseif ($object->object_title) echo windowsToAscii($object->object_title);
 			 	else echo 'Contributed Image';
 			}
 
-			elseif ($object->category_name=='Online Files'){
-				if ($object->getCategoryMetadata('File Description')) echo windowsToAscii($object->getCategoryMetadata('File Description', 150));
+			elseif ($object->type_name=='Online Files'){
+				if ($object->getTypeMetadata('File Description')) echo windowsToAscii($object->getTypeMetadata('File Description', 150));
 				elseif ($object->object_title) echo windowsToAscii($object->object_title);
 				elseif ($object->object_description) echo windowsToAscii($object->object_description);
 				else echo 'Contributed File';
 			}
 
-			else if ($object->category_name=='Outside Links'){
-					if ($object->getCategoryMetadata('Outside Link Content Provider Name')) echo allhtmlentities($object->getCategoryMetadata('Outside Link Content Provider Name', 100));
+			else if ($object->type_name=='Outside Links'){
+					if ($object->getTypeMetadata('Outside Link Content Provider Name')) echo allhtmlentities($object->getTypeMetadata('Outside Link Content Provider Name', 100));
 					elseif ($object->object_title) echo windowsToAscii($object->object_title);
 					elseif ($object->object_description) echo windowsToAscii($object->object_description);
 				 	else echo 'Contributed Link';
 			}
 			else {
-				echo $object->category_id; 
+				echo $object->type_id; 
 			}
 			
 		?></short_desc>
@@ -139,11 +139,11 @@ function htmlnumericentities($str){
 			<?php endforeach; ?>
 		</tags>
 		<files>
-			<?php if ($object->category_name=='Online Images'): foreach( $object->files as $file ): ?>
+			<?php if ($object->type_name=='Online Images'): foreach( $object->files as $file ): ?>
 			<file file_title="<?php echo $file->file_title; ?>" file_archive_filename="<?php echo $file->file_archive_filename; ?>" file_thumbnail_name="<?php echo $file->file_thumbnail_name; ?>" />
 			<?php endforeach; endif; ?>
 		</files>
-		<category_name><?php echo ($object->category_name); ?></category_name>
+		<type_name><?php echo ($object->type_name); ?></type_name>
 	</item>
 	<?php endforeach; ?>
 </mapitems>

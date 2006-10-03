@@ -5,8 +5,8 @@ Kea_Template_Router::connect(
 	array( 'template' => 'all', 'directory' => 'objects' ) );
 
 Kea_Template_Router::connect(
-	'/:admin/categories/:template/*',
-	array( 'template' => 'all', 'directory' => 'categories' ) );
+	'/:admin/types/:template/*',
+	array( 'template' => 'all', 'directory' => 'types' ) );
 
 Kea_Template_Router::connect(
 	'/:admin/collections/:template/*',

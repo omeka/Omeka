@@ -23,7 +23,7 @@ $max = $t->getMaxCount( self::$_session->getUser()->getId() );
 		<?php
 			foreach( $mine['objects'] as $object ):
 			$object->getFilesWithThumbnails()
-			   	   ->getCategoryMetadata()
+			   	   ->getTypeMetadata()
 			   	   ->getContributor();
 		?>
 			<div id="object-<?php echo $object->object_id; ?>" class="object">
@@ -33,8 +33,8 @@ $max = $t->getMaxCount( self::$_session->getUser()->getId() );
 				</div>
 
 					<ul class="object-metadata">
-						<?php if( $object->category_name ): ?>
-						<li class="object-type">Item Type: <?php echo $object->category_name; ?></li>
+						<?php if( $object->type_name ): ?>
+						<li class="object-type">Item Type: <?php echo $object->type_name; ?></li>
 						<?php else: ?>
 						<li class="object-type">Item Type: None</li>
 						<?php endif; ?>

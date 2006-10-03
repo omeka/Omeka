@@ -5,7 +5,7 @@ $num_fields = self::$_request->getProperty( 'num_fields' );
 $old_mfs = $__c->metafields()->all();
 
 // Saved form data
-$saved = self::$_session->getValue( 'category_form_saved' );
+$saved = self::$_session->getValue( 'type_form_saved' );
 
 for($i=0; $i<$num_fields; $i++): ?>
 <fieldset class="formElement">

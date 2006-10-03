@@ -25,7 +25,7 @@ $result = $__c->accounts()->getMyFavorites();
 			<?php
 				foreach( $result['objects'] as $object ):
 				$object->getFilesWithThumbnails()
-					   ->getCategoryMetadata()
+					   ->getTypeMetadata()
 					   ->getContributor();
 			?>
 

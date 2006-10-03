@@ -183,25 +183,25 @@
 </fieldset>
 <fieldset>
 	<legend>Format Metadata</legend>
-	<label for="category_id">Object Type</label>
+	<label for="type_id">Object Type</label>
 	<?php
-		$_form->select( array(	'name'		=> 'Object[category_id]',
-								'id'		=> 'category_id',
-								'onchange'	=> 'getData(this.value, "ajax_category_form")' ),
-						$__c->categories()->all( 'array' ),
-						@$saved['Object']['category_id'],
-						'category_id',
-						'category_name' );
+		$_form->select( array(	'name'		=> 'Object[type_id]',
+								'id'		=> 'type_id',
+								'onchange'	=> 'getData(this.value, "ajax_type_form")' ),
+						$__c->types()->all( 'array' ),
+						@$saved['Object']['type_id'],
+						'type_id',
+						'type_name' );
 	?>
 
-<div id="ajax_category_form"><?php
+<div id="ajax_type_form"><?php
 
-if (@$saved['Object']['category_id']) {
-	$cat = $__c->categories()->findById(@$saved['Object']['category_id']); ?> 
-	<h3>Category: <?php echo $cat->category_name ?></h3>
+if (@$saved['Object']['type_id']) {
+	$cat = $__c->types()->findById(@$saved['Object']['type_id']); ?> 
+	<h3>Type: <?php echo $cat->type_name ?></h3>
 	
 		<h4>Description:</h4>
-		<p><?php echo $cat->category_description; ?></p>
+		<p><?php echo $cat->type_description; ?></p>
 
 		<?php $i=0; foreach( $cat->metafields as $metafield ): ?>
 			
@@ -209,9 +209,9 @@ if (@$saved['Object']['category_id']) {
 			<p><?php echo $metafield->metafield_description ?></p>
 			<input type="hidden" name="metadata[<?php echo $i; ?>][metafield_id]" value="<?php echo $metafield->metafield_id; ?>" />
 			<?php
-				$_form->hidden( array('name' => 'metadata['.$i.'][metatext_id]', 'value' => @$saved['Object']['category_metadata'][$metafield->metafield_id]['metatext_id']) );
+				$_form->hidden( array('name' => 'metadata['.$i.'][metatext_id]', 'value' => @$saved['Object']['type_metadata'][$metafield->metafield_id]['metatext_id']) );
 			?>
-			<textarea rows="4" cols="30" name="metadata[<?php echo $i; ?>][metatext_text]"><?php echo @$saved['Object']['category_metadata'][$metafield->metafield_id]['metatext_text']?></textarea>
+			<textarea rows="4" cols="30" name="metadata[<?php echo $i; ?>][metatext_text]"><?php echo @$saved['Object']['type_metadata'][$metafield->metafield_id]['metatext_text']?></textarea>
 			
 		<?php $i++; endforeach; ?>
 	

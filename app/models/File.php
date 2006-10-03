@@ -496,8 +496,8 @@ class File extends Kea_Domain_Model
 				$output['creator'] = ucwords(strtolower(@$iptc["2#080"][0]));
 				$output['creation_date'] = @$iptc["2#055"][0];
 				$output['urgency'] = @$iptc["2#010"][0];
-				$output['category'] = @$iptc["2#015"][0];
-				$output['supp_categories'] = @$iptc["2#020"][0];
+				$output['type'] = @$iptc["2#015"][0];
+				$output['supp_types'] = @$iptc["2#020"][0];
 				$output['spec_instr'] = @$iptc["2#040"][0];
 				$output['credit_byline_title'] = @$iptc["2#085"][0];
 				$output['city'] = @$iptc["2#090"][0];

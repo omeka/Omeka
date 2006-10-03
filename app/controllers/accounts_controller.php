@@ -31,7 +31,7 @@ class AccountsController extends Kea_Action_Controller
 		$mapper = new Object_Mapper();
 
 		$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-						->joinLeft( 'categories', 'categories.category_id = objects.category_id' )
+						->joinLeft( 'types', 'types.type_id = objects.type_id' )
 						->where( 'objects.user_id = ?', self::$_session->getUser()->getId() );
 		
 		if( $order_by_date )
@@ -60,7 +60,7 @@ class AccountsController extends Kea_Action_Controller
 		$mapper = new Object_Mapper();
 
 		$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-						->joinLeft( 'categories', 'categories.category_id = objects.category_id' )
+						->joinLeft( 'types', 'types.type_id = objects.type_id' )
 						->join( 'objects_favorites', 'objects_favorites.object_id = objects.object_id' )
 						->where( 'objects_favorites.user_id = ?', self::$_session->getUser()->getId() );
 		
@@ -91,7 +91,7 @@ class AccountsController extends Kea_Action_Controller
 		$mapper = new Object_Mapper();
 
 		$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-						->joinLeft( 'categories', 'categories.category_id = objects.category_id' )
+						->joinLeft( 'types', 'types.type_id = objects.type_id' )
 						->order( array( 'objects.object_id' => 'DESC' ) )
 						->join( 'objects_tags', 'objects_tags.object_id = objects.object_id' )
 					   	->join( 'tags', 'objects_tags.tag_id = tags.tag_id' )

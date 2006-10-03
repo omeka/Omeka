@@ -110,13 +110,13 @@ class ObjectsController extends Kea_Action_Controller
 		
 		$mapper = new Object_Mapper();
 		$select = $mapper->select()
-					  ->joinLeft( 'categories', 'categories.category_id = objects.category_id' )
+					  ->joinLeft( 'types', 'types.type_id = objects.type_id' )
 					  ->where( 'objects.object_id = ?', $id );
 		$this->applyPermissions( $select );
 		$obj = $mapper->findObjects( $select );
 		
 		if ($obj->object_id):
-			$obj->getCategoryMetadata()
+			$obj->getTypeMetadata()
 				->getCreator()
 				->getLocation()
 				->getContributor()
@@ -160,7 +160,7 @@ class ObjectsController extends Kea_Action_Controller
 		
 		if( $short_desc ) {
 			$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-							 ->joinLeft( 'categories', 'categories.category_id = objects.category_id' )
+							 ->joinLeft( 'types', 'types.type_id = objects.type_id' )
 							 ->order( array( 'objects.object_id' => 'DESC' ) );
 		}
 
@@ -177,9 +177,9 @@ class ObjectsController extends Kea_Action_Controller
 		
 		if( ( $cat = self::$_request->getProperty( 'objectType' ) )  
 			|| ( $cat = self::$_request->getProperty( 'type' ) )
-			|| ( $cat = self::$_request->getProperty( 'category' ) ) )
+		 	 )
 		{
-			$select->where( 'objects.category_id = ?', $cat );
+			$select->where( 'objects.type_id = ?', $cat );
 		}
 		
 		if( self::$_request->getProperty( 'featured' ) ) {
@@ -347,13 +347,13 @@ class ObjectsController extends Kea_Action_Controller
 		} else {
 			$object_c = $this->_findById();
 			$object = $object_c->current();
-			$object->getCategoryMetadata();
+			$object->getTypeMetadata();
 			
 			$sudo = array();
 			$object_a = array(	'object_id'						=> $object->getId(),
 								'object_title'					=> $object->object_title,
 								'object_description'			=> $object->object_description,
-								'category_id'					=> $object->category_id,
+								'type_id'					=> $object->type_id,
 								'collection_id'					=> $object->collection_id,
 								'object_language'				=> $object->object_language,
 								//'contributor_id'				=> $object->contributor_id,
@@ -367,7 +367,7 @@ class ObjectsController extends Kea_Action_Controller
 								'object_subject'				=> $object->object_subject,
 								'object_source'					=> $object->object_source,
 								'object_public'					=> $object->object_public,
-								'category_metadata'				=> $object->category_metadata );
+								'type_metadata'				=> @$object->type_metadata );
 
 			$sudo['object_added'] = $object->object_added;
 			$sudo['object_modified'] = $object->object_modified;
@@ -534,6 +534,11 @@ class ObjectsController extends Kea_Action_Controller
 			$object->user_id = self::$_session->getUser()->getId();
 		}
 		
+		if ( empty( $object->type_id ) )
+		{
+			$object->type_id = 'NULL';
+		}
+		
 		/* Deprecated in favor of the following if statement as of r351 
 		if (self::$_session->getUser()) $object->user_id = self::$_session->getUser()->getId();
 		*/
@@ -632,10 +637,10 @@ class ObjectsController extends Kea_Action_Controller
 		return $mapper->total();
 	}
 	
-	protected function _totalInCategory( $category_id )
+	protected function _totalInType( $type_id )
 	{
 		$mapper = new Object_Mapper();
-		return $mapper->totalSliced( $category_id , null);
+		return $mapper->totalSliced( $type_id , null);
 	}
 	
 	protected function _totalInCollection( $collection_id )
@@ -646,10 +651,10 @@ class ObjectsController extends Kea_Action_Controller
 	}
 
 	
-	protected function _deleteCategoryAssociation( $object_id )
+	protected function _deleteTypeAssociation( $object_id )
 	{
 		$adapter = Kea_DB_Adapter::instance();
-		$adapter->update( 'objects', array( 'category_id'	=> 'NULL' ), 'objects.object_id = \'' . $object_id . '\'' );
+		$adapter->update( 'objects', array( 'type_id'	=> 'NULL' ), 'objects.object_id = \'' . $object_id . '\'' );
 		$adapter->delete( 'metatext', 'object_id = \'' . $object_id . '\'' );
 		if( $adapter->error() )
 		{

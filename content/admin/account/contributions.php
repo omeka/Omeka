@@ -52,7 +52,7 @@ $result = $__c->accounts()->getMyContributions();
 <?php
 	foreach( $result['objects'] as $object ):
 	$object->getFilesWithThumbnails()
-		   ->getCategoryMetadata()
+		   ->getTypeMetadata()
 		   ->getContributor();
 ?>
 
@@ -61,8 +61,8 @@ $result = $__c->accounts()->getMyContributions();
     <div class="meta" onclick="loadObject(<?php echo $object->object_id; ?>)" onmouseover="highlight(this)" onmouseout="unHighlight(this)">
         <h3><a href="<?php echo $_link->to('objects', 'show') . $object->object_id; ?>"><?php echo htmlentities( $object->object_title ); ?></a></h3>
 		<ul class="object-metadata">
-			<?php if( $object->category_name ): ?>
-			<li class="object-type">Object Type: <?php echo $object->category_name; ?></li>
+			<?php if( $object->type_name ): ?>
+			<li class="object-type">Object Type: <?php echo $object->type_name; ?></li>
 			<?php else: ?>
 			<li class="object-type">Object Type: None</li>
 			<?php endif; ?>

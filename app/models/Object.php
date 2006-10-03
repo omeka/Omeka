@@ -37,8 +37,8 @@ class Object extends Kea_Domain_Model
 	
 	public $creator_other;
 	
-	// Category <=> KJVObjectType data (same thing)
-	public $category_id;
+	// Type <=> KJVObjectType data (same thing)
+	public $type_id;
 	
 	public function __construct( $array = null )
 	{
@@ -48,9 +48,9 @@ class Object extends Kea_Domain_Model
 			$this->contributor_id = null;
 		}
 		
-		if( empty( $this->category_id ) )
+		if( empty( $this->type_id ) )
 		{
-			$this->category_id = null;
+			$this->type_id = null;
 		}
 		
 		if( empty( $this->creator_id ) )
@@ -60,13 +60,13 @@ class Object extends Kea_Domain_Model
 	}
 	
 	// Maybe this should be called in the "construct" method above, so that metadata is always available?? [JMG]
-	public function getCategoryMetadata($metafield_name = NULL, $length = -1, $append = '...')
+	public function getTypeMetadata($metafield_name = NULL, $length = -1, $append = '...')
 	{
-		$this->mapper()->getCategoryMetadata( $this );
+		$this->mapper()->getTypeMetadata( $this );
 		if (!is_null($metafield_name)) {
 			
 			// There's *got* to be a more elegant way of doing this than this... [JMG]
-			foreach ($this->category_metadata as $meta_field) {
+			foreach ($this->type_metadata as $meta_field) {
 				if ($meta_field['metafield_name'] == $metafield_name) {
 					if ( ($length > 0) && (strlen($meta_field['metatext_text']) > $length) ) {
 						$short = substr($meta_field['metatext_text'], 0, strrpos($meta_field['metatext_text'], ' ', $length-strlen($meta_field['metatext_text']))).$append;

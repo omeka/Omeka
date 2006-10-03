@@ -106,11 +106,11 @@ include( 'subnav.php' );
 			<dl id="object_rights"><dt>Rights:</dt> <dd><?php echo $object->object_rights; ?></dd></dl>				
 		</div>
 		
-		<div id="category-metadata" class="metadata-list">
+		<div id="type-metadata" class="metadata-list">
 			<h3>Type Metadata</h3>
-		<dl id="object-category"><dt>Type:</dt> <dd><?php echo $object->category_name; ?></dd></dl>
-			<?php if( $object->category_metadata ): ?>
-				<?php foreach( $object->category_metadata as $k => $v ): ?>
+		<dl id="object-type"><dt>Type:</dt> <dd><?php echo $object->type_name; ?></dd></dl>
+			<?php if( $object->type_metadata ): ?>
+				<?php foreach( $object->type_metadata as $k => $v ): ?>
 					<dl><dt><?php echo $v['metafield_name']; ?>:</dt><dd><?php echo nl2br( $v['metatext_text'] ); ?></dd></dl>
 				<?php endforeach; ?>
 			<?php endif;?>

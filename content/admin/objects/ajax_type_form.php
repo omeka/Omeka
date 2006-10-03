@@ -1,11 +1,11 @@
 <?php
-$cat = $__c->categories()->findById();
+$cat = $__c->types()->findById();
 ?>
 
-<h2>Category: <?php echo $cat->category_name ?></h2>
+<h2>Type: <?php echo $cat->type_name ?></h2>
 <fieldset class="formElement">
-	<label>Category Description:</label>
-	<p><?php echo $cat->category_description; ?></p>
+	<label>Type Description:</label>
+	<p><?php echo $cat->type_description; ?></p>
 	
 	<?php $i=0; foreach( $cat->metafields as $metafield ): ?>
 		<fieldset class="formElement">

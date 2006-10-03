@@ -1,6 +1,6 @@
 <?php
 
-class CategoriesController extends Kea_Action_Controller
+class TypesController extends Kea_Action_Controller
 {	
 
 	public function __construct()
@@ -12,7 +12,7 @@ class CategoriesController extends Kea_Action_Controller
 	
 	protected function _all( $type = 'object' )
 	{
-		$mapper = new Category_Mapper;
+		$mapper = new Type_Mapper;
 		switch( $type ) {
 			case( 'object' ):
 				return $mapper->allObjects();
@@ -26,27 +26,27 @@ class CategoriesController extends Kea_Action_Controller
 	
 	protected function _edit()
 	{
-		if( self::$_request->getProperty( 'category_edit' ) ) {
+		if( self::$_request->getProperty( 'type_edit' ) ) {
 			if( $this->commitForm() ) {
-				$this->redirect( BASE_URI . DS . 'categories' . DS . 'all' );
+				$this->redirect( BASE_URI . DS . 'types' . DS . 'all' );
 				return;
 			}
 		} 
 		else {
-			self::$_session->setValue('category_form_saved', self::$_request->getProperties() );
+			self::$_session->setValue('type_form_saved', self::$_request->getProperties() );
 			return $this->_findById();
 		}
 	}
 
 	protected function _delete()
 	{
-		if( $id = self::$_request->getProperty( 'category_id' ) ) {
+		if( $id = self::$_request->getProperty( 'type_id' ) ) {
 			
-			// Delete category
-			$mapper = new Category_Mapper;
+			// Delete type
+			$mapper = new Type_Mapper;
 			$mapper->delete( $id );
 			
-			$this->redirect( BASE_URI . DS . 'categories' . DS . 'all' );
+			$this->redirect( BASE_URI . DS . 'types' . DS . 'all' );
 		}
 	}
 
@@ -55,18 +55,18 @@ class CategoriesController extends Kea_Action_Controller
 		$db_adapter = Kea_DB_Adapter::instance();
 		$db_adapter->beginTransaction();
 		
-		$category = new Category( self::$_request->getProperty( 'category' ) );
+		$type = new Type( self::$_request->getProperty( 'type' ) );
 		//print_r($_REQUEST); exit;
 		/**
-		 * If the category is valid, save it, get its available metafields, then cycle through the form's list of metafields.
+		 * If the type is valid, save it, get its available metafields, then cycle through the form's list of metafields.
 		 * If there are any new metafield names, save those and replace the old ones in the list (but don't delete the old ones)
 		 * Otherwise if there are any changes to the metafield dropdown, process those changes
 		 * 
 		 * @author Kris Kelly
 		 **/
-		if( $this->validates( $category ) ) {
-			$category->save();
-			$category->getMetafields();
+		if( $this->validates( $type ) ) {
+			$type->save();
+			$type->getMetafields();
 			if($metafields = self::$_request->getProperty( 'metafields') )
 			{
 				//metafields are passed as arrays with metafield data + metafield_name_new if applicable
@@ -74,7 +74,7 @@ class CategoriesController extends Kea_Action_Controller
 				{
 					$mf_dropdown = new Metafield($v);
 					
-					//The stupid category editing form doesn't send an updated metafield ID, just a name, so we have to get the whole thing
+					//The stupid type editing form doesn't send an updated metafield ID, just a name, so we have to get the whole thing
 					$mf_dropdown = Metafield::findBy('metafield_name', $mf_dropdown->metafield_name);
 					if( $mf_dropdown instanceof Metafield_Collection )
 					{
@@ -91,10 +91,10 @@ class CategoriesController extends Kea_Action_Controller
 						elseif( $mf_new->validates() ) 
 						{
 							$mf_new->save();
-							$category->addMetafieldAssoc($mf_new);
-							if( $mf_dropdown && $category->hasMetafield($mf_dropdown) )
+							$type->addMetafieldAssoc($mf_new);
+							if( $mf_dropdown && $type->hasMetafield($mf_dropdown) )
 							{
-								$category->removeMetafieldAssoc($mf_dropdown);
+								$type->removeMetafieldAssoc($mf_dropdown);
 							}
 						}
 					}
@@ -102,48 +102,48 @@ class CategoriesController extends Kea_Action_Controller
 					elseif( is_null($mf_dropdown) )
 					{
 						$mf_old = Metafield::findBy('metafield_id', $v['metafield_id']);
-						$category->removeMetafieldAssoc($mf_old);
+						$type->removeMetafieldAssoc($mf_old);
 					}
 					//Or else it is a new metafield choice
-					elseif( !$category->hasMetafield($mf_dropdown) )
+					elseif( !$type->hasMetafield($mf_dropdown) )
 					{
-						$category->addMetafieldAssoc($mf_dropdown);
+						$type->addMetafieldAssoc($mf_dropdown);
 						
-						if( $mf_old = $category->metafields->getObjectAt($k) )
+						if( $mf_old = $type->metafields->getObjectAt($k) )
 						{
-							$category->removeMetafieldAssoc($mf_old);
+							$type->removeMetafieldAssoc($mf_old);
 						}
 					}
 				}
 			}
-			//$category->getMetafields(); var_dump($category);
+			//$type->getMetafields(); var_dump($type);
 			//return $this->add();
-			//return $category->save();
+			//return $type->save();
 			//return TRUE;
 			if( $db_adapter->error() )
 			{
 				$db_adapter->rollback();
-				self::$_session->setValue( 'category_form_saved', self::$_request->getProperties() );
+				self::$_session->setValue( 'type_form_saved', self::$_request->getProperties() );
 				return false;
 			}
 			else
 			{
 				$db_adapter->commit();
-				self::$_session->setValue( 'category_form_saved', null );
+				self::$_session->setValue( 'type_form_saved', null );
 				return true;
 			}
 		}
 		else
 		{
-			self::$_session->setValue( 'category_form_saved', self::$_request->getProperties() );
+			self::$_session->setValue( 'type_form_saved', self::$_request->getProperties() );
 		}
-		//self::$_session->setValue( 'category_form_saved', self::$_request->getProperties() );
+		//self::$_session->setValue( 'type_form_saved', self::$_request->getProperties() );
 		return false;
 	}
 	
 	protected function _total()
 	{	
-		$mapper = new Category_Mapper;
+		$mapper = new Type_Mapper;
 		return $mapper->total();
 	}
 	
@@ -158,10 +158,10 @@ class CategoriesController extends Kea_Action_Controller
 				0);
 		}
 
-		$mapper = new Category_Mapper();
+		$mapper = new Type_Mapper();
 
 		$obj = $mapper->find()
-					  ->where( 'categories.category_id = ?', $id )
+					  ->where( 'types.type_id = ?', $id )
 					  ->execute();
 		
 		$obj->getMetafields();
@@ -174,25 +174,25 @@ class CategoriesController extends Kea_Action_Controller
 	
 	protected function _add()
 	{	
-		if( !self::$_request->getProperty( 'category_submitted' ) ) {
-			self::$_session->setValue( 'category_form_saved', null );
+		if( !self::$_request->getProperty( 'type_submitted' ) ) {
+			self::$_session->setValue( 'type_form_saved', null );
 			return;
 		}
 
 		// Save the request data from the form to the session	
-		self::$_session->setValue( 'category_form_saved', $_REQUEST );
+		self::$_session->setValue( 'type_form_saved', $_REQUEST );
 
-		$cat = new Category( self::$_request->getProperty( 'category' ) );
-		$cat_map = new Category_Mapper;
+		$cat = new Type( self::$_request->getProperty( 'type' ) );
+		$cat_map = new Type_Mapper;
 		$mf_map = new Metafield_Mapper;
 		
 		
 		try{
-		// This should be a beforeSave filter or rule on Category objs
-		if( !$cat_map->unique( 'category_name', $cat->category_name ) ) {
+		// This should be a beforeSave filter or rule on Type objs
+		if( !$cat_map->unique( 'type_name', $cat->type_name ) ) {
 			throw new Kea_Exception(
-				'An object category called "'
-				. $cat->category_name .
+				'An object type called "'
+				. $cat->type_name .
 				'" already exists.  Please choose a unique name.'
 			);
 		}
@@ -258,8 +258,8 @@ class CategoriesController extends Kea_Action_Controller
 					}
 				}
 				
-				// This should be handled in the categories mapper or metafields mapper
-				$join_mapper = Kea_Domain_HelperFactory::getMapper('CategoriesMetafields');
+				// This should be handled in the types mapper or metafields mapper
+				$join_mapper = Kea_Domain_HelperFactory::getMapper('TypesMetafields');
 				foreach( $mf_ids as $mf_id ) {
 					$join_mapper->insert( $cat->getId(), $mf_id );
 				}
@@ -268,8 +268,8 @@ echo 'made it';
 				echo $db_adapter->error();
 				if ($db_adapter->commit()) 
 				{
-					self::$_session->setValue( 'category_form_saved', null );
-					$this->redirect( BASE_URI . DS . 'categories' . DS . 'all' );
+					self::$_session->setValue( 'type_form_saved', null );
+					$this->redirect( BASE_URI . DS . 'types' . DS . 'all' );
 				}
 				
 			} catch( Kea_Exception $e ) {

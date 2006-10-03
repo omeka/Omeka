@@ -12,7 +12,7 @@
 <ul id="navigation">
 	<li id="nav-welcome"<?php if(self::$_route['template'] == '') {echo ' class="current"';} ?>><a href="<?php echo $_link->to(); ?>">Home</a></li>
 	<li id="nav-objects"<?php if($current == 'objects' || $current == 'files') { echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'objects' ); ?>">Objects</a></li>
-	<li id="nav-categories"<?php if($current == 'categories') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'categories' ); ?>">Types</a></li>
+	<li id="nav-types"<?php if($current == 'types') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'types' ); ?>">Types</a></li>
 	<li id="nav-collections"<?php if($current == 'collections') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'collections' ); ?>">Collections</a></li>
 	<li id="nav-tags"<?php if($current == 'tags') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'tags' ); ?>">Tags</a></li>
 	<li id="nav-myarchive"<?php if($current == 'account') {echo ' class="current"';} ?>><a href="<?php echo $_link->to( 'account' ); ?>">My Archive</a></li>

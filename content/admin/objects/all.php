@@ -10,12 +10,12 @@ $result = $__c->objects()->paginate();
 
 <div id="object-all">
 		<form name="object_limit" id="object-limit" method="get" action="<?php echo $_link->to( 'objects' ); ?>" >
-			<label for="objectType">Object Category</label>
+			<label for="objectType">Object Type</label>
 		<select name="objectType">
-			<option value="">Show by Category:&nbsp;</option>
+			<option value="">Show by Type:&nbsp;</option>
 			<option value="">All</option>
-			<?php foreach( $__c->categories()->all( 'array' ) as $cat ): ?>
-			<option value="<?php echo $cat['category_id'] ?>" <?php if( $cat['category_id'] ==  self::$_request->getProperty('objectType') ){ echo ' selected '; } ?>><?php echo $cat['category_name'] ?></option>
+			<?php foreach( $__c->types()->all( 'array' ) as $cat ): ?>
+			<option value="<?php echo $cat['type_id'] ?>" <?php if( $cat['type_id'] ==  self::$_request->getProperty('objectType') ){ echo ' selected '; } ?>><?php echo $cat['type_name'] ?></option>
 			<?php endforeach; ?>
 		</select>
 		<label for="collection">Collection</label>
@@ -63,7 +63,7 @@ $result = $__c->objects()->paginate();
 	<?php
 		foreach( $result['objects'] as $object ):
 		$object->getFilesWithThumbnails()
-			   ->getCategoryMetadata()
+			   ->getTypeMetadata()
 			   ->getContributor();
 	?>
 	
@@ -74,8 +74,8 @@ $result = $__c->objects()->paginate();
 		</div>
 	        
 			<ul class="object-metadata">
-				<?php if( $object->category_name ): ?>
-				<li class="object-type">Item Type: <?php echo $object->category_name; ?></li>
+				<?php if( $object->type_name ): ?>
+				<li class="object-type">Item Type: <?php echo $object->type_name; ?></li>
 				<?php else: ?>
 				<li class="object-type">Item Type: None</li>
 				<?php endif; ?>

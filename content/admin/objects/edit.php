@@ -73,22 +73,22 @@ function deleteFile( file_id )
 	new Ajax.Request('<?php echo $_link->to( 'objects', 'ajaxDeleteFile' ); ?>', opt);
 }
 
-function deleteObjectFromCategory( object_id )
+function deleteObjectFromType( object_id )
 {
 	var opt = {
 	    method: 'post',
 	    postBody: 'object_id=' + object_id,
 	    onSuccess: function() {
-			new Effect.Fade( 'category_form', {duration: 0.6} );
-			new Effect.Appear( 'category_add', {duration: 0.6} );
-			setTimeout( "document.getElementById('category_form').innerHTML = null", 600 );
+			new Effect.Fade( 'type_form', {duration: 0.6} );
+			new Effect.Appear( 'type_add', {duration: 0.6} );
+			setTimeout( "document.getElementById('type_form').innerHTML = null", 600 );
 	    },
 	    onFailure: function() {
 	        alert('Could not delete file.');
 	    }
 	}
 
-	new Ajax.Request('<?php echo $_link->to( 'objects', 'ajaxDeleteObjectFromCategory' ); ?>', opt);	
+	new Ajax.Request('<?php echo $_link->to( 'objects', 'ajaxDeleteObjectFromType' ); ?>', opt);	
 }
 </script>
 

@@ -1,7 +1,7 @@
 <script type="text/javascript">
 var ajax;
 function getExtendedForm() {
-	num = parseInt(document.getElementById( 'category_metafield_number' ).value);
+	num = parseInt(document.getElementById( 'type_metafield_number' ).value);
 	if( num > 0 && num != NaN )
 	{
 		var opt = {
@@ -14,11 +14,11 @@ function getExtendedForm() {
 	
 		ajax = new Ajax.Updater(
 			'extended_elements',
-			'<?php echo $_link->to('categories', 'ajax_create_form'); ?>',
+			'<?php echo $_link->to('types', 'ajax_create_form'); ?>',
 			opt);
 	}
-	else if( document.getElementById( 'category_metafield_number' ).value == 0
-				|| document.getElementById( 'category_metafield_number' ).value == '' )
+	else if( document.getElementById( 'type_metafield_number' ).value == 0
+				|| document.getElementById( 'type_metafield_number' ).value == '' )
 	{
 		removeExtendedForm();
 	}
@@ -46,24 +46,24 @@ function isEnter(event)
 </script>
 <fieldset>
 	<legend>General Type Information</legend>
-<label for="category_name">Type Name:</label>
+<label for="type_name">Type Name:</label>
 	<p class="instructionText">Be descriptive yet concise; no punctuation.</p>
 	<?php
 		$_form->text(	array(	'size'	=> '20',
-									'value'	=> $category->category_name,
-									'id'	=> 'category_name',
+									'value'	=> $type->type_name,
+									'id'	=> 'type_name',
 									'class' => 'textinput',
-									'name'	=> 'category[category_name]' ) );
+									'name'	=> 'type[type_name]' ) );
 	?>
 
-<label for="category_description">Type Description:</label>
+<label for="type_description">Type Description:</label>
 	<p class="instructionText">Describe the object type and enter any further description/instruction concerning default object metadata.</p>
 	<?php 
 		$_form->textarea(	array(	'rows'	=> '4',
 									'cols'	=> '60',
-									'id'	=> 'category_description',
-									'name'	=> 'category[category_description]' ),
-							 		issetor($saved['category']['category_description'], $category->category_description ));
+									'id'	=> 'type_description',
+									'name'	=> 'type[type_description]' ),
+							 		issetor($saved['type']['type_description'], $type->type_description ));
 	?>
 </fieldset>
 <fieldset>
@@ -73,9 +73,9 @@ function isEnter(event)
 	// Get the old metafield names and ids
 	$old_mfs = $__c->metafields()->all();
 
-	if ($category): 
-	//	print_r($category->metafields); exit;
-		foreach ($category->metafields as $meta) {
+	if ($type): 
+	//	print_r($type->metafields); exit;
+		foreach ($type->metafields as $meta) {
 ?>
 
 		<input type="hidden" name="metafields[<?php echo $i; ?>][metafield_id]" value="<?php echo $meta->metafield_id; ?>" />
@@ -96,17 +96,17 @@ function isEnter(event)
 
 		<?php $i++;?>
 <?php } endif; ?>
-	<label for="category_metafield_number">How many extended element fields does the object type need?</label>
+	<label for="type_metafield_number">How many extended element fields does the object type need?</label>
 	<p class="instructionText">Click &#8216;Add more fields&#8217; after entering a number in the box below.</p>
 	<p class="instructionText">Fields not filled in will be ignored.</p>
-	<input type="text" name="category_metafield_number" id="category_metafield_number" value="<?php echo htmlentities( @$saved['category_metafield_number'] ) ?>" size="3" onkeypress="isEnter(event)" />
+	<input type="text" name="type_metafield_number" id="type_metafield_number" value="<?php echo htmlentities( @$saved['type_metafield_number'] ) ?>" size="3" onkeypress="isEnter(event)" />
 	<input type="submit" name="add_fields" value="Add more fields -&gt;" />
 	<a href="#" onclick="getExtendedForm()">Get extended fields</a>||<a href="#" onclick="removeExtendedForm()">Remove Extended Fields</a>
 	<div id="extended_elements"></div>
 
 	<?php if(!empty($more_fields)): 
 
-for($j=$category->metafields->total(); $j<($category->metafields->total()+$more_fields); $j++): ?>
+for($j=$type->metafields->total(); $j<($type->metafields->total()+$more_fields); $j++): ?>
 	<label for="metafields[<?php echo $j; ?>][metafield_name]"><?php echo $j + 1 ?>) Extended Element Field Name</label>
 	<p class="instructionText">Choose an earlier defined meta field or create your own:</p>
 	<select name="metafields[<?php echo $j; ?>][metafield_name]" id="metafields[<?php echo $j; ?>][metafield_name]">

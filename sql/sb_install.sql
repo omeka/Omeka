@@ -52,7 +52,7 @@ CREATE TABLE objects (
 	object_subject				tinytext	NOT NULL,
 	
 	# Type - aka - KJV object type metadata
-	category_id					int(11)		UNSIGNED NULL,
+	type_id					int(11)		UNSIGNED NULL,
 	
 	# Creator
 	object_creator				text		NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE objects (
 #	Object Published
 	object_public			BOOL 		NOT NULL DEFAULT '0', 
 	PRIMARY KEY	(object_id),
-	INDEX		(category_id),
+	INDEX		(type_id),
 	#INDEX		(contributor_id),
 	#INDEX		(creator_id),
 	INDEX		(collection_id),
@@ -122,14 +122,14 @@ CREATE TRIGGER objects_minus AFTER DELETE ON objects
 -- KJV Object Types
 --
 
-DROP TABLE IF EXISTS categories;
-CREATE TABLE categories (
-	category_id							int(11)		UNSIGNED NOT NULL auto_increment,
-	category_name						tinytext	NOT NULL,
-	category_description				text		NOT NULL,
-	category_active						tinyint(1)	UNSIGNED NOT NULL default '1', -- This may be switched to 0
+DROP TABLE IF EXISTS types;
+CREATE TABLE types (
+	type_id							int(11)		UNSIGNED NOT NULL auto_increment,
+	type_name						tinytext	NOT NULL,
+	type_description				text		NOT NULL,
+	type_active						tinyint(1)	UNSIGNED NOT NULL default '1', -- This may be switched to 0
 
-	PRIMARY KEY  (category_id)
+	PRIMARY KEY  (type_id)
 
 )   ENGINE = innodb DEFAULT CHARSET=utf8;
 
@@ -151,13 +151,13 @@ CREATE TABLE metafields (
 
 ) ENGINE = innodb DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS categories_metafields;
-CREATE TABLE categories_metafields (
-	category_id					int(11) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS types_metafields;
+CREATE TABLE types_metafields (
+	type_id					int(11) UNSIGNED NOT NULL,
 	metafield_id					int(11) UNSIGNED NOT NULL,
-	INDEX (category_id),
+	INDEX (type_id),
 	INDEX (metafield_id),
-	FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (type_id) REFERENCES types(type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (metafield_id) REFERENCES metafields(metafield_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = innodb DEFAULT CHARSET=utf8;
 
@@ -386,12 +386,12 @@ FOR EACH ROW
 
 
 
-ALTER TABLE objects ADD CONSTRAINT `category_key` FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE objects ADD CONSTRAINT `type_key` FOREIGN KEY (type_id) REFERENCES types(type_id) ON DELETE SET NULL ON UPDATE CASCADE;
 #ALTER TABLE objects ADD CONSTRAINT `contributor_key` FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE objects ADD CONSTRAINT `collection_key` FOREIGN KEY (collection_id) REFERENCES collections(collection_id) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE objects ADD CONSTRAINT `user_key` FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE;
 
-INSERT INTO `categories` (`category_id`,  `category_name`, `category_description`, `category_active`) VALUES
+INSERT INTO `types` (`type_id`,  `type_name`, `type_description`, `type_active`) VALUES
 (3,  'Document', 'A resource containing textual data.  Note that facsimiles or images of texts are still of the genre text.', 1),
 (4,  'Email', 'A resource containing textual messages and binary attachments sent electronically from one person to another or one person to many people.', 1),
 (5,  'Interactive Resource', 'A resource which requires interaction from the user to be understood, executed, or experienced.', 1),
@@ -420,7 +420,7 @@ INSERT INTO `metafields` (`metafield_id`, `metafield_name`, `metafield_descripti
 (31, 'HTML', 'The hypertext markup language used for building the web page.'),
 (32, 'Local URL', 'The URL of the local directory containing all assets of the website.');
 
-INSERT INTO `categories_metafields` (`category_id`, `metafield_id`) VALUES
+INSERT INTO `types_metafields` (`type_id`, `metafield_id`) VALUES
 (3, 5),
 (4, 6),
 (4, 7),

@@ -20,20 +20,20 @@ class Object_Mapper extends Kea_DB_Mapper
 		return self::$_adapter->update( $this->_table_name, array( $field => $value), 'object_id = ' . $obj_id );
 	}
 	
-	public function getCategoryMetadata( Object $obj )
+	public function getTypeMetadata( Object $obj )
 	{
 		$select = self::$_adapter->select()
-					->from('categories_metafields', 'metafield_name, metatext_text, metafields.metafield_id, metafield_description, metatext.metatext_id' )
-					->joinLeft( 'metafields', 'metafields.metafield_id = categories_metafields.metafield_id' )
+					->from('types_metafields', 'metafield_name, metatext_text, metafields.metafield_id, metafield_description, metatext.metatext_id' )
+					->joinLeft( 'metafields', 'metafields.metafield_id = types_metafields.metafield_id' )
 					->joinLeft( 'metatext', 'metatext.metafield_id = metafields.metafield_id' )
-					->where( 'categories_metafields.category_id = ?', $obj->category_id )
+					->where( 'types_metafields.type_id = ?', $obj->type_id )
 					->where( 'metatext.object_id = ?', $obj->object_id )
 					->order( array( 'metatext_id' => 'ASC' ) );
 			
 		if( $result = $this->query( $select ) ) {
 			if( $result->num_rows > 0) {
 				while( $row = $result->fetch_assoc() ) {
-					$obj->category_metadata[$row['metafield_id']] = array(	'metafield_id'			=> $row['metafield_id'],
+					$obj->type_metadata[$row['metafield_id']] = array(	'metafield_id'			=> $row['metafield_id'],
 														'metafield_name'		=> $row['metafield_name'],
 														'metafield_description'	=> $row['metafield_description'],
 														'metatext_id'			=> $row['metatext_id'],
@@ -43,13 +43,13 @@ class Object_Mapper extends Kea_DB_Mapper
 			} else {
 				$result->free();
 				$select = self::$_adapter->select()
-							->from('categories_metafields', 'metafield_name, metafield_description, metafields.metafield_id' )
-							->joinLeft( 'metafields', 'metafields.metafield_id = categories_metafields.metafield_id' )
-							->where( 'categories_metafields.category_id = ?', $obj->category_id )
+							->from('types_metafields', 'metafield_name, metafield_description, metafields.metafield_id' )
+							->joinLeft( 'metafields', 'metafields.metafield_id = types_metafields.metafield_id' )
+							->where( 'types_metafields.type_id = ?', $obj->type_id )
 							->order( array( 'metafield_id' => 'ASC' ) );;
 				$result = $this->query( $select );
 				while( $row = $result->fetch_assoc() ) {
-					$obj->category_metadata[$row['metafield_id']] = array( 	'metafield_id'			=> $row['metafield_id'],
+					$obj->type_metadata[$row['metafield_id']] = array( 	'metafield_id'			=> $row['metafield_id'],
 														'metafield_name'		=> $row['metafield_name'],
 														'metafield_description'	=> $row['metafield_description'],
 														'metatext_text'			=> null );
@@ -67,11 +67,11 @@ class Object_Mapper extends Kea_DB_Mapper
 		return self::$_adapter->fetchOne( $select );
 	}
 	
-	public function totalSliced( $category_id = null, $collection_id = null)
+	public function totalSliced( $type_id = null, $collection_id = null)
 	{
 		$select = self::$_adapter->select();
 		$select->from( 'objects', 'COUNT(*) as count' );
-		if ( $category_id != null) $select->where( 'objects.category_id = ?', $category_id );
+		if ( $type_id != null) $select->where( 'objects.type_id = ?', $type_id );
 		if ( $collection_id != null) $select->where( 'objects.collection_id = ?', $collection_id );
 		return self::$_adapter->fetchOne( $select );
 	}

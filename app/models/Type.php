@@ -1,11 +1,11 @@
 <?php
 
-class Category extends Kea_Domain_Model
+class Type extends Kea_Domain_Model
 {
-	public $category_id;
-	public $category_name;
-	public $category_description;
-	public $category_active;
+	public $type_id;
+	public $type_name;
+	public $type_description;
+	public $type_active;
 	
 	/**
 	 * Metafields Collection Object
@@ -14,7 +14,7 @@ class Category extends Kea_Domain_Model
 	
 	public function getMetafields()
 	{
-		$this->metafields = self::getMapper('Metafield')->findByCategory( $this->category_id );
+		$this->metafields = self::getMapper('Metafield')->findByType( $this->type_id );
 	}
 	
 	public function unqiue( $col, $val )
@@ -24,7 +24,7 @@ class Category extends Kea_Domain_Model
 	
 	public static function uniqueName( $name )
 	{
-		return self::getMapper(__CLASS__)->unique( 'category_name', $name );
+		return self::getMapper(__CLASS__)->unique( 'type_name', $name );
 	}
 	
 	public function removeMetafieldAssoc( Metafield $metafield )
@@ -33,7 +33,7 @@ class Category extends Kea_Domain_Model
 		{
 			throw new Kea_Domain_Exception('Metafield needs a valid ID.');
 		}
-		$join_mapper = Kea_Domain_HelperFactory::getMapper('CategoriesMetafields');
+		$join_mapper = Kea_Domain_HelperFactory::getMapper('TypesMetafields');
 		return $join_mapper->delete( $this->getId(), $metafield->getId() );
 	}
 	
@@ -43,7 +43,7 @@ class Category extends Kea_Domain_Model
 		{
 			throw new Kea_Domain_Exception('Metafield needs a valid ID.');
 		}
-		$join_mapper = Kea_Domain_HelperFactory::getMapper('CategoriesMetafields');
+		$join_mapper = Kea_Domain_HelperFactory::getMapper('TypesMetafields');
 		return $join_mapper->insert( $this->getId(), $metafield->getId() );
 	}	
 	
