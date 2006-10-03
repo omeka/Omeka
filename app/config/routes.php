@@ -38,4 +38,8 @@ Kea_Template_Router::connect(
 	'/:admin/files/:template/*',
 	array( 'template' => 'show', 'directory' => 'files' ) );
 
+Kea_Template_Router::connect(
+	'/:admin/settings/:template/*',
+	array( 'template' => 'all', 'directory' => 'settings' ) );
+
 ?>
