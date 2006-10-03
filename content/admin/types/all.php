@@ -23,7 +23,7 @@ $types = $__c->types()->all( 'object' );
 		<td><a href="<?php echo $_link->to( 'types', 'edit' ) . $type->type_id; ?>"><?php echo $type->type_name; ?></a></td>
 		<td><?php echo $type->type_description; ?></td>
 		<?php if( self::$_session->getUser()->getPermissions() <= 10 ): ?>
-		<td><a href="<?php echo $_link->to( 'objects' ); ?>?type=<?php echo $type->type_id; ?>" title="View items in the <?php echo $type->type_name; ?>">View</a></td>
+		<td><a href="<?php echo $_link->to( 'items' ); ?>?type=<?php echo $type->type_id; ?>" title="View items in the <?php echo $type->type_name; ?>">View</a></td>
 		<?php endif; ?>
 	</tr>
 	<?php

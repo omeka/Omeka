@@ -14,10 +14,10 @@ class Location_Mapper extends Kea_DB_Mapper
 		return 'Location';
 	}
 	
-	public function findByObject( $id )
+	public function findByItem( $id )
 	{
 		return $this->find()
-					->where( 'object_id = ?', $id )
+					->where( 'item_id = ?', $id )
 					->execute();
 	}
 }

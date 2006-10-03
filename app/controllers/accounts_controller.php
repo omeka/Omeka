@@ -24,86 +24,86 @@ class AccountsController extends Kea_Action_Controller
 		}
 	}
 	
-	protected function _getMyContributions( $num_objects = 9, $order_by_date = true )
+	protected function _getMyContributions( $num_items = 9, $order_by_date = true )
 	{
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
 
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 
-		$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-						->joinLeft( 'types', 'types.type_id = objects.type_id' )
-						->where( 'objects.user_id = ?', self::$_session->getUser()->getId() );
+		$select = $mapper->select( "*, RPAD( SUBSTRING( item_description, 1, 140 ),  LENGTH( SUBSTRING( item_description, 1, 140 ) ) + 3, '.') as short_desc" )
+						->joinLeft( 'types', 'types.type_id = items.type_id' )
+						->where( 'items.user_id = ?', self::$_session->getUser()->getId() );
 		
 		if( $order_by_date )
 		{
-			$select->order( array( 'objects.object_added' => 'DESC' ) );
+			$select->order( array( 'items.item_added' => 'DESC' ) );
 		}
 		else
 		{
-			$select->order( array( 'objects.object_id' => 'DESC' ) );
+			$select->order( array( 'items.item_id' => 'DESC' ) );
 		}
 		
 		if( $tags = self::$_request->getProperty( 'tags' ) )
 		{
-			$select->joinLeft( 'objects_tags', 'objects_tags.object_id = objects.object_id' )
-				   ->joinLeft( 'tags', 'objects_tags.tag_id = tags.tag_id' )
+			$select->joinLeft( 'items_tags', 'items_tags.item_id = items.item_id' )
+				   ->joinLeft( 'tags', 'items_tags.tag_id = tags.tag_id' )
 				   ->where( 'tags.tag_name = ?', $tags );
 		}
 
-		return $mapper->paginate( $select, $page, $num_objects );
+		return $mapper->paginate( $select, $page, $num_items );
 	}
 	
-	protected function _getMyFavorites( $num_objects = 9, $order_by_date = true )
+	protected function _getMyFavorites( $num_items = 9, $order_by_date = true )
 	{
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
 
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 
-		$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-						->joinLeft( 'types', 'types.type_id = objects.type_id' )
-						->join( 'objects_favorites', 'objects_favorites.object_id = objects.object_id' )
-						->where( 'objects_favorites.user_id = ?', self::$_session->getUser()->getId() );
+		$select = $mapper->select( "*, RPAD( SUBSTRING( item_description, 1, 140 ),  LENGTH( SUBSTRING( item_description, 1, 140 ) ) + 3, '.') as short_desc" )
+						->joinLeft( 'types', 'types.type_id = items.type_id' )
+						->join( 'items_favorites', 'items_favorites.item_id = items.item_id' )
+						->where( 'items_favorites.user_id = ?', self::$_session->getUser()->getId() );
 		
 		if( $order_by_date )
 		{
-			$select->order( array( 'objects_favorites.fav_added' => 'DESC' ) );
+			$select->order( array( 'items_favorites.fav_added' => 'DESC' ) );
 		}
 		else
 		{
-			$select->order( array( 'objects.object_id' => 'DESC' ) );
+			$select->order( array( 'items.item_id' => 'DESC' ) );
 		}
 		
 		if( $tags = self::$_request->getProperty( 'tags' ) )
 		{
-			$select->join( 'objects_tags', 'objects_tags.object_id = objects.object_id' )
-				   ->join( 'tags', 'objects_tags.tag_id = tags.tag_id' )
-				   ->where( 'objects_tags.user_id = ?', self::$_session->getUser()->getId() )
+			$select->join( 'items_tags', 'items_tags.item_id = items.item_id' )
+				   ->join( 'tags', 'items_tags.tag_id = tags.tag_id' )
+				   ->where( 'items_tags.user_id = ?', self::$_session->getUser()->getId() )
 				   ->where( 'tags.tag_name = ?', $tags );
 		}
 
-		return $mapper->paginate( $select, $page, $num_objects );
+		return $mapper->paginate( $select, $page, $num_items );
 	}
 	
-	protected function _findMyTaggedObjects( $num_objects = 9 , $showAll = false)
+	protected function _findMyTaggedItems( $num_items = 9 , $showAll = false)
 	{
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
 
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 
-		$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-						->joinLeft( 'types', 'types.type_id = objects.type_id' )
-						->order( array( 'objects.object_id' => 'DESC' ) )
-						->join( 'objects_tags', 'objects_tags.object_id = objects.object_id' )
-					   	->join( 'tags', 'objects_tags.tag_id = tags.tag_id' )
-				   		->where( 'objects_tags.user_id = ?', self::$_session->getUser()->getId() )
-						->group('objects.object_id');
+		$select = $mapper->select( "*, RPAD( SUBSTRING( item_description, 1, 140 ),  LENGTH( SUBSTRING( item_description, 1, 140 ) ) + 3, '.') as short_desc" )
+						->joinLeft( 'types', 'types.type_id = items.type_id' )
+						->order( array( 'items.item_id' => 'DESC' ) )
+						->join( 'items_tags', 'items_tags.item_id = items.item_id' )
+					   	->join( 'tags', 'items_tags.tag_id = tags.tag_id' )
+				   		->where( 'items_tags.user_id = ?', self::$_session->getUser()->getId() )
+						->group('items.item_id');
 		
 		if( $tags = self::$_request->getProperty( 'tags' ) ):
 			$select->where( 'tags.tag_name = ?', $tags );
 		endif;
 
 		if( $tags || $showAll == true):
-			return $mapper->paginate( $select, $page, $num_objects );
+			return $mapper->paginate( $select, $page, $num_items );
 		else:
 			return false;
 		endif;

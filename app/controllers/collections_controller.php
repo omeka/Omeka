@@ -53,20 +53,20 @@ class CollectionsController extends Kea_Action_Controller
 		if( $id = self::$_request->getProperty( 'collection_id' ) ) {
 			
 			/**
-			 * This will delete all the objects in the collection if the right $_request variable is set,
+			 * This will delete all the items in the collection if the right $_request variable is set,
 			 * for obvious reasons only a super user should be able to do this.
 			 *
 			 */
 			/* if( self::$_session->isSuper() )
 			{
-				$deleteObjects = self::$_request->getProperty( 'delete_objects' );
-				if($deleteObjects)
+				$deleteItems = self::$_request->getProperty( 'delete_items' );
+				if($deleteItems)
 				{
-					$objMapper = new Object_Mapper;
-					$objects = $objMapper->find()->where('collection_id = ?', $id)->execute();
-					foreach($objects as $object)
+					$objMapper = new Item_Mapper;
+					$items = $objMapper->find()->where('collection_id = ?', $id)->execute();
+					foreach($items as $item)
 					{
-						$object->delete();
+						$item->delete();
 					}
 				}
 			} */
@@ -122,12 +122,12 @@ class CollectionsController extends Kea_Action_Controller
 	
 	protected function _addToCollection()
 	{
-		$obj_id = self::$_request->getProperty( 'object_id' );
+		$obj_id = self::$_request->getProperty( 'item_id' );
 		$coll_id = self::$_request->getProperty( 'collection_id' );
 
 		$mapper = new Collection_Mapper();
 		if( empty($obj_id) || empty($coll_id) ) {
-			self::$_session->flash('Please choose a collection to assign the objects.');
+			self::$_session->flash('Please choose a collection to assign the items.');
 			return null;
 		} 
 		return $mapper->addToCollection( $obj_id, $coll_id );

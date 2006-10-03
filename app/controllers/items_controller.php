@@ -1,6 +1,6 @@
 <?php
 
-class ObjectsController extends Kea_Action_Controller
+class ItemsController extends Kea_Action_Controller
 {
 	/**
 	 * Constructor
@@ -20,13 +20,13 @@ class ObjectsController extends Kea_Action_Controller
 	}
 	
 	/**
-	 * Returns the next object in the database 
+	 * Returns the next item in the database 
 	 * 
-	 * @param int $id An object_id
-	 * @return Object Returns the entire object, otherwise returns false
+	 * @param int $id An item_id
+	 * @return Item Returns the entire item, otherwise returns false
 	 * @author Nate Agrin
 	 **/
-	protected function _getNextObjectID( $id = null )
+	protected function _getNextItemID( $id = null )
 	{
 		if( !$id )
 		{
@@ -39,9 +39,9 @@ class ObjectsController extends Kea_Action_Controller
 		
 		$id = (int) $id;
 
-		$mapper = new Object_Mapper;
+		$mapper = new Item_Mapper;
 		$select = $mapper->find()
-						->where( 'object_id > ?', $id )
+						->where( 'item_id > ?', $id )
 						->limit(1);
 		$this->applyPermissions( $select );
 		$obj = $select->execute()->getObjectAt(0);
@@ -54,13 +54,13 @@ class ObjectsController extends Kea_Action_Controller
 	}
 
 	/**
-	 * Returns the object located immediately prior in the database
+	 * Returns the item located immediately prior in the database
 	 *
-	 * @param int $id An object_id 
-	 * @return Object Returns the entire object, otherwise returns false
+	 * @param int $id An item_id 
+	 * @return Item Returns the entire item, otherwise returns false
 	 * @author Nate Agrin
 	 **/
-	protected function _getPrevObjectID( $id = null )
+	protected function _getPrevItemID( $id = null )
 	{
 		if( !$id )
 		{
@@ -73,10 +73,10 @@ class ObjectsController extends Kea_Action_Controller
 		
 		$id = (int) $id;
 
-		$mapper = new Object_Mapper;
+		$mapper = new Item_Mapper;
 		$select = $mapper->find()
-						->where( 'object_id < ?', $id )
-						->order( array( 'object_id' => 'DESC' ) )
+						->where( 'item_id < ?', $id )
+						->order( array( 'item_id' => 'DESC' ) )
 						->limit(1);
 		$this->applyPermissions( $select );
 		$obj = $select->execute()->getObjectAt(0);
@@ -89,10 +89,10 @@ class ObjectsController extends Kea_Action_Controller
 	}
 
 	/**
-	 * Find an object by ID
+	 * Find an item by ID
 	 *
-	 * @param int $id object_id
-	 * @return Object Returns the entire object, otherwise returns false
+	 * @param int $id item_id
+	 * @return Item Returns the entire item, otherwise returns false
 	 * @author Nate Agrin
 	 **/
 	protected function _findById( $id = null )
@@ -108,14 +108,14 @@ class ObjectsController extends Kea_Action_Controller
 		
 		$id = (int) $id;
 		
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 		$select = $mapper->select()
-					  ->joinLeft( 'types', 'types.type_id = objects.type_id' )
-					  ->where( 'objects.object_id = ?', $id );
+					  ->joinLeft( 'types', 'types.type_id = items.type_id' )
+					  ->where( 'items.item_id = ?', $id );
 		$this->applyPermissions( $select );
 		$obj = $mapper->findObjects( $select );
 		
-		if ($obj->object_id):
+		if ($obj->item_id):
 			$obj->getTypeMetadata()
 				->getCreator()
 				->getLocation()
@@ -124,13 +124,13 @@ class ObjectsController extends Kea_Action_Controller
 				->getFiles();					
 			return $obj;
 		else:
-		throw new Kea_Domain_Exception('Cannot retrieve object with ID # '.$id);
+		throw new Kea_Domain_Exception('Cannot retrieve item with ID # '.$id);
 			return false;
 		endif;
 	}
 
 	/**
-	 * Gets the current page number when browsing objects
+	 * Gets the current page number when browsing items
 	 *
 	 * @return int Page number
 	 * @author Nate Agrin
@@ -142,26 +142,26 @@ class ObjectsController extends Kea_Action_Controller
 	}
 	
 	/**
-	 * Chooses a list of objects to display based on $_request data
+	 * Chooses a list of items to display based on $_request data
 	 *
-	 * Handles both search and display of objects within the browse page.
+	 * Handles both search and display of items within the browse page.
 	 *
-	 * @param bool $short_desc Show a short description of each object 
-	 * @param int $num_objects The number of objects per page
-	 * @param bool $check_location Include objects with valid location coordinates
-	 * @return array Contains the following keys: 'total' => total # of objects found, 'page' => current page, 'per_page' => # per page, 'objects' => Object_Collection containing the objects found
+	 * @param bool $short_desc Show a short description of each item 
+	 * @param int $num_items The number of items per page
+	 * @param bool $check_location Include items with valid location coordinates
+	 * @return array Contains the following keys: 'total' => total # of items found, 'page' => current page, 'per_page' => # per page, 'items' => Item_Collection containing the items found
 	 * @author Nate Agrin
 	 **/
-	protected function _paginate( $short_desc = true, $num_objects = 9, $check_location = false )
+	protected function _paginate( $short_desc = true, $num_items = 9, $check_location = false )
 	{	
 		$page = isset( self::$_route['pass'][0] ) ? (int) self::$_route['pass'][0] : 1;
 
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 		
 		if( $short_desc ) {
-			$select = $mapper->select( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-							 ->joinLeft( 'types', 'types.type_id = objects.type_id' )
-							 ->order( array( 'objects.object_id' => 'DESC' ) );
+			$select = $mapper->select( "*, RPAD( SUBSTRING( item_description, 1, 140 ),  LENGTH( SUBSTRING( item_description, 1, 140 ) ) + 3, '.') as short_desc" )
+							 ->joinLeft( 'types', 'types.type_id = items.type_id' )
+							 ->order( array( 'items.item_id' => 'DESC' ) );
 		}
 
 		/* Begin consent screening
@@ -172,22 +172,22 @@ class ObjectsController extends Kea_Action_Controller
 		*/
 		
 		if( self::$_request->getProperty( 'collection' ) ) {
-			$select->where( 'objects.collection_id = ?', self::$_request->getProperty( 'collection' ) );
+			$select->where( 'items.collection_id = ?', self::$_request->getProperty( 'collection' ) );
 		}
 		
-		if( ( $cat = self::$_request->getProperty( 'objectType' ) )  
+		if( ( $cat = self::$_request->getProperty( 'itemType' ) )  
 			|| ( $cat = self::$_request->getProperty( 'type' ) )
 		 	 )
 		{
-			$select->where( 'objects.type_id = ?', $cat );
+			$select->where( 'items.type_id = ?', $cat );
 		}
 		
 		if( self::$_request->getProperty( 'featured' ) ) {
-			$select->where( 'objects.object_featured = ?', self::$_request->getProperty( 'featured' ) );
+			$select->where( 'items.item_featured = ?', self::$_request->getProperty( 'featured' ) );
 		}
 		
 		if( self::$_request->getProperty( 'contributor' ) ) {
-			$select->where( 'objects.contributor_id = ?', self::$_request->getProperty( 'contributor' ) );
+			$select->where( 'items.contributor_id = ?', self::$_request->getProperty( 'contributor' ) );
 		}
 		
 		if( $tags = self::$_request->getProperty( 'tags' ) )
@@ -199,95 +199,95 @@ class ObjectsController extends Kea_Action_Controller
 				$select->orWhere( 'tags.tag_name = ?', $tag );
 			}
 			
-			$select->joinLeft( 'objects_tags', 'objects_tags.object_id = objects.object_id' )
-				   ->joinLeft( 'tags', 'objects_tags.tag_id = tags.tag_id' )
-					->group( 'objects.object_id' );
+			$select->joinLeft( 'items_tags', 'items_tags.item_id = items.item_id' )
+				   ->joinLeft( 'tags', 'items_tags.tag_id = tags.tag_id' )
+					->group( 'items.item_id' );
 		}
 		
 	/*	if( self::$_request->getProperty( 'search' ) ) {
 
-			$select->join( 'metatext', 'objects.object_id = metatext.object_id');
-			$select->join( 'objects_tags', 'objects.object_id = objects_tags.object_id');
-			$select->join( 'tags', 'objects_tags.tag_id = tags.tag_id');
+			$select->join( 'metatext', 'items.item_id = metatext.item_id');
+			$select->join( 'items_tags', 'items.item_id = items_tags.item_id');
+			$select->join( 'tags', 'items_tags.tag_id = tags.tag_id');
 
-			$select->where( '( objects.object_title LIKE "%'.self::$_request->getProperty( 'search' ).'%" 
-				OR objects.object_description LIKE "%'.self::$_request->getProperty( 'search' ).'%"
+			$select->where( '( items.item_title LIKE "%'.self::$_request->getProperty( 'search' ).'%" 
+				OR items.item_description LIKE "%'.self::$_request->getProperty( 'search' ).'%"
 				OR metatext.metatext_text LIKE "%'.self::$_request->getProperty( 'search' ).'%"
-				OR tags.tag_name LIKE "%'.self::$_request->getProperty( 'search' ).'%" ) AND objects.object_id != ?', '' );			
+				OR tags.tag_name LIKE "%'.self::$_request->getProperty( 'search' ).'%" ) AND items.item_id != ?', '' );			
 	*/
-		$this->searchObjects($select);
+		$this->searchItems($select);
 		
 		if( $check_location )
 		{
-			$select->join( 'location', 'objects.object_id = location.object_id' );
+			$select->join( 'location', 'items.item_id = location.item_id' );
 			$select->where( 'location.latitude != ?', '' );
 			$select->where( 'location.longitude != ?', '' );
 		}
 		
-		$select->group( 'objects.object_id' );
+		$select->group( 'items.item_id' );
 		$this->applyPermissions( $select );
 
-		return $mapper->paginate( $select, $page, $num_objects, 'objectsTotal' );
+		return $mapper->paginate( $select, $page, $num_items, 'itemsTotal' );
 	}
 	
 	/**
 	 * Filters a data query based on search criteria
 	 *
-	 * @param Kea_DB_Select The Select object
-	 * @return Kea_DB_Select $select The Select object 
+	 * @param Kea_DB_Select The Select item
+	 * @return Kea_DB_Select $select The Select item 
 	 * @author Kris Kelly
 	 **/
-	private function searchObjects( Kea_DB_Select $select)
+	private function searchItems( Kea_DB_Select $select)
 	{
 		if( $phrase = self::$_request->getProperty( 'search' ) ) 
 		{
-			$select->join( 'metatext', 'objects.object_id = metatext.object_id');
-			//$select->joinRight( 'files', 'objects.object_id = files.object_id');
+			$select->join( 'metatext', 'items.item_id = metatext.item_id');
+			//$select->joinRight( 'files', 'items.item_id = files.item_id');
 			
-			//Search fails when objects are not tagged, figure out a way to fix this [KBK 8/29]
+			//Search fails when items are not tagged, figure out a way to fix this [KBK 8/29]
 			//Also, search should also cover 'files' file_description, but I can't get that to work (it breaks the Browse page)
 			
-			//$select->join( 'objects_tags', 'objects.object_id = objects_tags.object_id');
-			//$select->join( 'tags', 'objects_tags.tag_id = tags.tag_id');
+			//$select->join( 'items_tags', 'items.item_id = items_tags.item_id');
+			//$select->join( 'tags', 'items_tags.tag_id = tags.tag_id');
 
 			$phrase = trim($phrase);
 			$phrase = ' "%'.$phrase.'%" ';
-			$select->where( '( objects.object_title LIKE '.$phrase. 
-				'OR objects.object_description LIKE '.$phrase.
+			$select->where( '( items.item_title LIKE '.$phrase. 
+				'OR items.item_description LIKE '.$phrase.
 				'OR metatext.metatext_text LIKE '.$phrase.
 				//'OR files.file_description LIKE '.$phrase.
 				//'OR tags.tag_name LIKE '.$phrase.
-				' ) AND objects.object_id != "" ');			
+				' ) AND items.item_id != "" ');			
 			
 		}
 		return $select;
 	}
 	
 	/**
-	 * Filters objects based on user access permission
+	 * Filters items based on user access permission
 	 *
-	 * If the user is not an admin, this function will filter objects where the contributor has not given consent,
-	 * has not given permission to post the object (NOTE [KBK]: Current configuration only checks for Admin privileges, 
+	 * If the user is not an admin, this function will filter items where the contributor has not given consent,
+	 * has not given permission to post the item (NOTE [KBK]: Current configuration only checks for Admin privileges, 
 	 * we need to reconfigure so that researcher-level users will also be able to access the archives)
 	 *
-	 * @param Kea_DB_Select Select Object containing the parameters for selecting object(s) from the database 
-	 * @return Kea_DB_Select The select object with permission-based filtering
+	 * @param Kea_DB_Select Select Item containing the parameters for selecting item(s) from the database 
+	 * @return Kea_DB_Select The select item with permission-based filtering
 	 * @author Nate Agrin
 	 **/
 	private function applyPermissions( Kea_DB_Select $select )
 	{
 		if( !self::$_session->isAdmin() )
 		{
-			$select->where( 'objects.object_published = ?', 1 );
+			$select->where( 'items.item_published = ?', 1 );
 		}
 				
 		return $select;	
 	}
 	
 	/**
-	 * Add an object to the archive
+	 * Add an item to the archive
 	 *
-	 * If the object_add form has been submitted, commit the object to the database and redirect the user to view all objects,
+	 * If the item_add form has been submitted, commit the item to the database and redirect the user to view all items,
 	 * otherwise reset the saved form to empty
 	 * @return void
 	 * @author Nate Agrin
@@ -295,19 +295,19 @@ class ObjectsController extends Kea_Action_Controller
 	public function add( $type = 'admin' )
 	{
 		
-		if( self::$_request->getProperty( 'object_add' ) ) {
+		if( self::$_request->getProperty( 'item_add' ) ) {
 			
 			
-			if( $object = $this->commitForm() ) {
+			if( $item = $this->commitForm() ) {
 				switch ($type) 
 				{
 					case 'public': 
-						self::$_session->setValue( 'object_form_saved', null );
-						self::$_session->setValue( 'contributed_object', $object );
+						self::$_session->setValue( 'item_form_saved', null );
+						self::$_session->setValue( 'contributed_item', $item );
 						$this->redirect( BASE_URI . DS . 'mycontributions' );
 					break;
 					case 'admin': 
-						$this->redirect( BASE_URI . DS . 'objects' . DS . 'all' );
+						$this->redirect( BASE_URI . DS . 'items' . DS . 'all' );
 					break;
 					
 				}
@@ -315,78 +315,78 @@ class ObjectsController extends Kea_Action_Controller
 			}
 			return;
 		}
-		self::$_session->setValue( 'object_form_saved', null );
+		self::$_session->setValue( 'item_form_saved', null );
 	}
 	
 	/**
-	 * Edit an archived object
+	 * Edit an archived item
 	 *
-	 * If the object_edit form has been submitted, commit the form to the database and redirect the user to that 
-	 * object's entry.  If the form was not submitted, then find the current object and prepare that object's data
+	 * If the item_edit form has been submitted, commit the form to the database and redirect the user to that 
+	 * item's entry.  If the form was not submitted, then find the current item and prepare that item's data
 	 * to be displayed on the 'edit' page.
 	 *
-	 * @return Object Returns the object that is going to be edited
+	 * @return Item Returns the item that is going to be edited
 	 * @author Nate Agrin
 	 **/
 	protected function _edit( $type = 'admin')
 	{
-		if( self::$_request->getProperty( 'object_edit' ) ) {
+		if( self::$_request->getProperty( 'item_edit' ) ) {
 			if( $this->commitForm() ) {
-				$object = $this->_findById();
+				$item = $this->_findById();
 				switch ($type) 
 				{
 					case 'public': 
 						$this->redirect( BASE_URI . DS . 'mycontributions' );
 					break;
 					case 'admin': 
-						$this->redirect( BASE_URI . DS . 'objects' . DS . 'show' . DS . $object->object_id );
+						$this->redirect( BASE_URI . DS . 'items' . DS . 'show' . DS . $item->item_id );
 					break;
 				}			
 				return;
 			}
 		} else {
-			$object_c = $this->_findById();
-			$object = $object_c->current();
-			$object->getTypeMetadata();
+			$item_c = $this->_findById();
+			$item = $item_c->current();
+			$item->getTypeMetadata();
 			
 			$sudo = array();
-			$object_a = array(	'object_id'						=> $object->getId(),
-								'object_title'					=> $object->object_title,
-								'object_description'			=> $object->object_description,
-								'type_id'					=> $object->type_id,
-								'collection_id'					=> $object->collection_id,
-								'object_language'				=> $object->object_language,
-								//'contributor_id'				=> $object->contributor_id,
-								'object_publisher'				=> $object->object_publisher,
-								'object_rights'					=> $object->object_rights,
-								'object_date'					=> $object->object_date,
-								'object_coverage'				=> $object->object_coverage,
-								'object_creator'				=> $object->object_creator,
-								'object_additional_creator'		=> $object->object_additional_creator,
-								'object_relation'				=> $object->object_relation,
-								'object_subject'				=> $object->object_subject,
-								'object_source'					=> $object->object_source,
-								'object_public'					=> $object->object_public,
-								'type_metadata'				=> @$object->type_metadata );
+			$item_a = array(	'item_id'						=> $item->getId(),
+								'item_title'					=> $item->item_title,
+								'item_description'			=> $item->item_description,
+								'type_id'					=> $item->type_id,
+								'collection_id'					=> $item->collection_id,
+								'item_language'				=> $item->item_language,
+								//'contributor_id'				=> $item->contributor_id,
+								'item_publisher'				=> $item->item_publisher,
+								'item_rights'					=> $item->item_rights,
+								'item_date'					=> $item->item_date,
+								'item_coverage'				=> $item->item_coverage,
+								'item_creator'				=> $item->item_creator,
+								'item_additional_creator'		=> $item->item_additional_creator,
+								'item_relation'				=> $item->item_relation,
+								'item_subject'				=> $item->item_subject,
+								'item_source'					=> $item->item_source,
+								'item_public'					=> $item->item_public,
+								'type_metadata'				=> @$item->type_metadata );
 
-			$sudo['object_added'] = $object->object_added;
-			$sudo['object_modified'] = $object->object_modified;
+			$sudo['item_added'] = $item->item_added;
+			$sudo['item_modified'] = $item->item_modified;
 
-			if( $object->object_language != 'eng' && $object->object_language != 'fra' )
+			if( $item->item_language != 'eng' && $item->item_language != 'fra' )
 			{
-				$object_a['object_language'] = 'other';
-				$sudo['object_language_other'] = $object->object_language;
+				$item_a['item_language'] = 'other';
+				$sudo['item_language_other'] = $item->item_language;
 			}
 			else
 			{
-				$object_a['object_language'] = $object->object_language;
-				$sudo['object_language_other'] = null;
+				$item_a['item_language'] = $item->item_language;
+				$sudo['item_language_other'] = null;
 			}
 /*			
-			if( $object->creator_id != $object->contributor_id )
+			if( $item->creator_id != $item->contributor_id )
 			{
 				$sudo['creator'] = 'no';
-				$sudo['creator_other'] = $object->creator_other;
+				$sudo['creator_other'] = $item->creator_other;
 			}
 			else
 			{
@@ -395,18 +395,18 @@ class ObjectsController extends Kea_Action_Controller
 			}
 */
 			
-			$location_a = array(	'address'	=> $object->location->address,
-									'zipcode'	=> $object->location->zipcode,
-									'latitude'	=> $object->location->latitude,
-									'longitude'	=> $object->location->longitude,
-									'mapType'	=> $object->location->mapType,
-									'zoomLevel'	=> $object->location->zoomLevel,
-									'cleanAddress'	=> $object->location->cleanAddress,
-									'location_id'	=> $object->location->getId() );
-			$sudo['Object'] = $object_a;
+			$location_a = array(	'address'	=> $item->location->address,
+									'zipcode'	=> $item->location->zipcode,
+									'latitude'	=> $item->location->latitude,
+									'longitude'	=> $item->location->longitude,
+									'mapType'	=> $item->location->mapType,
+									'zoomLevel'	=> $item->location->zoomLevel,
+									'cleanAddress'	=> $item->location->cleanAddress,
+									'location_id'	=> $item->location->getId() );
+			$sudo['Item'] = $item_a;
 			$sudo['Location'] = $location_a;
-			self::$_session->setValue( 'object_form_saved', $sudo );	
-			return $object;
+			self::$_session->setValue( 'item_form_saved', $sudo );	
+			return $item;
 		}
 	}
 	
@@ -415,18 +415,18 @@ class ObjectsController extends Kea_Action_Controller
 		$adapter = Kea_DB_Adapter::instance();
 		$adapter->beginTransaction();
 
-		$object = new Object( self::$_request->getProperty( 'Object' ) );
+		$item = new Item( self::$_request->getProperty( 'Item' ) );
 		
 		// Else, try to match contributor by logged-in ID
-		// If the object's contributor ID is not set, then try to grab contributor info from the form.
+		// If the item's contributor ID is not set, then try to grab contributor info from the form.
 		// make a new contributor if its unique, otherwise find the pre-existing one, then take the ID
-		// from the one it found and attach that to the object.  If that doesn't work, then we try to get
+		// from the one it found and attach that to the item.  If that doesn't work, then we try to get
 		// or make new contributor info from the user who is logged in [JMG addition]  
-		//If the object's contributor ID is still null, then just go ahead and set it to 'NULL' string
+		//If the item's contributor ID is still null, then just go ahead and set it to 'NULL' string
 /*
-		if( empty($object->contributor_id) )
+		if( empty($item->contributor_id) )
 		{
-			if( self::$_request->getProperty('object_add') )
+			if( self::$_request->getProperty('item_add') )
 			{
 				if( self::$_request->getProperty('Contributor' ) )
 				{
@@ -447,15 +447,15 @@ class ObjectsController extends Kea_Action_Controller
 					}
 					if( !empty($contributor->contributor_id) )
 					{
-						$object->contributor_id = $contributor->contributor_id;
+						$item->contributor_id = $contributor->contributor_id;
 					}					
 				}
 				elseif ( $user = self::$_session->getUser() )
           		{   
-	              // If the user has a contributor ID attached, then hand it to the object
+	              // If the user has a contributor ID attached, then hand it to the item
 	              	if ($contributor = $user->getContributor())
 	              	{
-	                   $object->contributor_id = $user->contributor_id;
+	                   $item->contributor_id = $user->contributor_id;
 	              	}
 	              // If the user doesn't have a contributor ID attached, make a new one
 	            	else
@@ -473,86 +473,86 @@ class ObjectsController extends Kea_Action_Controller
 		                   $user->contributor_id = $contributor->contributor_id;
 		                   $user->save();                   
 
-		                   // Attach the new contributor to the new object
-		                   $object->contributor_id = $user->contributor_id;							
+		                   // Attach the new contributor to the new item
+		                   $item->contributor_id = $user->contributor_id;							
 						}
 
 	               }
           		}
 			}
 	        
-			if( empty($object->contributor_id) )
+			if( empty($item->contributor_id) )
 			{
-				$object->contributor_id = 'NULL';
+				$item->contributor_id = 'NULL';
 			}
 		}
 */		
 /*
-		if( self::$_request->getProperty( 'creator' ) == 'yes' && !empty( $object->contributor_id ) )
+		if( self::$_request->getProperty( 'creator' ) == 'yes' && !empty( $item->contributor_id ) )
 		{
-			$object->creator_id = $object->contributor_id;
+			$item->creator_id = $item->contributor_id;
 		}
 		elseif( self::$_request->getProperty( 'creator_other' ) )
 		{
-			$object->creator_id = null;
-			$object->creator_other = self::$_request->getProperty( 'creator_other' );
+			$item->creator_id = null;
+			$item->creator_other = self::$_request->getProperty( 'creator_other' );
 		}
 		else
 		{
-			$object->creator_id = null;
-			$object->creator_other = null;
+			$item->creator_id = null;
+			$item->creator_other = null;
 		}
 */		
-		if( $object->object_language == 'other' && self::$_request->getProperty('object_language_other') )
+		if( $item->item_language == 'other' && self::$_request->getProperty('item_language_other') )
 		{
-			$object->object_language = self::$_request->getProperty('object_language_other');
+			$item->item_language = self::$_request->getProperty('item_language_other');
 		}
 		
-		if( empty( $object->collection_id ) )
+		if( empty( $item->collection_id ) )
 		{
-			$object->collection_id = 'NULL';
+			$item->collection_id = 'NULL';
 		}
 		
-		if ( empty( $object->object_added) )
+		if ( empty( $item->item_added) )
 		{
-			$object->object_added = null;
+			$item->item_added = null;
 		}
 		
-		if ( empty( $object->object_modified) )
+		if ( empty( $item->item_modified) )
 		{
-			$object->object_modified = 'NULL';
+			$item->item_modified = 'NULL';
 		}
 
-		if ( empty( $object->object_public) )
+		if ( empty( $item->item_public) )
 		{
-			$object->object_public = '0';
+			$item->item_public = '0';
 		}
 
-		// This is a kludge to make sure that editing an object doesn't destroy its relationship with the user who uploaded it [JMG]
-		if ( !self::$_request->getProperty('object_edit') ) 
+		// This is a kludge to make sure that editing an item doesn't destroy its relationship with the user who uploaded it [JMG]
+		if ( !self::$_request->getProperty('item_edit') ) 
 		{
-			$object->user_id = self::$_session->getUser()->getId();
+			$item->user_id = self::$_session->getUser()->getId();
 		}
 		
-		if ( empty( $object->type_id ) )
+		if ( empty( $item->type_id ) )
 		{
-			$object->type_id = 'NULL';
+			$item->type_id = 'NULL';
 		}
 		
 		/* Deprecated in favor of the following if statement as of r351 
-		if (self::$_session->getUser()) $object->user_id = self::$_session->getUser()->getId();
+		if (self::$_session->getUser()) $item->user_id = self::$_session->getUser()->getId();
 		*/
 				
-		if( $this->validates( $object ) )
+		if( $this->validates( $item ) )
 		{
-			$object->save();
+			$item->save();
 			
 			$location = new Location( self::$_request->getProperty( 'Location' ) );
 			if( $location->hasValues() )
 			{
-				$object->getLocation();
-				$location_id = $object->location->location_id;
-				$location->object_id = $object->object_id;
+				$item->getLocation();
+				$location_id = $item->location->location_id;
+				$location->item_id = $item->item_id;
 				$location->latitude = round( $location->latitude, 5 );
 				$location->longitude = round( $location->longitude, 5 );
 				if( $location_id ) { $location->location_id = $location_id; }
@@ -563,7 +563,7 @@ class ObjectsController extends Kea_Action_Controller
 			}
 		
 			$tags = new Tags( self::$_request->getProperty( 'tags' ) );
-			$tags->object_id = $object->object_id;
+			$tags->item_id = $item->item_id;
 			if (self::$_session->getUser()) $tags->user_id = self::$_session->getUser()->getId();
 			
 			//if( $this->validates( $tags ) )
@@ -582,7 +582,7 @@ class ObjectsController extends Kea_Action_Controller
 						if(!empty($text))
 						{
 							$m = new Metatext( $v );
-							$m->object_id = $object->object_id;
+							$m->item_id = $item->item_id;
 							if( $this->validates( $m ) )
 							{
 								$m->save();
@@ -599,7 +599,7 @@ class ObjectsController extends Kea_Action_Controller
 
 							 $m = new Metatext(array(
                              					'metafield_id' => $metafield_id,
-                                                'object_id' => $object->object_id,
+                                                'item_id' => $item->item_id,
                                                 'metatext_text' => $v
                                                ) );
 
@@ -615,47 +615,47 @@ class ObjectsController extends Kea_Action_Controller
 			}
 		
 		
-			$files = File::add( $object->getId(), $object->contributor_id, 'objectfile', self::$_request->getProperty('File') );
+			$files = File::add( $item->getId(), $item->contributor_id, 'itemfile', self::$_request->getProperty('File') );
 		
-			$object->save();
+			$item->save();
 		}
 
 		if( count( $this->validationErrors ) > 0 ) {
-			self::$_session->setValue( 'object_form_saved', $_REQUEST );
+			self::$_session->setValue( 'item_form_saved', $_REQUEST );
 			$adapter->rollback();
 			return false;
 		} else {
-			self::$_session->setValue( 'object_form_saved', null );
+			self::$_session->setValue( 'item_form_saved', null );
 			$adapter->commit();
-			return $object;
+			return $item;
 		}
 	}
 	
 	protected function _total()
 	{
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 		return $mapper->total();
 	}
 	
 	protected function _totalInType( $type_id )
 	{
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 		return $mapper->totalSliced( $type_id , null);
 	}
 	
 	protected function _totalInCollection( $collection_id )
 	{
-		$mapper = new Object_Mapper();
+		$mapper = new Item_Mapper();
 		return $mapper->totalSliced( null, $collection_id );
 
 	}
 
 	
-	protected function _deleteTypeAssociation( $object_id )
+	protected function _deleteTypeAssociation( $item_id )
 	{
 		$adapter = Kea_DB_Adapter::instance();
-		$adapter->update( 'objects', array( 'type_id'	=> 'NULL' ), 'objects.object_id = \'' . $object_id . '\'' );
-		$adapter->delete( 'metatext', 'object_id = \'' . $object_id . '\'' );
+		$adapter->update( 'items', array( 'type_id'	=> 'NULL' ), 'items.item_id = \'' . $item_id . '\'' );
+		$adapter->delete( 'metatext', 'item_id = \'' . $item_id . '\'' );
 		if( $adapter->error() )
 		{
 			return $adapter->error();
@@ -668,19 +668,19 @@ class ObjectsController extends Kea_Action_Controller
 	
 	protected function _delete( $type = 'admin' )
 	{
-		if( $id = self::$_request->getProperty( 'object_id' ) ) {
+		if( $id = self::$_request->getProperty( 'item_id' ) ) {
 			/*
 				First get the files and delete them.
 				This is reinforced through foreign key constraints in mysql
 				but the underlying physical files should also be deleted.
 			*/
-			$object = $this->_findById( $id );
-			foreach( $object->files as $file )
+			$item = $this->_findById( $id );
+			foreach( $item->files as $file )
 			{
 				File::delete( $file->getId() );
 			}
 
-			$mapper = new Object_Mapper;
+			$mapper = new Item_Mapper;
 			$mapper->delete( $id );
 			switch ($type) 
 			{
@@ -688,28 +688,28 @@ class ObjectsController extends Kea_Action_Controller
 					$this->redirect( BASE_URI . DS . 'mycontributions' );
 				break;
 				case 'admin': 
-					$this->redirect( BASE_URI . DS . 'objects' . DS . 'all' );
+					$this->redirect( BASE_URI . DS . 'items' . DS . 'all' );
 				break;
 				
 			}
-			$this->redirect( BASE_URI . DS . 'objects' . DS . 'all' );
+			$this->redirect( BASE_URI . DS . 'items' . DS . 'all' );
 		}
 	}
 	
 	protected function _findFeatured()
 	{
-		$mapper = new Object_Mapper;
+		$mapper = new Item_Mapper;
 		$featured = $mapper->find()
-							->where( 'object_featured = ?', '1' );
+							->where( 'item_featured = ?', '1' );
 		$this->applyPermissions( $featured );
 		return $featured->execute(); 
 	}
 
 	protected function _findRandomFeatured()
 	{
-		$mapper = new Object_Mapper;
+		$mapper = new Item_Mapper;
 		$featured = $mapper->find()
-							->where( 'object_featured = ?', '1' );
+							->where( 'item_featured = ?', '1' );
 		$this->applyPermissions( $featured );
 		$all = $featured->execute(); 
 		return $all->getObjectAt( mt_rand( 0, $all->total() - 1 ) );
@@ -718,10 +718,10 @@ class ObjectsController extends Kea_Action_Controller
 	protected function _findRandomFeaturedWithThumb()
 	{
 /*		// First see if there even are thumbnails
-		$mapper = new Object_Mapper;
-		$has_thumbs = $mapper->find( 'objects.object_id, files.file_id' )
-							->join( 'files', 'objects.object_id = files.object_id' )
-							->where( 'objects.object_featured = ?', '1' )
+		$mapper = new Item_Mapper;
+		$has_thumbs = $mapper->find( 'items.item_id, files.file_id' )
+							->join( 'files', 'items.item_id = files.item_id' )
+							->where( 'items.item_featured = ?', '1' )
 							->where( 'files.file_thumbnail_name != ?', '')
 							->execute();
 
@@ -732,8 +732,8 @@ class ObjectsController extends Kea_Action_Controller
 		
 		// Or if there are featured with thumbs...
 		$featured = $has_thumbs->getObjectAt( mt_rand( 0, $has_thumbs->total() - 1 ) );
-		$new = $this->findById($featured->object_id);
-		echo $new->object_title;
+		$new = $this->findById($featured->item_id);
+		echo $new->item_title;
 		print_r($new); exit;
 		
 		foreach( $featured->files as $file ):
@@ -756,17 +756,17 @@ class ObjectsController extends Kea_Action_Controller
 
 	}
 	
-	protected function _getMapObjects( $map_objects = 40 )
+	protected function _getMapItems( $map_items = 40 )
 	{
-		return $this->_paginate( true, $map_objects, true );
+		return $this->_paginate( true, $map_items, true );
 	}
 	
 	protected function _getRandomMapFeatured()
 	{
-		$mapper = new Object_Mapper;
-		$featured = $mapper->find( "*, RPAD( SUBSTRING( object_description, 1, 140 ),  LENGTH( SUBSTRING( object_description, 1, 140 ) ) + 3, '.') as short_desc" )
-							->where( 'object_featured = ?', '1' )
-							->join( 'location', 'location.object_id = objects.object_id' )
+		$mapper = new Item_Mapper;
+		$featured = $mapper->find( "*, RPAD( SUBSTRING( item_description, 1, 140 ),  LENGTH( SUBSTRING( item_description, 1, 140 ) ) + 3, '.') as short_desc" )
+							->where( 'item_featured = ?', '1' )
+							->join( 'location', 'location.item_id = items.item_id' )
 							->where( 'location.latitude != ?', '')
 							->where( 'location.longitude != ?', '')
 							->execute();

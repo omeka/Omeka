@@ -20,9 +20,9 @@ class Metatext_Mapper extends Kea_DB_Mapper
 		return 'Metatext';
 	}
 	
-	public function deleteByObject( $object_id )
+	public function deleteByItem( $item_id )
 	{
-		return self::$_adapter->delete( 'metatext', 'metatext.object_id = \'' . $object_id . '\'');
+		return self::$_adapter->delete( 'metatext', 'metatext.item_id = \'' . $item_id . '\'');
 	}
 	
 }

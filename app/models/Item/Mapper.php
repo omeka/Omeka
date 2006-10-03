@@ -1,33 +1,33 @@
 <?php
 
-class Object_Mapper extends Kea_DB_Mapper
+class Item_Mapper extends Kea_DB_Mapper
 {
-	protected $_table_name	= 'objects';
-	protected $_unique_id	= 'object_id';
+	protected $_table_name	= 'items';
+	protected $_unique_id	= 'item_id';
 	
 	public function doLoad( $array )
 	{
-		return new Object( $array );
+		return new Item( $array );
 	}
 	
 	public function targetClass()
 	{
-		return 'Object';
+		return 'Item';
 	}
 	
 	public function singleUpdate( $field, $value, $obj_id )
 	{
-		return self::$_adapter->update( $this->_table_name, array( $field => $value), 'object_id = ' . $obj_id );
+		return self::$_adapter->update( $this->_table_name, array( $field => $value), 'item_id = ' . $obj_id );
 	}
 	
-	public function getTypeMetadata( Object $obj )
+	public function getTypeMetadata( Item $obj )
 	{
 		$select = self::$_adapter->select()
 					->from('types_metafields', 'metafield_name, metatext_text, metafields.metafield_id, metafield_description, metatext.metatext_id' )
 					->joinLeft( 'metafields', 'metafields.metafield_id = types_metafields.metafield_id' )
 					->joinLeft( 'metatext', 'metatext.metafield_id = metafields.metafield_id' )
 					->where( 'types_metafields.type_id = ?', $obj->type_id )
-					->where( 'metatext.object_id = ?', $obj->object_id )
+					->where( 'metatext.item_id = ?', $obj->item_id )
 					->order( array( 'metatext_id' => 'ASC' ) );
 			
 		if( $result = $this->query( $select ) ) {
@@ -63,25 +63,25 @@ class Object_Mapper extends Kea_DB_Mapper
 	public function total()
 	{
 		$select = self::$_adapter->select();
-		$select->from( 'objectsTotal', '*' );
+		$select->from( 'itemsTotal', '*' );
 		return self::$_adapter->fetchOne( $select );
 	}
 	
 	public function totalSliced( $type_id = null, $collection_id = null)
 	{
 		$select = self::$_adapter->select();
-		$select->from( 'objects', 'COUNT(*) as count' );
-		if ( $type_id != null) $select->where( 'objects.type_id = ?', $type_id );
-		if ( $collection_id != null) $select->where( 'objects.collection_id = ?', $collection_id );
+		$select->from( 'items', 'COUNT(*) as count' );
+		if ( $type_id != null) $select->where( 'items.type_id = ?', $type_id );
+		if ( $collection_id != null) $select->where( 'items.collection_id = ?', $collection_id );
 		return self::$_adapter->fetchOne( $select );
 	}
 	
 	/**
-	 *	Foreign key constraints delete object, object-tag relationship, files, and location data
+	 *	Foreign key constraints delete item, item-tag relationship, files, and location data
 	 */
 	public function delete( $id )
 	{
-		return self::$_adapter->delete( 'objects', 'objects.object_id = \'' . $id . '\'');
+		return self::$_adapter->delete( 'items', 'items.item_id = \'' . $id . '\'');
 	}
 }
 

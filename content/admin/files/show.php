@@ -2,8 +2,8 @@
 //Layout: default;
 $file = $__c->files()->findById();
 
-// Get Object this file belongs to
-$object = $__c->objects()->findById($file->object_id);
+// Get Item this file belongs to
+$item = $__c->items()->findById($file->item_id);
 
 ?>
 <?php include('subnav.php'); ?>

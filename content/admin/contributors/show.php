@@ -14,7 +14,7 @@ $contributor = $__c->contributors()->findById();
 <div id="contributor-wrapper">
 	<div id="contributor-main">
 		<h3><?php echo $contributor->getName(); ?>
-		 <span class="showByContributor"></span><a href="<?php echo $_link->to( 'objects' ); ?>?contributor=<?php echo $contributor->contributor_id; ?>">show contributions</a></h3>
+		 <span class="showByContributor"></span><a href="<?php echo $_link->to( 'items' ); ?>?contributor=<?php echo $contributor->contributor_id; ?>">show contributions</a></h3>
 		<p>Birth Year: <?php echo $contributor->contributor_birth_year; ?></p>
 		<p>Gender: <?php echo $contributor->contributor_gender; ?></p>
 		<p>Race: <?php echo $contributor->contributor_race; ?></p>

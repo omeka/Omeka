@@ -1,7 +1,7 @@
 <?php
 // Layout: show;
-$__c->objects()->add();
-$saved = self::$_session->getValue( 'object_form_saved' );
+$__c->items()->add();
+$saved = self::$_session->getValue( 'item_form_saved' );
 ?>
 
 <script type="text/javascript">
@@ -21,14 +21,14 @@ function getData(id, form) {
 		}
 	}
 	
-	ajax = new Ajax.Updater(form,'<?php echo $_link->to( "objects" ); ?>'+form,opt);
+	ajax = new Ajax.Updater(form,'<?php echo $_link->to( "items" ); ?>'+form,opt);
 }
 
 function addFile() {
 	var input = document.createElement("div");
 	input.style.display = "none";
 	document.getElementById('files').appendChild( input );
-	input.innerHTML = 'Attach this file: <input name="objectfile[]" type="file" /><a href="javascript:void(0);" onclick="removeFile( parentNode )">Remove</a>';
+	input.innerHTML = 'Attach this file: <input name="itemfile[]" type="file" /><a href="javascript:void(0);" onclick="removeFile( parentNode )">Remove</a>';
 	Effect.Appear( input, {duration: 0.4} );
 }
 
@@ -42,16 +42,16 @@ function showResponse(div) {
 }
 </script>
 <ul id="sub-navigation" class="navigation subnav">
-	<li<?php if(self::$_route['template'] == 'index') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects'); ?>">Show Items</a></li>
-	<li<?php if(self::$_route['template'] == 'add') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects', 'add'); ?>">Add Item</a></li>
+	<li<?php if(self::$_route['template'] == 'index') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('items'); ?>">Show Items</a></li>
+	<li<?php if(self::$_route['template'] == 'add') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('items', 'add'); ?>">Add Item</a></li>
 </ul>
 
 <h2>Add an Item</h2>
 
-<form method="post" id="object-addedit" action="<?php echo $_link->to( 'objects', 'add' ); ?>" enctype="multipart/form-data">
+<form method="post" id="item-addedit" action="<?php echo $_link->to( 'items', 'add' ); ?>" enctype="multipart/form-data">
 
 <?php include( 'form.php' ); ?>
 
-<input type="submit" value="Insert Item &gt;&gt;" name="object_add" />
+<input type="submit" value="Insert Item &gt;&gt;" name="item_add" />
 
 </form>

@@ -1,6 +1,6 @@
 <?php
 // Layout: default;
-$obj_count = $__c->objects()->total();
+$obj_count = $__c->items()->total();
 $file_count = $__c->files()->total();
 ?>
 
@@ -19,7 +19,7 @@ $file_count = $__c->files()->total();
 <div id="welcome-text">
 	<h1>Currently archiving:</h1>
 	<br/>
-	<h4><?php echo $obj_count; ?> Object<?php if( $obj_count != 1 && $obj_count >= 0 ) echo 's'; ?>,</h4>
+	<h4><?php echo $obj_count; ?> Item<?php if( $obj_count != 1 && $obj_count >= 0 ) echo 's'; ?>,</h4>
 	<h4>with <?php echo $file_count; ?> associated file<?php if($file_count != 1 && $file_count >= 0) echo 's'; ?>.</h4>
 </div>
 <br class="clear"/>

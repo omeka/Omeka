@@ -18,7 +18,7 @@ $result = $__c->accounts()->getMyContributions();
 	}
 	
 	function loadObject( id ) {
-		window.location = '<?php echo $_link->to( "objects", "show" ); ?>' +id ;
+		window.location = '<?php echo $_link->to( "items", "show" ); ?>' +id ;
 	}
 </script>
 */ ?>
@@ -37,30 +37,30 @@ $result = $__c->accounts()->getMyContributions();
 ?>
 </div>
 <?php
-	foreach( $result['objects'] as $object ):
-	$object->getFilesWithThumbnails()
+	foreach( $result['objects'] as $item ):
+	$item->getFilesWithThumbnails()
 		   ->getTypeMetadata()
 		   ->getContributor();
 ?>
-<div id="object-<?php echo $object->object_id; ?>" class="object">
-	<div class="object-title">
-	<h3><a href="<?php echo $_link->to('objects', 'show') . $object->object_id; ?>">Item #<?php echo $object->object_id; ?>: <?php echo htmlentities( $object->object_title ); ?></a></h3>
+<div id="item-<?php echo $item->item_id; ?>" class="item">
+	<div class="item-title">
+	<h3><a href="<?php echo $_link->to('items', 'show') . $item->item_id; ?>">Item #<?php echo $item->item_id; ?>: <?php echo htmlentities( $item->item_title ); ?></a></h3>
 
 	</div>
 
-		<ul class="object-metadata">
-			<?php if( $object->type_name ): ?>
-			<li class="object-type">Item Type: <?php echo $object->type_name; ?></li>
+		<ul class="item-metadata">
+			<?php if( $item->type_name ): ?>
+			<li class="item-type">Item Type: <?php echo $item->type_name; ?></li>
 			<?php else: ?>
-			<li class="object-type">Item Type: None</li>
+			<li class="item-type">Item Type: None</li>
 			<?php endif; ?>
-			<li>Files: <?php echo $object->getFileTotal(); ?></li>
+			<li>Files: <?php echo $item->getFileTotal(); ?></li>
         </ul>
 	<div class="details">
 		<span class="thumbnail-container">
 		<?php
-			$file_id = mt_rand( 0, ( $object->files->total() - 1 ) );
-			$file = $object->files->getObjectAt( $file_id );
+			$file_id = mt_rand( 0, ( $item->files->total() - 1 ) );
+			$file = $item->files->getObjectAt( $file_id );
 			if( !empty( $file->file_thumbnail_name ) ) {
 				$_html->thumbnail( $file->file_thumbnail_name,
 									array(	'class' => 'thumbnail',
@@ -72,9 +72,9 @@ $result = $__c->accounts()->getMyContributions();
 		</span>
         <p class="description">
 			<?php
-				if( $object->getDesc() )
+				if( $item->getDesc() )
 				{
-					echo htmlentities( $object->getShortDesc() );	
+					echo htmlentities( $item->getShortDesc() );	
 				}
 				else
 				{
@@ -85,12 +85,12 @@ $result = $__c->accounts()->getMyContributions();
 	</div>
 		<ul class="tags">
 			<?php
-				$object->getTags();
-				if( $object->tags->total() > 0 ):
+				$item->getTags();
+				if( $item->tags->total() > 0 ):
 			?>
 				<li>Tags:</li>
-				<?php foreach ($object->tags as $tag): ?>
-				<li><a href="<?php echo $_link->to( 'objects', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo $tag['tag_name']; ?></a><?php if( $object->tags->nextIsValid() ) echo ','; ?></li>
+				<?php foreach ($item->tags as $tag): ?>
+				<li><a href="<?php echo $_link->to( 'items', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo $tag['tag_name']; ?></a><?php if( $item->tags->nextIsValid() ) echo ','; ?></li>
 				<?php endforeach;?>
 			<?php else: ?>
 				<li>Not Tagged.</li>

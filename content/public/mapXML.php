@@ -7,7 +7,7 @@
 		$map_objects['objects'][0] = $object;
 	
 	else:
-		$map_objects = $__c->objects()->getMapObjects(50);
+		$map_objects = $__c->objects()->getMapItems(50);
 	endif;
 	$featured = $__c->objects()->getRandomMapFeatured();
 	$featured->getTags();

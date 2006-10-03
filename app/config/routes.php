@@ -1,8 +1,8 @@
 <?php
 
 Kea_Template_Router::connect(
-	'/:admin/objects/:template/*',
-	array( 'template' => 'all', 'directory' => 'objects' ) );
+	'/:admin/items/:template/*',
+	array( 'template' => 'all', 'directory' => 'items' ) );
 
 Kea_Template_Router::connect(
 	'/:admin/types/:template/*',

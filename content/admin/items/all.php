@@ -1,21 +1,21 @@
 <?php
 // Layout: show;
 
-$result = $__c->objects()->paginate();
+$result = $__c->items()->paginate();
 ?>
 <ul id="sub-navigation" class="navigation subnav">
-	<li<?php if(self::$_route['template'] == 'all') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects'); ?>">Show Items</a></li>
-	<li<?php if(self::$_route['template'] == 'add') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('objects', 'add'); ?>">Add Item</a></li>
+	<li<?php if(self::$_route['template'] == 'all') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('items'); ?>">Show Items</a></li>
+	<li<?php if(self::$_route['template'] == 'add') {echo ' class="current"';} ?>><a href="<?php echo $_link->to('items', 'add'); ?>">Add Item</a></li>
 </ul>
 
-<div id="object-all">
-		<form name="object_limit" id="object-limit" method="get" action="<?php echo $_link->to( 'objects' ); ?>" >
-			<label for="objectType">Object Type</label>
-		<select name="objectType">
+<div id="item-all">
+		<form name="item_limit" id="item-limit" method="get" action="<?php echo $_link->to( 'items' ); ?>" >
+			<label for="itemType">Item Type</label>
+		<select name="itemType">
 			<option value="">Show by Type:&nbsp;</option>
 			<option value="">All</option>
 			<?php foreach( $__c->types()->all( 'array' ) as $cat ): ?>
-			<option value="<?php echo $cat['type_id'] ?>" <?php if( $cat['type_id'] ==  self::$_request->getProperty('objectType') ){ echo ' selected '; } ?>><?php echo $cat['type_name'] ?></option>
+			<option value="<?php echo $cat['type_id'] ?>" <?php if( $cat['type_id'] ==  self::$_request->getProperty('itemType') ){ echo ' selected '; } ?>><?php echo $cat['type_name'] ?></option>
 			<?php endforeach; ?>
 		</select>
 		<label for="collection">Collection</label>
@@ -46,9 +46,9 @@ $result = $__c->objects()->paginate();
 
 
 	<?php if( $result['objects']->total() == 0 ): ?>
-	<h2 id="notice">No objects found.</h2>
+	<h2 id="notice">No items found.</h2>
 	<?php else: ?>
-	<h2 id="objects-results"><?php echo $result['total'];?> Results</h2>
+	<h2 id="items-results"><?php echo $result['total'];?> Results</h2>
 	
 	<div class="pagination navigation">
 	<?php 
@@ -56,36 +56,36 @@ $result = $__c->objects()->paginate();
 							$result['per_page'],
 							$result['total'],
 							'5',
-							$_link->to( 'objects', 'all' ) );
+							$_link->to( 'items', 'all' ) );
 	?>
 	</div>
-	<div id="objects">
+	<div id="items">
 	<?php
-		foreach( $result['objects'] as $object ):
-		$object->getFilesWithThumbnails()
+		foreach( $result['objects'] as $item ):
+		$item->getFilesWithThumbnails()
 			   ->getTypeMetadata()
 			   ->getContributor();
 	?>
 	
-	<div id="object-<?php echo $object->object_id; ?>" class="object">
-		<div class="object-title">
-		<h3><a href="<?php echo $_link->to('objects', 'show') . $object->object_id; ?>">Item #<?php echo $object->object_id; ?>: <?php echo htmlentities( $object->object_title ); ?></a></h3>
+	<div id="item-<?php echo $item->item_id; ?>" class="item">
+		<div class="item-title">
+		<h3><a href="<?php echo $_link->to('items', 'show') . $item->item_id; ?>">Item #<?php echo $item->item_id; ?>: <?php echo htmlentities( $item->item_title ); ?></a></h3>
 
 		</div>
 	        
-			<ul class="object-metadata">
-				<?php if( $object->type_name ): ?>
-				<li class="object-type">Item Type: <?php echo $object->type_name; ?></li>
+			<ul class="item-metadata">
+				<?php if( $item->type_name ): ?>
+				<li class="item-type">Item Type: <?php echo $item->type_name; ?></li>
 				<?php else: ?>
-				<li class="object-type">Item Type: None</li>
+				<li class="item-type">Item Type: None</li>
 				<?php endif; ?>
-				<li>Files: <?php echo $object->getFileTotal(); ?></li>
+				<li>Files: <?php echo $item->getFileTotal(); ?></li>
 	        </ul>
 		<div class="details">
 			<span class="thumbnail-container">
 			<?php
-				$file_id = mt_rand( 0, ( $object->files->total() - 1 ) );
-				$file = $object->files->getObjectAt( $file_id );
+				$file_id = mt_rand( 0, ( $item->files->total() - 1 ) );
+				$file = $item->files->getObjectAt( $file_id );
 				if( !empty( $file->file_thumbnail_name ) ) {
 					$_html->thumbnail( $file->file_thumbnail_name,
 										array(	'class' => 'thumbnail',
@@ -97,9 +97,9 @@ $result = $__c->objects()->paginate();
 			</span>
 	        <p class="description">
 				<?php
-					if( $object->getDesc() )
+					if( $item->getDesc() )
 					{
-						echo htmlentities( $object->getShortDesc() );	
+						echo htmlentities( $item->getShortDesc() );	
 					}
 					else
 					{
@@ -110,12 +110,12 @@ $result = $__c->objects()->paginate();
 		</div>
 			<ul class="tags">
 				<?php
-					$object->getTags();
-					if( $object->tags->total() > 0 ):
+					$item->getTags();
+					if( $item->tags->total() > 0 ):
 				?>
 					<li>Tags:</li>
-					<?php foreach ($object->tags as $tag): ?>
-					<li><a href="<?php echo $_link->to( 'objects', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo $tag['tag_name']; ?></a><?php if( $object->tags->nextIsValid() ) echo ','; ?></li>
+					<?php foreach ($item->tags as $tag): ?>
+					<li><a href="<?php echo $_link->to( 'items', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo $tag['tag_name']; ?></a><?php if( $item->tags->nextIsValid() ) echo ','; ?></li>
 					<?php endforeach;?>
 				<?php else: ?>
 					<li>Not Tagged.</li>
@@ -132,7 +132,7 @@ $result = $__c->objects()->paginate();
 							$result['per_page'],
 							$result['total'],
 							'5',
-							$_link->to( 'objects', 'all' ) );
+							$_link->to( 'items', 'all' ) );
 	?>
 	</div>
 	

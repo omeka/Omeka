@@ -4,7 +4,7 @@ include( 'subnav.php' );
 $t = new Tags;
 $tags = $t->getTagsAndCount( 100, true, false, null, self::$_session->getUser()->getId() );
 $max = $t->getMaxCount( self::$_session->getUser()->getId() );
-$result = $__c->accounts()->findMyTaggedObjects();
+$result = $__c->accounts()->findMyTaggedItems();
 
 ?>
 <h2>My Tags</h2>
@@ -16,7 +16,7 @@ $result = $__c->accounts()->findMyTaggedObjects();
 
 <?php if( $result ): ?>
 <?php if( $result['objects']->total() == 0 ): ?>
-<h2 id="notice">No objects found.</h2>
+<h2 id="notice">No items found.</h2>
 <?php elseif( $result['objects']->total() >= 0 ): ?>
 <div id="pagination-links">
 <?php 
@@ -24,36 +24,36 @@ $result = $__c->accounts()->findMyTaggedObjects();
 						$result['per_page'],
 						$result['total'],
 						'5',
-						$_link->to( 'objects', 'all' ) );
+						$_link->to( 'items', 'all' ) );
 ?>
 </div>
 <div id="objects-wrapper">
 <?php
-	foreach( $result['objects'] as $object ):
-	$object->getFilesWithThumbnails()
+	foreach( $result['objects'] as $item ):
+	$item->getFilesWithThumbnails()
 		   ->getTypeMetadata()
 		   ->getContributor();
 ?>
 
-<div id="object-<?php echo $object->object_id; ?>" class="object">
-	<div class="object-bar">#<?php echo $object->object_id; ?></div>
-    <div class="meta" onclick="loadObject(<?php echo $object->object_id; ?>)" onmouseover="highlight(this)" onmouseout="unHighlight(this)">
-        <h3><a href="<?php echo $_link->to('objects', 'show') . $object->object_id; ?>"><?php echo htmlentities( $object->object_title ); ?></a></h3>
-		<ul class="object-metadata">
-			<?php if( $object->type_name ): ?>
-			<li class="object-type">Object Type: <?php echo $object->type_name; ?></li>
+<div id="item-<?php echo $item->item_id; ?>" class="item">
+	<div class="item-bar">#<?php echo $item->item_id; ?></div>
+    <div class="meta" onclick="loadObject(<?php echo $item->item_id; ?>)" onmouseover="highlight(this)" onmouseout="unHighlight(this)">
+        <h3><a href="<?php echo $_link->to('items', 'show') . $item->item_id; ?>"><?php echo htmlentities( $item->item_title ); ?></a></h3>
+		<ul class="item-metadata">
+			<?php if( $item->type_name ): ?>
+			<li class="item-type">Item Type: <?php echo $item->type_name; ?></li>
 			<?php else: ?>
-			<li class="object-type">Object Type: None</li>
+			<li class="item-type">Item Type: None</li>
 			<?php endif; ?>
-			<li>Files: <?php echo $object->getFileTotal(); ?></li>
+			<li>Files: <?php echo $item->getFileTotal(); ?></li>
         </ul>
     </div>
 	<div class="details">
         <p class="description">
 			<span class="thumbnail-container">
 			<?php
-				$file_id = mt_rand( 0, ( $object->files->total() - 1 ) );
-				$file = $object->files->getObjectAt( $file_id );
+				$file_id = mt_rand( 0, ( $item->files->total() - 1 ) );
+				$file = $item->files->getObjectAt( $file_id );
 				if( !empty( $file->file_thumbnail_name ) ) {
 					$_html->thumbnail( $file->file_thumbnail_name,
 										array(	'class' => 'thumbnail',
@@ -64,9 +64,9 @@ $result = $__c->accounts()->findMyTaggedObjects();
 			?>
 			</span>
 			<?php
-				if( $object->object_description )
+				if( $item->item_description )
 				{
-					echo htmlentities( $object->short_desc );	
+					echo htmlentities( $item->short_desc );	
 				}
 				else
 				{
@@ -75,15 +75,15 @@ $result = $__c->accounts()->findMyTaggedObjects();
 			?>
 		</p>
 	</div>
-	<div class="object-tags">
+	<div class="item-tags">
 		<ul class="tags">
 			<?php
-				$object->getTags();
-				if( $object->tags->total() > 0 ):
+				$item->getTags();
+				if( $item->tags->total() > 0 ):
 			?>
 				<li>Tags:</li>
-				<?php foreach ($object->tags as $tag): ?>
-				<li><a href="<?php echo $_link->to( 'objects', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo $tag['tag_name']; ?></a><?php if( $object->tags->nextIsValid() ) echo ','; ?></li>
+				<?php foreach ($item->tags as $tag): ?>
+				<li><a href="<?php echo $_link->to( 'items', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo $tag['tag_name']; ?></a><?php if( $item->tags->nextIsValid() ) echo ','; ?></li>
 				<?php endforeach;?>
 			<?php else: ?>
 				<li>Not Tagged.</li>

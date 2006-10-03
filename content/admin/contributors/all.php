@@ -34,7 +34,7 @@ $contributors = $__c->contributors()->all('object', 'alpha');
 		foreach( $contributors as $contributor ):
 	?>	<tr>
 		<td><?php echo $contributor->contributor_id; ?></td>
-		<td><a href="<?php echo $_link->to( 'objects' ); ?>?contributor=<?php echo $contributor->contributor_id; ?>"><?php echo $contributor->getName(); ?></a></td>
+		<td><a href="<?php echo $_link->to( 'items' ); ?>?contributor=<?php echo $contributor->contributor_id; ?>"><?php echo $contributor->getName(); ?></a></td>
 		<td><?php echo $contributor->contributor_email; ?></td>
 		<td>[<a href="<?php echo $_link->to( 'contributors', 'edit' ) . $contributor->contributor_id; ?>">edit</a>]</td>
 	</tr>

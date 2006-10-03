@@ -3,7 +3,7 @@
 class Location extends Kea_Domain_Model
 {
 	public $location_id;
-	public $object_id;
+	public $item_id;
 	public $latitude;
 	public $longitude;
 	public $address;

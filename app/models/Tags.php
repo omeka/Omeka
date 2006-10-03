@@ -6,11 +6,11 @@
 
 class Tags extends Kea_Plugin implements Iterator
 {
-	public $object_id;
+	public $item_id;
 	public $user_id;
 	public $tags		= array();
 
-	protected $_validate = array(	'object_id' => array( '/([0-9])+/', 'The object_id must be set.' )
+	protected $_validate = array(	'item_id' => array( '/([0-9])+/', 'The item_id must be set.' )
 	 						//		'user_id'	=> array( '/([0-9]+)/', 'The user_id must be set.' )
 	 							);
 
@@ -73,12 +73,12 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 	}
 	
-	public function findByObject( $object_id )
+	public function findByItem( $item_id )
 	{
 		$select = $this->_adapter->select();
-		$select->from( 'objects_tags', 'tags.*, COUNT( objects_tags.tag_id ) as tagCount' )
-			   ->joinLeft( 'tags', 'objects_tags.tag_id = tags.tag_id' )
-			   ->where( 'objects_tags.object_id = ?', $object_id )
+		$select->from( 'items_tags', 'tags.*, COUNT( items_tags.tag_id ) as tagCount' )
+			   ->joinLeft( 'tags', 'items_tags.tag_id = tags.tag_id' )
+			   ->where( 'items_tags.item_id = ?', $item_id )
 			   ->group( 'tags.tag_name' );
 		$result = $this->_adapter->fetchAssoc( $select );
 		foreach( $result as $tag )
@@ -87,43 +87,43 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 	}
 	
-	public function findByUser( $user_id, $object_id = null )
+	public function findByUser( $user_id, $item_id = null )
 	{
 		$select = $this->_adapter->select();
-		$select->from( 'objects_tags', 'tags.tag_id, tags.tag_name, COUNT(objects_tags.tag_id) as tagCount' )
-			   ->joinLeft( 'tags', 'objects_tags.tag_id = tags.tag_id' )
-			   ->where( 'objects_tags.user_id = ?', $user_id )
+		$select->from( 'items_tags', 'tags.tag_id, tags.tag_name, COUNT(items_tags.tag_id) as tagCount' )
+			   ->joinLeft( 'tags', 'items_tags.tag_id = tags.tag_id' )
+			   ->where( 'items_tags.user_id = ?', $user_id )
 			   ->group( 'tags.tag_name' );
-		if( $object_id )
+		if( $item_id )
 		{
-			$select->where( 'objects_tags.object_id = ?', $object_id );
+			$select->where( 'items_tags.item_id = ?', $item_id );
 		}
  		return $this->_adapter->fetchAssoc( $select );
 	}
 	
-	public static function deleteAssociation( $tag_id, $object_id )
+	public static function deleteAssociation( $tag_id, $item_id )
 	{
 		$inst = new self;
-		return $inst->_adapter->delete( 'objects_tags', 'object_id=\'' . $object_id . '\' AND tag_id=\'' . $tag_id . '\'' );
+		return $inst->_adapter->delete( 'items_tags', 'item_id=\'' . $item_id . '\' AND tag_id=\'' . $tag_id . '\'' );
 	}
 	
-	public static function addMyTags( $tag_string, $object_id, $user_id )
+	public static function addMyTags( $tag_string, $item_id, $user_id )
 	{
 		$inst = new self( $tag_string );
-		$inst->object_id = $object_id;
+		$inst->item_id = $item_id;
 		$inst->user_id = $user_id;
 		$inst->save();
 	}
 	
-	public static function deleteMyTag( $tag_id, $object_id, $user_id )
+	public static function deleteMyTag( $tag_id, $item_id, $user_id )
 	{
 		$inst = new self;
-		return $inst->_adapter->delete( 'objects_tags', "object_id = '$object_id' AND tag_id = '$tag_id' AND user_id = '$user_id'" );
+		return $inst->_adapter->delete( 'items_tags', "item_id = '$item_id' AND tag_id = '$tag_id' AND user_id = '$user_id'" );
 	}
 	
 	public function save()
 	{
-		if( !isset( $this->object_id ) )
+		if( !isset( $this->item_id ) )
 		{
 			return false;
 		}
@@ -161,38 +161,38 @@ class Tags extends Kea_Plugin implements Iterator
 		foreach( $tag_ids as $tag_id )
 		{
 			$select = $this->_adapter->select();
-			$select->from( 'objects_tags')
+			$select->from( 'items_tags')
 					->where( 'tag_id = ?', $tag_id )
-					->where( 'object_id = ?', $this->object_id )
+					->where( 'item_id = ?', $this->item_id )
 					->where( 'user_id =?', $this->user_id );
 			$result = $this->_adapter->query( $select );
 			if( $result->num_rows == 0 )
 			{
-				$this->_adapter->insert( 'objects_tags', array( 'tag_id' => $tag_id, 'object_id' => $this->object_id, 'user_id' => $this->user_id ) );
+				$this->_adapter->insert( 'items_tags', array( 'tag_id' => $tag_id, 'item_id' => $this->item_id, 'user_id' => $this->user_id ) );
 			}
 		}
 	}
 	
-	public function getTagsAndCount( $limit = '100', $alpha = true, $count = false, $object_id = null, $user_id = null )
+	public function getTagsAndCount( $limit = '100', $alpha = true, $count = false, $item_id = null, $user_id = null )
 	{
 		$select = $this->_adapter->select();
-		$select->joinLeft( 'tags', 'tags.tag_id = objects_tags.tag_id' )
+		$select->joinLeft( 'tags', 'tags.tag_id = items_tags.tag_id' )
 			   ->group( 'tag_id' )
 			   ->limit( $limit );
 
-		if( $object_id )
+		if( $item_id )
 		{
-			$select->from( 'objects_tags', 'objects_tags.tag_id, objects_tags.object_id, COUNT( objects_tags.tag_id ) as tagCount, tags.tag_name' )
-				   ->where( 'objects_tags.object_id = ?', $object_id );
+			$select->from( 'items_tags', 'items_tags.tag_id, items_tags.item_id, COUNT( items_tags.tag_id ) as tagCount, tags.tag_name' )
+				   ->where( 'items_tags.item_id = ?', $item_id );
 		}
 		else
 		{
-			$select->from( 'objects_tags', 'objects_tags.tag_id, COUNT( objects_tags.tag_id ) as tagCount, tags.tag_name' );
+			$select->from( 'items_tags', 'items_tags.tag_id, COUNT( items_tags.tag_id ) as tagCount, tags.tag_name' );
 		}
 		
 		if( $user_id )
 		{
-			$select->where( 'objects_tags.user_id = ?', $user_id );
+			$select->where( 'items_tags.user_id = ?', $user_id );
 		}
 				
 		if( $alpha )
@@ -207,7 +207,7 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 
 		// Add authentication check here
-		//$select->join( 'objects', 'objects.object_id = objects_tags.object_id' );
+		//$select->join( 'items', 'items.item_id = items_tags.item_id' );
 		//$this->applyPermissions( $select );
 
 
@@ -218,7 +218,7 @@ class Tags extends Kea_Plugin implements Iterator
 	{
 		if( !self::$_session->isAdmin() )
 		{
-			$select->where( 'objects.object_published = ?', 1 );
+			$select->where( 'items.item_published = ?', 1 );
 		}
 				
 		return $select;	
@@ -237,7 +237,7 @@ class Tags extends Kea_Plugin implements Iterator
 	public function tagCount()
 	{
 		$select = $this->_adapter->select();
-		$select->from( 'objects_tags', 'COUNT(tag_id) as tagCount' );
+		$select->from( 'items_tags', 'COUNT(tag_id) as tagCount' );
 		return $this->_adapter->fetchOne( $select );
 	}
 	

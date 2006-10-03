@@ -57,7 +57,7 @@ function isEnter(event)
 	?>
 
 <label for="type_description">Type Description:</label>
-	<p class="instructionText">Describe the object type and enter any further description/instruction concerning default object metadata.</p>
+	<p class="instructionText">Describe the item type and enter any further description/instruction concerning default item metadata.</p>
 	<?php 
 		$_form->textarea(	array(	'rows'	=> '4',
 									'cols'	=> '60',
@@ -96,7 +96,7 @@ function isEnter(event)
 
 		<?php $i++;?>
 <?php } endif; ?>
-	<label for="type_metafield_number">How many extended element fields does the object type need?</label>
+	<label for="type_metafield_number">How many extended element fields does the item type need?</label>
 	<p class="instructionText">Click &#8216;Add more fields&#8217; after entering a number in the box below.</p>
 	<p class="instructionText">Fields not filled in will be ignored.</p>
 	<input type="text" name="type_metafield_number" id="type_metafield_number" value="<?php echo htmlentities( @$saved['type_metafield_number'] ) ?>" size="3" onkeypress="isEnter(event)" />

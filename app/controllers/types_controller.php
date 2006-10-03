@@ -191,7 +191,7 @@ class TypesController extends Kea_Action_Controller
 		// This should be a beforeSave filter or rule on Type objs
 		if( !$cat_map->unique( 'type_name', $cat->type_name ) ) {
 			throw new Kea_Exception(
-				'An object type called "'
+				'An item type called "'
 				. $cat->type_name .
 				'" already exists.  Please choose a unique name.'
 			);

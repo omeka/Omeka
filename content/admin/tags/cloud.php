@@ -15,7 +15,7 @@ $all = $tags->getTagsAndCount();
 	<?php if( count($all) == 0 ): ?>
 	<h2 id="notice">No tags have been applied to objects.</h2>
 	<?php else:
-		$_html->tagCloud( $all, $tags->getMaxCount(), $_link->to( 'objects', 'all' ), 2 );
+		$_html->tagCloud( $all, $tags->getMaxCount(), $_link->to( 'items', 'all' ), 2 );
 	endif;
 	?>
 </div>

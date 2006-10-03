@@ -15,7 +15,7 @@ class File extends Kea_Domain_Model
 	public $file_date;
 	public $file_creator;
 	public $file_additional_creator;
-	public $object_id;
+	public $item_id;
 	//public $contributor_id;
 	
 	public $file_transcriber;
@@ -162,7 +162,7 @@ class File extends Kea_Domain_Model
 						$mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $new_path ) ) ) );
 						$file_type = trim( exec( 'file -b ' . trim( escapeshellarg ( $new_path ) ) ) );
 						
-						$file_array = array(	'object_id'					=> $obj_id,
+						$file_array = array(	'item_id'					=> $obj_id,
 												'file_description'			=> $file_info_form['file_description'],
 												'file_size'					=> $_FILES[$file_form_name]['size'][$key],
 												'file_mime_browser'			=> $_FILES[$file_form_name]['type'][$key],

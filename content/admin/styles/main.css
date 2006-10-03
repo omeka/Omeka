@@ -34,8 +34,8 @@ ul.tags li {display: inline;}
 ul.tags span.remove-tag {vertical-align: super;}
 span.remove-tag a {text-decoration: none; padding: 0;line-height: 0; background: #fff;}
 
-ul#navigation, ul.navigation, ul.object-nav {list-style: none; display: block; width: auto;}
-ul#navigation li, ul.navigation li, ul.object-nav li {display: inline;}
+ul#navigation, ul.navigation, ul.item-nav {list-style: none; display: block; width: auto;}
+ul#navigation li, ul.navigation li, ul.item-nav li {display: inline;}
 ul#navigation li.current a {background: #DBF0C2;}
 ul.navigation a {text-decoration: none;}
 ul.subnav {display: block;padding: 0.75em 2em; background: #DBF0C2;margin-bottom: 1em;font-size: 1.1em;}
@@ -45,9 +45,9 @@ ul.subnav a:link, ul.subnav a:visited {background: transparent;}
 ul.subnav a:hover, ul.subnav a:active {background: #CCE9A8;}
 ul.subnav li.current a {background: #fff;}
 
-ul.object-nav {display: block; float: left; clear: both; padding: 1em 0;width: 35em;}
-ul.object-nav .previous {float: left;}
-ul.object-nav .next {float: right; }
+ul.item-nav {display: block; float: left; clear: both; padding: 1em 0;width: 35em;}
+ul.item-nav .previous {float: left;}
+ul.item-nav .next {float: right; }
 
 /* Forms */
 fieldset {border: none; margin: 1em 0;}
@@ -60,9 +60,9 @@ textarea {height: 10em;font: 1.3em Verdana, sans-serif;}
 .inputReadOnly { background-color: #eee; cursor: none; border: 1px solid #ccc; padding: 4px;}
 
 select#featured {width:150px;}
-#editfile fieldset, #object-addedit fieldset {display: block;float: left;width: 30em; margin: 2em;}
+#editfile fieldset, #item-addedit fieldset {display: block;float: left;width: 30em; margin: 2em;}
 
-#object-limit label {display: none;}
+#item-limit label {display: none;}
 
 /* Page
 --------------*/
@@ -86,18 +86,18 @@ select#featured {width:150px;}
 #primary {float: left; width: 45em;}
 #secondary {float: right;width: 45em;}
 
-/* Objects View page */
+/* Items View page */
 
-.object {padding: 1em; border-bottom: 1px solid #8c3;margin: 0.5em 0;}
-.object h3 {margin: 0; border-left: 1em solid #71B033; text-transform: none;}
-.object h3 a {text-decoration: none;}
-.object-title {display: block;margin-bottom: 0.5em;}
-.object-title h3, .object-title span.edit {display: inline;}
-.object-title .edit a {padding: 0.25em; color: #fff; background: #606060; text-decoration: none;}
-.object-title .edit a:hover {background: #777;}
+.item {padding: 1em; border-bottom: 1px solid #8c3;margin: 0.5em 0;}
+.item h3 {margin: 0; border-left: 1em solid #71B033; text-transform: none;}
+.item h3 a {text-decoration: none;}
+.item-title {display: block;margin-bottom: 0.5em;}
+.item-title h3, .item-title span.edit {display: inline;}
+.item-title .edit a {padding: 0.25em; color: #fff; background: #606060; text-decoration: none;}
+.item-title .edit a:hover {background: #777;}
 
-/* Individula object show page */
-#object {clear: both;}
+/* Individula item show page */
+#item {clear: both;}
 .metadata-list dl {display: block; padding: 0.5em 0.25em; background: #eee; width: auto;margin-bottom: 1px; font-size: 1.2em;}
 .metadata-list dt, .metadata-list dd {display: inline;}
 .metadata-list dd {font-weight: bold;}

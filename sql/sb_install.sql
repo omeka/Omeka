@@ -14,51 +14,51 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- 
--- Objects
+-- Items
 --
 
-DROP TABLE IF EXISTS objects;
-CREATE TABLE objects (
+DROP TABLE IF EXISTS items;
+CREATE TABLE items (
 
 # Dublin Core
 	# Identifier
-	object_id					int(11)		UNSIGNED NOT NULL auto_increment,
+	item_id					int(11)		UNSIGNED NOT NULL auto_increment,
 
 	# Title
-	object_title				tinytext	NOT NULL,
+	item_title				tinytext	NOT NULL,
 	
 	# Publisher
-	object_publisher			text		NOT NULL,
+	item_publisher			text		NOT NULL,
 
 	# Language
-	object_language				tinytext	NOT NULL,
+	item_language				tinytext	NOT NULL,
 	
 	# Rights
-	object_rights				text		NOT NULL,
+	item_rights				text		NOT NULL,
 	
 	# Description
-	object_description			text		NOT NULL,
+	item_description			text		NOT NULL,
 	
 	# Date
-	object_date					tinytext	NOT	NULL,
+	item_date					tinytext	NOT	NULL,
 	
 	# Relation
-	object_relation				text		NOT NULL,
+	item_relation				text		NOT NULL,
 
 	# Source
-	object_source				text		NOT NULL,
+	item_source				text		NOT NULL,
 	
 	# Subject					
-	object_subject				tinytext	NOT NULL,
+	item_subject				tinytext	NOT NULL,
 	
-	# Type - aka - KJV object type metadata
+	# Type - aka - KJV item type metadata
 	type_id					int(11)		UNSIGNED NULL,
 	
 	# Creator
-	object_creator				text		NOT NULL,
+	item_creator				text		NOT NULL,
 	
 	# Additional creator info
-	object_additional_creator	text		NOT NULL,
+	item_additional_creator	text		NOT NULL,
 	
 	# Contributor
 	#contributor_id				int(11)		UNSIGNED NULL,
@@ -78,17 +78,17 @@ CREATE TABLE objects (
 # Dublin Core End
 	
 #	Other meta data
-	object_coverage				text		NOT NULL,
+	item_coverage				text		NOT NULL,
 	
-	object_added				timestamp	NULL default NULL,
-	object_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	item_added				timestamp	NULL default NULL,
+	item_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
-#	Object Featured
-	object_featured				int(1)		NOT NULL DEFAULT '0',
+#	Item Featured
+	item_featured				int(1)		NOT NULL DEFAULT '0',
 	
-#	Object Published
-	object_public			BOOL 		NOT NULL DEFAULT '0', 
-	PRIMARY KEY	(object_id),
+#	Item Published
+	item_public			BOOL 		NOT NULL DEFAULT '0', 
+	PRIMARY KEY	(item_id),
 	INDEX		(type_id),
 	#INDEX		(contributor_id),
 	#INDEX		(creator_id),
@@ -97,29 +97,29 @@ CREATE TABLE objects (
 
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER object_added BEFORE INSERT ON objects
+CREATE TRIGGER item_added BEFORE INSERT ON items
 FOR EACH ROW
-	SET NEW.object_added = NOW();
+	SET NEW.item_added = NOW();
 
-DROP TABLE IF EXISTS objectsTotal;
-CREATE TABLE objectsTotal (
+DROP TABLE IF EXISTS itemsTotal;
+CREATE TABLE itemsTotal (
 	total	int(11)		NOT NULL default 0
 ) DEFAULT CHARSET=utf8;
-INSERT INTO objectsTotal (total) VALUES (0);
+INSERT INTO itemsTotal (total) VALUES (0);
 
-CREATE TRIGGER objects_plus AFTER INSERT ON objects
+CREATE TRIGGER items_plus AFTER INSERT ON items
 	FOR EACH ROW
-		UPDATE objectsTotal SET total = total + 1;
+		UPDATE itemsTotal SET total = total + 1;
 
-CREATE TRIGGER objects_minus AFTER DELETE ON objects
+CREATE TRIGGER items_minus AFTER DELETE ON items
 	FOR EACH ROW
-		UPDATE objectsTotal SET total = total - 1;
+		UPDATE itemsTotal SET total = total - 1;
 
 
 -- --------------------------------------------------------
 
 --
--- KJV Object Types
+-- KJV Item Types
 --
 
 DROP TABLE IF EXISTS types;
@@ -136,7 +136,7 @@ CREATE TABLE types (
 -- --------------------------------------------------------
 
 -- 
--- kjvObjectTypes_metaFields
+-- kjvItemTypes_metaFields
 -- 
 
 
@@ -169,21 +169,21 @@ DROP TABLE IF EXISTS metatext;
 CREATE TABLE metatext (
 	metatext_id					int(11)			UNSIGNED NOT NULL	auto_increment,
 	metafield_id				int(11)			UNSIGNED NOT NULL,
-	object_id					int(11)			UNSIGNED NOT NULL,
+	item_id					int(11)			UNSIGNED NOT NULL,
 	metatext_text				text			NOT NULL,
 
 	PRIMARY KEY (metatext_id),
 	INDEX		(metafield_id),
-	INDEX		(object_id),
+	INDEX		(item_id),
 	FOREIGN KEY (metafield_id) REFERENCES metafields(metafield_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE ON UPDATE CASCADE
 	
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Object Contributors
+-- Item Contributors
 --
 DROP TABLE IF EXISTS contributors;
 CREATE TABLE contributors (
@@ -258,7 +258,7 @@ CREATE TABLE files (
 	file_coverage				text		NOT NULL,
 
 #	Dublin core referenced in other tables
-	object_id					int(11)		UNSIGNED NULL,
+	item_id					int(11)		UNSIGNED NULL,
 	#contributor_id				int(11)		UNSIGNED NULL,
 
 #	File preservation and digitization metadata
@@ -290,8 +290,8 @@ CREATE TABLE files (
 	file_added					timestamp	NULL default NULL,
 
   PRIMARY KEY  (file_id),
-	INDEX		(object_id),
-	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE
+	INDEX		(item_id),
+	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE ON UPDATE CASCADE
 	#FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE
 
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
@@ -330,7 +330,7 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS location;
 CREATE TABLE location(
 	location_id		int(11)			NOT NULL auto_increment,
-	object_id		int(11)			UNSIGNED NOT NULL,
+	item_id		int(11)			UNSIGNED NOT NULL,
 	latitude		double			NULL,
 	longitude		double			NULL,
 	address			varchar(255)	NOT NULL,
@@ -340,8 +340,8 @@ CREATE TABLE location(
 	cleanAddress	varchar(200)	NOT NULL,
 
 	PRIMARY KEY (location_id),
-	INDEX		(object_id),
-	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE
+	INDEX		(item_id),
+	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE ON UPDATE CASCADE
 
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -356,40 +356,40 @@ CREATE TABLE tags(
 	PRIMARY KEY(tag_id)
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS objects_tags;
-CREATE TABLE objects_tags(
-	object_id		int(11)			UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS items_tags;
+CREATE TABLE items_tags(
+	item_id		int(11)			UNSIGNED NOT NULL,
 	tag_id			int(11)			UNSIGNED NOT NULL,
 	user_id			int(11)			UNSIGNED NOT NULL,
-	INDEX	(object_id),
+	INDEX	(item_id),
 	INDEX	(tag_id),
 	INDEX	(user_id),
-	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS objects_favorites;
-CREATE TABLE objects_favorites(
-	object_id		int(11)			UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS items_favorites;
+CREATE TABLE items_favorites(
+	item_id		int(11)			UNSIGNED NOT NULL,
 	user_id			int(11)			UNSIGNED NOT NULL,
 	fav_added		timestamp		NULL,
-	INDEX	(object_id),
+	INDEX	(item_id),
 	INDEX	(user_id),
-	FOREIGN KEY (object_id) REFERENCES objects(object_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = innodb DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER fav_added BEFORE INSERT ON objects_favorites
+CREATE TRIGGER fav_added BEFORE INSERT ON items_favorites
 FOR EACH ROW
 	SET NEW.fav_added = NOW();
 
 
 
-ALTER TABLE objects ADD CONSTRAINT `type_key` FOREIGN KEY (type_id) REFERENCES types(type_id) ON DELETE SET NULL ON UPDATE CASCADE;
-#ALTER TABLE objects ADD CONSTRAINT `contributor_key` FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE objects ADD CONSTRAINT `collection_key` FOREIGN KEY (collection_id) REFERENCES collections(collection_id) ON DELETE SET NULL ON UPDATE CASCADE;
-ALTER TABLE objects ADD CONSTRAINT `user_key` FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE items ADD CONSTRAINT `type_key` FOREIGN KEY (type_id) REFERENCES types(type_id) ON DELETE SET NULL ON UPDATE CASCADE;
+#ALTER TABLE items ADD CONSTRAINT `contributor_key` FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE items ADD CONSTRAINT `collection_key` FOREIGN KEY (collection_id) REFERENCES collections(collection_id) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE items ADD CONSTRAINT `user_key` FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE;
 
 INSERT INTO `types` (`type_id`,  `type_name`, `type_description`, `type_active`) VALUES
 (3,  'Document', 'A resource containing textual data.  Note that facsimiles or images of texts are still of the genre text.', 1),

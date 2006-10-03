@@ -11,7 +11,7 @@ $collections = $__c->collections()->all( 'object' );
 	<th scope="col">Collection Name</th>
 	<th scope="col">Collector</th>
 	<th scope="col">Description</th>
-	<th scope="col">View Objects in Collection</td>
+	<th scope="col">View Items in Collection</td>
 	</thead>
 	<tbody>
 
@@ -24,7 +24,7 @@ $collections = $__c->collections()->all( 'object' );
 		<td><?php echo $collection->collection_description; ?></td>
 		<td><?php echo $collection->collection_collector; ?></td>
 		<?php if( self::$_session->getUser()->getPermissions() <= 10 ): ?>
-		<td><a href="<?php echo $_link->to( 'objects' ); ?>?collection=<?php echo $collection->collection_id; ?>">View</a></td>
+		<td><a href="<?php echo $_link->to( 'items' ); ?>?collection=<?php echo $collection->collection_id; ?>">View</a></td>
 		<?php endif; ?>
 	</tr>
 	<?php

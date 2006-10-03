@@ -11,6 +11,6 @@ $saved = self::$_session->getValue( 'type_form_saved' );
 <?php include( 'form.php' ); ?>
 <p>Before adding this type, double check that everything is right.  If it is, continue:</p>
 <input type="hidden" name="type_submitted" value="type_submitted"/>
-<input type="button" value="Add this Type" id="object_type_form_submit" onclick="this.form.submitted = true; this.form.submit(); return true;" />
+<input type="button" value="Add this Type" id="item_type_form_submit" onclick="this.form.submitted = true; this.form.submit(); return true;" />
 
 </form>
