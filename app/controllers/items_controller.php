@@ -278,7 +278,7 @@ class ItemsController extends Kea_Action_Controller
 	{
 		if( !self::$_session->isAdmin() )
 		{
-			$select->where( 'items.item_published = ?', 1 );
+			$select->where( 'items.item_public = ?', 1 );
 		}
 				
 		return $select;	
