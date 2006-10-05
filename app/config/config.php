@@ -60,7 +60,7 @@ define( 'GMAPS_KEY',			'ABQIAAAAD-SKaHlA87rO8jrVjT7SHBSEOfja84tcPloLMbnK5ptAw5ZC
 /*
 	Path to imagemagick's 'convert' function
 */
-define( 'PATH_TO_CONVERT', '/usr/local/bin/convert' );
+define( 'PATH_TO_CONVERT', '/usr/bin/convert' );
 
 /*
 	Global 404 file for the application
@@ -77,7 +77,7 @@ define( 'KEA_LOGINS_LOG',		ABS_LOG_DIR.DS.'logins.log' );
 define( 'KEA_LOG_SQL',			false );
 define( 'KEA_LOG_ERRORS',		false );
 define( 'KEA_LOG_LOGINS',		false );
-define( 'KEA_EMAIL_ERRORS', 	true );
+define( 'KEA_EMAIL_ERRORS', 	false );
 
 /*
 	Web specific settings for use in linking in files, link generation, etc.
