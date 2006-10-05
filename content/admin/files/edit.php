@@ -55,8 +55,8 @@ $item = $__c->items()->findById($file->item_id);
 
 <label for="File[file_creator]">Other Creator</label>
 <?php
-	$_form->text( array(	'name'	=> 'File[file_creator_other]', 'class' => 'textinput',
-							'value'	=> $file->file_creato_other ) );
+	$_form->text( array(	'name'	=> 'File[file_additional_creator]', 'class' => 'textinput',
+							'value'	=> $file->file_additional_creator ) );
 ?>
 
 
@@ -118,6 +118,11 @@ $item = $__c->items()->findById($file->item_id);
 <?php
 	$_form->textarea( array(	'name'	=> 'File[file_rights]' ),
 						$file->file_rights );
+?>
+<label for="File[file_format]">Format</label>
+<?php
+	$_form->textarea( array(	'name'	=> 'File[file_format]' ),
+						$file->file_format );
 ?>
 </fieldset>
 <fieldset>
@@ -198,8 +203,8 @@ $item = $__c->items()->findById($file->item_id);
 
 <label for="File[file_change_history]">Change History</label>
 <?php
-	$_form->textarea( array(	'name'	=> 'File[file_change_history]', 'class' => 'textinput',
-						$file->file_change_history ) );
+	$_form->textarea( array(	'name'	=> 'File[file_change_history]', 'class' => 'textinput' ),
+						$file->file_change_history );
 ?>
 
 <label class="readonly" for="File[file_archive_filename]">Archive Filename <span class="readonly">(read only)</span></label>

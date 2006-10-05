@@ -15,14 +15,17 @@ class File extends Kea_Domain_Model
 	public $file_date;
 	public $file_creator;
 	public $file_additional_creator;
+	public $file_format;
 	public $item_id;
 	//public $contributor_id;
 	
 	public $file_transcriber;
 	public $file_producer;
 	public $file_render_device;
+	public $file_render_details;
 	public $file_capture_date;
 	public $file_capture_device;
+	public $file_capture_details;
 	public $file_change_history;
 	public $file_watermark;
 	public $file_authentication;

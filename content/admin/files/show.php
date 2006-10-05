@@ -21,15 +21,14 @@ $item = $__c->items()->findById($file->item_id);
 <dl><dt>Description:</dt> <?php if ($file->file_description): ?><dd><?php echo $file->file_description; ?></dd><?php endif; ?></dl>
 
 <dl><dt>Publisher:</dt> <?php if ($file->file_publisher): ?><dd><?php echo $file->file_publisher; ?></dd><?php endif; ?></dl>
-<dl><dt>Other Creator:</dt> <?php if ($file->file_creator_other): ?><dd><?php echo $file->file_creator_other; ?></dd><?php endif; ?></dl>
+<dl><dt>Other Creator:</dt> <?php if ($file->file_additional_creator): ?><dd><?php echo $file->file_additional_creator; ?></dd><?php endif; ?></dl>
 <dl><dt>Date:</dt> <?php if ($file->file_date): ?><dd><?php echo $file->file_date; ?></dd><?php endif; ?></dl>
 <dl><dt>Source:</dt> <?php if ($file->file_source): ?><dd><?php echo $file->file_source; ?></dd><?php endif; ?></dl>
 <dl><dt>Language:</dt> <?php if ($file->file_language): ?><dd><?php echo $file->file_language; ?></dd><?php endif; ?></dl>
 <dl><dt>Relation:</dt> <?php if ($file->file_relation): ?><dd><?php echo $file->file_relation; ?></dd><?php endif; ?></dl>
 <dl><dt>Coverage</dt> <?php if ($file->file_coverage): ?><dd><?php echo $file->file_coverage; ?></dd><?php endif; ?></dl>
 <dl><dt>Rights:</dt> <?php if ($file->file_rights): ?><dd><?php echo $file->file_rights; ?></dd><?php endif; ?></dl>
-<dl><dt>Format:</dt> <dd>View</dd></dl>
-<dl><dt>Type:</dt> <dd>View</dd></dl>
+<dl><dt>Format:</dt> <?php if ($file->file_format): ?><dd><?php echo $file->file_format; ?></dd><?php endif; ?></dl>
 </div>
 <div class="section" id="format-metadata">
 <h3>Format Metadata</h3>

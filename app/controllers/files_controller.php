@@ -43,7 +43,7 @@ class FilesController extends Kea_Action_Controller
 		{
 			
 		}
-		$this->scrubDate( $file->file_date );
+		//$this->scrubDate( $file->file_date );
 		$this->scrubDate( $file->file_capture_date );
 		
 		$file->save();

@@ -253,7 +253,8 @@ CREATE TABLE files (
 	file_subject				varchar(255)	NOT NULL,
 	file_creator				text			NOT NULL,
 	file_additional_creator		text			NOT NULL,
-
+	file_format					text			NOT NULL,
+	
 #	Coverage
 	file_coverage				text		NOT NULL,
 
@@ -268,6 +269,7 @@ CREATE TABLE files (
 	file_render_details			text	NOT NULL,
 	file_capture_date			timestamp	NOT NULL default '0000-00-00 00:00:00',
 	file_capture_device			text	NOT NULL,
+	file_capture_details		text	NOT NULL,
 	file_change_history			text	NOT NULL,
 	file_watermark				text	NOT NULL,
 	file_authentication			text	NOT NULL,
