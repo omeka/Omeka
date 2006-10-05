@@ -187,14 +187,14 @@
 	<?php
 		$_form->select( array(	'name'		=> 'Item[type_id]',
 								'id'		=> 'type_id',
-								'onchange'	=> 'getData(this.value, "ajax_type_form")' ),
+								 ),
 						$__c->types()->all( 'array' ),
 						@$saved['Item']['type_id'],
 						'type_id',
 						'type_name' );
 	?>
-
-<div id="ajax_type_form"><?php
+	<input type="submit" name="item_type_change" value="Change Item Type">
+<?php
 
 if (@$saved['Item']['type_id']) {
 	$cat = $__c->types()->findById(@$saved['Item']['type_id']); ?> 
@@ -215,7 +215,7 @@ if (@$saved['Item']['type_id']) {
 			
 		<?php $i++; endforeach; ?>
 	
-<?	} ?></div>
+<?	} ?>
 </fieldset>
 
 <fieldset>
@@ -257,9 +257,23 @@ if (@$saved['Item']['type_id']) {
 
 <fieldset>
 	<legend>Files</legend>
+	<label for="num_files">How many files would you like to add?</label>
+	<?php 
+		$_form->text( array('name' 	=> 'num_files', 
+							'id'	=> 'num_files',
+							'size'	=> 2,
+							'value' =>self::$_request->getProperty('num_files') ) );
+	?>
+	<input type="submit" name="add_more_files" value="Add these files">
 <!-- MAX_FILE_SIZE must precede the file input field -->
 <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 <!-- Name of input element determines name in $_FILES array -->
-<div id="files"></div>
-<p><a href="javascript:void(0);" onclick="addFile()">Attach a file</a></p>
+<div id="files">
+	<?php if( $num_files = self::$_request->getProperty('num_files') ): ?>
+		<?php for($i = 0; $i < $num_files; $i++ ): ?>
+			<p>Attach this file: <input name="itemfile[]" type="file" /></p>
+		<?php endfor; ?>
+	<?php endif; ?>
+</div>
+
 </fieldset>

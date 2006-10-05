@@ -174,11 +174,9 @@ class TypesController extends Kea_Action_Controller
 	
 	protected function _add()
 	{	
-		if( !self::$_request->getProperty( 'type_submitted' ) ) {
-			self::$_session->setValue( 'type_form_saved', null );
-			return;
-		}
-
+		if(self::$_request->getProperty( 'item_type_add') )
+		{
+			
 		// Save the request data from the form to the session	
 		self::$_session->setValue( 'type_form_saved', $_REQUEST );
 
@@ -186,6 +184,7 @@ class TypesController extends Kea_Action_Controller
 		$cat_map = new Type_Mapper;
 		$mf_map = new Metafield_Mapper;
 		
+		if( empty($cat->type_name) ) return;
 		
 		try{
 		// This should be a beforeSave filter or rule on Type objs
@@ -281,6 +280,32 @@ echo 'made it';
 		} catch( Kea_Exception $e ) {
 			print_r($e);
 			return $e;
+		}			
+			
+			
+		}
+		else
+		{
+			self::$_session->setValue('type_form_saved', self::$_request->getProperties() );
+		}
+	}
+	
+	/**
+	 * Changes the item type from within the item edit form without the use of AJAX
+	 *
+	 * @return void
+	 * @author Kris Kelly
+	 **/
+	protected function _change()
+	{
+		if ( self::$_request->getProperty('item_type_change') )
+		{
+			$saved = self::$_session->getValue('item_form_saved');
+			$item = self::$_request->getProperty('Item');
+			
+			$saved['Item']['type_id'] = $item['type_id'];
+			self::$_session->setValue('item_form_saved', $saved);
+			return;
 		}
 	}
 	

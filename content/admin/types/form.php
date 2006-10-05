@@ -1,56 +1,10 @@
-<script type="text/javascript">
-var ajax;
-function getExtendedForm() {
-	num = parseInt(document.getElementById( 'type_metafield_number' ).value);
-	if( num > 0 && num != NaN )
-	{
-		var opt = {
-			parameters: 'num_fields=' + num,
-			method:'get',
-			onComplete: function() {
-				new Effect.BlindDown( 'extended_elements', {duration: 0.8} );
-			}
-		}
-	
-		ajax = new Ajax.Updater(
-			'extended_elements',
-			'<?php echo $_link->to('types', 'ajax_create_form'); ?>',
-			opt);
-	}
-	else if( document.getElementById( 'type_metafield_number' ).value == 0
-				|| document.getElementById( 'type_metafield_number' ).value == '' )
-	{
-		removeExtendedForm();
-	}
-	else
-	{
-		alert( 'Please only enter a whole number greater than zero, or zero to clear the extended forms.' )
-	}
-}
-
-function removeExtendedForm()
-{
-	Effect.BlindUp( 'extended_elements', { duration: 0.6 } );
-	setTimeout( "document.getElementById('extended_elements').innerHTML = null", 600 );
-	return false;
-}
-
-function isEnter(event)
-{
-	var keycode = event.keyCode ? event.keyCode :
-					event.which ? event.which : event.charCode;
-	if( keycode == 13 ) {
-		getExtendedForm();
-	}
-}
-</script>
 <fieldset>
 	<legend>General Type Information</legend>
 <label for="type_name">Type Name:</label>
 	<p class="instructionText">Be descriptive yet concise; no punctuation.</p>
 	<?php
 		$_form->text(	array(	'size'	=> '20',
-									'value'	=> $type->type_name,
+									'value'	=> issetor($saved['type']['type_name'], @$type->type_name ),
 									'id'	=> 'type_name',
 									'class' => 'textinput',
 									'name'	=> 'type[type_name]' ) );
@@ -63,7 +17,7 @@ function isEnter(event)
 									'cols'	=> '60',
 									'id'	=> 'type_description',
 									'name'	=> 'type[type_description]' ),
-							 		issetor($saved['type']['type_description'], $type->type_description ));
+							 		issetor($saved['type']['type_description'], @$type->type_description ));
 	?>
 </fieldset>
 <fieldset>
@@ -73,7 +27,7 @@ function isEnter(event)
 	// Get the old metafield names and ids
 	$old_mfs = $__c->metafields()->all();
 
-	if ($type): 
+	if (@$type): 
 	//	print_r($type->metafields); exit;
 		foreach ($type->metafields as $meta) {
 ?>
@@ -99,14 +53,13 @@ function isEnter(event)
 	<label for="type_metafield_number">How many extended element fields does the item type need?</label>
 	<p class="instructionText">Click &#8216;Add more fields&#8217; after entering a number in the box below.</p>
 	<p class="instructionText">Fields not filled in will be ignored.</p>
-	<input type="text" name="type_metafield_number" id="type_metafield_number" value="<?php echo htmlentities( @$saved['type_metafield_number'] ) ?>" size="3" onkeypress="isEnter(event)" />
+	<input type="text" name="type_metafield_number" id="type_metafield_number" value="<?php echo htmlentities( @$saved['type_metafield_number'] ) ?>" size="3" />
 	<input type="submit" name="add_fields" value="Add more fields -&gt;" />
-	<a href="#" onclick="getExtendedForm()">Get extended fields</a>||<a href="#" onclick="removeExtendedForm()">Remove Extended Fields</a>
 	<div id="extended_elements"></div>
 
-	<?php if(!empty($more_fields)): 
-
-for($j=$type->metafields->total(); $j<($type->metafields->total()+$more_fields); $j++): ?>
+	<?php if($more_fields = self::$_request->getProperty('type_metafield_number') ): 
+				$total_fields = ( !empty($type) ) ? $type->metafields->total() : 0;
+for($j=$total_fields; $j<($total_fields+$more_fields); $j++): ?>
 	<label for="metafields[<?php echo $j; ?>][metafield_name]"><?php echo $j + 1 ?>) Extended Element Field Name</label>
 	<p class="instructionText">Choose an earlier defined meta field or create your own:</p>
 	<select name="metafields[<?php echo $j; ?>][metafield_name]" id="metafields[<?php echo $j; ?>][metafield_name]">

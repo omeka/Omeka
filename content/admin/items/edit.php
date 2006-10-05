@@ -1,98 +1,21 @@
 <?php
 // Layout: default;
+
+//For deleting files from the item without the use of javascript
+foreach(array_keys($_POST) as $key)
+{
+	if( $delete_file_id = strstr($key, 'delete_file_' ) ) 
+	{
+		$delete_file_id = str_replace('delete_file_', '', $delete_file_id);
+		$__c->admin()->protect();
+		$__c->files()->delete($delete_file_id);
+	}
+}
+
 $item = $__c->items()->edit();
+$__c->types()->change();
 $saved = self::$_session->getValue( 'item_form_saved' );
 ?>
-
-<script type="text/javascript">
-var ajax;
-function getData(id, form) {
-	if( id == '' ) {
-		Effect.BlindUp( form, { duration: 0.6 } );
-		setTimeout( "document.getElementById('" + form + "').innerHTML = null", 600 );
-		return false;
-	}
-	
-	var opt = {
-		parameters:'id=' + id,
-		method:'get',
-		onComplete: function(t) {
-			new Effect.BlindDown( form, {duration: 0.8} );
-		}
-	}
-	
-	ajax = new Ajax.Updater(form,'<?php echo $_link->to( "items" ); ?>'+form,opt);
-}
-
-function addFile() {
-	var input = document.createElement("div");
-	input.style.display = "none";
-	document.getElementById('files').appendChild( input );
-	input.innerHTML = 'Attach this file: <input name="itemfile[]" type="file" /><a href="javascript:void(0);" onclick="removeFile( parentNode )">Remove</a>';
-	Effect.Appear( input, {duration: 0.4} );
-}
-
-function removeFile( node ) {
-	Effect.Fade( node, {duration: 0.4} );
-	setTimeout( function() { document.getElementById('files').removeChild( node ) }, 600);
-}
-
-function showResponse(div) {
-	Effect.BlindDown(div);
-}
-
-function removeTag( tag_id, item_id )
-{
-	var opt = {
-	    method: 'post',
-	    postBody: 'item_id=' + item_id + '&tag_id=' + tag_id,
-	    onSuccess: function() {
-			new Effect.Fade( 'tag-' + tag_id );
-	    },
-	    onFailure: function() {
-	        alert('Could not delete tag.');
-	    }
-	}
-
-	new Ajax.Request('<?php echo $_link->to( 'items', 'ajaxRemoveTag' ); ?>', opt);
-}
-
-function deleteFile( file_id )
-{
-	var opt = {
-	    method: 'post',
-	    postBody: 'file_id=' + file_id,
-	    onSuccess: function() {
-			new Effect.Fade( 'file-' + file_id );
-	    },
-	    onFailure: function() {
-	        alert('Could not delete file.');
-	    }
-	}
-
-	new Ajax.Request('<?php echo $_link->to( 'items', 'ajaxDeleteFile' ); ?>', opt);
-}
-
-function deleteItemFromType( item_id )
-{
-	var opt = {
-	    method: 'post',
-	    postBody: 'item_id=' + item_id,
-	    onSuccess: function() {
-			new Effect.Fade( 'type_form', {duration: 0.6} );
-			new Effect.Appear( 'type_add', {duration: 0.6} );
-			setTimeout( "document.getElementById('type_form').innerHTML = null", 600 );
-	    },
-	    onFailure: function() {
-	        alert('Could not delete file.');
-	    }
-	}
-
-	new Ajax.Request('<?php echo $_link->to( 'items', 'ajaxDeleteItemFromType' ); ?>', opt);	
-}
-</script>
-
-
 <?php include( 'subnav.php' ); ?>
 
 <h2>Edit Item #<?php echo $item->item_id; ?>: <?php echo $item->item_title; ?></h2>
@@ -106,7 +29,7 @@ function deleteItemFromType( item_id )
 	<label>These are the associated files with this item</label>
 	<ul class="filelist">
 	<?php foreach( $item->files as $file ): ?>
-		<li id="file-<?php echo $file->getId(); ?>"><a href="javascript:void(0)" onclick="window.open();"><?php echo $file->file_original_filename; ?></a><input type="button" value="X" onclick="if( confirm( 'Are you sure you want to permanently remove this file from the item as well as the archive?' ) ){ deleteFile( '<?php echo $file->getId(); ?>' )}"></li>
+		<li id="file-<?php echo $file->getId(); ?>"><?php echo $file->file_original_filename; ?><input type="submit" name="delete_file_<?php echo $file->getId(); ?>" value="Delete this file"></li>
 	<?php endforeach; ?>
 	</ul>
 

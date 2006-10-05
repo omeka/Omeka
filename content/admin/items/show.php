@@ -1,84 +1,58 @@
 <?php
 // Layout: show;
+
+//This replaces the javascript/Ajax that used to do this stuff
+
+//Tag adding
+$item_id = self::$_request->getProperty('item_id');
+$user_id = self::$_session->getUser()->getId();
+if ( self::$_request->getProperty('add_tags') )
+{
+	$tag_string = self::$_request->getProperty('new_tags');
+	$__c->tags()->addMyTags($tag_string, $item_id, $user_id);
+}
+//Tag removal
+foreach( array_keys($_POST) as $key )
+{
+	if ( strstr($key, 'remove_mytag') )
+	{
+		$remove_id = str_replace('remove_mytag_', '', $key);
+		$__c->tags()->deleteMyTag( $remove_id, $item_id, self::$_session->getUser()->getId() );
+	} 
+	elseif ( strstr($key, 'remove_tag') )
+	{
+		$__c->admin()->protect();
+		$remove_id = str_replace('remove_tag_', '', $key);
+		$__c->tags()->deleteAssociation( $remove_id, $item_id );
+	}
+}
+
 $item = $__c->items()->findById();
+
+//Favorite
+if ( !empty($_POST['mark_favorite']) )
+{
+	$item->addRemoveFav( $user_id );
+}
+//Public
+elseif ( !empty($_POST['mark_public']) )
+{
+	$item->flip( 'item_public' );
+}
+//Featured
+elseif ( !empty($_POST['mark_featured']) )
+{
+	$item->flip( 'item_featured' );
+}
+
+
+
 include( 'subnav.php' );
 ?>
 <script type="text/javascript" charset="utf-8">
 	//<![CDATA[
 	
 	addLoadEvent(popUps);
-	
-	function markPublic( item_id )
-	{
-		var opt = {
-			parameters:'id=' + item_id,
-			method:'post'
-		}
-		
-		ajax = new Ajax.Updater('mark-public','<?php echo $_link->to( "items", "ajaxMarkPublic" ); ?>', opt);
-	}
-	
-	function markFav( item_id )
-	{
-		var opt = {
-			parameters:'id=' + item_id,
-			method:'post'
-		}
-
-		ajax = new Ajax.Updater('mark-favorite','<?php echo $_link->to( "items", "ajaxMarkFav" ); ?>', opt);
-	}
-	
-	function markFeatured( item_id )
-	{
-		var opt = {
-			parameters:'id=' + item_id,
-			method:'post'
-		}
-
-		ajax = new Ajax.Updater('mark-featured','<?php echo $_link->to( "items", "ajaxMarkFeatured" ); ?>', opt);
-	}
-	
-	function removeMyTag( tag_id, item_id, user_id, element )
-	{
-		var opt = {
-			parameters: 'tag_id=' + tag_id + '&item_id=' + item_id + '&user_id=' + user_id,
-			method:'post',
-			onSuccess: function()
-			{
-				new Effect.Fade( element.parentNode, {duration: 0.4} );
-				new Effect.Highlight('tags');
-			},
-			onFailure: function(t)
-			{
-				alert('Error: ' + t.status + ' -- ' + t.statusText );
-			}
-		}
-		new Ajax.Updater('tags','<?php echo $_link->to('items','ajaxRemoveMyTag'); ?>', opt );
-	}
-	
-	function addTags( tag_string, item_id )
-	{
-		var opt = {
-			parameters: 'tags=' + tag_string + '&item_id=' + item_id,
-			method:'post',
-			onSuccess: function(t, json)
-			{
-				itemTags = $('tags');
-				itemTags.innerHTML = json.objTags;
-				
-				myTags = $('my-tags');
-				myTags.innerHTML = json.myTags;
-				
-				new Effect.Highlight('tags');
-				new Effect.Highlight('my-tags');
-			},
-			onFailure: function(t)
-			{
-				alert('Error: ' + t.status + ' -- ' + t.statusText );
-			}
-		}
-		new Ajax.Request('<?php echo $_link->to('items','ajaxAddMyTags'); ?>', opt );
-	}
     //]]>
 </script>
 
@@ -120,33 +94,32 @@ include( 'subnav.php' );
 	</div>
 
 	<div id="secondary">
-
+		<form method="POST" action="<?php $_link->to('items', 'show').DS.$item->getId(); ?>">
 		<div id="mark-favorite">
-			<a class="mark<?php if( $item->isFav( self::$_session->getUser()->getId() ) ): ?> favorite
-			<?php endif; ?>" href="javascript:void(0)" onclick="markFav('<?php echo $item->getId(); ?>');" >
+			<input type="submit" name="mark_favorite" value="
 			<?php if( $item->isFav( self::$_session->getUser()->getId() ) ): ?>
 			Favorite
 			<?php else: ?>
 			Make Favorite	
 			<?php endif; ?>
-			</a>
+			">
 		</div>
 		<div id="mark-featured">
-			<a class="mark<?php if( $item->isFeatured( self::$_session->getUser()->getId() ) ): ?>
-			 featured<?php endif; ?>" href="javascript:void(0)" onclick="markFeatured('<?php echo $item->getId(); ?>');" >
+			<input type="submit" name="mark_featured" value="
 			<?php if( $item->isFeatured( self::$_session->getUser()->getId() ) ): ?>
 Featured			<?php else: ?>
 Make Featured			<?php endif; ?>
-			</a>
+			">
 		</div>
 		<div id="mark-public">
-			<a class="mark<?php if( $item->item_public ): ?>
-			 public<?php endif; ?>" href="javascript:void(0)" onclick="markPublic('<?php echo $item->getId(); ?>');" >
+			<input type="submit" name="mark_public" value="
 			<?php if( $item->item_public ): ?>
 Public			<?php else: ?>
 Make Public			<?php endif; ?>
-</a>
+			">
 		</div>
+		<input type="hidden" name="item_id" value="<?php echo $item->getId(); ?>" />
+		</form>
 		
 		<div id="item-contributor-info">
 			<?php if( $item->contributor->total() > 0 ): ?>
@@ -192,23 +165,34 @@ Make Public			<?php endif; ?>
 	<div class="citation"><?php echo $item->getCitation(); ?></div>
 	</div>
 			<div id="item-tags">
+				<form method="POST" action="<?php $_link->to('items', 'show').DS.$item->getId(); ?>">
 				<h2>Everyone&#8217;s Tags:</h2>
 				<ul id="all-tags" class="tags">
 				<?php foreach( $item->tags as $tag ): ?>
-					<li><a rel="tag" href="<?php echo $_link->to( 'items', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo htmlentities( $tag['tag_name'] ); ?></a><?php if( $item->tags->nextIsValid() ) echo ','; ?></li>
+					<li><a rel="tag" href="<?php echo $_link->to( 'items', 'all' ); ?>?tags=<?php echo urlencode( $tag['tag_name'] ); ?>"><?php echo htmlentities( $tag['tag_name'] ); ?></a><?php if( $item->tags->nextIsValid() ) echo ','; ?>
+					<?php if( self::$_session->isAdmin() ): ?>
+					<input type="submit" name="remove_tag_<?php echo $tag['tag_id']; ?>" value="x" />
+					<?php endif; ?>
+					</li>
 				<?php endforeach; ?>
 				</ul>
 				<h3>My Tags:</h3>
 				<ul id="my-tags" class="tags">
 				<?php foreach( $item->myTags( self::$_session->getUser()->getId() ) as $mytag ): ?>
-					<li><a rel="tag" href="<?php echo $_link->to( 'account', 'all' ); ?>?tags=<?php echo urlencode( $mytag['tag_name'] ); ?>"><?php echo htmlentities( $mytag['tag_name'] ); ?></a>  <span class="remove-tag"><a href="javascript:void(0);" onclick="if( confirm( 'Are you sure you want to remove this tag?' ) ){ removeMyTag('<?php echo $mytag['tag_id']; ?>', '<?php echo $item->getId(); ?>', '<?php echo self::$_session->getUser()->getId(); ?>', this ); }">x</a></span></li>
+					<li><a rel="tag" href="<?php echo $_link->to( 'account', 'all' ); ?>?tags=<?php echo urlencode( $mytag['tag_name'] ); ?>"><?php echo htmlentities( $mytag['tag_name'] ); ?></a>  <span class="remove-tag"><input type="submit" name="remove_mytag_<?php echo $mytag['tag_id']; ?>" value="x" /></span></li>
 				<?php endforeach; ?>
 				</ul>
+				<input type="hidden" name="item_id" value="<?php echo $item->getId(); ?>" />
+				</form>
 			</div>
 
 			<div id="add-tags">
-				<input type="text" size="20" id="new-tags" />
-				<input type="button" value="Add tags" onclick="addTags(document.getElementById('new-tags').value, '<?php echo $item->getId(); ?>');" ></input>
+				<form method="POST" action="<?php $_link->to('items', 'show').DS.$item->getId(); ?>">
+				<input type="text" size="20" name="new_tags" id="new-tags" />
+				<!--><input type="button" value="Add tags" onclick="addTags(document.getElementById('new-tags').value, '<?php echo $item->getId(); ?>');" ></input> </!-->
+				<input type="hidden" name="item_id" value="<?php echo $item->getId(); ?>" />
+				<input type="submit" name="add_tags" value="Add tags" />
+				</form>
 			</div>
 			<?php if( $item->location->total() > 0): ?>
 			<div id="item-location">
