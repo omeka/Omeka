@@ -219,6 +219,19 @@ if (@$saved['Item']['type_id']) {
 </fieldset>
 
 <fieldset>
+	<legend>Collection</legend>
+	<?php
+			$_form->select(	array(	
+						'name'	=> 'Item[collection_id]',
+						'id'	=> 'collection_id' ),
+						$__c->collections()->all( 'array' ),
+						@$saved['Item']['collection_id'],
+						'collection_id',
+						'collection_name' );
+	?>
+</fieldset>
+
+<fieldset>
 	<legend>Item History</legend>
 	<label class="readonly" for="item_added">Date item added (read only)</label>
 
