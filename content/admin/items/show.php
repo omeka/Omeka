@@ -121,16 +121,7 @@ Make Public			<?php endif; ?>
 		<input type="hidden" name="item_id" value="<?php echo $item->getId(); ?>" />
 		</form>
 		
-		<div id="item-contributor-info">
-			<?php if( $item->contributor->total() > 0 ): ?>
-			<h3>Contributor: <a href="<?php echo $_link->to( 'contributors', 'show' ) . $item->contributor->contributor_id; ?>/"><?php echo $item->contributor->getName(); ?></a></h3>
-			<p><strong>Gender:</strong> <span id="contributor_gender"><?php echo $item->contributor->contributor_gender; ?></span></p>
-			<p><strong>Race:</strong> <span id="contributor_race"><?php echo $item->contributor->contributor_race; ?></span></p>
-			<p><strong>Occupation:</strong> <span id="contributor_occupation"><?php echo $item->contributor->contributor_occupation; ?></span></p>
-		</div>
-		
 		<div id="item-other-meta">
-		<?php endif; ?>
 		
 		<?php if( $item->collection_id ): ?>
 		<h2>Collection: <a href="<?php echo $_link->to( 'items', 'all' ) . '?collection='.$item->collection_id; ?>"><?php echo $__c->collections()->findById( $item->collection_id )->collection_name;?></a></h2>

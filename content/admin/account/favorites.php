@@ -40,8 +40,7 @@ $result = $__c->accounts()->getMyFavorites();
 <?php
 	foreach( $result['objects'] as $item ):
 	$item->getFilesWithThumbnails()
-		   ->getTypeMetadata()
-		   ->getContributor();
+		   ->getTypeMetadata();
 ?>
 <div id="item-<?php echo $item->item_id; ?>" class="item">
 	<div class="item-title">

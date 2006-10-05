@@ -97,15 +97,6 @@ class UsersController extends Kea_Action_Controller
 		$user->user_institution = self::$_request->getProperty( 'user_institution' );
 		
 		$user->save();
-		// Update associated contributor
-		if( $contributor = @$user->getContributor() )
-		{
-			$contributor->contributor_first_name = $user->user_first_name;
-			$contributor->contributor_last_name = $user->user_last_name;
-			$contributor->save();
-		}
-
-		
 		
 		if (self::$_request->getProperty( 'old_password' ))
 		{
@@ -171,7 +162,6 @@ class UsersController extends Kea_Action_Controller
 			}
 			
 			if (!@$user->user_permission_id) $user->user_permission_id = 50;
-			if (!@$user->user_contributor_id) $user->user_contributor_id = NULL;
 
 			if( $this->validates( $user ) ) {
 				$password = $user->setRandomPassword(10);
@@ -217,7 +207,6 @@ class UsersController extends Kea_Action_Controller
 			}
 			
 			$user->user_permission_id = 50;
-			$user->user_contributor_id = NULL;
 			if( $this->validates( $user ) ) {
 				$password = $user->setRandomPassword(10);
 				$user->user_active = 1;
@@ -355,7 +344,6 @@ class UsersController extends Kea_Action_Controller
 			$user = $this->findById($user_id);
 		}
 
-		if( empty($user->contributor_id) ){$user->contributor_id = 'NULL';} 
 		$user->user_password = sha1($new);
 		$user->save();
 		self::$_session->flash( 'User password has been changed successfully.');

@@ -17,7 +17,6 @@ class File extends Kea_Domain_Model
 	public $file_additional_creator;
 	public $file_format;
 	public $item_id;
-	//public $contributor_id;
 	
 	public $file_transcriber;
 	public $file_producer;
@@ -105,7 +104,7 @@ class File extends Kea_Domain_Model
 		}		
 	}
 	
-	public static function add( $obj_id = null, $contributor_id = null, $file_form_name = null, $file_info_form = null )
+	public static function add( $obj_id = null, $file_form_name = null, $file_info_form = null )
 	{
 		
 		// Bump up memory allocated to PHP so there's space to manipulate big files
@@ -179,10 +178,6 @@ class File extends Kea_Domain_Model
 												'file_thumbnail_name'		=> self::createImage('thumbnail', $new_path, null, THUMBNAIL_SIZE ) );
 				
 						$file = new File( $file_array );
-						if( $contributor_id )
-						{
-							$file->contributor_id = $contributor_id;
-						}
 						if( $obj_id )
 						{
 							$file->save();

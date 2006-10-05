@@ -11,7 +11,6 @@ class User extends Kea_Domain_Model
 	public $user_institution;
 	public $user_permission_id = 50;	// If by some random error a user is created they are public.
 	public $user_active;
-	public $contributor_id;
 	
 	private $nonsha1_password;
 	
@@ -47,11 +46,6 @@ class User extends Kea_Domain_Model
 	public function getEmail()
 	{
 		return $this->user_email;
-	}
-	
-	public function getContributorID()
-	{
-		return $this->contributor_id;
 	}
 	
 	/* Generate password. (i.e. jachudru, cupheki) */
@@ -102,24 +96,6 @@ class User extends Kea_Domain_Model
 
 		mail( $this->getEmail(), $title, $message, $header);
 		return true;
-	}
-	
-	public function isContributor()
-	{
-		if( !empty( $this->contributor_id ) )
-		{
-			return true;
-		}
-		return false;
-	}
-	
-	public function getContributor()
-	{
-		$cont_mapper = new Contributor_Mapper;
-		$contributors = $cont_mapper->find()
-									->where( 'contributor_id = ?', $this->contributor_id )
-									->execute();
-		return $contributors->getObjectAt(0);
 	}
 	
 }

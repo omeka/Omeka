@@ -117,9 +117,7 @@ class ItemsController extends Kea_Action_Controller
 		
 		if ($obj->item_id):
 			$obj->getTypeMetadata()
-				->getCreator()
 				->getLocation()
-				->getContributor()
 				->getTags()
 				->getFiles();					
 			return $obj;
@@ -184,10 +182,6 @@ class ItemsController extends Kea_Action_Controller
 		
 		if( self::$_request->getProperty( 'featured' ) ) {
 			$select->where( 'items.item_featured = ?', self::$_request->getProperty( 'featured' ) );
-		}
-		
-		if( self::$_request->getProperty( 'contributor' ) ) {
-			$select->where( 'items.contributor_id = ?', self::$_request->getProperty( 'contributor' ) );
 		}
 		
 		if( $tags = self::$_request->getProperty( 'tags' ) )
@@ -265,10 +259,6 @@ class ItemsController extends Kea_Action_Controller
 	
 	/**
 	 * Filters items based on user access permission
-	 *
-	 * If the user is not an admin, this function will filter items where the contributor has not given consent,
-	 * has not given permission to post the item (NOTE [KBK]: Current configuration only checks for Admin privileges, 
-	 * we need to reconfigure so that researcher-level users will also be able to access the archives)
 	 *
 	 * @param Kea_DB_Select Select Item containing the parameters for selecting item(s) from the database 
 	 * @return Kea_DB_Select The select item with permission-based filtering
@@ -356,7 +346,6 @@ class ItemsController extends Kea_Action_Controller
 								'type_id'					=> $item->type_id,
 								'collection_id'					=> $item->collection_id,
 								'item_language'				=> $item->item_language,
-								//'contributor_id'				=> $item->contributor_id,
 								'item_publisher'				=> $item->item_publisher,
 								'item_rights'					=> $item->item_rights,
 								'item_date'					=> $item->item_date,
@@ -382,18 +371,6 @@ class ItemsController extends Kea_Action_Controller
 				$item_a['item_language'] = $item->item_language;
 				$sudo['item_language_other'] = null;
 			}
-/*			
-			if( $item->creator_id != $item->contributor_id )
-			{
-				$sudo['creator'] = 'no';
-				$sudo['creator_other'] = $item->creator_other;
-			}
-			else
-			{
-				$sudo['creator'] = 'yes';
-				$sudo['creator_other'] = null;
-			}
-*/
 			
 			$location_a = array(	'address'	=> $item->location->address,
 									'zipcode'	=> $item->location->zipcode,
@@ -417,92 +394,6 @@ class ItemsController extends Kea_Action_Controller
 
 		$item = new Item( self::$_request->getProperty( 'Item' ) );
 		
-		// Else, try to match contributor by logged-in ID
-		// If the item's contributor ID is not set, then try to grab contributor info from the form.
-		// make a new contributor if its unique, otherwise find the pre-existing one, then take the ID
-		// from the one it found and attach that to the item.  If that doesn't work, then we try to get
-		// or make new contributor info from the user who is logged in [JMG addition]  
-		//If the item's contributor ID is still null, then just go ahead and set it to 'NULL' string
-/*
-		if( empty($item->contributor_id) )
-		{
-			if( self::$_request->getProperty('item_add') )
-			{
-				if( self::$_request->getProperty('Contributor' ) )
-				{
-					$contributor = new Contributor( self::$_request->getProperty( 'Contributor' ) );
-	
-					$email = $contributor->contributor_email;
-					if( $this->validates($contributor) )
-					{
-						if( $contributor->uniqueNameEmail() )
-						{
-							$contributor->save();
-						}
-						elseif(!empty($email))
-						{
-							$contributor = $contributor->findUnique();
-						}
-					
-					}
-					if( !empty($contributor->contributor_id) )
-					{
-						$item->contributor_id = $contributor->contributor_id;
-					}					
-				}
-				elseif ( $user = self::$_session->getUser() )
-          		{   
-	              // If the user has a contributor ID attached, then hand it to the item
-	              	if ($contributor = $user->getContributor())
-	              	{
-	                   $item->contributor_id = $user->contributor_id;
-	              	}
-	              // If the user doesn't have a contributor ID attached, make a new one
-	            	else
-	             	{
-	                   $contributor = new Contributor();
-	                   $contributor->contributor_first_name = $user->user_first_name;
-	                   $contributor->contributor_last_name = $user->user_last_name;
-	                   $contributor->contributor_email = $user->user_email;
-					   $contributor->contributor_contact_consent = 'no';
-						if( $contributor->validates() )
-						{
-		                   $contributor->save();
-
-		                   // Attach the new contributor to the logged-in user
-		                   $user->contributor_id = $contributor->contributor_id;
-		                   $user->save();                   
-
-		                   // Attach the new contributor to the new item
-		                   $item->contributor_id = $user->contributor_id;							
-						}
-
-	               }
-          		}
-			}
-	        
-			if( empty($item->contributor_id) )
-			{
-				$item->contributor_id = 'NULL';
-			}
-		}
-*/		
-/*
-		if( self::$_request->getProperty( 'creator' ) == 'yes' && !empty( $item->contributor_id ) )
-		{
-			$item->creator_id = $item->contributor_id;
-		}
-		elseif( self::$_request->getProperty( 'creator_other' ) )
-		{
-			$item->creator_id = null;
-			$item->creator_other = self::$_request->getProperty( 'creator_other' );
-		}
-		else
-		{
-			$item->creator_id = null;
-			$item->creator_other = null;
-		}
-*/		
 		if( $item->item_language == 'other' && self::$_request->getProperty('item_language_other') )
 		{
 			$item->item_language = self::$_request->getProperty('item_language_other');
@@ -615,7 +506,7 @@ class ItemsController extends Kea_Action_Controller
 			}
 		
 		
-			$files = File::add( $item->getId(), $item->contributor_id, 'itemfile', self::$_request->getProperty('File') );
+			$files = File::add( $item->getId(), 'itemfile', self::$_request->getProperty('File') );
 		
 			$item->save();
 		}

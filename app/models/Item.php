@@ -29,24 +29,12 @@ class Item extends Kea_Domain_Model
 	// Collection data
 	public $collection_id;
 	
-	// Contributor data
-	// Contributor system is being removed/revised in future revisions [KBK]
-	//public $contributor_id;
-	
-	//public $creator_id;
-	
-	public $creator_other;
-	
 	// Type <=> KJVObjectType data (same thing)
 	public $type_id;
 	
 	public function __construct( $array = null )
 	{
 		parent::__construct( $array );
-		if( empty( $this->contributor_id ) )
-		{
-			$this->contributor_id = null;
-		}
 		
 		if( empty( $this->type_id ) )
 		{
@@ -133,18 +121,6 @@ class Item extends Kea_Domain_Model
 	public function getLocation()
 	{
 		$this->location = self::getMapper( 'Location' )->findByItem( $this->getId() );
-		return $this;
-	}
-	
-	public function getContributor()
-	{
-		$this->contributor = self::getMapper( 'Contributor' )->findById( $this->contributor_id );
-		return $this;
-	}
-	
-	public function getCreator()
-	{
-		$this->creator = self::getMapper( 'Contributor' )->findById( $this->creator_id );
 		return $this;
 	}
 	
@@ -249,7 +225,7 @@ class Item extends Kea_Domain_Model
 	public function getCitation() 
 	{
 		$cite = '';
-		$cite .= $this->contributor->getName();
+		$cite .= $this->item_creator;
 		if ($cite != '') $cite .= ', ';
 		$cite .= ($this->item_title) ? '"'.$this->item_title.'." ' : '"Untitled." ';
 		$cite .= '<em>'.INFO_TITLE.'</em>, ';

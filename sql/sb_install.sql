@@ -60,15 +60,6 @@ CREATE TABLE items (
 	# Additional creator info
 	item_additional_creator	text		NOT NULL,
 	
-	# Contributor
-	#contributor_id				int(11)		UNSIGNED NULL,
-	
-	# Creator
-	#creator_id					int(11)		UNSIGNED NULL,
-	
-	# Creator other
-	#creator_other				text		NOT NULL,
-	
 	# Source
 	collection_id				int(11)		UNSIGNED NULL,
 	
@@ -90,8 +81,6 @@ CREATE TABLE items (
 	item_public			BOOL 		NOT NULL DEFAULT '0', 
 	PRIMARY KEY	(item_id),
 	INDEX		(type_id),
-	#INDEX		(contributor_id),
-	#INDEX		(creator_id),
 	INDEX		(collection_id),
 	INDEX		(user_id)
 
@@ -180,40 +169,6 @@ CREATE TABLE metatext (
 	
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Item Contributors
---
-DROP TABLE IF EXISTS contributors;
-CREATE TABLE contributors (
-	contributor_id						int(11)								UNSIGNED NOT NULL auto_increment,
-	contributor_first_name				varchar(100)						NOT NULL,
-	contributor_middle_name				varchar(100)						NOT NULL,
-	contributor_last_name				varchar(100)						NOT NULL,
-	contributor_email					varchar(100)						NOT NULL,
-	contributor_phone					varchar(40)							NOT NULL,
-	contributor_birth_year				int(4)								NOT NULL,
-	contributor_gender					enum( 'male', 'female', 'unknown' )	default 'unknown',
-	contributor_race					enum( 'Asian/Pacific', 'Islander', 'African American', 'Hispanic', 'Native American / Indian', 'White', 'Other', 'unknown' )	default 'unknown',
-	contributor_race_other				tinytext							NOT NULL,
-	contributor_contact_consent			enum( 'yes', 'no', 'unknown' )		default 'unknown',
-
-	contributor_fax						varchar(14)		NOT NULL,
-	contributor_address					varchar(100)	NOT NULL,
-	contributor_city					varchar(16)		NOT NULL,
-	contributor_state					varchar(16)		NOT NULL,
-	contributor_zipcode					varchar(10)		NOT NULL,
-	contributor_occupation				varchar(255)	NOT NULL,
--- Specific to HDMB, remove if necessary
-	contributor_institution				varchar(255)    NOT NULL,
-	PRIMARY KEY (contributor_id)
-
-) ENGINE=innodb DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
-
 -- 
 -- Table structure for table collections
 -- 
@@ -260,7 +215,6 @@ CREATE TABLE files (
 
 #	Dublin core referenced in other tables
 	item_id					int(11)		UNSIGNED NULL,
-	#contributor_id				int(11)		UNSIGNED NULL,
 
 #	File preservation and digitization metadata
 	file_transcriber			text	NOT NULL,
@@ -294,7 +248,6 @@ CREATE TABLE files (
   PRIMARY KEY  (file_id),
 	INDEX		(item_id),
 	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE ON UPDATE CASCADE
-	#FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE
 
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -319,7 +272,6 @@ CREATE TABLE users (
   user_institution		text		NOT NULL,
   user_permission_id	int(11)		UNSIGNED NOT NULL default '100',
   user_active			int(1)		UNSIGNED NOT NULL default '0',
-	contributor_id		int(11)		UNSIGNED NULL,
 
   PRIMARY KEY  (user_id)
 
@@ -389,7 +341,6 @@ FOR EACH ROW
 
 
 ALTER TABLE items ADD CONSTRAINT `type_key` FOREIGN KEY (type_id) REFERENCES types(type_id) ON DELETE SET NULL ON UPDATE CASCADE;
-#ALTER TABLE items ADD CONSTRAINT `contributor_key` FOREIGN KEY (contributor_id) REFERENCES contributors(contributor_id) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE items ADD CONSTRAINT `collection_key` FOREIGN KEY (collection_id) REFERENCES collections(collection_id) ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE items ADD CONSTRAINT `user_key` FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE;
 

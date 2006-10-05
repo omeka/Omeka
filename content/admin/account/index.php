@@ -23,8 +23,7 @@ $max = $t->getMaxCount( self::$_session->getUser()->getId() );
 		<?php
 			foreach( $mine['objects'] as $item ):
 			$item->getFilesWithThumbnails()
-			   	   ->getTypeMetadata()
-			   	   ->getContributor();
+			   	   ->getTypeMetadata();
 		?>
 			<div id="item-<?php echo $item->item_id; ?>" class="item">
 				<div class="item-title">
