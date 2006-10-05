@@ -30,8 +30,8 @@ $result = $__c->items()->paginate();
 		<select name="status">
 			<option value="">Show by status:&nbsp;</option>
 			<option value="">All</option>
-			<option value="notyet" <?php if( self::$_request->getProperty('status') == "notyet"){ echo ' selected '; } ?>>Not Pubic</option>
-			<option value="approved" <?php if( self::$_request->getProperty('status') == "approved"){ echo ' selected '; } ?>>Public</option>
+			<option value="0" <?php if( self::$_request->getProperty('status') == "0"){ echo ' selected '; } ?>>Not Public</option>
+			<option value="1" <?php if( self::$_request->getProperty('status') == "1"){ echo ' selected '; } ?>>Public</option>
 
 		</select>
 		<label for="featured">Featured</label>

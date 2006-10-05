@@ -221,6 +221,12 @@ class ItemsController extends Kea_Action_Controller
 		$select->group( 'items.item_id' );
 		$this->applyPermissions( $select );
 
+		$status = self::$_request->getProperty( 'status' );
+		if( $status === '0' || $status === '1')
+		{
+			$select->where( 'items.item_public = ?', $status );
+		}
+		
 		return $mapper->paginate( $select, $page, $num_items, 'itemsTotal' );
 	}
 	
