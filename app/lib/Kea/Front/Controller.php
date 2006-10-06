@@ -26,6 +26,7 @@ class Kea_Front_Controller extends Kea_Controller_Base
 	 */
 	private static $_instance;
 
+	//private static $_plugin_manager;
 	/**
 	 * @var Kea_Controller_Router_Interface object
 	 */
@@ -92,9 +93,8 @@ class Kea_Front_Controller extends Kea_Controller_Base
 		self::$_session = new Kea_Session;
 
 		// Not yet implemented
-		//$this->_plugins = new Kea_Plugin_Manager();
-		
-		// Typesafe these so they can be swapped out later if needed
+		self::$_plugin_manager = Kea_Plugin_Manager::run();
+
 		$this->_setRouter( new Kea_Template_Router )
 			 ->_setViewController( new Kea_Template_Controller );
 		

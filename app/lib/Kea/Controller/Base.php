@@ -9,6 +9,8 @@ abstract class Kea_Controller_Base
 	
 	protected static $_route;
 	
+	protected static $_plugin_manager;
+	
 	public function request()
 	{
 		return self::$_request;
@@ -23,7 +25,11 @@ abstract class Kea_Controller_Base
 	{
 		return self::$_route;
 	}
-
+	
+	public function plugins()
+	{
+		return (self::$_plugin_manager) ? self::$_plugin_manager : null;
+	}
 }
 
 ?>

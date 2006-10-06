@@ -17,16 +17,36 @@ abstract class Kea_Action_Controller extends Kea_Controller_Base
 			$this->beforeFilter( $method, $this );
 
 			$result = call_user_func_array( array( $this, $method ), $args );
-		
-			$this->afterFilter( $result );
-		
-			return $result;
-		
-		} else {
-			throw new Kea_Action_Exception(
-				'The method ' . $method . ' doesn\'t exist in the controller ' . get_class( $this ) . '.'
-			);
+
 		}
+		if( $plugins = self::plugins() )
+		{
+			
+			$method = ltrim($method, '_');
+	
+			$msg = new Kea_Plugin_Message();
+			$msg->setController( get_class($this) );
+			$msg->addMethod($method, $args);
+			$msg->setResult(@$result);
+			
+			$msg = $plugins->notify( $msg );
+			
+			$newResult = $msg->getResult();
+			
+			$this->afterFilter( $newResult );
+			
+			return ($newResult) ? $newResult : @$result;
+		}
+		else
+		{
+			$this->afterFilter( $result );
+			
+			return $result;
+		}
+
+		throw new Kea_Action_Exception(
+			'The method ' . $method . ' doesn\'t exist in the controller ' . get_class( $this ) . '.'
+		);
 	}
 	
 	protected function beforeFilter( &$method, &$args )
