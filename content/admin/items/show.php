@@ -1,51 +1,6 @@
 <?php
 // Layout: show;
-
-//This replaces the javascript/Ajax that used to do this stuff
-
-//Tag adding
-$item_id = self::$_request->getProperty('item_id');
-$user_id = self::$_session->getUser()->getId();
-if ( self::$_request->getProperty('add_tags') )
-{
-	$tag_string = self::$_request->getProperty('new_tags');
-	$__c->tags()->addMyTags($tag_string, $item_id, $user_id);
-}
-//Tag removal
-foreach( array_keys($_POST) as $key )
-{
-	if ( strstr($key, 'remove_mytag') )
-	{
-		$remove_id = str_replace('remove_mytag_', '', $key);
-		$__c->tags()->deleteMyTag( $remove_id, $item_id, self::$_session->getUser()->getId() );
-	} 
-	elseif ( strstr($key, 'remove_tag') )
-	{
-		$__c->admin()->protect();
-		$remove_id = str_replace('remove_tag_', '', $key);
-		$__c->tags()->deleteAssociation( $remove_id, $item_id );
-	}
-}
-
-$item = $__c->items()->findById();
-
-//Favorite
-if ( !empty($_POST['mark_favorite']) )
-{
-	$item->addRemoveFav( $user_id );
-}
-//Public
-elseif ( !empty($_POST['mark_public']) )
-{
-	$item->flip( 'item_public' );
-}
-//Featured
-elseif ( !empty($_POST['mark_featured']) )
-{
-	$item->flip( 'item_featured' );
-}
-
-
+$item = $__c->items()->show();
 
 include( 'subnav.php' );
 ?>

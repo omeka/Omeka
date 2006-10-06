@@ -741,6 +741,75 @@ class ItemsController extends Kea_Action_Controller
 		}
 		
 	}
+	
+	protected function _show()
+	{
+		//This replaces the javascript/Ajax that used to do this stuff
+
+		//Tag adding
+		$item_id = self::$_request->getProperty('item_id');
+		$user_id = self::$_session->getUser()->getId();
+		if ( self::$_request->getProperty('add_tags') )
+		{
+			$tag_string = self::$_request->getProperty('new_tags');
+			Tags::addMyTags($tag_string, $item_id, $user_id);
+		}
+		//Tag removal
+		foreach( array_keys($_POST) as $key )
+		{
+			if ( strstr($key, 'remove_mytag') )
+			{
+				$remove_id = str_replace('remove_mytag_', '', $key);
+				Tags::deleteMyTag( $remove_id, $item_id, self::$_session->getUser()->getId() );
+			} 
+			elseif ( strstr($key, 'remove_tag') )
+			{
+				$this->protect();
+				$remove_id = str_replace('remove_tag_', '', $key);
+				Tags::deleteAssociation( $remove_id, $item_id );
+			}
+		}
+		
+		$item = $this->findById();
+
+		//Favorite
+		if ( !empty($_POST['mark_favorite']) )
+		{
+			$item->addRemoveFav( $user_id );
+		}
+		//Public
+		elseif ( !empty($_POST['mark_public']) )
+		{
+			$item->flip( 'item_public' );
+		}
+		//Featured
+		elseif ( !empty($_POST['mark_featured']) )
+		{
+			$item->flip( 'item_featured' );
+		}
+		
+		return $item;
+	}
+	
+	//Copied from admin controller
+	private function protect()
+	{
+		// If you're not an admin you have to sign in
+		if( !self::$_session->getUser()
+			|| self::$_session->getUser()->getPermissions() > 30 ) {
+			issetor( self::$_route['directory'], null );
+			if( self::$_route['template'] != 'login' || self::$_route['directory'] != null ) {
+				$this->redirect( WEB_ROOT . ADMIN_THEME_DIR . DS . 'login' );
+			}
+		}
+		
+		// If you are an admin, don't visit the login page dummy
+		if( self::$_route['template'] == 'login'
+			&& self::$_session->getUser()
+			&& self::$_session->getUser()->getPermissions() <= 30 ) {
+				$this->redirect( WEB_ROOT . ADMIN_THEME_DIR . DS );
+		}
+	}
 // End class
 }
 
