@@ -50,11 +50,23 @@ class UsersController extends Kea_Action_Controller
 
 	private function commitForm()
 	{
+		$adapter = Kea_DB_Adapter::instance();
+		$adapter->beginTransaction();
+		
 		$user = new User( self::$_request->getProperty( 'user' ) );
 		if( $this->validates( $user ) ) {
-			return $user->save();
+			$user->save();
 		}
-		return false;
+		//print_r($_REQUEST);
+		if( count( $this->validationErrors ) > 0 ) {
+			self::$_session->setValue( 'user_form_saved', $_REQUEST );
+			$adapter->rollback();
+			return false;
+		} else {
+			self::$_session->setValue( 'user_form_saved', null );
+			$adapter->commit();
+			return $user;
+		}
 	}
 
 	protected function _all( $type = 'object' , $sort = null)
@@ -116,7 +128,6 @@ class UsersController extends Kea_Action_Controller
 	protected function _adminEdit()
 	{
 		if( self::$_request->getProperty( 'user_edit' ) ) {
-			
 			if( $this->commitForm() ) {
 				$this->redirect( BASE_URI . DS . 'users' . DS . 'all');
 				return;

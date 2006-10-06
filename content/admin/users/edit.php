@@ -1,6 +1,7 @@
 <?php
 // Layout: default;
 $user = $__c->users()->adminEdit();
+$saved = self::$_session->getValue('user_form_saved');
 ?>
 <?php include( 'subnav.php' ); ?>
 <br/>
@@ -11,7 +12,7 @@ $user = $__c->users()->adminEdit();
 
 <form method="post" action="<?php echo $_link->to('users', 'edit'); ?><?php if (@$user->user_id) echo $user->user_id; ?>">
 
-<input type="hidden" name="user[user_id]" value="<?php echo $user->user_id; ?>">
+<input type="hidden" name="user[user_id]" value="<?php echo issetor($saved['user']['user_id'], $user->user_id); ?>">
 
 <?php include( 'form.php' ); ?>
 

@@ -3,8 +3,10 @@
 <?php
 	$_form->text( array(	'id'	=> 'user_name',
 	 						'name'	=> 'user[user_username]',
-	 						'value'	=> $user->user_username,
+	 						'value'	=> notemptyor($saved['user']['user_username'], @$user->user_username),
 	 						'size' => '23' ) );
+	
+	$_form->displayError( 'User', 'user_username', $__c->users()->validationErrors() );
 ?>
 </fieldset>
 
@@ -13,8 +15,10 @@
 <?php
 	$_form->text( array(	'id'	=> 'user_first_name',
 	 						'name'	=> 'user[user_first_name]',
-	 						'value'	=> $user->user_first_name,
+	 						'value'	=> notemptyor($saved['user']['user_first_name'], @$user->user_first_name),
 	 						'size' => '23' ) );
+	
+	$_form->displayError( 'User', 'user_user_first', $__c->users()->validationErrors() );
 ?>
 </fieldset>
 
@@ -23,8 +27,10 @@
 <?php
 	$_form->text( array(	'id'	=> 'user_last_name',
 	 						'name'	=> 'user[user_last_name]',
-	 						'value'	=> $user->user_last_name,
+	 						'value'	=> notemptyor($saved['user']['user_first_name'], @$user->user_last_name),
 	 						'size' => '23' ) );
+	
+	$_form->displayError( 'User', 'user_last_name', $__c->users()->validationErrors() );
 ?>
 </fieldset>
 
@@ -33,8 +39,10 @@
 <?php
 	$_form->text( array(	'id'	=> 'user_institution',
 	 						'name'	=> 'user[user_institution]',
-	 						'value'	=> $user->user_institution,
+	 						'value'	=> notemptyor($saved['user']['user_institution'], @$user->user_institution),
 	 						'size' => '23' ) );
+	
+	$_form->displayError( 'User', 'user_institution', $__c->users()->validationErrors() );
 ?>
 </fieldset>
 
@@ -43,8 +51,10 @@
 <?php
 	$_form->text( array(	'id'	=> 'user_email',
 	 						'name'	=> 'user[user_email]',
-	 						'value'	=> $user->user_email,
+	 						'value'	=> notemptyor($saved['user']['user_email'], @$user->user_email),
 	 						'size' => '23' ) );
+	
+	$_form->displayError( 'User', 'user_email', $__c->users()->validationErrors() );
 ?>
 </fieldset>
 
@@ -59,8 +69,9 @@
 								'20'	=> 'Researcher',
 								'10'	=> 'Admin',
 								'1'	=> 'Superuser' ),
-						$user->user_permission_id	);
+						notemptyor($saved['user']['user_permission_id'], @$user->user_permission_id)	);
+		
+		$_form->displayError( 'User', 'user_permission_id', $__c->users()->validationErrors() );
 	?>
-	
-	
+	<input type="checkbox" name="">
 </fieldset>
