@@ -160,7 +160,6 @@
 										@$saved['Item']['item_coverage'] );
 			?>
 			<label for="item_rights">Rights</label>
-			<p>Rights binding the item or legal conditions pertaining to the item.</p>
 			<?php
 				$_form->textarea( 	array(	'rows'	=> '8',
 											'cols'	=> '60',
@@ -170,7 +169,7 @@
 			?>
 
 
-
+<?php /*
 		<label for="tags">Tags</label>
 		<p class="instructionText">Words or phrases, separated by commas. (eg. katrina, south port, levy)</p>
 		<?php
@@ -179,10 +178,10 @@
 										'id'	=> 'tags',
 										'name'	=> 'tags' ),
 										@$saved['tags'] );
-		?>
+		?> */ ?>
 </fieldset>
 <fieldset>
-	<legend>Format Metadata</legend>
+	<legend>Type Metadata</legend>
 	<label for="type_id">Item Type</label>
 	<?php
 		$_form->select( array(	'name'		=> 'Item[type_id]',

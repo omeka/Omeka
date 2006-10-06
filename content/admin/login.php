@@ -16,6 +16,7 @@ $__c->admin()->protect();
 <body>
 <div id="topspacer"></div>
 <div id="login">
+	<h1>Sitebuilder</h1>
 	<?php if( !$user = self::$_session->getUser() ): ?>
 	<form method="post" action="login">
 		<fieldset id="login_form">

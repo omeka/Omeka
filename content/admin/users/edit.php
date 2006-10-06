@@ -21,8 +21,7 @@ $saved = self::$_session->getValue('user_form_saved');
 </form>
 
 <?php if( self::$_session->getUser()->getPermissions() <= 10 ): ?>
-<br/>
-<br/>
+
 <form method="post" action="<?php echo $_link->to('users', 'delete'); ?>" onsubmit="return confirm('Are you sure you want to delete this user?')">
 	<input type="hidden" name="user_id" value="<?php echo $user->user_id; ?>"></input>
 	<input type="Submit" value="Delete this User -&gt;"></input>

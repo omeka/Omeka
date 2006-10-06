@@ -11,7 +11,7 @@ $collections = $__c->collections()->all( 'object' );
 	<th scope="col">Collection Name</th>
 	<th scope="col">Collector</th>
 	<th scope="col">Description</th>
-	<th scope="col">View Items in Collection</td>
+	<th scope="col">View Items</td>
 	</thead>
 	<tbody>
 

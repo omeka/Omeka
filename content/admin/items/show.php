@@ -79,14 +79,17 @@ Make Public			<?php endif; ?>
 		<div id="item-other-meta">
 		
 		<?php if( $item->collection_id ): ?>
-		<h2>Collection: <a href="<?php echo $_link->to( 'items', 'all' ) . '?collection='.$item->collection_id; ?>"><?php echo $__c->collections()->findById( $item->collection_id )->collection_name;?></a></h2>
+		<h3>Collection</h3>
+		<ul>
+			<li><a href="<?php echo $_link->to( 'items', 'all' ) . '?collection='.$item->collection_id; ?>"><?php echo $__c->collections()->findById( $item->collection_id )->collection_name;?></a></li>
+		</ul>
 		<?php endif; ?>
 
 		<?php if( $item->files->total() > 0 ): ?>
 			<h3>Files:</h3>
 			<?php foreach( $item->files as $file ): ?>
-				<?php if( $file->file_thumbnail_name ): ?>
-				<a href="<?php echo $_link->to('files', 'show') . $file->getId(); ?>"><?php $_html->thumbnail( $file->file_thumbnail_name,
+				<?php if( $file->file_fullsize_filename ): ?>
+				<a href="<?php echo $_link->to('files', 'show') . $file->getId(); ?>"><?php $_html->thumbnail( $file->file_fullsize_filename,
 									array(	'class' => 'thumbnail',
 									 		'alt'	=> $file->file_description,
 									 		'title'	=> $file->file_title,

@@ -1,7 +1,7 @@
 <fieldset>
 	<legend>General Type Information</legend>
 <label for="type_name">Type Name:</label>
-	<p class="instructionText">Be descriptive yet concise; no punctuation.</p>
+	<?php /*<p class="instructionText">Be descriptive yet concise; no punctuation.</p> */ ?>
 	<?php
 		$_form->text(	array(	'size'	=> '20',
 									'value'	=> issetor($saved['type']['type_name'], @$type->type_name ),
@@ -11,7 +11,7 @@
 	?>
 
 <label for="type_description">Type Description:</label>
-	<p class="instructionText">Describe the item type and enter any further description/instruction concerning default item metadata.</p>
+	<?php /*<p class="instructionText">Describe the item type and enter any further description/instruction concerning default item metadata.</p> */ ?>
 	<?php 
 		$_form->textarea(	array(	'rows'	=> '4',
 									'cols'	=> '60',

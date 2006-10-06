@@ -25,7 +25,9 @@
 		<?php include( $content_for_layout ); ?>
 	</div>
 	<div id="footer">
-		<p>Developed by <a href="http://chnm.gmu.edu">CHNM</a></p>
+		<p>Developed by <a href="http://chnm.gmu.edu"><abbr title="Center for History and New Media">CHNM</abbr></a></p>
+		<p><a href="#">View Site</a></p>
+		
 	</div>
 </div>
 </body>

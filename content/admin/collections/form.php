@@ -21,4 +21,4 @@
 		 							'rows' => '4',
 									'cols' => '30' ), $collection->collection_collector );
 	?>
-	<p class="field-caption">Type in the name of the Collector(s). If there is more than one Collector, separate individuals by a comma.  Background information on each Collector should be entered in the "Contributors" table.</p>
+

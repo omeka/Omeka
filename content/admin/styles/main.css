@@ -1,27 +1,28 @@
-/* Generic styles
-------------------------------------------*/
+/* == Generic styles =======================*/
 
-*, html, body {margin:0; padding:0;}
+* {margin:0; padding:0;}
+body { margin: 0 auto; font: 62.5% "Lucida Grande", Helvetica, Arial, sans-serif; color: #555; padding-top: 20px; background: #e5e5e5; width: 96em;}
 
-body { margin: 0 auto; font: 62.5% Verdana,Helvetica, Arial, sans-serif; color: #555; padding-top: 20px;background: #BEE390; background: #e5e5e5; width: 96em;}
 h1,h2,h3,h4,h5,h6 {font-weight:normal;}
 h1 {font-size:2.4em;}
 h2 {font-size:2em; margin: 0.5em 0;}
-h3 {font-size:1.6em; font-family: "Century Gothic", Verdana, sans-serif; text-transform: lowercase;line-height: 1em; border-left: 1em solid #ddd; padding-left: 0.25em; margin: 1em 0 0.25em;}
+h3 {font-size:1.6em; text-transform: lowercase;line-height: 1em; border-left: 1em solid #ddd; padding-left: 0.25em; margin: 1em 0 0.25em;}
 h4 {font-size:1.5em;}
 h5 {font-size:1.3em; font-weight:bold;}
 h6 {font-size:1.3em; font-style:italic;}
+
 p,ul,ol,textarea {font-size: 1.3em;}
+ul,ol {list-style: none;}
+abbr,acronym {border: none; font-style: normal;}
 a:link, a:visited {color: #5A9433;}
 a:hover, a:active {color: #71B033;}
-ul,ol {list-style: none;}
 
-h1, h2,legend {font-family: "Century Gothic", sans-serif;}
+h1, h2, h3, legend {font-family: "Century Gothic", Futura, "Gill Sans", "Lucida Grande", Arial, Helvetica, sans-serif;}
 a img, :visited img {border: none;}
 
 .form-error { color: red; font-size: 1.2em;}
 
-table {font-size: 1.2em; width: 70em; margin: 0 1em 1em;}
+table {font-size: 1.2em; width: 76em; margin: 0 1em 1em;}
 th {text-align:left;padding: 1em;}
 thead {padding: 1em 0; background: #FFF09E;}
 td {text-align:left; padding: 1em; border-bottom: 1px solid #fff;}
@@ -60,27 +61,28 @@ textarea {height: 10em;font: 1.3em Verdana, sans-serif;}
 .inputReadOnly { background-color: #eee; cursor: none; border: 1px solid #ccc; padding: 4px;}
 
 select#featured {width:150px;}
-#editfile fieldset, #item-addedit fieldset {display: block;float: left;width: 30em; margin: 2em;}
+#editfile fieldset, #item-addedit fieldset {display: block;float: left;width: 26em; margin: 2em;}
 
 #item-limit label {display: none;}
 
-/* Page
---------------*/
+/* == Page =================================*/
 #page {width: 94em;display: block;float: left; padding: 1em;background: #fff;}
 
-/* Header 
------------------*/
+/* == Header ===============================*/
 #header {background:#8c3; padding: 2em 2em 0; border-bottom: 1em solid #DBF0C2;}
 #header h1 {margin-bottom: 1em; font-size: 3em; color: #fff; text-transform: uppercase;}
+
+/* View site link */
+.viewsite {display: block;float: right;}
+.viewsite a {display: block; float: right;width: 8em; font-size: 1.8em;padding: 0.25em 0; text-align: center;background: #63B025; color: #fff; text-decoration: none;}
+/* Main navigation styles */
 #navigation {padding: 0.5em 0;}
 #navigation a {text-decoration: none;padding: 0.5em 1em; color: #363;}
 #navigation a:link, #navigation a:visited {background: #A0D65C;}
 #navigation a:hover, #navigation a:active {background: #B8E085;}
-#navigation li.current a
- {background: #fff;}
+#navigation li.current a {background: #fff;}
 
-/* Content 
------------------*/
+/* == Content ================================*/
 #content {display: block;float: left; width: 94em;padding: 0;background: #fff;clear: both;}
 #primary, #secondary {display: block;}
 #primary {float: left; width: 45em;}
@@ -107,6 +109,9 @@ select#featured {width:150px;}
 
 a.mark {font-size: 1.5em; text-decoration: none;}
 #mark-favorite,#mark-featured,#mark-public {margin: 1em 0;}
+
+.citation {padding: 0.5em 0.25em;font-size: 1.3em; background:  #eee;}
+
 /* File view page */
 #image {display: block;float: right;}
 div.section dl {font-size: 1.3em; clear: both;display: block;float: left; width: 34em;padding: 0.5em 0; border-bottom: 1px dotted #ccc;}

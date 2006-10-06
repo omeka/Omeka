@@ -4,12 +4,6 @@ $data = $__c->users()->changePassword();
 ?>
 <?php include( 'subnav.php' ); ?>
 
-<style type="text/css" media="screen">
-/* <![CDATA[ */
-	#my-account-edit input {margin: 4px 0;}
-	#my-account-edit label {display:block;}
-/* ]]> */
-</style>
 
 <div class="container">
 <div id="my-account-edit">

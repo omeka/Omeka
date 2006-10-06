@@ -26,7 +26,7 @@ $saved = self::$_session->getValue( 'item_form_saved' );
 
 <fieldset>
 	<legend>Associated Files</legend>
-	<label>These are the associated files with this item</label>
+	<p>These are the associated files with this item:</p>
 	<ul class="filelist">
 	<?php foreach( $item->files as $file ): ?>
 		<li id="file-<?php echo $file->getId(); ?>"><?php echo $file->file_original_filename; ?><input type="submit" name="delete_file_<?php echo $file->getId(); ?>" value="Delete this file"></li>

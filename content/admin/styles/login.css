@@ -1,12 +1,15 @@
 *{ margin: 0;padding: 0; }
-html{ border-top: 6px solid #8c3;}
-body { margin: 0 auto; font: 62.5% "Century Gothic", Futura, Verdana, Helvetica, Arial, sans-serif; width: 40em; background: #fff;color: #555; }
+html{}
+body { margin: 0 auto; font: 62.5% "Century Gothic", Futura, Verdana, Helvetica, Arial, sans-serif; width: 40em; background: #e5e5e5;color: #555; }
+a:link, a:visited {color: #5A9433;}
+a:hover, a:active {color: #71B033;}
 
-#login {display:block; width: 38em; margin:10em auto; overflow: auto; padding: 1em; text-align: left; }
+h1 {font-weight: normal; font-size: 3em; padding: 0.25em;background: #8c3; color: #fff;}
+#login {display:block; width: 38em; margin:10em auto; overflow: auto; padding: 1em; text-align: left; background: #fff;}
 
-fieldset { margin: 1em; padding: 1em;border: 1px dotted #ccc; }
-legend {font-size: 2.8em; padding-left: 0.2em; padding-right: 0.2em; color: #38c;}
-label { font-size: 2em; color: #777; }
+fieldset { margin: 1em; padding: 1em; border: none; }
+legend {font-size: 2.4em; padding-left: 0.2em; padding-right: 0.2em; color: #8c3;}
+label { font-size: 2em; color: #777;}
 input { font-size: 2em; border: 1px solid #ccc; margin: 0.2em; padding: 0.2em; background: #f3f3f3;}
 label, input {display:block; margin: 0.6em 0.2em;}
 input:focus {background: #fff;}
