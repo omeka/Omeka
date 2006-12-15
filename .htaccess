@@ -3,10 +3,10 @@ php_flag zlib.output_compression On
 php_value zlib.output_compression_level 5
 
 # Sitebuilder
-<IfModule mod_rewrite.c>
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php [L]
-</IfModule>
+#<IfModule mod_rewrite.c>
+#RewriteEngine on
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule . index.php [L]
+#</IfModule>
 # End Sitebuilder

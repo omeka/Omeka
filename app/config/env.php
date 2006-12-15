@@ -8,17 +8,18 @@
 /**
  *	Set the class autoload env
  */
+/*
 function __autoload( $classname ) {
 	$path = str_replace( '_', DIRECTORY_SEPARATOR, $classname );
 	require_once( "$path.php" );
 }
+*/
 
 /**
  *	Handle uncaught exceptions by redirecting to a 404 page
  */
 function uncaught_exception_handler( $e ) {
 	$out = ob_get_contents();
-	ob_end_clean();
 	echo $out . $e->__toString();
 	/**
 	 * We can't include this call to the 404 page because that page runs 
@@ -29,7 +30,7 @@ function uncaught_exception_handler( $e ) {
 	exit();
 }
 
-date_default_timezone_set( 'America/New_York' );
+date_default_timezone_set('America/New_York');
 
 /**
  *	Sets the function for top level uncaught exceptions
