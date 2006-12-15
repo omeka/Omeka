@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @edited 10/13/06 n8agrin
+ */
+abstract class Kea_Controller_Action
+{	
+	protected $before_filters = array();
+	
+	protected $after_filters = array();
+	
+	protected $_response;
+	protected $_request;
+	
+	public $validationErrors = array();
+	
+	public function __construct()
+	{
+		$this->_response = Kea_Controller_Response::getInstance();
+		$this->_request = Kea_Request::getInstance();
+	}
+	
+	public function setResponse(Kea_Controller_Response $response)
+	{
+		$this->_response = $response;
+	}
+	
+	public function getResponse()
+	{
+		return $this->_response;
+	}
+	
+	public function beforeFilter(&$method, &$args)
+	{
+		foreach( $this->before_filters as $filter ) {
+			$filter->filter( $method, $args, $this );
+		}
+	}
+	
+	public function afterFilter(&$result)
+	{
+		foreach( $this->after_filters as $filter ) {
+			$filter->filter( $result, $this );
+		}
+	}
+	
+	protected function attachBeforeFilter(Kea_Filter $filter)
+	{
+		$this->before_filters[] = $filter;
+	}
+
+	protected function attachAfterFilter(Kea_Filter $filter)
+	{
+		$this->after_filters[] = $filter;
+	}
+
+
+	/**
+	 * This may need to be rethought.
+	 * It may need to actually just redirect to another controller,
+	 * action or template.
+	 * eg pass it an array('controller'=>'foo', 'action'=>'bar')
+	 */
+	public function redirect($redirect_to)
+	{
+		if (headers_sent()) {
+			throw new Kea_Action_Exception(
+				'Cannot redirect because output headers have already been sent.');
+			return;
+		}
+
+		header("Location: " . $redirect_to);
+
+		// This may cause issues with uncaught exceptions, but there should be no
+		// uncaught exceptions.
+		exit();
+	}
+	
+	public function validates(Kea_Domain_Model $object)
+	{
+		if($object->validates()) {
+			return true;
+		}
+		
+		$namespace = get_class( $object );
+		$errors = $object->getErrors();
+
+		foreach( $errors as $property => $error ) {
+			$this->validationErrors[$namespace][$property] = $error;
+		}
+		
+		return false;
+	}
+	
+	public function validationErrors()
+	{
+		return $this->validationErrors;
+	}
+	
+	public function addError( $namespace, $property, $error )
+	{
+		$this->validationErrors[$namespace][$property] = $error;
+	}
+	
+	protected function _forward($controller, $action)
+	{
+		$this->_request->addAction(
+			array('controller'=>$controller, 'action'=>$action));
+	}
+	
+		/*
+		public function __call ($method, $args)
+		{
+	echo 'GOT INTO THE CALL METHOD IN THE ACTION CONTROLLER!!';
+			$method = '_' . $method;
+
+			if (method_exists( $this, $method )) {
+
+				$this->beforeFilter( $method, $this );
+
+				$result = call_user_func_array( array( $this, $method ), $args );
+
+				$this->afterFilter( $result );
+
+				return $result;
+
+			} else {
+				throw new Kea_Action_Exception(
+					'The method ' . $method . ' doesn\'t exist in the controller ' . get_class( $this ) . '.'
+				);
+			}
+		}
+		*/
+	
+	
+}
+?>
