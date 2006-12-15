@@ -72,7 +72,7 @@ CREATE TABLE items (
 	item_coverage				text		NOT NULL,
 	
 	item_added				timestamp	NULL default NULL,
-	item_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP,
+	item_modified				timestamp	NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
 #	Item Featured
 	item_featured				int(1)		NOT NULL DEFAULT '0',
@@ -89,10 +89,6 @@ CREATE TABLE items (
 CREATE TRIGGER item_added BEFORE INSERT ON items
 FOR EACH ROW
 	SET NEW.item_added = NOW();
-
-CREATE TRIGGER item_modified BEFORE UPDATE ON items
-FOR EACH ROW
-	SET NEW.item_modified = NOW();
 
 DROP TABLE IF EXISTS itemsTotal;
 CREATE TABLE itemsTotal (
@@ -278,6 +274,28 @@ CREATE TABLE users (
   user_active			int(1)		UNSIGNED NOT NULL default '0',
 
   PRIMARY KEY  (user_id)
+
+) ENGINE=innodb DEFAULT CHARSET=utf8;
+
+--
+-- Geolocation
+--
+
+DROP TABLE IF EXISTS location;
+CREATE TABLE location(
+	location_id		int(11)			NOT NULL auto_increment,
+	item_id		int(11)			UNSIGNED NOT NULL,
+	latitude		double			NULL,
+	longitude		double			NULL,
+	address			varchar(255)	NOT NULL,
+	zipcode			varchar(10)		NOT NULL,
+	zoomLevel		varchar(40)		NOT NULL,
+	mapType			varchar(100)	NOT NULL,
+	cleanAddress	varchar(200)	NOT NULL,
+
+	PRIMARY KEY (location_id),
+	INDEX		(item_id),
+	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE ON UPDATE CASCADE
 
 ) ENGINE=innodb DEFAULT CHARSET=utf8;
 
