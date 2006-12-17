@@ -14,6 +14,8 @@ class Kea_Controller_Response
 	
 	private $_exception;
 	
+	private $_data;
+	
 	private function __construct() {}
 	private function __clone() {}
 	
@@ -47,6 +49,12 @@ class Kea_Controller_Response
 	public function addBody($text)
 	{
 		$this->_body .= $text;
+	}
+	
+	public function add($data)
+	{
+		$this->_data[] = $data;
+		return $this;
 	}
 	
 	public function setException(Exception $e)

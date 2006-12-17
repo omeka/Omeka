@@ -9,18 +9,10 @@ class Kea_Controller_Dispatcher
 
 	public function __construct()
 	{
-		$this->_controller_paths = (array) KEA_CONTROLLER_PATH;
-		/*
-		if (is_array($controller_path)) {
-			$this->_controller_paths = $controller_path;
-		}
-		else {
-			$this->_controller_paths = array(trim($controller_path, '/'));	
-		}
-		*/
+		$this->_controller_paths = (array) KEA_CONTROLLER_DIR;
 	}
 
-	public function route(Kea_Request $request)
+	public function route(Kea_Request $request, Kea_Controller_Response $response)
 	{
 		$next = $request->nextAction();
 		
@@ -50,9 +42,9 @@ class Kea_Controller_Dispatcher
 				$reflect->getMethod($action)->isPublic()) {
 					$controller = new $cName;
 					$controller->beforeFilter($action, $controller);
-					$controller->{$action}();
-					//$result = $controller->afterFilter($result);
-					//return $result;
+					$result = $controller->{$action}();
+					$result = $controller->afterFilter($result);
+					$response->add($result);
 			}
 			else {
 				throw new Kea_Router_Exception(

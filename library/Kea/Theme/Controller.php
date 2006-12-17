@@ -12,7 +12,7 @@ class Bar {
 class Kea_Theme_Controller
 {
 	private $_theme = KEA_THEME;
-	private $_themes_dir = KEA_THEME_PATH;
+	private $_themes_dir = KEA_THEME_DIR;
 	private $_output = array();
 	
 	public function __set($name, $val)

@@ -113,7 +113,7 @@ class Kea_Request
 	
 	public function getURI()
 	{
-		if( isset( $this->_uri ) ) {
+		if(isset($this->_uri)) {
 			return $this->_uri;	
 		}
 		return false;
@@ -147,9 +147,9 @@ class Kea_Request
 	 * @param string $seperator acts as the seperator between feedback msgs
 	 * @return string
 	 */
-	public function getFeedbackString( $seperator = "\n" )
+	public function getFeedbackString($seperator = "\n")
 	{
-		return implode( $seperator, $this->_feedback );
+		return implode($seperator, $this->_feedback);
 	}
 	
 	public function addAction(array $action)

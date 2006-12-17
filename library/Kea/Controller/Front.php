@@ -162,8 +162,15 @@ class Kea_Controller_Front
 			$request = $this->_router->resolve(Kea_Request::getInstance());
 
 			while ($request->hasMoreActions()) {
-				$this->_dispatcher->route($request);
+				$this->_dispatcher->route($request, $this->_response);
 			}
+			
+			/**
+			 * Add some data regarding the view portion here
+			 */
+			/*
+			$this->_view_controller = 
+			*/
 		} catch (Kea_Exception $e) {
 			$this->_response->setException($e);
 		}
