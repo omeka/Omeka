@@ -112,6 +112,11 @@ class Kea_Controller_Front
 		}
 		return self::$_instance;
 	}
+	
+	public static function setView(Kea_View_Abstract $view)
+	{
+		self::getInstance()->_view = $view;
+	}
 
 	/**
 	 * Initialize the thread the normal way, with no pretences.
@@ -140,7 +145,6 @@ class Kea_Controller_Front
 			$this->_dispatcher	= new Kea_Controller_Dispatcher;
 			$this->_router		= new Kea_Controller_Router;
 			$this->_response	= Kea_Controller_Response::getInstance();
-#			$this->_view		= new Kea_Theme_Controller;
 		}
 		catch (Kea_Exception $e) {
 			echo 'SOMETHING NEEDS TO BE DONE WITH THE FRONT CONTROLLER INI EXCEPTION';

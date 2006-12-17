@@ -16,8 +16,22 @@ class Kea_Controller_Response
 	
 	private $_data;
 	
-	private function __construct() {}
-	private function __clone() {}
+	protected $_data = array();
+	
+	final public function __construct() {}
+	
+	final public function __get($name)
+	{
+		if (array_key_exists($name, $this->_data)) {
+			return $this->_data[$name];
+		}
+		return false;
+	}
+	
+	final public function __set($name, $val)
+	{
+		$this->_data[$name] = $val;
+	}
 	
 	public static function getInstance()
 	{
