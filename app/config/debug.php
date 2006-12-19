@@ -3,7 +3,6 @@
 	Debug levels
 */
 define ('KEA_DEBUG_ERRORS',		1);
-define ('KEA_DEBUG_TIMER',		true);
 define ('KEA_DEBUG_SQL',		false);
 define ('KEA_DEBUG_TEMPLATE',	true);
 

@@ -14,10 +14,29 @@ abstract class Kea_Controller_Action
 	
 	public $validationErrors = array();
 	
-	public function __construct()
+	/**
+	 * Create a controller action object.
+	 * Each controller should return one piece of information
+	 * in an attempt to be RESTful.  They should not be concerned
+	 * with setting all the data needed for a particular view.
+	 * If they are interacting directly with a view, they should
+	 * be passed a response object on instantiation in order to
+	 * pass data between the two seamlessly.
+	 */
+	public function __construct(Kea_Controller_Response_Abstract $response)
 	{
-		$this->_response = Kea_Controller_Response::getInstance();
+		$this->_response = $response;
 		$this->_request = Kea_Request::getInstance();
+	}
+	
+	final public function __get($name)
+	{
+		return $this->_response->__get($name);
+	}
+	
+	final public function __set($name, $val)
+	{
+		return $this->_response->__set($name, $val);
 	}
 	
 	public function setResponse(Kea_Controller_Response $response)
@@ -32,8 +51,8 @@ abstract class Kea_Controller_Action
 	
 	public function beforeFilter(&$method, &$args)
 	{
-		foreach( $this->before_filters as $filter ) {
-			$filter->filter( $method, $args, $this );
+		foreach ($this->before_filters as $filter) {
+			$filter->filter($method, $args, $this);
 		}
 	}
 	

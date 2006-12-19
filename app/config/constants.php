@@ -7,8 +7,10 @@ define('APP_NAME', 'SITEBUILDER codename KIWI');
 /**
  * Dirs
  */
-define('KEA_CONTROLLER_DIR',	'app'.DIRECTORY_SEPARATOR.'controllers');
-define('KEA_THEME_DIR',			'public'.DIRECTORY_SEPARATOR.'themes');
+define('KEA_CONTROLLER_DIR',	KEA_ROOT.DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'controllers');
+define('KEA_THEME_DIR',			KEA_ROOT.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'themes');
+define('KEA_JSON_DIR',			KEA_ROOT.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'json'.DIRECTORY_SEPARATOR.'templates');
+define('KEA_REST_DIR',			KEA_ROOT.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'rest'.DIRECTORY_SEPARATOR.'templates');
 
 /**
  * Controller Settings
@@ -26,15 +28,15 @@ define('KEA_THEME', 'n8agrin');
 /**
 	DB connection
 */
-/*
+
 define( 'KEA_MYSQLI_HOST',		'localhost' );
 define( 'KEA_MYSQLI_USERNAME',	'root' );
 define( 'KEA_MYSQLI_PASSWORD',	'' );
-define( 'KEA_MYSQLI_DBNAME',	'sb-kiwi' );
+define( 'KEA_MYSQLI_DBNAME',	'sb-v1' );
 
 define( 'KEA_MYSQLI_PORT',		null );
 define( 'KEA_MYSQLI_SOCKET',	null );
-*/
+define( 'KEA_LOG_SQL',			false );
 /**
 	Site specific details
 */
@@ -95,7 +97,7 @@ define( 'ABS_LOG_DIR',			ABS_APP_DIR.DS.LOG_DIR_NAME );
 define( 'KEA_SQL_LOG',			ABS_LOG_DIR.DS.'sql.log' );
 define( 'KEA_ERRORS_LOG',		ABS_LOG_DIR.DS.'errors.log' );
 define( 'KEA_LOGINS_LOG',		ABS_LOG_DIR.DS.'logins.log' );
-define( 'KEA_LOG_SQL',			false );
+
 define( 'KEA_LOG_ERRORS',		false );
 define( 'KEA_LOG_LOGINS',		false );
 define( 'KEA_EMAIL_ERRORS', 	true );

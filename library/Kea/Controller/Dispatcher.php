@@ -3,6 +3,7 @@
  * @edited 10/13/06 n8agrin
  */
 require_once 'Kea/Controller/Dispatcher/Exception.php';
+require_once 'Kea/Controller/Response/Abstract.php';
 class Kea_Controller_Dispatcher
 {
 	private $_controller_paths;
@@ -12,7 +13,7 @@ class Kea_Controller_Dispatcher
 		$this->_controller_paths = (array) KEA_CONTROLLER_DIR;
 	}
 
-	public function route(Kea_Request $request, Kea_Controller_Response $response)
+	public function route(Kea_Request $request, Kea_Controller_Response_Abstract $response)
 	{
 		$next = $request->nextAction();
 		
@@ -40,11 +41,9 @@ class Kea_Controller_Dispatcher
 			$reflect = new ReflectionClass($cName);
 			if ($reflect->hasMethod($action) &&
 				$reflect->getMethod($action)->isPublic()) {
-					$controller = new $cName;
+					$controller = new $cName($response);
 					$controller->beforeFilter($action, $controller);
-					$result = $controller->{$action}();
-					$result = $controller->afterFilter($result);
-					$response->add($result);
+					$controller->{$action}();
 			}
 			else {
 				throw new Kea_Router_Exception(

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @license http://www.opensource.org/licenses/gpl-license.php GPL Public License
  * @package Kea
@@ -14,8 +13,7 @@
  * model / view / controller architecture.  It does not
  * purport to be the best, or most well rounded framework
  * out there.  In fact, Cake or Zend are probably much
- * better for your needs, since Kea is purposefully brittle,
- * as a framework.
+ * better for your needs, since Kea is purposefully brittle.
  * 
  * So why Kea?
  * 
@@ -28,72 +26,72 @@
  * easily met through using either Cake or ZF.  That said
  * as Kea evolves, certainly ZF and other framework
  * components will be included when useful.  Why wouldn't we?
- * Communities are doing great work on frameworks these days.
+ * Those communities are doing great work.
  * 
  * Kea is heavily inspired by the Zend Framework, Cake and
  * Wordpress.  This second iteration of Kea has
  * been mostly 'whiteroomed', except where explicitly
- * noted.  Even still, I will attempt to give credit where
+ * noted.  Even still, credit will be given where
  * credit is due, when some algorithms or files maintain their
- * similarity to those of outside sources. If some has been missed,
- * please do not hesitate to speak up.
+ * similarity to those of outside sources. If something deserves
+ * credit and was missed, do not hesitate to speak up, and let
+ * us know.
  */
+
+require_once 'Kea/Controller/Router.php';
+require_once 'Kea/Controller/Dispatcher.php';
+require_once 'Kea/Request.php';
 
 /**
  * Kea Application starting point.
  * The Front Controller is the first object called in the request and the
  * object responsible for stitching the basic logic of the system together.
  *
- * PURPOSE:  The Front Controller needs to do get the resolver,
- *	take the resolved output and hand it to the controller,
- *	then create a view object to render an output.
- *	1) request->resolved to c&a or to template
- *	2) router->act(token) = either preforms c&a methods, or
- *	3) view->render renders the correct c&a view or renders the template
- *
  * @package Kea
  * @subpackage Front
- * @author Nate Agrin [nate AT nateagrin.com]
+ * @author Nate Agrin [n8 AT n8agrin.com]
  * @copyright 2006 Center for History and New Media
  * @version 0.2.0 KIWI
- * @edited 10/13/06 n8agrin
+ * @edited 12/17/06 n8
  */
-
-require_once 'Kea/Controller/Router.php';
-require_once 'Kea/Controller/Dispatcher.php';
-require_once 'Kea/Controller/Response.php';
-require_once 'Kea/Request.php';
-#require_once 'Kea/Plugin/Manager.php';
-#require_once 'Kea/Theme/Controller.php';
-
 class Kea_Controller_Front
 {
 	/**
+	 * Stores the Front Controller Instance
+	 * 
 	 * @var Kea_Front_Controller object
 	 */
 	private static $_instance;
 
 	/**
-	 * @var Kea_Controller_Resolver object
+	 * The dispatcher takes the routed request finds the
+	 * appropriate controller, instantiates it, and instructs
+	 * it to preform the requested action in a safe way.
+	 * 
+	 * @var Kea_Controller_Dispatch object
 	 */
 	private $_dispatcher;
 	
 	/**
+	 * The router inspects the incoming request and attempts
+	 * to discern the appropriate controller and action which
+	 * match the request.
+	 * 
 	 * @var Kea_Controller_Router object
 	 */
 	private $_router;
 
 	/**
-	 * @var Kea_Controller_View object
+	 * The response handles the actual output from the incoming
+	 * request.  This must be set for each new type of data being
+	 * returned.
+	 * 
+	 * By default, the three data types are included; HTML, Json
+	 * and REST / XML
+	 * 
+	 * @var Kea_Controller_Response_Abstract object
 	 */
-	private $_view;
-
-	/**
-	 * Used for debuging speed issues
-	 * @var integer
-	 */
-	private $__app_timer;
-
+	private $_response;
 
 	/**
 	 * Singleton pattern
@@ -113,13 +111,16 @@ class Kea_Controller_Front
 		return self::$_instance;
 	}
 	
-	public static function setView(Kea_View_Abstract $view)
+	/**
+	 * Safely sets the Kea_Controller_Response object
+	 */
+	public static function setResponse(Kea_Controller_Response_Abstract $response)
 	{
-		self::getInstance()->_view = $view;
+		self::getInstance()->_response = $response;
 	}
 
 	/**
-	 * Initialize the thread the normal way, with no pretences.
+	 * Bootstrap the application
 	 * @see _init()
 	 * @see _dispatch()
 	 */
@@ -129,34 +130,51 @@ class Kea_Controller_Front
 	}
 
 	/**
-	 * Sets all the internal Front Controller properties.
-	 * _setRouter & _setResolver are preferred methods of
-	 * setting the Router & Resolver insuring they are born
-	 * of the appropriate Interfaces.
-	 * The debug property establishes a timer for timing the
-	 * application run time.
+	 * Sets the internal Front Controller properties.
+	 * Defaults the response object to an HTML theme based
+	 * request, if one is not previously sent.
 	 * Returns $this for convience of linking methods.
 	 * @return Kea_Controller_Front object
 	 */
 	private function _init()
 	{
 		try {
-#			$this->_plugins		= new Kea_Plugin_Manager;
 			$this->_dispatcher	= new Kea_Controller_Dispatcher;
 			$this->_router		= new Kea_Controller_Router;
-			$this->_response	= Kea_Controller_Response::getInstance();
+
+			// Set the response object if not already set
+			if (!$this->_response instanceof Kea_Controller_Response_Abstract) {
+				if ($return = Kea_Request::getInstance()->get("return")) {
+					switch ($return) {
+						case "json":
+							require_once 'Kea/Controller/Response/Json.php';
+							$this->setResponse(new Kea_Controller_Response_Json);
+						break;
+						case "rest":
+							require_once 'Kea/Controller/Response/Rest.php';
+							$this->setResponse(new Kea_Controller_Response_Rest);
+						break;
+					}
+				}
+				else {
+					require_once 'Kea/Controller/Response/Theme.php';
+					$this->setResponse(new Kea_Controller_Response_Theme);
+				}
+			}
 		}
 		catch (Kea_Exception $e) {
 			echo 'SOMETHING NEEDS TO BE DONE WITH THE FRONT CONTROLLER INI EXCEPTION';
 			throw $e;
 		}
-
-		if (KEA_DEBUG_TIMER) {
-			$this->__app_timer = microtime(true);
-		}
 		return $this;
 	}
 
+	/**
+	 * After initializing the appropriate components, the
+	 * dispatch loop is established and the appropriate data is
+	 * appended to the response object.
+	 * @return Kea_Controller_Response_Abstract object
+	 */
 	private function _dispatch()
 	{
 		try{
@@ -168,13 +186,7 @@ class Kea_Controller_Front
 			while ($request->hasMoreActions()) {
 				$this->_dispatcher->route($request, $this->_response);
 			}
-			
-			/**
-			 * Add some data regarding the view portion here
-			 */
-			/*
-			$this->_view_controller = 
-			*/
+
 		} catch (Kea_Exception $e) {
 			$this->_response->setException($e);
 		}

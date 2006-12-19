@@ -57,7 +57,7 @@ if (!extension_loaded('mysql'))
  */
 
 // Set the include path
-set_include_path(get_include_path() . ':./library' . ':./app/models' . ':./app/filters');
+set_include_path(get_include_path() . ':'.KEA_ROOT.'/library' . ':'.KEA_ROOT.'/app/models' . ':'.KEA_ROOT.'/app/filters' . ':'.KEA_ROOT.'/app/lib');
 
 // Set the class autoload env
 function __autoload($classname) {

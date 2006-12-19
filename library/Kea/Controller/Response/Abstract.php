@@ -2,23 +2,15 @@
 /**
  * Inspiration from Zend's Http Response Object
  */
-class Kea_Controller_Response
-{
-	private static $_instance;
+class Kea_Controller_Response_Abstract
+{	
+	protected $_headers = array();
 	
-	private $_headers = array();
+	protected $_body = "";
 	
-	private $_header;
-	
-	private $_body = "";
-	
-	private $_exception;
-	
-	private $_data;
+	protected $_exception;
 	
 	protected $_data = array();
-	
-	final public function __construct() {}
 	
 	final public function __get($name)
 	{
@@ -33,12 +25,9 @@ class Kea_Controller_Response
 		$this->_data[$name] = $val;
 	}
 	
-	public static function getInstance()
+	public function appendBody($body)
 	{
-		if (!self::$_instance instanceof self) {
-			self::$_instance = new self;
-		}
-		return self::$_instance;
+		$this->_body .= $body;
 	}
 	
 	public function addHeader($type, $val)
@@ -50,7 +39,7 @@ class Kea_Controller_Response
 	{
 		if (headers_sent()) {
 			throw new Kea_Exception(
-				"Cannot send the headers, because they have already been sent"
+				"Cannot send the headers because they have already been sent"
 			);
 			return;
 		}
@@ -58,17 +47,6 @@ class Kea_Controller_Response
 		foreach ($this->_headers as $type => $val) {
 			header($type . ": ".$val);
 		}
-	}
-	
-	public function addBody($text)
-	{
-		$this->_body .= $text;
-	}
-	
-	public function add($data)
-	{
-		$this->_data[] = $data;
-		return $this;
 	}
 	
 	public function setException(Exception $e)

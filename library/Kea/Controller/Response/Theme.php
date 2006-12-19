@@ -3,51 +3,62 @@
  * @created 10/13/06    
  * @edited 10/13/06
  */
-require_once 'Kea/Theme/Exception.php';
-require_once 'Kea/View/Abstract.php';
-class Kea_View_Theme extends Kea_View_Abstract
+require_once 'Kea/Controller/Response/Abstract.php';
+class Kea_Controller_Response_Theme extends Kea_Controller_Response_Abstract
 {
-	private $_theme = KEA_THEME;
-	private $_themes_dir = KEA_THEME_DIR;
-	private $_page;
+	private $_theme_dir;
+
+	protected $_page;
 	
-	private $_header;
-	private $_footer;
-	
-	public function render($controller, $action)
+	public function __construct()
 	{
-		// These should be relatively safe-formated already and lowercased.
-		$request = Kea_Request::getInstance();
-		if ($request->get('format') && $request->get('format') == 'json') {
-			require_once 'Zend/Json.php';
-			return Zend_Json::encode($this->_output);
-		}
-		
-		$theme_dir = $this->_themes_dir . DIRECTORY_SEPARATOR . $this->_theme . DIRECTORY_SEPARATOR . $controller;
-		$file = $action;
-		
-		if ($fullpath = Kea::loadFile($theme_dir, $file, false)) {
+		$this->_theme_dir = KEA_THEME_DIR . DIRECTORY_SEPARATOR . KEA_THEME;
+		$this->addHeader("Content-type", "text/html");
+	}
+	
+	public function setPage($page)
+	{
+		$this->_page = $page;
+	}
+	
+	public function getHeader($header="header", $echo=true)
+	{
+		if ($header_file = Kea::loadFile($this->_theme_dir, $header, false)) {
 			ob_start();
-			include $fullpath;
-			return ob_get_clean();
+			include $header_file;
+			if ($echo) {
+				echo ob_get_clean();
+				return;
+			} else {
+				return ob_get_clean();
+			}
 		}
+		return null;
 	}
 	
-	public function getHeader($file="header")
+	public function getFooter($footer="footer", $echo=true)
 	{
-		$header = $this->render('shared', $file);
-		/* Add some plugin functionality here to mod the header
-		 */
-		echo $header;
+		if ($footer_file = Kea::loadFile($this->_theme_dir, $footer, false)) {
+			ob_start();
+			include $footer_file;
+			if ($echo) {
+				echo ob_get_clean();
+				return;
+			} else {
+				return ob_get_clean();
+			}
+		}
+		return null;
 	}
 	
-	public function getFooter($file="footer")
+	public function __toString()
 	{
-		$footer = $this->render('shared', $file);
-		/*
-		 * Add plugin functionality to mod the footer
-		 */
-		echo $footer;
+		if ($page_path = Kea::loadFile($this->_theme_dir, $this->_page, false)) {
+			ob_start();
+			include $page_path;
+			$this->appendBody(ob_get_clean());
+		}
+		return parent::__toString();
 	}
 }
 
