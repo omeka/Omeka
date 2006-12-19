@@ -1,5 +1,8 @@
 <?php
-
+require_once 'Kea/DB/Select.php';
+require_once 'Kea/DB/Connection.php';
+require_once 'Kea/DB/Adapter/Exception.php';
+require_once 'Kea/Logger.php';
 class Kea_DB_Adapter
 {
 	protected static $_db;
@@ -42,15 +45,15 @@ class Kea_DB_Adapter
         if ($sql instanceof Kea_Db_Select) {
             $sql = $sql->__toString();
         }
-
+		
 		$this->prepSQL( $sql );
 
 		foreach( (array) $bind as $key => $val ) {
 			$this->bindParam( $key, $val );
 		}
-
-		$sql = $this->_joinSQL();
 		
+		$sql = $this->_joinSQL();
+		echo $sql;
 		if( KEA_LOG_SQL === true ) {
 			Kea_Logger::logSQL( $sql );
 		}
@@ -67,6 +70,12 @@ class Kea_DB_Adapter
 		}
     }
 
+	/**
+	 * Split the SQL statement into : or ? delimited pieces and add those that begin with such to the sqlParams list
+	 *
+	 * @return void
+	 * @author Zend
+	 **/
 	public function prepSQL( $sql )
 	{
 		// split into text and params

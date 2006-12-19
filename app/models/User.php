@@ -1,5 +1,33 @@
 <?php
-
+/**
+ *
+ * Copyright 2006:
+ * George Mason University
+ * Center for History and New Media,
+ * State of Virginia 
+ *
+ * LICENSE
+ *
+ * This source file is subject to the GNU Public License that
+ * is bundled with this package in the file GPL.txt, and the
+ * specific license found in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL: 
+ * http://www.gnu.org/licenses/gpl.txt
+ * If you did not receive a copy of the GPL or local license and are unable to
+ * obtain it through the world-wide-web, please send an email 
+ * to chnm@gmu.edu so we can send you a copy immediately.
+ *
+ * This software is licensed under the GPL license by the Center
+ * For History and New Media, at George Mason University, except 
+ * where other free software licenses apply.
+ * The source code may only be reused or redistributed if the
+ * copyright notice and licensing information above are retained,
+ * and other included Zend and Cake licenses, are preserved. 
+ * 
+ * @author Nate Agrin
+ * @contributors Josh Greenburg, Kris Kelly, Dan Stillman
+ * @license http://www.gnu.org/licenses/gpl.txt GNU Public License
+ */
 class User extends Kea_Domain_Model
 {
 	public $user_id;
@@ -90,14 +118,38 @@ class User extends Kea_Domain_Model
 			return false;
 		}
 		
-		$message = "Your account for the ".INFO_TITLE." archive has been created.\n  Please login using your user name and password below.\n\n Username: ".$this->getUsername()." \n Password: ".$this->nonsha1_password." \n\n\n ".INFO_TITLE." Administrator";
-		$title = "Your account information for the ".INFO_TITLE." Archive";
+		$message = "Your account for the ".SITE_TITLE." archive has been created.\n  Please login using your user name and password below.\n\n Username: ".$this->getUsername()." \n Password: ".$this->nonsha1_password." \n\n\n ".SITE_TITLE." Administrator";
+		$title = "Your account information for the ".SITE_TITLE." Archive";
 		$header = 'From: ' . "\n" . 'X-Mailer: PHP/' . phpversion();
 
 		mail( $this->getEmail(), $title, $message, $header);
 		return true;
 	}
 	
+	public function isSuper()
+	{
+		return ( $this->getPermissions() == 1 );
+	}
+	
+	public function isAdmin()
+	{
+		return ( $this->getPermissions() <= 10 );
+	}
+	
+	public function isResearcher()
+	{
+		return ( $this->getPermissions() <= 20 );
+	}
+	
+	public function isPrivResearcher()
+	{
+		return ( $this->getPermissions() <= 15 );
+	}
+
+	public function isPublic()
+	{
+		return ( $this->getPermissions() <= 100 );
+	}
 }
 
 ?>

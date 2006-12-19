@@ -28,15 +28,21 @@ define('KEA_THEME', 'n8agrin');
 /**
 	DB connection
 */
-
+/*
 define( 'KEA_MYSQLI_HOST',		'localhost' );
 define( 'KEA_MYSQLI_USERNAME',	'root' );
 define( 'KEA_MYSQLI_PASSWORD',	'' );
 define( 'KEA_MYSQLI_DBNAME',	'sb-v1' );
+*/
+
+define( 'KEA_MYSQLI_HOST',		'mysql.localdomain' );
+define( 'KEA_MYSQLI_USERNAME',	'sitebuilder' );
+define( 'KEA_MYSQLI_PASSWORD',	'XEddVNrwVYAGvrTW' );
+define( 'KEA_MYSQLI_DBNAME',	'sitebuilder_trunk' );
 
 define( 'KEA_MYSQLI_PORT',		null );
 define( 'KEA_MYSQLI_SOCKET',	null );
-define( 'KEA_LOG_SQL',			false );
+
 /**
 	Site specific details
 */
@@ -92,16 +98,26 @@ define( 'GLOBAL_404',			ABS_CONTENT_DIR.DS.'404.php' );
 /**
 	Logging
 */
-/*
-define( 'ABS_LOG_DIR',			ABS_APP_DIR.DS.LOG_DIR_NAME );
-define( 'KEA_SQL_LOG',			ABS_LOG_DIR.DS.'sql.log' );
-define( 'KEA_ERRORS_LOG',		ABS_LOG_DIR.DS.'errors.log' );
-define( 'KEA_LOGINS_LOG',		ABS_LOG_DIR.DS.'logins.log' );
 
-define( 'KEA_LOG_ERRORS',		false );
+define( 'ABS_LOG_DIR',			'logs' );
+define( 'KEA_SQL_LOG',			ABS_LOG_DIR.DIRECTORY_SEPARATOR.'sql.log' );
+define( 'KEA_ERRORS_LOG',		ABS_LOG_DIR.DIRECTORY_SEPARATOR.'errors.log' );
+define( 'KEA_LOGINS_LOG',		ABS_LOG_DIR.DIRECTORY_SEPARATOR.'logins.log' );
+
+define( 'KEA_LOG_ERRORS',		true );
 define( 'KEA_LOG_LOGINS',		false );
-define( 'KEA_EMAIL_ERRORS', 	true );
-*/
+define( 'KEA_EMAIL_ERRORS', 	false );
+define( 'KEA_LOG_SQL',			true );
+
+define( 'KEA_ERROR_EMAIL',		'kkelly7@gmu.edu');
+
+switch( KEA_DEBUG_ERRORS ) {
+	case( 1 ): error_reporting( E_ALL | E_STRICT );		break;
+	case( 2 ): error_reporting( E_ALL );				break;
+	case( 3 ): error_reporting( E_ALL  ^  E_NOTICE );	break;
+	case( 4 ): error_reporting( E_WARNING );			break;
+	case( 5 ): error_reporting( 0 );					break;
+}
 /*
 	Web specific settings for use in linking in files, link generation, etc.
 */

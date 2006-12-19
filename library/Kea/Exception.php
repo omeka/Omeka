@@ -9,7 +9,7 @@ class Kea_Exception extends Exception
 {
 	//Should be changed to the site administrator
 
-	protected $email = '';
+	protected $email = KEA_ERROR_EMAIL;
 	
 	public function __toString()
 	{
@@ -39,6 +39,7 @@ class Kea_Exception extends Exception
 			$msg .= 'In file: ' . $this->getFile() . "\n";
 			$msg .= 'On line: ' . $this->getLine() . "\n";
 			$msg .= $this->getMessage();
+			$msg .= print_r(debug_backtrace(), true);
 			$header = "From: {$this->email}\nX-Mailer: PHP/" . phpversion();
 			$title = "[".SITE_TITLE."] ".$this->getMessage();
 			//mail($this->email, $title, $msg, $header);

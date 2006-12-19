@@ -1,5 +1,34 @@
 <?php
-
+/**
+ *
+ * Copyright 2006:
+ * George Mason University
+ * Center for History and New Media,
+ * State of Virginia 
+ *
+ * LICENSE
+ *
+ * This source file is subject to the GNU Public License that
+ * is bundled with this package in the file GPL.txt, and the
+ * specific license found in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL: 
+ * http://www.gnu.org/licenses/gpl.txt
+ * If you did not receive a copy of the GPL or local license and are unable to
+ * obtain it through the world-wide-web, please send an email 
+ * to chnm@gmu.edu so we can send you a copy immediately.
+ *
+ * This software is licensed under the GPL license by the Center
+ * For History and New Media, at George Mason University, except 
+ * where other free software licenses apply.
+ * The source code may only be reused or redistributed if the
+ * copyright notice and licensing information above are retained,
+ * and other included Zend and Cake licenses, are preserved. 
+ * 
+ * @author Nate Agrin
+ * @contributors Josh Greenburg, Kris Kelly, Dan Stillman
+ * @license http://www.gnu.org/licenses/gpl.txt GNU Public License
+ */
+require_once 'Kea/Domain/Model.php';
 class File extends Kea_Domain_Model
 {
 	public $file_id;
@@ -43,18 +72,27 @@ class File extends Kea_Domain_Model
 	public $file_thumbnail_name;
 	public $file_added;
 	
-	/**
-	 *	
-	 */
+	public static function findById( $id ) {
+		return self::doFindById( $id, __CLASS__ );
+	}
+	
+	public static function total() {
+		return self::doTotal( __CLASS__ );
+	}
+	
 	public function validate() {}
 	
-	public static function delete( $file_id )
+	public function delete( $id = null )
 	{
-		$inst = new self;
-		$mapper = $inst->mapper();
-		$file = $mapper->find()
-					   ->where( 'file_id = ?', $file_id )
-					   ->execute();
+		if( $id )
+		{
+			$file = self::findById($id);
+		}
+		else
+		{
+			$file = $this;
+		}
+		
 		$filename = ABS_VAULT_DIR . DIRECTORY_SEPARATOR . $file->file_archive_filename;
 		if( file_exists( $filename ) )
 		{
@@ -76,7 +114,7 @@ class File extends Kea_Domain_Model
 				unlink( $fullsize_path );
 			}
 		}			
-		return $mapper->delete( $file_id );
+		return parent::delete( $file->getId() );
 	}
 	
 	public static function deleteUnsaved( File $file )
@@ -380,6 +418,8 @@ class File extends Kea_Domain_Model
 			$filename = basename( $file );
 			$new_name = explode( '.', $filename );
 			$new_name[0] .= '_' . basename($dir);
+			//ensures that all generated files are jpeg
+			$new_name[1] = 'jpg';
 			$imagename = implode( '.', $new_name );
 			$new_path = rtrim( $dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imagename;
 			
@@ -517,15 +557,21 @@ class File extends Kea_Domain_Model
 		endif;
 	}
 	
+	public function hasFullsize()
+	{
+		return ( !empty($this->file_fullsize_filename) );
+	}
+	
+	public function hasThumbnail()
+	{
+		return ( !empty($this->file_thumbnail_name) );
+	}
+	
 	public function getShortDesc ( $length = 250 , $append = '...')
 	{
-		if (strlen($this->file_description) > $length ):
-			$shortDesc = substr($this->file_description, 0, strrpos($this->file_description, ' ', $length-strlen($this->file_description)));
-			$shortDesc = $shortDesc.$append;
-			return $shortDesc;
-		else: 
-			return $this->file_description;
-		endif;
+		$fullDesc = $this->file_description;
+		if (strlen($fullDesc) > $length ) return snippet($fullDesc, 0, $length, $append);
+		return $fullDesc;
 	}
 	
 // End class

@@ -57,7 +57,7 @@ class Kea_Controller_Response_Abstract
 	public function __toString()
 	{
 		if ($this->_exception instanceof Exception) {
-			return $this->_exception->getMessage();
+			return $this->_exception->__toString();
 		}
 		$this->sendHeaders();
 		return $this->_body;

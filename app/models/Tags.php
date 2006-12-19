@@ -1,5 +1,33 @@
 <?php
-
+/**
+ *
+ * Copyright 2006:
+ * George Mason University
+ * Center for History and New Media,
+ * State of Virginia 
+ *
+ * LICENSE
+ *
+ * This source file is subject to the GNU Public License that
+ * is bundled with this package in the file GPL.txt, and the
+ * specific license found in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL: 
+ * http://www.gnu.org/licenses/gpl.txt
+ * If you did not receive a copy of the GPL or local license and are unable to
+ * obtain it through the world-wide-web, please send an email 
+ * to chnm@gmu.edu so we can send you a copy immediately.
+ *
+ * This software is licensed under the GPL license by the Center
+ * For History and New Media, at George Mason University, except 
+ * where other free software licenses apply.
+ * The source code may only be reused or redistributed if the
+ * copyright notice and licensing information above are retained,
+ * and other included Zend and Cake licenses, are preserved. 
+ * 
+ * @author Nate Agrin
+ * @contributors Josh Greenburg, Kris Kelly, Dan Stillman
+ * @license http://www.gnu.org/licenses/gpl.txt GNU Public License
+ */
 /*
 	This might be a plugin type of class
 */
@@ -8,15 +36,51 @@ class Tags extends Kea_Plugin implements Iterator
 {
 	public $item_id;
 	public $user_id;
+	
+	/**
+	 * Array containing the tags themselves
+	 * 
+	 * Composition: for new (unsaved) tags, 1-dimensional array containing the string tag names.
+	 * for retrieved tags, 2-dimensional array where each tag entry contains associative array
+	 * with 'tag_id', 'tag_name' and 'tagCount'
+	 *
+	 * @var array
+	 **/
 	public $tags		= array();
 
+	/**
+	 * Validation rules for tags
+	 * 
+	 * Existing validation rules require a valid numeric integer item_id and user_id
+	 *
+	 * @var array
+	 **/
 	protected $_validate = array(	'item_id' => array( '/([0-9])+/', 'The item_id must be set.' )
 	 						//		'user_id'	=> array( '/([0-9]+)/', 'The user_id must be set.' )
 	 							);
 
+	/**
+	 * Current number of tags stored in the Tags object 
+	 *
+	 * @var int
+	 **/
 	protected $total	= 0;
+	
+	/**
+	 * Key for the current accessed tag 
+	 *
+	 * @var int
+	 **/
 	protected $pointer	= 0;
 	
+	/**
+	 * Constructor
+	 *
+	 * Converts the string or array input into tags and stores them in the object
+	 *  
+	 * @param array $tags Either a delimited string of tags or an array containing them
+	 * @author Nate Agrin
+	 **/
 	public function __construct( $tags = null )
 	{
 		parent::__construct();
@@ -33,12 +97,44 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 	}
 	
+	/**
+	 * Explodes the tags into an array and returns a clean version
+	 *
+	 * @param string $tags A string of tags, separated by a delimiter
+	 * @param string $delim The delimiter to use (comma by default)
+	 * @return array
+	 * @author Nate Agrin
+	 **/
 	public function stringToTags( $tags, $delim = ',' )
 	{
 		$tags = explode( $delim, $tags );
 		return $this->cleanTags( $tags );
 	}
 	
+	/**
+	 * Converts the current array of tags into a delimited string
+	 *
+	 * @param string $delim Delimiter (comma by default)
+	 * @return string
+	 * @author Kris Kelly
+	 **/
+	public function tagsToString( $delim = ',')
+	{
+		$tag_string = '';
+		for ( $i=0; $i < count($this->tags); $i++ )
+		{ 
+			$tag_string .= $this->tags[$i]['tag_name'] . ( !empty($this->tags[$i+1]) ? $delim . ' ' : '' ); 
+		}
+		return $tag_string;
+	}
+	
+	/**
+	 * Removes all non-alphanumeric characters and (potentially) swear words from tags
+	 *
+	 * @param array $tags 
+	 * @return array
+	 * @author Nate Agrin
+	 **/
 	private function cleanTags( array $tags )
 	{
 		foreach( $tags as $key => &$tag )
@@ -62,6 +158,13 @@ class Tags extends Kea_Plugin implements Iterator
 		return $tags;
 	}
 	
+	/**
+	 * Adds an array of tags to the Tags object one by one
+	 *
+	 * @param array $tags
+	 * @return void
+	 * @author Nate Agrin
+	 **/
 	private function addTags( array $tags )
 	{
 		foreach( $tags as $tag )
@@ -73,6 +176,13 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 	}
 	
+	/**
+	 * Retrieves the tags associated with an item and adds them to the object
+	 *
+	 * @param int $item_id 
+	 * @return void
+	 * @author Nate Agrin
+	 **/
 	public function findByItem( $item_id )
 	{
 		$select = $this->_adapter->select();
@@ -87,6 +197,14 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 	}
 	
+	/**
+	 * Retrieves the tags associated with a user and returns them
+	 *
+	 * @param int $user_id Unique ID associated with the user
+	 * @param int $item_id Unique ID associated with an item (optional)
+	 * @return array
+	 * @author Nate Agrin
+	 **/
 	public function findByUser( $user_id, $item_id = null )
 	{
 		$select = $this->_adapter->select();
@@ -101,12 +219,29 @@ class Tags extends Kea_Plugin implements Iterator
  		return $this->_adapter->fetchAssoc( $select );
 	}
 	
+	/**
+	 * Remove all associations between a tag and an item
+	 *
+	 * @param int $tag_id
+	 * @param int $item_id
+	 * @return bool TRUE on success, FALSE on failure
+	 * @author Nate Agrin
+	 **/
 	public static function deleteAssociation( $tag_id, $item_id )
 	{
 		$inst = new self;
 		return $inst->_adapter->delete( 'items_tags', 'item_id=\'' . $item_id . '\' AND tag_id=\'' . $tag_id . '\'' );
 	}
 	
+	/**
+	 * Create an instance of Tags, load it up and save it to the database
+	 *
+	 * @param string $tag_string
+	 * @param int $item_id
+	 * @param int $user_id
+	 * @return void
+	 * @author Nate Agrin
+	 **/
 	public static function addMyTags( $tag_string, $item_id, $user_id )
 	{
 		$inst = new self( $tag_string );
@@ -115,12 +250,27 @@ class Tags extends Kea_Plugin implements Iterator
 		$inst->save();
 	}
 	
+	/**
+	 * Remove a tag <-> item association for only a specific user
+	 *
+	 * @param int $tag_id
+	 * @param int $item_id
+	 * @param int $user_id
+	 * @return bool TRUE on success, FALSE on failure
+	 * @author Nate Agrin
+	 **/
 	public static function deleteMyTag( $tag_id, $item_id, $user_id )
 	{
 		$inst = new self;
 		return $inst->_adapter->delete( 'items_tags', "item_id = '$item_id' AND tag_id = '$tag_id' AND user_id = '$user_id'" );
 	}
 	
+	/**
+	 * Save the Tags object to the database
+	 *
+	 * @return bool FALSE: if item_id not set, or no tags to save, or failure to save to database, TRUE on success
+	 * @author Nate Agrin
+	 **/		
 	public function save()
 	{
 		if( !isset( $this->item_id ) )
@@ -173,6 +323,18 @@ class Tags extends Kea_Plugin implements Iterator
 		}
 	}
 	
+	/**
+	 * Retrieve tags along with the number of times they occur
+	 *
+	 *
+	 * @param int $limit Maximum number of tags to retrieve
+	 * @param bool $alpha Sort tags in alphabetical order (optional)
+	 * @param bool $count Sort tags from highest count to lowest count (optional)
+	 * @param int $item_id Retrieve only tags associated with a specific item (optional)
+	 * @param int $user_id Retrieve only tags associated with a specific user (optional)
+	 * @return array 'tag_id', 'tag_name', 'tagCount' ('item_id' if chosen)
+	 * @author Nate Agrin
+	 **/
 	public function getTagsAndCount( $limit = '100', $alpha = true, $count = false, $item_id = null, $user_id = null )
 	{
 		$select = $this->_adapter->select();
@@ -214,16 +376,32 @@ class Tags extends Kea_Plugin implements Iterator
 		return $this->_adapter->fetchAssoc( $select );
 	}
 	
+	/**
+	 * Filter tags based on user permissions
+	 *
+	 * TODO: put this and getTagsAndCount() in the Tags controller
+	 *
+	 * @param Kea_DB_Select $select SELECT object that will query for the tags
+	 * @return void
+	 * @author Nate Agrin
+	 **/
 	private function applyPermissions( Kea_DB_Select $select )
 	{
 		if( !self::$_session->isAdmin() )
 		{
-			$select->where( 'items.item_published = ?', 1 );
+			$select->where( 'items.item_public = ?', 1 );
 		}
 				
 		return $select;	
 	}
-
+	
+	/**
+	 * Retrieve the count of the tag with the highest count for all users (or a specific user)
+	 *
+	 * @param int $user_id (optional)
+	 * @return int
+	 * @author Nate Agrin
+	 **/
 	public function getMaxCount( $user_id = null )
 	{
 		$large = $this->getTagsAndCount( 1, false, true, null, $user_id );
@@ -234,6 +412,12 @@ class Tags extends Kea_Plugin implements Iterator
 		return false;
 	}
 	
+	/**
+	 * Retrieve the number of tags currently in the system
+	 *
+	 * @return int
+	 * @author Nate Agrin
+	 **/
 	public function tagCount()
 	{
 		$select = $this->_adapter->select();
@@ -241,6 +425,13 @@ class Tags extends Kea_Plugin implements Iterator
 		return $this->_adapter->fetchOne( $select );
 	}
 	
+	/**
+	 * Retrieve a tag from the Tags object given its index
+	 *
+	 * @param int $key Index of the tag (starting from 0)
+	 * @return void
+	 * @author Nate Agrin
+	 **/
 	public function getTagAt( $key )
 	{
 		if( $key >= $this->total || $key < 0 )
@@ -255,7 +446,13 @@ class Tags extends Kea_Plugin implements Iterator
 		return false;
 	}
 	
-	
+	/**
+	 * Add a tag to the Tags object
+	 *
+	 * @param mixed $tag Either a 1-dimensional array or a string
+	 * @return void
+	 * @author Nate Agrin
+	 **/	
 	protected function add( $tag )
 	{
 		$this->tags[$this->total] = $tag;

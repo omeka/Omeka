@@ -1,5 +1,34 @@
 <?php
-
+/**
+ *
+ * Copyright 2006:
+ * George Mason University
+ * Center for History and New Media,
+ * State of Virginia 
+ *
+ * LICENSE
+ *
+ * This source file is subject to the GNU Public License that
+ * is bundled with this package in the file GPL.txt, and the
+ * specific license found in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL: 
+ * http://www.gnu.org/licenses/gpl.txt
+ * If you did not receive a copy of the GPL or local license and are unable to
+ * obtain it through the world-wide-web, please send an email 
+ * to chnm@gmu.edu so we can send you a copy immediately.
+ *
+ * This software is licensed under the GPL license by the Center
+ * For History and New Media, at George Mason University, except 
+ * where other free software licenses apply.
+ * The source code may only be reused or redistributed if the
+ * copyright notice and licensing information above are retained,
+ * and other included Zend and Cake licenses, are preserved. 
+ * 
+ * @author Nate Agrin
+ * @contributors Josh Greenburg, Kris Kelly, Dan Stillman
+ * @license http://www.gnu.org/licenses/gpl.txt GNU Public License
+ */
+require_once 'Kea/Domain/Model.php';
 class Item extends Kea_Domain_Model
 {
 	protected $validate		=	array(	'item_title'					=> array( '/(\w)+/', 'Items must have a title.' ) );
@@ -20,7 +49,6 @@ class Item extends Kea_Domain_Model
 	
 	public $item_added;
 	public $item_modified;
-	public $itemType_id;
 	public $item_featured;
 	public $item_public;
 	
@@ -32,104 +60,169 @@ class Item extends Kea_Domain_Model
 	// Type <=> KJVObjectType data (same thing)
 	public $type_id;
 	
-	public function __construct( $array = null )
+	//Put this in your model to use the syntax Item::findById()
+	public static function findById( $id ) {
+		return self::doFindById( $id, __CLASS__ );
+	}
+/*	
+	public static function total() {
+		return self::doTotal( __CLASS__ );
+	}
+*/	
+	/**
+	 * If $name is non-public property, then call loadName() and return $this->$name
+	 *
+	 * @return mixed
+	 * @author Kris Kelly
+	 **/
+	public function __get( $name )
 	{
-		parent::__construct( $array );
-		
-		if( empty( $this->type_id ) )
+		if ( !property_exists( 'Item', $name) )
 		{
-			$this->type_id = null;
+			$load_method = 'load' . ucwords($name);
+			call_user_func_array( array($this, $load_method), array() );			
 		}
 		
-		if( empty( $this->creator_id ) )
-		{
-			$this->creator_id = null;
-		}
+		return $this->$name;
 	}
 	
-	// Maybe this should be called in the "construct" method above, so that metadata is always available?? [JMG]
-	public function getTypeMetadata($metafield_name = NULL, $length = -1, $append = '...')
+	private function loadMetadata()
 	{
-		$this->mapper()->getTypeMetadata( $this );
-		if (!is_null($metafield_name)) {
-			
-			// There's *got* to be a more elegant way of doing this than this... [JMG]
-			foreach ($this->type_metadata as $meta_field) {
-				if ($meta_field['metafield_name'] == $metafield_name) {
-					if ( ($length > 0) && (strlen($meta_field['metatext_text']) > $length) ) {
-						$short = substr($meta_field['metatext_text'], 0, strrpos($meta_field['metatext_text'], ' ', $length-strlen($meta_field['metatext_text']))).$append;
-						return $short;
-					}
-					else return $meta_field['metatext_text'];
-				}
+		$this->doLoadMetadata( $this );
+		return $this;
+	}
+	
+	private function loadFiles()
+	{
+		if( !is_array($this->files) ) 
+		{
+			$sql = "SELECT * FROM files WHERE item_id = :item_id ORDER BY file_thumbnail_name DESC";
+			$res = $this->query($sql, array('item_id' => $this->getId() ) );
+			$this->files = $this->findObjects($res, 'File');
+		}
+
+		return $this;
+	}
+	
+	private function loadThumbnails()
+	{
+		$thumbs = array();
+		foreach( $this->files as $file )
+		{
+			if( !empty($file->file_thumbnail_name) ) 
+			{
+				array_push( $thumbs, $file );
 			}
-			return false;
 		}
-		else{
-			return $this;
-		}
+		$this->thumbnails = $thumbs;
+		return $this;		
 	}
 	
-	public function getFiles()
-	{
-		$this->files = self::getMapper( 'File' )->find()
-												->where( 'item_id = ?', $this->getId() )
-												->order( array( 'file_thumbnail_name' => 'DESC' ) )
-												->execute();
-		return $this;
-	}
-	
-	public function getFileTotal()
-	{
-		$adapter = Kea_DB_Adapter::instance();
-		$select = $adapter->select();
-		$select->from( 'files', 'COUNT(*) AS count' )
-				->where( 'item_id =?', $this->getId() );
-		$result = $adapter->fetchOne( $select );
-		return $result;
-	}
-	
-	public function getFilesWithThumbnails()
-	{
-		$this->files = self::getMapper( 'File' )->find()
-												->where( 'item_id = ?', $this->getId() )
-												->where( 'file_thumbnail_name != ?', '' )
-												->execute();
-		return $this;
-	}
-	
-	public function getRandomThumbnail()
-	{
-		// Pick a random one
-		$files = $this->getFilesWithThumbnails();
-		return $this->files->getObjectAt(mt_rand(0, $this->files->total() - 1 ) );
-	}
-	
-	public function getTags()
+	private function loadTags()
 	{
 		$this->tags = new Tags;
 		$this->tags->findByItem( $this->getId() );
 		return $this;
 	}
 	
+	private function loadCollection()
+	{
+		if( !(@$this->collection instanceof Collection) )
+		{
+			$this->collection = self::getMapper( 'Collection' )->findById( $this->collection_id );		
+		}
+		return $this;
+	}
+	
+	private function loadType()
+	{
+		if( !(@$this->type instanceof Type) )
+			$this->type = self::getMapper( 'Type' )->findById( $this->type_id );
+			
+		return $this;
+	}
+	
+	/**
+	 * retrieve one or all metadata fields for the item
+	 * 
+	 * @param string $metafield_name The name of the metafield to retrieve (optional)
+	 * @param int $length The length of the metatext to display (optional)
+	 * @param string $append The string to append to the metadata snippet, '...' by default
+	 * @return mixed If a metafield name is given, it returns the text (or a snippet thereof), otherwise it returns the entire type_metadata array
+	 * @author Kris Kelly
+	 **/
+	public function getTypeMetadata($metafield_name = NULL, $length = NULL, $append = '...')
+	{
+		if (!is_null($metafield_name) && @$this->metadata ) {
+			
+			foreach ($this->type_metadata as $meta_field) {
+				if ($meta_field['metafield_name'] == $metafield_name) {
+					if ( $length ) return snippet($meta_field['metatext_text'], 0, $length, $append);
+					else return $meta_field['metatext_text'];
+				}
+			}
+			return false;
+		}
+		else{
+			return @$this->metadata;
+		}
+	}
+	
+	/**
+	 * Retrieves a file at the given order in the list of files associated with an item, starting with 0, 
+	 * i.e. $this->getFile(0) would retrieve the first file.  
+	 *
+	 * @return File
+	 * @author Kris Kelly
+	 **/
+	public function getFile( $order = 0 )
+	{
+		return $this->files[$order];
+	}
+	
+	/**
+	 * Retrieve the number of files associated with the item
+	 *
+	 * @return int
+	 * @author Kris Kelly
+	 **/
+	public function getFileTotal()
+	{
+		return count($this->files);
+	}
+	
+	/**
+	 * standard accessor method for item descriptions
+	 *
+	 * @return string
+	 * @author Kris Kelly
+	 **/
+	public function getDesc() { return $this->item_description; }	
+	
+	/**
+	 * Retrieve one random file that has a thumbnail
+	 *
+	 * @return File
+	 * @author Kris Kelly
+	 **/
+	public function getRandomThumbnail()
+	{
+		// Pick a random one
+		return $this->thumbnails->getObjectAt( mt_rand(0, $this->thumbnails->total() - 1 ) );
+	}
+	
+	/**
+	 * Retrieve only the tags associated with a given user ID (returns a Tags object)
+	 *
+	 * @return Tags
+	 * @author Kris Kelly
+	 **/
 	public function myTags( $user_id )
 	{
 		$tags = new Tags;
 		return $tags->findByUser( $user_id, $this->getId() );
 	}
-	
-	public function getLocation()
-	{
-		$this->location = self::getMapper( 'Location' )->findByItem( $this->getId() );
-		return $this;
-	}
-	
-/*	public function getCollection()
-	{
-		$this->collection = self::getMapper( 'Collection' )->findById( $this->collection_id );
-		return $this->collection_id;
-	} */
-	
+
 	public function isFav( $user_id )
 	{
 		$adapter = Kea_DB_Adapter::instance();
@@ -138,12 +231,7 @@ class Item extends Kea_Domain_Model
 				->where( 'user_id = ?', $user_id )
 				->where( 'item_id = ?', $this->getId() );
 		$result = $adapter->query( $select );
-		print_r($adapter->error());
-		if( $result->num_rows > 0 )
-		{
-			return true;
-		}
-		return false;
+		return ( $result->num_rows > 0 );
 	}
 	
 	public function addRemoveFav( $user_id )
@@ -169,26 +257,17 @@ class Item extends Kea_Domain_Model
 				->where( 'item_id = ?', $this->getId() )
 				->where( 'item_featured = ?', '1' );
 		$result = $adapter->query( $select );
-		print_r($adapter->error());
-		if( $result->num_rows > 0 )
-		{
-			return true;
-		}
-		return false;
+		return ( $result->num_rows > 0 );
+	}
+	
+	public function isPublic()
+	{
+		return $this->item_public;
 	}
 	
 	public function addRemoveFeatured( )
 	{
-		$adapter = Kea_DB_Adapter::instance();
-		if( !$this->isFeatured() )
-		{
-			return $adapter->update( 'items', array( 'item_featured'	=> '1' ), 'items.item_id = \'' . $this->getId() . '\'' );
-		}
-		elseif( $this->isFeatured() )
-		{
-			return $adapter->update( 'items', array( 'item_featured'	=> '0' ), 'items.item_id = \'' . $this->getId() . '\'' );
-		}
-		return false;
+		return $this->flip('item_featured');
 	}
 	
 	public function flip( $field )
@@ -212,13 +291,8 @@ class Item extends Kea_Domain_Model
 	public function getShortDesc ( $length = 250 , $append = '...')
 	{
 		$fullDesc = $this->getDesc();
-		if (strlen($fullDesc) > $length ):
-			$shortDesc = substr($fullDesc, 0, strrpos($fullDesc, ' ', $length-strlen($fullDesc)));
-			$shortDesc = $shortDesc.$append;
-			return $shortDesc;
-		else: 
-			return $fullDesc;
-		endif;
+		if (strlen($fullDesc) > $length ) return snippet($fullDesc, 0, $length, $append);
+		return $fullDesc;
 	}
 
 
@@ -228,7 +302,7 @@ class Item extends Kea_Domain_Model
 		$cite .= $this->item_creator;
 		if ($cite != '') $cite .= ', ';
 		$cite .= ($this->item_title) ? '"'.$this->item_title.'." ' : '"Untitled." ';
-		$cite .= '<em>'.INFO_TITLE.'</em>, ';
+		$cite .= '<em>'.SITE_TITLE.'</em>, ';
 		$cite .= 'Item #'.$this->item_id.' ';
 		$cite .= '(accessed '.date('F d Y, g:i a').') ';
 	//	$cite .= '&lt;'.WEB_CONTENT_DIR.DS.'items'.DS.$this->item_id.'&gt;';
@@ -236,41 +310,78 @@ class Item extends Kea_Domain_Model
 		return $cite;
 	}
 	
-	public function delete()
+	public function hasFiles()
 	{
-		return $this->mapper()->delete( $this->getId() );
+		return ($this->files->total() > 0);
 	}
 	
-	/**
-	 * standard accessor method for item descriptions
-	 *
-	 * Has been changed to support use of the file_description instead of item description,
-	 * provided at least one of them is valid.  Can also be modified to pull descriptions from metadata,
-	 * which is useful for stories, etc. where the main text is not in the item_description.  Basically
-	 * this is a convenience function.
-	 * 
-	 * Priority is currently chosen in this order: file_description, item_description
-	 * 
-	 * @return mixed The string description of the item, otherwise false
-	 * @author Kris Kelly
-	 **/
-	public function getDesc()
+	public function hasThumbnail()
 	{
-		$this->getFiles();
-		$fileDesc = @$this->files->getObjectAt(0)->file_description;
-		$itemDesc = $this->item_description;
-		if(!empty($fileDesc))
-		{
-			return $fileDesc;
+		return ( $this->thumbnails->total() > 0 );
+	}
+	
+	//Everything below is copied directly from the Item Mapper.  12/19/06
+	
+	public function singleUpdate( $field, $value, $obj_id )
+	{
+		return self::$_adapter->update( $this->_table_name, array( $field => $value), 'item_id = ' . $obj_id );
+	}
+	
+	public function doLoadMetadata( Item $obj )
+	{
+		$select = self::$_adapter->select()
+					->from('types_metafields', 'metafield_name, metatext_text, metafields.metafield_id, metafield_description, metatext.metatext_id' )
+					->joinLeft( 'metafields', 'metafields.metafield_id = types_metafields.metafield_id' )
+					->joinLeft( 'metatext', 'metatext.metafield_id = metafields.metafield_id' )
+					->where( 'types_metafields.type_id = ?', $obj->type_id )
+					->where( 'metatext.item_id = ?', $obj->item_id )
+					->order( array( 'metatext_id' => 'ASC' ) );
+			
+		if( $result = $this->query( $select ) ) {
+			if( $result->num_rows > 0) {
+				while( $row = $result->fetch_assoc() ) {
+					$obj->type_metadata[$row['metafield_id']] = array(	'metafield_id'			=> $row['metafield_id'],
+														'metafield_name'		=> $row['metafield_name'],
+														'metafield_description'	=> $row['metafield_description'],
+														'metatext_id'			=> $row['metatext_id'],
+														'metatext_text'			=> $row['metatext_text'] );
+				}
+				return $obj;
+			} else {
+				$result->free();
+				$select = self::$_adapter->select()
+							->from('types_metafields', 'metafield_name, metafield_description, metafields.metafield_id' )
+							->joinLeft( 'metafields', 'metafields.metafield_id = types_metafields.metafield_id' )
+							->where( 'types_metafields.type_id = ?', $obj->type_id )
+							->order( array( 'metafield_id' => 'ASC' ) );;
+				$result = $this->query( $select );
+				while( $row = $result->fetch_assoc() ) {
+					$obj->type_metadata[$row['metafield_id']] = array( 	'metafield_id'			=> $row['metafield_id'],
+														'metafield_name'		=> $row['metafield_name'],
+														'metafield_description'	=> $row['metafield_description'],
+														'metatext_text'			=> null );
+				}
+			}
+		} else {
+			throw new Kea_DB_Mapper_Exception( self::$_adapter->error() );
 		}
-		elseif(!empty($itemDesc))
-		{
-			return $itemDesc;
-		}
-		else
-		{
-			return false;
-		}
+	}
+	
+	public static function total()
+	{
+		$adapter = Kea_DB_Adapter::instance();
+		$select = $adapter->select();
+		$select->from( 'itemsTotal', '*' );
+		return $adapter->fetchOne( $select );
+	}
+	
+	public function totalSliced( $type_id = null, $collection_id = null)
+	{
+		$select = self::$_adapter->select();
+		$select->from( 'items', 'COUNT(*) as count' );
+		if ( $type_id != null) $select->where( 'items.type_id = ?', $type_id );
+		if ( $collection_id != null) $select->where( 'items.collection_id = ?', $collection_id );
+		return self::$_adapter->fetchOne( $select );
 	}
 }
 

@@ -62,6 +62,7 @@ set_include_path(get_include_path() . ':'.KEA_ROOT.'/library' . ':'.KEA_ROOT.'/a
 // Set the class autoload env
 function __autoload($classname) {
 	echo 'AUTOLOADING '.$classname;
+//	var_dump( debug_backtrace() );exit;
 	$path = str_replace('_', DIRECTORY_SEPARATOR, $classname);
 	require_once "$path.php";
 }
