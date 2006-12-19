@@ -28,18 +28,18 @@ define('KEA_THEME', 'n8agrin');
 /**
 	DB connection
 */
-/*
+
 define( 'KEA_MYSQLI_HOST',		'localhost' );
 define( 'KEA_MYSQLI_USERNAME',	'root' );
 define( 'KEA_MYSQLI_PASSWORD',	'' );
 define( 'KEA_MYSQLI_DBNAME',	'sb-v1' );
-*/
 
+/*
 define( 'KEA_MYSQLI_HOST',		'mysql.localdomain' );
 define( 'KEA_MYSQLI_USERNAME',	'sitebuilder' );
 define( 'KEA_MYSQLI_PASSWORD',	'XEddVNrwVYAGvrTW' );
 define( 'KEA_MYSQLI_DBNAME',	'sitebuilder_trunk' );
-
+*/
 define( 'KEA_MYSQLI_PORT',		null );
 define( 'KEA_MYSQLI_SOCKET',	null );
 
