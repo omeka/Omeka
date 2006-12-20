@@ -60,12 +60,14 @@ if (!extension_loaded('mysql'))
 set_include_path(get_include_path() . ':'.KEA_ROOT.'/library' . ':'.KEA_ROOT.'/app/models' . ':'.KEA_ROOT.'/app/filters' . ':'.KEA_ROOT.'/app/lib');
 
 // Set the class autoload env
+/*
 function __autoload($classname) {
 	echo 'AUTOLOADING '.$classname;
 //	var_dump( debug_backtrace() );exit;
 	$path = str_replace('_', DIRECTORY_SEPARATOR, $classname);
 	require_once "$path.php";
 }
+*/
 
 // Handle uncaught exceptions by redirecting to a 404 page
 function uncaught_exception_handler($e) {
@@ -85,6 +87,17 @@ set_exception_handler("uncaught_exception_handler");
 
 // Set the default timezone, a PHP 5 thing
 date_default_timezone_set('America/New_York');
+
+/**
+ * DB settings
+ */
+require_once "library/Doctrine/Doctrine.compiled.php";
+$dbh = new Doctrine_Db('mysql:host=localhost;dbname=doctrine', 'root', '');
+Doctrine_Manager::connection($dbh);
+function __autoload($class) {
+    Doctrine::autoload($class);
+}
+spl_autoload_register(array('Doctrine', 'autoload'));
 
 // Includes
 require_once 'debug.php';

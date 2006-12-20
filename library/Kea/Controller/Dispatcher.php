@@ -39,10 +39,10 @@ class Kea_Controller_Dispatcher
 		else {
 			require_once $file;
 			$reflect = new ReflectionClass($cName);
-			if ($reflect->hasMethod($action) &&
-				$reflect->getMethod($action)->isPublic()) {
+			$paction = '_'.$action;
+			if ($reflect->hasMethod($paction) &&
+				$reflect->getMethod($paction)->isProtected()) {
 					$controller = new $cName($response);
-					$controller->beforeFilter($action, $controller);
 					$controller->{$action}();
 			}
 			else {

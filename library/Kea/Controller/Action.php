@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @edited 10/13/06 n8agrin
+ * @edited 12/20/06 n8agrin
  */
 abstract class Kea_Controller_Action
 {	
@@ -10,7 +10,10 @@ abstract class Kea_Controller_Action
 	protected $after_filters = array();
 	
 	protected $_response;
+
 	protected $_request;
+	
+	protected $_conn;
 	
 	public $validationErrors = array();
 	
@@ -25,6 +28,7 @@ abstract class Kea_Controller_Action
 	 */
 	public function __construct(Kea_Controller_Response_Abstract $response)
 	{
+		$this->_conn = Doctrine_Manager::connection();
 		$this->_response = $response;
 		$this->_request = Kea_Request::getInstance();
 	}
@@ -58,8 +62,8 @@ abstract class Kea_Controller_Action
 	
 	public function afterFilter(&$result)
 	{
-		foreach( $this->after_filters as $filter ) {
-			$filter->filter( $result, $this );
+		foreach ($this->after_filters as $filter) {
+			$filter->filter($result, $this);
 		}
 	}
 	
@@ -101,10 +105,10 @@ abstract class Kea_Controller_Action
 			return true;
 		}
 		
-		$namespace = get_class( $object );
+		$namespace = get_class($object);
 		$errors = $object->getErrors();
 
-		foreach( $errors as $property => $error ) {
+		foreach ($errors as $property => $error) {
 			$this->validationErrors[$namespace][$property] = $error;
 		}
 		
@@ -116,41 +120,32 @@ abstract class Kea_Controller_Action
 		return $this->validationErrors;
 	}
 	
-	public function addError( $namespace, $property, $error )
+	public function addError($namespace, $property, $error)
 	{
 		$this->validationErrors[$namespace][$property] = $error;
 	}
 	
 	protected function _forward($controller, $action)
 	{
-		$this->_request->addAction(
-			array('controller'=>$controller, 'action'=>$action));
+		$this->_request->addAction(array('controller'=>$controller, 'action'=>$action));
 	}
-	
-		/*
-		public function __call ($method, $args)
-		{
-	echo 'GOT INTO THE CALL METHOD IN THE ACTION CONTROLLER!!';
-			$method = '_' . $method;
 
-			if (method_exists( $this, $method )) {
-
-				$this->beforeFilter( $method, $this );
-
-				$result = call_user_func_array( array( $this, $method ), $args );
-
-				$this->afterFilter( $result );
-
-				return $result;
-
-			} else {
-				throw new Kea_Action_Exception(
-					'The method ' . $method . ' doesn\'t exist in the controller ' . get_class( $this ) . '.'
-				);
-			}
+	/**
+	 * This method cannot be overwritten in order to allow for embedding of filters
+	 */
+	final public function __call($method, $args)
+	{
+		$method = '_'.$method;
+		if (method_exists($this, $method)) {
+			$this->beforeFilter($method, $args);
+			$result = call_user_func_array(array($this, $method), $args);
+			$this->afterFilter($result);
+			return $result;
+		} else {
+			throw new Kea_Action_Exception(
+				'The method ' . $method . ' doesn\'t exist in the controller '.get_class($this) . '.'
+			);
 		}
-		*/
-	
-	
+	}
 }
 ?>
