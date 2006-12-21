@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Kea/Domain/Record.php';
 /**
  * Item
  *
@@ -8,13 +8,13 @@
  **/
 class Item extends Kea_Domain_Record
 {
-/*	public function setUp() {
+	public function setUp() {
 		$this->ownsOne("Collection","Item.collection_id");
 		$this->ownsOne("Type","Item.type_id");
 		$this->ownsOne("User","Item.user_id");
 		$this->hasMany("File","File.item_id");
 	}
-*/	
+	
 	public function setTableDefinition() {
 		$this->setTableName('items');
 		
