@@ -92,7 +92,6 @@ class Doctrine_RawSql extends Doctrine_Hydrate {
                     $p = $low;
                     if( ! isset($parts[$low]))
                         $parts[$low] = array();
-
                 break;
                 case "order":
                 case "group":
@@ -175,6 +174,8 @@ class Doctrine_RawSql extends Doctrine_Hydrate {
         $q .= ( ! empty($this->parts['groupby']))? ' GROUP BY ' . implode(', ', $this->parts['groupby']) : '';
         $q .= ( ! empty($this->parts['having']))?  ' HAVING '   . implode(' ', $this->parts['having']) : '';
         $q .= ( ! empty($this->parts['orderby']))? ' ORDER BY ' . implode(' ', $this->parts['orderby']) : '';
+        $q .= ( ! empty($this->parts['limit']))?   ' LIMIT ' . implode(' ', $this->parts['limit']) : '';
+        $q .= ( ! empty($this->parts['offset']))?  ' OFFSET ' . implode(' ', $this->parts['offset']) : '';
 
         if( ! empty($string))
             array_pop($this->parts['where']);
