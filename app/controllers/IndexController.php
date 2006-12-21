@@ -1,34 +1,39 @@
 <?php
 require_once 'Kea/Controller/Action.php';
-
-class User extends Doctrine_Record { 
-    public function setTableDefinition() {
-        // set 'user' table columns, note that
-        // id column is always auto-created
-        $this->hasColumn("name","string",30, array("unique"));
-        $this->hasColumn("username","string",20);
-        $this->hasColumn("password","string",16);
-        $this->hasColumn("created","integer",11);
-		$this->hasColumn("foo", "integer", 11);
-    }
-
-	public function save(Doctrine_Connection $conn = null)
-	{
-		try{
-			parent::save($conn);
-		} catch (Doctrine_Validator_Exception $e) {
-			print_r($e);
-		}
-	}
-}
-
+require_once 'Kea/Domain/Record.php';
+require_once 'app/models/Item.php';
+require_once 'app/models/User.php';
+require_once 'app/models/Collection.php';
+require_once 'app/models/Metafield.php';
+require_once 'app/models/Metatext.php';
+require_once 'app/models/Tag.php';
+require_once 'app/models/Type.php';
+require_once 'app/models/File.php';
 class IndexController extends Kea_Controller_Action
 {
+	
+	
 	protected function _index()
 	{
+		$conn = Doctrine_Manager::getInstance()->connection();
+		$userTable = new Doctrine_Table("user", $conn);
+		$itemTable = new Doctrine_Table("item", $conn);
+		$collTable = new Doctrine_Table("collection", $conn);
+		$metafieldTable = new Doctrine_Table("metafield", $conn);
+		$metatextTable = new Doctrine_Table("metatext", $conn);
+		$tagTable = new Doctrine_Table("tag", $conn);
+		$typeTable = new Doctrine_Table("type", $conn);
+		$fileTable = new Doctrine_Table("file", $conn);
+/*		
 		$q = new Doctrine_RawSql();
 		$s = $q->parseQuery("select {user.*} from user limit 13 offset 1");
 		echo count($s->execute()). " ";
+*/	
+		$i = new Item;
+		$i->title = "Foo";
+		$i->description = "Bar";
+		$ret = $i->save();
+		var_dump( $ret );exit;
 	}
 }
 ?>

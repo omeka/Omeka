@@ -92,7 +92,8 @@ date_default_timezone_set('America/New_York');
  * DB settings
  */
 require_once "library/Doctrine/Doctrine.php";
-$dbh = new Doctrine_Db('mysql:host=localhost;dbname=doctrine', 'root', '');
+//$dbh = new Doctrine_Db('mysql:host=localhost;dbname=doctrine', 'root', '');
+$dbh = new Doctrine_Db('mysql:host=mysql.localdomain;dbname=sitebuilder_doctrine', 'sitebuilder', 'XEddVNrwVYAGvrTW');
 Doctrine_Manager::connection($dbh);
 Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_VLD, true);
 function __autoload($class) {
