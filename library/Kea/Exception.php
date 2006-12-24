@@ -10,7 +10,7 @@ class Kea_Exception extends Exception
 	//Should be changed to the site administrator
 
 	protected $email = KEA_ERROR_EMAIL;
-	
+	/*
 	public function __toString()
 	{
 		$string = 'Error: ';
@@ -52,5 +52,6 @@ class Kea_Exception extends Exception
 		}
 		return $string;
 	}
+	*/
 }
 ?>

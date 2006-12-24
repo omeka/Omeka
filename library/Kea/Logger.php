@@ -1,5 +1,4 @@
 <?php
-
 class Kea_Logger
 {
 	public static function logSQL( $message )
@@ -23,5 +22,4 @@ class Kea_Logger
 		file_put_contents( KEA_ERRORS_LOG, $final, FILE_APPEND );
 	}
 }
-
 ?>

@@ -59,16 +59,6 @@ if (!extension_loaded('mysql'))
 // Set the include path
 set_include_path(get_include_path() . ':'.KEA_ROOT.'/library' . ':'.KEA_ROOT.'/app/models' . ':'.KEA_ROOT.'/app/filters' . ':'.KEA_ROOT.'/app/lib');
 
-// Set the class autoload env
-/*
-function __autoload($classname) {
-	echo 'AUTOLOADING '.$classname;
-//	var_dump( debug_backtrace() );exit;
-	$path = str_replace('_', DIRECTORY_SEPARATOR, $classname);
-	require_once "$path.php";
-}
-*/
-
 // Handle uncaught exceptions by redirecting to a 404 page
 function uncaught_exception_handler($e) {
 	$out = ob_get_contents();
@@ -88,18 +78,26 @@ set_exception_handler("uncaught_exception_handler");
 // Set the default timezone, a PHP 5 thing
 date_default_timezone_set('America/New_York');
 
-/**
- * DB settings
- */
+// DB settings
+/*
+$db_host		= "localhost";
+$db_name		= "doctrine";
+$db_user		= "root";
+$db_password	= "";
+*/
+
+// CHNM Settings
+$db_host		= "mysql.localdomain";
+$db_name		= "sitebuilder_doctrine";
+$db_user		= "sitebuilder";
+$db_password	= "XEddVNrwVYAGvrTW";
+
+
 require_once "library/Doctrine/Doctrine.php";
-//$dbh = new Doctrine_Db('mysql:host=localhost;dbname=doctrine', 'root', '');
-$dbh = new Doctrine_Db('mysql:host=mysql.localdomain;dbname=sitebuilder_doctrine', 'sitebuilder', 'XEddVNrwVYAGvrTW');
+spl_autoload_register(array('Doctrine', 'autoload'));  // autoload. it works, bitches
+$dbh = new Doctrine_Db('mysql:host='.$db_host.';dbname='.$db_name, $db_user, $db_password);
 Doctrine_Manager::connection($dbh);
 Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_VLD, true);
-function __autoload($class) {
-    Doctrine::autoload($class);
-}
-spl_autoload_register(array('Doctrine', 'autoload'));
 
 // Includes
 require_once 'debug.php';

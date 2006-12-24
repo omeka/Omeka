@@ -152,7 +152,7 @@ class Kea_Controller_Front
 						break;
 						case "rest":
 							require_once 'Kea/Controller/Response/Rest.php';
-							$this->setResponse(new Kea_Controller_Response_Rest);
+							$this->setResponse(new Kea_Controller_Response_Rest );
 						break;
 					}
 				}
