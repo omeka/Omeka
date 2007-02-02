@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.3/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.4 $"/>
+		<generation date="$Date: 2005/06/01 01:24:23 $"/>
+		<language type="uz"/>
+		<script type="Arab"/>
+		<territory type="AF"/>
+	</identity>
+    <dates>
+		<calendars>
+			<calendar type="gregorian">
+				<week>
+					<firstDay day="sat" draft="true"/>
+				</week>
+			</calendar>
+		</calendars>
+	</dates>
+</ldml>
+

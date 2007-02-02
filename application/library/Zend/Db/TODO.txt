@@ -1,0 +1,11 @@
+
+- Support for non-PDO adapters (mysqli, oci8) is currently in development
+  and should not be used at this time.  Many features are still undone.
+
+- Table metadata access will be moved to a separate component.
+
+- Some convenience methods of the adapters, such as insert() and update(), are
+  not compatible across the database and are subject to removal pending
+  group decision.
+
+

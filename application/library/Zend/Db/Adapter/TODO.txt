@@ -1,0 +1,19 @@
+
+Oracle Support (ext/oci8)
+
+- Currently broken
+- Adapter needs to be refactored to use Zend_Db_Adapter_Abstract
+- Some work left to be done (see @todo)
+
+
+MySQL Support (ext/mysqli)
+
+- Currently broken
+- Adapter needs to be refactored to use Zend_Db_Adapter_Abstract
+- Very large amount of work left to be done (see @todo)
+
+
+Zend_Db_Adapter_Abstract
+
+- Currently should work
+- John Coggeshall will improve transaction support
