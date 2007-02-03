@@ -79,19 +79,19 @@ set_exception_handler("uncaught_exception_handler");
 date_default_timezone_set('America/New_York');
 
 // DB settings
-/*
-$db_host		= "localhost";
-$db_name		= "doctrine";
-$db_user		= "root";
-$db_password	= "";
-*/
 
+$db_host		= "localhost";
+$db_name		= "sb-v2";
+$db_user		= "n8agrin";
+$db_password	= "dudeman";
+
+/*
 // CHNM Settings
 $db_host		= "mysql.localdomain";
 $db_name		= "sitebuilder_doctrine";
 $db_user		= "sitebuilder";
 $db_password	= "XEddVNrwVYAGvrTW";
-
+*/
 
 require_once "library/Doctrine/Doctrine.php";
 spl_autoload_register(array('Doctrine', 'autoload'));  // autoload. it works, bitches
