@@ -6,6 +6,11 @@
 require_once 'Zend/Controller/Action.php';
 class IndexController extends Zend_Controller_Action
 {
+	/**
+	 * This allows for GET style routing.
+	 * DO NOT EDIT THIS UNLESS THERE IS A BUG, OR YOU KNOW WHAT YOU ARE DOING
+	 * @author Nate Agrin
+	 */
     public function indexAction()
     {
 		$req = $this->getRequest();
