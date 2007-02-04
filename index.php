@@ -1,20 +1,23 @@
 <?php
+// Ladies and Gentlemen, start your timers
+define('APP_START', microtime(true));
+
 // Define the base path
 define('BASE_DIR', dirname(__FILE__));
 
 // Shorten the Directory Seperator constant to something reasonable
 define('DS', DIRECTORY_SEPARATOR);
 
-// Define some primitive settings so we don't need to load Zend_Config_Ini
+// Define some primitive settings so we don't need to load Zend_Config_Ini, yet
 $site['application']	= 'application';
-$site['library']		= 'library';
+$site['libraries']		= 'libraries';
 $site['controllers']	= 'controllers';
 $site['models']			= 'models';
 $site['config']			= 'config';
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
-set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DS.$site['application'].DS.$site['library']);
+set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DS.$site['application'].DS.$site['libraries']);
 
 /**
  * Let's try to make this dynamic.  Zend is already slow, we can speed
@@ -32,9 +35,13 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_VLD, true);
 Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 */
 
+// Use Zend_Config_Ini to store the info for the routes and db ini files
 require_once 'Zend.php';
 require_once 'Zend/Config/Ini.php';
-Zend::register('config', new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'config.ini'));
+Zend::register('routes_ini', new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'routes.ini'));
+Zend::register('db_ini', new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'db.ini'));
+$config = new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'config.ini');
+Zend::register('config_ini', $config);
 
 // Require the front controller and router
 require_once 'Zend/Controller/Front.php';
@@ -43,12 +50,16 @@ require_once 'Zend/Controller/RewriteRouter.php';
 // Initialize some stuff
 $front = Zend_Controller_Front::getInstance();
 $router = new Zend_Controller_RewriteRouter();
-$router->addConfig(Zend::registry('config'), 'routes');
+$router->addConfig(Zend::registry('routes_ini'), 'routes');
 $front->setRouter($router);
+$front->throwExceptions((boolean) $config->site->exceptions);
 $front->setControllerDirectory($site['application'].DS.$site['controllers']);
 
-// Call the dispatcher and echo the response object
-echo $front->dispatch();
+// Call the dispatcher which echos the response object automatically
+$front->dispatch();
 
+if ((boolean) $config->site->timer) {
+	echo microtime(true) - APP_START;
+}
 // We're done here.
 ?>
