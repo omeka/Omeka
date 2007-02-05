@@ -1,117 +1,221 @@
 <?php
-/*TODO: collapse this and Plugin model (all the logic can be in one place, shouldn't be all spread out)
+require_once 'Zend/Controller/Plugin/Abstract.php';
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Plugin.php';
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
 /**
- * Kea_Plugin
+ * Specialized plugin class
  *
  * @package Sitebuilder
  * @author Kris Kelly
  **/
-abstract class Kea_Plugin extends Plugin implements Kea_Plugin_Interface
+abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 {
-	private $tempStorage = array();
-	private $manager;
-	
-	/**
-	 * array of metafields for each plugin with metafields[]['name'] & metafields[]['description']
-	 *
-	 * @var array
-	 **/
-	protected $metafields = array();
-	
-	public function __construct($table = null, $isNewEntry = false) {
-		parent::__construct($table, $isNewEntry);
-	}
-	
-	/**
-	 * This is how the Plugin Manager tells the individual plugins to do their thing
-	 *
-	 * @param string the notification string, typically corresponding to a method name within the plugin
-	 * @param object the object from whence the notification sprang, or any arbitrary object (optional)
-	 * @param array  other parameters to pass to the plugin method (optional)
-	 * @return mixed the result of running the plugin method, or false if there is no given method
-	 * @author Kris Kelly
-	 **/
-	public function update($msg, &$obj, $params) {
-		if( method_exists($this, $msg) ) {
-			return call_user_func_array(array($this, $msg), array($obj, $params));
+	private $record;
+	private $listener;
+	public $router;
+		
+	public function __construct($router, $record = null) {
+		$this->router = $router;
+				
+		//Find the plugin entry in the database or create a new empty one
+		if(empty($record)) {
+			$conn = Doctrine_Manager::getInstance()->connection();
+			$this->record = $conn->getTable('Plugin')->findBySql("name = ?", array(get_class($this)))->getFirst();
+			if(empty($this->record)) $this->record = new Plugin();
+		} else {
+			$this->record = $record;
 		}
-		return false;
+		//Hook the Doctrine event listeners into the plugin
+		$listener = new Kea_EventListener($this);
+		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_LISTENER, $listener);
+		
+		$this->defineRoutes();
+		
+		$front = Zend_Controller_Front::getInstance();
+		$front->addControllerDirectory('public'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.get_class($this).'/controllers');
 	}
+	
+	///// ROUTING STUFF /////
+	
+	//Let the plugin writer add their own routes with this convenience method
+	public function defineRoutes() {}
+	
+	public function addRoute($name, Zend_Controller_Router_Route_Interface $route) {
+		$this->router->addRoute($name, $route);
+	}
+	
+	///// END ROUTING STUFF /////
+	
+	///// TEXT MANIPULATION CONVENIENCE METHODS /////
+	
+	public function append($text) {
+		$this->getResponse()->appendBody($text);
+	}
+	
+	public function prepend($text) {
+		$this->getResponse()->setBody($text.$this->getResponse()->getBody());
+	}
+	
+	public function insertAfter($insertText, $afterThis) {
+		$body = $this->getResponse()->getBody();
+		$body_a = explode($afterThis, $body);
+		$before = array_shift($body_a);
+		$after = implode($afterThis, $body_a);
+		$body = $before.$afterThis.$insertText.$after;
+		$this->getResponse()->setBody($body);
+	}
+	
+	///// INSTALLATION/ACTIVATION /////
 	
 	public function install(array $config) {
-		if(!$this->isInstalled())
-		{
-			$this->name = get_class($this);
-			//Maybe this should be passed as opposed to hard-coded, mais je ne sais pas
-			$this->path = PLUGIN_PATH.$this->name.EXT;
-			$this->config = $config;
-			
-			foreach( $this->metafields as $k => $v )
-			{
-				$this->Metafields[$k]->setArray($v);
-			}
-			
-			$this->activate();
+		if(!$this->record->exists()) {
+			$this->record->name = get_class($this);
+			$this->record->config = $config;
+			$this->activate();			
 		}
-	}
-	
-	public function isInstalled() {
-		$res = $this->getTable()->findBySql("name = '".get_class($this)."'" );
-		return ($res->count() > 0);
-	}
-	
-	/**
-	 * Get configuration elements, which are stored as a serialized array in the DB
-	 *
-	 * @return mixed
-	 * @author Kris Kelly
-	 **/
-	public function config($index) {
-		return $this->config[$index];
-	}
-	
-	public function setConfig($index, $value) {
-		$this->config[$index] = $value;
-		$this->save();
 	}
 	
 	public function activate() {
-		$this->active = 1;
-		$this->save();
+		$this->record->active = 1;
+		$this->record->save();
 	}
 	
 	public function deactivate() {
-		$this->active = 0;
-		$this->save();
+		$this->record->active = 0;
+		$this->record->save();
 	}
 	
-	public function view($view, $vars, $return) {
-		$CI =& get_instance();
-		$path = dirname($this->path).'/views/'.$view.EXT;
-		if(file_exists($path)) {
-			return $CI->load->_ci_load(array('view' => $view, 'vars' => $CI->load->_ci_object_to_array($vars), 'path' => $path, 'return' => $return));
-		}
-		elseif( $this->manager()->debug() ) {
-//			echo $path . ' view does not exist';
-		}
+	///// RECORD GETTER/SETTER /////
+	
+	public function getConfig($index) {
+		return $this->record->config[$index];
 	}
 	
-	public function store($index, $value) {
-		$this->tempStorage[$index] = $value;
+	public function setConfig($index, $val) {
+		$this->record->config[$index] = $val;
 	}
 	
-	public function retrieve($index) {
-		return (!empty($this->tempStorage[$index])) ? $this->tempStorage[$index] : false;
+	public function name() {
+		return $this->record->name;
 	}
+	
+	public function path() {
+		return $this->record->path;
+	}
+	
+	///// ZEND CONTROLLER HOOKS /////
+	
+	/**
+     * Called before Zend_Controller_Front begins evaluating the
+     * request against its routes.
+     *
+     * @param Zend_Controller_Request_Abstract $request
+     * @return void
+     */
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    {}
+
+    /**
+     * Called after Zend_Controller_Router exits.
+     *
+     * Called after Zend_Controller_Front exits from the router.
+     *
+     * @param  Zend_Controller_Request_Abstract $request
+     * @return void
+     */
+    public function routeShutdown(Zend_Controller_Request_Abstract $request)
+    {}
+
+    /**
+     * Called before Zend_Controller_Front enters its dispatch loop.
+     *
+     * @param  Zend_Controller_Request_Abstract $request
+     * @return void
+     */
+    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
+    {}
+
+    /**
+     * Called before an action is dispatched by Zend_Controller_Dispatcher.
+     *
+     * This callback allows for proxy or filter behavior.  By altering the
+     * request and resetting its dispatched flag (via
+     * {@link Zend_Controller_Request_Abstract::setDispatched() setDispatched(false)}),
+     * the current action may be skipped.
+     *
+     * @param  Zend_Controller_Request_Abstract $request
+     * @return void
+     */
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {}
+
+    /**
+     * Called after an action is dispatched by Zend_Controller_Dispatcher.
+     *
+     * This callback allows for proxy or filter behavior. By altering the
+     * request and resetting its dispatched flag (via
+     * {@link Zend_Controller_Request_Abstract::setDispatched() setDispatched(false)}),
+     * a new action may be specified for dispatching.
+     *
+     * @param  Zend_Controller_Request_Abstract $request
+     * @return void
+     */
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {}
+
+    /**
+     * Called before Zend_Controller_Front exits its dispatch loop.
+     *
+     * @return void
+     */
+    public function dispatchLoopShutdown()
+    {}
+	
+	///// END ZEND CONTROLLER HOOKS /////
+	
+	///// DOCTRINE LISTENERS /////
 		
-	public function manager(&$obj = null) {
-		if($obj === null) {
-			return $this->manager;
-		} else {
-			$this->manager = $obj;
-		}
-	}
+	public function onLoad(Doctrine_Record $record) {}
+    public function onPreLoad(Doctrine_Record $record) {}
+    public function onUpdate(Doctrine_Record $record) {}
+    public function onPreUpdate(Doctrine_Record $record) {}
+
+    public function onCreate(Doctrine_Record $record) {}
+    public function onPreCreate(Doctrine_Record $record) {}
+ 
+    public function onSave(Doctrine_Record $record) {}
+    public function onPreSave(Doctrine_Record $record) {}
+ 
+    public function onInsert(Doctrine_Record $record) {}
+    public function onPreInsert(Doctrine_Record $record) {}
+ 
+    public function onDelete(Doctrine_Record $record) {}
+    public function onPreDelete(Doctrine_Record $record) {}
+ 
+    public function onEvict(Doctrine_Record $record) {}
+    public function onPreEvict(Doctrine_Record $record) {}
+ 
+    public function onSleep(Doctrine_Record $record) {}
+    
+    public function onWakeUp(Doctrine_Record $record) {}
+    
+    public function onClose(Doctrine_Connection $connection) {}
+    public function onPreClose(Doctrine_Connection $connection) {}
+    
+    public function onOpen(Doctrine_Connection $connection) {}
+ 
+    public function onTransactionCommit(Doctrine_Connection $connection) {}
+    public function onPreTransactionCommit(Doctrine_Connection $connection) {}
+ 
+    public function onTransactionRollback(Doctrine_Connection $connection) {}
+    public function onPreTransactionRollback(Doctrine_Connection $connection) {}
+ 
+    public function onTransactionBegin(Doctrine_Connection $connection) {}
+    public function onPreTransactionBegin(Doctrine_Connection $connection) {}
+    
+    public function onCollectionDelete(Doctrine_Collection $collection) {}
+    public function onPreCollectionDelete(Doctrine_Collection $collection) {}
 	
-} // END class Kea_Plugin
+} // END class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 
 ?>

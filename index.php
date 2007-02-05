@@ -5,6 +5,9 @@ define('APP_START', microtime(true));
 // Define the base path
 define('BASE_DIR', dirname(__FILE__));
 
+// Define the path to the plugin directory
+define('PLUGIN_DIR', BASE_DIR . 'public' . DIRECTORY_SEPARATOR . 'plugins' );
+
 // Shorten the Directory Seperator constant to something reasonable
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -15,31 +18,39 @@ $site['controllers']	= 'controllers';
 $site['models']			= 'models';
 $site['config']			= 'config';
 
+define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
+define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
+define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
+
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
 set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DS.$site['application'].DS.$site['libraries']);
 
-/**
+/*
  * Let's try to make this dynamic.  Zend is already slow, we can speed
  * this up by at least loading Doctrine only when we need it.
+*/
 require_once 'Doctrine.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
 
-* This should use the Zend_Config_Ini obj
-$dbh = new PDO(':host=;dbname=', '', '');
+require_once 'Zend/Config/Ini.php';
+$db = new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'db.ini', 'database');
+Zend::register('db_ini', $db);
+
+$dbh = new PDO($db->type.':host='.$db->host.';dbname='.$db->name, $db->username, $db->password);
 
 Doctrine_Manager::connection($dbh);
 
 // sets a final attribute validation setting to true
-Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_VLD, true);
-Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
-*/
+$manager = Doctrine_Manager::getInstance();
+$manager->setAttribute(Doctrine::ATTR_VLD, true);
+$manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
+
 
 // Use Zend_Config_Ini to store the info for the routes and db ini files
 require_once 'Zend.php';
-require_once 'Zend/Config/Ini.php';
+
 Zend::register('routes_ini', new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'routes.ini'));
-Zend::register('db_ini', new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'db.ini'));
 $config = new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'config.ini');
 Zend::register('config_ini', $config);
 
@@ -52,8 +63,19 @@ $front = Zend_Controller_Front::getInstance();
 $router = new Zend_Controller_RewriteRouter();
 $router->addConfig(Zend::registry('routes_ini'), 'routes');
 $front->setRouter($router);
+
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Plugin.php';
+
+//Register all of the active plugins
+$plugins = $manager->getTable('Plugin')->activeArray($router);
+foreach( $plugins as $plugin )
+{
+	$front->registerPlugin($plugin);
+}
+
 $front->throwExceptions((boolean) $config->site->exceptions);
-$front->setControllerDirectory($site['application'].DS.$site['controllers']);
+$front->addControllerDirectory($site['application'].DS.$site['controllers']);
 
 // Call the dispatcher which echos the response object automatically
 $front->dispatch();

@@ -7,8 +7,8 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [database]
-database.type     = XXXXXXX
-database.host     = XXXXXXX
-database.username = XXXXXXX
-database.password = XXXXXXX
-database.name     = XXXXXXX
+type     = XXXXXXX
+host     = XXXXXXX
+username = XXXXXXX
+password = XXXXXXX
+name     = XXXXXXX
