@@ -28,7 +28,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		//Hook the Doctrine event listeners into the plugin
 		$listener = new Kea_EventListener($this);
 		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_LISTENER, $listener);
-		
+
 		$this->defineRoutes();
 		
 		$front = Zend_Controller_Front::getInstance();
@@ -101,6 +101,10 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	
 	public function path() {
 		return $this->record->path;
+	}
+	
+	public function metafields() {
+		return $this->record->Metafields;
 	}
 	
 	///// ZEND CONTROLLER HOOKS /////

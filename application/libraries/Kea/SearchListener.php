@@ -2,7 +2,7 @@
 /* TODO: integrate searching of Tags and other models related to the Item
  *
  */
-
+define('SEARCH_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'search');
 require_once 'Zend/Search/Lucene.php';
 
 /**
@@ -16,8 +16,8 @@ class Kea_SearchListener extends Doctrine_EventListener
 	private $index;
 	
 	public function __construct() {
-		$create = !file_exists(SEARCH_PATH.DIRECTORY_SEPARATOR.'index.lock');
-		$this->index = new Zend_Search_Lucene(SEARCH_PATH, $create);
+		$create = !file_exists(SEARCH_DIR.DIRECTORY_SEPARATOR.'index.lock');
+		$this->index = new Zend_Search_Lucene(SEARCH_DIR, $create);
 		
 		//We need this because Zend Search has some sort of retarded default that won't let you search through digits
 		Zend_Search_Lucene_Analysis_Analyzer::setDefault( new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive() );

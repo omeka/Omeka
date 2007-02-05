@@ -8,7 +8,7 @@
 class Plugin extends Doctrine_Record
 {
 	public function setUp() {
-//		$this->ownsMany("Metafield as Metafields", "Metafield.plugin_id");
+		$this->ownsMany("Metafield as Metafields", "Metafield.plugin_id");
 	}
 	
  	public function setTableDefinition() {

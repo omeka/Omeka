@@ -18,9 +18,11 @@ $site['controllers']	= 'controllers';
 $site['models']			= 'models';
 $site['config']			= 'config';
 
+// Define some constants based on those settings
 define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
 define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
 define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
+define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
@@ -46,6 +48,9 @@ $manager = Doctrine_Manager::getInstance();
 $manager->setAttribute(Doctrine::ATTR_VLD, true);
 $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 
+// tack on the search capabilities
+require_once 'Kea'.DIRECTORY_SEPARATOR.'SearchListener.php';
+$manager->setAttribute(Doctrine::ATTR_LISTENER, new Kea_SearchListener());
 
 // Use Zend_Config_Ini to store the info for the routes and db ini files
 require_once 'Zend.php';
