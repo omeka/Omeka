@@ -2,6 +2,8 @@
 /**
  * @package Sitebuilder
  * @author Nate Agrin
+ * 
+ * ONLY EDIT THIS FILE IF YOU KNOW WHAT YOU ARE DOING!!
  **/
 require_once 'Zend/Controller/Action.php';
 class AdminController extends Zend_Controller_Action

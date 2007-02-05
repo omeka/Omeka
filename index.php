@@ -5,9 +5,6 @@ define('APP_START', microtime(true));
 // Define the base path
 define('BASE_DIR', dirname(__FILE__));
 
-// Define the path to the plugin directory
-define('PLUGIN_DIR', BASE_DIR . 'public' . DIRECTORY_SEPARATOR . 'plugins' );
-
 // Shorten the Directory Seperator constant to something reasonable
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -23,6 +20,7 @@ define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_
 define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
 define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
 define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
+define('PLUGIN_DIR', BASE_DIR . 'public' . DIRECTORY_SEPARATOR . 'plugins' );
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
@@ -39,7 +37,7 @@ require_once 'Zend/Config/Ini.php';
 $db = new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'db.ini', 'database');
 Zend::register('db_ini', $db);
 
-$dbh = new PDO($db->type.':host='.$db->host.';dbname='.$db->name, $db->username, $db->password);
+$dbh = new PDO($db->database->type.':host='.$db->database->host.';dbname='.$db->database->name, $db->database->username, $db->database->password);
 
 Doctrine_Manager::connection($dbh);
 

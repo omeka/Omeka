@@ -24,5 +24,4 @@ class PluginTable extends Doctrine_Table
 		return $plugins;
 	}
 } // END class PluginTable extends Doctrine_Table
-
 ?>
