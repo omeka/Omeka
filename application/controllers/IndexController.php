@@ -13,15 +13,17 @@ class IndexController extends Zend_Controller_Action
 	 */
     public function indexAction()
     {
+		$config = Zend::registry('config_ini');
+		
 		$req = $this->getRequest();
 		
-		$c = $req->getParam('c');
-		$a = $req->getParam('a');
-		$admin = (boolean) $req->getParam('admin');
+		$c = $req->getParam($config->site->controller);
+		$a = $req->getParam($config->site->action);
+		$admin = (boolean) $req->getParam($config->site->admin);
 
 		if (!$c) {
 			// Assume that they want to go to the default location
-			$this->_forward('items', 'browse');
+			$this->_forward($config->site->default->controller, $config->site->default->action);
 		}
 		
 		if ($admin && $c) {
@@ -35,11 +37,16 @@ class IndexController extends Zend_Controller_Action
 				return;
 			}
 			else {
-				$this->_forward($c, 'index');
+				$this->_forward($c, $config->site->default->action);
 				return;
 			}
 		}
     }
+
+	public function testAction()
+	{
+		print_r($this->getRequest());
+	}
 
     public function noRouteAction()
     {

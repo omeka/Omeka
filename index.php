@@ -37,7 +37,7 @@ require_once 'Zend/Config/Ini.php';
 $db = new Zend_Config_Ini($site['application'].DS.$site['config'].DS.'db.ini', 'database');
 Zend::register('db_ini', $db);
 
-$dbh = new PDO($db->database->type.':host='.$db->database->host.';dbname='.$db->database->name, $db->database->username, $db->database->password);
+$dbh = new PDO($db->type.':host='.$db->host.';dbname='.$db->name, $db->username, $db->password);
 
 Doctrine_Manager::connection($dbh);
 
