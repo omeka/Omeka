@@ -38,5 +38,4 @@ short_admin.defaults.action = index
 id.route = ":controller/:action/:id"
 id.defaults.controller = index
 id.defaults.action = index
-id.defaults.id = 1
 id.reqs.id = "\d+"
