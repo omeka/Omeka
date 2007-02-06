@@ -26,18 +26,18 @@ class ThemesController extends Zend_Controller_Action
 			if (!$dir->isDot() and $fname[0] != '.' and $dir->isReadable()) {
 				
 				// Define a hard theme path for the theme
-				$theme['dir'] = ADMIN_DIR.DS.$dir;
+				$theme['dir'] = ADMIN_DIR.DIRECTORY_SEPARATOR.$dir;
 				
 				// Test to see if an image is available to present the user
 				// when switching themes
-				$image_file = $theme['dir'].DS.$fname.'.jpg';
+				$image_file = $theme['dir'].DIRECTORY_SEPARATOR.$fname.'.jpg';
 				if (file_exists($image_file) && is_readable($image_file)) {
-					$img = ADMIN_WEB.DS.$fname.DS.$fname.'.jpg';
+					$img = ADMIN_WEB.DIRECTORY_SEPARATOR.$fname.DIRECTORY_SEPARATOR.$fname.'.jpg';
 					$theme['image'] = $img;
 				}
 				
 				// Finally get the theme's config file
-				$theme_ini = $theme['dir'].DS.'theme.ini';
+				$theme_ini = $theme['dir'].DIRECTORY_SEPARATOR.'theme.ini';
 				if (file_exists($theme_ini) && is_readable($theme_ini)) {
 					$theme['ini'] = new Zend_Config_Ini($theme_ini, 'theme');
 				}
@@ -58,11 +58,11 @@ class ThemesController extends Zend_Controller_Action
 		// Create a view class
 		Zend::loadClass('Zend_View');
 		$view = new Zend_View;
-		$view->setScriptPath(ADMIN_DIR.DS.$admin_theme[0]->value);
+		$view->setScriptPath(ADMIN_DIR.DIRECTORY_SEPARATOR.$admin_theme[0]->value);
 		
 		// Send the global $themes array to the view
 		$view->assign('themes', $themes);
-		$this->getResponse()->appendBody($view->render('themes'.DS.'browse.php'));
+		$this->getResponse()->appendBody($view->render('themes'.DIRECTORY_SEPARATOR.'browse.php'));
 	}
 
     public function noRouteAction()
