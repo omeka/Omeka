@@ -13,10 +13,14 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	private $record;
 	private $listener;
 	public $router;
+	
+	protected $defaults;
 		
-	public function __construct($router, $record = null) {
-		$this->router = $router;
-				
+	public function __construct($router = null, $record = null) {
+		if(!empty($router)) {
+			$this->router = $router;
+			$this->defineRoutes();
+		}		
 		//Find the plugin entry in the database or create a new empty one
 		if(empty($record)) {
 			$conn = Doctrine_Manager::getInstance()->connection();
@@ -28,9 +32,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		//Hook the Doctrine event listeners into the plugin
 		$listener = new Kea_EventListener($this);
 		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_LISTENER, $listener);
-
-		$this->defineRoutes();
-		
+	
 		$front = Zend_Controller_Front::getInstance();
 		$front->addControllerDirectory('public'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.get_class($this).'/controllers');
 	}
@@ -67,13 +69,27 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	
 	///// INSTALLATION/ACTIVATION /////
 	
-	public function install(array $config) {
+	public function getDefaults() {
+		return $this->defaults;
+	}
+	
+	public function install($path) {
 		if(!$this->record->exists()) {
 			$this->record->name = get_class($this);
-			$this->record->config = $config;
-			$this->activate();			
+			$this->record->path = $path;
+			$this->record->config = $this->defaults;
+			$this->record->save();	
+			$this->customizeInstall();
 		}
 	}
+	
+	/**
+	 * Convenience method for plugin writers to customize their plugin installation
+	 *
+	 * @return void
+	 * @author Kris Kelly
+	 **/
+	public function customizeInstall() {}
 	
 	public function activate() {
 		$this->record->active = 1;

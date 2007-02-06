@@ -25,8 +25,8 @@ define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_
 define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
 define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
 define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
+define('PLUGIN_DIR', BASE_DIR .DIRECTORY_SEPARATOR. 'public' . DIRECTORY_SEPARATOR . 'plugins' );
 define('ADMIN_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin');
-define('PLUGIN_DIR', BASE_DIR . 'public' . DIRECTORY_SEPARATOR . 'plugins' );
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]

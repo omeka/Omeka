@@ -23,5 +23,27 @@ class PluginTable extends Doctrine_Table
 		}
 		return $plugins;
 	}
+	
+	public function getNewPluginNames() {
+		$plugins = $this->findAll();
+		$plugin_dirs = new DirectoryIterator(PLUGIN_DIR);
+		$new_plugins = array();
+				
+		foreach( $plugin_dirs as $v )
+		{
+			$dir = $v->__toString();
+			if(!$v->isDot() && $v != '.svn') {
+				$new_plugins[$dir] = $dir;
+			}
+			foreach( $plugins as $plugin )
+			{
+				if($dir == $plugin->name) 
+				{
+					unset($new_plugins[$dir]);
+				}
+			}
+		}
+		return $new_plugins;		
+	}
 } // END class PluginTable extends Doctrine_Table
 ?>
