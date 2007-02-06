@@ -17,13 +17,13 @@ class IndexController extends Zend_Controller_Action
 		
 		$req = $this->getRequest();
 		
-		$c = $req->getParam($config->site->controller);
-		$a = $req->getParam($config->site->action);
-		$admin = (boolean) $req->getParam($config->site->admin);
+		$c = $req->getParam($config->uri->controller);
+		$a = $req->getParam($config->uri->action);
+		$admin = (boolean) $req->getParam($config->uri->admin);
 
 		if (!$c) {
 			// Assume that they want to go to the default location
-			$this->_forward($config->site->default->controller, $config->site->default->action);
+			$this->_forward($config->default->controller, $config->default->action);
 		}
 		
 		if ($admin && $c) {
@@ -37,7 +37,7 @@ class IndexController extends Zend_Controller_Action
 				return;
 			}
 			else {
-				$this->_forward($c, $config->site->default->action);
+				$this->_forward($c, $config->default->action);
 				return;
 			}
 		}
