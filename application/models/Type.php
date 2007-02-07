@@ -1,4 +1,5 @@
 <?php
+require_once 'Metafield.php' ;
 /**
  * @package Sitebuilder
  * @author Kris Kelly

@@ -1,4 +1,7 @@
 <?php
+require_once 'GroupsPermissions.php';
+require_once 'User.php';
+require_once 'Permission.php';
 /**
  * @package Sitebuilder
  * @author Nate Agrin

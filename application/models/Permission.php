@@ -1,4 +1,5 @@
 <?php
+require_once 'Group.php' ;
 /**
  * @package Sitebuilder
  * @author Nate Agrin

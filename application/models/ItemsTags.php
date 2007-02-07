@@ -1,5 +1,7 @@
 <?php
-
+require_once 'User.php';
+require_once 'Item.php';
+require_once 'Tag.php';
 /**
  * Items_Tags join table
  *

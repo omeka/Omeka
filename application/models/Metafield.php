@@ -1,4 +1,5 @@
 <?php
+require_once 'Type.php';
 /**
  * @package Sitebuilder
  * @author Kris Kelly
