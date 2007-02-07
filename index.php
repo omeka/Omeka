@@ -1,5 +1,4 @@
 <?php
-
 // Ladies and Gentlemen, start your timers
 define('APP_START', microtime(true));
 
@@ -17,8 +16,9 @@ $site['config']			= 'config';
 $root = 'http://'.$_SERVER['HTTP_HOST'];
 $dir = explode(DIRECTORY_SEPARATOR, trim($_SERVER['REQUEST_URI'], DIRECTORY_SEPARATOR));
 define('WEB_DIR', $root.DIRECTORY_SEPARATOR.$dir[0]);
-define('PUBLIC_WEB', WEB_DIR.DIRECTORY_SEPARATOR.'public');
-define('ADMIN_WEB', PUBLIC_WEB.DIRECTORY_SEPARATOR.'admin');
+define('WEB_PUBLIC', WEB_DIR.DIRECTORY_SEPARATOR.'public');
+define('WEB_ADMIN', PUBLIC_WEB.DIRECTORY_SEPARATOR.'admin');
+define('WEB_THEMES', PUBLIC_WEB.DIRECTORY_SEPARATOR.'themes');
 
 // Define some constants based on those settings
 define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
@@ -32,10 +32,6 @@ define('ADMIN_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin');
 // do we want to include the model paths here too? [NA]
 set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
 
-/*
- * Let's try to make this dynamic.  Zend is already slow, we can speed
- * this up by at least loading Doctrine only when we need it.
-*/
 require_once 'Doctrine.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
 

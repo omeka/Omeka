@@ -50,7 +50,7 @@ class ThemesController extends Zend_Controller_Action
 			}
 		}
 		// Get the options table
-		require_once 'application/models/Option.php';
+		require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
 		$doctrine = Zend::registry('doctrine');
 		$options = $doctrine->getTable('option');
 		$admin_theme = $options->findByDql("name LIKE 'admin_theme'");
