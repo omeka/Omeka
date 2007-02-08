@@ -3,7 +3,7 @@
 /**
  * Kea_EventListener
  *
- * @package SiteBuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Kea_EventListener extends Doctrine_EventListener

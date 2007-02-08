@@ -2,7 +2,7 @@
 require_once 'Metafield.php' ;
 require_once 'TypesMetafields.php' ;
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Type extends Kea_Record { 

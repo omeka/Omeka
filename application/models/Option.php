@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Option extends Kea_Record { 

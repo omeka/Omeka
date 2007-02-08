@@ -2,7 +2,7 @@
 require_once 'Item.php' ;
 require_once 'TagTable.php';
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Tag extends Kea_Record { 

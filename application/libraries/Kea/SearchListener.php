@@ -8,7 +8,7 @@ require_once 'Zend/Search/Lucene.php';
 /**
  * This will help us index things with the Zend_Search
  *
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Kea_SearchListener extends Doctrine_EventListener

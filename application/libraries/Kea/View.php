@@ -6,7 +6,7 @@ require_once 'Zend/View/Abstract.php';
 /**
  * Customized view class
  *
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Kea_View extends Zend_View_Abstract

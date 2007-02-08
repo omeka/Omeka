@@ -2,7 +2,7 @@
 /**
  * 
  *
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class GeoLocation extends Kea_Plugin

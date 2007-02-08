@@ -1,7 +1,7 @@
 <?php
 require_once 'Group.php' ;
 /**
- * @package Sitebuilder
+ * @package Omeka
  **/
 
 /**

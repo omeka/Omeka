@@ -1,7 +1,7 @@
 <?php
 require_once 'Kea/View.php';
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Nate Agrin
  **/
 require_once 'Zend/Controller/Action.php';

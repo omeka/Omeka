@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Nate Agrin
  **/
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'File.php';

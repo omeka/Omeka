@@ -3,7 +3,7 @@ require_once LIB_DIR.DIRECTORY_SEPARATOR.'Kea'.DIRECTORY_SEPARATOR.'Plugin.php';
 /**
  * Special Plugin finder (to generate the correct plugins from the db)
  *
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class PluginTable extends Doctrine_Table

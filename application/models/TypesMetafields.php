@@ -4,7 +4,7 @@ require_once 'Metafield.php';
 /**
  * TypesMetafields join record
  *
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class TypesMetafields extends Kea_Record

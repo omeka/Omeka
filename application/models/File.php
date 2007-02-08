@@ -11,7 +11,7 @@ define( 'PATH_TO_CONVERT', '/usr/bin/convert' );
 require_once 'Item.php';
 
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class File extends Kea_Record { 

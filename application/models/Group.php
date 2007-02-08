@@ -3,7 +3,7 @@ require_once 'GroupsPermissions.php';
 require_once 'User.php';
 require_once 'Permission.php';
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Nate Agrin
  * 
  * For use in a ACL type system where each group

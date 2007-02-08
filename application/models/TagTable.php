@@ -3,7 +3,7 @@
 /**
  * Tag Table 
  *
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class TagTable extends Doctrine_Table

@@ -5,7 +5,7 @@ require_once 'Metatext.php';
 require_once 'TypesMetafields.php';
 require_once 'MetafieldTable.php';
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Metafield extends Kea_Record { 

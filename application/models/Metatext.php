@@ -2,7 +2,7 @@
 require_once 'Metafield.php';
 require_once 'Item.php';
 /**
- * @package Sitebuilder
+ * @package Omeka
  * @author Kris Kelly
  **/
 class Metatext extends Kea_Record { 
