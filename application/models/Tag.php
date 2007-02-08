@@ -1,5 +1,6 @@
 <?php
 require_once 'Item.php' ;
+require_once 'TagTable.php';
 /**
  * @package Sitebuilder
  * @author Kris Kelly

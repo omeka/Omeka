@@ -5,7 +5,7 @@ require_once 'User.php';
 require_once 'File.php';
 require_once 'Metatext.php';
 require_once 'Tag.php';
-
+require_once 'ItemsTags.php';
 /**
  * @package Sitebuilder
  * @author Kris Kelly

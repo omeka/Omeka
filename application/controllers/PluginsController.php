@@ -7,6 +7,7 @@ require_once 'Kea/View.php';
 require_once 'Zend/Controller/Action.php';
 class PluginsController extends Zend_Controller_Action
 {
+	//Duplicated in other controllers (should be abstracted by the layout/theme system)
 	public function init() {
 		$view = new Kea_View;
 		$this->view_path = PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'plugins';
@@ -29,8 +30,8 @@ class PluginsController extends Zend_Controller_Action
 		echo $this->view->render('all.php');
 	}
 
-	
-	private function find() {
+	//This should essentially be built into controllers as well, functional equivalent to findById() in the old system
+	protected function find() {
 		$id = $this->getRequest()->getParam('id');
 		$plugin = Doctrine_Manager::connection()->getTable('Plugin')->find($id);
 		return $plugin;

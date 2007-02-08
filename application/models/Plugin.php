@@ -1,5 +1,6 @@
 <?php
 require_once 'Metafield.php';
+require_once 'PluginTable.php';
 /**
  * Used for plugin storage in the database
  *
