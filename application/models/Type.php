@@ -6,8 +6,8 @@ require_once 'Metafield.php' ;
  **/
 class Type extends Kea_Record { 
     public function setUp() {
-		//This should be hasMany but I don't feel like setting up the join table just yet
-		$this->ownsMany("Metafield as Metafields", "Metafield.type_id");
+		//This should be 'ownsMany' to set up the foreign key cascade delete, but it won't work with many-to-many aggregates (Doctrine_Exception)
+		$this->hasMany("Metafield as Metafields", "TypesMetafields.metafield_id");
 	}
 
 	public function setTableDefinition() {
@@ -15,6 +15,14 @@ class Type extends Kea_Record {
 		$this->hasColumn("name","string", 200);
 		$this->hasColumn("description","string", null);
  	}
+
+	public function hasMetafield($name) {
+		foreach( $this->Metafields as $metafield )
+		{
+			if($metafield->name == $name) return true;
+		}
+		return false;
+	}
 }
 
 ?>
