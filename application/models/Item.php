@@ -6,12 +6,14 @@ require_once 'File.php';
 require_once 'Metatext.php';
 require_once 'Tag.php';
 require_once 'ItemsTags.php';
+
 /**
  * @package Sitebuilder
  * @author Kris Kelly
  **/
 class Item extends Kea_Record
 {	
+	
 	public function setUp() {
 		$this->hasOne("Collection","Item.collection_id");
 		$this->hasOne("Type","Item.type_id");
@@ -44,6 +46,9 @@ class Item extends Kea_Record
 		$this->hasColumn("user_id","integer");
 
 	}
+	
+	
+	///// TAGGING METHODS /////
 	
 	public function tagString($wrap = null, $delimiter = ',') {
 		$string = '';
@@ -106,6 +111,9 @@ class Item extends Kea_Record
 		}
 		return false;
 	}
+	
+	///// END TAGGING METHODS /////
+		
 } // END class Item extends Kea_Domain_Record
 
 ?>

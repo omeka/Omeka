@@ -75,7 +75,7 @@ class PluginsController extends Zend_Controller_Action
 						$plugin_class->install($path);
 						$this->_redirect('plugins/browse/');
 					} catch(Exception $e) {
-						var_dump( $e );exit;
+						echo $e->getMessage();exit;
 					}
 				}
 			}

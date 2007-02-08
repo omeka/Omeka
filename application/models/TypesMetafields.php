@@ -1,5 +1,6 @@
 <?php
-
+require_once 'Type.php';
+require_once 'Metafield.php';
 /**
  * TypesMetafields join record
  *

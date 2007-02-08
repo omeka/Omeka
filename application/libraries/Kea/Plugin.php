@@ -14,7 +14,20 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	private $listener;
 	public $router;
 	
-	protected $defaults;
+	/**
+	 * $config[]['property' => 'default']
+	 * @var array
+	 **/
+	protected $config = array();
+	
+	/**
+	 * $metafields[]['name']
+	 * $metafields[]['description']
+	 * these will be accessed only during installation/un-installation
+	 * 
+	 * @var array
+	 **/
+	protected $metafields = null;
 		
 	public function __construct($router = null, $record = null) {
 		if(!empty($router)) {
@@ -69,15 +82,21 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	
 	///// INSTALLATION/ACTIVATION /////
 	
-	public function getDefaults() {
-		return $this->defaults;
-	}
-	
 	public function install($path) {
 		if(!$this->record->exists()) {
 			$this->record->name = get_class($this);
 			$this->record->path = $path;
-			$this->record->config = $this->defaults;
+			$this->record->config = $this->config;
+			foreach( $this->metafields as $array )
+			{
+				$metafield = new Metafield;
+				foreach( $array as $key => $value )
+				{
+					$metafield->$key = $value;
+					// TODO: have it check for specific types in the metafield definition so that the plugin can add metafields only to certain types
+				}
+				$this->record->Metafields->add($metafield);
+			}
 			$this->record->save();	
 			$this->customizeInstall();
 		}

@@ -7,11 +7,13 @@
  **/
 class GeoLocation extends Kea_Plugin
 {
-	protected $defaults = array(
+	protected $config = array(
 		'Latitude' => 50, 
 		'Longitude' => 70, 
 		'ZoomLevel' => 5, 
 		'Maps Key' => 'ABQIAAAAD-SKaHlA87rO8jrVjT7SHBQ22YnqeXddIs-jHkCCm8C4K5z8GBTo29raXitwn3YbLGstzhF1Yn4Ctg');
+	
+	protected $metafields = array( array('name' => 'Latitude', 'description' => 'The latitude on the map.'), array('name' => 'Longitude', 'description' => 'The longitude on the map.'));
 	
 	public function defineRoutes()
 	{

@@ -1,5 +1,6 @@
 <?php
 require_once 'Metafield.php' ;
+require_once 'TypesMetafields.php' ;
 /**
  * @package Sitebuilder
  * @author Kris Kelly
