@@ -3,6 +3,7 @@ require_once 'Type.php';
 require_once 'Plugin.php';
 require_once 'Metatext.php';
 require_once 'TypesMetafields.php';
+require_once 'MetafieldTable.php';
 /**
  * @package Sitebuilder
  * @author Kris Kelly

@@ -47,6 +47,32 @@ class Item extends Kea_Record
 
 	}
 	
+	///// METADATA METHODS /////
+	
+	public function metadata( $name, $return_text = true ) {		
+		$meta = new Doctrine_Collection('Metatext');
+		foreach( $this->Metatext as $key => $record )
+		{
+			//metadata is either all plugin data, all type data, or a single field name
+			if($name == $record->Metafield->name) {
+				if($return_text) return $record->text;
+				return $record;
+			}
+			if( $name != 'plugin') {
+				if($this->Type->hasMetafield($record->Metafield->name)) {
+					$meta->add($record);
+				}
+			}elseif( $name != 'type') {
+				if( $record->Metafield->Plugin->exists() && $record->Metafield->Plugin->active ) {
+					$meta->add($record);
+				}
+			}
+
+		}
+		return $meta;
+	}
+	
+	///// END METADATA METHODS /////
 	
 	///// TAGGING METHODS /////
 	

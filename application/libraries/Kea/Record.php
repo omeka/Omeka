@@ -16,17 +16,19 @@ abstract class Kea_Record extends Doctrine_Record
 		}
 	}
 	
-	public function dumpSave() {
+	public function dumpSave($dumpValues = false) {
 		try {
 			$this->save();
 		}catch( Doctrine_Validator_Exception $e) {
 			foreach( $e->getInvalidRecords() as $key => $record )
 			{
-				echo get_class( $record )."<br/>\n";
+				echo get_class( $record ).(($record->exists()) ? " with id = ".$record->id : "")."<br/>\n";
 				foreach( $record->getErrorStack() as $name => $stack )
 				{
 					echo "$name) ".print_r($stack, true). "<br/>\n";
 				}
+				
+				if($dumpValues) $record->dump();
 			}
 		}
 	}
