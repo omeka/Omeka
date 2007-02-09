@@ -68,7 +68,7 @@ require_once 'Zend/Controller/Front.php';
 require_once 'Zend/Controller/RewriteRouter.php';
 
 // Initialize some stuff
-$front = Zend_Controller_Front::getInstance();
+$front = Kea_Controller_Front::getInstance();
 $router = new Zend_Controller_RewriteRouter();
 $router->addConfig(Zend::registry('routes_ini'), 'routes');
 $front->setRouter($router);

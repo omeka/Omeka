@@ -7,15 +7,6 @@ require_once 'Kea/View.php';
 require_once 'Zend/Controller/Action.php';
 class PluginsController extends Zend_Controller_Action
 {
-	//Duplicated in other controllers (should be abstracted by the layout/theme system)
-	public function init() {
-		$view = new Kea_View;
-		$this->view_path = PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'plugins';
-		$view->setScriptPath($this->view_path);
-		$this->view = $view;		
-	}
-	
-	
     public function indexAction()
     {
 		$this->_forward('plugins', 'browse');

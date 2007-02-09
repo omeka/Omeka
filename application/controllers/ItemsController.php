@@ -41,7 +41,7 @@ class ItemsController extends Kea_Controller_Action
     {
         $this->_redirect('/');
     }
-	
+
 	public function showAction() 
 	{
 		$this->view->item = $this->find();

@@ -46,7 +46,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		$listener = new Kea_EventListener($this);
 		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_LISTENER, $listener);
 	
-		$front = Zend_Controller_Front::getInstance();
+		$front = Kea_Controller_Front::getInstance();
 		$front->addControllerDirectory('public'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.get_class($this).'/controllers');
 	}
 	
@@ -99,6 +99,8 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 			}
 			$this->record->save();	
 			$this->customizeInstall();
+		}else {
+			throw new Exception(get_class($this).' plugin has already been installed.');
 		}
 	}
 	

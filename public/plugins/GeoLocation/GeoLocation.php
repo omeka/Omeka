@@ -27,6 +27,11 @@ class GeoLocation extends Kea_Plugin
 		);
 	}
 	
+	public function header()
+	{
+		echo "<script type=\"text/javascript\" charset=\"utf-8\">window.onload=function() {alert('foo');}</script>";
+	}
+	
 	public function routeStartup()
     {
 //        $this->getResponse()->appendBody('<p>routeStartup() called</p>');

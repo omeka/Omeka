@@ -82,6 +82,8 @@ function common($file, $vars = array(), $dir = 'common') {
 
 function head($vars = array(), $file = 'header') {
 	common($file, $vars);
+	Kea_Controller_Plugin_Broker::getInstance()->header();
+	echo "\n</head>\n<body>\n";
 }
 
 function footer($vars = array(), $file = 'footer') {

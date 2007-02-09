@@ -18,7 +18,7 @@ class Item extends Kea_Record
 		$this->hasOne("Collection","Item.collection_id");
 		$this->hasOne("Type","Item.type_id");
 		$this->hasOne("User","Item.user_id");
-		$this->ownsMany("File","File.item_id");
+		$this->ownsMany("File as Files","File.item_id");
 		$this->ownsMany("Metatext", "Metatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 	}
@@ -45,6 +45,7 @@ class Item extends Kea_Record
 		$this->hasColumn("collection_id","integer");
 		$this->hasColumn("user_id","integer");
 
+		$this->hasColumn("public", "boolean");
 	}
 	
 	///// METADATA METHODS /////
