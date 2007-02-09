@@ -9,16 +9,16 @@
 
 [site]
 ; set some basic routing variables for GET style requests
-controller = c
-action = a
-admin = admin
-output = output
+uri.controller = c
+uri.action = a
+uri.admin = admin
+uri.output = output
 
 default.controller = items
 default.action = index
 
 ; Display a runtime timer for page generation
-timer = true
+debug.timer = true
 
 ; Throw exceptions; this should only be used in development mode
-exceptions = true
+debug.exceptions = true
