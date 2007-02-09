@@ -5,30 +5,10 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
  * @package Omeka
  * @author Nate Agrin, Kris Kelly
  **/
-require_once 'Zend/Controller/Action.php';
-class ItemsController extends Zend_Controller_Action
+require_once 'Kea/Controller/Action.php';
+class ItemsController extends Kea_Controller_Action
 {	
-	/**
-	 * This should be a convenience function abstracted to Kea_Controller_Action
-	 * Most convenient usage would be something like: $this->render("show.php", compact("items", "total", "foo", "bar"));
-	 *
-	 * @param string The page, including .php extension
-	 * @param array The variables to be included on that page, where key = name and value = contents.  see compact()
-	 * @return void
-	 * @author Kris Kelly
-	 **/
-	public function render($page, array $vars) {
-		$this->view->assign($vars);
-		$this->getResponse()->appendBody($this->view->render($page));
-	}
-
-	//Duplicated in other controllers (should be abstracted by the layout/theme system)
-	public function init() {
-		$view = new Kea_View;
-//		$this->view_path = PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'items';
-//		$view->setScriptPath($this->view_path);
-		$this->view = $view;		
-	}
+	protected $_protected = array('browse');
 
     public function indexAction()
     {

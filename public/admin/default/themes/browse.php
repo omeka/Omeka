@@ -1,5 +1,5 @@
 <?php
-head();
+head(array('title'=>'foo'));
 ?>
 
 <?php foreach($this->themes as $theme): ?>

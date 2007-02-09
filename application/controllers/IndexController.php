@@ -3,8 +3,8 @@
  * @package Omeka
  * @author Nate Agrin
  **/
-require_once 'Zend/Controller/Action.php';
-class IndexController extends Zend_Controller_Action
+require_once 'Kea/Controller/Action.php';
+class IndexController extends Kea_Controller_Action
 {
 	/**
 	 * This allows for GET style routing.

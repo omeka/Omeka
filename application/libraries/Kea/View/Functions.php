@@ -72,19 +72,20 @@ function img($file, $dir = 'images') {
 	src($file, $dir);
 }
 
-function common($file, $dir = 'common') {
+function common($file, $vars = array(), $dir = 'common') {
 	$path = Zend::registry('theme_path').DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.php';
 	if (file_exists($path)) {
+		extract($vars);
 		include $path;
 	}
 }
 
-function head($file = 'header') {
-	common($file);
+function head($vars = array(), $file = 'header') {
+	common($file, $vars);
 }
 
-function footer($file = 'footer') {
-	common($file);
+function footer($vars = array(), $file = 'footer') {
+	common($file, $vars);
 }
 
 ?>
