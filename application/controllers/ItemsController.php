@@ -3,11 +3,27 @@
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 /**
  * @package Omeka
- * @author Nate Agrin
+ * @author Nate Agrin, Kris Kelly
  **/
 require_once 'Zend/Controller/Action.php';
 class ItemsController extends Zend_Controller_Action
-{
+{	
+	/**
+	 * This should be a convenience function abstracted to Kea_Controller_Action
+	 * Most convenient usage would be something like: $this->render("show.php", compact("items", "total", "foo", "bar"));
+	 *
+	 * @param string The page, including .php extension
+	 * @param array The variables to be included on that page, where key = name and value = contents.  see compact()
+	 * @return void
+	 * @author Kris Kelly
+	 **/
+	public function render($page, array $vars) {
+		$this->view->assign($vars);
+		$this->getResponse()->appendBody($this->view->render($page));
+	}
+	
+	
+	
 	//Duplicated in other controllers (should be abstracted by the layout/theme system)
 	public function init() {
 		$view = new Kea_View;
@@ -24,7 +40,24 @@ class ItemsController extends Zend_Controller_Action
 
 	public function browseAction()
 	{
-		$this->getResponse()->appendBody('foo');
+		//Should be mutable, possibly a POST variable with a default stored in a config file
+		$per_page = 12;
+		
+		$page = $this->getRequest()->getParam('page');
+		if(!$page) $page = 1;
+		
+		$offset = ($page - 1) * $per_page;
+		
+		$table = Doctrine_Manager::getInstance()->getTable('Item');
+		
+		$items = $table->createQuery()
+				   		->limit($per_page)
+				   		->offset($offset)
+				   		->execute();
+		
+		$total = $table->count();
+				
+		$this->render("browse.php", compact("total", "offset", "items") );
 	}
 
     public function noRouteAction()
