@@ -1,3 +1,7 @@
+<?php
+head();
+?>
+
 <?php foreach($this->themes as $theme): ?>
 
 <h2><?php echo $theme['ini']->title; ?></h2>
@@ -13,3 +17,7 @@
 <img src="<?php echo $theme['image']; ?>"/>
 
 <?php endforeach; ?>
+<img src="<?php img('foo.jpg');?>"/>
+<?php
+footer();
+?>

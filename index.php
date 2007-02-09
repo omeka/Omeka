@@ -17,8 +17,8 @@ $root = 'http://'.$_SERVER['HTTP_HOST'];
 $dir = explode(DIRECTORY_SEPARATOR, trim($_SERVER['REQUEST_URI'], DIRECTORY_SEPARATOR));
 define('WEB_DIR', $root.DIRECTORY_SEPARATOR.$dir[0]);
 define('WEB_PUBLIC', WEB_DIR.DIRECTORY_SEPARATOR.'public');
-define('WEB_ADMIN', PUBLIC_WEB.DIRECTORY_SEPARATOR.'admin');
-define('WEB_THEMES', PUBLIC_WEB.DIRECTORY_SEPARATOR.'themes');
+define('WEB_ADMIN', WEB_PUBLIC.DIRECTORY_SEPARATOR.'admin');
+define('WEB_THEME', WEB_PUBLIC.DIRECTORY_SEPARATOR.'themes');
 
 // Define some constants based on those settings
 define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
@@ -26,7 +26,8 @@ define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SE
 define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
 define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
 define('PLUGIN_DIR', BASE_DIR .DIRECTORY_SEPARATOR. 'public' . DIRECTORY_SEPARATOR . 'plugins' );
-define('ADMIN_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin');
+define('ADMIN_THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin');
+define('THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'themes');
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
@@ -71,6 +72,11 @@ $front = Zend_Controller_Front::getInstance();
 $router = new Zend_Controller_RewriteRouter();
 $router->addConfig(Zend::registry('routes_ini'), 'routes');
 $front->setRouter($router);
+
+require_once 'Zend/Controller/Request/Http.php';
+$request = new Zend_Controller_Request_Http();
+Zend::register('request', $request);
+$front->setRequest($request);
 
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Plugin.php';

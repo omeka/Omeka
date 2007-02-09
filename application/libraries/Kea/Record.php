@@ -8,7 +8,7 @@
  * @author Kris Kelly
  **/
 abstract class Kea_Record extends Doctrine_Record
-{
+{	
 	public function dump() {
 		foreach( $this as $key => $value )
 		{

@@ -20,19 +20,19 @@ class ThemesController extends Zend_Controller_Action
 		$themes = array();
 		
 		// Iterate over the directory to get the file structure
-		$themes_dir = new DirectoryIterator(ADMIN_DIR);
+		$themes_dir = new DirectoryIterator(ADMIN_THEME_DIR);
 		foreach($themes_dir as $dir) {
 			$fname = $dir->getFilename();
 			if (!$dir->isDot() and $fname[0] != '.' and $dir->isReadable()) {
 				
 				// Define a hard theme path for the theme
-				$theme['dir'] = ADMIN_DIR.DIRECTORY_SEPARATOR.$dir;
+				$theme['dir'] = ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$dir;
 				
 				// Test to see if an image is available to present the user
 				// when switching themes
 				$image_file = $theme['dir'].DIRECTORY_SEPARATOR.$fname.'.jpg';
 				if (file_exists($image_file) && is_readable($image_file)) {
-					$img = ADMIN_WEB.DIRECTORY_SEPARATOR.$fname.DIRECTORY_SEPARATOR.$fname.'.jpg';
+					$img = WEB_ADMIN.DIRECTORY_SEPARATOR.$fname.DIRECTORY_SEPARATOR.$fname.'.jpg';
 					$theme['image'] = $img;
 				}
 				
@@ -49,17 +49,12 @@ class ThemesController extends Zend_Controller_Action
 				$themes[$fname] = $theme;
 			}
 		}
-		// Get the options table
-		require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-		$doctrine = Zend::registry('doctrine');
-		$options = $doctrine->getTable('option');
-		$admin_theme = $options->findByDql("name LIKE 'admin_theme'");
+
 		
 		// Create a view class
-		Zend::loadClass('Zend_View');
-		$view = new Zend_View;
-		$view->setScriptPath(ADMIN_DIR.DIRECTORY_SEPARATOR.$admin_theme[0]->value);
-		
+		require_once 'application/libraries/Kea/View.php';
+		$view = new Kea_View(array('request', $this->getRequest()));
+
 		// Send the global $themes array to the view
 		$view->assign('themes', $themes);
 		$this->getResponse()->appendBody($view->render('themes'.DIRECTORY_SEPARATOR.'browse.php'));

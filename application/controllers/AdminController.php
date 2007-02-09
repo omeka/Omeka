@@ -12,17 +12,16 @@ class AdminController extends Zend_Controller_Action
     {
 		$req = $this->getRequest();
 		$req->setParam('admin', true);
-		print_r($this->getRequest()->getParams());
-		
+
 		$config = Zend::registry('config_ini');
 		$request = $this->getRequest();
-		
-		if(!$c = $request->getParam($config->site->controller)) {
-			$c = $config->site->default->controller;
+
+		if(!$c = $request->getParam($config->uri->controller)) {
+			$c = $config->default->controller;
 		}
 		
-		if(!$a = $request->getParam($config->site->action)) {
-			$a = $config->site->default->action;
+		if(!$a = $request->getParam($config->uri->action)) {
+			$a = $config->default->action;
 		}
 
 		$this->_forward($c, $a);
