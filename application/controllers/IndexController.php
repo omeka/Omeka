@@ -43,11 +43,6 @@ class IndexController extends Zend_Controller_Action
 		}
     }
 
-	public function testAction()
-	{
-		print_r($this->getRequest());
-	}
-
     public function noRouteAction()
     {
         $this->_redirect('/');

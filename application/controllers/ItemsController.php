@@ -21,21 +21,18 @@ class ItemsController extends Zend_Controller_Action
 		$this->view->assign($vars);
 		$this->getResponse()->appendBody($this->view->render($page));
 	}
-	
-	
-	
+
 	//Duplicated in other controllers (should be abstracted by the layout/theme system)
 	public function init() {
 		$view = new Kea_View;
-		$this->view_path = PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'items';
-		$view->setScriptPath($this->view_path);
+//		$this->view_path = PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'items';
+//		$view->setScriptPath($this->view_path);
 		$this->view = $view;		
 	}
-	
-	
+
     public function indexAction()
     {
-		$this->_forward('items', 'browse');
+		$this->browseAction();
     }
 
 	public function browseAction()
@@ -57,7 +54,7 @@ class ItemsController extends Zend_Controller_Action
 		
 		$total = $table->count();
 				
-		$this->render("browse.php", compact("total", "offset", "items") );
+		$this->render("items/browse.php", compact("total", "offset", "items"));
 	}
 
     public function noRouteAction()

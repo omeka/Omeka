@@ -78,6 +78,11 @@ $request = new Zend_Controller_Request_Http();
 Zend::register('request', $request);
 $front->setRequest($request);
 
+require_once 'Zend/Controller/Response/Http.php';
+$response = new Zend_Controller_Response_Http();
+Zend::register('response', $response);
+$front->setResponse($response);
+
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Plugin.php';
 

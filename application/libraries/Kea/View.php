@@ -13,6 +13,8 @@ class Kea_View extends Zend_View_Abstract
 	 */
 	protected $_request;
 	
+	protected $_response;
+	
 	/**
 	 * Using the current admin system, an option
 	 * is set by the admin controller upon authentication
@@ -30,6 +32,8 @@ class Kea_View extends Zend_View_Abstract
 	{
 		parent::__construct($config);
 		$this->setRequest(Zend::registry('request'));
+		
+		$this->setResponse(Zend::registry('response'));
 		
 		// set the theme path
 		$this->setThemePath();
@@ -57,6 +61,16 @@ class Kea_View extends Zend_View_Abstract
 		return $this->_request;
 	}
 	
+	public function setResponse(Zend_Controller_Response_Abstract $response)
+	{
+		$this->_response = $response;
+	}
+	
+	public function getResponse()
+	{
+		return $this->_response;
+	}
+	
 	/**
 	 * Construct the theme path from the options in the database
 	 * dependant on whether or not there is an admin interface request
@@ -65,27 +79,45 @@ class Kea_View extends Zend_View_Abstract
 	 * @edited 2007-02-09
 	 */
 	public function setThemePath($path = null)
-	{
-		// Get the options table
-		require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-		$doctrine = Zend::registry('doctrine');
-		$options = $doctrine->getTable('option');
-		
-		// do we select the admin theme or the public theme?
-		if ((boolean) $this->getRequest()->getParam('admin')) {
-			$theme = $options->findByDql("name LIKE 'admin_theme'");
-			$this->setScriptPath(ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
-			Zend::Register('theme_path', ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
-			Zend::Register('theme_web', WEB_ADMIN.DIRECTORY_SEPARATOR.$theme[0]->value);
+	{	
+		if ($output = $this->getRequest()->getParam('output')) {
+			switch($output) {
+				case('json'):
+					require_once 'Zend/Json.php';
+					$config = Zend::registry('config_ini');
+					if (!(boolean) $config->debug->json) {
+						$this->getResponse()->setHeader('Content-Type', 'text/x-json');
+					}
+					$this->setScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json');
+				break;
+				case('rest'):
+					$this->getResponse()->setHeader('Content-Type', 'text/xml');
+					$this->setScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'rest');
+				break;
+			}
 		}
 		else {
-			$theme = $options->findByDql("name LIKE 'theme'");
-			$this->setScriptPath(THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
-			Zend::Register('theme_path', THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
-			Zend::Register('theme_web', WEB_THEME.DIRECTORY_SEPARATOR.$theme[0]->value);
-		}
+			// Get the options table
+			require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
+			$doctrine = Zend::registry('doctrine');
+			$options = $doctrine->getTable('option');
+		
+			// do we select the admin theme or the public theme?
+			if ((boolean) $this->getRequest()->getParam('admin')) {
+				$theme = $options->findByDql("name LIKE 'admin_theme'");
+				$this->setScriptPath(ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				Zend::Register('theme_path', ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				Zend::Register('theme_web', WEB_ADMIN.DIRECTORY_SEPARATOR.$theme[0]->value);
+			}
+			else {
+				$theme = $options->findByDql("name LIKE 'theme'");
+				$this->setScriptPath(THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				Zend::Register('theme_path', THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				Zend::Register('theme_web', WEB_THEME.DIRECTORY_SEPARATOR.$theme[0]->value);
+			}
 
-		Zend::Register('theme_dir', $theme[0]->value);
+			Zend::Register('theme_dir', $theme[0]->value);
+		}
 	}
 	
 	/**

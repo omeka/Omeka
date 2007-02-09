@@ -39,3 +39,8 @@ id.route = ":controller/:action/:id"
 id.defaults.controller = index
 id.defaults.action = index
 id.reqs.id = "\d+"
+
+output.route = ":output/:controller/:action"
+output.defaults.controller = index
+output.defaults.action = index
+output.reqs.output = "(json|rest)"
