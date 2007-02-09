@@ -1,11 +1,41 @@
 <?php
 /**
  * @package Omeka
- * @author Nate Agrin
  **/
 require_once 'Zend/Controller/Action.php';
 class ThemesController extends Zend_Controller_Action
 {
+	/**
+	 * This is only temporary until the system is better
+	 * built out.  We should not be relying on this
+	 * exclusively to populate our theme options.
+	 * @author Nate Agrin
+	 */
+	public function init()
+	{
+		require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
+		$doctrine = Zend::registry('doctrine');
+		$options = $doctrine->getTable('option');
+		$themes = $options->findByDql('name LIKE ? or name LIKE ?', array('admin_theme', 'theme'));
+		
+		if (!count($themes) == 2) {
+			$admin = new Option();
+			$admin->name = 'admin_theme';
+			$admin->value = 'default';
+			
+			$theme = new Option();
+			$theme->name = 'theme';
+			$theme->value = 'default';
+			
+			$admin->save();
+			$theme->save();
+			return;
+		}
+		else {
+			return;
+		}
+	}
+	
     public function indexAction()
     {
 		$response = $this->getResponse();
