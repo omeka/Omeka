@@ -9,7 +9,12 @@ require_once 'Kea/Controller/Action.php';
 class ItemsController extends Kea_Controller_Action
 {	
 	protected $_protected = array('browse');
-
+	
+	public function init() 
+	{
+		$this->_table = Doctrine_Manager::getInstance()->getTable('Item');
+	}
+	
     public function indexAction()
     {
 		$this->browseAction();
@@ -44,18 +49,20 @@ class ItemsController extends Kea_Controller_Action
 
 	public function showAction() 
 	{
-		$this->view->item = $this->find();
-		if(!empty($_POST['tags'])) $this->addTags($this->view->item);
-		echo $this->view->render('show.php');
+		//Hard-coded until admin-controller parameter bug is resolved
+		$item = $this->findById(1);
+		
+		if(!empty($_POST['tags'])) $this->addTags($item);
+		echo $this->render('items/show.php', compact("item"));
 	}
-	
+/*	
 	//This should essentially be built into controllers as well, functional equivalent to findById() in the old system
 	protected function find() {
 		$id = $this->getRequest()->getParam('id');
 		$item = Doctrine_Manager::getInstance()->getTable('Item')->find($id);
 		return $item;
 	}
-	
+*/	
 	private function addTags($item) {
 		/* TODO: catch the current User somewhere in here, shoot it to the addTagString() method */
 		if($tagString = $_POST['tags']) {
