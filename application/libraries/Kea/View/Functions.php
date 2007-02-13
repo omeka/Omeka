@@ -19,25 +19,31 @@
  * Echos the physical path to the theme.
  * This should be used when you need to include a file through PHP.
  */
-function theme_path() {
-	echo Zend::registry('theme_path');
+function theme_path($return = false) {
+	$path = Zend::registry('theme_path');
+	if($return) return $path;
+	else echo $path;
 }
 
 /**
  * Echos the web path of the theme.
  * This should be used when you need to link in an image or other file.
  */
-function web_path() {
-	echo Zend::registry('theme_web');
+function web_path($return = false) {
+	$path = Zend::registry('theme_web');
+	if($return) return $path;
+	else echo $path;
 }
 
-function src($file, $dir, $ext = null) {
+function src($file, $dir, $ext = null, $return = false) {
 	$physical = Zend::registry('theme_path').DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file;
 	if ($ext !== null) {
 		$physical .= '.'.$ext;
 	}
 	if (file_exists($physical)) {
-		echo Zend::registry('theme_web').DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.'.$ext;
+		$path = Zend::registry('theme_web').DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.'.$ext;
+		if($return) return $path;
+		else echo $path;
 	}
 	else {
 		throw new Exception('Cannot find '.$file.'.'.$ext);
@@ -82,12 +88,18 @@ function common($file, $vars = array(), $dir = 'common') {
 
 function head($vars = array(), $file = 'header') {
 	common($file, $vars);
-	Kea_Controller_Plugin_Broker::getInstance()->header();
-	echo "\n</head>\n<body>\n";
 }
 
 function footer($vars = array(), $file = 'footer') {
 	common($file, $vars);
 }
 
+/**
+ * similar to wp_header() from Wordpress, hooks into the plugin system within the header
+ *
+ * @return void
+ **/
+function plugin_header() {
+	Kea_Controller_Plugin_Broker::getInstance()->header();
+}
 ?>
