@@ -30,6 +30,11 @@ adminId.route = "admin/:c/:a/:id"
 adminId.defaults.controller = admin
 adminId.defaults.action = index
 
+adminPage.route = "admin/:c/browse/:page"
+adminPage.defaults.controller = admin
+adminPage.defaults.page = 1
+adminPage.reqs.page = "\d+"
+
 ; Make sure all admin commands go through the admin controller
 admin.route = "admin/:c/:a"
 admin.defaults.controller = admin
@@ -44,6 +49,11 @@ id.route = ":controller/:action/:id"
 id.defaults.controller = index
 id.defaults.action = index
 id.reqs.id = "\d+"
+
+page.route = ":controller/browse/:page"
+page.defaults.controller = items
+page.defaults.page = 1
+page.reqs.page = "\d+"
 
 output.route = ":output/:controller/:action"
 output.defaults.controller = index
