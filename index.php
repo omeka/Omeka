@@ -14,8 +14,7 @@ $site['config']			= 'config';
 
 // Define Web routes
 $root = 'http://'.$_SERVER['HTTP_HOST'];
-$dir = explode(DIRECTORY_SEPARATOR, trim($_SERVER['REQUEST_URI'], DIRECTORY_SEPARATOR));
-define('WEB_DIR', $root.DIRECTORY_SEPARATOR.$dir[0]);
+define('WEB_DIR', $root.dirname($_SERVER['PHP_SELF']));
 define('WEB_PUBLIC', WEB_DIR.DIRECTORY_SEPARATOR.'public');
 define('WEB_ADMIN', WEB_PUBLIC.DIRECTORY_SEPARATOR.'admin');
 define('WEB_THEME', WEB_PUBLIC.DIRECTORY_SEPARATOR.'themes');
