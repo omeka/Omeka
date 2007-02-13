@@ -49,8 +49,8 @@ class ItemsController extends Kea_Controller_Action
 
 	public function showAction() 
 	{
-		//Hard-coded until admin-controller parameter bug is resolved
-		$item = $this->findById(1);
+		// This is abstracted out in the Kea_Controller_Action class
+		$item = $this->findById();
 		
 		if(!empty($_POST['tags'])) $this->addTags($item);
 		echo $this->render('items/show.php', compact("item"));

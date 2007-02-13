@@ -1,7 +1,6 @@
 <?php
 /**
  * @package Omeka
- * @author Everyone and their mothers
  */
 require_once 'Zend/Controller/Action.php';
 abstract class Kea_Controller_Action extends Zend_Controller_Action

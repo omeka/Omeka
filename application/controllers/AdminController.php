@@ -11,9 +11,19 @@ class AdminController extends Zend_Controller_Action
     public function indexAction()
     {
 		$req = $this->getRequest();
+		
+		$config = Zend::registry('config_ini');
+		
+		/**
+		 * reset the baseUrl property so that $this->_redirect
+		 * in controllers directs to admin templates
+		 * 
+		 * [NA] - not sure about using config->uri->admin for this
+		 */ 
+		$req->setBaseUrl($req->getBaseUrl().DIRECTORY_SEPARATOR.$config->uri->admin);
+
 		$req->setParam('admin', true);
 
-		$config = Zend::registry('config_ini');
 		$request = $this->getRequest();
 
 		if(!$c = $request->getParam($config->uri->controller)) {

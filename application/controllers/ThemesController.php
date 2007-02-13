@@ -2,8 +2,8 @@
 /**
  * @package Omeka
  **/
-require_once 'Zend/Controller/Action.php';
-class ThemesController extends Zend_Controller_Action
+require_once 'Kea/Controller/Action.php';
+class ThemesController extends Kea_Controller_Action
 {
 	/**
 	 * This is only temporary until the system is better
@@ -40,6 +40,11 @@ class ThemesController extends Zend_Controller_Action
     {
 		$response = $this->getResponse();
     }
+
+	public function rerouteAction()
+	{
+		$this->_redirect('themes/browse');
+	}
 
 	public function browseAction()
 	{
