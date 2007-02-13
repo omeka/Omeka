@@ -23,7 +23,7 @@ class ItemsController extends Kea_Controller_Action
 	public function browseAction()
 	{
 		//Should be mutable, possibly a POST variable with a default stored in a config file
-		$per_page = 12;
+		$per_page = 2;
 		
 		$page = $this->getRequest()->getParam('page');
 		if(!$page) $page = 1;
@@ -39,14 +39,33 @@ class ItemsController extends Kea_Controller_Action
 		
 		$total = $table->count();
 				
-		$this->render("items/browse.php", compact("total", "offset", "items"));
+		$this->render("items/browse.php", compact("total", "offset", "items", "per_page", "page"));
 	}
 
     public function noRouteAction()
     {
         $this->_redirect('/');
     }
-
+	
+	public function editAction()
+	{
+		$item = $this->findById(1);
+		
+		if(!empty($_POST))
+		{
+			$item->setArray($_POST);
+			try {
+				$item->save();
+				$this->_redirect('items/browse/'.$item->id);
+			}
+			catch(Doctrine_Validator_Exception $e) {
+				$errors = $item->getErrorStack();
+			}	
+		}
+		
+		$this->render('items/edit.php', compact('item', 'errors'));
+	}
+	
 	public function showAction() 
 	{
 		// This is abstracted out in the Kea_Controller_Action class
@@ -55,14 +74,7 @@ class ItemsController extends Kea_Controller_Action
 		if(!empty($_POST['tags'])) $this->addTags($item);
 		echo $this->render('items/show.php', compact("item"));
 	}
-/*	
-	//This should essentially be built into controllers as well, functional equivalent to findById() in the old system
-	protected function find() {
-		$id = $this->getRequest()->getParam('id');
-		$item = Doctrine_Manager::getInstance()->getTable('Item')->find($id);
-		return $item;
-	}
-*/	
+
 	private function addTags($item) {
 		/* TODO: catch the current User somewhere in here, shoot it to the addTagString() method */
 		if($tagString = $_POST['tags']) {

@@ -102,4 +102,36 @@ function footer($vars = array(), $file = 'footer') {
 function plugin_header() {
 	Kea_Controller_Plugin_Broker::getInstance()->header();
 }
+
+function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units = 'em', $return = false )
+{
+	$html = '';
+	foreach( $tags as $tag )
+	{
+		$size = round( ( ( $tag->tagCount / $largest ) * $max ), 3 );
+		
+		$size = ($size < $min) ? $min : $size;
+
+		$html .= '<span style="font-size:' . $size . $units . '">';
+
+		if( $link )
+		{
+			$html .= '<a href="' . $link . '?tags=' . $tag['name'] . '">';
+		}
+
+		$html .= $tag['name'];
+
+		if( $link )
+		{
+			$html .= '</a>';
+		}
+
+		$html .= '</span>' . "\n";
+
+	
+	}
+	if($return) return $html;
+	echo $html;
+}
+
 ?>
