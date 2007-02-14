@@ -13,6 +13,7 @@ require_once 'ItemsTags.php';
  **/
 class Item extends Kea_Record
 {	
+	protected $error_messages = array(	'title' => array('notblank' => 'Item must be given a title.'));
 	
 	public function setUp() {
 		$this->hasOne("Collection","Item.collection_id");

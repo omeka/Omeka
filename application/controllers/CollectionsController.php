@@ -47,8 +47,7 @@ class CollectionsController extends Kea_Controller_Action
 		{
 			$this->_redirect('collections/browse/');
 		}else {
-			$errors = $collection->getErrorStack();
-			$this->render('collections/add.php', compact('collection', 'errors'));
+			$this->render('collections/add.php', compact('collection'));
 		}
 	}
 	
@@ -64,8 +63,7 @@ class CollectionsController extends Kea_Controller_Action
 		{
 			$this->_redirect('collections/show/'.$collection->id);
 		}else{
-			$errors = $collection->getErrorStack();
-			$this->render('collections/edit.php', compact('collection', 'errors'));
+			$this->render('collections/edit.php', compact('collection'));
 		}
 		
 	}

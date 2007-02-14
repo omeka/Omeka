@@ -54,8 +54,7 @@ class ItemsController extends Kea_Controller_Action
 		{
 			$this->_redirect('items/browse/');
 		}else {
-			$errors = $item->getErrorStack();
-			$this->render('items/add.php', compact('item', 'errors'));
+			$this->render('items/add.php', compact('item'));
 		}
 	}
 	
@@ -66,10 +65,8 @@ class ItemsController extends Kea_Controller_Action
 		{
 			$this->_redirect('items/show/'.$item->id);
 		}else{
-			$errors = $item->getErrorStack();
-			$this->render('items/edit.php', compact('item', 'errors'));
+			$this->render('items/edit.php', compact('item'));
 		}
-		
 	}
 	
 	private function commitForm($item)
@@ -106,21 +103,7 @@ class ItemsController extends Kea_Controller_Action
 				$item->refresh();
 			//This error processing part should be abstracted out to the individual models, at least if all we want to do is display the errors
 			}catch(Doctrine_Validator_Exception $e) {
-				$invalid = $e->getInvalidRecords();
-				foreach( $invalid as $record )
-				{
-					foreach( $record->getErrorStack() as $key => $errorArray )
-					{
-						foreach( $errorArray as $errorKey => $error )
-						{
-							switch($error) {
-								case 'duplicate':
-									echo 'Error: Tag has already been added to this item by this user.';
-								break;
-							}
-						}
-					}
-				}
+				$item->gatherErrors($e);
 			}
 		}
 	}

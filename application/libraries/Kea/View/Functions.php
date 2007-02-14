@@ -95,6 +95,20 @@ function footer($vars = array(), $file = 'footer') {
 }
 
 /**
+ * Simple access to form errors
+ * 
+ * @example error($item, 'title');
+ * @return void
+ * @author Kris Kelly
+ **/
+function error($record, $field_name = null) {
+	$error = $record->getErrorMsg($field_name);
+	if(!empty($error)) {
+		echo 'Error: '.$error;
+	}
+}
+
+/**
  * similar to wp_header() from Wordpress, hooks into the plugin system within the header
  *
  * @return void

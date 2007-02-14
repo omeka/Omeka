@@ -9,6 +9,65 @@
  **/
 abstract class Kea_Record extends Doctrine_Record
 {	
+	/**
+	 * Ex.
+	 * $error_messages['title']['unique'] = "Title must be unique.  That title has already been used."
+	 *
+	 * @var array
+	 **/
+	protected $error_messages = array();
+	
+	
+	/**
+	 * 
+	 * @todo Make this method recursive so that $this->getErrorMsg() will retrieve all error messages
+	 * @return string
+	 **/
+	public function getErrorMsg($field = null) 
+	{
+		$stack = $this->getErrorStack();
+		$msg = '';
+		if(!$field) {
+			foreach( $stack as $name => $errors )
+			{
+				$msg .= $this->getErrorMsg($name);
+			}
+		}
+		if(isset($stack[$field])) {
+			$errors = $stack[$field];
+			foreach( $errors as $error )
+			{
+				if(isset($this->error_messages[$field][$error]))
+				{
+					$msg .= $this->error_messages[$field][$error];
+				}else{
+					$msg .= $error;
+				}
+			}
+		}
+		return $msg;
+	}
+	
+	/**
+	 * What I'm trying to do here is coalesce all the error messages into a single Record (usually the Item)
+	 *
+	 * @return void
+	 **/
+	public function gatherErrors(Doctrine_Validator_Exception $e)
+	{
+		$this_stack = $this->getErrorStack();
+		$invalid = $e->getInvalidRecords();
+		foreach( $invalid as $record )
+		{
+			$other_stack = $record->getErrorStack();
+			foreach( $other_stack as $field => $errors )
+			{
+				$this_stack->add(get_class($record), $record->getErrorMsg());
+			}
+		}
+		$this->errorStack($this_stack);
+	}
+	
 	public function dump() {
 		foreach( $this as $key => $value )
 		{

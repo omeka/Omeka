@@ -10,6 +10,8 @@ require_once 'Tag.php';
  **/
 class ItemsTags extends Kea_Record
 {
+	protected $error_messages = array('item_id' => array('duplicate' => 'Tag has already been added to this item by this user.'));
+	
 	public function setUp() {
 		$this->hasOne("User", "ItemsTags.user_id");
 		$this->hasOne("Item", "ItemsTags.item_id");
@@ -29,6 +31,7 @@ class ItemsTags extends Kea_Record
 			if($it->obtainIdentifier() != $this->obtainIdentifier()) {
 				$this->getErrorStack()->add('item_id', 'duplicate');
 			}
+			
 		}
 	}
 

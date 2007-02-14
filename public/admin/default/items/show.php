@@ -1,3 +1,4 @@
+<?php error($item);?>
 <h1><?=$item->title?></h1>
 <h4>Metatext</h4>
 <?php foreach($item->Metatext as $key => $metatext): ?>
