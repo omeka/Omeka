@@ -52,13 +52,19 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{
 		$id = (!$id) ? $this->getRequest()->getParam('id') : $id;
 		
-		if(!$id) throw new Exception( 'No ID passed to this request' );
+		if(!$id) throw new Exception( get_class($this).': No ID passed to this request' );
 		
 		if(!$table) {
-			return $this->_table->find($id);
+			$record = $this->_table->find($id);
 		}else {
-			return Doctrine_Manager::getInstance()->getTable($table)->find($id);
+			$record = Doctrine_Manager::getInstance()->getTable($table)->find($id);
 		}
+		
+		if(!$record) {
+			throw new Exception( get_class($this).": No record with ID # $id exists" );
+		}
+		
+		return $record;
 	}
 }
 ?>
