@@ -47,23 +47,45 @@ class ItemsController extends Kea_Controller_Action
         $this->_redirect('/');
     }
 	
+	public function addAction()
+	{
+		$item = new Item();
+		if($this->commitForm($item))
+		{
+			$this->_redirect('items/browse/');
+		}else {
+			$errors = $item->getErrorStack();
+			$this->render('items/add.php', compact('item', 'errors'));
+		}
+	}
+	
 	public function editAction()
 	{
-		$item = $this->findById(1);
+		$item = $this->findById();
+		if($this->commitForm($item))
+		{
+			$this->_redirect('items/show/'.$item->id);
+		}else{
+			$errors = $item->getErrorStack();
+			$this->render('items/edit.php', compact('item', 'errors'));
+		}
 		
+	}
+	
+	private function commitForm($item)
+	{
 		if(!empty($_POST))
 		{
 			$item->setArray($_POST);
 			try {
 				$item->save();
-				$this->_redirect('items/browse/'.$item->id);
+				return true;
 			}
 			catch(Doctrine_Validator_Exception $e) {
-				$errors = $item->getErrorStack();
+				return false;
 			}	
 		}
-		
-		$this->render('items/edit.php', compact('item', 'errors'));
+		return false;
 	}
 	
 	public function showAction() 
