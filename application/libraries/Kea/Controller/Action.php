@@ -31,6 +31,11 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	
 	///// BASIC CRUD INTERFACE /////
 	
+	public function noRouteAction()
+    {
+        $this->_redirect('/');
+    }
+	
 	public function indexAction()
 	{
 		$plural = strtolower($this->_modelClass).'s';

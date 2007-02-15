@@ -15,11 +15,6 @@ class ItemsController extends Kea_Controller_Action
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Item');
 		$this->_modelClass = 'Item';
 	}
-	
-    public function indexAction()
-    {
-		$this->browseAction();
-    }
 
 	public function browseAction()
 	{
@@ -42,55 +37,16 @@ class ItemsController extends Kea_Controller_Action
 				
 		$this->render("items/browse.php", compact("total", "offset", "items", "per_page", "page"));
 	}
-
-    public function noRouteAction()
-    {
-        $this->_redirect('/');
-    }
-	
-	public function addAction()
-	{
-		$item = new Item();
-		if($this->commitForm($item))
-		{
-			$this->_redirect('items/browse/');
-		}else {
-			$this->render('items/add.php', compact('item'));
-		}
-	}
-	
-	public function editAction()
-	{
-		$item = $this->findById();
-		if($this->commitForm($item))
-		{
-			$this->_redirect('items/show/'.$item->id);
-		}else{
-			$this->render('items/edit.php', compact('item'));
-		}
-	}
 	
 	protected function commitForm($item)
 	{
-		if(!empty($_POST))
-		{
-			$item->setArray($_POST);
-			try {
-				$item->save();
-				return true;
-			}
-			catch(Doctrine_Validator_Exception $e) {
-				return false;
-			}	
-		}
-		return false;
+		//add code here to handle anything aside from copying the form directly to the item
+		return parent::commitForm($item);
 	}
 	
 	public function showAction() 
 	{
-		// This is abstracted out in the Kea_Controller_Action class
 		$item = $this->findById();
-		
 		if(!empty($_POST['tags'])) $this->addTags($item);
 		echo $this->render('items/show.php', compact("item"));
 	}

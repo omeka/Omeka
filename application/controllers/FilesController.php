@@ -5,26 +5,19 @@
  **/
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'File.php';
 
-require_once 'Zend/Controller/Action.php';
-class FilesController extends Zend_Controller_Action
+require_once 'Kea/Controller/Action.php';
+class FilesController extends Kea_Controller_Action
 {
 	public function init() {
-		$view = new Kea_View;
-		$this->view_path = PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'files';
-		$view->setScriptPath($this->view_path);
-		$this->view = $view;		
+		$this->_modelClass = 'File';
+		$this->_table = Doctrine_Manager::getInstance()->getTable('File');		
 	}
 	
-    public function indexAction()
-    {
-		echo 'This is the '.get_class($this);
-    }
-
-    public function noRouteAction()
-    {
-        $this->_redirect('/');
-    }
-
+	/**
+	 * This will probably relocate to the commitForm method of ItemsController, seeing as files cannot exist without items
+	 *
+	 * @return void
+	 **/
 	public function addAction() 
 	{
 		if(!empty($_POST)) {
@@ -41,7 +34,12 @@ class FilesController extends Zend_Controller_Action
 				}
 			}
 		}
-		echo $this->view->render('add.php');
+		$this->render('files/add.php');
 	}
+	
+	public function indexAction() { $this->_redirect('items/browse/'); }
+	
+	// Should not browse files by themselves
+	public function browseAction() { $this->indexAction(); }
 }
 ?>
