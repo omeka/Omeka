@@ -1,1 +1,1 @@
-Collections Form
+<input type="text" name="name" value="<?php echo $collection->name; ?>" />

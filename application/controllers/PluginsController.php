@@ -1,51 +1,15 @@
 <?php
-require_once 'Kea/View.php';
 /**
  * @package Omeka
- * @author Nate Agrin
  **/
-require_once 'Zend/Controller/Action.php';
-class PluginsController extends Zend_Controller_Action
+require_once 'Kea/Controller/Action.php';
+class PluginsController extends Kea_Controller_Action
 {
-    public function indexAction()
-    {
-		$this->_forward('plugins', 'browse');
-    }
-
-	public function browseAction()
+	public function init()
 	{
-		$plugin = $this->find();
-		
-		$this->view->plugins = Doctrine_Manager::connection()->getTable('Plugin')->findAll();	
-
-		echo $this->view->render('all.php');
+		$this->_modelClass = 'Plugin';
+		$this->_table = Doctrine_Manager::getInstance()->getTable('Plugin');
 	}
-
-	//This should essentially be built into controllers as well, functional equivalent to findById() in the old system
-	protected function find() {
-		$id = $this->getRequest()->getParam('id');
-		$plugin = Doctrine_Manager::connection()->getTable('Plugin')->find($id);
-		return $plugin;
-	}
-	
-	public function showAction() {
-		
-		$this->view->plugin = $this->find();
-		echo $this->view->render('show.php');
-	}
-	
-	public function editAction() 
-	{			
-		$plugin = $this->find();
-		
-		$this->view->plugin = $plugin;
-		
-		if($this->_commitForm($this->view)) {
-			$this->_redirect('plugins/show/'.$plugin->id);
-		}
-		echo $this->view->render('edit.php');
-	}
-	
 	
 	public function installAction()  
 	{
@@ -79,9 +43,8 @@ class PluginsController extends Zend_Controller_Action
 	 * save the form values to the db
 	 *
 	 * @return boolean
-	 * @author Kris Kelly
 	 **/
-	private function _commitForm($view)
+	protected function commitForm($view)
 	{
 		if(empty($_POST)) return false;
 		$plugin = $view->plugin;

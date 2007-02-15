@@ -8,11 +8,12 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 require_once 'Kea/Controller/Action.php';
 class ItemsController extends Kea_Controller_Action
 {	
-	protected $_protected = array('browse');
+	protected $_protected = array('browse', 'delete');
 	
 	public function init() 
 	{
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Item');
+		$this->_modelClass = 'Item';
 	}
 	
     public function indexAction()
@@ -69,7 +70,7 @@ class ItemsController extends Kea_Controller_Action
 		}
 	}
 	
-	private function commitForm($item)
+	protected function commitForm($item)
 	{
 		if(!empty($_POST))
 		{

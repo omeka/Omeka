@@ -148,4 +148,35 @@ function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units
 	echo $html;
 }
 
+/**
+ * Adapted from Zend_View_Helper_Url
+ *
+ * Generates an url given the name of a route.
+ * 
+ * @param array $urlOptions Options passed to the assemble method of the Route object.
+ * @param mixed $name The name of a Route to use. If null it will use the current Route
+ * 
+ * @return string Url for the link href attribute.
+ **/
+function url($urlOptions = array(), $name = null)
+{
+    
+    $ctrl = Kea_Controller_Front::getInstance();
+    $router = $ctrl->getRouter();
+    
+    if (empty($name)) {
+        $route = $router->getCurrentRoute();
+    } else {
+        $route = $router->getRoute($name);
+    }
+    
+    $request = $ctrl->getRequest();
+    
+    $url = rtrim($request->getBaseUrl(), '/') . '/';
+    $url .= $route->assemble($urlOptions);
+     
+    return $url;
+    
+}
+
 ?>

@@ -9,6 +9,7 @@ class CollectionsController extends Kea_Controller_Action
 	public function init()
 	{
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Collection');
+		$this->_modelClass = 'Collection';
 	}
 	
 	/**
@@ -22,53 +23,7 @@ class CollectionsController extends Kea_Controller_Action
 		$this->_forward('collections', 'browse');
     }
 	
-	public function showAction()
-	{
-		try{
-			$collection = $this->findById();
-		}catch(Exception $e) {
-			echo $e->getMessage();exit;
-		}
-		
-		$this->render('collections/show.php', compact('collection'));
-	}
-	
-	public function browseAction()
-	{
-		$collections = $this->_table->findAll();
-		
-		$this->render('collections/browse.php', compact('collections'));
-	}
-	
-	public function addAction()
-	{
-		$collection = new Collection();
-		if($this->commitForm($collection))
-		{
-			$this->_redirect('collections/browse/');
-		}else {
-			$this->render('collections/add.php', compact('collection'));
-		}
-	}
-	
-	public function editAction()
-	{
-		try{
-			$collection = $this->findById();
-		}catch(Exception $e) {
-			echo $e->getMessage();exit;
-		}
-		
-		if($this->commitForm($collection))
-		{
-			$this->_redirect('collections/show/'.$collection->id);
-		}else{
-			$this->render('collections/edit.php', compact('collection'));
-		}
-		
-	}
-	
-	private function commitForm($collection)
+	protected function commitForm($collection)
 	{
 		if(!empty($_POST))
 		{
