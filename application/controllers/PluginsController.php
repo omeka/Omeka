@@ -64,11 +64,10 @@ class PluginsController extends Kea_Controller_Action
 		}
 
 	}
-
 	
-    public function noRouteAction()
-    {
-        $this->_redirect('/');
-    }
+	public function addAction()
+	{
+		$this->_forward('plugins/install');
+	}
 }
 ?>

@@ -14,30 +14,9 @@ class ItemsController extends Kea_Controller_Action
 	{
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Item');
 		$this->_modelClass = 'Item';
+		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
 
-	public function browseAction()
-	{
-		//Should be mutable, possibly a POST variable with a default stored in a config file
-		$per_page = 2;
-		
-		$page = $this->getRequest()->getParam('page');
-		if(!$page) $page = 1;
-		
-		$offset = ($page - 1) * $per_page;
-		
-		$table = Doctrine_Manager::getInstance()->getTable('Item');
-		
-		$items = $table->createQuery()
-				   		->limit($per_page)
-				   		->offset($offset)
-				   		->execute();
-		
-		$total = $table->count();
-				
-		$this->render("items/browse.php", compact("total", "offset", "items", "per_page", "page"));
-	}
-	
 	protected function commitForm($item)
 	{
 		//add code here to handle anything aside from copying the form directly to the item

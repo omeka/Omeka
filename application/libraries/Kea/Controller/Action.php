@@ -3,6 +3,8 @@
  * @package Omeka
  */
 require_once 'Zend/Controller/Action.php';
+require_once 'Kea/Controller/Browse/Paginate.php';
+require_once 'Kea/Controller/Browse/List.php';
 abstract class Kea_Controller_Action extends Zend_Controller_Action
 {
 	/**
@@ -29,6 +31,13 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 **/
 	protected $_modelClass;
 	
+	/**
+	 * Current options for browsing involve either Pagination or a single page list
+	 *
+	 * @var Kea_Controller_Browse_Interface
+	 **/
+	protected $_browse;
+	
 	///// BASIC CRUD INTERFACE /////
 	
 	public function noRouteAction()
@@ -43,7 +52,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	}
 	
 	/**
-	 * Builtin browse currently includes all records, must be overloaded to include pagination (as in ItemsController)
+	 * Browsing strategy defaults to a full listing, can be switched to pagination by instantiating Kea_Controller_Browse_Pagination in the init() method
 	 *
 	 * @return void
 	 **/
@@ -51,10 +60,9 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{
 		if(empty($this->_modelClass)) throw new Exception( 'Scaffolding class has not been specified' );
 		
-		$pluralName = strtolower($this->_modelClass).'s';
-		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
-		$$pluralName = $this->_table->findAll();
-		$this->render($viewPage, compact($pluralName));
+		if(empty($this->_browse)) $this->_browse = new Kea_Controller_Browse_List($this->_modelClass, $this);
+		
+		$this->_browse->browse();
 	}
 	
 	public function showAction()
