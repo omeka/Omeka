@@ -1,4 +1,6 @@
 <?php
+include_once 'UnicodeFunctions.php';
+include_once 'FormFunctions.php';
 /**
  * Not quite a helper, these functions defy definition...
  * 

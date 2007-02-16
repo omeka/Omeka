@@ -59,10 +59,12 @@ abstract class Kea_Record extends Doctrine_Record
 		$invalid = $e->getInvalidRecords();
 		foreach( $invalid as $record )
 		{
-			$other_stack = $record->getErrorStack();
-			foreach( $other_stack as $field => $errors )
-			{
-				$this_stack->add(get_class($record), $record->getErrorMsg());
+			if($record->id != $this->id) {
+				$other_stack = $record->getErrorStack();
+				foreach( $other_stack as $field => $errors )
+				{
+					$this_stack->add(get_class($record), $record->getErrorMsg());
+				}
 			}
 		}
 		$this->errorStack($this_stack);
@@ -125,5 +127,15 @@ abstract class Kea_Record extends Doctrine_Record
 		}
 		return $this;
 	}
+	
+	private function strip($text) {
+		$text = get_magic_quotes_gpc() ? stripslashes( $text ) : $text;
+		return $text;
+	}
+	
+	public function setFromForm($array) {
+		return $this->setArray($array, array($this, 'strip'));
+	}
+	
 } // END abstract class Kea_Record
 ?>

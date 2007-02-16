@@ -16,11 +16,46 @@ class ItemsController extends Kea_Controller_Action
 		$this->_modelClass = 'Item';
 		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
-
+	
+	/**
+	 * Processes and saves the form to the given record
+	 *
+	 * @param Kea_Record
+	 * @return boolean True on success, false otherwise
+	 **/
 	protected function commitForm($item)
 	{
-		//add code here to handle anything aside from copying the form directly to the item
-		return parent::commitForm($item);
+		if(!empty($_POST))
+		{
+			
+			$item->setFromForm($_POST);
+					
+			if(!empty($_POST['change_type'])) return false;
+			
+			try {
+				$item->save();
+				return true;
+			}
+			catch(Doctrine_Validator_Exception $e) {
+				$item->gatherErrors($e);
+				return false;
+			}	
+		}
+		return false;
+	}
+	
+	/**
+	 * Get all the collections and all the active plugins for the form
+	 *
+	 * @return void
+	 **/
+	protected function loadFormData() 
+	{
+		$collections = Doctrine_Manager::getInstance()->getTable('Collection')->findAll();
+		$plugins = Doctrine_Manager::getInstance()->getTable('Plugin')->findActive();
+		$types = Doctrine_Manager::getInstance()->getTable('Type')->findAll();
+		
+		$this->_view->assign(compact('collections', 'plugins', 'types'));
 	}
 	
 	public function showAction() 

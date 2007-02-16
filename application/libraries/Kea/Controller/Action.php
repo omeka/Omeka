@@ -95,6 +95,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		{
 			$this->_redirect($pluralName.'/browse/');
 		}else {
+			$this->loadFormData();
 			$this->render($pluralName.'/add.php', compact($varName));			
 		}
 
@@ -115,6 +116,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		{
 			$this->_redirect($pluralName.'/show/'.$$varName->id);
 		}else{
+			$this->loadFormData();
 			$this->render($pluralName.'/edit.php', compact($varName));
 		}		
 	}
@@ -128,11 +130,17 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$this->_redirect($browseURL);
 	}
 	
+	/**
+	 * Processes and saves the form to the given record
+	 *
+	 * @param Kea_Record
+	 * @return boolean True on success, false otherwise
+	 **/
 	protected function commitForm($record)
 	{
 		if(!empty($_POST))
 		{
-			$record->setArray($_POST);
+			$record->setFromForm($_POST);
 			try {
 				$record->save();
 				return true;
@@ -143,6 +151,13 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		}
 		return false;
 	}
+	
+	/**
+	 * Load extra data that would need to be displayed for forms, for example the item form would require all collections, plugins, etc.
+	 *
+	 * @return void
+	 **/
+	protected function loadFormData() {}
 	
 	///// END BASIC CRUD INTERFACE /////
 	

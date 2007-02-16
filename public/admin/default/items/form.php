@@ -1,6 +1,7 @@
 <?php error($item); ?>
 		<h4>Title</h4>
 		<input type="text" name="title" value="<?=$item->title;?>" size="50" />
+		<?php error($item, 'title'); ?>
 		
 		<h4>Publisher</h4>
 		<input type="text" name="publisher" value="<?=$item->publisher?>" size="50" />
@@ -36,10 +37,26 @@
 		<input type="text" name="date" value="<?=$item->date;?>" size="50" />
 		
 		<h4>Collection</h4>
-		<p>Put a select here to pick the Collection.  Right now the Item belongs to a collection named: <?php echo $item->Collection->name; ?></p>
+		<?php foreach( $collections as $key => $collection ): ?>
+			<?php select(	array(	
+						'name'	=> 'collection_id',
+						'id'	=> 'collection_id' ),
+						$collections,
+						$item->collection_id,
+						'id',
+						'name' ); ?>
+		<?php endforeach; ?>
 		
 		<h3>Type Info</h3>
-		<p>Put a select here to pick the Type.  Right now the Item has a Type called: <?php echo $item->Type->name; ?></p>
+		<?php foreach( $types as $key => $type ): ?>
+			<?php select(	array(	
+						'name'	=> 'type_id',
+						'id'	=> 'type_id' ),
+						$types,
+						$item->type_id,
+						'id',
+						'name' ); ?>
+		<?php endforeach; ?>
 			
 		<input type="submit" name="change_type" value="Pick this type" />
 		<h4>Type Metadata</h4>
