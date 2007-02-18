@@ -3,7 +3,6 @@
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 /**
  * @package Omeka
- * @author Nate Agrin, Kris Kelly
  **/
 require_once 'Kea/Controller/Action.php';
 class ItemsController extends Kea_Controller_Action

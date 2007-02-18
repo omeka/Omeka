@@ -8,7 +8,7 @@ class Option extends Kea_Record {
 		$this->setTableName('options');
 		
         $this->hasColumn("name","string",30, "unique|notnull");
-        $this->hasColumn("value","string",100);
+        $this->hasColumn("value","string");
     }
 }
 ?>

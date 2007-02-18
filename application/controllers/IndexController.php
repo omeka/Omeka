@@ -1,7 +1,6 @@
 <?php
 /**
  * @package Omeka
- * @author Nate Agrin
  **/
 require_once 'Kea/Controller/Action.php';
 class IndexController extends Kea_Controller_Action

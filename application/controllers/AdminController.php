@@ -1,7 +1,6 @@
 <?php
 /**
  * @package Omeka
- * @author Nate Agrin
  * 
  * ONLY EDIT THIS FILE IF YOU KNOW WHAT YOU ARE DOING!!
  **/

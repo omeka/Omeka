@@ -14,7 +14,6 @@ include_once 'FormFunctions.php';
  * speed issue in the long term.
  * 
  * @package Omeka
- * @author Nate Agrin
  */
 
 /**
@@ -58,7 +57,7 @@ function src($file, $dir, $ext = null, $return = false) {
  * $dir defaults to 'javascripts'
  * $file should not include the .js extension
  */
-function script($file, $dir = 'javascripts') {
+function js($file, $dir = 'javascripts') {
 	src($file, $dir, 'js');
 }
 
@@ -159,7 +158,7 @@ function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units
  * @example url('items/browse/'.$item->id);
  * @return string Url for the link href attribute.
  **/
-function url($urlEnd)
+function uri($urlEnd)
 {
     
     $ctrl = Kea_Controller_Front::getInstance();

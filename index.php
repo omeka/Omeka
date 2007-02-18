@@ -66,6 +66,42 @@ Zend::register('config_ini', $config);
 require_once 'Zend/Controller/Front.php';
 require_once 'Zend/Controller/RewriteRouter.php';
 
+// Retrieve the ACL from the db, or create a new ACL object
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
+$options = $manager->getTable('option');
+$results = $options->findByDql('name LIKE "acl"');
+if (count($results) == 0) {
+	require_once 'Kea/Acl.php';
+	require_once 'Zend/Acl/Role.php';
+	require_once 'Zend/Acl/Resource.php';
+
+	$acl = new Kea_Acl();
+	$role = new Zend_Acl_Role('super');
+
+	$acl->addRole($role);
+
+	$acl->add(new Zend_Acl_Resource('item'));
+	$acl->add(new Zend_Acl_Resource('add'), 'item');
+	$acl->add(new Zend_Acl_Resource('edit'), 'item');
+	$acl->add(new Zend_Acl_Resource('delete'), 'item');
+	$acl->add(new Zend_Acl_Resource('read'), 'item');
+	
+	$acl->add(new Zend_Acl_Resource('themes'));
+	$acl->add(new Zend_Acl_Resource('set'),'themes');
+	
+	$acl->allow('super');
+
+	$option = new Option;
+	$option->name = 'acl';
+	$option->value = serialize($acl);
+	$option->save();
+	Zend::register('acl', $acl);
+}
+else {
+	Zend::register('acl', unserialize($results[0]->value)); 
+	$acl = unserialize($results[0]->value);
+}
+
 // Initialize some stuff
 $front = Kea_Controller_Front::getInstance();
 $router = new Zend_Controller_RewriteRouter();
