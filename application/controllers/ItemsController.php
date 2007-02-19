@@ -15,6 +15,7 @@ class ItemsController extends Kea_Controller_Action
 		$this->_modelClass = 'Item';
 		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
+
 	
 	/**
 	 * Processes and saves the form to the given record
@@ -60,6 +61,7 @@ class ItemsController extends Kea_Controller_Action
 	public function showAction() 
 	{
 		$item = $this->findById();
+		
 		if(!empty($_POST['tags'])) $this->addTags($item);
 		echo $this->render('items/show.php', compact("item"));
 	}

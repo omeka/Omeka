@@ -15,7 +15,7 @@ class Plugin extends Doctrine_Record
 	
  	public function setTableDefinition() {
 		$this->setTableName("plugins");
-		$this->hasColumn("name", "string", 400);
+		$this->hasColumn("name", "string", 255, "unique");
 		$this->hasColumn("path", "string", 400);
 		$this->hasColumn("config", "array");
 		$this->hasColumn("active", "boolean");

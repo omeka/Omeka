@@ -16,6 +16,14 @@ class Kea_Controller_Browse_Paginate implements Kea_Controller_Browse_Interface
 	protected $_numLinks;
 	
 	/**
+	 * Kea_Controller_Search class
+	 * Maybe this pagination class doesn't need to store a search class and can just instantiate it when necessary
+	 * 
+	 * @var Kea_Controller_Search
+	 **/
+	protected $_search;
+	
+	/**
 	 * Constructor
 	 *
 	 * @todo Implement option to paginate in alphabetical order
@@ -25,6 +33,8 @@ class Kea_Controller_Browse_Paginate implements Kea_Controller_Browse_Interface
 	{
 		$this->_class = $class;
 		$this->_controller = $controller;
+		
+		$this->_search = new Kea_Controller_Search($class);
 		
 		foreach( $options as $key => $value )
 		{
@@ -65,14 +75,27 @@ class Kea_Controller_Browse_Paginate implements Kea_Controller_Browse_Interface
 		
 		$offset = ($page - 1) * $per_page;
 		
-		$table = Doctrine_Manager::getInstance()->getTable($this->_class);
 		
-		$$pluralVar = $table->createQuery()
-				   		->limit($per_page)
-				   		->offset($offset)
-				   		->execute();
+		//Has the user done a search?
 		
-		$total = $table->count();
+		if($searchTerms = $_REQUEST['search']) {
+			$this->_search->page = $page;
+			$this->_search->offset = $offset;
+			$this->_search->per_page = $per_page;
+			$this->_search->terms = $searchTerms;
+			$$pluralVar = $this->_search->run();
+			
+			$total = $$pluralVar->count();
+		} else {
+			$table = Doctrine_Manager::getInstance()->getTable($this->_class);
+		
+			$$pluralVar = $table->createQuery()
+					   		->limit($per_page)
+					   		->offset($offset)
+					   		->execute();
+		
+			$total = $table->count();			
+		}
 		
 		//Figure out the pagination 
 		

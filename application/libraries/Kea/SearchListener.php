@@ -15,6 +15,8 @@ class Kea_SearchListener extends Doctrine_EventListener
 {
 	private $index;
 	
+	protected $_keywordFields = array('added', 'modified', 'date');
+	
 	public function __construct() {
 		$create = !file_exists(SEARCH_DIR.DIRECTORY_SEPARATOR.'index.lock');
 		$this->index = new Zend_Search_Lucene(SEARCH_DIR, $create);
@@ -24,40 +26,35 @@ class Kea_SearchListener extends Doctrine_EventListener
 	}
 	
 	public function onInsert(Doctrine_Record $record) {
-		Zend_Search_Lucene_Analysis_Analyzer::setDefault( new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive() );
-		if(get_class($record) == 'Item') {
-			$doc = new Zend_Search_Lucene_Document();
-			$doc->addField(Zend_Search_Lucene_Field::Keyword('added', $record->added));
-			$doc->addField(Zend_Search_Lucene_Field::Keyword('modified', $record->modified));
-			$doc->addField(Zend_Search_Lucene_Field::Text('title', $record->title));
-			$doc->addField(Zend_Search_Lucene_Field::Text('description', $record->description));
-			$doc->addField(Zend_Search_Lucene_Field::Text('publisher', $record->publisher));
-			$doc->addField(Zend_Search_Lucene_Field::Text('relation', $record->relation));
-			$doc->addField(Zend_Search_Lucene_Field::Text('coverage', $record->coverage));
-			$doc->addField(Zend_Search_Lucene_Field::Text('rights', $record->rights));
-			$doc->addField(Zend_Search_Lucene_Field::Text('subject', $record->subject));
-			$doc->addField(Zend_Search_Lucene_Field::Text('source', $record->source));
-			$doc->addField(Zend_Search_Lucene_Field::Text('creator', $record->creator));
-			$doc->addField(Zend_Search_Lucene_Field::Text('additional_creator', $record->additional_creator));
-			$doc->addField(Zend_Search_Lucene_Field::Text('language', $record->language));
-			$doc->addField(Zend_Search_Lucene_Field::Keyword('date', $record->date));
-			$doc->addField(Zend_Search_Lucene_Field::Keyword('item_id', $record->id));
-			$this->index->addDocument($doc);
+		$doc = new Zend_Search_Lucene_Document();
+		$columns = $record->getTable()->getColumns();
+		foreach( $columns as $field => $value )
+		{
+			if(!empty($record->$field)) {
+				if(in_array($field, $this->_keywordFields)) {
+					$doc->addField(Zend_Search_Lucene_Field::Keyword($field, $record->$field));
+				}else{
+					$doc->addField(Zend_Search_Lucene_Field::Text($field, $record->$field));
+				}				
+			}
 		}
+		$doc->addField(Zend_Search_Lucene_Field::Keyword('model_name', get_class($record)));
+		$this->index->addDocument($doc);
 	}
-	
+
 	public function onPreDelete(Doctrine_Record $record) {
-		if(get_class($record) == 'Item') {
-			Zend_Search_Lucene_Analysis_Analyzer::setDefault( new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive() );
-			$term = new Zend_Search_Lucene_Index_Term($record->id, 'item_id');
-			$query = new Zend_Search_Lucene_Search_Query_Term($term);
-			$hits = $this->index->find($query);
-			$this->index->delete($hits[0]);
-		}
+		Zend_Search_Lucene_Analysis_Analyzer::setDefault( new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive() );
+		$idTerm = new Zend_Search_Lucene_Index_Term($record->id, 'id');
+		$modelTerm = new Zend_Search_Lucene_Index_Term(get_class($record), 'model_name');
+		$query = new Zend_Search_Lucene_Search_Query_MultiTerm();
+		$query->addTerm($modelTerm, true);
+		$query->addTerm($idTerm, true);
+		$hits = $this->index->find($query);
+		$this->index->delete($hits[0]);
 	}
 	
 	public function onUpdate(Doctrine_Record $record) {
-		$this->onDelete($record);
+		$this->onPreDelete($record);
 		$this->onInsert($record);
 	}
 
