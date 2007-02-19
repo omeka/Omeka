@@ -6,14 +6,12 @@
  **/
 require_once 'Zend/View/Abstract.php';
 class Kea_View extends Zend_View_Abstract
-{
+{	
 	/**
 	 * Placeholder for Zend Request object
 	 * @var _request Zend_Controller_Request object
 	 */
-	protected $_request;
-	
-	protected $_response;
+	protected $_controller;
 	
 	/**
 	 * Using the current admin system, an option
@@ -22,53 +20,39 @@ class Kea_View extends Zend_View_Abstract
 	 * has been made through GET or via routes.
 	 * 
 	 * This is the only reason why we need to let the view
-	 * know about the requestion object, so that it can correctly
+	 * know about the request object, so that it can correctly
 	 * grab the admin template or the publicly available template.
 	 * 
 	 * @author Nate Agrin
 	 * @edited 2007-02-09
 	 */
-	public function __construct($config = array())
+	public function __construct(Kea_Controller_Action $controller, $config = array())
 	{
 		parent::__construct($config);
-		$this->setRequest(Zend::registry('request'));
 		
-		$this->setResponse(Zend::registry('response'));
+		$this->_controller = $controller;
 		
-		// set the theme path
+		/**
+		 * Set the theme path:
+		 * This needs to happen last because the first thing Zend_View_Abstract
+		 * does in its __construct() is set $this->setScriptPath(null).
+		 */ 
 		$this->setThemePath();
 	}
-	
+
 	/**
-	 * Set the request object
-	 * 
+	 * Functions that see through to the controller
+	 * Simple stuff
 	 * @author Nate Agrin
-	 * @edited 2007-02-09
-	 */
-	public function setRequest(Zend_Controller_Request_Abstract $request)
-	{
-		$this->_request = $request;
-	}
-	
-	/**
-	 * Get the request object
-	 * 
-	 * @author Nate Agrin
-	 * @edited 2007-02-09
 	 */
 	public function getRequest()
 	{
-		return $this->_request;
-	}
-	
-	public function setResponse(Zend_Controller_Response_Abstract $response)
-	{
-		$this->_response = $response;
+		return $this->_controller->getRequest();
 	}
 	
 	public function getResponse()
 	{
-		return $this->_response;
+		return $this->_controller->getResponse();
 	}
 	
 	/**
@@ -139,6 +123,7 @@ class Kea_View extends Zend_View_Abstract
 		extract($this->getVars());
 		include func_get_arg(0);
 	}
+
 	/**
 	 * Render the requested file using the selected theme
 	 * 
@@ -153,5 +138,5 @@ class Kea_View extends Zend_View_Abstract
 		return parent::render($file);
 	}
 
-} // END class Kea_View
+}
 ?>

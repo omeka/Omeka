@@ -17,7 +17,6 @@ abstract class Kea_Record extends Doctrine_Record
 	 **/
 	protected $error_messages = array();
 	
-	
 	/**
 	 * 
 	 * @todo Make this method recursive so that $this->getErrorMsg() will retrieve all error messages
@@ -135,6 +134,37 @@ abstract class Kea_Record extends Doctrine_Record
 	
 	public function setFromForm($array) {
 		return $this->setArray($array, array($this, 'strip'));
+	}
+	
+	/**
+	 * toJson is an attempt to provide a relatively
+	 * simple implementation for converting Doctrine_Record
+	 * objects into JSON objects
+	 * 
+	 * This uses Zend_Json which does not seem to be able
+	 * to handle syntax like Item.id = '1'. Instead the entire
+	 * object needs to be represented by a hash like
+	 * {"class":"item", "id":"1"}
+	 * 
+	 * @author Nate Agrin
+	 */
+	public function toJson()
+	{
+		require_once 'Zend/Json.php';
+		$data = $this->getData();
+		$data['id'] = $this->id;
+		$data['class'] = ucfirst(strtolower(get_class($this)));
+		return Zend_Json::encode($data);
+	}
+	
+	/**
+	 * Take in a json string, instantiate a model from it
+	 * and assert that it is the same as the model in the
+	 * database
+	 */
+	public function fromJson()
+	{
+		throw new Exception('This function not yet implemented');
 	}
 	
 } // END abstract class Kea_Record

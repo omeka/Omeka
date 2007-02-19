@@ -58,7 +58,7 @@ function src($file, $dir, $ext = null, $return = false) {
  * $file should not include the .js extension
  */
 function js($file, $dir = 'javascripts') {
-	src($file, $dir, 'js');
+	echo '<script language="javascript" src="'.src($file, $dir, 'js', true).'"></script>'."\n";
 }
 
 /**
@@ -171,5 +171,25 @@ function uri($urlEnd)
  
     return $url;
     
+}
+
+/**
+ * Stolen directly from Rails, and why not, because Ruby
+ * and Rails are simply better than PHP and Zend's shitty framework, period.
+ * In fact this is the last time I ever use this bullshit, sorry excuse for
+ * a programming language.
+ * 
+ * @author Nate Agrin
+ */
+function flash()
+{
+	require_once 'Zend/Session.php';
+	$flash = new Zend_Session('flash');
+	$msg = $flash->msg;
+	$flash->msg = null;
+	if ($msg === null) {
+		return false;
+	}
+	return $msg;
 }
 ?>

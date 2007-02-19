@@ -37,13 +37,99 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * @var Kea_Controller_Browse_Interface
 	 **/
 	protected $_browse;
+
+	/**
+	 * Attaches a view object to the controller.
+	 * The view also receives the current controller
+	 * object so it can interact with the request / response objects.
+	 */
+	public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
+	{	
+		// Zend_Controller_Action __construct finishes by running init()
+		$init = parent::__construct($request, $response, $invokeArgs);
+		
+		$this->_view = new Kea_View($this);
+		
+		return $init;
+	}
 	
-	///// BASIC CRUD INTERFACE /////
-	
+	/**
+	 * Define this here to avoid Zend's silly requirements
+	 */
 	public function noRouteAction()
     {
         $this->_redirect('/');
     }
+
+
+	/**
+	 * CONVIENCE METHODS
+	 */
+	
+	/**
+	 * Retrieve the Doctrine table for queries
+	 * @author Nate Agrin
+	 */
+	public function getTable($table = null)
+	{
+		return Doctrine_Manager::getInstance()->getTable($table);
+	}
+
+	/**
+	 * Retrieve an option from the option table.
+	 * This may end up being redundant.
+	 * 
+	 * @starred
+	 * @author Nate Agrin
+	 */
+	public function getOption($name)
+	{
+		$optionTable = $this->getTable('option');
+		$options = $optionTable->findByDql("name LIKE :name", array('name' => $name));
+		if (count($options) == 1) {
+			return ($options[0]);
+		}
+		return false;
+	}
+
+	/**
+	 * Stolen directly from Rails.
+	 * Again, this may be redundant, in that message delivery
+	 * should allow for ajax and non ajax responses.
+	 * Session passed messages obviously do not necessarily allow
+	 * for this.
+	 * 
+	 * @starred
+	 * @author Nate Agrin
+	 */
+	public function flash($msg=null)
+	{
+		require_once 'Zend/Session.php';
+		$flash = new Zend_Session('flash');
+		$flash->msg = $msg;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///// BASIC CRUD INTERFACE /////
 	
 	public function indexAction()
 	{
@@ -175,16 +261,10 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$this->getResponse()->appendBody($this->_view->render($page));
 	}
 	
-	public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
-	{
-		parent::__construct($request,$response,$invokeArgs);
-		$this->_view = new Kea_View();
-	}
-	
 	/**
 	 * Find a particular record given its unique ID # and (optionally) its class name.  Essentially a convenience method
 	 * $this->_table must be initialized in the init() method if the particular model is to be chosen automagically
-	 *
+	 * 
 	 * @return Kea_Record
 	 **/
 	public function findById($id=null, $table=null)

@@ -166,6 +166,34 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * @var Doctrine_Tree $tree             tree object associated with this table
      */
     protected $tree;
+
+
+	/**
+	 * Overload __call to preform findBy* methods
+	 */
+	public function __call($func, $args = array())
+	{
+		if (0 == count($args)) return;
+		if (preg_match('/findBy([\w]+)/', $func, $matches)) {
+			
+			$column = strtolower($matches[1]);
+			
+			if ($this->hasColumn($column)) {
+				$results = $this->findByDql($column . ' LIKE ?', array($args[0]));
+				if (count($results) == 1) {
+					return $results[0];
+				}
+				elseif (count($results == 0)) {
+					return false;
+				}
+				return $results;
+			}
+		}
+	}
+	
+	
+	
+
     /**
      * the constructor
      * @throws Doctrine_Connection_Exception    if there are no opened connections
