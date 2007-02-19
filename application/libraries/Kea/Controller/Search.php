@@ -70,6 +70,8 @@ class Kea_Controller_Search
 		// that used pluralized aliases
 		$pluralized = $this->_targetClass.'s';
 		
+		$targetClass = $this->_targetClass;
+		
 		$start = $this->offset;
 		$end = $this->per_page + $start;
 		
@@ -80,28 +82,27 @@ class Kea_Controller_Search
 			if(!$start || ($key >= $start && $key <= $end)) {
 				$id = $hit->getDocument()->id;
 				$model = $hit->getDocument()->model_name;
-				
-				$foundRecord = $table->find($id);
-				
-				//If the found result is the target result
-				if($model == $this->_targetClass) {
-					//Does this need to use the search hit key as the key?
-					$records->add($foundRecord);
-				
-				//If the found result is related to the target class via one-to-one	
-				}elseif($foundRecord->hasRelation($this->_targetClass)) {
-					$model = $this->_targetClass;
-					$records->add($foundRecord->$model);
-				
-				//Hopefully this will make this thing smart enough to return results with one-to-many relationships	
-				}elseif($foundRecord->hasRelation($pluralized)) {
-					$relatedRecords = $foundRecord->$pluralized;
-					foreach( $relatedRecords as $key => $relatedRecord )
-					{
-						$records->add($relatedRecord);
+				//If we find something but it isn't the target class, we need to check if it is related to the target class somehow
+				if($model != $targetClass) {
+					$foundRecord = Doctrine_Manager::getInstance()->getTable($model)->find($id);
+					
+					//one-to-one
+					if($foundRecord->hasRelation($targetClass)) {
+						$related = $foundRecord->$targetClass;
+						if($related->exists())
+							$records->add($foundRecord->$targetClass);
+					//one-to-many	
+					}elseif($foundRecord->hasRelation($pluralized)){
+						$relatedRecords = $foundRecord->$pluralized;
+						foreach( $relatedRecords as $key => $relatedRecord )
+						{
+							$records->add($relatedRecord);
+						}
 					}
-				}
-				
+				} else {
+					$foundRecord = $table->find($id);
+					$records->add($foundRecord);
+				}				
 			}
 		}
 		

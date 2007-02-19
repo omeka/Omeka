@@ -109,32 +109,12 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$flash->msg = $msg;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	///// BASIC CRUD INTERFACE /////
 	
 	public function indexAction()
 	{
-		$plural = strtolower($this->_modelClass).'s';
-		$this->_forward($plural, 'browse');
+		$controllerName = strtolower(str_replace("Controller", "", get_class($this)));
+        $this->_forward($controllerName, 'browse');
 	}
 	
 	/**

@@ -17,6 +17,8 @@ class Kea_SearchListener extends Doctrine_EventListener
 	
 	protected $_keywordFields = array('added', 'modified', 'date');
 	
+	protected $_doNotIndex = array('password', 'Option', 'Group'); 
+	
 	public function __construct() {
 		$create = !file_exists(SEARCH_DIR.DIRECTORY_SEPARATOR.'index.lock');
 		$this->index = new Zend_Search_Lucene(SEARCH_DIR, $create);
@@ -26,20 +28,22 @@ class Kea_SearchListener extends Doctrine_EventListener
 	}
 	
 	public function onInsert(Doctrine_Record $record) {
-		$doc = new Zend_Search_Lucene_Document();
-		$columns = $record->getTable()->getColumns();
-		foreach( $columns as $field => $value )
-		{
-			if(!empty($record->$field)) {
-				if(in_array($field, $this->_keywordFields)) {
-					$doc->addField(Zend_Search_Lucene_Field::Keyword($field, $record->$field));
-				}else{
-					$doc->addField(Zend_Search_Lucene_Field::Text($field, $record->$field));
-				}				
+		if(!in_array(get_class($record), $this->_doNotIndex)) {
+			$doc = new Zend_Search_Lucene_Document();
+			$columns = $record->getTable()->getColumns();
+			foreach( $columns as $field => $value )
+			{
+				if(!empty($record->$field)) {
+					if(in_array($field, $this->_keywordFields)) {
+						$doc->addField(Zend_Search_Lucene_Field::Keyword($field, $record->$field));
+					}elseif(!in_array($field, $this->_doNotIndex)){
+						$doc->addField(Zend_Search_Lucene_Field::Text($field, $record->$field));
+					}				
+				}
 			}
+			$doc->addField(Zend_Search_Lucene_Field::Keyword('model_name', get_class($record)));
+			$this->index->addDocument($doc);
 		}
-		$doc->addField(Zend_Search_Lucene_Field::Keyword('model_name', get_class($record)));
-		$this->index->addDocument($doc);
 	}
 
 	public function onPreDelete(Doctrine_Record $record) {
@@ -50,7 +54,9 @@ class Kea_SearchListener extends Doctrine_EventListener
 		$query->addTerm($modelTerm, true);
 		$query->addTerm($idTerm, true);
 		$hits = $this->index->find($query);
-		$this->index->delete($hits[0]);
+		if($hits) {
+			$this->index->delete($hits[0]);
+		}
 	}
 	
 	public function onUpdate(Doctrine_Record $record) {
