@@ -4,7 +4,7 @@
  * Tag Table 
  *
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 class TagTable extends Doctrine_Table
 {

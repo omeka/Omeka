@@ -6,7 +6,7 @@ require_once 'TypesMetafields.php';
 require_once 'MetafieldTable.php';
 /**
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 class Metafield extends Kea_Record { 
     /* TODO: change constructor to use name of metafield as the key */

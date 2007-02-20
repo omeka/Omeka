@@ -4,7 +4,7 @@
  * Groups_Permissions join table
  *
  * @package default
- * @author Nate Agrin
+ * 
  **/
 class GroupsPermissions extends Kea_Record
 {

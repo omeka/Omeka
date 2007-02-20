@@ -23,7 +23,7 @@ class Kea_View extends Zend_View_Abstract
 	 * know about the request object, so that it can correctly
 	 * grab the admin template or the publicly available template.
 	 * 
-	 * @author Nate Agrin
+	 * 
 	 * @edited 2007-02-09
 	 */
 	public function __construct(Kea_Controller_Action $controller, $config = array())
@@ -43,7 +43,7 @@ class Kea_View extends Zend_View_Abstract
 	/**
 	 * Functions that see through to the controller
 	 * Simple stuff
-	 * @author Nate Agrin
+	 * 
 	 */
 	public function getRequest()
 	{
@@ -59,7 +59,7 @@ class Kea_View extends Zend_View_Abstract
 	 * Construct the theme path from the options in the database
 	 * dependant on whether or not there is an admin interface request
 	 * 
-	 * @author Nate Agrin
+	 * 
 	 * @edited 2007-02-09
 	 */
 	public function setThemePath($path = null)
@@ -117,7 +117,7 @@ class Kea_View extends Zend_View_Abstract
 	 * Now you can reference it simply by using:
 	 * $themes;
 	 * 
-	 * @author Kris Kelly
+	 * 
 	 */
 	public function _run() {
 		extract($this->getVars());
@@ -127,7 +127,7 @@ class Kea_View extends Zend_View_Abstract
 	/**
 	 * Render the requested file using the selected theme
 	 * 
-	 * @author Nate Agrin
+	 * 
 	 * @edited 2007-02-09
 	 */
 	public function render($file)

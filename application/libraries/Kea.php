@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Kea
- * @author Nate Agrin
+ * 
  */
 final class Kea
 {

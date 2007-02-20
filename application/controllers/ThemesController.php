@@ -9,7 +9,7 @@ class ThemesController extends Kea_Controller_Action
 	 * This is only temporary until the system is better
 	 * built out.  We should not be relying on this
 	 * exclusively to populate our theme options.
-	 * @author Nate Agrin
+	 * 
 	 */
 	public function init()
 	{

@@ -5,7 +5,7 @@ require_once 'Zend/Controller/Plugin/Broker.php';
  * customized plugin broker
  *
  * @package Sitebuilder
- * @author Kris Kelly
+ * 
  **/
 class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
 {

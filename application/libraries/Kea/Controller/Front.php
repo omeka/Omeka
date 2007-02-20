@@ -5,7 +5,7 @@ require_once 'Kea/Controller/Plugin/Broker.php';
  * customized Zend Front Controller
  *
  * @package Sitebuilder
- * @author Kris Kelly
+ * 
  **/
 class Kea_Controller_Front extends Zend_Controller_Front
 {

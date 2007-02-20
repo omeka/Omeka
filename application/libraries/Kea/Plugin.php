@@ -6,7 +6,7 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
  * Specialized plugin class
  *
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 {
@@ -108,7 +108,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * Convenience method for plugin writers to customize their plugin installation
 	 *
 	 * @return void
-	 * @author Kris Kelly
+	 * 
 	 **/
 	public function customizeInstall() {}
 	

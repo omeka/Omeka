@@ -6,7 +6,7 @@ require_once 'Tag.php';
  * Items_Tags join table
  *
  * @package default
- * @author Kris Kelly
+ * 
  **/
 class ItemsTags extends Kea_Record
 {

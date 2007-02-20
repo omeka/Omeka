@@ -5,7 +5,7 @@ require_once 'Metafield.php';
  * TypesMetafields join record
  *
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 class TypesMetafields extends Kea_Record
 {

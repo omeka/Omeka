@@ -5,7 +5,7 @@ require_once 'Group.php' ;
  **/
 
 /**
- * @author Nate Agrin
+ * 
  */
 class UserListener extends Doctrine_EventListener
 {
@@ -18,7 +18,7 @@ class UserListener extends Doctrine_EventListener
 }
 
 /**
- * @author Kris Kelly
+ * 
  */
 class User extends Kea_Record {
 

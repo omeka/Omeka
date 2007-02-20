@@ -12,7 +12,7 @@ require_once 'Item.php';
 
 /**
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 class File extends Kea_Record { 
     
@@ -67,7 +67,7 @@ class File extends Kea_Record {
 	 * Stole this jazz from the old File model
 	 *
 	 * @return void
-	 * @author Kris Kelly
+	 * 
 	 **/
 	public function upload($form_name, $index, $useExif = false) {
 		$error = $_FILES[$form_name]['error'][$index];
@@ -104,7 +104,7 @@ class File extends Kea_Record {
 	 * Also ripped off/modded from old File model
 	 *
 	 * @return void
-	 * @author Kris Kelly
+	 * 
 	 **/
 	protected function createImage( $new_dir, $old_path, $percent = null, $new_width = null, $new_height = null, $output = 3, $no_enlarge = true ) {
 		if(!$this->checkForImageMagick()) {

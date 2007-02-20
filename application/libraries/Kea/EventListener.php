@@ -4,7 +4,7 @@
  * Kea_EventListener
  *
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 class Kea_EventListener extends Doctrine_EventListener
 {

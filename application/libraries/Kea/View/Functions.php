@@ -100,7 +100,7 @@ function footer($vars = array(), $file = 'footer') {
  * 
  * @example error($item, 'title');
  * @return void
- * @author Kris Kelly
+ * 
  **/
 function error($record, $field_name = null) {
 	$error = $record->getErrorMsg($field_name);
@@ -179,7 +179,7 @@ function uri($urlEnd)
  * In fact this is the last time I ever use this bullshit, sorry excuse for
  * a programming language.
  * 
- * @author Nate Agrin
+ * 
  */
 function flash()
 {

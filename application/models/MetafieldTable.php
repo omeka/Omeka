@@ -4,7 +4,7 @@
  * MetafieldTable
  *
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 class MetafieldTable extends Doctrine_Table
 {
@@ -12,7 +12,7 @@ class MetafieldTable extends Doctrine_Table
 	 * Find all the metafields that belong to active plugins, (and optionally) plugins that have a given type
 	 *
 	 * @return void
-	 * @author Kris Kelly
+	 * 
 	 **/
 	public function findActive($type = null) {
 		$query = new Doctrine_Query();

@@ -9,7 +9,7 @@ require_once 'ItemsTags.php';
 
 /**
  * @package Omeka
- * @author Kris Kelly
+ * 
  **/
 class Item extends Kea_Record
 {	
@@ -96,7 +96,7 @@ class Item extends Kea_Record
 	 * What should this function return? (if anything)
 	 *
 	 * @return void
-	 * @author Kris Kelly
+	 * 
 	 **/
 	public function addTagString($string, $delimiter = ',') {
 		$tagsArray = explode($delimiter, $string);

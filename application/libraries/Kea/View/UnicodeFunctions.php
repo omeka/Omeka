@@ -46,8 +46,7 @@ function allhtmlentities($str, $convertTags = 1, $encoding = "", $named_entities
 /**
  * Correct illegal entities into their legal counterparts
  *
- * @return void
- * @author Kris Kelly
+ * @return string
  **/
 function correctEntities( $str )
 {

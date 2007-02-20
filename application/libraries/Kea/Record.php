@@ -5,7 +5,7 @@
  * Customized wrapper for Doctrine_Record
  *
  * @package Kea
- * @author Kris Kelly
+ * 
  **/
 abstract class Kea_Record extends Doctrine_Record
 {	
@@ -146,7 +146,7 @@ abstract class Kea_Record extends Doctrine_Record
 	 * object needs to be represented by a hash like
 	 * {"class":"item", "id":"1"}
 	 * 
-	 * @author Nate Agrin
+	 * 
 	 */
 	public function toJson()
 	{

@@ -68,7 +68,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	
 	/**
 	 * Retrieve the Doctrine table for queries
-	 * @author Nate Agrin
+	 * 
 	 */
 	public function getTable($table = null)
 	{
@@ -80,7 +80,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * This may end up being redundant.
 	 * 
 	 * @starred
-	 * @author Nate Agrin
+	 * 
 	 */
 	public function getOption($name)
 	{
@@ -100,7 +100,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * for this.
 	 * 
 	 * @starred
-	 * @author Nate Agrin
+	 * 
 	 */
 	public function flash($msg=null)
 	{
@@ -233,7 +233,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * @param string The page, including .php extension
 	 * @param array The variables to be included on that page, where key = name and value = contents.  see compact()
 	 * @return void
-	 * @author Kris Kelly
+	 * 
 	 **/
 	public function render($page, array $vars)
 	{

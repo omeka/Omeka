@@ -4,7 +4,7 @@ require_once 'User.php';
 require_once 'Permission.php';
 /**
  * @package Omeka
- * @author Nate Agrin
+ * 
  * 
  * For use in a ACL type system where each group
  * has specific permission and users belong to the

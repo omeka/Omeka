@@ -8,7 +8,7 @@ class IndexController extends Kea_Controller_Action
 	/**
 	 * This allows for GET style routing.
 	 * DO NOT EDIT THIS UNLESS THERE IS A BUG, OR YOU KNOW WHAT YOU ARE DOING
-	 * @author Nate Agrin
+	 * 
 	 */
     public function indexAction()
     {

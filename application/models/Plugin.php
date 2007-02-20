@@ -5,7 +5,7 @@ require_once 'PluginTable.php';
  * Used for plugin storage in the database
  *
  * @package default
- * @author Kris Kelly
+ * 
  **/
 class Plugin extends Doctrine_Record
 {
