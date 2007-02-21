@@ -11,6 +11,7 @@ define( 'PATH_TO_CONVERT', '/usr/bin/convert' );
 require_once 'Item.php';
 
 /**
+ * @todo Add a timestamp listener to process the added/modified fields (see Item)
  * @package Omeka
  * 
  **/
@@ -97,6 +98,35 @@ class File extends Kea_Record {
 				
 				$this->thumbnail_filename = $this->createImage(THUMBNAIL_DIR, $path, null, THUMBNAIL_IMAGE_WIDTH );
 				
+		} else {
+			// Ignore error '4' - no file uploaded and error '0' - file uploaded correctly
+				switch( $error ) {
+
+					// 1 - File exceeds upload size in php.ini
+					// 2 - File exceeds upload size set in MAX_FILE_SIZE
+					case( '1' ):
+					case( '2' ):
+						throw new Exception(
+							$_FILES[$file_form_name]['name'][$key] . ' exceeds the maximum file size.' . $_FILES[$file_form_name]['size'][$key]
+						);
+					break;
+					
+					// 3 - File partially uploaded
+					case( '3' ):
+						throw new Exception(
+							$_FILES[$file_form_name]['name'][$key] . ' was only partially uploaded.  Please try again.'
+						);
+					break;
+					
+					// 6 - Missing Temp folder
+					// 7 - Can't write file to disk
+					case( '6' ):
+					case( '7' ):
+						throw new Exception(
+							'There was a problem saving the files to the server.  Please contact an administrator for further assistance.'
+						);
+					break;
+				}
 		}
 	}
 	
@@ -179,7 +209,7 @@ class File extends Kea_Record {
 			}
 			else
 			{
-				throw new Kea_Domain_Exception(
+				throw new Exception(
 					'Something went wrong with thumbnail creation.  Ensure that the thumbnail directories have appropriate write permissions.'
 				);
 			}

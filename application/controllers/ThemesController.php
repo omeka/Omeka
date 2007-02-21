@@ -88,7 +88,7 @@ class ThemesController extends Kea_Controller_Action
 		
 		// Create a view class
 		require_once 'application/libraries/Kea/View.php';
-		$view = new Kea_View(array('request', $this->getRequest()));
+		$view = new Kea_View($this, array('request', $this->getRequest()));
 
 		// Send the global $themes array to the view
 		$view->assign('themes', $themes);

@@ -3,6 +3,9 @@
 /**
  * Integration between Zend_Search_Lucene and the controllers
  *
+ * @todo Abstract out the SEARCH_DIR constant so that more than one index can used if necessary
+ * @todo Keep an array repository of unique identifiers for the found records to eliminate the possibility of duplicate returns
+ * @todo Add an array of protected Record types that users without a certain ACL privilege will not be able to search (implies ACL integration)
  * @package Omeka
  **/
 class Kea_Controller_Search
@@ -45,6 +48,25 @@ class Kea_Controller_Search
 	
 	public function __construct($targetClass = null) {
 		$this->_targetClass = $targetClass;
+	}
+	
+	/**
+	 * Retrieve the current number of records in the Lucene index
+	 *
+	 * @return int
+	 **/
+	public function getTotal() {
+		$index = new Zend_Search_Lucene(SEARCH_DIR);
+		return $index->count();
+	}
+	
+	/**
+	 * Set the target class for search results
+	 *
+	 * @return void
+	 **/
+	public function setTarget($class) {
+		$this->_targetClass = $class;
 	}
 	
 	public function run() {

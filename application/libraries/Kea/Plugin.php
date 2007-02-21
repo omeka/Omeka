@@ -82,6 +82,12 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	
 	///// INSTALLATION/ACTIVATION /////
 	
+	/**
+	 * Install this plugin given its path
+	 *
+	 * @todo Have it check for specific types in the metafield definition so that the plugin can add metafields only to certain types
+	 * @return void
+	 **/
 	public function install($path) {
 		if(!$this->record->exists()) {
 			$this->record->name = get_class($this);
@@ -93,7 +99,6 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 				foreach( $array as $key => $value )
 				{
 					$metafield->$key = $value;
-					// TODO: have it check for specific types in the metafield definition so that the plugin can add metafields only to certain types
 				}
 				$this->record->Metafields->add($metafield);
 			}

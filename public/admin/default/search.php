@@ -1,4 +1,8 @@
+<?php
 
+	echo "There are $total records stored in the search index.  ";
+
+?>
 <?php echo count($results);?> were returned.
 
 <form method="post">

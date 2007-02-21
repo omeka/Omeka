@@ -70,6 +70,10 @@
 		<?php	
 			endforeach;
 		?>	
+		
+		<!-- MAX_FILE_SIZE must precede the file input field -->
+		<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+		<input name="file[0]" type="file" />
 
 <?php if(1==0):?>		
 		<h3>Plugin Info</h3>

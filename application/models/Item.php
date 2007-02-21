@@ -10,6 +10,7 @@ require_once 'ItemsTags.php';
 /**
  * @package Omeka
  * 
+ * @todo Create/modify the ItemTable::findAll() method (or all find methods) to check for ACL privileges and only return the Items that are public
  **/
 class Item extends Kea_Record
 {	

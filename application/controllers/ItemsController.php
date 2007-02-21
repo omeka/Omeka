@@ -2,6 +2,7 @@
 
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 /**
+ * @todo customize the Search query to include featured/not featured, plus whatever else we can think of
  * @package Omeka
  **/
 require_once 'Kea/Controller/Action.php';
@@ -31,6 +32,23 @@ class ItemsController extends Kea_Controller_Action
 			$item->setFromForm($_POST);
 					
 			if(!empty($_POST['change_type'])) return false;
+			
+			if(!empty($_FILES["file"])) {
+				//Handle the file uploads
+				foreach( $_FILES['file']['error'] as $key => $error )
+				{ 
+					try{
+						$file = new File();
+						$file->upload('file', $key);
+						$item->Files->add($file);
+					}catch(Exception $e) {
+						echo $e->getMessage();
+						$file->delete();
+						break;
+					}
+				
+				}
+			}
 			
 			try {
 				$item->save();
@@ -66,8 +84,13 @@ class ItemsController extends Kea_Controller_Action
 		echo $this->render('items/show.php', compact("item"));
 	}
 
+	/**
+	 * @todo catch the current User somewhere in here, shoot it to the addTagString() method 
+	 * @param Item
+	 * @return void
+	 **/
 	private function addTags($item) {
-		/* TODO: catch the current User somewhere in here, shoot it to the addTagString() method */
+		
 		if($tagString = $_POST['tags']) {
 			$item->addTagString($tagString);			
 			try{

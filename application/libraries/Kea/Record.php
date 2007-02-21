@@ -18,8 +18,9 @@ abstract class Kea_Record extends Doctrine_Record
 	protected $error_messages = array();
 	
 	/**
-	 * 
-	 * @todo Make this method recursive so that $this->getErrorMsg() will retrieve all error messages
+	 * Retrieve the error message associated with a specific field if it exists, or retrieve all errors as a string
+	 *
+	 * @param string Name of the field (optional - if not given, all error messages are returned concatenated)
 	 * @return string
 	 **/
 	public function getErrorMsg($field = null) 

@@ -9,7 +9,6 @@ require_once 'MetafieldTable.php';
  * 
  **/
 class Metafield extends Kea_Record { 
-    /* TODO: change constructor to use name of metafield as the key */
 
 	public function setUp() {
 		//Replace with a join table
@@ -24,8 +23,6 @@ class Metafield extends Kea_Record {
 		$this->hasColumn("name", "string", 255, "unique");
 		$this->hasColumn("description","string", null);
 		$this->hasColumn("plugin_id", "integer");
-
-//		$this->hasColumn("type_id", "integer");
  	}
 }
 
