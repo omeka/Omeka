@@ -91,7 +91,7 @@ function head($vars = array(), $file = 'header') {
 	common($file, $vars);
 }
 
-function footer($vars = array(), $file = 'footer') {
+function foot($vars = array(), $file = 'footer') {
 	common($file, $vars);
 }
 

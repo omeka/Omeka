@@ -17,7 +17,10 @@ class ItemsController extends Kea_Controller_Action
 		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
 
-	
+	public function indexAction()
+	{
+		$this->render('index.php', array());
+	}
 	/**
 	 * Processes and saves the form to the given record
 	 *
