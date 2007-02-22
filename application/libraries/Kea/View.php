@@ -128,7 +128,7 @@ class Kea_View extends Zend_View_Abstract
 	 * Render the requested file using the selected theme
 	 * 
 	 * 
-	 * @edited 2007-02-09
+	 * @edited 2007-02-22
 	 */
 	public function render($file)
 	{

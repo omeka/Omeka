@@ -27,7 +27,7 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
     }
 	
 	private function __construct() {}
-	
+
 	public function plugins() {
 		return $this->_plugins;
 	}

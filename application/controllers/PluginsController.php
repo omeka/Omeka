@@ -15,7 +15,7 @@ class PluginsController extends Kea_Controller_Action
 	{
 		$names = Doctrine_Manager::connection()->getTable('Plugin')->getNewPluginNames();
 		
-		$this->view->new_names = $names;
+		$this->_view->new_names = $names;
 		
 		if(!empty($_POST)) {
 			foreach( $names as $name )
@@ -36,7 +36,7 @@ class PluginsController extends Kea_Controller_Action
 			}
 		}
 		
-		echo $this->view->render('install.php');
+		$this->render('plugins/install.php');
 	}
 	
 	/**
@@ -44,10 +44,9 @@ class PluginsController extends Kea_Controller_Action
 	 *
 	 * @return boolean
 	 **/
-	protected function commitForm($view)
+	protected function commitForm($plugin)
 	{
 		if(empty($_POST)) return false;
-		$plugin = $view->plugin;
 
 		$plugin->config = $_POST['config'];
 		
@@ -58,8 +57,6 @@ class PluginsController extends Kea_Controller_Action
 			$plugin->save();
 			return true;
 		}catch( Exception $e) {
-			echo get_class( $e );exit;
-			$view->errors = $plugin->getErrorStack();
 			return false;
 		}
 

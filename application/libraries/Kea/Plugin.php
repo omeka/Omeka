@@ -28,11 +28,21 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * @var array
 	 **/
 	protected $metafields = null;
+	
+	/**
+	 * Path to the plugin directory
+	 *
+	 * @var string
+	 **/
+	protected $dir;
 		
 	public function __construct($router = null, $record = null) {
+		$this->dir = PLUGIN_DIR.DIRECTORY_SEPARATOR.get_class($this);
+		
 		if(!empty($router)) {
 			$this->router = $router;
-			$this->defineRoutes();
+			$config = new Zend_Config_Ini($this->dir.DIRECTORY_SEPARATOR.'routes.ini');
+			$this->router->addConfig($config, 'routes');
 		}		
 		//Find the plugin entry in the database or create a new empty one
 		if(empty($record)) {
@@ -47,37 +57,11 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_LISTENER, $listener);
 	
 		$front = Kea_Controller_Front::getInstance();
-		$front->addControllerDirectory('public'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.get_class($this).'/controllers');
-	}
-	
-	///// ROUTING STUFF /////
-	
-	//Let the plugin writer add their own routes with this convenience method
-	public function defineRoutes() {}
-	
-	public function addRoute($name, Zend_Controller_Router_Route_Interface $route) {
-		$this->router->addRoute($name, $route);
-	}
-	
-	///// END ROUTING STUFF /////
-	
-	///// TEXT MANIPULATION CONVENIENCE METHODS /////
-	
-	public function append($text) {
-		$this->getResponse()->appendBody($text);
-	}
-	
-	public function prepend($text) {
-		$this->getResponse()->setBody($text.$this->getResponse()->getBody());
-	}
-	
-	public function insertAfter($insertText, $afterThis) {
-		$body = $this->getResponse()->getBody();
-		$body_a = explode($afterThis, $body);
-		$before = array_shift($body_a);
-		$after = implode($afterThis, $body_a);
-		$body = $before.$afterThis.$insertText.$after;
-		$this->getResponse()->setBody($body);
+		$front->addControllerDirectory($this->dir.DIRECTORY_SEPARATOR.'controllers');
+		
+		
+		// This seems like a bad idea but it makes it easier to integrate plugins and their helpers
+		Zend::register(get_class($this), $this);
 	}
 	
 	///// INSTALLATION/ACTIVATION /////
@@ -148,6 +132,22 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	public function metafields() {
 		return $this->record->Metafields;
 	}
+	
+	///// CUSTOM OMEKA HOOKS /////
+	
+	/**
+	 * Echo all javascript includes, css files, etc. here so that they will be properly included in the template header
+	 *
+	 * @return void
+	 **/
+	public function header() {}
+	
+	/**
+	 * Ditto for the footer (not sure if this will be terribly useful)
+	 *
+	 * @return void
+	 **/
+	public function footer() {}
 	
 	///// ZEND CONTROLLER HOOKS /////
 	

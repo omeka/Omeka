@@ -91,7 +91,12 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		}
 		return false;
 	}
-
+	
+	public function getView()
+	{
+		return $this->_view;
+	}
+	
 	/**
 	 * Stolen directly from Rails.
 	 * Again, this may be redundant, in that message delivery
@@ -235,7 +240,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * @return void
 	 * 
 	 **/
-	public function render($page, array $vars)
+	public function render($page, array $vars = array())
 	{
 		$this->_view->assign($vars);
 		$this->getResponse()->appendBody($this->_view->render($page));

@@ -4,6 +4,8 @@
 <head>
 <title><?php echo $title; ?></title>
 
+<?php plugin_header(); ?>
+
 <link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
 

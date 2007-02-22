@@ -1,4 +1,4 @@
-<a href="<?php echo url(array('id'=>$plugin->id, 'controller' => 'plugins', 'action'=>'edit'), 'id'); ?>">Edit</a>
+<a href="<?php echo uri('plugins/edit/'.$plugin->id); ?>">Edit</a>
 
 <h2><?php echo $plugin->name;?></h2>
 

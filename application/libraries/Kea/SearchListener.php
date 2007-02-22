@@ -18,7 +18,6 @@ class Kea_SearchListener extends Doctrine_EventListener
 	/**
 	 * Array of fields/record types to exclude from indexing
 	 *
-	 * @todo Probably should put the join tables in here too (ItemsTags, etc.)
 	 * @var string
 	 **/
 	protected $_doNotIndex = array('password', 'Option', 'Group', 'ItemsTags', 'TypesMetafields', 'Plugin', 'GroupsPermissions'); 

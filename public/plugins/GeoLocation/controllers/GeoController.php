@@ -1,8 +1,8 @@
 <?php
 
-require_once 'Zend/Controller/Action.php';
+require_once 'Kea/Controller/Action.php';
 
-class GeoController extends Zend_Controller_Action
+class GeoController extends Kea_Controller_Action
 {
     public function indexAction()
     {
@@ -13,6 +13,11 @@ class GeoController extends Zend_Controller_Action
     {
         $this->_redirect('/');
     }
+
+	public function browseAction()
+	{
+		
+	}
 }
 
 ?>

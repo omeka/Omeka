@@ -109,15 +109,6 @@ function error($record, $field_name = null) {
 	}
 }
 
-/**
- * similar to wp_header() from Wordpress, hooks into the plugin system within the header
- *
- * @return void
- **/
-function plugin_header() {
-	Kea_Controller_Plugin_Broker::getInstance()->header();
-}
-
 function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units = 'em', $return = false )
 {
 	$html = '';
@@ -192,4 +183,32 @@ function flash()
 	}
 	return $msg;
 }
+
+///// PLUGIN HELPER FUNCTIONS /////
+
+/**
+ * This is the butter right here.  
+ *
+ * @example plugin('GeoLocation', 'map', 'arg1', 'arg2', 'arg3');
+ * @return mixed
+ **/
+function plugin() {
+	$args = func_get_args();
+	$pluginName = array_shift($args);
+	$method = array_shift($args);
+	$plugin = Zend::Registry($pluginName);
+	return call_user_func_array(array($plugin, $method), $args);
+}
+
+/**
+ * similar to wp_header() from Wordpress, hooks into the plugin system within the header
+ *
+ * @return void
+ **/
+function plugin_header() {
+	Kea_Controller_Plugin_Broker::getInstance()->header();
+}
+
+///// END PLUGIN HELPER FUNCTIONS /////
+
 ?>
