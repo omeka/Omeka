@@ -184,6 +184,39 @@ function flash()
 	return $msg;
 }
 
+///// NAVIGATION /////
+
+/**
+ * Generate navigation list items, with class "current" for the chosen item
+ *
+ * @param array Key = Text of Navigation, Value = Link
+ * @example primary_nav(array('Themes' => uri('themes/browse')));
+ * @return void
+ **/
+function nav(array $links) {
+	
+	$current = Kea_Controller_Front::getInstance()->getRequest()->getRequestUri();
+	$plugins = Kea_Controller_Plugin_Broker::getInstance();
+	
+	foreach( $links as $text => $link )
+	{		
+		$nav .= "<li".((trim($link, '/') == trim($current, '/')) ? ' class="current"':'')."><a href=\"$link\">$text</a></li>\n";
+		
+		//add navigation from the plugins
+		$plugResponses = $plugins->addNavigation($text, $link);
+		if(!empty($plugResponses)) {
+			foreach( $plugResponses as $array ) { 
+				list($plugText, $plugLink) = $array;
+				$nav .= "<li".((trim($plugLink, '/') == trim($current, '/')) ? ' class="current"':'')."><a href=\"$plugLink\">$plugText</a></li>\n"; 
+			}
+		}
+		
+	}
+	echo $nav;
+}
+
+///// END NAVIGATION /////
+
 ///// PLUGIN HELPER FUNCTIONS /////
 
 /**

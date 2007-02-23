@@ -127,6 +127,13 @@ JAVA1;
 
 		echo  $javascript;
 	}
+	
+	public function addNavigation($text, $link) {
+		if($text == 'Themes') {
+			return array('Foo', $this->uri('bar'));
+		}
+	}
+	
 	public function routeStartup()
     {
 //        $this->getResponse()->appendBody('<p>routeStartup() called</p>');

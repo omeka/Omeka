@@ -45,6 +45,21 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
 			$plugin->footer();
 		}
 	}
+	
+	/**
+	 * This applies to all plugin hooks that are defined in Kea_Plugin
+	 *
+	 * @return array|void
+	 **/
+	public function __call($m, $a) {
+		$retVals = array();
+		foreach( $this->_plugins as $key => $plugin )
+		{
+			$retVal = call_user_func_array(array($plugin, $m), $a);
+			if($retVal !== null) $retVals[$key] = $retVal;
+		}
+		if(!empty($retVals)) return $retVals;
+	}
 } // END class Kea_Controller_Plugin_Broker
 
 ?>

@@ -111,6 +111,12 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		$this->record->save();
 	}
 	
+	///// CONVENIENCE METHODS /////
+	
+	public function uri($urlEnd) {
+		return rtrim($this->getRequest()->getBaseUrl(), '/').'/'.$urlEnd;
+	}
+	
 	///// RECORD GETTER/SETTER /////
 	
 	public function getConfig($index) {
@@ -148,6 +154,19 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * @return void
 	 **/
 	public function footer() {}
+	
+	/**
+	 * Add navigation to themes at any given point in a view that a theme writer uses nav()
+	 *
+	 * Right now it only positions new navigation after existing navigation, but the plugin writer
+	 * can choose which navigation goes after other built-in navigation
+	 *
+	 * @param string Can place new navigation elements after elements with this link text
+	 * @param string New navigation can go after elements with this link uri
+	 * @usage If $text is 'Themes', then the return value will add itself to any nav() that contains 'Themes', but only right after 'Themes'
+	 * @return array Key = Text of link, Value = uri
+	 **/
+	public function addNavigation($text, $link, $position = 'after') {}	
 	
 	///// ZEND CONTROLLER HOOKS /////
 	

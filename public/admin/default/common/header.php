@@ -12,7 +12,13 @@
 </head>
 <body>
 	<div id="wrap">
-		
+		<ul>
+		<?php
+
+			nav(array('Items' => uri('items/browse'), 'Themes' => uri('themes/browse')));
+
+		?>
+		</ul>
 		<div id="header">
 			<h1 id="logo"><?php echo $title; ?></h1>
 		</div>
