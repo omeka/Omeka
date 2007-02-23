@@ -9,5 +9,5 @@
 	<?php  echo $item->id;?>) <?php echo $item->title; ?><br/>
 <?php endforeach; ?>
 
-<?php footer(); ?>
+<?php foot(); ?>
 

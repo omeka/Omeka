@@ -11,6 +11,7 @@ require_once 'ItemsTags.php';
  * @package Omeka
  * 
  * @todo Create/modify the ItemTable::findAll() method (or all find methods) to check for ACL privileges and only return the Items that are public
+ * @todo ItemsFavorites integration
  **/
 class Item extends Kea_Record
 {	
@@ -26,6 +27,8 @@ class Item extends Kea_Record
 	}
 	
 	public function setTableDefinition() {
+//		$this->option('type', 'MYISAM');
+		
 		$this->setTableName('items');
 		
 		$this->hasColumn("title","string",300, "notblank");
@@ -46,7 +49,7 @@ class Item extends Kea_Record
 		$this->hasColumn("type_id","integer");
 		$this->hasColumn("collection_id","integer");
 		$this->hasColumn("user_id","integer");
-
+		$this->hasColumn("featured", "boolean");
 		$this->hasColumn("public", "boolean");
 	}
 	

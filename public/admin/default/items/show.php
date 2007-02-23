@@ -12,7 +12,7 @@
 	$points[0]['longitude'] = 65;
 	$points[1]['latitude'] = 55;
 	$points[1]['longitude'] = 65;
-	plugin('GeoLocation', 'map', null, null, 5, 200, 200, 'map', $points, array('clickable' => true) );
+//	plugin('GeoLocation', 'map', null, null, 5, 200, 200, 'map', $points, array('clickable' => true) );
 ?>	
 
 <h2>Tags</h2>

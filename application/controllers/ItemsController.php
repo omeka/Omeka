@@ -21,6 +21,7 @@ class ItemsController extends Kea_Controller_Action
 	{
 		$this->render('index.php', array());
 	}
+	
 	/**
 	 * Processes and saves the form to the given record
 	 *
@@ -36,7 +37,7 @@ class ItemsController extends Kea_Controller_Action
 					
 			if(!empty($_POST['change_type'])) return false;
 			
-			if(!empty($_FILES["file"])) {
+			if(!empty($_FILES["file"]['name'][0])) {
 				//Handle the file uploads
 				foreach( $_FILES['file']['error'] as $key => $error )
 				{ 
