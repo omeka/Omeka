@@ -38,7 +38,7 @@ class ThemesController extends Kea_Controller_Action
 	
     public function indexAction()
     {
-		$response = $this->getResponse();
+		$this->browseAction();
     }
 
 	public function rerouteAction()
