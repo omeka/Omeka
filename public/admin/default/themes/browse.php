@@ -19,5 +19,5 @@ head(array('title'=>'foo'));
 <?php endforeach; ?>
 <img src="<?php img('foo.jpg');?>"/>
 <?php
-footer();
+foot();
 ?>

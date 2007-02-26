@@ -36,7 +36,7 @@ class Kea_SearchListener extends Doctrine_EventListener
 		{
 			$this->rebuildIndex();
 		}	
-			
+				
 		//We need this because Zend Search has some sort of retarded default that won't let you search through digits
 		Zend_Search_Lucene_Analysis_Analyzer::setDefault( new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive() );
 	}
@@ -59,8 +59,7 @@ class Kea_SearchListener extends Doctrine_EventListener
 			{
 				$this->onInsert($record);
 			}
-			// This is locking the index for some reason
-	//		$this->index->optimize();
+			$this->index->optimize();
 		}
 	}
 	

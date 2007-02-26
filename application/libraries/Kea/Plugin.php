@@ -54,7 +54,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		}
 		//Hook the Doctrine event listeners into the plugin
 		$listener = new Kea_EventListener($this);
-		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_LISTENER, $listener);
+		Doctrine_Manager::getInstance()->getListener()->add($listener);
 	
 		$front = Kea_Controller_Front::getInstance();
 		$front->addControllerDirectory($this->dir.DIRECTORY_SEPARATOR.'controllers');
