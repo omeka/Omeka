@@ -4,7 +4,7 @@
 <h1><?=$item->title?></h1>
 <h4>Metatext</h4>
 <?php foreach($item->Metatext as $key => $metatext): ?>
-<h5><?= $metatext->Metafield->name; ?>: <?= $metatext->text; ?></h5>
+<h5><?= $metatext->Metafield->name; ?>: <?= $metatext; ?></h5>
 <?php endforeach; ?>
 <?php
 

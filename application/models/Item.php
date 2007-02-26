@@ -6,7 +6,7 @@ require_once 'File.php';
 require_once 'Metatext.php';
 require_once 'Tag.php';
 require_once 'ItemsTags.php';
-
+require_once 'ItemMetatext.php';
 /**
  * @package Omeka
  * 
@@ -22,7 +22,7 @@ class Item extends Kea_Record
 		$this->hasOne("Type","Item.type_id");
 		$this->hasOne("User","Item.user_id");
 		$this->ownsMany("File as Files","File.item_id");
-		$this->ownsMany("Metatext", "Metatext.item_id");
+		$this->ownsMany("ItemMetatext as Metatext", "ItemMetatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 	}
 	
@@ -76,6 +76,15 @@ class Item extends Kea_Record
 
 		}
 		return $meta;
+	}
+	
+	/**
+	 * Alias of metadata()
+	 *
+	 * @return mixed
+	 **/
+	public function Metatext( $name, $return_text = true) {
+		return $this->metadata($name, $return_text);
 	}
 	
 	///// END METADATA METHODS /////
