@@ -2,6 +2,7 @@
 require_once 'Zend/Controller/Plugin/Abstract.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Plugin.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
+require_once 'Zend/Config/Ini.php';
 /**
  * Specialized plugin class
  *
@@ -13,21 +14,6 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	private $record;
 	private $listener;
 	public $router;
-	
-	/**
-	 * $config[]['property' => 'default']
-	 * @var array
-	 **/
-	protected $config = array();
-	
-	/**
-	 * $metafields[]['name']
-	 * $metafields[]['description']
-	 * these will be accessed only during installation/un-installation
-	 * 
-	 * @var array
-	 **/
-	protected $metafields = null;
 	
 	/**
 	 * Path to the plugin directory
@@ -74,16 +60,25 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 **/
 	public function install($path) {
 		if(!$this->record->exists()) {
+			$install = new Zend_Config_Ini($this->dir.DIRECTORY_SEPARATOR.'install.ini');
+			$defaults = $install->config->defaults->asArray();
+			$config = array();
+			foreach( $defaults as $key => $default )
+			{
+				$config[$default['name']] = $default['value'];
+			}
+			
 			$this->record->name = get_class($this);
 			$this->record->path = $path;
-			$this->record->config = $this->config;
-			foreach( $this->metafields as $array )
+			$this->record->config = $config;
+			foreach( $install->metafields->asArray() as $array )
 			{
 				$metafield = new Metafield;
 				foreach( $array as $key => $value )
 				{
 					$metafield->$key = $value;
 				}
+				$metafield->save();
 				$this->record->Metafields->add($metafield);
 			}
 			$this->record->save();	
