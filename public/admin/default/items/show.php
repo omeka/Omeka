@@ -1,10 +1,12 @@
-<?php head(); ?>
+<?php head(array('title' => 'Item'))?>
 
 <?php error($item);?>
-<h1><?=$item->title?></h1>
+
+<h1><?php $item->title?></h1>
 <h4>Metatext</h4>
 <?php foreach($item->Metatext as $key => $metatext): ?>
-<h5><?= $metatext->Metafield->name; ?>: <?= $metatext; ?></h5>
+<h5><?php $metatext->Metafield->name; ?>: <?php $metatext->text; ?></h5>
+
 <?php endforeach; ?>
 <?php
 
@@ -17,7 +19,7 @@
 
 <h2>Tags</h2>
 <ul>
-	<?=$item->tagString("<a href=\"whatever.php\">$0</a>", '.');?>
+	<?php $item->tagString("<a href=\"whatever.php\">$0</a>", '.');?>
 <form id="tags" method="post" action="">
 	<input type="text" name="tags" value="Put tag string in me" />
 	<input type="submit" name="submit" value="submit">

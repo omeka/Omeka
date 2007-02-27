@@ -11,8 +11,7 @@ class PluginsController extends Kea_Controller_Action
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Plugin');
 	}
 	
-	public function installAction()  
-	{
+	public function browseAction() {
 		$names = Doctrine_Manager::connection()->getTable('Plugin')->getNewPluginNames();
 		
 		$this->_view->new_names = $names;
@@ -35,6 +34,13 @@ class PluginsController extends Kea_Controller_Action
 				}
 			}
 		}
+		
+		parent::browseAction();
+	}
+	
+	public function installAction()  
+	{
+		
 		
 		$this->render('plugins/install.php');
 	}

@@ -1,3 +1,3 @@
 <?php head();?>
-<h2>Users | Add a User</h2>
+<h2>Users</h2>
 <?php foot();?>
