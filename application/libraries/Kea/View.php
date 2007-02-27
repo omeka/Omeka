@@ -72,11 +72,13 @@ class Kea_View extends Zend_View_Abstract
 					if (!(boolean) $config->debug->json) {
 						$this->getResponse()->setHeader('Content-Type', 'text/x-json');
 					}
-					$this->setScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json');
+					$this->addScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json');
+					Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this, 'json');
 				break;
 				case('rest'):
 					$this->getResponse()->setHeader('Content-Type', 'text/xml');
-					$this->setScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'rest');
+					$this->addScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'rest');
+					Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this, 'rest');
 				break;
 			}
 		}

@@ -168,6 +168,20 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 **/
 	public function addNavigation($text, $link, $position = 'after') {}	
 	
+	public function addScriptPath($view, $type = null) {
+		switch ( $type )
+		{
+			case 'json':
+			case 'rest':
+				$view->addScriptPath($this->dir.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$type);
+			break;
+			default:
+				$view->addScriptPath($this->dir.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'theme');
+			break;
+		}
+		
+	}
+	
 	///// ZEND CONTROLLER HOOKS /////
 	
 	/**
