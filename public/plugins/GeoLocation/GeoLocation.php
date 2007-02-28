@@ -11,6 +11,7 @@ class GeoLocation extends Kea_Plugin
 	{
 		$key = $this->getConfig('Maps Key');
 		echo '<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key='.$key.'" type="text/javascript"></script>';
+		include 'mapjs.php';
 	}
 	/**
 	 * 
@@ -31,93 +32,18 @@ class GeoLocation extends Kea_Plugin
 	 * @param array extra options
 	 * @return string
 	 **/
-	public function map($latitude, $longitude, $zoomLevel, $width, $height, $divName = 'map', $points = array(), $options = array()) {
-	
+	public function map($latitude, $longitude, $zoomLevel, $width, $height, $divName = 'map', $uri, $options = array()) {
+		echo "<div id=\"$divName\"></div>";
 		//Load this junk in from the plugin config
 		if(!$latitude || !$longitude) {
-			$plugin = Zend::Registry('GeoLocation');
-			$latitude = $plugin->getConfig('Latitude');
-			$longitude = $plugin->getConfig('Longitude');
-			$zoomLevel = $plugin->getConfig('ZoomLevel');
+			$latitude = $this->getConfig('Latitude');
+			$longitude = $this->getConfig('Longitude');
+			$zoomLevel = $this->getConfig('Zoom Level');
 		}
-
-		//process the options
-		$clickable = (bool) !empty($options['clickable']);
-		$clickInJS = ($clickable) ? 'true' : 'false';
-	
-		$pointsJS = '';
-		//IF there are other points, we would put them in here
-		foreach( $points as $key => $point )
-		{
-			$pointsJS .= <<<POINTS
-				point{$key} = new GLatLng({$point['latitude']}, {$point['longitude']});
-				point{$key}marker = new GMarker(point{$key}, {clickable: $clickInJS});
-				{$divName}.addOverlay(point{$key}marker);
-POINTS;
-		}
-	
-		// If there are no points given, add an overlay to the center
-		$centerOverlayJS = '';
-		if(!count($points)) {
-			$centerOverlayJS .= <<<CENTER
-				{$divName}marker = new GMarker({$divName}center, {clickable: $clickInJS});
-				$divName.addOverlay({$divName}marker);
-CENTER;
-		}
-				
-		$javascript = <<<JAVA1
-	<script type="text/javascript" charset="utf-8">
-
-	  var $divName = null;
-	  function {$divName}load() {
-	     if(document.getElementById("$divName")) {
-			if (GBrowserIsCompatible()) {
-		 		document.getElementById("$divName").style.width = $width;
-				document.getElementById("$divName").style.height = $height;
-			
-		      	$divName = new GMap2(document.getElementById("$divName"));
-				{$divName}center = new GLatLng($latitude, $longitude);
-		       $divName.setCenter( {$divName}center, $zoomLevel);
-			   $divName.addControl(new GSmallMapControl());
-				$centerOverlayJS
-				$pointsJS
-			
-				{$divName}geocoder = new GClientGeocoder();
-
-				if(document.getElementById('{$divName}latitude'))	{
-	
-					GEvent.addListener($divName, "click", function(marker, point) {
-					  if (marker) {
-					    $divName.removeOverlay(marker);
-						document.getElementById('{$divName}latitude').value = null;
-						document.getElementById('{$divName}longitude').value = null;
-					  } else {
-						$divName.clearOverlays();
-					    $divName.addOverlay(new GMarker(point));
-						document.getElementById('{$divName}zoomLevel').value = $divName.getZoom();
-						document.getElementById('{$divName}latitude').value = point.lat();
-						document.getElementById('{$divName}longitude').value = point.lng();
-					  }
-					});
-				}
-		     }
-		  }
-	   }
-	
-		oldonload = window.onload;
-	    if (typeof window.onload != 'function') {
-	    	window.onload = {$divName}load;
-	  	} else {
-	    	window.onload = function() {
-	      		oldonload();
-	      		{$divName}load();
-	    	}
-	  	}
-	</script>
-	<div id="{$divName}"></div>		
-JAVA1;
-
-		echo  $javascript;
+		
+		require_once 'Zend/Json.php';
+		$options = Zend_Json::encode($options);
+		echo "<script>var $divName = new OmekaMap('$divName', '$uri', $latitude, $longitude, $zoomLevel, $width, $height, $options);</script>";
 	}
 	
 	public function addNavigation($text, $link) {

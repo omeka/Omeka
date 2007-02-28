@@ -64,7 +64,7 @@ class Item extends Kea_Record
 				if($return_text) return $record->text;
 				return $record;
 			}
-			if( $name != 'plugin') {
+/*			if( $name != 'plugin') {
 				if($this->Type->hasMetafield($record->Metafield->name)) {
 					$meta->add($record);
 				}
@@ -73,9 +73,11 @@ class Item extends Kea_Record
 					$meta->add($record);
 				}
 			}
-
+*/
 		}
-		return $meta;
+		if(count($meta))
+			return $meta;
+		else return null;
 	}
 	
 	/**

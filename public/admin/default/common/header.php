@@ -7,6 +7,8 @@
 <link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
 
+<?php js('prototype'); ?>
+
 <?php plugin_header(); ?>
 
 </head>

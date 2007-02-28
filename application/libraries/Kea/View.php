@@ -91,13 +91,16 @@ class Kea_View extends Zend_View_Abstract
 			// do we select the admin theme or the public theme?
 			if ((boolean) $this->getRequest()->getParam('admin')) {
 				$theme = $options->findByDql("name LIKE 'admin_theme'");
-				$this->setScriptPath(ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				$this->addScriptPath(ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				//Plugins add their own view paths
+				Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this);
 				Zend::Register('theme_path', ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
 				Zend::Register('theme_web', WEB_ADMIN.DIRECTORY_SEPARATOR.$theme[0]->value);
 			}
 			else {
 				$theme = $options->findByDql("name LIKE 'theme'");
-				$this->setScriptPath(THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				$this->addScriptPath(THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
+				Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this);
 				Zend::Register('theme_path', THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
 				Zend::Register('theme_web', WEB_THEME.DIRECTORY_SEPARATOR.$theme[0]->value);
 			}
