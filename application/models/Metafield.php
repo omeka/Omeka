@@ -16,7 +16,7 @@ class Metafield extends Kea_Record {
 		$this->hasMany("Type as Types", "TypesMetafields.type_id");
 		$this->hasOne("Plugin", "Metafield.plugin_id");
 		$this->ownsMany("MetafieldMetatext as Metatext", "MetafieldMetatext.metafield_id");
-		$this->setAttribute(Doctrine::ATTR_COLL_KEY, 'id');
+//		$this->setAttribute(Doctrine::ATTR_COLL_KEY, 'id');
 	}
 
 	public function setTableDefinition() {

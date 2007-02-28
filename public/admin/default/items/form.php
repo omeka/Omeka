@@ -61,12 +61,12 @@
 		<input type="submit" name="change_type" value="Pick this type" />
 		<h4>Type Metadata</h4>
 		<?php
-			foreach($item->Type->Metafields as $key => $metafield):
+			foreach($item->Type->Metafields as $metafield):
 		?>
 		<h5> Metafield name: <?= $metafield->name; ?></h5>
 		<h5> Metafield description: <?= $metafield->description; ?></h5>
-		<h5> Metatext: <input type="text" name="Metatext[<?=$key;?>][text]" value="<?=$item->Metatext[$key]->text;?>"/></h5>
-		<input type="hidden" name="Metatext[<?=$key;?>][metafield_id]" value="<?=$metafield->id;?>"/>
+		<h5> Metatext: <input type="text" name="Metatext[<?=$metafield->id;?>][text]" value="<?=$item->Metatext[$metafield->id]->text;?>"/></h5>
+		<input type="hidden" name="Metatext[<?=$metafield->id;?>][metafield_id]" value="<?=$metafield->id;?>"/>
 		<?php	
 			endforeach;
 		?>	
