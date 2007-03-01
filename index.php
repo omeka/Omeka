@@ -133,8 +133,13 @@ foreach( $plugins as $plugin )
 $front->throwExceptions((boolean) $config->debug->exceptions);
 $front->addControllerDirectory($site['application'].DIRECTORY_SEPARATOR.$site['controllers']);
 
+try{
+	$front->dispatch();
+}catch(Exception $e) {
+	include '404.php';
+}
+
 // Call the dispatcher which echos the response object automatically
-$front->dispatch();
 
 if ((boolean) $config->debug->timer) {
 	echo microtime(true) - APP_START;

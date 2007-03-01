@@ -32,6 +32,7 @@ adminId.defaults.action = index
 
 adminPage.route = "admin/:c/browse/:page"
 adminPage.defaults.controller = admin
+adminPage.defaults.a = browse
 adminPage.defaults.page = 1
 adminPage.reqs.page = "\d+"
 
