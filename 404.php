@@ -7,7 +7,7 @@ if($_REQUEST['moreinfo']) {
 
 <h1>404 - Development Only</h1>
 
-<h3><?php echo $e->getMessage(); ?></h3>
+<h3><?php echo get_class($e) . ": ". $e->getMessage(); ?></h3>
 
 <h4>Backtrace: <?php Zend::dump($e->getTraceAsString()); ?></h4>
 

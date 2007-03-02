@@ -200,19 +200,29 @@ function nav(array $links) {
 	
 	foreach( $links as $text => $link )
 	{		
-		$nav .= "<li".((trim($link, '/') == trim($current, '/')) ? ' class="current"':'')."><a href=\"$link\">$text</a></li>\n";
+		$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$link\">$text</a></li>\n";
 		
 		//add navigation from the plugins
 		$plugResponses = $plugins->addNavigation($text, $link);
 		if(!empty($plugResponses)) {
 			foreach( $plugResponses as $array ) { 
 				list($plugText, $plugLink) = $array;
-				$nav .= "<li".((trim($plugLink, '/') == trim($current, '/')) ? ' class="current"':'')."><a href=\"$plugLink\">$plugText</a></li>\n"; 
+				$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$plugLink\">$plugText</a></li>\n"; 
 			}
 		}
 		
 	}
 	echo $nav;
+}
+
+function is_current($link, $req = null) {
+	if(!$req) {
+		$req = Kea_Controller_Front::getInstance()->getRequest();
+	}
+	$current = $req->getRequestUri();
+	$base = $req->getBaseUrl();
+	if($link == $current && rtrim($current, '/') == $base) return true;
+	else return (strripos($current,$link) === 0 && rtrim($link, '/') !== $base);
 }
 
 ///// END NAVIGATION /////
