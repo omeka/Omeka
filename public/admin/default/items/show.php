@@ -2,10 +2,52 @@
 
 <?php error($item);?>
 
-<h1><?php $item->title?></h1>
+<ul id="secondary-nav" class="navigation">
+	<?php nav(array('Show Item' => uri('items/show/'.$item->id), 'Edit Item' => uri('items/edit/'.$item->id), 'Back to Items' => uri('items')));?>
+</ul>
+
+<h2><?php echo $item->title; ?></h2>
+
+<h3>Core Metadata</h3>
+<div id="core-metadata">
+	
+	<h4>Description</h4>
+	<?php echo $item->description; ?>
+	
+	<h4>Publisher</h4>
+<?php echo $item->publisher?>
+	
+	<h4>Relation</h4>
+<?php echo $item->relation;?>
+	
+	<h4>Language</h4>
+<?php echo $item->language;?>
+
+	<h4>Coverage</h4>
+<?php echo $item->coverage;?>
+	
+	<h4>Rights</h4>
+	<?php echo $item->rights;?>
+
+	
+	<h4>Source</h4>
+<?php echo $item->source;?>
+	
+	<h4>Subject</h4>
+<?php echo $item->subject;?>
+	
+	<h4>Creator</h4>
+<?php echo $item->creator;?>
+	
+	<h4>Additional Creator</h4>
+<?php echo $item->additional_creator;?>
+	
+	<h4>Date</h4>
+<?php echo $item->date;?>
+</div>
 <h4>Metatext</h4>
 <?php foreach($item->Metatext as $key => $metatext): ?>
-<h5><?php $metatext->Metafield->name; ?>: <?php $metatext->text; ?></h5>
+<h5><?php echo $metatext->Metafield->name; ?>: <?php echo $metatext->text; ?></h5>
 
 <?php endforeach; ?>
 <?php
@@ -19,8 +61,13 @@
 
 <h2>Tags</h2>
 <ul>
-	<?php $item->tagString("<a href=\"whatever.php\">$0</a>", '.');?>
+	<?php $tags = $item->Tags;?>
+	<?php foreach($tags as $tag):?>
+	<a href="#"><?php echo $tag; ?></a>
+	<?php endforeach; ?>
+</ul>
 <form id="tags" method="post" action="">
 	<input type="text" name="tags" value="Put tag string in me" />
 	<input type="submit" name="submit" value="submit">
 </form>
+<?php foot();?>

@@ -58,7 +58,7 @@ function src($file, $dir, $ext = null, $return = false) {
  * $file should not include the .js extension
  */
 function js($file, $dir = 'javascripts') {
-	echo '<script language="javascript" src="'.src($file, $dir, 'js', true).'"></script>'."\n";
+	echo '<script type="text/javascript" src="'.src($file, $dir, 'js', true).'"></script>'."\n";
 }
 
 /**

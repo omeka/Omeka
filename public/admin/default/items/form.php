@@ -1,43 +1,46 @@
 <?php error($item); ?>
-		<h4>Title</h4>
-		<input type="text" name="title" value="<?=$item->title;?>" size="50" />
+<fieldset id="core-metadata">
+	<legend>Core Metadata</legend>
+		<label>Title</label>
+		<input type="text" class="textinput" name="title" value="<?php echo $item->title;?>" />
 		<?php error($item, 'title'); ?>
 		
-		<h4>Publisher</h4>
-		<input type="text" name="publisher" value="<?=$item->publisher?>" size="50" />
+		<label>Publisher</label>
+		<input type="text" class="textinput" name="publisher" value="<?php echo $item->publisher?>" />
 		
-		<h4>Relation</h4>
-		<input type="text" name="relation" value="<?=$item->relation;?>" size="50" />
+		<label>Relation</label>
+		<input type="text" class="textinput" name="relation" value="<?php echo $item->relation;?>" />
 		
-		<h4>Language</h4>
-		<input type="text" name="language" value="<?=$item->language;?>" size="50" />
+		<label>Language</label>
+		<input type="text" class="textinput" name="language" value="<?php echo $item->language;?>" />
 
-		<h4>Coverage</h4>
-		<input type="text" name="coverage" value="<?=$item->coverage;?>" size="50" />
+		<label>Coverage</label>
+		<input type="text" class="textinput" name="coverage" value="<?php echo $item->coverage;?>" />
 		
-		<h4>Rights</h4>
-		<input type="text" name="rights" value="<?=$item->rights;?>" size="50" />
+		<label>Rights</label>
+		<input type="text" class="textinput" name="rights" value="<?php echo $item->rights;?>" />
 		
-		<h4>Description</h4>
-		<input type="text" name="description" value="<?=$item->description;?>" size="50" />
+		<label>Description</label>
+		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo $item->description; ?></textarea>
 		
-		<h4>Source</h4>
-		<input type="text" name="source" value="<?=$item->source;?>" size="50" />
+		<label>Source</label>
+		<input type="text" class="textinput" name="source" value="<?php echo $item->source;?>" />
 		
-		<h4>Subject</h4>
-		<input type="text" name="subject" value="<?=$item->subject;?>" size="50" />
+		<label>Subject</label>
+		<input type="text" class="textinput" name="subject" value="<?php echo $item->subject;?>" />
 		
-		<h4>Creator</h4>
-		<input type="text" name="creator" value="<?=$item->creator;?>" size="50" />
+		<label>Creator</label>
+		<input type="text" class="textinput" name="creator" value="<?php echo $item->creator;?>" />
 		
-		<h4>Additional Creator</h4>
-		<input type="text" name="additional_creator" value="<?=$item->additional_creator;?>" size="50" />
+		<label>Additional Creator</label>
+		<input type="text" class="textinput" name="additional_creator" value="<?php echo $item->additional_creator;?>" />
 		
-		<h4>Date</h4>
-		<input type="text" name="date" value="<?=$item->date;?>" size="50" />
-		
-		<h4>Collection</h4>
-		<?php foreach( $collections as $key => $collection ): ?>
+		<label>Date</label>
+		<input type="text" class="textinput" name="date" value="<?php echo $item->date;?>" />
+	</fieldset>
+	<fieldset id="type-metadata">
+		<legend>Type Metadata</legend>
+		<label>Collection</label>
 			<?php select(	array(	
 						'name'	=> 'collection_id',
 						'id'	=> 'collection_id' ),
@@ -45,7 +48,6 @@
 						$item->collection_id,
 						'id',
 						'name' ); ?>
-		<?php endforeach; ?>
 		
 		<h3>Type Info</h3>
 		<?php foreach( $types as $key => $type ): ?>
@@ -59,29 +61,33 @@
 		<?php endforeach; ?>
 			
 		<input type="submit" name="change_type" value="Pick this type" />
-		<h4>Type Metadata</h4>
 		<?php
 			foreach($item->Type->Metafields as $metafield):
 		?>
-		<h5> Metafield name: <?= $metafield->name; ?></h5>
-		<h5> Metafield description: <?= $metafield->description; ?></h5>
-		<h5> Metatext: <input type="text" name="Metatext[<?=$metafield->id;?>][text]" value="<?=$item->Metatext[$metafield->id]->text;?>"/></h5>
-		<input type="hidden" name="Metatext[<?=$metafield->id;?>][metafield_id]" value="<?=$metafield->id;?>"/>
+
+		<label for="Name[<?php echo $key;?>][text]"> Metafield name:</label> 
+		<input type="text" class="textinput" value="Name[<?php echo $key;?>][text]" />
+		<label for="Description[<?php echo $key;?>][text]"> Metafield description:</label> 
+		<textarea name="Description[<?php echo $key;?>][text]"><?php echo $metafield->description; ?></textarea>
+		<label for="Metatext[<?php echo $key;?>][text]"> Metatext: <textarea class="textinput" name="Metatext[<?php echo $key;?>][text]"><?php echo $item->Metatext[$key]->text; ?>"/></textarea>
+		<input type="hidden" name="Metatext[<?php echo $key; ?>][metafield_id]" value="<?php echo $metafield->id; ?>"/>
+
 		<?php	
 			endforeach;
 		?>	
 		
 		<!-- MAX_FILE_SIZE must precede the file input field -->
 		<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-		<input name="file[0]" type="file" />
+		<input name="file[0]" type="file" class="textinput" />
 
-<?php if(1==0):?>		
-		<h3>Plugin Info</h3>
-		<?php foreach($plugins as $plugin): ?>
-			<h4><?=$plugin->name?> Plugin</h4>
-			<?php foreach($plugin->Metafields as $metafield):?>
-					<h5><?=$metafield->name?></h5>
-					<h5><?=$metafield->description?></h5>
-			<?php endforeach;?>
-		<?php endforeach;?>
-<?php endif; ?>
+		<?php if(1==0):?>		
+				<h3>Plugin Info</h3>
+				<?php foreach($plugins as $plugin): ?>
+					<label><?php echo $plugin->name?> Plugin</label>
+					<?php foreach($plugin->Metafields as $metafield):?>
+							<h5><?php echo $metafield->name; ?></h5>
+							<h5><?php echo $metafield->description ?></h5>
+					<?php endforeach;?>
+				<?php endforeach;?>
+		<?php endif; ?>
+		</fieldset>

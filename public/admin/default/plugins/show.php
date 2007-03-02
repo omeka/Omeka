@@ -1,3 +1,4 @@
+<?php head(); ?>
 <a href="<?php echo uri('plugins/edit/'.$plugin->id); ?>">Edit</a>
 
 <h2><?php echo $plugin->name;?></h2>
@@ -14,3 +15,5 @@
 <?php else: ?>
 	<h3>Plugin is inactive</h3>
 <?php endif; ?>
+
+<?php foot(); ?>

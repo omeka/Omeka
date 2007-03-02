@@ -10,14 +10,14 @@ yellow = #fff09e
 */
 
 /* == Generic =========================== */
-body {font:62.5% Verdana,Helvetica, Arial, sans-serif; color:#555; background: #333;width:820px; margin:0 auto; padding: 20px 0;}
+body {font:62.5% "Lucida Grande",Verdana,Helvetica, Arial, sans-serif; color:#555; background: #333 url("../images/diagonal-stripe.gif");width:720px; margin:0 auto; padding: 20px 0;}
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 {font-weight:normal; font-family:"Century Gothic",Futura, Verdana, sans-serif;}
 h1 {text-transform:uppercase;}
 h2 {}
-h3 {}
-h4 {}
+h3 {font-family:"Lucida Grande",Verdana, Helvetica, Arial, sans-serif; font-weight:bold;}
+h4 {font-size:1em; font-family:"Lucida Grande",Verdana, Helvetica, Arial, sans-serif; border-left:1em solid #ddd; line-height:1em; padding-left:.25em;}
 h5 {}
 h6 {}
 
@@ -29,35 +29,49 @@ a:active {color:#38c;}
 a img {border:none;}
 h1 a, h2 a, h3 a {text-decoration:none;}
 
+/* Misc Elements */
+p {line-height:1.75em;}
 ul {list-style:none; margin-left:0; padding-left:0;}
+
 /* Various Classes */
 .navigation {list-style:none; margin-left:0; padding-left:0;}
 	.navigation a {text-decoration:none;}
 
+/* Forms */
+label, input {display:block;}
+.textinput {margin-bottom:10px; border:1px solid #A2C9E8; background:#ECF4FA; padding:4px;}
+.textinput:focus {background:#fff;}
+fieldset {border:none; padding:0;}
+
+#search{display:block; float:right; width:200px; background:#ecf4fa; border:1px solid #a2c9e8; padding:10px; margin-top:20px;}
+
 /* == Wrap =========================== */
-#wrap {font-size:1.25em;background:#fff;}
+#wrap {font-size:1.25em;}
 
 /* == Header =========================== */
-#header { background: #333; color:#fff; padding:0;}
+#header { background: transparent; color:#fff; padding:0;}
 	#header h1 {margin:0; padding-top:10px;margin-bottom:20px;}
 	#header h1 a {text-decoration:none; color:#fff;}
-	#primary-nav { background:#38c; overflow:hidden;padding:8px 0;margin-bottom:0;border-bottom:10px solid #66A6D9;}
+	#primary-nav { background:#38c; overflow:hidden;padding:12px 0 8px 0;margin-bottom:0;border-bottom:10px solid #66A6D9;}
 		#primary-nav li {display:block; float:left;margin-right:1px;}
 			#primary-nav a {padding:8px 12px; color:#fff;}
 			#primary-nav a:link, #primary-nav a:visited {background: #38c;}
-			#primary-nav a:hover, #primary-nav a:active {background: #66A6D9;}
+			#primary-nav a:hover, #primary-nav a:active {background: #4D97D2;}
 			
-#secondary-nav {background:#DBF0C2; margin:0; padding:10px 10px 0;}
+			#primary-nav li.current a {background:#66a6d9;}
+			
+#secondary-nav {background:#66a6d9; margin:0; padding:10px 10px 0;margin:0 -20px;}
 	#secondary-nav li {display:inline;}
 	
 /* == Content =========================== */
-#content {padding:0 20px;overflow:hidden; zoom:1;}
+#content {padding:0 20px;background:#fff;padding-bottom:10px;overflow:hidden; zoom:1;}
 	#primary {display:block; float:left;}
 	#secondary {display:block; float:right;}
 	
-	#primary {width:380px;}
-	#secondary {width:380px;}
+	#primary {width:330px;}
+	#secondary {width:330px;}
 	
+	/* Homepage */
 	#user-info {border:1px solid #fff09e; background:#FFF8CF;display:block; padding: 0 10px; margin-top:20px;}
 	
 	#omeka-news {}
@@ -66,7 +80,36 @@ ul {list-style:none; margin-left:0; padding-left:0;}
 	#recent-items a {text-decoration:none;}
 		#recent-items span.title {display:block; float:left;width:48%;}
 		#recent-items span.date {display:block; float:right; width:48%;text-align:right;}
-		
 	
+	/* Themes page */
+	
+	.theme {overflow:hidden; border-bottom:1px dotted #ccc;}
+		.theme .metainfo {overflow:hidden; display:block; border-top:2px solid #999; border-bottom:1px solid #999; padding: 10px 0;}
+			.theme .metainfo h3 {display:block; float:left; width:48%; margin:0; padding:0;}
+			.theme .metainfo ul {display:block; float:right; width:48%;text-align:right;margin:0; padding:0;}
+		
+		.theme img {display:block; float:right;margin-top:10px;}
+		.theme .description {display:block; float:left; width: 380px; line-height:1.75em;margin-top:10px;}
+		.theme .type {display:none;}
+		
 /* == Footer ============================ */
-#footer {background: #333; border-top:10px solid #555;margin-top:10px; text-align:right; padding:10px 0;}
+#footer {background: transparent; border-top:10px solid #292929; overflow:hidden; text-align:right; padding:10px 0;}
+
+	#omeka-logo {
+		
+		width:100px; 
+		height:0;
+		background-image:url("http://omeka.org/logos/omeka-logo-small-dark.gif");
+		background-repeat:no-repeat;
+		background-position:top-left;
+		display:block;
+		overflow:hidden;
+		float:right;
+		padding: 32px 0 0 0;
+		height:0 !important;
+		height /**/: 32px;
+	}
+	
+	#omeka-logo:hover, #omeka-logo:active {
+		background-image:url("http://omeka.org/logos/omeka-logo-small.gif");
+	}

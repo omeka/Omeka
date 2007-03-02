@@ -1,4 +1,4 @@
-
+<?php head(); ?>
 
 <h2><?php echo $plugin->name;?></h2>
 
@@ -16,3 +16,5 @@
 <input type="submit" name="submit" value="submit" />
 
 </form>
+
+<?php foot(); ?>

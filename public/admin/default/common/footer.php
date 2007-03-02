@@ -1,5 +1,7 @@
+</div>
 <div id="footer">
-	<a href="http://omeka.org" id="omeka-link"><img src="http://omeka.org/logos/omeka-logo-small.gif" alt="Omeka" /></a></p>
+	<a href="http://omeka.org" id="omeka-logo">Powered by Omeka</a>
+</div>
 </div>
 </body>
 </html>

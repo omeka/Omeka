@@ -1,5 +1,5 @@
 <?php
-
+    head(); 
 	echo "There are $total records stored in the search index.  ";
 
 ?>
@@ -24,3 +24,4 @@
 	<?php 	endif;?>
 			
 <?php endforeach; ?>
+<?php foot(); ?>

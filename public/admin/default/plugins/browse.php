@@ -1,5 +1,4 @@
 <?php head(); ?>
-<div id="content">
 	<div id="installed">
 <h2>List of plugins:</h2>
 
@@ -31,7 +30,6 @@
 <?php else: ?>
 	No plugins to install.  Place new plugins in the 'public/plugins' directory in order for the application to recognize them.
 <?php endif;?>
-</div>
 </div>
 
 <?php foot(); ?>

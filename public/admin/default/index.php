@@ -1,7 +1,4 @@
-<?php head(array('title' => (' Home'))); ?>
-
-<div id="content">
-	
+<?php head(array('title' => (' Home'))); ?>	
 	<div id="primary">
 		<div id="user-info">
 			<h2>Welcome, Jeremy!</h2>
@@ -63,7 +60,4 @@
 			
 		</div>
 	</div>
-	
-</div>
-
 <?php foot(); ?>

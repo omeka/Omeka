@@ -1,8 +1,6 @@
-<html>
-
-<body>
+<?php head(); ?>
 <?php if(!empty($new_names)):?>
-<h3>The following plugins have not yet been installed</h3>
+<h2>The following plugins have not yet been installed</h2>
 
 <form method="post">
 
@@ -22,6 +20,4 @@
 <?php else: ?>
 	No plugins to install.  Place new plugins in the 'public/plugins' directory in order for the application to recognize them.
 <?php endif;?>
-
-</body>
-</html>
+<?php foot(); ?>
