@@ -1,10 +1,16 @@
 <?php
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'User.php';
 /**
  * @package Omeka
  **/
 require_once 'Kea/Controller/Action.php';
 class UsersController extends Kea_Controller_Action
 {
+	public function init() {
+		$this->_table = Doctrine_Manager::getInstance()->getTable('User');
+		$this->_modelClass = 'User';
+	}
+	
     public function indexAction()
     {
 		echo 'This is the '.get_class($this);

@@ -11,13 +11,9 @@
 </form>
 
 <?php foreach( $results as $key => $result ): ?>
-	<?php
 
-		echo get_class($result);
-		$result->dump();
-
-	?>
 	<?php  	if($result instanceof Item): ?>
+				<?php echo $result->title; ?>
 				<!-- Display the Item in a special way -->
 	<?php 	elseif($result instanceof Type): ?>
 				<?php echo $type->name; ?>
