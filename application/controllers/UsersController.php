@@ -10,11 +10,6 @@ class UsersController extends Kea_Controller_Action
 		$this->_table = Doctrine_Manager::getInstance()->getTable('User');
 		$this->_modelClass = 'User';
 	}
-	
-    public function indexAction()
-    {
-		echo 'This is the '.get_class($this);
-    }
 
 	public function rolesAction()
 	{
