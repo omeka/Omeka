@@ -16,11 +16,6 @@ class ItemsController extends Kea_Controller_Action
 		$this->_modelClass = 'Item';
 		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
-
-	public function indexAction()
-	{
-		$this->render('index.php', array());
-	}
 	
 	public function browseAction()
 	{

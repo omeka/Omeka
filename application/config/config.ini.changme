@@ -14,8 +14,8 @@ uri.action = a
 uri.admin = admin
 uri.output = output
 
-default.controller = items
-default.action = index
+default.controller = index
+default.action = home
 
 ; Display a runtime timer for page generation
 debug.timer = true

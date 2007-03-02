@@ -46,5 +46,10 @@ class IndexController extends Kea_Controller_Action
     {
         $this->_redirect('/');
     }
+
+	public function homeAction() 
+	{
+		$this->render('index.php');
+	}
 }
 ?>
