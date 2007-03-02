@@ -59,7 +59,8 @@
 						'id',
 						'name' ); ?>
 		<?php endforeach; ?>
-			
+		
+		
 		<input type="submit" name="change_type" value="Pick this type" />
 		<?php
 			foreach($item->Type->Metafields as $metafield):
@@ -79,7 +80,12 @@
 		<!-- MAX_FILE_SIZE must precede the file input field -->
 		<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 		<input name="file[0]" type="file" class="textinput" />
+		
+	<label for="public">Item is public: <?php
 
+			checkbox(array('name'=>'public', 'id'=>'public'), $item->public);
+
+		?></label>
 		<?php if(1==0):?>		
 				<h3>Plugin Info</h3>
 				<?php foreach($plugins as $plugin): ?>

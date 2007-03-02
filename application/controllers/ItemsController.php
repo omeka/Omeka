@@ -22,6 +22,28 @@ class ItemsController extends Kea_Controller_Action
 		$this->render('index.php', array());
 	}
 	
+	public function browseAction()
+	{
+		$query = Doctrine_Manager::getInstance()->getTable('Item')->createQuery();
+		//replace with permissions check
+		if(!$this->getRequest()->getParam('admin')) {
+			$query->where('Item.public = 1');
+			
+			//narrow the search by active/inactive
+			if($terms = $_REQUEST['search']) {
+				$userQuery = Zend_Search_Lucene_Search_QueryParser::parse($terms);
+				$filterQuery = new Zend_Search_Lucene_Search_Query_Term(new Zend_Search_Lucene_Index_Term('TRUE', 'public'));
+				$main = new Zend_Search_Lucene_Search_Query_Boolean();
+				$main->addSubQuery($filterQuery, true);
+				$main->addSubQuery($userQuery, true);
+				echo $main;
+				$this->_browse->setSearchQuery($userQuery);
+			
+			}
+		} 
+		$this->_browse->setDbQuery($query)->browse();
+	}
+	
 	/**
 	 * Processes and saves the form to the given record
 	 *
@@ -53,6 +75,8 @@ class ItemsController extends Kea_Controller_Action
 				
 				}
 			}
+			
+			if($_POST['public']) $item->public = 1;
 			
 			try {
 				$item->save();

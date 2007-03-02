@@ -80,7 +80,14 @@ class Kea_SearchListener extends Doctrine_EventListener
 					if(in_array($field, $this->_keywordFields)) {
 						$doc->addField(Zend_Search_Lucene_Field::Keyword($field, $record->$field));
 					}elseif(!in_array($field, $this->_doNotIndex)){
-						$doc->addField(Zend_Search_Lucene_Field::Text($field, $record->$field));
+						
+						//If its a boolean value, store it as true/false
+						if($value[0] == 'boolean') {
+							$store = ($record->$field) ? 'TRUE' : 'FALSE';
+						}else {
+							$store = $record->$field;
+						}
+						$doc->addField(Zend_Search_Lucene_Field::Text($field, $store));
 					}				
 				}
 			}

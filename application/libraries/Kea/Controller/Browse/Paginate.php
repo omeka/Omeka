@@ -6,66 +6,19 @@ require_once 'Kea/Controller/Browse/Interface.php';
  *
  * @package Omeka
  **/
-class Kea_Controller_Browse_Paginate implements Kea_Controller_Browse_Interface
-{
-	protected $_class;
-	protected $_controller;
-	
-	protected $_pluralized;
-	protected $_perPage;
-	protected $_numLinks;
-	
-	/**
-	 * Kea_Controller_Search class
-	 * Maybe this pagination class doesn't need to store a search class and can just instantiate it when necessary
-	 * 
-	 * @var Kea_Controller_Search
-	 **/
-	protected $_search;
-	
-	/**
-	 * Constructor
-	 *
-	 * @todo Implement option to paginate in alphabetical order
-	 * @return void
-	 **/
-	public function __construct($class, Kea_Controller_Action $controller, array $options = array() )
-	{
-		$this->_class = $class;
-		$this->_controller = $controller;
-		
-		$this->_search = new Kea_Controller_Search($class);
-		
-		foreach( $options as $key => $value )
-		{
-			switch ( $key )
-			{
-				case 'per_page':
-					$this->_perPage = $value;
-				break;
-				case 'pluralized':
-					$this->_pluralized = $value;
-				break;
-				case 'num_links':
-					$this->_numLinks = $value;
-				break;
-				case 'alphabetical':
-				default:
-				break;
-			}
-		}
-		
-	}
+class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
+{	
+	protected $_options = array('num_links' => 5, 'per_page' => 10);
 		
 	public function browse()
 	{
-		$pluralVar = (empty($this->_pluralized)) ? strtolower($this->_class).'s' : $this->_pluralized; 
+		$pluralVar = $this->getOption('pluralized');
+		if(empty($pluralVar)) $pluralVar = $this->formatPluralized();
 		
 		//per_page is either a $_POST var, db option, passed via constructor or default to 10 (in that order)
 		if(!empty($_REQUEST['per_page'])) $per_page = $_REQUEST['per_page'];
 		elseif(1==0) {/*DB lookup here*/}
-		elseif(!empty($this->_perPage)) $per_page = $this->_perPage;
-		else $per_page = 10;
+		else $per_page = $this->getOption('per_page');
 		
 		$req = $this->_controller->getRequest();
 		
@@ -76,31 +29,39 @@ class Kea_Controller_Browse_Paginate implements Kea_Controller_Browse_Interface
 		$offset = ($page - 1) * $per_page;
 		
 		
-		//Has the user done a search?
 		
-		if($searchTerms = $_REQUEST['search']) {
-			$this->_search->page = $page;
-			$this->_search->offset = $offset;
-			$this->_search->per_page = $per_page;
-			$this->_search->terms = $searchTerms;
-			$$pluralVar = $this->_search->run();
+		//We'll let the controller writer (or plugin writer) override the results if they want
+		if(empty($this->_results)) {		
 			
-			$total = $$pluralVar->count();
+			//Has the user done a search?
+			if($searchTerms = $_REQUEST['search']) {				
+				$this->_search->page = $page;
+				$this->_search->offset = $offset;
+				$this->_search->per_page = $per_page;
+				$query = $this->getSearchQuery();
+				if(!$query) $query = $searchTerms;
+				$this->_search->terms = $query;
+				$$pluralVar = $this->_search->run();
+		
+				$total = $$pluralVar->count();
+			} else {
+				$table = Doctrine_Manager::getInstance()->getTable($this->_class);
+				
+				$query = $this->getDbQuery();
+				if(!$query) $query = $table->createQuery();
+		
+				$query->limit($per_page)->offset($offset);
+				$$pluralVar = $query->execute();
+				$total = $table->count();			
+			}
 		} else {
-			$table = Doctrine_Manager::getInstance()->getTable($this->_class);
-		
-			$$pluralVar = $table->createQuery()
-					   		->limit($per_page)
-					   		->offset($offset)
-					   		->execute();
-		
-			$total = $table->count();			
-		}
-		
+			$$pluralVar = $this->_results;
+			$total = $this->_results->count();
+		}		
 		//Figure out the pagination 
 		
 		//num_links defaults to 5, we can make this dynamic as well
-		$num_links = !empty($this->_numLinks) ? $this->_numLinks : 5;
+		$num_links = $this->getOption('num_links');
 		
 		//Url is most likely going to be the current one, we can make this dynamic too if needed
 		$url = $req->getBaseUrl().DIRECTORY_SEPARATOR.$pluralVar.DIRECTORY_SEPARATOR.'browse'.DIRECTORY_SEPARATOR;

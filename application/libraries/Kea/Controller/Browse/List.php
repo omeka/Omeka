@@ -6,36 +6,23 @@ require_once 'Kea/Controller/Browse/Interface.php';
  *
  * @package Omeka
  **/
-class Kea_Controller_Browse_List implements Kea_Controller_Browse_Interface
+class Kea_Controller_Browse_List extends Kea_Controller_Browse_Abstract
 {
-	protected $_class;
-	protected $_controller;
-	
-	/**
-	 * Kea_Controller_Search
-	 *
-	 * @var Kea_Controller_Search
-	 **/
-	protected $_search;
-	
-	public function __construct($class, Kea_Controller_Action $controller, array $options = array() )
-	{
-		$this->_class = $class;
-		$this->_controller = $controller;
-		$this->_search = new Kea_Controller_Search($class);
-	}
-	
 	public function browse()
 	{	
-		$pluralName = strtolower($this->_class).'s';
+		$pluralName = $this->formatPluralized();
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
 		
+		$query = $this->getQuery();
 		if($terms = $_REQUEST['search']) {
-			$this->_search->terms = $terms;
+			$this->_search->terms = (!empty($query) ? $query : $terms);
 			$$pluralName = $this->_search->run();
-			var_dump( $$pluralName->count() );
 		}else {
-			$$pluralName = Doctrine_Manager::getInstance()->getTable($this->_class)->findAll();
+			if(!empty($query)) {
+				$$pluralName = $query->execute();
+			} else {
+				$$pluralName = Doctrine_Manager::getInstance()->getTable($this->_class)->findAll();
+			}
 		}
 		
 		$this->_controller->render($viewPage, compact($pluralName));
