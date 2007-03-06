@@ -60,3 +60,8 @@ output.route = ":output/:controller/:action"
 output.defaults.controller = index
 output.defaults.action = index
 output.reqs.output = "(json|rest)"
+
+adminOutput.route = "admin/:output/:controller/:action"
+adminOutput.defaults.controller = index
+adminOutput.defaults.action = index
+adminOutput.reqs.output = "(json|rest)"

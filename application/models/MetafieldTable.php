@@ -29,6 +29,24 @@ class MetafieldTable extends Doctrine_Table
 	public function findByName($name) {
 		return $this->findBySql("name = ?", array($name));
 	}
+	
+	public function findTypeMetafields() {
+		$query = new Doctrine_Query();
+		$query->from('Metafield m')->innerJoin('m.TypesMetafields tm');
+		return $query->execute();
+	}
+	
+	public function findMetafieldsWithoutType($type) {
+		$query = new Doctrine_Query();
+		$query->from('Metafield m')->where('m.plugin_id IS NULL');
+		
+		foreach( $type->Metafields as $key => $metafield )
+		{
+			$query->addWhere('m.id != '.$metafield->id);
+		}
+		
+		return $query->execute();
+	}
 } // END class MetafieldTable extends Doctrine_Table
 
 ?>
