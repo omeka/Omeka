@@ -254,4 +254,28 @@ function plugin_header() {
 
 ///// END PLUGIN HELPER FUNCTIONS /////
 
+function recent_items($num = 10) {
+	$query = new Doctrine_Query();
+	$query->from('Item i')->limit($num)->orderBy('i.added desc');
+	return $query->execute();
+}
+
+/**
+ * Do we need this for every model or better to have something like total('items')
+ *
+ * @return void
+ **/
+function total_items() {
+	return Doctrine_Manager::getInstance()->getTable('Item')->count();
+}
+
+/**
+ * Retrieve the most recent tags.
+ *
+ * @return Doctrine_Collection
+ **/
+function recent_tags($num = 30) {
+	return Doctrine_Manager::getInstance()->getTable('Tag')->getSome($num, false, true);
+}
+
 ?>

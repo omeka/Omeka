@@ -94,6 +94,12 @@ abstract class Kea_Record extends Doctrine_Record
 		}
 	}
 	
+	/**
+	 * Set all the record's values and relations given a multidimensional array
+	 *
+	 * @todo relational id fields should not have 0 as a value
+	 * @return void
+	 **/
 	public function setArray( $array, $callback = null ) {
 		foreach( $array as $key => $value )
 		{

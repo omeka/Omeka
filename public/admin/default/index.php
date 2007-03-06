@@ -13,7 +13,7 @@
 		
 		<div id="site-info">
 			<h2>Site Info</h2>
-			<p><em>Web Design History</em> contains 54 items, in 10 collections, tagged with 124 keywords. There are 7 users.</p>
+			<p><em>Web Design History</em> contains <?php echo total_items(); ?> items, in 10 collections, tagged with 124 keywords. There are 7 users.</p>
 		</div>
 		
 		<div id="omeka-news">
@@ -31,33 +31,21 @@
 		
 		<div id="recent-items">
 			<h2>Recently Added</h2>
+			<?php $recent = recent_items(10);	?>
 			<ul>
-				<li><span class="title"><a href="#">Lorem Ipsum</a></span> <span class="date">January 20, 2007</span></li>
-				<li><span class="title"><a href="#">Dolor Sit Amet</a></span> <span class="date">January 21, 2007</span></li>
-				<li><span class="title"><a href="#">Consectetuer Adipiscing</a></span> <span class="date">January 20, 2007</span></li>
-				<li><span class="title"><a href="#">Sed Vel Purus</a></span> <span class="date">January 21, 2007</span></li>
-				<li><span class="title"><a href="#">Cras Ultrices</a></span> <span class="date">January 24, 2007</span></li>
-				<li><span class="title"><a href="#">Nulla Porttitor</a></span> <span class="date">January 24, 2007</span></li>
-				<li><span class="title"><a href="#">Proin et Risus</a></span> <span class="date">January 27, 2007</span></li>
-				<li><span class="title"><a href="#">Donec Quis Quam Ac</a></span> <span class="date">January 27, 2007</span></li>
-				<li><span class="title"><a href="#">Lorem Ipsum</a></span> <span class="date">January 28, 2007</span></li>
-				<li><span class="title"><a href="#">Cras Proin Donec</a></span> <span class="date">January 28, 2007</span></li>
+				<?php foreach( $recent as $key => $item ): ?>
+					<li><span class="title"><a href="#"><?php  echo $item->title; ?></a></span> <span class="date"><?php echo $item->added; ?></span></li>
+				<?php endforeach; ?>
 				
 		</div>
 		
 		<div id="tagcloud">
 			<h2>Tag Cloud</h2>
-			<span style="font-size:4em"><a href="whatever?tags=tag1">tag1</a></span>
-			<span style="font-size:2em"><a href="whatever?tags=superdooper">superdooper</a></span>
+			<?php
 
-			<span style="font-size:2em"><a href="whatever?tags=foo">foo</a></span>
-			<span style="font-size:2em"><a href="whatever?tags=bar">bar</a></span>
-			<span style="font-size:2em"><a href="whatever?tags=what">what</a></span>
-			<span style="font-size:2em"><a href="whatever?tags=baz">baz</a></span>
-			<span style="font-size:2em"><a href="whatever?tags=tag!">tag!</a></span>
-			<span style="font-size:2em"><a href="whatever?tags=face">face</a></span>
-			<span style="font-size:2em"><a href="whatever?tags=test">test</a></span>
-			
+				tag_cloud(recent_tags(), 3, uri('items'), 4, 1);
+
+			?>
 		</div>
 	</div>
 <?php foot(); ?>

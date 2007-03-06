@@ -31,11 +31,16 @@ class ItemsController extends Kea_Controller_Action
 				$main = new Zend_Search_Lucene_Search_Query_Boolean();
 				$main->addSubQuery($filterQuery, true);
 				$main->addSubQuery($userQuery, true);
-				echo $main;
-				$this->_browse->setSearchQuery($userQuery);
+				$this->_browse->setSearchQuery($main);
 			
 			}
 		} 
+		
+		//filter based on tags
+		if($tag = $this->getRequest()->getParam('tags')) {
+			$query->innerJoin('Item.Tags t')->where("t.name = ?", array($tag));
+		}
+		
 		$this->_browse->setDbQuery($query)->browse();
 	}
 	

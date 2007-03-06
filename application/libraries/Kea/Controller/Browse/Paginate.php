@@ -49,10 +49,11 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 				
 				$query = $this->getDbQuery();
 				if(!$query) $query = $table->createQuery();
-		
+				
+				$total = count($query->execute());	
 				$query->limit($per_page)->offset($offset);
 				$$pluralVar = $query->execute();
-				$total = $table->count();			
+						
 			}
 		} else {
 			$$pluralVar = $this->_results;

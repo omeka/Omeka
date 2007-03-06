@@ -25,11 +25,12 @@ class TagTable extends Doctrine_Table
 	 * @param int limit
 	 * @param bool alphabetical order
 	 * @param bool ordered by count
+	 * @param bool ordered by most recent
 	 * @param Item only tags from this Item
 	 * @param User only tags from this User
 	 * @return Doctrine_Collection tags
 	 **/
-	public function getSome($limit = 100, $alpha = true, $count = false, $item = null, $user = null )
+	public function getSome($limit = 100, $alpha = true, $recent = false, $count = false, $item = null, $user = null )
 	{
 		$query = $this->createQuery()->select('t.*, COUNT(t.id) tagCount')->from('Tag t')->limit($limit);
 		$query->innerJoin('t.ItemsTags it');
@@ -47,6 +48,10 @@ class TagTable extends Doctrine_Table
 		if($count) {
 			$query->addOrderBy('tagCount desc');
 		}
+		if($recent) {
+			$query->addOrderBy('t.id desc');
+		}
+		
 		$query->groupby('t.id');
 		return $query->execute();
 	}
@@ -58,7 +63,7 @@ class TagTable extends Doctrine_Table
 	 **/
 	public function findAll($alpha = false, $count = false, $item = null, $user = null)
 	{
-		return $this->getSome($this->count(), $alpha, $count, $item, $user);
+		return $this->getSome($this->count(), $alpha, false, $count, $item, $user);
 	}
 	
 	/**
