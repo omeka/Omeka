@@ -12,7 +12,6 @@ require_once 'ItemsFavorites.php';
  * @package Omeka
  * 
  * @todo Create/modify the ItemTable::findAll() method (or all find methods) to check for ACL privileges and only return the Items that are public
- * @todo ItemsFavorites integration
  **/
 class Item extends Kea_Record
 {	

@@ -37,16 +37,23 @@ function web_path($return = false) {
 }
 
 function src($file, $dir, $ext = null, $return = false) {
-	$physical = Zend::registry('theme_path').DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file;
+	$physical = theme_path(true).DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file;
 	if ($ext !== null) {
 		$physical .= '.'.$ext;
 	}
 	if (file_exists($physical)) {
-		$path = Zend::registry('theme_web').DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.'.$ext;
+		$path = web_path(true).DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.'.$ext;
 		if($return) return $path;
 		else echo $path;
 	}
 	else {
+		//Check the 'universal' directory to see if it is in there
+		$physical = UNIVERSAL_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+		if(file_exists($physical)) {
+			$path = WEB_UNIVERSAL.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+			if($return) return $path;
+			else echo $path;
+		}
 		throw new Exception('Cannot find '.$file.'.'.$ext);
 	}
 }
@@ -80,10 +87,16 @@ function img($file, $dir = 'images') {
 }
 
 function common($file, $vars = array(), $dir = 'common') {
-	$path = Zend::registry('theme_path').DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.php';
+	$path = theme_path(true).DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.php';
 	if (file_exists($path)) {
 		extract($vars);
 		include $path;
+	}else {
+		$path = UNIVERSAL_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+		if(file_exists($path)) {
+			extract($vars);
+			include $path;
+		}
 	}
 }
 

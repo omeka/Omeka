@@ -18,6 +18,7 @@ define('WEB_DIR', $root.dirname($_SERVER['PHP_SELF']));
 define('WEB_PUBLIC', WEB_DIR.DIRECTORY_SEPARATOR.'public');
 define('WEB_ADMIN', WEB_PUBLIC.DIRECTORY_SEPARATOR.'admin');
 define('WEB_THEME', WEB_PUBLIC.DIRECTORY_SEPARATOR.'themes');
+define('WEB_UNIVERSAL', WEB_PUBLIC.DIRECTORY_SEPARATOR.'universal');
 
 // Define some constants based on those settings
 define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
@@ -27,6 +28,7 @@ define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
 define('PLUGIN_DIR', BASE_DIR .DIRECTORY_SEPARATOR. 'public' . DIRECTORY_SEPARATOR . 'plugins' );
 define('ADMIN_THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin');
 define('THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'themes');
+define('UNIVERSAL_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'universal');
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
