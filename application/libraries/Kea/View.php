@@ -68,10 +68,6 @@ class Kea_View extends Zend_View_Abstract
 			switch($output) {
 				case('json'):
 					require_once 'Zend/Json.php';
-					$config = Zend::registry('config_ini');
-					if (!(boolean) $config->debug->json) {
-						$this->getResponse()->setHeader('Content-Type', 'text/x-json');
-					}
 					$this->addScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json');
 					Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this, 'json');
 				break;
@@ -126,7 +122,17 @@ class Kea_View extends Zend_View_Abstract
 	 */
 	public function _run() {
 		extract($this->getVars());
+		
 		include func_get_arg(0);
+		
+		//Prototype.js doesn't recognize JSON unless the header is X-JSON: {json} all on one line [KK]
+		if($this->getRequest()->getParam('output') == 'json') {
+			$config = Zend::registry('config_ini');
+			if (!(boolean) $config->debug->json) {
+				$json = ob_get_clean();
+				header("X-JSON: $json");
+			}
+		}
 	}
 
 	/**
