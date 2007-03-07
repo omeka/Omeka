@@ -7,6 +7,7 @@ require_once 'Metatext.php';
 require_once 'Tag.php';
 require_once 'ItemsTags.php';
 require_once 'ItemMetatext.php';
+require_once 'ItemsFavorites.php';
 /**
  * @package Omeka
  * 
@@ -24,6 +25,7 @@ class Item extends Kea_Record
 		$this->ownsMany("File as Files","File.item_id");
 		$this->ownsMany("ItemMetatext as Metatext", "ItemMetatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
+		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
 	}
 	
 	public function setTableDefinition() {
@@ -156,6 +158,14 @@ class Item extends Kea_Record
 	}
 	
 	///// END TAGGING METHODS /////
+	
+	public function isFavoriteOf($user) {
+		foreach( $this->ItemsFavorites as $key => $if )
+		{
+			if($if->User == $user) return true;
+		}
+		return false;
+	}
 		
 } // END class Item extends Kea_Domain_Record
 

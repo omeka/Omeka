@@ -28,11 +28,15 @@ class User extends Kea_Record {
 		$this->getTable()->setAttribute(Doctrine::ATTR_LISTENER,new UserListener());
 	}
 	
+	public function setUp() {
+		$this->ownsMany("ItemsFavorites", "ItemsFavorites.user_id");
+		$this->ownsMany("ItemsTags", "ItemsTags.user_id");
+		$this->hasMany("Item as Items", "Item.user_id");
+		$this->hasOne("Group", "User.group_id");
+	}
+	
     public function setTableDefinition() {
 		$this->setTableName('users');
-		
-		$this->hasOne("Group", "User.group_id");
-		
         $this->hasColumn("name","string",30, "unique|notnull");
         $this->hasColumn("username","string",30);
         $this->hasColumn("password","string",40);

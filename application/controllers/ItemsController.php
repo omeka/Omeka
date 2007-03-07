@@ -108,10 +108,31 @@ class ItemsController extends Kea_Controller_Action
 	{
 		$item = $this->findById();
 		
+		$user = Doctrine_Manager::getInstance()->getTable('User')->find(1);
+		
+		if($this->getRequest()->getParam('makeFavorite')) {
+			//@todo Replace with retrieval of actual user
+			
+		
+			if($item->isFavoriteOf($user)) {
+				//Make un-favorite
+				$if = Doctrine_Manager::getInstance()->getTable('ItemsFavorites')->findBySql("user_id = {$user->id} AND item_id = {$item->id}");
+				$if->delete();
+			} else {
+				//Make it favorite
+				$if = new ItemsFavorites();
+				$if->Item = $item;
+				$if->User = $user;
+				$if->save();
+			}
+		}
 		if(!empty($_POST['tags'])) $this->addTags($item);
-		echo $this->render('items/show.php', compact("item"));
+		
+		$item->refresh();
+		
+		echo $this->render('items/show.php', compact("item", 'user'));
 	}
-
+	
 	/**
 	 * @todo catch the current User somewhere in here, shoot it to the addTagString() method 
 	 * @param Item

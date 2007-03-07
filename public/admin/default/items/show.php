@@ -1,7 +1,25 @@
 <?php head(array('title' => 'Item'))?>
 
 <?php error($item);?>
-
+<script type="text/javascript" charset="utf-8">
+	function setFavorite() {
+		var opt = {
+			onComplete: function(t, item) {
+				if(item.favorite) {
+					$('favorite').innerHTML = "Favorite";
+				} else {
+					$('favorite').innerHTML = "Not Favorite";
+				}
+			}
+		}
+		new Ajax.Request("<?php echo uri('json/items/show/');?>?makeFavorite=true&id=<?php echo $item->id;?>", opt);
+	}
+	
+	Event.observe(window, 'load', function() {
+		$('favorite').setAttribute('href', '#');
+		Event.observe("favorite", "click", setFavorite);
+	});
+</script>
 <ul id="secondary-nav" class="navigation">
 	<?php nav(array('Show Item' => uri('items/show/'.$item->id), 'Edit Item' => uri('items/edit/'.$item->id), 'Back to Items' => uri('items')));?>
 </ul>
@@ -50,15 +68,10 @@
 <h5><?php echo $metatext->Metafield->name; ?>: <?php echo $metatext->text; ?></h5>
 
 <?php endforeach; ?>
-<?php
 
-	$points[0]['latitude'] = 65;
-	$points[0]['longitude'] = 65;
-	$points[1]['latitude'] = 55;
-	$points[1]['longitude'] = 65;
-//	plugin('GeoLocation', 'map', null, null, 5, 200, 200, 'map', $points, array('clickable' => true) );
-?>	
-
+<div id="mark-favorite">
+	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
+</div>
 <h2>Tags</h2>
 <ul>
 	<?php $tags = $item->Tags;?>

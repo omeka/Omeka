@@ -11,7 +11,6 @@ define( 'PATH_TO_CONVERT', '/usr/bin/convert' );
 require_once 'Item.php';
 
 /**
- * @todo Add a timestamp listener to process the added/modified fields (see Item)
  * @package Omeka
  * 
  **/

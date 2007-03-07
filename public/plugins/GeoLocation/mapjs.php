@@ -15,7 +15,7 @@
 		},
 		
 		addPoints: function(t, json) {
-			this.points = eval('('+t.responseText+')');
+			this.points = json;
 			//If there is only one point, make it the center
 			if(this.points.length == 1) {
 				point = this.points[0];
