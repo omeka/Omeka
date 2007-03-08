@@ -82,7 +82,7 @@
 	<?php nav(array('Show Item' => uri('items/show/'.$item->id), 'Edit Item' => uri('items/edit/'.$item->id), 'Back to Items' => uri('items')));?>
 </ul>
 
-<h2><?php echo $item->title; ?></h2>
+<h2><div class="editable" id="title"><?php echo $item->title; ?></div></h2>
 
 <h3>Core Metadata</h3>
 <div id="core-metadata">
@@ -107,23 +107,33 @@
 <?php echo $item->coverage;?>
 	
 	<h4>Rights</h4>
+<div class="editable" id="rights">
 	<?php echo $item->rights;?>
-
+</div>
 	
 	<h4>Source</h4>
+<div class="editable" id="source">
 <?php echo $item->source;?>
+</div>
 	
 	<h4>Subject</h4>
+<div class="editable" id="subject">
 <?php echo $item->subject;?>
-	
+</div>
+
 	<h4>Creator</h4>
+<div class="editable" id="creator">
 <?php echo $item->creator;?>
+</div>
 	
 	<h4>Additional Creator</h4>
+<div class="editable" id="additional_creator">
 <?php echo $item->additional_creator;?>
+</div>
 	
 	<h4>Date</h4>
 <?php echo $item->date;?>
+
 </div>
 <h4>Metatext</h4>
 <?php foreach($item->Metatext as $key => $metatext): ?>

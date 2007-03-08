@@ -317,4 +317,15 @@ function recent_tags($num = 30) {
 	return Doctrine_Manager::getInstance()->getTable('Tag')->getSome($num, false, true);
 }
 
+/**
+ * We could just use a global array that contains these site settings rather than having a separate query for each one
+ *
+ * @return void
+ **/
+function settings($name, $return=false) {
+	$title = Doctrine_Manager::getInstance()->getTable('Option')->findByName($name);
+	if($return) return $title;
+	echo $title;
+}
+
 ?>

@@ -21,7 +21,7 @@
 <body>
 	<div id="wrap">
 		<div id="header">
-			<h1><a href="<?php echo uri(''); ?>">Web Design History <?php echo $title; ?></a></h1>
+			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?> <?php echo $title; ?></a></h1>
 			<ul id="primary-nav" class="navigation">
 			<?php
 

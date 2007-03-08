@@ -10,5 +10,9 @@ class Option extends Kea_Record {
         $this->hasColumn("name", "string", 30, "unique|notnull");
         $this->hasColumn("value","string");
     }
+
+	public function __toString() {
+		return $this->value;
+	}
 }
 ?>
