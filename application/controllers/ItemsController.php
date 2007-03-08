@@ -112,7 +112,6 @@ class ItemsController extends Kea_Controller_Action
 		
 		if($this->getRequest()->getParam('makeFavorite')) {
 			//@todo Replace with retrieval of actual user
-			
 		
 			if($item->isFavoriteOf($user)) {
 				//Make un-favorite

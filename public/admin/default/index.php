@@ -13,7 +13,7 @@
 		
 		<div id="site-info">
 			<h2>Site Info</h2>
-			<p><em>Web Design History</em> contains <?php echo total_items(); ?> items, in 10 collections, tagged with 124 keywords. There are 7 users.</p>
+			<p><em>Web Design History</em> contains <?php total_items(); ?> items, in <?php total_collections(); ?> collections, tagged with <?php total_tags(); ?> keywords. There are <?php total_users(); ?> users.</p>
 		</div>
 		
 		<div id="omeka-news">

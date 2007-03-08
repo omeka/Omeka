@@ -191,7 +191,12 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		if($this->commitForm($$varName))
 		{
-			$this->_redirect($pluralName.'/show/'.$$varName->id);
+			//Avoid a redirect by passing an extra parameter to the AJAX call
+			if($this->_getParam('noRedirect')) {
+				$this->_forward($pluralName, 'show');
+			} else {
+				$this->_redirect($pluralName.'/show/'.$$varName->id);
+			}
 		}else{
 			$this->loadFormData();
 			$this->render($pluralName.'/edit.php', compact($varName));

@@ -220,7 +220,7 @@ function nav(array $links) {
 		if(!empty($plugResponses)) {
 			foreach( $plugResponses as $array ) { 
 				list($plugText, $plugLink) = $array;
-				$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$plugLink\">$plugText</a></li>\n"; 
+				$nav .= "<li".(is_current($plugLink) ? ' class="current"':'')."><a href=\"$plugLink\">$plugText</a></li>\n"; 
 			}
 		}
 		
@@ -274,12 +274,38 @@ function recent_items($num = 10) {
 }
 
 /**
- * Do we need this for every model or better to have something like total('items')
+ * Retrieve the total number of items
  *
- * @return void
+ * @return int
  **/
-function total_items() {
-	return Doctrine_Manager::getInstance()->getTable('Item')->count();
+function total_items($return = false) {
+	$count = Doctrine_Manager::getInstance()->getTable('Item')->count();
+	if($return) return $count;
+	echo $count;
+}
+
+function total_collections($return = false) {
+	$count = Doctrine_Manager::getInstance()->getTable('Collection')->count();
+	if($return) return $count;
+	echo $count;
+}
+
+function total_tags($return = false) {
+	$count = Doctrine_Manager::getInstance()->getTable('Tag')->count();
+	if($return) return $count;
+	echo $count;
+}
+
+function total_users($return = false) {
+	$count = Doctrine_Manager::getInstance()->getTable('User')->count();
+	if($return) return $count;
+	echo $count;
+}
+
+function total_types($return = false) {
+	$count = Doctrine_Manager::getInstance()->getTable('Type')->count();
+	if($return) return $count;
+	echo $count;
 }
 
 /**
