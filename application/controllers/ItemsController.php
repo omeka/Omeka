@@ -17,6 +17,11 @@ class ItemsController extends Kea_Controller_Action
 		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
 	
+	/**
+	 * @todo Browse should be able to narrow by Collection, Type, Tag, etc.
+	 *
+	 * @return void
+	 **/
 	public function browseAction()
 	{
 		$query = Doctrine_Manager::getInstance()->getTable('Item')->createQuery();
@@ -125,7 +130,7 @@ class ItemsController extends Kea_Controller_Action
 				$if->save();
 			}
 		}
-		if(!empty($_POST['tags'])) $this->addTags($item);
+		if(!empty($_POST['tags'])) $this->addTags($item, $user);
 		
 		$item->refresh();
 		
@@ -133,14 +138,13 @@ class ItemsController extends Kea_Controller_Action
 	}
 	
 	/**
-	 * @todo catch the current User somewhere in here, shoot it to the addTagString() method 
 	 * @param Item
 	 * @return void
 	 **/
-	private function addTags($item) {
+	private function addTags($item, $user) {
 		
 		if($tagString = $_POST['tags']) {
-			$item->addTagString($tagString);			
+			$item->addTagString($tagString, $user);			
 			try{
 				$item->save();
 				$item->refresh();

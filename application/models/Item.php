@@ -114,7 +114,7 @@ class Item extends Kea_Record
 	 * @return void
 	 * 
 	 **/
-	public function addTagString($string, $delimiter = ',') {
+	public function addTagString($string, $user, $delimiter = ',') {
 		$tagsArray = explode($delimiter, $string);
 		foreach( $tagsArray as $key => $tagName )
 		{
@@ -123,14 +123,7 @@ class Item extends Kea_Record
 			$tag = $tag->getTable()->findOrNew($tagName);
 				$it = new ItemsTags();
 				$it->Tag = $tag;
-				
-			//  Make a fake User for testing purposes	
-				$user = new User();
-				$user = $user->getTable()->find(1);
-				if(!$user) $user = new User();
-				$user->name = "FooUser";
 				$it->User = $user;
-
 				$this->ItemsTags[] = $it;
 		}
 	}
@@ -154,6 +147,15 @@ class Item extends Kea_Record
 			}
 		}
 		return false;
+	}
+	
+	public function userTags($user) {
+		$query = new Doctrine_Query();
+		return $query->from('Tag t')
+				->innerJoin('t.ItemsTags it')
+				->innerJoin('it.Item i')
+				->where("i.id = {$this->id} AND it.user_id = {$user->id}")
+				->execute();
 	}
 	
 	///// END TAGGING METHODS /////

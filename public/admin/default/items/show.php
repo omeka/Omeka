@@ -2,6 +2,36 @@
 
 <?php error($item);?>
 <script type="text/javascript" charset="utf-8">
+	
+	function addTags() {
+		var opt = {
+			method: "post",
+			parameters: Form.serialize($('tags-form')),
+			onComplete: function(t, item) {
+				if(item.Errors) alert("Error: "+item.Errors);
+				oldTags = document.getElementsByClassName("my-tag");
+				// If the length is the same then adding the tag didn't work
+				if(oldTags.length != item.MyTags.length) {
+					newMyTagLi = document.createElement("li");
+					newMyTagLi.innerHTML = "<a href=\"#\">"+item.MyTags.last()+"</a>";
+					newMyTagLi.setAttribute('class', 'my-tag');
+
+					newTagLi = document.createElement("li");
+					newTagLi.innerHTML = newMyTagLi.innerHTML;
+					newTagLi.setAttribute('class', 'tag');
+					
+					// Append that business
+					$('my-tags').getElementsByTagName("ul")[0].appendChild(newMyTagLi);
+					$('tags').getElementsByTagName("ul")[0].appendChild(newTagLi);
+					
+					//@todo Focus on the new content
+				}
+			}
+		}
+		
+		new Ajax.Request("<?php echo uri('json/items/show/');?>?id=<?php echo $item->id;?>", opt);
+	}
+	
 	function setFavorite() {
 		var opt = {
 			onComplete: function(t, item) {
@@ -68,8 +98,21 @@
 	}
 	
 	Event.observe(window, 'load', function() {
+		//Make the favorites thing work w/ AJAX
 		$('favorite').setAttribute('href', '#');
 		Event.observe("favorite", "click", setFavorite);
+		
+		//Make the tags work w/AJAX
+		$('tags-submit').setStyle({display:"none"});
+		link = document.createElement("a");
+		link.setAttribute("href", "#");
+		link.innerHTML = "Add Tags";
+		$('tags-form').appendChild(link);
+		Event.observe(link, "click", addTags);
+		
+/*		oldTags = document.getElementsByClassName("tag");
+		lastTag = oldTags.last().getElementsByTagName("a");
+		tagText = $A(lastTag).first().innerHTML;*/
 		
 		editableElements = document.getElementsByClassName("editable");
 		
@@ -144,15 +187,25 @@
 <div id="mark-favorite">
 	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
 </div>
-<h2>Tags</h2>
-<ul>
-	<?php $tags = $item->Tags;?>
-	<?php foreach($tags as $tag):?>
-	<a href="#"><?php echo $tag; ?></a>
-	<?php endforeach; ?>
-</ul>
-<form id="tags" method="post" action="">
+<h2>My Tags</h2>
+<div id="my-tags">
+	<ul>
+		<?php $myTags = $item->userTags($user);?>
+		<?php foreach($myTags as $tag):?>
+		<li class="my-tag"><a href="#"><?php echo $tag; ?></a></li>
+		<?php endforeach; ?>
+	</ul>
+</div>
+<h2>All Tags</h2>
+<div id="tags">
+	<ul>
+		<?php foreach( $item->Tags as $key => $tag ): ?>
+			<li class="tag"><a href="#"><?php echo $tag; ?></a></li>
+		<?php endforeach; ?>
+	</ul>
+</div>
+<form id="tags-form" method="post" action="">
 	<input type="text" name="tags" value="Put tag string in me" />
-	<input type="submit" name="submit" value="submit">
+	<input type="submit" name="submit" value="submit" id="tags-submit">
 </form>
 <?php foot();?>
