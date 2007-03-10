@@ -8,26 +8,20 @@ class IndexController extends Kea_Controller_Action
 	/**
 	 * This allows for GET style routing.
 	 * DO NOT EDIT THIS UNLESS THERE IS A BUG, OR YOU KNOW WHAT YOU ARE DOING
-	 * 
+	 *
+	 * @todo could remove dependancy on the config_ini and the Zend Registry request by using an array 
 	 */
     public function indexAction()
     {
 		$config = Zend::registry('config_ini');
 		
 		$req = $this->getRequest();
-		
 		$c = $req->getParam($config->uri->controller);
 		$a = $req->getParam($config->uri->action);
-		$admin = (boolean) $req->getParam($config->uri->admin);
 
 		if (!$c) {
 			// Assume that they want to go to the default location
 			$this->_forward($config->default->controller, $config->default->action);
-		}
-		
-		if ($admin && $c) {
-			$this->_forward('admin', 'index');
-			return;
 		}
 		
 		if ($c) {

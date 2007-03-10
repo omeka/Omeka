@@ -54,6 +54,84 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	}
 	
 	/**
+	 * Before filter applies a named method to the controller
+	 * before calling the actual method.
+	 * Primarily used for logging in
+	 */
+	protected $_before_filter = array();
+	protected function before_filter($function_to_run, $except = array())
+	{
+		$this->_before_filter[$function_to_run] = $except;
+	}
+	
+	public function preDispatch()
+	{
+		/**
+		 * Admin theme protection is here.
+		 * Kind of bugs me that it's obscured but whatev -n8
+		 * 
+		 * The admin theme protection is as follows:
+		 * A user with an account needs to have greater than public access.
+		 * Otherwise, each method can have a specific, admin set permission
+		 * level
+		 */
+		$request = $this->getRequest();
+		if ($request->getParam('admin') == true &&
+			$request->getControllerName() != 'users' &&
+			$request->getActionName() != 'login') {
+
+			require_once 'Zend/Auth.php';
+			require_once 'Zend/Session.php';
+			require_once 'Kea/Auth/Adapter.php';
+
+			$auth = new Zend_Auth(new Kea_Auth_Adapter());
+			if (!$auth->isLoggedIn()) {
+				// capture the intended controller / action for the redirect
+				$session = new Zend_Session;
+				$session->controller = $request->getControllerName();
+				$session->action = $request->getActionName();
+
+				// finally, send to a login page
+				$this->_redirect('users/login');
+			}		
+		}
+		
+		$action = $this->_request->getActionName();
+		foreach ($this->_before_filter as $func => $exceptThese) {
+			if (!in_array($action, $exceptThese)) {
+				if (!method_exists($this, $func)) {
+					throw new Zend_Controller_Exception('The before filter '.$func.' was not found.');
+				}
+				else {
+					$this->$func();
+				}
+			}
+		}
+	}
+	
+	protected function authenticate()
+	{
+		require_once 'Zend/Auth.php';
+		require_once 'Zend/Session.php';
+		require_once 'Kea/Auth/Adapter.php';
+		require_once 'Zend/Filter/Input.php';
+
+		$auth = new Zend_Auth(new Kea_Auth_Adapter());
+		if ($auth->isLoggedIn()) {
+			// check the identity's role is compatible with the action's permissions
+		}
+		else {
+			// capture the intended controller / action for the redirect
+			$session = new Zend_Session;
+			$session->controller = $this->_request->getControllerName();
+			$session->action = $this->_request->getActionName();
+			
+			// finally, send to a login page
+			$this->_redirect('users/login');
+		}
+	}
+	
+	/**
 	 * Define this here to avoid Zend's silly requirements
 	 */
 	public function noRouteAction()

@@ -9,6 +9,46 @@ class UsersController extends Kea_Controller_Action
 	public function init() {
 		$this->_table = Doctrine_Manager::getInstance()->getTable('User');
 		$this->_modelClass = 'User';
+		$this->before_filter('authenticate', array('login'));
+	}
+
+	public function loginAction()
+	{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			
+			require_once 'Zend/Auth.php';
+			require_once 'Zend/Session.php';
+			require_once 'Kea/Auth/Adapter.php';
+			require_once 'Zend/Filter/Input.php';
+			
+			$session = new Zend_Session;
+			echo $session->controller;
+			
+			$filterPost = new Zend_Filter_Input($_POST);
+			$auth = new Zend_Auth(new Kea_Auth_Adapter());
+
+			$options = array('username' => $filterPost->testAlnum('username'),
+							 'password' => $filterPost->testAlnum('password'));
+
+			$token = $auth->authenticate($options);
+			
+			if ($token->isValid()) {
+				$this->_redirect('items');
+				return;
+			}
+			$this->render('users/login.php', array('errorMessage' => $token->getMessage()));
+			return;
+		}
+		$this->render('users/login.php');
+	}
+	
+	public function logoutAction()
+	{
+		require_once 'Zend/Auth.php';
+		require_once 'Kea/Auth/Adapter.php';
+		$auth = new Zend_Auth(new Kea_Auth_Adapter());
+		$auth->logout();
+		$this->_redirect('');
 	}
 
 	public function rolesAction()
@@ -18,14 +58,6 @@ class UsersController extends Kea_Controller_Action
 		
 		$params = array('roles' => $roles);
 		$this->render('users/roles.php', $params);
-	}
-	
-	public function fooAction()
-	{
-		$data = array('message' => 'bar');
-		
-		$this->getResponse()->setHeader('X-JSON', Zend_Json::encode($foo));
-		$this->getResponse()->appendBody(Zend_Json::encode($foo));
 	}
 
 	public function addRoleAction()

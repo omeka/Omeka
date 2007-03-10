@@ -3,9 +3,9 @@ require_once 'Collection.php';
 require_once 'Type.php';
 require_once 'User.php';
 require_once 'File.php';
-require_once 'Metatext.php';
 require_once 'Tag.php';
 require_once 'ItemsTags.php';
+require_once 'Metatext.php';
 require_once 'ItemMetatext.php';
 require_once 'ItemsFavorites.php';
 /**

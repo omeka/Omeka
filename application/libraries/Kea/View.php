@@ -91,7 +91,7 @@ class Kea_View extends Zend_View_Abstract
 				//Plugins add their own view paths
 				Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this);
 				Zend::Register('theme_path', ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$theme[0]->value);
-				Zend::Register('theme_web', WEB_ADMIN.DIRECTORY_SEPARATOR.$theme[0]->value);
+				Zend::Register('theme_web', WEB_THEME.DIRECTORY_SEPARATOR.$theme[0]->value);
 			}
 			else {
 				$theme = $options->findByDql("name LIKE 'theme'");

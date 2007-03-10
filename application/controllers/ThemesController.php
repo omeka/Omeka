@@ -67,7 +67,7 @@ class ThemesController extends Kea_Controller_Action
 				// when switching themes
 				$image_file = $theme['dir'].DIRECTORY_SEPARATOR.$fname.'.jpg';
 				if (file_exists($image_file) && is_readable($image_file)) {
-					$img = WEB_ADMIN.DIRECTORY_SEPARATOR.$fname.DIRECTORY_SEPARATOR.$fname.'.jpg';
+					$img = WEB_THEME.DIRECTORY_SEPARATOR.$fname.DIRECTORY_SEPARATOR.$fname.'.jpg';
 					$theme['image'] = $img;
 				}
 				
@@ -87,7 +87,7 @@ class ThemesController extends Kea_Controller_Action
 
 		
 		// Create a view class
-		require_once 'application/libraries/Kea/View.php';
+		require_once 'Kea/View.php';
 		$view = new Kea_View($this, array('request', $this->getRequest()));
 
 		// Send the global $themes array to the view

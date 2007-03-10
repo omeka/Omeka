@@ -1,10 +1,10 @@
 <?php
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Metatext.php';
 /**
  * Inherited off of Metatext to support using metafield_id as collection key
  *
  * @package Omeka
  **/
+require_once 'Metatext.php';
 class ItemMetatext extends Metatext
 {	
 	public function setUp() {
@@ -13,5 +13,4 @@ class ItemMetatext extends Metatext
 		$this->setAttribute(Doctrine::ATTR_COLL_KEY, 'metafield_id');
 	}
 } // END class ItemMetatext extends Metatext
-
 ?>

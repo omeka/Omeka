@@ -58,6 +58,12 @@ function src($file, $dir, $ext = null, $return = false) {
 	}
 }
 
+function the_title($return = false) {
+	$title = Zend::registry('doctrine')->getTable('option')->findByDql('name like ?', array('project_title'));
+	if (!$return) echo $title[0]->value;
+	else return $title[0]->value;
+}
+
 /**
  * Echos the web path (that's what's important to the browser)
  * to a javascript file.
@@ -211,6 +217,7 @@ function nav(array $links) {
 	$current = Kea_Controller_Front::getInstance()->getRequest()->getRequestUri();
 	$plugins = Kea_Controller_Plugin_Broker::getInstance();
 	
+	$nav = '';
 	foreach( $links as $text => $link )
 	{		
 		$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$link\">$text</a></li>\n";

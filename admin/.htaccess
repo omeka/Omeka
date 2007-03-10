@@ -1,0 +1,6 @@
+php_value display_errors 1
+php_flag zlib.output_compression On
+php_value zlib.output_compression_level 5
+
+RewriteEngine on
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php

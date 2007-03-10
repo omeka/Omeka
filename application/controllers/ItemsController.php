@@ -23,7 +23,7 @@ class ItemsController extends Kea_Controller_Action
 	 * @return void
 	 **/
 	public function browseAction()
-	{
+	{	
 		$query = Doctrine_Manager::getInstance()->getTable('Item')->createQuery();
 		//replace with permissions check
 		if(!$this->getRequest()->getParam('admin')) {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Equivalent of DB trigger to update timestamps on insert/update of records
  *
