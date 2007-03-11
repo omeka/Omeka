@@ -1,0 +1,39 @@
+<?php
+require_once 'Zend/Auth/Adapter.php';
+
+class Kea_Auth_Adapter extends Zend_Auth_Adapter
+{
+	public static function staticAuthenticate($options)
+	{
+		$valid = false;
+		$identity = null;
+		$message = null;
+		
+		$user = Doctrine_Manager::connection()->getTable('user')
+											  ->findByDql('username LIKE :username AND password LIKE SHA1(:password)', $options);
+		
+		// The user was logged in correctly
+		if (count($user) === 1) {
+			$valid = true;
+			$identity = $user[0];
+			return new Kea_Auth_Token($valid, $identity);
+		}
+		else {
+			$user = Doctrine_Manager::connection()->getTable('user')
+												  ->findByDql('username LIKE :username', $options);
+			
+			if (count($user) === 1) {
+				$message = "Invalid password";
+			}
+			else {
+				$message = "Cannot find a user with that username";
+			}
+		}
+		return new Kea_Auth_Token($valid, $identity, $message);
+	}
+	
+    public function authenticate($options)
+    {
+		return self::staticAuthenticate($options);
+    }
+}
