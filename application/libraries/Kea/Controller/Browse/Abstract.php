@@ -33,7 +33,7 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 	public function browse() {}
 
 	public function getQuery() {
-		return $this->_query;
+		if (isset($this->_query)) return $this->_query;
 	}
 	
 	/**
@@ -60,7 +60,9 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 	}
 	
 	public function getOption($name) {
-		return $this->_options[$name];
+		if (isset($this->_options[$name])) {
+			return $this->_options[$name];
+		}
 	}
 	
 	protected function formatPluralized() {

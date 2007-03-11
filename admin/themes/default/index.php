@@ -1,4 +1,4 @@
-<?php head(array('title' => (' Home'))); ?>	
+<?php head(); ?>	
 	<div id="primary">
 		<div id="user-info">
 			<h2>Welcome, Jeremy!</h2>

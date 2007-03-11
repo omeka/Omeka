@@ -1,4 +1,7 @@
 <?php
+echo 'this probably stopped working within 24 hours after it was coded';
+exit;
+
 /**
  * Set some base config stuff
  */

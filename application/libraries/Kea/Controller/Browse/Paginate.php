@@ -34,7 +34,8 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		if(empty($this->_results)) {		
 			
 			//Has the user done a search?
-			if($searchTerms = $_REQUEST['search']) {				
+			if(isset($_REQUEST['search'])) {
+				$searchTerms = $_REQUEST['search'];
 				$this->_search->page = $page;
 				$this->_search->offset = $offset;
 				$this->_search->per_page = $per_page;

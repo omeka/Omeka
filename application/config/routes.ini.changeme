@@ -25,27 +25,6 @@
 ; DO NOT EDIT THESE TWO ROUTES, THEY PROVIDE ADMIN VERIFICATION
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Make sure all admin id commands go through the admin controller
-adminId.route = "admin/:c/:a/:id"
-adminId.defaults.controller = admin
-adminId.defaults.action = index
-
-adminPage.route = "admin/:c/browse/:page"
-adminPage.defaults.controller = admin
-adminPage.defaults.a = browse
-adminPage.defaults.page = 1
-adminPage.reqs.page = "\d+"
-
-; Make sure all admin commands go through the admin controller
-admin.route = "admin/:c/:a"
-admin.defaults.controller = admin
-admin.defaults.action = index
-
-; Again, make sure any short admin routes are interpreted correctly
-short_admin.route = "admin/:c"
-short_admin.defaults.controller = admin
-short_admin.defaults.action = index
-
 id.route = ":controller/:action/:id"
 id.defaults.controller = index
 id.defaults.action = index
@@ -60,8 +39,3 @@ output.route = ":output/:controller/:action"
 output.defaults.controller = index
 output.defaults.action = index
 output.reqs.output = "(json|rest)"
-
-adminOutput.route = "admin/:output/:controller/:action"
-adminOutput.defaults.controller = index
-adminOutput.defaults.action = index
-adminOutput.reqs.output = "(json|rest)"

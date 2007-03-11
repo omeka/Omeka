@@ -14,10 +14,11 @@ class Kea_Controller_Browse_List extends Kea_Controller_Browse_Abstract
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
 		
 		$query = $this->getQuery();
-		if($terms = $_REQUEST['search']) {
+		if(isset($_REQUEST['search'])) {
+			$terms = $_REQUEST['search'];
 			$this->_search->terms = (!empty($query) ? $query : $terms);
 			$$pluralName = $this->_search->run();
-		}else {
+		} else {
 			if(!empty($query)) {
 				$$pluralName = $query->execute();
 			} else {
