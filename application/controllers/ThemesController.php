@@ -55,13 +55,13 @@ class ThemesController extends Kea_Controller_Action
 		$themes = array();
 		
 		// Iterate over the directory to get the file structure
-		$themes_dir = new DirectoryIterator(ADMIN_THEME_DIR);
+		$themes_dir = new DirectoryIterator(THEME_DIR);
 		foreach($themes_dir as $dir) {
 			$fname = $dir->getFilename();
 			if (!$dir->isDot() and $fname[0] != '.' and $dir->isReadable()) {
 				
 				// Define a hard theme path for the theme
-				$theme['dir'] = ADMIN_THEME_DIR.DIRECTORY_SEPARATOR.$dir;
+				$theme['dir'] = THEME_DIR.DIRECTORY_SEPARATOR.$dir;
 				
 				// Test to see if an image is available to present the user
 				// when switching themes

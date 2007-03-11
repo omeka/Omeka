@@ -1,0 +1,12 @@
+Super
+Admin
+Researcher
+Public
+
+Permissions work on several levels:
+
+	Admin interfaces are only available with a login
+	
+	Specific actions should be regulated on a per type basis
+	
+	Specific items should have permissions that allow some users to see them vs others

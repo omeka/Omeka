@@ -2,43 +2,15 @@
 // Ladies and Gentlemen, start your timers
 define('APP_START', microtime(true));
 
-// Define the base path
-define('BASE_DIR', dirname(dirname(__FILE__)));
-
-// This needs a better name, for now it works -n8
-define('THIS_DIR', dirname(__FILE__));
-
-// Define some primitive settings so we don't need to load Zend_Config_Ini, yet
-$site['application']	= 'application';
-$site['libraries']		= 'libraries';
-$site['controllers']	= 'controllers';
-$site['models']			= 'models';
-$site['config']			= 'config';
-
-// Define Web routes
-$root = 'http://'.$_SERVER['HTTP_HOST'];
-define('WEB_DIR', $root.dirname($_SERVER['PHP_SELF']));
-define('WEB_THEME', WEB_DIR.DIRECTORY_SEPARATOR.'themes');
-
-// Define some constants based on those settings
-define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
-define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
-define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
-define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
-define('PLUGIN_DIR', BASE_DIR .DIRECTORY_SEPARATOR. 'public' . DIRECTORY_SEPARATOR . 'plugins' );
-define('ADMIN_THEME_DIR', THIS_DIR.DIRECTORY_SEPARATOR.'themes');
-define('THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'themes');
-
-// Set the include path to the library path
-// do we want to include the model paths here too? [NA]
-set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].DIRECTORY_SEPARATOR.'Zend_Incubator'.PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
-
+// include the paths and define a theme path
+include '../paths.php';
+define('THEME_DIR', ADMIN_DIR.DIRECTORY_SEPARATOR.'themes');
 
 /**
  * Check for a config file which, if not present implies that the
  * app has not been installed.
  */
-if (!file_exists(BASE_DIR.DIRECTORY_SEPARATOR.'application/config/db.ini')) {
+if (!file_exists(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini')) {
 	echo 'It looks like you have not properly setup Omeka to run.  <a href="'.$root.dirname(dirname($_SERVER['PHP_SELF'])).DIRECTORY_SEPARATOR.'install/install.php">Click here to install Omeka.</a>';
 	exit;
 }
@@ -47,7 +19,7 @@ require_once 'Doctrine.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
 
 require_once 'Zend/Config/Ini.php';
-$db = new Zend_Config_Ini(BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['config'].DIRECTORY_SEPARATOR.'db.ini', 'database');
+$db = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini', 'database');
 Zend::register('db_ini', $db);
 
 $dbh = new PDO($db->type.':host='.$db->host.';dbname='.$db->name, $db->username, $db->password);
@@ -80,8 +52,8 @@ require_once 'Zend.php';
 // Register the Doctrine Manager
 Zend::register('doctrine', $manager);
 
-Zend::register('routes_ini', new Zend_Config_Ini(BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['config'].DIRECTORY_SEPARATOR.'routes.ini'));
-$config = new Zend_Config_Ini(BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['config'].DIRECTORY_SEPARATOR.'config.ini', 'site');
+Zend::register('routes_ini', new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini'));
+$config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
 Zend::register('config_ini', $config);
 
 // Require the front controller and router
@@ -140,7 +112,7 @@ $front->throwExceptions((boolean) $config->debug->exceptions);
 #############################################
 # SET THE CONTROLLER DIRECTORY IN THE FRONT CONTROLLER
 #############################################
-$front->addControllerDirectory(BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['controllers']);
+$front->addControllerDirectory(CONTROLLER_DIR);
 
 #############################################
 # CHECKING TO SEE IF THE USER IS LOGGED IN IS HANDLED BY

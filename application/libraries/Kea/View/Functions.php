@@ -48,9 +48,9 @@ function src($file, $dir, $ext = null, $return = false) {
 	}
 	else {
 		//Check the 'universal' directory to see if it is in there
-		$physical = UNIVERSAL_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+		$physical = SHARED_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
 		if(file_exists($physical)) {
-			$path = WEB_UNIVERSAL.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+			$path = WEB_SHARED.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
 			if($return) return $path;
 			else echo $path;
 		}
@@ -98,7 +98,7 @@ function common($file, $vars = array(), $dir = 'common') {
 		extract($vars);
 		include $path;
 	}else {
-		$path = UNIVERSAL_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+		$path = SHARED_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
 		if(file_exists($path)) {
 			extract($vars);
 			include $path;
