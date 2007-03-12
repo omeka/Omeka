@@ -24,10 +24,9 @@ define('WEB_SHARED', WEB_DIR.DIRECTORY_SEPARATOR.'shared');
 define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
 define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
 define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
-define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
-define('PLUGIN_DIR', BASE_DIR .DIRECTORY_SEPARATOR. 'public' . DIRECTORY_SEPARATOR . 'plugins' );
-define('ADMIN_THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin');
-define('THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'themes');
+define('PLUGIN_DIR', BASE_DIR .DIRECTORY_SEPARATOR.'plugins' );
+define('ADMIN_THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'themes');
+define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
 define('SHARED_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'shared');
 
 // Set the include path to the library path

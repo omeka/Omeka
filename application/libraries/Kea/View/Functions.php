@@ -331,6 +331,7 @@ function recent_tags($num = 30) {
  **/
 function settings($name, $return=false) {
 	$title = Doctrine_Manager::getInstance()->getTable('Option')->findByName($name);
+	if($title instanceof Doctrine_Collection_Batch) return;
 	if($return) return $title;
 	echo $title;
 }
