@@ -15,8 +15,7 @@ if (!file_exists(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini')) {
 	exit;
 }
 
-require_once 'Doctrine.php';
-spl_autoload_register(array('Doctrine', 'autoload'));
+require_once 'Doctrine.compiled.php';
 
 require_once 'Zend/Config/Ini.php';
 $db = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini', 'database');

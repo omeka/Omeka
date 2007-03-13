@@ -33,8 +33,8 @@ define('SHARED_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'shared');
 // do we want to include the model paths here too? [NA]
 set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].DIRECTORY_SEPARATOR.'Zend_Incubator'.PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
 
-require_once 'Doctrine.php';
-spl_autoload_register(array('Doctrine', 'autoload'));
+require_once 'Doctrine.compiled.php';
+require_once 'Zend.php';
 
 require_once 'Zend/Config/Ini.php';
 $db = new Zend_Config_Ini($site['application'].DIRECTORY_SEPARATOR.$site['config'].DIRECTORY_SEPARATOR.'db.ini', 'database');
@@ -60,6 +60,9 @@ $manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
 // Use Zend_Config_Ini to store the info for the routes and db ini files
 require_once 'Zend.php';
 
+require_once 'Kea.php';
+spl_autoload_register(array('Kea', 'autoload'));
+
 // Register the Doctrine Manager
 Zend::register('doctrine', $manager);
 
@@ -70,6 +73,7 @@ Zend::register('config_ini', $config);
 // Require the front controller and router
 require_once 'Zend/Controller/Front.php';
 require_once 'Zend/Controller/RewriteRouter.php';
+
 
 // Retrieve the ACL from the db, or create a new ACL object
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
