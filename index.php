@@ -4,7 +4,6 @@ define('APP_START', microtime(true));
 
 require_once 'paths.php';
 
-//define('WEB_ADMIN', WEB_PUBLIC.DIRECTORY_SEPARATOR.'admin');
 define('ADMIN_THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'themes');
 define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
 
