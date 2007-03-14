@@ -24,9 +24,12 @@ define('ADMIN_DIR', 		BASE_DIR.DIRECTORY_SEPARATOR.$site['admin']);
 
 // Define Web routes
 $root = 'http://'.$_SERVER['HTTP_HOST'];
+//This looks ugly but plugin and shared directories are at the root of the site, whereas WEB_THEME is either root or root/admin depending - KK
+define('WEB_ROOT', 		$root.dirname(str_replace('/admin', '', $_SERVER['PHP_SELF'])));
 define('WEB_DIR',		$root.dirname($_SERVER['PHP_SELF']));
 define('WEB_THEME',		WEB_DIR.DIRECTORY_SEPARATOR.'themes');
-define('WEB_SHARED',	WEB_DIR.DIRECTORY_SEPARATOR.'shared');
+define('WEB_SHARED',	WEB_ROOT.DIRECTORY_SEPARATOR.'shared');
+define('WEB_PLUGIN',	WEB_ROOT.DIRECTORY_SEPARATOR.'plugin');
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]

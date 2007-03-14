@@ -8,7 +8,7 @@ require_once 'Zend.php';
  * app has not been installed.
  */
 if (!file_exists(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini')) {
-	echo 'It looks like you have not properly setup Omeka to run.  <a href="'.$root.dirname(dirname($_SERVER['PHP_SELF'])).DIRECTORY_SEPARATOR.'install/install.php">Click here to install Omeka.</a>';
+	echo 'It looks like you have not properly setup Omeka to run.  <a href="'.WEB_ROOT.DIRECTORY_SEPARATOR.'install/install.php">Click here to install Omeka.</a>';
 	exit;
 }
 

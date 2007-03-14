@@ -1,42 +1,11 @@
 <?php
-echo 'this probably stopped working within 24 hours after it was coded';
-exit;
-
-/**
- * Set some base config stuff
- */
-define('WEB_ROOT', 'http://'.$_SERVER['HTTP_HOST'].dirname(dirname($_SERVER['PHP_SELF'])));
-
-// Define the base path
-define('BASE_DIR', dirname(dirname(__FILE__)));
-define('THIS_DIR', dirname(__FILE__));
-
-// Define some primitive settings so we don't need to load Zend_Config_Ini, yet
-$site['application']	= 'application';
-$site['libraries']		= 'libraries';
-$site['controllers']	= 'controllers';
-$site['models']			= 'models';
-$site['config']			= 'config';
-
-// Define Web routes
-$root = 'http://'.$_SERVER['HTTP_HOST'];
-define('WEB_DIR', $root.dirname($_SERVER['PHP_SELF']));
-define('WEB_THEME', WEB_DIR.DIRECTORY_SEPARATOR.'themes');
-
-// Define some constants based on those settings
-define('MODEL_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['models']);
-define('LIB_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
-define('APP_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
-define('PUBLIC_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'public');
-define('PLUGIN_DIR', BASE_DIR .DIRECTORY_SEPARATOR. 'public' . DIRECTORY_SEPARATOR . 'plugins' );
-define('ADMIN_THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'admin');
-define('THEME_DIR', PUBLIC_DIR.DIRECTORY_SEPARATOR.'themes');
+require_once '../paths.php';
 
 /**
  * Check to see if the db has already been setup
  */
-if (file_exists(BASE_DIR.DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'db.ini')) {
-	echo 'Omeka has already been setup. This file and the install directory should be deleted by an administrator. <a href="'.WEB_ROOT.'">Click here to go to this site.</a>';
+if (file_exists(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini')) {
+	echo 'Omeka has already been setup. This file and the install directory should be deleted by an administrator.';
 	exit;
 }
 
@@ -51,6 +20,8 @@ if (isset($_REQUEST['install_submit'])) {
 	// try to connect to the db
 	$db = $_REQUEST['db'];
 	try{
+		//@todo Add "port" option to db.ini and all PDO connections within the app
+		
 		$dbh = new PDO($db['type'].':host='.$db['host'].';dbname='.$db['name'], $db['username'], $db['password']);
 		if (!$dbh instanceof PDO) {
 			throw new Exception('No database connection could be created');
@@ -86,6 +57,17 @@ name     = ".$db['name']."
 		spl_autoload_register(array('Doctrine', 'autoload'));
 		Doctrine_Manager::connection($dbh);
 		$manager = Doctrine_Manager::getInstance();
+
+		// Build the tables explicitly
+		require_once 'tables.php';
+		
+		// Create the default user
+		$defaultUser = new User();
+		$defaultUser->name = "super";
+		$defaultUser->password = "super";
+		$defaultUser->username = "super";
+		$defaultUser->active = 1;
+		$defaultUser->save();
 		
 		// Retrieve the ACL from the db, or create a new ACL object
 		require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
@@ -118,10 +100,10 @@ name     = ".$db['name']."
 		$option->save();
 		
 		// Create the project name option
-		$project_title = new Option;
-		$project_title->name = 'project_title';
-		$project_title->value = $_REQUEST['project']['name'];
-		$project_title->save();
+		$site_title = new Option;
+		$site_title->name = 'site_title';
+		$site_title->value = $_REQUEST['site']['name'];
+		$site_title->save();
 		
 		// Set the default themes
 		$admin = new Option();
@@ -135,7 +117,7 @@ name     = ".$db['name']."
 		$admin->save();
 		$theme->save();
 		
-		echo 'hooray! the db is setup and you are ready to role.  <a href="'.WEB_ROOT.'">check out your site here!</a>';
+		echo 'hooray! the db is setup and you are ready to roll.  <a href="'.$_REQUEST['site']['uri'].'">check out your site here!</a>';
 		$display_form = false;
 
 	} catch(Exception $e) {
@@ -147,8 +129,9 @@ name     = ".$db['name']."
 if ($display_form == true) {
 ?>
 <form action="install.php" method="post" accept-charset="utf-8">
-	<h1>Project Info</h1>
-	Project Name:<input type="text" name="project[name]" value="" id="project[name]"/>
+	<h1>Site Info</h1>
+	Site Name:<input type="text" name="site[name]" value="" id="site[name]"/>
+	Site URL:<input type="text" name="site[uri]" value="" id="site[uri]"/>
 	
 	<h1>Database info</h1>
 	Host:<input type="text" name="db[host]" value="localhost" id="host"/><br/>
