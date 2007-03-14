@@ -63,9 +63,8 @@ name     = ".$db['name']."
 		
 		// Create the default user
 		$defaultUser = new User();
-		$defaultUser->name = "super";
-		$defaultUser->password = "super";
 		$defaultUser->username = "super";
+		$defaultUser->password = "super";
 		$defaultUser->active = 1;
 		$defaultUser->save();
 		
@@ -105,6 +104,15 @@ name     = ".$db['name']."
 		$site_title->value = $_REQUEST['site']['name'];
 		$site_title->save();
 		
+		// Fill in the other settings automanually (users can change these later if they want to)
+		$settings = array('copyright','meta_keywords', 'meta_author', 'meta_description');
+		foreach ($settings as $setting) {
+			$setting_option = new Option;
+			$setting_option->name = $setting;
+			$setting_option->value = '';
+			$setting_option->save();
+		}
+		
 		// Set the default themes
 		$admin = new Option();
 		$admin->name = 'admin_theme';
@@ -117,11 +125,14 @@ name     = ".$db['name']."
 		$admin->save();
 		$theme->save();
 		
+		//@todo Make an Ini with a list of the default types and metafields, load that sumbitch into the db
+		
 		echo 'hooray! the db is setup and you are ready to roll.  <a href="'.$_REQUEST['site']['uri'].'">check out your site here!</a>';
 		$display_form = false;
 
 	} catch(Exception $e) {
 		echo $e->getMessage();
+//		echo $e->getTraceAsString();
 		$display_form = true;
 	}
 }

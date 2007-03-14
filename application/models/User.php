@@ -42,9 +42,7 @@ class User extends Kea_Record {
 	
     public function setTableDefinition() {
 		$this->setTableName('users');
-		//@todo collapse name & username
-        $this->hasColumn("name","string",30, "unique|notnull");
-        $this->hasColumn("username","string",30);
+        $this->hasColumn("username","string",30, "unique|notnull");
         $this->hasColumn("password","string",40);
         $this->hasColumn("first_name","string",200);
         $this->hasColumn("last_name","string",200);

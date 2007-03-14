@@ -9,18 +9,13 @@ class SettingsController extends Kea_Controller_Action
 	
 	public function editAction() {
 		$table = Doctrine_Manager::getInstance()->getTable('Option');
-				
-		$defaults = array('site_title' => 'Omeka', 'copyright' => 'CHNM', 'meta_keywords' => 'meta, meta1', 'meta_author' => 'Meta Author', 'meta_description' => 'Meta Description');
 		
-		foreach( $defaults as $key => $value )
+		//Any changes to this list should be reflected in the install script (and possibly the view functions)		
+		$settings = array('site_title', 'copyright','meta_keywords', 'meta_author', 'meta_description');
+		
+		foreach( $settings as $setting )
 		{
-			$$key = $table->findBySQL("name LIKE '$key'")->getFirst();
-			if(!$$key) {
-				$$key = new Option;
-				$$key->name = $key;
-				$$key->value = $value;
-				$$key->save();
-			}
+			$$setting = $table->findBySQL("name LIKE '$setting'")->getFirst();
 		}
 						
 		//process the form
@@ -34,7 +29,7 @@ class SettingsController extends Kea_Controller_Action
 			}
 		}
 		
-		$this->render('settings/edit.php', compact(array_keys($defaults)));
+		$this->render('settings/edit.php', compact($settings));
 	}
 }
 
