@@ -7,12 +7,6 @@
  **/
 class GeoLocation extends Kea_Plugin
 {		
-	public function header()
-	{
-		$key = $this->getConfig('Maps Key');
-		echo '<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key='.$key.'" type="text/javascript"></script>';
-		include 'mapjs.php';
-	}
 	/**
 	 * 
 	 * 1) Note: the width and height setters will probably break in IE, I forgot how to fix this

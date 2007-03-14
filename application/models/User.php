@@ -5,10 +5,15 @@ require_once 'Group.php' ;
  **/
 
 /**
- * 
+ * @todo onLoad should set the password field to empty
  */
 class UserListener extends Doctrine_EventListener
 {
+	/**
+	 * @todo Check if pass is empty, if so then retrieve old password hash from DB and store it, otherwise encrypt the new password
+	 *
+	 * @return void
+	 **/
 	public function onPreSave(Doctrine_Record $record)
 	{
 		$record->password = sha1($record->password);
@@ -18,7 +23,7 @@ class UserListener extends Doctrine_EventListener
 }
 
 /**
- * 
+ * @todo generate random password for new users (find code in old sitebuilder)
  */
 class User extends Kea_Record {
 
@@ -37,6 +42,7 @@ class User extends Kea_Record {
 	
     public function setTableDefinition() {
 		$this->setTableName('users');
+		//@todo collapse name & username
         $this->hasColumn("name","string",30, "unique|notnull");
         $this->hasColumn("username","string",30);
         $this->hasColumn("password","string",40);

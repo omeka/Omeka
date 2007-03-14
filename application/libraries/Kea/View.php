@@ -89,7 +89,7 @@ class Kea_View extends Zend_View_Abstract
 				$theme = $options->findByDql("name LIKE 'admin_theme'");
 			}
 			else {
-				$theme = $options->findByDql("name LIKE 'theme'");
+				$theme = $options->findByDql("name LIKE 'public_theme'");
 			}
 			$theme_name = $theme[0]->value;
 			
@@ -141,7 +141,7 @@ class Kea_View extends Zend_View_Abstract
 	public function render($file)
 	{
 		require_once 'Kea/View/Functions.php';
-	
+		
 		// do the normal rendering
 		return parent::render($file);
 	}

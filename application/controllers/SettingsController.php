@@ -14,19 +14,15 @@ class SettingsController extends Kea_Controller_Action
 		
 		foreach( $defaults as $key => $value )
 		{
-			$$key = $table->findByName($key);
-		}
-				
-		if(!$site_title) {
-			foreach( $defaults as $key => $value )
-			{
+			$$key = $table->findBySQL("name LIKE '$key'")->getFirst();
+			if(!$$key) {
 				$$key = new Option;
 				$$key->name = $key;
 				$$key->value = $value;
 				$$key->save();
 			}
 		}
-		
+						
 		//process the form
 		if(!empty($_POST)) {
 			foreach( $_POST as $key => $value )

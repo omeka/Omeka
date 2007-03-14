@@ -119,7 +119,6 @@ $front->setResponse($response);
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Plugin.php';
 
-
 //Register all of the active plugins
 $plugins = $manager->getTable('Plugin')->activeArray($router);
 foreach( $plugins as $plugin )

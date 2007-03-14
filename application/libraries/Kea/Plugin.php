@@ -31,6 +31,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 			$this->router->addConfig($config, 'routes');
 		}		
 		//Find the plugin entry in the database or create a new empty one
+		//Should this force a record to be passed to the plugin?
 		if(empty($record)) {
 			$conn = Doctrine_Manager::getInstance()->connection();
 			$this->record = $conn->getTable('Plugin')->findBySql("name = ?", array(get_class($this)))->getFirst();
@@ -45,7 +46,6 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		$front = Kea_Controller_Front::getInstance();
 		$front->addControllerDirectory($this->dir.DIRECTORY_SEPARATOR.'controllers');
 		
-		
 		// This seems like a bad idea but it makes it easier to integrate plugins and their helpers
 		Zend::register(get_class($this), $this);
 	}
@@ -58,7 +58,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * @todo Have it check for specific types in the metafield definition so that the plugin can add metafields only to certain types
 	 * @return void
 	 **/
-	public function install($path) {
+	public function install() {
 		if(!$this->record->exists()) {
 			$install = new Zend_Config_Ini($this->dir.DIRECTORY_SEPARATOR.'install.ini');
 			$defaults = $install->config->defaults->asArray();
@@ -69,8 +69,9 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 			}
 			
 			$this->record->name = get_class($this);
-			$this->record->path = $path;
 			$this->record->config = $config;
+			$this->record->description = $install->info->description;
+			$this->record->author = $install->info->author;
 			foreach( $install->metafields->asArray() as $array )
 			{
 				$metafield = new Metafield;
@@ -122,16 +123,16 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		$this->record->config[$index] = $val;
 	}
 	
-	public function name() {
-		return $this->record->name;
-	}
-	
-	public function path() {
-		return $this->record->path;
-	}
-	
 	public function metafields() {
 		return $this->record->Metafields;
+	}
+	
+	public function webPath() {
+		return WEB_PLUGIN.DIRECTORY_SEPARATOR.get_class($this);
+	}
+	
+	public function __get($name) {
+		return $this->record->$name;
 	}
 	
 	///// CUSTOM OMEKA HOOKS /////
@@ -141,7 +142,14 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 *
 	 * @return void
 	 **/
-	public function header() {}
+	public function header() {
+		require_once 'Kea/View/Functions.php';
+		
+		$path = $this->dir.DIRECTORY_SEPARATOR.'header.php';
+		if(file_exists($path)) {
+			include $path; 
+		}
+	}
 	
 	/**
 	 * Ditto for the footer (not sure if this will be terribly useful)

@@ -59,7 +59,7 @@ function src($file, $dir, $ext = null, $return = false) {
 }
 
 function the_title($return = false) {
-	$title = Zend::registry('doctrine')->getTable('option')->findByDql('name like ?', array('project_title'));
+	$title = Zend::registry('doctrine')->getTable('option')->findByDql('name like ?', array('site_title'));
 	if (!$return) echo $title[0]->value;
 	else return $title[0]->value;
 }
@@ -98,7 +98,7 @@ function common($file, $vars = array(), $dir = 'common') {
 		extract($vars);
 		include $path;
 	}else {
-		$path = SHARED_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+		$path = SHARED_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.php';
 		if(file_exists($path)) {
 			extract($vars);
 			include $path;

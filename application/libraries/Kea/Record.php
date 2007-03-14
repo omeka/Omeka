@@ -41,7 +41,7 @@ abstract class Kea_Record extends Doctrine_Record
 				{
 					$msg .= $this->error_messages[$field][$error];
 				}else{
-					$msg .= $error;
+					$msg .= $field.": ".$error.".";
 				}
 			}
 		}
