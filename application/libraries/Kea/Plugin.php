@@ -27,8 +27,11 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		
 		if(!empty($router)) {
 			$this->router = $router;
-			$config = new Zend_Config_Ini($this->dir.DIRECTORY_SEPARATOR.'routes.ini');
-			$this->router->addConfig($config, 'routes');
+			$routesFile = $this->dir.DIRECTORY_SEPARATOR.'routes.ini';
+			if(file_exists($routesFile)) {
+				$config = new Zend_Config_Ini($routesFile);
+				$this->router->addConfig($config, 'routes');
+			}
 		}		
 		//Find the plugin entry in the database or create a new empty one
 		//Should this force a record to be passed to the plugin?
@@ -44,7 +47,9 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		Doctrine_Manager::getInstance()->getListener()->add($listener);
 	
 		$front = Kea_Controller_Front::getInstance();
-		$front->addControllerDirectory($this->dir.DIRECTORY_SEPARATOR.'controllers');
+		if(file_exists($this->dir.DIRECTORY_SEPARATOR.'controllers')) {
+			$front->addControllerDirectory($this->dir.DIRECTORY_SEPARATOR.'controllers');
+		}
 		
 		// This seems like a bad idea but it makes it easier to integrate plugins and their helpers
 		Zend::register(get_class($this), $this);
@@ -61,27 +66,40 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	public function install() {
 		if(!$this->record->exists()) {
 			$install = new Zend_Config_Ini($this->dir.DIRECTORY_SEPARATOR.'install.ini');
-			$defaults = $install->config->defaults->asArray();
-			$config = array();
-			foreach( $defaults as $key => $default )
+			if($defaults = $install->defaultConfig) 
 			{
-				$config[$default['name']] = $default['value'];
+				$defaults = $defaults->asArray();
+				$config = array();
+				foreach( $defaults as $key => $default )
+				{
+					$config[$default['name']] = $default['value'];
+				}
+				$this->record->config = $config;
+			}
+			else 
+			{
+				$this->record->config = array();			
 			}
 			
 			$this->record->name = get_class($this);
-			$this->record->config = $config;
 			$this->record->description = $install->info->description;
 			$this->record->author = $install->info->author;
-			foreach( $install->metafields->asArray() as $array )
+			
+			if($metafields = $install->metafields) 
 			{
-				$metafield = new Metafield;
-				foreach( $array as $key => $value )
+				$metafields = $metafields->asArray();
+				foreach( $install->metafields->asArray() as $array )
 				{
-					$metafield->$key = $value;
-				}
-				$metafield->save();
-				$this->record->Metafields->add($metafield);
+					$metafield = new Metafield;
+					foreach( $array as $key => $value )
+					{
+						$metafield->$key = $value;
+					}
+					$metafield->save();
+					$this->record->Metafields->add($metafield);
+				}				
 			}
+
 			$this->record->save();	
 			$this->customizeInstall();
 		}else {
@@ -298,6 +316,8 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
     public function onCollectionDelete(Doctrine_Collection $collection) {}
     public function onPreCollectionDelete(Doctrine_Collection $collection) {}
 	
+	
+	public function addToTitle() {}
 } // END class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 
 ?>

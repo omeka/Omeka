@@ -2,8 +2,10 @@
 	<h2>Themes</h2>
 
 	<?php foreach($this->themes as $theme): ?>
-	<div class="<?php if($theme == $current_admin) echo 'current_admin'; else echo 'theme';?>">
+	<div class="<?php echo 'theme';//if($theme == $current_admin) echo 'current_admin'; else echo 'theme';?>">
+		
 		<div class="metainfo">
+		
 		<h3><?php echo $theme->title; ?></h3>
 		<ul>
 			<li><span class="type">Author:</span> <span class="value"><?php echo $theme->author; ?></span></li>
@@ -12,8 +14,7 @@
 		</ul>
 		</div>
 
-		<p class="description"><?php echo $theme->description; ?></p>
-		<img src="<?php echo $theme->image; ?>"/>
+		<img src="<?php echo $theme->image; ?>" width="150"/><p class="description"><?php echo $theme->description; ?></p>
 		
 	</div>
 	<?php endforeach; ?>

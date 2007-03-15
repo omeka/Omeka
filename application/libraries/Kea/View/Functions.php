@@ -60,8 +60,17 @@ function src($file, $dir, $ext = null, $return = false) {
 
 function the_title($return = false) {
 	$title = Zend::registry('doctrine')->getTable('option')->findByDql('name like ?', array('site_title'));
-	if (!$return) echo $title[0]->value;
-	else return $title[0]->value;
+	$title = $title[0]->value;
+	
+	//Example of a plugin hook (maybe remove later?)
+	$return_array = Kea_Controller_Plugin_Broker::getInstance()->addToTitle();
+	if(!empty($return_array)) {
+		foreach ($return_array as $key => $value) {
+			$title .= $value;
+		}
+	}
+	if (!$return) echo $title;
+	else return $title;
 }
 
 /**

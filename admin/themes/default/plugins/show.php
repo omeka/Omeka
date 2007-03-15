@@ -3,12 +3,13 @@
 
 <h2><?php echo $plugin->name;?></h2>
 
-
-<?php foreach($plugin->config as $key => $value): ?>
+<?php if(!empty($plugin->config)): ?>
+	<?php foreach($plugin->config as $key => $value): ?>
 	
-	<?php echo $key; ?>) <?php echo $value; ?>
-	<br/>
-<?php endforeach;?>
+		<?php echo $key; ?>) <?php echo $value; ?>
+		<br/>
+	<?php endforeach;?>
+<?php endif; ?>
 
 <?php if ( $plugin->active ): ?>
 	<h3>Plugin is active</h3>
