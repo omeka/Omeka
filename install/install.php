@@ -45,7 +45,10 @@ username = ".$db['username']."
 password = ".$db['password']."
 name     = ".$db['name']."
 ";
-		$f = fopen(BASE_DIR.DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'db.ini', 'w');
+		$config_dir = BASE_DIR.DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'config';
+		if(!is_writable($config_dir)) 
+			die('You need correct read/write permissions in order for this install script to work.  Please refer to the Omeka documentation for details.');
+		$f = fopen($config_dir.DIRECTORY_SEPARATOR.'db.ini', 'w');
 		fwrite($f, $db_config);
 		fclose($f);		
 
@@ -63,8 +66,8 @@ name     = ".$db['name']."
 		
 		// Create the default user
 		$defaultUser = new User();
-		$defaultUser->username = "super";
-		$defaultUser->password = "super";
+		$defaultUser->username = $_REQUEST['user']['username'];
+		$defaultUser->password = $_REQUEST['user']['password'];
 		$defaultUser->active = 1;
 		$defaultUser->save();
 		
@@ -151,6 +154,10 @@ if ($display_form == true) {
 	Port:<input type="text" name="db[port]" value="" id="port"/><br/>
 	DB Name:<input type="text" name="db[name]" value="omeka" id="name"/><br/>
 	DB Type:<input type="text" name="db[type]" value="mysql" id="type"/><br/>
+	
+	<h1>Default User</h1>
+	Username:<input type="text" name="user[username]" value="super"/><br/>
+	Password:<input type="password" name="user[password]" value="super"/><br/>
 	<p><input type="submit" value="Continue" name="install_submit"></p>
 </form>
 <?php } ?>
