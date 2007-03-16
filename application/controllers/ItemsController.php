@@ -24,29 +24,17 @@ class ItemsController extends Kea_Controller_Action
 	 **/
 	public function browseAction()
 	{	
-		$query = Doctrine_Manager::getInstance()->getTable('Item')->createQuery();
 		//replace with permissions check
 		if(!$this->getRequest()->getParam('admin')) {
-			$query->where('Item.public = 1');
-			
-			//narrow the search by active/inactive
-			if($terms = $_REQUEST['search']) {
-				$userQuery = Zend_Search_Lucene_Search_QueryParser::parse($terms);
-				$filterQuery = new Zend_Search_Lucene_Search_Query_Term(new Zend_Search_Lucene_Index_Term('TRUE', 'public'));
-				$main = new Zend_Search_Lucene_Search_Query_Boolean();
-				$main->addSubQuery($filterQuery, true);
-				$main->addSubQuery($userQuery, true);
-				$this->_browse->setSearchQuery($main);
-			
-			}
+			$this->_browse->addSql('where', 'items.active = 1');
 		} 
-		
+
 		//filter based on tags
 		if($tag = $this->getRequest()->getParam('tags')) {
-			$query->innerJoin('Item.Tags t')->where("t.name = ?", array($tag));
+			$this->_browse->addSql('join', 'items_tags ON items_tags.item_id = items.id JOIN tags ON tags.id = items_tags.tag_id');
 		}
 		
-		$this->_browse->setDbQuery($query)->browse();
+		$this->_browse->browse();
 	}
 	
 	/**

@@ -13,18 +13,9 @@ class Kea_Controller_Browse_List extends Kea_Controller_Browse_Abstract
 		$pluralName = $this->formatPluralized();
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
 		
-		$query = $this->getQuery();
-		if(isset($_REQUEST['search'])) {
-			$terms = $_REQUEST['search'];
-			$this->_search->terms = (!empty($query) ? $query : $terms);
-			$$pluralName = $this->_search->run();
-		} else {
-			if(!empty($query)) {
-				$$pluralName = $query->execute();
-			} else {
-				$$pluralName = Doctrine_Manager::getInstance()->getTable($this->_class)->findAll();
-			}
-		}
+		Kea_Controller_Plugin_Broker::getInstance()->filterBrowse($this);
+		
+		$$pluralName = $this->buildQuery()->execute();
 		
 		$this->_controller->render($viewPage, compact($pluralName));
 	}

@@ -316,6 +316,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
     public function onCollectionDelete(Doctrine_Collection $collection) {}
     public function onPreCollectionDelete(Doctrine_Collection $collection) {}
 	
+	public function filterBrowse(Kea_Controller_Browse_Abstract $browseObj) {}
 	
 	public function addToTitle() {}
 } // END class Kea_Plugin extends Zend_Controller_Plugin_Abstract

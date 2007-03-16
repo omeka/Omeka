@@ -27,39 +27,20 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		if(!$page) $page = 1;
 		
 		$offset = ($page - 1) * $per_page;
+
+		if($per_page) {
+			$this->addSql('limit', $per_page);
+		}
+		if($offset) {
+			$this->addSql('offset', $offset);
+		}
+		Kea_Controller_Plugin_Broker::getInstance()->filterBrowse($this);
 		
+		$query = $this->buildQuery();
 		
+		$$pluralVar = $query->execute();
+		$total = count($$pluralVar);
 		
-		//We'll let the controller writer (or plugin writer) override the results if they want
-		if(empty($this->_results)) {		
-			
-			//Has the user done a search?
-			if(isset($_REQUEST['search'])) {
-				$searchTerms = $_REQUEST['search'];
-				$this->_search->page = $page;
-				$this->_search->offset = $offset;
-				$this->_search->per_page = $per_page;
-				$query = $this->getSearchQuery();
-				if(!$query) $query = $searchTerms;
-				$this->_search->terms = $query;
-				$$pluralVar = $this->_search->run();
-		
-				$total = $$pluralVar->count();
-			} else {
-				$table = Doctrine_Manager::getInstance()->getTable($this->_class);
-				
-				$query = $this->getDbQuery();
-				if(!$query) $query = $table->createQuery();
-				
-				$total = count($query->execute());	
-				$query->limit($per_page)->offset($offset);
-				$$pluralVar = $query->execute();
-						
-			}
-		} else {
-			$$pluralVar = $this->_results;
-			$total = $this->_results->count();
-		}		
 		//Figure out the pagination 
 		
 		//num_links defaults to 5, we can make this dynamic as well

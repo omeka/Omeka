@@ -4,6 +4,8 @@
 	<?php nav(array('Browse' => uri('items'), 'Add Item' => uri('items/add')));?>
 </ul>
 
+<h2>There are <?php echo $total;?> items.</h2>
+
 <form id="search">
 	<input type="text" name="search" />
 	<input type="submit" name="submit" value="Search" />

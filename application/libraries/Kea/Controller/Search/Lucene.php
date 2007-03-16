@@ -8,48 +8,9 @@
  * @todo Add an array of protected Record types that users without a certain ACL privilege will not be able to search (implies ACL integration)
  * @package Omeka
  **/
-class Kea_Controller_Search
+class Kea_Controller_Search_Lucene extends Kea_Controller_Search_Abstract
 {
-	
-	/**
-	 * Current page of results (if paginating)
-	 *
-	 * @var int
-	 **/
-	public $page;
-	
-	/**
-	 * Number of results per page (if applicable)
-	 *
-	 * @var int
-	 **/
-	public $per_page;
-	
-	/**
-	 * Offset for search results
-	 *
-	 * @var int
-	 **/
-	public $offset;
-	
-	/**
-	 * Search terms to find
-	 *
-	 * @var string
-	 **/
-	public $terms;
-	
-	/**
-	 * Search that specifies a particular class of Record will only return results of that type (this is optional)
-	 *
-	 * @var string
-	 **/
-	protected $_targetClass;
-	
-	public function __construct($targetClass = null) {
-		$this->_targetClass = $targetClass;
-	}
-	
+
 	/**
 	 * Retrieve the current number of records in the Lucene index
 	 *
@@ -58,15 +19,6 @@ class Kea_Controller_Search
 	public function getTotal() {
 		$index = new Zend_Search_Lucene(SEARCH_DIR);
 		return $index->count();
-	}
-	
-	/**
-	 * Set the target class for search results
-	 *
-	 * @return void
-	 **/
-	public function setTarget($class) {
-		$this->_targetClass = $class;
 	}
 	
 	public function run() {
