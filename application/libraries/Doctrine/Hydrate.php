@@ -704,4 +704,9 @@ abstract class Doctrine_Hydrate extends Doctrine_Access
     {
         return Doctrine_Lib::formatSql($this->getQuery());
     }
+
+
+	public function addParam($name, $val) {
+		$this->params[$name] = $val;
+	}
 }

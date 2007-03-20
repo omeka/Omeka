@@ -121,7 +121,7 @@ class Doctrine_RawSql extends Doctrine_Hydrate
             };
         };
 
-        $this->parts = $parts;
+        $this->parts = array_merge($this->parts, $parts);
         $this->parts["select"] = array();
 
         return $this;
@@ -179,6 +179,8 @@ class Doctrine_RawSql extends Doctrine_Hydrate
         unset($copy['select']);
 
         $q .= ( ! empty($this->parts['from']))?    ' FROM '     . implode(' ', $this->parts['from']) : '';
+		$q .= ( ! empty($this->parts['join']))?    ' JOIN '     . implode(' JOIN ', $this->parts['join']) : '';
+		$q .= ( ! empty($this->parts['left join']))?    ' LEFT JOIN '     . implode(' LEFT JOIN ', $this->parts['join']) : '';
         $q .= ( ! empty($this->parts['where']))?   ' WHERE '    . implode(' AND ', $this->parts['where']) : '';
         $q .= ( ! empty($this->parts['groupby']))? ' GROUP BY ' . implode(', ', $this->parts['groupby']) : '';
         $q .= ( ! empty($this->parts['having']))?  ' HAVING '   . implode(' ', $this->parts['having']) : '';
