@@ -19,6 +19,7 @@ class Kea_Auth_Adapter extends Zend_Auth_Adapter
 			return new Kea_Auth_Token($valid, $identity);
 		}
 		else {
+			unset($options['password']);
 			$user = Doctrine_Manager::connection()->getTable('user')
 												  ->findByDql('username LIKE :username', $options);
 			

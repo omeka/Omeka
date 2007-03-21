@@ -13,7 +13,7 @@ class Kea_SearchListener extends Doctrine_EventListener
 		if($class == 'Item') {
 			//Get a list of the indexed elements from the ini file
 			require_once 'Zend/Config/Ini.php';
-			$ini = new Zend_Config_Ini(LIB_DIR.'/Kea/Controller/Search/fields.ini');
+			$ini = new Zend_Config_Ini(LIB_DIR.'/Kea/fields.ini');
 		
 			$table = Doctrine_Manager::getInstance()->getTable($class);
 			$tableName = $table->getTableName();

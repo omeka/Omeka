@@ -27,17 +27,18 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		if(!$page) $page = 1;
 		
 		$offset = ($page - 1) * $per_page;
+		
+		$query = $this->getQuery();
 
-		if($per_page) {
-			$this->addSql('limit', $per_page);
-		}
-		if($offset) {
-			$this->addSql('offset', $offset);
-		}
+		settype($per_page, 'int');
+		$query->limit($per_page);
+		
+		settype($offset, 'int');
+		$query->offset($offset);
+		
 		Kea_Controller_Plugin_Broker::getInstance()->filterBrowse($this);
 		
 		$query = $this->buildQuery();
-		
 		$$pluralVar = $query->execute();
 		$total = count($$pluralVar);
 		
