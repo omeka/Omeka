@@ -36,16 +36,21 @@ class MetafieldTable extends Doctrine_Table
 		return $query->execute();
 	}
 	
-	public function findMetafieldsWithoutType($type) {
+	public function findMetafieldsWithoutType($type=null) {
 		$query = new Doctrine_Query();
-		$query->from('Metafield m')->where('m.plugin_id IS NULL');
+		$query->from('Metafield m');
 		
-		foreach( $type->Metafields as $key => $metafield )
+		if($type) {
+			$query->innerJoin('m.TypesMetafields tm')->innerJoin('tm.Type t')->addWhere('t.id != :type_id');			
+		}
+		$query->where('m.plugin_id IS NULL');
+		
+/*		foreach( $type->Metafields as $key => $metafield )
 		{
 			$query->addWhere('m.id != '.$metafield->id);
 		}
-		
-		return $query->execute();
+*/		
+		return $query->execute(array('type_id' => $type->id));
 	}
 } // END class MetafieldTable extends Doctrine_Table
 

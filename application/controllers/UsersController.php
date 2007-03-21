@@ -33,7 +33,7 @@ class UsersController extends Kea_Controller_Action
 			$token = $auth->authenticate($options);
 			
 			if ($token->isValid()) {
-				$this->_redirect('items');
+				$this->_redirect('/');
 				return;
 			}
 			$this->render('users/login.php', array('errorMessage' => $token->getMessage()));

@@ -8,16 +8,21 @@
 
 	function ajaxify() {
 		div = $('add');
-		new Insertion.After(div, "<a href=\"#\" id=\"add_existing_metafield\">Add a pre-existing metafield</a>");
-		new Insertion.After(div, "<a href=\"#\" id=\"add_new_metafield\">Add a new metafield</a>");
+		new Insertion.After(div, "<a href=\"javascript:return false;\" id=\"add_existing_metafield\">Add a pre-existing metafield</a>");
+		new Insertion.After(div, "<a href=\"javascript:return false;\" id=\"add_new_metafield\">Add a new metafield</a>");
+		
+		//hide the non-javascript metafield form elements
+		$('new-metafields').descendants().each( function(element) {
+			element.setStyle({display:"none"});
+		});
 		
 		Event.observe("add_existing_metafield", "click", addExistingMetafield);
 		Event.observe("add_new_metafield", "click", addNewMetafield);
 	}
 	
 	function getLastId() {
-		input = $$("#metafields input").last();
-		select = $$("#metafields select").last();		
+		input = $$("#new-metafields input").last();
+		select = $$("#new-metafields select").last();		
 		selectId = parseInt(select.id.replace("metafield_", ""));
 		inputId = parseInt(input.id.replace("metafield_", ""));
 		if(selectId > inputId) {
@@ -44,7 +49,7 @@
 			select.options[i] = new Option(metafields[i].name, metafields[i].id);
 		}
 		
-		$('metafields').appendChild(select);
+		$('new-metafields').appendChild(select);
 	}
 	
 	function addNewMetafield() {
@@ -54,8 +59,8 @@
 		nameField.setAttribute("name", "Metafields["+id+"][name]");
 		descField = document.createElement("textarea");
 		descField.setAttribute("name", "Metafields["+id+"][description]");
-		$('metafields').appendChild(nameField);
-		$('metafields').appendChild(descField);
+		$('new-metafields').appendChild(nameField);
+		$('new-metafields').appendChild(descField);
 	}
 	
 	Event.observe(window, "load", ajaxify);
@@ -67,8 +72,9 @@
 <label for="description">Type Description</label>
 <textarea class="textinput" name="description"><?php echo $type->description; ?></textarea>
 
+<div id="old-metafields">
 <?php if($type->exists()): ?>
-Edit existing metafields
+<p>Edit existing metafields</p>
 <?php foreach( $type->Metafields as $key => $metafield ):
 /*	select(	array(	
 							'name'	=> "Metafields[$key][id]" ),
@@ -84,12 +90,12 @@ Edit existing metafields
 endforeach; ?>
 
 <?php endif; ?>
-
+</div>
 <div id="add">
 </div>
 
-<div id="metafields">
-	Add a metafield:
+<div id="new-metafields">
+	<p>Add a metafield:</p>
 	<?php if ( $metafields ): ?>
 		<?php $totalMetafields = count($type->Metafields);?>
 

@@ -8,8 +8,11 @@ require_once 'Metafield.php';
  * @package Omeka
  * 
  **/
-class TypesMetafields extends Kea_Record
+class TypesMetafields extends Kea_JoinRecord
 {
+	protected $error_messages = array(	'type_id' => array('notnull' => 'Metafield must be related to a type'),
+										'metafield_id' => array('notnull' => 'Type must be related to a metafield'));
+	
 	public function setUp() {
 		$this->hasOne("Type", "TypesMetafields.type_id");
 		$this->hasOne("Metafield", "TypesMetafields.metafield_id");
@@ -18,22 +21,6 @@ class TypesMetafields extends Kea_Record
 	public function setTableDefinition() {
 		$this->hasColumn("type_id", "integer", null, "notnull");
 		$this->hasColumn("metafield_id", "integer", null, "notnull");
-	}
-	
-	/**
-	 * Validate unique combinations of type_id and metafield_id (almost entirely duplicated from ItemsTags::validate)
-	 *
-	 * @return void
-	 **/
-	public function validate() {
-		$preExisting = $this->getTable()->findBySql("type_id = ? AND metafield_id = ? ", array($this->type_id, $this->metafield_id));
-		if($preExisting && $it = $preExisting->getFirst()) {
-			//Is there a better way to compare an object with its referent in the database?
-			if($it->obtainIdentifier() != $this->obtainIdentifier()) {
-				$this->getErrorStack()->add('type_id', 'duplicate');
-			}
-			
-		}
 	}
 } // END class TypesMetafields extends Kea_Record
 
