@@ -39,3 +39,9 @@ output.route = ":output/:controller/:action"
 output.defaults.controller = index
 output.defaults.action = index
 output.reqs.output = "(json|rest)"
+
+tagBrowse.route = "items/browse/tag/:tag"
+tagBrowse.defaults.controller = items
+tagBrowse.defaults.action = browse
+tagBrowse.defaults.tag = ""
+tagBrowse.reqs.output = "\w+"

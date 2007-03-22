@@ -345,4 +345,13 @@ function settings($name, $return=false) {
 	echo $title;
 }
 
+/**
+ * Display an alternative value if the given variable is empty
+ *
+ * @return void
+ **/
+function display_empty($val, $alternative="[Empty]") {
+	echo (!empty($val) ? $val : $alternative);
+}
+
 ?>

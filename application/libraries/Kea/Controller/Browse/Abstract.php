@@ -71,7 +71,7 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 	/**
 	 * @todo add plugin hooks to add sql to search
 	 * 
-	 * @todo if we need complicated search criteria (like boolean mode or query expansion, other search criteria nonsense, etc.) we may need to go about it in a roundabout fashion, i.e. make a custom query that returns only IDs, then using Doctrine to hydrate those ids
+	 * @todo if we need complicated search criteria (like boolean mode or query expansion, other search criteria nonsense) we may need to go about it in a roundabout fashion, i.e. make a custom query that returns only IDs, then using Doctrine to hydrate those IDs
 	 * @todo MySQL search may be able to switch out w/ Lucene if Lucene search can be convinced to return a query instead of a set of objects
 	 * @param Doctrine_RawSql
 	 * @return void

@@ -25,14 +25,13 @@ class ItemsController extends Kea_Controller_Action
 	public function browseAction()
 	{	
 		$query = $this->_browse;
-		
 		//replace with permissions check
 		if(!$this->getRequest()->getParam('admin')) {
 			$query->where('items.active = 1');
 		} 
 
 		//filter based on tags
-		if($tag = $this->getRequest()->getParam('tags')) {
+		if($tag = $this->_getParam('tag')) {
 			$query->join('items_tags ON items_tags.item_id = items.id JOIN tags ON tags.id = items_tags.tag_id');
 			$query->where('tags.name = :tagName');
 			$query->addParam('tagName', $tag);
@@ -104,9 +103,9 @@ class ItemsController extends Kea_Controller_Action
 	public function showAction() 
 	{
 		$item = $this->findById();
-		
+	
 		$user = Doctrine_Manager::getInstance()->getTable('User')->find(1);
-		
+
 		if($this->getRequest()->getParam('makeFavorite')) {
 			//@todo Replace with retrieval of actual user
 		

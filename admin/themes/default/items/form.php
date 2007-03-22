@@ -43,39 +43,26 @@
 		<label>Collection</label>
 			<?php select(	array(	
 						'name'	=> 'collection_id',
-						'id'	=> 'collection_id' ),
+						'id'	=> 'collection' ),
 						$collections,
 						$item->collection_id,
 						'id',
 						'name' ); ?>
 		
 		<h3>Type Info</h3>
-		<?php foreach( $types as $key => $type ): ?>
 			<?php select(	array(	
 						'name'	=> 'type_id',
-						'id'	=> 'type_id' ),
+						'id'	=> 'type' ),
 						$types,
 						$item->type_id,
 						'id',
 						'name' ); ?>
-		<?php endforeach; ?>
 		
 		
 		<input type="submit" name="change_type" value="Pick this type" />
 		<?php
-			foreach($item->Type->Metafields as $metafield):
+			metatext_form($item,'text');
 		?>
-
-		<label for="Name[<?php echo $key;?>][text]"> Metafield name:</label> 
-		<input type="text" class="textinput" value="Name[<?php echo $key;?>][text]" />
-		<label for="Description[<?php echo $key;?>][text]"> Metafield description:</label> 
-		<textarea name="Description[<?php echo $key;?>][text]"><?php echo $metafield->description; ?></textarea>
-		<label for="Metatext[<?php echo $key;?>][text]"> Metatext: <textarea class="textinput" name="Metatext[<?php echo $key;?>][text]"><?php echo $item->Metatext[$key]->text; ?>"/></textarea>
-		<input type="hidden" name="Metatext[<?php echo $key; ?>][metafield_id]" value="<?php echo $metafield->id; ?>"/>
-
-		<?php	
-			endforeach;
-		?>	
 		
 		<!-- MAX_FILE_SIZE must precede the file input field -->
 		<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
@@ -86,14 +73,4 @@
 			checkbox(array('name'=>'public', 'id'=>'public'), $item->public);
 
 		?></label>
-		<?php if(1==0):?>		
-				<h3>Plugin Info</h3>
-				<?php foreach($plugins as $plugin): ?>
-					<label><?php echo $plugin->name?> Plugin</label>
-					<?php foreach($plugin->Metafields as $metafield):?>
-							<h5><?php echo $metafield->name; ?></h5>
-							<h5><?php echo $metafield->description ?></h5>
-					<?php endforeach;?>
-				<?php endforeach;?>
-		<?php endif; ?>
-		</fieldset>
+	</fieldset>

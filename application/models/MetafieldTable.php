@@ -40,17 +40,14 @@ class MetafieldTable extends Doctrine_Table
 		$query = new Doctrine_Query();
 		$query->from('Metafield m');
 		
-		if($type) {
-			$query->innerJoin('m.TypesMetafields tm')->innerJoin('tm.Type t')->addWhere('t.id != :type_id');			
+		if($type->id) {
+			foreach( $type->TypesMetafields as $key => $tm )
+			{
+				$query->addWhere('m.id != '.$tm->metafield_id);
+			}
 		}
-		$query->where('m.plugin_id IS NULL');
-		
-/*		foreach( $type->Metafields as $key => $metafield )
-		{
-			$query->addWhere('m.id != '.$metafield->id);
-		}
-*/		
-		return $query->execute(array('type_id' => $type->id));
+		$query->addWhere('m.plugin_id IS NULL');
+		return $query->execute();
 	}
 } // END class MetafieldTable extends Doctrine_Table
 

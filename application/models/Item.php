@@ -161,11 +161,11 @@ class Item extends Kea_Record
 	///// END TAGGING METHODS /////
 	
 	public function isFavoriteOf($user) {
-		foreach( $this->ItemsFavorites as $key => $if )
-		{
-			if($if->User == $user) return true;
-		}
-		return false;
+		$q = new Doctrine_Query();
+		$q->from('ItemsFavorites if')
+					->where('if.user_id = :user_id AND if.item_id = :item_id');
+		$res = $q->execute(array('user_id' => $user->id, 'item_id' => $this->id));
+		return count($res) > 0;
 	}
 		
 } // END class Item extends Kea_Domain_Record

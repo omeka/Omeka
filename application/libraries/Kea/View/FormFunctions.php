@@ -113,4 +113,74 @@
 		$checkbox .= ' />' . "\n";
 		echo $checkbox;
 	}
+	
+	/**
+	 * Create the form for an item's metatext entries, just so the theme writer doesn't have to know the mechanics
+	 * Right now this is recursive to allow theme writer to use specific metafields
+	 * 
+	 * @todo Do we want this to take metafield names as arguments? Probably.
+	 *
+	 * @return void
+	 **/
+	function metatext_form($item, $type="textarea", $metafields=null, $usePlugins=false ) 
+	{
+		if($metafields) {
+			//Loop through the metafields
+			if($metafields instanceof Doctrine_Collection_Batch) {
+				foreach ($metafields as $key => $metafield) {
+					metatext_form($item, $type, $metafield, $usePlugins );
+				}
+			} else {
+				$metafield = $metafields;
+				$out = '';
+				$metafieldInputId = strtolower(str_replace(' ', '_', $metafield->name));
+				//Process a single metafield for this item
+				switch ($type) {
+					case 'text':
+						$input = '<input type="text" class="textinput" name="Metatext['.$metafield->id.'][text]" id="'.$metafieldInputId.'" value="'.$item->Metatext[$metafield->id]->text.'" />';
+						break;
+					case 'textarea':
+						$input = '<textarea class="textinput" name="Metatext['.$metafield->id.'][text] id="'.$metafieldInputId.'"">';
+						$input .= $item->Metatext[$metafield->id]->text;
+						$input .= '</textarea>';
+						break;
+				}
+				
+				$out .= '<label for="'.$metafieldInputId.'">'.$metafield->name;
+				$out .= $input;
+				$out .=	'</label>'."\n\t";
+				$out .= '<input type="hidden" name="Metatext['.$metafield->id.'][metafield_id]" value="'.$metafield->id.'"/>'."\n\n\t";
+				echo $out;
+			}
+		} else {
+			metatext_form($item, $type, $item->Type->Metafields, $usePlugins );
+			
+			if($usePlugins) {
+				$plugins = Doctrine_Manager::getInstance()->getTable('Plugin')->findActive();
+				foreach ($plugins as $key => $plugin) {
+					metatext_form($item, $type, $plugin->Metafields, $usePlugins);
+				}
+			}
+		}
+/*		
+		$out = '';
+		foreach($item->Type->Metafields as $key => $metafield) {
+			
+		}
+		
+		if($plugins) {
+			
+			foreach ($plugins as $key => $plugin) {
+				foreach ($plugin->Metafields as $key => $metafield) {
+					//Copied from above
+					$out .= '<label>'.$metafield->name.'<textarea class="textinput" name="Metatext['
+						.$metafield->id.'][text]">'.$item->Metatext[$metafield->id]->text
+						.'</textarea><input type="hidden" name="Metatext['.$metafield->id
+						.'][metafield_id]" value="'.$metafield->id.'"/>';
+				}
+			}
+		}
+		echo $out;
+*/
+	}
 ?>
