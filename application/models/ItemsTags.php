@@ -8,9 +8,9 @@ require_once 'Tag.php';
  * @package default
  * 
  **/
-class ItemsTags extends Kea_Record
+class ItemsTags extends Kea_JoinRecord
 {
-	protected $error_messages = array('item_id' => array('duplicate' => 'Tag has already been added to this item by this user.'));
+	protected $error_messages = array('duplicate' => array('unique' => 'Tag has already been added to this item by this user'));
 	
 	public function setUp() {
 		$this->hasOne("User", "ItemsTags.user_id");
@@ -23,19 +23,6 @@ class ItemsTags extends Kea_Record
 		$this->hasColumn("tag_id", "integer", null, "notnull");
 		$this->hasColumn("user_id", "integer");
 	}
-	
-	public function validate() {
-		$preExisting = $this->getTable()->findBySql("item_id = ? AND tag_id = ? AND user_id = ?", array($this->item_id, $this->tag_id, $this->user_id));
-		if($preExisting && $it = $preExisting->getFirst()) {
-			//Is there a better way to compare an object with its referent in the database?
-			if($it->obtainIdentifier() != $this->obtainIdentifier()) {
-				$this->getErrorStack()->add('item_id', 'duplicate');
-			}
-			
-		}
-	}
-
-	
 } // END class ItemsTag
 
 ?>
