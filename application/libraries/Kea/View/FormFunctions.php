@@ -1,16 +1,18 @@
 <?php
-	function text( array $params = array(), $desc = null )
+	function text( array $params = array(), $label = null )
 	{
-		$input = '<input type="text" ';
+		$input = '';
+		if($label) 
+		{
+			$input .= '<label'.( isset($params['id']) ? ' for="'.$params['id'].'"' : '' ).'>'.$label.'</label>';
+		}
+		
+		$input .= '<input type="text" ';
 		foreach( $params as $key => $val )
 		{
 			$input .= $key . '="' . allhtmlentities( $val ) . '" ';
 		}
 		$input .= '/>';
-		if( $desc )
-		{
-			$input .= allhtmlentities( $desc );
-		}
 		$input .= "\n";
 		echo $input;
 	}
