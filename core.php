@@ -127,7 +127,7 @@ foreach( $plugins as $plugin )
 	$front->registerPlugin($plugin);
 }
 
-$front->throwExceptions((boolean) $config->debug->exceptions);
+$front->throwExceptions((boolean) true);
 
 $front->addControllerDirectory(CONTROLLER_DIR);
 

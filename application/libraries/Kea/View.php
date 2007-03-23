@@ -13,6 +13,8 @@ class Kea_View extends Zend_View_Abstract
 	 */
 	protected $_controller;
 	
+	protected $_request;
+	
 	/**
 	 * Using the current admin system, an option
 	 * is set by the admin controller upon authentication
@@ -26,11 +28,15 @@ class Kea_View extends Zend_View_Abstract
 	 * 
 	 * @edited 2007-02-09
 	 */
-	public function __construct(Kea_Controller_Action $controller, $config = array())
+	public function __construct($controller, $config = array())
 	{
 		parent::__construct($config);
 		
 		$this->_controller = $controller;
+		
+		if(isset($config['request'])) {
+			$this->_request = $config['request'];
+		}
 		
 		/**
 		 * Set the theme path:
@@ -47,6 +53,10 @@ class Kea_View extends Zend_View_Abstract
 	 */
 	public function getRequest()
 	{
+		if(!empty($this->_request)) {
+			return $this->_request;
+		}
+		
 		return $this->_controller->getRequest();
 	}
 	

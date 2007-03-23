@@ -24,11 +24,7 @@ $request->setParam('admin', true);
 #############################################
 # DISPATCH THE REQUEST, AND DO SOMETHING WITH THE OUTPUT
 #############################################
-try{
-	$front->dispatch();
-}catch(Exception $e) {
-	include BASE_DIR.DIRECTORY_SEPARATOR.'404.php';
-}
+require_once '../dispatch.php';
 
 if ((boolean) $config->debug->timer) {
 	echo microtime(true) - APP_START;

@@ -9,11 +9,7 @@ define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
 
 require_once 'core.php';
 
-try{
-	$front->dispatch();
-}catch(Exception $e) {
-	include '404.php';
-}
+require_once 'dispatch.php';
 
 // Call the dispatcher which echos the response object automatically
 
