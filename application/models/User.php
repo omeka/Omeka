@@ -1,32 +1,41 @@
 <?php
 require_once 'Group.php' ;
+require_once 'UsersActivations.php';
 /**
  * @package Omeka
  **/
 
-/**
- * @todo onLoad should set the password field to empty
- */
 class UserListener extends Doctrine_EventListener
 {
 	/**
-	 * @todo Check if pass is empty, if so then retrieve old password hash from DB and store it, otherwise encrypt the new password
 	 *
 	 * @return void
 	 **/
 	public function onPreSave(Doctrine_Record $record)
 	{
-		$record->password = sha1($record->password);
+		$conn = Doctrine_Manager::getInstance()->connection();
+		
+		if($record->exists()) {
+			$sql = "SELECT password FROM users WHERE id = {$record->id}";
+			$oldPassword = $conn->fetchOne($sql);			
+			if($record->password !== $oldPassword) {
+				$record->password = sha1($record->password);
+			}
+		}else {
+			$record->password = sha1($record->password);
+		}
 	}
-	
-	public function onPreCreate(Doctrine_Record $record) {}
 }
 
 /**
  * @todo generate random password for new users (find code in old sitebuilder)
+ * @todo Email should validate to email
  */
 class User extends Kea_Record {
 
+	protected $error_messages = array(	'email' => array('email' => 'Email must be valid', 'unique' => 'That email address has already been claimed by a different user.'),
+										'username' => array('unique' => 'That username is already taken.', 'notblank' => 'You must provide a valid username.'));
+	
 	public function __construct($table = null, $isNewEntry = false)
 	{
 		parent::__construct($table, $isNewEntry);
@@ -42,14 +51,33 @@ class User extends Kea_Record {
 	
     public function setTableDefinition() {
 		$this->setTableName('users');
-        $this->hasColumn("username","string",30, "unique|notnull");
-        $this->hasColumn("password","string",40);
+        $this->hasColumn("username","string",30, "unique|notblank");
+        $this->hasColumn("password","string",40, "notblank");
         $this->hasColumn("first_name","string",200);
         $this->hasColumn("last_name","string",200);
-		$this->hasColumn("email", "string", 200);
+		$this->hasColumn("email", "string", 200, "email|unique");
         $this->hasColumn("institution","string",300);
         $this->hasColumn("active","boolean",1);
 		$this->hasColumn("group_id", "integer");
     }
+	
+	/* Generate password. (i.e. jachudru, cupheki) */
+	// http://www.zend.com/codex.php?id=215&single=1
+	public function generatePassword($length) 
+	{
+	    $vowels = array('a', 'e', 'i', 'o', 'u', '1', '2', '3', '4', '5', '6');
+	    $cons = array('b', 'c', 'd', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'u', 'v', 'w', 'tr',
+	    'cr', 'br', 'fr', 'th', 'dr', 'ch', 'ph', 'wr', 'st', 'sp', 'sw', 'pr', 'sl', 'cl');
+
+	    $num_vowels = count($vowels);
+	    $num_cons = count($cons);
+		
+		$password = '';
+	    while(strlen($password) < $length){
+	        $password .= $cons[mt_rand(0, $num_cons - 1)] . $vowels[mt_rand(0, $num_vowels - 1)];
+	    }
+		$this->password = $password;
+		return $password;
+	}		
 }
 ?>

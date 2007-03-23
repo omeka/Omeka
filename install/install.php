@@ -107,8 +107,10 @@ name     = ".$db['name']."
 		$site_title->value = $_REQUEST['site']['name'];
 		$site_title->save();
 		
+		
+		
 		// Fill in the other settings automanually (users can change these later if they want to)
-		$settings = array('copyright','meta_keywords', 'meta_author', 'meta_description');
+		$settings = array('copyright','meta_keywords', 'meta_author', 'meta_description', 'administrator_email');
 		foreach ($settings as $setting) {
 			$setting_option = new Option;
 			$setting_option->name = $setting;
