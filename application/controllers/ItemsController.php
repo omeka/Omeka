@@ -66,7 +66,7 @@ class ItemsController extends Kea_Controller_Action
 					}catch(Exception $e) {
 						echo $e->getMessage();
 						$file->delete();
-						break;
+						return false;
 					}
 				
 				}

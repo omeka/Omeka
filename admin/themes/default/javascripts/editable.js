@@ -46,7 +46,7 @@ EditableField.prototype = {
 		//Now add an 'Edit' link
 		
 		editLink = document.createElement("a");
-		editLink.setAttribute("href", "#");
+		editLink.setAttribute("href", "javascript:void(0)");
 		editLink.innerHTML = 'Edit';
 		this.div.appendChild(editLink);
 		Event.observe(editLink, "click", this.sendEdit.bindAsEventListener(this));

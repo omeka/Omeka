@@ -1,6 +1,7 @@
 <?php
 /**
  * This will help us index things with the Zend_Search
+ * @todo Must be able to index data types that aren't Items
  *
  * @todo optimization
  * @package Omeka
@@ -41,12 +42,31 @@ class Kea_SearchListener extends Doctrine_EventListener
 					}
 				}
 			}
-		
+			
 			//Make a SQL statement that inserts it all into the fake table
 			
 			//@todo make sure aggregate is escaped correctly
 			$sql = "INSERT INTO {$tableName}_fulltext (id, text) VALUES ({$record->id}, '$aggregate');";
 			Doctrine_Manager::connection()->execute($sql); 
+		} else {
+			echo $class;
+			if($record->hasRelation('Items')) {
+				$items = $record->Items; 
+			}elseif($record->hasRelation('Item')) {
+	//			$items = new Doctrine_Collection('Item');
+	//			$items->add($record->Item);
+				$items = $record->Item;
+			}
+			if(isset($items)) {
+				if($items instanceof Doctrine_Collection_Batch) {
+					foreach ($items as $key => $item) {
+						$this->onUpdate($item);
+					}					
+				}else {
+					$this->onUpdate($items);
+				}
+
+			}
 		}
 
 	}

@@ -8,13 +8,14 @@ require_once 'ItemsTags.php';
 require_once 'Metatext.php';
 require_once 'ItemMetatext.php';
 require_once 'ItemsFavorites.php';
+
 /**
  * @package Omeka
  * 
  * @todo Create/modify the ItemTable::findAll() method (or all find methods) to check for ACL privileges and only return the Items that are public
  **/
 class Item extends Kea_Record
-{	
+{		
 	protected $error_messages = array(	'title' => array('notblank' => 'Item must be given a title.'));
 	
 	public function setUp() {
@@ -25,6 +26,7 @@ class Item extends Kea_Record
 		$this->ownsMany("ItemMetatext as Metatext", "ItemMetatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
+		parent::setUp();
 	}
 	
 	public function setTableDefinition() {

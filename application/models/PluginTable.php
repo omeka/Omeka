@@ -25,6 +25,9 @@ class PluginTable extends Doctrine_Table
 	}
 
 	public function installNew() {
+		//Installation will need to create new tables
+		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_CREATE_TABLES, true);
+		
 		$plugins = $this->findAll();
 		$pluginDirs = new DirectoryIterator(PLUGIN_DIR);
 		$newPlugins = array();

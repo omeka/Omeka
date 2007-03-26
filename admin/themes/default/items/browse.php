@@ -20,7 +20,7 @@
 <?php foreach($items as $key => $item): ?>
 <div class="item hentry">
 	<h3><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink">Item <?php echo $item->id;?>: <span class="entry-title"><?php echo $item->title; ?></span></a></h3>
-	<p><?php echo $item->description; ?></p>
+	<p><?php echo $item->description; ?></p>		
 	
 	<div class="tagcloud">Tags: 
 	<?php if(count($item->Tags)): ?>

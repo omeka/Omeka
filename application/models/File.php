@@ -1,12 +1,28 @@
 <?php
 
+if ( ! function_exists ( 'mime_content_type ' ) )
+{
+   function mime_content_type ( $f )
+   {
+       return trim ( exec ('file -bi ' . escapeshellarg ( $f ) ) ) ;
+   }
+}
+
+
 define('ARCHIVE_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'archive');
 define('THUMBNAIL_DIR', ARCHIVE_DIR.DIRECTORY_SEPARATOR.'thumbnails');
 define('FULLSIZE_DIR', ARCHIVE_DIR.DIRECTORY_SEPARATOR.'fullsize');
 define('FILES_DIR', ARCHIVE_DIR.DIRECTORY_SEPARATOR.'files');
+
+/**
+ * @todo Image sizes and binary paths should be stored as settings to change under the settings tab
+ *
+ * @return void
+ **/
+
 define('FULLSIZE_IMAGE_WIDTH', 600);
 define('THUMBNAIL_IMAGE_WIDTH', 150);
-define( 'PATH_TO_CONVERT', '/usr/bin/convert' );
+define( 'PATH_TO_CONVERT', '/opt/local/bin/convert' );
 
 require_once 'Item.php';
 
@@ -38,6 +54,7 @@ class File extends Kea_Record {
 		$this->hasColumn("date","date");
 		$this->hasColumn("added","timestamp");
 		$this->hasColumn("modified","timestamp");
+		$this->hasColumn("format", "string");
 		$this->hasColumn("item_id","integer");	 
 		$this->hasColumn("transcriber","string",null);
 		$this->hasColumn("producer","string",null);

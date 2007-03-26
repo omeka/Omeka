@@ -8,7 +8,8 @@ require_once 'UsersActivations.php';
 class UserListener extends Doctrine_EventListener
 {
 	/**
-	 *
+	 * @todo should check for $record->getModified() instead of making another SQL query
+	 * 
 	 * @return void
 	 **/
 	public function onPreSave(Doctrine_Record $record)

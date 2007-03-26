@@ -12,6 +12,8 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
 	
 	private static $_instance;
 	
+	private $_binded = array();
+	
 	/**
      * Singleton instance
      * 
@@ -44,6 +46,19 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
 		{
 			$plugin->footer();
 		}
+	}
+	
+	public function addBound($class, $bound) {
+		$this->_binded[$class][] = $bound;
+	}
+	
+	public function getBound($class) {
+		if(array_key_exists($class, $this->_binded)) {
+			return $this->_binded[$class];
+		} else {
+			return array();
+		}
+		
 	}
 	
 	/**

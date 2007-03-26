@@ -155,7 +155,9 @@
 				echo $out;
 			}
 		} else {
-			metatext_form($item, $type, $item->Type->Metafields, $usePlugins );
+			if($item->Type->exists()) {
+				metatext_form($item, $type, $item->Type->Metafields, $usePlugins );
+			}
 			
 			if($usePlugins) {
 				$plugins = Doctrine_Manager::getInstance()->getTable('Plugin')->findActive();

@@ -90,6 +90,7 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 		}
 		
 		$query->addComponent($tableName, $this->_class);
+		
 		return $query;
 	}
 	

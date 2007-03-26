@@ -5,7 +5,11 @@
  * @package Omeka
  **/
 class Collection extends Kea_Record { 
-    public function setTableDefinition() {
+    public function setUp() {
+		$this->hasMany('Item as Items', 'Item.collection_id');
+	}
+	
+	public function setTableDefinition() {
 		$this->setTableName('collections');
         $this->hasColumn("name","string",255, "unique|notnull");
         $this->hasColumn("description","string", null);

@@ -146,6 +146,15 @@
 	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
 </div>
 
+<?php if ( $item->Collection->exists() ): ?>
+	<h2>Collection</h2>
+
+	<div id="collection">
+		<?php echo $item->Collection->name; ?>
+	</div>
+<?php endif; ?>
+
+
 <h2>Type Metadata</h2>
 
 <h4>Type Name</h4>
@@ -178,14 +187,11 @@
 	<input type="submit" name="submit" value="submit" id="tags-submit">
 </form>
 
-<div style="display:none;">
-	<?php
-		select(	array(	
-			'name'	=> 'type_id',
-			'id'	=> 'type_edit' ),
-			all_types(),
-			$item->type_id,
-			'id',
-			'name' ); ?>
+<h2>Files</h2>
+<div id="files">
+	<?php foreach( $item->Files as $key => $file ): ?>
+		<?php  echo $file->archive_filename; ?>
+	<?php endforeach; ?>
 </div>
+
 <?php foot();?>

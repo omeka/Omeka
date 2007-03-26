@@ -12,6 +12,7 @@ class Type extends Kea_Record {
 		//This should be 'ownsMany' to set up the foreign key cascade delete, but it won't work with many-to-many aggregates (Doctrine_Exception)
 		$this->hasMany("Metafield as Metafields", "TypesMetafields.metafield_id");
 		$this->ownsMany("TypesMetafields", "TypesMetafields.type_id");
+		$this->hasMany("Item as Items", "Item.type_id");
 	}
 
 	public function setTableDefinition() {

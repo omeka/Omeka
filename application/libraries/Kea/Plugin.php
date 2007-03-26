@@ -53,7 +53,24 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		
 		// This seems like a bad idea but it makes it easier to integrate plugins and their helpers
 		Zend::register(get_class($this), $this);
+		
+		$this->bindModelRelations();
+		
+		$this->init();
 	}
+	
+	public function bindModelRelations()
+	{
+		$relationsFile = $this->dir.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'relations.ini';
+		if(file_exists($relationsFile)) {
+			$relations = new Zend_Config_Ini($relationsFile);
+			foreach ($relations->relations as $key => $entry) {
+				Kea_Controller_Plugin_Broker::getInstance()->addBound($entry->Class, array($entry->Type, $entry->Component, $entry->Link));
+			}
+		}
+	}
+	
+	public function init() {}
 	
 	///// INSTALLATION/ACTIVATION /////
 	
@@ -101,7 +118,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 			}
 
 			$this->record->save();	
-			$this->customizeInstall();
+			$this->customInstall();
 		}else {
 			throw new Exception(get_class($this).' plugin has already been installed.');
 		}
@@ -113,7 +130,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * @return void
 	 * 
 	 **/
-	public function customizeInstall() {}
+	public function customInstall() {}
 	
 	public function activate() {
 		$this->record->active = 1;
@@ -274,19 +291,35 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	///// END ZEND CONTROLLER HOOKS /////
 	
 	///// DOCTRINE LISTENERS /////
+	
+	protected function dispatchListener($type, $record)
+	{
+		$method = $type.get_class($record);
+		if(method_exists($this, $method)) {
+			call_user_func_array(array($this, $method), array($record));
+		}
+	}
 		
-	public function onLoad(Doctrine_Record $record) {}
-    public function onPreLoad(Doctrine_Record $record) {}
+	public function onLoad(Doctrine_Record $record) {
+		$this->dispatchListener('onLoad', $record);
+	}
+    public function onPreLoad(Doctrine_Record $record) {
+		$this->dispatchListener('onPreLoad', $record);
+	}
     public function onUpdate(Doctrine_Record $record) {}
     public function onPreUpdate(Doctrine_Record $record) {}
 
     public function onCreate(Doctrine_Record $record) {}
     public function onPreCreate(Doctrine_Record $record) {}
  
-    public function onSave(Doctrine_Record $record) {}
+    public function onSave(Doctrine_Record $record) {
+		$this->dispatchListener('onSave', $record);
+	}
     public function onPreSave(Doctrine_Record $record) {}
  
-    public function onInsert(Doctrine_Record $record) {}
+    public function onInsert(Doctrine_Record $record) {
+		$this->dispatchListener('onInsert', $record);
+	}
     public function onPreInsert(Doctrine_Record $record) {}
  
     public function onDelete(Doctrine_Record $record) {}

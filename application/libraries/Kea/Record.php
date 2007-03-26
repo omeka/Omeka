@@ -8,7 +8,7 @@
  * 
  **/
 abstract class Kea_Record extends Doctrine_Record
-{	
+{		
 	/**
 	 * Ex.
 	 * $error_messages['title']['unique'] = "Title must be unique.  That title has already been used."
@@ -16,6 +16,17 @@ abstract class Kea_Record extends Doctrine_Record
 	 * @var array
 	 **/
 	protected $error_messages = array();
+	
+	public function setUp() 
+	{
+		$bound = Kea_Controller_Plugin_Broker::getInstance()->getBound(get_class($this));
+		foreach ($bound as $key => $bind) {
+			$method = $bind[0];
+			$component = $bind[1];
+			$relation = $bind[2];
+			$this->$method($component, $relation);
+		}
+	}
 	
 	/**
 	 * Retrieve the error message associated with a specific field if it exists, or retrieve all errors as a string
