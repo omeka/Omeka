@@ -49,7 +49,6 @@ class Kea_SearchListener extends Doctrine_EventListener
 			$sql = "INSERT INTO {$tableName}_fulltext (id, text) VALUES ({$record->id}, '$aggregate');";
 			Doctrine_Manager::connection()->execute($sql); 
 		} else {
-			echo $class;
 			if($record->hasRelation('Items')) {
 				$items = $record->Items; 
 			}elseif($record->hasRelation('Item')) {

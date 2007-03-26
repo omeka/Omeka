@@ -27,7 +27,7 @@ class ItemsController extends Kea_Controller_Action
 		$query = $this->_browse;
 		//replace with permissions check
 		if(!$this->getRequest()->getParam('admin')) {
-			$query->where('items.active = 1');
+			$query->where('items.public = 1');
 		} 
 
 		//filter based on tags
