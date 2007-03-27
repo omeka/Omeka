@@ -78,7 +78,7 @@ class ThemesController extends Kea_Controller_Action
 		$themes = array();
 		if(!$dir) {
 			// Iterate over the directory to get the file structure
-			$themes_dir = new DirectoryIterator(THEME_DIR);
+			$themes_dir = new DirectoryIterator(PUBLIC_THEME_DIR);
 			foreach($themes_dir as $dir) {
 				$fname = $dir->getFilename();
 				if (!$dir->isDot() and $fname[0] != '.' and $dir->isReadable()) {
@@ -94,7 +94,7 @@ class ThemesController extends Kea_Controller_Action
 			
 			$theme = new Theme();
 			// Define a hard theme path for the theme
-			$theme->path = THEME_DIR.DIRECTORY_SEPARATOR.$dir;
+			$theme->path = PUBLIC_THEME_DIR.DIRECTORY_SEPARATOR.$dir;
 			$theme->directory = $dir;
 			// Test to see if an image is available to present the user
 			// when switching themes
@@ -120,34 +120,24 @@ class ThemesController extends Kea_Controller_Action
 		return $themes;
 	}
 	
-	/**
-	 * @todo This will have to work for both public and admin themes
-	 *
-	 * @return void
-	 **/
-	public function switchAction()
-	{
+	public function browseAction()
+	{		
 		$themes = $this->getAvailable();
+		
+		$public = Doctrine_Manager::getInstance()->getTable('Option')->findByName('public_theme');
 		
 		if(!empty($_POST)) {
-			
+			$public->value = $_POST['public_theme'];
+			$public->save();
 		}
-		
-		$this->render('themes/switch.php', compact('themes'));
-	}
-	
-	public function browseAction()
-	{
-		$themes = $this->getAvailable();
-		
-		$current_admin = Doctrine_Manager::getInstance()->getTable('Option')->findByName('admin_theme')->value;
-		$current_admin = $this->getAvailable($current_admin);
+
+		$current = $this->getAvailable($public->value);
 		
 		// Create a view class
 		require_once 'Kea/View.php';
 		$view = new Kea_View($this, array('request', $this->getRequest()));
 
-		$this->render('themes/browse.php', compact('current_admin', 'themes'));
+		$this->render('themes/browse.php', compact('current', 'themes'));
 	}
 
     public function noRouteAction()

@@ -5,7 +5,7 @@ define('APP_START', microtime(true));
 // include the paths and define a theme path
 include '../paths.php';
 define('THEME_DIR', ADMIN_DIR.DIRECTORY_SEPARATOR.'themes');
-
+define('PUBLIC_THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
 require_once '../core.php';
 
 #############################################
