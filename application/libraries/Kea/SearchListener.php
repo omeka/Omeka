@@ -46,7 +46,7 @@ class Kea_SearchListener extends Doctrine_EventListener
 			//Make a SQL statement that inserts it all into the fake table
 			
 			//@todo make sure aggregate is escaped correctly
-			$sql = "INSERT INTO {$tableName}_fulltext (id, text) VALUES ({$record->id}, '$aggregate');";
+			$sql = "INSERT INTO {$tableName}_fulltext (id, text) VALUES ({$record->id}, '".mysql_real_escape_string($aggregate)."');";
 			Doctrine_Manager::connection()->execute($sql); 
 		} else {
 			if($record->hasRelation('Items')) {
