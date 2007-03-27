@@ -1,25 +1,9 @@
 <?php
 /**
- * Dummy model to simulate the other ActiveRecord models
- *
- * @package Omeka
- **/	
-class Theme 
-{
-	public $path;
-	public $directory;
-	public $image;
-	public $author;
-	public $title;
-	public $description;
-	public $license;
-	public $website;
-}
-
-/**
  * @package Omeka
  **/
 require_once 'Kea/Controller/Action.php';
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Theme.php';
 class ThemesController extends Kea_Controller_Action
 {
 	/**
@@ -81,7 +65,7 @@ class ThemesController extends Kea_Controller_Action
 			$themes_dir = new DirectoryIterator(PUBLIC_THEME_DIR);
 			foreach($themes_dir as $dir) {
 				$fname = $dir->getFilename();
-				if (!$dir->isDot() and $fname[0] != '.' and $dir->isReadable()) {
+				if (!$dir->isDot() and $fname[0] != '.' and $dir->isReadable() and $dir->isDir()) {
 					$theme = $this->getAvailable($fname);
 				
 					// Finally set the array to the global array
