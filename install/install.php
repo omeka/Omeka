@@ -130,7 +130,9 @@ name     = ".$db['name']."
 		$admin->save();
 		$theme->save();
 		
-		//@todo Make an Ini with a list of the default types and metafields, load that sumbitch into the db
+		// Need to install miscellaneous stuff, straight up SQL is the quickest way
+		$installSQL = file_get_contents('install.sql');
+		Doctrine_Manager::getInstance()->connection()->execute($installSQL);
 		
 		echo 'hooray! the db is setup and you are ready to roll.  <a href="'.$_REQUEST['site']['uri'].'">check out your site here!</a>';
 		$display_form = false;

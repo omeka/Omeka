@@ -29,5 +29,10 @@ require_once '../dispatch.php';
 if ((boolean) $config->debug->timer) {
 	echo microtime(true) - APP_START;
 }
+
+if(isset($config->log->sql) && $config->log->sql) {
+	$logger->logQueryTotal();
+}
+
 // We're done here.
 ?>

@@ -28,3 +28,8 @@ debug.exceptions = true
 ; problem for ajax, but if you want to debug and have the json printed
 ; to the screen set this to 'true'
 debug.json = true
+
+
+log.sql = false
+
+log.errors = true

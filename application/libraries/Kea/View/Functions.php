@@ -334,6 +334,25 @@ function recent_tags($num = 30) {
 }
 
 /**
+ * @todo Make this a lot more complicated/flexible
+ *
+ * @return void
+ **/
+function get_tags() 
+{
+	$args = func_get_args();
+	$table = Doctrine_Manager::getInstance()->getTable('Tag');
+	if(count($args)) {
+		if($args[0] instanceof Kea_Record) {
+			return $args[0]->Tags;
+		}
+	} else {
+		//Retrieve all the tags
+		return $table->findAll();
+	}
+}
+
+/**
  * We could just use a global array that contains these site settings rather than having a separate query for each one
  *
  * @return void

@@ -4,6 +4,7 @@ require_once 'Doctrine.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
 require_once 'Zend.php';
 
+
 /**
  * Check for a config file which, if not present implies that the
  * app has not been installed.
@@ -31,6 +32,22 @@ $manager->setAttribute(Doctrine::ATTR_VLD, true);
 $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 
 
+$config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
+Zend::register('config_ini', $config);
+
+if(isset($config->log)) {
+	require_once LIB_DIR.DIRECTORY_SEPARATOR.'Kea'.DIRECTORY_SEPARATOR.'Logger.php';
+	$logger = new Kea_Logger;
+	$logger->setErrorLog(LOGS_DIR.DIRECTORY_SEPARATOR.'errors.log');
+	$logger->setSqlLog(LOGS_DIR.DIRECTORY_SEPARATOR.'sql.log');
+	if(isset($config->log->sql)) {
+		$logger->activateSqlLogging($config->log->sql);	
+	}
+	if(isset($config->log->errors)) {
+		$logger->activateErrorLogging($config->log->errors);
+	}
+}
+
 
 // tack on the search capabilities
 require_once 'Kea'.DIRECTORY_SEPARATOR.'SearchListener.php';
@@ -38,6 +55,7 @@ require_once 'Kea'.DIRECTORY_SEPARATOR.'TimestampListener.php';
 $chainListeners = new Doctrine_EventListener_Chain();
 $chainListeners->add(new Kea_TimestampListener());
 $chainListeners->add(new Kea_SearchListener());
+
 $manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
 
 
@@ -52,8 +70,6 @@ spl_autoload_register(array('Kea', 'autoload'));
 Zend::register('doctrine', $manager);
 
 Zend::register('routes_ini', new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini'));
-$config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
-Zend::register('config_ini', $config);
 
 // Require the front controller and router
 require_once 'Zend/Controller/Front.php';

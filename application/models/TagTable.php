@@ -32,7 +32,10 @@ class TagTable extends Doctrine_Table
 	 **/
 	public function getSome($limit = 100, $alpha = true, $recent = false, $count = false, $item = null, $user = null )
 	{
-		$query = $this->createQuery()->select('t.*, COUNT(t.id) tagCount')->from('Tag t')->limit($limit);
+		$query = $this->createQuery()->select('t.*, COUNT(t.id) tagCount')->from('Tag t');
+		if($limit) {
+			$query->limit($limit);
+		}
 		$query->innerJoin('t.ItemsTags it');
 		if($item) {
 			$query->innerJoin('it.Item i');
@@ -63,7 +66,7 @@ class TagTable extends Doctrine_Table
 	 **/
 	public function findAll($alpha = false, $count = false, $item = null, $user = null)
 	{
-		return $this->getSome($this->count(), $alpha, false, $count, $item, $user);
+		return $this->getSome(null, $alpha, false, $count, $item, $user);
 	}
 	
 	/**

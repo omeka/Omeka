@@ -9,6 +9,7 @@ $site['config']			= 'config';
 $site['admin']			= 'admin';
 $site['shared']			= 'shared';
 $site['plugins']		= 'plugins';
+$site['logs']			= 'logs';
 
 // Define some constants based on those settings
 define('BASE_DIR', 			dirname(__FILE__));
@@ -20,6 +21,7 @@ define('CONFIG_DIR',		APP_DIR.DIRECTORY_SEPARATOR.$site['config']);
 define('PLUGIN_DIR',		BASE_DIR.DIRECTORY_SEPARATOR.$site['plugins']);
 define('SHARED_DIR', 		BASE_DIR.DIRECTORY_SEPARATOR.$site['shared']);
 define('ADMIN_DIR', 		BASE_DIR.DIRECTORY_SEPARATOR.$site['admin']);
+define('LOGS_DIR',			APP_DIR.DIRECTORY_SEPARATOR.$site['logs']);
 // Abs theme dir is set in the appropriate index.php file
 
 // Define Web routes

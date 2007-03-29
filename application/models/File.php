@@ -79,7 +79,27 @@ class File extends Kea_Record {
 		$this->hasColumn("mime_os","string",400);
 		$this->hasColumn("type_os","string",400);
     }
-
+	
+	/**
+	 * Retrieve the path for the image
+	 *
+	 * @return string
+	 **/
+	public function getPath($type='fullsize')
+	{
+		switch ($type) {
+			case 'fullsize':
+				return FULLSIZE_DIR.DIRECTORY_SEPARATOR.$this->fullsize_filename;
+				break;
+			case 'thumbnail':
+				return THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$this->thumbnail_filename;
+			case 'archive':
+			default:
+				return FILES_DIR.DIRECTORY_SEPARATOR.$this->archive_filename;
+				break;
+		}
+	}
+	
 	/**
 	 * Stole this jazz from the old File model
 	 *

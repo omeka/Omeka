@@ -34,7 +34,7 @@ class Item extends Kea_Record
 		
 		$this->setTableName('items');
 		
-		$this->hasColumn("title","string",300, "notblank");
+		$this->hasColumn("title","string",255, "notblank|unique");
 		$this->hasColumn("publisher","string",300);
 		$this->hasColumn("language","string",null);
 		$this->hasColumn("relation","string",null);
@@ -55,7 +55,24 @@ class Item extends Kea_Record
 		$this->hasColumn("featured", "boolean");
 		$this->hasColumn("public", "boolean");
 	}
-	
+
+
+/* @todo Uncomment this and finish optimizing the queries	
+	public function get($name) {
+		switch ($name) {
+			case 'Tags':
+				//make an optimized DQL query
+				$tags = Doctrine_Manager::getInstance()->getTable('Tag')->getSome(null,null,null,null,$this);
+				//Do I need to set some sort of relation marker or something to make sure that this tag collection saves when the item saves?
+				return $tags;
+				break;
+			
+			default:
+				return parent::get($name);
+				break;
+		}
+	}
+*/	
 	///// METADATA METHODS /////
 	
 	public function metadata( $name, $return_text = true ) {		

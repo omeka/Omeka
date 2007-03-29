@@ -18,6 +18,7 @@ abstract class Kea_JoinRecord extends Kea_Record
 		$columns = $this->getKeyColumns();
 		$where = array();
 		foreach ($columns as $column) {
+			if(!is_int($this->$column)) return true;
 			$where[$column]= "$column = {$this->$column} ";
 		}
 		$result = $this->getTable()->findBySql( implode(' AND ', $where) )->getFirst();

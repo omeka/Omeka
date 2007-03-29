@@ -10,6 +10,7 @@ class Tag extends Kea_Record {
     	
 	public function setUp() {
 		$this->hasMany("Item as Items", "ItemsTags.item_id");
+		$this->hasMany("User as Users", "ItemsTags.user_id");
 	}
 	
 	public function setTableDefinition() {

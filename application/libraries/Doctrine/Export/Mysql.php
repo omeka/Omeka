@@ -547,10 +547,5 @@ class Doctrine_Export_Mysql extends Doctrine_Export
         $table  = $this->conn->quoteIdentifier($table, true);
         $this->conn->exec('DROP TABLE ' . $table);
     }
-
-	public function getUniqueFieldDeclaration()
-    {
-        return '';
-    }
 }
 

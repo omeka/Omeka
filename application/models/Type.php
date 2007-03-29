@@ -17,7 +17,7 @@ class Type extends Kea_Record {
 
 	public function setTableDefinition() {
    		$this->setTableName('types');
-		$this->hasColumn("name","string", 200, 'notblank|unique');
+		$this->hasColumn("name","string", 255, 'notblank|unique');
 		$this->hasColumn("description","string", null);
  	}
 

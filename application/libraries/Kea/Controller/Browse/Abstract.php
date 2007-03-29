@@ -27,6 +27,7 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 		$this->_tableName = $tableName;
 		$sql = "SELECT {{$tableName}.*} FROM $tableName ";
 		$this->_query->parseQuery($sql);	
+		$this->_query->addComponent($tableName, $this->_class);
 	}
 	
 	public function getQuery() {
@@ -89,7 +90,7 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 			$query->addParam('search', $terms);			
 		}
 		
-		$query->addComponent($tableName, $this->_class);
+
 		
 		return $query;
 	}
