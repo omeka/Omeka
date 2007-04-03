@@ -28,16 +28,13 @@ class Kea_SearchListener extends Doctrine_EventListener
 				$match = $ini->fields->$relation->match;
 				$fields = explode('|', $match);
 				foreach ($fields as $field) {
-					$plural = $relation.'s';
 					if($relation == $class) {
 						$aggregate .= ' '.$record->$field;
-					} elseif($record->hasRelation($plural)) {
-						//In this case it must be a plural relation
-						
-						foreach ($record->$plural as $key => $relatedRecord) {
-							$aggregate .= ' '.$relatedRecord->$field;
+					} elseif($record->$relation instanceof Doctrine_Collection) {
+						foreach ($record->$relation as $rel) {
+							$aggregate .= ' '.$rel->$field;
 						}
-					}elseif($record->hasRelation($relation)) {
+					} elseif($record->hasRelation($relation)) {
 						$aggregate .= ' '.$record->$relation->$field;
 					}
 				}
@@ -46,7 +43,7 @@ class Kea_SearchListener extends Doctrine_EventListener
 			//Make a SQL statement that inserts it all into the fake table
 			
 			//@todo make sure aggregate is escaped correctly
-			$sql = "INSERT INTO {$tableName}_fulltext (id, text) VALUES ({$record->id}, '".mysql_real_escape_string($aggregate)."');";
+			$sql = "INSERT INTO {$tableName}_fulltext (item_id, text) VALUES ({$record->id}, '".mysql_real_escape_string($aggregate)."');";
 			Doctrine_Manager::connection()->execute($sql); 
 		} else {
 			if($record->hasRelation('Items')) {
@@ -67,14 +64,20 @@ class Kea_SearchListener extends Doctrine_EventListener
 
 			}
 		}
-
 	}
 	public function onPreDelete(Doctrine_Record $record) {
 		$class = get_class($record);
 		if($class == 'Item') {
-			$tableName = Doctrine_Manager::getInstance()->getTable($class)->getTableName();
-			$sql = "DELETE FROM {$tableName}_fulltext WHERE id = {$record->id}";
+			$sql = "DELETE FROM items_fulltext WHERE item_id = {$record->id}";
 			Doctrine_Manager::connection()->execute($sql); 
+		}else {
+			if($record->hasRelation('Items')) {
+				foreach ($record->Items as $key => $item) {
+					$this->onUpdate($item);
+				}
+			}elseif($record->hasRelation('Item')) {
+				$this->onUpdate($record->Item);
+			}
 		}
 	}
 	

@@ -36,17 +36,15 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		$query = $this->buildQuery();
 
 		$countQuery = clone $query;
-		$countQuery->select("SELECT COUNT(*) AS count");
-		$res = $countQuery->execute(array(), Doctrine::FETCH_ARRAY);
-		$total = count($res);
+		$total = $countQuery->count();
 
 		settype($per_page, 'int');
 		$query->limit($per_page);
 		
 		settype($offset, 'int');
 		$query->offset($offset);
-		
-		
+
+//		echo $query;
 		$$pluralVar = $query->execute();
 		
 		//Figure out the pagination 

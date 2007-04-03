@@ -25,18 +25,21 @@ class ItemsController extends Kea_Controller_Action
 	public function browseAction()
 	{	
 		$query = $this->_browse;
+		$query->leftJoin('Item.Tags t');
+		
+				
 		//replace with permissions check
 		if(!$this->getRequest()->getParam('admin')) {
-			$query->where('items.public = 1');
+//			$query->where('items.public = 1');
 		} 
-
+		
 		//filter based on tags
-		if($tag = $this->_getParam('tag')) {
-			$query->join('items_tags ON items_tags.item_id = items.id JOIN tags ON tags.id = items_tags.tag_id');
-			$query->where('tags.name = :tagName');
+		if( ($tag = $this->_getParam('tag')) || ($tag = $this->_getParam('tags')) ) {
+			
+			$query->addWhere('t.name = :tagName');
 			$query->addParam('tagName', $tag);
 		}
-		
+
 		$this->_browse->browse();
 	}
 	
@@ -50,6 +53,12 @@ class ItemsController extends Kea_Controller_Action
 	{
 		if(!empty($_POST))
 		{
+			
+			if(!empty($_POST['tags'])) {
+				// @todo Replace with retrieval of actual logged in user
+				$user = Doctrine_Manager::getInstance()->getTable('User')->find(1);
+				$item->addTagString($_POST['tags'], $user);
+			}
 			
 			$item->setFromForm($_POST);
 					
@@ -121,7 +130,7 @@ class ItemsController extends Kea_Controller_Action
 				$if->save();
 			}
 		}
-		if(!empty($_POST['tags'])) $this->addTags($item, $user);
+		$this->commitForm($item);
 		
 		$item->refresh();
 		

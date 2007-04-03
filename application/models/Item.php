@@ -8,7 +8,7 @@ require_once 'ItemsTags.php';
 require_once 'Metatext.php';
 require_once 'ItemMetatext.php';
 require_once 'ItemsFavorites.php';
-
+require_once 'ItemsFulltext.php';
 /**
  * @package Omeka
  * 
@@ -26,6 +26,7 @@ class Item extends Kea_Record
 		$this->ownsMany("ItemMetatext as Metatext", "ItemMetatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
+		$this->ownsOne("ItemsFulltext", "ItemsFulltext.item_id");
 		parent::setUp();
 	}
 	
@@ -76,7 +77,6 @@ class Item extends Kea_Record
 	///// METADATA METHODS /////
 	
 	public function metadata( $name, $return_text = true ) {		
-		$meta = new Doctrine_Collection('Metatext');
 		foreach( $this->Metatext as $key => $record )
 		{
 			//metadata is either all plugin data, all type data, or a single field name
@@ -84,20 +84,8 @@ class Item extends Kea_Record
 				if($return_text) return $record->text;
 				return $record;
 			}
-/*			if( $name != 'plugin') {
-				if($this->Type->hasMetafield($record->Metafield->name)) {
-					$meta->add($record);
-				}
-			}elseif( $name != 'type') {
-				if( $record->Metafield->Plugin->exists() && $record->Metafield->Plugin->active ) {
-					$meta->add($record);
-				}
-			}
-*/
 		}
-		if(count($meta))
-			return $meta;
-		else return null;
+		return null;
 	}
 	
 	/**
@@ -126,7 +114,7 @@ class Item extends Kea_Record
 		
 		return $string;
 	}
-	
+		
 	/**
 	 * What should this function return? (if anything)
 	 *
@@ -152,29 +140,27 @@ class Item extends Kea_Record
 	 *
 	 * @return boolean
 	 **/
-	public function hasTag($tag) {
-		foreach( $this->Tags as $key => $oldTag )
+	public function hasTag($tag, $user=null) {
+		$q = Doctrine_Manager::getInstance()->getTable('ItemsTags')->createQuery();
+		$tagName = ($tag instanceof Tag) ? $tag->name : $tag;
+		$q->innerJoin('ItemsTags.Tag t')->where('t.name = ?', array($tagName));
+		if($user instanceof User)
 		{
-			if($tag instanceof Tag) {
-				if($tag->name == $oldTag->name) {
-					return true;
-				}
-			} else {
-				if($tag == $oldTag->name) {
-					return true;
-				}
-			}
+			if(!$user->exists()) return false;
+			$q->addWhere('ItemsTags.user_id = ?', array($user->id));
 		}
-		return false;
+		$res = $q->execute();
+		return (count($res) > 0);
 	}
 	
 	public function userTags($user) {
+		if(!$user->exists()) throw new Exception( 'Cannot retrieve tags for user that does not exist' );
 		$query = new Doctrine_Query();
-		return $query->from('Tag t')
+		$query->from('Tag t')
 				->innerJoin('t.ItemsTags it')
 				->innerJoin('it.Item i')
-				->where("i.id = {$this->id} AND it.user_id = {$user->id}")
-				->execute();
+				->where("i.id = :item_id AND it.user_id = :user_id");
+		return $query->execute(array('item_id'=>$this->id,'user_id'=>$user->id));
 	}
 	
 	///// END TAGGING METHODS /////

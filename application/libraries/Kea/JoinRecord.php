@@ -18,10 +18,17 @@ abstract class Kea_JoinRecord extends Kea_Record
 		$columns = $this->getKeyColumns();
 		$where = array();
 		foreach ($columns as $column) {
-			if(!is_int($this->$column)) return true;
-			$where[$column]= "$column = {$this->$column} ";
+			if($this->$column instanceof Kea_Record) {
+				//If the related element doesn't exist yet, there's no way that this current one isn't unique
+				if(!$this->$column->exists()) $this->$column->save();
+				$idNum = $this->$column->id;
+			}else {
+				$idNum = $this->$column;
+			}
+			$where[$column]= "$column = {$idNum} ";
 		}
-		$result = $this->getTable()->findBySql( implode(' AND ', $where) )->getFirst();
+		$where = implode(' AND ', $where);
+		$result = $this->getTable()->findBySql( $where )->getFirst();
 		return (!$result || ($result->obtainIdentifier() == $this->obtainIdentifier()));
 	}
 	

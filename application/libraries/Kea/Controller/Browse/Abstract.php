@@ -13,7 +13,7 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 			
 	protected $_query;
 		
-	protected $_tableName;
+	protected $_table;
 	
 	protected $_isModified = false;
 	
@@ -22,12 +22,8 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 		$this->_class = $class;
 		$this->_controller = $controller;
 		$this->_options = array_merge($this->_options, $options);
-		$this->_query = new Doctrine_RawSql();
-		$tableName = Doctrine_Manager::getInstance()->getTable($this->_class)->getTableName();
-		$this->_tableName = $tableName;
-		$sql = "SELECT {{$tableName}.*} FROM $tableName ";
-		$this->_query->parseQuery($sql);	
-		$this->_query->addComponent($tableName, $this->_class);
+		$this->_table = $table = Doctrine_Manager::getInstance()->getTable($this->_class);
+		$this->_query = $table->createQuery();
 	}
 	
 	public function getQuery() {
@@ -72,9 +68,8 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 	/**
 	 * @todo add plugin hooks to add sql to search
 	 * 
-	 * @todo if we need complicated search criteria (like boolean mode or query expansion, other search criteria nonsense) we may need to go about it in a roundabout fashion, i.e. make a custom query that returns only IDs, then using Doctrine to hydrate those IDs
 	 * @todo MySQL search may be able to switch out w/ Lucene if Lucene search can be convinced to return a query instead of a set of objects
-	 * @param Doctrine_RawSql
+	 * @param Doctrine_Query
 	 * @return void
 	 **/	
 	public function buildQuery($query=null) {		
@@ -85,9 +80,12 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 		
 		//Here is the search business
 		if($terms = $_REQUEST['search']) {
-			$query->join("{$tableName}_fulltext ON {$tableName}_fulltext.id = {$tableName}.id");
-			$query->where("MATCH({$tableName}_fulltext.text) AGAINST(:search)");
-			$query->addParam('search', $terms);			
+			$fulltextClass = $this->_class.'sFulltext';
+			if($this->_table->hasRelation($fulltextClass)) {
+				$query->innerJoin($this->_class.'.'.$fulltextClass.' full');
+				$query->addWhere("MATCH (full.text) AGAINST (:search)", array('search'=>$terms));
+			}
+		
 		}
 		
 
