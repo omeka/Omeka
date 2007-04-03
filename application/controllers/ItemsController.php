@@ -25,13 +25,37 @@ class ItemsController extends Kea_Controller_Action
 	public function browseAction()
 	{	
 		$query = $this->_browse;
+		$query->select('i.*, t.*')->from('Item i');
 		$query->leftJoin('Item.Tags t');
-		
+		$query->leftJoin('Item.Collection c');
+		$query->leftJoin('i.Type ty');
 				
 		//replace with permissions check
 		if(!$this->getRequest()->getParam('admin')) {
 //			$query->where('items.public = 1');
 		} 
+		
+		//filter based on featured
+		if($featured = $this->_getParam('featured')) {
+			$query->addWhere('i.featured = '.($featured == 'true' ? '1':'0'));
+		}
+		
+		//filter based on collection
+		if($collection = $this->_getParam('collection')) {
+			if(is_numeric($collection)) {
+				$query->addWhere('c.id = :collection', array('collection'=> $collection));
+			}else {
+				$query->addWhere('c.name = :collection', array('collection'=>$collection));
+			}
+		}
+		
+		if($type = $this->_getParam('type')) {
+			if(is_numeric($type)) {
+				$query->addWhere('ty.id = :type', compact('type'));
+			}else {
+				$query->addWhere('ty.name = :type', compact('type'));
+			}
+		}
 		
 		//filter based on tags
 		if( ($tag = $this->_getParam('tag')) || ($tag = $this->_getParam('tags')) ) {

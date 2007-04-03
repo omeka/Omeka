@@ -45,3 +45,13 @@ tagBrowse.defaults.controller = items
 tagBrowse.defaults.action = browse
 tagBrowse.defaults.tag = ""
 tagBrowse.reqs.output = "\w+"
+
+collectionBrowse.route = "items/browse/collection/:collection"
+collectionBrowse.defaults.controller = items
+collectionBrowse.defaults.action = browse
+collectionBrowse.defaults.collection = ""
+
+typeBrowse.route = "items/browse/type/:type"
+typeBrowse.defaults.controller = items
+typeBrowse.defaults.action = browse
+typeBrowse.defaults.type = ""
