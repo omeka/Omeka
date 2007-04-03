@@ -2,7 +2,6 @@
 
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 /**
- * @todo customize the Search query to include featured/not featured, plus whatever else we can think of
  * @package Omeka
  **/
 require_once 'Kea/Controller/Action.php';
