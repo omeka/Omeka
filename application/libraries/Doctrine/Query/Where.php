@@ -55,6 +55,10 @@ class Doctrine_Query_Where extends Doctrine_Query_Condition
             }
         }
 
+		if(substr($e[0],0,5) == "MATCH") {
+			return $this->parseMatch($where);
+		}
+		
         if (count($e) < 3) {
             $e = Doctrine_Query::sqlExplode($where, array('=', '<', '>', '!='));
         }
@@ -121,6 +125,7 @@ class Doctrine_Query_Where extends Doctrine_Query_Condition
             } else {
                 $table     = $this->query->load($reference, false);
                 $alias     = $this->query->getTableAlias($reference);
+
                 $table     = $this->query->getTable($alias);
                 
                 $field     = $table->getColumnName($field);
@@ -236,4 +241,28 @@ class Doctrine_Query_Where extends Doctrine_Query_Condition
     {
         return ( ! empty($this->parts))?implode(' AND ', $this->parts):'';
     }
+	
+	/**
+	 * @todo this doesn't parse spaces correctly.  fix that shit
+	 *
+	 * @return void
+	 **/
+	public function parseMatch($where) {
+		$e     = Doctrine_Query::sqlExplode($where);
+		$fieldString = Doctrine_Query::bracketTrim($e[1]);
+		$fields = explode(',', $fieldString);
+		
+		foreach ($fields as $key => $field) {
+			list($reference, $fieldName) = explode('.', $field);
+			
+            $alias     = $this->query->getTableAlias($reference);
+            $table     = $this->query->getTable($alias);
+			$fieldName     = $table->getColumnName($fieldName);
+			$fields[$key] =  implode('.', array($alias, $fieldName));
+		}
+		$e[1] = '('.implode(',',$fields).')';
+		
+		$where = implode(' ', $e);
+		return $where;
+	}
 }

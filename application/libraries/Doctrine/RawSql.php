@@ -180,7 +180,6 @@ class Doctrine_RawSql extends Doctrine_Hydrate
 
         $q .= ( ! empty($this->parts['from']))?    ' FROM '     . implode(' ', $this->parts['from']) : '';
 		$q .= ( ! empty($this->parts['join']))?    ' JOIN '     . implode(' JOIN ', $this->parts['join']) : '';
-		$q .= ( ! empty($this->parts['left join']))?    ' LEFT JOIN '     . implode(' LEFT JOIN ', $this->parts['join']) : '';
         $q .= ( ! empty($this->parts['where']))?   ' WHERE '    . implode(' AND ', $this->parts['where']) : '';
         $q .= ( ! empty($this->parts['groupby']))? ' GROUP BY ' . implode(', ', $this->parts['groupby']) : '';
         $q .= ( ! empty($this->parts['having']))?  ' HAVING '   . implode(' ', $this->parts['having']) : '';
