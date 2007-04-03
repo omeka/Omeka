@@ -14,7 +14,8 @@
 				// If the length is the same then adding the tag didn't work
 				if(oldTags.length != item.MyTags.length) {
 					newMyTagLi = document.createElement("li");
-					newMyTagLi.innerHTML = "<a href=\"#\">"+item.MyTags.last()+"</a>";
+					tag = item.MyTags.last();
+					newMyTagLi.innerHTML = "<a href=\"<?php echo uri('items/browse/tag/')?>"+tag+"\">"+tag+"</a>";
 					newMyTagLi.setAttribute('class', 'my-tag');
 
 					newTagLi = document.createElement("li");

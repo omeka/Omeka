@@ -8,12 +8,6 @@ if ( ! function_exists ( 'mime_content_type' ) )
    }
 }
 
-
-define('ARCHIVE_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'archive');
-define('THUMBNAIL_DIR', ARCHIVE_DIR.DIRECTORY_SEPARATOR.'thumbnails');
-define('FULLSIZE_DIR', ARCHIVE_DIR.DIRECTORY_SEPARATOR.'fullsize');
-define('FILES_DIR', ARCHIVE_DIR.DIRECTORY_SEPARATOR.'files');
-
 /**
  * @todo Image sizes and binary paths should be stored as settings to change under the settings tab
  *

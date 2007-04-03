@@ -12,33 +12,31 @@ class FilesController extends Kea_Controller_Action
 		$this->_table = Doctrine_Manager::getInstance()->getTable('File');		
 	}
 	
-	/**
-	 * This will probably relocate to the commitForm method of ItemsController, seeing as files cannot exist without items
-	 *
-	 * @return void
-	 **/
-	public function addAction() 
-	{
-		if(!empty($_POST)) {
-			
-			foreach( $_FILES['itemfile']['error'] as $key => $error )
-			{
-				try{
-					$file = new File();
-					$file->upload('itemfile', $key);
-					$file->save();	
-				} catch(Exception $e) {
-					$file->delete();
-					var_dump( $e );exit;
-				}
-			}
-		}
-		$this->render('files/add.php');
-	}
-	
 	public function indexAction() { $this->_redirect('items/browse/'); }
 	
 	// Should not browse files by themselves
 	public function browseAction() { $this->indexAction(); }
+	
+	public function addAction() {$this->indexAction();}
+	
+	protected function commitForm($file) {
+		$immutable = array(
+			'id', 
+			'modified', 
+			'added', 
+			'authentication', 
+			'thumbnail_filename', 
+			'archive_filename', 
+			'fullsize_filename', 
+			'original_filename', 
+			'mime_browser', 
+			'mime_php', 
+			'mime_os', 
+			'type_os');
+		foreach ($immutable as $value) {
+			unset($_POST[$value]);
+		}
+		return parent::commitForm($file);
+	}
 }
 ?>
