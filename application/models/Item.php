@@ -55,6 +55,12 @@ class Item extends Kea_Record
 		$this->hasColumn("user_id","integer");
 		$this->hasColumn("featured", "boolean", null,array('default'=>0));
 		$this->hasColumn("public", "boolean", null,array('default'=>0));
+		
+		$this->index('featured', array('fields' => array('featured')));
+		$this->index('public', array('fields' => array('public')));
+		$this->index('type', array('fields' => array('type_id')));
+		$this->index('coll', array('fields' => array('collection_id')));
+		$this->index('user', array('fields' => array('user_id')));
 	}
 
 

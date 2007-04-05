@@ -16,8 +16,9 @@ class Metatext extends Kea_Record {
 		$this->hasColumn("item_id","integer");
 		$this->hasColumn("metafield_id","integer");
 		$this->hasColumn("text","string", null);
+		$this->index('item', array('fields' => array('item_id')));
  	}
-
+	
 	public function __toString() {
 		return $this->text;
 	}

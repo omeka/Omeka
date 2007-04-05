@@ -4,7 +4,6 @@ require_once 'Metafield.php';
 /**
  * TypesMetafields join record
  *
- * @todo Add validation so that each combination is unique
  * @package Omeka
  * 
  **/
@@ -21,6 +20,8 @@ class TypesMetafields extends Kea_JoinRecord
 	public function setTableDefinition() {
 		$this->hasColumn("type_id", "integer", null, "notnull");
 		$this->hasColumn("metafield_id", "integer", null, "notnull");
+		$this->index('type', array('fields' => array('type_id')));
+		$this->index('metafield', array('fields' => array('metafield_id')));
 	}
 } // END class TypesMetafields extends Kea_Record
 

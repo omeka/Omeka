@@ -20,6 +20,8 @@ class Group extends Kea_Record {
 		$this->hasOne("Group as Groups", "Group.group_id");
 		$this->hasMany("Permission as Permissions", "GroupsPermissions.permission_id");
 		$this->ownsMany("User as Users", "User.group_id");
+		
+		$this->index('group', array('fields' => array('group_id')));
     }
 }
 ?>

@@ -16,6 +16,9 @@ class ItemsFavorites extends Kea_JoinRecord
 		$this->hasColumn("item_id", "integer", null, "notnull");
 		$this->hasColumn("user_id", "integer", null, "notnull");
 		$this->hasColumn("added", "timestamp");
+		
+		$this->index('item', array('fields' => array('item_id')));
+		$this->index('user', array('fields' => array('user_id')));
 	}
 	
 	public function validate() {

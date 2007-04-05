@@ -30,7 +30,7 @@ $manager->setAttribute(Doctrine::ATTR_VLD, true);
 //$manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, false);
 
 $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
-
+$manager->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 
 $config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
 Zend::register('config_ini', $config);
@@ -121,7 +121,6 @@ $front->setRouter($router);
 // Adds the static routes that we all about and shit (rhyme unintentional, please kill me)
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Route.php';
 $staticRoutes = $manager->getTable('Route')->findStatic();
-Zend::Register('static_routes', $staticRoutes);
 foreach ($staticRoutes as $route) {
 	$router->addRoute($route['name'], new Zend_Controller_Router_StaticRoute($route['route'], array('controller'=>'static', 'action'=>'findStatic', 'route'=>$route)));
 }

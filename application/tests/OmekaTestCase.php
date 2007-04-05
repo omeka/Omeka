@@ -19,8 +19,36 @@ abstract class OmekaTestCase extends UnitTestCase
     }
 	public function wipeDb() {
 		$conn = $this->manager->connection();
-		$sql = file_get_contents('fresh_db.sql');
-		$conn->execute($sql);		
+		$conn->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
+		$models  = array('Collection',
+					'Exhibit',
+					'File',
+					'Group',
+					'GroupsPermissions',
+					'Item',
+					'ItemsExhibits',
+					'ItemsFavorites',
+					'ItemsFulltext',
+					'ItemsTags',
+					'Metafield',
+					'Metatext',
+					'Option',
+					'Permission',
+					'Plugin',
+					'Route',
+					'Tag',
+					'Type',
+					'TypesMetafields',
+					'User',
+					'UsersActivations');
+		
+		foreach ($models as $model) {
+			require_once MODEL_DIR.DIRECTORY_SEPARATOR.$model.'.php';
+			$tableName = $this->manager->getTable($model)->getTableName();
+			$sql = "DROP TABLE IF EXISTS `$tableName`;";
+			$conn->execute($sql);
+			$this->manager->getTable($model)->export();
+		}		
 	}
 	public function init() {}
 } // END abstract class OmekaTestCase extends UnitTestCase 

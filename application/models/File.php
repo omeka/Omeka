@@ -72,6 +72,8 @@ class File extends Kea_Record {
 		$this->hasColumn("mime_php","string",400);
 		$this->hasColumn("mime_os","string",400);
 		$this->hasColumn("type_os","string",400);
+		
+		$this->index('item', array('fields' => array('item_id')));
     }
 	
 	/**

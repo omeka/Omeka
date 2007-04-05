@@ -61,6 +61,8 @@ class User extends Kea_Record {
         $this->hasColumn("institution","string",300);
         $this->hasColumn("active","boolean",1);
 		$this->hasColumn("group_id", "integer");
+		$this->index('active', array('fields' => array('active')));
+		$this->index('group', array('fields' => array('group_id')));
     }
 	
 	/* Generate password. (i.e. jachudru, cupheki) */

@@ -14,10 +14,12 @@ class ItemsFulltext extends Kea_Record
                                                    'unsigned' => true));
 		$this->hasColumn("item_id", "integer", null, array('unique' => true));
         $this->hasColumn('text', 'clob', null, array('notnull' => true));
-		$this->index('myindex', array(
+		$this->index('text', array(
                           'fields' => 'text',
                           'type' => 'fulltext',
                           ));
+
+		$this->index('item', array('fields' => array('item_id')));			
     }
     public function setUp()
     {

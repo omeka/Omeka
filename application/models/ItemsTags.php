@@ -22,6 +22,8 @@ class ItemsTags extends Kea_JoinRecord
 		$this->hasColumn("item_id", "integer", null, "notnull");
 		$this->hasColumn("tag_id", "integer", null, "notnull");
 		$this->hasColumn("user_id", "integer", null, "notnull");
+		
+		$this->index('itemtaguser', array('fields' => array('item_id', 'tag_id','user_id')));
 	}
 } // END class ItemsTag
 
