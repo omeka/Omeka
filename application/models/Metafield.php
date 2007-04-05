@@ -28,6 +28,7 @@ class Metafield extends Kea_Record {
 		$this->hasColumn("name", "string", 255, "unique|notblank");
 		$this->hasColumn("description","string", null);
 		$this->hasColumn("plugin_id", "integer");
+		$this->index('plugin', array('fields'=>array('plugin_id')));
  	}
 }
 

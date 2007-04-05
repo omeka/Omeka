@@ -19,7 +19,8 @@ class Plugin extends Doctrine_Record
 		$this->hasColumn("description", "string");
 		$this->hasColumn("author", "string");
 		$this->hasColumn("config", "array");
-		$this->hasColumn("active", "boolean");
+		$this->hasColumn("active", "boolean",null,array('default'=>0));
+		$this->index('active', array('fields'=>array('active')));
 	}
 } // END class Location extends Kea_Record
 
