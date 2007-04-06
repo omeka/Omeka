@@ -352,6 +352,20 @@ function get_tags()
 	}
 }
 
+//@todo Abstract to all the get functions
+function get_items(array $params = array())
+{
+	$req = new Zend_Controller_Request_Http();
+	$req->setParams($params);
+	$req->setParam('return', 'items');
+	$resp = new Zend_Controller_Response_Cli();
+	require_once CONTROLLER_DIR.DIRECTORY_SEPARATOR.'ItemsController.php';
+	$controller = new ItemsController($req,$resp);
+	$items = $controller->browseAction();
+	return $items;
+}
+
+
 /**
  * We could just use a global array that contains these site settings rather than having a separate query for each one
  *

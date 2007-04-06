@@ -1,10 +1,17 @@
 <?php
+	function label($text, $id = null, $return = false) 
+	{
+		$label = '<label'.(!$id ? '' : ' for="'.$id.'"').'>'.$text.'</label>';
+		if($return) return $label;
+		else echo $label;
+	}
+	
 	function text( array $params = array(), $label = null )
 	{
 		$input = '';
 		if($label) 
 		{
-			$input .= '<label'.( isset($params['id']) ? ' for="'.$params['id'].'"' : '' ).'>'.$label.'</label>';
+			label($label, @$params['id']);
 		}
 		
 		$input .= '<input type="text" ';
@@ -18,10 +25,10 @@
 	}
 	
 
-	function select( array $props = null, $val_array = null, $saved = null, $value = null, $desc = null )
+	function select( array $params = array(), $val_array = null, $saved = null, $value = null, $desc = null )
 	{
 		$select = '<select ';
-		foreach( $props as $k => $v )
+		foreach( $params as $k => $v )
 		{
 			$select .= $k . '="' . allhtmlentities( $v ) . '" ';
 		}
@@ -61,8 +68,9 @@
 		echo $select;
 	}
 	
-	function textarea( array $params = array(), $text = null )
+	function textarea( array $params = array(), $text = null, $label = null )
 	{
+		if($label) label($label,@$params['id']);
 		$ta = '<textarea ';
 		foreach( $params as $key => $val ) {
 			$ta .= ' ' . $key . '="' . $val . '"';
@@ -104,15 +112,16 @@
 		echo $input;
 	}
 	
-	function checkbox( array $props, $checked = FALSE )
+	function checkbox( array $params, $checked = FALSE, $label = null )
 	{
 		$checkbox = '<input type="checkbox" ';
-		foreach( $props as $prop => $value )
+		foreach( $params as $param => $value )
 		{
-			$checkbox .= $prop . '="'. $value. '" ';
+			$checkbox .= $param . '="'. $value. '" ';
 		}
 		if( $checked ) $checkbox .= 'checked="checked" ';
 		$checkbox .= ' />' . "\n";
+		if($label) label($label,@$params['id']);
 		echo $checkbox;
 	}
 	

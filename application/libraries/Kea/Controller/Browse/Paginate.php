@@ -8,7 +8,7 @@ require_once 'Kea/Controller/Browse/Interface.php';
  **/
 class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 {	
-	protected $_options = array('num_links' => 5, 'per_page' => 10);
+	protected $_options = array('num_links' => 5, 'limit' => 10);
 		
 	public function browse()
 	{
@@ -16,14 +16,11 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		if(empty($pluralVar)) $pluralVar = $this->formatPluralized();
 		
 		//per_page is either a $_POST var, db option, passed via constructor or default to 10 (in that order)
-		if(!empty($_REQUEST['per_page'])) $per_page = $_REQUEST['per_page'];
-		elseif(1==0) {/*DB lookup here*/}
-		else $per_page = $this->getOption('per_page');
 		
-		$req = $this->_controller->getRequest();
-		
+		$per_page = $this->getOption('limit');
+				
 		//page 
-		$page = $req->getParam('page');
+		$page = $this->getOption('page');
 		if(!$page) $page = 1;
 		
 		$offset = ($page - 1) * $per_page;
@@ -37,7 +34,7 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 
 		$countQuery = clone $query;
 		$total = $countQuery->count();
-
+		
 		settype($per_page, 'int');
 		$query->limit($per_page);
 		
@@ -53,11 +50,12 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		$num_links = $this->getOption('num_links');
 		
 		//Url is most likely going to be the current one, we can make this dynamic too if needed
+		$req = $this->getRequest();
 		$url = $req->getBaseUrl().DIRECTORY_SEPARATOR.$pluralVar.DIRECTORY_SEPARATOR.'browse'.DIRECTORY_SEPARATOR;
 		
 		$pagination = $this->pagination($page, $per_page, $total, $num_links, $url);
 				
-		$this->_controller->render($pluralVar."/browse.php", compact("total", "offset", $pluralVar, "per_page", "page", "pagination"));
+		return $this->_controller->render($pluralVar."/browse.php", compact("total", "offset", $pluralVar, "per_page", "page", "pagination"));
 	}
 	
 	/**

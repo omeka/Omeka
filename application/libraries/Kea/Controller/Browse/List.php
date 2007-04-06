@@ -21,7 +21,7 @@ class Kea_Controller_Browse_List extends Kea_Controller_Browse_Abstract
 			$$pluralName = $this->buildQuery()->execute();
 		}
 		
-		$this->_controller->render($viewPage, compact($pluralName));
+		return $this->_controller->render($viewPage, compact($pluralName));
 	}
 }
 ?>

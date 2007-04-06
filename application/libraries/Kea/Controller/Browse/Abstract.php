@@ -21,9 +21,14 @@ abstract class Kea_Controller_Browse_Abstract implements Kea_Controller_Browse_I
 	{
 		$this->_class = $class;
 		$this->_controller = $controller;
-		$this->_options = array_merge($this->_options, $options);
+		$this->_options = array_merge($this->_options, $this->getRequest()->getParams());
 		$this->_table = $table = Doctrine_Manager::getInstance()->getTable($this->_class);
 		$this->_query = $table->createQuery();
+	}
+	
+	public function getRequest()
+	{
+		return $this->_controller->getRequest();
 	}
 	
 	public function getQuery() {

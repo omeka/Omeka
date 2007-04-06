@@ -217,7 +217,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		if(empty($this->_browse)) $this->_browse = new Kea_Controller_Browse_List($this->_modelClass, $this);
 		
-		$this->_browse->browse();
+		return $this->_browse->browse();
 	}
 	
 	public function showAction()
@@ -234,7 +234,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 			echo $e->getMessage();exit;
 		}
 		
-		$this->render($viewPage, compact($varName));
+		return $this->render($viewPage, compact($varName));
 	}
 	
 	public function addAction()
@@ -326,11 +326,22 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 *
 	 * @param string The page, including .php extension
 	 * @param array The variables to be included on that page, where key = name and value = contents.  see compact()
-	 * @return void
+	 * @return mixed|void
 	 * 
 	 **/
 	public function render($page, array $vars = array())
 	{
+		if($return = $this->_getParam('return')){
+			if(is_array($return)) {
+				$returnThese = array();
+				foreach ($return as $r) {
+					$returnThese[$r] = $vars[$r];
+				}
+				return $returnThese;
+			} else {
+				return $vars[$return];
+			}
+		} 
 		$this->_view->assign($vars);
 		$this->getResponse()->appendBody($this->_view->render($page));
 	}
