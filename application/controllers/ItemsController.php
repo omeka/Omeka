@@ -48,6 +48,7 @@ class ItemsController extends Kea_Controller_Action
 			}
 		}
 		
+		//filter based on type
 		if($type = $this->_getParam('type')) {
 			if(is_numeric($type)) {
 				$query->addWhere('ty.id = :type', compact('type'));
@@ -59,11 +60,44 @@ class ItemsController extends Kea_Controller_Action
 		//filter based on tags
 		if( ($tag = $this->_getParam('tag')) || ($tag = $this->_getParam('tags')) ) {
 			
-			$query->addWhere('t.name = :tagName');
-			$query->addParam('tagName', $tag);
+			if(!is_array($tag) )
+			{
+				$tag = explode(',', $tag);
+			}
+			foreach ($tag as $key => $t) {
+				$key = 'tag'.$key;
+				$query->addWhere("t.name = :$key", array($key=>$t));
+			}			
 		}
+		
+		//exclude Items with given tags
+		if(($excludeTags = $this->_getParam('withoutTags'))) {
+				//we are looking for Items that are tagged but not with a specific one(s)
+				if(!is_array($excludeTags))
+				{
+					$excludeTags = explode(',', $excludeTags);
+				}
+				$where = array();
+				foreach ($excludeTags as $key => $tag) {
+					$key = 'noTag'.$key;
+					$where[$key] = "t.name LIKE :$key";
+					$params[$key] = $tag;
+				}	
+				$query->addWhere(
+					"i.id NOT IN (SELECT i.id FROM Item i INNER JOIN i.ItemsTags it".
+					" INNER JOIN it.Tag t WHERE ".join(' OR ',$where).")", $params );
+		}
+		
+//		echo $query->getQuery();
 
-		$this->_browse->browse();
+		if(($from_record = $this->_getParam('relatedTo')) && @$from_record->exists()) {
+			$componentName = $from_record->getTable()->getComponentName();
+			$alias = $this->_table->getAlias($componentName);
+			$query->innerJoin("Item.$alias rec");
+			$query->addWhere('rec.id = ?', array($from_record->id));
+		}
+	
+		return $this->_browse->browse();
 	}
 	
 	/**
