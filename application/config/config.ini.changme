@@ -32,4 +32,4 @@ debug.json = true
 
 log.sql = false
 
-log.errors = true
+log.errors = false

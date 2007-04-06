@@ -178,6 +178,14 @@ class Item extends Kea_Record
 		$res = $q->execute(array('user_id' => $user->id, 'item_id' => $this->id));
 		return count($res) > 0;
 	}
+	
+   public function getRandomFileWithImage()
+   {
+           $q = new Doctrine_Query;
+           $q->parseQuery("SELECT f.*, RANDOM() rand FROM File f WHERE f.item_id = ? AND f.thumbnail_filename IS NOT NULL AND f.thumbnail_filename != '' ORDER BY rand");
+           return $q->execute(array($this->id))->getFirst();
+   }
+
 		
 } // END class Item extends Kea_Domain_Record
 

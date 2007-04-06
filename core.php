@@ -38,13 +38,14 @@ Zend::register('config_ini', $config);
 if(isset($config->log)) {
 	require_once LIB_DIR.DIRECTORY_SEPARATOR.'Kea'.DIRECTORY_SEPARATOR.'Logger.php';
 	$logger = new Kea_Logger;
-	$logger->setErrorLog(LOGS_DIR.DIRECTORY_SEPARATOR.'errors.log');
-	$logger->setSqlLog(LOGS_DIR.DIRECTORY_SEPARATOR.'sql.log');
-	if(isset($config->log->sql)) {
-		$logger->activateSqlLogging($config->log->sql);	
+
+	if(isset($config->log->sql) && $config->log->sql) {
+		$logger->setSqlLog(LOGS_DIR.DIRECTORY_SEPARATOR.'sql.log');
+		$logger->activateSqlLogging(true);	
 	}
-	if(isset($config->log->errors)) {
-		$logger->activateErrorLogging($config->log->errors);
+	if(isset($config->log->errors) && $config->log->errors) {
+		$logger->setErrorLog(LOGS_DIR.DIRECTORY_SEPARATOR.'errors.log');
+		$logger->activateErrorLogging(true);
 	}
 }
 

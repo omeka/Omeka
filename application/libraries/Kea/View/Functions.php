@@ -372,4 +372,61 @@ function display_empty($val, $alternative="[Empty]") {
 	echo (!empty($val) ? $val : $alternative);
 }
 
+
+function thumbnail($record, $props=array(), $width=null, $height=null) 
+{
+       return archive_image($record, 'thumbnail_filename', $props, $width, $height, THUMBNAIL_DIR, WEB_THUMBNAILS);
+}
+
+function fullsize($record, $props=array(), $width=null, $height=null)
+{
+       return archive_image($record, 'fullsize_filename', $props, $width, $height, FULLSIZE_DIR, WEB_FULLSIZE);
+}
+
+function archive_image( $record, $field , $props, $width, $height, $abs, $web) 
+{
+       if($record instanceof File) {
+               $file = $record->$field;
+       }elseif($record instanceof Item) {
+               $file = $record->getRandomFileWithImage();
+               if(!$file) return false;
+               $file = $file->$field;
+       }
+
+       $path =  $web . DIRECTORY_SEPARATOR . $file;
+       $abs_path =  $abs . DIRECTORY_SEPARATOR . $file;
+       if( file_exists( $abs_path ) ) {
+               $html = '<img src="' . $path . '" ';
+               foreach( $props as $k => $v ) {
+                       $html .= $k . '="' . $v . '" ';
+               }
+               list($o_width, $o_height) = getimagesize( $abs_path );
+               if(!$width && !$height) 
+               {
+                       $html .= 'width="' . $o_width . '" height="' . $o_height . '"';
+               }
+               if( $o_width > $width && !$height )
+               {
+                       $ratio = $width / $o_width;
+                       $height = $o_height * $ratio;
+                       $html .= 'width="' . $width . '" height="' . $height . '"';
+               }
+               elseif( !$width && $o_height > $height)
+               {
+                       $ratio = $height / $o_height;
+                       $width = $o_width * $ratio;
+                       $html .= 'width="' . $width . '" height="' . $height . '"';
+               }
+               elseif ( $width && $height )
+               {
+                       $html .= 'width="' . $width . '" height="' . $height . '"';
+               }
+               $html .= '/>' . "\n";
+               echo $html;
+       } else {
+               echo '<img src="' . $path . '" alt="Image missing." />' . "\n";
+       }
+}
+
+
 ?>
