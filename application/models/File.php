@@ -8,16 +8,6 @@ if ( ! function_exists ( 'mime_content_type' ) )
    }
 }
 
-/**
- * @todo Image sizes and binary paths should be stored as settings to change under the settings tab
- *
- * @return void
- **/
-
-define('FULLSIZE_IMAGE_WIDTH', 600);
-define('THUMBNAIL_IMAGE_WIDTH', 150);
-define( 'PATH_TO_CONVERT', '/opt/local/bin/convert' );
-
 require_once 'Item.php';
 
 /**
@@ -126,9 +116,16 @@ class File extends Kea_Record {
 
 				$this->original_filename = $name;
 				$this->archive_filename = $new_name_string;
-				$this->fullsize_filename = $this->createImage(FULLSIZE_DIR, $path, null, FULLSIZE_IMAGE_WIDTH );
 				
-				$this->thumbnail_filename = $this->createImage(THUMBNAIL_DIR, $path, null, THUMBNAIL_IMAGE_WIDTH );
+				//Retrieve the image sizes from the database
+				$full_width = get_option('fullsize_width');
+				$full_height = get_option('fullsize_height');
+				$thumb_width = get_option('thumbnail_width');
+				$thumb_height = get_option('thumbnail_height');
+				
+				$this->fullsize_filename = $this->createImage(FULLSIZE_DIR, $path, null, $full_width, $full_height );
+				
+				$this->thumbnail_filename = $this->createImage(THUMBNAIL_DIR, $path, null, $thumb_width, $thumb_height );
 				
 		} else {
 			// Ignore error '4' - no file uploaded and error '0' - file uploaded correctly
@@ -169,7 +166,9 @@ class File extends Kea_Record {
 	 * 
 	 **/
 	protected function createImage( $new_dir, $old_path, $percent = null, $new_width = null, $new_height = null, $output = 3, $no_enlarge = true ) {
-		if(!$this->checkForImageMagick()) {
+		$convertPath = get_option('path_to_convert');
+		
+		if(!$this->checkForImageMagick($convertPath)) {
 			throw new Exception( 'ImageMagick library is required for thumbnail generation' );
 		}
 		
@@ -203,19 +202,19 @@ class File extends Kea_Record {
 				$new_height = ($percent * $height);
 				
 				// This is the actual convert command
-				$command = PATH_TO_CONVERT . ' ' . $old_path . ' -resize ' . $percent . '% ' . $new_path;
+				$command = $convertPath . ' ' . $old_path . ' -resize ' . $percent . '% ' . $new_path;
 			}
 			elseif( $new_width && $new_height )
 			{
-				$command = PATH_TO_CONVERT . ' ' . $old_path . ' -resize ' . $new_width . 'x' . $new_height . '> ' . $new_path;
+				$command = $convertPath . ' ' . $old_path . ' -resize ' . $new_width . 'x' . $new_height . '> ' . $new_path;
 			}
 			elseif( $new_width && !$new_height )
 			{
-				$command = PATH_TO_CONVERT . ' ' . $old_path . ' -resize ' . $new_width . 'x ' . $new_path;
+				$command = $convertPath . ' ' . $old_path . ' -resize ' . $new_width . 'x ' . $new_path;
 			}
 			elseif( !$new_width && $new_height )
 			{
-				$command = PATH_TO_CONVERT . ' ' . $old_path . ' -resize ' . 'x' . $new_height . ' ' . $new_path;
+				$command = $convertPath . ' ' . $old_path . ' -resize ' . 'x' . $new_height . ' ' . $new_path;
 			}
 			elseif( !$percent && !$new_width && !$new_height )
 			{
@@ -229,7 +228,7 @@ class File extends Kea_Record {
 			{
 				if ( ( !empty($new_width) && $new_width > $width ) || ( !empty($new_height) && $new_height > $height ) )
 				{
-					$command = PATH_TO_CONVERT . ' ' . $old_path . ' ' . $new_path;
+					$command = $convertPath . ' ' . $old_path . ' ' . $new_path;
 				}
 			}
 
@@ -248,8 +247,8 @@ class File extends Kea_Record {
 		}
 	}
 	
-	private function checkForImageMagick() {
-		exec( PATH_TO_CONVERT . ' -version', $convert_version, $convert_return );
+	private function checkForImageMagick($path) {
+		exec( $path . ' -version', $convert_version, $convert_return );
 		return ( $convert_return == 0 );
 	}
 	

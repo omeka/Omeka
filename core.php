@@ -78,39 +78,29 @@ require_once 'Zend/Controller/RewriteRouter.php';
 
 // Retrieve the ACL from the db, or create a new ACL object
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-$options = $manager->getTable('option');
-$results = $options->findByDql('name LIKE "acl"');
-if (count($results) == 0) {
-	require_once 'Kea/Acl.php';
-	require_once 'Zend/Acl/Role.php';
-	require_once 'Zend/Acl/Resource.php';
 
-	$acl = new Kea_Acl();
-	$role = new Zend_Acl_Role('super');
-
-	$acl->addRole($role);
-
-	$acl->add(new Zend_Acl_Resource('item'));
-	$acl->add(new Zend_Acl_Resource('add'), 'item');
-	$acl->add(new Zend_Acl_Resource('edit'), 'item');
-	$acl->add(new Zend_Acl_Resource('delete'), 'item');
-	$acl->add(new Zend_Acl_Resource('read'), 'item');
-	
-	$acl->add(new Zend_Acl_Resource('themes'));
-	$acl->add(new Zend_Acl_Resource('set'),'themes');
-	
-	$acl->allow('super');
-
-	$option = new Option;
-	$option->name = 'acl';
-	$option->value = serialize($acl);
-	$option->save();
-	Zend::register('acl', $acl);
+/**
+ * This is a global function, which may seem bad but its really the only one that needs to be global
+ *
+ * @return void
+ **/
+function get_option($name) {
+	if(Zend::isRegistered('options')) {
+		$options = Zend::Registry('options');
+		return $options[$name];
+	}else {
+		$q = new Doctrine_Query;
+		$array = $q->parseQuery("SELECT o.name,o.value FROM Option o")->execute(array(),Doctrine::FETCH_ARRAY);
+		foreach ($array as $k => $v) {
+			$options[$v['o']['name']] = $v['o']['value'];
+		}		
+		Zend::register('options',$options);
+		return $options[$name];
+	}
 }
-else {
-	$acl = unserialize($results[0]->value);
-	Zend::register('acl', $acl);
-}
+
+$acl = unserialize(get_option('acl'));
+Zend::register('acl', $acl);
 
 // Initialize some stuff
 $front = Kea_Controller_Front::getInstance();

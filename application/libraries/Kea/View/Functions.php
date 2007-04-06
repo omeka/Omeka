@@ -58,21 +58,6 @@ function src($file, $dir, $ext = null, $return = false) {
 	}
 }
 
-function the_title($return = false) {
-	$title = Zend::registry('doctrine')->getTable('option')->findByDql('name like ?', array('site_title'));
-	$title = $title[0]->value;
-	
-	//Example of a plugin hook (maybe remove later?)
-	$return_array = Kea_Controller_Plugin_Broker::getInstance()->addToTitle();
-	if(!empty($return_array)) {
-		foreach ($return_array as $key => $value) {
-			$title .= $value;
-		}
-	}
-	if (!$return) echo $title;
-	else return $title;
-}
-
 /**
  * Echos the web path (that's what's important to the browser)
  * to a javascript file.
@@ -372,10 +357,10 @@ function get_items(array $params = array())
  * @return void
  **/
 function settings($name, $return=false) {
-	$title = Doctrine_Manager::getInstance()->getTable('Option')->findByName($name);
-	if($title instanceof Doctrine_Collection_Batch) return;
-	if($return) return $title;
-	echo $title;
+	$name = get_option($name);
+	if($name instanceof Doctrine_Collection_Batch) return;
+	if($return) return $name;
+	echo $name;
 }
 
 /**
