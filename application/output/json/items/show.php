@@ -6,11 +6,13 @@ $toEncode['favorite'] = $item->isFavoriteOf($user);
 $myTags = $item->userTags($user);
 foreach( $myTags as $key => $tag )
 {
-	$toEncode['MyTags'][$key] = $tag->name;
+	$tag->load();
+	$toEncode['MyTags'][$key] = $tag->toArray();
 }
 foreach( $item->Tags as $key => $tag )
 {
-	$toEncode['Tags'][$key] = $tag->name;
+	$tag->load();
+	$toEncode['Tags'][$key] = $tag->toArray();
 }
 $toEncode['Errors'] = $item->getErrorMsg();
 

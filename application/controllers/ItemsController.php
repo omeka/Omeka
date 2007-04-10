@@ -110,16 +110,18 @@ class ItemsController extends Kea_Controller_Action
 	{
 		if(!empty($_POST))
 		{
+			$clean = $_POST;
+			unset($clean['id']);
 			
-			if(!empty($_POST['tags'])) {
+			if(!empty($clean['tags'])) {
 				// @todo Replace with retrieval of actual logged in user
 				$user = Doctrine_Manager::getInstance()->getTable('User')->find(1);
-				$item->addTagString($_POST['tags'], $user);
+				$item->addTagString($clean['tags'], $user);
 			}
 			
-			$item->setFromForm($_POST);
+			$item->setFromForm($clean);
 					
-			if(!empty($_POST['change_type'])) return false;
+			if(!empty($clean['change_type'])) return false;
 			
 			if(!empty($_FILES["file"]['name'][0])) {
 				//Handle the file uploads
@@ -138,7 +140,7 @@ class ItemsController extends Kea_Controller_Action
 				}
 			}
 			
-			if($_POST['public']) $item->public = 1;
+			if($clean['public']) $item->public = 1;
 			
 			try {
 				$item->save();
@@ -170,6 +172,10 @@ class ItemsController extends Kea_Controller_Action
 	{
 		$item = $this->findById();
 	
+		$tagsAdded = $this->commitForm($item);
+		
+		$item = $this->findById();
+	
 		$user = Doctrine_Manager::getInstance()->getTable('User')->find(1);
 
 		if($this->getRequest()->getParam('makeFavorite')) {
@@ -187,7 +193,40 @@ class ItemsController extends Kea_Controller_Action
 				$if->save();
 			}
 		}
-		$this->commitForm($item);
+		
+		if($deleteTag = $this->_getParam('deleteTag'))
+		{
+			//@todo PERMISSIONS CHECK
+			$isMyTag = $this->_getParam('isMyTag');
+			$tagToDelete = $this->getTable('Tag')->find($deleteTag);
+			
+			if($tagToDelete) {
+				if($isMyTag) {
+					
+					//delete that association
+					$it = $this->getTable('ItemsTags')->findBySql('item_id = ? AND tag_id = ? AND user_id = ?',array($item->id,$deleteMyTag, $user->id))->getFirst();
+					if($it) {
+						$it->delete();
+					}				
+
+					if($tagToDelete->tagCount() == 0)
+					{
+						$tagToDelete->delete();
+					}
+				
+				}else {
+					$tagToDelete->delete();
+				}
+			}
+			
+			$tagsDeleted = true;
+			
+		}
+		
+		if($tagsAdded || $tagsDeleted) {
+			//This is a workaround for the fact that the Tags collection doesn't get automatically refreshed
+			$item->Tags = $this->getTable('Tag')->getSome(null,null,null,null,$item);
+		}
 		
 		$item->refresh();
 		

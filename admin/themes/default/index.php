@@ -13,7 +13,7 @@
 		
 		<div id="site-info">
 			<h2>Site Info</h2>
-			<p><em>Web Design History</em> contains <?php total_items(); ?> items, in <?php total_collections(); ?> collections, tagged with <?php total_tags(); ?> keywords. There are <?php total_users(); ?> users.</p>
+			<p><em><?php settings('site_title'); ?></em> contains <?php total_items(); ?> items, in <?php total_collections(); ?> collections, tagged with <?php total_tags(); ?> keywords. There are <?php total_users(); ?> users.</p>
 		</div>
 		
 		<div id="omeka-news">

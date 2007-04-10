@@ -25,6 +25,10 @@ abstract class Kea_JoinRecord extends Kea_Record
 			}else {
 				$idNum = $this->$column;
 			}
+			if(!$idNum) {
+//				throw new Exception( 'Record of class '.get_class($this).' with ID#:'.$this->id.' does not have a valid ID # stored in field: '.$column );
+				return true;
+			}
 			$where[$column]= "$column = {$idNum} ";
 		}
 		$where = implode(' AND ', $where);
@@ -33,9 +37,15 @@ abstract class Kea_JoinRecord extends Kea_Record
 	}
 	
 	public function validate() {
-		if(!$this->isUnique()) {
-				$this->getErrorStack()->add('duplicate', 'unique');
-		}	
+		$state = $this->getState();
+		Zend::dump( $state );
+		if($state == Doctrine_Record::STATE_TDIRTY || $state == Doctrine_Record::STATE_DIRTY)
+		{
+			if(!$this->isUnique()) {
+					$this->getErrorStack()->add('duplicate', 'unique');
+			}				
+		}
+
 	}
 	
 	public function getKeyColumns() {

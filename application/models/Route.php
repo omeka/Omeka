@@ -7,6 +7,7 @@ class Route extends Kea_Record
 {
 	public function setTableDefinition()
 	{
+		$this->setTableName('routes');
 		$this->hasColumn("name", "string");
 		$this->hasColumn("route", "string");
 		$this->hasColumn("defaults", "array");

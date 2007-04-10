@@ -8,10 +8,14 @@
  * 
  **/
 class Kea_SearchListener extends Doctrine_EventListener
-{		
+{	
+	private $item_id;
+		
 	public function onInsert(Doctrine_Record $record) {
+		if(!$record->id) return;
 		$class = get_class($record);
 		if($class == 'Item') {
+			
 			//Get a list of the indexed elements from the ini file
 			require_once 'Zend/Config/Ini.php';
 			$ini = new Zend_Config_Ini(LIB_DIR.'/Kea/fields.ini');
@@ -43,8 +47,8 @@ class Kea_SearchListener extends Doctrine_EventListener
 			//Make a SQL statement that inserts it all into the fake table
 			
 			//@todo make sure aggregate is escaped correctly
-			$sql = "INSERT INTO {$tableName}_fulltext (item_id, text) VALUES ({$record->id}, '".mysql_real_escape_string($aggregate)."');";
-			Doctrine_Manager::connection()->execute($sql); 
+			$sql = "INSERT INTO {$tableName}_fulltext (item_id, text) VALUES (?, ?);";
+			Doctrine_Manager::connection()->execute($sql, array($record->id, $aggregate)); 
 		} else {
 			if($record->hasRelation('Items')) {
 				$items = $record->Items; 
@@ -68,8 +72,8 @@ class Kea_SearchListener extends Doctrine_EventListener
 	public function onPreDelete(Doctrine_Record $record) {
 		$class = get_class($record);
 		if($class == 'Item') {
-			$sql = "DELETE FROM items_fulltext WHERE item_id = {$record->id}";
-			Doctrine_Manager::connection()->execute($sql); 
+			$sql = "DELETE FROM items_fulltext WHERE item_id = ?";
+			Doctrine_Manager::connection()->execute($sql, array($record->id)); 
 		}else {
 			if($record->hasRelation('Items')) {
 				foreach ($record->Items as $key => $item) {
@@ -82,6 +86,7 @@ class Kea_SearchListener extends Doctrine_EventListener
 	}
 	
 	public function onUpdate(Doctrine_Record $record) {
+		if(!$record->id) return;
 		$this->onPreDelete($record);
 		$this->onInsert($record);
 	}

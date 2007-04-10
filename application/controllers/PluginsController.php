@@ -13,7 +13,7 @@ class PluginsController extends Kea_Controller_Action
 	
 	public function browseAction() {
 		Doctrine_Manager::connection()->getTable('Plugin')->installNew();
-		parent::browseAction();
+		return parent::browseAction();
 	}
 
 	/**

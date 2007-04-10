@@ -300,7 +300,9 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{
 		if(!empty($_POST))
 		{
-			$record->setFromForm($_POST);
+			$clean = $_POST;
+			unset($clean['id']);
+			$record->setFromForm($clean);
 			try {
 				$record->save();
 				return true;

@@ -4,30 +4,70 @@
 <?php error($item);?>
 <script type="text/javascript" charset="utf-8">
 	
+	function updateTags(element, tags)
+	{
+		listElements = $A(element.getElementsByTagName('li'));	
+		
+		ulElement = element.getElementsByTagName("ul")[0];
+		
+		//Get rid of the old tags	
+		listElements.each(function(element, index) {
+			ulElement.removeChild(element);
+		});
+		//Insert the new tags
+		for (var i=0; i < tags.length; i++) {
+			var liElement = document.createElement('li');
+			ulElement.appendChild(liElement);
+			var tagLink = document.createElement('a');
+			var removeLink = document.createElement('a');
+			tagLink.href =  "<?php echo uri('items/browse/tag/')?>"+tags[i]['name'];
+			tagLink.rel = tags[i]['id'];
+			tagLink.update(tags[i]['name']);
+			removeLink.href = "javascript:void(0)";
+			removeLink.addClassName("delete-tag");
+			removeLink.update("[x]");
+			Event.observe(removeLink,"click",deleteTag);
+			
+			liElement.appendChild(tagLink);
+			liElement.appendChild(removeLink);
+		};
+	}
+	
+	function deleteTag(event) {
+		var link = event.target;
+		var tagId = link.parentNode.down().rel;
+		var params = {id:"<?php echo $item->id ?>"};
+		var isMyTag = false;
+	
+		if(link.hasClassName('my-tag')) {
+			isMyTag = true;
+			params['deleteMyTag'] = tagId;
+		}else {
+			params['deleteTag'] = tagId;
+		}
+	
+		var opt = {
+			method:"post",
+			parameters: params,
+			onComplete: function(t,item) {
+				updateTags($('my-tags'),item.MyTags);
+				updateTags($('tags'),item.Tags);
+			}
+		};
+		new Ajax.Request("<?php echo uri('json/items/show/');?>", opt);//"?id=<?php echo $item->id ?>", opt);
+	}
+	
 	function addTags() {
 		var opt = {
 			method: "post",
 			parameters: Form.serialize($('tags-form')),
 			onComplete: function(t, item) {
 				if(item.Errors) alert("Error: "+item.Errors);
-				oldTags = document.getElementsByClassName("my-tag");
-				// If the length is the same then adding the tag didn't work
-				if(oldTags.length != item.MyTags.length) {
-					newMyTagLi = document.createElement("li");
-					tag = item.MyTags.last();
-					newMyTagLi.innerHTML = "<a href=\"<?php echo uri('items/browse/tag/')?>"+tag+"\">"+tag+"</a>";
-					newMyTagLi.setAttribute('class', 'my-tag');
-
-					newTagLi = document.createElement("li");
-					newTagLi.innerHTML = newMyTagLi.innerHTML;
-					newTagLi.setAttribute('class', 'tag');
-					
-					// Append that business
-					$('my-tags').getElementsByTagName("ul")[0].appendChild(newMyTagLi);
-					$('tags').getElementsByTagName("ul")[0].appendChild(newTagLi);
-					
-					//@todo Focus on the new content
-				}
+				updateTags($('my-tags'),item.MyTags);
+				updateTags($('tags'),item.Tags);
+			},
+			onFailure: function(t) {
+				alert(t.status);
 			}
 		}
 		
@@ -39,9 +79,9 @@
 		var opt = {
 			onComplete: function(t, item) {
 				if(item.favorite) {
-					$('favorite').innerHTML = "Favorite";
+					$('favorite').update("Favorite");
 				} else {
-					$('favorite').innerHTML = "Not Favorite";
+					$('favorite').update("Not Favorite");
 				}
 			}
 		}
@@ -59,7 +99,7 @@
 		$('tags-submit').setStyle({display:"none"});
 		link = document.createElement("a");
 		link.setAttribute("href", "javascript:void(0)");
-		link.innerHTML = "Add Tags";
+		link.update("Add Tags");
 		$('tags-form').appendChild(link);
 		Event.observe(link, "click", addTags);
 		
@@ -77,9 +117,11 @@
 											editableElements[i].getAttribute('rel'));
 		}
 		
-		var langSelect = document.createElement('select');
-		
-				
+		deleteTagLinks = document.getElementsByClassName('delete-tag');
+		for (var i=0; i < deleteTagLinks.length; i++) {
+			deleteTagLinks[i].href = "javascript:void(0)";
+			Event.observe(deleteTagLinks[i],"click",deleteTag);
+		};						
 	});
 </script>
 <ul id="secondary-nav" class="navigation">
@@ -171,7 +213,10 @@
 	<ul>
 		<?php $myTags = $item->userTags($user);?>
 		<?php foreach($myTags as $tag):?>
-		<li class="my-tag"><a href="<?php echo uri('items/browse/tag/'.$tag->name);?>"><?php echo $tag; ?></a></li>
+		<li class="my-tag">
+			<a href="<?php echo uri('items/browse/tag/'.$tag->name);?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
+			<a href="<?php echo uri('items/show/'.$item->id.'?isMyTag=true&deleteTag='.$tag->id); ?>" class="delete-tag" >[x]</a>
+		</li>
 		<?php endforeach; ?>
 	</ul>
 </div>
@@ -179,7 +224,10 @@
 <div id="tags">
 	<ul>
 		<?php foreach( $item->Tags as $key => $tag ): ?>
-			<li class="tag"><a href="<?php echo uri('items/browse/tag/'.$tag->name);?>"><?php echo $tag; ?></a></li>
+		<li class="tag">
+			<a href="<?php echo uri('items/browse/tag/'.$tag->name);?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
+			<a href="<?php echo uri('items/show/'.$item->id.'?deleteTag='.$tag->id); ?>" class="delete-tag">[x]</a>
+		</li>
 		<?php endforeach; ?>
 	</ul>
 </div>
@@ -191,7 +239,7 @@
 <h2>Files</h2>
 <div id="files">
 	<?php foreach( $item->Files as $key => $file ): ?>
-		<?php  echo $file->archive_filename; ?>
+		<?php thumbnail($file, array('class'=>'thumb')); ?>
 	<?php endforeach; ?>
 </div>
 

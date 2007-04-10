@@ -39,11 +39,11 @@ class TagTable extends Doctrine_Table
 		$query->innerJoin('t.ItemsTags it');
 		if($item) {
 			$query->innerJoin('it.Item i');
-			$query->where('i.id = '.$item->id);			
+			$query->where('i.id = ?',$item->id);			
 		}
 		if($user) {
 			$query->innerJoin('it.User u');
-			$query->addWhere('u.id = '.$user->id);
+			$query->addWhere('u.id = ?',$user->id);
 		}
 		if($alpha) {
 			$query->addOrderBy('t.name asc');

@@ -9,6 +9,7 @@ foreach ($tags as $tag) {
 			$data[$key] = null;
 		}
 	}
+	$data['id'] = $tag->id;
 	$data['tagCount'] = $tag->tagCount;
 	$toEncode[] = $data;
 }

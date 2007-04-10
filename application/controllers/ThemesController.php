@@ -121,7 +121,7 @@ class ThemesController extends Kea_Controller_Action
 		require_once 'Kea/View.php';
 		$view = new Kea_View($this, array('request', $this->getRequest()));
 
-		$this->render('themes/browse.php', compact('current', 'themes'));
+		return $this->render('themes/browse.php', compact('current', 'themes'));
 	}
 
     public function noRouteAction()

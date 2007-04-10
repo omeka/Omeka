@@ -9,6 +9,8 @@ require_once 'Metatext.php';
 require_once 'ItemMetatext.php';
 require_once 'ItemsFavorites.php';
 require_once 'ItemsFulltext.php';
+//require_once 'ItemsExhibits.php';
+//require_once 'Exhibit.php';
 /**
  * @package Omeka
  * 
@@ -27,6 +29,9 @@ class Item extends Kea_Record
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
 		$this->ownsOne("ItemsFulltext", "ItemsFulltext.item_id");
+		$this->ownsMany("ItemsTags", "ItemsTags.item_id");
+//		$this->hasMany("Exhibit as Exhibits", "ItemsExhibits.exhibit_id");
+//		$this->ownsMany("ItemsExhibits", "ItemsExhibits.item_id");
 		parent::setUp();
 	}
 	
@@ -185,7 +190,6 @@ class Item extends Kea_Record
            $q->parseQuery("SELECT f.*, RANDOM() rand FROM File f WHERE f.item_id = ? AND f.thumbnail_filename IS NOT NULL AND f.thumbnail_filename != '' ORDER BY rand");
            return $q->execute(array($this->id))->getFirst();
    }
-
 		
 } // END class Item extends Kea_Domain_Record
 

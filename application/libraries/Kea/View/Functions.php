@@ -127,7 +127,7 @@ function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units
 	$html = '';
 	foreach( $tags as $tag )
 	{
-		$size = round( ( ( $tag->tagCount / $largest ) * $max ), 3 );
+		$size = round( ( ( $tag["tagCount"] / $largest ) * $max ), 3 );
 		
 		$size = ($size < $min) ? $min : $size;
 
@@ -372,7 +372,6 @@ function display_empty($val, $alternative="[Empty]") {
 	echo (!empty($val) ? $val : $alternative);
 }
 
-
 function thumbnail($record, $props=array(), $width=null, $height=null) 
 {
        return archive_image($record, 'thumbnail_filename', $props, $width, $height, THUMBNAIL_DIR, WEB_THUMBNAILS);
@@ -427,6 +426,4 @@ function archive_image( $record, $field , $props, $width, $height, $abs, $web)
                echo '<img src="' . $path . '" alt="Image missing." />' . "\n";
        }
 }
-
-
 ?>
