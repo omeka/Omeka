@@ -28,6 +28,8 @@ class PluginTable extends Doctrine_Table
 		//Installation will need to create new tables
 		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_CREATE_TABLES, true);
 		
+		$router = Kea_Controller_Front::getInstance()->getRouter();
+		
 		$plugins = $this->findAll();
 		$pluginDirs = new DirectoryIterator(PLUGIN_DIR);
 		$newPlugins = array();
@@ -51,7 +53,7 @@ class PluginTable extends Doctrine_Table
 		foreach ($newPlugins as $key => $name) {
 			$path = PLUGIN_DIR.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.$name.'.php';
 			require_once $path;
-			$plugin = new $name();
+			$plugin = new $name($router, new Plugin());
 			$plugin->install();
 		}
 	}

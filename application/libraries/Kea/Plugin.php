@@ -22,51 +22,50 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 **/
 	protected $dir;
 		
-	public function __construct($router = null, $record = null) {
+	public function __construct($router, $record) {
 		$this->dir = PLUGIN_DIR.DIRECTORY_SEPARATOR.get_class($this);
 		
-		if(!empty($router)) {
-			$this->router = $router;
-			$routesFile = $this->dir.DIRECTORY_SEPARATOR.'routes.ini';
-			if(file_exists($routesFile)) {
-				$config = new Zend_Config_Ini($routesFile);
-				$this->router->addConfig($config, 'routes');
+		$iniFile = $this->dir.DIRECTORY_SEPARATOR.'plugin.ini';
+		
+		if(!file_exists($iniFile)) 
+		{
+			throw new Exception( get_class($this).' plugin is missing the plugin.ini file.' );
+		}
+		$ini = new Zend_Config_Ini($iniFile);
+		$this->ini = $ini;
+		
+		if($record->active) {
+			if(isset($ini->routes)) {
+				$router->addConfig($ini, 'routes');			
 			}
-		}		
-		//Find the plugin entry in the database or create a new empty one
-		//Should this force a record to be passed to the plugin?
-		if(empty($record)) {
-			$conn = Doctrine_Manager::getInstance()->connection();
-			$this->record = $conn->getTable('Plugin')->findBySql("name = ?", array(get_class($this)))->getFirst();
-			if(empty($this->record)) $this->record = new Plugin();
-		} else {
+
+			$this->router = $router;
+		
 			$this->record = $record;
-		}
-		//Hook the Doctrine event listeners into the plugin
-		$listener = new Kea_EventListener($this);
-		Doctrine_Manager::getInstance()->getListener()->add($listener);
+
+			//Hook the Doctrine event listeners into the plugin
+			$listener = new Kea_EventListener($this);
+			Doctrine_Manager::getInstance()->getListener()->add($listener);
 	
-		$front = Kea_Controller_Front::getInstance();
-		if(file_exists($this->dir.DIRECTORY_SEPARATOR.'controllers')) {
-			$front->addControllerDirectory($this->dir.DIRECTORY_SEPARATOR.'controllers');
+			$front = Kea_Controller_Front::getInstance();
+			if(file_exists($this->dir.DIRECTORY_SEPARATOR.'controllers')) {
+				$front->addControllerDirectory($this->dir.DIRECTORY_SEPARATOR.'controllers');
+			}
+		
+			Zend::register(get_class($this), $this);
+			$this->bindModelRelations();
+			
+			$this->init();
 		}
 		
-		// This seems like a bad idea but it makes it easier to integrate plugins and their helpers
-		Zend::register(get_class($this), $this);
-		
-		$this->bindModelRelations();
-		
-		$this->init();
 	}
 	
 	public function bindModelRelations()
 	{
-		$relationsFile = $this->dir.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'relations.ini';
-		if(file_exists($relationsFile)) {
-			$relations = new Zend_Config_Ini($relationsFile);
-			foreach ($relations->relations as $key => $entry) {
+		if(isset($this->ini->relations)) {
+			foreach ($this->ini->relations as $key => $entry) {
 				Kea_Controller_Plugin_Broker::getInstance()->addBound($entry->Class, array($entry->Type, $entry->Component, $entry->Link));
-			}
+			}			
 		}
 	}
 	
@@ -82,8 +81,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 **/
 	public function install() {
 		if(!$this->record->exists()) {
-			$install = new Zend_Config_Ini($this->dir.DIRECTORY_SEPARATOR.'install.ini');
-			if($defaults = $install->defaultConfig) 
+			if($defaults = $this->ini->config) 
 			{
 				$defaults = $defaults->asArray();
 				$config = array();
@@ -99,13 +97,13 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 			}
 			
 			$this->record->name = get_class($this);
-			$this->record->description = $install->info->description;
-			$this->record->author = $install->info->author;
+			$this->record->description = $this->ini->info->description;
+			$this->record->author = $this->ini->info->author;
 			
-			if($metafields = $install->metafields) 
+			if($metafields = $this->ini->metafields) 
 			{
 				$metafields = $metafields->asArray();
-				foreach( $install->metafields->asArray() as $array )
+				foreach( $this->ini->metafields->asArray() as $array )
 				{
 					$metafield = new Metafield;
 					foreach( $array as $key => $value )

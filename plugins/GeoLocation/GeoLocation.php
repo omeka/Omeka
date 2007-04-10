@@ -7,11 +7,6 @@
  **/
 class GeoLocation extends Kea_Plugin
 {	
-	public function filterBrowse($browse) {
-		if($browse->getClass() == 'Item') {
-//			$browse->addSql('where', "items.description = 'foo'");
-		}
-	}	
 	/**
 	 * 
 	 * 1) Note: the width and height setters will probably break in IE, I forgot how to fix this

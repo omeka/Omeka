@@ -675,7 +675,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function execute($query, array $params = array()) 
     {
-Kea_Logger::setQueryStart();			
+Kea_Logger::setQueryStart();
         try {
             if ( ! empty($params)) {
                 $stmt = $this->dbh->prepare($query);
@@ -683,6 +683,7 @@ Kea_Logger::setQueryStart();
 Kea_Logger::logSql($query);
                 return $stmt;
             } else {
+Kea_Logger::logSql($query);	
                 return $this->dbh->query($query);
             }
         } catch(Doctrine_Adapter_Exception $e) {
