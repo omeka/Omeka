@@ -30,43 +30,98 @@ class TagTable extends Doctrine_Table
 	 * @param User only tags from this User
 	 * @return Doctrine_Collection tags
 	 **/
-	public function getSome($limit = 100, $alpha = true, $recent = false, $count = false, $item = null, $user = null )
+	public function findSome($params=array())
 	{
-		$query = $this->createQuery()->select('t.*, COUNT(t.id) tagCount')->from('Tag t');
-		if($limit) {
-			$query->limit($limit);
+		$defaults = array('limit'=>100,
+							'alpha'=>false,
+							'recent'=>false,
+							'lowToHigh'=>false,
+							'highToLow'=>false,
+							'item_id'=>null,
+							'user_id'=>null,
+							'returnType'=>'object',
+							'onlyPublic'=>false);
+							
+		foreach ($defaults as $k=>$v) {
+			if(array_key_exists($k,$params)) {
+				$$k = $params[$k];
+			}else{ 
+				$$k = $v;
+			}
 		}
-		$query->innerJoin('t.ItemsTags it');
-		if($item) {
-			$query->innerJoin('it.Item i');
-			$query->where('i.id = ?',$item->id);			
+		$dql = "SELECT t.*, COUNT(t.id) tagCount FROM Tag t INNER JOIN t.ItemsTags it ";
+		$query = new Doctrine_Query;
+		
+		$pass = array();
+		$join = array();
+		$where = array();
+		
+		if($item_id) {
+			$join['item'] = "it.Item i";
+			$where['item'] = 'i.id = ?';
+			$pass[] = $item_id;	
 		}
-		if($user) {
-			$query->innerJoin('it.User u');
-			$query->addWhere('u.id = ?',$user->id);
-		}
-		if($alpha) {
-			$query->addOrderBy('t.name asc');
-		}
-		if($count) {
-			$query->addOrderBy('tagCount desc');
+		if($user_id) {
+			$join['user'] = 'it.User u';
+			$where['user'] = 'u.id = ?';
+			$pass[] = $user_id;
 		}
 		if($recent) {
-			$query->addOrderBy('t.id desc');
+			$order[] = 't.id DESC';
+		}elseif($alpha) {
+			$order[] = 't.name ASC';
+		}
+		elseif($highToLow) {
+			$order[] = 'tagCount DESC';
+		}elseif($lowToHigh) {
+			$order[] = 'tagCount ASC';
 		}
 		
-		$query->groupby('t.id');
-		return $query->execute();
+		//Showing tags related to public items
+		if($onlyPublic) {
+			if(!array_key_exists('item',$join)) {
+				$join['item'] = "it.Item i";
+			}
+			$where['public'] = "i.public = 1";
+		}
+		
+		$dql .= (!empty($join)?" INNER JOIN ".join(' INNER JOIN ', $join):"").
+				(!empty($where) ? " WHERE ".join(' AND ',$where):"").
+				(!empty($order)?' ORDER BY '.join(',',$order):"");
+		
+		if($limit) {
+			$dql .= " LIMIT $limit";
+		}
+		$dql .= " GROUP BY t.id ";
+
+		$query->parseQuery($dql);
+
+		if($returnType == 'array') {
+			$res = $query->execute($pass, Doctrine::FETCH_ARRAY);
+			foreach ($res as $key => $value) {
+				$array[$key]['name'] = $res[$key]['t']['name'];
+				$array[$key]['id'] = $res[$key]['t']['id'];
+				$array[$key]['tagCount'] = $res[$key]['t'][0];
+			}
+			return $array;
+		}else {
+			return $query->execute($pass);
+		}
+		
+		
 	}
 	
 	/**
-	 * Overloaded as a wrapper for getSome()
+	 * Overloaded as a wrapper for findSome()
 	 *
-	 * @return Doctrine_Collection
+	 * @return mixed
 	 **/
-	public function findAll($alpha = false, $count = false, $item = null, $user = null)
+	public function findAll($params=array())
 	{
-		return $this->getSome(null, $alpha, false, $count, $item, $user);
+		$params = array_merge(array(
+						'limit'=>null,
+						'returnType'=>'array'), $params);
+		return $this->findSome($params);
 	}
 	
 	/**

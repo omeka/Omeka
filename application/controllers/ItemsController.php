@@ -96,7 +96,11 @@ class ItemsController extends Kea_Controller_Action
 			$query->innerJoin("Item.$alias rec");
 			$query->addWhere('rec.id = ?', array($from_record->id));
 		}
-	
+		
+		if($recent = $this->_getParam('recent')) {
+			$query->orderBy('i.added desc');
+		}
+		
 		return $this->_browse->browse();
 	}
 	
@@ -225,7 +229,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		if($tagsAdded || $tagsDeleted) {
 			//This is a workaround for the fact that the Tags collection doesn't get automatically refreshed
-			$item->Tags = $this->getTable('Tag')->getSome(null,null,null,null,$item);
+			$item->Tags = $this->getTable('Tag')->findSome(array('item_id'=>$item->id));
 		}
 		
 		$item->refresh();

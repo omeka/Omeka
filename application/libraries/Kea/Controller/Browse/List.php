@@ -20,8 +20,9 @@ class Kea_Controller_Browse_List extends Kea_Controller_Browse_Abstract
 		} else {
 			$$pluralName = $this->buildQuery()->execute();
 		}
+		$total = count($$pluralName);
 		
-		return $this->_controller->render($viewPage, compact($pluralName));
+		return $this->_controller->render($viewPage, compact($pluralName,'total'));
 	}
 }
 ?>

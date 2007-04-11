@@ -57,5 +57,10 @@ class TypesController extends Kea_Controller_Action
 		$metafields = Doctrine_Manager::getInstance()->getTable('Metafield')->findMetafieldsWithoutType($type);
 		$this->_view->assign(compact('metafields'));
 	}
+	
+	public function metafieldsAction()
+	{
+		return $this->getTable('Metafield')->findAll();
+	}
 }
 ?>

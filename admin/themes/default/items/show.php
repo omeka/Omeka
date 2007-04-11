@@ -36,16 +36,12 @@
 	function deleteTag(event) {
 		var link = event.target;
 		var tagId = link.parentNode.down().rel;
-		var params = {id:"<?php echo $item->id ?>"};
-		var isMyTag = false;
+		var params = {id:"<?php echo $item->id ?>", deleteTag:tagId};
 	
-		if(link.hasClassName('my-tag')) {
-			isMyTag = true;
-			params['deleteMyTag'] = tagId;
-		}else {
-			params['deleteTag'] = tagId;
+		if(link.parentNode.hasClassName('my-tag')) {
+			params['isMyTag'] = true;
 		}
-	
+		
 		var opt = {
 			method:"post",
 			parameters: params,
@@ -54,7 +50,7 @@
 				updateTags($('tags'),item.Tags);
 			}
 		};
-		new Ajax.Request("<?php echo uri('json/items/show/');?>", opt);//"?id=<?php echo $item->id ?>", opt);
+		new Ajax.Request("<?php echo uri('json/items/show/');?>?id=<?php echo $item->id ?>", opt);
 	}
 	
 	function addTags() {
@@ -102,10 +98,6 @@
 		link.update("Add Tags");
 		$('tags-form').appendChild(link);
 		Event.observe(link, "click", addTags);
-		
-/*		oldTags = document.getElementsByClassName("tag");
-		lastTag = oldTags.last().getElementsByTagName("a");
-		tagText = $A(lastTag).first().innerHTML;*/
 		
 		editableElements = document.getElementsByClassName("editable");
 		

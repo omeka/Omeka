@@ -268,11 +268,7 @@ function plugin_header() {
 
 ///// END PLUGIN HELPER FUNCTIONS /////
 
-function recent_items($num = 10) {
-	$query = new Doctrine_Query();
-	$query->from('Item i')->limit($num)->orderBy('i.added desc');
-	return $query->execute();
-}
+
 
 /**
  * Retrieve the total number of items
@@ -280,31 +276,27 @@ function recent_items($num = 10) {
  * @return int
  **/
 function total_items($return = false) {
-	$count = Doctrine_Manager::getInstance()->getTable('Item')->count();
-	if($return) return $count;
-	echo $count;
+	return _get_model_total('ItemsController',$return);
 }
 
 function total_collections($return = false) {
-	$count = Doctrine_Manager::getInstance()->getTable('Collection')->count();
-	if($return) return $count;
-	echo $count;
+	return _get_model_total('CollectionsController',$return);
 }
 
 function total_tags($return = false) {
-	$count = Doctrine_Manager::getInstance()->getTable('Tag')->count();
-	if($return) return $count;
-	echo $count;
+	return _get_model_total('TagsController',$return);
 }
 
 function total_users($return = false) {
-	$count = Doctrine_Manager::getInstance()->getTable('User')->count();
-	if($return) return $count;
-	echo $count;
+	return _get_model_total('UsersController',$return);
 }
 
 function total_types($return = false) {
-	$count = Doctrine_Manager::getInstance()->getTable('Type')->count();
+	return _get_model_total('TypesController',$return);
+}
+
+function _get_model_total($controller,$return) {
+	$count = _make_omeka_request($controller,'browse',array(),'total');
 	if($return) return $count;
 	echo $count;
 }
@@ -315,46 +307,76 @@ function total_types($return = false) {
  * @return Doctrine_Collection
  **/
 function recent_tags($num = 30) {
-	return Doctrine_Manager::getInstance()->getTable('Tag')->getSome($num, false, true);
+	return get_tags(array('recent'=>true,'limit'=>$num));
 }
 
-/**
- * @todo Make this a lot more complicated/flexible
- *
- * @return void
- **/
-function get_tags() 
+function recent_items($num = 10) {
+	return get_items(array('recent'=>true,'limit'=>$num));
+}
+
+function get_tags(array $params = array()) 
 {
-	$args = func_get_args();
-	$table = Doctrine_Manager::getInstance()->getTable('Tag');
-	if(count($args)) {
-		if($args[0] instanceof Kea_Record) {
-			return $args[0]->Tags;
-		}
-	} else {
-		//Retrieve all the tags
-		return $table->findAll();
-	}
+	return _make_omeka_request('TagsController','browse',$params,'tags');
 }
 
-//@todo Abstract to all the get functions
 function get_items(array $params = array())
 {
-	$req = new Zend_Controller_Request_Http();
-	$req->setParams($params);
-	$req->setParam('return', 'items');
-	$resp = new Zend_Controller_Response_Cli();
-	require_once CONTROLLER_DIR.DIRECTORY_SEPARATOR.'ItemsController.php';
-	$controller = new ItemsController($req,$resp);
-	$items = $controller->browseAction();
-	return $items;
+	return _make_omeka_request('ItemsController','browse',$params,'items');
 }
 
+function get_collections(array $params = array())
+{
+	return _make_omeka_request('CollectionsController','browse',$params,'collections');
+}
+
+function get_metafields(array $params = array())
+{
+	//To add filters to this function, put them in the TypesController::metafieldsAction() method
+	return _make_omeka_request('TypesController','metafields',$params,null);
+}
+
+function get_users(array $params = array())
+{
+	return _make_omeka_request('UsersController','browse',$params,'users');
+}
+
+function _make_omeka_request($controller,$action,$params, $returnVars)
+{
+	$front = Kea_Controller_Front::getInstance();
+	$dirs = $front->getControllerDirectory();
+	
+	//Include the controller
+	foreach ($dirs as $dir) {
+		$file = $dir.DIRECTORY_SEPARATOR.$controller.".php";
+		if(file_exists($file)) {
+			require_once $file;
+		}
+	}
+	
+	//Merge together the existing parameters with the old ones
+	$oldReq = $front->getRequest();
+	$params = array_merge($oldReq->getParams(), $params);
+
+	//Create the request
+	$newReq = new Zend_Controller_Request_Http();
+	$newReq->setParams($params);
+	$newReq->setParam('return', $returnVars);
+	
+	//Create the response
+	$resp = new Zend_Controller_Response_Cli();
+	
+	//Fire the controller
+	$controller = new $controller($newReq,$resp);
+	$action = $action.'Action';
+	$retVal = $controller->$action();
+	
+	return $retVal;
+}
 
 /**
- * We could just use a global array that contains these site settings rather than having a separate query for each one
+ * Retrieve the value of a particular site setting
  *
- * @return void
+ * @return string
  **/
 function settings($name, $return=false) {
 	$name = get_option($name);
