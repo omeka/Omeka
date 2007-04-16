@@ -1,7 +1,8 @@
 <?php head(); ?>
 
 <ul id="secondary-nav" class="navigation">
-	<?php nav(array('Browse' => uri('items'), 'Add Item' => uri('items/add')));?>
+	<?php nav(array('Browse' => uri('items'),
+					'Add Item' => uri('items/add')));?>
 </ul>
 
 <h2>There are <?php echo $total;?> items.</h2>

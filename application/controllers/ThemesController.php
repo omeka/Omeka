@@ -6,6 +6,8 @@ require_once 'Kea/Controller/Action.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Theme.php';
 class ThemesController extends Kea_Controller_Action
 {
+	protected $_protectableActions = array('Switch' => 'switchAction');
+	
 	/**
 	 * This is only temporary until the system is better
 	 * built out.  We should not be relying on this

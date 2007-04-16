@@ -1,12 +1,12 @@
 <?php
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'User.php';
-require_once 'Zend/Filter/Input.php';
 /**
  * @package Omeka
  **/
+require_once MODEL_DIR.DIRECTORY_SEPARATOR.'User.php';
+require_once 'Zend/Filter/Input.php';
 require_once 'Kea/Controller/Action.php';
 class UsersController extends Kea_Controller_Action
-{
+{	
 	public function init() {
 		$this->_table = Doctrine_Manager::getInstance()->getTable('User');
 		$this->_modelClass = 'User';
@@ -19,7 +19,8 @@ class UsersController extends Kea_Controller_Action
 		$ua = Doctrine_Manager::getInstance()->getTable('UsersActivations')->findByUrl($hash);
 		
 		if(!$ua) {
-			$this->render('404.php');return;
+			$this->render('404.php');
+			return;
 		}
 		
 		if(!empty($_POST)) {
@@ -135,13 +136,31 @@ class UsersController extends Kea_Controller_Action
 		$this->_redirect('');
 	}
 
+/**
+ * Define Roles Actions
+ */
+
 	public function rolesAction()
 	{
 		$acl = Zend::registry('acl');
-		$roles = array_keys($acl->getRoles());
 		
-		$params = array('roles' => $roles);
+		$roles = array_keys($acl->getRoles());
+
+		$permissions = $acl->getPermissions();
+		
+		foreach($roles as $key => $val) {
+			$roles[$val] = $val;
+			unset($roles[$key]);
+		}
+
+		$acl->getRules('researcher');
+		$params = array('roles' => $roles, 'permissions' => $permissions);
 		$this->render('users/roles.php', $params);
+	}
+	
+	public function getRoleForm()
+	{
+		
 	}
 
 	public function addRoleAction()
@@ -186,6 +205,23 @@ class UsersController extends Kea_Controller_Action
 				$dbAcl[0]->save();
 			}
 		}
+		$this->_redirect('users/roles');
+	}
+	
+	public function setPermissionsAction() {
+		$role = $_POST['role'];
+		if (!empty($role)) {
+			$acl = Zend::registry('acl');
+			foreach($_POST['permissions'] as $resource => $permissions) {
+				$resource_permissions = array();
+				foreach($permissions as $permission => $on) {
+					$resource_permissions[] = $permission;
+				}
+				$acl->allow($role, $resource, $resource_permissions);
+			}
+		}
+		$acl->save();
+		$this->_redirect('users/roles');
 	}
 
     public function noRouteAction()

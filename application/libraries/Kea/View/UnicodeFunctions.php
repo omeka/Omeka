@@ -24,7 +24,7 @@ function allhtmlentities($str, $convertTags = 1, $encoding = "", $named_entities
       $arrOutput[$key] = allhtmlentities($arrOutput[$key], $convertTags, $encoding, $named_entities);
     return $arrOutput;
     }
-  else if (!empty($str)) {
+  else if ($str === 0 or !empty($str)) {
 
     $str = mb_convert_encoding($str,"HTML-ENTITIES","UTF-8");
     

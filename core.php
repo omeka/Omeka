@@ -144,5 +144,4 @@ foreach( $plugins as $plugin )
 $front->throwExceptions((boolean) true);
 
 $front->addControllerDirectory(CONTROLLER_DIR);
-
 ?>

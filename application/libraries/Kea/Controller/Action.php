@@ -10,7 +10,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	/**
 	 * @var protected methods array
 	 */
-	protected $_protected = array('delete');
+	protected $_protected = array();
 	
 	/**
 	 * @var Kea_View
@@ -37,6 +37,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * @var Kea_Controller_Browse_Interface
 	 **/
 	protected $_browse;
+	
 
 	/**
 	 * Attaches a view object to the controller.
@@ -44,7 +45,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * object so it can interact with the request / response objects.
 	 */
 	public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
-	{	
+	{
 		// Zend_Controller_Action __construct finishes by running init()
 		$init = parent::__construct($request, $response, $invokeArgs);
 		
@@ -59,6 +60,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * Primarily used for logging in
 	 */
 	protected $_before_filter = array();
+	
 	protected function before_filter($function_to_run, $except = array())
 	{
 		$this->_before_filter[$function_to_run] = $except;
@@ -68,7 +70,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{
 		/**
 		 * Admin theme protection is here.
-		 * Kind of bugs me that it's obscured but whatev -n8
+		 * Kind of bugs me that it's obscured -n8
 		 * 
 		 * The admin theme protection is as follows:
 		 * A user with an account needs to have greater than public access.

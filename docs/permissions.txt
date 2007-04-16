@@ -1,7 +1,15 @@
-Super
-Admin
-Researcher
-Public
+Roles
+	Super
+	Admin
+	Researcher
+	Public
+
+Resources
+	CRUD on all controllers
+	
+	
+	
+	
 
 Permissions work on several levels:
 
