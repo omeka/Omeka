@@ -29,6 +29,7 @@ class Kea_Auth_Adapter extends Zend_Auth_Adapter
 			else {
 				$message = "Cannot find a user with that username";
 			}
+			unset($user);
 		}
 		return new Kea_Auth_Token($valid, $identity, $message);
 	}

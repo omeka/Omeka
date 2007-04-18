@@ -21,5 +21,24 @@ final class Kea
 
 		return false;
 	}
+	
+	/**
+	 * Convenience method returns the logged in user
+	 * or false depending on whether the user is 
+	 * logged in or not.
+	 */
+	static function loggedIn() {
+		require_once 'Zend/Auth.php';
+		require_once 'Zend/Session.php';
+		require_once 'Kea/Auth/Adapter.php';
+		require_once 'Zend/Filter/Input.php';
+
+		$auth = new Zend_Auth(new Kea_Auth_Adapter());
+		if ($auth->isLoggedIn()) {
+			$token = $auth->getToken();
+			return $token->getIdentity();
+		}
+		return false;
+	}
 }
 ?>

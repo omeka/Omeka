@@ -104,10 +104,8 @@ class UsersController extends Kea_Controller_Action
 			require_once 'Zend/Auth.php';
 			require_once 'Zend/Session.php';
 			require_once 'Kea/Auth/Adapter.php';
-			
-			
+
 			$session = new Zend_Session;
-			echo $session->controller;
 			
 			$filterPost = new Zend_Filter_Input($_POST);
 			$auth = new Zend_Auth(new Kea_Auth_Adapter());

@@ -17,16 +17,16 @@ class Kea_Acl extends Zend_Acl
 	 */
 	protected $_permissions = array('GLOBAL' => array());
 	
-	public function getPermissions() {
+	public function getRules() {
 		return $this->_permissions;
 	}
 	
-	public function deletePermissions() {
+	public function deleteRules() {
 		$this->_permissions = array('GLOBAL' => array());
 		$this->save();
 	}
 	
-	public function registerPermission(Zend_Acl_Resource_Interface $resource = null, $permissions) {
+	public function registerRule(Zend_Acl_Resource_Interface $resource = null, $permissions) {
 		$permissions = (array) $permissions;
 		
 		// Register a Global permission
@@ -58,7 +58,7 @@ class Kea_Acl extends Zend_Acl
 		$this->save();
 	}
 
-	public function removePermission($resource = null, $permissions)
+	public function removeRule($resource = null, $permissions)
 	{
 		$permissions = (array) $permissions;
 		
@@ -107,7 +107,7 @@ class Kea_Acl extends Zend_Acl
 		$this->save();
 	}
 	
-	public function unregisterPermissionsByResource($resource)
+	public function removeRulesByResource($resource)
 	{
 		if ($resource instanceof Zend_Acl_Resource_Interface) {
             $resourceId = $resource->getResourceId();
@@ -131,7 +131,7 @@ class Kea_Acl extends Zend_Acl
 	 * array of what that role is allowed.  This is a purposefully simplified
 	 * method of the Zend ACL operations
 	 */
-	public function getRules($role) {
+	public function getRoleAssignedRules($role) {
 		$roleRules = array('GLOBAL' => array());
 		
 		$globalRules = $this->_rules['allResources']['byRoleId'][$role]['byPrivilegeId'];
