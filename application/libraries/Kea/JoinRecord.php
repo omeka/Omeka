@@ -38,7 +38,6 @@ abstract class Kea_JoinRecord extends Kea_Record
 	
 	public function validate() {
 		$state = $this->getState();
-		Zend::dump( $state );
 		if($state == Doctrine_Record::STATE_TDIRTY || $state == Doctrine_Record::STATE_DIRTY)
 		{
 			if(!$this->isUnique()) {

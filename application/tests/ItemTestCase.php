@@ -14,9 +14,6 @@ class ItemTestCase extends OmekaTestCase
 	 **/
 	public function init()
 	{
-		$sql = file_get_contents('users.sql');
-		$this->manager->connection()->execute($sql);
-		
 	}
 	
 	public function setUp()
@@ -47,7 +44,7 @@ class ItemTestCase extends OmekaTestCase
 	{
 		$i = $this->i1;
 		$u = $this->u1;
-		$string = "foo, bar, far";
+		$string = "Tag1, bar, far";
 		$i->addTagString($string, $u);
 		$this->assertEqual(count($i->ItemsTags), 4);
 		$existingIt = $i->ItemsTags->getFirst();
@@ -63,13 +60,13 @@ class ItemTestCase extends OmekaTestCase
 	public function testHasTag()
 	{
 		$i = $this->i1;
-		$this->assertTrue($i->hasTag('foo'));
+		$this->assertTrue($i->hasTag('Tag1'));
 		
 		$u = $this->u1;
-		$this->assertTrue($i->hasTag('foo', $u));
+		$this->assertTrue($i->hasTag('Tag1', $u));
 		
 		$newU = new User;
-		$this->assertFalse($i->hasTag('foo', $newU), 'Item is tagged by a user that does not exist');
+		$this->assertFalse($i->hasTag('Tag1', $newU), 'Item is tagged by a user that does not exist');
 	}
 	
 	public function testHasFavorite()
@@ -121,7 +118,7 @@ class ItemTestCase extends OmekaTestCase
 		$agg = $if->text;
 		$array = array_diff(explode(' ', $agg), array(""));
 		sort($array);
-		$this->assertEqual($array, array ( 0 => 'Item1', 1 => 'Metatext1', 2 => 'foo', 3 => 'newTagged'));
+		$this->assertEqual($array, array ( 0 => 'Item1', 1 => 'Metatext1', 2 => 'Tag1', 3 => 'newTagged'));
 	}
 }
  

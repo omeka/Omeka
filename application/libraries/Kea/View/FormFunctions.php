@@ -1,95 +1,142 @@
 <?php
-	function label($text, $id = null, $return = false) 
+	function _tag_attributes($attributes,$value=null) {
+		//don't allow 'value' to be set specifically as an attribute (why = consistency)
+		unset($attributes['value']);
+		
+		$attr = array();
+		foreach ($attributes as $key => $attribute) {
+			$attr[$key] = $key . '="' . allhtmlentities( $attribute ) . '"';
+		}
+		return join(' ',$attr);
+	}
+
+	/**
+	 * Make a label for a form element
+	 *
+	 * @param mixed an array of attributes, or just the string id to be used in the 'for' attribute
+	 * @param string text of the form label
+	 * @param boolean whether or not to return the label HTML
+	 * @return mixed
+	 **/
+	function label($attributes=array(), $text, $return = false) 
 	{
-		$label = '<label'.(!$id ? '' : ' for="'.$id.'"').'>'.$text.'</label>';
+		if(!is_array($attributes)) {
+			$id = $attributes;
+			$label = '<label'.(!$id ? '' : ' for="'.allhtmlentities($id).'"').'>'.$text.'</label>';;
+		} else {
+			$label = '<label '._tag_attributes($attributes).">".$text."</label>";
+		}
+		
 		if($return) return $label;
 		else echo $label;
 	}
 	
-	function text( array $params = array(), $label = null )
+	function text( array $attributes = array(), $default, $label = null )
 	{
 		$input = '';
 		if($label) 
 		{
-			label($label, @$params['id']);
+			label(@$attributes['id'],allhtmlentities($label));
 		}
 		
-		$input .= '<input type="text" ';
-		foreach( $params as $key => $val )
+		if(!$default and !empty($attributes['value'])) 
 		{
-			$input .= $key . '="' . allhtmlentities( $val ) . '" ';
+			$default = $attributes['value'];
+			unset($attributes['value']);
 		}
+		
+		$input .= '<input type="text"';
+		if(!empty($attributes)) {
+			$input .= ' '._tag_attributes($attributes);
+		}
+		$input .= ' value="'.allhtmlentities($default).'" ';
+		
 		$input .= '/>';
 		$input .= "\n";
 		echo $input;
 	}
 	
 
-	function select( array $params = array(), $val_array = null, $saved = null, $value = null, $desc = null )
+	function select( array $attributes = array(), $values = null, $default = null, $label=null, $optionValue = null, $optionDesc = null )
 	{
-		$select = '<select ';
-		foreach( $params as $k => $v )
-		{
-			$select .= $k . '="' . allhtmlentities( $v ) . '" ';
+		$select = '<select';
+		$attr = array();
+		foreach ($attributes as $key => $attribute) {
+			$attr[$key] = $key . '="' . allhtmlentities( $attribute ) . '"';
+		}
+		if(!empty($attr)) {
+			$select .= ' '.join(' ',$attr);
 		}
 		$select .= '>';
-		$select .= "\t" . '<option value="">Select Below&nbsp;</option>' . "\n"; 
-		if( !$value && !$desc )
+		$select .= "\n\t" . '<option value="">Select Below&nbsp;</option>' . "\n"; 
+		if( !$optionValue && !$optionDesc )
 		{
-			foreach( $val_array as $k => $v )
+			foreach( $values as $k => $v )
 			{
 				$select .= "\t" . '<option value="' . allhtmlentities( $k ) . '"';
-				if( $saved && $saved == $k ) $select .= ' selected="selected" ';
+				if( $default == $k ) $select .= ' selected="selected"';
 				$select .= '>' . allhtmlentities( $v ) . '</option>' . "\n";
 			}
 		}
 		else
 		{
-			foreach( $val_array as $obj_array )
+			foreach( $values as $obj_array )
 			{
-				$select .= "\t" . '<option value="' . allhtmlentities( $obj_array[$value] ) . '"';
-				if( $saved && $saved == $obj_array[$value] ) $select .= ' selected="selected" ';
+				$select .= "\t" . '<option value="' . allhtmlentities( $obj_array[$optionValue] ) . '"';
+				if( $default == $obj_array[$optionValue] ) $select .= ' selected="selected"';
 				$select .= '>';
-				if( is_array( $desc ) )
+				if( is_array( $optionDesc ) )
 				{
-					foreach( $desc as $text )
+					foreach( $optionDesc as $text )
 					{
 						$select .= allhtmlentities( $obj_array[$text] ) . ' ';
 					}
 					$select .= '</option>' . "\n";
 				}
-				elseif( is_string( $desc ) )
+				elseif( is_string( $optionDesc ) )
 				{
-					$select .= allhtmlentities( $obj_array[$desc] ) . '</option>' . "\n";	
+					$select .= allhtmlentities( $obj_array[$optionDesc] ) . '</option>' . "\n";	
 				}
 			}
 		}
 		$select .= '</select>' . "\n";
-		echo $select;
+		
+		if($label) {
+			//Label attribute must either have an associated id element or be wrapped around the select 
+			//http://checker.atrc.utoronto.ca/servlet/ShowCheck?check=91
+			if(array_key_exists('id',$attributes)) {
+				label(@$attributes['id'],allhtmlentities($label));
+				echo "\n".$select;
+			}else {
+				label(null,allhtmlentities($label) ."\n\t". $select);
+			}
+		}else {
+			echo $select;
+		}
 	}
 	
-	function textarea( array $params = array(), $text = null, $label = null )
+	function textarea( array $attributes = array(), $default = null, $label = null )
 	{
-		if($label) label($label,@$params['id']);
-		$ta = '<textarea ';
-		foreach( $params as $key => $val ) {
-			$ta .= ' ' . $key . '="' . $val . '"';
+		if($label) label(@$attributes['id'],$label);
+		$ta = '<textarea';
+		if(!empty($attributes)) {
+			$ta .= ' '._tag_attributes($attributes);
 		}
-		$ta .= '>' .  $text  . '</textarea>'."\n";
+		$ta .= '>' .  $default  . '</textarea>'."\n";
 		echo $ta;
 	}
 	
-	function radio( $name = null, array $values, $default = null, $saved = null, $label_class = 'radiolabel' )
+	function radio( $attributes=array(), array $values, $default = null, $label_class = 'radiolabel' )
 	{
 		foreach( $values as $k => $v )
 		{
 			
-			$radio = '<label class="' . $label_class . '"><input type="radio" name="' . $name . '" value="' . $k . '"';
-			if( $saved && $saved == $k )
-			{
-				$radio .= ' checked="checked" />' . $v . '</label>';
+			$radio = '<label class="' . $label_class . '"><input type="radio"';
+			if(!empty($attributes)) {
+				$radio .= ' '._tag_attributes($attributes);
 			}
-			elseif( !$saved && $default == $k )
+			$radio .= ' value="' . $k . '"';
+			if($default == $k )
 			{
 				$radio .= ' checked="checked" />' . $v . '</label>';
 			}
@@ -101,28 +148,37 @@
 		}
 	}
 	
-	function hidden( array $params = array() )
+	function hidden( array $attributes = array(),$value )
 	{
-		$input = '<input type="hidden" ';
-		foreach( $params as $key => $val )
-		{
-			$input .= $key . '="' . allhtmlentities( $val ) . '" ';
+		$input = '<input type="hidden"';
+		if(!empty($attributes)) {
+			$input .= ' '._tag_attributes($attributes);
 		}
+		$input .= ' value="'.allhtmlentities($value).'"';
 		$input .= ' />' . "\n";
 		echo $input;
 	}
 	
-	function checkbox( array $params, $checked = FALSE, $label = null )
+	function checkbox( array $attributes, $value=null, $checked = FALSE, $label = null )
 	{
-		$checkbox = '<input type="checkbox" ';
-		foreach( $params as $param => $value )
-		{
-			$checkbox .= $param . '="'. $value. '" ';
+		$checkbox = '<input type="checkbox"';
+		if( $checked ) {
+			$attributes['checked'] = 'checked';
 		}
-		if( $checked ) $checkbox .= 'checked="checked" ';
+		if(!empty($attributes)) {
+			$checkbox .= ' '._tag_attributes($attributes);
+		}
+		if($value) {
+			$checkbox .= ' value="'.allhtmlentities($value).'"';
+		}
 		$checkbox .= ' />' . "\n";
-		if($label) label($label,@$params['id']);
+		if($label) label(@$attributes['id'],$label);
 		echo $checkbox;
+	}
+	
+	function submit($value="Submit this Form --&gt;",$name="submit")
+	{
+		echo '<input type="submit" name="'.$name.'" value="'.$value.'" />';
 	}
 	
 	/**

@@ -82,11 +82,11 @@
 							$metafield->id,
 							'id',
 							'name' ); */
-	text(array('name' => "Metafields[$key][name]", 'value' => $metafield->name));
+	text(array('name' => "Metafields[$key][name]"),$metafield->name);
 	echo 'Remove this metafield from the Type';
-	checkbox(array('name' => "remove_metafield[$key]"), false);
+	checkbox(array('name' => "remove_metafield[$key]"));
 	echo 'Delete this metafield permanently';
-	checkbox(array('name' => "delete_metafield[$key]"), false);
+	checkbox(array('name' => "delete_metafield[$key]"));
 endforeach; ?>
 
 <?php endif; ?>
@@ -104,6 +104,7 @@ endforeach; ?>
 							'id'	=> "metafield_$totalMetafields" ),
 							$metafields,
 							null,
+							'Pre-existing Metafields',
 							'id',
 							'name' ); ?>
 	<?php endif; ?>

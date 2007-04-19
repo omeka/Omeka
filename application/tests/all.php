@@ -6,11 +6,11 @@ require_once '../../paths.php';
 
 //set_include_path(get_include_path().PATH_SEPARATOR.APP_DIR.DIRECTORY_SEPARATOR.$site['simpletest']);
 
-require_once 'Kea/Logger.php';
+/*require_once 'Kea/Logger.php';
 $logger = new Kea_Logger;
 $logger->setSqlLog(dirname(__FILE__).DIRECTORY_SEPARATOR.'sql.log');
 $logger->activateSqlLogging(true);	
-
+*/
 require_once 'Doctrine.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
 $dbh = new PDO('mysql:host=localhost;dbname=omeka_test', 'root', '');
@@ -35,7 +35,9 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 
 //Mock::generate('Log');
 require_once 'ItemTestCase.php';
+require_once 'FormFunctionsTestCase.php';
 $test = new TestSuite('Omeka Tests');
 $test->addTestCase(new ItemTestCase());
+$test->addTestCase(new FormFunctionsTestCase());
 $test->run(new HtmlReporter());
 ?>

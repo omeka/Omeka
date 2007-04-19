@@ -46,19 +46,19 @@
 						'id'	=> 'collection_id' ),
 						$collections,
 						$item->collection_id,
+						'Collection',
 						'id',
 						'name' ); ?>
 		
 		<h3>Type Info</h3>
-		<?php foreach( $types as $key => $type ): ?>
 			<?php select(	array(	
 						'name'	=> 'type_id',
 						'id'	=> 'type_id' ),
 						$types,
 						$item->type_id,
+						'Type Info',
 						'id',
 						'name' ); ?>
-		<?php endforeach; ?>
 		
 		
 		<input type="submit" name="change_type" value="Pick this type" />

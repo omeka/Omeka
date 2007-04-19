@@ -40,12 +40,12 @@
 	</fieldset>
 	<fieldset id="type-metadata">
 		<legend>Type Metadata</legend>
-		<label>Collection</label>
 			<?php select(	array(	
 						'name'	=> 'collection_id',
 						'id'	=> 'collection' ),
 						$collections,
 						$item->collection_id,
+						'Collection',
 						'id',
 						'name' ); ?>
 		
@@ -55,6 +55,7 @@
 						'id'	=> 'type' ),
 						$types,
 						$item->type_id,
+						'Type Info',
 						'id',
 						'name' ); ?>
 		

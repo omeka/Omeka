@@ -13,6 +13,8 @@ abstract class OmekaTestCase extends UnitTestCase
         if( ! $this->init) {
 			$this->manager = Doctrine_Manager::getInstance();
 			$this->wipeDb();
+			$sql = file_get_contents('setup.sql');
+			$this->manager->connection()->execute($sql);
 			$this->init();
 		}
         $this->init    = true;
@@ -21,12 +23,12 @@ abstract class OmekaTestCase extends UnitTestCase
 		$conn = $this->manager->connection();
 		$conn->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 		$models  = array('Collection',
-					'Exhibit',
+			//		'Exhibit',
 					'File',
 					'Group',
 					'GroupsPermissions',
 					'Item',
-					'ItemsExhibits',
+			//		'ItemsExhibits',
 					'ItemsFavorites',
 					'ItemsFulltext',
 					'ItemsTags',
@@ -51,5 +53,8 @@ abstract class OmekaTestCase extends UnitTestCase
 		}		
 	}
 	public function init() {}
+	
+	public function getTable($name) { return $this->manager->getTable($name);}
+	
 } // END abstract class OmekaTestCase extends UnitTestCase 
 ?>
