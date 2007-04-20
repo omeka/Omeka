@@ -144,7 +144,7 @@ class UsersController extends Kea_Controller_Action
 		
 		$roles = array_keys($acl->getRoles());
 
-		$permissions = $acl->getPermissions();
+		$permissions = $acl->getRules();
 		
 		foreach($roles as $key => $val) {
 			$roles[$val] = $val;
@@ -194,13 +194,11 @@ class UsersController extends Kea_Controller_Action
 	public function deleteRoleAction()
 	{
 		$filterPost = new Zend_Filter_Input($_POST);
-		if ($roleName = $filterPost->testAlnum('name')) {
+		if ($roleName = $filterPost->testAlnum('role')) {
 			$acl = Zend::registry('acl');
 			if ($acl->hasRole($roleName)) {
 				$acl->removeRole($roleName);
-				$dbAcl = $this->getTable('option')->findByDql('name LIKE "acl"');
-				$dbAcl[0]->value = serialize($acl);
-				$dbAcl[0]->save();
+				$acl->save();
 			}
 		}
 		$this->_redirect('users/roles');
