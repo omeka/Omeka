@@ -127,18 +127,18 @@ class Kea_Acl extends Zend_Acl
 	}
 	
 	/**
-	 * Takes a single role and optional resource and returns an
+	 * Takes a single role and return an
 	 * array of what that role is allowed.  This is a purposefully simplified
 	 * method of the Zend ACL operations
 	 */
 	public function getRoleAssignedRules($role) {
 		$roleRules = array('GLOBAL' => array());
-		
+
 		$globalRules = $this->_rules['allResources']['byRoleId'][$role]['byPrivilegeId'];
 		foreach($globalRules as $rule => $settings) {
 			$roleRules['GLOBAL'][] = $rule;
 		}
-		
+
 		foreach ($this->_rules['byResourceId'] as $resourceId => $settings) {
 			foreach ($settings['byRoleId'] as $roleId => $permissions) {
 				if ($role == $roleId) {
@@ -149,8 +149,20 @@ class Kea_Acl extends Zend_Acl
 				}
 			}
 		}
-		
 		return $roleRules;
+	}
+	
+	public function removeRulesByRole($role) {
+		$rules = $this->getRoleAssignedRules($role);
+		foreach($rules as $resource => $rule) {
+			if ($resource == 'GLOBAL') {
+				$this->removeAllow($role, null, $rule);	
+			}
+			else {
+				$this->removeAllow($role, $resource, $rule);
+			}
+		}
+		$this->save();
 	}
 	
 	/**

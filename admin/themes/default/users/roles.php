@@ -10,24 +10,11 @@
 <form action="<?php echo uri('users/deleteRole'); ?>" method="post">
 <h3>Delete Roles</h3>
 <?php select(array('name' => 'role'), $roles); ?>
-<input type="submit" value="Delete Selected User" onclick="return confirm('Are you sure you want to delete the selected user?');">
+<input type="submit" value="Delete The Selected Role" onclick="return confirm('Are you sure you want to delete the selected role?');">
 </form>
 
 <br/>
-<h3>Alter Permissions</h3>
-<form action="" method="post">
-<?php select(array('name' => 'role'), $roles); ?>
-<ul>
-<?php foreach ($permissions as $resource => $resource_permissions): ?>
-	<li><h2><?php echo $resource; ?></h2></li>
-	<?php foreach ($resource_permissions as $permission): ?>
-	<li><?php echo $permission; checkbox(array('name' => 'permissions['.$resource.']['.$permission.']'))?></li>
-	<?php endforeach; ?>
-<?php endforeach; ?>
-</ul>
-
-<input type="submit" value="Add Permissions to Users"/>
-</form>
-
-
+<h3>Alter Role Permissions</h3>
+<?php select(array('name' => 'role', 'onchange' => 'getRoleRuleForm(this);'), $roles); ?>
+<div id="rulesForm"></div>
 <?php foot();?>

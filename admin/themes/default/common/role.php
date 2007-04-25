@@ -14,10 +14,18 @@
 <!-- JavaScripts -->
 <?php
 	js('prototype');
-	js('scriptaculous');
-	js('dragdrop');
 ?>
-
+<script type="text/javascript" charset="utf-8">
+	function getRoleRuleForm(role) {
+		var url = '/omeka/admin/users/rulesForm?role='+role.value;
+		new Ajax.Request(url, {
+			method: 'post',
+			onSuccess: function(req) {
+				$('rulesForm').innerHTML = req.responseText;
+			}
+		});
+	}
+</script>
 
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>

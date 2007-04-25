@@ -143,22 +143,22 @@ class UsersController extends Kea_Controller_Action
 		$acl = Zend::registry('acl');
 		
 		$roles = array_keys($acl->getRoles());
-
-		$permissions = $acl->getRules();
 		
 		foreach($roles as $key => $val) {
 			$roles[$val] = $val;
 			unset($roles[$key]);
 		}
-
-		$acl->getRules('researcher');
-		$params = array('roles' => $roles, 'permissions' => $permissions);
+		
+		$params = array('roles' => $roles);
 		$this->render('users/roles.php', $params);
 	}
 	
-	public function getRoleForm()
-	{
-		
+	public function rulesFormAction() {
+		$role = $_REQUEST['role'];
+		$acl = Zend::registry('acl');
+		$permissions = $acl->getRules();
+		$params = array('permissions' => $permissions, 'role' => $role, 'acl' => $acl);
+		$this->render('users/rulesForm.php', $params);
 	}
 
 	public function addRoleAction()
@@ -208,6 +208,7 @@ class UsersController extends Kea_Controller_Action
 		$role = $_POST['role'];
 		if (!empty($role)) {
 			$acl = Zend::registry('acl');
+			$acl->removeRulesByRole($role);
 			foreach($_POST['permissions'] as $resource => $permissions) {
 				$resource_permissions = array();
 				foreach($permissions as $permission => $on) {
@@ -215,8 +216,8 @@ class UsersController extends Kea_Controller_Action
 				}
 				$acl->allow($role, $resource, $resource_permissions);
 			}
+			$acl->save();
 		}
-		$acl->save();
 		$this->_redirect('users/roles');
 	}
 
