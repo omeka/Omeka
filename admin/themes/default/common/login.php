@@ -18,7 +18,7 @@
 <?php plugin_header(); ?>
 
 </head>
-<body>
+<body id="login">
 	<div id="wrap">
 		<div id="header">
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>

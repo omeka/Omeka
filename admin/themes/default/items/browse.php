@@ -1,38 +1,43 @@
 <?php head(); ?>
 
-<ul id="secondary-nav" class="navigation">
-	<?php nav(array('Browse' => uri('items'),
-					'Add Item' => uri('items/add')));?>
+<?php common('archive-nav'); ?>
+<ul id="tertiary-nav" class="navigation">
+	<?php nav(array('Browse Items' => uri('items/browse'), 'Add Item' => uri('items/add')));?>
 </ul>
-
-<h2>There are <?php echo $total;?> items.</h2>
-
-<form id="search">
-	<input type="text" name="search" />
-	<input type="submit" name="submit" value="Search" />
-</form>
-<?php echo $pagination; ?>
-
-<?php
-//plugin('GeoLocation', 'map', null, null, 5, 200, 200, 'map', uri('json/map/browse'), array('clickable' => false) );
-//plugin('GeoLocation', 'map', null, null, 5, 300, 200, 'map2', uri('json/map/browse'), array('clickable' => true) );
-?>
-
-<?php foreach($items as $key => $item): ?>
-<div class="item hentry">
-	<h3><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink">Item <?php echo $item->id;?>: <span class="entry-title"><?php echo $item->title; ?></span></a></h3>
-	<p><?php echo $item->description; ?></p>		
-	
-	<div class="tagcloud">Tags: 
-	<?php if(count($item->Tags)): ?>
-	<?php foreach ($item->Tags as $tag): ?>
-	<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" re="tag"><?php echo $tag ?></a>
-	<?php endforeach; ?>
-	<?php else: ?>
-	No Tags
-	<?php endif;?>
-	
-	</div>
+<h2>Browse Items (<?php echo $total;?> items total)</h2>
+<div class="archive-meta">
+	<form id="search">
+		<input type="text" name="search" />
+		<input type="submit" name="submit" value="Search" />
+	</form>
+	<div class="pagination"><?php echo $pagination; ?></div>
 </div>
+
+<table id="items" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+		<th scope="col">ID</th>
+		<th scope="col">Title</th>
+		<th scope="col">Type</th>
+		<th scope="col">Creator</th>
+		<th scope="col">Date Added</th>
+		<th scope="col">View</th>
+		</tr>
+	</thead>
+	<tbody>
+<?php foreach($items as $key => $item): ?>
+<tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
+	<td scope="row"><?php echo $item->id;?></td> 
+	<td><?php echo $item->title; ?></td>
+	<td><?php echo $item->Type->name; ?></td>
+	<td><?php echo $item->creator; ?></td>	
+	<td><?php echo date('m.d.Y', strtotime($item->added)); ?></td>
+	<td><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink">View</a></td>
+</tr>
 <?php endforeach; ?>
+</tbody>
+</table>
+<div class="archive-meta">
+<div class="pagination"><?php echo $pagination; ?></div>
+</div>
 <?php foot(); ?>

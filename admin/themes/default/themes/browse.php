@@ -1,4 +1,6 @@
 <?php head();?>
+<?php common('settings-nav'); ?>
+
 	<h2>Themes</h2>
 <form method="post">
 	<?php foreach($this->themes as $theme): ?>

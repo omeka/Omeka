@@ -56,6 +56,30 @@
 		echo $input;
 	}
 	
+	function password( array $attributes = array(), $default, $label = null )
+	{
+		$input = '';
+		if($label) 
+		{
+			label(@$attributes['id'],allhtmlentities($label));
+		}
+		
+		if(!$default and !empty($attributes['value'])) 
+		{
+			$default = $attributes['value'];
+			unset($attributes['value']);
+		}
+		
+		$input .= '<input type="password"';
+		if(!empty($attributes)) {
+			$input .= ' '._tag_attributes($attributes);
+		}
+		$input .= ' value="'.allhtmlentities($default).'" ';
+		
+		$input .= '/>';
+		$input .= "\n";
+		echo $input;
+	}
 
 	function select( array $attributes = array(), $values = null, $default = null, $label=null, $optionValue = null, $optionDesc = null )
 	{
@@ -115,6 +139,7 @@
 		}
 	}
 	
+
 	function textarea( array $attributes = array(), $default = null, $label = null )
 	{
 		if($label) label(@$attributes['id'],$label);
@@ -189,7 +214,7 @@
 	 *
 	 * @return void
 	 **/
-	function metatext_form($item, $type="textarea", $metafields=null, $usePlugins=false ) 
+	function metatext_form($item, $type="textarea",$metafields=null,$usePlugins=false) 
 	{
 		if($metafields) {
 			//Loop through the metafields
@@ -212,11 +237,13 @@
 						$input .= '</textarea>';
 						break;
 				}
-				
+				$out .= '<div class="field">';
 				$out .= '<label for="'.$metafieldInputId.'">'.$metafield->name;
-				$out .= $input;
 				$out .=	'</label>'."\n\t";
-				$out .= '<input type="hidden" name="Metatext['.$metafield->id.'][metafield_id]" value="'.$metafield->id.'"/>'."\n\n\t";
+				$out .= $input;
+				$out .= '</div>';
+				
+				$out .= '<input type="hidden" name="Metatext['.$metafield->id.'][metafield_id]" value="'.$metafield->id.'" />'."\n\n\t";
 				echo $out;
 			}
 		} else {

@@ -1,4 +1,6 @@
 <?php head(); ?>
+<?php common('settings-nav'); ?>
+
 	<div id="installed">
 <h2>List of plugins:</h2>
 

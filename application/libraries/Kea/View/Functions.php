@@ -189,7 +189,8 @@ function flash()
 {
 	require_once 'Zend/Session.php';
 	$flash = new Zend_Session('flash');
-	$msg = $flash->msg;
+	
+	$msg = '<div class="alert">'.$flash->msg.'</div>';
 	$flash->msg = null;
 	if ($msg === null) {
 		return false;

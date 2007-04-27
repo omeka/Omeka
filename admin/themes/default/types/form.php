@@ -54,28 +54,49 @@
 	
 	function addNewMetafield() {
 		id = getLastId()+1;
+		
+		nameFieldBox = document.createElement("div");
+		nameFieldBox.setAttribute("class","field");
+		nameFieldLabel = document.createElement("label");
+		nameFieldLabel.innerHTML = 'Name Field';
 		nameField = document.createElement("input");
 		nameField.setAttribute("id", "metafield_"+id);
 		nameField.setAttribute("name", "Metafields["+id+"][name]");
+		nameField.setAttribute("class", "textinput");
+		
+		descFieldBox = document.createElement("div");
+		descFieldBox.setAttribute("class","field");
+		descFieldLabel = document.createElement("label");
+		descFieldLabel.innerHTML = 'Description Field';
 		descField = document.createElement("textarea");
 		descField.setAttribute("name", "Metafields["+id+"][description]");
-		$('new-metafields').appendChild(nameField);
-		$('new-metafields').appendChild(descField);
+		descField.setAttribute("class", "textinput");
+		
+		nameFieldBox.appendChild(nameFieldLabel);
+		nameFieldBox.appendChild(nameField);
+		descFieldBox.appendChild(descFieldLabel);
+		descFieldBox.appendChild(descField);
+		
+		$('new-metafields').appendChild(nameFieldBox);
+		$('new-metafields').appendChild(descFieldBox);
+		
 	}
 	
 	Event.observe(window, "load", ajaxify);
 </script>
-
-<label for="name">Type Name</label>
-<input class="textinput" type="text" name="name" value="<?php echo $type->name; ?>" />
-
-<label for="description">Type Description</label>
-<textarea class="textinput" name="description"><?php echo $type->description; ?></textarea>
+<fieldset>
+<div class="field">
+<?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$type->name, 'Type Name'); ?>
+</div>
+<div class="field">
+<?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description', 'rows'=>'10'),$type->description, 'Type Description'); ?>
+</div>
 
 <div id="old-metafields">
 <?php if($type->exists()): ?>
 <p>Edit existing metafields</p>
 <?php foreach( $type->Metafields as $key => $metafield ):
+	echo '<div class="field">';
 /*	select(	array(	
 							'name'	=> "Metafields[$key][id]" ),
 							$metafields,
@@ -87,12 +108,12 @@
 	checkbox(array('name' => "remove_metafield[$key]"));
 	echo 'Delete this metafield permanently';
 	checkbox(array('name' => "delete_metafield[$key]"));
+	echo '</div>';
 endforeach; ?>
 
 <?php endif; ?>
 </div>
-<div id="add">
-</div>
+<div id="add"></div>
 
 <div id="new-metafields">
 	<p>Add a metafield:</p>
@@ -111,3 +132,4 @@ endforeach; ?>
 	
 	<input type="text" name="Metafields[<?php echo $totalMetafields;?>][name]" id="metafield_<?php echo $totalMetafields;?>" />
 </div>
+</fieldset>

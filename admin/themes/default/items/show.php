@@ -1,4 +1,5 @@
 <?php head(array('title' => 'Item'))?>
+<?php common('archive-nav'); ?>
 
 <?php js('editable');?>
 <?php error($item);?>
@@ -115,62 +116,77 @@
 			Event.observe(deleteTagLinks[i],"click",deleteTag);
 		};						
 	});
+	/*
+	var checkJS = document.getElementById;
+
+	if (checkJS) {
+	        document.write('<style type="text/css">ul.items-nav{display: none;}</style>');
+	}*/
 </script>
-<ul id="secondary-nav" class="navigation">
+<ul id="tertiary-nav" class="items-nav navigation">
 	<?php nav(array('Show Item' => uri('items/show/'.$item->id), 'Edit Item' => uri('items/edit/'.$item->id), 'Back to Items' => uri('items')));?>
 </ul>
 
-<h2><div class="editable" id="title"><?php echo $item->title; ?></div></h2>
+<h2><div class="editable" id="title" rel="text"><?php echo $item->title; ?></div></h2>
 
 <h3>Core Metadata</h3>
 <div id="core-metadata">
 	
 	
-		<h4>Description</h4>
+	<h4>Description</h4>
 	<div id="description" class="editable" rel="textarea">
-		<?php display_empty($item->description); ?>
+	<?php display_empty($item->description); ?>
 	</div>
+	
 	<h4>Publisher</h4>
-<div id="publisher" class="editable" rel="text"><?php display_empty($item->publisher)?></div>
+	<div id="publisher" class="editable" rel="text">
+	<?php display_empty($item->publisher)?>
+	</div>
 	
 	<h4>Relation</h4>
 	<div class="editable" id="relation" rel="text">
-		<?php display_empty($item->relation)?>
+	<?php display_empty($item->relation)?>
 	</div>
 	
 	<h4>Language</h4>
-<?php display_empty($item->language)?>
+	<div class="editable" id="language" rel="text">
+	<?php display_empty($item->language)?>
+	</div>
 
 	<h4>Coverage</h4>
-<?php display_empty($item->coverage)?>
+	<div id="coverage" class="editable" rel="text">
+	<?php display_empty($item->coverage)?>
+	</div>
 	
 	<h4>Rights</h4>
-<div class="editable" id="rights">
+	<div class="editable" id="rights" rel="text">
 	<?php display_empty($item->rights)?>
-</div>
+	</div>
 	
 	<h4>Source</h4>
-<div class="editable" id="source">
-<?php display_empty($item->source)?>
-</div>
+	<div class="editable" id="source" rel="text">
+	<?php display_empty($item->source)?>
+	</div>
 	
 	<h4>Subject</h4>
-<div class="editable" id="subject">
-<?php display_empty($item->subject)?>
-</div>
+	<div class="editable" id="subject" rel="text">
+	<?php display_empty($item->subject)?>
+	</div>
 
 	<h4>Creator</h4>
-<div class="editable" id="creator">
-<?php display_empty($item->creator)?>
-</div>
+	<div class="editable" id="creator" rel="text">
+	<?php display_empty($item->creator)?>
+	</div>
 	
 	<h4>Additional Creator</h4>
-<div class="editable" id="additional_creator">
-<?php display_empty($item->additional_creator)?>
-</div>
+	<div class="editable" id="additional_creator" rel="text">
+	<?php display_empty($item->additional_creator)?>
+	</div>
 	
 	<h4>Date</h4>
-<?php echo $item->date;?>
+	<div>
+	<?php echo $item->date;?>
+	</div>
 
 </div>
 
@@ -182,7 +198,7 @@
 </div>
 
 <?php if ( $item->Collection->exists() ): ?>
-	<h2>Collection</h2>
+	<h4>Collection</h4>
 
 	<div id="collection">
 		<?php echo $item->Collection->name; ?>
@@ -190,19 +206,20 @@
 <?php endif; ?>
 
 
-<h2>Type Metadata</h2>
+<h3>Type Metadata</h3>
 
 <h4>Type Name</h4>
-<h5><div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div></h5>
+<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
 
-<h4>Metatext</h4>
 <?php foreach($item->Metatext as $key => $metatext): ?>
-<h5><?php echo $metatext->Metafield->name; ?>: <?php echo $metatext->text; ?></h5>
+<h4><?php echo $metatext->Metafield->name; ?></h4>
+<div><?php echo $metatext->text; ?></div>
 <?php endforeach; ?>
 
-<h2>My Tags</h2>
+<h3>Tags</h3>
+<h4>My Tags</h4>
 <div id="my-tags">
-	<ul>
+	<ul class="tags">
 		<?php $myTags = $item->userTags($user);?>
 		<?php foreach($myTags as $tag):?>
 		<li class="my-tag">
@@ -212,9 +229,9 @@
 		<?php endforeach; ?>
 	</ul>
 </div>
-<h2>All Tags</h2>
+<h4>All Tags</h4>
 <div id="tags">
-	<ul>
+	<ul class="tags">
 		<?php foreach( $item->Tags as $key => $tag ): ?>
 		<li class="tag">
 			<a href="<?php echo uri('items/browse/tag/'.$tag->name);?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>

@@ -1,4 +1,6 @@
 <?php head(); ?>
+<?php common('settings-nav'); ?>
+
 <?php if(!empty($new_names)):?>
 <h2>The following plugins have not yet been installed</h2>
 

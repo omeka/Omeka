@@ -1,4 +1,5 @@
 <?php head(); ?>
+<?php common('settings-nav'); ?>
 
 <h2><?php echo $plugin->name;?></h2>
 

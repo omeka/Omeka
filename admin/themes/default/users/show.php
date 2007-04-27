@@ -1,3 +1,11 @@
 <?php head();?>
-<h2>Users | User Name</h2>
+<h2>User: <?php echo $user->first_name; ?> <?php echo $user->last_name; ?> <a class="edit" href="<?php echo uri('users/edit/'.$user->id); ?>">(Edit)</a></h2>
+<dl>
+	<dt>Username</dt>
+	<dd><?php echo $user->username; ?></dd>
+	<dt>Email</dt>
+	<dd><?php echo $user->username; ?></dd>
+	<dt>Institution</dt>
+	<dd><?php echo $user->institution; ?></dd>
+</dl>
 <?php foot();?>

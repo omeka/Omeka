@@ -17,11 +17,16 @@ EditableField.prototype = {
 			case 'text':
 				this.formElement = document.createElement("input");
 				this.formElement.setAttribute("type", "text");
+				this.formElement.setAttribute("class","textinput");
 				this.formElement.value = this.text;
 			break;
 			case 'textarea': 
 			default:
 				this.formElement = document.createElement("textarea");
+				this.formElement.setAttribute("class","textinput");
+				this.formElement.setAttribute("rows","10");
+				this.formElement.setAttribute("cols","50");
+				
 				this.formElement.innerHTML = this.text;
 			break;
 		}		
@@ -50,6 +55,7 @@ EditableField.prototype = {
 		editLink.innerHTML = 'Edit';
 		this.div.appendChild(editLink);
 		Event.observe(editLink, "click", this.sendEdit.bindAsEventListener(this));
+		
 	},
 	
 	sendEdit: function() {
@@ -61,6 +67,7 @@ EditableField.prototype = {
 			method: "post",
 			onSuccess: function(t, item) {
 				that.div.innerHTML = item[that.fieldName];
+				new Effect.Highlight(that.div, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'})
 				Event.observe(that.div, "click", that.boundMakeEditable);
 			}
 		}
@@ -79,8 +86,9 @@ EditableSelect.prototype = Object.extend({
 		this.ajaxUri = ajaxUri;
 		this.recordId = recordId;
 		this.selectElement = selectElement;
-		this.boundMakeEditable = this.makeEditable.bindAsEventListener(this);
+		this.boundMakeEditable = this.makeEditable.bindAsEventListener(this);		
 		Event.observe(this.div, "click", this.boundMakeEditable);
+		
 	},
 
 	makeFormElement: function() {

@@ -13,20 +13,28 @@
 
 <!-- JavaScripts -->
 <?php js('prototype'); ?>
-
+<?php js('scriptaculous');?>
+<?php js('globals'); ?>
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>
 
 </head>
 <body>
+	<div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
 	<div id="wrap">
+		
 		<div id="header">
+			<div id="user-meta">Welcome, User! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></div>
+			
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 			<ul id="primary-nav" class="navigation">
 			<?php
-				nav(array('Home' => uri(''),'Items' => uri('items/browse'), 'Types' => uri('types'), 'Collections' => uri('collections'), 'Tags' => uri('tags'), 'Themes' => uri('themes'), 'Plugins' => uri('plugins'),'Users' => uri('users'), 'Settings' =>uri('settings'), 'Logout' => uri('users/logout')));
+				nav(array('Home' => uri(''),'Archive' => uri('items/browse'),'Exhibits' => uri('exhibits'),'Users' => uri('users'), 'Settings' =>uri('settings')));
 
 			?>
 			</ul>
 		</div>
+		
+		
+		
 		<div id="content">

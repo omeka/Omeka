@@ -1,5 +1,9 @@
-<label for="name">Collection Name</label>
-<input type="text" class="textinput" name="name" value="<?php echo $collection->name; ?>" />
+<fieldset>
+<div class="field">
+<?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name, 'Collection Name'); ?>
+</div>
 
-<label for="description">Collection Description</label>
-<textarea name="description" class="textinput"><?php echo $collection->description; ?></textarea>
+<div class="field">
+<?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
+</div>
+</fieldset>

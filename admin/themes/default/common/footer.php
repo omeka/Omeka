@@ -1,6 +1,6 @@
 </div>
 <div id="footer">
-	<a href="http://omeka.org" id="omeka-logo">Powered by Omeka</a>
+	<p><a href="http://omeka.org" id="omeka-logo">Powered by Omeka</a></p>
 </div>
 </div>
 </body>

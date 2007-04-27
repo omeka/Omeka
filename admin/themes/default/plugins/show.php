@@ -1,4 +1,6 @@
 <?php head(); ?>
+<?php common('settings-nav'); ?>
+
 <a href="<?php echo uri('plugins/edit/'.$plugin->id); ?>">Edit</a>
 
 <h2><?php echo $plugin->name;?></h2>
