@@ -28,7 +28,6 @@ $manager->setAttribute(Doctrine::ATTR_VLD, true);
 
 //@todo Uncomment this prior to production release for increase in speed
 //$manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, false);
-
 $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 $manager->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 

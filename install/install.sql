@@ -23,6 +23,4 @@ INSERT INTO `types_metafields` (type_id, metafield_id) VALUES (4, 5);
 INSERT INTO `types_metafields` (type_id, metafield_id) VALUES (5, 6);
 INSERT INTO `types_metafields` (type_id, metafield_id) VALUES (7, 7);
 
-
-
 CREATE TABLE `items_fulltext` (`id` INT( 11 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,`item_id` INT(11) UNSIGNED NOT NULL, `text` LONGTEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,FULLTEXT (`text`)) ENGINE = MYISAM;

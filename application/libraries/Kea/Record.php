@@ -16,6 +16,7 @@ abstract class Kea_Record extends Doctrine_Record
 	 * @var array
 	 **/
 	protected $error_messages = array();
+	protected $constraints = array();
 	
 	public function setUp() 
 	{
@@ -118,7 +119,9 @@ abstract class Kea_Record extends Doctrine_Record
 				if(!is_array($value)) {
 					$type = $this->getTable()->getTypeOf($key);
 					if($type == 'string' || $type == 'integer') {
-						settype($value, $type);
+						if(!is_null($value)) {
+							settype($value, $type);
+						}
 					}
 				
 					$this->$key = (!$callback) ? $value : call_user_func_array($callback, array($value) );
@@ -151,6 +154,14 @@ abstract class Kea_Record extends Doctrine_Record
 	}
 	
 	public function setFromForm($array) {
+		
+		//Debatable as to whether this needs to go in the setArray() method or here - my guess is here
+		foreach ($this->constraints as $constraint) {
+			if(array_key_exists($constraint,$array) && empty($array[$constraint])) {
+				$array[$constraint] = null;
+			}
+		}
+		
 		return $this->setArray($array, array($this, 'strip'));
 	}
 	

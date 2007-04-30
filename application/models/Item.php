@@ -20,6 +20,8 @@ class Item extends Kea_Record
 {		
 	protected $error_messages = array(	'title' => array('notblank' => 'Item must be given a title.'));
 	
+	protected $constraints = array('collection_id','type_id','user_id');
+	
 	public function setUp() {
 		$this->hasOne("Collection","Item.collection_id");
 		$this->hasOne("Type","Item.type_id");
@@ -56,7 +58,7 @@ class Item extends Kea_Record
 		$this->hasColumn("modified","timestamp");
 		
 		$this->hasColumn("type_id","integer");
-		$this->hasColumn("collection_id","integer");
+		$this->hasColumn("collection_id","integer",null);
 		$this->hasColumn("user_id","integer");
 		$this->hasColumn("featured", "boolean", null,array('default'=>0));
 		$this->hasColumn("public", "boolean", null,array('default'=>0));

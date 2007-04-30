@@ -1,3 +1,5 @@
+<?php echo flash(); ?>
+
 <?php error($item); ?>
 <fieldset id="core-metadata">
 	<legend>Core Metadata</legend>

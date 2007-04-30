@@ -144,7 +144,8 @@ class ItemsController extends Kea_Controller_Action
 				}
 			}
 			
-			if($clean['public']) $item->public = 1;
+			$item->public = (bool) $clean['public'];
+			$item->featured = (bool) $clean['featured'];
 			
 			try {
 				$item->save();
@@ -153,6 +154,8 @@ class ItemsController extends Kea_Controller_Action
 			catch(Doctrine_Validator_Exception $e) {
 				$item->gatherErrors($e);
 				return false;
+			}catch(Exception $e) {
+				$this->flash($e->getMessage());
 			}	
 		}
 		return false;
