@@ -34,14 +34,18 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 		$ini = new Zend_Config_Ini($iniFile);
 		$this->ini = $ini;
 		
+		if(!$record) {
+			throw new Exception( 'Plugin must have an associated record in the database' );
+		}
+		
+		$this->record = $record;
+		
 		if($record->active) {
 			if(isset($ini->routes)) {
 				$router->addConfig($ini, 'routes');			
 			}
 
-			$this->router = $router;
-		
-			$this->record = $record;
+			$this->router = $router;			
 
 			//Hook the Doctrine event listeners into the plugin
 			$listener = new Kea_EventListener($this);
