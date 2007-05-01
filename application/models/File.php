@@ -103,6 +103,11 @@ class File extends Kea_Record {
 				$new_name_string = implode( '.', $new_name );
 				$path = FILES_DIR.DIRECTORY_SEPARATOR.$new_name_string;
 				
+				if( !is_writable(dirname($path)) )
+				{
+					throw new Exception ('Unable to write to '. dirname($path) . ' directory; improper permissions');
+				}
+				
 				if( !move_uploaded_file( $tmp, $path ) ) throw new Exception('Could not save file.');
 				
 				//set the attributes of this file
@@ -176,7 +181,7 @@ class File extends Kea_Record {
 		{
 			throw new Exception ('Invalid directory to put new image');
 		}
-		if( !is_writeable($new_dir) )
+		if( !is_writable($new_dir) )
 		{
 			throw new Exception ('Unable to write to '. $new_dir . ' directory; improper permissions');
 		}
@@ -206,7 +211,7 @@ class File extends Kea_Record {
 			}
 			elseif( $new_width && $new_height )
 			{
-				$command = $convertPath . ' ' . $old_path . ' -resize ' . $new_width . 'x' . $new_height . '> ' . $new_path;
+				$command = $convertPath . ' ' . $old_path . ' -resize \'' . $new_width . 'x' . $new_height . '>\' ' . $new_path;
 			}
 			elseif( $new_width && !$new_height )
 			{
@@ -233,13 +238,13 @@ class File extends Kea_Record {
 			}
 
 			exec( $command, $result_array, $result_value );
-			
 			if( $result_value == 0 )
 			{
 				return $imagename;	
 			}
 			else
 			{
+			
 				throw new Exception(
 					'Something went wrong with thumbnail creation.  Ensure that the thumbnail directories have appropriate write permissions.'
 				);

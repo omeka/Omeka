@@ -136,7 +136,7 @@ class ItemsController extends Kea_Controller_Action
 						$file->upload('file', $key);
 						$item->Files->add($file);
 					}catch(Exception $e) {
-						echo $e->getMessage();
+						$this->flash($e->getMessage());
 						$file->delete();
 						return false;
 					}
