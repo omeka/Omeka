@@ -28,10 +28,6 @@ class UserListener extends Doctrine_EventListener
 	}
 }
 
-/**
- * @todo generate random password for new users (find code in old sitebuilder)
- * @todo Email should validate to email
- */
 class User extends Kea_Record {
 
 	protected $error_messages = array(	'email' => array('email' => 'Email must be valid', 'unique' => 'That email address has already been claimed by a different user.'),
@@ -60,9 +56,8 @@ class User extends Kea_Record {
 		$this->hasColumn("email", "string", 200, "email|unique");
         $this->hasColumn("institution","string",300);
         $this->hasColumn("active","boolean",1);
-		$this->hasColumn("group_id", "integer");
+		$this->hasColumn("role", "string", 40, "notblank");
 		$this->index('active', array('fields' => array('active')));
-		$this->index('group', array('fields' => array('group_id')));
     }
 	
 	/* Generate password. (i.e. jachudru, cupheki) */

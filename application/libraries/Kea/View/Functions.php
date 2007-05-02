@@ -341,6 +341,11 @@ function get_users(array $params = array())
 	return _make_omeka_request('UsersController','browse',$params,'users');
 }
 
+function get_user_roles(array $params = array())
+{
+	return _make_omeka_request('UsersController','roles',$params,'roles');
+}
+
 function _make_omeka_request($controller,$action,$params, $returnVars)
 {
 	$front = Kea_Controller_Front::getInstance();

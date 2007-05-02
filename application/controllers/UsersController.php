@@ -74,7 +74,7 @@ class UsersController extends Kea_Controller_Action
 		}
 		//somebody is trying to change the password
 		//@todo Put in a security check (superusers don't need to know the old password)
-		if(isset($_POST['new_password1'])) {
+		if(!empty($_POST['new_password1'])) {
 			$new1 = $_POST['new_password1'];
 			$new2 = $_POST['new_password2'];
 			$old = $_POST['old_password'];
@@ -137,7 +137,10 @@ class UsersController extends Kea_Controller_Action
 /**
  * Define Roles Actions
  */
-
+	/**
+	 * @todo allowed for super user
+	 *
+	 **/
 	public function rolesAction()
 	{
 		$acl = Zend::registry('acl');
@@ -150,7 +153,7 @@ class UsersController extends Kea_Controller_Action
 		}
 		
 		$params = array('roles' => $roles);
-		$this->render('users/roles.php', $params);
+		return $this->render('users/roles.php', $params);
 	}
 	
 	public function rulesFormAction() {

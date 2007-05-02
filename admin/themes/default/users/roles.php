@@ -15,6 +15,6 @@
 
 <br/>
 <h3>Alter Role Permissions</h3>
-<?php select(array('name' => 'role', 'onchange' => 'getRoleRuleForm(this);'), $roles); ?>
+<?php select(array('name' => 'role', 'id'=>'alter_role'), $roles); ?>
 <div id="rulesForm"></div>
 <?php foot();?>
