@@ -69,6 +69,7 @@ name     = ".$db['name']."
 		$defaultUser->username = $_REQUEST['user']['username'];
 		$defaultUser->password = $_REQUEST['user']['password'];
 		$defaultUser->active = 1;
+		$defaultUser->role = "super";
 		$defaultUser->save();
 		
 		// Retrieve the ACL from the db, or create a new ACL object
@@ -85,7 +86,7 @@ name     = ".$db['name']."
 
 		$acl->addRole($role);
 		
-		$acl->registerRule(new Zend_Acl_Resource('Items'), array('add','edit','show','browse','delete', 'tag', 'showAll'));
+		$acl->registerRule(new Zend_Acl_Resource('Items'), array('add','edit','show','browse','delete', 'addTag', 'removeTag','showAll'));
 		$acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','show','browse','delete'));
 		$acl->registerRule(new Zend_Acl_Resource('Files'), array('show','edit','delete'));
 		$acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','edit','show'));
@@ -94,7 +95,7 @@ name     = ".$db['name']."
 		$acl->registerRule(new Zend_Acl_Resource('Tags'), array('edit','browse','delete'));
 		$acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
 		$acl->registerRule(new Zend_Acl_Resource('Types'), array('add','edit','show','browse','delete'));
-		$acl->registerRule(new Zend_Acl_Resource('Users'), array('add','edit','show','browse','delete', 'roles'));
+		$acl->registerRule(new Zend_Acl_Resource('Users'), array('add','edit','show','browse','delete', 'roles','addRule'));
 		
 		$acl->allow('super');
 
