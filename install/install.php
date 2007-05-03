@@ -84,16 +84,18 @@ name     = ".$db['name']."
 		$role = new Zend_Acl_Role('super');
 
 		$acl->addRole($role);
-
-		$acl->add(new Zend_Acl_Resource('item'));
-		$acl->add(new Zend_Acl_Resource('add'), 'item');
-		$acl->add(new Zend_Acl_Resource('edit'), 'item');
-		$acl->add(new Zend_Acl_Resource('delete'), 'item');
-		$acl->add(new Zend_Acl_Resource('read'), 'item');
-
-		$acl->add(new Zend_Acl_Resource('themes'));
-		$acl->add(new Zend_Acl_Resource('set'),'themes');
-
+		
+		$acl->registerRule(new Zend_Acl_Resource('Items'), array('add','edit','show','browse','delete', 'tag', 'showAll'));
+		$acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','show','browse','delete'));
+		$acl->registerRule(new Zend_Acl_Resource('Files'), array('show','edit','delete'));
+		$acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','edit','show'));
+		$acl->registerRule(new Zend_Acl_Resource('Settings'), array('edit'));
+		$acl->registerRule(new Zend_Acl_Resource('Static'), array('add','edit','show','browse','delete'));
+		$acl->registerRule(new Zend_Acl_Resource('Tags'), array('edit','browse','delete'));
+		$acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
+		$acl->registerRule(new Zend_Acl_Resource('Types'), array('add','edit','show','browse','delete'));
+		$acl->registerRule(new Zend_Acl_Resource('Users'), array('add','edit','show','browse','delete', 'roles'));
+		
 		$acl->allow('super');
 
 		$option = new Option;

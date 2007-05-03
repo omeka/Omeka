@@ -19,7 +19,7 @@ class UsersController extends Kea_Controller_Action
 		$ua = Doctrine_Manager::getInstance()->getTable('UsersActivations')->findByUrl($hash);
 		
 		if(!$ua) {
-			$this->render('404.php');
+			$this->errorAction();
 			return;
 		}
 		
@@ -143,7 +143,7 @@ class UsersController extends Kea_Controller_Action
 	 **/
 	public function rolesAction()
 	{
-		$acl = Zend::registry('acl');
+		$acl = $this->acl;
 		
 		$roles = array_keys($acl->getRoles());
 		
@@ -152,13 +152,15 @@ class UsersController extends Kea_Controller_Action
 			unset($roles[$key]);
 		}
 		
-		$params = array('roles' => $roles);
-		return $this->render('users/roles.php', $params);
+		$rules = $acl->getRules();
+		$resources = $acl->getResources();
+		return $this->render('users/roles.php', compact('roles','rules','resources','acl'));
 	}
 	
 	public function rulesFormAction() {
 		$role = $_REQUEST['role'];
-		$acl = Zend::registry('acl');
+		$acl = $this->acl;
+
 		$permissions = $acl->getRules();
 		$params = array('permissions' => $permissions, 'role' => $role, 'acl' => $acl);
 		$this->render('users/rulesForm.php', $params);
@@ -168,7 +170,7 @@ class UsersController extends Kea_Controller_Action
 	{
 		$filterPost = new Zend_Filter_Input($_POST);
 		if ($roleName = $filterPost->testAlnum('name')) {
-			$acl = Zend::registry('acl');
+			$acl = $this->acl;
 			if (!$acl->hasRole($roleName)) {
 				$acl->addRole(new Zend_Acl_Role($roleName));
 				$dbAcl = $this->getOption('acl');
@@ -198,7 +200,7 @@ class UsersController extends Kea_Controller_Action
 	{
 		$filterPost = new Zend_Filter_Input($_POST);
 		if ($roleName = $filterPost->testAlnum('role')) {
-			$acl = Zend::registry('acl');
+			$acl = $this->acl;
 			if ($acl->hasRole($roleName)) {
 				$acl->removeRole($roleName);
 				$acl->save();
@@ -210,7 +212,7 @@ class UsersController extends Kea_Controller_Action
 	public function setPermissionsAction() {
 		$role = $_POST['role'];
 		if (!empty($role)) {
-			$acl = Zend::registry('acl');
+			$acl = $this->acl;
 			$acl->removeRulesByRole($role);
 			foreach($_POST['permissions'] as $resource => $permissions) {
 				$resource_permissions = array();
@@ -224,6 +226,20 @@ class UsersController extends Kea_Controller_Action
 		$this->_redirect('users/roles');
 	}
 
+	/**
+	 * IMPORTANT - This should only be used for testing (or to assist hackers in modding the Omeka codebase)
+	 *
+	 * @return void
+	 **/
+	public function addRuleAction()
+	{
+		if(!empty($_POST)) {
+			$this->acl->registerRule(new Zend_Acl_Resource($_POST['rule']), $_POST['action']);
+			$this->acl->save();
+		}
+		$this->_redirect('users/roles');
+	}
+	
     public function noRouteAction()
     {
         $this->_redirect('/');

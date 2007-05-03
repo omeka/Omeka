@@ -38,7 +38,13 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 **/
 	protected $_browse;
 	
-
+	/**
+	 * Kea_Acl
+	 *
+	 * @var Kea_Acl
+	 **/
+	protected $acl;
+	
 	/**
 	 * Attaches a view object to the controller.
 	 * The view also receives the current controller
@@ -46,6 +52,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 */
 	public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
 	{
+		$this->acl = Zend::Registry('acl');
+		
 		// Zend_Controller_Action __construct finishes by running init()
 		$init = parent::__construct($request, $response, $invokeArgs);
 		
@@ -78,6 +86,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		 * level
 		 */
 		$request = $this->getRequest();
+		$action = $request->getActionName();
 		if ($request->getParam('admin') == true &&
 			$request->getControllerName() != 'users' &&
 			$request->getActionName() != 'login') {
@@ -97,6 +106,10 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				$this->_redirect('users/login');
 			}		
 		}
+		if($action != 'login' && $action != 'logout') {
+			$this->checkActionPermission($action);
+		}
+		
 		
 		$action = $this->_request->getActionName();
 		foreach ($this->_before_filter as $func => $exceptThese) {
@@ -109,6 +122,35 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				}
 			}
 		}
+	}
+	
+	protected function checkActionPermission($action)
+	{
+		//Here is the permissions check for each action
+		try {
+			//Note that 'index' action is always allowed, this is because it always redirects to 'browse'
+			//If this becomes a problem in the future then we should alter the ACL to include 'index' actions
+			if($action != 'index' && !$this->isAllowed($action)) {		
+				$this->_redirect('403');
+			}
+		} catch (Zend_Acl_Exception $e) {}		
+	}
+	
+	/**
+	 * Notifies whether the logged-in user has permission for the given rule
+	 * i.e., if the $rule is 'edit', then this will return TRUE if the user has permission to 'edit' for 
+	 * the current controller
+	 *
+	 * @return true
+	 **/
+	protected function isAllowed($rule, $user=null) 
+	{
+		if(!$user) {
+			$user = Kea::loggedIn();
+		}
+		$role = !$user ? false : $user->role;
+		$resourceName = str_replace('Controller','',get_class($this));
+		return $this->acl->isAllowed($role, $resourceName, $rule);
 	}
 	
 	protected function authenticate()
@@ -373,6 +415,16 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		}
 		
 		return $record;
+	}
+	
+	public function forbiddenAction()
+	{
+		$this->render('403.php');
+	}
+	
+	public function errorAction()
+	{
+		$this->render('404.php');
 	}
 }
 ?>

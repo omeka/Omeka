@@ -15,24 +15,6 @@
 <?php
 	js('prototype');
 ?>
-<script type="text/javascript" charset="utf-8">
-	function getRoleRuleForm(role) {
-		var url = '<?php echo uri('users/rulesForm'); ?>?role='+role.value;
-		new Ajax.Request(url, {
-			method: 'post',
-			onSuccess: function(req) {
-				$('rulesForm').innerHTML = req.responseText;
-			}
-		});
-	}
-	
-	Event.observe(window,'load',function(){
-		Event.observe($('alter_role'),'change',function(event) {
-			alert('foo');
-			getRoleRuleForm(event.target);
-		});
-	});
-</script>
 
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>

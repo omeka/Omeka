@@ -24,7 +24,7 @@
 	<div id="wrap">
 		
 		<div id="header">
-			<div id="user-meta">Welcome, User! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></div>
+			<div id="user-meta">Welcome, <?php echo current_user()->first_name; ?>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></div>
 			
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 			<ul id="primary-nav" class="navigation">

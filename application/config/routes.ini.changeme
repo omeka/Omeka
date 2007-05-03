@@ -25,6 +25,14 @@
 ; DO NOT EDIT THESE TWO ROUTES, THEY PROVIDE ADMIN VERIFICATION
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+forbidden.route = "403/"
+forbidden.defaults.controller = index
+forbidden.defaults.action = forbidden
+
+error.route = "404/"
+error.defaults.controller = index
+error.defaults.action = error
+
 id.route = ":controller/:action/:id"
 id.defaults.controller = index
 id.defaults.action = index

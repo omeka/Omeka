@@ -135,9 +135,12 @@ class Kea_Acl extends Zend_Acl
 		$roleRules = array('GLOBAL' => array());
 
 		$globalRules = $this->_rules['allResources']['byRoleId'][$role]['byPrivilegeId'];
-		foreach($globalRules as $rule => $settings) {
-			$roleRules['GLOBAL'][] = $rule;
+		if(!empty($globalRules)) {
+			foreach($globalRules as $rule => $settings) {
+				$roleRules['GLOBAL'][] = $rule;
+			}			
 		}
+
 
 		foreach ($this->_rules['byResourceId'] as $resourceId => $settings) {
 			foreach ($settings['byRoleId'] as $roleId => $permissions) {
