@@ -2,7 +2,11 @@
 
 <?php common('archive-nav'); ?>
 <ul id="tertiary-nav" class="navigation">
-	<?php nav(array('Browse Items' => uri('items/browse'), 'Add Item' => uri('items/add')));?>
+	<?php 
+		if(has_permission('Items','add')) {
+			nav(array('Browse Items' => uri('items/browse'), 'Add Item' => uri('items/add')));
+		}
+	?>
 </ul>
 <h2>Browse Items (<?php echo $total;?> items total)</h2>
 <div class="archive-meta">

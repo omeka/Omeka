@@ -1,3 +1,4 @@
+<?php echo flash(); ?>
 <?php error($user); ?>
 <fieldset>
 	<legend>User Info</legend>
@@ -26,7 +27,9 @@
 <?php checkbox(array('name'=>'active', 'id'=>'active'), $user->active); ?>
 </div>
 
-<div class="field">
+<?php if ( has_permission('Users','showRoles') ): ?>
+	<div class="field">
 	<?php select(array('name'=>'role','id'=>'role'),get_user_roles(), $user->role, 'Choose a Role for this user'); ?>
-</div>
+	</div>
+<?php endif; ?>
 </fieldset>

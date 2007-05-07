@@ -1,7 +1,11 @@
 <?php head(); ?>
 <?php common('archive-nav'); ?>
 <ul id="tertiary-nav" class="navigation">
-	<?php nav(array('Browse Types' => uri('types/browse'), 'Add Type' => uri('types/add')));?>
+	<?php 
+		if(has_permission('Types','add')) {
+			nav(array('Browse Types' => uri('types/browse'), 'Add Type' => uri('types/add')));
+		}
+	?>
 </ul>
 <h2>Item Types</h2>
 <?php foreach( $types as $type ): ?>

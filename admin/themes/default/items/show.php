@@ -24,10 +24,13 @@
 			tagLink.href =  "<?php echo uri('items/browse/tag/')?>"+tags[i]['name'];
 			tagLink.rel = tags[i]['id'];
 			tagLink.update(tags[i]['name']);
+
+<?php if ( has_permission('Items','removeTag') ): ?>
 			removeLink.href = "javascript:void(0)";
 			removeLink.addClassName("delete-tag");
 			removeLink.update("[x]");
 			Event.observe(removeLink,"click",deleteTag);
+<?php endif; ?>
 			
 			liElement.appendChild(tagLink);
 			liElement.appendChild(removeLink);
@@ -100,7 +103,8 @@
 		$('tags-form').appendChild(link);
 		Event.observe(link, "click", addTags);
 		
-		editableElements = document.getElementsByClassName("editable");
+<?php if ( has_permission('Items','edit') ): ?>
+			editableElements = document.getElementsByClassName("editable");
 		
 		for(i=0;i<editableElements.length;i++) {
 			var editable = new EditableField(editableElements[i], 
@@ -109,6 +113,7 @@
 											<?php echo $item->id;?>, 
 											editableElements[i].getAttribute('rel'));
 		}
+<?php endif; ?>
 		
 		deleteTagLinks = document.getElementsByClassName('delete-tag');
 		for (var i=0; i < deleteTagLinks.length; i++) {
@@ -124,9 +129,17 @@
 	}*/
 </script>
 <ul id="tertiary-nav" class="items-nav navigation">
-	<?php nav(array('Show Item' => uri('items/show/'.$item->id), 'Edit Item' => uri('items/edit/'.$item->id), 'Back to Items' => uri('items')));?>
+	<?php 
+		$tertiary_nav['Show Item'] = uri('items/show/'.$item->id);
+		if(has_permission('Items','edit')) {
+			$tertiary_nav['Edit Item'] = uri('items/edit/'.$item->id);
+		}
+		$tertiary_nav['Back to Items'] = uri('items');
+	?>
+	
+	<?php nav($tertiary_nav);?>
 </ul>
-
+<?php echo flash(); ?>
 <h2><div class="editable" id="title" rel="text"><?php echo $item->title; ?></div></h2>
 
 <h3>Core Metadata</h3>
@@ -235,15 +248,23 @@
 		<?php foreach( $item->Tags as $key => $tag ): ?>
 		<li class="tag">
 			<a href="<?php echo uri('items/browse/tag/'.$tag->name);?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
+
+			<?php if ( has_permission('Items','removeTag') ): ?>
 			<a href="<?php echo uri('items/show/'.$item->id.'?deleteTag='.$tag->id); ?>" class="delete-tag">[x]</a>
+			<?php endif; ?>
+
 		</li>
 		<?php endforeach; ?>
 	</ul>
 </div>
-<form id="tags-form" method="post" action="">
+
+
+<?php if ( has_permission('Items','addTag') ): ?>
+	<form id="tags-form" method="post" action="">
 	<input type="text" name="tags" value="Put tag string in me" />
 	<input type="submit" name="submit" value="submit" id="tags-submit">
 </form>
+<?php endif; ?>
 
 <h2>Files</h2>
 <div id="files">

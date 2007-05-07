@@ -29,7 +29,14 @@
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 			<ul id="primary-nav" class="navigation">
 			<?php
-				nav(array('Home' => uri(''),'Archive' => uri('items/browse'),'Exhibits' => uri('exhibits'),'Users' => uri('users'), 'Settings' =>uri('settings')));
+				$header_navigation = array('Home' => uri(''),'Archive' => uri('items/browse'),'Exhibits' => uri('exhibits') );
+				if(has_permission('Users','browse') ) {
+					$header_navigation['Users'] = uri('users');
+				}
+				if(has_permission('super')) {
+					$header_navigation['Settings'] = uri('settings');
+				}
+				nav($header_navigation);
 
 			?>
 			</ul>
@@ -38,3 +45,4 @@
 		
 		
 		<div id="content">
+			

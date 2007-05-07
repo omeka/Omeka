@@ -81,23 +81,8 @@ name     = ".$db['name']."
 		require_once 'Zend/Acl/Role.php';
 		require_once 'Zend/Acl/Resource.php';
 
-		$acl = new Kea_Acl();
-		$role = new Zend_Acl_Role('super');
-
-		$acl->addRole($role);
-		
-		$acl->registerRule(new Zend_Acl_Resource('Items'), array('add','edit','show','browse','delete', 'addTag', 'removeTag','showAll'));
-		$acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','show','browse','delete'));
-		$acl->registerRule(new Zend_Acl_Resource('Files'), array('show','edit','delete'));
-		$acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','edit','show'));
-		$acl->registerRule(new Zend_Acl_Resource('Settings'), array('edit'));
-		$acl->registerRule(new Zend_Acl_Resource('Static'), array('add','edit','show','browse','delete'));
-		$acl->registerRule(new Zend_Acl_Resource('Tags'), array('edit','browse','delete'));
-		$acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
-		$acl->registerRule(new Zend_Acl_Resource('Types'), array('add','edit','show','browse','delete'));
-		$acl->registerRule(new Zend_Acl_Resource('Users'), array('add','edit','show','browse','delete', 'roles','addRule'));
-		
-		$acl->allow('super');
+		/* @todo Move 'acl.php' to this directory */
+		require_once '../acl.php';
 
 		$option = new Option;
 		$option->name = 'acl';

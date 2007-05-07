@@ -36,8 +36,10 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 //Mock::generate('Log');
 require_once 'ItemTestCase.php';
 require_once 'FormFunctionsTestCase.php';
+require_once 'UserThemeFunctionsTestCase.php';
 $test = new TestSuite('Omeka Tests');
 $test->addTestCase(new ItemTestCase());
 $test->addTestCase(new FormFunctionsTestCase());
+$test->addTestCase(new UserThemeFunctionsTestCase());
 $test->run(new HtmlReporter());
 ?>

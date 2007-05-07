@@ -6,9 +6,7 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
  **/
 require_once 'Kea/Controller/Action.php';
 class ItemsController extends Kea_Controller_Action
-{	
-	protected $_protected = array('browse', 'delete');
-	
+{		
 	public function init() 
 	{
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Item');
@@ -29,9 +27,8 @@ class ItemsController extends Kea_Controller_Action
 		$query->leftJoin('Item.Collection c');
 		$query->leftJoin('i.Type ty');
 				
-		//replace with permissions check
-		if(!$this->getRequest()->getParam('admin')) {
-//			$query->where('items.public = 1');
+		if( !$this->isAllowed('showNotPublic') ) {
+			$query->addWhere('i.public = 1');
 		} 
 		
 		//filter based on featured
@@ -118,8 +115,7 @@ class ItemsController extends Kea_Controller_Action
 			unset($clean['id']);
 			
 			if(!empty($clean['tags'])) {
-				// @todo Replace with retrieval of actual logged in user
-				$user = Doctrine_Manager::getInstance()->getTable('User')->find(1);
+				$user = Kea::loggedIn();
 				$item->addTagString($clean['tags'], $user);
 			}
 			
@@ -178,15 +174,25 @@ class ItemsController extends Kea_Controller_Action
 	public function showAction() 
 	{
 		$item = $this->findById();
-	
-		$tagsAdded = $this->commitForm($item);
 		
-		$item = $this->findById();
-	
-		$user = Doctrine_Manager::getInstance()->getTable('User')->find(1);
+		//If the item is not public, check for permissions
+		if(!$item->public && !$this->isAllowed('showNotPublic')) {
+			$this->_redirect('403');
+		}
+		
+		if(!empty($_POST['tags'])) {
+		 	if($this->isAllowed('addTag')) {
+				$tagsAdded = $this->commitForm($item);
+				$item = $this->findById();
+			}else {
+				$this->flash('User does not have permission to add tags.');
+			}
+		}
+			
+		$user = Kea::loggedIn();
 
+		//@todo Does makeFavorite require a permissions check?
 		if($this->getRequest()->getParam('makeFavorite')) {
-			//@todo Replace with retrieval of actual user
 		
 			if($item->isFavoriteOf($user)) {
 				//Make un-favorite
@@ -203,31 +209,37 @@ class ItemsController extends Kea_Controller_Action
 		
 		if($deleteTag = $this->_getParam('deleteTag'))
 		{
-			//@todo PERMISSIONS CHECK
+			
 			$isMyTag = $this->_getParam('isMyTag');
 			$tagToDelete = $this->getTable('Tag')->find($deleteTag);
-			
 			if($tagToDelete) {
 				if($isMyTag) {
 					
-					//delete that association
-					$it = $this->getTable('ItemsTags')->findBySql('item_id = ? AND tag_id = ? AND user_id = ?',array($item->id,$deleteMyTag, $user->id))->getFirst();
-					if($it) {
-						$it->delete();
-					}				
+					//permissions check
+					if($this->isAllowed('removeTag')) {
+	
+						//delete that association
+						$it = $this->getTable('ItemsTags')->findBySql('item_id = ? AND tag_id = ? AND user_id = ?',array($item->id,$tagToDelete->id, $user->id))->getFirst();
+						if($it) {
+							$it->delete();
+						}				
 
-					if($tagToDelete->tagCount() == 0)
-					{
-						$tagToDelete->delete();
+						if($tagToDelete->tagCount() == 0)
+						{
+							$tagToDelete->delete();
+						}						
+						$tagsDeleted = true;
+					}else {
+						$this->flash('User does not have permission to remove tags that user has previously applied.');
 					}
-				
-				}else {
+						
+				}elseif($this->isAllowed('delete','Tags')) {
 					$tagToDelete->delete();
+					$tagsDeleted = true;
+				}else {
+					$this->flash('User does not have permission to remove tags from items');
 				}
 			}
-			
-			$tagsDeleted = true;
-			
 		}
 		
 		if($tagsAdded || $tagsDeleted) {
@@ -237,25 +249,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		$item->refresh();
 		
-		echo $this->render('items/show.php', compact("item", 'user'));
-	}
-	
-	/**
-	 * @param Item
-	 * @return void
-	 **/
-	private function addTags($item, $user) {
-		
-		if($tagString = $_POST['tags']) {
-			$item->addTagString($tagString, $user);			
-			try{
-				$item->save();
-				$item->refresh();
-			//This error processing part should be abstracted out to the individual models, at least if all we want to do is display the errors
-			}catch(Doctrine_Validator_Exception $e) {
-				$item->gatherErrors($e);
-			}
-		}
+		return $this->render('items/show.php', compact("item", 'user'));
 	}
 }
 ?>

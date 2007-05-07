@@ -73,6 +73,13 @@
 	<?php submit('Add Action'); ?>
 </form>
 
+<h3>Delete an Action from a Rule</h3>
+<form method="post" action="<?php echo uri('users/deleteRule'); ?>">
+	<?php text(array('name'=>'action', 'id'=>'action'), null, 'Action Name'); ?>
+	<?php select(array('name'=>'rule','id'=>'rule'),$ruleNames); ?>
+	<?php submit('Delete Action'); ?>
+</form>
+
 <form action="<?php echo uri('users/deleteRole'); ?>" method="post">
 <h3>Delete Roles</h3>
 <?php select(array('name' => 'role'), $roles); ?>

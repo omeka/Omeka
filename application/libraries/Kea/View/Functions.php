@@ -36,25 +36,28 @@ function web_path($return = false) {
 	else echo $path;
 }
 
-function src($file, $dir, $ext = null, $return = false) {
-	$physical = theme_path(true).DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file;
+function src($file, $dir=null, $ext = null, $return = false) {
 	if ($ext !== null) {
-		$physical .= '.'.$ext;
+		$file .= '.'.$ext;
 	}
+	if ($dir !== null) {
+		$file = $dir.DIRECTORY_SEPARATOR.$file;
+	}
+	$physical = theme_path(true).DIRECTORY_SEPARATOR.$file;
 	if (file_exists($physical)) {
-		$path = web_path(true).DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.'.$ext;
+		$path = web_path(true).DIRECTORY_SEPARATOR.$file;
 		if($return) return $path;
 		else echo $path;
 	}
 	else {
 		//Check the 'universal' directory to see if it is in there
-		$physical = SHARED_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+		$physical = SHARED_DIR.DIRECTORY_SEPARATOR.$file;
 		if(file_exists($physical)) {
-			$path = WEB_SHARED.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.($ext ? '.':'').$ext;
+			$path = WEB_SHARED.DIRECTORY_SEPARATOR.$file;
 			if($return) return $path;
 			else echo $path;
 		}
-		throw new Exception('Cannot find '.$file.'.'.$ext);
+		throw new Exception('Cannot find '.$file);
 	}
 }
 
@@ -190,12 +193,12 @@ function flash()
 	require_once 'Zend/Session.php';
 	$flash = new Zend_Session('flash');
 	
-	$msg = '<div class="alert">'.$flash->msg.'</div>';
+	$msg = $flash->msg;
 	$flash->msg = null;
 	if ($msg === null) {
 		return false;
 	}
-	return $msg;
+	return '<div class="alert">'.$msg.'</div>';
 }
 
 ///// NAVIGATION /////
@@ -277,23 +280,23 @@ function plugin_header() {
  * @return int
  **/
 function total_items($return = false) {
-	return _get_model_total('ItemsController',$return);
+	return _get_model_total('Items',$return);
 }
 
 function total_collections($return = false) {
-	return _get_model_total('CollectionsController',$return);
+	return _get_model_total('Collections',$return);
 }
 
 function total_tags($return = false) {
-	return _get_model_total('TagsController',$return);
+	return _get_model_total('Tags',$return);
 }
 
 function total_users($return = false) {
-	return _get_model_total('UsersController',$return);
+	return _get_model_total('Users',$return);
 }
 
 function total_types($return = false) {
-	return _get_model_total('TypesController',$return);
+	return _get_model_total('Types',$return);
 }
 
 function _get_model_total($controller,$return) {
@@ -317,33 +320,33 @@ function recent_items($num = 10) {
 
 function get_tags(array $params = array()) 
 {
-	return _make_omeka_request('TagsController','browse',$params,'tags');
+	return _make_omeka_request('Tags','browse',$params,'tags');
 }
 
 function get_items(array $params = array())
 {
-	return _make_omeka_request('ItemsController','browse',$params,'items');
+	return _make_omeka_request('Items','browse',$params,'items');
 }
 
 function get_collections(array $params = array())
 {
-	return _make_omeka_request('CollectionsController','browse',$params,'collections');
+	return _make_omeka_request('Collections','browse',$params,'collections');
 }
 
 function get_metafields(array $params = array())
 {
 	//To add filters to this function, put them in the TypesController::metafieldsAction() method
-	return _make_omeka_request('TypesController','metafields',$params,null);
+	return _make_omeka_request('Types','metafields',$params,null);
 }
 
 function get_users(array $params = array())
 {
-	return _make_omeka_request('UsersController','browse',$params,'users');
+	return _make_omeka_request('Users','browse',$params,'users');
 }
 
 function get_user_roles(array $params = array())
 {
-	return _make_omeka_request('UsersController','roles',$params,'roles');
+	return _make_omeka_request('Users','roles',$params,'roles');
 }
 
 function current_user()
@@ -351,33 +354,55 @@ function current_user()
 	return Kea::loggedIn();
 }
 
+function has_permission($role,$privilege=null) {
+	$acl = Zend::registry('acl');
+	$user = current_user();
+	if(!$user) return false;
+	
+	$userRole = $user->role;
+	
+	if(!$privilege) {
+		return ($userRole == $role);
+	}
+
+	//This is checking for the correct combo of 'role','resource' and 'privilege'
+	$resource = $role;
+	return $acl->isAllowed($userRole,ucwords($resource),$privilege);
+}
+
 function _make_omeka_request($controller,$action,$params, $returnVars)
 {
 	$front = Kea_Controller_Front::getInstance();
 	$dirs = $front->getControllerDirectory();
 	
-	//Include the controller
-	foreach ($dirs as $dir) {
-		$file = $dir.DIRECTORY_SEPARATOR.$controller.".php";
-		if(file_exists($file)) {
-			require_once $file;
+	$className = ucwords($controller.'Controller');
+	
+	if(!empty($dirs)) {
+		//Include the controller
+		foreach ($dirs as $dir) {
+			$file = $dir.DIRECTORY_SEPARATOR.$className.".php";
+			if(file_exists($file)) {
+				require_once $file;
+			}
 		}
 	}
 	
 	//Merge together the existing parameters with the old ones
 	$oldReq = $front->getRequest();
-	$params = array_merge($oldReq->getParams(), $params);
+	if($oldReq) {
+		$params = array_merge($oldReq->getParams(), $params);
+	}
 
 	//Create the request
 	$newReq = new Zend_Controller_Request_Http();
 	$newReq->setParams($params);
-	$newReq->setParam('return', $returnVars);
+	$newReq->setControllerName(strtolower($controller));
 	
 	//Create the response
 	$resp = new Zend_Controller_Response_Cli();
 	
 	//Fire the controller
-	$controller = new $controller($newReq,$resp);
+	$controller = new $className($newReq,$resp, array('return'=>$returnVars));
 	$action = $action.'Action';
 	$retVal = $controller->$action();
 	

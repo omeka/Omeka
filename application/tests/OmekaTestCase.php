@@ -25,8 +25,6 @@ abstract class OmekaTestCase extends UnitTestCase
 		$models  = array('Collection',
 			//		'Exhibit',
 					'File',
-					'Group',
-					'GroupsPermissions',
 					'Item',
 			//		'ItemsExhibits',
 					'ItemsFavorites',
@@ -35,7 +33,6 @@ abstract class OmekaTestCase extends UnitTestCase
 					'Metafield',
 					'Metatext',
 					'Option',
-					'Permission',
 					'Plugin',
 					'Route',
 					'Tag',
@@ -55,6 +52,11 @@ abstract class OmekaTestCase extends UnitTestCase
 	public function init() {}
 	
 	public function getTable($name) { return $this->manager->getTable($name);}
+	
+	protected function stripSpace($html)
+	{
+		return str_replace(array("\t","\n"),'',$html);
+	}
 	
 } // END abstract class OmekaTestCase extends UnitTestCase 
 ?>

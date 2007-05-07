@@ -8,11 +8,6 @@ require_once 'Kea/Controller/Browse/List.php';
 abstract class Kea_Controller_Action extends Zend_Controller_Action
 {
 	/**
-	 * @var protected methods array
-	 */
-	protected $_protected = array();
-	
-	/**
 	 * @var Kea_View
 	 */
 	protected $_view;
@@ -46,6 +41,20 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	protected $acl;
 	
 	/**
+	 * Zend_Auth
+	 *
+	 * @var Zend_Auth
+	 **/
+	protected $_auth;
+	
+	/**
+	 * Temporarily allowed permissions
+	 *
+	 * @var array
+	 **/
+	protected $_allowed = array();
+		
+	/**
 	 * Attaches a view object to the controller.
 	 * The view also receives the current controller
 	 * object so it can interact with the request / response objects.
@@ -57,7 +66,11 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		// Zend_Controller_Action __construct finishes by running init()
 		$init = parent::__construct($request, $response, $invokeArgs);
 		
-		$this->_view = new Kea_View($this);
+		if(!array_key_exists('return',$invokeArgs)) {
+			$this->_view = new Kea_View($this);
+		}
+		
+		$this->_auth = Zend::Registry('auth');
 		
 		return $init;
 	}
@@ -95,7 +108,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 			require_once 'Zend/Session.php';
 			require_once 'Kea/Auth/Adapter.php';
 
-			$auth = new Zend_Auth(new Kea_Auth_Adapter());
+			$auth = $this->_auth;
 			if (!$auth->isLoggedIn()) {
 				// capture the intended controller / action for the redirect
 				$session = new Zend_Session;
@@ -106,10 +119,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				$this->_redirect('users/login');
 			}		
 		}
-		if($action != 'login' && $action != 'logout') {
-			$this->checkActionPermission($action);
-		}
-		
+		$this->checkActionPermission($action);
 		
 		$action = $this->_request->getActionName();
 		foreach ($this->_before_filter as $func => $exceptThese) {
@@ -128,9 +138,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{
 		//Here is the permissions check for each action
 		try {
-			//Note that 'index' action is always allowed, this is because it always redirects to 'browse'
-			//If this becomes a problem in the future then we should alter the ACL to include 'index' actions
-			if($action != 'index' && !$this->isAllowed($action)) {		
+			if(!$this->isAllowed($action)) {		
 				$this->_redirect('403');
 			}
 		} catch (Zend_Acl_Exception $e) {}		
@@ -141,16 +149,43 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * i.e., if the $rule is 'edit', then this will return TRUE if the user has permission to 'edit' for 
 	 * the current controller
 	 *
-	 * @return true
+	 * @return bool
 	 **/
-	protected function isAllowed($rule, $user=null) 
+	protected function isAllowed($rule, $resourceName=null, $user=null) 
 	{
+		$allowed = $this->_allowed;
+		if(isset($allowed[$rule])) {
+			return $allowed[$rule];
+		}
+		
 		if(!$user) {
 			$user = Kea::loggedIn();
 		}
-		$role = !$user ? false : $user->role;
-		$resourceName = str_replace('Controller','',get_class($this));
+		
+		/*	'default' permission level is hard-coded here, may change later */
+		$role = !$user ? 'default' : $user->role;
+		if(!$resourceName) {
+			$resourceName = $this->getName();
+		}
+		
+		//If the resource has no rule that would indicate permissions are necessary, then we assume access is allowed
+		if(!$this->acl->resourceHasRule($resourceName,$rule)){
+			return TRUE;
+		} 
+		
 		return $this->acl->isAllowed($role, $resourceName, $rule);
+	}
+	
+	/**
+	 * Temporarily override the ACL's permissions for this controller
+	 *
+	 * @return this
+	 **/
+	protected function setAllowed($rule,$isAllowed=true) 
+	{
+		$this->_allowed[$rule] = $isAllowed;
+		
+		return $this;
 	}
 	
 	protected function authenticate()
@@ -160,7 +195,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		require_once 'Kea/Auth/Adapter.php';
 		require_once 'Zend/Filter/Input.php';
 
-		$auth = new Zend_Auth(new Kea_Auth_Adapter());
+		$auth = $this->_auth;
 		if ($auth->isLoggedIn()) {
 			// check the identity's role is compatible with the action's permissions
 		}
@@ -219,6 +254,11 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		return $this->_view;
 	}
 	
+	public function getName()
+	{
+		return ucwords($this->getRequest()->getControllerName());
+	}
+	
 	/**
 	 * Stolen directly from Rails.
 	 * Again, this may be redundant, in that message delivery
@@ -246,8 +286,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	
 	public function indexAction()
 	{
-		$controllerName = strtolower(str_replace("Controller", "", get_class($this)));
-        $this->_forward($controllerName, 'browse');
+        $this->_forward($this->getRequest()->getControllerName(), 'browse');
 	}
 	
 	/**
@@ -256,7 +295,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * @return void
 	 **/
 	public function browseAction()
-	{
+	{		
 		if(empty($this->_modelClass)) throw new Exception( 'Scaffolding class has not been specified' );
 		
 		if(empty($this->_browse)) $this->_browse = new Kea_Controller_Browse_List($this->_modelClass, $this);
@@ -377,7 +416,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 **/
 	public function render($page, array $vars = array())
 	{
-		if($return = $this->_getParam('return')){
+		if($return = $this->getInvokeArg('return')){
 			if(is_array($return)) {
 				$returnThese = array();
 				foreach ($return as $r) {
@@ -425,6 +464,20 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	public function errorAction()
 	{
 		$this->render('404.php');
+	}
+	
+	/**
+	 * Overridden to support requests that only want to return data and not spit out pages
+	 *
+	 **/
+	protected function _redirect($url,array $options=null) 
+	{
+		if($return = $this->getInvokeArg('return')) 
+		{
+			return null;
+		}else {
+			return parent::_redirect($url,$options);
+		}
 	}
 }
 ?>

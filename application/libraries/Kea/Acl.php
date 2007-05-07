@@ -17,6 +17,12 @@ class Kea_Acl extends Zend_Acl
 	 */
 	protected $_permissions = array('GLOBAL' => array());
 	
+	public function resourceHasRule($resource,$rule) {
+		$rules = $this->_permissions[$resource];
+		if(!$rules) return false;
+		return in_array($rule,$rules);
+	}
+	
 	public function getRules() {
 		return $this->_permissions;
 	}

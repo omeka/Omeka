@@ -105,16 +105,12 @@ class ThemesController extends Kea_Controller_Action
 		
 		$public = Doctrine_Manager::getInstance()->getTable('Option')->findByName('public_theme');
 		
-		if(!empty($_POST)) {
+		if(!empty($_POST) and $this->isAllowed('switch')) {
 			$public->value = $_POST['public_theme'];
 			$public->save();
 		}
 
 		$current = $this->getAvailable($public->value);
-		
-		// Create a view class
-		require_once 'Kea/View.php';
-		$view = new Kea_View($this, array('request', $this->getRequest()));
 
 		return $this->render('themes/browse.php', compact('current', 'themes'));
 	}

@@ -21,8 +21,8 @@ class TagsController extends Kea_Controller_Action
 	public function browseAction()
 	{
 		$params = $this->_getAllParams();
-		
-		if(!$this->_getParam('admin')) {
+
+		if(!$this->isAllowed('showNotPublic','Items')) {
 			$params['onlyPublic'] = true;
 		}
 		

@@ -2,14 +2,41 @@ Roles
 	Super
 	Admin
 	Researcher
-	Public
+	Default
 
-Resources
-	CRUD on all controllers
+Resources (one for each controller)
+	Items
+	Collections
+	Files
+	Tags
+	Users
+	Plugins
+	Settings
+	Themes
+	Types
 	
+Privileges/Rules/Actions (we should come up with a unified terminology for this,
+it is referred to by different nomenclature in different parts of the app)	
+	Depends on the resource
+	Most common are:
+		add
+		edit
+		delete
 	
+	Show/Browse privileges are not included for most Resources (except those 
+	that should be limited to administrators, like Plugins,Users,etc.)	
 	
+
+Each Item can be set as public/not public, and currently there is a privilege for 
+the Items resource called 'showNotPublic', which is also applied in the Tags and 
+Files controller
 	
+	A more complicated set of permissions would necessitate persistent storage in
+	the DB for Items and their associated permission levels.  
+	IMO it doesn't make a whole lot of sense to contribute an object/Item to an archive
+	and then have it set to a restrictive permission level such that only a small 
+	subset of Omeka users (or even just the individual who uploaded it) could see it.
+
 
 Permissions work on several levels:
 

@@ -12,7 +12,7 @@ class FilesController extends Kea_Controller_Action
 		$this->_table = Doctrine_Manager::getInstance()->getTable('File');		
 	}
 	
-	public function indexAction() { $this->_redirect('items/browse/'); }
+	public function indexAction() { $this->_redirect('/'); }
 	
 	// Should not browse files by themselves
 	public function browseAction() { $this->indexAction(); }
@@ -37,6 +37,17 @@ class FilesController extends Kea_Controller_Action
 			unset($_POST[$value]);
 		}
 		return parent::commitForm($file);
+	}
+	
+	public function showAction()
+	{
+		$file = $this->findById();
+				
+		if(!$file->Item->public && !$this->isAllowed('showNotPublic','Items')) {
+			$this->_redirect('403');
+		}
+		
+		$this->render('files/show.php',compact('file'));
 	}
 }
 ?>

@@ -41,7 +41,7 @@ class UsersController extends Kea_Controller_Action
 	 * @return void
 	 **/
 	public function addAction() 
-	{
+	{	
 		$user = new User();
 		$password = $user->generatePassword(8);
 		if($this->commitForm($user)) {
@@ -62,9 +62,17 @@ class UsersController extends Kea_Controller_Action
 			$this->render('users/add.php', compact('user'));
 		}
 	}
-		
+	
 	protected function commitForm($user)
 	{
+		/* Permissions check to see if whoever is trying to change role to a super-user*/	
+		if(!empty($_POST['role']) && $_POST['role'] == 'super') {
+			if(!$this->isAllowed('makeSuperUser')) {
+				$this->flash('User may not change permissions to super-user');
+				return false;
+			}
+		} 
+		
 		if($_POST['active']) {
 			$_POST['active'] = 1;
 		}
@@ -99,16 +107,14 @@ class UsersController extends Kea_Controller_Action
 	
 	public function loginAction()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if (!empty($_POST)) {
 			
-			require_once 'Zend/Auth.php';
 			require_once 'Zend/Session.php';
-			require_once 'Kea/Auth/Adapter.php';
 
 			$session = new Zend_Session;
 			
 			$filterPost = new Zend_Filter_Input($_POST);
-			$auth = new Zend_Auth(new Kea_Auth_Adapter());
+			$auth = $this->_auth;
 
 			$options = array('username' => $filterPost->testAlnum('username'),
 							 'password' => $filterPost->testAlnum('password'));
@@ -116,7 +122,12 @@ class UsersController extends Kea_Controller_Action
 			$token = $auth->authenticate($options);
 			
 			if ($token->isValid()) {
-				$this->_redirect('/');
+				//Avoid a redirect by passing an extra parameter to the AJAX call
+				if($this->_getParam('noRedirect')) {
+					$this->_forward('index', 'home');
+				} else {
+					$this->_redirect('/');
+				}				
 				return;
 			}
 			$this->render('users/login.php', array('errorMessage' => $token->getMessage()));
@@ -127,22 +138,44 @@ class UsersController extends Kea_Controller_Action
 	
 	public function logoutAction()
 	{
-		require_once 'Zend/Auth.php';
-		require_once 'Kea/Auth/Adapter.php';
-		$auth = new Zend_Auth(new Kea_Auth_Adapter());
+		$auth = $this->_auth;
 		$auth->logout();
 		$this->_redirect('');
 	}
 
-/**
- * Define Roles Actions
- */
 	/**
-	 * @todo allowed for super user
+	 * This hook allows specific user actions to be allowed if and only if an authenticated user 
+	 * is accessing their own user data.
 	 *
 	 **/
+	public function preDispatch()
+	{		
+		$userActions = array('show','edit');
+				
+		if($current = Kea::loggedIn()) {
+			try {
+				$user = $this->findById();
+				if($current->id == $user->id) {
+					foreach ($userActions as $action) {
+						$this->setAllowed($action);
+					}
+				}	
+			} catch (Exception $e) {}
+				
+		}
+		return parent::preDispatch();
+	}
+
+/**
+ * Define Roles Actions
+ */		
 	public function rolesAction()
 	{
+		/* Permissions check */	
+		if(!$this->isAllowed('showRoles')) {
+			$this->_redirect('403');
+			return;
+		}
 		$acl = $this->acl;
 		
 		$roles = array_keys($acl->getRoles());
@@ -158,6 +191,9 @@ class UsersController extends Kea_Controller_Action
 	}
 	
 	public function rulesFormAction() {
+		/* Permissions check */	
+		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
+		
 		$role = $_REQUEST['role'];
 		$acl = $this->acl;
 
@@ -168,6 +204,9 @@ class UsersController extends Kea_Controller_Action
 
 	public function addRoleAction()
 	{
+		/* Permissions check */	
+		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
+		
 		$filterPost = new Zend_Filter_Input($_POST);
 		if ($roleName = $filterPost->testAlnum('name')) {
 			$acl = $this->acl;
@@ -198,6 +237,9 @@ class UsersController extends Kea_Controller_Action
 	
 	public function deleteRoleAction()
 	{
+		/* Permissions check */	
+		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
+		
 		$filterPost = new Zend_Filter_Input($_POST);
 		if ($roleName = $filterPost->testAlnum('role')) {
 			$acl = $this->acl;
@@ -210,6 +252,9 @@ class UsersController extends Kea_Controller_Action
 	}
 	
 	public function setPermissionsAction() {
+		/* Permissions check */	
+		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
+		
 		$role = $_POST['role'];
 		if (!empty($role)) {
 			$acl = $this->acl;
@@ -233,8 +278,23 @@ class UsersController extends Kea_Controller_Action
 	 **/
 	public function addRuleAction()
 	{
+		/* Permissions check */
+		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
+		
 		if(!empty($_POST)) {
 			$this->acl->registerRule(new Zend_Acl_Resource($_POST['rule']), $_POST['action']);
+			$this->acl->save();
+		}
+		$this->_redirect('users/roles');
+	}
+	
+	public function deleteRuleAction()
+	{
+		/* Permissions check */
+		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
+		
+		if(!empty($_POST)) {
+			$this->acl->removeRule(new Zend_Acl_Resource($_POST['rule']), $_POST['action']);
 			$this->acl->save();
 		}
 		$this->_redirect('users/roles');

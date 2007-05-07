@@ -4,7 +4,11 @@
 <?php js('editable');?>
 
 <div id="type-info">
-<h2>Type: <?php echo $type->name;?> <a class="edit" href="<?php echo uri('types/edit/'.$type->id); ?>">(Edit)</a></h2>
+<h2>Type: <?php echo $type->name;?>
+	 <?php if ( has_permission('Types','edit') ): ?>
+	 	<a class="edit" href="<?php echo uri('types/edit/'.$type->id); ?>">(Edit)</a>
+	 <?php endif; ?>
+</h2>
 	<p><?php echo $type->description; ?></p>
 	<h3>Type Metadata</h3>
 	<dl class="type-metadata">

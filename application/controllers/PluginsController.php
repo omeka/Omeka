@@ -38,5 +38,9 @@ class PluginsController extends Kea_Controller_Action
 		}
 
 	}
+	
+	public function deleteAction() {$this->_redirect('/');}
+	
+	public function addAction() {$this->_redirect('/');}
 }
 ?>

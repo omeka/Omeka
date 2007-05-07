@@ -10,7 +10,7 @@ class Kea_Auth_Adapter extends Zend_Auth_Adapter
 		$message = null;
 		
 		$user = Doctrine_Manager::connection()->getTable('user')
-											  ->findByDql('username LIKE :username AND password LIKE SHA1(:password)', $options);
+											  ->findByDql('username LIKE :username AND password LIKE SHA1(:password) AND active = 1', $options);
 		
 		// The user was logged in correctly
 		if (count($user) === 1) {
@@ -21,7 +21,7 @@ class Kea_Auth_Adapter extends Zend_Auth_Adapter
 		else {
 			unset($options['password']);
 			$user = Doctrine_Manager::connection()->getTable('user')
-												  ->findByDql('username LIKE :username', $options);
+												  ->findByDql('username LIKE :username AND active = 1', $options);
 			
 			if (count($user) === 1) {
 				$message = "Invalid password";

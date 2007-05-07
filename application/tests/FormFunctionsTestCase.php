@@ -3,10 +3,7 @@ require_once 'Kea/View/FormFunctions.php';
 require_once 'Kea/View/UnicodeFunctions.php';	
 class FormFunctionsTestCase extends OmekaTestCase
 {
-	private function stripSpace($html)
-	{
-		return str_replace(array("\t","\n"),'',$html);
-	}
+
 	
 	public function testLabel()
 	{

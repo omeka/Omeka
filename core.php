@@ -99,8 +99,20 @@ function get_option($name) {
 	}
 }
 
-$acl = unserialize(get_option('acl'));
+//$acl = unserialize(get_option('acl'));
+
+
+//@todo Uncomment the above code to keep the ACL stored in the DB
+include 'acl.php';
+
 Zend::register('acl', $acl);
+
+//Register the Authentication mechanism to be able to share it
+require_once 'Zend/Auth.php';
+require_once 'Kea/Auth/Adapter.php';
+$auth = new Zend_Auth(new Kea_Auth_Adapter());
+Zend::register('auth', $auth);
+
 
 // Initialize some stuff
 $front = Kea_Controller_Front::getInstance();

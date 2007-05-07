@@ -5,7 +5,7 @@ NULL , 'User1', SHA1( 'test' ) , 'First1', 'Last1', 'user1@user1.com', 'CHNM', '
 
 INSERT INTO `users` ( `id` , `username` , `password` , `first_name` , `last_name` , `email` , `institution` , `active` , `role` )
 VALUES (
-'2', 'User2', SHA1( 'test' ) , 'First2', 'Last2', 'user2@user2.com', 'CHNM', '1', 'super'
+'2', 'User2', SHA1( 'test' ) , 'First2', 'Last2', 'user2@user2.com', 'CHNM', '1', 'researcher'
 );
 
 INSERT INTO items (id, title) VALUES (1, 'Item1');

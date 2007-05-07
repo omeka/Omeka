@@ -33,7 +33,7 @@ final class Kea
 		require_once 'Kea/Auth/Adapter.php';
 		require_once 'Zend/Filter/Input.php';
 
-		$auth = new Zend_Auth(new Kea_Auth_Adapter());
+		$auth = Zend::Registry('auth');
 		if ($auth->isLoggedIn()) {
 			$token = $auth->getToken();
 			return $token->getIdentity();
