@@ -119,9 +119,7 @@ abstract class Kea_Record extends Doctrine_Record
 				if(!is_array($value)) {
 					$type = $this->getTable()->getTypeOf($key);
 					if($type == 'string' || $type == 'integer') {
-						if(!is_null($value)) {
-							settype($value, $type);
-						}
+						settype($value, $type);
 					}
 				
 					$this->$key = (!$callback) ? $value : call_user_func_array($callback, array($value) );
@@ -145,6 +143,7 @@ abstract class Kea_Record extends Doctrine_Record
 				}
 			}
 		}
+		
 		return $this;
 	}
 	
