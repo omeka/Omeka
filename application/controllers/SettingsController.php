@@ -11,16 +11,17 @@ class SettingsController extends Kea_Controller_Action
 		$table = Doctrine_Manager::getInstance()->getTable('Option');
 		
 		//Any changes to this list should be reflected in the install script (and possibly the view functions)		
-		$settings = array('site_title', 'copyright','meta_keywords', 'meta_author', 'meta_description', 'thumbnail_width', 'thumbnail_height', 'fullsize_width', 'fullsize_height', 'path_to_convert');
+		$settingsList = array('site_title', 'copyright','meta_keywords', 'meta_author', 'meta_description', 'thumbnail_width', 'thumbnail_height', 'fullsize_width', 'fullsize_height', 'path_to_convert');
 		
-		foreach( $settings as $setting )
+		foreach( $settingsList as $setting )
 		{
-			$$setting = $table->findBySQL("name LIKE '$setting'")->getFirst();
-			if(!$$setting) {
-				$$setting = new Option();
-				$$setting->name = $setting;
-				$$setting->value = "";
+			$option = $table->findBySQL("name LIKE '$setting'")->getFirst();
+			if(empty($option)) {
+				$option = new Option();
+				$option->name = $setting;
+				$option->value = "";
 			}
+			$settings[$setting] = $option;
 		}
 						
 		//process the form
@@ -28,18 +29,23 @@ class SettingsController extends Kea_Controller_Action
 			$options = Zend::Registry('options');
 			foreach( $_POST as $key => $value )
 			{
-				if(isset($$key)) {
+				if(array_key_exists($key,$settings)) {
 					$value = get_magic_quotes_gpc() ? stripslashes( $value ) : $value;
-					$$key->value = $value;
+					$settings[$key]->value = $value;
+					$settings[$key]->save();
+					
 					$options[$key] = $value;
-					$$key->save();
 				}
 			}
 			Zend::register('options', $options);
 			$this->flash("Settings have been changed.");
 		}
 		
-		$this->render('settings/edit.php', compact($settings));
+		foreach ($settings as $name=>$option) {
+			$settings[$name] = $option->value;
+		}
+
+		$this->render('settings/edit.php', $settings);
 	}
 }
 

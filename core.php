@@ -99,7 +99,7 @@ function get_option($name) {
 	}
 }
 
-//$acl = unserialize(get_option('acl'));
+$acl = unserialize(get_option('acl'));
 
 
 //@todo Uncomment the above code to keep the ACL stored in the DB
