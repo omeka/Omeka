@@ -6,6 +6,8 @@
 
 $acl = new Kea_Acl();
 
+$acl->setAutoSave(false);
+
 $acl->addRole(new Zend_Acl_Role('super'));
 $acl->addRole(new Zend_Acl_Role('researcher'));
 $acl->addRole(new Zend_Acl_Role('admin'));

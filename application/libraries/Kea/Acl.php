@@ -3,6 +3,8 @@ require_once 'Zend/Acl.php';
 require_once 'Kea/Acl/Role/Registry.php';
 class Kea_Acl extends Zend_Acl
 {
+	protected $_autosave = true;
+	
 	/**
 	 * Zend doesn't have a way of getting what rules/permissions are potentially
 	 * available for specific resources or for global resources, so here is an
@@ -29,7 +31,7 @@ class Kea_Acl extends Zend_Acl
 	
 	public function deleteRules() {
 		$this->_permissions = array('GLOBAL' => array());
-		$this->save();
+		$this->autoSave();
 	}
 	
 	public function registerRule(Zend_Acl_Resource_Interface $resource = null, $permissions) {
@@ -61,7 +63,7 @@ class Kea_Acl extends Zend_Acl
 		}
 
 		// Auto save the acl object
-		$this->save();
+		$this->autoSave();
 	}
 
 	public function removeRule($resource = null, $permissions)
@@ -110,7 +112,7 @@ class Kea_Acl extends Zend_Acl
 		}
 		
 		// Auto save the acl object
-		$this->save();
+		$this->autoSave();
 	}
 	
 	public function removeRulesByResource($resource)
@@ -129,7 +131,7 @@ class Kea_Acl extends Zend_Acl
 
 		unset($this->_permissions[$resourceId]);
 		$this->remove($resourceId);
-		$this->save();
+		$this->autoSave();
 	}
 	
 	/**
@@ -171,7 +173,7 @@ class Kea_Acl extends Zend_Acl
 				$this->removeAllow($role, $resource, $rule);
 			}
 		}
-		$this->save();
+		$this->autoSave();
 	}
 	
 	/**
@@ -216,6 +218,18 @@ class Kea_Acl extends Zend_Acl
 			
 		}
 		return parent::isAllowed($role, $resource, $privilege);
+	}
+	
+	public function setAutoSave($bool) 
+	{
+		$this->_autosave = $bool;
+	}
+	
+	public function autoSave()
+	{
+		if($this->_autosave) {
+			$this->save();
+		}
 	}
 }
 ?>

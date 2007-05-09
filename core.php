@@ -53,6 +53,7 @@ if(isset($config->log)) {
 require_once 'Kea'.DIRECTORY_SEPARATOR.'SearchListener.php';
 require_once 'Kea'.DIRECTORY_SEPARATOR.'TimestampListener.php';
 $chainListeners = new Doctrine_EventListener_Chain();
+$chainListeners->add(new Kea_OutputListener());
 $chainListeners->add(new Kea_TimestampListener());
 $chainListeners->add(new Kea_SearchListener());
 

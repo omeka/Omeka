@@ -8,8 +8,22 @@ EditableField.prototype = {
 		this.ajaxUri = ajaxUri;
 		this.recordId = recordId;
 		this.fieldType = fieldType;
-		this.boundMakeEditable = this.makeEditable.bindAsEventListener(this);
+		this.boundMakeEditable = this.makeEditable.bindAsEventListener(this);		
 		Event.observe(this.div, "click", this.boundMakeEditable);
+	},
+	
+	escapeSomeHtml: function(str) {
+		//This is to make this compatible with allhtmlentities()
+		//Right now the allowed tags are hard-coded but that may change
+		var html = str.escapeHTML();
+
+		var catchTags = /&lt;\/?(em|b|strong|del|span|cite|blockquote)( .*?)?&gt;/ig;
+
+		var unescapedHtml = html.replace( catchTags, function(htmlStr){
+			return htmlStr.unescapeHTML();
+		});
+
+		return unescapedHtml;
 	},
 	
 	makeFormElement: function() {
@@ -66,7 +80,7 @@ EditableField.prototype = {
 			parameters: "noRedirect=true&"+Form.serialize(this.editForm),
 			method: "post",
 			onSuccess: function(t, item) {
-				that.div.innerHTML = item[that.fieldName];
+				that.div.innerHTML = that.escapeSomeHtml(item[that.fieldName]);
 				new Effect.Highlight(that.div, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'})
 				Event.observe(that.div, "click", that.boundMakeEditable);
 			}
