@@ -111,7 +111,19 @@ Zend::register('acl', $acl);
 //Register the Authentication mechanism to be able to share it
 require_once 'Zend/Auth.php';
 require_once 'Kea/Auth/Adapter.php';
-$auth = new Zend_Auth(new Kea_Auth_Adapter());
+
+$authPrefix = get_option('auth_prefix');
+
+//Leave this in for development, take it out for release
+if(!$authPrefix) {
+	$authPrefix = md5(mt_rand());
+	$prefixOption = new Option();
+	$prefixOption->name = 'auth_prefix';
+	$prefixOption->value = $authPrefix;
+	$prefixOption->save();
+}
+
+$auth = new Zend_Auth(new Kea_Auth_Adapter(), true, $authPrefix);
 Zend::register('auth', $auth);
 
 

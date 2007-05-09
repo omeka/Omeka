@@ -95,7 +95,11 @@ name     = ".$db['name']."
 		$site_title->value = $_REQUEST['site']['name'];
 		$site_title->save();
 		
-		
+		// Namespace for the authentication session (to prevent clashes on shared servers)
+		$auth_prefix = new Option();
+		$auth_prefix->name = 'auth_prefix';
+		$auth_prefix->value = md5(mt_rand());
+		$auth_prefix->save();
 		
 		// Fill in the other settings automanually (users can change these later if they want to)
 		$settings = array('copyright','meta_keywords', 'meta_author', 'meta_description', 'administrator_email');
