@@ -127,6 +127,15 @@ function error($record, $field_name = null) {
 
 function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units = 'em', $return = false )
 {
+	if(!$tags){
+		$html = '<div class="error">There are no tags to display</div>';
+		if($return) return $html;
+		else {
+			echo $html;
+			return;
+		}
+	} 
+	
 	$html = '';
 	foreach( $tags as $tag )
 	{
