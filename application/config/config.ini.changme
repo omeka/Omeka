@@ -18,18 +18,22 @@ default.controller = index
 default.action = home
 
 ; Display a runtime timer for page generation
-debug.timer = true
+debug.timer = false
 
 ; Throw exceptions; this should only be used in development mode
-debug.exceptions = true
+debug.exceptions = false
 
 ; Json request return Content-Type: text/x-json
 ; In some browsers this will prompt for you to download a file, not a
 ; problem for ajax, but if you want to debug and have the json printed
 ; to the screen set this to 'true'
-debug.json = true
+debug.json = false
 
-
+; Log SQL statements
 log.sql = false
 
+; Log errors (to be implemented)
 log.errors = false
+
+; Amount of time (in minutes) to allow before expiring an authenticated user
+login.expire = 15

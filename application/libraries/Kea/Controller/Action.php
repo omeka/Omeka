@@ -117,6 +117,19 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 
 				// finally, send to a login page
 				$this->_redirect('users/login');
+			}else {
+				/*	Access the authentication session and set it to expire after a certain amount
+				 	of time if there are no requests */
+				$authPrefix = $auth->getSessionNamespace();
+				$auth_session = new Zend_Session($authPrefix);
+				
+				$config = Zend::Registry('config_ini');
+				$minutesUntilExpiration = (int) $config->login->expire;
+				
+				//Default value in case for whatever reason it's not available
+				if(!$minutesUntilExpiration) $minutesUntilExpiration = 15;
+				
+				$auth_session->setExpirationSeconds($minutesUntilExpiration * 60);
 			}		
 		}
 		$this->checkActionPermission($action);

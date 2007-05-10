@@ -103,12 +103,12 @@ function get_option($name) {
 $acl = unserialize(get_option('acl'));
 
 
-//@todo Uncomment the above code to keep the ACL stored in the DB
+//@todo Comment the line below to keep the ACL stored in the DB
 include 'acl.php';
 
 Zend::register('acl', $acl);
 
-//Register the Authentication mechanism to be able to share it
+
 require_once 'Zend/Auth.php';
 require_once 'Kea/Auth/Adapter.php';
 
@@ -123,7 +123,10 @@ if(!$authPrefix) {
 	$prefixOption->save();
 }
 
+//Set up the authentication mechanism with the specially generated prefix
 $auth = new Zend_Auth(new Kea_Auth_Adapter(), true, $authPrefix);
+
+//Register the Authentication mechanism to be able to share it
 Zend::register('auth', $auth);
 
 
