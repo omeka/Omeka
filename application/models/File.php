@@ -86,6 +86,47 @@ class File extends Kea_Record {
 		}
 	}
 	
+	public function sanitizeFilename($name)
+	{
+		//Strip whitespace
+		$name = trim($name);
+		
+		/*	Remove all but last .
+			I wish there was an easier way of doing this */
+		if(substr_count($name,'.') > 1) {
+			$array = explode('.',$name);
+			if(count($array) > 2) {
+				$last = array_pop($array);
+				$first = join('', $array);
+				$name = array();
+				if(!empty($first)) {
+					$name = $first;
+				}
+				if(!empty($last)) {
+					$name .= '.'.$last;
+				}
+			}
+		}
+		
+		//Strip out invalid characters
+		$invalid = array('"','*','/',':','<','>','?','|',"'",'&',';','#','\\');
+		$name = str_replace($invalid, '', $name);
+		
+		//Strip out non-printable characters
+		for ($i=0; $i < 32; $i++) { 
+			$nonPrintable[$i] = chr($i);
+		}
+		$name = str_replace($nonPrintable, '', $name);
+		
+		//Convert to lowercase (avoid corrupting UTF-8)
+		$name = strtolower($name);
+		
+		//Convert remaining spaces to hyphens
+		$name = str_replace(' ', '-', $name);
+		
+		return $name;
+	}
+	
 	/**
 	 * Stole this jazz from the old File model
 	 *
@@ -98,6 +139,8 @@ class File extends Kea_Record {
 		if( $error == UPLOAD_ERR_OK ) {
 				$tmp = $_FILES[$form_name]['tmp_name'][$index];
 				$name = $_FILES[$form_name]['name'][$index];
+				$originalName = $name;
+				$name = $this->sanitizeFilename($name);
 				$new_name = explode( '.', $name );
 				$new_name[0] .= '_' . substr( md5( mt_rand() + microtime( true ) ), 0, 10 );
 				$new_name_string = implode( '.', $new_name );
@@ -119,7 +162,7 @@ class File extends Kea_Record {
 				$this->mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $path ) ) ) );
 				$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
 
-				$this->original_filename = $name;
+				$this->original_filename = $originalName;
 				$this->archive_filename = $new_name_string;
 				
 				//Retrieve the image sizes from the database
