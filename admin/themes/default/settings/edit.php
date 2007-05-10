@@ -1,6 +1,6 @@
 <?php head(); ?>
 <?php common('settings-nav'); ?>
-
+<?php echo flash(); ?>
 <h2>Edit Settings</h2>
 
 <form method="post">
