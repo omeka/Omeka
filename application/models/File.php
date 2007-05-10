@@ -123,14 +123,12 @@ class File extends Kea_Record {
 				$this->archive_filename = $new_name_string;
 				
 				//Retrieve the image sizes from the database
-				$full_width = get_option('fullsize_width');
-				$full_height = get_option('fullsize_height');
-				$thumb_width = get_option('thumbnail_width');
-				$thumb_height = get_option('thumbnail_height');
+				$full_constraint = get_option('fullsize_constraint');
+				$thumb_constraint = get_option('thumbnail_constraint');
 				
-				$this->fullsize_filename = $this->createImage(FULLSIZE_DIR, $path, null, $full_width, $full_height );
+				$this->fullsize_filename = $this->createImage(FULLSIZE_DIR, $path, $full_constraint );
 				
-				$this->thumbnail_filename = $this->createImage(THUMBNAIL_DIR, $path, null, $thumb_width, $thumb_height );
+				$this->thumbnail_filename = $this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint );
 				
 		} else {
 			// Ignore error '4' - no file uploaded and error '0' - file uploaded correctly
@@ -170,7 +168,7 @@ class File extends Kea_Record {
 	 * @return void
 	 * 
 	 **/
-	protected function createImage( $new_dir, $old_path, $percent = null, $new_width = null, $new_height = null, $output = 3, $no_enlarge = true ) {
+	protected function createImage( $new_dir, $old_path, $constraint, $no_enlarge = true ) {
 		$convertPath = get_option('path_to_convert');
 		
 		if(!$this->checkForImageMagick($convertPath)) {
@@ -201,37 +199,33 @@ class File extends Kea_Record {
 			$old_path = escapeshellarg( $old_path );
 			$new_path = escapeshellarg( $new_path );
 			
-			if( $percent )
-			{
-				$new_width = ($percent * $width);
-				$new_height = ($percent * $height);
-				
-				// This is the actual convert command
-				$command = $convertPath . ' ' . $old_path . ' -resize ' . $percent . '% ' . $new_path;
-			}
-			elseif( $new_width && $new_height )
-			{
-				$command = $convertPath . ' ' . $old_path . ' -resize \'' . $new_width . 'x' . $new_height . '>\' ' . $new_path;
-			}
-			elseif( $new_width && !$new_height )
-			{
-				$command = $convertPath . ' ' . $old_path . ' -resize ' . $new_width . 'x ' . $new_path;
-			}
-			elseif( !$new_width && $new_height )
-			{
-				$command = $convertPath . ' ' . $old_path . ' -resize ' . 'x' . $new_height . ' ' . $new_path;
-			}
-			elseif( !$percent && !$new_width && !$new_height )
-			{
-				throw new Exception(
-					'At least one of the following must be specified: percent, new width, new height or both new width and new height.'
+			if(!$constraint) {
+				throw new Exception( 
+					'Image creation failed - Image size constraint must be specified within application settings' 
 				);
 			}
+			
+			//Landscape aspect-ratio
+			if($width > $height) {
+				//Width is the constraint
+				
+				$new_width = $constraint;
+				$new_height = ($constraint / $width) * $height;
+			}
+			//Portrait aspect-ratio
+			else {
+				//Height is the constraint
+
+				$new_height = $constraint;
+				$new_width = ($constraint / $height) * $width;
+			}
+			
+			$command = $convertPath . ' ' . $old_path . ' -resize \'' . $new_width . 'x' . $new_height . '>\' ' . $new_path;
 			
 			//We probably don't want to make images that are any bigger than the raw file
 			if( $no_enlarge )
 			{
-				if ( ( !empty($new_width) && $new_width > $width ) || ( !empty($new_height) && $new_height > $height ) )
+				if ( ( $new_width > $width ) || ( $new_height > $height ) )
 				{
 					$command = $convertPath . ' ' . $old_path . ' ' . $new_path;
 				}
@@ -246,7 +240,7 @@ class File extends Kea_Record {
 			{
 			
 				throw new Exception(
-					'Something went wrong with thumbnail creation.  Ensure that the thumbnail directories have appropriate write permissions.'
+					'Something went wrong with image creation.  Ensure that the thumbnail directories have appropriate write permissions.'
 				);
 			}
 		}

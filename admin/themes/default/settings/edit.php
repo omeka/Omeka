@@ -26,19 +26,11 @@
 </div>
 
 <div class="field">    
-<?php text(array('name'=>'thumbnail_width', 'class'=>'textinput', 'id'=>'thumbnail_width'),$thumbnail_width, 'Thumbnail Width'); ?>
+<?php text(array('name'=>'thumbnail_constraint', 'class'=>'textinput', 'id'=>'thumbnail_constraint'),$thumbnail_constraint, 'Thumbnail Size Constraint'); ?>
 </div>
 
 <div class="field">
-	<?php text(array('name'=>'thumbnail_height', 'class'=>'textinput', 'id'=>'thumbnail_height'),$thumbnail_height, 'Thumbnail Height'); ?>
-</div>
-
-<div class="field">
-	<?php text(array('name'=>'fullsize_width', 'class'=>'textinput', 'id'=>'fullsize_width'),$fullsize_width, 'Fullsize Width'); ?>
-</div>
-
-<div class="field">
-	<?php text(array('name'=>'fullsize_height', 'class'=>'textinput', 'id'=>'fullsize_height'),$fullsize_height, 'Fullsize Height'); ?> 
+	<?php text(array('name'=>'fullsize_constraint', 'class'=>'textinput', 'id'=>'fullsize_constraint'),$fullsize_constraint, 'Fullsize Size Constraint'); ?>
 </div>
 
 <div class="field">

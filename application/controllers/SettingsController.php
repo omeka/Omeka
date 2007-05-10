@@ -11,7 +11,15 @@ class SettingsController extends Kea_Controller_Action
 		$table = Doctrine_Manager::getInstance()->getTable('Option');
 		
 		//Any changes to this list should be reflected in the install script (and possibly the view functions)		
-		$settingsList = array('site_title', 'copyright','meta_keywords', 'meta_author', 'meta_description', 'thumbnail_width', 'thumbnail_height', 'fullsize_width', 'fullsize_height', 'path_to_convert');
+		$settingsList = array(
+			'site_title', 
+			'copyright',
+			'meta_keywords', 
+			'meta_author', 
+			'meta_description', 
+			'thumbnail_constraint', 
+			'fullsize_constraint', 
+			'path_to_convert');
 		
 		foreach( $settingsList as $setting )
 		{
