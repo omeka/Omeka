@@ -145,6 +145,12 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 				#type-items .title {float:left; display:block; width: 48%;}
 				#type-items .date {float:right; display:block; width:48%;text-align:right;}
 				#type-items a {text-decoration:none;}
+	
+	/* Items Form Page */
+	#date_day, #date_year, #date_month {display:inline;float:none;}
+	#date_day {width:20px;}
+	#date_month {width:20px;}
+	#date_year {width:40px;}
 				
 	/* Tags Page */
 	

@@ -430,6 +430,28 @@ function settings($name, $return=false) {
 	echo $name;
 }
 
+//Format of $date is YYYY-MM-DD
+function get_month($date)
+{
+	$parts = explode('-',$date);
+	if($parts[1] === '00') return null;
+	return $parts[1];
+}
+
+function get_day($date)
+{
+	$parts = explode('-',$date);
+	if($parts[2] === '00') return null;
+	return $parts[2];
+}
+
+function get_year($date)
+{
+	$parts = explode('-',$date);
+	if($parts[0] === '0000') return null;
+	return $parts[0];
+}
+
 /**
  * Display an alternative value if the given variable is empty
  *

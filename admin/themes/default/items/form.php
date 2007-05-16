@@ -60,7 +60,10 @@
 		
 		<div class="field">
 		<label>Date</label>
-		<input type="text" class="textinput" name="date" value="<?php echo $item->date;?>" />
+		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo get_year($item->date); ?>"> -
+		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo get_month($item->date); ?>" /> -
+		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo get_day($item->date); ?>">
+		(YYYY-MM-DD)
 		</div>
 		
 	</fieldset>

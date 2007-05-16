@@ -114,12 +114,31 @@ class ItemsController extends Kea_Controller_Action
 			$clean = $_POST;
 			unset($clean['id']);
 			
+			
+			//Process the date fields, convert to YYYY-MM-DD
+			$date = array();
+			$date[0] = !empty($clean['date_year']) ? $clean['date_year'] : '0000';
+			$date[1] = !empty($clean['date_month']) ? $clean['date_month'] : '00';
+			$date[2] = !empty($clean['date_day']) ? $clean['date_day'] : '00';
+						
 			if(!empty($clean['tags'])) {
 				$user = Kea::loggedIn();
 				$item->addTagString($clean['tags'], $user);
 			}
 			
+			//Mirror the form to the record
 			$item->setFromForm($clean);
+			
+			//If the date is invalid, flash that as an error
+			if( !checkdate($date[1], $date[2], $date[0]) ) {
+				
+				$this->flash('The date provided is invalid.  Please provide a correct date.');
+				return false;
+				
+			}else {
+				
+				$item->date = implode('-', $date);
+			}
 					
 			if(!empty($clean['change_type'])) return false;
 			
