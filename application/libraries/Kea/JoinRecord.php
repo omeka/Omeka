@@ -28,6 +28,9 @@ abstract class Kea_JoinRecord extends Kea_Record
 			if(!$idNum) {
 //				throw new Exception( 'Record of class '.get_class($this).' with ID#:'.$this->id.' does not have a valid ID # stored in field: '.$column );
 				return true;
+				
+			}elseif(!is_numeric($idNum)) {
+				return true;
 			}
 			$where[$column]= "$column = {$idNum} ";
 		}

@@ -40,7 +40,7 @@ class Doctrine_Validator_Notnull
      */
     public function validate(Doctrine_Record $record, $key, $value)
     {
-        if ($value === null || $value === '') {
+        if ($value === null /*|| $value === ''*/) {
             return false;
         }
         return true;

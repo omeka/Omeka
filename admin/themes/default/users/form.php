@@ -1,5 +1,4 @@
 <?php echo flash(); ?>
-<?php error($user); ?>
 <fieldset>
 	<legend>User Info</legend>
 <div class="field">
@@ -24,7 +23,7 @@
 
 <div class="field">
 <label for="active">Active</label>
-<?php checkbox(array('name'=>'active', 'id'=>'active'), $user->active); ?>
+<?php radio(array('name'=>'active', 'id'=>'active'), array('0'=>'Inactive','1'=>'Active'), $user->active); ?>
 </div>
 
 <?php if ( has_permission('Users','showRoles') ): ?>

@@ -166,14 +166,38 @@
 	<?php display_empty($item->language)?>
 	</div>
 
-	<h4>Coverage</h4>
+	<h4>Spatial Coverage</h4>
 	<div id="coverage" class="editable" rel="text">
-	<?php display_empty($item->coverage)?>
+	<?php display_empty($item->spatial_coverage)?>
 	</div>
+	
+	<h4>Temporal Coverage</h4>
+	<?php display_empty($item->temporal_coverage_start); ?> &mdash; 
+	<?php display_empty($item->temporal_coverage_end)?>
 	
 	<h4>Rights</h4>
 	<div class="editable" id="rights" rel="text">
 	<?php display_empty($item->rights)?>
+	</div>
+	
+	<h4>Rights Holder</h4>
+	<div class="editable" id="rights_holder" rel="text">
+	<?php display_empty($item->rights_holder)?>
+	</div>
+	
+	<h4>Contributor</h4>
+	<div class="editable" id="contributor" rel="text">
+	<?php display_empty($item->contributor)?>
+	</div>
+	
+	<h4>Provenance</h4>
+	<div class="editable" id="provenance" rel="text">
+	<?php display_empty($item->provenance)?>
+	</div>
+	
+	<h4>Citation</h4>
+	<div class="editable" id="citation" rel="text">
+	<?php display_empty($item->citation)?>
 	</div>
 	
 	<h4>Source</h4>

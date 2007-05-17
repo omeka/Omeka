@@ -13,9 +13,11 @@ class Metatext extends Kea_Record {
 
 	public function setTableDefinition() {
    	//	$this->setTableName('metatext');
-		$this->hasColumn("item_id","integer", null, "notnull|unsigned");
-		$this->hasColumn("metafield_id","integer", null,"notnull|unsigned");
-		$this->hasColumn("text","string");
+        $this->hasColumn('item_id', 'integer', null, array('notnull' => true, 
+                                                        'unsigned' => true));
+        $this->hasColumn('metafield_id', 'integer', null, array('notnull' => true, 
+                                                             'unsigned' => true));
+        $this->hasColumn('text', 'string', null, array('notnull' => true, 'default'=>''));
 		$this->index('item', array('fields' => array('item_id')));
 		$this->index('metafield', array('fields' => array('metafield_id')));
  	}

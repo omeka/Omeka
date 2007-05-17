@@ -404,6 +404,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				return true;
 			}
 			catch(Doctrine_Validator_Exception $e) {
+				$record->gatherErrors($e);
+				$this->flash($record->getErrorMsg());
 				return false;
 			}	
 		}

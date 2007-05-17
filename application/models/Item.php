@@ -39,29 +39,35 @@ class Item extends Kea_Record
 	
 	public function setTableDefinition() {
 //		$this->option('type', 'MYISAM');
-		
 		$this->setTableName('items');
 		
 		$this->hasColumn("title","string",255, "notblank|unique");
-		$this->hasColumn("publisher","string",300);
-		$this->hasColumn("language","string",null);
-		$this->hasColumn("relation","string",null);
-		$this->hasColumn("coverage","string",null);
-		$this->hasColumn("rights","string",null);
-		$this->hasColumn("description","string");
-		$this->hasColumn("source","string",null);
-		$this->hasColumn("subject","string",300);
-		$this->hasColumn("creator","string",300);
-		$this->hasColumn("additional_creator","string",300);
-		$this->hasColumn("date","date");
-		$this->hasColumn("added","timestamp");
-		$this->hasColumn("modified","timestamp");
-		
-		$this->hasColumn("type_id","integer");
-		$this->hasColumn("collection_id","integer");
-		$this->hasColumn("user_id","integer");
-		$this->hasColumn("featured", "boolean", null,array('default'=>0));
-		$this->hasColumn("public", "boolean", null,array('default'=>0));
+        $this->hasColumn('publisher', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('language', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('relation', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('spatial_coverage', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('rights', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('source', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('subject', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('creator', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('additional_creator', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('date', 'date');
+        $this->hasColumn('added', 'timestamp', null);
+        $this->hasColumn('modified', 'timestamp', null);
+        $this->hasColumn('type_id', 'integer');
+        $this->hasColumn('collection_id', 'integer');
+        $this->hasColumn('user_id', 'integer');
+        $this->hasColumn('featured', 'integer', 1, array('notnull' => true));
+        $this->hasColumn('public', 'integer', 1, array('notnull' => true));
+        $this->hasColumn('contributor', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('rights_holder', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('provenance', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('citation', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('temporal_coverage_start', 'date');
+        $this->hasColumn('temporal_coverage_end', 'date');
+		$this->hasColumn("featured", "boolean", null,array('notnull' => true, 'default'=>'0'));
+		$this->hasColumn("public", "boolean", null,array('notnull' => true, 'default'=>'0'));		
 		
 		$this->index('featured', array('fields' => array('featured')));
 		$this->index('public', array('fields' => array('public')));
@@ -87,6 +93,40 @@ class Item extends Kea_Record
 		}
 	}
 */	
+/**
+	 * Process the date info given, return false on invalid date given, otherwise set the appropriate field
+	 *
+	 * @return bool
+	 **/
+	public function processDate($field,$year,$month,$day) 
+	{
+			//Process the date fields, convert to YYYY-MM-DD
+			$date = array();
+			$date[0] = !empty($year) 	? $year 	: '0000';
+			$date[1] = !empty($month) 	? $month 	: '00';
+			$date[2] = !empty($day) 	? $day 		: '00';
+			
+			$mySqlDate = implode('-', $date);
+			
+			//If its a blank thing then its valid I suppose
+			
+			if($mySqlDate == '0000-00-00') {
+					$this->$field = null;
+					return true;
+			}
+			//If the date is invalid, return false
+			elseif( !checkdate($date[1], $date[2], $date[0]) ) {
+
+					return false;
+			
+			}else {
+				
+				
+				$this->$field = $mySqlDate;
+				return true;
+			}					
+	}
+
 	///// METADATA METHODS /////
 	
 	public function metadata( $name, $return_text = true ) {		

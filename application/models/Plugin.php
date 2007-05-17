@@ -15,11 +15,11 @@ class Plugin extends Doctrine_Record
 	
  	public function setTableDefinition() {
 		$this->setTableName("plugins");
-		$this->hasColumn("name", "string", 255, "unique|notblank");
-		$this->hasColumn("description", "string");
-		$this->hasColumn("author", "string");
-		$this->hasColumn("config", "array");
-		$this->hasColumn("active", "boolean",null,array('default'=>0));
+       	$this->hasColumn('name', 'string', 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
+        $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('author', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('config', 'array', null);
+        $this->hasColumn('active', 'boolean', null, array('default'=>'0', 'notnull' => true));		
 		$this->index('active', array('fields'=>array('active')));
 	}
 } // END class Location extends Kea_Record

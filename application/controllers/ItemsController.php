@@ -14,6 +14,18 @@ class ItemsController extends Kea_Controller_Action
 		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
 	
+	public function addAction()
+	{
+		$item = new Item;
+		$user = Kea::loggedIn();
+		$item->User = $user;
+		if($this->commitForm($item)) {
+			return $this->_redirect('items/browse');
+		}else {
+			return $this->render('items/add.php',compact('item'));
+		}
+	}
+	
 	/**
 	 * @todo Browse should be able to narrow by Collection, Type, Tag, etc.
 	 *
@@ -115,11 +127,20 @@ class ItemsController extends Kea_Controller_Action
 			unset($clean['id']);
 			
 			
-			//Process the date fields, convert to YYYY-MM-DD
-			$date = array();
-			$date[0] = !empty($clean['date_year']) ? $clean['date_year'] : '0000';
-			$date[1] = !empty($clean['date_month']) ? $clean['date_month'] : '00';
-			$date[2] = !empty($clean['date_day']) ? $clean['date_day'] : '00';
+			$validDate = $item->processDate('date',
+								$clean['date_year'],
+								$clean['date_month'],
+								$clean['date_day']);
+								
+			$validCoverageStart = $item->processDate('temporal_coverage_start', 
+								$clean['coverage_start_year'],
+								$clean['coverage_start_month'],
+								$clean['coverage_start_day']);
+								
+			$validCoverageEnd = $item->processDate('temporal_coverage_end', 
+								$clean['coverage_end_year'],
+								$clean['coverage_end_month'],
+								$clean['coverage_end_day']);	
 						
 			if(!empty($clean['tags'])) {
 				$user = Kea::loggedIn();
@@ -129,17 +150,19 @@ class ItemsController extends Kea_Controller_Action
 			//Mirror the form to the record
 			$item->setFromForm($clean);
 			
-			//If the date is invalid, flash that as an error
-			if( !checkdate($date[1], $date[2], $date[0]) ) {
-				
+			//Check to see if the date was valid
+			if(!$validDate) {
 				$this->flash('The date provided is invalid.  Please provide a correct date.');
 				return false;
-				
-			}else {
-				
-				$item->date = implode('-', $date);
 			}
-					
+			
+			//If someone is providing coverage dates, they need to provide both a start and end or neither
+			if( (!$validCoverageStart and $validCoverageEnd) or ($validCoverageStart and !$validCoverageEnd) ) {
+				
+				$this->flash('For coverage, both start date and end date must be specified, otherwise neither may be specified.');
+				return false;
+			}
+			
 			if(!empty($clean['change_type'])) return false;
 			
 			if(!empty($_FILES["file"]['name'][0])) {
@@ -159,8 +182,14 @@ class ItemsController extends Kea_Controller_Action
 				}
 			}
 			
-			$item->public = (bool) $clean['public'];
-			$item->featured = (bool) $clean['featured'];
+			//Handle the boolean vars
+			if(array_key_exists('public', $clean)) {
+				$item->public = (bool) $clean['public'];
+			}
+			
+			if(array_key_exists('featured', $clean)) {
+				$item->featured = (bool) $clean['featured'];
+			}
 			
 			try {
 				$item->save();

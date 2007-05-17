@@ -25,8 +25,8 @@ class Metafield extends Kea_Record {
 	public function setTableDefinition() {
    		$this->setTableName('metafields');
 		
-		$this->hasColumn("name", "string", 255, "unique|notblank");
-		$this->hasColumn("description","string", null);
+		$this->hasColumn("name", "string", 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
+     	$this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
 		$this->hasColumn("plugin_id", "integer");
 		$this->index('plugin', array('fields'=>array('plugin_id')));
  	}

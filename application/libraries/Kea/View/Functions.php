@@ -348,6 +348,11 @@ function get_metafields(array $params = array())
 	return _make_omeka_request('Types','metafields',$params,null);
 }
 
+function get_types(array $params = array())
+{
+	return _make_omeka_request('Types','browse',$params,'types');
+}
+
 function get_users(array $params = array())
 {
 	return _make_omeka_request('Users','browse',$params,'users');

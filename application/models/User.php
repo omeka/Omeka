@@ -47,14 +47,15 @@ class User extends Kea_Record {
 	
     public function setTableDefinition() {
 		$this->setTableName('users');
-        $this->hasColumn("username","string",30, "unique|notblank");
-        $this->hasColumn("password","string",40, "notblank");
-        $this->hasColumn("first_name","string",200);
-        $this->hasColumn("last_name","string",200);
-		$this->hasColumn("email", "string", 200, "email|unique");
-        $this->hasColumn("institution","string",300);
-        $this->hasColumn("active","boolean",1);
-		$this->hasColumn("role", "string", 40, "notblank");
+        $this->hasColumn('username', 'string', 30, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
+        $this->hasColumn('password', 'string', 40, array('notnull' => true, 'notblank'=>true));
+        $this->hasColumn('first_name', 'string', 255, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('last_name', 'string', 255, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('email', 'string', 255, array('notnull' => true, 'notblank'=>true, 'default'=>'', 'email'=>true, 'unique'=>true));
+        $this->hasColumn('institution', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('active', 'boolean', null, array('notnull' => true, 'default'=>'0'));
+        $this->hasColumn('role', 'string', 40, array('notnull' => true, 'default'=>'default', 'notblank'=>true));
+
 		$this->index('active', array('fields' => array('active')));
     }
 	

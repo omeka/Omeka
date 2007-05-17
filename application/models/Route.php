@@ -14,7 +14,7 @@ class Route extends Kea_Record
 		$this->hasColumn("path", "string");
 		$this->hasColumn("added", "timestamp");
 		$this->hasColumn("static", "boolean",null,array('default'=>1));
-		$this->hasColumn("active", "boolean",null,array('default'=>0));
+		$this->hasColumn("active", "boolean",null,array('default'=>'0'));
 		
 		$this->index('static', array('fields' => array('active','static')));
 	}

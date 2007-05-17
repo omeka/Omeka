@@ -1,7 +1,5 @@
 <?php
 /**
- * @todo Name field needs to be larger across all models, will be adjusted once Doctrine fixes its bugs
- * @todo fix includes to be sure Kea_Record is included
  * @package Omeka
  **/
 class Collection extends Kea_Record { 
@@ -11,11 +9,11 @@ class Collection extends Kea_Record {
 	
 	public function setTableDefinition() {
 		$this->setTableName('collections');
-        $this->hasColumn("name","string",255, "unique|notnull");
-        $this->hasColumn("description","string", null);
-        $this->hasColumn("active","boolean", 1);
-        $this->hasColumn("featured","boolean", 1);
-		$this->hasColumn("collector", "string", null);
+        $this->hasColumn('name', 'string', 255, array('unique'=>true, 'notnull' => true, 'notblank'=>true));
+        $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('active', 'boolean', null, array('notnull' => true));
+        $this->hasColumn('featured', 'boolean', null, array('notnull' => true));
+        $this->hasColumn('collector', 'string', null, array('notnull' => true, 'default'=>''));
     }
 }
 
