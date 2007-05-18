@@ -58,7 +58,7 @@
 <?php else: ?>
 	<?php echo $file->archive_filename; ?>
 <?php endif; ?>
-<a href="<?php echo FILES_DIR.'/'.addslashes($file->archive_filename); ?>">Download this file</a>
+<a href="<?php echo WEB_FILES.'/'.addslashes($file->archive_filename); ?>">Download this file</a>
 </div>
 
 <div id="file-history" class="section">

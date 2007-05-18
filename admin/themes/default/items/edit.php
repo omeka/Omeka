@@ -4,7 +4,7 @@
 <form method="post" enctype="multipart/form-data">
 	<?php include 'form.php'; ?>
 	<fieldset>
-	<input type="submit" name="submit" value="Submit --&gt;" />
+	<input type="submit" name="submit" value="Save Item" />
 	</fieldset>
 </form>
 <?php foot();?>

@@ -117,27 +117,24 @@
 						'id'	=> 'type' ),
 						get_types(),
 						$item->type_id,
-						'Type Info',
+						'Item Type',
 						'id',
 						'name' ); ?>
-						<input type="submit" name="change_type" value="Pick this type" />
-						
-					</div>
+		<input type="submit" name="change_type" value="Pick this type" />	
+		</div>
 		
-		<?php
-			metatext_form($item,'textarea');
-		?>
+		<?php metatext_form($item,'textarea'); ?>
 		
 
 		</fieldset>
 		<fieldset id="files">
 			<legend>Files</legend>
 			<div class="field">
-			<label for="file[0]">Find a File</label>
-			<!-- MAX_FILE_SIZE must precede the file input field -->
-			<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-			<input name="file[0]" id="file[0]" type="file" class="textinput" />
-			</field>
+				<label for="file[0]">Find a File</label>
+				<!-- MAX_FILE_SIZE must precede the file input field -->
+				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+				<input name="file[]" id="file[]" type="file" class="textinput" />
+			</div>
 		</fieldset>
 		<fieldset id="miscellaneous">
 			<legend>Miscellaneous</legend>

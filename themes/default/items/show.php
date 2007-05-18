@@ -19,10 +19,17 @@
 	
 	<h4>Language</h4>
 	<div id="language"><?php echo $item->language;?></div>
-
-	<h4>Coverage</h4>
-	<div id="coverage"><?php echo $item->coverage;?></div>
 	
+	<h4>Spatial Coverage</h4>
+	<div id="coverage" class="editable" rel="text">
+	<?php display_empty($item->spatial_coverage)?>
+	</div>
+	
+	<h4>Temporal Coverage</h4>
+	<?php display_empty($item->temporal_coverage_start); ?> &mdash; 
+	<?php display_empty($item->temporal_coverage_end)?>
+
+
 	<h4>Rights</h4>
 	<div id="rights"><?php echo $item->rights;?></div>
 	

@@ -1,4 +1,4 @@
-<?php head(array('title' => 'Item'))?>
+<?php head(array('title' => 'Item')); ?>
 <?php common('archive-nav'); ?>
 
 <?php js('editable');?>
@@ -21,7 +21,7 @@
 			ulElement.appendChild(liElement);
 			var tagLink = document.createElement('a');
 			var removeLink = document.createElement('a');
-			tagLink.href =  "<?php echo uri('items/browse/tag/')?>"+tags[i]['name'];
+			tagLink.href =  "<?php echo uri('items/browse/tag/'); ?>"+tags[i]['name'];
 			tagLink.rel = tags[i]['id'];
 			tagLink.update(tags[i]['name']);
 
@@ -145,7 +145,6 @@
 <h3>Core Metadata</h3>
 <div id="core-metadata">
 	
-	
 	<h4>Description</h4>
 	<div id="description" class="editable" rel="textarea">
 	<?php display_empty($item->description); ?>
@@ -153,17 +152,17 @@
 	
 	<h4>Publisher</h4>
 	<div id="publisher" class="editable" rel="text">
-	<?php display_empty($item->publisher)?>
+	<?php display_empty($item->publisher); ?>
 	</div>
 	
 	<h4>Relation</h4>
 	<div class="editable" id="relation" rel="text">
-	<?php display_empty($item->relation)?>
+	<?php display_empty($item->relation); ?>
 	</div>
 	
 	<h4>Language</h4>
 	<div class="editable" id="language" rel="text">
-	<?php display_empty($item->language)?>
+	<?php display_empty($item->language); ?>
 	</div>
 
 	<h4>Spatial Coverage</h4>
@@ -177,7 +176,7 @@
 	
 	<h4>Rights</h4>
 	<div class="editable" id="rights" rel="text">
-	<?php display_empty($item->rights)?>
+	<?php display_empty($item->rights); ?>
 	</div>
 	
 	<h4>Rights Holder</h4>
@@ -202,22 +201,22 @@
 	
 	<h4>Source</h4>
 	<div class="editable" id="source" rel="text">
-	<?php display_empty($item->source)?>
+	<?php display_empty($item->source); ?>
 	</div>
 	
 	<h4>Subject</h4>
 	<div class="editable" id="subject" rel="text">
-	<?php display_empty($item->subject)?>
+	<?php display_empty($item->subject); ?>
 	</div>
 
 	<h4>Creator</h4>
 	<div class="editable" id="creator" rel="text">
-	<?php display_empty($item->creator)?>
+	<?php display_empty($item->creator); ?>
 	</div>
 	
 	<h4>Additional Creator</h4>
 	<div class="editable" id="additional_creator" rel="text">
-	<?php display_empty($item->additional_creator)?>
+	<?php display_empty($item->additional_creator); ?>
 	</div>
 	
 	<h4>Date</h4>
@@ -293,7 +292,9 @@
 <h2>Files</h2>
 <div id="files">
 	<?php foreach( $item->Files as $key => $file ): ?>
-		<?php thumbnail($file, array('class'=>'thumb')); ?>
+	
+		<?php //thumbnail($file, array('class'=>'thumb')); ?>
+		<a href="<?php echo uri('files/show/'.$file->id); ?>"><?php echo $file->original_filename; ?></a>
 	<?php endforeach; ?>
 </div>
 

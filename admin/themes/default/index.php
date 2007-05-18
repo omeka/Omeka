@@ -26,7 +26,7 @@
 			<?php $items = recent_items(5); ?>
 			<ul>
 				<?php foreach( $items as $key => $item ): ?>
-					<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><span class="title"><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php  echo $item->title; ?></a></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></li>
+					<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><span class="title"><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php  echo $item->title; ?></a></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></li>	
 				<?php endforeach; ?>
 			</ul>
 			<p><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>	

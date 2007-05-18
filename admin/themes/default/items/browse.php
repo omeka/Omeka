@@ -8,6 +8,7 @@
 		}
 	?>
 </ul>
+
 <?php if ( $total_results ): ?>
 
 	<h2>Browse Items (<?php echo $total_results;?> items total)</h2>
@@ -43,9 +44,6 @@
 	<?php endforeach; ?>
 	</tbody>
 	</table>
-	<div class="archive-meta">
-	<div class="pagination"><?php echo $pagination; ?></div>
-	</div>
 
 <?php elseif(!$total_items): ?>
 	<h2>There are no items in the archive yet.
@@ -57,5 +55,6 @@
 <?php else: ?>
 	<h2>The query searched <?php echo $total_items; ?> items and returned no results.</h2>
 <?php endif; ?>
+
 
 <?php foot(); ?>

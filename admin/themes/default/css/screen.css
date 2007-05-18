@@ -2,7 +2,7 @@
 @import url("reset.css");
 
 /* == Generic == */
-body {font:62.5% Helvetica,"Lucida Grande",Verdana, sans-serif; color:#444; background:#163d5c; width:860px; margin:0 auto; padding:20px 0;}
+body {font:62.5% "Frutiger","Univers","Helvetica Neue",arial,helvetica, sans-serif; color:#444; background:#163d5c; width:860px; margin:0 auto; padding:20px 0;}
 body#login {width:400px;}
 
 /* Headings */
@@ -19,7 +19,6 @@ a:link {color:#38c;}
 a:visited {color:#38c;}
 a:hover {color:#369;}
 a:active {color:#369;}
-a img {border:none;}
 h1 a, h2 a, h3 a {text-decoration:none;}
 
 /* Misc */
@@ -37,7 +36,7 @@ td,th {padding:1.66667em 0.833333em; line-height:1em;}
 fieldset {margin-bottom:2em;}
 legend {color:#444; font-size:1.6em; margin-bottom:1.25em; line-height:1.25em;}
 label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display:block;}
-.textinput {margin-bottom:1.66667em; display:block;border:1px solid #A2C9E8;padding:5px;font:1.2em Helvetica,"Lucida Grande",Verdana, sans-serif;}
+.textinput {margin-bottom:1.66667em; display:block;border:1px solid #A2C9E8;padding:5px;font:1.2em "Frutiger","Univers","Helvetica Neue",arial,helvetica, sans-serif;}
 
 /* Reusable Classes */
 .hide {text-indent:-1000em; height:0; width:0; overflow:hidden;}
