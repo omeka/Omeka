@@ -285,7 +285,7 @@
 
 <?php if ( has_permission('Items','addTag') ): ?>
 	<form id="tags-form" method="post" action="">
-	<input type="text" name="tags" value="Put tag string in me" />
+	<input type="text" name="tags" value="" />
 	<input type="submit" name="submit" value="submit" id="tags-submit">
 </form>
 <?php endif; ?>

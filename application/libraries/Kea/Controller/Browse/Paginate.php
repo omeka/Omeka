@@ -33,7 +33,10 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		$query = $this->buildQuery();
 
 		$countQuery = clone $query;
-		$total = $countQuery->count();
+		$total_results = $countQuery->count();
+	 	
+		$totalVar = "total_$pluralVar"; //i.e. $total_items
+		$$totalVar = $this->_table->count();
 		
 		settype($per_page, 'int');
 		$query->limit($per_page);
@@ -53,9 +56,9 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		$req = $this->getRequest();
 		$url = $req->getBaseUrl().DIRECTORY_SEPARATOR.$pluralVar.DIRECTORY_SEPARATOR.'browse'.DIRECTORY_SEPARATOR;
 		
-		$pagination = $this->pagination($page, $per_page, $total, $num_links, $url);
+		$pagination = $this->pagination($page, $per_page, $total_results, $num_links, $url);
 				
-		return $this->_controller->render($pluralVar."/browse.php", compact("total", "offset", $pluralVar, "per_page", "page", "pagination"));
+		return $this->_controller->render($pluralVar."/browse.php", compact("total_results", $totalVar, "offset", $pluralVar, "per_page", "page", "pagination"));
 	}
 	
 	/**

@@ -8,9 +8,9 @@
 		}
 	?>
 </ul>
-<?php if ( $total ): ?>
+<?php if ( $total_results ): ?>
 
-	<h2>Browse Items (<?php echo $total;?> items total)</h2>
+	<h2>Browse Items (<?php echo $total_results;?> items total)</h2>
 	<div class="archive-meta">
 		<form id="search">
 			<input type="text" name="search" />
@@ -47,12 +47,15 @@
 	<div class="pagination"><?php echo $pagination; ?></div>
 	</div>
 
-<?php else: ?>
+<?php elseif(!$total_items): ?>
 	<h2>There are no items in the archive yet.
 	
 	<?php if(has_permission('Items','add')): ?>
-		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?
+		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?</h2>
 	<?php endif; ?>
+	
+<?php else: ?>
+	<h2>The query searched <?php echo $total_items; ?> items and returned no results.</h2>
 <?php endif; ?>
 
 <?php foot(); ?>

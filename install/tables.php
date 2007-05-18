@@ -1,5 +1,5 @@
 <?php
-$tableNames = array('Collection', 'File', 'Item', 'ItemsFavorites', 'ItemsTags', 'Metafield', 'Metatext', 'Plugin', 'Tag', 'Type', 'TypesMetafields', 'User');
+$tableNames = array('Collection', 'File', 'Item', 'ItemsFavorites', 'ItemsFulltext', 'ItemsTags', 'Metafield', 'Metatext', 'Plugin', 'Tag', 'Type', 'TypesMetafields', 'User');
 
 foreach ($tableNames as $key => $name) {
 	require_once '../application/models/'.$name.'.php';

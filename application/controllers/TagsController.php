@@ -28,7 +28,7 @@ class TagsController extends Kea_Controller_Action
 		
 		$tags = $this->_table->findAll($params);
 
-		$total = count($tags);
-		return $this->render('tags/browse.php',compact('tags','total'));
+		$total_results = count($tags);
+		return $this->render('tags/browse.php',compact('tags','total_results'));
 	}
 }
