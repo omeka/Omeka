@@ -21,14 +21,23 @@ class TagsController extends Kea_Controller_Action
 	public function browseAction()
 	{
 		$params = $this->_getAllParams();
-
+		$perms = array();
+		
 		if(!$this->isAllowed('showNotPublic','Items')) {
-			$params['onlyPublic'] = true;
+			$perms['onlyPublic'] = true;
 		}
 		
-		$tags = $this->_table->findAll($params);
+		$tags = $this->_table->findAll(array_merge($params, $perms));
 
 		$total_results = count($tags);
-		return $this->render('tags/browse.php',compact('tags','total_results'));
+		
+		//Retrieve the total number of tags for 
+		$sql = "SELECT COUNT(*) FROM tags t";
+		if(!empty($perms['onlyPublic'])) {
+			$sql .= ' INNER JOIN items_tags it ON it.tag_id = t.id INNER JOIN items i ON i.id = it.item_id WHERE i.public = 1';
+		}
+		$total_tags = $this->getConn()->fetchOne($sql);
+			
+		return $this->render('tags/browse.php',compact('tags','total_results', 'total_tags'));
 	}
 }

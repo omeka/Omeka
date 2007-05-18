@@ -27,90 +27,168 @@ class ItemsController extends Kea_Controller_Action
 	}
 	
 	/**
-	 * @todo Browse should be able to narrow by Collection, Type, Tag, etc.
+	 * New Strategy: this will run a SQL query that selects the IDs, then use that to hydrate the Doctrine objects.
+	 * Stupid Doctrine.  Maybe their new version will be better.
 	 *
-	 * @return void
+	 * @return mixed|void
 	 **/
 	public function browseAction()
 	{	
-		$query = $this->_browse;
-		$query->select('i.*, t.*')->from('Item i');
-		$query->leftJoin('Item.Tags t');
-		$query->leftJoin('Item.Collection c');
-		$query->leftJoin('i.Type ty');
-				
+		require_once 'Kea/Select.php';
+		$select = new Kea_Select($this->getConn());
+	
+		$select->from('items i','i.id');
+
+		//Run the permissions check
 		if( !$this->isAllowed('showNotPublic') ) {
-			$query->addWhere('i.public = 1');
+			$select->where('i.public = 1');
 		} 
 		
-		//filter based on featured
+		
+		//Grab the total number of items in the table(as differentiated from the result count)
+		//Make sure that the query that retrieves the total number of Items also contains the permissions check
+		$countQuery = clone $select;
+		$countQuery->resetFrom('items i', 'COUNT(*)');
+		$total_items = $countQuery->fetchOne();
+		if(!$total_items) $total_items = 0;
+		
+		//filter items based on featured (only value of 'true' will return featured items)
 		if($featured = $this->_getParam('featured')) {
-			$query->addWhere('i.featured = '.($featured == 'true' ? '1':'0'));
+			$select->where('i.featured = '.($featured == 'true' ? '1':'0'));
 		}
 		
 		//filter based on collection
 		if($collection = $this->_getParam('collection')) {
+			
+			$select->joinInner('collections c', 'i.collection_id = c.id');
+			
 			if(is_numeric($collection)) {
-				$query->addWhere('c.id = :collection', array('collection'=> $collection));
+				$select->where('c.id = ?', $collection);
 			}else {
-				$query->addWhere('c.name = :collection', array('collection'=>$collection));
+				$select->where('c.name = ?', $collection);
 			}
 		}
 		
 		//filter based on type
 		if($type = $this->_getParam('type')) {
+			
+			$select->joinInner('types ty','i.type_id = ty.id');
 			if(is_numeric($type)) {
-				$query->addWhere('ty.id = :type', compact('type'));
+				$select->where('ty.id = ?', $type);
 			}else {
-				$query->addWhere('ty.name = :type', compact('type'));
+				$select->where('ty.name = ?', $type);
 			}
 		}
 		
 		//filter based on tags
 		if( ($tag = $this->_getParam('tag')) || ($tag = $this->_getParam('tags')) ) {
 			
+			$select->joinInner('items_tags it','it.item_id = i.id');
+			$select->joinInner('tags t', 'it.tag_id = t.id');
 			if(!is_array($tag) )
 			{
 				$tag = explode(',', $tag);
 			}
 			foreach ($tag as $key => $t) {
-				$key = 'tag'.$key;
-				$query->addWhere("t.name = :$key", array($key=>$t));
+				$select->where('t.name = ?', $t);
 			}			
 		}
 		
 		//exclude Items with given tags
 		if(($excludeTags = $this->_getParam('withoutTags'))) {
-				//we are looking for Items that are tagged but not with a specific one(s)
 				if(!is_array($excludeTags))
 				{
 					$excludeTags = explode(',', $excludeTags);
 				}
-				$where = array();
+				$subSelect = new Kea_Select($this->getConn());
+				$subSelect->from('items i INNER JOIN items_tags it ON it.item_id = i.id 
+							INNER JOIN tags t ON it.tag_id = t.id', 'i.id');
+								
 				foreach ($excludeTags as $key => $tag) {
-					$key = 'noTag'.$key;
-					$where[$key] = "t.name LIKE :$key";
-					$params[$key] = $tag;
+					$subSelect->where("t.name LIKE ?", $tag);
 				}	
-				$query->addWhere(
-					"i.id NOT IN (SELECT i.id FROM Item i INNER JOIN i.ItemsTags it".
-					" INNER JOIN it.Tag t WHERE ".join(' OR ',$where).")", $params );
+		
+				$select->where('i.id NOT IN ('.$subSelect->__toString().')');
 		}
 		
-//		echo $query->getQuery();
-
+/*
 		if(($from_record = $this->_getParam('relatedTo')) && @$from_record->exists()) {
 			$componentName = $from_record->getTable()->getComponentName();
 			$alias = $this->_table->getAlias($componentName);
 			$query->innerJoin("Item.$alias rec");
 			$query->addWhere('rec.id = ?', array($from_record->id));
 		}
+*/
 		
 		if($recent = $this->_getParam('recent')) {
-			$query->orderBy('i.added desc');
+			$select->order('i.added DESC');
 		}
 		
-		return $this->_browse->browse();
+		
+		//Check for a search
+		if($search = $this->_getParam('search')) {
+			$select->from('items i', 'MATCH (ft.text) AGAINST ('.$select->quote($search).') as relevancy');
+			$select->joinInner("items_fulltext ft","ft.item_id = i.id");
+			$select->where("MATCH (ft.text) AGAINST (? WITH QUERY EXPANSION)", $search);
+			$select->order("relevancy DESC");
+		}
+		
+		//Before the pagination, please grab the number of results that this full query will return
+		$resultCount = clone $select;
+		$resultCount->resetFrom('items i','COUNT(*)');
+		$resultCount->unsetOrderBy();
+		$total_results = $resultCount->fetchOne();
+		
+		
+		/** 
+		 * Now process the pagination
+		 * 
+		 **/
+		$options = array(	'num_links'=>	5, 
+							'per_page'=>	10,
+							'page'		=> 	1 );
+							
+		//check to see if these options were changed by request vars
+		foreach ($options as $key => $value) {
+			if($reqOption = $this->_getParam($key)) {
+				$options[$key] = $reqOption;
+			}
+		}
+		
+		$select->limitPage($options['page'], $options['per_page']);
+		
+		$res = $select->fetchAll();
+		
+		foreach ($res as $key => $value) {
+			$ids[] =  $value['id'];
+		}
+		
+		
+		if(!$ids) {
+			$this->flash('No results were found for this query.');
+		}
+					
+
+		//Finally, hydrate the Doctrine objects with the array of ids given
+		$query = new Doctrine_Query;
+		$query->select('i.*, t.*')->from('Item i');
+		$query->leftJoin('Item.Tags t');
+		$query->leftJoin('Item.Collection c');
+		$query->leftJoin('i.Type ty');
+		
+		//If no IDs were returned in the first query, then whatever
+		if(!empty($ids)) {
+			$where = "(i.id = ".join(" OR i.id = ", $ids) . ")";
+		}else {
+			$where = "1 = 0";
+		}
+		
+		
+		$query->where($where);
+			
+		$items = $query->execute();
+		
+		return $this->render('items/browse.php', compact('total_results','total_items', 'items'));
 	}
 	
 	/**

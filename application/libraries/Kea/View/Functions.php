@@ -345,7 +345,9 @@ function total_types($return = false) {
 }
 
 function _get_model_total($controller,$return) {
-	$count = _make_omeka_request($controller,'browse',array(),'total');
+	$totalVar = 'total_'.strtolower($controller);
+	$count = _make_omeka_request($controller,'browse',array(),$totalVar);
+//	if($count === null ) $count = 0;
 	if($return) return $count;
 	echo $count;
 }
