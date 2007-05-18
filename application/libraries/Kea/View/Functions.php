@@ -1,6 +1,7 @@
 <?php
 include_once 'UnicodeFunctions.php';
 include_once 'FormFunctions.php';
+//include_once 'ExhibitFunctions.php';
 /**
  * Not quite a helper, these functions defy definition...
  * 
@@ -15,6 +16,16 @@ include_once 'FormFunctions.php';
  * 
  * @package Omeka
  */
+
+/**
+ * Simple math for determining whether a number is odd or even
+ *
+ * @return bool
+ **/
+function is_odd($num)
+{
+	return $num & 1;
+}
 
 /**
  * Echos the physical path to the theme.
@@ -189,6 +200,15 @@ function uri($urlEnd)
     
 }
 
+function a_link($uri,$text,$props=array()) {
+	$string = '<a href="'.$uri.'" ';
+	foreach ($props as $key => $value) {
+		$string .= "$key=\"$value\" ";
+	}
+	$string .= ">$text</a>";
+	echo $string;
+}
+
 /**
  * Stolen directly from Rails, and why not, because Ruby
  * and Rails are simply better than PHP and Zend's shitty framework, period.
@@ -281,7 +301,23 @@ function plugin_header() {
 
 ///// END PLUGIN HELPER FUNCTIONS /////
 
+function tag_string($record, $link=null, $delimiter=', ',$return=false)
+{
+	$string = array();
+	if($record->hasRelation("Tags")) {
+		foreach ($record->Tags as $key=>$tag) {
+			if(!$link) {
+				$string[$key] = $tag["name"];
+			}else {
+				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'">'.$tag["name"].'</a>';
+			}
+		}
+		$string = join($delimiter,$string);
+		if($return) return $string;
+		else echo $string;		
+	}
 
+}
 
 /**
  * Retrieve the total number of items
@@ -466,17 +502,17 @@ function display_empty($val, $alternative="[Empty]") {
 	echo (!empty($val) ? $val : $alternative);
 }
 
-function thumbnail($record, $props=array(), $width=null, $height=null) 
+function thumbnail($record, $props=array(), $width=null, $height=null,$return=false) 
 {
-       return archive_image($record, 'thumbnail_filename', $props, $width, $height, THUMBNAIL_DIR, WEB_THUMBNAILS);
+       return archive_image($record, 'thumbnail_filename', $props, $width, $height, THUMBNAIL_DIR, WEB_THUMBNAILS,$return);
 }
 
-function fullsize($record, $props=array(), $width=null, $height=null)
+function fullsize($record, $props=array(), $width=null, $height=null,$return=false)
 {
-       return archive_image($record, 'fullsize_filename', $props, $width, $height, FULLSIZE_DIR, WEB_FULLSIZE);
+       return archive_image($record, 'fullsize_filename', $props, $width, $height, FULLSIZE_DIR, WEB_FULLSIZE,$return);
 }
 
-function archive_image( $record, $field , $props, $width, $height, $abs, $web) 
+function archive_image( $record, $field , $props, $width, $height, $abs, $web,$return) 
 {
        if($record instanceof File) {
                $file = $record->$field;
@@ -515,9 +551,86 @@ function archive_image( $record, $field , $props, $width, $height, $abs, $web)
                        $html .= 'width="' . $width . '" height="' . $height . '"';
                }
                $html .= '/>' . "\n";
-               echo $html;
+			   if($return) return $html;
+			   echo $html;
        } else {
-               echo '<img src="' . $path . '" alt="Image missing." />' . "\n";
+				$html = '<img src="' . $path . '" alt="Image missing." />' . "\n";
+				if($return) return $html;
+               echo $html;
        }
 }
+/**
+ *	The pagination function from the old version of the software
+ *  It looks more complicated than it might need to be, but its also more flexible.  We may decide to simplify it later
+ */
+function pagination( $page = 1, $per_page, $total, $num_links, $link, $page_query = null )
+	{
+		$num_pages = ceil( $total / $per_page );
+		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;
+
+		$query = !empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : null;
+		
+		if ( $page_query )
+		{
+			//Using the power of regexp we replace only part of the query string related to the pagination
+			if( preg_match( '/[\?&]'.$page_query.'/', $query ) ) 
+			{
+				$p = '/([\?&])('.preg_quote($page_query) . ')=([0-9]*)/';
+				$pattern = preg_replace( $p, '$1$2='.preg_quote('%PAGE%'), $query );
+			}
+			else $pattern = ( !empty($query) )  ? $query . '&' . $page_query . '=' . '%PAGE%' : '?' . $page_query . '=' . '%PAGE%' ; 
+	
+		}
+		else
+		{
+			$pattern = '%PAGE%' . $query;
+		}
+
+		$html = ' <a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a> |';
+
+		if( $page > 1 ) {
+			$html .= ' <a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&lt; Prev</a> |';
+		} else {
+			$html .= ' &lt; Prev |';
+		}
+
+		$buffer = floor( ( $num_links - 1 ) / 2 );
+		$start_link = ( ($page - $buffer) > 0 ) ? ($page - $buffer) : 1;
+		$end_link = ( ($page + $buffer) < $num_pages ) ? ($page + $buffer) : $num_pages;
+
+		if( $start_link == 1 ) {
+			$end_link += ( $num_links - $end_link );
+		}elseif( $end_link == $num_pages ) {
+			$start_link -= ( $num_links - ($end_link - $start_link ) - 1 );
+		}
+
+		for( $i = $start_link; $i < $end_link+1; $i++) {
+			if( $i <= $num_pages ) {
+				if( $page == $i ) {
+					$html .= ' ' . $i . ' |';
+				} else {
+					$html .= ' <a href="' . $link . str_replace('%PAGE%', $i, $pattern) . '">' . ($i) . '</a> |';
+				}
+			}
+		}
+
+		if( $page < $num_pages ) {
+			$html .= ' <a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next &gt;</a> |';
+		} else {
+			$html .= ' Next &gt; |';
+		}
+
+		$html .= ' <a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a> ';
+
+		$html .= '<select class="pagination-link" onchange="location.href = \''.$link. str_replace('%PAGE%', '\' + this.value + \'', $pattern) .'\'">'; 
+		$html .= '<option>Page:&nbsp;&nbsp;</option>';
+		for( $i = 0; $i < $num_pages; $i++ ) {
+			$html .= '<option value="' . ($i + 1) . '"';
+			//if( $page == ($i+1) ) $html .= ' selected ';
+			$html .= '>' . ($i + 1) . '</option>';
+		}
+		$html .= '</select>';
+
+		return $html;
+	}
 ?>

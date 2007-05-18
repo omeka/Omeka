@@ -13,6 +13,16 @@ function unescapeTags($matches) {
   	return str_replace( array("&gt;", "&lt;", "&quot;", "&amp;"), array(">", "<", "\"", "&"), $matches[0]);
 }	
 
+/**
+ * Un-escape the rest of the HTML tags in the text, assuming that allhtmlentities() has already been called
+ *
+ * @return void
+ **/
+function unescapeAll($str)
+{
+	return preg_replace_callback('!&lt;/?(.*?)?&gt;!i', 'unescapeTags', $str);
+}
+
 function detectUTF8($string)
 {
         return preg_match('%(?:

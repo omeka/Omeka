@@ -245,6 +245,11 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		return Doctrine_Manager::getInstance()->getTable($table);
 	}
 
+	public function getConn()
+	{
+		return Doctrine_Manager::getInstance()->connection();
+	}
+
 	/**
 	 * Retrieve an option from the option table.
 	 * This may end up being redundant.

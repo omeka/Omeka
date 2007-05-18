@@ -115,16 +115,18 @@ abstract class Kea_Record extends Doctrine_Record
 	public function setArray( $array, $callback = null ) {
 		foreach( $array as $key => $value )
 		{
+
 			if($this->hasRelation($key)) {
 				if(!is_array($value)) {
 					$type = $this->getTable()->getTypeOf($key);
 					if($type == 'string' || $type == 'integer') {
 						settype($value, $type);
 					}
-				
+					
 					$this->$key = (!$callback) ? $value : call_user_func_array($callback, array($value) );
 				}
 				else {
+					
 					if($this->hasRelation($key)) {
 					
 						if($this->$key instanceof Doctrine_Collection) {
@@ -147,7 +149,7 @@ abstract class Kea_Record extends Doctrine_Record
 		return $this;
 	}
 	
-	private function strip($text) {
+	public function strip($text) {
 		$text = get_magic_quotes_gpc() ? stripslashes( $text ) : $text;
 		return $text;
 	}
@@ -160,6 +162,9 @@ abstract class Kea_Record extends Doctrine_Record
 				$array[$constraint] = null;
 			}
 		}
+		
+		//Avoid security holes
+		unset($array['id']);
 		
 		return $this->setArray($array, array($this, 'strip'));
 	}
@@ -193,6 +198,28 @@ abstract class Kea_Record extends Doctrine_Record
 	public function fromJson()
 	{
 		throw new Exception('This function not yet implemented');
+	}
+	
+	/**
+	 * This is a onvenience method to execute SQL statements directly
+	 * within the record.  
+	 *
+	 * @return mixed
+	 **/
+	public function execute($sql, $params=array())
+	{
+		$res = $this->getTable()->getConnection()->execute($sql,$params);
+		return $res->fetch();
+	}
+	
+	/**
+	 * Convenience method to execute DQL statements directly within the record
+	 *
+	 * @return mixed
+	 **/
+	public function executeDql($dql, $params=array(), $returnOne = false)
+	{
+		
 	}
 	
 } // END abstract class Kea_Record

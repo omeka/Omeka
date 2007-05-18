@@ -31,7 +31,7 @@
 		else echo $label;
 	}
 	
-	function text( array $attributes = array(), $default, $label = null )
+	function text( array $attributes = array(), $default=null, $label = null )
 	{
 		$input = '';
 		if($label) 
@@ -56,7 +56,7 @@
 		echo $input;
 	}
 	
-	function password( array $attributes = array(), $default, $label = null )
+	function password( array $attributes = array(), $default=null, $label = null )
 	{
 		$input = '';
 		if($label) 
