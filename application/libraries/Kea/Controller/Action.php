@@ -100,7 +100,16 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		 */
 		$request = $this->getRequest();
 		$action = $request->getActionName();
-		if ($request->getParam('admin') == true &&
+		
+		/**
+		 *	Right now user activation is the only admin controller/action that doesn't require login (doesn't make sense to require it)
+		 */
+		if($request->getParam('admin') == true &&
+			$request->getControllerName() == 'users' &&
+				$request->getActionName() == 'activate') {
+			
+		}
+		elseif ($request->getParam('admin') == true &&
 			$request->getControllerName() != 'users' &&
 			$request->getActionName() != 'login') {
 

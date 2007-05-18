@@ -10,7 +10,6 @@ class UsersController extends Kea_Controller_Action
 	public function init() {
 		$this->_table = Doctrine_Manager::getInstance()->getTable('User');
 		$this->_modelClass = 'User';
-		$this->before_filter('authenticate', array('login'));
 	}
 	
 	public function activateAction()
