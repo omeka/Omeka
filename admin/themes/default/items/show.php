@@ -196,7 +196,7 @@
 	
 	<h4>Citation</h4>
 	<div class="editable" id="citation" rel="text">
-	<?php display_empty($item->citation)?>
+	<?php display_empty($item->getCitation());?>
 	</div>
 	
 	<h4>Source</h4>

@@ -127,6 +127,24 @@ class Item extends Kea_Record
 			}					
 	}
 
+	
+	public function getCitation()
+	{
+	    if(!empty($this->citation)) {
+			return $this->citation;
+		}
+
+		$cite = '';
+	    $cite .= $this->creator;
+	    if ($cite != '') $cite .= ', ';
+	    $cite .= ($this->title) ? '"'.$this->title.'." ' : '"Untitled." ';
+	    $cite .= '<em>'.get_option('site_title').'</em>, ';
+	    $cite .= 'Item #'.$this->id.' ';
+	    $cite .= '(accessed '.date('F d Y, g:i a').') ';
+	    //$cite .= '('.date('F d Y, g:i a', strtotime($this->added)).')';
+	    return $cite;
+	 }
+	
 	///// METADATA METHODS /////
 	
 	public function metadata( $name, $return_text = true ) {		
