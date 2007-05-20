@@ -101,8 +101,13 @@ name     = ".$db['name']."
 		$auth_prefix->value = md5(mt_rand());
 		$auth_prefix->save();
 		
+		$admin_email = new Option;
+		$admin_email->name = 'administrator_email';
+		$admin_email->value = $_REQUEST['site']['admin_email'];
+		$admin_email->save();
+		
 		// Fill in the other settings automanually (users can change these later if they want to)
-		$settings = array('copyright','meta_keywords', 'meta_author', 'meta_description', 'administrator_email');
+		$settings = array('copyright','meta_keywords', 'meta_author', 'meta_description');
 		foreach ($settings as $setting) {
 			$setting_option = new Option;
 			$setting_option->name = $setting;
@@ -126,7 +131,7 @@ name     = ".$db['name']."
 		$installSQL = file_get_contents('install.sql');
 		Doctrine_Manager::getInstance()->connection()->execute($installSQL);
 		
-		echo 'hooray! the db is setup and you are ready to roll.  <a href="'.$_REQUEST['site']['uri'].'">check out your site here!</a>';
+		echo 'hooray! the db is setup and you are ready to roll.  <a href="'.dirname(dirname($_SERVER['REQUEST_URI'])).'">check out your site here!</a>';
 		$display_form = false;
 
 	} catch(Exception $e) {
@@ -139,16 +144,15 @@ name     = ".$db['name']."
 if ($display_form == true) {
 ?>
 <form action="install.php" method="post" accept-charset="utf-8">
-	<h1>Site Info</h1>
-	Site Name:<input type="text" name="site[name]" value="" id="site[name]"/>
-	Site URL:<input type="text" name="site[uri]" value="" id="site[uri]"/>
-	
+	<h1>Site Settings</h1>
+	Site Name:<input type="text" name="site[name]" value="<?php echo $_POST['site']['name']; ?>" id="site[name]"/>
+	Administrator Email (required for form emails):<input type="text" name="site[admin_email]" id="site[admin_email]" value="<?php echo $_POST['site']['admin_email']; ?>" />
 	<h1>Database info</h1>
-	Host:<input type="text" name="db[host]" value="localhost" id="host"/><br/>
-	Username:<input type="text" name="db[username]" value="root" id="username"/><br/>
-	Password:<input type="password" name="db[password]" value="" id="password"/><br/>
+	Host:<input type="text" name="db[host]" value="<?php echo (!empty($_POST) ? $_POST['db']['host'] : 'localhost'); ?>" id="host"/><br/>
+	Username:<input type="text" name="db[username]" value="<?php echo (!empty($_POST) ? $_POST['db']['username'] : 'root'); ?>" id="username"/><br/>
+	Password:<input type="password" name="db[password]" value="<?php echo (!empty($_POST) ? $_POST['db']['password'] : ''); ?>" id="password"/><br/>
 	Port:<input type="text" name="db[port]" value="" id="port"/><br/>
-	DB Name:<input type="text" name="db[name]" value="omeka" id="name"/><br/>
+	DB Name:<input type="text" name="db[name]" value="<?php echo !empty($_POST) ? $_POST['db']['name'] : 'omeka'; ?>" id="name"/><br/>
 	DB Type:<input type="text" name="db[type]" value="mysql" id="type"/><br/>
 	
 	<h1>Default User</h1>

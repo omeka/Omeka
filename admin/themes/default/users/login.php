@@ -21,5 +21,5 @@
 </form>
 
 </div>
-<div id="forgotpassword"><a href="#">Lost your password?</a></div>
+<div id="forgotpassword"><a href="<?php echo uri('users/forgotPassword'); ?>">Lost your password?</a></div>
 <?php foot(); ?>

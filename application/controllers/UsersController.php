@@ -11,6 +11,55 @@ class UsersController extends Kea_Controller_Action
 		$this->_table = Doctrine_Manager::getInstance()->getTable('User');
 		$this->_modelClass = 'User';
 	}
+
+	public function forgotPasswordAction()
+	{
+		
+		//If the user's email address has been submitted, then make a new temp activation url and email it
+		if(!empty($_POST)) {
+			
+			$email = $_POST['email'];
+			$ua = new UsersActivations;
+			
+			$user = $this->_table->findByEmail($email);
+			
+			
+			if($user) {
+				//Create the activation url
+				
+				
+				$ua->User = $user;
+				$ua->generate();
+				$ua->save();
+				
+				$site_title = get_option('site_title');
+				
+				//Send the email with the activation url
+				$url = $this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
+				$body 	= "Please follow this link to reset your password:\n\n";
+				$body  .= '<a href="'.$url.'">Reset Your Password</a>'."\n\n";
+				$body  .= "$site_title Administrator";				
+				
+				$admin_email = get_option('administrator_email');
+				$title = "[$site_title] Reset Your Password";
+				$header = 'From: '.$admin_email. "\n" . 'X-Mailer: PHP/' . phpversion();
+				
+				echo "To: $email\n";
+				echo "$title\n\n";
+				echo $body."\n\n";
+				echo $header;
+				
+				mail($email,$title, $body, $header);
+			}else {
+				//If that email address doesn't exist
+				
+				$this->flash('The email address you provided is invalid.');
+			}			
+
+		}
+		
+		return $this->render('users/forgotPassword.php');
+	}
 	
 	public function activateAction()
 	{
@@ -52,10 +101,10 @@ class UsersController extends Kea_Controller_Action
 			$site_title = Doctrine_Manager::getInstance()->getTable('Option')->findByName('site_title');
 			$from = Doctrine_Manager::getInstance()->getTable('Option')->findByName('administrator_email');
 			
-			$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
+			$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."admin/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
 			$title = "Activate your account with the ".$site_title." Archive";
 			$header = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
-			mail($user->email, $title, $body);
+			mail($user->email, $title, $body, $header);
 			$this->_redirect('users/show/'.$user->id);
 		}else {
 			$this->render('users/add.php', compact('user'));
