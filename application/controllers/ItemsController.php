@@ -144,9 +144,11 @@ class ItemsController extends Kea_Controller_Action
 		 * Now process the pagination
 		 * 
 		 **/
+		$paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
 		$options = array(	'num_links'=>	5, 
 							'per_page'=>	10,
-							'page'		=> 	1 );
+							'page'		=> 	1,
+							'pagination_url' => $paginationUrl);
 							
 		//check to see if these options were changed by request vars
 		foreach ($options as $key => $value) {
@@ -161,12 +163,11 @@ class ItemsController extends Kea_Controller_Action
 		
 		foreach ($res as $key => $value) {
 			$ids[] =  $value['id'];
-		}
+		}		
 		
-		
-		if(!$ids) {
-			$this->flash('No results were found for this query.');
-		}
+		//Serve up the pagination
+		require_once 'Kea/View/Functions.php';
+		$pagination = pagination($options['page'], $options['per_page'], $total_results, $options['num_links'], $options['pagination_url']);
 					
 
 		//Finally, hydrate the Doctrine objects with the array of ids given
@@ -188,7 +189,8 @@ class ItemsController extends Kea_Controller_Action
 			
 		$items = $query->execute();
 		
-		return $this->render('items/browse.php', compact('total_results','total_items', 'items'));
+		
+		return $this->render('items/browse.php', compact('total_results','total_items', 'items', 'pagination'));
 	}
 	
 	/**

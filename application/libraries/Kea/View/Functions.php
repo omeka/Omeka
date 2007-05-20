@@ -456,8 +456,13 @@ function _make_omeka_request($controller,$action,$params, $returnVars)
 	//Fire the controller
 	$controller = new $className($newReq,$resp, array('return'=>$returnVars));
 	$action = $action.'Action';
-	$retVal = $controller->$action();
 	
+	try {
+		$retVal = $controller->$action();
+	} catch (Exception $e) {
+		echo $e->getMessage();
+	}
+
 	return $retVal;
 }
 
