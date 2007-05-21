@@ -85,19 +85,17 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
  *
  * @return void
  **/
+$option_stmt = $dbh->query('SELECT * FROM options');
+$option_array = $option_stmt->fetchAll();
+$options = array();
+foreach ($option_array as $opt) {
+	$options[$opt['name']] = $opt['value'];
+}
+Zend::register('options',$options);
+
 function get_option($name) {
-	if(Zend::isRegistered('options')) {
 		$options = Zend::Registry('options');
 		return $options[$name];
-	}else {
-		$q = new Doctrine_Query;
-		$array = $q->parseQuery("SELECT o.name,o.value FROM Option o")->execute(array(),Doctrine::FETCH_ARRAY);
-		foreach ($array as $k => $v) {
-			$options[$v['o']['name']] = $v['o']['value'];
-		}		
-		Zend::register('options',$options);
-		return $options[$name];
-	}
 }
 
 $acl = unserialize(get_option('acl'));
