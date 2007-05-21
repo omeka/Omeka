@@ -40,6 +40,7 @@ id.reqs.id = "\d+"
 
 page.route = ":controller/browse/:page"
 page.defaults.controller = items
+page.defaults.action = browse
 page.defaults.page = 1
 page.reqs.page = "\d+"
 

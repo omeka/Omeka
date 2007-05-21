@@ -459,4 +459,20 @@ class Doctrine_EventListener_Chain extends Doctrine_Access implements Doctrine_E
             $listener->onPreCollectionDelete($collection);
         }
     }
+
+	/**
+	 * Added to Doctrine by KBK
+	 * This will check for an existing listener
+	 *
+	 * @return boolean
+	 **/
+	public function hasListener($class)
+	{
+		foreach ($this->listeners as $listener) {
+			if(get_class($listener) == $class)
+				return true;
+		}
+		
+		return false;
+	}
 }

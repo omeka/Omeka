@@ -38,6 +38,8 @@ class Kea_View extends Zend_View_Abstract
 			$this->_request = $config['request'];
 		}
 		
+		$this->setOutputListener();
+		
 		/**
 		 * Set the theme path:
 		 * This needs to happen last because the first thing Zend_View_Abstract
@@ -45,7 +47,27 @@ class Kea_View extends Zend_View_Abstract
 		 */ 
 		$this->setThemePath();
 	}
-
+	
+	public function setOutputListener()
+	{
+		$doctrine = Zend::registry('doctrine');
+		$listeners = $doctrine->getListener();
+		
+		/* 	Here's a quick hack for ya:  the OutputListener needs to know what the output type is
+	     *	So it can escape the data properly.  REST & JSON must be fully converted to htmlentities
+		 *	but XHTML will only be partially converted based on what tags are specified as converted
+		 **/		
+		
+		if(!$listeners->hasListener('Kea_OutputListener') ) {
+			if ($output = $this->getRequest()->getParam('output')) {
+				$listeners->add(new Kea_OutputListener(null));			
+			}else {
+				$listeners->add(new Kea_OutputListener('em|b|strong|del|span|cite|blockquote'));	
+			}		
+		}	
+		$doctrine->setListener($listeners);
+	}
+	
 	/**
 	 * Functions that see through to the controller
 	 * Simple stuff
@@ -75,6 +97,7 @@ class Kea_View extends Zend_View_Abstract
 	public function setThemePath($path = null)
 	{	
 		if ($output = $this->getRequest()->getParam('output')) {
+
 			switch($output) {
 				case('json'):
 					require_once 'Zend/Json.php';
@@ -91,17 +114,15 @@ class Kea_View extends Zend_View_Abstract
 		else {
 			// Get the options table
 			require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-			$doctrine = Zend::registry('doctrine');
-			$options = $doctrine->getTable('option');
-		
+			$options = Zend::registry('options');
+			
 			// do we select the admin theme or the public theme?
 			if ((boolean) $this->getRequest()->getParam('admin')) {
-				$theme = $options->findByDql("name LIKE 'admin_theme'");
+				$theme_name = $options['admin_theme'];
 			}
 			else {
-				$theme = $options->findByDql("name LIKE 'public_theme'");
+				$theme_name = $options['public_theme'];
 			}
-			$theme_name = $theme[0]->value;
 			
 			$this->addScriptPath(THEME_DIR.DIRECTORY_SEPARATOR.$theme_name);
 			

@@ -7,9 +7,15 @@
 require_once 'Kea/View/UnicodeFunctions.php';
 class Kea_OutputListener extends Doctrine_EventListener
 {	 
+	protected $_escape;
+	
+	public function __construct($escape) {
+		$this->_escape = $escape;
+	}
+	
 	public function onGetProperty(Doctrine_Record $record, $property, $value)
     {
-        return allhtmlentities($value);
+		return allhtmlentities($value, $this->_escape);
     }
 }
 ?>

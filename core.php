@@ -53,7 +53,7 @@ if(isset($config->log)) {
 require_once 'Kea'.DIRECTORY_SEPARATOR.'SearchListener.php';
 require_once 'Kea'.DIRECTORY_SEPARATOR.'TimestampListener.php';
 $chainListeners = new Doctrine_EventListener_Chain();
-$chainListeners->add(new Kea_OutputListener());
+
 $chainListeners->add(new Kea_TimestampListener());
 $chainListeners->add(new Kea_SearchListener());
 
@@ -145,6 +145,7 @@ foreach ($staticRoutes as $route) {
 
 require_once 'Zend/Controller/Request/Http.php';
 $request = new Zend_Controller_Request_Http();
+
 // Removed 3/9/07 n8
 //Zend::register('request', $request);
 $front->setRequest($request);
