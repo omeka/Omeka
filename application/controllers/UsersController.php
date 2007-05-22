@@ -101,7 +101,7 @@ class UsersController extends Kea_Controller_Action
 			$site_title = Doctrine_Manager::getInstance()->getTable('Option')->findByName('site_title');
 			$from = Doctrine_Manager::getInstance()->getTable('Option')->findByName('administrator_email');
 			
-			$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."admin/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
+			$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."/admin/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
 			$title = "Activate your account with the ".$site_title." Archive";
 			$header = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
 			mail($user->email, $title, $body, $header);
@@ -113,6 +113,7 @@ class UsersController extends Kea_Controller_Action
 	
 	protected function commitForm($user)
 	{
+		
 		/* Permissions check to see if whoever is trying to change role to a super-user*/	
 		if(!empty($_POST['role']) && $_POST['role'] == 'super') {
 			if(!$this->isAllowed('makeSuperUser')) {
@@ -129,26 +130,40 @@ class UsersController extends Kea_Controller_Action
 			unset($_POST['password']);
 		}
 		//somebody is trying to change the password
-		//@todo Put in a security check (superusers don't need to know the old password)
 		if(!empty($_POST['new_password1'])) {
 			$new1 = $_POST['new_password1'];
 			$new2 = $_POST['new_password2'];
 			$old = $_POST['old_password'];
-			if(empty($new1) || empty($new2) || empty($old)) {
-				$user->getErrorStack()->add('password', 'User must fill out all password fields in order to change password');
-				return false;
-			}
-			//If the old passwords don't match up
-			if(sha1($old) !== $user->password) {
-				$user->getErrorStack()->add('password', 'Old password has been entered incorrectly');
-				return false;
-			} 
 			
-			if($new1 !== $new2) {
-				$user->getErrorStack()->add('password', 'New password has been entered incorrectly');
-				return false;
-			}			
-			$user->password = $new1;
+			//super users can change the password without knowing the old one
+			$current = Kea::loggedIn();
+			if($current->role == 'super') {
+				
+				if($new1 != $new2) {
+					$this->flash('New password must be typed correctly twice.');
+					return false;
+				}
+				
+				$user->password = $new1;
+				
+			}else {
+				if(empty($new1) || empty($new2) || empty($old)) {
+					$this->flash('User must fill out all password fields in order to change password');
+					return false;
+				}
+				//If the old passwords don't match up
+				if(sha1($old) !== $user->password) {
+					$this->flash('Old password has been entered incorrectly.');
+					return false;
+				} 
+			
+				if($new1 !== $new2) {
+					$this->flash('New password must be typed correctly twice.');
+					return false;
+				}	
+				
+				$user->password = $new1;
+			}
 		}
 		return parent::commitForm($user);
 	}

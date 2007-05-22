@@ -203,6 +203,9 @@ class ItemsController extends Kea_Controller_Action
 	{
 		if(!empty($_POST))
 		{
+			$conn = $this->getConn();
+			$conn->beginTransaction();
+			
 			$clean = $_POST;
 			unset($clean['id']);
 			
@@ -244,6 +247,7 @@ class ItemsController extends Kea_Controller_Action
 			}
 			
 			if(!empty($clean['change_type'])) return false;
+			if(!empty($clean['add_more_files'])) return false;
 			
 			if(!empty($_FILES["file"]['name'][0])) {
 				//Handle the file uploads
@@ -256,12 +260,23 @@ class ItemsController extends Kea_Controller_Action
 					}catch(Exception $e) {
 						$this->flash($e->getMessage());
 						$file->delete();
+						$conn->rollback();
 						return false;
 					}
 				
 				}
 			}
 			
+			/* Delete files what that have been chosen as such */
+			if($filesToDelete = $clean['delete_files']) {
+				$conn = $this->getConn();
+				foreach ($item->Files as $key=> $file) {
+					if(in_array($file->id,$filesToDelete)) {
+						$file->delete();
+					}
+				}
+			}		
+						
 			//Handle the boolean vars
 			if(array_key_exists('public', $clean)) {
 				$item->public = (bool) $clean['public'];
@@ -273,12 +288,15 @@ class ItemsController extends Kea_Controller_Action
 			
 			try {
 				$item->save();
+				$conn->commit();
 				return true;
 			}
 			catch(Doctrine_Validator_Exception $e) {
 				$item->gatherErrors($e);
+				$conn->rollback();
 				return false;
 			}catch(Exception $e) {
+	//			Zend::dump( $e );exit;
 				$this->flash($e->getMessage());
 			}	
 		}

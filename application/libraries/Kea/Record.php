@@ -206,10 +206,13 @@ abstract class Kea_Record extends Doctrine_Record
 	 *
 	 * @return mixed
 	 **/
-	public function execute($sql, $params=array())
+	public function execute($sql, $params=array(), $fetchOne = false)
 	{
 		$res = $this->getTable()->getConnection()->execute($sql,$params);
-		return $res->fetch();
+		if($fetchOne)
+			return $res->fetchColumn(0);
+		else 
+			return $res->fetch();
 	}
 	
 	/**

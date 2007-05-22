@@ -1,5 +1,12 @@
 <?php head();?>
 <h2>Users</h2>
+<ul id="tertiary-nav" class="navigation">
+	<?php 
+		if(has_permission('Users','add')) {
+			nav(array('Add a New User' => uri('users/add')));
+		}
+	?>
+</ul>
 <table id="users">
 	<thead>
 		<tr>

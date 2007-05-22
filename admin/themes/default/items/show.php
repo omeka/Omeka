@@ -292,9 +292,14 @@
 <h2>Files</h2>
 <div id="files">
 	<?php foreach( $item->Files as $key => $file ): ?>
-	
-		<?php //thumbnail($file, array('class'=>'thumb')); ?>
-		<a href="<?php echo uri('files/show/'.$file->id); ?>"><?php echo $file->original_filename; ?></a>
+
+		<a href="<?php echo uri('files/show/'.$file->id); ?>">
+			<?php if($file->hasThumbnail()): ?>
+			<?php thumbnail($file, array('class'=>'thumb')); ?>
+			<?php else: ?>
+			<?php echo $file->original_filename; ?>
+			<?php endif; ?>
+		</a>
 	<?php endforeach; ?>
 </div>
 

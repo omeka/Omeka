@@ -3,6 +3,8 @@
 <dl>
 	<dt>Username</dt>
 	<dd><?php echo $user->username; ?></dd>
+	<dt>Real Name</dt>
+	<dd><?php echo $user->first_name . ' ' . $user->last_name; ?>
 	<dt>Email</dt>
 	<dd><?php echo $user->username; ?></dd>
 	<dt>Institution</dt>

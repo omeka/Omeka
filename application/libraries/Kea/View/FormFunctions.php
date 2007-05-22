@@ -184,7 +184,7 @@
 		echo $input;
 	}
 	
-	function checkbox( array $attributes, $value=null, $checked = FALSE, $label = null )
+	function checkbox( array $attributes, $checked = FALSE, $value=null, $label = null )
 	{
 		$checkbox = '<input type="checkbox"';
 		if( $checked ) {

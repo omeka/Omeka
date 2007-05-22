@@ -1,5 +1,9 @@
 <?php head(); ?>
 <form method="post" id="editfile" action="<?php echo uri('files/edit/'.$file->id); ?>" name="editFile">
+	<?php 
+		fullsize($file); 
+	?>
+	
 	<fieldset>
 <legend>Core Metadata</legend>	
 

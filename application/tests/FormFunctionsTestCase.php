@@ -121,14 +121,14 @@ class FormFunctionsTestCase extends OmekaTestCase
 		
 		ob_start();
 		
-		checkbox($attr,$value,true,$label);
+		checkbox($attr,true,$value,$label);
 		
 		$checkbox = ob_get_contents();
 		$checkbox = $this->stripSpace($checkbox);
 		$this->assertEqual($checkbox,'<label for="foobar">Foobar</label><input type="checkbox" name="foobar" id="foobar" checked="checked" value="foobar" />');
 		ob_clean();
 		
-		checkbox($attr,$value,false);
+		checkbox($attr,false,$value);
 		
 		$checkbox = ob_get_contents();
 		$checkbox = $this->stripSpace($checkbox);

@@ -2,11 +2,14 @@
 <?php common('archive-nav'); ?>
 <h2>Edit &#8220;<?php echo $item->title; ?>&#8221;</h2>
 <script type="text/javascript" charset="utf-8">
+//<![CDATA[
 	Event.observe(window,'load',function() {
 		$('delete_item').onclick = function() {
 			return confirm( 'Are you sure you want to delete this item, all of it\'s files, tags, and other data from the archive?' );
 		};
+
 	});
+//]]>	
 </script>
 
 <form method="post" enctype="multipart/form-data">

@@ -127,15 +127,57 @@
 		
 
 		</fieldset>
-		<fieldset id="files">
-			<legend>Files</legend>
+		<fieldset id="add-files">
+			<legend>Add Files</legend>
 			<div class="field">
-				<label for="file[0]">Find a File</label>
-				<!-- MAX_FILE_SIZE must precede the file input field -->
+			<?php 
+				$numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; 
+			?>
+				<?php 
+					text(array('name'=>'add_num_files','size'=>2),$numFiles);
+					submit('Add this many more files', 'add_more_files'); 
+				?>
+				
+			</div>
+			
+			<div class="field">
+			<!-- MAX_FILE_SIZE must precede the file input field -->
 				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-				<input name="file[]" id="file[]" type="file" class="textinput" />
+					
+			<?php for($i=0;$i<$numFiles;$i++): ?>	
+				<label for="file[<?php echo $i; ?>]">Find a File</label>
+				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="textinput" />
+			<?php endfor; ?>
 			</div>
 		</fieldset>
+		
+		<?php if ( $item->hasFiles() ): ?>
+			<fieldset id="files">
+			<legend>Edit existing files</legend>
+			<p>(click on file to edit on a new page, check 'Delete this' to remove files)</p>
+			<ul id="file-list">
+			<?php foreach( $item->Files as $key => $file ): ?>
+				<li>
+					<div class="file-link">
+						<a href="<?php echo uri('files/edit/'.$file->id); ?>" target="_blank">
+			
+							<?php if ( !$file->hasThumbnail() ): ?>
+								<?php echo $file->original_filename; ?>
+							<?php else: ?>
+								<?php thumbnail($file); ?>
+							<?php endif; ?>
+						</a>
+					</div>
+					<div class="delete-link">
+						<?php checkbox(array('name'=>'delete_files[]'),false,$file->id,'Delete this file'); ?>
+					</div>	
+				</li>
+		
+			<?php endforeach; ?>
+			</ul>
+			</fieldset>
+		<?php endif; ?>
+		
 		<fieldset id="miscellaneous">
 			<legend>Miscellaneous</legend>
 			<div class="field">

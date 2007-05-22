@@ -42,8 +42,8 @@ class FilesController extends Kea_Controller_Action
 	public function showAction()
 	{
 		$file = $this->findById();
-				
-		if(!$file->Item->public && !$this->isAllowed('showNotPublic','Items')) {
+						
+		if(!$file->isPublic() && !$this->isAllowed('showNotPublic','Items')) {
 			$this->_redirect('403');
 		}
 		

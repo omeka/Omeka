@@ -250,6 +250,11 @@ class Item extends Kea_Record
            $q->parseQuery("SELECT f.*, RANDOM() rand FROM File f WHERE f.item_id = ? AND f.thumbnail_filename IS NOT NULL AND f.thumbnail_filename != '' ORDER BY rand");
            return $q->execute(array($this->id))->getFirst();
    }
+
+	public function hasFiles()
+	{
+		return ($this->Files->count() > 0);
+	}
 		
 } // END class Item extends Kea_Domain_Record
 

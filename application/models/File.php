@@ -18,7 +18,8 @@ class File extends Kea_Record {
     
 
 	public function setUp() {
-		$this->hasOne("Item", "File.item_id");
+//		Removed [5-22-07 KBK], this throws errors when attempting to delete files from items/form		
+//		$this->hasOne("Item", "File.item_id");		
 	}
 
 	public function setTableDefinition() {
@@ -54,17 +55,24 @@ class File extends Kea_Record {
         $this->hasColumn('compression', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('post_processing', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('archive_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('fullsize_filename', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('fullsize_filename', 'string', null, array('default'=>''));
         $this->hasColumn('original_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('thumbnail_filename', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('thumbnail_filename', 'string', null, array('default'=>''));
         $this->hasColumn('size', 'integer', null, array('default'=>'0', 'notnull' => true));
-        $this->hasColumn('mime_browser', 'string', null, array('notnull' => true, 'default'=>''));
+        $this->hasColumn('mime_browser', 'string', null, array('default'=>''));
         $this->hasColumn('mime_php', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('mime_os', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('type_os', 'string', null, array('notnull' => true, 'default'=>''));
 		
 		$this->index('item', array('fields' => array('item_id')));
     }
+	
+	public function isPublic()
+	{
+		$sql = "SELECT COUNT(*) FROM items i WHERE i.id = ? AND i.public = 1";
+		$count = $this->execute($sql,array($this->item_id), true);
+		return ($count > 0);
+	}
 	
 	/**
 	 * Retrieve the path for the image
@@ -127,6 +135,16 @@ class File extends Kea_Record {
 		return $name;
 	}
 	
+	public function hasThumbnail()
+	{
+		return !empty($this->thumbnail_filename);
+	}
+	
+	public function hasFullsize()
+	{
+		return !empty($this->fullsize_filename);
+	}
+	
 	/**
 	 * Stole this jazz from the old File model
 	 *
@@ -157,7 +175,7 @@ class File extends Kea_Record {
 				$this->size = $_FILES[$form_name]['size'][$index];
 				$this->authentication = md5_file( $path );
 				
-				$this->mime_browser = $_FILES[$file_form_name]['type'][$index];
+				$this->mime_browser = $_FILES[$form_name]['type'][$index];
 				$this->mime_php = mime_content_type( $path );
 				$this->mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $path ) ) ) );
 				$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
