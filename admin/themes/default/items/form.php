@@ -69,6 +69,11 @@
 		</div>
 		
 		<div class="field">
+		<label>Contributor</label>
+		<input type="text" class="textinput" name="contributor" value="<?php echo $item->contributor;?>" />
+		</div>
+		
+		<div class="field">
 		<label>Bibliographic Citation</label>
 		<input type="text" class="textinput" name="citation" value="<?php echo $item->citation;?>" />
 		</div>

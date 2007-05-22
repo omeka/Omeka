@@ -58,8 +58,6 @@ class Item extends Kea_Record
         $this->hasColumn('type_id', 'integer');
         $this->hasColumn('collection_id', 'integer');
         $this->hasColumn('user_id', 'integer');
-        $this->hasColumn('featured', 'integer', 1, array('notnull' => true));
-        $this->hasColumn('public', 'integer', 1, array('notnull' => true));
         $this->hasColumn('contributor', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('rights_holder', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('provenance', 'string', null, array('notnull' => true, 'default'=>''));
