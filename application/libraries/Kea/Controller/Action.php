@@ -76,6 +76,19 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	}
 	
 	/**
+	 *	Streamline the process of adding static pages by automatically checking for 
+	 * 	arbitrarily added pages.
+	 * 
+	 */
+	public function __call($m, $a)
+	{
+		$action = $this->getRequest()->getParam('action');
+		$controller = $this->getRequest()->getParam('controller');
+		
+		return $this->render($controller.DIRECTORY_SEPARATOR.$action.'.php');
+	}
+	
+	/**
 	 * Before filter applies a named method to the controller
 	 * before calling the actual method.
 	 * Primarily used for logging in

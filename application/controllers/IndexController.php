@@ -13,12 +13,18 @@ class IndexController extends Kea_Controller_Action
 	 */
     public function indexAction()
     {
+	
 		$config = Zend::registry('config_ini');
 		
 		$req = $this->getRequest();
 		$c = $req->getParam($config->uri->controller);
 		$a = $req->getParam($config->uri->action);
-
+		
+		//Check to see if we've got a static page request
+		if( ($page = $req->getParam('page')) and ($dir = $req->getParam('dir')) ) {
+			return $this->renderStaticPage($dir,$page);
+		}
+		
 		if (!$c) {
 			// Assume that they want to go to the default location
 			$this->_forward($config->default->controller, $config->default->action);
@@ -35,7 +41,23 @@ class IndexController extends Kea_Controller_Action
 			}
 		}
     }
-
+	
+	/**
+	 *	Example: 
+	 * 		'about.php' -> /about/
+	 *		'foobar/baz.php' -> /foobar/baz/
+	 */
+	protected function renderStaticPage($dir,$page)
+	{
+		if($page == 'index') {
+			$file = $dir.'.php';
+		}else {
+			$file = $dir.DIRECTORY_SEPARATOR.$page.'.php';
+		}
+		
+		return $this->render($file);
+	}
+	
     public function noRouteAction()
     {
         $this->_redirect('/');
