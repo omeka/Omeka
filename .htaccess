@@ -6,3 +6,12 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+
+<FilesMatch "\.(php|ini)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+<Files index.php>
+Allow from all
+</Files>

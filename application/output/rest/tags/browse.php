@@ -7,11 +7,6 @@
 <tags>
 <?php foreach ($tags as $tag): ?>
 
-<tag title="<?php echo $tag[name]; ?>">
-
-</tag>
-<?php 
-endforeach; 
-?>
-
+<tag><?php echo $tag[name]; ?></tag>
+<?php endforeach; ?>
 </tags>

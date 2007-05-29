@@ -7,34 +7,23 @@
 <items>
 <?php foreach ($items as $item): ?>
 
-
-<item title="<?php echo $item->title; ?>">
+<item id="<?php echo $item->id; ?>">
 	
-	
+	<title><?php echo $item->title; ?></title>
 	<tags>
 	<?php foreach ($item->Tags as $tag): ?>
-		<tag name="<?php echo $tag->Name; ?>"></tag>
+		<tag name="<?php echo $tag->name; ?>"></tag>
 	<?php
 	endforeach;
 	?>
 	</tags>
 	
-	<files>
-	<?php foreach ($item->Files as $file): ?>
-		<file title="<?php echo $file->Title; ?>"></file>
-	<?php
-	endforeach;
-	?>
-	</files>
+	<files><?php foreach ($item->Files as $file): ?><file><title><?php echo $file->title; ?></title></file><?php endforeach; ?></files>
 	
-	<collection>
-		<?php echo $item->Collection->name; ?>
-	</collection>
+	<collection><?php echo $item->Collection->name; ?></collection>
 	
-	<type>
-		<?php echo $item->Type->name; ?>
-	</type>
-	
+	<type><?php echo $item->Type->name; ?></type>
+
 </item>
 <?php 
 endforeach; 
