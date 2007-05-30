@@ -1,0 +1,14 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; DB Configuration
+;
+; phpDoctrine can support many different types of databases.
+; Configurations differ based on the type of database needed.
+; Below are some examples:
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[database]
+type     = XXXXXXX
+host     = XXXXXXX
+username = XXXXXXX
+password = XXXXXXX
+name     = XXXXXXX

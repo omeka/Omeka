@@ -1,0 +1,66 @@
+[routes]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Routes Configuration
+; 
+; Routes will default to action/controller.  If more comprehensive
+; routes are needed, Zend allows for this.
+;
+; Should look like one of the following two:
+;
+; archive.route = "archive/:year/*"
+; archive.defaults.controller = archive
+; archive.defaults.action = show
+; archive.defaults.year = 2000
+; archive.reqs.year = "\d+"
+; 
+; news.type = "Zend_Controller_Router_StaticRoute"
+; news.route = "news"
+; news.defaults.controller = "news"
+; news.defaults.action = "list"
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; DO NOT EDIT THESE TWO ROUTES, THEY PROVIDE ADMIN VERIFICATION
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+forbidden.route = "403/"
+forbidden.defaults.controller = index
+forbidden.defaults.action = forbidden
+
+error.route = "404/"
+error.defaults.controller = index
+error.defaults.action = error
+
+id.route = ":controller/:action/:id"
+id.defaults.controller = index
+id.defaults.action = index
+id.reqs.id = "\d+"
+
+page.route = ":controller/browse/:page"
+page.defaults.controller = items
+page.defaults.action = browse
+page.defaults.page = 1
+page.reqs.page = "\d+"
+
+output.route = ":output/:controller/:action"
+output.defaults.controller = index
+output.defaults.action = index
+output.reqs.output = "(json|rest)"
+
+tagBrowse.route = "items/browse/tag/:tag"
+tagBrowse.defaults.controller = items
+tagBrowse.defaults.action = browse
+tagBrowse.defaults.tag = ""
+tagBrowse.reqs.output = "\w+"
+
+collectionBrowse.route = "items/browse/collection/:collection"
+collectionBrowse.defaults.controller = items
+collectionBrowse.defaults.action = browse
+collectionBrowse.defaults.collection = ""
+
+typeBrowse.route = "items/browse/type/:type"
+typeBrowse.defaults.controller = items
+typeBrowse.defaults.action = browse
+typeBrowse.defaults.type = ""

@@ -1,5 +1,0 @@
-<items>
-	<item>
-		
-	</item>
-</items>

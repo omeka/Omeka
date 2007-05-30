@@ -1,2 +1,0 @@
-<div class="collection-title"><a href="<?php echo '../browse'.DS; ?>?collection=<?php echo $collection->collection_id; ?>"><?php echo $collection->collection_name; ?></a></div>
-<?php if ($collection->collection_description) { ?><div class="collection-description"><?php echo $collection->collection_description; ?></div><?php } ?>

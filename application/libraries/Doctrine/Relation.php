@@ -1,0 +1,352 @@
+<?php
+/*
+ *  $Id: Relation.php 1182 2007-03-21 22:11:18Z zYne $
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the LGPL. For more information, see
+ * <http://www.phpdoctrine.com>.
+ */
+/**
+ * Doctrine_Relation
+ * This class represents a relation between components
+ *
+ * @package     Doctrine
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @category    Object Relational Mapping
+ * @link        www.phpdoctrine.com
+ * @since       1.0
+ * @version     $Revision: 1182 $
+ * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
+ */
+abstract class Doctrine_Relation
+{
+    /**
+     * RELATION CONSTANTS
+     */
+
+    /**
+     * constant for ONE_TO_ONE and MANY_TO_ONE aggregate relationships
+     */
+    const ONE_AGGREGATE         = 0;
+    /**
+     * constant for ONE_TO_ONE and MANY_TO_ONE composite relationships
+     */
+    const ONE_COMPOSITE         = 1;
+    /**
+     * constant for MANY_TO_MANY and ONE_TO_MANY aggregate relationships
+     */
+    const MANY_AGGREGATE        = 2;
+    /**
+     * constant for MANY_TO_MANY and ONE_TO_MANY composite relationships
+     */
+    const MANY_COMPOSITE        = 3;
+
+    const ONE   = 0;
+    const MANY  = 1;
+    
+    protected $definition = array('alias'       => true,
+                                  'foreign'     => true,
+                                  'local'       => true,
+                                  'class'       => true,
+                                  'type'        => true,
+                                  'name'        => false,
+                                  'assocTable'  => false,
+                                  'onDelete'    => false,
+                                  'onUpdate'    => false,
+                                  'deferred'    => false,
+                                  'constraint'  => false,
+                                  );
+    /**
+     * constructor
+     *
+     * @param array $definition         an associative array with the following structure:
+     *          name                    foreign key constraint name
+     *
+     *          local                   the local field(s)
+     *
+     *          foreign                 the foreign reference field(s)
+     *
+     *          table                   the foreign table object
+     *
+     *          assocTable              the association table object (if any)
+     *
+     *          onDelete                referential delete action
+     *  
+     *          onUpdate                referential update action
+     *
+     *          deferred                deferred constraint checking 
+     *
+     *          alias                   relation alias
+     *
+     *          type                    the relation type, either Doctrine_Relation::ONE or Doctrine_Relation::MANY
+     *
+     *          constraint              boolean value, true if the relation needs referential integrity constraint
+     *
+     * The onDelete and onUpdate keys accept the following values:
+     *
+     * CASCADE: Delete or update the row from the parent table and automatically delete or
+     *          update the matching rows in the child table. Both ON DELETE CASCADE and ON UPDATE CASCADE are supported.
+     *          Between two tables, you should not define several ON UPDATE CASCADE clauses that act on the same column
+     *          in the parent table or in the child table.
+     *
+     * SET NULL: Delete or update the row from the parent table and set the foreign key column or columns in the
+     *          child table to NULL. This is valid only if the foreign key columns do not have the NOT NULL qualifier 
+     *          specified. Both ON DELETE SET NULL and ON UPDATE SET NULL clauses are supported.
+     *
+     * NO ACTION: In standard SQL, NO ACTION means no action in the sense that an attempt to delete or update a primary 
+     *           key value is not allowed to proceed if there is a related foreign key value in the referenced table.
+     *
+     * RESTRICT: Rejects the delete or update operation for the parent table. NO ACTION and RESTRICT are the same as
+     *           omitting the ON DELETE or ON UPDATE clause.
+     *
+     * SET DEFAULT
+     */
+    public function __construct(array $definition)
+    {
+    	$def = array();
+    	foreach ($this->definition as $key => $val) {
+            if ( ! isset($definition[$key]) && $val) {
+                throw new Doctrine_Exception($key . ' is required!');
+            }
+            if (isset($definition[$key])) {
+                $def[$key] = $definition[$key];
+            } else {
+                $def[$key] = null;      	
+            }
+        }
+
+        $this->definition = $def;
+    }
+    /** 
+     * toArray
+     *
+     * @return array
+     */
+    public function toArray() 
+    {
+        return $this->definition;
+    }
+    /**
+     * hasConstraint
+     *
+     * @return boolean
+     */
+    public function hasConstraint()
+    {
+        return $this->definition['constraint'];
+    }
+    /**
+     * getAlias
+     * returns the relation alias
+     *
+     * @return string
+     */
+    final public function getAlias()
+    {
+        return $this->definition['alias'];
+    }
+    /**
+     * getType
+     * returns the relation type, either 0 or 1
+     *
+     * @see Doctrine_Relation MANY_* and ONE_* constants
+     * @return integer
+     */
+    final public function getType()
+    {
+        return $this->definition['type'];
+    }
+    /**
+     * getTable
+     * returns the foreign table object
+     *
+     * @return object Doctrine_Table
+     */
+    final public function getTable()
+    {
+        return Doctrine_Manager::getInstance()
+               ->getConnectionForComponent($this->definition['class'])
+               ->getTable($this->definition['class']);
+    }
+    /**
+     * getLocal
+     * returns the name of the local column
+     *
+     * @return string
+     */
+    final public function getLocal()
+    {
+        return $this->definition['local'];
+    }
+    /**
+     * getForeign
+     * returns the name of the foreignkey column where
+     * the localkey column is pointing at
+     *
+     * @return string
+     */
+    final public function getForeign()
+    {
+        return $this->definition['foreign'];
+    }
+    /**
+     * isComposite
+     * returns whether or not this relation is a composite relation
+     *
+     * @return boolean
+     */
+    final public function isComposite()
+    {
+        return ($this->definition['type'] == Doctrine_Relation::ONE_COMPOSITE ||
+                $this->definition['type'] == Doctrine_Relation::MANY_COMPOSITE);
+    }
+    /**
+     * isOneToOne
+     * returns whether or not this relation is a one-to-one relation
+     *
+     * @return boolean
+     */
+    final public function isOneToOne()
+    {
+        return ($this->definition['type'] == Doctrine_Relation::ONE_AGGREGATE ||
+                $this->definition['type'] == Doctrine_Relation::ONE_COMPOSITE);
+    }
+    /**
+     * getRelationDql
+     *
+     * @param integer $count
+     * @return string
+     */
+    public function getRelationDql($count)
+    {
+    	$component = $this->getTable()->getComponentName();
+
+        $dql  = 'FROM ' . $component
+              . ' WHERE ' . $component . '.' . $this->definition['foreign']
+              . ' IN (' . substr(str_repeat('?, ', $count), 0, -2) . ')';
+
+        return $dql;
+    }
+    /**
+     * getDeleteOperations
+     *
+     * get the records that need to be deleted in order to change the old collection
+     * to the new one
+     *
+     * The algorithm here is very simple and definitely not
+     * the fastest one, since we have to iterate through the collections twice.
+     * the complexity of this algorithm is O(n^2)
+     *
+     * We iterate through the old collection and get the records
+     * that do not exists in the new collection (Doctrine_Records that need to be deleted).
+     *
+     * @param Doctrine_Collection $old
+     * @param Doctrine_Collection $new
+     * @return array
+     */
+    public static function getDeleteOperations(Doctrine_Collection $old, Doctrine_Collection $new)
+    {
+        $r = array();
+
+        foreach ($old as $k => $record) {
+            $id = $record->getIncremented();
+
+            if (empty($id)) {
+                continue;
+            }
+            $found = false;
+            foreach ($new as $k2 => $record2) {
+                if ($record2->getIncremented() === $record->getIncremented()) {
+                    $found = true;
+                    break;
+                }
+            }
+
+            if ( ! $found)  {
+                $r[] = $record;
+                unset($old[$k]);
+            }
+        }
+
+        return $r;
+    }
+    /**
+     * getInsertOperations
+     *
+     * get the records that need to be added in order to change the old collection
+     * to the new one
+     *
+     * The algorithm here is very simple and definitely not
+     * the fastest one, since we have to iterate through the collections twice.
+     * the complexity of this algorithm is O(n^2)
+     *
+     * We iterate through the old collection and get the records
+     * that exists only in the new collection (Doctrine_Records that need to be added).
+     *
+     * @param Doctrine_Collection $old
+     * @param Doctrine_Collection $new
+     * @return array
+     */
+    public static function getInsertOperations(Doctrine_Collection $old, Doctrine_Collection $new)
+    {
+        $r = array();
+
+        foreach ($new as $k => $record) {
+            $found = false;
+
+            $id = $record->getIncremented();
+            if ( ! empty($id)) {
+                foreach ($old as $k2 => $record2) {
+                    if ($record2->getIncremented() === $record->getIncremented()) {
+                        $found = true;
+                        break;
+                    }
+                }
+            }
+            if ( ! $found) {
+                $old[] = $record;
+                $r[] = $record;
+            }
+        }
+
+        return $r;
+    }
+    /**
+     * fetchRelatedFor
+     *
+     * fetches a component related to given record
+     *
+     * @param Doctrine_Record $record
+     * @return Doctrine_Record|Doctrine_Collection
+     */
+    abstract public function fetchRelatedFor(Doctrine_Record $record);
+    /**
+     * __toString
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $r[] = "<pre>";
+        foreach ($this->definition as $k => $v) {
+            if(is_object($v)) {
+                $v = 'Object(' . get_class($v) . ')';
+            }
+            $r[] = $k . ' : ' . $v;
+        }
+        $r[] = "</pre>";
+        return implode("\n", $r);
+    }
+}
