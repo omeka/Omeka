@@ -14,6 +14,8 @@ $site['archive']		= 'archive';
 $site['fullsize']		= 'fullsize';
 $site['thumbnails']		= 'thumbnails';
 $site['files']			= 'files';
+$site['exhibit_layouts']= 'exhibit_layouts';
+$site['exhibit_themes'] = 'exhibit_themes';
 
 // Define some constants based on those settings
 define('BASE_DIR', 			dirname(__FILE__));
@@ -30,7 +32,8 @@ define('ARCHIVE_DIR', 		BASE_DIR.DIRECTORY_SEPARATOR.$site['archive']);
 define('THUMBNAIL_DIR', 	ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['thumbnails']);
 define('FULLSIZE_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('FILES_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['files']);
-
+define('EXHIBIT_LAYOUTS_DIR',		SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_layouts']);
+define('EXHIBIT_THEMES_DIR',SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
 // Abs theme dir is set in the appropriate index.php file
 
 // Define Web routes
@@ -45,8 +48,10 @@ define('WEB_ARCHIVE',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['archive']);
 define('WEB_THUMBNAILS',WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['thumbnails']);
 define('WEB_FULLSIZE',	WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('WEB_FILES',		WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['files']);
+define('WEB_EXHIBIT_LAYOUTS', WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_layouts'] );
+define('WEB_EXHIBIT_THEMES',  WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
 
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
-set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].DIRECTORY_SEPARATOR.'Zend_Incubator'.PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries']);
+set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].DIRECTORY_SEPARATOR.'Zend_Incubator'.PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].PATH_SEPARATOR.MODEL_DIR);
 ?>

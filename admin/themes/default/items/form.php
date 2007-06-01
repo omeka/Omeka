@@ -1,3 +1,55 @@
+<script type="text/javascript" charset="utf-8">
+	Event.observe(window,'load', function() {
+		ajaxifyTagRemoval();
+	});
+	
+	function ajaxifyTagRemoval()
+	{
+		var buttons = $('tags-list').getElementsByTagName('button');
+		for (var i=0; i < buttons.length; i++) {
+			buttons[i].onsubmit = function() {
+				return false;
+			}
+		
+			buttons[i].onclick = function(e) {
+				removeTag(e.target);
+				return false;
+			};
+		};		
+	}
+	
+	function removeTag(button)
+	{
+		var tagId = button.value;
+		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
+		
+		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
+			parameters: {
+				'remove_tag': tagId
+			},
+			method: 'post',
+			onComplete: function(t) {
+				//Fire the other ajax request to update the page
+				new Ajax.Request("<?php echo uri('items/ajaxTagsRemove/'); ?>", {
+					parameters: {
+						'id': "<?php echo $item->id; ?>"
+					},
+					onSuccess: function(t) {
+						$('tags-list').hide();
+						$('tags-list').update(t.responseText);
+						Effect.Appear('tags-list', {duration: 1.0});
+					},
+					onComplete: function() {
+						ajaxifyTagRemoval();
+					}
+				});
+			}
+		});
+		
+		return false;
+	}
+</script>
+
 <?php echo flash(); ?>
 
 <?php error($item); ?>
@@ -190,5 +242,26 @@
 		</div>
 		<div class="field">
 		<label for="featured">Item is featured: <?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></label>
-	</div>
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Tagging</legend>
+		<div class="field">
+		<label for="tags-field">Modify Your Tags</label>
+		<input type="text" name="tags" id="tags-field" class="textInput" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+		</div>
+		
+		<div class="field">
+			<label for="all-tags">Remove Other Users&apos; Tags</label>
+			<ul id="tags-list">
+			<?php foreach( $item->Tags as $key => $tag ): ?>
+				<li>
+					<?php echo $tag->name; ?>
+					<button type="submit" name="remove_tag" value="<?php echo $tag->id; ?>">[x]</button>
+				</li>
+			<?php endforeach; ?>
+			</ul>
+		</div>
+		
 	</fieldset>

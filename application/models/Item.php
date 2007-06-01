@@ -4,13 +4,16 @@ require_once 'Type.php';
 require_once 'User.php';
 require_once 'File.php';
 require_once 'Tag.php';
+require_once 'Taggable.php';
 require_once 'ItemsTags.php';
 require_once 'Metatext.php';
 require_once 'ItemMetatext.php';
 require_once 'ItemsFavorites.php';
 require_once 'ItemsFulltext.php';
-//require_once 'ItemsExhibits.php';
-//require_once 'Exhibit.php';
+
+require_once 'ItemsPages.php';
+require_once 'Section.php';
+
 /**
  * @package Omeka
  * 
@@ -32,9 +35,23 @@ class Item extends Kea_Record
 		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
 		$this->ownsOne("ItemsFulltext", "ItemsFulltext.item_id");
 		$this->ownsMany("ItemsTags", "ItemsTags.item_id");
-//		$this->hasMany("Exhibit as Exhibits", "ItemsExhibits.exhibit_id");
-//		$this->ownsMany("ItemsExhibits", "ItemsExhibits.item_id");
+
+		$this->ownsMany("ItemsPages","ItemsPages.item_id");
+//		$this->hasMany("SectionPage as ExhibitPages", "ItemsPages.page_id");
+		
 		parent::setUp();
+	}
+	
+	public function construct()
+	{
+		$this->_taggable = new Taggable($this);
+		
+		/*	Pull in the appropriate metadata fields
+		 *	1) All metafields associated with the Item's type
+		 *	2) All metafields associated with a plugin
+		 * 	(metafields singularly associated with Items is not implemented)
+		 */ 
+		//$dql = "SELECT m.* FROM Metatext m "
 	}
 	
 	public function setTableDefinition() {
@@ -124,7 +141,6 @@ class Item extends Kea_Record
 				return true;
 			}					
 	}
-
 	
 	public function getCitation()
 	{
@@ -168,71 +184,7 @@ class Item extends Kea_Record
 	
 	///// END METADATA METHODS /////
 	
-	///// TAGGING METHODS /////
-	
-	public function tagString($wrap = null, $delimiter = ',') {
-		$string = '';
-		foreach( $this->Tags as $key => $tag )
-		{
-			if($tag->exists()) {
-				$name = $tag->__toString();
-				$string .= (!empty($wrap) ? preg_replace("/$name/", $wrap, $name) : $name);
-				$string .= ( ($key+1) < $this->Tags->count() ) ? $delimiter.' ' : '';
-			}
-		}
-		
-		return $string;
-	}
-		
-	/**
-	 * What should this function return? (if anything)
-	 *
-	 * @return void
-	 * 
-	 **/
-	public function addTagString($string, $user, $delimiter = ',') {
-		$tagsArray = explode($delimiter, $string);
-		foreach( $tagsArray as $key => $tagName )
-		{
-			$tagName = trim($tagName);
-			$tag = new Tag();
-			$tag = $tag->getTable()->findOrNew($tagName);
-				$it = new ItemsTags();
-				$it->Tag = $tag;
-				$it->User = $user;
-				$this->ItemsTags[] = $it;
-		}
-	}
-		
-	/** If the $tag were a string and the keys of Tags were just the names of the tags, this would be:
-	 * in_array(array_keys($this->Tags))
-	 *
-	 * @return boolean
-	 **/
-	public function hasTag($tag, $user=null) {
-		$q = Doctrine_Manager::getInstance()->getTable('ItemsTags')->createQuery();
-		$tagName = ($tag instanceof Tag) ? $tag->name : $tag;
-		$q->innerJoin('ItemsTags.Tag t')->where('t.name = ?', array($tagName));
-		if($user instanceof User)
-		{
-			if(!$user->exists()) return false;
-			$q->addWhere('ItemsTags.user_id = ?', array($user->id));
-		}
-		$res = $q->execute();
-		return (count($res) > 0);
-	}
-	
-	public function userTags($user) {
-		if(!$user->exists()) throw new Exception( 'Cannot retrieve tags for user that does not exist' );
-		$query = new Doctrine_Query();
-		$query->from('Tag t')
-				->innerJoin('t.ItemsTags it')
-				->innerJoin('it.Item i')
-				->where("i.id = :item_id AND it.user_id = :user_id");
-		return $query->execute(array('item_id'=>$this->id,'user_id'=>$user->id));
-	}
-	
-	///// END TAGGING METHODS /////
+
 	
 	public function isFavoriteOf($user) {
 		$q = new Doctrine_Query();

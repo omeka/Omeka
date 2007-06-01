@@ -14,7 +14,6 @@ class TagsController extends Kea_Controller_Action
 	}
 	
 	/**
-	 * @todo All permissions checks for tags should go here
 	 *
 	 * @return void
 	 **/

@@ -13,7 +13,6 @@
 <form method="post" enctype="multipart/form-data">
 	<?php include 'form.php'; ?>
 	<fieldset>	
-	<label for="tags">Add Tags:</label><input type="text" name="tags" class="textinput" id="tags" value="" />	
 	<input type="submit" name="submit" value="Add Item" />
 	</fieldset>
 </form>

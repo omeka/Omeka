@@ -4,76 +4,7 @@
 <?php js('editable');?>
 <?php error($item);?>
 <script type="text/javascript" charset="utf-8">
-	
-	function updateTags(element, tags)
-	{
-		listElements = $A(element.getElementsByTagName('li'));	
-		
-		ulElement = element.getElementsByTagName("ul")[0];
-		
-		//Get rid of the old tags	
-		listElements.each(function(element, index) {
-			ulElement.removeChild(element);
-		});
-		//Insert the new tags
-		for (var i=0; i < tags.length; i++) {
-			var liElement = document.createElement('li');
-			ulElement.appendChild(liElement);
-			var tagLink = document.createElement('a');
-			var removeLink = document.createElement('a');
-			tagLink.href =  "<?php echo uri('items/browse/tag/'); ?>"+tags[i]['name'];
-			tagLink.rel = tags[i]['id'];
-			tagLink.update(tags[i]['name']);
 
-<?php if ( has_permission('Items','removeTag') ): ?>
-			removeLink.href = "javascript:void(0)";
-			removeLink.addClassName("delete-tag");
-			removeLink.update("[x]");
-			Event.observe(removeLink,"click",deleteTag);
-<?php endif; ?>
-			
-			liElement.appendChild(tagLink);
-			liElement.appendChild(removeLink);
-		};
-	}
-	
-	function deleteTag(event) {
-		var link = event.target;
-		var tagId = link.parentNode.down().rel;
-		var params = {id:"<?php echo $item->id ?>", deleteTag:tagId};
-	
-		if(link.parentNode.hasClassName('my-tag')) {
-			params['isMyTag'] = true;
-		}
-		
-		var opt = {
-			method:"post",
-			parameters: params,
-			onComplete: function(t,item) {
-				updateTags($('my-tags'),item.MyTags);
-				updateTags($('tags'),item.Tags);
-			}
-		};
-		new Ajax.Request("<?php echo uri('json/items/show/');?>?id=<?php echo $item->id ?>", opt);
-	}
-	
-	function addTags() {
-		var opt = {
-			method: "post",
-			parameters: Form.serialize($('tags-form')),
-			onComplete: function(t, item) {
-				if(item.Errors) alert("Error: "+item.Errors);
-				updateTags($('my-tags'),item.MyTags);
-				updateTags($('tags'),item.Tags);
-			},
-			onFailure: function(t) {
-				alert(t.status);
-			}
-		}
-		
-		new Ajax.Request("<?php echo uri('json/items/show/');?>?id=<?php echo $item->id;?>", opt);
-		return false;
-	}
 	
 	function setFavorite() {
 		var opt = {
@@ -89,19 +20,36 @@
 		return false;
 	}
 
+	function modifyTags() {
+		//Add the tags with this request
+		new Ajax.Request("<?php echo uri('items/show/'.$item->id); ?>", {
+			parameters: $('tags-form').serialize(),
+			method: 'post',
+			//Initial tagging request must be completed before displaying the new tags
+			onComplete: function(t) {
+				new Ajax.Request("<?php echo uri('items/ajaxTagsField/?id='.$item->id) ?>", {
+					onSuccess: function(t) {
+						$('tags').hide();
+						$('tags').update(t.responseText);
+						Effect.Appear('tags', {duration: 1.0});
+					}
+				});
+			}
+		});
+		
+	
+		return false;
+	}
 	
 	Event.observe(window, 'load', function() {
 		//Make the favorites thing work w/ AJAX
 		$('favorite').setAttribute('href', 'javascript:void(0)');
 		Event.observe("favorite", "click", setFavorite);
 		
-		//Make the tags work w/AJAX
-		$('tags-submit').setStyle({display:"none"});
-		link = document.createElement("a");
-		link.setAttribute("href", "javascript:void(0)");
-		link.update("Add Tags");
-		$('tags-form').appendChild(link);
-		Event.observe(link, "click", addTags);
+		$('tags-form').onsubmit = function() {
+			modifyTags();
+			return false;
+		}
 		
 <?php if ( has_permission('Items','edit') ): ?>
 			editableElements = document.getElementsByClassName("editable");
@@ -114,12 +62,7 @@
 											editableElements[i].getAttribute('rel'));
 		}
 <?php endif; ?>
-		
-		deleteTagLinks = document.getElementsByClassName('delete-tag');
-		for (var i=0; i < deleteTagLinks.length; i++) {
-			deleteTagLinks[i].href = "javascript:void(0)";
-			Event.observe(deleteTagLinks[i],"click",deleteTag);
-		};						
+	
 	});
 	/*
 	var checkJS = document.getElementById;
@@ -253,41 +196,29 @@
 <?php endforeach; ?>
 
 <h3>Tags</h3>
+<?php if ( has_permission('Items','tag') ): ?>
 <h4>My Tags</h4>
 <div id="my-tags">
-	<ul class="tags">
-		<?php $myTags = $item->userTags($user);?>
-		<?php foreach($myTags as $tag):?>
-		<li class="my-tag">
-			<a href="<?php echo uri('items/browse/tag/'.$tag->name);?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
-			<a href="<?php echo uri('items/show/'.$item->id.'?isMyTag=true&deleteTag='.$tag->id); ?>" class="delete-tag" >[x]</a>
-		</li>
-		<?php endforeach; ?>
-	</ul>
+	<form id="tags-form" method="post" action="">
+	<input type="text" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+	<input type="submit" name="modify_tags" value="Modify Your Tags" id="tags-submit">
+</form>
 </div>
+<?php endif; ?>
+
 <h4>All Tags</h4>
 <div id="tags">
 	<ul class="tags">
 		<?php foreach( $item->Tags as $key => $tag ): ?>
 		<li class="tag">
 			<a href="<?php echo uri('items/browse/tag/'.$tag->name);?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
-
-			<?php if ( has_permission('Items','removeTag') ): ?>
-			<a href="<?php echo uri('items/show/'.$item->id.'?deleteTag='.$tag->id); ?>" class="delete-tag">[x]</a>
-			<?php endif; ?>
-
 		</li>
 		<?php endforeach; ?>
 	</ul>
 </div>
 
 
-<?php if ( has_permission('Items','addTag') ): ?>
-	<form id="tags-form" method="post" action="">
-	<input type="text" name="tags" value="" />
-	<input type="submit" name="submit" value="submit" id="tags-submit">
-</form>
-<?php endif; ?>
+
 
 <h2>Files</h2>
 <div id="files">

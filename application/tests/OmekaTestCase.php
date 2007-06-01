@@ -23,10 +23,10 @@ abstract class OmekaTestCase extends UnitTestCase
 		$conn = $this->manager->connection();
 		$conn->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 		$models  = array('Collection',
-			//		'Exhibit',
 					'File',
+					'Exhibit',
+					'ExhibitsTags',
 					'Item',
-			//		'ItemsExhibits',
 					'ItemsFavorites',
 					'ItemsFulltext',
 					'ItemsTags',

@@ -225,9 +225,14 @@ class ItemsController extends Kea_Controller_Action
 								$clean['coverage_end_month'],
 								$clean['coverage_end_day']);	
 						
-			if(!empty($clean['tags'])) {
+			if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
 				$user = Kea::loggedIn();
-				$item->addTagString($clean['tags'], $user);
+				$item->applyTagString($clean['tags'], $user->id);
+			}
+			
+			//Special method for untagging other users' tags
+			if($this->isAllowed('untagOthers')) {
+				$tagsDeleted = $this->removeTag($item);
 			}
 			
 			//Mirror the form to the record
@@ -296,7 +301,6 @@ class ItemsController extends Kea_Controller_Action
 				$conn->rollback();
 				return false;
 			}catch(Exception $e) {
-	//			Zend::dump( $e );exit;
 				$this->flash($e->getMessage());
 			}	
 		}
@@ -326,8 +330,11 @@ class ItemsController extends Kea_Controller_Action
 			$this->_redirect('403');
 		}
 		
-		if(!empty($_POST['tags'])) {
-		 	if($this->isAllowed('addTag')) {
+		//Add the tags
+		 
+		if(array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
+			
+		 	if($this->isAllowed('tag')) {
 				$tagsAdded = $this->commitForm($item);
 				$item = $this->findById();
 			}else {
@@ -339,54 +346,10 @@ class ItemsController extends Kea_Controller_Action
 
 		//@todo Does makeFavorite require a permissions check?
 		if($this->getRequest()->getParam('makeFavorite')) {
-		
-			if($item->isFavoriteOf($user)) {
-				//Make un-favorite
-				$if = Doctrine_Manager::getInstance()->getTable('ItemsFavorites')->findBySql("user_id = {$user->id} AND item_id = {$item->id}");
-				$if->delete();
-			} else {
-				//Make it favorite
-				$if = new ItemsFavorites();
-				$if->Item = $item;
-				$if->User = $user;
-				$if->save();
-			}
+			$this->makeFavorite($item,$user);
 		}
 		
-		if($deleteTag = $this->_getParam('deleteTag'))
-		{
-			
-			$isMyTag = $this->_getParam('isMyTag');
-			$tagToDelete = $this->getTable('Tag')->find($deleteTag);
-			if($tagToDelete) {
-				if($isMyTag) {
-					
-					//permissions check
-					if($this->isAllowed('removeTag')) {
-	
-						//delete that association
-						$it = $this->getTable('ItemsTags')->findBySql('item_id = ? AND tag_id = ? AND user_id = ?',array($item->id,$tagToDelete->id, $user->id))->getFirst();
-						if($it) {
-							$it->delete();
-						}				
-
-						if($tagToDelete->tagCount() == 0)
-						{
-							$tagToDelete->delete();
-						}						
-						$tagsDeleted = true;
-					}else {
-						$this->flash('User does not have permission to remove tags that user has previously applied.');
-					}
-						
-				}elseif($this->isAllowed('delete','Tags')) {
-					$tagToDelete->delete();
-					$tagsDeleted = true;
-				}else {
-					$this->flash('User does not have permission to remove tags from items');
-				}
-			}
-		}
+		
 		
 		if($tagsAdded || $tagsDeleted) {
 			//This is a workaround for the fact that the Tags collection doesn't get automatically refreshed
@@ -396,6 +359,39 @@ class ItemsController extends Kea_Controller_Action
 		$item->refresh();
 		
 		return $this->render('items/show.php', compact("item", 'user'));
+	}
+	
+	protected function makeFavorite($item, $user)
+	{
+		if($item->isFavoriteOf($user)) {
+				//Make un-favorite
+				$if = Doctrine_Manager::getInstance()->getTable('ItemsFavorites')->findBySql("user_id = {$user->id} AND item_id = {$item->id}");
+				$if->delete();
+		} else {
+			//Make it favorite
+			$if = new ItemsFavorites();
+			$if->Item = $item;
+			$if->User = $user;
+			$if->save();
+		}
+	}
+	
+	/**
+	 * Will remove all instances of a particular tag from a particular Item
+	 * Checks for $_POST key with name = 'remove_tag' and value = tag ID
+	 *
+	 * @return bool
+	 **/
+	protected function removeTag($item)
+	{
+		if(array_key_exists('remove_tag', $_POST)) {
+			$tagId = $_POST['remove_tag'];
+			$tagToDelete = $this->getTable('Tag')->find($tagId);
+			if($tagToDelete) {
+				//delete the tag from the Item
+				return $item->deleteTag($tagToDelete, null, true);
+			}
+		}
 	}
 }
 ?>

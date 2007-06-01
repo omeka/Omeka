@@ -4,6 +4,8 @@ require_once 'Doctrine.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
 require_once 'Zend.php';
 
+//Register the various path names so they can be accessed by the app
+Zend::register('path_names', $site);
 
 /**
  * Check for a config file which, if not present implies that the

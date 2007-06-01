@@ -46,10 +46,20 @@ class FormFunctionsTestCase extends OmekaTestCase
 		
 		$coll_array = array(1=>'Collection1',2=>'Collection2');
 		select(array('id'=>'foobar','name'=>'foobar','class'=>'select'),$coll_array,$default,$label);
-		$select = ob_get_clean();
+		$select = ob_get_contents();
 		$select = str_replace(array("\t","\n"),'',$select);
 		
 		$this->assertEqual($select,'<label for="foobar">Foobar</label><select id="foobar" name="foobar" class="select"><option value="">Select Below&nbsp;</option><option value="1" selected="selected">Collection1</option><option value="2">Collection2</option></select>');
+		
+		ob_clean();
+		
+		$test_array = array('default'=>'default');
+		select(array('name'=>'foobar'),$test_array,'default');
+		
+		$select = ob_get_clean();
+		$select = $this->stripSpace($select);
+		
+		$this->assertEqual($select, '<select name="foobar"><option value="">Select Below&nbsp;</option><option value="default" selected="selected">default</option></select>');
 	}
 	
 	public function testText()

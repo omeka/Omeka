@@ -35,15 +35,19 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Item.php';
 
 //Mock::generate('Log');
 require_once 'ItemTestCase.php';
+require_once 'TagTestCase.php';
 require_once 'FileTestCase.php';
 require_once 'FormFunctionsTestCase.php';
 require_once 'UserThemeFunctionsTestCase.php';
 require_once 'UnicodeFunctionsTestCase.php';
+require_once 'ExhibitTestCase.php';
 $test = new TestSuite('Omeka Tests');
-$test->addTestCase(new ItemTestCase());
-$test->addTestCase(new FileTestCase());
-$test->addTestCase(new FormFunctionsTestCase());
-$test->addTestCase(new UserThemeFunctionsTestCase());
-$test->addTestCase(new UnicodeFunctionsTestCase());
+//$test->addTestCase(new ItemTestCase());
+$test->addTestCase(new TaggableTestCase());
+//$test->addTestCase(new FileTestCase());
+//$test->addTestCase(new FormFunctionsTestCase());
+//$test->addTestCase(new UserThemeFunctionsTestCase());
+//$test->addTestCase(new UnicodeFunctionsTestCase());
+//$test->addTestCase(new ExhibitTestCase());
 $test->run(new HtmlReporter());
 ?>

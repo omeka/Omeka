@@ -72,6 +72,13 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
 
     protected $aggregateValues = array();
 
+	public function dump()
+	{
+		foreach ($this->data as $key => $value) {
+			echo $value;
+		}
+	}
+
     /**
      * constructor
      *

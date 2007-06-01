@@ -17,6 +17,7 @@ abstract class Kea_Record extends Doctrine_Record
 	 **/
 	protected $error_messages = array();
 	protected $constraints = array();
+	protected $_taggable;
 	
 	public function setUp() 
 	{
@@ -198,6 +199,22 @@ abstract class Kea_Record extends Doctrine_Record
 	public function fromJson()
 	{
 		throw new Exception('This function not yet implemented');
+	}
+	
+	public function getTableName($model=null)
+	{
+		if(!$model) {
+			return $this->getTable()->getTableName();
+		}
+		
+		return Doctrine_Manager::getInstance()->getTable($model)->getTableName();
+	}
+	
+	public function __call($m, $a)
+	{
+		if(method_exists($this->_taggable, $m)) {
+			return call_user_func_array(array($this->_taggable, $m), $a);
+		}
 	}
 	
 	/**

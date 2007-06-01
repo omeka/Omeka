@@ -1,7 +1,7 @@
 <?php
 include_once 'UnicodeFunctions.php';
 include_once 'FormFunctions.php';
-//include_once 'ExhibitFunctions.php';
+include_once 'ExhibitFunctions.php';
 /**
  * Not quite a helper, these functions defy definition...
  * 
@@ -304,8 +304,15 @@ function plugin_header() {
 function tag_string($record, $link=null, $delimiter=', ',$return=false)
 {
 	$string = array();
-	if($record->hasRelation("Tags")) {
-		foreach ($record->Tags as $key=>$tag) {
+	if($record instanceof Kea_Record and $record->hasRelation("Tags")) {
+		$tags = $record->Tags;
+		
+	}else {
+		$tags = $record;
+	}
+	
+	if(!empty($tags)) {
+		foreach ($tags as $key=>$tag) {
 			if(!$link) {
 				$string[$key] = $tag["name"];
 			}else {
@@ -314,9 +321,14 @@ function tag_string($record, $link=null, $delimiter=', ',$return=false)
 		}
 		$string = join($delimiter,$string);
 		if($return) return $string;
-		else echo $string;		
+		else echo $string;				
 	}
+}
 
+function current_user_tags($item)
+{
+	$user = current_user();
+	return get_tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
 }
 
 /**
@@ -373,6 +385,18 @@ function get_tags(array $params = array())
 function get_items(array $params = array())
 {
 	return _make_omeka_request('Items','browse',$params,'items');
+}
+
+function get_item($id) 
+{
+	$item = Doctrine_Manager::getInstance()->getTable('Item')->find($id);
+	
+	//Quick permissions check
+	if(!$item->public && !has_permission('Items', 'showNotPublic')) {
+		return false;
+	}
+	
+	return $item;
 }
 
 function get_collections(array $params = array())

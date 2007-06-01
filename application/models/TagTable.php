@@ -7,7 +7,7 @@
  * 
  **/
 class TagTable extends Doctrine_Table
-{
+{	
 	public function findOrNew($name) {
 		$result = $this->findBySql('name = ? LIMIT 1', array($name))->getFirst();
 		if(!$result) {
@@ -30,7 +30,7 @@ class TagTable extends Doctrine_Table
 	 * @param User only tags from this User
 	 * @return Doctrine_Collection tags
 	 **/
-	public function findSome($params=array())
+	public function findSome($params=array(),$for="Item")
 	{
 		$defaults = array('limit'=>100,
 							'alpha'=>false,
@@ -40,7 +40,8 @@ class TagTable extends Doctrine_Table
 							'item_id'=>null,
 							'user_id'=>null,
 							'returnType'=>'object',
-							'onlyPublic'=>false);
+							'onlyPublic'=>false,
+							'exhibit_id'=>null);
 							
 		foreach ($defaults as $k=>$v) {
 			if(array_key_exists($k,$params)) {
@@ -49,18 +50,41 @@ class TagTable extends Doctrine_Table
 				$$k = $v;
 			}
 		}
-		$dql = "SELECT t.*, COUNT(t.id) tagCount FROM Tag t INNER JOIN t.ItemsTags it ";
-		$query = new Doctrine_Query;
+		$dql = "SELECT t.*, COUNT(t.id) tagCount FROM Tag t";
 		
 		$pass = array();
 		$join = array();
 		$where = array();
+			
+		//Figure out where to get the tags from
+		switch (strtolower($for)) {
+			case 'exhibit':
+				$join['et'] = "t.ExhibitsTags it";
+				break;
+			case 'item':
+			default:
+				$join['it'] = "t.ItemsTags it";
+				break;
+		}
+	
+		
+		$query = new Doctrine_Query;
+		
+
 		
 		if($item_id) {
+			$join['it'] = "t.ItemsTags it";
 			$join['item'] = "it.Item i";
 			$where['item'] = 'i.id = ?';
 			$pass[] = $item_id;	
 		}
+		if($exhibit_id) {
+			$join['et'] = "t.ExhibitsTags it";
+			$join['exhibit'] = "it.Exhibit ex";
+			$where['exhibit'] = 'ex.id = ?';
+			$pass[] = $exhibit_id;
+		}
+		
 		if($user_id) {
 			$join['user'] = 'it.User u';
 			$where['user'] = 'u.id = ?';

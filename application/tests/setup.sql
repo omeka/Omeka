@@ -37,15 +37,17 @@ NULL , 'Collection1', 'CollectionDescription1', '1', '1', 'Collector1'
 NULL , 'Collection2', 'CollectionDescription2', '0', '0', 'Collector2'
 );
 
---INSERT INTO `exhibits` ( `id` , `title` , `description` , `credits` , `featured` , `slug` , `theme` )
---VALUES (
---1 , 'Exhibit1', 'Description1', 'Credits1', '1', 'exhibit1', ''
---);
+INSERT INTO `exhibits` ( `id` , `title` , `description` , `credits` , `featured` , `slug` , `theme` )
+VALUES (
+1 , 'Exhibit1', 'Description1', 'Credits1', '1', 'exhibit1', ''
+);
 
---INSERT INTO `exhibits_tags` ( `id` , `exhibit_id` , `tag_id` , `user_id` )
---VALUES (
---1 , '1', '1', '1'
---), (
---2 , '1', '2', '1'
---);
+INSERT INTO `exhibits_tags` ( `id` , `exhibit_id` , `tag_id` , `user_id` )
+VALUES (
+1 , '1', '1', '1'
+), (
+2 , '1', '2', '1'
+), (
+3, '1', '1', '2'
+);
 

@@ -14,6 +14,7 @@ class ItemTestCase extends OmekaTestCase
 	 **/
 	public function init()
 	{
+
 	}
 	
 	public function setUp()
@@ -43,9 +44,9 @@ class ItemTestCase extends OmekaTestCase
 	public function testAddTagString()
 	{
 		$i = $this->i1;
-		$u = $this->u1;
+		$u = $this->u1->id;
 		$string = "Tag1, bar, far";
-		$i->addTagString($string, $u);
+		$i->addTags($string, $u);
 		$this->assertEqual(count($i->ItemsTags), 4);
 		$existingIt = $i->ItemsTags->getFirst();
 		$invalidIt = $i->ItemsTags[1];
@@ -63,7 +64,7 @@ class ItemTestCase extends OmekaTestCase
 		$this->assertTrue($i->hasTag('Tag1'));
 		
 		$u = $this->u1;
-		$this->assertTrue($i->hasTag('Tag1', $u));
+		$this->assertTrue($i->hasTag('Tag1', $u->id));
 		
 		$newU = new User;
 		$this->assertFalse($i->hasTag('Tag1', $newU), 'Item is tagged by a user that does not exist');
