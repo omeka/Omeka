@@ -116,6 +116,50 @@ function exhibit_css($file)
 	
 }
 
+function section_nav($useSlug=true)
+{
+	$exhibit = Zend::registry('exhibit');
+	$slug = $useSlug ? $exhibit->slug : $exhibit->id;
+	
+	//Use class="section-nav"
+	echo '<ul class="section-nav">';
+	
+	foreach ($exhibit->Sections as $key => $s) {		
+	
+		$secUrl = 'exhibits/show/'.$exhibit->slug.'/'.$s->order;
+		$secUrl = uri($secUrl);
+	
+		echo '<li><a href="' . $secUrl . '"' . (is_current($secUrl) ? ' class="current"' : ''). '>' . $s->title . '</a></li>';
+	
+	}
+	
+	echo '</ul>';
+}
+
+function page_nav($useSlug=true)
+{
+	$section = Zend::registry('section');
+	
+	$slug = $useSlug ? $section->Exhibit->slug : $section->Exhibit->id;
+	
+	echo '<ul class="page-nav">';
+	echo '<li class="first"><a href="'.uri('exhibits/show/'.$slug.'/'.$section->order.'/1').'">First</a></li>';
+	
+	$key = 1;
+	foreach ($section->Pages as $key => $p) {
+	
+		$pageUrl = 'exhibits/show/'.$slug.'/'.$section->order.'/'.$p->order;
+		$pageUrl = uri($pageUrl);
+		
+		//Create the link (also check if uri matches current uri)
+		echo '<li><a href="'. $pageUrl . '"'. (is_current($pageUrl) ? ' class="current"' : '').'>' . $key . '</a></li>';
+	
+	}
+	
+	echo '<li class="last"><a href="'.uri('exhibits/show/'.$slug.'/'.$section->order.'/'.$key).'">Last</a></li>';
+	echo '</ul>';
+}
+
 function render_exhibit_page()
 {
 	$exhibit = Zend::Registry('exhibit');

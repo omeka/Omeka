@@ -27,16 +27,16 @@
 	
 	<?php echo flash(); ?>				
 
-
-
-	<ul>
-	<?php foreach( $exhibit->Sections as $key => $sec ): ?>
-		<li><?php echo $sec->title;?></li>
-	<?php endforeach; ?>
-	</ul>
-	
+<?php 
+	section_nav(); 
+?>	
 	<ul>
 	<li>The exhibit's title is: <?php echo $exhibit->title; ?></li>
 	<li>The current sections's title is: <?php echo $section->title; ?></li>
 	</ul>
+	
+	<?php 
+		page_nav(); 
+	?>
+	
 	

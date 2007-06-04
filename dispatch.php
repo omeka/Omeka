@@ -33,6 +33,7 @@ function render_404($e, $debugExceptions = false) {
 		include '404.php';
 		exit;	
 	}else {
+		$front = Kea_Controller_Front::getInstance();
 		$view = new Kea_View(null, array('request'=>$front->getRequest()));
 		echo $view->render('404.php');
 		exit;		
