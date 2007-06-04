@@ -16,6 +16,11 @@ class TypesController extends Kea_Controller_Action
 	{
 		if(!empty($_POST))
 		{
+			$conn = $this->getConn();
+		
+			//Start the transaction
+			$conn->beginTransaction();
+			
 			$type->setFromForm($_POST);
 			
 			//Remove empty metafield submissions
@@ -40,10 +45,12 @@ class TypesController extends Kea_Controller_Action
 			
 			try {
 				$type->save();
+				$conn->commit();
 				return true;
 			}
 			catch(Doctrine_Validator_Exception $e) {
 				$type->gatherErrors($e);
+				$conn->rollback();
 				return false;
 			}	
 		}

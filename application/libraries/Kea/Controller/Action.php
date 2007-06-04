@@ -421,11 +421,11 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 **/
 	protected function commitForm($record)
 	{
+		$conn = $this->getConn();
+		$conn->beginTransaction();
+		
 		if(!empty($_POST))
-		{
-			$conn = $this->getConn();
-			$conn->beginTransaction();
-			
+		{		
 			$this->preCommitForm($record);
 			$clean = $_POST;
 			unset($clean['id']);
