@@ -26,6 +26,11 @@ class ItemsController extends Kea_Controller_Action
 		}
 	}
 	
+	public function tagsAction()
+	{
+		$this->_forward('Tags', 'browse', array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
+	}
+	
 	/**
 	 * New Strategy: this will run a SQL query that selects the IDs, then use that to hydrate the Doctrine objects.
 	 * Stupid Doctrine.  Maybe their new version will be better.

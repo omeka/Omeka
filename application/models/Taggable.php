@@ -26,6 +26,11 @@ class Taggable
 		$this->conn = Doctrine_Manager::getInstance()->connection();
 	}
 	
+	public function getTagJoinTableName()
+	{
+		return $this->joinTable;
+	}
+	
 	protected function refreshTags()
 	{
 		//Reload the instances of the join class

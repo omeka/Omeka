@@ -17,6 +17,11 @@ class ExhibitsController extends Kea_Controller_Action
 		$this->session = new Zend_Session('Exhibit');
 	}
 	
+	public function tagsAction()
+	{
+		$this->_forward('Tags', 'browse', array('tagType' => 'Exhibit', 'renderPage'=>'exhibits/tags.php'));
+	}
+	
 	public function showAction()
 	{		
 		$slug = $this->_getParam('slug');

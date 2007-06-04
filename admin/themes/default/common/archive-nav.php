@@ -2,5 +2,5 @@
 	<?php nav(array('Items' => uri('items'),
 					'Types' => uri('types'),
 					'Collections'=>uri('collections'),
-					'Tags'=>uri('tags')));?>
+					'Tags'=>uri('items/tags')));?>
 </ul>

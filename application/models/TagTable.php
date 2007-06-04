@@ -140,12 +140,12 @@ class TagTable extends Doctrine_Table
 	 *
 	 * @return mixed
 	 **/
-	public function findAll($params=array())
+	public function findAll($params=array(), $for="Item")
 	{
 		$params = array_merge(array(
 						'limit'=>null,
 						'returnType'=>'array'), $params);
-		return $this->findSome($params);
+		return $this->findSome($params, $for);
 	}
 	
 	/**
