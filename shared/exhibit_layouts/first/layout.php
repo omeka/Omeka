@@ -5,9 +5,7 @@
 ?>
 
 <div class="first">
-	<?php 
-		echo $section->title; 
-	?>
+	The current section's title is: <?php echo $section->title;?>
 	
 	<div class="item">
 		<?php 
@@ -19,7 +17,7 @@
 	</div>
 	
 	<div class="text">
-		<?php echo page_text(1); ?>
+		The value of the first piece of text is: <?php echo page_text(1); ?>
 	</div>
 
 </div>

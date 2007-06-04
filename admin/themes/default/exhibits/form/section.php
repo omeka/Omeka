@@ -27,7 +27,7 @@
 		<?php foreach( $section->Pages as $key => $page ): ?>
 		<tr>
 			<td><?php echo $page->order; ?></td>
-			<td><?php ex_layout($page->layout); ?></td>
+			<td><?php exhibit_layout($page->layout); ?></td>
 			<td><?php echo $page->getItemCount(); ?></td>
 			<td><?php echo $page->getTextCount(); ?></td>
 			<td><a href="<?php echo uri('exhibits/editPage/'.$page->id); ?>">[Edit]</a></td>

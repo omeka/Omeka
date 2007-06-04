@@ -9,14 +9,7 @@
 		textarea(array('name'=>'credits', 'id'=>'credits'), $exhibit->credits,'Exhibit Credits');
 		
 		
-
-		
-		text(array('name'=>'tags', 'id'=>'tags'), tag_string($exhibit->userTags(current_user()->id),null,', ',true), 'Your Exhibit Tags');
-		
-		//Super users should be able to edit all the tags
-		if(has_permission('super')) {
-			text(array('name'=>'all_tags', 'id'=>'all_tags'), tag_string($exhibit,null,', ',true), 'All Exhibit Tags');
-		}
+		text(array('name'=>'tags', 'id'=>'tags'), tag_string($exhibit,null,', ',true), 'Exhibit Tags');
 		
 		checkbox(array('name'=>'featured', 'id'=>'featured'),$exhibit->featured, null ,'This Exhibit is Featured');
 	?>

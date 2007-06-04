@@ -423,21 +423,33 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{
 		if(!empty($_POST))
 		{
+			$conn = $this->getConn();
+			$conn->beginTransaction();
+			
+			$this->preCommitForm($record);
 			$clean = $_POST;
 			unset($clean['id']);
 			$record->setFromForm($clean);
 			try {
 				$record->save();
+				$this->postCommitForm($record);
+				$conn->commit();
 				return true;
 			}
 			catch(Doctrine_Validator_Exception $e) {
 				$record->gatherErrors($e);
 				$this->flash($record->getErrorMsg());
+				$conn->rollback();
 				return false;
 			}	
 		}
 		return false;
 	}
+	
+	//Extra set of hooks to customize commitForm()
+	protected function preCommitForm($record) {}
+	
+	protected function postCommitForm($record) {}
 	
 	/**
 	 * Load extra data that would need to be displayed for forms, for example the item form would require all collections, plugins, etc.

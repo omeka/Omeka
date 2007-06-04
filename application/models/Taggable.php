@@ -19,6 +19,8 @@ class Taggable
 		$this->joinId = strtolower(get_class($record)) . '_id';
 		
 		$this->tagTable = Doctrine_Manager::getInstance()->getTable('Tag');
+		$this->tagTableName = $this->tagTable->getTableName();
+		
 		$this->joinTable = Doctrine_Manager::getInstance()->getTable($this->joinClass)->getTableName();
 		
 		$this->conn = Doctrine_Manager::getInstance()->connection();
@@ -68,12 +70,14 @@ class Taggable
 	protected function insertJoin($tag_id, $user_id, $join_id) {
 				
 		$sql = "INSERT IGNORE INTO {$this->joinTable} (tag_id, user_id, {$this->joinId}) VALUES (?, ?, ?)";
+		
 		$res = $this->conn->execute($sql, array($tag_id, $user_id, $join_id));
 		return ($res->rowCount() > 0);
 	}	
 	
 	protected function deleteJoin($tag_id, $user_id, $join_id) {		
 		$sql = "DELETE IGNORE FROM {$this->joinTable} WHERE tag_id = ? AND user_id = ? AND {$this->joinId} = ? LIMIT 1";
+		
 		$res = $this->conn->execute($sql, array($tag_id, $user_id, $join_id));
 		return ($res->rowCount() > 0);
 	}	
@@ -83,6 +87,19 @@ class Taggable
 		$res = $this->conn->execute($sql, array($tag_id, $join_id));
 		return ($res->rowCount() > 0);
 	}
+	
+	protected function insertTag($tagName) {
+		$sql = "INSERT INTO {$this->tagTable} (name) VALUES (?)";
+		$res = $this->conn->execute($sql, array(trim($tagName)));
+		return ($res->rowCount() > 0);
+	}
+	
+	protected function getTagId($name) {
+		$sql = "SELECT t.id FROM {$this->tagTableName} t WHERE t.name LIKE ?";
+		$res = $this->conn->execute($sql, array($name))->fetch();
+		return $res[0];
+	}
+	
 	/**
 	 * Delete a tag from the record
 	 *
@@ -160,16 +177,29 @@ class Taggable
 	}
 
 	public function addTags($tags, $user_id, $delimiter = ',') {
+		if(!$this->record->id) {
+			throw new Exception( 'A valid record ID # must be provided when tagging.' );
+		}
+		
+		if(!$user_id) {
+			throw new Exception( 'A valid user ID # must be provided when tagging' );
+		}
+		
 		if(!is_array($tags)) {
 			$tags = explode($delimiter, $tags);
 			$tags = array_diff($tags, array(''));
 		}
 		
 		foreach ($tags as $key => $tagName) {
-			$tag = $this->tagTable->findOrNew($tagName);
-			$tag->save();
+			$tag_id = $this->getTagId($tagName);
+			
+			if(!$tag_id) {
+				$sql = "INSERT INTO {$this->tagTableName} (name) VALUES (?)";
+				$res = $this->conn->execute($sql,array($tagName));
+				$tag_id = $this->conn->getDbh()->lastInsertId();
+			}
 			 
-			$this->insertJoin($tag->id, $user_id, $this->record->id);
+			$this->insertJoin($tag_id, $user_id, $this->record->id);
 		}
 	}
 
@@ -223,9 +253,14 @@ class Taggable
 	{
 		$tags = ($deleteTags) ? $this->record->Tags : $this->userTags($user_id);
 		$diff = $this->diffTagString($string, $tags, $delimiter);
-		 Zend::dump( $diff );
-		$this->removeTagsByArray($diff['removed'], $user_id, $deleteTags);
-		$this->addTags($diff['added'], $user_id);
+		
+		if(!empty($diff['removed'])) {
+			$this->removeTagsByArray($diff['removed'], $user_id, $deleteTags);
+		}
+		if(!empty($diff['added'])) {
+			$this->addTags($diff['added'], $user_id);
+		}
+		
 	}
 	
 	public function removeTagsByArray($array,$user_id, $deleteWholeTag=false)

@@ -28,7 +28,6 @@ class ExhibitsController extends Kea_Controller_Action
 			$exhibit = $this->_table->findBySlug($slug);
 		}
 		
-		
 //		$theme = $exhibit->theme;
 		
 		$ps = $this->getSectionAndPage($exhibit);
@@ -356,18 +355,7 @@ class ExhibitsController extends Kea_Controller_Action
 					$exhibit->Sections[$key]->order = $section['order'];
 				}
 				$exhibit->Sections->save();
-			}
-			
-			//Manipulate a given user's tags
-			$current_user = Kea::loggedIn();
-			
-			$exhibit->applyTagString($_POST['tags'], $current_user->id);
-			
-			//If the user is a super user, they can remove tags at will
-			if($current_user->role == 'super') {
-				$deleteTags = true;
-				$exhibit->applyTagString($_POST['all_tags'], $current_user->id, $deleteTags);
-			}
+			}			
 		}			
 		
 		$retVal = parent::commitForm($exhibit);
@@ -379,7 +367,13 @@ class ExhibitsController extends Kea_Controller_Action
 		
 		return $retVal;
 	}
-
+	
+	//Add the tags after the form has been saved
+	protected function postCommitForm($exhibit) {
+		
+		$current_user = Kea::loggedIn();		
+		$exhibit->applyTagString($_POST['tags'], $current_user->id, true);
+	}
 	
 	protected function commitSectionForm($section) {
 		

@@ -1,3 +1,9 @@
+-- Unique Indices for Join tables (Doctrine not building these for some reason)
+ALTER TABLE `items_tags` ADD UNIQUE `taguseritem` ( `tag_id` , `user_id` , `item_id` );
+ALTER TABLE `exhibits_tags` ADD UNIQUE `tagexhibit` (`tag_id`, `exhibit_id`);
+
+-- Types and Metafields
+
 INSERT INTO `types` (id, name, description) VALUES (1, 'Document', 'A resource containing textual data.  Note that facsimiles or images of texts are still of the genre text.');
 INSERT INTO `types` (id, name, description) VALUES (3, 'Moving Image', 'A series of visual representations that, when shown in succession, impart an impression of motion.');
 INSERT INTO `types` (id, name, description) VALUES (4, 'Oral History', 'A resource containing historical information obtained in interviews with persons having firsthand knowledge.');

@@ -225,10 +225,7 @@ class ItemsController extends Kea_Controller_Action
 								$clean['coverage_end_month'],
 								$clean['coverage_end_day']);	
 						
-			if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
-				$user = Kea::loggedIn();
-				$item->applyTagString($clean['tags'], $user->id);
-			}
+			
 			
 			//Special method for untagging other users' tags
 			if($this->isAllowed('untagOthers')) {
@@ -293,6 +290,13 @@ class ItemsController extends Kea_Controller_Action
 			
 			try {
 				$item->save();
+				
+				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
+				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
+					$user = Kea::loggedIn();
+					$item->applyTagString($clean['tags'], $user->id);
+				}
+				
 				$conn->commit();
 				return true;
 			}

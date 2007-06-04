@@ -12,7 +12,8 @@ class ExhibitsTags extends Kea_JoinRecord
 		$this->hasColumn("tag_id", "integer",null,"notnull");
 		$this->hasColumn("user_id", "integer", null,"notnull");
 		
-		$this->unique(array('tag_id','user_id', 'exhibit_id'));
+		//The join for this table should just be for tags and exhibits (without users)
+		$this->unique(array('tag_id','exhibit_id'));
     }
     public function setUp()
     {

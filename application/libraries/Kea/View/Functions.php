@@ -328,6 +328,9 @@ function tag_string($record, $link=null, $delimiter=', ',$return=false)
 function current_user_tags($item)
 {
 	$user = current_user();
+	if(!$item->exists()) {
+		return false;
+	}
 	return get_tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
 }
 

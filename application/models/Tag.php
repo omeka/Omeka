@@ -27,13 +27,10 @@ class Tag extends Kea_Record {
 		return $this->name;
 	}
 	
-	public function tagCount() {
-		if(isset($this->tagCount))
-		{
-			return $this->tagCount;
-		}
+	public function tagCount($for="Items") {
 		$q = new Doctrine_Query;
-		$q->parseQuery("SELECT COUNT(it.id) as tagCount FROM ItemsTags it WHERE it.tag_id = ?");
+		$join = $for.'Tags';
+		$q->parseQuery("SELECT COUNT(j.id) as tagCount FROM $join j WHERE j.tag_id = ?");
 		$res = $q->execute(array($this->id), Doctrine::FETCH_ARRAY);
 		return $res[0]['i'][0];
 	}

@@ -92,7 +92,7 @@ function get_ex_layouts()
 	return $array;
 }
 
-function ex_layout($layout)
+function exhibit_layout($layout)
 {	
 	//Load the thumbnail image
 	$imgFile = WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'layout.jpg';
@@ -105,11 +105,12 @@ function ex_layout($layout)
 
 function exhibit_css($file)
 {
-	if(Zend::isRegistered('page')) {
-		$page = Zend::Registry('page');
-		$path = $page->layout.DIRECTORY_SEPARATOR.$file.'.css';
-		if(file_exists(EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$path)) {
-			echo WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$path;
+	if(Zend::isRegistered('exhibit')) {
+		$ex = Zend::Registry('exhibit');
+		$path = $ex->theme.DIRECTORY_SEPARATOR.$file.'.css';
+		
+		if(file_exists(EXHIBIT_THEMES_DIR.DIRECTORY_SEPARATOR.$path)) {
+			echo WEB_EXHIBIT_THEMES.DIRECTORY_SEPARATOR.$path;
 		}
 	}
 	

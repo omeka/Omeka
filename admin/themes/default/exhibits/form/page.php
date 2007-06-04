@@ -8,7 +8,7 @@
 	$layouts = get_ex_layouts();
 	
 	foreach ($layouts as $layout) {
-		ex_layout($layout);
+		exhibit_layout($layout);
 	} 
 	radio(array('name'=>'layout'), array_combine($layouts,$layouts), $page->layout);
 	submit('Choose this layout','choose_layout');

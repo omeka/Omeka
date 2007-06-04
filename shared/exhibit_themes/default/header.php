@@ -21,12 +21,22 @@
 <body>
 	<div id="wrap">
 		<div id="header">
-			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a> - Default Exhibit Theme</h1>
+			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a> - Sample Exhibit Theme (named &#039;default&#039;)</h1>
 		</div>
 		<div id="content">
 	
 	<?php echo flash(); ?>				
 
-	<?php echo $exhibit->title; ?>
+
+
+	<ul>
+	<?php foreach( $exhibit->Sections as $key => $sec ): ?>
+		<li><?php echo $sec->title;?></li>
+	<?php endforeach; ?>
+	</ul>
 	
-	<?php echo $section->title; ?>			
+	<ul>
+	<li>The exhibit's title is: <?php echo $exhibit->title; ?></li>
+	<li>The current sections's title is: <?php echo $section->title; ?></li>
+	</ul>
+	
