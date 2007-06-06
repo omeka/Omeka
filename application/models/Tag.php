@@ -28,6 +28,24 @@ class Tag extends Kea_Record {
 	}
 	
 	/**
+	 * If a user ID is passed, then only delete the joins for that user
+	 *
+	 * @return bool
+	 **/
+	public function delete($user_id = null) {
+		if(!$user_id) {
+			return parent::delete();
+		}
+		
+		$joins = $this->getTable()->getJoins();
+		
+		foreach ($joins as $joinTable) {
+			$dql = "DELETE FROM $joinTable j WHERE j.tag_id = ? AND j.user_id = ?";
+			$this->executeDql($dql, array($this->id, $user_id));
+		}
+	}
+	
+	/**
 	 * Rename all the instances of a tag
 	 * 1) Find a set of all the joins that need to be updated
 	 * 2) Ignore the original tag if included in the list of new tags

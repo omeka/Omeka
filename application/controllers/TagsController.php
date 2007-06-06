@@ -23,14 +23,44 @@ class TagsController extends Kea_Controller_Action
 				$this->editTags($user);
 			}
 			
-		/*
-				$sql = "SELECT t.*, (COUNT(et.id) + COUNT(it.id)) AS tagCount
-					FROM tags t
-					LEFT JOIN items_tags it ON it.tag_id = t.id
-					LEFT JOIN exhibits_tags et ON et.tag_id = t.id	
-					GROUP BY t.id";
-		*/	
+			//Having 'rename' permissions really means that user can rename everyone's tags
+			if($this->isAllowed('rename')) {
+				$tags = $this->getTagListWithCount();
+			}else {
+				$tags = $this->getTagListWithCount($user->id);
+			}
 			
+			
+			
+			return $this->render('tags/edit.php', compact('tags'));
+		}
+	}
+	
+	public function deleteAction()
+	{
+		if($user = Kea::loggedIn()) {
+			if(!empty($_POST)) {
+				$tag_id = $_POST['delete_tag'];
+				$tag = $this->_table->find($tag_id);
+				if($this->isAllowed('remove')) {
+					$tag->delete();
+				}else {
+					$tag->delete($user->id);
+				}
+				$this->flash("Tag named '{$tag->name}' was successfully deleted.");
+			}
+			if($this->isAllowed('remove')) {
+				$tags = $this->getTagListWithCount();
+			}else {
+				$tags = $this->getTagListWithCount($user->id);
+			}
+			
+			
+			return $this->render('tags/delete.php', compact('tags'));
+		}
+	}
+	
+	protected function getTagListWithCount($user_id=null) {
 			$select = new Kea_Select($this->getConn());
 			$select->from('tags t', 't.*, (COUNT(et.id) + COUNT(it.id)) AS tagCount')
 					->joinLeft('items_tags it', 'it.tag_id = t.id')
@@ -38,9 +68,8 @@ class TagsController extends Kea_Controller_Action
 					->group('t.id')
 					->having('tagCount > 0');
 			
-			//Having 'rename' permissions really means that user can rename everyone's tags
-			if(!$this->isAllowed('rename')) {
-				$user_id = $user->id;
+			
+			if($user_id) {
 				//This user can only edit their own tags
 				$select->where('it.user_id = ? OR et.user_id = ?', $user_id);
 				$tags = $select->execute()->fetchAll();
@@ -49,9 +78,8 @@ class TagsController extends Kea_Controller_Action
 				$tags = $select->execute()->fetchAll();
 			}
 			
-			return $this->render('tags/edit.php', compact('tags'));
-		}
-	}
+			return $tags;		
+	} 
 	
 	protected function editTags($user)
 	{
@@ -66,17 +94,17 @@ class TagsController extends Kea_Controller_Action
 		
 		$oldTag = $this->_table->find($oldTagId);
 		
+		$oldName = $oldTag->name;
+		$newNames = $_POST['new_tag'];
+		
 		if($this->isAllowed('edit')) {
 			$oldTag->rename($newTags);
 		}
 		else {
 			$oldTag->rename($newTags, $user->id);
 		}
-	}
-	
-	public function deleteAction()
-	{
 		
+		$this->flash("Tag named '$oldName' was successfully renamed to '$newNames'.");
 	}
 	
 	/**
