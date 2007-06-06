@@ -8,6 +8,12 @@
  **/
 class TagTable extends Doctrine_Table
 {	
+	protected $_joins = array('Item'=>'ItemsTags', 'Exhibit'=>'ExhibitsTags');
+	
+	public function getJoins() {
+		return $this->_joins;
+	}
+	
 	public function findOrNew($name) {
 		$result = $this->findBySql('name = ? LIMIT 1', array($name))->getFirst();
 		if(!$result) {

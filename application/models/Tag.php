@@ -8,7 +8,7 @@ require_once 'TagTable.php';
  * 
  **/
 class Tag extends Kea_Record { 
-    	
+  
 	public function setUp() {
 		$this->hasMany("Item as Items", "ItemsTags.item_id");
 		$this->hasMany("User as Users", "ItemsTags.user_id");
@@ -25,6 +25,85 @@ class Tag extends Kea_Record {
 
 	public function __toString() {
 		return $this->name;
+	}
+	
+	/**
+	 * Rename all the instances of a tag
+	 * 1) Find a set of all the joins that need to be updated
+	 * 2) Ignore the original tag if included in the list of new tags
+	 * 3) Loop through the new tags, loop through the joins and create a new one for each new tag
+	 * @return void
+	 **/
+	public function rename($newNames, $userId = null, $delimiter=",") {
+		$joinClasses = $this->getTable()->getJoins();
+		$joins = array();
+		foreach ($joinClasses as $joinTable) {
+			$dql = "SELECT j.* FROM $joinTable j WHERE j.tag_id = {$this->id}";
+			if($userId) {
+				$dql .= " AND j.user_id = $userId";
+			}
+			$joins[$joinTable] = $this->executeDql($dql);
+		}
+		
+		if(in_array($this->name, $newNames)) {
+			//Remove the original name from the list
+			$newNames = array_diff($newNames,array($this->name));
+			//Ignore the existing joins
+			
+			//If there are no new names left, finish
+			if(!count($newNames)) {
+				return true;
+			}
+			
+		}else {
+			//Otherwise take the first name and use it to update the existing joins
+			$newName = array_shift($newNames);
+		
+			//Find the tag or make a new one
+			$newTag = $this->getTable()->findOrNew($newName);
+			$newTag->save();
+			
+			$newTagId = $newTag->id;
+			
+			//Update all the existing joins
+			foreach ($joins as $joinSet) {
+				foreach ($joinSet as $join) {
+					$join->tag_id = $newTagId;
+					
+					//If saving doesn't work, its because of unique constraint violations
+					//So we should delete the join because it already exists
+					try {
+						$join->trySave();
+					} catch (Exception $e) {
+						$join->delete();
+					}
+				}
+			}
+		}
+		
+		//Create new joins for the newly entered tags (if applicable)
+		
+		foreach ($newNames as $k => $newName) {
+			$newTag = $this->getTable()->findOrNew($newName);
+			$newTag->save();
+			
+			$newTagId = $newTag->id;
+			
+			foreach ($joins as $joinSet) {
+				foreach ($joinSet as $join) {
+					//clone the existing join
+					$clone = $join->copy();
+					
+					//set the tag_id for the cloned join
+					
+					$clone->tag_id = $newTagId; 
+					
+					//save the new join
+					$clone->trySave();
+				}
+			}
+		}
+					
 	}
 	
 	public function tagCount($for="Items") {

@@ -11,6 +11,72 @@ class TagsController extends Kea_Controller_Action
 	{
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Tag');
 		$this->_modelClass = 'Tag';
+		
+		$this->_joinTables = array('ExhibitsTags', 'ItemsTags');
+	}
+	
+	public function editAction()
+	{
+		if($user = Kea::loggedIn()) {
+			
+			if(!empty($_POST)) {				
+				$this->editTags($user);
+			}
+			
+		/*
+				$sql = "SELECT t.*, (COUNT(et.id) + COUNT(it.id)) AS tagCount
+					FROM tags t
+					LEFT JOIN items_tags it ON it.tag_id = t.id
+					LEFT JOIN exhibits_tags et ON et.tag_id = t.id	
+					GROUP BY t.id";
+		*/	
+			
+			$select = new Kea_Select($this->getConn());
+			$select->from('tags t', 't.*, (COUNT(et.id) + COUNT(it.id)) AS tagCount')
+					->joinLeft('items_tags it', 'it.tag_id = t.id')
+					->joinLeft('exhibits_tags et', 'et.tag_id = t.id')
+					->group('t.id')
+					->having('tagCount > 0');
+			
+			//Having 'rename' permissions really means that user can rename everyone's tags
+			if(!$this->isAllowed('rename')) {
+				$user_id = $user->id;
+				//This user can only edit their own tags
+				$select->where('it.user_id = ? OR et.user_id = ?', $user_id);
+				$tags = $select->execute()->fetchAll();
+			}else {
+				//This user can edit everyone's tags
+				$tags = $select->execute()->fetchAll();
+			}
+			
+			return $this->render('tags/edit.php', compact('tags'));
+		}
+	}
+	
+	protected function editTags($user)
+	{
+		$oldTagId = $_POST['old_tag'];
+		
+		//Explode and sanitize the new tags
+		$newTags = explode(',', $_POST['new_tag']);
+		foreach ($newTags as $k=>$t) {
+			$newTags[$k] = trim($t);
+		}
+		$newTags = array_diff($newTags,array(''));
+		
+		$oldTag = $this->_table->find($oldTagId);
+		
+		if($this->isAllowed('edit')) {
+			$oldTag->rename($newTags);
+		}
+		else {
+			$oldTag->rename($newTags, $user->id);
+		}
+	}
+	
+	public function deleteAction()
+	{
+		
 	}
 	
 	/**

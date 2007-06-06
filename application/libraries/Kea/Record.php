@@ -239,7 +239,9 @@ abstract class Kea_Record extends Doctrine_Record
 	 **/
 	public function executeDql($dql, $params=array(), $returnOne = false)
 	{
-		
+		$q = new Doctrine_Query;
+		$res = $q->parseQuery($dql)->execute($params);
+		return ($returnOne) ? $res->getFirst() : $res;
 	}
 	
 } // END abstract class Kea_Record
