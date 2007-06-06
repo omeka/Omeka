@@ -55,9 +55,9 @@ class File extends Kea_Record {
         $this->hasColumn('compression', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('post_processing', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('archive_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('fullsize_filename', 'string', null, array('default'=>''));
+        $this->hasColumn('fullsize_filename', 'string');
         $this->hasColumn('original_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('thumbnail_filename', 'string', null, array('default'=>''));
+        $this->hasColumn('thumbnail_filename', 'string');
         $this->hasColumn('size', 'integer', null, array('default'=>'0', 'notnull' => true));
         $this->hasColumn('mime_browser', 'string', null, array('default'=>''));
         $this->hasColumn('mime_php', 'string', null, array('notnull' => true, 'default'=>''));
