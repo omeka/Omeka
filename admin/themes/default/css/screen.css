@@ -186,6 +186,18 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 		
 		
 	/* Exhibits Pages */
+	#item-select .item {
+		float:left;
+		display:block;
+		width:100px;
+		height:100px;
+		border: solid 1px black;
+	}
+	.item .item_id {
+		font-style: italic;
+		font-size: 2em;
+	}
+
 	table#exhibits {margin-top:1.6667em;}
 	table#exhibits th {color:#933; font-weight:bold;border:1px solid #fff; border-width: 1px 0; background:#fff;}
 	table#exhibits td {border:1px solid #fff; border-width:1px 0;}

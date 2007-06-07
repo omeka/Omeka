@@ -48,19 +48,12 @@ function page_item_id($order)
 	return $page->ItemId($order);
 }
 
-function show_items_and_pagination($url)
-{		
-	//Retrieve items with their pagination
-	$retVal = _make_omeka_request('Items','browse',array('pagination_url'=>$url),array('items','pagination'));
-	extract($retVal);
-	
-	foreach ($items as $item) {
-		echo '<div class="item">';
-		thumbnail($item); echo $item->id . ')' . $item->title;
-		echo '</div>';
-	}
-	
-	echo $pagination;
+function layout_form_item($order, $label='Enter an Item ID #') {
+	text(array('name'=>'Item['.$order.']', 'size'=>2, 'class'=>'item'), page_item_id($order), $label);
+}
+
+function layout_form_text($order, $label='Enter text') {
+	text(array('name'=>'Text['.$order.']'), page_text($order), $label); 
 }
 
 /**
@@ -114,6 +107,18 @@ function exhibit_css($file)
 		}
 	}
 	
+}
+
+function layout_css($file='layout')
+{
+	if(Zend::isRegistered('page')) {
+		$p = Zend::Registry('page');
+		$path = $p->layout.DIRECTORY_SEPARATOR.$file.'.css';
+		
+		if(file_exists(EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$path)) {
+			echo WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$path;
+		}
+	}
 }
 
 function section_nav($useSlug=true)

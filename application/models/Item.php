@@ -108,6 +108,14 @@ class Item extends Kea_Record
 		}
 	}
 */	
+	public function hasThumbnail()
+	{
+		$sql = "SELECT COUNT(f.id) thumbCount FROM files f WHERE f.item_id = ? AND f.thumbnail_filename IS NOT NULL";
+		$res = $this->execute($sql, array($this->id), true);
+		return $res > 0;
+	}
+	
+	
 /**
 	 * Process the date info given, return false on invalid date given, otherwise set the appropriate field
 	 *

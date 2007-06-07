@@ -433,6 +433,10 @@ function current_user()
 	return Kea::loggedIn();
 }
 
+function has_thumbnail($item) {
+	return $item->hasThumbnail();
+}
+
 function has_permission($role,$privilege=null) {
 	$acl = Zend::registry('acl');
 	$user = current_user();
