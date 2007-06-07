@@ -39,6 +39,9 @@ function page_item($order)
 {
 	$page = Zend::Registry('page');
 	$item = $page->ItemsPages[$order]->Item;
+	if(!$item->exists()) {
+		return null;
+	}
 	return $item;
 }
 
