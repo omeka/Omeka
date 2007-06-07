@@ -559,6 +559,10 @@ function archive_image( $record, $field , $props, $width, $height, $abs, $web,$r
                if(!$file) return false;
                $file = $file->$field;
        }
+	   
+		if(empty($file)) {
+			return false;
+	   }
 
        $path =  $web . DIRECTORY_SEPARATOR . $file;
        $abs_path =  $abs . DIRECTORY_SEPARATOR . $file;
