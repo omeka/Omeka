@@ -1,25 +1,31 @@
 <?php head(); ?>
+
 <form method="post">
 	<fieldset>
 		<legend>Exhibit Metadata</legend>
-	<?php 
-		echo flash();
-		text(array('name'=>'title', 'id'=>'title'), $exhibit->title, 'Exhibit Title');
-		textarea(array('name'=>'description', 'id'=>'description'), $exhibit->description, 'Exhibit Description'); 
-		textarea(array('name'=>'credits', 'id'=>'credits'), $exhibit->credits,'Exhibit Credits');
+		<?php echo flash();?>
+	<div class="field"><?php text(array('name'=>'title', 'class'=>'textinput', 'id'=>'title'), $exhibit->title, 'Exhibit Title'); ?></div>
+		<div class="field"><?php textarea(array('name'=>'description', 'id'=>'description', 'class'=>'textinput','rows'=>'10','cols'=>'40'), $exhibit->description, 'Exhibit Description'); ?></div>
+		<div class="field"><?php textarea(array('name'=>'credits', 'id'=>'credits', 'class'=>'textinput', 'rows'=>'10','cols'=>'40'), $exhibit->credits,'Exhibit Credits'); ?></div>
 		
 		
-		text(array('name'=>'tags', 'id'=>'tags'), tag_string($exhibit,null,', ',true), 'Exhibit Tags');
+
 		
-		checkbox(array('name'=>'featured', 'id'=>'featured'),$exhibit->featured, null ,'This Exhibit is Featured');
-	?>
+		<div class="field"><?php text(array('name'=>'tags', 'id'=>'tags', 'class'=>'textinput'), tag_string($exhibit->userTags(current_user()->id),null,', ',true), 'Your Exhibit Tags'); ?></div>
+		
+		<?php //Super users should be able to edit all the tags
+		
+		if(has_permission('super')) { ?>
+		<div class="field">	<?php text(array('name'=>'all_tags', 'id'=>'all_tags', 'class'=>'textinput'), tag_string($exhibit,null,', ',true), 'All Exhibit Tags'); ?></div>
+			
+		<?php } ?>
+		
+	<div class="field"><?php checkbox(array('name'=>'featured', 'id'=>'featured'),$exhibit->featured, null ,'This Exhibit is Featured'); ?></div>
 	</fieldset>
 	<fieldset>
 		<legend>Exhibit Display Data</legend>
-		<?php 
-			select(array('name'=>'theme','id'=>'theme'),get_ex_themes(),$exhibit->theme,'Select a Theme');
-			text(array('name'=>'slug', 'id'=>'slug'), $exhibit->slug, 'Exhibit Slug (no spaces or special characters)');
-		?>
+		<div class="field"><?php select(array('name'=>'theme','id'=>'theme'),get_ex_themes(),$exhibit->theme,'Select a Theme'); ?></div>
+			<div class="field"><?php text(array('name'=>'slug', 'id'=>'slug', 'class'=>'textinput'), $exhibit->slug, 'Exhibit Slug (no spaces or special characters)'); ?></div>
 		
 	</fieldset>
 	

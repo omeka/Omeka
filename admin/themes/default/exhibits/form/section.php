@@ -7,10 +7,8 @@
 
 <form method="post" accept-charset="utf-8" action="">
 	<fieldset>
-	<?php 
-		text(array('name'=>'title', 'id'=>'title'), $section->title, 'Title for the Section'); 
-		text(array('name'=>'description', 'id'=>'description'), $section->description, 'Description for the Section');
-	?>
+	<div class="field"><?php text(array('name'=>'title', 'id'=>'title'), $section->title, 'Title for the Section'); ?></div>
+	<div class="field"><?php textarea(array('name'=>'description', 'id'=>'description', 'rows'=>'10','cols'=>'40'), $section->description, 'Description for the Section'); ?></div>
 	</fieldset>
 	
 	<?php if ( $section->Pages->count() ): ?>

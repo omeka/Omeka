@@ -6,16 +6,20 @@
 <div id="type-info">
 <h2>Type: <?php echo $type->name;?>
 	 <?php if ( has_permission('Types','edit') ): ?>
-	 	<a class="edit" href="<?php echo uri('types/edit/'.$type->id); ?>">(Edit)</a>
+	 	<a id="edit" href="<?php echo uri('types/edit/'.$type->id); ?>">(Edit)</a>
+	<a id="delete" href="<?php echo uri('types/delete/'.$type->id); ?>">(Delete)</a>
 	 <?php endif; ?>
 </h2>
 	<p><?php echo $type->description; ?></p>
 	<h3>Type Metadata</h3>
 	<dl class="type-metadata">
+
 		<?php foreach($type->Metafields as $metafield): ?>
-		<dt><?php echo $metafield->name; ?></dt>
-		<dd><?php echo $metafield->description; ?></dd>
+		<div class="name"><?php echo $metafield->name; ?></div>
+		<div class="description"><?php echo $metafield->description; ?></div>
 		<?php endforeach; ?>
+
+		
 	</dl>
 </div>
 

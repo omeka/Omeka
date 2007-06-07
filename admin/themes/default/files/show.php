@@ -33,7 +33,7 @@
 <dl><dt>Capture Details:</dt> <?php if ($file->capture_details): ?><dd><?php echo $file->capture_details; ?></dd><?php endif; ?></dl>
 <dl><dt>Watermark:</dt> <?php if ($file->watermark): ?><dd><?php echo $file->watermark; ?></dd><?php endif; ?></dl>
 
-<dl><dt>Encryption:</dt> <?php if ($file->encryption): ?><dd><?php echo  $file->encryption; ?></dd><?php endif; ?></dl>
+<dl><dt>Encryption:</dt> <?php if ($file->encryption): ?><dd><?php echo $file->encryption; ?></dd><?php endif; ?></dl>
 <dl><dt>Compression:</dt> <?php if ($file->compression): ?><dd><?php echo $file->compression; ?></dd><?php endif; ?></dl>
 <dl><dt>Post-processing:</dt> <?php if ($file->post_processing): ?><dd><?php echo $file->post_processing; ?></dd><?php endif; ?></dl>
 <dl><dt>Change History:</dt> <?php if ($file->change_history): ?><dd><?php echo $file->change_history; ?></dd><?php endif; ?></dl>

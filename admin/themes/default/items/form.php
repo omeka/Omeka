@@ -131,24 +131,34 @@
 		</div>
 		
 		<div class="field">
-		<label>Date</label>
-		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo get_year($item->date); ?>"> -
-		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo get_month($item->date); ?>" /> -
+			<label for="date_year">Date <span class="notes">(YYYY-MM-DD)</span></label>
+			
+			<div class="dates">
+			<div class="dateinput">
+		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo get_year($item->date); ?>">
+		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo get_month($item->date); ?>" />
 		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo get_day($item->date); ?>">
-		(YYYY-MM-DD)
+		
+		</div>
+		</div>
 		</div>
 		
 		<div class="field">
-		<label>Temporal Coverage</label>
-		<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo get_year($item->temporal_coverage_start); ?>"> -
-		<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo get_month($item->temporal_coverage_start); ?>" /> -
-		<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo get_day($item->temporal_coverage_start); ?>">
-		(Start YYYY-MM-DD)
-		
-		<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo get_year($item->temporal_coverage_end); ?>"> -
-		<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo get_month($item->temporal_coverage_end); ?>" /> -
-		<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo get_day($item->temporal_coverage_end); ?>">
-		(End YYYY-MM-DD)
+			<label>Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
+			
+			<div class="dates">
+				<div class="dateinput">
+					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo get_year($item->temporal_coverage_start); ?>"> 
+					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo get_month($item->temporal_coverage_start); ?>" /> 
+					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo get_day($item->temporal_coverage_start); ?>">
+				</div>
+				
+				<div class="dateinput">
+					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo get_year($item->temporal_coverage_end); ?>"> 
+					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo get_month($item->temporal_coverage_end); ?>" /> 
+					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo get_day($item->temporal_coverage_end); ?>">
+				</div>
+			</div>
 		</div>
 		
 	</fieldset>
@@ -187,12 +197,14 @@
 		<fieldset id="add-files">
 			<legend>Add Files</legend>
 			<div class="field">
+				<label for="add_num_files">Add Files</label>
+				<div class="">
 			<?php 
 				$numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; 
 			?>
 				<?php 
 					text(array('name'=>'add_num_files','size'=>2),$numFiles);
-					submit('Add this many more files', 'add_more_files'); 
+					submit('Add this many files', 'add_more_files'); 
 				?>
 				
 			</div>
@@ -201,9 +213,11 @@
 			<!-- MAX_FILE_SIZE must precede the file input field -->
 				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 					
-			<?php for($i=0;$i<$numFiles;$i++): ?>	
+			<?php for($i=0;$i<$numFiles;$i++): ?>
+			<div class="file">
 				<label for="file[<?php echo $i; ?>]">Find a File</label>
-				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="textinput" />
+				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="textinput" />			
+			</div>
 			<?php endfor; ?>
 			</div>
 		</fieldset>
@@ -238,10 +252,10 @@
 		<fieldset id="miscellaneous">
 			<legend>Miscellaneous</legend>
 			<div class="field">
-	<label for="public">Item is public: <?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></label>
+	<div class="label">Item is public:</div> <div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
 		</div>
 		<div class="field">
-		<label for="featured">Item is featured: <?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></label>
+		<div class="label">Item is featured:</div> <div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
 		</div>
 	</fieldset>
 	

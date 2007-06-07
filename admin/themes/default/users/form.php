@@ -22,8 +22,10 @@
 </div>
 
 <div class="field">
-<label for="active">Active</label>
+<div class="label">Active</div>
+<div class="radio">
 <?php radio(array('name'=>'active', 'id'=>'active'), array('0'=>'Inactive','1'=>'Active'), $user->active); ?>
+</div>
 </div>
 
 <?php if ( has_permission('Users','showRoles') ): ?>

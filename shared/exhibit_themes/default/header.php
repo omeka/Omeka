@@ -18,25 +18,15 @@
 <?php plugin_header(); ?>
 
 </head>
-<body>
+<body id="<?php echo $exhibit->theme; ?>">
 	<div id="wrap">
 		<div id="header">
-			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a> - Sample Exhibit Theme (named &#039;default&#039;)</h1>
+			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a> - Default Exhibit Theme</h1>
 		</div>
 		<div id="content">
 	
 	<?php echo flash(); ?>				
 
-<?php 
-	section_nav(); 
-?>	
-	<ul>
-	<li>The exhibit's title is: <?php echo $exhibit->title; ?></li>
-	<li>The current sections's title is: <?php echo $section->title; ?></li>
-	</ul>
+		<h1><?php echo $exhibit->title; ?></h1>
 	
-	<?php 
-		page_nav(); 
-	?>
-	
-	
+	<h2><?php echo $section->title; ?></h2>			

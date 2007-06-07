@@ -7,8 +7,8 @@ body#login {width:400px;}
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 {font-weight:normal;}
-h1 {font-size:1.2em;line-height:1.66667em; margin-bottom:1.66667em; color:#cb3602;}
-h2 {font-size:2em; line-height:1em;margin-bottom:1em; color:#cb3602;}
+h1 {font-size:1.2em;line-height:1.66667em; margin-bottom:1.66667em; color:#933;}
+h2 {font-size:2em; line-height:1em;margin-bottom:1em; color:#933;}
 h3 {font-size:1.6em; line-height:1.25em; margin-bottom:1.25em;}
 h4 {font-size:1.2em; line-height:1.66667em;margin-bottom:1.66667em;}
 h5 {}
@@ -35,8 +35,8 @@ td,th {padding:1.66667em 0.833333em; line-height:1em;}
 /* Form Elements */
 fieldset {margin-bottom:2em;}
 legend {color:#444; font-size:1.6em; margin-bottom:1.25em; line-height:1.25em;}
-label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display:block;}
-.textinput {margin-bottom:1.66667em; display:block;border:1px solid #A2C9E8;padding:5px;font:1.2em "Frutiger","Univers","Helvetica Neue",arial,helvetica, sans-serif;}
+label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display:block;}
+.textinput {margin-bottom:1.66667em; display:block;}
 
 /* Reusable Classes */
 .hide {text-indent:-1000em; height:0; width:0; overflow:hidden;}
@@ -48,7 +48,7 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 .tags {list-style:none; margin-left:0; padding-left:0;}
 	.tags li {display:inline;}
 
-.error {background:#F1C8BA; color:#cb3602;}
+.error {background:#F1C8BA; color:#933;}
 .alert {background:#fff09e;}
 
 /* == Wrap == */
@@ -56,9 +56,9 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 
 /* == Header == */
 #header {background:#fff;overflow:hidden;padding:0 20px 20px;}
-#header h1 {font-size:2.4em; line-height:0.833333em; width: 240px; float:left;padding-bottom:0;padding-top:1.2em;}
-	#header a {color:#cb3602;}
-	#user-meta { text-align:right;font-size:1.2em;color:#fff;background:#163d5c; margin:0 -20px;border-bottom:0.5em solid #cb3602;padding:0.8333333em 0;}
+#header h1 {font-size:2.4em; line-height:0.833333em; width: 400px; float:left;padding-bottom:0;padding-top:1.2em;}
+	#header a {color:#933;}
+	#user-meta { text-align:right;font-size:1.2em;color:#fff;background:#163d5c; margin:0 -20px;border-bottom:0.5em solid #933;padding:0.8333333em 0;}
 		a#logout { color:#fff; text-decoration:none;border-left:1px dotted #ccc; padding-left:6px;}
 		
 /* == Navigation (of various levels) == */
@@ -68,7 +68,7 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 		#primary-nav a {color:#777; display:block; text-align:left;float:left;padding:30px 30px 0 10px; border-left:1px dotted #ccc;}
 		#primary-nav a:hover { color:#444;}
 	
-	#primary-nav li.current a {background:#fff; color:#cb3602; font-weight:bold;}
+	#primary-nav li.current a {background:#fff; color:#933; font-weight:bold;}
 	
 	#secondary-nav {background:#fff; margin: -20px 0 20px; padding:10px 0 0; overflow:hidden; border-top:1px dotted #ccc;}
 		#secondary-nav li {display:block; float:left;margin-right:20px;}
@@ -87,6 +87,7 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 	#secondary {float:right; width: 400px;}
 	
 	a.edit {}
+	
 	/* Homepage Styles */
 	#recent-items ul {margin-left:0; padding-left:0;}
 		#recent-items li { overflow:hidden; display:block;border-bottom:1px solid #fff;padding:0.833333em;}
@@ -98,7 +99,7 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 			
 	/* Items Browse */
 	table#items {margin-top:1.6667em;}
-	table#items th {color:#cb3602; font-weight:bold;border:1px solid #fff; border-width: 1px 0; background:#fff;}
+	table#items th {color:#933; font-weight:bold;border:1px solid #fff; border-width: 1px 0; background:#fff;}
 	table#items td {border:1px solid #fff; border-width:1px 0;}
 	table#items tr {background:#daedf5;}
 	table#items tr.odd {background:#EEF7FA;}
@@ -108,13 +109,28 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 		.archive-meta form {display:block; float:left; width:300px;}
 		.pagination {float:right; width: 300px;font-size:1.2em; line-height:1.6667em; text-align:right;}
 	
-	/* Items Pages */
-	.field {border-top:1px dotted #A2C9E8; margin-bottom:1px;background:#daedf5; overflow:hidden;padding-top:1.66667em; padding-right:180px;padding-left:20px;}
-		.field label {float:left; width: 240px; font-weight:bold; text-align:right;}
-		.field .textinput {float:right; width:340px;}
+	/* Items Add-Edit pages */
 	
 	.tags li {display:inline;}
 	
+	/* Items Form Page */
+	.field {border-top:1px dotted #A2C9E8; margin-bottom:1px;background:#daedf5; overflow:hidden;padding-top:1.66667em; padding-right:180px;padding-left:20px;}
+		.field label, .field .label {float:left; width: 240px; font-weight:bold; text-align:right; }
+		.field select { margin-left: 40px; margin-bottom:1.6667em;}
+		.field .textinput {float:right; width:340px;}
+		
+		.dates {float:right; width: 340px;}
+			.dateinput {display:inline; margin-right:20px;}
+		#date_day, #date_year, #date_month {display:inline;float:none;}
+		#date_day {width:20px;}
+		#date_month {width:20px;}
+		#date_year {width:40px;}
+		
+		.radio {float:right; width: 340px;}
+		.radio label {width:10em; text-align:left; display:inline; float:none; margin-right:20px;}
+		
+		.file {overflow:hidden;}
+		
 	/* Collections Pages */
 	.collection {overflow:hidden; border-top: 1px dotted #ccc;padding-top:1.66667em;}
 		.collection h3 {float:left; width:260px;padding-bottom:0.833333em;}
@@ -131,9 +147,9 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 			#collection-items a {text-decoration:none;}
 			
 	/* Items Types Pages */
-	.type {overflow:hidden; border-top: 1px dotted #ccc;padding-top:1.66667em;}
-		.type h3 {float:left; width:260px;padding-bottom:0.833333em;}
-		.type p {float:right; width:528px;}
+	.itemtype {overflow:hidden; border-top: 1px dotted #ccc;padding-top:1.66667em;}
+		.itemtype h3 {float:left; width:260px;padding-bottom:0.833333em;}
+		.itemtype p {float:right; width:528px;}
 	
 		#type-info {float:left; width:400px;}
 		#type-items {float:right; width:400px;}
@@ -145,11 +161,7 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 				#type-items .date {float:right; display:block; width:48%;text-align:right;}
 				#type-items a {text-decoration:none;}
 	
-	/* Items Form Page */
-	#date_day, #date_year, #date_month {display:inline;float:none;}
-	#date_day {width:20px;}
-	#date_month {width:20px;}
-	#date_year {width:40px;}
+
 	
 	#file-list {clear:both;}
 	.delete-link {clear:right;}
@@ -159,13 +171,32 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 	
 	/* Settings Pages */
 	
-	
+	/* Themes */
+	.theme {border-top:1px dotted #ccc; overflow:hidden; padding-top:1.25em;}
+	.theme label {font-size:1.6em; line-height:1.25em; margin-bottom:1.25em;}
+		.theme label input {float:left; margin-right:12px; display:inline;}
+		.theme .meta {float:left; width:400px;}
+		.theme .description {float:right; width: 400px;}
+		.theme img {float:left; display:block;}
+		.theme .description p {float:right; width:180px;}
+
+		.theme li {overflow:hidden; border-bottom:1px dotted #ccc; padding:0.83333em 0; margin-left:12px;}
+		.theme .type {float:left; width: 6em;color:#933;}
+		.theme .value {float:right; width: 16em; text-align:right;}
+		
+		
 	/* Exhibits Pages */
+	table#exhibits {margin-top:1.6667em;}
+	table#exhibits th {color:#933; font-weight:bold;border:1px solid #fff; border-width: 1px 0; background:#fff;}
+	table#exhibits td {border:1px solid #fff; border-width:1px 0;}
+	table#exhibits tr {background:#daedf5;}
+	table#exhibits tr.odd {background:#EEF7FA;}
+	table#exhibits thead {border-bottom:1px solid #fff;}
 	
 	
 	/* Users Pages */
 	table#users {margin-top:1.6667em;}
-	table#users th {color:#cb3602; font-weight:bold;border:1px solid #fff; border-width: 1px 0; background:#fff;}
+	table#users th {color:#933; font-weight:bold;border:1px solid #fff; border-width: 1px 0; background:#fff;}
 	table#users td {border:1px solid #fff; border-width:1px 0;}
 	table#users tr {background:#daedf5;}
 	table#users tr.odd {background:#EEF7FA;}
@@ -175,7 +206,7 @@ label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;display
 		#login .field label, #login .field .textinput {float:none; width:auto; text-align:left;}
 		
 /* == Footer == */
-#footer {clear:both; padding:20px 0 0;background:#163d5c;}
+#footer {clear:both; padding:20px 0 0;background:#163d5c; border-top:0.5em solid #933;}
 	#footer p {margin-bottom:0;}
 	#footer a {color:#999; text-decoration:none;}
 	#footer a:hover {color: #ccc;}
