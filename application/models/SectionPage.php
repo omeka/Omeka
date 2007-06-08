@@ -19,6 +19,7 @@ class SectionPage extends Kea_Record
     {
 		$this->hasOne("Section", "SectionPage.section_id");
 		$this->ownsMany("ItemsPages", "ItemsPages.page_id");
+	//	$this->hasMany("Item as Items", "ItemsPages.item_id");
 	}
 	
 	public function getItemCount()

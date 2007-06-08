@@ -193,6 +193,23 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 		height:100px;
 		border: solid 1px black;
 	}
+	#item-select .item-container {
+		float:left;
+		display:block;
+		width:100px;
+		height:100px;
+	}
+	#layout-form {
+		clear:both;
+	}
+	
+	#layout-form .drop-item {
+		display:block;
+		width:100px;
+		height:100px;
+		border: solid 1px black;
+	}
+	
 	.item .item_id {
 		font-style: italic;
 		font-size: 2em;

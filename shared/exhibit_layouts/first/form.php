@@ -1,7 +1,9 @@
 <fieldset>
 	<?php 
 		layout_form_text(1);
-		layout_form_item(2);
+	?>
+	<?php	layout_form_item(2); ?>
+	<?php
 		layout_form_text(2);
 	?>
 	

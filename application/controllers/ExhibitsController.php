@@ -239,7 +239,7 @@ class ExhibitsController extends Kea_Controller_Action
 			
 				//A layout has been chosen for the page
 				$page->layout = $_POST['layout'];
-			
+				$page->save();
 				//We'll need to register this with the session
 				$this->session->page = $page;
 			
@@ -291,6 +291,17 @@ class ExhibitsController extends Kea_Controller_Action
 						
 						$this->_redirect('exhibits/editPage/'.$page->id.'/'.$paginationPage);
 						return;
+						
+					}elseif(array_key_exists('delete_page', $_POST)) {
+						
+						//Cancel/delete this page and return to the section form
+						unset($this->session->page);
+						
+						if($page->exists()) {
+							$page->delete();
+						}
+						
+						$this->_redirect('exhibits/editSection/'.$section->id);
 					}
 				}
 			}

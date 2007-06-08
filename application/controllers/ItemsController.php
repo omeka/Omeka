@@ -156,12 +156,10 @@ class ItemsController extends Kea_Controller_Action
 							'pagination_url' => $paginationUrl);
 							
 		//check to see if these options were changed by request vars
-		foreach ($options as $key => $value) {
-			if($reqOption = $this->_getParam($key)) {
-				$options[$key] = $reqOption;
-			}
-		}
+		$reqOptions = $this->_getAllParams();
 		
+		$options = array_merge($options, $reqOptions);
+
 		$select->limitPage($options['page'], $options['per_page']);
 		
 		$res = $select->fetchAll();

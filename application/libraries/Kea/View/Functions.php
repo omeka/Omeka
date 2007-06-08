@@ -605,7 +605,7 @@ function archive_image( $record, $field , $props, $width, $height, $abs, $web,$r
  *	The pagination function from the old version of the software
  *  It looks more complicated than it might need to be, but its also more flexible.  We may decide to simplify it later
  */
-function pagination( $page = 1, $per_page, $total, $num_links, $link, $page_query = null )
+function pagination( $page = 1, $per_page, $total, $num_links, $link=null, $page_query = null )
 	{
 		$num_pages = ceil( $total / $per_page );
 		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;

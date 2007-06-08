@@ -13,6 +13,7 @@
 
 <!-- JavaScripts -->
 <?php js('prototype'); ?>
+<?php js('prototype-extensions'); ?>
 <?php js('scriptaculous');?>
 <?php js('globals'); ?>
 <!-- Plugin Stuff -->
