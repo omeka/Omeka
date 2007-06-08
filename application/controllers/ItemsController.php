@@ -206,6 +206,7 @@ class ItemsController extends Kea_Controller_Action
 	{
 		if(!empty($_POST))
 		{
+			
 			$conn = $this->getConn();
 			$conn->beginTransaction();
 			
@@ -306,6 +307,15 @@ class ItemsController extends Kea_Controller_Action
 			catch(Doctrine_Validator_Exception $e) {
 				$item->gatherErrors($e);
 				$conn->rollback();
+				
+				//Reload the files b/c of a stupid bug
+				foreach ($item->Files as $key => $file) {
+					if(!$file->exists()) {
+						$file->delete();
+					}
+					unset($item->Files[$key]);
+				}
+				
 				return false;
 			}catch(Exception $e) {
 				$this->flash($e->getMessage());

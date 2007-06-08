@@ -90,8 +90,7 @@ class Item extends Kea_Record
 		$this->index('coll', array('fields' => array('collection_id')));
 		$this->index('user', array('fields' => array('user_id')));
 	}
-
-
+	
 /* @todo Uncomment this and finish optimizing the queries	
 	public function get($name) {
 		switch ($name) {

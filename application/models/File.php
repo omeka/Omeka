@@ -39,7 +39,7 @@ class File extends Kea_Record {
         $this->hasColumn('date', 'date', null);
         $this->hasColumn('added', 'timestamp', null);
         $this->hasColumn('modified', 'timestamp', null);
-        $this->hasColumn('item_id', 'integer');
+        $this->hasColumn('item_id', 'integer', null, array('range'=>array('1')));
         $this->hasColumn('format', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('transcriber', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('producer', 'string', null, array('notnull' => true, 'default'=>''));
