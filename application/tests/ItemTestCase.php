@@ -108,7 +108,8 @@ class ItemTestCase extends OmekaTestCase
 		//Test for pulling inactive/active plugin metadata
 	}
 	
-	public function testSearchAggregation()
+/*
+		public function testSearchAggregation()
 	{
 		$i = $this->i1;
 		$if = $i->ItemsFulltext;
@@ -121,6 +122,7 @@ class ItemTestCase extends OmekaTestCase
 		sort($array);
 		$this->assertEqual($array, array ( 0 => 'Item1', 1 => 'Metatext1', 2 => 'Tag1', 3 => 'newTagged'));
 	}
+*/	
 }
  
 ?>

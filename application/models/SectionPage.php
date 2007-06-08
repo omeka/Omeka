@@ -7,6 +7,7 @@ class SectionPage extends Kea_Record
 {
 	public function setTableDefinition()
     {
+		$this->option('type', 'MYISAM');
 		$this->setTableName('section_pages');
 		$this->hasColumn("section_id", "integer",null,"notnull");
 	

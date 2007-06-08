@@ -9,8 +9,6 @@ require_once 'ItemsTags.php';
 require_once 'Metatext.php';
 require_once 'ItemMetatext.php';
 require_once 'ItemsFavorites.php';
-require_once 'ItemsFulltext.php';
-
 require_once 'ItemsPages.php';
 require_once 'Section.php';
 
@@ -33,7 +31,6 @@ class Item extends Kea_Record
 		$this->ownsMany("ItemMetatext as Metatext", "ItemMetatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
-		$this->ownsOne("ItemsFulltext", "ItemsFulltext.item_id");
 		$this->ownsMany("ItemsTags", "ItemsTags.item_id");
 
 		$this->ownsMany("ItemsPages","ItemsPages.item_id");
@@ -55,10 +52,11 @@ class Item extends Kea_Record
 	}
 	
 	public function setTableDefinition() {
-//		$this->option('type', 'MYISAM');
+		
+		$this->option('type', 'MYISAM');
 		$this->setTableName('items');
 		
-		$this->hasColumn("title","string",255, "notblank|unique");
+		$this->hasColumn("title","string",255, array('notnull'=>true, 'notblank'=>true, 'unique'=>true, 'default'=>''));
         $this->hasColumn('publisher', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('language', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('relation', 'string', null, array('notnull' => true, 'default'=>''));
@@ -89,6 +87,40 @@ class Item extends Kea_Record
 		$this->index('type', array('fields' => array('type_id')));
 		$this->index('coll', array('fields' => array('collection_id')));
 		$this->index('user', array('fields' => array('user_id')));
+		
+		$this->index('search_all', array('fields' => array( 
+												'title', 
+												'publisher', 
+												'language', 
+												'relation', 
+												'spatial_coverage', 
+												'rights', 
+												'description', 
+												'source', 
+												'subject', 
+												'creator', 
+												'additional_creator', 
+												'contributor', 
+												'rights_holder', 
+												'provenance', 
+												'citation'),
+											'type' => 'fulltext'));
+		$this->index('title_search', array( 'fields' => 'title', 'type' => 'fulltext'));
+ 		$this->index('publisher_search', array( 'fields' => 'publisher', 'type' => 'fulltext'));
+		$this->index('language_search', array( 'fields' => 'language', 'type' => 'fulltext'));
+ 		$this->index('relation_search', array( 'fields' => 'relation', 'type' => 'fulltext'));
+ 		$this->index('spatial_coverage_search', array( 'fields' => 'spatial_coverage', 'type' => 'fulltext'));
+ 		$this->index('rights_search', array( 'fields' => 'rights', 'type' => 'fulltext'));
+ 		$this->index('description_search', array( 'fields' => 'description', 'type' => 'fulltext'));
+ 		$this->index('source_search', array( 'fields' => 'source', 'type' => 'fulltext'));
+ 		$this->index('subject_search', array( 'fields' => 'subject', 'type' => 'fulltext'));
+ 		$this->index('creator_search', array( 'fields' => 'creator', 'type' => 'fulltext'));
+ 		$this->index('additional_creator_search', array( 'fields' => 'additional_creator', 'type' => 'fulltext'));
+ 		$this->index('contributor_search', array( 'fields' => 'contributor', 'type' => 'fulltext'));
+ 		$this->index('rights_holder_search', array( 'fields' => 'rights_holder', 'type' => 'fulltext'));
+ 		$this->index('provenance_search', array( 'fields' => 'provenance', 'type' => 'fulltext'));
+ 		$this->index('citation_search', array( 'fields' => 'citation', 'type' => 'fulltext'));
+									
 	}
 	
 /* @todo Uncomment this and finish optimizing the queries	

@@ -23,6 +23,7 @@ class File extends Kea_Record {
 	}
 
 	public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
 		$this->setTableName('files');
 		
        	$this->hasColumn('title', 'string', null, array('notnull' => true, 'default'=>''));

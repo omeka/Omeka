@@ -46,6 +46,7 @@ class User extends Kea_Record {
 	}
 	
     public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
 		$this->setTableName('users');
         $this->hasColumn('username', 'string', 30, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
         $this->hasColumn('password', 'string', 40, array('notnull' => true, 'notblank'=>true));

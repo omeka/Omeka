@@ -13,6 +13,7 @@ class ItemsFavorites extends Kea_JoinRecord
 	}
 	
 	public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
 		$this->hasColumn("item_id", "integer", null, "notnull");
 		$this->hasColumn("user_id", "integer", null, "notnull");
 		$this->hasColumn("added", "timestamp");

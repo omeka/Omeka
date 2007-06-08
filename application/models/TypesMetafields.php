@@ -18,6 +18,7 @@ class TypesMetafields extends Kea_JoinRecord
 	}
 	
 	public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
 		$this->hasColumn("type_id", "integer", null, "notnull");
 		$this->hasColumn("metafield_id", "integer", null, "notnull");
 		$this->index('type', array('fields' => array('type_id')));

@@ -1,5 +1,6 @@
 <?php
 require_once 'Section.php';
+require_once 'Tag.php';
 require_once 'Taggable.php';
 require_once 'ExhibitsTags.php';
 /**
@@ -12,6 +13,7 @@ class Exhibit extends Kea_Record
 	
     public function setTableDefinition()
     {
+		$this->option('type', 'MYISAM');
 		$this->setTableName('exhibits');
 		$this->hasColumn("title", "string", 255, "unique|notblank");
 		$this->hasColumn("description", "string");

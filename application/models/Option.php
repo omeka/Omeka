@@ -5,6 +5,7 @@
  **/
 class Option extends Kea_Record { 
     public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
 		$this->setTableName('options');
 		
         $this->hasColumn("name", "string", 30, "unique|notnull");

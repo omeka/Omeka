@@ -13,9 +13,9 @@
 
 	<h2>Browse Items (<?php echo $total_results;?> items total)</h2>
 	<div class="archive-meta">
-		<form id="search">
+		<form id="search" action="<?php echo uri('items/browse'); ?>">
 			<input type="text" name="search" />
-			<input type="submit" name="submit" value="Search" />
+			<input type="submit" name="submit_search" value="Search" />
 		</form>
 		<div class="pagination"><?php echo $pagination; ?></div>
 	</div>

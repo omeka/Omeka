@@ -23,6 +23,7 @@ class Metafield extends Kea_Record {
 	}
 
 	public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
    		$this->setTableName('metafields');
 		
 		$this->hasColumn("name", "string", 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));

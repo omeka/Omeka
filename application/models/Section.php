@@ -9,6 +9,7 @@ class Section extends Kea_Record
 {
     public function setTableDefinition()
     {
+		$this->option('type', 'MYISAM');
 		$this->setTableName('sections');
 		$this->hasColumn("title", "string", 255,"notblank");
 		$this->hasColumn("description", "string");

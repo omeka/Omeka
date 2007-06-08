@@ -14,6 +14,7 @@ class Plugin extends Doctrine_Record
 	}
 	
  	public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
 		$this->setTableName("plugins");
        	$this->hasColumn('name', 'string', 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
         $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));

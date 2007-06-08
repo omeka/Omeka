@@ -15,6 +15,7 @@ class UsersActivations extends Kea_JoinRecord
 	
 	public function setTableDefinition()
 	{
+		$this->option('type', 'MYISAM');
 		$this->hasColumn("user_id", "integer", null, "notnull");
 		$this->hasColumn("url", "string", 100);
 		$this->hasColumn("added", "timestamp");

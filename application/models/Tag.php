@@ -19,6 +19,7 @@ class Tag extends Kea_Record {
 	}
 	
 	public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
 		$this->setTableName('tags');
    		$this->hasColumn("name","string", 255, "unique|notblank");
  	}

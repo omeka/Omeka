@@ -132,9 +132,11 @@ class ItemsController extends Kea_Controller_Action
 		
 		//Check for a search
 		if($search = $this->_getParam('search')) {
-			$select->from('items i', 'MATCH (ft.text) AGAINST ('.$select->quote($search).') as relevancy');
-			$select->joinInner("items_fulltext ft","ft.item_id = i.id");
-			$select->where("MATCH (ft.text) AGAINST (? WITH QUERY EXPANSION)", $search);
+			
+			$matchClause = "i.title, i.publisher, i.language, i.relation, i.spatial_coverage, i.rights, i.description, i.source, i.subject, i.creator, i.additional_creator, i.contributor, i.rights_holder, i.provenance, i.citation";
+			
+			$select->from('items i', "MATCH ($matchClause) AGAINST (".$select->quote($search).' WITH QUERY EXPANSION) as relevancy');
+			$select->where("MATCH ($matchClause) AGAINST (? WITH QUERY EXPANSION)", $search);
 			$select->order("relevancy DESC");
 		}
 		
@@ -143,7 +145,6 @@ class ItemsController extends Kea_Controller_Action
 		$resultCount->resetFrom('items i','COUNT(*)');
 		$resultCount->unsetOrderBy();
 		$total_results = $resultCount->fetchOne();
-		
 		
 		/** 
 		 * Now process the pagination
@@ -159,11 +160,11 @@ class ItemsController extends Kea_Controller_Action
 		$reqOptions = $this->_getAllParams();
 		
 		$options = array_merge($options, $reqOptions);
-
+		
 		$select->limitPage($options['page'], $options['per_page']);
-		
+				
 		$res = $select->fetchAll();
-		
+				
 		foreach ($res as $key => $value) {
 			$ids[] =  $value['id'];
 		}		

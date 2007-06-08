@@ -8,6 +8,7 @@ class ExhibitsTags extends Kea_JoinRecord
 {
     public function setTableDefinition()
     {
+		$this->option('type', 'MYISAM');
 		$this->hasColumn("exhibit_id", "integer",null,"notnull");
 		$this->hasColumn("tag_id", "integer",null,"notnull");
 		$this->hasColumn("user_id", "integer", null,"notnull");

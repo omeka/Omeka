@@ -12,6 +12,7 @@ class Metatext extends Kea_Record {
 	}
 
 	public function setTableDefinition() {
+		$this->option('type', 'MYISAM');
    	//	$this->setTableName('metatext');
         $this->hasColumn('item_id', 'integer', null, array('notnull' => true, 
                                                         'unsigned' => true));

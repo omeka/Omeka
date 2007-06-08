@@ -609,7 +609,7 @@ function pagination( $page = 1, $per_page, $total, $num_links, $link=null, $page
 	{
 		$num_pages = ceil( $total / $per_page );
 		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;
-
+				
 		$query = !empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : null;
 		
 		if ( $page_query )

@@ -52,12 +52,10 @@ if(isset($config->log)) {
 
 
 // tack on the search capabilities
-require_once 'Kea'.DIRECTORY_SEPARATOR.'SearchListener.php';
 require_once 'Kea'.DIRECTORY_SEPARATOR.'TimestampListener.php';
 $chainListeners = new Doctrine_EventListener_Chain();
 
 $chainListeners->add(new Kea_TimestampListener());
-$chainListeners->add(new Kea_SearchListener());
 
 $manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
 

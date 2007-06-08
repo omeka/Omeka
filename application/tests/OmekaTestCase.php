@@ -28,7 +28,6 @@ abstract class OmekaTestCase extends UnitTestCase
 					'ExhibitsTags',
 					'Item',
 					'ItemsFavorites',
-					'ItemsFulltext',
 					'ItemsTags',
 					'Metafield',
 					'Metatext',
