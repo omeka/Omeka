@@ -10,7 +10,7 @@ h1,h2,h3,h4,h5,h6 {font-weight:normal;}
 h1 {font-size:1.2em;line-height:1.66667em; margin-bottom:1.66667em; color:#933;}
 h2 {font-size:2em; line-height:1em;margin-bottom:1em; color:#933;}
 h3 {font-size:1.6em; line-height:1.25em; margin-bottom:1.25em;}
-h4 {font-size:1.2em; line-height:1.66667em;margin-bottom:1.66667em;}
+h4 {font-size:1.4em; line-height:1.4825em;margin-bottom:1.4825em; font-weight:bold;}
 h5 {}
 h6 {}
 
@@ -22,7 +22,7 @@ a:active {color:#369;}
 h1 a, h2 a, h3 a {text-decoration:none;}
 
 /* Misc */
-p,ul,ol,dl,table {font-size:1.2em; line-height:1.66667em; margin-bottom:1.66667em;}
+p,ul,ol,dl,table,div.editable {font-size:1.2em; line-height:1.66667em; margin-bottom:1.66667em;}
 ul,ol {margin-left:1.5em;}
 	li {line-height:1.66667em;}
 dl dt, dl dd {display:block;}

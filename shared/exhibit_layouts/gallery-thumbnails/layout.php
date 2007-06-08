@@ -1,61 +1,73 @@
 <?php 
-	//Name: Super dooper layout;
-	//Description: Here is the description for the layout;
-	//Author: Kris Kelly; 
+	//Name: Thumbnail Gallery;
+	//Description: Displays a gallery of up to 12 items;
+	//Author: Jeremy Boggs; 
 ?>
 
-<div class="first">
-	<?php 
-		echo $section->title; 
-	?>
-	
+<div class="gallery-thumbs">
+
 	<div class="item">
 		<?php $item = page_item(1); ?>
-		<?php echo $item->title; ?>
-	</div>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
+			</div>
 	<div class="item">
 		<?php $item = page_item(2); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
 	<div class="item">
 		<?php $item = page_item(3); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
 	<div class="item">
 		<?php $item = page_item(4); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
 	<div class="item">
 		<?php $item = page_item(5); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php if($item = page_item(6)):?>
 	<div class="item">
 		<?php $item = page_item(6); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php endif; ?>
+	<?php if($item = page_item(7)):?>
 	<div class="item">
 		<?php $item = page_item(7); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php endif; ?>
+	<?php if($item = page_item(8)):?>
 	<div class="item">
 		<?php $item = page_item(8); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php endif; ?>
+	<?php if($item = page_item(9)):?>
 	<div class="item">
 		<?php $item = page_item(9); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php endif; ?>
+	<?php if($item = page_item(10)):?>
 	<div class="item">
 		<?php $item = page_item(10); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php endif; ?>
+	<?php if($item = page_item(11)):?>
 	<div class="item">
 		<?php $item = page_item(11); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php endif; ?>
+	<?php if($item = page_item(12)):?>
 	<div class="item">
 		<?php $item = page_item(12); ?>
-		<?php echo $item->title; ?>
+		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 	</div>
+	<?php endif; ?>
+	
 
 </div>

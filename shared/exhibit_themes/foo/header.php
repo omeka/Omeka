@@ -9,7 +9,6 @@
 
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php exhibit_css('screen'); ?>" />
-<link rel="stylesheet" media="screen" href="<?php layout_css(); ?>">
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
 
 <!-- JavaScripts -->
@@ -19,17 +18,15 @@
 <?php plugin_header(); ?>
 
 </head>
-<body id="<?php echo $exhibit->theme; ?>">
+<body>
 	<div id="wrap">
 		<div id="header">
-			<h1><?php echo $exhibit->title; ?></h1>
-			<?php section_nav();?>
+			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a> - Default Exhibit Theme</h1>
 		</div>
 		<div id="content">
 	
 	<?php echo flash(); ?>				
 
-		
+		<h1><?php echo $exhibit->title; ?></h1>
 	
-	<h2><?php echo $section->title; ?></h2>
-	<?php page_nav(); ?>		
+	<h2><?php echo $section->title; ?></h2>			

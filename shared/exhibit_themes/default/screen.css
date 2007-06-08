@@ -1,8 +1,7 @@
-body {
-	background-color:#006633;
-}
+body {width:774px; margin:0 auto; padding:32px 0; font: 62.5% Verdana, Arial, sans-serif;color:#555; background:#ddd;}
 
-a:visited {
-	text-decoration: none;
-	color: #999;
-}
+a img {border:none;}
+#wrap {background:#fff; overflow:hidden;}
+
+#header {background:#38c; color:#fff; padding:18px;}
+#content {padding:18px 0 18px 18px;}

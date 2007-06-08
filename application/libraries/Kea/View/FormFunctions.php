@@ -232,7 +232,7 @@
 						$input = '<input type="text" class="textinput" name="Metatext['.$metafield->id.'][text]" id="'.$metafieldInputId.'" value="'.$item->Metatext[$metafield->id]->text.'" />';
 						break;
 					case 'textarea':
-						$input = '<textarea class="textinput" name="Metatext['.$metafield->id.'][text] id="'.$metafieldInputId.'">';
+						$input = '<textarea rows="15" cols="50" class="textinput" name="Metatext['.$metafield->id.'][text] id="'.$metafieldInputId.'">';
 						$input .= $item->Metatext[$metafield->id]->text;
 						$input .= '</textarea>';
 						break;
