@@ -19,4 +19,8 @@
 		The value of the first piece of text is: <?php echo page_text(1); ?>
 	</div>
 
+
+	<div class="text">
+		The value of the second piece of text is: <?php echo page_text(2); ?>
+	</div>
 </div>

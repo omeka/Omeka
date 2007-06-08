@@ -22,6 +22,15 @@ class Section extends Kea_Record
 		$this->setAttribute(Doctrine::ATTR_COLL_KEY, 'section_order');
     }
 
+	//Deleting a section must re-order the other sections
+	public function delete()
+	{
+		$exhibit = $this->Exhibit;
+		$retVal = parent::delete();
+		
+		$exhibit->reorderSections();
+	}
+
 	public function reorderPages()
 	{
 		$dql = "SELECT p.* FROM SectionPage p WHERE p.section_id = ? ORDER BY p.page_order ASC";

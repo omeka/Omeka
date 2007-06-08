@@ -35,8 +35,14 @@ class ExhibitsController extends Kea_Controller_Action
 		
 //		$theme = $exhibit->theme;
 		
-		$ps = $this->getSectionAndPage($exhibit);
-		extract($ps);
+		$section_order = $this->_getParam('section_order');
+		$section = $exhibit->getSection($section_order);
+		
+		if($section) {
+			$page_order = $this->_getParam('page_order');
+
+			$page = $section->getPage($page_order);			
+		}
 		
 		$layout = $page->layout;
 		
@@ -75,6 +81,7 @@ class ExhibitsController extends Kea_Controller_Action
 				$this->render($headerPath, compact('section','exhibit','page'));
 			}
 			
+			Zend::dump( $layoutPath );
 			if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$layoutPath)) {
 				$this->render($layoutPath, compact('section','exhibit','page'));
 			}
@@ -86,20 +93,6 @@ class ExhibitsController extends Kea_Controller_Action
 			$this->render('exhibits/show.php',compact('theme','layout','exhibit','section'));
 		}
 		
-	}
-	
-	protected function getSectionAndPage($exhibit)
-	{
-		$section_order = $this->_getParam('section_order');
-		$section = $exhibit->getSection($section_order);
-		
-		if($section) {
-			$page_order = $this->_getParam('page_order');
-			$page = $section->getPage($page_order);			
-		}
-
-		
-		return compact('page','section');
 	}
 	
 	public function addAction()
@@ -240,8 +233,8 @@ class ExhibitsController extends Kea_Controller_Action
 				//A layout has been chosen for the page
 				$page->layout = $_POST['layout'];
 				$page->save();
-				//We'll need to register this with the session
-				$this->session->page = $page;
+				
+				$this->_redirect('exhibits/editPage/' . $page->id);
 			
 			}elseif(array_key_exists('change_layout', $_POST)) {
 				
@@ -352,7 +345,6 @@ class ExhibitsController extends Kea_Controller_Action
 		$section = $page->Section;
 		
 		$page->delete();
-		$section->reorderPages();
 		
 		$this->_redirect('exhibits/editSection/'.$section->id);
 	}

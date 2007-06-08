@@ -22,6 +22,14 @@ class SectionPage extends Kea_Record
 	//	$this->hasMany("Item as Items", "ItemsPages.item_id");
 	}
 	
+	public function delete()
+	{
+		$section = $this->Section;
+		$retVal = parent::delete();
+		
+		$section->reorderPages();
+	}
+	
 	public function getItemCount()
 	{
 		$sql = "SELECT COUNT(*) FROM ".$this->getTableName('ItemsPages')." p WHERE p.page_id = ? AND p.item_id IS NOT NULL";
