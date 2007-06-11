@@ -31,6 +31,40 @@ class ItemsController extends Kea_Controller_Action
 		$this->_forward('Tags', 'browse', array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
 	}
 	
+	protected function search( $select, $terms)
+	{
+		$conn = $this->getConn();
+		$conn->execute("CREATE TEMPORARY TABLE temp_search (id BIGINT AUTO_INCREMENT, item_id BIGINT UNIQUE, PRIMARY KEY(id))");
+		
+		$itemSelect = clone $select;
+		
+		//Search the items table	
+		$itemsClause = "i.title, i.publisher, i.language, i.relation, i.spatial_coverage, i.rights, i.description, i.source, i.subject, i.creator, i.additional_creator, i.contributor, i.rights_holder, i.provenance, i.citation";
+		
+		$itemSelect->where("MATCH ($itemsClause) AGAINST (? WITH QUERY EXPANSION)", $terms);
+				
+		//Grab those results, place in the temp table		
+		$insert = "INSERT INTO temp_search (item_id) ".$itemSelect->__toString();
+		$conn->execute($insert);
+		
+		
+		//Search the metatext table
+		$mSelect = clone $select;
+		$metatextClause = "m.text";
+		$mSelect->joinInner("metatext m", "m.item_id = i.id");
+		$mSelect->where("MATCH ($metatextClause) AGAINST (? WITH QUERY EXPANSION)", $terms);
+	//	echo $mSelect;
+		
+		//Put those results in the temp table
+		$insert = "REPLACE INTO temp_search (item_id) ".$mSelect;
+		$conn->execute($insert);
+		
+	//	Zend::dump( $conn->execute("SELECT * FROM temp_search")->fetchAll() );exit;
+		
+		$select->joinInner('temp_search ts', 'ts.item_id = i.id');
+		$select->order('ts.id ASC');
+	}
+	
 	/**
 	 * New Strategy: this will run a SQL query that selects the IDs, then use that to hydrate the Doctrine objects.
 	 * Stupid Doctrine.  Maybe their new version will be better.
@@ -39,6 +73,7 @@ class ItemsController extends Kea_Controller_Action
 	 **/
 	public function browseAction()
 	{	
+		
 		require_once 'Kea/Select.php';
 		$select = new Kea_Select($this->getConn());
 	
@@ -128,16 +163,10 @@ class ItemsController extends Kea_Controller_Action
 		if($recent = $this->_getParam('recent')) {
 			$select->order('i.added DESC');
 		}
-		
-		
+
 		//Check for a search
 		if($search = $this->_getParam('search')) {
-			
-			$matchClause = "i.title, i.publisher, i.language, i.relation, i.spatial_coverage, i.rights, i.description, i.source, i.subject, i.creator, i.additional_creator, i.contributor, i.rights_holder, i.provenance, i.citation";
-			
-			$select->from('items i', "MATCH ($matchClause) AGAINST (".$select->quote($search).' WITH QUERY EXPANSION) as relevancy');
-			$select->where("MATCH ($matchClause) AGAINST (? WITH QUERY EXPANSION)", $search);
-			$select->order("relevancy DESC");
+			$this->search($select, $search);
 		}
 		
 		//Before the pagination, please grab the number of results that this full query will return
@@ -162,8 +191,13 @@ class ItemsController extends Kea_Controller_Action
 		$options = array_merge($options, $reqOptions);
 		
 		$select->limitPage($options['page'], $options['per_page']);
+
+
 				
 		$res = $select->fetchAll();
+		
+		//Drop the search table if it exists
+		$this->getConn()->execute("DROP TABLE IF EXISTS temp_search");
 				
 		foreach ($res as $key => $value) {
 			$ids[] =  $value['id'];
