@@ -170,14 +170,11 @@ class UsersController extends Kea_Controller_Action
 	
 	public function loginAction()
 	{
-		require_once 'Zend/Session.php';
-
-		$session = new Zend_Session;
-		
-		echo $session->redirect;
 		if (!empty($_POST)) {
 			
-			
+			require_once 'Zend/Session.php';
+
+			$session = new Zend_Session;
 			
 			$filterPost = new Zend_Filter_Input($_POST);
 			$auth = $this->_auth;
