@@ -170,11 +170,14 @@ class UsersController extends Kea_Controller_Action
 	
 	public function loginAction()
 	{
+		require_once 'Zend/Session.php';
+
+		$session = new Zend_Session;
+		
+		echo $session->redirect;
 		if (!empty($_POST)) {
 			
-			require_once 'Zend/Session.php';
-
-			$session = new Zend_Session;
+			
 			
 			$filterPost = new Zend_Filter_Input($_POST);
 			$auth = $this->_auth;
@@ -189,8 +192,9 @@ class UsersController extends Kea_Controller_Action
 				if($this->_getParam('noRedirect')) {
 					$this->_forward('index', 'home');
 				} else {
-					$this->_redirect('/');
-				}				
+					$this->_redirect($session->redirect);
+					unset($session->redirect);
+				}
 				return;
 			}
 			$this->render('users/login.php', array('errorMessage' => $token->getMessage()));

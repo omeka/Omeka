@@ -134,6 +134,9 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 			if (!$auth->isLoggedIn()) {
 				// capture the intended controller / action for the redirect
 				$session = new Zend_Session;
+				$session->redirect = $request->getPathInfo();
+				
+				// do we need these sessions?  possibly delete
 				$session->controller = $request->getControllerName();
 				$session->action = $request->getActionName();
 
