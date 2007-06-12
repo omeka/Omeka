@@ -1,6 +1,6 @@
 <?php head(); ?>
 <h2>Tags</h2>
 <?php
-tag_cloud($tags, 2, "whatever", 4, 1);
+tag_cloud($tags, "whatever");
 ?>
 <?php foot(); ?>

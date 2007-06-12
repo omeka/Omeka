@@ -11,11 +11,85 @@ include_once 'ExhibitFunctions.php';
  * They purposely do not use objects in order to simplify the theme
  * writer's need to understand the underlying system at work.
  * 
- * However, they make use of Zend::registry a lot, which may be a
- * speed issue in the long term.
- * 
  * @package Omeka
  */
+
+/**
+ * Default display for a given item type
+ * Example: Still Image would display a fullsize image, Moving Image would embed the movie via object tag
+ *
+ * @return void
+ **/
+function display_item($item, $props = array()) {
+	switch ($item->Type->name) {
+		case 'Document':
+			echo nls2p($item->Metatext('Text'));
+			break;
+		
+		case 'Still Image':
+			fullsize($item);
+			break;
+			
+		case 'Moving Image':
+			$file = $item->Files[0];
+			
+			$defaults = array(
+						'width' => 320, 
+						'height' => 240, 
+						'autostart' => '0', 
+						'ShowControls'=>'1', 
+						'ShowStatusBar' => '0', 
+						'ShowDisplay'=>'0');
+					
+			$defaults = array_merge($defaults, $props);
+			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
+			
+			switch ($file->mime_browser) {
+				//WMV & AVI
+				case 'video/avi':
+				case 'video/msvideo':
+				case 'video/x-msvideo':
+				case 'video/x-ms-wmv':
+					$html 	 = 	'<object id="MediaPlayer" width="'.$defaults['width'].'" height="'.$defaults['height'].'"';
+					$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
+					$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
+					$html	.=	'<param name="FileName" value="'.$path.'">'."\n";
+					$html	.=	'<param name="autostart" value="'.($defaults['autostart'] ? 'true' : 'false').'">'."\n";
+					$html	.=	'<param name="ShowControls" value="'.($defaults['ShowControls'] ? 'true' : 'false').'">'."\n";
+					$html	.=	'<param name="ShowStatusBar" value="'.($defaults['ShowStatusBar'] ? 'true' : 'false').'">'."\n";
+					$html	.=	'<param name="ShowDisplay" value="'.($defaults['ShowDisplay'] ? 'true' : 'false').'">'."\n";
+					$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
+					$html	.=	' width="'.$defaults['width'].'" height="'.$defaults['height'].'"'; 		
+					$html	.=	' ShowControls="'.$defaults['ShowControls'].'" ShowStatusBar="'.$defaults['ShowStatusBar'].'"'; 
+					$html	.=	' ShowDisplay="'.$defaults['ShowDisplay'].'" autostart="'.$defaults['autostart'].'"></embed></object>';
+					echo $html;
+					break;
+				
+				//MOV
+				case 'mov':
+
+					break;
+					
+				default:
+					# code...
+					break;
+			}
+			
+			break;
+			
+		case 'Oral History':
+		case 'Sound':
+		case 'Website':
+		case 'Event':
+		case 'Email':
+		case 'Lesson Plan':
+		case 'Hyperlink':
+		case 'Person':
+		default:
+			# code...
+			break;
+	}
+}
 
 /**
  * Simple math for determining whether a number is odd or even
@@ -122,21 +196,7 @@ function foot($vars = array(), $file = 'footer') {
 	common($file, $vars);
 }
 
-/**
- * Simple access to form errors
- * 
- * @example error($item, 'title');
- * @return void
- * 
- **/
-function error($record, $field_name = null) {
-	$error = $record->getErrorMsg($field_name);
-	if(!empty($error)) {
-		echo 'Error: '.$error;
-	}
-}
-
-function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units = 'em', $return = false )
+function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
 {
 	if(!$tags){
 		$html = '<div class="error">There are no tags to display</div>';
@@ -147,14 +207,27 @@ function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units
 		}
 	} 
 	
-	$html = '';
+	//Get the largest value in the tags array
+	$largest = 0;
+	foreach ($tags as $tag) {
+		if($tag["tagCount"] > $largest) {
+			$largest = $tag["tagCount"];
+		}
+	}
+	$html = '<div class="hTagcloud">';
+	$html .= '<ul class="popularity">';
+	
+	if($largest < $maxClasses) {
+		$maxClasses = $largest;
+	}
+	
 	foreach( $tags as $tag )
 	{
-		$size = round( ( ( $tag["tagCount"] / $largest ) * $max ), 3 );
-		
-		$size = ($size < $min) ? $min : $size;
+		$size = ($tag["tagCount"] * $maxClasses) / $largest - 1;
 
-		$html .= '<span style="font-size:' . $size . $units . '">';
+		$class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
+
+		$html .= '<li class="' . $class . '">';
 
 		if( $link )
 		{
@@ -168,10 +241,10 @@ function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units
 			$html .= '</a>';
 		}
 
-		$html .= '</span>' . "\n";
-
-	
+		$html .= '</li>' . "\n";
 	}
+ 	$html .= '</ul></div>';
+
 	if($return) return $html;
 	echo $html;
 }
@@ -182,7 +255,8 @@ function tag_cloud($tags, $largest, $link = null, $max = '4', $min = '1', $units
  * Generates an url given the name of a route.
  * 
  * @param string $urlEnd The controller/action/parameter that specifies the link.
- * @example url('items/browse/'.$item->id);
+ * @example uri('items/browse/'.$item->id); 
+ * @todo Work without mod_rewrite enabled: uri('items/show/3') -> ?controller=items&action=show&id=3
  * @return string Url for the link href attribute.
  **/
 function uri($urlEnd)
@@ -331,7 +405,7 @@ function current_user_tags($item)
 	if(!$item->exists()) {
 		return false;
 	}
-	return get_tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
+	return tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
 }
 
 /**
@@ -359,9 +433,24 @@ function total_types($return = false) {
 	return _get_model_total('Types',$return);
 }
 
+function total_results($return = false) {
+	if(Zend::isRegistered('total_results')) {
+		$count = Zend::Registry('total_results');
+		
+		if($return) return $count;
+		echo $count;
+	}
+}
+
 function _get_model_total($controller,$return) {
 	$totalVar = 'total_'.strtolower($controller);
-	$count = _make_omeka_request($controller,'browse',array(),$totalVar);
+	
+	if(Zend::isRegistered($totalVar)) {
+		$count = Zend::Registry($totalVar);
+	}else {
+		$count = _make_omeka_request($controller,'browse',array(),$totalVar);
+	}
+	
 //	if($count === null ) $count = 0;
 	if($return) return $count;
 	echo $count;
@@ -373,25 +462,40 @@ function _get_model_total($controller,$return) {
  * @return Doctrine_Collection
  **/
 function recent_tags($num = 30) {
-	return get_tags(array('recent'=>true,'limit'=>$num));
+	return tags(array('recent'=>true,'limit'=>$num));
 }
 
 function recent_items($num = 10) {
-	return get_items(array('recent'=>true,'limit'=>$num));
+	return items(array('recent'=>true,'limit'=>$num));
 }
 
-function get_tags(array $params = array()) 
+function tags(array $params = array()) 
 {
+	if( empty($params) && Zend::isRegistered('tags')) {
+		$tags = Zend::Registry('tags');
+		return $tags;
+	}
+	
 	return _make_omeka_request('Tags','browse',$params,'tags');
 }
 
-function get_items(array $params = array())
+function items(array $params = array())
 {
+	if (empty($params) && Zend::isRegistered('items')) {
+		$items = Zend::Registry('items');
+		return $items;
+	}
+	
 	return _make_omeka_request('Items','browse',$params,'items');
 }
 
-function get_item($id) 
+function item($id=null) 
 {
+	if(!$id && Zend::isRegistered('item')) {
+		$item = Zend::Registry('item');
+		return $item;
+	}
+	
 	$item = Doctrine_Manager::getInstance()->getTable('Item')->find($id);
 	
 	//Quick permissions check
@@ -402,24 +506,61 @@ function get_item($id)
 	return $item;
 }
 
-function get_collections(array $params = array())
+function collection($id=null)
 {
+	if(!$id && Zend::isRegistered('collection')) {
+		$c = Zend::Registry('collection');
+		return $c;
+	}
+	
+	$c = Doctrine_Manager::getInstance()->getTable('Collection')->find($id);
+	return $c;
+}
+
+function collections(array $params = array())
+{
+	if (empty($params) && Zend::isRegistered('collections')) {
+		$collections = Zend::Registry('collections');
+		return $collections;
+	}
+	
 	return _make_omeka_request('Collections','browse',$params,'collections');
 }
 
-function get_metafields(array $params = array())
+function metafields(array $params = array())
 {
 	//To add filters to this function, put them in the TypesController::metafieldsAction() method
 	return _make_omeka_request('Types','metafields',$params,null);
 }
 
-function get_types(array $params = array())
+function type($id=null)
 {
+	if(!$id && Zend::isRegistered('type')) {
+		$t = Zend::Registry('type');
+		return $t;
+	}
+	
+	$t = Doctrine_Manager::getInstance()->getTable('Type')->find($id);
+	
+	return $t;
+}
+
+function types(array $params = array())
+{
+	if (empty($params) && Zend::isRegistered('types')) {
+		$types = Zend::Registry('types');
+		return $types;
+	}
+	
 	return _make_omeka_request('Types','browse',$params,'types');
 }
 
-function get_users(array $params = array())
+function users(array $params = array())
 {
+	if (empty($params) && Zend::isRegistered('users')) {
+		$users = Zend::Registry('users');
+		return $users;
+	}
 	return _make_omeka_request('Users','browse',$params,'users');
 }
 

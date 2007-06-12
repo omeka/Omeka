@@ -24,6 +24,7 @@ class Kea_Controller_Browse_List extends Kea_Controller_Browse_Abstract
 		
 		$$totalVar = count($$pluralName);
 		
+		Zend::Register($pluralName, $$pluralName);
 		return $this->_controller->render($viewPage, compact($pluralName,$totalVar));
 	}
 }

@@ -1,9 +1,7 @@
-<?php error($item); ?>
 <fieldset id="core-metadata">
 	<legend>Core Metadata</legend>
 		<label>Title</label>
 		<input type="text" class="textinput" name="title" value="<?php echo $item->title;?>" />
-		<?php error($item, 'title'); ?>
 		
 		<label>Publisher</label>
 		<input type="text" class="textinput" name="publisher" value="<?php echo $item->publisher?>" />

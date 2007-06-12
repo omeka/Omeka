@@ -2,7 +2,6 @@
 <?php common('archive-nav'); ?>
 
 <?php js('editable');?>
-<?php error($item);?>
 <script type="text/javascript" charset="utf-8">
 
 	
@@ -83,6 +82,7 @@
 	<?php nav($tertiary_nav);?>
 </ul>
 <?php echo flash(); ?>
+
 <h2><div class="editable" id="title" rel="text"><?php echo $item->title; ?></div></h2>
 
 <h3>Core Metadata</h3>

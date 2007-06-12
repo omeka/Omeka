@@ -8,10 +8,9 @@
 		}
 	?>
 </ul>
+<?php if ( total_results(true) ): ?>
 
-<?php if ( $total_results ): ?>
-
-	<h2>Browse Items (<?php echo $total_results;?> items total)</h2>
+	<h2>Browse Items (<?php echo total_results(true);?> items total)</h2>
 	<div class="archive-meta">
 		<form id="search" action="<?php echo uri('items/browse'); ?>">
 			<input type="text" name="search" />
@@ -45,7 +44,7 @@
 	</tbody>
 	</table>
 
-<?php elseif(!$total_items): ?>
+<?php elseif(!total_items(true)): ?>
 	<h2>There are no items in the archive yet.
 	
 	<?php if(has_permission('Items','add')): ?>
@@ -53,7 +52,7 @@
 	<?php endif; ?>
 	
 <?php else: ?>
-	<h2>The query searched <?php echo $total_items; ?> items and returned no results.</h2>
+	<h2>The query searched <?php total_items(); ?> items and returned no results.</h2>
 <?php endif; ?>
 
 

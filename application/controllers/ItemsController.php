@@ -92,6 +92,8 @@ class ItemsController extends Kea_Controller_Action
 		$total_items = $countQuery->fetchOne();
 		if(!$total_items) $total_items = 0;
 		
+		Zend::register('total_items', $total_items);
+		
 		//filter items based on featured (only value of 'true' will return featured items)
 		if($featured = $this->_getParam('featured')) {
 			$select->where('i.featured = '.($featured == 'true' ? '1':'0'));
@@ -227,8 +229,8 @@ class ItemsController extends Kea_Controller_Action
 			
 		$items = $query->execute();
 		
-		
-		return $this->render('items/browse.php', compact('total_results','total_items', 'items', 'pagination'));
+		Zend::register('total_results', $total_results);
+		return $this->render('items/browse.php', compact('total_items', 'items', 'pagination'));
 	}
 	
 	/**
@@ -410,6 +412,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		$item->refresh();
 		
+		Zend::Register('item', $item);
 		return $this->render('items/show.php', compact("item", 'user'));
 	}
 	

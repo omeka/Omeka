@@ -360,6 +360,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 			echo $e->getMessage();exit;
 		}
 		
+		
+		Zend::register($varName, $$varName);
 		return $this->render($viewPage, compact($varName));
 	}
 	

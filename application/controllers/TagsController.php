@@ -132,7 +132,7 @@ class TagsController extends Kea_Controller_Action
 		}
 		
 		
-		if(!$this->isAllowed('showNotPublic','Items')) {
+		if( ($for == 'Item') and !$this->isAllowed('showNotPublic','Items') ) {
 			$perms['onlyPublic'] = true;
 		}
 		
@@ -140,15 +140,19 @@ class TagsController extends Kea_Controller_Action
 
 		$total_results = count($tags);
 		
+		
+		
 		//Retrieve the total number of tags for 
-/*		$joinTable = $classFor->getTagJoinTableName();
-		$sql = "SELECT COUNT(*) FROM tags t INNER JOIN $joinTable j ON j.tag_id = t.id";
+		$joinTable = $classFor->getTagJoinTableName();
+		$sql = "SELECT COUNT(t.id) FROM tags t INNER JOIN $joinTable j ON j.tag_id = t.id";
 		
 		if(!empty($perms['onlyPublic'])) {
-			$sql .= "INNER JOIN ".$classFor->getTableName()." i ON i.id = it.item_id WHERE i.public = 1";
+			$sql .= " INNER JOIN ".$classFor->getTableName()." i ON i.id = j.item_id WHERE i.public = 1";
 		}
 		$total_tags = $this->getConn()->fetchOne($sql);
-*/			
-		return $this->render('tags/browse.php',compact('tags','total_results', 'total_tags'));
+		
+		Zend::register('total_tags', $total_tags);
+		Zend::register('total_results', $total_results);	
+		return $this->render('tags/browse.php',compact('tags','total_tags'));
 	}
 }

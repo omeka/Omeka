@@ -12,11 +12,14 @@ INSERT INTO `types` (id, name, description) VALUES (6, 'Still Image', 'A static 
 INSERT INTO `types` (id, name, description) VALUES (7, 'Website', 'A resource comprising of a web page or web pages and all related assets ( such as images, sound and video files, etc. ).');
 INSERT INTO `types` (id, name, description) VALUES (8, 'Event', 'A non-persistent, time-based occurrence.  Metadata for an event provides descriptive information that is the basis for discovery of the purpose, location, duration, and responsible agents associated with an event. Examples include an exhibition, webcast, conference, workshop, open day, performance, battle, trial, wedding, tea party, conflagration.');
 
+
+
 -- Additions
 INSERT INTO `types` (id, name, description) VALUES (9, 'Email', '');
 INSERT INTO `types` (id, name, description) VALUES (10, 'Lesson Plan', '');
 INSERT INTO `types` (id, name, description) VALUES (11, 'Hyperlink', '');
 INSERT INTO `types` (id, name, description) VALUES (12, 'Person', '');
+INSERT INTO `types` (id, name, description) VALUES (13, 'Interactive Resource', 'A resource requiring interaction from the user to be understood, executed, or experienced. Examples include forms on Web pages, applets, multimedia learning objects, chat services, or virtual reality environments.');
 
 INSERT INTO `metafields` (id, name, description) VALUES (1, 'Text', 'Any textual data included in the document.');
 INSERT INTO `metafields` (id, name, description) VALUES (2, 'Interviewer', 'The person(s) performing the interview.');

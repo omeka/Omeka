@@ -52,13 +52,11 @@
 
 <?php echo flash(); ?>
 
-<?php error($item); ?>
 <fieldset id="core-metadata">
 	<legend>Core Metadata</legend>
 		<div class="field">
 		<label>Title</label>
 		<input type="text" class="textinput" name="title" value="<?php echo $item->title;?>" />
-		<?php error($item, 'title'); ?>
 		</div>
 		
 		<div class="field"><label>Publisher</label>
@@ -168,7 +166,7 @@
 		<?php select(	array(	
 					'name'	=> 'collection_id',
 					'id'	=> 'collection' ),
-					get_collections(),
+					collections(),
 					$item->collection_id,
 					'Collection',
 					'id',
@@ -182,7 +180,7 @@
 			<?php select(	array(	
 						'name'	=> 'type_id',
 						'id'	=> 'type' ),
-						get_types(),
+						types(),
 						$item->type_id,
 						'Item Type',
 						'id',

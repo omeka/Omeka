@@ -234,7 +234,8 @@ class File extends Kea_Record {
 		$convertPath = get_option('path_to_convert');
 		
 		if(!$this->checkForImageMagick($convertPath)) {
-			throw new Exception( 'ImageMagick library is required for thumbnail generation' );
+			//throw new Exception( 'ImageMagick library is required for thumbnail generation' );
+			return null;
 		}
 		
 		if( !is_dir($new_dir) )

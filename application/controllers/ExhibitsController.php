@@ -36,6 +36,11 @@ class ExhibitsController extends Kea_Controller_Action
 //		$theme = $exhibit->theme;
 		
 		$section_order = $this->_getParam('section_order');
+		
+		if(!$section_order) {
+			$this->flash('Please update your routes.ini file.');
+			$this->_redirect('404');
+		}
 		$section = $exhibit->getSection($section_order);
 		
 		if($section) {
@@ -81,7 +86,6 @@ class ExhibitsController extends Kea_Controller_Action
 				$this->render($headerPath, compact('section','exhibit','page'));
 			}
 			
-			Zend::dump( $layoutPath );
 			if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$layoutPath)) {
 				$this->render($layoutPath, compact('section','exhibit','page'));
 			}

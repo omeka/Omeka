@@ -1,5 +1,5 @@
 <?php 
-	$item = get_item($_REQUEST['id']);
+	$item = item($_REQUEST['id']);
 ?>
 
 <?php foreach( $item->Tags as $key => $tag ): ?>

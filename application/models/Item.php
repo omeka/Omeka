@@ -201,15 +201,13 @@ class Item extends Kea_Record
 	///// METADATA METHODS /////
 	
 	public function metadata( $name, $return_text = true ) {		
-		foreach( $this->Metatext as $key => $record )
-		{
-			//metadata is either all plugin data, all type data, or a single field name
-			if($name == $record->Metafield->name) {
-				if($return_text) return $record->text;
-				return $record;
-			}
-		}
-		return null;
+		$sql = "SELECT text FROM metatext mt INNER JOIN metafields mf ON mf.id = mt.metafield_id WHERE mt.item_id = ? AND mf.name = ?";
+		$text = $this->execute($sql, array($this->id, $name), true);
+		
+		if($return_text) 
+			return $text;
+		
+		echo $text;
 	}
 	
 	/**

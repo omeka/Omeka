@@ -23,7 +23,7 @@
 		
 		<div id="tagcloud">
 			<h2>Tag Cloud</h2>
-			<?php tag_cloud(recent_tags(), 3, uri('items'), 4, 1); ?>
+			<?php tag_cloud(recent_tags(), uri('items')); ?>
 		</div>
 	</div>
 <?php foot(); ?>

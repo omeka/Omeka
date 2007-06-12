@@ -34,7 +34,7 @@
 		
 		<div id="tagcloud">
 			<h2>Tag Cloud</h2>
-			<?php tag_cloud(recent_tags(), 3, uri('items/browse/tag'), 4, 1); // OK, so what does this all mean and do? ?>
+			<?php tag_cloud(recent_tags(), uri('items/browse/')); ?>
 		</div>
 		
 	</div>

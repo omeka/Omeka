@@ -1,6 +1,5 @@
 <?php head(array('title' => 'Item'))?>
 
-<?php error($item);?>
 <h2><?php echo $item->title; ?></h2>
 
 <div id="core-metadata">
