@@ -73,11 +73,16 @@ exhibitPageAdd.defaults.page = 1
 exhibitPageAdd.reqs.id = "\d+"
 exhibitPageAdd.reqs.page = "\d+"
 
-exhibit2.route = "exhibits/show/:slug/:section_order/:page_order"
+exhibit2.route = "exhibits/:slug/:section_order/:page_order"
 exhibit2.defaults.controller = exhibits
 exhibit2.defaults.action = show
 exhibit2.defaults.section_order = 1
 exhibit2.defaults.page_order = 1
-exhibit2.reqs.slug = "\w+"
 exhibit2.reqs.section_order = "\d+"
+exhibit2.reqs.page_order  = "\d+"
 
+exhibitItem.route = "exhibits/:slug/:section_order/item/:id"
+exhibitItem.defaults.controller = exhibits
+exhibitItem.defaults.action = showitem
+exhibitItem.defaults.section_order = 1
+exhibitItem.reqs.id = "\d+"

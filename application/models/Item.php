@@ -238,6 +238,25 @@ class Item extends Kea_Record
            return $q->execute(array($this->id))->getFirst();
    }
 
+	public function isInExhibit($exhibit_id)
+	{
+		$iTable = $this->getTableName();
+		$eTable = $this->getTableName('Exhibit');
+		$ipTable = $this->getTableName('ItemsPages');
+		$spTable = $this->getTableName('SectionPage');
+		$sTable = $this->getTableName('Section'); 
+		$sql = "SELECT COUNT(i.id) FROM $iTable i 
+				INNER JOIN $ipTable ip ON ip.item_id = i.id 
+				INNER JOIN $spTable sp ON sp.id = ip.page_id
+				INNER JOIN $sTable s ON s.id = sp.section_id
+				INNER JOIN $eTable e ON e.id = s.exhibit_id
+				WHERE e.id = ? AND i.id = ?";
+				
+		$count = $this->execute($sql, array($exhibit_id, $this->id), true);
+		
+		return ($count > 0);
+	}
+
 	public function hasFiles()
 	{
 		return ($this->Files->count() > 0);

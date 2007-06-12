@@ -149,12 +149,16 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				$auth_session = new Zend_Session($authPrefix);
 				
 				$config = Zend::Registry('config_ini');
-				$minutesUntilExpiration = (int) $config->login->expire;
 				
-				//Default value in case for whatever reason it's not available
-				if(!$minutesUntilExpiration) $minutesUntilExpiration = 15;
+				if(isset($config->login->expire)) {
+					$minutesUntilExpiration = (int) $config->login->expire;
 				
-				$auth_session->setExpirationSeconds($minutesUntilExpiration * 60);
+					//Default value in case for whatever reason it's not available
+					if(!$minutesUntilExpiration) $minutesUntilExpiration = 15;
+				
+					$auth_session->setExpirationSeconds($minutesUntilExpiration * 60);					
+				}
+
 			}		
 		}
 		$this->checkActionPermission($action);

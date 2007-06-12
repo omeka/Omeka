@@ -22,6 +22,66 @@ class ExhibitsController extends Kea_Controller_Action
 		$this->_forward('Tags', 'browse', array('tagType' => 'Exhibit', 'renderPage'=>'exhibits/tags.php'));
 	}
 	
+	public function showitemAction()
+	{
+		$item_id = $this->_getParam('id');
+		$slug = $this->_getParam('slug');
+		
+		$exhibit = is_numeric($slug) ?
+			$this->_table->find($slug) :
+			$this->_table->findBySlug($slug);
+			
+		$item = $this->findById($item_id, 'Item');	
+		
+		$section_order = $this->_getParam('section_order');
+
+		$section = $exhibit->getSection($section_order);
+
+		if( $item->isInExhibit($exhibit->id) ) {
+			
+			//Permissions check
+			if(!$item->public and !$this->isAllowed('showNotPublic')) {
+
+				$this->_redirect('403');
+			}
+			
+			Zend::register('item', $item);
+			Zend::register('exhibit', $exhibit);
+			Zend::register('section', $section);
+			
+			//If has exhibit theme, render the item.php page in the exhibit theme
+			if(!empty($exhibit->theme)) {
+				$this->_view->addScriptPath(SHARED_DIR);
+			
+				$site = Zend::Registry('path_names');
+				
+				$headerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'header.php';
+				$itemPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'item.php';
+				$footerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'footer.php';
+								
+				if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$headerPath)) {
+					$this->render($headerPath, compact('exhibit','item'));
+				}
+			
+				if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$layoutPath)) {
+					$this->render($itemPath, compact('exhibit','item'));
+				}
+			
+				if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$footerPath)) {
+					$this->render($footerPath, compact('exhibit','item'));
+				}
+				
+				return;
+			}
+						
+			//Otherwise render the normal item page
+			return $this->render('items/show.php');
+		}else {
+			$this->flash('This item is not used within this exhibit.');
+			$this->_redirect('403');
+		}
+	}
+	
 	public function showAction()
 	{		
 		$slug = $this->_getParam('slug');
@@ -38,7 +98,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$section_order = $this->_getParam('section_order');
 		
 		if(!$section_order) {
-			$this->flash('Please update your routes.ini file.');
+			throw new Exception( 'Please update your routes.ini file.' );
 			$this->_redirect('404');
 		}
 		$section = $exhibit->getSection($section_order);
@@ -57,10 +117,10 @@ class ExhibitsController extends Kea_Controller_Action
 		}
 */		
 		if(!$section) {
-			$this->flash('There are no sections in this exhibit.');
+			$this->flash('This section does not exist for this exhibit.');
 		}
 		elseif(!$page) {
-			$this->flash('There are no pages in this section of the exhibit.');
+			$this->flash('This page does not exist in this section of the exhibit.');
 		}
 		
 		//Register these so that theme functions can use them

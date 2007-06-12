@@ -1,4 +1,4 @@
-<?php if($item = get_item($_REQUEST['id'])): ?>
+<?php if($item = item($_REQUEST['id'])): ?>
 <div class="item">
 	<div class="item_id">
 		<?php echo $item->id; ?>

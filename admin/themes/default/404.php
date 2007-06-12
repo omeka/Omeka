@@ -3,5 +3,6 @@
 ?>
 
 <?php head(); ?>
+<?php echo flash(); ?>
 Sorry, this page doesn't exist!
 <?php foot(); ?>
