@@ -220,9 +220,10 @@ function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
 	if($largest < $maxClasses) {
 		$maxClasses = $largest;
 	}
-	
+
 	foreach( $tags as $tag )
 	{
+
 		$size = ($tag["tagCount"] * $maxClasses) / $largest - 1;
 
 		$class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
@@ -231,7 +232,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
 
 		if( $link )
 		{
-			$html .= '<a href="' . $link . '?tags=' . $tag['name'] . '">';
+			$html .= '<a href="' . $link . '?tags=' . urlencode($tag['name']) . '">';
 		}
 
 		$html .= $tag['name'];
@@ -756,6 +757,10 @@ function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $
 		}
 	}
 	
+	if($total <= $per_page) {
+		return "&nbsp;";
+	}
+	
 		$num_pages = ceil( $total / $per_page );
 		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;
 				
@@ -777,7 +782,12 @@ function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $
 			$pattern = '%PAGE%' . $query;
 		}
 
-		$html = ' <a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a> |';
+		//We don't have enough for pagination
+		if($total < $per_page) {
+			$html = '';
+		}else {
+			$html = ' <a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a> |';
+		}
 
 		if( $page > 1 ) {
 			$html .= ' <a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&lt; Prev</a> |';

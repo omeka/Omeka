@@ -21,12 +21,14 @@
 <?php text(array('name'=>'institution', 'class'=>'textinput', 'id'=>'institution'),$user->institution, 'Institution'); ?>
 </div>
 
-<div class="field">
+<?php if ( has_permission('super') ): ?>
+	<div class="field">
 <div class="label">Active</div>
 <div class="radio">
 <?php radio(array('name'=>'active', 'id'=>'active'), array('0'=>'Inactive','1'=>'Active'), $user->active); ?>
 </div>
 </div>
+<?php endif; ?>
 
 <?php if ( has_permission('Users','showRoles') ): ?>
 	<div class="field">

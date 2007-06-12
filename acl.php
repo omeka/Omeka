@@ -26,6 +26,7 @@ $acl->registerRule(new Zend_Acl_Resource('Tags'), array('rename','remove'));
 $acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
 $acl->registerRule(new Zend_Acl_Resource('Types'), array('add','edit','delete'));
 $acl->registerRule(new Zend_Acl_Resource('Users'), array('browse','show','add','edit','delete','showRoles','editRoles','makeSuperUser'));
+$acl->registerRule(new Zend_Acl_Resource('Exhibits'), array('add', 'edit', 'delete', 'addPage', 'editPage', 'deletePage', 'addSection', 'editSection', 'deleteSection'));
 
 $acl->allow('super'); 
 
@@ -39,5 +40,5 @@ $acl->allow('admin','Tags',array('rename','remove'));
 $acl->allow('admin','Themes',array('browse'));
 $acl->allow('admin','Types',array('add','edit','delete'));
 $acl->allow('admin','Users',array('browse','show','add','edit','delete','showRoles'));
-
+$acl->allow('admin','Exhibits',array('add', 'edit', 'delete', 'addPage', 'editPage', 'deletePage', 'addSection', 'editSection', 'deleteSection'));
 ?>
