@@ -11,14 +11,7 @@
 		
 
 		
-		<div class="field"><?php text(array('name'=>'tags', 'id'=>'tags', 'class'=>'textinput'), tag_string($exhibit->userTags(current_user()->id),null,', ',true), 'Your Exhibit Tags'); ?></div>
-		
-		<?php //Super users should be able to edit all the tags
-		
-		if(has_permission('super')) { ?>
-		<div class="field">	<?php text(array('name'=>'all_tags', 'id'=>'all_tags', 'class'=>'textinput'), tag_string($exhibit,null,', ',true), 'All Exhibit Tags'); ?></div>
-			
-		<?php } ?>
+		<div class="field"><?php text(array('name'=>'tags', 'id'=>'tags', 'class'=>'textinput'), tag_string($exhibit,null,', ',true), 'Exhibit Tags'); ?></div>
 		
 	<div class="field"><?php checkbox(array('name'=>'featured', 'id'=>'featured'),$exhibit->featured, null ,'This Exhibit is Featured'); ?></div>
 	</fieldset>
