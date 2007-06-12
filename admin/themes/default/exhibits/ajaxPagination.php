@@ -6,7 +6,7 @@
 	?>
 	<div id="pagination">
 	<?php 
-		 echo $pagination; 
+		 echo pagination(); 
 	?>
 		</div>
 		

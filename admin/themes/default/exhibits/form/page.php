@@ -206,7 +206,7 @@
 	?>
 	<div id="pagination">
 	<?php 
-		 echo $pagination; 
+		 echo pagination(); 
 	?>
 		</div>
 	<?php foreach( $items as $item ): ?>

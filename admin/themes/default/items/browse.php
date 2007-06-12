@@ -16,7 +16,7 @@
 			<input type="text" name="search" />
 			<input type="submit" name="submit_search" value="Search" />
 		</form>
-		<div class="pagination"><?php echo $pagination; ?></div>
+		<div class="pagination"><?php echo pagination(); ?></div>
 	</div>
 
 	<table id="items" cellspacing="0" cellpadding="0">

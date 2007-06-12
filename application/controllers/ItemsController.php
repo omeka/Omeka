@@ -208,7 +208,7 @@ class ItemsController extends Kea_Controller_Action
 		//Serve up the pagination
 		require_once 'Kea/View/Functions.php';
 		$pagination = pagination($options['page'], $options['per_page'], $total_results, $options['num_links'], $options['pagination_url']);
-					
+		Zend::register('pagination', $pagination);			
 
 		//Finally, hydrate the Doctrine objects with the array of ids given
 		$query = new Doctrine_Query;
@@ -230,7 +230,7 @@ class ItemsController extends Kea_Controller_Action
 		$items = $query->execute();
 		
 		Zend::register('total_results', $total_results);
-		return $this->render('items/browse.php', compact('total_items', 'items', 'pagination'));
+		return $this->render('items/browse.php', compact('total_items', 'items'));
 	}
 	
 	/**

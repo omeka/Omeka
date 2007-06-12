@@ -28,11 +28,14 @@ function exhibit_foot()
 	
 }
 
-function page_text($order)
+function page_text($order, $addTag=true)
 {
 	$page = Zend::Registry('page');
 	$text = $page->ItemsPages[$order]->text;
-	return nls2p($text);
+	if($addTag) {
+		return nls2p($text);
+	}
+	return $text;
 }
 
 function page_item($order)
@@ -56,7 +59,7 @@ function layout_form_item($order, $label='Enter an Item ID #') {
 }
 
 function layout_form_text($order, $label='Enter text') {
-	textarea(array('name'=>'Text['.$order.']','rows'=>'10','cols'=>'40','class'=>'textinput'), page_text($order), $label); 
+	textarea(array('name'=>'Text['.$order.']','rows'=>'10','cols'=>'40','class'=>'textinput'), page_text($order, false), $label); 
 }
 
 /**

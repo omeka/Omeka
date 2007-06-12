@@ -1,6 +1,6 @@
 <?php head(); ?>
 <h2>Browse</h2>
-<?php echo $pagination; ?>
+<?php echo pagination(); ?>
 <div id="primary">
 <?php foreach($items as $key => $item): ?>
 <div class="item hentry">

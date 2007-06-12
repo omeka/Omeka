@@ -85,18 +85,22 @@ class ExhibitsController extends Kea_Controller_Action
 	public function showAction()
 	{		
 		$slug = $this->_getParam('slug');
-		
+
 		//Slug can be either the numeric 'id' for the exhibit or the alphanumeric slug
 		if(is_numeric($slug)) {
 			$exhibit = $this->_table->findById($slug);
 		}else {
 			$exhibit = $this->_table->findBySlug($slug);
 		}
+				
+		if(!$exhibit) {
+			throw new Exception( 'Exhibit with that ID does not exist.' );
+		}
 		
 //		$theme = $exhibit->theme;
 		
 		$section_order = $this->_getParam('section_order');
-		
+				
 		if(!$section_order) {
 			throw new Exception( 'Please update your routes.ini file.' );
 			$this->_redirect('404');

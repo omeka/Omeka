@@ -65,8 +65,10 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		//Serve up the pagination
 		require_once 'Kea/View/Functions.php';
 		$pagination = pagination($page, $per_page, $total_results, $num_links, $url);
-
-		return $this->_controller->render($pluralVar."/browse.php", compact("total_results", $totalVar, "offset", $pluralVar, "per_page", "page", "pagination"));
+		Zend::register('pagination', $pagination);
+		
+		
+		return $this->_controller->render($pluralVar."/browse.php", compact("total_results", $totalVar, "offset", $pluralVar, "per_page", "page"));
 	}
 	
 } // END class Kea_Controller_Browse_Paginate
