@@ -1,7 +1,31 @@
+@import url('reset.css');
+
+/* == Generic == */
 body {width:774px; margin:0 auto; padding:32px 0; font: 62.5% Verdana, Arial, sans-serif;color:#555; background:#ddd;}
 
+h1 {font-size:1.8em; margin-bottom:1em; line-height:1em;}
+h2 {font-size:1.6em; margin-bottom:1.125em; line-height:1.125em; font-weight:bold;}
+h3 {font-size:1.4em; margin-bottom:1.2857em; line-height:1.2857em;}
 a img {border:none;}
+
+p,ul,ol,dl {font-size:1.2em; margin-bottom:1.5em; line-height:1.5em;}
+/* == Wrap == */
 #wrap {background:#fff; overflow:hidden;}
 
-#header {background:#38c; color:#fff; padding:18px;}
-#content {padding:18px 0 18px 18px;}
+/* == Header == */
+#header {background:#38c; color:#fff; padding:18px 18px 0;}
+	#header h1 {margin-bottom:1em;}
+	
+.section-nav {list-style:none; margin-left:0; padding-left:0; overflow:hidden; margin-bottom:0;}
+	.section-nav li {display:block; float:left; width:10em;margin-right:1px;}
+	.section-nav li a {display:block; float:left; width: 10em; text-decoration:none;padding:0.5em 0; text-align:center; background:#4D97D2; color:#fff;}
+	.section-nav li a:hover {background:#66A6D9;}
+	
+/* == Content == */
+
+#content {padding:18px;}
+
+.commentary {background:#eee; padding:18px;}
+	.commentary p {font-size:1.1em; line-height:1.63636;}
+/* == Layout-specific styles == */
+.image-list-left .item, .image-list-right .item {border-bottom:1px dotted #ccc; margin-bottom:18px;}

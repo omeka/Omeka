@@ -675,4 +675,12 @@ function pagination( $page = 1, $per_page, $total, $num_links, $link=null, $page
 
 		return $html;
 	}
+	
+	//Adapted from PHP.net: http://us.php.net/manual/en/function.nl2br.php#73479
+	function nls2p($str)
+	{
+	  return str_replace('<p></p>', '', '<p>'
+	        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)
+	        . '</p>');
+	}
 ?>

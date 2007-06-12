@@ -32,7 +32,7 @@ function page_text($order)
 {
 	$page = Zend::Registry('page');
 	$text = $page->ItemsPages[$order]->text;
-	return $text;
+	return nls2p($text);
 }
 
 function page_item($order)
@@ -56,7 +56,7 @@ function layout_form_item($order, $label='Enter an Item ID #') {
 }
 
 function layout_form_text($order, $label='Enter text') {
-	text(array('name'=>'Text['.$order.']'), page_text($order), $label); 
+	textarea(array('name'=>'Text['.$order.']','rows'=>'10','cols'=>'40','class'=>'textinput'), page_text($order), $label); 
 }
 
 /**

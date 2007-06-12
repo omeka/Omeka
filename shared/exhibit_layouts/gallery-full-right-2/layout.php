@@ -1,10 +1,10 @@
 <?php 
-	//Name: Gallery Full Left;
-	//Description: An image gallery, with a wider left column;
+	//Name: Gallery Full Right;
+	//Description: An image gallery, with a wider right column;
 	//Author: Jeremy Boggs; 
 ?>
 
-<div class="gallery-full-left">
+<div class="gallery-full-right">
 	<div class="primary">
 	<div class="item-full">
 		<?php $item = page_item(1); ?>
