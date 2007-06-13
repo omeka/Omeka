@@ -15,7 +15,11 @@ class Kea_OutputListener extends Doctrine_EventListener
 	
 	public function onGetProperty(Doctrine_Record $record, $property, $value)
     {
-		return allhtmlentities($value, $this->_escape);
+		if(!is_array($value)) {
+			return allhtmlentities($value, $this->_escape);
+		}else {
+			return $value;
+		}
     }
 }
 ?>

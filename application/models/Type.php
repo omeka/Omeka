@@ -13,6 +13,7 @@ class Type extends Kea_Record {
 		$this->hasMany("Metafield as Metafields", "TypesMetafields.metafield_id");
 		$this->ownsMany("TypesMetafields", "TypesMetafields.type_id");
 		$this->hasMany("Item as Items", "Item.type_id");
+		$this->hasOne("Plugin", "Type.plugin_id");
 	}
 
 	public function setTableDefinition() {
@@ -20,6 +21,7 @@ class Type extends Kea_Record {
    		$this->setTableName('types');
 		$this->hasColumn('name', 'string', 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
         $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
+		$this->hasColumn('plugin_id', 'integer');
  	}
 
 	public function hasMetafield($name) {

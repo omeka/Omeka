@@ -23,39 +23,5 @@ class PluginTable extends Doctrine_Table
 		}
 		return $plugins;
 	}
-
-	public function installNew() {
-		//Installation will need to create new tables
-		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_CREATE_TABLES, true);
-		
-		$router = Kea_Controller_Front::getInstance()->getRouter();
-		
-		$plugins = $this->findAll();
-		$pluginDirs = new DirectoryIterator(PLUGIN_DIR);
-		$newPlugins = array();
-		
-		//Pull a list of the new ones		
-		foreach( $pluginDirs as $v )
-		{
-			$dir = $v->__toString();
-			if(!$v->isDot() && $v != '.svn' && $v->isDir()) {
-				$newPlugins[$dir] = $dir;
-			}
-			foreach( $plugins as $plugin )
-			{
-				if($dir == $plugin->name) 
-				{
-					unset($newPlugins[$dir]);
-				}
-			}
-		}
-		
-		foreach ($newPlugins as $key => $name) {
-			$path = PLUGIN_DIR.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.$name.'.php';
-			require_once $path;
-			$plugin = new $name($router, new Plugin());
-			$plugin->install();
-		}
-	}
 } // END class PluginTable extends Doctrine_Table
 ?>

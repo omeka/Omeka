@@ -1,25 +1,34 @@
 <?php head(); ?>
-<?php common('settings-nav'); ?>
 
-<?php if(!empty($new_names)):?>
-<h2>The following plugins have not yet been installed</h2>
+<h2>Install the <?php echo get_class($plugin); ?> Plugin</h2>
 
-<form method="post">
+<?php 
+	$meta = $plugin->getMetaInfo(); 
+?>
+<dl>
+	<dt>Author:</dt>
+	<dd><?php echo $meta['author']; ?>
+	<dt>Description:</dt>
+	<dd><?php echo $meta['description']; ?>
+</dl>
 
-<ol>
-<?php foreach( $new_names as $name ): ?>
-	<li>
-		<input type="checkbox" name="<?php echo $name; ?>" />
-		<?php  echo $name; ?>
-	</li>
-<?php endforeach; ?>
-</ol>
-
-<input type="submit" name="submit" value="submit" />
-
+<?php 
+	$config = $plugin->getConfigDefinition(); 
+?>
+<form method="post" accept-charset="utf-8">
+	<fieldset>
+	<?php foreach( $config as $name => $def ): ?>
+		<div class="field">	
+			<label for="<?php echo $name; ?>"><?php echo $name; ?></label>	
+			<p class="description"><?php echo $def['description']; ?></p>
+			<input type="text" name="config[<?php echo $name; ?>]" value="<?php echo $def['default']; ?>" />
+		</div>
+	<?php endforeach; ?>
+	</fieldset>
+	
+	<fieldset>
+		<input type="submit" name="submit" value="Install this plugin --&gt;" />
+	</fieldset>
 </form>
 
-<?php else: ?>
-	No plugins to install.  Place new plugins in the 'public/plugins' directory in order for the application to recognize them.
-<?php endif;?>
 <?php foot(); ?>

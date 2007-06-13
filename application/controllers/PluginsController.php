@@ -12,10 +12,51 @@ class PluginsController extends Kea_Controller_Action
 	}
 	
 	public function browseAction() {
-		Doctrine_Manager::connection()->getTable('Plugin')->installNew();
+		$this->installNew();
+		
 		return parent::browseAction();
 	}
-
+	
+	protected function installNew() {
+		//Installation will need to create new tables
+		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_CREATE_TABLES, true);
+		
+		$router = Kea_Controller_Front::getInstance()->getRouter();
+		
+		$dir = new VersionedDirectoryIterator(PLUGIN_DIR);
+		$names = $dir->getValid();
+				
+		foreach ($names as $name) {
+			$plugin = $this->_table->findByName($name);
+			if(!$plugin) {
+				$this->_redirect('plugins/install/'.$name);
+			}
+		}		
+	}
+	
+	public function installAction()
+	{
+		$name = $this->_getParam('name');
+		
+		$path = PLUGIN_DIR.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.$name.'.php';
+		require_once $path;
+		$plugin = new $name($router, new Plugin());
+		
+		if(!empty($_POST)) {
+			$plugin->install($_POST['config']);
+			$this->_redirect('plugins/');
+		}
+		
+		$record = $this->_table->findByName($name);
+		if($record) {
+			$this->_redirect('plugins/');
+		}
+		
+		
+		$this->render('plugins/install.php', compact('plugin'));
+	}
+	
+	
 	/**
 	 * save the form values to the db
 	 *

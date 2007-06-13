@@ -1,4 +1,3 @@
-<script type="text/javascript" charset="utf-8">
 	var OmekaMap = Class.create();
 	
 	OmekaMap.prototype = {
@@ -63,4 +62,3 @@
 
 		}
 	}
-</script>

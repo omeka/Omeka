@@ -27,9 +27,6 @@ class Kea_Controller_Browse_Paginate extends Kea_Controller_Browse_Abstract
 		
 		$query = $this->getQuery();
 
-		
-		Kea_Controller_Plugin_Broker::getInstance()->filterBrowse($this);
-
 		$query = $this->buildQuery();
 
 		$countQuery = clone $query;

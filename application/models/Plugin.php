@@ -17,11 +17,34 @@ class Plugin extends Doctrine_Record
 		$this->option('type', 'MYISAM');
 		$this->setTableName("plugins");
        	$this->hasColumn('name', 'string', 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
-        $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('author', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('config', 'array', null);
         $this->hasColumn('active', 'boolean', null, array('default'=>'0', 'notnull' => true));		
 		$this->index('active', array('fields'=>array('active')));
+	}
+	
+	public function __get($name) {
+		$plugin_name = $this->name;
+		if($plugin_name) {
+			$path = PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin_name.DIRECTORY_SEPARATOR.$plugin_name.'.php';
+			require_once $path;
+			
+			$router = Kea_Controller_Front::getInstance()->getRouter();
+			$plugin = new $plugin_name($router,$this);
+					
+			switch ($name) {
+				case 'description':
+					return $plugin->getMetaInfo('description');
+					break;
+				case 'author':
+					return $plugin->getMetaInfo('author');
+				default:
+					return parent::__get($name);
+					break;
+			}			
+		}
+
+		
+		return parent::__get($name);
 	}
 } // END class Location extends Kea_Record
 

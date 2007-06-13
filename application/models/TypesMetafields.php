@@ -15,12 +15,15 @@ class TypesMetafields extends Kea_JoinRecord
 	public function setUp() {
 		$this->hasOne("Type", "TypesMetafields.type_id");
 		$this->hasOne("Metafield", "TypesMetafields.metafield_id");
+		$this->hasOne("Plugin", "TypesMetafields.plugin_id");
 	}
 	
 	public function setTableDefinition() {
 		$this->option('type', 'MYISAM');
 		$this->hasColumn("type_id", "integer", null, "notnull");
 		$this->hasColumn("metafield_id", "integer", null, "notnull");
+		$this->hasColumn('plugin_id', 'integer');
+		
 		$this->index('type', array('fields' => array('type_id')));
 		$this->index('metafield', array('fields' => array('metafield_id')));
 	}

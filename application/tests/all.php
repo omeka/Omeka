@@ -26,6 +26,7 @@ $manager->setAttribute(Doctrine::ATTR_VLD, true);
 require_once 'simpletest/unit_tester.php';
 require_once 'simpletest/reporter.php';
 require_once 'simpletest/mock_objects.php';
+require_once 'simpletest/web_tester.php';
 
 require_once 'OmekaTestCase.php';
 
@@ -41,6 +42,7 @@ require_once 'FormFunctionsTestCase.php';
 require_once 'UserThemeFunctionsTestCase.php';
 require_once 'UnicodeFunctionsTestCase.php';
 require_once 'ExhibitTestCase.php';
+require_once 'ProfilingTestCase.php';
 $test = new TestSuite('Omeka Tests');
 //$test->addTestCase(new ItemTestCase());
 $test->addTestCase(new TaggableTestCase());
@@ -49,5 +51,6 @@ $test->addTestCase(new TaggableTestCase());
 //$test->addTestCase(new UserThemeFunctionsTestCase());
 //$test->addTestCase(new UnicodeFunctionsTestCase());
 //$test->addTestCase(new ExhibitTestCase());
+$test->addTestCase(new ProfilingTestCase());
 $test->run(new HtmlReporter());
 ?>

@@ -12,9 +12,7 @@ class Kea_Controller_Browse_List extends Kea_Controller_Browse_Abstract
 	{	
 		$pluralName = $this->formatPluralized();
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
-		
-		Kea_Controller_Plugin_Broker::getInstance()->filterBrowse($this);
-		
+				
 		if(!$this->isCustomQuery()) {
 			$$pluralName = Doctrine_Manager::getInstance()->getTable($this->_class)->findAll();
 		} else {

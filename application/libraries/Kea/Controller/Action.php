@@ -72,6 +72,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		$this->_auth = Zend::Registry('auth');
 		
+		$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
+		
 		return $init;
 	}
 	

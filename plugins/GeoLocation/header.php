@@ -1,4 +1,4 @@
-<?php $key = $this->getConfig('Maps Key'); ?>
+<?php $key = $this->getConfig('Google Maps API Key'); ?>
 <?php if($key): ?>
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=<?php echo $key;?>" type="text/javascript"></script>
