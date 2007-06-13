@@ -137,7 +137,7 @@ function section_nav($useSlug=true)
 	
 	foreach ($exhibit->Sections as $key => $s) {		
 	
-		$secUrl = 'exhibits/'.$exhibit->slug.'/'.$s->order;
+		$secUrl = 'exhibits/show/'.$exhibit->slug.'/'.$s->order;
 		$secUrl = uri($secUrl);
 	
 		echo '<li><a href="' . $secUrl . '"' . (is_current($secUrl) ? ' class="current"' : ''). '>' . $s->title . '</a></li>';
@@ -154,12 +154,12 @@ function page_nav($useSlug=true)
 	$slug = $useSlug ? $section->Exhibit->slug : $section->Exhibit->id;
 	
 	echo '<ul class="page-nav">';
-	echo '<li class="first"><a href="'.uri('exhibits/'.$slug.'/'.$section->order.'/1').'">First</a></li>';
+	echo '<li class="first"><a href="'.uri('exhibits/show/'.$slug.'/'.$section->order.'/1').'">First</a></li>';
 	
 	$key = 1;
 	foreach ($section->Pages as $key => $p) {
 	
-		$pageUrl = 'exhibits/'.$slug.'/'.$section->order.'/'.$p->order;
+		$pageUrl = 'exhibits/show/'.$slug.'/'.$section->order.'/'.$p->order;
 		$pageUrl = uri($pageUrl);
 		
 		//Create the link (also check if uri matches current uri)
@@ -167,7 +167,7 @@ function page_nav($useSlug=true)
 	
 	}
 	
-	echo '<li class="last"><a href="'.uri('exhibits/'.$slug.'/'.$section->order.'/'.$key).'">Last</a></li>';
+	echo '<li class="last"><a href="'.uri('exhibits/show/'.$slug.'/'.$section->order.'/'.$key).'">Last</a></li>';
 	echo '</ul>';
 }
 
