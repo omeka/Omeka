@@ -32,6 +32,7 @@ function page_text($order, $addTag=true)
 {
 	$page = Zend::Registry('page');
 	$text = $page->ItemsPages[$order]->text;
+	$text = unescapeAll($text);
 	if($addTag) {
 		return nls2p($text);
 	}

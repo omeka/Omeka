@@ -301,6 +301,11 @@ class ExhibitsController extends Kea_Controller_Action
 	{
 		$section = $this->findById(null,'Section');
 		
+		if(isset($_GET['cancel'])) {
+			unset($this->session->page);
+			$this->_redirect('exhibits/editSection/'.$section->id);
+		}
+		
 		//Check to see if the page var was saved in the session
 		if(isset($this->session->page)) {
 

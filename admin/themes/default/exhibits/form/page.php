@@ -246,12 +246,19 @@
 ?>
 </form>
 
-<form action="<?php echo uri('exhibits/deletePage/'.$page->id); ?>">
-	<?php 
-		submit('Cancel/Delete this page', 'delete_page'); 
-	?>
+	<?php if ( $page->exists() ): ?>
+		<form action="<?php echo uri('exhibits/deletePage/'.$page->id); ?>">
+		<?php 
+			submit('Cancel/Delete this page', 'delete_page'); 
+		?>
 	
-</form>
+	</form>
+	<?php else: ?>
+		<form method="get">
+			<input type="submit" name="cancel" value="Cancel adding this page" />
+		</form>
+	<?php endif; ?>
+
 <?php endif; ?>
 
 <?php foot(); ?>
