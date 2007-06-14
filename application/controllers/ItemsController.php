@@ -160,10 +160,6 @@ class ItemsController extends Kea_Controller_Action
 			$query->addWhere('rec.id = ?', array($from_record->id));
 		}
 */
-		
-		if($recent = $this->_getParam('recent')) {
-			$select->order('i.added DESC');
-		}
 
 		//Check for a search
 		if($search = $this->_getParam('search')) {
@@ -225,7 +221,12 @@ class ItemsController extends Kea_Controller_Action
 		
 		
 		$query->where($where);
-			
+
+		//Order by recent-ness
+		if($recent = $this->_getParam('recent')) {
+			$query->addOrderBy('i.added DESC');
+		}
+		
 		$items = $query->execute();
 		
 		Zend::register('total_results', $total_results);
