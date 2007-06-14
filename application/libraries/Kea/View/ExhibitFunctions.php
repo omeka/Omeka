@@ -94,10 +94,11 @@ function get_ex_layouts()
 function exhibit_layout($layout)
 {	
 	//Load the thumbnail image
-	$imgFile = WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'layout.jpg';
-	
-	echo "<img src='$imgFile' />";
-	
+	$imgFile = WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'layout.gif';
+	echo '<div class="layout">';
+	echo '<img src="'.$imgFile.'" />';
+	echo '<div class="input"><input type="radio" name="layout" value="'.$layout .'" />'. $layout .'</div>';
+	echo '</div>';
 	//Load the name/description/author from the header of the file
 	$file = EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.'.php';
 }

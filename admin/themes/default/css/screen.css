@@ -44,13 +44,23 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 .navigation {margin-left:0; padding-left:0; list-style:none;}
 	.navigation li {display:inline;}
 	.navigation a {text-decoration:none;}
-	
-.tags {list-style:none; margin-left:0; padding-left:0;}
-	.tags li {display:inline;}
 
 .error {background:#F1C8BA; color:#933;}
 .alert {background:#fff09e;}
+	
+/* Microformats */	
+.hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
+	.hTagcloud li {display:inline;}
 
+	.popular {}
+	.v-popular {font-size:140%;}
+	.vv-popular {font-size:180%;}
+	.vvv-popular {font-size:220%;}
+	.vvvv-popular {font-size:260%;}
+	.vvvvv-popular {font-size:300%;}
+	.vvvvvv-popular {font-size:340%;}
+	.vvvvvvv-popular {font-size:380%;}
+	
 /* == Wrap == */
 #wrap {background:#fff; overflow:hidden;}
 
@@ -85,9 +95,7 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 #content {padding:20px; background:#fff; overflow:hidden;clear:both;}
 	#primary {float:left; width: 400px;}
 	#secondary {float:right; width: 400px;}
-	
-	a.edit {}
-	
+
 	/* Homepage Styles */
 	#recent-items ul {margin-left:0; padding-left:0;}
 		#recent-items li { overflow:hidden; display:block;border-bottom:1px solid #fff;padding:0.833333em;}
@@ -165,7 +173,8 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 	
 	#file-list {clear:both;}
 	.delete-link {clear:right;}
-	#tags-list {clear:both;}			
+	#tags-list {clear:both;}
+				
 	/* Tags Page */
 	
 	
@@ -186,35 +195,10 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 		
 		
 	/* Exhibits Pages */
-	#item-select .item {
-		float:left;
-		display:block;
-		width:100px;
-		height:100px;
-		border: solid 1px black;
-	}
-	#item-select .item-container {
-		float:left;
-		display:block;
-		width:100px;
-		height:100px;
-	}
-	#layout-form {
-		clear:both;
-	}
-	
-	#layout-form .drop-item {
-		display:block;
-		width:100px;
-		height:100px;
-		border: solid 1px black;
-	}
-	
-	.item .item_id {
-		font-style: italic;
-		font-size: 2em;
-	}
-
+	#layouts {overflow:hidden;}
+	#choose-layout .layout {display:block; float:left; width: 205px; margin-bottom:18px;}
+		#choose-layout img {border:1px solid #ccc; padding:2px; text-align;center;}
+		#choose-layout .input {font-size:1.2em;}
 	table#exhibits {margin-top:1.6667em;}
 	table#exhibits th {color:#933; font-weight:bold;border:1px solid #fff; border-width: 1px 0; background:#fff;}
 	table#exhibits td {border:1px solid #fff; border-width:1px 0;}

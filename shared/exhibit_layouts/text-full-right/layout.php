@@ -14,7 +14,7 @@
 	</div>
 	</div>
 	
-	<div id="secondary">
+	<div class="secondary">
 	<div class="commentary"><?php echo page_text(1); ?></div>
 	</div>
 </div>

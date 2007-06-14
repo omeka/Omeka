@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(); /*?>
 
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
@@ -169,20 +169,21 @@
 	});
 //]]>
 </script>
-
+*/ ?>
 <?php if ( empty($page->layout) ): ?>
 
 <h2>Choose a layout for the page</h2>
-<form method="post">
+<form method="post" id="choose-layout">
+	<div id="layouts">
 <?php 
 	$layouts = get_ex_layouts();
 	
 	foreach ($layouts as $layout) {
 		exhibit_layout($layout);
 	} 
-	radio(array('name'=>'layout'), array_combine($layouts,$layouts), $page->layout);
-	submit('Choose this layout','choose_layout');
 ?>
+	</div> 
+	<?php submit('Choose this layout','choose_layout');?>
 </form>
 
 <?php else: ?>
