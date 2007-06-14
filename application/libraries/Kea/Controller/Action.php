@@ -3,8 +3,6 @@
  * @package Omeka
  */
 require_once 'Zend/Controller/Action.php';
-require_once 'Kea/Controller/Browse/Paginate.php';
-require_once 'Kea/Controller/Browse/List.php';
 abstract class Kea_Controller_Action extends Zend_Controller_Action
 {
 	/**
@@ -53,6 +51,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * @var array
 	 **/
 	protected $_allowed = array();
+	
+	protected $_broker;
 		
 	/**
 	 * Attaches a view object to the controller.
@@ -72,7 +72,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		$this->_auth = Zend::Registry('auth');
 		
-		$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
+		$this->_broker = Kea_Controller_Plugin_Broker::getInstance();
 		
 		return $init;
 	}
@@ -347,9 +347,21 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{		
 		if(empty($this->_modelClass)) throw new Exception( 'Scaffolding class has not been specified' );
 		
-		if(empty($this->_browse)) $this->_browse = new Kea_Controller_Browse_List($this->_modelClass, $this);
+		$pluralName = strtolower($this->_modelClass).'s';
+		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
+				
+		$$pluralName = Doctrine_Manager::getInstance()->getTable($this->_modelClass)->findAll();
+
+		$totalVar = 'total_'.$pluralName;
 		
-		return $this->_browse->browse();
+		$$totalVar = count($$pluralName);
+		
+		Zend::Register($pluralName, $$pluralName);
+		
+		//Fire the plugin hook
+		$this->pluginHook('onBrowse' . ucwords($pluralName), array($$pluralName));
+		
+		return $this->render($viewPage, compact($pluralName,$totalVar));
 	}
 	
 	public function showAction()
@@ -368,7 +380,16 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		
 		Zend::register($varName, $$varName);
+		
+		//i.e. onShowItem() plugin hook
+		$this->pluginHook( 'onShow' . get_class($$varName), array($$varName) );
+		
 		return $this->render($viewPage, compact($varName));
+	}
+	
+	protected function pluginHook($hookName, $varsToPass = array()) {
+		//Fire the plugin hook
+		call_user_func_array(array($this->_broker, $hookName), $varsToPass);
 	}
 	
 	public function addAction()
@@ -382,6 +403,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		if($this->commitForm($$varName))
 		{
+			$this->pluginHook('onAdd' . $class, array($$varName));
 			$this->_redirect($pluralName.'/browse/');
 		}else {
 			$this->loadFormData();
@@ -403,6 +425,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		if($this->commitForm($$varName))
 		{
+			$this->pluginHook('onEdit' . $this->_modelClass, array($$varName));
+			
 			//Avoid a redirect by passing an extra parameter to the AJAX call
 			if($this->_getParam('noRedirect')) {
 				$this->_forward($pluralName, 'show');
@@ -420,6 +444,9 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$browseURL = strtolower($this->_modelClass).'s/browse/';
 		
 		$record = $this->findById();
+
+		$this->pluginHook('onDelete' . $this->_modelClass, array($record));
+				
 		$record->delete();
 		$this->_redirect($browseURL);
 	}
@@ -500,7 +527,12 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		}
 		
 		$this->_view->assign($vars);
+		
+		$this->pluginHook('preRenderPage', array($page, $vars));
+		
 		$this->getResponse()->appendBody($this->_view->render($page));
+		
+		$this->pluginHook('postRenderPage', array($page, $vars));
 	}
 	
 	/**

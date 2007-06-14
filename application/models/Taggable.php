@@ -26,6 +26,13 @@ class Taggable
 		$this->conn = Doctrine_Manager::getInstance()->connection();
 	}
 	
+	protected function pluginHook($hookName, $varsToPass = array())
+	{
+		$broker = Kea_Controller_Plugin_Broker::getInstance();
+		
+		call_user_func_array(array($broker, $hookName), $varsToPass);
+	}
+	
 	public function getTagJoinTableName()
 	{
 		return $this->joinTable;
@@ -261,9 +268,15 @@ class Taggable
 		
 		if(!empty($diff['removed'])) {
 			$this->removeTagsByArray($diff['removed'], $user_id, $deleteTags);
+			
+			//PLUGIN HOOKS
+			$this->pluginHook('onUntag' . get_class($this->record), array($this->record, $diff['removed'], $user_id));
 		}
 		if(!empty($diff['added'])) {
 			$this->addTags($diff['added'], $user_id);
+			
+			//PLUGIN HOOKS
+			$this->pluginHook('onTag' . get_class($this->record), array($this->record, $diff['added'], $user_id));
 		}
 		
 	}

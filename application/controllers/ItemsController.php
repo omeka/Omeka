@@ -11,7 +11,6 @@ class ItemsController extends Kea_Controller_Action
 	{
 		$this->_table = Doctrine_Manager::getInstance()->getTable('Item');
 		$this->_modelClass = 'Item';
-		$this->_browse = new Kea_Controller_Browse_Paginate('Item', $this);
 	}
 	
 	public function addAction()
@@ -20,6 +19,7 @@ class ItemsController extends Kea_Controller_Action
 		$user = Kea::loggedIn();
 		$item->User = $user;
 		if($this->commitForm($item)) {
+			$this->pluginHook('onAddItem', array($item));
 			return $this->_redirect('items/browse');
 		}else {
 			return $this->render('items/add.php',compact('item'));
@@ -230,6 +230,9 @@ class ItemsController extends Kea_Controller_Action
 		$items = $query->execute();
 		
 		Zend::register('total_results', $total_results);
+		
+		$this->pluginHook('onBrowseItems', array($items));
+		
 		return $this->render('items/browse.php', compact('total_items', 'items'));
 	}
 	
@@ -250,6 +253,10 @@ class ItemsController extends Kea_Controller_Action
 			$clean = $_POST;
 			unset($clean['id']);
 			
+			//If item is being made public
+			if(!$item->public && $clean['public'] == 1) {
+				$wasMadePublic = true;
+			}
 			
 			$validDate = $item->processDate('date',
 								$clean['date_year'],
@@ -338,6 +345,11 @@ class ItemsController extends Kea_Controller_Action
 					$item->applyTagString($clean['tags'], $user->id);
 				}
 				
+				//If the item was made public, fire the plugin hook
+				if($wasMadePublic) {
+					$this->pluginHook('onMakePublicItem', array($item));
+				}
+				
 				$conn->commit();
 				return true;
 			}
@@ -413,6 +425,9 @@ class ItemsController extends Kea_Controller_Action
 		$item->refresh();
 		
 		Zend::Register('item', $item);
+		
+		$this->pluginHook('onShowItem', array($item));
+		
 		return $this->render('items/show.php', compact("item", 'user'));
 	}
 	
@@ -428,6 +443,7 @@ class ItemsController extends Kea_Controller_Action
 			$if->Item = $item;
 			$if->User = $user;
 			$if->save();
+			$this->pluginHook('onMakeFavoriteItem', array($item, $user));
 		}
 	}
 	
@@ -443,6 +459,8 @@ class ItemsController extends Kea_Controller_Action
 			$tagId = $_POST['remove_tag'];
 			$tagToDelete = $this->getTable('Tag')->find($tagId);
 			if($tagToDelete) {
+				$this->pluginHook('onUntagItem', array($item, $tagToDelete->name, $this->_user));
+				
 				//delete the tag from the Item
 				return $item->deleteTag($tagToDelete, null, true);
 			}

@@ -46,4 +46,10 @@
 	
 </form>
 
+<?php if ( $section->exists() ): ?>
+	<form action="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>">
+		<input type="submit" name="submit" value="Delete this Section --&gt;" />
+	</form>
+<?php endif; ?>
+
 <?php foot(); ?>

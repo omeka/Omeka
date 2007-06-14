@@ -70,8 +70,10 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
 		$retVals = array();
 		foreach( $this->_plugins as $key => $plugin )
 		{
-			$retVal = call_user_func_array(array($plugin, $m), $a);
-			if($retVal !== null) $retVals[$key] = $retVal;
+			if(method_exists($plugin, $m)) {
+				$retVal = call_user_func_array(array($plugin, $m), $a);
+				if($retVal !== null) $retVals[$key] = $retVal;				
+			}
 		}
 		if(!empty($retVals)) return $retVals;
 	}

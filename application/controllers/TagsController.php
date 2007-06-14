@@ -153,6 +153,10 @@ class TagsController extends Kea_Controller_Action
 		
 		Zend::register('total_tags', $total_tags);
 		Zend::register('total_results', $total_results);	
+		
+		//Plugin hook
+		$this->pluginHook('onBrowseTags', array($tags, $for));
+		
 		return $this->render('tags/browse.php',compact('tags','total_tags'));
 	}
 }

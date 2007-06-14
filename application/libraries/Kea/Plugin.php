@@ -51,10 +51,6 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 			}
 
 			$this->router = $router;			
-
-			//Hook the Doctrine event listeners into the plugin
-			$listener = new Kea_EventListener($this);
-			Doctrine_Manager::getInstance()->getListener()->add($listener);
 	
 			$front = Kea_Controller_Front::getInstance();
 			if(file_exists($this->dir.DIRECTORY_SEPARATOR.'controllers')) {
@@ -364,29 +360,47 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	
 	///// END ZEND CONTROLLER HOOKS /////
 	
-	///// DOCTRINE LISTENERS /////
-		
-	public function onLoad(Doctrine_Record $record) {
-		$this->dispatchListener('onLoad', $record);
-	}
-    public function onPreLoad(Doctrine_Record $record) {
-		$this->dispatchListener('onPreLoad', $record);
-	}
-    public function onUpdate(Doctrine_Record $record) {
-		$this->dispatchListener('onEdit', $record);
-	}
- 
-    public function onInsert(Doctrine_Record $record) {
-		$this->dispatchListener('onAdd', $record);
-	}
- 
-    public function onDelete(Doctrine_Record $record) {}
-    public function onPreDelete(Doctrine_Record $record) {}
- 
-    public function onSleep(Doctrine_Record $record) {}
-    
-    public function onWakeUp(Doctrine_Record $record) {}
-		
+	public function preRenderPage($page, $vars) {}
+	public function postRenderPage($page, $vars) {}
+	
+	public function onBrowseItems($items) {} 
+	public function onShowItem($item) {} 
+	public function onDeleteItem($item) {}
+	public function onAddItem($item) {} 
+	public function onEditItem($item) {}
+	public function onTagItem($item, $tagName, $user_id) {}
+	public function onUntagItem($item, $tagName, $user_id) {} 
+	public function onMakePublicItem($item) {}
+	public function onMakeFavoriteItem($item, $user_id) {}
+	
+	public function onAddCollection($coll) {}
+	public function onEditCollection($coll) {}
+	public function onBrowseCollections($colls) {}
+	public function onShowCollection($coll) {}
+	public function onDeleteCollection($coll) {}
+	
+	public function onBrowseExhibits($exhibits) {}
+	public function onAddExhibit($ex) {}
+	public function onEditExhibit($ex) {}
+	public function onDeleteExhibit($ex) {}
+	public function onTagExhibit($ex, $tags) {}
+	public function onUntagExhibit($ex, $tags) {}
+	public function onShowExhibit($ex, $section, $page) {}
+	public function onAddExhibitPage($page) {}
+	public function onAddExhibitSection($section) {}
+	public function onEditExhibitPage($page) {}
+	public function onEditExhibitSection($section) {}
+	public function onDeleteExhibitPage($page) {}
+	public function onDeleteExhibitSection($section) {}
+	public function onShowExhibitItem($item, $exhibit) {}
+	
+	public function onAddType($type) {}
+	public function onEditType($type) {}
+	public function onDeleteType($type) {}
+	public function onShowType($type) {}
+	public function onBrowseTypes($types) {}		
+	
+	public function onBrowseTags($tags, $for) {}
 } // END class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 
 ?>

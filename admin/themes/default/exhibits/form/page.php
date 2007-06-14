@@ -242,10 +242,16 @@
 	submit('Save &amp; Return to Section', 'section_form');
 	submit('Save &amp; Add Another Page', 'page_form');
 	submit('Change the layout for this page', 'change_layout');
-	submit('Cancel/Delete this page', 'delete_page');
+	
 ?>
 </form>
 
+<form action="<?php echo uri('exhibits/deletePage/'.$page->id); ?>">
+	<?php 
+		submit('Cancel/Delete this page', 'delete_page'); 
+	?>
+	
+</form>
 <?php endif; ?>
 
 <?php foot(); ?>
