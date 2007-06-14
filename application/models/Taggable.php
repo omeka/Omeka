@@ -18,10 +18,10 @@ class Taggable
 		//e.g. exhibit_id
 		$this->joinId = strtolower(get_class($record)) . '_id';
 		
-		$this->tagTable = Doctrine_Manager::getInstance()->getTable('Tag');
+		$this->tagTable = Zend::Registry('doctrine')->getTable('Tag');
 		$this->tagTableName = $this->tagTable->getTableName();
 		
-		$this->joinTable = Doctrine_Manager::getInstance()->getTable($this->joinClass)->getTableName();
+		$this->joinTable = Zend::Registry('doctrine')->getTable($this->joinClass)->getTableName();
 		
 		$this->conn = Doctrine_Manager::getInstance()->connection();
 	}
@@ -57,7 +57,7 @@ class Taggable
 		if($user_id instanceof User) {
 			$user_id = $user_id->id;
 		}
-		$table = Doctrine_Manager::getInstance()->getTable('Tag');
+		$table = Zend::Registry('doctrine')->getTable('Tag');
 		
 		$dql = "SELECT t.* FROM Tag t INNER JOIN t.{$this->joinClass} j WHERE j.user_id = ? AND j.{$this->joinId} = ?";
 		
@@ -156,7 +156,7 @@ class Taggable
 	 * @return boolean
 	 **/
 	public function hasTag($tag, $user=null) {
-		$q = Doctrine_Manager::getInstance()->getTable($this->joinClass)->createQuery();
+		$q = Zend::Registry('doctrine')->getTable($this->joinClass)->createQuery();
 		$tagName = ($tag instanceof Tag) ? $tag->name : $tag;
 		$q->innerJoin($this->joinClass.'.Tag t')->where('t.name = ?', array($tagName));
 

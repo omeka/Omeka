@@ -11,7 +11,7 @@ class ExhibitsController extends Kea_Controller_Action
 	public function init()
 	{
 		$this->_modelClass = 'Exhibit';
-		$this->_table = Doctrine_Manager::getInstance()->getTable('Exhibit');
+		$this->_table = $this->getTable('Exhibit');
 		
 		require_once 'Zend/Session.php';
 		$this->session = new Zend_Session('Exhibit');

@@ -497,7 +497,7 @@ function item($id=null)
 		return $item;
 	}
 	
-	$item = Doctrine_Manager::getInstance()->getTable('Item')->find($id);
+	$item = Zend::Registry('doctrine')->getTable('Item')->find($id);
 	
 	//Quick permissions check
 	if(!$item->public && !has_permission('Items', 'showNotPublic')) {
@@ -514,7 +514,7 @@ function collection($id=null)
 		return $c;
 	}
 	
-	$c = Doctrine_Manager::getInstance()->getTable('Collection')->find($id);
+	$c = Zend::Registry('doctrine')->getTable('Collection')->find($id);
 	return $c;
 }
 
@@ -541,7 +541,7 @@ function type($id=null)
 		return $t;
 	}
 	
-	$t = Doctrine_Manager::getInstance()->getTable('Type')->find($id);
+	$t = Zend::Registry('doctrine')->getTable('Type')->find($id);
 	
 	return $t;
 }

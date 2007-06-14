@@ -9,7 +9,7 @@ class TypesController extends Kea_Controller_Action
 	public function init()
 	{
 		$this->_modelClass = 'Type';
-		$this->_table = Doctrine_Manager::getInstance()->getTable('Type');
+		$this->_table = $this->getTable('Type');
 	}
 	
 	protected function commitForm($type) 
@@ -60,8 +60,8 @@ class TypesController extends Kea_Controller_Action
 	protected function loadFormData() 
 	{
 		$id = $this->getRequest()->getParam('id');
-		$type = Doctrine_Manager::getInstance()->getTable('Type')->find($id);
-		$metafields = Doctrine_Manager::getInstance()->getTable('Metafield')->findMetafieldsWithoutType($type);
+		$type = $this->getTable('Type')->find($id);
+		$metafields = $this->getTable('Metafield')->findMetafieldsWithoutType($type);
 		$this->_view->assign(compact('metafields'));
 	}
 	

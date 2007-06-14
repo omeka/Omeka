@@ -207,7 +207,7 @@ abstract class Kea_Record extends Doctrine_Record
 			return $this->getTable()->getTableName();
 		}
 		
-		return Doctrine_Manager::getInstance()->getTable($model)->getTableName();
+		return Zend::Registry('doctrine')->getTable($model)->getTableName();
 	}
 	
 	public function __call($m, $a)

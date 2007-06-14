@@ -9,7 +9,7 @@ class ItemsController extends Kea_Controller_Action
 {		
 	public function init() 
 	{
-		$this->_table = Doctrine_Manager::getInstance()->getTable('Item');
+		$this->_table = $this->getTable('Item');
 		$this->_modelClass = 'Item';
 	}
 	
@@ -72,8 +72,7 @@ class ItemsController extends Kea_Controller_Action
 	 * @return mixed|void
 	 **/
 	public function browseAction()
-	{	
-		
+	{			
 		require_once 'Kea/Select.php';
 		$select = new Kea_Select($this->getConn());
 	
@@ -380,9 +379,9 @@ class ItemsController extends Kea_Controller_Action
 	 **/
 	protected function loadFormData() 
 	{
-		$collections = Doctrine_Manager::getInstance()->getTable('Collection')->findAll();
-		$plugins = Doctrine_Manager::getInstance()->getTable('Plugin')->findActive();
-		$types = Doctrine_Manager::getInstance()->getTable('Type')->findAll();
+		$collections = $this->getTable('Collection')->findAll();
+		$plugins = $this->getTable('Plugin')->findActive();
+		$types = $this->getTable('Type')->findAll();
 		
 		$this->_view->assign(compact('collections', 'plugins', 'types'));
 	}
@@ -435,7 +434,7 @@ class ItemsController extends Kea_Controller_Action
 	{
 		if($item->isFavoriteOf($user)) {
 				//Make un-favorite
-				$if = Doctrine_Manager::getInstance()->getTable('ItemsFavorites')->findBySql("user_id = {$user->id} AND item_id = {$item->id}");
+				$if = $this->getTable('ItemsFavorites')->findBySql("user_id = {$user->id} AND item_id = {$item->id}");
 				$if->delete();
 		} else {
 			//Make it favorite

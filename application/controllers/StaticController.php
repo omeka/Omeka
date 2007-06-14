@@ -8,7 +8,7 @@ class StaticController extends Kea_Controller_Action
 	public function init()
 	{
 		$this->_modelClass = 'Route';
-		$this->_table = Doctrine_Manager::getInstance()->getTable($this->_modelClass);
+		$this->_table = $this->getTable($this->_modelClass);
 	}
 	
 	public function findStaticAction()

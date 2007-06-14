@@ -8,7 +8,7 @@ class SettingsController extends Kea_Controller_Action
 	}
 	
 	public function editAction() {
-		$table = Doctrine_Manager::getInstance()->getTable('Option');
+		$table = $this->getTable('Option');
 		
 		//Any changes to this list should be reflected in the install script (and possibly the view functions)		
 		$settingsList = array(

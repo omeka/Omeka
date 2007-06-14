@@ -8,7 +8,7 @@ require_once 'Kea/Controller/Action.php';
 class UsersController extends Kea_Controller_Action
 {	
 	public function init() {
-		$this->_table = Doctrine_Manager::getInstance()->getTable('User');
+		$this->_table = $this->getTable('User');
 		$this->_modelClass = 'User';
 	}
 
@@ -64,7 +64,7 @@ class UsersController extends Kea_Controller_Action
 	public function activateAction()
 	{
 		$hash = $this->_getParam('u');
-		$ua = Doctrine_Manager::getInstance()->getTable('UsersActivations')->findByUrl($hash);
+		$ua = $this->getTable('UsersActivations')->findByUrl($hash);
 		
 		if(!$ua) {
 			$this->errorAction();
@@ -98,8 +98,8 @@ class UsersController extends Kea_Controller_Action
 			$ua->generate();
 			$ua->save();
 			//send the user an email telling them about their great new user account
-			$site_title = Doctrine_Manager::getInstance()->getTable('Option')->findByName('site_title');
-			$from = Doctrine_Manager::getInstance()->getTable('Option')->findByName('administrator_email');
+			$site_title = $this->getTable('Option')->findByName('site_title');
+			$from = $this->getTable('Option')->findByName('administrator_email');
 			
 			$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."/admin/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
 			$title = "Activate your account with the ".$site_title." Archive";

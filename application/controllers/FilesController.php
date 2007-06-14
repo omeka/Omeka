@@ -9,7 +9,7 @@ class FilesController extends Kea_Controller_Action
 {
 	public function init() {
 		$this->_modelClass = 'File';
-		$this->_table = Doctrine_Manager::getInstance()->getTable('File');		
+		$this->_table = $this->getTable('File');		
 	}
 	
 	public function indexAction() { $this->_redirect('/'); }

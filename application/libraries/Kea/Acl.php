@@ -201,7 +201,7 @@ class Kea_Acl extends Zend_Acl
 
 	public function save()
 	{
-		$optionTable = Doctrine_Manager::getInstance()->getTable('option');;
+		$optionTable = Zend::Registry('doctrine')->getTable('option');;
 		$acl = $optionTable->findByDql("name LIKE :name", array('name' => 'acl'));
 		$acl[0]->value = serialize($this);
 		$acl[0]->save();

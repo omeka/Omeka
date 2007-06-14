@@ -9,7 +9,7 @@ class TagsController extends Kea_Controller_Action
 {	
 	public function init()
 	{
-		$this->_table = Doctrine_Manager::getInstance()->getTable('Tag');
+		$this->_table = $this->getTable('Tag');
 		$this->_modelClass = 'Tag';
 		
 		$this->_joinTables = array('ExhibitsTags', 'ItemsTags');

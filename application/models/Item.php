@@ -128,7 +128,7 @@ class Item extends Kea_Record
 		switch ($name) {
 			case 'Tags':
 				//make an optimized DQL query
-				$tags = Doctrine_Manager::getInstance()->getTable('Tag')->getSome(null,null,null,null,$this);
+				$tags = Zend::Registry('doctrine')->getTable('Tag')->getSome(null,null,null,null,$this);
 				//Do I need to set some sort of relation marker or something to make sure that this tag collection saves when the item saves?
 				return $tags;
 				break;

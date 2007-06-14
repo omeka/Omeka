@@ -8,7 +8,7 @@ class PluginsController extends Kea_Controller_Action
 	public function init()
 	{
 		$this->_modelClass = 'Plugin';
-		$this->_table = Doctrine_Manager::getInstance()->getTable('Plugin');
+		$this->_table = $this->getTable('Plugin');
 	}
 	
 	public function browseAction() {

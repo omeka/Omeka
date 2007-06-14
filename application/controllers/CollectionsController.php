@@ -8,7 +8,7 @@ class CollectionsController extends Kea_Controller_Action
 {
 	public function init()
 	{
-		$this->_table = Doctrine_Manager::getInstance()->getTable('Collection');
+		$this->_table = $this->getTable('Collection');
 		$this->_modelClass = 'Collection';
 	}
 	

@@ -273,7 +273,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 */
 	public function getTable($table = null)
 	{
-		return Doctrine_Manager::getInstance()->getTable($table);
+		return Zend::Registry('doctrine')->getTable($table);
 	}
 
 	public function getConn()
@@ -350,7 +350,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$pluralName = strtolower($this->_modelClass).'s';
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
 				
-		$$pluralName = Doctrine_Manager::getInstance()->getTable($this->_modelClass)->findAll();
+		$$pluralName = $this->getTable($this->_modelClass)->findAll();
 
 		$totalVar = 'total_'.$pluralName;
 		
@@ -550,7 +550,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		if(!$table) {
 			$record = $this->_table->find($id);
 		}else {
-			$record = Doctrine_Manager::getInstance()->getTable($table)->find($id);
+			$record = $this->getTable($table)->find($id);
 		}
 		
 		if(!$record) {

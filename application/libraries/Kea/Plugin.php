@@ -100,8 +100,8 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 				throw new Exception( 'Plugin install failed.' );
 			}
 			
-			$mfTable = Doctrine_Manager::getInstance()->getTable('Metafield');
-			$typesTable = Doctrine_Manager::getInstance()->getTable('Type');
+			$mfTable = Zend::Registry('doctrine')->getTable('Metafield');
+			$typesTable = Zend::Registry('doctrine')->getTable('Type');
 			
 			//Add metafields to existing types			
 			$dql = "SELECT tm.* FROM TypesMetafields tm 

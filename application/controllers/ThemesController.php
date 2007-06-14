@@ -103,7 +103,7 @@ class ThemesController extends Kea_Controller_Action
 	{		
 		$themes = $this->getAvailable();
 		
-		$public = Doctrine_Manager::getInstance()->getTable('Option')->findByName('public_theme');
+		$public = $this->getTable('Option')->findByName('public_theme');
 		
 		if(!empty($_POST) and $this->isAllowed('switch')) {
 			$public->value = $_POST['public_theme'];
