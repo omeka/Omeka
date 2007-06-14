@@ -1,0 +1,5 @@
+.gallery-full-top-right .primary,.gallery-full-top-right .secondary {overflow:hidden;}
+	.gallery-full-top-right .primary .item {float:right; margin: 0 18px;}
+	.gallery-full-top-right .primary .text {margin-left:18px;}
+	.gallery-full-top-right .secondary { padding:18px 18px 18px 0; background:#eee; margin:18px 18px 0;}
+	.gallery-full-top-right .secondary .item {float:left; margin-left:18px; margin-bottom:18px;}
