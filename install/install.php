@@ -8,7 +8,9 @@ if (file_exists(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini')) {
 	echo 'Omeka has already been setup. This file and the install directory should be deleted by an administrator.';
 	exit;
 }
-
+$config_dir = BASE_DIR.DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'config';
+		if(!is_writable($config_dir)) 
+			die('You need correct read/write permissions in order for this install script to work.  Please refer to the Omeka documentation for details.');
 /**
  * What needs to be done on an install?
  * 1) Setup the db connection
@@ -45,9 +47,7 @@ username = ".$db['username']."
 password = ".$db['password']."
 name     = ".$db['name']."
 ";
-		$config_dir = BASE_DIR.DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'config';
-		if(!is_writable($config_dir)) 
-			die('You need correct read/write permissions in order for this install script to work.  Please refer to the Omeka documentation for details.');
+		
 		$f = fopen($config_dir.DIRECTORY_SEPARATOR.'db.ini', 'w');
 		fwrite($f, $db_config);
 		fclose($f);		
@@ -60,7 +60,8 @@ name     = ".$db['name']."
 		spl_autoload_register(array('Doctrine', 'autoload'));
 		Doctrine_Manager::connection($dbh);
 		$manager = Doctrine_Manager::getInstance();
-
+		Zend::register('doctrine', $manager);
+		
 		// Build the tables explicitly
 		require_once 'tables.php';
 		

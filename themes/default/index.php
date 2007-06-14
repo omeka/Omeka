@@ -9,7 +9,14 @@
 	</div>
 	
 	<div id="secondary">
-
+		<?php if ( $user = current_user() ): ?>
+			<div class="welcome">
+				Howdy, <?php echo $user->first_name; ?>! You are logged in to Omeka.  
+				<?php if ( has_permission('Items', 'showNotPublic') ): ?>
+					Because you are logged in, you can see items that are not public.
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
 		
 		<div id="recent-items">
 			<h2>Recently Added</h2>
