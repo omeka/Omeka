@@ -13,6 +13,10 @@ include_once 'ExhibitFunctions.php';
  * 
  * @package Omeka
  */
+function dublin_core($type) { 
+	$data = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'dublincore.ini', array('coremetadata')); 
+	echo $data->$type; 
+} 
 
 /**
  * Default display for a given item type
@@ -718,7 +722,7 @@ function archive_image( $record, $field , $props, $width, $height, $abs, $web,$r
                {
                        $html .= 'width="' . $o_width . '" height="' . $o_height . '"';
                }
-               if( $o_width > $width && !$height )
+               elseif( $o_width > $width && !$height )
                {
                        $ratio = $width / $o_width;
                        $height = $o_height * $ratio;
