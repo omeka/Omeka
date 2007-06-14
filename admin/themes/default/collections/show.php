@@ -9,8 +9,12 @@
 </div>
 <div id="collection-items">
 	<h3>Recently Added to <?php echo $collection->name; ?></h3>
+	<?php
+		$items = items(array('collection'=>$collection->name, 'recent'=>true));
+	?>
+	
 	<ul>
-	<?php foreach ($collection->Items as $key => $item): ?>
+	<?php foreach ($items as $key => $item): ?>
 		<?php if ($key < 10): ?>
 		<li><span class="title"><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo $item->title; ?></a></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></li>
 		<?php endif; ?> 

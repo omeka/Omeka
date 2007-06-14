@@ -156,7 +156,6 @@ function page_nav($useSlug=true)
 	$slug = $useSlug ? $section->Exhibit->slug : $section->Exhibit->id;
 	
 	echo '<ul class="page-nav">';
-	echo '<li class="first"><a href="'.uri('exhibits/show/'.$slug.'/'.$section->order.'/1').'">First</a></li>';
 	
 	$key = 1;
 	foreach ($section->Pages as $key => $p) {
@@ -165,11 +164,10 @@ function page_nav($useSlug=true)
 		$pageUrl = uri($pageUrl);
 		
 		//Create the link (also check if uri matches current uri)
-		echo '<li><a href="'. $pageUrl . '"'. (is_current($pageUrl) ? ' class="current"' : '').'>' . $key . '</a></li>';
+		echo '<li'. (is_current($pageUrl) ? ' class="current"' : '').'><a href="'. $pageUrl . '">' . $key . '</a></li>';
 	
 	}
 	
-	echo '<li class="last"><a href="'.uri('exhibits/show/'.$slug.'/'.$section->order.'/'.$key).'">Last</a></li>';
 	echo '</ul>';
 }
 

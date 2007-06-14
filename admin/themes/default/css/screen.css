@@ -137,8 +137,8 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 		.radio {float:right; width: 340px;}
 		.radio label {width:10em; text-align:left; display:inline; float:none; margin-right:20px;}
 		
-		.file {overflow:hidden;}
-		
+		.files {overflow:hidden; float:right;width:340px;}
+			
 	/* Collections Pages */
 	.collection {overflow:hidden; border-top: 1px dotted #ccc;padding-top:1.66667em;}
 		.collection h3 {float:left; width:260px;padding-bottom:0.833333em;}

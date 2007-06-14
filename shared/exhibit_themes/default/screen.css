@@ -21,6 +21,8 @@ p,ul,ol,dl {font-size:1.2em; margin-bottom:1.5em; line-height:1.5em;}
 	.section-nav li a {display:block; float:left; width: 10em; text-decoration:none;padding:0.5em 0; text-align:center; background:#4D97D2; color:#fff;}
 	.section-nav li a:hover {background:#66A6D9;}
 	
+.page-nav {list-style:none; margin-left:18px;}
+	.page-nav li {display:inline; margin-right:10px;}
 /* == Content == */
 
 #content {padding:18px 0;}

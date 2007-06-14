@@ -196,7 +196,7 @@
 			<legend>Add Files</legend>
 			<div class="field">
 				<label for="add_num_files">Add Files</label>
-				<div class="">
+				<div class="files">
 			<?php 
 				$numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; 
 			?>
@@ -204,17 +204,17 @@
 					text(array('name'=>'add_num_files','size'=>2),$numFiles);
 					submit('Add this many files', 'add_more_files'); 
 				?>
-				
+				</div>
 			</div>
 			
 			<div class="field">
 			<!-- MAX_FILE_SIZE must precede the file input field -->
 				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+				<label for="file[<?php echo $i; ?>]">Find a File</label>
 					
 			<?php for($i=0;$i<$numFiles;$i++): ?>
-			<div class="file">
-				<label for="file[<?php echo $i; ?>]">Find a File</label>
-				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="textinput" />			
+			<div class="files">
+				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="fileinput" />			
 			</div>
 			<?php endfor; ?>
 			</div>
@@ -261,7 +261,7 @@
 		<legend>Tagging</legend>
 		<div class="field">
 		<label for="tags-field">Modify Your Tags</label>
-		<input type="text" name="tags" id="tags-field" class="textInput" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+		<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo tag_string(current_user_tags($item)); ?>" />
 		</div>
 		
 		<div class="field">
