@@ -79,7 +79,7 @@ class ItemsController extends Kea_Controller_Action
 		$select->from('items i','i.id');
 
 		//Run the permissions check
-		if( !$this->isAllowed('showNotPublic') ) {
+		if( !$this->isAllowed('showNotPublic') or $this->_getParam('public') ) {
 			$select->where('i.public = 1');
 		} 
 		

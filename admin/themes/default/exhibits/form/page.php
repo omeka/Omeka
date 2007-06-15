@@ -201,7 +201,7 @@
 	<div id="item-select">
 	<?php 
 	//Retrieve items with their pagination
-	$retVal = _make_omeka_request('Items','browse',array('pagination_url'=>$url),array('items','pagination'));
+	$retVal = _make_omeka_request('Items','browse',array('pagination_url'=>$url, 'public'=>true),array('items','pagination'));
 	extract($retVal);
 	
 	?>

@@ -1,6 +1,6 @@
 	<?php 
 	//Retrieve items with their pagination
-	$retVal = _make_omeka_request('Items','browse',array('page'=>$_REQUEST['page'], 'pagination_url'=>null),array('items','pagination'));
+	$retVal = _make_omeka_request('Items','browse',array('page'=>$_REQUEST['page'], 'pagination_url'=>null, 'public'=>true),array('items','pagination'));
 	extract($retVal);
 	
 	?>
