@@ -156,9 +156,11 @@ class Taggable
 	 * @return boolean
 	 **/
 	public function hasTag($tag, $user=null) {
-		$q = Zend::Registry('doctrine')->getTable($this->joinClass)->createQuery();
+		$q = new Doctrine_Query;
+		$q->parseQuery("SELECT COUNT(j.id) count FROM {$this->joinClass} j INNER JOIN j.Tag t");
+		
 		$tagName = ($tag instanceof Tag) ? $tag->name : $tag;
-		$q->innerJoin($this->joinClass.'.Tag t')->where('t.name = ?', array($tagName));
+		$q->addWhere("t.name = ? AND j.{$this->joinId} = ?", array($tagName, $this->record->id));
 
 		if($user)
 		{
@@ -167,11 +169,11 @@ class Taggable
 				if(!$user->exists()) return false;
 				$user = $user->id;
 			}
-			$q->addWhere($this->joinClass.'.user_id = ?', array($user));
+			$q->addWhere('j.user_id = ?', array($user));
 		}
-				
+
 		$res = $q->execute();
-		return (count($res) > 0);
+		return ($res[0]->count > 0);
 	}	
 		
 	public function tagString($wrap = null, $delimiter = ',') {

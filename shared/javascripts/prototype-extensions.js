@@ -8,5 +8,7 @@ Element.addMethods({
 		wrapper.appendChild(element); 
 		wrapper.addClassName(className);
 		return Element.extend(wrapper); 
-	} 
+	},
+	
+	insertAfter: function(element, insert) { insert.parentNode.insertBefore(element, insert.nextSibling); }
 }); 

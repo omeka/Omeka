@@ -28,8 +28,14 @@
 			onComplete: function(t) {
 				new Ajax.Request("<?php echo uri('items/ajaxTagsField/?id='.$item->id) ?>", {
 					onSuccess: function(t) {
-						$('tags').hide();
-						$('tags').update(t.responseText);
+						var tagDiv = $('tags');
+						if(!tagDiv) {
+							tagDiv = document.createElement('div');
+							tagDiv.id = 'tags';
+							tagDiv.insertAfter($('my-tags'));
+						}
+						tagDiv.hide();
+						tagDiv.update(t.responseText);
 						Effect.Appear('tags', {duration: 1.0});
 					}
 				});
@@ -61,7 +67,7 @@
 											editableElements[i].getAttribute('rel'));
 		}
 <?php endif; ?>
-	
+
 	});
 	/*
 	var checkJS = document.getElementById;
@@ -176,7 +182,7 @@
 	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
 </div>
 
-<?php if ( $item->Collection->exists() ): ?>
+<?php if ( has_collection($item) ): ?>
 	<h4>Collection</h4>
 
 	<div id="collection">
@@ -184,16 +190,18 @@
 	</div>
 <?php endif; ?>
 
+<?php if ( has_type($item) ): ?>
+	<h3>Type Metadata</h3>
 
-<h3>Type Metadata</h3>
+	<h4>Type Name</h4>
+	<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
 
-<h4>Type Name</h4>
-<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
+	<?php foreach($item->Metatext as $key => $metatext): ?>
+	<h4><?php echo $metatext->Metafield->name; ?></h4>
+	<div><?php echo $metatext->text; ?></div>
+	<?php endforeach; ?>
 
-<?php foreach($item->Metatext as $key => $metatext): ?>
-<h4><?php echo $metatext->Metafield->name; ?></h4>
-<div><?php echo $metatext->text; ?></div>
-<?php endforeach; ?>
+<?php endif; ?>
 
 <h3>Tags</h3>
 <?php if ( has_permission('Items','tag') ): ?>
@@ -206,7 +214,8 @@
 </div>
 <?php endif; ?>
 
-<h4>All Tags</h4>
+<?php if ( has_tags($item) ): ?>
+	<h4>All Tags</h4>
 <div id="tags">
 	<ul class="tags">
 		<?php foreach( $item->Tags as $key => $tag ): ?>
@@ -216,7 +225,7 @@
 		<?php endforeach; ?>
 	</ul>
 </div>
-
+<?php endif; ?>
 
 
 

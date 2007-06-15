@@ -461,6 +461,31 @@ function _get_model_total($controller,$return) {
 	echo $count;
 }
 
+function has_type($item, $name=null) {
+	$exists = $item->Type->exists();
+	$hasName = (!empty($name) ? $item->Type->name == $name : true);
+	return ( $exists and $hasName );
+}
+
+function has_collection($item, $name=null) {
+	$exists = $item->Collection->exists();
+	$hasName = (!empty($name) ? $item->Collection->name == $name : true);
+	return ( $exists and $hasName );
+}
+
+function has_tags($item, array $tags=array()) {
+	$hasSome = ($item->Tags->count() > 0);
+	if(empty($tags) or !$hasSome){
+		return $hasSome;
+	}
+	foreach ($tags as $key => $tag) {
+		if(!$item->hasTag($tag)) {
+			return false;
+		}
+	}
+	return true;
+}
+
 /**
  * Retrieve the most recent tags.
  *
