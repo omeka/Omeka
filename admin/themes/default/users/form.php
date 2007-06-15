@@ -35,4 +35,5 @@
 	<?php select(array('name'=>'role','id'=>'role'),get_user_roles(), $user->role, 'Choose a Role for this user'); ?>
 	</div>
 <?php endif; ?>
+
 </fieldset>

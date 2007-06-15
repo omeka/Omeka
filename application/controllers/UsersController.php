@@ -115,9 +115,13 @@ class UsersController extends Kea_Controller_Action
 	{
 		
 		/* Permissions check to see if whoever is trying to change role to a super-user*/	
-		if(!empty($_POST['role']) && $_POST['role'] == 'super') {
-			if(!$this->isAllowed('makeSuperUser')) {
+		if(!empty($_POST['role'])) {
+			if($_POST['role'] == 'super' and !$this->isAllowed('makeSuperUser')) {
 				$this->flash('User may not change permissions to super-user');
+				return false;
+			}
+			if(!$this->isAllowed('changeRole')) {
+				$this->flash('User may not change roles.');
 				return false;
 			}
 		} 
