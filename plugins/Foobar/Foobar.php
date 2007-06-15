@@ -27,7 +27,7 @@ class Foobar extends Kea_Plugin
 		Zend::dump( 'showing item with ID = '.$item->id ); 
 	}
 	public function onBrowseItems($items) {
-		Zend::dump( get_class($items) );
+//		Zend::dump( get_class($items) );
 	}
 	public function onAddItem($item) {
 		Zend::dump( 'you added an item!  It has an ID = '. $item->id );exit;
@@ -45,7 +45,7 @@ class Foobar extends Kea_Plugin
 		Zend::dump( 'edited item with ID = '.$item->id );exit;
 	}
 	public function onDeleteItem($item) {
-		Zend::dump( 'deleting item with ID = '.$item->id );exit;
+//		Zend::dump( 'deleting item with ID = '.$item->id );exit;
 	}
 	public function onMakePublicItem($item) {
 		Zend::dump( $item->id );exit;
@@ -60,7 +60,7 @@ class Foobar extends Kea_Plugin
 		Zend::dump( 'edited a collection with ID = '.$coll->id );exit;
 	}
 	public function onBrowseCollections($colls) {
-		Zend::dump( 'browsing '.count($colls).' collections' );
+//		Zend::dump( 'browsing '.count($colls).' collections' );
 	}
 	public function onShowCollection($coll) {
 		Zend::dump( 'showing collection with ID = '.$coll->id );
@@ -72,7 +72,7 @@ class Foobar extends Kea_Plugin
 	/////END COLLECTION HOOKS
 	
 	public function onBrowseExhibits($exhibits) {
-		Zend::dump( 'browsing '.count($exhibits).' exhibits' );
+//		Zend::dump( 'browsing '.count($exhibits).' exhibits' );
 	}
 	
 	public function onAddExhibit($ex) {
@@ -132,13 +132,13 @@ class Foobar extends Kea_Plugin
 		Zend::dump( 'showing a type with ID = '.$type->id );
 	}
 	public function onBrowseTypes($types) {
-		Zend::dump( 'Browsing '.count($types). ' types' );
+//		Zend::dump( 'Browsing '.count($types). ' types' );
 	}		
 	
 	/////END TYPE HOOKS
 	
 	public function onBrowseTags($tags, $for) {
-		Zend::dump( 'browsing '.count($tags).' tags for class = '.$for );
+//		Zend::dump( 'browsing '.count($tags).' tags for class = '.$for );
 	}
 }
  

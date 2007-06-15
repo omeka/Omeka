@@ -9,6 +9,7 @@ class Metatext extends Kea_Record {
     public function setUp() {
 		$this->hasOne("Item","Metatext.item_id");
 		$this->hasOne("Metafield", "Metatext.metafield_id");
+		$this->setAttribute(Doctrine::ATTR_COLL_KEY, 'metafield_id');
 	}
 
 	public function setTableDefinition() {

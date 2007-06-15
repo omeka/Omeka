@@ -229,7 +229,7 @@ abstract class Kea_Record extends Doctrine_Record
 		if($fetchOne)
 			return $res->fetchColumn(0);
 		else 
-			return $res->fetch();
+			return $res->fetchAll();
 	}
 	
 	/**

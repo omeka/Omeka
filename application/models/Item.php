@@ -7,7 +7,6 @@ require_once 'Tag.php';
 require_once 'Taggable.php';
 require_once 'ItemsTags.php';
 require_once 'Metatext.php';
-require_once 'ItemMetatext.php';
 require_once 'ItemsFavorites.php';
 require_once 'ItemsPages.php';
 require_once 'Section.php';
@@ -23,12 +22,15 @@ class Item extends Kea_Record
 	
 	protected $constraints = array('collection_id','type_id','user_id');
 	
+	protected $_metatext;
+	protected $_metafields;
+		
 	public function setUp() {
 		$this->hasOne("Collection","Item.collection_id");
 		$this->hasOne("Type","Item.type_id");
 		$this->hasOne("User","Item.user_id");
 		$this->ownsMany("File as Files","File.item_id");
-		$this->ownsMany("ItemMetatext as Metatext", "ItemMetatext.item_id");
+		$this->ownsMany("Metatext", "Metatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
 		$this->ownsMany("ItemsTags", "ItemsTags.item_id");
@@ -43,12 +45,7 @@ class Item extends Kea_Record
 	{
 		$this->_taggable = new Taggable($this);
 		
-		/*	Pull in the appropriate metadata fields
-		 *	1) All metafields associated with the Item's type
-		 *	2) All metafields associated with a plugin
-		 * 	(metafields singularly associated with Items is not implemented)
-		 */ 
-		//$dql = "SELECT m.* FROM Metatext m "
+		
 	}
 	
 	public function setTableDefinition() {
@@ -123,22 +120,85 @@ class Item extends Kea_Record
 									
 	}
 	
-/* @todo Uncomment this and finish optimizing the queries	
+	/**
+	 * Optimized queries for obtaining related elements
+	 *
+	 * @return mixed
+	 **/
 	public function get($name) {
 		switch ($name) {
-			case 'Tags':
-				//make an optimized DQL query
-				$tags = Zend::Registry('doctrine')->getTable('Tag')->getSome(null,null,null,null,$this);
-				//Do I need to set some sort of relation marker or something to make sure that this tag collection saves when the item saves?
-				return $tags;
-				break;
+			case 'Metafields':
+				//Cache the metafields so we don't run the query too many times
+				if(empty($this->_metafields)) {
+					$mfIds = $this->getMetafieldIds();
+					if(!empty($mfIds)) {
+						$dql = "SELECT m.* FROM Metafield m WHERE m.id IN (".join(', ', $mfIds).")";
+						$this->_metafields = $this->executeDql($dql);
+					}else {
+						$this->_metafields = new Doctrine_Collection('Metafield');
+					}
+				}
+				
+				return $this->_metafields;
 			
+			case 'Metatext':
+				if(empty($this->_metatext)) {
+					$mfIds = $this->getMetafieldIds();
+					if(!empty($mfIds) and $this->exists() ) {
+						$dql = "SELECT m.* FROM Metatext m WHERE m.metafield_id IN(".join(', ',$mfIds).")
+						AND m.item_id = {$this->id}";
+						$this->_metatext = $this->executeDql($dql);	
+					}else {
+						$this->_metatext = new Doctrine_Collection('Metatext');
+					}										
+				}
+				return $this->_metatext;
 			default:
 				return parent::get($name);
 				break;
 		}
 	}
-*/	
+	
+	/*	Pull in the appropriate metafield IDs
+	 *	1) All metafields associated with the Item's type
+	 *	2) All metafields associated with a plugin
+	 * 	(metafields singularly associated with Items is not implemented)
+	 *
+	 * @param $for string 'All','Plugin','Type' Depending on which metafields you want
+	 */ 
+	protected function getMetafieldIds($for='All')
+	{
+		$mfTable = $this->getTableName('Metafield');
+		$tmTable = $this->getTableName('TypesMetafields');
+		$pTable = $this->getTableName('Plugin');
+		$tTable = $this->getTableName('Type');
+		
+		//Get metafields for plugins
+		if( ($for == 'Plugin') or ($for == 'All')) {
+			$where[] = 'p.active = 1';
+		}
+		
+		//Get the metafields for a specific Type
+		if(!empty($this->type_id) and is_numeric($this->type_id) and ($for == 'All' || $for == 'Type')) {
+			$where[] = "mf.id IN (
+					SELECT mf.id FROM $mfTable mf
+					INNER JOIN $tmTable tm ON tm.metafield_id = mf.id
+					INNER JOIN $tTable t ON t.id = tm.type_id
+					WHERE t.id = {$this->type_id} )";
+		}
+		$sql = "SELECT mf.id FROM $mfTable mf
+				LEFT JOIN $pTable p ON p.id = mf.plugin_id
+				WHERE ".join(' OR ', $where);
+
+		$res = $this->execute($sql);
+		$ids = array();
+		foreach ($res as $k => $v) {
+			$ids[$k] = $v[0];
+		}
+		return $ids;
+
+	}
+	
 	public function hasThumbnail()
 	{
 		$sql = "SELECT COUNT(f.id) thumbCount FROM files f WHERE f.item_id = ? AND f.thumbnail_filename IS NOT NULL";

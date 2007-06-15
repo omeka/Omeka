@@ -486,6 +486,16 @@ function has_tags($item, array $tags=array()) {
 	return true;
 }
 
+function has_metatext($item, $metafield_name = null) {
+	$hasSome = ($item->Metatext->count() > 0);
+	
+	if(!empty($metafield_name)) {
+		$mt = $item->Metatext($metafield_name);
+		return ($hasSome and !empty($mt));
+	}
+	return $hasSome;
+}
+
 /**
  * Retrieve the most recent tags.
  *

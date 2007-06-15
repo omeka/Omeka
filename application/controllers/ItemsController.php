@@ -189,7 +189,10 @@ class ItemsController extends Kea_Controller_Action
 		
 		$select->limitPage($options['page'], $options['per_page']);
 
-
+		//Order by recent-ness
+		if($recent = $this->_getParam('recent')) {
+			$select->order('i.added DESC');
+		}
 				
 		$res = $select->fetchAll();
 		
@@ -246,7 +249,7 @@ class ItemsController extends Kea_Controller_Action
 	{
 		if(!empty($_POST))
 		{
-			
+
 			$conn = $this->getConn();
 			$conn->beginTransaction();
 			
@@ -258,6 +261,7 @@ class ItemsController extends Kea_Controller_Action
 				$wasMadePublic = true;
 			}
 			
+			//Process the separate date fields
 			$validDate = $item->processDate('date',
 								$clean['date_year'],
 								$clean['date_month'],
@@ -339,6 +343,13 @@ class ItemsController extends Kea_Controller_Action
 			try {
 				$item->save();
 				
+				//Special process to save the metatext
+				$mts = $item->Metatext;
+				foreach ($mts as $mt) {
+					$mt->item_id = $item->id;
+				}
+				$mts->save();
+				
 				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
 				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
 					$user = Kea::loggedIn();
@@ -364,6 +375,7 @@ class ItemsController extends Kea_Controller_Action
 					}
 					unset($item->Files[$key]);
 				}
+				$this->flash($item->getErrorMsg());
 				
 				return false;
 			}catch(Exception $e) {

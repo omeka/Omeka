@@ -218,7 +218,7 @@
 	{
 		if($metafields) {
 			//Loop through the metafields
-			if($metafields instanceof Doctrine_Collection_Batch) {
+			if($metafields instanceof Doctrine_Collection) {
 				foreach ($metafields as $key => $metafield) {
 					metatext_form($item, $type, $metafield, $usePlugins );
 				}
@@ -232,7 +232,7 @@
 						$input = '<input type="text" class="textinput" name="Metatext['.$metafield->id.'][text]" id="'.$metafieldInputId.'" value="'.$item->Metatext[$metafield->id]->text.'" />';
 						break;
 					case 'textarea':
-						$input = '<textarea rows="15" cols="50" class="textinput" name="Metatext['.$metafield->id.'][text] id="'.$metafieldInputId.'">';
+						$input = '<textarea rows="15" cols="50" class="textinput" name="Metatext['.$metafield->id.'][text]" id="'.$metafieldInputId.'">';
 						$input .= $item->Metatext[$metafield->id]->text;
 						$input .= '</textarea>';
 						break;
@@ -247,16 +247,9 @@
 				echo $out;
 			}
 		} else {
-			if($item->Type->exists()) {
-				metatext_form($item, $type, $item->Type->Metafields, $usePlugins );
-			}
-			
-			if($usePlugins) {
-				$plugins = Doctrine_Manager::getInstance()->getTable('Plugin')->findActive();
-				foreach ($plugins as $key => $plugin) {
-					metatext_form($item, $type, $plugin->Metafields, $usePlugins);
-				}
-			}
+			$metafields = $item->Metafields;
+
+			metatext_form($item, $type, $metafields, $usePlugins );
 		}
 /*		
 		$out = '';

@@ -190,7 +190,7 @@
 	</div>
 <?php endif; ?>
 
-<?php if ( has_type($item) ): ?>
+<?php if ( has_type($item) or has_metatext($item)): ?>
 	<h3>Type Metadata</h3>
 
 	<h4>Type Name</h4>
