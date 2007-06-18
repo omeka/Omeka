@@ -18,6 +18,10 @@ function dublin_core($type) {
 	echo $data->$type; 
 } 
 
+function not_empty_or($value, $default) {
+	return !empty($value) ? $value : $default;
+}
+
 /**
  * Default display for a given item type
  * Example: Still Image would display a fullsize image, Moving Image would embed the movie via object tag
@@ -380,7 +384,7 @@ function plugin_header() {
 
 ///// END PLUGIN HELPER FUNCTIONS /////
 
-function tag_string($record, $link=null, $delimiter=', ',$return=false)
+function tag_string($record, $link=null, $delimiter=', ')
 {
 	$string = array();
 	if($record instanceof Kea_Record and $record->hasRelation("Tags")) {
@@ -399,8 +403,7 @@ function tag_string($record, $link=null, $delimiter=', ',$return=false)
 			}
 		}
 		$string = join($delimiter,$string);
-		if($return) return $string;
-		else echo $string;				
+		return $string;
 	}
 }
 

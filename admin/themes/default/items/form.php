@@ -133,9 +133,9 @@
 			
 			<div class="dates">
 			<div class="dateinput">
-		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo get_year($item->date); ?>">
-		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo get_month($item->date); ?>" />
-		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo get_day($item->date); ?>">
+		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['date_year'], get_year($item->date)); ?>">
+		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['date_month'], get_month($item->date)); ?>" />
+		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['date_day'], get_day($item->date)); ?>">
 		
 		</div>
 		</div>
@@ -146,15 +146,15 @@
 			
 			<div class="dates">
 				<div class="dateinput">
-					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo get_year($item->temporal_coverage_start); ?>"> 
-					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo get_month($item->temporal_coverage_start); ?>" /> 
-					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo get_day($item->temporal_coverage_start); ?>">
+					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>"> 
+					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>">
 				</div>
 				
 				<div class="dateinput">
-					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo get_year($item->temporal_coverage_end); ?>"> 
-					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo get_month($item->temporal_coverage_end); ?>" /> 
-					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo get_day($item->temporal_coverage_end); ?>">
+					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>"> 
+					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>">
 				</div>
 			</div>
 		</div>
@@ -261,7 +261,7 @@
 		<legend>Tagging</legend>
 		<div class="field">
 		<label for="tags-field">Modify Your Tags</label>
-		<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+		<input type="text" name="tags" id="tags-field" class="textInput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
 		</div>
 		
 		<div class="field">
