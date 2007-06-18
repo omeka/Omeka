@@ -21,8 +21,8 @@ class IndexController extends Kea_Controller_Action
 		$a = $req->getParam($config->uri->action);
 		
 		//Check to see if we've got a static page request
-		if( ($page = $req->getParam('page')) and ($dir = $req->getParam('dir')) ) {
-			return $this->renderStaticPage($dir,$page);
+		if($this->_getParam('static')) {
+			return $this->renderStaticPage();
 		}
 		
 		if (!$c) {
@@ -47,12 +47,15 @@ class IndexController extends Kea_Controller_Action
 	 * 		'about.php' -> /about/
 	 *		'foobar/baz.php' -> /foobar/baz/
 	 */
-	protected function renderStaticPage($dir,$page)
+	protected function renderStaticPage()
 	{
-		if($page == 'index') {
-			$file = $dir.'.php';
+		$page = $this->_getParam('page');
+		$dir = $this->_getParam('dir');
+		
+		if(!$dir) {
+			$file = $page . '.php';
 		}else {
-			$file = $dir.DIRECTORY_SEPARATOR.$page.'.php';
+			$file = $dir . DIRECTORY_SEPARATOR . $page . '.php';
 		}
 		
 		return $this->render($file);
