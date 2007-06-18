@@ -10,6 +10,7 @@ class Foobar extends Kea_Plugin
 		$this->hasMetafield('Bar');
 		
 		$this->hasConfig('Default Foo Value', 'This is the default value for the metafield Foo', 40);
+		$this->hasScriptPath('scripts');
 	}
 	
 	public function customInstall()

@@ -21,6 +21,10 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	protected $typesMetafields = array();
 	protected $metaInfo = array();
 	
+	protected $scriptPath = array(	'theme'	=> array('views/theme'),
+									'json'	=> array('views/json'),
+									'rest'	=> array('views/rest'));
+	
 	/**
 	 * Path to the plugin directory
 	 *
@@ -185,6 +189,10 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	public function typeHasMetafield($typeName, $metafieldName, $metafieldDescription=null) {
 		$this->typesMetafields[$typeName] = array('name'=>$metafieldName, 'description'=>$metafieldDescription);
 	}
+	
+	public function hasScriptPath($path, $type='theme') {
+		$this->scriptPath[$type][] = $path;
+	}
 		
 	/**
 	 * Convenience method for plugin writers to customize their plugin installation
@@ -276,18 +284,10 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 **/
 	public function addNavigation($text, $link, $position = 'after') {}	
 	
-	public function addScriptPath($view, $type = null) {
-		switch ( $type )
-		{
-			case 'json':
-			case 'rest':
-				$view->addScriptPath($this->dir.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$type);
-			break;
-			default:
-				$view->addScriptPath($this->dir.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'theme');
-			break;
+	public function addScriptPath($view, $type = 'theme') {
+		foreach ($this->scriptPath[$type] as $path) {
+			$view->addScriptPath($this->dir.DIRECTORY_SEPARATOR.$path);
 		}
-		
 	}
 	
 	///// ZEND CONTROLLER HOOKS /////
