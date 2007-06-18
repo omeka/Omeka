@@ -87,6 +87,8 @@ function get_ex_layouts()
 		$array[$k] = array_shift(explode('.',$file));
 	}
 	
+	natsort($array);
+	
 	//get rid of duplicates
 	$array = array_flip(array_flip($array));
 	return $array;
