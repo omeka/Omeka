@@ -7,6 +7,10 @@ class SettingsController extends Kea_Controller_Action
 		$this->_forward('settings', 'edit');
 	}
 	
+	public function browseAction() {
+		$this->_forward('settings', 'edit');
+	}
+	
 	public function editAction() {
 		$table = $this->getTable('Option');
 		
