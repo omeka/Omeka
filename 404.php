@@ -25,3 +25,4 @@ endif;
 	<input type="checkbox" name="moreinfo" value="more" />
 	<input type="submit" name="submit" value="Dump Error" />
 </form>
+

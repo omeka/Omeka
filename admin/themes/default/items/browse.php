@@ -27,18 +27,16 @@
 			<th scope="col">Type</th>
 			<th scope="col">Creator</th>
 			<th scope="col">Date Added</th>
-			<th scope="col">View</th>
 			</tr>
 		</thead>
 		<tbody>
 	<?php foreach($items as $key => $item): ?>
 	<tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
 		<td scope="row"><?php echo $item->id;?></td> 
-		<td><?php echo $item->title; ?></td>
+		<td><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php echo $item->title; ?></a></td>
 		<td><?php echo $item->Type->name; ?></td>
 		<td><?php echo $item->creator; ?></td>	
 		<td><?php echo date('m.d.Y', strtotime($item->added)); ?></td>
-		<td><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink">View</a></td>
 	</tr>
 	<?php endforeach; ?>
 	</tbody>

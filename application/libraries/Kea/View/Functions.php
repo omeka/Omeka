@@ -31,7 +31,7 @@ function not_empty_or($value, $default) {
 function display_item($item, $props = array()) {
 	switch ($item->Type->name) {
 		case 'Document':
-			echo nls2p($item->Metatext('Text'));
+			echo '<div class="document-text">'. nls2p($item->Metatext('Text')) . '</div>';
 			break;
 		
 		case 'Still Image':
@@ -62,14 +62,14 @@ function display_item($item, $props = array()) {
 					$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
 					$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
 					$html	.=	'<param name="FileName" value="'.$path.'">'."\n";
-					$html	.=	'<param name="autostart" value="'.($defaults['autostart'] ? 'true' : 'false').'">'."\n";
+					$html	.=	'<param name="AutoPlay" value="'.($defaults['autostart'] ? 'true' : 'false').'">'."\n";
 					$html	.=	'<param name="ShowControls" value="'.($defaults['ShowControls'] ? 'true' : 'false').'">'."\n";
 					$html	.=	'<param name="ShowStatusBar" value="'.($defaults['ShowStatusBar'] ? 'true' : 'false').'">'."\n";
 					$html	.=	'<param name="ShowDisplay" value="'.($defaults['ShowDisplay'] ? 'true' : 'false').'">'."\n";
 					$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
 					$html	.=	' width="'.$defaults['width'].'" height="'.$defaults['height'].'"'; 		
 					$html	.=	' ShowControls="'.$defaults['ShowControls'].'" ShowStatusBar="'.$defaults['ShowStatusBar'].'"'; 
-					$html	.=	' ShowDisplay="'.$defaults['ShowDisplay'].'" autostart="'.$defaults['autostart'].'"></embed></object>';
+					$html	.=	' ShowDisplay="'.$defaults['ShowDisplay'].'" autoplay="'.$defaults['autostart'].'"></embed></object>';
 					echo $html;
 					break;
 				
@@ -97,6 +97,33 @@ function display_item($item, $props = array()) {
 			# code...
 			break;
 	}
+}
+
+function display_item_list($items,$title_only=false,$display_content=false) {
+	foreach($items as $key => $item): ?>
+	<div class="item hentry">
+		<div class="item-meta">
+		<h2><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink">Item <?php echo $item->id;?>: <span class="entry-title"><?php echo $item->title; ?></span></a></h2>
+		<?php if(!$title_only):?>
+		<p><?php echo $item->description; ?></p>
+
+		<div class="tagcloud">Tags: 
+		<?php if(count($item->Tags)): ?>
+		<?php foreach ($item->Tags as $tag): ?>
+		<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" re="tag"><?php echo $tag ?></a>
+		<?php endforeach; ?>
+		<?php else: ?>
+		No Tags
+		<?php endif;?>
+
+		</div>
+		<?php endif; ?>
+		</div>
+		<?php if($display_content):?>
+	<div class="item-content"><?php display_item($item); ?></div>
+	<?php endif; ?>
+	</div>
+	<?php endforeach;
 }
 
 /**

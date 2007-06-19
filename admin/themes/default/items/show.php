@@ -28,14 +28,8 @@
 			onComplete: function(t) {
 				new Ajax.Request("<?php echo uri('items/ajaxTagsField/?id='.$item->id) ?>", {
 					onSuccess: function(t) {
-						var tagDiv = $('tags');
-						if(!tagDiv) {
-							tagDiv = document.createElement('div');
-							tagDiv.id = 'tags';
-							tagDiv.insertAfter($('my-tags'));
-						}
-						tagDiv.hide();
-						tagDiv.update(t.responseText);
+						$('tags').hide();
+						$('tags').update(t.responseText);
 						Effect.Appear('tags', {duration: 1.0});
 					}
 				});
@@ -67,7 +61,7 @@
 											editableElements[i].getAttribute('rel'));
 		}
 <?php endif; ?>
-
+	
 	});
 	/*
 	var checkJS = document.getElementById;
@@ -182,7 +176,7 @@
 	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
 </div>
 
-<?php if ( has_collection($item) ): ?>
+<?php if ( $item->Collection->exists() ): ?>
 	<h4>Collection</h4>
 
 	<div id="collection">
@@ -190,18 +184,16 @@
 	</div>
 <?php endif; ?>
 
-<?php if ( has_type($item) or has_metatext($item)): ?>
-	<h3>Type Metadata</h3>
 
-	<h4>Type Name</h4>
-	<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
+<h3>Type Metadata</h3>
 
-	<?php foreach($item->Metatext as $key => $metatext): ?>
-	<h4><?php echo $metatext->Metafield->name; ?></h4>
-	<div><?php echo $metatext->text; ?></div>
-	<?php endforeach; ?>
+<h4>Type Name</h4>
+<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
 
-<?php endif; ?>
+<?php foreach($item->Metatext as $key => $metatext): ?>
+<h4><?php echo $metatext->Metafield->name; ?></h4>
+<div><?php echo $metatext->text; ?></div>
+<?php endforeach; ?>
 
 <h3>Tags</h3>
 <?php if ( has_permission('Items','tag') ): ?>
@@ -214,8 +206,7 @@
 </div>
 <?php endif; ?>
 
-<?php if ( has_tags($item) ): ?>
-	<h4>All Tags</h4>
+<h4>All Tags</h4>
 <div id="tags">
 	<ul class="tags">
 		<?php foreach( $item->Tags as $key => $tag ): ?>
@@ -225,12 +216,15 @@
 		<?php endforeach; ?>
 	</ul>
 </div>
-<?php endif; ?>
 
 
 
 <h2>Files</h2>
 <div id="files">
+	<?php //if(!has_files($item)):?>
+	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
+	<?php //endif;?>
+	
 	<?php foreach( $item->Files as $key => $file ): ?>
 
 		<a href="<?php echo uri('files/show/'.$file->id); ?>">

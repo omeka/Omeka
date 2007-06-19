@@ -1,14 +1,16 @@
+/* == Reset == */
+@import url("reset.css");
+
 /* == Generic styles ======== */
-body {font: 62.5% Verdana, Arial, sans-serif; color: #777; background: #dfdfd2;  margin:0; padding:0;}
+body {font: 62.5% "Helvetica Neue",Helvetica, Arial, sans-serif; color: #777; background: #fff;  margin:0; padding:36px 0;}
 
 /* Headings */
-h1,h2,h3,h4,h5,h6 {font-weight: normal;}
-h1 {font-size: 2.4em;}
-h2 {font-size: 1.75em; text-align:right;}
-h3 {font-size: 1.5em;}
-h4 {font-size: 1.25em;}
-h5 {font-size: 1em; font-weight: bold;}
-h6 {font-size: 1em; font-style: italic;}
+h1 {font-size:2.4em; line-height:0.75em; margin-bottom:0.75em;}
+h2 {font-size:2em; line-height:0.9em; margin-bottom:0.9em;}
+h3 {font-size:1.8em; line-height:1em; margin-bottom:1em; font-weight:bold;}
+h4 {font-size:1.8em; line-height:1em; margin-bottom:0.5em; font-style:italic;}
+h5 {font-size:1.5em; line-height:1.2em; margin-bottom:1.2em;}
+h6 {}
 
 /* Links */
 a:link {color: #c60;}
@@ -17,33 +19,32 @@ a:hover {color: #c83;}
 a:active {color: #c83;}
 
 /* Misc. elements */
-p,ul,ol {font-size:1.2em;}
+p,ul,ol,dl {font-size:1.2em;line-height:1.5em; margin-bottom:1.5em;}
 abbr,acronym {border: none; font-style: normal;}
 
-/* == Reusable classes ======== */
+/* Microformats */
+.hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
+	.hTagcloud li {display:inline;}
+
+	.popular {}
+	.v-popular {font-size:140%;}
+	.vv-popular {font-size:180%;}
+	.vvv-popular {font-size:220%;}
+	.vvvv-popular {font-size:260%;}
+	.vvvvv-popular {font-size:300%;}
+	.vvvvvv-popular {font-size:340%;}
+	.vvvvvvv-popular {font-size:380%;}
+	
+/* Reusable classes */
 .hide {text-indent: -1000em; width: 0; height: 0; overflow: hidden;}
-.padding {width:820px; margin:0 auto;overflow:hidden;}
+.padding {width:774px; margin:0 auto;overflow:hidden;}
 
 .navigation {list-style:none; margin-left:0; padding-left:0;}
 	.navigation li {display:inline;}
 	.navigation a {text-decoration:none;}
-	
-/* == Wrap styles ============= */
-#wrap {background:transparent;overflow:hidden;}
 
-/* == Header styles =========== */
-#header {background:#fff;padding-top:20px;}
-	#header div.padding { padding:20px; background:#6f6559; background:#c70;}
-	#header a {color:#fff; text-decoration:none;}
-	
-/* == Content styles ========== */
-#content {}
-	#content h2 {background:#D38921; margin:-20px -20px 20px; color:#fff; padding:10px 20px 20px;}
-	#content div.padding {background:#fff; padding:20px; border-top:10px solid #D38921;}
-	#primary {display:block; float:left; width:500px;}
-	#secondary {display:block; float:right; width: 250px;}
-		
-/* == Footer styles =========== */
-#footer {color:#53483A;}
-	#footer a {color:#fff;}
-	#footer .padding {padding:20px; background:#53483A;}
+
+/* Items browse */
+.item {overflow:hidden; border-bottom:1px dotted #ccc; margin-bottom:17px; padding-bottom:18px;}
+	.item .item-content {float:right; margin-left:18px; margin-bottom:18px;}
+	.item .item-meta {float:left;}

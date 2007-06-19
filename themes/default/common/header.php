@@ -6,7 +6,6 @@
 
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <meta type="description" content="<?php echo settings('meta_description'); ?>" />
 
 <!-- Stylesheets -->
@@ -27,7 +26,7 @@
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 			<ul id="primary-nav" class="navigation">
 			<?php
-				nav(array('Home' => uri(''),'Items' => uri('items/browse'), 'Types' => uri('types'), 'Collections' => uri('collections'), 'Tags' => uri('tags')));
+				nav(array('Items' => uri('items/browse'), 'Collections' => uri('collections'),'Exhibits' => uri('exhibits')));
 
 			?>
 			</ul>

@@ -1,5 +1,5 @@
 <?php head(); ?>
-	<h2>Collections</h2>
+	<h1>Collections</h1>
 
 		<?php foreach( $collections as $collection ): ?>
 			<div class="collection">
