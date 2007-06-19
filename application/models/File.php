@@ -9,7 +9,6 @@ if ( ! function_exists ( 'mime_content_type' ) )
 }
 
 require_once 'Item.php';
-require_once 'FilesImages.php';
 
 /**
  * @package Omeka
@@ -20,8 +19,7 @@ class File extends Kea_Record {
 
 	public function setUp() {
 //		Removed [5-22-07 KBK], this throws errors when attempting to delete files from items/form		
-//		$this->hasOne("Item", "File.item_id");
-		$this->ownsOne('FilesImages', 'FilesImages.file_id');		
+//		$this->hasOne("Item", "File.item_id");		
 	}
 
 	public function setTableDefinition() {
