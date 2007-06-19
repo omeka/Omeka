@@ -16,9 +16,9 @@ INSERT INTO `types` (id, name, description) VALUES (8, 'Event', 'A non-persisten
 
 -- Additions
 INSERT INTO `types` (id, name, description) VALUES (9, 'Email', '');
-INSERT INTO `types` (id, name, description) VALUES (10, 'Lesson Plan', '');
-INSERT INTO `types` (id, name, description) VALUES (11, 'Hyperlink', '');
-INSERT INTO `types` (id, name, description) VALUES (12, 'Person', '');
+INSERT INTO `types` (id, name, description) VALUES (10, 'Lesson Plan', 'Instructional materials.');
+INSERT INTO `types` (id, name, description) VALUES (11, 'Hyperlink', 'Title, URL, Description or annotation.');
+INSERT INTO `types` (id, name, description) VALUES (12, 'Person', 'An individual, biographical data, birth and death, etc.');
 INSERT INTO `types` (id, name, description) VALUES (13, 'Interactive Resource', 'A resource requiring interaction from the user to be understood, executed, or experienced. Examples include forms on Web pages, applets, multimedia learning objects, chat services, or virtual reality environments.');
 
 INSERT INTO `metafields` (id, name, description) VALUES (1, 'Text', 'Any textual data included in the document.');
@@ -33,8 +33,6 @@ INSERT INTO `metafields` (id, name, description) VALUES (6, 'Local URL', 'The UR
 INSERT INTO `metafields` (id, name, description) VALUES (7, 'Original Format', '');
 
 -- Still Image
-INSERT INTO `metafields` (id, name, description) VALUES (8, 'Resolution', '');
-INSERT INTO `metafields` (id, name, description) VALUES (9, 'Dimensions (px)', '');
 INSERT INTO `metafields` (id, name, description) VALUES (10, 'Physical Dimensions', '');
 
 -- Moving Image
@@ -84,8 +82,6 @@ INSERT INTO `metafields` (id, name, description) VALUES (36, 'Bibliography', '')
 INSERT INTO `types_metafields` (`id`, `type_id`, `metafield_id`) VALUES (1, 1, 7),
 (2, 1, 1),
 (3, 6, 7),
-(4, 6, 8),
-(5, 6, 9),
 (6, 6, 10),
 (7, 3, 7),
 (8, 3, 11),
