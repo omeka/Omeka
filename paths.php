@@ -16,6 +16,7 @@ $site['thumbnails']		= 'thumbnails';
 $site['files']			= 'files';
 $site['exhibit_layouts']= 'exhibit_layouts';
 $site['exhibit_themes'] = 'exhibit_themes';
+$site['public_theme']	= 'themes';
 
 // Define some constants based on those settings
 define('BASE_DIR', 			dirname(__FILE__));
@@ -50,7 +51,7 @@ define('WEB_FULLSIZE',	WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('WEB_FILES',		WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['files']);
 define('WEB_EXHIBIT_LAYOUTS', WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_layouts'] );
 define('WEB_EXHIBIT_THEMES',  WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
-
+define('WEB_PUBLIC_THEME',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['public_theme']);
 // Set the include path to the library path
 // do we want to include the model paths here too? [NA]
 set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].DIRECTORY_SEPARATOR.'Zend_Incubator'.PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].PATH_SEPARATOR.MODEL_DIR);

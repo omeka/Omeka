@@ -77,9 +77,9 @@ class ThemesController extends Kea_Controller_Action
 			$theme->directory = $dir;
 			// Test to see if an image is available to present the user
 			// when switching themes
-			$image_file = $theme->path.DIRECTORY_SEPARATOR.$dir.'.jpg';
+			$image_file = $theme->path.DIRECTORY_SEPARATOR.'theme.jpg';
 			if (file_exists($image_file) && is_readable($image_file)) {
-				$img = WEB_THEME.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$dir.'.jpg';
+				$img = WEB_PUBLIC_THEME.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.'theme.jpg';
 				$theme->image = $img;
 			}
 			
