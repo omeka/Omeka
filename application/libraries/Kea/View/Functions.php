@@ -387,20 +387,6 @@ function is_current($link, $req = null) {
 ///// PLUGIN HELPER FUNCTIONS /////
 
 /**
- * This is the butter right here.  
- *
- * @example plugin('GeoLocation', 'map', 'arg1', 'arg2', 'arg3');
- * @return mixed
- **/
-function plugin() {
-	$args = func_get_args();
-	$pluginName = array_shift($args);
-	$method = array_shift($args);
-	$plugin = Zend::Registry($pluginName);
-	return call_user_func_array(array($plugin, $method), $args);
-}
-
-/**
  * similar to wp_header() from Wordpress, hooks into the plugin system within the header
  *
  * @return void
@@ -441,6 +427,12 @@ function current_user_tags($item)
 		return false;
 	}
 	return tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
+}
+
+function link_to_item($item, $action='show', $field='title')
+{
+	$path = 'items/'.$action.'/' . $item->id;
+	echo '<a href="'. uri($path) . '">' . $item->$field . '</a>';
 }
 
 /**
