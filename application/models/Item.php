@@ -132,7 +132,11 @@ class Item extends Kea_Record
 				if(empty($this->_metafields)) {
 					$mfIds = $this->getMetafieldIds();
 					if(!empty($mfIds)) {
-						$dql = "SELECT m.* FROM Metafield m WHERE m.id IN (".join(', ', $mfIds).")";
+						$dql = "SELECT m.* FROM Metafield m WHERE";
+						if(count($mfIds) > 1) 
+							$dql .=  " m.id IN (".join(', ', $mfIds).")";
+						else
+							$dql .= " m.id = {$mfIds[0]}";
 						$this->_metafields = $this->executeDql($dql);
 					}else {
 						$this->_metafields = new Doctrine_Collection('Metafield');
@@ -145,8 +149,13 @@ class Item extends Kea_Record
 				if(empty($this->_metatext)) {
 					$mfIds = $this->getMetafieldIds();
 					if(!empty($mfIds) and $this->exists() ) {
-						$dql = "SELECT m.* FROM Metatext m WHERE m.metafield_id IN(".join(', ',$mfIds).")
-						AND m.item_id = {$this->id}";
+						$dql = "SELECT m.* FROM Metatext m WHERE ";
+						if(count($mfIds) > 1)
+							$dql .= "m.metafield_id IN(".join(', ',$mfIds).")";
+						else 
+							$dql .= "m.metafield_id = {$mfIds[0]}";
+							
+						$dql .= " AND m.item_id = {$this->id}";
 						$this->_metatext = $this->executeDql($dql);	
 					}else {
 						$this->_metatext = new Doctrine_Collection('Metatext');
