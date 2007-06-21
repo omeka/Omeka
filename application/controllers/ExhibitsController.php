@@ -499,6 +499,23 @@ class ExhibitsController extends Kea_Controller_Action
 		return $retVal;
 	}
 	
+	protected function preCommitForm($exhibit) {
+		
+		//Make an exhibit slug if the posted slug is empty
+		if(empty($_POST['slug'])) {
+			
+			//Convert the title of the exhibit to a usable slug
+			$slug = $_POST['title'];
+			
+			//Replace prohibited characters in the title with - 's
+			$prohibited = array(':', '/', ' ', '.');
+			$replace = array_fill(0, count($prohibited), '-');
+			$slug = str_replace($prohibited, $replace, strtolower($slug) );
+			
+			$_POST['slug'] = $slug;
+		}
+	}
+	
 	//Add the tags after the form has been saved
 	protected function postCommitForm($exhibit) {
 		
