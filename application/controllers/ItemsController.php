@@ -131,7 +131,7 @@ class ItemsController extends Kea_Controller_Action
 				$tag = explode(',', $tag);
 			}
 			foreach ($tag as $key => $t) {
-				$select->where('t.name = ?', $t);
+				$select->where('t.name = ?', trim($t));
 			}			
 		}
 		

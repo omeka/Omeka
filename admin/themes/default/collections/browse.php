@@ -12,7 +12,7 @@
 				<p class="collector">Collector: <?php echo $collection->collector; ?></p>
 				
 				<?php echo nls2p($collection["description"]); ?>
-				<p><a href="<?php echo uri('items/browse/'); ?>">View Items in <?php echo $collection->name; ?></a></p>
+				<p><a href="<?php echo uri('items/browse/?collection='.$collection->id); ?>">View Items in <?php echo $collection->name; ?></a></p>
 			</div>
 		<?php endforeach; ?>
 

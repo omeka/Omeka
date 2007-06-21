@@ -13,8 +13,31 @@
 	<h2>Browse Items (<?php echo total_results(true);?> items total)</h2>
 	<div class="archive-meta">
 		<form id="search" action="<?php echo uri('items/browse'); ?>">
-			<input type="text" name="search" />
+			<fieldset>
+				<?php 
+					checkbox(array('name'=>'recent'), $_REQUEST['recent'], null, 'View Most Recent Items'); 
+				?>
+			</fieldset>
+			
+			<fieldset>
+			<?php 
+				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Filter by Collection', 'id', 'name');
+				select(array('name'=>'type'), types(), $_REQUEST['type'], 'Filter by Type', 'id', 'name'); 
+			?>
+			<label>Filter by Tags<input type="text" name="tags" value="<?php echo $_REQUEST['tags']; ?>" /></label>
+			</fieldset>
+			
+			<fieldset>
+			<?php 
+				checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
+				checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
+			?>
+			</fieldset>
+			
+			<fieldset>
+			<input type="text" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
 			<input type="submit" name="submit_search" value="Search" />
+			</fieldset>
 		</form>
 		<div class="pagination"><?php echo pagination(); ?></div>
 	</div>
