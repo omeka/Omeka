@@ -14,7 +14,7 @@
 
 <div class="field">
 <?php 
-	radio(array('name'=>'active'),array('0'=>'Inactive','1'=>'Active'), $collection->active); ?>
+	radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->public); ?>
 </div>
 
 <div class="field">	

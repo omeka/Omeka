@@ -12,7 +12,7 @@ class Collection extends Kea_Record {
 		$this->setTableName('collections');
         $this->hasColumn('name', 'string', 255, array('notnull' => true, 'notblank'=>true));
         $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('active', 'boolean', null, array('notnull' => true));
+        $this->hasColumn('public', 'boolean', null, array('notnull' => true));
         $this->hasColumn('featured', 'boolean', null, array('notnull' => true));
         $this->hasColumn('collector', 'string', null, array('notnull' => true, 'default'=>''));
     }
