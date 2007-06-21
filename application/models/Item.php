@@ -53,7 +53,7 @@ class Item extends Kea_Record
 		$this->option('type', 'MYISAM');
 		$this->setTableName('items');
 		
-		$this->hasColumn("title","string",255, array('notnull'=>true, 'notblank'=>true, 'unique'=>true, 'default'=>''));
+		$this->hasColumn("title","string",255, array('notnull'=>true, 'default'=>''));
         $this->hasColumn('publisher', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('language', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('relation', 'string', null, array('notnull' => true, 'default'=>''));

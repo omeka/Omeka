@@ -9,13 +9,15 @@ require_once 'ExhibitsTags.php';
  */
 class Exhibit extends Kea_Record
 {
+	protected $error_messages = array(	'slug' => array('notblank' => 'Exhibit must be given a valid slug.'));
+	
 	protected $_taggable;
 	
     public function setTableDefinition()
     {
 		$this->option('type', 'MYISAM');
 		$this->setTableName('exhibits');
-		$this->hasColumn("title", "string", 255, "unique|notblank");
+		$this->hasColumn("title", "string", 255, "notblank");
 		$this->hasColumn("description", "string");
 		$this->hasColumn("credits", "string");
 		$this->hasColumn("featured", "boolean");
