@@ -53,6 +53,16 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	protected $_allowed = array();
 	
 	protected $_broker;
+	
+	/**
+	 * Controller/Action list for admin actions that do not require being logged-in
+	 *
+	 * @var string
+	 **/
+	protected $_adminWhitelist = array(
+				array('controller'=>'users', 'action'=>'activate'), 
+				array('controller'=>'users', 'action'=>'login'));
+	
 		
 	/**
 	 * Attaches a view object to the controller.
@@ -115,19 +125,25 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		 */
 		$request = $this->getRequest();
 		$action = $request->getActionName();
+		$controller = $request->getControllerName();
+		
+		$overrideLogin = false;
 		
 		/**
 		 *	Right now user activation is the only admin controller/action that doesn't require login (doesn't make sense to require it)
 		 */
-		if($request->getParam('admin') == true &&
-			$request->getControllerName() == 'users' &&
-				$request->getActionName() == 'activate') {
+		if($request->getParam('admin')) {
+			foreach ($this->_adminWhitelist as $entry) {
+				if( ($entry['controller'] == $controller) and ($entry['action'] == $action) ) {
+					$overrideLogin = true;
+					break;
+				}
+			}
 			
-		}
-		elseif ($request->getParam('admin') == true &&
-			$request->getControllerName() != 'users' &&
-			$request->getActionName() != 'login') {
-
+			//If we haven't overridden the need to login
+			if(!$overrideLogin) {
+			
+				//Deal with the login stuff
 			require_once 'Zend/Auth.php';
 			require_once 'Zend/Session.php';
 			require_once 'Kea/Auth/Adapter.php';
@@ -161,8 +177,12 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 					$auth_session->setExpirationSeconds($minutesUntilExpiration * 60);					
 				}
 
-			}		
+			}					
+			
+			} 
+			
 		}
+				
 		$this->checkActionPermission($action);
 		
 		$action = $this->_request->getActionName();
