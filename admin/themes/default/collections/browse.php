@@ -15,5 +15,5 @@
 				<p><a href="<?php echo uri('items/browse/?collection='.$collection->id); ?>">View Items in <?php echo $collection->name; ?></a></p>
 			</div>
 		<?php endforeach; ?>
-
+		
 <?php foot(); ?>

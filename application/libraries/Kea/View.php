@@ -173,8 +173,22 @@ class Kea_View extends Zend_View_Abstract
 	{
 		require_once 'Kea/View/Functions.php';
 		
-		// do the normal rendering
-		return parent::render($file);
+		try {
+			// do the normal rendering
+			$result = parent::render($file);
+		} catch (Exception $e) {
+			
+			/* Exceptions should not be uncaught at this stage of execution
+				This is b/c the only PHP executed beyond this point are theme functions */
+			echo 'Error:' . $e->getMessage();
+			
+			$config = Zend::Registry( 'config_ini' );
+			//Display a lot of info if exceptions are turned on
+			if($config->debug->exceptions) {	
+				echo nl2br( $e->getTraceAsString() );
+			}
+		}
+		return $result;
 	}
 
 }
