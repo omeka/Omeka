@@ -13,16 +13,12 @@
 <?php text(array('name'=>'copyright', 'class'=>'textinput', 'id'=>'copyright'),$copyright, 'Copyright'); ?>
 </div>
 
-<div class="field">
-<?php textarea(array('name'=>'meta_keywords', 'class'=>'textinput', 'id'=>'meta_keywords','rows'=>'5'),$meta_keywords, 'Keywords'); ?>
+<div class="field">    
+<?php text(array('name'=>'author', 'class'=>'textinput', 'id'=>'author'),$author, 'Author'); ?>
 </div>
 
 <div class="field">    
-<?php text(array('name'=>'meta_author', 'class'=>'textinput', 'id'=>'meta_author'),$meta_author, 'Author'); ?>
-</div>
-
-<div class="field">    
-<?php textarea(array('name'=>'meta_description', 'class'=>'textinput', 'id'=>'meta_description','rows'=>'10'),$meta_description, 'Description'); ?>
+<?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$description, 'Description'); ?>
 </div>
 
 <div class="field">    

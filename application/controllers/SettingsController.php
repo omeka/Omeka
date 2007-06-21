@@ -18,9 +18,8 @@ class SettingsController extends Kea_Controller_Action
 		$settingsList = array(
 			'site_title', 
 			'copyright',
-			'meta_keywords', 
-			'meta_author', 
-			'meta_description', 
+			'author', 
+			'description', 
 			'thumbnail_constraint', 
 			'fullsize_constraint', 
 			'path_to_convert');

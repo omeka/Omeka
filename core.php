@@ -7,20 +7,47 @@ require_once 'Zend.php';
 //Register the various path names so they can be accessed by the app
 Zend::register('path_names', $site);
 
-/**
- * Check for a config file which, if not present implies that the
- * app has not been installed.
- */
-if (!file_exists(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini')) {
-	echo 'It looks like you have not properly setup Omeka to run.  <a href="'.WEB_ROOT.DIRECTORY_SEPARATOR.'install/install.php">Click here to install Omeka.</a>';
-	exit;
+function install_notification() {
+	die('Please install Omeka.<a href="'.WEB_ROOT.DIRECTORY_SEPARATOR.'install/install.php">Click here to install Omeka.</a>');
 }
 
 require_once 'Zend/Config/Ini.php';
 $db = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini', 'database');
 Zend::register('db_ini', $db);
 
-$dbh = new PDO($db->type.':host='.$db->host.';dbname='.$db->name, $db->username, $db->password);
+$dsn = 'mysql:host='.$db->host.';dbname='.$db->name;
+if(isset($db->port)) {
+	$dsn .= "port=" . $db->port;
+}
+try {
+	$dbh = new PDO($dsn, $db->username, $db->password);
+} catch (Exception $e) {
+	install_notification();
+}
+
+//Pull the options from the DB
+$option_stmt = $dbh->query('SELECT * FROM options');
+if(!$option_stmt) {
+	install_notification();
+}
+$option_array = $option_stmt->fetchAll();
+
+// ****** CHECK TO SEE IF OMEKA IS INSTALLED ****** 
+if(!count($option_array)) {
+	install_notification();
+}
+
+//Save the options so they can be accessed
+$options = array();
+foreach ($option_array as $opt) {
+	$options[$opt['name']] = $opt['value'];
+}
+Zend::register('options',$options);
+
+function get_option($name) {
+		$options = Zend::Registry('options');
+		return $options[$name];
+}
 
 Doctrine_Manager::connection($dbh);
 
@@ -80,32 +107,11 @@ require_once 'Zend/Controller/RewriteRouter.php';
 // Retrieve the ACL from the db, or create a new ACL object
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
 
-/**
- * This is a global function, which may seem bad but its really the only one that needs to be global
- *
- * @return void
- **/
-$option_stmt = $dbh->query('SELECT * FROM options');
-$option_array = $option_stmt->fetchAll();
-$options = array();
-foreach ($option_array as $opt) {
-	$options[$opt['name']] = $opt['value'];
-}
-Zend::register('options',$options);
-
-function get_option($name) {
-		$options = Zend::Registry('options');
-		return $options[$name];
-}
-
-$acl = unserialize(get_option('acl'));
 
 
-//@todo Comment the line below to keep the ACL stored in the DB
 include 'acl.php';
 
 Zend::register('acl', $acl);
-
 
 require_once 'Zend/Auth.php';
 require_once 'Kea/Auth/Adapter.php';

@@ -6,7 +6,7 @@
 
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta type="description" content="<?php echo settings('meta_description'); ?>" />
+<meta type="description" content="<?php echo settings('description'); ?>" />
 
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />

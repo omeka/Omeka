@@ -7,7 +7,6 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [database]
-type     = XXXXXXX
 host     = XXXXXXX
 username = XXXXXXX
 password = XXXXXXX
