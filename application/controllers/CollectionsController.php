@@ -38,7 +38,7 @@ class CollectionsController extends Kea_Controller_Action
 		$dql = "SELECT c.* FROM Collection c";
 		
 		if(!$this->isAllowed('showInactive')) {
-			$dql .= " WHERE c.active = 1";
+			$dql .= " WHERE c.public = 1";
 		}
 		
 		$q = new Doctrine_Query;
