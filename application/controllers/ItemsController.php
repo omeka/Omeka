@@ -436,7 +436,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		$item->refresh();
 		
-		Zend::Register('item', $item);
+		Zend::register('item', $item);
 		
 		$this->pluginHook('onShowItem', array($item));
 		

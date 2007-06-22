@@ -1,4 +1,5 @@
 <?php head(); ?>
+
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 	Event.observe(window,'load',function() {
@@ -28,6 +29,11 @@
 	</tr>
 	</thead>
 	<tbody>
+		
+<?php 
+	$exhibits = exhibits(); 
+?>
+		
 <?php foreach( $exhibits as $key=>$exhibit ): ?>
 	<tr class="exhibit <?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
 		<td><?php echo $exhibit->id;?></td>
@@ -39,4 +45,5 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+
 <?php foot(); ?>

@@ -1,6 +1,10 @@
 <?php 
 ///// EXHIBIT FUNCTIONS /////
 
+function exhibits($params = array()) {
+	return _get_recordset($params, 'exhibits');
+}
+
 /**
  * Load either the default theme or the chosen exhibit theme, depending
  *

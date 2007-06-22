@@ -13,7 +13,10 @@
 		
 		<div class="field"><?php text(array('name'=>'tags', 'id'=>'tags', 'class'=>'textinput'), tag_string($exhibit,null,', ',true), 'Exhibit Tags'); ?></div>
 		
-	<div class="field"><?php checkbox(array('name'=>'featured', 'id'=>'featured'),$exhibit->featured, null ,'This Exhibit is Featured'); ?></div>
+	<div class="field">
+		<div class="label">Exhibit is featured:</div> 
+		<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $exhibit->featured); ?></div>
+	</div>
 	</fieldset>
 	<fieldset>
 		<legend>Exhibit Display Data</legend>

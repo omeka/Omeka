@@ -376,7 +376,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		$$totalVar = count($$pluralName);
 		
-		Zend::Register($pluralName, $$pluralName);
+		Zend::register($pluralName, $$pluralName);
 		
 		//Fire the plugin hook
 		$this->pluginHook('onBrowse' . ucwords($pluralName), array($$pluralName));

@@ -9,7 +9,10 @@ require_once 'ExhibitsTags.php';
  */
 class Exhibit extends Kea_Record
 {
-	protected $error_messages = array(	'slug' => array('notblank' => 'Exhibit must be given a valid slug.'));
+	protected $error_messages = array(	
+		'slug' => array('notblank' => 'Exhibit must be given a valid slug.'),
+		'title' => array('notblank' => 'Exhibit must be given a title.')		
+				);
 	
 	protected $_taggable;
 	

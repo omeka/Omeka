@@ -533,22 +533,12 @@ function recent_items($num = 10) {
 
 function tags(array $params = array()) 
 {
-	if( empty($params) && Zend::isRegistered('tags')) {
-		$tags = Zend::Registry('tags');
-		return $tags;
-	}
-	
-	return _make_omeka_request('Tags','browse',$params,'tags');
+	return _get_recordset($params, 'tags');
 }
 
 function items(array $params = array())
 {
-	if (empty($params) && Zend::isRegistered('items')) {
-		$items = Zend::Registry('items');
-		return $items;
-	}
-	
-	return _make_omeka_request('Items','browse',$params,'items');
+	return _get_recordset($params, 'items');
 }
 
 function item($id=null) 
@@ -581,12 +571,7 @@ function collection($id=null)
 
 function collections(array $params = array())
 {
-	if (empty($params) && Zend::isRegistered('collections')) {
-		$collections = Zend::Registry('collections');
-		return $collections;
-	}
-	
-	return _make_omeka_request('Collections','browse',$params,'collections');
+	return _get_recordset($params, 'collections');
 }
 
 function metafields(array $params = array())
@@ -609,21 +594,25 @@ function type($id=null)
 
 function types(array $params = array())
 {
-	if (empty($params) && Zend::isRegistered('types')) {
-		$types = Zend::Registry('types');
-		return $types;
-	}
-	
-	return _make_omeka_request('Types','browse',$params,'types');
+	return _get_recordset($params, 'types');
 }
 
 function users(array $params = array())
 {
-	if (empty($params) && Zend::isRegistered('users')) {
-		$users = Zend::Registry('users');
-		return $users;
-	}
-	return _make_omeka_request('Users','browse',$params,'users');
+	return _get_recordset($params, 'users');
+	
+}
+
+/**
+ * @example _get_recordset(array(), 'users') => $users
+ * @return mixed
+ **/
+function _get_recordset($params, $for) {
+	if (empty($params) && Zend::isRegistered($for)) {
+		$records = Zend::Registry($for);
+		return $records;
+	}	
+	return _make_omeka_request(ucwords($for),'browse',$params, $for);
 }
 
 function get_user_roles(array $params = array())

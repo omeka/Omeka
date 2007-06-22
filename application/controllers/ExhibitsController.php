@@ -22,6 +22,30 @@ class ExhibitsController extends Kea_Controller_Action
 		$this->_forward('Tags', 'browse', array('tagType' => 'Exhibit', 'renderPage'=>'exhibits/tags.php'));
 	}
 	
+	public function browseAction()
+	{
+		$dql = "SELECT e.* FROM Exhibit e";
+		
+		$q = new Doctrine_Query;
+		
+		$q->parseQuery($dql);
+		
+		if(($tags = $this->_getParam('tag')) || ($tags = $this->_getParam('tags'))) {
+			$tags = explode(',', $tags);
+			$q->innerJoin('e.ExhibitsTags et');
+			$q->innerJoin('et.Tag t');
+			foreach ($tags as $k => $tag) {
+				$q->addWhere('t.name = ?', trim($tag));
+			}
+		}
+
+		$exhibits = $q->execute();
+
+		Zend::register('exhibits', $exhibits);
+		
+		return $this->render('exhibits/browse.php');
+	}
+	
 	public function showitemAction()
 	{
 		$item_id = $this->_getParam('id');

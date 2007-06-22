@@ -128,8 +128,8 @@ class Kea_View extends Zend_View_Abstract
 			
 			Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this);
 
-			Zend::Register('theme_path',	THEME_DIR.DIRECTORY_SEPARATOR.$theme_name);
-			Zend::Register('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
+			Zend::register('theme_path',	THEME_DIR.DIRECTORY_SEPARATOR.$theme_name);
+			Zend::register('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
 		}
 	}
 	

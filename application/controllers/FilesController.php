@@ -47,7 +47,7 @@ class FilesController extends Kea_Controller_Action
 			$this->_redirect('403');
 		}
 		
-		Zend::Register('file', $file);
+		Zend::register('file', $file);
 		$this->render('files/show.php',compact('file'));
 	}
 }
