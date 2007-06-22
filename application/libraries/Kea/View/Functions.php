@@ -697,6 +697,7 @@ function _make_omeka_request($controller,$action,$params, $returnVars)
 function settings($name, $return=false) {
 	$name = get_option($name);
 	if($name instanceof Doctrine_Collection_Batch) return;
+	$name = allhtmlentities($name);
 	if($return) return $name;
 	echo $name;
 }

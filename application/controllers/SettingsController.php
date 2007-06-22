@@ -12,7 +12,7 @@ class SettingsController extends Kea_Controller_Action
 	}
 	
 	public function editAction() {
-		$table = $this->getTable('Option');
+		
 		
 		//Any changes to this list should be reflected in the install script (and possibly the view functions)		
 		$settingsList = array(
@@ -24,36 +24,31 @@ class SettingsController extends Kea_Controller_Action
 			'fullsize_constraint', 
 			'path_to_convert');
 		
-		foreach( $settingsList as $setting )
-		{
-			$option = $table->findBySQL("name LIKE '$setting'")->getFirst();
-			if(empty($option)) {
-				$option = new Option();
-				$option->name = $setting;
-				$option->value = "";
+		$options = Zend::Registry( 'options' );
+		
+		foreach ($options as $k => $v) {
+			if(in_array($k, $settingsList)) {
+				$settings[$k] = $v;
 			}
-			$settings[$setting] = $option;
 		}
+				
+		$optionTable = $this->getTable('Option')->getTableName();
+		$conn = $this->getConn();
 						
 		//process the form
 		if(!empty($_POST)) {
-			$options = Zend::Registry('options');
+			$sql = "UPDATE $optionTable SET value = ? WHERE name = ?";
 			foreach( $_POST as $key => $value )
 			{
 				if(array_key_exists($key,$settings)) {
 					$value = get_magic_quotes_gpc() ? stripslashes( $value ) : $value;
-					$settings[$key]->value = $value;
-					$settings[$key]->save();
-					
+					$conn->execute($sql, array($value, $key));
+					$settings[$key] = $value;
 					$options[$key] = $value;
 				}
 			}
 			Zend::register('options', $options);
 			$this->flash("Settings have been changed.");
-		}
-		
-		foreach ($settings as $name=>$option) {
-			$settings[$name] = $option->value;
 		}
 
 		$this->render('settings/edit.php', $settings);
