@@ -180,11 +180,10 @@ class UsersController extends Kea_Controller_Action
 
 			$session = new Zend_Session;
 			
-			$filterPost = new Zend_Filter_Input($_POST);
 			$auth = $this->_auth;
 
-			$options = array('username' => $filterPost->testAlnum('username'),
-							 'password' => $filterPost->testAlnum('password'));
+			$options = array('username' => $_POST['username'],
+							 'password' => $_POST['password']);
 
 			$token = $auth->authenticate($options);
 			
