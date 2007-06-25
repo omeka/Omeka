@@ -1,10 +1,17 @@
 <?php
 	function _tag_attributes($attributes,$value=null) {
-		//don't allow 'value' to be set specifically as an attribute (why = consistency)
-		unset($attributes['value']);
+	
+		if(is_string($attributes)) {
+			$toProcess['name'] = $attributes;
+			$toProcess['id'] = $attributes;
+		}else {
+			//don't allow 'value' to be set specifically as an attribute (why = consistency)
+			unset($attributes['value']);
+			$toProcess = $attributes;
+		}
 		
 		$attr = array();
-		foreach ($attributes as $key => $attribute) {
+		foreach ($toProcess as $key => $attribute) {
 			$attr[$key] = $key . '="' . allhtmlentities( $attribute ) . '"';
 		}
 		return join(' ',$attr);
@@ -18,7 +25,7 @@
 	 * @param boolean whether or not to return the label HTML
 	 * @return mixed
 	 **/
-	function label($attributes=array(), $text, $return = false) 
+	function label($attributes, $text, $return = false) 
 	{
 		if(!is_array($attributes)) {
 			$id = $attributes;
@@ -31,7 +38,7 @@
 		else echo $label;
 	}
 	
-	function text( array $attributes = array(), $default=null, $label = null )
+	function text( $attributes, $default=null, $label = null )
 	{
 		$input = '';
 		if($label) 
@@ -56,7 +63,7 @@
 		echo $input;
 	}
 	
-	function password( array $attributes = array(), $default=null, $label = null )
+	function password( $attributes, $default=null, $label = null )
 	{
 		$input = '';
 		if($label) 
@@ -81,17 +88,9 @@
 		echo $input;
 	}
 
-	function select( array $attributes = array(), $values = null, $default = null, $label=null, $optionValue = null, $optionDesc = null )
+	function select( $attributes, $values = null, $default = null, $label=null, $optionValue = null, $optionDesc = null )
 	{
-		$select = '<select';
-		$attr = array();
-		foreach ($attributes as $key => $attribute) {
-			$attr[$key] = $key . '="' . allhtmlentities( $attribute ) . '"';
-		}
-		if(!empty($attr)) {
-			$select .= ' '.join(' ',$attr);
-		}
-		$select .= '>';
+		$select = '<select '._tag_attributes($attributes).'>';
 		$select .= "\n\t" . '<option value="">Select Below&nbsp;</option>' . "\n"; 
 		if( !$optionValue && !$optionDesc )
 		{
@@ -126,9 +125,13 @@
 		$select .= '</select>' . "\n";
 		
 		if($label) {
+			if(is_string($attributes)) {
+				label($attributes, allhtmlentities($label));
+				echo "\n".$select;
+			}
 			//Label attribute must either have an associated id element or be wrapped around the select 
 			//http://checker.atrc.utoronto.ca/servlet/ShowCheck?check=91
-			if(array_key_exists('id',$attributes)) {
+			elseif(array_key_exists('id',$attributes)) {
 				label(@$attributes['id'],allhtmlentities($label));
 				echo "\n".$select;
 			}else {
@@ -140,7 +143,7 @@
 	}
 	
 
-	function textarea( array $attributes = array(), $default = null, $label = null )
+	function textarea($attributes, $default = null, $label = null )
 	{
 		if($label) label(@$attributes['id'],$label);
 		$ta = '<textarea';
@@ -151,7 +154,7 @@
 		echo $ta;
 	}
 	
-	function radio( $attributes=array(), array $values, $default = null, $label_class = 'radiolabel' )
+	function radio( $attributes, array $values, $default = null, $label_class = 'radiolabel' )
 	{
 		foreach( $values as $k => $v )
 		{
@@ -173,7 +176,7 @@
 		}
 	}
 	
-	function hidden( array $attributes = array(),$value )
+	function hidden( $attributes, $value )
 	{
 		$input = '<input type="hidden"';
 		if(!empty($attributes)) {
@@ -184,7 +187,7 @@
 		echo $input;
 	}
 	
-	function checkbox( array $attributes, $checked = FALSE, $value=null, $label = null )
+	function checkbox($attributes, $checked = FALSE, $value=null, $label = null )
 	{
 		$checkbox = '<input type="checkbox"';
 		if( $checked ) {

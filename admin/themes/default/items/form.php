@@ -80,7 +80,7 @@
 					'fra'=>'French',
 					'spa'=>'Spanish',
 					'san'=>'Sanskrit'),
-				'eng'); 
+				!empty($item->language) ? $item->language : 'eng'); 
 		?>
 		
 		</div>
@@ -175,9 +175,7 @@
 	<fieldset id="collection-metadata">
 		<legend>Collection Metadata</legend>
 		<div class="field">
-		<?php select(	array(	
-					'name'	=> 'collection_id',
-					'id'	=> 'collection' ),
+		<?php select('collection_id',
 					collections(),
 					$item->collection_id,
 					'Collection',
