@@ -9,17 +9,23 @@ if ( ! function_exists ( 'mime_content_type' ) )
 }
 
 require_once 'Item.php';
-
+require_once 'FilesImages.php';
+require_once 'FilesVideos.php';
+require_once 'FileMetaLookup.php';
 /**
  * @package Omeka
  * 
  **/
 class File extends Kea_Record { 
     
-
+	protected $extendedMetadata = array();
+	
 	public function setUp() {
 //		Removed [5-22-07 KBK], this throws errors when attempting to delete files from items/form		
-//		$this->hasOne("Item", "File.item_id");		
+//		$this->hasOne("Item", "File.item_id");
+		$this->hasOne('FileMetaLookup', 'File.lookup_id');
+		$this->hasOne('FilesImages', 'FilesImages.file_id');
+		$this->hasOne('FilesVideos', 'FilesVideos.file_id');		
 	}
 
 	public function setTableDefinition() {
@@ -65,8 +71,44 @@ class File extends Kea_Record {
         $this->hasColumn('mime_os', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('type_os', 'string', null, array('notnull' => true, 'default'=>''));
 		
+		$this->hasColumn('lookup_id', 'integer');
+		
 		$this->index('item', array('fields' => array('item_id')));
     }
+	
+	public function get($name)
+	{
+		if($this->hasRelation($name)) {
+			return parent::get($name);
+		}else {
+			//Try to obtain extended metadata
+			if(empty($this->extendedMetadata)) {
+				$this->extendedMetadata = $this->getExtendedMetadata();
+			}
+			$metadata = $this->extendedMetadata[$name];
+			
+			if($unserialized = unserialize($metadata)) {
+				return $unserialized;
+			}else {
+				return $metadata;
+			}
+			
+		}
+	}
+	
+	protected function getExtendedMetadata()
+	{
+		$lookupTable = $this->getTableName('FileMetaLookup');
+		$fileTable = $this->getTableName();
+		$sql = "SELECT table_name FROM $lookupTable l WHERE l.id = {$this->lookup_id}";
+		
+		//We've got the name of the table that holds the extended data
+		$metadataTable = $this->execute($sql, array(), true);
+		
+		
+		$metadata = $this->execute("SELECT d.* FROM $metadataTable d WHERE d.file_id = ?", array($this->id));
+		return $metadata[0];
+	}
 	
 	public function isPublic()
 	{
@@ -192,6 +234,7 @@ class File extends Kea_Record {
 				
 				$this->thumbnail_filename = $this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint );
 				
+				$this->processExtendedMetadata($path);
 		} else {
 			// Ignore error '4' - no file uploaded and error '0' - file uploaded correctly
 				switch( $error ) {
@@ -223,6 +266,35 @@ class File extends Kea_Record {
 				}
 		}
 	}
+
+	protected function processExtendedMetadata($path)
+	{
+		$fi = new FilesImages;
+		$m = new FileMetaLookup;
+		
+		require_once 'getID3/getid3.php';
+		//Instantiate this third-party sheit
+		$id3 = new getID3;
+		
+		$id3->encoding = 'UTF-8';
+		$id3->Analyze($path);
+		
+		$mime_type = $id3->info['mime_type'];
+		
+		//Get the lookup ID for the correct table
+		$lookupTable = $this->getTableName('FileMetaLookup');
+		$sql = "SELECT * FROM $lookupTable WHERE mime_type = ? LIMIT 1";
+		$res = $this->execute($sql, array($mime_type));
+		
+		//Generate the extended info
+		if(count($res)) {
+			$this->lookup_id = $res[0]['id'];
+			//Have the correct class
+			$extendedClass = $res[0]['table_class'];
+			$info = $id3->info;
+			$this->$extendedClass->generate($info, $path);
+		}		
+	}
 	
 	/**
 	 * Also ripped off/modded from old File model
@@ -253,7 +325,6 @@ class File extends Kea_Record {
 			
 			$filename = basename( $old_path );
 			$new_name = explode( '.', $filename );
-			$new_name[0] .= '_' . basename($new_dir);
 			//ensures that all generated files are jpeg
 			$new_name[1] = 'jpg';
 			$imagename = implode( '.', $new_name );
