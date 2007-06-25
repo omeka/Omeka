@@ -8,6 +8,8 @@ if ( ! function_exists ( 'mime_content_type' ) )
    }
 }
 
+define('IMAGE_DERIVATIVE_EXT', 'jpg');
+
 require_once 'Item.php';
 require_once 'FilesImages.php';
 require_once 'FilesVideos.php';
@@ -62,9 +64,7 @@ class File extends Kea_Record {
         $this->hasColumn('compression', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('post_processing', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('archive_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('fullsize_filename', 'string');
         $this->hasColumn('original_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('thumbnail_filename', 'string');
         $this->hasColumn('size', 'integer', null, array('default'=>'0', 'notnull' => true));
         $this->hasColumn('mime_browser', 'string', null, array('default'=>''));
         $this->hasColumn('mime_php', 'string', null, array('notnull' => true, 'default'=>''));
@@ -124,17 +124,25 @@ class File extends Kea_Record {
 	 **/
 	public function getPath($type='fullsize')
 	{
+		$fn = $this->getDerivativeFilename();
 		switch ($type) {
 			case 'fullsize':
-				return FULLSIZE_DIR.DIRECTORY_SEPARATOR.$this->fullsize_filename;
+				return FULLSIZE_DIR.DIRECTORY_SEPARATOR.$fn;
 				break;
 			case 'thumbnail':
-				return THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$this->thumbnail_filename;
+				return THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$fn;
 			case 'archive':
 			default:
 				return FILES_DIR.DIRECTORY_SEPARATOR.$this->archive_filename;
 				break;
 		}
+	}
+	
+	public function getDerivativeFilename()
+	{
+		list($base, $ext) = explode('.', $this->archive_filename);
+		$fn = $base.'.'.IMAGE_DERIVATIVE_EXT;
+		return $fn;		
 	}
 	
 	public function sanitizeFilename($name)
@@ -179,13 +187,14 @@ class File extends Kea_Record {
 	}
 	
 	public function hasThumbnail()
-	{
-		return !empty($this->thumbnail_filename);
+	{		
+		return file_exists($this->getPath('thumbnail'));
 	}
 	
 	public function hasFullsize()
 	{
-		return !empty($this->fullsize_filename);
+		
+		return file_exists($this->getPath('fullsize'));
 	}
 	
 	/**
@@ -230,9 +239,9 @@ class File extends Kea_Record {
 				$full_constraint = get_option('fullsize_constraint');
 				$thumb_constraint = get_option('thumbnail_constraint');
 				
-				$this->fullsize_filename = $this->createImage(FULLSIZE_DIR, $path, $full_constraint );
+				$this->createImage(FULLSIZE_DIR, $path, $full_constraint );
 				
-				$this->thumbnail_filename = $this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint );
+				$this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint );
 				
 				$this->processExtendedMetadata($path);
 		} else {
@@ -326,7 +335,7 @@ class File extends Kea_Record {
 			$filename = basename( $old_path );
 			$new_name = explode( '.', $filename );
 			//ensures that all generated files are jpeg
-			$new_name[1] = 'jpg';
+			$new_name[1] = IMAGE_DERIVATIVE_EXT;
 			$imagename = implode( '.', $new_name );
 			$new_path = rtrim( $new_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imagename;
 			
@@ -387,9 +396,9 @@ class File extends Kea_Record {
 	
 	protected function deleteFiles() {
 		$files = array( 
-			(FULLSIZE_DIR . DIRECTORY_SEPARATOR . $this->fullsize_filename), 
-			(THUMBNAIL_DIR . DIRECTORY_SEPARATOR . $this->thumbnail_filename), 
-			(FILES_DIR . DIRECTORY_SEPARATOR . $this->archive_filename) );
+			$this->getPath('fullsize'), 
+			$this->getPath('thumbnail'), 
+			$this->getPath('archive') );
 		
 		foreach( $files as $file )
 		{

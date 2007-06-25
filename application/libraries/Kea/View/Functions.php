@@ -735,30 +735,30 @@ function display_empty($val, $alternative="[Empty]") {
 
 function thumbnail($record, $props=array(), $width=null, $height=null,$return=false) 
 {
-       return archive_image($record, 'thumbnail_filename', $props, $width, $height, THUMBNAIL_DIR, WEB_THUMBNAILS,$return);
+       return archive_image($record, $props, $width, $height, THUMBNAIL_DIR, WEB_THUMBNAILS,$return);
 }
 
 function fullsize($record, $props=array(), $width=null, $height=null,$return=false)
 {
-       return archive_image($record, 'fullsize_filename', $props, $width, $height, FULLSIZE_DIR, WEB_FULLSIZE,$return);
+       return archive_image($record, $props, $width, $height, FULLSIZE_DIR, WEB_FULLSIZE,$return);
 }
 
-function archive_image( $record, $field , $props, $width, $height, $abs, $web,$return) 
+function archive_image( $record, $props, $width, $height, $abs, $web,$return) 
 {
        if($record instanceof File) {
-               $file = $record->$field;
+               $filename = $record->getDerivativeFilename();
        }elseif($record instanceof Item) {
                $file = $record->getRandomFileWithImage();
                if(!$file) return false;
-               $file = $file->$field;
+               $filename = $file->getDerivativeFilename();
        }
 	   
-		if(empty($file)) {
+		if(empty($filename)) {
 			return false;
 	   }
 
-       $path =  $web . DIRECTORY_SEPARATOR . $file;
-       $abs_path =  $abs . DIRECTORY_SEPARATOR . $file;
+       $path =  $web . DIRECTORY_SEPARATOR . $filename;
+       $abs_path =  $abs . DIRECTORY_SEPARATOR . $filename;
        if( file_exists( $abs_path ) ) {
                $html = '<img src="' . $path . '" ';
                foreach( $props as $k => $v ) {

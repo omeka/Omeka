@@ -197,20 +197,6 @@
 							'class' => 'readonly textinput'),$file->original_filename);
 ?>
 
-<label class="readonly" for="thumbnail_filename">Display File Name <span class="readonly">(read only)</span></label>
-<?php
-	text( array(	'name'	=> 'fullsize_filename',
-							'readonly' => 'readonly',
-							'class' => 'readonly textinput'),$file->fullsize_filename);
-?>
-
-<label class="readonly" for="thumbnail_filename">Thumbnail File Name <span class="readonly">(read only)</span></label>
-<?php
-	text( array(	'name'	=> 'thumbnail_filename',
-							'readonly' => 'readonly',
-							'class' => 'readonly textinput'),$file->thumbnail_filename);
-?>
-
 <label class="readonly" for="size">File Size <span class="readonly">(read only)</span></label>
 <?php
 	text( array(	'name'	=> 'size',

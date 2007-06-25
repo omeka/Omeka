@@ -210,9 +210,12 @@ class Item extends Kea_Record
 	
 	public function hasThumbnail()
 	{
-		$sql = "SELECT COUNT(f.id) thumbCount FROM files f WHERE f.item_id = ? AND f.thumbnail_filename IS NOT NULL";
-		$res = $this->execute($sql, array($this->id), true);
-		return $res > 0;
+		foreach ($this->Files as $k => $file) {
+			if($file->hasThumbnail()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
@@ -301,10 +304,17 @@ class Item extends Kea_Record
 	}
 	
    public function getRandomFileWithImage()
-   {
-           $q = new Doctrine_Query;
-           $q->parseQuery("SELECT f.*, RANDOM() rand FROM File f WHERE f.item_id = ? AND f.thumbnail_filename IS NOT NULL AND f.thumbnail_filename != '' ORDER BY rand");
-           return $q->execute(array($this->id))->getFirst();
+   {	
+		//Get files that have thumbnails
+		$files = array();
+		foreach ($this->Files as $k => $file) {
+			if($file->hasThumbnail()) {
+				$files[] = $file;
+			}
+		}
+		$index = mt_rand(0, count($files)-1);
+		
+		return $files[$index];
    }
 
 	public function isInExhibit($exhibit_id)

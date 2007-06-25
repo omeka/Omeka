@@ -40,7 +40,6 @@
 
 <dl><dt>Archive Filename:</dt> <?php if ($file->archive_filename): ?><dd><?php echo $file->archive_filename; ?></dd><?php endif; ?></dl>
 <dl><dt>Original Filename:</dt> <?php if ($file->original_filename): ?><dd><?php echo $file->original_filename; ?></dd><?php endif; ?></dl>
-<dl><dt>Thumbnail Name:</dt> <?php if ($file->thumbnail_filename): ?><dd><?php echo $file->thumbnail_filename; ?></dd><?php endif; ?></dl>
 <dl><dt>File Size:</dt> <?php if ($file->size): ?><dd><?php echo $file->size; ?> bytes</dd><?php endif; ?></dl>
 </div>
 <div id="type-metadata" class="section">
@@ -53,7 +52,7 @@
 </div>
 <div id="secondary">
 <div id="image">
-<?php if ($file->thumbnail_filename): ?>
+<?php if ($file->hasThumbnail()): ?>
 	<img src="<?php echo WEB_FILES.'/'.$file->archive_filename; ?>" alt="<?php echo $file->title; ?>" width="400" />
 <?php else: ?>
 	<?php echo $file->archive_filename; ?>
