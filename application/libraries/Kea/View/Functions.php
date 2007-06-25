@@ -295,7 +295,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
  * @todo Work without mod_rewrite enabled: uri('items/show/3') -> ?controller=items&action=show&id=3
  * @return string Url for the link href attribute.
  **/
-function uri($urlEnd)
+function uri($urlEnd, $params=array())
 {
     
     $ctrl = Kea_Controller_Front::getInstance();
@@ -303,9 +303,14 @@ function uri($urlEnd)
     $request = $ctrl->getRequest();
     
     $url = rtrim($request->getBaseUrl(), '/') . '/';
-    
+
 	$url .= $urlEnd;
  
+	//Convert array of params into valid query string
+	if(!empty($params)) {
+		$url .= '?' . http_build_query($params);
+	}
+
     return $url;
     
 }
@@ -410,7 +415,7 @@ function tag_string($record, $link=null, $delimiter=', ')
 	if(!empty($tags)) {
 		foreach ($tags as $key=>$tag) {
 			if(!$link) {
-				$string[$key] = $tag["name"];
+				$string[$key] = allhtmlentities($tag["name"]);
 			}else {
 				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'">'.$tag["name"].'</a>';
 			}
