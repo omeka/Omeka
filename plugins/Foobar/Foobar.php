@@ -43,7 +43,7 @@ class Foobar extends Kea_Plugin
 		Zend::dump( $tags );
 	}
 	public function onEditItem($item) {
-		Zend::dump( 'edited item with ID = '.$item->id );exit;
+//		Zend::dump( 'edited item with ID = '.$item->id );exit;
 	}
 	public function onDeleteItem($item) {
 //		Zend::dump( 'deleting item with ID = '.$item->id );exit;
