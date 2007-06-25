@@ -240,17 +240,21 @@ class Item extends Kea_Record
 					$this->$field = null;
 					return true;
 			}
+			//If day or month is not included, then just check the year
+			if( ($date[2] == '00') or ($date[1] == '00') ) {
+				if($date[0] < 0 or $date[0] > date('Y')) {
+					return false;
+				}
+			}
 			//If the date is invalid, return false
 			elseif( !checkdate($date[1], $date[2], $date[0]) ) {
 
 					return false;
 			
-			}else {
-				
-				
-				$this->$field = $mySqlDate;
-				return true;
-			}					
+			}
+			
+			$this->$field = $mySqlDate;
+			return true;
 	}
 	
 	public function getCitation()
