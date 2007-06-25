@@ -188,7 +188,7 @@
 
 <?php else: ?>
 
-<form method="post">
+
 	<?php 
 		if(!$page->exists()) {
 			$url = uri('exhibits/addPage').DIRECTORY_SEPARATOR.$section->id.DIRECTORY_SEPARATOR; 
@@ -203,8 +203,9 @@
 	//Retrieve items with their pagination
 	$retVal = _make_omeka_request('Items','browse',array('pagination_url'=>$url, 'public'=>true),array('items','pagination'));
 	extract($retVal);
-	
+		items_filter_form(array(), $url);
 	?>
+<form method="post">
 	<div id="pagination">
 	<?php 
 		 echo pagination(); 

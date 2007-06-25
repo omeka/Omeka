@@ -206,6 +206,37 @@
 		echo '<input type="submit" name="'.$name.'" value="'.$value.'" />';
 	}
 	
+	function items_filter_form($props=array(), $uri) {
+		?>
+		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
+			<fieldset>
+				<?php 
+					checkbox(array('name'=>'recent'), $_REQUEST['recent'], null, 'View Most Recent Items'); 
+				?>
+			</fieldset>
+			
+			<fieldset>
+			<?php 
+				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Filter by Collection', 'id', 'name');
+				select(array('name'=>'type'), types(), $_REQUEST['type'], 'Filter by Type', 'id', 'name'); 
+			?>
+			<label>Filter by Tags<input type="text" name="tags" value="<?php echo $_REQUEST['tags']; ?>" /></label>
+			</fieldset>
+			
+			<fieldset>
+			<?php 
+				checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
+				checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
+			?>
+			</fieldset>
+			
+			<fieldset>
+			<input type="text" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
+			<input type="submit" name="submit_search" value="Search" />
+			</fieldset>
+		</form><?php
+	}
+	
 	/**
 	 * Create the form for an item's metatext entries, just so the theme writer doesn't have to know the mechanics
 	 * Right now this is recursive to allow theme writer to use specific metafields

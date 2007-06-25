@@ -77,45 +77,45 @@ class Foobar extends Kea_Plugin
 	}
 	
 	public function onAddExhibit($ex) {
-		Zend::dump( 'added an exhibit with ID = '.$ex->id );exit;
+//		Zend::dump( 'added an exhibit with ID = '.$ex->id );exit;
 	}
 
 	public function onEditExhibit($ex) {
-		Zend::dump( 'edited an exhibit with ID = '.$ex->id );
+//		Zend::dump( 'edited an exhibit with ID = '.$ex->id );
 	}
 	
 	public function onDeleteExhibit($ex) {
-		Zend::dump( 'about to delete an exhibit with ID = '.$ex->id );exit;
+//		Zend::dump( 'about to delete an exhibit with ID = '.$ex->id );exit;
 	}
 	public function onTagExhibit($ex, $tags, $user_id) {
-		Zend::dump( 'tagged an exhibit with '.print_r($tags, true).' by '.$user_id );exit;
+//		Zend::dump( 'tagged an exhibit with '.print_r($tags, true).' by '.$user_id );exit;
 	}
 	public function onUntagExhibit($ex, $tags) {
-		Zend::dump( 'removed these tags'.print_r($tags, true));exit;
+//		Zend::dump( 'removed these tags'.print_r($tags, true));exit;
 	}
 	public function onShowExhibit($ex, $section, $page) {
-		Zend::dump( 'Showing Exhibit ID = '.$ex->id . ' Section ID = '.$section->id.' Page ID = '.$page->id );
+//		Zend::dump( 'Showing Exhibit ID = '.$ex->id . ' Section ID = '.$section->id.' Page ID = '.$page->id );
 	}
 	public function onAddExhibitPage($page) {
-		Zend::dump( 'added a page to an exhibit (Page ID = '.$page->id.')' );exit;
+//		Zend::dump( 'added a page to an exhibit (Page ID = '.$page->id.')' );exit;
 	}
 	public function onAddExhibitSection($section) {
-		Zend::dump( 'added a section to an exhibit (new section has ID = '.$section->id.')' );exit;
+//		Zend::dump( 'added a section to an exhibit (new section has ID = '.$section->id.')' );exit;
 	}
 	public function onEditExhibitPage($page) {
-		Zend::dump( 'edited an exhibit page with ID = '.$page->id );exit;
+//		Zend::dump( 'edited an exhibit page with ID = '.$page->id );exit;
 	}
 	public function onEditExhibitSection($section) {
-		Zend::dump( 'edited an exhibit Section with ID = '.$section->id );
+//		Zend::dump( 'edited an exhibit Section with ID = '.$section->id );
 	}
 	public function onDeleteExhibitPage($page) {
-		Zend::dump( 'about to delete an exhibit page with ID = '.$page->id );exit;
+//		Zend::dump( 'about to delete an exhibit page with ID = '.$page->id );exit;
 	}
 	public function onDeleteExhibitSection($section) {
-		Zend::dump( 'about to delete an exhibit section with ID = '.$section->id );exit;
+//		Zend::dump( 'about to delete an exhibit section with ID = '.$section->id );exit;
 	}
 	public function onShowExhibitItem($item, $exhibit) {
-		Zend::dump( 'showing item with ID = '.$item->id .' within exhibit with ID = '.$exhibit->id );exit;
+//		Zend::dump( 'showing item with ID = '.$item->id .' within exhibit with ID = '.$exhibit->id );exit;
 	}
 	
 	/////END EXHIBIT HOOKS
