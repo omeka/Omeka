@@ -70,7 +70,19 @@
 		
 		<div class="field">
 		<label>Language</label>
-		<input type="text" class="textinput" name="language" value="<?php echo $item->language;?>" />
+		<?php 
+			select(
+				array('id'=>'language','name'=>'language'), 
+				array(
+					'eng'=>'English', 
+					'rus'=>'Russian',
+					'deu'=>'German',
+					'fra'=>'French',
+					'spa'=>'Spanish',
+					'san'=>'Sanskrit'),
+				'eng'); 
+		?>
+		
 		</div>
 		
 		<div class="field">
