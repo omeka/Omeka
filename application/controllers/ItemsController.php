@@ -13,6 +13,47 @@ class ItemsController extends Kea_Controller_Action
 		$this->_modelClass = 'Item';
 	}
 	
+	/**
+	 * This wraps the builtin method with permissions checks
+	 *
+	 **/
+	public function editAction()
+	{
+		if($user = Kea::loggedIn()) {
+			
+			$item = $this->findById();
+		
+			//If the user cannot edit any given item
+			if($this->isAllowed('editAll') or 
+				//Check if they can edit this specific item
+				($this->isAllowed('editSelf') and $item->user_id == $user->id)) {
+				
+				return $this->render('items/edit.php', compact('item'));	
+			}
+		}
+
+		$this->_forward('index','forbidden');
+	}
+	
+	/**
+	 * Wrapping this crap with permissions checks
+	 *
+	 **/
+	public function deleteAction()
+	{
+		if($user = Kea::loggedIn()) {
+			$item = $this->findById();
+			
+			//Permission check
+			if($this->isAllowed('deleteAll') or ( $this->isAllowed('deleteSelf') and $item->user_id == $user->id )) {
+				$item->delete();
+				
+				$this->_redirect('items/browse');
+			}
+		}
+		$this->_forward('index', 'forbidden');
+	}
+	
 	public function addAction()
 	{
 		$item = new Item;
@@ -78,11 +119,42 @@ class ItemsController extends Kea_Controller_Action
 	
 		$select->from('items i','i.id');
 
-		//Run the permissions check
-		if( !$this->isAllowed('showNotPublic') or $this->_getParam('public') ) {
+		//Show only public if we say so
+		if($this->_getParam('public')) {
+			$select->where('i.public = 1');
+		}
+		//Don't do any more filtering if user is allowed to see items that aren't public
+		elseif( $this->isAllowed('showNotPublic')) {}
+		
+		//Otherwise check if specific user can see their own items
+		elseif($this->isAllowed('showSelfNotPublic')) {
+			$user = Kea::loggedIn();
+			
+			$select->where('(i.public = 1 OR i.user_id = ?)', $user->id);
+		}
+		//Otherwise display only public items by default
+		else {
+		
 			$select->where('i.public = 1');
 		} 
 		
+		try {
+			
+			//User-specific item browsing
+			if($userToView = $this->_getParam('user')) {
+							
+				//Must be logged in to view items specific to certain users
+				if(!$this->isAllowed('browse', 'Users')) {
+					throw new Exception( 'May not browse by specific users.' );
+				}
+				
+				if(is_numeric($userToView)) {
+					$select->where('i.user_id = ?', $userToView);
+				}
+			}
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
+		}
 		
 		//Grab the total number of items in the table(as differentiated from the result count)
 		//Make sure that the query that retrieves the total number of Items also contains the permissions check
@@ -193,7 +265,7 @@ class ItemsController extends Kea_Controller_Action
 		if($recent = $this->_getParam('recent')) {
 			$select->order('i.added DESC');
 		}
-				
+//echo $select;exit;
 		$res = $select->fetchAll();
 		
 		//Drop the search table if it exists
@@ -402,9 +474,13 @@ class ItemsController extends Kea_Controller_Action
 	public function showAction() 
 	{
 		$item = $this->findById();
+		$user = Kea::loggedIn();
 		
 		//If the item is not public, check for permissions
-		if(!$item->public && !$this->isAllowed('showNotPublic')) {
+		$canSeeNotPublic = 	($this->isAllowed('showNotPublic') or 
+				($this->isAllowed('showSelfNotPublic') and $item->user_id == $user->id));
+		
+		if(!$item->public && !$canSeeNotPublic) {
 			$this->_redirect('403');
 		}
 		
@@ -419,14 +495,11 @@ class ItemsController extends Kea_Controller_Action
 				$this->flash('User does not have permission to add tags.');
 			}
 		}
-			
-		$user = Kea::loggedIn();
 
 		//@todo Does makeFavorite require a permissions check?
 		if($this->getRequest()->getParam('makeFavorite')) {
 			$this->makeFavorite($item,$user);
 		}
-		
 		
 		
 		if($tagsAdded || $tagsDeleted) {

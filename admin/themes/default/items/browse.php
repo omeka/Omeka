@@ -8,6 +8,8 @@
 		}
 	?>
 </ul>
+<?php echo flash(); ?>
+
 <?php if ( total_results(true) ): ?>
 
 	<h2>Browse Items (<?php echo total_results(true);?> items total)</h2>

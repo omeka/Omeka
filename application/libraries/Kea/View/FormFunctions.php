@@ -233,6 +233,14 @@
 			?>
 			</fieldset>
 			
+			<?php if(has_permission('Users', 'browse')): ?>
+			<fieldset>
+			<?php 
+				 select(array('name'=>'user'), users(), $_REQUEST['user'], 'Filter By User', 'id', array('first_name', 'last_name'));
+			?>
+			</fieldset>
+			<?php endif; ?>
+			
 			<fieldset>
 			<input type="text" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
 			<input type="submit" name="submit_search" value="Search" />
