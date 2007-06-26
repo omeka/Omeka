@@ -238,9 +238,9 @@ class File extends Kea_Record {
 				$full_constraint = get_option('fullsize_constraint');
 				$thumb_constraint = get_option('thumbnail_constraint');
 				
-				$this->createImage(FULLSIZE_DIR, $path, $full_constraint );
+				$this->createImage(FULLSIZE_DIR, $path, $full_constraint);
 				
-				$this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint );
+				$this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint);
 				
 				$this->processExtendedMetadata($path);
 		} else {
@@ -310,26 +310,23 @@ class File extends Kea_Record {
 	 * @return void
 	 * 
 	 **/
-	protected function createImage( $new_dir, $old_path, $constraint, $no_enlarge = true ) {
+	protected function createImage( $new_dir, $old_path, $constraint) {
+		
 		$convertPath = get_option('path_to_convert');
 		
-		if(!$this->checkForImageMagick($convertPath)) {
+		if (!$this->checkForImageMagick($convertPath)) {
 			//throw new Exception( 'ImageMagick library is required for thumbnail generation' );
 			return null;
 		}
 		
-		if( !is_dir($new_dir) )
-		{
+		if (!is_dir($new_dir)) {
 			throw new Exception ('Invalid directory to put new image');
 		}
-		if( !is_writable($new_dir) )
-		{
+		if (!is_writable($new_dir)) {
 			throw new Exception ('Unable to write to '. $new_dir . ' directory; improper permissions');
 		}
 		
-		if( file_exists( $old_path ) && is_readable( $old_path ) && getimagesize( $old_path ) )
-		{	
-			list( $width, $height, $type ) = getimagesize( $old_path );
+		if (file_exists($old_path) && is_readable($old_path) && getimagesize($old_path)) {	
 			
 			$filename = basename( $old_path );
 			$new_name = explode( '.', $filename );
@@ -342,48 +339,17 @@ class File extends Kea_Record {
 			$new_path = escapeshellarg( $new_path );
 			
 			if(!$constraint) {
-				throw new Exception( 
-					'Image creation failed - Image size constraint must be specified within application settings' 
-				);
+				throw new Exception('Image creation failed - Image size constraint must be specified within application settings');
 			}
 			
-			//Landscape aspect-ratio
-			if($width > $height) {
-				//Width is the constraint
-				
-				$new_width = $constraint;
-				$new_height = ($constraint / $width) * $height;
-			}
-			//Portrait aspect-ratio
-			else {
-				//Height is the constraint
-
-				$new_height = $constraint;
-				$new_width = ($constraint / $height) * $width;
-			}
+			$command = ''.$convertPath.' '.$old_path.' -resize '.escapeshellarg($constraint.'x'.$constraint.'>').' '.$new_path.'';
 			
-			$command = $convertPath . ' ' . $old_path . ' -resize \'' . $new_width . 'x' . $new_height . '>\' ' . $new_path;
-			
-			//We probably don't want to make images that are any bigger than the raw file
-			if( $no_enlarge )
-			{
-				if ( ( $new_width > $width ) || ( $new_height > $height ) )
-				{
-					$command = $convertPath . ' ' . $old_path . ' ' . $new_path;
-				}
-			}
-
 			exec( $command, $result_array, $result_value );
-			if( $result_value == 0 )
-			{
-				return $imagename;	
-			}
-			else
-			{
 			
-				throw new Exception(
-					'Something went wrong with image creation.  Ensure that the thumbnail directories have appropriate write permissions.'
-				);
+			if ($result_value == 0) {
+				return $imagename;	
+			} else {
+				throw new Exception('Something went wrong with image creation.  Ensure that the thumbnail directories have appropriate write permissions.');
 			}
 		}
 	}
