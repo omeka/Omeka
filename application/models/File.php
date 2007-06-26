@@ -66,12 +66,11 @@ class File extends Kea_Record {
         $this->hasColumn('archive_filename', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('original_filename', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('size', 'integer', null, array('default'=>'0', 'notnull' => true));
-        $this->hasColumn('mime_browser', 'string', null, array('default'=>''));
-        $this->hasColumn('mime_php', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('mime_os', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('type_os', 'string', null, array('notnull' => true, 'default'=>''));
-		
-		$this->hasColumn('lookup_id', 'integer');
+        $this->hasColumn('mime_browser', 'string');
+        //$this->hasColumn('mime_php', 'string');
+        $this->hasColumn('mime_os', 'string');
+        $this->hasColumn('type_os', 'string');
+        $this->hasColumn('lookup_id', 'integer');
 		
 		$this->index('item', array('fields' => array('item_id')));
     }
@@ -228,7 +227,7 @@ class File extends Kea_Record {
 				$this->authentication = md5_file( $path );
 				
 				$this->mime_browser = $_FILES[$form_name]['type'][$index];
-				$this->mime_php = mime_content_type( $path );
+				//$this->mime_php = mime_content_type( $path );
 				$this->mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $path ) ) ) );
 				$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
 
@@ -281,7 +280,7 @@ class File extends Kea_Record {
 		$fi = new FilesImages;
 		$m = new FileMetaLookup;
 		
-		require_once 'getID3/getid3.php';
+		require_once 'getid3/getid3.php';
 		//Instantiate this third-party sheit
 		$id3 = new getID3;
 		
