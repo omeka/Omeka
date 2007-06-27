@@ -462,7 +462,7 @@ class ExhibitsController extends Kea_Controller_Action
 	{
 		$page = $this->findById(null,'SectionPage');
 		$section = $page->Section;
-		
+	//	Zend::dump( $_POST );exit;
 		//Session var says we are not adding a page (for plugin hooks)
 		$this->session->addingPage = false;
 		

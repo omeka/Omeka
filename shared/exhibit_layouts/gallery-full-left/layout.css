@@ -1,0 +1,8 @@
+
+#gallery ul {
+	display:inline;
+	float:left;
+}
+#gallery div {
+	display:block;
+}

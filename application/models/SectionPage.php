@@ -50,9 +50,9 @@ class SectionPage extends Kea_Record
 	 **/
 	public function Text($order) {
 		
-		$sql = "SELECT text FROM items_section_pages p WHERE p.page_id = ? AND p.entry_order = ?";
-		$res = $this->execute($sql,array($this->id, $order));
-		Zend::dump( $res );exit;
+		$sql = "SELECT text FROM items_section_pages p WHERE p.page_id = ? AND p.entry_order = ? LIMIT 1";
+		$res = $this->execute($sql,array($this->id, $order), true);
+		return $res;
 	}
 	
 /*
@@ -69,9 +69,9 @@ class SectionPage extends Kea_Record
 	 * @return int|null
 	 **/
 	public function ItemId($order) {
-		$sql = "SELECT item_id FROM items_section_pages p WHERE p.page_id = ? AND p.entry_order = ?";
-		$res = $this->execute($sql,array($this->id, $order));
-		return $res[0];
+		$sql = "SELECT item_id FROM items_section_pages p WHERE p.page_id = ? AND p.entry_order = ? LIMIT 1";
+		$res = $this->execute($sql,array($this->id, $order), true);
+		return $res;
 	}
 }
 ?>

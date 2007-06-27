@@ -31,6 +31,20 @@ function exhibit_foot()
 	}
 	
 }
+/*
+	
+function has_sections($exhibit)
+{
+	return $exhibit->Sections->count() > 0;
+}
+*/	
+/*
+		
+function has_pages($section)
+{
+	return $section->Pages->count() > 0;
+}
+*/	
 
 function page_text($order, $addTag=true)
 {
@@ -59,8 +73,20 @@ function page_item_id($order)
 	return $page->ItemId($order);
 }
 
-function layout_form_item($order, $label='Enter an Item ID #') {
-	text(array('name'=>'Item['.$order.']', 'size'=>2, 'class'=>'item'), page_item_id($order), $label);
+function layout_form_item($order, $label='Enter an Item ID #') {	
+	echo '<div class="item-drop">';	
+	$item = page_item($order);
+	if($item and $item->exists()) {
+		echo '<div class="item-drag"><div class="item_id">' . $item->id . '</div>';
+			if(has_thumbnail($item)){
+				thumbnail($item);
+			} else {
+				echo $item->title;
+			}
+		echo '</div>';		
+	}
+	text(array('name'=>'Item['.$order.']', 'size'=>2), $item->id, $label);
+	echo '</div>';
 }
 
 function layout_form_text($order, $label='Enter text') {
@@ -191,6 +217,12 @@ function render_exhibit_page()
 
 function render_layout_form($layout)
 {
+/*
+		echo '<style>';
+	include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'layout.css';
+	echo '</style>';
+*/	
+	
 	include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'form.php';
 }
 

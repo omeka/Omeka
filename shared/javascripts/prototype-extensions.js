@@ -10,5 +10,7 @@ Element.addMethods({
 		return Element.extend(wrapper); 
 	},
 	
-	insertAfter: function(element, insert) { insert.parentNode.insertBefore(element, insert.nextSibling); }
+	insertAfter: function(element, insert) { insert.parentNode.insertBefore(element, insert.nextSibling); },
+	
+	destroy: function(element) {var parent = element.up(); parent.removeChild(element); }
 }); 
