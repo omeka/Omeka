@@ -28,7 +28,9 @@ class ItemsController extends Kea_Controller_Action
 				//Check if they can edit this specific item
 				($this->isAllowed('editSelf') and $item->user_id == $user->id)) {
 				
-				return $this->render('items/edit.php', compact('item'));	
+				
+				
+				return parent::editAction();	
 			}
 		}
 

@@ -513,6 +513,10 @@ function has_tags($item, array $tags=array()) {
 	return true;
 }
 
+function has_files($item) {
+	return $item->Files->count() > 0;
+}
+
 function has_metatext($item, $metafield_name = null) {
 	$hasSome = ($item->Metatext->count() > 0);
 	

@@ -218,13 +218,12 @@
 </div>
 
 
+<?php if(!has_files($item)):?>
+	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
+<?php else: ?>
 
 <h2>Files</h2>
-<div id="files">
-	<?php //if(!has_files($item)):?>
-	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
-	<?php //endif;?>
-	
+<div id="files">	
 	<?php foreach( $item->Files as $key => $file ): ?>
 
 		<a href="<?php echo uri('files/show/'.$file->id); ?>">
@@ -236,5 +235,7 @@
 		</a>
 	<?php endforeach; ?>
 </div>
+
+<?php endif;?>
 
 <?php foot();?>

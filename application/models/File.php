@@ -285,7 +285,12 @@ class File extends Kea_Record {
 		$id3 = new getID3;
 		
 		$id3->encoding = 'UTF-8';
-		$id3->Analyze($path);
+		
+		try {
+			$id3->Analyze($path);
+		} catch (Exception $e) {
+			return false;
+		}
 		
 		$mime_type = $id3->info['mime_type'];
 		
