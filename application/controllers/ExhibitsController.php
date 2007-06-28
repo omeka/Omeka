@@ -186,7 +186,7 @@ class ExhibitsController extends Kea_Controller_Action
 				$this->render($footerPath, compact('section','exhibit','page'));
 			}			
 		}else {
-			$this->render('exhibits/show.php',compact('theme','layout','exhibit','section'));
+			$this->render('exhibits/show.php',compact('theme','layout','exhibit','section', 'page'));
 		}
 		
 	}
@@ -455,6 +455,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$q = new Doctrine_Query;
 		$section_id = $this->_getParam('id');
 		$section = $q->parseQuery($dql)->execute(array($section_id))->getFirst();
+
 		return $this->processSectionForm($section, $exhibit);
 	}
 	
@@ -505,12 +506,10 @@ class ExhibitsController extends Kea_Controller_Action
 			unset($_POST['featured']);
 			
 			//Change the order of the sections
-			if(array_key_exists('reorder_sections',$_POST)) {
-				foreach ($_POST['Sections'] as $key => $section) {
-					$exhibit->Sections[$key]->order = $section['order'];
-				}
-				$exhibit->Sections->save();
-			}			
+			foreach ($_POST['Sections'] as $key => $section) {
+				$exhibit->Sections[$key]->order = $section['order'];
+			}
+			$exhibit->Sections->save();
 		}			
 		
 		$retVal = parent::commitForm($exhibit);
@@ -559,7 +558,14 @@ class ExhibitsController extends Kea_Controller_Action
 			try {
 				//Fill out the section from the form
 				$section->setFromForm($_POST);
-			
+
+				//Change the order of the pages
+				foreach ($_POST['Pages'] as $key => $page) {
+					$section->Pages[$key]->order = $page['order'];
+				}
+				$section->Pages->save();
+				$section->reorderPages();
+				
 				//Save it
 				$section->save();
 			

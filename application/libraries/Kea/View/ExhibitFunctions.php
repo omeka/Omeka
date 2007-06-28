@@ -5,6 +5,26 @@ function exhibits($params = array()) {
 	return _get_recordset($params, 'exhibits');
 }
 
+function exhibit($id=null) {
+	if(!$id) {
+		if(Zend::isRegistered('exhibit')) {
+			return Zend::Registry( 'exhibit' );
+		}
+	}else {
+		return Doctrine_Manager::getInstance()->getTable('Exhibit')->find($id);
+	}
+}
+
+function exhibit_section($id=null) {
+	if(!$id) {
+		if(Zend::isRegistered('section')) {
+			return Zend::Registry('section');
+		}
+	}else {
+		return Doctrine_Manager::getInstance()->getTable('Section')->find($id);
+	}
+}
+
 /**
  * Load either the default theme or the chosen exhibit theme, depending
  *
@@ -124,14 +144,16 @@ function get_ex_layouts()
 	return $array;
 }
 
-function exhibit_layout($layout)
+function exhibit_layout($layout, $input=true)
 {	
 	//Load the thumbnail image
 	$imgFile = WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'layout.gif';
 	echo '<div class="layout">';
-	echo '<img src="'.$imgFile.'" />';
-	echo '<div class="input"><input type="radio" name="layout" value="'.$layout .'" />'. $layout .'</div>';
-	echo '</div>';
+	echo '<img src="'.$imgFile.'" /><div class="input">';
+	if($input) {
+		echo '<input type="radio" name="layout" value="'.$layout .'" />';
+	}
+	echo $layout . '</div></div>';
 	//Load the name/description/author from the header of the file
 	$file = EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.'.php';
 }

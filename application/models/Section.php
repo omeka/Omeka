@@ -3,7 +3,6 @@ require_once 'SectionPage.php';
 /**
  * Section
  * @package: Omeka
- * @todo Have a function that re-orders the pages if the order gets fucked up or one gets deleted, etc.
  */
 class Section extends Kea_Record
 {
@@ -15,6 +14,8 @@ class Section extends Kea_Record
 		$this->hasColumn("description", "string");
 		$this->hasColumn("exhibit_id", "integer",null,"notnull");
 		$this->hasColumn("section_order as order", "integer", null,"notnull");
+		
+//		$this->index('exhibit_section', array('fields'=>array('exhibit_id', 'section_order'), 'type'=>'unique'));
     }
     public function setUp()
     {
@@ -47,7 +48,13 @@ class Section extends Kea_Record
 			$i++;
 		}
 	}
-
+	
+	public function loadPages()
+	{
+		$dql = "SELECT p.* FROM SectionPage p WHERE p.section_id = {$this->id} ORDER BY p.page_order ASC";
+		$this->Pages = $this->executeDql($dql);
+	}
+	
 	public function getPageCount()
 	{
 		$sql = "SELECT COUNT(*) FROM section_pages WHERE section_id = ?";

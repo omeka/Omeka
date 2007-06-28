@@ -12,5 +12,11 @@ Element.addMethods({
 	
 	insertAfter: function(element, insert) { insert.parentNode.insertBefore(element, insert.nextSibling); },
 	
-	destroy: function(element) {var parent = element.up(); parent.removeChild(element); }
+	destroy: function(element) {var parent = element.up(); parent.removeChild(element); },
+	
+	updateAppear: function(element, text) {
+		element.hide();
+		element.update(text);
+		Effect.Appear(element, {duration: 1.0});
+	}
 }); 

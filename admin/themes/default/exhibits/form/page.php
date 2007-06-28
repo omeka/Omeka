@@ -23,24 +23,7 @@
 
 <script type="text/javascript" charset="utf-8">
 	Event.observe(window, 'load', function() {
-/*
-			Sortable.create('layout-form', {
-			tag: 'div',
-			overlap: 'horizontal'
-		//	only: 'item-drop'
-		//	scroll: window
-		//	containment: ['layout-form', 'item-select']
-		});	
-*/	
 		dragDropPage();
-		
-		var checkForm = Builder.node('input', {type:'button' ,name:'checkForm', value:'Check the form'});
-		checkForm.onclick = function() {
-			var serialized = $('layout-all').serialize();
-			alert(serialized);
-		
-		}
-		$('layout-form').appendChild(checkForm);
 	});
 </script>
 <?php js('exhibits'); ?>

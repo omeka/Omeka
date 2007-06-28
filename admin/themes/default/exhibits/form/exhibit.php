@@ -1,6 +1,48 @@
 <?php head(); ?>
+<?php js('listsort'); ?>
 
-<form method="post">
+<script type="text/javascript" charset="utf-8">	
+	var listSorter = {};
+	
+	Event.observe(window, 'load', function() {		
+		listSorter.list = $('section-list');
+		listSorter.form = $('exhibit-form');
+		listSorter.editUri = "<?php echo $_SERVER['REQUEST_URI']; ?>";
+		listSorter.partialUri = "<?php echo uri('exhibits/ajaxSectionList'); ?>";
+		listSorter.recordId = '<?php echo $exhibit->id; ?>';
+		listSorter.tag = 'tr';
+		listSorter.confirmation = 'Are you sure you want to delete this section?';
+		listSorter.deleteLinks = listSorter.list.getElementsByClassName('delete-section');
+								
+		if(listSorter.list) {
+			//Create the sortable list
+			makeSortable(listSorter.list);
+		
+/*
+				var submitInputs = $$('input[type="submit"]');
+		
+			//Activate the sortable form elements when the form gets submitted
+			for (var i=0; i < submitInputs.length; i++) {
+				submitInputs[i].onclick = function(event) {
+					enableListForm(true);
+				};
+			};		
+*/	
+		}
+		
+/*
+			var checkForm = Builder.node('input', {type:'button' ,name:'checkForm', value:'Check the form'});
+		checkForm.onclick = function() {
+			var serialized = listSorter.form.serialize();
+			alert(serialized);
+		}
+		listSorter.form.appendChild(checkForm);
+*/	
+	});
+</script>
+
+
+<form id="exhibit-form" method="post">
 	<fieldset>
 		<legend>Exhibit Metadata</legend>
 		<?php echo flash();?>
@@ -26,14 +68,16 @@
 	</fieldset>
 	
 		<table>
+			<tbody id="section-list">
 		<?php foreach( $exhibit->Sections as $key => $section ): ?>
-			<tr>
-				<td><?php text(array('name'=>"Sections[$key][order]",'size'=>2), $key); ?>
-				<td><a href="<?php echo uri('exhibits/editSection/'.$section->id); ?>">[Edit]</a></td>
-				<td><a href="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>">[Delete]</a></td>
+			<tr id="section_<?php echo $key; ?>">
+				<td><?php text(array('name'=>"Sections[$key][order]",'size'=>2), $key); ?></td>
+				<td><a href="<?php echo uri('exhibits/editSection/'.$section->id); ?>" class="edit-section">[Edit]</a></td>
+				<td><a href="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>"  class="delete-section">[Delete]</a></td>
 				<td><?php echo $section->title; ?></td>
 			</tr>
 		<?php endforeach; ?>
+			</tbody>
 		</table>
 		<?php 
 			submit('Save &amp; Finish','save_exhibit');

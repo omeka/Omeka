@@ -56,7 +56,7 @@
 		if(!empty($attributes)) {
 			$input .= ' '._tag_attributes($attributes);
 		}
-		$input .= ' value="'.allhtmlentities($default).'" ';
+		$input .= ' value="'.$default.'" ';
 		
 		$input .= '/>';
 		$input .= "\n";
