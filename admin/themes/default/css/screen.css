@@ -138,6 +138,13 @@ label,.label {font-size:1.2em; line-height:1.66667em; margin-bottom:0.4166666em;
 		.radio label {width:10em; text-align:left; display:inline; float:none; margin-right:20px;}
 		
 		.files {overflow:hidden; float:right;width:340px;}
+	
+	.tooltip {
+		display:block;
+		width: 170px;
+		padding:10px;
+		background-color: #eee;
+	}
 			
 	/* Collections Pages */
 	.collection {overflow:hidden; border-top: 1px dotted #ccc;padding-top:1.66667em;}
