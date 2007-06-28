@@ -330,10 +330,7 @@ class ItemsController extends Kea_Controller_Action
 			$clean = $_POST;
 			unset($clean['id']);
 			
-			//If item is being made public
-			if(!$item->public && $clean['public'] == 1) {
-				$wasMadePublic = true;
-			}
+			
 			
 			//Process the separate date fields
 			$validDate = $item->processDate('date',
@@ -404,13 +401,20 @@ class ItemsController extends Kea_Controller_Action
 					}
 				}
 			}		
-						
+									
 			//Handle the boolean vars
 			if(array_key_exists('public', $clean)) {
-				$item->public = (bool) $clean['public'];
+				if($this->isAllowed('makePublic')) {
+					//If item is being made public
+					if(!$item->public && $clean['public'] == 1) {
+						$wasMadePublic = true;
+					}
+					
+					$item->public = (bool) $clean['public'];
+				}
 			}
 			
-			if(array_key_exists('featured', $clean)) {
+			if(array_key_exists('featured', $clean) and $this->isAllowed('makeFeatured')) {
 				$item->featured = (bool) $clean['featured'];
 			}
 			

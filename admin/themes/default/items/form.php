@@ -256,7 +256,7 @@
 			</div>
 		</fieldset>
 		
-		<?php if ( $item->hasFiles() ): ?>
+		<?php if ( has_files($item) ): ?>
 			<fieldset id="files">
 			<legend>Edit existing files</legend>
 			<p>(click on file to edit on a new page, check 'Delete this' to remove files)</p>
@@ -285,12 +285,16 @@
 		
 		<fieldset id="miscellaneous">
 			<legend>Miscellaneous</legend>
-			<div class="field">
+			<?php if ( has_permission('Items', 'makePublic') ): ?>
+				<div class="field">
 	<div class="label">Item is public:</div> <div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
-		</div>
-		<div class="field">
+				</div>
+			<?php endif; ?>
+		<?php if ( has_permission('Items', 'makeFeatured') ): ?>
+			<div class="field">
 		<div class="label">Item is featured:</div> <div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
-		</div>
+			</div>
+		<?php endif; ?>
 	</fieldset>
 	
 	<fieldset>

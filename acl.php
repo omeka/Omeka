@@ -17,7 +17,7 @@ $acl->addRole(new Zend_Acl_Role('admin'));
 //This should be referenced as little as possible in the event that the implementation changes (likely)
 $acl->addRole(new Zend_Acl_Role('default'));
 
-$acl->registerRule(new Zend_Acl_Resource('Items'), array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers'));
+$acl->registerRule(new Zend_Acl_Resource('Items'), array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured'));
 $acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','delete', 'showInactive'));
 $acl->registerRule(new Zend_Acl_Resource('Files'), array('edit','delete'));
 $acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','edit','show'));
@@ -36,7 +36,7 @@ $acl->allow('researcher','Collections',array('showInactive'));
 
 $acl->allow('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic'));
 
-$acl->allow('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers'));
+$acl->allow('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers', 'makePublic', 'makeFeatured'));
 $acl->allow('admin','Collections',array('add','edit','delete', 'showInactive'));
 $acl->allow('admin','Files',array('edit','delete'));
 $acl->allow('admin','Tags',array('rename','remove'));
