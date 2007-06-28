@@ -434,10 +434,13 @@ function current_user_tags($item)
 	return tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
 }
 
-function link_to_item($item, $action='show', $field='title')
+function link_to_item($item, $action='show', $text=null)
 {
 	$path = 'items/'.$action.'/' . $item->id;
-	echo '<a href="'. uri($path) . '">' . $item->$field . '</a>';
+	if(!$text) {
+		$text = !empty($item->title) ? $item->title : '[Untitled]';
+	}
+	echo '<a href="'. uri($path) . '">' . $text . '</a>';
 }
 
 /**
