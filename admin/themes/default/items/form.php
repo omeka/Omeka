@@ -2,7 +2,55 @@
 <script type="text/javascript" charset="utf-8">
 	Event.observe(window,'load', function() {
 		ajaxifyTagRemoval();
+		makeTooltips();
+		ajaxifyTypeMetadata();
+		filesAdding();
+	});
+	
+	function filesAdding()
+	{
+		var nonJsFormDiv = $('add-more-files');
 		
+		//This is where we put the new file inputs
+		var filesDiv = $$('#file-inputs .files')[0];
+		
+		//Make a link that will add another file input to the page
+		var link = Builder.node('a', {href:'javascript:void(0);'}, 'Add another file');
+
+		Event.observe(link, 'click', function(){
+			var inputs = $A(filesDiv.getElementsByTagName('input'));
+			var inputCount = inputs.length;
+			var fileHtml = '<input name="file['+inputCount+']" id="file['+inputCount+']" type="file" class="fileinput" />';
+			new Insertion.After(inputs.last(), fileHtml);
+		});
+	
+		
+		nonJsFormDiv.update();
+		nonJsFormDiv.appendChild(link);
+	}
+		
+	function ajaxifyTypeMetadata()
+	{
+		var typeSelect = $('type');
+		
+		typeSelect.onchange = function() {
+			new Ajax.Request('<?php echo uri("items/ajaxTypeMetadata") ?>', {
+				parameters: 'id=<?php echo $item->id; ?>&type_id='+this.getValue(),
+				onFailure: function(t) {
+					alert(t.status);
+				},
+				onComplete: function(t) {
+					var form = $('type-metadata-form');
+					form.hide();
+					form.update(t.responseText);
+					Effect.BlindDown(form, {duration: 1.0});
+				}
+			});
+		}
+	}
+	
+	function makeTooltips()
+	{
 		//Now load the tooltip js
 			var tooltipIds = ['title', 'publisher', 'relation', 'language', 'spatial_coverage', 'rights', 'rights_holder', 'description', 'source', 'subject', 'creator', 'additional_creator', 'provenance', 'contributor', 'citation', 'temporal_coverage', 'date'];
 			
@@ -11,7 +59,7 @@
 			var tooltipId = elId + '_tooltip';
 			var tooltip = new Tooltip(elId, tooltipId, {default_css:true, zindex:100000});
 		};
-	});
+	}
 	
 	function ajaxifyTagRemoval()
 	{
@@ -223,14 +271,14 @@
 						'name' ); ?>
 		<input type="submit" name="change_type" value="Pick this type" />	
 		</div>
-		
+		<div id="type-metadata-form">
 		<?php metatext_form($item,'textarea'); ?>
-		
+		</div>
 
 		</fieldset>
 		<fieldset id="add-files">
 			<legend>Add Files</legend>
-			<div class="field">
+			<div class="field" id="add-more-files">
 				<label for="add_num_files">Add Files</label>
 				<div class="files">
 			<?php 
@@ -243,7 +291,7 @@
 				</div>
 			</div>
 			
-			<div class="field">
+			<div class="field" id="file-inputs">
 			<!-- MAX_FILE_SIZE must precede the file input field -->
 				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 				<label for="file[<?php echo $i; ?>]">Find a File</label>
