@@ -25,22 +25,22 @@ class Foobar extends Kea_Plugin
 	}
 	
 	public function onShowItem($item) { 
-		Zend::dump( 'showing item with ID = '.$item->id ); 
+//		Zend::dump( 'showing item with ID = '.$item->id ); 
 	}
 	public function onBrowseItems($items) {
 //		Zend::dump( get_class($items) );
 	}
 	public function onAddItem($item) {
-		Zend::dump( 'you added an item!  It has an ID = '. $item->id );exit;
+//		Zend::dump( 'you added an item!  It has an ID = '. $item->id );exit;
 	}
 	public function onMakeFavoriteItem($item, $user) {
-		Zend::dump( 'the user with ID = '.$user->id.' has favorited item with ID =' .$item->id );exit;
+//		Zend::dump( 'the user with ID = '.$user->id.' has favorited item with ID =' .$item->id );exit;
 	}
 	public function onUntagItem($item, $tags, $user_id) {
-		Zend::dump( $tags );
+//		Zend::dump( $tags );
 	}
 	public function onTagItem($item, $tags, $user_id) {
-		Zend::dump( $tags );
+//		Zend::dump( $tags );
 	}
 	public function onEditItem($item) {
 //		Zend::dump( 'edited item with ID = '.$item->id );exit;
@@ -49,25 +49,25 @@ class Foobar extends Kea_Plugin
 //		Zend::dump( 'deleting item with ID = '.$item->id );exit;
 	}
 	public function onMakePublicItem($item) {
-		Zend::dump( $item->id );exit;
+//		Zend::dump( $item->id );exit;
 	}
 	
 	/////END ITEM HOOKS
 	
 	public function onAddCollection($coll) {
-		Zend::dump( 'added a collection with ID = '.$coll->id );exit;
+//		Zend::dump( 'added a collection with ID = '.$coll->id );exit;
 	}
 	public function onEditCollection($coll) {
-		Zend::dump( 'edited a collection with ID = '.$coll->id );exit;
+//		Zend::dump( 'edited a collection with ID = '.$coll->id );exit;
 	}
 	public function onBrowseCollections($colls) {
 //		Zend::dump( 'browsing '.count($colls).' collections' );
 	}
 	public function onShowCollection($coll) {
-		Zend::dump( 'showing collection with ID = '.$coll->id );
+//		Zend::dump( 'showing collection with ID = '.$coll->id );
 	}
 	public function onDeleteCollection($coll) {
-		Zend::dump( 'deleting a collection with ID = '.$coll->id );exit;
+//		Zend::dump( 'deleting a collection with ID = '.$coll->id );exit;
 	}	
 	
 	/////END COLLECTION HOOKS
@@ -121,16 +121,16 @@ class Foobar extends Kea_Plugin
 	/////END EXHIBIT HOOKS
 	
 	public function onAddType($type) {
-		Zend::dump( 'added a type (ID = '.$type->id.')' );exit;
+//		Zend::dump( 'added a type (ID = '.$type->id.')' );exit;
 	}
 	public function onEditType($type) {
-		Zend::dump( 'edited a type (ID = '.$type->id.')' );exit;
+//		Zend::dump( 'edited a type (ID = '.$type->id.')' );exit;
 	}
 	public function onDeleteType($type) {
-		Zend::dump( 'about to delete a type (ID = '.$type->id.')' );exit;
+//		Zend::dump( 'about to delete a type (ID = '.$type->id.')' );exit;
 	}
 	public function onShowType($type) {
-		Zend::dump( 'showing a type with ID = '.$type->id );
+//		Zend::dump( 'showing a type with ID = '.$type->id );
 	}
 	public function onBrowseTypes($types) {
 //		Zend::dump( 'Browsing '.count($types). ' types' );

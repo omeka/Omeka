@@ -8,6 +8,16 @@ class ExhibitsController extends Kea_Controller_Action
 {
 	protected $session;
 	
+	protected $_redirects = array(
+		'addSection' => array('exhibits/addSection/id', array('id')),
+		'editSection'=> array('exhibits/editSection/id', array('id')),
+		'saveExhibit'=> array('exhibits/browse'),
+		'editExhibit'=> array('exhibits/edit/id', array('id')),
+		'deleteExhibit'=>array('exhibits/browse'),
+		'addPage'=>array('exhibits/addPage/id', array('id')),
+		'editPage'=>array('exhibits/editPage/id/page', array('id'), array('page'))
+	);
+	
 	public function init()
 	{
 		$this->_modelClass = 'Exhibit';
@@ -245,12 +255,11 @@ class ExhibitsController extends Kea_Controller_Action
 			if(array_key_exists('add_section',$_POST)) {
 				//forward to addSection & unset the POST vars 
 				unset($_POST);
-				$this->_redirect('exhibits/addSection/'.$exhibit->id);
+				$this->_redirect('addSection', array('id'=>$exhibit->id) );
 				return;
 			}elseif(array_key_exists('save_exhibit', $_POST)) {
 			
-				//stay on this same pag
-				$this->_redirect('exhibits/browse');
+				$this->_redirect('saveExhibit');
 			}else {
 			
 				//Everything else should render the page
@@ -300,13 +309,13 @@ class ExhibitsController extends Kea_Controller_Action
 			if(array_key_exists('exhibit_form',$_POST)) {
 				
 				//Forward to the 'edit' action
-				$this->_redirect('exhibits/edit/'.$section->Exhibit->id); 
+				$this->_redirect('editExhibit', array('id'=>$section->Exhibit->id)); 
 				return;
 			
 			}elseif(array_key_exists('page_form',$_POST)) {
 				
 				//Forward to the addPage action (id is the section id)
-				$this->_redirect('exhibits/addPage/'.$section->id);
+				$this->_redirect('addPage', array('id'=>$section->id));
 				return;
 				
 			}
@@ -327,7 +336,7 @@ class ExhibitsController extends Kea_Controller_Action
 		
 		if(isset($_GET['cancel'])) {
 			unset($this->session->page);
-			$this->_redirect('exhibits/editSection/'.$section->id);
+			$this->_redirect('editSection', array('id'=>$section->id));
 		}
 		
 		//Check to see if the page var was saved in the session
@@ -363,7 +372,7 @@ class ExhibitsController extends Kea_Controller_Action
 				
 		//		$page->save();
 				
-				$this->_redirect('exhibits/addPage/' . $section->id);
+				$this->_redirect('addPage', array('id'=> $section->id));
 			
 			}elseif(array_key_exists('change_layout', $_POST)) {
 				
@@ -398,20 +407,20 @@ class ExhibitsController extends Kea_Controller_Action
 					if(array_key_exists('exhibit_form', $_POST)) {
 					
 						//Return to the exhibit form
-						$this->_redirect('exhibits/edit/'.$section->Exhibit->id);
+						$this->_redirect('editExhibit', array('id'=>$section->Exhibit->id));
 						return;
 					
 					}elseif(array_key_exists('section_form', $_POST)) {
 					
 						//Return to the section form
-						$this->_redirect('exhibits/editSection/'.$section->id);
+						$this->_redirect('editSection', array('id'=>$section->id));
 						return;
 					
 					}elseif(array_key_exists('page_form', $_POST)) {
 					
 						//Add another page
 						unset($_POST);
-						$this->_redirect('exhibits/addPage/'.$section->id);
+						$this->_redirect('addPage', array('id'=>$section->id));
 						return;
 					
 					}elseif(array_key_exists('save_and_paginate', $_POST)) {
@@ -420,22 +429,10 @@ class ExhibitsController extends Kea_Controller_Action
 						//@todo How would this work?
 						$paginationPage = $this->_getParam('page');
 						
-						$this->_redirect('exhibits/editPage/'.$page->id.'/'.$paginationPage);
+						$this->_redirect('editPage', array('id'=>$page->id, 'page'=>$paginationPage) );
 						return;
 						
-					}/*
-						elseif(array_key_exists('delete_page', $_POST)) {
-						
-						//Cancel/delete this page and return to the section form
-						unset($this->session->page);
-						
-						if($page->exists()) {
-							$page->delete();
-						}
-						
-						$this->_redirect('exhibits/editSection/'.$section->id);
 					}
-					*/	
 				}
 			}
 		}
@@ -482,7 +479,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$section->delete();
 		$exhibit->reorderSections();
 		
-		$this->_redirect('exhibits/edit/'.$exhibit->id);
+		$this->_redirect('editExhibit', array('id'=>$exhibit->id) );
 	}
 	
 	public function deletePageAction()
@@ -494,7 +491,7 @@ class ExhibitsController extends Kea_Controller_Action
 		
 		$page->delete();
 		
-		$this->_redirect('exhibits/editSection/'.$section->id);
+		$this->_redirect('editSection', array('id' => $section->id) );
 	}
 	
 	protected function commitExhibitForm($exhibit) {

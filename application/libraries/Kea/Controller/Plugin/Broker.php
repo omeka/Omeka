@@ -61,6 +61,10 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
 		
 	}
 	
+	public function setRedirects(&$redirects) {
+//		Zend::dump( $redirects );
+	}
+	
 	/**
 	 * This applies to all plugin hooks that are defined in Kea_Plugin
 	 *

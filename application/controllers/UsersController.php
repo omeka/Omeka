@@ -7,6 +7,10 @@ require_once 'Zend/Filter/Input.php';
 require_once 'Kea/Controller/Action.php';
 class UsersController extends Kea_Controller_Action
 {	
+	protected $_redirects = array(
+		'add'=> array('users/show/id', array('id'))
+	);
+	
 	public function init() {
 		$this->_table = $this->getTable('User');
 		$this->_modelClass = 'User';
@@ -77,7 +81,7 @@ class UsersController extends Kea_Controller_Action
 				$ua->User->active = 1;
 				$ua->User->save();
 				$ua->delete();
-				$this->_redirect('users/login');				
+				$this->_redirect('login');				
 			}
 		}
 		$user = $ua->User;
@@ -105,7 +109,7 @@ class UsersController extends Kea_Controller_Action
 			$title = "Activate your account with the ".$site_title." Archive";
 			$header = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
 			mail($user->email, $title, $body, $header);
-			$this->_redirect('users/show/'.$user->id);
+			$this->_redirect('add', array('id'=>$user->id));
 		}else {
 			$this->render('users/add.php', compact('user'));
 		}

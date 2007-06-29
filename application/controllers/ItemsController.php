@@ -29,7 +29,6 @@ class ItemsController extends Kea_Controller_Action
 				($this->isAllowed('editSelf') and $item->user_id == $user->id)) {
 				
 				
-				
 				return parent::editAction();	
 			}
 		}
@@ -50,7 +49,7 @@ class ItemsController extends Kea_Controller_Action
 			if($this->isAllowed('deleteAll') or ( $this->isAllowed('deleteSelf') and $item->user_id == $user->id )) {
 				$item->delete();
 				
-				$this->_redirect('items/browse');
+				$this->_redirect('delete', array('controller'=>'items'));
 			}
 		}
 		$this->_forward('index', 'forbidden');
@@ -63,7 +62,7 @@ class ItemsController extends Kea_Controller_Action
 		$item->User = $user;
 		if($this->commitForm($item)) {
 			$this->pluginHook('onAddItem', array($item));
-			return $this->_redirect('items/browse');
+			return $this->_redirect('add', array('controller'=>'items'));
 		}else {
 			return $this->render('items/add.php',compact('item'));
 		}
@@ -474,7 +473,9 @@ class ItemsController extends Kea_Controller_Action
 		$plugins = $this->getTable('Plugin')->findActive();
 		$types = $this->getTable('Type')->findAll();
 		
-		$this->_view->assign(compact('collections', 'plugins', 'types'));
+		if($this->_view) {
+			$this->_view->assign(compact('collections', 'plugins', 'types'));
+		}
 	}
 	
 	public function showAction() 

@@ -63,6 +63,19 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				array('controller'=>'users', 'action'=>'activate'), 
 				array('controller'=>'users', 'action'=>'login'));
 	
+	/**
+	 * Redirects should be defined up here (with opportunity to override them)
+	 * @example $_redirects = array('edit'=>array('items/show/id', array('id')));
+	 * @return void
+	 **/
+	private $_crudRedirects = array(
+		'edit' 	=> array('controller/show/id', array('controller','id')),
+		'add'	=> array('controller/browse/', array('controller')),
+		'login'	=> array('users/login'),
+		'delete'=> array('controller/browse', array('controller')),
+		'default'=> array('controller/action/id', array('controller', 'action', 'id'))
+	);
+	protected $_redirects = array();
 		
 	/**
 	 * Attaches a view object to the controller.
@@ -84,8 +97,55 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		$this->_broker = Kea_Controller_Plugin_Broker::getInstance();
 		
+		$this->_redirects = array_merge($this->_crudRedirects, $this->_redirects);
+		
+		$this->_broker->setRedirects($this->_redirects);
+
 		return $init;
 	}
+	
+	/**
+	 * Process 
+	 *
+	 * @return void
+	 **/
+
+	public function getRedirect($action, $vars=null) {
+
+		$uri = $this->_redirects[$action][0];
+
+		//Check for the presence of required fields
+		if(isset($this->_redirects[$action][1])) {
+			$reqs = $this->_redirects[$action][1];
+			foreach ($reqs as $r) {
+				if(!in_array($r, array_keys($vars))) {
+					throw new Exception( 'You are missing the '.$r.' field in this redirect' );
+				}else {
+					//Substitute the var into the uri
+					$uri = str_replace($r, $vars[$r], $uri);
+				}
+			}
+		}
+
+		//Process any optional fields
+		$optional = @$this->_redirects[$action][2];
+		if($optional) {
+			foreach ($optional as $k => $o) {
+				//If we passed the var then use it
+				if(in_array($o, array_keys($vars))) {
+					$uri = str_replace($o, $vars[$o], $uri);
+				}
+				//Otherwise remove that part of the url
+				else {
+					// The '//' is to get rid of the extra slash in the uri
+					$uri = str_replace($o, '', $uri);
+					$uri = str_replace('//', '/', $uri);
+				}
+			}
+		}
+
+		return $uri;
+	}	
 	
 	/**
 	 *	Streamline the process of adding static pages by automatically checking for 
@@ -159,7 +219,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				$session->action = $request->getActionName();
 
 				// finally, send to a login page
-				$this->_redirect('users/login');
+				$this->_redirect('login');
 			}else {
 				/*	Access the authentication session and set it to expire after a certain amount
 				 	of time if there are no requests */
@@ -270,7 +330,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 			$session->action = $this->_request->getActionName();
 			
 			// finally, send to a login page
-			$this->_redirect('users/login');
+			$this->_redirect('login');
 		}
 	}
 	
@@ -323,9 +383,10 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		return $this->_view;
 	}
 	
-	public function getName()
+	public function getName($upper=true)
 	{
-		return ucwords($this->getRequest()->getControllerName());
+		$name = $this->getRequest()->getControllerName();
+		return $upper ? ucwords($name) : $name;
 	}
 	
 	/**
@@ -424,7 +485,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		if($this->commitForm($$varName))
 		{
 			$this->pluginHook('onAdd' . $class, array($$varName));
-			$this->_redirect($pluralName.'/browse/');
+			$this->_redirect('add',array('controller'=>$pluralName));
 		}else {
 			$this->loadFormData();
 			$this->render($pluralName.'/add.php', compact($varName));			
@@ -451,24 +512,24 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 			if($this->_getParam('noRedirect')) {
 				$this->_forward($pluralName, 'show');
 			} else {
-				$this->_redirect($pluralName.'/show/'.$$varName->id);
+				$this->_redirect('edit', array('controller'=>$pluralName, 'id'=>$$varName->id) );
 			}
 		}else{
 			$this->loadFormData();
-			$this->render($pluralName.'/edit.php', compact($varName));
+			return $this->render($pluralName.'/edit.php', compact($varName));
 		}		
 	}
 	
 	public function deleteAction()
 	{
-		$browseURL = strtolower($this->_modelClass).'s/browse/';
+		$controller = $this->getName(false);
 		
 		$record = $this->findById();
 
 		$this->pluginHook('onDelete' . $this->_modelClass, array($record));
 				
 		$record->delete();
-		$this->_redirect($browseURL);
+		$this->_redirect('delete', array('controller'=>$controller));
 	}
 	
 	/**
@@ -594,13 +655,17 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * Overridden to support requests that only want to return data and not spit out pages
 	 *
 	 **/
-	protected function _redirect($url,array $options=null) 
+	protected function _redirect($action,array $vars=null, array $options=null) 
 	{
 		if($return = $this->getInvokeArg('return')) 
 		{
 			return null;
 		}else {
-			return parent::_redirect($url,$options);
+			//Substitute var in url for actual value of var
+			$redirect = $this->getRedirect($action, $vars);
+			$redirect = !$redirect ? $action : $redirect;
+
+			return parent::_redirect($redirect,$options);
 		}
 	}
 }

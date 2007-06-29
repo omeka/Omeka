@@ -34,7 +34,7 @@ class FilesImages extends Kea_Record
 		$this->channels = $size['channels'];
 
 		//EXIF
-		if($exif = exif_read_data($path)) {
+		if($exif = @exif_read_data($path)) {
 			$this->exif_array = $exif;
 		}else {
 			$this->exif_array = array();

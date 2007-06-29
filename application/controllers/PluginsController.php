@@ -5,6 +5,10 @@
 require_once 'Kea/Controller/Action.php';
 class PluginsController extends Kea_Controller_Action
 {
+	protected $_redirects = array(
+		'install' => array('plugins/install/name', array('name'))
+	);
+	
 	public function init()
 	{
 		$this->_modelClass = 'Plugin';
@@ -29,7 +33,7 @@ class PluginsController extends Kea_Controller_Action
 		foreach ($names as $name) {
 			$plugin = $this->_table->findByName($name);
 			if(!$plugin) {
-				$this->_redirect('plugins/install/'.$name);
+				$this->_redirect('install', array('name'=>$name));
 			}
 		}		
 	}
