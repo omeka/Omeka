@@ -30,7 +30,7 @@
 			<?php $recent = recent_items(10); ?>
 			<ul>
 				<?php foreach( $recent as $item ): ?>
-				<li><span class="title"><a href="#"><?php echo $item->title; ?></a></span> <span class="date"><?php echo $item->added; ?></span></li>
+				<li><span class="title"><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo $item->title; ?></a></span> <span class="date"><?php echo $item->added; ?></span></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
