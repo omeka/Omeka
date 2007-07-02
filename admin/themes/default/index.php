@@ -17,6 +17,15 @@
 			</ul>
 			<p>Need help with Omeka? Visit our <a href="http://omeka.org/codex/">codex</a> for detailed instructions for using and customizing our application.</p>
 		</div>
+		
+		<div id="featured-item">
+			<h2>Random Featured Item</h2>
+			<?php 
+				$featured = random_featured_item();
+				thumbnail($featured);?>
+			<h3><?php echo $featured->title; ?></h4>
+			
+		</div>
 	</div>
 	
 	<div id="secondary">

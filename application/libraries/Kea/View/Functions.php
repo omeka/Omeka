@@ -543,13 +543,8 @@ function recent_items($num = 10) {
 	return items(array('recent'=>true,'limit'=>$num));
 }
 
-function random_featured_item() {
-	$q = new Doctrine_Query;
-	$q->parseQuery("SELECT i.*, RANDOM() rand FROM Item i WHERE i.featured = 1 ORDER BY rand DESC LIMIT 1");
-	$res = $q->execute();
-	if($res) {
-		return $res->getFirst();
-	}
+function random_featured_item($hasImage=true) {
+	return Item::getRandomFeaturedItem($hasImage);
 }
 
 function tags(array $params = array()) 

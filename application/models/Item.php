@@ -309,17 +309,31 @@ class Item extends Kea_Record
 	
    public function getRandomFileWithImage()
    {	
-		//Get files that have thumbnails
-		$files = array();
-		foreach ($this->Files as $k => $file) {
-			if($file->hasThumbnail()) {
-				$files[] = $file;
-			}
+		$dql = "SELECT f.* FROM File f WHERE f.item_id = {$this->id} AND f.has_derivative_image = 1";
+		if($res = $this->executeDql($dql)) {
+			return $res->getFirst();
 		}
-		$index = mt_rand(0, count($files)-1);
-		
-		return $files[$index];
    }
+
+	public static function getRandomFeaturedItem($withImage=true)
+	{
+		if($withImage) {
+			$sql = "SELECT i.id, RAND() as rand 
+					FROM items i INNER JOIN files f ON f.item_id = i.id 
+					WHERE i.featured = 1 AND f.has_derivative_image = 1 ORDER BY rand DESC LIMIT 1";
+		}else {
+			$sql = "SELECT i.id, RAND() as rand 
+					FROM items i INNER JOIN files f ON f.item_id = i.id 
+					WHERE i.featured = 1 ORDER BY rand DESC LIMIT 1";
+		}
+		$conn = Zend::Registry( 'doctrine' )->connection();
+
+		$id = $conn->fetchOne($sql);
+		
+		if($id) {
+			return Zend::Registry( 'doctrine' )->getTable('Item')->find($id);
+		}
+	}
 
 	public function isInExhibit($exhibit_id)
 	{

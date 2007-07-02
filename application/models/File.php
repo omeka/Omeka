@@ -70,6 +70,9 @@ class File extends Kea_Record {
         //$this->hasColumn('mime_php', 'string');
         $this->hasColumn('mime_os', 'string');
         $this->hasColumn('type_os', 'string');
+		
+		$this->hasColumn('has_derivative_image', 'boolean', null, array('default'=>'0', 'notnull'=>true));
+		
         $this->hasColumn('lookup_id', 'integer');
 		
 		$this->index('item', array('fields' => array('item_id')));
@@ -352,6 +355,11 @@ class File extends Kea_Record {
 			exec( $command, $result_array, $result_value );
 			
 			if ($result_value == 0) {
+				//Image was created, so set the derivative bitflag
+				if(!$this->has_derivative_image) {
+					$this->has_derivative_image = 1;
+				}
+				
 				return $imagename;	
 			} else {
 				throw new Exception('Something went wrong with image creation.  Ensure that the thumbnail directories have appropriate write permissions.');
