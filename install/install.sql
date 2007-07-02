@@ -125,4 +125,43 @@ INSERT INTO `types_metafields` (`id`, `type_id`, `metafield_id`) VALUES (1, 1, 7
 (46, 12, 35),
 (47, 12, 36);
 
--- CREATE TABLE `items_fulltext` (`id` INT( 11 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,`item_id` INT(11) UNSIGNED NOT NULL, `text` LONGTEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,FULLTEXT (`text`)) ENGINE = MYISAM;
+
+INSERT INTO `file_meta_lookup` ( `id` , `mime_type` , `table_name` , `table_class` ) 
+VALUES 
+(NULL , 'image/bmp', 'files_images', 'FilesImages'), 
+(NULL , 'image/gif', 'files_images', 'FilesImages'), 
+(NULL , 'image/ief', 'files_images', 'FilesImages'), 
+(NULL , 'image/jpeg', 'files_images', 'FilesImages'), 
+(NULL , 'image/pict', 'files_images', 'FilesImages'), 
+(NULL , 'image/pjpeg', 'files_images', 'FilesImages'), 
+(NULL , 'image/png', 'files_images', 'FilesImages'), 
+(NULL , 'image/tiff', 'files_images', 'FilesImages'), 
+(NULL , 'image/vnd.rn-realflash', 'files_images', 'FilesImages'), 
+(NULL , 'image/vnd.rn-realpix', 'files_images', 'FilesImages'), 
+(NULL , 'image/vnd.wap.wbmp', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-icon', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-jg', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-jps', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-niff', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-pcx', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-pict', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-quicktime', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-rgb', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-tiff', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-windows-bmp', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-xbitmap', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-xbm', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-xpixmap', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-xwd', 'files_images', 'FilesImages'), 
+(NULL , 'image/x-xwindowdump', 'files_images', 'FilesImages');
+
+INSERT INTO `file_meta_lookup` ( `id` , `mime_type` , `table_name` , `table_class` ) 
+VALUES
+(NULL , 'video/x-msvideo', 'files_videos', 'FilesVideos'), 
+(NULL , 'video/avi', 'files_videos', 'FilesVideos'), 
+(NULL , 'video/msvideo', 'files_videos', 'FilesVideos'), 
+(NULL , 'video/x-mpeg', 'files_videos', 'FilesVideos'), 
+(NULL , 'video/x-ms-asf', 'files_videos', 'FilesVideos'), 
+(NULL , 'video/mpeg', 'files_videos', 'FilesVideos'), 
+(NULL , 'video/quicktime', 'files_videos', 'FilesVideos'),
+(NULL , 'video/x-ms-wmv', 'files_videos', 'FilesVideos');
