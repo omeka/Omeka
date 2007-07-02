@@ -58,7 +58,7 @@ class ExhibitsController extends Kea_Controller_Action
 	
 	public function showitemAction()
 	{
-		$item_id = $this->_getParam('id');
+		$item_id = $this->_getParam('item_id');
 		$slug = $this->_getParam('slug');
 		
 		$exhibit = is_numeric($slug) ?
@@ -86,34 +86,7 @@ class ExhibitsController extends Kea_Controller_Action
 			//Plugin hooks
 			$this->pluginHook('onShowExhibitItem', array($item, $exhibit));
 			
-			
-			//If has exhibit theme, render the item.php page in the exhibit theme
-			if(!empty($exhibit->theme)) {
-				$this->_view->addScriptPath(SHARED_DIR);
-			
-				$site = Zend::Registry('path_names');
-				
-				$headerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'header.php';
-				$itemPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'item.php';
-				$footerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'footer.php';
-								
-				if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$headerPath)) {
-					$this->render($headerPath, compact('exhibit','item'));
-				}
-			
-				if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$layoutPath)) {
-					$this->render($itemPath, compact('exhibit','item'));
-				}
-			
-				if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$footerPath)) {
-					$this->render($footerPath, compact('exhibit','item'));
-				}
-				
-				return;
-			}
-						
-			//Otherwise render the normal item page
-			return $this->render('items/show.php');
+			return $this->renderExhibit(compact('exhibit','item'), 'item');
 		}else {
 			$this->flash('This item is not used within this exhibit.');
 			$this->_redirect('403');
@@ -122,14 +95,7 @@ class ExhibitsController extends Kea_Controller_Action
 	
 	public function showAction()
 	{		
-		$slug = $this->_getParam('slug');
-
-		//Slug can be either the numeric 'id' for the exhibit or the alphanumeric slug
-		if(is_numeric($slug)) {
-			$exhibit = $this->_table->findById($slug);
-		}else {
-			$exhibit = $this->_table->findBySlug($slug);
-		}
+		$exhibit = $this->findBySlug();
 				
 		if(!$exhibit) {
 			throw new Exception( 'Exhibit with that ID does not exist.' );
@@ -171,34 +137,91 @@ class ExhibitsController extends Kea_Controller_Action
 		Zend::register('page',		$page);
 		
 		$this->pluginHook('onShowExhibit', array($exhibit,$section,$page));
+
+		$this->renderExhibit(compact('section','exhibit','page'));
+	}
+	
+	protected function findBySlug($slug=null) 
+	{
+		if(!$slug) {
+			$slug = $this->_getParam('slug');
+		}
+		
+		//Slug can be either the numeric 'id' for the exhibit or the alphanumeric slug
+		if(is_numeric($slug)) {
+			$exhibit = $this->_table->findById($slug);
+		}else {
+			$exhibit = $this->_table->findBySlug($slug);
+		}
+		return $exhibit;
+	}
+	
+	public function summaryAction()
+	{
+		$exhibit = $this->findBySlug();
+		Zend::register('exhibit', $exhibit);
+		return $this->renderExhibit(compact('exhibit'), 'summary');
+	}
+	
+	protected function renderExhibit($vars, $toRender='layout') {
 		/* 	If there is a theme, render the header/footer and layout page,
 			Otherwise render the default exhibits/show.php page
 		*/
+		extract($vars);
+		
 		if(!empty($exhibit->theme)) {
 		
 			$this->_view->addScriptPath(SHARED_DIR);
 			
 			$site = Zend::Registry('path_names');
-			
-			$headerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'header.php';
-			$layoutPath = $site['exhibit_layouts'].DIRECTORY_SEPARATOR.$page->layout.DIRECTORY_SEPARATOR.'layout.php';
-			$footerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'footer.php';
 
+			$headerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'header.php';
 			if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$headerPath)) {
-				$this->render($headerPath, compact('section','exhibit','page'));
+				$this->render($headerPath, $vars);
 			}
 			
-			if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$layoutPath)) {
-				$this->render($layoutPath, compact('section','exhibit','page'));
+			switch ($toRender) {
+				case 'layout':
+					$renderPath = $site['exhibit_layouts'].DIRECTORY_SEPARATOR.$page->layout.DIRECTORY_SEPARATOR.'layout.php';
+					break;
+				case 'summary':
+					$renderPath = $site['exhibit_themes']. DIRECTORY_SEPARATOR . $exhibit->theme . DIRECTORY_SEPARATOR . 'summary.php';
+					break;
+				case 'item':
+					$renderPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'item.php';
+					break;
+				default:
+					throw new Exception( 'Hey, you gotta render something!' );
+					break;
 			}
 			
+			if(isset($renderPath) and file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$renderPath)) {
+				$this->render($renderPath, $vars);
+			}
+			
+			$footerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'footer.php';
 			if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$footerPath)) {
-				$this->render($footerPath, compact('section','exhibit','page'));
+				$this->render($footerPath, $vars);
 			}			
+			
 		}else {
-			$this->render('exhibits/show.php',compact('theme','layout','exhibit','section', 'page'));
+			switch ($toRender) {
+				case 'layout':
+					$path = 'exhibits/show.php';
+					break;
+				case 'summary':
+					$path = 'exhibits/summary.php';
+					break;
+				case 'item':
+					$path = 'items/show.php';
+					break;
+				default:
+					throw new Exception( 'You gotta render some stuff because whatever!' );
+					break;
+			}
+			
+			return $this->render($path, $vars);
 		}
-		
 	}
 	
 	public function addAction()

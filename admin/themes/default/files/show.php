@@ -45,7 +45,6 @@
 <div id="type-metadata" class="section">
 	<h3>Type Metadata</h3>
 <dl><dt>Mime Type / Browser:</dt> <?php if ($file->mime_browser): ?><dd><?php echo $file->mime_browser; ?></dd><?php endif; ?></dl>
-<dl><dt>Mime Type / PHP:</dt> <?php if ($file->mime_php): ?><dd><?php echo $file->mime_php; ?></dd><?php endif; ?></dl>
 <dl><dt>Mime Type / OS:</dt> <?php if ($file->mime_os): ?><dd><?php echo $file->mime_os; ?></dd><?php endif; ?></dl>
 <dl><dt>File Type / OS:</dt> <?php if ($file->type_os): ?><dd><?php echo $file->type_os; ?></dd><?php endif; ?></dl>
 </div>

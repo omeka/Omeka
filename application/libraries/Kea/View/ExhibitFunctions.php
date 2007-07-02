@@ -1,6 +1,53 @@
 <?php 
 ///// EXHIBIT FUNCTIONS /////
 
+function link_to_exhibit($exhibit, $section=null, $page = null)
+{
+	$slug = $exhibit->slug;
+	
+	$uri = 'exhibits/show/' . $slug . '/' . ( !empty($section) ? $section . (!empty($page) ? '/' . $page : ''): '');
+	
+	echo '<a href="'.uri($uri).'">' . $exhibit->title . '</a>';
+}
+
+function link_to_exhibit_item($item, $props=array())
+{	
+	$uri = exhibit_item_uri($item);
+	
+	echo '<a href="' . $uri . '" '. _tag_attributes($props). '>' . $item->title . '</a>';
+}
+
+function img_link_to_exhibit_item($item, $props=array(), $type="thumbnail")
+{
+	$uri = exhibit_item_uri($item);
+	
+	echo '<a href="' . $uri . '" '._tag_attributes($props).'>';
+	switch ($type) {
+		case 'thumbnail':
+			thumbnail($item->Files[0]);
+			break;
+		case 'fullsize':
+			fullsize($item->Files[0]);
+		default:
+			break;
+	}
+	
+	echo '</a>';
+}
+
+function exhibit_item_uri($item, $exhibit=null, $section=null)
+{
+	if(!$exhibit) {
+		$exhibit = Zend::Registry( 'exhibit' );
+	}
+	
+	if(!$section) {
+		$section = Zend::Registry( 'section' );
+	}
+	
+	return uri('exhibits/show/' . $exhibit->slug . '/' . $section->order . '/item/' . $item->id);
+}
+
 function exhibits($params = array()) {
 	return _get_recordset($params, 'exhibits');
 }
@@ -205,6 +252,10 @@ function section_nav($useSlug=true)
 
 function page_nav($useSlug=true)
 {
+	if(!Zend::isRegistered('section')) {
+		return false;
+	}
+	
 	$section = Zend::registry('section');
 	
 	$slug = $useSlug ? $section->Exhibit->slug : $section->Exhibit->id;
@@ -246,13 +297,6 @@ function render_layout_form($layout)
 */	
 	
 	include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'form.php';
-}
-
-function exhibit_item_uri($item)
-{
-	$s = Zend::Registry( 'section' );
-	$e = Zend::Registry( 'exhibit' );
-	return uri('exhibits/' . $e->id . '/' . $s->id . '/item/' . $item->id);
 }
 ///// END EXHIBIT FUNCTIONS /////
  
