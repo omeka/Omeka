@@ -60,6 +60,20 @@ $manager->setAttribute(Doctrine::ATTR_VLD, true);
 $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 $manager->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 
+// Register the Doctrine Manager
+Zend::register('doctrine', $manager);
+
+//Check the current migration # in the DB against the hardcoded #
+//Migrate the DB if necessary and exit
+if(!isset($options['migration']) or $options['migration'] != OMEKA_MIGRATION) {
+	$fromVersion = $options['migration'] or $fromVersion = 0;
+	$toVersion = OMEKA_MIGRATION;
+	require_once 'Kea/Upgrader.php';
+	$upgrader = new Kea_Upgrader($manager, $fromVersion, $toVersion);
+	exit;
+}
+
+
 $config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
 Zend::register('config_ini', $config);
 
@@ -94,8 +108,7 @@ require_once 'Zend.php';
 require_once 'Kea.php';
 spl_autoload_register(array('Kea', 'autoload'));
 
-// Register the Doctrine Manager
-Zend::register('doctrine', $manager);
+
 
 Zend::register('routes_ini', new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini'));
 

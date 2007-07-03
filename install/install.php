@@ -116,6 +116,12 @@ if (isset($_REQUEST['install_submit'])) {
 		$auth_prefix->value = md5(mt_rand());
 		$auth_prefix->save();
 		
+		// Add the migration option to the DB
+		$migration = new Option;
+		$migration->name = 'migration';
+		$migration->value = OMEKA_MIGRATION;
+		$migration->save();
+		
 		// Add the settings to the db
 		$settings = array('administrator_email', 'copyright', 'site_title', 'author', 'description', 'thumbnail_constraint', 'fullsize_constraint', 'path_to_convert');
 		foreach ($settings as $v) {
