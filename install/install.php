@@ -69,7 +69,11 @@ try {
 	$options = $manager->getTable('Option')->findAll();
 	if(count($options)) {
 		throw new Exception('Omeka has already been configured.  Please remove this install directory.');
-	}	
+	}
+	
+	//Use the "which" command to auto-find the path to ImageMagick
+	$output = shell_exec('which convert');
+	$path_to_convert = ($output !== NULL) ? trim($output) : FALSE;
 	
 } catch (Exception $e) {
 	die($e->getMessage() . '  Please refer to Omeka documentation for help.');
@@ -176,7 +180,16 @@ if ($display_form == true):
 	<label for="fullsize_constraint">Maximum Fullsize Image Size Constraint (px)</label> 
 	<input type="text" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo (!empty($_POST['fullsize_constraint']) ? $_POST['fullsize_constraint'] : 600); ?>" />
 	<label for="path_to_convert">Imagemagick Binary Path:</label>
-	<input type="text" name="path_to_convert" id="path_to_convert" value="<?php echo $_POST['path_to_convert']; ?>" />
+	<?php
+	if ($path_to_convert) {
+		echo '
+	<input type="hidden" name="path_to_convert" id="path_to_convert" value="'.$path_to_convert.'" />
+	<p>'.$path_to_convert.' (found automatically)</p>';
+	} else {
+		echo '
+	<input type="text" name="path_to_convert" id="path_to_convert" value="'.$_POST['path_to_convert'].'" />';
+	}
+	?>
 	
 	<h1>Default Super User Account</h1>
 	<label for="username">Username:</label><input type="text" name="username" value="<?php echo $_POST['username']; ?>" />
