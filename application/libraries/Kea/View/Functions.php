@@ -539,7 +539,7 @@ function recent_tags($num = 30) {
 	return tags(array('recent'=>true,'limit'=>$num));
 }
 
-function recent_items($num = 5) {
+function recent_items($num = 10) {
 	return items(array('recent'=>true,'limit'=>$num));
 }
 
