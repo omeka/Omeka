@@ -539,7 +539,7 @@ function recent_tags($num = 30) {
 	return tags(array('recent'=>true,'limit'=>$num));
 }
 
-function recent_items($num = 10) {
+function recent_items($num = 5) {
 	return items(array('recent'=>true,'limit'=>$num));
 }
 
@@ -777,9 +777,11 @@ function archive_image( $record, $props, $width, $height, $abs, $web,$return)
        $abs_path =  $abs . DIRECTORY_SEPARATOR . $filename;
        if( file_exists( $abs_path ) ) {
                $html = '<img src="' . $path . '" ';
-               foreach( $props as $k => $v ) {
-                       $html .= $k . '="' . $v . '" ';
-               }
+				if ($props != null) {
+               		foreach( $props as $k => $v ) {
+                       	$html .= $k . '="' . $v . '" ';
+               		}
+                }
                list($o_width, $o_height) = getimagesize( $abs_path );
                if(!$width && !$height) 
                {
