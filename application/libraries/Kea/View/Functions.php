@@ -446,7 +446,9 @@ function link_to_item($item, $action='show', $text=null)
 function link_to_thumbnail($item, $action='show')
 {
 	$path = 'items/'.$action.'/' . $item->id;
-	echo '<a href="'. uri($path) . '">' . thumbnail($item) . '</a>';
+	echo '<a href="'. uri($path) . '">';
+	thumbnail($item);
+	echo '</a>';
 }
 
 /**
