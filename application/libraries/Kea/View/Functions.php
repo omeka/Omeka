@@ -924,6 +924,9 @@ function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $
 	{
 	$start_pos = ( !$start_pos ) ? 0 : strrpos( $text, ' ', $start_pos - strlen($text) ); 
 	$end_pos = strrpos( $text, ' ', ( $end_pos ) - strlen($text) );
-	return substr($text, $start_pos, $end_pos - $start_pos ) . $append; 
+	$snippet = substr($text, $start_pos, $end_pos - $start_pos );
+		if (strlen($snippet)) {
+			return  $snippet . $append; 
+		}
 	}
 ?>
