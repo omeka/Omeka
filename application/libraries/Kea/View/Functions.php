@@ -443,6 +443,12 @@ function link_to_item($item, $action='show', $text=null)
 	echo '<a href="'. uri($path) . '">' . $text . '</a>';
 }
 
+function link_to_thumbnail($item, $action='show')
+{
+	$path = 'items/'.$action.'/' . $item->id;
+	echo '<a href="'. uri($path) . '">' . thumbnail($item) . '</a>';
+}
+
 /**
  * Retrieve the total number of items
  *
