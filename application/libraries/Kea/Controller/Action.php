@@ -489,18 +489,22 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		$$varName = new $class();
 		
-		if($this->commitForm($$varName))
-		{
-			if($$varName->hasStrategy('Relatable')) {
-				$user = Kea::loggedIn();
-				$$varName->setAddedBy($user);
+		try {
+			if($$varName->commitForm($_POST))
+			{
+				if($$varName->hasStrategy('Relatable')) {
+					$user = Kea::loggedIn();
+					$$varName->setAddedBy($user);
+				}
+				$this->pluginHook('onAdd' . $class, array($$varName));
+				$this->_redirect('add',array('controller'=>$pluralName));
 			}
-			$this->pluginHook('onAdd' . $class, array($$varName));
-			$this->_redirect('add',array('controller'=>$pluralName));
-		}else {
-			$this->loadFormData();
-			$this->render($pluralName.'/add.php', compact($varName));			
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
 		}
+
+		$this->loadFormData();
+		$this->render($pluralName.'/add.php', compact($varName));			
 
 	}
 	
@@ -515,25 +519,30 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 			echo $e->getMessage();exit;
 		}
 		
-		if($this->commitForm($$varName))
-		{
-			if($$varName->hasStrategy('Relatable')) {
-				$user = Kea::loggedIn();
-				$$varName->setModifiedBy($user);
+		try {
+			if($$varName->commitForm($_POST))
+			{
+				if($$varName->hasStrategy('Relatable')) {
+					$user = Kea::loggedIn();
+					$$varName->setModifiedBy($user);
+				}
+				
+				$this->pluginHook('onEdit' . $this->_modelClass, array($$varName));
+				
+				//Avoid a redirect by passing an extra parameter to the AJAX call
+				if($this->_getParam('noRedirect')) {
+					$this->_forward($pluralName, 'show');
+					return;
+				} else {
+					$this->_redirect('edit', array('controller'=>$pluralName, 'id'=>$$varName->id) );
+				}
 			}
-			
-			$this->pluginHook('onEdit' . $this->_modelClass, array($$varName));
-			
-			//Avoid a redirect by passing an extra parameter to the AJAX call
-			if($this->_getParam('noRedirect')) {
-				$this->_forward($pluralName, 'show');
-			} else {
-				$this->_redirect('edit', array('controller'=>$pluralName, 'id'=>$$varName->id) );
-			}
-		}else{
-			$this->loadFormData();
-			return $this->render($pluralName.'/edit.php', compact($varName));
-		}		
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
+		}
+		
+		$this->loadFormData();
+		return $this->render($pluralName.'/edit.php', compact($varName));		
 	}
 	
 	public function deleteAction()
@@ -547,46 +556,6 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$record->delete();
 		$this->_redirect('delete', array('controller'=>$controller));
 	}
-	
-	/**
-	 * Processes and saves the form to the given record
-	 *
-	 * @param Kea_Record
-	 * @return boolean True on success, false otherwise
-	 **/
-	protected function commitForm($record)
-	{
-		$conn = $this->getConn();
-		$conn->beginTransaction();
-		
-		if(!empty($_POST))
-		{		
-			if(!$this->preCommitForm($record)) {
-				return false;
-			}
-			$clean = $_POST;
-			unset($clean['id']);
-			$record->setFromForm($clean);
-			try {
-				$record->save();
-				$this->postCommitForm($record);
-				$conn->commit();
-				return true;
-			}
-			catch(Doctrine_Validator_Exception $e) {
-				$record->gatherErrors($e);
-				$this->flash($record->getErrorMsg());
-				$conn->rollback();
-				return false;
-			}	
-		}
-		return false;
-	}
-	
-	//Extra set of hooks to customize commitForm()
-	protected function preCommitForm($record) {return true;}
-	
-	protected function postCommitForm($record) {}
 	
 	/**
 	 * Load extra data that would need to be displayed for forms, for example the item form would require all collections, plugins, etc.

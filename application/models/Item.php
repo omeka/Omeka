@@ -346,7 +346,148 @@ class Item extends Kea_Record
 		
 		return ($count > 0);
 	}
-	
+
+	public function commitForm($post, $save=true, $options=array())
+	{
+		if(!empty($post))
+		{	
+			$conn = $this->_table->getConnection();
+			$conn->beginTransaction();
+			
+			$clean = $post;
+			unset($clean['id']);
+			
+			
+			//Process the separate date fields
+			$validDate = $this->processDate('date',
+								$clean['date_year'],
+								$clean['date_month'],
+								$clean['date_day']);
+								
+			$validCoverageStart = $this->processDate('temporal_coverage_start', 
+								$clean['coverage_start_year'],
+								$clean['coverage_start_month'],
+								$clean['coverage_start_day']);
+								
+			$validCoverageEnd = $this->processDate('temporal_coverage_end', 
+								$clean['coverage_end_year'],
+								$clean['coverage_end_month'],
+								$clean['coverage_end_day']);				
+			
+			//Special method for untagging other users' tags
+			if($this->userHasPermission('untagOthers')) {
+				if(array_key_exists('remove_tag', $post)) {
+					$tagId = $post['remove_tag'];
+					$tagToDelete = Zend::Registry( 'doctrine' )->getTable('Tag')->find($tagId);
+					$current_user = Kea::loggedIn();
+					if($tagToDelete) {
+						$this->pluginHook('onUntagItem', array($tagToDelete->name, $current_user));
+				
+						//delete the tag from the Item
+						$tagsDeleted = $this->deleteTag($tagToDelete, null, true);
+					}
+				}				
+			}
+			
+			//Mirror the form to the record
+			$this->setFromForm($clean);
+			
+			//Check to see if the date was valid
+			if(!$validDate) {
+				throw new Exception( 'The date provided is invalid.  Please provide a correct date.' );
+			}
+			
+			//If someone is providing coverage dates, they need to provide both a start and end or neither
+			if( (!$validCoverageStart and $validCoverageEnd) or ($validCoverageStart and !$validCoverageEnd) ) {
+				throw new Exception( 'For coverage, both start date and end date must be specified, otherwise neither may be specified.' );
+			}
+			
+			if(!empty($clean['change_type'])) return false;
+			if(!empty($clean['add_more_files'])) return false;
+			
+			if(!empty($_FILES["file"]['name'][0])) {
+				//Handle the file uploads
+				foreach( $_FILES['file']['error'] as $key => $error )
+				{ 
+					try{
+						$file = new File();
+						$file->upload('file', $key);
+						$this->Files->add($file);
+					}catch(Exception $e) {
+						$file->delete();
+						$conn->rollback();
+						throw $e;
+					}
+				
+				}
+			}
+			
+			/* Delete files what that have been chosen as such */
+			if($filesToDelete = $clean['delete_files']) {
+				foreach ($this->Files as $key=> $file) {
+					if(in_array($file->id,$filesToDelete)) {
+						$file->delete();
+					}
+				}
+			}		
+									
+			//Handle the boolean vars
+			if(array_key_exists('public', $clean)) {
+				if($this->userHasPermission('makePublic')) {
+					//If item is being made public
+					if(!$this->public && $clean['public'] == 1) {
+						$wasMadePublic = true;
+					}
+					
+					$this->public = (bool) $clean['public'];
+				}
+			}
+			
+			if(array_key_exists('featured', $clean) and $this->userHasPermission('makeFeatured')) {
+				$this->featured = (bool) $clean['featured'];
+			}
+			
+			try {
+				$this->save();
+				
+				//Special process to save the metatext
+				$mts = $this->Metatext;
+				foreach ($mts as $mt) {
+					$mt->item_id = $this->id;
+				}
+				$mts->save();
+				
+				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
+				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
+					$user = Kea::loggedIn();
+					$this->applyTagString($clean['tags'], $user->id);
+				}
+				
+				//If the item was made public, fire the plugin hook
+				if($wasMadePublic) {
+					$this->pluginHook('onMakePublicItem');
+				}
+				
+				$conn->commit();
+				return true;
+			}
+			catch(Doctrine_Validator_Exception $e) {
+				$this->gatherErrors($e);
+				$conn->rollback();
+				
+				//Reload the files b/c of a stupid bug
+				foreach ($this->Files as $key => $file) {
+					if(!$file->exists()) {
+						$file->delete();
+					}
+					unset($this->Files[$key]);
+				}
+				throw new Exception( $this->getErrorMsg() );				
+			}	
+		}
+		return false;
+	}
+
 	public function hasFiles()
 	{
 		return ($this->Files->count() > 0);

@@ -51,7 +51,7 @@ class Entity extends Kea_Record
 	 **/
 	public function validate()
 	{
-		if($this->parent_id == $this->id) {
+		if(is_numeric($this->parent_id) and ($this->parent_id == $this->id)) {
 			$this->getErrorStack()->add('circular', 'An entity cannot be affiliated with itself.');
 		}
 		elseif($this->Parent->isDescendantOf($this)) {

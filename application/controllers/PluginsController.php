@@ -60,30 +60,6 @@ class PluginsController extends Kea_Controller_Action
 		$this->render('plugins/install.php', compact('plugin'));
 	}
 	
-	
-	/**
-	 * save the form values to the db
-	 *
-	 * @return boolean
-	 **/
-	protected function commitForm($plugin)
-	{	
-		if(empty($_POST)) return false;
-
-		$plugin->config = $_POST['config'];
-		
-		if($_POST['active']) {
-			$plugin->active = (int) !($plugin->active);
-		}
-		try{
-			$plugin->save();
-			return true;
-		}catch( Exception $e) {
-			return false;
-		}
-
-	}
-	
 	public function deleteAction() {$this->_redirect('/');}
 	
 	public function addAction() {$this->_redirect('/');}

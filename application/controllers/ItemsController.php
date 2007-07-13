@@ -53,26 +53,7 @@ class ItemsController extends Kea_Controller_Action
 		}
 		$this->_forward('index', 'forbidden');
 	}
-	
-/*
-		public function addAction()
-	{
-		$item = new Item;
-		$user = Kea::loggedIn();
-		
-		if($this->commitForm($item)) {
-			
-			//Create the 'added' relationship in the DB
-			$item->addRelatedTo($user, 'added');
-			
-			$this->pluginHook('onAddItem', array($item));
-			return $this->_redirect('add', array('controller'=>'items'));
-		}else {
-			return $this->render('items/add.php',compact('item'));
-		}
-	}
-*/	
-	
+
 	public function tagsAction()
 	{
 		$this->_forward('Tags', 'browse', array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
@@ -348,157 +329,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		return $this->render('items/browse.php', compact('total_items', 'items'));
 	}
-	
-	/**
-	 * Processes and saves the form to the given record
-	 *
-	 * @param Kea_Record
-	 * @return boolean True on success, false otherwise
-	 **/
-	protected function commitForm($item)
-	{
-		if(!empty($_POST))
-		{
 
-			$conn = $this->getConn();
-			$conn->beginTransaction();
-			
-			$clean = $_POST;
-			unset($clean['id']);
-			
-			
-			
-			//Process the separate date fields
-			$validDate = $item->processDate('date',
-								$clean['date_year'],
-								$clean['date_month'],
-								$clean['date_day']);
-								
-			$validCoverageStart = $item->processDate('temporal_coverage_start', 
-								$clean['coverage_start_year'],
-								$clean['coverage_start_month'],
-								$clean['coverage_start_day']);
-								
-			$validCoverageEnd = $item->processDate('temporal_coverage_end', 
-								$clean['coverage_end_year'],
-								$clean['coverage_end_month'],
-								$clean['coverage_end_day']);	
-						
-			
-			
-			//Special method for untagging other users' tags
-			if($this->isAllowed('untagOthers')) {
-				$tagsDeleted = $this->removeTag($item);
-			}
-			
-			//Mirror the form to the record
-			$item->setFromForm($clean);
-			
-			//Check to see if the date was valid
-			if(!$validDate) {
-				$this->flash('The date provided is invalid.  Please provide a correct date.');
-				return false;
-			}
-			
-			//If someone is providing coverage dates, they need to provide both a start and end or neither
-			if( (!$validCoverageStart and $validCoverageEnd) or ($validCoverageStart and !$validCoverageEnd) ) {
-				
-				$this->flash('For coverage, both start date and end date must be specified, otherwise neither may be specified.');
-				return false;
-			}
-			
-			if(!empty($clean['change_type'])) return false;
-			if(!empty($clean['add_more_files'])) return false;
-			
-			if(!empty($_FILES["file"]['name'][0])) {
-				//Handle the file uploads
-				foreach( $_FILES['file']['error'] as $key => $error )
-				{ 
-					try{
-						$file = new File();
-						$file->upload('file', $key);
-						$item->Files->add($file);
-					}catch(Exception $e) {
-						$this->flash($e->getMessage());
-						$file->delete();
-						$conn->rollback();
-						return false;
-					}
-				
-				}
-			}
-			
-			/* Delete files what that have been chosen as such */
-			if($filesToDelete = $clean['delete_files']) {
-				$conn = $this->getConn();
-				foreach ($item->Files as $key=> $file) {
-					if(in_array($file->id,$filesToDelete)) {
-						$file->delete();
-					}
-				}
-			}		
-									
-			//Handle the boolean vars
-			if(array_key_exists('public', $clean)) {
-				if($this->isAllowed('makePublic')) {
-					//If item is being made public
-					if(!$item->public && $clean['public'] == 1) {
-						$wasMadePublic = true;
-					}
-					
-					$item->public = (bool) $clean['public'];
-				}
-			}
-			
-			if(array_key_exists('featured', $clean) and $this->isAllowed('makeFeatured')) {
-				$item->featured = (bool) $clean['featured'];
-			}
-			
-			try {
-				$item->save();
-				
-				//Special process to save the metatext
-				$mts = $item->Metatext;
-				foreach ($mts as $mt) {
-					$mt->item_id = $item->id;
-				}
-				$mts->save();
-				
-				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
-				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
-					$user = Kea::loggedIn();
-					$item->applyTagString($clean['tags'], $user->id);
-				}
-				
-				//If the item was made public, fire the plugin hook
-				if($wasMadePublic) {
-					$this->pluginHook('onMakePublicItem', array($item));
-				}
-				
-				$conn->commit();
-				return true;
-			}
-			catch(Doctrine_Validator_Exception $e) {
-				$item->gatherErrors($e);
-				$conn->rollback();
-				
-				//Reload the files b/c of a stupid bug
-				foreach ($item->Files as $key => $file) {
-					if(!$file->exists()) {
-						$file->delete();
-					}
-					unset($item->Files[$key]);
-				}
-				$this->flash($item->getErrorMsg());
-				
-				return false;
-			}catch(Exception $e) {
-				$this->flash($e->getMessage());
-			}	
-		}
-		return false;
-	}
-	
 	/**
 	 * Get all the collections and all the active plugins for the form
 	 *
@@ -533,7 +364,7 @@ class ItemsController extends Kea_Controller_Action
 		if(array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
 			
 		 	if($this->isAllowed('tag')) {
-				$tagsAdded = $this->commitForm($item);
+				$tagsAdded = $item->commitForm($_POST);
 				$item = $this->findById();
 			}else {
 				$this->flash('User does not have permission to add tags.');
@@ -567,18 +398,6 @@ class ItemsController extends Kea_Controller_Action
 	 *
 	 * @return bool
 	 **/
-	protected function removeTag($item)
-	{
-		if(array_key_exists('remove_tag', $_POST)) {
-			$tagId = $_POST['remove_tag'];
-			$tagToDelete = $this->getTable('Tag')->find($tagId);
-			if($tagToDelete) {
-				$this->pluginHook('onUntagItem', array($item, $tagToDelete->name, $this->_user));
-				
-				//delete the tag from the Item
-				return $item->deleteTag($tagToDelete, null, true);
-			}
-		}
-	}
+	
 }
 ?>

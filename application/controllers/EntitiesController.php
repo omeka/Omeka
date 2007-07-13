@@ -20,7 +20,7 @@ class EntitiesController extends Kea_Controller_Action
 	public function addAction()
 	{
 		$e = new Entity;
-		if($this->commitForm($e)) {
+		if($e->commitForm($_POST)) {
 			$this->_redirect('add');
 		} 
 		
@@ -108,18 +108,5 @@ class EntitiesController extends Kea_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		$this->_redirect('merge');
-	}
-
-
-	protected function preCommitForm($e)
-	{
-		
-		
-		return true;
-	}
-	
-	protected function postCommitForm($e)
-	{
-
 	}
 }

@@ -11,52 +11,7 @@ class TypesController extends Kea_Controller_Action
 		$this->_modelClass = 'Type';
 		$this->_table = $this->getTable('Type');
 	}
-	
-	protected function commitForm($type) 
-	{
-		if(!empty($_POST))
-		{
-			$conn = $this->getConn();
-		
-			//Start the transaction
-			$conn->beginTransaction();
-			
-			$type->setFromForm($_POST);
-			
-			//Remove empty metafield submissions
-			foreach( $type->TypesMetafields as $key => $tm )
-			{
-				if(empty($tm->metafield_id)) {
-					$type->TypesMetafields->remove($key);
-				}
-			}
-			
-			//duplication (delete/remove existing metafields)
-			foreach( $type->Metafields as $key => $metafield )
-			{
-				if($_POST['delete_metafield'][$key] == 'on') {
-					$metafield->delete();
-				}
-				
-				if(empty($metafield->name) || $_POST['remove_metafield'][$key] == 'on') {
-					$type->Metafields->remove($key);
-				}
-			}
-			
-			try {
-				$type->save();
-				$conn->commit();
-				return true;
-			}
-			catch(Doctrine_Validator_Exception $e) {
-				$type->gatherErrors($e);
-				$conn->rollback();
-				return false;
-			}	
-		}
-		return false;
-	}
-	
+
 	protected function loadFormData() 
 	{
 		$id = $this->getRequest()->getParam('id');

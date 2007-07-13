@@ -46,6 +46,24 @@ class Plugin extends Doctrine_Record
 		
 		return parent::__get($name);
 	}
+	
+	public function commitForm($post, $save, $options)
+	{	
+		if(empty($post)) return false;
+
+		$this->config = $post['config'];
+		
+		if($post['active']) {
+			$this->active = (int) !($this->active);
+		}
+		try{
+			$this->save();
+			return true;
+		}catch( Exception $e) {
+			return false;
+		}
+
+	}
 } // END class Location extends Kea_Record
 
 

@@ -42,6 +42,44 @@ class Exhibit extends Kea_Record
 		$this->_strategies[] = new Taggable($this);
 	}
 	
+	protected function preCommitForm(&$post, $options)
+	{					
+		//Whether or not the exhibit is featured
+		$this->featured = (bool) $post['featured'];
+		unset($post['featured']);
+		
+		//Change the order of the sections
+		foreach ($post['Sections'] as $key => $section) {
+			$this->Sections[$key]->order = $section['order'];
+		}
+		$this->Sections->save();
+		
+		
+		//Make an exhibit slug if the posted slug is empty
+		if(empty($post['slug'])) {
+			
+			//Convert the title of the exhibit to a usable slug
+			$slug = $post['title'];
+			
+			//Replace prohibited characters in the title with - 's
+			$prohibited = array(':', '/', ' ', '.');
+			$replace = array_fill(0, count($prohibited), '-');
+			$slug = str_replace($prohibited, $replace, strtolower($slug) );
+			
+			$post['slug'] = $slug;
+		}
+	}
+	
+	protected function postCommitForm($post, $options)
+	{
+		//Add the tags after the form has been saved
+		$current_user = Kea::loggedIn();		
+		$this->applyTagString($post['tags'], $current_user->id, true);
+		
+		//reload the sections b/c Doctrine is too dumb to do it
+		$this->loadSections();
+	}
+	
 	public function reorderSections()
 	{
 		$this->loadSections();

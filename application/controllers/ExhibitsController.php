@@ -263,7 +263,7 @@ class ExhibitsController extends Kea_Controller_Action
 	 **/
 	protected function processExhibitForm($exhibit)
 	{
-		$retVal = $this->commitExhibitForm($exhibit);
+		$retVal = $exhibit->commitForm($_POST);
 		
 		//Fire the plugin hook depending on whether exhibit is added or edited
 		if($retVal) {
@@ -314,7 +314,7 @@ class ExhibitsController extends Kea_Controller_Action
 	
 	protected function processSectionForm($section, $exhibit=null)
 	{
-		$retVal = $this->commitSectionForm($section);
+		$retVal = $section->commitForm($_POST);
 		
 		if($retVal) {
 			$hook = ($this->session->addingSection ? 'onAddExhibitSection' : 'onEditExhibitSection');
@@ -408,7 +408,7 @@ class ExhibitsController extends Kea_Controller_Action
 			}
 				
 			else {
-				$retVal = $this->commitPageForm($page);
+				$retVal = $page->commitForm($_POST);
 				
 				if($retVal) {
 					$hook = ($this->session->addingPage ? 'onAddExhibitPage' : 'onEditExhibitPage');
@@ -515,164 +515,6 @@ class ExhibitsController extends Kea_Controller_Action
 		$page->delete();
 		
 		$this->_redirect('editSection', array('id' => $section->id) );
-	}
-	
-	protected function commitExhibitForm($exhibit) {
-		
-		if(!empty($_POST)) {
-			
-			//Whether or not the exhibit is featured
-			$exhibit->featured = (bool) $_POST['featured'];
-			unset($_POST['featured']);
-			
-			//Change the order of the sections
-			foreach ($_POST['Sections'] as $key => $section) {
-				$exhibit->Sections[$key]->order = $section['order'];
-			}
-			$exhibit->Sections->save();
-		}			
-		
-		$retVal = parent::commitForm($exhibit);
-		
-		if($retVal) {
-			//reload the sections b/c Doctrine is too dumb to do it
-			$exhibit->loadSections();
-		}
-		
-		return $retVal;
-	}
-	
-	protected function preCommitForm($exhibit) {
-		
-		//Make an exhibit slug if the posted slug is empty
-		if(empty($_POST['slug'])) {
-			
-			//Convert the title of the exhibit to a usable slug
-			$slug = $_POST['title'];
-			
-			//Replace prohibited characters in the title with - 's
-			$prohibited = array(':', '/', ' ', '.');
-			$replace = array_fill(0, count($prohibited), '-');
-			$slug = str_replace($prohibited, $replace, strtolower($slug) );
-			
-			$_POST['slug'] = $slug;
-		}
-		
-		return true;
-	}
-	
-	//Add the tags after the form has been saved
-	protected function postCommitForm($exhibit) {
-		
-		$current_user = Kea::loggedIn();		
-		$exhibit->applyTagString($_POST['tags'], $current_user->id, true);
-	}
-	
-	protected function commitSectionForm($section) {
-		
-		if(!empty($_POST)) {
-			
-			$conn = $this->getConn();
-		
-			//Start the transaction
-			$conn->beginTransaction();
-		
-			try {
-				//Fill out the section from the form
-				$section->setFromForm($_POST);
-
-				//Change the order of the pages
-				foreach ($_POST['Pages'] as $key => $page) {
-					$section->Pages[$key]->order = $page['order'];
-				}
-				$section->Pages->save();
-				$section->reorderPages();
-				
-				//Save it
-				$section->save();
-			
-				//Commit it
-				$conn->commit();
-			
-				return true;
-			} catch (Doctrine_Validator_Exception $e) {
-			
-				//Get the errors
-				$this->flash($section->getErrorMsg());
-			
-				//It's messed up, rollback
-				$conn->rollback();
-			
-				return false;
-			} catch (Exception $e) {
-			
-				//Rollback for all other exceptions too
-				$conn->rollback();
-			
-				//Rethrow the exception so that it can be caught elsewhere (maybe)
-				throw $e;
-			}
-		}
-		return false;
-	}
-
-	
-	/**
-	 * Page Form POST will look like:
-	 *
-	 * Text[1] = 'Text inserted <a href="foobar.com">With HTML</a>'
-	 * Item[2] = 35		(integer ID)
-	 * Item[3] = 64
-	 * Text[3] = 'This is commentary for the Item with ID # 64' 
-	 * 
-	 * @return void
-	 **/
-	protected function commitPageForm($page) {
-//		Zend::dump( $_POST );exit;
-		if(!empty($_POST)) {
-			
-			$conn = $this->getConn();
-			
-			//Start the transaction
-			$conn->beginTransaction();
-			
-			try {
-				
-				if(!empty($_POST['Text'])) {
-					//Process the text fields
-					foreach ($_POST['Text'] as $key => $text) {
-						$ip = $page->ItemsPages[$key];
-						$ip->text = $ip->strip($text);
-						$ip->order = $key;
-					}
-				}
-				
-				if(!empty($_POST['Item'])) {
-					//Process the Item fields
-					foreach ($_POST['Item'] as $key => $item_id) {
-						$ip = $page->ItemsPages[$key];
-						$ip->item_id = is_numeric($item_id) ? $item_id : null;
-						$ip->order = $key;
-					}
-				}
-				
-				$page->save();
-				
-				$conn->commit();
-				
-				return true;
-			} catch (Doctrine_Validator_Exception $e) {
-				$page->gatherErrors($e);
-//				Zend::dump( $page->getErrorMsg() );
-				
-				$conn->rollback();
-			} catch (Exception $e) {
-				
-				$conn->rollback();
-				throw $e;
-			}
-		}
-		return false;
 	}
 } 
 ?>

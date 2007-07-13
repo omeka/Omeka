@@ -16,6 +16,11 @@
 	<?php password(array('name'=>'new_password2', 'class'=>'textinput', 'id'=>'new_password2'), 'Retype Password'); ?>
 </div>
 */ ?>
+<input type="submit" name="submit" value="Edit User Information --&gt;" />
+</form>
+
+<form action="<?php echo uri('users/changePassword/', array('id'=>$user->id)); ?>" method="post" accept-charset="utf-8">
+
 <fieldset>
 	<legend>Change Password</legend>
 	
@@ -35,6 +40,6 @@
 	</div>
 </fieldset>
 
-<input type="submit" name="submit" value="Edit" />
+	<input type="submit" name="submit" value="Change the password --&gt;" />
 </form>
 <?php foot();?>

@@ -98,6 +98,24 @@ class File extends Kea_Record {
 		}
 	}
 	
+	protected function preCommitForm(&$post, $options)
+	{
+		$immutable = array(
+			'id', 
+			'modified', 
+			'added', 
+			'authentication', 
+			'archive_filename', 
+			'original_filename', 
+			'mime_browser', 
+			'mime_php', 
+			'mime_os', 
+			'type_os');
+		foreach ($immutable as $value) {
+			unset($post[$value]);
+		}
+	}
+	
 	protected function getExtendedMetadata()
 	{
 		$lookupTable = $this->getTableName('FileMetaLookup');

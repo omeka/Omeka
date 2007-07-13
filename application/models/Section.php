@@ -33,6 +33,16 @@ class Section extends Kea_Record
 		$exhibit->reorderSections();
 	}
 
+	protected function postCommitForm($post, $options)
+	{
+		//Change the order of the pages
+		foreach ($post['Pages'] as $key => $page) {
+			$this->Pages[$key]->order = $page['order'];
+		}
+		$this->Pages->save();
+		$this->reorderPages();
+	}
+
 	public function reorderPages()
 	{
 		$dql = "SELECT p.* FROM SectionPage p WHERE p.section_id = ? ORDER BY p.page_order ASC";

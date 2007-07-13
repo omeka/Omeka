@@ -74,7 +74,118 @@ class User extends Kea_Record {
 				return $entity->$name;
 			}
 		}
+	}
+	
+	protected function preCommitForm(&$post, $options)
+	{
+		if(!$this->processEntity($post, $options)) {
+			return false;
+		}
 		
+		/* Permissions check to see if whoever is trying to change role to a super-user*/	
+		if(!empty($post['role'])) {
+			if($post['role'] == 'super' and !$this->userHasPermission('makeSuperUser')) {
+				throw new Exception( 'User may not change permissions to super-user' );
+			}
+			if(!$this->userHasPermission('changeRole')) {
+				throw new Exception('User may not change roles.');
+			}
+		} 
+		
+		if($post['active']) {
+			$post['active'] = 1;
+		}
+		//potential security hole
+		if(isset($post['password'])) {
+			unset($post['password']);
+		}
+				
+		
+		
+		return true;
+	}
+	
+		
+	public function changePassword($new1, $new2, $old)
+	{	
+		//super users can change the password without knowing the old one
+		$current = Kea::loggedIn();
+		if($current->role == 'super') {
+			
+			if($new1 != $new2) {
+				throw new Exception('New password must be typed correctly twice.');
+			}
+			
+			$this->password = $new1;
+			
+		}else {
+			if(empty($new1) || empty($new2) || empty($old)) {
+				throw new Exception('User must fill out all password fields in order to change password');
+			}
+			//If the old passwords don't match up
+			if(sha1($old) !== $this->password) {
+				throw new Exception('Old password has been entered incorrectly.');
+			} 
+		
+			if($new1 !== $new2) {
+				throw new Exception('New password must be typed correctly twice.');
+			}	
+			
+			$this->password = $new1;
+		}
+	}
+	
+	protected function processEntity(&$post, $options)
+	{	
+		//If the entity is new, then determine whether it is an institution or a person
+		if(!$this->Entity->exists()) {
+			//Institution provided with no name
+			if(empty($post['last_name']) and empty($post['first_name']) and !empty($post['institution'])) {
+				require_once 'Institution.php';
+				$this->Entity = new Institution;
+			}
+			else {
+				require_once 'Person.php';
+				$this->Entity = new Person;
+			}
+		}
+		
+		require_once 'Zend/Filter/Input.php';
+		$clean = new Zend_Filter_Input($post, false);
+		
+		if(!$clean->testEmail('email')) {
+			throw new Exception('A valid email address is required for users.');
+		}
+				
+		//Check for the presence of an email address
+		$email = $clean->getRaw('email');
+							
+		//Branch on persistence
+		if(!$this->exists() or ($this->exists() and $email != $this->Entity->email)) {
+			
+			//Check if email is changed, then verify that it is still unique
+			$this->Entity->email = $email;
+
+			if(!$this->Entity->isUnique('email')) {
+			
+				throw new Exception('This email address is already in use.  Please choose another.');			
+			}			
+		}
+
+		//The new email address is fully legit, so set the entity to the new info				
+		$this->first_name = $post['first_name'];
+		$this->last_name = $post['last_name'];
+		$this->institution = $post['institution'];
+		
+		$this->Entity->save();
+		unset($post['email']);
+		unset($post['first_name']);
+		unset($post['last_name']);
+		unset($post['institution']);
+		
+		Zend::dump( $post );Zend::dump( $this->Entity->toArray() );
+				
+		return true;
 	}
 	
 	public function set($name, $value) {

@@ -31,6 +31,31 @@ class Type extends Kea_Record {
 		}
 		return false;
 	}
+	
+	protected function preCommitForm(&$post, $options)
+	{
+
+		//Remove empty metafield submissions
+		foreach( $this->TypesMetafields as $key => $tm )
+		{
+			if(empty($tm->metafield_id)) {
+				$this->TypesMetafields->remove($key);
+			}
+		}
+		
+		//duplication (delete/remove existing metafields)
+		foreach( $this->Metafields as $key => $metafield )
+		{
+			if($_POST['delete_metafield'][$key] == 'on') {
+				$metafield->delete();
+			}
+			
+			if(empty($metafield->name) || $_POST['remove_metafield'][$key] == 'on') {
+				$this->Metafields->remove($key);
+			}
+		}
+			
+	}
 }
 
 ?>

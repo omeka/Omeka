@@ -19,24 +19,6 @@ class FilesController extends Kea_Controller_Action
 	
 	public function addAction() {$this->indexAction();}
 	
-	protected function commitForm($file) {
-		$immutable = array(
-			'id', 
-			'modified', 
-			'added', 
-			'authentication', 
-			'archive_filename', 
-			'original_filename', 
-			'mime_browser', 
-			'mime_php', 
-			'mime_os', 
-			'type_os');
-		foreach ($immutable as $value) {
-			unset($_POST[$value]);
-		}
-		return parent::commitForm($file);
-	}
-	
 	public function showAction()
 	{
 		$file = $this->findById();

@@ -44,6 +44,37 @@ class SectionPage extends Kea_Record
 	}
 	
 	/**
+	 * Page Form POST will look like:
+	 *
+	 * Text[1] = 'Text inserted <a href="foobar.com">With HTML</a>'
+	 * Item[2] = 35		(integer ID)
+	 * Item[3] = 64
+	 * Text[3] = 'This is commentary for the Item with ID # 64' 
+	 * 
+	 * @return void
+	 **/
+	public function preCommitForm(&$post, $options)
+	{
+		if(!empty($post['Text'])) {
+			//Process the text fields
+			foreach ($post['Text'] as $key => $text) {
+				$ip = $page->ItemsPages[$key];
+				$ip->text = $ip->strip($text);
+				$ip->order = $key;
+			}
+		}
+		
+		if(!empty($post['Item'])) {
+			//Process the Item fields
+			foreach ($post['Item'] as $key => $item_id) {
+				$ip = $page->ItemsPages[$key];
+				$ip->item_id = is_numeric($item_id) ? $item_id : null;
+				$ip->order = $key;
+			}
+		}
+	}
+	
+	/**
 	 * Retrieve the text at a given order on the page
 	 *
 	 * @return string|null	

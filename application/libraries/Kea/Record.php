@@ -23,6 +23,14 @@ abstract class Kea_Record extends Doctrine_Record
 	protected $_pluralized;
 	protected $_hidden;
 	
+	protected $_plugins;
+	
+	public function construct()
+	{
+		$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
+	}
+	
+	
 	public function setUp() 
 	{
 		$bound = Kea_Controller_Plugin_Broker::getInstance()->getBound(get_class($this));
@@ -354,6 +362,84 @@ abstract class Kea_Record extends Doctrine_Record
 		} catch (Exception $e) {
 			return false;
 		}
+	}
+	
+	/**
+	 * Processes and saves the form to the given record
+	 *
+	 * @param Kea_Record
+	 * @return boolean True on success, false otherwise
+	 **/
+	public function commitForm(&$post, $save=true, $options=array())
+	{
+		$conn = $this->_table->getConnection();
+		$conn->beginTransaction();
+	
+		if(!empty($post))
+		{		
+			if($this->preCommitForm($post, $options) === false) {
+				return false;
+			}
+			$clean = $post;
+			unset($clean['id']);
+			$this->setFromForm($clean);
+			if($save) {
+				try {
+					$this->save();
+					$this->postCommitForm($post, $options);
+					$conn->commit();
+					return true;
+				}
+				catch(Doctrine_Validator_Exception $e) {
+					$this->gatherErrors($e);
+					throw new Exception( $this->getErrorMsg() );
+					$conn->rollback();
+					return false;
+				}	
+			}
+			
+		}
+		return false;
+	}
+	
+	/**
+	 * This is used solely by the commitForm() methods
+	 *
+	 * @return void
+	 **/
+	protected function userHasPermission($rule) {
+		$user = Kea::loggedIn();
+		$resource = $this->getPluralized(false);
+		
+		/*	'default' permission level is hard-coded here, may change later */
+		$role = !$user ? 'default' : $user->role;
+		
+		$acl = Zend::Registry( 'acl' );
+		
+		//If the resource has no rule that would indicate permissions are necessary, then we assume access is allowed
+		if(!$acl->resourceHasRule($resource,$rule)){
+			return TRUE;
+		} 
+		
+		return $acl->isAllowed($role, $resource, $rule);
+	}
+	
+	protected function preCommitForm(&$post, $options) {return true;}
+	
+	protected function postCommitForm($post, $options) {}
+	
+	/**
+	 * This is essentially duplicated in the action controller, with the exception that this function passes $this as the first parameter
+	 *
+	 * @return mixed
+	 **/
+	public function pluginHook($hook, $vars=array())
+	{
+		if(empty($this->_plugins)) {
+			$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
+		}
+		array_unshift($vars, $this);
+		call_user_func_array(array($this->_plugins, $hook), $vars);
 	}
 	
 	//@remove REMOVE THIS HACK WHEN DOCTRINE IS FULLY UPGRADED TO NEW REVISION

@@ -12,41 +12,6 @@ class CollectionsController extends Kea_Controller_Action
 		$this->_modelClass = 'Collection';
 	}
 	
-	protected function preCommitForm($collection)
-	{
-		//Handle the boolean vars in the form
-		//This must be a radio button b/c checkboxes don't submit post correctly
-		if(array_key_exists('active', $_POST)) {
-			$collection->active = (bool) $_POST['active'];
-			unset($_POST['active']);
-		}
-			
-		if(array_key_exists('featured', $_POST)) {
-			$collection->featured = (bool) $_POST['featured'];
-			unset($_POST['featured']);
-		}	
-		
-		return true;
-	}
-	
-	protected function postCommitForm($collection)
-	{
-		//Process the collectors that have been provided on the form
-		$collectorsPost = $_POST['collectors'];
-		
-		foreach ($collectorsPost as $k => $c) {
-			
-			//Numbers mean that an entity_id has been passed, so add the relation
-			if(is_numeric($c)) {
-				$entity_id = $c;
-				$collection->addRelatedIfNotExists($entity_id, 'collector');
-			}else {
-				//@todo Add support for entering a string name (this is thorny b/c of string splitting and unicode)
-				throw new Exception( 'Cannot enter a collector by name.' );
-			}
-		}
-	}
-	
 	public function browseAction()
 	{
 		$dql = "SELECT c.* FROM Collection c";

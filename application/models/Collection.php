@@ -44,6 +44,42 @@ class Collection extends Kea_Record {
 				break;
 		}
 	}
+	
+	protected function postCommitForm($post, $options)
+	{
+		//Process the collectors that have been provided on the form
+		$collectorsPost = $post['collectors'];
+		
+		foreach ($collectorsPost as $k => $c) {
+			if(!empty($c)) {
+				//Numbers mean that an entity_id has been passed, so add the relation
+				if(is_numeric($c)) {
+					$entity_id = $c;
+					$this->addRelatedIfNotExists($entity_id, 'collector');
+				}else {
+					//@todo Add support for entering a string name (this is thorny b/c of string splitting and unicode)
+					throw new Exception( 'Cannot enter a collector by name.' );
+				}
+			}
+		}
+	}
+	
+	public function preCommitForm(&$post, $options)
+	{
+		//Handle the boolean vars in the form
+		//This must be a radio button b/c checkboxes don't submit post correctly
+		if(array_key_exists('public', $post)) {
+			$this->public = (bool) $post['public'];
+			unset($post['public']);
+		}
+			
+		if(array_key_exists('featured', $post)) {
+			$this->featured = (bool) $post['featured'];
+			unset($post['featured']);
+		}	
+
+		return true;
+	}
 }
 
 ?>
