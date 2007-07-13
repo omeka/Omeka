@@ -771,4 +771,13 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     {
         return Doctrine_Lib::getCollectionAsString($this);
     }
+
+	//OMEKA CUSTOMIZATION
+	public function __call($m, $a)
+	{
+		foreach ($this as $k => $record) {
+			call_user_func_array(array($record, $m), $a);
+		}
+	}
+	
 }

@@ -1452,4 +1452,28 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
 	 	  	} 
 	     } 
 	}
+	
+	public function findUniqueOrNew($values, $other = array())
+	{	
+		$where = array();
+		foreach ($values as $k => $v) {
+			$where[$k] = $k . ' = ?';
+		}
+		$vars = array_values($values);
+		$component = $this->getComponentName();
+		
+		$dql = "SELECT e.* FROM ".$component." e WHERE " . join(' AND ', $where);
+		$q = new Doctrine_Query;
+		$q->parseQuery($dql);
+			
+		$res = $q->execute($vars);
+		if(count($res)) {
+			return $res->getFirst();
+		}else {
+			$rec = new $component;
+			$rec->setArray($values);
+			if(!empty($other)) $rec->setArray($other);
+			return $rec;
+		}
+	}
 }

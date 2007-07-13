@@ -157,12 +157,12 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
                     // ONE-TO-ONE relationship
                     $obj = $record->get($fk->getAlias());
 					
-					 // Zend::dump( 'retrieving record with alias = '.$fk->getAlias() . ' from record of class '.get_class($record).' returns object of class '.get_class($obj) );
-                    $state = $obj->state();
-                    if ( !($state == Doctrine_Record::STATE_CLEAN || $state == Doctrine_Record::STATE_TCLEAN) ) {
-	//					Zend::dump( 'Attempting to save '.get_class($obj) );
-                        $obj->save($this->conn);
-                    }
+					// Protection against infinite function recursion before attempting to save
+                   	 if ($obj instanceof Doctrine_Record &&
+                       	 $obj->isModified()) {
+                         $obj->save($this->conn);
+                     }
+
                 }
 
             } elseif ($fk instanceof Doctrine_Relation_Association) {
