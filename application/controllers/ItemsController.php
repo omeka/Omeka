@@ -26,8 +26,7 @@ class ItemsController extends Kea_Controller_Action
 			//If the user cannot edit any given item
 			if($this->isAllowed('editAll') or 
 				//Check if they can edit this specific item
-				($this->isAllowed('editSelf') and $item->user_id == $user->id)) {
-				
+				($this->isAllowed('editSelf') and $item->wasAddedBy($user))) {
 				
 				return parent::editAction();	
 			}
@@ -46,7 +45,7 @@ class ItemsController extends Kea_Controller_Action
 			$item = $this->findById();
 			
 			//Permission check
-			if($this->isAllowed('deleteAll') or ( $this->isAllowed('deleteSelf') and $item->user_id == $user->id )) {
+			if($this->isAllowed('deleteAll') or ( $this->isAllowed('deleteSelf') and $item->wasAddedBy($user) )) {
 				$item->delete();
 				
 				$this->_redirect('delete', array('controller'=>'items'));
@@ -55,18 +54,24 @@ class ItemsController extends Kea_Controller_Action
 		$this->_forward('index', 'forbidden');
 	}
 	
-	public function addAction()
+/*
+		public function addAction()
 	{
 		$item = new Item;
 		$user = Kea::loggedIn();
-		$item->User = $user;
+		
 		if($this->commitForm($item)) {
+			
+			//Create the 'added' relationship in the DB
+			$item->addRelatedTo($user, 'added');
+			
 			$this->pluginHook('onAddItem', array($item));
 			return $this->_redirect('add', array('controller'=>'items'));
 		}else {
 			return $this->render('items/add.php',compact('item'));
 		}
 	}
+*/	
 	
 	public function tagsAction()
 	{
@@ -107,6 +112,40 @@ class ItemsController extends Kea_Controller_Action
 		$select->order('ts.id ASC');
 	}
 	
+	protected function filterSelectByUser($select, $user_id)
+	{
+		$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
+		$select->joinLeft('entities e', 'e.id = ie.entity_id');
+		$select->joinLeft('users u', 'u.entity_id = e.id');
+		$select->where('(u.id = ? AND ie.inheritance_id = 1)', $user_id);
+	}
+	
+	protected function orderSelectByRecent($select)
+	{
+		if($select instanceof Doctrine_Query) {
+			$select->addSelect('ie.time as i.added');
+			$select->innerJoin('i.ItemsRelations ie');
+			$select->innerJoin('ie.EntityRelationships er');
+			$select->addWhere('er.name = "added"');
+			$select->addOrderBy('ie.time DESC');
+		}else {
+			$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
+			
+	//		$select->order('i.added DESC');
+		}
+	}
+	
+	protected function getCountFromSelect($select)
+	{
+		//Grab the total number of items in the table(as differentiated from the result count)
+		//Make sure that the query that retrieves the total number of Items also contains the permissions check
+		$countQuery = clone $select;
+		$countQuery->resetFrom('items i', 'COUNT(DISTINCT(i.id))');
+		$total_items = $countQuery->fetchOne();
+		if(!$total_items) $total_items = 0;
+		return $total_items;
+	}
+	
 	/**
 	 * New Strategy: this will run a SQL query that selects the IDs, then use that to hydrate the Doctrine objects.
 	 * Stupid Doctrine.  Maybe their new version will be better.
@@ -118,7 +157,7 @@ class ItemsController extends Kea_Controller_Action
 		require_once 'Kea/Select.php';
 		$select = new Kea_Select($this->getConn());
 	
-		$select->from('items i','i.id');
+		$select->from('items i','DISTINCT i.id');
 
 		//Show only public if we say so
 		if($this->_getParam('public')) {
@@ -131,11 +170,16 @@ class ItemsController extends Kea_Controller_Action
 		elseif($this->isAllowed('showSelfNotPublic')) {
 			$user = Kea::loggedIn();
 			
-			$select->where('(i.public = 1 OR i.user_id = ?)', $user->id);
+			$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
+			$select->joinLeft('entities e', 'e.id = ie.entity_id');
+			$select->joinLeft('users u', 'u.entity_id = e.id');
+			$select->joinLeft('entity_relationships ier', 'ier.id = ie.relationship_id');
+			
+			$select->where( '(i.public = 1 OR (u.id = ? AND (ier.name = "added" OR ier.name = "modified") AND ie.inheritance_id = 1) )', $user->id);
 		}
+		
 		//Otherwise display only public items by default
 		else {
-		
 			$select->where('i.public = 1');
 		} 
 		
@@ -150,19 +194,14 @@ class ItemsController extends Kea_Controller_Action
 				}
 				
 				if(is_numeric($userToView)) {
-					$select->where('i.user_id = ?', $userToView);
+					$this->filterSelectByUser($select, $userToView);
 				}
 			}
 		} catch (Exception $e) {
 			$this->flash($e->getMessage());
 		}
 		
-		//Grab the total number of items in the table(as differentiated from the result count)
-		//Make sure that the query that retrieves the total number of Items also contains the permissions check
-		$countQuery = clone $select;
-		$countQuery->resetFrom('items i', 'COUNT(*)');
-		$total_items = $countQuery->fetchOne();
-		if(!$total_items) $total_items = 0;
+		$total_items = $this->getCountFromSelect($select);
 		
 		Zend::register('total_items', $total_items);
 		
@@ -240,11 +279,8 @@ class ItemsController extends Kea_Controller_Action
 		}
 		
 		//Before the pagination, please grab the number of results that this full query will return
-		$resultCount = clone $select;
-		$resultCount->resetFrom('items i','COUNT(*)');
-		$resultCount->unsetOrderBy();
-		$total_results = $resultCount->fetchOne();
-		
+		$total_results = $this->getCountFromSelect($select);
+
 		/** 
 		 * Now process the pagination
 		 * 
@@ -264,8 +300,9 @@ class ItemsController extends Kea_Controller_Action
 
 		//Order by recent-ness
 		if($recent = $this->_getParam('recent')) {
-			$select->order('i.added DESC');
+			$this->orderSelectByRecent($select);
 		}
+		
 //echo $select;exit;
 		$res = $select->fetchAll();
 		
@@ -300,7 +337,7 @@ class ItemsController extends Kea_Controller_Action
 
 		//Order by recent-ness
 		if($recent = $this->_getParam('recent')) {
-			$query->addOrderBy('i.added DESC');
+			$this->orderSelectByRecent($query);
 		}
 		
 		$items = $query->execute();
@@ -485,7 +522,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		//If the item is not public, check for permissions
 		$canSeeNotPublic = 	($this->isAllowed('showNotPublic') or 
-				($this->isAllowed('showSelfNotPublic') and $item->user_id == $user->id));
+				($this->isAllowed('showSelfNotPublic') and $item->wasAddedBy($user)));
 		
 		if(!$item->public && !$canSeeNotPublic) {
 			$this->_redirect('403');
@@ -505,7 +542,8 @@ class ItemsController extends Kea_Controller_Action
 
 		//@todo Does makeFavorite require a permissions check?
 		if($this->getRequest()->getParam('makeFavorite')) {
-			$this->makeFavorite($item,$user);
+			$item->toggleFavorite($user);
+			$this->pluginHook('onMakeFavoriteItem', array($item, $user));
 		}
 		
 		
@@ -521,22 +559,6 @@ class ItemsController extends Kea_Controller_Action
 		$this->pluginHook('onShowItem', array($item));
 		
 		return $this->render('items/show.php', compact("item", 'user'));
-	}
-	
-	protected function makeFavorite($item, $user)
-	{
-		if($item->isFavoriteOf($user)) {
-				//Make un-favorite
-				$if = $this->getTable('ItemsFavorites')->findBySql("user_id = {$user->id} AND item_id = {$item->id}");
-				$if->delete();
-		} else {
-			//Make it favorite
-			$if = new ItemsFavorites();
-			$if->Item = $item;
-			$if->User = $user;
-			$if->save();
-			$this->pluginHook('onMakeFavoriteItem', array($item, $user));
-		}
 	}
 	
 	/**

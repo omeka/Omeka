@@ -1,5 +1,7 @@
 <?php
 require_once 'UsersActivations.php';
+require_once 'Entity.php';
+require_once 'Item.php';
 /**
  * @package Omeka
  **/
@@ -39,10 +41,10 @@ class User extends Kea_Record {
 	}
 	
 	public function setUp() {
-		$this->ownsMany("ItemsFavorites", "ItemsFavorites.user_id");
 		$this->ownsMany("ItemsTags", "ItemsTags.user_id");
 		$this->hasMany("Item as Items", "Item.user_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
+		$this->ownsOne("Entity", "User.entity_id");
 	}
 	
     public function setTableDefinition() {
@@ -50,15 +52,40 @@ class User extends Kea_Record {
 		$this->setTableName('users');
         $this->hasColumn('username', 'string', 30, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
         $this->hasColumn('password', 'string', 40, array('notnull' => true, 'notblank'=>true));
-        $this->hasColumn('first_name', 'string', 255, array('notnull' => true, 'default'=>''));
+/*
+	        $this->hasColumn('first_name', 'string', 255, array('notnull' => true, 'default'=>''));
         $this->hasColumn('last_name', 'string', 255, array('notnull' => true, 'default'=>''));
         $this->hasColumn('email', 'string', 255, array('notnull' => true, 'notblank'=>true, 'default'=>'', 'email'=>true, 'unique'=>true));
         $this->hasColumn('institution', 'string', null, array('notnull' => true, 'default'=>''));
+*/	
         $this->hasColumn('active', 'boolean', null, array('notnull' => true, 'default'=>'0'));
         $this->hasColumn('role', 'string', 40, array('notnull' => true, 'default'=>'default', 'notblank'=>true));
-
+		$this->hasColumn('entity_id', 'integer', null, array('range'=>array('1')));
+		
 		$this->index('active', array('fields' => array('active')));
     }
+	
+	public function get($name) {
+		if($this->hasRelation($name)) {
+			return parent::get($name);
+		}else {
+			$entity = $this->Entity;
+			if($entity->exists() and $entity->hasRelation($name)) {
+				return $entity->$name;
+			}
+		}
+		
+	}
+	
+	public function set($name, $value) {
+		if($this->hasRelation($name)) {
+			return parent::set($name, $value);
+		}elseif($this->Entity->hasRelation($name)) {
+			return $this->Entity->set($name, $value);
+		}else {
+			throw new Exception( $name );
+		}
+	}
 	
 	/* Generate password. (i.e. jachudru, cupheki) */
 	// http://www.zend.com/codex.php?id=215&single=1

@@ -7,10 +7,10 @@ require_once 'Tag.php';
 require_once 'Taggable.php';
 require_once 'ItemsTags.php';
 require_once 'Metatext.php';
-require_once 'ItemsFavorites.php';
 require_once 'ItemsPages.php';
 require_once 'Section.php';
-
+require_once 'ItemsRelations.php';
+require_once 'Relatable.php';
 /**
  * @package Omeka
  * 
@@ -32,10 +32,11 @@ class Item extends Kea_Record
 		$this->ownsMany("File as Files","File.item_id");
 		$this->ownsMany("Metatext", "Metatext.item_id");
 		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
-		$this->ownsMany("ItemsFavorites", "ItemsFavorites.item_id");
 		$this->ownsMany("ItemsTags", "ItemsTags.item_id");
 
 		$this->ownsMany("ItemsPages","ItemsPages.item_id");
+		
+		$this->ownsMany("ItemsRelations", "ItemsRelations.relation_id");
 //		$this->hasMany("SectionPage as ExhibitPages", "ItemsPages.page_id");
 		
 		parent::setUp();
@@ -43,9 +44,8 @@ class Item extends Kea_Record
 	
 	public function construct()
 	{
-		$this->_taggable = new Taggable($this);
-		
-		
+		$this->_strategies[] = new Taggable($this);
+		$this->_strategies[] = new Relatable($this, ITEM_RELATION_INHERITANCE_ID);
 	}
 	
 	public function setTableDefinition() {
@@ -65,11 +65,8 @@ class Item extends Kea_Record
         $this->hasColumn('creator', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('additional_creator', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('date', 'date');
-        $this->hasColumn('added', 'timestamp', null);
-        $this->hasColumn('modified', 'timestamp', null);
         $this->hasColumn('type_id', 'integer');
         $this->hasColumn('collection_id', 'integer');
-        $this->hasColumn('user_id', 'integer');
         $this->hasColumn('contributor', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('rights_holder', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('provenance', 'string', null, array('notnull' => true, 'default'=>''));
@@ -162,6 +159,11 @@ class Item extends Kea_Record
 					}										
 				}
 				return $this->_metatext;
+					
+			case 'added':
+			case 'modified':
+				return $this->timeOfLastRelationship($name);
+				break;
 			default:
 				return parent::get($name);
 				break;
@@ -200,9 +202,10 @@ class Item extends Kea_Record
 				WHERE ".join(' OR ', $where);
 
 		$res = $this->execute($sql);
+
 		$ids = array();
 		foreach ($res as $k => $v) {
-			$ids[$k] = $v[0];
+			$ids[$k] = $v['id'];
 		}
 		return $ids;
 
@@ -296,17 +299,7 @@ class Item extends Kea_Record
 	}
 	
 	///// END METADATA METHODS /////
-	
 
-	
-	public function isFavoriteOf($user) {
-		$q = new Doctrine_Query();
-		$q->from('ItemsFavorites if')
-					->where('if.user_id = :user_id AND if.item_id = :item_id');
-		$res = $q->execute(array('user_id' => $user->id, 'item_id' => $this->id));
-		return count($res) > 0;
-	}
-	
    public function getRandomFileWithImage()
    {	
 		$dql = "SELECT f.* FROM File f WHERE f.item_id = {$this->id} AND f.has_derivative_image = 1";
@@ -353,7 +346,7 @@ class Item extends Kea_Record
 		
 		return ($count > 0);
 	}
-
+	
 	public function hasFiles()
 	{
 		return ($this->Files->count() > 0);

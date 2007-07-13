@@ -217,7 +217,7 @@ class Kea_Select {
             $type = null;
         }
 
-        $this->_parts['join'][] = array(
+        $this->_parts['join'][$name] = array(
             'type' => $type,
             'name' => $name,
             'cond' => $cond

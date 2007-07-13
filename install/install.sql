@@ -1,6 +1,498 @@
--- Unique Indices for Join tables (Doctrine not building these for some reason)
-ALTER TABLE `items_tags` ADD UNIQUE `taguseritem` ( `tag_id` , `user_id` , `item_id` );
-ALTER TABLE `exhibits_tags` ADD UNIQUE `tagexhibit` (`tag_id`, `exhibit_id`);
+DROP TABLE IF EXISTS `collections`;
+CREATE TABLE IF NOT EXISTS `collections` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `public` tinyint(1) NOT NULL,
+  `featured` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `entities`
+-- 
+
+DROP TABLE IF EXISTS `entities`;
+CREATE TABLE IF NOT EXISTS `entities` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `first_name` text collate utf8_unicode_ci,
+  `middle_name` text collate utf8_unicode_ci,
+  `last_name` text collate utf8_unicode_ci,
+  `email` text collate utf8_unicode_ci,
+  `institution` text collate utf8_unicode_ci,
+  `parent_id` bigint(20) default NULL,
+  `inheritance_id` tinyint(4) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `entities_relations`
+-- 
+
+DROP TABLE IF EXISTS `entities_relations`;
+CREATE TABLE IF NOT EXISTS `entities_relations` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `entity_id` bigint(20) default NULL,
+  `relation_id` bigint(20) default NULL,
+  `relationship_id` bigint(20) default NULL,
+  `inheritance_id` bigint(20) default NULL,
+  `time` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `entity_relationships`
+-- 
+
+DROP TABLE IF EXISTS `entity_relationships`;
+CREATE TABLE IF NOT EXISTS `entity_relationships` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` text collate utf8_unicode_ci,
+  `description` text collate utf8_unicode_ci,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `entity_relationships` (`id`, `name`, `description`) VALUES (1, 'added', NULL),
+(2, 'modified', NULL),
+(3, 'favorite', NULL),
+(4, 'collector', NULL);
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `exhibits`
+-- 
+
+DROP TABLE IF EXISTS `exhibits`;
+CREATE TABLE IF NOT EXISTS `exhibits` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `title` varchar(255) collate utf8_unicode_ci default NULL,
+  `description` text collate utf8_unicode_ci,
+  `credits` text collate utf8_unicode_ci,
+  `featured` tinyint(1) default NULL,
+  `theme` varchar(30) collate utf8_unicode_ci default NULL,
+  `slug` varchar(30) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `exhibits_tags`
+-- 
+
+DROP TABLE IF EXISTS `exhibits_tags`;
+CREATE TABLE IF NOT EXISTS `exhibits_tags` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `exhibit_id` bigint(20) NOT NULL,
+  `tag_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `tagexhibit` (`tag_id`,`exhibit_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `file_meta_lookup`
+-- 
+
+DROP TABLE IF EXISTS `file_meta_lookup`;
+CREATE TABLE IF NOT EXISTS `file_meta_lookup` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `mime_type` varchar(255) collate utf8_unicode_ci default NULL,
+  `table_name` varchar(255) collate utf8_unicode_ci default NULL,
+  `table_class` varchar(255) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `mime_type_idx` (`mime_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `files`
+-- 
+
+DROP TABLE IF EXISTS `files`;
+CREATE TABLE IF NOT EXISTS `files` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `title` text collate utf8_unicode_ci NOT NULL,
+  `publisher` text collate utf8_unicode_ci NOT NULL,
+  `language` varchar(40) collate utf8_unicode_ci NOT NULL default '',
+  `relation` text collate utf8_unicode_ci NOT NULL,
+  `coverage` text collate utf8_unicode_ci NOT NULL,
+  `rights` text collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `source` text collate utf8_unicode_ci NOT NULL,
+  `subject` text collate utf8_unicode_ci NOT NULL,
+  `creator` text collate utf8_unicode_ci NOT NULL,
+  `additional_creator` text collate utf8_unicode_ci NOT NULL,
+  `date` date default NULL,
+  `added` datetime default NULL,
+  `modified` datetime default NULL,
+  `item_id` bigint(20) default NULL,
+  `format` text collate utf8_unicode_ci NOT NULL,
+  `transcriber` text collate utf8_unicode_ci NOT NULL,
+  `producer` text collate utf8_unicode_ci NOT NULL,
+  `render_device` text collate utf8_unicode_ci NOT NULL,
+  `render_details` text collate utf8_unicode_ci NOT NULL,
+  `capture_date` datetime default NULL,
+  `capture_device` text collate utf8_unicode_ci NOT NULL,
+  `capture_details` text collate utf8_unicode_ci NOT NULL,
+  `change_history` text collate utf8_unicode_ci NOT NULL,
+  `watermark` text collate utf8_unicode_ci NOT NULL,
+  `authentication` text collate utf8_unicode_ci NOT NULL,
+  `encryption` text collate utf8_unicode_ci NOT NULL,
+  `compression` text collate utf8_unicode_ci NOT NULL,
+  `post_processing` text collate utf8_unicode_ci NOT NULL,
+  `archive_filename` text collate utf8_unicode_ci NOT NULL,
+  `fullsize_filename` text collate utf8_unicode_ci,
+  `original_filename` text collate utf8_unicode_ci NOT NULL,
+  `thumbnail_filename` text collate utf8_unicode_ci,
+  `size` bigint(20) NOT NULL default '0',
+  `mime_browser` text collate utf8_unicode_ci,
+  `mime_php` text collate utf8_unicode_ci,
+  `mime_os` text collate utf8_unicode_ci,
+  `type_os` text collate utf8_unicode_ci,
+  `lookup_id` bigint(20) unsigned default NULL,
+  `has_derivative_image` tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `item_idx` (`item_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `files_images`
+-- 
+
+DROP TABLE IF EXISTS `files_images`;
+CREATE TABLE IF NOT EXISTS `files_images` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `width` bigint(20) default NULL,
+  `height` bigint(20) default NULL,
+  `bit_depth` bigint(20) default NULL,
+  `channels` bigint(20) default NULL,
+  `exif_string` text collate utf8_unicode_ci,
+  `exif_array` text collate utf8_unicode_ci,
+  `iptc_string` text collate utf8_unicode_ci,
+  `iptc_array` text collate utf8_unicode_ci,
+  `file_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `files_videos`
+-- 
+
+DROP TABLE IF EXISTS `files_videos`;
+CREATE TABLE IF NOT EXISTS `files_videos` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `bitrate` smallint(5) unsigned default NULL,
+  `duration` bigint(20) unsigned default NULL,
+  `sample_rate` int(10) unsigned default NULL,
+  `codec` text collate utf8_unicode_ci,
+  `file_id` bigint(20) unsigned NOT NULL,
+  `width` int(10) unsigned default NULL,
+  `height` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 
+-- Table structure for table `items`
+-- 
+
+DROP TABLE IF EXISTS `items`;
+CREATE TABLE IF NOT EXISTS `items` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `title` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+  `publisher` text collate utf8_unicode_ci NOT NULL,
+  `language` text collate utf8_unicode_ci NOT NULL,
+  `relation` text collate utf8_unicode_ci NOT NULL,
+  `spatial_coverage` text collate utf8_unicode_ci NOT NULL,
+  `rights` text collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `source` text collate utf8_unicode_ci NOT NULL,
+  `subject` text collate utf8_unicode_ci NOT NULL,
+  `creator` text collate utf8_unicode_ci NOT NULL,
+  `additional_creator` text collate utf8_unicode_ci NOT NULL,
+  `date` date default NULL,
+  `type_id` bigint(20) default NULL,
+  `collection_id` bigint(20) default NULL,
+  `contributor` text collate utf8_unicode_ci NOT NULL,
+  `rights_holder` text collate utf8_unicode_ci NOT NULL,
+  `provenance` text collate utf8_unicode_ci NOT NULL,
+  `citation` text collate utf8_unicode_ci NOT NULL,
+  `temporal_coverage_start` date default NULL,
+  `temporal_coverage_end` date default NULL,
+  `featured` tinyint(1) NOT NULL,
+  `public` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `featured_idx` (`featured`),
+  KEY `public_idx` (`public`),
+  KEY `type_idx` (`type_id`),
+  KEY `coll_idx` (`collection_id`),
+  FULLTEXT KEY `search_all_idx` (`title`,`publisher`,`language`,`relation`,`spatial_coverage`,`rights`,`description`,`source`,`subject`,`creator`,`additional_creator`,`contributor`,`rights_holder`,`provenance`,`citation`),
+  FULLTEXT KEY `title_search_idx` (`title`),
+  FULLTEXT KEY `publisher_search_idx` (`publisher`),
+  FULLTEXT KEY `language_search_idx` (`language`),
+  FULLTEXT KEY `relation_search_idx` (`relation`),
+  FULLTEXT KEY `spatial_coverage_search_idx` (`spatial_coverage`),
+  FULLTEXT KEY `rights_search_idx` (`rights`),
+  FULLTEXT KEY `description_search_idx` (`description`),
+  FULLTEXT KEY `source_search_idx` (`source`),
+  FULLTEXT KEY `subject_search_idx` (`subject`),
+  FULLTEXT KEY `creator_search_idx` (`creator`),
+  FULLTEXT KEY `additional_creator_search_idx` (`additional_creator`),
+  FULLTEXT KEY `contributor_search_idx` (`contributor`),
+  FULLTEXT KEY `rights_holder_search_idx` (`rights_holder`),
+  FULLTEXT KEY `provenance_search_idx` (`provenance`),
+  FULLTEXT KEY `citation_search_idx` (`citation`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `items_section_pages`
+-- 
+
+DROP TABLE IF EXISTS `items_section_pages`;
+CREATE TABLE IF NOT EXISTS `items_section_pages` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `item_id` bigint(20) default NULL,
+  `page_id` bigint(20) NOT NULL,
+  `text` text collate utf8_unicode_ci,
+  `entry_order` bigint(20) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `items_tags`
+-- 
+
+DROP TABLE IF EXISTS `items_tags`;
+CREATE TABLE IF NOT EXISTS `items_tags` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `item_id` bigint(20) NOT NULL,
+  `tag_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `taguseritem` (`tag_id`,`user_id`,`item_id`),
+  KEY `itemtaguser_idx` (`item_id`,`tag_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `metafields`
+-- 
+
+DROP TABLE IF EXISTS `metafields`;
+CREATE TABLE IF NOT EXISTS `metafields` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `plugin_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `plugin_idx` (`plugin_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `metatext`
+-- 
+
+DROP TABLE IF EXISTS `metatext`;
+CREATE TABLE IF NOT EXISTS `metatext` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `item_id` bigint(20) unsigned NOT NULL,
+  `metafield_id` bigint(20) unsigned NOT NULL,
+  `text` text collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `item_idx` (`item_id`),
+  KEY `metafield_idx` (`metafield_id`),
+  FULLTEXT KEY `metatext_search` (`text`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `options`
+-- 
+
+DROP TABLE IF EXISTS `options`;
+CREATE TABLE IF NOT EXISTS `options` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(30) collate utf8_unicode_ci NOT NULL,
+  `value` text collate utf8_unicode_ci,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `plugins`
+-- 
+
+DROP TABLE IF EXISTS `plugins`;
+CREATE TABLE IF NOT EXISTS `plugins` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `author` text collate utf8_unicode_ci NOT NULL,
+  `config` text collate utf8_unicode_ci,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `active_idx` (`active`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `routes`
+-- 
+
+DROP TABLE IF EXISTS `routes`;
+CREATE TABLE IF NOT EXISTS `routes` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` text collate utf8_unicode_ci,
+  `route` text collate utf8_unicode_ci,
+  `defaults` text collate utf8_unicode_ci,
+  `path` text collate utf8_unicode_ci,
+  `added` datetime default NULL,
+  `static` tinyint(1) default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `static_idx` (`active`,`static`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `section_pages`
+-- 
+
+DROP TABLE IF EXISTS `section_pages`;
+CREATE TABLE IF NOT EXISTS `section_pages` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `section_id` bigint(20) NOT NULL,
+  `layout` varchar(255) collate utf8_unicode_ci default NULL,
+  `page_order` bigint(20) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `sections`
+-- 
+
+DROP TABLE IF EXISTS `sections`;
+CREATE TABLE IF NOT EXISTS `sections` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `title` varchar(255) collate utf8_unicode_ci default NULL,
+  `description` text collate utf8_unicode_ci,
+  `exhibit_id` bigint(20) NOT NULL,
+  `section_order` bigint(20) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `tags`
+-- 
+
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `types`
+-- 
+
+DROP TABLE IF EXISTS `types`;
+CREATE TABLE IF NOT EXISTS `types` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `description` text collate utf8_unicode_ci NOT NULL,
+  `plugin_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `types_metafields`
+-- 
+
+DROP TABLE IF EXISTS `types_metafields`;
+CREATE TABLE IF NOT EXISTS `types_metafields` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `type_id` bigint(20) NOT NULL,
+  `metafield_id` bigint(20) NOT NULL,
+  `plugin_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `type_idx` (`type_id`),
+  KEY `metafield_idx` (`metafield_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `users`
+-- 
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `username` varchar(30) collate utf8_unicode_ci NOT NULL,
+  `password` varchar(40) collate utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `role` varchar(40) collate utf8_unicode_ci NOT NULL default 'default',
+  `entity_id` bigint(20) unsigned default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `username` (`username`),
+  KEY `active_idx` (`active`),
+  KEY `entity_id` (`entity_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `users_activations`
+-- 
+
+DROP TABLE IF EXISTS `users_activations`;
+CREATE TABLE IF NOT EXISTS `users_activations` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `user_id` bigint(20) NOT NULL,
+  `url` varchar(100) collate utf8_unicode_ci default NULL,
+  `added` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Types and Metafields
 

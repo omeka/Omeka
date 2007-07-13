@@ -557,6 +557,8 @@ class ExhibitsController extends Kea_Controller_Action
 			
 			$_POST['slug'] = $slug;
 		}
+		
+		return true;
 	}
 	
 	//Add the tags after the form has been saved

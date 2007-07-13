@@ -4,7 +4,7 @@
  */
 require_once 'Zend/Controller/Action.php';
 abstract class Kea_Controller_Action extends Zend_Controller_Action
-{
+{		
 	/**
 	 * @var Kea_View
 	 */
@@ -146,6 +146,13 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 
 		return $uri;
 	}	
+	
+	protected function getPluralized($lower=true)
+	{
+		$class = $this->_modelClass;
+		$record = new $class;
+		return $record->getPluralized($lower);
+	}
 	
 	/**
 	 *	Streamline the process of adding static pages by automatically checking for 
@@ -428,7 +435,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{		
 		if(empty($this->_modelClass)) throw new Exception( 'Scaffolding class has not been specified' );
 		
-		$pluralName = strtolower($this->_modelClass).'s';
+		$pluralName = $this->getPluralized();
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
 				
 		$$pluralName = $this->getTable($this->_modelClass)->findAll();
@@ -450,7 +457,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$varName = strtolower($this->_modelClass);
 		
 		//duplicated from above
-		$pluralName = $varName.'s';
+		$pluralName = $this->getPluralized();
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'show.php';
 		
 		try{
@@ -478,12 +485,16 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		//Maybe this recurring bit should be abstracted out
 		$varName = strtolower($this->_modelClass);
 		$class = $this->_modelClass;
-		$pluralName = $varName.'s';
+		$pluralName = $this->getPluralized();
 		
 		$$varName = new $class();
 		
 		if($this->commitForm($$varName))
 		{
+			if($$varName->hasStrategy('Relatable')) {
+				$user = Kea::loggedIn();
+				$$varName->setAddedBy($user);
+			}
 			$this->pluginHook('onAdd' . $class, array($$varName));
 			$this->_redirect('add',array('controller'=>$pluralName));
 		}else {
@@ -496,7 +507,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	public function editAction()
 	{
 		$varName = strtolower($this->_modelClass);
-		$pluralName = $varName.'s';
+		$pluralName = $this->getPluralized();
 		
 		try{
 			$$varName = $this->findById();
@@ -506,6 +517,11 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		if($this->commitForm($$varName))
 		{
+			if($$varName->hasStrategy('Relatable')) {
+				$user = Kea::loggedIn();
+				$$varName->setModifiedBy($user);
+			}
+			
 			$this->pluginHook('onEdit' . $this->_modelClass, array($$varName));
 			
 			//Avoid a redirect by passing an extra parameter to the AJAX call
@@ -545,7 +561,9 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		if(!empty($_POST))
 		{		
-			$this->preCommitForm($record);
+			if(!$this->preCommitForm($record)) {
+				return false;
+			}
 			$clean = $_POST;
 			unset($clean['id']);
 			$record->setFromForm($clean);
@@ -566,7 +584,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	}
 	
 	//Extra set of hooks to customize commitForm()
-	protected function preCommitForm($record) {}
+	protected function preCommitForm($record) {return true;}
 	
 	protected function postCommitForm($record) {}
 	

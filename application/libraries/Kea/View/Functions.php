@@ -434,13 +434,18 @@ function current_user_tags($item)
 	return tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
 }
 
+function link_to($record, $action='show', $text=null)
+{
+	$path = $record->getPluralized() . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $record->id;
+
+	echo '<a href="'. uri($path) . '">' . $text . '</a>';
+}
+
 function link_to_item($item, $action='show', $text=null)
 {
-	$path = 'items/'.$action.'/' . $item->id;
-	if(!$text) {
-		$text = !empty($item->title) ? $item->title : '[Untitled]';
-	}
-	echo '<a href="'. uri($path) . '">' . $text . '</a>';
+	$text = (!empty($text) ? $text : (!empty($item->title) ? $item->title : '[Untitled]'));
+	
+	return link_to($item, $action, $text);
 }
 
 function link_to_thumbnail($item, $action='show')
@@ -553,6 +558,23 @@ function recent_items($num = 10) {
 
 function random_featured_item($hasImage=true) {
 	return Item::getRandomFeaturedItem($hasImage);
+}
+
+function entities(array $params = array())
+{
+	return _get_recordset($params, 'entities');
+}
+
+function people(array $params = array())
+{
+	$params = array_merge($params, array('type'=>'person'));
+	return _get_recordset($params, 'entities');
+}
+
+function institutions(array $params = array())
+{
+	$params = array_merge($params, array('type'=>'institution', 'hierarchy'=>false));
+	return _get_recordset($params, 'entities');
 }
 
 function tags(array $params = array()) 

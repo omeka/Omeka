@@ -46,10 +46,12 @@
 			label(@$attributes['id'],allhtmlentities($label));
 		}
 		
-		if(!$default and !empty($attributes['value'])) 
-		{
-			$default = $attributes['value'];
-			unset($attributes['value']);
+		if(is_array($attributes)) {
+			if(!$default and !empty($attributes['value'])) 
+			{
+				$default = $attributes['value'];
+				unset($attributes['value']);
+			}			
 		}
 		
 		$input .= '<input type="text"';
@@ -88,6 +90,10 @@
 		echo $input;
 	}
 
+	/**
+	 * 7/12/07 - $optionDesc can be complex like "%last_name%, %first_name%" instead of array('last_name','first_name')
+	 *
+	 **/
 	function select( $attributes, $values = null, $default = null, $label=null, $optionValue = null, $optionDesc = null )
 	{
 		$select = '<select '._tag_attributes($attributes).'>';
@@ -118,7 +124,21 @@
 				}
 				elseif( is_string( $optionDesc ) )
 				{
-					$select .= allhtmlentities( $obj_array[$optionDesc] ) . '</option>' . "\n";	
+					//if we have % in the desc then its a complex description
+					if(strpos($optionDesc, '%') !== false) {
+						$desc = preg_match_all('/%(\w+)%/', $optionDesc, $matches);
+	
+						$search = $matches[0];
+						$fields = $matches[1];
+		
+						foreach ($fields as $k => $field) {
+							$optionDesc = str_replace($search[$k], $entity[$field], $optionDesc);
+						}
+						$select .= allhtmlentities( $optionDesc ) . '</option>' . "\n";
+					}
+					else {
+						$select .= allhtmlentities( $obj_array[$optionDesc] ) . '</option>' . "\n";	
+					}					
 				}
 			}
 		}

@@ -17,6 +17,7 @@ class Kea_Upgrader
 	public function __construct($manager, $fromVersion, $toVersion)
 	{
 		$this->manager = $manager;
+		$this->manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, false);
 		$this->start = $fromVersion;
 		$this->end = $toVersion;
 		
@@ -50,8 +51,18 @@ class Kea_Upgrader
 	}
 	
 	public function getTableName($model) {
+		$file = $model . '.php';
+
+		if(!file_exists(MODEL_DIR.DIRECTORY_SEPARATOR.$file)) {
+			throw new Exception( 'This model does not exist' );
+		}
 		require_once $model . '.php';
 		return $this->manager->getTable($model)->getTableName();
+	}
+	
+	public function buildTable($model) {
+		require_once $model.'.php';
+		return $this->manager->getTable($model)->export();
 	}
 	
 	public function incrementMigration() {
@@ -60,7 +71,13 @@ class Kea_Upgrader
 		$this->query("UPDATE $optTable SET value = {$this->current} WHERE name = '".self::VERSION_OPTION. "'");
 	}
 	
-	public function hasTable($tbl) {
+	public function hasTable($model) {
+		try {
+			$tbl = $this->getTableName($model);
+		} catch (Exception $e) {
+			$tbl = $model;
+		}
+				
 		$res = $this->query("SHOW tables LIKE '$tbl'");
 		return !empty($res);
 	}
@@ -83,14 +100,14 @@ class Kea_Upgrader
 		return false;
 	}
 	
-	public function query($sql) {
+	public function query($sql, $params=array()) {
 		//Echo each query as it is run
-		echo $sql;
+		Zend::dump( $sql );
 		
 		$conn = $this->manager->connection();
 		
-		$res = $conn->execute($sql);
-		return $res->fetchAll();
+		$res = $conn->execute($sql, $params);
+		return $res->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 } // END class Kea_Upgrader 

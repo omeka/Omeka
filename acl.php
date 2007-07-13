@@ -19,6 +19,7 @@ $acl->addRole(new Zend_Acl_Role('default'));
 
 $acl->registerRule(new Zend_Acl_Resource('Items'), array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured'));
 $acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','delete', 'showInactive'));
+$acl->registerRule(new Zend_Acl_Resource('Entities'), array('add','edit','displayEmail','delete'));
 $acl->registerRule(new Zend_Acl_Resource('Files'), array('edit','delete'));
 $acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','edit','show'));
 $acl->registerRule(new Zend_Acl_Resource('Settings'), array('edit'));
@@ -38,6 +39,7 @@ $acl->allow('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf'
 
 $acl->allow('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers', 'makePublic', 'makeFeatured'));
 $acl->allow('admin','Collections',array('add','edit','delete', 'showInactive'));
+$acl->allow('admin','Entities',array('add','edit','delete', 'displayEmail'));
 $acl->allow('admin','Files',array('edit','delete'));
 $acl->allow('admin','Tags',array('rename','remove'));
 $acl->allow('admin','Themes',array('browse'));

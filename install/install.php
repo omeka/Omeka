@@ -104,17 +104,28 @@ if (isset($_REQUEST['install_submit'])) {
 		}
 				
 		// Build the tables explicitly
-		require_once 'tables.php';
+		$installSQL = file_get_contents('install.sql');
+		
+		$manager = Doctrine_Manager::getInstance();
+		$conn = $manager->connection();
+		$conn->execute($installSQL);
 		
 		// Create the default user
-		$defaultUser = new User();
-		$defaultUser->username = $_REQUEST['username'];
-		$defaultUser->password = $_REQUEST['password'];
-		$defaultUser->active = 1;
-		$defaultUser->role = "super";
-		$defaultUser->save();
-
+		require_once 'User.php';
+		require_once 'Person.php';
+		
+		$userTable = $manager->getTable('User')->getTableName();
+		$entityTable = $manager->getTable('Entity')->getTableName();
+		
+		$entitySql = "INSERT INTO $entityTable (inheritance_id) VALUES (?)";
+		$conn->execute($entitySql, array(PERSON_INHERITANCE_ID));
+		
+		$userSql = "INSERT INTO $userTable (username, password, active, role, entity_id) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
+		$conn->execute($userSql, array($_REQUEST['username'], $_REQUEST['password']));
+		
+	
 		// Namespace for the authentication session (to prevent clashes on shared servers)
+		require_once 'Option.php';
 		$auth_prefix = new Option();
 		$auth_prefix->name = 'auth_prefix';
 		$auth_prefix->value = md5(mt_rand());
@@ -146,10 +157,7 @@ if (isset($_REQUEST['install_submit'])) {
 		
 		$admin->save();
 		$theme->save();
-		
-		// Need to install miscellaneous stuff, straight up SQL is the quickest way
-		$installSQL = file_get_contents('install.sql');
-		Doctrine_Manager::getInstance()->connection()->execute($installSQL);
+
 		
 		echo 'hooray! the db is setup and you are ready to roll.  <a href="'.dirname(dirname($_SERVER['REQUEST_URI'])).'">check out your site here!</a>';
 		$display_form = false;

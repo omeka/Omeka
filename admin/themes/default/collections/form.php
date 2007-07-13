@@ -8,9 +8,20 @@
 <?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
 </div>
 
-<div class="field">
-<label for="collector">Collection Collector</label><input type="text" name="collector" id="collector" class="textinput" value="<?php echo $collection->collector; ?>" />	
-</div>
+<?php 
+	$entities = entities();
+?>
+
+<h3>Collectors</h3>
+<ul id="collectors">
+<?php foreach( $collection->Collectors as $k => $collector ): ?>
+	<li><?php echo $collector->getName(); ?></li>
+<?php endforeach; ?>
+</ul>
+
+<?php 
+	select(array('name'=>'collectors[]', 'id'=>'collector'), $entities, null, 'Add a Collector (optional)', 'id', array('first_name', 'last_name', 'institution')); 
+?>
 
 <div class="field">
 <?php 

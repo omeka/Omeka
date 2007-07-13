@@ -114,9 +114,12 @@ class UsersController extends Kea_Controller_Action
 			$this->render('users/add.php', compact('user'));
 		}
 	}
-	
-	protected function commitForm($user)
+
+	protected function preCommitForm($user)
 	{
+		if(!$this->processEntity($user)) {
+			return false;
+		}
 		
 		/* Permissions check to see if whoever is trying to change role to a super-user*/	
 		if(!empty($_POST['role'])) {
@@ -139,41 +142,104 @@ class UsersController extends Kea_Controller_Action
 		}
 		//somebody is trying to change the password
 		if(!empty($_POST['new_password1'])) {
-			$new1 = $_POST['new_password1'];
-			$new2 = $_POST['new_password2'];
-			$old = $_POST['old_password'];
-			
-			//super users can change the password without knowing the old one
-			$current = Kea::loggedIn();
-			if($current->role == 'super') {
-				
-				if($new1 != $new2) {
-					$this->flash('New password must be typed correctly twice.');
-					return false;
-				}
-				
-				$user->password = $new1;
-				
-			}else {
-				if(empty($new1) || empty($new2) || empty($old)) {
-					$this->flash('User must fill out all password fields in order to change password');
-					return false;
-				}
-				//If the old passwords don't match up
-				if(sha1($old) !== $user->password) {
-					$this->flash('Old password has been entered incorrectly.');
-					return false;
-				} 
-			
-				if($new1 !== $new2) {
-					$this->flash('New password must be typed correctly twice.');
-					return false;
-				}	
-				
-				$user->password = $new1;
+			if(!$this->changePassword($user)) {
+				return false;
 			}
 		}
-		return parent::commitForm($user);
+		
+		return true;
+	}
+	
+	protected function processEntity($user)
+	{	
+		//If the entity is new, then determine whether it is an institution or a person
+		if(!$user->Entity->exists()) {
+			//Institution provided with no name
+			if(empty($_POST['last_name']) and empty($_POST['first_name']) and !empty($_POST['institution'])) {
+				require_once 'Institution.php';
+				$user->Entity = new Institution;
+			}
+			else {
+				require_once 'Person.php';
+				$user->Entity = new Person;
+			}
+		}
+		
+		require_once 'Zend/Filter/Input.php';
+		$clean = new Zend_Filter_Input($_POST, false);
+		
+		if(!$clean->testEmail('email')) {
+			$this->flash('A valid email address is required for users.');
+			return false;
+		}
+				
+		//Check for the presence of an email address
+		$email = $clean->getRaw('email');
+							
+		//Branch on persistence
+		if(!$user->exists() or ($user->exists() and $email != $user->Entity->email)) {
+			
+			//Check if email is changed, then verify that it is still unique
+			$user->Entity->email = $email;
+
+			if(!$user->Entity->isUnique('email')) {
+			
+				$this->flash('This email address is already in use.  Please choose another.');
+				return false;
+			
+			}			
+		}
+
+		//The new email address is fully legit, so set the entity to the new info				
+		$user->first_name = $_POST['first_name'];
+		$user->last_name = $_POST['last_name'];
+		$user->institution = $_POST['institution'];
+		
+		$user->Entity->save();
+		unset($_POST['email']);
+		unset($_POST['first_name']);
+		unset($_POST['last_name']);
+		unset($_POST['institution']);
+				
+		return true;
+	}
+	
+	protected function changePassword($user)
+	{
+		$new1 = $_POST['new_password1'];
+		$new2 = $_POST['new_password2'];
+		$old = $_POST['old_password'];
+		
+		//super users can change the password without knowing the old one
+		$current = Kea::loggedIn();
+		if($current->role == 'super') {
+			
+			if($new1 != $new2) {
+				$this->flash('New password must be typed correctly twice.');
+				return false;
+			}
+			
+			$user->password = $new1;
+			
+		}else {
+			if(empty($new1) || empty($new2) || empty($old)) {
+				$this->flash('User must fill out all password fields in order to change password');
+				return false;
+			}
+			//If the old passwords don't match up
+			if(sha1($old) !== $user->password) {
+				$this->flash('Old password has been entered incorrectly.');
+				return false;
+			} 
+		
+			if($new1 !== $new2) {
+				$this->flash('New password must be typed correctly twice.');
+				return false;
+			}	
+			
+			$user->password = $new1;
+			return true;
+		}
 	}
 	
 	public function loginAction()

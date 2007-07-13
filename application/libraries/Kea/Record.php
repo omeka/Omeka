@@ -17,7 +17,11 @@ abstract class Kea_Record extends Doctrine_Record
 	 **/
 	protected $error_messages = array();
 	protected $constraints = array();
-	protected $_taggable;
+	
+	protected $_strategies = array();
+	
+	protected $_pluralized;
+	protected $_hidden;
 	
 	public function setUp() 
 	{
@@ -119,11 +123,23 @@ abstract class Kea_Record extends Doctrine_Record
 
 			if($this->hasRelation($key)) {
 				if(!is_array($value)) {
-					$type = $this->getTable()->getTypeOf($key);
-					if($type == 'string' || $type == 'integer') {
+					
+					//Set empty form entries to the default value (or null if no default)
+					//Otherwise force the form entry to be either a string or integer
+					$def = $this->getTable()->getDefinitionOf($key);
+					$type = $def[0];
+					$default = @$def[2]['default'];
+					if(empty($value)) {
+						if($default !== null) {
+							$value = $default;
+						}else {
+							$value = null;
+						}
+					}
+					elseif($type == 'string' || $type == 'integer') {
 						settype($value, $type);
 					}
-					
+
 					$this->$key = (!$callback) ? $value : call_user_func_array($callback, array($value) );
 				}
 				else {
@@ -146,7 +162,6 @@ abstract class Kea_Record extends Doctrine_Record
 				}
 			}
 		}
-		
 		return $this;
 	}
 	
@@ -210,11 +225,82 @@ abstract class Kea_Record extends Doctrine_Record
 		return Zend::Registry('doctrine')->getTable($model)->getTableName();
 	}
 	
+	/**
+	 * Merge two records and all of their relevant join records together
+	 *
+	 * @return bool
+	 **/
+	public function merge($record)
+	{
+		throw new Exception( 'This function must be implemented for each relevant sub-class' );
+	}
+	
+	/**
+	 * This prevents access to a given field (both get and set) for the duration of the object's existence
+	 *
+	 * This is really a workaround for the most obvious solution, which is to not draw in the data from the DB in the first place
+	 * Unfortunately the ORM does not understand this, so this is the current solution.
+	 **/
+	public function hideField($field)
+	{
+		$this->_hidden[$field] = true;
+	}
+	
+	protected function fieldIsHidden($field)
+	{
+		$hidden = $this->_hidden;
+		$bool = ($hidden and isset($hidden[$field]));
+		return $bool;
+	}
+	
+	public function get($name)
+	{
+		//Return nothing if the field has been hidden
+		if($this->fieldIsHidden($name)) {
+			return false;
+		}else {
+			return parent::get($name);
+		}
+	}
+	
+	public function set($name, $value)
+	{
+		if($this->fieldIsHidden($name)) {
+			return false;
+		}else {
+			return parent::set($name, $value);
+		}
+	}
+	
+	//END HIDDEN FIELD MODIFICATIONS
+	
+	public function getPluralized($lower=true)
+	{
+		$pluralName = !empty($this->_pluralized) ? strtolower($this->_pluralized) : get_class($this) .'s';
+		return ($lower) ? strtolower($pluralName) : $pluralName;
+	}
+	
 	public function __call($m, $a)
 	{
-		if(method_exists($this->_taggable, $m)) {
-			return call_user_func_array(array($this->_taggable, $m), $a);
+		foreach ($this->_strategies as $k => $strat) {
+			if(method_exists($strat, $m)) {
+				return call_user_func_array(array($strat, $m), $a);
+			}
 		}
+	}
+	
+	/**
+	 * @example $record->hasStrategy('Relatable') --> bool (true)
+	 *
+	 * @return bool
+	 **/
+	public function hasStrategy($name)
+	{
+		foreach ($this->_strategies as $k => $strat) {
+			if($name == get_class($strat)) return true;
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -229,7 +315,7 @@ abstract class Kea_Record extends Doctrine_Record
 		if($fetchOne)
 			return $res->fetchColumn(0);
 		else 
-			return $res->fetchAll();
+			return $res->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
 	/**
@@ -243,6 +329,58 @@ abstract class Kea_Record extends Doctrine_Record
 		$res = $q->parseQuery($dql)->execute($params);
 		return ($returnOne) ? $res->getFirst() : $res;
 	}
+	
+	/**
+	 * Check if a given field is unique
+	 *
+	 * @return bool
+	 **/
+	public function isUnique($field)
+	{
+		if(is_array($field)) {
+			$where = join(' = ? AND ', $field) . ' = ?';
+			foreach ($field as $f) {
+				$values[] = $this->$f;
+			}
+		}else {
+			$where = "$field = ?";
+			$values = array($this->$field);
+		}
+		try {
+			$sql = "SELECT e.id as id FROM ".$this->getTableName()." e WHERE $where";
+			$id = $this->execute($sql, $values);
+			return (!count($id) or ( (count($id) == 1) and ($id[0]['id'] == $this->id) ));
+				
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+	
+	//@remove REMOVE THIS HACK WHEN DOCTRINE IS FULLY UPGRADED TO NEW REVISION
+	public function save($conn=null)
+	{
+		$this->preSave();
+		if(!$this->exists()) {
+			$this->preInsert();
+		}
+		
+//		try {
+			$res = parent::save();
+/*
+			} catch (Exception $e) {
+			$this->getErrorStack()->add('sql', $e->getMessage());
+			return false;
+		}
+*/	
+		$this->postSave();
+		return $res;
+	}
+	
+	public function preInsert() {}
+	public function preSave() {}
+	public function postSave() {}
+	
+	//END HACK TO REMOVE
 	
 } // END abstract class Kea_Record
 ?>

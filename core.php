@@ -56,7 +56,7 @@ $manager = Doctrine_Manager::getInstance();
 $manager->setAttribute(Doctrine::ATTR_VLD, true);
 
 //@todo Uncomment this prior to production release for increase in speed
-//$manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, false);
+$manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, false);
 $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 $manager->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 
@@ -65,7 +65,12 @@ Zend::register('doctrine', $manager);
 
 //Check the current migration # in the DB against the hardcoded #
 //Migrate the DB if necessary and exit
-if(!isset($options['migration']) or $options['migration'] != OMEKA_MIGRATION) {
+if(!isset($options['migration'])) {
+	$dbh->query("INSERT INTO `options` (name, value) VALUES ('migration',0)");
+	$options['migration'] = 0;
+}
+
+if($options['migration'] != OMEKA_MIGRATION) {
 	$fromVersion = $options['migration'] or $fromVersion = 0;
 	$toVersion = OMEKA_MIGRATION;
 	require_once 'Kea/Upgrader.php';

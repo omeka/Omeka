@@ -9,10 +9,19 @@
 		<?php foreach( $collections as $collection ): ?>
 			<div class="collection">
 				<h3><a href="<?php echo uri('collections/show/'.$collection->id); ?>"><?php echo $collection->name; ?></a></h3>
-				<p class="collector">Collector: <?php echo $collection->collector; ?></p>
 				
 				<?php echo nls2p($collection["description"]); ?>
 				<p><a href="<?php echo uri('items/browse/?collection='.$collection->id); ?>">View Items in <?php echo $collection->name; ?></a></p>
+				
+				<?php if($time = $collection->added):?>
+						<p>Time Added: <?php echo $time; ?></p>
+				<?php endif; ?>
+				
+				<p class="collector">Collectors:
+				<?php foreach( $collection->Collectors as $k => $collector ): ?>
+					<?php echo $collector->name; ?>
+				<?php endforeach; ?>
+				</p>
 			</div>
 		<?php endforeach; ?>
 		

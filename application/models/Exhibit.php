@@ -39,7 +39,7 @@ class Exhibit extends Kea_Record
 	
 	public function construct()
 	{
-		$this->_taggable = new Taggable($this);
+		$this->_strategies[] = new Taggable($this);
 	}
 	
 	public function reorderSections()
