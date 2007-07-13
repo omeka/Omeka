@@ -25,10 +25,10 @@ require_once 'Zend/Config/Ini.php';
 try {
 	//Check for the config file
 	$config_file = CONFIG_DIR . DIRECTORY_SEPARATOR . 'db.ini';
-	if(!file_exists($config_file)) {
+	if (!file_exists($config_file)) {
 		throw new Exception('Your Omeka database configuration file is missing.');
 	}
-	if(!is_readable($config_file)) {
+	if (!is_readable($config_file)) {
 		throw new Exception('Your Omeka database configuration file cannot be read by the application.');
 	}
 
@@ -37,7 +37,7 @@ try {
 	$db = $config->database->asArray();
 
 	//Fail on improperly configured db.ini file
-	if(!isset($db['host']) or ($db['host'] == 'XXXXXXX')) {
+	if (!isset($db['host']) or ($db['host'] == 'XXXXXXX')) {
 		throw new Exception('Your Omeka database configuration file has not been set up properly.');
 	}
 
@@ -67,12 +67,14 @@ try {
 	//Check if the options table is filled (if so, Omeka already set up so die)
 	require_once 'Option.php';
 	$options = $manager->getTable('Option')->findAll();
-	if(count($options)) {
+	if (count($options)) {
 		throw new Exception('Omeka has already been configured.  Please remove this install directory.');
 	}
 	
-	//Use the "which" command to auto-find the path to ImageMagick
-	$output = shell_exec('which convert');
+	// Use the "which" command to auto-detect the path to ImageMagick;
+	// redirect std error to where std input goes, which is nowhere
+	// see http://www.unix.org.ua/orelly/unix/upt/ch45_21.htm
+	$output = shell_exec('which convert 2>&0');
 	$path_to_convert = ($output !== NULL) ? trim($output) : FALSE;
 	
 } catch (Exception $e) {
@@ -86,7 +88,7 @@ $display_form = true;
 //Try to actually install the thing
 if (isset($_REQUEST['install_submit'])) {
 	
-	try{
+	try {
 		//Validate the FORM POST
 		$validation = array(
 					'administrator_email' => "/^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/",
