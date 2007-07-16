@@ -37,7 +37,7 @@ class Collection extends Kea_Record {
 				return $this->isFavoriteOf($user);
 			
 			case 'Collectors':
-				return $this->getRelatedEntities('collector');
+				return ($this->exists()) ? $this->getRelatedEntities('collector') : array();
 			
 			default:
 				return parent::get($name);

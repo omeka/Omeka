@@ -54,9 +54,7 @@ class Exhibit extends Kea_Record
 				$this->Sections[$key]->order = $section['order'];
 			}
 			$this->Sections->save();
-		}
-		
-		
+		}		
 		
 		//Make an exhibit slug if the posted slug is empty
 		if(empty($post['slug'])) {
