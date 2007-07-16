@@ -48,11 +48,14 @@ class Exhibit extends Kea_Record
 		$this->featured = (bool) $post['featured'];
 		unset($post['featured']);
 		
-		//Change the order of the sections
-		foreach ($post['Sections'] as $key => $section) {
-			$this->Sections[$key]->order = $section['order'];
+		if(!empty($post['Sections'])) {
+			//Change the order of the sections
+			foreach ($post['Sections'] as $key => $section) {
+				$this->Sections[$key]->order = $section['order'];
+			}
+			$this->Sections->save();
 		}
-		$this->Sections->save();
+		
 		
 		
 		//Make an exhibit slug if the posted slug is empty
