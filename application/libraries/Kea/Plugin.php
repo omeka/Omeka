@@ -285,9 +285,21 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	public function addNavigation($text, $link, $position = 'after') {}	
 	
 	public function addScriptPath($view, $type = 'theme') {
-		foreach ($this->scriptPath[$type] as $path) {
-			$view->addScriptPath($this->dir.DIRECTORY_SEPARATOR.$path);
+		//Grab the web paths of the other plugins
+		if(Zend::isRegistered('plugin_web_paths')) {
+			$webPaths = Zend::Registry( 'plugin_web_paths' );
+		}else {
+			$webPaths = array();
 		}
+
+		foreach ($this->scriptPath[$type] as $path) {
+			$physicalPath = $this->dir.DIRECTORY_SEPARATOR.$path;
+			$view->addScriptPath($physicalPath);
+			
+			$webPaths[$physicalPath] = WEB_PLUGIN . DIRECTORY_SEPARATOR . get_class($this) . DIRECTORY_SEPARATOR . $path;
+		}
+		
+		Zend::register('plugin_view_paths', $webPaths);
 	}
 	
 	///// ZEND CONTROLLER HOOKS /////

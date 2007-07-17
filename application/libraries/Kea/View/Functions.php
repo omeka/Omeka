@@ -169,7 +169,7 @@ function src($file, $dir=null, $ext = null, $return = false) {
 		if($return) return $path;
 		else echo $path;
 	}
-	else {
+	else {		
 		//Check the 'universal' directory to see if it is in there
 		$physical = SHARED_DIR.DIRECTORY_SEPARATOR.$file;
 		if(file_exists($physical)) {
@@ -179,6 +179,23 @@ function src($file, $dir=null, $ext = null, $return = false) {
 		}
 		throw new Exception('Cannot find '.$file);
 	}
+}
+
+function plugin_src($file, $dir=null)
+{
+	try {
+		$file = (!empty($dir)) ? $dir . DIRECTORY_SEPARATOR . $file : $file;
+		
+		$paths = Zend::Registry( 'plugin_view_paths' );
+		
+		foreach ($paths as $physical => $web) {
+
+			if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
+				return $web . DIRECTORY_SEPARATOR . $file;
+			}
+		}
+		
+	} catch (Exception $e) {}
 }
 
 /**
@@ -210,16 +227,24 @@ function img($file, $dir = 'images') {
 }
 
 function common($file, $vars = array(), $dir = 'common') {
+	
 	$path = theme_path(true).DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.php';
 	if (file_exists($path)) {
 		extract($vars);
 		include $path;
-	}else {
-		$path = SHARED_DIR.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.php';
-		if(file_exists($path)) {
-			extract($vars);
-			include $path;
-		}
+	}else {			
+		//Grab the view paths for the plugins and then append the path for the shared directory
+		$paths = Zend::Registry( 'plugin_view_paths' );
+		$paths = array_merge( array( SHARED_DIR => WEB_SHARED ), $paths);
+
+		foreach ($paths as $physicalPath => $webPath) {
+			$path = $physicalPath . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $file . '.php';
+
+			if(file_exists($path)) {
+				extract($vars);
+				include $path;
+			}
+		}		
 	}
 }
 

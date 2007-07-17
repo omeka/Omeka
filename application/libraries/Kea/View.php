@@ -46,6 +46,7 @@ class Kea_View extends Zend_View_Abstract
 		 * does in its __construct() is set $this->setScriptPath(null).
 		 */ 
 		$this->setThemePath();
+		
 	}
 	
 	public function setOutputListener()
