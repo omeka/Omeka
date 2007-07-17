@@ -578,7 +578,7 @@ function recent_tags($num = 30) {
 }
 
 function recent_items($num = 10) {
-	return items(array('recent'=>true,'limit'=>$num));
+	return items(array('recent'=>true,'per_page'=>$num));
 }
 
 function random_featured_item($hasImage=true) {
