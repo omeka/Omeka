@@ -7,7 +7,7 @@ require_once 'PluginTable.php';
  * @package default
  * 
  **/
-class Plugin extends Doctrine_Record
+class Plugin extends Kea_Record
 {
 	public function setUp() {
 		$this->ownsMany("Metafield as Metafields", "Metafield.plugin_id");
