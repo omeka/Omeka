@@ -10,6 +10,27 @@ class ExhibitTable extends Doctrine_Table
 		$q->where('Exhibit.slug = ?',array($slug));
 		return $q->execute()->getFirst();
 	}
+	
+	public function findBy($params=array())
+	{
+		$dql = "SELECT e.* FROM Exhibit e";
+		
+		$q = new Doctrine_Query;
+		
+		$q->parseQuery($dql);
+		
+		if(isset($params['tags'])) {
+			$tags = explode(',', $params['tags']);
+			$q->innerJoin('e.ExhibitTaggings et');
+			$q->innerJoin('et.Tag t');
+			foreach ($tags as $k => $tag) {
+				$q->addWhere('t.name = ?', trim($tag));
+			}
+		}
+	//	echo $q;
+		$exhibits = $q->execute();
+		return $exhibits;
+	}
 }
  
 ?>

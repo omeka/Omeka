@@ -9,12 +9,12 @@ class Anonymous extends Entity
     public function setUp()
     {
 		parent::setUp();
-		$this->setInheritanceMap(array('inheritance_id'=>1));
+		$this->setInheritanceMap(array('type'=>"Anonymous"));
     }
 
 	public function preSave()
 	{
-		$this->inheritance_id = 1;
+		$this->type = "Anonymous";
 	}
 	
 	public function getName()

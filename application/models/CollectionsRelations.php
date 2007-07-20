@@ -9,12 +9,12 @@ class CollectionsRelations extends EntitiesRelations
     public function setUp()
     {
 		parent::setUp();
-		$this->setInheritanceMap(array('inheritance_id'=>COLLECTION_RELATION_INHERITANCE_ID));
+		$this->setInheritanceMap(array('type'=>'Collection'));
     }
 
 	public function preSave()
 	{
-		$this->inheritance_id = COLLECTION_RELATION_INHERITANCE_ID;
+		$this->type = "Collection";
 	}
 }
 

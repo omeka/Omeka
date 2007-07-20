@@ -21,7 +21,8 @@ INSERT INTO tags
 	( `id` , `name` ) 
 VALUES 
 	( 1 , 'Tag1'), 
-	( 2 , 'Tag2');
+	( 2 , 'Tag2'),
+	( 3, 'Tag3');
 
 INSERT INTO taggings 
 	(id, relation_id, tag_id, entity_id, type, time) 
@@ -30,7 +31,8 @@ VALUES
 	(2, 1, 1, 1, "Exhibit", "1997-04-10 12:00:00"),
 	(3, 1, 2, 1, "Exhibit", "1999-12-31 11:59:59"),
 	(4, 1, 1, 2, "Exhibit", "2006-05-31 12:00:00"),
-	(5, 2, 1, 1, "Item", "1990-01-01 12:00:00");
+	(5, 2, 1, 1, "Item", "1990-01-01 12:00:00"),
+	(6, 1, 2, 1, "Item", "1994-04-04 12:00:00");
 
 INSERT INTO `entities_relations` 
 	( `id` , `relation_id` , `entity_id` , `relationship_id`, `type`, `time` )

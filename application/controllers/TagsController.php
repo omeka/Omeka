@@ -10,9 +10,7 @@ class TagsController extends Kea_Controller_Action
 	public function init()
 	{
 		$this->_table = $this->getTable('Tag');
-		$this->_modelClass = 'Tag';
-		
-		$this->_joinTables = array('ExhibitsTags', 'ItemsTags');
+		$this->_modelClass = 'Tag';	
 	}
 	
 	public function editAction()
@@ -60,26 +58,6 @@ class TagsController extends Kea_Controller_Action
 		}
 	}
 	
-	protected function getTagListWithCount($user_id=null) {
-			$select = new Kea_Select($this->getConn());
-			$select->from('tags t', 't.*, (COUNT(et.id) + COUNT(it.id)) AS tagCount')
-					->joinLeft('items_tags it', 'it.tag_id = t.id')
-					->joinLeft('exhibits_tags et', 'et.tag_id = t.id')
-					->group('t.id')
-					->having('tagCount > 0');
-			
-			
-			if($user_id) {
-				//This user can only edit their own tags
-				$select->where('it.user_id = ? OR et.user_id = ?', $user_id);
-				$tags = $select->execute()->fetchAll();
-			}else {
-				//This user can edit everyone's tags
-				$tags = $select->execute()->fetchAll();
-			}
-			
-			return $tags;		
-	} 
 	
 	protected function editTags($user)
 	{
@@ -131,26 +109,21 @@ class TagsController extends Kea_Controller_Action
 			$classFor = new $for;
 		}
 		
+		if($record = $this->_getParam('record')) {
+			$filter['record'] = $record;
+		}
+		
 		
 		if( ($for == 'Item') and !$this->isAllowed('showNotPublic','Items') ) {
-			$perms['onlyPublic'] = true;
+			$perms['public'] = true;
 		}
 		
-		$tags = $this->_table->findSome(array_merge($params, $perms), $for);
+		$total_tags = $this->_table->findBy($perms, $for, true);
+
+		$tags = $this->_table->findBy(array_merge($params, $perms), $for);
 
 		$total_results = count($tags);
-		
-		
-		
-		//Retrieve the total number of tags for 
-		$joinTable = $classFor->getTagJoinTableName();
-		$sql = "SELECT COUNT(t.id) FROM tags t INNER JOIN $joinTable j ON j.tag_id = t.id";
-		
-		if(!empty($perms['onlyPublic'])) {
-			$sql .= " INNER JOIN ".$classFor->getTableName()." i ON i.id = j.item_id WHERE i.public = 1";
-		}
-		$total_tags = $this->getConn()->fetchOne($sql);
-		
+
 		Zend::register('total_tags', $total_tags);
 		Zend::register('total_results', $total_results);	
 		

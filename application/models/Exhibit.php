@@ -1,8 +1,10 @@
 <?php
 require_once 'Section.php';
 require_once 'Tag.php';
+require_once 'Taggings.php';
 require_once 'Taggable.php';
-require_once 'ExhibitsTags.php';
+require_once 'ExhibitTable.php';
+require_once 'ExhibitTaggings.php';
 /**
  * Exhibit
  * @package: Omeka
@@ -29,13 +31,26 @@ class Exhibit extends Kea_Record
 		$this->hasColumn("theme","string",30);
 		$this->hasColumn("slug", "string", 30,"unique|notblank");
     }
+
     public function setUp()
     {
 		$this->ownsMany('Section as Sections', 'Section.exhibit_id');
-		$this->ownsMany('ExhibitsTags', 'ExhibitsTags.exhibit_id');
-		$this->hasMany('Tag as Tags','ExhibitsTags.tag_id');
-		
+		$this->ownsMany("ExhibitTaggings", "ExhibitTaggings.relation_id");
     }
+	
+	public function get($name)
+	{
+		switch ($name) {
+			//I had to do this same damn thing in the Item model.  This is pissing me off.
+			case 'Tags':
+				return $this->getTags();
+				break;
+
+			default:
+				return parent::get($name);
+				break;
+		}
+	}
 	
 	public function construct()
 	{
@@ -75,7 +90,7 @@ class Exhibit extends Kea_Record
 	{
 		//Add the tags after the form has been saved
 		$current_user = Kea::loggedIn();		
-		$this->applyTagString($post['tags'], $current_user->id, true);
+		$this->applyTagString($post['tags'], $current_user, true);
 		
 		//reload the sections b/c Doctrine is too dumb to do it
 		$this->loadSections();

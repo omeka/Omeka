@@ -9,13 +9,13 @@ class Institution extends Entity
     public function setUp()
     {
 		parent::setUp();
-		$this->setInheritanceMap(array('inheritance_id'=>INSTITUTION_INHERITANCE_ID));
+		$this->setInheritanceMap(array('type'=>"Institution"));
     }
 
 	public function preSave()
 	{
 		parent::preSave();
-		$this->inheritance_id = INSTITUTION_INHERITANCE_ID;
+		$this->type = "Institution";
 	}
 	
 	public function getName()

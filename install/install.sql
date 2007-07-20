@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS `collections`;
 CREATE TABLE IF NOT EXISTS `collections` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `description` text collate utf8_unicode_ci NOT NULL,
+  `name` varchar(255)  NOT NULL,
+  `description` text  NOT NULL,
   `public` tinyint(1) NOT NULL,
   `featured` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
@@ -17,13 +17,13 @@ CREATE TABLE IF NOT EXISTS `collections` (
 DROP TABLE IF EXISTS `entities`;
 CREATE TABLE IF NOT EXISTS `entities` (
   `id` bigint(20) NOT NULL auto_increment,
-  `first_name` text collate utf8_unicode_ci,
-  `middle_name` text collate utf8_unicode_ci,
-  `last_name` text collate utf8_unicode_ci,
-  `email` text collate utf8_unicode_ci,
-  `institution` text collate utf8_unicode_ci,
+  `first_name` text ,
+  `middle_name` text ,
+  `last_name` text ,
+  `email` text ,
+  `institution` text ,
   `parent_id` bigint(20) default NULL,
-  `inheritance_id` tinyint(4) default NULL,
+  `type` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `entities_relations` (
   `entity_id` bigint(20) default NULL,
   `relation_id` bigint(20) default NULL,
   `relationship_id` bigint(20) default NULL,
-  `inheritance_id` bigint(20) default NULL,
+  `type` varchar(50) NOT NULL,
   `time` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS `entities_relations` (
 DROP TABLE IF EXISTS `entity_relationships`;
 CREATE TABLE IF NOT EXISTS `entity_relationships` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` text collate utf8_unicode_ci,
-  `description` text collate utf8_unicode_ci,
+  `name` text ,
+  `description` text ,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -72,12 +72,12 @@ INSERT INTO `entity_relationships` (`id`, `name`, `description`) VALUES (1, 'add
 DROP TABLE IF EXISTS `exhibits`;
 CREATE TABLE IF NOT EXISTS `exhibits` (
   `id` bigint(20) NOT NULL auto_increment,
-  `title` varchar(255) collate utf8_unicode_ci default NULL,
-  `description` text collate utf8_unicode_ci,
-  `credits` text collate utf8_unicode_ci,
+  `title` varchar(255)  default NULL,
+  `description` text ,
+  `credits` text ,
   `featured` tinyint(1) default NULL,
-  `theme` varchar(30) collate utf8_unicode_ci default NULL,
-  `slug` varchar(30) collate utf8_unicode_ci default NULL,
+  `theme` varchar(30)  default NULL,
+  `slug` varchar(30)  default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `slug` (`slug`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -107,9 +107,9 @@ CREATE TABLE IF NOT EXISTS `exhibits_tags` (
 DROP TABLE IF EXISTS `file_meta_lookup`;
 CREATE TABLE IF NOT EXISTS `file_meta_lookup` (
   `id` bigint(20) NOT NULL auto_increment,
-  `mime_type` varchar(255) collate utf8_unicode_ci default NULL,
-  `table_name` varchar(255) collate utf8_unicode_ci default NULL,
-  `table_class` varchar(255) collate utf8_unicode_ci default NULL,
+  `mime_type` varchar(255)  default NULL,
+  `table_name` varchar(255)  default NULL,
+  `table_class` varchar(255)  default NULL,
   PRIMARY KEY  (`id`),
   KEY `mime_type_idx` (`mime_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -123,44 +123,44 @@ CREATE TABLE IF NOT EXISTS `file_meta_lookup` (
 DROP TABLE IF EXISTS `files`;
 CREATE TABLE IF NOT EXISTS `files` (
   `id` bigint(20) NOT NULL auto_increment,
-  `title` text collate utf8_unicode_ci NOT NULL,
-  `publisher` text collate utf8_unicode_ci NOT NULL,
-  `language` varchar(40) collate utf8_unicode_ci NOT NULL default '',
-  `relation` text collate utf8_unicode_ci NOT NULL,
-  `coverage` text collate utf8_unicode_ci NOT NULL,
-  `rights` text collate utf8_unicode_ci NOT NULL,
-  `description` text collate utf8_unicode_ci NOT NULL,
-  `source` text collate utf8_unicode_ci NOT NULL,
-  `subject` text collate utf8_unicode_ci NOT NULL,
-  `creator` text collate utf8_unicode_ci NOT NULL,
-  `additional_creator` text collate utf8_unicode_ci NOT NULL,
+  `title` text  NOT NULL,
+  `publisher` text  NOT NULL,
+  `language` varchar(40)  NOT NULL default '',
+  `relation` text  NOT NULL,
+  `coverage` text  NOT NULL,
+  `rights` text  NOT NULL,
+  `description` text  NOT NULL,
+  `source` text  NOT NULL,
+  `subject` text  NOT NULL,
+  `creator` text  NOT NULL,
+  `additional_creator` text  NOT NULL,
   `date` date default NULL,
   `added` datetime default NULL,
   `modified` datetime default NULL,
   `item_id` bigint(20) default NULL,
-  `format` text collate utf8_unicode_ci NOT NULL,
-  `transcriber` text collate utf8_unicode_ci NOT NULL,
-  `producer` text collate utf8_unicode_ci NOT NULL,
-  `render_device` text collate utf8_unicode_ci NOT NULL,
-  `render_details` text collate utf8_unicode_ci NOT NULL,
+  `format` text  NOT NULL,
+  `transcriber` text  NOT NULL,
+  `producer` text  NOT NULL,
+  `render_device` text  NOT NULL,
+  `render_details` text  NOT NULL,
   `capture_date` datetime default NULL,
-  `capture_device` text collate utf8_unicode_ci NOT NULL,
-  `capture_details` text collate utf8_unicode_ci NOT NULL,
-  `change_history` text collate utf8_unicode_ci NOT NULL,
-  `watermark` text collate utf8_unicode_ci NOT NULL,
-  `authentication` text collate utf8_unicode_ci NOT NULL,
-  `encryption` text collate utf8_unicode_ci NOT NULL,
-  `compression` text collate utf8_unicode_ci NOT NULL,
-  `post_processing` text collate utf8_unicode_ci NOT NULL,
-  `archive_filename` text collate utf8_unicode_ci NOT NULL,
-  `fullsize_filename` text collate utf8_unicode_ci,
-  `original_filename` text collate utf8_unicode_ci NOT NULL,
-  `thumbnail_filename` text collate utf8_unicode_ci,
+  `capture_device` text  NOT NULL,
+  `capture_details` text  NOT NULL,
+  `change_history` text  NOT NULL,
+  `watermark` text  NOT NULL,
+  `authentication` text  NOT NULL,
+  `encryption` text  NOT NULL,
+  `compression` text  NOT NULL,
+  `post_processing` text  NOT NULL,
+  `archive_filename` text  NOT NULL,
+  `fullsize_filename` text ,
+  `original_filename` text  NOT NULL,
+  `thumbnail_filename` text ,
   `size` bigint(20) NOT NULL default '0',
-  `mime_browser` text collate utf8_unicode_ci,
-  `mime_php` text collate utf8_unicode_ci,
-  `mime_os` text collate utf8_unicode_ci,
-  `type_os` text collate utf8_unicode_ci,
+  `mime_browser` text ,
+  `mime_php` text ,
+  `mime_os` text ,
+  `type_os` text ,
   `lookup_id` bigint(20) unsigned default NULL,
   `has_derivative_image` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
@@ -180,10 +180,10 @@ CREATE TABLE IF NOT EXISTS `files_images` (
   `height` bigint(20) default NULL,
   `bit_depth` bigint(20) default NULL,
   `channels` bigint(20) default NULL,
-  `exif_string` text collate utf8_unicode_ci,
-  `exif_array` text collate utf8_unicode_ci,
-  `iptc_string` text collate utf8_unicode_ci,
-  `iptc_array` text collate utf8_unicode_ci,
+  `exif_string` text ,
+  `exif_array` text ,
+  `iptc_string` text ,
+  `iptc_array` text ,
   `file_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `files_videos` (
   `bitrate` smallint(5) unsigned default NULL,
   `duration` bigint(20) unsigned default NULL,
   `sample_rate` int(10) unsigned default NULL,
-  `codec` text collate utf8_unicode_ci,
+  `codec` text ,
   `file_id` bigint(20) unsigned NOT NULL,
   `width` int(10) unsigned default NULL,
   `height` int(10) unsigned default NULL,
@@ -214,24 +214,24 @@ CREATE TABLE IF NOT EXISTS `files_videos` (
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
   `id` bigint(20) NOT NULL auto_increment,
-  `title` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-  `publisher` text collate utf8_unicode_ci NOT NULL,
-  `language` text collate utf8_unicode_ci NOT NULL,
-  `relation` text collate utf8_unicode_ci NOT NULL,
-  `spatial_coverage` text collate utf8_unicode_ci NOT NULL,
-  `rights` text collate utf8_unicode_ci NOT NULL,
-  `description` text collate utf8_unicode_ci NOT NULL,
-  `source` text collate utf8_unicode_ci NOT NULL,
-  `subject` text collate utf8_unicode_ci NOT NULL,
-  `creator` text collate utf8_unicode_ci NOT NULL,
-  `additional_creator` text collate utf8_unicode_ci NOT NULL,
+  `title` varchar(255)  NOT NULL default '',
+  `publisher` text  NOT NULL,
+  `language` text  NOT NULL,
+  `relation` text  NOT NULL,
+  `spatial_coverage` text  NOT NULL,
+  `rights` text  NOT NULL,
+  `description` text  NOT NULL,
+  `source` text  NOT NULL,
+  `subject` text  NOT NULL,
+  `creator` text  NOT NULL,
+  `additional_creator` text  NOT NULL,
   `date` date default NULL,
   `type_id` bigint(20) default NULL,
   `collection_id` bigint(20) default NULL,
-  `contributor` text collate utf8_unicode_ci NOT NULL,
-  `rights_holder` text collate utf8_unicode_ci NOT NULL,
-  `provenance` text collate utf8_unicode_ci NOT NULL,
-  `citation` text collate utf8_unicode_ci NOT NULL,
+  `contributor` text  NOT NULL,
+  `rights_holder` text  NOT NULL,
+  `provenance` text  NOT NULL,
+  `citation` text  NOT NULL,
   `temporal_coverage_start` date default NULL,
   `temporal_coverage_end` date default NULL,
   `featured` tinyint(1) NOT NULL,
@@ -270,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `items_section_pages` (
   `id` bigint(20) NOT NULL auto_increment,
   `item_id` bigint(20) default NULL,
   `page_id` bigint(20) NOT NULL,
-  `text` text collate utf8_unicode_ci,
+  `text` text ,
   `entry_order` bigint(20) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -301,8 +301,8 @@ CREATE TABLE IF NOT EXISTS `items_tags` (
 DROP TABLE IF EXISTS `metafields`;
 CREATE TABLE IF NOT EXISTS `metafields` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `description` text collate utf8_unicode_ci NOT NULL,
+  `name` varchar(255)  NOT NULL,
+  `description` text  NOT NULL,
   `plugin_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
@@ -320,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `metatext` (
   `id` bigint(20) NOT NULL auto_increment,
   `item_id` bigint(20) unsigned NOT NULL,
   `metafield_id` bigint(20) unsigned NOT NULL,
-  `text` text collate utf8_unicode_ci NOT NULL,
+  `text` text  NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `item_idx` (`item_id`),
   KEY `metafield_idx` (`metafield_id`),
@@ -336,8 +336,8 @@ CREATE TABLE IF NOT EXISTS `metatext` (
 DROP TABLE IF EXISTS `options`;
 CREATE TABLE IF NOT EXISTS `options` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` varchar(30) collate utf8_unicode_ci NOT NULL,
-  `value` text collate utf8_unicode_ci,
+  `name` varchar(30)  NOT NULL,
+  `value` text ,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -351,10 +351,10 @@ CREATE TABLE IF NOT EXISTS `options` (
 DROP TABLE IF EXISTS `plugins`;
 CREATE TABLE IF NOT EXISTS `plugins` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `description` text collate utf8_unicode_ci NOT NULL,
-  `author` text collate utf8_unicode_ci NOT NULL,
-  `config` text collate utf8_unicode_ci,
+  `name` varchar(255)  NOT NULL,
+  `description` text  NOT NULL,
+  `author` text  NOT NULL,
+  `config` text ,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
@@ -370,10 +370,10 @@ CREATE TABLE IF NOT EXISTS `plugins` (
 DROP TABLE IF EXISTS `routes`;
 CREATE TABLE IF NOT EXISTS `routes` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` text collate utf8_unicode_ci,
-  `route` text collate utf8_unicode_ci,
-  `defaults` text collate utf8_unicode_ci,
-  `path` text collate utf8_unicode_ci,
+  `name` text ,
+  `route` text ,
+  `defaults` text ,
+  `path` text ,
   `added` datetime default NULL,
   `static` tinyint(1) default NULL,
   `active` tinyint(1) default NULL,
@@ -391,7 +391,7 @@ DROP TABLE IF EXISTS `section_pages`;
 CREATE TABLE IF NOT EXISTS `section_pages` (
   `id` bigint(20) NOT NULL auto_increment,
   `section_id` bigint(20) NOT NULL,
-  `layout` varchar(255) collate utf8_unicode_ci default NULL,
+  `layout` varchar(255)  default NULL,
   `page_order` bigint(20) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -405,8 +405,8 @@ CREATE TABLE IF NOT EXISTS `section_pages` (
 DROP TABLE IF EXISTS `sections`;
 CREATE TABLE IF NOT EXISTS `sections` (
   `id` bigint(20) NOT NULL auto_increment,
-  `title` varchar(255) collate utf8_unicode_ci default NULL,
-  `description` text collate utf8_unicode_ci,
+  `title` varchar(255)  default NULL,
+  `description` text ,
   `exhibit_id` bigint(20) NOT NULL,
   `section_order` bigint(20) NOT NULL,
   PRIMARY KEY  (`id`)
@@ -421,12 +421,24 @@ CREATE TABLE IF NOT EXISTS `sections` (
 DROP TABLE IF EXISTS `tags`;
 CREATE TABLE IF NOT EXISTS `tags` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` varchar(255) collate utf8_unicode_ci default NULL,
+  `name` varchar(255)  default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
+DROP TABLE IF EXISTS `taggings`;
+CREATE TABLE `taggings` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `relation_id` bigint(20) unsigned NOT NULL,
+  `tag_id` bigint(20) unsigned NOT NULL,
+  `entity_id` bigint(20) unsigned NOT NULL,
+  `type` varchar(50) collate utf8_unicode_ci NOT NULL default '',
+  `time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `tag` (`relation_id`,`tag_id`,`entity_id`,`type`)
+) ENGINE=MyISAM;
+
 
 -- 
 -- Table structure for table `types`
@@ -435,8 +447,8 @@ CREATE TABLE IF NOT EXISTS `tags` (
 DROP TABLE IF EXISTS `types`;
 CREATE TABLE IF NOT EXISTS `types` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `description` text collate utf8_unicode_ci NOT NULL,
+  `name` varchar(255)  NOT NULL,
+  `description` text  NOT NULL,
   `plugin_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
@@ -468,10 +480,10 @@ CREATE TABLE IF NOT EXISTS `types_metafields` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL auto_increment,
-  `username` varchar(30) collate utf8_unicode_ci NOT NULL,
-  `password` varchar(40) collate utf8_unicode_ci NOT NULL,
+  `username` varchar(30)  NOT NULL,
+  `password` varchar(40)  NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `role` varchar(40) collate utf8_unicode_ci NOT NULL default 'default',
+  `role` varchar(40)  NOT NULL default 'default',
   `entity_id` bigint(20) unsigned default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
@@ -489,7 +501,7 @@ DROP TABLE IF EXISTS `users_activations`;
 CREATE TABLE IF NOT EXISTS `users_activations` (
   `id` bigint(20) NOT NULL auto_increment,
   `user_id` bigint(20) NOT NULL,
-  `url` varchar(100) collate utf8_unicode_ci default NULL,
+  `url` varchar(100)  default NULL,
   `added` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

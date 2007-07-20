@@ -44,9 +44,22 @@ class Kea_Select {
      */
     protected $_tableCols = array();
 	
-	public function __construct($conn)
+	public function __construct($conn=null)
 	{
+		if(!$conn) $conn = Doctrine_Manager::getInstance()->connection();
 		$this->_adapter = $conn;
+	}
+	
+	protected function modelToTable($name)
+	{
+		//Omeka Customization convert model name to table name
+		if(is_array($name)) {
+			list($model, $alias) = $name;
+			$table = Doctrine_Manager::getInstance()->getTable($model)->getTableName();
+			$name = $table . ' ' . $alias;
+		}
+		
+		return $name;
 	}
 	
 	public function __call($m,$a) 
@@ -190,6 +203,8 @@ class Kea_Select {
      */
     public function from($name, $cols = '*')
     {
+		$name = $this->modelToTable($name);
+	
         // add the table to the 'from' list
         $this->_parts['from'][$name] = null;
 
@@ -216,7 +231,9 @@ class Kea_Select {
         if (!in_array($type, array('left', 'inner'))) {
             $type = null;
         }
-
+		
+		$name = $this->modelToTable($name);
+		
         $this->_parts['join'][$name] = array(
             'type' => $type,
             'name' => $name,
@@ -263,8 +280,10 @@ class Kea_Select {
      * @param array|string $cols The columns to select from the joined table.
      * @return Zend_Db_Select This Zend_Db_Select object.
      */
-    public function joinInner($name, $cond, $cols = null) 
+    public function innerJoin($name, $cond, $cols = null) 
     {
+		
+	
         return $this->_join('inner', $name, $cond, $cols);
     }
 

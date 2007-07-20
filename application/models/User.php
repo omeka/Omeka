@@ -41,9 +41,7 @@ class User extends Kea_Record {
 	}
 	
 	public function setUp() {
-		$this->ownsMany("ItemsTags", "ItemsTags.user_id");
 		$this->hasMany("Item as Items", "Item.user_id");
-		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
 		$this->ownsOne("Entity", "User.entity_id");
 	}
 	

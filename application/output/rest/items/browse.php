@@ -12,7 +12,7 @@
 	<title><?php echo $item->title; ?></title>
 	<tags>
 	<?php foreach ($item->Tags as $tag): ?>
-		<tag name="<?php echo $tag->name; ?>"></tag>
+		<tag name="<?php echo htmlentities($tag->name); ?>"></tag>
 	<?php
 	endforeach;
 	?>

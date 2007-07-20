@@ -119,8 +119,8 @@ if (isset($_REQUEST['install_submit'])) {
 		$userTable = $manager->getTable('User')->getTableName();
 		$entityTable = $manager->getTable('Entity')->getTableName();
 		
-		$entitySql = "INSERT INTO $entityTable (inheritance_id) VALUES (?)";
-		$conn->execute($entitySql, array(PERSON_INHERITANCE_ID));
+		$entitySql = "INSERT INTO $entityTable (type) VALUES (?)";
+		$conn->execute($entitySql, array("Person"));
 		
 		$userSql = "INSERT INTO $userTable (username, password, active, role, entity_id) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
 		$conn->execute($userSql, array($_REQUEST['username'], $_REQUEST['password']));

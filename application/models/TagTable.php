@@ -8,12 +8,6 @@
  **/
 class TagTable extends Doctrine_Table
 {	
-	protected $_joins = array('Item'=>'ItemsTags', 'Exhibit'=>'ExhibitsTags');
-	
-	public function getJoins() {
-		return $this->_joins;
-	}
-	
 	public function findOrNew($name) {
 		$result = $this->findBySql('name = ? LIMIT 1', array($name))->getFirst();
 		if(!$result) {
@@ -23,6 +17,21 @@ class TagTable extends Doctrine_Table
 		} else {
 			return $result;
 		}
+	}
+
+	/**
+	 * DUPLICATED from the ItemTable class...too lazy to do anything else for now
+	 *
+	 * @return void
+	 **/
+	protected function getCountFromSelect($select)
+	{		
+		//Grab the total number of items in the table(as differentiated from the result count)
+		$countQuery = clone $select;
+		$countQuery->resetFrom(array('Tag', 't'), 'COUNT(DISTINCT(t.id))');
+		$total_items = $countQuery->fetchOne();
+		if(!$total_items) $total_items = 0;
+		return $total_items;
 	}
 	
 	/**
@@ -36,18 +45,18 @@ class TagTable extends Doctrine_Table
 	 * @param User only tags from this User
 	 * @return Doctrine_Collection tags
 	 **/
-	public function findSome($params=array(),$for="Item")
+	public function findBy($params=array(), $for=null, $returnCount=false)
 	{
-		$defaults = array('limit'=>100,
+		$defaults = array(	'limit'=>100,
 							'alpha'=>false,
 							'recent'=>false,
-							'lowToHigh'=>false,
-							'highToLow'=>false,
-							'item_id'=>null,
-							'user_id'=>null,
-							'returnType'=>'object',
-							'onlyPublic'=>false,
-							'exhibit_id'=>null);
+							'mostToLeast'=>false,
+							'leastToMost'=>false,
+							'record'=>null,
+							'entity'=>null,
+							'user'=>null,
+							'public'=>false,
+							'return'=>'array');
 							
 		foreach ($defaults as $k=>$v) {
 			if(array_key_exists($k,$params)) {
@@ -56,102 +65,97 @@ class TagTable extends Doctrine_Table
 				$$k = $v;
 			}
 		}
-		$dql = "SELECT t.*, COUNT(t.id) tagCount FROM Tag t";
 		
-		$pass = array();
-		$join = array();
-		$where = array();
+		$select = new Kea_Select;
+		
+		$select->from(array('Tag', 't'), 't.*, COUNT(t.id) as tagCount')
+				->innerJoin(array('Taggings', 'tg'), "tg.tag_id = t.id");
+
+		if($record instanceof Kea_Record) {
+			if($record->exists()) {
+				$record_id = $record->id;
+				$select->where("tg.relation_id = ?", $record_id);
 			
-		//Figure out where to get the tags from
-		switch (strtolower($for)) {
-			case 'exhibit':
-				$join['et'] = "t.ExhibitsTags it";
-				break;
-			case 'item':
-			default:
-				$join['it'] = "t.ItemsTags it";
-				break;
+				if(empty($for)) {
+					$select->where("tg.type = ?", get_class($record));
+				}
+			}
+			//A non-persistent record has no tags, so return emptiness
+			else {
+				return ($return == 'array') ? array() : new Doctrine_Collection('Tag');
+			}
 		}
 	
+		if(!empty($for)) {
+			$select->where("tg.type = ?", (string) $for);
+		}
 		
-		$query = new Doctrine_Query;
+		if($user) {
+			$select->innerJoin(array('Entity', 'e'), "e.id = tg.entity_id");
+			$select->innerJoin(array('User', 'u'), "u.entity_id = e.id");
+			$select->where("u.id = ?", ($user instanceof User) ? $user->id : $user);
+		}
+		elseif($entity) {
+			$select->innerJoin(array('Entity', 'e'), "e.id = tg.entity_id");
+			$select->where("e.id = ?", ($entity instanceof Entity) ? $entity->id : $entity );
+		}
+
+		if($recent) {
+			$select->order('tg.time DESC');
+		}elseif($alpha) {
+			$select->order('t.name ASC');
+		}
+		elseif($mostToLeast) {
+			$select->order('tagCount DESC');
+		}elseif($leastToMost) {
+			$select->order('tagCount ASC');
+		}
 		
 
-		
-		if($item_id) {
-			$join['it'] = "t.ItemsTags it";
-			$join['item'] = "it.Item i";
-			$where['item'] = 'i.id = ?';
-			$pass[] = $item_id;	
-		}
-		if($exhibit_id) {
-			$join['et'] = "t.ExhibitsTags it";
-			$join['exhibit'] = "it.Exhibit ex";
-			$where['exhibit'] = 'ex.id = ?';
-			$pass[] = $exhibit_id;
-		}
-		
-		if($user_id) {
-			$join['user'] = 'it.User u';
-			$where['user'] = 'u.id = ?';
-			$pass[] = $user_id;
-		}
-		if($recent) {
-			$order[] = 't.id DESC';
-		}elseif($alpha) {
-			$order[] = 't.name ASC';
-		}
-		elseif($highToLow) {
-			$order[] = 'tagCount DESC';
-		}elseif($lowToHigh) {
-			$order[] = 'tagCount ASC';
-		}
 		
 		//Showing tags related to public items
-		if($onlyPublic) {
-			if(!array_key_exists('item',$join)) {
-				$join['item'] = "it.Item i";
-			}
-			$where['public'] = "i.public = 1";
-		}
-		
-		$dql .= (!empty($join)?" INNER JOIN ".join(' INNER JOIN ', $join):"").
-				(!empty($where) ? " WHERE ".join(' AND ',$where):"").
-				(!empty($order)?' ORDER BY '.join(',',$order):"");
-		
+		if($public and $for == 'Item') {
+			$select->innerJoin(array('Item', 'i'), "i.id = tg.relation_id");
+			$select->where("i.public = 1");
+		}	
+
 		if($limit) {
-			$dql .= " LIMIT $limit";
+			$select->limit($limit);
 		}
-		$dql .= " GROUP BY t.id ";
-
-		$query->parseQuery($dql);
-
-		if($returnType == 'array') {
-			$res = $query->execute($pass, Doctrine::FETCH_ARRAY);
-			foreach ($res as $key => $value) {
-				$array[$key]['name'] = $res[$key]['t']['name'];
-				$array[$key]['id'] = $res[$key]['t']['id'];
-				$array[$key]['tagCount'] = $res[$key]['t'][0];
+		
+				
+		if($returnCount) {
+			return $this->getCountFromSelect($select);
+		}
+		
+		$select->group("t.id");
+		
+//echo $select;
+		
+		//Return Doctrine_Collection instead of an array (the slow way)
+		if($return == 'object') {
+			$ids = array();
+			$select->resetFrom(array('Tag', 't'), "DISTINCT t.id");
+			$array = $select->fetchAll();
+			foreach ($array as $row) {
+				$ids[] = $row['id'];
 			}
-			return $array;
-		}else {
-			return $query->execute($pass);
+			return !empty($ids) ? $this->find($ids, true) : new Doctrine_Collection('Tag');
 		}
 		
-		
+		return $select->fetchAll();
 	}
 	
 	/**
-	 * Overloaded as a wrapper for findSome()
+	 * Overloaded as a wrapper for findBy()
 	 *
 	 * @return mixed
 	 **/
-	public function findAll($params=array(), $for="Item")
+	public function findAll($for=null, $params=array())
 	{
 		$params = array_merge(array(
-						'limit'=>null,
-						'returnType'=>'array'), $params);
-		return $this->findSome($params, $for);
+						'limit'=>null, 'return'=>'object'), $params);
+		return $this->findBy($params, $for);
 	}
 	
 	/**
@@ -160,16 +164,49 @@ class TagTable extends Doctrine_Table
 	 * @param int id
 	 * @return Tag
 	 **/
-	public function find($id) 
+	public function find($id, $makeCollection=false) 
 	{
-		$id = (int) $id;
-		return $this->createQuery()
+		//make the where statement
+		$id = (array) $id;
+		$where = array();
+		foreach ($id as $val) {
+			$where[] = "t.id = ?";
+		}
+		$where = join(' OR ', $where);
+		
+		$q = $this->createQuery()
 					->select("t.*, COUNT(t.id) tagCount")
 					->from('Tag t')
-					->where('t.id = ?',array( $id ) )
-					->groupby('t.id')
-					->execute()->getFirst();
+					->where($where, $id)
+					->groupby('t.id');
+		$tags = $q->execute();
+					
+		if((count($tags) == 1) and !$makeCollection) return $tags->getFirst();
+		
+		return $tags;
 	}
+	
+	protected function getTagListWithCount($user_id=null) {
+			$select = new Kea_Select;
+			$select->from('tags t', 't.*, (COUNT(tg.id) AS tagCount')
+					->joinLeft('taggings tg', 'tg.tag_id = t.id')
+					->joinLeft('entities e', 'e.id = tg.entity_id')
+					->joinLeft('users u', 'u.entity_id = e.id')
+					->group('t.id')
+					->having('tagCount > 0');
+			
+			
+			if($user_id) {
+				//This user can only edit their own tags
+				$select->where('u.id = ?', $user_id);
+				$tags = $select->execute()->fetchAll();
+			}else {
+				//This user can edit everyone's tags
+				$tags = $select->execute()->fetchAll();
+			}
+			
+			return $tags;		
+	} 
 } // END class TagTable extends Doctrine_Table
 
 ?>

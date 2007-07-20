@@ -430,13 +430,13 @@ function plugin_header() {
 function tag_string($record, $link=null, $delimiter=', ')
 {
 	$string = array();
-	if($record instanceof Kea_Record and $record->hasRelation("Tags")) {
+	if($record instanceof Kea_Record) {
 		$tags = $record->Tags;
 		
 	}else {
 		$tags = $record;
 	}
-	
+
 	if(!empty($tags)) {
 		foreach ($tags as $key=>$tag) {
 			if(!$link) {
@@ -456,7 +456,7 @@ function current_user_tags($item)
 	if(!$item->exists()) {
 		return false;
 	}
-	return tags(array('user_id'=>$user->id, 'item_id'=>$item->id));
+	return tags(array('user'=>$user->id, 'record'=>$item));
 }
 
 function link_to($record, $action='show', $text=null)

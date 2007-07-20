@@ -3,22 +3,26 @@
 
 	function ajaxify() {
 		div = $('add');
-		new Insertion.After(div, "<a href=\"javascript:return false;\" id=\"add_existing_metafield\">Add a pre-existing metafield</a>");
-		new Insertion.After(div, "<a href=\"javascript:return false;\" id=\"add_new_metafield\">Add a new metafield</a>");
+		new Insertion.After(div, "<a href=\"javascript:void(0);\" id=\"add_existing_metafield\">Add a pre-existing metafield</a>");
+		new Insertion.After(div, "<a href=\"javascript:void(0);\" id=\"add_new_metafield\">Add a new metafield</a>");
 		
-		//hide the non-javascript metafield form elements
-		$('new-metafields').descendants().each( function(element) {
-			element.setStyle({display:"none"});
-		});
+		$('add_existing_metafield').onclick = function() { addMetafield('old'); }
 		
-		Event.observe("add_existing_metafield", "click", addExistingMetafield);
-		Event.observe("add_new_metafield", "click", addNewMetafield);
+		$('add_new_metafield').onclick = function() { addMetafield('new'); }
 	}
 	
 	function getLastId() {
 		input = $$("#new-metafields input").last();
-		select = $$("#new-metafields select").last();		
-		selectId = parseInt(select.id.replace("metafield_", ""));
+		select = $$("#new-metafields select").last();
+		
+		if(!input && !select) {
+			return 0;
+		}
+		if(select) {
+			selectId = parseInt(select.id.replace("metafield_", ""));
+		}else {
+			selectId = 0;
+		}		
 		inputId = parseInt(input.id.replace("metafield_", ""));
 		if(selectId > inputId) {
 			return selectId;
@@ -27,54 +31,26 @@
 		}
 	}
 	
-	function addExistingMetafield() {
-		var metafields = $A(null);
-		<?php foreach( $metafields as $key => $metafield ):
-			$metafield->load();
-			echo "metafields[$key] = ".Zend_Json::encode($metafield->toArray()).";\n"; 
-		endforeach; ?>		
-		
-		count = getLastId()+1;
-		
-		select = document.createElement("select");
-		select.setAttribute('id', "metafield_"+count);
-		select.setAttribute('name', "TypesMetafields["+count+"][metafield_id]");
-		
-		for(i=0;i<metafields.size();i++) {
-			select.options[i] = new Option(metafields[i].name, metafields[i].id);
+	function addMetafield(type) {
+		switch(type) {
+			case 'new':
+				var uri = "<?php echo uri('types/_new_metafield'); ?>";
+				break;
+			case 'old':
+				var uri = "<?php echo uri('types/_old_metafield'); ?>";
+				break;
+			default:
+				break;
 		}
 		
-		$('new-metafields').appendChild(select);
-	}
-	
-	function addNewMetafield() {
-		id = getLastId()+1;
+		num = getLastId()+1;
 		
-		nameFieldBox = document.createElement("div");
-		nameFieldBox.setAttribute("class","field");
-		nameFieldLabel = document.createElement("label");
-		nameFieldLabel.innerHTML = 'Name Field';
-		nameField = document.createElement("input");
-		nameField.setAttribute("id", "metafield_"+id);
-		nameField.setAttribute("name", "Metafields["+id+"][name]");
-		nameField.setAttribute("class", "textinput");
-		
-		descFieldBox = document.createElement("div");
-		descFieldBox.setAttribute("class","field");
-		descFieldLabel = document.createElement("label");
-		descFieldLabel.innerHTML = 'Description Field';
-		descField = document.createElement("textarea");
-		descField.setAttribute("name", "Metafields["+id+"][description]");
-		descField.setAttribute("class", "textinput");
-		
-		nameFieldBox.appendChild(nameFieldLabel);
-		nameFieldBox.appendChild(nameField);
-		descFieldBox.appendChild(descFieldLabel);
-		descFieldBox.appendChild(descField);
-		
-		$('new-metafields').appendChild(nameFieldBox);
-		$('new-metafields').appendChild(descFieldBox);
-		
+		new Ajax.Request(uri, {
+			parameters: "id=" + num,
+			onComplete: function(t) {
+				new Insertion.Bottom($('new-metafields'), t.responseText);
+			}
+		});
 	}
 	
 	Event.observe(window, "load", ajaxify);
@@ -112,19 +88,7 @@ endforeach; ?>
 
 <div id="new-metafields">
 	<p>Add a metafield:</p>
-	<?php if ( $metafields ): ?>
-		<?php $totalMetafields = count($type->Metafields);?>
-
-		<?php select(	array(	
-							'name'	=> "TypesMetafields[$totalMetafields][metafield_id]",
-							'id'	=> "metafield_$totalMetafields" ),
-							$metafields,
-							null,
-							'Pre-existing Metafields',
-							'id',
-							'name' ); ?>
-	<?php endif; ?>
-	
-	<input type="text" name="Metafields[<?php echo $totalMetafields;?>][name]" id="metafield_<?php echo $totalMetafields;?>" />
+	<?php $totalMetafields = count($type->Metafields);?>
+	<?php common('_new_metafield', array('id'=>$totalMetafields), 'types'); ?>
 </div>
 </fieldset>

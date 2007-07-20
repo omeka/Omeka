@@ -458,8 +458,22 @@ abstract class Kea_Record extends Doctrine_Record
 			return false;
 		}
 */	
+		//Call the onSave for any strategies that have been added
+		foreach($this->_strategies as $strat) {
+			$strat->onSave();
+		}
+	
 		$this->postSave();
 		return $res;
+	}
+	
+	public function delete()
+	{
+		//Call the onSave for any strategies that have been added
+		foreach($this->_strategies as $strat) {
+			$strat->onDelete();
+		}
+		return parent::delete();
 	}
 	
 	public function preInsert() {}

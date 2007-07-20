@@ -1,5 +1,6 @@
 <?php
 require_once 'CollectionsRelations.php';
+require_once 'CollectionTaggings.php';
 /**
  * @package Omeka
  **/
@@ -7,12 +8,13 @@ class Collection extends Kea_Record {
     
 	public function construct()
 	{
-		$this->_strategies[] = new Relatable($this, COLLECTION_RELATION_INHERITANCE_ID);
+		$this->_strategies[] = new Relatable($this);
 	}
 
 	public function setUp() {
 		$this->hasMany('Item as Items', 'Item.collection_id');
 		$this->ownsMany("CollectionsRelations", "CollectionsRelations.relation_id");
+		$this->ownsMany("CollectionTaggings", "CollectionTaggings.relation_id");
 	}
 	
 	public function setTableDefinition() {
@@ -37,8 +39,7 @@ class Collection extends Kea_Record {
 				return $this->isFavoriteOf($user);
 			
 			case 'Collectors':
-				return ($this->exists()) ? $this->getRelatedEntities('collector') : array();
-			
+				return ($this->exists()) ? $this->getRelatedEntities('collector') : array();			
 			default:
 				return parent::get($name);
 				break;

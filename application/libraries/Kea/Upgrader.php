@@ -83,14 +83,20 @@ class Kea_Upgrader
 	}
 	
 	public function tableHasColumn($model, $column) {
-		$col = $this->getColumnDefinition($model, $column);
+		//If it is a model and not a table name, 
+		$file = MODEL_DIR.DIRECTORY_SEPARATOR.$model.'.php';
+		if(file_exists($file)) {
+			require_once $file;
+			$tblName = $this->getTableName($model);
+		}else {
+			$tblName = $model;
+		}
+		$col = $this->getColumnDefinition($tblName, $column);
 		return !empty($col);
 	}
 	
-	public function getColumnDefinition($model, $column) {
-		//Replace with SHOW COLUMNS
-		
-		$tblName = $this->getTableName($model);
+	public function getColumnDefinition($tblName, $column) {
+		//Replace with SHOW COLUMNS		
 		$explain = $this->query("EXPLAIN `$tblName`");
 		foreach ($explain as $k => $col) {
 			if($column == $col['Field'] ) {

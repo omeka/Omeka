@@ -1,8 +1,7 @@
 <?php
 require_once 'Item.php';
-require_once 'ItemsTags.php';
-require_once 'ExhibitsTags.php';
 require_once 'TagTable.php';
+require_once 'Exhibit.php';
 /**
  * @package Omeka
  * 
@@ -10,13 +9,12 @@ require_once 'TagTable.php';
 class Tag extends Kea_Record { 
   
 	public function setUp() {
-		$this->hasMany("Item as Items", "ItemsTags.item_id");
-		$this->hasMany("User as Users", "ItemsTags.user_id");
-		$this->ownsMany("ItemsTags", "ItemsTags.tag_id");
+		$this->ownsMany("Taggings","Taggings.tag_id");
 		
-		$this->ownsMany("ExhibitsTags","ExhibitsTags.tag_id");
-		$this->hasMany("Exhibit as Exhibits","ExhibitsTags.exhibit_id");
-		
+		$this->ownsMany("ItemTaggings", "ItemTaggings.tag_id");
+		$this->ownsMany("CollectionTaggings", "CollectionTaggings.tag_id");
+		$this->ownsMany("ExhibitTaggings", "ExhibitTaggings.tag_id");
+	
 		//Hack around the tags so that they are not auto-escaped by the OutputListener class
 		$this->setListener(new Doctrine_EventListener);
 		
@@ -31,23 +29,23 @@ class Tag extends Kea_Record {
 	public function __toString() {
 		return $this->name;
 	}
-	
+
 	/**
-	 * If a user ID is passed, then only delete the joins for that user
+	 * If an user ID is passed, then only delete the joins for that entity
 	 *
 	 * @return bool
 	 **/
-	public function delete($user_id = null) {
-		if(!$user_id) {
+
+	public function delete($entity = null) {
+		if(!$entity) {
 			return parent::delete();
 		}
+	
+		$table = Zend::Registry( 'doctrine' )->getTable('Taggings');
+
+		$joins = $table->findBy(array('entity'=>$entity, 'tag'=>$this));
 		
-		$joins = $this->getTable()->getJoins();
-		
-		foreach ($joins as $joinTable) {
-			$dql = "DELETE FROM $joinTable j WHERE j.tag_id = ? AND j.user_id = ?";
-			$this->executeDql($dql, array($this->id, $user_id));
-		}
+		$joins->delete();
 	}
 	
 	/**
@@ -57,17 +55,19 @@ class Tag extends Kea_Record {
 	 * 3) Loop through the new tags, loop through the joins and create a new one for each new tag
 	 * @return void
 	 **/
-	public function rename($newNames, $userId = null, $delimiter=",") {
-		$joinClasses = $this->getTable()->getJoins();
+	public function rename($newNames, $user_id = null, $delimiter=",") {
+		throw new Exception( 'rename taggings must be fixed' );
 		$joins = array();
-		foreach ($joinClasses as $joinTable) {
-			$dql = "SELECT j.* FROM $joinTable j WHERE j.tag_id = {$this->id}";
-			if($userId) {
-				$dql .= " AND j.user_id = $userId";
+/*
+			
+		$dql = "SELECT j.* FROM Taggings j WHERE j.tag_id = ?";
+			if($user_id) {
+				$dql .= " AND j.user_id = $user_id";
 			}
-			$joins[$joinTable] = $this->executeDql($dql);
+			$joins[$joinTable] = $this->executeDql($dql, array($this->id, ));
 		}
 		
+*/	
 		if(in_array($this->name, $newNames)) {
 			//Remove the original name from the list
 			$newNames = array_diff($newNames,array($this->name));
@@ -127,20 +127,6 @@ class Tag extends Kea_Record {
 			}
 		}
 					
-	}
-	
-	public function tagCount($for="Items") {
-		$q = new Doctrine_Query;
-		$join = $for.'Tags';
-		$q->parseQuery("SELECT COUNT(j.id) as tagCount FROM $join j WHERE j.tag_id = ?");
-		$res = $q->execute(array($this->id), Doctrine::FETCH_ARRAY);
-		return $res[0]['i'][0];
-	}
-	
-	public function toArray() {
-		$array = parent::toArray();
-		$array['tagCount'] = $this->tagCount();
-		return $array;
 	}
 }
 

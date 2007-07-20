@@ -34,7 +34,6 @@ class Type extends Kea_Record {
 	
 	protected function preCommitForm(&$post, $options)
 	{
-
 		//Remove empty metafield submissions
 		foreach( $this->TypesMetafields as $key => $tm )
 		{
@@ -54,7 +53,22 @@ class Type extends Kea_Record {
 				$this->Metafields->remove($key);
 			}
 		}
-			
+		
+		//Remove empty Metafields form entries
+		foreach ($post['Metafields'] as $k => $mf) {
+			if(empty($tm['name'])) {
+				unset($post['Metafields'][$k]);
+			}
+		}
+		
+		//Remove all the empty TypesMetafields entries on the form
+		foreach ($post['TypesMetafields'] as $k => $tm) {
+			if(empty($tm['metafield_id'])) {
+				unset($post['TypesMetafields'][$k]);
+			}
+		}
+		
+//		Zend::dump( $post );exit;	
 	}
 }
 

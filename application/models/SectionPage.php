@@ -58,7 +58,7 @@ class SectionPage extends Kea_Record
 		if(!empty($post['Text'])) {
 			//Process the text fields
 			foreach ($post['Text'] as $key => $text) {
-				$ip = $page->ItemsPages[$key];
+				$ip = $this->ItemsPages[$key];
 				$ip->text = $ip->strip($text);
 				$ip->order = $key;
 			}
@@ -67,7 +67,7 @@ class SectionPage extends Kea_Record
 		if(!empty($post['Item'])) {
 			//Process the Item fields
 			foreach ($post['Item'] as $key => $item_id) {
-				$ip = $page->ItemsPages[$key];
+				$ip = $this->ItemsPages[$key];
 				$ip->item_id = is_numeric($item_id) ? $item_id : null;
 				$ip->order = $key;
 			}

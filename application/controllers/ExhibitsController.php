@@ -34,23 +34,14 @@ class ExhibitsController extends Kea_Controller_Action
 	
 	public function browseAction()
 	{
-		$dql = "SELECT e.* FROM Exhibit e";
-		
-		$q = new Doctrine_Query;
-		
-		$q->parseQuery($dql);
+		$filter = array();
 		
 		if(($tags = $this->_getParam('tag')) || ($tags = $this->_getParam('tags'))) {
-			$tags = explode(',', $tags);
-			$q->innerJoin('e.ExhibitsTags et');
-			$q->innerJoin('et.Tag t');
-			foreach ($tags as $k => $tag) {
-				$q->addWhere('t.name = ?', trim($tag));
-			}
+			$filter['tags'] = $tags;
 		}
-
-		$exhibits = $q->execute();
-
+		
+		$exhibits = $this->_table->findBy($filter);
+				
 		Zend::register('exhibits', $exhibits);
 		
 		return $this->render('exhibits/browse.php');

@@ -12,7 +12,7 @@ class Person extends Entity
     public function setUp()
     {
 		parent::setUp();
-		$this->setInheritanceMap(array('inheritance_id'=>PERSON_INHERITANCE_ID));
+		$this->setInheritanceMap(array('type'=>"Person"));
     }
 
 	/**
@@ -23,7 +23,7 @@ class Person extends Entity
 	{
 		parent::preSave();
 		
-		$this->inheritance_id = PERSON_INHERITANCE_ID;	
+		$this->type = "Person";	
 		
 		if(!empty($this->institution)) {
 			$this->setParentToInstitution();

@@ -673,6 +673,7 @@ abstract class Doctrine_Hydrate extends Doctrine_Access
         $c = array();
 
         $index = 0;
+
         foreach ($array as $tableAlias => $maps) {
             $a = array();
             
@@ -687,10 +688,10 @@ abstract class Doctrine_Hydrate extends Doctrine_Access
                 $b = array();
                 foreach ($map as $field => $value) {
                     if ($index > 0) {
-                        $b[] = '(' . $tableAlias  . $field . ' = ' . $value
+                        $b[] = '(' . $tableAlias  . $field . ' = ' . "'$value'"
                              . ' OR ' . $tableAlias . $field . ' IS NULL)';
                     } else {
-                        $b[] = $tableAlias . $field . ' = ' . $value;
+                        $b[] = $tableAlias . $field . ' = ' . "'$value'";
                     }
                 }
 

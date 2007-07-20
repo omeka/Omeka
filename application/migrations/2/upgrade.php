@@ -41,8 +41,6 @@ if($this->tableHasColumn('User', 'first_name')) {
 	foreach ($users as $k => $u) {
 		
 		if(empty($u["entity_id"])) {
-			require_once 'Person.php';
-			$p = new Person;
 		
 			$fields = array('first_name','last_name','email','institution');
 			
@@ -50,11 +48,12 @@ if($this->tableHasColumn('User', 'first_name')) {
 				$values[$v] = !empty($u[$v]) ? $u[$v] : null;
 			}
 			
-			$user = $this->getTable('User')->find($u['id']);
-			
 			//If all the fields are missing, assign it to a new Person
 			if(empty($u['first_name']) and empty($u['last_name']) and empty($u['email']) and empty($u['institution']) ) {
 				
+				//Get the entity_id for the anonymous entity
+				
+				$res = $this->query("SELECT e.id FROM entities e WHERE e.first_name = 'Anonymous'");
 				$user->Entity->inheritance_id = 2;
 
 			}
@@ -171,7 +170,7 @@ if($this->tableHasColumn('Collection', 'collector')) {
 		"SELECT 
 			c.id as relation_id, 
 			c.collector as entity, ".
-			COLLECTION_RELATION_INHERITANCE_ID." as inheritance_id
+			COLLECTION_INHERITANCE_ID." as inheritance_id
 		FROM collections c
 		");
 		
@@ -179,7 +178,7 @@ if($this->tableHasColumn('Collection', 'collector')) {
 		if(!empty($coll['entity'])) {
 			$entity = new Entity;
 			$entity->first_name = $coll['entity'];
-			$entity->inheritance_id = COLLECTION_RELATION_INHERITANCE_ID;
+			$entity->inheritance_id = COLLECTION_INHERITANCE_ID;
 			$entity->dumpSave();
 			
 			$sql = "INSERT INTO entities_relations 

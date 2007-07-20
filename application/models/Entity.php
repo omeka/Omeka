@@ -1,11 +1,6 @@
 <?php
 require_once 'EntitiesRelations.php';
 require_once 'User.php';
-
-define('ANONYMOUS_INHERITANCE_ID', 1);
-define('INSTITUTION_INHERITANCE_ID', 2);
-define('PERSON_INHERITANCE_ID', 3);
-
 /**
  * entity
  * @package: Omeka
@@ -30,7 +25,7 @@ class Entity extends Kea_Record
 		
 		$this->hasColumn('parent_id', 'integer');
 		
-		$this->hasColumn('inheritance_id', 'integer', 1, array('range'=>array('1')));
+		$this->hasColumn('type', 'string', 50, array('notblank'=>true));
 		
 //		$this->index('unique', array('fields'=>array('first_name', 'last_name', 'email', 'institution'), 'type'=>'unique'));
     }
@@ -38,6 +33,7 @@ class Entity extends Kea_Record
     public function setUp()
     {
 		$this->ownsMany('EntitiesRelations', 'EntitiesRelations.entity_id');
+		$this->ownsMany('Taggings', 'Taggings.entity_id');
 		$this->hasOne('User', 'User.entity_id');
 		$this->hasOne('Entity as Parent', 'Entity.parent_id');
     }
@@ -108,12 +104,12 @@ class Entity extends Kea_Record
 	
 	public function isPerson()
 	{
-		return $this->inheritance_id == PERSON_INHERITANCE_ID;
+		return $this->type == "Person";
 	}
 	
 	public function isInstitution()
 	{
-		return $this->inheritance_id == INSTITUTION_INHERITANCE_ID;
+		return $this->type == "Institution";
 	}
 	
 	/**
@@ -123,18 +119,18 @@ class Entity extends Kea_Record
 	 * @return string
 	 **/
 	public function getName() {
-		switch ($this->inheritance_id) {
-			case INSTITUTION_INHERITANCE_ID:
+		switch ($this->type) {
+			case "Institution":
 				return $this->institution;
 				break;
-			case PERSON_INHERITANCE_ID:
+			case "Person":
 				return implode(' ', array($this->first_name, $this->middle_name, $this->last_name));
 				break;
-			case ANONYMOUS_INHERITANCE_ID:
+			case "Anonymous":
 				return 'Anonymous';
 				break;
 			default:
-				throw new Exception( 'No inheritance_id!' );
+				throw new Exception( 'Entity does not have a type!' );
 				break;
 		}
 	}
@@ -142,10 +138,10 @@ class Entity extends Kea_Record
 	public function preSave()
 	{	
 		//@todo Remove this after upgrading Doctrine
-		if(!empty($this->institution) and ($this->inheritance_id == PERSON_INHERITANCE_ID)) {
+		if(!empty($this->institution) and ($this->isPerson())) {
 			$name = $this->institution;
 			$inst = $this->getTable('Institution')->findUniqueOrNew(array('institution'=>$name));
-			$inst->inheritance_id = INSTITUTION_INHERITANCE_ID;
+			$inst->type = "Institution";
 			$this->Parent = $inst;
 			$this->Parent->save();
 			$this->institution = NULL;

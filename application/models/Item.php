@@ -5,16 +5,18 @@ require_once 'User.php';
 require_once 'File.php';
 require_once 'Tag.php';
 require_once 'Taggable.php';
-require_once 'ItemsTags.php';
+require_once 'Taggings.php';
 require_once 'Metatext.php';
 require_once 'ItemsPages.php';
 require_once 'Section.php';
 require_once 'ItemsRelations.php';
 require_once 'Relatable.php';
+require_once 'ItemTable.php';
+require_once 'ItemTaggings.php';
+require_once 'ExhibitTaggings.php';
 /**
  * @package Omeka
  * 
- * @todo Create/modify the ItemTable::findAll() method (or all find methods) to check for ACL privileges and only return the Items that are public
  **/
 class Item extends Kea_Record
 {		
@@ -24,17 +26,18 @@ class Item extends Kea_Record
 	
 	protected $_metatext;
 	protected $_metafields;
-		
+			
 	public function setUp() {
 		$this->hasOne("Collection","Item.collection_id");
 		$this->hasOne("Type","Item.type_id");
-		$this->hasOne("User","Item.user_id");
 		$this->ownsMany("File as Files","File.item_id");
 		$this->ownsMany("Metatext", "Metatext.item_id");
-		$this->hasMany("Tag as Tags", "ItemsTags.tag_id");
-		$this->ownsMany("ItemsTags", "ItemsTags.item_id");
+		$this->ownsMany("ItemTaggings", "ItemTaggings.relation_id");
+	//	$this->hasMany("Tag as Tags", "ItemTaggings.tag_id");
 
 		$this->ownsMany("ItemsPages","ItemsPages.item_id");
+		
+		
 		
 		$this->ownsMany("ItemsRelations", "ItemsRelations.relation_id");
 //		$this->hasMany("SectionPage as ExhibitPages", "ItemsPages.page_id");
@@ -45,7 +48,7 @@ class Item extends Kea_Record
 	public function construct()
 	{
 		$this->_strategies[] = new Taggable($this);
-		$this->_strategies[] = new Relatable($this, ITEM_RELATION_INHERITANCE_ID);
+		$this->_strategies[] = new Relatable($this);
 	}
 	
 	public function setTableDefinition() {
@@ -80,7 +83,6 @@ class Item extends Kea_Record
 		$this->index('public', array('fields' => array('public')));
 		$this->index('type', array('fields' => array('type_id')));
 		$this->index('coll', array('fields' => array('collection_id')));
-		$this->index('user', array('fields' => array('user_id')));
 		
 		$this->index('search_all', array('fields' => array( 
 												'title', 
@@ -164,6 +166,9 @@ class Item extends Kea_Record
 			case 'modified':
 				return $this->timeOfLastRelationship($name);
 				break;
+				
+			case 'Tags':
+				return $this->getTags();
 			default:
 				return parent::get($name);
 				break;
@@ -460,7 +465,7 @@ class Item extends Kea_Record
 				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
 				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
 					$user = Kea::loggedIn();
-					$this->applyTagString($clean['tags'], $user->id);
+					$this->applyTagString($clean['tags'], $user);
 				}
 				
 				//If the item was made public, fire the plugin hook

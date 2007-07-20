@@ -20,7 +20,7 @@
 </ul>
 
 <?php 
-	select(array('name'=>'collectors[]', 'id'=>'collector'), $entities, null, 'Add a Collector (optional)', 'id', array('first_name', 'last_name', 'institution')); 
+	select(array('name'=>'collectors[]', 'id'=>'collector'), $entities, null, 'Add a Collector (optional)', 'id', 'name'); 
 ?>
 
 <div class="field">

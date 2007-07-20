@@ -44,7 +44,7 @@
 </script>
 <?php echo flash(); ?>
 <div class="field" id="entity-type">
-<?php radio('inheritance_id', array('2'=>'Institution','3'=>'Person'), $entity->inheritance_id); ?>
+<?php radio('type', array('Institution'=>'Institution','Person'=>'Person'), $entity->type); ?>
 </div>
 
 <div class="field">

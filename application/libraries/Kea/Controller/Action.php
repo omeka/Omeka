@@ -504,7 +504,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		}
 
 		$this->loadFormData();
-		$this->render($pluralName.'/add.php', compact($varName));			
+		return $this->render($pluralName.'/add.php', compact($varName));			
 
 	}
 	

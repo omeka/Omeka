@@ -1,7 +1,5 @@
 <?php
 require_once 'EntityRelationships.php';
-define('ITEM_RELATION_INHERITANCE_ID', 1);
-define('COLLECTION_RELATION_INHERITANCE_ID', 2);
 /**
  * ItemsPeople
  * @package: Omeka
@@ -13,10 +11,9 @@ class EntitiesRelations extends Kea_Record
 		$this->hasColumn('entity_id', 'integer', null, array('range'=>array('1')));
 		$this->hasColumn('relation_id', 'integer', null, array('range'=>array('1')));
 		$this->hasColumn('relationship_id', 'integer', null, array('range'=>array('1')));
-		$this->hasColumn('inheritance_id', 'integer', null, array('range'=>array('1')));
+		$this->hasColumn('type', 'string', 50, array('notblank'=>true));
 		$this->hasColumn('time', 'timestamp');
 		
-//		$this->index('unique', array('fields'=>array('entity_id', 'relation_id', 'inheritance_id'), 'type'=>'unique'))
     }
     public function setUp()
     {
@@ -24,6 +21,7 @@ class EntitiesRelations extends Kea_Record
 		$this->hasOne('EntityRelationships', 'EntitiesRelations.relationship_id');
     }
 
+	//@todo Move this to CURRENT_TIMESTAMP() SQL
 	public function preInsert()
 	{
 		$this->time = date('YmdHis');

@@ -278,7 +278,7 @@ class Zend_Db_Select {
      * @param array|string $cols The columns to select from the joined table.
      * @return Zend_Db_Select This Zend_Db_Select object.
      */
-    public function joinInner($name, $cond, $cols = null) 
+    public function innerJoin($name, $cond, $cols = null) 
     {
         return $this->_join('inner', $name, $cond, $cols);
     }

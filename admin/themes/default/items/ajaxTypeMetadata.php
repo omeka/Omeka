@@ -6,6 +6,5 @@
 	}else {
 		$item = _make_omeka_request('Items', 'add', array(), 'item');
 	}
-	
 	metatext_form($item,'textarea');
 ?>

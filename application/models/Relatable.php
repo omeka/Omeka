@@ -2,23 +2,26 @@
 /**
 * Relatable strategy
 */
-class Relatable	
+class Relatable	implements Kea_Strategy_Interface
 {
 	protected $record;
 	
-	public function __construct($record, $inheritance_id)
+	public function __construct($record)
 	{
 		$this->record = $record;
 		$this->relationshipsTable = $this->getTableName('EntityRelationships');
 		$this->joinTable = $this->getTableName('EntitiesRelations');
 		$this->entityTable = $this->getTableName('Entity');
-		$this->inheritance_id = $inheritance_id;
+		$this->type = get_class($record);
 	}
 	
 	public function __call($m, $a)
 	{
 		return call_user_func_array( array($this->record, $m), $a);
 	}
+	
+	public function onDelete() {}
+	public function onSave() {}
 	
 	/**
 	 * Get the last date the item was modified, etc.
@@ -30,13 +33,13 @@ class Relatable
 		$sql = "SELECT ie.time as time
 				FROM {$this->joinTable} ie 
 				JOIN {$this->relationshipsTable} er ON er.id = ie.relationship_id
-				WHERE ie.relation_id = ? AND er.name = ? AND ie.inheritance_id = ?
+				WHERE ie.relation_id = ? AND er.name = ? AND ie.type = ?
 				ORDER BY time DESC
 				LIMIT 1";
 		
 		$relation_id = $this->getRelationId();
 				
-		return $this->execute($sql, array($relation_id, $rel, $this->inheritance_id), true);
+		return $this->execute($sql, array($relation_id, $rel, $this->type), true);
 	}
 	
 	/**
@@ -50,9 +53,9 @@ class Relatable
 		"SELECT e.* FROM Entity e 
 		INNER JOIN e.EntitiesRelations r 
 		INNER JOIN r.EntityRelationships er
-		WHERE r.relation_id = ? AND r.inheritance_id = ? AND er.name = ?";
+		WHERE r.relation_id = ? AND r.type = ? AND er.name = ?";
 		
-		return $this->executeDql($dql, array($this->getRelationId(), $this->inheritance_id, $rel));
+		return $this->executeDql($dql, array($this->getRelationId(), $this->type, $rel));
 	}
 	
 	/**
@@ -73,11 +76,11 @@ class Relatable
 		}
 		
 		$sql = "INSERT INTO {$this->joinTable} 
-					(entity_id, relation_id, relationship_id, time, inheritance_id)
+					(entity_id, relation_id, relationship_id, time, type)
 				VALUES
 					(?, ?, ?, NOW(), ?)";
 					
-		return $this->execute($sql, array($entity_id, $relation_id, $relationship_id, $this->inheritance_id));				
+		return $this->execute($sql, array($entity_id, $relation_id, $relationship_id, $this->type));				
 	}
 	
 	public function removeRelatedTo($entity, $rel, $limit = null)
@@ -92,13 +95,13 @@ class Relatable
 		
 		$sql = 
 		"DELETE FROM {$this->joinTable}
-		WHERE entity_id = ? AND relation_id = ? AND relationship_id = ? AND inheritance_id = ?";
+		WHERE entity_id = ? AND relation_id = ? AND relationship_id = ? AND type = ?";
 		
 		if($limit) {
 			$sql .= " LIMIT $limit";
 		}
 		
-		return $this->execute($sql, array($entity_id, $relation_id, $relationship_id, $this->inheritance_id));
+		return $this->execute($sql, array($entity_id, $relation_id, $relationship_id, $this->type));
 		
 	}
 
@@ -127,13 +130,13 @@ class Relatable
 		$relation_id = $this->getRelationId();
 				
 		$select->from("{$this->joinTable} ie", "COUNT(ie.id)")
-				->joinInner("{$this->entityTable} e", "e.id = ie.entity_id")
+				->innerJoin("{$this->entityTable} e", "e.id = ie.entity_id")
 				->where("ie.relation_id = ?", $relation_id)
 				->where("ie.entity_id = ?", $entity_id)
-				->where("ie.inheritance_id = ?", $this->inheritance_id); 
+				->where("ie.type = ?", $this->type); 
 										
 		if(!empty($rel)) {
-			$select->joinInner("{$this->relationshipsTable} ier", "ier.id = ie.relationship_id");
+			$select->innerJoin("{$this->relationshipsTable} ier", "ier.id = ie.relationship_id");
 			$select->where("ier.name = ?", $rel);
 		}
 
