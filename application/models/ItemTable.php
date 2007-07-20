@@ -39,7 +39,7 @@ class ItemTable extends Doctrine_Table
 	//	echo $mSelect;
 		
 		//Put those results in the temp table
-		$insert = "REPLACE INTO temp_search (item_id) ".$mSelect;
+		$insert = "REPLACE INTO temp_search (item_id) ".$mSelect->__toString();
 		$conn->execute($insert);
 		
 	//	Zend::dump( $conn->execute("SELECT * FROM temp_search")->fetchAll() );exit;
