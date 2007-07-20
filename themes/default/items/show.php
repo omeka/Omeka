@@ -1,6 +1,6 @@
 <?php head(array('title' => 'Item'))?>
 
-<h2><?php echo $item->title; ?></h2>
+<h1><?php echo $item->title; ?></h1>
 
 <div id="core-metadata">
 
@@ -49,7 +49,7 @@
 
 </div>
 <div id="additional-metadata">
-	<h3>Type Metadata</h3>
+	<h3>Item Type: <?php echo $item->Type->name; ?></h3>
 	<div id="type-metadata">
 		<?php foreach($item->Metatext as $key => $metatext): ?>
 		<h4><?php echo $metatext->Metafield->name; ?></h4>

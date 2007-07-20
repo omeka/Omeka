@@ -1,4 +1,5 @@
-<?php head(); ?>	
+<?php head(); ?>
+
 	<div id="primary">
 		
 		<div id="site-info">
@@ -32,7 +33,7 @@
 		
 		<div id="recent-items">
 			<h2>Recently Added</h2>
-			<?php $items = recent_items(5); ?>
+			<?php $items = recent_items('5'); ?>
 			<ul>
 				<?php foreach( $items as $key => $item ): ?>
 					<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><span class="title"><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php  echo $item->title; ?></a></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></li>	

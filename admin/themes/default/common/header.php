@@ -25,18 +25,20 @@
 	<div id="wrap">
 		
 		<div id="header">
+			<h1 id="site-title"><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
+			
 			<div id="user-meta">Welcome, <?php echo current_user()->first_name; ?>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></div>
 			
-			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 			<ul id="primary-nav" class="navigation">
 			<?php
-				$header_navigation = array('Home' => uri(''),'Archive' => uri('items/browse'),'Exhibits' => uri('exhibits') );
+				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items/browse'),'Exhibits' => uri('exhibits/browse') );
 				if(has_permission('Users','browse') ) {
-					$header_navigation['Users'] = uri('users');
+					$header_navigation['Users'] = uri('users/browse');
 				}
 				if(has_permission('super')) {
-					$header_navigation['Settings'] = uri('settings');
+					$header_navigation['Settings'] = uri('settings/browse');
 				}
+				$header_navigation['Entities'] = uri('entities/browse');
 				nav($header_navigation);
 
 			?>

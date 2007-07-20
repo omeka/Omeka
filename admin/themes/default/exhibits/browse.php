@@ -12,12 +12,8 @@
 	});
 //]]>	
 </script>
-
-<ul id="tertiary-nav" class="navigation">
-	<?php 
-		nav(array('Browse Exhibits' => uri('exhibits/browse'), 'Add Exhibit' => uri('exhibits/add')));
-	?>
-</ul>
+<?php common('exhibits-nav'); ?>
+<div id="primary">
 <table id="exhibits">
 	<thead>
 	<tr>
@@ -45,5 +41,5 @@
 <?php endforeach; ?>
 </tbody>
 </table>
-
+</div>
 <?php foot(); ?>

@@ -2,7 +2,7 @@
 <?php common('archive-nav'); ?>
 
 <?php js('editable');?>
-
+<div id="primary">
 <div id="type-info">
 <h2>Type: <?php echo $type->name;?>
 	 <?php if ( has_permission('Types','edit') ): ?>
@@ -37,5 +37,6 @@
 	<p>There are no items with the type <?php echo $type->name; ?></p>
 	<?php endif;?>
 		
+</div>
 </div>
 <?php foot();?>

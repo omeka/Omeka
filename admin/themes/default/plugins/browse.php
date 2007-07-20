@@ -1,7 +1,7 @@
 <?php head(); ?>
 <?php common('settings-nav'); ?>
 
-	<div id="installed">
+<div id="primary">
 <h2>List of plugins:</h2>
 
 <table>

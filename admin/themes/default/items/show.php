@@ -70,6 +70,7 @@
 	        document.write('<style type="text/css">ul.items-nav{display: none;}</style>');
 	}*/
 </script>
+<div id="primary">
 <ul id="tertiary-nav" class="items-nav navigation">
 	<?php 
 		$tertiary_nav['Show Item'] = uri('items/show/'.$item->id);
@@ -90,7 +91,7 @@
 	
 	<h4>Description</h4>
 	<div id="description" class="editable" rel="textarea">
-	<?php display_empty($item->description); ?>
+	<?php display_empty($item->description,"No description available."); ?>
 	</div>
 	
 	<h4>Publisher</h4>
@@ -237,5 +238,5 @@
 </div>
 
 <?php endif;?>
-
+</div>
 <?php foot();?>

@@ -1,5 +1,6 @@
 <?php head();?>
 <?php common('archive-nav'); ?>
+<div id="primary">
 <h2>Edit &#8220;<?php echo $item->title; ?>&#8221;</h2>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
@@ -22,4 +23,5 @@
 <form action="<?php echo uri('items/delete/'.$item->id); ?>" method="post" accept-charset="utf-8">
 	<input type="submit" name="delete_item" id="delete_item" value="Delete This Item" />
 </form>
+</div>
 <?php foot();?>

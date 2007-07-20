@@ -24,12 +24,6 @@
 		<div id="header">
 			<div class="padding">
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
-			<ul id="primary-nav" class="navigation">
-			<?php
-				nav(array('Items' => uri('items/browse'), 'Collections' => uri('collections'),'Exhibits' => uri('exhibits')));
-
-			?>
-			</ul>
 			</div>
 		</div>
 		<div id="content">

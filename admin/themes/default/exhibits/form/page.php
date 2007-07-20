@@ -27,7 +27,8 @@
 	});
 </script>
 <?php js('exhibits'); ?>
-
+<?php common('exhibits-nav'); ?>
+<div id="primary">
 <?php if ( empty($page->layout) ): ?>
 
 <h2>Choose a layout for the page</h2>
@@ -121,5 +122,5 @@
 	<?php endif; ?>
 
 <?php endif; ?>
-
+</div>
 <?php foot(); ?>

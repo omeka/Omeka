@@ -2,10 +2,13 @@
 <h1>Browse</h1>
 <?php echo pagination(); ?>
 <div id="primary">
-<?php 
-display_item_list($items,false,false); 
-?>
 
+<?php foreach($items as $item): ?>
+
+<h2><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo $item->title; ?></a></h2>
+<p><?php echo $item->description; ?></p>
+
+<?php endforeach; ?>
 </div>
 <div id="secondary">
 	<form id="search">

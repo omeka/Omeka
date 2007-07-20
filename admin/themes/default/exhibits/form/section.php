@@ -19,7 +19,8 @@
 		};
 	});
 </script>
-
+<?php common('exhibits-nav'); ?>
+<div id="primary">
 <h2>Provide title &amp; description for the section</h2>
 
 <?php 
@@ -74,5 +75,5 @@
 		<input type="submit" name="submit" value="Delete this Section --&gt;" />
 	</form>
 <?php endif; ?>
-
+</div>
 <?php foot(); ?>

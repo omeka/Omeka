@@ -1,5 +1,6 @@
 <?php head();?>
 <?php common('archive-nav'); ?>
+<div id="primary">
 <ul id="tertiary-nav" class="navigation">
 	<?php
 	 	$tertiary_nav['Browse Items'] = uri('items');
@@ -16,4 +17,5 @@
 	<input type="submit" name="submit" value="Add Item" />
 	</fieldset>
 </form>
+</div>
 <?php foot();?>

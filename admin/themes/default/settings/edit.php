@@ -1,5 +1,6 @@
 <?php head(); ?>
 <?php common('settings-nav'); ?>
+<div id="primary">
 <?php echo flash(); ?>
 <h2>Edit Settings</h2>
 
@@ -37,5 +38,5 @@
 	<?php //submit('Edit Settings','submit'); ?>
 	</fieldset>
 </form>
-
+</div>
 <?php foot(); ?>

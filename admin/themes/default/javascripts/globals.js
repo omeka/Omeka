@@ -8,5 +8,17 @@ function alertBox() {
 		//return;
 	}
 }
+function toggleSearch() {
+	var search = $('search');
+	search.hide();
+	var searchHeader = $('search-header');
+	searchHeader.style.cursor = "pointer";
+	searchHeader.onclick = function() {
+		search.toggle();
+		searchHeader.toggleClassName('open','close');
+		return false;
+	}
+}
 
+Event.observe(window,'load',toggleSearch);
 Event.observe(window,'load',alertBox);

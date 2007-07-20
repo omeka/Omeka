@@ -1,11 +1,13 @@
 <?php head();?>
-<ul id="tertiary-nav" class="navigation">
+<ul id="secondary-nav" class="navigation">
 	<?php 
 		if(has_permission('Users','add')) {
 			nav(array('Browse Users' => uri('users/browse'), 'Add User' => uri('users/add')));
 		}
 	?>
 </ul>
+<div id="primary">
+
 <h2>Users</h2>
 <ul id="tertiary-nav" class="navigation">
 	<?php 
@@ -39,4 +41,5 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+</div>
 <?php foot();?>

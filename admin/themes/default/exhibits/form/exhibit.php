@@ -40,8 +40,8 @@
 */	
 	});
 </script>
-
-
+<?php common('exhibits-nav'); ?>
+<div id="primary">
 <form id="exhibit-form" method="post">
 	<fieldset>
 		<legend>Exhibit Metadata</legend>
@@ -85,5 +85,5 @@
 			submit('Add a New Section to the Exhibit', 'add_section');
 		?>
 </form>		
-
+</div>
 <?php foot(); ?>

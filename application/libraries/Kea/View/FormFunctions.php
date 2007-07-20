@@ -233,37 +233,38 @@
 		?>
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
 			<fieldset>
-				<?php 
-					checkbox(array('name'=>'recent'), $_REQUEST['recent'], null, 'View Most Recent Items'); 
-				?>
+				<legend>Search for Items</legend>
+				<input type="text" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
+				<input type="submit" name="submit_search" value="Search" />
 			</fieldset>
 			
 			<fieldset>
+				<legend>Narrow Your Search</legend>
+				<div id="search-selects">
 			<?php 
 				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Filter by Collection', 'id', 'name');
 				select(array('name'=>'type'), types(), $_REQUEST['type'], 'Filter by Type', 'id', 'name'); 
 			?>
-			<label>Filter by Tags<input type="text" name="tags" value="<?php echo $_REQUEST['tags']; ?>" /></label>
-			</fieldset>
-			
-			<fieldset>
-			<?php 
-				checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
-				checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
-			?>
-			</fieldset>
-			
 			<?php if(has_permission('Users', 'browse')): ?>
-			<fieldset>
 			<?php 
 				 select(array('name'=>'user'), users(), $_REQUEST['user'], 'Filter By User', 'id', array('first_name', 'last_name'));
 			?>
-			</fieldset>
 			<?php endif; ?>
+			<label>Filter by Tags<input type="text" name="tags" value="<?php echo $_REQUEST['tags']; ?>" /></label>
+			</div>
+			<div id="search-checkboxes">
+			<?php 
+				checkbox(array('name'=>'recent'), $_REQUEST['recent'], null, 'Recent Items');
+				checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
+				checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
+			?>
+			</div>
+			</fieldset>
+			
+
 			
 			<fieldset>
-			<input type="text" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
-			<input type="submit" name="submit_search" value="Search" />
+
 			</fieldset>
 		</form><?php
 	}

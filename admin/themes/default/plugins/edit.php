@@ -1,6 +1,6 @@
 <?php head(); ?>
 <?php common('settings-nav'); ?>
-
+<div id="primary">
 <h2><?php echo $plugin->name;?></h2>
 
 <form method="post">
@@ -19,5 +19,5 @@
 <input type="submit" name="submit" value="submit" />
 
 </form>
-
+</div>
 <?php foot(); ?>

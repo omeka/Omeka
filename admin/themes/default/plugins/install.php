@@ -1,5 +1,7 @@
 <?php head(); ?>
 
+<?php common('settings-nav'); ?>
+<div id="primary">
 <h2>Install the <?php echo get_class($plugin); ?> Plugin</h2>
 
 <?php 
@@ -30,5 +32,5 @@
 		<input type="submit" name="submit" value="Install this plugin --&gt;" />
 	</fieldset>
 </form>
-
+</div>
 <?php foot(); ?>

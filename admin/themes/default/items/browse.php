@@ -1,6 +1,7 @@
 <?php head(); ?>
-
 <?php common('archive-nav'); ?>
+
+<div id="primary">
 <ul id="tertiary-nav" class="navigation">
 	<?php 
 		if(has_permission('Items','add')) {
@@ -8,57 +9,43 @@
 		}
 	?>
 </ul>
-<?php echo flash(); ?>
-
 <?php if ( total_results(true) ): ?>
 
-	<h2>Browse Items (<?php echo total_results(true);?> items total)</h2>
-	<div class="archive-meta">
-		<?php items_filter_form(array('id'=>'search'), uri('items/browse')); ?>
-		<div class="pagination"><?php echo pagination(); ?></div>
-	</div>
+<h1>Browse Items (<?php echo total_results(true);?> items total)</h1>
 
-	<table id="items" cellspacing="0" cellpadding="0">
-		<thead>
-			<tr>
-			<th scope="col">ID</th>
-			<th scope="col">Title</th>
-			<th scope="col">Type</th>
-			<th scope="col">Creator</th>
-			<th scope="col">Date Added</th>
-			<th scope="col">Is Public</th>
-			<?php if ( has_permission('Items','edit') ): ?>
-				<th scope="col">Edit</th>	
-			<?php endif; ?>
-			</tr>
-		</thead>
-		<tbody>
-	<?php foreach($items as $key => $item): ?>
-	<tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
-		<td scope="row"><?php echo $item->id;?></td> 
-		<td><?php link_to_item($item, 'show'); ?></td>
-		<td><?php echo $item->Type->name; ?></td>
-		<td><?php echo $item->creator; ?></td>	
-		<td><?php echo date('m.d.Y', strtotime($item->added)); ?></td>
-		<td><?php echo ($item->public) ? 'Public' : 'Not Public'; ?></td>
-		<?php if ( has_permission('Items','edit') ): ?>
-			<td><?php link_to_item($item, 'edit', '[Edit]'); ?></td>
-		<?php endif; ?>
-	</tr>
-	<?php endforeach; ?>
-	</tbody>
-	</table>
+<h2 id="search-header" class="close">Search Items</h2>
+<?php include('searchform.php'); ?>
+
+	<div class="pagination"><?php echo pagination(); ?></div>
+
+<ul class="navigation" id="view-style">
+	<li><a id="detailed" href="?view=detailed"<?php if($_GET['view'] == 'detailed' || $_GET['view'] == '') echo ' class="current"';?>>Detailed</a></li>
+	<li><a id="simple" href="?view=simple"<?php if($_GET['view'] == 'simple') echo ' class="current"';?>>Simple</a></li>
+</ul>	
+
+<div id="view-choice">
+<?php if($_GET['view'] == 'detailed' || $_GET['view'] == ''):?>
+	<?php include('detailed-view.php'); ?>
+<?php elseif($_GET['view'] == 'simple'):?>
+	<?php include('simple-view.php'); ?>
+<?php endif; ?>
+</div>
 
 <?php elseif(!total_items(true)): ?>
+	<div id="no-items">
 	<h2>There are no items in the archive yet.
 	
 	<?php if(has_permission('Items','add')): ?>
 		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?</h2>
 	<?php endif; ?>
+</div>
 	
 <?php else: ?>
 	<h2>The query searched <?php total_items(); ?> items and returned no results.</h2>
+	
+	<h2 id="search-header" class="close">Search Items</h2>
+	<?php include('searchform.php'); ?>
 <?php endif; ?>
 
-
+</div>
 <?php foot(); ?>

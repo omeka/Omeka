@@ -957,14 +957,17 @@ function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $
 		$html .= '</select>';
 
 		return $html;
+		
 	}
 	
 	//Adapted from PHP.net: http://us.php.net/manual/en/function.nl2br.php#73479
 	function nls2p($str)
 	{
+		
 	  return str_replace('<p></p>', '', '<p>'
 	        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)
 	        . '</p>');
+	
 	}
 	
 	function snippet($text, $start_pos, $end_pos, $append = '...')
@@ -976,4 +979,5 @@ function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $
 			return  $snippet . $append; 
 		}
 	}
+
 ?>
