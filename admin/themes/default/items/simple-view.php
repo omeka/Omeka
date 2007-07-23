@@ -18,8 +18,10 @@
 	<td><?php echo $item->Type->name; ?></td>
 	<td><?php echo $item->creator; ?></td>	
 	<td><?php echo date('m.d.Y', strtotime($item->added)); ?></td>
-	<td><?php checkbox('public'); ?></td>
-	<td><?php checkbox('featured'); ?></td>
+	<td><?php checkbox(array('name'=>"items[$item->id][public]"), $item->public); ?></td>
+	<td><?php checkbox(array('name'=>"items[$item->id][featured]"), $item->featured); ?>
+		<?php hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>
+	</td>
 </tr>
 <?php endforeach; ?>
 </tbody>

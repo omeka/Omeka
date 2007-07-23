@@ -238,11 +238,51 @@ class ItemsController extends Kea_Controller_Action
 	}
 	
 	/**
-	 * Will remove all instances of a particular tag from a particular Item
-	 * Checks for $_POST key with name = 'remove_tag' and value = tag ID
-	 *
-	 * @return bool
+	 * 
+	 * @since Supports public and featured changes on items
+	 * @return void
 	 **/
+	public function powerEditAction()
+	{
+		/*POST in this format:
+		 			items[1][public],
+		 			items[1][featured],
+					items[1][id],
+					items[2]...etc
+		*/
+		if(empty($_POST)) {
+			$this->_redirect('items/browse');
+		}
+		
+		
+		if(!$this->isAllowed('makePublic')) {
+			throw new Exception( 'User is not allowed to modify visibility of items.' );
+		}
+
+		if(!$this->isAllowed('makeFeatured')) {
+			throw new Exception( 'User is not allowed to modify' );
+		}
+		
+		if($item_a = $this->_getParam('items')) {
+									
+			//Loop through the IDs given and toggle
+			foreach ($item_a as $k => $fields) {
+
+				$item = $this->findById($fields['id']);
+	
+				//Process the public field
+								
+				//If public has been checked
+				$item->public = array_key_exists('public', $fields);
+				
+				$item->featured = array_key_exists('featured', $fields);
+								
+				$item->save();
+			}		
+		}
+		
+		$this->_redirect('items/browse');
+	}
 	
 }
 ?>

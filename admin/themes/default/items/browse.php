@@ -23,13 +23,19 @@
 	<li><a id="simple" href="?view=simple"<?php if($_GET['view'] == 'simple') echo ' class="current"';?>>Simple</a></li>
 </ul>	
 
-<div id="view-choice">
-<?php if($_GET['view'] == 'detailed' || $_GET['view'] == ''):?>
-	<?php include('detailed-view.php'); ?>
-<?php elseif($_GET['view'] == 'simple'):?>
-	<?php include('simple-view.php'); ?>
-<?php endif; ?>
-</div>
+<form action="<?php echo uri('items/powerEdit'); ?>" method="post" accept-charset="utf-8">
+	
+	<div id="view-choice">
+	<?php if($_GET['view'] == 'detailed' || $_GET['view'] == ''):?>
+		<?php include('detailed-view.php'); ?>
+	<?php elseif($_GET['view'] == 'simple'):?>
+		<?php include('simple-view.php'); ?>
+	<?php endif; ?>
+	</div>
+
+<input type="submit" name="submit" value="Modify these Items --&gt;">
+
+</form>
 
 <?php elseif(!total_items(true)): ?>
 	<div id="no-items">
