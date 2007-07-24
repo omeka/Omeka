@@ -234,7 +234,7 @@ function common($file, $vars = array(), $dir = 'common') {
 		include $path;
 	}else {			
 		//Grab the view paths for the plugins and then append the path for the shared directory
-		$paths = Zend::Registry( 'plugin_view_paths' );
+		$paths = Zend::isRegistered('plugin_view_paths') ? Zend::Registry( 'plugin_view_paths' ) : array();
 		$paths = array_merge( array( SHARED_DIR => WEB_SHARED ), $paths);
 
 		foreach ($paths as $physicalPath => $webPath) {
