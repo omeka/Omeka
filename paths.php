@@ -1,5 +1,5 @@
 <?php
-define('OMEKA_MIGRATION', 3);
+define('OMEKA_MIGRATION', 4);
 define('OMEKA_VERSION', 'v0.15r1');
 
 // Define some primitive settings

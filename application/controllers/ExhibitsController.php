@@ -87,34 +87,23 @@ class ExhibitsController extends Kea_Controller_Action
 	public function showAction()
 	{		
 		$exhibit = $this->findBySlug();
-				
+
 		if(!$exhibit) {
 			throw new Exception( 'Exhibit with that ID does not exist.' );
 		}
 		
-//		$theme = $exhibit->theme;
-		
-		$section_order = $this->_getParam('section_order');
-				
-		if(!$section_order) {
-			throw new Exception( 'Please update your routes.ini file.' );
-			$this->_redirect('404');
-		}
-		$section = $exhibit->getSection($section_order);
+		$section = $this->_getParam('section');
+
+		$section = $exhibit->getSection($section);
 		
 		if($section) {
-			$page_order = $this->_getParam('page_order');
+			$page_order = $this->_getParam('page');
 
 			$page = $section->getPage($page_order);			
 		}
 		
 		$layout = $page->layout;
-		
-/*		if(!$exhibit) {
-			$this->errorAction();
-			return;
-		}
-*/		
+
 		if(!$section) {
 			$this->flash('This section does not exist for this exhibit.');
 		}
@@ -506,6 +495,44 @@ class ExhibitsController extends Kea_Controller_Action
 		$page->delete();
 		
 		$this->_redirect('editSection', array('id' => $section->id) );
+	}
+	
+	
+	/**
+	 * The route exhibits/whatever can be one of three things: 
+	 *	built-in controller action
+	 *	static page
+	 *	exhibit slug
+	 *
+	 *	Unfortunately we have no way of knowing which one it is without a complicated database/filesystem check,
+	 *	so it can't go in the routes file (at least not in any way I've been able to figure out) -- Kris
+	 * 
+	 * @return void
+	 **/
+	public function routeSimpleAction()
+	{
+		//Check if it is a built in controller action
+		$slug = strtolower($this->_getParam('slug'));
+		
+		$action = $slug . 'Action';
+		
+		if(method_exists($this, $action)) {
+			return $this->_forward('exhibits', $slug, $this->_getAllParams());
+			exit;
+		}
+		
+		//Check if it is a static page
+		$page = $slug . '.php';
+		
+		//Try to render, invalid pages will be caught as exceptions
+		try {
+			return $this->render('exhibits' . DIRECTORY_SEPARATOR . $page);
+		} catch (Zend_View_Exception $e) {}
+		
+		
+		//Otherwise this is a slug for an Exhibit
+		
+		$this->_forward('exhibits', 'summary', $this->_getAllParams());
 	}
 } 
 ?>

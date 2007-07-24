@@ -57,6 +57,18 @@ class Exhibit extends Kea_Record
 		$this->_strategies[] = new Taggable($this);
 	}
 	
+	public function generateSlug($title)
+	{
+		//Convert the title of the exhibit to a usable slug
+		$slug = $title;
+		
+		//Replace prohibited characters in the title with - 's
+		$prohibited = array(':', '/', ' ', '.');
+		$replace = array_fill(0, count($prohibited), '-');
+		$slug = str_replace($prohibited, $replace, strtolower($slug) );
+		return $slug;
+	}
+	
 	protected function preCommitForm(&$post, $options)
 	{					
 		//Whether or not the exhibit is featured
@@ -72,18 +84,9 @@ class Exhibit extends Kea_Record
 		}		
 		
 		//Make an exhibit slug if the posted slug is empty
-		if(empty($post['slug'])) {
-			
-			//Convert the title of the exhibit to a usable slug
-			$slug = $post['title'];
-			
-			//Replace prohibited characters in the title with - 's
-			$prohibited = array(':', '/', ' ', '.');
-			$replace = array_fill(0, count($prohibited), '-');
-			$slug = str_replace($prohibited, $replace, strtolower($slug) );
-			
-			$post['slug'] = $slug;
-		}
+		//This is duplicated exactly in the Section class
+		$slugFodder = !empty($post['slug']) ? $post['slug'] : $post['title'];
+		$post['slug'] = $this->generateSlug($post['title']);
 	}
 	
 	protected function postCommitForm($post, $options)
@@ -117,12 +120,10 @@ class Exhibit extends Kea_Record
 		$this->Sections = $sections;
 	}
 	
-	public function getSection($order)
+	public function getSection($slug)
 	{
-		$dql = "SELECT s.* FROM Section s LEFT JOIN s.Pages p WHERE s.order = ? AND s.exhibit_id = ?";
-		$q = new Doctrine_Query;
-		$q->parseQuery($dql);
-		return $q->execute(array($order,$this->id))->getFirst();
+		$dql = "SELECT s.* FROM Section s LEFT JOIN s.Pages p WHERE s.slug = ? AND s.exhibit_id = ? LIMIT 1";
+        return $this->executeDql($dql, array( strtolower($slug), $this->id), true);	
 	}
 	
 	/**
@@ -133,9 +134,7 @@ class Exhibit extends Kea_Record
 	public function getSectionCount()
 	{
 		$sql = "SELECT COUNT(*) FROM sections WHERE exhibit_id = ?";
-		$res = $this->getTable()->getConnection()->execute($sql,array($this->id));
-		$count = $res->fetch();
-		return $count[0];
+		return $this->execute($sql, array($this->id), true);
 	}
 }
 

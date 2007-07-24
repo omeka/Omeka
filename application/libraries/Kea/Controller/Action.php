@@ -639,6 +639,17 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	}
 	
 	/**
+	 * @since 7-24-07 Supports detection of Prototype AJAX requests
+	 * @link http://www.sitepoint.com/article/painless-javascript-prototype/4
+	 * @return bool
+	 **/
+	protected function isAjaxRequest()
+	{
+ 		return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+     		$_SERVER ['HTTP_X_REQUESTED_WITH']  == 'XMLHttpRequest';
+	}
+	
+	/**
 	 * Overridden to support requests that only want to return data and not spit out pages
 	 *
 	 **/

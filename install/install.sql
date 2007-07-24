@@ -409,7 +409,9 @@ CREATE TABLE IF NOT EXISTS `sections` (
   `description` text ,
   `exhibit_id` bigint(20) NOT NULL,
   `section_order` bigint(20) NOT NULL,
-  PRIMARY KEY  (`id`)
+  `slug` varchar(30) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `slug` (`slug`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------

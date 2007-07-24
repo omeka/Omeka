@@ -151,15 +151,29 @@ class Kea_View extends Zend_View_Abstract
 	 */
 	public function _run() {
 		extract($this->getVars());
+	
+		try {
+			include func_get_arg(0);
 		
-		include func_get_arg(0);
+			//Prototype.js doesn't recognize JSON unless the header is X-JSON: {json} all on one line [KK]
+			if($this->getRequest()->getParam('output') == 'json') {
+				$config = Zend::registry('config_ini');
+				if (!(boolean) $config->debug->json) {
+					$json = ob_get_clean();
+					header("X-JSON: $json");
+				}
+			}
 		
-		//Prototype.js doesn't recognize JSON unless the header is X-JSON: {json} all on one line [KK]
-		if($this->getRequest()->getParam('output') == 'json') {
-			$config = Zend::registry('config_ini');
-			if (!(boolean) $config->debug->json) {
-				$json = ob_get_clean();
-				header("X-JSON: $json");
+		} catch (Exception $e) {
+			
+			/* Exceptions should not be uncaught at this stage of execution
+				This is b/c the only PHP executed beyond this point are theme functions */
+			echo 'Error:' . $e->getMessage();
+			
+			$config = Zend::Registry( 'config_ini' );
+			//Display a lot of info if exceptions are turned on
+			if($config->debug->exceptions) {	
+				echo nl2br( $e->getTraceAsString() );
 			}
 		}
 	}
@@ -174,22 +188,7 @@ class Kea_View extends Zend_View_Abstract
 	{
 		require_once 'Kea/View/Functions.php';
 		
-		try {
-			// do the normal rendering
-			$result = parent::render($file);
-		} catch (Exception $e) {
-			
-			/* Exceptions should not be uncaught at this stage of execution
-				This is b/c the only PHP executed beyond this point are theme functions */
-			echo 'Error:' . $e->getMessage();
-			
-			$config = Zend::Registry( 'config_ini' );
-			//Display a lot of info if exceptions are turned on
-			if($config->debug->exceptions) {	
-				echo nl2br( $e->getTraceAsString() );
-			}
-		}
-		return $result;
+		return parent::render($file);
 	}
 
 }

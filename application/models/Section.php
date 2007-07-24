@@ -14,7 +14,7 @@ class Section extends Kea_Record
 		$this->hasColumn("description", "string");
 		$this->hasColumn("exhibit_id", "integer",null,"notnull");
 		$this->hasColumn("section_order as order", "integer", null,"notnull");
-		
+		$this->hasColumn('slug', 'string', null, "notblank");
 //		$this->index('exhibit_section', array('fields'=>array('exhibit_id', 'section_order'), 'type'=>'unique'));
     }
     public function setUp()
@@ -31,6 +31,18 @@ class Section extends Kea_Record
 		$retVal = parent::delete();
 		
 		$exhibit->reorderSections();
+	}
+	
+	/**
+	 * @since 7-24-07 Now with slugs!
+	 *
+	 **/
+	protected function preCommitForm(&$post, $options)
+	{
+		//We need to make a slug for this section
+		$slugFodder = !empty($post['slug']) ? $post['slug'] : $post['title'];
+		
+		$post['slug'] = $this->Exhibit->generateSlug($slugFodder);
 	}
 
 	protected function postCommitForm($post, $options)
@@ -76,9 +88,7 @@ class Section extends Kea_Record
 	public function getPage($order)
 	{
 		$dql = "SELECT p.* FROM SectionPage p WHERE p.order = ? AND p.section_id = ?";
-		$q = new Doctrine_Query;
-		$q->parseQuery($dql);
-		return $q->execute(array($order,$this->id))->getFirst();
+		return $this->executeDql($dql, array($order,$this->id), true);
 	}
 }
 

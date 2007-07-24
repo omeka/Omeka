@@ -2,10 +2,8 @@
 ///// EXHIBIT FUNCTIONS /////
 
 function link_to_exhibit($exhibit, $section=null, $page = null)
-{
-	$slug = $exhibit->slug;
-	
-	$uri = 'exhibits/show/' . $slug . '/' . ( !empty($section) ? $section . (!empty($page) ? '/' . $page : ''): '');
+{	
+	$uri = 'exhibits/' . $exhibit->slug . '/' . ( !empty($section) ? $section . (!empty($page) ? '/' . $page : ''): '');
 	
 	echo '<a href="'.uri($uri).'">' . $exhibit->title . '</a>';
 }
@@ -45,7 +43,7 @@ function exhibit_item_uri($item, $exhibit=null, $section=null)
 		$section = Zend::Registry( 'section' );
 	}
 	
-	return uri('exhibits/show/' . $exhibit->slug . '/' . $section->order . '/item/' . $item->id);
+	return uri('exhibits/' . $exhibit->slug . '/' . $section->slug . '/item/' . $item->id);
 }
 
 function exhibits($params = array()) {
