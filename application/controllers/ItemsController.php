@@ -154,8 +154,7 @@ class ItemsController extends Kea_Controller_Action
 		 * 
 		 **/
 		$paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
-		$options = array(	'num_links'=>	5, 
-							'per_page'=>	10,
+		$options = array(	'per_page'=>	10,
 							'page'		=> 	1,
 							'pagination_url' => $paginationUrl);
 							
@@ -164,17 +163,29 @@ class ItemsController extends Kea_Controller_Action
 		
 		$options = array_merge($options, $reqOptions);
 		
+		$config_ini = Zend::Registry('config_ini');
+
+		if ($config_ini->pagination->per_page)
+		{
+			$per_page = $config_ini->pagination->per_page;
+		} else {
+			echo "copy your config.ini.changeme file over to the config.ini file in the application/config directory";
+		}
 		
 		$params['page'] = $options['page'];
 		$params['per_page'] = $options['per_page'];
+		
+		if($per_page = $this->_getParam('per_page')) {
+			$params['per_page'] = $per_page;
+		}
 		
 		//Retrieve the items themselves
 		$items = $this->getTable('Item')->findBy($params);
 
 		//Serve up the pagination
 		require_once 'Kea/View/Functions.php';
-		$pagination = pagination($options['page'], $options['per_page'], $total_results, $options['num_links'], $options['pagination_url']);
-		Zend::register('pagination', $pagination);	
+		$pagination = array('menu'=>$menu, 'page'=>$options['page'], 'per_page'=>$params['per_page'], 'total_results'=>$total_results, 'link'=>$options['pagination_url']);
+		Zend::register('pagination', $pagination);
 		
 		$this->pluginHook('onBrowseItems', array($items));
 		

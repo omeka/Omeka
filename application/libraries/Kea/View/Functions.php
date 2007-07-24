@@ -871,21 +871,41 @@ function archive_image( $record, $props, $width, $height, $abs, $web,$return)
  *	The pagination function from the old version of the software
  *  It looks more complicated than it might need to be, but its also more flexible.  We may decide to simplify it later
  */
-function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $link=null, $page_query = null )
+function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page = null, $total_results=null, $link=null, $page_query = null )
 {
+	
 	//If no args passed, retrieve the stored 'pagination' value
-	if(!count(func_get_args())) {
-		if(Zend::isRegistered('pagination')) {
-			$p = Zend::Registry( 'pagination' );
-			return $p;
+	if(Zend::isRegistered('pagination')) {
+		$p = Zend::Registry( 'pagination' );
+	}
+	
+	if(empty($per_page)) {
+		$per_page = $p['per_page'];
+	} 
+	if(empty($num_links)) {
+		$num_links = $p['num_links'];
+	}
+	if(empty($total_results)) {
+		$total_results = $p['total_results'];
+	}
+	if(empty($page)) {
+		$page = $p['page'];
+	}
+	if(empty($link)) {
+		$link = $p['link'];
+	}
+	
+	if($total_results <= $per_page) {
+		//return "&nbsp;";
+		if ($page != 1) {
+			if (!$per_page = null) {
+				$link = $link . '?per_page=' . $per_page;
+			}
+			header("Location: $link");
 		}
 	}
-	
-	if($total <= $per_page) {
-		return "&nbsp;";
-	}
-	
-		$num_pages = ceil( $total / $per_page );
+
+		$num_pages = ceil( $total_results / $per_page );
 		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;
 				
 		$query = !empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : null;
@@ -907,7 +927,7 @@ function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $
 		}
 
 		//We don't have enough for pagination
-		if($total < $per_page) {
+		if($total_results < $per_page) {
 			$html = '';
 		}else {
 			$html = ' <a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a> |';
@@ -947,17 +967,18 @@ function pagination( $page = 1, $per_page = 10, $total=null, $num_links= null, $
 
 		$html .= ' <a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a> ';
 
-		$html .= '<select class="pagination-link" onchange="location.href = \''.$link. str_replace('%PAGE%', '\' + this.value + \'', $pattern) .'\'">'; 
-		$html .= '<option>Page:&nbsp;&nbsp;</option>';
-		for( $i = 0; $i < $num_pages; $i++ ) {
-			$html .= '<option value="' . ($i + 1) . '"';
-			//if( $page == ($i+1) ) $html .= ' selected ';
-			$html .= '>' . ($i + 1) . '</option>';
+	
+		if ($menu) {
+			$html .= '<select class="pagination-link" onchange="location.href = \''.$link . $page . '?per_page=' . ('\' + this.value + \'') .'\'">';
+			$html .= '<option>Results Per Page:&nbsp;</option>';
+			$per_page_limits = array(10, 25, 50);
+			foreach ($per_page_limits as $per_page_limit) {
+				$html .= '<option value="' . $per_page_limit . '"';
+				$html .= '>' . $per_page_limit . ' results' . '</option>';
+			}
+			$html .= '</select>';
 		}
-		$html .= '</select>';
-
-		return $html;
-		
+		return $html;		
 	}
 	
 	//Adapted from PHP.net: http://us.php.net/manual/en/function.nl2br.php#73479

@@ -16,7 +16,7 @@
 <h2 id="search-header" class="close">Search Items</h2>
 <?php include('searchform.php'); ?>
 
-	<div class="pagination"><?php echo pagination(); ?></div>
+	<div class="pagination"><?php echo pagination_links(); ?></div>
 
 <ul class="navigation" id="view-style">
 	<li><a id="detailed" href="?view=detailed"<?php if($_GET['view'] == 'detailed' || $_GET['view'] == '') echo ' class="current"';?>>Detailed</a></li>
