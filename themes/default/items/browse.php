@@ -1,6 +1,6 @@
 <?php head(); ?>
 <h1>Browse</h1>
-<?php echo pagination(); ?>
+<?php echo pagination_links(); ?>
 <div id="primary">
 
 <?php foreach($items as $item): ?>

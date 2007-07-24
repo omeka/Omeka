@@ -68,7 +68,7 @@
 	<div id="item-select">
 		<div id="pagination">
 		<?php 
-			 echo pagination(); 
+			 echo pagination_links(); 
 		?>
 		<p class="warning">(Warning: You must save the form before paginating through the items otherwise its contents may be erased)</p>
 		</div>

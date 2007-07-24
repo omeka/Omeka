@@ -8,7 +8,7 @@
 	?>
 	<div id="pagination">
 	<?php 
-		 echo pagination(); 
+		 echo pagination_links(); 
 	?>
 		</div>
 		
