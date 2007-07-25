@@ -1,5 +1,11 @@
 <?php 
-require_once 'EntitiesRelations.php';
+define('ITEM_INHERITANCE_ID', 1);
+define('COLLECTION_INHERITANCE_ID', 2);
+
+define('ANONYMOUS_INHERITANCE_ID', 1);
+define('INSTITUTION_INHERITANCE_ID', 2);
+define('PERSON_INHERITANCE_ID', 3);
+
 //Convert the users table to entities table
 
 /* 1) Make 'entities' table if not exists, add 'entity_id' field to Users table
@@ -12,20 +18,21 @@ require_once 'EntitiesRelations.php';
 
 //Build 'entities' table
 if(!$this->hasTable('Entity')) {
-	require_once 'Entity.php';
-	//Export and add constraints
-	$this->getTable('Entity')->export();
-/*
-		$this->query(
-		"ALTER TABLE `entities` ADD UNIQUE `person` (`last_name` ( 75 ) , `first_name` ( 50 ) , `email` ( 75 ) , `middle_name` ( 30 ) ) ;
-		ALTER TABLE `entities` ADD UNIQUE `institution` ( `institution` ( 255 ) ); ");
-*/	
-		
-	//Create the anonymous entity
-	$e = new Entity;
-	$e->first_name = 'Anonymous';
-	$e->inheritance_id = 1;
-	$e->save();
+	
+	$this->query("CREATE TABLE IF NOT EXISTS `entities` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `first_name` text ,
+  `middle_name` text ,
+  `last_name` text ,
+  `email` text ,
+  `institution` text ,
+  `parent_id` bigint(20) default NULL,
+  `inheritance_id` tinyint(2) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+	INSERT INTO `entities` (first_name, inheritance_id) VALUES ('Anonymous', 1);
+");
 }
 
 if(!$this->tableHasColumn('User', 'entity_id')) {
@@ -53,27 +60,31 @@ if($this->tableHasColumn('User', 'first_name')) {
 				
 				//Get the entity_id for the anonymous entity
 				
-				$res = $this->query("SELECT e.id FROM entities e WHERE e.first_name = 'Anonymous'");
-				$user->Entity->inheritance_id = 2;
-
+				$entity_id = $this->query("SELECT e.id FROM entities e WHERE e.first_name = 'Anonymous'", array(), true);
+				
+				//Update the user entry
+				$this->query("UPDATE `users` SET entity_id = ? WHERE id = ?", array($entity_id, $u['id']));
+				
 			}
-			//Otherwise we are going to need to search the DB for the pre-existing entry and if found, save that
+			//Otherwise insert a new entry into the entities table
 			else {
 				
-				$toFind = array('first_name'=>$values['first_name'], 'last_name'=>$values['last_name'], 'email'=>$values['email']);
-
-				$person = $this->getTable('Person')->findUniqueOrNew($toFind);
-				
+				//If the institution is set, insert this as an institution
 				if(!empty($values['institution'])) {
-					$inst = $this->getTable('Institution')->findUniqueOrNew(array('institution'=>$u["institution"]));
-					$inst->save();
-					$person->parent_id = $inst->id;
+					$inheritance_id = INSTITUTION_INHERITANCE_ID;
+				}else{
+					$inheritance_id = PERSON_INHERITANCE_ID;
 				}
-
-				$person->save();
-				$user->entity_id = $person->id;	
+				
+				$this->query("INSERT INTO `entities` (first_name, last_name, email, institution, inheritance_id) VALUES (?, ?, ?, ?, ?)", 
+					array( $values['first_name'], $values['last_name'], $values['email'], $values['institution'], $inheritance_id ) );
+				
+				//Grab entity ID via query
+				$entity_id = $this->query("SELECT LAST_INSERT_ID() as id", array(), true);
+				
+				//Now update the user row
+				$this->query("UPDATE `users` SET entity_id = ? WHERE id = ?", array($entity_id, $u['id']));
 			}
-			$user->save();	
 		}
 	}
 	
@@ -87,12 +98,26 @@ DROP `institution` ;");
 
 //Now create the EntitiesRelations table
 if(!$this->hasTable('EntitiesRelations')) {
-	$this->buildTable('EntitiesRelations');
+	$this->query("CREATE TABLE IF NOT EXISTS `entities_relations` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `entity_id` bigint(20) default NULL,
+  `relation_id` bigint(20) default NULL,
+  `relationship_id` bigint(20) default NULL,
+  `inheritance_id` tinyint(2) NOT NULL,
+  `time` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
 }
 
 //Next step is to convert all the user_id fields on the Item to EntitiesRelations relationships
 if($this->tableHasColumn('Item', 'user_id')) {
-	$this->buildTable('EntityRelationships');
+	$this->query("
+	CREATE TABLE IF NOT EXISTS `entity_relationships` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` text ,
+  `description` text ,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
 	
 	//All the 'added' timestamps are being converted to entries in the entities_relations table
 	$this->query("INSERT IGNORE INTO `entity_relationships` (id, name) VALUES (1, 'added')");
@@ -176,16 +201,16 @@ if($this->tableHasColumn('Collection', 'collector')) {
 		
 	foreach ($colls as $k => $coll) {
 		if(!empty($coll['entity'])) {
-			$entity = new Entity;
-			$entity->first_name = $coll['entity'];
-			$entity->inheritance_id = COLLECTION_INHERITANCE_ID;
-			$entity->dumpSave();
+
+			$this->query("INSERT INTO `entities` (first_name, inheritance_id) VALUES (?, ?)", array($coll['entity'], COLLECTION_INHERITANCE_ID));
+			
+			$entity_id = $this->query("SELECT LAST_INSERT_ID() as id", array(), true);
 			
 			$sql = "INSERT INTO entities_relations 
 						(entity_id, relation_id, inheritance_id, relationship_id, time)
 					VALUES (?, ?, ?, ?, NOW())";
 					
-			$this->query($sql, array($entity->id, $coll['relation_id'], $coll['inheritance_id'], 4));
+			$this->query($sql, array($entity_id, $coll['relation_id'], $coll['inheritance_id'], 4));
 		}
 	}
 	

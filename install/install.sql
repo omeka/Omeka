@@ -85,22 +85,6 @@ CREATE TABLE IF NOT EXISTS `exhibits` (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `exhibits_tags`
--- 
-
-DROP TABLE IF EXISTS `exhibits_tags`;
-CREATE TABLE IF NOT EXISTS `exhibits_tags` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `exhibit_id` bigint(20) NOT NULL,
-  `tag_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `tagexhibit` (`tag_id`,`exhibit_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
--- 
 -- Table structure for table `file_meta_lookup`
 -- 
 
@@ -273,23 +257,6 @@ CREATE TABLE IF NOT EXISTS `items_section_pages` (
   `text` text ,
   `entry_order` bigint(20) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `items_tags`
--- 
-
-DROP TABLE IF EXISTS `items_tags`;
-CREATE TABLE IF NOT EXISTS `items_tags` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `item_id` bigint(20) NOT NULL,
-  `tag_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `taguseritem` (`tag_id`,`user_id`,`item_id`),
-  KEY `itemtaguser_idx` (`item_id`,`tag_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------

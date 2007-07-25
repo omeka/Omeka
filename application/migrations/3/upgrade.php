@@ -1,7 +1,7 @@
 <?php 
-define('ITEM_INHERITANCE_ID', 1);
-define('EXHIBIT_INHERITANCE_ID', 2);
-define('COLLECTION_INHERITANCE_ID', 3);
+if(!defined('ITEM_INHERITANCE_ID')) define('ITEM_INHERITANCE_ID', 1);
+if(!defined('EXHIBIT_INHERITANCE_ID')) define('EXHIBIT_INHERITANCE_ID', 2);
+if(!defined('COLLECTION_INHERITANCE_ID')) define('COLLECTION_INHERITANCE_ID', 3);
 
 //Create the taggings table
 if(!$this->hasTable('taggings')) {
