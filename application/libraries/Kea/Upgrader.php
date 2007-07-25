@@ -106,12 +106,15 @@ class Kea_Upgrader
 		return false;
 	}
 	
-	public function query($sql, $params=array()) {
+	public function query($sql, $params=array(), $fetchOne=false) {
 		//Echo each query as it is run
 		Zend::dump( $sql );
 		
 		$conn = $this->manager->connection();
 		
+		if($fetchOne)
+			return $conn->fetchOne($sql, $params);
+			
 		$res = $conn->execute($sql, $params);
 		return $res->fetchAll(PDO::FETCH_ASSOC);
 	}
