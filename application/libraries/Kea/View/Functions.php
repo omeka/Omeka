@@ -930,13 +930,13 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		if($total_results < $per_page) {
 			$html = '';
 		}else {
-			$html = '<ul><li><a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a></li>';
+			$html = '<ul><li class="first"><a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a></li>';
 		}
 
 		if( $page > 1 ) {
-			$html .= '<li><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&lt; Prev</a></li>';
+			$html .= '<li class="previous"><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&lt; Prev</a></li>';
 		} else {
-			$html .= '<li>&lt; Prev</li>';
+			$html .= '<li class="previous">&lt; Prev</li>';
 		}
 
 		$buffer = floor( ( $num_links - 1 ) / 2 );
@@ -952,7 +952,7 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		for( $i = $start_link; $i < $end_link+1; $i++) {
 			if( $i <= $num_pages ) {
 				if( $page == $i ) {
-					$html .= '<li>' . $i . '</li>';
+					$html .= '<li class="current">' . $i . '</li>';
 				} else {
 					$html .= '<li><a href="' . $link . str_replace('%PAGE%', $i, $pattern) . '">' . ($i) . '</a></li>';
 				}
@@ -960,12 +960,12 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		}
 
 		if( $page < $num_pages ) {
-			$html .= '<li><a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next &gt;</a></li>';
+			$html .= '<li class="next"><a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next &gt;</a></li>';
 		} else {
-			$html .= '<li>Next &gt;</li>';
+			$html .= '<li class="next">Next &gt;</li>';
 		}
 
-		$html .= '<li><a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a></li></ul>';
+		$html .= '<li class="last"><a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a></li></ul>';
 
 	
 		if ($menu) {
