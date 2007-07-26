@@ -50,6 +50,10 @@ function exhibits($params = array()) {
 	return _get_recordset($params, 'exhibits');
 }
 
+function recent_exhibits($num = 10) {
+	return exhibits(array('recent'=>true,'limit'=>$num));
+}
+
 function exhibit($id=null) {
 	if(!$id) {
 		if(Zend::isRegistered('exhibit')) {

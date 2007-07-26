@@ -931,7 +931,6 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 			$html = '';
 		}else {
 			$html = '<ul><li class="first"><a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a></li>';
-		}
 
 		if( $page > 1 ) {
 			$html .= '<li class="previous"><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&lt; Prev</a></li>';
@@ -977,6 +976,7 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 				$html .= '>' . $per_page_limit . ' results' . '</option>';
 			}
 			$html .= '</select>';
+		}
 		}
 		return $html;		
 	}
