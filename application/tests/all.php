@@ -36,11 +36,15 @@ require_once 'Item.php';
 
 require_once 'TagTestCase.php';
 require_once 'TaggingsTestCase.php';
+require_once 'TaggableTestCase.php';
+require_once 'ItemTestCase.php';
 
 $test = new TestSuite('Omeka Tests');
 
 $test->addTestCase(new TagTestCase());
 $test->addTestCase(new TaggingsTestCase());
+$test->addTestCase(new TaggableTestCase());
+$test->addTestCase(new ItemTestCase());
 
 $test->run(new HtmlReporter());
 ?>

@@ -27,7 +27,7 @@ class MetafieldTable extends Doctrine_Table
 	}
 	
 	public function findByName($name) {
-		return $this->findBySql("name = ?", array($name));
+		return $this->findBySql("name = ?", array($name))->getFirst();
 	}
 	
 	public function findTypeMetafields() {

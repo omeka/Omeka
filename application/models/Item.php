@@ -175,6 +175,40 @@ class Item extends Kea_Record
 		}
 	}
 	
+	/**
+	 * Will set the metatext for a given metafield 
+	 * This is slow so should not be used unless setting only specific metafields
+	 *
+	 * @return void
+	 **/
+	public function setMetatext($field, $value)
+	{
+		$mt = $this->Metatext;
+		
+		//Look for the entry within the current set of metatext
+		foreach ($mt as $k => $m) {
+			if($m->Metafield->name == $field) {
+				$m->text = $value;
+				return true;
+			}
+		}
+		
+		//Find the metafield
+		$metafield = Doctrine_Manager::getInstance()->getTable('Metafield')->findByName($field);
+				
+		if(!$metafield) {
+			throw new Exception( 'Metafield named '.$field . ' does not exist!' );
+		}
+		
+		//Create the new metatext entry and append to the rest of them
+		$newMt = new Metatext;
+		$newMt->text = $value;
+		$newMt->Metafield = $metafield;
+		$newMt->Item = $this;
+		
+		$mt->add($newMt);
+	}
+	
 	/*	Pull in the appropriate metafield IDs
 	 *	1) All metafields associated with the Item's type
 	 *	2) All metafields associated with a plugin
@@ -283,8 +317,18 @@ class Item extends Kea_Record
 	 }
 	
 	///// METADATA METHODS /////
-	
-	public function metadata( $name, $return_text = true ) {		
+		
+	public function getMetatext( $name, $return_text = true ) {	
+		//first check the available metatext
+		foreach ($this->Metatext as $k => $mt) {
+			if($mt->Metafield->name == $name) {
+				if($return_text) 
+					return $mt->text;
+				echo $text;
+				return;
+			}
+		}
+			
 		$sql = "SELECT text FROM metatext mt INNER JOIN metafields mf ON mf.id = mt.metafield_id WHERE mt.item_id = ? AND mf.name = ?";
 		$text = $this->execute($sql, array($this->id, $name), true);
 		
@@ -300,7 +344,7 @@ class Item extends Kea_Record
 	 * @return mixed
 	 **/
 	public function Metatext( $name, $return_text = true) {
-		return $this->metadata($name, $return_text);
+		return $this->getMetatext($name, $return_text);
 	}
 	
 	///// END METADATA METHODS /////
@@ -389,7 +433,7 @@ class Item extends Kea_Record
 						$this->pluginHook('onUntagItem', array($tagToDelete->name, $current_user));
 				
 						//delete the tag from the Item
-						$tagsDeleted = $this->deleteTag($tagToDelete, null, true);
+						$tagsDeleted = $this->deleteTags($tagToDelete, null, true);
 					}
 				}				
 			}
@@ -455,17 +499,10 @@ class Item extends Kea_Record
 			try {
 				$this->save();
 				
-				//Special process to save the metatext
-				$mts = $this->Metatext;
-				foreach ($mts as $mt) {
-					$mt->item_id = $this->id;
-				}
-				$mts->save();
-				
 				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
 				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
 					$user = Kea::loggedIn();
-					$this->applyTagString($clean['tags'], $user);
+					$this->applyTagString($clean['tags'], $user->Entity);
 				}
 				
 				//If the item was made public, fire the plugin hook
@@ -491,6 +528,16 @@ class Item extends Kea_Record
 			}	
 		}
 		return false;
+	}
+
+	public function postSave()
+	{
+		//Special process to save the metatext
+		$mts = $this->Metatext;
+		foreach ($mts as $mt) {
+			$mt->item_id = $this->id;
+		}
+		$mts->save();		
 	}
 
 	public function hasFiles()

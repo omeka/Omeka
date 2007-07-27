@@ -93,7 +93,7 @@ class Exhibit extends Kea_Record
 	{
 		//Add the tags after the form has been saved
 		$current_user = Kea::loggedIn();		
-		$this->applyTagString($post['tags'], $current_user, true);
+		$this->applyTagString($post['tags'], $current_user->Entity, true);
 		
 		//reload the sections b/c Doctrine is too dumb to do it
 		$this->loadSections();

@@ -22,9 +22,7 @@ class PluginsController extends Kea_Controller_Action
 	}
 	
 	protected function installNew() {
-		//Installation will need to create new tables
-		Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_CREATE_TABLES, true);
-		
+
 		$router = Kea_Controller_Front::getInstance()->getRouter();
 		
 		$dir = new VersionedDirectoryIterator(PLUGIN_DIR);

@@ -72,7 +72,7 @@ class ExhibitTestCase extends OmekaTestCase
 /*		$e = $this->manager->getTable('Exhibit')->find(1);
 		$this->assertEqual($e->Tags->count(), 2);
 		
-		$e->deleteTag('Tag1');
+		$e->deleteTags('Tag1');
 		
 		$this->assertEqual($e->Tags->count(), 1);
 */	}

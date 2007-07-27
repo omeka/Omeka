@@ -26,7 +26,7 @@ class Taggable implements Kea_Strategy_Interface
 	{
 		return call_user_func_array( array($this->record, $m), $a);
 	}
-	
+
 	/**
 	 * Bit of a hook to help with deleting Taggings (or anything else)
 	 * 
@@ -56,6 +56,10 @@ class Taggable implements Kea_Strategy_Interface
 		return $tags;
 	}
 
+	public function entityTags($entity)
+	{
+		return $this->tagTable->findBy(array('entity'=>$entity, 'record'=>$this->record, 'return'=>'object'), $this->type);
+	}
 	/**
 	 * Delete a tag from the record
 	 *
@@ -63,7 +67,7 @@ class Taggable implements Kea_Strategy_Interface
 	 * @param bool deleteAll Whether or not to delete all references to this tag for this record
 	 * @return bool|array Whether or not the tag was deleted (false if tag doesn't exist)
 	 **/
-	public function deleteTag($tag, $user=null, $deleteAll=false)
+	public function deleteTags($tag, $entity=null, $deleteAll=false)
 	{
 		$joinType = 'Taggings';
 			
@@ -72,7 +76,7 @@ class Taggable implements Kea_Strategy_Interface
 		
 		//If we aren't deleting all the tags associated with a record, then find those specifically for the user
 		if(!$deleteAll) {
-			$findWith['user'] = $user;
+			$findWith['entity'] = $entity;
 		}
 		
 		$tagging = $this->joinTable->findBy($findWith);
@@ -85,8 +89,8 @@ class Taggable implements Kea_Strategy_Interface
 	 *
 	 * @return boolean
 	 **/
-	public function hasTag($tag, $user=null) {
-		$count = $this->joinTable->findBy(array('tag'=>$tag, 'user'=>$user, 'record'=>$this->record), null, true);
+	public function hasTag($tag, $entity=null) {
+		$count = $this->joinTable->findBy(array('tag'=>$tag, 'entity'=>$entity, 'record'=>$this->record), null, true);
 		
 		return $count > 0;
 	}	
@@ -107,13 +111,13 @@ class Taggable implements Kea_Strategy_Interface
 		return $string;
 	}
 
-	public function addTags($tags, $user, $delimiter = ',') {
+	public function addTags($tags, $entity, $delimiter = ',') {
 		if(!$this->record->id) {
 			throw new Exception( 'A valid record ID # must be provided when tagging.' );
 		}
 		
-		if(!$user) {
-			throw new Exception( 'A valid user ID # must be provided when tagging' );
+		if(!$entity) {
+			throw new Exception( 'A valid entity must be provided when tagging' );
 		}
 		
 		if(!is_array($tags)) {
@@ -131,7 +135,7 @@ class Taggable implements Kea_Strategy_Interface
 			$join->tag_id = $tag->id;
 			$join->relation_id = $this->record->id;
 			$join->type = $this->type;
-			$join->Entity = $user->Entity;
+			$join->Entity = $entity;
 			
 			$join->trySave();			
 		}
@@ -183,43 +187,25 @@ class Taggable implements Kea_Strategy_Interface
 	 *
 	 * @return void
 	 **/
-	public function applyTagString($string, $user, $deleteTags = false, $delimiter=",")
+	public function applyTagString($string, $entity, $deleteTags = false, $delimiter=",")
 	{
-		$tags = ($deleteTags) ? $this->record->Tags : $this->userTags($user);
+		$tags = ($deleteTags) ? $this->record->Tags : $this->entityTags($entity);
 		$diff = $this->diffTagString($string, $tags, $delimiter);
 		
 		if(!empty($diff['removed'])) {
-			$this->removeTagsByArray($diff['removed'], $user, $deleteTags);
+			$this->deleteTags($diff['removed'], $entity, $deleteTags);
 			
 			//PLUGIN HOOKS
-			$this->pluginHook('onUntag' . get_class($this->record), array($this->record, $diff['removed'], $user));
+			$this->pluginHook('onUntag' . get_class($this->record), array($this->record, $diff['removed'], $entity));
 		}
 		if(!empty($diff['added'])) {
-			$this->addTags($diff['added'], $user);
+			$this->addTags($diff['added'], $entity);
 			
 			//PLUGIN HOOKS
-			$this->pluginHook('onTag' . get_class($this->record), array($this->record, $diff['added'], $user));
+			$this->pluginHook('onTag' . get_class($this->record), array($this->record, $diff['added'], $entity));
 		}
 		
 	}
-	
-	public function removeTagsByArray($array,$user, $deleteWholeTag=false)
-	{
-		/*
-		 *	Process for deleting the whole tag
-		 *		1) delete all references for that tag/record combo within the relevant join table
-		 *		2) check to see if there are any other references in that or the other join tables
-		 *		3) if there are no references in the other join tables, delete the entry from the tag table
-		 *
-		 *		Right now this only does 1), not sure of the best way to determine which references a tag contains
-		 */		
-		foreach ($array as $tagName) {
-			if($this->deleteTag($tagName, $user, $deleteWholeTag)) {
-				$success = true;
-			}
-		}		
-	}
-
 }
 
 ?>

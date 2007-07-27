@@ -283,6 +283,18 @@ abstract class Doctrine_Record extends Doctrine_Access implements Countable, Ite
 
         return $this->_errorStack->count() == 0 ? true : false;
     }
+
+   /**
+     * isModified
+     * returns true if this record was modified, otherwise false
+     *
+     * @return boolean
+     */
+    public function isModified()
+    {
+        return ($this->_state === Doctrine_Record::STATE_DIRTY ||
+                $this->_state === Doctrine_Record::STATE_TDIRTY);
+    }
     /**
      * Emtpy template method to provide concrete Record classes with the possibility
      * to hook into the validation procedure, doing any custom / specialized

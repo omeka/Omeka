@@ -14,7 +14,7 @@ abstract class OmekaTestCase extends UnitTestCase
         if( ! $this->init) {
 			$this->manager = Doctrine_Manager::getInstance();
 			$this->wipeDb($pathToSetup);
-			$this->setUpFixtures();
+			$this->setUpFixtures($pathToSetup);
 			$this->init();
 		}
         $this->init    = true;
@@ -41,9 +41,9 @@ abstract class OmekaTestCase extends UnitTestCase
 		
 	}
 	
-	protected function setUpFixtures()
+	protected function setUpFixtures($path)
 	{
-		include 'fixtures.php';
+		include $path . DIRECTORY_SEPARATOR. 'fixtures.php';
 		$this->fixtures = $fixtures;
 	}
 	
