@@ -1,5 +1,8 @@
 <?php head();?>
-<h2>Users | Edit a User</h2>
+<?php common('users-nav'); ?>
+
+<div id="primary">
+<h1>Users | Edit a User</h1>
 <form method="post">
 <?php include('form.php'); ?>
 <?php/*
@@ -42,4 +45,5 @@
 
 	<input type="submit" name="submit" value="Change the password --&gt;" />
 </form>
+</div>
 <?php foot();?>

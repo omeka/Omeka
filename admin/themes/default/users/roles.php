@@ -1,4 +1,6 @@
 <?php head();?>
+<?php common('users-nav'); ?>
+
 <script type="text/javascript" charset="utf-8">
 	function getRoleRuleForm(role) {
 		var url = '<?php echo uri('users/rulesForm'); ?>?role='+role.value;
@@ -16,10 +18,10 @@
 		});
 	});
 </script>
+<div id="primary">
+<div id="message"></div>
 
-<h1 id="message"></h1>
-
-<h2>Available Roles</h2>
+<h1>Available Roles</h1>
 <ul>
 <?php foreach( $roles as $role ): ?>
 	<li><h3><?php echo $role; ?></h3>
@@ -90,4 +92,5 @@
 <h3>Alter Role Permissions</h3>
 <?php select(array('name' => 'role', 'id'=>'alter_role'), $roles); ?>
 <div id="rulesForm"></div>
+</div>
 <?php foot();?>

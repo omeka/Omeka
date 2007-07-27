@@ -1,21 +1,9 @@
 <?php head();?>
-<ul id="secondary-nav" class="navigation">
-	<?php 
-		if(has_permission('Users','add')) {
-			nav(array('Browse Users' => uri('users/browse'), 'Add User' => uri('users/add')));
-		}
-	?>
-</ul>
+<?php common('users-nav'); ?>
 <div id="primary">
 
-<h2>Users</h2>
-<ul id="tertiary-nav" class="navigation">
-	<?php 
-		if(has_permission('Users','add')) {
-			nav(array('Add a New User' => uri('users/add')));
-		}
-	?>
-</ul>
+<h1>Browse Users</h1>
+
 <table id="users">
 	<thead>
 		<tr>

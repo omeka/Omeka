@@ -1,4 +1,4 @@
-
+/*
 var EditableField = Class.create();
 
 EditableField.prototype = {
@@ -123,4 +123,4 @@ function parseXML(string) {
         doc.loadXML(string)
     }
     return doc;
-}
+} */

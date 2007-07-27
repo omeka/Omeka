@@ -577,6 +577,10 @@ function recent_tags($num = 30) {
 	return tags(array('recent'=>true,'limit'=>$num));
 }
 
+function recent_collections($num = 10) {
+	return collections(array('recent'=>true,'limit'=>$num));
+}
+
 function recent_items($num = 10) {
 	return items(array('recent'=>true,'per_page'=>$num));
 }

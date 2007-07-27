@@ -1,6 +1,8 @@
 <?php head(); ?>
+<?php common('entities-nav'); ?>
 
-<h3>Browse Entities</h3>
+<div id="primary">
+<h1>Browse Entities</h1>
 
 <?php echo flash(); ?>
 
@@ -14,6 +16,7 @@
 			<th>Last Name</th>
 			<th>Email</th>
 			<th>Institution</th>
+			<th>Role</th>
 			<th>[Edit]</th>
 			<th>[Delete]</th>
 		</tr>
@@ -26,6 +29,7 @@
 			<td><?php echo $e->last_name; ?></td>
 			<td><?php echo $e->email; ?></td>
 			<td><?php echo $e->institution; ?></td>
+			<td>Contributor</td>
 			<td><?php link_to($e, 'edit', '[Edit]'); ?></td>
 			<td><?php link_to($e, 'delete', '[Delete]'); ?></td>
 		</tr>
@@ -70,13 +74,9 @@
 ?>
 
 <?php endif; ?>
-
-<h3>Add a new entity to the list</h3>
-
-<form action="<?php echo uri('entities/add') ?>" method="post" accept-charset="utf-8">
+<form action="<?php echo uri('entities/add') ?>" id="add-entity-form" method="post" accept-charset="utf-8">
 	<?php include 'form.php'; ?>
-	<input type="submit" name="submit" value="Add the entity --&gt;" />
+	<input type="submit" name="submit" value="Add the Entity" />
 </form>
-
-
+</div>
 <?php foot(); ?>

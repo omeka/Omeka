@@ -224,7 +224,7 @@
 		echo $checkbox;
 	}
 	
-	function submit($value="Submit this Form --&gt;",$name="submit")
+	function submit($value="Submit this Form",$name="submit")
 	{
 		echo '<input type="submit" name="'.$name.'" value="'.$value.'" />';
 	}
@@ -235,7 +235,6 @@
 			<fieldset>
 				<legend>Search for Items</legend>
 				<input type="text" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
-				<input type="submit" name="submit_search" value="Search" />
 			</fieldset>
 			
 			<fieldset>
@@ -260,12 +259,8 @@
 			?>
 			</div>
 			</fieldset>
+			<input type="submit" name="submit_search" value="Search" />
 			
-
-			
-			<fieldset>
-
-			</fieldset>
 		</form><?php
 	}
 	

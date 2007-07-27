@@ -38,7 +38,7 @@
 				if(has_permission('super')) {
 					$header_navigation['Settings'] = uri('settings/browse');
 				}
-				$header_navigation['Entities'] = uri('entities/browse');
+				$header_navigation['Names'] = uri('entities/browse');
 				nav($header_navigation);
 
 			?>

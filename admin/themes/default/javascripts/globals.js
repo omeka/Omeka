@@ -8,10 +8,23 @@ function alertBox() {
 		//return;
 	}
 }
+
+function revealSwitch( field, file ) {
+	new Ajax.Updater(field,
+		revealPath + file,
+		{
+			onComplete: function(t) {
+				new Effect.Appear( field, {duration: 0.8} );
+			}
+		});
+}
+
 function toggleSearch() {
 	var search = $('search');
+	if(!search) return;
 	search.hide();
 	var searchHeader = $('search-header');
+	if(!searchHeader) return;
 	searchHeader.style.cursor = "pointer";
 	searchHeader.onclick = function() {
 		search.toggle();

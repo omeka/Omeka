@@ -56,8 +56,11 @@
 			
 		for (var i=0; i < tooltipIds.length; i++) {
 			var elId = tooltipIds[i];
+			$(elId).style.cursor = "help";
+			
 			var tooltipId = elId + '_tooltip';
 			var tooltip = new Tooltip(elId, tooltipId, {default_css:true, zindex:100000});
+			$(tooltipId).addClassName('info-window');
 		};
 	}
 	
@@ -114,24 +117,110 @@
 	<legend>Core Metadata</legend>
 		<div class="field">
 		<label for="title" id="title">Title</label>
-		<span class="tooltip" id="title_tooltip"><?php dublin_core('title'); ?></span>
 		<input type="text" class="textinput" name="title" value="<?php echo $item->title;?>" />
+		<span class="tooltip" id="title_tooltip"><?php dublin_core('title'); ?></span>
 		</div>
 		
-		<div class="field"><label id="publisher">Publisher</label>
-		<span class="tooltip" id="publisher_tooltip"><?php dublin_core('publisher'); ?></span>
+		<div class="field">
+		<label id="subject">Subject</label>
+		<input type="text" class="textinput" name="subject" value="<?php echo $item->subject;?>" />
+		<span class="tooltip" id="subject_tooltip"><?php dublin_core('subject'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="description">Description</label>
+		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo $item->description; ?></textarea>
+		<span class="tooltip" id="description_tooltip"><?php dublin_core('description'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="creator">Creator</label>
+		<input type="text" class="textinput" name="creator" value="<?php echo $item->creator;?>" />
+		<span class="tooltip" id="creator_tooltip"><?php dublin_core('creator'); ?></span>
+		</div>
+
+		<div class="field">
+		<label id="additional_creator">Additional Creator</label>
+		<input type="text" class="textinput" name="additional_creator" value="<?php echo $item->additional_creator;?>" />
+		<span class="tooltip" id="additional_creator_tooltip"><?php dublin_core('additional_creator'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="source">Source</label>
+		<input type="text" class="textinput" name="source" value="<?php echo $item->source;?>" />
+		<span class="tooltip" id="source_tooltip"><?php dublin_core('source'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="publisher">Publisher</label>
 		<input type="text" class="textinput" name="publisher" value="<?php echo $item->publisher?>" />
+		<span class="tooltip" id="publisher_tooltip"><?php dublin_core('publisher'); ?></span>
+		</div>
+		
+		<div class="field">
+			<label for="date_year" id="date">Date <span class="notes">(YYYY-MM-DD)</span></label>
+			
+			<div class="dates">
+			<div class="dateinput">
+		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['date_year'], get_year($item->date)); ?>">
+		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['date_month'], get_month($item->date)); ?>" />
+		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['date_day'], get_day($item->date)); ?>">
+		
+			</div>
+			</div>
+			<span class="tooltip" id="date_tooltip"><?php dublin_core('date'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="contributor">Contributor</label>
+		<input type="text" class="textinput" name="contributor" value="<?php echo $item->contributor;?>" />
+		<span class="tooltip" id="contributor_tooltip"><?php dublin_core('contributor'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="rights">Rights</label>
+		<input type="text" class="textinput" name="rights" value="<?php echo $item->rights;?>" />
+		<span class="tooltip" id="rights_tooltip"><?php dublin_core('rights'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="rights_holder">Rights Holder</label>
+		<input type="text" class="textinput" name="rights_holder" value="<?php echo $item->rights_holder;?>" />
+		<span class="tooltip" id="rights_holder_tooltip"><?php dublin_core('rights_holder'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="relation">Relation</label>
-		<span class="tooltip" id="relation_tooltip"><?php dublin_core('relation'); ?></span>
 		<input type="text" class="textinput" name="relation" value="<?php echo $item->relation;?>" />
+		<span class="tooltip" id="relation_tooltip"><?php dublin_core('relation'); ?></span>
 		</div>
 		
 		<div class="field">
+		<label id="spatial_coverage">Spatial Coverage</label>
+		<input type="text" class="textinput" name="spatial_coverage" value="<?php echo $item->spatial_coverage;?>" />
+		<span class="tooltip" id="spatial_coverage_tooltip"><?php dublin_core('spatial_coverage'); ?></span>
+		</div>
+		
+		<div class="field">
+			<label id="temporal_coverage">Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
+			<div class="dates">
+				<span class="dateinput">
+					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>"> 
+					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>">
+				</span>
+				&ndash;
+				<span class="dateinput">
+					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>"> 
+					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>">
+				</span>
+			</div>
+			<span class="tooltip" id="temporal_coverage_tooltip"><?php dublin_core('temporal_coverage'); ?></span>
+		</div>
+
+		<div class="field">
 		<label id="language">Language</label>
-		<span class="tooltip" id="language_tooltip"><?php dublin_core('language'); ?></span>
 		<?php 
 			select(
 				array('id'=>'language','name'=>'language'), 
@@ -144,107 +233,21 @@
 					'san'=>'Sanskrit'),
 				!empty($item->language) ? $item->language : 'eng'); 
 		?>
-		
+		<span class="tooltip" id="language_tooltip"><?php dublin_core('language'); ?></span>
 		</div>
-		
-		<div class="field">
-		<label id="spatial_coverage">Spatial Coverage</label>
-		<span class="tooltip" id="spatial_coverage_tooltip"><?php dublin_core('spatial_coverage'); ?></span>
-		<input type="text" class="textinput" name="spatial_coverage" value="<?php echo $item->spatial_coverage;?>" />
-		</div>
-		
-		<div class="field">
-		<label id="rights">Rights</label>
-		<span class="tooltip" id="rights_tooltip"><?php dublin_core('rights'); ?></span>
-		<input type="text" class="textinput" name="rights" value="<?php echo $item->rights;?>" />
-		</div>
-		
-		<div class="field">
-		<label id="rights_holder">Rights Holder</label>
-		<span class="tooltip" id="rights_holder_tooltip"><?php dublin_core('rights_holder'); ?></span>
-		<input type="text" class="textinput" name="rights_holder" value="<?php echo $item->rights_holder;?>" />
-		</div>
-		
-		<div class="field">
-		<label id="description">Description</label>
-		<span class="tooltip" id="description_tooltip"><?php dublin_core('description'); ?></span>
-		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo $item->description; ?></textarea>
-		</div>
-		
-		<div class="field">
-		<label id="source">Source</label>
-		<span class="tooltip" id="source_tooltip"><?php dublin_core('source'); ?></span>
-		<input type="text" class="textinput" name="source" value="<?php echo $item->source;?>" />
-		</div>
-		
-		<div class="field">
-		<label id="subject">Subject</label>
-		<span class="tooltip" id="subject_tooltip"><?php dublin_core('subject'); ?></span>
-		<input type="text" class="textinput" name="subject" value="<?php echo $item->subject;?>" />
-		</div>
-		
-		<div class="field">
-		<label id="creator">Creator</label>
-		<span class="tooltip" id="creator_tooltip"><?php dublin_core('creator'); ?></span>
-		<input type="text" class="textinput" name="creator" value="<?php echo $item->creator;?>" />
-		</div>
-		
-		<div class="field">
-		<label id="additional_creator">Additional Creator</label>
-		<span class="tooltip" id="additional_creator_tooltip"><?php dublin_core('additional_creator'); ?></span>
-		<input type="text" class="textinput" name="additional_creator" value="<?php echo $item->additional_creator;?>" />
-		</div>
-		
+
 		<div class="field">
 		<label id="provenance">Provenance</label>
-		<span class="tooltip" id="provenance_tooltip"><?php dublin_core('provenance'); ?></span>
 		<input type="text" class="textinput" name="provenance" value="<?php echo $item->provenance;?>" />
+		<span class="tooltip" id="provenance_tooltip"><?php dublin_core('provenance'); ?></span>
 		</div>
-		
-		<div class="field">
-		<label id="contributor">Contributor</label>
-		<span class="tooltip" id="contributor_tooltip"><?php dublin_core('contributor'); ?></span>
-		<input type="text" class="textinput" name="contributor" value="<?php echo $item->contributor;?>" />
-		</div>
-		
+
 		<div class="field">
 		<label id="citation">Bibliographic Citation</label>
-		<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
 		<input type="text" class="textinput" name="citation" value="<?php echo $item->citation;?>" />
+		<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
 		</div>
-		
-		<div class="field">
-			<label for="date_year" id="date">Date <span class="notes">(YYYY-MM-DD)</span></label>
-			<span class="tooltip" id="date_tooltip"><?php dublin_core('date'); ?></span>
-			
-			<div class="dates">
-			<div class="dateinput">
-		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['date_year'], get_year($item->date)); ?>">
-		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['date_month'], get_month($item->date)); ?>" />
-		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['date_day'], get_day($item->date)); ?>">
-		
-		</div>
-		</div>
-		</div>
-		
-		<div class="field">
-			<label id="temporal_coverage">Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
-			<span class="tooltip" id="temporal_coverage_tooltip"><?php dublin_core('temporal_coverage'); ?></span>
-			<div class="dates">
-				<div class="dateinput">
-					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>"> 
-					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>">
-				</div>
-				
-				<div class="dateinput">
-					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>"> 
-					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>">
-				</div>
-			</div>
-		</div>
-		
+
 	</fieldset>
 	<fieldset id="collection-metadata">
 		<legend>Collection Metadata</legend>
@@ -347,6 +350,7 @@
 	
 	<fieldset>
 		<legend>Tagging</legend>
+		<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
 		<div class="field">
 		<label for="tags-field">Modify Your Tags</label>
 		<input type="text" name="tags" id="tags-field" class="textInput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />

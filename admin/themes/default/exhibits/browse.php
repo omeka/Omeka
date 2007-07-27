@@ -17,7 +17,7 @@
 <table id="exhibits">
 	<thead>
 	<tr>
-		<th>Identification #</th>
+		<th>ID</th>
 		<th>Title</th>
 		<th>Tags</th>
 		<th>Edit?</th>

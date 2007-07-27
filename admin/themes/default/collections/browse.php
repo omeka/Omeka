@@ -1,10 +1,7 @@
 <?php head(); ?>
 <?php common('archive-nav'); ?>
 <div id="primary">
-<ul id="tertiary-nav" class="navigation">
-	<?php nav(array('Browse Collections' => uri('collections'), 'Add a Collection' => uri('collections/add/'))); ?>
-</ul>
-	<h1>Collections &rarr; Browse</h1>
+	<h1>Collections</h1>
 
 		<?php foreach($collections as $collection): ?>
 			<div class="collection">

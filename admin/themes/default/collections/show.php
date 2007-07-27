@@ -1,9 +1,6 @@
 <?php head(); ?>
 <?php common('archive-nav');?>
 <div id="primary">
-<ul id="tertiary-nav" class="navigation">
-	<?php nav(array('Browse Collections' => uri('collections'), 'Add a Collection' => uri('collections/add/'))); ?>
-</ul>
 <div id="collection-info">
 <h1>Collections &rarr; <?php echo $collection->name;?> <a class="edit" href="<?php echo uri('collections/edit/').$collection->id; ?>">(Edit)</a>  <a class="delete" href="<?php echo uri('collections/delete/').$collection->id; ?>">(Delete)</a></h1>
 <p><?php echo $collection->description; ?></p>
@@ -19,7 +16,7 @@
 	<?php
 		$items = items(array('collection'=>$collection->name, 'recent'=>true));
 	?>
-	
+	<?php echo total_items($items);?>
 	<ul>
 	<?php foreach ($items as $key => $item): ?>
 		<?php if ($key < 10): ?>

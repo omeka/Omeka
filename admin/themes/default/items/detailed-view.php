@@ -1,3 +1,4 @@
+<?php $items = items(); ?>
 <div id="detailed">
 <?php foreach($items as $key => $item):?>
 <div class="item">
@@ -9,8 +10,8 @@
 			<li><span class="fieldname">Added:</span> <?php echo $item->added; ?></li>
 			<?php if ( $item->Collection->exists() ): ?>
 			<li><span class="fieldname">Collection:</span> <?php echo $item->Collection->name; ?></li>
-			<li><span class="fieldname">Public</span> <?php checkbox('public'); ?></li>
-			<li><span class="fieldname">Featured</span> <?php checkbox('featured'); ?></li>
+			<li><span class="fieldname">Public</span> <?php checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></li>
+			<li><span class="fieldname">Featured</span> <?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?></li>
 			<?php endif; ?>	
 		</ul>
 	</div>

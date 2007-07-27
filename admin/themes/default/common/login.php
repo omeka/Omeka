@@ -21,6 +21,6 @@
 <body id="login">
 	<div id="wrap">
 		<div id="header">
-			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
+			<h1 id="site-title"><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 		</div>
 		<div id="content">

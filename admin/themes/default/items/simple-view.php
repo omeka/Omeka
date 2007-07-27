@@ -1,3 +1,4 @@
+<?php $items = items(); ?>
 <table id="items" class="simple" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
@@ -11,15 +12,15 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach($items as $key => $item): ?>
+<?php foreach($items as $key => $item):?>
 <tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
 	<td scope="row"><?php echo $item->id;?></td> 
 	<td><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php echo $item->title; ?></a></td>
 	<td><?php echo $item->Type->name; ?></td>
 	<td><?php echo $item->creator; ?></td>	
 	<td><?php echo date('m.d.Y', strtotime($item->added)); ?></td>
-	<td><?php checkbox(array('name'=>"items[$item->id][public]"), $item->public); ?></td>
-	<td><?php checkbox(array('name'=>"items[$item->id][featured]"), $item->featured); ?>
+	<td><?php checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></td>
+	<td><?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?>
 		<?php hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>
 	</td>
 </tr>

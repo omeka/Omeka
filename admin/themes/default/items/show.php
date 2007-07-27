@@ -49,7 +49,7 @@
 			modifyTags();
 			return false;
 		}
-		
+		/*
 <?php if ( has_permission('Items','edit') ): ?>
 			editableElements = document.getElementsByClassName("editable");
 		
@@ -61,7 +61,7 @@
 											editableElements[i].getAttribute('rel'));
 		}
 <?php endif; ?>
-	
+	*/
 	});
 	/*
 	var checkJS = document.getElementById;
@@ -84,88 +84,90 @@
 </ul>
 <?php echo flash(); ?>
 
-<h2><div class="editable" id="title" rel="text"><?php echo $item->title; ?></div></h2>
+<h1><div class="editable" id="title" rel="text"><?php echo $item->title; ?></div></h1>
 
-<h3>Core Metadata</h3>
+<h2>Core Metadata</h2>
 <div id="core-metadata">
 	
-	<h4>Description</h4>
+	<h3>Subject</h3>
+	<div class="editable" id="subject" rel="text">
+	<?php display_empty($item->subject); ?>
+	</div>
+	
+	<h3>Description</h3>
 	<div id="description" class="editable" rel="textarea">
 	<?php display_empty($item->description,"No description available."); ?>
 	</div>
 	
-	<h4>Publisher</h4>
-	<div id="publisher" class="editable" rel="text">
-	<?php display_empty($item->publisher); ?>
-	</div>
-	
-	<h4>Relation</h4>
-	<div class="editable" id="relation" rel="text">
-	<?php display_empty($item->relation); ?>
-	</div>
-	
-	<h4>Language</h4>
-	<div class="editable" id="language" rel="text">
-	<?php display_empty($item->language); ?>
-	</div>
-
-	<h4>Spatial Coverage</h4>
-	<div id="coverage" class="editable" rel="text">
-	<?php display_empty($item->spatial_coverage)?>
-	</div>
-	
-	<h4>Temporal Coverage</h4>
-	<?php display_empty($item->temporal_coverage_start); ?> &mdash; 
-	<?php display_empty($item->temporal_coverage_end)?>
-	
-	<h4>Rights</h4>
-	<div class="editable" id="rights" rel="text">
-	<?php display_empty($item->rights); ?>
-	</div>
-	
-	<h4>Rights Holder</h4>
-	<div class="editable" id="rights_holder" rel="text">
-	<?php display_empty($item->rights_holder)?>
-	</div>
-	
-	<h4>Contributor</h4>
-	<div class="editable" id="contributor" rel="text">
-	<?php display_empty($item->contributor)?>
-	</div>
-	
-	<h4>Provenance</h4>
-	<div class="editable" id="provenance" rel="text">
-	<?php display_empty($item->provenance)?>
-	</div>
-	
-	<h4>Citation</h4>
-	<div class="editable" id="citation" rel="text">
-	<?php display_empty($item->getCitation());?>
-	</div>
-	
-	<h4>Source</h4>
-	<div class="editable" id="source" rel="text">
-	<?php display_empty($item->source); ?>
-	</div>
-	
-	<h4>Subject</h4>
-	<div class="editable" id="subject" rel="text">
-	<?php display_empty($item->subject); ?>
-	</div>
-
-	<h4>Creator</h4>
+	<h3>Creator</h3>
 	<div class="editable" id="creator" rel="text">
 	<?php display_empty($item->creator); ?>
 	</div>
 	
-	<h4>Additional Creator</h4>
+	<h3>Additional Creator</h3>
 	<div class="editable" id="additional_creator" rel="text">
 	<?php display_empty($item->additional_creator); ?>
 	</div>
 	
-	<h4>Date</h4>
+	<h3>Source</h3>
+	<div class="editable" id="source" rel="text">
+	<?php display_empty($item->source); ?>
+	</div>
+
+	<h3>Publisher</h3>
+	<div id="publisher" class="editable" rel="text">
+	<?php display_empty($item->publisher); ?>
+	</div>
+	
+	<h3>Date</h3>
 	<div>
 	<?php echo $item->date;?>
+	</div>
+	
+	<h3>Contributor</h3>
+	<div class="editable" id="contributor" rel="text">
+	<?php display_empty($item->contributor)?>
+	</div>
+	
+	<h3>Rights</h3>
+	<div class="editable" id="rights" rel="text">
+	<?php display_empty($item->rights); ?>
+	</div>
+	
+	<h3>Rights Holder</h3>
+	<div class="editable" id="rights_holder" rel="text">
+	<?php display_empty($item->rights_holder)?>
+	</div>
+
+	<h3>Relation</h3>
+	<div class="editable" id="relation" rel="text">
+	<?php display_empty($item->relation); ?>
+	</div>
+	
+	<h3>Spatial Coverage</h3>
+	<div id="spatial-coverage" class="editable" rel="text">
+	<?php display_empty($item->spatial_coverage)?>
+	</div>
+	
+	<h3>Temporal Coverage</h3>
+	<div id="temporal-coverage">
+	<?php display_empty($item->temporal_coverage_start); ?> &mdash; 
+	<?php display_empty($item->temporal_coverage_end)?>
+	</div>
+	
+	<h3>Language</h3>
+	<div class="editable" id="language" rel="text">
+	<?php display_empty($item->language); ?>
+	</div>
+
+	<h3>Provenance</h3>
+	<div class="editable" id="provenance" rel="text">
+	<?php display_empty($item->provenance)?>
+	</div>
+	
+	<h3>Bibliographic Citation</h3>
+	<div class="editable" id="citation" rel="text">
+	<?php display_empty($item->getCitation());?>
 	</div>
 
 </div>
@@ -178,7 +180,7 @@
 </div>
 
 <?php if ( $item->Collection->exists() ): ?>
-	<h4>Collection</h4>
+	<h3>Collection</h3>
 
 	<div id="collection">
 		<?php echo $item->Collection->name; ?>
@@ -186,19 +188,19 @@
 <?php endif; ?>
 
 
-<h3>Type Metadata</h3>
+<h2>Type Metadata</h2>
 
-<h4>Type Name</h4>
+<h3>Type Name</h3>
 <div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
 
 <?php foreach($item->Metatext as $key => $metatext): ?>
-<h4><?php echo $metatext->Metafield->name; ?></h4>
+<h3><?php echo $metatext->Metafield->name; ?></h3>
 <div><?php echo $metatext->text; ?></div>
 <?php endforeach; ?>
 
-<h3>Tags</h3>
+<h2>Tags</h2>
 <?php if ( has_permission('Items','tag') ): ?>
-<h4>My Tags</h4>
+<h3>My Tags</h3>
 <div id="my-tags">
 	<form id="tags-form" method="post" action="">
 	<input type="text" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
@@ -207,7 +209,7 @@
 </div>
 <?php endif; ?>
 
-<h4>All Tags</h4>
+<h3>All Tags</h3>
 <div id="tags">
 	<ul class="tags">
 		<?php foreach( $item->Tags as $key => $tag ): ?>

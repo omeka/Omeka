@@ -1,28 +1,46 @@
 <?php head(); ?>
 <?php common('archive-nav'); ?>
+<script type="text/javascript">
+/* revealPath is used in revealSwitch(); */
+var revealPath = "<?php echo uri('items/'); ?>";
 
+
+function revealChoice() {
+	if(!document.getElementById) return false;
+	var detailedView = $('detailed');
+	simpleView = $('simple');
+
+	simpleView.onclick = function() {
+		revealSwitch( 'view-choice', 'simple-view');
+		this.addClassName('current');
+		detailedView.removeClassName('current');
+		return false;
+	}
+	detailedView.onclick = function() {
+		revealSwitch( 'view-choice', 'detailed-view');
+		this.addClassName('current');
+		simpleView.removeClassName('current');
+		return false;
+	}
+}
+
+Event.observe(window,'load',revealChoice);
+
+</script>
 <div id="primary">
-<ul id="tertiary-nav" class="navigation">
-	<?php 
-		if(has_permission('Items','add')) {
-			nav(array('Browse Items' => uri('items/browse'), 'Add Item' => uri('items/add')));
-		}
-	?>
-</ul>
 <?php if ( total_results(true) ): ?>
 
 <h1>Browse Items (<?php echo total_results(true);?> items total)</h1>
-
+<div id="add-new-item" class="add"><a href="<?php echo uri('items/add'); ?>">Add an Item</a></div>
 <h2 id="search-header" class="close">Search Items</h2>
 <?php include('searchform.php'); ?>
-
-	<div class="pagination"><?php echo pagination_links(); ?></div>
-
+<div id="browse-meta">
+<div class="pagination"><?php echo pagination_links(); ?></div>
 <ul class="navigation" id="view-style">
 	<li><a id="detailed" href="?view=detailed"<?php if($_GET['view'] == 'detailed' || $_GET['view'] == '') echo ' class="current"';?>>Detailed</a></li>
 	<li><a id="simple" href="?view=simple"<?php if($_GET['view'] == 'simple') echo ' class="current"';?>>Simple</a></li>
 </ul>	
-
+</div>
 <form action="<?php echo uri('items/powerEdit'); ?>" method="post" accept-charset="utf-8">
 	
 	<div id="view-choice">
@@ -33,7 +51,7 @@
 	<?php endif; ?>
 	</div>
 
-<input type="submit" name="submit" value="Modify these Items --&gt;">
+<input type="submit" name="submit" value="Modify these Items" />
 
 </form>
 
