@@ -48,6 +48,7 @@ textarea {font-size:1.2em; font-family:;}
 	.field .textinput {display:block; float:right;}
 	.dateinput .textinput {width: 50px; display:inline; float:none;}
 	.dateinput {display:inline;}
+
 	
 /* Reusable Classes */
 .hide {text-indent:-1000em; height:0; width:0; overflow:hidden;}

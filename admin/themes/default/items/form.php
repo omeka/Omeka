@@ -57,9 +57,11 @@
 		for (var i=0; i < tooltipIds.length; i++) {
 			var elId = tooltipIds[i];
 			$(elId).style.cursor = "help";
-			
+			var image = document.createElement('img');
+			image.src = "<?php echo img('info.gif'); ?>";
+			$(elId).appendChild(image);
 			var tooltipId = elId + '_tooltip';
-			var tooltip = new Tooltip(elId, tooltipId, {default_css:true, zindex:100000});
+			var tooltip = new Tooltip(image, tooltipId, {default_css:true, zindex:100000});
 			$(tooltipId).addClassName('info-window');
 		};
 	}
