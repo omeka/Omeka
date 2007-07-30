@@ -130,7 +130,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 			//Add the metafields
 			foreach ($this->metafields as $name => $def) {
 				$mf = $mfTable->findByName($name);
-				if(!count($mf)) {
+				if(!$mf) {
 					$mf = new Metafield;
 					$mf->setArray($def);
 					$mf->plugin_id = $plugin_id;
@@ -138,7 +138,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 				}
 				
 			}
-			
+
 			//Add the types
 			foreach ($this->types as $name => $def) {
 				$t = $typesTable->findByName($name);
