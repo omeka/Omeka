@@ -186,7 +186,7 @@ class ItemTable extends Doctrine_Table
 		$select->limitPage($params['page'], $params['per_page']);
 
 		//Order items by recent
-		if(isset($options['recent'])) {
+		if(isset($params['recent'])) {
 			$this->orderSelectByRecent($select);
 		}
 
@@ -216,7 +216,7 @@ class ItemTable extends Doctrine_Table
 		$query->select('i.*, t.*')->from('Item i');
 		$query->leftJoin('Item.Collection c');
 		$query->leftJoin('i.Type ty');
-		
+				
 		//If no IDs were returned in the first query, then whatever
 		if(!empty($ids)) {
 			$where = "(i.id = ".join(" OR i.id = ", $ids) . ")";

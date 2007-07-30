@@ -2,7 +2,7 @@
 <div id="detailed">
 <?php foreach($items as $key => $item):?>
 <div class="item">
-	<h2><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo $item->title; ?></a></h2>
+	<h2><?php link_to_item($item); ?></h2>
 
 	<div class="meta">
 		<ul>

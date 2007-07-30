@@ -985,6 +985,31 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		return $html;		
 	}
 	
+	/**
+	 *
+	 * @see Zend/View/Helper/Url.php
+	 *
+	 * @return void
+	 **/
+	function generate_url($options, $name)
+	{
+		$ctrl = Kea_Controller_Front::getInstance();
+        $router = $ctrl->getRouter();
+        
+        if (empty($name)) {
+            $route = $router->getCurrentRoute();
+        } else {
+            $route = $router->getRoute($name);
+        }
+        
+        $request = $ctrl->getRequest();
+        
+        $url = rtrim($request->getBaseUrl(), '/') . '/';
+        $url .= $route->assemble($options);
+         
+        return $url;
+	}
+	
 	//Adapted from PHP.net: http://us.php.net/manual/en/function.nl2br.php#73479
 	function nls2p($str)
 	{

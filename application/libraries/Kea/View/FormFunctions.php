@@ -305,7 +305,7 @@
 				echo $out;
 			}
 		} else {
-			$metafields = $item->Metafields;
+			$metafields = $item->TypeMetafields;
 
 			metatext_form($item, $type, $metafields, $usePlugins );
 		}

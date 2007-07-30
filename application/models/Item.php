@@ -126,39 +126,16 @@ class Item extends Kea_Record
 	 **/
 	public function get($name) {
 		switch ($name) {
-			case 'Metafields':
+			case 'TypeMetafields':
 				//Cache the metafields so we don't run the query too many times
 				if(empty($this->_metafields)) {
-					$mfIds = $this->getMetafieldIds();
-					if(!empty($mfIds)) {
-						$dql = "SELECT m.* FROM Metafield m WHERE";
-						if(count($mfIds) > 1) 
-							$dql .=  " m.id IN (".join(', ', $mfIds).")";
-						else
-							$dql .= " m.id = {$mfIds[0]}";
-						$this->_metafields = $this->executeDql($dql);
-					}else {
-						$this->_metafields = new Doctrine_Collection('Metafield');
-					}
+					$this->_metafields = $this->getMetafields('Type');
 				}
-				
 				return $this->_metafields;
 			
 			case 'Metatext':
 				if(empty($this->_metatext)) {
-					$mfIds = $this->getMetafieldIds();
-					if(!empty($mfIds) and $this->exists() ) {
-						$dql = "SELECT m.* FROM Metatext m WHERE ";
-						if(count($mfIds) > 1)
-							$dql .= "m.metafield_id IN(".join(', ',$mfIds).")";
-						else 
-							$dql .= "m.metafield_id = {$mfIds[0]}";
-							
-						$dql .= " AND m.item_id = {$this->id}";
-						$this->_metatext = $this->executeDql($dql);	
-					}else {
-						$this->_metatext = new Doctrine_Collection('Metatext');
-					}										
+					$this->_metatext = $this->getTypeMetatext();									
 				}
 				return $this->_metatext;
 					
@@ -173,6 +150,28 @@ class Item extends Kea_Record
 				return parent::get($name);
 				break;
 		}
+	}
+	
+	/**
+	 * This is duplicated from getMetafields() basically
+	 *
+	 * @return void
+	 **/
+	public function getTypeMetatext()
+	{
+		$mfIds = $this->getMetafieldIds('Type');
+		if(!empty($mfIds) and $this->exists() ) {
+			$dql = "SELECT m.* FROM Metatext m WHERE ";
+			if(count($mfIds) > 1)
+				$dql .= "m.metafield_id IN(".join(', ',$mfIds).")";
+			else 
+				$dql .= "m.metafield_id = {$mfIds[0]}";
+				
+			$dql .= " AND m.item_id = {$this->id}";
+			return $this->executeDql($dql);	
+		}else {
+			return new Doctrine_Collection('Metatext');
+		}	
 	}
 	
 	/**
@@ -209,6 +208,23 @@ class Item extends Kea_Record
 		$mt->add($newMt);
 	}
 	
+	public function getMetafields($for='All')
+	{
+		$mfIds = $this->getMetafieldIds($for);
+		if(!empty($mfIds)) {
+			$dql = "SELECT m.* FROM Metafield m WHERE";
+			if(count($mfIds) > 1) 
+				$dql .=  " m.id IN (".join(', ', $mfIds).")";
+			else
+				$dql .= " m.id = {$mfIds[0]}";
+			$mfs = $this->executeDql($dql);
+		}else {
+			$mfs = new Doctrine_Collection('Metafield');
+		}
+		
+		return $mfs;
+	}
+	
 	/*	Pull in the appropriate metafield IDs
 	 *	1) All metafields associated with the Item's type
 	 *	2) All metafields associated with a plugin
@@ -218,36 +234,33 @@ class Item extends Kea_Record
 	 */ 
 	protected function getMetafieldIds($for='All')
 	{
-		$mfTable = $this->getTableName('Metafield');
-		$tmTable = $this->getTableName('TypesMetafields');
-		$pTable = $this->getTableName('Plugin');
-		$tTable = $this->getTableName('Type');
-		
+		$select = new Kea_Select;
+
 		//Get metafields for plugins
 		if( ($for == 'Plugin') or ($for == 'All')) {
 			$where[] = 'p.active = 1';
+			$select->where('p.active = 1');
+		}
+		
+		if(empty($this->type_id) and $for == 'Type') {
+			return array();
 		}
 		
 		//Get the metafields for a specific Type
 		if(!empty($this->type_id) and is_numeric($this->type_id) and ($for == 'All' || $for == 'Type')) {
-			$where[] = "mf.id IN (
-					SELECT mf.id FROM $mfTable mf
-					INNER JOIN $tmTable tm ON tm.metafield_id = mf.id
-					INNER JOIN $tTable t ON t.id = tm.type_id
-					WHERE t.id = {$this->type_id} )";
+			$sub = new Kea_Select;
+			$sub->from(array('Metafield','mf'), 'mf.id')
+				->innerJoin(array('TypesMetafields','tm'), 'tm.metafield_id = mf.id')
+				->innerJoin(array('Type','t'), 't.id = tm.type_id')
+				->where('t.id = ?', $this->type_id);
+			
+			$select->orWhere('mf.id IN ('.$sub->__toString().')');	
 		}
-		$sql = "SELECT mf.id FROM $mfTable mf
-				LEFT JOIN $pTable p ON p.id = mf.plugin_id
-				WHERE ".join(' OR ', $where);
-
-		$res = $this->execute($sql);
-
-		$ids = array();
-		foreach ($res as $k => $v) {
-			$ids[$k] = $v['id'];
-		}
-		return $ids;
-
+				
+		$select->from(array('Metafield','mf'),'mf.id')
+				->joinLeft(array('Plugin','p'), 'p.id = mf.plugin_id');
+		
+		return $select->fetchColumn();
 	}
 	
 	public function hasThumbnail()
