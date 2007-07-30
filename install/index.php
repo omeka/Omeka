@@ -162,7 +162,7 @@ if (isset($_REQUEST['install_submit'])) {
 		$theme->save();
 
 		
-		echo 'hooray! the db is setup and you are ready to roll. <a href="'.dirname(dirname($_SERVER['REQUEST_URI'])).'">check out your site here!</a>';
+		echo 'hooray! the db is setup and you are ready to roll. <a href="'.dirname($_SERVER['REQUEST_URI']).'">check out your site here!</a>';
 		$display_form = false;
 
 	} catch(Exception $e) {
@@ -176,9 +176,9 @@ if ($display_form == true):
 ?>
 <div id="intro">
 <h1>Omeka Installation</h1>
-<p>Proin at eros non eros adipiscing mollis. Donec semper turpis sed diam. Sed consequat ligula nec tortor. Integer eget sem. Ut vitae enim eu est vehicula gravida. Morbi ipsum ipsum, porta nec, tempor id, auctor vitae, purus. Pellentesque neque.</p>
+
 </div>
-<form action="install.php" method="post" accept-charset="utf-8" id="install-form">
+<form method="post" accept-charset="utf-8" id="install-form">
 	<fieldset>
 	<legend>Site Settings</legend>
 	<div class="field">

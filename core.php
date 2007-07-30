@@ -8,7 +8,7 @@ require_once 'Zend.php';
 Zend::register('path_names', $site);
 
 function install_notification() {
-	die('Please install Omeka.<a href="'.WEB_ROOT.DIRECTORY_SEPARATOR.'install/install.php">Click here to install Omeka.</a>');
+	die('Please install Omeka.<a href="'.WEB_ROOT.DIRECTORY_SEPARATOR.'install/">Click here to install Omeka.</a>');
 }
 
 require_once 'Zend/Config/Ini.php';
