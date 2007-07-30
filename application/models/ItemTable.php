@@ -58,8 +58,9 @@ class ItemTable extends Doctrine_Table
 			$select->addOrderBy('ie.time DESC');
 		}else {
 			$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
-			
-	//		$select->order('i.added DESC');
+			$select->joinLeft(array('EntityRelationships', 'er'), 'er.id = ie.relationship_id');
+			$select->where('er.name = "added"');
+			$select->order('ie.time DESC');
 		}
 	}
 	
@@ -183,6 +184,11 @@ class ItemTable extends Doctrine_Table
 		}
 		
 		$select->limitPage($params['page'], $params['per_page']);
+
+		//Order items by recent
+		if(isset($options['recent'])) {
+			$this->orderSelectByRecent($select);
+		}
 
 		//At this point we can return the count instead of the items themselves if that is specified
 		if($returnCount) {

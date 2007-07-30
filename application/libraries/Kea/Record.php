@@ -473,6 +473,9 @@ abstract class Kea_Record extends Doctrine_Record
 		foreach($this->_strategies as $strat) {
 			$strat->onDelete();
 		}
+		
+		$this->pluginHook('onDeleteRecord', array($this));
+		
 		return parent::delete();
 	}
 	

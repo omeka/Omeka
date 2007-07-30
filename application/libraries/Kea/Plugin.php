@@ -413,6 +413,10 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	public function onBrowseTypes($types) {}		
 	
 	public function onBrowseTags($tags, $for) {}
+	
+	//Low-level DB Hooks (why did I get rid of these in the first place?)
+	public function onDeleteRecord($record) {}
+	
 } // END class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 
 ?>

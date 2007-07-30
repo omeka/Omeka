@@ -501,8 +501,13 @@ class Item extends Kea_Record
 				
 				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
 				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
-					$user = Kea::loggedIn();
-					$this->applyTagString($clean['tags'], $user->Entity);
+					if(isset($options['entity'])) {
+						$entity = $options['entity'];
+					}else {
+						$user = Kea::loggedIn();
+						$entity = $user->Entity;
+					}
+					$this->applyTagString($clean['tags'], $entity);
 				}
 				
 				//If the item was made public, fire the plugin hook

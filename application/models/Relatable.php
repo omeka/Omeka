@@ -192,16 +192,12 @@ class Relatable	implements Kea_Strategy_Interface
 		return $this->toggleRelatedTo($entity_id, 'favorite');
 	}
 	
-	public function setAddedBy($user) {
-		$entity_id = $user->entity_id;
-		
-		return $this->addRelatedTo($entity_id, 'added');
+	public function setAddedBy($entity) {
+		return $this->addRelatedTo($entity, 'added');
 	}
 	
-	public function setModifiedBy($user) {
-		$entity_id = $user->entity_id;
-		
-		return $this->addRelatedTo($entity_id, 'modified');
+	public function setModifiedBy($entity) {		
+		return $this->addRelatedTo($entity, 'modified');
 	}
 	
 	public function addRelatedIfNotExists($entity, $rel) {

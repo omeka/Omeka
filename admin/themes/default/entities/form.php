@@ -1,7 +1,7 @@
 <script type="text/javascript" charset="utf-8">
 	
-	const Person = 3;
-	const Institution = 2;
+	const Person = "Person";
+	const Institution = "Institution";
 	
 	function switchForm(radio) {
 		var personElements = ['first_name','middle_name', 'last_name'];
