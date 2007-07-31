@@ -1,24 +1,9 @@
 <?php head(); ?>
-<style type="text/css" charset="utf-8">
-	.item-drop {
-		width: 150px;
-		height: 150px;
-		border: 1px solid black;
-		display:block;
-	}
-	
-	#item-select {
-		float:right;
-		display:inline;
-		height: 200px;
-	}
-	#item-select .item {
-		display:block;
-	}
-	
-	#layout-form {
-		clear:both;	
-	}
+<style type="text/css" media="screen">
+@import url('<?php layout_css(); ?>');
+#item-select {float:left; width: 378px;}
+#layout-all {float:right; width:378px;}
+
 </style>
 
 <script type="text/javascript" charset="utf-8">
@@ -28,7 +13,7 @@
 </script>
 <?php js('exhibits'); ?>
 <?php common('exhibits-nav'); ?>
-<div id="primary">
+<div id="exhibit-page">
 <?php if ( empty($page->layout) ): ?>
 
 <h2>Choose a layout for the page</h2>
@@ -62,7 +47,6 @@
 	//Retrieve items with their pagination
 	$retVal = _make_omeka_request('Items','browse',array('pagination_url'=>$url, 'public'=>true),array('items','pagination'));
 	extract($retVal);
-		items_filter_form(array(), $url);
 	?>
 		
 	<div id="item-select">
@@ -77,7 +61,6 @@
 			<div class="item-drop">
 				<div class="item-drag">
 					<div class="item_id"><?php echo $item->id; ?></div>
-			
 					<?php 
 						if(has_thumbnail($item)){
 							thumbnail($item);
@@ -88,39 +71,33 @@
 				</div>
 				<div class="item_id"><?php echo $item->id; ?></div>
 			</div>
-		<?php endforeach; ?>	
+		<?php endforeach; ?>
+		<h2 id="search-header" class="close">Search Items</h2>
+		
+		<?php items_filter_form(array('id'=>'search'), $url); ?>
+			
 	</div>
 <form name="layout" id="layout-all" method="post">
-	
-
 	<div id="layout-form">
-<?php 
-	render_layout_form($page->layout);
-?>
+	<?php render_layout_form($page->layout); ?>
 	</div>
 <?php
 	submit('Save Changes &amp; Continue Paginating Through Items', 'save_and_paginate'); 
 	submit('Save &amp; Return to Exhibit', 'exhibit_form');
 	submit('Save &amp; Return to Section', 'section_form');
 	submit('Save &amp; Add Another Page', 'page_form');
-	submit('Change the layout for this page', 'change_layout');
-	
+	submit('Change the layout for this page', 'change_layout');	
 ?>
 </form>
-
 	<?php if ( $page->exists() ): ?>
 		<form action="<?php echo uri('exhibits/deletePage/'.$page->id); ?>">
-		<?php 
-			submit('Cancel/Delete this page', 'delete_page'); 
-		?>
-	
-	</form>
+		<?php submit('Cancel/Delete this page', 'delete_page'); ?>
+		</form>
 	<?php else: ?>
 		<form method="get">
-			<input type="submit" name="cancel" value="Cancel adding this page" />
+			<?php submit('Cancel Adding This Page', 'cancel'); ?>
 		</form>
 	<?php endif; ?>
-
 <?php endif; ?>
 </div>
 <?php foot(); ?>

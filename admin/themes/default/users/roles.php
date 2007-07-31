@@ -22,17 +22,19 @@
 <div id="message"></div>
 
 <h1>Available Roles</h1>
-<ul>
+
 <?php foreach( $roles as $role ): ?>
-	<li><h3><?php echo $role; ?></h3>
+	<dl class="user<?php echo $role; ?>">
+	<dt><?php echo $role; ?></dt>
 		<?php 
 			$roleRules = $acl->getRoleAssignedRules($role); 
 			
 		?>
 		<?php if(!empty($roleRules)): ?>
-		<ul>
+		<dd>
+			<ul>
 		<?php foreach( $roleRules as $k => $roleRule ): ?>
-			<li><h4><?php echo $k;?></h4>
+			<li><div class="role-rule"><?php echo $k;?></div>
 				<ul>
 				<?php foreach( $roleRule as $rr ): ?>
 					<li><?php echo $rr; ?></li>
@@ -40,14 +42,12 @@
 				</ul>		
 			</li>
 		<?php endforeach; ?>
-		</ul>
+		</dd>
 		<?php endif; ?>
-		
-	</li>
+	</dl>
 <?php endforeach; ?>
-</ul>
 
-<h2>Available Rules</h2>
+<h1>Available Rules</h1>
 <ul>
 <?php foreach( $rules as $key=>$rule ): ?>
 	<li>

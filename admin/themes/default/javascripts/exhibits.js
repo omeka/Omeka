@@ -226,4 +226,3 @@ function dragDropPage() {
 		el.hide();
 	});	
 }
-

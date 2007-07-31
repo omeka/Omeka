@@ -33,5 +33,33 @@ function toggleSearch() {
 	}
 }
 
+function hideReorderSections() {
+	if(!$('reorder_sections')) return;
+	$('reorder_sections').remove();	
+}
+
+function hideReorderExhibits() {
+	if(!$('reorder_exhibits')) return;
+	$('reorder_exhibits').remove();	
+}
+
+function styleExhibitBuilder() {
+	
+	hideReorderSections();
+	hideReorderExhibits();
+	
+	var handles = $$('.handle');
+	for(var i=0; i<handles.length; i++) {
+		handles[i].setStyle({display:'inline',cursor: 'move'});
+	}
+		
+	var orderInputs = $$('.order-input');
+	for(var i=0; i<orderInputs.length; i++) {
+		orderInputs[i].setStyle({border: 'none',background:'#fff',color: '#333'});
+	}
+	
+}
+
 Event.observe(window,'load',toggleSearch);
 Event.observe(window,'load',alertBox);
+Event.observe(window,'load',styleExhibitBuilder);

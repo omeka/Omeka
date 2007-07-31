@@ -10,6 +10,7 @@
 		listSorter.partialUri = "<?php echo uri('exhibits/ajaxPageList'); ?>";
 		listSorter.recordId = '<?php echo $section->id; ?>';
 		listSorter.tag = 'tr';
+		listSorter.handle = 'handle';
 		listSorter.confirmation = 'Are you sure you want to delete this page?';
 		listSorter.deleteLinks = listSorter.list.getElementsByClassName('delete-page');
 								
@@ -38,6 +39,7 @@
 		<fieldset>
 		<table>
 			<tr>
+				<th>Reorder</th>
 				<th>Page Order</th>
 				<th>Layout</th>
 				<th># of Items</th>
@@ -48,6 +50,7 @@
 			<tbody id="page-list">
 			<?php foreach( $section->Pages as $key => $page ): ?>
 			<tr id="page_<?php echo $key; ?>">
+				<td class="handle"><img src="<?php echo img('icons/arrow_move.png'); ?>" alt="Drag" /></td>
 				<td><?php text(array('name'=>"Pages[$key][order]",'size'=>2), $key); ?></td>
 				<td><?php exhibit_layout($page->layout, false); ?></td>
 				<td><?php echo $page->getItemCount(); ?></td>

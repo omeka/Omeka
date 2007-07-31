@@ -226,7 +226,7 @@
 	
 	function submit($value="Submit this Form",$name="submit")
 	{
-		echo '<input type="submit" name="'.$name.'" value="'.$value.'" />';
+		echo '<input type="submit" name="'.$name.'" id="'.$name.'" value="'.$value.'" />';
 	}
 	
 	function items_filter_form($props=array(), $uri) {
