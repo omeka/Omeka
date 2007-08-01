@@ -1,0 +1,151 @@
+/* == Reset == */
+@import url("reset.css");
+@import url("cbb.css");
+
+/* ==== Generic styles ===== */
+body {font: 75% "Helvetica Neue",Helvetica, Arial, sans-serif; margin: 0; }
+html>body {font-size: 12px;}
+p, span {font-size: 1em; line-height: 1.5em; margin: .5em 0 1.5em;}
+
+/* ====Headings==== */
+h1, h2, h3, h4, h5 {font-family: palatino, georgia, times, serif; font-weight: normal; }
+	h1 {float: left; text-align: left; font-size: 3em; line-height: 1em; padding: .5em;}
+	h2 {text-transform: uppercase; font-size: 1.6em; line-height: 1.13em; margin: 0 0 1.13em; padding: 0 .6em; }
+	h3 {font-size: 1.4em; line-height: 1.28em;}
+	h4 {font-size: 1.2em; line-height: 1.5em; margin: .75em 0 1.5em;}
+	h5 {font-size: 1em; line-height: 1em; margin: .5em 0 1em;}
+	h6 {}
+
+#header h3 {float: right; font-style: italic; padding: .5em .5em 0; width: 300px;}
+#items h2 {margin-bottom: .6em;}
+
+/* =====Colors & Borders===== */
+
+body {color: #444; background-color: #d8caab;} 
+h1, h2, h3, h4, h5 {color: #2d2303;}
+	h2 {color: #284907; border-bottom: 1px solid #284907;}
+
+a:link {color: #284907;}
+a:visited {color: #5c832f;}
+a:hover {color: #69bfde;} 
+	h1 a, h1 a:visited {color: #284907; text-decoration: none;}
+	h3 a:link, h3 a:visited { text-decoration: none;}
+	ul#primary-nav li.current a:link, ul#primary-nav li.current a:visited {border-bottom: 3px solid #5c832f;}
+	#footer a:link, #footer a:visited {color: #2d2303;}
+
+select.pagination-link {border: 1px solid #bbb5a0; }
+
+dl#metadata dt { border-bottom: 1px dotted #bbb5a0; }
+dl#metadata dd {border-bottom: 1px dotted #bbb5a0;}
+
+	.-popular a, .-popular a:visited {color: #284907;}
+	.v-popular a {color: #405d20;}
+	.vv-popular a {color: #587038;}
+	.vvv-popular a {color: #708451;}
+	.vvvv-popular a {color: #889869;}
+	.vvvvv-popular a {color: #9fab82;}
+	.vvvvvv-popular a {color: #b7bf9a;}
+	.vvvvvvv-popular a {color: #cfd3b3;}
+	.vvvvvvvv-popular a {color: #e7e6cb;}
+	
+/* ==Misc. elements=== */
+p {padding: 0 1em 1em;}
+p,ul,ol,dl {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
+abbr,acronym {border: none; font-style: normal;}
+
+/* ==Reusable classes== */
+.hide {text-indent: -1000em; width: 0; height: 0; overflow: hidden;}
+.clear {clear: both;}
+
+.navigation {list-style: none;}
+	.navigation li {display:inline;}
+	.navigation a {text-decoration:none;}
+
+/* ====== Structure ====== */
+
+#wrap {width: 1000px; margin: 0 auto; position: relative;}
+#header,#nav {width: 1000px; margin: 0 auto; position: relative; margin: 1em 0 0; }
+#featured-item, #recent-items, #items, #show-item, #collections, #about, #exhibits {float: left; width: 662.28px; margin: 1em 0 0; overflow: hidden; }
+	#collection {margin: 0 1em 1em;}
+#content {width: 1000px; margin: 0 auto 2em; overflow: hidden;}
+#primary {float: left; margin-right: 24px;}
+	#primary div#pagination {width: auto; font-size: 1em; padding: .5em; text-align: right;}
+#secondary {float: left;}
+#footer {padding: 1em;}
+
+#searchwrap, #news, #tagcloud, #foot { width: 313.72px; overflow: hidden; margin: 1em 0 0;}
+		#searchform, #news ul, #tagcloud ul {padding: 0 12px;}
+		#searchform {padding: 0 auto; margin: 0 0 1em;}
+		#searchform input {padding: .25em 12px; width: 200px;}
+		#searchform input#search { width: auto; padding: .25em .2em;}
+		
+		#news li {list-style-type: square; list-style-position: outside; padding-left: .5em; margin-bottom: 1em; }
+		#show-item dl {margin-bottom: 2em;}
+			#show-item img {padding: 1em;}
+
+/* ====Navigation==== */
+
+ul#primary-nav {margin: 0 auto;}
+	ul#primary-nav li {float: left;  font-size: 1.2em; }
+	ul#primary-nav li a:link, ul#primary-nav li a:visited {float: left; display: block; padding: .25em 0;}
+	ul#primary-nav:first-child {padding-left: 0;}
+
+/* ====Random Featured Item==== */
+
+#featured-item {overflow: hidden;}
+	#featured-item h3 {margin: .0625em 0;}
+	#featured-item h3 a:link, #featured-item h3 a:visited {text-decoration: none;}
+	#featured-item img {margin: 1em 25.14px;}
+
+#primary div.feat-metadata {width: 638.28px; padding: 0 12px; font-size: 1em;}
+	div.feat-metadata span {display: block; margin: .5em 0;}
+
+/* ====Recent Items==== */
+
+#recent-items ul {overflow: hidden; margin: 0 0 0 1em; font-size: 1em; line-height: 1.2em; padding-left: .3em;}
+	#recent-items img {vertical-align: top; margin-bottom: .25em;}
+	#recent-items ul li {float:left; display: inline; width: 150px; height: 200px; margin: 0 .5em .5em 0;}
+	#recent-items ul span.thumb {margin: 1em 0;}
+	#recent-items p {margin: 1em;}
+	#recent-items a:link, #recent-items a:visited {text-decoration: none;}
+	
+/* ====Browse Item & Collection Pages==== */
+
+#primary div.item {margin: .5em auto 1.5em; width: 600px; padding: 0 0 1em; overflow: hidden; border-bottom: 1px solid #aec197;}
+	#primary div.item .item-img {float: left; padding: 0 1em 0 0;}
+	#primary div.item .desc, #primary div.item .tagcloud {padding: 0 0 1em;}
+
+dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
+	dl#metadata dt { width: 34%; float: left; padding: 0.5em 2%;font-weight: bold; }
+
+	/* commented backslash hack for mac-ie5 \*/
+	dl#metadata dt { clear: both; }
+	/* end hack */
+
+	dl#metadata dd {float: left; width: 62%; padding: 0.5em 0;}
+	dl#metadata ul {font-size: inherit; margin: 0;}
+	ul.tags li {display: inline;}
+	
+	#collections dl {border-bottom: 1px solid #aec197; font-size: 1em; padding: 0 0 1em 0;}
+		#collections dd {text-indent: 1em;}
+
+/* ====Exhibits Page==== */
+
+	#exhibits table { margin: 1em auto; border: 1px solid #ddd; width: 90%;}
+		#exhibits table th, #exhibits table td {padding: 1em;}
+		#exhibits table th.wide {width: 45%;}
+		
+/* ====Microformats==== */
+.hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
+	.hTagcloud li {display:inline; margin-left:0; padding-left:0;}
+
+	.-popular {font-size:120%;}
+	.v-popular {font-size:160%;}
+	.vv-popular {font-size:200%;}
+	.vvv-popular {font-size:240%;}
+	.vvvv-popular {font-size:260%;}
+	.vvvvv-popular {font-size:280%;}
+	.vvvvvv-popular {font-size:300%;}
+	.vvvvvvv-popular {font-size:320%;}
+	.vvvvvvvv-popular {font-size:340%;}
+	

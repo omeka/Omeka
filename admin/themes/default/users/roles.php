@@ -23,72 +23,106 @@
 
 <h1>Available Roles</h1>
 
-<?php foreach( $roles as $role ): ?>
-	<dl class="user<?php echo $role; ?>">
-	<dt><?php echo $role; ?></dt>
-		<?php 
-			$roleRules = $acl->getRoleAssignedRules($role); 
-			
-		?>
-		<?php if(!empty($roleRules)): ?>
-		<dd>
-			<ul>
-		<?php foreach( $roleRules as $k => $roleRule ): ?>
-			<li><div class="role-rule"><?php echo $k;?></div>
-				<ul>
-				<?php foreach( $roleRule as $rr ): ?>
-					<li><?php echo $rr; ?></li>
-				<?php endforeach; ?>		
-				</ul>		
-			</li>
-		<?php endforeach; ?>
-		</dd>
-		<?php endif; ?>
-	</dl>
-<?php endforeach; ?>
+<table id="userroles">
+	<caption>User roles and permissions, in alphabetical order.</caption>
+	<thead>
+		<tr>
+			<th></th>
+			<th class="rolename">Super</th>
+			<th class="rolename">Admin</th>
+			<th class="rolename">Contributor</th>
+			<th class="rolename">Researcher</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Collections</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Entities</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Exhibits</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Files</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Items</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
+		</tr>
+		<tr>
+			<th>Plugins</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Settings</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Static</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Tags</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Themes</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Types</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Users</th>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
 
-<h1>Available Rules</h1>
-<ul>
-<?php foreach( $rules as $key=>$rule ): ?>
-	<li>
-		<?php echo $key; ?>
-		<?php $ruleNames[$key] = $key; ?>
-		<ul>
-			<?php foreach( $rule as $k => $action ): ?>
-				<li><?php echo $action; ?></li>
-			<?php endforeach; ?>
-		</ul>
-	</li>
-<?php endforeach; ?>
-</ul>
 
-<h3>Add a New Role</h3>
-<form method="post" action="<?php echo uri('users/addRole');?>">
-	<input type="text" name="name"/>
-	<input type="submit" name="submit" value="Add a New Role"/>
-</form>
-
-<h3>Add a New Action to a Rule</h3>
-<form method="post" action="<?php echo uri('users/addRule'); ?>">
-	<?php text(array('name'=>'action', 'id'=>'action'), null, 'Action Name'); ?>
-	<?php select(array('name'=>'rule','id'=>'rule'),$ruleNames); ?>
-	<?php submit('Add Action'); ?>
-</form>
-
-<h3>Delete an Action from a Rule</h3>
-<form method="post" action="<?php echo uri('users/deleteRule'); ?>">
-	<?php text(array('name'=>'action', 'id'=>'action'), null, 'Action Name'); ?>
-	<?php select(array('name'=>'rule','id'=>'rule'),$ruleNames); ?>
-	<?php submit('Delete Action'); ?>
-</form>
-
-<form action="<?php echo uri('users/deleteRole'); ?>" method="post">
-<h3>Delete Roles</h3>
-<?php select(array('name' => 'role'), $roles); ?>
-<input type="submit" value="Delete The Selected Role" onclick="return confirm('Are you sure you want to delete the selected role?');">
-</form>
-
-<br/>
 <h3>Alter Role Permissions</h3>
 <?php select(array('name' => 'role', 'id'=>'alter_role'), $roles); ?>
 <div id="rulesForm"></div>

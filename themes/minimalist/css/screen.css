@@ -1,0 +1,123 @@
+/* == Reset == */
+@import url("reset.css");
+
+/* == Generic styles ======== */
+body {font: 75% "Helvetica Neue",Helvetica, Arial, sans-serif; color: #444; background: #fffff8;  margin:0; }
+html>body {font-size: 12px;}
+p, span,ul,ol,dl  {font-size: 1em; line-height: 1.5em;}
+abbr,acronym {border: none; font-style: normal;}
+
+/* Headings */
+h1, h2, h3 {font-family: 'Trebuchet MS'; font-weight: normal; }
+h1 {color: #4b0049; text-transform: uppercase; letter-spacing: .2em; font-size: 3em; line-height: 1em; margin: 1em 0 0;}
+h2 {text-align: left; border-bottom: 1px solid #ddd; font-size: 2em; line-height: .75em; margin-bottom: .75em;}
+h3 {font-size: 1.5em; line-height: 1em; margin-bottom: 1em;}
+h4 {font-size: 1.2em; line-height: 1.25em; margin: .75em 0 1.25em; letter-spacing: .1em;}
+h5 {font-size: 1.2em; line-height: 1.25em; margin: .75em 0 1.25em;}
+h6 {}
+
+#searchwrap h3 {text-transform: uppercase; font-size: 1em; margin: 0;}
+
+/* Links */
+a:link {color: #4b0049;}
+a:visited {color: #4b0049;}
+a:hover {color: #92278f;} 
+a:active {color: #ff00ff;}
+
+h1 a, h1 a:visited {color: #4b0049; text-decoration: none;}
+h4 a:link, h4 a:visited { text-decoration: none; color: #4b0049; padding: .25em 0;}
+h4 a:hover {color: #92278f; }
+
+/* Reusable classes */
+.hide {text-indent: -1000em; width: 0; height: 0; overflow: hidden;}
+
+.navigation {list-style:none; margin: 2em 0 0;}
+	.navigation li {display:inline;}
+	.navigation a {text-decoration:none;}
+
+/* ====== Structure ====== */
+
+#wrap {width: 744px; margin: 0 auto; position: relative;}
+#header {width: 744px; margin: 2em 0 0; padding: 1em 0 0;}
+#content {clear: both; margin-bottom: 2em;}
+#primary {clear: both; margin: 3em 0 0; width: 744px;}
+#secondary {clear: both; margin: 3em 0 0;}
+#featured-item {clear: both; margin: 1.5em 0;}
+#recent-items {clear: both; overflow: hidden; margin: 1.5em 0;}
+#tagcloud {margin-top: 2em;}
+#footer {clear: both; padding: 1em .5em; margin: 3em 0 1em; background-color: #eee;}
+.collection {margin: 1em 0; padding: 1em 0;border-bottom: 1px solid #ddd;}
+
+/* Search */
+#searchwrap {background-color: #eee; position: absolute; top: -1em; right: 0; font-size: .9em; margin: 0 0 18px; padding: .5em 1em;}
+form#search input, #search textarea {padding: 0 1em; border: 1px solid #ccc; background-color: #fff;}
+
+/* Primary Navigation */
+ul#primary-nav {margin: 2em 0; float: right; display: inline;}
+ul#primary-nav li {float: left; padding: .5em; text-transform: uppercase; letter-spacing: .14em; border-right: 1px solid #ccc;}
+ul#primary-nav li a:link, ul#primary-nav li a:visited {float: left; display: block; padding: .5em; color: #363636;}
+ul#primary-nav li a:hover {color: #92278f;}
+ul#primary-nav li#news {border: none;}
+ul#primary-nav:first-child {padding-left: 0;}
+
+/* Thumbnails */
+span.thumb {margin: 0 0 2em;}
+span.thumb a img {border: 1px solid #ccc;} 
+
+/* Random Featured Item */
+#featured-item {overflow: hidden; margin-bottom: 1em;}
+#featured-item h3 {margin: .0625em 0;}
+#featured-item h3 a:link, #featured-item h3 a:visited {text-decoration: none;}
+div.feat-metadata {width: 168px;}
+span.feat-img {float: right; padding-left: 1em;}
+
+/* Recent Items */
+#recent-items img {vertical-align: top; margin: 0 0 1em 1em;}
+#recent-items ul li {float:right; width: 170px; height: 170px;}
+
+/* Browse and Item Pages */
+#pagination {float: left; font-size: .9em; width: auto;}
+	#pagination li {display: inline; padding: 0 .5em 0 0;}
+	#pagination a {padding: 0 .5em 0 0;}
+
+.item {overflow: hidden; width: 318px; min-height: 187px; float: left; border-bottom: 1px solid #eee;}
+	.item .item-content {float:right; margin-left: 18px; margin-bottom: 18px;}
+	.item .item-meta {float:left;}
+ 	.item span {line-height: 1.5em; margin-bottom: 1.5em;}
+	.item span.thumb {float: right;}
+	.iten div.item-img {margin: 9px;}
+.hentry {margin: 18px 36px 18px 18px; }
+
+dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
+dl#metadata dt { width: 38%;float: left;padding: 0.5em 0; border-bottom: 1px dotted #ddd;font-weight: bold;}
+/* commented backslash hack for mac-ie5 \*/
+dl#metadata dt { clear: both; }
+/* end hack */
+dl#metadata dd {float: left;width: 62%;padding: 0.5em 0;border-bottom: 1px dotted #ddd;}
+dl#metadata ul {font-size: inherit; margin: 0;}
+ul.tags li {display: inline;}
+
+/* Microformats */
+.hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
+	.hTagcloud li {display:inline;}
+
+	.-popular {font-size:120%;}
+	.v-popular {font-size:140%;}
+	.vv-popular {font-size:180%;}
+	.vvv-popular {font-size:220%;}
+	.vvvv-popular {font-size:260%;}
+	.vvvvv-popular {font-size:300%;}
+	.vvvvvv-popular {font-size:320%;}
+	.vvvvvvv-popular {font-size:340%;}
+	.vvvvvvvv-popular {font-size:360%;}
+
+	.-popular a, .-popular a:visited {color: #ccc;}
+	.v-popular a {color: #ccc;}
+	.vv-popular a {color: #bebebe;}
+	.vvv-popular a {color: #b1b1b1;}
+	.vvvv-popular a {color: #a3a3a3;}
+	.vvvvv-popular a {color: #959595;}
+	.vvvvvv-popular a {color: #888;}
+	.vvvvvvv-popular a {color: #7a7a7a;}
+	.vvvvvvvv-popular a {color: #6d6d6d;}
+	

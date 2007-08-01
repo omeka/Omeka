@@ -3,7 +3,7 @@
 
 /* == Generic == */
 body {font:62.5% "Lucida Grande",verdana,arial,helvetica, sans-serif; color:#444; min-width:1000px;background:#333; border-top:12px solid #222;padding:0;}
-body#login {width:400px; min-width:400px;margin:0 auto; padding:40px 0;border:none;}
+body#login {width:344px; min-width:344px;margin:0 auto; padding:40px 0;border:none;}
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 {font-family:"Gill Sans", sans-serif;}
@@ -123,6 +123,11 @@ textarea {font-size:1.2em;}
 	
 /* == Wrap == */
 #wrap {background:#fff; overflow:hidden;}
+
+/* == Login == */
+#login h2, form, ul {margin: 1em 18px;}
+#login #site-title {margin-left: 18px;}
+#login .textinput {width: 300px;}
 
 /* == Header == */
 #header {overflow:hidden; background:#2c2c2c; padding-right:36px;}
@@ -263,6 +268,16 @@ ul.collections {float:right; width:378px;}
 
 #add-new-section-form {background: #fff09e; overflow:hidden; width:342px; padding:18px;}
 #add-new-section-form .field {}
+
+/* == User Roles == */
+table#userroles {width: auto;}
+table#userroles caption {margin: 0 0 1em 0;}
+table#userroles thead tr {border: none; }
+table#userroles tbody tr {border-bottom:none;}
+table#userroles th, table#userroles td {width: 8em;}
+table#userroles th {text-align: right; font-weight: bold; padding: 1em; background-color: #fff; border-right: 1px solid #cdcdc5; vertical-align: bottom;}
+table#userroles th.rolename {text-align: center; background-color: #e1e1d8;}
+table#userroles tbody td {border: 1px solid #cdcdc5; text-align: center; padding: .833333em .833333em 0;}
 
 /* == Footer styles == */
 
