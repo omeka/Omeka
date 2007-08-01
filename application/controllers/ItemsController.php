@@ -154,7 +154,7 @@ class ItemsController extends Kea_Controller_Action
 		 * 
 		 **/
 		$paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
-		$options = array(	'per_page'=>	10,
+		$options = array(	'per_page'=>	4,
 							'page'		=> 	1,
 							'pagination_url' => $paginationUrl);
 							
@@ -173,7 +173,7 @@ class ItemsController extends Kea_Controller_Action
 		}
 		
 		$params['page'] = $options['page'];
-		$params['per_page'] = $options['per_page'];
+		$params['per_page'] = $per_page;
 		
 		if($per_page = $this->_getParam('per_page')) {
 			$params['per_page'] = $per_page;

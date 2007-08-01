@@ -949,13 +949,12 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		//We don't have enough for pagination
 		if($total_results < $per_page) {
 			$html = '';
-		}else {
-			$html = '<ul><li class="first"><a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a></li>';
-
-		if( $page > 1 ) {
-			$html .= '<li class="previous"><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&#60; Prev</a></li>';
 		} else {
-			$html .= '<li class="previous">&#60; Prev</li>';
+			
+		if( $page > 1 ) {
+			$html = '<ul><li class="first"><a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a></li><li class="previous"><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&#60; Prev</a></li>';
+		} elseif( $page == 1) {
+			$html = '<ul>';
 		}
 
 		$buffer = floor( ( $num_links - 1 ) / 2 );
@@ -979,14 +978,11 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		}
 
 		if( $page < $num_pages ) {
-			$html .= '<li class="next"><a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next &#62;</a></li>';
-		} else {
-			$html .= '<li class="next">Next &#62;</li>';
+			$html .= '<li class="next"><a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next &#62;</a></li><li class="last"><a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a></li>';
 		}
 
-		$html .= '<li class="last"><a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a></li></ul>';
-
-	
+		$html .= '</ul>';
+			
 		if ($menu) {
 			$html .= '<select class="pagination-link" onchange="location.href = \''.$link . $page . '?per_page=' . ('\' + this.value + \'') .'\'">';
 			$html .= '<option>Results Per Page:&nbsp;</option>';

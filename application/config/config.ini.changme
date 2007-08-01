@@ -39,4 +39,4 @@ log.errors = false
 login.expire = 500
 
 ; Limit the number of items displayed
-pagination.per_page = 6
+pagination.per_page = 10
