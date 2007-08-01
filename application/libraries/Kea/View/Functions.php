@@ -103,25 +103,41 @@ function display_item_list($items,$title_only=false,$display_content=false) {
 	foreach($items as $key => $item): ?>
 	<div class="item hentry">
 		<div class="item-meta">
-		<h2><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink">Item <?php echo $item->id;?>: <span class="entry-title"><?php echo $item->title; ?></span></a></h2>
+		<h3><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php echo $item->title; ?></a></h3>
 		<?php if(!$title_only):?>
-		<p><?php echo $item->description; ?></p>
 
-		<div class="tagcloud">Tags: 
+		<div class="item-img">
+		<?php if(has_thumbnail($item)): ?>
+			<a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo thumbnail($item); ?></a>						
+		<?php else: ?>
+		<?php endif; ?>
+		</div>
+
+		<div class="desc"><strong>Description:</strong>
+		<?php if($item->description): ?>
+		<?php echo $item->description; ?>
+		<?php else: ?>
+			<span>None Available</span>
+		<?php endif; ?>
+		</div>
+
+		<div class="tagcloud"><strong>Tags:</strong> 
 		<?php if(count($item->Tags)): ?>
 		<?php foreach ($item->Tags as $tag): ?>
 		<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" re="tag"><?php echo $tag ?></a>
 		<?php endforeach; ?>
 		<?php else: ?>
-		No Tags
+		<span>No Tags</span>
 		<?php endif;?>
-
 		</div>
+
 		<?php endif; ?>
 		</div>
+
 		<?php if($display_content):?>
-	<div class="item-content"><?php display_item($item); ?></div>
-	<?php endif; ?>
+		<div class="item-content"><?php display_item($item); ?></div>
+		<?php endif; ?>
+	
 	</div>
 	<?php endforeach;
 }
@@ -844,23 +860,23 @@ function archive_image( $record, $props, $width, $height, $abs, $web,$return)
                list($o_width, $o_height) = getimagesize( $abs_path );
                if(!$width && !$height) 
                {
-                       $html .= 'width="' . $o_width . '" height="' . $o_height . '"';
+                       $html .= 'width="' . $o_width . '" height="' . $o_height . '" alt=""';
                }
                elseif( $o_width > $width && !$height )
                {
                        $ratio = $width / $o_width;
                        $height = $o_height * $ratio;
-                       $html .= 'width="' . $width . '" height="' . $height . '"';
+                       $html .= 'width="' . $width . '" height="' . $height . '" alt=""';
                }
                elseif( !$width && $o_height > $height)
                {
                        $ratio = $height / $o_height;
                        $width = $o_width * $ratio;
-                       $html .= 'width="' . $width . '" height="' . $height . '"';
+                       $html .= 'width="' . $width . '" height="' . $height . '" alt=""';
                }
                elseif ( $width && $height )
                {
-                       $html .= 'width="' . $width . '" height="' . $height . '"';
+                       $html .= 'width="' . $width . '" height="' . $height . '" alt=""';
                }
                $html .= '/>' . "\n";
 			   if($return) return $html;
@@ -937,9 +953,9 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 			$html = '<ul><li class="first"><a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a></li>';
 
 		if( $page > 1 ) {
-			$html .= '<li class="previous"><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&lt; Prev</a></li>';
+			$html .= '<li class="previous"><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">&#60; Prev</a></li>';
 		} else {
-			$html .= '<li class="previous">&lt; Prev</li>';
+			$html .= '<li class="previous">&#60; Prev</li>';
 		}
 
 		$buffer = floor( ( $num_links - 1 ) / 2 );
@@ -963,9 +979,9 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		}
 
 		if( $page < $num_pages ) {
-			$html .= '<li class="next"><a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next &gt;</a></li>';
+			$html .= '<li class="next"><a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next &#62;</a></li>';
 		} else {
-			$html .= '<li class="next">Next &gt;</li>';
+			$html .= '<li class="next">Next &#62;</li>';
 		}
 
 		$html .= '<li class="last"><a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a></li></ul>';
