@@ -10,7 +10,7 @@
 			<th>Username</th>
 			<th>Real Name</th>
 			<th>Email</th>
-			<th>Institution</th>
+			<th>Role</th>
 			<th>Active?</th>
 			<th>Edit</th>
 		</tr>
@@ -21,7 +21,7 @@
 		<td><?php  echo $user->username; ?></td>
 		<td><?php echo $user->first_name; ?> <?php echo $user->last_name; ?></td>
 		<td><?php echo $user->email; ?></td>
-		<td><?php echo $user->institution; ?></td>
+		<td><?php echo $user->role; ?></td>
 		
 		<td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
 		<td><a href="<?php echo uri('users/edit/'.$user->id);?>">[Edit]</a></td>

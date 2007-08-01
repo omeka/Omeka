@@ -32,7 +32,7 @@
 	function ajaxifyTypeMetadata()
 	{
 		var typeSelect = $('type');
-		
+		$('change_type').hide();
 		typeSelect.onchange = function() {
 			new Ajax.Request('<?php echo uri("items/ajaxTypeMetadata") ?>', {
 				parameters: 'id=<?php echo $item->id; ?>&type_id='+this.getValue(),
@@ -206,12 +206,13 @@
 		<div class="field">
 			<label id="temporal_coverage">Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
 			<div class="dates">
+				<span>From</span>
 				<span class="dateinput">
 					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>"> 
 					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
 					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>">
 				</span>
-				&ndash;
+				<span>to</span>
 				<span class="dateinput">
 					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>"> 
 					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
@@ -274,7 +275,7 @@
 						'Item Type',
 						'id',
 						'name' ); ?>
-		<input type="submit" name="change_type" value="Pick this type" />	
+		<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
 		</div>
 		<div id="type-metadata-form">
 		<?php common('ajaxTypeMetadata', array('id'=>$item->id), 'items'); ?>
