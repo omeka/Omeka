@@ -168,13 +168,14 @@ textarea {font-size:1.2em;}
 	
 	#welcome {display:block; float:left; width:528px;}
 	
-	#site-info {float:right; width: 372px; margin:18px 0;background:#DAE9F6; padding:18px;}
+	#site-info {float:right; width: 372px; margin: 0;background:#DAE9F6; padding:18px;}
 
 /* == Dashboard == */
 
 #getting-started dl {overflow:hidden; border-bottom:1px dotted #ccc;}
 	#getting-started dt {font-size:1.4em; width: 258px; float:left;display:block; margin-bottom:0.64em;}
-	#getting-started dl ul {float:right; width:216px; padding:18px; background:#fff09e;}
+	#getting-started dl ul {float:right; width:216px; padding:18px; background:#DFF1C7;}
+	#getting-started dl li {margin-bottom:1em;}
 	#getting-started p {float:left; width: 258px;}
 #getting-started dl.archive {border-top:1px dotted #ccc; padding-top:1.5em;}
 
