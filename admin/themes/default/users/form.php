@@ -1,6 +1,5 @@
 <?php echo flash(); ?>
 <fieldset>
-	<legend>User Info</legend>
 <div class="field">
 	<?php text(array('name'=>'username', 'class'=>'textinput', 'id'=>'username'),$user->username, 'Username'); ?>
 </div>
