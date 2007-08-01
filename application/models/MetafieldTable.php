@@ -14,18 +14,36 @@ class MetafieldTable extends Doctrine_Table
 	 * @return void
 	 * 
 	 **/
-	public function findActive($type = null) {
+	public function findByTypeAndPlugin($type=null, $plugin=null) {
 		$query = new Doctrine_Query();
 		$query->from('Metafield m')->innerJoin('m.Plugin p')->where('p.active = 1');
-		$where = "p.active = 1";
+		
 		if(!empty($type)) {
 			$query->innerJoin('m.Types t');
-			$where .= ' OR t.id = '.$type->id;
+			if(is_string($type)) {
+				$query->addWhere('t.name = ?', $type);
+			}else {
+				if($type instanceof Type and $type->exists()){
+					$query->addWhere('t.id = ?', $type->id);
+				}elseif(is_numeric($type)) {
+					$query->addWhere('t.id = ?', $type);
+				}
+			}
 		}
-		$query->where($where);
+		
+		if(!empty($plugin)) {
+			if(is_string($plugin)) {
+				$query->addWhere('p.name = ?', $plugin);
+			}elseif($plugin instanceof Plugin) {
+				$query->addWhere('p.id = ?', $plugin->id);
+			}else {
+				$query->addWhere('p.id = ?', $plugin);
+			}
+		}
+				
 		return $query->execute();
 	}
-	
+
 	public function findByName($name) {
 		return $this->findBySql("name = ?", array($name))->getFirst();
 	}
@@ -35,7 +53,7 @@ class MetafieldTable extends Doctrine_Table
 		$query->from('Metafield m')->innerJoin('m.TypesMetafields tm');
 		return $query->execute();
 	}
-	
+
 	public function findMetafieldsWithoutType($type=null) {
 		$query = new Doctrine_Query();
 		$query->from('Metafield m');

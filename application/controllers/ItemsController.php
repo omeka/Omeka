@@ -200,7 +200,6 @@ class ItemsController extends Kea_Controller_Action
 	protected function loadFormData() 
 	{
 		$collections = $this->getTable('Collection')->findAll();
-		$plugins = $this->getTable('Plugin')->findActive();
 		$types = $this->getTable('Type')->findAll();
 		
 		if($this->_view) {

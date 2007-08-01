@@ -9,7 +9,7 @@
 	<div class="item-full">
 		<?php $item = page_item(1); ?>
 		<h3><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php echo $item->title; ?></a></h3>
-		<div class="text"><?php echo nls2p($item->Metatext('Text'));?></div>
+		<?php echo display_item($item); ?>
 		
 	</div>
 	</div>

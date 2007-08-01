@@ -29,7 +29,16 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
     }
 	
 	private function __construct() {}
-
+	
+	public function __get($name)
+	{
+		foreach ($this->_plugins as $k => $plugin) {
+			if(get_class($plugin) == $name) {
+				return $plugin;
+			}
+		}
+	}
+	
 	public function plugins() {
 		return $this->_plugins;
 	}

@@ -11,7 +11,7 @@ require_once 'Zend/Config/Ini.php';
  **/
 abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 {
-	private $record;
+	protected $record;
 	private $listener;
 	public $router;
 	
@@ -201,6 +201,8 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * 
 	 **/
 	public function customInstall() {}
+	
+	public function uninstall() {}
 	
 	public function activate() {
 		$this->record->active = 1;

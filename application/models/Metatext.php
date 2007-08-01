@@ -1,6 +1,7 @@
 <?php
 require_once 'Item.php';
 require_once 'Metafield.php';
+require_once 'MetatextTable.php';
 /**
  * @package Omeka
  * 

@@ -49,5 +49,5 @@
 	
 	<type><?php echo $item->Type->name; ?></type>
 	
-	<metafields><?php foreach($item->Metatext as $metatext): ?><metatext name="<?php echo $metatext->Metafield->name; ?>"><?php echo $metatext->text; ?></metatext><?php endforeach; ?></metafields>
+	<metafields><?php foreach($item->TypeMetadata as $name => $value): ?><metatext name="<?php echo $name; ?>"><?php echo $text; ?></metatext><?php endforeach; ?></metafields>
 </item>

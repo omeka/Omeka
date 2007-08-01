@@ -24,8 +24,7 @@ class Item extends Kea_Record
 	
 	protected $constraints = array('collection_id','type_id','user_id');
 	
-	protected $_metatext;
-	protected $_metafields;
+	protected $_metatextToSave = array();
 			
 	public function setUp() {
 		$this->hasOne("Collection","Item.collection_id");
@@ -125,20 +124,29 @@ class Item extends Kea_Record
 	 * @return mixed
 	 **/
 	public function get($name) {
+		//I hate that the var escaping has to take place at this low level
+		//That violates all kinds of crap.  Also this is duplicated in so many places it makes me sad
+		require_once 'Kea/Escaper.php';
+		$esc = new Kea_Escaper("em|b|strong|del|span|cite|blockquote");
+		
 		switch ($name) {
-			case 'TypeMetafields':
-				//Cache the metafields so we don't run the query too many times
-				if(empty($this->_metafields)) {
-					$this->_metafields = $this->getMetafields('Type');
-				}
-				return $this->_metafields;
-			
-			case 'Metatext':
-				if(empty($this->_metatext)) {
-					$this->_metatext = $this->getTypeMetatext();									
-				}
-				return $this->_metatext;
+			case 'TypeMetadata':
+				/*This is the simplified version of the metatext field*/
+				$mt = $this->getTypeMetadata(true);
+				$mt = $esc->escape($mt);
+				return $mt;
 					
+			case 'PluginTypeMetadata':
+				/*This returns type metadata for plugins*/
+				$mt = $this->getPluginTypeMetadata(true);
+				$mt = $esc->escape($mt);
+				return $mt;
+			
+			case 'PluginMetadata':
+				$mt = $this->getPluginMetadata(true);
+				$mt = $esc->escape($mt);
+				return $mt;
+				
 			case 'added':
 			case 'modified':
 				return $this->timeOfLastRelationship($name);
@@ -151,116 +159,76 @@ class Item extends Kea_Record
 				break;
 		}
 	}
-	
+
 	/**
-	 * This is duplicated from getMetafields() basically
+	 * Retrieve all extended metadata associated with the item (plugin or not)
 	 *
 	 * @return void
 	 **/
-	public function getTypeMetatext()
+	public function getAllExtendedMetadata($simple = true)
 	{
-		$mfIds = $this->getMetafieldIds('Type');
-		if(!empty($mfIds) and $this->exists() ) {
-			$dql = "SELECT m.* FROM Metatext m WHERE ";
-			if(count($mfIds) > 1)
-				$dql .= "m.metafield_id IN(".join(', ',$mfIds).")";
-			else 
-				$dql .= "m.metafield_id = {$mfIds[0]}";
-				
-			$dql .= " AND m.item_id = {$this->id}";
-			return $this->executeDql($dql);	
-		}else {
-			return new Doctrine_Collection('Metatext');
-		}	
+		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('all'=>true), $simple);
 	}
+	
+	/**
+	 * Retrieve all plugin metadata associated with this item's type
+	 *
+	 * @return array
+	 **/
+	public function getPluginTypeMetadata($simple = true)
+	{
+		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('plugin'=>true, 'type'=>$this->Type), $simple);
+	}
+	
+	public function getPluginMetadata($simple = true)
+	{
+		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('plugin'=>true), $simple);
+	}
+	
+	/**
+	 * Retrieve all (non-plugin) type metadata associated with this Item
+	 *
+	 * @return array
+	 **/
+	public function getTypeMetadata($simple = true)
+	{
+		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('type'=>$this->Type), $simple);
+	}
+	
 	
 	/**
 	 * Will set the metatext for a given metafield 
-	 * This is slow so should not be used unless setting only specific metafields
 	 *
 	 * @return void
 	 **/
-	public function setMetatext($field, $value)
+	public function setMetatext($field, $value=null)
 	{
-		$mt = $this->Metatext;
-		
-		//Look for the entry within the current set of metatext
-		foreach ($mt as $k => $m) {
-			if($m->Metafield->name == $field) {
-				$m->text = $value;
-				return true;
-			}
+		//If passed an array, its a metafield name/value pair
+		if(is_array($field)) {
+			$mt = array_merge($this->_metatextToSave, $field);
 		}
-		
-		//Find the metafield
-		$metafield = Doctrine_Manager::getInstance()->getTable('Metafield')->findByName($field);
-				
-		if(!$metafield) {
-			throw new Exception( 'Metafield named '.$field . ' does not exist!' );
-		}
-		
-		//Create the new metatext entry and append to the rest of them
-		$newMt = new Metatext;
-		$newMt->text = $value;
-		$newMt->Metafield = $metafield;
-		$newMt->Item = $this;
-		
-		$mt->add($newMt);
-	}
-	
-	public function getMetafields($for='All')
-	{
-		$mfIds = $this->getMetafieldIds($for);
-		if(!empty($mfIds)) {
-			$dql = "SELECT m.* FROM Metafield m WHERE";
-			if(count($mfIds) > 1) 
-				$dql .=  " m.id IN (".join(', ', $mfIds).")";
-			else
-				$dql .= " m.id = {$mfIds[0]}";
-			$mfs = $this->executeDql($dql);
-		}else {
-			$mfs = new Doctrine_Collection('Metafield');
-		}
-		
-		return $mfs;
-	}
-	
-	/*	Pull in the appropriate metafield IDs
-	 *	1) All metafields associated with the Item's type
-	 *	2) All metafields associated with a plugin
-	 * 	(metafields singularly associated with Items is not implemented)
-	 *
-	 * @param $for string 'All','Plugin','Type' Depending on which metafields you want
-	 */ 
-	protected function getMetafieldIds($for='All')
-	{
-		$select = new Kea_Select;
-
-		//Get metafields for plugins
-		if( ($for == 'Plugin') or ($for == 'All')) {
-			$where[] = 'p.active = 1';
-			$select->where('p.active = 1');
-		}
-		
-		if(empty($this->type_id) and $for == 'Type') {
-			return array();
-		}
-		
-		//Get the metafields for a specific Type
-		if(!empty($this->type_id) and is_numeric($this->type_id) and ($for == 'All' || $for == 'Type')) {
-			$sub = new Kea_Select;
-			$sub->from(array('Metafield','mf'), 'mf.id')
-				->innerJoin(array('TypesMetafields','tm'), 'tm.metafield_id = mf.id')
-				->innerJoin(array('Type','t'), 't.id = tm.type_id')
-				->where('t.id = ?', $this->type_id);
+		else {
 			
-			$select->orWhere('mf.id IN ('.$sub->__toString().')');	
+			//This is mapped to its implementation in MetatextTable::collectionFromArray
+			$this->_metatextToSave[$field]['name'] = $field;
+			$this->_metatextToSave[$field]['text'] = $value;
 		}
-				
-		$select->from(array('Metafield','mf'),'mf.id')
-				->joinLeft(array('Plugin','p'), 'p.id = mf.plugin_id');
+	}
+	
+	public function saveMetatext($post)
+	{
+		$table = Doctrine_Manager::getInstance()->getTable('Metatext');
 		
-		return $select->fetchColumn();
+		//Save the metatext that was posted
+		$posted = $table->collectionFromArray($post, $this);
+		$posted->save();
+		
+		//Save the metatext that was set elsewhere
+		$mt = $this->_metatextToSave;
+	
+		$other =  $table->collectionFromArray($mt, $this);
+		$other->save();
+		
 	}
 	
 	public function hasThumbnail()
@@ -333,33 +301,27 @@ class Item extends Kea_Record
 		
 	public function getMetatext( $name, $return_text = true ) {	
 		//first check the available metatext
-		foreach ($this->Metatext as $k => $mt) {
-			if($mt->Metafield->name == $name) {
-				if($return_text) 
-					return $mt->text;
-				echo $text;
-				return;
-			}
-		}
+		$mt = $this->_metatextToSave;
+		
+		if(isset($mt[$name])) {
+			//This whole check for whether or not it is an array is duplicated elsewhere (BAD!!!)
+			$text = is_array($mt[$name]) ? $mt[$name]['text'] : $mt[$name];
 			
-		$sql = "SELECT text FROM metatext mt INNER JOIN metafields mf ON mf.id = mt.metafield_id WHERE mt.item_id = ? AND mf.name = ?";
-		$text = $this->execute($sql, array($this->id, $name), true);
+			if($return_text) return $text;
+			echo $text;
+			return;
+		}
+		
+		$all_mt = $this->getAllExtendedMetadata(true);
+		
+		$text = $all_mt[$name];
 		
 		if($return_text) 
 			return $text;
 		
 		echo $text;
 	}
-	
-	/**
-	 * Alias of metadata()
-	 *
-	 * @return mixed
-	 **/
-	public function Metatext( $name, $return_text = true) {
-		return $this->getMetatext($name, $return_text);
-	}
-	
+
 	///// END METADATA METHODS /////
 
    public function getRandomFileWithImage()
@@ -550,12 +512,7 @@ class Item extends Kea_Record
 
 	public function postSave()
 	{
-		//Special process to save the metatext
-		$mts = $this->Metatext;
-		foreach ($mts as $mt) {
-			$mt->item_id = $this->id;
-		}
-		$mts->save();		
+		$this->saveMetatext($_POST['metafields']);
 	}
 
 	public function hasFiles()

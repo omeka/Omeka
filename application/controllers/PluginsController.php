@@ -5,6 +5,7 @@
 require_once 'Kea/Controller/Action.php';
 class PluginsController extends Kea_Controller_Action
 {
+	
 	protected $_redirects = array(
 		'install' => array('plugins/install/name', array('name'))
 	);
@@ -56,6 +57,28 @@ class PluginsController extends Kea_Controller_Action
 		
 		
 		$this->render('plugins/install.php', compact('plugin'));
+	}
+	
+	public function reinstallAction()
+	{
+		$name = $this->_getParam('name');
+		$broker = Kea_Controller_Plugin_Broker::getInstance();		
+
+		$record = $this->getTable('Plugin')->findByName($name);			
+		
+		if($record) {
+
+			$plugin = $broker->$name;
+		
+			if(!$plugin) {
+				$plugin = new $name(null, $record);
+			}
+			
+			$record->delete();
+			$plugin->uninstall();
+			$this->_redirect('plugins/browse');			
+		}
+
 	}
 	
 	public function deleteAction() {$this->_redirect('/');}

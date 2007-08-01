@@ -193,9 +193,9 @@
 <h3>Type Name</h3>
 <div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
 
-<?php foreach($item->Metatext as $key => $metatext): ?>
-<h3><?php echo $metatext->Metafield->name; ?></h3>
-<div><?php echo $metatext->text; ?></div>
+<?php foreach($item->TypeMetadata as $name => $value): ?>
+<h3><?php echo $name; ?></h3>
+<div><?php echo $value; ?></div>
 <?php endforeach; ?>
 
 <h2>Tags</h2>

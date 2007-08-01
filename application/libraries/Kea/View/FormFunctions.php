@@ -272,62 +272,44 @@
 	 *
 	 * @return void
 	 **/
-	function metatext_form($item, $type="textarea",$metafields=null,$usePlugins=false) 
+	function metatext_form($item, $type="textarea",$metafields=null) 
 	{
-		if($metafields) {
+		if(!empty($metafields)) {
+
 			//Loop through the metafields
-			if($metafields instanceof Doctrine_Collection) {
+			if(is_array(current($metafields))) {
 				foreach ($metafields as $key => $metafield) {
-					metatext_form($item, $type, $metafield, $usePlugins );
+					metatext_form($item, $type, $metafield);
 				}
 			} else {
-				$metafield = $metafields;
+				$field = $metafields;
 				$out = '';
-				$metafieldInputId = strtolower(str_replace(' ', '_', $metafield->name));
+				$input_id = strtolower(str_replace(' ', '_', $field['name']));
+				
+				$metafield_name = $field['name'];
+				$metafield_value = $field['text'];
+				$metafield_id = $field['metafield_id'];
+				
 				//Process a single metafield for this item
 				switch ($type) {
 					case 'text':
-						$input = '<input type="text" class="textinput" name="Metatext['.$metafield->id.'][text]" id="'.$metafieldInputId.'" value="'.$item->Metatext[$metafield->id]->text.'" />';
+						$input = '<input type="text" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'" value="'.$metafield_value.'" />' . "\n\t";
 						break;
 					case 'textarea':
-						$input = '<textarea rows="15" cols="50" class="textinput" name="Metatext['.$metafield->id.'][text]" id="'.$metafieldInputId.'">';
-						$input .= $item->Metatext[$metafield->id]->text;
-						$input .= '</textarea>';
+						$input = "\t" . '<textarea rows="15" cols="50" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'">';
+						$input .= $metafield_value;
+						$input .= '</textarea>' . "\n\t";
 						break;
 				}
 				$out .= '<div class="field">';
-				$out .= '<label for="'.$metafieldInputId.'">'.$metafield->name;
+				$out .= '<label for="'.$metafieldInputId.'">'.$metafield_name;
 				$out .=	'</label>'."\n\t";
 				$out .= $input;
-				$out .= '</div>';
-				
-				$out .= '<input type="hidden" name="Metatext['.$metafield->id.'][metafield_id]" value="'.$metafield->id.'" />'."\n\n\t";
+				$out .= '<input type="hidden" name="metafields['.$metafield_id.'][name]" value="' . allhtmlentities($metafield_name) . '" />';
+				$out .= '</div>'."\n\n\t";
+
 				echo $out;
 			}
-		} else {
-			$metafields = $item->TypeMetafields;
-
-			metatext_form($item, $type, $metafields, $usePlugins );
 		}
-/*		
-		$out = '';
-		foreach($item->Type->Metafields as $key => $metafield) {
-			
-		}
-		
-		if($plugins) {
-			
-			foreach ($plugins as $key => $plugin) {
-				foreach ($plugin->Metafields as $key => $metafield) {
-					//Copied from above
-					$out .= '<label>'.$metafield->name.'<textarea class="textinput" name="Metatext['
-						.$metafield->id.'][text]">'.$item->Metatext[$metafield->id]->text
-						.'</textarea><input type="hidden" name="Metatext['.$metafield->id
-						.'][metafield_id]" value="'.$metafield->id.'"/>';
-				}
-			}
-		}
-		echo $out;
-*/
 	}
 ?>

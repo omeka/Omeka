@@ -31,7 +31,7 @@ function not_empty_or($value, $default) {
 function display_item($item, $props = array()) {
 	switch ($item->Type->name) {
 		case 'Document':
-			echo '<div class="document-text">'. nls2p($item->Metatext('Text')) . '</div>';
+			echo '<div class="document-text">'. nls2p($item->getMetatext('Text')) . '</div>';
 			break;
 		
 		case 'Still Image':
@@ -572,16 +572,6 @@ function has_tags($item, array $tags=array()) {
 
 function has_files($item) {
 	return $item->Files->count() > 0;
-}
-
-function has_metatext($item, $metafield_name = null) {
-	$hasSome = ($item->Metatext->count() > 0);
-	
-	if(!empty($metafield_name)) {
-		$mt = $item->Metatext($metafield_name);
-		return ($hasSome and !empty($mt));
-	}
-	return $hasSome;
 }
 
 /**

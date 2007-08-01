@@ -351,7 +351,7 @@ class Kea_Select {
     {
         if (func_num_args() > 1) {
             $val = func_get_arg(1);
-            $cond = $this->_adapter->quoteInto($cond, $val);
+            $cond = $this->quoteInto($cond, $val);
         }
 
         if ($this->_parts['where']) {

@@ -122,7 +122,7 @@
 		<input type="text" class="textinput" name="title" value="<?php echo $item->title;?>" />
 		<span class="tooltip" id="title_tooltip"><?php dublin_core('title'); ?></span>
 		</div>
-		
+
 		<div class="field">
 		<label id="subject">Subject</label>
 		<input type="text" class="textinput" name="subject" value="<?php echo $item->subject;?>" />
@@ -277,7 +277,7 @@
 		<input type="submit" name="change_type" value="Pick this type" />	
 		</div>
 		<div id="type-metadata-form">
-		<?php metatext_form($item,'textarea'); ?>
+		<?php common('ajaxTypeMetadata', array('id'=>$item->id), 'items'); ?>
 		</div>
 
 		</fieldset>

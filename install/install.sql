@@ -522,7 +522,7 @@ INSERT INTO `metafields` (id, name, description) VALUES (16, 'Time Summary', '')
 
 -- Email
 INSERT INTO `metafields` (id, name, description) VALUES (17, 'Email Body', '');
-INSERT INTO `metafields` (id, name, description) VALUES (18, 'Subject', '');
+INSERT INTO `metafields` (id, name, description) VALUES (18, 'Subject Line', '');
 INSERT INTO `metafields` (id, name, description) VALUES (19, 'From', '');
 INSERT INTO `metafields` (id, name, description) VALUES (20, 'To', '');
 INSERT INTO `metafields` (id, name, description) VALUES (21, 'CC', '');
