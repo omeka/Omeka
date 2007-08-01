@@ -10,11 +10,13 @@
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php css('niftyCorners'); ?>" />
 
 <!-- JavaScripts -->
 <?php js('prototype'); ?>
 <?php js('prototype-extensions'); ?>
 <?php js('scriptaculous');?>
+<?php js('niftycube');?>
 <?php js('globals'); ?>
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>

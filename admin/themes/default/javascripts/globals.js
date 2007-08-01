@@ -60,6 +60,12 @@ function styleExhibitBuilder() {
 	
 }
 
+function roundCorners() {
+	Nifty('#primary-nav a','top transparent');
+	Nifty('#user-meta','bottom');
+}
+
 Event.observe(window,'load',toggleSearch);
 Event.observe(window,'load',alertBox);
 Event.observe(window,'load',styleExhibitBuilder);
+Event.observe(window,'load',roundCorners);
