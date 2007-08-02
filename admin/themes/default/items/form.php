@@ -6,7 +6,7 @@
 		ajaxifyTypeMetadata();
 		filesAdding();
 	});
-	
+
 	function filesAdding()
 	{
 		var nonJsFormDiv = $('add-more-files');
@@ -115,9 +115,83 @@
 </script>
 
 <?php echo flash(); ?>
+<div id="item-form">
+	
+	<fieldset id="type-metadata">
+		<legend class="toggle">Type Metadata</legend>
+		<div class="toggle_content">
+		<div class="field">
+			<?php select(	array(	
+						'name'	=> 'type_id',
+						'id'	=> 'type' ),
+						types(),
+						$item->type_id,
+						'Item Type',
+						'id',
+						'name' ); ?>
+		<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
+		</div>
+		<div id="type-metadata-form">
+		<?php common('ajaxTypeMetadata', array('id'=>$item->id), 'items'); ?>
+		</div>
 
+			<h2>Add Files</h2>
+			<div class="field" id="add-more-files">
+				<label for="add_num_files">Add Files</label>
+				<div class="files">
+			<?php 
+				$numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; 
+			?>
+				<?php 
+					text(array('name'=>'add_num_files','size'=>2),$numFiles);
+					submit('Add this many files', 'add_more_files'); 
+				?>
+				</div>
+			</div>
+			
+			<div class="field" id="file-inputs">
+			<!-- MAX_FILE_SIZE must precede the file input field -->
+				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+				<label for="file[<?php echo $i; ?>]">Find a File</label>
+					
+			<?php for($i=0;$i<$numFiles;$i++): ?>
+			<div class="files">
+				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="fileinput" />			
+			</div>
+			<?php endfor; ?>
+			</div>
+		
+		<?php if ( has_files($item) ): ?>
+	
+			<h2>Edit existing files</h2>
+			<p>(click on file to edit on a new page, check 'Delete this' to remove files)</p>
+			<ul id="file-list">
+			<?php foreach( $item->Files as $key => $file ): ?>
+				<li>
+					<div class="file-link">
+						<a href="<?php echo uri('files/edit/'.$file->id); ?>" target="_blank">
+			
+							<?php if ( !$file->hasThumbnail() ): ?>
+								<?php echo $file->original_filename; ?>
+							<?php else: ?>
+								<?php thumbnail($file); ?>
+							<?php endif; ?>
+						</a>
+					</div>
+					<div class="delete-link">
+						<?php checkbox(array('name'=>'delete_files[]'),false,$file->id,'Delete this file'); ?>
+					</div>	
+				</li>
+		
+			<?php endforeach; ?>
+			</ul>
+			<?php endif; ?>
+			</div>
+			</fieldset>
+	
 <fieldset id="core-metadata">
-	<legend>Core Metadata</legend>
+	<legend class="toggle">Core Metadata</legend>
+	<div class="toggle_content">
 		<div class="field">
 		<label for="title" id="title">Title</label>
 		<input type="text" class="textinput" name="title" value="<?php echo $item->title;?>" />
@@ -251,10 +325,11 @@
 		<input type="text" class="textinput" name="citation" value="<?php echo $item->citation;?>" />
 		<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
 		</div>
-
+		</div>
 	</fieldset>
 	<fieldset id="collection-metadata">
-		<legend>Collection Metadata</legend>
+		<legend class="toggle">Collection Metadata</legend>
+		<div class="toggle_content">
 		<div class="field">
 		<?php select('collection_id',
 					collections(),
@@ -263,83 +338,15 @@
 					'id',
 					'name' ); ?>
 		</div>
+	</div>
 	</fieldset>
 	
-	<fieldset id="type-metadata">
-		<legend>Type Metadata</legend>
-		<div class="field">
-			<?php select(	array(	
-						'name'	=> 'type_id',
-						'id'	=> 'type' ),
-						types(),
-						$item->type_id,
-						'Item Type',
-						'id',
-						'name' ); ?>
-		<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
-		</div>
-		<div id="type-metadata-form">
-		<?php common('ajaxTypeMetadata', array('id'=>$item->id), 'items'); ?>
-		</div>
 
-		</fieldset>
-		<fieldset id="add-files">
-			<legend>Add Files</legend>
-			<div class="field" id="add-more-files">
-				<label for="add_num_files">Add Files</label>
-				<div class="files">
-			<?php 
-				$numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; 
-			?>
-				<?php 
-					text(array('name'=>'add_num_files','size'=>2),$numFiles);
-					submit('Add this many files', 'add_more_files'); 
-				?>
-				</div>
-			</div>
-			
-			<div class="field" id="file-inputs">
-			<!-- MAX_FILE_SIZE must precede the file input field -->
-				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-				<label for="file[<?php echo $i; ?>]">Find a File</label>
-					
-			<?php for($i=0;$i<$numFiles;$i++): ?>
-			<div class="files">
-				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="fileinput" />			
-			</div>
-			<?php endfor; ?>
-			</div>
-		</fieldset>
 		
-		<?php if ( has_files($item) ): ?>
-			<fieldset id="files">
-			<legend>Edit existing files</legend>
-			<p>(click on file to edit on a new page, check 'Delete this' to remove files)</p>
-			<ul id="file-list">
-			<?php foreach( $item->Files as $key => $file ): ?>
-				<li>
-					<div class="file-link">
-						<a href="<?php echo uri('files/edit/'.$file->id); ?>" target="_blank">
-			
-							<?php if ( !$file->hasThumbnail() ): ?>
-								<?php echo $file->original_filename; ?>
-							<?php else: ?>
-								<?php thumbnail($file); ?>
-							<?php endif; ?>
-						</a>
-					</div>
-					<div class="delete-link">
-						<?php checkbox(array('name'=>'delete_files[]'),false,$file->id,'Delete this file'); ?>
-					</div>	
-				</li>
-		
-			<?php endforeach; ?>
-			</ul>
-			</fieldset>
-		<?php endif; ?>
 		
 		<fieldset id="miscellaneous">
-			<legend>Miscellaneous</legend>
+			<legend class="toggle">Miscellaneous</legend>
+			<div class="toggle_content">
 			<?php if ( has_permission('Items', 'makePublic') ): ?>
 				<div class="field">
 	<div class="label">Item is public:</div> <div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
@@ -350,10 +357,12 @@
 		<div class="label">Item is featured:</div> <div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
 			</div>
 		<?php endif; ?>
+		</div>
 	</fieldset>
 	
 	<fieldset>
-		<legend>Tagging</legend>
+		<legend class="toggle">Tagging</legend>
+		<div class="toggle_content">
 		<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
 		<div class="field">
 		<label for="tags-field">Modify Your Tags</label>
@@ -366,10 +375,11 @@
 			<?php foreach( $item->Tags as $key => $tag ): ?>
 				<li>
 					<?php echo $tag->name; ?>
-					<button type="submit" name="remove_tag" value="<?php echo $tag->id; ?>">[x]</button>
+					<button type="submit" name="remove_tag" class="remove" value="<?php echo $tag->id; ?>">[x]</button>
 				</li>
 			<?php endforeach; ?>
 			</ul>
 		</div>
-		
+		</div>
 	</fieldset>
+</div>

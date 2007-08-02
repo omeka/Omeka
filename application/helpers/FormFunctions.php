@@ -234,7 +234,7 @@
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
 			<fieldset>
 				<legend>Search for Items</legend>
-				<input type="text" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
+				<input type="text" class="textinput" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
 			</fieldset>
 			
 			<fieldset>
@@ -249,7 +249,8 @@
 				 select(array('name'=>'user'), users(), $_REQUEST['user'], 'Filter By User', 'id', array('first_name', 'last_name'));
 			?>
 			<?php endif; ?>
-			<label>Filter by Tags<input type="text" name="tags" value="<?php echo $_REQUEST['tags']; ?>" /></label>
+			<label for="tags">Filter by Tags</label>
+				<input type="text" class="textinput" name="tags" value="<?php echo $_REQUEST['tags']; ?>" />
 			</div>
 			<div id="search-checkboxes">
 			<?php 

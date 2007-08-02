@@ -44,7 +44,6 @@ function hideReorderExhibits() {
 }
 
 function styleExhibitBuilder() {
-	
 	hideReorderSections();
 	hideReorderExhibits();
 	
@@ -67,9 +66,31 @@ function roundCorners() {
 	Nifty('#site-info');
 	Nifty('#getting-started ul');
 	Nifty('#view-all-items a','transparent');
+	Nifty('#search','big');
+}
+
+function makeAccordion() {
+	if(!$('item-form')) return;
+	var accordionForm = new accordion('#item-form', {
+	resizeSpeed : 8,
+	classNames : {
+	    toggle : 'toggle',
+	    toggleActive : 'toggle_active',
+	    content : 'toggle_content'
+	}
+	});
+	
+	var toggleHeader = $$('#item-form .toggle');
+	
+	for(var i=0;i<toggleHeader.length; i++) {
+	toggleHeader[i].setStyle({cursor: 'pointer'});
+	}
+	
+	accordionForm.activate($$('#item-form .toggle')[0]);
 }
 
 Event.observe(window,'load',toggleSearch);
 Event.observe(window,'load',alertBox);
 Event.observe(window,'load',styleExhibitBuilder);
 Event.observe(window,'load',roundCorners);
+Event.observe(window,'load',makeAccordion);

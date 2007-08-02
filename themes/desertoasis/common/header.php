@@ -14,7 +14,7 @@
 
 <!-- JavaScripts -->
 <?php js('prototype'); ?>
-<?php js('cb'); ?>
+<?php //js('cb'); ?>
 
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>

@@ -14,7 +14,14 @@
 </script>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
+	<h1>Exhibits</h1>
+	<a href="<?php echo uri('exhibits/add'); ?>" id="add-exhibit" class="add-exhibit">Add an Exhibit</a>
 <table id="exhibits">
+	<col id="col-id" />
+	<col id="col-title" />
+	<col id="col-tags" />
+	<col id="col-edit" />
+	<col id="col-delete" />
 	<thead>
 	<tr>
 		<th>ID</th>
@@ -35,8 +42,8 @@
 		<td><?php echo $exhibit->id;?></td>
 		<td><?php link_to_exhibit($exhibit); ?></td>
 		<td><?php echo tag_string($exhibit, uri('exhibits/browse/tag/')); ?></td>
-		<td><a href="<?php echo uri('exhibits/edit/'.$exhibit->id); ?>">[Edit]</a></td>
-		<td><a class="delete-link" href="<?php echo uri('exhibits/delete/'.$exhibit->id); ?>">[Delete]</a></td>
+		<td><a class="edit-exhibit" href="<?php echo uri('exhibits/edit/'.$exhibit->id); ?>">Edit</a></td>
+		<td><a class="delete-exhibit" href="<?php echo uri('exhibits/delete/'.$exhibit->id); ?>">Delete</a></td>
 	</tr>
 <?php endforeach; ?>
 </tbody>
