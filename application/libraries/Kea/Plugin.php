@@ -217,7 +217,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	///// CONVENIENCE METHODS /////
 	
 	public function uri($urlEnd) {
-		require_once 'Kea/View/Functions.php';
+		require_once HELPERS;
 		return uri($urlEnd);
 	}
 	
@@ -258,7 +258,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * @return void
 	 **/
 	public function header() {
-		require_once 'Kea/View/Functions.php';
+		require_once HELPERS;
 		
 		$path = $this->dir.DIRECTORY_SEPARATOR.'header.php';
 		if(file_exists($path)) {

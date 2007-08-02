@@ -5,7 +5,7 @@
  * @package Omeka
  **/
 
-require_once 'Kea/View/Functions.php';
+require_once HELPERS;
 require_once CONTROLLER_DIR.DIRECTORY_SEPARATOR.'UsersController.php'; 
 require_once 'Zend/Auth.php';
 require_once 'Kea/Auth/Token.php';

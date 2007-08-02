@@ -1,6 +1,5 @@
 <?php 
-require_once 'Kea/View/FormFunctions.php';
-require_once 'Kea/View/UnicodeFunctions.php';	
+require_once HELPERS;
 class FormFunctionsTestCase extends OmekaTestCase
 {
 

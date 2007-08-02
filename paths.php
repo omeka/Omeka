@@ -6,6 +6,7 @@ define('OMEKA_VERSION', 'v0.15r1');
 // if we can reuse these that might not be a bad thing
 $site['application']	= 'application';
 $site['libraries']		= 'libraries';
+$site['helpers']		= 'helpers';
 $site['controllers']	= 'controllers';
 $site['models']			= 'models';
 $site['config']			= 'config';
@@ -27,6 +28,7 @@ define('APP_DIR',			BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
 define('MODEL_DIR',			APP_DIR.DIRECTORY_SEPARATOR.$site['models']);
 define('CONTROLLER_DIR',	APP_DIR.DIRECTORY_SEPARATOR.$site['controllers']);
 define('LIB_DIR',			APP_DIR.DIRECTORY_SEPARATOR.$site['libraries']);
+define('HELPER_DIR',		APP_DIR.DIRECTORY_SEPARATOR.$site['helpers']);
 define('CONFIG_DIR',		APP_DIR.DIRECTORY_SEPARATOR.$site['config']);
 define('PLUGIN_DIR',		BASE_DIR.DIRECTORY_SEPARATOR.$site['plugins']);
 define('SHARED_DIR', 		BASE_DIR.DIRECTORY_SEPARATOR.$site['shared']);
@@ -38,6 +40,10 @@ define('FULLSIZE_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('FILES_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['files']);
 define('EXHIBIT_LAYOUTS_DIR',		SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_layouts']);
 define('EXHIBIT_THEMES_DIR',SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
+
+//Define the main file that will load all the helpers
+define('HELPERS',			HELPER_DIR.DIRECTORY_SEPARATOR.'all.php');
+
 // Abs theme dir is set in the appropriate index.php file
 
 // Define Web routes

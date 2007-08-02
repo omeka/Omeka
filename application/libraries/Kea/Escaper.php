@@ -51,7 +51,7 @@ class Kea_Escaper
 	private function esc_callback($value)
 	{
 		if(is_string($value)) {
-			require_once 'Kea/View/UnicodeFunctions.php';
+			require_once HELPERS;
 			return allhtmlentities($value, $this->avoid);
 		}
 		return $value;

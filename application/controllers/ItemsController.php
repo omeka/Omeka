@@ -183,7 +183,6 @@ class ItemsController extends Kea_Controller_Action
 		$items = $this->getTable('Item')->findBy($params);
 
 		//Serve up the pagination
-		require_once 'Kea/View/Functions.php';
 		$pagination = array('menu'=>$menu, 'page'=>$options['page'], 'per_page'=>$params['per_page'], 'total_results'=>$total_results, 'link'=>$options['pagination_url']);
 		Zend::register('pagination', $pagination);
 		

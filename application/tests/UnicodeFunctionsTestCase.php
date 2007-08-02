@@ -1,5 +1,5 @@
 <?php 
-require_once 'Kea/View/UnicodeFunctions.php';	
+require_once HELPERS;	
 class UnicodeFunctionsTestCase extends OmekaTestCase
 { 
 	function testAllhtmlentities()

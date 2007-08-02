@@ -4,7 +4,7 @@
  *
  * @package Omeka
  **/
-require_once 'Kea/View/UnicodeFunctions.php';
+require_once HELPERS;
 class Kea_OutputListener extends Doctrine_EventListener
 {	 
 	protected $_escape;

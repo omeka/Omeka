@@ -186,7 +186,7 @@ class Kea_View extends Zend_View_Abstract
 	 */
 	public function render($file)
 	{
-		require_once 'Kea/View/Functions.php';
+		require_once HELPERS;
 		
 		return parent::render($file);
 	}
