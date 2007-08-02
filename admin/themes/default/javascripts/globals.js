@@ -62,9 +62,11 @@ function styleExhibitBuilder() {
 
 function roundCorners() {
 	Nifty('#primary-nav a','top transparent');
+	Nifty('#secondary-nav a','top transparent');
 	Nifty('#user-meta','bottom');
 	Nifty('#site-info');
 	Nifty('#getting-started ul');
+	Nifty('#view-all-items a','transparent');
 }
 
 Event.observe(window,'load',toggleSearch);

@@ -60,6 +60,7 @@
 			var image = document.createElement('img');
 			image.src = "<?php echo img('icons/information.png'); ?>";
 			$(elId).appendChild(image);
+			$(elId).style.paddingLeft = "20px";
 			var tooltipId = elId + '_tooltip';
 			var tooltip = new Tooltip(image, tooltipId, {default_css:true, zindex:100000});
 			$(tooltipId).addClassName('info-window');

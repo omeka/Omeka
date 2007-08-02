@@ -21,7 +21,7 @@
 		<td><?php  echo $user->username; ?></td>
 		<td><?php echo $user->first_name; ?> <?php echo $user->last_name; ?></td>
 		<td><?php echo $user->email; ?></td>
-		<td><?php echo $user->role; ?></td>
+		<td><span class="<?php echo $user->role; ?>"><?php echo $user->role; ?></span></td>
 		
 		<td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
 		<td><a href="<?php echo uri('users/edit/'.$user->id);?>">[Edit]</a></td>

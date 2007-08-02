@@ -37,18 +37,18 @@ Event.observe(window,'load',revealChoice);
 <div id="browse-meta">
 <div class="pagination"><?php echo pagination_links(); ?></div>
 <ul class="navigation" id="view-style">
-	<li><a id="detailed" href="?view=detailed"<?php if($_GET['view'] == 'detailed' || $_GET['view'] == '') echo ' class="current"';?>>Detailed</a></li>
-	<li><a id="simple" href="?view=simple"<?php if($_GET['view'] == 'simple') echo ' class="current"';?>>Simple</a></li>
+	<li><a id="simple" href="?view=simple"<?php if($_GET['view'] == 'simple' || $_GET['view'] == '') echo ' class="current"';?>>Simple</a></li>
+	<li><a id="detailed" href="?view=detailed"<?php if($_GET['view'] == 'detailed') echo ' class="current"';?>>Detailed</a></li>
 </ul>	
 </div>
 <form action="<?php echo uri('items/powerEdit'); ?>" method="post" accept-charset="utf-8">
 	
 	<div id="view-choice">
-	<?php if($_GET['view'] == 'detailed' || $_GET['view'] == ''):?>
+	<?php //if($_GET['view'] == 'detailed'):?>
 		<?php include('detailed-view.php'); ?>
-	<?php elseif($_GET['view'] == 'simple'):?>
-		<?php include('simple-view.php'); ?>
-	<?php endif; ?>
+	<?php //elseif($_GET['view'] == 'simple' || $_GET['view'] == ''):?>
+		<?php //include('simple-view.php'); ?>
+	<?php //endif; ?>
 	</div>
 
 <input type="submit" name="submit" value="Modify these Items" />

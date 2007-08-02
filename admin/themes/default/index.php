@@ -18,7 +18,7 @@
 				</dl>
 				<?php if(has_permission('Exhibits','browse')): ?>
 				<dl class="exhibits">
-					<dt>Exhibits</dt>
+					<dt><a href="<?php echo uri('exhibits/browse'); ?>">Exhibits</a></dt>
 					<dd>
 						<ul>
 							<li><a class="browse-exhibits" href="<?php echo uri('exhibits/browse'); ?>">Browse exhibits</a></li>
@@ -32,11 +32,11 @@
 				
 				<?php if(has_permission('Users','browse')): ?>
 				<dl class="users">
-					<dt>Users</dt>
+					<dt><a href="<?php echo uri('users/browse'); ?>">Users</a></dt>
 					<dd>
 						<ul>
-							<li><a class="browse-users" href="<?php echo uri('users/browse'); ?>">Browse exhibits</a></li>
-							<li><a class="add-user" href="<?php echo uri('users/add'); ?>">Add a user</a></li>
+							<li><a class="browse-users" href="<?php echo uri('users/browse'); ?>">Browse Users</a></li>
+							<li><a class="add-user" href="<?php echo uri('users/add'); ?>">Add a User</a></li>
 						</ul>
 						<p>Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus.</p>
 						
@@ -47,10 +47,10 @@
 				<?php if(has_permission('super')): ?>
 				
 				<dl class="site-settings">
-					<dt>Settings</dt>
+					<dt><a href="<?php echo uri('settings'); ?>">Settings</a></dt>
 					<dd>
 						<ul>
-							<li><a class="settings" href="<?php echo uri('settings/browse'); ?>">Edit General Settings</a></li>
+							<li><a class="settings" href="<?php echo uri('settings'); ?>">Edit General Settings</a></li>
 							<li><a class="themes" href="<?php echo uri('themes'); ?>">Manage Themes</a></li>
 							<li><a class="plugins" href="<?php echo uri('plugins'); ?>">Manage Plugins</a></li>
 						</ul>
@@ -62,7 +62,7 @@
 			<?php //if(has_permission('names','browse')): ?>
 			
 				<dl class="names">
-					<dt>Names</dt>
+					<dt><a href="<?php echo uri('entities/browse'); ?>">Names</a></dt>
 					<dd>
 						<ul>
 							<li><a href="<?php echo uri('entities/browse'); ?>">Browse Names</a></li>
@@ -81,18 +81,18 @@
 		</div>
 		<div id="site-info">
 			<div id="site-meta">
-				<h2>Site Info</h2>
+				<h2>Site Totals</h2>
 				<p><em><?php settings('site_title'); ?></em> contains <?php total_items(); ?> items, in <?php total_collections(); ?> collections, tagged with <?php total_tags(); ?> keywords. There are <?php total_users(); ?> users.</p>
 			</div>
 			<div id="recent-items">
-				<h2>Recently Added</h2>
+				<h2>Recently Added Items</h2>
 				<?php $items = recent_items('5'); ?>
 				<ul>
 					<?php foreach( $items as $key => $item ): ?>
 						<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><a href="<?php echo uri('items/show/'.$item->id); ?>"><span class="title"><?php  echo $item->title; ?></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></a> </li>	
 					<?php endforeach; ?>
 				</ul>
-				<p><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>	
+				<p id="view-all-items"><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>	
 			</div>
 		</div>
 		
