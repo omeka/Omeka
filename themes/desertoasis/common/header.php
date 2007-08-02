@@ -11,8 +11,6 @@
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php css('nifty/niftyCorners'); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php css('nifty/niftyPrint'); ?>" media="print" />
 
 <!-- JavaScripts -->
 <?php js('prototype'); ?>

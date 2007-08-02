@@ -248,11 +248,13 @@ textarea#location
 	/* Individual Item View */
 	
 	#core-metadata {overflow:hidden;}
+		.field h3, #type-metadata h3 {clear: both; float: left; width: 210px;}
 	#type-meetadata {clear: both;}
-		#core-metadata .field {clear: both; border-bottom: 1px solid #ddd;}
-		#core-metadata h3, #type-metadata h3 {clear: both; float: left; width: 246px;}
-		#core-metadata  .field div {float: right; clear: right; width: 510px;}
-
+		 .field {clear: both; border-bottom: 1px solid #ccc; margin: 0 0 18px 36px; overflow: hidden;}
+		.field div, .field a {float: right; clear: right; width: 510px;}
+	#mark-favorite {font-size: inherit;}
+	ul.tags, li.tag {display: inline;}
+		.field li.tag a {float: none; clear: none; width: auto;}
 
 	
 /* == Collections styles == */

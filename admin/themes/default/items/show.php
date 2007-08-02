@@ -103,14 +103,12 @@
 	</div>
 	</div>
 	
-	
 	<div id="creator" class="field">
 	<h3>Creator</h3>
 	<div>
 	<?php display_empty($item->creator); ?>
 	</div>
 	</div>
-	
 	
 	<div id="additional_creator" class="field">
 	<h3>Additional Creator</h3>
@@ -119,14 +117,12 @@
 	</div>
 	</div>
 	
-	
 	<div id="source" class="field">
 	<h3>Source</h3>
 	<div>
 	<?php display_empty($item->source); ?>
 	</div>
 	</div>
-	
 
 	<div id="publisher" class="field">
 	<h3>Publisher</h3>
@@ -135,7 +131,6 @@
 	</div>
 	</div>
 	
-	
 	<div id="date" class="field">
 	<h3>Date</h3>
 	<div>
@@ -143,22 +138,19 @@
 	</div>
 	</div>
 	
-	
 	<div id="contributor" class="field">
 	<h3>Contributor</h3>
 	<div>
 	<?php display_empty($item->contributor)?>
 	</div>
 	</div>
-	
-	
+		
 	<div id="rights" class="field">
 	<h3>Rights</h3>
 	<div>
 	<?php display_empty($item->rights); ?>
 	</div>
 	</div>
-	
 	
 	<div id="rights_holder" class="field">
 	<h3>Rights Holder</h3>
@@ -167,7 +159,6 @@
 	</div>
 	</div>
 	
-
 	<div id="relation" class="field">
 	<h3>Relation</h3>
 	<div>
@@ -175,14 +166,12 @@
 	</div>
 	</div>
 	
-	
 	<div id="spatial-coverage" class="field">
 	<h3>Spatial Coverage</h3>
 	<div>
 	<?php display_empty($item->spatial_coverage)?>
 	</div>
 	</div>
-	
 	
 	<div id="temporal-coverage" class="field">
 	<h3>Temporal Coverage</h3>
@@ -192,14 +181,12 @@
 	</div>
 	</div>
 	
-	
 	<div id="language" class="field">
 	<h3>Language</h3>
 	<div>
 	<?php display_empty($item->language); ?>
 	</div>
 	</div>
-	
 
 	<div id="provenance" class="field">
 	<h3>Provenance</h3>
@@ -208,64 +195,72 @@
 	</div>
 	</div>
 	
-	
 	<div id="citation" class="field">
 	<h3>Bibliographic Citation</h3>
 	<div>
 	<?php display_empty($item->getCitation());?>
 	</div>
 	</div>
-	
 
 </div>
 
-<div id="mark-favorite">
+<?php /* ?>
+<div id="mark-favorite" class="field">
+	<h3>Favorite</h3>
 	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
 </div>
+<?php */ ?>
 
 <?php if ( $item->Collection->exists() ): ?>
+	<div id="collection" class="field">
 	<h3>Collection</h3>
-
-	<div id="collection">
+	<div>
 		<?php echo $item->Collection->name; ?>
 	</div>
+	</div>
 <?php endif; ?>
-
 
 <div id="type-metadata">
 <h2>Type Metadata</h2>
 
-<h3>Type Name</h3>
-<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
-
-<?php foreach($item->TypeMetadata as $name => $value): ?>
-<h3><?php echo $name; ?></h3>
-<div><?php echo $value; ?></div>
-<?php endforeach; ?>
+	<div class="field">
+	<h3>Type Name</h3>
+		<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
+	</div>
+		
+	<?php foreach($item->TypeMetadata as $name => $value): ?>
+		<div class="field">
+			<h3><?php echo $name; ?></h3>
+			<div><?php echo $value; ?></div>
+		</div>
+	<?php endforeach; ?>
 
 <h2>Tags</h2>
-<?php if ( has_permission('Items','tag') ): ?>
-<h3>My Tags</h3>
-<div id="my-tags">
-	<form id="tags-form" method="post" action="">
-	<input type="text" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
-	<input type="submit" name="modify_tags" value="Modify Your Tags" id="tags-submit">
-</form>
-</div>
-<?php endif; ?>
+	<?php if ( has_permission('Items','tag') ): ?>
+		<div id="citation" class="field">
+		<h3>My Tags</h3>
+		<div id="my-tags">
+			<form id="tags-form" method="post" action="">
+				<input type="text" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+				<input type="submit" name="modify_tags" value="Modify Your Tags" id="tags-submit">
+			</form>
+		</div>
+		</div>
+	<?php endif; ?>
 
-<h3>All Tags</h3>
-<div id="tags">
-	<ul class="tags">
-		<?php foreach( $item->Tags as $key => $tag ): ?>
-		<li class="tag">
-			<a href="<?php echo uri('items/browse/tag/'.urlencode($tag->name));?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
-		</li>
-		<?php endforeach; ?>
-	</ul>
-</div>
-
-
+	<div class="field">
+		<h3>All Tags</h3>
+		<div id="tags">
+			<ul class="tags">
+				<?php foreach( $item->Tags as $key => $tag ): ?>
+					<li class="tag">
+						<a href="<?php echo uri('items/browse/tag/'.urlencode($tag->name));?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+		</div>
+		
 <?php if(!has_files($item)):?>
 	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
 <?php else: ?>
