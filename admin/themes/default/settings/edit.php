@@ -34,7 +34,7 @@
 	<?php text(array('name'=>'path_to_convert', 'class'=>'textinput', 'id'=>'path_to_convert'),$path_to_convert, 'Local Path to ImageMagick binary (required for thumbnail generation)'); ?>
 </div>
 	
-	<input type="submit" name="submit" value="Edit the settings" />
+	<input type="submit" name="submit" value="Save Changes" />
 	<?php //submit('Edit Settings','submit'); ?>
 	</fieldset>
 </form>

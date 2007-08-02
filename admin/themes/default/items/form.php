@@ -357,7 +357,7 @@
 		<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
 		<div class="field">
 		<label for="tags-field">Modify Your Tags</label>
-		<input type="text" name="tags" id="tags-field" class="textInput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
+		<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
 		</div>
 		
 		<div class="field">

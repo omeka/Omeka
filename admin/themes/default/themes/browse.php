@@ -2,7 +2,7 @@
 <?php common('settings-nav'); ?>
 <div id="primary">
 	<h1>Themes</h1>
-<form method="post">
+<form method="post" id="themeswitch">
 	<?php foreach($this->themes as $theme): ?>
 	<div class="<?php echo 'theme';//if($theme == $current_admin) echo 'current_admin'; else echo 'theme';?>">
 		<div class="meta">
@@ -21,7 +21,7 @@
 	</div>
 	<?php endforeach; ?>
 	
-	<input type="submit" name="submit" value="Switch this theme" />
+	<input type="submit" name="submit" id="submit" value="Switch this theme" />
 </form>
 </div>
 <?php foot(); ?>

@@ -6,6 +6,7 @@ body {font: 75% "Helvetica Neue",Helvetica, Arial, sans-serif; color: #444; back
 html>body {font-size: 12px;}
 p, span,ul,ol,dl  {font-size: 1em; line-height: 1.5em;}
 abbr,acronym {border: none; font-style: normal;}
+img a {border: none;}
 
 /* Headings */
 h1, h2, h3 {font-family: 'Trebuchet MS'; font-weight: normal; }
