@@ -84,96 +84,140 @@
 </ul>
 <?php echo flash(); ?>
 
-<h1><div class="editable" id="title" rel="text"><?php echo $item->title; ?></div></h1>
+<h1><div id="title"><?php echo $item->title; ?></div></h1>
 
-<h2>Core Metadata</h2>
 <div id="core-metadata">
+<h2>Core Metadata</h2>
 	
+	<div id="subject" class="field">
 	<h3>Subject</h3>
-	<div class="editable" id="subject" rel="text">
+	<div>
 	<?php display_empty($item->subject); ?>
 	</div>
+	</div>
 	
+	<div id="description" class="field">
 	<h3>Description</h3>
-	<div id="description" class="editable" rel="textarea">
+	<div>
 	<?php display_empty($item->description,"No description available."); ?>
 	</div>
+	</div>
 	
+	
+	<div id="creator" class="field">
 	<h3>Creator</h3>
-	<div class="editable" id="creator" rel="text">
+	<div>
 	<?php display_empty($item->creator); ?>
 	</div>
+	</div>
 	
+	
+	<div id="additional_creator" class="field">
 	<h3>Additional Creator</h3>
-	<div class="editable" id="additional_creator" rel="text">
+	<div>
 	<?php display_empty($item->additional_creator); ?>
 	</div>
+	</div>
 	
+	
+	<div id="source" class="field">
 	<h3>Source</h3>
-	<div class="editable" id="source" rel="text">
+	<div>
 	<?php display_empty($item->source); ?>
 	</div>
-
-	<h3>Publisher</h3>
-	<div id="publisher" class="editable" rel="text">
-	<?php display_empty($item->publisher); ?>
 	</div>
 	
+
+	<div id="publisher" class="field">
+	<h3>Publisher</h3>
+	<div>
+	<?php display_empty($item->publisher); ?>
+	</div>
+	</div>
+	
+	
+	<div id="date" class="field">
 	<h3>Date</h3>
 	<div>
 	<?php echo $item->date;?>
 	</div>
+	</div>
 	
+	
+	<div id="contributor" class="field">
 	<h3>Contributor</h3>
-	<div class="editable" id="contributor" rel="text">
+	<div>
 	<?php display_empty($item->contributor)?>
 	</div>
+	</div>
 	
+	
+	<div id="rights" class="field">
 	<h3>Rights</h3>
-	<div class="editable" id="rights" rel="text">
+	<div>
 	<?php display_empty($item->rights); ?>
 	</div>
+	</div>
 	
+	
+	<div id="rights_holder" class="field">
 	<h3>Rights Holder</h3>
-	<div class="editable" id="rights_holder" rel="text">
+	<div>
 	<?php display_empty($item->rights_holder)?>
 	</div>
+	</div>
+	
 
+	<div id="relation" class="field">
 	<h3>Relation</h3>
-	<div class="editable" id="relation" rel="text">
+	<div>
 	<?php display_empty($item->relation); ?>
 	</div>
-	
-	<h3>Spatial Coverage</h3>
-	<div id="spatial-coverage" class="editable" rel="text">
-	<?php display_empty($item->spatial_coverage)?>
 	</div>
 	
+	
+	<div id="spatial-coverage" class="field">
+	<h3>Spatial Coverage</h3>
+	<div>
+	<?php display_empty($item->spatial_coverage)?>
+	</div>
+	</div>
+	
+	
+	<div id="temporal-coverage" class="field">
 	<h3>Temporal Coverage</h3>
-	<div id="temporal-coverage">
+	<div>
 	<?php display_empty($item->temporal_coverage_start); ?> &mdash; 
 	<?php display_empty($item->temporal_coverage_end)?>
 	</div>
+	</div>
 	
+	
+	<div id="language" class="field">
 	<h3>Language</h3>
-	<div class="editable" id="language" rel="text">
+	<div>
 	<?php display_empty($item->language); ?>
 	</div>
-
-	<h3>Provenance</h3>
-	<div class="editable" id="provenance" rel="text">
-	<?php display_empty($item->provenance)?>
 	</div>
 	
+
+	<div id="provenance" class="field">
+	<h3>Provenance</h3>
+	<div>
+	<?php display_empty($item->provenance)?>
+	</div>
+	</div>
+	
+	
+	<div id="citation" class="field">
 	<h3>Bibliographic Citation</h3>
-	<div class="editable" id="citation" rel="text">
+	<div>
 	<?php display_empty($item->getCitation());?>
 	</div>
+	</div>
+	
 
 </div>
-
-
-
 
 <div id="mark-favorite">
 	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
@@ -188,6 +232,7 @@
 <?php endif; ?>
 
 
+<div id="type-metadata">
 <h2>Type Metadata</h2>
 
 <h3>Type Name</h3>
@@ -240,5 +285,6 @@
 </div>
 
 <?php endif;?>
+</div>
 </div>
 <?php foot();?>

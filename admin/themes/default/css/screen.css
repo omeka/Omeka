@@ -245,6 +245,16 @@ textarea#location
 
 .filenotfound ul.items {float:left; width: 378px;}
 
+	/* Individual Item View */
+	
+	#core-metadata {overflow:hidden;}
+	#type-meetadata {clear: both;}
+		#core-metadata .field {clear: both; border-bottom: 1px solid #ddd;}
+		#core-metadata h3, #type-metadata h3 {clear: both; float: left; width: 246px;}
+		#core-metadata  .field div {float: right; clear: right; width: 510px;}
+
+
+	
 /* == Collections styles == */
 .collection {overflow:hidden; border-bottom:1px solid #ccc; margin-bottom:18px;}
 	.collection h2 {float:left; width:246px;}
@@ -259,6 +269,8 @@ ul.collections {float:right; width:378px;}
 .itemtype {overflow:hidden; border-bottom:1px solid #ccc;margin-bottom:18px;}
 	.itemtype h2 {float:left; width:246px;}
 	.itemtype p {float:left; width: 510px;}
+	
+
 	
 /* == Exhibit Builder == */
 
