@@ -12,7 +12,8 @@ require_once 'ExhibitTaggings.php';
 class Exhibit extends Kea_Record
 {
 	protected $error_messages = array(	
-		'slug' => array('notblank' => 'Exhibit must be given a valid slug.'),
+		'slug' => array('notblank' => 'Exhibit must be given a valid slug.', 
+						'unique' => 'Your URL slug is already in use by another exhibit.  Please choose another.'),
 		'title' => array('notblank' => 'Exhibit must be given a title.')		
 				);
 	
@@ -86,7 +87,7 @@ class Exhibit extends Kea_Record
 		//Make an exhibit slug if the posted slug is empty
 		//This is duplicated exactly in the Section class
 		$slugFodder = !empty($post['slug']) ? $post['slug'] : $post['title'];
-		$post['slug'] = $this->generateSlug($post['title']);
+		$post['slug'] = $this->generateSlug($slugFodder);
 	}
 	
 	protected function postCommitForm($post, $options)
@@ -111,7 +112,7 @@ class Exhibit extends Kea_Record
 		
 		return $this;
 	}
-	
+
 	public function loadSections()
 	{
 		$dql = "SELECT s.* FROM Section s WHERE s.exhibit_id = {$this->id} ORDER BY s.section_order ASC";

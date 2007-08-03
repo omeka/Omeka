@@ -356,15 +356,6 @@ function uri($urlEnd, $params=array())
     
 }
 
-function a_link($uri,$text,$props=array()) {
-	$string = '<a href="'.$uri.'" ';
-	foreach ($props as $key => $value) {
-		$string .= "$key=\"$value\" ";
-	}
-	$string .= ">$text</a>";
-	echo $string;
-}
-
 /**
  * Stolen directly from Rails, and why not, because Ruby
  * and Rails are simply better than PHP and Zend's shitty framework, period.
@@ -373,7 +364,7 @@ function a_link($uri,$text,$props=array()) {
  * 
  * 
  */
-function flash()
+function flash($wrap=true)
 {
 	require_once 'Zend/Session.php';
 	$flash = new Zend_Session('flash');
@@ -383,7 +374,7 @@ function flash()
 	if ($msg === null) {
 		return false;
 	}
-	return '<div class="alert">'.$msg.'</div>';
+	return $wrap ? '<div class="alert">'.$msg.'</div>' : $msg;
 }
 
 ///// NAVIGATION /////
@@ -475,11 +466,12 @@ function current_user_tags($item)
 	return tags(array('user'=>$user->id, 'record'=>$item));
 }
 
-function link_to($record, $action='show', $text=null)
+function link_to($record, $action='show', $text=null, $props = array())
 {
 	$path = $record->getPluralized() . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $record->id;
 
-	echo '<a href="'. uri($path) . '">' . $text . '</a>';
+	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
+	echo '<a href="'. uri($path) . '"' . $attr . '>' . $text . '</a>';
 }
 
 function link_to_item($item, $action='show', $text=null)

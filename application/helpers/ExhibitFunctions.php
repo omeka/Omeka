@@ -1,11 +1,13 @@
 <?php 
 ///// EXHIBIT FUNCTIONS /////
 
-function link_to_exhibit($exhibit, $section=null, $page = null)
+function link_to_exhibit($exhibit, $text=null, $section=null, $page = null)
 {	
 	$uri = 'exhibits/' . $exhibit->slug . '/' . ( !empty($section) ? $section . (!empty($page) ? '/' . $page : ''): '');
 	
-	echo '<a href="'.uri($uri).'">' . $exhibit->title . '</a>';
+	$text = !empty($text) ? $text : $exhibit->title;
+	
+	echo '<a href="'.uri($uri).'">' . $text . '</a>';
 }
 
 function link_to_exhibit_item($item, $props=array())

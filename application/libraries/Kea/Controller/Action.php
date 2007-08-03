@@ -655,7 +655,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 **/
 	protected function _redirect($action,array $vars=null, array $options=null) 
 	{
-		if($return = $this->getInvokeArg('return')) 
+		if( ($return = $this->getInvokeArg('return')) or $this->isAjaxRequest() ) 
 		{
 			return null;
 		}else {

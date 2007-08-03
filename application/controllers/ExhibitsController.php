@@ -11,7 +11,7 @@ class ExhibitsController extends Kea_Controller_Action
 	protected $_redirects = array(
 		'addSection' => array('exhibits/addSection/id', array('id')),
 		'editSection'=> array('exhibits/editSection/id', array('id')),
-		'saveExhibit'=> array('exhibits/browse'),
+		'saveExhibit'=> array('exhibits/slug/', array('slug')),
 		'editExhibit'=> array('exhibits/edit/id', array('id')),
 		'deleteExhibit'=>array('exhibits/browse'),
 		'addPage'=>array('exhibits/addPage/id', array('id')),
@@ -104,12 +104,14 @@ class ExhibitsController extends Kea_Controller_Action
 		
 		$layout = $page->layout;
 
-		if(!$section) {
+/*
+			if(!$section) {
 			$this->flash('This section does not exist for this exhibit.');
 		}
 		elseif(!$page) {
 			$this->flash('This page does not exist in this section of the exhibit.');
 		}
+*/	
 		
 		//Register these so that theme functions can use them
 		Zend::register('section',	$section);
@@ -262,7 +264,7 @@ class ExhibitsController extends Kea_Controller_Action
 				return;
 			}elseif(array_key_exists('save_exhibit', $_POST)) {
 			
-				$this->_redirect('saveExhibit');
+				$this->_redirect('saveExhibit', array('slug'=>$exhibit->slug));
 			}else {
 			
 				//Everything else should render the page
@@ -294,7 +296,12 @@ class ExhibitsController extends Kea_Controller_Action
 	
 	protected function processSectionForm($section, $exhibit=null)
 	{
-		$retVal = $section->commitForm($_POST);
+		try {
+			$retVal = $section->commitForm($_POST);
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
+			$retVal = false;
+		}
 		
 		if($retVal) {
 			$hook = ($this->session->addingSection ? 'onAddExhibitSection' : 'onEditExhibitSection');
@@ -322,6 +329,19 @@ class ExhibitsController extends Kea_Controller_Action
 				return;
 				
 			}
+		}
+		
+		//this is an AJAX request
+		if($this->isAjaxRequest()) {
+			//If the form submission was invalid 
+			if(!$retVal) {
+				//Send a header that will inform us that the request was a failure
+				//@see http://tech.groups.yahoo.com/group/rest-discuss/message/6183
+				header ("HTTP/1.0 422 Unprocessable Entity");
+
+			}	
+			//Render the 'section.php' page inside of the JSON output	
+			return $this->render('exhibits/section.php', compact('section'));
 		}
 		
 		return $this->render('exhibits/form/section.php',compact('exhibit','section'));		
@@ -497,6 +517,65 @@ class ExhibitsController extends Kea_Controller_Action
 		$this->_redirect('editSection', array('id' => $section->id) );
 	}
 	
+	/////HERE WE HAVE SOME AJAX-ONLY ACTIONS /////
+	
+	public function sectionFormAction()
+	{
+		$exhibit = $this->findById();
+		
+		$section = new Section;
+		$section->Exhibit = $exhibit;
+		
+		$this->render('exhibits/_section_form.php', compact('section'));
+	}
+	
+	public function sectionListAction()
+	{
+		$exhibit = $this->findOrNew();
+		$exhibit->loadSections();
+		$this->render('exhibits/_section_list.php', compact('exhibit'));
+	}
+	
+	protected function findOrNew()
+	{
+		try {
+			$exhibit = $this->findById();
+		} catch (Exception $e) {
+			$exhibit = new Exhibit;
+		}
+		return $exhibit;
+	}
+
+	/**
+	 * Return the Exhibit ID as a JSON value
+	 *
+	 * @return void
+	 **/
+	public function saveAction()
+	{
+		//Run a permission check
+		if(!$this->isAllowed('add')) {
+			$this->forbiddenAction();
+		}
+		
+		if(!empty($_POST)) {
+			$exhibit = $this->findOrNew();
+			
+			require_once 'Zend/Json.php';
+			$return = array();
+			try {
+				$exhibit->commitForm($_POST);
+			} catch (Exception $e) {
+				//We pass this stupid header b/c Prototype doesn't know anything otherwise
+				header ("HTTP/1.0 404 Not Found"); 
+				
+				$this->flash($e->getMessage());
+			}
+			$this->render('exhibits/show.php', compact('exhibit'));
+		}
+	}
+	
+	/////END AJAX-ONLY ACTIONS
 	
 	/**
 	 * The route exhibits/whatever can be one of three things: 
@@ -517,6 +596,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$action = $slug . 'Action';
 		
 		if(method_exists($this, $action)) {
+			$this->_setParam('action', $slug);
 			return $this->_forward('exhibits', $slug, $this->_getAllParams());
 			exit;
 		}

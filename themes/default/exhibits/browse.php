@@ -21,7 +21,6 @@
 		<th>Title</th>
 		<th>Tags</th>
 		<th>Edit?</th>
-		<th>Delete?</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -35,8 +34,7 @@
 		<td><?php echo $exhibit->id;?></td>
 		<td><?php link_to_exhibit($exhibit); ?></td>
 		<td><?php echo tag_string($exhibit, uri('exhibits/browse/tag/')); ?></td>
-		<td><a href="<?php echo uri('exhibits/edit/'.$exhibit->id); ?>">[Edit]</a></td>
-		<td><a class="delete-link" href="<?php echo uri('exhibits/delete/'.$exhibit->id); ?>">[Delete]</a></td>
+		<td><?php link_to($exhibit, 'edit', '[Edit]'); ?></td>
 	</tr>
 <?php endforeach; ?>
 </tbody>

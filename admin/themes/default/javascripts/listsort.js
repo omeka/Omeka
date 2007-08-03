@@ -4,17 +4,14 @@ function makeSortable(list) {
 	if(listSorter.handle) {
 		opt.handle = listSorter.handle;
 	}	
+//	Sortable.destroy(list);
 	
 	Sortable.create(list, opt);
 	enableListForm(false);
 	
 	//Auto-update the form when someone clicks a delete link
 	var dl = listSorter.deleteLinks;
-	if(dl) {
-		for (var i=0; i < dl.length; i++) {
-			dl[i].onclick = ajaxListDelete;
-		};		
-	}
+	dl.each(function(e) {e.onclick = ajaxListDelete; });
 }
 
 //Enable or disable the section part of the form (depending)
@@ -60,7 +57,7 @@ function reorderList(container) {
 
 function ajaxListDelete(event) {
 		var href = this.href;
-		
+
 		if(confirm(listSorter.confirmation)) {
 		
 			new Ajax.Request(href, {
@@ -73,6 +70,9 @@ function ajaxListDelete(event) {
 							onComplete: function(t) {
 								listSorter.list.updateAppear(t.responseText);
 								makeSortable(listSorter.list);
+								if(listSorter.callback) {
+									listSorter.callback();
+								}
 							}
 						} );
 					}

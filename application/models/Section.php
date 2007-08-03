@@ -6,6 +6,12 @@ require_once 'SectionPage.php';
  */
 class Section extends Kea_Record
 {
+	protected $error_messages = array(	
+	'slug' => array('notblank' => 'This section must be given a valid slug.', 
+					'unique' => 'Your URL slug is already in use by another section of this exhibit.  Please choose another.'),
+	'title' => array('notblank' => 'This section must be given a title.')		
+			);
+	
     public function setTableDefinition()
     {
 		$this->option('type', 'MYISAM');
@@ -48,11 +54,13 @@ class Section extends Kea_Record
 	protected function postCommitForm($post, $options)
 	{
 		//Change the order of the pages
-		foreach ($post['Pages'] as $key => $page) {
-			$this->Pages[$key]->order = $page['order'];
+		if(!empty($post['Pages'])) {
+			foreach ($post['Pages'] as $key => $page) {
+				$this->Pages[$key]->order = $page['order'];
+			}		
+			$this->Pages->save();
+			$this->reorderPages();	
 		}
-		$this->Pages->save();
-		$this->reorderPages();
 	}
 
 	public function reorderPages()

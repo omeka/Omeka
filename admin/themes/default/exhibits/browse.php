@@ -3,7 +3,7 @@
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 	Event.observe(window,'load',function() {
-		var deleteLinks = document.getElementsByClassName('delete-link');
+		var deleteLinks = document.getElementsByClassName('delete-exhibit');
 		for (var i=0; i < deleteLinks.length; i++) {
 			deleteLinks[i].onclick = function() {
 				return confirm( 'Are you sure you want to delete this exhibit and all of its data from the archive?' );
@@ -42,8 +42,8 @@
 		<td><?php echo $exhibit->id;?></td>
 		<td><?php link_to_exhibit($exhibit); ?></td>
 		<td><?php echo tag_string($exhibit, uri('exhibits/browse/tag/')); ?></td>
-		<td><a class="edit-exhibit" href="<?php echo uri('exhibits/edit/'.$exhibit->id); ?>">Edit</a></td>
-		<td><a class="delete-exhibit" href="<?php echo uri('exhibits/delete/'.$exhibit->id); ?>">Delete</a></td>
+		<td><?php link_to($exhibit, 'edit', '[Edit]', array('class'=>'edit-exhibit')); ?></td>
+		<td><?php link_to($exhibit, 'delete', '[Delete]', array('class'=>'delete-exhibit')) ?></td>
 	</tr>
 <?php endforeach; ?>
 </tbody>

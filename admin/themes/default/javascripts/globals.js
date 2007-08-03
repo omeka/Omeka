@@ -1,3 +1,22 @@
+var Omeka = {
+	flash: function(msg) {
+		var div = $('alert');
+		if(div == null) {
+			var form = $$('form').first();
+			new Insertion.Before(form, '<div id="alert"></div>');
+			div = $('alert');
+		}
+
+		div.updateAppear(msg);
+		div.setStyle({display:'block'});
+		new Effect.Highlight(div, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'});
+	},
+	
+	hideFlash: function() {
+		$('alert').hide();
+	}
+};
+
 function alertBox() {
 	var alerts = $$('div.alert');
 	for(var i=0;i<alerts.length;i++) {
