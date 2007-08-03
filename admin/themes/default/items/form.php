@@ -69,6 +69,7 @@
 	
 	function ajaxifyTagRemoval()
 	{
+		if(!$('tags-list')) return;
 		var buttons = $('tags-list').getElementsByTagName('button');
 		for (var i=0; i < buttons.length; i++) {
 			buttons[i].onsubmit = function() {
@@ -368,9 +369,10 @@
 		<label for="tags-field">Modify Your Tags</label>
 		<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
 		</div>
-		
+		<?php if(has_permission('Items','untagOthers')): ?>
 		<div class="field">
 			<label for="all-tags">Remove Other Users&apos; Tags</label>
+			<?php if($item->Tags != null):?>
 			<ul id="tags-list">
 			<?php foreach( $item->Tags as $key => $tag ): ?>
 				<li>
@@ -379,7 +381,13 @@
 				</li>
 			<?php endforeach; ?>
 			</ul>
+			<?php else: ?>
+				foo
+				<?php endif; ?>
 		</div>
+		<?php else: ?>
+			<p>silly</p>
+		<?php endif; ?>
 		</div>
 	</fieldset>
 </div>

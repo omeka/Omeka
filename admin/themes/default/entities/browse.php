@@ -8,35 +8,30 @@
 
 
 <?php if(!$_GET['hierarchy']): //Let's lose the table for now'?>
+	<div id="names-browse">
 <table>
 	<thead>
 		<tr>
-			<th>Unique ID</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Email</th>
+			<th>ID</th>
+			<th>Name</th>
 			<th>Institution</th>
-			<th>Role</th>
-			<th>[Edit]</th>
-			<th>[Delete]</th>
+			<th>Edit</th>
+			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($entities as $key => $e): ?>
 		<tr>
 			<td><?php echo $e->id; ?></td>
-			<td><?php echo $e->first_name; ?></td>
-			<td><?php echo $e->last_name; ?></td>
-			<td><?php echo $e->email; ?></td>
+			<td><?php echo $e->first_name; ?> <?php echo $e->last_name; ?></td>
 			<td><?php echo $e->institution; ?></td>
-			<td>Contributor</td>
-			<td><?php link_to($e, 'edit', '[Edit]'); ?></td>
-			<td><?php link_to($e, 'delete', '[Delete]'); ?></td>
+			<td><a class="edit" href="<?php echo uri('entities/edit/'.$e->id); ?>">Edit</a></td>
+			<td><a class="delete" href="<?php echo uri('entities/delete/'.$e->id); ?>">Delete</a></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>
 </table>
-
+</div>
 <?php else: ?>
 
 <?php 
@@ -74,7 +69,7 @@
 ?>
 
 <?php endif; ?>
-<form action="<?php echo uri('entities/add') ?>" id="add-entity-form" method="post" accept-charset="utf-8">
+<form id="names-add" action="<?php echo uri('entities/add') ?>" id="add-entity-form" method="post" accept-charset="utf-8">
 	<?php include 'form.php'; ?>
 	<input type="submit" name="submit" value="Add the Entity" />
 </form>

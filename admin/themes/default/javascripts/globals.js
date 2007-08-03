@@ -62,11 +62,14 @@ function styleExhibitBuilder() {
 function roundCorners() {
 	Nifty('#primary-nav a','top transparent');
 	Nifty('#secondary-nav a','top transparent');
-	Nifty('#user-meta','bottom');
+	Nifty('#user-meta','bottom big');
 	Nifty('#site-info');
 	Nifty('#getting-started ul');
 	Nifty('#view-all-items a','transparent');
 	Nifty('#search','big');
+	Nifty('#names-add','big');
+	Nifty('div.meta ul','big');
+	Nifty('#add-item,#add-collection','transparent');
 }
 
 function makeAccordion() {
@@ -93,4 +96,4 @@ Event.observe(window,'load',toggleSearch);
 Event.observe(window,'load',alertBox);
 Event.observe(window,'load',styleExhibitBuilder);
 Event.observe(window,'load',roundCorners);
-Event.observe(window,'load',makeAccordion);
+//Event.observe(window,'load',makeAccordion);

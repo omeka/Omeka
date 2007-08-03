@@ -43,36 +43,39 @@
 	});
 </script>
 <?php echo flash(); ?>
+<fieldset>
+	<legend>Add a Name</legend>
 <div class="field" id="entity-type">
 <?php radio('type', array('Institution'=>'Institution','Person'=>'Person'), $entity->type); ?>
 </div>
-
 <div class="field">
-	<?php text('first_name', $entity->first_name, 'First Name:'); ?>
+<?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$type->name, 'Type Name'); ?>
+</div>
+<div class="field">
+	<?php text(array('class' => 'textinput','name'=>'first_name','id'=>'first_name'), $entity->first_name, 'First Name'); ?>
 </div>
 
 <div class="field">
-	<?php text('middle_name', $entity->middle_name, 'Middle Name:'); ?>
+	<?php text(array('class' => 'textinput','name'=>'middle_name','id'=>'middle_name'), $entity->middle_name, 'Middle Name'); ?>
 </div>
 
 <div class="field">
-	<?php text('last_name', $entity->last_name, 'Last Name:'); ?>
+	<?php text(array('class' => 'textinput','name'=>'last_name','id'=>'last_name'), $entity->last_name, 'Last Name'); ?>
 </div>
 
 <div class="field">
-	<?php text('email', $entity->email, 'Email:'); ?>
+	<?php text(array('class' => 'textinput','name'=>'email','id'=>'email'), $entity->email, 'Email'); ?>
 </div>
 
 <div class="field">
-	<?php text('institution', $entity->institution, 'Institution Name:'); ?>
+	<?php text(array('class' => 'textinput','name'=>'institution','id'=>'institution'), $entity->institution, 'Institution Name'); ?>
 </div>
 
 <div class="field">
 	<?php
 	$institutions = institutions();
-	select('parent_id', $institutions, $entity->parent_id, 'Choose an institution of affiliation:', 'id', 'name'); 
+	select('parent_id', $institutions, $entity->parent_id, 'Affiliation', 'id', 'name'); 
 	?>
 </div>
-
-
+</fieldset>
 

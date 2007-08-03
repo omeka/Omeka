@@ -31,7 +31,8 @@ Event.observe(window,'load',revealChoice);
 <?php if ( total_results(true) ): ?>
 
 <h1>Browse Items (<?php echo total_results(true);?> items total)</h1>
-<div id="add-new-item" class="add"><a href="<?php echo uri('items/add'); ?>">Add an Item</a></div>
+<a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
+
 <h2 id="search-header" class="close">Search Items</h2>
 <?php include('searchform.php'); ?>
 <div id="browse-meta">

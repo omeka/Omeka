@@ -6,6 +6,7 @@
 
 	
 	function setFavorite() {
+		if(!document.getElementById('favorite')) return;
 		var opt = {
 			onComplete: function(t, item) {
 				if(item.favorite) {
@@ -35,12 +36,11 @@
 				});
 			}
 		});
-		
-	
 		return false;
 	}
 	
 	Event.observe(window, 'load', function() {
+		if(!$('favorite')) return;
 		//Make the favorites thing work w/ AJAX
 		$('favorite').setAttribute('href', 'javascript:void(0)');
 		Event.observe("favorite", "click", setFavorite);
@@ -63,12 +63,7 @@
 <?php endif; ?>
 	*/
 	});
-	/*
-	var checkJS = document.getElementById;
 
-	if (checkJS) {
-	        document.write('<style type="text/css">ul.items-nav{display: none;}</style>');
-	}*/
 </script>
 <div id="primary">
 <ul id="tertiary-nav" class="items-nav navigation">
@@ -237,14 +232,12 @@
 
 <h2>Tags</h2>
 	<?php if ( has_permission('Items','tag') ): ?>
-		<div id="citation" class="field">
+		<div id="my-tags" class="field">
 		<h3>My Tags</h3>
-		<div id="my-tags">
-			<form id="tags-form" method="post" action="">
-				<input type="text" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
-				<input type="submit" name="modify_tags" value="Modify Your Tags" id="tags-submit">
-			</form>
-		</div>
+		<form id="tags-form" method="post" action="">
+			<input type="text" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+			<input type="submit" name="modify_tags" value="Modify Your Tags" id="tags-submit">
+		</form>
 		</div>
 	<?php endif; ?>
 
