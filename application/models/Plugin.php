@@ -48,7 +48,7 @@ class Plugin extends Kea_Record
 		return parent::__get($name);
 	}
 	
-	public function commitForm($post, $save, $options)
+	public function commitForm($post, $save=true, $options=array())
 	{	
 		if(empty($post)) return false;
 
