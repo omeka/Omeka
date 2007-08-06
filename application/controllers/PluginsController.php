@@ -42,6 +42,11 @@ class PluginsController extends Kea_Controller_Action
 		$name = $this->_getParam('name');
 		
 		$path = PLUGIN_DIR.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.$name.'.php';
+		
+		if(!file_exists($path)) {
+			throw new Exception( "Plugin named '$name' does not exist.  Please remove the directory named '$name' in order to continue." );
+		}
+		
 		require_once $path;
 		$plugin = new $name($router, new Plugin());
 		
