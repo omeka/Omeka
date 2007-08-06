@@ -8,30 +8,35 @@
 
 
 <?php if(!$_GET['hierarchy']): //Let's lose the table for now'?>
-	<div id="names-browse">
 <table>
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>Name</th>
+			<th>Unique ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Email</th>
 			<th>Institution</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th>Role</th>
+			<th>[Edit]</th>
+			<th>[Delete]</th>
 		</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($entities as $key => $e): ?>
 		<tr>
-			<td><?php echo $e->id; ?></td>
-			<td><?php echo $e->first_name; ?> <?php echo $e->last_name; ?></td>
-			<td><?php echo $e->institution; ?></td>
-			<td><a class="edit" href="<?php echo uri('entities/edit/'.$e->id); ?>">Edit</a></td>
-			<td><a class="delete" href="<?php echo uri('entities/delete/'.$e->id); ?>">Delete</a></td>
+			<td><?php echo h($e->id); ?></td>
+			<td><?php echo h($e->first_name); ?></td>
+			<td><?php echo h($e->last_name); ?></td>
+			<td><?php echo h($e->email); ?></td>
+			<td><?php echo h($e->institution); ?></td>
+			<td>Contributor</td>
+			<td><?php link_to($e, 'edit', '[Edit]'); ?></td>
+			<td><?php link_to($e, 'delete', '[Delete]'); ?></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>
 </table>
-</div>
+
 <?php else: ?>
 
 <?php 
@@ -41,11 +46,11 @@
 			<?php foreach( $entities as $k => $entity ): ?>
 				<li class="entity">
 					<div class="name">
-					<?php echo $entity->name; ?>
+					<?php echo h($entity->name); ?>
 					</div>
 					
 					<div class="entity-type">
-					<?php echo $entity->isPerson() ? '(Person)' : '(Institution)'; ?>
+					<?php echo h($entity->isPerson() ? '(Person)' : '(Institution)'); ?>
 					</div>
 					
 					<div class="miscellaneous">
@@ -69,7 +74,7 @@
 ?>
 
 <?php endif; ?>
-<form id="names-add" action="<?php echo uri('entities/add') ?>" id="add-entity-form" method="post" accept-charset="utf-8">
+<form action="<?php echo uri('entities/add') ?>" id="add-entity-form" method="post" accept-charset="utf-8">
 	<?php include 'form.php'; ?>
 	<input type="submit" name="submit" value="Add the Entity" />
 </form>

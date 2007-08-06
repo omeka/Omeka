@@ -8,7 +8,7 @@
 
 	<h1>Combine two Entities</h1>
 	<form action="<?php echo uri('entities/merge'); ?>" method="post" accept-charset="utf-8">
-		<input type="hidden" name="merger" value="<?php echo $entity->id; ?>" />
+		<input type="hidden" name="merger" value="<?php echo h($entity->id); ?>" />
 		<?php $entities = entities(); ?>
 		<?php 
 			select('mergee', $entities, null, 'Choose an entity to merge with the current one:', 'id', 'name'); 

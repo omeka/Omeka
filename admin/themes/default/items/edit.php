@@ -1,7 +1,7 @@
 <?php head();?>
 <?php common('archive-nav'); ?>
 <div id="primary">
-<h2>Edit &#8220;<?php echo $item->title; ?>&#8221;</h2>
+<h2>Edit &#8220;<?php echo h($item->title); ?>&#8221;</h2>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 	Event.observe(window,'load',function() {

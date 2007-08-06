@@ -8,7 +8,7 @@
 		listSorter.form = $('section-form');
 		listSorter.editUri = "<?php echo $_SERVER['REQUEST_URI']; ?>";
 		listSorter.partialUri = "<?php echo uri('exhibits/ajaxPageList'); ?>";
-		listSorter.recordId = '<?php echo $section->id; ?>';
+		listSorter.recordId = '<?php echo h($section->id); ?>';
 		listSorter.tag = 'tr';
 		listSorter.handle = 'handle';
 		listSorter.confirmation = 'Are you sure you want to delete this page?';
@@ -53,8 +53,8 @@
 				<td class="handle"><img src="<?php echo img('icons/arrow_move.png'); ?>" alt="Drag" /></td>
 				<td><?php text(array('name'=>"Pages[$key][order]",'size'=>2), $key); ?></td>
 				<td><?php exhibit_layout($page->layout, false); ?></td>
-				<td><?php echo $page->getItemCount(); ?></td>
-				<td><?php echo $page->getTextCount(); ?></td>
+				<td><?php echo h($page->getItemCount()); ?></td>
+				<td><?php echo h($page->getTextCount()); ?></td>
 				<td><a href="<?php echo uri('exhibits/editPage/'.$page->id); ?>">[Edit]</a></td>
 				<td><a href="<?php echo uri('exhibits/deletePage/'.$page->id); ?>" class="delete-page">[Delete]</a></td>
 			</tr>

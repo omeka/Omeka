@@ -3,7 +3,7 @@
 <div id="primary">
 <a href="<?php echo uri('plugins/edit/'.$plugin->id); ?>">Edit</a>
 
-<h2><?php echo $plugin->name;?></h2>
+<h2><?php echo h($plugin->name);?></h2>
 
 <?php if(!empty($plugin->config)): ?>
 	<?php foreach($plugin->config as $key => $value): ?>

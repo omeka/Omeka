@@ -89,7 +89,7 @@
 				<?php $items = recent_items('5'); ?>
 				<ul>
 					<?php foreach( $items as $key => $item ): ?>
-						<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><a href="<?php echo uri('items/show/'.$item->id); ?>"><span class="title"><?php  echo $item->title; ?></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></a> </li>	
+						<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><a href="<?php echo uri('items/show/'.$item->id); ?>"><span class="title"><?php  echo h($item->title); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></a> </li>	
 					<?php endforeach; ?>
 				</ul>
 				<p id="view-all-items"><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>	

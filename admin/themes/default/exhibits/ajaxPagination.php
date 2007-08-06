@@ -15,14 +15,14 @@
 	<?php foreach( $items as $item ): ?>
 		<div class="item">
 			<div class="item_id">
-				<?php echo $item->id; ?>
+				<?php echo h($item->id); ?>
 			</div>
 			
 			<?php 
 				if(has_thumbnail($item)){
 					thumbnail($item);
 				} else {
-					echo $item->title;
+					echo h($item->title);
 				}
 			?>
 		</div>

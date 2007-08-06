@@ -15,7 +15,7 @@ include_once 'ExhibitFunctions.php';
  */
 function dublin_core($type) { 
 	$data = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'dublincore.ini', array('coremetadata')); 
-	echo $data->$type; 
+	echo h($data->$type); 
 } 
 
 function not_empty_or($value, $default) {
@@ -103,7 +103,7 @@ function display_item_list($items,$title_only=false,$display_content=false) {
 	foreach($items as $key => $item): ?>
 	<div class="item hentry">
 		<div class="item-meta">
-		<h3><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php echo $item->title; ?></a></h3>
+		<h3><?php link_to_item($item, 'show', null, array('class'=>'permalink')); ?></h3>
 		<?php if(!$title_only):?>
 
 		<div class="item-img">
@@ -115,7 +115,7 @@ function display_item_list($items,$title_only=false,$display_content=false) {
 
 		<div class="desc"><strong>Description:</strong>
 		<?php if($item->description): ?>
-		<?php echo $item->description; ?>
+		<?php echo h($item->description); ?>
 		<?php else: ?>
 			<span>None Available</span>
 		<?php endif; ?>
@@ -124,7 +124,7 @@ function display_item_list($items,$title_only=false,$display_content=false) {
 		<div class="tagcloud"><strong>Tags:</strong> 
 		<?php if(count($item->Tags)): ?>
 		<?php foreach ($item->Tags as $tag): ?>
-		<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" re="tag"><?php echo $tag ?></a>
+		<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" re="tag"><?php echo h($tag); ?></a>
 		<?php endforeach; ?>
 		<?php else: ?>
 		<span>No Tags</span>
@@ -386,14 +386,14 @@ function nav(array $links) {
 	$nav = '';
 	foreach( $links as $text => $link )
 	{		
-		$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$link\">$text</a></li>\n";
+		$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$link\">".h($text)."</a></li>\n";
 		
 		//add navigation from the plugins
 		$plugResponses = $plugins->addNavigation($text, $link);
 		if(!empty($plugResponses)) {
 			foreach( $plugResponses as $array ) { 
 				list($plugText, $plugLink) = $array;
-				$nav .= "<li".(is_current($plugLink) ? ' class="current"':'')."><a href=\"$plugLink\">$plugText</a></li>\n"; 
+				$nav .= "<li".(is_current($plugLink) ? ' class="current"':'')."><a href=\"$plugLink\">".h($plugText)."</a></li>\n"; 
 			}
 		}
 		
@@ -463,7 +463,7 @@ function link_to($record, $action='show', $text, $props = array())
 	$path = $record->getPluralized() . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $record->id;
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-	echo '<a href="'. uri($path) . '"' . $attr . '>' . $text . '</a>';
+	echo '<a href="'. uri($path) . '"' . $attr . '>' . h($text) . '</a>';
 }
 
 function link_to_item($item, $action='show', $text=null, $props=array())
@@ -769,7 +769,7 @@ function _make_omeka_request($controller,$action,$params, $returnVars)
 function settings($name, $return=false) {
 	$name = get_option($name);
 	if($name instanceof Doctrine_Collection_Batch) return;
-	$name = allhtmlentities($name);
+	$name = h($name);
 	if($return) return $name;
 	echo $name;
 }
@@ -802,7 +802,7 @@ function get_year($date)
  * @return void
  **/
 function display_empty($val, $alternative="[Empty]") {
-	echo (!empty($val) ? $val : $alternative);
+	echo h(!empty($val) ? $val : $alternative);
 }
 
 function thumbnail($record, $props=array(), $width=null, $height=null,$return=false) 

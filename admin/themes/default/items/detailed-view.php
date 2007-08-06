@@ -6,10 +6,10 @@
 
 	<div class="meta">
 		<ul>
-			<li><span class="fieldname">Creator:</span> <?php echo $item->creator; ?></li>
-			<li><span class="fieldname">Added:</span> <?php echo $item->added; ?></li>
+			<li><span class="fieldname">Creator:</span> <?php echo h($item->creator); ?></li>
+			<li><span class="fieldname">Added:</span> <?php echo h($item->added); ?></li>
 				<?php if($item->Collection->exists()): ?>
-			<li><span class="fieldname">Collection:</span> <?php echo $item->Collection->name; ?></li>
+			<li><span class="fieldname">Collection:</span> <?php echo h($item->Collection->name); ?></li>
 			<?php endif; ?>
 			<li><span class="fieldname">Public</span> <?php checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></li>
 			<li><span class="fieldname">Featured</span> <?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?></li>

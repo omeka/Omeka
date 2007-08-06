@@ -15,7 +15,7 @@
 <h3>Collectors</h3>
 <ul id="collectors">
 <?php foreach( $collection->Collectors as $k => $collector ): ?>
-	<li><?php echo $collector->getName(); ?></li>
+	<li><?php echo h($collector->getName()); ?></li>
 <?php endforeach; ?>
 </ul>
 

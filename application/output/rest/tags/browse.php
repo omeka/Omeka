@@ -1,8 +1,4 @@
-<?php
-/* This is really dumb;
-// the short <?= php syntax interferes with the xml header!! */
-   echo '<?xml version="1.0" encoding="UTF-8"?>'
-?>
+<?php head(); ?>
 
 <tags>
 <?php foreach ($tags as $tag): ?>

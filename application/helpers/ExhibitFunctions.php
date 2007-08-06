@@ -7,7 +7,7 @@ function link_to_exhibit($exhibit, $text=null, $props=array(), $section=null, $p
 	
 	$text = !empty($text) ? $text : $exhibit->title;
 	
-	echo '<a href="'.uri($uri).'">' . $text . '</a>';
+	echo '<a href="'.uri($uri).'">' . h($text) . '</a>';
 }
 
 function exhibit_uri($exhibit, $section=null, $page=null)
@@ -27,7 +27,7 @@ function link_to_exhibit_item($item, $props=array())
 {	
 	$uri = exhibit_item_uri($item);
 	
-	echo '<a href="' . $uri . '" '. _tag_attributes($props). '>' . $item->title . '</a>';
+	echo '<a href="' . $uri . '" '. _tag_attributes($props). '>' . h($item->title) . '</a>';
 }
 
 function img_link_to_exhibit_item($item, $props=array(), $type="thumbnail")
@@ -165,7 +165,7 @@ function layout_form_item($order, $label='Enter an Item ID #') {
 			if(has_thumbnail($item)){
 				thumbnail($item);
 			} else {
-				echo $item->title;
+				echo h($item->title);
 			}
 		echo '</div>';		
 	}
@@ -281,7 +281,7 @@ function page_nav()
 		$uri = exhibit_uri($section->Exhibit, $section, $page);
 		
 		//Create the link (also check if uri matches current uri)
-		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">' . $key . '</a></li>';
+		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">' . h($key) . '</a></li>';
 	
 	}
 	

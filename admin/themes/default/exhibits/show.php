@@ -1,8 +1,8 @@
 <?php head(); ?>
 
-	<?php echo $exhibit->title; ?>
+	<?php echo h($exhibit->title); ?>
 	
-	<?php echo $section->title; ?>
+	<?php echo h($section->title); ?>
 		
 	<?php echo flash(); ?>
 	<?php 

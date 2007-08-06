@@ -29,9 +29,9 @@
 	{
 		if(!is_array($attributes)) {
 			$id = $attributes;
-			$label = '<label'.(!$id ? '' : ' for="'.h($id).'"').'>'.$text.'</label>';;
+			$label = '<label'.(!$id ? '' : ' for="'.h($id).'"').'>'.h($text).'</label>';;
 		} else {
-			$label = '<label '._tag_attributes($attributes).">".$text."</label>";
+			$label = '<label '._tag_attributes($attributes).">".h($text)."</label>";
 		}
 		
 		if($return) return $label;
@@ -58,7 +58,7 @@
 		if(!empty($attributes)) {
 			$input .= ' '._tag_attributes($attributes);
 		}
-		$input .= ' value="'.$default.'" ';
+		$input .= ' value="'.h($default).'" ';
 		
 		$input .= '/>';
 		$input .= "\n";
@@ -170,7 +170,7 @@
 		if(!empty($attributes)) {
 			$ta .= ' '._tag_attributes($attributes);
 		}
-		$ta .= '>' .  $default  . '</textarea>'."\n";
+		$ta .= '>' .  h($default)  . '</textarea>'."\n";
 		echo $ta;
 	}
 	
@@ -183,14 +183,14 @@
 			if(!empty($attributes)) {
 				$radio .= ' '._tag_attributes($attributes);
 			}
-			$radio .= ' value="' . $k . '"';
+			$radio .= ' value="' . h($k) . '"';
 			if($default == $k )
 			{
-				$radio .= ' checked="checked" />' . $v . '</label>';
+				$radio .= ' checked="checked" />' . h($v) . '</label>';
 			}
 			else
 			{
-				$radio .= ' />' . $v . '</label>';
+				$radio .= ' />' . h($v) . '</label>';
 			}
 			echo $radio;
 		}
@@ -234,7 +234,7 @@
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
 			<fieldset>
 				<legend>Search for Items</legend>
-				<input type="text" class="textinput" name="search" value="<?php echo $_REQUEST['search']; ?>"/>
+				<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
 			</fieldset>
 			
 			<fieldset>
@@ -250,7 +250,7 @@
 			?>
 			<?php endif; ?>
 			<label for="tags">Filter by Tags</label>
-				<input type="text" class="textinput" name="tags" value="<?php echo $_REQUEST['tags']; ?>" />
+				<input type="text" class="textinput" name="tags" value="<?php echo h($_REQUEST['tags']); ?>" />
 			</div>
 			<div id="search-checkboxes">
 			<?php 
@@ -294,16 +294,16 @@
 				//Process a single metafield for this item
 				switch ($type) {
 					case 'text':
-						$input = '<input type="text" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'" value="'.$metafield_value.'" />' . "\n\t";
+						$input = '<input type="text" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'" value="'.h($metafield_value).'" />' . "\n\t";
 						break;
 					case 'textarea':
 						$input = "\t" . '<textarea rows="15" cols="50" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'">';
-						$input .= $metafield_value;
+						$input .= h($metafield_value);
 						$input .= '</textarea>' . "\n\t";
 						break;
 				}
 				$out .= '<div class="field">';
-				$out .= '<label for="'.$metafieldInputId.'">'.$metafield_name;
+				$out .= '<label for="'.$metafieldInputId.'">'.h($metafield_name);
 				$out .=	'</label>'."\n\t";
 				$out .= $input;
 				$out .= '<input type="hidden" name="metafields['.$metafield_id.'][name]" value="' . h($metafield_name) . '" />';

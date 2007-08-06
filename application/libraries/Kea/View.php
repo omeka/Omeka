@@ -80,12 +80,14 @@ class Kea_View extends Zend_View_Abstract
 			switch($output) {
 				case('json'):
 					require_once 'Zend/Json.php';
-					$this->addScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json');
+					$scriptPath = APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json';
+					$this->addScriptPath($scriptPath);
 					Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this, 'json');
 				break;
 				case('rest'):
 					$this->getResponse()->setHeader('Content-Type', 'text/xml');
-					$this->addScriptPath(APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'rest');
+					$scriptPath = APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'rest';
+					$this->addScriptPath($scriptPath);
 					Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this, 'rest');
 				break;
 			}
@@ -103,13 +105,15 @@ class Kea_View extends Zend_View_Abstract
 				$theme_name = $options['public_theme'];
 			}
 			
-			$this->addScriptPath(THEME_DIR.DIRECTORY_SEPARATOR.$theme_name);
+			$scriptPath = THEME_DIR.DIRECTORY_SEPARATOR.$theme_name;
+			$this->addScriptPath($scriptPath);
 			
 			Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this);
 
-			Zend::register('theme_path',	THEME_DIR.DIRECTORY_SEPARATOR.$theme_name);
+			
 			Zend::register('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
 		}
+		Zend::register('theme_path',	$scriptPath);
 	}
 	
 	/**

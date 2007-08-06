@@ -2,7 +2,7 @@
 <h2>Routes</h2>
 <form method="post">
 	<?php foreach( $routes as $key => $route ): ?>
-		<?php  echo $route->name; ?>
+		<?php  echo h($route->name); ?>
 		<a href="<?php echo uri('static/'."?activate=true&id={$route->id}"); ?>"><?php if(!$route->active): ?>Activate<?php else: ?>De-activate<?php endif; ?></a>
 	<?php endforeach; ?>
 	

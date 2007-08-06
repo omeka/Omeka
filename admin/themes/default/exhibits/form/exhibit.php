@@ -184,7 +184,7 @@
 	</div>
 	</fieldset>
 	
-	<input type="hidden" name="exhibit_id" id="exhibit_id" value="<?php echo $exhibit->id; ?>" />
+	<input type="hidden" name="exhibit_id" id="exhibit_id" value="<?php echo h($exhibit->id); ?>" />
 	
 	<fieldset id="exhibit-display">
 		<legend>Exhibit Display Data</legend>

@@ -16,7 +16,7 @@
 				}
 			}
 		}
-		new Ajax.Request("<?php echo uri('json/items/show/');?>?makeFavorite=true&id=<?php echo $item->id;?>", opt);
+		new Ajax.Request("<?php echo uri('json/items/show/');?>?makeFavorite=true&id=<?php echo h($item->id);?>", opt);
 		return false;
 	}
 
@@ -57,7 +57,7 @@
 			var editable = new EditableField(editableElements[i], 
 											editableElements[i].id, 
 											"<?php echo uri('json/items/edit/'); ?>", 
-											<?php echo $item->id;?>, 
+											<?php echo h($item->id);?>, 
 											editableElements[i].getAttribute('rel'));
 		}
 <?php endif; ?>
@@ -79,7 +79,7 @@
 </ul>
 <?php echo flash(); ?>
 
-<h1><div id="title"><?php echo $item->title; ?></div></h1>
+<h1><div id="title"><?php echo h($item->title); ?></div></h1>
 
 <div id="core-metadata">
 <h2>Core Metadata</h2>
@@ -129,7 +129,7 @@
 	<div id="date" class="field">
 	<h3>Date</h3>
 	<div>
-	<?php echo $item->date;?>
+	<?php echo h($item->date);?>
 	</div>
 	</div>
 	
@@ -210,7 +210,7 @@
 	<div id="collection" class="field">
 	<h3>Collection</h3>
 	<div>
-		<?php echo $item->Collection->name; ?>
+		<?php echo h($item->Collection->name); ?>
 	</div>
 	</div>
 <?php endif; ?>
@@ -220,13 +220,13 @@
 
 	<div class="field">
 	<h3>Type Name</h3>
-		<div id="type_id" class="editableSelect"><?php echo $item->Type->name; ?></div>
+		<div id="type_id" class="editableSelect"><?php echo h($item->Type->name); ?></div>
 	</div>
 		
 	<?php foreach($item->TypeMetadata as $name => $value): ?>
 		<div class="field">
-			<h3><?php echo $name; ?></h3>
-			<div><?php echo $value; ?></div>
+			<h3><?php echo h($name); ?></h3>
+			<div><?php echo h($value); ?></div>
 		</div>
 	<?php endforeach; ?>
 
@@ -247,7 +247,7 @@
 			<ul class="tags">
 				<?php foreach( $item->Tags as $key => $tag ): ?>
 					<li class="tag">
-						<a href="<?php echo uri('items/browse/tag/'.urlencode($tag->name));?>" rel="<?php echo $tag->id; ?>"><?php echo $tag; ?></a>
+						<a href="<?php echo uri('items/browse/tag/'.urlencode($tag->name));?>" rel="<?php echo h($tag->id); ?>"><?php echo h($tag); ?></a>
 					</li>
 				<?php endforeach; ?>
 			</ul>
@@ -266,7 +266,7 @@
 			<?php if($file->hasThumbnail()): ?>
 			<?php thumbnail($file, array('class'=>'thumb')); ?>
 			<?php else: ?>
-			<?php echo $file->original_filename; ?>
+			<?php echo h($file->original_filename); ?>
 			<?php endif; ?>
 		</a>
 	<?php endforeach; ?>

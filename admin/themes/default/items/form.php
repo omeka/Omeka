@@ -35,7 +35,7 @@
 		$('change_type').hide();
 		typeSelect.onchange = function() {
 			new Ajax.Request('<?php echo uri("items/ajaxTypeMetadata") ?>', {
-				parameters: 'id=<?php echo $item->id; ?>&type_id='+this.getValue(),
+				parameters: 'id=<?php echo h($item->id); ?>&type_id='+this.getValue(),
 				onFailure: function(t) {
 					alert(t.status);
 				},
@@ -97,7 +97,7 @@
 				//Fire the other ajax request to update the page
 				new Ajax.Request("<?php echo uri('items/ajaxTagsRemove/'); ?>", {
 					parameters: {
-						'id': "<?php echo $item->id; ?>"
+						'id': "<?php echo h($item->id); ?>"
 					},
 					onSuccess: function(t) {
 						$('tags-list').hide();
@@ -173,7 +173,7 @@
 						<a href="<?php echo uri('files/edit/'.$file->id); ?>" target="_blank">
 			
 							<?php if ( !$file->hasThumbnail() ): ?>
-								<?php echo $file->original_filename; ?>
+								<?php echo h($file->original_filename); ?>
 							<?php else: ?>
 								<?php thumbnail($file); ?>
 							<?php endif; ?>
@@ -195,43 +195,43 @@
 	<div class="toggle_content">
 		<div class="field">
 		<label for="title" id="title">Title</label>
-		<input type="text" class="textinput" name="title" value="<?php echo $item->title;?>" />
+		<input type="text" class="textinput" name="title" value="<?php echo h($item->title);?>" />
 		<span class="tooltip" id="title_tooltip"><?php dublin_core('title'); ?></span>
 		</div>
 
 		<div class="field">
 		<label id="subject">Subject</label>
-		<input type="text" class="textinput" name="subject" value="<?php echo $item->subject;?>" />
+		<input type="text" class="textinput" name="subject" value="<?php echo h($item->subject);?>" />
 		<span class="tooltip" id="subject_tooltip"><?php dublin_core('subject'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="description">Description</label>
-		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo $item->description; ?></textarea>
+		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo h($item->description); ?></textarea>
 		<span class="tooltip" id="description_tooltip"><?php dublin_core('description'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="creator">Creator</label>
-		<input type="text" class="textinput" name="creator" value="<?php echo $item->creator;?>" />
+		<input type="text" class="textinput" name="creator" value="<?php echo h($item->creator);?>" />
 		<span class="tooltip" id="creator_tooltip"><?php dublin_core('creator'); ?></span>
 		</div>
 
 		<div class="field">
 		<label id="additional_creator">Additional Creator</label>
-		<input type="text" class="textinput" name="additional_creator" value="<?php echo $item->additional_creator;?>" />
+		<input type="text" class="textinput" name="additional_creator" value="<?php echo h($item->additional_creator);?>" />
 		<span class="tooltip" id="additional_creator_tooltip"><?php dublin_core('additional_creator'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="source">Source</label>
-		<input type="text" class="textinput" name="source" value="<?php echo $item->source;?>" />
+		<input type="text" class="textinput" name="source" value="<?php echo h($item->source);?>" />
 		<span class="tooltip" id="source_tooltip"><?php dublin_core('source'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="publisher">Publisher</label>
-		<input type="text" class="textinput" name="publisher" value="<?php echo $item->publisher?>" />
+		<input type="text" class="textinput" name="publisher" value="<?php echo h($item->publisher);?>" />
 		<span class="tooltip" id="publisher_tooltip"><?php dublin_core('publisher'); ?></span>
 		</div>
 		
@@ -251,31 +251,31 @@
 		
 		<div class="field">
 		<label id="contributor">Contributor</label>
-		<input type="text" class="textinput" name="contributor" value="<?php echo $item->contributor;?>" />
+		<input type="text" class="textinput" name="contributor" value="<?php echo h($item->contributor);?>" />
 		<span class="tooltip" id="contributor_tooltip"><?php dublin_core('contributor'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="rights">Rights</label>
-		<input type="text" class="textinput" name="rights" value="<?php echo $item->rights;?>" />
+		<input type="text" class="textinput" name="rights" value="<?php echo h($item->rights);?>" />
 		<span class="tooltip" id="rights_tooltip"><?php dublin_core('rights'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="rights_holder">Rights Holder</label>
-		<input type="text" class="textinput" name="rights_holder" value="<?php echo $item->rights_holder;?>" />
+		<input type="text" class="textinput" name="rights_holder" value="<?php echo h($item->rights_holder);?>" />
 		<span class="tooltip" id="rights_holder_tooltip"><?php dublin_core('rights_holder'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="relation">Relation</label>
-		<input type="text" class="textinput" name="relation" value="<?php echo $item->relation;?>" />
+		<input type="text" class="textinput" name="relation" value="<?php echo h($item->relation);?>" />
 		<span class="tooltip" id="relation_tooltip"><?php dublin_core('relation'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="spatial_coverage">Spatial Coverage</label>
-		<input type="text" class="textinput" name="spatial_coverage" value="<?php echo $item->spatial_coverage;?>" />
+		<input type="text" class="textinput" name="spatial_coverage" value="<?php echo h($item->spatial_coverage);?>" />
 		<span class="tooltip" id="spatial_coverage_tooltip"><?php dublin_core('spatial_coverage'); ?></span>
 		</div>
 		
@@ -317,13 +317,13 @@
 
 		<div class="field">
 		<label id="provenance">Provenance</label>
-		<input type="text" class="textinput" name="provenance" value="<?php echo $item->provenance;?>" />
+		<input type="text" class="textinput" name="provenance" value="<?php echo h($item->provenance);?>" />
 		<span class="tooltip" id="provenance_tooltip"><?php dublin_core('provenance'); ?></span>
 		</div>
 
 		<div class="field">
 		<label id="citation">Bibliographic Citation</label>
-		<input type="text" class="textinput" name="citation" value="<?php echo $item->citation;?>" />
+		<input type="text" class="textinput" name="citation" value="<?php echo h($item->citation);?>" />
 		<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
 		</div>
 		</div>
@@ -376,8 +376,8 @@
 			<ul id="tags-list">
 			<?php foreach( $item->Tags as $key => $tag ): ?>
 				<li>
-					<?php echo $tag->name; ?>
-					<button type="submit" name="remove_tag" class="remove" value="<?php echo $tag->id; ?>">[x]</button>
+					<?php echo h($tag->name); ?>
+					<button type="submit" name="remove_tag" class="remove" value="<?php echo h($tag->id); ?>">[x]</button>
 				</li>
 			<?php endforeach; ?>
 			</ul>

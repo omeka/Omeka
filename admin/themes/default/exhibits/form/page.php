@@ -60,16 +60,16 @@
 		<?php foreach( $items as $k => $item ): ?>
 			<div class="item-drop">
 				<div class="item-drag">
-					<div class="item_id"><?php echo $item->id; ?></div>
+					<div class="item_id"><?php echo h($item->id); ?></div>
 					<?php 
 						if(has_thumbnail($item)){
 							thumbnail($item);
 						} else {
-							echo $item->title;
+							echo h($item->title);
 						}
 					?>
 				</div>
-				<div class="item_id"><?php echo $item->id; ?></div>
+				<div class="item_id"><?php echo h($item->id); ?></div>
 			</div>
 		<?php endforeach; ?>
 		<h2 id="search-header" class="close">Search Items</h2>
