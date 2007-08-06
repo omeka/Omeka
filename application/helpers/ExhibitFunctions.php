@@ -1,13 +1,26 @@
 <?php 
 ///// EXHIBIT FUNCTIONS /////
 
-function link_to_exhibit($exhibit, $text=null, $section=null, $page = null)
+function link_to_exhibit($exhibit, $text=null, $props=array(), $section=null, $page = null)
 {	
-	$uri = 'exhibits/' . $exhibit->slug . '/' . ( !empty($section) ? $section . (!empty($page) ? '/' . $page : ''): '');
+	$uri = exhibit_uri($exhibit, $section, $page);
 	
 	$text = !empty($text) ? $text : $exhibit->title;
 	
 	echo '<a href="'.uri($uri).'">' . $text . '</a>';
+}
+
+function exhibit_uri($exhibit, $section=null, $page=null)
+{
+	$exhibit_slug = ($exhibit instanceof Exhibit) ? $exhibit->slug : $exhibit;
+	
+	$section_slug = ($section instanceof Section) ? $section->slug : $section;
+	
+	$page_num = ($page instanceof SectionPage) ? $page->order : $page;
+	
+	$uri = 'exhibits/' . $exhibit_slug . '/' . ( !empty($section_slug) ? $section_slug . (!empty($page_num) ? '/' . $page_num : ''): '');
+	
+	return uri($uri);
 }
 
 function link_to_exhibit_item($item, $props=array())
@@ -234,46 +247,41 @@ function layout_css($file='layout')
 	}
 }
 
-function section_nav($useSlug=true)
+function section_nav()
 {
 	$exhibit = Zend::registry('exhibit');
-	$slug = $useSlug ? $exhibit->slug : $exhibit->id;
 	
 	//Use class="section-nav"
 	echo '<ul class="section-nav">';
 	
 	foreach ($exhibit->Sections as $key => $section) {		
 	
-		$secUrl = 'exhibits/'.$exhibit->slug.'/'.$section->slug;
-		$secUrl = uri($secUrl);
-	
-		echo '<li><a href="' . $secUrl . '"' . (is_current($secUrl) ? ' class="current"' : ''). '>' . $section->title . '</a></li>';
+		$uri = exhibit_uri($exhibit, $section);
+		
+		echo '<li><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . $section->title . '</a></li>';
 	
 	}
 	
 	echo '</ul>';
 }
 
-function page_nav($useSlug=true)
+function page_nav()
 {
 	if(!Zend::isRegistered('section')) {
 		return false;
 	}
 	
 	$section = Zend::registry('section');
-	
-	$slug = $useSlug ? $section->Exhibit->slug : $section->Exhibit->id;
-	
+		
 	echo '<ul class="page-nav">';
 	
 	$key = 1;
 	foreach ($section->Pages as $key => $page) {
 	
-		$pageUrl = 'exhibits/'.$slug.'/'.$section->slug.'/'.$page->order;
-		$pageUrl = uri($pageUrl);
+		$uri = exhibit_uri($section->Exhibit, $section, $page);
 		
 		//Create the link (also check if uri matches current uri)
-		echo '<li'. (is_current($pageUrl) ? ' class="current"' : '').'><a href="'. $pageUrl . '">' . $key . '</a></li>';
+		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">' . $key . '</a></li>';
 	
 	}
 	

@@ -12,7 +12,7 @@
 		
 		$attr = array();
 		foreach ($toProcess as $key => $attribute) {
-			$attr[$key] = $key . '="' . allhtmlentities( $attribute ) . '"';
+			$attr[$key] = $key . '="' . h( $attribute ) . '"';
 		}
 		return join(' ',$attr);
 	}
@@ -29,7 +29,7 @@
 	{
 		if(!is_array($attributes)) {
 			$id = $attributes;
-			$label = '<label'.(!$id ? '' : ' for="'.allhtmlentities($id).'"').'>'.$text.'</label>';;
+			$label = '<label'.(!$id ? '' : ' for="'.h($id).'"').'>'.$text.'</label>';;
 		} else {
 			$label = '<label '._tag_attributes($attributes).">".$text."</label>";
 		}
@@ -43,7 +43,7 @@
 		$input = '';
 		if($label) 
 		{
-			label(@$attributes['id'],allhtmlentities($label));
+			label(@$attributes['id'],h($label));
 		}
 		
 		if(is_array($attributes)) {
@@ -70,7 +70,7 @@
 		$input = '';
 		if($label) 
 		{
-			label(@$attributes['id'],allhtmlentities($label));
+			label(@$attributes['id'],h($label));
 		}
 		
 		if(!$default and !empty($attributes['value'])) 
@@ -83,7 +83,7 @@
 		if(!empty($attributes)) {
 			$input .= ' '._tag_attributes($attributes);
 		}
-		$input .= ' value="'.allhtmlentities($default).'" ';
+		$input .= ' value="'.h($default).'" ';
 		
 		$input .= '/>';
 		$input .= "\n";
@@ -102,23 +102,23 @@
 		{
 			foreach( $values as $k => $v )
 			{
-				$select .= "\t" . '<option value="' . allhtmlentities( $k ) . '"';
+				$select .= "\t" . '<option value="' . h( $k ) . '"';
 				if( $default == $k ) $select .= ' selected="selected"';
-				$select .= '>' . allhtmlentities( $v ) . '</option>' . "\n";
+				$select .= '>' . h( $v ) . '</option>' . "\n";
 			}
 		}
 		else
 		{
 			foreach( $values as $obj_array )
 			{
-				$select .= "\t" . '<option value="' . allhtmlentities( $obj_array[$optionValue] ) . '"';
+				$select .= "\t" . '<option value="' . h( $obj_array[$optionValue] ) . '"';
 				if( $default == $obj_array[$optionValue] ) $select .= ' selected="selected"';
 				$select .= '>';
 				if( is_array( $optionDesc ) )
 				{
 					foreach( $optionDesc as $text )
 					{
-						$select .= allhtmlentities( $obj_array[$text] ) . ' ';
+						$select .= h( $obj_array[$text] ) . ' ';
 					}
 					$select .= '</option>' . "\n";
 				}
@@ -134,10 +134,10 @@
 						foreach ($fields as $k => $field) {
 							$optionDesc = str_replace($search[$k], $entity[$field], $optionDesc);
 						}
-						$select .= allhtmlentities( $optionDesc ) . '</option>' . "\n";
+						$select .= h( $optionDesc ) . '</option>' . "\n";
 					}
 					else {
-						$select .= allhtmlentities( $obj_array[$optionDesc] ) . '</option>' . "\n";	
+						$select .= h( $obj_array[$optionDesc] ) . '</option>' . "\n";	
 					}					
 				}
 			}
@@ -146,16 +146,16 @@
 		
 		if($label) {
 			if(is_string($attributes)) {
-				label($attributes, allhtmlentities($label));
+				label($attributes, h($label));
 				echo "\n".$select;
 			}
 			//Label attribute must either have an associated id element or be wrapped around the select 
 			//http://checker.atrc.utoronto.ca/servlet/ShowCheck?check=91
 			elseif(array_key_exists('id',$attributes)) {
-				label(@$attributes['id'],allhtmlentities($label));
+				label(@$attributes['id'],h($label));
 				echo "\n".$select;
 			}else {
-				label(null,allhtmlentities($label) ."\n\t". $select);
+				label(null,h($label) ."\n\t". $select);
 			}
 		}else {
 			echo $select;
@@ -202,7 +202,7 @@
 		if(!empty($attributes)) {
 			$input .= ' '._tag_attributes($attributes);
 		}
-		$input .= ' value="'.allhtmlentities($value).'"';
+		$input .= ' value="'.h($value).'"';
 		$input .= ' />' . "\n";
 		echo $input;
 	}
@@ -217,7 +217,7 @@
 			$checkbox .= ' '._tag_attributes($attributes);
 		}
 		if($value) {
-			$checkbox .= ' value="'.allhtmlentities($value).'"';
+			$checkbox .= ' value="'.h($value).'"';
 		}
 		$checkbox .= ' />' . "\n";
 		if($label) label(@$attributes['id'],$label);
@@ -306,7 +306,7 @@
 				$out .= '<label for="'.$metafieldInputId.'">'.$metafield_name;
 				$out .=	'</label>'."\n\t";
 				$out .= $input;
-				$out .= '<input type="hidden" name="metafields['.$metafield_id.'][name]" value="' . allhtmlentities($metafield_name) . '" />';
+				$out .= '<input type="hidden" name="metafields['.$metafield_id.'][name]" value="' . h($metafield_name) . '" />';
 				$out .= '</div>'."\n\n\t";
 
 				echo $out;

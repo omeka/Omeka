@@ -124,27 +124,19 @@ class Item extends Kea_Record
 	 * @return mixed
 	 **/
 	public function get($name) {
-		//I hate that the var escaping has to take place at this low level
-		//That violates all kinds of crap.  Also this is duplicated in so many places it makes me sad
-		require_once 'Kea/Escaper.php';
-		$esc = new Kea_Escaper("em|b|strong|del|span|cite|blockquote");
-		
 		switch ($name) {
 			case 'TypeMetadata':
 				/*This is the simplified version of the metatext field*/
 				$mt = $this->getTypeMetadata(true);
-				$mt = $esc->escape($mt);
 				return $mt;
 					
 			case 'PluginTypeMetadata':
 				/*This returns type metadata for plugins*/
 				$mt = $this->getPluginTypeMetadata(true);
-				$mt = $esc->escape($mt);
 				return $mt;
 			
 			case 'PluginMetadata':
 				$mt = $this->getPluginMetadata(true);
-				$mt = $esc->escape($mt);
 				return $mt;
 				
 			case 'added':

@@ -15,9 +15,6 @@ class Tag extends Kea_Record {
 		$this->ownsMany("CollectionTaggings", "CollectionTaggings.tag_id");
 		$this->ownsMany("ExhibitTaggings", "ExhibitTaggings.tag_id");
 	
-		//Hack around the tags so that they are not auto-escaped by the OutputListener class
-		$this->setListener(new Doctrine_EventListener);
-		
 	}
 	
 	public function setTableDefinition() {

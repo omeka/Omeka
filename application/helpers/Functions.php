@@ -356,14 +356,6 @@ function uri($urlEnd, $params=array())
     
 }
 
-/**
- * Stolen directly from Rails, and why not, because Ruby
- * and Rails are simply better than PHP and Zend's shitty framework, period.
- * In fact this is the last time I ever use this bullshit, sorry excuse for
- * a programming language.
- * 
- * 
- */
 function flash($wrap=true)
 {
 	require_once 'Zend/Session.php';
@@ -447,9 +439,9 @@ function tag_string($record, $link=null, $delimiter=', ')
 	if(!empty($tags)) {
 		foreach ($tags as $key=>$tag) {
 			if(!$link) {
-				$string[$key] = allhtmlentities($tag["name"]);
+				$string[$key] = h($tag["name"]);
 			}else {
-				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'">'.$tag["name"].'</a>';
+				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'">'.h($tag["name"]).'</a>';
 			}
 		}
 		$string = join($delimiter,$string);
@@ -466,7 +458,7 @@ function current_user_tags($item)
 	return tags(array('user'=>$user->id, 'record'=>$item));
 }
 
-function link_to($record, $action='show', $text=null, $props = array())
+function link_to($record, $action='show', $text, $props = array())
 {
 	$path = $record->getPluralized() . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $record->id;
 
@@ -474,11 +466,18 @@ function link_to($record, $action='show', $text=null, $props = array())
 	echo '<a href="'. uri($path) . '"' . $attr . '>' . $text . '</a>';
 }
 
-function link_to_item($item, $action='show', $text=null)
+function link_to_item($item, $action='show', $text=null, $props=array())
 {
 	$text = (!empty($text) ? $text : (!empty($item->title) ? $item->title : '[Untitled]'));
 	
-	return link_to($item, $action, $text);
+	return link_to($item, $action, $text, $props);
+}
+
+function link_to_collection($collection, $action='show', $text=null, $props=array())
+{
+	$text = (!empty($text) ? $text : (!empty($collection->name) ? $collection->name : '[Untitled]'));
+	
+	return link_to($collection, $action, $text, $props);
 }
 
 function link_to_thumbnail($item, $action='show')

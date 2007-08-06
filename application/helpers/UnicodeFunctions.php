@@ -1,7 +1,7 @@
 <?php
 function h($str, $tags=null) {
 	$res = allhtmlentities($str, $tags);
-	echo $res;
+	return $res;
 }
 
 function allhtmlentities($str, $allowedTags = "em|b|strong|del|span|cite|blockquote") {

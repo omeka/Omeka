@@ -37,9 +37,7 @@ class Kea_View extends Zend_View_Abstract
 		if(isset($config['request'])) {
 			$this->_request = $config['request'];
 		}
-		
-		$this->setOutputListener();
-		
+				
 		/**
 		 * Set the theme path:
 		 * This needs to happen last because the first thing Zend_View_Abstract
@@ -47,26 +45,6 @@ class Kea_View extends Zend_View_Abstract
 		 */ 
 		$this->setThemePath();
 		
-	}
-	
-	public function setOutputListener()
-	{
-		$doctrine = Zend::registry('doctrine');
-		$listeners = $doctrine->getListener();
-		
-		/* 	Here's a quick hack for ya:  the OutputListener needs to know what the output type is
-	     *	So it can escape the data properly.  REST & JSON must be fully converted to htmlentities
-		 *	but XHTML will only be partially converted based on what tags are specified as converted
-		 **/		
-		
-		if(!$listeners->hasListener('Kea_OutputListener') ) {
-			if ($output = $this->getRequest()->getParam('output')) {
-				$listeners->add(new Kea_OutputListener(null));			
-			}else {
-				$listeners->add(new Kea_OutputListener('em|b|strong|del|span|cite|blockquote'));	
-			}		
-		}	
-		$doctrine->setListener($listeners);
 	}
 	
 	/**
