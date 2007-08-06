@@ -233,7 +233,62 @@ class Item extends Kea_Record
 		return false;
 	}
 	
+	/**
+	 * Next() and previous() are facade functions
+	 *
+	 * @return void
+	 **/
+	public function next()
+	{
+		return $this->getNearby('next');
+	}
 	
+	public function previous()
+	{
+		return $this->getNearby('previous');
+	}
+	
+	protected function getNearby($position = 'next')
+	{
+		//If the current item is not persistent in the database, there is no next item
+		if(!$this->exists()) {
+			return false;
+		}
+
+		//Create a Doctrine_Query object, as we need to pull an ActiveRecord object
+		$q = new Doctrine_Query;
+		$q->parseQuery("SELECT i.* FROM Item i");
+		
+		//If the user does not have permission to show items that are public
+		if(!$this->userHasPermission('showNotPublic')) {
+	
+			//Throw a flag that retrieves only public items
+			$q->addWhere('i.public = 1');
+		}
+		
+		//Now add conditions to pull down the item with an ID that is higher/lower than the current one
+		switch ($position) {
+			case 'next':
+			
+				$q->addWhere('i.id > ?', $this->id);
+				
+				break;
+			case 'previous':
+			
+				$q->addWhere('i.id < ?', $this->id);
+			
+				break;
+			default:
+				throw new Exception( 'Invalid!' );
+				break;
+		}
+		
+		//Now say that we should only retrieve 1 Item
+		$q->limit(1);
+		
+		//Execute the query and return the first result
+		return $q->execute()->getFirst();
+	}
 /**
 	 * Process the date info given, return false on invalid date given, otherwise set the appropriate field
 	 *

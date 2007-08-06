@@ -81,6 +81,14 @@
 
 <h1><div id="title"><?php echo h($item->title); ?></div></h1>
 
+<div id="previous-item">
+	<?php link_to_previous_item($item); ?>
+</div>
+
+<div id="next-item">
+	<?php link_to_next_item($item); ?>
+</div>
+
 <div id="core-metadata">
 <h2>Core Metadata</h2>
 	

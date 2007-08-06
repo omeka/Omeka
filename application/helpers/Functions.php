@@ -473,6 +473,20 @@ function link_to_item($item, $action='show', $text=null, $props=array())
 	return link_to($item, $action, $text, $props);
 }
 
+function link_to_next_item($item, $text="Next Item -->")
+{
+	if($next = $item->next()) {
+		return link_to($next, 'show', $text);
+	}
+}
+
+function link_to_previous_item($item, $text="<-- Previous Item")
+{
+	if($previous = $item->previous()) {
+		return link_to($previous, 'show', $text);
+	}
+}
+
 function link_to_collection($collection, $action='show', $text=null, $props=array())
 {
 	$text = (!empty($text) ? $text : (!empty($collection->name) ? $collection->name : '[Untitled]'));
