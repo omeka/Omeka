@@ -73,7 +73,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		'add'	=> array('controller/browse/', array('controller')),
 		'login'	=> array('users/login'),
 		'delete'=> array('controller/browse', array('controller')),
-		'default'=> array('controller/action/id', array('controller', 'action', 'id'))
+		'default'=> array('controller/action/id', array('controller', 'action', 'id')),
+		'forbidden'=>array('controller/forbidden', array('controller'))
 	);
 	protected $_redirects = array();
 		
@@ -630,7 +631,9 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	
 	public function forbiddenAction()
 	{
+		header ("HTTP/1.0 403 Access Forbidden"); 
 		$this->render('403.php');
+		return;
 	}
 	
 	public function errorAction()

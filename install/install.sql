@@ -75,11 +75,13 @@ CREATE TABLE IF NOT EXISTS `exhibits` (
   `title` varchar(255)  default NULL,
   `description` text ,
   `credits` text ,
-  `featured` tinyint(1) default NULL,
+  `featured` tinyint(1) default 0,
+  `public` tinyint(1) default 0,
   `theme` varchar(30)  default NULL,
   `slug` varchar(30)  default NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `slug` (`slug`)
+  UNIQUE KEY `slug` (`slug`),
+  KEY `public` (`public`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------

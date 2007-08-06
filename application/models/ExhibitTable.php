@@ -27,6 +27,11 @@ class ExhibitTable extends Doctrine_Table
 				$q->addWhere('t.name = ?', trim($tag));
 			}
 		}
+		
+		if(isset($params['public'])) {
+			$q->addWhere('e.public = 1');
+		}
+		
 	//	echo $q;
 		$exhibits = $q->execute();
 		return $exhibits;

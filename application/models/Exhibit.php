@@ -27,6 +27,7 @@ class Exhibit extends Kea_Record
 		$this->hasColumn("description", "string");
 		$this->hasColumn("credits", "string");
 		$this->hasColumn("featured", "boolean");
+		$this->hasColumn('public', 'boolean');
 		
 		//Display info (not archival)
 		$this->hasColumn("theme","string",30);

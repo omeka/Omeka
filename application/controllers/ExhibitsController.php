@@ -40,6 +40,10 @@ class ExhibitsController extends Kea_Controller_Action
 			$filter['tags'] = $tags;
 		}
 		
+		if(!$this->isAllowed('showNotPublic')) {
+			$filter['public'] = true;
+		}
+		
 		$exhibits = $this->_table->findBy($filter);
 				
 		Zend::register('exhibits', $exhibits);
@@ -92,6 +96,8 @@ class ExhibitsController extends Kea_Controller_Action
 			throw new Exception( 'Exhibit with that ID does not exist.' );
 		}
 		
+		$this->checkPermission($exhibit);
+		
 		$section = $this->_getParam('section');
 
 		$section = $exhibit->getSection($section);
@@ -138,9 +144,19 @@ class ExhibitsController extends Kea_Controller_Action
 		return $exhibit;
 	}
 	
+	protected function checkPermission($exhibit)
+	{
+		if(!$exhibit->public and !$this->isAllowed('showNotPublic')) {
+			$this->_redirect('forbidden', array('controller'=>'exhibits'));
+		}
+	}
+	
 	public function summaryAction()
 	{
 		$exhibit = $this->findBySlug();
+		
+		$this->checkPermission($exhibit);
+		
 		Zend::register('exhibit', $exhibit);
 		return $this->renderExhibit(compact('exhibit'), 'summary');
 	}
