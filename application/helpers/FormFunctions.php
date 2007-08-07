@@ -291,6 +291,11 @@
 				$metafield_value = $field['text'];
 				$metafield_id = $field['metafield_id'];
 				
+				//Check for non-empty POST vars
+				if($post_text = @$_POST['metafields'][$metafield_id]['text']) {
+					$metafield_value = $post_text;
+				}
+				
 				//Process a single metafield for this item
 				switch ($type) {
 					case 'text':

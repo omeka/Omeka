@@ -16,7 +16,7 @@ class MetatextTable extends Doctrine_Table
 		$mfTable = Doctrine_Manager::getInstance()->getTable('Metafield');
 		
 		$coll = new Doctrine_Collection('Metatext');
-		
+
 		foreach ($metatext as $row) {
 			
 			$metafield_name = $row['name'];
@@ -24,7 +24,7 @@ class MetatextTable extends Doctrine_Table
 			
 			//Try to find the existing metatext row so we can edit it
 			$mtObj = $this->findByItemAndMetafieldName($item, $metafield_name);
-			
+
 			//If we can't find it, make a new one!!!1
 			if(!$mtObj) {
 				
@@ -37,8 +37,8 @@ class MetatextTable extends Doctrine_Table
 				//Make a new Metatext obj
 				$mtObj = new Metatext;
 				
-				$mtObj->Metafield = $mf;
-				$mtObj->Item = $item;
+				$mtObj->metafield_id = $mf->id;
+				$mtObj->item_id = $item->id;
 				
 			}
 			
@@ -59,7 +59,9 @@ class MetatextTable extends Doctrine_Table
 		$dql = "SELECT m.* FROM Metatext m INNER JOIN m.Metafield mf WHERE m.item_id = ? AND mf.name = ? LIMIT 1";
 		$q = new Doctrine_Query;
 		
-		$res = $q->parseQuery($dql)->execute(array($item->id, $metafield));
+		$q->parseQuery($dql);
+		
+		$res = $q->execute(array($item->id, $metafield));
 		
 		if($res) return $res->getFirst();
 		

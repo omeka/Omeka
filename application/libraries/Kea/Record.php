@@ -137,6 +137,7 @@ abstract class Kea_Record extends Doctrine_Record
 					$def = $this->getTable()->getDefinitionOf($key);
 					$type = $def[0];
 					$default = @$def[2]['default'];
+					
 					if(empty($value)) {
 						if($default !== null) {
 							$value = $default;
@@ -174,12 +175,14 @@ abstract class Kea_Record extends Doctrine_Record
 	}
 	
 	public function strip($text) {
-		$text = get_magic_quotes_gpc() ? stripslashes( $text ) : $text;
+		if($text !== null) {
+			$text = get_magic_quotes_gpc() ? stripslashes( $text ) : $text;
+		}
 		return $text;
 	}
 	
 	public function setFromForm($array) {
-		
+
 		//Debatable as to whether this needs to go in the setArray() method or here - my guess is here
 		foreach ($this->constraints as $constraint) {
 			if(array_key_exists($constraint,$array) && empty($array[$constraint])) {
@@ -189,7 +192,7 @@ abstract class Kea_Record extends Doctrine_Record
 		
 		//Avoid security holes
 		unset($array['id']);
-		
+
 		return $this->setArray($array, array($this, 'strip'));
 	}
 	

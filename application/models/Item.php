@@ -428,7 +428,6 @@ class Item extends Kea_Record
 			$clean = $post;
 			unset($clean['id']);
 			
-			
 			//Process the separate date fields
 			$validDate = $this->processDate('date',
 								$clean['date_year'],
@@ -459,10 +458,10 @@ class Item extends Kea_Record
 					}
 				}				
 			}
-			
+
 			//Mirror the form to the record
 			$this->setFromForm($clean);
-			
+
 			//Check to see if the date was valid
 			if(!$validDate) {
 				throw new Exception( 'The date provided is invalid.  Please provide a correct date.' );
