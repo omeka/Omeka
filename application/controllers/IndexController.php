@@ -44,7 +44,6 @@ class IndexController extends Kea_Controller_Action
 
 	public function homeAction() 
 	{
-		throw new Exception ( 'ALL YOUR ERRORS ARE BELONG TO US.' );
 		$this->render('index.php');
 	}
 }
