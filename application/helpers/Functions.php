@@ -562,6 +562,10 @@ function has_collection($item, $name=null) {
 	return ( $exists and $hasName );
 }
 
+function has_collectors($collection) {
+	return ($collection->Collectors->count() > 0);
+}
+
 function has_tags($item, array $tags=array()) {
 	$hasSome = ($item->Tags->count() > 0);
 	if(empty($tags) or !$hasSome){
