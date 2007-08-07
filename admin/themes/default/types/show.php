@@ -15,10 +15,9 @@
 	<dl class="type-metadata">
 
 		<?php foreach($type->Metafields as $metafield): ?>
-		<div class="name"><?php echo h($metafield->name); ?></div>
-		<div class="description"><?php echo h($metafield->description); ?></div>
+		<dt><?php echo h($metafield->name); ?></dt>
+		<dd><?php echo h($metafield->description); ?></dd>
 		<?php endforeach; ?>
-
 		
 	</dl>
 </div>

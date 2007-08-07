@@ -2,21 +2,26 @@
 <?php common('archive-nav');?>
 <div id="primary">
 <div id="collection-info">
-<h1>Collections &rarr; <?php echo h($collection->name);?> <a class="edit" href="<?php echo uri('collections/edit/').$collection->id; ?>">(Edit)</a>  <a class="delete" href="<?php echo uri('collections/delete/').$collection->id; ?>">(Delete)</a></h1>
-<p><?php echo h($collection->description); ?></p>
 
-<ul id="collector-list">
-<?php foreach( $collection->Collectors as $k => $collector ): ?><li><?php echo h($collector->name); ?></li>
+<h2>Collection: <?php echo h($collection->name);?></h2>
+
+<p> <a class="edit" href="<?php echo uri('collections/edit/').$collection->id; ?>">Edit</a>  <a class="delete" href="<?php echo uri('collections/delete/').$collection->id; ?>">Delete</a></p>
+
+<h3>Description:</h3> <p><?php echo h($collection->description); ?></p>
+
+<?php foreach( $collection->Collectors as $k => $collector ): ?>
+	<h3>Collectors:</h3>
+	<ul id="collector-list">
+		<li><?php echo h($collector->name); ?></li>
+	</ul>
 <?php endforeach; ?>
-</ul>
 
 </div>
 <div id="collection-items">
-	<h2>Recently Added to <?php echo h($collection->name); ?></h2>
+	<h3>Recently Added to <?php echo h($collection->name); ?></h3>
 	<?php
 		$items = items(array('collection'=>$collection->name, 'recent'=>true));
 	?>
-	<?php echo total_items($items);?>
 	<ul>
 	<?php foreach ($items as $key => $item): ?>
 		<?php if ($key < 10): ?>
@@ -24,6 +29,7 @@
 		<?php endif; ?> 
 	<?php endforeach;?>
 	</ul>
+	<h4>Total Number of Items in Collection: <?php echo total_items($items);?></h4>
 	
 </div>
 </div>

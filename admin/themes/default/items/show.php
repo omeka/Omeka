@@ -89,7 +89,8 @@
 	<?php link_to_next_item($item); ?>
 </div>
 
-<div id="core-metadata">
+<div id="core-metadata" class="showitem">
+
 <h2>Core Metadata</h2>
 	
 	<div id="subject" class="field">
@@ -223,7 +224,8 @@
 	</div>
 <?php endif; ?>
 
-<div id="type-metadata">
+<div id="type-metadata" class="showitem">
+
 <h2>Type Metadata</h2>
 
 	<div class="field">
@@ -281,6 +283,16 @@
 </div>
 
 <?php endif;?>
+
 </div>
+<?php if ( $item->Collection->exists() ): ?>
+	<div id="collection" class="field">
+	<h2>Collection</h2>
+	<div>
+		<?php echo $item->Collection->name; ?>
+	</div>
+	</div>
+<?php endif; ?>
+
 </div>
 <?php foot();?>

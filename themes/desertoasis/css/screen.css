@@ -33,6 +33,8 @@ a:hover {color: #69bfde;}
 	ul#primary-nav li.current a:link, ul#primary-nav li.current a:visited {border-bottom: 3px solid #5c832f;}
 	#footer a:link, #footer a:visited {color: #2d2303;}
 
+	a img {border: 1px solid #284907;}
+
 select.pagination-link {border: 1px solid #bbb5a0; }
 
 dl#metadata dt { border-bottom: 1px dotted #bbb5a0; }
@@ -69,7 +71,8 @@ abbr,acronym {border: none; font-style: normal;}
 	#collection {margin: 0 1em 1em;}
 #content {width: 1000px; margin: 0 auto 2em; overflow: hidden;}
 #primary {float: left; margin-right: 24px;}
-	#primary div#pagination {width: auto; font-size: 1em; padding: .5em; text-align: right;}
+	#primary div#pagination {width: auto; font-size: 1em; text-align: right;}
+	#primary div#pagination li {display: inline;}
 #secondary {float: left;}
 #footer {padding: 1em;}
 

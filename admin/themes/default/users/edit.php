@@ -2,7 +2,7 @@
 <?php common('users-nav'); ?>
 
 <div id="primary">
-<h1>Users | Edit a User</h1>
+<h1>Edit a User</h1>
 <form method="post">
 <?php include('form.php'); ?>
 <?php/*
@@ -19,7 +19,7 @@
 	<?php password(array('name'=>'new_password2', 'class'=>'textinput', 'id'=>'new_password2'), 'Retype Password'); ?>
 </div>
 */ ?>
-<input type="submit" name="submit" value="Edit User Information --&gt;" />
+<input type="submit" name="submit" value="Save User Information" class="button" />
 </form>
 
 <form action="<?php echo uri('users/changePassword/', array('id'=>$user->id)); ?>" method="post" accept-charset="utf-8">
@@ -43,7 +43,7 @@
 	</div>
 </fieldset>
 
-	<input type="submit" name="submit" value="Change the password --&gt;" />
+	<input type="submit" name="submit" value="Change Password"  class="button" />
 </form>
 </div>
 <?php foot();?>

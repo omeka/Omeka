@@ -1,12 +1,13 @@
 <?php head(); ?>
 <div id="primary">
-	<h1>Edit the Entity</h1>
+
+	<h2>Edit the Entity</h2>
 	<form method="post" accept-charset="utf-8">
 		<?php include 'form.php'; ?>
 		<input type="submit" name="submit" value="Edit the Entity" />
 	</form>
 
-	<h1>Combine two Entities</h1>
+	<h2>Combine Two Entities</h2>
 	<form action="<?php echo uri('entities/merge'); ?>" method="post" accept-charset="utf-8">
 		<input type="hidden" name="merger" value="<?php echo h($entity->id); ?>" />
 		<?php $entities = entities(); ?>
@@ -15,5 +16,6 @@
 		?>
 		<input type="submit" name="submit" value="Merge these Entities" />
 	</form>
+
 </div>
 <?php foot(); ?>

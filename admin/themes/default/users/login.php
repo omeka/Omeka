@@ -1,5 +1,5 @@
 <?php head(array(), 'login'); ?>
-<div id="login">
+
 <h2>Login</h2>
 	<?php
 	if (isset($errorMessage)) {
@@ -20,11 +20,9 @@
 	</fieldset>
 </form>
 
-</div>
 <ul>
 <li id="backtosite"><a href="<?php echo uri(''); ?>">Back to <?php settings('site_title'); ?></a></li>
 <li id="forgotpassword"><a href="<?php echo uri('users/forgotPassword'); ?>">Lost your password?</a></li>
 </ul>
-
 
 <?php foot(); ?>

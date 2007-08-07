@@ -1,5 +1,8 @@
 <?php echo flash(); ?>
-<fieldset>
+
+<fieldset id="editcollection">
+	<legend>Collection Details</legend>
+
 <div class="field">
 <?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name, 'Collection Name'); ?>
 </div>
@@ -8,27 +11,28 @@
 <?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
 </div>
 
-<?php 
-	$entities = entities();
-?>
+<?php $entities = entities(); ?>
 
-<h3>Collectors</h3>
-<ul id="collectors">
 <?php foreach( $collection->Collectors as $k => $collector ): ?>
+<h3>Collectors: </h3>
+<ul id="collectors">
 	<li><?php echo h($collector->getName()); ?></li>
-<?php endforeach; ?>
 </ul>
+<?php endforeach; ?>
 
+<div class="field">
 <?php 
 	select(array('name'=>'collectors[]', 'id'=>'collector'), $entities, null, 'Add a Collector (optional)', 'id', 'name'); 
 ?>
+</div>
 
-<div class="field">
+<h3>Status: </h3>
+<div class="field radiofield">
 <?php 
 	radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->public); ?>
 </div>
 
-<div class="field">	
+<div class="field radiofield">	
 <?php 
 	radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->featured); ?>
 </div>	

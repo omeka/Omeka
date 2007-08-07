@@ -88,7 +88,7 @@ function roundCorners() {
 	Nifty('#search','big');
 	Nifty('#names-add','big');
 	Nifty('div.meta ul','big');
-	Nifty('#add-item,#add-collection','transparent');
+	Nifty('#add-item,#add-collection,#add-type','transparent');
 }
 
 function makeAccordion() {

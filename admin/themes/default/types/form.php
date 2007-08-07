@@ -56,6 +56,7 @@
 	Event.observe(window, "load", ajaxify);
 </script>
 <fieldset>
+	<legend>Edit Type</legend>
 <div class="field">
 <?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$type->name, 'Type Name'); ?>
 </div>
@@ -65,7 +66,7 @@
 
 <div id="old-metafields">
 <?php if($type->exists()): ?>
-<p>Edit existing metafields</p>
+<h2>Edit existing metafields:</h2>
 <?php foreach( $type->Metafields as $key => $metafield ):
 	echo '<div class="field">';
 /*	select(	array(	
@@ -75,19 +76,21 @@
 							'id',
 							'name' ); */
 	text(array('name' => "Metafields[$key][name]"),$metafield->name);
-	echo 'Remove this metafield from the Type';
+	echo '<span>Remove this metafield from the Type</span>';
 	checkbox(array('name' => "remove_metafield[$key]"));
-	echo 'Delete this metafield permanently';
+	echo '<span>Delete this metafield permanently</span>';
 	checkbox(array('name' => "delete_metafield[$key]"));
 	echo '</div>';
 endforeach; ?>
 
 <?php endif; ?>
 </div>
-<div id="add"></div>
 
 <div id="new-metafields">
-	<p>Add a metafield:</p>
+	<h2>Add a metafield:</h2>
+
+<div id="add"></div>
+
 	<?php $totalMetafields = count($type->Metafields);?>
 	<?php common('_new_metafield', array('id'=>$totalMetafields), 'types'); ?>
 </div>
