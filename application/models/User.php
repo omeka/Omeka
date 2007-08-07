@@ -180,9 +180,7 @@ class User extends Kea_Record {
 		unset($post['first_name']);
 		unset($post['last_name']);
 		unset($post['institution']);
-		
-		Zend::dump( $post );Zend::dump( $this->Entity->toArray() );
-				
+						
 		return true;
 	}
 	
