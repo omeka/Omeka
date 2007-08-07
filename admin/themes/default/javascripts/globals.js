@@ -30,8 +30,11 @@ function alertBox() {
 
 function revealSwitch( field, file ) {
 	new Ajax.Updater(field,
-		revealPath + file,
+		revealPath,
 		{
+			parameters: {
+				view: file
+			},
 			onComplete: function(t) {
 				new Effect.Appear( field, {duration: 0.8} );
 			}

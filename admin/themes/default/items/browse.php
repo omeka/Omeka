@@ -2,8 +2,7 @@
 <?php common('archive-nav'); ?>
 <script type="text/javascript">
 /* revealPath is used in revealSwitch(); */
-var revealPath = "<?php echo uri('items/'); ?>";
-
+var revealPath = "<?php echo $_SERVER['REQUEST_URI']; ?>";
 
 function revealChoice() {
 	if(!document.getElementById) return false;
@@ -11,13 +10,13 @@ function revealChoice() {
 	simpleView = $('simple');
 
 	simpleView.onclick = function() {
-		revealSwitch( 'view-choice', 'simple-view');
+		revealSwitch( 'view-choice', 'simple');
 		this.addClassName('current');
 		detailedView.removeClassName('current');
 		return false;
 	}
 	detailedView.onclick = function() {
-		revealSwitch( 'view-choice', 'detailed-view');
+		revealSwitch( 'view-choice', 'detailed');
 		this.addClassName('current');
 		simpleView.removeClassName('current');
 		return false;
@@ -46,9 +45,9 @@ Event.observe(window,'load',revealChoice);
 	
 	<div id="view-choice">
 	<?php if($_GET['view'] == 'detailed'):?>
-		<?php include('detailed-view.php'); ?>
+		<?php include('_detailed.php'); ?>
 	<?php elseif($_GET['view'] == 'simple' || $_GET['view'] == ''):?>
-		<?php include('simple-view.php'); ?>
+		<?php include('_simple.php'); ?>
 	<?php endif; ?>
 	</div>
 
