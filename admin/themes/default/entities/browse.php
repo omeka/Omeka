@@ -6,32 +6,26 @@
 
 <?php echo flash(); ?>
 
-
+<div id="names-browse">
 <?php if(!$_GET['hierarchy']): //Let's lose the table for now'?>
 <table>
 	<thead>
 		<tr>
-			<th>Unique ID</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Email</th>
+			<th>ID</th>
+			<th>Name</th>
 			<th>Institution</th>
-			<th>Role</th>
-			<th>[Edit]</th>
-			<th>[Delete]</th>
+			<th>Edit</th>
+			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($entities as $key => $e): ?>
 		<tr>
 			<td><?php echo h($e->id); ?></td>
-			<td><?php echo h($e->first_name); ?></td>
-			<td><?php echo h($e->last_name); ?></td>
-			<td><?php echo h($e->email); ?></td>
+			<td><?php echo h($e->first_name); ?> <?php echo h($e->last_name); ?></td>
 			<td><?php echo h($e->institution); ?></td>
-			<td>Contributor</td>
-			<td><?php link_to($e, 'edit', '[Edit]'); ?></td>
-			<td><?php link_to($e, 'delete', '[Delete]'); ?></td>
+			<td><a href="<?php echo uri('entities/edit/'.$e->id); ?>" class="edit">Edit</a></td>
+			<td><a href="<?php echo uri('entities/delete/'.$e->id); ?>" class="delete">Delete</a></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>
@@ -74,7 +68,8 @@
 ?>
 
 <?php endif; ?>
-<form action="<?php echo uri('entities/add') ?>" id="add-entity-form" method="post" accept-charset="utf-8">
+</div>
+<form action="<?php echo uri('entities/add') ?>" id="names-add" method="post" accept-charset="utf-8">
 	<?php include 'form.php'; ?>
 	<input type="submit" name="submit" value="Add the Entity" />
 </form>

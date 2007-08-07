@@ -257,7 +257,7 @@
 			<ul class="tags">
 				<?php foreach( $item->Tags as $key => $tag ): ?>
 					<li class="tag">
-						<a href="<?php echo uri('items/browse/tag/'.urlencode($tag->name));?>" rel="<?php echo h($tag->id); ?>"><?php echo h($tag); ?></a>
+						<a href="<?php echo uri('items/browse/tag/'.urlencode($tag->name));?>" rel="<?php echo h($tag->id); ?>"><?php echo h($tag->name); ?></a>
 					</li>
 				<?php endforeach; ?>
 			</ul>

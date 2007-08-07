@@ -24,7 +24,7 @@
 		<td><span class="<?php echo h($user->role); ?>"><?php echo h($user->role); ?></span></td>
 		
 		<td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
-		<td><a href="<?php echo uri('users/edit/'.$user->id);?>">[Edit]</a></td>
+		<td><a class="edit" href="<?php echo uri('users/edit/'.$user->id);?>">Edit</a></td>
 	</tr>
 <?php endforeach; ?>
 </tbody>

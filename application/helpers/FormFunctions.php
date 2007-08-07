@@ -29,9 +29,9 @@
 	{
 		if(!is_array($attributes)) {
 			$id = $attributes;
-			$label = '<label'.(!$id ? '' : ' for="'.h($id).'"').'>'.h($text).'</label>';;
+			$label = '<label'.(!$id ? '' : ' for="'.h($id).'"').'>'.$text.'</label>';;
 		} else {
-			$label = '<label '._tag_attributes($attributes).">".h($text)."</label>";
+			$label = '<label '._tag_attributes($attributes).">".$text."</label>";
 		}
 		
 		if($return) return $label;

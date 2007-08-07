@@ -64,7 +64,7 @@ select {border:1px solid #a2c9e8; padding:2px; margin: .5em 0 0;}
 div.showitem {clear: both; margin-bottom: 2em; border-bottom: 1px solid #ccc;}
 div.showitem .field {overflow: hidden;}
 	div.showitem h2 {margin: .5em 0;}
-	div.showitem .field div {font-size: 1.2em; line-height: 1.8em;}
+
 	div.showitem .field h3 {float:left; clear:left; width: 12em; margin-bottom: .5em;}
 	div.showitem .field label {display:block; float:left; width:246px;}
 	div.showitem .field .textinput {display:block; float:right;}
@@ -151,6 +151,7 @@ ul.tags, li.tag {display: inline;}
 .add-user {background-image:url("../images/icons/user_add.png");}
 .edit-user {background-image:url("../images/icons/pencil_go.png");}
 .edit {background-image:url("../images/icons/pencil_go.png");}
+
 /* Microformats */	
 .hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
 	.hTagcloud li {display:inline;}
@@ -307,9 +308,6 @@ ul.tags, li.tag {display: inline;}
 		.collection p {float: left; line-height: 1.6667em; }
 		.collection p.viewitems {clear: both;}
 
-	.collection h3, #collection-info h3 {clear: both; display: inline; width:10em; float: left; margin-bottom: .5em;}
-		#editcollection h3 {margin: 1em 0 .5em;}
-		.radiofield {width: 10em; margin-right: 1em; border: 1px solid #ddd; float: left; padding: .5em;}
 
 	#collection-items {margin: 0 0 2em;}
 		#collection-items h4 {display: inline; font-weight: normal;}
@@ -322,8 +320,8 @@ ul.tags, li.tag {display: inline;}
 
 	/* Item Type Styles */
 	.itemtype {clear: both; overflow:hidden; border-bottom:1px solid #ddd; margin:1em 0 .5em; padding: .5em 0 0; width:918px;}
-		.itemtype h2 {float:left; width:246px;}
-		.itemtype p {float:left; width: 510px;}
+		.itemtype h2 {float:left; width:200px;}
+		.itemtype p {float:right; width: 680px;}
 		
 	#add-type {position: absolute; top: 0; right: 0; background-color:#d4ecb5; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:9em; display:block;}
 	#add-type:hover {background-color:#e9f6da;}
@@ -386,10 +384,10 @@ ul.tags, li.tag {display: inline;}
 	#names-add {float:right; width: 364px; display:block; padding:18px;background: #DAE9F6;}
 		#names-add fieldset {overflow:hidden; border-width:0;}
 		#names-add legend {background:transparent;}
-		#names-add .textinput, #names-add select {width:216px; float:right;background:#fff;}
+		#names-add .textinput, #names-add select {width:216px; float:right;background:#fff;margin:0;}
 		#names-add select {width: 226px;}
-		#names-add label {font-size:1.2em;float:left; width: 122px;text-align:right;}
-		#names-add .field {overflow:hidden;clear:both; }
+		#names-add label {float:left;width: 122px;text-align:right;margin:0;}
+		#names-add .field {overflow:hidden;clear:both; margin-bottom:0.5em;}
 		#names-add #entity-type {margin-bottom:1.5em;}
 
 /* == Footer styles == */

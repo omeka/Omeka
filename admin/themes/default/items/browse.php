@@ -45,11 +45,11 @@ Event.observe(window,'load',revealChoice);
 <form action="<?php echo uri('items/powerEdit'); ?>" method="post" accept-charset="utf-8">
 	
 	<div id="view-choice">
-	<?php //if($_GET['view'] == 'detailed'):?>
+	<?php if($_GET['view'] == 'detailed'):?>
 		<?php include('detailed-view.php'); ?>
-	<?php //elseif($_GET['view'] == 'simple' || $_GET['view'] == ''):?>
-		<?php //include('simple-view.php'); ?>
-	<?php //endif; ?>
+	<?php elseif($_GET['view'] == 'simple' || $_GET['view'] == ''):?>
+		<?php include('simple-view.php'); ?>
+	<?php endif; ?>
 	</div>
 
 <input type="submit" name="submit" value="Modify these Items" />

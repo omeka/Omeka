@@ -563,7 +563,7 @@ function has_collection($item, $name=null) {
 }
 
 function has_collectors($collection) {
-	return ($collection->Collectors->count() > 0);
+	return ($collection->Collectors[0]->exists());
 }
 
 function has_tags($item, array $tags=array()) {
@@ -820,7 +820,7 @@ function get_year($date)
  * @return void
  **/
 function display_empty($val, $alternative="[Empty]") {
-	echo h(!empty($val) ? $val : $alternative);
+	echo nls2p(h(!empty($val) ? $val : $alternative));
 }
 
 function thumbnail($record, $props=array(), $width=null, $height=null,$return=false) 

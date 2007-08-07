@@ -15,7 +15,7 @@
 		var filesDiv = $$('#file-inputs .files')[0];
 		
 		//Make a link that will add another file input to the page
-		var link = Builder.node('a', {href:'javascript:void(0);'}, 'Add another file');
+		var link = Builder.node('a', {href:'javascript:void(0);',class:'add-file'}, 'Add another file');
 
 		Event.observe(link, 'click', function(){
 			var inputs = $A(filesDiv.getElementsByTagName('input'));
