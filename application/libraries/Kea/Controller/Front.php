@@ -110,6 +110,7 @@ class Kea_Controller_Front extends Zend_Controller_Front
 	
 	protected function render404($e, $debugExceptions = false)
 	{
+		Kea_Logger::logError( $e );
 		if($debugExceptions) {
 			include BASE_DIR . DIRECTORY_SEPARATOR .'404.php';
 			exit;	

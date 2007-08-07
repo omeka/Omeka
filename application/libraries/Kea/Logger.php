@@ -63,9 +63,9 @@ class Kea_Logger
 		}
 	}
 	
-	public static function logError( Kea_Exception $e )
+	public static function logError( Exception $e )
 	{
-		if(self::$logSql) {
+		if($e) {
 			$final  = '=======================' . "\n";
 			$final .= 'Type: '.get_class($e)."\n";
 			$final .= 'Date: ' . date( DATE_ISO8601, time() ) . "\n";
