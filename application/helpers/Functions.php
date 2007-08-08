@@ -142,6 +142,8 @@ function display_item_list($items,$title_only=false,$display_content=false) {
 	<?php endforeach;
 }
 
+//CSS Helpers
+
 /**
  * Simple math for determining whether a number is odd or even
  *
@@ -153,6 +155,28 @@ function is_odd($num)
 }
 
 /**
+ * 1) convert to lowercase
+ * 2) Replace whitespace with -, 
+ * 3) remove all non-alphanumerics, 
+ * 4) remove leading/trailing delimiters
+ * 5) optionally prepend a piece of text
+ *
+ * @return void
+ **/
+function text_to_id($text, $prepend=null, $delimiter='-')
+{
+	$text = strtolower($text);
+	$id = preg_replace('/\s/', $delimiter, $text);
+	$id = preg_replace('/[^\w\-]/', '', $id);
+	$id = trim($id, $delimiter);
+	$prepend = (string) $prepend;
+	return !empty($prepend) ? join($delimiter, array($prepend, $id)) : $id;
+}
+
+
+//End CSS Helpers
+
+/**
  * Echos the physical path to the theme.
  * This should be used when you need to include a file through PHP.
  */
@@ -160,6 +184,11 @@ function theme_path($return = false) {
 	$path = Zend::registry('theme_path');
 	if($return) return $path;
 	else echo $path;
+}
+
+function path_to($file) {
+	$path = theme_path(true) . DIRECTORY_SEPARATOR . $file;
+	return $path;
 }
 
 /**
@@ -369,6 +398,11 @@ function flash($wrap=true)
 	return $wrap ? '<div class="alert">'.$msg.'</div>' : $msg;
 }
 
+function controller_name()
+{
+	return Kea_Controller_Front::getInstance()->getRequest()->getControllerName();
+}
+
 ///// NAVIGATION /////
 
 /**
@@ -376,32 +410,37 @@ function flash($wrap=true)
  *
  * @param array Key = Text of Navigation, Value = Link
  * @example primary_nav(array('Themes' => uri('themes/browse')));
- * @return void
  **/
 function nav(array $links) {
 	
 	$current = Kea_Controller_Front::getInstance()->getRequest()->getRequestUri();
-	$plugins = Kea_Controller_Plugin_Broker::getInstance();
 	
 	$nav = '';
 	foreach( $links as $text => $link )
 	{		
 		$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$link\">".h($text)."</a></li>\n";
-		
-		//add navigation from the plugins
-		$plugResponses = $plugins->addNavigation($text, $link);
-		if(!empty($plugResponses)) {
-			foreach( $plugResponses as $array ) { 
-				list($plugText, $plugLink) = $array;
-				$nav .= "<li".(is_current($plugLink) ? ' class="current"':'')."><a href=\"$plugLink\">".h($plugText)."</a></li>\n"; 
-			}
-		}
-		
 	}
 	echo $nav;
 }
 
-function is_current($link, $req = null) {
+/**
+ * This works different from the above function in that it may/may not append navigation
+ * via the plugins, but also different in the way it handles CSS.  Instead of class="current"
+ * because of all the whacked-out navigation on the admin theme, we give each link an id of 'nav-'
+ * + the link text converted into a CSS ID
+ *
+ **/
+function admin_nav(array $links) {
+	$current = $_SERVER['REQUEST_URI'];
+	
+	$nav = '';
+	foreach ($links as $text => $link) {
+		$nav .= '<li id="' . text_to_id($text, 'nav') . '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
+	}
+	echo $nav;	
+}
+
+function is_current($link, $req = null) {	
 	if(!$req) {
 		$req = Kea_Controller_Front::getInstance()->getRequest();
 	}
@@ -422,6 +461,16 @@ function is_current($link, $req = null) {
  **/
 function plugin_header() {
 	Kea_Controller_Plugin_Broker::getInstance()->header();
+}
+
+function plugin_nav($links) {
+	
+	//Plugins add their own navigation
+	Kea_Controller_Plugin_Broker::getInstance()->addNavigation($links);
+}
+
+function plugin_html($page, $options=array()) {
+	Kea_Controller_Plugin_Broker::getInstance()->appendToPage($page, $options);
 }
 
 ///// END PLUGIN HELPER FUNCTIONS /////
