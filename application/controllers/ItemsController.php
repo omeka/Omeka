@@ -127,7 +127,7 @@ class ItemsController extends Kea_Controller_Action
 				$filter['search'] = $search;
 			}
 			
-			if($this->_getParam('recent')) {
+			if($this->_getParam('recent') != 'false') {
 				$order['recent'] = true;
 			}
 			
