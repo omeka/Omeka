@@ -4,7 +4,9 @@ php_value zlib.output_compression_level 5
 
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-d [OR]
+# This ensures that Apache will not mistake the URL mysite.com/archive/ for a request for the physical directory that stores files
+RewriteCond %{REQUEST_URI}  .+\/archive\/
 RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
 
 <FilesMatch "\.(php|ini)$">
