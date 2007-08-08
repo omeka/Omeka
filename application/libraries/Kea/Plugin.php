@@ -284,7 +284,7 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	 * @usage If $text is 'Themes', then the return value will add itself to any nav() that contains 'Themes', but only right after 'Themes'
 	 * @return array Key = Text of link, Value = uri
 	 **/
-	public function addNavigation($text, $link, $position = 'after') {}	
+	public function addNavigation($links) {}	
 	
 	public function addScriptPath($view, $type = 'theme') {
 		//Grab the web paths of the other plugins
@@ -421,6 +421,13 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	
 	//Allow plugins to filter the items browsing
 	public function filterBrowse($select, $recordType) {}
+	
+	/**
+	 * @example plugin_html('items/form') --> Kea_Plugin::appendToPage('items/form')
+	 *
+	 * @return void
+	 **/
+	public function appendToPage($page, $options=array()) {}
 	
 } // END class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 
