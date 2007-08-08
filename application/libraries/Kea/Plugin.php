@@ -419,6 +419,9 @@ abstract class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 	//Low-level DB Hooks (why did I get rid of these in the first place?)
 	public function onDeleteRecord($record) {}
 	
+	//Allow plugins to filter the items browsing
+	public function filterBrowse($select, $recordType) {}
+	
 } // END class Kea_Plugin extends Zend_Controller_Plugin_Abstract
 
 ?>

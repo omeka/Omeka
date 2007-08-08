@@ -1,4 +1,3 @@
-<item id="<?php echo htmlspecialchars($item->id); ?>">
 	
 	<title><?php echo htmlspecialchars($item->title); ?></title>
 	<publisher><?php echo htmlspecialchars($item->publisher); ?></publisher>
@@ -40,4 +39,3 @@
 	<type><?php echo htmlspecialchars($item->Type->name); ?></type>
 	
 	<metafields><?php foreach($item->TypeMetadata as $name => $value): ?><metatext name="<?php echo htmlspecialchars($name); ?>"><?php echo htmlspecialchars($value); ?></metatext><?php endforeach; ?></metafields>
-</item>

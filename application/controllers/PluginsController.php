@@ -72,7 +72,10 @@ class PluginsController extends Kea_Controller_Action
 		$record = $this->getTable('Plugin')->findByName($name);			
 		
 		if($record) {
-
+			if(!class_exists($name)) {
+				throw new Exception( 'Cannot find class with name "'.$name.'"' );
+			}
+			
 			$plugin = $broker->$name;
 		
 			if(!$plugin) {

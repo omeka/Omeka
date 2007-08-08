@@ -68,7 +68,8 @@ class ItemTable extends Doctrine_Table
 	/**
 	 * Possible options: 'public','user','featured','collection','type','tag','excludeTags', 'search', 'recent'
 	 *
-	 * @return void
+	 * @param array $params Filtered set of parameters from the request
+	 * @return Doctrine_Collection(Item)
 	 **/
 	public function findBy($params=array(), $returnCount=false)
 	{
@@ -189,6 +190,9 @@ class ItemTable extends Doctrine_Table
 		if(isset($params['recent'])) {
 			$this->orderSelectByRecent($select);
 		}
+
+		//Fire a plugin hook to filter the SELECT statement
+		Kea_Controller_Plugin_Broker::getInstance()->filterBrowse($select, "Item");
 
 		//At this point we can return the count instead of the items themselves if that is specified
 		if($returnCount) {
