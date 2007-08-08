@@ -26,7 +26,7 @@
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 			<ul id="primary-nav" class="navigation">
 			<?php
-				nav(array('Home' => uri(''),'Items' => uri('items/browse'), 'Types' => uri('types'), 'Collections' => uri('collections'), 'Tags' => uri('tags'), 'Themes' => uri('themes'), 'Plugins' => uri('plugins'),'Users' => uri('users'), 'Settings' =>uri('settings'), 'Logout' => uri('users/logout')));
+				admin_nav(array('Home' => uri(''),'Items' => uri('items/browse'), 'Types' => uri('types'), 'Collections' => uri('collections'), 'Tags' => uri('tags'), 'Themes' => uri('themes'), 'Plugins' => uri('plugins'),'Users' => uri('users'), 'Settings' =>uri('settings'), 'Logout' => uri('users/logout')));
 
 			?>
 			</ul>

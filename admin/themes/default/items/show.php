@@ -75,7 +75,7 @@
 		$tertiary_nav['Back to Items'] = uri('items');
 	?>
 	
-	<?php nav($tertiary_nav);?>
+	<?php admin_nav($tertiary_nav);?>
 </ul>
 <?php echo flash(); ?>
 

@@ -390,4 +390,9 @@
 		<?php endif; ?>
 		</div>
 	</fieldset>
+	
+	
+	<div id="additional-plugin-data">
+		<?php plugin_html('items/form', compact('item')); ?>
+	</div>
 </div>

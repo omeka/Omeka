@@ -24,7 +24,7 @@
 <?php plugin_header(); ?>
 
 </head>
-<body>
+<body id="<?php echo controller_name(); ?>">
 	<div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
 	<div id="wrap">
 		
@@ -35,15 +35,15 @@
 			
 			<ul id="primary-nav" class="navigation">
 			<?php
-				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items/browse'),'Exhibits' => uri('exhibits/browse') );
+				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items'),'Exhibits' => uri('exhibits') );
 				if(has_permission('Users','browse') ) {
-					$header_navigation['Users'] = uri('users/browse');
+					$header_navigation['Users'] = uri('users');
 				}
 				if(has_permission('super')) {
-					$header_navigation['Settings'] = uri('settings/browse');
+					$header_navigation['Settings'] = uri('settings');
 				}
-				$header_navigation['Names'] = uri('entities/browse');
-				nav($header_navigation);
+				$header_navigation['Names'] = uri('entities');
+				admin_nav($header_navigation);
 
 			?>
 			</ul>

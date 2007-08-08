@@ -13,7 +13,7 @@
 	<h2>Items</h2>
 	<ul class="items">
 		<?php foreach($items as $item):?>
-		<li class="item"><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo h($item->title); ?></a></li>
+		<li class="item"><?php link_to_item($item); ?></li>
 		<?php endforeach; ?>
 	</ul>
 	</div>
@@ -21,7 +21,7 @@
 	<h2>Collections</h2>
 	<ul class="collections">
 		<?php foreach($collections as $collection):?>
-		<li class="collection"><a href="<?php echo uri('collections/show/'.$collection->id); ?>"><?php echo h($collection->name); ?></a></li>
+		<li class="collection"><?php link_to_collection($collection); ?></li>
 		<?php endforeach; ?>
 	</ul>
 	</div>
