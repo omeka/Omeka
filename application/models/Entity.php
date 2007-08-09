@@ -7,6 +7,8 @@ require_once 'User.php';
  */
 class Entity extends Kea_Record
 {
+	protected $error_messages = array(	'type' => array('notblank' => 'Must specify whether the name belongs to a Person or an Institution.'));
+	
 	protected $_pluralized = 'Entities';
 
 	protected $_children;
@@ -54,6 +56,15 @@ class Entity extends Kea_Record
 			$this->getErrorStack()->add('circular', 'This entity is already affiliated with '.$this->Parent->name);
 		}
 		
+		//Blank first and last name for a 'Person' is not OK
+		if( ($this->type == 'Person') and empty($this->first_name) and empty($this->last_name)) {
+			$this->getErrorStack()->add('Name', 'A name for a Person may not be completely blank');
+		}
+		
+		//Blank institution name for an 'Institution' is not OK
+		if( ($this->type == 'Institution') and empty($this->institution)) {
+			$this->getErrorStack()->add('Name', 'The name of an institution may not be blank');
+		}
 	}
 
 	public function set($name, $value)

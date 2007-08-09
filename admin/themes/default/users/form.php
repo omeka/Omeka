@@ -5,11 +5,11 @@
 </div>
 
 <div class="field">
-	<?php text(array('name'=>'first_name', 'class'=>'textinput', 'id'=>'first_name'),$user->first_name, 'First Name'); ?>
+	<?php text(array('name'=>'first_name', 'class'=>'textinput', 'id'=>'first_name'),not_empty_or($user->first_name, $_POST['first_name']), 'First Name'); ?>
 </div>
 
 <div class="field">
-	<?php text(array('name'=>'last_name', 'class'=>'textinput', 'id'=>'last_name'),$user->last_name, 'Last Name'); ?>
+	<?php text(array('name'=>'last_name', 'class'=>'textinput', 'id'=>'last_name'),not_empty_or($user->last_name, $_POST['last_name']), 'Last Name'); ?>
 </div>
 
 <div class="field">

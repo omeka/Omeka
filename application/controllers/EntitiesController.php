@@ -20,9 +20,17 @@ class EntitiesController extends Kea_Controller_Action
 	public function addAction()
 	{
 		$e = new Entity;
-		if($e->commitForm($_POST)) {
-			$this->_redirect('add');
-		} 
+		try {
+						
+			if($e->commitForm($_POST)) {
+				
+				$this->flash('Successfully added!');
+				
+				$this->_redirect('add');
+			} 
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
+		}
 		
 		return $this->_forward('Entities', 'browse');
 	}
@@ -35,7 +43,7 @@ class EntitiesController extends Kea_Controller_Action
 			
 			$q = new Doctrine_Query;
 			
-			if($type = $this->_getParam('type')) {
+			if($type = $this->_getParam('displayType')) {
 				if(!in_array(strtolower($type), array('person', 'institution'))) {
 					throw new Exception( 'That type does not exist.' );
 					$this->_redirect('403');
