@@ -131,7 +131,24 @@ function disablePaginationDraggables() {
 	};
 }
 
-function makeDraggable(containers, options) {
+function makeDraggable(containers) {
+	var options = {
+		revert:true,
+		ghosting:true,
+		onStart: function(draggable, event) {			
+			if(draggable.element.descendantOf('layout-form')) {
+				var oldContainer = draggable.element.parentNode;
+				setItemId(oldContainer, '');
+			}
+		},
+		onEnd: function(draggable) {
+			var droppable = draggable.element.parentNode;
+			if(droppable.descendantOf('layout-form')) {
+				setItemId(droppable, getItemId(draggable.element));
+			}
+		}
+	}
+	
 	for (var i=0; i < containers.length; i++) {
 		
 		var item = getItemFromContainer(containers[i]);
@@ -150,61 +167,16 @@ function makeDroppable(containers, onDrop) {
 	};
 }
 
-function dragDropPage() {
+function dragDropForm() {
 	var formContainers = $$('#layout-form div.item-drop');
-	var paginateContainers = $$('#item-select div.item-drop');
-	var containers = $$('div.item-drop');
 	
 	//All items are draggable but only items on the form will reset the form inputs when dragged
-	makeDraggable(containers, {
-		revert:true,
-		ghosting:true,
-		onStart: function(draggable, event) {			
-			if(draggable.element.descendantOf('layout-form')) {
-				var oldContainer = draggable.element.parentNode;
-				setItemId(oldContainer, '');
-			}
-		},
-		onEnd: function(draggable) {
-			var droppable = draggable.element.parentNode;
-			if(droppable.descendantOf('layout-form')) {
-				setItemId(droppable, getItemId(draggable.element));
-			}
-		}
-	});
+	makeDraggable(formContainers);
 	
 	//Dropping the items on the form should only work when dropping them elsewhere on the form
 	makeDroppable(formContainers, function(draggable, droppable) {
 		moveDraggable(draggable, droppable);
 	});
-		
-/*
-		var containers = $$("div.item-drop");
-	for (var i=0; i < containers.length; i++) {
-		
-		var item = getItemFromContainer(containers[i]);
-		if(item) {
-			var drag = new Draggable(item, {
-				revert:true,
-				ghosting:true,
-				onStart: function(draggable, event) {			
-					oldContainer = draggable.element.parentNode;
-					setItemId(oldContainer, '');
-				}
-			});
-		}
-		
-		Droppables.add(containers[i], {
-			snap: true,
-			onDrop: function(draggable, droppable) {
-				moveDraggable(draggable, droppable);
-			}
-		});
-	};
-*/	
-	
-	//Disable the items in the pagination that are already used
-	disablePaginationDraggables();
 	
 	//Add an onMouseover to each draggable that will show up a little menu of options (like delete)
 	

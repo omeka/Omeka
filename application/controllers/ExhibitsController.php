@@ -88,6 +88,14 @@ class ExhibitsController extends Kea_Controller_Action
 		}
 	}
 	
+	public function itemsAction()
+	{
+		$params = $this->_getAllParams();
+		//Make sure to render that specific page and only show public items
+		$params = array_merge($params, array('renderPage'=>'exhibits/_items.php', 'public'=>true));
+		return $this->_forward('items', 'browse', $params);
+	}
+	
 	public function showAction()
 	{		
 		$exhibit = $this->findBySlug();

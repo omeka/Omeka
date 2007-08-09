@@ -7,9 +7,60 @@
 </style>
 
 <script type="text/javascript" charset="utf-8">
+	
+	var paginate_uri = "<?php echo uri('exhibits/items'); ?>";
+	
 	Event.observe(window, 'load', function() {
-		dragDropPage();
+		//Loads the items pagination
+		
+		
+		//Retrieve the pagination through ajaxy goodness
+		getPagination(paginate_uri, function() {
+			//When you're done, make all the items drag/droppable
+			dragDropForm();
+			
+			onLoadPagination();
+		});
+		
 	});
+	
+	function onLoadPagination() 
+	{
+		//Make each of the pagination links fire an additional ajax request
+		var links = $$('#pagination a');
+		
+		links.each(function(link) {
+			link.onclick = function() {
+				getPagination(this.href, onLoadPagination);
+				return false;
+			}
+		});
+		
+		//Make the correct elements on the pagination draggable
+		makeDraggable($$('#item-select div.item-drop'));
+		
+		//Disable the items in the pagination that are already used
+		disablePaginationDraggables();
+		
+		//Hide all the numbers that tell us the Item ID
+		var idDivs = document.getElementsByClassName('item_id');
+		idDivs.each(function(el) {el.hide()});
+		
+		//Make the search form respond with ajax power
+		$('search').onsubmit = function() {
+			getPagination(paginate_uri, onLoadPagination, $('search').serialize());
+			return false;
+		}
+	}
+	
+	function getPagination(uri, onFinish, parameters)
+	{
+		new Ajax.Updater('item-select', uri, {
+			parameters: parameters,
+			onComplete: onFinish
+		});
+	}
+	
 </script>
 <?php js('exhibits'); ?>
 <?php common('exhibits-nav'); ?>
@@ -41,42 +92,11 @@
 		}
 		
 	?>
-	
-	
-	<?php 
-	//Retrieve items with their pagination
-	$retVal = _make_omeka_request('Items','browse',array('pagination_url'=>$url, 'public'=>true),array('items','pagination'));
-	extract($retVal);
-	?>
 		
 	<div id="item-select">
-		<div id="pagination">
-		<?php 
-			 echo pagination_links(); 
-		?>
-		<p class="warning">(Warning: You must save the form before paginating through the items otherwise its contents may be erased)</p>
-		</div>
 		
-		<?php foreach( $items as $k => $item ): ?>
-			<div class="item-drop">
-				<div class="item-drag">
-					<div class="item_id"><?php echo h($item->id); ?></div>
-					<?php 
-						if(has_thumbnail($item)){
-							thumbnail($item);
-						} else {
-							echo h($item->title);
-						}
-					?>
-				</div>
-				<div class="item_id"><?php echo h($item->id); ?></div>
-			</div>
-		<?php endforeach; ?>
-		<h2 id="search-header" class="close">Search Items</h2>
-		
-		<?php items_filter_form(array('id'=>'search'), $url); ?>
-			
 	</div>
+	<p class="warning">(Warning: You must save the form before paginating through the items otherwise its contents may be erased)</p>
 <form name="layout" id="layout-all" method="post">
 	<div id="layout-form">
 	<?php render_layout_form($page->layout); ?>
