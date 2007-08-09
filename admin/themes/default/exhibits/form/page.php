@@ -26,6 +26,8 @@
 	
 	function onLoadPagination() 
 	{
+		new Effect.Highlight('item-list');
+		
 		//Make each of the pagination links fire an additional ajax request
 		var links = $$('#pagination a');
 		

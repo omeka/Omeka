@@ -5,6 +5,7 @@
 
 </div>
 
+<div id="item-list">
 <?php foreach( $items as $k => $item ): ?>
 	<div class="item-drop">
 		<div class="item-drag">
@@ -20,6 +21,7 @@
 		<div class="item_id"><?php echo h($item->id); ?></div>
 	</div>
 <?php endforeach; ?>
+</div>
 <h2 id="search-header" class="close">Search Items</h2>
 
 <?php items_filter_form(array('id'=>'search'), $url); ?>		
