@@ -1,7 +1,4 @@
- 	<?php
-include_once 'UnicodeFunctions.php';
-include_once 'FormFunctions.php';
-include_once 'ExhibitFunctions.php';
+<?php
 /**
  * Not quite a helper, these functions defy definition...
  * 
@@ -549,6 +546,22 @@ function link_to_thumbnail($item, $action='show')
 	echo '<a href="'. uri($path) . '">';
 	thumbnail($item);
 	echo '</a>';
+}
+
+function link_to_home_page($text, $props = array())
+{
+	$uri = WEB_ROOT;
+	echo '<a href="'.$uri.'" '._tag_attributes($props).'>'.h($text)."</a>\n";
+}
+
+function link_to_admin_home_page($text, $props = array())
+{
+	echo '<a href="'.admin_uri().'" '._tag_attributes($props).'>'.h($text)."</a>\n";
+}
+
+function admin_uri()
+{
+	return WEB_ROOT . DIRECTORY_SEPARATOR. 'admin' . DIRECTORY_SEPARATOR;
 }
 
 /**
