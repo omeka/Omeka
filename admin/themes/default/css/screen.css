@@ -192,7 +192,18 @@ ul.tags, li.tag {display: inline;}
 		#primary-nav a:link, #primary-nav a:visited {color:#fff; background: #444 url("../images/primary-nav-bg.gif") bottom left repeat-x;}
 		#primary-nav a:hover {color:#fff;background: #4c4c4c url("../images/primary-nav-bg.gif") bottom left repeat-x; }
 		#primary-nav a:active {color:#fff; background: #4a4a4a url("../images/primary-nav-bg.gif") bottom left repeat-x;}
-		#primary-nav .current a {color:#fff;border-bottom:1px solid #666; background: #666 url("../images/primary-nav-selected.gif") 50% bottom no-repeat;}
+		
+		.index #primary-nav .nav-dashboard a,
+		.items #primary-nav .nav-archive a,
+		.types #primary-nav .nav-archive a,
+		.collections #primary-nav .nav-archive a,
+		.exhibits #primary-nav .nav-exhibits a,
+		.users #primary-nav .nav-users a,
+		.settings #primary-nav .nav-settings a,
+		.themes #primary-nav .nav-settings a,
+		.plugins #primary-nav .nav-settings a,
+		.entities #primary-nav .nav-names a
+		{color:#fff;border-bottom:1px solid #666; background: #666 url("../images/primary-nav-selected.gif") 50% bottom no-repeat;}
 		
 		#primary-nav {background-image:none !important;}
 		#primary-nav a {background-image:none !important; padding-bottom:8px;}
@@ -200,7 +211,15 @@ ul.tags, li.tag {display: inline;}
 	/* Secondary Navigation */
 	#secondary-nav {background:#666;padding:0 36px 0;overflow:hidden;}
 		#secondary-nav a {color:#fff; text-decoration:none;display:block; width:10em;float:left; padding:6px 0; text-align:center;}
-		#secondary-nav .current a {background:#fff; color:#555;}
+		.items #secondary-nav .nav-items a,
+		.types #secondary-nav .nav-types a,
+		.collections #secondary-nav .nav-collections a,
+		.users #secondary-nav .nav-users a,
+		.settings #secondary-nav .nav-general a,
+		.themes #secondary-nav .nav-themes a,
+		.plugins #secondary-nav .nav-plugins a,
+		.users #secondary-nav .nav-browse-users a
+		{background:#fff; color:#555;}
 	
 /* == Search == */
 #search-header {background-color: #fff; color:#38c;text-align:left; clear:right;float:left;margin-bottom:0; width:5.5em; padding:0.75em 1.5em 0.75em 1.5em;background-position: 6px 50%; background-repeat:no-repeat;}
