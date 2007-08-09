@@ -1,3 +1,9 @@
+<?php if(!isset($user)) {
+	$user = new User;
+	$user->setArray($_POST);
+} 
+?>
+
 <?php echo flash(); ?>
 <fieldset>
 <div class="field">

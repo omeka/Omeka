@@ -96,24 +96,51 @@ class UsersController extends Kea_Controller_Action
 	{	
 		$user = new User();
 		$password = $user->generatePassword(8);
-		if($user->commitForm($_POST)) {
-			$ua = new UsersActivations;
-			$ua->User = $user;
-			$ua->generate();
-			$ua->save();
-			//send the user an email telling them about their great new user account
-			$site_title = $this->getTable('Option')->findByName('site_title');
-			$from = $this->getTable('Option')->findByName('administrator_email');
-			
-			$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."/admin/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
-			$title = "Activate your account with the ".$site_title." Archive";
-			$header = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
-			mail($user->email, $title, $body, $header);
-			$this->_redirect('add', array('id'=>$user->id));
-		}else {
-			$this->render('users/add.php', compact('user'));
+		try {
+			if($user->commitForm($_POST)) {
+				
+				$this->sendActivationEmail($user);
+				
+				$this->flash('User was added successfully!');
+				
+				//If this is an AJAX request then we will want to return the alternative representation of the User object
+				if($this->isAjaxRequest()) {
+					return $this->render('users/show.php', compact('user'));
+				}
+				
+				//Redirect to the main user browse page
+				$this->_redirect('users');
+			}
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
 		}
+			
+		if($this->isAjaxRequest()) {
+			return $this->render('users/show.php', compact('user'));
+		}	
+		
+		return $this->_forward('Users', 'browse');
 	}
+
+	protected function sendActivationEmail($user)
+	{
+		$ua = new UsersActivations;
+		$ua->User = $user;
+		$ua->generate();
+		$ua->save();
+		//send the user an email telling them about their great new user account
+		
+		$site_options = Zend::Registry( 'options' );
+		
+		$site_title = $site_options['site_title'];
+		$from = $site_options['administrator_email'];
+		
+		$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."/admin/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
+		$title = "Activate your account with the ".$site_title." Archive";
+		$header = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
+		return mail($user->email, $title, $body, $header);
+	}
+
 
 	public function changePasswordAction()
 	{

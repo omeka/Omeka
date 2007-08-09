@@ -1,7 +1,7 @@
 <?php head();?>
 <?php common('users-nav'); ?>
 <div id="primary">
-
+<?php echo flash(); ?>
 <h1>Browse Users</h1>
 <a href="<?php echo uri('users/add'); ?>" class="add-user" id="add-user">Add a User</a>
 <table id="users">
@@ -29,5 +29,15 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+
+<div id="new-user-form">
+	<form action="<?php echo uri('users/add'); ?>" method="post" accept-charset="utf-8">
+		<?php common('form', array(), 'users'); ?>
+		
+		<input type="submit" name="submit" value="Add a new User --&gt;" />
+	</form>
+	
+</div>
+
 </div>
 <?php foot();?>
