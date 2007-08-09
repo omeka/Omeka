@@ -9,12 +9,12 @@
 
 <h3>Description:</h3> <p><?php echo h($collection->description); ?></p>
 
-<?php foreach( $collection->Collectors as $k => $collector ): ?>
 	<h3>Collectors:</h3>
 	<ul id="collector-list">
+		<?php foreach( $collection->Collectors as $k => $collector ): ?>
 		<li><?php echo h($collector->name); ?></li>
+		<?php endforeach; ?>
 	</ul>
-<?php endforeach; ?>
 
 </div>
 <div id="collection-items">

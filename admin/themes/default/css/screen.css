@@ -199,6 +199,7 @@ ul.tags, li.tag {display: inline;}
 		
 		.index #primary-nav .nav-dashboard a,
 		.items #primary-nav .nav-archive a,
+		.files #primary-nav .nav-archive a,
 		.types #primary-nav .nav-archive a,
 		.collections #primary-nav .nav-archive a,
 		.exhibits #primary-nav .nav-exhibits a,
@@ -225,6 +226,7 @@ ul.tags, li.tag {display: inline;}
 		.themes #secondary-nav .nav-themes a,
 		.plugins #secondary-nav .nav-plugins a,
 		.users #secondary-nav .nav-browse-users a,
+		.files #secondary-nav .nav-items a
 		#secondary-nav .current a
 		{background:#fff; color:#555;}
 	
@@ -248,6 +250,7 @@ ul.tags, li.tag {display: inline;}
 /* == Content == */
 #content {overflow:hidden; border-top:18px solid #666; background:#fff url("../images/footer-bg.gif") bottom left repeat-x; padding-bottom:18px;}
 	#primary { width:918px; margin-left:36px;margin-top:18px;}
+	#secondary {width:918px; margin-left:36px;margin-top:18px;}
 	
 	/* Dashboard */
 	#welcome {display:block; float:left; width:528px;}
@@ -307,10 +310,10 @@ ul.tags, li.tag {display: inline;}
 	/* Item Browse styles */
 	#add-item {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:6em; display:block;}
 	#add-item:hover {background-color:#e9f6da;}
-	#browse-meta {margin:1.5em 0 0; padding:0 1.5em; margin-top:18px;background:#ccc; overflow:hidden; clear:both;}
-	#view-style { margin-bottom:0; background:#ccc;overflow:hidden;display:block; float:left; width:246px;}
-		#view-style a {display:block; float:left; width:5em;padding:0.75em;background:transparent; color:#333;}
-		#view-style a.current {color:#333; font-weight:bold;}
+	#browse-meta {background-color:#ddd;margin:1.5em 0 0; padding:1em 1.5em 0; margin-top:18px; overflow:hidden; clear:both;}
+	#view-style { margin-bottom:0; overflow:hidden;display:block; float:left; width:246px;}
+		#view-style a {display:block; float:left; width: 9em; padding:6px 0; background:transparent; color:#333;background-color:#ddd; text-align: center;}
+		#view-style a.current {color:#333; font-weight:bold;background-color:#fff}
 
 	#browse-meta .pagination {float:right; display:block;width:472px; padding:0.75em 0 0;text-align:right;}
 			.pagination ul {text-align:right; line-height:1em; margin-bottom:0;}
@@ -340,15 +343,37 @@ ul.tags, li.tag {display: inline;}
 		div.showitem .field h3 {float:left; clear:left; width: 12em; margin-bottom: .5em;}
 		div.showitem .field div {display:block; float:left; width:246px;}
 	
+	/* File Page Styles */
+	
+	div.section {clear: both; margin: 0 0 3em;overflow: hidden;}
+		div.section h2 { border-bottom: 1px dotted #ddd; }
+			div.section dt, div.section dd {display: inline;margin: 1em 0 .5em; padding: .5em 0 0;}
+			div.section dt {clear: both; float: left; width: 200px; padding-right: 1em;}
+			div.section dd {float: left; width: 680px;}
+			div#image a {display: block; font-size: 1.2em; padding: .5em 0 0 20px; background: url(../images/icons/page_go.png) left bottom no-repeat;}
+			
+	.files div#image {float: right;}
+		.files #image img { border: 1px solid #ccc;}
+		.files #image p {text-transform: uppercase; font-size: 1em; text-align: right; letter-spacing: .1em;}
+	.files form fieldset {margin: 1em 0 0; width: 650px;}
+	.files form div {margin:0 0 1.5em; overflow: hidden;}
+	.files form label {width: 180px; padding: 0 20px 0 0; float: left;}
+	.files form input, .files form textarea {float: left; width: 400px;}
+		.files form input#file_edit {float: left; width: auto;}
+		.files form span.readonly {display: block;}
 	
 	/* Collections styles */
 	#add-collection {background-color:#d4ecb5; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:8.5em; display:block;}
 	#add-collection:hover {background-color:#E9F6DA;}
 	
-	.collection {overflow:hidden; border-bottom:1px solid #ccc; margin-bottom:18px; width:918;}
+	.collection {overflow:hidden; border-bottom: 1px solid #ccc; margin:18px 0; width:918px;}
+		.collection h3 {float: left; display: inline; width: 10em;}
 		.collection a {text-decoration:none;}
-		.collection p {float: left; line-height: 1.6667em; }
+		.collection p, .collection ul {float: left; line-height: 1.6667em; }
 		.collection p.viewitems {clear: both;}
+		.collection div {clear: both;}
+			.collection div.meta {width: 600px;}
+			.collection div.meta li {text-align: left;}
 
 	#collection-items {margin: 0 0 2em;}
 		#collection-items h4 {display: inline; font-weight: normal;}

@@ -1,56 +1,60 @@
 <?php head(); ?>
-<h2>File #<?php echo h($file->id); ?></h2>
+<?php common('archive-nav'); ?>
 
 <div id="primary">
-<div id="core-metadata" class="section">
-	<h3>Core Metadata</h3>
+<h1>File #<?php echo h($file->id); ?></h1>
 	
-<dl><dt>Identifier:</dt> <?php if ($file->id): ?><dd><?php echo h($file->id); ?></dd><?php endif; ?></dl>
-<dl><dt>Title:</dt> <?php if ($file->title): ?><dd><?php echo h($file->title); ?></dd><?php endif; ?></dl>
-<dl><dt>Creator:</dt> <?php if ($file->creator): ?><dd><?php echo h($file->creator); ?></dd><?php endif; ?></dl>
-<dl><dt>Subject:</dt> <?php if ($file->subject): ?><dd><?php echo h($file->subject); ?></dd><?php endif; ?></dl>
-
-<dl><dt>Description:</dt> <?php if ($file->description): ?><dd><?php echo h($file->description); ?></dd><?php endif; ?></dl>
-
-<dl><dt>Publisher:</dt> <?php if ($file->publisher): ?><dd><?php echo h($file->publisher); ?></dd><?php endif; ?></dl>
-<dl><dt>Other Creator:</dt> <?php if ($file->additional_creator): ?><dd><?php echo h($file->additional_creator); ?></dd><?php endif; ?></dl>
-<dl><dt>Date:</dt> <?php if ($file->date): ?><dd><?php echo h($file->date); ?></dd><?php endif; ?></dl>
-<dl><dt>Source:</dt> <?php if ($file->source): ?><dd><?php echo h($file->source); ?></dd><?php endif; ?></dl>
-<dl><dt>Language:</dt> <?php if ($file->language): ?><dd><?php echo h($file->language); ?></dd><?php endif; ?></dl>
-<dl><dt>Relation:</dt> <?php if ($file->relation): ?><dd><?php echo h($file->relation); ?></dd><?php endif; ?></dl>
-<dl><dt>Coverage</dt> <?php if ($file->coverage): ?><dd><?php echo h($file->coverage); ?></dd><?php endif; ?></dl>
-<dl><dt>Rights:</dt> <?php if ($file->rights): ?><dd><?php echo h($file->rights); ?></dd><?php endif; ?></dl>
-<dl><dt>Format:</dt> <?php if ($file->format): ?><dd><?php echo h($file->format); ?></dd><?php endif; ?></dl>
+<div id="core-metadata" class="section">
+<h2>Core Metadata</h2>
+<dl>	
+<dt>Identifier:</dt> <dd><?php if ($file->id): ?><?php echo h($file->id); ?><?php endif; ?></dd>
+<dt>Title:</dt> <dd><?php if ($file->title): ?><?php echo h($file->title); ?><?php endif; ?></dd>
+<dt>Creator:</dt> <dd><?php if ($file->creator): ?><?php echo h($file->creator); ?><?php endif; ?></dd>
+<dt>Subject:</dt> <dd><?php if ($file->subject): ?><?php echo h($file->subject); ?><?php endif; ?></dd>
+<dt>Description:</dt> <dd><?php if ($file->description): ?><?php echo h($file->description); ?><?php endif; ?></dd>
+<dt>Publisher:</dt> <dd><?php if ($file->publisher): ?><?php echo h($file->publisher); ?><?php endif; ?></dd>
+<dt>Other Creator:</dt> <dd><?php if ($file->additional_creator): ?><?php echo h($file->additional_creator); ?><?php endif; ?></dd>
+<dt>Date:</dt> <dd><?php if ($file->date): ?><?php echo h($file->date); ?><?php endif; ?></dd>
+<dt>Source:</dt> <dd><?php if ($file->source): ?><?php echo h($file->source); ?><?php endif; ?></dd>
+<dt>Language:</dt> <dd><?php if ($file->language): ?><?php echo h($file->language); ?><?php endif; ?></dd>
+<dt>Relation:</dt> <dd><?php if ($file->relation): ?><?php echo h($file->relation); ?><?php endif; ?></dd>
+<dt>Coverage</dt> <dd><?php if ($file->coverage): ?><?php echo h($file->coverage); ?><?php endif; ?></dd>
+<dt>Rights:</dt> <dd><?php if ($file->rights): ?><?php echo h($file->rights); ?><?php endif; ?></dd>
+<dt>Format:</dt> <dd><?php if ($file->format): ?><?php echo h($file->format); ?><?php endif; ?></dd>
+</dl>
 </div>
-<div class="section" id="format-metadata">
-<h3>Format Metadata</h3>
-<dl><dt>Transcriber:</dt> <?php if ($file->transcriber): ?><dd><?php echo h($file->transcriber); ?></dd><?php endif; ?></dl>
-<dl><dt>Producer:</dt> <?php if ($file->producer): ?><dd><?php echo h($file->producer); ?></dd><?php endif; ?></dl>
-<dl><dt>Render Device:</dt> <?php if ($file->render_device): ?><dd><?php echo h($file->render_device); ?></dd><?php endif; ?></dl>
-<dl><dt>Render Details:</dt> <?php if ($file->render_details): ?><dd><?php echo h($file->render_details); ?></dd><?php endif; ?></dl>
-<dl><dt>Capture Date:</dt> <?php if ($file->capture_date): ?><dd><?php echo h($file->capture_date); ?></dd><?php endif; ?></dl>
-<dl><dt>Capture Device:</dt> <?php if ($file->capture_device): ?><dd><?php echo h($file->capture_device); ?></dd><?php endif; ?></dl>
-<dl><dt>Capture Details:</dt> <?php if ($file->capture_details): ?><dd><?php echo h($file->capture_details); ?></dd><?php endif; ?></dl>
-<dl><dt>Watermark:</dt> <?php if ($file->watermark): ?><dd><?php echo h($file->watermark); ?></dd><?php endif; ?></dl>
 
-<dl><dt>Encryption:</dt> <?php if ($file->encryption): ?><dd><?php echo h($file->encryption); ?></dd><?php endif; ?></dl>
-<dl><dt>Compression:</dt> <?php if ($file->compression): ?><dd><?php echo h($file->compression); ?></dd><?php endif; ?></dl>
-<dl><dt>Post-processing:</dt> <?php if ($file->post_processing): ?><dd><?php echo h($file->post_processing); ?></dd><?php endif; ?></dl>
-<dl><dt>Change History:</dt> <?php if ($file->change_history): ?><dd><?php echo h($file->change_history); ?></dd><?php endif; ?></dl>
-
-<dl><dt>Archive Filename:</dt> <?php if ($file->archive_filename): ?><dd><?php echo h($file->archive_filename); ?></dd><?php endif; ?></dl>
-<dl><dt>Original Filename:</dt> <?php if ($file->original_filename): ?><dd><?php echo h($file->original_filename); ?></dd><?php endif; ?></dl>
-<dl><dt>File Size:</dt> <?php if ($file->size): ?><dd><?php echo h($file->size); ?> bytes</dd><?php endif; ?></dl>
+<div id="format-metadata" class="section">
+<h2>Format Metadata</h2>
+<dl>
+<dt>Transcriber:</dt> <dd><?php if ($file->transcriber): ?><?php echo h($file->transcriber); ?><?php endif; ?></dd>
+<dt>Producer:</dt> <dd><?php if ($file->producer): ?><?php echo h($file->producer); ?><?php endif; ?></dd>
+<dt>Render Device:</dt> <dd><?php if ($file->render_device): ?><?php echo h($file->render_device); ?><?php endif; ?></dd>
+<dt>Render Details:</dt> <dd><?php if ($file->render_details): ?><?php echo h($file->render_details); ?><?php endif; ?></dd>
+<dt>Capture Date:</dt> <dd><?php if ($file->capture_date): ?><?php echo h($file->capture_date); ?><?php endif; ?></dd>
+<dt>Capture Device:</dt> <dd><?php if ($file->capture_device): ?><?php echo h($file->capture_device); ?><?php endif; ?></dd>
+<dt>Capture Details:</dt> <dd><?php if ($file->capture_details): ?><?php echo h($file->capture_details); ?><?php endif; ?></dd>
+<dt>Watermark:</dt> <dd><?php if ($file->watermark): ?><?php echo h($file->watermark); ?><?php endif; ?></dd>
+<dt>Encryption:</dt> <dd><?php if ($file->encryption): ?><?php echo h($file->encryption); ?><?php endif; ?></dd>
+<dt>Compression:</dt> <dd><?php if ($file->compression): ?><?php echo h($file->compression); ?><?php endif; ?></dd>
+<dt>Post-processing:</dt> <dd><?php if ($file->post_processing): ?><?php echo h($file->post_processing); ?><?php endif; ?></dd>
+<dt>Change History:</dt> <dd><?php if ($file->change_history): ?><?php echo h($file->change_history); ?><?php endif; ?></dd>
+<dt>Archive Filename:</dt> <dd><?php if ($file->archive_filename): ?><?php echo h($file->archive_filename); ?><?php endif; ?></dd>
+<dt>Original Filename:</dt> <dd><?php if ($file->original_filename): ?><?php echo h($file->original_filename); ?><?php endif; ?></dd>
+<dt>File Size:</dt> <dd><?php if ($file->size): ?><?php echo h($file->size); ?> bytes<?php endif; ?></dd>
+</dl>
 </div>
+
 <div id="type-metadata" class="section">
-	<h3>Type Metadata</h3>
-<dl><dt>Mime Type / Browser:</dt> <?php if ($file->mime_browser): ?><dd><?php echo h($file->mime_browser); ?></dd><?php endif; ?></dl>
-<dl><dt>Mime Type / OS:</dt> <?php if ($file->mime_os): ?><dd><?php echo h($file->mime_os); ?></dd><?php endif; ?></dl>
-<dl><dt>File Type / OS:</dt> <?php if ($file->type_os): ?><dd><?php echo h($file->type_os); ?></dd><?php endif; ?></dl>
+<h2>Type Metadata</h2>
+<dl>
+<dt>Mime Type / Browser:</dt> <dd><?php if ($file->mime_browser): ?><?php echo h($file->mime_browser); ?><?php endif; ?></dd>
+<dt>Mime Type / OS:</dt> <dd><?php if ($file->mime_os): ?><?php echo h($file->mime_os); ?><?php endif; ?></dd>
+<dt>File Type / OS:</dt> <dd><?php if ($file->type_os): ?><?php echo h($file->type_os); ?><?php endif; ?></dd>
+</dl>
 </div>
-</div>
-<div id="secondary">
-<div id="image">
+	
+<div id="image" class="section">
 <?php if ($file->hasThumbnail()): ?>
 	<img src="<?php echo WEB_FILES.'/'.$file->archive_filename; ?>" alt="<?php echo h($file->title); ?>" width="400" />
 <?php else: ?>
@@ -60,10 +64,13 @@
 </div>
 
 <div id="file-history" class="section">
-	<h3>File History</h3>
-	<dl><dt>Date Added:</dt> <?php if ($file->added): ?><dd><?php echo h($file->added); ?></dd><?php endif; ?></dl>
-	<dl><dt>Date Modified:</dt> <?php if ($file->modified): ?><dd><?php echo h($file->modified); ?></dd><?php endif; ?></dl>
-	<dl><dt>Authentication:</dt> <?php if ($file->authentication): ?><dd><?php echo h($file->authentication); ?></dd><?php endif; ?></dl>
+<h2>File History</h2>
+<dl>
+<dt>Date Added:</dt> <dd><?php if ($file->added): ?><?php echo h($file->added); ?><?php endif; ?></dd>
+<dt>Date Modified:</dt> <dd><?php if ($file->modified): ?><?php echo h($file->modified); ?><?php endif; ?></dd>
+<dt>Authentication:</dt> <dd><?php if ($file->authentication): ?><?php echo h($file->authentication); ?><?php endif; ?></dd>
+</dl>
 </div>
-</div>
+
+</div><!--end primary-->
 <?php foot();?>
