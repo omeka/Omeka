@@ -4,6 +4,7 @@
 		ajaxifyTagRemoval();
 		makeTooltips();
 		ajaxifyTypeMetadata();
+		filesAdding();
 		//filesAdding();
 	});
 		

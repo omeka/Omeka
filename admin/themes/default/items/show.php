@@ -4,7 +4,9 @@
 <?php js('editable');?>
 <script type="text/javascript" charset="utf-8">
 
-	
+	function toggleImageGallery() {
+		
+	}
 	function setFavorite() {
 		if(!document.getElementById('favorite')) return;
 		var opt = {
@@ -80,15 +82,33 @@
 <?php echo flash(); ?>
 
 <h1><div id="title"><?php echo h($item->title); ?></div></h1>
+<ul class="item-pagination navigation">
+<li id="previous-item" class="previous">
+	<?php link_to_previous_item($item,'Previous'); ?>
+</li>
+<li id="next-item" class="next">
+	<?php link_to_next_item($item,'Next'); ?>
+</li>
+</ul>
 
-<div id="previous-item">
-	<?php link_to_previous_item($item); ?>
-</div>
+<div id="item-images">
+	<div id="main-image">
+		<?php $mainfile = $item->Files[0]; ?>
+		<?php if($mainfile->hasThumbnail()): ?>
+			<img src="<?php echo WEB_FILES.'/'.$mainfile->archive_filename; ?>" alt="<?php echo h($file->title); ?>" width="400" />
+			<?php endif; ?>
+			</div>
+	<div id="files">	
+		<?php foreach( $item->Files as $key => $file ): ?>
+			<?php if($file->hasThumbnail()): ?>
 
-<div id="next-item">
-	<?php link_to_next_item($item); ?>
-</div>
-
+			<a href="<?php echo uri('files/show/'.$file->id); ?>">
+				<?php thumbnail($file, array('class'=>'thumb')); ?>
+			</a>
+			<?php endif; ?>
+		<?php endforeach; ?>
+	</div>
+	</div>
 <div id="core-metadata" class="showitem">
 
 <h2>Core Metadata</h2>

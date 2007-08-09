@@ -2,8 +2,11 @@
 <style type="text/css" media="screen">
 @import url('<?php layout_css(); ?>');
 #item-select {float:left; width: 378px;}
-#layout-all {float:right; width:378px;}
+#layout-all {float:right; width:512px;}
 
+#layout-form .item-drop {width:100px; height:100px; overflow:hidden; border:2px solid #999; display:block;}
+
+#delete-page {clear:both;}
 </style>
 
 <script type="text/javascript" charset="utf-8">
@@ -66,7 +69,7 @@
 </script>
 <?php js('exhibits'); ?>
 <?php common('exhibits-nav'); ?>
-<div id="exhibit-page">
+<div id="primary">
 <?php if ( empty($page->layout) ): ?>
 
 <h2>Choose a layout for the page</h2>
@@ -103,20 +106,22 @@
 	<div id="layout-form">
 	<?php render_layout_form($page->layout); ?>
 	</div>
-<?php
-	submit('Save Changes &amp; Continue Paginating Through Items', 'save_and_paginate'); 
-	submit('Save &amp; Return to Exhibit', 'exhibit_form');
-	submit('Save &amp; Return to Section', 'section_form');
-	submit('Save &amp; Add Another Page', 'page_form');
-	submit('Change the layout for this page', 'change_layout');	
-?>
+	<div id="layout-submits">
+	<?php
+		submit('Save Changes &amp; Continue Paginating Through Items', 'save_and_paginate'); 
+		submit('Save &amp; Return to Exhibit', 'exhibit_form');
+		submit('Save &amp; Return to Section', 'section_form');
+		submit('Save &amp; Add Another Page', 'page_form');
+		submit('Change the layout for this page', 'change_layout');	
+	?>
+	</div>
 </form>
 	<?php if ( $page->exists() ): ?>
-		<form action="<?php echo uri('exhibits/deletePage/'.$page->id); ?>">
+		<form id="delete-page" action="<?php echo uri('exhibits/deletePage/'.$page->id); ?>">
 		<?php submit('Cancel/Delete this page', 'delete_page'); ?>
 		</form>
 	<?php else: ?>
-		<form method="get">
+		<form id="delete-page" method="get">
 			<?php submit('Cancel Adding This Page', 'cancel'); ?>
 		</form>
 	<?php endif; ?>

@@ -29,7 +29,7 @@
 	<div id="wrap">
 		
 		<div id="header">
-			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></div>
+			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a> | <?php link_to_home_page('View Public Site', array('class'=>'public-link')); ?></div>
 			
 			<div id="user-meta">Welcome, <?php echo current_user()->first_name; ?>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></div>
 			

@@ -120,11 +120,15 @@ ul.tags, li.tag {display: inline;}
 .add-exhibit,
 .edit-exhibit,
 .delete-exhibit,
-.add-file
+.add-file,
+.previous a
 {background-position:center left; background-repeat:no-repeat; padding:2px 4px 2px 20px; text-decoration:none;}
-.go
+.go,
+.next a
 {background-position:center right; text-align:right;background-repeat:no-repeat; padding:2px 18px 2px 0; text-decoration:none;background-image:url("../images/icons/bullet_go.png");}
 
+.previous a {background-image:url("../images/icons/arrow_left.png");}
+.next a {background-image:url("../images/icons/arrow_right.png");}
 .contributor {background-image:url("../images/icons/user_red.png");}
 .super {background-image:url("../images/icons/user_suit.png");}
 .admin {background-image:url("../images/icons/user_orange.png");}
@@ -211,6 +215,8 @@ ul.tags, li.tag {display: inline;}
 	/* Secondary Navigation */
 	#secondary-nav {background:#666;padding:0 36px 0;overflow:hidden;}
 		#secondary-nav a {color:#fff; text-decoration:none;display:block; width:10em;float:left; padding:6px 0; text-align:center;}
+		
+		.files #secondary-nav .nav-items a,
 		.items #secondary-nav .nav-items a,
 		.types #secondary-nav .nav-types a,
 		.collections #secondary-nav .nav-collections a,
@@ -218,7 +224,8 @@ ul.tags, li.tag {display: inline;}
 		.settings #secondary-nav .nav-general a,
 		.themes #secondary-nav .nav-themes a,
 		.plugins #secondary-nav .nav-plugins a,
-		.users #secondary-nav .nav-browse-users a
+		.users #secondary-nav .nav-browse-users a,
+		#secondary-nav .current a
 		{background:#fff; color:#555;}
 	
 /* == Search == */
@@ -325,6 +332,10 @@ ul.tags, li.tag {display: inline;}
 	.filenotfound ul.items {float:left; width: 378px;}
 
 	/* Individual Item View */
+	.item-pagination {overflow:hidden;}	
+		.item-pagination li {width:48%;display:block; overflow:hidden;}
+		.item-pagination #previous-item {float:left;}
+		.item-pagination #next-item {float:right; text-align:right;}
 		
 		div.showitem .field h3 {float:left; clear:left; width: 12em; margin-bottom: .5em;}
 		div.showitem .field div {display:block; float:left; width:246px;}

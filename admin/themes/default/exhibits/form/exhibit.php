@@ -202,10 +202,12 @@
 			<div id="new-section"></div>
 			<?php //submit('Add a New Section', 'add_section'); ?>
 		</fieldset>
+		<fieldset id="save-exhibit">
 		<?php 
 			submit('Save &amp; Finish','save_exhibit');
 			submit('Re-order the Exhibit Sections','reorder_sections'); 
 		?>
+		</fieldset>
 </form>		
 </div>
 <?php foot(); ?>
