@@ -284,30 +284,37 @@ class ItemsController extends Kea_Controller_Action
 		}
 		
 		
-		if(!$this->isAllowed('makePublic')) {
-			throw new Exception( 'User is not allowed to modify visibility of items.' );
-		}
+		try {
+			if(!$this->isAllowed('makePublic')) {
+				throw new Exception( 'User is not allowed to modify visibility of items.' );
+			}
 
-		if(!$this->isAllowed('makeFeatured')) {
-			throw new Exception( 'User is not allowed to modify' );
-		}
+			if(!$this->isAllowed('makeFeatured')) {
+				throw new Exception( 'User is not allowed to modify featured status of items' );
+			}
+			
+			if($item_a = $this->_getParam('items')) {
+										
+				//Loop through the IDs given and toggle
+				foreach ($item_a as $k => $fields) {
+
+					$item = $this->findById($fields['id']);
 		
-		if($item_a = $this->_getParam('items')) {
+					//Process the public field
 									
-			//Loop through the IDs given and toggle
-			foreach ($item_a as $k => $fields) {
-
-				$item = $this->findById($fields['id']);
-	
-				//Process the public field
-								
-				//If public has been checked
-				$item->public = array_key_exists('public', $fields);
-				
-				$item->featured = array_key_exists('featured', $fields);
-								
-				$item->save();
-			}		
+					//If public has been checked
+					$item->public = array_key_exists('public', $fields);
+					
+					$item->featured = array_key_exists('featured', $fields);
+									
+					$item->save();
+					
+				}		
+			}
+			$this->flash('Changes were successful');
+			
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
 		}
 		
 		$this->_redirect('items/browse');

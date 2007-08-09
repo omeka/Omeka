@@ -12,7 +12,9 @@
 			<li><span class="fieldname">Collection:</span> <?php echo h($item->Collection->name); ?></li>
 			<?php endif; ?>
 			<li><span class="fieldname">Public</span> <?php checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></li>
-			<li><span class="fieldname">Featured</span> <?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?></li>
+			<li><span class="fieldname">Featured</span> <?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?>
+			<?php hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>	
+				</li>
 		</ul>
 	</div>
 	<div class="description">

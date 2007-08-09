@@ -558,7 +558,10 @@ class Item extends Kea_Record
 
 	public function postSave()
 	{
-		$this->saveMetatext($_POST['metafields']);
+		if(!empty($_POST['metafields'])) 
+		{
+			$this->saveMetatext($_POST['metafields']);
+		}
 	}
 
 	public function hasFiles()

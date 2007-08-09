@@ -27,6 +27,7 @@ Event.observe(window,'load',revealChoice);
 
 </script>
 <div id="primary">
+<?php echo flash(); ?>
 <?php if ( total_results(true) ): ?>
 
 <h1>Browse Items (<?php echo total_results(true);?> items total)</h1>
