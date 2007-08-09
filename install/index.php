@@ -161,8 +161,10 @@ if (isset($_REQUEST['install_submit'])) {
 		$admin->save();
 		$theme->save();
 
-		
-		echo 'hooray! the db is setup and you are ready to roll. <a href="'.dirname($_SERVER['REQUEST_URI']).'">check out your site here!</a>';
+		echo '<div id="intro">';
+		echo '<h1>Oh Yeah!</h1>';
+		echo '<p>The db is setup and you are ready to roll. <a href="'.dirname($_SERVER['REQUEST_URI']).'">check out your site here!</a></p>';
+		echo '</div>'
 		$display_form = false;
 
 	} catch(Exception $e) {
@@ -175,42 +177,42 @@ if (isset($_REQUEST['install_submit'])) {
 if ($display_form == true):
 ?>
 <div id="intro">
-<h1>Omeka Installation</h1>
-
+<h1>Welcome to Omeka!</h1>
+<p>Aliquam aliquet, est a ullamcorper condimentum, tellus nulla fringilla elit, a iaculis nulla turpis sed wisi. Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus. Nunc porttitor nunc a sem. Sed sollicitudin velit eu magna. Aliquam erat volutpat. Vivamus ornare est non wisi.</p>
 </div>
 <form method="post" accept-charset="utf-8" id="install-form">
 	<fieldset>
 	<legend>Site Settings</legend>
 	<div class="field">
-	<label for="site_title">Site Name:</label>
-	<input type="text" name="site_title" id="site_title" value="<?php echo $_POST['site_title']; ?>" />
+	<label for="site_title">Site Name</label>
+	<input type="text" name="site_title" class="textinput" id="site_title" value="<?php echo $_POST['site_title']; ?>" />
 	</div>
 	<div class="field">
-	<label for="admin_email">Administrator Email (required for form emails):</label>
-	<input type="text" name="administrator_email" id="admin_email" value="<?php echo $_POST['administrator_email']; ?>" />
+	<label for="admin_email">Administrator Email (required for form emails)</label>
+	<input type="text" name="administrator_email" class="textinput" id="admin_email" value="<?php echo $_POST['administrator_email']; ?>" />
 	</div>
 	<div class="field">
-	<label for="copyright">Copyright Info:</label>
-	<input type="text" name="copyright" id="copyright" value="<?php echo $_POST['copyright']; ?>" />
+	<label for="copyright">Copyright Info</label>
+	<input type="text" name="copyright" class="textinput" id="copyright" value="<?php echo $_POST['copyright']; ?>" />
 	</div>
 	<div class="field">
-	<label for="author">Author Info:</label>
-	<input type="text" name="author" id="author" value="<?php echo $_POST['author']; ?>" />
+	<label for="author">Author Info</label>
+	<input type="text" class="textinput" name="author" id="author" value="<?php echo $_POST['author']; ?>" />
 	</div>
 	<div class="field">
-	<label for="description">Site Description:</label>
-	<textarea name="description" id="description"><?php echo $_POST['description']; ?></textarea>
+	<label for="description">Site Description</label>
+	<textarea name="description" class="textinput" id="description"><?php echo $_POST['description']; ?></textarea>
 	</div>
 	<div class="field">
-	<label for="thumbnail_constraint">Maximum Thumbnail Size Constraint (px):</label>
-	<input type="text" name="thumbnail_constraint" id="thumbnail_constraint" value="<?php echo (!empty($_POST['thumbnail_constraint']) ? $_POST['thumbnail_constraint'] : 150); ?>" />
+	<label for="thumbnail_constraint">Maximum Thumbnail Size Constraint (px)</label>
+	<input type="text" class="textinput" name="thumbnail_constraint" id="thumbnail_constraint" value="<?php echo (!empty($_POST['thumbnail_constraint']) ? $_POST['thumbnail_constraint'] : 150); ?>" />
 	</div>
 	<div class="field">
 	<label for="fullsize_constraint">Maximum Fullsize Image Size Constraint (px)</label> 
-	<input type="text" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo (!empty($_POST['fullsize_constraint']) ? $_POST['fullsize_constraint'] : 600); ?>" />
+	<input type="text" class="textinput" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo (!empty($_POST['fullsize_constraint']) ? $_POST['fullsize_constraint'] : 600); ?>" />
 	</div>
 	<div class="field">
-	<label for="path_to_convert">Imagemagick Binary Path:</label>
+	<label for="path_to_convert">Imagemagick Binary Path</label>
 	<?php
 	if ($path_to_convert) {
 		echo '
@@ -226,8 +228,12 @@ if ($display_form == true):
 	<fieldset>
 	<legend>Default Super User Account</legend>
 	<div class="field">
-	<label for="username">Username:</label><input type="text" name="username" value="<?php echo $_POST['username']; ?>" />
-	<label for="password">Password:</label><input type="password" name="password" value="<?php echo $_POST['password']; ?>"/>
+	<label for="username">Username</label>
+	<input type="text" class="textinput" name="username" value="<?php echo $_POST['username']; ?>" />
+	</div>
+	<div class="field">
+	<label for="password">Password</label>
+	<input class="textinput" type="password" name="password" value="<?php echo $_POST['password']; ?>"/>
 	</div>
 	</fieldset>
 	<p><input type="submit" value="Continue" name="install_submit" /></p>

@@ -4,46 +4,35 @@
 		ajaxifyTagRemoval();
 		makeTooltips();
 		ajaxifyTypeMetadata();
-		filesAdding();
+		//filesAdding();
 	});
-
-	function filesAdding()
-	{
-		var nonJsFormDiv = $('add-more-files');
-		
-		//This is where we put the new file inputs
-		var filesDiv = $$('#file-inputs .files')[0];
-		
-		//Make a link that will add another file input to the page
-		var link = Builder.node('a', {href:'javascript:void(0);',class:'add-file'}, 'Add another file');
-
-		Event.observe(link, 'click', function(){
-			var inputs = $A(filesDiv.getElementsByTagName('input'));
-			var inputCount = inputs.length;
-			var fileHtml = '<input name="file['+inputCount+']" id="file['+inputCount+']" type="file" class="fileinput" />';
-			new Insertion.After(inputs.last(), fileHtml);
-		});
-	
-		
-		nonJsFormDiv.update();
-		nonJsFormDiv.appendChild(link);
-	}
 		
 	function ajaxifyTypeMetadata()
 	{
 		var typeSelect = $('type');
 		$('change_type').hide();
 		typeSelect.onchange = function() {
+			
+			var typeSelect = $('type-select');
+			var typeSelectLabel = $$('#type-select label')[0];
+			var image = document.createElement('img');
+			image.src = "<?php echo img('loader2.gif'); ?>";
+			
 			new Ajax.Request('<?php echo uri("items/ajaxTypeMetadata") ?>', {
-				parameters: 'id=<?php echo h($item->id); ?>&type_id='+this.getValue(),
+				parameters: 'id=<?php echo $item->id; ?>&type_id='+this.getValue(),
+				onCreate: function(t) {
+					typeSelectLabel.appendChild(image);
+				},
 				onFailure: function(t) {
 					alert(t.status);
+					image.remove();
 				},
 				onComplete: function(t) {
 					var form = $('type-metadata-form');
+					image.remove();
 					form.hide();
 					form.update(t.responseText);
-					Effect.BlindDown(form, {duration: 1.0});
+					Effect.BlindDown(form, {duration: 0.5});
 				}
 			});
 		}
@@ -70,12 +59,12 @@
 	function ajaxifyTagRemoval()
 	{
 		if(!$('tags-list')) return;
-		var buttons = $('tags-list').getElementsByTagName('button');
+		var buttons = $('tags-list').getElementsByTagName('input');
+		
 		for (var i=0; i < buttons.length; i++) {
 			buttons[i].onsubmit = function() {
 				return false;
 			}
-		
 			buttons[i].onclick = function(e) {
 				removeTag(e.target);
 				return false;
@@ -116,36 +105,33 @@
 </script>
 
 <?php echo flash(); ?>
-<div id="item-form">
-	
 	<fieldset id="type-metadata">
 		<legend class="toggle">Type Metadata</legend>
-		<div class="toggle_content">
-		<div class="field">
-			<?php select(	array(	
-						'name'	=> 'type_id',
-						'id'	=> 'type' ),
-						types(),
-						$item->type_id,
-						'Item Type',
-						'id',
-						'name' ); ?>
-		<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
-		</div>
-		<div id="type-metadata-form">
-		<?php common('ajaxTypeMetadata', array('id'=>$item->id), 'items'); ?>
-		</div>
 
-			<h2>Add Files</h2>
+			<div class="field" id="type-select">
+				<?php select(	array(	
+							'name'	=> 'type_id',
+							'id'	=> 'type' ),
+							types(),
+							$item->type_id,
+							'Item Type',
+							'id',
+							'name' ); ?>
+			<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
+			</div>
+			<div id="type-metadata-form">
+			<?php //common('ajaxTypeMetadata', array('id'=>$item->id), 'items'); ?>
+			</div>
+			</fieldset>
+			<fieldset>
+			<legend>Add Files</legend>
 			<div class="field" id="add-more-files">
-				<label for="add_num_files">Add Files</label>
+			<label for="add_num_files">Add Files</label>
 				<div class="files">
-			<?php 
-				$numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; 
-			?>
+				<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
 				<?php 
-					text(array('name'=>'add_num_files','size'=>2),$numFiles);
-					submit('Add this many files', 'add_more_files'); 
+				text(array('name'=>'add_num_files','size'=>2),$numFiles);
+				submit('Add this many files', 'add_more_files'); 
 				?>
 				</div>
 			</div>
@@ -155,39 +141,45 @@
 				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 				<label for="file[<?php echo $i; ?>]">Find a File</label>
 					
-			<?php for($i=0;$i<$numFiles;$i++): ?>
-			<div class="files">
-				<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="fileinput" />			
-			</div>
-			<?php endfor; ?>
+				<?php for($i=0;$i<$numFiles;$i++): ?>
+				<div class="files">
+					<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="fileinput" />			
+				</div>
+				<?php endfor; ?>
 			</div>
 		
 		<?php if ( has_files($item) ): ?>
-	
-			<h2>Edit existing files</h2>
-			<p>(click on file to edit on a new page, check 'Delete this' to remove files)</p>
-			<ul id="file-list">
+			<div class="label">Edit existing files</div>
+			<div id="file-list">
+			<table>
+				<thead>
+					<tr>
+						<th>File Name</th>
+						<th>Delete?</th>
+				<tbody>
 			<?php foreach( $item->Files as $key => $file ): ?>
-				<li>
-					<div class="file-link">
-						<a href="<?php echo uri('files/edit/'.$file->id); ?>" target="_blank">
+				<tr>
+					<td class="file-link">
+						<?php //if ($file->hasThumbnail() ): ?>
+							<?php //thumbnail($file,array(),50,50); ?>
+						<?php// endif; ?>
+						<a href="<?php echo uri('files/edit/'.$file->id); ?>">
 			
-							<?php if ( !$file->hasThumbnail() ): ?>
+							
+								
 								<?php echo h($file->original_filename); ?>
-							<?php else: ?>
-								<?php thumbnail($file); ?>
-							<?php endif; ?>
 						</a>
-					</div>
-					<div class="delete-link">
-						<?php checkbox(array('name'=>'delete_files[]'),false,$file->id,'Delete this file'); ?>
-					</div>	
+					</td>
+					<td class="delete-link">
+						<?php checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
+					</td>	
 				</li>
 		
 			<?php endforeach; ?>
-			</ul>
-			<?php endif; ?>
+			</tbody>
+			</table>
 			</div>
+			<?php endif; ?>
 			</fieldset>
 	
 <fieldset id="core-metadata">
@@ -298,36 +290,37 @@
 			<span class="tooltip" id="temporal_coverage_tooltip"><?php dublin_core('temporal_coverage'); ?></span>
 		</div>
 
-		<div class="field">
-		<label id="language">Language</label>
-		<?php 
-			select(
-				array('id'=>'language','name'=>'language'), 
-				array(
-					'eng'=>'English', 
-					'rus'=>'Russian',
-					'deu'=>'German',
-					'fra'=>'French',
-					'spa'=>'Spanish',
-					'san'=>'Sanskrit'),
-				!empty($item->language) ? $item->language : 'eng'); 
-		?>
-		<span class="tooltip" id="language_tooltip"><?php dublin_core('language'); ?></span>
-		</div>
+			<div class="field">
+			<label id="language">Language</label>
+			<?php 
+				select(
+					array('id'=>'language','name'=>'language'), 
+					array(
+						'eng'=>'English', 
+						'rus'=>'Russian',
+						'deu'=>'German',
+						'fra'=>'French',
+						'spa'=>'Spanish',
+						'san'=>'Sanskrit'),
+					!empty($item->language) ? $item->language : 'eng'); 
+			?>
+			<span class="tooltip" id="language_tooltip"><?php dublin_core('language'); ?></span>
+			</div>
 
-		<div class="field">
-		<label id="provenance">Provenance</label>
-		<input type="text" class="textinput" name="provenance" value="<?php echo h($item->provenance);?>" />
-		<span class="tooltip" id="provenance_tooltip"><?php dublin_core('provenance'); ?></span>
-		</div>
+			<div class="field">
+			<label id="provenance">Provenance</label>
+			<input type="text" class="textinput" name="provenance" value="<?php echo h($item->provenance);?>" />
+			<span class="tooltip" id="provenance_tooltip"><?php dublin_core('provenance'); ?></span>
+			</div>
 
-		<div class="field">
-		<label id="citation">Bibliographic Citation</label>
-		<input type="text" class="textinput" name="citation" value="<?php echo h($item->citation);?>" />
-		<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
-		</div>
+			<div class="field">
+			<label id="citation">Bibliographic Citation</label>
+			<input type="text" class="textinput" name="citation" value="<?php echo h($item->citation);?>" />
+			<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
+			</div>
 		</div>
 	</fieldset>
+	
 	<fieldset id="collection-metadata">
 		<legend class="toggle">Collection Metadata</legend>
 		<div class="toggle_content">
@@ -339,23 +332,22 @@
 					'id',
 					'name' ); ?>
 		</div>
-	</div>
+		</div>
 	</fieldset>
-	
 
-		
-		
-		<fieldset id="miscellaneous">
-			<legend class="toggle">Miscellaneous</legend>
-			<div class="toggle_content">
-			<?php if ( has_permission('Items', 'makePublic') ): ?>
-				<div class="field">
-	<div class="label">Item is public:</div> <div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
-				</div>
-			<?php endif; ?>
+	<fieldset id="miscellaneous">
+		<legend class="toggle">Miscellaneous</legend>
+		<div class="toggle_content">
+		<?php if ( has_permission('Items', 'makePublic') ): ?>
+			<div class="field">
+				<div class="label">Item is public:</div> 
+				<div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
+			</div>
+		<?php endif; ?>
 		<?php if ( has_permission('Items', 'makeFeatured') ): ?>
 			<div class="field">
-		<div class="label">Item is featured:</div> <div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
+				<div class="label">Item is featured:</div> 
+				<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
 			</div>
 		<?php endif; ?>
 		</div>
@@ -364,33 +356,28 @@
 	<fieldset>
 		<legend class="toggle">Tagging</legend>
 		<div class="toggle_content">
-		<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
-		<div class="field">
-		<label for="tags-field">Modify Your Tags</label>
-		<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
-		</div>
-		<?php if(has_permission('Items','untagOthers')): ?>
-		<div class="field">
-			<label for="all-tags">Remove Other Users&apos; Tags</label>
-			<?php if($item->Tags != null):?>
-			<ul id="tags-list">
-			<?php foreach( $item->Tags as $key => $tag ): ?>
-				<li>
-					<?php echo h($tag->name); ?>
-					<button type="submit" name="remove_tag" class="remove" value="<?php echo h($tag->id); ?>">[x]</button>
-				</li>
-			<?php endforeach; ?>
-			</ul>
-			<?php else: ?>
-				foo
+			<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
+			<div class="field">
+			<label for="tags-field">Modify Your Tags</label>
+			<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
+			</div>
+			<?php if(has_permission('Items','untagOthers')): ?>
+			<div class="field">
+				<label for="all-tags">Remove All Tags</label>
+				<?php if($item->Tags == null):?>
+				<ul id="tags-list">
+				<?php foreach( $item->Tags as $key => $tag ): ?>
+					<li>
+						<input type="image" src="<?php echo img('icons/delete.png'); ?>" name="remove_tag" value="<?php echo h($tag->id); ?>" />
+						<?php echo h($tag->name); ?>
+					</li>
+				<?php endforeach; ?>
+				</ul>
 				<?php endif; ?>
-		</div>
-		<?php else: ?>
-			<p>silly</p>
-		<?php endif; ?>
+			</div>
+			<?php endif; ?>
 		</div>
 	</fieldset>
-	
 	
 	<div id="additional-plugin-data">
 		<?php plugin_html('items/form', compact('item')); ?>

@@ -3,7 +3,7 @@
 <div id="primary">
 
 <h1>Browse Users</h1>
-
+<a href="<?php echo uri('users/add'); ?>" class="add-user" id="add-user">Add a User</a>
 <table id="users">
 	<thead>
 		<tr>

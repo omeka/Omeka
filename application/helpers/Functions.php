@@ -426,8 +426,8 @@ function nav(array $links) {
 /**
  * This works different from the above function in that it may/may not append navigation
  * via the plugins, but also different in the way it handles CSS.  Instead of class="current"
- * because of all the whacked-out navigation on the admin theme, we give each link an id of 'nav-'
- * + the link text converted into a CSS ID
+ * because of all the whacked-out navigation on the admin theme, we give each link an class of 'nav-'
+ * + the link text.
  *
  **/
 function admin_nav(array $links) {
@@ -435,7 +435,7 @@ function admin_nav(array $links) {
 	
 	$nav = '';
 	foreach ($links as $text => $link) {
-		$nav .= '<li id="' . text_to_id($text, 'nav') . '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
+		$nav .= '<li class="' . text_to_id($text, 'nav') . '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
 	}
 	echo $nav;	
 }

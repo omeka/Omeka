@@ -43,13 +43,13 @@ Event.observe(window,'load',revealChoice);
 </div>
 <form action="<?php echo uri('items/powerEdit'); ?>" method="post" accept-charset="utf-8">
 	
-	<div id="view-choice">
+	<fieldset id="view-choice">
 	<?php if($_GET['view'] == 'detailed'):?>
 		<?php include('_detailed.php'); ?>
 	<?php elseif($_GET['view'] == 'simple' || $_GET['view'] == ''):?>
 		<?php include('_simple.php'); ?>
 	<?php endif; ?>
-	</div>
+	</fieldset>
 
 <input type="submit" name="submit" value="Modify these Items" />
 
@@ -57,15 +57,15 @@ Event.observe(window,'load',revealChoice);
 
 <?php elseif(!total_items(true)): ?>
 	<div id="no-items">
-	<h2>There are no items in the archive yet.
+	<h1>There are no items in the archive yet.
 	
 	<?php if(has_permission('Items','add')): ?>
-		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?</h2>
+		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?</h1>
 	<?php endif; ?>
 </div>
 	
 <?php else: ?>
-	<h2>The query searched <?php total_items(); ?> items and returned no results.</h2>
+	<h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
 	
 	<h2 id="search-header" class="close">Search Items</h2>
 	<?php include('searchform.php'); ?>

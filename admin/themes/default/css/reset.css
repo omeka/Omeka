@@ -20,6 +20,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 a img, :link img, :visited img {
 	border: 0;
 }
+a,:active {outline:0;}
 table {
 	border-collapse: collapse;
 	border-spacing: 0;

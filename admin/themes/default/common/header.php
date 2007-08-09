@@ -17,19 +17,19 @@
 <?php js('prototype-extensions'); ?>
 <?php js('scriptaculous');?>
 <?php js('niftycube');?>
-<?php js('accordion');?>
+<?php //js('accordion');?>
 <?php js('globals'); ?>
 
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>
 
 </head>
-<body id="<?php echo controller_name(); ?>">
+<body class="<?php echo controller_name(); ?>">
 	<div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
 	<div id="wrap">
 		
 		<div id="header">
-			<h1 id="site-title"><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
+			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></div>
 			
 			<div id="user-meta">Welcome, <?php echo current_user()->first_name; ?>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></div>
 			

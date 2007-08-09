@@ -14,8 +14,7 @@
 	function getLastId() {
 		input = $$("#new-metafields input").last();
 		select = $$("#new-metafields select").last();
-		
-		if(!input && !select) {
+		if(!input && !select && div) {
 			return 0;
 		}
 		if(select) {
@@ -47,23 +46,30 @@
 		
 		new Ajax.Request(uri, {
 			parameters: "id=" + num,
+			onSuccess: function(t) {
+				new Insertion.Bottom($('new-metafields'), t.responseText);	
+				$('field_'+num).hide();
+			},
 			onComplete: function(t) {
-				new Insertion.Bottom($('new-metafields'), t.responseText);
+				new Effect.BlindDown('field_'+num,{duration:1.0});
+				
 			}
 		});
 	}
 	
 	Event.observe(window, "load", ajaxify);
 </script>
-<fieldset>
-	<legend>Edit Type</legend>
+<fieldset id="type-information">
+	<legend>Type Information</legend>
 <div class="field">
 <?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$type->name, 'Type Name'); ?>
 </div>
 <div class="field">
 <?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description', 'rows'=>'10'),$type->description, 'Type Description'); ?>
 </div>
-
+</fieldset>
+<fieldset id="type-metafields">
+	<legend>Type Metafields</legend>
 <div id="old-metafields">
 <?php if($type->exists()): ?>
 <h2>Edit existing metafields:</h2>

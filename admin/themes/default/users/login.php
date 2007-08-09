@@ -1,12 +1,12 @@
 <?php head(array(), 'login'); ?>
 
-<h2>Login</h2>
+<h1>Login</h1>
 	<?php
 	if (isset($errorMessage)) {
 		echo '<div class="error">Error: <span>'.$errorMessage.'</span></div>';
 	}
 	?>
-<form action="<?php echo uri('users/login');?>" method="post" accept-charset="utf-8">
+<form id="login-form" action="<?php echo uri('users/login');?>" method="post" accept-charset="utf-8">
 	<fieldset>
 		<div class="field">
 	<label for="username">Username</label> 
@@ -16,8 +16,8 @@
 	<label for="password">Password</label> 
 	<input type="password" name="password" class="textinput" id="password" />
 	</div>
-	<input type="submit" value="Login" />
 	</fieldset>
+	<input type="submit" class="login" value="Login" />
 </form>
 
 <ul>
