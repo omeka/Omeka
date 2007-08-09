@@ -519,17 +519,17 @@ function link_to_item($item, $action='show', $text=null, $props=array())
 	return link_to($item, $action, $text, $props);
 }
 
-function link_to_next_item($item, $text="Next Item -->")
+function link_to_next_item($item, $text="Next Item -->", $props=array())
 {
 	if($next = $item->next()) {
-		return link_to($next, 'show', $text);
+		return link_to($next, 'show', $text, $props);
 	}
 }
 
-function link_to_previous_item($item, $text="<-- Previous Item")
+function link_to_previous_item($item, $text="<-- Previous Item", $props=array())
 {
 	if($previous = $item->previous()) {
-		return link_to($previous, 'show', $text);
+		return link_to($previous, 'show', $text, $props);
 	}
 }
 
@@ -1097,6 +1097,7 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 	{
 	$start_pos = ( !$start_pos ) ? 0 : strrpos( $text, ' ', $start_pos - strlen($text) ); 
 	$end_pos = strrpos( $text, ' ', ( $end_pos ) - strlen($text) );
+	if(!$end_pos) $end_pos = strlen($text);
 	$snippet = substr($text, $start_pos, $end_pos - $start_pos );
 		if (strlen($snippet)) {
 			return  $snippet . $append; 
