@@ -14,9 +14,10 @@
 	//]]>*/	
 	</script>
 
-	<form method="post" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data" id="item-form">
 		<?php include 'form.php'; ?>
 		<input type="submit" name="submit" id="save_item" value="Save Item" />	
+		</div>
 	</form>
 
 	<form id="delete_item_form" action="<?php echo uri('items/delete/'.$item->id); ?>" method="post" accept-charset="utf-8">

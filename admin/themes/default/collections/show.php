@@ -3,13 +3,13 @@
 <div id="primary">
 <div id="collection-info">
 
-<h2>Collection: <?php echo h($collection->name);?></h2>
+<h1>Collection: <?php echo h($collection->name);?></h1>
 
 <p> <a class="edit" href="<?php echo uri('collections/edit/').$collection->id; ?>">Edit</a>  <a class="delete" href="<?php echo uri('collections/delete/').$collection->id; ?>">Delete</a></p>
 
-<h3>Description:</h3> <p><?php echo h($collection->description); ?></p>
+<h2>Description:</h2> <p><?php echo h($collection->description); ?></p>
 
-	<h3>Collectors:</h3>
+	<h2>Collectors:</h2>
 	<ul id="collector-list">
 		<?php foreach( $collection->Collectors as $k => $collector ): ?>
 		<li><?php echo h($collector->name); ?></li>
@@ -18,7 +18,7 @@
 
 </div>
 <div id="collection-items">
-	<h3>Recently Added to <?php echo h($collection->name); ?></h3>
+	<h2>Recently Added to <?php echo h($collection->name); ?></h2>
 	<?php
 		$items = items(array('collection'=>$collection->name, 'recent'=>true));
 	?>

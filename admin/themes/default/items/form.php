@@ -103,10 +103,10 @@
 </script>
 
 <?php echo flash(); ?>
-<ul id="section-nav" class="navigation">
-	<li><a href="#step1">Step 1</a></li>
-	<li><a href="#step2">Step 2</a></li>
-	<li><a href="#step3">Step 3</a></li>
+<ul id="tertiary-nav" class="navigation">
+	<li id="first"><a href="#step1">Step One</a></li>
+	<li id="second"><a href="#step2">Step Two</a></li>
+	<li id="third"><a href="#step3">Step Three</a></li>
 </ul>
 <div class="toggle" id="step1">
 	<fieldset>
@@ -167,7 +167,7 @@
 						<?php //if ($file->hasThumbnail() ): ?>
 							<?php //thumbnail($file,array(),50,50); ?>
 						<?php// endif; ?>
-						<a href="<?php echo uri('files/edit/'.$file->id); ?>">
+						<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">
 			
 							
 								
@@ -381,4 +381,3 @@
 	<fieldset id="additional-plugin-data">
 		<?php plugin_html('items/form', compact('item')); ?>
 	</fieldset>
-	</div>

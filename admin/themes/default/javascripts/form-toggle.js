@@ -103,13 +103,14 @@ function toggleNav() {
 		toggles[i].style.display = "none";
 		toggles[0].style.display = "block";
 	}
-	var links = $$("#section-nav a");
+	var links = $$("#tertiary-nav a");
+	links[0].addClassName('current');
 	for (var i=0;i<links.length; i++) {
 		var link = links[i];
 		var section = link.getAttribute("href").split("#step")[1];
 		link.onclick = function() {
 			var section = this.getAttribute("href").split("#step")[1];
-			
+			this.addClassName('current');
 			toggleTab(section,links.length);
 			return false;
 		}

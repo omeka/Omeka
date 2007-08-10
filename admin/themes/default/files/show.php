@@ -54,7 +54,7 @@
 </dl>
 </div>
 	
-<div id="image" class="section">
+<div id="lgimage" class="section">
 <?php if ($file->hasThumbnail()): ?>
 	<img src="<?php echo WEB_FILES.'/'.$file->archive_filename; ?>" alt="<?php echo h($file->title); ?>" width="400" />
 <?php else: ?>

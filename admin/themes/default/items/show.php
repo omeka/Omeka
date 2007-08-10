@@ -68,20 +68,8 @@
 
 </script>
 <div id="primary">
-<ul id="tertiary-nav" class="items-nav navigation">
-	<?php 
-		$tertiary_nav['Show Item'] = uri('items/show/'.$item->id);
-		if(has_permission('Items','edit')) {
-			$tertiary_nav['Edit Item'] = uri('items/edit/'.$item->id);
-		}
-		$tertiary_nav['Back to Items'] = uri('items');
-	?>
-	
-	<?php admin_nav($tertiary_nav);?>
-</ul>
 <?php echo flash(); ?>
 
-<h1><div id="title"><?php echo h($item->title); ?></div></h1>
 <ul class="item-pagination navigation">
 <li id="previous-item" class="previous">
 	<?php link_to_previous_item($item,'Previous'); ?>
@@ -91,6 +79,9 @@
 </li>
 </ul>
 
+<h1 id="title"><?php echo h($item->title); ?></h1>
+<p id="edit-delete"> <a class="edit" href="<?php echo uri('items/edit/').$item->id; ?>">Edit</a>  <a class="delete" href="<?php echo uri('items/delete/').$item->id; ?>">Delete</a></p>
+
 <div id="item-images">
 	<div id="main-image">
 		<?php $mainfile = $item->Files[0]; ?>
@@ -98,7 +89,7 @@
 			<img src="<?php echo WEB_FILES.'/'.$mainfile->archive_filename; ?>" alt="<?php echo h($file->title); ?>" width="400" />
 			<?php endif; ?>
 			</div>
-	<div id="files">	
+<?php /*	<div id="files">	
 		<?php foreach( $item->Files as $key => $file ): ?>
 			<?php if($file->hasThumbnail()): ?>
 
@@ -108,6 +99,7 @@
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
+*/ ?>
 	</div>
 <div id="core-metadata" class="showitem">
 
@@ -239,7 +231,7 @@
 	<div id="collection" class="field">
 	<h3>Collection</h3>
 	<div>
-		<?php echo h($item->Collection->name); ?>
+		<p><?php echo h($item->Collection->name); ?></p>
 	</div>
 	</div>
 <?php endif; ?>
@@ -250,7 +242,7 @@
 
 	<div class="field">
 	<h3>Type Name</h3>
-		<div id="type_id" class="editableSelect"><?php echo h($item->Type->name); ?></div>
+		<div id="type_id" class="editableSelect"><p><?php echo h($item->Type->name); ?></p></div>
 	</div>
 		
 	<?php foreach($item->TypeMetadata as $name => $value): ?>
@@ -265,7 +257,7 @@
 		<div id="my-tags" class="field">
 		<h3>My Tags</h3>
 		<form id="tags-form" method="post" action="">
-			<input type="text" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
 			<input type="submit" name="modify_tags" value="Modify Your Tags" id="tags-submit">
 		</form>
 		</div>
@@ -289,18 +281,37 @@
 <?php else: ?>
 
 <h2>Files</h2>
-<div id="files">	
+	<div id="file-list">
+	<table>
+		<thead>
+			<tr>
+				<th>File Name</th>
+				<th>Edit File</th>
+				<th>Delete File?</th>
+		<tbody>
 	<?php foreach( $item->Files as $key => $file ): ?>
+		<tr>
+			<td>
+				<a class="show" title="View File Metadata" href="<?php echo uri('files/edit/'.$file->id); ?>">	
+						<?php echo h($file->original_filename); ?>
+				</a>
+			</td>
+			<td class="file-link">
+				<?php //if ($file->hasThumbnail() ): ?>
+					<?php //thumbnail($file,array(),50,50); ?>
+				<?php// endif; ?>
+				<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">Edit</a>
+			</td>
+			<td class="delete-link">
+				<a class="delete" href="<?php echo uri('files/delete/'.$file->id); ?>">Delete</a>
+			</td>	
+		</li>
 
-		<a href="<?php echo uri('files/show/'.$file->id); ?>">
-			<?php if($file->hasThumbnail()): ?>
-			<?php thumbnail($file, array('class'=>'thumb')); ?>
-			<?php else: ?>
-			<?php echo h($file->original_filename); ?>
-			<?php endif; ?>
-		</a>
 	<?php endforeach; ?>
-</div>
+	</tbody>
+	</table>
+	</div>
+
 
 <?php endif;?>
 
