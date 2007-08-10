@@ -14,7 +14,6 @@
 		$('change_type').hide();
 		typeSelect.onchange = function() {
 			
-			var typeSelect = $('type-select');
 			var typeSelectLabel = $$('#type-select label')[0];
 			var image = document.createElement('img');
 			image.src = "<?php echo img('loader2.gif'); ?>";
@@ -31,9 +30,7 @@
 				onComplete: function(t) {
 					var form = $('type-metadata-form');
 					image.remove();
-					form.hide();
 					form.update(t.responseText);
-					Effect.BlindDown(form, {duration: 0.5});
 				}
 			});
 		}
@@ -106,8 +103,14 @@
 </script>
 
 <?php echo flash(); ?>
-	<fieldset id="type-metadata">
-		<legend class="toggle">Type Metadata</legend>
+<ul id="section-nav" class="navigation">
+	<li><a href="#step1">Step 1</a></li>
+	<li><a href="#step2">Step 2</a></li>
+	<li><a href="#step3">Step 3</a></li>
+</ul>
+<div class="toggle" id="step1">
+	<fieldset>
+		<legend>Type Metadata</legend>
 
 			<div class="field" id="type-select">
 				<?php select(	array(	
@@ -182,10 +185,10 @@
 			</div>
 			<?php endif; ?>
 			</fieldset>
-	
+	</div>
+	<div id="step2" class="toggle">
 <fieldset id="core-metadata">
-	<legend class="toggle">Core Metadata</legend>
-	<div class="toggle_content">
+	<legend>Core Metadata</legend>
 		<div class="field">
 		<label for="title" id="title">Title</label>
 		<input type="text" class="textinput" name="title" value="<?php echo h($item->title);?>" />
@@ -319,12 +322,11 @@
 			<input type="text" class="textinput" name="citation" value="<?php echo h($item->citation);?>" />
 			<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
 			</div>
-		</div>
 	</fieldset>
-	
+</div>
+<div id="step3" class="toggle">
 	<fieldset id="collection-metadata">
-		<legend class="toggle">Collection Metadata</legend>
-		<div class="toggle_content">
+		<legend>Collection Metadata</legend>
 		<div class="field">
 		<?php select('collection_id',
 					collections(),
@@ -333,12 +335,11 @@
 					'id',
 					'name' ); ?>
 		</div>
-		</div>
 	</fieldset>
 
 	<fieldset id="miscellaneous">
-		<legend class="toggle">Miscellaneous</legend>
-		<div class="toggle_content">
+		<legend>Miscellaneous</legend>
+		
 		<?php if ( has_permission('Items', 'makePublic') ): ?>
 			<div class="field">
 				<div class="label">Item is public:</div> 
@@ -351,12 +352,11 @@
 				<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
 			</div>
 		<?php endif; ?>
-		</div>
+	
 	</fieldset>
 	
 	<fieldset>
-		<legend class="toggle">Tagging</legend>
-		<div class="toggle_content">
+		<legend>Tagging</legend>
 			<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
 			<div class="field">
 			<label for="tags-field">Modify Your Tags</label>
@@ -377,10 +377,8 @@
 				<?php endif; ?>
 			</div>
 			<?php endif; ?>
-		</div>
 	</fieldset>
-	
-	<div id="additional-plugin-data">
+	<fieldset id="additional-plugin-data">
 		<?php plugin_html('items/form', compact('item')); ?>
+	</fieldset>
 	</div>
-</div>

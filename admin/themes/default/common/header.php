@@ -17,7 +17,7 @@
 <?php js('prototype-extensions'); ?>
 <?php js('scriptaculous');?>
 <?php js('niftycube');?>
-<?php //js('accordion');?>
+<?php js('form-toggle');?>
 <?php js('globals'); ?>
 
 <!-- Plugin Stuff -->
