@@ -27,14 +27,18 @@
 </div>
 
 <h3>Status: </h3>
-<div class="field radiofield">
+<div class="field">
+	<label for="public">Public</label>	
 <?php 
-	radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->public); ?>
+	// radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->public);
+	checkbox(array('name'=>'public'), $collection->public); ?>
 </div>
 
-<div class="field radiofield">	
+<div class="field">
+	<label for="featured">Featured</label>	
 <?php 
-	radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->featured); ?>
+	//radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->featured); 
+	checkbox(array('name'=>'featured'), $collection->featured); ?>
 </div>	
 
 </fieldset>

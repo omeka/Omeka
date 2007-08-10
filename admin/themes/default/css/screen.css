@@ -106,9 +106,9 @@ ul.tags, li.tag {display: inline;}
 .error,
 .edit,
 .browse,
-.settings,
-.themes,
-.plugins,
+.editsettings,
+.managethemes,
+.manageplugins,
 .browse-users,
 .add-user,
 .edit-user,
@@ -142,9 +142,9 @@ ul.tags, li.tag {display: inline;}
 .edit-exhibit {background-image:url("../images/icons/picture_edit.png");}
 .add-collection {background-image:url("../images/icons/folder_add.png");}
 .browse-collections {background-image:url("../images/icons/folder.png");}
-.settings {background-image:url("../images/icons/cog.png");}
-.themes {background-image:url("../images/icons/layout.png");}
-.plugins {background-image:url("../images/icons/plugin.png");}
+.editsettings {background-image:url("../images/icons/cog.png");}
+.managethemes {background-image:url("../images/icons/layout.png");}
+.manageplugins {background-image:url("../images/icons/plugin.png");}
 .browse-users {background-image:url("../images/icons/user_female.png");}
 .add-user {background-image:url("../images/icons/user_add.png");}
 .edit-user {background-image:url("../images/icons/pencil_go.png");}
@@ -185,6 +185,7 @@ ul.tags, li.tag {display: inline;}
 
 	#user-meta {display:block; float:right; width:15em;color:#fff;background:#222; text-align:center; font-size:1.2em; padding:0.5em 0.5em 1.5em;}
 		#user-meta a {color:#fff;}
+		#public-link {margin: 1em 0 0 2em;display: block; font-weight: bold; text-decoration: none; background-image: url("../images/icons/arrow_right_white.gif"); background-position:6px 50%; background-repeat: no-repeat; padding: 0 0 0 24px;}
 
 /* == Navigation == */
 	
@@ -230,14 +231,14 @@ ul.tags, li.tag {display: inline;}
 		
 	/* Tertiary Nav */
 	#tertiary-nav {overflow: hidden;}
-	#tertiary-nav a {text-transform: uppercase; font-size: 1.2em; color: #88cc33;float: left; display: block; margin-right: 1px; width: 264px; padding: .5em 0 .5em 36px; background-color: #e9f6da; background-position: 6px 50%; background-repeat: no-repeat;}
-		#tertiary-nav #first a {background-image: url(../images/first-inactive.gif);}
-		#tertiary-nav #second a {background-image: url(../images/second-inactive.gif);}
-		#tertiary-nav #third a {background-image: url(../images/third-inactive.gif);}
+	#tertiary-nav a {text-transform: uppercase; font-size: 1.2em; color: #999;float: left; display: block; margin-right: 1px; width: 264px; padding: .5em 0 .5em 36px; background-color: #eee; background-position: 6px 50%; background-repeat: no-repeat;}
+		#tertiary-nav #first a {background-image: url(../images/first-inactive-grey.gif);}
+		#tertiary-nav #second a {background-image: url(../images/second-inactive-grey.gif);}
+		#tertiary-nav #third a {background-image: url(../images/third-inactive-grey.gif);}
 		#tertiary-nav #first a.current {background-image: url(../images/first-active.gif);}
 		#tertiary-nav #second a.current {background-image: url(../images/second-active.gif);}
 		#tertiary-nav #third a.current {background-image: url(../images/third-active.gif);}
-		#tertiary-nav a.current {background-color:#d4ecb5; color: #555;}
+		#tertiary-nav a.current {background-color:#9ed558; color: #fff;}
 	
 	
 /* == Search == */
@@ -261,7 +262,7 @@ ul.tags, li.tag {display: inline;}
 	#primary { width:918px; margin-left:36px;margin-top:18px;}
 	#secondary {width:918px; margin-left:36px;margin-top:18px;}
 	
-	#content h1 {float: left; width: 60%;}
+	#content h1.floater {float: left; width: 60%;}
 	#content h1#title {margin-bottom: 0;}
 
 	#edit-delete {clear: both;}
@@ -385,10 +386,10 @@ ul.tags, li.tag {display: inline;}
 	#editfile {clear: left;}
 		
 	/* Collections styles */
-	#add-collection {background-color:#d4ecb5; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:8.5em; display:block;}
+	#add-collection {background-color:#d4ecb5; float: right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:8.5em; display:block;}
 	#add-collection:hover {background-color:#E9F6DA;}
 	
-	.collection {overflow:hidden; border-bottom: 1px solid #ccc; margin:18px 0; width:918px;}
+	.collection {clear: both; overflow:hidden; border-bottom: 1px solid #ccc; margin:18px 0; width:918px;}
 		.collection h3 {float: left; display: inline; width: 10em;}
 		.collection a {text-decoration:none;}
 		.collection p, .collection ul {float: left; line-height: 1.6667em; }
@@ -403,8 +404,11 @@ ul.tags, li.tag {display: inline;}
 	ul.collections {float:right; width:378px;}
 	ul#collectors {clear: left;}
 	
+	#editcollection h3 {margin-bottom: .25em;}
 	#editcollection .field label {font-size: 1.6em;}
 	#editcollection .field .radiolabel {font: 1.2em "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; margin: 0;}
+	
+	select#collector {margin-bottom: 1.5em;}
 
 	/* Item Type Styles */
 	.itemtype {clear: both; overflow:hidden; border-bottom:1px solid #ddd; margin:1em 0 .5em; padding: .5em 0 0; width:918px;}
@@ -462,6 +466,9 @@ ul.tags, li.tag {display: inline;}
 	#add-user {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:7.5em; display:block;}
 	#add-user:hover {background-color:#e9f6da;}
 	
+	#users {clear: both;}
+	
+	input#institution {margin-bottom: 1.5em;}
 	
 	table#userroles {width: auto;}
 	table#userroles caption {margin: 0 0 1em 0;}
@@ -483,7 +490,7 @@ ul.tags, li.tag {display: inline;}
 	/* Names styles */
 	#names-browse {float:left; width: 494px;display:block;background:#fff; padding:0;}
 	#names-browse tr {width:100%;}
-	#names-add {float:right; width: 364px; display:block; padding:18px;background: #DAE9F6;}
+	#names-add {float:right; width: 364px; display:block; padding:18px;background: #DAE9F6;margin-bottom: 1.8em;}
 		#names-add fieldset {overflow:hidden; border-width:0;}
 		#names-add legend {background:transparent;}
 		#names-add .textinput, #names-add select {width:216px; float:right;background:#fff;margin:0;}

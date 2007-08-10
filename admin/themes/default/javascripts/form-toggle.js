@@ -110,6 +110,7 @@ function toggleNav() {
 		toggles[0].style.display = "block";
 	}
 	var links = $$("#tertiary-nav a");
+	if (!links) return;
 	links[0].addClassName('current');
 	for (var i=0;i<links.length; i++) {
 		var link = links[i];

@@ -30,7 +30,7 @@ Event.observe(window,'load',revealChoice);
 <?php echo flash(); ?>
 <?php if ( total_results(true) ): ?>
 
-<h1>Browse Items (<?php echo total_results(true);?> items total)</h1>
+<h1 class="floater">Browse Items (<?php echo total_results(true);?> items total)</h1>
 <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
 
 <h2 id="search-header" class="close">Search Items</h2>

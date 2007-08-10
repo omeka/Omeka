@@ -14,7 +14,7 @@
 </script>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
-	<h1>Exhibits</h1>
+	<h1 class="floater">Exhibits</h1>
 	<a href="<?php echo uri('exhibits/add'); ?>" id="add-exhibit" class="add-exhibit">Add an Exhibit</a>
 <table id="exhibits">
 	<col id="col-id" />

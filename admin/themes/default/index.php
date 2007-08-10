@@ -50,9 +50,9 @@
 					<dt><a href="<?php echo uri('settings'); ?>">Settings</a></dt>
 					<dd>
 						<ul>
-							<li><a class="settings" href="<?php echo uri('settings'); ?>">Edit General Settings</a></li>
-							<li><a class="themes" href="<?php echo uri('themes'); ?>">Manage Themes</a></li>
-							<li><a class="plugins" href="<?php echo uri('plugins'); ?>">Manage Plugins</a></li>
+							<li><a class="editsettings" href="<?php echo uri('settings'); ?>">Edit General Settings</a></li>
+							<li><a class="managethemes" href="<?php echo uri('themes'); ?>">Manage Themes</a></li>
+							<li><a class="manageplugins" href="<?php echo uri('plugins'); ?>">Manage Plugins</a></li>
 						</ul>
 						<p>Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus.</p>
 						

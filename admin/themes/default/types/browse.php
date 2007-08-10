@@ -1,7 +1,7 @@
 <?php head(); ?>
 <?php common('archive-nav'); ?>
 <div id="primary">
-<h1>Item Types</h1>
+<h1 class="floater">Item Types</h1>
 <a id="add-type" class="add" href="<?php echo uri('types/add'); ?>">Add an Item Type</a>
 <?php foreach( $types as $type ): ?>
 <div class="itemtype">
