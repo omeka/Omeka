@@ -96,6 +96,12 @@ function toggleBackNext() {
 
 }
 
+function removeClasses(theArray) {
+	for(var i=0;i<theArray.length;i++){
+	theArray[i].removeClassName('current');
+	}
+	
+}
 function toggleNav() {
 	var toggles = $$("div.toggle");
 	
@@ -110,7 +116,9 @@ function toggleNav() {
 		var section = link.getAttribute("href").split("#step")[1];
 		link.onclick = function() {
 			var section = this.getAttribute("href").split("#step")[1];
-			this.addClassName('current');
+			removeClasses(links);
+			this.toggleClassName('current','off');
+			
 			toggleTab(section,links.length);
 			return false;
 		}
