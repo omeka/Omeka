@@ -30,5 +30,14 @@
 </tbody>
 </table>
 
+<div id="new-user-form">
+	<form action="<?php echo uri('users/add'); ?>" method="post" accept-charset="utf-8">
+		<?php common('form', array(), 'users'); ?>
+		
+		<input type="submit" name="submit" value="Add a new User --&gt;" />
+	</form>
+	
+</div>
+
 </div>
 <?php foot();?>
