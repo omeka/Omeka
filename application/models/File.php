@@ -67,7 +67,6 @@ class File extends Kea_Record {
         $this->hasColumn('original_filename', 'string', null, array('notnull' => true, 'default'=>''));
         $this->hasColumn('size', 'integer', null, array('default'=>'0', 'notnull' => true));
         $this->hasColumn('mime_browser', 'string');
-        //$this->hasColumn('mime_php', 'string');
         $this->hasColumn('mime_os', 'string');
         $this->hasColumn('type_os', 'string');
 		
@@ -108,7 +107,6 @@ class File extends Kea_Record {
 			'archive_filename', 
 			'original_filename', 
 			'mime_browser', 
-			'mime_php', 
 			'mime_os', 
 			'type_os');
 		foreach ($immutable as $value) {
@@ -254,7 +252,6 @@ class File extends Kea_Record {
 				$this->authentication = md5_file( $path );
 				
 				$this->mime_browser = $_FILES[$form_name]['type'][$index];
-				//$this->mime_php = mime_content_type( $path );
 				$this->mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $path ) ) ) );
 				$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
 

@@ -241,14 +241,6 @@
 ?>
 </div>
 
-<div><label class="readonly" for="mime_php">File Mime PHP <span class="readonly">(read only)</span></label>
-<?php
-	text( array(	'name'	=> 'mime_php',
-							'readonly' => 'readonly',
-							'class' => 'readonly textinput'),$file->mime_php);
-?>
-</div>
-
 <div><label class="readonly" for="mime_os">File Mime OS <span class="readonly">(read only)</span></label>
 <?php
 	text( array(	'name'	=> 'mime_os',

@@ -70,7 +70,6 @@ CREATE TABLE `files` (
   `original_filename` text collate utf8_unicode_ci,
   `size` bigint(20) default NULL,
   `mime_browser` text collate utf8_unicode_ci,
-  `mime_php` text collate utf8_unicode_ci,
   `mime_os` text collate utf8_unicode_ci,
   `type_os` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`)

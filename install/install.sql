@@ -144,7 +144,6 @@ CREATE TABLE IF NOT EXISTS `files` (
   `thumbnail_filename` text ,
   `size` bigint(20) NOT NULL default '0',
   `mime_browser` text ,
-  `mime_php` text ,
   `mime_os` text ,
   `type_os` text ,
   `lookup_id` bigint(20) unsigned default NULL,
