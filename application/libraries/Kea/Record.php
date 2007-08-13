@@ -380,10 +380,12 @@ abstract class Kea_Record extends Doctrine_Record
 	
 		if(!empty($post))
 		{		
-			if($this->preCommitForm($post, $options) === false) {
+			$clean = $post;
+			
+			if($this->preCommitForm($clean, $options) === false) {
 				return false;
 			}
-			$clean = $post;
+			
 			unset($clean['id']);
 			$this->setFromForm($clean);
 			if($save) {

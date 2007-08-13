@@ -431,12 +431,13 @@ CREATE TABLE IF NOT EXISTS `types` (
 -- 
 
 DROP TABLE IF EXISTS `types_metafields`;
-CREATE TABLE IF NOT EXISTS `types_metafields` (
+CREATE TABLE `types_metafields` (
   `id` bigint(20) NOT NULL auto_increment,
   `type_id` bigint(20) NOT NULL,
   `metafield_id` bigint(20) NOT NULL,
   `plugin_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
+  UNIQUE KEY `type_metafield` (`type_id`,`metafield_id`),
   KEY `type_idx` (`type_id`),
   KEY `metafield_idx` (`metafield_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

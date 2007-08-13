@@ -59,6 +59,7 @@
 	
 	Event.observe(window, "load", ajaxify);
 </script>
+<?php echo flash(); ?>
 <fieldset id="type-information">
 	<legend>Type Information</legend>
 <div class="field">
