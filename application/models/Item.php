@@ -316,6 +316,11 @@ class Item extends Kea_Record
 					return false;
 				}
 			}
+			//If somebody provides some random string as input, then it's not valid
+			elseif(!is_numeric($year) or !is_numeric($month) or !is_numeric($day)) 
+			{
+				return false;
+			}
 			//If the date is invalid, return false
 			elseif( !checkdate($date[1], $date[2], $date[0]) ) {
 
@@ -418,142 +423,125 @@ class Item extends Kea_Record
 		return ($count > 0);
 	}
 
-	public function commitForm($post, $save=true, $options=array())
+	protected function preCommitForm(&$clean, $options)
 	{
-		if(!empty($post))
-		{	
-			$conn = $this->_table->getConnection();
-			$conn->beginTransaction();
+		//Process the separate date fields
+		$validDate = $this->processDate('date',
+							$clean['date_year'],
+							$clean['date_month'],
+							$clean['date_day']);
+							
+		$validCoverageStart = $this->processDate('temporal_coverage_start', 
+							$clean['coverage_start_year'],
+							$clean['coverage_start_month'],
+							$clean['coverage_start_day']);
+							
+		$validCoverageEnd = $this->processDate('temporal_coverage_end', 
+							$clean['coverage_end_year'],
+							$clean['coverage_end_month'],
+							$clean['coverage_end_day']);				
+		
+		//Special method for untagging other users' tags
+		if($this->userHasPermission('untagOthers')) {
+			if(array_key_exists('remove_tag', $clean)) {
+				$tagId = $post['remove_tag'];
+				$tagToDelete = Zend::Registry( 'doctrine' )->getTable('Tag')->find($tagId);
+				$current_user = Kea::loggedIn();
+				if($tagToDelete) {
+					$this->pluginHook('onUntagItem', array($tagToDelete->name, $current_user));
 			
-			$clean = $post;
-			unset($clean['id']);
-			
-			//Process the separate date fields
-			$validDate = $this->processDate('date',
-								$clean['date_year'],
-								$clean['date_month'],
-								$clean['date_day']);
-								
-			$validCoverageStart = $this->processDate('temporal_coverage_start', 
-								$clean['coverage_start_year'],
-								$clean['coverage_start_month'],
-								$clean['coverage_start_day']);
-								
-			$validCoverageEnd = $this->processDate('temporal_coverage_end', 
-								$clean['coverage_end_year'],
-								$clean['coverage_end_month'],
-								$clean['coverage_end_day']);				
-			
-			//Special method for untagging other users' tags
-			if($this->userHasPermission('untagOthers')) {
-				if(array_key_exists('remove_tag', $post)) {
-					$tagId = $post['remove_tag'];
-					$tagToDelete = Zend::Registry( 'doctrine' )->getTable('Tag')->find($tagId);
-					$current_user = Kea::loggedIn();
-					if($tagToDelete) {
-						$this->pluginHook('onUntagItem', array($tagToDelete->name, $current_user));
-				
-						//delete the tag from the Item
-						$tagsDeleted = $this->deleteTags($tagToDelete, null, true);
-					}
-				}				
-			}
-
-			//Mirror the form to the record
-			$this->setFromForm($clean);
-
-			//Check to see if the date was valid
-			if(!$validDate) {
-				throw new Exception( 'The date provided is invalid.  Please provide a correct date.' );
-			}
-			
-			//If someone is providing coverage dates, they need to provide both a start and end or neither
-			if( (!$validCoverageStart and $validCoverageEnd) or ($validCoverageStart and !$validCoverageEnd) ) {
-				throw new Exception( 'For coverage, both start date and end date must be specified, otherwise neither may be specified.' );
-			}
-			
-			if(!empty($clean['change_type'])) return false;
-			if(!empty($clean['add_more_files'])) return false;
-			
-			if(!empty($_FILES["file"]['name'][0])) {
-				//Handle the file uploads
-				foreach( $_FILES['file']['error'] as $key => $error )
-				{ 
-					try{
-						$file = new File();
-						$file->upload('file', $key);
-						$this->Files->add($file);
-					}catch(Exception $e) {
-						$file->delete();
-						$conn->rollback();
-						throw $e;
-					}
-				
+					//delete the tag from the Item
+					$tagsDeleted = $this->deleteTags($tagToDelete, null, true);
 				}
-			}
-			
-			/* Delete files what that have been chosen as such */
-			if($filesToDelete = $clean['delete_files']) {
-				foreach ($this->Files as $key=> $file) {
-					if(in_array($file->id,$filesToDelete)) {
-						$file->delete();
-					}
-				}
-			}		
-									
-			//Handle the boolean vars
-			if(array_key_exists('public', $clean)) {
-				if($this->userHasPermission('makePublic')) {
-					//If item is being made public
-					if(!$this->public && $clean['public'] == 1) {
-						$wasMadePublic = true;
-					}
-					
-					$this->public = (bool) $clean['public'];
-				}
-			}
-			
-			if(array_key_exists('featured', $clean) and $this->userHasPermission('makeFeatured')) {
-				$this->featured = (bool) $clean['featured'];
-			}
-			
-			try {
-				$this->save();
-				
-				//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
-				if(array_key_exists('modify_tags', $clean) || !empty($clean['tags'])) {
-					if(isset($options['entity'])) {
-						$entity = $options['entity'];
-					}else {
-						$user = Kea::loggedIn();
-						$entity = $user->Entity;
-					}
-					$this->applyTagString($clean['tags'], $entity);
-				}
-				
-				//If the item was made public, fire the plugin hook
-				if($wasMadePublic) {
-					$this->pluginHook('onMakePublicItem');
-				}
-				
-				$conn->commit();
-				return true;
-			}
-			catch(Doctrine_Validator_Exception $e) {
-				$this->gatherErrors($e);
-				$conn->rollback();
-				
-				//Reload the files b/c of a stupid bug
-				foreach ($this->Files as $key => $file) {
-					if(!$file->exists()) {
-						$file->delete();
-					}
-					unset($this->Files[$key]);
-				}
-				throw new Exception( $this->getErrorMsg() );				
-			}	
+			}				
+		}	
+		
+		//Check to see if the date was valid
+		if(!$validDate) {
+			throw new Exception( 'The date provided is invalid.  Please provide a correct date.' );
+		}	
+		
+		//If someone is providing coverage dates, they need to provide both a start and end or neither
+		if( (!$validCoverageStart and $validCoverageEnd) or ($validCoverageStart and !$validCoverageEnd) ) {
+			throw new Exception( 'For coverage, both start date and end date must be specified, otherwise neither may be specified.' );
 		}
-		return false;
+		
+		if(!empty($clean['change_type'])) return false;
+		if(!empty($clean['add_more_files'])) return false;
+		
+		if(!empty($_FILES["file"]['name'][0])) {
+			//Handle the file uploads
+			foreach( $_FILES['file']['error'] as $key => $error )
+			{ 
+				try{
+					$file = new File();
+					$file->upload('file', $key);
+					$this->Files->add($file);
+				}catch(Exception $e) {
+					$file->delete();
+					$conn->rollback();
+					throw $e;
+				}
+			
+			}
+		}
+		
+		/* Delete files what that have been chosen as such */
+		if($filesToDelete = $clean['delete_files']) {
+			foreach ($this->Files as $key=> $file) {
+				if(in_array($file->id,$filesToDelete)) {
+					$file->delete();
+				}
+			}
+		}		
+							
+		//Handle the boolean vars
+		if(array_key_exists('public', $clean)) {
+			if($this->userHasPermission('makePublic')) {
+				//If item is being made public
+				if(!$this->public && $clean['public'] == 1) {
+					
+					//Set this value in the Registry so that postCommitForm will catch it (HACK)
+					Zend::register('item_is_public', true);
+				}
+				
+				$this->public = (bool) $clean['public'];
+			}
+		}
+		
+		if(array_key_exists('featured', $clean) and $this->userHasPermission('makeFeatured')) {
+			$this->featured = (bool) $clean['featured'];
+		}		
+	}
+
+	protected function postCommitForm($post, $options)
+	{
+		//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
+		if(array_key_exists('modify_tags', $post) || !empty($post['tags'])) {
+			if(isset($options['entity'])) {
+				$entity = $options['entity'];
+			}else {
+				$user = Kea::loggedIn();
+				$entity = $user->Entity;
+			}
+			$this->applyTagString($post['tags'], $entity);
+		}
+		
+		//If the item was made public, fire the plugin hook
+		if(Zend::isRegistered('item_is_public')) {
+			$this->pluginHook('onMakePublicItem');
+		}		
+	}
+	
+	protected function onFormError($post, $options=array())
+	{
+		//Reload the files b/c of a stupid bug
+		foreach ($this->Files as $key => $file) {
+			if(!$file->exists()) {
+				$file->delete();
+			}
+			unset($this->Files[$key]);
+		}		
 	}
 
 	public function postSave()

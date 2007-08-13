@@ -396,6 +396,7 @@ abstract class Kea_Record extends Doctrine_Record
 				}
 				catch(Doctrine_Validator_Exception $e) {
 					$this->gatherErrors($e);
+					$this->onFormError($post, $options);
 					throw new Exception( $this->getErrorMsg() );
 					$conn->rollback();
 					return false;
@@ -431,6 +432,8 @@ abstract class Kea_Record extends Doctrine_Record
 	protected function preCommitForm(&$post, $options) {return true;}
 	
 	protected function postCommitForm($post, $options) {}
+	
+	protected function onFormError($post, $options) {}
 	
 	/**
 	 * This is essentially duplicated in the action controller, with the exception that this function passes $this as the first parameter
