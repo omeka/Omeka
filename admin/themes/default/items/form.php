@@ -17,9 +17,10 @@
 			var typeSelectLabel = $$('#type-select label')[0];
 			var image = document.createElement('img');
 			image.src = "<?php echo img('loader2.gif'); ?>";
-			
-			new Ajax.Request('<?php echo uri("items/ajaxTypeMetadata") ?>', {
-				parameters: 'id=<?php echo $item->id; ?>&type_id='+this.getValue(),
+			var params = 'item_id=<?php echo $item->id; ?>&type_id='+this.getValue();
+						
+			new Ajax.Request('<?php echo uri("items/changeType") ?>', {
+				parameters: params,
 				onCreate: function(t) {
 					typeSelectLabel.appendChild(image);
 				},
@@ -31,6 +32,7 @@
 					var form = $('type-metadata-form');
 					image.remove();
 					form.update(t.responseText);
+					Effect.BlindDown(form);
 				}
 			});
 		}
@@ -124,7 +126,7 @@
 			<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
 			</div>
 			<div id="type-metadata-form">
-			<?php //common('ajaxTypeMetadata', array('id'=>$item->id), 'items'); ?>
+			<?php common('_type', compact('item'), 'items'); ?>
 			</div>
 			</fieldset>
 			<fieldset>

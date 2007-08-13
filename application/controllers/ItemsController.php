@@ -267,6 +267,23 @@ class ItemsController extends Kea_Controller_Action
 	}
 	
 	/**
+	 * Find or create an item for this mini-form
+	 *
+	 **/
+	public function changeTypeAction()
+	{
+		if($id = $_POST['item_id']) {
+			$item = $this->findById($id);
+		}else {
+			$item = new Item;
+		}
+		
+		$item->type_id = $_POST['type_id'];
+		
+		return $this->render('items/_type.php', compact('item'));
+	}
+	
+	/**
 	 * 
 	 * @since Supports public and featured changes on items
 	 * @return void
