@@ -123,7 +123,7 @@ function roundCorners() {
 	Nifty('#site-info,#type-items,#getting-started ul');
 	Nifty('#view-all-items a','transparent');
 	Nifty('#search,#names-add','big');
-	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit','transparent');
+	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit,#new-user-form','transparent');
 }
 
 function checkDeleteItem() {
