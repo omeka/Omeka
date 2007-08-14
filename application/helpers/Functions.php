@@ -121,7 +121,7 @@ function display_item_list($items,$title_only=false,$display_content=false) {
 		<div class="tagcloud"><strong>Tags:</strong> 
 		<?php if(count($item->Tags)): ?>
 		<?php foreach ($item->Tags as $tag): ?>
-		<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" re="tag"><?php echo h($tag); ?></a>
+		<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" re="tag"><?php echo h($tag->name); ?></a>
 		<?php endforeach; ?>
 		<?php else: ?>
 		<span>No Tags</span>

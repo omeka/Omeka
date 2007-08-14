@@ -407,8 +407,26 @@ class ExhibitsController extends Kea_Controller_Action
 		return $this->processPageForm($page, $section);
 	}
 	
+	protected function cancelPageAdd()
+	{
+		//Unset session var that tells us we are adding a page
+		unset($this->session->addingPage);
+	}
+	
 	protected function processPageForm($page, $section=null) 
 	{
+		//'cancel_and_section_form' and 'cancel_and_exhibit_form' as POST elements will cancel adding a page
+		//And they will redirect to whatever form is important
+		if(isset($_POST['cancel_and_section_form'])) {
+			$this->cancelPageAdd();
+			$this->_redirect('editSection', array('id'=>$page->section_id));
+		}
+		
+		if(isset($_POST['cancel_and_exhibit_form'])) {
+			$this->cancelPageAdd();
+			$this->_redirect('editExhibit', array('id'=>$section->exhibit_id));
+		}
+		
 		if(!empty($_POST)) {
 			
 			if(array_key_exists('choose_layout', $_POST)) {
@@ -432,15 +450,18 @@ class ExhibitsController extends Kea_Controller_Action
 			}
 				
 			else {
-				$retVal = $page->commitForm($_POST);
+				try {
+					$retVal = $page->commitForm($_POST);
+				} catch (Exception $e) {
+					$this->flash($e->getMessage());
+				}
 				
 				if($retVal) {
 					$hook = ($this->session->addingPage ? 'onAddExhibitPage' : 'onEditExhibitPage');
 					$this->pluginHook($hook, array($page));
 				}
 				
-				//Unset session var that tells us we are adding a page
-				unset($this->session->addingPage);
+				$this->cancelPageAdd();
 				
 				//Otherwise the page form has been submitted
 				if($retVal) {

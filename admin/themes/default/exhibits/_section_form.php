@@ -4,7 +4,7 @@
 //]]>	
 </script>
 	<fieldset>		
-		<p><a id="add-section" href="javascript:void(0);">Add This Section</a> or <a id="cancel-add" href="javascript:void(0);">Cancel</a></p>
+		<p><a id="add_section" href="javascript:void(0);">Add This Section</a> or <a id="cancel-add" href="javascript:void(0);">Cancel</a></p>
 	</fieldset>
 	<fieldset>
 	<div class="field"><?php text(array('name'=>'title', 'id'=>'title'), $section->title, 'Title for the Section'); ?></div>

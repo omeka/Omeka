@@ -36,7 +36,7 @@
 			},
 			onComplete: function(t) {
 				//Now make the add/cancel links work
-				var addLink = $('add-section');
+				var addLink = $('add_section');
 				var cancelLink = $('cancel-add');
 				addLink.onclick = addSection;
 				cancelLink.onclick = removeAddSectionForm;
@@ -173,7 +173,7 @@
 	<fieldset id="save-exhibit">
 		
 			<button type="submit" name="save_exhibit" id="save_exhibit" class="exhibit-button">Exhibit Metadata</button>
-			<button type="submit" name="add_section" id="add_section" class="exhibit-button">Add a Section</button>
+			<button type="submit" name="add_section" id="add_new_section" class="exhibit-button">Add a Section</button>
 			<div id="pages_button" class="exhibit-button">Pages</div>
 			
 		

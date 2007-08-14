@@ -112,12 +112,14 @@
 </script>
 <?php js('exhibits'); ?>
 <?php common('exhibits-nav'); ?>
+<?php echo flash(); ?>
+
 <div id="page-builder">
 <?php if ( empty($page->layout) ): ?>
 <form method="post" id="choose-layout">
 	<fieldset>
-		<button type="submit" name="exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
-		<button type="submit" name="section_form" id="section_form" class="exhibit-button">Section Metadata</button>
+		<button type="submit" name="cancel_and_exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
+		<button type="submit" name="cancel_and_section_form" id="section_form" class="exhibit-button">Section Metadata</button>
 		
 		<div id="page_button" class="exhibit-button">Page Metadata</div>
 		
