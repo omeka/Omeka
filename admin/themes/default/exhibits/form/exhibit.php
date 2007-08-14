@@ -12,33 +12,37 @@
 			//If we don't have a valid exhibit ID, we need to save the exhibit first
 			if(isNaN(exhibit_id)) {
 				
-				exhibit_id = saveNewExhibit();
-				if(!exhibit_id) {
-					return false;
-				}
+				saveNewExhibit();
 				
 			}
-						
-			//Now submit the request for the 
-			new Ajax.Updater('new-section', "<?php echo uri('exhibits/sectionForm'); ?>", {
-				parameters: "id=" + exhibit_id,
-				onFailure: function(t) {
-					Omeka.flash(t.responseText);
-				},
-				onSuccess: function(t) {
-					//Highlight the updated DIV
-					new Effect.Highlight('new-section');					
-				},
-				onComplete: function(t) {
-					//Now make the add/cancel links work
-					var addLink = $('add-section');
-					var cancelLink = $('cancel-add');
-					addLink.onclick = addSection;
-					cancelLink.onclick = removeAddSectionForm;
-				}
-			});
+			else {
+				loadSectionForm(exhibit_id);
+			}			
+			
 		}		
 	});
+	
+	function loadSectionForm(exhibit_id)
+	{
+		//Now submit the request for the 
+		new Ajax.Updater('new-section', "<?php echo uri('exhibits/sectionForm'); ?>", {
+			parameters: "id=" + exhibit_id,
+			onFailure: function(t) {
+				Omeka.flash(t.responseText);
+			},
+			onSuccess: function(t) {
+				//Highlight the updated DIV
+				new Effect.Highlight('new-section');					
+			},
+			onComplete: function(t) {
+				//Now make the add/cancel links work
+				var addLink = $('add-section');
+				var cancelLink = $('cancel-add');
+				addLink.onclick = addSection;
+				cancelLink.onclick = removeAddSectionForm;
+			}
+		});		
+	}
 	
 	function addSection()
 	{
@@ -117,20 +121,17 @@
 
 				Omeka.flash('Exhibit was saved successfully');
 				setExhibitId(exhibit['id']);
-
-			},
-
-			onFailure: function(t, exhibit) {
-				Omeka.flash(exhibit['Flash']);
-			},
-
-			onComplete: function(t, exhibit) {
-
+				
 				//After a successful save, update the exhibit slug b/c that is most likely to be auto-generated
 				$('slug').value = exhibit['slug'];
 				
 				exhibit_id = exhibit['id'];
-				return exhibit_id;
+				
+				loadSectionForm(exhibit_id);
+			},
+
+			onFailure: function(t, exhibit) {
+				Omeka.flash(exhibit['Flash']);
 			}
 		});			
 	}
