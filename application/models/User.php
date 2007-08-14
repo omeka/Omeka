@@ -1,5 +1,6 @@
 <?php
 require_once 'UsersActivations.php';
+require_once 'UsersTable.php';
 require_once 'Entity.php';
 require_once 'Item.php';
 /**

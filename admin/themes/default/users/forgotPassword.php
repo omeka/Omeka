@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array(), 'login'); ?>
 <div id="primary">
 <?php echo flash(); ?>
 <form method="post" accept-charset="utf-8">

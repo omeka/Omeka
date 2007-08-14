@@ -61,7 +61,8 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 **/
 	protected $_adminWhitelist = array(
 				array('controller'=>'users', 'action'=>'activate'), 
-				array('controller'=>'users', 'action'=>'login'));
+				array('controller'=>'users', 'action'=>'login'),
+				array('controller'=>'users', 'action'=>'forgotPassword'));
 	
 	/**
 	 * Redirects should be defined up here (with opportunity to override them)
