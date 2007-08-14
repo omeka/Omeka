@@ -16,8 +16,9 @@
 
 	<form method="post" enctype="multipart/form-data" id="item-form">
 		<?php include 'form.php'; ?>
-		<input type="submit" name="submit" id="save_item" value="Save Item" />	
 		</div>
+		
+		<input type="submit" name="submit" id="save_item" value="Save Item" />	
 	</form>
 
 	<form id="delete_item_form" action="<?php echo uri('items/delete/'.$item->id); ?>" method="post" accept-charset="utf-8">

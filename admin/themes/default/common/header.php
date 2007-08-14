@@ -41,7 +41,7 @@
 			<?php
 				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items'),'Exhibits' => uri('exhibits') );
 				if(has_permission('Users','browse') ) {
-					$header_navigation['Users'] = uri('users');
+					$header_navigation['Users'] = uri('users/browse');
 				}
 				if(has_permission('super')) {
 					$header_navigation['Settings'] = uri('settings');

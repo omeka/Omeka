@@ -109,8 +109,10 @@ function toggleNav() {
 		toggles[i].style.display = "none";
 		toggles[0].style.display = "block";
 	}
+
+	if(!$$("#tertiary-nav a")) return;
 	var links = $$("#tertiary-nav a");
-	if (!links) return;
+	if(!links[0]) return;
 	links[0].addClassName('current');
 	for (var i=0;i<links.length; i++) {
 		var link = links[i];

@@ -12,6 +12,7 @@
 	layout_form_item(10);
 	layout_form_item(11);
 	layout_form_item(12);
+	layout_form_text(1);
 	?>
 	
 </fieldset>

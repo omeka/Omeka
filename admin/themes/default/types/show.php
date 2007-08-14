@@ -25,7 +25,7 @@
 
 	<div id="type-items">
 		<h2>Recent Items with Type <?php echo h($type->name); ?></h2>
-		<?php if($type->Items): ?>
+		<?php if($type->Items != null): ?>
 		<ul>
 		<?php foreach ($type->Items as $key => $item): ?>
 		<?php if ($key < 10): ?>

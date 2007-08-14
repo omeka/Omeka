@@ -7,8 +7,9 @@ var revealPath = "<?php echo $_SERVER['REQUEST_URI']; ?>";
 function revealChoice() {
 	if(!document.getElementById) return false;
 	var detailedView = $('detailed');
-	simpleView = $('simple');
-
+	var simpleView = $('simple');
+	if(!$('simple') || !$('detailed')) return;
+	
 	simpleView.onclick = function() {
 		revealSwitch( 'view-choice', 'simple');
 		this.addClassName('current');

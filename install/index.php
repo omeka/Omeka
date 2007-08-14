@@ -164,7 +164,7 @@ if (isset($_REQUEST['install_submit'])) {
 		echo '<div id="intro">';
 		echo '<h1>Oh Yeah!</h1>';
 		echo '<p>The db is setup and you are ready to roll. <a href="'.dirname($_SERVER['REQUEST_URI']).'">check out your site here!</a></p>';
-		echo '</div>'
+		echo '</div>';
 		$display_form = false;
 
 	} catch(Exception $e) {

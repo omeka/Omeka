@@ -1,3 +1,9 @@
+<div id="search-form">
+<h2 id="search-header" class="close">Search Items</h2>
+
+<?php items_filter_form(array('id'=>'search'), $url); ?>
+</div>
+
 <div id="pagination">
 <?php 
 	 echo pagination_links(5, null, null, null, null, uri('exhibits/items/'), 'page'); 
@@ -22,6 +28,4 @@
 	</div>
 <?php endforeach; ?>
 </div>
-<h2 id="search-header" class="close">Search Items</h2>
-
-<?php items_filter_form(array('id'=>'search'), $url); ?>		
+		

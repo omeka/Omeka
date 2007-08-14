@@ -173,8 +173,10 @@ function layout_form_item($order, $label='Enter an Item ID #') {
 	echo '</div>';
 }
 
-function layout_form_text($order, $label='Enter text') {
+function layout_form_text($order, $label='Text') {
+	echo '<div class="textfield">';
 	textarea(array('name'=>'Text['.$order.']','rows'=>'10','cols'=>'40','class'=>'textinput'), page_text($order, false), $label); 
+	echo '</div>';
 }
 
 /**
@@ -182,7 +184,7 @@ function layout_form_text($order, $label='Enter text') {
  *
  * @return array
  **/
-function get_ex_themes()
+function get_ex_themes() 
 {	
 	$path = EXHIBIT_THEMES_DIR;
 	$iter = new VersionedDirectoryIterator($path);
@@ -213,11 +215,14 @@ function exhibit_layout($layout, $input=true)
 	//Load the thumbnail image
 	$imgFile = WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'layout.gif';
 	echo '<div class="layout">';
-	echo '<img src="'.$imgFile.'" /><div class="input">';
+	echo '<img src="'.$imgFile.'" />';
 	if($input) {
+		echo '<div class="input">';
 		echo '<input type="radio" name="layout" value="'.$layout .'" />';
+		echo '</div>';
 	}
-	echo $layout . '</div></div>';
+	echo '<div class="layout-name">'.$layout.'</div>'; 
+	echo '</div>';
 	//Load the name/description/author from the header of the file
 	$file = EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.'.php';
 }

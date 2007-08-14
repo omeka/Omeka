@@ -170,7 +170,23 @@
 <div id="primary">
 	
 <form id="exhibit-form" method="post">
-	<fieldset id="exhibit-metadata">
+	<fieldset id="save-exhibit">
+		
+			<button type="submit" name="save_exhibit" id="save_exhibit" class="exhibit-button">Exhibit Metadata</button>
+			<button type="submit" name="add_section" id="add_section" class="exhibit-button">Add a Section</button>
+			<div id="pages_button" class="exhibit-button">Pages</div>
+			
+		
+	<?php 
+		//submit('Save &amp; Finish','save_exhibit');
+		//submit('Add a New Section', 'add_section');
+		
+		//submit('Re-order the Exhibit Sections','reorder_sections'); 
+	?>
+	
+	</fieldset>
+	<div id="exhibit-metadata">
+	<fieldset>
 		<legend>Exhibit Metadata</legend>
 		<?php echo flash();?>
 	<div class="field"><?php text(array('name'=>'title', 'class'=>'textinput', 'id'=>'title'), $exhibit->title, 'Exhibit Title'); ?></div>
@@ -183,11 +199,12 @@
 		<label for="featured">Exhibit is featured:</label>
 		<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $exhibit->featured); ?></div>
 	</div>
-	</fieldset>
-	
 	<input type="hidden" name="exhibit_id" id="exhibit_id" value="<?php echo h($exhibit->id); ?>" />
 	
-	<fieldset id="exhibit-display">
+	</fieldset>
+	</div>
+	<div id="exhibit-display">
+	<fieldset>
 		<legend>Exhibit Display Data</legend>
 		<div class="field">
 			<label for="theme">Exhibit Theme</label>
@@ -201,14 +218,10 @@
 			</ol>
 			<div id="add_section">Save &amp; Add a Section</div>
 			<div id="new-section"></div>
-			<?php //submit('Add a New Section', 'add_section'); ?>
+		
+		</div>
 		</fieldset>
-		<fieldset id="save-exhibit">
-		<?php 
-			submit('Save &amp; Finish','save_exhibit');
-			submit('Re-order the Exhibit Sections','reorder_sections'); 
-		?>
-		</fieldset>
+	</div>	
 </form>		
 </div>
 <?php foot(); ?>

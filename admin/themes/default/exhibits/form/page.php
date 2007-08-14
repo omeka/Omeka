@@ -1,15 +1,41 @@
 <?php head(); ?>
 <style type="text/css" media="screen">
 @import url('<?php layout_css(); ?>');
-#item-select {float:left; width: 378px;}
+#page-builder {width:910px;margin:18px 0 18px 36px;}
+#item-select {float:left; width: 378px; background:#DAE9F6; height:600px;}
 #layout-all {float:right; width:512px;}
 
-#layout-form .item-drop {width:100px; height:100px; overflow:hidden; border:2px solid #999; display:block;}
+#layout-form .item {clear:both;overflow:hidden; border-bottom:1px solid #ccc; margin-bottom:1.8em; padding-bottom:1.8em;}
+#layout-form .item-drop {width:100px; height:100px; float:left; overflow:hidden; border:2px solid #999; margin-right:2px; margin-bottom:2px;display:block;}
 
+#item-list {margin-left:18px;}
+#item-list .item-drop {font-size:1.2em; display:block;}
+#layout-form .textfield {float:right; width:390px;}
 #delete-page {clear:both;}
+#layouts {position:relative;  padding-top:0;}
+#layouts #layout-thumbs {padding-top:4em;}
+#layout-thumbs .layout-name {display:none;}
+#layouts #choose_layout {position:absolute; top:0; right:0;}
+#layouts .layout {cursor:pointer;}
+
+
 </style>
 
 <script type="text/javascript" charset="utf-8">
+	
+/*
+	Event.observe(window,'load',function() {
+		var layouts = $$('div.layout');
+		for (var i=0;i<layouts.length;i++) {
+			var layout = layouts[i];
+			var input = layout.getElementsByTagName('input')[0];
+			layout.onclick = function() {
+				input.checked = 'checked';
+				return;
+			}
+		}
+	});
+*/
 	
 	var paginate_uri = "<?php echo uri('exhibits/items'); ?>";
 	
@@ -27,9 +53,16 @@
 		
 	});
 	
+	function selectLayout() {
+		var layouts = $$('.layout');
+		for(var i=0;i<layouts.length;i++) {
+			
+		}
+	}
+	
 	function onLoadPagination() 
 	{
-		new Effect.Highlight('item-list');
+		//new Effect.Highlight('item-list');
 		
 		//Make each of the pagination links fire an additional ajax request
 		var links = $$('#pagination a');
@@ -69,12 +102,25 @@
 </script>
 <?php js('exhibits'); ?>
 <?php common('exhibits-nav'); ?>
-<div id="primary">
+<div id="page-builder">
 <?php if ( empty($page->layout) ): ?>
-
-<h2>Choose a layout for the page</h2>
 <form method="post" id="choose-layout">
-	<div id="layouts">
+	<fieldset>
+		<button type="submit" name="exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
+		<button type="submit" name="section_form" id="section_form" class="exhibit-button">Section Metadata</button>
+		
+		<div id="page_button" class="exhibit-button">Page Metadata</div>
+		
+		<?php 
+		//	submit('Exhibit', 'exhibit_form');
+		//	submit('New Page', 'page_form'); 
+		?>
+		
+	</fieldset>
+	
+	<fieldset id="layouts">
+		<legend>Layouts</legend>
+		<div id="layout-thumbs">
 <?php 
 	$layouts = get_ex_layouts();
 	
@@ -82,8 +128,11 @@
 		exhibit_layout($layout);
 	} 
 ?>
-	</div> 
-	<?php submit('Choose this layout','choose_layout');?>
+</div>
+<button type="submit" name="choose_layout" id="choose_layout" class="page-button">Choose a Layout</button>
+
+	</fieldset> 
+	
 </form>
 
 <?php else: ?>
@@ -98,22 +147,47 @@
 		
 	?>
 		
+	
+	<p class="warning">(Warning: You must save the form before paginating through the items otherwise its contents may be erased)</p>
+<form name="layout" id="page-form" method="post">
+	<fieldset id="tertiary-nav">
+		<button type="submit" name="exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
+		<button type="submit" name="section_form" id="section_form" class="exhibit-button">Section Metadata</button>
+		
+		<div id="page_button" class="exhibit-button" class="current">Page Metadata</div>
+		
+		<?php 
+		//	submit('Exhibit', 'exhibit_form');
+		//	submit('New Page', 'page_form'); 
+	//	submit('Save &amp; Add Another Page', 'page_form');
+		?>
+			
+	</fieldset>
+	<fieldset>
+			<button type="submit" name="page_form" id="page_form" class="page-button">Save and Add Another Page</button>
+			<button type="submit" name="cancel" id="cancel_page" class="page-button">Cancel This Page</button>
+	</fieldset>
+	
 	<div id="item-select">
 		
 	</div>
-	<p class="warning">(Warning: You must save the form before paginating through the items otherwise its contents may be erased)</p>
-<form name="layout" id="layout-all" method="post">
+	
+	<div id="layout-submits">
+		
+	<?php
+	//	submit('Save Changes &amp; Continue Paginating Through Items', 'save_and_paginate'); 
+	//	submit('Save &amp; Return to Exhibit', 'exhibit_form');
+	//	submit('Save &amp; Return to Section', 'section_form');
+	//	
+	//	submit('Save &amp; Add Another Page', 'page_form');
+	//	submit('Change the layout for this page', 'change_layout');	
+	?>
+	
+	</div>
+	<div id="layout-all">
 	<div id="layout-form">
 	<?php render_layout_form($page->layout); ?>
 	</div>
-	<div id="layout-submits">
-	<?php
-		submit('Save Changes &amp; Continue Paginating Through Items', 'save_and_paginate'); 
-		submit('Save &amp; Return to Exhibit', 'exhibit_form');
-		submit('Save &amp; Return to Section', 'section_form');
-		submit('Save &amp; Add Another Page', 'page_form');
-		submit('Change the layout for this page', 'change_layout');	
-	?>
 	</div>
 </form>
 	<?php if ( $page->exists() ): ?>

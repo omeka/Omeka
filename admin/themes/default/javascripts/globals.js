@@ -19,12 +19,13 @@ var Omeka = {
 
 function alertBox() {
 	var alerts = $$('div.alert');
+	
 	for(var i=0;i<alerts.length;i++) {
 		alert = alerts[i];
-		new Effect.Highlight(alert, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'});
+		alert.style.background = "white";
+		new Effect.Highlight(alert, {duration:'3.0',startcolor:'#ffff99', endcolor:'#ffffff'});
+	//	new Effect.Fade(alert,{duration:'6.0'});
 		return;
-		//new Effect.Fade(alert,{duration:'6.0'});
-		//return;
 	}
 }
 
@@ -85,7 +86,7 @@ function styleExhibitBuilder() {
 function filesAdding()
 {
 	
-	if(!$('add-more-files')) return false;
+	if(!$('add-more-files')) return;
 	if(!$('file-inputs')) return;
 	if(!$$('#file-inputs .files')) return;
 	var nonJsFormDiv = $('add-more-files');
@@ -116,6 +117,7 @@ function filesAdding()
 	
 	filesDivWrap.appendChild(link);
 }
+
 function roundCorners() {
 	Nifty('#primary-nav a,#secondary-nav a','top transparent');
 	Nifty('#view-style a','top transparent');
@@ -133,10 +135,8 @@ function checkDeleteItem() {
 	}
 }
 
-
 Event.observe(window,'load',roundCorners);
 Event.observe(window,'load',checkDeleteItem);
 Event.observe(window,'load',toggleSearch);
 Event.observe(window,'load',alertBox);
 Event.observe(window,'load',styleExhibitBuilder);
-

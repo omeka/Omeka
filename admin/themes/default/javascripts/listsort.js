@@ -4,6 +4,12 @@ function makeSortable(list) {
 	if(listSorter.handle) {
 		opt.handle = listSorter.handle;
 	}	
+	if(listSorter.overlap) {
+		opt.overlap = listSorter.overlap;
+	}
+	if(listSorter.constraint) {
+		opt.constraint = listSorter.constraint;
+	}
 //	Sortable.destroy(list);
 	
 	Sortable.create(list, opt);

@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset class="form-gallery-thumbs">
 	<?php 
 	layout_form_item(1);
 	layout_form_item(2);

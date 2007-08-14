@@ -276,7 +276,7 @@
 		</div>
 		</div>
 		
-<?php if(!has_files($item)):?>
+<?php if(has_files($item)==null):?>
 	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
 <?php else: ?>
 
