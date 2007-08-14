@@ -23,20 +23,6 @@
 
 <script type="text/javascript" charset="utf-8">
 	
-/*
-	Event.observe(window,'load',function() {
-		var layouts = $$('div.layout');
-		for (var i=0;i<layouts.length;i++) {
-			var layout = layouts[i];
-			var input = layout.getElementsByTagName('input')[0];
-			layout.onclick = function() {
-				input.checked = 'checked';
-				return;
-			}
-		}
-	});
-*/
-	
 	var paginate_uri = "<?php echo uri('exhibits/items'); ?>";
 	
 	Event.observe(window, 'load', function() {
@@ -53,11 +39,29 @@
 		
 	});
 	
-	function selectLayout() {
-		var layouts = $$('.layout');
-		for(var i=0;i<layouts.length;i++) {
-			
-		}
+	Event.observe(window, 'load', makeLayoutSelectable);
+	
+	function makeLayoutSelectable() {
+		var current_layout = $('current_layout');
+		var layouts = document.getElementsByClassName('layout');
+		
+		//Make each layout clickable
+		layouts.each( function(layout) {
+			layout.onclick = function() {
+				//Make a copy of the image
+				var img = this.getElementsByTagName('img')[0];
+				var copy = img.cloneNode(true);
+				
+				//Overwrite the contents of the div that displays the current layout
+				current_layout.update();
+				current_layout.appendChild(copy);
+				new Effect.Highlight(current_layout);
+
+				//Make sure the input is selected
+				var input = this.getElementsByTagName('input')[0];
+				input.click();
+			}
+		});		
 	}
 	
 	function onLoadPagination() 
@@ -120,6 +124,7 @@
 	
 	<fieldset id="layouts">
 		<legend>Layouts</legend>
+		<div id="current_layout"></div>
 		<div id="layout-thumbs">
 <?php 
 	$layouts = get_ex_layouts();
