@@ -1,7 +1,8 @@
-<div id="search-form">
+<div id="page-search-form">
 <h2 id="search-header" class="close">Search Items</h2>
-
-<?php items_filter_form(array('id'=>'search'), $url); ?>
+<div id="search">
+<?php items_filter_form(array(), $url); ?>
+</div>
 </div>
 
 <div id="pagination">

@@ -3,3 +3,9 @@
 	.gallery-full-top-right .primary .text {margin-left:18px;}
 	.gallery-full-top-right .secondary { padding:18px 18px 18px 0; background:#eee; margin:18px 18px 0;}
 	.gallery-full-top-right .secondary .item {float:left; margin-left:18px; margin-bottom:18px;}
+	
+.gallery-full-top-right .image-text {display:block; overflow:hidden; border-bottom:1px dotted #ccc; padding-bottom:18px; margin-bottom:18px;}
+	.gallery-full-top-right .image-text .item-drop {float:left;}
+	.gallery-full-top-right .image-text .textfield {float:right;}
+	
+	

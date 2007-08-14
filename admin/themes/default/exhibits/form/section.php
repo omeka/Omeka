@@ -52,18 +52,20 @@
 	<div class="field"><?php textarea(array('name'=>'description', 'id'=>'description', 'class'=>'textinput', 'rows'=>'10','cols'=>'40'), $section->description, 'Add a description for this section'); ?></div>
 
 	</fieldset>
-	
-	<?php if ( $section->Pages->count() ): ?>
 		<fieldset id="section-pages">
-			<legend>Pages in This Section</legend>
+			<legend>Pages in This Section</legend>	
+	<?php if ( $section->Pages->count() ): ?>
+	
 			<ul id="page-list">
 			<?php common('_page_list', compact('section'), 'exhibits'); ?>
 
 			</ul>
-
-	</fieldset>
+		
+	<?php else: ?>
+		<p>There are no pages in this section. <button type="submit" name="page_form" id="page_form" class="inline-button">Add a Page</button>
+		</p>
 	<?php endif; ?>
-	
+	</fieldset>
 
 	
 </form>

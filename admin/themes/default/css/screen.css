@@ -479,7 +479,7 @@ ul.tags, li.tag {display: inline;}
 
 	button.exhibit-button {padding-bottom:7px;}
 
-	#exhibit-form #save_exhibit, #section-form #section_button, #page-form #page_button {background:#9ed558; color:#fff;cursor:default;}
+	#exhibit-form #save_exhibit, #section-form #section_button, #choose-layout #page_button,#page-form #page_button {background:#9ed558; color:#fff;cursor:default;}
 
 	table#exhibits {clear:both;}
 

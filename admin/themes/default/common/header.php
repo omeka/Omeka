@@ -12,6 +12,7 @@
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
 <link rel="stylesheet" media="screen" href="<?php css('niftyCorners'); ?>" />
 
+<link rel="stylesheet" media="screen" href="<?php layout_css(); ?>" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" media="screen" href="<?php css('lte-ie6'); ?>" />
 <![endif]-->
