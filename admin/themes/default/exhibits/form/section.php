@@ -7,7 +7,7 @@
 		listSorter.list = $('page-list');
 		listSorter.form = $('section-form');
 		listSorter.editUri = "<?php echo $_SERVER['REQUEST_URI']; ?>";
-		listSorter.partialUri = "<?php echo uri('exhibits/ajaxPageList'); ?>";
+		listSorter.partialUri = "<?php echo uri('exhibits/pageList'); ?>";
 		listSorter.recordId = '<?php echo h($section->id); ?>';
 		listSorter.tag = 'tr';
 		listSorter.handle = 'handle';
@@ -48,17 +48,7 @@
 				<th>&nbsp;</th>
 			</tr>
 			<tbody id="page-list">
-			<?php foreach( $section->Pages as $key => $page ): ?>
-			<tr id="page_<?php echo $key; ?>">
-				<td class="handle"><img src="<?php echo img('icons/arrow_move.png'); ?>" alt="Drag" /></td>
-				<td><?php text(array('name'=>"Pages[$key][order]",'size'=>2), $key); ?></td>
-				<td><?php exhibit_layout($page->layout, false); ?></td>
-				<td><?php echo h($page->getItemCount()); ?></td>
-				<td><?php echo h($page->getTextCount()); ?></td>
-				<td><a href="<?php echo uri('exhibits/editPage/'.$page->id); ?>">[Edit]</a></td>
-				<td><a href="<?php echo uri('exhibits/deletePage/'.$page->id); ?>" class="delete-page">[Delete]</a></td>
-			</tr>
-			<?php endforeach; ?>
+			<?php common('_page_list', compact('section'), 'exhibits'); ?>
 			</tbody>
 		</table>
 	</fieldset>

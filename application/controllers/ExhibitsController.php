@@ -560,6 +560,13 @@ class ExhibitsController extends Kea_Controller_Action
 		$this->render('exhibits/_section_list.php', compact('exhibit'));
 	}
 	
+	public function pageListAction()
+	{
+		$section = $this->findById();
+		$section->loadPages();
+		$this->render('exhibits/_page_list.php', compact('section'));
+	}
+	
 	protected function findOrNew()
 	{
 		try {
