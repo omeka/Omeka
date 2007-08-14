@@ -67,15 +67,104 @@ class MetatextTable extends Doctrine_Table
 		
 		return $res;
 	}
+
+	/**
+	 * @param Item $item
+	 * @param array $metafields
+	 * @return array
+	 **/
+	public function findByMetafields($item, $metafields, $simple=true)
+	{
+		//Create a giant customized 'where' condition
+		$where = array();
+		foreach ($metafields as $metafield) {
+			$where[] = "mf.name = '{$metafield['name']}'";
+		}
+		$where = '(' . join(' OR ', $where) . ')';
+		
+		
+		$select = new Kea_Select;
+		
+		$select->from(array('Metafield', 'mf'), 'mf.name as name, mt.text as text, mf.id as metafield_id, mt.item_id')
+			
+		//Join the metafields, types_metafields, types
+		->joinLeft(array('Metatext', 'mt'), 'mt.metafield_id = mf.id')
+		->where($where);
+		
+		$select->where('(mt.item_id = ?)', $item->id);
+		
+//		echo $select;
+		
+		$rows = $select->fetchAll();
+		
+		$metatext = array();
+		foreach ($metafields as $name => $metafield) {
+			foreach ($rows as $row) {
+				if($row['name'] == $name) {
+					$metatext[$name] = $row;
+					continue 2;
+				}
+			}
+			
+		}		
+
+		//At this point, we should have two arrays with metafield names as keys
+		//$metafields and $metatext
+		//Now merge that business!
+
+		$result = array_merge($metafields, $metatext);
+		
+		
+		if($simple) return $this->getSimplified($result);
+		
+		return $result;
+		
+	}
+	
+	public function findByType($item, $type, $simple=true) {
+		
+		if(empty($type)) return array();
+		
+		//Retrieve the metafields
+
+			$select = new Kea_Select;
+		
+		$type_id = ($type instanceof Type) ? $type->id : $type;
+		
+		$select->from(array('Metafield','mf'), 'mf.name as name, mf.id as metafield_id')
+			->innerJoin(array('TypesMetafields','tm'), 'tm.metafield_id = mf.id')
+			->innerJoin(array('Type','t'), 't.id = tm.type_id')
+			->where('t.id = ?', $type_id);
+
+		$res = $select->fetchAll();	
+	
+		//Now pop the metafields into an array that has the name as the key
+		$metafields = array();
+		foreach ($res as $row) {
+			$metafields[$row['name']] = $row;
+		}
+		
+		//Now pull the data via the metafields
+		
+		return $this->findByMetafields($item, $metafields, $simple);
+	}
+	
+	
+	protected function getSimplified($res)
+	{
+		foreach ($res as $k => $row) {
+			$mt[$row['name']] = $row['text'];
+		}
+		 return $mt;
+	}
 	
 	public function findByItem($item, array $params = array(), $simplified = false)
 	{
 		$item_id = $item->exists() ? $item->id : 0;
 		
 		$select = new Kea_Select;
-		
 		$select->from(array('Metafield', 'mf'), 'DISTINCT(mf.name) as name, mt.text as text, mf.id as metafield_id')
-				
+			
 		//Join the metafields, types_metafields, types
 		->joinLeft(array('Metatext', 'mt'), 'mt.metafield_id = mf.id')
 		->joinLeft(array('TypesMetafields', 'tm'), 'tm.metafield_id = mf.id')
@@ -110,8 +199,8 @@ class MetatextTable extends Doctrine_Table
 		if(isset($params['type'])) {
 			$type = $params['type'];
 			
-			if(is_string($type)) {
-				$select->where('t.name =  ?', $type);
+			if(is_numeric($type)) {
+				$select->where('t.id = ?', $type);
 			}
 			
 			elseif($type instanceof $type) {
@@ -119,13 +208,13 @@ class MetatextTable extends Doctrine_Table
 			}
 			
 			else {
-				$select->where('t.id = ?', $type);
+				$select->where('t.name =  ?', $type);
 			}
 		}
 		
 		//Retrieve no type metatext unless the 'all' parameter is set
-		elseif(!isset($params['all'])) {
-			$select->where('t.id IS NULL');
+		elseif(!isset($params['all'])) {			
+			$select->where('(t.id IS NULL AND tm.id IS NULL AND mf.plugin_id IS NOT NULL)');
 		}
 
 //echo $select;
@@ -136,10 +225,7 @@ class MetatextTable extends Doctrine_Table
 		
 		//Simplified just means key/value pairs
 		if($simplified) {
-			foreach ($res as $k => $row) {
-				$mt[$row['name']] = $row['text'];
-			}
-			 return $mt;
+			return $this->getSimplified($res);
 		}
 		
 		

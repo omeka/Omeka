@@ -273,14 +273,14 @@
 	 *
 	 * @return void
 	 **/
-	function metatext_form($item, $type="textarea",$metafields=null) 
+	function metatext_form($item, $input="textarea",$metafields=null) 
 	{
 		if(!empty($metafields)) {
 
 			//Loop through the metafields
 			if(is_array(current($metafields))) {
 				foreach ($metafields as $key => $metafield) {
-					metatext_form($item, $type, $metafield);
+					metatext_form($item, $input, $metafield);
 				}
 			} else {
 				$field = $metafields;
@@ -297,7 +297,7 @@
 				}
 				
 				//Process a single metafield for this item
-				switch ($type) {
+				switch ($input) {
 					case 'text':
 						$input = '<input type="text" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'" value="'.h($metafield_value).'" />' . "\n\t";
 						break;

@@ -184,7 +184,7 @@ class Item extends Kea_Record
 	 **/
 	public function getTypeMetadata($simple = true)
 	{
-		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('type'=>$this->Type), $simple);
+		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByType($this, $this->type_id, $simple);
 	}
 	
 	
