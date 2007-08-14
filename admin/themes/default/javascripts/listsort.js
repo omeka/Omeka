@@ -49,9 +49,6 @@ function reorderList(container) {
 		new Ajax.Request(listSorter.editUri, {
 			method:'post',
 			parameters: serialized,
-			onFailure: function(t) {
-				alert(t.responseText);
-			},
 			onComplete: function(t) {
 				enableListForm(false);
 				
