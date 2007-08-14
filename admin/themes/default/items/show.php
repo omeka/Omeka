@@ -288,6 +288,8 @@
 				<th>File Name</th>
 				<th>Edit File</th>
 				<th>Delete File?</th>
+			</tr>
+			</thead>
 		<tbody>
 	<?php foreach( $item->Files as $key => $file ): ?>
 		<tr>
@@ -305,7 +307,6 @@
 			<td class="delete-link">
 				<a class="delete" href="<?php echo uri('files/delete/'.$file->id); ?>">Delete</a>
 			</td>	
-		</li>
 
 	<?php endforeach; ?>
 	</tbody>

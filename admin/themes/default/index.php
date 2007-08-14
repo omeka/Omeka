@@ -5,79 +5,62 @@
 
 			<div id="getting-started">
 				<h1>Getting Started with Omeka</h1>
-				<dl class="archive">
-					<dt><a href="<?php echo uri('items'); ?>">Archive</a></dt>
-					<dd>
+				<dl>
+					<dt class="archive"><a href="<?php echo uri('items'); ?>">Archive</a></dt>
+					<dd class="archive">
 						<ul>
 							<li><a class="add" href="<?php echo uri('items/add'); ?>">Add an item to your archive</a></li>
 							<li><a class="add-collection" href="<?php echo uri('collections/add'); ?>">Add a collection to group items</a></li>
 						</ul>
-						<p>Aliquam aliquet, est a ullamcorper condimentum, tellus nulla fringilla elit, a iaculis nulla turpis sed wisi. Fusce volutpat.</p>
-						
+						<p>Manage items in your archive: add, edit, and delete items. Learn about item types and group items into collections.</p>
 					</dd>
-				</dl>
+					
 				<?php if(has_permission('Exhibits','browse')): ?>
-				<dl class="exhibits">
-					<dt><a href="<?php echo uri('exhibits/browse'); ?>">Exhibits</a></dt>
-					<dd>
+					<dt class="exhibits"><a href="<?php echo uri('exhibits/browse'); ?>">Exhibits</a></dt>
+					<dd class="exhibits">
 						<ul>
 							<li><a class="browse-exhibits" href="<?php echo uri('exhibits/browse'); ?>">Browse exhibits</a></li>
 							<li><a class="add-exhibit" href="<?php echo uri('exhibits/add'); ?>">Create an exhibit</a></li>
 						</ul>
-						<p>Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus.</p>
-						
+						<p>Create and manage exhibits that display items in the archive.</p>
 					</dd>
-				</dl>
 				<?php endif; ?>
 				
 				<?php if(has_permission('Users','browse')): ?>
-				<dl class="users">
-					<dt><a href="<?php echo uri('users/browse'); ?>">Users</a></dt>
-					<dd>
+					<dt class="users"><a href="<?php echo uri('users/browse'); ?>">Users</a></dt>
+					<dd class="users">
 						<ul>
 							<li><a class="browse-users" href="<?php echo uri('users/browse'); ?>">Browse Users</a></li>
 							<li><a class="add-user" href="<?php echo uri('users/add'); ?>">Add a User</a></li>
 						</ul>
-						<p>Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus.</p>
-						
+						<p>Add and manage users of various levels: from researcher to super.</p>
 					</dd>
-				</dl>
 				<?php endif; ?>
 				
 				<?php if(has_permission('super')): ?>
-				
-				<dl class="site-settings">
-					<dt><a href="<?php echo uri('settings'); ?>">Settings</a></dt>
-					<dd>
+					<dt class="site-settings"><a href="<?php echo uri('settings'); ?>">Settings</a></dt>
+					<dd class="site-settings">
 						<ul>
 							<li><a class="editsettings" href="<?php echo uri('settings'); ?>">Edit General Settings</a></li>
 							<li><a class="managethemes" href="<?php echo uri('themes'); ?>">Manage Themes</a></li>
 							<li><a class="manageplugins" href="<?php echo uri('plugins'); ?>">Manage Plugins</a></li>
 						</ul>
-						<p>Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus.</p>
-						
+						<p>Manage your general settings for the site, including title, description, and themes.</p>
 					</dd>
-				</dl>
 			<?php endif; ?>
 			<?php //if(has_permission('names','browse')): ?>
-			
-				<dl class="names">
-					<dt><a href="<?php echo uri('entities/browse'); ?>">Names</a></dt>
-					<dd>
+					<dt class="names"><a href="<?php echo uri('entities/browse'); ?>">Names</a></dt>
+					<dd class="names">
 						<ul>
-							<li><a href="<?php echo uri('entities/browse'); ?>">Browse Names</a></li>
-							<li><a href="<?php echo uri('themes'); ?>">Manage Themes</a></li>
-							<li><a href="<?php echo uri('plugins'); ?>">Manage Plugins</a></li>
+							<li><a class="browse-names" href="<?php echo uri('entities/browse'); ?>">Browse Names</a></li>
 						</ul>
-						<p>Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus.</p>
-						
+						<p>Manage all names in your site, including people and institutions.</p>
 					</dd>
-				</dl>
+					</dl>
 			<?php //endif; ?>
-				<p>Need help with Omeka? Visit our <a href="http://omeka.org/codex/">codex</a> for detailed instructions for using and customizing our application.</p>
+			<p class="help">Need help with Omeka? Visit our <a href="http://omeka.org/codex/">codex</a> for detailed instructions for using and customizing our application.</p>
 			</div>
-		
-	
+			
 		</div>
 		<div id="site-info">
 			<div id="site-meta">

@@ -37,85 +37,85 @@
 	<tbody>
 		<tr>
 			<th>Collections</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Entities</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Exhibits</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Files</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Items</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td>limited</td>
+			<td>limited</td>
+			<td>limited</td>
 		</tr>
 		<tr>
 			<th>Plugins</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Settings</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Static</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Tags</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Themes</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Types</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th>Users</th>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /></td>
-			<td><img src="<?php img('icons/tick.png'); ?>" width="16" height="16" alt="yes" /> limited</td>
+			<td><img src="<?php img('icons/tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
+			<td>limited</td>
 			<td></td>
 			<td></td>
 		</tr>

@@ -21,7 +21,7 @@
 </form>
 
 <ul>
-<li id="backtosite"><a href="<?php echo uri(''); ?>">Back to <?php settings('site_title'); ?></a></li>
+<li id="backtosite"><?php link_to_home_page('View Public Site', array('id'=>'public-link')); ?></li>
 <li id="forgotpassword"><a href="<?php echo uri('users/forgotPassword'); ?>">Lost your password?</a></li>
 </ul>
 

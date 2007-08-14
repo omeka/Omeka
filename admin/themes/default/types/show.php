@@ -4,12 +4,13 @@
 <?php js('editable');?>
 <div id="primary">
 	<div id="type-info">
-	<h1>Type: <?php echo h($type->name);?>
-		 <?php if ( has_permission('Types','edit') ): ?>
-		 	<a id="edit" href="<?php echo uri('types/edit/'.$type->id); ?>">(Edit)</a>
-		<a id="delete" href="<?php echo uri('types/delete/'.$type->id); ?>">(Delete)</a>
-		 <?php endif; ?>
-	</h1>
+	<h1>Type: <?php echo h($type->name);?></h1>
+
+		<p><?php if ( has_permission('Types','edit') ): ?>
+		 	<a class="edit" href="<?php echo uri('types/edit/'.$type->id); ?>">Edit</a>
+			<a class="delete" href="<?php echo uri('types/delete/'.$type->id); ?>">Delete</a>
+		 <?php endif; ?></p>
+		
 		<p><?php echo h($type->description); ?></p>
 		<h2>Type Metadata</h2>
 		<dl class="type-metadata">

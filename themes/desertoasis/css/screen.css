@@ -69,11 +69,11 @@ abbr,acronym {border: none; font-style: normal;}
 #header,#nav {width: 1000px; margin: 0 auto; position: relative; margin: 1em 0 0; }
 #featured-item, #recent-items, #items, #show-item, #collections, #about, #exhibits {float: left; width: 662.28px; margin: 1em 0 0; overflow: hidden; }
 	#collection {margin: 0 1em 1em;}
-#content {width: 1000px; margin: 0 auto 2em; overflow: hidden;}
-#primary {float: left; margin-right: 24px;}
+#content {width: 1000px; margin: 0; overflow: hidden;}
+#primary {float: left;overflow: hidden;}
 	#primary div#pagination {width: auto; font-size: 1em; text-align: right;}
 	#primary div#pagination li {display: inline;}
-#secondary {float: left;}
+#secondary {float: right;}
 #footer {padding: 1em;}
 
 #searchwrap, #news, #tagcloud, #foot { width: 313.72px; overflow: hidden; margin: 1em 0 0;}
