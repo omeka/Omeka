@@ -381,7 +381,7 @@ class ExhibitsController extends Kea_Controller_Action
 	{
 		$section = $this->findById(null,'Section');
 		
-		if(isset($_GET['cancel'])) {
+		if(isset($_POST['cancel'])) {
 			unset($this->session->page);
 			$this->_redirect('editSection', array('id'=>$section->id));
 		}
