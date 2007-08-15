@@ -31,7 +31,7 @@ class UsersController extends Kea_Controller_Action
 			if($user) {
 				//Create the activation url
 				
-				
+			try {	
 				$ua->User = $user;
 				$ua->generate();
 				$ua->save();
@@ -39,21 +39,21 @@ class UsersController extends Kea_Controller_Action
 				$site_title = get_option('site_title');
 				
 				//Send the email with the activation url
-				$url = $this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
+				$url = $_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
 				$body 	= "Please follow this link to reset your password:\n\n";
-				$body  .= '<a href="'.$url.'">Reset Your Password</a>'."\n\n";
-				$body  .= "$site_title Administrator";				
+				$body  .= $url."\n\n";
+				$body  .= "$site_title Administrator";		
 				
 				$admin_email = get_option('administrator_email');
 				$title = "[$site_title] Reset Your Password";
 				$header = 'From: '.$admin_email. "\n" . 'X-Mailer: PHP/' . phpversion();
 				
-				echo "To: $email\n";
-				echo "$title\n\n";
-				echo $body."\n\n";
-				echo $header;
-				
 				mail($email,$title, $body, $header);
+				$this->flash('Your password has been emailed');	
+			} catch (Exception $e) {
+				  $this->flash('your password has already been sent to your email address');
+			}
+			
 			}else {
 				//If that email address doesn't exist
 				
