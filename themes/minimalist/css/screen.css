@@ -4,9 +4,10 @@
 /* == Generic styles ======== */
 body {font: 75% "Helvetica Neue",Helvetica, Arial, sans-serif; color: #444; background: #fffff8;  margin:0; }
 html>body {font-size: 12px;}
-p, span,ul,ol,dl  {font-size: 1em; line-height: 1.5em;}
+p, span,ul,ol,dl  {font-size: 1em; line-height: 1.6em;}
 abbr,acronym {border: none; font-style: normal;}
 img a {border: none;}
+strong {font-weight: bold;}
 
 /* Headings */
 h1, h2, h3 {font-family: 'Trebuchet MS'; font-weight: normal; }
@@ -43,7 +44,7 @@ h4 a:hover {color: #92278f; }
 #content {clear: both; margin-bottom: 2em;}
 #primary {clear: both; margin: 3em 0 0; width: 744px;}
 #secondary {clear: both; margin: 3em 0 0;}
-#featured-item {clear: both; margin: 1.5em 0;}
+#featured-item {clear: both; margin: 1.5em 0 1em;}
 #recent-items {clear: both; overflow: hidden; margin: 1.5em 0;}
 #tagcloud {margin-top: 2em;}
 #footer {clear: both; padding: 1em .5em; margin: 3em 0 1em; background-color: #eee;}
@@ -66,35 +67,32 @@ span.thumb {margin: 0 0 2em;}
 span.thumb a img {border: 1px solid #ccc;} 
 
 /* Random Featured Item */
-#featured-item {overflow: hidden; margin-bottom: 1em;}
-#featured-item h3 {margin: .0625em 0;}
-#featured-item h3 a:link, #featured-item h3 a:visited {text-decoration: none;}
-div.feat-metadata {width: 168px;}
-span.feat-img {float: right; padding-left: 1em;}
+#featured-item {overflow: hidden; width: 100%;}
+	#featured-item h3 {margin: .0625em 0 1.2em;}
+	#featured-item h3 a:link, #featured-item h3 a:visited {text-decoration: none;}
+	a.feat-img {float: right; padding-left: 1em;}
+	p.source {font-style: italic;}
 
 /* Recent Items */
 #recent-items img {vertical-align: top; margin: 0 0 1em 1em;}
-#recent-items ul li {float:right; width: 170px; height: 170px;}
+#recent-items ul li {list-style-type: square;list-style-position: outside; margin-left: 1.5em; padding: 0 0 .5em;}
 
 /* Browse and Item Pages */
-#pagination {float: left; font-size: .9em; width: auto;}
+#pagination {float: left; font-size: .9em; width: auto;display: block; margin-bottom: 1.6em;}
 	#pagination li {display: inline; padding: 0 .5em 0 0;}
 	#pagination a {padding: 0 .5em 0 0;}
 
-.item {overflow: hidden; width: 318px; min-height: 187px; float: left; border-bottom: 1px solid #eee; padding-bottom: 18px;}
+.item {overflow: hidden; clear: both; border-bottom: 1px solid #eee; padding-bottom: 18px;}
 	.item .item-content {float:right; margin-left: 18px; margin-bottom: 18px;}
 	.item .item-meta {float:left;}
  	.item span {line-height: 1.5em; margin-bottom: 1.5em;}
 	.item span.thumb {float: right;}
-	.iten div.item-img {margin: 9px;}
+	.item div.item-img {padding-left: 9px; float: right;}
 .hentry {margin: 18px 36px 18px 18px; }
 
 dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
-dl#metadata dt { width: 38%;float: left;padding: 0.5em 0; border-bottom: 1px dotted #ddd;font-weight: bold;}
-/* commented backslash hack for mac-ie5 \*/
-dl#metadata dt { clear: both; }
-/* end hack */
-dl#metadata dd {float: left;width: 62%;padding: 0.5em 0;border-bottom: 1px dotted #ddd;}
+dl#metadata dt { width: 38%;float: left;padding: 0.5em 0; font-weight: bold;clear: both; }
+dl#metadata dd {float: left;width: 62%;padding: 0.5em 0;}
 dl#metadata ul {font-size: inherit; margin: 0;}
 ul.tags li {display: inline;}
 

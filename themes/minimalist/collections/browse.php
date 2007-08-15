@@ -5,7 +5,7 @@
 			<div class="collection">
 				<?php $collectors=$collection->Collectors; ?>
 				<h3><a href="<?php echo uri('collections/show/'.$collection->id); ?>"><?php echo $collection->name; ?></a></h3>
-				<p><?php foreach($collectors as $collector):?>Collector: <?php echo $collector->name; ?><?php endforeach; ?></p>
+				<p><strong>Collector(s):</strong> <ul><?php foreach($collectors as $collector):?><li><?php echo $collector->name; ?></li><?php endforeach; ?></ul></p>
 				<p><a href="<?php echo uri('items/browse/'); ?>">View the items in <?php echo $collection->name; ?></a></p>
 			</div>
 		<?php endforeach; ?>

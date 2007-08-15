@@ -27,9 +27,9 @@
 			<h5><?php settings('description'); ?></h5>
 			<ul id="primary-nav" class="navigation">
 			<?php
-				nav(array('Inspiration' => uri('items/browse'), 'Exhibits' => uri('exhibits'), 'Collections' => uri('collections')));
+				nav(array('Items' => uri('items/browse'), 'Exhibits' => uri('exhibits'), 'Collections' => uri('collections')));
 			?>
-			<li id="news"><a href="#">News</a></li>
+			<li id="news"><a href="about">About</a></li>
 			</ul>
 		</div>
 		<div id="content">
