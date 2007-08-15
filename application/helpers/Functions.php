@@ -642,7 +642,7 @@ function has_tags($item, array $tags=array()) {
 }
 
 function has_files($item) {
-	return $item->Files->count() > 0;
+	return ( ($item->Files->count() > 0) and ($item->Files[0]->exists()) );
 }
 
 /**
