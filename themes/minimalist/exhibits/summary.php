@@ -1,10 +1,10 @@
 <?php head(); ?>
 <div id="primary">
-<h1>Exhibit Title: <?php echo h($exhibit->title); ?></h1>
-<h2>Description</h2>
+<h2><?php echo h($exhibit->title); ?></h2>
+<h3>Description</h3>
 <?php echo nls2p($exhibit->description); ?>
 
-<h2>Credits</h2>
+<h3>Credits</h3>
 <p><?php echo h($exhibit->credits); ?></p>
 
 

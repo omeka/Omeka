@@ -14,28 +14,22 @@
 </script>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
-<table id="exhibits">
-	<thead>
-	<tr>
-		<th>Identification #</th>
-		<th>Title</th>
-		<th>Tags</th>
-	</tr>
-	</thead>
-	<tbody>
-		
-<?php 
-	$exhibits = exhibits(); 
-?>
+	<?php $exhibits = exhibits(); 
+	if($exhibits):
+	?>
+	<h2>Exhibits</h2>
+<div id="exhibits">
 		
 <?php foreach( $exhibits as $key=>$exhibit ): ?>
-	<tr class="exhibit <?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
-		<td><?php echo $exhibit->id;?></td>
-		<td><?php link_to_exhibit($exhibit); ?></td>
-		<td><?php echo tag_string($exhibit, uri('exhibits/browse/tag/')); ?></td>
-	</tr>
+	<div class="exhibit <?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
+		<h3><?php link_to_exhibit($exhibit); ?></h3>
+		<div class="description"><?php echo nls2p($exhibit->description); ?></div>
+		<div class="tags"><?php echo tag_string($exhibit, uri('exhibits/browse/tag/')); ?></div>
+	</div>
 <?php endforeach; ?>
-</tbody>
-</table>
+</div>
+<?php else: ?>
+	<p>You have no exhibits. Please add some in the admin.</p>
+	<?php endif; ?>
 </div>
 <?php foot(); ?>

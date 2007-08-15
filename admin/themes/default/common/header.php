@@ -40,12 +40,19 @@
 									
 			<ul id="primary-nav" class="navigation">
 			<?php
-				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items'),'Exhibits' => uri('exhibits') );
+				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items'));
+				
+				if(has_permission('exhibits','add')){
+				$header_navigation['Exhibits'] = uri('exhibits');
+			}
 				if(has_permission('Users','browse') ) {
 					$header_navigation['Users'] = uri('users/browse');
 				}
-				$header_navigation['Names'] = uri('entities');
 				
+				if(has_permission('entities','add')) {
+				
+				$header_navigation['Names'] = uri('entities');
+				}
 				if(has_permission('super')) {
 					$header_navigation['Settings'] = uri('settings');
 				}

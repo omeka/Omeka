@@ -97,6 +97,9 @@ dl#metadata ul {font-size: inherit; margin: 0;}
 ul.tags li {display: inline;}
 
 /* Exhibits */
+table#exhibits {width:100%;}
+table#exhibits th {text-align:left;}
+
 .exhibit-section-nav, .exhibit-page-nav { list-style:none; margin-left:0; padding-left:0;}
 .exhibit-section-nav li, .exhibit-page-nav li {display:inline; margin-left:0; padding-left:0; margin-right:8px;}
 

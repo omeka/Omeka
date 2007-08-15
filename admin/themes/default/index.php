@@ -48,7 +48,7 @@
 						<p>Manage your general settings for the site, including title, description, and themes.</p>
 					</dd>
 			<?php endif; ?>
-			<?php //if(has_permission('names','browse')): ?>
+			<?php if(has_permission('entities','add')): ?>
 					<dt class="names"><a href="<?php echo uri('entities/browse'); ?>">Names</a></dt>
 					<dd class="names">
 						<ul>
@@ -57,7 +57,7 @@
 						<p>Manage all names in your site, including people and institutions.</p>
 					</dd>
 					</dl>
-			<?php //endif; ?>
+			<?php endif; ?>
 			<p class="help">Need help with Omeka? Visit our <a href="http://omeka.org/codex/">codex</a> for detailed instructions for using and customizing our application.</p>
 			</div>
 			

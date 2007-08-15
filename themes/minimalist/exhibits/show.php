@@ -1,9 +1,9 @@
 <?php head(); ?>
 
-	<h1><?php echo $exhibit->title; ?></h1>
+	<h2><?php echo $exhibit->title; ?></h2>
 	<?php section_nav();?>
 	
-	<h2><?php echo $section->title; ?></h2>
+	<h3><?php echo $section->title; ?></h3>
 		<?php page_nav();?>
 		
 	<?php echo flash(); ?>
