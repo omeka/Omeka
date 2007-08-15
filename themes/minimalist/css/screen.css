@@ -98,6 +98,10 @@ dl#metadata dd {float: left;width: 62%;padding: 0.5em 0;border-bottom: 1px dotte
 dl#metadata ul {font-size: inherit; margin: 0;}
 ul.tags li {display: inline;}
 
+/* Exhibits */
+.exhibit-section-nav, .exhibit-page-nav { list-style:none; margin-left:0; padding-left:0;}
+.exhibit-section-nav li, .exhibit-page-nav li {display:inline; margin-left:0; padding-left:0; margin-right:8px;}
+
 /* Microformats */
 .hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
 	.hTagcloud li {display:inline;}

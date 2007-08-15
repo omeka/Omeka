@@ -1,2 +1,2 @@
-.image-list-right .item {overflow:hidden;}
-	.image-list-right .item img {float:right; margin-right:20px; margin-bottom:20px;}
+.image-list-right .exhibit-item {overflow:hidden; width:auto;}
+	.image-list-right .exhibit-item img {float:right; margin-right:20px; margin-bottom:20px;}

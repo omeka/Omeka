@@ -1,2 +1,3 @@
-.gallery-full-left .primary {float:left; width:48%;}
+.gallery-full-left .primary {float:left; width:48%;overflow:hidden;}
 .gallery-full-left .secondary {float:right; width:48%;}
+.gallery-full-left .gallery .exhibit-item {float:left; margin-right:18px; margin-bottom:18px;}

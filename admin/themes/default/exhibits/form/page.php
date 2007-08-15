@@ -7,9 +7,9 @@
 #layout-form .item {clear:both;overflow:hidden; border-bottom:1px solid #ccc; margin-bottom:1.8em; padding-bottom:1.8em;}
 #layout-form .item-drop {width:100px; height:100px; float:left; overflow:hidden; border:2px solid #999; margin-right:2px; margin-bottom:2px;display:block;}
 
-#item-list .item-drag {width:100px; height:100px; overflow:hidden; border:1px solid #38c;}
+#item-list .item-drag {width:100px; height:116px; overflow:hidden; float:left; margin-right:8px; margin-bottom:8px;}
+#item-list .item-drop {top:0; left:0;}
 #item-list {margin-left:18px;}
-#item-list .item-drop {font-size:1.2em; display:block;}
 #layout-form .textfield {float:right; width:390px;}
 #delete-page {clear:both;}
 #layouts {position:relative;  padding-top:0;}
@@ -23,11 +23,20 @@
 #layouts .layout input {display:none;}
 
 #layout-form .primary, #layout-form .secondary {float:none; display:block; width:100%;overflow:hidden; clear:both;}
-
 </style>
 
 <script type="text/javascript" charset="utf-8">
-	
+/*
+	    Event.observe(window,'load',function() {
+            div = document.getElementById("item-select");
+			div.style.position = "absolute";
+		//	div.style.bottom = '100px';
+		//	window.onscroll = function() {
+        //    div.style.top = (300 + self.pageYOffset) + "px";
+		}
+        });
+*/
+    //pageYOffset
 	var paginate_uri = "<?php echo uri('exhibits/items'); ?>";
 	
 	Event.observe(window, 'load', function() {

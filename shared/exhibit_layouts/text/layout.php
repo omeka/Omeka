@@ -4,7 +4,7 @@
 	//Author: Jeremy Boggs; 
 ?>
 
-<div class="document-text-right">
+<div class="text-full">
 	<div class="primary">
 	<?php echo page_text(1); ?>
 	</div>

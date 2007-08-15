@@ -257,7 +257,7 @@ function section_nav()
 	$exhibit = Zend::registry('exhibit');
 	
 	//Use class="section-nav"
-	echo '<ul class="section-nav">';
+	echo '<ul class="exhibit-section-nav">';
 	
 	foreach ($exhibit->Sections as $key => $section) {		
 	
@@ -278,15 +278,16 @@ function page_nav()
 	
 	$section = Zend::registry('section');
 		
-	echo '<ul class="page-nav">';
+	echo '<ul class="exhibit-page-nav">';
 	
 	$key = 1;
+	$section->loadPages();
 	foreach ($section->Pages as $key => $page) {
 	
 		$uri = exhibit_uri($section->Exhibit, $section, $page);
 		
 		//Create the link (also check if uri matches current uri)
-		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">' . h($key) . '</a></li>';
+		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">Page ' . $key . '</a></li>';
 	
 	}
 	
