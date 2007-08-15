@@ -320,6 +320,11 @@ class ExhibitsController extends Kea_Controller_Action
 	
 	protected function processSectionForm($section, $exhibit=null)
 	{
+		//Check for a 'cancel' button so we can redirect
+		if(isset($_POST['cancel_section'])) {
+			$this->_redirect('editExhibit', array('id' => $section->exhibit_id));
+		}
+		
 		try {
 			$retVal = $section->commitForm($_POST);
 		} catch (Exception $e) {

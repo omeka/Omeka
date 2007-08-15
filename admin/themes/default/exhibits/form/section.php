@@ -32,7 +32,7 @@
 
 <form method="post" accept-charset="utf-8" action="" id="section-form">
 	<fieldset>
-		<button type="submit" name="exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
+		<button type="submit" name="cancel_section" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
 		<div id="section_button" class="exhibit-button">Section Metadata</div>
 		<button type="submit" name="page_form" id="page_form" class="exhibit-button">Add a Page</button>
 				
