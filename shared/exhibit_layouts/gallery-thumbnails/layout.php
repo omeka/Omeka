@@ -9,7 +9,7 @@
 	<div class="item">
 		<?php $item = page_item(1); ?>
 		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
-			</div>
+	</div>
 	<div class="item">
 		<?php $item = page_item(2); ?>
 		<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>

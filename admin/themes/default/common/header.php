@@ -44,10 +44,11 @@
 				if(has_permission('Users','browse') ) {
 					$header_navigation['Users'] = uri('users/browse');
 				}
+				$header_navigation['Names'] = uri('entities');
+				
 				if(has_permission('super')) {
 					$header_navigation['Settings'] = uri('settings');
 				}
-				$header_navigation['Names'] = uri('entities');
 				admin_nav($header_navigation);
 
 			?>

@@ -1,8 +1,2 @@
-
-#gallery ul {
-	display:inline;
-	float:left;
-}
-#gallery div {
-	display:block;
-}
+.gallery-full-left .primary {float:left; width:48%;}
+.gallery-full-left .secondary {float:right; width:48%;}

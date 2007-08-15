@@ -47,7 +47,7 @@
 			var elId = tooltipIds[i];
 			$(elId).style.cursor = "help";
 			var image = document.createElement('img');
-			image.src = "<?php echo img('icons/information.png'); ?>";
+			image.src = "<?php echo img('information.png'); ?>";
 			$(elId).appendChild(image);
 			$(elId).style.paddingLeft = "20px";
 			var tooltipId = elId + '_tooltip';

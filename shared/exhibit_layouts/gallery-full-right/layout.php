@@ -4,7 +4,7 @@
 	//Author: Jeremy Boggs; 
 ?>
 
-<div class="gallery-full-right">
+<div class="<?php echo $layout; ?>">
 	<div class="primary">
 	<div class="item-full">
 		<?php $item = page_item(1); ?>

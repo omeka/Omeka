@@ -494,7 +494,7 @@ ul.tags, li.tag {display: inline;}
 	#add-new-section-form {background: #fff09e; overflow:hidden; width:342px; padding:18px;}
 	#add-new-section-form .field {}
 
-	#layouts .layout {display:block; float:left; text-align:center; border:1px solid #ccc; margin-left:18px; margin-bottom:18px; width:150px;}
+	#layouts .layout {display:block; float:left; text-align:center; border:1px solid #ccc; margin-right:18px; margin-bottom:18px; padding:6px 0;width:100px;}
 
 	#section-meta {display:block;float:left; width: 450px;}
 	#section-description {display:block; float:right;width:450px;}

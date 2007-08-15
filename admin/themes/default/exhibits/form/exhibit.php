@@ -5,7 +5,7 @@
 //<![CDATA[
 
 	Event.observe(window,'load',function() {
-		$('add_section').onclick = function() {
+		$('add-section').onclick = function() {
 			var exhibit_id = getExhibitId();
 			
 						
@@ -36,7 +36,7 @@
 			},
 			onComplete: function(t) {
 				//Now make the add/cancel links work
-				var addLink = $('add_section');
+				var addLink = $('add-section');
 				var cancelLink = $('cancel-add');
 				addLink.onclick = addSection;
 				cancelLink.onclick = removeAddSectionForm;
@@ -199,7 +199,6 @@
 		<label for="featured">Exhibit is featured:</label>
 		<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $exhibit->featured); ?></div>
 	</div>
-	<input type="hidden" name="exhibit_id" id="exhibit_id" value="<?php echo h($exhibit->id); ?>" />
 	
 	</fieldset>
 	</div>
@@ -216,8 +215,9 @@
 			<ol id="section-list">
 				<?php common('_section_list', compact('exhibit'), 'exhibits'); ?>
 			</ol>
-			<div id="add_section">Save &amp; Add a Section</div>
+			<div id="add-section">Save &amp; Add a Section</div>
 			<div id="new-section"></div>
+			<input type="hidden" name="exhibit_id" id="exhibit_id" value="<?php echo h($exhibit->id); ?>" />
 		
 		</div>
 		</fieldset>

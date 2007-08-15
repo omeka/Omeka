@@ -18,8 +18,11 @@
 #layouts #choose_layout {position:absolute; top:0; right:0;}
 #layouts .layout {cursor:pointer;}
 #search {background:#B5D4EC;border-bottom:1px solid #fff;}
-
+#layout-form label {display:none;}
 	#page-search-form .textinput {width:358px;}
+#layouts .layout input {display:none;}
+
+#layout-form .primary, #layout-form .secondary {float:none; display:block; width:100%;overflow:hidden; clear:both;}
 
 </style>
 
@@ -51,6 +54,12 @@
 		layouts.each( function(layout) {
 			layout.onclick = function() {
 				//Make a copy of the image
+				layouts.each(function(layout) {
+					layout.style.border = "1px solid #ccc";
+					layout.style.backgroundColor = "#fff";
+				})
+				this.style.border = "1px solid #6BA8DA";
+				this.style.backgroundColor = "#A2C9E8"
 				var img = this.getElementsByTagName('img')[0];
 				var copy = img.cloneNode(true);
 				
