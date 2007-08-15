@@ -126,7 +126,7 @@ dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
 	/* end hack */
 
 	dl#metadata dd {float: left; width: 62%; padding: 0.5em 0;}
-	dl#metadata ul {font-size: inherit; margin: 0;}
+	dl#metadata ul {font-size: inherit; margin: 0;list-style-position: outside;}
 	ul.tags li {display: inline;}
 	
 	#collections dl {border-bottom: 1px solid #aec197; font-size: 1em; padding: 0 0 1em 0;}

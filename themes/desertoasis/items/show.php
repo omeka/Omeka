@@ -12,8 +12,8 @@
 
 	<dl id="metadata">
 		
-		<dt id="desc">Description</dt>
-		<dd>
+		<dt>Description</dt>
+		<dd id="desc">
 			<?php if($item->description): echo $item->description; else: ?>
 			<span>none available</span>
 			<?php endif; ?>

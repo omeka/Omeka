@@ -3,7 +3,7 @@
 
 		<div id="about" class="cbb">
 		<h2>About</h2>
-		<p>Morbi non erat non ipsum pharetra tempus. Donec orci. Proin in ante. Pellentesque sit amet purus. Cras egestas diam sed ante. Etiam imperdiet urna sit amet risus. Donec ornare arcu id erat. Aliquam ultrices scelerisque sem. In elit nulla, molestie vel, ornare sit amet, interdum vel, mauris. Etiam dignissim imperdiet metus.</p>
+		<p>Here is an example of an about page.</p>
 
 		</div><!--end about -->
 	

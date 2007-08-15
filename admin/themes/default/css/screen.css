@@ -83,7 +83,7 @@ input#tags-submit {display: inline;}
 	.navigation a {text-decoration:none;}
 
 .error {background:#f1c8ba; color:#933; margin:1.5em; font-size:1.2em; padding:1.5em;}
-.alert {color:#555; font-size:1.2em; padding:0.75em;}
+.alert {background:#fff09e;}
 
 .tooltip {font-size:1.2em; line-height:1.5em;}
 .info-window {background:#fff09e; z-index:100;display:block;width:300px; padding:1.5em; border:1px solid #cdcdc5;}
@@ -93,7 +93,8 @@ input#tags-submit {display: inline;}
 ul.tags, li.tag {display: inline;}
 	li.tag a {float: none; clear: none; width: auto;}
 	
-
+.button {margin-bottom: 1.5em;}
+	
 /* Icons */
 .contributor,
 .super,
@@ -101,7 +102,6 @@ ul.tags, li.tag {display: inline;}
 .researcher,
 .default,
 .add,
-.alert,
 .delete,
 .error,
 .edit,
@@ -230,7 +230,7 @@ ul.tags, li.tag {display: inline;}
 		.themes #secondary-nav .nav-themes a,
 		.plugins #secondary-nav .nav-plugins a,
 		.users #secondary-nav .nav-browse-users a,
-		.files #secondary-nav .nav-items a,
+		.files #secondary-nav .nav-items a
 		#secondary-nav .current a
 		{background:#fff; color:#555;}
 		
@@ -455,37 +455,14 @@ ul.tags, li.tag {display: inline;}
 	.section-delete a {text-decoration:none; color:red;}
 	.section-edit a {text-decoration:none; color:#38c;}
 
-	.button {margin-bottom: 1.5em;}
+	table#exhibits {width:774px;}
 
+	#exhibit-form {}
 
-	.exhibit-button {
-	    display:block;
-	    float:left;
-	text-transform: uppercase;
-	    margin:0 1px 0 0;
-	    background-color:#f5f5f5;
-	    border:1px solid #dedede;
-	    border-top:1px solid #eee;
-	    border-left:1px solid #eee;
-	text-align:left;
-	    font-size:1.4em;
-	width:280px;
-	    line-height:130%;
-	    text-decoration:none;
-	cursor:pointer;
-	    color:#999;
-	    padding:5px 0 8px 20px; /* Links */
-	}
+	#exhibit-metadata {float:left; width:378px;}
+	#exhibit-display {float:right; width: 378px;}
 
-	button.exhibit-button {padding-bottom:7px;}
-
-	#exhibit-form #save_exhibit, #section-form #section_button, #choose-layout #page_button,#page-form #page_button {background:#9ed558; color:#fff;cursor:default;}
-
-	table#exhibits {clear:both;}
-
-	#exhibit-metadata {display:block;float:left; width:450px;overflow:hidden;}
-	#exhibit-display {float:right; display:block;width: 450px;overflow:hidden;}
-
+	#section-list-container {clear:both;}
 
 		#section-list li {display:block; float:left; clear:left;}
 		#section-list li .left {display:block; float:left; width: 70%;}
@@ -494,27 +471,21 @@ ul.tags, li.tag {display: inline;}
 	#add-new-section-form {background: #fff09e; overflow:hidden; width:342px; padding:18px;}
 	#add-new-section-form .field {}
 
-	#layouts .layout {display:block; float:left; text-align:center; border:1px solid #ccc; margin-right:18px; margin-bottom:18px; padding:6px 0;width:100px;}
-
-	#section-meta {display:block;float:left; width: 450px;}
-	#section-description {display:block; float:right;width:450px;}
-
-	#section-pages {clear:both;}
-	#page-list .page {overflow:hidden; border-right:1px dotted #ccc;width:180px;float:left;}
-	#page-list img {margin:0 auto; text-align:center;float:left;}
-		#page-list .page-info {float:left; width:48%;}
-		#page-list span {display:inline;}
-		#page-list .page-links {float:right; width: 48%;}
-
-	#page-links input {background:#fff; color:#555; border:none;}
-	#page-list .layout-name {display:none;}
-	
 	/* Users */
 	#add-user {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:7.5em; display:block;}
 	#add-user:hover {background-color:#e9f6da;}
 	
-	#users {clear: both;float:left; width: 494px;display:block;background:#fff; padding:0;}
+	#users {clear: both;float:left; width: 512px;background:#fff; padding:0 18px 0 0;}
 		#users tr {width:100%;}
+
+	#new-user-form {float:right; width: 346px; display:block; padding:18px;background: #DAE9F6;margin-bottom: 1.8em;}
+		#new-user-form fieldset {overflow:hidden; border-width:0;}
+		#new-user-form legend {background:transparent;}
+		#new-user-form .textinput, #new-user-form select {width:216px; float:right;background:#fff;margin:0;}
+		#new-user-form select {width: 226px;}
+		#new-user-form label {float:left;width: 104px;text-align:right;margin:0;}
+		#new-user-form .field {overflow:hidden;clear:both; margin-bottom:0.5em;}
+		#new-user-form #entity-type {margin-bottom:1.5em;}
 
 	input#institution {margin-bottom: 1.5em;}
 	
@@ -527,19 +498,10 @@ ul.tags, li.tag {display: inline;}
 	table#userroles th.rolename {text-align: center; background-color: #F6DAE9;}
 	table#userroles tbody td {border: 1px solid #cdcdc5; text-align: center; padding: .833333em .833333em 0;}
 
-	#new-user-form {float:right; width: 364px; display:block; padding:18px;background: #DAE9F6;margin-bottom: 1.8em;}
-		#new-user-form fieldset {overflow:hidden; border-width:0;}
-		#new-user-form legend {background:transparent;}
-		#new-user-form .textinput, #new-user-form select {width:216px; float:right;background:#fff;margin:0;}
-		#new-user-form select {width: 226px;}
-		#new-user-form label {float:left;width: 122px;text-align:right;margin:0;}
-		#new-user-form .field {overflow:hidden;clear:both; margin-bottom:0.5em;}
-		#new-user-form #entity-type {margin-bottom:1.5em;}
-
 	/* Themes Browse */
 	.theme {clear: both; overflow:hidden; border:1px dotted #ccc; border-width: 0 0 1px; margin:18px 0;}
 		.theme .description {float:right; width:606px;}
-			.theme .description img {float:left; margin-right:18px; margin-bottom:18px;}
+			.theme .description img {float:left; margin-right:18px; margin-bottom:18px; border: 1px solid #ccc;}
 		.theme .meta {float:left; width:294px;}
 			.theme .meta label {font-size:1.6em;}
 			.theme .meta ul {background: #F6DAE9; padding:18px; width:258px;}
