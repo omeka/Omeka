@@ -352,6 +352,9 @@ class ExhibitsController extends Kea_Controller_Action
 				$this->_redirect('addPage', array('id'=>$section->id));
 				return;
 				
+			}elseif(array_key_exists('add_new_section', $_POST)) {
+				//Forward back to adding a new section to the exhibit
+				$this->_redirect('addSection', array('id'=>$section->Exhibit->id));
 			}
 		}
 		

@@ -35,7 +35,7 @@
 		<button type="submit" name="exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
 		<div id="section_button" class="exhibit-button">Section Metadata</div>
 		<button type="submit" name="page_form" id="page_form" class="exhibit-button">Add a Page</button>
-		
+				
 		<?php 
 		//	submit('Exhibit', 'exhibit_form');
 		//	submit('New Page', 'page_form'); 
@@ -44,6 +44,9 @@
 	</fieldset>
 	<fieldset id="section-meta">
 		<legend>Section Meta</legend>
+		
+		<input type="submit" name="add_new_section" value="Save &amp; Add Another Section --&gt;" />
+		
 	<div class="field"><?php text(array('name'=>'title', 'id'=>'title', 'class'=>'textinput'), $section->title, 'Title for the Section'); ?></div>
 		<div class="field"><?php text(array('name'=>'slug','id'=>'slug','class'=>'textinput'), $section->slug, 'URL Slug (optional)'); ?></div>
 	</fieldset>

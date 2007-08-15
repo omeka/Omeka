@@ -7,7 +7,7 @@ function link_to_exhibit($exhibit, $text=null, $props=array(), $section=null, $p
 	
 	$text = !empty($text) ? $text : $exhibit->title;
 	
-	echo '<a href="'.uri($uri).'">' . h($text) . '</a>';
+	echo '<a href="'.$uri.'">' . h($text) . '</a>';
 }
 
 function exhibit_uri($exhibit, $section=null, $page=null)
