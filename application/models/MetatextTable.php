@@ -80,17 +80,20 @@ class MetatextTable extends Doctrine_Table
 		foreach ($metafields as $metafield) {
 			$where[] = "mf.name = '{$metafield['name']}'";
 		}
-		$where = '(' . join(' OR ', $where) . ')';
-		
 		
 		$select = new Kea_Select;
+		
+		if(count($where)) {
+			$where = '(' . join(' OR ', $where) . ')';
+			$select->where($where);
+		}		
+		
+		
 		
 		$select->from(array('Metafield', 'mf'), 'mf.name as name, mt.text as text, mf.id as metafield_id, mt.item_id')
 			
 		//Join the metafields, types_metafields, types
-		->joinLeft(array('Metatext', 'mt'), 'mt.metafield_id = mf.id')
-		->where($where);
-		
+		->joinLeft(array('Metatext', 'mt'), 'mt.metafield_id = mf.id');		
 		$select->where('(mt.item_id = ?)', $item->id);
 		
 //		echo $select;
@@ -152,6 +155,7 @@ class MetatextTable extends Doctrine_Table
 	
 	protected function getSimplified($res)
 	{
+		$mt = array();
 		foreach ($res as $k => $row) {
 			$mt[$row['name']] = $row['text'];
 		}
