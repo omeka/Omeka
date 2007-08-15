@@ -178,7 +178,21 @@ function dragDropForm() {
 		moveDraggable(draggable, droppable);
 	});
 	
-	//Add an onMouseover to each draggable that will show up a little menu of options (like delete)
+	//Add a little 'clear' button to the top of each item-drop div
+	formContainers.each( function(drop) {
+		var clear = document.createElement('a');
+		clear.innerHTML = "Remove This Item";
+		clear.className = 'remove_item';
+		clear.onclick = function() {
+			var drag = getItemFromContainer(drop);
+			setItemId(drop, '');
+			if(drag) {
+				sendItemHome(drag);
+			}
+		}
+		drop.appendChild(clear);
+	});
+	
 	
 	//Get rid of the warning
 	document.getElementsByClassName('warning')[0].hide();
