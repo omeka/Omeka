@@ -16,6 +16,7 @@
 <?php foreach( $items as $k => $item ): ?>
 	<div class="item-drop">
 		<div class="item-drag">
+			<div class="handle"><img src="<?php img('arrow_move.gif'); ?>"></div>
 			<div class="item_id"><?php echo h($item->id); ?></div>
 			<?php 
 				if(has_thumbnail($item)){

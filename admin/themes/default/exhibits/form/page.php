@@ -7,7 +7,7 @@
 #layout-form .item {clear:both;overflow:hidden; border-bottom:1px solid #ccc; margin-bottom:1.8em; padding-bottom:1.8em;}
 #layout-form .item-drop {width:100px; height:100px; float:left; overflow:hidden; border:2px solid #999; margin-right:2px; margin-bottom:2px;display:block;}
 
-#item-select .item-drag {width:100px; height:100px; overflow:hidden; border:1px solid #38c;}
+#item-list .item-drag {width:100px; height:100px; overflow:hidden; border:1px solid #38c;}
 #item-list {margin-left:18px;}
 #item-list .item-drop {font-size:1.2em; display:block;}
 #layout-form .textfield {float:right; width:390px;}

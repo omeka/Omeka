@@ -134,7 +134,8 @@ function disablePaginationDraggables() {
 function makeDraggable(containers) {
 	var options = {
 		revert:true,
-		ghosting:true,
+		handle: 'handle',
+		snap: [20, 20],
 		onStart: function(draggable, event) {			
 			if(draggable.element.descendantOf('layout-form')) {
 				var oldContainer = draggable.element.parentNode;
