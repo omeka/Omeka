@@ -2,6 +2,8 @@
 define('OMEKA_MIGRATION', 6);
 define('OMEKA_VERSION', 'v0.15r1');
 
+error_reporting(E_ALL ^ E_NOTICE);
+
 // Define some primitive settings
 // if we can reuse these that might not be a bad thing
 $site['application']	= 'application';
