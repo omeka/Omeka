@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 1112 2007-02-16 22:54:59Z zYne $
+ *  $Id: Pgsql.php 2113 2007-07-31 05:50:41Z lukenukem $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ Doctrine::autoload("Doctrine_Connection_Common");
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1112 $
+ * @version     $Revision: 2113 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -99,9 +99,20 @@ class Doctrine_Connection_Pgsql extends Doctrine_Connection_Common
      * @param array $item
      * @return void
      */
-    public function convertBooleans(array $items)
+    public function convertBooleans($item)
     {
-        return $items;
+    	if (is_array($item)) {
+            foreach ($item as $key => $value) {
+                if (is_bool($value)) {
+                    $item[$key] = ($value) ? 'true' : 'false';
+                }
+            }
+    	} else {
+    	   if (is_bool($item)) {
+    	       $item = ($item) ? 'true' : 'false';
+    	   }
+    	}
+        return $item;
     }
     /**
      * Changes a query string for various DBMS specific reasons
@@ -129,10 +140,10 @@ class Doctrine_Connection_Pgsql extends Doctrine_Connection_Common
                        . $from . ' ' . $where . ' LIMIT ' . $limit . ')';
 
             } else {
-                if ($limit !== false) {
+                if ( ! empty($limit)) {
                   $query .= ' LIMIT ' . $limit;
                 }
-                if ($offset !== false) {
+                if ( ! empty($offset)) {
                   $query .= ' OFFSET ' . $offset;
                 }
             }

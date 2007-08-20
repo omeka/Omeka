@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Relation.php 1182 2007-03-21 22:11:18Z zYne $
+ *  $Id: Relation.php 1973 2007-07-11 14:39:15Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,10 +27,10 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1182 $
+ * @version     $Revision: 1973 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-abstract class Doctrine_Relation
+abstract class Doctrine_Relation implements ArrayAccess
 {
     /**
      * RELATION CONSTANTS
@@ -54,19 +54,22 @@ abstract class Doctrine_Relation
     const MANY_COMPOSITE        = 3;
 
     const ONE   = 0;
-    const MANY  = 1;
+    const MANY  = 2;
     
     protected $definition = array('alias'       => true,
                                   'foreign'     => true,
                                   'local'       => true,
                                   'class'       => true,
                                   'type'        => true,
+                                  'table'       => true,
                                   'name'        => false,
-                                  'assocTable'  => false,
+                                  'refTable'    => false,
                                   'onDelete'    => false,
                                   'onUpdate'    => false,
                                   'deferred'    => false,
+                                  'deferrable'  => false,
                                   'constraint'  => false,
+                                  'equal'       => false,
                                   );
     /**
      * constructor
@@ -80,7 +83,7 @@ abstract class Doctrine_Relation
      *
      *          table                   the foreign table object
      *
-     *          assocTable              the association table object (if any)
+     *          refTable                the reference table object (if any)
      *
      *          onDelete                referential delete action
      *  
@@ -92,7 +95,7 @@ abstract class Doctrine_Relation
      *
      *          type                    the relation type, either Doctrine_Relation::ONE or Doctrine_Relation::MANY
      *
-     *          constraint              boolean value, true if the relation needs referential integrity constraint
+     *          constraint              boolean value, true if the relation has an explicit referential integrity constraint
      *
      * The onDelete and onUpdate keys accept the following values:
      *
@@ -129,7 +132,58 @@ abstract class Doctrine_Relation
 
         $this->definition = $def;
     }
-    /** 
+    /**
+     * hasConstraint
+     * whether or not this relation has an explicit constraint
+     *
+     * @return boolean
+     */
+    public function hasConstraint()
+    {
+        return ($this->definition['constraint'] ||
+                ($this->definition['onUpdate']) ||
+                ($this->definition['onDelete']));
+    }
+    public function isDeferred()
+    {
+        return $this->definition['deferred'];
+    }
+
+    public function isDeferrable()
+    {
+        return $this->definition['deferrable'];
+    }
+    public function isEqual()
+    {
+        return $this->definition['equal'];
+    }
+
+    public function offsetExists($offset)
+    {
+        return isset($this->definition[$offset]);
+    }
+
+    public function offsetGet($offset)
+    {
+        if (isset($this->definition[$offset])) {
+            return $this->definition[$offset];
+        }
+        
+        return null;
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        if (isset($this->definition[$offset])) {
+            $this->definition[$offset] = $value;
+        }
+    }
+
+    public function offsetUnset($offset)
+    {
+        $this->definition[$offset] = false;
+    }
+    /**
      * toArray
      *
      * @return array
@@ -137,15 +191,6 @@ abstract class Doctrine_Relation
     public function toArray() 
     {
         return $this->definition;
-    }
-    /**
-     * hasConstraint
-     *
-     * @return boolean
-     */
-    public function hasConstraint()
-    {
-        return $this->definition['constraint'];
     }
     /**
      * getAlias
@@ -238,90 +283,6 @@ abstract class Doctrine_Relation
               . ' IN (' . substr(str_repeat('?, ', $count), 0, -2) . ')';
 
         return $dql;
-    }
-    /**
-     * getDeleteOperations
-     *
-     * get the records that need to be deleted in order to change the old collection
-     * to the new one
-     *
-     * The algorithm here is very simple and definitely not
-     * the fastest one, since we have to iterate through the collections twice.
-     * the complexity of this algorithm is O(n^2)
-     *
-     * We iterate through the old collection and get the records
-     * that do not exists in the new collection (Doctrine_Records that need to be deleted).
-     *
-     * @param Doctrine_Collection $old
-     * @param Doctrine_Collection $new
-     * @return array
-     */
-    public static function getDeleteOperations(Doctrine_Collection $old, Doctrine_Collection $new)
-    {
-        $r = array();
-
-        foreach ($old as $k => $record) {
-            $id = $record->getIncremented();
-
-            if (empty($id)) {
-                continue;
-            }
-            $found = false;
-            foreach ($new as $k2 => $record2) {
-                if ($record2->getIncremented() === $record->getIncremented()) {
-                    $found = true;
-                    break;
-                }
-            }
-
-            if ( ! $found)  {
-                $r[] = $record;
-                unset($old[$k]);
-            }
-        }
-
-        return $r;
-    }
-    /**
-     * getInsertOperations
-     *
-     * get the records that need to be added in order to change the old collection
-     * to the new one
-     *
-     * The algorithm here is very simple and definitely not
-     * the fastest one, since we have to iterate through the collections twice.
-     * the complexity of this algorithm is O(n^2)
-     *
-     * We iterate through the old collection and get the records
-     * that exists only in the new collection (Doctrine_Records that need to be added).
-     *
-     * @param Doctrine_Collection $old
-     * @param Doctrine_Collection $new
-     * @return array
-     */
-    public static function getInsertOperations(Doctrine_Collection $old, Doctrine_Collection $new)
-    {
-        $r = array();
-
-        foreach ($new as $k => $record) {
-            $found = false;
-
-            $id = $record->getIncremented();
-            if ( ! empty($id)) {
-                foreach ($old as $k2 => $record2) {
-                    if ($record2->getIncremented() === $record->getIncremented()) {
-                        $found = true;
-                        break;
-                    }
-                }
-            }
-            if ( ! $found) {
-                $old[] = $record;
-                $r[] = $record;
-            }
-        }
-
-        return $r;
     }
     /**
      * fetchRelatedFor

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 1091 2007-02-11 08:46:29Z zYne $
+ *  $Id: Oracle.php 1334 2007-05-11 19:20:38Z lsmith $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,7 +24,7 @@ Doctrine::autoload('Doctrine_DataDict');
  * @subpackage  Doctrine_DataDict
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @version     $Revision: 1091 $
+ * @version     $Revision: 1334 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -55,6 +55,9 @@ class Doctrine_DataDict_Oracle extends Doctrine_DataDict
      */
     public function getNativeDeclaration(array $field)
     {
+    	if ( ! isset($field['type'])) {
+            throw new Doctrine_DataDict_Exception('Missing column type.');
+    	}
         switch ($field['type']) {
             case 'string':
             case 'array':
@@ -89,10 +92,11 @@ class Doctrine_DataDict_Oracle extends Doctrine_DataDict
             case 'double':
                 return 'NUMBER';
             case 'decimal':
-                return 'NUMBER(*,'.$this->conn->options['decimal_places'].')';
+                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES);
+                return 'NUMBER(*,'.$scale.')';
             default:
-                throw new Doctrine_DataDict_Exception('Unknown field type '. $field['type']);
         }
+        throw new Doctrine_DataDict_Exception('Unknown field type \'' . $field['type'] .  '\'.');
     }
     /**
      * Maps a native array description of a field to a doctrine datatype and length
@@ -185,7 +189,7 @@ class Doctrine_DataDict_Oracle extends Doctrine_DataDict
 
         return array('type'     => $type,
                      'length'   => $length,
-                     'unsigned' => $unsigned, 
+                     'unsigned' => $unsigned,
                      'fixed'    => $fixed);
     }
 }

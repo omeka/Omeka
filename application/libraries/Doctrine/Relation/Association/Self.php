@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Self.php 1112 2007-02-16 22:54:59Z zYne $
+ *  $Id: Self.php 1434 2007-05-22 15:57:17Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Relation_Association');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1112 $
+ * @version     $Revision: 1434 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Relation_Association_Self extends Doctrine_Relation_Association
@@ -43,17 +43,17 @@ class Doctrine_Relation_Association_Self extends Doctrine_Relation_Association
         switch ($context) {
             case 'record':
                 $sub    = 'SELECT '.$this->definition['foreign'] 
-                        . ' FROM '.$this->definition['assocTable']->getTableName()
+                        . ' FROM '.$this->definition['refTable']->getTableName()
                         . ' WHERE '.$this->definition['local']
                         . ' = ?';
 
                 $sub2   = 'SELECT '.$this->definition['local']
-                        . ' FROM '.$this->definition['assocTable']->getTableName()
+                        . ' FROM '.$this->definition['refTable']->getTableName()
                         . ' WHERE '.$this->definition['foreign']
                         . ' = ?';
 
                 $dql  = 'FROM ' . $this->definition['table']->getComponentName()
-                      . '.' . $this->definition['assocTable']->getComponentName()
+                      . '.' . $this->definition['refTable']->getComponentName()
                       . ' WHERE ' . $this->definition['table']->getComponentName()
                       . '.' . $this->definition['table']->getIdentifier() 
                       . ' IN (' . $sub . ')'
@@ -63,9 +63,9 @@ class Doctrine_Relation_Association_Self extends Doctrine_Relation_Association
                 break;
             case 'collection':
                 $sub  = substr(str_repeat('?, ', $count),0,-2);
-                $dql  = 'FROM '.$this->definition['assocTable']->getComponentName() 
+                $dql  = 'FROM '.$this->definition['refTable']->getComponentName()
                       . '.' . $this->definition['table']->getComponentName()
-                      . ' WHERE '.$this->definition['assocTable']->getComponentName() 
+                      . ' WHERE '.$this->definition['refTable']->getComponentName()
                       . '.' . $this->definition['local'] . ' IN (' . $sub . ')';
         };
 
@@ -93,9 +93,9 @@ class Doctrine_Relation_Association_Self extends Doctrine_Relation_Association
                   ' = ?';
 
         $q->select('{'.$tableName.'.*}, {'.$assocTable.'.*}')
-          ->from($tableName.' INNER JOIN '.$assocTable.' ON '.
-                 $tableName.'.'.$identifier.' = '.$assocTable.'.'.$this->getLocal().' OR '.
-                 $tableName.'.'.$identifier.' = '.$assocTable.'.'.$this->getForeign()
+          ->from($tableName . ' INNER JOIN '.$assocTable.' ON '.
+                 $tableName . '.' . $identifier . ' = ' . $assocTable . '.' . $this->getLocal() . ' OR ' .
+                 $tableName . '.' . $identifier . ' = ' . $assocTable . '.' . $this->getForeign()
                  )
           ->where($tableName.'.'.$identifier.' IN ('.$sub.') OR '.
                   $tableName.'.'.$identifier.' IN ('.$sub2.')'

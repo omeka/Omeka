@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Export.php 1116 2007-02-17 12:38:02Z zYne $
+ *  $Id: Export.php 2063 2007-07-23 23:44:14Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,10 +29,24 @@ Doctrine::autoload('Doctrine_Connection_Module');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1116 $
+ * @version     $Revision: 2063 $
  */
 class Doctrine_Export extends Doctrine_Connection_Module
 {
+    protected $valid_default_values = array(
+        'text'      => '',
+        'boolean'   => true,
+        'integer'   => 0,
+        'decimal'   => 0.0,
+        'float'     => 0.0,
+        'timestamp' => '1970-01-01 00:00:00',
+        'time'      => '00:00:00',
+        'date'      => '1970-01-01',
+        'clob'      => '',
+        'blob'      => '',
+        'string'    => ''
+    );
+
     /**
      * drop an existing database
      * (this method is implemented by the drivers)
@@ -42,19 +56,40 @@ class Doctrine_Export extends Doctrine_Connection_Module
      */
     public function dropDatabase($database)
     {
+        $this->conn->execute($this->dropDatabaseSql($database));
+    }
+    /**
+     * drop an existing database
+     * (this method is implemented by the drivers)
+     *
+     * @param string $name name of the database that should be dropped
+     * @return void
+     */
+    public function dropDatabaseSql($database)
+    {
         throw new Doctrine_Export_Exception('Drop database not supported by this driver.');
+    }
+    /**
+     * dropTableSql
+     * drop an existing table
+     *
+     * @param string $table           name of table that should be dropped from the database
+     * @return string
+     */
+    public function dropTableSql($table)
+    {
+        return 'DROP TABLE ' . $this->conn->quoteIdentifier($table);
     }
     /**
      * dropTable
      * drop an existing table
      *
      * @param string $table           name of table that should be dropped from the database
-     * @throws PDOException
      * @return void
      */
     public function dropTable($table)
     {
-        $this->conn->execute('DROP TABLE ' . $table);
+        $this->conn->execute($this->dropTableSql($table));
     }
 
     /**
@@ -66,8 +101,20 @@ class Doctrine_Export extends Doctrine_Connection_Module
      */
     public function dropIndex($table, $name)
     {
-        $name = $this->conn->quoteIdentifier($this->conn->getIndexName($name), true);
-        return $this->conn->exec('DROP INDEX ' . $name);
+        return $this->conn->exec($this->dropIndexSql($table, $name));
+    }
+    
+    /**
+     * dropIndexSql
+     *
+     * @param string    $table        name of table that should be used in method
+     * @param string    $name         name of the index to be dropped
+     * @return string                 SQL that is used for dropping an index
+     */
+    public function dropIndexSql($table, $name) 
+    {
+        $name = $this->conn->quoteIdentifier($this->conn->formatter->getIndexName($name));
+        return 'DROP INDEX ' . $name;
     }
     /**
      * drop existing constraint
@@ -79,18 +126,32 @@ class Doctrine_Export extends Doctrine_Connection_Module
      */
     public function dropConstraint($table, $name, $primary = false)
     {
-        $table = $this->conn->quoteIdentifier($table, true);
-        $name  = $this->conn->quoteIdentifier($this->conn->getIndexName($name), true);
+        $table = $this->conn->quoteIdentifier($table);
+        $name  = $this->conn->quoteIdentifier($this->conn->formatter->getIndexName($name));
         return $this->conn->exec('ALTER TABLE ' . $table . ' DROP CONSTRAINT ' . $name);
     }
     /**
+     * dropSequenceSql
      * drop existing sequence
      * (this method is implemented by the drivers)
      *
-     * @param string    $seq_name     name of the sequence to be dropped
+     * @throws Doctrine_Connection_Exception     if something fails at database level
+     * @param string $sequenceName      name of the sequence to be dropped
      * @return void
      */
-    public function dropSequence($name)
+    public function dropSequence($sequenceName)
+    {
+        $this->conn->exec($this->dropSequenceSql($sequenceName));
+    }
+    /**
+     * dropSequenceSql
+     * drop existing sequence
+     *
+     * @throws Doctrine_Connection_Exception     if something fails at database level
+     * @param string $sequenceName name of the sequence to be dropped
+     * @return void
+     */
+    public function dropSequenceSql($sequenceName)
     {
         throw new Doctrine_Export_Exception('Drop sequence not supported by this driver.');
     }
@@ -102,6 +163,17 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * @return void
      */
     public function createDatabase($database)
+    {
+        $this->conn->execute($this->createDatabaseSql($database));
+    }
+    /**
+     * create a new database
+     * (this method is implemented by the drivers)
+     *
+     * @param string $name name of the database that should be created
+     * @return string
+     */
+    public function createDatabaseSql($database)
     {
         throw new Doctrine_Export_Exception('Create database not supported by this driver.');
     }
@@ -140,13 +212,16 @@ class Doctrine_Export extends Doctrine_Connection_Module
         }
         
         if (empty($fields)) {
-            throw new Doctrine_Export_Exception('no fields specified for table '.$name);
+            throw new Doctrine_Export_Exception('no fields specified for table ' . $name);
         }
+
         $queryFields = $this->getFieldDeclarationList($fields);
+
 
         if (isset($options['primary']) && ! empty($options['primary'])) {
             $queryFields .= ', PRIMARY KEY(' . implode(', ', array_values($options['primary'])) . ')';
         }
+
         if (isset($options['indexes']) && ! empty($options['indexes'])) {
             foreach($options['indexes'] as $index => $definition) {
                 $queryFields .= ', ' . $this->getIndexDeclaration($index, $definition);
@@ -154,9 +229,29 @@ class Doctrine_Export extends Doctrine_Connection_Module
         }
 
         $name  = $this->conn->quoteIdentifier($name, true);
-        $query = 'CREATE TABLE ' . $name . ' (' . $queryFields . ')';
+        $query = 'CREATE TABLE ' . $name . ' (' . $queryFields;
+        
+        $check = $this->getCheckDeclaration($fields);
+        
+        if ( ! empty($check)) {
+            $query .= ', ' . $check;
+        }
 
-        return $query;
+        $query .= ')';
+
+
+
+        $sql[] = $query;
+
+        if (isset($options['foreignKeys'])) {
+
+            foreach ((array) $options['foreignKeys'] as $k => $definition) {
+                if (is_array($definition)) {
+                    $sql[] = $this->createForeignKeySql($name, $definition);
+                }
+            }
+        }   
+        return $sql;
     }
     /**
      * create a new table
@@ -170,28 +265,46 @@ class Doctrine_Export extends Doctrine_Connection_Module
      */
     public function createTable($name, array $fields, array $options = array())
     {
-        return $this->conn->execute($this->createTableSql($name, $fields, $options));
+    	$sql = (array) $this->createTableSql($name, $fields, $options);
+
+        foreach ($sql as $query) {
+            $this->conn->execute($query);
+        }
     }
     /**
      * create sequence
      *
+     * @throws Doctrine_Connection_Exception     if something fails at database level
      * @param string    $seqName        name of the sequence to be created
      * @param string    $start          start value of the sequence; default is 1
+     * @param array     $options  An associative array of table options:
+     *                          array(
+     *                              'comment' => 'Foo',
+     *                              'charset' => 'utf8',
+     *                              'collate' => 'utf8_unicode_ci',
+     *                          );     
      * @return void
      */
-    public function createSequence($seqName, $start = 1)
+    public function createSequence($seqName, $start = 1, array $options = array())
     {
-        return $this->conn->execute($this->createSequenceSql($seqName, $start = 1));  
+        return $this->conn->execute($this->createSequenceSql($seqName, $start = 1, $options));
     }
     /**
      * return RDBMS specific create sequence statement
      * (this method is implemented by the drivers)
      *
+     * @throws Doctrine_Connection_Exception     if something fails at database level
      * @param string    $seqName        name of the sequence to be created
      * @param string    $start          start value of the sequence; default is 1
+     * @param array     $options  An associative array of table options:
+     *                          array(
+     *                              'comment' => 'Foo',
+     *                              'charset' => 'utf8',
+     *                              'collate' => 'utf8_unicode_ci',
+     *                          );
      * @return string
      */
-    public function createSequenceSql($seqName, $start = 1)
+    public function createSequenceSql($seqName, $start = 1, array $options = array())
     {
         throw new Doctrine_Export_Exception('Create sequence not supported by this driver.');
     }
@@ -218,20 +331,48 @@ class Doctrine_Export extends Doctrine_Connection_Module
      */
     public function createConstraint($table, $name, $definition)
     {
-        $table = $this->conn->quoteIdentifier($table, true);
-        $name = $this->conn->quoteIdentifier($this->conn->getIndexName($name), true);
+        return $this->conn->exec($this->createConstraintSql($table, $name, $definition));
+    }
+    /**
+     * create a constraint on a table
+     *
+     * @param string    $table         name of the table on which the constraint is to be created
+     * @param string    $name          name of the constraint to be created
+     * @param array     $definition    associative array that defines properties of the constraint to be created.
+     *                                 Currently, only one property named FIELDS is supported. This property
+     *                                 is also an associative with the names of the constraint fields as array
+     *                                 constraints. Each entry of this array is set to another type of associative
+     *                                 array that specifies properties of the constraint that are specific to
+     *                                 each field.
+     *
+     *                                 Example
+     *                                    array(
+     *                                        'fields' => array(
+     *                                            'user_name' => array(),
+     *                                            'last_login' => array()
+     *                                        )
+     *                                    )
+     * @return void
+     */
+    public function createConstraintSql($table, $name, $definition)
+    {
+        $table = $this->conn->quoteIdentifier($table);
+        $name  = $this->conn->quoteIdentifier($this->conn->formatter->getIndexName($name));
         $query = 'ALTER TABLE ' . $table . ' ADD CONSTRAINT ' . $name;
-        if (!empty($definition['primary'])) {
+
+        if (isset($definition['primary']) && $definition['primary']) {
             $query .= ' PRIMARY KEY';
-        } elseif (!empty($definition['unique'])) {
+        } elseif (isset($definition['unique']) && $definition['unique']) {
             $query .= ' UNIQUE';
         }
+
         $fields = array();
         foreach (array_keys($definition['fields']) as $field) {
             $fields[] = $this->conn->quoteIdentifier($field, true);
         }
         $query .= ' ('. implode(', ', $fields) . ')';
-        return $this->conn->exec($query);
+
+        return $query;
     }
     /**
      * Get the stucture of a field into an array
@@ -296,7 +437,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
         $query = 'CREATE ' . $type . 'INDEX ' . $name . ' ON ' . $table;
 
         $fields = array();
-        foreach (array_keys($definition['fields']) as $field) {
+        foreach ($definition['fields'] as $field) {
             $fields[] = $this->conn->quoteIdentifier($field);
         }
         $query .= ' (' . implode(', ', $fields) . ')';
@@ -304,15 +445,19 @@ class Doctrine_Export extends Doctrine_Connection_Module
         return $query;
     }
     /**
-     * createForeignKey
+     * createForeignKeySql
      *
-     * @param string    $table         name of the table on which the index is to be created
-     * @param string    $name          name of the foreign key to be created
+     * @param string    $table         name of the table on which the foreign key is to be created
      * @param array     $definition    associative array that defines properties of the foreign key to be created.
+     * @return string
      */
-    public function createForeignKey($table, $name, array $definition)
+    public function createForeignKeySql($table, array $definition)
     {
+        $table = $this->conn->quoteIdentifier($table);
 
+        $query = 'ALTER TABLE ' . $table . ' ADD CONSTRAINT ' . $this->getForeignKeyDeclaration($definition);
+
+        return $query;
     }
     /**
      * alter an existing table
@@ -487,6 +632,8 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *          Text value with the default COLLATION for this field.
      *      unique
      *          unique constraint
+     *      check   
+     *          column check constraint
      *
      * @return string  DBMS specific SQL code portion that should be used to
      *      declare the specified field.
@@ -506,6 +653,9 @@ class Doctrine_Export extends Doctrine_Connection_Module
 
         $unique    = (isset($field['unique']) && $field['unique']) ?
                     ' ' . $this->getUniqueFieldDeclaration() : '';
+                    
+        $check     = (isset($field['check']) && $field['check']) ?
+                    ' ' . $field['check'] : '';
 
         $method = 'get' . $field['type'] . 'Declaration';
 
@@ -514,7 +664,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
         } else {
             $dec = $this->conn->dataDict->getNativeDeclaration($field);
         }
-        return $this->conn->quoteIdentifier($name, true) . ' ' . $dec . $charset . $default . $notnull . $unique . $collation;
+        return $this->conn->quoteIdentifier($name, true) . ' ' . $dec . $charset . $default . $notnull . $unique . $check . $collation;
     }
     /**
      * getDefaultDeclaration
@@ -532,22 +682,50 @@ class Doctrine_Export extends Doctrine_Connection_Module
                 $field['default'] = empty($field['notnull'])
                     ? null : $this->valid_default_values[$field['type']];
 
-                if ($field['default'] === ''
-                    && ($conn->getAttribute(Doctrine::ATTR_PORTABILITY) & Doctrine::PORTABILITY_EMPTY_TO_NULL)
-                ) {
-                    $field['default'] = ' ';
+                if ($field['default'] === '' && 
+                   ($this->conn->getAttribute(Doctrine::ATTR_PORTABILITY) & Doctrine::PORTABILITY_EMPTY_TO_NULL)) {
+                    $field['default'] = null;
                 }
             }
     
+            if ($field['type'] === 'boolean') {
+                $fields['default'] = $this->conn->convertBooleans($field['default']);                                 	
+            }
             $default = ' DEFAULT ' . $this->conn->quote($field['default'], $field['type']);
         }
         return $default;
     }
     /**
+     * Obtain DBMS specific SQL code portion needed to set a CHECK constraint
+     * declaration to be used in statements like CREATE TABLE.
+     *
+     * @param array $definition     check definition
+     * @return string               DBMS specific SQL code portion needed to set a CHECK constraint
+     */
+    public function getCheckDeclaration(array $definition)
+    {
+        $constraints = array();
+        foreach ($definition as $field => $def) {
+            if (is_string($def)) {
+                $constraints[] = 'CHECK (' . $def . ')';
+            } else {
+                if (isset($def['min'])) {
+                    $constraints[] = 'CHECK (' . $field . ' >= ' . $def['min'] . ')';
+                }
+
+                if (isset($def['max'])) {
+                    $constraints[] = 'CHECK (' . $field . ' <= ' . $def['max'] . ')';
+                }
+            }
+        }
+
+        return implode(', ', $constraints);
+    }
+    /**
      * Obtain DBMS specific SQL code portion needed to set an index 
      * declaration to be used in statements like CREATE TABLE.
      *
-     * @param string $charset       name of the index
+     * @param string $name          name of the index
      * @param array $definition     index definition
      * @return string               DBMS specific SQL code portion needed to set an index
      */
@@ -563,7 +741,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
                 throw new Doctrine_Export_Exception('Unknown index type ' . $definition['type']);
             }
         }
-        
+
         if ( ! isset($definition['fields']) || ! is_array($definition['fields'])) {
             throw new Doctrine_Export_Exception('No index columns given.');
         }
@@ -592,6 +770,24 @@ class Doctrine_Export extends Doctrine_Connection_Module
             }
         }
         return implode(', ', $ret);
+    }
+    /**
+     * A method to return the required SQL string that fits between CREATE ... TABLE
+     * to create the table as a temporary table.
+     *
+     * Should be overridden in driver classes to return the correct string for the
+     * specific database type.
+     *
+     * The default is to return the string "TEMPORARY" - this will result in a
+     * SQL error for any database that does not support temporary tables, or that
+     * requires a different SQL command from "CREATE TEMPORARY TABLE".
+     *
+     * @return string The string required to be placed between "CREATE" and "TABLE"
+     *                to generate a temporary table, if possible.
+     */
+    public function getTemporaryTableQuery()
+    {
+        return 'TEMPORARY';
     }
     /**
      * getForeignKeyDeclaration
@@ -638,39 +834,53 @@ class Doctrine_Export extends Doctrine_Connection_Module
     public function getForeignKeyDeclaration(array $definition)
     {
         $sql  = $this->getForeignKeyBaseDeclaration($definition);
-        
-        if (isset($definition['deferred'])) {
-            $sql .= ' ' . $this->getForeignKeyDeferredDeclaration();
-        }
+        $sql .= $this->getAdvancedForeignKeyOptions($definition);
 
-        $a = array('onUpdate', 'onDelete');
-        foreach($a as $v) {
-            $keyword = ($v == 'onUpdate') ? ' ON UPDATE ' : ' ON DELETE ';
-
-            if (isset($definition[$v])) {
-                switch ($definition[$v]) {
-                    case 'CASCADE':
-                    case 'SET NULL':
-                    case 'NO ACTION':
-                    case 'RESTRICT':
-                    case 'SET DEFAULT':
-                        $sql .= $keyword . $definition[$v];
-                    break;
-                    default:
-                        throw new Doctrine_Export_Exception('Unknown foreign key referential action option given.');
-                }
-            }
-        }
         return $sql;
     }
-    /** 
-     * getForeignKeyDeferredDeclaration
+    /**
+     * getAdvancedForeignKeyOptions
+     * Return the FOREIGN KEY query section dealing with non-standard options
+     * as MATCH, INITIALLY DEFERRED, ON UPDATE, ...
      *
+     * @param array $definition     foreign key definition
      * @return string
      */
-    public function getForeignKeyDeferredDeclaration($deferred)
+    public function getAdvancedForeignKeyOptions(array $definition)
     {
-        return '';
+        $query = '';
+        if ( ! empty($definition['onUpdate'])) {
+            $query .= ' ON UPDATE ' . $this->getForeignKeyRefentialAction($definition['onUpdate']);
+        }
+        if ( ! empty($definition['onDelete'])) {
+            $query .= ' ON DELETE ' . $this->getForeignKeyRefentialAction($definition['onDelete']);
+        }
+        return $query;
+    }
+    /**
+     * getForeignKeyReferentialAction
+     *
+     * returns given referential action in uppercase if valid, otherwise throws
+     * an exception
+     *
+     * @throws Doctrine_Exception_Exception     if unknown referential action given
+     * @param string $action    foreign key referential action
+     * @param string            foreign key referential action in uppercase
+     */
+    public function getForeignKeyReferentialAction($action)
+    {
+    	$upper = strtoupper($action);
+        switch ($upper) {
+            case 'CASCADE':
+            case 'SET NULL':
+            case 'NO ACTION':
+            case 'RESTRICT':
+            case 'SET DEFAULT':
+                return $upper;
+            break;
+            default:
+                throw new Doctrine_Export_Exception('Unknown foreign key referential action \'' . $upper . '\' given.');
+        }
     }
     /**
      * getForeignKeyBaseDeclaration
@@ -684,9 +894,9 @@ class Doctrine_Export extends Doctrine_Connection_Module
     {
     	$sql = '';
         if (isset($definition['name'])) {
-            $sql .= 'CONSTRAINT ' . $definition['name'] . ' ';
+            $sql .= 'CONSTRAINT ' . $this->conn->quoteIdentifier($definition['name']) . ' ';
         }
-        $sql .= 'FOREIGN KEY ';
+        $sql .= 'FOREIGN KEY (';
 
         if ( ! isset($definition['local'])) {
             throw new Doctrine_Export_Exception('Local reference field missing from definition.');
@@ -704,8 +914,9 @@ class Doctrine_Export extends Doctrine_Connection_Module
         if ( ! is_array($definition['foreign'])) {
             $definition['foreign'] = array($definition['foreign']);
         }
+
         $sql .= implode(', ', array_map(array($this->conn, 'quoteIdentifier'), $definition['local']))
-              . ' REFERENCES '
+              . ') REFERENCES '
               . $definition['foreignTable'] . '('
               . implode(', ', array_map(array($this->conn, 'quoteIdentifier'), $definition['foreign'])) . ')';
         
@@ -745,65 +956,175 @@ class Doctrine_Export extends Doctrine_Connection_Module
     public function getCollationFieldDeclaration($collation)
     {
         return '';
-    }
+    } 
     /**
      * export
      * method for exporting Doctrine_Record classes to a schema
      *
+     * if the directory parameter is given this method first iterates 
+     * recursively trhough the given directory in order to find any model classes
+     *
+     * Then it iterates through all declared classes and creates tables for the ones
+     * that extend Doctrine_Record and are not abstract classes
+     *
+     * @throws Doctrine_Connection_Exception    if some error other than Doctrine::ERR_ALREADY_EXISTS
+     *                                          occurred during the create table operation
+     * @param string $directory     optional directory parameter
      * @return void
      */
-    public static function exportAll()
+    public function export($directory = null)
+    {
+        $sql = $this->exportSql($directory);
+
+        $this->conn->beginTransaction();
+
+        foreach ($sql as $query) {
+            try {
+                $this->conn->exec($query);
+            } catch (Doctrine_Connection_Exception $e) {
+                // we only want to silence table already exists errors
+                if($e->getPortableCode() !== Doctrine::ERR_ALREADY_EXISTS) {
+                    $this->conn->rollback();
+                    throw $e;
+                }                                           
+            }
+        }
+        $this->conn->commit();
+    }
+    /**
+     * exportClasses
+     * method for exporting Doctrine_Record classes to a schema
+     *
+     * @throws Doctrine_Connection_Exception    if some error other than Doctrine::ERR_ALREADY_EXISTS
+     *                                          occurred during the create table operation
+     * @param array $classes
+     * @return void
+     */
+    public function exportClasses(array $classes)
+    {
+        $sql = $this->exportClassesSql($classes);
+
+        $this->conn->beginTransaction();
+
+        foreach ($sql as $query) {
+            try {
+                $this->conn->exec($query);
+            } catch (Doctrine_Connection_Exception $e) {
+                // we only want to silence table already exists errors
+                if($e->getPortableCode() !== Doctrine::ERR_ALREADY_EXISTS) {
+                    $this->conn->rollback();
+                    throw $e;
+                }
+            }
+        }
+        $this->conn->commit();
+    }
+    /**
+     * exportClassesSql
+     * method for exporting Doctrine_Record classes to a schema
+     *
+     * @throws Doctrine_Connection_Exception    if some error other than Doctrine::ERR_ALREADY_EXISTS
+     *                                          occurred during the create table operation
+     * @param array $classes
+     * @return void
+     */
+    public function exportClassesSql(array $classes)
     {
         $parent = new ReflectionClass('Doctrine_Record');
-        $conn   = Doctrine_Manager::getInstance()->getCurrentConnection();
-        $old    = $conn->getAttribute(Doctrine::ATTR_CREATE_TABLES);
 
-        $conn->setAttribute(Doctrine::ATTR_CREATE_TABLES, true);
+        $sql = array();
+        $fks = array();
 
-        foreach (get_declared_classes() as $name) {
+        // we iterate trhough the diff of previously declared classes 
+        // and currently declared classes
+        foreach ($classes as $name) {
             $class = new ReflectionClass($name);
+            $conn  = Doctrine_Manager::getInstance()->getConnectionForComponent($name);
 
-            if ($class->isSubclassOf($parent) && ! $class->isAbstract()) {
-                $obj = new $class();
+            // check if class is an instance of Doctrine_Record and not abstract
+            // class must have method setTableDefinition (to avoid non-Record subclasses like symfony's sfDoctrineRecord)
+            if ($class->isSubclassOf($parent) && ! $class->isAbstract() && method_exists($class->getName(), 'setTableDefinition')) {
+                $record = new $name();
+                $table  = $record->getTable();
+                $data = $table->getExportableFormat();
+
+                $query = $this->conn->export->createTableSql($data['tableName'], $data['columns'], $data['options']);
+
+                if (is_array($query)) {
+                    $sql = array_merge($sql, $query);
+                } else {
+                    $sql[] = $query;
+                }
             }
         }
-        $conn->setAttribute(Doctrine::ATTR_CREATE_TABLES, $old);
+        $sql = array_unique($sql);
+        rsort($sql);
+
+        return $sql;
     }
-    public function export($record)
+    /**
+     * exportSql
+     * returns the sql for exporting Doctrine_Record classes to a schema
+     *
+     * if the directory parameter is given this method first iterates 
+     * recursively trhough the given directory in order to find any model classes
+     *
+     * Then it iterates through all declared classes and creates tables for the ones
+     * that extend Doctrine_Record and are not abstract classes
+     *
+     * @throws Doctrine_Connection_Exception    if some error other than Doctrine::ERR_ALREADY_EXISTS
+     *                                          occurred during the create table operation
+     * @param string $directory     optional directory parameter
+     * @return void
+     */
+    public function exportSql($directory = null)
     {
-        if ( ! $record instanceof Doctrine_Record)
-            $record = new $record();
+    	$declared = get_declared_classes();
 
-        $table = $record->getTable();
-
-        $reporter = new Doctrine_Reporter();
-
-        if ( ! Doctrine::isValidClassname($table->getComponentName())) {
-            $reporter->add(E_WARNING, 'Badly named class.');
+       	if ($directory !== null) {
+       	    foreach ((array) $directory as $dir) {
+                $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir),
+                                                        RecursiveIteratorIterator::LEAVES_ONLY);
+                                                        
+                foreach ($it as $file) {
+                    $e = explode('.', $file->getFileName());
+                    if (end($e) === 'php' && strpos($file->getFileName(), '.inc') === false) {
+                        require_once $file->getPathName();
+                    }
+                }
+            }
+            $declared = array_diff(get_declared_classes(), $declared);
         }
+
+        return $this->exportClassesSql($declared);
+    }
+    /**
+     * exportTable
+     * exports given table into database based on column and option definitions
+     *
+     * @throws Doctrine_Connection_Exception    if some error other than Doctrine::ERR_ALREADY_EXISTS
+     *                                          occurred during the create table operation
+     * @return boolean                          whether or not the export operation was successful
+     *                                          false if table already existed in the database
+     */
+    public function exportTable(Doctrine_Table $table)
+    {
+    	/**
+    	TODO: maybe there should be portability option for the following check
+        if ( ! Doctrine::isValidClassname($table->getOption('declaringClass')->getName())) {
+            throw new Doctrine_Export_Exception('Class name not valid.');
+        }
+        */
 
         try {
-            $columns = array();
-            foreach ($table->getColumns() as $name => $column) {
-                $definition = $column[2];
-                $definition['type'] = $column[0];
-                $definition['length'] = $column[1];
+            $data = $table->getExportableFormat();
 
-                if ($definition['type'] == 'enum' && isset($definition['default'])) {
-                    $definition['default'] = $table->enumIndex($name, $definition['default']);
-                }
-                if ($definition['type'] == 'boolean' && isset($definition['default'])) {
-                    $definition['default'] = (int) $definition['default'];
-                }
-                $columns[$name] = $definition;
-            }
-
-            $this->createTable($table->getTableName(), $columns);
-
+            $this->conn->export->createTable($data['tableName'], $data['columns'], $data['options']);
         } catch(Doctrine_Connection_Exception $e) {
-            $reporter->add(E_ERROR, $e->getMessage());
+            // we only want to silence table already exists errors
+            if($e->getPortableCode() !== Doctrine::ERR_ALREADY_EXISTS) {
+                throw $e;
+            }
         }
-
-        return $reporter;
     }
 }

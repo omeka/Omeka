@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Pgsql.php 1632 2007-06-11 23:37:24Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ Doctrine::autoload('Doctrine_Sequence');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1632 $
  */
 class Doctrine_Sequence_Pgsql extends Doctrine_Sequence
 {
@@ -42,7 +42,7 @@ class Doctrine_Sequence_Pgsql extends Doctrine_Sequence
      */
     public function nextId($seqName, $onDemand = true)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
 
         $query = "SELECT NEXTVAL('" . $sequenceName . "')";
         try {
@@ -61,16 +61,19 @@ class Doctrine_Sequence_Pgsql extends Doctrine_Sequence
         return $result;
     }
     /**
+     * lastInsertId
+     *
      * Returns the autoincrement ID if supported or $id or fetches the current
      * ID in a sequence called: $table.(empty($field) ? '' : '_'.$field)
      *
      * @param   string  name of the table into which a new row was inserted
      * @param   string  name of the field into which a new row was inserted
+     * @return integer      the autoincremented id
      */
     public function lastInsertId($table = null, $field = null)
     {
         $seqName = $table . (empty($field) ? '' : '_' . $field);
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
 
         return (int) $this->conn->fetchOne("SELECT CURRVAL('" . $sequenceName . "')");
     }
@@ -83,7 +86,7 @@ class Doctrine_Sequence_Pgsql extends Doctrine_Sequence
      */
     public function currId($seqName)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         return (int) $this->conn->fetchOne('SELECT last_value FROM ' . $sequenceName);
     }
 }

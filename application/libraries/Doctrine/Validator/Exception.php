@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Exception.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Exception.php 2041 2007-07-21 22:15:22Z meus $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ Doctrine::autoload('Doctrine_Exception');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 2041 $
  */
 class Doctrine_Validator_Exception extends Doctrine_Exception implements Countable, IteratorAggregate
 {
@@ -42,6 +42,7 @@ class Doctrine_Validator_Exception extends Doctrine_Exception implements Countab
     public function __construct(array $invalid)
     {
         $this->invalid = $invalid;
+        parent::__construct($this->generateMessage());
     }
 
     public function getInvalidRecords()
@@ -68,4 +69,14 @@ class Doctrine_Validator_Exception extends Doctrine_Exception implements Countab
 
         return parent::__toString();
     }
+
+    private function generateMessage()
+    {
+        $message = "";
+        foreach ($this->invalid as $record){
+           $message .= "Validaton error in class " . get_class($record) . " ";
+        }
+        return $message;
+    }
+
 }

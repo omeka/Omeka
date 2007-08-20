@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: ForeignKey.php 1156 2007-03-02 09:23:24Z gyim $
+ *  $Id: ForeignKey.php 1517 2007-05-30 10:20:21Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,48 +29,10 @@ Doctrine::autoload('Doctrine_Relation');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1156 $
+ * @version     $Revision: 1517 $
  */
 class Doctrine_Relation_ForeignKey extends Doctrine_Relation
 {
-    /**
-     * processDiff
-     *
-     * @param Doctrine_Record $record
-     * @param Doctrine_Connection $conn
-     * @return void
-     */
-    public function processDiff(Doctrine_Record $record, $conn = null)
-    {
-        if (!$conn) {
-       	    $conn = $this->getTable()->getConnection();
-        }
-    	
-        $alias = $this->getAlias();
-
-        if ($this->isOneToOne()) {
-            if ($record->obtainOriginals($alias)
-               && $record->obtainOriginals($alias)->obtainIdentifier() != $this->obtainReference($alias)->obtainIdentifier()
-            ) {
-                    $record->obtainOriginals($alias)->delete($conn);
-            }
-        } else {
-            if ($record->hasReference($alias)) {
-                $new = $record->obtainReference($alias);
-
-                if ( ! $record->obtainOriginals($alias)) {
-                    $record->loadReference($alias);
-                }
-                $operations = Doctrine_Relation::getDeleteOperations($record->obtainOriginals($alias), $new);
-
-                foreach ($operations as $r) {
-                    $r->delete($conn);
-                }
-
-                $record->assignOriginals($alias, clone $record->get($alias));
-            }
-        }
-    }
     /**
      * fetchRelatedFor
      *
@@ -81,32 +43,56 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
      */
     public function fetchRelatedFor(Doctrine_Record $record)
     {
-        $id = $record->get($this->definition['local']);
-
+    	$id = array();
+    	foreach ((array) $this->definition['local'] as $local) {
+    	   $value = $record->get($local);
+           if (isset($value)) {
+               $id[] = $value;
+           }
+        }
         if ($this->isOneToOne()) {
-            if (empty($id)) {
+            if ( ! $record->exists() || empty($id) || 
+                 ! $this->definition['table']->getAttribute(Doctrine::ATTR_LOAD_REFERENCES)) {
+                
                 $related = $this->getTable()->create();
             } else {
                 $dql  = 'FROM ' . $this->getTable()->getComponentName()
-                      . ' WHERE ' . $this->getTable()->getComponentName()
-                      . '.' . $this->definition['foreign'] . ' = ?';
+                      . ' WHERE ' . $this->getCondition();
 
-                $coll = $this->getTable()->getConnection()->query($dql, array($id));
+                $coll = $this->getTable()->getConnection()->query($dql, $id);
                 $related = $coll[0];
             }
 
             $related->set($this->definition['foreign'], $record, false);
 
-        } else {    
+        } else {
 
-            if (empty($id)) {
+            if ( ! $record->exists() || empty($id) || 
+                 ! $this->definition['table']->getAttribute(Doctrine::ATTR_LOAD_REFERENCES)) {
+                
                 $related = new Doctrine_Collection($this->getTable());
             } else {
                 $query      = $this->getRelationDql(1);
-                $related    = $this->getTable()->getConnection()->query($query, array($id));
+                $related    = $this->getTable()->getConnection()->query($query, $id);
             }
             $related->setReference($record, $this);
         }
         return $related;
+    }
+    /**
+     * getCondition
+     *
+     * @param string $alias
+     */
+    public function getCondition($alias = null)
+    {
+    	if ( ! $alias) {
+    	   $alias = $this->getTable()->getComponentName();
+    	}
+    	$conditions = array();
+        foreach ((array) $this->definition['foreign'] as $foreign) {
+            $conditions[] = $alias . '.' . $foreign . ' = ?';
+        }
+        return implode(' AND ', $conditions);
     }
 }

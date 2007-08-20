@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Access.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Access.php 1604 2007-06-08 19:07:32Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,10 +29,10 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1604 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-abstract class Doctrine_Access implements ArrayAccess
+abstract class Doctrine_Access extends Doctrine_Object implements ArrayAccess
 {
     /**
      * setArray
@@ -45,7 +45,7 @@ abstract class Doctrine_Access implements ArrayAccess
     {
         foreach ($array as $k=>$v) {
             $this->set($k,$v);
-        };
+        }
 
         return $this;
     }
@@ -126,7 +126,7 @@ abstract class Doctrine_Access implements ArrayAccess
         if ( ! isset($offset)) {
             $this->add($value);
         } else {
-            $this->set($offset,$value);
+            $this->set($offset, $value);
         }
     }
     /**

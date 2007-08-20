@@ -218,3 +218,4 @@ if($this->tableHasColumn('Collection', 'collector')) {
 	$this->query("ALTER TABLE `collections` DROP `collector`");		
 }
 ?>
+>>>>>>> .merge-right.r1288

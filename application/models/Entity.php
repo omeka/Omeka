@@ -1,6 +1,9 @@
 <?php
 require_once 'EntitiesRelations.php';
 require_once 'User.php';
+require_once 'Anonymous.php';
+require_once 'Institution.php';
+require_once 'Person.php';
 /**
  * entity
  * @package: Omeka
@@ -29,6 +32,8 @@ class Entity extends Kea_Record
 		
 		$this->hasColumn('type', 'string', 50, array('notblank'=>true));
 		
+		
+		$this->option('subclasses', array('Anonymous', 'Institution', 'Person'));
 //		$this->index('unique', array('fields'=>array('first_name', 'last_name', 'email', 'institution'), 'type'=>'unique'));
     }
 

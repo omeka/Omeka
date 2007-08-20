@@ -112,7 +112,7 @@ class Relatable	implements Kea_Strategy_Interface
 
 	protected function getRelationId()
 	{
-		$id =  $this->record->obtainIdentifier();
+		$id =  $this->record->identifier();
 		$id = $id['id'];
 		
 		if(!$id) {

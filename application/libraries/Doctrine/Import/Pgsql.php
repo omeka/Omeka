@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Pgsql.php 1889 2007-06-28 12:11:55Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@ Doctrine::autoload('Doctrine_Import');
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Paul Cooper <pgc@ucecom.com>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1889 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -154,19 +154,21 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
 
         $columns     = array();
         foreach ($result as $key => $val) {
-            if ($val['type'] === 'varchar') {
-                // need to add length to the type so we are compatible with
-                // Zend_Db_Adapter_Pdo_Pgsql!
+            $val = array_change_key_case($val, CASE_LOWER);
+
+            if (strtolower($val['type']) === 'varchar') {
+                // get length from varchar definition
                 $length = preg_replace('~.*\(([0-9]*)\).*~', '$1', $val['complete_type']);
-                $val['type'] .= '(' . $length . ')';
+                $val['length'] = $length;
             }
             
             $decl = $this->conn->dataDict->getPortableDeclaration($val);
 
             $description = array(
                 'name'      => $val['field'],
-                'type'      => $val['type'],
-                'ptype'     => $decl['type'],
+                'ntype'     => $val['type'],
+                'type'      => $decl['type'][0],
+                'alltypes'  => $decl['type'],
                 'length'    => $decl['length'],
                 'fixed'     => $decl['fixed'],
                 'unsigned'  => $decl['unsigned'],
@@ -199,7 +201,7 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
      */
     public function listTables($database = null)
     {
-        return $this->conn->fetchAssoc($this->sql['listTables']);
+        return $this->conn->fetchColumn($this->sql['listTables']);
     }
     /**
      * lists table triggers
@@ -209,7 +211,15 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
      */
     public function listTableTriggers($table)
     {
-
+        $query = 'SELECT trg.tgname AS trigger_name
+                    FROM pg_trigger trg,
+                         pg_class tbl
+                   WHERE trg.tgrelid = tbl.oid';
+        if ($table !== null) {
+            $table = $this->conn->quote(strtoupper($table), 'string');
+            $query .= " AND tbl.relname = $table";
+        }
+        return $this->conn->fetchColumn($query);
     }
     /**
      * list the views in the database that reference a given table

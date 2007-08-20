@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: LocalKey.php 1156 2007-03-02 09:23:24Z gyim $
+ *  $Id: LocalKey.php 2195 2007-08-10 07:07:53Z njero $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,30 +29,10 @@ Doctrine::autoload('Doctrine_Relation');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1156 $
+ * @version     $Revision: 2195 $
  */
 class Doctrine_Relation_LocalKey extends Doctrine_Relation
 {
-    /**
-     * processDiff
-     *
-     * @param Doctrine_Record $record
-     * @param Doctrine_Connection $conn
-     */
-    public function processDiff(Doctrine_Record $record, $conn = null)
-    {
-        if (!$conn) {
-            $conn = $this->getTable()->getConnection();
-        }
-        
-        $alias = $this->getAlias();
-
-        if ($record->obtainOriginals($alias)
-           && $record->obtainOriginals($alias)->obtainIdentifier() != $this->references[$alias]->obtainIdentifier()
-        ) {
-            $record->obtainOriginals($alias)->delete($conn);
-        }
-    }
     /**
      * fetchRelatedFor
      *
@@ -65,10 +45,18 @@ class Doctrine_Relation_LocalKey extends Doctrine_Relation
     {
         $id = $record->get($this->definition['local']);
 
-        if (empty($id)) {
+        if (empty($id) || ! $this->definition['table']->getAttribute(Doctrine::ATTR_LOAD_REFERENCES)) {
             $related = $this->getTable()->create();
         } else {
-            if ( ! ($related = $this->getTable()->find($id))) {
+            $dql  = 'FROM ' . $this->getTable()->getComponentName()
+                 . ' WHERE ' . $this->getCondition();
+
+            $related = $this->getTable()
+                            ->getConnection()
+                            ->query($dql, array($id))
+                            ->getFirst();
+            
+            if ( ! $related || empty($related)) {
                 $related = $this->getTable()->create();
             }
         }
@@ -77,4 +65,18 @@ class Doctrine_Relation_LocalKey extends Doctrine_Relation
 
         return $related;
     }
+    
+    /**
+     * getCondition
+     *
+     * @param string $alias
+     */
+    public function getCondition($alias = null)
+    {
+    	if ( ! $alias) {
+    	   $alias = $this->getTable()->getComponentName();
+    	}
+    	return $alias . '.' . $this->definition['foreign'] . ' = ?';
+    }
+
 }

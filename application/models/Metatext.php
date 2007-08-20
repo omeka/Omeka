@@ -24,9 +24,9 @@ class Metatext extends Kea_Record {
 		$this->index('item', array('fields' => array('item_id')));
 		$this->index('metafield', array('fields' => array('metafield_id')));
  	}
-	
+
 	public function __toString() {
-		return $this->text;
+		return (string) $this->text;
 	}
 }
 

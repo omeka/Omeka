@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Sqlite.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Sqlite.php 1722 2007-06-17 17:50:05Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ Doctrine::autoload('Doctrine_Sequence');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1722 $
  */
 class Doctrine_Sequence_Sqlite extends Doctrine_Sequence
 {
@@ -42,7 +42,7 @@ class Doctrine_Sequence_Sqlite extends Doctrine_Sequence
      */
     public function nextId($seqName, $onDemand = true)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         $seqcolName   = $this->conn->quoteIdentifier($this->conn->getAttribute(Doctrine::ATTR_SEQCOL_NAME), true);
 
         $query        = 'INSERT INTO ' . $sequenceName . ' (' . $seqcolName . ') VALUES (NULL)';
@@ -65,6 +65,7 @@ class Doctrine_Sequence_Sqlite extends Doctrine_Sequence
                 // First ID of a newly created sequence is 1
                 return 1;
             }
+            throw $e;
         }
 
         $value = $this->conn->getDbh()->lastInsertId();
@@ -101,7 +102,7 @@ class Doctrine_Sequence_Sqlite extends Doctrine_Sequence
      */
     public function currId($seqName)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         $seqcolName   = $this->conn->quoteIdentifier($this->conn->getAttribute(Doctrine::ATTR_SEQCOL_NAME), true);
 
         $query        = 'SELECT MAX(' . $seqcolName . ') FROM ' . $sequenceName;

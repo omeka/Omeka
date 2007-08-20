@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 1153 2007-03-01 21:32:08Z zYne $
+ *  $Id: Oracle.php 1889 2007-06-28 12:11:55Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -23,7 +23,7 @@ Doctrine::autoload('Doctrine_Import');
  * @package     Doctrine
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
- * @version     $Revision: 1153 $
+ * @version     $Revision: 1889 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -88,7 +88,7 @@ class Doctrine_Import_Oracle extends Doctrine_Import
 
         $tableNames = $this->conn->fetchColumn($query);
 
-        return array_map(array($this->conn, 'fixSequenceName'), $tableNames);
+        return array_map(array($this->conn->formatter, 'fixSequenceName'), $tableNames);
     }
     /**
      * lists table constraints
@@ -105,7 +105,7 @@ class Doctrine_Import_Oracle extends Doctrine_Import
 
         $constraints = $this->conn->fetchColumn($query);
 
-        return array_map(array($this->conn, 'fixIndexName'), $constraints);
+        return array_map(array($this->conn->formatter, 'fixIndexName'), $constraints);
     }
     /**
      * lists table constraints
@@ -122,13 +122,16 @@ class Doctrine_Import_Oracle extends Doctrine_Import
         $result = $this->conn->fetchAssoc($sql);
 
         foreach($result as $val) {
+            $val = array_change_key_case($val, CASE_LOWER);
             $decl = $this->conn->dataDict->getPortableDeclaration($val);
+
 
             $descr[$val['column_name']] = array(
                'name'       => $val['column_name'],
                'notnull'    => (bool) ($val['nullable'] === 'N'),
-               'type'       => $val['data_type'],
-               'ptype'      => $decl['type'],
+               'ntype'      => $val['data_type'],
+               'type'       => $decl['type'][0],
+               'alltypes'   => $decl['type'],
                'fixed'      => $decl['fixed'],
                'unsigned'   => $decl['unsigned'],
                'default'    => $val['data_default'],
@@ -154,7 +157,7 @@ class Doctrine_Import_Oracle extends Doctrine_Import
 
         $indexes = $this->conn->fetchColumn($query);
 
-        return array_map(array($this->conn, 'fixIndexName'), $indexes);
+        return array_map(array($this->conn->formatter, 'fixIndexName'), $indexes);
     }
     /**
      * lists tables

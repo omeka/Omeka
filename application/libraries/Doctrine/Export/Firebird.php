@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Firebird.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Firebird.php 1753 2007-06-19 11:10:13Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,7 +30,7 @@ Doctrine::autoload('Doctrine_Export');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1753 $
  */
 class Doctrine_Export_Firebird extends Doctrine_Export
 {
@@ -80,7 +80,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
             $result = $this->createSequence($table, $start);
         }
 
-        $sequence_name = $this->conn->getSequenceName($table);
+        $sequence_name = $this->conn->formatter->getSequenceName($table);
         $trigger_name  = $this->conn->quoteIdentifier($table . '_AUTOINCREMENT_PK', true);
 
         $table = $this->conn->quoteIdentifier($table, true);
@@ -147,7 +147,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
      *
      * @return void
      */
-    public function createTable($name, $fields, $options = array()) {
+    public function createTable($name, array $fields, array $options = array()) {
         parent::createTable($name, $fields, $options);
 
         // TODO ? $this->_silentCommit();
@@ -300,10 +300,10 @@ class Doctrine_Export_Firebird extends Doctrine_Export
      *                             actually perform them otherwise.
      * @return void
      */
-    public function alterTable($name, $changes, $check)
+    public function alterTable($name, array $changes, $check)
     {
-        foreach ($changes as $change_name => $change) {
-            switch ($change_name) {
+        foreach ($changes as $changeName => $change) {
+            switch ($changeName) {
                 case 'add':
                 case 'remove':
                 case 'rename':
@@ -314,7 +314,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
                     }
                     break;
                 default:
-                    throw new Doctrine_DataDict_Exception('change type ' . $change_name . ' not yet supported');
+                    throw new Doctrine_DataDict_Exception('change type ' . $changeName . ' not yet supported');
             }
         }
         if ($check) {
@@ -322,11 +322,11 @@ class Doctrine_Export_Firebird extends Doctrine_Export
         }
         $query = '';
         if (!empty($changes['add']) && is_array($changes['add'])) {
-            foreach ($changes['add'] as $field_name => $field) {
+            foreach ($changes['add'] as $fieldName => $field) {
                 if ($query) {
                     $query.= ', ';
                 }
-                $query.= 'ADD ' . $this->getDeclaration($field['type'], $field_name, $field, $name);
+                $query.= 'ADD ' . $this->getDeclaration($field['type'], $fieldName, $field, $name);
             }
         }
 
@@ -352,13 +352,13 @@ class Doctrine_Export_Firebird extends Doctrine_Export
 
         if (!empty($changes['change']) && is_array($changes['change'])) {
             // missing support to change DEFAULT and NULLability
-            foreach ($changes['change'] as $field_name => $field) {
+            foreach ($changes['change'] as $fieldName => $field) {
                 $this->checkSupportedChanges($field);
                 if ($query) {
                     $query.= ', ';
                 }
                 $this->conn->loadModule('Datatype', null, true);
-                $field_name = $this->conn->quoteIdentifier($field_name, true);
+                $field_name = $this->conn->quoteIdentifier($fieldName, true);
                 $query.= 'ALTER ' . $field_name.' TYPE ' . $this->getTypeDeclaration($field['definition']);
             }
         }
@@ -368,7 +368,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
         }
 
         $name = $this->conn->quoteIdentifier($name, true);
-        $result = $this->conn->exec("ALTER TABLE $name $query");
+        $result = $this->conn->exec('ALTER TABLE ' . $name . ' ' . $query);
         $this->_silentCommit();
         return $result;
     }
@@ -403,7 +403,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
      *                                    )
      * @return void
      */
-    public function createIndex($table, $name, array $definition)
+    public function createIndexSql($table, $name, array $definition)
     {
         $query = 'CREATE';
 
@@ -421,7 +421,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
             }
         }
         $table = $this->conn->quoteIdentifier($table, true);
-        $name  = $this->conn->quoteIdentifier($this->conn->getIndexName($name), true);
+        $name  = $this->conn->quoteIdentifier($this->conn->formatter->getIndexName($name), true);
         $query .= $query_sort. ' INDEX ' . $name . ' ON ' . $table;
         $fields = array();
         foreach (array_keys($definition['fields']) as $field) {
@@ -429,9 +429,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
         }
         $query .= ' ('.implode(', ', $fields) . ')';
 
-        $result = $this->conn->exec($query);
-        // todo: $this->_silentCommit();
-        return $result;
+        return $query;
     }
     /**
      * create a constraint on a table
@@ -459,7 +457,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
         $table = $this->conn->quoteIdentifier($table, true);
 
         if (!empty($name)) {
-            $name = $this->conn->quoteIdentifier($this->conn->getIndexName($name), true);
+            $name = $this->conn->quoteIdentifier($this->conn->formatter->getIndexName($name), true);
         }
         $query = "ALTER TABLE $table ADD";
         if (!empty($definition['primary'])) {
@@ -483,21 +481,47 @@ class Doctrine_Export_Firebird extends Doctrine_Export
         return $result;
     }
     /**
+     * A method to return the required SQL string that fits between CREATE ... TABLE
+     * to create the table as a temporary table.
+     *
+     * @return string The string required to be placed between "CREATE" and "TABLE"
+     *                to generate a temporary table, if possible.
+     */
+    public function getTemporaryTableQuery()
+    {
+        return 'GLOBAL TEMPORARY';
+    }
+    /**
      * create sequence
      *
      * @param string $seqName name of the sequence to be created
      * @param string $start start value of the sequence; default is 1
-     * @return void
+     * @param array     $options  An associative array of table options:
+     *                          array(
+     *                              'comment' => 'Foo',
+     *                              'charset' => 'utf8',
+     *                              'collate' => 'utf8_unicode_ci',
+     *                          );
+     * @return boolean
      */
-    public function createSequence($seqName, $start = 1)
+    public function createSequence($seqName, $start = 1, array $options = array())
     {
-        $sequenceName = $this->conn->getSequenceName($seqName);
+        $sequenceName = $this->conn->formatter->getSequenceName($seqName);
 
         $this->conn->exec('CREATE GENERATOR ' . $sequenceName);
 
-        $this->conn->exec('SET GENERATOR ' . $sequenceName . ' TO ' . ($start-1));
-
-        $this->dropSequence($seqName);
+        try {
+            $this->conn->exec('SET GENERATOR ' . $sequenceName . ' TO ' . ($start-1));
+            
+            return true;
+        } catch (Doctrine_Connection_Exception $e) {
+            try {
+                $this->dropSequence($seqName);
+            } catch(Doctrine_Connection_Exception $e) {
+                throw new Doctrine_Export_Exception('Could not drop inconsistent sequence table');
+            }
+        }
+        throw new Doctrine_Export_Exception('could not create sequence table');
     }
     /**
      * drop existing sequence
@@ -505,12 +529,12 @@ class Doctrine_Export_Firebird extends Doctrine_Export
      * @param string $seqName name of the sequence to be dropped
      * @return void
      */
-    public function dropSequence($seqName)
+    public function dropSequenceSql($seqName)
     {
-        $sequenceName = $this->conn->getSequenceName($seqName);
+        $sequenceName = $this->conn->formatter->getSequenceName($seqName);
         $sequenceName = $this->conn->quote($sequenceName);
         $query = "DELETE FROM RDB\$GENERATORS WHERE UPPER(RDB\$GENERATOR_NAME)=" . $sequenceName;
         
-        return $this->conn->exec($query);
+        return $query;
     }
 }

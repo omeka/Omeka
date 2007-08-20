@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Import.php 1088 2007-02-10 21:51:53Z zYne $
+ *  $Id: Import.php 2051 2007-07-23 20:28:46Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,7 +30,7 @@ Doctrine::autoload('Doctrine_Connection_Module');
  * @link        www.phpdoctrine.com
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @since       1.0
- * @version     $Revision: 1088 $
+ * @version     $Revision: 2051 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Jukka Hassinen <Jukka.Hassinen@BrainAlliance.com>
  */
@@ -181,14 +181,23 @@ class Doctrine_Import extends Doctrine_Connection_Module
      *
      * @param string $directory
      * @param array $databases
+     * @return array                the names of the imported classes
      */
     public function import($directory, array $databases = array())
     {
         $builder = new Doctrine_Import_Builder();
         $builder->setTargetPath($directory);
 
+        $classes = array();
         foreach ($this->listTables() as $table) {
-            $builder->buildRecord($table, $this->listTableColumns($table));
+            $builder->buildRecord(array('tableName' => $table,
+                                        'className' => Doctrine::classify($table)),
+                                  $this->listTableColumns($table),
+                                  array());
+        
+            $classes[] = Doctrine::classify($table);
         }
+        
+        return $classes;
     }
 }

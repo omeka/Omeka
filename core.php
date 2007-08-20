@@ -56,7 +56,6 @@ $manager = Doctrine_Manager::getInstance();
 $manager->setAttribute(Doctrine::ATTR_VLD, true);
 
 //@todo Uncomment this prior to production release for increase in speed
-$manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, false);
 $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 $manager->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 
@@ -97,14 +96,9 @@ if(isset($config->log)) {
 }
 
 
-// tack on the search capabilities
-require_once 'Kea'.DIRECTORY_SEPARATOR.'TimestampListener.php';
 $chainListeners = new Doctrine_EventListener_Chain();
 
-$chainListeners->add(new Kea_TimestampListener());
-
 $manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
-
 
 
 // Use Zend_Config_Ini to store the info for the routes and db ini files

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Sqlite.php 1164 2007-03-07 09:59:44Z zYne $
+ *  $Id: Sqlite.php 1889 2007-06-28 12:11:55Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,7 +24,7 @@ Doctrine::autoload('Doctrine_Import');
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1164 $
+ * @version     $Revision: 1889 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -130,9 +130,14 @@ class Doctrine_Import_Sqlite extends Doctrine_Import
         $description = array();
         $columns     = array();
         foreach ($result as $key => $val) {
+            $val = array_change_key_case($val, CASE_LOWER);
+            $decl = $this->conn->dataDict->getPortableDeclaration($val);
+
             $description = array(
                     'name'      => $val['name'],
-                    'type'      => $val['type'],
+                    'ntype'     => $val['type'],
+                    'type'      => $decl['type'][0],
+                    'alltypes'  => $decl['type'],
                     'notnull'   => (bool) $val['notnull'],
                     'default'   => $val['dflt_value'],
                     'primary'   => (bool) $val['pk'],

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mssql.php 1091 2007-02-11 08:46:29Z zYne $
+ *  $Id: Mssql.php 1730 2007-06-18 18:27:11Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_DataDict');
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
  * @author      Frank M. Kromann <frank@kromann.info> (PEAR MDB2 Mssql driver)
  * @author      David Coallier <davidc@php.net> (PEAR MDB2 Mssql driver)
- * @version     $Revision: 1091 $
+ * @version     $Revision: 1730 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -59,6 +59,9 @@ class Doctrine_DataDict_Mssql extends Doctrine_DataDict
      */
     public function getNativeDeclaration($field)
     {
+    	if ( ! isset($field['type'])) {
+            throw new Doctrine_DataDict_Exception('Missing column type.');
+    	}
         switch ($field['type']) {
             case 'array':
             case 'object':
@@ -66,6 +69,7 @@ class Doctrine_DataDict_Mssql extends Doctrine_DataDict
             case 'char':
             case 'varchar':
             case 'string':
+            case 'gzip':
                 $length = !empty($field['length'])
                     ? $field['length'] : false;
 
@@ -105,9 +109,11 @@ class Doctrine_DataDict_Mssql extends Doctrine_DataDict
                 return 'FLOAT';
             case 'decimal':
                 $length = !empty($field['length']) ? $field['length'] : 18;
-                return 'DECIMAL('.$length.','.$this->conn->options['decimal_places'].')';
+                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES);
+                return 'DECIMAL('.$length.','.$scale.')';
         }
-        throw new Doctrine_DataDict_Exception('Unknown column type.');
+
+        throw new Doctrine_DataDict_Exception('Unknown field type \'' . $field['type'] .  '\'.');
     }
     /**
      * Maps a native array description of a field to a MDB2 datatype and length
@@ -177,7 +183,7 @@ class Doctrine_DataDict_Mssql extends Doctrine_DataDict
 
         return array('type'     => $type,
                      'length'   => $length,
-                     'unsigned' => $unsigned, 
+                     'unsigned' => $unsigned,
                      'fixed'    => $fixed);
     }
 }

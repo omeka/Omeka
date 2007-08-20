@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Node.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Node.php 1949 2007-07-08 12:57:52Z romanb $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1949 $
  * @author      Joe Simms <joe.simms@websites4.com>
  */
 class Doctrine_Node implements IteratorAggregate
@@ -50,6 +50,13 @@ class Doctrine_Node implements IteratorAggregate
      * @param array     $iteratorOptions
      */
     protected $iteratorOptions;
+    
+    /**
+     * The tree to which the node belongs.
+     *
+     * @var unknown_type
+     */
+    protected $_tree;
 
     /**
      * contructor, creates node with reference to record and any options
@@ -61,6 +68,7 @@ class Doctrine_Node implements IteratorAggregate
     {
         $this->record = $record;
         $this->options = $options;
+        $this->_tree = $this->record->getTable()->getTree();
     }
 
     /**

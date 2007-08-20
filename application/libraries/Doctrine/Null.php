@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Null.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Null.php 2182 2007-08-09 17:27:13Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,8 +29,17 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 2182 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 final class Doctrine_Null
-{ }
+{ 
+    public function exists()
+    {
+        return false;	
+    }
+    public function __toString()
+    {
+    	return '';
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Condition.php 1099 2007-02-15 11:38:26Z zYne $
+ *  $Id: Condition.php 1479 2007-05-24 19:47:28Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Query_Part');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1099 $
+ * @version     $Revision: 1479 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 abstract class Doctrine_Query_Condition extends Doctrine_Query_Part
@@ -39,32 +39,32 @@ abstract class Doctrine_Query_Condition extends Doctrine_Query_Part
      * @param string $str
      * @return string
      */
-    final public function parse($str)
+    public function parse($str)
     {
         $tmp = trim($str);
 
-        $parts = Doctrine_Query::bracketExplode($str, array(' \&\& ', ' AND '), '(', ')');
+        $parts = Doctrine_Tokenizer::bracketExplode($str, array(' \&\& ', ' AND '), '(', ')');
 
         if (count($parts) > 1) {
             $ret = array();
             foreach ($parts as $part) {
-                $part = Doctrine_Query::bracketTrim($part, '(', ')');
+                $part = Doctrine_Tokenizer::bracketTrim($part, '(', ')');
                 $ret[] = $this->parse($part);
             }
-            $r = implode(' AND ',$ret);
+            $r = implode(' AND ', $ret);
         } else {
 
-            $parts = Doctrine_Query::bracketExplode($str, array(' \|\| ', ' OR '), '(', ')');
+            $parts = Doctrine_Tokenizer::bracketExplode($str, array(' \|\| ', ' OR '), '(', ')');
             if (count($parts) > 1) {
                 $ret = array();
                 foreach ($parts as $part) {
-                    $part = Doctrine_Query::bracketTrim($part, '(', ')');
+                    $part = Doctrine_Tokenizer::bracketTrim($part, '(', ')');
                     $ret[] = $this->parse($part);
                 }
                 $r = implode(' OR ', $ret);
             } else {
-                if (substr($parts[0],0,1) == '(' && substr($parts[0],-1) == ')') {
-                    return $this->parse(substr($parts[0],1,-1));
+                if (substr($parts[0],0,1) == '(' && substr($parts[0], -1) == ')') {
+                    return $this->parse(substr($parts[0], 1, -1));
                 } else {
                     return $this->load($parts[0]);
                 }
@@ -73,6 +73,9 @@ abstract class Doctrine_Query_Condition extends Doctrine_Query_Part
 
         return '(' . $r . ')';
     }
+
+
+
     /**
      * parses a literal value and returns the parsed value
      *
@@ -88,7 +91,7 @@ abstract class Doctrine_Query_Condition extends Doctrine_Query_Part
         if (strpos($value, '\'') === false) {
             // parse booleans
             $value = $this->query->getConnection()
-                     ->dataDict->parseBoolean($value);  
+                     ->dataDict->parseBoolean($value);
 
             $a = explode('.', $value);
 

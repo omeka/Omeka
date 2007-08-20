@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mssql.php 1088 2007-02-10 21:51:53Z zYne $
+ *  $Id: Mssql.php 1889 2007-06-28 12:11:55Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ Doctrine::autoload('Doctrine_Import');
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
  * @author      Frank M. Kromann <frank@kromann.info> (PEAR MDB2 Mssql driver)
  * @author      David Coallier <davidc@php.net> (PEAR MDB2 Mssql driver)
- * @version     $Revision: 1088 $
+ * @version     $Revision: 1889 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -44,7 +44,7 @@ class Doctrine_Import_Mssql extends Doctrine_Import
         $query = "SELECT name FROM sysobjects WHERE xtype = 'U'";
         $tableNames = $this->conn->fetchColumn($query);
 
-        return array_map(array($this->conn, 'fixSequenceName'), $tableNames);
+        return array_map(array($this->conn->formatter, 'fixSequenceName'), $tableNames);
     }
     /**
      * lists table constraints
@@ -59,6 +59,8 @@ class Doctrine_Import_Mssql extends Doctrine_Import
         $columns = array();
 
         foreach ($result as $key => $val) {
+            $val = array_change_key_case($val, CASE_LOWER);
+
             if (strstr($val['type_name'], ' ')) {
                 list($type, $identity) = explode(' ', $val['type_name']);
             } else {
@@ -74,8 +76,9 @@ class Doctrine_Import_Mssql extends Doctrine_Import
 
             $description  = array(
                 'name'      => $val['column_name'],
-                'type'      => $type,
-                'ptype'     => $decl['type'],
+                'ntype'     => $type,
+                'type'      => $decl['type'][0],
+                'alltypes'  => $decl['type'],
                 'length'    => $decl['length'],
                 'fixed'     => $decl['fixed'],
                 'unsigned'  => $decl['unsigned'],
@@ -115,7 +118,7 @@ class Doctrine_Import_Mssql extends Doctrine_Import
      *
      * @return array
      */
-    public function listTriggers()
+    public function listTriggers($database = null)
     {
         $query = "SELECT name FROM sysobjects WHERE xtype = 'TR'";
 
@@ -168,7 +171,7 @@ class Doctrine_Import_Mssql extends Doctrine_Import
 
         foreach ($indexes as $index) {
             if (!in_array($index, $pkAll) && $index != null) {
-                $result[] = $this->_fixIndexName($index);
+                $result[] = $this->conn->formatter->fixIndexName($index);
             }
         }
 

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Groupby.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Groupby.php 1479 2007-05-24 19:47:28Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Query_Part');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1479 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_Groupby extends Doctrine_Query_Part
@@ -39,7 +39,7 @@ class Doctrine_Query_Groupby extends Doctrine_Query_Part
      * @param string $str
      * @return void
      */
-    final public function parse($str)
+    public function parse($str, $append = false)
     {
         $r = array();
         foreach (explode(',', $str) as $reference) {
@@ -47,15 +47,10 @@ class Doctrine_Query_Groupby extends Doctrine_Query_Part
             $e     = explode('.', $reference);
             $field = array_pop($e);
             $ref   = implode('.', $e);
-            $table = $this->query->load($ref);
-            $component = $table->getComponentName();
-            $r[] = $this->query->getTableAlias($ref).".".$field;
+            $this->query->load($ref);
+
+            $r[] = $this->query->getTableAlias($ref) . '.' . $field;
         }
         return implode(', ', $r);
-    }
-
-    public function __toString()
-    {
-        return ( ! empty($this->parts))?implode(", ", $this->parts):'';
     }
 }

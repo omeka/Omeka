@@ -5,7 +5,7 @@ require_once 'CollectionTaggings.php';
  * @package Omeka
  **/
 class Collection extends Kea_Record { 
-    
+
 	public function construct()
 	{
 		$this->_strategies[] = new Relatable($this);

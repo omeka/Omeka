@@ -231,7 +231,7 @@ class Kea_Select {
         if (!in_array($type, array('left', 'inner'))) {
             $type = null;
         }
-		
+
 		$name = $this->modelToTable($name);
 		
         $this->_parts['join'][$name] = array(

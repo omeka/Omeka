@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Array.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Array.php 1495 2007-05-27 18:56:04Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,10 +28,10 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1495 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine_Cache_Array implements Countable
+class Doctrine_Cache_Array implements Countable, Doctrine_Cache_Interface
 {
     /**
      * @var array $data         an array of cached data

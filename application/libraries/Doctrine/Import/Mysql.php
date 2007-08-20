@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mysql.php 1157 2007-03-02 18:47:46Z zYne $
+ *  $Id: Mysql.php 2081 2007-07-26 19:52:12Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,7 +24,7 @@ Doctrine::autoload('Doctrine_Import');
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1157 $
+ * @version     $Revision: 2081 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -47,9 +47,9 @@ class Doctrine_Import_Mysql extends Doctrine_Import
      */
     public function listSequences($database = null)
     {
-        $query = "SHOW TABLES";
+        $query = 'SHOW TABLES';
         if (!is_null($database)) {
-            $query .= " FROM $database";
+            $query .= ' FROM ' . $database;
         }
         $tableNames = $this->conn->fetchColumn($query);
 
@@ -122,13 +122,17 @@ class Doctrine_Import_Mysql extends Doctrine_Import
 
             $decl = $this->conn->dataDict->getPortableDeclaration($val);
 
+            $values = isset($decl['values']) ? $decl['values'] : array();
+
             $description = array(
                 'name'      => $val['field'],
-                'type'      => $val['type'],
-                'ptype'     => $decl['type'],
+                'type'      => $decl['type'][0],
+                'alltypes'  => $decl['type'],
+                'ntype'     => $val['type'],
                 'length'    => $decl['length'],
                 'fixed'     => $decl['fixed'],
                 'unsigned'  => $decl['unsigned'],
+                'values'    => $values,
                 'primary'   => (strtolower($val['key']) == 'pri'),
                 'default'   => $val['default'],
                 'notnull'   => (bool) ($val['null'] != 'YES'),

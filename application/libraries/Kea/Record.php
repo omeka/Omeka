@@ -29,8 +29,7 @@ abstract class Kea_Record extends Doctrine_Record
 	{
 		$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
 	}
-	
-	
+		
 	public function setUp() 
 	{
 		$bound = Kea_Controller_Plugin_Broker::getInstance()->getBound(get_class($this));
@@ -450,49 +449,5 @@ abstract class Kea_Record extends Doctrine_Record
 		array_unshift($vars, $this);
 		call_user_func_array(array($this->_plugins, $hook), $vars);
 	}
-	
-	//@remove REMOVE THIS HACK WHEN DOCTRINE IS FULLY UPGRADED TO NEW REVISION
-	public function save($conn=null)
-	{
-		$this->preSave();
-		if(!$this->exists()) {
-			$this->preInsert();
-		}
-		
-//		try {
-			$res = parent::save();
-/*
-			} catch (Exception $e) {
-			$this->getErrorStack()->add('sql', $e->getMessage());
-			return false;
-		}
-*/	
-		//Call the onSave for any strategies that have been added
-		foreach($this->_strategies as $strat) {
-			$strat->onSave();
-		}
-	
-		$this->postSave();
-		return $res;
-	}
-	
-	public function delete()
-	{
-		//Call the onSave for any strategies that have been added
-		foreach($this->_strategies as $strat) {
-			$strat->onDelete();
-		}
-		
-		$this->pluginHook('onDeleteRecord', array($this));
-		
-		return parent::delete();
-	}
-	
-	public function preInsert() {}
-	public function preSave() {}
-	public function postSave() {}
-	
-	//END HACK TO REMOVE
-	
 } // END abstract class Kea_Record
 ?>

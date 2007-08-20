@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mock.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Mock.php 1819 2007-06-25 17:48:44Z subzero2000 $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,7 +29,7 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1819 $
  */
 class Doctrine_Adapter_Mock implements Doctrine_Adapter_Interface, Countable
 {
@@ -150,11 +150,13 @@ class Doctrine_Adapter_Mock implements Doctrine_Adapter_Interface, Countable
     { }
     public function getAttribute($attribute) 
     {
-        if($attribute == PDO::ATTR_DRIVER_NAME)
+        if($attribute == Doctrine::ATTR_DRIVER_NAME)
             return strtolower($this->name);
     }
     public function setAttribute($attribute, $value) 
     {
                                    	
     }
+    public function sqliteCreateFunction()
+    { }
 }

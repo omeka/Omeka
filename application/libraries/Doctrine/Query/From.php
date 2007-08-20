@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: From.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: From.php 2217 2007-08-11 21:53:02Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,12 +27,11 @@ Doctrine::autoload("Doctrine_Query_Part");
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 2217 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_From extends Doctrine_Query_Part
 {
-
     /**
      * DQL FROM PARSER
      * parses the from part of the query string
@@ -40,11 +39,10 @@ class Doctrine_Query_From extends Doctrine_Query_Part
      * @param string $str
      * @return void
      */
-    final public function parse($str)
+    public function parse($str)
     {
-
         $str = trim($str);
-        $parts = Doctrine_Query::bracketExplode($str, 'JOIN');
+        $parts = Doctrine_Tokenizer::bracketExplode($str, 'JOIN');
 
         $operator = false;
 
@@ -53,7 +51,9 @@ class Doctrine_Query_From extends Doctrine_Query_Part
                 $operator = ':';
             case 'LEFT':
                 array_shift($parts);
+            break;
         }
+
 
         $last = '';
 
@@ -71,23 +71,21 @@ class Doctrine_Query_From extends Doctrine_Query_Part
             }
             $part = implode(' ', $e);
 
-            foreach (Doctrine_Query::bracketExplode($part, ',') as $reference) {
+            foreach (Doctrine_Tokenizer::bracketExplode($part, ',') as $reference) {
                 $reference = trim($reference);
-                $e         = explode('.', $reference);
+                $e = explode(' ', $reference);
+                $e2 = explode('.', $e[0]);
 
                 if ($operator) {
-                    $reference = array_shift($e) . $operator . implode('.', $e);
+                    $e[0] = array_shift($e2) . $operator . implode('.', $e2);
                 }
 
-                $table     = $this->query->load($reference);
+                $table = $this->query->load(implode(' ', $e));
             }
 
             $operator = ($last == 'INNER') ? ':' : '.';
         }
+        return null;
     }
 
-    public function __toString()
-    {
-        return ( ! empty($this->parts))?implode(", ", $this->parts):'';
-    }
 }

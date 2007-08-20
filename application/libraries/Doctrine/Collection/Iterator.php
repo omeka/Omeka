@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Iterator.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Iterator.php 1323 2007-05-10 23:46:09Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1323 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 abstract class Doctrine_Collection_Iterator implements Iterator
@@ -57,7 +57,7 @@ abstract class Doctrine_Collection_Iterator implements Iterator
      * constructor
      * @var Doctrine_Collection $collection
      */
-    public function __construct(Doctrine_Collection $collection)
+    public function __construct($collection)
     {
         $this->collection = $collection;
         $this->keys       = $this->collection->getKeys();

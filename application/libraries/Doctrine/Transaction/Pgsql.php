@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Pgsql.php 1269 2007-04-18 08:59:10Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,7 +29,7 @@ Doctrine::autoload('Doctrine_Transaction');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1269 $
  */
 class Doctrine_Transaction_Pgsql extends Doctrine_Transaction
 {
@@ -42,7 +42,7 @@ class Doctrine_Transaction_Pgsql extends Doctrine_Transaction
      */
     protected function createSavePoint($savepoint)
     {
-        $query = 'SAVEPOINT '.$savepoint;
+        $query = 'SAVEPOINT ' . $savepoint;
 
         return $this->conn->execute($query);
     }
@@ -55,7 +55,7 @@ class Doctrine_Transaction_Pgsql extends Doctrine_Transaction
      */
     protected function releaseSavePoint($savepoint)
     {
-        $query = 'RELEASE SAVEPOINT '.$savepoint;
+        $query = 'RELEASE SAVEPOINT ' . $savepoint;
 
         return $this->conn->execute($query);
     }
@@ -68,7 +68,7 @@ class Doctrine_Transaction_Pgsql extends Doctrine_Transaction
      */
     protected function rollbackSavePoint($savepoint)
     {
-        $query = 'ROLLBACK TO SAVEPOINT '.$savepoint;
+        $query = 'ROLLBACK TO SAVEPOINT ' . $savepoint;
 
         return $this->conn->execute($query);
     }

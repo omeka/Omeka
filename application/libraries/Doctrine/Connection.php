@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Connection.php 1182 2007-03-21 22:11:18Z zYne $
+ *  $Id: Connection.php 2187 2007-08-09 22:26:57Z jackbravo $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -22,12 +22,34 @@ Doctrine::autoload('Doctrine_Configurable');
 /**
  * Doctrine_Connection
  *
+ * A wrapper layer on top of PDO / Doctrine_Adapter
+ *
+ * Doctrine_Connection is the heart of any Doctrine based application.
+ *
+ * 1. Event listeners
+ *    An easy to use, pluggable eventlistener architecture. Aspects such as
+ *    logging, query profiling and caching can be easily implemented through
+ *    the use of these listeners
+ *
+ * 2. Lazy-connecting
+ *    Creating an instance of Doctrine_Connection does not connect
+ *    to database. Connecting to database is only invoked when actually needed
+ *    (for example when query() is being called) 
+ *
+ * 3. Convenience methods
+ *    Doctrine_Connection provides many convenience methods such as fetchAll(), fetchOne() etc.
+ *
+ * 4. Modular structure
+ *    Higher level functionality such as schema importing, exporting, sequence handling etc.
+ *    is divided into modules. For a full list of connection modules see 
+ *    Doctrine_Connection::$_modules
+ *
  * @package     Doctrine
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1182 $
+ * @version     $Revision: 2187 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (MDB2 library)
  */
@@ -47,11 +69,21 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     protected $driverName;
     /**
+     * @var boolean $isConnected                whether or not a connection has been established
+     */
+    protected $isConnected      = false;
+    /**
      * @var array $supported                    an array containing all features this driver supports,
      *                                          keys representing feature names and values as
      *                                          one of the following (true, false, 'emulated')
      */
     protected $supported        = array();
+    /**
+     * @var array $pendingAttributes            An array of pending attributes. When setting attributes
+     *                                          no connection is needed. When connected all the pending
+     *                                          attributes are passed to the underlying adapter (usually PDO) instance.
+     */
+    protected $pendingAttributes  = array();
     /**
      * @var array $modules                      an array containing all modules
      *              transaction                 Doctrine_Transaction driver, handles savepoint and transaction isolation abstraction
@@ -66,12 +98,19 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      *              sequence                    Doctrine_Sequence driver, handles sequential id generation and retrieval
      *
+     *              unitOfWork                  Doctrine_Connection_UnitOfWork handles many orm functionalities such as object
+     *                                          deletion and saving
+     *
+     *              formatter                   Doctrine_Formatter handles data formatting, quoting and escaping
+     *
      * @see Doctrine_Connection::__get()
      * @see Doctrine_DataDict
      * @see Doctrine_Expression
      * @see Doctrine_Export
      * @see Doctrine_Transaction
      * @see Doctrine_Sequence
+     * @see Doctrine_Connection_UnitOfWork
+     * @see Doctrine_Formatter
      */
     private $modules = array('transaction' => false,
                              'expression'  => false,
@@ -80,22 +119,19 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
                              'import'      => false,
                              'sequence'    => false,
                              'unitOfWork'  => false,
+                             'formatter'   => false,
+                             'util'        => false,
                              );
     /**
      * @var array $properties               an array of connection properties
      */
     protected $properties = array('sql_comments'        => array(array('start' => '--', 'end' => "\n", 'escape' => false),
-                                                                 array('start' => '/*', 'end' => '*/', 'escape' => false)
-                                                                 ),
-                                  'identifier_quoting'  => array('start' => '"',
-                                                                 'end' => '"',
-                                                                 'escape' => '"'
-                                                                 ),
+                                                                 array('start' => '/*', 'end' => '*/', 'escape' => false)),
+                                  'identifier_quoting'  => array('start' => '"', 'end' => '"','escape' => '"'),
                                   'string_quoting'      => array('start' => "'",
                                                                  'end' => "'",
                                                                  'escape' => false,
-                                                                 'escape_pattern' => false
-                                                                 ),
+                                                                 'escape_pattern' => false),
                                   'wildcards'           => array('%', '_'),
                                   'varchar_max_length'  => 255,
                                   );
@@ -103,6 +139,8 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @var array $serverInfo
      */
     protected $serverInfo = array();
+    
+    protected $options    = array();
     /**
      * @var array $availableDrivers         an array containing all availible drivers
      */
@@ -115,6 +153,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
                                         'Sqlite',
                                         'Firebird'
                                         );
+    protected $_count;
 
     /**
      * the constructor
@@ -122,22 +161,90 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param Doctrine_Manager $manager                 the manager object
      * @param PDO|Doctrine_Adapter_Interface $adapter   database driver
      */
-    public function __construct(Doctrine_Manager $manager, $adapter)
+    public function __construct(Doctrine_Manager $manager, $adapter, $user = null, $pass = null)
     {
-        if ( ! ($adapter instanceof PDO) && ! in_array('Doctrine_Adapter_Interface', class_implements($adapter))) {
-            throw new Doctrine_Connection_Exception("First argument should be an instance of PDO or implement Doctrine_Adapter_Interface");
-        }
-        $this->dbh   = $adapter;
+    	if (is_object($adapter)) {
+            if ( ! ($adapter instanceof PDO) && ! in_array('Doctrine_Adapter_Interface', class_implements($adapter))) {
+                throw new Doctrine_Connection_Exception('First argument should be an instance of PDO or implement Doctrine_Adapter_Interface');
+            }
+            $this->dbh = $adapter;
 
-        //$this->modules['transaction']  = new Doctrine_Connection_Transaction($this);
-        $this->modules['unitOfWork']   = new Doctrine_Connection_UnitOfWork($this);
+            $this->isConnected = true;
+
+        } elseif(is_array($adapter)) {
+            $this->pendingAttributes[Doctrine::ATTR_DRIVER_NAME] = $adapter['scheme'];
+
+            $this->options['dsn']      = $adapter['dsn'];
+            $this->options['username'] = $adapter['user'];
+            $this->options['password'] = $adapter['pass'];
+        }
 
         $this->setParent($manager);
 
-        $this->dbh->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
-        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->setAttribute(Doctrine::ATTR_CASE, Doctrine::CASE_NATURAL);
+        $this->setAttribute(Doctrine::ATTR_ERRMODE, Doctrine::ERRMODE_EXCEPTION);
 
         $this->getAttribute(Doctrine::ATTR_LISTENER)->onOpen($this);
+    }
+    /**
+     * getAttribute
+     * retrieves a database connection attribute
+     *
+     * @param integer $attribute
+     * @return mixed
+     */
+    public function getAttribute($attribute)
+    {
+
+    	if ($attribute >= 100) {
+            if ( ! isset($this->attributes[$attribute])) {
+                return $this->parent->getAttribute($attribute);
+            }
+            return $this->attributes[$attribute];
+    	}
+
+        if ($this->isConnected) {
+            try {
+                return $this->dbh->getAttribute($attribute);
+            } catch(Exception $e) {
+                throw new Doctrine_Connection_Exception('Attribute ' . $attribute . ' not found.');
+            }
+        } else {
+            if ( ! isset($this->pendingAttributes[$attribute])) {
+                $this->connect();
+                $this->getAttribute($attribute);
+            }
+
+            return $this->pendingAttributes[$attribute];
+        }
+    }
+    /**
+     * returns an array of available PDO drivers
+     */
+    public static function getAvailableDrivers()
+    {
+        return PDO::getAvailableDrivers();
+    }
+    /**
+     * setAttribute
+     * sets an attribute
+     *
+     * @param integer $attribute
+     * @param mixed $value
+     * @return boolean
+     */
+    public function setAttribute($attribute, $value)
+    {
+    	if ($attribute >= 100) {
+            parent::setAttribute($attribute, $value);
+    	} else {
+            if ($this->isConnected) {
+                $this->dbh->setAttribute($attribute, $value);
+            } else {
+                $this->pendingAttributes[$attribute] = $value;
+            }
+        }
+        return $this;
     }
     /**
      * getName
@@ -164,8 +271,9 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function __get($name)
     {
-        if (isset($this->properties[$name]))
+        if (isset($this->properties[$name])) {
             return $this->properties[$name];
+        }
 
         if ( ! isset($this->modules[$name])) {
             throw new Doctrine_Connection_Exception('Unknown module / property ' . $name);
@@ -175,6 +283,9 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
                 case 'unitOfWork':
                     $this->modules[$name] = new Doctrine_Connection_UnitOfWork($this);
                     break;
+                case 'formatter':
+                    $this->modules[$name] = new Doctrine_Formatter($this);
+                    break;
                 default:
                     $class = 'Doctrine_' . ucwords($name) . '_' . $this->getName();
                     $this->modules[$name] = new $class($this);
@@ -182,91 +293,6 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
         }
 
         return $this->modules[$name];
-    }
-    /**
-     * Quotes pattern (% and _) characters in a string)
-     *
-     * EXPERIMENTAL
-     *
-     * WARNING: this function is experimental and may change signature at
-     * any time until labelled as non-experimental
-     *
-     * @param   string  the input string to quote
-     *
-     * @return  string  quoted string
-     */
-    public function escapePattern($text)
-    {
-        if ($this->string_quoting['escape_pattern']) {
-            $text = str_replace($this->string_quoting['escape_pattern'], $this->string_quoting['escape_pattern'] . $this->string_quoting['escape_pattern'], $text);
-            foreach ($this->wildcards as $wildcard) {
-                $text = str_replace($wildcard, $this->string_quoting['escape_pattern'] . $wildcard, $text);
-            }
-        }
-        return $text;
-    }
-    /**
-     * convertBoolean
-     * some drivers need the boolean values to be converted into integers
-     * when using DQL API
-     *
-     * This method takes care of that conversion
-     *
-     * @param array $item
-     * @return void
-     */
-    public function convertBooleans(array $items)
-    {
-        foreach ($items as $k => $item) {
-            if (is_bool($item)) {
-                $items[$k] = (int) $item;
-            }
-        }
-        return $items;
-    }
-    /**
-     * Quote a string so it can be safely used as a table or column name
-     *
-     * Delimiting style depends on which database driver is being used.
-     *
-     * NOTE: just because you CAN use delimited identifiers doesn't mean
-     * you SHOULD use them.  In general, they end up causing way more
-     * problems than they solve.
-     *
-     * Portability is broken by using the following characters inside
-     * delimited identifiers:
-     *   + backtick (<kbd>`</kbd>) -- due to MySQL
-     *   + double quote (<kbd>"</kbd>) -- due to Oracle
-     *   + brackets (<kbd>[</kbd> or <kbd>]</kbd>) -- due to Access
-     *
-     * Delimited identifiers are known to generally work correctly under
-     * the following drivers:
-     *   + mssql
-     *   + mysql
-     *   + mysqli
-     *   + oci8
-     *   + pgsql
-     *   + sqlite
-     *
-     * InterBase doesn't seem to be able to use delimited identifiers
-     * via PHP 4.  They work fine under PHP 5.
-     *
-     * @param string $str           identifier name to be quoted
-     * @param bool $checkOption     check the 'quote_identifier' option
-     *
-     * @return string               quoted identifier string
-     */
-    public function quoteIdentifier($str, $checkOption = true)
-    {
-        if ($checkOption && ! $this->getAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER)) {
-            return $str;
-        }
-        $str = str_replace($this->properties['identifier_quoting']['end'],
-                           $this->properties['identifier_quoting']['escape'] .
-                           $this->properties['identifier_quoting']['end'], $str);
-
-        return $this->properties['identifier_quoting']['start']
-               . $str . $this->properties['identifier_quoting']['end'];
     }
     /**
      * returns the manager that created this connection
@@ -284,7 +310,66 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function getDbh()
     {
+    	$this->connect();
+    	
         return $this->dbh;
+    }
+    /**
+     * connect
+     * connects into database
+     *
+     * @return boolean
+     */
+    public function connect()
+    {
+
+        if ($this->isConnected) {
+            return false;
+        }
+
+        $event = new Doctrine_Event($this, Doctrine_Event::CONN_CONNECT);
+
+        $this->getListener()->preConnect($event);
+
+        $e     = explode(':', $this->options['dsn']);
+        $found = false;
+        
+        if (extension_loaded('pdo')) {
+            if (in_array($e[0], PDO::getAvailableDrivers())) {
+                $this->dbh = new PDO($this->options['dsn'], $this->options['username'], $this->options['password']);
+                $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $found = true;
+            }
+        }
+
+        if ( ! $found) {
+            $class = 'Doctrine_Adapter_' . ucwords($e[0]);
+
+            if (class_exists($class)) {
+                $this->dbh = new $class($this->options['dsn'], $this->options['username'], $this->options['password']);
+            } else {
+                throw new Doctrine_Connection_Exception("Couldn't locate driver named " . $e[0]);      	
+            }
+        }
+
+        // attach the pending attributes to adapter
+        foreach($this->pendingAttributes as $attr => $value) {
+            // some drivers don't support setting this so we just skip it
+            if($attr == Doctrine::ATTR_DRIVER_NAME) {
+                continue;
+            }
+            $this->dbh->setAttribute($attr, $value);
+        }
+
+        $this->isConnected = true;
+
+        $this->getListener()->postConnect($event);
+        return true;
+    }
+    
+    public function incrementQueryCount() 
+    {
+        $this->_count++;
     }
     /**
      * converts given driver name
@@ -303,100 +388,9 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     public function supports($feature)
     {
         return (isset($this->supported[$feature])
-            && ($this->supported[$feature] === 'emulated'
-                || $this->supported[$feature]
-            )
-       );
+                  && ($this->supported[$feature] === 'emulated'
+                   || $this->supported[$feature]));
     }
-    /**
-     * quote
-     * quotes given input parameter
-     *
-     * @param mixed $input      parameter to be quoted
-     * @param string $type
-     * @return mixed
-     */
-    public function quote($input, $type = null)
-    {
-        if ($type == null) {
-            $type = gettype($input);
-        }
-        switch ($type) {
-            case 'integer':
-            case 'enum':
-            case 'boolean':
-            case 'double':
-            case 'float':
-            case 'bool':
-            case 'int':
-                return $input;
-            case 'array':
-            case 'object':
-                $input = serialize($input);
-            case 'string':
-            case 'char':
-            case 'varchar':
-            case 'text':
-            case 'gzip':
-            case 'blob':
-            case 'clob':
-                return $this->dbh->quote($input);
-        }
-    }
-    /**
-     * Removes any formatting in an sequence name using the 'seqname_format' option
-     *
-     * @param string $sqn string that containts name of a potential sequence
-     * @return string name of the sequence with possible formatting removed
-     */
-    public function fixSequenceName($sqn)
-    {
-        $seqPattern = '/^'.preg_replace('/%s/', '([a-z0-9_]+)',  $this->getAttribute(Doctrine::ATTR_SEQNAME_FORMAT)).'$/i';
-        $seqName    = preg_replace($seqPattern, '\\1', $sqn);
-
-        if ($seqName && ! strcasecmp($sqn, $this->getSequenceName($seqName))) {
-            return $seqName;
-        }
-        return $sqn;
-    }
-    /**
-     * Removes any formatting in an index name using the 'idxname_format' option
-     *
-     * @param string $idx string that containts name of anl index
-     * @return string name of the index with possible formatting removed
-     */
-    public function fixIndexName($idx)
-    {
-        $indexPattern   = '/^'.preg_replace('/%s/', '([a-z0-9_]+)', $this->getAttribute(Doctrine::ATTR_IDXNAME_FORMAT)).'$/i';
-        $indexName      = preg_replace($indexPattern, '\\1', $idx);
-        if ($indexName && ! strcasecmp($idx, $this->getIndexName($indexName))) {
-            return $indexName;
-        }
-        return $idx;
-    }
-    /**
-     * adds sequence name formatting to a sequence name
-     *
-     * @param string    name of the sequence
-     * @return string   formatted sequence name
-     */
-    public function getSequenceName($sqn)
-    {
-        return sprintf($this->getAttribute(Doctrine::ATTR_SEQNAME_FORMAT),
-            preg_replace('/[^a-z0-9_\$.]/i', '_', $sqn));
-    }
-    /**
-     * adds index name formatting to a index name
-     *
-     * @param string    name of the index
-     * @return string   formatted index name
-     */
-    public function getIndexName($idx)
-    {
-        return sprintf($this->getAttribute(Doctrine::ATTR_IDXNAME_FORMAT),
-                preg_replace('/[^a-z0-9_\$]/i', '_', $idx));
-    }
-
     /**
      * Execute a SQL REPLACE query. A REPLACE query is identical to a INSERT
      * query, except that if there is already a row in the table with the same
@@ -453,7 +447,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
             }
         }
 
-        $query          = 'DELETE FROM '. $table . ' WHERE ' . implode(' AND ', $condition);
+        $query          = 'DELETE FROM ' . $this->quoteIdentifier($table) . ' WHERE ' . implode(' AND ', $condition);
         $affectedRows   = $this->exec($query);
 
         $this->insert($table, $values);
@@ -478,12 +472,25 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
         $cols = array_keys($values);
 
         // build the statement
-        $query = "INSERT INTO $table "
-               . '(' . implode(', ', $cols) . ') '
-               . 'VALUES (' . substr(str_repeat('?, ', count($values)), 0, -2) . ')';
+        $query = 'INSERT INTO ' . $this->quoteIdentifier($table) 
+               . ' (' . implode(', ', $cols) . ') '
+               . 'VALUES (';
+        
+        $a = array();
+        foreach ($values as $k => $value) {
+            if ($value instanceof Doctrine_Expression) {
+                $value = $value->getSql();
+                unset($values[$k]);
+            } else {
+                $value = '?';      	
+            }
+            $a[] = $value;
 
+        }
+        $query .= implode(', ', $a) . ')';
         // prepare and execute the statement
-        $this->execute($query, array_values($values));
+
+        $this->exec($query, array_values($values));
 
         return true;
     }
@@ -497,6 +504,75 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     public function setCharset($charset)
     {
 
+    }
+    /**
+     * Quote a string so it can be safely used as a table or column name
+     *
+     * Delimiting style depends on which database driver is being used.
+     *
+     * NOTE: just because you CAN use delimited identifiers doesn't mean
+     * you SHOULD use them.  In general, they end up causing way more
+     * problems than they solve.
+     *
+     * Portability is broken by using the following characters inside
+     * delimited identifiers:
+     *   + backtick (<kbd>`</kbd>) -- due to MySQL
+     *   + double quote (<kbd>"</kbd>) -- due to Oracle
+     *   + brackets (<kbd>[</kbd> or <kbd>]</kbd>) -- due to Access
+     *
+     * Delimited identifiers are known to generally work correctly under
+     * the following drivers:
+     *   + mssql
+     *   + mysql
+     *   + mysqli
+     *   + oci8
+     *   + pgsql
+     *   + sqlite
+     *
+     * InterBase doesn't seem to be able to use delimited identifiers
+     * via PHP 4.  They work fine under PHP 5.
+     *
+     * @param string $str           identifier name to be quoted
+     * @param bool $checkOption     check the 'quote_identifier' option
+     *
+     * @return string               quoted identifier string
+     */
+    public function quoteIdentifier($str, $checkOption = true)
+    {
+    	// quick fix for the identifiers that contain a dot
+        if (strpos($str, '.')) {
+            $e = explode('.', $str);
+            
+            return $this->formatter->quoteIdentifier($e[0], $checkOption) . '.' 
+                 . $this->formatter->quoteIdentifier($e[1], $checkOption);
+        }
+        return $this->formatter->quoteIdentifier($str, $checkOption);
+    }
+    /**
+     * convertBooleans
+     * some drivers need the boolean values to be converted into integers
+     * when using DQL API
+     *
+     * This method takes care of that conversion
+     *
+     * @param array $item
+     * @return void
+     */
+    public function convertBooleans($item)
+    {
+        return $this->formatter->convertBooleans($item);
+    }
+    /**
+     * quote
+     * quotes given input parameter
+     *
+     * @param mixed $input      parameter to be quoted
+     * @param string $type
+     * @return mixed
+     */
+    public function quote($input, $type = null)
+    {
+        return $this->formatter->quote($input, $type);
     }
     /**
      * Set the date/time format for the current connection
@@ -517,7 +593,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function fetchAll($statement, array $params = array()) 
     {
-        return $this->execute($statement, $params)->fetchAll(PDO::FETCH_ASSOC);
+        return $this->execute($statement, $params)->fetchAll(Doctrine::FETCH_ASSOC);
     }
     /**
      * fetchOne
@@ -540,7 +616,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function fetchRow($statement, array $params = array()) 
     {
-        return $this->execute($statement, $params)->fetch(PDO::FETCH_ASSOC);
+        return $this->execute($statement, $params)->fetch(Doctrine::FETCH_ASSOC);
     }
     /**
      * fetchArray
@@ -551,7 +627,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function fetchArray($statement, array $params = array()) 
     {
-        return $this->execute($statement, $params)->fetch(PDO::FETCH_NUM);
+        return $this->execute($statement, $params)->fetch(Doctrine::FETCH_NUM);
     }
     /**
      * fetchColumn
@@ -563,7 +639,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function fetchColumn($statement, array $params = array(), $colnum = 0) 
     {
-        return $this->execute($statement, $params)->fetchAll(PDO::FETCH_COLUMN, $colnum);
+        return $this->execute($statement, $params)->fetchAll(Doctrine::FETCH_COLUMN, $colnum);
     }
     /**
      * fetchAssoc
@@ -574,7 +650,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function fetchAssoc($statement, array $params = array()) 
     {
-        return $this->execute($statement, $params)->fetchAll(PDO::FETCH_ASSOC);
+        return $this->execute($statement, $params)->fetchAll(Doctrine::FETCH_ASSOC);
     }
     /**
      * fetchBoth
@@ -585,7 +661,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      */
     public function fetchBoth($statement, array $params = array()) 
     {
-        return $this->execute($statement, $params)->fetchAll(PDO::FETCH_BOTH);
+        return $this->execute($statement, $params)->fetchAll(Doctrine::FETCH_BOTH);
     }
     /**
      * query
@@ -608,6 +684,34 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
         $parser = new Doctrine_Query($this);
 
         return $parser->query($query, $params);
+    }
+    /**
+     * prepare
+     *
+     * @param string $statement
+     */
+    public function prepare($statement)
+    {
+        $this->connect();
+
+        try {
+            $event = new Doctrine_Event($this, Doctrine_Event::CONN_PREPARE, $statement);
+    
+            $this->getAttribute(Doctrine::ATTR_LISTENER)->prePrepare($event);
+
+            $stmt = false;
+    
+            if ( ! $event->skipOperation) {
+                $stmt = $this->dbh->prepare($statement);
+            }
+    
+            $this->getAttribute(Doctrine::ATTR_LISTENER)->postPrepare($event);
+            
+            return new Doctrine_Connection_Statement($this, $stmt);
+        } catch(Doctrine_Adapter_Exception $e) {
+        } catch(PDOException $e) { }
+
+        $this->rethrowException($e, $this);
     }
     /**
      * query
@@ -647,7 +751,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param integer $offset
      * @return PDOStatement
      */
-    public function select($query,$limit = 0,$offset = 0)
+    public function select($query, $limit = 0, $offset = 0)
     {
         if ($limit > 0 || $offset > 0) {
             $query = $this->modifyLimitQuery($query, $limit, $offset);
@@ -673,23 +777,33 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * @return PDOStatement|Doctrine_Adapter_Statement
      */
-    public function execute($query, array $params = array()) 
+    public function execute($query, array $params = array())
     {
-Kea_Logger::setQueryStart();
+    	$this->connect();
+
         try {
             if ( ! empty($params)) {
-                $stmt = $this->dbh->prepare($query);
+                $stmt = $this->prepare($query);
                 $stmt->execute($params);
-Kea_Logger::logSql($query);
                 return $stmt;
             } else {
-Kea_Logger::logSql($query);	
-                return $this->dbh->query($query);
+                $event = new Doctrine_Event($this, Doctrine_Event::CONN_QUERY, $query, $params);
+
+                $this->getAttribute(Doctrine::ATTR_LISTENER)->preQuery($event);
+
+                if ( ! $event->skipOperation) {
+                    $stmt = $this->dbh->query($query);
+
+                    $this->_count++;
+                }
+                $this->getAttribute(Doctrine::ATTR_LISTENER)->postQuery($event);
+
+                return $stmt;
             }
         } catch(Doctrine_Adapter_Exception $e) {
         } catch(PDOException $e) { }
 
-        $this->rethrowException($e);
+        $this->rethrowException($e, $this);
     }
     /**
      * exec
@@ -699,26 +813,44 @@ Kea_Logger::logSql($query);
      * @return PDOStatement|Doctrine_Adapter_Statement
      */
     public function exec($query, array $params = array()) {
+    	$this->connect();
+
         try {
             if ( ! empty($params)) {
-                $stmt = $this->dbh->prepare($query);
+                $stmt = $this->prepare($query);
                 $stmt->execute($params);
+
                 return $stmt->rowCount();
             } else {
-                return $this->dbh->exec($query);
+                $event = new Doctrine_Event($this, Doctrine_Event::CONN_EXEC, $query, $params);
+
+                $this->getAttribute(Doctrine::ATTR_LISTENER)->preExec($event);
+
+                if ( ! $event->skipOperation) {
+                    $count = $this->dbh->exec($query);
+
+                    $this->_count++;
+                }
+                $this->getAttribute(Doctrine::ATTR_LISTENER)->postExec($event);
+
+                return $count;
             }
         } catch(Doctrine_Adapter_Exception $e) {
         } catch(PDOException $e) { }
 
-        $this->rethrowException($e);
+        $this->rethrowException($e, $this);
     }
     /**
      * rethrowException
      *
      * @throws Doctrine_Connection_Exception
      */
-    private function rethrowException(Exception $e)
+    public function rethrowException(Exception $e, $invoker)
     {
+    	$event = new Doctrine_Event($this, Doctrine_Event::CONN_ERROR);
+
+    	$this->getListener()->preError($event);
+
         $name = 'Doctrine_Connection_' . $this->driverName . '_Exception';
 
         $exc  = new $name($e->getMessage(), (int) $e->getCode());
@@ -727,7 +859,11 @@ Kea_Logger::logSql($query);
         }
         $exc->processErrorInfo($e->errorInfo);
 
-        throw $exc;
+         if ($this->getAttribute(Doctrine::ATTR_THROW_EXCEPTIONS)) {
+            throw $exc;
+        }
+        
+        $this->getListener()->postError($event);
     }
     /**
      * hasTable
@@ -754,16 +890,13 @@ Kea_Logger::logSql($query);
         $class = $name . 'Table';
 
         if (class_exists($class) && in_array('Doctrine_Table', class_parents($class))) {
-            $table = new $class($name, $this, $allowExport);
+            $table = new $class($name, $this);
         } else {
-            $table = new Doctrine_Table($name, $this, $allowExport);
+            $table = new Doctrine_Table($name, $this);
         }
-        
+
         $this->tables[$name] = $table;
-        
-        if ($table->getAttribute(Doctrine::ATTR_EXPORT) & Doctrine::EXPORT_TABLES) {
-            $table->export();
-        }
+
 
         return $table;
     }
@@ -799,23 +932,23 @@ Kea_Logger::logSql($query);
      */
     public function count()
     {
-        return count($this->tables);
+        return $this->_count;
     }
     /**
      * addTable
      * adds a Doctrine_Table object into connection registry
      *
-     * @param $objTable             a Doctrine_Table object to be added into registry
+     * @param $table                a Doctrine_Table object to be added into registry
      * @return boolean
      */
-    public function addTable(Doctrine_Table $objTable)
+    public function addTable(Doctrine_Table $table)
     {
-        $name = $objTable->getComponentName();
+        $name = $table->getComponentName();
 
         if (isset($this->tables[$name])) {
             return false;
         }
-        $this->tables[$name] = $objTable;
+        $this->tables[$name] = $table;
         return true;
     }
     /**
@@ -866,6 +999,7 @@ Kea_Logger::logSql($query);
     public function evictTables()
     {
         $this->tables = array();
+        $this->exported = array();
     }
     /**
      * close
@@ -875,11 +1009,16 @@ Kea_Logger::logSql($query);
      */
     public function close()
     {
-        $this->getAttribute(Doctrine::ATTR_LISTENER)->onPreClose($this);
+    	$event = new Doctrine_Event($this, Doctrine_Event::CONN_CLOSE);
+
+        $this->getAttribute(Doctrine::ATTR_LISTENER)->preClose($event);
 
         $this->clear();
+        
+        $this->dbh = null;
+        $this->isConnected = false;
 
-        $this->getAttribute(Doctrine::ATTR_LISTENER)->onClose($this);
+        $this->getAttribute(Doctrine::ATTR_LISTENER)->postClose($event);
     }
     /**
      * get the current transaction nesting level
@@ -891,94 +1030,96 @@ Kea_Logger::logSql($query);
         return $this->transaction->getTransactionLevel();
     }
     /**
-     * beginTransaction
-     * starts a new transaction
+     * errorCode
+     * Fetch the SQLSTATE associated with the last operation on the database handle
      *
-     * this method can be listened by onPreBeginTransaction and onBeginTransaction
-     * listener methods
-     *
-     * @return void
+     * @return integer
      */
-    public function beginTransaction()
+    public function errorCode()
     {
-        $this->transaction->beginTransaction();
+    	$this->connect();
+
+        return $this->dbh->errorCode();
     }
     /**
-     * commits the current transaction
-     * if lockmode is optimistic this method starts a transaction
-     * and commits it instantly
+     * errorInfo
+     * Fetch extended error information associated with the last operation on the database handle
      *
-     * @return void
+     * @return array
      */
-    public function commit()
+    public function errorInfo()
     {
-        $this->transaction->commit();
+    	$this->connect();
+
+        return $this->dbh->errorInfo();
+    }
+    /**
+     * lastInsertId
+     *
+     * Returns the ID of the last inserted row, or the last value from a sequence object,
+     * depending on the underlying driver.
+     *
+     * Note: This method may not return a meaningful or consistent result across different drivers, 
+     * because the underlying database may not even support the notion of auto-increment fields or sequences.
+     *
+     * @param string $table     name of the table into which a new row was inserted
+     * @param string $field     name of the field into which a new row was inserted
+     */
+    public function lastInsertId($table = null, $field = null)
+    {
+        return $this->sequence->lastInsertId($table, $field);
+    }
+    /**
+     * beginTransaction
+     * Start a transaction or set a savepoint.
+     *
+     * if trying to set a savepoint and there is no active transaction
+     * a new transaction is being started
+     *
+     * Listeners: onPreTransactionBegin, onTransactionBegin
+     *
+     * @param string $savepoint                 name of a savepoint to set
+     * @throws Doctrine_Transaction_Exception   if the transaction fails at database level
+     * @return integer                          current transaction nesting level
+     */
+    public function beginTransaction($savepoint = null)
+    {
+        $this->transaction->beginTransaction($savepoint);
+    }
+    /**
+     * commit
+     * Commit the database changes done during a transaction that is in
+     * progress or release a savepoint. This function may only be called when
+     * auto-committing is disabled, otherwise it will fail.
+     *
+     * Listeners: onPreTransactionCommit, onTransactionCommit
+     *
+     * @param string $savepoint                 name of a savepoint to release
+     * @throws Doctrine_Transaction_Exception   if the transaction fails at PDO level
+     * @throws Doctrine_Validator_Exception     if the transaction fails due to record validations
+     * @return boolean                          false if commit couldn't be performed, true otherwise
+     */
+    public function commit($savepoint = null)
+    {
+        $this->transaction->commit($savepoint);
     }
     /**
      * rollback
-     * rolls back all transactions
+     * Cancel any database changes done during a transaction or since a specific
+     * savepoint that is in progress. This function may only be called when
+     * auto-committing is disabled, otherwise it will fail. Therefore, a new
+     * transaction is implicitly started after canceling the pending changes.
      *
-     * this method also listens to onPreTransactionRollback and onTransactionRollback
-     * eventlisteners
+     * this method can be listened with onPreTransactionRollback and onTransactionRollback
+     * eventlistener methods
      *
-     * @return void
+     * @param string $savepoint                 name of a savepoint to rollback to   
+     * @throws Doctrine_Transaction_Exception   if the rollback operation fails at database level
+     * @return boolean                          false if rollback couldn't be performed, true otherwise
      */
-    public function rollback()
+    public function rollback($savepoint = null)
     {
-        $this->transaction->rollback();
-    }
-    /**
-     * saves the given record
-     *
-     * @param Doctrine_Record $record
-     * @return void
-     */
-    public function save(Doctrine_Record $record)
-    {
-        $record->getTable()->getAttribute(Doctrine::ATTR_LISTENER)->onPreSave($record);
-
-        switch ($record->state()) {
-            case Doctrine_Record::STATE_TDIRTY:
-                $this->unitOfWork->insert($record);
-                break;
-            case Doctrine_Record::STATE_DIRTY:
-            case Doctrine_Record::STATE_PROXY:
-                $this->unitOfWork->update($record);
-                break;
-            case Doctrine_Record::STATE_CLEAN:
-            case Doctrine_Record::STATE_TCLEAN:
-                // do nothing
-                break;
-        };
-
-        $record->getTable()->getAttribute(Doctrine::ATTR_LISTENER)->onSave($record);
-    }
-    /**
-     * deletes this data access object and all the related composites
-     * this operation is isolated by a transaction
-     *
-     * this event can be listened by the onPreDelete and onDelete listeners
-     *
-     * @return boolean      true on success, false on failure
-     */
-    public function delete(Doctrine_Record $record)
-    {
-        if ( ! $record->exists()) {
-            return false;
-        }
-        $this->beginTransaction();
-
-        $record->getTable()->getListener()->onPreDelete($record);
-
-        $this->unitOfWork->deleteComposites($record);
-
-        $this->transaction->addDelete($record);
-
-        $record->getTable()->getListener()->onDelete($record);
-
-        $this->commit();
-
-        return true;
+        $this->transaction->rollback($savepoint);
     }
     /**
      * returns a string representation of this object

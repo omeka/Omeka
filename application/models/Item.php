@@ -35,9 +35,6 @@ class Item extends Kea_Record
 	//	$this->hasMany("Tag as Tags", "ItemTaggings.tag_id");
 
 		$this->ownsMany("ItemsPages","ItemsPages.item_id");
-		
-		
-		
 		$this->ownsMany("ItemsRelations", "ItemsRelations.relation_id");
 //		$this->hasMany("SectionPage as ExhibitPages", "ItemsPages.page_id");
 		
@@ -146,6 +143,7 @@ class Item extends Kea_Record
 				
 			case 'Tags':
 				return $this->getTags();
+				
 			default:
 				return parent::get($name);
 				break;
@@ -524,6 +522,7 @@ class Item extends Kea_Record
 				$user = Kea::loggedIn();
 				$entity = $user->Entity;
 			}
+
 			$this->applyTagString($post['tags'], $entity);
 		}
 		

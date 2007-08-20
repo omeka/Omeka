@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Sqlite.php 1185 2007-03-22 13:32:43Z zYne $
+ *  $Id: Sqlite.php 2065 2007-07-24 09:35:11Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,10 +29,30 @@ Doctrine::autoload('Doctrine_Export');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1185 $
+ * @version     $Revision: 2065 $
  */
 class Doctrine_Export_Sqlite extends Doctrine_Export
 {
+    /**
+     * drop an existing database
+     *
+     * @param string $name                  name of the database that should be dropped
+     * @throws Doctrine_Export_Exception    if the database file does not exist
+     * @throws Doctrine_Export_Exception    if something failed during the removal of the database file
+     * @return void
+     */
+    public function dropDatabase($name)
+    {
+        $databaseFile = $this->conn->getDatabaseFile($name);
+        if (!@file_exists($databaseFile)) {
+            throw new Doctrine_Export_Exception('database does not exist');
+        }
+        $result = @unlink($databaseFile);
+        if ( ! $result) {
+            throw new Doctrine_Export_Exception('could not remove the database file');
+        }
+    }
+
     /**
      * Get the stucture of a field into an array
      *
@@ -68,7 +88,7 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
     public function createIndexSql($table, $name, array $definition)
     {
         $table = $this->conn->quoteIdentifier($table, true);
-        $name  = $this->conn->getIndexName($name);
+        $name  = $this->conn->formatter->getIndexName($name);
         $query = 'CREATE INDEX ' . $name . ' ON ' . $table;
         $query .= ' (' . $this->getIndexFieldDeclarationList($definition['fields']) . ')';
 
@@ -135,7 +155,7 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
      *
      * @return void
      */
-    public function createTable($name, array $fields, array $options = array()) 
+    public function createTableSql($name, array $fields, array $options = array())
     {
         if ( ! $name) {
             throw new Doctrine_Export_Exception('no valid table name specified');
@@ -148,7 +168,8 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
         
         $autoinc = false;
         foreach($fields as $field) {
-            if(isset($field['autoincrement']) && $field['autoincrement']) {
+            if(isset($field['autoincrement']) && $field['autoincrement'] || 
+              (isset($field['autoinc']) && $field['autoinc'])) {
                 $autoinc = true;
                 break;
             }
@@ -157,40 +178,44 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
         if ( ! $autoinc && isset($options['primary']) && ! empty($options['primary'])) {
             $queryFields.= ', PRIMARY KEY('.implode(', ', array_values($options['primary'])).')';
         }
-        
-        // sqlite doesn't support foreign key declaration but it parses those anyway
-        
-        $fk = array();
-        if (isset($options['foreignKeys']) && ! empty($options['foreignKeys'])) {
-            foreach ($options['foreignKeys'] as $definition) {
-                //$queryFields .= ', ' . $this->getForeignKeyDeclaration($definition);
 
-                if (isset($definition['onDelete'])) {
-                    $fk[] = $definition;
-                }
-            }
+        $name  = $this->conn->quoteIdentifier($name, true);
+        $sql   = 'CREATE TABLE ' . $name . ' (' . $queryFields;
+
+        if ($check = $this->getCheckDeclaration($fields)) {
+            $sql .= ', ' . $check;
         }
+
+        if (isset($options['checks']) && $check = $this->getCheckDeclaration($options['checks'])) {
+            $sql .= ', ' . $check;
+        }
+
+        $sql .= ')';
+
+        $query[] = $sql;
 
         if (isset($options['indexes']) && ! empty($options['indexes'])) {
             foreach ($options['indexes'] as $index => $definition) {
-                $queryFields .= ', ' . $this->getIndexDeclaration($index, $definition);
+                $query[] = $this->createIndexSql($name, $index, $definition);
             }
         }
-
-        $name  = $this->conn->quoteIdentifier($name, true);
-        $query = 'CREATE TABLE ' . $name . ' (' . $queryFields . ')';
-
+        return $query;
+        
+        
+        /**
         try {
+
             if ( ! empty($fk)) {
                 $this->conn->beginTransaction();
             }
+
             $ret   = $this->conn->exec($query);
 
             if ( ! empty($fk)) {
                 foreach ($fk as $definition) {
 
                     $query = 'CREATE TRIGGER doctrine_' . $name . '_cscd_delete '
-                           . 'AFTER DELETE ON ' . $name . ' FOR EACH STATEMENT '
+                           . 'AFTER DELETE ON ' . $name . ' FOR EACH ROW '
                            . 'BEGIN '
                            . 'DELETE FROM ' . $definition['foreignTable'] . ' WHERE ';
 
@@ -206,21 +231,63 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
 
                 $this->conn->commit();
             }
+
+
         } catch(Doctrine_Exception $e) {
 
             $this->conn->rollback();
 
             throw $e;
         }
+        */
+    }
+    /**
+     * getAdvancedForeignKeyOptions
+     * Return the FOREIGN KEY query section dealing with non-standard options
+     * as MATCH, INITIALLY DEFERRED, ON UPDATE, ...
+     *
+     * @param array $definition         foreign key definition
+     * @return string
+     * @access protected
+     */
+    public function getAdvancedForeignKeyOptions(array $definition)
+    {
+        $query = '';
+        if (isset($definition['match'])) {
+            $query .= ' MATCH ' . $definition['match'];
+        }
+        if (isset($definition['onUpdate'])) {
+            $query .= ' ON UPDATE ' . $definition['onUpdate'];
+        }
+        if (isset($definition['onDelete'])) {
+            $query .= ' ON DELETE ' . $definition['onDelete'];
+        }
+        if (isset($definition['deferrable'])) {
+            $query .= ' DEFERRABLE';
+        } else {
+            $query .= ' NOT DEFERRABLE';
+        }
+        if (isset($definition['feferred'])) {
+            $query .= ' INITIALLY DEFERRED';
+        } else {
+            $query .= ' INITIALLY IMMEDIATE';
+        }
+        return $query;
     }
     /**
      * create sequence
      *
      * @param string    $seqName        name of the sequence to be created
      * @param string    $start          start value of the sequence; default is 1
+     * @param array     $options  An associative array of table options:
+     *                          array(
+     *                              'comment' => 'Foo',
+     *                              'charset' => 'utf8',
+     *                              'collate' => 'utf8_unicode_ci',
+     *                          );
      * @return boolean
      */
-    public function createSequence($seqName, $start = 1)
+    public function createSequence($seqName, $start = 1, array $options = array())
     {
         $sequenceName   = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
         $seqcolName     = $this->conn->quoteIdentifier($this->conn->getAttribute(Doctrine::ATTR_SEQCOL_NAME), true);
@@ -236,7 +303,8 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
             $this->conn->exec('INSERT INTO ' . $sequenceName . ' (' . $seqcolName . ') VALUES (' . ($start-1) . ')');
             return true;
         } catch(Doctrine_Connection_Exception $e) {
-            // Handle error
+            // Handle error    
+
             try {
                 $result = $db->exec('DROP TABLE ' . $sequenceName);
             } catch(Doctrine_Connection_Exception $e) {
@@ -248,12 +316,13 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
     /**
      * drop existing sequence
      *
-     * @param string    $seq_name     name of the sequence to be dropped
-     * @return boolean
+     * @param string $sequenceName      name of the sequence to be dropped
+     * @return string
      */
-    public function dropSequence($seq_name)
+    public function dropSequenceSql($sequenceName)
     {
-        $sequenceName   = $this->conn->quoteIdentifier($this->conn->getSequenceName($seq_name), true);
-        return $this->conn->exec('DROP TABLE ' . $sequenceName);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($sequenceName), true);
+
+        return 'DROP TABLE ' . $sequenceName;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mysql.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Mysql.php 1721 2007-06-17 17:49:13Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ Doctrine::autoload('Doctrine_Sequence');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1721 $
  */
 class Doctrine_Sequence_Mysql extends Doctrine_Sequence
 {
@@ -40,9 +40,9 @@ class Doctrine_Sequence_Mysql extends Doctrine_Sequence
      *
      * @return integer          next id in the given sequence
      */
-    public function nextId($seqName, $ondemand = true)
+    public function nextId($seqName, $onDemand = true)
     {
-        $sequenceName  = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName  = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         $seqcolName    = $this->conn->quoteIdentifier($this->conn->getAttribute(Doctrine::ATTR_SEQCOL_NAME), true);
         $query         = 'INSERT INTO ' . $sequenceName . ' (' . $seqcolName . ') VALUES (NULL)';
         
@@ -51,7 +51,7 @@ class Doctrine_Sequence_Mysql extends Doctrine_Sequence
             $this->conn->exec($query);
 
         } catch(Doctrine_Connection_Exception $e) {
-            if ($ondemand && $e->getPortableCode() == Doctrine::ERR_NOSUCHTABLE) {
+            if ($onDemand && $e->getPortableCode() == Doctrine::ERR_NOSUCHTABLE) {
                 // Since we are creating the sequence on demand
                 // we know the first id = 1 so initialize the
                 // sequence at 2
@@ -101,7 +101,7 @@ class Doctrine_Sequence_Mysql extends Doctrine_Sequence
      */
     public function currId($seqName)
     {
-        $sequenceName   = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName   = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         $seqcolName     = $this->conn->quoteIdentifier($this->conn->getAttribute(Doctrine::ATTR_SEQCOL_NAME), true);
         $query          = 'SELECT MAX(' . $seqcolName . ') FROM ' . $sequenceName;
 

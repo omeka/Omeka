@@ -17,7 +17,6 @@ class Kea_Upgrader
 	public function __construct($manager, $fromVersion, $toVersion)
 	{
 		$this->manager = $manager;
-		$this->manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, false);
 		$this->start = $fromVersion;
 		$this->end = $toVersion;
 		

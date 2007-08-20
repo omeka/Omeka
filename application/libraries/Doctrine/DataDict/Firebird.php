@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Firebird.php 1091 2007-02-11 08:46:29Z zYne $
+ *  $Id: Firebird.php 1731 2007-06-18 18:30:19Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ Doctrine::autoload('Doctrine_DataDict');
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lorenzo Alberton <l.alberton@quipo.it> (PEAR MDB2 Interbase driver)
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1091 $
+ * @version     $Revision: 1731 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -57,6 +57,9 @@ class Doctrine_DataDict_Firebird extends Doctrine_DataDict
      */
     public function getNativeDeclaration($field)
     {
+    	if ( ! isset($field['type'])) {
+            throw new Doctrine_DataDict_Exception('Missing column type.');
+    	}
         switch ($field['type']) {
             case 'varchar':
             case 'string':
@@ -64,6 +67,7 @@ class Doctrine_DataDict_Firebird extends Doctrine_DataDict
             case 'object':
             case 'char':
             case 'text':
+            case 'gzip':
                 $length = !empty($field['length'])
                     ? $field['length'] : 16777215; // TODO: $this->conn->options['default_text_field_length'];
 
@@ -90,10 +94,11 @@ class Doctrine_DataDict_Firebird extends Doctrine_DataDict
                 return 'DOUBLE PRECISION';
             case 'decimal':
                 $length = !empty($field['length']) ? $field['length'] : 18;
-                return 'DECIMAL('.$length.','.$this->conn->options['decimal_places'].')';
-            default:
-                throw new Doctrine_DataDict_Exception('Unknown field type '. $field['type']);
+                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES);
+                return 'DECIMAL('.$length.','.$scale.')';
         }
+
+        throw new Doctrine_DataDict_Exception('Unknown field type \'' . $field['type'] .  '\'.');
     }
     /**
      * Maps a native array description of a field to a Doctrine datatype and length
@@ -181,7 +186,7 @@ class Doctrine_DataDict_Firebird extends Doctrine_DataDict
 
         return array('type'     => $type,
                      'length'   => $length,
-                     'unsigned' => $unsigned, 
+                     'unsigned' => $unsigned,
                      'fixed'    => $fixed);
     }
     /**
@@ -194,7 +199,7 @@ class Doctrine_DataDict_Firebird extends Doctrine_DataDict
      */
     public function getCharsetFieldDeclaration($charset)
     {
-        return 'CHARACTER SET '.$charset;
+        return 'CHARACTER SET ' . $charset;
     }
     /**
      * Obtain DBMS specific SQL code portion needed to set the COLLATION
@@ -206,6 +211,6 @@ class Doctrine_DataDict_Firebird extends Doctrine_DataDict
      */
     public function getCollationFieldDeclaration($collation)
     {
-        return 'COLLATE '.$collation;
+        return 'COLLATE ' . $collation;
     }
 }

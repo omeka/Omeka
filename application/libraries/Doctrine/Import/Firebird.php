@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Firebird.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Firebird.php 1616 2007-06-10 19:17:26Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@ Doctrine::autoload('Doctrine_Import');
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lorenzo Alberton <l.alberton@quipo.it> (PEAR MDB2 Interbase driver)
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1616 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -37,7 +37,7 @@ class Doctrine_Import_Firebird extends Doctrine_Import
      *
      * @return array        data array
      */
-    public function listTables()
+    public function listTables($database = null)
     {
         $query = 'SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$SYSTEM_FLAG=0 AND RDB$VIEW_BLR IS NULL';
 
@@ -71,7 +71,7 @@ class Doctrine_Import_Firebird extends Doctrine_Import
      *
      * @return array            data array containing all database views
      */
-    public function listViews()
+    public function listViews($database = null)
     {
         return $this->conn->fetchColumn('SELECT DISTINCT RDB$VIEW_NAME FROM RDB$VIEW_RELATIONS');
     }
@@ -108,7 +108,7 @@ class Doctrine_Import_Firebird extends Doctrine_Import
      *                            previous database to query against.
      * @return array              data array containing all triggers for given table
      */
-    public function listTableTriggers($table = null)
+    public function listTableTriggers($table)
     {
         $query = 'SELECT RDB$TRIGGER_NAME FROM RDB$TRIGGERS WHERE RDB$SYSTEM_FLAG IS NULL OR RDB$SYSTEM_FLAG = 0';
 

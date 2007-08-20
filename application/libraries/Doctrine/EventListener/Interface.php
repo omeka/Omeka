@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Interface.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Interface.php 1976 2007-07-11 22:03:47Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,61 +18,52 @@
  * and is licensed under the LGPL. For more information, see
  * <http://www.phpdoctrine.com>.
  */
+Doctrine::autoload('Doctrine_EventListener_Interface');
 /**
- * Doctrine_EventListener_Interface
+ * Doctrine_EventListener     all event listeners extend this base class
+ *                            the empty methods allow child classes to only implement the methods they need to implement
  *
- * interface for event listening, forces all classes that extend
- * Doctrine_EventListener to have the same method arguments as their parent
  *
- * @author      Konsta Vesterinen
- * @package     Doctrine ORM
- * @url         www.phpdoctrine.com
- * @license     LGPL
+ * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
+ * @package     Doctrine
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @category    Object Relational Mapping
+ * @link        www.phpdoctrine.com
+ * @since       1.0
+ * @version     $Revision: 1976 $
  */
-interface Doctrine_EventListener_Interface {
+interface Doctrine_EventListener_Interface
+{
+    public function preTransactionCommit(Doctrine_Event $event);
+    public function postTransactionCommit(Doctrine_Event $event);
 
-    public function onLoad(Doctrine_Record $record);
-    public function onPreLoad(Doctrine_Record $record);
+    public function preTransactionRollback(Doctrine_Event $event);
+    public function postTransactionRollback(Doctrine_Event $event);
 
-    public function onUpdate(Doctrine_Record $record);
-    public function onPreUpdate(Doctrine_Record $record);
+    public function preTransactionBegin(Doctrine_Event $event);
+    public function postTransactionBegin(Doctrine_Event $event);
 
-    public function onCreate(Doctrine_Record $record);
-    public function onPreCreate(Doctrine_Record $record);
+    public function postConnect(Doctrine_Event $event);
+    public function preConnect(Doctrine_Event $event);
 
-    public function onSave(Doctrine_Record $record);
-    public function onPreSave(Doctrine_Record $record);
+    public function preQuery(Doctrine_Event $event);
+    public function postQuery(Doctrine_Event $event);
 
-    public function onGetProperty(Doctrine_Record $record, $property, $value);
-    public function onSetProperty(Doctrine_Record $record, $property, $value);
+    public function prePrepare(Doctrine_Event $event);
+    public function postPrepare(Doctrine_Event $event);
 
-    public function onInsert(Doctrine_Record $record);
-    public function onPreInsert(Doctrine_Record $record);
+    public function preExec(Doctrine_Event $event);
+    public function postExec(Doctrine_Event $event);
 
-    public function onDelete(Doctrine_Record $record);
-    public function onPreDelete(Doctrine_Record $record);
+    public function preError(Doctrine_Event $event);
+    public function postError(Doctrine_Event $event);
 
-    public function onEvict(Doctrine_Record $record);
-    public function onPreEvict(Doctrine_Record $record);
+    public function preFetch(Doctrine_Event $event);
+    public function postFetch(Doctrine_Event $event);
 
-    public function onSleep(Doctrine_Record $record);
+    public function preFetchAll(Doctrine_Event $event);
+    public function postFetchAll(Doctrine_Event $event);
 
-    public function onWakeUp(Doctrine_Record $record);
-
-    public function onClose(Doctrine_Connection $connection);
-    public function onPreClose(Doctrine_Connection $connection);
-
-    public function onOpen(Doctrine_Connection $connection);
-
-    public function onTransactionCommit(Doctrine_Connection $connection);
-    public function onPreTransactionCommit(Doctrine_Connection $connection);
-
-    public function onTransactionRollback(Doctrine_Connection $connection);
-    public function onPreTransactionRollback(Doctrine_Connection $connection);
-
-    public function onTransactionBegin(Doctrine_Connection $connection);
-    public function onPreTransactionBegin(Doctrine_Connection $connection);
-
-    public function onCollectionDelete(Doctrine_Collection $collection);
-    public function onPreCollectionDelete(Doctrine_Collection $collection);
+    public function preStmtExecute(Doctrine_Event $event);
+    public function postStmtExecute(Doctrine_Event $event);
 }

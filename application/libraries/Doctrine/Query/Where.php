@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Where.php 1154 2007-03-01 21:48:09Z zYne $
+ *  $Id: Where.php 2224 2007-08-13 21:23:56Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,168 +27,129 @@ Doctrine::autoload('Doctrine_Query_Condition');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1154 $
+ * @version     $Revision: 2224 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_Where extends Doctrine_Query_Condition
 {
-    /**
-     * load
-     * returns the parsed query part
-     *
-     * @param string $where
-     * @return string
-     */
-    public function load($where)
+    public function load($where) 
     {
-        $where = trim($where);
+        $where = Doctrine_Tokenizer::bracketTrim(trim($where));
+        $conn  = $this->query->getConnection();
+        $terms = Doctrine_Tokenizer::sqlExplode($where);  
 
-        $e     = Doctrine_Query::sqlExplode($where);
-
-        if (count($e) > 1) {
-            $tmp   = $e[0] . ' ' . $e[1];
-
-            if (substr($tmp, 0, 6) == 'EXISTS') {
+        if (count($terms) > 1) {
+            if (substr($where, 0, 6) == 'EXISTS') {
                 return $this->parseExists($where, true);
             } elseif (substr($where, 0, 10) == 'NOT EXISTS') {
                 return $this->parseExists($where, false);
             }
         }
 
-		if(substr($e[0],0,5) == "MATCH") {
-			return $this->parseMatch($where);
-		}
-		
-        if (count($e) < 3) {
-            $e = Doctrine_Query::sqlExplode($where, array('=', '<', '>', '!='));
+        if (count($terms) < 3) {
+            $terms = Doctrine_Tokenizer::sqlExplode($where, array('=', '<', '<>', '>', '!='));
         }
-        $r = array_shift($e);
 
-        $a = explode('.', $r);
+        if (count($terms) > 1) {
+            $first = array_shift($terms);
+            $value = array_pop($terms);
+            $operator = trim(substr($where, strlen($first), -strlen($value)));
+            $table = null;
+            $field = null;
 
-        if (count($a) > 1) {
-            $field     = array_pop($a);
-            $count     = count($e);
-            $slice     = array_slice($e, -1, 1);
-            $value     = implode('', $slice);
-            $operator  = trim(substr($where, strlen($r), -strlen($value)));
-
-            $reference = implode('.', $a);
-            $count     = count($a);
-
-            $pos       = strpos($field, '(');
-
-            if ($pos !== false) {
-                $func   = substr($field, 0, $pos);
-                $value  = trim(substr($field, ($pos + 1), -1));
-
-                $values = Doctrine_Query::sqlExplode($value, ',');
-
-                $field      = array_pop($a);
-                $reference  = implode('.', $a);
-                $table      = $this->query->load($reference, false);
+            if (strpos($first, "'") === false && strpos($first, '(') === false) {
+                // normal field reference found
+                $a = explode('.', $first);
+        
+                $field = array_pop($a);
+                $reference = implode('.', $a);
                 
-                $field      = $table->getColumnName($field);
-
-                array_pop($a);
-                
-                $reference2 = implode('.', $a);
-                
-                $alias      = $this->query->getTableAlias($reference2);
-
-                $stack      = $this->query->getRelationStack();
-                $relation   = end($stack);
-
-                $stack      = $this->query->getTableStack();
-
-                switch ($func) {
-                    case 'contains':
-                    case 'regexp':
-                    case 'like':
-                        $operator = $this->getOperator($func);
-
-                        if (empty($relation)) {
-                            throw new Doctrine_Query_Exception('DQL functions contains/regexp/like can only be used for fields of related components');
-                        }
-                        $where = array();
-                        foreach ($values as $value) {
-                            $where[] = $alias . '.' . $relation->getLocal() 
-                                     . ' IN (SELECT '.$relation->getForeign()
-                                     . ' FROM ' . $relation->getTable()->getTableName() 
-                                     . ' WHERE ' . $field . $operator . $value . ')';
-                        }
-                        $where = implode(' AND ', $where);
-                        break;
-                    default:
-                        throw new Doctrine_Query_Exception('Unknown DQL function: '.$func);
+                if (empty($reference)) {
+                    $map = $this->query->getRootDeclaration();  
+                    
+                    $alias = $this->query->getTableAlias($this->query->getRootAlias());
+                    $table = $map['table'];                     	
+                } else {
+                    $map = $this->query->load($reference, false);
+    
+                    $alias = $this->query->getTableAlias($reference);
+                    $table = $map['table'];
+                }
+                if ($this->query->getType() === Doctrine_Query::SELECT) {
+                    $first = $conn->quoteIdentifier($alias)
+                           . '.'
+                           . $conn->quoteIdentifier($table->getColumnName($field));
+                } else {
+                    $first = $conn->quoteIdentifier($table->getColumnName($field));
                 }
             } else {
-                $table     = $this->query->load($reference, false);
-                $alias     = $this->query->getTableAlias($reference);
+                $first = $this->query->parseClause($first);
+            }
+            $sql = $first . ' ' . $operator . ' ' . $this->parseValue($value, $table, $field);
+        
+            return $sql;  
+        } else {
 
-                $table     = $this->query->getTable($alias);
-                
-                $field     = $table->getColumnName($field);
+        }
+    }
+
+    public function parseValue($value, Doctrine_Table $table = null, $field = null)
+    {
+        if (substr($value, 0, 1) == '(') {
+            // trim brackets
+            $trimmed   = Doctrine_Tokenizer::bracketTrim($value);
+
+            if (substr($trimmed, 0, 4) == 'FROM' ||
+                substr($trimmed, 0, 6) == 'SELECT') {
+
+                // subquery found
+                $q     = new Doctrine_Query();
+                $value = '(' . $q->isSubquery(true)->parseQuery($trimmed)->getQuery() . ')';
+
+            } elseif (substr($trimmed, 0, 4) == 'SQL:') {
+                $value = '(' . substr($trimmed, 4) . ')';
+            } else {
+                // simple in expression found
+                $e = Doctrine_Tokenizer::sqlExplode($trimmed, ',');
+
+                $value = array();
+
+                $index = false;
+
+                foreach ($e as $part) {
+                    if (isset($table) && isset($field)) {
+                        $index = $table->enumIndex($field, trim($part, "'"));
+                    }
+
+                    if ($index !== false) {
+                        $value[] = $index;
+                    } else {
+                        $value[] = $this->parseLiteralValue($part);
+                    }
+                }
+                $value = '(' . implode(', ', $value) . ')';
+            }
+        } elseif(substr($value, 0, 1) == ':' || $value === '?') {
+            // placeholder found
+            if (isset($table) && isset($field) && $table->getTypeOf($field) == 'enum') {
+                $this->query->addEnumParam($value, $table, $field);
+            } else {
+                $this->query->addEnumParam($value, null, null);
+            }
+        } else {
+            $enumIndex = false;
+            if (isset($table) && isset($field)) {
                 // check if value is enumerated value
                 $enumIndex = $table->enumIndex($field, trim($value, "'"));
+            }
 
-                if (substr($value, 0, 1) == '(') {
-                    // trim brackets
-                    $trimmed   = Doctrine_Query::bracketTrim($value);
-
-                    if (substr($trimmed, 0, 4) == 'FROM' || substr($trimmed, 0, 6) == 'SELECT') {
-
-                        // subquery found
-                        $q     = new Doctrine_Query();
-                        $value = '(' . $q->isSubquery(true)->parseQuery($trimmed)->getQuery() . ')';
-
-                    } elseif (substr($trimmed, 0, 4) == 'SQL:') {
-                        $value = '(' . substr($trimmed, 4) . ')';
-                    } else {
-                        // simple in expression found
-                        $e     = Doctrine_Query::sqlExplode($trimmed, ',');
-
-                        $value = array();
-                        foreach ($e as $part) {
-                            $index   = $table->enumIndex($field, trim($part, "'"));
-                            if ($index !== false) {
-                                $value[] = $index;
-                            } else {
-                                $value[] = $this->parseLiteralValue($part);
-                            }
-                        }
-                        $value = '(' . implode(', ', $value) . ')';
-                    }
-                } else {
-                    if ($enumIndex !== false) {
-                        $value = $enumIndex;
-                    } else {
-                        $value = $this->parseLiteralValue($value);
-                    }
-                }
-
-                switch ($operator) {
-                    case '<':
-                    case '>':
-                    case '=':
-                    case '!=':
-                        if ($enumIndex !== false) {
-                            $value  = $enumIndex;
-                        }
-                    default:
-
-                        if ($this->query->getType() === Doctrine_Query::SELECT) {
-                            $fieldname = $alias ? $alias . '.' . $field : $field;
-                        } else {
-                            $fieldname = $field;
-                        }
-                        
-                        $where      = $fieldname . ' ' 
-                                    . $operator . ' ' . $value;
-                }
+            if ($enumIndex !== false) {
+                $value = $enumIndex;
+            } else {
+                $value = $this->parseLiteralValue($value);
             }
         }
-        return $where;
+        return $value;
     }
     /**
      * parses an EXISTS expression
@@ -203,66 +164,12 @@ class Doctrine_Query_Where extends Doctrine_Query_Condition
 
         $pos = strpos($where, '(');
 
-        if ($pos == false)
-            throw new Doctrine_Query_Exception("Unknown expression, expected '('");
-
-        $sub = Doctrine_Query::bracketTrim(substr($where, $pos));
-
-        return $operator . ' ('.$this->query->createSubquery()->parseQuery($sub, false)->getQuery() . ')';
-    }
-    /**
-     * getOperator
-     *
-     * @param string $func
-     * @return string
-     */
-    public function getOperator($func)
-    {
-        switch ($func) {
-            case 'contains':
-                $operator = ' = ';
-                break;
-            case 'regexp':
-                $operator = $this->query->getConnection()->getRegexpOperator();
-                break;
-            case 'like':
-                $operator = ' LIKE ';
-                break;
+        if ($pos == false) {
+            throw new Doctrine_Query_Exception('Unknown expression, expected a subquery with () -marks');
         }
-        return $operator;
+
+        $sub = Doctrine_Tokenizer::bracketTrim(substr($where, $pos));
+
+        return $operator . ' (' . $this->query->createSubquery()->parseQuery($sub, false)->getQuery() . ')';
     }
-    /**
-     * __toString
-     * return string representation of this object
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return ( ! empty($this->parts))?implode(' AND ', $this->parts):'';
-    }
-	
-	/**
-	 * @todo this doesn't parse spaces correctly.  fix that shit
-	 *
-	 * @return void
-	 **/
-	public function parseMatch($where) {
-		$e     = Doctrine_Query::sqlExplode($where);
-		$fieldString = Doctrine_Query::bracketTrim($e[1]);
-		$fields = explode(',', $fieldString);
-		
-		foreach ($fields as $key => $field) {
-			list($reference, $fieldName) = explode('.', $field);
-			
-            $alias     = $this->query->getTableAlias($reference);
-            $table     = $this->query->getTable($alias);
-			$fieldName     = $table->getColumnName($fieldName);
-			$fields[$key] =  implode('.', array($alias, $fieldName));
-		}
-		$e[1] = '('.implode(',',$fields).')';
-		
-		$where = implode(' ', $e);
-		return $where;
-	}
 }

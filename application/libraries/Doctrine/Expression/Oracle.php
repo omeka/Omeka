@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 1165 2007-03-07 10:38:45Z zYne $
+ *  $Id: Oracle.php 1917 2007-07-01 11:27:45Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information, see
  * <http://www.phpdoctrine.com>.
  */
-Doctrine::autoload('Doctrine_Expression');
+Doctrine::autoload('Doctrine_Expression_Driver');
 /**
  * Doctrine_Expression_Sqlite
  *
@@ -27,10 +27,10 @@ Doctrine::autoload('Doctrine_Expression');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1165 $
+ * @version     $Revision: 1917 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine_Expression_Oracle extends Doctrine_Expression
+class Doctrine_Expression_Oracle extends Doctrine_Expression_Driver
 {
     /**
      * Returns a series of strings concatinated
@@ -41,12 +41,11 @@ class Doctrine_Expression_Oracle extends Doctrine_Expression
      * @param string $arg1, $arg2 ... $argN     strings that will be concatinated.
      * @return string
      */
-    public function concat($arg1, $arg2)
+    public function concat()
     {
         $args = func_get_args();
 
-        $cols = $this->getIdentifiers( $args );
-        return join( ' || ' , $cols );
+        return join(' || ' , $args);
     }
     /**
      * return string to call a function to get a substring inside an SQL statement

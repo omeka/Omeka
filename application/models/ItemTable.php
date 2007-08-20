@@ -218,14 +218,14 @@ class ItemTable extends Doctrine_Table
 		//Finally, hydrate the Doctrine objects with the array of ids given
 		$query = new Doctrine_Query;
 		$query->select('i.*, t.*')->from('Item i');
-		$query->leftJoin('Item.Collection c');
+		$query->leftJoin('i.Collection c');
 		$query->leftJoin('i.Type ty');
 				
 		//If no IDs were returned in the first query, then whatever
 		if(!empty($ids)) {
 			$where = "(i.id = ".join(" OR i.id = ", $ids) . ")";
 		}else {
-			$where = "1 = 0";
+			$where = "0";
 		}
 		
 		

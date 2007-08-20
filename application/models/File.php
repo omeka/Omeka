@@ -89,12 +89,14 @@ class File extends Kea_Record {
 			$metadata = $this->extendedMetadata[$name];
 			
 			if($unserialized = unserialize($metadata)) {
-				return $unserialized;
+				$value = $unserialized;
 			}else {
-				return $metadata;
+				$value = $metadata;
 			}
-			
+			return $value;
 		}
+		
+		return parent::get($name);
 	}
 	
 	protected function preCommitForm(&$post, $options)

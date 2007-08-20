@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Set.php 1154 2007-03-01 21:48:09Z zYne $
+ *  $Id: Set.php 2119 2007-07-31 20:22:10Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,31 +27,30 @@ Doctrine::autoload('Doctrine_Query_Part');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1154 $
+ * @version     $Revision: 2119 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_Set extends Doctrine_Query_Part
 {
     public function parse($dql)
     {
-        $parts = Doctrine_Query::sqlExplode($dql, ',');
+        preg_match_all("/[a-z0-9_]+\.[a-z0-9_]+[\.[a-z0-9]+]*/i", $dql, $m);
 
-        $result = array();
-        foreach ($parts as $part) {
-            $set = Doctrine_Query::sqlExplode($part, '=');
-
-            $e   = explode('.', trim($set[0]));
-            $field = array_pop($e);
-
-            $reference = implode('.', $e);
-
-            $alias     = $this->query->getTableAlias($reference);
-            $table     = $this->query->getTable($alias);
-
-            $result[]  = $table->getColumnName($field) . ' = ' . $set[1];
+        if (isset($m[0])) {
+            foreach ($m[0] as $part) {
+                $e   = explode('.', trim($part));
+                $field = array_pop($e);
+    
+                $reference = implode('.', $e);
+    
+                $alias = $this->query->getTableAlias($reference);
+                $map   = $this->query->getAliasDeclaration($reference);
+    
+                $dql = str_replace($part, $map['table']->getColumnName($field), $dql);
+            }
         }
 
-        return implode(', ', $result);
+        return $dql;
     }
 }
 

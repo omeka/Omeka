@@ -507,7 +507,6 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 
 		$this->loadFormData();
 		return $this->render($pluralName.'/add.php', compact($varName));			
-
 	}
 	
 	public function editAction()
@@ -577,7 +576,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * 
 	 **/
 	public function render($page, array $vars = array())
-	{
+	{		
 		if($return = $this->getInvokeArg('return')){
 			if(is_array($return)) {
 				$returnThese = array();
@@ -589,7 +588,6 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				return $vars[$return];
 			}
 		} 
-		
 		/* Check if the page to render has been overridden by an arbitrary param
 			Make sure that this param is not set via the URL */
 		if(($toRender = $this->_getParam('renderPage')) and (!isset($_REQUEST['renderPage']))) {

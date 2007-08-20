@@ -23,7 +23,6 @@ class PluginsController extends Kea_Controller_Action
 	}
 	
 	protected function installNew() {
-
 		$router = Kea_Controller_Front::getInstance()->getRouter();
 		
 		$dir = new VersionedDirectoryIterator(PLUGIN_DIR);

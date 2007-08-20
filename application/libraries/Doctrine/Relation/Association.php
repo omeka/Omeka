@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Association.php 1156 2007-03-02 09:23:24Z gyim $
+ *  $Id: Association.php 2212 2007-08-11 18:24:19Z nightfreak $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,7 +30,7 @@ Doctrine::autoload('Doctrine_Relation');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1156 $
+ * @version     $Revision: 2212 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Relation_Association extends Doctrine_Relation
@@ -40,50 +40,11 @@ class Doctrine_Relation_Association extends Doctrine_Relation
      */
     public function getAssociationFactory()
     {
-        return $this->definition['assocTable'];
+        return $this->definition['refTable'];
     }
-    /**
-     * processDiff
-     *
-     * @param Doctrine_Record $record
-     * @param Doctrine_Connection $conn
-     */
-    public function processDiff(Doctrine_Record $record, $conn = null)
+    public function getAssociationTable()
     {
-         if (!$conn) {
-             $conn = $this->getTable()->getConnection();
-         }
-
-        $asf     = $this->getAssociationFactory();
-        $alias   = $this->getAlias();
-
-        if ($record->hasReference($alias)) {
-            $new = $record->obtainReference($alias);
-
-            if ( ! $record->obtainOriginals($alias)) {
-                $record->loadReference($alias);
-            }
-            $operations = Doctrine_Relation::getDeleteOperations($record->obtainOriginals($alias), $new);
-
-            foreach ($operations as $r) {
-                $query = 'DELETE FROM ' . $asf->getTableName()
-                       . ' WHERE '      . $this->getForeign() . ' = ?'
-                       . ' AND '        . $this->getLocal()   . ' = ?';
-
-                $conn->execute($query, array($r->getIncremented(),$record->getIncremented()));
-            }
-
-            $operations = Doctrine_Relation::getInsertOperations($record->obtainOriginals($alias),$new);
-
-            foreach ($operations as $r) {
-                $reldao = $asf->create();
-                $reldao->set($this->getForeign(), $r);
-                $reldao->set($this->getLocal(), $record);
-                $reldao->save($conn);
-            }
-
-            $record->assignOriginals($alias, clone $record->get($alias));
-        }
+    	return $this->definition['refTable'];
     }
     /**
      * getRelationDql
@@ -93,19 +54,14 @@ class Doctrine_Relation_Association extends Doctrine_Relation
      */
     public function getRelationDql($count, $context = 'record')
     {
-    	$component = $this->definition['assocTable']->getComponentName();
+    	$component = $this->definition['refTable']->getComponentName();
         switch ($context) {
             case "record":
-                $sub    = 'SQL:SELECT ' . $this->definition['foreign'].
-                          ' FROM '  . $this->definition['assocTable']->getTableName().
-                          ' WHERE ' . $this->definition['local'] .
-                          ' IN ('   . substr(str_repeat("?, ", $count),0,-2) .
-                          ')';
-
+                $sub  = substr(str_repeat("?, ", $count),0,-2);
                 $dql  = 'FROM ' . $this->getTable()->getComponentName();
                 $dql .= '.' . $component;
                 $dql .= ' WHERE ' . $this->getTable()->getComponentName()
-                      . '.' . $this->getTable()->getIdentifier() . ' IN (' . $sub . ')';
+                . '.' . $component . '.' . $this->definition['local'] . ' IN (' . $sub . ')';
                 break;
             case "collection":
                 $sub  = substr(str_repeat("?, ", $count),0,-2);
@@ -126,12 +82,13 @@ class Doctrine_Relation_Association extends Doctrine_Relation
      */
     public function fetchRelatedFor(Doctrine_Record $record)
     {
-        $id      = $record->getIncremented();
-        if (empty($id)) {
+        $id = $record->getIncremented();
+        if (empty($id) || ! $this->definition['table']->getAttribute(Doctrine::ATTR_LOAD_REFERENCES)) {
             $coll = new Doctrine_Collection($this->getTable());
         } else {
             $coll = Doctrine_Query::create()->parseQuery($this->getRelationDql(1))->execute(array($id));
         }
+        $coll->setReference($record, $this);
         return $coll;
     }
 }

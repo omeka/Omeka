@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Configurable.php 1187 2007-03-23 16:31:35Z zYne $
+ *  $Id: Configurable.php 2153 2007-08-03 11:52:24Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,20 +28,25 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1187 $
+ * @version     $Revision: 2153 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-abstract class Doctrine_Configurable
+abstract class Doctrine_Configurable extends Doctrine_Object
 {
-
     /**
      * @var array $attributes               an array of containing all attributes
      */
-    private $attributes = array();
+    protected $attributes = array();
     /**
-     * @var $parent                         the parents of this component
+     * @var Doctrine_Configurable $parent   the parent of this component
      */
-    private $parent;
+    protected $parent;
+    /**
+     * @var array $_impl                    an array containing concrete implementations for class templates
+     *                                      keys as template names and values as names of the concrete 
+     *                                      implementation classes
+     */
+    protected $_impl = array();
     /**
      * setAttribute
      * sets a given attribute
@@ -63,13 +68,17 @@ abstract class Doctrine_Configurable
      */
     public function setAttribute($attribute,$value)
     {
+        if (is_string($attribute)) {
+            $upper = strtoupper($attribute);
+            
+            $const = 'Doctrine::ATTR_' . $attribute;
+            if (defined($const)) {
+                $this->_state = constant($const);
+            } else {
+                throw new Doctrine_Exception('Unknown attribute ' . $attribute);
+            }
+        }
         switch ($attribute) {
-            case Doctrine::ATTR_BATCH_SIZE:
-                if ($value < 0) {
-                    throw new Doctrine_Exception("Batch size should be greater than or equal to zero");
-                }
-                break;
-
             case Doctrine::ATTR_FETCHMODE:
                 if ($value < 0) {
                    throw new Doctrine_Exception("Unknown fetchmode. See Doctrine::FETCH_* constants.");
@@ -79,35 +88,12 @@ abstract class Doctrine_Configurable
                 $this->setEventListener($value);
                 break;
             case Doctrine::ATTR_LOCKMODE:
-                if ($this instanceof Doctrine_Connection) {
-                    if ($this->transaction->getState() != Doctrine_Transaction::STATE_SLEEP) {
-                        throw new Doctrine_Exception("Couldn't set lockmode. There are transactions open.");
-                    }
-                } elseif ($this instanceof Doctrine_Manager) {
-                    foreach ($this as $connection) {
-                        if ($connection->transaction->getState() != Doctrine_Transaction::STATE_SLEEP) {
-                            throw new Doctrine_Exception("Couldn't set lockmode. There are transactions open.");
-                        }
-                    }
-                } else {
-                    throw new Doctrine_Exception("Lockmode attribute can only be set at the global or connection level.");
-                }
                 break;
             case Doctrine::ATTR_CREATE_TABLES:
-                    $attribute = Doctrine::ATTR_EXPORT;
-                if ($value) {
-                    $value = Doctrine::EXPORT_ALL;
-                } else {
-                    $value = Doctrine::EXPORT_NONE;
-                }
+                    throw new Doctrine_Exception("ATTR_CREATE_TABLES has been deprecated. See exporting in the first chapter of the manual.");
                 break;
             case Doctrine::ATTR_ACCESSORS:
-                $accessors = array('none','get','set','both');
-
-               // if ( ! in_array($value,$accessors)) {
-               //     throw new Doctrine_Exception();
-               // }
-
+                    throw new Doctrine_Exception("Get / Set filtering is deprecated (slowed down Doctrine too much)."); 
                 break;
             case Doctrine::ATTR_COLL_LIMIT:
                 if ($value < 1) {
@@ -122,6 +108,13 @@ abstract class Doctrine_Configurable
                     throw new Doctrine_Exception("Couldn't set collection key attribute. No such column '$value'");
                 }
                 break;
+            case Doctrine::ATTR_CACHE:
+                if ($value !== null) {
+                    if ( ! ($value instanceof Doctrine_Cache_Interface)) {
+                        throw new Doctrine_Exception('Cache driver should implement Doctrine_Cache_Interface');
+                    }
+                }
+                break;
             case Doctrine::ATTR_VLD:
             case Doctrine::ATTR_AUTO_LENGTH_VLD:
             case Doctrine::ATTR_AUTO_TYPE_VLD:
@@ -134,6 +127,10 @@ abstract class Doctrine_Configurable
             case Doctrine::ATTR_EMULATE_DATABASE:
             case Doctrine::ATTR_DEFAULT_SEQUENCE:
             case Doctrine::ATTR_EXPORT:
+            case Doctrine::ATTR_DECIMAL_PLACES:
+            case Doctrine::ATTR_LOAD_REFERENCES:
+            case Doctrine::ATTR_RECORD_LISTENER:
+            case Doctrine::ATTR_THROW_EXCEPTIONS:
 
                 break;
             case Doctrine::ATTR_SEQCOL_NAME:
@@ -154,10 +151,55 @@ abstract class Doctrine_Configurable
                 break;
             default:
                 throw new Doctrine_Exception("Unknown attribute.");
-        };
+        }
 
         $this->attributes[$attribute] = $value;
 
+    }
+    /**
+     * setImpl
+     * binds given class to given template name
+     *
+     * this method is the base of Doctrine dependency injection
+     *
+     * @param string $template      name of the class template
+     * @param string $class         name of the class to be bound
+     * @return Doctrine_Configurable    this object
+     */
+    public function setImpl($template, $class)
+    {
+        $this->_impl[$template] = $class;
+        
+        return $this;
+    }
+    /**
+     * getImpl
+     * returns the implementation for given class
+     *
+     * @return string   name of the concrete implementation
+     */
+    public function getImpl($template)
+    {
+        if ( ! isset($this->_impl[$template])) {
+            if (isset($this->parent)) {
+                return $this->parent->getImpl($template);
+            }
+            return null;
+        }
+        return $this->_impl[$template];
+    }
+    /**
+     * getCacheDriver
+     *
+     * @return Doctrine_Cache_Interface
+     */
+    public function getCacheDriver()
+    {
+        if ( ! isset($this->attributes[Doctrine::ATTR_CACHE])) {
+            throw new Doctrine_Exception('Cache driver not initialized.');
+        }
+        
+        return $this->attributes[Doctrine::ATTR_CACHE];
     }
     /**
      * @param Doctrine_EventListener $listener
@@ -168,14 +210,65 @@ abstract class Doctrine_Configurable
         return $this->setListener($listener);
     }
     /**
+     * addRecordListener
+     *
+     * @param Doctrine_EventListener_Interface|Doctrine_Overloadable $listener
+     * @return mixed        this object
+     */
+    public function addRecordListener($listener, $name = null)
+    {
+        if ( ! isset($this->attributes[Doctrine::ATTR_RECORD_LISTENER]) ||
+             ! ($this->attributes[Doctrine::ATTR_RECORD_LISTENER] instanceof Doctrine_Record_Listener_Chain)) {
+            
+            $this->attributes[Doctrine::ATTR_RECORD_LISTENER] = new Doctrine_Record_Listener_Chain();
+        }
+        $this->attributes[Doctrine::ATTR_RECORD_LISTENER]->add($listener, $name);
+
+        return $this;
+    }
+    /**
+     * getListener
+     *
+     * @return Doctrine_EventListener_Interface|Doctrine_Overloadable
+     */
+    public function getRecordListener()
+    {
+        if ( ! isset($this->attributes[Doctrine::ATTR_RECORD_LISTENER])) {
+            if (isset($this->parent)) {
+                return $this->parent->getRecordListener();
+            }
+            return null;
+        }
+        return $this->attributes[Doctrine::ATTR_RECORD_LISTENER];
+    }
+    /**
+     * setListener
+     *
+     * @param Doctrine_EventListener_Interface|Doctrine_Overloadable $listener
+     * @return Doctrine_Configurable        this object
+     */
+    public function setRecordListener($listener)
+    {
+        if ( ! ($listener instanceof Doctrine_Record_Listener_Interface)
+            && ! ($listener instanceof Doctrine_Overloadable)
+        ) {
+            throw new Doctrine_Exception("Couldn't set eventlistener. Record listeners should implement either Doctrine_Record_Listener_Interface or Doctrine_Overloadable");
+        }
+        $this->attributes[Doctrine::ATTR_RECORD_LISTENER] = $listener;
+
+        return $this;
+    }
+    /**
      * addListener
      *
-     * @param Doctrine_Db_EventListener_Interface|Doctrine_Overloadable $listener
-     * @return Doctrine_Db
+     * @param Doctrine_EventListener_Interface|Doctrine_Overloadable $listener
+     * @return mixed        this object
      */
     public function addListener($listener, $name = null)
     {
-        if ( ! ($this->attributes[Doctrine::ATTR_LISTENER] instanceof Doctrine_EventListener_Chain)) {
+        if ( ! isset($this->attributes[Doctrine::ATTR_LISTENER]) ||
+             ! ($this->attributes[Doctrine::ATTR_LISTENER] instanceof Doctrine_EventListener_Chain)) {
+            
             $this->attributes[Doctrine::ATTR_LISTENER] = new Doctrine_EventListener_Chain();
         }
         $this->attributes[Doctrine::ATTR_LISTENER]->add($listener, $name);
@@ -185,7 +278,7 @@ abstract class Doctrine_Configurable
     /**
      * getListener
      *
-     * @return Doctrine_Db_EventListener_Interface|Doctrine_Overloadable
+     * @return Doctrine_EventListener_Interface|Doctrine_Overloadable
      */
     public function getListener()
     {
@@ -200,15 +293,15 @@ abstract class Doctrine_Configurable
     /**
      * setListener
      *
-     * @param Doctrine_Db_EventListener_Interface|Doctrine_Overloadable $listener
-     * @return Doctrine_Db
+     * @param Doctrine_EventListener_Interface|Doctrine_Overloadable $listener
+     * @return Doctrine_Configurable        this object
      */
     public function setListener($listener)
     {
         if ( ! ($listener instanceof Doctrine_EventListener_Interface)
             && ! ($listener instanceof Doctrine_Overloadable)
         ) {
-            throw new Doctrine_Exception("Couldn't set eventlistener. EventListeners should implement either Doctrine_EventListener_Interface or Doctrine_Overloadable");
+            throw new Doctrine_EventListener_Exception("Couldn't set eventlistener. EventListeners should implement either Doctrine_EventListener_Interface or Doctrine_Overloadable");
         }
         $this->attributes[Doctrine::ATTR_LISTENER] = $listener;
 
@@ -224,8 +317,9 @@ abstract class Doctrine_Configurable
     {
         $attribute = (int) $attribute;
 
-        if ($attribute < 0)
+        if ($attribute < 0) {
             throw new Doctrine_Exception('Unknown attribute.');
+        }
 
         if ( ! isset($this->attributes[$attribute])) {
             if (isset($this->parent)) {

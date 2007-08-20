@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 1122 2007-02-18 20:50:50Z zYne $
+ *  $Id: Pgsql.php 1917 2007-07-01 11:27:45Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information, see
  * <http://www.phpdoctrine.com>.
  */
-Doctrine::autoload('Doctrine_Expression');
+Doctrine::autoload('Doctrine_Expression_Driver');
 /**
  * Doctrine_Expression_Pgsql
  *
@@ -27,10 +27,10 @@ Doctrine::autoload('Doctrine_Expression');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1122 $
+ * @version     $Revision: 1917 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine_Expression_Pgsql extends Doctrine_Expression
+class Doctrine_Expression_Pgsql extends Doctrine_Expression_Driver
 {
     /**
      * Returns the md5 sum of a field.
@@ -92,12 +92,11 @@ class Doctrine_Expression_Pgsql extends Doctrine_Expression
      * @param string|array(string) strings that will be concatinated.
      * @return string
      */
-    public function concat($arg1, $arg2)
+    public function concat()
     {
         $args = func_get_args();
-        $cols = $this->getIdentifiers($cols);
 
-        return join(' || ' , $cols);
+        return join(' || ' , $args);
     }
     /**
      * Returns the SQL string to return the current system date and time.

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mysql.php 1118 2007-02-17 18:18:44Z zYne $
+ *  $Id: Mysql.php 1730 2007-06-18 18:27:11Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@ Doctrine::autoload('Doctrine_DataDict');
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1118 $
+ * @version     $Revision: 1730 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -134,6 +134,10 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
      */
     public function getNativeDeclaration($field)
     {
+    	if ( ! isset($field['type'])) {
+            throw new Doctrine_DataDict_Exception('Missing column type.');
+    	}
+
         switch ($field['type']) {
             case 'char':
                 $length = (! empty($field['length'])) ? $field['length'] : false;
@@ -143,7 +147,7 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
             case 'array':
             case 'object':
             case 'string':
-
+            case 'gzip':
                 if ( ! isset($field['length'])) {
                     if (array_key_exists('default', $field)) {
                         $field['length'] = $this->conn->varchar_max_length;
@@ -212,9 +216,10 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
                 return 'DOUBLE';
             case 'decimal':
                 $length = !empty($field['length']) ? $field['length'] : 18;
-                return 'DECIMAL(' . $length . ',' . 0 . ')'; //$this->dbh->options['decimal_places'] . ')';
+                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES);
+                return 'DECIMAL('.$length.','.$scale.')';
         }
-        throw new Doctrine_DataDict_Exception('Unknown column type.');
+        throw new Doctrine_DataDict_Exception('Unknown field type \'' . $field['type'] .  '\'.');
     }
     /**
      * Maps a native array description of a field to a MDB2 datatype and length
@@ -242,6 +247,8 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
         if ( ! isset($field['name'])) {
             $field['name'] = '';
         }
+
+        $values = null;
 
         switch ($dbType) {
             case 'tinyint':
@@ -300,7 +307,7 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
                 }
             break;
             case 'enum':
-                $type[] = 'text';
+                $type[] = 'enum';
                 preg_match_all('/\'.+\'/U', $field['type'], $matches);
                 $length = 0;
                 $fixed = false;
@@ -313,6 +320,8 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
                         if (preg_match('/^(is|has)/', $field['name'])) {
                             $type = array_reverse($type);
                         }
+                    } else {
+                        $values = $matches[0];
                     }
                 }
                 $type[] = 'integer';
@@ -359,13 +368,16 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
                 $length = null;
             break;
             default:
-                throw new Doctrine_DataDict_Exception('unknown database attribute type: '.$dbType);
+                throw new Doctrine_DataDict_Exception('unknown database attribute type: ' . $dbType);
         }
 
         $length = ((int) $length == 0) ? null : (int) $length;
 
-
-        return array('type' => $type, 'length' => $length, 'unsigned' => $unsigned, 'fixed' => $fixed);
+        if ($values === null) {
+            return array('type' => $type, 'length' => $length, 'unsigned' => $unsigned, 'fixed' => $fixed);
+        } else {
+            return array('type' => $type, 'length' => $length, 'unsigned' => $unsigned, 'fixed' => $fixed, 'values' => $values);
+        }
     }
     /**
      * Obtain DBMS specific SQL code portion needed to set the CHARACTER SET
@@ -377,7 +389,7 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
      */
     public function getCharsetFieldDeclaration($charset)
     {
-        return 'CHARACTER SET '.$charset;
+        return 'CHARACTER SET ' . $charset;
     }
     /**
      * Obtain DBMS specific SQL code portion needed to set the COLLATION
@@ -389,7 +401,7 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
      */
     public function getCollationFieldDeclaration($collation)
     {
-        return 'COLLATE '.$collation;
+        return 'COLLATE ' . $collation;
     }
     /**
      * Obtain DBMS specific SQL code portion needed to declare an integer type

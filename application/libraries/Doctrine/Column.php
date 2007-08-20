@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Column.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Column.php 1392 2007-05-19 17:29:43Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @package     Doctrine
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1392 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -36,8 +36,8 @@ class Doctrine_Column extends Doctrine_Access implements IteratorAggregate, Coun
      * @var array $definition
      */
     protected $_definition = array(
-                                'type' => null,
-                                'length' => 0,
+                                'type'    => null,
+                                'length'  => 0,
                                 );
     /**
      * @var array $definition
@@ -85,6 +85,46 @@ class Doctrine_Column extends Doctrine_Access implements IteratorAggregate, Coun
     public function set($name, $value)
     {
         $this->_definition[$name] = $value;
+    }
+    /**
+     * @param string $field
+     * @return array
+     */
+    public function getEnumValues()
+    {
+        if (isset($this->_definition['values'])) {
+            return $this->_definition['values'];
+        } else {
+            return array();
+        }
+    }
+    /**
+     * enumValue
+     *
+     * @param string $field
+     * @param integer $index
+     * @return mixed
+     */
+    public function enumValue($index)
+    {
+        if ($index instanceof Doctrine_Null) {
+            return $index;
+        }
+
+        return isset($this->_definition['values'][$index]) ? $this->_definition['values'][$index] : $index;
+    }
+    /**
+     * enumIndex
+     *
+     * @param string $field
+     * @param mixed $value
+     * @return mixed
+     */
+    public function enumIndex($field, $value)
+    {
+        $values = $this->getEnumValues($field);
+
+        return array_search($value, $values);
     }
     /**
      * count

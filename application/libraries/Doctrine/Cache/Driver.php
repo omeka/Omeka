@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Driver.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Driver.php 1401 2007-05-20 17:54:22Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1401 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 abstract class Doctrine_Cache_Driver implements Doctrine_Cache_Interface
@@ -36,7 +36,7 @@ abstract class Doctrine_Cache_Driver implements Doctrine_Cache_Interface
     /**
      * @var array $_options      an array of options
      */
-    protected $_options;
+    protected $_options = array();
     
     /**
      * constructor

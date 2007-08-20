@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: JoinCondition.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: JoinCondition.php 2217 2007-08-11 21:53:02Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Query_Part');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 2217 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_JoinCondition extends Doctrine_Query_Condition 
@@ -36,7 +36,7 @@ class Doctrine_Query_JoinCondition extends Doctrine_Query_Condition
     {
         $condition = trim($condition);
 
-        $e         = Doctrine_Query::sqlExplode($condition);
+        $e         = Doctrine_Tokenizer::sqlExplode($condition);
 
         if(count($e) > 2) {
             $a         = explode('.', $e[0]);
@@ -46,25 +46,25 @@ class Doctrine_Query_JoinCondition extends Doctrine_Query_Condition
             $value     = $e[2];
 
             $alias     = $this->query->getTableAlias($reference);
-
-            $table     = $this->query->getTable($alias);
+            $map       = $this->query->getAliasDeclaration($reference);
+            $table     = $map['table'];
             // check if value is enumerated value
             $enumIndex = $table->enumIndex($field, trim($value, "'"));
 
 
             if (substr($value, 0, 1) == '(') {
                 // trim brackets
-                $trimmed   = Doctrine_Query::bracketTrim($value);
+                $trimmed   = Doctrine_Tokenizer::bracketTrim($value);
 
                 if (substr($trimmed, 0, 4) == 'FROM' || substr($trimmed, 0, 6) == 'SELECT') {
                     // subquery found
-                    $q     = new Doctrine_Query();
+                    $q = $this->query->createSubquery();
                     $value = '(' . $q->parseQuery($trimmed)->getQuery() . ')';
                 } elseif (substr($trimmed, 0, 4) == 'SQL:') {
                     $value = '(' . substr($trimmed, 4) . ')';
                 } else {
                     // simple in expression found
-                    $e     = Doctrine_Query::sqlExplode($trimmed, ',');
+                    $e     = Doctrine_Tokenizer::sqlExplode($trimmed, ',');
 
                     $value = array();
                     foreach ($e as $part) {

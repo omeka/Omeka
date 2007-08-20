@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Firebird.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Firebird.php 1917 2007-07-01 11:27:45Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information, see
  * <http://www.phpdoctrine.com>.
  */
-Doctrine::autoload('Doctrine_Expression');
+Doctrine::autoload('Doctrine_Expression_Driver');
 /**
  * Doctrine_Expression_Firebird
  *
@@ -27,12 +27,12 @@ Doctrine::autoload('Doctrine_Expression');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1917 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lorenzo Alberton <l.alberton@quipo.it> (PEAR MDB2 Interbase driver)
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
  */
-class Doctrine_Expression_Firebird extends Doctrine_Expression
+class Doctrine_Expression_Firebird extends Doctrine_Expression_Driver
 {
     /**
      * return string for internal table used when calling only a function

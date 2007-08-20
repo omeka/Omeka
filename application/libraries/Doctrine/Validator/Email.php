@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Email.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Email.php 1444 2007-05-23 09:55:32Z romanb $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1444 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Validator_Email
@@ -74,7 +74,7 @@ class Doctrine_Validator_Email
         $local_part = "$word(\\x2e$word)*";
         $addr_spec = "$local_part\\x40$domain";
 
-        return (bool)preg_match("!^$addr_spec$!", $value);
+        return (bool)preg_match("!^$addr_spec$!D", $value);
     }
 
 }

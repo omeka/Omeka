@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Exception.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Exception.php 1345 2007-05-14 13:00:14Z meus $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Exception');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1345 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Connection_Exception extends Doctrine_Exception
@@ -35,7 +35,7 @@ class Doctrine_Connection_Exception extends Doctrine_Exception
     /**
      * @var array $errorMessages        an array containing messages for portable error codes
      */
-    protected static $errorMessages = array(
+    static protected $errorMessages = array(
                 Doctrine::ERR                    => 'unknown error',
                 Doctrine::ERR_ALREADY_EXISTS     => 'already exists',
                 Doctrine::ERR_CANNOT_CREATE      => 'can not create',
@@ -105,7 +105,7 @@ class Doctrine_Connection_Exception extends Doctrine_Exception
      * @return  string  error message, or false if the error code was
      *                  not recognized
      */
-    public static function errorMessage($value = null)
+    public function errorMessage($value = null)
     {
         return isset(self::$errorMessages[$value]) ?
            self::$errorMessages[$value] : self::$errorMessages[Doctrine::ERR];

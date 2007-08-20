@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Oracle.php 1798 2007-06-24 21:05:12Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Connection');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1798 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Connection_Oracle extends Doctrine_Connection
@@ -76,7 +76,7 @@ class Doctrine_Connection_Oracle extends Doctrine_Connection
      */
     public function setDateFormat($format = 'YYYY-MM-DD HH24:MI:SS')
     {
-      $this->exec('ALTER SESSION SET NLS_DATE_FORMAT "'.$format.'";');
+      $this->exec('ALTER SESSION SET NLS_DATE_FORMAT = "' . $format . '"');
     }
     /**
      * Adds an driver-specific LIMIT clause to the query
@@ -93,6 +93,8 @@ class Doctrine_Connection_Oracle extends Doctrine_Connection
         $e2     = explode(" from ",$e[1]);
         $fields = $e2[0];
         */
+        $limit = (int) $limit;
+        $offset = (int) $offset;
         if (preg_match('/^\s*SELECT/i', $query)) {
             if ( ! preg_match('/\sFROM\s/i', $query)) {
                 $query .= " FROM dual";

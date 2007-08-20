@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 1098 2007-02-15 11:36:43Z zYne $
+ *  $Id: Pgsql.php 2033 2007-07-21 15:17:17Z romanb $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ Doctrine::autoload('Doctrine_DataDict');
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Paul Cooper <pgc@ucecom.com>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1098 $
+ * @version     $Revision: 2033 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -360,12 +360,16 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
      */
     public function getNativeDeclaration(array $field)
     {
+    	if ( ! isset($field['type'])) {
+            throw new Doctrine_DataDict_Exception('Missing column type.');
+    	}
         switch ($field['type']) {
             case 'char':
             case 'string':
             case 'array':
             case 'object':
-            case 'varchar':
+            case 'varchar':   
+            case 'gzip':
                 $length = (isset($field['length']) && $field['length']) ? $field['length'] : null;
                         // TODO:  $this->conn->options['default_text_field_length'];
 
@@ -414,10 +418,10 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
                 return 'FLOAT8';
             case 'decimal':
                 $length = !empty($field['length']) ? $field['length'] : 18;
-                return 'NUMERIC(' . $length . ',' . $this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES) . ')';
-            default:
-                throw new Doctrine_DataDict_Exception('Unknown field type '. $field['type']);
+                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES);
+                return 'NUMERIC('.$length.','.$scale.')';
         }
+        throw new Doctrine_DataDict_Exception('Unknown field type \'' . $field['type'] .  '\'.');
     }
     /**
      * Maps a native array description of a field to a portable Doctrine datatype and length
@@ -443,9 +447,9 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
             $field['name'] = '';
         }
 
-        $db_type = strtolower($field['type']);
+        $dbType = strtolower($field['type']);
 
-        switch ($db_type) {
+        switch ($dbType) {
             case 'smallint':
             case 'int2':
                 $type[] = 'integer';
@@ -492,7 +496,7 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
                     if (preg_match('/^(is|has)/', $field['name'])) {
                         $type = array_reverse($type);
                     }
-                } elseif (strstr($db_type, 'text')) {
+                } elseif (strstr($dbType, 'text')) {
                     $type[] = 'clob';
                 }
                 if ($fixed !== false) {
@@ -541,12 +545,12 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
                 $length = null;
                 break;
             default:
-                throw new Doctrine_DataDict_Exception('unknown database attribute type: '.$db_type);
+                throw new Doctrine_DataDict_Exception('unknown database attribute type: '.$dbType);
         }
 
         return array('type'     => $type,
                      'length'   => $length,
-                     'unsigned' => $unsigned, 
+                     'unsigned' => $unsigned,
                      'fixed'    => $fixed);
     }
     /**
@@ -604,7 +608,7 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
     }
     /**
      * parseBoolean
-     * parses a literal boolean value and returns 
+     * parses a literal boolean value and returns
      * proper sql equivalent
      *
      * @param string $value     boolean value to be parsed

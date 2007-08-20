@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Complex.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Complex.php 1482 2007-05-26 16:49:58Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Hook_Parser');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1482 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 abstract class Doctrine_Hook_Parser_Complex extends Doctrine_Hook_Parser
@@ -58,7 +58,7 @@ abstract class Doctrine_Hook_Parser_Complex extends Doctrine_Hook_Parser
      */
     public function parseClause($alias, $field, $value)
     {
-        $parts = Doctrine_Query::quoteExplode($value, ' AND ');
+        $parts = Doctrine_Tokenizer::quoteExplode($value, ' AND ');
 
         if (count($parts) > 1) {
             $ret = array();
@@ -68,7 +68,7 @@ abstract class Doctrine_Hook_Parser_Complex extends Doctrine_Hook_Parser
 
             $r = implode(' AND ', $ret);
         } else {
-            $parts = Doctrine_Query::quoteExplode($value, ' OR ');
+            $parts = Doctrine_Tokenizer::quoteExplode($value, ' OR ');
             if (count($parts) > 1) {
                 $ret = array();
                 foreach ($parts as $part) {

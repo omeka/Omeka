@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mssql.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Mssql.php 1697 2007-06-14 20:18:25Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,7 +20,7 @@
  */
 Doctrine::autoload('Doctrine_Export');
 /**
- * Doctrine_Export_Oracle
+ * Doctrine_Export_Mssql
  *
  * @package     Doctrine
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
@@ -30,7 +30,7 @@ Doctrine::autoload('Doctrine_Export');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1697 $
  */
 class Doctrine_Export_Mssql extends Doctrine_Export
 {
@@ -60,8 +60,19 @@ class Doctrine_Export_Mssql extends Doctrine_Export
     public function dropDatabase($name)
     {
         $name = $this->conn->quoteIdentifier($name, true);
-        return $this->conn->standaloneQuery("DROP DATABASE $name", null, true);
+        return $this->conn->standaloneQuery('DROP DATABASE ' . $name, null, true);
     }
+
+    /**
+     * Override the parent method.
+     *
+     * @return string The string required to be placed between "CREATE" and "TABLE"
+     *                to generate a temporary table, if possible.
+     */
+    public function getTemporaryTableQuery()
+    {
+        return '';
+    }  
     /**
      * alter an existing table
      *
@@ -150,10 +161,10 @@ class Doctrine_Export_Mssql extends Doctrine_Export
      *                             actually perform them otherwise.
      * @return void
      */
-    public function alterTable($name, $changes, $check)
+    public function alterTable($name, array $changes, $check)
     {
-        foreach ($changes as $change_name => $change) {
-            switch ($change_name) {
+        foreach ($changes as $changeName => $change) {
+            switch ($changeName) {
                 case 'add':
                     break;
                 case 'remove':
@@ -162,50 +173,56 @@ class Doctrine_Export_Mssql extends Doctrine_Export
                 case 'rename':
                 case 'change':
                 default:
-                    throw new Doctrine_Export_Exception('alterTable: change type "' . $change_name . '" not yet supported');
+                    throw new Doctrine_Export_Exception('alterTable: change type "' . $changeName . '" not yet supported');
             }
         }
 
         $query = '';
-        if (!empty($changes['add']) && is_array($changes['add'])) {
-            foreach ($changes['add'] as $field_name => $field) {
+        if ( ! empty($changes['add']) && is_array($changes['add'])) {
+            foreach ($changes['add'] as $fieldName => $field) {
                 if ($query) {
-                    $query.= ', ';
+                    $query .= ', ';
                 }
-                $query.= 'ADD ' . $this->conn->getDeclaration($field['type'], $field_name, $field);
+                $query .= 'ADD ' . $this->conn->getDeclaration($field['type'], $fieldName, $field);
             }
         }
 
-        if (!empty($changes['remove']) && is_array($changes['remove'])) {
-            foreach ($changes['remove'] as $field_name => $field) {
+        if ( ! empty($changes['remove']) && is_array($changes['remove'])) {
+            foreach ($changes['remove'] as $fieldName => $field) {
                 if ($query) {
-                    $query.= ', ';
+                    $query .= ', ';
                 }
-                $field_name = $this->conn->quoteIdentifier($field_name, true);
-                $query.= 'DROP COLUMN ' . $field_name;
+                $field_name = $this->conn->quoteIdentifier($fieldName, true);
+                $query .= 'DROP COLUMN ' . $fieldName;
             }
         }
 
-        if (!$query) {
+        if ( ! $query) {
             return false;
         }
 
         $name = $this->conn->quoteIdentifier($name, true);
-        return $this->conn->exec("ALTER TABLE $name $query");
+        return $this->conn->exec('ALTER TABLE ' . $name . ' ' . $query);
     }
     /**
      * create sequence
      *
-     * @param string    $seq_name     name of the sequence to be created
-     * @param string    $start        start value of the sequence; default is 1
-     * @return void
+     * @param string $seqName name of the sequence to be created
+     * @param string $start start value of the sequence; default is 1
+     * @param array     $options  An associative array of table options:
+     *                          array(
+     *                              'comment' => 'Foo',
+     *                              'charset' => 'utf8',
+     *                              'collate' => 'utf8_unicode_ci',
+     *                          );
+     * @return string
      */
-    public function createSequence($seq_name, $start = 1)
+    public function createSequence($seqName, $start = 1, array $options = array())
     {
-        $sequence_name = $this->conn->quoteIdentifier($this->conn->getSequenceName($seq_name), true);
-        $seqcol_name = $this->conn->quoteIdentifier($this->conn->options['seqcol_name'], true);
-        $query = "CREATE TABLE $sequence_name ($seqcol_name " .
-                 "INT PRIMARY KEY CLUSTERED IDENTITY($start,1) NOT NULL)";
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $seqcolName = $this->conn->quoteIdentifier($this->conn->options['seqcol_name'], true);
+        $query = 'CREATE TABLE ' . $sequenceName . ' (' . $seqcolName .
+                 ' INT PRIMARY KEY CLUSTERED IDENTITY(' . $start . ', 1) NOT NULL)';
 
         $res = $this->conn->exec($query);
 
@@ -214,11 +231,11 @@ class Doctrine_Export_Mssql extends Doctrine_Export
         }
 
         try {
-            $query = 'SET IDENTITY_INSERT $sequence_name ON ' .
-                     'INSERT INTO $sequence_name (' . $seqcol_name . ') VALUES ( ' . $start . ')';
+            $query = 'SET IDENTITY_INSERT ' . $sequenceName . ' ON ' .
+                     'INSERT INTO ' . $sequenceName . ' (' . $seqcolName . ') VALUES ( ' . $start . ')';
             $res = $this->conn->exec($query);
         } catch (Exception $e) {
-            $result = $this->conn->exec("DROP TABLE $sequence_name");
+            $result = $this->conn->exec('DROP TABLE ' . $sequenceName);
         }
         return true;
     }
@@ -228,9 +245,9 @@ class Doctrine_Export_Mssql extends Doctrine_Export
      * @param string $seqName      name of the sequence to be dropped
      * @return void
      */
-    public function dropSequence($seqName)
+    public function dropSequenceSql($seqName)
     {
         $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
-        return $this->conn->exec('DROP TABLE ' . $sequenceName);
+        return 'DROP TABLE ' . $sequenceName;
     }
 }

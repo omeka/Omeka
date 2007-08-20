@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Oracle.php 1619 2007-06-10 19:28:47Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ Doctrine::autoload('Doctrine_Sequence');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1619 $
  */
 class Doctrine_Sequence_Oracle extends Doctrine_Sequence
 {
@@ -42,7 +42,7 @@ class Doctrine_Sequence_Oracle extends Doctrine_Sequence
      */
     public function nextID($seqName, $onDemand = true)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         $query        = 'SELECT ' . $sequenceName . '.nextval FROM DUAL';
 
         try {
@@ -71,7 +71,7 @@ class Doctrine_Sequence_Oracle extends Doctrine_Sequence
     public function lastInsertID($table = null, $field = null)
     {
         $seqName = $table . (empty($field) ? '' : '_'.$field);
-        $sequenceName =  $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName =  $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
 
         return $this->conn->fetchOne('SELECT ' . $sequenceName . '.currval');
     }
@@ -84,7 +84,7 @@ class Doctrine_Sequence_Oracle extends Doctrine_Sequence
      */
     public function currID($seqName)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         $query   = 'SELECT (last_number-1) FROM user_sequences';
         $query  .= ' WHERE sequence_name=' . $this->conn->quote($sequenceName, 'text');
         $query  .= ' OR sequence_name=' . $this->conn->quote(strtoupper($sequenceName), 'text');

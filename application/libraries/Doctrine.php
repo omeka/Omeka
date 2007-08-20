@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Doctrine.php 1182 2007-03-21 22:11:18Z zYne $
+ *  $Id: Doctrine.php 1976 2007-07-11 22:03:47Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,7 +30,7 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1182 $
+ * @version     $Revision: 1976 $
  */
 final class Doctrine
 {
@@ -125,7 +125,7 @@ final class Doctrine
      */
     const ATTR_AUTOCOMMIT           = 0;
     const ATTR_PREFETCH             = 1;
-    const ATTR_TIMEOUT              = 2;
+    const ATTR_TIMEOUT              = 2; 
     const ATTR_ERRMODE              = 3;
     const ATTR_SERVER_VERSION       = 4;
     const ATTR_CLIENT_VERSION       = 5;
@@ -142,6 +142,7 @@ final class Doctrine
     const ATTR_DRIVER_NAME          = 16;
     const ATTR_STRINGIFY_FETCHES    = 17;
     const ATTR_MAX_COLUMN_LEN       = 18;
+
     /**
      * Doctrine constants
      */
@@ -155,8 +156,7 @@ final class Doctrine
     const ATTR_DBNAME_FORMAT        = 117;
     const ATTR_TBLCLASS_FORMAT      = 119;
     const ATTR_EXPORT               = 140;
-
-
+    const ATTR_DECIMAL_PLACES       = 141;  
 
     const ATTR_PORTABILITY          = 106;
     const ATTR_VLD                  = 107;
@@ -191,6 +191,11 @@ final class Doctrine
     const ATTR_NS_GAP_SIZE          = 131;
     const ATTR_NS_GAP_DECREASE_EXP  = 132;
 
+    const ATTR_CACHE                = 150;
+    const ATTR_CACHE_LIFESPAN       = 151;
+    const ATTR_LOAD_REFERENCES      = 153;
+    const ATTR_RECORD_LISTENER      = 154;
+    const ATTR_THROW_EXCEPTIONS     = 155;
 
 
     /**
@@ -254,40 +259,15 @@ final class Doctrine
      */
 
     const FETCH_ARRAY           = 3;
-
-
-    /**
-     * ACCESSOR CONSTANTS
-     */
-
-    /**
-     * constant for no accessors
-     */
-    const ACCESSOR_NONE         = 0;
-    /**
-     * constant for get accessors
-     */
-    const ACCESSOR_GET          = 1;
-    /**
-     * constant for set accessors
-     */
-    const ACCESSOR_SET          = 2;
-    /**
-     * constant for both accessors get and set
-     */
-    const ACCESSOR_BOTH         = 3;
-
     /**
      * PORTABILITY CONSTANTS
      */
-
 
     /**
      * Portability: turn off all portability features.
      * @see Doctrine::ATTR_PORTABILITY
      */
-    const PORTABILITY_NONE      = 0;
-
+    const PORTABILITY_NONE          = 0;
     /**
      * Portability: convert names of tables and fields to case defined in the
      * "field_case" option when using the query*(), fetch*() methods.
@@ -300,7 +280,6 @@ final class Doctrine
      * @see Doctrine::ATTR_PORTABILITY
      */
     const PORTABILITY_RTRIM         = 2;
-
     /**
      * Portability: force reporting the number of rows deleted.
      * @see Doctrine::ATTR_PORTABILITY
@@ -317,12 +296,16 @@ final class Doctrine
      * @see Doctrine::ATTR_PORTABILITY
      */
     const PORTABILITY_FIX_ASSOC_FIELD_NAMES = 16;
-
+    /**
+     * Portability: makes Doctrine_Expression throw exception for unportable RDBMS expressions
+     * @see Doctrine::ATTR_PORTABILITY
+     */
+    const PORTABILITY_EXPR          = 32;
     /**
      * Portability: turn on all portability features.
      * @see Doctrine::ATTR_PORTABILITY
      */
-    const PORTABILITY_ALL           = 17;
+    const PORTABILITY_ALL           = 33;
 
     /**
      * LOCKMODE CONSTANTS
@@ -386,6 +369,18 @@ final class Doctrine
      */
     private static $path;
     /**
+     * @var boolean $_debug
+     */
+    private static $_debug = false;
+
+    public static function debug($bool = null)
+    {
+        if ($bool !== null) {
+            self::$_debug = (bool) $bool;
+        }
+        return self::$_debug;
+    }
+    /**
      * getPath
      * returns the doctrine root
      *
@@ -393,7 +388,7 @@ final class Doctrine
      */
     public static function getPath()
     {
-        if (! self::$path) {
+        if ( ! self::$path) {
             self::$path = dirname(__FILE__);
         }
         return self::$path;
@@ -430,9 +425,19 @@ final class Doctrine
      *
      * @param string $directory
      */
-    public static function export($directory)
+    public static function export($directory = null)
     {
-        Doctrine_Export::export();
+        return Doctrine_Manager::connection()->export->export($directory);
+    }
+    /**
+     * exportSql
+     * method for exporting Doctrine_Record classes to a schema
+     *
+     * @param string $directory
+     */
+    public static function exportSql($directory = null)
+    {
+        return Doctrine_Manager::connection()->export->exportSql($directory);
     }
     /**
      * compile
@@ -480,24 +485,28 @@ final class Doctrine
      * dumps a given variable
      *
      * @param mixed $var        a variable of any type
+     * @param boolean $output   whether to output the content
      * @return void|string
      */
-    public static function dump($var) 
+    public static function dump($var, $output = true)
     {
     	$ret = array();
         switch (gettype($var)) {
             case 'array':
                 $ret[] = 'Array(';
                 foreach ($var as $k => $v) {
-                    $ret[] = $k . ' : ' . Doctrine::dump($v);
+                    $ret[] = $k . ' : ' . Doctrine::dump($v, false);
                 }
-                $ret[] = ')';
+                $ret[] = ")";
                 break;
             case 'object':
                 $ret[] = 'Object(' . get_class($var) . ')';
                 break;
             default:
                 $ret[] = var_export($var, true);
+        }
+        if ($output) {
+            print implode("\n", $ret);
         }
         return implode("\n", $ret);
     }

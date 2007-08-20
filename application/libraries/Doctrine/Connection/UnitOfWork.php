@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: UnitOfWork.php 1168 2007-03-07 23:08:17Z subzero2000 $
+ *  $Id: UnitOfWork.php 2197 2007-08-10 20:35:25Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,10 +27,10 @@ Doctrine::autoload('Doctrine_Connection_Module');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1168 $
+ * @version     $Revision: 2197 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implements IteratorAggregate, Countable
+class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
 {
     /**
      * buildFlushTree
@@ -40,8 +40,8 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
      * 'correct' order. Basically this means that the records of those
      * components can be saved safely in the order specified by the returned array.
      *
-     * @param array $tables
-     * @return array
+     * @param array $tables     an array of Doctrine_Table objects or component names
+     * @return array            an array of component names in flushing order
      */
     public function buildFlushTree(array $tables)
     {
@@ -49,7 +49,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
         foreach ($tables as $k => $table) {
 
             if ( ! ($table instanceof Doctrine_Table)) {
-                $table = $this->conn->getTable($table);
+                $table = $this->conn->getTable($table, false);
             }
             $nm     = $table->getComponentName();
 
@@ -77,8 +77,9 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
                 $type   = $rel->getType();
 
                 // skip self-referenced relations
-                if ($name === $nm)
+                if ($name === $nm) {
                     continue;
+                }
 
                 if ($rel instanceof Doctrine_Relation_ForeignKey) {
                     if ($index2 !== false) {
@@ -131,6 +132,157 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
         return array_values($tree);
     }
     /**
+     * saves the given record
+     *
+     * @param Doctrine_Record $record
+     * @return void
+     */
+    public function saveGraph(Doctrine_Record $record)
+    {
+    	$conn = $this->getConnection();
+
+        $state = $record->state();
+        if ($state === Doctrine_Record::STATE_LOCKED) {
+            return false;
+        }
+
+        $record->state(Doctrine_Record::STATE_LOCKED);
+
+        $conn->beginTransaction();
+
+        $saveLater = $this->saveRelated($record);
+
+        $record->state($state);
+
+        if ($record->isValid()) {
+            $event = new Doctrine_Event($record, Doctrine_Event::RECORD_SAVE);
+
+            $record->preSave($event);
+    
+            $record->getTable()->getRecordListener()->preSave($event);
+
+            if ( ! $event->skipOperation) {
+                switch ($state) {
+                    case Doctrine_Record::STATE_TDIRTY:
+                        $this->insert($record);
+                        break;
+                    case Doctrine_Record::STATE_DIRTY:
+                    case Doctrine_Record::STATE_PROXY:
+                        $this->update($record);
+                        break;
+                    case Doctrine_Record::STATE_CLEAN:
+                    case Doctrine_Record::STATE_TCLEAN:
+
+                        break;
+                }
+            }
+
+            $record->getTable()->getRecordListener()->postSave($event);
+            
+            $record->postSave($event);
+        } else {
+            $conn->transaction->addInvalid($record);
+        }
+        
+        $state = $record->state();
+
+        $record->state(Doctrine_Record::STATE_LOCKED);
+
+        foreach ($saveLater as $fk) {
+            $alias = $fk->getAlias();
+
+            if ($record->hasReference($alias)) {
+                $obj = $record->$alias;
+                $obj->save($conn);
+            }
+        }
+
+        // save the MANY-TO-MANY associations
+        $this->saveAssociations($record);
+
+        $record->state($state);
+
+        $conn->commit();
+
+        return true;
+    }
+    /**
+     * saves the given record
+     *
+     * @param Doctrine_Record $record
+     * @return void
+     */
+    public function save(Doctrine_Record $record)
+    {
+        $event = new Doctrine_Event($record, Doctrine_Event::RECORD_SAVE);
+
+        $record->preSave($event);
+
+        $record->getTable()->getRecordListener()->preSave($event);
+
+        if ( ! $event->skipOperation) {
+            switch ($record->state()) {
+                case Doctrine_Record::STATE_TDIRTY:
+                    $this->insert($record);
+                    break;
+                case Doctrine_Record::STATE_DIRTY:
+                case Doctrine_Record::STATE_PROXY:
+                    $this->update($record);
+                    break;
+                case Doctrine_Record::STATE_CLEAN:
+                case Doctrine_Record::STATE_TCLEAN:
+                    // do nothing
+                    break;
+            }
+        }
+
+        $record->getTable()->getRecordListener()->postSave($event);
+        
+        $record->postSave($event);
+    }
+    /**
+     * deletes given record and all the related composites
+     * this operation is isolated by a transaction
+     *
+     * this event can be listened by the onPreDelete and onDelete listeners
+     *
+     * @return boolean      true on success, false on failure
+     */
+    public function delete(Doctrine_Record $record)
+    {
+        if ( ! $record->exists()) {
+            return false;
+        }
+        $this->conn->beginTransaction();
+
+        $event = new Doctrine_Event($record, Doctrine_Event::RECORD_DELETE);
+
+        $record->preDelete($event);
+        
+        $record->getTable()->getRecordListener()->preDelete($event);
+
+        $record->state(Doctrine_Record::STATE_LOCKED);
+
+        $this->deleteComposites($record);
+        
+        $record->state(Doctrine_Record::STATE_TDIRTY);
+
+        if ( ! $event->skipOperation) {
+            $this->conn->transaction->addDelete($record);
+
+            $record->state(Doctrine_Record::STATE_TCLEAN);
+        }
+        
+        $record->getTable()->getRecordListener()->postDelete($event);
+
+        $record->postDelete($event);
+
+        $this->conn->commit();
+
+        return true;
+    }
+
+    /**
      * saveRelated
      * saves all related records to $record
      *
@@ -140,35 +292,26 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
     public function saveRelated(Doctrine_Record $record)
     {
         $saveLater = array();
-        foreach ($record->getReferences() as $k=>$v) {
-            $fk = $record->getTable()->getRelation($k);
-            if ($fk instanceof Doctrine_Relation_ForeignKey ||
-               $fk instanceof Doctrine_Relation_LocalKey) {
-                $local = $fk->getLocal();
-                $foreign = $fk->getForeign();
+        foreach ($record->getReferences() as $k => $v) {
+            $rel = $record->getTable()->getRelation($k);
 
-                if ($record->getTable()->hasPrimaryKey($fk->getLocal())) {
-                    if ( ! $record->exists()) {
-                        $saveLater[$k] = $fk;
-                    } else {
-                        $v->save($this->conn);
-                    }
-                } else {
-                    // ONE-TO-ONE relationship
-                    $obj = $record->get($fk->getAlias());
-					
-					// Protection against infinite function recursion before attempting to save
-                   	 if ($obj instanceof Doctrine_Record &&
-                       	 $obj->isModified()) {
-                         $obj->save($this->conn);
-                     }
+            $local = $rel->getLocal();
+            $foreign = $rel->getForeign();
 
+            if ($rel instanceof Doctrine_Relation_ForeignKey) {
+                $saveLater[$k] = $rel;
+            } elseif ($rel instanceof Doctrine_Relation_LocalKey) {
+                // ONE-TO-ONE relationship
+                $obj = $record->get($rel->getAlias());
+
+                // Protection against infinite function recursion before attempting to save
+                if ($obj instanceof Doctrine_Record &&
+                    $obj->isModified()) {
+                    $obj->save($this->conn);
                 }
-
-            } elseif ($fk instanceof Doctrine_Relation_Association) {
-                $v->save($this->conn);
             }
         }
+
         return $saveLater;
     }
     /**
@@ -188,11 +331,29 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
      */
     public function saveAssociations(Doctrine_Record $record)
     {
-        foreach ($record->getTable()->getRelations() as $rel) {
-            $table   = $rel->getTable();
-            $alias   = $rel->getAlias();
+        foreach ($record->getReferences() as $k => $v) {
+            $rel = $record->getTable()->getRelation($k);
+            
+            if ($rel instanceof Doctrine_Relation_Association) {   
+                $v->save($this->conn);
 
-            $rel->processDiff($record, $this->conn);
+                $assocTable = $rel->getAssociationTable();
+                foreach ($v->getDeleteDiff() as $r) {
+                    $query = 'DELETE FROM ' . $assocTable->getTableName()
+                           . ' WHERE ' . $rel->getForeign() . ' = ?'
+                           . ' AND ' . $rel->getLocal() . ' = ?';
+
+                    $this->conn->execute($query, array($r->getIncremented(), $record->getIncremented()));
+                }
+
+                foreach ($v->getInsertDiff() as $r) {
+                    $assocRecord = $assocTable->create();
+                    $assocRecord->set($rel->getForeign(), $r);
+                    $assocRecord->set($rel->getLocal(), $record);
+
+                    $this->saveGraph($assocRecord);
+                }
+            }
         }
     }
     /**
@@ -209,9 +370,14 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
                 case Doctrine_Relation::ONE_COMPOSITE:
                 case Doctrine_Relation::MANY_COMPOSITE:
                     $obj = $record->get($fk->getAlias());
-                    $obj->delete($this->conn);
+                    if ( $obj instanceof Doctrine_Record && 
+                           $obj->state() != Doctrine_Record::STATE_LOCKED)  {
+                            
+                            $obj->delete($this->conn);
+                           	
+                    }
                     break;
-            };
+            }
         }
     }
     /**
@@ -231,7 +397,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
             $table = $this->conn->getTable($name);
 
             foreach ($table->getRepository() as $record) {
-                $this->conn->save($record);
+                $this->save($record);
             }
         }
 
@@ -245,56 +411,68 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
         }
     }
     /**
+     * update
      * updates the given record
      *
-     * @param Doctrine_Record $record
-     * @return boolean
+     * @param Doctrine_Record $record   record to be updated
+     * @return boolean                  whether or not the update was successful
      */
     public function update(Doctrine_Record $record)
     {
-        $record->getTable()->getAttribute(Doctrine::ATTR_LISTENER)->onPreUpdate($record);
+        $event = new Doctrine_Event($record, Doctrine_Event::RECORD_UPDATE);
 
-        $array = $record->getPrepared();
+        $record->preUpdate($event);
 
-        if (empty($array)) {
-            return false;
-        }
-        $set   = array();
-        foreach ($array as $name => $value) {
-                $set[] = $name." = ?";
+        $record->getTable()->getRecordListener()->preUpdate($event);
 
-                if ($value instanceof Doctrine_Record) {
-                    switch ($value->state()) {
-                        case Doctrine_Record::STATE_TCLEAN:
-                        case Doctrine_Record::STATE_TDIRTY:
+        if ( ! $event->skipOperation) {
+            $array = $record->getPrepared();
+
+            if (empty($array)) {
+                return false;
+            }
+            $set = array();
+            foreach ($array as $name => $value) {
+                if ($value instanceof Doctrine_Expression) {
+                    $set[] = $value->getSql();
+                    unset($array[$name]);
+                } else {
+
+                    $set[] = $name . ' = ?';
+    
+                    if ($value instanceof Doctrine_Record) {
+                        if ( ! $value->exists()) {
                             $record->save($this->conn);
-                        default:
-                            $array[$name] = $value->getIncremented();
-                            $record->set($name, $value->getIncremented());
-                    };
+                        }
+                        $array[$name] = $value->getIncremented();
+                        $record->set($name, $value->getIncremented());
+                    }
                 }
-        };
+            }
 
-        $params   = array_values($array);
-        $id       = $record->obtainIdentifier();
-
-        if ( ! is_array($id)) {
-            $id = array($id);
+            $params = array_values($array);
+            $id     = $record->identifier();
+    
+            if ( ! is_array($id)) {
+                $id = array($id);
+            }
+            $id     = array_values($id);
+            $params = array_merge($params, $id);
+    
+            $sql  = 'UPDATE ' . $this->conn->quoteIdentifier($record->getTable()->getTableName())
+                  . ' SET ' . implode(', ', $set)
+                  . ' WHERE ' . implode(' = ? AND ', $record->getTable()->getPrimaryKeys())
+                  . ' = ?';
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($params);
+    
+            $record->assignIdentifier(true);
         }
-        $id     = array_values($id);
-        $params = array_merge($params, $id);
+        
+        $record->getTable()->getRecordListener()->postUpdate($event);
 
-        $sql  = 'UPDATE ' . $record->getTable()->getTableName()
-              . ' SET ' . implode(', ', $set)
-              . ' WHERE ' . implode(' = ? AND ', $record->getTable()->getPrimaryKeys())
-              . ' = ?';
-
-        $stmt = $this->conn->getDBH()->prepare($sql);
-        $stmt->execute($params);
-
-        $record->assignIdentifier(true);
-
-        $record->getTable()->getAttribute(Doctrine::ATTR_LISTENER)->onUpdate($record);
+        $record->postUpdate($event);
 
         return true;
     }
@@ -307,54 +485,57 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module implemen
     public function insert(Doctrine_Record $record)
     {
          // listen the onPreInsert event
-        $record->getTable()->getAttribute(Doctrine::ATTR_LISTENER)->onPreInsert($record);
+        $event = new Doctrine_Event($record, Doctrine_Event::RECORD_INSERT);
 
-        $array = $record->getPrepared();
+        $record->preInsert($event);
+        
+        $record->getTable()->getRecordListener()->preInsert($event);
 
-        if (empty($array)) {
-            return false;
-        }
-        $table     = $record->getTable();
-        $keys      = $table->getPrimaryKeys();
-
-        $seq       = $record->getTable()->sequenceName;
-
-        if ( ! empty($seq)) {
-            $id             = $this->conn->sequence->nextId($seq);
-            $name           = $record->getTable()->getIdentifier();
-            $array[$name]   = $id;
-            
-            $record->assignIdentifier($id);
-        }
-
-        $this->conn->insert($table->getTableName(), $array);
-
-        if (empty($seq) && count($keys) == 1 && $keys[0] == $table->getIdentifier() &&
-            $table->getIdentifierType() != Doctrine_Identifier::NORMAL) {
-
-            if (strtolower($this->conn->getName()) == 'pgsql') {
-                $seq = $table->getTableName() . '_' . $keys[0];
+        if ( ! $event->skipOperation) {
+            $array = $record->getPrepared();
+    
+            if (empty($array)) {
+                return false;
             }
-
-            $id = $this->conn->sequence->lastInsertId($seq);
-
-            if ( ! $id) {
-                $id = $table->getMaxIdentifier();
+            $table     = $record->getTable();
+            $keys      = $table->getPrimaryKeys();
+    
+            $seq       = $record->getTable()->sequenceName;
+    
+            if ( ! empty($seq)) {
+                $id             = $this->conn->sequence->nextId($seq);
+                $name           = $record->getTable()->getIdentifier();
+                $array[$name]   = $id;
+    
+                $record->assignIdentifier($id);
             }
-
-            $record->assignIdentifier($id);
-        } else {
-            $record->assignIdentifier(true);
+    
+            $this->conn->insert($table->getTableName(), $array);
+    
+            if (empty($seq) && count($keys) == 1 && $keys[0] == $table->getIdentifier() &&
+                $table->getIdentifierType() != Doctrine::IDENTIFIER_NATURAL) {
+    
+                if (strtolower($this->conn->getName()) == 'pgsql') {
+                    $seq = $table->getTableName() . '_' . $keys[0];
+                }
+    
+                $id = $this->conn->sequence->lastInsertId($seq);
+    
+                if ( ! $id) {
+                    $id = $table->getMaxIdentifier();
+                }
+    
+                $record->assignIdentifier($id);
+            } else {
+                $record->assignIdentifier(true);
+            }
         }
+        $record->getTable()->addRecord($record);
 
-        // listen the onInsert event
-        $table->getAttribute(Doctrine::ATTR_LISTENER)->onInsert($record);
+        $record->getTable()->getRecordListener()->postInsert($event);
+
+        $record->postInsert($event);
 
         return true;
     }
-    public function getIterator()
-    { }
-
-    public function count()
-    { }
 }

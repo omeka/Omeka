@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mssql.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Mssql.php 1934 2007-07-05 22:42:32Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ Doctrine::autoload('Doctrine_Sequence');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1934 $
  */
 class Doctrine_Sequence_Mssql extends Doctrine_Sequence
 {
@@ -40,24 +40,25 @@ class Doctrine_Sequence_Mssql extends Doctrine_Sequence
      *
      * @return integer          next id in the given sequence
      */
-    public function nextId($seqName, $ondemand = true)
+    public function nextId($seqName, $onDemand = true)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->getSequenceName($seqName), true);
-        $seqcolName   = $this->conn->quoteIdentifier($this->getAttribute(Doctrine::ATTR_SEQCOL_NAME), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
+        $seqcolName   = $this->conn->quoteIdentifier($this->conn->getAttribute(Doctrine::ATTR_SEQCOL_NAME), true);
 
 
-        if ($this->_checkSequence($sequenceName)) {
-            $query = 'SET IDENTITY_INSERT ' . $sequenceName . ' ON '
-                   . 'INSERT INTO ' . $sequenceName . ' (' . $seqcolName . ') VALUES (0)';
+        if ($this->checkSequence($sequenceName)) {
+            $query = 'SET IDENTITY_INSERT ' . $sequenceName . ' OFF '
+                   . 'INSERT INTO ' . $sequenceName . ' DEFAULT VALUES';
         } else {
             $query = 'INSERT INTO ' . $sequenceName . ' (' . $seqcolName . ') VALUES (0)';
         }
+        
         try {
 
             $this->conn->exec($query);
 
         } catch(Doctrine_Connection_Exception $e) {
-            if ($ondemand && !$this->_checkSequence($sequenceName)) {
+            if ($onDemand && $e->getPortableCode() == Doctrine::ERR_NOSUCHTABLE) {
                 // Since we are creating the sequence on demand
                 // we know the first id = 1 so initialize the
                 // sequence at 2
@@ -66,25 +67,56 @@ class Doctrine_Sequence_Mssql extends Doctrine_Sequence
                 } catch(Doctrine_Exception $e) {
                     throw new Doctrine_Sequence_Exception('on demand sequence ' . $seqName . ' could not be created');
                 }
-                // First ID of a newly created sequence is 1
+                
+                /**
+                 * This could actually be a table that starts at 18.. oh well..
+                 * we will keep the fallback to return 1 in case we skip this.. which
+                 * should really not happen.. otherwise the returned values is biased.
+                 */
+                if ($this->checkSequence($seqName)) {
+                    return $this->lastInsertId($seqName);
+                }
+                
                 return 1;
             }
+            throw $e;
         }
         
         $value = $this->lastInsertId($sequenceName);
 
         if (is_numeric($value)) {
             $query = 'DELETE FROM ' . $sequenceName . ' WHERE ' . $seqcolName . ' < ' . $value;
-            $this->conn->exec($query);
-            /**
-            TODO: is the following needed ?
-            if (PEAR::isError($result)) {
-                $this->warnings[] = 'nextID: could not delete previous sequence table values from '.$seq_name;
+            
+            try {
+                $this->conn->exec($query);
+            } catch (Doctrine_Connection_Exception $e) {
+                throw new Doctrine_Sequence_Exception('Could not delete previous sequence from ' . $sequenceName . 
+                                                      ' at ' . __FILE__ . ' in ' . __FUNCTION__ . ' with the message: ' .
+                                                      $e->getMessage());
             }
-            */
         }
         return $value;
     }
+    /**
+     * Checks if there's a sequence that exists.
+     *
+     * @param  string $seqName     The sequence name to verify.
+     * @return bool   $tableExists The value if the table exists or not
+     * @access private
+     */
+    public function checkSequence($seqName)
+    {
+        $query = 'SELECT COUNT(1) FROM ' . $seqName;
+        try {
+            $this->conn->execute($query);
+        } catch (Doctrine_Connection_Exception $e) {
+            if ($e->getPortableCode() == Doctrine::ERR_NOSUCHTABLE) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Returns the autoincrement ID if supported or $id or fetches the current
      * ID in a sequence called: $table.(empty($field) ? '' : '_'.$field)

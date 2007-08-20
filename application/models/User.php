@@ -7,42 +7,15 @@ require_once 'Item.php';
  * @package Omeka
  **/
 
-class UserListener extends Doctrine_EventListener
-{
-	/**
-	 * @todo should check for $record->getModified() instead of making another SQL query
-	 * 
-	 * @return void
-	 **/
-	public function onPreSave(Doctrine_Record $record)
-	{
-		$conn = Doctrine_Manager::getInstance()->connection();
-		
-		if($record->exists()) {
-			$sql = "SELECT password FROM users WHERE id = {$record->id}";
-			$oldPassword = $conn->fetchOne($sql);			
-			if($record->password !== $oldPassword) {
-				$record->password = sha1($record->password);
-			}
-		}else {
-			$record->password = sha1($record->password);
-		}
-	}
-}
 
 class User extends Kea_Record {
 
 	protected $error_messages = array(	'email' => array('email' => 'Email must be valid', 'unique' => 'That email address has already been claimed by a different user.'),
 										'username' => array('unique' => 'That username is already taken.', 'notblank' => 'You must provide a valid username.'));
 	
-	public function __construct($table = null, $isNewEntry = false)
-	{
-		parent::__construct($table, $isNewEntry);
-		$this->getTable()->setAttribute(Doctrine::ATTR_LISTENER,new UserListener());
-	}
-	
 	public function setUp() {
 		$this->hasMany("Item as Items", "Item.user_id");
+		$this->ownsOne("Entity", "User.entity_id");
 		$this->ownsOne("Entity", "User.entity_id");
 	}
 	
@@ -64,6 +37,21 @@ class User extends Kea_Record {
 		$this->index('active', array('fields' => array('active')));
     }
 	
+	public function preSave()
+	{
+		$conn = Doctrine_Manager::getInstance()->connection();
+				
+		if($this->exists()) {
+			$sql = "SELECT password FROM users WHERE id = {$this->id}";
+			$oldPassword = $conn->fetchOne($sql);			
+			if($this->password !== $oldPassword) {
+				$this->password = sha1($this->password);
+			}
+		}else {
+			$this->password = sha1($this->password);
+		}
+	}
+
 	public function get($name) {
 		if($this->hasRelation($name)) {
 			return parent::get($name);

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Hook.php 1175 2007-03-16 22:17:32Z zYne $
+ *  $Id: Hook.php 2149 2007-08-02 21:27:42Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1175 $
+ * @version     $Revision: 2149 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Hook
@@ -65,6 +65,7 @@ class Doctrine_Hook
                               'string'    => 'Doctrine_Hook_WordLike',
                               'varchar'   => 'Doctrine_Hook_WordLike',
                               'integer'   => 'Doctrine_Hook_Integer',
+                              'enum'      => 'Doctrine_Hook_Integer',
                               'time'      => 'Doctrine_Hook_Time',
                               'date'      => 'Doctrine_Hook_Date',
                               );
@@ -82,6 +83,8 @@ class Doctrine_Hook
         } else {
             throw new Doctrine_Exception('Constructor argument should be either Doctrine_Query object or valid DQL query');      	
         }
+        
+        $this->query->getQuery();
     }
     /**
      * getQuery
@@ -126,19 +129,24 @@ class Doctrine_Hook
             return false;
         }
         foreach ($params as $name => $value) {
+            if ($value === '' || $value === '-') {
+                continue;
+            }
             $e = explode('.', $name);
 
             if (count($e) == 2) {
                 list($alias, $column) = $e;
 
-                $tableAlias = $this->query->getTableAlias($alias);
-                $table = $this->query->getTable($tableAlias);
+                $map   = $this->query->getAliasDeclaration($alias);
+                $table = $map['table'];
 
                 if ( ! $table) {
-                    throw new Doctrine_Exception('Unknown table alias ' . $tableAlias);
+                    throw new Doctrine_Exception('Unknown alias ' . $alias);
                 }
 
                 if ($def = $table->getDefinitionOf($column)) {
+
+                $def[0] = gettype($value);
                     if (isset($this->typeParsers[$def[0]])) {
                         $name   = $this->typeParsers[$def[0]];
                         $parser = new $name;
@@ -180,10 +188,10 @@ class Doctrine_Hook
             if (count($e) == 2) {
                 list($alias, $column) = $e;
 
-                $tableAlias = $this->query->getTableAlias($alias);
-                $table = $this->query->getTable($tableAlias);
+                $map   = $this->query->getAliasDeclaration($alias);
+                $table = $map['table'];
 
-                if ($def = $table->getDefinitionOf($column)) {
+                if ($def = $table->getDefinitionOf($column)) {   
                     $this->query->addOrderBy($alias . '.' . $column . ' ' . $order);
                 }
             }

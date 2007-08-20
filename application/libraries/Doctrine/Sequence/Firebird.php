@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Firebird.php 1109 2007-02-16 19:54:41Z zYne $
+ *  $Id: Firebird.php 1619 2007-06-10 19:28:47Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ Doctrine::autoload('Doctrine_Sequence');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1109 $
+ * @version     $Revision: 1619 $
  */
 class Doctrine_Sequence_Firebird extends Doctrine_Sequence
 {
@@ -42,7 +42,7 @@ class Doctrine_Sequence_Firebird extends Doctrine_Sequence
      */
     public function nextID($seqName, $onDemand = true)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
 
         $query = 'SELECT GEN_ID(' . $sequenceName . ', 1) as the_value FROM RDB$DATABASE';
         try {
@@ -88,7 +88,7 @@ class Doctrine_Sequence_Firebird extends Doctrine_Sequence
      */
     public function currId($seqName)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
         
 
         $query = 'SELECT GEN_ID(' . $sequenceName . ', 0) as the_value FROM RDB$DATABASE';

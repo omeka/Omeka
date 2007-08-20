@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Having.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Having.php 1881 2007-06-27 18:42:47Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Query_Condition');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1881 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_Having extends Doctrine_Query_Condition
@@ -47,7 +47,7 @@ class Doctrine_Query_Having extends Doctrine_Query_Condition
 
             $name   = substr($func, 0, $pos);
             $func   = substr($func, ($pos + 1), -1);
-            $params = Doctrine_Query::bracketExplode($func, ',', '(', ')');
+            $params = Doctrine_Tokenizer::bracketExplode($func, ',', '(', ')');
 
             foreach ($params as $k => $param) {
                 $params[$k] = $this->parseAggregateFunction($param);
@@ -60,12 +60,17 @@ class Doctrine_Query_Having extends Doctrine_Query_Condition
         } else {
             if ( ! is_numeric($func)) {
                 $a = explode('.', $func);
-                $field     = array_pop($a);
-                $reference = implode('.', $a);
-                $table     = $this->query->load($reference, false);
-                $field     = $table->getColumnName($field);
-                $func      = $this->query->getTableAlias($reference) . '.' . $field;
 
+                if (count($a) > 1) {
+                    $field     = array_pop($a);
+                    $reference = implode('.', $a);
+                    $map       = $this->query->load($reference, false);
+                    $field     = $map['table']->getColumnName($field);
+                    $func      = $this->query->getTableAlias($reference) . '.' . $field;
+                } else {
+                    $field = end($a);
+                    $func  = $this->query->getAggregateAlias($field);
+                }
                 return $func;
             } else {
                 return $func;
@@ -81,7 +86,7 @@ class Doctrine_Query_Having extends Doctrine_Query_Condition
      */
     final public function load($having)
     {
-        $e = Doctrine_Query::bracketExplode($having, ' ', '(', ')');
+        $e = Doctrine_Tokenizer::bracketExplode($having, ' ', '(', ')');
 
         $r = array_shift($e);
         $t = explode('(', $r);
@@ -93,14 +98,5 @@ class Doctrine_Query_Having extends Doctrine_Query_Condition
         $r .= ' ' . $operator . ' ' . $value;
 
         return $r;
-    }
-    /**
-     * __toString
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return ( ! empty($this->parts))?implode(' AND ', $this->parts):'';
     }
 }

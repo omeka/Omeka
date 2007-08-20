@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Sqlite.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Sqlite.php 1773 2007-06-19 23:33:04Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ Doctrine::autoload("Doctrine_Connection_Common");
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1773 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -74,7 +74,6 @@ class Doctrine_Connection_Sqlite extends Doctrine_Connection_Common
         $this->options['server_version'] = '';
         */
         parent::__construct($manager, $adapter);
-        //$this->initFunctions();
     }
     /**
      * initializes database functions missing in sqlite
@@ -82,11 +81,23 @@ class Doctrine_Connection_Sqlite extends Doctrine_Connection_Common
      * @see Doctrine_Expression
      * @return void
      */
-    public function initFunctions()
+    public function connect() 
     {
+        parent::connect();
+        
         $this->dbh->sqliteCreateFunction('md5',    array('Doctrine_Expression_Sqlite', 'md5Impl'), 1);
         $this->dbh->sqliteCreateFunction('mod',    array('Doctrine_Expression_Sqlite', 'modImpl'), 2);
         $this->dbh->sqliteCreateFunction('concat', array('Doctrine_Expression_Sqlite', 'concatImpl'));
         $this->dbh->sqliteCreateFunction('now', 'time', 0);
+    }
+    /**
+     * getDatabaseFile
+     *
+     * @param string $name      the name of the database
+     * @return string
+     */
+    public function getDatabaseFile($name)
+    {
+        return $name . '.db';
     }
 }

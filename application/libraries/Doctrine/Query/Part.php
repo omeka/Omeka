@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Part.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Part.php 1479 2007-05-24 19:47:28Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information, see
  * <http://www.phpdoctrine.com>.
  */
-Doctrine::autoload("Doctrine_Access");
+
 /**
  * Doctrine_Query_Part
  *
@@ -27,36 +27,21 @@ Doctrine::autoload("Doctrine_Access");
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1479 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-abstract class Doctrine_Query_Part extends Doctrine_Access
+abstract class Doctrine_Query_Part
 {
     /**
      * @var Doctrine_Query $query           the query object associated with this parser
      */
     protected $query;
     /**
-     * @var string $name                    the name of this parser
-     */
-    protected $name;
-    /**
-     * @var array $parts
-     */
-    protected $parts = array();
-    /**
      * @param Doctrine_Query $query         the query object associated with this parser
      */
-    public function __construct(Doctrine_Query $query)
+    public function __construct($query)
     {
         $this->query = $query;
-    }
-    /**
-     * @return string $name                 the name of this parser
-     */
-    public function getName()
-    {
-        return $this->name;
     }
     /**
      * @return Doctrine_Query $query        the query object associated with this parser
@@ -65,20 +50,4 @@ abstract class Doctrine_Query_Part extends Doctrine_Access
     {
         return $this->query;
     }
-    /**
-     * add
-     *
-     * @param string $value
-     * @return void
-     */
-    public function add($value)
-    {
-        $method = "parse".$this->name;
-        $this->query->$method($value);
-    }
-
-    public function get($name)
-    { }
-    public function set($name, $value)
-    { }
 }

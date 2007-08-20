@@ -132,11 +132,14 @@ class Kea_View extends Zend_View_Abstract
 	 * 
 	 */
 	public function _run() {
-		extract($this->getVars());
+		$vars = $this->getVars();
 	
 		try {
+			extract($vars);	
 			include func_get_arg(0);
 		
+					
+
 			//Prototype.js doesn't recognize JSON unless the header is X-JSON: {json} all on one line [KK]
 			if($this->getRequest()->getParam('output') == 'json') {
 				$config = Zend::registry('config_ini');

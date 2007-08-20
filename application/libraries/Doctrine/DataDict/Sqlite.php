@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Sqlite.php 1091 2007-02-11 08:46:29Z zYne $
+ *  $Id: Sqlite.php 2196 2007-08-10 20:29:07Z meus $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@ Doctrine::autoload('Doctrine_DataDict');
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 1091 $
+ * @version     $Revision: 2196 $
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
@@ -57,6 +57,9 @@ class Doctrine_DataDict_Sqlite extends Doctrine_DataDict
      */
     public function getNativeDeclaration(array $field)
     {
+    	if ( ! isset($field['type'])) {
+            throw new Doctrine_DataDict_Exception('Missing column type.');
+    	}
         switch ($field['type']) {
             case 'text':
             case 'object':
@@ -112,9 +115,10 @@ class Doctrine_DataDict_Sqlite extends Doctrine_DataDict
                     //($this->conn->options['fixed_float']+2).','.$this->conn->options['fixed_float'].')' : '');
             case 'decimal':
                 $length = !empty($field['length']) ? $field['length'] : 18;
-                return 'DECIMAL('.$length.','.$this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES).')';
+                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine::ATTR_DECIMAL_PLACES);
+                return 'DECIMAL('.$length.','.$scale.')';
         }
-        throw new Doctrine_DataDict_Exception('Unknown datatype ' . $field['type']);
+        throw new Doctrine_DataDict_Exception('Unknown field type \'' . $field['type'] .  '\'.');
     }
     /**
      * Maps a native array description of a field to Doctrine datatype and length
@@ -234,7 +238,7 @@ class Doctrine_DataDict_Sqlite extends Doctrine_DataDict
 
         return array('type'     => $type,
                      'length'   => $length,
-                     'unsigned' => $unsigned, 
+                     'unsigned' => $unsigned,
                      'fixed'    => $fixed);
     }
     /**
@@ -268,7 +272,9 @@ class Doctrine_DataDict_Sqlite extends Doctrine_DataDict
         $default = $autoinc = '';
         $type    = $this->getNativeDeclaration($field);
 
-        if (isset($field['autoincrement']) && $field['autoincrement']) {
+        $autoincrement = isset($field['autoincrement']) && $field['autoincrement'];
+
+        if ($autoincrement){
             $autoinc = ' PRIMARY KEY AUTOINCREMENT';
             $type    = 'INTEGER';
         } elseif (array_key_exists('default', $field)) {
@@ -283,7 +289,9 @@ class Doctrine_DataDict_Sqlite extends Doctrine_DataDict
         */
 
         $notnull  = (isset($field['notnull']) && $field['notnull']) ? ' NOT NULL' : '';
-        $unsigned = (isset($field['unsigned']) && $field['unsigned']) ? ' UNSIGNED' : '';
+
+        // sqlite does not support unsigned attribute for autoinremented fields
+        $unsigned = (isset($field['unsigned']) && $field['unsigned'] && !$autoincrement) ? ' UNSIGNED' : '';
 
         $name = $this->conn->quoteIdentifier($name, true);
         return $name . ' ' . $type . $unsigned . $default . $notnull . $autoinc;

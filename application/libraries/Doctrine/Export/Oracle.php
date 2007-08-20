@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 1090 2007-02-11 08:42:13Z zYne $
+ *  $Id: Oracle.php 1735 2007-06-18 19:58:53Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,7 +29,7 @@ Doctrine::autoload('Doctrine_Export');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1090 $
+ * @version     $Revision: 1735 $
  */
 class Doctrine_Export_Oracle extends Doctrine_Export
 {
@@ -93,31 +93,30 @@ class Doctrine_Export_Oracle extends Doctrine_Export
      */
     public function _makeAutoincrement($name, $table, $start = 1)
     {
+    	$sql   = array();
         $table = strtoupper($table);
-        $index_name  = $table . '_AI_PK';
+        $indexName  = $table . '_AI_PK';
         $definition = array(
             'primary' => true,
             'fields' => array($name => true),
         );
-        $result = $this->createConstraint($table, $index_name, $definition);
+
+        $sql[] = $this->createConstraintSql($table, $indexName, $definition);
 
         if (is_null($start)) {
-            $this->conn->beginTransaction();
             $query = 'SELECT MAX(' . $this->conn->quoteIdentifier($name, true) . ') FROM ' . $this->conn->quoteIdentifier($table, true);
             $start = $this->conn->fetchOne($query);
 
             ++$start;
-            $result = $this->createSequence($table, $start);
-            $this->conn->commit();
-        } else {
-            $result = $this->createSequence($table, $start);
         }
 
-        $sequence_name = $this->conn->getSequenceName($table);
-        $trigger_name  = $this->conn->quoteIdentifier($table . '_AI_PK', true);
+        $sql[] = $this->createSequenceSql($table, $start);
+
+        $sequenceName = $this->conn->formatter->getSequenceName($table);
+        $triggerName  = $this->conn->quoteIdentifier($table . '_AI_PK', true);
         $table = $this->conn->quoteIdentifier($table, true);
         $name  = $this->conn->quoteIdentifier($name, true);
-        $trigger_sql = 'CREATE TRIGGER '.$trigger_name.'
+        $sql[] = 'CREATE TRIGGER ' . $triggerName . '
    BEFORE INSERT
    ON '.$table.'
    FOR EACH ROW
@@ -125,21 +124,21 @@ DECLARE
    last_Sequence NUMBER;
    last_InsertID NUMBER;
 BEGIN
-   SELECT '.$sequence_name.'.NEXTVAL INTO :NEW.'.$name.' FROM DUAL;
+   SELECT '.$sequenceName.'.NEXTVAL INTO :NEW.'.$name.' FROM DUAL;
    IF (:NEW.'.$name.' IS NULL OR :NEW.'.$name.' = 0) THEN
-      SELECT '.$sequence_name.'.NEXTVAL INTO :NEW.'.$name.' FROM DUAL;
+      SELECT '.$sequenceName.'.NEXTVAL INTO :NEW.'.$name.' FROM DUAL;
    ELSE
       SELECT NVL(Last_Number, 0) INTO last_Sequence
         FROM User_Sequences
-       WHERE UPPER(Sequence_Name) = UPPER(\''.$sequence_name.'\');
+       WHERE UPPER(Sequence_Name) = UPPER(\''.$sequenceName.'\');
       SELECT :NEW.id INTO last_InsertID FROM DUAL;
       WHILE (last_InsertID > last_Sequence) LOOP
-         SELECT '.$sequence_name.'.NEXTVAL INTO last_Sequence FROM DUAL;
+         SELECT ' . $sequenceName . '.NEXTVAL INTO last_Sequence FROM DUAL;
       END LOOP;
    END IF;
 END;
 ';
-        return $this->conn->exec($trigger_sql);
+        return $sql;
     }
     /**
      * drop an existing autoincrement sequence + trigger
@@ -172,6 +171,45 @@ END;
             $this->dropConstraint($table, $indexName);
         }
     }
+   /**
+     * A method to return the required SQL string that fits between CREATE ... TABLE
+     * to create the table as a temporary table.
+     *
+     * @return string The string required to be placed between "CREATE" and "TABLE"
+     *                to generate a temporary table, if possible.
+     */
+    public function getTemporaryTableQuery()
+    {
+        return 'GLOBAL TEMPORARY';
+    }
+    /**
+     * getAdvancedForeignKeyOptions
+     * Return the FOREIGN KEY query section dealing with non-standard options
+     * as MATCH, INITIALLY DEFERRED, ON UPDATE, ...
+     *
+     * @param array $definition         foreign key definition
+     * @return string
+     * @access protected
+     */
+    public function getAdvancedForeignKeyOptions(array $definition)
+    {
+        $query = '';
+        if (isset($definition['onDelete'])) {
+            $query .= ' ON DELETE ' . $definition['onDelete'];
+        }
+        if (isset($definition['deferrable'])) {
+            $query .= ' DEFERRABLE';
+        } else {
+            $query .= ' NOT DEFERRABLE';
+        }
+        if (isset($definition['feferred'])) {
+            $query .= ' INITIALLY DEFERRED';
+        } else {
+            $query .= ' INITIALLY IMMEDIATE';
+        }
+        return $query;
+    }
+
     /**
      * create a new table
      *
@@ -203,21 +241,60 @@ END;
      *
      * @return void
      */
-    public function createTable($name, $fields, $options = array())
+    public function createTable($name, array $fields, array $options = array())
     {
         $this->conn->beginTransaction();
 
-        $result = parent::createTable($name, $fields, $options);
-
-        foreach ($fields as $field_name => $field) {
-            if (isset($field['autoincrement']) && $field['autoincrement']) {
-                $result = $this->_makeAutoincrement($field_name, $name);
-            }
+        foreach ($this->createTableSql($name, $fields, $options) as $sql) {
+            $this->conn->exec($sql);
         }
 
         $this->conn->commit();
+    }
 
-        return $result;
+    /**
+     * create a new table
+     *
+     * @param string $name     Name of the database that should be created
+     * @param array $fields Associative array that contains the definition of each field of the new table
+     *                        The indexes of the array entries are the names of the fields of the table an
+     *                        the array entry values are associative arrays like those that are meant to be
+     *                         passed with the field definitions to get[Type]Declaration() functions.
+     *
+     *                        Example
+     *                        array(
+     *
+     *                            'id' => array(
+     *                                'type' => 'integer',
+     *                                'unsigned' => 1
+     *                                'notnull' => 1
+     *                                'default' => 0
+     *                            ),
+     *                            'name' => array(
+     *                                'type' => 'text',
+     *                                'length' => 12
+     *                            ),
+     *                            'password' => array(
+     *                                'type' => 'text',
+     *                                'length' => 12
+     *                            )
+     *                        );
+     * @param array $options  An associative array of table options:
+     *
+     * @return void
+     */
+    public function createTableSql($name, array $fields, array $options = array())
+    {
+        $sql = parent::createTableSql($name, $fields, $options);
+
+        foreach ($fields as $fieldName => $field) {
+            if (isset($field['autoincrement']) && $field['autoincrement'] ||
+               (isset($field['autoinc']) && $fields['autoinc'])) {           
+                $sql = array_merge($sql, $this->_makeAutoincrement($fieldName, $name));
+            }
+        }
+
+        return $sql;
     }
     /**
      * drop an existing table
@@ -333,7 +410,7 @@ END;
                 case 'rename':
                     break;
                 default:
-                    throw new Doctrine_Export_Exception('change type "'.$changeName.'" not yet supported');
+                    throw new Doctrine_Export_Exception('change type "' . $changeName . '" not yet supported');
             }
         }
 
@@ -343,77 +420,74 @@ END;
 
         $name = $this->conn->quoteIdentifier($name, true);
 
-        if (!empty($changes['add']) && is_array($changes['add'])) {
+        if ( ! empty($changes['add']) && is_array($changes['add'])) {
             $fields = array();
-            foreach ($changes['add'] as $field_name => $field) {
-                $fields[] = $this->conn->getDeclaration($field['type'], $field_name, $field);
+            foreach ($changes['add'] as $fieldName => $field) {
+                $fields[] = $this->conn->getDeclaration($field['type'], $fieldName, $field);
             }
-            $result = $this->conn->exec("ALTER TABLE $name ADD (". implode(', ', $fields).')');
+            $result = $this->conn->exec('ALTER TABLE ' . $name . ' ADD (' . implode(', ', $fields) . ')');
         }
 
-        if (!empty($changes['change']) && is_array($changes['change'])) {
+        if ( ! empty($changes['change']) && is_array($changes['change'])) {
             $fields = array();
-            foreach ($changes['change'] as $field_name => $field) {
-                $fields[] = $field_name. ' ' . $this->conn->getDeclaration($field['definition']['type'], '', $field['definition']);
+            foreach ($changes['change'] as $fieldName => $field) {
+                $fields[] = $fieldName. ' ' . $this->conn->getDeclaration($field['definition']['type'], '', $field['definition']);
             }
-            $result = $this->conn->exec("ALTER TABLE $name MODIFY (". implode(', ', $fields).')');
+            $result = $this->conn->exec('ALTER TABLE ' . $name . ' MODIFY (' . implode(', ', $fields) . ')');
         }
 
-        if (!empty($changes['rename']) && is_array($changes['rename'])) {
-            foreach ($changes['rename'] as $field_name => $field) {
-                $field_name = $this->conn->quoteIdentifier($field_name, true);
-                $query = "ALTER TABLE $name RENAME COLUMN $field_name TO ".$this->conn->quoteIdentifier($field['name']);
+        if ( ! empty($changes['rename']) && is_array($changes['rename'])) {
+            foreach ($changes['rename'] as $fieldName => $field) {
+                $query = 'ALTER TABLE ' . $name . ' RENAME COLUMN ' . $this->conn->quoteIdentifier($fieldName, true)
+                       . ' TO ' . $this->conn->quoteIdentifier($field['name']);
+
                 $result = $this->conn->exec($query);
             }
         }
 
-        if (!empty($changes['remove']) && is_array($changes['remove'])) {
+        if ( ! empty($changes['remove']) && is_array($changes['remove'])) {
             $fields = array();
-            foreach ($changes['remove'] as $field_name => $field) {
-                $fields[] = $this->conn->quoteIdentifier($field_name, true);
+            foreach ($changes['remove'] as $fieldName => $field) {
+                $fields[] = $this->conn->quoteIdentifier($fieldName, true);
             }
-            $result = $this->conn->exec("ALTER TABLE $name DROP COLUMN ". implode(', ', $fields));
+            $result = $this->conn->exec('ALTER TABLE ' . $name . ' DROP COLUMN ' . implode(', ', $fields));
         }
 
-        if (!empty($changes['name'])) {
-            $change_name = $this->conn->quoteIdentifier($changes['name'], true);
-            $result = $this->conn->exec("ALTER TABLE $name RENAME TO ".$change_name);
+        if ( ! empty($changes['name'])) {
+            $changeName = $this->conn->quoteIdentifier($changes['name'], true);
+            $result = $this->conn->exec('ALTER TABLE ' . $name . ' RENAME TO ' . $changeName);
         }
-    }
-    /** 
-     * getForeignKeyDeferredDeclaration
-     *
-     * @return string
-     */
-    public function getForeignKeyDeferredDeclaration($deferred)
-    {
-        return ($deferred) ? 'INITIALLY DEFERRED DEFERRABLE' : '';
     }
     /**
      * create sequence
      *
-     * @param object $this->conn database object that is extended by this class
      * @param string $seqName name of the sequence to be created
      * @param string $start start value of the sequence; default is 1
-     * @return void
+     * @param array     $options  An associative array of table options:
+     *                          array(
+     *                              'comment' => 'Foo',
+     *                              'charset' => 'utf8',
+     *                              'collate' => 'utf8_unicode_ci',
+     *                          );
+     * @return string
      */
-    public function createSequence($seqName, $start = 1)
+    public function createSequenceSql($seqName, $start = 1, array $options = array())
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
-        $query = 'CREATE SEQUENCE ' . $sequenceName . ' START WITH ' . $start . ' INCREMENT BY 1 NOCACHE';
-        $query.= ($start < 1 ? ' MINVALUE ' . $start : '');
-        return $this->conn->exec($query);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
+        $query  = 'CREATE SEQUENCE ' . $sequenceName . ' START WITH ' . $start . ' INCREMENT BY 1 NOCACHE';
+        $query .= ($start < 1 ? ' MINVALUE ' . $start : '');
+        return $query;
     }
     /**
      * drop existing sequence
      *
      * @param object $this->conn database object that is extended by this class
      * @param string $seqName name of the sequence to be dropped
-     * @return void
+     * @return string
      */
-    public function dropSequence($seqName)
+    public function dropSequenceSql($seqName)
     {
-        $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
-        return $this->conn->exec('DROP SEQUENCE ' . $sequenceName);
+        $sequenceName = $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($seqName), true);
+        return 'DROP SEQUENCE ' . $sequenceName;
     }
 }

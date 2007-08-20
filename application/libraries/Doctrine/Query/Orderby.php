@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Orderby.php 1080 2007-02-10 18:17:08Z romanb $
+ *  $Id: Orderby.php 1871 2007-06-27 17:41:02Z zYne $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ Doctrine::autoload('Doctrine_Query_Part');
  * @category    Object Relational Mapping
  * @link        www.phpdoctrine.com
  * @since       1.0
- * @version     $Revision: 1080 $
+ * @version     $Revision: 1871 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_Orderby extends Doctrine_Query_Part
@@ -39,7 +39,7 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
      * @param string $str
      * @return void
      */
-    public function parse($str)
+    public function parse($str, $append = false)
     {
         $ret = array();
 
@@ -53,12 +53,10 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
                 $reference = implode('.', $a);
                 $name      = end($a);
 
-                $this->query->load($reference, false);
-                $alias     = $this->query->getTableAlias($reference);
+                $map = $this->query->load($reference, false);
+                $tableAlias = $this->query->getTableAlias($reference);
 
-                $tname     = $this->query->getTable($alias)->getTableName();
-
-                $r = $alias . '.' . $field;
+                $r = $tableAlias . '.' . $field;
 
 
             } else {
@@ -71,11 +69,6 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
             }
             $ret[] = $r;
         }
-
-        return implode(', ', $ret);
-    }
-    public function __toString()
-    {
-        return ( ! empty($this->parts))?implode(', ', $this->parts):'';
+        return $ret;
     }
 }
