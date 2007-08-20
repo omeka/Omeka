@@ -200,6 +200,11 @@
 		<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $exhibit->featured); ?></div>
 	</div>
 	
+	<div class="field">
+		<label for="featured">Exhibit is public:</label>
+		<div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $exhibit->public); ?></div>
+	</div>
+	
 	</fieldset>
 	</div>
 	<div id="exhibit-display">
@@ -221,6 +226,9 @@
 		</div>
 		</fieldset>
 	</div>	
+	<fieldset id="exhibit-save">
+		<?php submit('Save &amp; Finish','save_exhibit'); ?>
+		</fieldset>
 </form>		
 </div>
 <?php foot(); ?>

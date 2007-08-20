@@ -87,8 +87,8 @@
 		<?php $mainfile = $item->Files[0]; ?>
 		<?php if($mainfile->hasThumbnail()): ?>
 			<img src="<?php echo WEB_FILES.'/'.$mainfile->archive_filename; ?>" alt="<?php echo h($file->title); ?>" width="400" />
-			<?php endif; ?>
-			</div>
+		<?php endif; ?>
+	</div>
 <?php /*	<div id="files">	
 		<?php foreach( $item->Files as $key => $file ): ?>
 			<?php if($file->hasThumbnail()): ?>
@@ -214,7 +214,7 @@
 	<div id="citation" class="field">
 	<h3>Bibliographic Citation</h3>
 	<div>
-	<?php display_empty($item->getCitation());?>
+	<p><?php echo $item->getCitation();?></p>
 	</div>
 	</div>
 

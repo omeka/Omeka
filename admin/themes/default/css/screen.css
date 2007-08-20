@@ -370,7 +370,7 @@ ul.tags, li.tag {display: inline;}
 		div.showitem .field div {display:block; float:left; width:680px;}
 		
 		#tags-field {margin-bottom: .5em;}
-	
+		
 	/* File Page Styles */
 	
 	div.section {clear: both; margin: 0 0 3em;overflow: hidden;}
@@ -503,6 +503,7 @@ ul.tags, li.tag {display: inline;}
 
 	#exhibit-form #save_exhibit, #section-form #section_button, #choose-layout #page_button,#page-form #page_button {background:#9ed558; color:#fff;cursor:default;}
 
+	#exhibit-form #exhibit-save {clear:both;}
 	table#exhibits {clear:both;}
 
 	#exhibit-metadata {display:block;float:left; width:450px;overflow:hidden;}

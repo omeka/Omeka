@@ -21,6 +21,7 @@
 <?php echo flash(); ?>
 
 <div id="names-browse">
+	
 <?php if(!$_GET['hierarchy']): //Let's lose the table for now'?>
 <table>
 	<thead>
@@ -33,7 +34,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<?php foreach ($entities as $key => $e): ?>
+	<?php foreach($entities as $key => $e): ?>
 		<tr>
 			<td><?php echo h($e->id); ?></td>
 			<td><?php echo h($e->first_name); ?> <?php echo h($e->last_name); ?></td>
@@ -41,13 +42,13 @@
 			<td><a href="<?php echo uri('entities/edit/'.$e->id); ?>" class="edit">Edit</a></td>
 			<td><a href="<?php echo uri('entities/delete/'.$e->id); ?>" class="delete">Delete</a></td>
 		</tr>
-	<?php endforeach ?>
+	<?php endforeach; ?>
 	</tbody>
 </table>
 
 <?php else: ?>
 
-<?php 
+<?php /*
 	function display_nested_entities($entities)
 	{ ?>
 		<ul>
@@ -78,7 +79,7 @@
 <?	} ?>
 
 <?php 
-	display_nested_entities($entities); 
+	//display_nested_entities($entities); */
 ?>
 
 <?php endif; ?>

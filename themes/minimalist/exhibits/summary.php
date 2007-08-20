@@ -6,8 +6,6 @@
 
 <h3>Credits</h3>
 <p><?php echo h($exhibit->credits); ?></p>
-
-
 <?php section_nav(); ?>
 </div>
 <?php foot(); ?>

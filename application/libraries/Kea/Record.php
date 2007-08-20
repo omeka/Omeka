@@ -374,8 +374,10 @@ abstract class Kea_Record extends Doctrine_Record
 	 **/
 	public function commitForm(&$post, $save=true, $options=array())
 	{
+	/*
 		$conn = $this->_table->getConnection();
 		$conn->beginTransaction();
+	*/
 	
 		if(!empty($post))
 		{		
@@ -392,14 +394,14 @@ abstract class Kea_Record extends Doctrine_Record
 					$this->save();
 					$this->postCommitForm($post, $options);
 					$this->pluginHook('onCommitForm', array($this, $post));
-					$conn->commit();
+				//	$conn->commit();
 					return true;
 				}
 				catch(Doctrine_Validator_Exception $e) {
 					$this->gatherErrors($e);
 					$this->onFormError($post, $options);
 					throw new Exception( $this->getErrorMsg() );
-					$conn->rollback();
+				//	$conn->rollback();
 					return false;
 				}	
 			}

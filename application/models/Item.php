@@ -477,7 +477,7 @@ class Item extends Kea_Record
 					$this->Files->add($file);
 				}catch(Exception $e) {
 					$file->delete();
-					$conn->rollback();
+//					$conn->rollback();
 					throw $e;
 				}
 			
