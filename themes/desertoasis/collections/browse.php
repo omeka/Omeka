@@ -9,7 +9,11 @@
 			<?php $collectors=$collection->Collectors; ?>
 			<dl>
 			<dt><h3><a href="<?php echo uri('collections/show/'.$collection->id); ?>"><?php echo $collection->name; ?></a></h3></dt>
-			<dd><?php foreach($collectors as $collector):?>Collector: <?php echo $collector->name; ?><?php endforeach; ?></dd>
+			<dd>Collector(s): <ul id="collectors">
+				<?php foreach($collectors as $collector):?>
+					<li><?php echo $collector->name; ?></li>
+				<?php endforeach; ?></dd>
+				</ul>
 			<dd><a href="<?php echo uri('items/browse/'); ?>">View the items in <?php echo $collection->name; ?></a></dd>
 			</dl>
 		</div><!--end collection-->

@@ -115,8 +115,10 @@ ul#primary-nav {margin: 0 auto;}
 /* ====Browse Item & Collection Pages==== */
 
 #primary div.item {margin: .5em auto 1.5em; width: 600px; padding: 0 0 1em; overflow: hidden; border-bottom: 1px solid #aec197;}
-	#primary div.item .item-img {float: left; padding: 0 1em 0 0;}
-	#primary div.item .desc, #primary div.item .tagcloud {padding: 0 0 1em;}
+	#primary div.item .item-img {float: left; padding: 1em 1em 0 0;}
+	#primary div.item .desc {padding: 0 0 1em;}
+	#primary div.item .tagcloud p {margin:0;}
+		.desc p {padding: 0; text-indent: 0;}
 
 dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
 	dl#metadata dt { width: 34%; float: left; padding: 0.5em 2%;font-weight: bold; }
@@ -125,18 +127,25 @@ dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
 	dl#metadata dt { clear: both; }
 	/* end hack */
 
-	dl#metadata dd {float: left; width: 62%; padding: 0.5em 0;}
+	dl#metadata dd {float: left; width: 62%; padding: 0.5em 0; font-size: 1.2em;}
 	dl#metadata ul {font-size: inherit; margin: 0;list-style-position: outside;}
 	ul.tags li {display: inline;}
 	
 	#collections dl {border-bottom: 1px solid #aec197; font-size: 1em; padding: 0 0 1em 0;}
 		#collections dd {text-indent: 1em;}
+		ul#collectors {line-height: 1.5em; padding: 0; margin: 0 0 1em; font-size: 1em;}
 
 /* ====Exhibits Page==== */
 
-	#exhibits table { margin: 1em auto; border: 1px solid #ddd; width: 90%;}
-		#exhibits table th, #exhibits table td {padding: 1em;}
+	#exhibits table { margin: 1em auto; width: 100%;}
+		#exhibits table thead {border-bottom: 2px solid #284907; font-size: 1.4em; font-weight: bold;}
+		#exhibits table tr {border-bottom: 1px solid #94A483;}
+		#exhibits table th {padding: 0 0 0 1em;}
+		#exhibits table td {padding: 1em 0 1em 1.4em;}
 		#exhibits table th.wide {width: 45%;}
+			.title {font-size: 1.2em; font-family: palatino, georgia, times, serif;}
+			.title a {text-decoration: none;}
+
 		
 /* ====Microformats==== */
 .hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
