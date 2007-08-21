@@ -49,9 +49,9 @@ Event.observe(window,'load',revealChoice);
 	
 	<fieldset id="view-choice">
 	<?php if($_GET['view'] == 'detailed'):?>
-		<?php include('_detailed.php'); ?>
+		<?php common('_detailed', compact('items'), 'items'); ?>
 	<?php elseif($_GET['view'] == 'simple' || $_GET['view'] == ''):?>
-		<?php include('_simple.php'); ?>
+		<?php common('_simple', compact('items'), 'items'); ?>
 	<?php endif; ?>
 	</fieldset>
 

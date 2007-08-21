@@ -140,7 +140,8 @@ if(!$authPrefix) {
 }
 
 //Set up the authentication mechanism with the specially generated prefix
-$auth = new Zend_Auth(new Kea_Auth_Adapter(), true, $authPrefix);
+require_once 'Zend/Auth.php';
+$auth = new Kea_Auth(new Kea_Auth_Adapter(), true, $authPrefix);
 
 //Register the Authentication mechanism to be able to share it
 Zend::register('auth', $auth);
