@@ -1212,4 +1212,3 @@ class Doctrine_Hydrate extends Doctrine_Object implements Serializable
         return Doctrine_Lib::formatSql($this->getQuery());
     }
 }
-?>

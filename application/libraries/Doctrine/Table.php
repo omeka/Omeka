@@ -1361,4 +1361,3 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
 		}
 	}
 }
-?>
