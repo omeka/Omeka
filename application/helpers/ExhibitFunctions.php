@@ -1,6 +1,11 @@
 <?php 
 ///// EXHIBIT FUNCTIONS /////
 
+function section_has_pages($section) 
+{
+	return $section->Pages->count() > 0;
+}
+
 function link_to_exhibit($exhibit, $text=null, $props=array(), $section=null, $page = null)
 {	
 	$uri = exhibit_uri($exhibit, $section, $page);

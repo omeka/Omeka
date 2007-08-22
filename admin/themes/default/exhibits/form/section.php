@@ -57,7 +57,8 @@
 	</fieldset>
 		<fieldset id="section-pages">
 			<legend>Pages in This Section</legend>	
-	<?php if ( $section->Pages->count() ): ?>
+			
+	<?php if ( section_has_pages($section) ): ?>
 	
 			<ul id="page-list">
 			<?php common('_page_list', compact('section'), 'exhibits'); ?>
