@@ -133,9 +133,7 @@ abstract class Kea_Record extends Doctrine_Record
 					
 					//Set empty form entries to the default value (or null if no default)
 					//Otherwise force the form entry to be either a string or integer
-					$def = $this->getTable()->getDefinitionOf($key);
-					$type = $def[0];
-					$default = @$def[2]['default'];
+					$default = $this->getTable()->getDefaultValueOf($key);
 					
 					if(empty($value)) {
 						if($default !== null) {
