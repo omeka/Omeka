@@ -29,18 +29,7 @@ abstract class Kea_Record extends Doctrine_Record
 	{
 		$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
 	}
-		
-	public function setUp() 
-	{
-		$bound = Kea_Controller_Plugin_Broker::getInstance()->getBound(get_class($this));
-		foreach ($bound as $key => $bind) {
-			$method = $bind[0];
-			$component = $bind[1];
-			$relation = $bind[2];
-			$this->$method($component, $relation);
-		}
-	}
-	
+
 	/**
 	 * Retrieve the error message associated with a specific field if it exists, or retrieve all errors as a string
 	 *
@@ -391,7 +380,7 @@ abstract class Kea_Record extends Doctrine_Record
 				try {
 					$this->save();
 					$this->postCommitForm($post, $options);
-					$this->pluginHook('onCommitForm', array($this, $post));
+					$this->pluginHook('onCommitForm', array($post));
 				//	$conn->commit();
 					return true;
 				}

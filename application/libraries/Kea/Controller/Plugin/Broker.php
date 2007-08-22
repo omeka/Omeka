@@ -56,24 +56,7 @@ class Kea_Controller_Plugin_Broker extends Zend_Controller_Plugin_Broker
 			$plugin->footer();
 		}
 	}
-	
-	public function addBound($class, $bound) {
-		$this->_binded[$class][] = $bound;
-	}
-	
-	public function getBound($class) {
-		if(array_key_exists($class, $this->_binded)) {
-			return $this->_binded[$class];
-		} else {
-			return array();
-		}
-		
-	}
-	
-	public function setRedirects(&$redirects) {
-//		Zend::dump( $redirects );
-	}
-	
+
 	/**
 	 * This applies to all plugin hooks that are defined in Kea_Plugin
 	 *
