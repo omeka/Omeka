@@ -390,15 +390,18 @@ class ExhibitsController extends Kea_Controller_Action
 		$section = $this->findById(null,'Section');
 		
 		if(isset($_POST['cancel'])) {
-			unset($this->session->page);
+			unset($this->session->layout);
 			$this->_redirect('editSection', array('id'=>$section->id));
 		}
 		
 		//Check to see if the page var was saved in the session
-		if(isset($this->session->page)) {
+		if(isset($this->session->layout)) {
+			
+			$page = new SectionPage;
 
-			$page = $this->session->page;
-
+			$page->layout = $this->session->layout;
+			$page->Section = $section;
+						
 		}else {
 
 			$page = new SectionPage;
@@ -440,8 +443,7 @@ class ExhibitsController extends Kea_Controller_Action
 			if(array_key_exists('choose_layout', $_POST)) {
 			
 				//A layout has been chosen for the page
-				$page->layout = $_POST['layout'];
-				$this->session->page = $page;
+				$this->session->layout = (string) $_POST['layout'];
 				
 		//		$page->save();
 				
@@ -475,8 +477,8 @@ class ExhibitsController extends Kea_Controller_Action
 				if($retVal) {
 				
 					//Unset the page var that was saved in the session
-					if(isset($this->session->page)) {
-						unset($this->session->page);
+					if(isset($this->session->layout)) {
+						unset($this->session->layout);
 					}
 				
 				
