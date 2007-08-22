@@ -3,10 +3,20 @@
 
 <?php js('editable');?>
 <script type="text/javascript" charset="utf-8">
-
-	function toggleImageGallery() {
-		
+	
+	//This will add confirmation for deleting files and the item
+	function confirmDelete() {
+		var links = $$('a.delete');
+				
+		links.each( function(el) {
+			el.onclick = function() {
+				return confirm('Are you sure you want to delete this?');
+			}
+		});
 	}
+	
+	Event.observe(window, 'load', confirmDelete);
+
 	function setFavorite() {
 		if(!document.getElementById('favorite')) return;
 		var opt = {
@@ -80,7 +90,11 @@
 </ul>
 
 <h1 id="title"><?php echo h($item->title); ?></h1>
-<p id="edit-delete"> <a class="edit" href="<?php echo uri('items/edit/').$item->id; ?>">Edit</a>  <a class="delete" href="<?php echo uri('items/delete/').$item->id; ?>">Delete</a></p>
+<p id="edit-delete"> 
+<?php 
+link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
+link_to_item($item, 'delete', 'Delete', array('class'=>'delete')); 
+?></p>
 
 <div id="item-images">
 	<div id="main-image">
