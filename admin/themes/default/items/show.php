@@ -331,7 +331,7 @@ link_to_item($item, 'delete', 'Delete', array('class'=>'delete'));
 <?php endif;?>
 
 </div>
-<?php if ( $item->Collection->exists() ): ?>
+<?php if ( has_collection($item) ): ?>
 	<div id="collection" class="field">
 	<h2>Collection</h2>
 	<div>
@@ -340,5 +340,7 @@ link_to_item($item, 'delete', 'Delete', array('class'=>'delete'));
 	</div>
 <?php endif; ?>
 
+<div id="additional-metadata">
+	<?php plugin_html('items/show', compact('item')); ?>
 </div>
 <?php foot();?>
