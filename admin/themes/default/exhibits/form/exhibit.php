@@ -172,7 +172,7 @@
 <form id="exhibit-form" method="post">
 	<fieldset id="save-exhibit">
 		
-			<button type="submit" name="save_exhibit" id="save_exhibit" class="exhibit-button">Exhibit Metadata</button>
+			<button type="submit" name="save_exhibit" id="save_exhibit" class="exhibit-button" disabled="disabled">Exhibit Metadata</button>
 			<button type="submit" name="add_new_section" id="add_new_section" class="exhibit-button">Add a Section</button>
 			<div id="pages_button" class="exhibit-button">Pages</div>
 			
