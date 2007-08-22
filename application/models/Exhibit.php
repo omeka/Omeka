@@ -124,7 +124,7 @@ class Exhibit extends Kea_Record
 	
 	public function getSection($slug)
 	{
-		$dql = "SELECT s.* FROM Section s LEFT JOIN s.Pages p WHERE s.slug = ? AND s.exhibit_id = ? LIMIT 1";
+		$dql = "SELECT s.* FROM Section s LEFT JOIN s.Pages p WHERE s.slug = ? AND s.exhibit_id = ?";
         return $this->executeDql($dql, array( strtolower($slug), $this->id), true);	
 	}
 	
