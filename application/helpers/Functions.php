@@ -885,68 +885,80 @@ function display_empty($val, $alternative="[Empty]") {
 	echo nls2p(h(!empty($val) ? $val : $alternative));
 }
 
+/**
+ * @see FilesController
+ * @see routes.ini (display/download routes)
+ *
+ * @return string
+ **/
+function file_download_uri($file, $format='fullsize')
+{
+	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
+	$uri = generate_url($options, 'download');
+	
+	return $uri;
+}
+
+function file_display_uri($file, $format='fullsize')
+{
+	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
+	return generate_url($options, 'display');
+}
+
 function thumbnail($record, $props=array(), $width=null, $height=null,$return=false) 
 {
-       return archive_image($record, $props, $width, $height, THUMBNAIL_DIR, WEB_THUMBNAILS,$return);
+       return archive_image($record, $props, $width, $height, 'thumbnail', $return);
 }
 
 function fullsize($record, $props=array(), $width=null, $height=null,$return=false)
 {
-       return archive_image($record, $props, $width, $height, FULLSIZE_DIR, WEB_FULLSIZE,$return);
+       return archive_image($record, $props, $width, $height, 'fullsize', $return);
 }
 
-function archive_image( $record, $props, $width, $height, $abs, $web,$return) 
+function archive_image( $record, $props, $width, $height, $format, $return) 
 {
        if($record instanceof File) {
                $filename = $record->getDerivativeFilename();
+			   $file = $record;
        }elseif($record instanceof Item) {
                $file = $record->getRandomFileWithImage();
                if(!$file) return false;
                $filename = $file->getDerivativeFilename();
        }
-	   
-		if(empty($filename)) {
+
+		$path = $file->getPath($format);
+		$uri = file_display_uri($file, $format);
+		
+	   if(!file_exists($path)) {
 			return false;
 	   }
 
-       $path =  $web . DIRECTORY_SEPARATOR . $filename;
-       $abs_path =  $abs . DIRECTORY_SEPARATOR . $filename;
-       if( file_exists( $abs_path ) ) {
-               $html = '<img src="' . $path . '" ';
-				if ($props != null) {
-               		foreach( $props as $k => $v ) {
-                       	$html .= $k . '="' . $v . '" ';
-               		}
-                }
-               list($o_width, $o_height) = getimagesize( $abs_path );
-               if(!$width && !$height) 
-               {
-                       $html .= 'width="' . $o_width . '" height="' . $o_height . '" alt=""';
-               }
-               elseif( $o_width > $width && !$height )
-               {
-                       $ratio = $width / $o_width;
-                       $height = $o_height * $ratio;
-                       $html .= 'width="' . $width . '" height="' . $height . '" alt=""';
-               }
-               elseif( !$width && $o_height > $height)
-               {
-                       $ratio = $height / $o_height;
-                       $width = $o_width * $ratio;
-                       $html .= 'width="' . $width . '" height="' . $height . '" alt=""';
-               }
-               elseif ( $width && $height )
-               {
-                       $html .= 'width="' . $width . '" height="' . $height . '" alt=""';
-               }
-               $html .= '/>' . "\n";
-			   if($return) return $html;
-			   echo $html;
-       } else {
-				$html = '<img src="' . $path . '" alt="Image missing." />' . "\n";
-				if($return) return $html;
-               echo $html;
+       list($o_width, $o_height) = getimagesize( $path );
+       if(!$width && !$height) 
+       {
+			$width = $o_width;
+			$height = $o_height;
        }
+       elseif( $o_width > $width && !$height )
+       {
+               $ratio = $width / $o_width;
+               $height = $o_height * $ratio;
+       }
+       elseif( !$width && $o_height > $height)
+       {
+               $ratio = $height / $o_height;
+               $width = $o_width * $ratio;
+       }
+	   $props['width'] = $width;
+	   $props['height'] = $height;
+	
+	   if(!isset($props['alt'])) {
+			$props['alt'] = $file->title;
+		}
+	
+	   $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
+	   if($return) return $html;
+	   echo $html;
 }
 /**
  *	The pagination function from the old version of the software

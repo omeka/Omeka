@@ -56,11 +56,11 @@
 	
 <div id="lgimage" class="section">
 <?php if ($file->hasThumbnail()): ?>
-	<img src="<?php echo WEB_FILES.'/'.$file->archive_filename; ?>" alt="<?php echo h($file->title); ?>" width="400" />
+	<?php fullsize($file, array(), 400); ?>
 <?php else: ?>
 	<?php echo h($file->archive_filename); ?>
 <?php endif; ?>
-<a href="<?php echo WEB_FILES.'/'.addslashes($file->archive_filename); ?>">Download this file</a>
+<a href="<?php echo file_download_uri($file); ?>">Download this file</a>
 </div>
 
 <div id="file-history" class="section">
