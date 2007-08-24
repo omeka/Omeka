@@ -292,7 +292,7 @@ function page_nav()
 		$uri = exhibit_uri($section->Exhibit, $section, $page);
 		
 		//Create the link (also check if uri matches current uri)
-		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">'. $key .'</a></li>';
+		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">Page '. $key .'</a></li>';
 	
 	}
 	

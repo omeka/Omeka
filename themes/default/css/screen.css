@@ -5,7 +5,7 @@
 body {font: 62.5% "Helvetica Neue",Helvetica, Arial, sans-serif; color: #777; background: #fff;  margin:0; padding:36px 0;}
 
 /* Headings */
-h1 {font-size:2.4em; line-height:0.75em; margin-bottom:0.75em;}
+h1 {font-size:2.4em; line-height:0.75em; margin-bottom:1.5em;}
 h2 {font-size:2em; line-height:0.9em; margin-bottom:0.9em;}
 h3 {font-size:1.8em; line-height:1em; margin-bottom:1em; font-weight:bold;}
 h4 {font-size:1.8em; line-height:1em; margin-bottom:0.5em; font-style:italic;}
@@ -18,6 +18,8 @@ a:visited {color: #c60;}
 a:hover {color: #c83;} 
 a:active {color: #c83;}
 
+h1 a {text-decoration: none;}
+
 /* Misc. elements */
 p,ul,ol,dl {font-size:1.2em;line-height:1.5em; margin-bottom:1.5em;}
 abbr,acronym {border: none; font-style: normal;}
@@ -26,14 +28,15 @@ abbr,acronym {border: none; font-style: normal;}
 .hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
 	.hTagcloud li {display:inline;}
 
-	.popular {}
+	.popular, .-popular {font-size:120%}
 	.v-popular {font-size:140%;}
 	.vv-popular {font-size:180%;}
 	.vvv-popular {font-size:220%;}
 	.vvvv-popular {font-size:260%;}
 	.vvvvv-popular {font-size:300%;}
 	.vvvvvv-popular {font-size:340%;}
-	.vvvvvvv-popular {font-size:380%;}
+	.vvvvvvv-popular {font-size:360%;}
+	.vvvvvvvv-popular {font-size:380%;}
 	
 /* Reusable classes */
 .hide {text-indent: -1000em; width: 0; height: 0; overflow: hidden;}
@@ -43,6 +46,11 @@ abbr,acronym {border: none; font-style: normal;}
 	.navigation li {display:inline;}
 	.navigation a {text-decoration:none;}
 
+/* Structure */
+#primary {}
+#secondary {}
+
+/* Home page */
 
 /* Items browse */
 .item {overflow:hidden; border-bottom:1px dotted #ccc; margin-bottom:17px; padding-bottom:18px;}

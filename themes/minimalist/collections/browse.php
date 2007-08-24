@@ -10,6 +10,4 @@
 			</div>
 		<?php endforeach; ?>
 			
-
-	<div id="secondary">
-		<?php common('sidebar'); ?>	
+<?php foot(); ?>	

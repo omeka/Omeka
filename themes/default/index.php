@@ -3,7 +3,7 @@
 	<div id="primary">
 
 		<div id="site-info">
-			<h1>Site Info</h1>
+			<h2>Site Info</h2>
 			<p><em>Web Design History</em> contains <?php total_items(); ?> items, in <?php total_collections(); ?> collections, with <?php total_types(); ?> types tagged with <?php total_tags(); ?> keywords. There are <?php total_users(); ?> users.</p>
 		</div>
 		<?php if ( $user = current_user() ): ?>
@@ -19,7 +19,7 @@
 	<div id="secondary">
 		
 		<div id="recent-items">
-			<h1>Recently Added</h1>
+			<h2>Recently Added</h2>
 			<?php $recent = recent_items(5); ?>
 			<ul>
 				<?php foreach( $recent as $item ): ?>
@@ -29,7 +29,7 @@
 		</div>
 		
 		<div id="tagcloud">
-			<h1>Tag Cloud</h1>
+			<h2>Tag Cloud</h2>
 			<?php tag_cloud(recent_tags(), uri('items')); ?>
 		</div>
 	</div>

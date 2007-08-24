@@ -7,15 +7,15 @@
 		<?php foreach ($collections as $collection ): ?>
 		<div id="collection">
 			<?php $collectors=$collection->Collectors; ?>
-			<dl>
-			<dt><h3><a href="<?php echo uri('collections/show/'.$collection->id); ?>"><?php echo $collection->name; ?></a></h3></dt>
-			<dd>Collector(s): <ul id="collectors">
+			
+			<h3><a href="<?php echo uri('collections/show/'.$collection->id); ?>"><?php echo $collection->name; ?></a></h3>
+			<h4>Collector(s):</h4>
+				<ul id="collectors">
 				<?php foreach($collectors as $collector):?>
 					<li><?php echo $collector->name; ?></li>
-				<?php endforeach; ?></dd>
+				<?php endforeach; ?>
 				</ul>
-			<dd><a href="<?php echo uri('items/browse/'); ?>">View the items in <?php echo $collection->name; ?></a></dd>
-			</dl>
+			<p><a href="<?php echo uri('items/browse/?collection='.$collection->id); ?>">View the items in <?php echo $collection->name; ?></a></p>
 		</div><!--end collection-->
 		<?php endforeach; ?>
 		

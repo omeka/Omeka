@@ -8,14 +8,16 @@ html>body {font-size: 12px;}
 p, span {font-size: 1em; line-height: 1.5em; margin: .5em 0 1.5em;}
 
 /* ====Headings==== */
-h1, h2, h3, h4, h5 {font-family: palatino, georgia, times, serif; font-weight: normal; }
-	h1 {float: left; text-align: left; font-size: 3em; line-height: 1em; padding: .5em;}
+h1, h2, h3, h4, h5 {text-align: left; font-family: palatino, georgia, times, serif; font-weight: normal; }
+	h1 {float: left; font-size: 3em; line-height: 1em; padding: .5em;}
 	h2 {text-transform: uppercase; font-size: 1.6em; line-height: 1.13em; margin: 0 0 1.13em; padding: 0 .6em; }
 	h3 {font-size: 1.4em; line-height: 1.28em;}
 	h4 {font-size: 1.2em; line-height: 1.5em; margin: .75em 0 1.5em;}
 	h5 {font-size: 1em; line-height: 1em; margin: .5em 0 1em;}
 	h6 {}
 
+.item-meta h3 {margin: 1em 0;}
+.desc h4 {margin: 0; padding: 0;}
 #header h3 {float: right; font-style: italic; padding: .5em .5em 0; width: 300px;}
 #items h2 {margin-bottom: .6em;}
 
@@ -26,8 +28,8 @@ h1, h2, h3, h4, h5 {color: #2d2303;}
 	h2 {color: #284907; border-bottom: 1px solid #284907;}
 
 a:link {color: #284907;}
-a:visited {color: #5c832f;}
-a:hover {color: #69bfde;} 
+a:visited {color: #284907;}
+a:hover {color: #cc9966;} 
 	h1 a, h1 a:visited {color: #284907; text-decoration: none;}
 	h3 a:link, h3 a:visited { text-decoration: none;}
 	ul#primary-nav li.current a:link, ul#primary-nav li.current a:visited {border-bottom: 3px solid #5c832f;}
@@ -40,16 +42,6 @@ select.pagination-link {border: 1px solid #bbb5a0; }
 dl#metadata dt { border-bottom: 1px dotted #bbb5a0; }
 dl#metadata dd {border-bottom: 1px dotted #bbb5a0;}
 
-	.-popular a, .-popular a:visited {color: #284907;}
-	.v-popular a {color: #405d20;}
-	.vv-popular a {color: #587038;}
-	.vvv-popular a {color: #708451;}
-	.vvvv-popular a {color: #889869;}
-	.vvvvv-popular a {color: #9fab82;}
-	.vvvvvv-popular a {color: #b7bf9a;}
-	.vvvvvvv-popular a {color: #cfd3b3;}
-	.vvvvvvvv-popular a {color: #e7e6cb;}
-	
 /* ==Misc. elements=== */
 p {padding: 0 1em 1em;}
 p,ul,ol,dl {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
@@ -115,10 +107,11 @@ ul#primary-nav {margin: 0 auto;}
 /* ====Browse Item & Collection Pages==== */
 
 #primary div.item {margin: .5em auto 1.5em; width: 600px; padding: 0 0 1em; overflow: hidden; border-bottom: 1px solid #aec197;}
-	#primary div.item .item-img {float: left; padding: 1em 1em 0 0;}
+	#primary div.item .item-img {float: left; padding: 0 1em 0 0;}
 	#primary div.item .desc {padding: 0 0 1em;}
 	#primary div.item .tagcloud p {margin:0;}
-		.desc p {padding: 0; text-indent: 0;}
+		.desc p {padding: 0; text-indent: 0; margin-bottom: 0;}
+		.tagcloud p {padding: 0;}
 
 dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
 	dl#metadata dt { width: 34%; float: left; padding: 0.5em 2%;font-weight: bold; }
@@ -127,26 +120,21 @@ dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
 	dl#metadata dt { clear: both; }
 	/* end hack */
 
-	dl#metadata dd {float: left; width: 62%; padding: 0.5em 0; font-size: 1.2em;}
+	dl#metadata dd {float: left; width: 62%; padding: 0.5em 0; }
 	dl#metadata ul {font-size: inherit; margin: 0;list-style-position: outside;}
-	ul.tags li {display: inline;}
+		ul.tags li {display: inline; margin: 0 1em 0 0;}
+
+	#collections h3 {padding-left: .8em;}	
+		#collections p {margin-bottom: 0; padding: 0 1em 1em; font-size: 1em;}
+		#collections #collection h3 {padding-left: 0;}	
+	#collections #collection h4 {margin-bottom: 0;}	
+	#collections #collection {border-bottom: 1px solid #aec197;}
+		#collection p {padding: 0;}
+		ul#collectors {line-height: 1.5em; padding: 0; margin: .5em 0 1em 2em;font-size: 1em;list-style-type: square;}
+	.meta {margin: 0 1em 1em;}
+		.meta span {font-size: 1em;}
+
 	
-	#collections dl {border-bottom: 1px solid #aec197; font-size: 1em; padding: 0 0 1em 0;}
-		#collections dd {text-indent: 1em;}
-		ul#collectors {line-height: 1.5em; padding: 0; margin: 0 0 1em; font-size: 1em;}
-
-/* ====Exhibits Page==== */
-
-	#exhibits table { margin: 1em auto; width: 100%;}
-		#exhibits table thead {border-bottom: 2px solid #284907; font-size: 1.4em; font-weight: bold;}
-		#exhibits table tr {border-bottom: 1px solid #94A483;}
-		#exhibits table th {padding: 0 0 0 1em;}
-		#exhibits table td {padding: 1em 0 1em 1.4em;}
-		#exhibits table th.wide {width: 45%;}
-			.title {font-size: 1.2em; font-family: palatino, georgia, times, serif;}
-			.title a {text-decoration: none;}
-
-		
 /* ====Microformats==== */
 .hTagcloud ul {list-style:none; margin-left:0; padding-left:0;}
 	.hTagcloud li {display:inline; margin-left:0; padding-left:0;}
@@ -161,3 +149,58 @@ dl#metadata {width: 100%; margin: 2em 0; padding: 0 0 2em;}
 	.vvvvvvv-popular {font-size:320%;}
 	.vvvvvvvv-popular {font-size:340%;}
 	
+	.popular a, .popular a:visited {color: #284907;}
+	.-popular a, .-popular a:visited {color: #405d20;}
+	.v-popular a, .v-popular a:visited {color: #405d20;}
+	.vv-popular a, .vv-popular a:visited {color: #587038;}
+	.vvv-popular a, .vvv-popular a:visited {color: #708451;}
+	.vvvv-popular a, .vvvv-popular a:visited {color: #889869;}
+	.vvvvv-popular a, .vvvvv-popular a:visited {color: #9fab82;}
+	.vvvvvv-popular a, .vvvvvv-popular a:visited {color: #b7bf9a;}
+	.vvvvvvv-popular a, .vvvvvvv-popular a:visited {color: #cfd3b3;}
+	.vvvvvvvv-popular a, .vvvvvvvv-popular a:visited {color: #B1BDA5;}
+
+	.popular a:hover, .-popular a:hover {color: #8b5825;}
+	.v-popular a:hover {color: #966739;}
+	.vv-popular a:hover {color: #a0764d;}
+	.vvv-popular a:hover {color: #ab8660;}
+	.vvvv-popular a:hover {color: #b59574;}
+	.vvvvv-popular a:hover {color: #c0a488;}
+	.vvvvvv-popular a:hover {color: #cab39c;}
+	.vvvvvvv-popular a:hover {color: #d5c2b0;}
+	.vvvvvvvv-popular a:hover {color: #dfd1c4;}
+
+/* ==Exhibit Styles== */
+
+#exhibits table { margin: 1em auto; width: 100%;}
+	#exhibits table thead {border-bottom: 2px solid #b7bf9a; font-size: 1.4em; font-weight: bold;}
+	#exhibits table tr.exhibit {border-bottom: 1px solid #b7bf9a;}
+	#exhibits table th {padding: 0 0 0 1em;}
+	#exhibits table td {padding: 1em 0 1em 1.2em;}
+	#exhibits table th.wide {width: 45%;}
+		.title {font-size: 1.2em; font-family: palatino, georgia, times, serif;}
+		.title a {text-decoration: none;}
+
+#exhibits h3 {padding: 0 .8em;}
+	#exhibits .exhibit h3 a {text-decoration: none;}	
+	#exhibits p, #exhibits .tags {margin: 0 .6em 1em 0;}
+
+#exhibit-header {clear: both;}
+	#exhibit-header h2 {text-transform: uppercase; margin-bottom: 0;}
+	#exhibit-header h2 a {text-decoration: none;} 
+	#exhibit-header h3 {clear: both; float: left; margin: 0;}
+
+.exhibit-section-nav {float:left;margin:0 0 2em 1em;padding-left: 0;}
+	.exhibit-section-nav li {list-style-type: square;float:left;text-transform:uppercase;padding:.5em .5em .5em 0; }
+	.exhibit-section-nav li a {float:left;text-decoration: none; display: block; color: #284907;border-bottom: 2px solid #fffae4;}
+	.exhibit-section-nav li a:visited {color: #284907;}
+	.exhibit-section-nav li a:hover {color: #5bb401;border-bottom: 2px solid #5bb401;}
+	.exhibit-section-nav li a.current {border-bottom: 2px solid #660066; color: #660066;}
+	
+.exhibit-page-nav {float: right; padding-right: 1em;}
+	.exhibit-page-nav li {float: left; display: inline; padding: 0 2px 0 0;}
+	.exhibit-page-nav li a {display: inline; padding: 5px 1em 3px; border: 1px solid #ddd;border-bottom: none;text-decoration: none;}
+	.exhibit-page-nav li.current a {text-decoration: none; font-weight: bold;background-color: #ddd;}
+
+.summary {margin-bottom: 0;}	
+.exhibit-item {}

@@ -22,7 +22,7 @@
 			<ul>
 				<?php foreach( $recent as $item ): ?>
 				<li><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo $item->title; ?></a><?php if ($item->description); 
-				{ echo ": ".$item->description; } ?></li>
+				{ echo "<span class=\"item-description\">".$item->description."</span>"; } ?></li>
 				<?php endforeach; ?>
 			</ul>
 		</div><!--end recent-items -->

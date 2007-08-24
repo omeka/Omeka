@@ -21,14 +21,24 @@
 </head>
 <body>
 	<div id="wrap">
-		<?php common('search'); ?>
+
 		<div id="header">
+		<div id="searchwrap">
+			<form id="searchform" action="search.php" class="clear">
+				<input type="text" name="search" id="search" />
+				<input type="submit" name="submit" value="Search" />
+			</form>
+		</div><!--end searchwrap-->
+
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
 			<h5><?php settings('description'); ?></h5>
-			<ul id="primary-nav" class="navigation">
+			
+			<div id="primary-nav" >
+			<ul class="navigation">
 			<?php
 				nav(array('Items' => uri('items/browse'), 'Exhibits' => uri('exhibits'), 'Collections' => uri('collections'),'About'=>uri('about')));
 			?>
 			</ul>
+			</div>
 		</div>
 		<div id="content">
