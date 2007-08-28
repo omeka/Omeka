@@ -11,3 +11,7 @@
 
 <h3>Credits</h3>
 	<ul><li><?php echo $exhibit->credits; ?></li></ul>
+
+<?php 	
+// <a href=". uri('exhibits/'.$section->title)."\">" 
+?>

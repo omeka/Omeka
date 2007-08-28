@@ -19,8 +19,9 @@
 <?php plugin_header(); ?>
 
 </head>
-<body>
+<body id="<?php echo $exhibit->theme; ?>">
 	<div id="wrap">
+	<h5><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h5>
 		
 		<div id="header">
 			<h1><?php link_to_exhibit($exhibit); ?></h1>
