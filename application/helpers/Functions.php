@@ -982,16 +982,6 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 	if(empty($link)) {
 		$link = $p['link'];
 	}
-	
-	if($total_results <= $per_page) {
-		//return "&nbsp;";
-		if ($page != 1) {
-			if (!$per_page = null) {
-				$link = $link . '?per_page=' . $per_page;
-			}
-			header("Location: $link");
-		}
-	}
 
 		$num_pages = ceil( $total_results / $per_page );
 		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;

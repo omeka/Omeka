@@ -35,7 +35,7 @@ Event.observe(window,'load',revealChoice);
 <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
 
 <h2 id="search-header" class="close">Search Items</h2>
-<?php include('searchform.php'); ?>
+<?php items_filter_form(array('id'=>'search'), uri('items/browse')); ?>
 
 <div id="browse-meta">
 <div class="pagination"><?php echo pagination_links(); ?></div>
