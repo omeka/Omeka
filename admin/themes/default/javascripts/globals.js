@@ -1,3 +1,4 @@
+//Namespace for generic Omeka utility functions
 var Omeka = {
 	flash: function(msg) {
 		var div = $('alert');
@@ -17,6 +18,7 @@ var Omeka = {
 	}
 };
 
+//Highlight 'alert' boxes after the page has loaded (different from Omeka.flash)
 function alertBox() {
 	var alerts = $$('div.alert');
 	
@@ -42,6 +44,7 @@ function revealSwitch( field, file ) {
 		});
 }
 
+//Show or hide the search form depending on whether the header icon was clicked
 function toggleSearch() {
 	//alert('foo');
 	var search = $('search');
@@ -57,16 +60,19 @@ function toggleSearch() {
 	}
 }
 
+//Hide buttons for the non-js version of the exhibits builder
 function hideReorderSections() {
 	if(!$('reorder_sections')) return;
 	$('reorder_sections').remove();	
 }
 
+//Hide more buttons for the non-js version of the exhibits builder
 function hideReorderExhibits() {
 	if(!$('reorder_exhibits')) return;
 	$('reorder_exhibits').remove();	
 }
 
+//Style the handles for the section/page lists in the exhibit builder
 function styleExhibitBuilder() {
 	hideReorderSections();
 	hideReorderExhibits();
@@ -83,6 +89,7 @@ function styleExhibitBuilder() {
 	
 }
 
+//Adds an arbitrary number of file input elements to the items form so that more than one file can be uploaded at once
 function filesAdding()
 {
 	
@@ -118,6 +125,7 @@ function filesAdding()
 	filesDivWrap.appendChild(link);
 }
 
+//Adds rounded corners to the admin theme
 function roundCorners() {
 	Nifty('#primary-nav a,#secondary-nav a','top transparent');
 	Nifty('#view-style a','top transparent');
@@ -128,6 +136,7 @@ function roundCorners() {
 	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit,#new-user-form','transparent');
 }
 
+//Adds confirmation for the 'delete_item' button that is on the items form
 function checkDeleteItem() {
 	if(!$('delete_item')) return;
 	$('delete_item').onclick = function() {

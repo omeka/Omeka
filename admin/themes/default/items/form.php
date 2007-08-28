@@ -3,12 +3,13 @@
 	Event.observe(window,'load', function() {
 		ajaxifyTagRemoval();
 		makeTooltips();
-		ajaxifyTypeMetadata();
+		changeTypeMetadata();
 		filesAdding();
 		//filesAdding();
 	});
-		
-	function ajaxifyTypeMetadata()
+	
+	//Update the type metadata every time a different Item Type is selected	
+	function changeTypeMetadata()
 	{
 		var typeSelect = $('type');
 		$('change_type').hide();
@@ -56,6 +57,7 @@
 		};
 	}
 	
+	//Messing with the tag list should not submit the form.  Instead it runs an AJAX request to remove tags
 	function ajaxifyTagRemoval()
 	{
 		if(!$('tags-list')) return;
