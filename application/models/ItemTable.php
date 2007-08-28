@@ -225,7 +225,7 @@ class ItemTable extends Doctrine_Table
 		if(!empty($ids)) {
 			$where = "(i.id = ".join(" OR i.id = ", $ids) . ")";
 		}else {
-			$where = "0";
+			$where = "i.id = 0";
 		}
 		
 		
@@ -236,7 +236,7 @@ class ItemTable extends Doctrine_Table
 			$this->orderSelectByRecent($query);
 		}
 		
-//echo $query;
+//echo $query;exit;
 		
 		$items = $query->execute();
 		
