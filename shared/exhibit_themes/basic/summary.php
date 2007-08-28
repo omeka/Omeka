@@ -1,16 +1,5 @@
-<h2>Summary Page</h2>
 
-<dl>
-	<dt>Title</dt>
-	<dd><?php echo $exhibit->title; ?></dd>
-</dl>
+<p><?php echo $exhibit->description; ?></p>
 
-<dl>
-	<dt>Description</dt>
-	<dd><?php echo $exhibit->description; ?></dd>
-</dl>
-
-<dl>
-	<dt>Credits</dt>
-	<dd><?php echo $exhibit->credits; ?></dd>
-</dl>
+<h3>Credits</h3>
+	<ul><li><?php echo $exhibit->credits; ?></li></ul>

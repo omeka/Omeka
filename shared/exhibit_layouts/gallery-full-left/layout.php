@@ -13,9 +13,9 @@
 			<?php echo $item->description; ?>
 		</div>
 		<div class="exhibit-text">
-		<?php page_text(1); ?>
+		<?php echo page_text(1); ?>
 		</div>
-	</div>
+	</div><!--end primary-->
 	
 	<div class="secondary gallery">
 		
@@ -35,4 +35,6 @@
 			<?php $item = page_item(5); ?>
 			<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 		</div>
-</div>
+
+	</div><!--end secondary gallery-->
+</div><!--end gallery full left-->

@@ -11,6 +11,7 @@
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php layout_css(); ?>" />
 
 <!-- JavaScripts -->
 <?php js('prototype'); ?>

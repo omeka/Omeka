@@ -9,6 +9,7 @@
 
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php exhibit_css('screen'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php layout_css('layout'); ?>" />
 <link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
 
 <!-- JavaScripts -->
@@ -20,13 +21,16 @@
 </head>
 <body>
 	<div id="wrap">
+		
 		<div id="header">
-			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a> - Default Exhibit Theme</h1>
+			<h1><?php link_to_exhibit($exhibit); ?></h1>
+			<?php section_nav();?>
 		</div>
+		
 		<div id="content">
 	
-	<?php echo flash(); ?>				
+			<h2><?php echo $section->title; ?></h2>			
+			<?php page_nav(); ?>
+			
+			<?php echo flash(); ?>				
 
-		<h1><?php echo $exhibit->title; ?></h1>
-	
-	<h2><?php echo $section->title; ?></h2>			

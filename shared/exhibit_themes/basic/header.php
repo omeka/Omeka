@@ -20,6 +20,7 @@
 
 </head>
 <body id="<?php echo $exhibit->theme; ?>">
+	<h5><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h5>
 	<div id="wrap">
 		<div id="header">
 			<h1><?php echo $exhibit->title; ?></h1>
@@ -29,7 +30,5 @@
 	
 	<?php echo flash(); ?>				
 
-		
-	
 	<h2><?php echo $section->title; ?></h2>
 	<?php page_nav(); ?>		

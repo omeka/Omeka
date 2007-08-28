@@ -6,7 +6,7 @@
 
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta type="description" content="<?php echo settings('description'); ?>" />
+<meta name="description" content="<?php echo settings('description'); ?>" />
 
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
@@ -25,8 +25,8 @@
 		<div id="header">
 		<div id="searchwrap">
 			<form id="searchform" action="search.php" class="clear">
-				<input type="text" name="search" id="search" />
-				<input type="submit" name="submit" value="Search" />
+				<input type="text" name="search" id="search"></input>
+				<input type="submit" name="submit" value="Search"></input>
 			</form>
 		</div><!--end searchwrap-->
 

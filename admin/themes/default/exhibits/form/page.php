@@ -211,7 +211,7 @@
 	//	submit('Save &amp; Return to Section', 'section_form');
 	//	
 	//	submit('Save &amp; Add Another Page', 'page_form');
-	//	submit('Change the layout for this page', 'change_layout');	
+		submit('Change the layout for this page', 'change_layout');	
 	?>
 	
 	</div>
