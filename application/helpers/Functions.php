@@ -537,6 +537,8 @@ function link_to_collection($collection, $action='show', $text=null, $props=arra
 
 function link_to_thumbnail($item, $props=array(), $action='show', $random=false)
 {
+	if(!$item or !$item->exists()) return false;
+	
 	$path = 'items/'.$action.'/' . $item->id;
 	echo '<a href="'. uri($path) . '" ' . _tag_attributes($props) . '>';
 	
@@ -546,6 +548,26 @@ function link_to_thumbnail($item, $props=array(), $action='show', $random=false)
 		thumbnail($item->Files[0]);
 	}
 	echo '</a>';
+}
+
+/**
+ * Note to self: exact duplication of link_to_thumbnail()
+ *
+ * @return void|false
+ **/
+function link_to_fullsize($item, $props=array(), $action='show', $random=false)
+{
+	if(!$item or !$item->exists()) return false;
+	
+	$path = 'items/'.$action.'/' . $item->id;
+	echo '<a href="'. uri($path) . '" ' . _tag_attributes($props) . '>';
+	
+	if($random) {
+		fullsize($item);
+	}else {
+		fullsize($item->Files[0]);
+	}
+	echo '</a>';	
 }
 
 function link_to_home_page($text, $props = array())

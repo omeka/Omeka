@@ -22,7 +22,7 @@
 	<?php if (has_thumbnail($item) == null): ?>
 		<?php echo nls2p(snippet($item->description, 0, 300)); ?>
 		<?php else: ?>
-		<a class="thumbnail" href="<?php echo uri('items/show/'.$item->id); ?>"><?php thumbnail($item);?></a> 
+		<?php link_to_thumbnail($item, array('class'=>'thumbnail')); ?>
 		<?php echo nls2p(snippet($item->description, 0, 100)); ?>
 	<?php endif; ?>
 	</div>
