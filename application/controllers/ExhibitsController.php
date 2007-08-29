@@ -188,7 +188,7 @@ class ExhibitsController extends Kea_Controller_Action
 			
 			switch ($toRender) {
 				case 'layout':
-					$renderPath = $site['exhibit_layouts'].DIRECTORY_SEPARATOR.$page->layout.DIRECTORY_SEPARATOR.'layout.php';
+					$renderPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'show.php';
 					break;
 				case 'summary':
 					$renderPath = $site['exhibit_themes']. DIRECTORY_SEPARATOR . $exhibit->theme . DIRECTORY_SEPARATOR . 'summary.php';
