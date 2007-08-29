@@ -169,7 +169,15 @@ class ExhibitsController extends Kea_Controller_Action
 		return $this->renderExhibit(compact('exhibit'), 'summary');
 	}
 	
-	protected function renderExhibit($vars, $toRender='layout') {
+	/**
+	 * Figure out how to render the exhibit.  
+	 * 1) the view needs access to the shared directories
+	 * 2) if the exhibit has an associated theme, render the pages for that specific exhibit theme, 
+	 *		otherwise display the generic theme pages in the main public theme
+	 * 
+	 * @return void
+	 **/
+	protected function renderExhibit($vars, $toRender='show') {
 		/* 	If there is a theme, render the header/footer and layout page,
 			Otherwise render the default exhibits/show.php page
 		*/
@@ -181,13 +189,8 @@ class ExhibitsController extends Kea_Controller_Action
 			
 			$site = Zend::Registry('path_names');
 
-			$headerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'header.php';
-			if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$headerPath)) {
-				$this->render($headerPath, $vars);
-			}
-			
 			switch ($toRender) {
-				case 'layout':
+				case 'show':
 					$renderPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'show.php';
 					break;
 				case 'summary':
@@ -203,16 +206,11 @@ class ExhibitsController extends Kea_Controller_Action
 			
 			if(isset($renderPath) and file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$renderPath)) {
 				$this->render($renderPath, $vars);
-			}
-			
-			$footerPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'footer.php';
-			if(file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$footerPath)) {
-				$this->render($footerPath, $vars);
-			}			
+			}	
 			
 		}else {
 			switch ($toRender) {
-				case 'layout':
+				case 'show':
 					$path = 'exhibits/show.php';
 					break;
 				case 'summary':
