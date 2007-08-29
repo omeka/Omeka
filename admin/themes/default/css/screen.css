@@ -45,7 +45,7 @@ tbody tr {border-bottom:1px solid #cdcdc5;}
 form {display:block; overflow:hidden;padding-bottom:2em;}
 input,textarea {font:1.2em "Lucida Grande",Verdana, Arial, Helvetica, sans-serif;}
 input[type="submit"] {display: block;}
-fieldset {margin-bottom:2em;border-top:1px dotted #ccc; padding-top:1.8em;display:block;position: relative;}
+fieldset {margin-bottom:2em;border-top:1px dotted #ccc; padding-top:1.8em;display:block;}
 legend {font-family:"Gill Sans", sans-serif; color:#444; font-size:1.8em; background:#fff; padding-right:1em; line-height:1em;display:block;position: absolute;top:0; left:-.5em;}
 .toggle_content {overflow:hidden; height:auto;}
 .field label {overflow:hidden; position:relative; z-index:0; margin: 1em 0 0;}

@@ -18,7 +18,7 @@
 		
 		<div class="exhibit-item">
 			<?php $item = page_item(2); ?>
-			<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
+			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(3); ?>
@@ -29,8 +29,10 @@
 			<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
 		</div>
 		<div class="exhibit-item">
-			<?php $item = page_item(5); ?>
+			<?php if($item = page_item(5)): ?>
+				<?php var_dump(get_class($item)); ?>
 			<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php thumbnail($item->Files[0]); ?></a>
+			<?php endif; ?>
 		</div>
 
 	</div><!--end secondary gallery-->
