@@ -12,9 +12,6 @@
 			<?php echo $item->title; ?>
 			<?php echo $item->description; ?>
 		</div>
-		<div class="exhibit-text">
-		<?php echo page_text(1); ?>
-		</div>
 	</div><!--end primary-->
 	
 	<div class="secondary gallery">
@@ -37,4 +34,7 @@
 		</div>
 
 	</div><!--end secondary gallery-->
+	
+		<div id="item-full-text"><?php echo page_text(1); ?></div>
+
 </div><!--end gallery full left-->

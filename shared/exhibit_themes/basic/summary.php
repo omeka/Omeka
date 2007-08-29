@@ -1,5 +1,5 @@
-<h2>Exhibit Summary</h2>
-
+<h1><?php link_to_exhibit($exhibit); ?></h1>
+empty h2
 <p class="exhibit-description"><?php echo $exhibit->description; ?></p>
 
 <h3>Sections</h3>

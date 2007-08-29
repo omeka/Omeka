@@ -23,7 +23,10 @@
 	<div id="wrap">
 	<h5><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h5>
 		<div id="header">
-			<h1><?php link_to_exhibit($exhibit); ?></h1>
+			<?php //if exhibit_section(''): { ?>
+				<h1><?php link_to_exhibit($exhibit); ?></h1>
+
+			<?php //endif ?>
 			<?php section_nav();?>
 		</div>
 		<div id="content">

@@ -26,7 +26,7 @@ a:hover {}
 		h5 a, h5 a:visited {color: #ccc;}
 
 /* =Exhibit Navigation= */	
-.exhibit-section-nav {float: left; list-style:none; margin-left:0; padding-left:0; overflow:hidden; margin-bottom:0;margin-left: 18px;}
+.exhibit-section-nav {float: left; list-style:none; padding-left:0; overflow:hidden; margin:0 0 0 18px;}
 	.exhibit-section-nav li {display:block; float:left; width:10em;margin-right:1px;}
 	.exhibit-section-nav li a {display:block; float:left; width: 10em; text-decoration:none;padding:0.5em 0;text-align: left; color:#333;}
 	.exhibit-section-nav li a:hover {text-decoration: underline; color: #990000;}

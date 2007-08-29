@@ -1,7 +1,7 @@
 <?php exhibit_head(); ?>
 
 <div id="primary">
-	<div id="exhibit-page" class="cbb">
+	<div id="exhibit-page">
 	
 	<div><!--exhibit header information-->
 	<h2 class="summary"><?php echo h($exhibit->title); ?></h2>
