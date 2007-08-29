@@ -535,11 +535,16 @@ function link_to_collection($collection, $action='show', $text=null, $props=arra
 	return link_to($collection, $action, $text, $props);
 }
 
-function link_to_thumbnail($item, $action='show')
+function link_to_thumbnail($item, $props=array(), $action='show', $random=false)
 {
 	$path = 'items/'.$action.'/' . $item->id;
-	echo '<a href="'. uri($path) . '">';
-	thumbnail($item);
+	echo '<a href="'. uri($path) . '" ' . _tag_attributes($props) . '>';
+	
+	if($random) {
+		thumbnail($item);
+	}else {
+		thumbnail($item->Files[0]);
+	}
 	echo '</a>';
 }
 
