@@ -269,12 +269,14 @@ class Item extends Kea_Record
 			case 'next':
 			
 				$q->addWhere('i.id > ?', $this->id);
+				$q->addOrderBy('i.id ASC');
 				
 				break;
 			case 'previous':
 			
 				$q->addWhere('i.id < ?', $this->id);
-			
+				$q->addOrderBy('i.id DESC');
+				
 				break;
 			default:
 				throw new Exception( 'Invalid!' );
@@ -283,7 +285,7 @@ class Item extends Kea_Record
 		
 		//Now say that we should only retrieve 1 Item
 		$q->limit(1);
-		
+
 		//Execute the query and return the first result
 		return $q->execute()->getFirst();
 	}
