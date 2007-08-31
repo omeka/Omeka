@@ -368,7 +368,7 @@ class ExhibitsController extends Kea_Controller_Action
 				$this->_redirect('addSection', array('id'=>$section->Exhibit->id));
 			}
 		}
-		
+				
 		//this is an AJAX request
 		if($this->isAjaxRequest()) {
 			//If the form submission was invalid 
@@ -377,12 +377,17 @@ class ExhibitsController extends Kea_Controller_Action
 				//@see http://tech.groups.yahoo.com/group/rest-discuss/message/6183
 				header ("HTTP/1.0 422 Unprocessable Entity");
 
-			}	
-			//Render the 'section.php' page inside of the JSON output	
-			return $this->render('exhibits/section.php', compact('section'));
+			}				
 		}
 		
-		return $this->render('exhibits/form/section.php',compact('exhibit','section'));		
+		//If we are trying to render the JSON output, it's on a different page
+		if($this->_getParam('output') == 'json') {
+			return $this->render('exhibits/section.php', compact('section'));
+		}
+		//Otherwise we are rendering the admin theme's section form page
+		else {
+			return $this->render('exhibits/form/section.php',compact('exhibit','section'));		
+		}		
 	}
 	
 	/**
