@@ -16,7 +16,7 @@
 //]]>	
 </script>
 <div id="primary">
-<h1>Browse Entities</h1>
+<h1>Browse Names</h1>
 
 <?php echo flash(); ?>
 

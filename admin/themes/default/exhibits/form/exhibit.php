@@ -128,6 +128,9 @@
 				exhibit_id = exhibit['id'];
 				
 				loadSectionForm(exhibit_id);
+				
+				//Update the form so that it has an action corresponding to edit rather than add
+				$('exhibit-form').action = "<?php echo uri('exhibits/edit/'); ?>" + exhibit_id;				
 			},
 
 			onFailure: function(t, exhibit) {

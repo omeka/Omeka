@@ -233,7 +233,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$exhibit = new Exhibit;
 		
 		//Set a sess var so that plugin hooks can tell whether adding or editing
-		$this->session->adding = true;
+		$this->addingExhibit = true;
 		
 		return $this->processExhibitForm($exhibit);
 	}
@@ -267,33 +267,36 @@ class ExhibitsController extends Kea_Controller_Action
 	 **/
 	protected function processExhibitForm($exhibit)
 	{
-		$retVal = $exhibit->commitForm($_POST);
-		
-		//Fire the plugin hook depending on whether exhibit is added or edited
-		if($retVal) {
-			$hookName = (isset($this->session->adding) ? 'onAddExhibit' : 'onEditExhibit');
-			$this->pluginHook($hookName, array($exhibit));
+		try {
+			$retVal = $exhibit->commitForm($_POST);
+			
+			//Fire the plugin hook depending on whether exhibit is added or edited
+			if($retVal) {
+				$hookName = (isset($this->addingExhibit) ? 'onAddExhibit' : 'onEditExhibit');
+				$this->pluginHook($hookName, array($exhibit));
+			}
+
+			if($retVal) {
+				if(array_key_exists('add_section',$_POST)) {
+					//forward to addSection & unset the POST vars 
+					unset($_POST);
+					$this->_redirect('addSection', array('id'=>$exhibit->id) );
+					return;
+				}elseif(array_key_exists('save_exhibit', $_POST)) {
+				
+					$this->_redirect('saveExhibit', array('slug'=>$exhibit->slug));
+				}else {
+				
+					//Everything else should render the page
+					//return $this->render('exhibits/form/exhibit.php',compact('exhibit'));
+				}			
+			}
+					
+		} catch (Exception $e) {
+			$this->flash($e->getMessage());
 		}
 		
-		//Unset the session var that tells the plugins which hook to fire
-		unset($this->session->adding);
-		
-		if($retVal) {
-			if(array_key_exists('add_section',$_POST)) {
-				//forward to addSection & unset the POST vars 
-				unset($_POST);
-				$this->_redirect('addSection', array('id'=>$exhibit->id) );
-				return;
-			}elseif(array_key_exists('save_exhibit', $_POST)) {
-			
-				$this->_redirect('saveExhibit', array('slug'=>$exhibit->slug));
-			}else {
-			
-				//Everything else should render the page
-				//return $this->render('exhibits/form/exhibit.php',compact('exhibit'));
-			}			
-		}
-		return $this->render('exhibits/form/exhibit.php',compact('exhibit'));		
+		return $this->render('exhibits/form/exhibit.php',compact('exhibit'));
 	}
 	
 	/**
@@ -311,7 +314,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$section->order = $numSections + 1;
 		
 		//Tell the plugin hook that we are adding a section
-		$this->session->addingSection = true;
+		$this->addSection = true;
 		
 		return $this->processSectionForm($section, $exhibit);
 	}
@@ -324,19 +327,24 @@ class ExhibitsController extends Kea_Controller_Action
 		}
 		
 		try {
-			$retVal = $section->commitForm($_POST);
+			//Section form may be prefixed with Section (like name="Section[title]") or it may not be, depending
+			
+			if(array_key_exists('Section', $_POST)) {
+				$toPost = $_POST['Section'];
+			}else {
+				$toPost = $_POST;
+			}
+			
+			$retVal = $section->commitForm($toPost);
 		} catch (Exception $e) {
 			$this->flash($e->getMessage());
 			$retVal = false;
 		}
 		
 		if($retVal) {
-			$hook = ($this->session->addingSection ? 'onAddExhibitSection' : 'onEditExhibitSection');
+			$hook = ($this->addSection ? 'onAddExhibitSection' : 'onEditExhibitSection');
 			$this->pluginHook($hook, array($section));
 		}
-		
-		//Unset session var for plugin hooks
-		unset($this->session->addingSection);
 		
 		//If successful form submission
 		if($retVal)
@@ -388,16 +396,16 @@ class ExhibitsController extends Kea_Controller_Action
 		$section = $this->findById(null,'Section');
 		
 		if(isset($_POST['cancel'])) {
-			unset($this->session->layout);
+			$this->setLayout(null);
 			$this->_redirect('editSection', array('id'=>$section->id));
 		}
 		
 		//Check to see if the page var was saved in the session
-		if(isset($this->session->layout)) {
+		if($layout = $this->getLayout()) {
 			
 			$page = new SectionPage;
 
-			$page->layout = $this->session->layout;
+			$page->layout = $layout;
 			$page->Section = $section;
 						
 		}else {
@@ -407,7 +415,7 @@ class ExhibitsController extends Kea_Controller_Action
 
 		}
 		
-		$this->session->addingPage = true;
+		$this->addingPage = true;
 		
 		//Set the order for the new page
 		$numPages = $section->getPageCount();
@@ -416,23 +424,25 @@ class ExhibitsController extends Kea_Controller_Action
 		return $this->processPageForm($page, $section);
 	}
 	
-	protected function cancelPageAdd()
+	protected function getLayout()
 	{
-		//Unset session var that tells us we are adding a page
-		unset($this->session->addingPage);
+		return $this->session->layout;
 	}
 	
+	protected function setLayout($layout)
+	{
+		$this->session->layout = (string) $layout;
+	}
+		
 	protected function processPageForm($page, $section=null) 
 	{
 		//'cancel_and_section_form' and 'cancel_and_exhibit_form' as POST elements will cancel adding a page
 		//And they will redirect to whatever form is important
 		if(isset($_POST['cancel_and_section_form'])) {
-			$this->cancelPageAdd();
 			$this->_redirect('editSection', array('id'=>$page->section_id));
 		}
 		
 		if(isset($_POST['cancel_and_exhibit_form'])) {
-			$this->cancelPageAdd();
 			$this->_redirect('editExhibit', array('id'=>$section->exhibit_id));
 		}
 		
@@ -441,7 +451,7 @@ class ExhibitsController extends Kea_Controller_Action
 			if(array_key_exists('choose_layout', $_POST)) {
 			
 				//A layout has been chosen for the page
-				$this->session->layout = (string) $_POST['layout'];
+				$this->setLayout($_POST['layout']);
 				
 		//		$page->save();
 				
@@ -450,11 +460,7 @@ class ExhibitsController extends Kea_Controller_Action
 			}elseif(array_key_exists('change_layout', $_POST)) {
 				
 				//User wishes to change the current layout
-				$page->layout = null;
-			
-				//We'll need to register this with the session
-				$this->session->page = $page;
-		
+				$page->layout = null;		
 			}
 				
 			else {
@@ -465,19 +471,15 @@ class ExhibitsController extends Kea_Controller_Action
 				}
 				
 				if($retVal) {
-					$hook = ($this->session->addingPage ? 'onAddExhibitPage' : 'onEditExhibitPage');
+					$hook = ($this->addingPage ? 'onAddExhibitPage' : 'onEditExhibitPage');
 					$this->pluginHook($hook, array($page));
 				}
-				
-				$this->cancelPageAdd();
-				
+								
 				//Otherwise the page form has been submitted
 				if($retVal) {
 				
 					//Unset the page var that was saved in the session
-					if(isset($this->session->layout)) {
-						unset($this->session->layout);
-					}
+					$this->setLayout(null);
 				
 				
 					if(array_key_exists('exhibit_form', $_POST)) {
@@ -495,7 +497,6 @@ class ExhibitsController extends Kea_Controller_Action
 					}elseif(array_key_exists('page_form', $_POST)) {
 					
 						//Add another page
-						unset($_POST);
 						$this->_redirect('addPage', array('id'=>$section->id));
 						return;
 					
@@ -536,9 +537,8 @@ class ExhibitsController extends Kea_Controller_Action
 	{
 		$page = $this->findById(null,'SectionPage');
 		$section = $page->Section;
-	//	Zend::dump( $_POST );exit;
-		//Session var says we are not adding a page (for plugin hooks)
-		$this->session->addingPage = false;
+
+		$this->addingPage = false;
 		
 		return $this->processPageForm($page, $section);
 	}

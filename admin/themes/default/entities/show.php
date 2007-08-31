@@ -1,6 +1,6 @@
 <?php head(); ?>
 
-	<h1>Show Entity</h1>
+	<h1>Show Name</h1>
 	
 	
 	<?php foreach( $entity as $key => $value ): ?>
