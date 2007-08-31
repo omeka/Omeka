@@ -103,9 +103,9 @@ function exhibit_head()
 {
 	$exhibit = Zend::Registry('exhibit');
 	if($exhibit->theme) {
-		common('header',array(),'exhibit_themes'.DIRECTORY_SEPARATOR.$exhibit->theme);
+		common('header',compact('exhibit'),'exhibit_themes'.DIRECTORY_SEPARATOR.$exhibit->theme);
 	}else {
-		head();
+		head(compact('exhibit'));
 	}
 	
 }
@@ -114,9 +114,9 @@ function exhibit_foot()
 {
 	$exhibit = Zend::Registry('exhibit');
 	if($exhibit->theme) {
-		common('footer',array(),'exhibit_themes'.DIRECTORY_SEPARATOR.$exhibit->theme);
+		common('footer',compact('exhibit'),'exhibit_themes'.DIRECTORY_SEPARATOR.$exhibit->theme);
 	}else {
-		foot();
+		foot(compact('exhibit'));
 	}
 	
 }
