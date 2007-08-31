@@ -490,7 +490,7 @@ INSERT INTO `types` (id, name, description) VALUES (8, 'Event', 'A non-persisten
 
 
 -- Additions
-INSERT INTO `types` (id, name, description) VALUES (9, 'Email', '');
+INSERT INTO `types` (id, name, description) VALUES (9, 'Email', 'A resource containing textual messages and binary attachments sent electronically from one person to another or one person to many people.');
 INSERT INTO `types` (id, name, description) VALUES (10, 'Lesson Plan', 'Instructional materials.');
 INSERT INTO `types` (id, name, description) VALUES (11, 'Hyperlink', 'Title, URL, Description or annotation.');
 INSERT INTO `types` (id, name, description) VALUES (12, 'Person', 'An individual, biographical data, birth and death, etc.');
@@ -523,13 +523,13 @@ INSERT INTO `metafields` (id, name, description) VALUES (15, 'Bit Rate/Frequency
 INSERT INTO `metafields` (id, name, description) VALUES (16, 'Time Summary', '');
 
 -- Email
-INSERT INTO `metafields` (id, name, description) VALUES (17, 'Email Body', '');
-INSERT INTO `metafields` (id, name, description) VALUES (18, 'Subject Line', '');
-INSERT INTO `metafields` (id, name, description) VALUES (19, 'From', '');
-INSERT INTO `metafields` (id, name, description) VALUES (20, 'To', '');
-INSERT INTO `metafields` (id, name, description) VALUES (21, 'CC', '');
-INSERT INTO `metafields` (id, name, description) VALUES (22, 'BCC', '');
-INSERT INTO `metafields` (id, name, description) VALUES (23, 'Number of Attachments', '');
+INSERT INTO `metafields` (id, name, description) VALUES (17, 'Email Body', 'The main body of the email, including all replied and forwarded text and headers.');
+INSERT INTO `metafields` (id, name, description) VALUES (18, 'Subject Line', 'The content of the subject line of the email.');
+INSERT INTO `metafields` (id, name, description) VALUES (19, 'From', 'The name and email address of the person sending the email.');
+INSERT INTO `metafields` (id, name, description) VALUES (20, 'To', 'The name(s) and email address(es) of the person to whom the email was sent.');
+INSERT INTO `metafields` (id, name, description) VALUES (21, 'CC', 'The name(s) and email address(es) of the person to whom the email was carbon copied.');
+INSERT INTO `metafields` (id, name, description) VALUES (22, 'BCC', 'The name(s) and email address(es) of the person to whom the email was blind carbon copied.');
+INSERT INTO `metafields` (id, name, description) VALUES (23, 'Number of Attachments', 'The number of attachments to the email.');
 
 -- Lesson Plan
 INSERT INTO `metafields` (id, name, description) VALUES (24, 'Standards', '');
