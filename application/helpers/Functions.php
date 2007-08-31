@@ -939,6 +939,10 @@ function fullsize($record, $props=array(), $width=null, $height=null,$return=fal
 
 function archive_image( $record, $props, $width, $height, $format, $return) 
 {
+	if(!$record) {
+		return false;
+	}
+		
        if($record instanceof File) {
                $filename = $record->getDerivativeFilename();
 			   $file = $record;
