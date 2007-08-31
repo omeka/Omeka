@@ -25,7 +25,7 @@
 	<ul>
 	<?php foreach ($items as $key => $item): ?>
 		<?php if ($key < 10): ?>
-		<li><span class="title"><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo h($item->title); ?></a></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></li>
+		<li><span class="title"><?php link_to_item($item); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></li>
 		<?php endif; ?> 
 	<?php endforeach;?>
 	</ul>

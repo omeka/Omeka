@@ -20,7 +20,7 @@ if(!isset($items)) {
 <?php foreach($items as $key => $item):?>
 <tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
 	<td scope="row"><?php echo h($item->id);?></td> 
-	<td><a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php echo h($item->title); ?></a></td>
+	<td><?php link_to_item($item); ?></td>
 	<td><?php echo h($item->Type->name); ?></td>
 	<td><?php echo h($item->creator); ?></td>	
 	<td><?php echo date('m.d.Y', strtotime($item->added)); ?></td>
