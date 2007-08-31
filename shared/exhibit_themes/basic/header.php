@@ -21,7 +21,7 @@
 </head>
 <body id="<?php echo $exhibit->theme; ?>">
 	<div id="wrap">
-	<h5><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h5>
+	<h5><a href="<?php echo uri('exhibits'); ?>">Back to Exhibits</a></h5>
 		<div id="header">
 			<?php //if exhibit_section(''): { ?>
 				<h1><?php link_to_exhibit($exhibit); ?></h1>

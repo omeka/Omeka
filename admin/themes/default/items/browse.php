@@ -55,7 +55,7 @@ Event.observe(window,'load',revealChoice);
 	<?php endif; ?>
 	</fieldset>
 
-<input type="submit" name="submit" value="Modify these Items" />
+<input type="submit" name="submit" value="Save Changes" />
 
 </form>
 

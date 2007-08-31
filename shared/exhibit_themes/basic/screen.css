@@ -10,9 +10,9 @@ a img {border:none;}
 p,ul,ol,dl {font-size:1.2em; margin-bottom:1.5em;}
 p {line-height:1.8em;}
 
-a:link {color: #330066;}
-a:visited {color: #582e82;}
-a:hover {color: #ff6600;}
+a:link {color: #003399;}
+a:visited {color: #466bb5;}
+a:hover {color: #00ccff;}
 
 /* == Structure == */
 
@@ -47,7 +47,7 @@ p.exhibit-description {padding-top: 1em;}
 	#exhibit-sections ul.exhibit-section-nav li {float:none;display: block; padding: 0 0 .5em;}
 	#exhibit-sections ul.exhibit-section-nav li a {float:none;display:block; padding: 0 0 .5em;}
 	
-	#exhibit-sections dt {clear: right;padding: 0 0 1.5em 1%; width: 20%; float: left;font-weight: bold;}
+	#exhibit-sections dt {clear:both;padding: 0 0 1.5em 1%; width: 20%; float: left;font-weight: bold;}
 	#exhibit-sections dd {padding: 0 0 1.5em 1%; width: 78%; float: right;}
 
 #footer {margin-top: 1em; padding: 1em;}

@@ -13,6 +13,7 @@ if(!isset($items)) {
 		<th scope="col">Date Added</th>
 		<th scope="col">Public</th>
 		<th scope="col">Featured</th>
+		<th scope="col">Edit?</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -27,6 +28,7 @@ if(!isset($items)) {
 	<td><?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?>
 		<?php hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>
 	</td>
+	<td><?php link_to_item($item, 'edit', 'Edit', array('class'=>'edit')); ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>

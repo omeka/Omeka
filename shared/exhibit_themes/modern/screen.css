@@ -10,9 +10,8 @@ a img {border:none;}
 p,ul,ol,dl {font-size:1.2em; margin-bottom:1.5em;}
 p {line-height:1.8em;}
 
-a:link {color: #990000;}
-a:visited {color: #b64949;}
-a:hover {}
+a:link,a:visited {color: #cc0033;}
+a:hover {color:#ff6600;}
 
 /* ===== Structure ===== */
 #wrap {width:810px; margin:2em auto; background:#333;overflow:hidden; }
@@ -20,23 +19,24 @@ a:hover {}
 #header {background:#fff; color:#333; padding:0; margin: 0;overflow: hidden;border-bottom: 9px solid #333;}
 	h1 {margin:18px 18px 0; padding-bottom: .5em; border-bottom: 1px solid #666;}
 	h1 a {text-decoration: none;}
-	h2 {color: #666; padding: 18px 18px 9px 0;margin: 0;}
+	h2, h3 {font-weight: bold;color: #444444;}
+	h2 {padding: 18px 18px 9px 0;margin: 0;}
 	h3 {clear: both;}
 	h5 {background-color: #121212;padding: 0 0 1em;}
 		h5 a, h5 a:visited {color: #ccc;}
 
 /* =Exhibit Navigation= */	
-.exhibit-section-nav {float: left; list-style:none; padding-left:0; overflow:hidden; margin:0 0 0 18px;}
-	.exhibit-section-nav li {display:block; float:left; width:10em;margin-right:1px;}
-	.exhibit-section-nav li a {display:block; float:left; width: 10em; text-decoration:none;padding:0.5em 0;text-align: left; color:#333;}
-	.exhibit-section-nav li a:hover {text-decoration: underline; color: #990000;}
+.exhibit-section-nav {float: left;padding-left:0; overflow:hidden; margin:0 0 0 18px;}
+	.exhibit-section-nav li {display:block; float:left; width:auto;padding: .5em 1.5em .5em 0;margin-right:1px;}
+	.exhibit-section-nav li a, .exhibit-section-nav li a:visited {display:block; float:left; text-decoration:none;padding:0.5em 0;text-align: left;}
+	.exhibit-section-nav li a:hover {text-decoration: underline;}
 	
 /* =Page Navigation= */
 .exhibit-page-nav {list-style:none; float: left; padding-top: .7em; width: 100%; border-top: 1px solid #666;}
-	.exhibit-page-nav li {display:inline;float: left; margin-right:10px;}
-	.exhibit-page-nav li a {display:block; width: 5em; text-decoration:none;padding:0.5em 0;text-align: left;}
-	.exhibit-page-nav li.current a {display:block; width: 5em;font-weight:bold; text-decoration:none;padding:0.5em 0;text-align: left;}
-	.exhibit-page-nav li a:hover {text-decoration: underline;}
+	.exhibit-page-nav li {display:inline;float: left; margin-right:2px;}
+	.exhibit-page-nav li a {display:block; width: 5em; text-decoration:none;padding:0.5em 0;text-align: center;background-color: #eee;border:1px solid #ddd;}
+	.exhibit-page-nav li.current a {display:block; width: 5em;text-decoration:none;padding:0.5em 0;background-color: #cc6666;color: white;border:1px solid #CC2E4A;}
+	.exhibit-page-nav li a:hover {background-color: #cc0033;color:white;}
 
 /* == Content == */
 
@@ -47,12 +47,10 @@ p.exhibit-description {padding-top: 1em;}
 	#exhibit-sections ul.exhibit-section-nav li {float:none;display: block; padding: 0 0 .5em;}
 	#exhibit-sections ul.exhibit-section-nav li a {float:none;display:block; padding: 0 0 .5em;}
 	
-	#exhibit-sections dt {padding: 0 0 1.5em 1%; width: 20%; float: left;font-weight: bold;}
+	#exhibit-sections dt {padding: 0 1% 1.5em 0; width: 20%; float: left;}
 	#exhibit-sections dd {padding: 0 0 1.5em 1%; width: 78%; float: right;}
 
 #footer {margin-top: 1em; padding: 1em;background-color:#fff;}
-	#footer a {color: #333;}
-	#footer a:visited {color: #666;}
 
 .commentary {background:#eee; padding:18px;}
 	.commentary p {font-size:1.1em; line-height:1.63636;}

@@ -168,7 +168,8 @@
 </script>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
-	
+	<h1>Edit Exhibit: <?php echo h($exhibit->title); ?></h1>
+
 <form id="exhibit-form" method="post">
 	<fieldset id="save-exhibit">
 		
