@@ -55,15 +55,23 @@ try {
 		throw new Exception('No database connection could be created');
 	}
 
+	//Build the database if necessary
+	$res = $dbh->query("SHOW TABLES");
+	$tables = $res->fetchAll();
+	
+	if(empty($tables)) {
+		// Build the tables explicitly
+		$installSQL = file_get_contents('install.sql');
+		
+		$dbh->query($installSQL);
+	}
+
 	// Setup Doctrine
 	require_once 'Doctrine.php';
 	spl_autoload_register(array('Doctrine', 'autoload'));
 	Doctrine_Manager::connection($dbh);
 	$manager = Doctrine_Manager::getInstance();
 	Zend::register('doctrine', $manager);
-
-	//Build tables automagically
-	$manager->setAttribute(Doctrine::ATTR_CREATE_TABLES, true);
 
 	//Check if the options table is filled (if so, Omeka already set up so die)
 	require_once 'Option.php';
@@ -105,13 +113,8 @@ if (isset($_REQUEST['install_submit'])) {
 				}
 			}
 		}
-				
-		// Build the tables explicitly
-		$installSQL = file_get_contents('install.sql');
 		
-		$manager = Doctrine_Manager::getInstance();
-		$conn = $manager->connection();
-		$conn->execute($installSQL);
+		$conn = Doctrine_Manager::getInstance()->connection();
 		
 		// Create the default user
 		require_once 'User.php';
@@ -120,8 +123,8 @@ if (isset($_REQUEST['install_submit'])) {
 		$userTable = $manager->getTable('User')->getTableName();
 		$entityTable = $manager->getTable('Entity')->getTableName();
 		
-		$entitySql = "INSERT INTO $entityTable (type) VALUES (?)";
-		$conn->execute($entitySql, array("Person"));
+		$entitySql = "INSERT INTO $entityTable (type, email) VALUES (?, ?)";
+		$conn->execute($entitySql, array("Person", $_POST['super_email']));
 		
 		$userSql = "INSERT INTO $userTable (username, password, active, role, entity_id) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
 		$conn->execute($userSql, array($_REQUEST['username'], $_REQUEST['password']));
@@ -235,6 +238,11 @@ if ($display_form == true):
 	<label for="password">Password</label>
 	<input class="textinput" type="password" name="password" value="<?php echo $_POST['password']; ?>"/>
 	</div>
+	<div class="field">
+		<label for="super_email">Email</label>
+		<input class="textinput" type="text" name="super_email" id="super_email" value="<?php echo $_POST['super_email']; ?>">
+	</div>
+	
 	</fieldset>
 	<p><input type="submit" value="Continue" name="install_submit" /></p>
 </form>
