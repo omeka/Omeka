@@ -120,20 +120,6 @@ function exhibit_foot()
 	}
 	
 }
-/*
-	
-function has_sections($exhibit)
-{
-	return $exhibit->Sections->count() > 0;
-}
-*/	
-/*
-		
-function has_pages($section)
-{
-	return $section->Pages->count() > 0;
-}
-*/	
 
 function page_text($order, $addTag=true)
 {
