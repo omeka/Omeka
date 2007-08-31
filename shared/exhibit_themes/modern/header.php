@@ -23,15 +23,9 @@
 	<div id="wrap">
 	<h5><a href="<?php echo uri('exhibits'); ?>">Back to Exhibits</a></h5>
 		
-		<div id="header">
-			<h1><?php link_to_exhibit($exhibit); ?></h1>
-			<?php section_nav();?>
-		</div>
-		
 		<div id="content">
+		<?php echo flash(); ?>				
+		<h1><?php link_to_exhibit($exhibit); ?></h1>
 	
-			<h2><?php echo $section->title; ?></h2>			
-			<?php page_nav(); ?>
-			
 			<?php echo flash(); ?>				
 

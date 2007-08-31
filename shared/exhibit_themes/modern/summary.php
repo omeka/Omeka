@@ -24,22 +24,23 @@
 	<h5><a href="<?php echo uri('exhibits'); ?>">Back to Exhibits</a></h5>
 		
 		<div id="content">
-	
-			<?php echo flash(); ?>				
-
+		<?php echo flash(); ?>				
 		<h1><?php link_to_exhibit($exhibit); ?></h1>
 
-<p class="exhibit-description"><?php echo $exhibit->description; ?></p>
+		<p><?php echo $exhibit->description; ?></p>
 
-<h3>Sections</h3>
-<div id="exhibit-sections">	
-	<?php section_nav();?>
-	<dl>
-	<?php foreach($exhibit->Sections as $section): {echo "<dt>".$section->title."</dt><dd>".$section->description."</dd>";} endforeach; ?>
-	</dl>
-</div>
+		<div id="exhibit-sections">	
+			<div>
+			<?php foreach($exhibit->Sections as $section) {
+			$uri = exhibit_uri($exhibit, $section);
+			echo '<a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '><span class="section-title">' . $section->title . '</span>' . '<span class="section-desc">' . $section->description . '</span></a>';
+			} ?>
+			</div>
+		</div>
 
-<h3>Credits</h3>
-	<ul><li><?php echo $exhibit->credits; ?></li></ul>
+		<div id="exhibit-credits">	
+			<h3>Credits</h3>
+			<ul><li><?php echo $exhibit->credits; ?></li></ul>
+		</div>
 
 <?php exhibit_foot(); ?>

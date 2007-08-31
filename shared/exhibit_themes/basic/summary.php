@@ -1,18 +1,19 @@
-<h1><?php link_to_exhibit($exhibit); ?></h1>
-empty h2
+<?php exhibit_head(); ?>
+
 <div class="exhibit-description">
 	<?php echo nls2p($exhibit->description); ?>
 </div>
 
-<h3>Sections</h3>
 <div id="exhibit-sections">	
-	<dl>
-	<?php foreach($exhibit->Sections as $section): ?>
-		<dt><?php echo $section->title; ?></dt>
-		<dd><?php echo $section->description; ?></dd>
-	<?php endforeach; ?>
-	</dl>
+	<?php foreach($exhibit->Sections as $section) {
+		$uri = exhibit_uri($exhibit, $section);
+		echo '<h3><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . $section->title . '</a></h3><p>' . $section->description . '</p>';
+	} ?>
 </div>
 
-<h3>Credits</h3>
-<p><?php echo h($exhibit->credits); ?></p>
+<div id="exhibit-credits">	
+	<h3>Credits</h3>
+	<p><?php echo h($exhibit->credits); ?></p>
+</div>
+
+<?php exhibit_foot(); ?>

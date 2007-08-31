@@ -20,20 +20,16 @@
 
 </head>
 <body id="<?php echo $exhibit->theme; ?>">
-	<div id="wrap">
-	<h5><a href="<?php echo uri('exhibits'); ?>">Back to Exhibits</a></h5>
-		<div id="header">
-			<?php //if exhibit_section(''): { ?>
-				<h1><?php link_to_exhibit($exhibit); ?></h1>
 
-			<?php //endif ?>
-			<?php section_nav();?>
-		</div>
-		<div id="content">
-	
-	<h2><?php echo $section->title; ?></h2>
-	<?php page_nav(); ?>
-				
-	<?php echo flash(); ?>				
+<div id="wrap">
+	<h5><a href="<?php echo uri('exhibits'); ?>">Back to Exhibits</a></h5>
+	<h1><?php link_to_exhibit($exhibit); ?></h1>
+
+<div id="exhibit-nav">
+	<?php section_nav();?>
+</div>
+
+<div id="content">
+<?php echo flash(); ?>				
 
 		
