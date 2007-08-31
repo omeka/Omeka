@@ -127,7 +127,8 @@ class ItemsController extends Kea_Controller_Action
 				$filter['search'] = $search;
 			}
 			
-			if($this->_getParam('recent') != 'false') {
+			$recent = $this->_getParam('recent');
+			if($recent !== 'false') {
 				$order['recent'] = true;
 			}
 			
@@ -139,7 +140,6 @@ class ItemsController extends Kea_Controller_Action
 		//Get the item count after permissions have been applied, which is the total number of items possible to see
 		$total_items = $this->getTable('Item')->findBy($perms, true);
 		Zend::register('total_items', $total_items);
-		
 		
 		$params = array_merge($perms, $filter, $order);
 
