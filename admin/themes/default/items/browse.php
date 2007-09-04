@@ -52,7 +52,7 @@
 	<h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
 	
 	<h2 id="search-header" class="close">Search Items</h2>
-	<?php include('searchform.php'); ?>
+	<?php items_filter_form(array('id'=>'search'), uri('items/browse')); ?>
 <?php endif; ?>
 
 </div>
