@@ -31,19 +31,6 @@ function alertBox() {
 	}
 }
 
-function revealSwitch( field, file ) {
-	new Ajax.Updater(field,
-		revealPath,
-		{
-			parameters: {
-				view: file
-			},
-			onComplete: function(t) {
-				new Effect.Appear( field, {duration: 0.8} );
-			}
-		});
-}
-
 //Show or hide the search form depending on whether the header icon was clicked
 function toggleSearch() {
 	//alert('foo');

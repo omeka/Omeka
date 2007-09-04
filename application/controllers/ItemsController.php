@@ -188,27 +188,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		$this->pluginHook('onBrowseItems', array($items));
 		
-		//Here we put a switch in that will let someone use a simple or detailed view
-		if($_REQUEST['view']) {
-			switch ($_REQUEST['view']) {
-				case 'simple':
-					$file = 'items/_simple.php';
-					break;
-				
-				case 'detailed':
-					$file = 'items/_detailed.php';
-					break;
-					
-				default:
-					throw new Exception( "Invalid partial provided as parameter!" );
-					break;
-			}
-		}
-		else {
-			$file = 'items/browse.php';
-		}
-		
-		return $this->render($file, compact('total_items', 'items'));
+		return $this->render('items/browse.php', compact('total_items', 'items'));
 	}
 
 	/**

@@ -1,4 +1,6 @@
-<?php $items = items(); ?>
+<?php if(!isset($items)) {
+		$items = items(); } ?>
+
 <div id="detailed">
 <?php foreach($items as $key => $item):?>
 <div class="item">

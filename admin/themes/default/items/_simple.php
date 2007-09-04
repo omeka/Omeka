@@ -3,6 +3,7 @@ if(!isset($items)) {
 	$items = items(); 
 }
 ?>
+	
 <table id="items" class="simple" cellspacing="0" cellpadding="0">
 	<thead>
 		<tr>
@@ -33,3 +34,6 @@ if(!isset($items)) {
 <?php endforeach; ?>
 </tbody>
 </table>
+
+
+

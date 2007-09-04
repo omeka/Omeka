@@ -1,32 +1,6 @@
 <?php head(); ?>
 <?php common('archive-nav'); ?>
-<script type="text/javascript">
-/* revealPath is used in revealSwitch(); */
-var revealPath = "<?php echo $_SERVER['REQUEST_URI']; ?>";
 
-function revealChoice() {
-	if(!document.getElementById) return false;
-	var detailedView = $('detailed');
-	var simpleView = $('simple');
-	if(!$('simple') || !$('detailed')) return;
-	
-	simpleView.onclick = function() {
-		revealSwitch( 'view-choice', 'simple');
-		this.addClassName('current');
-		detailedView.removeClassName('current');
-		return false;
-	}
-	detailedView.onclick = function() {
-		revealSwitch( 'view-choice', 'detailed');
-		this.addClassName('current');
-		simpleView.removeClassName('current');
-		return false;
-	}
-}
-
-Event.observe(window,'load',revealChoice);
-
-</script>
 <div id="primary">
 <?php echo flash(); ?>
 <?php if ( total_results(true) ): ?>
@@ -46,14 +20,20 @@ Event.observe(window,'load',revealChoice);
 </ul>	
 </div>
 <form action="<?php echo uri('items/powerEdit'); ?>" method="post" accept-charset="utf-8">
-	
-	<fieldset id="view-choice">
-	<?php if($_GET['view'] == 'detailed'):?>
-		<?php common('_detailed', compact('items'), 'items'); ?>
-	<?php elseif($_GET['view'] == 'simple' || $_GET['view'] == ''):?>
-		<?php common('_simple', compact('items'), 'items'); ?>
-	<?php endif; ?>
-	</fieldset>
+
+<fieldset id="view-choice">
+	<?php 
+		switch ($_GET['view']) {
+			case 'detailed':
+				common('_detailed', compact('items'), 'items');
+				break;
+			case 'simple':
+			default:
+				common('_simple', compact('items'), 'items');
+				break;
+		}
+	 ?>
+</fieldset>
 
 <input type="submit" name="submit" value="Save Changes" />
 
