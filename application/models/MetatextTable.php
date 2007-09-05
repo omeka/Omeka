@@ -4,6 +4,7 @@
 */
 class MetatextTable extends Doctrine_Table
 {
+	
 	/**
 	 * Given an array of key/value pairs where key = metafield name and value = array consisting of (at minimum) metafield name and text,
 	 * Find each metatext entry or create a new one given a metafield name

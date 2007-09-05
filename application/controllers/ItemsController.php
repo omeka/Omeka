@@ -66,7 +66,7 @@ class ItemsController extends Kea_Controller_Action
 	 * @return mixed|void
 	 **/
 	public function browseAction()
-	{	
+	{			
 		$perms = array();
 		$filter = array();
 		$order = array();
@@ -131,6 +131,18 @@ class ItemsController extends Kea_Controller_Action
 			if($recent !== 'false') {
 				$order['recent'] = true;
 			}
+			
+			//The advanced or 'itunes' search
+			if($advanced = $this->_getParam('advanced')) {
+
+				//We need to filter out the empty entries if any were provided
+				foreach ($advanced as $k => $entry) {					
+					if(empty($entry['field']) or empty($entry['type'])) {
+						unset($advanced[$k]);
+					}
+				}
+				$filter['advanced_search'] = $advanced;
+			};
 			
 			
 		} catch (Exception $e) {
@@ -205,7 +217,7 @@ class ItemsController extends Kea_Controller_Action
 			$this->_view->assign(compact('collections', 'plugins', 'types'));
 		}
 	}
-	
+		
 	public function showAction() 
 	{
 		$item = $this->findById();

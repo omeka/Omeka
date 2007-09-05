@@ -31,6 +31,23 @@ class Metafield extends Kea_Record {
 		$this->hasColumn("plugin_id", "integer");
 		$this->index('plugin', array('fields'=>array('plugin_id')));
  	}
+
+	public static function names($prefix=true) {
+		$conn = Doctrine_Manager::getInstance()->connection();
+		
+		$res = $conn->execute("SELECT m.name FROM metafields m ORDER BY m.name DESC");
+		
+		$rows = $res->fetchAll();
+		
+		$names = array();
+		
+		foreach ($rows as $row) {
+			$key = $prefix ? 'metafield_' . $row['name'] : $row['name'];
+			$names[$key] = $row['name'];
+		}
+		
+		return $names;
+	}
 }
 
 

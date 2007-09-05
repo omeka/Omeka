@@ -264,6 +264,11 @@ ul.tags, li.tag {display: inline;}
 		#search-checkboxes input#public {position: absolute; left: 11em; top: 1.5em;}
 		#search-checkboxes input#featured {position: absolute; left: 11em; top: 3em;}
 	
+	/* Advanced Search - [KBK] - added 9/5/07 */
+	#search div.search-entry select {display:inline;}
+	#search div.search-entry {clear:both;}
+	#advanced-search {margin-bottom:20px;}
+		
 /* == Content == */
 #content {overflow:hidden; border-top:18px solid #666; background:#fff url("../images/footer-bg.gif") bottom left repeat-x; padding-bottom:18px;}
 	#primary { width:918px; margin-left:36px;margin-top:18px;}

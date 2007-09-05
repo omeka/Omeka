@@ -149,7 +149,33 @@ class Item extends Kea_Record
 				break;
 		}
 	}
-
+	
+	/**
+	 * Retrieve simply the names of the fields, converted to words and uppercase
+	 *
+	 * @return array
+	 **/
+	public static function fields($prefix=true)
+	{
+		$cols = Doctrine_Manager::getInstance()->getTable('Item')->getColumnNames();
+		
+		//Avoid certain fields because they are DB keys
+		$avoid = array('id', 'type_id', 'collection_id', 'featured', 'public');
+			
+		$fields = array();
+		foreach ($cols as $col) {
+			if(in_array($col, $avoid)) continue;
+			
+			//Field name should not have underscores and should be uppercase
+			$field = ucwords(str_replace('_', ' ', $col));
+			
+			$key = $prefix ? 'item_' . $col : $col; 
+			$fields[$key] = $field;
+		}
+		
+		return $fields;
+	}
+	
 	/**
 	 * Retrieve all extended metadata associated with the item (plugin or not)
 	 *

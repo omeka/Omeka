@@ -13,8 +13,84 @@ class ItemTable extends Doctrine_Table
 		if(!$total_items) $total_items = 0;
 		return $total_items;
 	}
+	
+	/**
+	 * The trail of this function:
+	 * 	items_filter_form() form helper  --> ItemsController::browseAction()  --> ItemTable::findBy() --> here
+	 *
+	 * @return void
+	 **/
+	protected function advancedSearch($select, $advanced)
+	{
+		$conn = Doctrine_Manager::getInstance()->connection();
 		
-	protected function search( $select, $terms)
+		foreach ($advanced as $k => $v) {
+			$field = $v['field'];
+			$type = $v['type'];
+			$value = $v['terms'];
+
+//var_dump( $field );var_dump( $type );var_dump( $value );exit;			
+
+			//Strip out the prefix to figure out what table it comin from
+			$field_a = explode('_', $field);
+			$prefix = array_shift($field_a);
+			$field = implode('_', $field_a);
+			
+			//Process the joins differently depending on what table it needs
+			switch ($prefix) {
+				case 'item':
+					//We don't need any joins because we are already searching the items table
+					
+					//But we should verify that the field given is a column in the table
+					if(!$this->getTypeOf($field)) {
+						throw new Exception( 'Invalid field given!' );
+					}
+					
+					//We're good, so start building the WHERE clause
+					$where = '(i.' . $field;
+					
+					break;
+				case 'metafield':
+					//We need to join on the metafields and metatext tables
+					$select->innerJoin(array('Metatext', 'mt'), 'mt.item_id = i.id');
+					$select->innerJoin(array('Metafield','m'), 'm.id = mt.metafield_id');
+					
+					//Start building the where clause
+					$where = "(m.name = ". $conn->quote($field) . " AND mt.text";
+					
+					break;
+				default:
+					throw new Exception( 'Search failed!' );
+					break;
+			}	
+			
+			//Determine what the SQL clause should look like
+			switch ($type) {
+				case 'contains':
+					$predicate = "LIKE " . $conn->quote('%'.$value .'%') . ")";
+					break;
+				case 'does not contain':
+					$predicate = "NOT LIKE " . $conn->quote('%'.$value .'%') . ")";
+					break;
+				case 'is empty':	
+					$predicate = "= '')";
+					break;
+				case 'is not empty':
+					$predicate = "!= '')";
+					break;
+				default:
+					throw new Exception( 'Invalid search type given!' );
+					break;
+			}
+			
+			//Build the SQL WHERE clause
+			$where = join(' ', array($where, $predicate));
+			
+			$select->where($where);
+		}
+	}
+		
+	protected function simpleSearch( $select, $terms)
 	{
 		$conn = $this->getConnection();
 		$conn->execute("CREATE TEMPORARY TABLE temp_search (id BIGINT AUTO_INCREMENT, item_id BIGINT UNIQUE, PRIMARY KEY(id))");
@@ -181,7 +257,12 @@ class ItemTable extends Doctrine_Table
 
 		//Check for a search
 		if(isset($params['search'])) {
-			$this->search($select, $params['search']);
+			$this->simpleSearch($select, $params['search']);
+		}
+		
+		//Process the advanced search 
+		if(isset($params['advanced_search'])) {
+			$this->advancedSearch($select, $params['advanced_search']);
 		}
 		
 		$select->limitPage($params['page'], $params['per_page']);

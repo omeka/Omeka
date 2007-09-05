@@ -231,14 +231,138 @@
 	
 	function items_filter_form($props=array(), $uri) {
 		?>
+		<script type="text/javascript" charset="utf-8">
+		//<![CDATA[
+
+			//Here is javascript that will duplicate the advanced-search form entries
+			Event.observe(window,'load', function() {
+				var addButton = document.getElementsByClassName('add_search');
+				
+				//Make each button respond to clicks
+				addButton.each(function(button) {
+					Event.observe(button, 'click', addAdvancedSearch);
+				});
+				
+				var removeButtons = document.getElementsByClassName('remove_search');
+				
+				removeButtons.each(function(button) {
+					removeAdvancedSearch(button);
+				});
+			});
+			
+			function removeAdvancedSearch(button) {
+				Event.observe(button, 'click', function() {
+						button.up().destroy();
+				});
+			}
+			
+			function addAdvancedSearch() {
+				//Copy the div that is already on the search form
+				var oldDiv = $$('.search-entry').last();
+				
+				//Clone the div and append it to the form
+				var div = oldDiv.cloneNode(true);
+								
+				oldDiv.up().appendChild(div);
+				
+				var inputs = $A(div.getElementsByTagName('input'));
+				var selects = $A(div.getElementsByTagName('select'));
+				
+				//Find the index of the last advanced search formlet and inc it
+				//I.e. if there are two entries on the form, they should be named advanced[0], advanced[1], etc
+				var inputName = inputs[0].getAttribute('name');
+				
+				//Match the index, parse into integer, increment and convert to string again				
+				var index = inputName.match(/advanced\[(\d+)\]/)[1];
+				var newIndex = (parseInt(index) + 1).toString();
+				
+				//Reset the selects and inputs	
+								
+				inputs.each(function(i) {
+					i.value = '';
+					i.setAttribute('name', i.name.gsub(/\d+/, newIndex) );
+				});
+				selects.each(function(s) {
+					s.selectedIndex = 0;
+					s.setAttribute('name', s.name.gsub(/\d+/, newIndex) );
+				});	
+												
+				//Make the button special again
+				var add = div.getElementsByClassName('add_search').first();
+				
+				add.onclick = addAdvancedSearch;
+				
+				var remove = div.getElementsByClassName('remove_search').first();
+				removeAdvancedSearch(remove);
+			}
+			
+		//]]>	
+		</script>
+		
+		
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
 			<fieldset>
 				<legend>Search for Items</legend>
 				<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
 			</fieldset>
-			
 			<fieldset>
-				<legend>Narrow Your Search</legend>
+				<legend>Advanced Search</legend>
+				
+				<?php 
+					//We need to retrieve a list of all the core metadata fields and the extended type metafields
+					$metafields = Metafield::names();
+					$core_fields = Item::fields();
+					$search_fields = array_merge($core_fields, $metafields);
+					natsort($search_fields);
+				?>
+				
+				<div id="advanced-search">
+					
+						<?php 
+						//If the form has been submitted, retain the number of search fields used and rebuild the form
+						if(!empty($_GET['advanced'])) {
+							$search = $_GET['advanced'];
+						}else {
+							$search = array(array('field'=>'','type'=>'','value'=>''));
+						}
+						
+						//Here is where we actually build the search form
+						foreach ($search as $i => $rows): ?>
+							<div class="search-entry">		
+							<?php 
+							//The POST looks like => 
+							// advanced[0] =>
+								//[field] = 'description'
+								//[type] = 'contains'
+								//[terms] = 'foobar'
+							//etc
+							select(
+								array('name'=>"advanced[$i][field]"), 
+								$search_fields, 
+								@$rows['field']); ?>
+							
+							<?php 
+								select(
+									array('name'=>"advanced[$i][type]"),
+									array('contains'=>'contains', 'does not contain'=>'does not contain', 'is empty'=>'is empty', 'is not empty'=>'is not empty'),
+									@$rows['type']
+								); 
+							?>
+							
+							<?php 
+								text(
+									array('name'=>"advanced[$i][terms]"),
+									@$rows['terms']); 
+							?>
+							
+							<button type="button" class="add_search">+</button>
+							<button type="button" class="remove_search">-</button>
+							</div>		 				
+						<? endforeach; ?>	
+						
+					
+				</div>
+				
 				<div id="search-selects">
 			<?php 
 				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Filter by Collection', 'id', 'name');
