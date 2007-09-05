@@ -178,11 +178,6 @@ function theme_path($return = false) {
 	else echo $path;
 }
 
-function path_to($file) {
-	$path = theme_path(true) . DIRECTORY_SEPARATOR . $file;
-	return $path;
-}
-
 /**
  * Echos the web path of the theme.
  * This should be used when you need to link in an image or other file.

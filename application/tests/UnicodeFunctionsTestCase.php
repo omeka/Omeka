@@ -61,17 +61,6 @@ class UnicodeFunctionsTestCase extends OmekaTestCase
 		$this->assertEqual($trans, '&ldquo;hello there&rdquo; &lt;span class=&quot;foo&quot;&gt;dude&lt;/span&gt;');
 	}
 	
-	function testUnescapeAll()
-	{
-		$test = "“Here is the thing” <em>Test</em><div class=\"foo\">Test</div>";
-		
-		$trans = allhtmlentities($test);
-				
-		$unescaped = unescapeAll($trans);
-		
-		$this->assertEqual($unescaped, '&ldquo;Here is the thing&rdquo; <em>Test</em><div class="foo">Test</div>');
-	}
-	
 	/**
 	 * Just for the hell of it, let's make sure this function never gets too slow
 	 *
