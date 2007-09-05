@@ -1,4 +1,7 @@
 <?php head(); ?>
+
+<?php js('search'); ?>
+
 <style type="text/css" media="screen">
 #page-builder {width:910px;margin:18px 0 18px 36px;}
 #item-select {float:left; width: 378px; background:#DAE9F6;}
@@ -86,7 +89,12 @@
 	
 	function onLoadPagination() 
 	{
+		//When the pagination loads, it is not the same kind of event as window.onload, 
+		//so we need to fire all those events manually
 		toggleSearch();
+		roundCorners();
+		activateSearchButtons();
+		
 		new Effect.Highlight('item-list');
 		
 		//Make each of the pagination links fire an additional ajax request
@@ -115,6 +123,7 @@
 			return false;
 		}
 		
+		return false;
 	}
 	
 	function getPagination(uri, onFinish, parameters)
@@ -178,7 +187,8 @@
 		
 	?>
 		
-	
+	<div id="item-select"></div>
+
 	<p class="warning">(Warning: You must save the form before paginating through the items otherwise its contents may be erased)</p>
 <form name="layout" id="page-form" method="post">
 	<fieldset id="tertiary-nav">
@@ -199,9 +209,7 @@
 			<button type="submit" name="cancel" id="cancel_page" class="page-button">Cancel This Page</button>
 	</fieldset>
 	
-	<div id="item-select">
-		
-	</div>
+
 	
 	<div id="layout-submits">
 		

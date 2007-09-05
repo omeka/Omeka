@@ -229,84 +229,40 @@
 		echo '<input type="submit" name="'.$name.'" id="'.$name.'" value="'.$value.'" />';
 	}
 	
-	function items_filter_form($props=array(), $uri) {
+	function items_search_form($props=array(), $uri) {
 		?>
+		<h2 id="search-header" class="close">Search Items </h2>
+			<div id="search_choices" style="font-style: italic;">
+				<span id="basic_search_header">Simple</span> /
+				<span id="advanced_search_header">Advanced</span>
+			</div>
+			
+		
+		
 		<script type="text/javascript" charset="utf-8">
 		//<![CDATA[
-
+		
+		//The functions that are used by the search form can be found in search.js
+		
+			Event.observe(window,'load',toggleSearch);
+			
 			//Here is javascript that will duplicate the advanced-search form entries
-			Event.observe(window,'load', function() {
-				var addButton = document.getElementsByClassName('add_search');
-				
-				//Make each button respond to clicks
-				addButton.each(function(button) {
-					Event.observe(button, 'click', addAdvancedSearch);
-				});
-				
-				var removeButtons = document.getElementsByClassName('remove_search');
-				
-				removeButtons.each(function(button) {
-					removeAdvancedSearch(button);
-				});
-			});
+			Event.observe(window,'load', activateSearchButtons );
 			
-			function removeAdvancedSearch(button) {
-				Event.observe(button, 'click', function() {
-						button.up().destroy();
-				});
-			}
-			
-			function addAdvancedSearch() {
-				//Copy the div that is already on the search form
-				var oldDiv = $$('.search-entry').last();
-				
-				//Clone the div and append it to the form
-				var div = oldDiv.cloneNode(true);
-								
-				oldDiv.up().appendChild(div);
-				
-				var inputs = $A(div.getElementsByTagName('input'));
-				var selects = $A(div.getElementsByTagName('select'));
-				
-				//Find the index of the last advanced search formlet and inc it
-				//I.e. if there are two entries on the form, they should be named advanced[0], advanced[1], etc
-				var inputName = inputs[0].getAttribute('name');
-				
-				//Match the index, parse into integer, increment and convert to string again				
-				var index = inputName.match(/advanced\[(\d+)\]/)[1];
-				var newIndex = (parseInt(index) + 1).toString();
-				
-				//Reset the selects and inputs	
-								
-				inputs.each(function(i) {
-					i.value = '';
-					i.setAttribute('name', i.name.gsub(/\d+/, newIndex) );
-				});
-				selects.each(function(s) {
-					s.selectedIndex = 0;
-					s.setAttribute('name', s.name.gsub(/\d+/, newIndex) );
-				});	
-												
-				//Make the button special again
-				var add = div.getElementsByClassName('add_search').first();
-				
-				add.onclick = addAdvancedSearch;
-				
-				var remove = div.getElementsByClassName('remove_search').first();
-				removeAdvancedSearch(remove);
-			}
-			
+			//This will let you switch between basic and advanced search
+			Event.observe(window, 'load', switchBasicAdvancedSearch);
+						
 		//]]>	
 		</script>
 		
 		
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
-			<fieldset>
-				<legend>Search for Items</legend>
+			<fieldset id="basic_search">
+				<legend id="basic_search_header">Basic Search</legend>
 				<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
 			</fieldset>
-			<fieldset>
-				<legend>Advanced Search</legend>
+			<fieldset id="advanced_search">
+				<legend id="advanced_search_header">Advanced Search</legend>
 				
 				<?php 
 					//We need to retrieve a list of all the core metadata fields and the extended type metafields
@@ -384,7 +340,7 @@
 			?>
 			</div>
 			</fieldset>
-			<input type="submit" name="submit_search" value="Search" />
+			<input type="submit" name="submit_search" id="submit_search" value="Search" />
 			
 		</form><?php
 	}

@@ -31,22 +31,6 @@ function alertBox() {
 	}
 }
 
-//Show or hide the search form depending on whether the header icon was clicked
-function toggleSearch() {
-	//alert('foo');
-	var search = $('search');
-	if(!search) return;
-	search.hide();
-	var searchHeader = $('search-header');
-	if(!searchHeader) return;
-	searchHeader.style.cursor = "pointer";
-	searchHeader.onclick = function() {
-		new Effect.toggle(search,'blind',{duration:0.5});
-		searchHeader.toggleClassName('open','close');
-		return false;
-	}
-}
-
 //Hide buttons for the non-js version of the exhibits builder
 function hideReorderSections() {
 	if(!$('reorder_sections')) return;
@@ -133,6 +117,5 @@ function checkDeleteItem() {
 
 Event.observe(window,'load',roundCorners);
 Event.observe(window,'load',checkDeleteItem);
-Event.observe(window,'load',toggleSearch);
 Event.observe(window,'load',alertBox);
 Event.observe(window,'load',styleExhibitBuilder);

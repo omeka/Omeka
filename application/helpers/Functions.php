@@ -377,6 +377,38 @@ function uri($urlEnd, $params=array())
     
 }
 
+/**
+ * Returns the current URL (optionally with query parameters appended)
+ *
+ * @return void
+ **/
+function current_uri($params=array()) 
+{
+	//Grab everything before the ? of the query
+	$uri = array_shift(explode('?', $_SERVER['REQUEST_URI']));
+	
+	if(!empty($params)) {
+		
+		//The query should be a combination of $_GET and passed parameters
+		$query = array_merge($_GET, $params);
+				
+		$query_string = http_build_query($query);
+		
+		//Check if there is already a query
+		//If there is no query, then append it
+/*
+			if(strpos($uri, '?') !== false) {
+			$uri .= '?' . $query;
+		}else {
+			$uri .= '&' . $query;
+		}
+*/	
+		$uri .= '?' . $query_string;
+	}
+	
+	return $uri;
+}
+
 function flash($wrap=true)
 {
 	require_once 'Zend/Session.php';

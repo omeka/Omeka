@@ -16,7 +16,7 @@ class ItemTable extends Doctrine_Table
 	
 	/**
 	 * The trail of this function:
-	 * 	items_filter_form() form helper  --> ItemsController::browseAction()  --> ItemTable::findBy() --> here
+	 * 	items_search_form() form helper  --> ItemsController::browseAction()  --> ItemTable::findBy() --> here
 	 *
 	 * @return void
 	 **/
