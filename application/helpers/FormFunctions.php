@@ -232,12 +232,6 @@
 	function items_search_form($props=array(), $uri) {
 		?>
 		<h2 id="search-header" class="close">Search Items </h2>
-			<div id="search_choices" style="font-style: italic;">
-				<span id="basic_search_header">Simple</span> /
-				<span id="advanced_search_header">Advanced</span>
-			</div>
-			
-		
 		
 		<script type="text/javascript" charset="utf-8">
 		//<![CDATA[
@@ -254,9 +248,14 @@
 						
 		//]]>	
 		</script>
-		
+			
 		
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
+			<div id="search_choices" style="font-style: italic;">
+				<span id="basic_search_header">Simple</span> /
+				<span id="advanced_search_header">Advanced</span>
+			</div>
+			
 			<fieldset id="basic_search">
 				<legend id="basic_search_header">Basic Search</legend>
 				<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
@@ -271,6 +270,7 @@
 					$search_fields = array_merge($core_fields, $metafields);
 					natsort($search_fields);
 				?>
+				<h3>Search by Specific fields</h3>
 				
 				<div id="advanced-search">
 					
@@ -307,7 +307,7 @@
 							
 							<?php 
 								text(
-									array('name'=>"advanced[$i][terms]"),
+									array('name'=>"advanced[$i][terms]", 'size'=>20),
 									@$rows['terms']); 
 							?>
 							
@@ -319,22 +319,28 @@
 					
 				</div>
 				
+				<div>
+					<?php text(
+						array('name'=>'range', 'class'=>'textinput'), 
+						@$_GET['range'], 
+						'Search by a range of ID#s (example: 1-4, 156, 79)'); ?>
+				</div>
+				
 				<div id="search-selects">
 			<?php 
-				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Filter by Collection', 'id', 'name');
-				select(array('name'=>'type'), types(), $_REQUEST['type'], 'Filter by Type', 'id', 'name'); 
+				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Search by Collection', 'id', 'name');
+				select(array('name'=>'type'), types(), $_REQUEST['type'], 'Search by Type', 'id', 'name'); 
 			?>
 			<?php if(has_permission('Users', 'browse')): ?>
 			<?php 
-				 select(array('name'=>'user'), users(), $_REQUEST['user'], 'Filter By User', 'id', array('first_name', 'last_name'));
+				 select(array('name'=>'user'), users(), $_REQUEST['user'], 'Search By User', 'id', array('first_name', 'last_name'));
 			?>
 			<?php endif; ?>
-			<label for="tags">Filter by Tags</label>
+			<label for="tags">Search by Tags</label>
 				<input type="text" class="textinput" name="tags" value="<?php echo h($_REQUEST['tags']); ?>" />
 			</div>
 			<div id="search-checkboxes">
 			<?php 
-				checkbox(array('name'=>'recent'), $_REQUEST['recent'], null, 'Recent Items');
 				checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
 				checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
 			?>

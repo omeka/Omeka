@@ -89,6 +89,44 @@ class ItemTable extends Doctrine_Table
 			$select->where($where);
 		}
 	}
+	
+	/**
+	 * Can specify a range of valid Item IDs or an individual ID
+	 * 
+	 * @param Kea_Select $select
+	 * @param string $range Example: 1-4, 75, 89
+	 * @return void
+	 **/
+	protected function filterByRange($select, $range)
+	{
+		//Comma-separated expressions should be treated individually
+		$exprs = explode(',', $range);
+		
+		//Construct a SQL clause where every entry in this array is linked by 'OR'
+		$wheres = array();
+		
+		foreach ($exprs as $expr) {
+			//If it has a '-' in it, it is a range of item IDs.  Otherwise it is a single item ID
+			if(strpos($expr, '-') !== false) {
+				list($start, $finish) = explode('-', $expr);
+				
+				//Naughty naughty koolaid, no SQL injection for you
+				$start = (int) trim($start);
+				$finish = (int) trim($finish);
+				
+				$wheres[] = "(i.id BETWEEN $start AND $finish)";
+			}
+			//It is a single item ID
+			else {
+				$id = (int) trim($expr);
+				$wheres[] = "(i.id = $id)";
+			}
+		}
+		
+		$where = join(' OR ', $wheres);
+		
+		$select->where('('.$where.')');
+	}
 		
 	protected function simpleSearch( $select, $terms)
 	{
@@ -142,7 +180,7 @@ class ItemTable extends Doctrine_Table
 	
 	
 	/**
-	 * Possible options: 'public','user','featured','collection','type','tag','excludeTags', 'search', 'recent'
+	 * Possible options: 'public','user','featured','collection','type','tag','excludeTags', 'search', 'recent', 'range', 'advanced'
 	 *
 	 * @param array $params Filtered set of parameters from the request
 	 * @return Doctrine_Collection(Item)
@@ -271,8 +309,12 @@ class ItemTable extends Doctrine_Table
 		if(isset($params['recent'])) {
 			$this->orderSelectByRecent($select);
 		}
-
-		//Fire a plugin hook to filter the SELECT statement
+		
+		if(isset($params['range'])) {
+			$this->filterByRange($select, $params['range']);
+		}
+		
+		//Fire a plugin hook to add clauses to the SELECT statement
 		Kea_Controller_Plugin_Broker::getInstance()->filterBrowse($select, "Item");
 
 		//At this point we can return the count instead of the items themselves if that is specified

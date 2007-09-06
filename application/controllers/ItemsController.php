@@ -143,6 +143,10 @@ class ItemsController extends Kea_Controller_Action
 				}
 				$filter['advanced_search'] = $advanced;
 			};
+
+			if($range = $this->_getParam('range')) {
+				$filter['range'] = $range;
+			}
 			
 			
 		} catch (Exception $e) {

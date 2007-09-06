@@ -194,10 +194,6 @@ function dragDropForm() {
 		drop.appendChild(clear);
 	});
 	
-	
-	//Get rid of the warning
-	document.getElementsByClassName('warning')[0].hide();
-	
 	//Hide the item_id divs
 	document.getElementsByClassName('item_id').each( function(el) {
 		el.hide();

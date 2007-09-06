@@ -94,6 +94,7 @@
 		toggleSearch();
 		roundCorners();
 		activateSearchButtons();
+		switchBasicAdvancedSearch();
 		
 		new Effect.Highlight('item-list');
 		
@@ -189,7 +190,6 @@
 		
 	<div id="item-select"></div>
 
-	<p class="warning">(Warning: You must save the form before paginating through the items otherwise its contents may be erased)</p>
 <form name="layout" id="page-form" method="post">
 	<fieldset id="tertiary-nav">
 		<button type="submit" name="exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
