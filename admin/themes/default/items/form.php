@@ -385,3 +385,4 @@
 	<fieldset id="additional-plugin-data">
 		<?php plugin_html('items/form', compact('item')); ?>
 	</fieldset>
+	

@@ -31,71 +31,6 @@ function alertBox() {
 	}
 }
 
-//Hide buttons for the non-js version of the exhibits builder
-function hideReorderSections() {
-	if(!$('reorder_sections')) return;
-	$('reorder_sections').remove();	
-}
-
-//Hide more buttons for the non-js version of the exhibits builder
-function hideReorderExhibits() {
-	if(!$('reorder_exhibits')) return;
-	$('reorder_exhibits').remove();	
-}
-
-//Style the handles for the section/page lists in the exhibit builder
-function styleExhibitBuilder() {
-	hideReorderSections();
-	hideReorderExhibits();
-	
-	var handles = $$('.handle');
-	for(var i=0; i<handles.length; i++) {
-		handles[i].setStyle({display:'inline',cursor: 'move'});
-	}
-		
-	var orderInputs = $$('.order-input');
-	for(var i=0; i<orderInputs.length; i++) {
-		orderInputs[i].setStyle({border: 'none',background:'#fff',color: '#333'});
-	}
-	
-}
-
-//Adds an arbitrary number of file input elements to the items form so that more than one file can be uploaded at once
-function filesAdding()
-{
-	
-	if(!$('add-more-files')) return;
-	if(!$('file-inputs')) return;
-	if(!$$('#file-inputs .files')) return;
-	var nonJsFormDiv = $('add-more-files');
-
-	//This is where we put the new file inputs
-	var filesDiv = $$('#file-inputs .files').first();
-	
-	var filesDivWrap = $('file-inputs');
-	//Make a link that will add another file input to the page
-	var link = document.createElement('a');
-	var linkText = document.createTextNode('Add Another File');
-	link.appendChild(linkText);
-	link.href = "javascript:void(0)";
-	link.id = "add-file";
-	link.className = "add-file";
-
-	Event.observe(link, 'click', function(){
-		var inputs = $A(filesDiv.getElementsByTagName('input'));
-		var inputCount = inputs.length;
-		var fileHtml = '<div id="fileinput'+inputCount+'" class="fileinput"><input name="file['+inputCount+']" id="file['+inputCount+']" type="file" class="fileinput" /></div>';
-		new Insertion.After(inputs.last(), fileHtml);
-		$('fileinput'+inputCount).hide();
-		new Effect.SlideDown('fileinput'+inputCount,{duration:0.2});
-		//new Effect.Highlight('file['+inputCount+']');
-	});
-
-	nonJsFormDiv.update();
-	
-	filesDivWrap.appendChild(link);
-}
-
 //Adds rounded corners to the admin theme
 function roundCorners() {
 	Nifty('#primary-nav a,#secondary-nav a','top transparent');
@@ -107,15 +42,19 @@ function roundCorners() {
 	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit,#new-user-form','transparent');
 }
 
-//Adds confirmation for the 'delete_item' button that is on the items form
-function checkDeleteItem() {
-	if(!$('delete_item')) return;
-	$('delete_item').onclick = function() {
-		return confirm('Are you sure you want to delete this item, including all of the files, tags, and other data associated with the item, from the archive?' );
-	}
+//This will add confirmation for deleting files and the item
+function confirmDelete() {
+	$$('.delete').each( function(el) {
+		el.onclick = function() {
+			return confirm('Are you sure you want to delete this?');
+		}
+	});
+	$$('.delete-exhibit').each(function(el) {
+		el.onclick = function() {
+			return confirm( 'Are you sure you want to delete this exhibit and all of its data from the archive?' );
+		}
+	});
 }
-
 Event.observe(window,'load',roundCorners);
-Event.observe(window,'load',checkDeleteItem);
 Event.observe(window,'load',alertBox);
-Event.observe(window,'load',styleExhibitBuilder);
+Event.observe(window,'load',confirmDelete);

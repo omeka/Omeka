@@ -32,9 +32,6 @@
 
 <form method="post" accept-charset="utf-8" action="" id="section-form">
 	<fieldset>
-		<button type="submit" name="cancel_section" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
-		<div id="section_button" class="exhibit-button">Section Metadata</div>
-		<button type="submit" name="page_form" id="page_form" class="exhibit-button">Add a Page</button>
 				
 		<?php 
 		//	submit('Exhibit', 'exhibit_form');
@@ -45,7 +42,7 @@
 	<fieldset id="section-meta">
 		<legend>Section Meta</legend>
 		
-		<input type="submit" name="add_new_section" value="Save &amp; Add Another Section --&gt;" />
+		
 		
 	<div class="field"><?php text(array('name'=>'title', 'id'=>'title', 'class'=>'textinput'), $section->title, 'Title for the Section'); ?></div>
 		<div class="field"><?php text(array('name'=>'slug','id'=>'slug','class'=>'textinput'), $section->slug, 'URL Slug (optional)'); ?></div>
@@ -64,20 +61,25 @@
 			<?php common('_page_list', compact('section'), 'exhibits'); ?>
 
 			</ul>
-		
+		<button type="submit" name="page_form" id="page_form" class="inline-button">Add a Page</button>
 	<?php else: ?>
 		<p>There are no pages in this section. <button type="submit" name="page_form" id="page_form" class="inline-button">Add a Page</button>
 		</p>
 	<?php endif; ?>
 	</fieldset>
 
-	
+	<fieldset>
+		<p>
+		<button type="submit" name="add_new_section">Save</button> or
+		<button type="submit" name="cancel_section" id="exhibit_form" class="exhibit-button">Cancel</button>
+		</p>
+	</fieldset>
 </form>
 
-<?php if ( $section->exists() ): ?>
+<?php /*if ( $section->exists() ): ?>
 	<form action="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>">
 		<input type="submit" name="submit" value="Delete this Section --&gt;" />
 	</form>
-<?php endif; ?>
+<?php endif;*/ ?>
 </div>
 <?php foot(); ?>

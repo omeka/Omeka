@@ -1,17 +1,4 @@
 <?php head(); ?>
-
-<script type="text/javascript" charset="utf-8">
-//<![CDATA[
-	Event.observe(window,'load',function() {
-		var deleteLinks = document.getElementsByClassName('delete-exhibit');
-		for (var i=0; i < deleteLinks.length; i++) {
-			deleteLinks[i].onclick = function() {
-				return confirm( 'Are you sure you want to delete this exhibit and all of its data from the archive?' );
-			};
-		};
-	});
-//]]>	
-</script>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
 	<h1 class="floater">Exhibits</h1>

@@ -7,8 +7,8 @@
 		<span class="section-title"><?php echo h($section->title); ?></span>
 		</span>
 		<span class="right">
-		<span class="section-edit"><a href="<?php echo uri('exhibits/editSection/'.$section->id); ?>"><img src="<?php echo img('pencil_go.gif'); ?>" alt="Edit" />Edit</a></span>
-		<span class="section-delete"><a href="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>"><img src="<?php echo img('delete.gif'); ?>" alt="Drag" />Delete</a></span>
+		<span class="section-edit"><a href="<?php echo uri('exhibits/editSection/'.$section->id); ?>" class="edit">Edit</a></span>
+		<span class="section-delete"><a href="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>" class="delete">Delete</a></span>
 		</span>
 	</li>
 <?php endforeach; ?>

@@ -32,9 +32,12 @@
 			},
 			onSuccess: function(t) {
 				//Highlight the updated DIV
-				new Effect.Highlight('new-section');					
+				$('add_new_section').hide();	
+				$('new-section').hide();				
 			},
 			onComplete: function(t) {
+				new Effect.SlideDown('new-section',{duration:0.8});
+				
 				//Now make the add/cancel links work
 				var addLink = $('add_section');
 				var cancelLink = $('cancel-add');
@@ -46,6 +49,8 @@
 	
 	function addSection()
 	{
+		$('add_new_section').show();
+		
 		//Serialize all the form inputs (also specify JSON output)
 		var inputs = $$('#new-section input, #new-section textarea');
 		var params = Form.serializeElements(inputs) + "&output=json";
@@ -89,8 +94,10 @@
 
 	
 	function removeAddSectionForm()
-	{
+	{		
 		$('new-section').update();
+		$('add_new_section').show();
+		
 	}
 	
 	//This is a bit of a hack.  The exhibit ID is a hidden value on the form
@@ -171,25 +178,10 @@
 </script>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
-	<h1>Edit Exhibit: <?php echo h($exhibit->title); ?></h1>
+	<h1>Add Exhibit</h1>
 
 <form id="exhibit-form" method="post">
-	<fieldset id="save-exhibit">
-		
-			<button type="submit" name="save_exhibit" id="save_exhibit" class="exhibit-button" disabled="disabled">Exhibit Metadata</button>
-			<button type="submit" name="add_new_section" id="add_new_section" class="exhibit-button">Add a Section</button>
-			<div id="pages_button" class="exhibit-button">Pages</div>
-			
-		
-	<?php 
-		//submit('Save &amp; Finish','save_exhibit');
-		//submit('Add a New Section', 'add_section');
-		
-		//submit('Re-order the Exhibit Sections','reorder_sections'); 
-	?>
-	
-	</fieldset>
-	<div id="exhibit-metadata">
+
 	<fieldset>
 		<legend>Exhibit Metadata</legend>
 		<?php echo flash();?>
@@ -210,14 +202,11 @@
 	</div>
 	
 	</fieldset>
-	</div>
-	<div id="exhibit-display">
-	<fieldset>
+		<fieldset>
 		<legend>Exhibit Display Data</legend>
 		<div class="field">
 			<label for="theme">Exhibit Theme</label>
-			<div class="select"><?php select(array('name'=>'theme','id'=>'theme'),get_ex_themes(),$exhibit->theme); ?>
-			</div>
+			<div class="select"><?php select(array('name'=>'theme','id'=>'theme'),get_ex_themes(),$exhibit->theme); ?></div>
 		</div>
 		<div id="section-list-container">
 			<h2>Exhibit Sections</h2>
@@ -226,12 +215,13 @@
 			</ol>
 			<div id="new-section"></div>
 			<input type="hidden" name="exhibit_id" id="exhibit_id" value="<?php echo h($exhibit->id); ?>" />
-		
+		<button type="submit" name="add_new_section" id="add_new_section" class="exhibit-button">Add a Section</button>
 		</div>
 		</fieldset>
-	</div>	
-	<fieldset id="exhibit-save">
-		<?php submit('Save &amp; Finish','save_exhibit'); ?>
+		<fieldset>
+<p>
+				<button type="submit" name="save_exhibit" id="save_exhibit" class="exhibit-button">Save and Finish</button> or 
+				<a href="<?php echo uri('exhibits'); ?>">Cancel</a></p>
 		</fieldset>
 </form>		
 </div>

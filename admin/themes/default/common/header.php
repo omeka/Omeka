@@ -24,6 +24,8 @@
 <?php js('niftycube');?>
 <?php js('form-toggle');?>
 <?php js('globals'); ?>
+<?php js('exhibits'); ?>
+<?php js('archive'); ?>
 
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>

@@ -1,0 +1,78 @@
+/* Exhibits */
+#add-exhibit {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:7.5em; display:block;}
+#add-exhibit:hover {background-color:#e9f6da;}
+
+.section-delete a {text-decoration:none; color:red;}
+.section-edit a {text-decoration:none; color:#38c;}
+
+table#exhibits {width:774px;}
+
+#exhibit-form {}
+
+#exhibit-metadata {float:left; width:378px;}
+#exhibit-display {float:right; width: 378px;}
+
+#section-list-container {clear:both;}
+
+	#section-list li {display:block; float:left; clear:left;width:512px;}
+	#section-list li .left {display:block; float:left; width: 70%;}
+	#section-list li .right {display:block; float:right; width:28%;}
+
+#add-new-section-form {background: #fff09e; overflow:hidden; width:342px; padding:18px;}
+#add-new-section-form .field {}
+
+ 	.section-delete a {text-decoration:none; color:red;}
+ 	.section-edit a {text-decoration:none; color:#38c;}
+
+table#exhibits {width:774px;}
+
+.exhibit-button {
+    display:inline;
+	text-align:left;
+    font-size:1em;
+padding:0;
+color:#38c;
+cursor:pointer;
+background:none; 
+border:none;
+border-bottom:1px dotted #38c;
+text-decoration:underline !important; 
+
+} 
+
+#section-list-container {clear:both;}
+
+
+
+#exhibit-form #exhibit-save {clear:both;}
+table#exhibits {clear:both;}
+
+ 		#section-list li {display:block; float:left; clear:left;}
+ 		#section-list li .left {display:block; float:left; width: 70%;}
+ 		#section-list li .right {display:block; float:right; width:28%;}
+ 	#add-new-section-form {background: #fff09e; overflow:hidden; width:342px; padding:18px;}
+ 	#add-new-section-form .field {}
+
+#layouts .layout {display:block; float:left; text-align:center; border:1px solid #ccc; margin-right:18px; margin-bottom:18px; padding:6px 0;width:100px;}
+
+#section-meta {display:block;float:left; width: 450px;}
+#section-description {display:block; float:right;width:450px;}
+
+#section-pages {clear:both;}
+#page-list .page {overflow:hidden; border-right:1px dotted #ccc;width:180px;float:left;}
+#page-list img {margin:0 auto; text-align:center;float:left;}
+	#page-list .page-info {float:left; width:48%;}
+	#page-list span {display:inline;}
+	#page-list .page-links {float:right; width: 48%;}
+
+#page-links input {background:#fff; color:#555; border:none;}
+#page-list .layout-name {display:none;}
+
+#exhibit-form fieldset {clear:both; overflow:hidden;}
+#exhibit-form .field {overflow:hidden;display:block;clear:both;background:transparent;margin-bottom:1em;}
+#exhibit-form .field label {float:left; width: 200px; display:block; text-align:right;margin:0; padding:0;}
+#exhibit-form .field input.textinput, #exhibit-form .field textarea {width: 700px; float:right; display:block;margin:0;}
+
+#exhibit-form .field .radio {float:right; width: 700px;margin:0; }
+#exhibit-form .field .radio label {width:auto; display:inline;float:none; margin-right:1em;}
+

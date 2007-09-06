@@ -213,3 +213,32 @@ function dragDropForm() {
 		el.hide();
 	});	
 }
+
+//Hide buttons for the non-js version of the exhibits builder
+function hideReorderSections() {
+	if(!$('reorder_sections')) return;
+	$('reorder_sections').remove();	
+}
+
+//Hide more buttons for the non-js version of the exhibits builder
+function hideReorderExhibits() {
+	if(!$('reorder_exhibits')) return;
+	$('reorder_exhibits').remove();	
+}
+
+//Style the handles for the section/page lists in the exhibit builder
+function styleExhibitBuilder() {
+	hideReorderSections();
+	hideReorderExhibits();
+	
+	var handles = $$('.handle');
+	for(var i=0; i<handles.length; i++) {
+		handles[i].setStyle({display:'inline',cursor: 'move'});
+	}
+		
+	var orderInputs = $$('.order-input');
+	for(var i=0; i<orderInputs.length; i++) {
+		orderInputs[i].setStyle({border: 'none',background:'#fff',color: '#333'});
+	}	
+}
+Event.observe(window,'load',styleExhibitBuilder);

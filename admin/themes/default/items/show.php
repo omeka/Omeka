@@ -4,19 +4,6 @@
 <?php js('editable');?>
 <script type="text/javascript" charset="utf-8">
 	
-	//This will add confirmation for deleting files and the item
-	function confirmDelete() {
-		var links = $$('a.delete');
-				
-		links.each( function(el) {
-			el.onclick = function() {
-				return confirm('Are you sure you want to delete this?');
-			}
-		});
-	}
-	
-	Event.observe(window, 'load', confirmDelete);
-
 	function setFavorite() {
 		if(!document.getElementById('favorite')) return;
 		var opt = {
@@ -296,31 +283,12 @@ link_to_item($item, 'delete', 'Delete', array('class'=>'delete'));
 
 <h2>Files</h2>
 	<div id="file-list">
-	<table>
-		<thead>
-			<tr>
-				<th>File Name</th>
-				<th>Edit File</th>
-				<th>Delete File?</th>
-			</tr>
-			</thead>
-		<tbody>
+		<ul>
 	<?php foreach( $item->Files as $key => $file ): ?>
-		<tr>
-			<td>
-				<a class="show" title="View File Metadata" href="<?php echo uri('files/edit/'.$file->id); ?>">	
+		<li><a class="show" title="View File Metadata" href="<?php echo uri('files/edit/'.$file->id); ?>">	
 						<?php echo h($file->original_filename); ?>
-				</a>
-			</td>
-			<td class="file-link">
-				<?php //if ($file->hasThumbnail() ): ?>
-					<?php //thumbnail($file,array(),50,50); ?>
-				<?php// endif; ?>
-				<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">Edit</a>
-			</td>
-			<td class="delete-link">
-				<a class="delete" href="<?php echo uri('files/delete/'.$file->id); ?>">Delete</a>
-			</td>	
+				</a></li>
+		
 
 	<?php endforeach; ?>
 	</tbody>

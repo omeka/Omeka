@@ -314,7 +314,7 @@
 							<button type="button" class="add_search">+</button>
 							<button type="button" class="remove_search">-</button>
 							</div>		 				
-						<? endforeach; ?>	
+						<?php endforeach; ?>	
 						
 					
 				</div>

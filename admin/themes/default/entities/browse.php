@@ -1,20 +1,6 @@
 <?php head(); ?>
 <?php common('entities-nav'); ?>
-<script type="text/javascript" charset="utf-8">
-//<![CDATA[
 
-	Event.observe( window, 'load', function() {
-		var deleteLinks = document.getElementsByClassName('delete');
-		
-		deleteLinks.each(function(el) {
-			el.onclick = function() {
-				return confirm('Are you sure you want to delete this name and all its associated tags from the database?');
-			}
-		});	
-	});
-
-//]]>	
-</script>
 <div id="primary">
 <h1>Browse Names</h1>
 
