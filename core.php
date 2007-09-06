@@ -153,13 +153,6 @@ $router = new Zend_Controller_RewriteRouter();
 $router->addConfig(Zend::registry('routes_ini'), 'routes');
 $front->setRouter($router);
 
-// Adds the static routes that we all about and shit (rhyme unintentional, please kill me)
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Route.php';
-$staticRoutes = $manager->getTable('Route')->findStatic();
-foreach ($staticRoutes as $route) {
-	$router->addRoute($route['name'], new Zend_Controller_Router_StaticRoute($route['route'], array('controller'=>'static', 'action'=>'findStatic', 'route'=>$route)));
-}
-
 require_once 'Zend/Controller/Request/Http.php';
 $request = new Zend_Controller_Request_Http();
 
