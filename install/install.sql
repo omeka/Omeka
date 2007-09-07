@@ -332,26 +332,6 @@ CREATE TABLE IF NOT EXISTS `plugins` (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `routes`
--- 
-
-DROP TABLE IF EXISTS `routes`;
-CREATE TABLE IF NOT EXISTS `routes` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `name` text ,
-  `route` text ,
-  `defaults` text ,
-  `path` text ,
-  `added` datetime default NULL,
-  `static` tinyint(1) default NULL,
-  `active` tinyint(1) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `static_idx` (`active`,`static`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
--- 
 -- Table structure for table `section_pages`
 -- 
 
