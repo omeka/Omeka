@@ -24,12 +24,32 @@ class ItemTable extends Doctrine_Table
 	{
 		$conn = Doctrine_Manager::getInstance()->connection();
 		
+		$metafields = array();
+		
 		foreach ($advanced as $k => $v) {
 			$field = $v['field'];
 			$type = $v['type'];
 			$value = $v['terms'];
 
-//var_dump( $field );var_dump( $type );var_dump( $value );exit;			
+			//Determine what the SQL clause should look like
+			switch ($type) {
+				case 'contains':
+					$predicate = "LIKE " . $conn->quote('%'.$value .'%');
+					break;
+				case 'does not contain':
+					$predicate = "NOT LIKE " . $conn->quote('%'.$value .'%');
+					break;
+				case 'is empty':	
+					$predicate = "= ''";
+					break;
+				case 'is not empty':
+					$predicate = "!= ''";
+					break;
+				default:
+					throw new Exception( 'Invalid search type given!' );
+					break;
+			}
+
 
 			//Strip out the prefix to figure out what table it comin from
 			$field_a = explode('_', $field);
@@ -47,16 +67,25 @@ class ItemTable extends Doctrine_Table
 					}
 					
 					//We're good, so start building the WHERE clause
-					$where = '(i.' . $field;
+					$where = '(i.' . $field . ' ' . $predicate . ')';
+					
+					$select->where($where);
 					
 					break;
 				case 'metafield':
+					//Ugh, the Metafields query needs to be dealt with separately because just tacking on multiple metafields
+					//will not return correct results
+					
+					
+					
 					//We need to join on the metafields and metatext tables
 					$select->innerJoin(array('Metatext', 'mt'), 'mt.item_id = i.id');
 					$select->innerJoin(array('Metafield','m'), 'm.id = mt.metafield_id');
 					
 					//Start building the where clause
-					$where = "(m.name = ". $conn->quote($field) . " AND mt.text";
+					$where = "(m.name = ". $conn->quote($field) . " AND mt.text $predicate)";
+					
+					$metafields[] = $where;
 					
 					break;
 				default:
@@ -64,32 +93,32 @@ class ItemTable extends Doctrine_Table
 					break;
 			}	
 			
-			//Determine what the SQL clause should look like
-			switch ($type) {
-				case 'contains':
-					$predicate = "LIKE " . $conn->quote('%'.$value .'%') . ")";
-					break;
-				case 'does not contain':
-					$predicate = "NOT LIKE " . $conn->quote('%'.$value .'%') . ")";
-					break;
-				case 'is empty':	
-					$predicate = "= '')";
-					break;
-				case 'is not empty':
-					$predicate = "!= '')";
-					break;
-				default:
-					throw new Exception( 'Invalid search type given!' );
-					break;
+			//Build the metafields WHERE clause
+			//Should look something like the query below
+			/*
+			mt.id IN 
+			(
+			SELECT mt.id 
+			FROM metatext mt 
+			INNER JOIN metafields m ON m.id = mt.metafield_id
+			WHERE 
+				(m.name = 'Process Edit' AND mt.text != '') 
+			OR 
+				(m.name = 'Process Review' AND mt.text = '')
+			)
+				}
 			}
+			*/
 			
-			//Build the SQL WHERE clause
-			$where = join(' ', array($where, $predicate));
+			$subQuery = new Kea_Select;
+			$subQuery->from(array('Metatext','mt'), 'mt.id')
+			->innerJoin(array('Metafield','m'), 'm.id = mt.metafield_id')
+			->where(join(' OR ', $metafields));
 			
-			$select->where($where);
+			$select->where('mt.id IN ('. $subQuery->__toString().')');
+//	echo $select;exit;
 		}
 	}
-	
 	/**
 	 * Can specify a range of valid Item IDs or an individual ID
 	 * 
