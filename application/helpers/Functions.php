@@ -925,6 +925,13 @@ function get_year($date)
 	return $parts[0];
 }
 
+function item_metadata($item, $field, $escape=true)
+{
+	$text = $item->getMetatext($field);
+	
+	return $escape ? h($text) : $text;
+}
+
 /**
  * Display an alternative value if the given variable is empty
  *
