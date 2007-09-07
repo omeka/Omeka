@@ -346,6 +346,8 @@
 			?>
 			</div>
 			</fieldset>
+			
+			<?php plugin_html('items/search', array()); ?>
 			<input type="submit" name="submit_search" id="submit_search" value="Search" />
 			
 		</form><?php

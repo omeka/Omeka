@@ -185,6 +185,9 @@ class Taggable implements Kea_Strategy_Interface
 	/**
 	 * This will add tags that are in the tag string and remove those that are no longer in the tag string
 	 *
+	 * @param string $string A string of tags delimited by $delimiter
+	 * @param Entity $entity The entity that all the tags will be associated with
+	 * @param bool $deleteTags When a tag is designated for removal, this specifies whether to remove all instances of the tag or just for the current Entity
 	 * @return void
 	 **/
 	public function applyTagString($string, $entity, $deleteTags = false, $delimiter=",")
