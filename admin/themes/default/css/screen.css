@@ -511,4 +511,4 @@ ul.tags, li.tag {display: inline;}
 	#footer a:link,#footer a:visited {color:#999;}
 	#footer a:hover, #footer a:active {color:#ccc;}
 	
-	#footer #omeka-logo {width:148px; display:block; overflow:hidden; padding: 148px 0 0; background:transparent url("../images/omeka-logo-admin") top left no-repeat; height:0 !important; height /**/:148px;}
+	#footer #omeka-logo {width:148px; display:block; overflow:hidden; padding: 148px 0 0; background:transparent url("../images/omeka-logo-admin.gif") top left no-repeat; height:0 !important; height /**/:148px;}
