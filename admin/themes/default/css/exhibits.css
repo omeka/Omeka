@@ -14,7 +14,7 @@ table#exhibits {width:774px;}
 
 #section-list-container {clear:both;}
 
-	#section-list li {display:block; float:left; clear:left;width:512px;}
+	#section-list li {display:block; overflow:hidden; width:512px;}
 	#section-list li .left {display:block; float:left; width: 70%;}
 	#section-list li .right {display:block; float:right; width:28%;}
 
@@ -42,15 +42,14 @@ text-decoration:underline !important;
 
 #section-list-container {clear:both;}
 
-
-
 #exhibit-form #exhibit-save {clear:both;}
 table#exhibits {clear:both;}
 
  		#section-list li {display:block; float:left; clear:left;}
  		#section-list li .left {display:block; float:left; width: 70%;}
  		#section-list li .right {display:block; float:right; width:28%;}
- 	#add-new-section-form {background: #fff09e; overflow:hidden; width:342px; padding:18px;}
+
+ 	#add-new-section-form {background: #fff09e; overflow:hidden;}
  	#add-new-section-form .field {}
 
 #layouts .layout {display:block; float:left; text-align:center; border:1px solid #ccc; margin-right:18px; margin-bottom:18px; padding:6px 0;width:100px;}
@@ -75,4 +74,3 @@ table#exhibits {clear:both;}
 
 #exhibit-form .field .radio {float:right; width: 700px;margin:0; }
 #exhibit-form .field .radio label {width:auto; display:inline;float:none; margin-right:1em;}
-
