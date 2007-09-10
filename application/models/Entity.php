@@ -225,6 +225,9 @@ class Entity extends Kea_Record
 			$sql = "UPDATE ". $this->getTableName() . " t SET t.parent_id = NULL WHERE t.parent_id = {$this->id}";
 			$this->execute($sql);
 		}
+		
+		fire_plugin_hook('delete_entity', $this);
+		
 		return parent::delete();
 	}
 	

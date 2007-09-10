@@ -16,7 +16,22 @@ class PluginsController extends Kea_Controller_Action
 		$this->_modelClass = 'Plugin';
 		$this->_table = $this->getTable('Plugin');
 	}
-
+	
+	public function activateAction()
+	{
+		//Get the plugin record, toggle its status and save it back
+		$plugin = Doctrine_Manager::getInstance()->getTable('Plugin')->findByName($_POST['activate']);
+		
+		echo $plugin;
+		
+		//Toggle!
+		$plugin->active = !($plugin->active);
+		
+		$plugin->save();
+		
+		$this->_redirect('plugins');
+	}
+	
 	/**
 	 * Retrieve the descriptive info for a plugin from its plugin.ini file
 	 *
@@ -61,31 +76,6 @@ class PluginsController extends Kea_Controller_Action
 		}
 		
 		return $this->render('plugins/browse.php', compact('plugins'));
-	}
-	
-	public function reinstallAction()
-	{
-		$name = $this->_getParam('name');
-		$broker = Kea_Controller_Plugin_Broker::getInstance();		
-
-		$record = $this->getTable('Plugin')->findByName($name);			
-		
-		if($record) {
-			if(!class_exists($name)) {
-				throw new Exception( 'Cannot find class with name "'.$name.'"' );
-			}
-			
-			$plugin = $broker->$name;
-		
-			if(!$plugin) {
-				$plugin = new $name(null, $record);
-			}
-			
-			$record->delete();
-			$plugin->uninstall();
-			$this->_redirect('plugins/browse');			
-		}
-
 	}
 	
 	public function deleteAction() {$this->_redirect('/');}

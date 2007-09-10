@@ -4,16 +4,20 @@
 <div id="primary">
 <h2>List of plugins:</h2>
 
+<form action="<?php echo uri('plugins/activate'); ?>" method="post" accept-charset="utf-8">
 <table>
 <?php foreach( $plugins as $key => $plugin ): ?>
 	<tr>
 		<td><?php echo h($plugin->directory); ?></td>
-		<td><a href="<?php echo uri('plugins/show/'.$plugin->id); ?>"><?php echo h($plugin->name); ?></a> </td>
+		<td><?php echo h($plugin->name); ?></td>
 		<td><?php echo h($plugin->description);?></td>
 		<td><?php echo h($plugin->author);?></td>
+		<td><button name="activate" type="submit" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?></button>
 	</tr>
 <?php endforeach; ?>
 </table>
+</form>
+
 </div>
 
 <?php foot(); ?>

@@ -152,6 +152,7 @@ Zend::register('auth', $auth);
 $front = Kea_Controller_Front::getInstance();
 $router = new Zend_Controller_RewriteRouter();
 $router->addConfig(Zend::registry('routes_ini'), 'routes');
+fire_plugin_hook('loadRoutes', $router);
 $front->setRouter($router);
 
 require_once 'Zend/Controller/Request/Http.php';

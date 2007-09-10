@@ -23,7 +23,7 @@ class Person extends Entity
 	{
 		parent::preSave();
 		
-		$this->type = "Person";	
+//		$this->type = "Person";	
 		
 		if(!empty($this->institution)) {
 			$this->setParentToInstitution();
