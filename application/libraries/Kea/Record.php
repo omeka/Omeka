@@ -294,7 +294,7 @@ abstract class Kea_Record extends Doctrine_Record
 	}
 	
 	/**
-	 * This is a onvenience method to execute SQL statements directly
+	 * This is a convenience method to execute SQL statements directly
 	 * within the record.  
 	 *
 	 * @return mixed
@@ -305,7 +305,9 @@ abstract class Kea_Record extends Doctrine_Record
 		if($fetchOne)
 			return $res->fetchColumn(0);
 		else 
-			return $res->fetchAll(PDO::FETCH_ASSOC);
+			if ($res->columnCount != 0) {
+				return $res->fetchAll(PDO::FETCH_ASSOC);
+			}
 	}
 	
 	/**
