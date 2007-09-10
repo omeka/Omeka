@@ -2,31 +2,6 @@
 
 <?php js('search'); ?>
 
-<style type="text/css" media="screen">
-#page-builder {width:910px;margin:18px 0 18px 36px;}
-#item-select {float:left; width: 378px; background:#DAE9F6;}
-#layout-all {float:right; width:512px;}
-
-#layout-form .item {clear:both;overflow:hidden; border-bottom:1px solid #ccc; margin-bottom:1.8em; padding-bottom:1.8em;}
-#layout-form .item-drop {width:100px; height:100px; float:left; overflow:hidden; border:2px solid #999; margin-right:2px; margin-bottom:2px;display:block;}
-
-#item-list .item-drag {width:100px; height:116px; overflow:hidden; float:left; margin-right:8px; margin-bottom:8px;}
-#item-list .item-drop {top:0; left:0;}
-#item-list {margin-left:18px;}
-#layout-form .textfield {float:right; width:390px;}
-#delete-page {clear:both;}
-#layouts {position:relative;  padding-top:0;}
-#layouts #layout-thumbs {padding-top:4em;}
-#layout-thumbs .layout-name {display:none;}
-#layouts #choose_layout {position:absolute; top:0; right:0;}
-#layouts .layout {cursor:pointer;}
-#search {background:#B5D4EC;border-bottom:1px solid #fff;}
-#layout-form label {display:none;}
-	#page-search-form .textinput {width:358px;}
-#layouts .layout input {display:none;}
-
-#layout-form .primary, #layout-form .secondary {float:none; display:block; width:100%;overflow:hidden; clear:both;}
-</style>
 
 <script type="text/javascript" charset="utf-8">
 /*
@@ -59,6 +34,7 @@
 	Event.observe(window, 'load', makeLayoutSelectable);
 	
 	function makeLayoutSelectable() {
+		$('layout-submits').hide();
 		var current_layout = $('current_layout');
 		var layouts = document.getElementsByClassName('layout');
 		
@@ -74,11 +50,18 @@
 				this.style.backgroundColor = "#A2C9E8"
 				var img = this.getElementsByTagName('img')[0];
 				var copy = img.cloneNode(true);
+				var input = this.getElementsByTagName('input')[0];
+				var title = input.readAttribute('value');
+				var titletext = document.createTextNode(title);
+				var heading = document.createElement('h2');
+				heading.appendChild(titletext);
 				
 				//Overwrite the contents of the div that displays the current layout
 				current_layout.update();
 				current_layout.appendChild(copy);
-				new Effect.Highlight(current_layout);
+				current_layout.appendChild(heading);
+				$('layout-submits').show();
+				//new Effect.Highlight(current_layout);
 
 				//Make sure the input is selected
 				var input = this.getElementsByTagName('input')[0];
@@ -143,24 +126,20 @@
 <?php echo flash(); ?>
 
 <div id="page-builder">
+	<h1>Add Exhibit</h1>
 <?php if ( empty($page->layout) ): ?>
 <form method="post" id="choose-layout">
-	<fieldset>
-		<button type="submit" name="cancel_and_exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
-		<button type="submit" name="cancel_and_section_form" id="section_form" class="exhibit-button">Section Metadata</button>
+
 		
-		<div id="page_button" class="exhibit-button">Page Metadata</div>
 		
 		<?php 
 		//	submit('Exhibit', 'exhibit_form');
 		//	submit('New Page', 'page_form'); 
 		?>
 		
-	</fieldset>
 	
 	<fieldset id="layouts">
 		<legend>Layouts</legend>
-		<div id="current_layout"></div>
 		<div id="layout-thumbs">
 		<?php 
 			$layouts = get_ex_layouts();
@@ -169,9 +148,14 @@
 				exhibit_layout($layout);
 			} 
 		?>
+		</div>
+		<div id="chosen_layout">
+		<div id="current_layout"><p>Choose a layout by selecting a thumbnail on the right.</p></div>
+		
+		<p id="layout-submits">
+		<button type="submit" name="choose_layout" id="choose_layout" class="page-button">Choose This Layout</button>
+		or <button type="submit" name="cancel_and_section_form" id="section_form" class="cancel">Cancel</button></p>
 	</div>
-	<button type="submit" name="choose_layout" id="choose_layout" class="page-button">Choose a Layout</button>
-
 	</fieldset> 
 	
 </form>
@@ -191,53 +175,33 @@
 	<div id="item-select"></div>
 
 <form name="layout" id="page-form" method="post">
-	<fieldset id="tertiary-nav">
-		<button type="submit" name="exhibit_form" id="exhibit_form" class="exhibit-button">Exhibit Metadata</button>
-		<button type="submit" name="section_form" id="section_form" class="exhibit-button">Section Metadata</button>
-		
-		<div id="page_button" class="exhibit-button" class="current">Page Metadata</div>
-		
-		<?php 
-		//	submit('Exhibit', 'exhibit_form');
-		//	submit('New Page', 'page_form'); 
-	//	submit('Save &amp; Add Another Page', 'page_form');
-		?>
-			
-	</fieldset>
-	<fieldset>
-			<button type="submit" name="page_form" id="page_form" class="page-button">Save and Add Another Page</button>
-			<button type="submit" name="cancel" id="cancel_page" class="page-button">Cancel This Page</button>
-	</fieldset>
-	
 
 	
 	<div id="layout-submits">
-		
-	<?php
-	//	submit('Save Changes &amp; Continue Paginating Through Items', 'save_and_paginate'); 
-	//	submit('Save &amp; Return to Exhibit', 'exhibit_form');
-	//	submit('Save &amp; Return to Section', 'section_form');
-	//	
-	//	submit('Save &amp; Add Another Page', 'page_form');
-		submit('Change the layout for this page', 'change_layout');	
-	?>
+
 	
 	</div>
 	<div id="layout-all">
 	<div id="layout-form">
 	<?php render_layout_form($page->layout); ?>
 	</div>
+	<?php
+		//submit('Change the layout for this page', 'change_layout');	
+	?>
 	</div>
-</form>
-	<?php if ( $page->exists() ): ?>
-		<form id="delete-page" action="<?php echo uri('exhibits/deletePage/'.$page->id); ?>">
-		<?php submit('Cancel/Delete this page', 'delete_page'); ?>
-		</form>
-	<?php else: ?>
-		<form id="delete-page" method="get">
-			<?php submit('Cancel Adding This Page', 'cancel'); ?>
-		</form>
-	<?php endif; ?>
+
+
+		<?php
+		//	submit('Save Changes &amp; Continue Paginating Through Items', 'save_and_paginate'); 
+		//	submit('Save &amp; Return to Exhibit', 'exhibit_form');
+		//	submit('Save &amp; Return to Section', 'section_form');
+		//	
+		//	submit('Save &amp; Add Another Page', 'page_form');
+			//submit('Change the layout for this page', 'change_layout');	
+		?>
+		<p id="page-submits"><button id="section_form" name="section_form" type="submit">Save and Return to Section</button> or <button id="page_form" name="page_form" type="submit">Save and Add Another Page</button> or <button name="cancel" class="cancel">Cancel</button></p>
+		
+	</form>
 <?php endif; ?>
 </div>
 <?php foot(); ?>

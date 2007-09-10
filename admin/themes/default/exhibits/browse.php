@@ -15,8 +15,12 @@
 		<th>Title</th>
 		<th>Tags</th>
 		<th>Theme</th>
+		<?php if(has_permission('Exhibits','edit')){ ?>
+		
 		<th>Edit?</th>
+		<?php } if(has_permission('Exhibits','delete')){ ?>
 		<th>Delete?</th>
+		<?php } ?>
 	</tr>
 	</thead>
 	<tbody>

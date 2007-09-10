@@ -36,7 +36,7 @@ function roundCorners() {
 	Nifty('#primary-nav a,#secondary-nav a','top transparent');
 	Nifty('#view-style a','top transparent');
 	Nifty('#user-meta','bottom big');
-	Nifty('#site-info,#type-items,#getting-started ul');
+	Nifty('#site-meta,#recent-items,#tag-cloud,#type-items,#getting-started ul');
 	Nifty('#view-all-items a','transparent');
 	Nifty('#search,#names-add','big');
 	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit,#new-user-form','transparent');

@@ -1,5 +1,4 @@
 <?php exhibit_head(); ?>
-foo
 <div id="primary">
 
 		<div class="exhibit-content">

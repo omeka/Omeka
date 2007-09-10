@@ -80,7 +80,7 @@
 <p id="edit-delete"> 
 <?php 
 link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
-link_to_item($item, 'delete', 'Delete', array('class'=>'delete')); 
+//link_to_item($item, 'delete', 'Delete', array('class'=>'delete')); 
 ?></p>
 
 <div id="item-images">

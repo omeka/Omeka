@@ -5,7 +5,7 @@
 
 <h1>Collection: <?php echo h($collection->name);?></h1>
 
-<p> <a class="edit" href="<?php echo uri('collections/edit/').$collection->id; ?>">Edit</a>  <a class="delete" href="<?php echo uri('collections/delete/').$collection->id; ?>">Delete</a></p>
+<p> <a class="edit" href="<?php echo uri('collections/edit/').$collection->id; ?>">Edit</a></p>
 
 <h2>Description:</h2> <p><?php echo h($collection->description); ?></p>
 

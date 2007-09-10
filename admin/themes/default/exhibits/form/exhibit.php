@@ -49,7 +49,6 @@
 	
 	function addSection()
 	{
-		$('add_new_section').show();
 		
 		//Serialize all the form inputs (also specify JSON output)
 		var inputs = $$('#new-section input, #new-section textarea');
@@ -82,6 +81,8 @@
 						makeSectionListDraggable();
 						//Highlight the section list
 						new Effect.Highlight($('section-list').parent);
+						$('add_new_section').show();
+						
 					}
 				});
 			},
@@ -180,7 +181,7 @@
 <div id="primary">
 	<h1>Add Exhibit</h1>
 
-<form id="exhibit-form" method="post">
+<form id="exhibit-form" method="post" class="exhibit-builder">
 
 	<fieldset>
 		<legend>Exhibit Metadata</legend>
@@ -200,28 +201,27 @@
 		<label for="featured">Exhibit is public:</label>
 		<div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $exhibit->public); ?></div>
 	</div>
-	
-	</fieldset>
-		<fieldset>
-		<legend>Exhibit Display Data</legend>
 		<div class="field">
 			<label for="theme">Exhibit Theme</label>
 			<div class="select"><?php select(array('name'=>'theme','id'=>'theme'),get_ex_themes(),$exhibit->theme); ?></div>
 		</div>
+		</fieldset>
+	<fieldset>
+		<legend>Exhibit Sections</legend>
+		
 		<div id="section-list-container">
-			<h2>Exhibit Sections</h2>
 			<ol id="section-list">
 				<?php common('_section_list', compact('exhibit'), 'exhibits'); ?>
 			</ol>
+			<div id="new-section-link"><a href="javascript:void()" name="add_new_section" id="add_new_section">Add a Section</a></div>
 			<div id="new-section"></div>
 			<input type="hidden" name="exhibit_id" id="exhibit_id" value="<?php echo h($exhibit->id); ?>" />
-		<button type="submit" name="add_new_section" id="add_new_section" class="exhibit-button">Add a Section</button>
 		</div>
 		</fieldset>
 		<fieldset>
 <p>
 				<button type="submit" name="save_exhibit" id="save_exhibit" class="exhibit-button">Save and Finish</button> or 
-				<a href="<?php echo uri('exhibits'); ?>">Cancel</a></p>
+				<a href="<?php echo uri('exhibits'); ?>" class="cancel">Cancel</a></p>
 		</fieldset>
 </form>		
 </div>

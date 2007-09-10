@@ -30,6 +30,7 @@
 </div>
 
 <div id="content">
+	<?php page_nav(); ?>
 <?php echo flash(); ?>				
 
 		

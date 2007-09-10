@@ -287,16 +287,16 @@ ul.tags, li.tag {display: inline;}
 	/* Dashboard */
 	#welcome {display:block; float:left; width:528px; overflow: hidden;}
 
-	#site-info {float:right; width: 336px; margin: 0;background:#DAE9F6; padding:18px; overflow: hidden;}
-
+	#site-info {float:right; width: 372px;}
+		#site-meta, #recent-items, #tag-cloud {background:#DAE9F6; width: 336px; padding:18px; overflow:hidden; margin-bottom:18px;}
 	#getting-started dl {overflow:hidden;padding-top:1.5em;}
 		#getting-started a {text-decoration:none;}
 		#getting-started dt {clear: both; font-size:1.4em; width: 258px; float:left;display:block; margin-bottom:0.64em;}
 		#getting-started dl ul {float:right; width:216px; padding:18px; background:#dff1c7;}
 		#getting-started dl li {margin-bottom:1em;}
 		#getting-started dd {overflow: hidden; display: inline;}
-		#getting-started p {float:left; width: 246px;}
-			#getting-started p.help	{clear:both; padding: 1em 0 0; border-top:1px dotted #ccc; }
+		#getting-started dd p {float:left; width: 246px;}
+			#getting-started p.help	{clear:both; padding: 1em 0 0; border-top:1px dotted #ccc; width}
 
 	#recent-items ul {border-top:1px dotted #90bee3;overflow: hidden;}
 	#recent-items li {clear: both; overflow: hidden;}
@@ -312,11 +312,7 @@ ul.tags, li.tag {display: inline;}
 	/* Item Add/Edit Form */
 	
 	#item-form {clear: both;}
-/*	#item-form #core-metadata {overflow:hidden;}
-	#item-form #type-metadata {clear: both;}
-		#item-form #type-metadata .field {clear: both; margin: 0 0 1em; overflow: hidden;}
-		#item-form #type-metadata .field div, #item-form #type-metadata .field a {float: right; clear: right; width: 510px;}
-*/
+	
 	textarea#duration, 
 	textarea#compression, 
 	textarea#producer, 
@@ -343,10 +339,13 @@ ul.tags, li.tag {display: inline;}
 	#type-select label {position:relative;}
 		#type-select img {position:absolute; left: 5em;}
 	
+	#item-form-submits, #form_submits {float:left; width: 400px;}
+	#delete_item_link, #delete_link {float:right;display:block; text-align:right; width:400px;}
+	
 	/* Item Browse styles */
 	#add-item {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:6em; display:block;}
 	#add-item:hover {background-color:#e9f6da;}
-	#browse-meta {background-color:#dae9f6;margin:1.5em 0 0; padding:1em 1.5em 0; margin-top:18px; overflow:hidden; clear:both;width: 100%;}
+	#browse-meta {background-color:#dae9f6;margin:1.5em 0 0; padding:1em 1.5em 0; margin-top:18px; overflow:hidden; clear:both;}
 	#view-style { margin-bottom:0; overflow:hidden;display:block; float:left; width:246px;}
 		#view-style a {display:block; float:left; width: 9em; padding:6px 0; background:transparent; color:#333;background-color:#C7DFF1; text-align: center; margin-right: 1px;}
 		#view-style a.current {color:#333;font-weight:bold;background-color:#fff}
@@ -357,9 +356,8 @@ ul.tags, li.tag {display: inline;}
 			.pagination li {display:inline; padding: 0 .5em;}
 		
 	#view-choice {border:1px solid #ccc; border-width:0;}
-
 		#view-choice table {margin-bottom:0; padding-bottom:0;}
-	#detailed, .simple {overflow:hidden; }
+			#detailed, .simple {overflow:hidden; }
 
 	#detailed .item {overflow:hidden; clear:both; border-bottom:1px solid #ccc;padding:18px 18px 0;}
 		.meta {float:left; width:246px;}

@@ -8,7 +8,6 @@
 
 		<p><?php if ( has_permission('Types','edit') ): ?>
 		 	<a class="edit" href="<?php echo uri('types/edit/'.$type->id); ?>">Edit</a>
-			<a class="delete" href="<?php echo uri('types/delete/'.$type->id); ?>">Delete</a>
 		 <?php endif; ?></p>
 		
 		<p><?php echo h($type->description); ?></p>

@@ -25,31 +25,27 @@
 </script>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
+	<h1>Add Exhibit</h1>
 
 <?php 
 	echo flash();
 ?>
 
-<form method="post" accept-charset="utf-8" action="" id="section-form">
-	<fieldset>
+<form method="post" accept-charset="utf-8" action="" id="section-form" class="exhibit-builder">
 				
 		<?php 
 		//	submit('Exhibit', 'exhibit_form');
 		//	submit('New Page', 'page_form'); 
 		?>
 		
-	</fieldset>
-	<fieldset id="section-meta">
+	<fieldset>
 		<legend>Section Meta</legend>
 		
 		
 		
 	<div class="field"><?php text(array('name'=>'title', 'id'=>'title', 'class'=>'textinput'), $section->title, 'Title for the Section'); ?></div>
 		<div class="field"><?php text(array('name'=>'slug','id'=>'slug','class'=>'textinput'), $section->slug, 'URL Slug (optional)'); ?></div>
-	</fieldset>
-	<fieldset id="section-description">
-		<legend>Section Description</legend>
-	<div class="field"><?php textarea(array('name'=>'description', 'id'=>'description', 'class'=>'textinput', 'rows'=>'10','cols'=>'40'), $section->description, 'Add a description for this section'); ?></div>
+	<div class="field"><?php textarea(array('name'=>'description', 'id'=>'description', 'class'=>'textinput','rows'=>'10','cols'=>'40'), $section->description, 'Section Description'); ?></div>	
 
 	</fieldset>
 		<fieldset id="section-pages">
@@ -69,16 +65,13 @@
 	</fieldset>
 
 	<fieldset>
-		<p>
-		<button type="submit" name="add_new_section">Save</button> or
-		<button type="submit" name="cancel_section" id="exhibit_form" class="exhibit-button">Cancel</button>
-		</p>
+		<p><button type="submit" name="exhibit_form">Save and Return to Exhibit</button> or <button type="submit" name="cancel_section" id="cancel_section" class="cancel">Cancel</button></p>
 	</fieldset>
 </form>
 
 <?php /*if ( $section->exists() ): ?>
 	<form action="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>">
-		<input type="submit" name="submit" value="Delete this Section --&gt;" />
+		<input type="submit" name="submit" value="Delete this Section" />
 	</form>
 <?php endif;*/ ?>
 </div>

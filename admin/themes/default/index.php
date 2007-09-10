@@ -22,7 +22,7 @@
 							<li><a class="browse-exhibits" href="<?php echo uri('exhibits/browse'); ?>">Browse exhibits</a></li>
 							<li><a class="add-exhibit" href="<?php echo uri('exhibits/add'); ?>">Create an exhibit</a></li>
 						</ul>
-						<p>Create and manage exhibits that display items in the archive.</p>
+						<p>Create and manage exhibits that display items from the archive.</p>
 					</dd>
 				<?php endif; ?>
 				
@@ -64,11 +64,11 @@
 		</div>
 		<div id="site-info">
 			<div id="site-meta">
-				<h2>Site Totals</h2>
+				<h2>Site Overview</h2>
 				<p><em><?php settings('site_title'); ?></em> contains <?php total_items(); ?> items, in <?php total_collections(); ?> collections, tagged with <?php total_tags(); ?> keywords. There are <?php total_users(); ?> users.</p>
 			</div>
 			<div id="recent-items">
-				<h2>Recently Added Items</h2>
+				<h2>Recent Items</h2>
 				<?php $items = recent_items('5'); ?>
 				<ul>
 					<?php foreach( $items as $key => $item ): ?>
@@ -77,7 +77,13 @@
 				</ul>
 				<p id="view-all-items"><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>	
 			</div>
+			
+			<div id="tag-cloud">
+				<h2>Recent Tags</h2>
+				<?php tag_cloud(recent_tags(), uri('items/browse/')); ?>
+			</div>
 		</div>
+		
 		
 	</div>
 <?php foot(); ?>

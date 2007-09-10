@@ -24,7 +24,9 @@
 	<h5><a href="<?php echo uri('exhibits'); ?>">Back to Exhibits</a></h5>
 		
 		<div id="content">
-		<?php echo flash(); ?>				
+		<?php echo flash(); ?>	
+		<?php page_nav(); ?>
+					
 		<h1><?php link_to_exhibit($exhibit); ?></h1>
 	
 			<?php echo flash(); ?>				
