@@ -1092,12 +1092,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         foreach ($map as $k => $v) {
             $old = $this->get($k, false);
 
-            if ((string) $old !== (string) $v || $old === null) {
+         //   if ((string) $old !== (string) $v || $old === null) {
                 $a[$k] = $v;
                 $this->_data[$k] = $v;
-            }
+         //   }
         }
-
         return $a;
     }
     /**
