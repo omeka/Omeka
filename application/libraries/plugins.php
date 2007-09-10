@@ -26,6 +26,9 @@ class PluginBroker
 	
 	//Output directories that have been added by plugins
 	protected $_output_dirs = array('json'=>array(), 'rest'=>array());
+
+	//Routes that have been added by plugins
+	protected $_routes = array();
 	
 	public function __construct() 
 	{
@@ -123,18 +126,20 @@ class PluginBroker
 			
 			//If the current plugin is not installed
 			if(!$this->isInstalled($plugin)) {
-			
+				
 				$form_hook = $this->_callbacks['install_form'][$plugin];
 				
 				//If we haven't POSTed anything, Check to see whether the plugin has an install form
 				if( empty($_POST) and !empty($form_hook) ) {
-			
+					require_once HELPERS;
+					head();
 					//This can be wrapped a bit better in the future
 					echo '<form action="" method="post">';
 					//Load whatever form the plugin writer has provided and exit
 					call_user_func_array($form_hook, array());
 					echo '<input type="submit" name="install_plugin" />';
 					echo '</form>';
+					foot();
 					exit;			
 				}
 			
@@ -229,6 +234,21 @@ class PluginBroker
 		
 	}
 	
+	public function addRoute()
+	{
+		$args = func_get_args();
+				
+		$this->_routes[] = $args;	
+	}
+	
+	public function loadRoutes($router)
+	{	
+		
+		foreach ($this->_routes as $route) {
+			call_user_func_array(array($router, 'addRoute'), $route);	
+		}
+	}
+	
 	public function loadOutputDirs(Kea_View $view, $type)
 	{
 		$this->registerScriptPaths($view, $this->_output_dirs[$type]);
@@ -319,8 +339,12 @@ function add_plugin_hook($hook, $callback)
 
 function db_query($sql, $params=array())
 {
-	$conn = Doctrine_Manager::getInstance()->connection();
-	return $conn->execute($sql, $params)->fetchAll(PDO::FETCH_ASSOC);
+	try {
+		$conn = Doctrine_Manager::getInstance()->connection();
+		return $conn->execute($sql, $params)->fetchAll(PDO::FETCH_ASSOC);
+	} catch (Exception $e) {
+		echo $e->getMessage();exit;
+	}
 }
 
 /**
@@ -342,7 +366,7 @@ function get_plugin_broker()
 	return Zend::Registry( 'plugin_broker' );
 }
 
-function define_plugin_metafield($name, $description, $type=null)
+function define_metafield($name, $description, $type=null)
 {
 	$broker = Zend::Registry( 'plugin_broker' );
 	$broker->defineMetafield($name, $description, $type);
@@ -356,6 +380,21 @@ function add_theme_pages($dir, $theme='both')
 function add_controllers($dir='controllers')
 {
 	get_plugin_broker()->addControllerDir($dir);
+}
+
+/**
+ * Facade for the Zend Router interface
+ *
+ * for example: add_route(
+ *   'user',
+ *   new Zend_Controller_Router_Route('user/:username', array('controller' => 'user', 'action' => 'info'))
+ * @return void
+ **/
+function add_route()
+{
+	$name = func_get_arg(0);
+	$def = func_get_arg(1);
+	get_plugin_broker()->addRoute($name, $def);
 }
 
 function add_output_pages($dir, $output_type='rest')

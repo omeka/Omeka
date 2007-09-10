@@ -373,7 +373,6 @@ abstract class Kea_Record extends Doctrine_Record
 				try {
 					$this->save();
 					$this->postCommitForm($post, $options);
-					fire_plugin_hook('onCommitForm',  $post);
 				//	$conn->commit();
 					return true;
 				}
