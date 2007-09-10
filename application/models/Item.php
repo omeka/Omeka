@@ -556,7 +556,7 @@ class Item extends Kea_Record
 		
 		//If the item was made public, fire the plugin hook
 		if(Zend::isRegistered('item_is_public')) {
-			fire_public_hook('make_item_public', $this);
+			fire_plugin_hook('make_item_public', $this);
 		}		
 	}
 	
