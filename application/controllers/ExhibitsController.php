@@ -48,7 +48,9 @@ class ExhibitsController extends Kea_Controller_Action
 				
 		Zend::register('exhibits', $exhibits);
 		
-		return $this->render('exhibits/browse.php');
+		fire_plugin_hook('browse_exhibits', $exhibits);
+		
+		return $this->render('exhibits/browse.php', compact('exhibits'));
 	}
 	
 	public function showitemAction()
@@ -79,7 +81,7 @@ class ExhibitsController extends Kea_Controller_Action
 			Zend::register('section', $section);
 			
 			//Plugin hooks
-			$this->pluginHook('onShowExhibitItem', array($item, $exhibit));
+			fire_plugin_hook('show_exhibit_item',  $item, $exhibit);
 			
 			return $this->renderExhibit(compact('exhibit','item'), 'item');
 		}else {
@@ -132,7 +134,7 @@ class ExhibitsController extends Kea_Controller_Action
 		Zend::register('exhibit',	$exhibit);
 		Zend::register('page',		$page);
 		
-		$this->pluginHook('onShowExhibit', array($exhibit,$section,$page));
+		fire_plugin_hook('show_exhibit', $exhibit,$section,$page);
 
 		$this->renderExhibit(compact('section','exhibit','page'));
 	}
@@ -166,6 +168,9 @@ class ExhibitsController extends Kea_Controller_Action
 		$this->checkPermission($exhibit);
 		
 		Zend::register('exhibit', $exhibit);
+		
+		fire_plugin_hook('show_exhibit', $exhibit);
+		
 		return $this->renderExhibit(compact('exhibit'), 'summary');
 	}
 	
@@ -231,10 +236,7 @@ class ExhibitsController extends Kea_Controller_Action
 	public function addAction()
 	{		
 		$exhibit = new Exhibit;
-		
-		//Set a sess var so that plugin hooks can tell whether adding or editing
-		$this->addingExhibit = true;
-		
+				
 		return $this->processExhibitForm($exhibit);
 	}
 
@@ -269,12 +271,6 @@ class ExhibitsController extends Kea_Controller_Action
 	{
 		try {
 			$retVal = $exhibit->commitForm($_POST);
-			
-			//Fire the plugin hook depending on whether exhibit is added or edited
-			if($retVal) {
-				$hookName = (isset($this->addingExhibit) ? 'onAddExhibit' : 'onEditExhibit');
-				$this->pluginHook($hookName, array($exhibit));
-			}
 
 			if($retVal) {
 				if(array_key_exists('add_section',$_POST)) {
@@ -339,11 +335,6 @@ class ExhibitsController extends Kea_Controller_Action
 		} catch (Exception $e) {
 			$this->flash($e->getMessage());
 			$retVal = false;
-		}
-		
-		if($retVal) {
-			$hook = ($this->addSection ? 'onAddExhibitSection' : 'onEditExhibitSection');
-			$this->pluginHook($hook, array($section));
 		}
 		
 		//If successful form submission
@@ -419,9 +410,7 @@ class ExhibitsController extends Kea_Controller_Action
 			$page->Section = $section;			
 
 		}
-		
-		$this->addingPage = true;
-		
+				
 		//Set the order for the new page
 		$numPages = $section->getPageCount();
 		$page->order = $numPages + 1;
@@ -473,11 +462,6 @@ class ExhibitsController extends Kea_Controller_Action
 					$retVal = $page->commitForm($_POST);
 				} catch (Exception $e) {
 					$this->flash($e->getMessage());
-				}
-				
-				if($retVal) {
-					$hook = ($this->addingPage ? 'onAddExhibitPage' : 'onEditExhibitPage');
-					$this->pluginHook($hook, array($page));
 				}
 								
 				//Otherwise the page form has been submitted
@@ -542,8 +526,6 @@ class ExhibitsController extends Kea_Controller_Action
 	{
 		$page = $this->findById(null,'SectionPage');
 		$section = $page->Section;
-
-		$this->addingPage = false;
 		
 		return $this->processPageForm($page, $section);
 	}
@@ -555,7 +537,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$section = $this->findById(null,'Section');
 		$exhibit = $section->Exhibit;
 		
-		$this->pluginHook('onDeleteExhibitSection', array($section));
+		fire_plugin_hook('delete_exhibit_section',  $section);
 		
 		$section->delete();
 		$exhibit->reorderSections();
@@ -568,7 +550,7 @@ class ExhibitsController extends Kea_Controller_Action
 		$page = $this->findById(null,'SectionPage');
 		$section = $page->Section;
 		
-		$this->pluginHook('onDeleteExhibitPage', array($page));
+		fire_plugin_hook('delete_exhibit_page',  $page);
 		
 		$page->delete();
 		

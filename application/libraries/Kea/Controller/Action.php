@@ -97,12 +97,10 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		$this->_auth = Zend::Registry('auth');
 		
-		$this->_broker = Kea_Controller_Plugin_Broker::getInstance();
+		$this->_broker = get_plugin_broker();
 		
 		$this->_redirects = array_merge($this->_crudRedirects, $this->_redirects);
 		
-		$this->_broker->setRedirects($this->_redirects);
-
 		return $init;
 	}
 	
@@ -449,7 +447,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		Zend::register($pluralName, $$pluralName);
 		
 		//Fire the plugin hook
-		$this->pluginHook('onBrowse' . ucwords($pluralName), array($$pluralName));
+		fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $$pluralName);
 		
 		return $this->render($viewPage, compact($pluralName,$totalVar));
 	}
@@ -471,15 +469,9 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		Zend::register($varName, $$varName);
 		
-		//i.e. onShowItem() plugin hook
-		$this->pluginHook( 'onShow' . get_class($$varName), array($$varName) );
+		fire_plugin_hook( 'show_' . strtolower(get_class($$varName)), $$varName );
 		
 		return $this->render($viewPage, compact($varName));
-	}
-	
-	protected function pluginHook($hookName, $varsToPass = array()) {
-		//Fire the plugin hook
-		call_user_func_array(array($this->_broker, $hookName), $varsToPass);
 	}
 	
 	public function addAction()
@@ -498,7 +490,6 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 					$user = Kea::loggedIn();
 					$$varName->setAddedBy($user);
 				}
-				$this->pluginHook('onAdd' . $class, array($$varName));
 				$this->_redirect('add',array('controller'=>$pluralName));
 			}
 		} catch (Exception $e) {
@@ -527,9 +518,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 					$user = Kea::loggedIn();
 					$$varName->setModifiedBy($user);
 				}
-				
-				$this->pluginHook('onEdit' . $this->_modelClass, array($$varName));
-				
+								
 				//Avoid a redirect by passing an extra parameter to the AJAX call
 				if($this->_getParam('noRedirect')) {
 					$this->_forward($pluralName, 'show');
@@ -551,8 +540,6 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$controller = $this->getName(false);
 		
 		$record = $this->findById();
-
-		$this->pluginHook('onDelete' . $this->_modelClass, array($record));
 				
 		$record->delete();
 		$this->_redirect('delete', array('controller'=>$controller));
@@ -596,11 +583,11 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		$this->_view->assign($vars);
 		
-		$this->pluginHook('preRenderPage', array($page, $vars));
+		fire_plugin_hook('pre_render_page', $page, $vars);
 		
 		$this->getResponse()->appendBody($this->_view->render($page));
 		
-		$this->pluginHook('postRenderPage', array($page, $vars));
+		fire_plugin_hook('post_render_page', $page, $vars);
 	}
 	
 	/**

@@ -198,14 +198,16 @@ class Taggable implements Kea_Strategy_Interface
 		if(!empty($diff['removed'])) {
 			$this->deleteTags($diff['removed'], $entity, $deleteTags);
 			
+			//i.e. remove_item_tag
+			$hook = 'remove_' . strtolower(get_class($this->record)) . '_tag';
 			//PLUGIN HOOKS
-			$this->pluginHook('onUntag' . get_class($this->record), array($this->record, $diff['removed'], $entity));
+			fire_plugin_hook($hook,  $this->record, $diff['removed'], $entity);
 		}
 		if(!empty($diff['added'])) {
 			$this->addTags($diff['added'], $entity);
 			
 			//PLUGIN HOOKS
-			$this->pluginHook('onTag' . get_class($this->record), array($this->record, $diff['added'], $entity));
+			fire_plugin_hook('add_' . strtolower(get_class($this->record)) . '_tag',  $this->record, $diff['added'], $entity);
 		}
 		
 	}

@@ -7,6 +7,7 @@
 <table>
 <?php foreach( $plugins as $key => $plugin ): ?>
 	<tr>
+		<td><?php echo h($plugin->directory); ?></td>
 		<td><a href="<?php echo uri('plugins/show/'.$plugin->id); ?>"><?php echo h($plugin->name); ?></a> </td>
 		<td><?php echo h($plugin->description);?></td>
 		<td><?php echo h($plugin->author);?></td>

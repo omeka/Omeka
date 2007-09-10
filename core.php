@@ -95,6 +95,9 @@ if(isset($config->log)) {
 	}
 }
 
+//Activate the plugins
+require_once 'plugins.php';
+$plugin_broker = new PluginBroker;
 
 $chainListeners = new Doctrine_EventListener_Chain();
 
@@ -102,8 +105,6 @@ $manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
 
 
 // Use Zend_Config_Ini to store the info for the routes and db ini files
-require_once 'Zend.php';
-
 require_once 'Kea.php';
 spl_autoload_register(array('Kea', 'autoload'));
 
@@ -165,19 +166,6 @@ $response = new Zend_Controller_Response_Http();
 // Removed 3/9/07 n8
 //Zend::register('response', $response);
 $front->setResponse($response);
-
-#############################################
-# INITIALIZE PLUGINS
-#############################################
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'PluginTable.php';
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Plugin.php';
-
-//Register all of the active plugins
-$plugins = $manager->getTable('Plugin')->activeArray($router);
-foreach( $plugins as $plugin )
-{
-	$front->registerPlugin($plugin);
-}
 
 $front->throwExceptions((boolean) true);
 

@@ -31,7 +31,7 @@ class CollectionsController extends Kea_Controller_Action
 		Zend::register('total_collections', $total_results);
 		Zend::register('total_results', $total_results);
 		
-		$this->pluginHook('onBrowseCollections', array($collections));
+		fire_plugin_hook('browse_collections', $collections);
 		
 		return $this->render('collections/browse.php', compact('collections','total_collections'));
 	}

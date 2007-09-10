@@ -474,7 +474,7 @@ class Item extends Kea_Record
 				$tagToDelete = Zend::Registry( 'doctrine' )->getTable('Tag')->find($tagId);
 				$current_user = Kea::loggedIn();
 				if($tagToDelete) {
-					$this->pluginHook('onUntagItem', array($tagToDelete->name, $current_user));
+					fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $current_user);
 			
 					//delete the tag from the Item
 					$tagsDeleted = $this->deleteTags($tagToDelete, null, true);
@@ -556,7 +556,7 @@ class Item extends Kea_Record
 		
 		//If the item was made public, fire the plugin hook
 		if(Zend::isRegistered('item_is_public')) {
-			$this->pluginHook('onMakePublicItem');
+			fire_public_hook('make_item_public', $this);
 		}		
 	}
 	
@@ -577,6 +577,7 @@ class Item extends Kea_Record
 		{
 			$this->saveMetatext($_POST['metafields']);
 		}
+		parent::postSave();
 	}
 
 	public function hasFiles()

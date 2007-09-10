@@ -22,13 +22,6 @@ abstract class Kea_Record extends Doctrine_Record
 	
 	protected $_pluralized;
 	protected $_hidden;
-	
-	protected $_plugins;
-	
-	public function construct()
-	{
-		$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
-	}
 
 	/**
 	 * Retrieve the error message associated with a specific field if it exists, or retrieve all errors as a string
@@ -380,7 +373,7 @@ abstract class Kea_Record extends Doctrine_Record
 				try {
 					$this->save();
 					$this->postCommitForm($post, $options);
-					$this->pluginHook('onCommitForm', array($post));
+					fire_plugin_hook('onCommitForm',  $post);
 				//	$conn->commit();
 					return true;
 				}
@@ -419,24 +412,43 @@ abstract class Kea_Record extends Doctrine_Record
 		return $acl->isAllowed($role, $resource, $rule);
 	}
 	
+	
+	/**
+	 * Wrap Doctrine's delete function with a plugin hook that fires whenever a record gets deleted
+	 *
+	 * @return void
+	 **/
+	public function delete()
+	{
+		//i.e. 'delete_item'
+		$hook = 'delete_' . strtolower(get_class($this));
+		fire_plugin_hook($hook, $this);
+		
+		return parent::delete();
+	}
+	
+	public function postSave()
+	{
+		$hook = 'save_' . strtolower(get_class($this));
+		fire_plugin_hook($hook, $this);
+	}
+	
+	public function postInsert()
+	{
+		$hook = 'insert_' . strtolower(get_class($this));
+		fire_plugin_hook($hook, $this);
+	}
+	
+	public function postUpdate()
+	{
+		$hook = 'update_' . strtolower(get_class($this));
+		fire_plugin_hook($hook, $this);
+	}
+	
 	protected function preCommitForm(&$post, $options) {return true;}
 	
 	protected function postCommitForm($post, $options) {}
 	
 	protected function onFormError($post, $options) {}
-	
-	/**
-	 * This is essentially duplicated in the action controller, with the exception that this function passes $this as the first parameter
-	 *
-	 * @return mixed
-	 **/
-	public function pluginHook($hook, $vars=array())
-	{
-		if(empty($this->_plugins)) {
-			$this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
-		}
-		array_unshift($vars, $this);
-		call_user_func_array(array($this->_plugins, $hook), $vars);
-	}
 } // END abstract class Kea_Record
 ?>

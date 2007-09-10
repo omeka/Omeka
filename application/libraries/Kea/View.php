@@ -32,6 +32,10 @@ class Kea_View extends Zend_View_Abstract
 	{
 		parent::__construct($config);
 		
+		if(!$controller) {
+			throw new Exception( 'Invalid Controller' );
+		}
+		
 		$this->_controller = $controller;
 		
 		if(isset($config['request'])) {
@@ -75,6 +79,8 @@ class Kea_View extends Zend_View_Abstract
 	 */
 	public function setThemePath($path = null)
 	{	
+		$broker = Zend::Registry( 'plugin_broker' );
+		
 		if ($output = $this->getRequest()->getParam('output')) {
 
 			switch($output) {
@@ -82,15 +88,17 @@ class Kea_View extends Zend_View_Abstract
 					require_once 'Zend/Json.php';
 					$scriptPath = APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json';
 					$this->addScriptPath($scriptPath);
-					Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this, 'json');
+					$broker->loadOutputDirs($this, 'json');
 				break;
 				case('rest'):
 					$this->getResponse()->setHeader('Content-Type', 'text/xml');
 					$scriptPath = APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'rest';
 					$this->addScriptPath($scriptPath);
-					Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this, 'rest');
+					$broker->loadOutputDirs($this, 'rest');
 				break;
 			}
+			
+//			var_dump( $this->getScriptPaths() );exit;
 		}
 		else {
 			// Get the options table
@@ -100,16 +108,20 @@ class Kea_View extends Zend_View_Abstract
 			// do we select the admin theme or the public theme?
 			if ((boolean) $this->getRequest()->getParam('admin')) {
 				$theme_name = $options['admin_theme'];
+				
+				//Add script paths for plugins
+				$broker->loadThemeDirs($this, 'admin');
 			}
 			else {
 				$theme_name = $options['public_theme'];
+				
+				$broker->loadThemeDirs($this, 'public');
 			}
 			
 			$scriptPath = THEME_DIR.DIRECTORY_SEPARATOR.$theme_name;
 			$this->addScriptPath($scriptPath);
 			
-			Kea_Controller_Plugin_Broker::getInstance()->addScriptPath($this);
-
+	//		var_dump( $this->getScriptPaths() );exit;
 			
 			Zend::register('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
 		}

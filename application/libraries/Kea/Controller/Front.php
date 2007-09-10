@@ -1,6 +1,5 @@
 <?php
 require_once 'Zend/Controller/Front.php';
-require_once 'Kea/Controller/Plugin/Broker.php';
 /**
  * customized Zend Front Controller
  *
@@ -18,13 +17,8 @@ class Kea_Controller_Front extends Zend_Controller_Front
 	
 	private function __construct()
     {
-        $this->_plugins = Kea_Controller_Plugin_Broker::getInstance();
+        $this->_plugins = new Zend_Controller_Plugin_Broker;
     }
-
-	public function getPlugins() 
-	{
-		return $this->_plugins->plugins();
-	}
 	
 	/**
      * Singleton instance

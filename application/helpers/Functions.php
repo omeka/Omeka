@@ -479,17 +479,15 @@ function is_current($link, $req = null) {
  * @return void
  **/
 function plugin_header() {
-	Kea_Controller_Plugin_Broker::getInstance()->header();
+	fire_plugin_hook('theme_header');
 }
 
-function plugin_nav($links) {
-	
-	//Plugins add their own navigation
-	Kea_Controller_Plugin_Broker::getInstance()->addNavigation($links);
+function plugin_footer() {
+	fire_plugin_hook('theme_footer');
 }
 
 function plugin_html($page, $options=array()) {
-	Kea_Controller_Plugin_Broker::getInstance()->appendToPage($page, $options);
+	fire_plugin_hook('append_to_page', $page, $options);
 }
 
 ///// END PLUGIN HELPER FUNCTIONS /////

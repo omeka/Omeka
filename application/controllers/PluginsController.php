@@ -1,4 +1,5 @@
 <?php
+require_once 'Plugin.php';
 /**
  * @package Omeka
  **/
@@ -15,52 +16,51 @@ class PluginsController extends Kea_Controller_Action
 		$this->_modelClass = 'Plugin';
 		$this->_table = $this->getTable('Plugin');
 	}
+
+	/**
+	 * Retrieve the descriptive info for a plugin from its plugin.ini file
+	 *
+	 * @return stdClass
+	 **/
+	public function getPluginMetaInfo($plugin)
+	{		
+		$info = new stdClass;
+		
+		$info->directory = $plugin;
+		
+		$path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin . DIRECTORY_SEPARATOR . 'plugin.ini';
+		
+		if(file_exists($path)) {
+			$config = new Zend_Config_Ini($path, 'info');
+			
+			foreach ($config as $key => $value) {
+				$info->$key = $value;
+			}
+		}
+		
+		return $info;
+	}
 	
 	public function browseAction() {
-		$this->installNew();
+		fire_plugin_hook('install');
 		
-		return parent::browseAction();
-	}
-	
-	protected function installNew() {
-		$router = Kea_Controller_Front::getInstance()->getRouter();
+		//Get a list of all the plugins
 		
-		$dir = new VersionedDirectoryIterator(PLUGIN_DIR);
-		$names = $dir->getValid();
-				
-		foreach ($names as $name) {
-			$plugin = $this->_table->findByName($name);
-			if(!$plugin) {
-				$this->_redirect('install', array('name'=>$name));
-			}
-		}		
-	}
-	
-	public function installAction()
-	{
-		$name = $this->_getParam('name');
+		$broker = get_plugin_broker();
 		
-		$path = PLUGIN_DIR.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.$name.'.php';
+		$list = $broker->getAll();
 		
-		if(!file_exists($path)) {
-			throw new Exception( "Plugin named '$name' does not exist.  Please remove the directory named '$name' in order to continue." );
+		foreach ($list as $name) {
+			
+			$plugin = $this->getPluginMetaInfo($name);
+			
+			$plugin->installed = $broker->isInstalled($name);
+			$plugin->active = $broker->isActive($name);
+			
+			$plugins[] = $plugin;
 		}
 		
-		require_once $path;
-		$plugin = new $name($router, new Plugin());
-		
-		if(!empty($_POST)) {
-			$plugin->install($_POST['config']);
-			$this->_redirect('plugins/');
-		}
-		
-		$record = $this->_table->findByName($name);
-		if($record) {
-			$this->_redirect('plugins/');
-		}
-		
-		
-		$this->render('plugins/install.php', compact('plugin'));
+		return $this->render('plugins/browse.php', compact('plugins'));
 	}
 	
 	public function reinstallAction()

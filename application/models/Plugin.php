@@ -1,6 +1,5 @@
 <?php
 require_once 'Metafield.php';
-require_once 'PluginTable.php';
 /**
  * Used for plugin storage in the database
  *
@@ -21,31 +20,6 @@ class Plugin extends Kea_Record
         $this->hasColumn('config', 'array', null);
         $this->hasColumn('active', 'boolean', null, array('default'=>'0', 'notnull' => true));		
 		$this->index('active', array('fields'=>array('active')));
-	}
-	
-	public function __get($name) {
-		$plugin_name = $this->name;
-		if($plugin_name) {
-			$path = PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin_name.DIRECTORY_SEPARATOR.$plugin_name.'.php';
-			require_once $path;
-			
-			$router = Kea_Controller_Front::getInstance()->getRouter();
-			$plugin = new $plugin_name($router,$this);
-					
-			switch ($name) {
-				case 'description':
-					return $plugin->getMetaInfo('description');
-					break;
-				case 'author':
-					return $plugin->getMetaInfo('author');
-				default:
-					return parent::__get($name);
-					break;
-			}			
-		}
-
-		
-		return parent::__get($name);
 	}
 	
 	public function commitForm($post, $save=true, $options=array())

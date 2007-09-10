@@ -8,6 +8,8 @@ class Collection extends Kea_Record {
 
 	public function construct()
 	{
+		require_once 'Relatable.php';
+		require_once 'Entity.php';
 		$this->_strategies[] = new Relatable($this);
 	}
 

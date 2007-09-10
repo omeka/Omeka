@@ -202,7 +202,7 @@ class ItemsController extends Kea_Controller_Action
 		$pagination = array('menu'=>$menu, 'page'=>$options['page'], 'per_page'=>$params['per_page'], 'total_results'=>$total_results, 'link'=>$options['pagination_url']);
 		Zend::register('pagination', $pagination);
 		
-		$this->pluginHook('onBrowseItems', array($items));
+		fire_plugin_hook('browse_items', $items);
 		
 		return $this->render('items/browse.php', compact('total_items', 'items'));
 	}
@@ -250,14 +250,14 @@ class ItemsController extends Kea_Controller_Action
 		//@todo Does makeFavorite require a permissions check?
 		if($this->getRequest()->getParam('makeFavorite')) {
 			$item->toggleFavorite($user);
-			$this->pluginHook('onMakeFavoriteItem', array($item, $user));
+			fire_plugin_hook('make_item_favorite',  $item, $user);
 		}
 
 		$item->refresh();
 		
 		Zend::register('item', $item);
 		
-		$this->pluginHook('onShowItem', array($item));
+		fire_plugin_hook('show_item', $item);
 		
 		return $this->render('items/show.php', compact("item", 'user'));
 	}
@@ -314,9 +314,18 @@ class ItemsController extends Kea_Controller_Action
 					$item = $this->findById($fields['id']);
 		
 					//Process the public field
+					
+					//Existing status must be compared against new status for the sake of plugin hooks
+					$old = $item->public;
+					$new = array_key_exists('public', $fields);
+					
+					//If the item was made public, fire the plugin hook
+					if(!$old and $new) {
+						fire_plugin_hook('make_item_public', $item);
+					}
 									
 					//If public has been checked
-					$item->public = array_key_exists('public', $fields);
+					$item->public = $new;
 					
 					$item->featured = array_key_exists('featured', $fields);
 									

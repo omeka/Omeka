@@ -36,7 +36,12 @@ final class Kea
 		$auth = Zend::Registry('auth');
 		if ($auth->isLoggedIn()) {
 			$token = $auth->getToken();
-			return $token->getIdentity();
+			$user_id = $token->getIdentity();
+			
+			require_once 'User.php';
+			$user = Doctrine_Manager::getInstance()->getTable('User')->find($user_id);
+			
+			return $user;
 		}
 		return false;
 	}

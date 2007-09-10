@@ -15,8 +15,10 @@ class Kea_Auth_Adapter extends Zend_Auth_Adapter
 		// The user was logged in correctly
 		if (count($user) === 1) {
 			$valid = true;
-			$identity = $user[0];
-			return new Kea_Auth_Token($valid, $identity);
+			$user = $user[0];
+			
+			$user_id = $user->id;
+			return new Kea_Auth_Token($valid, $user_id);
 		}
 		else {
 			unset($options['password']);

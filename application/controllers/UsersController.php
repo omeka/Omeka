@@ -13,7 +13,7 @@ class UsersController extends Kea_Controller_Action
 	
 	public function init() {
 		$this->_table = $this->getTable('User');
-		$this->_modelClass = 'User';
+		$this->_modelClass = 'User';		
 	}
 
 	public function forgotPasswordAction()
@@ -182,7 +182,7 @@ class UsersController extends Kea_Controller_Action
 							 'password' => $_POST['password']);
 
 			$token = $auth->authenticate($options);
-			
+
 			if ($token->isValid()) {
 				//Avoid a redirect by passing an extra parameter to the AJAX call
 				if($this->_getParam('noRedirect')) {
