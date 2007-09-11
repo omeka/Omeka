@@ -47,7 +47,10 @@ class PluginBroker
 			$this->setCurrentPlugin($name);
 	
 			//Require the file that contains the plugin
-			require_once PLUGIN_DIR . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'plugin.php';
+			$path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'plugin.php';
+			if(file_exists($path)) {
+				require_once $path;
+			}
 		}
 		
 		//Get the list of currently installed plugins
