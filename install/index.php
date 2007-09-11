@@ -22,7 +22,7 @@ require_once '../paths.php';
  */
 require_once 'Zend.php';
 require_once 'Zend/Config/Ini.php';
-
+require_once 'plugins.php';
 try {
 	//Check for the config file
 	$config_file = CONFIG_DIR . DIRECTORY_SEPARATOR . 'db.ini';
@@ -131,38 +131,20 @@ if (isset($_REQUEST['install_submit'])) {
 		
 	
 		// Namespace for the authentication session (to prevent clashes on shared servers)
-		require_once 'Option.php';
-		$auth_prefix = new Option();
-		$auth_prefix->name = 'auth_prefix';
-		$auth_prefix->value = md5(mt_rand());
-		$auth_prefix->save();
+		$optionTable = $manager->getTable('Option')->getTableName();
 		
-		// Add the migration option to the DB
-		$migration = new Option;
-		$migration->name = 'migration';
-		$migration->value = OMEKA_MIGRATION;
-		$migration->save();
+		$optionSql = "INSERT INTO $optionTable (name, value) VALUES (?,?)";
+		$conn->execute($optionSql, array('auth_prefix', md5(mt_rand())));
+		$conn->execute($optionSql, array('migration', OMEKA_MIGRATION));
 		
 		// Add the settings to the db
 		$settings = array('administrator_email', 'copyright', 'site_title', 'author', 'description', 'thumbnail_constraint', 'fullsize_constraint', 'path_to_convert');
 		foreach ($settings as $v) {
-			$setting = new Option;
-			$setting->name = $v;
-			$setting->value = $_POST[$v];
-			$setting->save();
+			$conn->execute($optionSql, array($v, $_POST[$v]));
 		}
 		
-		// Set the default themes
-		$admin = new Option();
-		$admin->name = 'admin_theme';
-		$admin->value = 'default';
-		
-		$theme = new Option();
-		$theme->name = 'public_theme';
-		$theme->value = 'default';
-		
-		$admin->save();
-		$theme->save();
+		$conn->execute($optionSql, array('admin_theme', 'default'));
+		$conn->execute($optionSql, array('public_theme', 'default'));
 
 		echo '<div id="intro">';
 		echo '<h1>Oh Yeah!</h1>';
