@@ -32,10 +32,6 @@ class Kea_View extends Zend_View_Abstract
 	{
 		parent::__construct($config);
 		
-		if(!$controller) {
-			throw new Exception( 'Invalid Controller' );
-		}
-		
 		$this->_controller = $controller;
 		
 		if(isset($config['request'])) {
