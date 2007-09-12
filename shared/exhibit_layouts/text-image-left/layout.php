@@ -8,7 +8,7 @@
 	<div class="primary">
 		<div class="item">
 			<?php $item = page_item(1); ?>
-			<?php img_link_to_exhibit_item($item, array('class'=>'permalink'), 'fullsize'); ?>
+			<?php exhibit_fullsize($item); ?>
 			</div>	
 		</div>
 		<div class="secondary">		

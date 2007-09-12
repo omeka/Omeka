@@ -15,73 +15,73 @@
 
 		<div class="exhibit-item">
 		<?php $item = page_item(1); ?>
-		<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+		<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 	</div>
 	<?php endif; ?>
 	<?php if($item=page_item(2)): ?>
 	<div class="exhibit-item">
 		<?php $item = page_item(2); ?>
-		<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+		<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 	</div>
 	<?php endif; ?>
 	<?php if($item=page_item(3)):?>
 	<div class="exhibit-item">
 		<?php $item = page_item(3); ?>
-		<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+		<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 	</div>
 	<?php endif; ?>
 	<?php if($item=page_item(4)):?>
 	<div class="exhibit-item">
 		<?php $item = page_item(4); ?>
-		<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+		<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 	</div>
 	<?php endif; ?>
 	<?php if($item = page_item(5)):?>
 	<div class="exhibit-item">
 		<?php $item = page_item(5); ?>
-		<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+		<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 	</div>
 	<?php endif; ?>
 		<?php if($item = page_item(6)):?>
 		<div class="exhibit-item">
 			<?php $item = page_item(6); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		<?php if($item = page_item(7)):?>
 		<div class="exhibit-item">
 			<?php $item = page_item(7); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		<?php if($item = page_item(8)):?>
 		<div class="exhibit-item">
 			<?php $item = page_item(8); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		<?php if($item = page_item(9)):?>
 		<div class="exhibit-item">
 			<?php $item = page_item(9); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		<?php if($item = page_item(10)):?>
 		<div class="exhibit-item">
 			<?php $item = page_item(10); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		<?php if($item = page_item(11)):?>
 		<div class="exhibit-item">
 			<?php $item = page_item(11); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		<?php if($item = page_item(12)):?>
 		<div class="exhibit-item">
 			<?php $item = page_item(12); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 	</div>

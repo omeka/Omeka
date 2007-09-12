@@ -18,19 +18,19 @@
 		
 		<div class="exhibit-item">
 			<?php $item = page_item(2); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(3); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(4); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php if($item = page_item(5)): ?>
-			<?php 	link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php 	exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 			<?php endif; ?>
 		</div>
 

@@ -8,7 +8,7 @@
 	<div class="primary">
 	<div class="item-full">
 		<?php $item = page_item(1); ?>
-		<?php link_to_fullsize($item, array('class'=>'permalink')); ?>
+		<?php exhibit_fullsize($item); ?>
 		<?php echo $item->title; ?>
 		<?php echo $item->description; ?>
 	</div>
@@ -18,19 +18,19 @@
 		
 		<div class="exhibit-item">
 			<?php $item = page_item(2); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(3); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(4); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(5); ?>
-			<?php link_to_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 	</div><!--end secondary-->
 

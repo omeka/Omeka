@@ -8,7 +8,7 @@
 	<div class="primary">
 		<div class="exhibit-item">
 			<?php $item = page_item(1); ?>
-			<a href="<?php echo uri('items/show/'.$item->id); ?>" class="permalink"><?php fullsize($item->Files[0]); ?></a>
+			<?php exhibit_fullsize($item); ?>
 		</div>	
 	</div>
 	<div class="secondary">		

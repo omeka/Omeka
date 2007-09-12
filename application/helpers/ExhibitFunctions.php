@@ -1,6 +1,38 @@
 <?php 
 ///// EXHIBIT FUNCTIONS /////
 
+function exhibit_thumbnail($item, $props=array('class'=>'permalink')) 
+{	
+	$uri = exhibit_item_uri($item);
+		
+	echo '<a href="' . $uri . '">';
+	
+	$file = $item->Files[0];
+	
+	thumbnail($file, $props);
+	
+	echo '</a>';
+}
+
+/**
+ * Duplication of exhibit_thumbnail()
+ *
+ * @return void
+ **/
+function exhibit_fullsize($item, $props=array('class'=>'permalink'))
+{
+	$uri = exhibit_item_uri($item);
+		
+	echo '<a href="' . $uri . '">';
+	
+	$file = $item->Files[0];
+	
+	fullsize($file, $props);
+	
+	echo '</a>';
+}
+
+
 function section_has_pages($section) 
 {
 	return $section->Pages->count() > 0;
@@ -35,24 +67,6 @@ function link_to_exhibit_item($item, $props=array())
 	echo '<a href="' . $uri . '" '. _tag_attributes($props). '>' . h($item->title) . '</a>';
 }
 
-function img_link_to_exhibit_item($item, $props=array(), $type="thumbnail")
-{
-	$uri = exhibit_item_uri($item);
-	
-	echo '<a href="' . $uri . '" '._tag_attributes($props).'>';
-	switch ($type) {
-		case 'thumbnail':
-			thumbnail($item->Files[0]);
-			break;
-		case 'fullsize':
-			fullsize($item->Files[0]);
-		default:
-			break;
-	}
-	
-	echo '</a>';
-}
-
 function exhibit_item_uri($item, $exhibit=null, $section=null)
 {
 	if(!$exhibit) {
@@ -63,7 +77,15 @@ function exhibit_item_uri($item, $exhibit=null, $section=null)
 		$section = Zend::Registry( 'section' );
 	}
 	
-	return uri('exhibits/' . $exhibit->slug . '/' . $section->slug . '/item/' . $item->id);
+	//If the exhibit has a theme associated with it
+	if(!empty($exhibit->theme)) {
+		return uri('exhibits/' . $exhibit->slug . '/' . $section->slug . '/item/' . $item->id);
+	}
+	
+	else {
+		return generate_url(array('controller'=>'items','action'=>'show','id'=>$item->id), 'id');
+	}
+	
 }
 
 function exhibits($params = array()) {
@@ -164,6 +186,7 @@ function layout_form_item($order, $label='Enter an Item ID #') {
 }
 
 function layout_form_text($order, $label='Text') {
+	
 	echo '<div class="textfield">';
 	textarea(array('name'=>'Text['.$order.']','rows'=>'10','cols'=>'40','class'=>'textinput'), page_text($order, false), $label); 
 	echo '</div>';
