@@ -1,7 +1,6 @@
 <?php exhibit_head(); ?>
 
 <h2><?php echo $section->title; ?></h2>			
-<?php page_nav(); ?>
 			
 <div id="primary">
 	<div class="exhibit-content"><!--exhibit content-->
