@@ -285,7 +285,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<div id="file-list">
 		<ul>
 	<?php foreach( $item->Files as $key => $file ): ?>
-		<li><a class="show" title="View File Metadata" href="<?php echo uri('files/edit/'.$file->id); ?>">	
+		<li><a class="show" title="View File Metadata" href="<?php echo file_download_uri($file); ?>">	
 						<?php echo h($file->original_filename); ?>
 				</a></li>
 		
