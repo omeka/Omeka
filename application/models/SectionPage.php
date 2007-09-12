@@ -54,23 +54,18 @@ class SectionPage extends Kea_Record
 	 * @return void
 	 **/
 	public function preCommitForm(&$post, $options)
-	{
-		if(!empty($post['Text'])) {
-			//Process the text fields
-			foreach ($post['Text'] as $key => $text) {
-				$ip = $this->ItemsPages[$key];
-				$ip->text = $ip->strip($text);
-				$ip->order = $key;
-			}
-		}
+	{			
+		$textCount = count($post['Text']);
+		$itemCount = count($post['Item']);
+		$highCount = ($textCount > $itemCount) ? $textCount : $itemCount;	
 		
-		if(!empty($post['Item'])) {
-			//Process the Item fields
-			foreach ($post['Item'] as $key => $item_id) {
-				$ip = $this->ItemsPages[$key];
-				$ip->item_id = is_numeric($item_id) ? $item_id : null;
-				$ip->order = $key;
-			}
+		for ($i=1; $i <= $highCount; $i++) { 
+			$ip = $this->ItemsPages[$i];
+			$text = $post['Text'][$i];
+			$item_id = $post['Item'][$i];
+			$ip->text = (string) $ip->strip($text);
+			$ip->item_id = (int) is_numeric($item_id) ? $item_id : null;
+			$ip->order = (int) $i;
 		}
 	}
 	
