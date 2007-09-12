@@ -118,6 +118,10 @@ class File extends Kea_Record {
 	
 	protected function getExtendedMetadata()
 	{
+		if(!$this->lookup_id) {
+			return;
+		}
+		
 		$lookupTable = $this->getTableName('FileMetaLookup');
 		$fileTable = $this->getTableName();
 		$sql = "SELECT table_name FROM $lookupTable l WHERE l.id = {$this->lookup_id}";
