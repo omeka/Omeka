@@ -58,9 +58,17 @@ class FilesController extends Kea_Controller_Action
 		
 		$this->checkFilePermission($file);
 		
-		$path = $file->getPath($format);
 		
-		header('Content-type: ' . (string) $file->mime_type);
+		//If we don't have any images associated with this file, then use the full archive path
+		if(!$file->has_derivative_image) {
+			$format = 'archive';
+		}
+
+		//Otherwise use the chosen format of the image
+		
+		$path = $file->getPath($format);
+
+		header('Content-type: ' . (string) $file->mime_browser);
 
 		$type = $this->_getParam('type');
 		
