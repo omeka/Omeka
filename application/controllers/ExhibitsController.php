@@ -64,9 +64,8 @@ class ExhibitsController extends Kea_Controller_Action
 			
 		$item = $this->findById($item_id, 'Item');	
 		
-		$section_order = $this->_getParam('section_order');
-
-		$section = $exhibit->getSection($section_order);
+		$section_name = $this->_getParam('section');
+		$section = $exhibit->getSection($section_name);
 
 		if( $item->isInExhibit($exhibit->id) ) {
 			
@@ -83,7 +82,7 @@ class ExhibitsController extends Kea_Controller_Action
 			//Plugin hooks
 			fire_plugin_hook('show_exhibit_item',  $item, $exhibit);
 			
-			return $this->renderExhibit(compact('exhibit','item'), 'item');
+			return $this->renderExhibit(compact('exhibit','item', 'section'), 'item');
 		}else {
 			$this->flash('This item is not used within this exhibit.');
 			$this->_redirect('403');
