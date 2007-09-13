@@ -118,11 +118,10 @@ require_once 'Zend/Controller/Front.php';
 require_once 'Zend/Controller/RewriteRouter.php';
 
 
-// Retrieve the ACL from the db, or create a new ACL object
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
+require_once 'Item.php';
+require_once 'Option.php';
 
-
-
+//Setup the ACL
 include 'acl.php';
 
 Zend::register('acl', $acl);
@@ -131,15 +130,6 @@ require_once 'Zend/Auth.php';
 require_once 'Kea/Auth/Adapter.php';
 
 $authPrefix = get_option('auth_prefix');
-
-//Leave this in for development, take it out for release
-if(!$authPrefix) {
-	$authPrefix = md5(mt_rand());
-	$prefixOption = new Option();
-	$prefixOption->name = 'auth_prefix';
-	$prefixOption->value = $authPrefix;
-	$prefixOption->save();
-}
 
 //Set up the authentication mechanism with the specially generated prefix
 require_once 'Zend/Auth.php';
