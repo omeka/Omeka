@@ -116,6 +116,55 @@ class Item extends Kea_Record
 	}
 	
 	/**
+	 * @duplication
+	 * @see Exhibit::postInsert()
+	 * @since 9/13/07
+	 **/
+	//Make sure you set the entity relationships
+	public function postInsert()
+	{
+		$entity = Kea::loggedIn()->Entity;
+		
+		$this->setAddedBy($entity);
+	}
+	
+	//Make sure you set the entity relationships
+	public function postUpdate()
+	{
+		$entity = Kea::loggedIn()->Entity;
+		
+		$this->setModifiedBy($entity);
+	}
+	
+	public function delete()
+	{
+		fire_plugin_hook('delete_item', $this);
+		
+		$this->deleteTaggings();
+		$this->deleteRelations();
+		
+		$id = (int) $this->id;
+		
+		//Delete all of the physical files
+		foreach ($this->Files as $file) {
+			$file->deleteFiles();
+		}
+		
+		//Delete metatext, files, items
+		$delete = "DELETE metatext, files, items FROM items
+		LEFT JOIN metatext ON metatext.item_id = items.id
+		LEFT JOIN files ON files.item_id = items.id
+		WHERE items.id = $id";
+		
+		$this->execute($delete);
+		
+		//Update the items_section_pages table to remove invalid item IDs
+		$update = "UPDATE items_section_pages SET item_id = NULL WHERE item_id = $id";
+		
+		$this->execute($update);
+	}
+	
+	/**
 	 * Optimized queries for obtaining related elements
 	 *
 	 * @return mixed

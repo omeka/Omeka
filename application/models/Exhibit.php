@@ -36,7 +36,7 @@ class Exhibit extends Kea_Record
 
     public function setUp()
     {
-		$this->ownsMany('Section as Sections', 'Section.exhibit_id');
+		$this->ownsMany('Section as Sections', array('local'=>'id', 'foreign' => 'exhibit_id') );
 		$this->ownsMany("ExhibitTaggings", "ExhibitTaggings.relation_id");
     }
 	
@@ -54,9 +54,53 @@ class Exhibit extends Kea_Record
 		}
 	}
 	
+	public function delete()
+	{
+		fire_plugin_hook('delete_exhibit', $this);
+		
+		//Manually delete from the sections, section_pages, items_section_pages, taggings tables
+		$exhibit_id = $this->id;
+		
+		if(empty($exhibit_id)) return;
+		
+		$this->deleteTaggings();
+				
+		//Delete everything from the entities_relations table
+		
+		$this->deleteRelations();
+		
+		//This query will delete everything from the exhibits tables when an exhibit is deleted
+		//This is semi-duplicated in the Section, SectionPage, ItemsPages models as necessary
+		
+		$delete = "DELETE items_section_pages, section_pages, sections, exhibits FROM exhibits 
+		LEFT JOIN sections ON sections.exhibit_id = exhibits.id
+		LEFT JOIN section_pages ON section_pages.section_id = sections.id
+		LEFT JOIN items_section_pages ON items_section_pages.page_id = section_pages.id
+		WHERE exhibits.id = $exhibit_id;";
+		
+		$this->execute($delete);
+	}
+	
 	public function construct()
 	{
 		$this->_strategies[] = new Taggable($this);
+		$this->_strategies[] = new Relatable($this);
+	}
+	
+	public function postInsert()
+	{
+		//Set the name of the entity who added this
+		$e = Kea::loggedIn()->Entity;
+		
+		$this->setAddedBy($e);
+	}
+	
+	public function postUpdate()
+	{
+		//Set the name of the entity who edited this
+		$e = Kea::loggedIn()->Entity;
+		
+		$this->setModifiedBy($e);
 	}
 	
 	public function generateSlug($title)

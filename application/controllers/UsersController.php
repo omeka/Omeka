@@ -15,7 +15,31 @@ class UsersController extends Kea_Controller_Action
 		$this->_table = $this->getTable('User');
 		$this->_modelClass = 'User';		
 	}
-
+	
+	/**
+	 * @duplication
+	 * @see EntitiesController::deleteAction()
+	 * @since 9/13/07
+	 **/
+	public function deleteAction()
+	{
+		$user = $this->findById();
+		
+		if( ($user->role == 'super') and !$this->isAllowed('deleteSuperUser')) {
+			$this->flash('You are not allowed to delete super users!');
+			$this->_redirect('users/browse');
+		}
+		
+		$current = Kea::loggedIn();
+		
+		if($current->id == $user->id) {
+			$this->flash('You are not allowed to delete yourself!');
+			$this->_redirect('users/browse');
+		}
+		
+		return parent::deleteAction();
+	}
+	
 	public function forgotPasswordAction()
 	{
 		

@@ -17,7 +17,6 @@ class Plugin extends Kea_Record
 		$this->option('type', 'MYISAM');
 		$this->setTableName("plugins");
        	$this->hasColumn('name', 'string', 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
-        $this->hasColumn('config', 'array', null);
         $this->hasColumn('active', 'boolean', null, array('default'=>'0', 'notnull' => true));		
 		$this->index('active', array('fields'=>array('active')));
 	}

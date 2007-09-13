@@ -2,7 +2,7 @@
 /**
 * Relatable strategy
 */
-class Relatable	implements Kea_Strategy_Interface
+class Relatable
 {
 	protected $record;
 	
@@ -19,10 +19,30 @@ class Relatable	implements Kea_Strategy_Interface
 	{
 		return call_user_func_array( array($this->record, $m), $a);
 	}
-	
-	public function onDelete() {}
-	public function onSave() {}
-	
+
+	public function deleteRelations()
+	{
+		/**
+		 * @duplication 
+		 * @see Taggable::deleteTaggings()
+		 * @since 9/13/07
+		 */
+		
+		$id = (int) $this->record->id;
+		
+		//What table should we be deleting taggings for
+		$model_table = $this->record->getTableName();
+		
+		//Polymorphic 'type' column in this table
+		$type = (string) get_class($this->record);
+		
+		$relations = "DELETE entities_relations FROM entities_relations
+		LEFT JOIN $model_table ON entities_relations.relation_id = $model_table.id
+		WHERE $model_table.id = $id AND entities_relations.type = '$type'";
+		
+		$this->execute($relations);
+	}
+
 	/**
 	 * Get the last date the item was modified, etc.
 	 * @example getLastRelationship('modified') returns the date of the last modification
@@ -65,7 +85,15 @@ class Relatable	implements Kea_Strategy_Interface
 	 **/
 	public function addRelatedTo($entity, $relationship )
 	{
-		$entity_id = ($entity instanceof Kea_Record) ? $entity->id : $entity;		
+		$entity_id = (int) ($entity instanceof Kea_Record) ? $entity->id : $entity;		
+	
+		//If the entity_id is 0, die because that won't work
+		if($entity_id == 0) {
+		//	throw new Exception( 'Invalid entity provided!' );
+		
+			//For now, fail silently because there's no use in bitching about it
+			return false;
+		}
 	
 		$relation_id = $this->getRelationId();
 		

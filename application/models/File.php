@@ -399,7 +399,7 @@ class File extends Kea_Record {
 		return ( $convert_return == 0 );
 	}
 	
-	protected function deleteFiles() {
+	public function deleteFiles() {
 		$files = array( 
 			$this->getPath('fullsize'), 
 			$this->getPath('thumbnail'), 

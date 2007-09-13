@@ -43,7 +43,7 @@ class TaggingsTable extends Doctrine_Table
 			
 			$q->innerJoin("tg.Entity e");
 			
-			$entity_id = is_numeric($entity) ? $entity : $entity->id;
+			$entity_id = is_numeric($entity) ? $entity : (int) $entity->id;
 			
 			$q->addWhere("e.id = ?", array($entity_id));
 		}

@@ -16,7 +16,35 @@ class EntitiesController extends Kea_Controller_Action
 		$this->_table = $this->getTable('Entity');
 		$this->_modelClass = 'Entity';
 	}
-
+	
+	public function deleteAction()
+	{
+		$entity = $this->findById();
+		
+		//Check the permissions of the user associated with this entity
+		$user = $entity->User;
+		
+		if($user->exists()) {
+			//If we are trying to delete the entity that belongs to a super user
+			if( ($user->role == 'super') and !$this->isAllowed('deleteSuperUser') ) {
+				$this->flash('You are not allowed to delete names that are associated with super users!');
+				$this->_redirect('entities/browse');
+			}
+			
+			$current = Kea::loggedIn();
+			
+			//We can't delete ourselves
+			if( $user->id == $current->id ) {
+				$this->flash('You are not allowed to delete yourself!');
+				$this->_redirect('entities/browse');
+			}
+		}
+		
+		return parent::deleteAction();
+	}
+	
+	
+	
 	public function addAction()
 	{
 		$e = new Entity;

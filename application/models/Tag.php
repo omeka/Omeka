@@ -32,17 +32,23 @@ class Tag extends Kea_Record {
 	 *
 	 * @return bool
 	 **/
-
 	public function delete($entity = null) {
-		if(!$entity) {
-			return parent::delete();
-		}
-	
-		$table = Zend::Registry( 'doctrine' )->getTable('Taggings');
-
-		$joins = $table->findBy(array('entity'=>$entity, 'tag'=>$this));
+		fire_plugin_hook('delete_tag', $this);
 		
-		$joins->delete();
+		$tag_id = (int) $this->id;
+		
+		//Delete all from taggings that have this specific tag
+		$delete = "DELETE taggings, tags FROM tags 
+		LEFT JOIN taggings ON taggings.tag_id = tags.id
+		WHERE tags.id = $tag_id";
+		
+		//Delete only for a specific entity if we have passed one
+		if($entity instanceof Entity) {
+			$entity_id = (int) $entity->id;
+			$delete .= " AND taggings.entity_id = $entity_id;";
+		}		
+		
+		$this->execute($delete);
 	}
 	
 	/**

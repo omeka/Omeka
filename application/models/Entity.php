@@ -215,20 +215,21 @@ class Entity extends Kea_Record
 
 	//END ADJACENCY LIST CODE
 
-	/**
-	 * Delete also needs to clear out the parent_id fields of the entity's children
-	 *
-	 **/
 	public function delete()
 	{
-		if($this->exists()) {
-			$sql = "UPDATE ". $this->getTableName() . " t SET t.parent_id = NULL WHERE t.parent_id = {$this->id}";
-			$this->execute($sql);
-		}
-		
 		fire_plugin_hook('delete_entity', $this);
 		
-		return parent::delete();
+		$id = (int) $this->id;
+		
+		//Delete also needs to clear out the parent_id fields of the entity's children	
+		$delete = "DELETE taggings, entities_relations, entities, users FROM entities
+		LEFT JOIN taggings ON taggings.entity_id = entities.id
+		LEFT JOIN entities_relations ON entities_relations.entity_id = entities.id
+		LEFT JOIN users ON users.entity_id = entities.id
+		WHERE entities.id = $id;
+		UPDATE entities t SET t.parent_id = NULL WHERE t.parent_id = $id;";
+				
+		$this->execute($delete);		
 	}
 	
 	

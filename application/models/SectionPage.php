@@ -26,8 +26,18 @@ class SectionPage extends Kea_Record
 	public function delete()
 	{
 		$section = $this->Section;
-		$retVal = parent::delete();
 		
+		$id = (int) $this->id;
+		
+		fire_plugin_hook('delete_exhibit_page', $this);
+		
+		//Delete thyself and all thine dependencies
+		$delete = "DELETE items_section_pages, section_pages FROM section_pages
+		LEFT JOIN items_section_pages ON items_section_pages.page_id = section_pages.id
+		WHERE section_pages.id = $id;";
+		
+		$this->execute($delete);
+				
 		$section->reorderPages();
 	}
 	

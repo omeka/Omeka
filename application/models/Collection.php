@@ -27,7 +27,50 @@ class Collection extends Kea_Record {
         $this->hasColumn('public', 'boolean', null, array('notnull' => true));
         $this->hasColumn('featured', 'boolean', null, array('notnull' => true));
     }
-
+	
+	
+	/**
+	 * @duplication
+	 * @see Item::postInsert(), Item::postUpdate()
+	 * @since 9/13/07
+	 * @return void
+	 **/
+	//Make sure you set the entity relationships
+	public function postInsert()
+	{
+		$entity = Kea::loggedIn()->Entity;
+		
+		$this->setAddedBy($entity);
+	}
+	
+	//Make sure you set the entity relationships
+	public function postUpdate()
+	{
+		$entity = Kea::loggedIn()->Entity;
+		
+		$this->setModifiedBy($entity);
+	}
+	
+	public function delete()
+	{
+		fire_plugin_hook('delete_collection', $this);
+		
+		//Take care of the entities_relations DB rows
+		$this->deleteRelations();
+		
+		$id = (int) $this->id;
+		
+		//Remove this collection
+		$delete = "DELETE collections FROM collections WHERE id = $id";
+		
+		$this->execute($delete);
+		
+		//Reset the collection_id field for the relevant items
+		$update = "UPDATE items SET collection_id = NULL WHERE collection_id = $id";
+		
+		$this->execute($update);
+	}
+	
 	public function get($name) {
 		switch ($name) {
 			case 'added':

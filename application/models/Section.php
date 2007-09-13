@@ -34,9 +34,22 @@ class Section extends Kea_Record
 	public function delete()
 	{
 		$exhibit = $this->Exhibit;
-		$retVal = parent::delete();
+		
+		$id = (int) $this->id;
+		
+		fire_plugin_hook('delete_exhibit_section', $this);
+		
+		//Delete thyself and all thine dependencies
+		$delete = "DELETE items_section_pages, section_pages, sections FROM sections 
+		LEFT JOIN section_pages ON section_pages.section_id = sections.id
+		LEFT JOIN items_section_pages ON items_section_pages.page_id = section_pages.id
+		WHERE sections.id = $id;";
+		
+		$this->execute($delete);
 		
 		$exhibit->reorderSections();
+		
+		return $retVal;
 	}
 	
 	/**
@@ -74,9 +87,10 @@ class Section extends Kea_Record
 		$i = 1;
 		foreach ($pages as $key => $page) {
 			$page->order = $i;
-			$page->save();
 			$i++;
 		}
+		
+		$pages->save();
 	}
 	
 	public function loadPages()

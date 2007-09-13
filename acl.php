@@ -27,7 +27,7 @@ $acl->registerRule(new Zend_Acl_Resource('Static'), array('browse'));
 $acl->registerRule(new Zend_Acl_Resource('Tags'), array('rename','remove'));
 $acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
 $acl->registerRule(new Zend_Acl_Resource('Types'), array('add','edit','delete'));
-$acl->registerRule(new Zend_Acl_Resource('Users'), array('browse','show','add','edit','delete','showRoles','editRoles','makeSuperUser', 'changeRole'));
+$acl->registerRule(new Zend_Acl_Resource('Users'), array('browse','show','add','edit','delete','showRoles','editRoles','makeSuperUser', 'changeRole', 'deleteSuperUser'));
 $acl->registerRule(new Zend_Acl_Resource('Exhibits'), array('add', 'edit', 'delete', 'addPage', 'editPage', 'deletePage', 'addSection', 'editSection', 'deleteSection', 'save', 'showNotPublic'));
 
 $acl->allow('super'); 

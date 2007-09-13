@@ -43,7 +43,7 @@ class TagsController extends Kea_Controller_Action
 				if($this->isAllowed('remove')) {
 					$tag->delete();
 				}else {
-					$tag->delete($user->id);
+					$tag->delete($user->Entity);
 				}
 				$this->flash("Tag named '{$tag->name}' was successfully deleted.");
 			}

@@ -31,7 +31,21 @@ class Metafield extends Kea_Record {
 		$this->hasColumn("plugin_id", "integer");
 		$this->index('plugin', array('fields'=>array('plugin_id')));
  	}
-
+	
+	public function delete()
+	{
+		fire_plugin_hook('delete_metafield', $this);
+		
+		$id = (int) $this->id;
+		
+		$delete = "DELETE types_metafields, metatext, metafields FROM metafields
+		LEFT JOIN types_metafields ON types_metafields.metafield_id = metafields.id
+		LEFT JOIN metatext ON metatext.metafield_id = metafields.id
+		WHERE metafields.id = $id;";
+		
+		$this->execute($delete);
+	}
+	
 	public static function names($prefix=true) {
 		$conn = Doctrine_Manager::getInstance()->connection();
 		

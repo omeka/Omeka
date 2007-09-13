@@ -320,9 +320,6 @@ DROP TABLE IF EXISTS `plugins`;
 CREATE TABLE IF NOT EXISTS `plugins` (
   `id` bigint(20) NOT NULL auto_increment,
   `name` varchar(255)  NOT NULL,
-  `description` text  NOT NULL,
-  `author` text  NOT NULL,
-  `config` text ,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),

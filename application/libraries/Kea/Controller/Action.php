@@ -486,10 +486,6 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		try {
 			if($$varName->commitForm($_POST))
 			{
-				if($$varName->hasStrategy('Relatable')) {
-					$user = Kea::loggedIn();
-					$$varName->setAddedBy($user);
-				}
 				$this->_redirect('add',array('controller'=>$pluralName));
 			}
 		} catch (Exception $e) {
@@ -513,12 +509,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		
 		try {
 			if($$varName->commitForm($_POST))
-			{
-				if($$varName->hasStrategy('Relatable')) {
-					$user = Kea::loggedIn();
-					$$varName->setModifiedBy($user);
-				}
-								
+			{	
 				//Avoid a redirect by passing an extra parameter to the AJAX call
 				if($this->_getParam('noRedirect')) {
 					$this->_forward($pluralName, 'show');

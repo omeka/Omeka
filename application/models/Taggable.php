@@ -1,11 +1,10 @@
 <?php
-require_once 'Kea/Strategy/Interface.php';
 /**
  * Taggable
  * Adaptation of the Rails Acts_as_taggable
  * @package: Omeka
  */
-class Taggable implements Kea_Strategy_Interface
+class Taggable
 {
 	protected $record;
 	
@@ -15,30 +14,36 @@ class Taggable implements Kea_Strategy_Interface
 		
 		$this->type = get_class($record);
 		
-		$this->tagTable = Zend::Registry('doctrine')->getTable('Tag');
+		$this->tagTable = Doctrine_Manager::getInstance()->getTable('Tag');
 		
-		$this->joinTable = Zend::Registry( 'doctrine' )->getTable('Taggings');
+		$this->joinTable = Doctrine_Manager::getInstance()->getTable('Taggings');
 		
 		$this->conn = Doctrine_Manager::getInstance()->connection();
+	}
+	
+	public function deleteTaggings()
+	{
+		$id = (int) $this->record->id;
+		
+		//What table should we be deleting taggings for
+		$model_table = $this->record->getTableName();
+		
+		//Polymorphic 'type' column in this table
+		$type = (string) get_class($this->record);
+		
+		//Delete everything from the taggings table
+		
+		$taggings = "DELETE taggings FROM taggings
+		LEFT JOIN $model_table ON taggings.relation_id = $model_table.id
+		WHERE $model_table.id = $id AND taggings.type = '$type'";
+		
+		$this->execute($taggings);
 	}
 		
 	public function __call($m, $a)
 	{
 		return call_user_func_array( array($this->record, $m), $a);
 	}
-
-	/**
-	 * Bit of a hook to help with deleting Taggings (or anything else)
-	 * 
-	 * This particular method allows us to delete Taggings without setting up
-	 * dependencies like Item::ownsMany(ItemsTaggings) via Doctrine
-	 * which doesn't work b/c Doctrine doesn't allow for polymorphic relationships
-	 *
-	 * @return void
-	 **/
-	public function onDelete() {}
-	
-	public function onSave() {}
 	
 	public function getTaggings()
 	{
