@@ -1,4 +1,5 @@
 <?php
+require_once 'globals.php';
 require_once 'Doctrine.php';
 //require_once 'Doctrine.compiled.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
