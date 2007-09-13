@@ -62,8 +62,12 @@ try {
 	if(empty($tables)) {
 		// Build the tables explicitly
 		$installSQL = file_get_contents('install.sql');
-		
-		$dbh->query($installSQL);
+
+		$stmts = explode(';', $installSQL);
+
+		foreach ($stmts as $sql) {
+			$dbh->query($sql);
+		}
 	}
 
 	// Setup Doctrine
