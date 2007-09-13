@@ -314,7 +314,11 @@ function render_exhibit_page()
 	try {
 		$section = Zend::Registry('section');
 		$page = Zend::Registry('page');
-		include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$page->layout.DIRECTORY_SEPARATOR.'layout.php';
+		if ($page->layout) {
+			include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$page->layout.DIRECTORY_SEPARATOR.'layout.php';
+		} else {
+			echo "this section has no pages added to it yet";
+		}
 	} catch (Exception $e) {}
 	
 }
