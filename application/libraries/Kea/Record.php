@@ -305,7 +305,7 @@ abstract class Kea_Record extends Doctrine_Record
 		if($fetchOne)
 			return $res->fetchColumn(0);
 		else 
-			if ($res->columnCount != 0) {
+			if ($res->columnCount() != 0) {
 				return $res->fetchAll(PDO::FETCH_ASSOC);
 			}
 	}

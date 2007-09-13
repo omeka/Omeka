@@ -115,7 +115,10 @@ class Kea_Upgrader
 			return $conn->fetchOne($sql, $params);
 			
 		$res = $conn->execute($sql, $params);
-		return $res->fetchAll(PDO::FETCH_ASSOC);
+		if ($res->columnCount() != 0)
+			return $res->fetchAll(PDO::FETCH_ASSOC);
+		else
+			return array();
 	}
 	
 } // END class Kea_Upgrader 
