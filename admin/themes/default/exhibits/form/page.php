@@ -2,7 +2,6 @@
 
 <?php js('search'); ?>
 
-
 <script type="text/javascript" charset="utf-8">
 /*
 	    Event.observe(window,'load',function() {
@@ -30,45 +29,6 @@
 		});
 		
 	});
-	
-	Event.observe(window, 'load', makeLayoutSelectable);
-	
-	function makeLayoutSelectable() {
-		$('layout-submits').hide();
-		var current_layout = $('current_layout');
-		var layouts = document.getElementsByClassName('layout');
-		
-		//Make each layout clickable
-		layouts.each( function(layout) {
-			layout.onclick = function() {
-				//Make a copy of the image
-				layouts.each(function(layout) {
-					layout.style.border = "1px solid #ccc";
-					layout.style.backgroundColor = "#fff";
-				})
-				this.style.border = "1px solid #6BA8DA";
-				this.style.backgroundColor = "#A2C9E8"
-				var img = this.getElementsByTagName('img')[0];
-				var copy = img.cloneNode(true);
-				var input = this.getElementsByTagName('input')[0];
-				var title = input.readAttribute('value');
-				var titletext = document.createTextNode(title);
-				var heading = document.createElement('h2');
-				heading.appendChild(titletext);
-				
-				//Overwrite the contents of the div that displays the current layout
-				current_layout.update();
-				current_layout.appendChild(copy);
-				current_layout.appendChild(heading);
-				$('layout-submits').show();
-				//new Effect.Highlight(current_layout);
-
-				//Make sure the input is selected
-				var input = this.getElementsByTagName('input')[0];
-				input.click();
-			}
-		});		
-	}
 	
 	function onLoadPagination() 
 	{
@@ -127,41 +87,6 @@
 
 <div id="page-builder">
 	<h1>Add Exhibit</h1>
-<?php if ( empty($page->layout) ): ?>
-<form method="post" id="choose-layout">
-
-		
-		
-		<?php 
-		//	submit('Exhibit', 'exhibit_form');
-		//	submit('New Page', 'page_form'); 
-		?>
-		
-	
-	<fieldset id="layouts">
-		<legend>Layouts</legend>
-		<div id="layout-thumbs">
-		<?php 
-			$layouts = get_ex_layouts();
-	
-			foreach ($layouts as $layout) {
-				exhibit_layout($layout);
-			} 
-		?>
-		</div>
-		<div id="chosen_layout">
-		<div id="current_layout"><p>Choose a layout by selecting a thumbnail on the right.</p></div>
-		
-		<p id="layout-submits">
-		<button type="submit" name="choose_layout" id="choose_layout" class="page-button">Choose This Layout</button>
-		or <button type="submit" name="cancel_and_section_form" id="section_form" class="cancel">Cancel</button></p>
-	</div>
-	</fieldset> 
-	
-</form>
-
-<?php else: ?>
-
 
 	<?php 
 		if(!$page->exists()) {
@@ -199,9 +124,10 @@
 		//	submit('Save &amp; Add Another Page', 'page_form');
 			//submit('Change the layout for this page', 'change_layout');	
 		?>
-		<p id="page-submits"><button id="section_form" name="section_form" type="submit">Save and Return to Section</button> or <button id="page_form" name="page_form" type="submit">Save and Add Another Page</button> or <button name="cancel" class="cancel">Cancel</button></p>
+		<p id="page-submits">
+			<button id="change_layout" name="change_layout" type="submit">Change the Current Layout</button> or 
+			<button id="section_form" name="section_form" type="submit">Save and Return to Section</button> or <button id="page_form" name="page_form" type="submit">Save and Add Another Page</button> or <button name="cancel" class="cancel">Cancel</button></p>
 		
 	</form>
-<?php endif; ?>
 </div>
 <?php foot(); ?>

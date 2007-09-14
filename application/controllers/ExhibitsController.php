@@ -438,6 +438,9 @@ class ExhibitsController extends Kea_Controller_Action
 			$this->_redirect('editExhibit', array('id'=>$section->exhibit_id));
 		}
 		
+		//Register the page var so that theme functions can use it
+		Zend::register('page', $page);
+		
 		if(!empty($_POST)) {
 			
 			if(array_key_exists('choose_layout', $_POST)) {
@@ -445,18 +448,28 @@ class ExhibitsController extends Kea_Controller_Action
 				//A layout has been chosen for the page
 				$this->setLayout($_POST['layout']);
 				
-		//		$page->save();
+				$page->layout = (string) $_POST['layout'];
 				
-				$this->_redirect('addPage', array('id'=> $section->id));
+				return $this->render('exhibits/form/page.php', compact('page','section'));
 			
 			}elseif(array_key_exists('change_layout', $_POST)) {
 				
 				//User wishes to change the current layout
-				$page->layout = null;		
+				
+				//Reset the layout vars
+				$this->setLayout(null);
+				$page->layout = null;
+				
+				return $this->render('exhibits/form/layout.php', compact('page','section'));		
 			}
 				
 			else {
 				try {
+					
+					if($layout = $this->getLayout()) {
+						$page->layout = $layout;
+					}
+
 					$retVal = $page->commitForm($_POST);
 				} catch (Exception $e) {
 					$this->flash($e->getMessage());
@@ -500,10 +513,12 @@ class ExhibitsController extends Kea_Controller_Action
 				}
 			}
 		}
-		
-		//Register the page var so that theme functions can use it
-		Zend::register('page', $page);
-		return $this->render('exhibits/form/page.php',compact('section','page'));		
+				
+		if ( empty($page->layout) ) {
+			return $this->render('exhibits/form/layout.php', compact('section','page'));
+		}else {
+			return $this->render('exhibits/form/page.php',compact('section','page'));	
+		}		
 	}
 	
 	/**
