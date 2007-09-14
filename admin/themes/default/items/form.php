@@ -157,7 +157,7 @@
 			</div>
 		
 		<?php if ( has_files($item) ): ?>
-			<div class="label">Edit existing files</div>
+			<div class="label">Edit File Metadata</div>
 			<div id="file-list">
 			<table>
 				<thead>

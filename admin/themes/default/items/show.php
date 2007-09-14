@@ -281,7 +281,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
 <?php else: ?>
 
-<h2>Files</h2>
+<h2>View File Metadata</h2>
 	<div id="file-list">
 		<ul>
 	<?php foreach( $item->Files as $key => $file ): ?>

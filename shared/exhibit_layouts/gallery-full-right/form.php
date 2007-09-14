@@ -5,6 +5,7 @@
 	<?php layout_form_item(1); ?>
 	<?php layout_form_text(1); ?>
 </div>
+
 <div class="secondary gallery">
 	<h3>Secondary</h3>
 	<?php layout_form_item(2); ?>
