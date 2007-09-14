@@ -241,10 +241,7 @@ class ExhibitsController extends Kea_Controller_Action
 
 	public function editAction()
 	{	
-		//Make sure the exhibit is retrieved with sections in the proper order		
-		$dql = "SELECT e.*, s.* FROM Exhibit e, e.Sections s WHERE e.id = :id ORDER BY s.section_order ASC";
-		$q = new Doctrine_Query;
-		$q->parseQuery($dql);
+		$exhibit = $this->findById();
 		
 /*		if(1==1) {
 			$q->addSelect("et.*");
@@ -253,10 +250,8 @@ class ExhibitsController extends Kea_Controller_Action
 			$q->addWhere("et.user_id = :user_id", array('user_id'=>$user_id));
 		}
 *///		echo $q;exit;
-		
-		$id = $this->_getParam('id');
-		
-		$exhibit = $q->execute(compact('id'))->getFirst();
+
+		$exhibit->loadSections();
 		
 		return $this->processExhibitForm($exhibit);
 	}	
