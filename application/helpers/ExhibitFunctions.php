@@ -160,6 +160,19 @@ function page_item($order)
 	if(!$item->exists()) {
 		return null;
 	}
+	
+	//Put in a permissions check so that un-viewable items do not show up
+	/**
+	 * This kind of duplication of permissions checking should be abstracted into a general location
+	 * @duplication
+	 * @see ItemsController:showAction()
+	 * @author Kris Kelly
+	 */
+	if(!$item->public and !has_permission('Items', 'showNotPublic'))
+	{
+		return null;
+	}
+	
 	return $item;
 }
 
