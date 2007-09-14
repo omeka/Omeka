@@ -18,6 +18,11 @@ function makeSortable(list) {
 	//Auto-update the form when someone clicks a delete link
 	var dl = listSorter.deleteLinks;
 	dl.each(function(e) {e.onclick = ajaxListDelete; });
+	
+	//When we submit the form, then enable the elements in the list so that they submit properly
+	Event.observe(listSorter.form, 'submit', function() {
+		enableListForm(true);
+	});
 }
 
 //Enable or disable the section part of the form (depending)
@@ -39,23 +44,6 @@ function reorderList(container) {
 		var order = i+1;
 		input.value = order;
 	};
-
-	enableListForm(true);
-	
-	var serialized = listSorter.form.serialize();
-	
-	//Why not send an AJAX request?  You know, for the hell of it.
-	if(listSorter.editUri) {
-		new Ajax.Request(listSorter.editUri, {
-			method:'post',
-			parameters: serialized,
-			onComplete: function(t) {
-				enableListForm(false);
-				
-			}
-		});		
-	}
-
 }
 
 function ajaxListDelete(event) {

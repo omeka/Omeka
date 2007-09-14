@@ -101,6 +101,8 @@ class ExhibitsController extends Kea_Controller_Action
 	{		
 		$exhibit = $this->findBySlug();
 
+		$exhibit->loadSections();
+
 		if(!$exhibit) {
 			throw new Exception( 'Exhibit with that ID does not exist.' );
 		}
@@ -163,6 +165,8 @@ class ExhibitsController extends Kea_Controller_Action
 	public function summaryAction()
 	{
 		$exhibit = $this->findBySlug();
+		
+		$exhibit->loadSections();
 		
 		$this->checkPermission($exhibit);
 		
@@ -508,10 +512,11 @@ class ExhibitsController extends Kea_Controller_Action
 	 **/
 	public function editSectionAction()
 	{
-		$dql = "SELECT s.*, p.* FROM Section s, s.Pages p WHERE s.id = ? ORDER BY p.page_order ASC";
-		$q = new Doctrine_Query;
-		$section_id = $this->_getParam('id');
-		$section = $q->parseQuery($dql)->execute(array($section_id))->getFirst();
+		$section = $this->findById(null, 'Section');
+		
+		$exhibit = $section->Exhibit;
+		
+		$section->loadPages();
 
 		return $this->processSectionForm($section, $exhibit);
 	}

@@ -5,6 +5,7 @@
 //<![CDATA[
 
 	Event.observe(window,'load',function() {
+		//When you click the 'add_new_section' button, add that section
 		$('add_new_section').onclick = function() {
 			var exhibit_id = getExhibitId();
 			
