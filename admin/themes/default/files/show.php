@@ -3,6 +3,15 @@
 
 <div id="primary">
 <h1>File #<?php echo h($file->id); ?></h1>
+
+<div id="lgimage" class="section">
+<?php if ($file->hasThumbnail()): ?>
+	<?php fullsize($file, array(), 400); ?>
+<?php else: ?>
+	<?php echo h($file->original_filename); ?>
+<?php endif; ?>
+<a href="<?php echo file_download_uri($file); ?>">Download this file</a>
+</div>
 	
 <div id="core-metadata" class="section">
 <h2>Core Metadata</h2>
@@ -54,15 +63,6 @@
 </dl>
 </div>
 	
-<div id="lgimage" class="section">
-<?php if ($file->hasThumbnail()): ?>
-	<?php fullsize($file, array(), 400); ?>
-<?php else: ?>
-	<?php echo h($file->archive_filename); ?>
-<?php endif; ?>
-<a href="<?php echo file_download_uri($file); ?>">Download this file</a>
-</div>
-
 <div id="file-history" class="section">
 <h2>File History</h2>
 <dl>
