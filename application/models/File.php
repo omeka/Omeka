@@ -99,6 +99,17 @@ class File extends Kea_Record {
 		return parent::get($name);
 	}
 	
+	public function preInsert()
+	{
+		$this->added = date("Y-m-d H:i:s");
+		$this->modified = date("Y-m-d H:i:s");
+	}
+	
+	public function preUpdate()
+	{
+		$this->modified = date("Y-m-d H:i:s");
+	}
+	
 	protected function preCommitForm(&$post, $options)
 	{
 		$immutable = array(
