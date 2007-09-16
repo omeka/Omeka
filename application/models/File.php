@@ -267,10 +267,13 @@ class File extends Kea_Record {
 				//Retrieve the image sizes from the database
 				$full_constraint = get_option('fullsize_constraint');
 				$thumb_constraint = get_option('thumbnail_constraint');
+				//$square_thumbnail_constraint = get_option('square_thumbnail_constraint');
 				
 				$this->createImage(FULLSIZE_DIR, $path, $full_constraint);
 				
 				$this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint);
+				
+				//$this->createSquareImage(SQUARE_THUMBNAIL_DIR, $path, $square_thumbnail_constraint);
 				
 				$this->processExtendedMetadata($path);
 		} else {
@@ -339,15 +342,7 @@ class File extends Kea_Record {
 		}		
 	}
 	
-	/**
-	 * Also ripped off/modded from old File model
-	 *
-	 * @return void
-	 * 
-	 **/
-	protected function createImage( $new_dir, $old_path, $constraint) {
-		
-		$convertPath = get_option('path_to_convert');
+	protected function checkImage( $new_dir, $old_path, $convertPath) {
 		
 		if (!$this->checkForImageMagick($convertPath)) {
 			//throw new Exception( 'ImageMagick library is required for thumbnail generation' );
@@ -360,41 +355,47 @@ class File extends Kea_Record {
 		if (!is_writable($new_dir)) {
 			throw new Exception ('Unable to write to '. $new_dir . ' directory; improper permissions');
 		}
-		
-		if (file_exists($old_path) && is_readable($old_path) && getimagesize($old_path)) {	
+	}
+
+	private function createImage( $new_dir, $old_path, $constraint) {
+			$convertPath = get_option('path_to_convert');
 			
-			$filename = basename( $old_path );
-			$new_name = explode( '.', $filename );
-			//ensures that all generated files are jpeg
-			$new_name[1] = IMAGE_DERIVATIVE_EXT;
-			$imagename = implode( '.', $new_name );
-			$new_path = rtrim( $new_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imagename;
+			$this->checkImage( $new_dir, $old_path, $convertPath);
 			
-			$old_path = escapeshellarg( $old_path );
-			$new_path = escapeshellarg( $new_path );
-			
-			if(!$constraint) {
-				throw new Exception('Image creation failed - Image size constraint must be specified within application settings');
-			}
-			
-			$command = ''.$convertPath.' '.$old_path.' -resize '.escapeshellarg($constraint.'x'.$constraint.'>').' '.$new_path.'';
-			
-			exec( $command, $result_array, $result_value );
-			
-			if ($result_value == 0) {
-				//Image was created, so set the derivative bitflag
-				if(!$this->has_derivative_image) {
-					$this->has_derivative_image = 1;
+			if (file_exists($old_path) && is_readable($old_path) && getimagesize($old_path)) {	
+
+				$filename = basename( $old_path );
+				$new_name = explode( '.', $filename );
+				//ensures that all generated files are jpeg
+				$new_name[1] = IMAGE_DERIVATIVE_EXT;
+				$imagename = implode( '.', $new_name );
+				$new_path = rtrim( $new_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imagename;
+
+				$old_path = escapeshellarg( $old_path );
+				$new_path = escapeshellarg( $new_path );
+
+				if(!$constraint) {
+					throw new Exception('Image creation failed - Image size constraint must be specified within application settings');
 				}
-				
-				return $imagename;	
-			} else {
-				throw new Exception('Something went wrong with image creation.  Ensure that the thumbnail directories have appropriate write permissions.');
+
+				$command = ''.$convertPath.' '.$old_path.' -resize '.escapeshellarg($constraint.'x'.$constraint.'>').' '.$new_path.'';
+
+				exec( $command, $result_array, $result_value );
+
+				if ($result_value == 0) {
+					//Image was created, so set the derivative bitflag
+					if(!$this->has_derivative_image) {
+						$this->has_derivative_image = 1;
+					}
+
+					return $imagename;	
+				} else {
+					throw new Exception('Something went wrong with image creation.  Ensure that the thumbnail directories have appropriate write permissions.');
+				}
 			}
-		}
 	}
 	
-	private function checkForImageMagick($path) {
+	protected function checkForImageMagick($path) {
 		exec( $path . ' -version', $convert_version, $convert_return );
 		return ( $convert_return == 0 );
 	}
