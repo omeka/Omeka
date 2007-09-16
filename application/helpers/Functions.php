@@ -947,6 +947,7 @@ function display_empty($val, $alternative="[Empty]") {
  **/
 function file_download_uri($file, $format='fullsize')
 {
+	if(!$file->exists()) return false;
 	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
 	$uri = generate_url($options, 'download');
 	
@@ -955,6 +956,7 @@ function file_download_uri($file, $format='fullsize')
 
 function file_display_uri($file, $format='fullsize')
 {
+	if(!$file->exists()) return false;
 	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
 	return generate_url($options, 'display');
 }
