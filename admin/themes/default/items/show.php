@@ -86,9 +86,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 <div id="item-images">
 	<div id="main-image">
 		<?php $mainfile = $item->Files[0]; ?>
-		<?php if($mainfile->hasThumbnail()): ?>
-			<img src="<?php echo WEB_FILES.'/'.$mainfile->archive_filename; ?>" alt="<?php echo h($file->title); ?>" width="400" />
-		<?php endif; ?>
+		<?php fullsize($mainfile); ?>
 	</div>
 <?php /*	<div id="files">	
 		<?php foreach( $item->Files as $key => $file ): ?>
