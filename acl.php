@@ -23,7 +23,6 @@ $acl->registerRule(new Zend_Acl_Resource('Entities'), array('add','edit','displa
 $acl->registerRule(new Zend_Acl_Resource('Files'), array('edit','delete'));
 $acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','edit','show', 'reinstall', 'install'));
 $acl->registerRule(new Zend_Acl_Resource('Settings'), array('edit'));
-$acl->registerRule(new Zend_Acl_Resource('Static'), array('browse'));
 $acl->registerRule(new Zend_Acl_Resource('Tags'), array('rename','remove'));
 $acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
 $acl->registerRule(new Zend_Acl_Resource('Types'), array('add','edit','delete'));
