@@ -480,22 +480,22 @@ INSERT INTO `metafields` (id, name, description) VALUES (6, 'Local URL', 'The UR
 
 -- Additions
 -- Document
-INSERT INTO `metafields` (id, name, description) VALUES (7, 'Original Format', '');
+INSERT INTO `metafields` (id, name, description) VALUES (7, 'Original Format', 'If the image is of an object, state the type of object, such as painting, sculpture, paper, photo, and additional data');
 
 -- Still Image
-INSERT INTO `metafields` (id, name, description) VALUES (10, 'Physical Dimensions', '');
+INSERT INTO `metafields` (id, name, description) VALUES (10, 'Physical Dimensions', 'The actual physical size of the original image.');
 
 -- Moving Image
-INSERT INTO `metafields` (id, name, description) VALUES (11, 'Duration', '');
-INSERT INTO `metafields` (id, name, description) VALUES (12, 'Compression', '');
-INSERT INTO `metafields` (id, name, description) VALUES (13, 'Producer', '');
-INSERT INTO `metafields` (id, name, description) VALUES (14, 'Director', '');
+INSERT INTO `metafields` (id, name, description) VALUES (11, 'Duration', 'Length of time involved (seconds, minutes, hours, days, class periods, etc.)');
+INSERT INTO `metafields` (id, name, description) VALUES (12, 'Compression', 'Type/rate of compression for moving image file (i.e. MPEG-4)');
+INSERT INTO `metafields` (id, name, description) VALUES (13, 'Producer', 'Name (or names) of the person who produced the video.');
+INSERT INTO `metafields` (id, name, description) VALUES (14, 'Director', 'Name (or names) of the person who produced the video.');
 
 -- Sound
-INSERT INTO `metafields` (id, name, description) VALUES (15, 'Bit Rate/Frequency', '');
+INSERT INTO `metafields` (id, name, description) VALUES (15, 'Bit Rate/Frequency', 'Rate at which bits are transferred (i.e. 96 kbit/s would be FM quality audio)');
 
 -- Oral History
-INSERT INTO `metafields` (id, name, description) VALUES (16, 'Time Summary', '');
+INSERT INTO `metafields` (id, name, description) VALUES (16, 'Time Summary', 'A summary of an interview given for different time stamps throughout the interview');
 
 -- Email
 INSERT INTO `metafields` (id, name, description) VALUES (17, 'Email Body', 'The main body of the email, including all replied and forwarded text and headers.');
@@ -517,7 +517,7 @@ INSERT INTO `metafields` (id, name, description) VALUES (28, 'URL', '');
 
 -- Event
 INSERT INTO `metafields` (id, name, description) VALUES (29, 'Event Type', '');
-INSERT INTO `metafields` (id, name, description) VALUES (30, 'Participants', '');
+INSERT INTO `metafields` (id, name, description) VALUES (30, 'Participants', 'Names of individuals or groups participating in the event.');
 
 -- Person
 INSERT INTO `metafields` (id, name, description) VALUES (31, 'Birth Date', '');
