@@ -123,13 +123,15 @@ class ItemsController extends Kea_Controller_Action
 				$filter['excludeTags'] = $excludeTags;
 			}
 			
-			if($search = $this->_getParam('search')) {
-				$filter['search'] = $search;
-			}
-			
 			$recent = $this->_getParam('recent');
 			if($recent !== 'false') {
 				$order['recent'] = true;
+			}
+
+			if($search = $this->_getParam('search')) {
+				$filter['search'] = $search;
+				//Don't order by recent-ness if we're doing a search
+				unset($order['recent']);
 			}
 			
 			//The advanced or 'itunes' search
