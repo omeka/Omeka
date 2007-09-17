@@ -19,16 +19,16 @@
 </div>
 
 <div class="field">
-	<?php text(array('name'=>'email', 'class'=>'textinput', 'id'=>'email'),$user->email, 'Email'); ?>
+	<?php text(array('name'=>'email', 'class'=>'textinput', 'id'=>'email'), not_empty_or($user->email, $_POST['email']), 'Email'); ?>
 </div>
 
 <div class="field">
-<?php text(array('name'=>'institution', 'class'=>'textinput', 'id'=>'institution'),$user->institution, 'Institution'); ?>
+<?php text(array('name'=>'institution', 'class'=>'textinput', 'id'=>'institution'),not_empty_or($user->institution, $_POST['institution']), 'Institution'); ?>
 </div>
 
 <?php if ( has_permission('Users','showRoles') ): ?>
 	<div class="field">
-	<?php select(array('name'=>'role','id'=>'role'),get_user_roles(), $user->role, 'Role'); ?>
+	<?php select(array('name'=>'role','id'=>'role'),get_user_roles(), not_empty_or($user->role, $_POST['role']), 'Role'); ?>
 	</div>
 <?php endif; ?>
 
