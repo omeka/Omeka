@@ -226,10 +226,12 @@ class Entity extends Kea_Record
 		LEFT JOIN taggings ON taggings.entity_id = entities.id
 		LEFT JOIN entities_relations ON entities_relations.entity_id = entities.id
 		LEFT JOIN users ON users.entity_id = entities.id
-		WHERE entities.id = $id;
-		UPDATE entities t SET t.parent_id = NULL WHERE t.parent_id = $id;";
+		WHERE entities.id = $id;";
+		
+		$update = "UPDATE entities SET parent_id = NULL WHERE parent_id = $id;";
 				
 		$this->execute($delete);		
+		$this->execute($update);
 	}
 	
 	
