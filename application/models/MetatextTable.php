@@ -91,7 +91,7 @@ class MetatextTable extends Doctrine_Table
 		
 		
 		
-		$select->from(array('Metafield', 'mf'), 'mf.name as name, mt.text as text, mf.id as metafield_id, mt.item_id')
+		$select->from(array('Metafield', 'mf'), 'mf.name as name, mt.text as text, mf.id as metafield_id, mt.item_id, mf.description as description')
 			
 		//Join the metafields, types_metafields, types
 		->joinLeft(array('Metatext', 'mt'), 'mt.metafield_id = mf.id');		
@@ -135,7 +135,7 @@ class MetatextTable extends Doctrine_Table
 		
 		$type_id = ($type instanceof Type) ? $type->id : $type;
 		
-		$select->from(array('Metafield','mf'), 'mf.name as name, mf.id as metafield_id')
+		$select->from(array('Metafield','mf'), 'mf.name as name, mf.id as metafield_id, mf.description')
 			->innerJoin(array('TypesMetafields','tm'), 'tm.metafield_id = mf.id')
 			->innerJoin(array('Type','t'), 't.id = tm.type_id')
 			->where('t.id = ?', $type_id);
@@ -168,7 +168,7 @@ class MetatextTable extends Doctrine_Table
 		$item_id = $item->exists() ? $item->id : 0;
 		
 		$select = new Kea_Select;
-		$select->from(array('Metafield', 'mf'), 'DISTINCT(mf.name) as name, mt.text as text, mf.id as metafield_id')
+		$select->from(array('Metafield', 'mf'), 'DISTINCT(mf.name) as name, mt.text as text, mf.id as metafield_id, mf.description')
 			
 		//Join the metafields, types_metafields, types
 		->joinLeft(array('Metatext', 'mt'), 'mt.metafield_id = mf.id')

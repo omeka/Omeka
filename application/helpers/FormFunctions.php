@@ -374,7 +374,7 @@
 				$field = $metafields;
 				$out = '';
 				$input_id = strtolower(str_replace(' ', '_', $field['name']));
-				
+
 				$metafield_name = $field['name'];
 				$metafield_value = $field['text'];
 				$metafield_id = $field['metafield_id'];
@@ -396,9 +396,10 @@
 						break;
 				}
 				$out .= '<div class="field">';
-				$out .= '<label for="'.$metafieldInputId.'">'.h($metafield_name);
+				$out .= '<label for="'.$input_id.'">'.h($metafield_name);
 				$out .=	'</label>'."\n\t";
-				$out .= $input;
+				$out .= '<span class="tooltip" id="'.$input_id.'_tooltip">'. h($field['description']) .'</span>';
+				$out .= $input;		
 				$out .= '<input type="hidden" name="metafields['.$metafield_id.'][name]" value="' . h($metafield_name) . '" />';
 				$out .= '</div>'."\n\n\t";
 
