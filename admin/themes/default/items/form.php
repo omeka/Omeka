@@ -5,7 +5,6 @@
 		makeTooltips();
 		changeTypeMetadata();
 		filesAdding();
-		//filesAdding();
 	});
 	
 	//Update the type metadata every time a different Item Type is selected	
@@ -78,7 +77,7 @@
 	{
 		var tagId = button.value;
 		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
-		
+
 		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
 			parameters: {
 				'remove_tag': tagId
@@ -363,24 +362,20 @@
 		<legend>Tagging</legend>
 			<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
 			<div class="field">
-			<label for="tags-field">Modify Your Tags</label>
+			<label for="tags-field">Your Tags</label>
 			<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
 			</div>
+			
+	<?php if(1==0): //This is masked until we get it working ?>
 			<?php if(has_permission('Items','untagOthers')): ?>
 			<div class="field">
-				<label for="all-tags">Remove All Tags</label>
-				<?php if($item->Tags == null):?>
+				<label for="all-tags">Remove Other Users' Tags</label>
 				<ul id="tags-list">
-				<?php foreach( $item->Tags as $key => $tag ): ?>
-					<li>
-						<input type="image" src="<?php echo img('icons/delete.png'); ?>" name="remove_tag" value="<?php echo h($tag->id); ?>" />
-						<?php echo h($tag->name); ?>
-					</li>
-				<?php endforeach; ?>
+					<?php common('ajaxTagsRemove', compact('item'), 'items'); ?>
 				</ul>
-				<?php endif; ?>
 			</div>
 			<?php endif; ?>
+	<?php endif; ?>
 	</fieldset>
 	<fieldset id="additional-plugin-data">
 		<?php plugin_html('items/form', compact('item')); ?>
