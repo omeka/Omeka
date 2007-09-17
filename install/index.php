@@ -197,6 +197,10 @@ if ($display_form == true):
 	<input type="text" class="textinput" name="thumbnail_constraint" id="thumbnail_constraint" value="<?php echo (!empty($_POST['thumbnail_constraint']) ? $_POST['thumbnail_constraint'] : 150); ?>" />
 	</div>
 	<div class="field">
+	<label for="square_thumbnail_constraint">Maximum Square Thumbnail Size Constraint (px)</label>
+	<input type="text" class="textinput" name="square_thumbnail_constraint" id="square_thumbnail_constraint" value="<?php echo (!empty($_POST['square_thumbnail_constraint']) ? $_POST['square_thumbnail_constraint'] : 150); ?>" />
+	</div>
+	<div class="field">
 	<label for="fullsize_constraint">Maximum Fullsize Image Size Constraint (px)</label> 
 	<input type="text" class="textinput" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo (!empty($_POST['fullsize_constraint']) ? $_POST['fullsize_constraint'] : 600); ?>" />
 	</div>

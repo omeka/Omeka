@@ -21,6 +21,7 @@ class SettingsController extends Kea_Controller_Action
 			'author', 
 			'description', 
 			'thumbnail_constraint', 
+			'square_thumbnail_constraint',
 			'fullsize_constraint', 
 			'path_to_convert');
 		

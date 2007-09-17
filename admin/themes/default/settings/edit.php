@@ -11,19 +11,23 @@
 </div>
 
 <div class="field">	
-<?php text(array('name'=>'copyright', 'class'=>'textinput', 'id'=>'copyright'),$copyright, 'Copyright'); ?>
+	<?php text(array('name'=>'copyright', 'class'=>'textinput', 'id'=>'copyright'),$copyright, 'Copyright'); ?>
 </div>
 
 <div class="field">    
-<?php text(array('name'=>'author', 'class'=>'textinput', 'id'=>'author'),$author, 'Author'); ?>
+	<?php text(array('name'=>'author', 'class'=>'textinput', 'id'=>'author'),$author, 'Author'); ?>
 </div>
 
 <div class="field">    
-<?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$description, 'Description'); ?>
+	<?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$description, 'Description'); ?>
 </div>
 
 <div class="field">    
-<?php text(array('name'=>'thumbnail_constraint', 'class'=>'textinput', 'id'=>'thumbnail_constraint'),$thumbnail_constraint, 'Thumbnail Size Constraint'); ?>
+	<?php text(array('name'=>'thumbnail_constraint', 'class'=>'textinput', 'id'=>'thumbnail_constraint'),$thumbnail_constraint, 'Thumbnail Size Constraint'); ?>
+</div>
+
+<div class="field">
+	<?php text(array('name'=>'square_thumbnail_constraint', 'class'=>'textinput', 'id'=>'square_thumbnail_constraint'),$square_thumbnail_constraint, 'Square Thumbnail Constraint'); ?>
 </div>
 
 <div class="field">
