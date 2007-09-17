@@ -177,6 +177,9 @@ function dragDropForm() {
 	//Dropping the items on the form should only work when dropping them elsewhere on the form
 	makeDroppable(formContainers, function(draggable, droppable) {
 		moveDraggable(draggable, droppable);
+		$$('#layout-form .handle').invoke('hide');
+
+		new Effect.Highlight(droppable);
 	});
 	
 	//Add a little 'clear' button to the top of each item-drop div
@@ -184,11 +187,13 @@ function dragDropForm() {
 		var clear = document.createElement('a');
 		clear.innerHTML = "Remove This Item";
 		clear.className = 'remove_item';
+		clear.style.cursor = "pointer";
 		clear.onclick = function() {
 			var drag = getItemFromContainer(drop);
 			setItemId(drop, '');
 			if(drag) {
 				sendItemHome(drag);
+				$$('#item-list .handle').invoke('show');
 			}
 		}
 		drop.appendChild(clear);
@@ -200,14 +205,10 @@ function dragDropForm() {
 	});
 	
 	//Hide the labels for the item boxes
-	$$('.item-drop label').each( function(el) {
-		el.hide();
-	});
+	$$('.item-drop label').invoke('hide');
 	
 	//Hide the text fields for the layout form
-	$$('.item-drop input').each( function(el) {
-		el.hide();
-	});	
+	$$('.item-drop input').invoke('hide');
 }
 
 //Hide buttons for the non-js version of the exhibits builder

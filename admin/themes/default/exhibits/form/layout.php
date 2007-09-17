@@ -1,5 +1,6 @@
 <?php head(); ?>
 <?php js('exhibits'); ?>
+<div id="primary">
 <?php common('exhibits-nav'); ?>
 
 <script type="text/javascript" charset="utf-8">
@@ -76,5 +77,5 @@
 	</fieldset> 
 	
 </form>
-
+</div>
 <?php foot(); ?>

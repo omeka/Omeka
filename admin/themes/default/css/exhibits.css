@@ -53,15 +53,18 @@ table#exhibits {clear:both;}
 #item-select {float:left; width: 378px; background:#DAE9F6;}
 #layout-all {float:right; width:512px;}
 
-#layout-form .item {clear:both;overflow:hidden; border-bottom:1px solid #ccc; margin-bottom:1.8em; padding-bottom:1.8em;}
-#layout-form .item-drop {width:100px; height:100px; float:left; overflow:hidden; border:2px solid #999; margin-right:2px; margin-bottom:2px;display:block;}
+#layout-form .item {clear:both; border-bottom:1px solid #ccc; margin-bottom:1.8em; padding-bottom:1.8em;}
+#layout-form .item-drop {width:100px; height:100px; float:left; overflow:hidden; border:1px solid #A2C9E8; margin-right:2px; margin-bottom:2px;display:block;}
 
-#item-list .item-drag {width:100px; height:116px; position:relative;overflow:hidden; float:left; margin-right:8px; margin-bottom:8px;}
+#item-list .item-drag {width:100px; height:116px; position:relative;overflow:hidden; float:left; margin-right:8px; margin-bottom:8px; cursor:default;}
 #item-list .item-drop {top:0; left:0;}
-.item-drag .handle, .item-drop .handle {position:absolute; top:0; left:0;}
+
+.item-drag .handle, .item-drop .handle {position:absolute; top:0; left:0;cursor:move;}
+
 #item-list {margin-left:18px;}
-.handle {background-color:#fff;}
-.remove_item {position:absolute; top:0; right:0; width: 16px; padding:16px 0 0; color:red; background:#fff url("../images/delete.gif") top left no-repeat; z-index:10000; overflow:hidden; height:0 !important; height /**/:16px;}
+.handle {background-color:#fff; }
+
+.remove_item {position:absolute; top:0; right:0; width: 20px; padding:20px 0 0; background:#fff url("../images/delete.gif") 50% 50% no-repeat; z-index:10000; overflow:hidden; height:0 !important; height /**/:20px; border:1px solid #A2C9E8; border-width:0 0 1px 1px;}
 #layout-form .textfield {float:right; width:390px;}
 
 
@@ -70,6 +73,7 @@ table#exhibits {clear:both;}
 	#page-search-form .textinput {width:358px;}
 	
 	#page-submits {clear:both;}
+	
 	/* choose layout */
 	#layouts {}
 		#layouts #layout-thumbs {width:512px; float:left;}

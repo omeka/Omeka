@@ -83,6 +83,7 @@
 </script>
 <?php js('exhibits'); ?>
 <?php common('exhibits-nav'); ?>
+<div id="primary">
 <?php echo flash(); ?>
 
 <div id="page-builder">
@@ -129,5 +130,6 @@
 			<button id="section_form" name="section_form" type="submit">Save and Return to Section</button> or <button id="page_form" name="page_form" type="submit">Save and Add Another Page</button> or <button name="cancel" class="cancel">Cancel</button></p>
 		
 	</form>
+</div>
 </div>
 <?php foot(); ?>
