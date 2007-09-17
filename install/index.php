@@ -127,8 +127,8 @@ if (isset($_REQUEST['install_submit'])) {
 		$userTable = $manager->getTable('User')->getTableName();
 		$entityTable = $manager->getTable('Entity')->getTableName();
 		
-		$entitySql = "INSERT INTO $entityTable (type, email) VALUES (?, ?)";
-		$conn->execute($entitySql, array("Person", $_POST['super_email']));
+		$entitySql = "INSERT INTO $entityTable (type, email, first_name, last_name) VALUES (?, ?, ?, ?)";
+		$conn->execute($entitySql, array("Person", $_POST['super_email'], 'Super', 'User'));
 		
 		$userSql = "INSERT INTO $userTable (username, password, active, role, entity_id) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
 		$conn->execute($userSql, array($_REQUEST['username'], $_REQUEST['password']));
@@ -167,7 +167,7 @@ if ($display_form == true):
 ?>
 <div id="intro">
 <h1>Welcome to Omeka!</h1>
-<p>Aliquam aliquet, est a ullamcorper condimentum, tellus nulla fringilla elit, a iaculis nulla turpis sed wisi. Fusce volutpat. Etiam sodales ante id nunc. Proin ornare dignissim lacus. Nunc porttitor nunc a sem. Sed sollicitudin velit eu magna. Aliquam erat volutpat. Vivamus ornare est non wisi.</p>
+<p>To complete the installation process, please fill out the form below:</p>
 </div>
 <form method="post" accept-charset="utf-8" id="install-form">
 	<fieldset>
