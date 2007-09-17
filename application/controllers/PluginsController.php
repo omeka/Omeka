@@ -65,6 +65,8 @@ class PluginsController extends Kea_Controller_Action
 		
 		$list = $broker->getAll();
 		
+		$plugins = array();
+		
 		foreach ($list as $name) {
 			
 			$plugin = $this->getPluginMetaInfo($name);
