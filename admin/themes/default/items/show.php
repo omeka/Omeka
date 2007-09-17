@@ -257,7 +257,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 		<h3>My Tags</h3>
 		<form id="tags-form" method="post" action="">
 			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
-			<input type="submit" name="modify_tags" value="Modify Your Tags" id="tags-submit">
+			<input type="submit" name="modify_tags" value="Add/Change Your Tags" id="tags-submit">
 		</form>
 		</div>
 	<?php endif; ?>
