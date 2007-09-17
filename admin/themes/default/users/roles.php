@@ -2,7 +2,8 @@
 <?php common('users-nav'); ?>
 
 <script type="text/javascript" charset="utf-8">
-	function getRoleRuleForm(role) {
+/*
+		function getRoleRuleForm(role) {
 		var url = '<?php echo uri('users/rulesForm'); ?>?role='+role.value;
 		new Ajax.Request(url, {
 			method: 'post',
@@ -17,6 +18,7 @@
 			getRoleRuleForm(event.target);
 		});
 	});
+*/	
 </script>
 <div id="primary">
 <div id="message"></div>
@@ -85,13 +87,6 @@
 			<td></td>
 		</tr>
 		<tr>
-			<th>Static</th>
-			<td><img src="<?php img('tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
 			<th>Tags</th>
 			<td><img src="<?php img('tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
 			<td><img src="<?php img('tick.gif'); ?>" width="16" height="16" alt="yes" /></td>
@@ -122,9 +117,11 @@
 	</tbody>
 </table>
 
+<?php if(1==0): //@since 9/17/07  Not supported through admin interface ?>
+	<h3>Alter Role Permissions</h3>
+	<?php select(array('name' => 'role', 'id'=>'alter_role'), $roles); ?>
+	<div id="rulesForm"></div>
+	</div>
+<?php endif; ?>
 
-<h3>Alter Role Permissions</h3>
-<?php select(array('name' => 'role', 'id'=>'alter_role'), $roles); ?>
-<div id="rulesForm"></div>
-</div>
 <?php foot();?>
