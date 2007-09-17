@@ -70,7 +70,7 @@ if(!isset($options['migration'])) {
 	$options['migration'] = 0;
 }
 
-if($options['migration'] != OMEKA_MIGRATION) {
+if((int) $options['migration'] < OMEKA_MIGRATION) {
 	$fromVersion = $options['migration'] or $fromVersion = 0;
 	$toVersion = OMEKA_MIGRATION;
 	require_once 'Kea/Upgrader.php';
