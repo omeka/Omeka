@@ -1,5 +1,9 @@
 <?php head(); ?>
 <?php echo flash(); ?>
+<?php common('archive-nav'); ?>
+
+<div id="primary">
+	<h1>Edit Tags</h1>
 <form method="post">
 <select name="old_tag">
 	<?php foreach( $tags as $key => $tag ): ?>
@@ -12,5 +16,5 @@
 <input type="submit" name="submit" value="Edit these Tags" />
 
 </form>
-
+</div>
 <?php foot(); ?>

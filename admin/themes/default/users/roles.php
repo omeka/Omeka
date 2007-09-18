@@ -123,5 +123,5 @@
 	<div id="rulesForm"></div>
 	</div>
 <?php endif; ?>
-
+</div>
 <?php foot();?>

@@ -1,5 +1,9 @@
 <?php head(); ?>
 <?php echo flash(); ?>
+<?php common('archive-nav'); ?>
+
+<div id="primary">
+	<h1>Delete Tags</h1>
 <form method="post">
 <select name="delete_tag">
 	<?php foreach( $tags as $key => $tag ): ?>
@@ -10,5 +14,5 @@
 <input type="submit" name="submit" value="Delete this tag" />
 
 </form>
-
+</div>
 <?php foot(); ?>

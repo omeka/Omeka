@@ -207,6 +207,7 @@ ul.tags, li.tag {display: inline;}
 		
 		.index #primary-nav .nav-dashboard a,
 		.items #primary-nav .nav-archive a,
+		.tags #primary-nav .nav-archive a,
 		.files #primary-nav .nav-archive a,
 		.types #primary-nav .nav-archive a,
 		.collections #primary-nav .nav-archive a,
@@ -227,6 +228,7 @@ ul.tags, li.tag {display: inline;}
 		
 		.files #secondary-nav .nav-items a,
 		.items #secondary-nav .nav-items a,
+		.tags #secondary-nav .nav-tags a,
 		.types #secondary-nav .nav-types a,
 		.collections #secondary-nav .nav-collections a,
 		.users #secondary-nav .nav-users a,
@@ -332,6 +334,9 @@ ul.tags, li.tag {display: inline;}
 	textarea#location 
 	{height: 1.2em;display:block;}
 
+	.theme-paginate {overflow:hidden; font-size:1.5em;}
+	.theme-paginate .next {float:right; text-align:right;}
+
 	#add-file {padding:8px 12px 8px 30px;margin-bottom: 1.5em; background-position:8px 50%; font-size:1.2em; text-decoration:none;color:#38c; display:block;}
 	
 	#file-list {width:450px;}
@@ -365,7 +370,7 @@ ul.tags, li.tag {display: inline;}
 				.meta li span {display:block; float:left; width: 48%;}
 		.item .description {float:right; width: 472px;}
 		.item .description .thumbnail {display:block; float:right; margin-left:18px; margin-bottom:18px; border: 1px solid #666; padding:0 !important;}
-		.item .description .thumbnail img {padding:0; margin:0; border:0;}
+
 	.filenotfound ul.items {float:left; width: 378px;}
 
 	/* Individual Item View */

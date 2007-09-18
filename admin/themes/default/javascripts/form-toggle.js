@@ -46,33 +46,30 @@ function toggleTab(num,numelems,opennum,animate) {
 }
 
 function toggleBackNext() {
-	var themeContent = $("theme-content");
 	var toggles = $$("div.toggle");
 	for (var i=0;i<toggles.length; i++) {
-		toggles[i].style.display = "none";
-		toggles[0].style.display = "block";
-		
+			
 		var newNav = document.createElement("div");
 		newNav.setAttribute('class','theme-paginate');
 		
 		var next = document.createElement("a");
-		next.setAttribute('href','#toggle'+(i+2));
+		next.setAttribute('href','#step'+(i+2));
 		next.setAttribute('class','next');
 		next.innerHTML = "Next &#187;";
 		
 		next.onclick = function(event) {
-			var section = this.getAttribute("href").split("#toggle")[1];
+			var section = this.getAttribute("href").split("#step")[1];
 			toggleTab(section,toggles.length);
 			return false;
 		}
 		
 		var back = document.createElement("a");
-		back.setAttribute('href','#toggle'+i);
+		back.setAttribute('href','#step'+i);
 		back.setAttribute('class','back');
 		back.innerHTML = "&#171; Back";
 		
 		back.onclick = function() {
-			var section = this.getAttribute("href").split("#toggle")[1];
+			var section = this.getAttribute("href").split("#step")[1];
 			toggleTab(section,toggles.length);
 			return false;
 		}
@@ -84,23 +81,15 @@ function toggleBackNext() {
 		if(i!=(toggles.length-1)) {
 			newNav.appendChild(next);
 		}
-		var heading = toggles[i].getElementsByTagName("h3");
-		for (var j=0;j<heading.length; j++)
-		{
-			var head = heading[j];
-			insertAfter(newNav,head);
-		}
-	//	toggles[i].appendChild(newNav);
-				
+		
+		toggles[i].appendChild(newNav);				
 	}
-
 }
 
 function removeClasses(theArray) {
 	for(var i=0;i<theArray.length;i++){
 	theArray[i].removeClassName('current');
 	}
-	
 }
 function toggleNav() {
 	var toggles = $$("div.toggle");
@@ -129,4 +118,4 @@ function toggleNav() {
 }
 
 Event.observe(window,'load',toggleNav);
-
+Event.observe(window,'load',toggleBackNext);
