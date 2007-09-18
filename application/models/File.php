@@ -278,13 +278,13 @@ class File extends Kea_Record {
 				//Retrieve the image sizes from the database
 				$full_constraint = get_option('fullsize_constraint');
 				$thumb_constraint = get_option('thumbnail_constraint');
-				//$square_thumbnail_constraint = get_option('square_thumbnail_constraint');
+				$square_thumbnail_constraint = get_option('square_thumbnail_constraint');
 				
 				$this->createImage(FULLSIZE_DIR, $path, $full_constraint);
 				
 				$this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint);
 				
-				//$this->createSquareImage(SQUARE_THUMBNAIL_DIR, $path, $square_thumbnail_constraint);
+				$this->createImage(SQUARE_THUMBNAIL_DIR, $path, $square_thumbnail_constraint, "square");
 				
 				$this->processExtendedMetadata($path);
 		} else {
@@ -368,7 +368,7 @@ class File extends Kea_Record {
 		}
 	}
 
-	private function createImage( $new_dir, $old_path, $constraint) {
+	private function createImage( $new_dir, $old_path, $constraint, $type) {
 			$convertPath = get_option('path_to_convert');
 			
 			$this->checkImage( $new_dir, $old_path, $convertPath);
@@ -389,7 +389,13 @@ class File extends Kea_Record {
 					throw new Exception('Image creation failed - Image size constraint must be specified within application settings');
 				}
 
-				$command = ''.$convertPath.' '.$old_path.' -resize '.escapeshellarg($constraint.'x'.$constraint.'>').' '.$new_path.'';
+				switch ($type) {
+				case "square":
+					$command = ''.$convertPath.' '.$old_path.' -thumbnail x'.($constraint*2).' -resize "'.($constraint*2).'x<" -resize 50% -gravity center -crop '.$constraint.'x'.$constraint.'+0+0 +repage '.$new_path.'';
+					break;
+				default:
+					$command = ''.$convertPath.' '.$old_path.' -resize '.escapeshellarg($constraint.'x'.$constraint.'>').' '.$new_path.'';						
+				}
 
 				exec( $command, $result_array, $result_value );
 
