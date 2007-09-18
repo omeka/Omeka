@@ -971,6 +971,11 @@ function fullsize($record, $props=array(), $width=null, $height=null,$return=fal
        return archive_image($record, $props, $width, $height, 'fullsize', $return);
 }
 
+function square_thumbnail($record, $props=array(), $width=null, $height=null,$return=false)
+{
+       return archive_image($record, $props, $width, $height, 'square_thumbnail', $return);
+}
+
 function archive_image( $record, $props, $width, $height, $format, $return) 
 {
 	if(!$record) {

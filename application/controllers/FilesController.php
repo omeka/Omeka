@@ -38,7 +38,7 @@ class FilesController extends Kea_Controller_Action
 
 	protected function isValidFormat($format)
 	{
-		return in_array($format, array('fullsize','thumbnail','archive'));
+		return in_array($format, array('fullsize','thumbnail','archive','square_thumbnail'));
 	}
 
 	protected function isValidDisposition($type)

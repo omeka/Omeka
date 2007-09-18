@@ -166,6 +166,8 @@ class File extends Kea_Record {
 				break;
 			case 'thumbnail':
 				return THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$fn;
+			case 'square_thumbnail':
+				return SQUARE_THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$fn;
 			case 'archive':
 			default:
 				return FILES_DIR.DIRECTORY_SEPARATOR.$this->archive_filename;
