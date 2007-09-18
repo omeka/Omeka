@@ -142,7 +142,7 @@ if (isset($_REQUEST['install_submit'])) {
 		$conn->execute($optionSql, array('migration', OMEKA_MIGRATION));
 		
 		// Add the settings to the db
-		$settings = array('administrator_email', 'copyright', 'site_title', 'author', 'description', 'thumbnail_constraint', 'fullsize_constraint', 'path_to_convert');
+		$settings = array('administrator_email', 'copyright', 'site_title', 'author', 'description', 'thumbnail_constraint', 'square_thumbnail_constraint', 'fullsize_constraint', 'path_to_convert');
 		foreach ($settings as $v) {
 			$conn->execute($optionSql, array($v, $_POST[$v]));
 		}
@@ -198,7 +198,7 @@ if ($display_form == true):
 	</div>
 	<div class="field">
 	<label for="square_thumbnail_constraint">Maximum Square Thumbnail Size Constraint (px)</label>
-	<input type="text" class="textinput" name="square_thumbnail_constraint" id="square_thumbnail_constraint" value="<?php echo (!empty($_POST['square_thumbnail_constraint']) ? $_POST['square_thumbnail_constraint'] : 150); ?>" />
+	<input type="text" class="textinput" name="square_thumbnail_constraint" id="square_thumbnail_constraint" value="<?php echo (!empty($_POST['square_thumbnail_constraint']) ? $_POST['square_thumbnail_constraint'] : 100); ?>" />
 	</div>
 	<div class="field">
 	<label for="fullsize_constraint">Maximum Fullsize Image Size Constraint (px)</label> 
