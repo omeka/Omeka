@@ -368,7 +368,7 @@ class File extends Kea_Record {
 		}
 	}
 
-	private function createImage( $new_dir, $old_path, $constraint, $type) {
+	private function createImage( $new_dir, $old_path, $constraint, $type=null) {
 			$convertPath = get_option('path_to_convert');
 			
 			$this->checkImage( $new_dir, $old_path, $convertPath);
