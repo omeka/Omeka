@@ -2,7 +2,7 @@
 @import url("reset.css");
 
 /* == Generic styles ======== */
-body {font: 62.5% "Helvetica Neue",Helvetica, Arial, sans-serif; color: #777; background: #fff;  margin:0; padding:36px 0;}
+body {font: 62.5% "Helvetica Neue",Helvetica, Arial, sans-serif; color: #444; background: #444;  width:876px;margin:0 auto; padding:66px 0;}
 
 /* Headings */
 h1 {font-size:2.4em; line-height:0.75em; margin-bottom:1.5em;}
@@ -47,6 +47,7 @@ abbr,acronym {border: none; font-style: normal;}
 	.navigation a {text-decoration:none;}
 
 /* Structure */
+#wrap {overflow:hidden; padding:66px; background:#fff;}
 #primary {}
 #secondary {}
 

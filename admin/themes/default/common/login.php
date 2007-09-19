@@ -14,6 +14,7 @@
 <!-- JavaScripts -->
 <?php js('prototype'); ?>
 <?php js('scriptaculous');?>
+<?php js('niftycube');?>
 <?php js('globals'); ?>
 
 <!-- Plugin Stuff -->

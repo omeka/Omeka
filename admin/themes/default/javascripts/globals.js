@@ -36,7 +36,7 @@ function roundCorners() {
 	Nifty('#primary-nav a,#secondary-nav a','top transparent');
 	Nifty('#view-style a','top transparent');
 	Nifty('#user-meta','bottom big');
-	Nifty('#site-meta,#recent-items,#tag-cloud,#type-items,#getting-started ul');
+	Nifty('#login #content,#site-meta,#recent-items,#tag-cloud,#type-items,#getting-started ul');
 	Nifty('#view-all-items a','transparent');
 	Nifty('#search,#names-add','big');
 	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit,#new-user-form','transparent');
@@ -55,6 +55,73 @@ function confirmDelete() {
 		}
 	});
 }
+
+	
+	const Person = "Person";
+	const Institution = "Institution";
+	
+	
+	
+	function switchForm(radio) {
+		if(!document.getElementById) return;
+		var personElements = ['first_name','middle_name', 'last_name'];
+		var institutionElements = ['institution'];
+		
+		if(radio.value == Institution) {
+			//Disable name elements on form
+			personElements.each(function(el) {
+				var element = $(el);
+				ancestors = element.ancestors();
+				ancestors[0].hide();
+				element.disable();
+				element.hide();
+			});
+			institutionElements.each(function(el) {
+				var element = $(el);
+				element.enable();
+				element.show();
+				ancestors = element.ancestors();
+				ancestors[0].show();
+			});
+		}else{
+			//Enable name elements
+			personElements.each(function(el) {
+				var element = $(el);
+				element.enable();
+				element.show();
+				ancestors = element.ancestors();
+				ancestors[0].show();
+			});
+			institutionElements.each(function(el) {
+				var element = $(el);
+				element.disable();
+				element.hide();
+				ancestors = element.ancestors();
+				ancestors[0].hide();
+			
+			});
+		}
+	}
+	
+function toggleNamesForm() {
+	if(!document.getElementById) return;
+	if(!$('name-inputs') || !$('entity-type')) return;
+	var radioButtons = $$("#entity-type input");
+	var allFields = $('name-inputs');
+	allFields.hide();
+	for (var i=0; i < radioButtons.length; i++) {
+		radioButtons[i].onclick = function() {
+			switchForm(this);
+			allFields.show();
+		}
+		if(radioButtons[i].checked) {
+			switchForm(radioButtons[i]);
+			allFields.show();
+		}
+	}
+}
+
+Event.observe(window,'load',toggleNamesForm);
 Event.observe(window,'load',roundCorners);
 Event.observe(window,'load',alertBox);
 Event.observe(window,'load',confirmDelete);

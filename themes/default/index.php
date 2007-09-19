@@ -23,7 +23,7 @@
 			<?php $recent = recent_items(5); ?>
 			<ul>
 				<?php foreach( $recent as $item ): ?>
-				<?php echo $item->title;?><br />
+				<li><a href="<?php echo uri('items/show/'.$item->ID); ?>"<?php echo $item->title;?></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
