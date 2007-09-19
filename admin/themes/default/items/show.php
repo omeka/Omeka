@@ -76,7 +76,7 @@
 </li>
 </ul>
 
-<h1 id="title"><?php echo h($item->title); ?></h1>
+<h1 id="title">#<?php echo $item->id; ?> <?php echo h($item->title); ?></h1>
 <p id="edit-delete"> 
 <?php 
 link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));

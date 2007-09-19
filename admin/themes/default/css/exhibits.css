@@ -15,9 +15,9 @@ table#exhibits {width:774px;}
 #section-list-container {clear:both;}
 
 	#section-list {overflow:hidden; float:left; width: 512px;}
-	#section-list li {display:block; overflow:hidden; width:512px;}
+	#section-list li {display:block; overflow:hidden; float:left; clear:both; height:2em;width:512px; margin:1em 0; padding:0; border:1px solid green;}/*
 	#section-list li .left {display:block; float:left; width: 70%;}
-	#section-list li .right {display:block; float:right; width:28%;}
+	#section-list li .right {display:block; float:right; width:28%;} */
 
 #new-section-link {float:right; width:390px; font-size:1.2em;}
 #new-section {float:right; width: 390px;}

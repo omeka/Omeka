@@ -251,9 +251,8 @@
 			
 		
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
-			<div id="search_choices" style="font-style: italic;">
-				<span id="basic_search_header">Simple</span> /
-				<span id="advanced_search_header">Advanced</span>
+			<div id="search_choices">
+				<span id="basic_search_header">Simple</span> | <span id="advanced_search_header">Advanced</span>
 			</div>
 			
 			<fieldset id="basic_search">

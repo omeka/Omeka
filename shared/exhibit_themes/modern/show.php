@@ -1,5 +1,4 @@
 <?php exhibit_head(); ?>
-
 <h2><?php echo $section->title; ?></h2>			
 			
 <div id="primary">

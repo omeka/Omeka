@@ -16,7 +16,6 @@
 			<th>Name</th>
 			<th>Institution</th>
 			<th>Edit</th>
-			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,7 +25,6 @@
 			<td><?php echo h($e->first_name); ?> <?php echo h($e->last_name); ?></td>
 			<td><?php echo h($e->institution); ?></td>
 			<td><a href="<?php echo uri('entities/edit/'.$e->id); ?>" class="edit">Edit</a></td>
-			<td><a href="<?php echo uri('entities/delete/'.$e->id); ?>" class="delete">Delete</a></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
@@ -71,8 +69,12 @@
 <?php endif; ?>
 </div>
 <form action="<?php echo uri('entities/add') ?>" id="names-add" method="post" accept-charset="utf-8">
+	<fieldset>
+		<legend>Add a Name</legend>
 	<?php include 'form.php'; ?>
-	<input type="submit" name="submit" value="Add the Entity" />
+	</fieldset>
+	<p id="add-name-buttons">
+	<button type="submit" name="submit">Add the Name</button></p>
 </form>
 </div>
 <?php foot(); ?>

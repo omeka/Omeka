@@ -25,6 +25,7 @@
 		
 		<div id="content">
 		<?php echo flash(); ?>	
+				
 		<?php page_nav(); ?>
 					
 		<h1><?php link_to_exhibit($exhibit); ?></h1>

@@ -529,7 +529,7 @@ function link_to($record, $action='show', $text, $props = array())
 	$path = $record->getPluralized() . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $record->id;
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-	echo '<a href="'. uri($path) . '"' . $attr . '>' . h($text) . '</a>';
+	echo '<a href="'. uri($path) . '"' . $attr . '  title="View '.$text.'">' . h($text) . '</a>';
 }
 
 function link_to_item($item, $action='show', $text=null, $props=array())

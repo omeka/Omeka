@@ -1,6 +1,4 @@
 <?php echo flash(); ?>
-<fieldset>
-	<legend>Add a Name</legend>
 <div class="field" id="entity-type">
 <?php radio('type', array('Institution'=>'Institution','Person'=>'Person'), not_empty_or($entity->type, $_POST['type'])); ?>
 </div>
@@ -30,5 +28,4 @@
 	?>
 </div>
 </div>
-</fieldset>
 

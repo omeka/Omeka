@@ -88,7 +88,7 @@ input#tags-submit {display: inline;}
 	.navigation a {text-decoration:none;}
 
 .error {background:#f1c8ba; color:#933; margin:1.5em; font-size:1.2em; padding:1.5em;}
-.alert {background:#fff09e;}
+.alert {background:#fff09e; font-size:1.2em; padding: 0.5em;}
 
 .tooltip {font-size:1.2em; line-height:1.5em;}
 .info-window {background:#fff09e; z-index:100;display:block;width:300px; padding:1.5em; border:1px solid #cdcdc5;}
@@ -371,10 +371,14 @@ ul.tags, li.tag {display: inline;}
 			.meta li {overflow:hidden; text-align:right; }
 				.meta li span {display:block; float:left; width: 48%;}
 		.item .description {float:right; width: 472px;}
-		.item .description .thumbnail {display:block; float:right; margin-left:18px; margin-bottom:18px; border: 1px solid #666; padding:0 !important;}
+		.item .description .thumbnail {display:block; float:right; margin-left:18px; margin-bottom:18px;}
 
 	.filenotfound ul.items {float:left; width: 378px;}
-
+	#search_choices {margin-bottom:1em;}
+	#search_choices span {cursor:pointer; color:#38c; text-decoration:underline; font-size:1.1em}
+	
+	#search_checkboxes {}
+	
 	/* Individual Item View */
 	.item-pagination {overflow:hidden;}	
 		.item-pagination li {width:48%;display:block; overflow:hidden;}
@@ -508,6 +512,8 @@ ul.tags, li.tag {display: inline;}
 		#names-add .field {overflow:hidden;clear:both; margin-bottom:0.5em;}
 		#names-add #entity-type {margin-bottom:1.5em;}
 
+	#names-edit {}
+	#names-combine {float:right; width: 364px; background:#dae9f6;}
 /* == Footer styles == */
 
 #footer {background:#333; color:#fff; padding-bottom:3.6em;}
