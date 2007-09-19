@@ -132,6 +132,18 @@ class User extends Kea_Record {
 			}
 		}
 		
+		//Check the fields to make sure they are filled out
+		if(get_class($this->Entity) == 'Person') {
+			if(empty($post['first_name']) or empty($post['last_name'])) {
+				throw new Exception( 'First and last name are required for user accounts.' );
+			}
+		}
+		elseif(get_class($this->Entity) == 'Institution') {
+			if(empty($post['institution'])) {
+				throw new Exception( 'Name of the institution is required for user accounts.' );
+			}
+		}
+		
 		require_once 'Zend/Filter/Input.php';
 		$clean = new Zend_Filter_Input($post, false);
 		
