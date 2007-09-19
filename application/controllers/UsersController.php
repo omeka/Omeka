@@ -272,6 +272,9 @@ class UsersController extends Kea_Controller_Action
 			$roles[$val] = $val;
 			unset($roles[$key]);
 		}
+
+		//Don't let people make users with the 'default' level
+		unset($roles['default']);
 		
 		$rules = $acl->getRules();
 		$resources = $acl->getResources();
