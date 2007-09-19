@@ -1,6 +1,6 @@
 <?php
-define('OMEKA_MIGRATION', 9);
-define('OMEKA_VERSION', 'v0.15r1');
+define('OMEKA_MIGRATION', 10);
+define('OMEKA_VERSION', 'private_beta');
 
 error_reporting(E_ALL ^ E_NOTICE);
 
