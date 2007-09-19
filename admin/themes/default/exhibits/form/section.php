@@ -52,7 +52,7 @@
 			<legend>Pages in This Section</legend>	
 			
 	<?php if ( section_has_pages($section) ): ?>
-	
+		<p>To reorder pages, click and drag the page thumbnail to the left or right.</p>
 			<ul id="page-list">
 			<?php common('_page_list', compact('section'), 'exhibits'); ?>
 

@@ -5,7 +5,7 @@
 @import url("exhibits.css");
 
 /* == Generic == */
-body {font:62.5% "Lucida Grande",verdana,arial,helvetica, sans-serif; color:#444; min-width:1000px;background:#333; border-top:12px solid #222;padding:0;}
+body {font:62.5% "Lucida Grande",verdana,arial,helvetica, sans-serif; color:#444; min-width:1000px;background:#333;}
 
 body#login {min-width:400px;}
 body#login #wrap {background-color: #333; width:346px; min-width:346px;margin:0 auto; padding:40px 0;border:none;}
@@ -245,12 +245,12 @@ ul.tags, li.tag {display: inline;}
 	/* Tertiary Nav */
 	#tertiary-nav {overflow: hidden;}
 	#tertiary-nav a {text-transform: uppercase; font-size: 1.2em; color: #999;float: left; display: block; margin-right: 1px; width: 264px; padding: .5em 0 .5em 36px; background-color: #eee; background-position: 6px 50%; background-repeat: no-repeat;}
-		#tertiary-nav #first a {background-image: url(../images/first-inactive-grey.gif);}
-		#tertiary-nav #second a {background-image: url(../images/second-inactive-grey.gif);}
-		#tertiary-nav #third a {background-image: url(../images/third-inactive-grey.gif);}
-		#tertiary-nav #first a.current {background-image: url(../images/first-active.gif);}
-		#tertiary-nav #second a.current {background-image: url(../images/second-active.gif);}
-		#tertiary-nav #third a.current {background-image: url(../images/third-active.gif);}
+		#tertiary-nav #stepbutton1 a {background-image: url(../images/first-inactive-grey.gif);}
+		#tertiary-nav #stepbutton2 a {background-image: url(../images/second-inactive-grey.gif);}
+		#tertiary-nav #stepbutton3 a {background-image: url(../images/third-inactive-grey.gif);}
+		#tertiary-nav #stepbutton1 a.current {background-image: url(../images/first-active.gif);}
+		#tertiary-nav #stepbutton2 a.current {background-image: url(../images/second-active.gif);}
+		#tertiary-nav #stepbutton3 a.current {background-image: url(../images/third-active.gif);}
 		#tertiary-nav a.current {background-color:#9ed558; color: #fff;}
 	
 	
@@ -260,6 +260,7 @@ ul.tags, li.tag {display: inline;}
 
 #search {overflow:hidden; clear:left;background:#DAE9F6;padding:18px;}
 	#search #search-checkboxes {float:right; width: 48%; position: relative;}
+		#search #search-checkboxes label, #search-checkboxes input {display:inline;}
 	#search #search-selects {float:left; width:48%;}
 	#search legend {background:transparent;}
 	#search fieldset {border:none;}
@@ -269,8 +270,8 @@ ul.tags, li.tag {display: inline;}
 	
 	#search-checkboxes label {clear: both; float: left; width: 10em; margin: 0 0 .5em;}
 	#search-checkboxes input {position: absolute; left: 11em; top: 0;}
-		#search-checkboxes input#public {position: absolute; left: 11em; top: 1.5em;}
-		#search-checkboxes input#featured {position: absolute; left: 11em; top: 3em;}
+		#search-checkboxes input#public {position: absolute; left: 11em; top: 0em;}
+		#search-checkboxes input#featured {position: absolute; left: 11em; top: 1.7em;}
 	
 	/* Advanced Search - [KBK] - added 9/5/07 */
 	#search div.search-entry select {display:inline;}

@@ -107,9 +107,9 @@
 
 <?php echo flash(); ?>
 <ul id="tertiary-nav" class="navigation">
-	<li id="first"><a href="#step1">Step One</a></li>
-	<li id="second"><a href="#step2">Step Two</a></li>
-	<li id="third"><a href="#step3">Step Three</a></li>
+	<li id="stepbutton1"><a href="#step1">Step One</a></li>
+	<li id="stepbutton2"><a href="#step2">Step Two</a></li>
+	<li id="stepbutton3"><a href="#step3">Step Three</a></li>
 </ul>
 <div class="toggle" id="step1">
 	<fieldset>

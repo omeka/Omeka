@@ -62,12 +62,14 @@ function switchBasicAdvancedSearch() {
 	};
 	
 	var disableAndHide = function(form) {
-		Effect.BlindUp(form);
+		new Effect.BlindUp(form);
+		form.hide();
 		form.getElementsBySelector('input, select').invoke('disable');
 	}
 	
 	var enableAndShow = function(form) {
-		Effect.BlindDown(form);
+		new Effect.BlindDown(form);
+		form.show();
 		form.getElementsBySelector('input, select').invoke('enable');
 	}
 	

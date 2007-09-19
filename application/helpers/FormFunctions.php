@@ -231,7 +231,7 @@
 	
 	function items_search_form($props=array(), $uri) {
 		?>
-		<h2 id="search-header" class="close">Search Items </h2>
+		<h2 id="search-header" class="close">Search Items</h2>
 		
 		<script type="text/javascript" charset="utf-8">
 		//<![CDATA[

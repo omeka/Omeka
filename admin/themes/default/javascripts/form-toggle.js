@@ -47,6 +47,11 @@ function toggleTab(num,numelems,opennum,animate) {
 
 function toggleBackNext() {
 	var toggles = $$("div.toggle");
+	var togglesLength = toggles.length;
+	var links = $$("#tertiary-nav a");
+	if(!('tertiary-nav')) return false;
+	if(!toggles) return false;
+	removeClasses(links);
 	for (var i=0;i<toggles.length; i++) {
 			
 		var newNav = document.createElement("div");
@@ -60,6 +65,9 @@ function toggleBackNext() {
 		next.onclick = function(event) {
 			var section = this.getAttribute("href").split("#step")[1];
 			toggleTab(section,toggles.length);
+			sectionButton = $("stepbutton"+section).getElementsByTagName('a')[0];
+			removeClasses(links);
+			sectionButton.toggleClassName('current','off');
 			return false;
 		}
 		
@@ -71,6 +79,10 @@ function toggleBackNext() {
 		back.onclick = function() {
 			var section = this.getAttribute("href").split("#step")[1];
 			toggleTab(section,toggles.length);
+			removeClasses(links);
+			sectionButton = $("stepbutton"+section).getElementsByTagName('a')[0];
+			removeClasses(links);
+			sectionButton.toggleClassName('current','off');
 			return false;
 		}
 		
@@ -80,6 +92,7 @@ function toggleBackNext() {
 		
 		if(i!=(toggles.length-1)) {
 			newNav.appendChild(next);
+			
 		}
 		
 		toggles[i].appendChild(newNav);				
@@ -105,7 +118,6 @@ function toggleNav() {
 	links[0].addClassName('current');
 	for (var i=0;i<links.length; i++) {
 		var link = links[i];
-		var section = link.getAttribute("href").split("#step")[1];
 		link.onclick = function() {
 			var section = this.getAttribute("href").split("#step")[1];
 			removeClasses(links);
@@ -117,5 +129,5 @@ function toggleNav() {
 	}
 }
 
-Event.observe(window,'load',toggleNav);
 Event.observe(window,'load',toggleBackNext);
+Event.observe(window,'load',toggleNav);

@@ -11,13 +11,15 @@
 
 table#exhibits {width:774px;}
 
-/* Exhibit Mdetadata */
+/* Exhibit Metadata */
 #section-list-container {clear:both;}
 
-	#section-list {overflow:hidden; float:left; width: 512px;}
-	#section-list li {display:block; overflow:hidden; float:left; clear:both; height:2em;width:512px; margin:1em 0; padding:0; border:1px solid green;}/*
-	#section-list li .left {display:block; float:left; width: 70%;}
-	#section-list li .right {display:block; float:right; width:28%;} */
+	#section-list {float:left; width: 512px;}
+	#section-list li {display:block; overflow:hidden; float:left; clear:both; height:2em;width:512px; margin:0 0 2px 0; padding:0; background:#e9f6da;}
+	#section-list li .left {display:block; float:left; width: 65%;}
+	#section-list img {background:#fff; padding:4px; float:left;}
+	#section-list input {padding:4px 0; width:1em;}
+	#section-list li .right {display:block; float:right; width:28%; padding:4px 0;} 
 
 #new-section-link {float:right; width:390px; font-size:1.2em;}
 #new-section {float:right; width: 390px;}
@@ -45,9 +47,6 @@ table#exhibits {width:774px;}
 #exhibit-form #exhibit-save {clear:both;}
 table#exhibits {clear:both;}
 
- 		#section-list li {display:block;}
- 		#section-list li .left {display:block; float:left; width: 70%;}
- 		#section-list li .right {display:block; float:right; width:28%;}
 
 
 /* Page Metadata */
