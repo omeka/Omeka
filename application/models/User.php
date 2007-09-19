@@ -24,12 +24,7 @@ class User extends Kea_Record {
 		$this->setTableName('users');
         $this->hasColumn('username', 'string', 30, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
         $this->hasColumn('password', 'string', 40, array('notnull' => true, 'notblank'=>true));
-/*
-	        $this->hasColumn('first_name', 'string', 255, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('last_name', 'string', 255, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('email', 'string', 255, array('notnull' => true, 'notblank'=>true, 'default'=>'', 'email'=>true, 'unique'=>true));
-        $this->hasColumn('institution', 'string', null, array('notnull' => true, 'default'=>''));
-*/	
+
         $this->hasColumn('active', 'boolean', null, array('notnull' => true, 'default'=>'0'));
         $this->hasColumn('role', 'string', 40, array('notnull' => true, 'default'=>'default', 'notblank'=>true));
 		$this->hasColumn('entity_id', 'integer', null, array('range'=>array('1')));

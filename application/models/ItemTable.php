@@ -109,13 +109,15 @@ class ItemTable extends Doctrine_Table
 				}
 			}
 			*/
-			
+		if(count($metafields)) {
 			$subQuery = new Kea_Select;
 			$subQuery->from(array('Metatext','mt'), 'mt.id')
 			->innerJoin(array('Metafield','m'), 'm.id = mt.metafield_id')
 			->where(join(' OR ', $metafields));
 			
-			$select->where('mt.id IN ('. $subQuery->__toString().')');
+			$select->where('mt.id IN ('. $subQuery->__toString().')');			
+		}
+
 //	echo $select;exit;
 		}
 	}
@@ -346,6 +348,7 @@ class ItemTable extends Doctrine_Table
 		//Fire a plugin hook to add clauses to the SELECT statement
 		fire_plugin_hook('item_browse_sql', $select);
 
+//echo $select;
 		//At this point we can return the count instead of the items themselves if that is specified
 		if($returnCount) {
 			$count = $this->getCountFromSelect($select);
