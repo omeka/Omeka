@@ -3,6 +3,21 @@
 <div id="primary">
 	<h1 class="floater">Exhibits</h1>
 	<a href="<?php echo uri('exhibits/add'); ?>" id="add-exhibit" class="add-exhibit">Add an Exhibit</a>
+<?php 
+	$exhibits = exhibits(); 
+?>	
+
+<?php if(!count($exhibits)): ?>	
+	<div id="no-exhibits">
+	<h1>There are no exhibits yet.
+	
+	<?php if(has_permission('Exhibits','add')): ?>
+		  Why don't you <a href="<?php echo uri('exhibits/add'); ?>">add some</a>?</h1>
+	<?php endif; ?>
+	</div>
+	
+<?php else: //Show the exhibits in a table?>	
+
 <table id="exhibits">
 	<col id="col-id" />
 	<col id="col-title" />
@@ -25,10 +40,6 @@
 	</thead>
 	<tbody>
 		
-<?php 
-	$exhibits = exhibits(); 
-?>
-		
 <?php foreach( $exhibits as $key=>$exhibit ): ?>
 	<tr class="exhibit <?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
 		<td><?php echo h($exhibit->id);?></td>
@@ -41,5 +52,8 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+
+<?php endif; ?>
+
 </div>
 <?php foot(); ?>

@@ -2,6 +2,10 @@
 #add-exhibit {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:7.5em; display:block;}
 #add-exhibit:hover {background-color:#e9f6da;}
 
+#no-exhibits {
+	clear:both;
+}
+
 .section-delete a {text-decoration:none; color:red;}
 .section-edit a {text-decoration:none; color:#38c;}
 
