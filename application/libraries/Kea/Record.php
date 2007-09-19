@@ -154,10 +154,7 @@ abstract class Kea_Record extends Doctrine_Record
 	}
 	
 	public function strip($text) {
-		if($text !== null) {
-			$text = get_magic_quotes_gpc() ? stripslashes( $text ) : $text;
-		}
-		return $text;
+		return strip_slashes($text);
 	}
 	
 	public function setFromForm($array) {

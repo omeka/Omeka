@@ -8,4 +8,12 @@ function pluck($col, $array)
 	}
 	return $res;	
 } 
+
+function strip_slashes($text)
+{
+	if($text !== null) {
+		$text = get_magic_quotes_gpc() ? stripslashes( $text ) : $text;
+	}
+	return $text;
+}
 ?>
