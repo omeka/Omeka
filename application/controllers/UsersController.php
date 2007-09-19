@@ -159,7 +159,8 @@ class UsersController extends Kea_Controller_Action
 		$site_title = $site_options['site_title'];
 		$from = $site_options['administrator_email'];
 		
-		$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account: <a href=\"".WEB_ROOT."/admin/users/activate?u={$ua->url}\">Activate</a> (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
+		$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account:\n\n"
+		.WEB_ROOT."/admin/users/activate?u={$ua->url}\n\n (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
 		$title = "Activate your account with the ".$site_title." Archive";
 		$header = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
 		return mail($user->email, $title, $body, $header);
