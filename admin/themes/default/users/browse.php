@@ -3,7 +3,6 @@
 <div id="primary">
 <?php echo flash(); ?>
 <h1 class="floater">Browse Users</h1>
-<a href="<?php echo uri('users/add'); ?>" class="add-user" id="add-user">Add a User</a>
 <table id="users">
 	<thead>
 		<tr>
