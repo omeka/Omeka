@@ -47,7 +47,9 @@ class Exhibit extends Kea_Record
 			case 'Tags':
 				return $this->getTags();
 				break;
-
+			case 'Sections':
+				$this->loadSections();
+				return $this->Sections;
 			default:
 				return parent::get($name);
 				break;
