@@ -48,8 +48,7 @@ class Exhibit extends Kea_Record
 				return $this->getTags();
 				break;
 			case 'Sections':
-				$this->loadSections();
-				return $this->Sections;
+				return $this->loadSections();
 			default:
 				return parent::get($name);
 				break;
@@ -166,6 +165,7 @@ class Exhibit extends Kea_Record
 		$q = new Doctrine_Query;
 		$sections = $q->parseQuery($dql)->execute();
 		$this->Sections = $sections;
+		return $sections;
 	}
 	
 	public function getSection($slug)
