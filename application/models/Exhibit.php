@@ -19,6 +19,8 @@ class Exhibit extends Kea_Record
 	
 	protected $_taggable;
 	
+	protected $_sections;
+	
     public function setTableDefinition()
     {
 		$this->option('type', 'MYISAM');
@@ -48,9 +50,25 @@ class Exhibit extends Kea_Record
 				return $this->getTags();
 				break;
 			case 'Sections':
-				return $this->loadSections();
+				if(empty($this->_sections)) {
+					$this->_sections = $this->loadSections();
+				}
+				return $this->_sections;
 			default:
 				return parent::get($name);
+				break;
+		}
+	}
+	
+	public function set($name, $value)
+	{
+		switch ($name) {
+			case 'Sections':
+				$this->_sections = $value;
+				break;
+			
+			default:
+				return parent::set($name, $value);
 				break;
 		}
 	}
