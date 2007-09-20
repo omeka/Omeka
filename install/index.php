@@ -23,6 +23,7 @@ require_once '../paths.php';
 require_once 'Zend.php';
 require_once 'Zend/Config/Ini.php';
 require_once 'plugins.php';
+require_once 'globals.php';
 try {
 	//Check for the config file
 	$config_file = CONFIG_DIR . DIRECTORY_SEPARATOR . 'db.ini';
@@ -109,6 +110,10 @@ if (isset($_REQUEST['install_submit'])) {
 					'fullsize_constraint' => "/\d+/",
 					'username' => "/^[\w\d\_\.]{4,}$/",		//At least 4 characters, _ . alphanumeric allowed
 					'password' => "/^.{4,}$/");				//At least 4 characters (all allowed)
+		
+		foreach ($_POST as $key => $value) {
+			$_POST[$key] = strip_slashes($value);
+		}
 			
 		foreach ($validation as $key => $validator) {
 			if($validator) {
@@ -131,7 +136,7 @@ if (isset($_REQUEST['install_submit'])) {
 		$conn->execute($entitySql, array("Person", $_POST['super_email'], 'Super', 'User'));
 		
 		$userSql = "INSERT INTO $userTable (username, password, active, role, entity_id) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
-		$conn->execute($userSql, array($_REQUEST['username'], $_REQUEST['password']));
+		$conn->execute($userSql, array($_POST['username'], $_POST['password']));
 		
 	
 		// Namespace for the authentication session (to prevent clashes on shared servers)
@@ -174,15 +179,15 @@ if ($display_form == true):
 	<legend>Site Settings</legend>
 	<div class="field">
 	<label for="site_title">Site Name</label>
-	<input type="text" name="site_title" class="textinput" id="site_title" value="<?php echo $_POST['site_title']; ?>" />
+	<input type="text" name="site_title" class="textinput" id="site_title" value="<?php echo htmlentities($_POST['site_title']); ?>" />
 	</div>
 	<div class="field">
 	<label for="admin_email">Administrator Email (required for form emails)</label>
-	<input type="text" name="administrator_email" class="textinput" id="admin_email" value="<?php echo $_POST['administrator_email']; ?>" />
+	<input type="text" name="administrator_email" class="textinput" id="admin_email" value="<?php echo htmlentities($_POST['administrator_email']); ?>" />
 	</div>
 	<div class="field">
 	<label for="copyright">Copyright Info</label>
-	<input type="text" name="copyright" class="textinput" id="copyright" value="<?php echo $_POST['copyright']; ?>" />
+	<input type="text" name="copyright" class="textinput" id="copyright" value="<?php echo htmlentities($_POST['copyright']); ?>" />
 	</div>
 	<div class="field">
 	<label for="author">Author Info</label>
@@ -190,47 +195,38 @@ if ($display_form == true):
 	</div>
 	<div class="field">
 	<label for="description">Site Description</label>
-	<textarea name="description" class="textinput" id="description"><?php echo $_POST['description']; ?></textarea>
+	<textarea name="description" class="textinput" id="description"><?php echo htmlentities($_POST['description']); ?></textarea>
 	</div>
 	<div class="field">
 	<label for="thumbnail_constraint">Maximum Thumbnail Size Constraint (px)</label>
-	<input type="text" class="textinput" name="thumbnail_constraint" id="thumbnail_constraint" value="<?php echo (!empty($_POST['thumbnail_constraint']) ? $_POST['thumbnail_constraint'] : 150); ?>" />
+	<input type="text" class="textinput" name="thumbnail_constraint" id="thumbnail_constraint" value="<?php echo (!empty($_POST['thumbnail_constraint']) ? htmlentities($_POST['thumbnail_constraint']) : 150); ?>" />
 	</div>
 	<div class="field">
 	<label for="square_thumbnail_constraint">Maximum Square Thumbnail Size Constraint (px)</label>
-	<input type="text" class="textinput" name="square_thumbnail_constraint" id="square_thumbnail_constraint" value="<?php echo (!empty($_POST['square_thumbnail_constraint']) ? $_POST['square_thumbnail_constraint'] : 100); ?>" />
+	<input type="text" class="textinput" name="square_thumbnail_constraint" id="square_thumbnail_constraint" value="<?php echo (!empty($_POST['square_thumbnail_constraint']) ? htmlentities($_POST['square_thumbnail_constraint']) : 100); ?>" />
 	</div>
 	<div class="field">
 	<label for="fullsize_constraint">Maximum Fullsize Image Size Constraint (px)</label> 
-	<input type="text" class="textinput" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo (!empty($_POST['fullsize_constraint']) ? $_POST['fullsize_constraint'] : 600); ?>" />
+	<input type="text" class="textinput" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo (!empty($_POST['fullsize_constraint']) ? htmlentities($_POST['fullsize_constraint']) : 600); ?>" />
 	</div>
 	<div class="field">
 	<label for="path_to_convert">Imagemagick Binary Path</label>
-	<?php
-	if ($path_to_convert) {
-		echo '
-	<input type="hidden" name="path_to_convert" id="path_to_convert" value="'.$path_to_convert.'" />
-	<p>'.$path_to_convert.' (found automatically)</p>';
-	} else {
-		echo '
-	<input type="text" name="path_to_convert" id="path_to_convert" value="'.$_POST['path_to_convert'].'" />';
-	}
-	?>
+	<input type="text" name="path_to_convert" class="textinput" id="path_to_convert" value="<?php echo htmlentities($_POST['path_to_convert']); ?>" />';
 	</div>
 	</fieldset>
 	<fieldset>
 	<legend>Default Super User Account</legend>
 	<div class="field">
 	<label for="username">Username</label>
-	<input type="text" class="textinput" name="username" value="<?php echo $_POST['username']; ?>" />
+	<input type="text" class="textinput" name="username" value="<?php echo htmlentities($_POST['username']); ?>" />
 	</div>
 	<div class="field">
 	<label for="password">Password</label>
-	<input class="textinput" type="password" name="password" value="<?php echo $_POST['password']; ?>"/>
+	<input class="textinput" type="password" name="password" value="<?php echo htmlentities($_POST['password']); ?>"/>
 	</div>
 	<div class="field">
 		<label for="super_email">Email</label>
-		<input class="textinput" type="text" name="super_email" id="super_email" value="<?php echo $_POST['super_email']; ?>">
+		<input class="textinput" type="text" name="super_email" id="super_email" value="<?php echo htmlentities($_POST['super_email']); ?>">
 	</div>
 	
 	</fieldset>
