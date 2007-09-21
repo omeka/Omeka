@@ -21,7 +21,7 @@ class MetatextTable extends Doctrine_Table
 		foreach ($metatext as $row) {
 			
 			$metafield_name = $row['name'];
-			$text = $row['text'];
+			$text = strip_slashes($row['text']);
 			
 			//Try to find the existing metatext row so we can edit it
 			$mtObj = $this->findByItemAndMetafieldName($item, $metafield_name);
