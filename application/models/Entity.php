@@ -222,14 +222,16 @@ class Entity extends Kea_Record
 		$id = (int) $this->id;
 		
 		//Delete also needs to clear out the parent_id fields of the entity's children	
-		$delete = "DELETE taggings, entities_relations, entities, users FROM entities
+		$delete = "DELETE taggings, entities, users FROM entities
 		LEFT JOIN taggings ON taggings.entity_id = entities.id
-		LEFT JOIN entities_relations ON entities_relations.entity_id = entities.id
 		LEFT JOIN users ON users.entity_id = entities.id
 		WHERE entities.id = $id;";
 		
 		$update = "UPDATE entities SET parent_id = NULL WHERE parent_id = $id;";
-				
+		
+		$update_join = "UPDATE entities_relations SET entity_id = NULL WHERE entity_id = $id";
+		
+		$this->execute($update_join);		
 		$this->execute($delete);		
 		$this->execute($update);
 	}

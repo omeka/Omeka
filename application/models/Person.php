@@ -6,9 +6,7 @@ require_once 'Institution.php';
  * @package: Omeka
  */
 class Person extends Entity
-{
-	protected $_pluralized = 'People';
-	
+{	
     public function setUp()
     {
 		parent::setUp();
