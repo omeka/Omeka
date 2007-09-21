@@ -186,9 +186,7 @@ class ItemTable extends Doctrine_Table
 		//Put those results in the temp table
 		$insert = "REPLACE INTO temp_search (item_id) ".$mSelect->__toString();
 		$conn->execute($insert);
-		
-	//	Zend::dump( $conn->execute("SELECT * FROM temp_search")->fetchAll() );exit;
-		
+				
 		$select->innerJoin('temp_search ts', 'ts.item_id = i.id');
 		$select->order('ts.id ASC');
 	}
@@ -197,14 +195,14 @@ class ItemTable extends Doctrine_Table
 	{
 		if($select instanceof Doctrine_Query) {
 			$select->addSelect('ie.time as i.added');
-			$select->innerJoin('i.ItemsRelations ie');
-			$select->innerJoin('ie.EntityRelationships er');
-			$select->addWhere('er.name = "added"');
+			$select->leftJoin('i.ItemsRelations ie');
+			$select->leftJoin('ie.EntityRelationships er');
+			$select->addWhere('(er.name = "added" OR er.name IS NULL)');
 			$select->addOrderBy('ie.time DESC');
 		}else {
 			$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
-			$select->joinLeft(array('EntityRelationships', 'er'), 'er.id = ie.relationship_id');
-			$select->where('er.name = "added"');
+			$select->joinLeft('entity_relationships er', 'er.id = ie.relationship_id');
+			$select->where('(er.name = "added" OR er.name IS NULL) AND (ie.type = "Item" OR ie.type IS NULL)');
 			$select->order('ie.time DESC');
 		}
 	}
