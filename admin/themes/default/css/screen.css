@@ -320,7 +320,8 @@ ul.tags, li.tag {display: inline;}
 	
 	textarea#duration, 
 	textarea#compression, 
-	textarea#producer, 
+	textarea#producer,
+	textarea#physical_dimensions,
 	textarea#director, 
 	textarea#interviewer, 
 	textarea#interviewee, 
