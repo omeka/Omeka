@@ -101,7 +101,7 @@ class ExhibitsController extends Kea_Controller_Action
 	{		
 		$exhibit = $this->findBySlug();
 
-		$exhibit->loadSections();
+		
 
 		if(!$exhibit) {
 			throw new Exception( 'Exhibit with that ID does not exist.' );
@@ -166,7 +166,7 @@ class ExhibitsController extends Kea_Controller_Action
 	{
 		$exhibit = $this->findBySlug();
 		
-		$exhibit->loadSections();
+		
 		
 		$this->checkPermission($exhibit);
 		
@@ -255,7 +255,7 @@ class ExhibitsController extends Kea_Controller_Action
 		}
 *///		echo $q;exit;
 
-		$exhibit->loadSections();
+		
 		
 		return $this->processExhibitForm($exhibit);
 	}	
@@ -586,7 +586,7 @@ class ExhibitsController extends Kea_Controller_Action
 	public function sectionListAction()
 	{
 		$exhibit = $this->findOrNew();
-		$exhibit->loadSections();
+		
 		$this->render('exhibits/_section_list.php', compact('exhibit'));
 	}
 	
