@@ -186,12 +186,12 @@ ul.tags, li.tag {display: inline;}
 #login #footer {padding:0;}
 
 /* == Header == */
-#header {overflow:hidden; background:#2c2c2c; padding-right:36px;}
+#header {overflow:hidden; background:#2c2c2c; padding-right:36px; border-top:6px solid #222;}
 	
 	#site-title {width:378px; float:left;margin:0 36px;padding:0.9em 0;}
 	#site-title a {color:#fff; }
 
-	#user-meta {display:block; float:right;padding:0 1em; width:16em;color:#fff;background:#222; text-align:center;}
+	#user-meta {display:block; float:right;padding:0 1em 0; width:16em;color:#fff;background:#222; text-align:center;}
 		#user-meta p {margin-bottom:0.5em; text-align:center;}
 		#user-meta a {color:#fff;}
 		#public-link {display: block; font-weight: bold; text-decoration: none; background-image: url("../images/arrow_right_white.gif"); background-position:6px 50%; background-repeat: no-repeat; padding: 0 0 0 24px;}

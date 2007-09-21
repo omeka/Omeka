@@ -70,12 +70,17 @@
 			<div id="recent-items">
 				<h2>Recent Items</h2>
 				<?php $items = recent_items('5'); ?>
+				<?php if($items->count() == 0):?>
+					<div class="error">There are no items to display</div>	
+				<?php else: ?>
 				<ul>
 					<?php foreach( $items as $key => $item ): ?>
 						<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><a href="<?php echo uri('items/show/'.$item->id); ?>"><span class="title"><?php  echo h($item->title); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></a> </li>	
 					<?php endforeach; ?>
 				</ul>
-				<p id="view-all-items"><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>	
+				
+				<p id="view-all-items"><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>
+				<?php endif; ?>
 			</div>
 			
 			<div id="tag-cloud">

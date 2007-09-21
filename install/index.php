@@ -82,7 +82,7 @@ try {
 	require_once 'Option.php';
 	$options = $manager->getTable('Option')->findAll();
 	if (count($options)) {
-		throw new Exception('Omeka has already been configured.  Please remove this install directory.');
+		throw new Exception('<h1>Omeka Already Installed</h1><p>It looks like Omeka has already been installed. You can remove the &#8220;install&#8221; directory for security reasons.</p>');
 	}
 	
 	// Use the "which" command to auto-detect the path to ImageMagick;
@@ -92,7 +92,7 @@ try {
 	$path_to_convert = ($output !== NULL) ? trim($output) : FALSE;
 	
 } catch (Exception $e) {
-	die($e->getMessage() . '  Please refer to Omeka documentation for help.');
+	die($e->getMessage() . '<p>Please refer to Omeka documentation for help.</p>');
 }
 
 
@@ -156,8 +156,8 @@ if (isset($_REQUEST['install_submit'])) {
 		$conn->execute($optionSql, array('public_theme', 'default'));
 
 		echo '<div id="intro">';
-		echo '<h1>Oh Yeah!</h1>';
-		echo '<p>The db is setup and you are ready to roll. <a href="'.dirname($_SERVER['REQUEST_URI']).'">check out your site here!</a></p>';
+		echo '<h1>All Finished!</h1>';
+		echo '<p>Omeka&#8217;s database is setup and you are ready to roll. <a href="'.dirname($_SERVER['REQUEST_URI']).'">Check out your site!</a></p>';
 		echo '</div>';
 		$display_form = false;
 
