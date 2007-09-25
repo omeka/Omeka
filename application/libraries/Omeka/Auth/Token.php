@@ -1,6 +1,6 @@
 <?php
 require_once 'Zend/Auth/Token/Interface.php';
-class Kea_Auth_Token implements Zend_Auth_Token_Interface
+class Omeka_Auth_Token implements Zend_Auth_Token_Interface
 {
     /**
      * Whether or not this token represents a successful authentication attempt

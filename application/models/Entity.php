@@ -8,7 +8,7 @@ require_once 'Person.php';
  * entity
  * @package: Omeka
  */
-class Entity extends Kea_Record
+class Entity extends Omeka_Record
 {
 	protected $error_messages = array(	'type' => array('notblank' => 'Must specify whether the name belongs to a Person or an Institution.'));
 	

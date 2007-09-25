@@ -6,7 +6,7 @@ define('UPGRADE_DIR', APP_DIR.DIRECTORY_SEPARATOR.'migrations');
  * @package Omeka
  * @author CHNM
  **/
-class Kea_Upgrader
+class Omeka_Upgrader
 {
 	protected $manager;
 	protected $start;
@@ -202,5 +202,5 @@ class Kea_Upgrader
 			return array();
 	}
 	
-} // END class Kea_Upgrader 
+} // END class Omeka_Upgrader 
 ?>

@@ -4,8 +4,8 @@ require_once 'Item.php';
 /**
  * @package Omeka
  **/
-require_once 'Kea/Controller/Action.php';
-class ItemsController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class ItemsController extends Omeka_Controller_Action
 {		
 	public function init() 
 	{
@@ -19,7 +19,7 @@ class ItemsController extends Kea_Controller_Action
 	 **/
 	public function editAction()
 	{
-		if($user = Kea::loggedIn()) {
+		if($user = Omeka::loggedIn()) {
 			
 			$item = $this->findById();
 		
@@ -41,7 +41,7 @@ class ItemsController extends Kea_Controller_Action
 	 **/
 	public function deleteAction()
 	{
-		if($user = Kea::loggedIn()) {
+		if($user = Omeka::loggedIn()) {
 			$item = $this->findById();
 			
 			//Permission check
@@ -80,7 +80,7 @@ class ItemsController extends Kea_Controller_Action
 		
 		//Otherwise check if specific user can see their own items
 		elseif($this->isAllowed('showSelfNotPublic')) {			
-			$perms['publicAndUser'] = Kea::loggedIn();
+			$perms['publicAndUser'] = Omeka::loggedIn();
 		}
 		//Find public items by default
 		else {
@@ -227,7 +227,7 @@ class ItemsController extends Kea_Controller_Action
 	public function showAction() 
 	{
 		$item = $this->findById();
-		$user = Kea::loggedIn();
+		$user = Omeka::loggedIn();
 		
 		//If the item is not public, check for permissions
 		$canSeeNotPublic = 	($this->isAllowed('showNotPublic') or 

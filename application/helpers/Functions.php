@@ -355,7 +355,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
 function uri($urlEnd, $params=array())
 {
     
-    $ctrl = Kea_Controller_Front::getInstance();
+    $ctrl = Omeka_Controller_Front::getInstance();
     
     $request = $ctrl->getRequest();
     
@@ -419,7 +419,7 @@ function flash($wrap=true)
 
 function controller_name()
 {
-	return Kea_Controller_Front::getInstance()->getRequest()->getControllerName();
+	return Omeka_Controller_Front::getInstance()->getRequest()->getControllerName();
 }
 
 ///// NAVIGATION /////
@@ -432,7 +432,7 @@ function controller_name()
  **/
 function nav(array $links) {
 	
-	$current = Kea_Controller_Front::getInstance()->getRequest()->getRequestUri();
+	$current = Omeka_Controller_Front::getInstance()->getRequest()->getRequestUri();
 	
 	$nav = '';
 	foreach( $links as $text => $link )
@@ -463,7 +463,7 @@ function admin_nav(array $links) {
 
 function is_current($link, $req = null) {	
 	if(!$req) {
-		$req = Kea_Controller_Front::getInstance()->getRequest();
+		$req = Omeka_Controller_Front::getInstance()->getRequest();
 	}
 	$current = $req->getRequestUri();
 	$base = $req->getBaseUrl();
@@ -497,7 +497,7 @@ function plugin_html($page, $options=array()) {
 function tag_string($record, $link=null, $delimiter=', ')
 {
 	$string = array();
-	if($record instanceof Kea_Record) {
+	if($record instanceof Omeka_Record) {
 		$tags = $record->Tags;
 		
 	}else {
@@ -843,7 +843,7 @@ function has_permission($role,$privilege=null) {
 
 function _make_omeka_request($controller,$action,$params, $returnVars)
 {
-	$front = Kea_Controller_Front::getInstance();
+	$front = Omeka_Controller_Front::getInstance();
 	$dirs = $front->getControllerDirectory();
 	
 	$className = ucwords($controller.'Controller');
@@ -1130,7 +1130,7 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 	 **/
 	function generate_url($options, $name)
 	{
-		$ctrl = Kea_Controller_Front::getInstance();
+		$ctrl = Omeka_Controller_Front::getInstance();
         $router = $ctrl->getRouter();
         
         if (empty($name)) {

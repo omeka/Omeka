@@ -4,7 +4,7 @@ require_once 'SectionPage.php';
  * Section
  * @package: Omeka
  */
-class Section extends Kea_Record
+class Section extends Omeka_Record
 {
 	protected $error_messages = array(	
 	'slug' => array('notblank' => 'This section must be given a valid slug.', 

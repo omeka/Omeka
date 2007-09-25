@@ -9,7 +9,7 @@ require_once 'MetafieldMetatext.php';
  * @package Omeka
  * 
  **/
-class Metafield extends Kea_Record { 
+class Metafield extends Omeka_Record { 
 	
 	protected $error_messages = array(	'name' => array('notblank' => 'Metafield name must not be blank', 'unique' => 'Metafield name must be different than existing metafield names'));
 

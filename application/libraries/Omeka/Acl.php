@@ -1,7 +1,7 @@
 <?php
 require_once 'Zend/Acl.php';
-require_once 'Kea/Acl/Role/Registry.php';
-class Kea_Acl extends Zend_Acl
+require_once 'Omeka/Acl/Role/Registry.php';
+class Omeka_Acl extends Zend_Acl
 {
 	protected $_autosave = true;
 	
@@ -194,7 +194,7 @@ class Kea_Acl extends Zend_Acl
 	protected function _getRoleRegistry()
     {
         if (null === $this->_roleRegistry) {
-            $this->_roleRegistry = new Kea_Acl_Role_Registry();
+            $this->_roleRegistry = new Omeka_Acl_Role_Registry();
         }
         return $this->_roleRegistry;
     }

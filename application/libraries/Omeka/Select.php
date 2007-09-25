@@ -16,7 +16,7 @@
  * @copyright  Copyright (c) 2005-2007 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Kea_Select {
+class Omeka_Select {
 
     /**
      * The component parts of a SELECT statement.

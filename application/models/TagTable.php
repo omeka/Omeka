@@ -66,12 +66,12 @@ class TagTable extends Doctrine_Table
 			}
 		}
 		
-		$select = new Kea_Select;
+		$select = new Omeka_Select;
 		
 		$select->from(array('Tag', 't'), 't.*, COUNT(t.id) as tagCount')
 				->innerJoin(array('Taggings', 'tg'), "tg.tag_id = t.id");
 
-		if($record instanceof Kea_Record) {
+		if($record instanceof Omeka_Record) {
 			if($record->exists()) {
 				$record_id = $record->id;
 				$select->where("tg.relation_id = ?", $record_id);
@@ -187,7 +187,7 @@ class TagTable extends Doctrine_Table
 	}
 	
 	protected function getTagListWithCount($user_id=null) {
-			$select = new Kea_Select;
+			$select = new Omeka_Select;
 			$select->from('tags t', 't.*, (COUNT(tg.id) AS tagCount')
 					->joinLeft('taggings tg', 'tg.tag_id = t.id')
 					->joinLeft('entities e', 'e.id = tg.entity_id')

@@ -252,7 +252,7 @@ class PluginBroker
 		}
 	}
 	
-	public function loadOutputDirs(Kea_View $view, $type)
+	public function loadOutputDirs(Omeka_View $view, $type)
 	{
 		$this->registerScriptPaths($view, $this->_output_dirs[$type]);
 	}
@@ -263,13 +263,13 @@ class PluginBroker
 	 * 
 	 * @return void
 	 **/
-	public function loadThemeDirs(Kea_View $view, $theme)
+	public function loadThemeDirs(Omeka_View $view, $theme)
 	{
 		$this->registerScriptPaths($view, $this->_theme_dirs[$theme]);
 	}
 		
 	/**
-	 * @see Kea_View::setThemePath()
+	 * @see Omeka_View::setThemePath()
 	 *
 	 * @return void
 	 **/	
@@ -301,7 +301,7 @@ class PluginBroker
 	 **/
 	public function addControllerDir($path=null)
 	{
-		$front = Kea_Controller_Front::getInstance();
+		$front = Omeka_Controller_Front::getInstance();
 		
 		$current = $this->getCurrentPlugin();
 		

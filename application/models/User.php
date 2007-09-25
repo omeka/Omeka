@@ -8,7 +8,7 @@ require_once 'Item.php';
  **/
 
 
-class User extends Kea_Record {
+class User extends Omeka_Record {
 
 	protected $error_messages = array(	'email' => array('email' => 'Email must be valid', 'unique' => 'That email address has already been claimed by a different user.'),
 										'username' => array('unique' => 'That username is already taken.', 'notblank' => 'You must provide a valid username.'));
@@ -91,7 +91,7 @@ class User extends Kea_Record {
 	public function changePassword($new1, $new2, $old)
 	{	
 		//super users can change the password without knowing the old one
-		$current = Kea::loggedIn();
+		$current = Omeka::loggedIn();
 		if($current->role == 'super') {
 			
 			if($new1 != $new2) {

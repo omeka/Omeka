@@ -64,8 +64,8 @@ if(!isset($options['migration'])) {
 if((int) $options['migration'] < OMEKA_MIGRATION) {
 	$fromVersion = $options['migration'] or $fromVersion = 0;
 	$toVersion = OMEKA_MIGRATION;
-	require_once 'Kea/Upgrader.php';
-	$upgrader = new Kea_Upgrader($manager, $fromVersion, $toVersion);
+	require_once 'Omeka/Upgrader.php';
+	$upgrader = new Omeka_Upgrader($manager, $fromVersion, $toVersion);
 	exit;
 }
 
@@ -74,8 +74,8 @@ $config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site
 Zend::register('config_ini', $config);
 
 if(isset($config->log)) {
-	require_once LIB_DIR.DIRECTORY_SEPARATOR.'Kea'.DIRECTORY_SEPARATOR.'Logger.php';
-	$logger = new Kea_Logger;
+	require_once LIB_DIR.DIRECTORY_SEPARATOR.'Omeka'.DIRECTORY_SEPARATOR.'Logger.php';
+	$logger = new Omeka_Logger;
 
 	if(isset($config->log->sql) && $config->log->sql) {
 		$logger->setSqlLog(LOGS_DIR.DIRECTORY_SEPARATOR.'sql.log');
@@ -102,8 +102,8 @@ $manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
 
 
 // Use Zend_Config_Ini to store the info for the routes and db ini files
-require_once 'Kea.php';
-spl_autoload_register(array('Kea', 'autoload'));
+require_once 'Omeka.php';
+spl_autoload_register(array('Omeka', 'autoload'));
 
 
 
@@ -118,20 +118,20 @@ require_once 'Item.php';
 require_once 'Option.php';
 
 require_once 'Zend/Auth.php';
-require_once 'Kea/Auth/Adapter.php';
+require_once 'Omeka/Auth/Adapter.php';
 
 $authPrefix = get_option('auth_prefix');
 
 //Set up the authentication mechanism with the specially generated prefix
 require_once 'Zend/Auth.php';
-$auth = new Kea_Auth(new Kea_Auth_Adapter(), true, $authPrefix);
+$auth = new Omeka_Auth(new Omeka_Auth_Adapter(), true, $authPrefix);
 
 //Register the Authentication mechanism to be able to share it
 Zend::register('auth', $auth);
 
 
 // Initialize some stuff
-$front = Kea_Controller_Front::getInstance();
+$front = Omeka_Controller_Front::getInstance();
 $router = new Zend_Controller_RewriteRouter();
 $router->addConfig(Zend::registry('routes_ini'), 'routes');
 fire_plugin_hook('loadRoutes', $router);

@@ -3,7 +3,7 @@ require_once 'Zend/Auth.php';
 /**
 * Wrapper for caching of Zend_Auth calls
 */
-class Kea_Auth extends Zend_Auth
+class Omeka_Auth extends Zend_Auth
 {
 	public function isLoggedIn()
 	{

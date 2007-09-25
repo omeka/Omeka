@@ -5,7 +5,7 @@
  * @package Omeka
  * @author CHNM
  **/
-class UsersActivations extends Kea_Record
+class UsersActivations extends Omeka_Record
 {
 	
 	public function setUp()
@@ -30,5 +30,5 @@ class UsersActivations extends Kea_Record
 	{
 		$this->url = sha1($this->User->password);
 	}
-} // END class UsersActivations extends Kea_Record
+} // END class UsersActivations extends Omeka_Record
  ?>

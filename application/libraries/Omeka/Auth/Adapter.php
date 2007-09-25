@@ -1,7 +1,7 @@
 <?php
 require_once 'Zend/Auth/Adapter.php';
 
-class Kea_Auth_Adapter extends Zend_Auth_Adapter
+class Omeka_Auth_Adapter extends Zend_Auth_Adapter
 {
 	public static function staticAuthenticate($options)
 	{
@@ -18,7 +18,7 @@ class Kea_Auth_Adapter extends Zend_Auth_Adapter
 			$user = $user[0];
 			
 			$user_id = $user->id;
-			return new Kea_Auth_Token($valid, $user_id);
+			return new Omeka_Auth_Token($valid, $user_id);
 		}
 		else {
 			unset($options['password']);
@@ -33,7 +33,7 @@ class Kea_Auth_Adapter extends Zend_Auth_Adapter
 			}
 			unset($user);
 		}
-		return new Kea_Auth_Token($valid, $identity, $message);
+		return new Omeka_Auth_Token($valid, $identity, $message);
 	}
 	
     public function authenticate($options)

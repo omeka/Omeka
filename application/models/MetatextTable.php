@@ -82,7 +82,7 @@ class MetatextTable extends Doctrine_Table
 			$where[] = "mf.name = '{$metafield['name']}'";
 		}
 		
-		$select = new Kea_Select;
+		$select = new Omeka_Select;
 		
 		if(count($where)) {
 			$where = '(' . join(' OR ', $where) . ')';
@@ -131,7 +131,7 @@ class MetatextTable extends Doctrine_Table
 		
 		//Retrieve the metafields
 
-			$select = new Kea_Select;
+			$select = new Omeka_Select;
 		
 		$type_id = ($type instanceof Type) ? $type->id : $type;
 		
@@ -167,7 +167,7 @@ class MetatextTable extends Doctrine_Table
 	{
 		$item_id = $item->exists() ? $item->id : 0;
 		
-		$select = new Kea_Select;
+		$select = new Omeka_Select;
 		$select->from(array('Metafield', 'mf'), 'DISTINCT(mf.name) as name, mt.text as text, mf.id as metafield_id, mf.description')
 			
 		//Join the metafields, types_metafields, types

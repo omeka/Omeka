@@ -5,7 +5,7 @@
  * @package Omeka
  * @author CHNM
  **/
-class Kea_Logger
+class Omeka_Logger
 {
 	private static $sqlLog;
 	private static $errorLog;
@@ -85,5 +85,5 @@ class Kea_Logger
 		file_put_contents( self::$sqlLog, $final, FILE_APPEND );
 	}
 }
- // END class Kea_Log 
+ // END class Omeka_Log 
 ?>

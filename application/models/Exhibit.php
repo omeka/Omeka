@@ -9,7 +9,7 @@ require_once 'ExhibitTaggings.php';
  * Exhibit
  * @package: Omeka
  */
-class Exhibit extends Kea_Record
+class Exhibit extends Omeka_Record
 {
 	protected $error_messages = array(	
 		'slug' => array('notblank' => 'Exhibit must be given a valid slug.', 
@@ -109,7 +109,7 @@ class Exhibit extends Kea_Record
 	public function postInsert()
 	{
 		//Set the name of the entity who added this
-		$e = Kea::loggedIn()->Entity;
+		$e = Omeka::loggedIn()->Entity;
 		
 		$this->setAddedBy($e);
 	}
@@ -117,7 +117,7 @@ class Exhibit extends Kea_Record
 	public function postUpdate()
 	{
 		//Set the name of the entity who edited this
-		$e = Kea::loggedIn()->Entity;
+		$e = Omeka::loggedIn()->Entity;
 		
 		$this->setModifiedBy($e);
 	}
@@ -157,7 +157,7 @@ class Exhibit extends Kea_Record
 	protected function postCommitForm($post, $options)
 	{
 		//Add the tags after the form has been saved
-		$current_user = Kea::loggedIn();		
+		$current_user = Omeka::loggedIn();		
 		$this->applyTagString($post['tags'], $current_user->Entity, true);
 		
 		//reload the sections b/c Doctrine is too dumb to do it

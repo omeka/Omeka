@@ -3,7 +3,7 @@
  * @package Omeka
  * 
  **/
-class Option extends Kea_Record { 
+class Option extends Omeka_Record { 
     public function setTableDefinition() {
 		$this->option('type', 'MYISAM');
 		$this->setTableName('options');

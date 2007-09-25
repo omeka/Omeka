@@ -3,7 +3,7 @@
  * EntityRelationships
  * @package: Omeka
  */
-class EntityRelationships extends Kea_Record
+class EntityRelationships extends Omeka_Record
 {
     public function setTableDefinition()
     {

@@ -85,7 +85,7 @@ class Relatable
 	 **/
 	public function addRelatedTo($entity, $relationship )
 	{
-		$entity_id = (int) ($entity instanceof Kea_Record) ? $entity->id : $entity;		
+		$entity_id = (int) ($entity instanceof Omeka_Record) ? $entity->id : $entity;		
 	
 		//If the entity_id is 0, die because that won't work
 		if($entity_id == 0) {
@@ -113,7 +113,7 @@ class Relatable
 	
 	public function removeRelatedTo($entity, $rel, $limit = null)
 	{
-		$entity_id = ($entity instanceof Kea_Record) ? $entity->id : $entity;
+		$entity_id = ($entity instanceof Omeka_Record) ? $entity->id : $entity;
 		
 		$relation_id = $this->getRelationId();
 		
@@ -153,7 +153,7 @@ class Relatable
 	public function isRelatedTo($entity_id, $rel=null)
 	{
 		$conn = $this->getTable()->getConnection();
-		$select = new Kea_Select($conn);
+		$select = new Omeka_Select($conn);
 		
 		$relation_id = $this->getRelationId();
 				

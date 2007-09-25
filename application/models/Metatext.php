@@ -6,7 +6,7 @@ require_once 'MetatextTable.php';
  * @package Omeka
  * 
  **/
-class Metatext extends Kea_Record { 
+class Metatext extends Omeka_Record { 
     public function setUp() {
 		$this->hasOne("Item","Metatext.item_id");
 		$this->hasOne("Metafield", "Metatext.metafield_id");

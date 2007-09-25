@@ -18,7 +18,7 @@ require_once 'ExhibitTaggings.php';
  * @package Omeka
  * 
  **/
-class Item extends Kea_Record
+class Item extends Omeka_Record
 {		
 	protected $error_messages = array(	'title' => array('notblank' => 'Item must be given a title.'));
 	
@@ -123,7 +123,7 @@ class Item extends Kea_Record
 	//Make sure you set the entity relationships
 	public function postInsert()
 	{
-		$entity = Kea::loggedIn()->Entity;
+		$entity = Omeka::loggedIn()->Entity;
 		
 		$this->setAddedBy($entity);
 	}
@@ -131,7 +131,7 @@ class Item extends Kea_Record
 	//Make sure you set the entity relationships
 	public function postUpdate()
 	{
-		$entity = Kea::loggedIn()->Entity;
+		$entity = Omeka::loggedIn()->Entity;
 		
 		$this->setModifiedBy($entity);
 	}
@@ -521,7 +521,7 @@ class Item extends Kea_Record
 			if(array_key_exists('remove_tag', $clean)) {
 				$tagId = $post['remove_tag'];
 				$tagToDelete = Zend::Registry( 'doctrine' )->getTable('Tag')->find($tagId);
-				$current_user = Kea::loggedIn();
+				$current_user = Omeka::loggedIn();
 				if($tagToDelete) {
 					fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $current_user);
 			
@@ -596,7 +596,7 @@ class Item extends Kea_Record
 			if(isset($options['entity'])) {
 				$entity = $options['entity'];
 			}else {
-				$user = Kea::loggedIn();
+				$user = Omeka::loggedIn();
 				$entity = $user->Entity;
 			}
 
@@ -634,6 +634,6 @@ class Item extends Kea_Record
 		return ($this->Files->count() > 0);
 	}
 		
-} // END class Item extends Kea_Domain_Record
+} // END class Item extends Omeka_Domain_Record
 
 ?>

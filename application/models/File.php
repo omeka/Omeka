@@ -18,7 +18,7 @@ require_once 'FileMetaLookup.php';
  * @package Omeka
  * 
  **/
-class File extends Kea_Record { 
+class File extends Omeka_Record { 
     
 	protected $extendedMetadata = array();
 	

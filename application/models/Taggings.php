@@ -4,7 +4,7 @@ require_once 'TaggingsTable.php';
  * Taggings
  * @package: Omeka
  */
-class Taggings extends Kea_Record
+class Taggings extends Omeka_Record
 {
 	protected static $_inheritance_id;
 	

@@ -3,7 +3,7 @@
  * ItemsPages
  * @package: Omeka
  */
-class ItemsPages extends Kea_Record
+class ItemsPages extends Omeka_Record
 {
     public function setTableDefinition()
     {

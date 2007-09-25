@@ -1,13 +1,13 @@
 <?php
 /**
- * Kea_Record 
+ * Omeka_Record 
  *
  * Customized wrapper for Doctrine_Record
  *
- * @package Kea
+ * @package Omeka
  * 
  **/
-abstract class Kea_Record extends Doctrine_Record
+abstract class Omeka_Record extends Doctrine_Record
 {		
 	/**
 	 * Ex.
@@ -348,7 +348,7 @@ abstract class Kea_Record extends Doctrine_Record
 	/**
 	 * Processes and saves the form to the given record
 	 *
-	 * @param Kea_Record
+	 * @param Omeka_Record
 	 * @return boolean True on success, false otherwise
 	 **/
 	public function commitForm(&$post, $save=true, $options=array())
@@ -394,7 +394,7 @@ abstract class Kea_Record extends Doctrine_Record
 	 * @return void
 	 **/
 	protected function userHasPermission($rule) {
-		$user = Kea::loggedIn();
+		$user = Omeka::loggedIn();
 		$resource = $this->getPluralized(false);
 		
 		/*	'default' permission level is hard-coded here, may change later */
@@ -448,5 +448,5 @@ abstract class Kea_Record extends Doctrine_Record
 	protected function postCommitForm($post, $options) {}
 	
 	protected function onFormError($post, $options) {}
-} // END abstract class Kea_Record
+} // END abstract class Omeka_Record
 ?>

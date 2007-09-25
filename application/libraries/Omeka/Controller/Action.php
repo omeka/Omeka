@@ -3,10 +3,10 @@
  * @package Omeka
  */
 require_once 'Zend/Controller/Action.php';
-abstract class Kea_Controller_Action extends Zend_Controller_Action
+abstract class Omeka_Controller_Action extends Zend_Controller_Action
 {		
 	/**
-	 * @var Kea_View
+	 * @var Omeka_View
 	 */
 	protected $_view;
 	
@@ -27,14 +27,14 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	/**
 	 * Current options for browsing involve either Pagination or a single page list
 	 *
-	 * @var Kea_Controller_Browse_Interface
+	 * @var Omeka_Controller_Browse_Interface
 	 **/
 	protected $_browse;
 	
 	/**
-	 * Kea_Acl
+	 * Omeka_Acl
 	 *
-	 * @var Kea_Acl
+	 * @var Omeka_Acl
 	 **/
 	protected $acl;
 	
@@ -92,7 +92,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		$init = parent::__construct($request, $response, $invokeArgs);
 		
 		if(!array_key_exists('return',$invokeArgs)) {
-			$this->_view = new Kea_View($this);
+			$this->_view = new Omeka_View($this);
 		}
 		
 		$this->_auth = Zend::Registry('auth');
@@ -213,7 +213,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 				//Deal with the login stuff
 			require_once 'Zend/Auth.php';
 			require_once 'Zend/Session.php';
-			require_once 'Kea/Auth/Adapter.php';
+			require_once 'Omeka/Auth/Adapter.php';
 
 			$auth = $this->_auth;
 			if (!$auth->isLoggedIn()) {
@@ -290,7 +290,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 		}
 		
 		if(!$user) {
-			$user = Kea::loggedIn();
+			$user = Omeka::loggedIn();
 		}
 		
 		/*	'default' permission level is hard-coded here, may change later */
@@ -323,7 +323,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	{
 		require_once 'Zend/Auth.php';
 		require_once 'Zend/Session.php';
-		require_once 'Kea/Auth/Adapter.php';
+		require_once 'Omeka/Auth/Adapter.php';
 		require_once 'Zend/Filter/Input.php';
 
 		$auth = $this->_auth;
@@ -427,7 +427,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	}
 	
 	/**
-	 * Browsing strategy defaults to a full listing, can be switched to pagination by instantiating Kea_Controller_Browse_Pagination in the init() method
+	 * Browsing strategy defaults to a full listing, can be switched to pagination by instantiating Omeka_Controller_Browse_Pagination in the init() method
 	 *
 	 * @return void
 	 **/
@@ -585,7 +585,7 @@ abstract class Kea_Controller_Action extends Zend_Controller_Action
 	 * Find a particular record given its unique ID # and (optionally) its class name.  Essentially a convenience method
 	 * $this->_table must be initialized in the init() method if the particular model is to be chosen automagically
 	 * 
-	 * @return Kea_Record
+	 * @return Omeka_Record
 	 **/
 	public function findById($id=null, $table=null)
 	{

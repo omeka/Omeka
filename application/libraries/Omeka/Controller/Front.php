@@ -6,7 +6,7 @@ require_once 'Zend/Controller/Front.php';
  * @package Sitebuilder
  * 
  **/
-class Kea_Controller_Front extends Zend_Controller_Front
+class Omeka_Controller_Front extends Zend_Controller_Front
 {
 	
 	/**
@@ -23,7 +23,7 @@ class Kea_Controller_Front extends Zend_Controller_Front
 	/**
      * Singleton instance
      * 
-     * @return Kea_Controller_Front
+     * @return Omeka_Controller_Front
      */
     public static function getInstance()
     {
@@ -96,7 +96,7 @@ class Kea_Controller_Front extends Zend_Controller_Front
 			$file = $dir . DIRECTORY_SEPARATOR . $page . '.php';
 		}
 		
-		$view = new Kea_View(null, array('request'=>$req));
+		$view = new Omeka_View(null, array('request'=>$req));
 		echo $view->render($file);
 		
 		return true;
@@ -104,18 +104,18 @@ class Kea_Controller_Front extends Zend_Controller_Front
 	
 	protected function render404($e, $debugExceptions = false)
 	{
-		Kea_Logger::logError( $e );
+		Omeka_Logger::logError( $e );
 		if($debugExceptions) {
 			include BASE_DIR . DIRECTORY_SEPARATOR .'404.php';
 			exit;	
 		}else {
-			$front = Kea_Controller_Front::getInstance();
-			$view = new Kea_View(null, array('request'=>$front->getRequest()));
+			$front = Omeka_Controller_Front::getInstance();
+			$view = new Omeka_View(null, array('request'=>$front->getRequest()));
 			echo $view->render('404.php');
 			exit;		
 		}	
 	}
 
-} // END class Kea_Controller_Front extends Zend_Controller_Front
+} // END class Omeka_Controller_Front extends Zend_Controller_Front
 
 ?>

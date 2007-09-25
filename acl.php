@@ -4,7 +4,7 @@
  * 
  **/
 
-$acl = new Kea_Acl();
+$acl = new Omeka_Acl();
 
 $acl->setAutoSave(false);
 

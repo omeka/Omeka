@@ -3,8 +3,8 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Metafield.php';
 /**
  * @package Omeka
  **/
-require_once 'Kea/Controller/Action.php';
-class TypesController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class TypesController extends Omeka_Controller_Action
 {
 	public function init()
 	{

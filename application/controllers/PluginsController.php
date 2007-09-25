@@ -3,8 +3,8 @@ require_once 'Plugin.php';
 /**
  * @package Omeka
  **/
-require_once 'Kea/Controller/Action.php';
-class PluginsController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class PluginsController extends Omeka_Controller_Action
 {
 	
 	protected $_redirects = array(

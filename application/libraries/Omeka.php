@@ -1,9 +1,9 @@
 <?php
 /**
- * @package Kea
+ * @package Omeka
  * 
  */
-final class Kea
+final class Omeka
 {
 	static function autoload($classname)
 	{
@@ -30,7 +30,7 @@ final class Kea
 	static function loggedIn() {
 		require_once 'Zend/Auth.php';
 		require_once 'Zend/Session.php';
-		require_once 'Kea/Auth/Adapter.php';
+		require_once 'Omeka/Auth/Adapter.php';
 		require_once 'Zend/Filter/Input.php';
 
 		$auth = Zend::Registry('auth');

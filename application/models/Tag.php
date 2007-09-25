@@ -6,7 +6,7 @@ require_once 'Exhibit.php';
  * @package Omeka
  * 
  **/
-class Tag extends Kea_Record { 
+class Tag extends Omeka_Record { 
   
 	public function setUp() {
 		$this->ownsMany("Taggings","Taggings.tag_id");

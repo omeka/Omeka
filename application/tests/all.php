@@ -6,8 +6,8 @@ require_once '../../paths.php';
 
 //set_include_path(get_include_path().PATH_SEPARATOR.APP_DIR.DIRECTORY_SEPARATOR.$site['simpletest']);
 
-/*require_once 'Kea/Logger.php';
-$logger = new Kea_Logger;
+/*require_once 'Omeka/Logger.php';
+$logger = new Omeka_Logger;
 $logger->setSqlLog(dirname(__FILE__).DIRECTORY_SEPARATOR.'sql.log');
 $logger->activateSqlLogging(true);	
 */
@@ -30,8 +30,8 @@ require_once 'simpletest/web_tester.php';
 
 require_once 'OmekaTestCase.php';
 
-require_once 'Kea/Record.php';
-require_once 'Kea/JoinRecord.php';
+require_once 'Omeka/Record.php';
+require_once 'Omeka/JoinRecord.php';
 require_once 'Item.php';
 
 require_once 'TagTestCase.php';

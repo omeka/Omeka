@@ -2,8 +2,8 @@
 /**
  * @package Omeka
  **/
-require_once 'Kea/Controller/Action.php';
-class IndexController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class IndexController extends Omeka_Controller_Action
 {
 	/**
 	 * This allows for GET style routing.

@@ -3,8 +3,8 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Exhibit.php';
 /**
  * @package Omeka
  **/
-require_once 'Kea/Controller/Action.php';
-class ExhibitsController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class ExhibitsController extends Omeka_Controller_Action
 {
 	protected $session;
 	
@@ -250,7 +250,7 @@ class ExhibitsController extends Kea_Controller_Action
 /*		if(1==1) {
 			$q->addSelect("et.*");
 			$q->leftJoin("e.ExhibitsTags et");
-			$user_id = Kea::loggedIn()->id;
+			$user_id = Omeka::loggedIn()->id;
 			$q->addWhere("et.user_id = :user_id", array('user_id'=>$user_id));
 		}
 *///		echo $q;exit;

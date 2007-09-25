@@ -16,7 +16,7 @@ function pluck($col, $array)
 
 function current_user()
 {
-	return Kea::loggedIn();
+	return Omeka::loggedIn();
 }
 
 function strip_slashes($text)

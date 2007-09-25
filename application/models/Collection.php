@@ -4,7 +4,7 @@ require_once 'CollectionTaggings.php';
 /**
  * @package Omeka
  **/
-class Collection extends Kea_Record { 
+class Collection extends Omeka_Record { 
 
 	public function construct()
 	{
@@ -38,7 +38,7 @@ class Collection extends Kea_Record {
 	//Make sure you set the entity relationships
 	public function postInsert()
 	{
-		$entity = Kea::loggedIn()->Entity;
+		$entity = Omeka::loggedIn()->Entity;
 		
 		$this->setAddedBy($entity);
 	}
@@ -46,7 +46,7 @@ class Collection extends Kea_Record {
 	//Make sure you set the entity relationships
 	public function postUpdate()
 	{
-		$entity = Kea::loggedIn()->Entity;
+		$entity = Omeka::loggedIn()->Entity;
 		
 		$this->setModifiedBy($entity);
 	}
@@ -80,7 +80,7 @@ class Collection extends Kea_Record {
 				return $this->timeOfLastRelationship('modified');
 			
 			case 'favorite':
-				$user = Kea::loggedIn();
+				$user = Omeka::loggedIn();
 				return $this->isFavoriteOf($user);
 			
 			case 'Collectors':

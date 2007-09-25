@@ -5,7 +5,7 @@
  * @package Omeka
  **/
 require_once 'Zend/View/Abstract.php';
-class Kea_View extends Zend_View_Abstract
+class Omeka_View extends Zend_View_Abstract
 {	
 	/**
 	 * Placeholder for Zend Request object

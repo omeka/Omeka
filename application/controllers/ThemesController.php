@@ -2,9 +2,9 @@
 /**
  * @package Omeka
  **/
-require_once 'Kea/Controller/Action.php';
+require_once 'Omeka/Controller/Action.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Theme.php';
-class ThemesController extends Kea_Controller_Action
+class ThemesController extends Omeka_Controller_Action
 {	
 	/**
 	 * This is only temporary until the system is better

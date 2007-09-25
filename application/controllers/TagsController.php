@@ -4,8 +4,8 @@ require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Tag.php';
 /**
  * @package Omeka
  **/
-require_once 'Kea/Controller/Action.php';
-class TagsController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class TagsController extends Omeka_Controller_Action
 {	
 	public function init()
 	{
@@ -15,7 +15,7 @@ class TagsController extends Kea_Controller_Action
 	
 	public function editAction()
 	{
-		if($user = Kea::loggedIn()) {
+		if($user = Omeka::loggedIn()) {
 			
 			if(!empty($_POST)) {				
 				$this->editTags($user);
@@ -36,7 +36,7 @@ class TagsController extends Kea_Controller_Action
 	
 	public function deleteAction()
 	{
-		if($user = Kea::loggedIn()) {
+		if($user = Omeka::loggedIn()) {
 			if(!empty($_POST)) {
 				$tag_id = $_POST['delete_tag'];
 				$tag = $this->_table->find($tag_id);

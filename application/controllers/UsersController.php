@@ -4,8 +4,8 @@
  **/
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'User.php';
 require_once 'Zend/Filter/Input.php';
-require_once 'Kea/Controller/Action.php';
-class UsersController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class UsersController extends Omeka_Controller_Action
 {	
 	protected $_redirects = array(
 		'add'=> array('users/show/id', array('id'))
@@ -30,7 +30,7 @@ class UsersController extends Kea_Controller_Action
 			$this->_redirect('users/browse');
 		}
 		
-		$current = Kea::loggedIn();
+		$current = Omeka::loggedIn();
 		
 		if($current->id == $user->id) {
 			$this->flash('You are not allowed to delete yourself!');
@@ -171,7 +171,7 @@ class UsersController extends Kea_Controller_Action
 	{
 		$user = $this->findById();
 		
-		$current = Kea::loggedIn();
+		$current = Omeka::loggedIn();
 				
 		try {
 			//Only super users and the actual user can change this user's password
@@ -240,7 +240,7 @@ class UsersController extends Kea_Controller_Action
 	{		
 		$userActions = array('show','edit');
 				
-		if($current = Kea::loggedIn()) {
+		if($current = Omeka::loggedIn()) {
 			try {
 				$user = $this->findById();
 				if($current->id == $user->id) {

@@ -1,6 +1,6 @@
 <?php
 require_once 'Zend/Acl/Role/Registry.php';
-class Kea_Acl_Role_Registry extends Zend_Acl_Role_Registry
+class Omeka_Acl_Role_Registry extends Zend_Acl_Role_Registry
 {	
 	public function getRoles()
 	{

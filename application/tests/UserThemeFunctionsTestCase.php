@@ -8,10 +8,10 @@
 require_once HELPERS;
 require_once CONTROLLER_DIR.DIRECTORY_SEPARATOR.'UsersController.php'; 
 require_once 'Zend/Auth.php';
-require_once 'Kea/Auth/Token.php';
-Mock::generate('Kea_Acl');
+require_once 'Omeka/Auth/Token.php';
+Mock::generate('Omeka_Acl');
 Mock::generate('Zend_Auth');
-Mock::generate('Kea_Auth_Token');
+Mock::generate('Omeka_Auth_Token');
 
 class UserThemeFunctionsTestCase extends OmekaTestCase
 {
@@ -25,7 +25,7 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		}
 		
 		$mockAuth = new MockZend_Auth();
-		$mockToken = new MockKea_Auth_Token();
+		$mockToken = new MockOmeka_Auth_Token();
 		
 		$mockAuth->setReturnValue('getToken',$mockToken);
 		$mockToken->setReturnValue('getIdentity',$user);
@@ -41,15 +41,15 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		
 	}
 	
-	public function testKeaLoggedIn()
+	public function testOmekaLoggedIn()
 	{
 		$user = $this->login();
-		$this->assertEqual($user->id, Kea::loggedIn()->id);		
+		$this->assertEqual($user->id, Omeka::loggedIn()->id);		
 	}
 	
 	public function testHasPermission()
 	{
-		$acl = new MockKea_Acl();
+		$acl = new MockOmeka_Acl();
 		
 		$user = $this->login('super');
 		$acl->setReturnValue('isAllowed',true,array('super','Items','edit'));
@@ -129,7 +129,7 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 	public function testOmekaRequestFunction() {
 		$user = $this->login();
 		
-		$acl = new MockKea_Acl();
+		$acl = new MockOmeka_Acl();
 		
 		//isAllowed will always return true b/c the User is a super user
 		$acl->setReturnValue('isAllowed',true,array('*','*','*'));

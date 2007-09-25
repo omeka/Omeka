@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Kea/Controller/Action.php';
-class SettingsController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class SettingsController extends Omeka_Controller_Action
 {	
 	public function indexAction() {
 		$this->_forward('settings', 'edit');

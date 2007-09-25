@@ -3,7 +3,7 @@
  * Exhibit Page
  * @package: Omeka
  */
-class SectionPage extends Kea_Record
+class SectionPage extends Omeka_Record
 {
 	public function setTableDefinition()
     {

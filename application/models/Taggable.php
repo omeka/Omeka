@@ -8,7 +8,7 @@ class Taggable
 {
 	protected $record;
 	
-	public function __construct(Kea_Record $record) {
+	public function __construct(Omeka_Record $record) {
 
 		$this->record = $record;
 		

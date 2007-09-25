@@ -5,7 +5,7 @@ require_once 'TypesMetafields.php' ;
  * @package Omeka
  * 
  **/
-class Type extends Kea_Record { 
+class Type extends Omeka_Record { 
     protected $error_messages = array(	'name' => array('notblank' => 'Type name must not be blank.'));
 
 	public function setUp() {

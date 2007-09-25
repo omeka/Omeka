@@ -3,7 +3,7 @@
  * FilesVideo
  * @package: Omeka
  */
-class FilesVideos extends Kea_Record
+class FilesVideos extends Omeka_Record
 {	
     public function setTableDefinition()
     {

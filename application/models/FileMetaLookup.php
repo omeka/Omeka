@@ -3,7 +3,7 @@
  * FileMetaLookup
  * @package: Omeka
  */
-class FileMetaLookup extends Kea_Record
+class FileMetaLookup extends Omeka_Record
 {
     public function setTableDefinition()
     {

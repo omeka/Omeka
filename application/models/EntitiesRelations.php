@@ -4,7 +4,7 @@ require_once 'EntityRelationships.php';
  * ItemsPeople
  * @package: Omeka
  */
-class EntitiesRelations extends Kea_Record
+class EntitiesRelations extends Omeka_Record
 {
     public function setTableDefinition()
     {

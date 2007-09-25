@@ -3,7 +3,7 @@
  * FilesImages
  * @package: Omeka
  */
-class FilesImages extends Kea_Record
+class FilesImages extends Omeka_Record
 {	
     public function setTableDefinition()
     {

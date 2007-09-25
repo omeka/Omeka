@@ -18,7 +18,7 @@ $request->setParam('admin', true);
 
 #############################################
 # CHECKING TO SEE IF THE USER IS LOGGED IN IS HANDLED BY
-# THE Kea_Controller_Action::preDispatch() method
+# THE Omeka_Controller_Action::preDispatch() method
 #############################################
 
 #############################################

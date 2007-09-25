@@ -110,7 +110,7 @@ class ItemTable extends Doctrine_Table
 			}
 			*/
 		if(count($metafields)) {
-			$subQuery = new Kea_Select;
+			$subQuery = new Omeka_Select;
 			$subQuery->from(array('Metatext','mt'), 'mt.id')
 			->innerJoin(array('Metafield','m'), 'm.id = mt.metafield_id')
 			->where(join(' OR ', $metafields));
@@ -124,7 +124,7 @@ class ItemTable extends Doctrine_Table
 	/**
 	 * Can specify a range of valid Item IDs or an individual ID
 	 * 
-	 * @param Kea_Select $select
+	 * @param Omeka_Select $select
 	 * @param string $range Example: 1-4, 75, 89
 	 * @return void
 	 **/
@@ -216,7 +216,7 @@ class ItemTable extends Doctrine_Table
 	 **/
 	public function findBy($params=array(), $returnCount=false)
 	{
-		$select = new Kea_Select;
+		$select = new Omeka_Select;
 		
 		$select->from('items i','DISTINCT i.id');
 		
@@ -302,7 +302,7 @@ class ItemTable extends Doctrine_Table
 			{
 				$excludeTags = explode(',', $excludeTags);
 			}
-			$subSelect = new Kea_Select;
+			$subSelect = new Omeka_Select;
 			$subSelect->from('items i INNER JOIN taggings tg ON tg.relation_id = i.id 
 						INNER JOIN tags t ON tg.tag_id = t.id', 'i.id');
 							

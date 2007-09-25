@@ -3,8 +3,8 @@
  * @package Omeka
  **/
 require_once 'Entity.php';
-require_once 'Kea/Controller/Action.php';
-class EntitiesController extends Kea_Controller_Action
+require_once 'Omeka/Controller/Action.php';
+class EntitiesController extends Omeka_Controller_Action
 {
 	protected $_redirects = array(
 		'merge'=>array('entities/'), 
@@ -31,7 +31,7 @@ class EntitiesController extends Kea_Controller_Action
 				$this->_redirect('entities/browse');
 			}
 			
-			$current = Kea::loggedIn();
+			$current = Omeka::loggedIn();
 			
 			//We can't delete ourselves
 			if( $user->id == $current->id ) {
