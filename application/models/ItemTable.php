@@ -344,7 +344,7 @@ class ItemTable extends Doctrine_Table
 		}
 		
 		//Fire a plugin hook to add clauses to the SELECT statement
-		fire_plugin_hook('item_browse_sql', $select);
+		fire_plugin_hook('item_browse_sql', $select, $params);
 
 //echo $select;
 		//At this point we can return the count instead of the items themselves if that is specified

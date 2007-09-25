@@ -821,11 +821,6 @@ function get_user_roles(array $params = array())
 	return _make_omeka_request('Users','roles',$params,'roles');
 }
 
-function current_user()
-{
-	return Kea::loggedIn();
-}
-
 function has_thumbnail($item) {
 	return $item->hasThumbnail();
 }
