@@ -211,7 +211,12 @@ if ($display_form == true):
 	</div>
 	<div class="field">
 	<label for="path_to_convert">Imagemagick Binary Path</label>
-	<input type="text" name="path_to_convert" class="textinput" id="path_to_convert" value="<?php echo htmlentities($_POST['path_to_convert']); ?>" />';
+	<input type="text" name="path_to_convert" class="textinput" id="path_to_convert" value="
+	<?php if ($path_to_convert) { 
+			echo "$path_to_convert.\" /> <p>$path_to_convert (found automatically)</p>";
+		  } else {
+			echo htmlentities($_POST['path_to_convert'])."\" />";
+		} ?>
 	</div>
 	</fieldset>
 	<fieldset>
