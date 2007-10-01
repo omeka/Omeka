@@ -32,7 +32,7 @@ class ItemsController extends Omeka_Controller_Action
 			}
 		}
 
-		$this->_forward('index','forbidden');
+		$this->_forward('forbidden', 'index');
 	}
 	
 	/**
@@ -51,12 +51,12 @@ class ItemsController extends Omeka_Controller_Action
 				$this->_redirect('delete', array('controller'=>'items'));
 			}
 		}
-		$this->_forward('index', 'forbidden');
+		$this->_forward('forbidden', 'index');
 	}
 
 	public function tagsAction()
 	{
-		$this->_forward('Tags', 'browse', array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
+		$this->_forward('browse', 'Tags', null, array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
 	}
 
 	/**
@@ -157,13 +157,13 @@ class ItemsController extends Omeka_Controller_Action
 		
 		//Get the item count after permissions have been applied, which is the total number of items possible to see
 		$total_items = $this->getTable('Item')->findBy($perms, true);
-		Zend::register('total_items', $total_items);
+		Zend_Registry::set('total_items', $total_items);
 		
 		$params = array_merge($perms, $filter, $order);
 
 		//Get the item count after other filtering has been applied, which is the total number of items found
 		$total_results = $this->getTable('Item')->findBy($params, true);
-		Zend::register('total_results', $total_results);
+		Zend_Registry::set('total_results', $total_results);
 
 
 		
@@ -181,7 +181,7 @@ class ItemsController extends Omeka_Controller_Action
 		
 		$options = array_merge($options, $reqOptions);
 		
-		$config_ini = Zend::Registry('config_ini');
+		$config_ini = Zend_Registry::get('config_ini');
 
 		if ($config_ini->pagination->per_page)
 		{
@@ -202,7 +202,7 @@ class ItemsController extends Omeka_Controller_Action
 
 		//Serve up the pagination
 		$pagination = array('menu'=>$menu, 'page'=>$options['page'], 'per_page'=>$params['per_page'], 'total_results'=>$total_results, 'link'=>$options['pagination_url']);
-		Zend::register('pagination', $pagination);
+		Zend_Registry::set('pagination', $pagination);
 		
 		fire_plugin_hook('browse_items', $items);
 		
@@ -257,7 +257,7 @@ class ItemsController extends Omeka_Controller_Action
 
 		$item->refresh();
 		
-		Zend::register('item', $item);
+		Zend_Registry::set('item', $item);
 		
 		fire_plugin_hook('show_item', $item);
 		

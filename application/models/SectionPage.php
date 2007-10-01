@@ -95,7 +95,7 @@ class SectionPage extends Omeka_Record
 		public function Item($order) {
 		$dql = "SELECT i.* FROM Item i INNER JOIN i.ItemsPages ip INNER JOIN ip.Page p WHERE p.order = ? AND p.id = ? LIMIT 1";
 		$item = $this->executeDql($dql, array($order, $this->id));
-		Zend::dump( get_class($item) );exit;
+		Zend_Debug::dump( get_class($item) );exit;
 	}
 */	
 	

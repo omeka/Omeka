@@ -21,8 +21,8 @@
 			<?php $recent = recent_items(8); ?>
 			<ul>
 				<?php foreach( $recent as $item ): ?>
-				<li><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo $item->title; ?></a><?php if ($item->description) 
-				 echo "<span class=\"item-description\">".$item->description."</span>"; ?></li>
+				<li><a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo $item->title; ?></a><?php if ($item->description); 
+				{ echo "<span class=\"item-description\">".$item->description."</span>"; } ?></li>
 				<?php endforeach; ?>
 			</ul>
 		</div><!--end recent-items -->

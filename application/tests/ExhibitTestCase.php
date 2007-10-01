@@ -44,7 +44,7 @@ class ExhibitTestCase extends OmekaTestCase
 		
 //		$stack = $p->getErrorStack();
 		
-//		Zend::dump( $stack );
+//		Zend_Debug::dump( $stack );
 		
 		$p->layout = 'foobar';
 		

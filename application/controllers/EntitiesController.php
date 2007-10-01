@@ -60,7 +60,7 @@ class EntitiesController extends Omeka_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
-		return $this->_forward('Entities', 'browse');
+		return $this->_forward('browse', 'Entities');
 	}
 
 	public function browseAction()

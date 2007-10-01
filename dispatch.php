@@ -1,3 +1,3 @@
 <?php
-	$front->dispatch($config->debug->exceptions);
+	$front->dispatch($request, $response);
 ?>

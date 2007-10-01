@@ -29,16 +29,15 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		
 		$mockAuth->setReturnValue('getToken',$mockToken);
 		$mockToken->setReturnValue('getIdentity',$user);
-		$mockAuth->setReturnValue('isLoggedIn',true);
+		$mockAuth->setReturnValue('hasIdentity',true);
 		
-		Zend::register('auth',$mockAuth);
+		Zend_Registry::set('auth',$mockAuth);
 		return $user;		
 	}
 	
 	private function logout()
 	{
-		$auth = Zend::Registry('auth');
-		
+		$auth = Zend_Registry::get('auth');
 	}
 	
 	public function testOmekaLoggedIn()
@@ -54,7 +53,7 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		$user = $this->login('super');
 		$acl->setReturnValue('isAllowed',true,array('super','Items','edit'));
 		
-		Zend::register('acl',$acl);	
+		Zend_Registry::set('acl',$acl);	
 		
 		$this->assertTrue(has_permission('Items','edit') );
 		$this->assertFalse(has_permission('Items','show') );
@@ -67,8 +66,8 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 	{
 		$hard_path = dirname(dirname(__FILE__));
 		$web_path = WEB_ROOT.DIRECTORY_SEPARATOR.'application';
-		Zend::register('theme_path',$hard_path);
-		Zend::register('theme_web',$web_path);
+		Zend_Registry::set('theme_path',$hard_path);
+		Zend_Registry::set('theme_web',$web_path);
 		
 		ob_start();
 		src('setup.sql','tests',null);
@@ -76,13 +75,13 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		$this->assertEqual($web_path.DIRECTORY_SEPARATOR.'tests/setup.sql',$src);
 		ob_flush();
 		
-		Zend::register('theme_path',dirname(__FILE__));
+		Zend_Registry::set('theme_path',dirname(__FILE__));
 		src('setup.sql',null);
 		$src = ob_get_clean();
 		$this->assertEqual($web_path.DIRECTORY_SEPARATOR.'setup.sql',$src);
 		ob_flush();
 		
-		Zend::register('theme_path','foobar');
+		Zend_Registry::set('theme_path','foobar');
 		$this->expectException(new Exception('Cannot find bar/foo.php'));
 		echo src('foo', 'bar', 'php', false);
 	}
@@ -91,8 +90,8 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 	{
 		$hard_path = dirname(__FILE__);
 		$web_path = WEB_ROOT.DIRECTORY_SEPARATOR.'application';
-		Zend::register('theme_path',$hard_path);
-		Zend::register('theme_web',$web_path);
+		Zend_Registry::set('theme_path',$hard_path);
+		Zend_Registry::set('theme_web',$web_path);
 		
 		ob_start();
 		js('test',null);
@@ -134,7 +133,7 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		//isAllowed will always return true b/c the User is a super user
 		$acl->setReturnValue('isAllowed',true,array('*','*','*'));
 		
-		$acl = Zend::register('acl',$acl);
+		$acl = Zend_Registry::set('acl',$acl);
 		
 		require_once CONTROLLER_DIR.DIRECTORY_SEPARATOR.'ItemsController.php';
 		$controller = 'Items';

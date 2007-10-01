@@ -15,7 +15,7 @@ class ThemesController extends Omeka_Controller_Action
 	public function init()
 	{
 		require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-		$doctrine = Zend::registry('doctrine');
+		$doctrine = Zend_Registry::get('doctrine');
 		$options = $doctrine->getTable('option');
 		$themes = $options->findByDql('name LIKE ? or name LIKE ?', array('admin_theme', 'theme'));
 		
@@ -114,10 +114,5 @@ class ThemesController extends Omeka_Controller_Action
 
 		return $this->render('themes/browse.php', compact('current', 'themes'));
 	}
-
-    public function noRouteAction()
-    {
-        $this->_redirect('/');
-    }
 }
 ?>

@@ -173,7 +173,7 @@ function text_to_id($text, $prepend=null, $delimiter='-')
  * This should be used when you need to include a file through PHP.
  */
 function theme_path($return = false) {
-	$path = Zend::registry('theme_path');
+	$path = Zend_Registry::get('theme_path');
 	if($return) return $path;
 	else echo $path;
 }
@@ -183,7 +183,7 @@ function theme_path($return = false) {
  * This should be used when you need to link in an image or other file.
  */
 function web_path($return = false) {
-	$path = Zend::registry('theme_web');
+	$path = Zend_Registry::get('theme_web');
 	if($return) return $path;
 	else echo $path;
 }
@@ -218,7 +218,7 @@ function plugin_src($file, $dir=null)
 	try {
 		$file = (!empty($dir)) ? $dir . DIRECTORY_SEPARATOR . $file : $file;
 		
-		$paths = Zend::Registry( 'plugin_view_paths' );
+		$paths = Zend_Registry::get('plugin_view_paths');
 		
 		foreach ($paths as $physical => $web) {
 
@@ -266,7 +266,7 @@ function common($file, $vars = array(), $dir = 'common') {
 		include $path;
 	}else {			
 		//Grab the view paths for the plugins and then append the path for the shared directory
-		$paths = Zend::isRegistered('plugin_view_paths') ? Zend::Registry( 'plugin_view_paths' ) : array();
+		$paths = Zend_Registry::isRegistered('plugin_view_paths') ? Zend_Registry::get( 'plugin_view_paths' ) : array();
 		$paths = array_merge( array( SHARED_DIR => WEB_SHARED ), $paths);
 
 		foreach ($paths as $physicalPath => $webPath) {
@@ -407,7 +407,7 @@ function current_uri($params=array())
 function flash($wrap=true)
 {
 	require_once 'Zend/Session.php';
-	$flash = new Zend_Session('flash');
+	$flash = new Zend_Session_Namespace('flash');
 	
 	$msg = $flash->msg;
 	$flash->msg = null;
@@ -639,8 +639,9 @@ function total_types($return = false) {
 }
 
 function total_results($return = false) {
-	if(Zend::isRegistered('total_results')) {
-		$count = Zend::Registry('total_results');
+	if(Zend_Registry::isRegistered('total_results')) {
+		$count = Zend_Registry::get('total_results');
+
 		
 		if($return) return $count;
 		echo $count;
@@ -650,8 +651,8 @@ function total_results($return = false) {
 function _get_model_total($controller,$return) {
 	$totalVar = 'total_'.strtolower($controller);
 	
-	if(Zend::isRegistered($totalVar)) {
-		$count = Zend::Registry($totalVar);
+	if(Zend_Registry::isRegistered($totalVar)) {
+		$count = Zend_Registry::get($totalVar);
 	}else {
 		$count = _make_omeka_request($controller,'browse',array(),$totalVar);
 	}
@@ -744,12 +745,13 @@ function items(array $params = array())
 
 function item($id=null) 
 {
-	if(!$id && Zend::isRegistered('item')) {
-		$item = Zend::Registry('item');
+	if(!$id && Zend_Registry::isRegistered('item')) {
+		$item = Zend_Registry::get('item');
+
 		return $item;
 	}
 	
-	$item = Zend::Registry('doctrine')->getTable('Item')->find($id);
+	$item = Zend_Registry::get('doctrine')->getTable('Item')->find($id);
 	
 	//Quick permissions check
 	if(!$item->public && !has_permission('Items', 'showNotPublic')) {
@@ -761,12 +763,13 @@ function item($id=null)
 
 function collection($id=null)
 {
-	if(!$id && Zend::isRegistered('collection')) {
-		$c = Zend::Registry('collection');
+	if(!$id && Zend_Registry::isRegistered('collection')) {
+		$c = Zend_Registry::get('collection');
+
 		return $c;
 	}
 	
-	$c = Zend::Registry('doctrine')->getTable('Collection')->find($id);
+	$c = Zend_Registry::get('doctrine')->getTable('Collection')->find($id);
 	return $c;
 }
 
@@ -783,12 +786,13 @@ function metafields(array $params = array())
 
 function type($id=null)
 {
-	if(!$id && Zend::isRegistered('type')) {
-		$t = Zend::Registry('type');
+	if(!$id && Zend_Registry::isRegistered('type')) {
+		$t = Zend_Registry::get('type');
+
 		return $t;
 	}
 	
-	$t = Zend::Registry('doctrine')->getTable('Type')->find($id);
+	$t = Zend_Registry::get('doctrine')->getTable('Type')->find($id);
 	
 	return $t;
 }
@@ -809,8 +813,8 @@ function users(array $params = array())
  * @return mixed
  **/
 function _get_recordset($params, $for) {
-	if (empty($params) && Zend::isRegistered($for)) {
-		$records = Zend::Registry($for);
+	if (empty($params) && Zend_Registry::isRegistered($for)) {
+		$records = Zend_Registry::get($for);
 		return $records;
 	}	
 	return _make_omeka_request(ucwords($for),'browse',$params, $for);
@@ -826,7 +830,7 @@ function has_thumbnail($item) {
 }
 
 function has_permission($role,$privilege=null) {
-	$acl = Zend::registry('acl');
+	$acl = Zend_Registry::get('acl');
 	$user = current_user();
 	if(!$user) return false;
 	
@@ -1030,8 +1034,8 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 {
 	
 	//If no args passed, retrieve the stored 'pagination' value
-	if(Zend::isRegistered('pagination')) {
-		$p = Zend::Registry( 'pagination' );
+	if(Zend_Registry::isRegistered('pagination')) {
+		$p = Zend_Registry::get('pagination');
 	}
 	
 	if(empty($per_page)) {

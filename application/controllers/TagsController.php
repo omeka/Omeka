@@ -124,8 +124,9 @@ class TagsController extends Omeka_Controller_Action
 
 		$total_results = count($tags);
 
-		Zend::register('total_tags', $total_tags);
-		Zend::register('total_results', $total_results);	
+		Zend_Registry::set('total_tags', $total_tags);
+
+		Zend_Registry::set('total_results', $total_results);	
 		
 		//Plugin hook
 		fire_plugin_hook('browse_tags',  $tags, $for);

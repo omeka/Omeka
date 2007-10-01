@@ -25,8 +25,8 @@
 		<div id="header">
 		<div id="searchwrap">
 			<form id="searchform" action="search.php" class="clear">
-				<input type="text" name="search" id="search" />
-				<input type="submit" name="submit" value="Search" />
+				<input type="text" name="search" id="search"></input>
+				<input type="submit" name="submit" value="Search"></input>
 			</form>
 		</div><!--end searchwrap-->
 

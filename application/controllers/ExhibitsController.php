@@ -24,12 +24,12 @@ class ExhibitsController extends Omeka_Controller_Action
 		$this->_table = $this->getTable('Exhibit');
 		
 		require_once 'Zend/Session.php';
-		$this->session = new Zend_Session('Exhibit');
+		$this->session = new Zend_Session_Namespace('Exhibit');
 	}
 	
 	public function tagsAction()
 	{
-		$this->_forward('Tags', 'browse', array('tagType' => 'Exhibit', 'renderPage'=>'exhibits/tags.php'));
+		$this->_forward('browse', 'Tags', null, array('tagType' => 'Exhibit', 'renderPage'=>'exhibits/tags.php'));
 	}
 	
 	public function browseAction()
@@ -46,7 +46,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		
 		$exhibits = $this->_table->findBy($filter);
 				
-		Zend::register('exhibits', $exhibits);
+		Zend_Registry::set('exhibits', $exhibits);
 		
 		fire_plugin_hook('browse_exhibits', $exhibits);
 		
@@ -75,9 +75,12 @@ class ExhibitsController extends Omeka_Controller_Action
 				$this->_redirect('403');
 			}
 			
-			Zend::register('item', $item);
-			Zend::register('exhibit', $exhibit);
-			Zend::register('section', $section);
+			Zend_Registry::set('item', $item);
+
+			Zend_Registry::set('exhibit', $exhibit);
+
+			Zend_Registry::set('section', $section);
+
 			
 			//Plugin hooks
 			fire_plugin_hook('show_exhibit_item',  $item, $exhibit);
@@ -94,7 +97,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		$params = $this->_getAllParams();
 		//Make sure to render that specific page and only show public items
 		$params = array_merge($params, array('renderPage'=>'exhibits/_items.php'));
-		return $this->_forward('items', 'browse', $params);
+		return $this->_forward('browse', 'items', $params);
 	}
 	
 	public function showAction()
@@ -131,9 +134,9 @@ class ExhibitsController extends Omeka_Controller_Action
 */	
 		
 		//Register these so that theme functions can use them
-		Zend::register('section',	$section);
-		Zend::register('exhibit',	$exhibit);
-		Zend::register('page',		$page);
+		Zend_Registry::set('section',	$section);
+		Zend_Registry::set('exhibit',	$exhibit);
+		Zend_Registry::set('page',		$page);
 		
 		fire_plugin_hook('show_exhibit', $exhibit,$section,$page);
 
@@ -170,7 +173,8 @@ class ExhibitsController extends Omeka_Controller_Action
 		
 		$this->checkPermission($exhibit);
 		
-		Zend::register('exhibit', $exhibit);
+		Zend_Registry::set('exhibit', $exhibit);
+
 		
 		fire_plugin_hook('show_exhibit', $exhibit);
 		
@@ -195,7 +199,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		
 			$this->_view->addScriptPath(SHARED_DIR);
 			
-			$site = Zend::Registry('path_names');
+			$site = Zend_Registry::get('path_names');
 
 			switch ($toRender) {
 				case 'show':
@@ -439,7 +443,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		}
 		
 		//Register the page var so that theme functions can use it
-		Zend::register('page', $page);
+		Zend_Registry::set('page', $page);
 		
 		if(!empty($_POST)) {
 			
@@ -658,7 +662,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		
 		if(method_exists($this, $action)) {
 			$this->_setParam('action', $slug);
-			return $this->_forward('exhibits', $slug, $this->_getAllParams());
+			return $this->_forward($slug, 'exhibits', null, $this->_getAllParams());
 			exit;
 		}
 		
@@ -673,7 +677,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		
 		//Otherwise this is a slug for an Exhibit
 		
-		$this->_forward('exhibits', 'summary', $this->_getAllParams());
+		$this->_forward('summary', 'exhibits', null, $this->_getAllParams());
 	}
 } 
 ?>

@@ -4,11 +4,11 @@ require_once 'Omeka/Controller/Action.php';
 class SettingsController extends Omeka_Controller_Action
 {	
 	public function indexAction() {
-		$this->_forward('settings', 'edit');
+		$this->_forward('edit', 'settings');
 	}
 	
 	public function browseAction() {
-		$this->_forward('settings', 'edit');
+		$this->_forward('edit', 'settings');
 	}
 	
 	public function editAction() {
@@ -25,7 +25,7 @@ class SettingsController extends Omeka_Controller_Action
 			'fullsize_constraint', 
 			'path_to_convert');
 		
-		$options = Zend::Registry( 'options' );
+		$options = Zend_Registry::get('options');
 		
 		foreach ($options as $k => $v) {
 			if(in_array($k, $settingsList)) {
@@ -48,7 +48,8 @@ class SettingsController extends Omeka_Controller_Action
 					$options[$key] = $value;
 				}
 			}
-			Zend::register('options', $options);
+			Zend_Registry::set('options', $options);
+
 			$this->flash("Settings have been changed.");
 		}
 

@@ -401,7 +401,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	
 	public function indexAction()
 	{
-        $this->_forward($this->getRequest()->getControllerName(), 'browse');
+        $this->_forward('browse', $this->getRequest()->getControllerName());
 	}
 	
 	/**
@@ -490,7 +490,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			{	
 				//Avoid a redirect by passing an extra parameter to the AJAX call
 				if($this->_getParam('noRedirect')) {
-					$this->_forward($pluralName, 'show');
+					$this->_forward('show', $pluralName);
 					return;
 				} else {
 					$this->_redirect('edit', array('controller'=>$pluralName, 'id'=>$$varName->id) );

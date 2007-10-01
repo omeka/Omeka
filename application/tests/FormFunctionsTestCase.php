@@ -94,7 +94,7 @@ class FormFunctionsTestCase extends OmekaTestCase
 		$text = $this->stripSpace($text);
 
 		$this->assertEqual($text, '<label for="foobar">Label text</label><textarea name="foobar" id="foobar">Foobar</textarea>');
-		Zend::dump( $text );
+		Zend_Debug::dump( $text );
 		ob_clean();
 		
 		textarea($attr);

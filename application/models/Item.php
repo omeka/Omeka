@@ -470,12 +470,12 @@ class Item extends Omeka_Record
 					FROM items i INNER JOIN files f ON f.item_id = i.id 
 					WHERE i.featured = 1 ORDER BY rand DESC LIMIT 1";
 		}
-		$conn = Zend::Registry( 'doctrine' )->connection();
+		$conn = Zend_Registry::get( 'doctrine' )->connection();
 
 		$id = $conn->fetchOne($sql);
 		
 		if($id) {
-			return Zend::Registry( 'doctrine' )->getTable('Item')->find($id);
+			return Zend_Registry::get( 'doctrine' )->getTable('Item')->find($id);
 		}
 	}
 
@@ -520,7 +520,7 @@ class Item extends Omeka_Record
 		if($this->userHasPermission('untagOthers')) {
 			if(array_key_exists('remove_tag', $clean)) {
 				$tagId = $post['remove_tag'];
-				$tagToDelete = Zend::Registry( 'doctrine' )->getTable('Tag')->find($tagId);
+				$tagToDelete = Zend_Registry::get( 'doctrine' )->getTable('Tag')->find($tagId);
 				$current_user = Omeka::loggedIn();
 				if($tagToDelete) {
 					fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $current_user);
@@ -577,7 +577,7 @@ class Item extends Omeka_Record
 				if(!$this->public && $clean['public'] == 1) {
 					
 					//Set this value in the Registry so that postCommitForm will catch it (HACK)
-					Zend::register('item_is_public', true);
+					Zend_Registry::set('item_is_public', true);
 				}
 				
 				$this->public = (bool) $clean['public'];
@@ -604,7 +604,7 @@ class Item extends Omeka_Record
 		}
 		
 		//If the item was made public, fire the plugin hook
-		if(Zend::isRegistered('item_is_public')) {
+		if(Zend_Registry::isRegistered('item_is_public')) {
 			fire_plugin_hook('make_item_public', $this);
 		}		
 	}

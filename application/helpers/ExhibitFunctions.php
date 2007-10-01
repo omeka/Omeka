@@ -70,11 +70,11 @@ function link_to_exhibit_item($item, $props=array())
 function exhibit_item_uri($item, $exhibit=null, $section=null)
 {
 	if(!$exhibit) {
-		$exhibit = Zend::Registry( 'exhibit' );
+		$exhibit = Zend_Registry::get('exhibit');
 	}
 	
 	if(!$section) {
-		$section = Zend::Registry( 'section' );
+		$section = Zend_Registry::get('section');
 	}
 	
 	//If the exhibit has a theme associated with it
@@ -98,8 +98,8 @@ function recent_exhibits($num = 10) {
 
 function exhibit($id=null) {
 	if(!$id) {
-		if(Zend::isRegistered('exhibit')) {
-			return Zend::Registry( 'exhibit' );
+		if(Zend_Registry::isRegistered('exhibit')) {
+			return Zend_Registry::get('exhibit');
 		}
 	}else {
 		return Doctrine_Manager::getInstance()->getTable('Exhibit')->find($id);
@@ -108,8 +108,8 @@ function exhibit($id=null) {
 
 function exhibit_section($id=null) {
 	if(!$id) {
-		if(Zend::isRegistered('section')) {
-			return Zend::Registry('section');
+		if(Zend_Registry::isRegistered('section')) {
+			return Zend_Registry::get('section');
 		}
 	}else {
 		return Doctrine_Manager::getInstance()->getTable('Section')->find($id);
@@ -123,7 +123,8 @@ function exhibit_section($id=null) {
  **/
 function exhibit_head()
 {
-	$exhibit = Zend::Registry('exhibit');
+	$exhibit = Zend_Registry::get('exhibit');
+
 	if($exhibit->theme) {
 		common('header',compact('exhibit'),'exhibit_themes'.DIRECTORY_SEPARATOR.$exhibit->theme);
 	}else {
@@ -134,7 +135,8 @@ function exhibit_head()
 
 function exhibit_foot()
 {
-	$exhibit = Zend::Registry('exhibit');
+	$exhibit = Zend_Registry::get('exhibit');
+
 	if($exhibit->theme) {
 		common('footer',compact('exhibit'),'exhibit_themes'.DIRECTORY_SEPARATOR.$exhibit->theme);
 	}else {
@@ -145,7 +147,8 @@ function exhibit_foot()
 
 function page_text($order, $addTag=true)
 {
-	$page = Zend::Registry('page');
+	$page = Zend_Registry::get('page');
+
 	$text = $page->ItemsPages[$order]->text;
 	if($addTag) {
 		return nls2p($text);
@@ -155,7 +158,8 @@ function page_text($order, $addTag=true)
 
 function page_item($order)
 {
-	$page = Zend::Registry('page');
+	$page = Zend_Registry::get('page');
+
 	$item = $page->ItemsPages[$order]->Item;
 	if(!$item->exists()) {
 		return null;
@@ -178,7 +182,8 @@ function page_item($order)
 
 function page_item_id($order)
 {
-	$page = Zend::Registry('page');
+	$page = Zend_Registry::get('page');
+
 	return $page->ItemId($order);
 }
 
@@ -255,8 +260,9 @@ function exhibit_layout($layout, $input=true)
 
 function exhibit_css($file)
 {
-	if(Zend::isRegistered('exhibit')) {
-		$ex = Zend::Registry('exhibit');
+	if(Zend_Registry::isRegistered('exhibit')) {
+		$ex = Zend_Registry::get('exhibit');
+
 		$path = $ex->theme.DIRECTORY_SEPARATOR.$file.'.css';
 		
 		if(file_exists(EXHIBIT_THEMES_DIR.DIRECTORY_SEPARATOR.$path)) {
@@ -268,8 +274,9 @@ function exhibit_css($file)
 
 function layout_css($file='layout')
 {
-	if(Zend::isRegistered('page')) {
-		$p = Zend::Registry('page');
+	if(Zend_Registry::isRegistered('page')) {
+		$p = Zend_Registry::get('page');
+
 		$path = $p->layout.DIRECTORY_SEPARATOR.$file.'.css';
 		
 		if(file_exists(EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$path)) {
@@ -280,7 +287,7 @@ function layout_css($file='layout')
 
 function section_nav()
 {
-	$exhibit = Zend::registry('exhibit');
+	$exhibit = Zend_Registry::get('exhibit');
 	
 	//Use class="section-nav"
 	echo '<ul class="exhibit-section-nav">';
@@ -298,11 +305,11 @@ function section_nav()
 
 function page_nav()
 {
-	if(!Zend::isRegistered('section')) {
+	if(!Zend_Registry::isRegistered('section')) {
 		return false;
 	}
 	
-	$section = Zend::registry('section');
+	$section = Zend_Registry::get('section');
 		
 	echo '<ul class="exhibit-page-nav">';
 	
@@ -322,11 +329,14 @@ function page_nav()
 
 function render_exhibit_page()
 {
-	$exhibit = Zend::Registry('exhibit');
+	$exhibit = Zend_Registry::get('exhibit');
+
 	
 	try {
-		$section = Zend::Registry('section');
-		$page = Zend::Registry('page');
+		$section = Zend_Registry::get('section');
+
+		$page = Zend_Registry::get('page');
+
 		if ($page->layout) {
 			include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$page->layout.DIRECTORY_SEPARATOR.'layout.php';
 		} else {

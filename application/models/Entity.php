@@ -275,7 +275,7 @@ class Entity extends Omeka_Record
 			echo $name;
 		//Remove the excess spaces via regex
 		$name = preg_replace('/\s([\s\t]+)/', '', $name);
-		Zend::dump( $name );
+		Zend_Debug::dump( $name );
 		
 		$name_a = explode(' ', trim($name));
 		

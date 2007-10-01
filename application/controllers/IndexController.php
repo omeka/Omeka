@@ -14,7 +14,7 @@ class IndexController extends Omeka_Controller_Action
     public function indexAction()
     {
 	
-		$config = Zend::registry('config_ini');
+		$config = Zend_Registry::get('config_ini');
 		
 		$req = $this->getRequest();
 		$c = $req->getParam($config->uri->controller);
@@ -22,24 +22,19 @@ class IndexController extends Omeka_Controller_Action
 
 		if (!$c) {
 			// Assume that they want to go to the default location
-			$this->_forward($config->default->controller, $config->default->action);
+			$this->_forward($config->default->action, $config->default->controller);
 		}
 		
 		if ($c) {
 			if ($a) {
-				$this->_forward($c, $a);
+				$this->_forward($a, $c);
 				return;
 			}
 			else {
-				$this->_forward($c, $config->default->action);
+				$this->_forward($config->default->action, $c);
 				return;
 			}
 		}
-    }
-	
-    public function noRouteAction()
-    {
-        $this->_redirect('/');
     }
 
 	public function homeAction() 

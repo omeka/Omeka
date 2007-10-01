@@ -1,6 +1,6 @@
 <?php
 require_once 'Zend/Auth/Result.php';
-class Omeka_Auth_Token implements Zend_Auth_Result
+class Omeka_Auth_Token extends Zend_Auth_Result
 {
 
     /**

@@ -2,7 +2,7 @@
 header("HTTP/1.0 404 Not Found");
 
 if($_REQUEST['moreinfo']) {
-	Zend::dump( $e );
+	Zend_Debug::dump( $e );
 }
 ?>
 
@@ -20,7 +20,7 @@ endif;
 ?>
 
 
-<h4>Backtrace: <?php Zend::dump($e->getTraceAsString()); ?></h4>
+<h4>Backtrace: <?php Zend_Debug::dump($e->getTraceAsString()); ?></h4>
 
 <form id="error-details">
 

@@ -28,8 +28,10 @@ class CollectionsController extends Omeka_Controller_Action
 		$total_results = count($collections);
 		
 		$total_collections = $total_results;
-		Zend::register('total_collections', $total_results);
-		Zend::register('total_results', $total_results);
+		Zend_Registry::set('total_collections', $total_results);
+
+		Zend_Registry::set('total_results', $total_results);
+
 		
 		fire_plugin_hook('browse_collections', $collections);
 		

@@ -25,7 +25,7 @@ class FilesController extends Omeka_Controller_Action
 						
 		$this->checkFilePermission($file);				
 								
-		Zend::register('file', $file);
+		Zend_Registry::set('file', $file);
 		$this->render('files/show.php',compact('file'));
 	}
 	

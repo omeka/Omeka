@@ -3,14 +3,13 @@ require_once 'globals.php';
 require_once 'Doctrine.php';
 //require_once 'Doctrine.compiled.php';
 spl_autoload_register(array('Doctrine', 'autoload'));
-require_once 'Zend.php';
 
 //Register the various path names so they can be accessed by the app
-Zend::register('path_names', $site);
+Zend_Registry::set('path_names', $site);
 
 require_once 'Zend/Config/Ini.php';
 $db = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini', 'database');
-Zend::register('db_ini', $db);
+Zend_Registry::set('db_ini', $db);
 
 $dsn = 'mysql:host='.$db->host.';dbname='.$db->name;
 if(isset($db->port)) {
@@ -39,7 +38,7 @@ $options = array();
 foreach ($option_array as $opt) {
 	$options[$opt['name']] = $opt['value'];
 }
-Zend::register('options',$options);
+Zend_Registry::set('options', $options);
 
 Doctrine_Manager::connection($dbh);
 
@@ -52,7 +51,7 @@ $manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
 $manager->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
 
 // Register the Doctrine Manager
-Zend::register('doctrine', $manager);
+Zend_Registry::set('doctrine', $manager);
 
 //Check the current migration # in the DB against the hardcoded #
 //Migrate the DB if necessary and exit
@@ -71,7 +70,7 @@ if((int) $options['migration'] < OMEKA_MIGRATION) {
 
 
 $config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
-Zend::register('config_ini', $config);
+Zend_Registry::set('config_ini', $config);
 
 if(isset($config->log)) {
 	require_once LIB_DIR.DIRECTORY_SEPARATOR.'Omeka'.DIRECTORY_SEPARATOR.'Logger.php';
@@ -90,7 +89,7 @@ if(isset($config->log)) {
 //Setup the ACL
 include 'acl.php';
 
-Zend::register('acl', $acl);
+Zend_Registry::set('acl', $acl);
 
 //Activate the plugins
 require_once 'plugins.php';
@@ -105,52 +104,52 @@ $manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
 require_once 'Omeka.php';
 spl_autoload_register(array('Omeka', 'autoload'));
 
-
-
-Zend::register('routes_ini', new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini'));
+Zend_Registry::set('routes_ini', new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini', null));
 
 // Require the front controller and router
 require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/RewriteRouter.php';
+require_once 'Zend/Controller/Router/Rewrite.php';
 
 
 require_once 'Item.php';
 require_once 'Option.php';
 
-require_once 'Zend/Auth.php';
-require_once 'Omeka/Auth/Adapter.php';
-
-$authPrefix = get_option('auth_prefix');
-
-//Set up the authentication mechanism with the specially generated prefix
-require_once 'Zend/Auth.php';
-$auth = new Omeka_Auth(new Omeka_Auth_Adapter(), true, $authPrefix);
+include 'auth.php';
 
 //Register the Authentication mechanism to be able to share it
-Zend::register('auth', $auth);
+Zend_Registry::set('auth', $auth);
 
 
 // Initialize some stuff
 $front = Omeka_Controller_Front::getInstance();
-$router = new Zend_Controller_RewriteRouter();
-$router->addConfig(Zend::registry('routes_ini'), 'routes');
+$router = new Zend_Controller_Router_Rewrite();
+$router->addConfig(Zend_Registry::get('routes_ini'), 'routes');
+fire_plugin_hook('loadRoutes', $router);
+
+$router->setFrontController($front);
 fire_plugin_hook('loadRoutes', $router);
 $front->setRouter($router);
+
+$front->getDispatcher()->setFrontController($front);
+
+//Disable the ViewRenderer until we can refactor Omeka codebase to use it
+$front->setParam('noViewRenderer', true);
 
 require_once 'Zend/Controller/Request/Http.php';
 $request = new Zend_Controller_Request_Http();
 
 // Removed 3/9/07 n8
-//Zend::register('request', $request);
+//Zend_Registry::set('request', $request);
 $front->setRequest($request);
 
 require_once 'Zend/Controller/Response/Http.php';
 $response = new Zend_Controller_Response_Http();
 // Removed 3/9/07 n8
-//Zend::register('response', $response);
+//Zend_Registry::set('response', $response);
 $front->setResponse($response);
 
 $front->throwExceptions((boolean) true);
 
-$front->addControllerDirectory(CONTROLLER_DIR);
+//$front->addControllerDirectory(array('default'=>CONTROLLER_DIR));
+$front->setControllerDirectory(CONTROLLER_DIR);
 ?>

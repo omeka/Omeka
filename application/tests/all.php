@@ -21,7 +21,7 @@ Doctrine_Manager::connection($dbh);
 $manager = Doctrine_Manager::getInstance();
 $manager->setAttribute(Doctrine::ATTR_VLD, true);
 
-Zend::register('doctrine', $manager);
+Zend_Registry::set('doctrine', $manager);
 
 require_once 'simpletest/unit_tester.php';
 require_once 'simpletest/reporter.php';

@@ -76,7 +76,7 @@ try {
 	spl_autoload_register(array('Doctrine', 'autoload'));
 	Doctrine_Manager::connection($dbh);
 	$manager = Doctrine_Manager::getInstance();
-	Zend::register('doctrine', $manager);
+	Zend_Registry::set('doctrine', $manager);
 
 	//Check if the options table is filled (if so, Omeka already set up so die)
 	require_once 'Option.php';
@@ -213,10 +213,10 @@ if ($display_form == true):
 	<label for="path_to_convert">Imagemagick Binary Path</label>
 	<input type="text" name="path_to_convert" class="textinput" id="path_to_convert" value="
 	<?php if ($path_to_convert) { 
-			echo "$path_to_convert\" /> <p>$path_to_convert (found automatically)</p>";
+			echo "$path_to_convert";
 		  } else {
-			echo htmlentities($_POST['path_to_convert'])."\" />";
-		} ?>
+			echo htmlentities($_POST['path_to_convert']);
+		} ?>" />
 	</div>
 	</fieldset>
 	<fieldset>

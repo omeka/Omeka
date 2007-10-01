@@ -62,15 +62,12 @@ class Omeka_Controller_Front extends Zend_Controller_Front
 	 **/
 	protected function isMissingController($e)
 	{
-		if($e instanceof Zend_Exception) {
-			$msg = $e->getMessage();
-			
-			if(substr($msg, 0, 6) == 'File "') {
-				return true;
-			}
+		if($e instanceof Zend_Controller_Dispatcher_Exception) {
+			return true;
 		}
 		return false;
 	}
+
 
 	protected function renderStaticPage()
 	{

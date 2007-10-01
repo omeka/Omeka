@@ -143,7 +143,7 @@ class UsersController extends Omeka_Controller_Action
 			return $this->render('users/show.php', compact('user'));
 		}	
 		
-		return $this->_forward('Users', 'browse');
+		return $this->_forward('browse', 'Users');
 	}
 
 	protected function sendActivationEmail($user)
@@ -154,7 +154,7 @@ class UsersController extends Omeka_Controller_Action
 		$ua->save();
 		//send the user an email telling them about their great new user account
 		
-		$site_options = Zend::Registry( 'options' );
+		$site_options = Zend_Registry::get('options');
 		
 		$site_title = $site_options['site_title'];
 		$from = $site_options['administrator_email'];
@@ -199,19 +199,18 @@ class UsersController extends Omeka_Controller_Action
 			
 			require_once 'Zend/Session.php';
 
-			$session = new Zend_Session;
+			$session = new Zend_Session_Namespace;
 			
 			$auth = $this->_auth;
 
-			$options = array('username' => $_POST['username'],
-							 'password' => $_POST['password']);
-
-			$token = $auth->authenticate($options);
+			$adapter = new Omeka_Auth_Adapter($_POST['username'], $_POST['password']);
+			
+			$token = $auth->authenticate($adapter);
 
 			if ($token->isValid()) {
 				//Avoid a redirect by passing an extra parameter to the AJAX call
 				if($this->_getParam('noRedirect')) {
-					$this->_forward('index', 'home');
+					$this->_forward('home', 'index');
 				} else {
 					$this->_redirect($session->redirect);
 					unset($session->redirect);
@@ -390,10 +389,5 @@ class UsersController extends Omeka_Controller_Action
 		}
 		$this->_redirect('users/roles');
 	}
-	
-    public function noRouteAction()
-    {
-        $this->_redirect('/');
-    }
 }
 ?>
