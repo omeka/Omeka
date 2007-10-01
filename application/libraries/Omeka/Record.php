@@ -209,7 +209,7 @@ abstract class Omeka_Record extends Doctrine_Record
 			return $this->getTable()->getTableName();
 		}
 		
-		return Zend::Registry('doctrine')->getTable($model)->getTableName();
+		return Zend_Registry::get('doctrine')->getTable($model)->getTableName();
 	}
 	
 	/**
@@ -400,7 +400,7 @@ abstract class Omeka_Record extends Doctrine_Record
 		/*	'default' permission level is hard-coded here, may change later */
 		$role = !$user ? 'default' : $user->role;
 		
-		$acl = Zend::Registry( 'acl' );
+		$acl = Zend_Registry::get( 'acl' );
 		
 		//If the resource has no rule that would indicate permissions are necessary, then we assume access is allowed
 		if(!$acl->resourceHasRule($resource,$rule)){

@@ -13,7 +13,7 @@ class Omeka_Controller_Front extends Zend_Controller_Front
      * Singleton instance
      * @var self 
      */
-    private static $_instance = null;
+    protected static $_instance = null;
 	
 	private function __construct()
     {
@@ -34,7 +34,7 @@ class Omeka_Controller_Front extends Zend_Controller_Front
         return self::$_instance;
     }
 
-	public function dispatch($debugExceptions = false)
+	public function dispatch()
 	{
 		try {
 			return parent::dispatch();
@@ -44,13 +44,12 @@ class Omeka_Controller_Front extends Zend_Controller_Front
 				if($this->isMissingController($e)) {
 					$rendered = $this->renderStaticPage();
 				}
-				
 			} catch (Exception $e) {
-				$this->render404($e, $debugExceptions);
+				$this->render404($e);
 			}
 			
 			if(!$rendered) {
-				$this->render404($e, $debugExceptions);
+				$this->render404($e);
 			}		
 		}
 		
@@ -102,8 +101,10 @@ class Omeka_Controller_Front extends Zend_Controller_Front
 		return true;
 	}
 	
-	protected function render404($e, $debugExceptions = false)
+	protected function render404($e)
 	{
+		$debugExceptions = (bool) Zend_Registry::get('config_ini')->debug->exceptions;
+		
 		Omeka_Logger::logError( $e );
 		if($debugExceptions) {
 			include BASE_DIR . DIRECTORY_SEPARATOR .'404.php';

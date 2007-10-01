@@ -201,7 +201,7 @@ class Omeka_Acl extends Zend_Acl
 
 	public function save()
 	{
-		$optionTable = Zend::Registry('doctrine')->getTable('option');;
+		$optionTable = Zend_Registry::get('doctrine')->getTable('option');;
 		$acl = $optionTable->findByDql("name LIKE :name", array('name' => 'acl'));
 		$acl[0]->value = serialize($this);
 		$acl[0]->save();

@@ -5,15 +5,15 @@ require_once 'Zend/Auth.php';
 */
 class Omeka_Auth extends Zend_Auth
 {
-	public function isLoggedIn()
+	public function hasIdentity()
 	{
-		if(Zend::isRegistered('isLoggedIn')) {
-			return Zend::Registry( 'isLoggedIn' );
+		if(Zend_Registry::isRegistered('hasIdentity')) {
+			return Zend_Registry::get( 'hasIdentity' );
 		}
 		
-		$loggedIn = parent::isLoggedIn();
+		$loggedIn = parent::hasIdentity();
 		
-		Zend::register('isLoggedIn', $loggedIn);
+		Zend_Registry::set('hasIdentity', $loggedIn);
 		
 		return $loggedIn;
 	}

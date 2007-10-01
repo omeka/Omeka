@@ -75,7 +75,7 @@ class Omeka_View extends Zend_View_Abstract
 	 */
 	public function setThemePath($path = null)
 	{	
-		$broker = Zend::Registry( 'plugin_broker' );
+		$broker = Zend_Registry::get( 'plugin_broker' );
 		
 		if ($output = $this->getRequest()->getParam('output')) {
 
@@ -99,7 +99,7 @@ class Omeka_View extends Zend_View_Abstract
 		else {
 			// Get the options table
 			require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-			$options = Zend::registry('options');
+			$options = Zend_Registry::get('options');
 			
 			// do we select the admin theme or the public theme?
 			if ((boolean) $this->getRequest()->getParam('admin')) {
@@ -119,9 +119,9 @@ class Omeka_View extends Zend_View_Abstract
 			
 	//		var_dump( $this->getScriptPaths() );exit;
 			
-			Zend::register('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
+			Zend_Registry::set('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
 		}
-		Zend::register('theme_path',	$scriptPath);
+		Zend_Registry::set('theme_path',	$scriptPath);
 	}
 	
 	/**
@@ -150,7 +150,7 @@ class Omeka_View extends Zend_View_Abstract
 
 			//Prototype.js doesn't recognize JSON unless the header is X-JSON: {json} all on one line [KK]
 			if($this->getRequest()->getParam('output') == 'json') {
-				$config = Zend::registry('config_ini');
+				$config = Zend_Registry::get('config_ini');
 				if (!(boolean) $config->debug->json) {
 					$json = ob_get_clean();
 					header("X-JSON: $json");
@@ -163,7 +163,7 @@ class Omeka_View extends Zend_View_Abstract
 				This is b/c the only PHP executed beyond this point are theme functions */
 			echo 'Error:' . $e->getMessage();
 			
-			$config = Zend::Registry( 'config_ini' );
+			$config = Zend_Registry::get( 'config_ini' );
 			//Display a lot of info if exceptions are turned on
 			if($config->debug->exceptions) {	
 				echo nl2br( $e->getTraceAsString() );

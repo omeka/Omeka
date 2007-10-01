@@ -188,7 +188,7 @@ class Omeka_Upgrader
 	
 	public function query($sql, $params=array(), $fetchOne=false) {
 		//Echo each query as it is run
-		Zend::dump( $sql );
+		Zend_Debug::dump( $sql );
 		
 		$conn = $this->manager->connection();
 		

@@ -32,7 +32,7 @@ class PluginBroker
 	
 	public function __construct() 
 	{
-		Zend::register('plugin_broker', $this);
+		Zend_Registry::set('plugin_broker', $this);
 		
 		//Construct the current list of potential, installed & active plugins
 		require_once 'VersionedDirectoryIterator.php';
@@ -276,8 +276,8 @@ class PluginBroker
 	protected function registerScriptPaths($view, $paths)
 	{
 		//Grab the web paths of the other plugins
-		if(Zend::isRegistered('plugin_web_paths')) {
-			$webPaths = Zend::Registry( 'plugin_web_paths' );
+		if(Zend_Registry::isRegistered('plugin_web_paths')) {
+			$webPaths = Zend_Registry::get( 'plugin_web_paths' );
 		}else {
 			$webPaths = array();
 		}
@@ -289,7 +289,7 @@ class PluginBroker
 			$webPaths[$physicalPath] = WEB_PLUGIN . DIRECTORY_SEPARATOR . $path;
 		}
 		
-		Zend::register('plugin_view_paths', $webPaths);		
+		Zend_Registry::set('plugin_view_paths', $webPaths);		
 	}
 	
 	/**
@@ -336,7 +336,7 @@ class PluginBroker
 
 function add_plugin_hook($hook, $callback)
 {
-	$broker = Zend::Registry( 'plugin_broker' );
+	$broker = Zend_Registry::get( 'plugin_broker' );
 	$broker->addHook($hook, $callback);
 } 
 
@@ -366,12 +366,12 @@ function fire_plugin_hook()
 
 function get_plugin_broker()
 {
-	return Zend::Registry( 'plugin_broker' );
+	return Zend_Registry::get( 'plugin_broker' );
 }
 
 function define_metafield($name, $description, $type=null)
 {
-	$broker = Zend::Registry( 'plugin_broker' );
+	$broker = Zend_Registry::get( 'plugin_broker' );
 	$broker->defineMetafield($name, $description, $type);
 }
 
@@ -412,7 +412,7 @@ function set_option($name, $value)
 
 function get_acl()
 {
-	return Zend::Registry( 'acl' );
+	return Zend_Registry::get( 'acl' );
 }
 
 ?>

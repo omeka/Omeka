@@ -1,13 +1,21 @@
 <?php
-require_once 'Zend/Auth/Adapter.php';
+require_once 'Zend/Auth/Adapter/Interface.php';
 
-class Omeka_Auth_Adapter extends Zend_Auth_Adapter
+class Omeka_Auth_Adapter implements Zend_Auth_Adapter_Interface
 {
-	public static function staticAuthenticate($options)
+	public function __construct($username, $password)
+    {
+        $this->username = $username;
+		$this->password = $password;
+    }
+	
+	public function authenticate()
 	{
 		$valid = false;
 		$identity = null;
 		$message = null;
+		
+		$options = array('username'=>$this->username, 'password'=>$this->password);
 		
 		$user = Doctrine_Manager::connection()->getTable('User')
 											  ->findByDql('username LIKE :username AND password LIKE SHA1(:password) AND active = 1', $options);
@@ -18,7 +26,7 @@ class Omeka_Auth_Adapter extends Zend_Auth_Adapter
 			$user = $user[0];
 			
 			$user_id = $user->id;
-			return new Omeka_Auth_Token($valid, $user_id);
+			return new Zend_Auth_Result($valid, $user_id);
 		}
 		else {
 			unset($options['password']);
@@ -33,11 +41,6 @@ class Omeka_Auth_Adapter extends Zend_Auth_Adapter
 			}
 			unset($user);
 		}
-		return new Omeka_Auth_Token($valid, $identity, $message);
+		return new Zend_Auth_Result($valid, $identity, $message);
 	}
-	
-    public function authenticate($options)
-    {
-		return self::staticAuthenticate($options);
-    }
 }

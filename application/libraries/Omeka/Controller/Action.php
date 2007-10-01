@@ -86,7 +86,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 */
 	public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
 	{
-		$this->acl = Zend::Registry('acl');
+		$this->acl = Zend_Registry::get('acl');
 		
 		// Zend_Controller_Action __construct finishes by running init()
 		$init = parent::__construct($request, $response, $invokeArgs);
@@ -95,7 +95,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			$this->_view = new Omeka_View($this);
 		}
 		
-		$this->_auth = Zend::Registry('auth');
+		$this->_auth = Zend_Registry::get('auth');
 		
 		$this->_broker = get_plugin_broker();
 		
@@ -216,9 +216,9 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			require_once 'Omeka/Auth/Adapter.php';
 
 			$auth = $this->_auth;
-			if (!$auth->isLoggedIn()) {
+			if (!$auth->hasIdentity()) {
 				// capture the intended controller / action for the redirect
-				$session = new Zend_Session;
+				$session = new Zend_Session_Namespace;
 				$session->redirect = $request->getPathInfo();
 				
 				// do we need these sessions?  possibly delete
@@ -230,10 +230,10 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			}else {
 				/*	Access the authentication session and set it to expire after a certain amount
 				 	of time if there are no requests */
-				$authPrefix = $auth->getSessionNamespace();
-				$auth_session = new Zend_Session($authPrefix);
+				$auth_session = new Zend_Session_Namespace( $auth->getStorage()->getNamespace() );
 				
-				$config = Zend::Registry('config_ini');
+				
+				$config = Zend_Registry::get('config_ini');
 				
 				if(isset($config->login->expire)) {
 					$minutesUntilExpiration = (int) $config->login->expire;
@@ -319,28 +319,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		return $this;
 	}
 	
-	protected function authenticate()
-	{
-		require_once 'Zend/Auth.php';
-		require_once 'Zend/Session.php';
-		require_once 'Omeka/Auth/Adapter.php';
-		require_once 'Zend/Filter/Input.php';
-
-		$auth = $this->_auth;
-		if ($auth->isLoggedIn()) {
-			// check the identity's role is compatible with the action's permissions
-		}
-		else {
-			// capture the intended controller / action for the redirect
-			$session = new Zend_Session;
-			$session->controller = $this->_request->getControllerName();
-			$session->action = $this->_request->getActionName();
-			
-			// finally, send to a login page
-			$this->_redirect('login');
-		}
-	}
-	
 	/**
 	 * Define this here to avoid Zend's silly requirements
 	 */
@@ -360,7 +338,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 */
 	public function getTable($table = null)
 	{
-		return Zend::Registry('doctrine')->getTable($table);
+		return Zend_Registry::get('doctrine')->getTable($table);
 	}
 
 	public function getConn()
@@ -409,7 +387,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	public function flash($msg=null)
 	{
 		require_once 'Zend/Session.php';
-		$flash = new Zend_Session('flash');
+		$flash = new Zend_Session_Namespace('flash');
 		$flash->msg = $msg;
 	}
 
@@ -444,7 +422,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		$$totalVar = count($$pluralName);
 		
-		Zend::register($pluralName, $$pluralName);
+		Zend_Registry::set($pluralName, $$pluralName);
 		
 		//Fire the plugin hook
 		fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $$pluralName);
@@ -467,7 +445,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		}
 		
 		
-		Zend::register($varName, $$varName);
+		Zend_Registry::set($varName, $$varName);
 		
 		fire_plugin_hook( 'show_' . strtolower(get_class($$varName)), $$varName );
 		

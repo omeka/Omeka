@@ -1,7 +1,7 @@
 <?php 
 //Useful global library functions
 function get_option($name) {
-		$options = Zend::Registry('options');
+		$options = Zend_Registry::get('options');
 		return $options[$name];
 }
 
