@@ -1054,6 +1054,9 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		$link = $p['link'];
 	}
 
+	//Avoid division by zero error
+	if(!$per_page) return;
+
 		$num_pages = ceil( $total_results / $per_page );
 		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;
 				

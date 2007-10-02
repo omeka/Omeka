@@ -127,7 +127,6 @@ $router->addConfig(Zend_Registry::get('routes_ini'), 'routes');
 fire_plugin_hook('loadRoutes', $router);
 
 $router->setFrontController($front);
-fire_plugin_hook('loadRoutes', $router);
 $front->setRouter($router);
 
 $front->getDispatcher()->setFrontController($front);

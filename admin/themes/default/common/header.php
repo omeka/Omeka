@@ -59,7 +59,7 @@
 					$header_navigation['Settings'] = uri('settings');
 				}
 				admin_nav($header_navigation);
-
+				fire_plugin_hook('load_navigation', 'main');
 			?>
 			</ul>
 		</div>

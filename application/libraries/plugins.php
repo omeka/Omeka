@@ -30,6 +30,9 @@ class PluginBroker
 	//Routes that have been added by plugins
 	protected $_routes = array();
 	
+	//Any navigation elements that have been added via plugins
+	protected $_nav = array();
+	
 	public function __construct() 
 	{
 		Zend_Registry::set('plugin_broker', $this);
@@ -312,6 +315,39 @@ class PluginBroker
 	}
 	
 	/**
+	 * @since 10/2/07 current navigation types include: 'main', 'archive', 'settings', 'users'
+	 *
+	 * @return void
+	 **/
+	public function addNavigation($text, $link, $type='main')
+	{
+		$nav = $this->_nav;
+		$nav[$type][$text] = $link;
+		$this->_nav = $nav;
+	}
+	
+	/**
+	 * This gets fired from within the admin theme to load plugin-defined navigation elements
+	 *
+	 * @see nav() theme helper function
+	 * @return void
+	 **/
+	public function load_navigation($type)
+	{
+		if(!isset($this->_nav[$type])) return;
+		
+		foreach ($this->_nav[$type] as $text => $link) {
+			
+			//Actually create the link (test if it is local or not)
+			//If it has an 'http' in it, its not local, otherwise it is
+			if(!preg_match('/^http/', $link)) {
+				$link = uri($link);
+			}		
+			echo '<li class="' . text_to_id($text, 'nav') . (is_current($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>';
+		}
+	}
+	
+	/**
 	 * This handles dispatching all plugin hooks
 	 *
 	 * @return array|void
@@ -383,6 +419,11 @@ function add_theme_pages($dir, $theme='both')
 function add_controllers($dir='controllers')
 {
 	get_plugin_broker()->addControllerDir($dir);
+}
+
+function add_navigation($text, $link, $type='main')
+{
+	get_plugin_broker()->addNavigation($text, $link, $type);
 }
 
 /**
