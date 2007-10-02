@@ -179,7 +179,8 @@ class Exhibit extends Omeka_Record
 
 	public function loadSections()
 	{
-		$dql = "SELECT s.* FROM Section s WHERE s.exhibit_id = {$this->id} ORDER BY s.section_order ASC";
+		$id = (int) $this->id;
+		$dql = "SELECT s.* FROM Section s WHERE s.exhibit_id = $id ORDER BY s.section_order ASC";
 		$q = new Doctrine_Query;
 		$sections = $q->parseQuery($dql)->execute();
 		$this->Sections = $sections;
