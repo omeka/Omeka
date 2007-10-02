@@ -97,7 +97,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		$params = $this->_getAllParams();
 		//Make sure to render that specific page and only show public items
 		$params = array_merge($params, array('renderPage'=>'exhibits/_items.php'));
-		return $this->_forward('browse', 'items', $params);
+		return $this->_forward('browse', 'items', null, $params);
 	}
 	
 	public function showAction()
