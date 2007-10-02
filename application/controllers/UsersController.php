@@ -217,7 +217,7 @@ class UsersController extends Omeka_Controller_Action
 				}
 				return;
 			}
-			$this->render('users/login.php', array('errorMessage' => $token->getMessage()));
+			$this->render('users/login.php', array('errorMessage' => array_pop($token->getMessages())));
 			return;
 		}
 		$this->render('users/login.php');
@@ -226,7 +226,7 @@ class UsersController extends Omeka_Controller_Action
 	public function logoutAction()
 	{
 		$auth = $this->_auth;
-		$auth->logout();
+		$auth->clearIdentity();
 		$this->_redirect('');
 	}
 

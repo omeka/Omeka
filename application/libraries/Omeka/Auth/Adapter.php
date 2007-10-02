@@ -13,7 +13,7 @@ class Omeka_Auth_Adapter implements Zend_Auth_Adapter_Interface
 	{
 		$valid = false;
 		$identity = null;
-		$message = null;
+		$message = array();
 		
 		$options = array('username'=>$this->username, 'password'=>$this->password);
 		
@@ -34,10 +34,10 @@ class Omeka_Auth_Adapter implements Zend_Auth_Adapter_Interface
 												  ->findByDql('username LIKE :username AND active = 1', $options);
 			
 			if (count($user) === 1) {
-				$message = "Invalid password";
+				$message[] = "Invalid password";
 			}
 			else {
-				$message = "Cannot find a user with that username";
+				$message[] = "Cannot find a user with that username";
 			}
 			unset($user);
 		}
