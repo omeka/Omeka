@@ -611,7 +611,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 * Overridden to support requests that only want to return data and not spit out pages
 	 *
 	 **/
-	protected function _redirect($action,array $vars=null, array $options=null) 
+	protected function _redirect($action,array $vars=null, array $options=array()) 
 	{
 		if( ($return = $this->getInvokeArg('return')) or $this->isAjaxRequest() ) 
 		{
