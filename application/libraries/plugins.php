@@ -26,9 +26,6 @@ class PluginBroker
 	
 	//Output directories that have been added by plugins
 	protected $_output_dirs = array('json'=>array(), 'rest'=>array());
-
-	//Routes that have been added by plugins
-	protected $_routes = array();
 	
 	//Any navigation elements that have been added via plugins
 	protected $_nav = array();
@@ -240,21 +237,6 @@ class PluginBroker
 		
 	}
 	
-	public function addRoute()
-	{
-		$args = func_get_args();
-				
-		$this->_routes[] = $args;	
-	}
-	
-	public function loadRoutes($router)
-	{	
-		
-		foreach ($this->_routes as $route) {
-			call_user_func_array(array($router, 'addRoute'), $route);	
-		}
-	}
-	
 	public function loadOutputDirs(Omeka_View $view, $type)
 	{
 		$this->registerScriptPaths($view, $this->_output_dirs[$type]);
@@ -302,15 +284,19 @@ class PluginBroker
 	 * 
 	 * @return void
 	 **/
-	public function addControllerDir($path=null)
+	public function addControllerDir($path=null, $module=null)
 	{
 		$front = Omeka_Controller_Front::getInstance();
 		
 		$current = $this->getCurrentPlugin();
 		
 		$dir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $current . ($path ? DIRECTORY_SEPARATOR . $path : ''); 
-		
-		$front->addControllerDirectory($dir);
+
+		if(!$module) {
+			$module = strtolower($current);
+		}
+	
+		$front->addControllerDirectory($dir, $module);
 		
 	}
 	
@@ -424,21 +410,6 @@ function add_controllers($dir='controllers')
 function add_navigation($text, $link, $type='main')
 {
 	get_plugin_broker()->addNavigation($text, $link, $type);
-}
-
-/**
- * Facade for the Zend Router interface
- *
- * for example: add_route(
- *   'user',
- *   new Zend_Controller_Router_Route('user/:username', array('controller' => 'user', 'action' => 'info'))
- * @return void
- **/
-function add_route()
-{
-	$name = func_get_arg(0);
-	$def = func_get_arg(1);
-	get_plugin_broker()->addRoute($name, $def);
 }
 
 function add_output_pages($dir, $output_type='rest')

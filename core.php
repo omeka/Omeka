@@ -124,7 +124,7 @@ Zend_Registry::set('auth', $auth);
 $front = Omeka_Controller_Front::getInstance();
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig(Zend_Registry::get('routes_ini'), 'routes');
-fire_plugin_hook('loadRoutes', $router);
+fire_plugin_hook('add_routes', $router);
 
 $router->setFrontController($front);
 $front->setRouter($router);
@@ -150,5 +150,5 @@ $front->setResponse($response);
 $front->throwExceptions((boolean) true);
 
 //$front->addControllerDirectory(array('default'=>CONTROLLER_DIR));
-$front->setControllerDirectory(CONTROLLER_DIR);
+$front->addControllerDirectory(CONTROLLER_DIR);
 ?>
