@@ -155,7 +155,7 @@ class PluginBroker
 					
 					$res = db_query("SELECT LAST_INSERT_ID() as new_id");
 					
-					$plugin_id = $res[0]['new_id'];
+					$plugin_id = (int) $res[0]['new_id'];
 					
 					$this->_last_insert_id = $plugin_id;
 					
@@ -165,6 +165,8 @@ class PluginBroker
 					unset($_POST);
 					
 				} catch (Exception $e) {
+					
+					echo "An error occurred when installing this plugin: ".$e->getMessage();
 					
 					//If there was an error, remove the plugin from the DB so that we can retry the install
 					if(isset($plugin_id) and is_int($plugin_id)) {
@@ -366,7 +368,10 @@ function db_query($sql, $params=array())
 {
 	try {
 		$conn = Doctrine_Manager::getInstance()->connection();
-		return $conn->execute($sql, $params)->fetchAll(PDO::FETCH_ASSOC);
+		$res = $conn->execute($sql, $params);
+		if ($res->columnCount() != 0) {
+			return $res->fetchAll(PDO::FETCH_ASSOC);
+		}
 	} catch (Exception $e) {
 		echo $e->getMessage();exit;
 	}
@@ -419,7 +424,8 @@ function add_output_pages($dir, $output_type='rest')
 
 function set_option($name, $value)
 {
-	db_query("REPLACE INTO options (name, value) VALUES (?,?)", array($name, $value));
+	$conn = Doctrine_Manager::getInstance()->connection();
+	$conn->exec("REPLACE INTO options (name, value) VALUES (?,?)", array($name, $value));
 }
 
 function get_acl()
