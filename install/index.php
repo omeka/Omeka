@@ -20,7 +20,6 @@ require_once '../paths.php';
  * 2) Submit this form with all the relevant settings
  * 3) Create all the tables
  */
-require_once 'Zend.php';
 require_once 'Zend/Config/Ini.php';
 require_once 'plugins.php';
 require_once 'globals.php';
@@ -34,9 +33,9 @@ try {
 		throw new Exception('Your Omeka database configuration file cannot be read by the application.');
 	}
 
-	$config = new Zend_Config_Ini($config_file);
+	$config = new Zend_Config_Ini($config_file, null);
 
-	$db = $config->database->asArray();
+	$db = $config->database->toArray();
 
 	//Fail on improperly configured db.ini file
 	if (!isset($db['host']) or ($db['host'] == 'XXXXXXX')) {
@@ -104,24 +103,37 @@ if (isset($_REQUEST['install_submit'])) {
 	
 	try {
 		//Validate the FORM POST
-		$validation = array(
-					'administrator_email' => "/^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/",
-					'thumbnail_constraint' => "/\d+/",
-					'fullsize_constraint' => "/\d+/",
-					'username' => "/^[\w\d\_\.]{4,}$/",		//At least 4 characters, _ . alphanumeric allowed
-					'password' => "/^.{4,}$/");				//At least 4 characters (all allowed)
 		
+		$length_validator = new Zend_Validate_StringLength(4, 30);
+		
+		$validation = array(
+					'administrator_email' => "EmailAddress",
+					'thumbnail_constraint' => "Digits",
+					'fullsize_constraint' => "Digits",
+					'square_thumbnail_constraint' => "Digits",
+					'username' => array('Alnum', $length_validator),		//At least 4 characters, _ . alphanumeric allowed
+					'password' => $length_validator);				//At least 4 characters (all allowed)
+		
+		$filter = new Zend_Filter_Input(null, $validation, $_POST);
+		
+		//We got some errors
+		if($filter->hasInvalid()) {
+			$wrong = $filter->getInvalid();
+			
+			$msg = '';
+			
+			foreach ($wrong as $field => $m) {
+				$explanation = array_pop($m);
+				$msg .= "$field: $explanation.\n";
+			}
+			throw new Exception( $msg );
+		}
+
 		foreach ($_POST as $key => $value) {
 			$_POST[$key] = strip_slashes($value);
 		}
 			
-		foreach ($validation as $key => $validator) {
-			if($validator) {
-				if(!preg_match($validator, $_POST[$key])) {
-					throw new Exception( $key . ' was not configured properly.  Please try again.' );
-				}
-			}
-		}
+	
 		
 		$conn = Doctrine_Manager::getInstance()->connection();
 		
@@ -162,7 +174,7 @@ if (isset($_REQUEST['install_submit'])) {
 		$display_form = false;
 
 	} catch(Exception $e) {
-		echo $e->getMessage();
+		$error = $e->getMessage();
 //		echo $e->getTraceAsString();
 		$display_form = true;
 	}
@@ -172,6 +184,13 @@ if ($display_form == true):
 ?>
 <div id="intro">
 <h1>Welcome to Omeka!</h1>
+
+<?php if(isset($error)): ?>
+	<div class="error">
+	The following errors occurred:<br />
+	<?php echo nl2br(htmlentities($error)); ?>
+	</div>
+<?php endif; ?>
 <p>To complete the installation process, please fill out the form below:</p>
 </div>
 <form method="post" accept-charset="utf-8" id="install-form">

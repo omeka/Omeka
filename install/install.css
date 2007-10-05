@@ -80,6 +80,12 @@ input#tags-submit {display: inline;}
 .dates input {margin-bottom:0;}
 .dates {margin-bottom:1.5em;}
 
+/* Errors */
+.error {
+	background:#f1c8ba; color:#933;
+	margin-bottom: 1.5em;
+}
+
 /* == Wrap == */
 
 #wrap {background:#fff; overflow:hidden; width:380px; margin:0 auto; padding:18px;}
