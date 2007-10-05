@@ -258,7 +258,7 @@ class UsersController extends Omeka_Controller_Action
  */		
 	public function rolesAction()
 	{
-		/* Permissions check */	
+		//Permissions check
 		if(!$this->isAllowed('showRoles')) {
 			$this->_redirect('403');
 			return;
@@ -278,116 +278,6 @@ class UsersController extends Omeka_Controller_Action
 		$rules = $acl->getRules();
 		$resources = $acl->getResources();
 		return $this->render('users/roles.php', compact('roles','rules','resources','acl'));
-	}
-	
-	public function rulesFormAction() {
-		/* Permissions check */	
-		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
-		
-		$role = $_REQUEST['role'];
-		$acl = $this->acl;
-
-		$permissions = $acl->getRules();
-		$params = array('permissions' => $permissions, 'role' => $role, 'acl' => $acl);
-		$this->render('users/rulesForm.php', $params);
-	}
-
-	public function addRoleAction()
-	{
-		/* Permissions check */	
-		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
-		
-		$filterPost = new Zend_Filter_Input($_POST);
-		if ($roleName = $filterPost->testAlnum('name')) {
-			$acl = $this->acl;
-			if (!$acl->hasRole($roleName)) {
-				$acl->addRole(new Zend_Acl_Role($roleName));
-				$dbAcl = $this->getOption('acl');
-				$dbAcl->value = serialize($acl);
-				$dbAcl->save();
-			}
-			else {
-				/**
-				 * Return some message that the role name has already been taken
-				 */
-			}
-		}
-		
-		/**
-		 * Support some implementation abstract method of handling
-		 * both ajax and regular calls
-		 */
-		if ($filterPost->getAlpha('request') == 'ajax') {
-			return null;
-		}
-		else {
-			$this->_redirect('users/roles');
-		}
-	}
-	
-	public function deleteRoleAction()
-	{
-		/* Permissions check */	
-		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
-		
-		$filterPost = new Zend_Filter_Input($_POST);
-		if ($roleName = $filterPost->testAlnum('role')) {
-			$acl = $this->acl;
-			if ($acl->hasRole($roleName)) {
-				$acl->removeRole($roleName);
-				$acl->save();
-			}
-		}
-		$this->_redirect('users/roles');
-	}
-	
-	public function setPermissionsAction() {
-		/* Permissions check */	
-		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
-		
-		$role = $_POST['role'];
-		if (!empty($role)) {
-			$acl = $this->acl;
-			$acl->removeRulesByRole($role);
-			foreach($_POST['permissions'] as $resource => $permissions) {
-				$resource_permissions = array();
-				foreach($permissions as $permission => $on) {
-					$resource_permissions[] = $permission;
-				}
-				$acl->allow($role, $resource, $resource_permissions);
-			}
-			$acl->save();
-		}
-		$this->_redirect('users/roles');
-	}
-
-	/**
-	 * IMPORTANT - This should only be used for testing (or to assist hackers in modding the Omeka codebase)
-	 *
-	 * @return void
-	 **/
-	public function addRuleAction()
-	{
-		/* Permissions check */
-		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
-		
-		if(!empty($_POST)) {
-			$this->acl->registerRule(new Zend_Acl_Resource($_POST['rule']), $_POST['action']);
-			$this->acl->save();
-		}
-		$this->_redirect('users/roles');
-	}
-	
-	public function deleteRuleAction()
-	{
-		/* Permissions check */
-		if(!$this->isAllowed('editRoles')) $this->_redirect('403');
-		
-		if(!empty($_POST)) {
-			$this->acl->removeRule(new Zend_Acl_Resource($_POST['rule']), $_POST['action']);
-			$this->acl->save();
-		}
-		$this->_redirect('users/roles');
 	}
 }
 ?>
