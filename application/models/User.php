@@ -144,16 +144,14 @@ class User extends Omeka_Record {
 			}
 		}
 		
-		require_once 'Zend/Filter/Input.php';
-		$clean = new Zend_Filter_Input($post, false);
+		$email = $post['email'];
 		
-		if(!$clean->testEmail('email')) {
+		require_once 'Zend/Validate.php';
+		
+		if(!Zend_Validate::is($email, 'EmailAddress')) {
 			throw new Exception('A valid email address is required for users.');
 		}
-				
-		//Check for the presence of an email address
-		$email = $clean->getRaw('email');
-							
+											
 		//Branch on persistence
 		if(!$this->exists() or ($this->exists() and $email != $this->Entity->email)) {
 			
