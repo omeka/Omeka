@@ -18,6 +18,7 @@ class SettingsController extends Omeka_Controller_Action
 		$settingsList = array(
 			'site_title', 
 			'copyright',
+			'administrator_email',
 			'author', 
 			'description', 
 			'thumbnail_constraint', 

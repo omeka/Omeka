@@ -10,6 +10,10 @@
 	<?php text(array('name'=>'site_title', 'class'=>'textinput', 'id'=>'site_title'),$site_title, 'Site Title'); ?>
 </div>
 
+<div class="field">
+	<?php text(array('name'=>'administrator_email', 'class'=>'textinput', 'id'=>'administrator_email'),$administrator_email, 'Administrator Email'); ?>
+</div>
+
 <div class="field">	
 	<?php text(array('name'=>'copyright', 'class'=>'textinput', 'id'=>'copyright'),$copyright, 'Copyright'); ?>
 </div>
