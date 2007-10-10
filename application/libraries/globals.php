@@ -5,6 +5,19 @@ function get_option($name) {
 		return $options[$name];
 }
 
+function set_option($name, $value)
+{
+	$conn = Doctrine_Manager::getInstance()->connection();
+	$conn->exec("REPLACE INTO options (name, value) VALUES (?,?)", array($name, $value));
+	
+	//Now update the options hash so that any subsequent requests have it available
+	$options = Zend_Registry::get('options');
+	$options[$name] = $value;
+	
+	Zend_Registry::set('options', $options);
+}
+
+
 function pluck($col, $array)
 {
 	$res = array();

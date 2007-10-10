@@ -422,15 +422,8 @@ function add_output_pages($dir, $output_type='rest')
 	get_plugin_broker()->addOutputDir($dir, $output_type);
 }
 
-function set_option($name, $value)
-{
-	$conn = Doctrine_Manager::getInstance()->connection();
-	$conn->exec("REPLACE INTO options (name, value) VALUES (?,?)", array($name, $value));
-}
-
 function get_acl()
 {
 	return Zend_Registry::get( 'acl' );
 }
-
 ?>
