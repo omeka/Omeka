@@ -34,7 +34,7 @@ function alertBox() {
 //Adds rounded corners to the admin theme
 function roundCorners() {
 	Nifty('#primary-nav a,#secondary-nav a','top transparent');
-	Nifty('#view-style a','top transparent');
+	Nifty('#view-style a,#browse-meta','top transparent');
 	Nifty('#user-meta','bottom big');
 	Nifty('#login #content,#site-meta,#recent-items,#tag-cloud,#type-items,#getting-started ul');
 	Nifty('#view-all-items a','transparent');

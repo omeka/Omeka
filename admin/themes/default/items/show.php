@@ -62,7 +62,25 @@
 <?php endif; ?>
 	*/
 	});
+	function swapImage(which,where) {
+	  var source = which.getAttribute("href");
+	  where.setAttribute("src",source);
+	  return false;
+	}
 
+	function imageGallery() {
+		if(!document.getElementById || !document.getElementsByTagName) return;
+		var mainfile = $$('#main-image img')[0];
+		mainfile.setAttribute('width',null);
+		mainfile.setAttribute('height',null);
+		$$('#files a').each(function(el){
+			el.onclick = function() {
+				return swapImage(this,mainfile);
+			}
+		});
+	}
+
+	new Event.observe(window,'load',imageGallery);
 </script>
 <div id="primary">
 <?php echo flash(); ?>
@@ -88,17 +106,19 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 		<?php $mainfile = $item->Files[0]; ?>
 		<?php fullsize($mainfile); ?>
 	</div>
-<?php /*	<div id="files">	
+	<?php if(count($item->Files) > 1):?>
+	<div id="files">
 		<?php foreach( $item->Files as $key => $file ): ?>
 			<?php if($file->hasThumbnail()): ?>
 
-			<a href="<?php echo uri('files/show/'.$file->id); ?>">
-				<?php thumbnail($file, array('class'=>'thumb')); ?>
+			<a href="<?php echo file_display_uri($file); ?>">
+				<?php square_thumbnail($file, array('class'=>'thumb')); ?>
 			</a>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
-*/ ?>
+	<?php endif;?>
+	
 	</div>
 <div id="core-metadata" class="showitem">
 
