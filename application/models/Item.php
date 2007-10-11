@@ -284,16 +284,19 @@ class Item extends Omeka_Record
 	{
 		$table = Doctrine_Manager::getInstance()->getTable('Metatext');
 		
-		//Save the metatext that was posted
-		$posted = $table->collectionFromArray($post, $this);
-		$posted->save();
+		if($post) {
+			//Save the metatext that was posted
+			$posted = $table->collectionFromArray($post, $this);
+			$posted->save();		
+		}
 		
 		//Save the metatext that was set elsewhere
 		$mt = $this->_metatextToSave;
-	
-		$other =  $table->collectionFromArray($mt, $this);
-		$other->save();
 		
+		if($mt) {
+			$other =  $table->collectionFromArray($mt, $this);
+			$other->save();			
+		}
 	}
 	
 	public function hasThumbnail()
@@ -622,10 +625,7 @@ class Item extends Omeka_Record
 
 	public function postSave()
 	{
-		if(!empty($_POST['metafields'])) 
-		{
-			$this->saveMetatext($_POST['metafields']);
-		}
+		$this->saveMetatext($_POST['metafields']);
 		parent::postSave();
 	}
 
