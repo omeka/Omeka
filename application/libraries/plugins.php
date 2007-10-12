@@ -42,17 +42,7 @@ class PluginBroker
 		$names = $dir->getValid();
 		
 		$this->_all = $names;
-		
-		foreach ($names as $name) {
-			$this->setCurrentPlugin($name);
-	
-			//Require the file that contains the plugin
-			$path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'plugin.php';
-			if(file_exists($path)) {
-				require_once $path;
-			}
-		}
-		
+
 		//Get the list of currently installed plugins
 		if(empty($this->_installed)) {
 			$installed = array();
@@ -62,8 +52,19 @@ class PluginBroker
 			foreach ($res as $row) {
 				$installed[$row['name']] = $row['name'];
 				
+				//Only active plugins should be require'd
 				if($row['active']) {
-					$active[$row['name']] = $row['name'];
+					$name = $row['name'];
+					
+					$this->setCurrentPlugin($name);
+					
+					$active[$name] = $name;
+					
+					//Require the file that contains the plugin
+					$path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'plugin.php';
+					if(file_exists($path)) {
+						require_once $path;
+					}
 				}
 			}
 			$this->_active = $active;
