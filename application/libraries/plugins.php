@@ -61,7 +61,7 @@ class PluginBroker
 					$active[$name] = $name;
 					
 					//Require the file that contains the plugin
-					$path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'plugin.php';
+					$path = $this->getPluginFilePath($name);
 					if(file_exists($path)) {
 						require_once $path;
 					}
@@ -73,6 +73,11 @@ class PluginBroker
 		
 		//Fire all the 'initialize' hooks for the plugins
 		$this->initialize();
+	}
+	
+	protected function getPluginFilePath($name)
+	{
+		return PLUGIN_DIR . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'plugin.php';
 	}
 		
 	/**
@@ -130,6 +135,9 @@ class PluginBroker
 			
 			//If the current plugin is not installed
 			if(!$this->isInstalled($plugin)) {
+				
+				$file = $this->getPluginFilePath($plugin);
+				require_once $file;
 				
 				$form_hook = $this->_callbacks['install_form'][$plugin];
 				
