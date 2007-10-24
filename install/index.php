@@ -46,9 +46,7 @@ try {
 	$dsn = 'mysql:host='.$db['host'].';dbname='.$db['name'];
 	if(isset($db['port'])) {
 		$dsn .= 'port='.$db['port'].';';
-	} else {
-		throw new Exception('<h2>No database connection could be created</h2>');
-	}
+	}	
 
 	//PDO Connection
 	//@todo Add "port" option to db.ini and all PDO connections within the app
