@@ -17,6 +17,56 @@ class PluginsController extends Omeka_Controller_Action
 		$this->_table = $this->getTable('Plugin');
 	}
 	
+	/**
+	 * Load the configuration form for a specific plugin.  
+	 * That configuration form will be POSTed back to this URL and processed by the plugin.
+	 *
+	 * @return void
+	 **/
+	public function configAction()
+	{
+		$plugin = $this->_getParam('name');
+
+		$broker = get_plugin_broker();
+		
+		if(!$plugin) {
+			$this->errorAction();
+		}
+		
+		$config = $broker->config($plugin);
+		
+		//If the configuration function returns output, then we need to render that because it is a form
+		if($config !== null) {
+			return $this->render('plugins/config.php', compact('config', 'plugin'));
+		}
+		else {
+			$this->flash('Plugin configuration successfully changed!');
+			$this->_redirect('plugins/browse');	
+		}
+	}
+	
+	public function installAction()
+	{
+		$plugin = $this->_getParam('name');
+
+		if(!$plugin) $this->errorAction();
+		
+		$broker = get_plugin_broker();
+
+		if(!$broker->isInstalled($plugin)) {
+
+			$config = $broker->install($plugin);
+			
+			if($config !== null) {
+				return $this->render('plugins/config.php', compact('config', 'plugin'));
+			}
+			else {
+				$this->flash("Plugin named '$plugin' was successfully installed!");
+				$this->_redirect('plugins/browse');
+			}			
+		}
+	}
+	
 	public function activateAction()
 	{
 		//Get the plugin record, toggle its status and save it back
@@ -57,8 +107,17 @@ class PluginsController extends Omeka_Controller_Action
 	}
 	
 	public function browseAction() {
-		fire_plugin_hook('install');
+		$new_plugins = get_plugin_broker()->getNew();
 		
+		if(count($new_plugins)) {
+			$plugin_to_install = array_pop($new_plugins);
+			
+			$this->_setParam('name', $plugin_to_install);
+			
+			//Run the config action with the installer turned on
+			return $this->installAction();
+		}
+				
 		//Get a list of all the plugins
 		
 		$broker = get_plugin_broker();

@@ -1,6 +1,8 @@
 <?php head(); ?>
 <?php common('settings-nav'); ?>
 
+<?php echo flash(); ?>
+
 <div id="primary">
 <h2>List of plugins:</h2>
 
@@ -13,7 +15,8 @@
 		<td><?php echo h($plugin->name); ?></td>
 		<td><?php echo h($plugin->description);?></td>
 		<td><?php echo h($plugin->author);?></td>
-		<td><button name="activate" type="submit" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?></button>
+		<td><button name="activate" type="submit" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?></button></td>
+		<td><a href="<?php echo uri('plugins/config', array('name'=>$plugin->directory)); ?>">Configure</a></td>
 	</tr>
 <?php endforeach; 
 	else:

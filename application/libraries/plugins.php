@@ -92,6 +92,13 @@ class PluginBroker
 		$this->_callbacks[$hook][$current] = $callback;
 	}
 	
+	public function getHook($plugin, $hook)
+	{		
+		if(is_array($this->_callbacks[$hook])) {
+			return $this->_callbacks[$hook][$plugin];
+		}
+	}
+	
 	/**
 	 * The plugin helper functions do not have any way of determining what plugin to is currently in focus
 	 * These get/setCurrentPlugin methods allow the broker to know how to delegate to specific plugins if necessary
@@ -120,68 +127,84 @@ class PluginBroker
 	}
 	
 	/**
-	 * Special installer hook (checks DB to see if plugin is already there)
-	 * If the plugin is not there, it will check for 'install_form' hooks
+	 * Return a list of plugins that have not been installed yet
 	 *
 	 * @return void
 	 **/
-	public function install() {
+	public function getNew()
+	{
+		$new = array_diff($this->_all, array_keys($this->_installed));
 		
-		//Loop through all the possible plugins
-		foreach ($this->_all as $plugin) {
+		return $new;
+	}
+	
+	public function config($plugin)
+	{
+		//Check if the POST is empty, then check for a configuration form	
+		if(empty($_POST)) {
 
-			//Make sure the plugin helpers like define_metafield() etc. that need to be aware of scope can operate on this plugin
-			$this->setCurrentPlugin($plugin);
+			$config_form_hook = $this->getHook($plugin, 'config_form');
+	
+			//If there is a configuration form available, load that and return the output for rendering later
+			if($config_form_hook) {
+				require_once HELPERS;
+				
+				ob_start();
+				call_user_func_array($config_form_hook, array($_POST)); 
+				$config = ob_get_clean();	
+		
+				return $config;					
+			}
+		}
+		//Data has been POSTed to the configuration mechanism
+		else {
+			//Run the 'config' hook, then run the rest of the installer
+			$config_hook = $this->getHook($plugin, 'config');
 			
-			//If the current plugin is not installed
-			if(!$this->isInstalled($plugin)) {
-				
-				$file = $this->getPluginFilePath($plugin);
-				require_once $file;
-				
-				$form_hook = $this->_callbacks['install_form'][$plugin];
-				
-				//If we haven't POSTed anything, Check to see whether the plugin has an install form
-				if( empty($_POST) and !empty($form_hook) ) {
-					require_once HELPERS;
-					head();
-					//This can be wrapped a bit better in the future
-					echo '<form action="" method="post">';
-					//Load whatever form the plugin writer has provided and exit
-					call_user_func_array($form_hook, array());
-					echo '<input type="submit" name="install_plugin" />';
-					echo '</form>';
-					foot();
-					exit;			
-				}
-			
-				//Now run the installer for the plugin
-				$install_hook = $this->_callbacks['install'][$plugin];
+			if($config_hook) {
+				call_user_func_array($config_hook, array($_POST));
+			}			
+		}		
+	}
+	
+	public function install($plugin) 
+	{
+		
+		//Make sure the plugin helpers like define_metafield() etc. that need to be aware of scope can operate on this plugin
+		$this->setCurrentPlugin($plugin);
+		
+		//Include the plugin file manually because it was not included via the constructor
+		$file = $this->getPluginFilePath($plugin);
+		require_once $file;
+	
+		$config = $this->config($plugin);
+		
+		if($config !== null) {
+			return $config;		
+		}
+								
+		//Now run the installer for the plugin
+		$install_hook = $this->_callbacks['install'][$plugin];
 
-				try {
-					//Insert the plugin into the DB
-					db_query("INSERT IGNORE INTO plugins (name, active) VALUES ('$plugin', 1);");
-					
-					$res = db_query("SELECT LAST_INSERT_ID() as new_id");
-					
-					$plugin_id = (int) $res[0]['new_id'];
-					
-					$this->_last_insert_id = $plugin_id;
-					
-					call_user_func_array($install_hook, array($plugin_id));
-					
-					//If more than one plugin needs to install itself, don't reuse the same form submission
-					unset($_POST);
-					
-				} catch (Exception $e) {
-					
-					echo "An error occurred when installing this plugin: ".$e->getMessage();
-					
-					//If there was an error, remove the plugin from the DB so that we can retry the install
-					if(isset($plugin_id) and is_int($plugin_id)) {
-						db_query("DELETE FROM plugins WHERE id = $plugin_id");
-					}
-				}
+		try {
+			//Insert the plugin into the DB
+			db_query("INSERT IGNORE INTO plugins (name, active) VALUES ('$plugin', 1);");
+		
+			$res = db_query("SELECT LAST_INSERT_ID() as new_id");
+		
+			$plugin_id = (int) $res[0]['new_id'];
+		
+			$this->_last_insert_id = $plugin_id;
+		
+			call_user_func_array($install_hook, array($plugin_id));
+		
+		} catch (Exception $e) {
+		
+			echo "An error occurred when installing this plugin: ".$e->getMessage();
+		
+			//If there was an error, remove the plugin from the DB so that we can retry the install
+			if(isset($plugin_id) and is_int($plugin_id)) {
+				db_query("DELETE FROM plugins WHERE id = $plugin_id");
 			}
 		}
 
