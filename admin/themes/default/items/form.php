@@ -376,6 +376,9 @@
 			</div>
 			<?php endif; ?>
 	<?php endif; ?>
+		
+		<?php fire_plugin_hook('append_to_item_form_tags', $item); ?>
+		
 	</fieldset>
 	<fieldset id="additional-plugin-data">
 		<?php plugin_html('items/form', compact('item')); ?>
