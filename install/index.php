@@ -46,13 +46,15 @@ try {
 	$dsn = 'mysql:host='.$db['host'].';dbname='.$db['name'];
 	if(isset($db['port'])) {
 		$dsn .= 'port='.$db['port'].';';
+	} else {
+		throw new Exception('<h2>No database connection could be created</h2>');
 	}
 
 	//PDO Connection
 	//@todo Add "port" option to db.ini and all PDO connections within the app
 	$dbh = new PDO($dsn, $db['username'], $db['password']);
 	if (!$dbh instanceof PDO) {
-		throw new Exception('No database connection could be created');
+		throw new Exception('<h2>No database connection could be created</h2>');
 	}
 
 	//Build the database if necessary
@@ -91,7 +93,7 @@ try {
 	$path_to_convert = ($output !== NULL) ? trim($output) : FALSE;
 	
 } catch (Exception $e) {
-	die($e->getMessage() . '<p>Please refer to Omeka documentation for help.</p>');
+	die($e->getMessage() . '<p>Please refer to <a href="http://omeka.org/codex/">Omeka documentation</a> for help.</p>');
 }
 
 
