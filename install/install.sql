@@ -302,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `metatext` (
 DROP TABLE IF EXISTS `options`;
 CREATE TABLE IF NOT EXISTS `options` (
   `id` bigint(20) NOT NULL auto_increment,
-  `name` varchar(30)  NOT NULL,
+  `name` varchar(200)  NOT NULL,
   `value` text ,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)

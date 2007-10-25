@@ -67,7 +67,7 @@ select {border:1px solid #a2c9e8; padding:2px; margin: .5em 0 0;}
 button.remove {cursor:pointer;}
 
 div.showitem {clear: both; margin-bottom: 2em; border-bottom: 1px solid #ccc;}
-div.showitem .field {overflow: hidden;}
+div.field {overflow: hidden;}
 	div.showitem h2 {margin: .5em 0;}
 div.fileinput {display:block; padding:0.5em 0;}
 
