@@ -40,6 +40,20 @@ function strip_slashes($text)
 	return $text;
 }
 
+/**
+ * @copyright Wordpress 2007 (GPL)
+ *
+ * @return mixed
+ **/
+function stripslashes_deep($value)
+{
+	 $value = is_array($value) ?
+							 array_map('stripslashes_deep', $value) :
+							 stripslashes($value);
+
+	 return $value;
+}
+
 function install_notification() { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
