@@ -103,6 +103,19 @@ class ItemsController extends Omeka_Controller_Action
 				}
 			}
 			
+			//Entity-specific browsing
+			//@duplication
+			if($entityToView = $this->_getParam('entity')) {
+				if(!$this->isAllowed('browse', 'Entities')) {
+					throw new Exception( 'May not browse by specific entities' );
+				}
+				
+				if(is_numeric($entityToView)) {
+					$filter['entity'] = $entityToView;
+				}
+			}
+			
+			
 			if($this->_getParam('featured')) {
 				$filter['featured'] = true;
 			}

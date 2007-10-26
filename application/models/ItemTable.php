@@ -245,6 +245,15 @@ class ItemTable extends Doctrine_Table
 			$select->where('(u.id = ? AND ie.type = "Item")', $user_id);			
 		
 		}
+		//Even more duplication of the code above
+		elseif(isset($params['entity'])) {
+			
+			$entity_id = (int) $params['entity'];
+			
+			$select->innerJoin('entities_relations ie', 'ie.relation_id = i.id');
+			$select->innerJoin('entities e', 'e.id = ie.entity_id');
+			$select->where('(e.id = ? AND ie.type = "Item")', $entity_id);
+		}
 						
 		//filter items based on featured (only value of 'true' will return featured items)
 		if(isset($params['featured'])) {
