@@ -346,7 +346,7 @@
 			</div>
 			</fieldset>
 			
-			<?php plugin_html('items/search', array()); ?>
+			<?php fire_plugin_hook('append_to_search_form'); ?>
 			<input type="submit" name="submit_search" id="submit_search" value="Search" />
 			
 		</form><?php

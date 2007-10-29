@@ -4,6 +4,8 @@
 <?php echo flash(); ?>
 <h2>Edit Settings</h2>
 
+<?php fire_plugin_hook('prepend_to_settings_form'); ?>
+
 <form method="post">
 	<fieldset>
 <div class="field">
@@ -41,7 +43,8 @@
 <div class="field">
 	<?php text(array('name'=>'path_to_convert', 'class'=>'textinput', 'id'=>'path_to_convert'),$path_to_convert, 'Local Path to ImageMagick binary (required for thumbnail generation)'); ?>
 </div>
-	
+
+<?php fire_plugin_hook('append_to_settings_form'); ?>	
 
 	</fieldset>
 	<input type="submit" name="submit" value="Save Changes" />

@@ -326,6 +326,6 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 <?php endif; ?>
 
 <div id="additional-metadata">
-	<?php plugin_html('items/show', compact('item')); ?>
+	<?php fire_plugin_hook('append_to_item_show', $item); ?>
 </div>
 <?php foot();?>

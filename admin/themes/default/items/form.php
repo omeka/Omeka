@@ -381,5 +381,5 @@
 		
 	</fieldset>
 	<fieldset id="additional-plugin-data">
-		<?php plugin_html('items/form', compact('item')); ?>
+		<?php fire_plugin_hook('append_to_item_form', $item); ?>
 	</fieldset>

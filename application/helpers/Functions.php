@@ -491,10 +491,6 @@ function plugin_footer() {
 	fire_plugin_hook('theme_footer');
 }
 
-function plugin_html($page, $options=array()) {
-	fire_plugin_hook('append_to_page', $page, $options);
-}
-
 ///// END PLUGIN HELPER FUNCTIONS /////
 
 function tag_string($record, $link=null, $delimiter=', ')
