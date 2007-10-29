@@ -339,10 +339,13 @@ class PluginBroker
 	 *
 	 * @return void
 	 **/
-	public function addNavigation($text, $link, $type='main')
+	public function addNavigation($text, $link, $type='main', $permissions)
 	{
 		$nav = $this->_nav;
-		$nav[$type][$text] = $link;
+		
+		$new = array('text'=>$text,'link'=>$link, 'permissions'=>$permissions);
+
+		$nav[$type][] = $new;
 		$this->_nav = $nav;
 	}
 	
@@ -356,7 +359,21 @@ class PluginBroker
 	{
 		if(!isset($this->_nav[$type])) return;
 		
-		foreach ($this->_nav[$type] as $text => $link) {
+		foreach ($this->_nav[$type] as $nav) {
+			
+			$link = $nav['link'];
+			$text = $nav['text'];
+			$permissions = $nav['permissions'];
+			
+			//Make a quick permissions check
+			if($permissions) {
+				$resource = $permissions[0];
+				$rule = $permissions[1];
+				
+				if(!has_permission($resource, $rule)) {
+					continue;
+				}
+			}
 			
 			//Actually create the link (test if it is local or not)
 			//If it has an 'http' in it, its not local, otherwise it is
@@ -444,9 +461,9 @@ function add_controllers($dir='controllers')
 	get_plugin_broker()->addControllerDir($dir);
 }
 
-function add_navigation($text, $link, $type='main')
+function add_navigation($text, $link, $type='main', $permissions=null)
 {
-	get_plugin_broker()->addNavigation($text, $link, $type);
+	get_plugin_broker()->addNavigation($text, $link, $type, $permissions);
 }
 
 function add_output_pages($dir, $output_type='rest')
