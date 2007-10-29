@@ -28,7 +28,7 @@ function not_empty_or($value, $default) {
 function display_item($item, $props = array()) {
 	switch ($item->Type->name) {
 		case 'Document':
-			echo '<div class="document-text">'. nls2p($item->getMetatext('Text')) . '</div>';
+			echo '<div class="document-text">'. nls2p(item_metadata($item,'Text')) . '</div>';
 			break;
 		
 		case 'Still Image':
@@ -89,6 +89,9 @@ function display_item($item, $props = array()) {
 		case 'Email':
 		case 'Lesson Plan':
 		case 'Hyperlink':
+			$html = '<a href="'.item_metadata($item,'URL').'">Hyperlink</a>';
+			echo $html;
+			break;
 		case 'Person':
 		default:
 			# code...
@@ -1164,7 +1167,7 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 	
 	}
 	
-	function snippet($text, $start_pos, $end_pos, $append = '...')
+	function snippet($text, $start_pos, $end_pos, $append = '…')
 	{
 	$start_pos = ( !$start_pos ) ? 0 : strrpos( $text, ' ', $start_pos - strlen($text) ); 
 	$end_pos = strrpos( $text, ' ', ( $end_pos ) - strlen($text) );

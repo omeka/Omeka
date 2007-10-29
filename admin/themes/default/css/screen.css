@@ -30,8 +30,10 @@ h1 a, h2 a, h3 a, #site-title a {text-decoration:none;}
 p,ul,ol,dl,table,div.editable {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
 ul,ol {}
 	li {line-height:1.5em;}
-ul ul {font-size:1em; margin-left:1.5em;}
-li * {font-size:1em;}
+		li * {font-size:1em;}
+	ul ul {font-size:1em; margin-left:1.5em;}
+	
+
 dl dt, dl dd {display:block;}
 dl dt {font-weight:bold;}
 dl dd {margin-bottom:1.5em;}
@@ -44,7 +46,6 @@ td,th {padding:1.5em 0.833333em; line-height:1em;}
 
 thead tr {border:1px solid #cdcdc5; border-width:0 0 3px; font-weight:bold;}
 tbody tr {border-bottom:1px solid #cdcdc5;}
-
 
 /* Form Elements */
 form {display:block; overflow:hidden;padding-bottom:2em;}
@@ -338,8 +339,9 @@ ul.tags, li.tag {display: inline;}
 	textarea#location 
 	{height: 1.2em;display:block;}
 
-	.theme-paginate {overflow:hidden; font-size:1.5em;}
-	.theme-paginate .next {float:right; text-align:right;}
+	.theme-paginate {overflow:hidden; font-size:1.5em; border-bottom:1px solid #DAE9F6; margin-bottom:2em;}
+		.theme-paginate a {text-decoration:none; float:left;background:#DAE9F6; display:block; width: 5em; padding:0.5em 0; text-align:center;}
+	.theme-paginate .next {float:right;}
 
 	#add-file {padding:8px 12px 8px 30px;margin-bottom: 1.5em; background-position:8px 50%; font-size:1.2em; text-decoration:none;color:#38c; display:block;}
 	
@@ -350,7 +352,8 @@ ul.tags, li.tag {display: inline;}
 	
 	#item-form-submits, #form_submits {float:left; width: 400px;}
 	#delete_item_link, #delete_link {float:right;display:block; text-align:right; width:400px;}
-	
+		#delete_item_link a, #delete_link a {background-color:#f1c8ba; width: 8em; display:block; color:#900;float:right;padding:0.5em 1em 0.5em 3em;background-position: 12px 50%;}
+
 	/* Item Browse styles */
 	#add-item {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:6em; display:block;}
 	#add-item:hover {background-color:#e9f6da;}

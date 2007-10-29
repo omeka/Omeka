@@ -44,6 +44,13 @@ p {padding: 0 1em 1em;}
 p,ul,ol,dl {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
 abbr,acronym {border: none; font-style: normal;}
 
+/* Forms */
+
+fieldset {border:0; padding:0;}
+	legend {font-size:1.5em; line-height:1em; margin:1em 0 0 ;}
+	input.textinput {margin-bottom:1em;}
+	label {display:block;}
+
 /* ==Reusable classes== */
 .hide {text-indent: -1000em; width: 0; height: 0; overflow: hidden;}
 .clear {clear: both;}

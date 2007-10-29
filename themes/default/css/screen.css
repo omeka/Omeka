@@ -31,6 +31,13 @@ h1 a, h1 a:visited {color: #660066; text-decoration: none;}
 h4 a:link, h4 a:visited { text-decoration: none; color: #660066; padding: .25em 0;}
 h4 a:hover {color: #92278f; }
 
+/* Forms */
+
+fieldset {border:0; padding:0;}
+	legend {font-size:1.5em; line-height:1em; margin:1em 0 0 ;}
+	input.textinput {margin-bottom:1em;}
+	label {display:block;}
+	
 /* Reusable classes */
 .hide {text-indent: -1000em; width: 0; height: 0; overflow: hidden;}
 
