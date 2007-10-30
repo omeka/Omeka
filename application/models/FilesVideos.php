@@ -24,12 +24,12 @@ class FilesVideos extends Omeka_Record
 	{		
 		$streamInfo = array_pop($info['video']['streams']);
 		
-		$this->bitrate = $info['bitrate'];
+		$this->bitrate = (int) $info['bitrate'];
 		$this->duration = (int) $info['playtime_seconds'];
 		$this->codec = $streamInfo['codec'];
-		$this->width = $streamInfo['resolution_x'];
-		$this->height = $streamInfo['resolution_y'];
-		$this->sample_rate = $info['audio']['sample_rate'];
+		$this->width = (int) $streamInfo['resolution_x'];
+		$this->height = (int) $streamInfo['resolution_y'];
+		$this->sample_rate = (int) $info['audio']['sample_rate'];
 	}
 }
 

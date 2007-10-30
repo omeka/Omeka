@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `files_images` (
 DROP TABLE IF EXISTS `files_videos`;
 CREATE TABLE IF NOT EXISTS `files_videos` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
-  `bitrate` smallint(5) unsigned default NULL,
+  `bitrate` int(10) unsigned default NULL,
   `duration` bigint(20) unsigned default NULL,
   `sample_rate` int(10) unsigned default NULL,
   `codec` text ,

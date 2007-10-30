@@ -26,8 +26,8 @@ class File extends Omeka_Record {
 //		Removed [5-22-07 KBK], this throws errors when attempting to delete files from items/form		
 //		$this->hasOne("Item", "File.item_id");
 		$this->hasOne('FileMetaLookup', 'File.lookup_id');
-		$this->hasOne('FilesImages', 'FilesImages.file_id');
-		$this->hasOne('FilesVideos', 'FilesVideos.file_id');		
+		$this->ownsOne('FilesImages', 'FilesImages.file_id');
+		$this->ownsOne('FilesVideos', 'FilesVideos.file_id');		
 	}
 
 	public function setTableDefinition() {
