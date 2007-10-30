@@ -175,7 +175,12 @@ class PluginBroker
 		
 		//Include the plugin file manually because it was not included via the constructor
 		$file = $this->getPluginFilePath($plugin);
-		require_once $file;
+		if(file_exists($file)) {
+			require_once $file;
+		}
+		else {
+			throw new Exception( "Plugin named '$plugin' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$plugin' directory." );
+		}
 	
 		$config = $this->config($plugin);
 		
