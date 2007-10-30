@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Browse Items', 'body_class'=>'items')); ?>
 <?php common('archive-nav'); ?>
 
 <?php js('search'); ?>

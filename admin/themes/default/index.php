@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('body_class'=>'index', 'title'=>'Dashboard')); ?>
 
 	<div id="primary">
 		<div id="welcome">

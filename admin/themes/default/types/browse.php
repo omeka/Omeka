@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Browse Types','body_class'=>'types')); ?>
 <?php common('archive-nav'); ?>
 <div id="primary">
 <h1 class="floater">Item Types</h1>

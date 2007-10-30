@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Plugins', 'body_class'=>'plugins')); ?>
 <?php common('settings-nav'); ?>
 
 <?php echo flash(); ?>

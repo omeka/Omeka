@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Edit Name #'.$entity->id, 'body_class'=>'entities')); ?>
 <div id="primary">
 	<div id="names-combine">
 	<h2>Combine Two Names</h2>

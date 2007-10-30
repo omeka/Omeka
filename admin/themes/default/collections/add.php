@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Add Collection', 'body_class'=>'collections')); ?>
 <?php common('archive-nav'); ?>
 <div id="primary">
 <h1>Add a Collection</h1>

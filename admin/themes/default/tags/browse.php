@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Browse Tags', 'body_class'=>'tags')); ?>
 <?php common('archive-nav'); ?>
 <div id="primary">
 <h1>Tags</h1>

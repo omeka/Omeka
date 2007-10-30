@@ -225,6 +225,8 @@ ul.tags, li.tag {display: inline;}
 		#primary-nav {background-image:none !important;}
 		#primary-nav a {background-image:none !important; padding-bottom:8px;}
 		
+		#primary-nav .current a{background:#666; border-bottom:1px solid #666;}
+		
 	/* Secondary Navigation */
 	#secondary-nav {background:#666;padding:0 36px 0;overflow:hidden; width: 100%;}
 		#secondary-nav a {color:#fff; text-decoration:none;display:block; width:10em;float:left; padding:6px 0; text-align:center;}
@@ -238,7 +240,6 @@ ul.tags, li.tag {display: inline;}
 		.settings #secondary-nav .nav-general a,
 		.themes #secondary-nav .nav-themes a,
 		.plugins #secondary-nav .nav-plugins a,
-		.users #secondary-nav .nav-browse-users a,
 		.files #secondary-nav .nav-items a,
 		#secondary-nav .current a
 		{background:#fff; color:#555;}

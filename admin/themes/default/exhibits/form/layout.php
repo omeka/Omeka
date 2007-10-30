@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Exhibit Page', 'body_class'=>'exhibits')); ?>
 <?php js('exhibits'); ?>
 <div id="primary">
 <?php common('exhibits-nav'); ?>

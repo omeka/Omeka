@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Remove Tags', 'body_class'=>'tags')); ?>
 <?php echo flash(); ?>
 <?php common('archive-nav'); ?>
 

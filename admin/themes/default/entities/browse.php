@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Browse Names', 'body_class'=>'entities')); ?>
 <?php common('entities-nav'); ?>
 
 <div id="primary">

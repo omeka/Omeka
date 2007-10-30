@@ -1,4 +1,4 @@
-<?php head(array('title' => 'Item')); ?>
+<?php head(array('title' => 'Item # '.$item->id, 'body_class'=>'items')); ?>
 <?php common('archive-nav'); ?>
 
 <?php js('editable');?>

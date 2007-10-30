@@ -1,4 +1,4 @@
-<?php head();?>
+<?php head(array('title'=>'Add Item', 'body_class'=>'items'));?>
 
 <?php common('archive-nav'); ?>
 

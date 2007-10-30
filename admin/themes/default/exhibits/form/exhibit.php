@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Add Exhibit', 'body_class'=>'exhibits')); ?>
 <?php js('listsort'); ?>
 
 <script type="text/javascript" charset="utf-8">	

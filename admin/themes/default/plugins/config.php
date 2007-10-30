@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Plugin Configuration', 'body_class'=>'plugins')); ?>
 
 <div id="primary">
 	

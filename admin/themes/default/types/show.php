@@ -1,4 +1,4 @@
-<?php head();?>
+<?php head(array('title'=>'Type: '.h($type->name),'body_class'=>'types'));?>
 <?php common('archive-nav'); ?>
 
 <?php js('editable');?>

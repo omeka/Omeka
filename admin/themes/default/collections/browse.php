@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Browse Collections', 'body_class'=>'collections')); ?>
 <?php common('archive-nav'); ?>
 <div id="primary">
 	<h1 class="floater">Collections</h1>

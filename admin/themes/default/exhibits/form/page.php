@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Exhibit Page', 'body_class'=>'exhibits')); ?>
 
 <?php js('search'); ?>
 

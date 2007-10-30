@@ -1,4 +1,4 @@
-<?php head();?>
+<?php head(array('title'=>'User Roles', 'body_class'=>'users'));?>
 <?php common('users-nav'); ?>
 
 <script type="text/javascript" charset="utf-8">

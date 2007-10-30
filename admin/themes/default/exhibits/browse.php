@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Browse Exhibits', 'body_class'=>'exhibits')); ?>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
 	<h1 class="floater">Exhibits</h1>

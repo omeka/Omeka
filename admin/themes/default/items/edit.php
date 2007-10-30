@@ -1,4 +1,4 @@
-<?php head();?>
+<?php head(array('title'=>'Edit Item', 'body_class'=>'items'));?>
 <?php common('archive-nav'); ?>
 <div id="primary">
 	

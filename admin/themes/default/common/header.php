@@ -2,7 +2,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Omeka Admin: <?php settings('site_title'); ?></title>
+<title>Omeka Admin: <?php settings('site_title'); ?> | <?php echo $title; ?></title>
 
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,7 +31,7 @@
 <?php plugin_header(); ?>
 
 </head>
-<body class="<?php echo controller_name(); ?>">
+<body class="<?php echo $body_class; ?>">
 	<div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
 	<div id="wrap">
 		

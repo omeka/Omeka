@@ -1,4 +1,4 @@
-<?php head();?>
+<?php head(array('title'=>'Browse Users', 'body_class'=>'users'));?>
 <?php common('users-nav'); ?>
 <div id="primary">
 <?php echo flash(); ?>

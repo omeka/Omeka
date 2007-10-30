@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Exhibit #'.$exhibit->id, 'body_class'=>'exhibits')); ?>
 
 	<?php echo h($exhibit->title); ?>
 	

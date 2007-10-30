@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Edit Settings', 'body_class'=>'settings')); ?>
 <?php common('settings-nav'); ?>
 <div id="primary">
 <?php echo flash(); ?>
