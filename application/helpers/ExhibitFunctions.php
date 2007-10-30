@@ -5,11 +5,11 @@ function exhibit_thumbnail($item, $props=array('class'=>'permalink'))
 {	
 	$uri = exhibit_item_uri($item);
 		
-	echo '<a href="' . $uri . '">';
+	echo '<a href="' . $uri . '" rel="gb_page_center[640,640]">';
 	
 	$file = $item->Files[0];
 	
-	thumbnail($file, $props);
+	thumbnail($file);
 	
 	echo '</a>';
 }
@@ -23,7 +23,7 @@ function exhibit_fullsize($item, $props=array('class'=>'permalink'))
 {
 	$uri = exhibit_item_uri($item);
 		
-	echo '<a href="' . $uri . '">';
+	echo '<a href="' . $uri . '" style="border:none">';
 	
 	$file = $item->Files[0];
 	
@@ -206,7 +206,7 @@ function layout_form_item($order, $label='Enter an Item ID #') {
 function layout_form_text($order, $label='Text') {
 	
 	echo '<div class="textfield">';
-	textarea(array('name'=>'Text['.$order.']','rows'=>'10','cols'=>'40','class'=>'textinput'), page_text($order, false), $label); 
+	textarea(array('name'=>'Text['.$order.']','rows'=>'30','cols'=>'50','class'=>'textinput'), page_text($order, false), $label); 
 	echo '</div>';
 }
 

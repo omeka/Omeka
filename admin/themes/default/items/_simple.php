@@ -2,6 +2,8 @@
 if(!isset($items)) {
 	$items = items(); 
 }
+
+ini_set('memory_limit', '36M');
 ?>
 	
 <table id="items" class="simple" cellspacing="0" cellpadding="0">
