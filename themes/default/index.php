@@ -8,7 +8,7 @@
 			<?php $randomitem = random_featured_item();  ?>
 			<div class="feat-metadata">
 				<?php if(!empty($randomitem)): ?>
-				<?php if(has_thumbnail($item)): ?>
+				<?php if(has_thumbnail($randomitem)): ?>
 			<a class="feat-img" href="<?php echo uri('items/show/'.$randomitem->id); ?>"><?php fullsize($randomitem, null, 467); ?></a>
 			<?php endif; ?>
 			<h3 class="item-title"><a href="<?php echo uri('items/show/'.$randomitem->id); ?>"><?php echo $randomitem->title; ?></a></h3>
