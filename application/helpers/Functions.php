@@ -27,10 +27,13 @@ function not_empty_or($value, $default) {
  **/
 
 function display_file($item, $props = array()) {
-	
+	if(has_files($item)) {
 	if(count($item->Files) > 1) {
-		foreach($items->Files as $file) {
-			echo '<a href="'.link_to_download($file).'" class="download-file">'.h($file->original_filename).'</a>';
+		foreach($item->Files as $file) {
+			echo '<a href="'.file_download_uri($file).'" class="download-file">';
+			if($file->hasThumbnail()) square_thumbnail($file, array('class'=>'thumb')); 
+			else echo $file->original_filename;
+			echo '</a>';
 		}
 	} else {
 		
@@ -41,6 +44,18 @@ function display_file($item, $props = array()) {
 			case 'video/msvideo':
 			case 'video/x-msvideo':
 			case 'video/x-ms-wmv':
+			
+			$defaults = array(
+						'width' => '320', 
+						'height' => '240', 
+						'autostart' => 0, 
+						'ShowControls'=> 1, 
+						'ShowDisplay'=> 1,
+						'ShowStatusBar' => 1
+						);
+
+			$defaults = array_merge($defaults, $props);
+			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
 				$html 	 = 	'<object id="MediaPlayer" width="'.$defaults['width'].'" height="'.$defaults['height'].'"';
 				$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
 				$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
@@ -60,18 +75,15 @@ function display_file($item, $props = array()) {
 			case 'video/quicktime':
 		
 			$defaults = array(
-						'width' => 320, 
-						'height' => 240, 
-						'autoplay' => '0', 
-						'controller'=>'1', 
-						'loop'=>'0'
+						'width' => '320', 
+						'height' => '240', 
+						'autoplay' => 0, 
+						'controller'=> 1, 
+						'loop'=> 0
 						);
 
 			$defaults = array_merge($defaults, $props);
 			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-		
-				$file = $item->Files[0];
-				$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
 
 			$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$defaults['width'].'" height="'.$defaults['height'].'">
 				<param name="src" value="'.$path.'">
@@ -82,144 +94,11 @@ function display_file($item, $props = array()) {
 				<embed src="'.$path.'" scale="tofit" width="'.$defaults['width'].'" height="'.$defaults['height'].'" controller="'.($defaults['controller'] ? 'true' : 'false').'" autoplay="'.($defaults['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
 				</object>';
 				echo $html;
-				break;	
+				break;			
 		}
 	}
-}
-
-function display_item($item, $props = array()) {
-	switch ($item->Type->name) {
-		case 'Document':
-			echo '<div class="document-text">'. nls2p(item_metadata($item,'Text')) . '</div>';
-			break;
-		
-		case 'Still Image':
-		fullsize($item);
-		if(count($item->Files) > 1) foreach ($item->Files as $file)
-		echo '<a href="'.link_to_fullsize($file).'">'.square_thumbnail($file).'</a>';
-			break;
-			
-		case 'Moving Image':
-			$file = $item->Files[0];
-			
-			$defaults = array(
-						'width' => 320, 
-						'height' => 240, 
-						'autostart' => '0', 
-						'ShowControls'=>'1', 
-						'ShowStatusBar' => '0', 
-						'ShowDisplay'=>'0');
-					
-			$defaults = array_merge($defaults, $props);
-			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-			
-			switch ($file->mime_browser) {
-				//WMV & AVI
-				case 'video/avi':
-				case 'video/msvideo':
-				case 'video/x-msvideo':
-				case 'video/x-ms-wmv':
-					$html 	 = 	'<object id="MediaPlayer" width="'.$defaults['width'].'" height="'.$defaults['height'].'"';
-					$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
-					$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
-					$html	.=	'<param name="FileName" value="'.$path.'">'."\n";
-					$html	.=	'<param name="AutoPlay" value="'.($defaults['autostart'] ? 'true' : 'false').'">'."\n";
-					$html	.=	'<param name="ShowControls" value="'.($defaults['ShowControls'] ? 'true' : 'false').'">'."\n";
-					$html	.=	'<param name="ShowStatusBar" value="'.($defaults['ShowStatusBar'] ? 'true' : 'false').'">'."\n";
-					$html	.=	'<param name="ShowDisplay" value="'.($defaults['ShowDisplay'] ? 'true' : 'false').'">'."\n";
-					$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
-					$html	.=	' width="'.$defaults['width'].'" height="'.$defaults['height'].'"'; 		
-					$html	.=	' ShowControls="'.$defaults['ShowControls'].'" ShowStatusBar="'.$defaults['ShowStatusBar'].'"'; 
-					$html	.=	' ShowDisplay="'.$defaults['ShowDisplay'].'" autoplay="'.$defaults['autostart'].'"></embed></object>';
-					echo $html;
-					break;
-				
-				//MOV
-				case 'mov':
-				case 'mp4':
-				
-				$defaults = array(
-							'width' => 320, 
-							'height' => 240, 
-							'autostart' => '0', 
-							'ShowControls'=>'1', 
-							'ShowStatusBar' => '0', 
-							'ShowDisplay'=>'0');
-
-				$defaults = array_merge($defaults, $props);
-				$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-				
-					$file = $item->Files[0];
-					$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-
-				$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="326" height="240">
-					<param name="src" value="'.$path.'">
-					<param name="controller" value="true">
-					<param name="autoplay" value="false">
-					<param name="loop" value="false">
-
-					<embed src="'.$path.'" scale="tofit" width="326" height="16" controller="true" autoplay="false" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
-					</object>';
-					echo $html;
-					break;
-					
-				default:
-					# code...
-					break;
-			}
-			
-			break;
-			
-		case 'Oral History':
-		case 'Sound':
-		$defaults = array(
-					'width' => 320, 
-					'height' => 240, 
-					'autostart' => '0', 
-					'ShowControls'=>'1', 
-					'ShowStatusBar' => '0', 
-					'ShowDisplay'=>'0');
-				
-		$defaults = array_merge($defaults, $props);
-		$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-		
-		$file = $item->Files[0];
-		$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-		$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="326" height="16">
-			<param name="src" value="'.$path.'">
-			<param name="controller" value="true">
-			<param name="autoplay" value="false">
-			<param name="loop" value="false">
-
-			<embed src="'.$path.'" scale="tofit" width="326" height="16" controller="true" autoplay="false" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
-			</object>';
-			echo $html;
-			break;
-		case 'Website':
-		
-		
-		
-		case 'Event':
-		
-		
-		
-		case 'Email':
-		
-		
-		
-		case 'Lesson Plan':
-		
-		
-		
-		case 'Hyperlink':
-			$html = '<div id="hyperlink"><a href="'.item_metadata($item,'URL').'">Hyperlink</a></div>';
-			echo $html;
-			break;
-		case 'Person':
-		default:
-			# code...
-			break;
 	}
+	else 
 }
 
 function display_item_list($items,$title_only=false,$display_content=false) {

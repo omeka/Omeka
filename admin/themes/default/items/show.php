@@ -263,7 +263,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<h3>Type Name</h3>
 		<div id="type_id" class="editableSelect"><p><?php echo h($item->Type->name); ?></p></div>
 	</div>
-		
+			
 	<?php foreach($item->TypeMetadata as $name => $value): ?>
 		<div class="field">
 			<h3><?php echo h($name); ?></h3>
