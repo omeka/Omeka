@@ -224,10 +224,18 @@
 		echo $checkbox;
 	}
 	
-	function submit($value="Submit this Form",$name="submit")
+	function submit($value="Submit",$name="submit")
 	{
 		echo '<input type="submit" name="'.$name.'" id="'.$name.'" value="'.$value.'" />';
 	}
+	
+	function simple_search($props=array(),$uri) { ?>
+		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
+		
+		<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
+		<?php submit("Submit","submit_search"); ?>
+		</form>
+	 <?php }
 	
 	function items_search_form($props=array(), $uri) {
 		?>

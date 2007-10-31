@@ -1,9 +1,7 @@
 		<div id="searchwrap" class="cbb">
 		<h2>Search</h2>
-			<form id="searchform" action="search.php" class="clear">
-				<input type="text" name="search" />
-				<input type="submit" name="submit" id="search" value="Go" />
-			</form>
+		<?php simple_search(array('id'=>'searchform'), uri('items/browse')); ?>
+
 		</div><!--end searchwrap-->
 			
 		<div id="news" class="cbb">

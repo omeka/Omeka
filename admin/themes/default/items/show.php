@@ -308,6 +308,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 		
 
 	<?php endforeach; ?>
+	</ul>
 	</tbody>
 	</table>
 	</div>

@@ -32,7 +32,8 @@ function display_item($item, $props = array()) {
 			break;
 		
 		case 'Still Image':
-			fullsize($item);
+		if(count($item->files) > 1) image_gallery($item);
+		else fullsize($item);
 			break;
 			
 		case 'Moving Image':
@@ -84,12 +85,24 @@ function display_item($item, $props = array()) {
 			
 		case 'Oral History':
 		case 'Sound':
+		$file = $item->Files[0];
+		$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
+		$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="326" height="16">
+			<param name="src" value="'.$path.'">
+			<param name="controller" value="true">
+			<param name="autoplay" value="false">
+			<param name="loop" value="false">
+
+			<embed src="'.$path.'" scale="tofit" width="326" height="16" controller="true" autoplay="false" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
+			</object>';
+			echo $html;
+			break;
 		case 'Website':
 		case 'Event':
 		case 'Email':
 		case 'Lesson Plan':
 		case 'Hyperlink':
-			$html = '<a href="'.item_metadata($item,'URL').'">Hyperlink</a>';
+			$html = '<div id="hyperlink"><a href="'.item_metadata($item,'URL').'">Hyperlink</a></div>';
 			echo $html;
 			break;
 		case 'Person':
