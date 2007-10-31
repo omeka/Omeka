@@ -66,8 +66,8 @@
 			buttons[i].onsubmit = function() {
 				return false;
 			}
-			buttons[i].onclick = function(e) {
-				removeTag(e.target);
+			buttons[i].onclick = function() {
+				removeTag(this);
 				return false;
 			};
 		};		
@@ -79,15 +79,13 @@
 		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
 
 		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
-			parameters: {
-				'remove_tag': tagId
-			},
+			parameters: 'remove_tag='+ tagId,
 			method: 'post',
-			onComplete: function(t) {
+			onSuccess: function(t) {
 				//Fire the other ajax request to update the page
-				new Ajax.Request("<?php echo uri('items/ajaxTagsRemove/'); ?>", {
+				new Ajax.Request("<?php echo uri('items/_tags_remove/'); ?>", {
 					parameters: {
-						'id': "<?php echo h($item->id); ?>"
+						'id': "<?php echo $item->id; ?>"
 					},
 					onSuccess: function(t) {
 						$('tags-list').hide();
@@ -98,6 +96,9 @@
 						ajaxifyTagRemoval();
 					}
 				});
+			},
+			onFailure: function(t) {
+				alert(t.status);
 			}
 		});
 		
@@ -365,20 +366,18 @@
 			<label for="tags-field">Your Tags</label>
 			<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
 			</div>
+		
+			<?php fire_plugin_hook('append_to_item_form_tags', $item); ?>
 			
-	<?php if(1==0): //This is masked until we get it working ?>
-			<?php if(has_permission('Items','untagOthers')): ?>
+			<?php if(has_tags($item) and has_permission('Items','untagOthers')): ?>
 			<div class="field">
 				<label for="all-tags">Remove Other Users' Tags</label>
 				<ul id="tags-list">
-					<?php common('ajaxTagsRemove', compact('item'), 'items'); ?>
+					<?php common('_tags_remove', compact('item'), 'items'); ?>
 				</ul>
 			</div>
 			<?php endif; ?>
-	<?php endif; ?>
-		
-		<?php fire_plugin_hook('append_to_item_form_tags', $item); ?>
-		
+			
 	</fieldset>
 	<fieldset id="additional-plugin-data">
 		<?php fire_plugin_hook('append_to_item_form', $item); ?>

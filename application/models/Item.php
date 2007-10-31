@@ -280,7 +280,7 @@ class Item extends Omeka_Record
 		}
 	}
 	
-	public function saveMetatext($post)
+	public function saveMetatext($post=null)
 	{
 		$table = Doctrine_Manager::getInstance()->getTable('Metatext');
 		
@@ -522,8 +522,8 @@ class Item extends Omeka_Record
 		//Special method for untagging other users' tags
 		if($this->userHasPermission('untagOthers')) {
 			if(array_key_exists('remove_tag', $clean)) {
-				$tagId = $post['remove_tag'];
-				$tagToDelete = Zend_Registry::get( 'doctrine' )->getTable('Tag')->find($tagId);
+				$tagId = (int) $clean['remove_tag'];
+				$tagToDelete = Doctrine_Manager::getInstance()->getTable('Tag')->find($tagId);
 				$current_user = Omeka::loggedIn();
 				if($tagToDelete) {
 					fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $current_user);
