@@ -4,10 +4,10 @@
 
 	<h2><?php echo $item->title; ?></h2>
 
-		<div id="fullsizeimg">
-			<?php if(fullsize($item)): echo fullsize($item); ?>
-			<?php endif; ?>
-		</div>
+	<div id="fullsizeimg">
+		<?php if(fullsize($item)): echo fullsize($item); ?>
+		<?php endif; ?>
+	</div>
 
 	<dl id="metadata">
 		
