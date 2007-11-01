@@ -218,23 +218,6 @@ function src($file, $dir=null, $ext = null, $return = false) {
 	}
 }
 
-function plugin_src($file, $dir=null)
-{
-	try {
-		$file = (!empty($dir)) ? $dir . DIRECTORY_SEPARATOR . $file : $file;
-		
-		$paths = Zend_Registry::get('plugin_view_paths');
-		
-		foreach ($paths as $physical => $web) {
-
-			if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
-				return $web . DIRECTORY_SEPARATOR . $file;
-			}
-		}
-		
-	} catch (Exception $e) {}
-}
-
 /**
  * Echos the web path (that's what's important to the browser)
  * to a javascript file.
@@ -420,11 +403,6 @@ function flash($wrap=true)
 		return false;
 	}
 	return $wrap ? '<div class="alert">'.$msg.'</div>' : $msg;
-}
-
-function controller_name()
-{
-	return Omeka_Controller_Front::getInstance()->getRequest()->getControllerName();
 }
 
 ///// NAVIGATION /////

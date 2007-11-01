@@ -19,7 +19,7 @@
 <?php plugin_header(); ?>
 
 </head>
-<body id="<?php echo controller_name(); ?>">
+<body>
 	<div id="wrap">
 
 		<div id="header">
