@@ -3,7 +3,7 @@
 
 		<div id="about" class="cbb">
 		<h2>About</h2>
-		<p>Here is an example of an about page.</p>
+		<p>This is an example of a static page. To edit the content here, simply open the "about.php" file in a text editor.</p>
 
 		</div><!--end about -->
 	
