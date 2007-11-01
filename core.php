@@ -1,4 +1,7 @@
 <?php
+//Until Omeka's memory usage issues get resolved, here is a temporary solution
+ini_set('memory_limit', '32M');
+
 require_once 'globals.php';
 require_once 'Doctrine.php';
 //require_once 'Doctrine.compiled.php';
