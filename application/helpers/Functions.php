@@ -98,7 +98,6 @@ function display_file($item, $props = array()) {
 		}
 	}
 	}
-	else 
 }
 
 function display_item_list($items,$title_only=false,$display_content=false) {
