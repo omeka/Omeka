@@ -155,6 +155,8 @@
 				</div>
 				<?php endfor; ?>
 			</div>
+			
+			<?php fire_plugin_hook('append_to_item_form_upload', $item); ?>
 		
 		<?php if ( has_files($item) ): ?>
 			<div class="label">Edit File Metadata</div>
