@@ -277,16 +277,7 @@ class File extends Omeka_Record {
 				$this->original_filename = $originalName;
 				$this->archive_filename = $new_name_string;
 				
-				//Retrieve the image sizes from the database
-				$full_constraint = get_option('fullsize_constraint');
-				$thumb_constraint = get_option('thumbnail_constraint');
-				$square_thumbnail_constraint = get_option('square_thumbnail_constraint');
-				
-				$this->createImage(FULLSIZE_DIR, $path, $full_constraint);
-				
-				$this->createImage(THUMBNAIL_DIR, $path, $thumb_constraint);
-				
-				$this->createImage(SQUARE_THUMBNAIL_DIR, $path, $square_thumbnail_constraint, "square");
+				$this->createDerivativeImages($path);
 				
 				$this->processExtendedMetadata($path);
 		} else {
@@ -319,6 +310,23 @@ class File extends Omeka_Record {
 					break;
 				}
 		}
+	}
+	
+	public function createDerivativeImages($path)
+	{
+		//Function processes derivatives of every image uploaded - additional images may be created using createImage function.  Additionally, plugin hooks allow you to add your own additional image sizes [DL]
+		
+		//Retrieve the image sizes from the database
+		$full_constraint = get_option('fullsize_constraint');
+		$thumb_constraint = get_option('thumbnail_constraint');
+		$square_thumbnail_constraint = get_option('square_thumbnail_constraint');
+		
+		$this->createImage($path, FULLSIZE_DIR, $full_constraint);
+		
+		$this->createImage($path, THUMBNAIL_DIR, $thumb_constraint);
+		
+		$this->createImage($path, SQUARE_THUMBNAIL_DIR, $square_thumbnail_constraint, "square");
+		
 	}
 
 	protected function processExtendedMetadata($path)
@@ -370,7 +378,7 @@ class File extends Omeka_Record {
 		}
 	}
 
-	private function createImage( $new_dir, $old_path, $constraint, $type=null) {
+	protected function createImage( $old_path, $new_dir, $constraint, $type=null) {
 			$convertPath = get_option('path_to_convert');
 			
 			$this->checkImage( $new_dir, $old_path, $convertPath);
