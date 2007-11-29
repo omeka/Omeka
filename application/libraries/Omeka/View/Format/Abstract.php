@@ -57,23 +57,41 @@ abstract class Omeka_View_Format_Abstract
 	 **/
 	public function canRender()
 	{
-		return ((bool) $this->getRecord() or (bool) $this->getRecordset());
+		$view = $this->getView();
+		return (isset($view->recordset) or isset($view->record));
+//		return ((bool) $this->getRecord() or (bool) $this->getRecordset());
+	}
+	
+	protected function hasRecord()
+	{
+		$view = $this->getView();
+		return isset($view->record);
+	}
+	
+	protected function hasRecordset()
+	{
+		$view = $this->getview();
+		return isset($view->recordset);
 	}
 	
 	protected function renderRecords()
 	{
-		if($record = $this->getRecord()) {
-		
+		if($this->hasRecord() and ($record = $this->getRecord())) {
 			$class = get_class($record);
 			$renderer = self::getModelOutputHandler($class, $this->getFormat());
-			return $renderer->renderOne($record);
-		
-		}elseif($records = $this->getRecordset()) {
-			
-			$class = get_class(current($records));
+			return $renderer->renderOne($record);		
+		}elseif($this->hasRecordset()) {
+			$class = $this->getView()->record_type;
+			if(!$class) {
+				throw new Omeka_View_Format_Exception( 'Class must be specified when rendering a set of records!' );
+			}	
+			if( !($records = $this->getRecordset())) {
+				$records = array();
+			}		
 			$renderer = self::getModelOutputHandler($class, $this->getFormat());
 			return $renderer->renderall($records);
-		
+		}else {
+			throw new Omeka_View_Format_Exception( 'There are no records to render!' );
 		}
 	}
 	

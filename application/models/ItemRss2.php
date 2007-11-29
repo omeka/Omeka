@@ -27,6 +27,7 @@ class ItemRss2 extends Omeka_Record_Feed_Abstract
 
 	protected function buildRSSHeaders()
 	{
+		require_once HELPERS;
 		$headers = array();
 
 //		How do we determine what title to give the RSS feed?		

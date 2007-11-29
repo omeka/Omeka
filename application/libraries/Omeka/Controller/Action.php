@@ -396,6 +396,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		$pass_to_template = compact($pluralName,$totalVar);
 		$pass_to_template['recordset'] = $$pluralName;
+		$pass_to_template['record_type'] = $this->_modelClass;
 		
 		return $this->render($viewPage, $pass_to_template);
 	}

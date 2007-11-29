@@ -54,7 +54,7 @@ class Omeka_View extends Zend_View_Abstract
 		try {
 			Zend_Loader::loadClass($class);
 			$format_class = new $class($this, $options);
-			
+
 			if($format_class->canRender()) {
 				return $format_class;
 			}

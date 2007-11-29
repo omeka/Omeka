@@ -437,14 +437,21 @@ function admin_nav(array $links) {
 	echo $nav;	
 }
 
-function is_current($link, $req = null) {	
+function is_current($link, $req = null) {
+		
 	if(!$req) {
 		$req = Zend_Controller_Front::getInstance()->getRequest();
 	}
 	$current = $req->getRequestUri();
 	$base = $req->getBaseUrl();
-	if($link == $current && rtrim($current, '/') == $base) return true;
-	else return (strripos($current,$link) === 0 && rtrim($link, '/') !== $base);
+
+	//Strip out the protocol, host, base URI, rightmost slash before comparing the link to the current one
+	$strip_out = array(WEB_DIR, $_SERVER['HTTP_HOST'], $base);
+	$current = rtrim( str_replace($strip_out, '', $current), '/');
+	$link = rtrim( str_replace($strip_out, '', $link), '/');
+	
+	if(strlen($link) == 0) return (strlen($current) == 0);
+	return ($link == $current) or (strpos($current, $link) === 0);
 }
 
 ///// END NAVIGATION /////
@@ -514,15 +521,31 @@ function link_to_item($item, $action='show', $text=null, $props=array())
 }
 
 function link_to_items_rss($params=array())
+{	
+	echo '<a href="' . items_rss_uri($params) . '" class="rss">RSS</a>';
+}
+
+function items_rss_uri($params=array())
 {
 	$params['output'] = 'rss2';
 	
 	//In case $_GET is passed from a search of items, don't include the submit form button
 	unset($params['submit_search']);
 	
-	$uri = uri('items/browse', $params);
+	$uri = uri('items/browse', $params);	
 	
-	echo '<a href="' . $uri . '" class="rss">RSS</a>';
+	return $uri;
+}
+
+function items_rss_header()
+{
+	if($_GET and is_current(uri('items/browse'))) {
+		$uri = items_rss_uri($_GET);
+	}else {
+		$uri = items_rss_uri();
+	}
+	
+	echo '<link rel="alternate" type="application/rss+xml" title="'.get_option('site_title').'" href="'. $uri .'" />';
 }
 
 function link_to_next_item($item, $text="Next Item -->", $props=array())
@@ -1125,10 +1148,9 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
         return $url;
 	}
 	
-	function get_base_url()
+	function get_base_url($use_relative_uri=false)
 	{
-//		$base = Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
-		$base = WEB_DIR;
+		$base = ($use_relative_uri) ? Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl() : WEB_DIR;
 		return rtrim($base , '/') . '/';
 	}
 	

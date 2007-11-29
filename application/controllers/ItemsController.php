@@ -203,6 +203,7 @@ class ItemsController extends Omeka_Controller_Action
 		
 		$pass_to_template = compact('total_items', 'items');
 		$pass_to_template['recordset'] = $items;
+		$pass_to_template['record_type'] = 'Item';
 		
 		return $this->render('items/browse.php', $pass_to_template);
 	}
