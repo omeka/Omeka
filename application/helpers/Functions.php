@@ -513,6 +513,18 @@ function link_to_item($item, $action='show', $text=null, $props=array())
 	return link_to($item, $action, $text, $props);
 }
 
+function link_to_items_rss($params=array())
+{
+	$params['output'] = 'rss2';
+	
+	//In case $_GET is passed from a search of items, don't include the submit form button
+	unset($params['submit_search']);
+	
+	$uri = uri('items/browse', $params);
+	
+	echo '<a href="' . $uri . '" class="rss">RSS</a>';
+}
+
 function link_to_next_item($item, $text="Next Item -->", $props=array())
 {
 	if($next = $item->next()) {

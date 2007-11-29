@@ -65,16 +65,27 @@ class ItemRss2 extends Omeka_Record_Feed_Abstract
 		$entry['lastUpdate'] = strtotime($item->added);
 		
 		//Branch on type to figure out what to put in the 'content' part
-		switch ($this->Type->name) {
+		switch ($item->Type->name) {
 			case 'Document':
 				$entry['content'] = $item->getMetatext('Text');
 				break;
 			
 			case 'Still Image':
+				
+				//Append the HTML for the image to the 'description' of the rss entry
 				ob_start();
 				fullsize($item);
 				$fullsize_html = ob_get_clean();
-				$entry['content'] = $fullsize_html;
+				$entry['description'] .= $fullsize_html;
+	
+				//List the file as an enclosure (whatever that means)
+				if($item->Files and ($file = current($item->Files))) {
+					$entry['enclosure'] = array();
+					$enc['url'] = file_display_uri($file);
+					$enc['type'] = $file->mime_browser;
+					$enc['length'] = (int) $file->size;
+					$entry['enclosure'][] = $enc;
+				}
 				break;
 				
 			default:
