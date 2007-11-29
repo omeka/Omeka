@@ -3,120 +3,179 @@ class TagTestCase extends OmekaTestCase
 {	
 	public function setUp()
 	{
-		parent::setUp('Tag');
-		$table = Doctrine_Manager::getInstance()->getTable('Tag');
-		$this->Tag1 = $table->find(1);
-		$this->Tag2 = $table->find(2);
-		$this->table = $table;
+		parent::setUp();
+		
+		$this->db->setTable('Tag', false);
 	}
 	
-	public function testFindAll()
-	{
-		//Assert that findAll returns a Doctrine_Collection for a record type
-		$tags = $this->table->findAll('Item');
-		$this->assertEqual(count($tags), 2);
-		
-		
-		//Assert that only tags with taggings are returned
-		$tags = $this->table->findAll();
-		$this->assertEqual(count($tags), 3);
-		
-	}
-	
+
+
 	public function testFind()
 	{
-		$this->assertEqual("Tag1", $this->Tag1->name);
+		$db = $this->db;
+	
+		$table = $db->getTable('Tag');
+		
+		$db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount 
+FROM tags t 
+INNER JOIN taggings tg ON tg.tag_id = t.id 
+WHERE t.id = '1' 
+GROUP BY t.id 
+LIMIT 1");
 		
 		//Assert that searching for one tag returns a Tag instance
-		$foundTag = $this->table->find($this->Tag1->id);
-		
-		$this->assertEqual("Tag", get_class($foundTag));
-		
-		$foundTags = $this->table->find(array(1, 2));
-		
-		//Assert that searching for multiple tag ids returns a collection
-		$this->assertEqual("Doctrine_Collection", get_class($foundTags));
-		$this->assertEqual(2, count($foundTags));		
+		$foundTag = $table->find(1);
 	}
+
 	
-	public function testFindBy()
+
+	public function testFindByUser()
 	{
-		//Assert retrieve by user
-		$u = $this->fixtures['User2'];
+		$db = $this->db;	
 		
-		$tC = $this->table->findBy( array('user'=>$u), 'Item', true);
+		$table = $this->db->getTable('Tag');
+				
+		//Test that findBy() creates the proper SQL statement when returning the count for a user
+
+		$db->expectCountQuery("SELECT COUNT(DISTINCT(t.id)) 
+FROM tags t INNER JOIN taggings tg ON tg.tag_id = t.id 
+INNER JOIN entities e ON e.id = tg.entity_id 
+INNER JOIN users u ON u.entity_id = e.id 
+INNER JOIN items i ON i.id = tg.relation_id 
+WHERE tg.type = 'Item' AND u.id = '1'");
 		
-		$this->assertEqual($tC, 1);
+		$tags = $table->findBy( array('user'=>1, 'return'=>'count'), 'Item');
+	}
+
+	
+	public function testFindByItem()
+	{
+		$db = $this->db;
 		
-		//Assert retrieve by record
+		$item = new Item;
+		$item->id = 2;
 		
-		$i = $this->fixtures['Item'];
+		$table = $db->getTable('Tag');
 		
-		$tC = $this->table->findBy( array('record'=>$i), 'Item', true);
+		$db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount 
+FROM tags t 
+INNER JOIN taggings tg ON tg.tag_id = t.id 
+WHERE tg.relation_id = '2' AND tg.type = 'Item' 
+GROUP BY t.id 
+ORDER BY tagCount ASC");
 		
-		$this->assertEqual($tC, 2);
+		$table->findBy(array('record'=>$item));
+	}	
+
 		
-		//Assert retrieve by entity
+	public function testFindByEntity()
+	{
+						
+		$this->db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount 
+FROM tags t 
+INNER JOIN taggings tg ON tg.tag_id = t.id 
+INNER JOIN entities e ON e.id = tg.entity_id 
+INNER JOIN items i ON i.id = tg.relation_id 
+WHERE tg.type = 'Item' AND e.id = '2' 
+GROUP BY t.id ORDER BY tagCount ASC");
 		
-		$e = $this->fixtures['Entity'];
-		
-		$tC = $this->table->findBy( array('entity'=>$e), 'Item', true);
-		
-		$this->assertEqual($tC, 2);
-		
+		$this->db->getTable('Tag')->findBy( array('entity'=>2), 'Item');		
+	}	
+
+
+	public function testFindByPublic()
+	{
 		//Assert retrieve public
 		
-		$tC = $this->table->findBy( array('public'=>true), 'Item', true);
+		$this->db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount 
+FROM tags t 
+INNER JOIN taggings tg ON tg.tag_id = t.id 
+INNER JOIN items i ON i.id = tg.relation_id 
+WHERE tg.type = 'Item' AND i.public = 1 
+GROUP BY t.id 
+ORDER BY tagCount ASC");
 		
-		$this->assertEqual($tC, 0);
+		$this->db->getTable('Tag')->findBy( array('public'=>true), 'Item');		
+	}	
+
 		
-		//Assert limit retrieval
+	public function testLimitFindBy()
+	{
+		$this->db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount 
+FROM tags t 
+INNER JOIN taggings tg ON tg.tag_id = t.id 
+GROUP BY t.id 
+ORDER BY tagCount ASC 
+LIMIT 5");
 		
-		$tags = $this->table->findBy( array('limit'=>1), null );
-		
-		$this->assertEqual(count($tags), 1);
-		
-		//Assert order by recent
-		
-		$tags = $this->table->findBy( array('recent'=>true), null);
-		
-		$mostRecent = array_pop($tags);
-		
-		$this->assertEqual($mostRecent['id'], 1);
-		
-		//Assert order from most to least
-		
-		$tags = $this->table->findBy( array('mostToLeast'=>true), null);
-		
-		$least = end($tags);
-		
-		$this->assertEqual($least['id'], 3);
-		
-	}
+		$this->db->getTable('Tag')->findBy( array('limit'=>5), null );
+	}	
+
 	
+	public function testFindByRecent()
+	{
+		
+		$this->db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount 
+FROM tags t 
+INNER JOIN taggings tg ON tg.tag_id = t.id 
+INNER JOIN items i ON i.id = tg.relation_id 
+WHERE tg.type = 'Item' 
+GROUP BY t.id 
+ORDER BY tg.time DESC");
+		
+		$this->db->getTable('Tag')->findBy( array('recent'=>true), 'Item');		
+	}	
+			
+	public function testOrderedMostToLeast()
+	{		
+	$this->db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount 
+FROM tags t 
+INNER JOIN taggings tg ON tg.tag_id = t.id 
+GROUP BY t.id 
+ORDER BY tagCount DESC");
+		
+		$this->db->getTable('Tag')->findBy( array('mostToLeast'=>true), null);		
+	}	
+
 	public function testFindOrNew()
 	{
-		//Assert finds persistent tag		
-		$tag = $this->table->findOrNew('Tag1');
-		
-		$this->assertTrue( $tag->exists() );
-		$this->assertEqual($tag->id, $this->fixtures['Tag1']->id);
-		
-		//Assert makes new tag
-		
-		$tag = $this->table->findOrNew('Foobar');
-		$this->assertFalse( $tag->exists() );
-		
-	}
 	
-	public function testDeleteByUser()
-	{
+		$this->db->expectQuery("SELECT t.* FROM tags t WHERE t.name = ? LIMIT 1", array('Tag1'));
 		
-	}
+		//Assert does not find persistent tag, but instead returns a new one with that name		
+		$tag = $this->db->getTable('Tag')->findOrNew('Tag1');
+		
+		$this->assertFalse( $tag->exists() );
+		$this->assertEqual($tag->name, 'Tag1');		
+	}	
+	
+/*
+	public function testFindAll()
+	{		
+		//Assert that findAll returns a Doctrine_Collection for a record type
+		$this->db->expectQuery(
+"SELECT t.*, COUNT(t.id) as tagCount
+FROM tags t
+INNER JOIN taggings tg ON tg.tag_id = t.id
+INNER JOIN items i ON i.id = tg.relation_id
+WHERE tg.type = 'Item'
+GROUP BY t.id
+ORDER BY tagCount ASC", array());
+
+		$this->db->getTable('Tag')->findAll('Item');		
+	}	
 	
 	public function testRename()
 	{
 		
 	}
+*/	
 } 
 ?>

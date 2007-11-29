@@ -5,27 +5,18 @@
  */
 class FilesImages extends Omeka_Record
 {	
-    public function setTableDefinition()
-    {
-		$this->hasColumn('width', 'integer');
-		$this->hasColumn('height', 'integer');
-		$this->hasColumn('bit_depth', 'integer');
-		$this->hasColumn('channels', 'integer');
-		$this->hasColumn('exif_string', 'string');
-		$this->hasColumn('exif_array', 'array');
-		$this->hasColumn('iptc_string', 'string');
-		$this->hasColumn('iptc_array', 'array');
-		$this->hasColumn('file_id', 'integer', null, array('range'=>array('1')));
-    }
-    public function setUp()
-    {
-		$this->hasOne('File', 'FilesImages.file_id');
-    }
+	public $width;
+	public $height;
+	public $bit_depth;
+	public $channels;
+	public $exif_string;
+	public $exif_array;
+	public $iptc_string;
+	public $iptc_array;
+	public $file_id;
 
 	public function generate($id3, $path)
-	{
-//		$path = FILES_DIR.DIRECTORY_SEPARATOR.$this->File->archive_filename;
-		
+	{		
 		$size = getimagesize($path, $info);
 
 		$this->width = $size[0];
@@ -63,6 +54,17 @@ class FilesImages extends Omeka_Record
 		
 		$this->exif_string = $exif_string;
 		
+	}
+	
+	protected function preSave()
+	{
+		if(is_array($this->exif_array)) {
+			$this->exif_array = serialize($this->exif_array);
+		}
+		
+		if(is_array($this->iptc_array)) {
+			$this->iptc_array = serialize($this->iptc_array);
+		}
 	}
 }
 

@@ -18,10 +18,10 @@ $acl->addRole(new Zend_Acl_Role('admin'));
 $acl->addRole(new Zend_Acl_Role('default'));
 
 $acl->registerRule(new Zend_Acl_Resource('Items'), array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured'));
-$acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','delete', 'showInactive'));
+$acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','delete', 'showNotPublic'));
 $acl->registerRule(new Zend_Acl_Resource('Entities'), array('add','edit','displayEmail','delete'));
 $acl->registerRule(new Zend_Acl_Resource('Files'), array('edit','delete'));
-$acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','edit','show','config', 'install'));
+$acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','show','config', 'install'));
 $acl->registerRule(new Zend_Acl_Resource('Settings'), array('edit'));
 $acl->registerRule(new Zend_Acl_Resource('Tags'), array('rename','remove'));
 $acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
@@ -32,12 +32,12 @@ $acl->registerRule(new Zend_Acl_Resource('Exhibits'), array('add', 'edit', 'dele
 $acl->allow('super'); 
 
 $acl->allow('researcher','Items',array('showNotPublic'));
-$acl->allow('researcher','Collections',array('showInactive'));
+$acl->allow('researcher','Collections',array('showNotPublic'));
 
 $acl->allow('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic'));
 
 $acl->allow('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers', 'makePublic', 'makeFeatured'));
-$acl->allow('admin','Collections',array('add','edit','delete', 'showInactive'));
+$acl->allow('admin','Collections',array('add','edit','delete', 'showNotPublic'));
 $acl->allow('admin','Entities',array('add','edit','delete', 'displayEmail'));
 $acl->allow('admin','Files',array('edit','delete'));
 $acl->allow('admin','Tags',array('rename','remove'));

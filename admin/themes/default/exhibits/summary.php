@@ -1,5 +1,6 @@
 <?php head(array('title'=>'Exhibit #'.$exhibit->id, 'body_class'=>'exhibits')); ?>
 <div id="primary">
+
 <h1>Exhibit Title: <?php echo h($exhibit->title); ?></h1>
 <h2>Description</h2>
 <?php echo nls2p(h($exhibit->description)); ?>

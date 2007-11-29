@@ -113,7 +113,7 @@ function toggleNamesForm() {
 		radioButtons[i].onclick = function() {
 			switchForm(this);
 			allFields.show();
-		}
+		};
 		if(radioButtons[i].checked) {
 			switchForm(radioButtons[i]);
 			allFields.show();

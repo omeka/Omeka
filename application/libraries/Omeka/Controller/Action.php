@@ -11,9 +11,9 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	protected $_view;
 	
 	/**
-	 * Doctrine_Table associated with the controller (initialized optionally within the init() method)
+	 * Omeka_Table associated with the controller (initialized optionally within the init() method)
 	 *
-	 * @var Doctrine_Table
+	 * @var Omeka_Table
 	 **/
 	protected $_table;
 	
@@ -282,29 +282,18 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 *
 	 * @return bool
 	 **/
-	protected function isAllowed($rule, $resourceName=null, $user=null) 
+	protected function isAllowed($rule, $resourceName=null) 
 	{
 		$allowed = $this->_allowed;
 		if(isset($allowed[$rule])) {
 			return $allowed[$rule];
 		}
 		
-		if(!$user) {
-			$user = Omeka::loggedIn();
-		}
-		
-		/*	'default' permission level is hard-coded here, may change later */
-		$role = !$user ? 'default' : $user->role;
 		if(!$resourceName) {
 			$resourceName = $this->getName();
 		}
 		
-		//If the resource has no rule that would indicate permissions are necessary, then we assume access is allowed
-		if(!$this->acl->resourceHasRule($resourceName,$rule)){
-			return TRUE;
-		} 
-		
-		return $this->acl->isAllowed($role, $resourceName, $rule);
+		return $this->acl->checkUserPermission($resourceName, $rule);
 	}
 	
 	/**
@@ -333,36 +322,14 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 */
 	
 	/**
-	 * Retrieve the Doctrine table for queries
+	 * Retrieve the table for queries
 	 * 
 	 */
 	public function getTable($table = null)
 	{
-		return Zend_Registry::get('doctrine')->getTable($table);
+		return get_db()->getTable($table);
 	}
 
-	public function getConn()
-	{
-		return Doctrine_Manager::getInstance()->connection();
-	}
-
-	/**
-	 * Retrieve an option from the option table.
-	 * This may end up being redundant.
-	 * 
-	 * @starred
-	 * 
-	 */
-	public function getOption($name)
-	{
-		$optionTable = $this->getTable('option');
-		$options = $optionTable->findByDql("name LIKE :name", array('name' => $name));
-		if (count($options) == 1) {
-			return ($options[0]);
-		}
-		return false;
-	}
-	
 	public function getView()
 	{
 		return $this->_view;
@@ -427,7 +394,10 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		//Fire the plugin hook
 		fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $$pluralName);
 		
-		return $this->render($viewPage, compact($pluralName,$totalVar));
+		$pass_to_template = compact($pluralName,$totalVar);
+		$pass_to_template['recordset'] = $$pluralName;
+		
+		return $this->render($viewPage, $pass_to_template);
 	}
 	
 	public function showAction()
@@ -462,15 +432,19 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		$$varName = new $class();
 		
 		try {
-			if($$varName->commitForm($_POST))
+			if($$varName->saveForm($_POST))
 			{
 				$this->_redirect('add',array('controller'=>$pluralName));
 			}
-		} catch (Exception $e) {
+		} 
+		catch (Omeka_Validator_Exception $e)
+		{
+			throw new Exception( 'Implement Omeka_Validator_Exception catching in default addAction()' );
+		}
+		catch (Exception $e) {
 			$this->flash($e->getMessage());
 		}
 
-		$this->loadFormData();
 		return $this->render($pluralName.'/add.php', compact($varName));			
 	}
 	
@@ -486,7 +460,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		}
 		
 		try {
-			if($$varName->commitForm($_POST))
+			if($$varName->saveForm($_POST))
 			{	
 				//Avoid a redirect by passing an extra parameter to the AJAX call
 				if($this->_getParam('noRedirect')) {
@@ -500,7 +474,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
-		$this->loadFormData();
 		return $this->render($pluralName.'/edit.php', compact($varName));		
 	}
 	
@@ -513,13 +486,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		$record->delete();
 		$this->_redirect('delete', array('controller'=>$controller));
 	}
-	
-	/**
-	 * Load extra data that would need to be displayed for forms, for example the item form would require all collections, plugins, etc.
-	 *
-	 * @return void
-	 **/
-	protected function loadFormData() {}
 	
 	///// END BASIC CRUD INTERFACE /////
 	
@@ -554,9 +520,23 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		fire_plugin_hook('pre_render_page', $page, $vars);
 		
-		$this->getResponse()->appendBody($this->_view->render($page));
+		$body = $this->_view->renderFormat($this->getOutputFormat(), $page);
+		
+		$this->getResponse()->appendBody($body);
 		
 		fire_plugin_hook('post_render_page', $page, $vars);
+	}
+	
+	private function getOutputFormat()
+	{
+		$output = $this->_getParam('output');
+		
+		//The default output type is 'xhtml'
+		if(!$output) {
+			$output = 'xhtml';
+		}
+		
+		return (string) $output;
 	}
 	
 	/**
@@ -570,15 +550,21 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		$id = (!$id) ? $this->getRequest()->getParam('id') : $id;
 		
 		if(!$id) throw new Exception( get_class($this).': No ID passed to this request' );
+					
+		$table = !$table ? $this->_table : $this->getTable($table);			
 		
-		if(!$table) {
-			$record = $this->_table->find($id);
-		}else {
-			$record = $this->getTable($table)->find($id);
-		}
+		$record = $table->find($id);
 		
 		if(!$record) {
-			throw new Exception( get_class($this).": No record with ID # $id exists" );
+			
+			//Check to see whether to record exists at all
+			if(!$table->checkExists($id)) {
+				throw new Exception( get_class($this).": No record with ID # $id exists" );
+			}
+			else {
+				throw new Exception( 'You do not have permission to access this page.' );
+			}
+			
 		}
 		
 		return $record;

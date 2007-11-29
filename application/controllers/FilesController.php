@@ -22,18 +22,9 @@ class FilesController extends Omeka_Controller_Action
 	public function showAction()
 	{
 		$file = $this->findById();
-						
-		$this->checkFilePermission($file);				
-								
+														
 		Zend_Registry::set('file', $file);
 		$this->render('files/show.php',compact('file'));
-	}
-	
-	protected function checkFilePermission($file)
-	{
-		if(!$file->isPublic() && !$this->isAllowed('showNotPublic','Items')) {
-			$this->forbiddenAction();
-		}		
 	}
 
 	protected function isValidFormat($format)
@@ -54,10 +45,7 @@ class FilesController extends Omeka_Controller_Action
 			$this->forbiddenAction();
 		}
 		
-		$file = $this->findById();
-		
-		$this->checkFilePermission($file);
-		
+		$file = $this->findById();		
 		
 		//If we don't have any images associated with this file, then use the full archive path
 		if(!$file->has_derivative_image) {

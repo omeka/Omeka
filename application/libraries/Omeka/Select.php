@@ -46,20 +46,8 @@ class Omeka_Select {
 	
 	public function __construct($conn=null)
 	{
-		if(!$conn) $conn = Doctrine_Manager::getInstance()->connection();
+		if(!$conn) $conn = get_db();
 		$this->_adapter = $conn;
-	}
-	
-	protected function modelToTable($name)
-	{
-		//Omeka Customization convert model name to table name
-		if(is_array($name)) {
-			list($model, $alias) = $name;
-			$table = Doctrine_Manager::getInstance()->getTable($model)->getTableName();
-			$name = $table . ' ' . $alias;
-		}
-		
-		return $name;
 	}
 	
 	public function __call($m,$a) 
@@ -68,12 +56,7 @@ class Omeka_Select {
 			$a[0] = $this->__toString();
 		}
 
-		//If this isn't a doctrine Connection thing, then use the PDO
-		if(!method_exists($this->_adapter, $m)) {
-			$callback = array($this->_adapter->getDbh(), $m);
-		}else {
-			$callback = array($this->_adapter, $m);
-		}
+		$callback = array($this->_adapter, $m);
 		
 		return call_user_func_array($callback, $a);
 	}
@@ -202,9 +185,7 @@ class Omeka_Select {
      * @return Zend_Db_Select This Zend_Db_Select object.
      */
     public function from($name, $cols = '*')
-    {
-		$name = $this->modelToTable($name);
-	
+    {	
         // add the table to the 'from' list
         $this->_parts['from'][$name] = null;
 
@@ -212,7 +193,17 @@ class Omeka_Select {
         $this->_tableCols($name, $cols);
         return $this;
     }
-
+	
+	public function hasFrom($name)
+	{
+		return array_key_exists($name, $this->_parts['from']);
+	}
+	
+	public function hasJoin($name)
+	{
+		return array_key_exists($name, $this->_parts['join']);
+	}
+	
     /**
      * Populate the {@link $_parts} 'join' key
      *
@@ -231,8 +222,6 @@ class Omeka_Select {
         if (!in_array($type, array('left', 'inner'))) {
             $type = null;
         }
-
-		$name = $this->modelToTable($name);
 		
         $this->_parts['join'][$name] = array(
             'type' => $type,
@@ -523,10 +512,15 @@ class Omeka_Select {
         }
     }
 
+	public function addFrom($cols)
+	{
+		$this->_tableCols(null, $cols);
+	}
+
 	public function resetFrom($name,$cols="*")
 	{
-		unset($this->_parts['from']);
-		unset($this->_parts['cols']);
+		$this->_parts['from'] = array();
+		$this->_parts['cols'] = array();
 		return $this->from($name,$cols);
 	}
 	

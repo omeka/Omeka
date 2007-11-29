@@ -339,7 +339,7 @@
 				select(array('name'=>'type'), types(), $_REQUEST['type'], 'Search by Type', 'id', 'name'); 
 			?>
 			<?php if(has_permission('Users', 'browse')): ?>
-			<?php 
+			<?php 			
 				 select(array('name'=>'user'), users(), $_REQUEST['user'], 'Search By User', 'id', array('first_name', 'last_name'));
 			?>
 			<?php endif; ?>

@@ -340,14 +340,8 @@ function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
  * @return string Url for the link href attribute.
  **/
 function uri($urlEnd, $params=array())
-{
-    
-    $ctrl = Omeka_Controller_Front::getInstance();
-    
-    $request = $ctrl->getRequest();
-    
-    $url = rtrim($request->getBaseUrl(), '/') . '/';
-
+{    
+	$url = get_base_url();
 	$url .= $urlEnd;
  
 	//Convert array of params into valid query string
@@ -401,7 +395,7 @@ function flash($wrap=true)
 	if ($msg === null) {
 		return false;
 	}
-	return $wrap ? '<div class="alert">'.$msg.'</div>' : $msg;
+	return $wrap ? '<div class="alert">'.nl2br($msg).'</div>' : $msg;
 }
 
 ///// NAVIGATION /////
@@ -414,7 +408,7 @@ function flash($wrap=true)
  **/
 function nav(array $links) {
 	
-	$current = Omeka_Controller_Front::getInstance()->getRequest()->getRequestUri();
+	$current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
 	
 	$nav = '';
 	foreach( $links as $text => $link )
@@ -445,7 +439,7 @@ function admin_nav(array $links) {
 
 function is_current($link, $req = null) {	
 	if(!$req) {
-		$req = Omeka_Controller_Front::getInstance()->getRequest();
+		$req = Zend_Controller_Front::getInstance()->getRequest();
 	}
 	$current = $req->getRequestUri();
 	$base = $req->getBaseUrl();
@@ -594,26 +588,32 @@ function admin_uri()
 /**
  * Retrieve the total number of items
  *
+ * @since 11/7/07 This function can now be passed a $collection obj to return the total # of items in that collection
  * @return int
  **/
 function total_items($return = false) {
-	return _get_model_total('Items',$return);
+	if($return instanceof Collection)
+	{
+		return $return->totalItems();
+	}
+	
+	return get_db()->getTable('Item')->count();
 }
 
-function total_collections($return = false) {
-	return _get_model_total('Collections',$return);
+function total_collections() {
+	return get_db()->getTable('Collection')->count();
 }
 
-function total_tags($return = false) {
-	return _get_model_total('Tags',$return);
+function total_tags() {
+	return get_db()->getTable('Tag')->count();
 }
 
-function total_users($return = false) {
-	return _get_model_total('Users',$return);
+function total_users() {
+	return get_db()->getTable('User')->count();
 }
 
-function total_types($return = false) {
-	return _get_model_total('Types',$return);
+function total_types() {
+	return get_db()->getTable('Type')->count();
 }
 
 function total_results($return = false) {
@@ -626,20 +626,6 @@ function total_results($return = false) {
 	}
 }
 
-function _get_model_total($controller,$return) {
-	$totalVar = 'total_'.strtolower($controller);
-	
-	if(Zend_Registry::isRegistered($totalVar)) {
-		$count = Zend_Registry::get($totalVar);
-	}else {
-		$count = _make_omeka_request($controller,'browse',array(),$totalVar);
-	}
-	
-//	if($count === null ) $count = 0;
-	if($return) return $count;
-	echo $count;
-}
-
 function has_type($item, $name=null) {
 	$exists = $item->Type->exists();
 	$hasName = (!empty($name) ? $item->Type->name == $name : true);
@@ -647,17 +633,15 @@ function has_type($item, $name=null) {
 }
 
 function has_collection($item, $name=null) {
-	$exists = $item->Collection->exists();
-	$hasName = (!empty($name) ? $item->Collection->name == $name : true);
-	return ( $exists and $hasName );
+	return !empty($item->collection_id);
 }
 
 function has_collectors($collection) {
-	return ($collection->Collectors[0]->exists());
+	return $collection->hasCollectors();
 }
 
 function has_tags($item, array $tags=array()) {
-	$hasSome = ($item->Tags->count() > 0);
+	$hasSome = (count($item->Tags) > 0);
 	if(empty($tags) or !$hasSome){
 		return $hasSome;
 	}
@@ -670,13 +654,13 @@ function has_tags($item, array $tags=array()) {
 }
 
 function has_files($item) {
-	return ( ($item->Files->count() > 0) and ($item->Files[0]->exists()) );
+	return $item->hasFiles();
 }
 
 /**
  * Retrieve the most recent tags.
  *
- * @return Doctrine_Collection
+ * @return array
  **/
 function recent_tags($num = 30) {
 	return tags(array('recent'=>true,'limit'=>$num));
@@ -691,7 +675,7 @@ function recent_items($num = 10) {
 }
 
 function random_featured_item($hasImage=true) {
-	return Item::getRandomFeaturedItem($hasImage);
+	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
 }
 
 function entities(array $params = array())
@@ -729,14 +713,14 @@ function item($id=null)
 		return $item;
 	}
 	
-	$item = Zend_Registry::get('doctrine')->getTable('Item')->find($id);
-	
-	//Quick permissions check
-	if(!$item->public && !has_permission('Items', 'showNotPublic')) {
-		return false;
-	}
+	$item = get_db()->getTable('Item')->find($id);
 	
 	return $item;
+}
+
+function item_permalink_url($item)
+{
+	return WEB_DIR . DIRECTORY_SEPARATOR . 'items/show/' . $item->id;
 }
 
 function collection($id=null)
@@ -747,7 +731,7 @@ function collection($id=null)
 		return $c;
 	}
 	
-	$c = Zend_Registry::get('doctrine')->getTable('Collection')->find($id);
+	$c = get_db()->getTable('Collection')->find($id);
 	return $c;
 }
 
@@ -770,7 +754,7 @@ function type($id=null)
 		return $t;
 	}
 	
-	$t = Zend_Registry::get('doctrine')->getTable('Type')->find($id);
+	$t = get_db()->getTable('Type')->find($id);
 	
 	return $t;
 }
@@ -825,7 +809,7 @@ function has_permission($role,$privilege=null) {
 
 function _make_omeka_request($controller,$action,$params, $returnVars)
 {
-	$front = Omeka_Controller_Front::getInstance();
+	$front = Zend_Controller_Front::getInstance();
 	$dirs = $front->getControllerDirectory();
 	
 	$className = ucwords($controller.'Controller');
@@ -874,7 +858,6 @@ function _make_omeka_request($controller,$action,$params, $returnVars)
  **/
 function settings($name, $return=false) {
 	$name = get_option($name);
-	if($name instanceof Doctrine_Collection_Batch) return;
 	$name = h($name);
 	if($return) return $name;
 	echo $name;
@@ -965,7 +948,7 @@ function archive_image( $record, $props, $width, $height, $format, $return)
                $filename = $record->getDerivativeFilename();
 			   $file = $record;
        }elseif($record instanceof Item) {
-               $file = $record->getRandomFileWithImage();
+               $file = get_db()->getTable('File')->getRandomFileWithImage($record->id);
                if(!$file) return false;
                $filename = $file->getDerivativeFilename();
        }
@@ -1115,7 +1098,7 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 	 **/
 	function generate_url($options, $name)
 	{
-		$ctrl = Omeka_Controller_Front::getInstance();
+		$ctrl = Zend_Controller_Front::getInstance();
         $router = $ctrl->getRouter();
         
         if (empty($name)) {
@@ -1124,12 +1107,17 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
             $route = $router->getRoute($name);
         }
         
-        $request = $ctrl->getRequest();
-        
-        $url = rtrim($request->getBaseUrl(), '/') . '/';
+        $url = get_base_url();
         $url .= $route->assemble($options);
          
         return $url;
+	}
+	
+	function get_base_url()
+	{
+//		$base = Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
+		$base = WEB_DIR;
+		return rtrim($base , '/') . '/';
 	}
 	
 	//Adapted from PHP.net: http://us.php.net/manual/en/function.nl2br.php#73479

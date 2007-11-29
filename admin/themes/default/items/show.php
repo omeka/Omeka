@@ -246,7 +246,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 </div>
 <?php */ ?>
 
-<?php if ( $item->Collection->exists() ): ?>
+<?php if ( has_collection($item) ): ?>
 	<div id="collection" class="field">
 	<h3>Collection</h3>
 	<div>
@@ -317,14 +317,6 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 <?php endif;?>
 
 </div>
-<?php if ( has_collection($item) ): ?>
-	<div id="collection" class="field">
-	<h2>Collection</h2>
-	<div>
-		<?php echo $item->Collection->name; ?>
-	</div>
-	</div>
-<?php endif; ?>
 
 <div id="additional-metadata">
 	<?php fire_plugin_hook('append_to_item_show', $item); ?>

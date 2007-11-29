@@ -39,11 +39,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		if(($tags = $this->_getParam('tag')) || ($tags = $this->_getParam('tags'))) {
 			$filter['tags'] = $tags;
 		}
-		
-		if(!$this->isAllowed('showNotPublic')) {
-			$filter['public'] = true;
-		}
-		
+				
 		$exhibits = $this->_table->findBy($filter);
 				
 		Zend_Registry::set('exhibits', $exhibits);
@@ -67,13 +63,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		$section_name = $this->_getParam('section');
 		$section = $exhibit->getSection($section_name);
 
-		if( $item->isInExhibit($exhibit->id) ) {
-			
-			//Permissions check
-			if(!$item->public and !$this->isAllowed('showNotPublic')) {
-
-				$this->_redirect('403');
-			}
+		if( $item and $item->isInExhibit($exhibit) ) {
 			
 			Zend_Registry::set('item', $item);
 
@@ -104,14 +94,10 @@ class ExhibitsController extends Omeka_Controller_Action
 	{		
 		$exhibit = $this->findBySlug();
 
-		
-
 		if(!$exhibit) {
 			throw new Exception( 'Exhibit with that ID does not exist.' );
 		}
-		
-		$this->checkPermission($exhibit);
-		
+				
 		$section = $this->_getParam('section');
 
 		$section = $exhibit->getSection($section);
@@ -155,24 +141,14 @@ class ExhibitsController extends Omeka_Controller_Action
 		}else {
 			$exhibit = $this->_table->findBySlug($slug);
 		}
+				
 		return $exhibit;
-	}
-	
-	protected function checkPermission($exhibit)
-	{
-		if(!$exhibit->public and !$this->isAllowed('showNotPublic')) {
-			$this->_redirect('forbidden', array('controller'=>'exhibits'));
-		}
 	}
 	
 	public function summaryAction()
 	{
-		$exhibit = $this->findBySlug();
-		
-		
-		
-		$this->checkPermission($exhibit);
-		
+		$exhibit = $this->findBySlug();		
+				
 		Zend_Registry::set('exhibit', $exhibit);
 
 		
@@ -218,6 +194,10 @@ class ExhibitsController extends Omeka_Controller_Action
 			
 			if(isset($renderPath) and file_exists(SHARED_DIR.DIRECTORY_SEPARATOR.$renderPath)) {
 				$this->render($renderPath, $vars);
+			}else {
+				throw new Exception( 
+					"Exhibit theme named '$exhibit->theme' no longer exists!\n\n  
+					Please change the exhibit's theme in order to properly view the exhibit." );
 			}	
 			
 		}else {
@@ -272,7 +252,7 @@ class ExhibitsController extends Omeka_Controller_Action
 	protected function processExhibitForm($exhibit)
 	{
 		try {
-			$retVal = $exhibit->commitForm($_POST);
+			$retVal = $exhibit->saveForm($_POST);
 
 			if($retVal) {
 				if(array_key_exists('add_section',$_POST)) {
@@ -304,8 +284,8 @@ class ExhibitsController extends Omeka_Controller_Action
 	public function addSectionAction()
 	{
 		$exhibit = $this->findById();
-		$section = new Section;
-		$section->Exhibit = $exhibit;
+		$section = new ExhibitSection;
+		$section->exhibit_id = $exhibit->id;
 		
 		//Give the new section a section order (1, 2, 3, ...)
 		$numSections = $exhibit->getSectionCount();
@@ -333,7 +313,7 @@ class ExhibitsController extends Omeka_Controller_Action
 				$toPost = $_POST;
 			}
 			
-			$retVal = $section->commitForm($toPost);
+			$retVal = $section->saveForm($toPost);
 		} catch (Exception $e) {
 			$this->flash($e->getMessage());
 			$retVal = false;
@@ -391,7 +371,7 @@ class ExhibitsController extends Omeka_Controller_Action
 	 **/
 	public function addPageAction()
 	{
-		$section = $this->findById(null,'Section');
+		$section = $this->findById(null,'ExhibitSection');
 		
 		if(isset($_POST['cancel'])) {
 			$this->setLayout(null);
@@ -401,17 +381,14 @@ class ExhibitsController extends Omeka_Controller_Action
 		//Check to see if the page var was saved in the session
 		if($layout = $this->getLayout()) {
 			
-			$page = new SectionPage;
+			$page = new ExhibitPage;
 
-			$page->layout = $layout;
-			$page->Section = $section;
-						
+			$page->layout = $layout;						
 		}else {
 
-			$page = new SectionPage;
-			$page->Section = $section;			
-
+			$page = new ExhibitPage;
 		}
+		$page->section_id = $section->id;
 				
 		//Set the order for the new page
 		$numPages = $section->getPageCount();
@@ -446,7 +423,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		Zend_Registry::set('page', $page);
 		
 		if(!empty($_POST)) {
-			
+
 			if(array_key_exists('choose_layout', $_POST)) {
 			
 				//A layout has been chosen for the page
@@ -474,11 +451,12 @@ class ExhibitsController extends Omeka_Controller_Action
 						$page->layout = $layout;
 					}
 
-					$retVal = $page->commitForm($_POST);
+					$retVal = $page->saveForm($_POST);
+
 				} catch (Exception $e) {
 					$this->flash($e->getMessage());
 				}
-								
+
 				//Otherwise the page form has been submitted
 				if($retVal) {
 				
@@ -531,18 +509,16 @@ class ExhibitsController extends Omeka_Controller_Action
 	 **/
 	public function editSectionAction()
 	{
-		$section = $this->findById(null, 'Section');
+		$section = $this->findById(null, 'ExhibitSection');
 		
 		$exhibit = $section->Exhibit;
 		
-		$section->loadPages();
-
 		return $this->processSectionForm($section, $exhibit);
 	}
 	
 	public function editPageAction()
 	{
-		$page = $this->findById(null,'SectionPage');
+		$page = $this->findById(null,'ExhibitPage');
 		$section = $page->Section;
 		
 		return $this->processPageForm($page, $section);
@@ -552,20 +528,19 @@ class ExhibitsController extends Omeka_Controller_Action
 	{
 		//Delete the section and re-order the rest of the sections in the exhibit
 		
-		$section = $this->findById(null,'Section');
+		$section = $this->findById(null,'ExhibitSection');
 		$exhibit = $section->Exhibit;
 		
 		fire_plugin_hook('delete_exhibit_section',  $section);
 		
 		$section->delete();
-		$exhibit->reorderSections();
 		
 		$this->_redirect('editExhibit', array('id'=>$exhibit->id) );
 	}
 	
 	public function deletePageAction()
 	{
-		$page = $this->findById(null,'SectionPage');
+		$page = $this->findById(null,'ExhibitPage');
 		$section = $page->Section;
 		
 		fire_plugin_hook('delete_exhibit_page',  $page);
@@ -581,7 +556,7 @@ class ExhibitsController extends Omeka_Controller_Action
 	{
 		$exhibit = $this->findById();
 		
-		$section = new Section;
+		$section = new ExhibitSection;
 		$section->Exhibit = $exhibit;
 		
 		$this->render('exhibits/_section_form.php', compact('section'));
@@ -596,8 +571,8 @@ class ExhibitsController extends Omeka_Controller_Action
 	
 	public function pageListAction()
 	{
-		$section = $this->findById(null, 'Section');
-		$section->loadPages();
+		$section = $this->findById(null, 'ExhibitSection');
+
 		$this->render('exhibits/_page_list.php', compact('section'));
 	}
 	
@@ -629,7 +604,7 @@ class ExhibitsController extends Omeka_Controller_Action
 			require_once 'Zend/Json.php';
 			$return = array();
 			try {
-				$exhibit->commitForm($_POST);
+				$exhibit->saveForm($_POST);
 			} catch (Exception $e) {
 				//We pass this stupid header b/c Prototype doesn't know anything otherwise
 				header ("HTTP/1.0 404 Not Found"); 

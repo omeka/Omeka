@@ -2,24 +2,43 @@
 /**
 * Relatable strategy
 */
-class Relatable
+class Relatable extends Omeka_Record_Module
 {
 	protected $record;
 	
 	public function __construct($record)
 	{
 		$this->record = $record;
-		$this->relationshipsTable = $this->getTableName('EntityRelationships');
-		$this->joinTable = $this->getTableName('EntitiesRelations');
-		$this->entityTable = $this->getTableName('Entity');
 		$this->type = get_class($record);
 	}
-	
-	public function __call($m, $a)
-	{
-		return call_user_func_array( array($this->record, $m), $a);
-	}
 
+	/**
+	 * After updating records, add a stamp that the logged-in entity has modified it
+	 *
+	 * @return void
+	 **/
+	public function postUpdate()
+	{
+		$entity = Omeka::loggedIn()->Entity;
+		$this->setModifiedBy($entity);		
+	}
+	
+	/**
+	 * After inserting records, add a stamp that the logged-in entity has added it
+	 *
+	 * @return void
+	 **/
+	public function postInsert()
+	{
+		$entity = Omeka::loggedIn()->Entity;		
+		$this->setAddedBy($entity);		
+	}
+	
+	public function preDelete()
+	{
+		$this->deleteRelations();
+	}
+	
 	public function deleteRelations()
 	{
 		/**
@@ -31,16 +50,21 @@ class Relatable
 		$id = (int) $this->record->id;
 		
 		//What table should we be deleting taggings for
-		$model_table = $this->record->getTableName();
+		
+		$db = get_db();
 		
 		//Polymorphic 'type' column in this table
 		$type = (string) get_class($this->record);
 		
-		$relations = "DELETE entities_relations FROM entities_relations
-		LEFT JOIN $model_table ON entities_relations.relation_id = $model_table.id
-		WHERE $model_table.id = $id AND entities_relations.type = '$type'";
+		$model_table = $db->$type;
 		
-		$this->execute($relations);
+		$er = $db->EntitiesRelations;
+		
+		$delete = "DELETE $er FROM $er
+		LEFT JOIN $model_table ON $er.relation_id = $model_table.id
+		WHERE $model_table.id = $id AND $er.type = '$type'";
+		
+		$db->exec($delete);
 	}
 
 	/**
@@ -50,16 +74,18 @@ class Relatable
 	 **/
 	public function timeOfLastRelationship($rel)
 	{
+		$db = get_db();
+		
 		$sql = "SELECT ie.time as time
-				FROM {$this->joinTable} ie 
-				JOIN {$this->relationshipsTable} er ON er.id = ie.relationship_id
+				FROM {$db->EntitiesRelations} ie 
+				JOIN {$db->EntityRelationships} er ON er.id = ie.relationship_id
 				WHERE ie.relation_id = ? AND er.name = ? AND ie.type = ?
 				ORDER BY time DESC
 				LIMIT 1";
 		
 		$relation_id = $this->getRelationId();
 				
-		return $this->execute($sql, array($relation_id, $rel, $this->type), true);
+		return $db->query($sql, array($relation_id, $rel, $this->type), true);
 	}
 	
 	/**
@@ -69,13 +95,17 @@ class Relatable
 	 **/
 	public function getRelatedEntities($rel)
 	{
-		$dql = 
-		"SELECT e.* FROM Entity e 
-		INNER JOIN e.EntitiesRelations r 
-		INNER JOIN r.EntityRelationships er
-		WHERE r.relation_id = ? AND r.type = ? AND er.name = ?";
+		$db = get_db();
+						
+		$sql = 
+		"SELECT e.* FROM {$db->Entity} e 
+		INNER JOIN {$db->EntitiesRelations} r ON r.entity_id = e.id
+		INNER JOIN {$db->EntityRelationships} er ON er.id = r.relationship_id
+		WHERE r.relation_id = ? AND r.type = ? AND er.name = ? GROUP BY e.id";
+	
+		$entities = $this->getTable('Entity')->fetchObjects($sql, array($this->getRelationId(), $this->type, $rel));
 		
-		return $this->executeDql($dql, array($this->getRelationId(), $this->type, $rel));
+		return !$entities ? array() : $entities;
 	}
 	
 	/**
@@ -84,7 +114,7 @@ class Relatable
 	 * @return void
 	 **/
 	public function addRelatedTo($entity, $relationship )
-	{
+	{		
 		$entity_id = (int) ($entity instanceof Omeka_Record) ? $entity->id : $entity;		
 	
 		//If the entity_id is 0, die because that won't work
@@ -103,12 +133,14 @@ class Relatable
 			throw new Exception( 'Relationship called '.$relationship . ' does not exist.' );
 		}
 		
-		$sql = "INSERT INTO {$this->joinTable} 
-					(entity_id, relation_id, relationship_id, time, type)
+		$db = get_db();
+		
+		$sql = "INSERT INTO {$db->EntitiesRelations}
+					(entity_id, relation_id, relationship_id, time, `type`)
 				VALUES
 					(?, ?, ?, NOW(), ?)";
-					
-		return $this->execute($sql, array($entity_id, $relation_id, $relationship_id, $this->type));				
+
+		return $db->exec($sql, array($entity_id, $relation_id, $relationship_id, $this->type));				
 	}
 	
 	public function removeRelatedTo($entity, $rel, $limit = null)
@@ -121,27 +153,30 @@ class Relatable
 		
 		$limit = (!empty($limit)) ? (int) $limit : null;
 		
+		$db = get_db();
+		
 		$sql = 
-		"DELETE FROM {$this->joinTable}
+		"DELETE FROM {$db->EntitiesRelations}
 		WHERE entity_id = ? AND relation_id = ? AND relationship_id = ? AND type = ?";
 		
 		if($limit) {
 			$sql .= " LIMIT $limit";
 		}
 		
-		return $this->execute($sql, array($entity_id, $relation_id, $relationship_id, $this->type));
+		return $db->exec($sql, array($entity_id, $relation_id, $relationship_id, $this->type));
 		
 	}
 
 	protected function getRelationshipId($rel)
 	{
-		return $this->execute("SELECT r.id FROM {$this->relationshipsTable} r WHERE r.name = ?", array($rel), true);
+		$db = get_db();
+		$sql = "SELECT r.id FROM {$db->EntityRelationships} r WHERE r.name = ?";
+		return $db->fetchOne($sql, array($rel));
 	}
 
 	protected function getRelationId()
 	{
-		$id =  $this->record->identifier();
-		$id = $id['id'];
+		$id =  $this->record->id;
 		
 		if(!$id) {
 			throw new Exception( 'Record must exist before relations can be set.' );
@@ -152,19 +187,21 @@ class Relatable
 
 	public function isRelatedTo($entity_id, $rel=null)
 	{
-		$conn = $this->getTable()->getConnection();
-		$select = new Omeka_Select($conn);
+		$conn = get_db();
+		$select = new Omeka_Select;
 		
 		$relation_id = $this->getRelationId();
 				
-		$select->from("{$this->joinTable} ie", "COUNT(ie.id)")
-				->innerJoin("{$this->entityTable} e", "e.id = ie.entity_id")
+		$db = get_db();		
+				
+		$select->from("{$db->EntitiesRelations} ie", "COUNT(ie.id)")
+				->innerJoin("{$db->Entity} e", "e.id = ie.entity_id")
 				->where("ie.relation_id = ?", $relation_id)
 				->where("ie.entity_id = ?", $entity_id)
 				->where("ie.type = ?", $this->type); 
 										
 		if(!empty($rel)) {
-			$select->innerJoin("{$this->relationshipsTable} ier", "ier.id = ie.relationship_id");
+			$select->innerJoin("{$db->EntityRelationships} ier", "ier.id = ie.relationship_id");
 			$select->where("ier.name = ?", $rel);
 		}
 

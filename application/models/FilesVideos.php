@@ -5,20 +5,13 @@
  */
 class FilesVideos extends Omeka_Record
 {	
-    public function setTableDefinition()
-    {
-		$this->hasColumn('bitrate', 'integer', null, array('unsigned'=>true));
-		$this->hasColumn('duration', 'integer', null, array('unsigned'=>true));
-		$this->hasColumn('codec', 'string');
-		$this->hasColumn('sample_rate', 'integer', null, array('unsigned'=>true));
-		$this->hasColumn('width', 'integer', null, array('unsigned'=>true));
-		$this->hasColumn('height', 'integer', null, array('unsigned'=>true));
-		$this->hasColumn('file_id', 'integer', null, array('unsigned'=>true, 'range'=>array('1'), 'notnull'=>true));
-    }
-    public function setUp()
-    {
-		$this->hasOne('File', 'FilesVideos.file_id');
-    }
+	public $bitrate;
+	public $duration;
+	public $codec;
+	public $sample_rate;
+	public $width;
+	public $height;
+	public $file_id;
 
 	public function generate($info, $path)
 	{		

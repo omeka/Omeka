@@ -2,18 +2,8 @@
 /**
 * ItemTable
 */
-class ItemTable extends Doctrine_Table
-{
-	protected function getCountFromSelect($select)
-	{
-		//Grab the total number of items in the table(as differentiated from the result count)
-		$countQuery = clone $select;
-		$countQuery->resetFrom('items i', 'COUNT(DISTINCT(i.id))');
-		$total_items = $countQuery->fetchOne();
-		if(!$total_items) $total_items = 0;
-		return $total_items;
-	}
-	
+class ItemTable extends Omeka_Table
+{	
 	/**
 	 * The trail of this function:
 	 * 	items_search_form() form helper  --> ItemsController::browseAction()  --> ItemTable::findBy() --> here
@@ -22,7 +12,7 @@ class ItemTable extends Doctrine_Table
 	 **/
 	protected function advancedSearch($select, $advanced)
 	{
-		$conn = Doctrine_Manager::getInstance()->connection();
+		$db = get_db();
 		
 		$metafields = array();
 		
@@ -34,10 +24,10 @@ class ItemTable extends Doctrine_Table
 			//Determine what the SQL clause should look like
 			switch ($type) {
 				case 'contains':
-					$predicate = "LIKE " . $conn->quote('%'.$value .'%');
+					$predicate = "LIKE " . $db->quote('%'.$value .'%');
 					break;
 				case 'does not contain':
-					$predicate = "NOT LIKE " . $conn->quote('%'.$value .'%');
+					$predicate = "NOT LIKE " . $db->quote('%'.$value .'%');
 					break;
 				case 'is empty':	
 					$predicate = "= ''";
@@ -61,8 +51,7 @@ class ItemTable extends Doctrine_Table
 				case 'item':
 					//We don't need any joins because we are already searching the items table
 					
-					//But we should verify that the field given is a column in the table
-					if(!$this->getTypeOf($field)) {
+					if(!$this->hasColumn($field)) {
 						throw new Exception( 'Invalid field given!' );
 					}
 					
@@ -79,11 +68,11 @@ class ItemTable extends Doctrine_Table
 					
 					
 					//We need to join on the metafields and metatext tables
-					$select->innerJoin(array('Metatext', 'mt'), 'mt.item_id = i.id');
-					$select->innerJoin(array('Metafield','m'), 'm.id = mt.metafield_id');
+					$select->innerJoin("$db->Metatext mt", 'mt.item_id = i.id');
+					$select->innerJoin("$db->Metafield m", 'm.id = mt.metafield_id');
 					
 					//Start building the where clause
-					$where = "(m.name = ". $conn->quote($field) . " AND mt.text $predicate)";
+					$where = "(m.name = ". $db->quote($field) . " AND mt.text $predicate)";
 					
 					$metafields[] = $where;
 					
@@ -111,8 +100,8 @@ class ItemTable extends Doctrine_Table
 			*/
 		if(count($metafields)) {
 			$subQuery = new Omeka_Select;
-			$subQuery->from(array('Metatext','mt'), 'mt.id')
-			->innerJoin(array('Metafield','m'), 'm.id = mt.metafield_id')
+			$subQuery->from("$db->Metatext mt", 'mt.id')
+			->innerJoin("$db->Metafield m", 'm.id = mt.metafield_id')
 			->where(join(' OR ', $metafields));
 			
 			$select->where('mt.id IN ('. $subQuery->__toString().')');			
@@ -158,53 +147,80 @@ class ItemTable extends Doctrine_Table
 		
 		$select->where('('.$where.')');
 	}
-		
+	
+	/**
+	 * Search through the items and metatext table via fulltext, store results in a temporary table
+	 * then join the main query to that temp table and order it by relevance values retrieved from the search
+	 *
+	 * @return void
+	 **/	
 	protected function simpleSearch( $select, $terms)
 	{
-		$conn = $this->getConnection();
-		$conn->execute("CREATE TEMPORARY TABLE temp_search (id BIGINT AUTO_INCREMENT, item_id BIGINT UNIQUE, PRIMARY KEY(id))");
+		$db = get_db();
 		
-		$itemSelect = clone $select;
-		
-		//Search the items table	
-		$itemsClause = "i.title, i.publisher, i.language, i.relation, i.spatial_coverage, i.rights, i.description, i.source, i.subject, i.creator, i.additional_creator, i.contributor, i.rights_holder, i.provenance, i.citation";
-		
-		$itemSelect->where("MATCH ($itemsClause) AGAINST (? WITH QUERY EXPANSION)", $terms);
-				
-		//Grab those results, place in the temp table		
-		$insert = "INSERT INTO temp_search (item_id) ".$itemSelect->__toString();
-		$conn->execute($insert);
-		
-		
+		$tempTable = "{$db->prefix}temp_search";
+		$db->exec("CREATE TEMPORARY TABLE IF NOT EXISTS $tempTable (item_id BIGINT UNIQUE, rank FLOAT(10), PRIMARY KEY(item_id))");
+
 		//Search the metatext table
-		$mSelect = clone $select;
-		$metatextClause = "m.text";
-		$mSelect->innerJoin("metatext m", "m.item_id = i.id");
-		$mSelect->where("MATCH ($metatextClause) AGAINST (? WITH QUERY EXPANSION)", $terms);
+		$mSelect = new Omeka_Select;
+		$mSearchClause = "MATCH (m.text) AGAINST (".$db->quote($terms).")";
+		
+		$mSelect->from("$db->Metatext m", "m.item_id, $mSearchClause as rank");
+		
+		$mSelect->where($mSearchClause);
 	//	echo $mSelect;
 		
 		//Put those results in the temp table
-		$insert = "REPLACE INTO temp_search (item_id) ".$mSelect->__toString();
-		$conn->execute($insert);
+		$insert = "REPLACE INTO $tempTable (item_id, rank) ".$mSelect->__toString();
+		$db->exec($insert);
+		
+		//Search the items table
+		$iSearchClause = 
+			"MATCH (
+				i.title, 
+				i.publisher, 
+				i.language, 
+				i.relation, 
+				i.spatial_coverage, 
+				i.rights, 
+				i.description, 
+				i.source, 
+				i.subject, 
+				i.creator, 
+				i.additional_creator, 
+				i.contributor, 
+				i.rights_holder, 
+				i.provenance, 
+				i.citation) 
+			AGAINST (".$db->quote($terms).")";
+		
+		$itemSelect = new Omeka_Select;
+		$itemSelect->from("$db->Item i", "i.id as item_id, $iSearchClause as rank");
+					
+		$itemSelect->where($iSearchClause);
+
+/*
+$mDump = $db->query($itemSelect)->fetchAll();
+Zend_Debug::dump( $mDump );exit;
+*/	
+	
+		//Grab those results, place in the temp table		
+		$insert = "REPLACE INTO $tempTable (item_id, rank) ".$itemSelect->__toString();
+
+		$db->exec($insert);		
+	
+/*
+$dumpTable = $db->query("SELECT * FROM $tempTable ORDER BY rank DESC")->fetchAll();
+Zend_Debug::dump( $dumpTable );exit;
+*/	
 				
-		$select->innerJoin('temp_search ts', 'ts.item_id = i.id');
-		$select->order('ts.id ASC');
+		$select->innerJoin("$tempTable ts", 'ts.item_id = i.id');
+		$select->order('ts.rank DESC');
 	}
 
 	protected function orderSelectByRecent($select)
 	{
-		if($select instanceof Doctrine_Query) {
-			$select->addSelect('ie.time as i.added');
-			$select->leftJoin('i.ItemsRelations ie');
-			$select->leftJoin('ie.EntityRelationships er');
-			$select->addWhere('(er.name = "added" OR er.name IS NULL)');
-			$select->addOrderBy('ie.time DESC');
-		}else {
-			$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
-			$select->joinLeft('entity_relationships er', 'er.id = ie.relationship_id');
-			$select->where('(er.name = "added" OR er.name IS NULL) AND (ie.type = "Item" OR ie.type IS NULL)');
-			$select->order('ie.time DESC');
-		}
+		$select->order('i.id DESC');
 	}
 	
 	
@@ -216,43 +232,29 @@ class ItemTable extends Doctrine_Table
 	 **/
 	public function findBy($params=array(), $returnCount=false)
 	{
-		$select = new Omeka_Select;
+		$select = $this->getItemSelectSQL( ($returnCount ? 'count' : 'full') );
 		
-		$select->from('items i','DISTINCT i.id');
+		$db = get_db();
 		
-		//Show only public if we say so
+		//Show items associated somehow with a specific user or entity
+		if(isset($params['user']) or isset($params['entity'])) {
+
+			$select->joinLeft("$db->EntitiesRelations ie", 'ie.relation_id = i.id');
+			$select->joinLeft("$db->Entity e", 'e.id = ie.entity_id');
+			
+			if($entity_id = (int) $params['entity']) {
+				
+				$select->where('(e.id = ? AND ie.type = "Item")', $entity_id);
+			}elseif($user_id = (int) $params['user']) {
+								
+				$select->joinLeft("$db->User u", 'u.entity_id = e.id');
+				$select->where('(u.id = ? AND ie.type = "Item")', $user_id);
+			}						
+		}
+		
+		//Force a preview of the public items
 		if(isset($params['public'])) {
 			$select->where('i.public = 1');
-		}
-		//Show both public items and items added or modified by a specific user
-		elseif(isset($params['publicAndUser'])) {
-		
-			$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
-			$select->joinLeft('entities e', 'e.id = ie.entity_id');
-			$select->joinLeft('users u', 'u.entity_id = e.id');
-			$select->joinLeft('entity_relationships ier', 'ier.id = ie.relationship_id');
-			
-			$select->where( '(i.public = 1 OR (u.id = ? AND (ier.name = "added" OR ier.name = "modified") AND ie.type = "Item") )', $params['publicAndUser']->id);
-		}			
-		//Duplication of some of the code above
-		//Show items associated somehow with a specific user
-		elseif(isset($params['user'])) {
-			
-			$user_id = ($params['user'] instanceof User) ? $params['user']->id : $params['user'];
-			$select->joinLeft('entities_relations ie', 'ie.relation_id = i.id');
-			$select->joinLeft('entities e', 'e.id = ie.entity_id');
-			$select->joinLeft('users u', 'u.entity_id = e.id');
-			$select->where('(u.id = ? AND ie.type = "Item")', $user_id);			
-		
-		}
-		//Even more duplication of the code above
-		elseif(isset($params['entity'])) {
-			
-			$entity_id = (int) $params['entity'];
-			
-			$select->innerJoin('entities_relations ie', 'ie.relation_id = i.id');
-			$select->innerJoin('entities e', 'e.id = ie.entity_id');
-			$select->where('(e.id = ? AND ie.type = "Item")', $entity_id);
 		}
 						
 		//filter items based on featured (only value of 'true' will return featured items)
@@ -263,7 +265,7 @@ class ItemTable extends Doctrine_Table
 		//filter based on collection
 		if(isset($params['collection'])) {
 			$coll = $params['collection'];		
-			$select->innerJoin('collections c', 'i.collection_id = c.id');
+			$select->innerJoin("$db->Collection c", 'i.collection_id = c.id');
 			
 			if($coll instanceof Collection) {
 				$select->where('c.id = ?', $coll->id);
@@ -278,7 +280,7 @@ class ItemTable extends Doctrine_Table
 		if(isset($params['type'])) {
 			$type = $params['type'];
 			
-			$select->innerJoin('types ty','i.type_id = ty.id');
+			$select->innerJoin("$db->Type ty",'i.type_id = ty.id');
 			if($type instanceof Type) {
 				$select->where('ty.id = ?', $type->id);
 			}elseif(is_numeric($type)) {
@@ -292,8 +294,8 @@ class ItemTable extends Doctrine_Table
 		if(isset($params['tags'])) {
 			$tags = $params['tags'];
 			
-			$select->innerJoin('taggings tg','tg.relation_id = i.id');
-			$select->innerJoin('tags t', 'tg.tag_id = t.id');
+			$select->innerJoin("$db->Taggings tg",'tg.relation_id = i.id');
+			$select->innerJoin("$db->Tag t", 'tg.tag_id = t.id');
 			if(!is_array($tags) )
 			{
 				$tags = explode(',', $tags);
@@ -312,8 +314,8 @@ class ItemTable extends Doctrine_Table
 				$excludeTags = explode(',', $excludeTags);
 			}
 			$subSelect = new Omeka_Select;
-			$subSelect->from('items i INNER JOIN taggings tg ON tg.relation_id = i.id 
-						INNER JOIN tags t ON tg.tag_id = t.id', 'i.id');
+			$subSelect->from("$db->Item i INNER JOIN $db->Taggings tg ON tg.relation_id = i.id 
+						INNER JOIN $db->Tag t ON tg.tag_id = t.id", 'i.id');
 							
 			foreach ($excludeTags as $key => $tag) {
 				$subSelect->where("t.name LIKE ?", $tag);
@@ -343,66 +345,183 @@ class ItemTable extends Doctrine_Table
 		
 		$select->limitPage($params['page'], $params['per_page']);
 
+		if(isset($params['range'])) {
+			$this->filterByRange($select, $params['range']);
+		}
+	
+	
+		//Fire a plugin hook to add clauses to the SELECT statement
+		fire_plugin_hook('item_browse_sql', $select, $params);
+
+//echo $select;exit;
+
+		//At this point we can return the count instead of the items themselves if that is specified
+		if($returnCount) {
+			
+//echo $select;exit;
+			$count = (int) get_db()->fetchOne($select);
+			
+			if(isset($params['search'])) {
+				//Drop the search table if it exists
+				get_db()->exec("DROP TABLE IF EXISTS {$db->prefix}_temp_search");
+			}
+		
+			return $count;
+		}else {
+			
+			//If we returning the data itself, we need to group by the item ID
+			$select->group("i.id");
+		}
+
 		//Order items by recent
+		//@since 11/7/07  ORDER BY must not be in the COUNT() query b/c it slows down
 		if(isset($params['recent'])) {
 			$this->orderSelectByRecent($select);
 		}
 		
-		if(isset($params['range'])) {
-			$this->filterByRange($select, $params['range']);
-		}
+//echo $select;exit;
+		$items = $this->fetchObjects($select);
 		
-		//Fire a plugin hook to add clauses to the SELECT statement
-		fire_plugin_hook('item_browse_sql', $select, $params);
-
-//echo $select;
-		//At this point we can return the count instead of the items themselves if that is specified
-		if($returnCount) {
-			$count = $this->getCountFromSelect($select);
-			
+		
+		if(isset($params['search'])) {
 			//Drop the search table if it exists
-			$this->getConnection()->execute("DROP TABLE IF EXISTS temp_search");
-		
-			return $count;
+			get_db()->exec("DROP TABLE IF EXISTS {$db->prefix}_temp_search");
 		}
-		
-//echo $select;
-		$res = $select->fetchAll();
-		
-		//Drop the search table if it exists (DUPLICATED)
-		$this->getConnection()->execute("DROP TABLE IF EXISTS temp_search");
-				
-		foreach ($res as $key => $value) {
-			$ids[] =  $value['id'];
-		}		
 
-
-		//Finally, hydrate the Doctrine objects with the array of ids given
-		$query = new Doctrine_Query;
-		$query->select('i.*, t.*')->from('Item i');
-		$query->leftJoin('i.Collection c');
-		$query->leftJoin('i.Type ty');
-				
-		//If no IDs were returned in the first query, then whatever
-		if(!empty($ids)) {
-			$where = "(i.id = ".join(" OR i.id = ", $ids) . ")";
-		}else {
-			$where = "i.id = 0";
-		}
-		
-		
-		$query->where($where);
-
-		//Order by recent-ness
-		if(isset($params['recent'])) {
-			$this->orderSelectByRecent($query);
-		}
-		
-//echo $query;exit;
-		
-		$items = $query->execute();
-		
 		return $items;
+	}
+	
+	/**
+	 * This is a kind of simple factory that spits out proper beginnings 
+	 * of SQL statements when retrieving items
+	 *
+	 * @param $type string full|simple|count|id
+	 * @return Omeka_Select
+	 **/
+	private function getItemSelectSQL($type='full')
+	{
+		//@duplication self::findBy()
+		$select = new Omeka_Select;
+		
+		$db = get_db();
+		
+		switch ($type) {
+			case 'count':
+				$select->from("$db->Item i", 'COUNT(DISTINCT(i.id))');
+				break;
+			case 'full':
+			
+				$select->from("$db->Item i",'i.*, added.time as added, modded.time as modified');
+			
+				//Join on the entities_relations table so we can pull timestamps
+				$select->joinLeft("$db->EntitiesRelations modded", 'modded.relation_id = i.id');
+				$select->joinLeft("$db->EntityRelationships mod_r", 'mod_r.id = modded.relationship_id');
+	
+				$select->joinLeft("$db->EntitiesRelations added", 'added.relation_id = i.id');
+				$select->joinLeft("$db->EntityRelationships add_r", 'add_r.id = added.relationship_id');
+	
+				//This rather complicated mess ensures that no items are left out of the list as a result of DB inconsistencies
+				//i.e. an item lacks an entry in the entities_relations table for some reason
+				$select->where('( (added.type = "Item" AND add_r.name = "added" OR added.time IS NULL) 
+								OR (modded.type = "Item" AND mod_r.name = "modified" OR modded.time IS NULL) )');
+				break;
+			
+			//'Simple' SQL statement just returns id, title
+			case 'simple':	
+				$select->from("$db->Item i", 'i.id, i.title');
+				break;
+			default:
+				# code...
+				break;
+		}
+		
+		new ItemPermissions($select);
+		
+		return $select;
+	}
+	
+	/**
+	 * Override the built-in count() method to filter based on permissions
+	 *
+	 * @return void
+	 **/
+	public function count()
+	{
+		$sql = $this->getItemSelectSQL('count');
+		return get_db()->fetchOne($sql);
+	}
+	
+	public function find($id)
+	{
+		$select = $this->getItemSelectSQL();
+		
+		$select->where("i.id = ?", $id);
+		$select->limit(1);
+		
+		return $this->fetchObjects($select, null, true);
+	}
+	
+	public function findPrevious($item)
+	{
+		return $this->findNearby($item, 'previous');
+	}
+	
+	public function findNext($item)
+	{
+		return $this->findNearby($item, 'next');
+	}
+	
+	protected function findNearby($item, $position = 'next')
+	{
+		//This will only pull the title and id for the item
+		$select = $this->getItemSelectSQL('simple');
+		
+		$select->limit(1);
+		
+		switch ($position) {
+			case 'next':
+				$select->where('i.id > ?', (int) $item->id);
+				$select->order('i.id ASC');
+				break;
+			
+			case 'previous':
+				$select->where('i.id < ?', (int) $item->id);
+				$select->order('i.id DESC');
+				break;
+				
+			default:
+				throw new Exception( 'Invalid position provided to ItemTable::findNearby()!' );
+				break;
+		}
+
+		return $this->fetchObjects($select, null, true);
+	}
+	
+	
+	
+	public function findRandomFeatured($withImage=true)
+	{		
+		$select = $this->getItemSelectSQL();
+		
+		$db = get_db();
+		
+		$select->addFrom('RAND() as rand');
+		
+		$select->innerJoin("$db->File f", 'f.item_id = i.id');
+		$select->where('i.featured = 1');
+				
+		$select->order('rand DESC');
+		$select->limit(1);
+		
+		if($withImage) {
+			$select->where('f.has_derivative_image = 1');
+		}
+				
+//		echo $select;exit;		
+				
+		$item = $this->fetchObjects($select, null, true);
+	
+		return $item;
 	}
 }
  

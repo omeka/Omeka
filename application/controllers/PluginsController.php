@@ -70,7 +70,7 @@ class PluginsController extends Omeka_Controller_Action
 	public function activateAction()
 	{
 		//Get the plugin record, toggle its status and save it back
-		$plugin = Doctrine_Manager::getInstance()->getTable('Plugin')->findByName($_POST['activate']);
+		$plugin = get_db()->getTable('Plugin')->findBySql('name = ?', array($_POST['activate']), true );
 		
 		echo $plugin;
 		

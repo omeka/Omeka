@@ -11,14 +11,6 @@ if($_REQUEST['moreinfo']) {
 
 <h3><?php echo get_class($e) . ": ". $e->getMessage(); ?></h3>
 
-<?php
-if($e instanceof Doctrine_Validator_Exception):
-	foreach ($e->getInvalidRecords() as $key => $record):
-		echo get_class($record).": ".$record->getErrorMsg();
-	endforeach;
-endif;
-?>
-
 
 <h4>Backtrace: <?php Zend_Debug::dump($e->getTraceAsString()); ?></h4>
 

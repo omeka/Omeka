@@ -36,15 +36,35 @@ class Omeka_View extends Zend_View_Abstract
 		
 		if(isset($config['request'])) {
 			$this->_request = $config['request'];
-		}
-				
-		/**
-		 * Set the theme path:
-		 * This needs to happen last because the first thing Zend_View_Abstract
-		 * does in its __construct() is set $this->setScriptPath(null).
-		 */ 
-		$this->setThemePath();
+		}				
+	}
+	
+	/**
+	 * Simple factory method for returning an instance of a View Format obj
+	 * 
+	 * Check based on some common string manipulation
+	 *
+	 * @return void
+	 **/
+	public function getFormat($format, $options)
+	{
+		//This will give us a class like Omeka_View_Format_Xml from 'xml'
+		$class = "Omeka_View_Format_" . ucwords(strtolower($format));
 		
+		try {
+			Zend_Loader::loadClass($class);
+			$format_class = new $class($this, $options);
+			
+			if($format_class->canRender()) {
+				return $format_class;
+			}
+		} 
+		//Silence exceptions for missing classes
+		catch (Zend_Exception $e) {}		
+		
+		//Return the plugin handler as the default, which can handle whatever nonsense you throw towards it
+		$options['format'] = $format;
+		return new Omeka_View_Format_Plugin($this, $options);		
 	}
 	
 	/**
@@ -64,64 +84,6 @@ class Omeka_View extends Zend_View_Abstract
 	public function getResponse()
 	{
 		return $this->_controller->getResponse();
-	}
-	
-	/**
-	 * Construct the theme path from the options in the database
-	 * dependant on whether or not there is an admin interface request
-	 * 
-	 * 
-	 * @edited 2007-02-09
-	 */
-	public function setThemePath($path = null)
-	{	
-		$broker = Zend_Registry::get( 'plugin_broker' );
-		
-		if ($output = $this->getRequest()->getParam('output')) {
-
-			switch($output) {
-				case('json'):
-					require_once 'Zend/Json.php';
-					$scriptPath = APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'json';
-					$this->addScriptPath($scriptPath);
-					$broker->loadOutputDirs($this, 'json');
-				break;
-				case('rest'):
-					$this->getResponse()->setHeader('Content-Type', 'text/xml');
-					$scriptPath = APP_DIR.DIRECTORY_SEPARATOR.'output'.DIRECTORY_SEPARATOR.'rest';
-					$this->addScriptPath($scriptPath);
-					$broker->loadOutputDirs($this, 'rest');
-				break;
-			}
-			
-//			var_dump( $this->getScriptPaths() );exit;
-		}
-		else {
-			// Get the options table
-			require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-			$options = Zend_Registry::get('options');
-			
-			// do we select the admin theme or the public theme?
-			if ((boolean) $this->getRequest()->getParam('admin')) {
-				$theme_name = $options['admin_theme'];
-				
-				//Add script paths for plugins
-				$broker->loadThemeDirs($this, 'admin');
-			}
-			else {
-				$theme_name = $options['public_theme'];
-				
-				$broker->loadThemeDirs($this, 'public');
-			}
-			
-			$scriptPath = THEME_DIR.DIRECTORY_SEPARATOR.$theme_name;
-			$this->addScriptPath($scriptPath);
-			
-	//		var_dump( $this->getScriptPaths() );exit;
-			
-			Zend_Registry::set('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
-		}
-		Zend_Registry::set('theme_path',	$scriptPath);
 	}
 	
 	/**
@@ -145,18 +107,6 @@ class Omeka_View extends Zend_View_Abstract
 		try {
 			extract($vars);	
 			include func_get_arg(0);
-		
-					
-
-			//Prototype.js doesn't recognize JSON unless the header is X-JSON: {json} all on one line [KK]
-			if($this->getRequest()->getParam('output') == 'json') {
-				$config = Zend_Registry::get('config_ini');
-				if (!(boolean) $config->debug->json) {
-					$json = ob_get_clean();
-					header("X-JSON: $json");
-				}
-			}
-		
 		} catch (Exception $e) {
 			
 			/* Exceptions should not be uncaught at this stage of execution
@@ -170,19 +120,24 @@ class Omeka_View extends Zend_View_Abstract
 			}
 		}
 	}
-
-	/**
-	 * Render the requested file using the selected theme
-	 * 
-	 * 
-	 * @edited 2007-02-22
-	 */
-	public function render($file)
-	{
-		require_once HELPERS;
 		
-		return parent::render($file);
+	/**
+	 * Get a View_Format object and then render the shit out of it
+	 *
+	 * Filename of script to render (if applicable) gets passed as part of $options
+	 * 
+	 * @return void
+	 **/
+	public function renderFormat($format, $file, $options=array())
+	{
+		$options['feed_filename'] = $file;
+		
+		$format_obj = $this->getFormat($format, $options);
+		
+		if(!$format_obj) {
+			throw new Exception( "Format named '$format' does not exist!" );
+		}
+		return $format_obj->render();
 	}
-
 }
 ?>

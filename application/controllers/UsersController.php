@@ -56,8 +56,7 @@ class UsersController extends Omeka_Controller_Action
 				//Create the activation url
 				
 			try {	
-				$ua->User = $user;
-				$ua->generate();
+				$ua->user_id = $user->id;
 				$ua->save();
 				
 				$site_title = get_option('site_title');
@@ -119,9 +118,9 @@ class UsersController extends Omeka_Controller_Action
 	public function addAction() 
 	{	
 		$user = new User();
-		$password = $user->generatePassword(8);
+		
 		try {
-			if($user->commitForm($_POST)) {
+			if($user->saveForm($_POST)) {
 				
 				$this->sendActivationEmail($user);
 				
@@ -149,15 +148,13 @@ class UsersController extends Omeka_Controller_Action
 	protected function sendActivationEmail($user)
 	{
 		$ua = new UsersActivations;
-		$ua->User = $user;
-		$ua->generate();
+		$ua->user_id = $user->id;
 		$ua->save();
+		
 		//send the user an email telling them about their great new user account
-		
-		$site_options = Zend_Registry::get('options');
-		
-		$site_title = $site_options['site_title'];
-		$from = $site_options['administrator_email'];
+				
+		$site_title = get_option('site_title');
+		$from = get_option('administrator_email');
 		
 		$body = "Welcome!\n\nYour account for the ".$site_title." archive has been created. Please click the following link to activate your account:\n\n"
 		.WEB_ROOT."/admin/users/activate?u={$ua->url}\n\n (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n".$site_title." Administrator";
@@ -217,7 +214,7 @@ class UsersController extends Omeka_Controller_Action
 				}
 				return;
 			}
-			$this->render('users/login.php', array('errorMessage' => array_pop($token->getMessages())));
+			$this->render('users/login.php', array('errorMessage' => $token->getMessages()));
 			return;
 		}
 		$this->render('users/login.php');
@@ -226,6 +223,7 @@ class UsersController extends Omeka_Controller_Action
 	public function logoutAction()
 	{
 		$auth = $this->_auth;
+		//http://framework.zend.com/manual/en/zend.auth.html
 		$auth->clearIdentity();
 		$this->_redirect('');
 	}

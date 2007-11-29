@@ -28,29 +28,34 @@ final class Omeka
 	 * logged in or not.
 	 */
         static function loggedIn() {
-                require_once 'Zend/Auth.php';
-                require_once 'Zend/Session.php';
-                require_once 'Omeka/Auth/Adapter.php';
-                require_once 'Zend/Filter/Input.php';
+           if(Zend_Registry::isRegistered('logged_in_user')) {
+				return Zend_Registry::get('logged_in_user');
+			}
 
-                $auth = Zend_Registry::get('auth');
-                if ($auth->hasIdentity()) {
-                        $user_id = $auth->getIdentity();
+     	require_once 'Zend/Auth.php';
+        require_once 'Zend/Session.php';
+        require_once 'Omeka/Auth/Adapter.php';
+        require_once 'Zend/Filter/Input.php';
 
-                        require_once 'User.php';
-
-                        if(Zend_Registry::isRegistered('logged_in_user')) {
-                                return Zend_Registry::get('logged_in_user');
-                        }
-
-                        $user = Doctrine_Manager::getInstance()->getTable('User')->find($user_id);
-
-                        Zend_Registry::set('logged_in_user', $user);
-
-                        return $user;
-                }
-                return false;
-        }
-
+		$auth = Zend_Registry::get('auth');
+		if ($auth->hasIdentity()) {
+			$user_id = $auth->getIdentity();
+			
+			require_once 'User.php';
+			
+			
+			
+			$user = get_db()->getTable('User')->find($user_id);
+			
+			Zend_Registry::set('logged_in_user', $user);
+			
+			return $user;
+		} 
+		//Should also cache the negative response so we don't ping $auth->getIdentity() a million times
+		else {
+			Zend_Registry::set('logged_in_user', false);
+		}
+		return false;
+	}
 }
 ?>

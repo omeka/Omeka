@@ -7,8 +7,8 @@ function get_option($name) {
 
 function set_option($name, $value)
 {
-	$conn = Doctrine_Manager::getInstance()->connection();
-	$conn->exec("REPLACE INTO options (name, value) VALUES (?,?)", array($name, $value));
+	$db = get_db();
+	$db->exec("REPLACE INTO $db->Option (name, value) VALUES (?,?)", array($name, $value));
 	
 	//Now update the options hash so that any subsequent requests have it available
 	$options = Zend_Registry::get('options');
@@ -17,6 +17,16 @@ function set_option($name, $value)
 	Zend_Registry::set('options', $options);
 }
 
+function generate_slug($text)
+{
+	$slug = trim($text);
+	
+	//Replace prohibited characters in the title with - 's
+	$prohibited = array(':', '/', ' ', '.');
+	$replace = array_fill(0, count($prohibited), '-');
+	$slug = str_replace($prohibited, $replace, strtolower($slug) );
+	return $slug;
+}
 
 function pluck($col, $array)
 {
@@ -32,12 +42,19 @@ function current_user()
 	return Omeka::loggedIn();
 }
 
-function strip_slashes($text)
+/**
+ * Replace _ with spaces and capitalize words
+ *
+ * @return string
+ **/
+function humanize($value)
 {
-	if($text !== null) {
-		$text = get_magic_quotes_gpc() ? stripslashes( $text ) : $text;
-	}
-	return $text;
+	return ucwords(str_replace('_', ' ', $value));
+}
+
+function get_db()
+{
+	return Zend_Registry::get('db');
 }
 
 /**

@@ -1,6 +1,3 @@
-<?php if(!isset($items)) {
-		$items = items(); } ?>
-
 <div id="detailed">
 <?php foreach($items as $key => $item):?>
 <div class="item">
@@ -10,7 +7,7 @@
 		<ul>
 			<li><span class="fieldname">Creator:</span> <?php echo h($item->creator); ?></li>
 			<li><span class="fieldname">Added:</span> <?php echo h($item->added); ?></li>
-				<?php if($item->Collection->exists()): ?>
+				<?php if(has_collection($item)): ?>
 			<li><span class="fieldname">Collection:</span> <?php echo h($item->Collection->name); ?></li>
 			<?php endif; ?>
 			<li><span class="fieldname">Public</span> <?php checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></li>

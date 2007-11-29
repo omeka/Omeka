@@ -7,25 +7,16 @@ require_once 'Institution.php';
  */
 class Person extends Entity
 {	
-    public function setUp()
-    {
-		parent::setUp();
-		$this->setInheritanceMap(array('type'=>"Person"));
-    }
-
 	/**
 	 * Find the institution for the Entity and save it as parent_id
 	 *
 	 **/
 	public function preSave()
-	{
-		parent::preSave();
-		
-//		$this->type = "Person";	
+	{		
+		$this->type = "Person";	
 		
 		if(!empty($this->institution)) {
 			$this->setParentToInstitution();
-			$this->institution = NULL;
 		}
 	}
 	
@@ -33,30 +24,17 @@ class Person extends Entity
 	{
 		$name = $this->institution;
 		
-		$inst = $this->getTable('Institution')->findUniqueOrNew(array('institution'=>$name));
-		$this->Parent = $inst;
+		$inst = $this->getTable('Entity')->findUniqueOrNew(array('institution'=>$name));
+		$inst->type = "Institution";
+		$inst->save();
+		$this->parent_id = $inst->id;
+		$this->institution = NULL;
 	}
 	
 	public function getName()
 	{
 		return implode(' ', array($this->first_name, $this->middle_name, $this->last_name));
 	}
-	
-	public function get($name)
-	{
-		switch ($name) {
-			
-			case 'institution':
-				if(!empty($this->parent_id)) {
-					return $this->Parent->institution;
-				}
-				break;
-			
-			default:
-				return parent::get($name);
-				break;
-		}
-	}	
 }
 
 ?>

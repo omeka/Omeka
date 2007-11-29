@@ -29,7 +29,7 @@
 		<?php endif; ?> 
 	<?php endforeach;?>
 	</ul>
-	<h4>Total Number of Items in Collection: <?php echo total_items($items);?></h4>
+	<h4>Total Number of Items in Collection: <?php echo total_items($collection);?></h4>
 	
 </div>
 </div>

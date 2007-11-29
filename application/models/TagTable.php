@@ -6,34 +6,21 @@
  * @package Omeka
  * 
  **/
-class TagTable extends Doctrine_Table
+class TagTable extends Omeka_Table
 {	
 	public function findOrNew($name) {
-		$result = $this->findBySql('name = ? LIMIT 1', array($name))->getFirst();
-		if(!$result) {
-			$tag = new Tag();
+		$db = get_db();
+		$sql = "SELECT t.* FROM {$db->Tag} t WHERE t.name = ? LIMIT 1";
+		$tag = $this->fetchObjects($sql, array($name), true);
+		
+		if(!$tag) {
+			$tag = new Tag;
 			$tag->name = $name;
-			return $tag;
-		} else {
-			return $result;
 		}
+		
+		return $tag;
 	}
 
-	/**
-	 * DUPLICATED from the ItemTable class...too lazy to do anything else for now
-	 *
-	 * @return void
-	 **/
-	protected function getCountFromSelect($select)
-	{		
-		//Grab the total number of items in the table(as differentiated from the result count)
-		$countQuery = clone $select;
-		$countQuery->resetFrom(array('Tag', 't'), 'COUNT(DISTINCT(t.id))');
-		$total_items = $countQuery->fetchOne();
-		if(!$total_items) $total_items = 0;
-		return $total_items;
-	}
-	
 	/**
 	 * Retrieve a certain number of tags
 	 *
@@ -45,9 +32,11 @@ class TagTable extends Doctrine_Table
 	 * @param User only tags from this User
 	 * @return Doctrine_Collection tags
 	 **/
-	public function findBy($params=array(), $for=null, $returnCount=false)
+	public function findBy($params=array(), $for=null)
 	{
-		$defaults = array(	'limit'=>100,
+		$defaults = array(/*
+			'limit'=>100,
+		*/	
 							'alpha'=>false,
 							'recent'=>false,
 							'mostToLeast'=>false,
@@ -55,23 +44,18 @@ class TagTable extends Doctrine_Table
 							'record'=>null,
 							'entity'=>null,
 							'user'=>null,
-							'public'=>false,
 							'return'=>'array');
-							
-		foreach ($defaults as $k=>$v) {
-			if(array_key_exists($k,$params)) {
-				$$k = $params[$k];
-			}else{ 
-				$$k = $v;
-			}
-		}
-		
+
+		$params = array_merge($defaults, $params);
+
 		$select = new Omeka_Select;
 		
-		$select->from(array('Tag', 't'), 't.*, COUNT(t.id) as tagCount')
-				->innerJoin(array('Taggings', 'tg'), "tg.tag_id = t.id");
+		$db = get_db();
+		
+		$select->from("$db->Tag t", 't.*, COUNT(t.id) as tagCount')
+				->innerJoin("$db->Taggings tg", "tg.tag_id = t.id");
 
-		if($record instanceof Omeka_Record) {
+		if(($record = $params['record']) and ($record instanceof Omeka_Record) ) {
 			if($record->exists()) {
 				$record_id = $record->id;
 				$select->where("tg.relation_id = ?", $record_id);
@@ -82,7 +66,7 @@ class TagTable extends Doctrine_Table
 			}
 			//A non-persistent record has no tags, so return emptiness
 			else {
-				return ($return == 'array') ? array() : new Doctrine_Collection('Tag');
+				return array();
 			}
 		}
 	
@@ -90,60 +74,99 @@ class TagTable extends Doctrine_Table
 			$select->where("tg.type = ?", (string) $for);
 		}
 		
-		if($user) {
-			$select->innerJoin(array('Entity', 'e'), "e.id = tg.entity_id");
-			$select->innerJoin(array('User', 'u'), "u.entity_id = e.id");
-			$select->where("u.id = ?", ($user instanceof User) ? $user->id : $user);
+		if($user = $params['user']) {
+			$select->innerJoin("$db->Entity e", "e.id = tg.entity_id");
+			$select->innerJoin("$db->User u", "u.entity_id = e.id");
+			$select->where("u.id = ?", (int) $user);
 		}
-		elseif($entity) {
-			$select->innerJoin(array('Entity', 'e'), "e.id = tg.entity_id");
+		elseif($entity = $params['entity']) {
+			$select->innerJoin("$db->Entity e", "e.id = tg.entity_id");
 			$select->where("e.id = ?", ($entity instanceof Entity) ? $entity->id : $entity );
 		}
 
-		if($recent) {
-			$select->order('tg.time DESC');
-		}elseif($alpha) {
-			$select->order('t.name ASC');
+		if($params['return'] != 'count') {
+				if((bool) $params['recent']) {
+					$select->order('tg.time DESC');
+				}elseif($alpha) {
+					$select->order('t.name ASC');
+				}	
+				elseif((bool) $params['mostToLeast']) {
+					$select->order('tagCount DESC');
+				}elseif(isset($params['leastToMost'])) {
+					$select->order('tagCount ASC');
+				}	
 		}
-		elseif($mostToLeast) {
-			$select->order('tagCount DESC');
-		}elseif($leastToMost) {
-			$select->order('tagCount ASC');
-		}
-		
 
-		
-		//Showing tags related to public items
-		if($public and $for == 'Item') {
-			$select->innerJoin(array('Item', 'i'), "i.id = tg.relation_id");
-			$select->where("i.public = 1");
+		//Showing tags related to items
+		if($for == 'Item') {
+			
+			$select->innerJoin("$db->Item i", "i.id = tg.relation_id");
+
+			//If the 'public' switch has been set
+			if(array_key_exists('public', $params)) {
+				$public = $params['public'];
+				
+				//Public is set to true, so show only public items
+				if($public === true) {
+					$select->where('i.public = 1');
+				}
+				elseif($public === false) {
+					
+					//Apply the permissions checks to make sure no one is cheating
+					new ItemPermissions($select);
+					
+					$select->where('i.public = 0');
+				}
+				
+			}
+			//If they have not specified whether tags should be public or not, then apply perms check
+			else {
+				new ItemPermissions($select);
+			}
 		}	
 
-		if($limit) {
+		if($params['return'] == 'count') {
+			$select->resetFrom("$db->Tag t", 'COUNT(DISTINCT(t.id))');
+
+			return (int) $db->fetchOne((string) $select);
+		}
+
+		//Limit should always be 
+		if($limit = (int) $params['limit']) {
 			$select->limit($limit);
 		}
 		
-				
-		if($returnCount) {
-			return $this->getCountFromSelect($select);
-		}
-		
 		$select->group("t.id");
-		
-//echo $select;
-		
-		//Return Doctrine_Collection instead of an array (the slow way)
-		if($return == 'object') {
-			$ids = array();
-			$select->resetFrom(array('Tag', 't'), "DISTINCT t.id");
-			$array = $select->fetchAll();
-			foreach ($array as $row) {
-				$ids[] = $row['id'];
-			}
-			return !empty($ids) ? $this->find($ids, true) : new Doctrine_Collection('Tag');
+
+
+//	debug_print_backtrace();		
+//echo $select;exit;
+	
+		if($params['return'] == 'object') {
+			$tags = $this->fetchObjects($select);
 		}
+		else {
+			$bind = null;
+			$tags = $db->query((string) $select, null)->fetchAll();
+		}
+
+		if(!$tags) {
+			return array();
+		}
+		return $tags;
+	}
+	
+	protected function getTagSelectSQL()
+	{
+		$select = new Omeka_Select;
 		
-		return $select->fetchAll();
+		$db = get_db();
+		
+		$select->from("$db->Tag t", 't.*, COUNT(t.id) as tagCount')
+				->innerJoin("$db->Taggings tg", "tg.tag_id = t.id")
+				->group('t.id');
+				
+		return $select;
 	}
 	
 	/**
@@ -153,19 +176,14 @@ class TagTable extends Doctrine_Table
 	 **/
 	public function findAll($for=null, $params=array())
 	{
-		$params = array_merge(array(
-						'limit'=>null, 'return'=>'object'), $params);
+		$params = array_merge(array('return'=>'object'), $params);
+		
 		return $this->findBy($params, $for);
 	}
 	
-	/**
-	 * Overloaded to include tagCount within all retrieved tags
-	 *
-	 * @param int id
-	 * @return Tag
-	 **/
-	public function find($id, $makeCollection=false) 
+	public function find($id) 
 	{
+/*
 		//make the where statement
 		$id = (array) $id;
 		$where = array();
@@ -173,16 +191,18 @@ class TagTable extends Doctrine_Table
 			$where[] = "t.id = ?";
 		}
 		$where = join(' OR ', $where);
+*/	
 		
-		$q = $this->createQuery()
-					->select("t.*, COUNT(t.id) tagCount")
-					->from('Tag t')
-					->where($where, $id)
-					->groupby('t.id');
-		$tags = $q->execute();
-					
-		if((count($tags) == 1) and !$makeCollection) return $tags->getFirst();
+		if(!$id) {
+			throw new Exception( 'ID must be passed when retrieving objects from the database' );
+		}
 		
+		$select = $this->getTagSelectSQL();
+		
+		$select->where("t.id = ?", (int) $id)->limit(1);
+		
+		$tags = $this->fetchObjects($select, null, true);
+							
 		return $tags;
 	}
 	
@@ -207,6 +227,6 @@ class TagTable extends Doctrine_Table
 			
 			return $tags;		
 	} 
-} // END class TagTable extends Doctrine_Table
+} // END class TagTable extends Omeka_Table
 
 ?>

@@ -2,7 +2,7 @@
 /**
 * TaggingsTable
 */
-class TaggingsTable extends Doctrine_Table
+class TaggingsTable extends Omeka_Table
 {
 	/**
 	 * Current options
@@ -11,74 +11,73 @@ class TaggingsTable extends Doctrine_Table
 	 **/
 	public function findBy($options=array(), $for=null, $returnCount=false) 
 	{
-		$q = new Doctrine_Query;
-		$q->parseQuery("SELECT tg.* FROM Taggings tg");
+		$select = new Omeka_Select;
+		$db = get_db();
 		
+		if($returnCount) {
+			$select->from("$db->Taggings tg", "COUNT(DISTINCT(tg.id))");
+		}else {
+			$select->from("$db->Taggings tg", "tg.*");
+		}
+				
 		if(isset($options['tag'])) {
 			
 			$tag = $options['tag'];
-			$q->innerJoin("tg.Tag t");
-
-			//If it is an array or a collection then loop through and create a WHERE clause
-			if( is_array($tag) or ($tag instanceof Doctrine_Collection)) {
-				$where = array();
-				$pass = array();
-				foreach ($tag as $k => $t) {
-					$where[$k] = "t.name = ?";
-					$pass[] = ($t instanceof Tag) ? $t->name : $t; 
+			$select->innerJoin("$db->Tag t", "t.id = tg.tag_id");
+			
+			if(is_array($tag)) {
+				$wheres = array();
+				$names = array();
+				foreach ($tag as $t) {
+					$name = ($t instanceof Tag) ? $t->name : $t;
+					$wheres[] = "t.name = ".$db->quote($t);
 				}
-				
-				$q->addWhere( join(" OR ", $where), $pass);
-				
-			}else {							
-				$tag = ($tag instanceof Tag) ? $tag->name : $tag;
-			
-				$q->addWhere("t.name = ?", array($tag));
-			}		
-
-		}
+				$select->where( "(" . implode(' OR ', $wheres) . ")" );
+			}
+			else {
+				$name = ($tag instanceof Tag) ? $tag->name : $tag;
 		
-		if(isset($options['entity'])) {
-			$entity = $options['entity'];
-			
-			$q->innerJoin("tg.Entity e");
-			
-			$entity_id = is_numeric($entity) ? $entity : (int) $entity->id;
-			
-			$q->addWhere("e.id = ?", array($entity_id));
-		}
-		
-		if(isset($options['user'])) {
-			$user = $options['user'];
-			
-			$q->innerJoin("tg.Entity e");
-			$q->innerJoin("e.User u");
-			
-			if(is_numeric($user)) {
-				$q->addWhere("u.id = ?", array($user));
-			}elseif($user instanceof User and !empty($user->id)) {
-				$q->addWhere("u.id = ?", array($user->id));
+				$select->where("t.name = ?", $name);				
 			}
 		}
 		
+		if(isset($options['entity']) or isset($options['user'])) {
+			
+			$select->innerJoin("$db->Entity e", "e.id = tg.entity_id");
+			
+			if($entity = $options['entity']) {
+				
+				$entity_id = (int) is_numeric($entity) ? $entity : $entity->id;
+				$select->where("e.id = ?", $entity_id);
+				
+			}elseif($user = $options['user']) {
+				
+				$select->innerJoin("$db->User u", "u.entity_id = e.id");
+				
+				if(is_numeric($user)) {
+					$select->where("u.id = ?", $user);
+				}elseif($user instanceof User and !empty($user->id)) {
+					$select->where("u.id = ?", $user->id);
+				}
+			}			
+		}
+			
 		if(isset($options['record'])) {
 			$record = $options['record'];
 			
-			$q->addWhere("tg.relation_id = ? AND tg.type = ?", array($record->id, get_class($record)));
+			$select->where("tg.relation_id = ?", $record->id);
+			$select->where("tg.type = ?", get_class($record) );
 		}
 		
 		if($for and !isset($options['record'])) {
-			$q->addWhere("tg.type = ?", array($for) );
+			$select->where("tg.type = ?", $for );
 		}
-		
-//		echo $q;
-				
+						
 		if($returnCount) {
-			$count = $q->count();
-			return $count;
+			return $db->fetchOne($select);
+		}else {
+			return $this->fetchObjects($select);
 		}
-
-		return $q->execute();
 	}
 }
  

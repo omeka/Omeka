@@ -35,7 +35,7 @@ function exhibit_fullsize($item, $props=array('class'=>'permalink'))
 
 function section_has_pages($section) 
 {
-	return $section->Pages->count() > 0;
+	return $section->hasPages();
 }
 
 function link_to_exhibit($exhibit, $text=null, $props=array(), $section=null, $page = null)
@@ -51,9 +51,9 @@ function exhibit_uri($exhibit, $section=null, $page=null)
 {
 	$exhibit_slug = ($exhibit instanceof Exhibit) ? $exhibit->slug : $exhibit;
 	
-	$section_slug = ($section instanceof Section) ? $section->slug : $section;
+	$section_slug = ($section instanceof ExhibitSection) ? $section->slug : $section;
 	
-	$page_num = ($page instanceof SectionPage) ? $page->order : $page;
+	$page_num = ($page instanceof ExhibitPage) ? $page->order : $page;
 	
 	$uri = 'exhibits/' . $exhibit_slug . '/' . ( !empty($section_slug) ? $section_slug . (!empty($page_num) ? '/' . $page_num : ''): '');
 	
@@ -102,7 +102,7 @@ function exhibit($id=null) {
 			return Zend_Registry::get('exhibit');
 		}
 	}else {
-		return Doctrine_Manager::getInstance()->getTable('Exhibit')->find($id);
+		return get_db()->getTable('Exhibit')->find($id);
 	}
 }
 
@@ -112,7 +112,7 @@ function exhibit_section($id=null) {
 			return Zend_Registry::get('section');
 		}
 	}else {
-		return Doctrine_Manager::getInstance()->getTable('Section')->find($id);
+		return get_db()->getTable('ExhibitSection')->find($id);
 	}
 }
 
@@ -149,7 +149,7 @@ function page_text($order, $addTag=true)
 {
 	$page = Zend_Registry::get('page');
 
-	$text = $page->ItemsPages[$order]->text;
+	$text = $page->ExhibitPageEntry[$order]->text;
 	if($addTag) {
 		return nls2p($text);
 	}
@@ -160,31 +160,13 @@ function page_item($order)
 {
 	$page = Zend_Registry::get('page');
 
-	$item = $page->ItemsPages[$order]->Item;
-	if(!$item->exists()) {
+	$item = $page->ExhibitPageEntry[(int) $order]->Item;
+	
+	if(!$item or !$item->exists()) {
 		return null;
 	}
-	
-	//Put in a permissions check so that un-viewable items do not show up
-	/**
-	 * This kind of duplication of permissions checking should be abstracted into a general location
-	 * @duplication
-	 * @see ItemsController:showAction()
-	 * @author Kris Kelly
-	 */
-	if(!$item->public and !has_permission('Items', 'showNotPublic'))
-	{
-		return null;
-	}
-	
+
 	return $item;
-}
-
-function page_item_id($order)
-{
-	$page = Zend_Registry::get('page');
-
-	return $page->ItemId($order);
 }
 
 function layout_form_item($order, $label='Enter an Item ID #') {	
@@ -288,10 +270,10 @@ function layout_css($file='layout')
 function section_nav()
 {
 	$exhibit = Zend_Registry::get('exhibit');
-	
+
 	//Use class="section-nav"
 	echo '<ul class="exhibit-section-nav">';
-	
+
 	foreach ($exhibit->Sections as $key => $section) {		
 	
 		$uri = exhibit_uri($exhibit, $section);
@@ -314,7 +296,6 @@ function page_nav()
 	echo '<ul class="exhibit-page-nav">';
 	
 	$key = 1;
-	$section->loadPages();
 	foreach ($section->Pages as $key => $page) {
 	
 		$uri = exhibit_uri($section->Exhibit, $section, $page);

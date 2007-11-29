@@ -6,15 +6,8 @@ require_once 'Entity.php';
  */
 class Institution extends Entity
 {
-    public function setUp()
-    {
-		parent::setUp();
-		$this->setInheritanceMap(array('type'=>"Institution"));
-    }
-
 	public function preSave()
 	{
-		parent::preSave();
 		$this->type = "Institution";
 	}
 	

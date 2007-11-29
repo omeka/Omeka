@@ -3,7 +3,7 @@ class ExhibitTestCase extends OmekaTestCase
 { 
 	function testExhibitConstraints()
 	{
-		$table = $this->manager->getTable('Exhibit');
+		$table = $this->db->getTable('Exhibit');
 		
 		//Test the validity of the exhibit itself
 		$e = new Exhibit;
@@ -56,7 +56,7 @@ class ExhibitTestCase extends OmekaTestCase
 		
 		
 		//Test the validity of an entry for a page of a section of an exhibit
-		$ip = $p->ItemsPages[0];
+		$ip = $p->ExhibitPageEntry[0];
 		
 		$this->assertFalse($ip->isValid());
 		
@@ -69,7 +69,7 @@ class ExhibitTestCase extends OmekaTestCase
 	
 	public function testExhibitDeleteTag()
 	{
-/*		$e = $this->manager->getTable('Exhibit')->find(1);
+/*		$e = $this->db->getTable('Exhibit')->find(1);
 		$this->assertEqual($e->Tags->count(), 2);
 		
 		$e->deleteTags('Tag1');
@@ -79,7 +79,7 @@ class ExhibitTestCase extends OmekaTestCase
 	
 	public function testIsTaggable()
 	{
-		$e = $this->manager->getTable('Exhibit')->find(1);
+		$e = $this->db->getTable('Exhibit')->find(1);
 		$this->assertTrue($e->hasTag('Tag1'));
 	}
 }

@@ -4,52 +4,62 @@ require_once 'Plugin.php';
 require_once 'Metatext.php';
 require_once 'TypesMetafields.php';
 require_once 'MetafieldTable.php';
-require_once 'MetafieldMetatext.php';
 /**
  * @package Omeka
  * 
  **/
 class Metafield extends Omeka_Record { 
 	
-	protected $error_messages = array(	'name' => array('notblank' => 'Metafield name must not be blank', 'unique' => 'Metafield name must be different than existing metafield names'));
-
-	public function setUp() {
-		//Replace with a join table
-		$this->hasMany("Type as Types", "TypesMetafields.type_id");
-		$this->hasOne("Plugin", "Metafield.plugin_id");
-		$this->ownsMany("MetafieldMetatext as Metatext", "MetafieldMetatext.metafield_id");
-		$this->ownsMany("TypesMetafields", "TypesMetafields.metafield_id");
-//		$this->setAttribute(Doctrine::ATTR_COLL_KEY, 'id');
-	}
-
-	public function setTableDefinition() {
-		$this->option('type', 'MYISAM');
-   		$this->setTableName('metafields');
+	public $name;
+	public $description = '';
+	public $plugin_id;
 		
-		$this->hasColumn("name", "string", 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
-     	$this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
-		$this->hasColumn("plugin_id", "integer");
-		$this->index('plugin', array('fields'=>array('plugin_id')));
- 	}
-	
-	public function delete()
-	{
-		fire_plugin_hook('delete_metafield', $this);
+	protected function _delete()
+	{		
+		$db = get_db();
 		
+		//Cascade delete the metatext and the types_metafields joins
+		$mt_objs = $db->getTable('Metatext')->findBySql("metafield_id = ?", array($this->id));
+		
+		foreach ($mt_objs as $mt_obj) {
+			$mt_obj->delete();
+		}
+		
+		$tm_objs = $db->getTable('TypesMetafields')->findBySql('metafield_id = ?', array($this->id));
+		
+		foreach ($tm_objs as $tm_obj) {
+			$tm_obj->delete();
+		}
+/*
 		$id = (int) $this->id;
-		
 		$delete = "DELETE types_metafields, metatext, metafields FROM metafields
 		LEFT JOIN types_metafields ON types_metafields.metafield_id = metafields.id
 		LEFT JOIN metatext ON metatext.metafield_id = metafields.id
 		WHERE metafields.id = $id;";
 		
-		$this->execute($delete);
+		$db->exec($delete);
+*/	
+	}
+	
+	protected function _validate()
+	{
+		if(empty($this->name)) {
+			$this->addError('name', 'Metafield name must not be blank');
+		}
+		
+		if(!$this->fieldIsUnique('name')) {
+			$this->addError('name', 'Metafield name must be different than existing metafield names');
+		}
+		
+		if(!($this->plugin_id === NULL) and !is_numeric($this->plugin_id)) {
+			$this->addError('plugin_id', "Metafield was incorrectly associated with a plugin");
+		}
 	}
 	
 	public static function names($prefix=true) {
-		$conn = Doctrine_Manager::getInstance()->connection();
+		$db = get_db();
 		
-		$res = $conn->execute("SELECT m.name FROM metafields m ORDER BY m.name DESC");
+		$res = $db->query("SELECT m.name FROM $db->Metafield m ORDER BY m.name DESC");
 		
 		$rows = $res->fetchAll();
 		

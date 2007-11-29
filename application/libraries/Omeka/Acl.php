@@ -199,14 +199,6 @@ class Omeka_Acl extends Zend_Acl
         return $this->_roleRegistry;
     }
 
-	public function save()
-	{
-		$optionTable = Zend_Registry::get('doctrine')->getTable('option');;
-		$acl = $optionTable->findByDql("name LIKE :name", array('name' => 'acl'));
-		$acl[0]->value = serialize($this);
-		$acl[0]->save();
-	}
-	
 	public function isAllowed($role = null, $resource = null, $privilege = null){
 		// A global permission check is occuring
 		if ($resource === null && $privilege !== null) {
@@ -230,6 +222,30 @@ class Omeka_Acl extends Zend_Acl
 		if($this->_autosave) {
 			$this->save();
 		}
+	}
+	
+	/**
+	 * Wrapper for self::isAllowed() that makes use of Omeka's login mechanism
+	 * 
+	 * @since 11/5/07
+	 *
+	 * @return bool 
+	 **/
+	public function checkUserPermission($resource, $privilege)
+	{
+		if(!$user) {
+			$user = Omeka::loggedIn();
+		}
+		
+		/*	'default' permission level is hard-coded here, may change later */
+		$role = !$user ? 'default' : $user->role;
+				
+		//If the resource has no rule that would indicate permissions are necessary, then we assume access is allowed
+		if(!$this->resourceHasRule($resource,$privilege)){
+			return TRUE;
+		} 
+				
+		return $this->isAllowed($role, $resource, $privilege);		
 	}
 }
 ?>

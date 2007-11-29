@@ -6,37 +6,6 @@ require_once 'Omeka/Controller/Action.php';
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Theme.php';
 class ThemesController extends Omeka_Controller_Action
 {	
-	/**
-	 * This is only temporary until the system is better
-	 * built out.  We should not be relying on this
-	 * exclusively to populate our theme options.
-	 * 
-	 */
-	public function init()
-	{
-		require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Option.php';
-		$doctrine = Zend_Registry::get('doctrine');
-		$options = $doctrine->getTable('option');
-		$themes = $options->findByDql('name LIKE ? or name LIKE ?', array('admin_theme', 'theme'));
-		
-		if (!count($themes) == 2) {
-			$admin = new Option();
-			$admin->name = 'admin_theme';
-			$admin->value = 'default';
-			
-			$theme = new Option();
-			$theme->name = 'theme';
-			$theme->value = 'default';
-			
-			$admin->save();
-			$theme->save();
-			return;
-		}
-		else {
-			return;
-		}
-	}
-
 	public function rerouteAction()
 	{
 		$this->_redirect('themes/browse');
@@ -103,14 +72,13 @@ class ThemesController extends Omeka_Controller_Action
 	{		
 		$themes = $this->getAvailable();
 		
-		$public = $this->getTable('Option')->findByName('public_theme');
-		
+		$public = get_option('public_theme');
+
 		if(!empty($_POST) and $this->isAllowed('switch')) {
-			$public->value = $_POST['public_theme'];
-			$public->save();
+			set_option('public_theme', $_POST['public_theme']);
 		}
 
-		$current = $this->getAvailable($public->value);
+		$current = $this->getAvailable($public);
 
 		return $this->render('themes/browse.php', compact('current', 'themes'));
 	}

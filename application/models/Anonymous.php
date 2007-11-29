@@ -6,12 +6,6 @@ require_once 'Entity.php';
  */
 class Anonymous extends Entity
 {
-    public function setUp()
-    {
-		parent::setUp();
-		$this->setInheritanceMap(array('type'=>"Anonymous"));
-    }
-
 	public function preSave()
 	{
 		$this->type = "Anonymous";

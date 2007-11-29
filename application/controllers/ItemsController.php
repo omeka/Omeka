@@ -32,7 +32,7 @@ class ItemsController extends Omeka_Controller_Action
 			}
 		}
 
-		$this->_forward('forbidden', 'index');
+		return $this->forbiddenAction();
 	}
 	
 	/**
@@ -51,7 +51,8 @@ class ItemsController extends Omeka_Controller_Action
 				$this->_redirect('delete', array('controller'=>'items'));
 			}
 		}
-		$this->_forward('forbidden', 'index');
+		
+		return $this->forbiddenAction();
 	}
 
 	public function tagsAction()
@@ -59,12 +60,6 @@ class ItemsController extends Omeka_Controller_Action
 		$this->_forward('browse', 'Tags', null, array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
 	}
 
-	/**
-	 * New Strategy: this will run a SQL query that selects the IDs, then use that to hydrate the Doctrine objects.
-	 * Stupid Doctrine.  Maybe their new version will be better.
-	 *
-	 * @return mixed|void
-	 **/
 	public function browseAction()
 	{			
 		$perms = array();
@@ -73,17 +68,6 @@ class ItemsController extends Omeka_Controller_Action
 		
 		//Show only public items
 		if( $this->_getParam('public') ) {
-			$perms['public'] = true;
-		}
-		//Show all items
-		elseif( $this->isAllowed('showNotPublic')) {}
-		
-		//Otherwise check if specific user can see their own items
-		elseif($this->isAllowed('showSelfNotPublic')) {			
-			$perms['publicAndUser'] = Omeka::loggedIn();
-		}
-		//Find public items by default
-		else {
 			$perms['public'] = true;
 		}
 		
@@ -168,8 +152,8 @@ class ItemsController extends Omeka_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
-		//Get the item count after permissions have been applied, which is the total number of items possible to see
-		$total_items = $this->getTable('Item')->findBy($perms, true);
+		//Permissions are checked automatically at the SQL level
+		$total_items = $this->getTable('Item')->count();
 		Zend_Registry::set('total_items', $total_items);
 		
 		$params = array_merge($perms, $filter, $order);
@@ -177,9 +161,7 @@ class ItemsController extends Omeka_Controller_Action
 		//Get the item count after other filtering has been applied, which is the total number of items found
 		$total_results = $this->getTable('Item')->findBy($params, true);
 		Zend_Registry::set('total_results', $total_results);
-
-
-		
+				
 		/** 
 		 * Now process the pagination
 		 * 
@@ -219,22 +201,10 @@ class ItemsController extends Omeka_Controller_Action
 		
 		fire_plugin_hook('browse_items', $items);
 		
-		return $this->render('items/browse.php', compact('total_items', 'items'));
-	}
-
-	/**
-	 * Get all the collections and all the active plugins for the form
-	 *
-	 * @return void
-	 **/
-	protected function loadFormData() 
-	{
-		$collections = $this->getTable('Collection')->findAll();
-		$types = $this->getTable('Type')->findAll();
+		$pass_to_template = compact('total_items', 'items');
+		$pass_to_template['recordset'] = $items;
 		
-		if($this->_view) {
-			$this->_view->assign(compact('collections', 'plugins', 'types'));
-		}
+		return $this->render('items/browse.php', $pass_to_template);
 	}
 		
 	public function showAction() 
@@ -242,20 +212,12 @@ class ItemsController extends Omeka_Controller_Action
 		$item = $this->findById();
 		$user = Omeka::loggedIn();
 		
-		//If the item is not public, check for permissions
-		$canSeeNotPublic = 	($this->isAllowed('showNotPublic') or 
-				($this->isAllowed('showSelfNotPublic') and $item->wasAddedBy($user)));
-		
-		if(!$item->public && !$canSeeNotPublic) {
-			$this->_redirect('403');
-		}
-		
 		//Add the tags
 		 
 		if(array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
 			
 		 	if($this->isAllowed('tag')) {
-				$tagsAdded = $item->commitForm($_POST);
+				$tagsAdded = $item->saveForm($_POST);
 				$item = $this->findById();
 			}else {
 				$this->flash('User does not have permission to add tags.');
@@ -268,13 +230,16 @@ class ItemsController extends Omeka_Controller_Action
 			fire_plugin_hook('make_item_favorite',  $item, $user);
 		}
 
-		$item->refresh();
+		$item = $this->findById();
 		
 		Zend_Registry::set('item', $item);
 		
 		fire_plugin_hook('show_item', $item);
 		
-		return $this->render('items/show.php', compact("item", 'user'));
+		$pass_to_template = compact("item", 'user');
+		$pass_to_template['record'] = $item;
+		
+		return $this->render('items/show.php', $pass_to_template);
 	}
 	
 	/**

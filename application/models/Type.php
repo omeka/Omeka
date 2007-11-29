@@ -6,67 +6,87 @@ require_once 'TypesMetafields.php' ;
  * 
  **/
 class Type extends Omeka_Record { 
-    protected $error_messages = array(	'name' => array('notblank' => 'Type name must not be blank.'));
+    
+	public $name;
+	public $description = '';
+	public $plugin_id;
 
-	public function setUp() {
-		//This should be 'ownsMany' to set up the foreign key cascade delete, but it won't work with many-to-many aggregates (Doctrine_Exception)
-		$this->hasMany("Metafield as Metafields", "TypesMetafields.metafield_id");
-		$this->ownsMany("TypesMetafields", "TypesMetafields.type_id");
-		$this->hasMany("Item as Items", "Item.type_id");
-		$this->hasOne("Plugin", "Type.plugin_id");
-	}
-
-	public function setTableDefinition() {
-		$this->option('type', 'MYISAM');
-   		$this->setTableName('types');
-		$this->hasColumn('name', 'string', 255, array('notnull' => true, 'unique'=>true, 'notblank'=>true));
-        $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
-		$this->hasColumn('plugin_id', 'integer');
- 	}
+	protected $_related = array('Metafields'=>'loadMetafields', 'Items'=>'getItems', 'Plugin'=>'getPlugin');
 
 	public function hasMetafield($name) {
-		foreach( $this->Metafields as $metafield )
-		{
-			if($metafield->name == $name) return true;
-		}
-		return false;
+		$db = get_db();
+		
+		$sql = "SELECT COUNT(m.id) FROM $db->Metafield m 
+		INNER JOIN $db->TypesMetafields tm ON tm.metafield_id = m.id
+		WHERE tm.type_id = ? AND m.name = ?";
+		
+		$count = (int) $db->fetchOne($sql, array($this->id, $name));
+		return ($count > 0);
 	}
 	
-	public function loadMetafields()
+	protected function loadMetafields()
 	{
-		$dql = "SELECT m.* FROM Metafield m INNER JOIN m.TypesMetafields tm WHERE tm.type_id = ?";
-		$this->Metafields = $this->executeDql($dql, array($this->id));
+		$db = get_db();
+		$sql = "SELECT m.* FROM {$db->Metafield} m 	
+				INNER JOIN {$db->TypesMetafields} tm ON tm.metafield_id = m.id 
+				WHERE tm.type_id = ? GROUP BY m.id";
+		return $this->getTable('Metafield')->fetchObjects($sql, array($this->id));
 	}
 	
-	protected function removeMetafield($metafield)
+	protected function getPlugin()
+	{
+		return $this->getTable('Plugin')->find($this->plugin_id);
+	}
+	
+	protected function getItems()
+	{
+		return $this->getTable('Item')->findBy(array('type'=>$this->id));
+	}
+	
+	protected function _validate()
+	{
+		if(empty($this->name)) {
+			$this->addError('name', 'Type name must not be blank');
+		}
+		
+		if(!$this->fieldIsUnique('name')) {
+			$this->addError('name', 'That name has already been used for a different Type');
+		}
+	}
+	
+	protected function _delete()
+	{
+		$tm_objs = get_db()->getTable('TypesMetafields')->findBySql('type_id = ?', array( (int) $this->id));
+		
+		foreach ($tm_objs as $tm) {
+			$tm->delete();
+		}
+	}
+	
+	protected function removeMetafield(Metafield $metafield)
 	{
 		//Find the join and delete it
-		$dql = "SELECT tm.* FROM TypesMetafields tm WHERE tm.type_id = ? AND tm.metafield_id = ? LIMIT 1";
-		$tm = $this->executeDql($dql, array($this->id, $metafield->id), true);
+		$db = get_db();
+		$sql = "SELECT tm.* FROM $db->TypesMetafields tm WHERE tm.type_id = ? AND tm.metafield_id = ? LIMIT 1";
+		$tm = $this->getTable('TypesMetafields')->fetchObjects($sql, array($this->id, $metafield->id), true);
 		$tm->delete();
 	}
 	
-	protected function addMetafield($metafield)
+	public function addMetafield(Metafield $metafield)
 	{
-		try {
-			//save the metafield if its a new one
-			if(!$metafield->exists()) {
-				$metafield->save();
-			}
-			
-			//Add a join row in the TypesMetafields table
-			$tm = new TypesMetafields;
-			
-			$tm->metafield_id = $metafield->id;
-			$tm->type_id = $this->id;
-			$tm->save();
-			
-			return true;
-			
-		} catch (Exception $e) {
-			//Errors indicate that we can't do what we're trying to
-			return false;
+		//save the metafield if its a new one
+		if(!$metafield->exists()) {
+			$metafield->save();
 		}
+		
+		//Add a join row in the TypesMetafields table
+		$tm = new TypesMetafields;
+		
+		$tm->metafield_id = $metafield->id;
+		$tm->type_id = $this->id;
+		$tm->save();
+			
+		return true;
 	}
 	
 	/**
@@ -75,18 +95,18 @@ class Type extends Omeka_Record {
 	 *
 	 * @return void
 	 **/
-	protected function postCommitForm($post, $options)
+	protected function postSaveForm($post)
 	{
 
 		//Add new metafields
-		foreach ($post['Metafields']['add'] as $key => $mf_array) {
+		foreach ($post['NewMetafields'] as $key => $mf_array) {
 			
 			$mf_name = $mf_array['name'];
 			
 			if(!empty($mf_name)) {
-				$mf = Doctrine_Manager::getInstance()->getTable('Metafield')->findByName($mf_name);
+				$mf = get_db()->getTable('Metafield')->findByName($mf_name);
 				if(!$mf) $mf = new Metafield;
-			
+
 				if(!$this->hasMetafield($mf_name)) {
 					$mf->setArray($mf_array);
 					$this->addMetafield($mf);				
@@ -96,8 +116,8 @@ class Type extends Omeka_Record {
 		}
 
 		//Add new joins for pre-existing metafields
-		if(!empty($post['TypesMetafields']['add'])) {
-			foreach ($post['TypesMetafields']['add'] as $key => $tm_array) {			
+		if(!empty($post['ExistingMetafields'])) {
+			foreach ($post['ExistingMetafields'] as $key => $tm_array) {			
 				$tm = new TypesMetafields;
 				$tm->metafield_id = $tm_array['metafield_id'];
 				$tm->type_id = $this->id;
@@ -112,9 +132,8 @@ class Type extends Omeka_Record {
 		$this->loadMetafields();
 	}
 	
-	protected function preCommitForm(&$clean, $options)
+	protected function preSaveForm(&$clean)
 	{
-
 		//duplication (delete/remove existing metafields)
 		foreach( $this->Metafields as $key => $metafield )
 		{

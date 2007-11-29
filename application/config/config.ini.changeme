@@ -21,7 +21,7 @@ default.action = home
 debug.timer = false
 
 ; Throw exceptions; this should only be used in development mode
-debug.exceptions = false
+debug.exceptions = true
 
 ; Json request return Content-Type: text/x-json
 ; In some browsers this will prompt for you to download a file, not a

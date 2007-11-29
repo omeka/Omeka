@@ -43,7 +43,7 @@ class TagsController extends Omeka_Controller_Action
 				if($this->isAllowed('remove')) {
 					$tag->delete();
 				}else {
-					$tag->delete($user->Entity);
+					$tag->deleteForEntity($user->Entity);
 				}
 				$this->flash("Tag named '{$tag->name}' was successfully deleted.");
 			}
@@ -113,13 +113,12 @@ class TagsController extends Omeka_Controller_Action
 			$filter['record'] = $record;
 		}
 		
+		//For the count, we only need to check based on permission levels
+		$count_params = array_merge($perms, array('return'=>'count', 'limit'=>false, 'recent'=>false));
 		
-		if( ($for == 'Item') and !$this->isAllowed('showNotPublic','Items') ) {
-			$perms['public'] = true;
-		}
-		
-		$total_tags = $this->_table->findBy($perms, $for, true);
+		$total_tags = $this->_table->findBy($count_params, $for, true);
 
+		
 		$tags = $this->_table->findBy(array_merge($params, $perms), $for);
 
 		$total_results = count($tags);

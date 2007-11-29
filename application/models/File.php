@@ -11,6 +11,7 @@ if ( ! function_exists ( 'mime_content_type' ) )
 define('IMAGE_DERIVATIVE_EXT', 'jpg');
 
 require_once 'Item.php';
+require_once 'FileTable.php';
 require_once 'FilesImages.php';
 require_once 'FilesVideos.php';
 require_once 'FileMetaLookup.php';
@@ -20,97 +21,67 @@ require_once 'FileMetaLookup.php';
  **/
 class File extends Omeka_Record { 
     
-	protected $extendedMetadata = array();
+	public $title = '';
+	public $publisher = '';
+	public $language = '';
+	public $relation = '';
+	public $coverage = '';
+	public $rights = '';
+	public $description = '';
+	public $source = '';
+	public $subject = '';
+	public $creator = '';
+	public $additional_creator = '';
+	public $date;
+	public $added;
+	public $modified;
+	public $item_id;
+	public $format = '';
+	public $transcriber = '';
+	public $producer = '';
+	public $render_device = '';
+	public $render_details = '';
+	public $capture_date;
+	public $capture_device = '';
+	public $capture_details = '';
+	public $change_history = '';
+	public $watermark = '';
+	public $authentication = '';
+	public $encryption = '';
+	public $post_processing = '';
+	public $archive_filename;
+	public $original_filename;
+	public $size = '0';
+	public $mime_browser;
+	public $mime_os;
+	public $type_os;
+	public $has_derivative_image = '0';
+	public $lookup_id;
 	
-	public function setUp() {
-//		Removed [5-22-07 KBK], this throws errors when attempting to delete files from items/form		
-//		$this->hasOne("Item", "File.item_id");
-		$this->hasOne('FileMetaLookup', 'File.lookup_id');
-		$this->ownsOne('FilesImages', 'FilesImages.file_id');
-		$this->ownsOne('FilesVideos', 'FilesVideos.file_id');		
-	}
-
-	public function setTableDefinition() {
-		$this->option('type', 'MYISAM');
-		$this->setTableName('files');
-		
-       	$this->hasColumn('title', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('publisher', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('language', 'string', 40, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('relation', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('coverage', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('rights', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('source', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('subject', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('creator', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('additional_creator', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('date', 'date', null);
-        $this->hasColumn('added', 'timestamp', null);
-        $this->hasColumn('modified', 'timestamp', null);
-        $this->hasColumn('item_id', 'integer', null, array('range'=>array('1')));
-        $this->hasColumn('format', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('transcriber', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('producer', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('render_device', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('render_details', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('capture_date', 'timestamp', null);
-        $this->hasColumn('capture_device', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('capture_details', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('change_history', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('watermark', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('authentication', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('encryption', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('compression', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('post_processing', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('archive_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('original_filename', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('size', 'integer', null, array('default'=>'0', 'notnull' => true));
-        $this->hasColumn('mime_browser', 'string');
-        $this->hasColumn('mime_os', 'string');
-        $this->hasColumn('type_os', 'string');
-		
-		$this->hasColumn('has_derivative_image', 'boolean', null, array('default'=>'0', 'notnull'=>true));
-		
-        $this->hasColumn('lookup_id', 'integer');
-		
-		$this->index('item', array('fields' => array('item_id')));
-    }
 	
-	public function get($name)
+	protected $_related = array('Extended'=>'getExtendedMetadata');
+	
+	public function __get($name)
 	{
-		if($this->hasRelation($name)) {
-			return parent::get($name);
-		}else {
-			//Try to obtain extended metadata
-			if(empty($this->extendedMetadata)) {
-				$this->extendedMetadata = $this->getExtendedMetadata();
-			}
-			$metadata = $this->extendedMetadata[$name];
-			
-			if($unserialized = unserialize($metadata)) {
-				$value = $unserialized;
-			}else {
-				$value = $metadata;
-			}
-			return $value;
+		$ext = $this->getExtendedMetadata();
+
+		if($data = $ext[$name]) {
+			return $data;
 		}
-		
-		return parent::get($name);
 	}
 	
-	public function preInsert()
+	protected function preInsert()
 	{
 		$this->added = date("Y-m-d H:i:s");
-		$this->modified = date("Y-m-d H:i:s");
+		$this->modified = date("Y-m-d H:i:s");		
 	}
 	
-	public function preUpdate()
+	protected function preUpdate()
 	{
 		$this->modified = date("Y-m-d H:i:s");
 	}
 	
-	protected function preCommitForm(&$post, $options)
+	protected function preSaveForm(&$post)
 	{
 		$immutable = array(
 			'id', 
@@ -133,23 +104,31 @@ class File extends Omeka_Record {
 			return;
 		}
 		
-		$lookupTable = $this->getTableName('FileMetaLookup');
-		$fileTable = $this->getTableName();
-		$sql = "SELECT table_name FROM $lookupTable l WHERE l.id = {$this->lookup_id}";
+		$db = get_db();
+		
+		$lookupTable = $db->FileMetaLookup;
+		$fileTable = $db->File;
+		$sql = "SELECT table_name FROM $lookupTable l WHERE l.id = ? LIMIT 1";
 		
 		//We've got the name of the table that holds the extended data
-		$metadataTable = $this->execute($sql, array(), true);
+		$metadataTable = $db->fetchOne($sql, array($this->lookup_id));
 		
+		$metadataTable = $db->prefix . $metadataTable;
 		
-		$metadata = $this->execute("SELECT d.* FROM $metadataTable d WHERE d.file_id = ?", array($this->id));
-		return $metadata[0];
-	}
-	
-	public function isPublic()
-	{
-		$sql = "SELECT COUNT(*) FROM items i WHERE i.id = ? AND i.public = 1";
-		$count = $this->execute($sql,array($this->item_id), true);
-		return ($count > 0);
+		$metadata = $db->query("SELECT d.* FROM $metadataTable d WHERE d.file_id = ? LIMIT 1", array((int) $this->id))->fetch();
+		
+		$prepared = array();
+		
+		//We have to unserialize some of these extended metadata values
+		foreach ($metadata as $key => $value) {
+			
+			if($unserialized = @unserialize($value)) {
+				$value = $unserialized;
+			}
+			$prepared[$key] = $value;
+		}
+				
+		return $prepared;
 	}
 	
 	/**
@@ -281,29 +260,33 @@ class File extends Omeka_Record {
 				
 				$this->processExtendedMetadata($path);
 		} else {
-			// Ignore error '4' - no file uploaded and error '0' - file uploaded correctly
 				switch( $error ) {
 
 					// 1 - File exceeds upload size in php.ini
 					// 2 - File exceeds upload size set in MAX_FILE_SIZE
-					case( '1' ):
-					case( '2' ):
+					case UPLOAD_ERR_INI_SIZE:
+					case UPLOAD_ERR_FORM_SIZE:
 						throw new Exception(
 							$_FILES[$file_form_name]['name'][$key] . ' exceeds the maximum file size.' . $_FILES[$file_form_name]['size'][$key]
 						);
 					break;
 					
 					// 3 - File partially uploaded
-					case( '3' ):
+					case UPLOAD_ERR_PARTIAL:
 						throw new Exception(
 							$_FILES[$file_form_name]['name'][$key] . ' was only partially uploaded.  Please try again.'
 						);
 					break;
 					
+					//
+					case UPLOAD_ERR_NO_FILE:
+						throw new Exception( 'No file was uploaded!' );
+					break;
+					
 					// 6 - Missing Temp folder
 					// 7 - Can't write file to disk
-					case( '6' ):
-					case( '7' ):
+					case UPLOAD_ERR_NO_TMP_DIR:
+					case UPLOAD_ERR_CANT_WRITE:
 						throw new Exception(
 							'There was a problem saving the files to the server.  Please contact an administrator for further assistance.'
 						);
@@ -349,18 +332,36 @@ class File extends Omeka_Record {
 		$mime_type = $id3->info['mime_type'];
 		
 		//Get the lookup ID for the correct table
-		$lookupTable = $this->getTableName('FileMetaLookup');
-		$sql = "SELECT * FROM $lookupTable WHERE mime_type = ? LIMIT 1";
-		$res = $this->execute($sql, array($mime_type));
-		
+		$db = get_db();
+		$sql = "SELECT * FROM  $db->FileMetaLookup WHERE mime_type = ? LIMIT 1";
+		$res = $db->query($sql, array($mime_type))->fetchAll();
+				
 		//Generate the extended info
 		if(count($res)) {
 			$this->lookup_id = $res[0]['id'];
 			//Have the correct class
 			$extendedClass = $res[0]['table_class'];
+			
+			$metadata = new $extendedClass;
+					
 			$info = $id3->info;
-			$this->$extendedClass->generate($info, $path);
+			$metadata->generate($info, $path);
+			
+			$this->Extended = $metadata;
 		}		
+	}
+	
+	/**
+	 * Save extended metadata if we got it
+	 *
+	 * @return void
+	 **/
+	protected function postSave()
+	{
+		if($this->Extended instanceof Omeka_Record) {
+			$this->Extended->file_id = $this->id;
+			$this->Extended->save();
+		}
 	}
 	
 	protected function checkImage( $new_dir, $old_path, $convertPath) {
@@ -427,7 +428,7 @@ class File extends Omeka_Record {
 		return ( $convert_return == 0 );
 	}
 	
-	public function deleteFiles() {
+	public function unlinkFile() {
 		$files = array( 
 			$this->getPath('fullsize'), 
 			$this->getPath('thumbnail'), 
@@ -438,9 +439,9 @@ class File extends Omeka_Record {
 			if( file_exists($file) && !is_dir($file) ) unlink($file);
 		}
 	}
-	public function delete() {
-		$this->deleteFiles();
-		parent::delete();
+	
+	protected function _delete() {
+		$this->unlinkFile();
 	}
 }  	 
 

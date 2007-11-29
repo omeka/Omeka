@@ -2,10 +2,16 @@
 
 <h1>Login</h1>
 	<?php
-	if (isset($errorMessage)) {
-		echo '<div class="error">Error: <span>'.$errorMessage.'</span></div>';
-	}
-	?>
+	if (isset($errorMessage)):
+		?><div class="error">Error: <span>
+			
+		<?php 
+			foreach ($errorMessage as $msg): ?>
+			<?php echo $msg; ?>
+		<?php endforeach; ?>
+		</span></div>
+	<?php endif; ?>
+	
 <form id="login-form" action="<?php echo uri('users/login');?>" method="post" accept-charset="utf-8">
 	<fieldset>
 		<div class="field">

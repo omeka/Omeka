@@ -12,14 +12,6 @@ class TypesController extends Omeka_Controller_Action
 		$this->_table = $this->getTable('Type');
 	}
 
-	protected function loadFormData() 
-	{
-		$id = $this->getRequest()->getParam('id');
-		$type = $this->getTable('Type')->find($id);
-		$metafields = $this->getTable('Metafield')->findMetafieldsWithoutType($type);
-		$this->_view->assign(compact('metafields'));
-	}
-	
 	public function metafieldsAction()
 	{
 		return $this->getTable('Metafield')->findAll();

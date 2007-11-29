@@ -12,9 +12,7 @@ class Omeka_Logger
 	
 	private static $logSql = false;
 	private static $logErrors = false;
-	
-	private static $lastSqlQueryTime = APP_START;
-	
+		
 	private static $totalQueryTime = 0;
 	private static $totalQueries = 0;
 	
@@ -42,14 +40,9 @@ class Omeka_Logger
 	public static function logSQL( $sql, $params = array() )
 	{
 		if(self::$logSql) {
-			$execTime = microtime(true) - self::$lastSqlQueryTime;
 			self::$totalQueryTime += $execTime;
 			self::$totalQueries++;
-			$final = '========================' . "\n";
-		
-			if($execTime > 0.5) {
-				$final .= 'FLAGGED: SLOW QUERY'."\n";
-			}
+			$final = '========================' . "\n";		
 			$final .= 'Type: SQL' . "\n";
 			$final .= 'Date: ' . date( DATE_ISO8601, time() ) . "\n";
 			$final .= $sql . "\n";
@@ -59,7 +52,6 @@ class Omeka_Logger
 			$final .= 'Execution time: '.$execTime. "\n";
 			$final .= '========================' . "\n";
 			file_put_contents( self::$sqlLog, $final, FILE_APPEND );
-			self::$lastSqlQueryTime = microtime(true);
 		}
 	}
 	

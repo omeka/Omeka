@@ -4,45 +4,43 @@
  * Adaptation of the Rails Acts_as_taggable
  * @package: Omeka
  */
-class Taggable
-{
-	protected $record;
-	
+class Taggable extends Omeka_Record_Module
+{	
 	public function __construct(Omeka_Record $record) {
 
 		$this->record = $record;
 		
 		$this->type = get_class($record);
 		
-		$this->tagTable = Doctrine_Manager::getInstance()->getTable('Tag');
+		$this->tagTable = get_db()->getTable('Tag');
 		
-		$this->joinTable = Doctrine_Manager::getInstance()->getTable('Taggings');
+		$this->joinTable = get_db()->getTable('Taggings');
 		
-		$this->conn = Doctrine_Manager::getInstance()->connection();
+		$this->conn = get_db();
+	}
+		
+	public function preDelete()
+	{
+		$this->deleteTaggings();
 	}
 	
 	public function deleteTaggings()
 	{
 		$id = (int) $this->record->id;
 		
+		$db = get_db();
+		
 		//What table should we be deleting taggings for
-		$model_table = $this->record->getTableName();
-		
-		//Polymorphic 'type' column in this table
-		$type = (string) get_class($this->record);
-		
+		$record_type = $this->type;
+		$model_table = $db->$record_type;
+
 		//Delete everything from the taggings table
 		
-		$taggings = "DELETE taggings FROM taggings
-		LEFT JOIN $model_table ON taggings.relation_id = $model_table.id
-		WHERE $model_table.id = $id AND taggings.type = '$type'";
+		$delete = "DELETE $db->Taggings FROM $db->Taggings
+		LEFT JOIN $model_table ON $db->Taggings.relation_id = $model_table.id
+		WHERE $model_table.id = $id AND $db->Taggings.type = '$record_type'";
 		
-		$this->execute($taggings);
-	}
-		
-	public function __call($m, $a)
-	{
-		return call_user_func_array( array($this->record, $m), $a);
+		$db->exec($delete);
 	}
 	
 	public function getTaggings()
@@ -86,7 +84,11 @@ class Taggable
 		
 		$tagging = $this->joinTable->findBy($findWith);
 		
-		return $tagging->delete();
+		$tagging = current($tagging);
+				
+		if($tagging) {		
+			return $tagging->delete();
+		}		
 	}
 			
 	/** If the $tag were a string and the keys of Tags were just the names of the tags, this would be:
@@ -100,22 +102,6 @@ class Taggable
 		return $count > 0;
 	}	
 		
-	public function tagString($wrap = null, $delimiter = ',') {
-		$string = '';
-		$tags = $this->record->Tags;
-		
-		foreach( $this->record->Tags as $key => $tag )
-		{
-			if($tag->exists()) {
-				$name = $tag->__toString();
-				$string .= (!empty($wrap) ? preg_replace("/$name/", $wrap, $name) : $name);
-				$string .= ( ($key+1) < $this->record->Tags->count() ) ? $delimiter.' ' : '';
-			}
-		}
-		
-		return $string;
-	}
-
 	public function addTags($tags, $entity, $delimiter = ',') {
 		if(!$this->record->id) {
 			throw new Exception( 'A valid record ID # must be provided when tagging.' );
@@ -131,18 +117,19 @@ class Taggable
 		}
 		
 		foreach ($tags as $key => $tagName) {
-			$tag = $this->tagTable->findOrNew($tagName);
+			$tag = $this->tagTable->findOrNew(trim($tagName));
 			
-			$tag->save();
+			if(!$tag->exists()) {
+				$tag->save();
+			}
 			
 			$join = new Taggings;
 						
 			$join->tag_id = $tag->id;
 			$join->relation_id = $this->record->id;
 			$join->type = $this->type;
-			$join->Entity = $entity;
-			
-			$join->trySave();			
+			$join->entity_id = $entity->id;
+			$join->save();			
 		}
 	}
 

@@ -24,7 +24,7 @@ class EntitiesController extends Omeka_Controller_Action
 		//Check the permissions of the user associated with this entity
 		$user = $entity->User;
 		
-		if($user->exists()) {
+		if($user and $user->exists()) {
 			//If we are trying to delete the entity that belongs to a super user
 			if( ($user->role == 'super') and !$this->isAllowed('deleteSuperUser') ) {
 				$this->flash('You are not allowed to delete names that are associated with super users!');
@@ -48,9 +48,10 @@ class EntitiesController extends Omeka_Controller_Action
 	public function addAction()
 	{
 		$e = new Entity;
+		
 		try {
 						
-			if($e->commitForm($_POST)) {
+			if($e->saveForm($_POST)) {
 				
 				$this->flash('Successfully added!');
 				
@@ -68,9 +69,7 @@ class EntitiesController extends Omeka_Controller_Action
 		require_once 'Person.php';
 		require_once 'Institution.php';
 		try {
-			
-			$q = new Doctrine_Query;
-			
+						
 			if($type = $this->_getParam('displayType')) {
 				if(!in_array(strtolower($type), array('person', 'institution'))) {
 					throw new Exception( 'That type does not exist.' );
@@ -83,31 +82,36 @@ class EntitiesController extends Omeka_Controller_Action
 				$type = 'Entity';
 			}
 					
-			$q->parseQuery("SELECT e.* FROM $type e");
+			$select = new Omeka_Select;
+			$db = get_db();
+			
+			//If we are not allowed to display email addresses, don't pull it from the DB
+			if(!$this->isAllowed('displayEmail')) {
+				$fields = "e.first_name, e.middle_name, e.last_name, e.institution, e.parent_id, e.type";
+			}else {
+				$fields = "e.*";
+			}
+			
+			$select->from("{$db->Entity} e", $fields);
 			
 			
 			if($parent = $this->_getParam('parent')) {
 				if(!is_numeric($parent)) {
 					throw new Exception( 'Parent must be a valid institution or person' );
 				}
-				$q->addWhere('e.id = :parent', compact('parent') );
+				$select->where('e.id = ?', $parent );
 				
 				//Make sure that we use the hierarchical view for this one
 				$this->_setParam('hierarchy', true);
 				$_GET['hierarchy'] = true;
 			}
 			
-			
 			if($this->_getParam('hierarchy')) {
-				$q->addWhere('e.parent_id IS NULL');
+				$select->where('e.parent_id IS NULL');
 			}
 			
+			$entities = $db->getTable('Entity')->fetchObjects($select);
 			
-			$entities = $q->execute();
-			
-			if(!$this->isAllowed('displayEmail')) {
-				$entities->hideField('email');
-			}
 		} catch (Exception $e) {
 			$this->flash($e->getMessage());
 		}

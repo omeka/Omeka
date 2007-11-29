@@ -1,24 +1,45 @@
 <?php 
-	
+Mock::generate('MetatextTable');
+
 class ItemTestCase extends OmekaTestCase
 {
 	public function setUp()
 	{
-		parent::setUp('Item');
+		include 'dependencies.php';
+		
+		$mtTable = new MockMetatextTable;
+		
+		$mt = new Metatext;
+		$mt->text = "This is text";
+		
+		$otherMt = new Metatext;
+		$otherMt->text = "Whatever";
+		
+		//Assume that MetatextTable::findByItem() returns this arbitrary data for 2 metafields
+		$mtTable->setReturnValue('findByItem', array("Bazfoo's Metafield"=>$mt, "Text"=>$otherMt));
+		
+		$this->db->setTable('Metatext', $mtTable);		
 	}
 	
-	public function testSetMetatext() {
-		$i = $this->fixtures['Valid Item'];
+	public function testGetMetatext()
+	{
+		$item = new Item;
 		
-		$mt = $i->getMetatext("Bazfoo's Metafield");
+		$mt = $item->getMetatext("Bazfoo's Metafield");
 		
-		$this->assertFalse($mt);
+		$this->assertEqual($mt, "This is text");
+	}
+	
+
+	public function testSetMetatext()
+	{	
+		$item = new Item;
 		
-		$i->setMetatext("Bazfoo's Metafield", "This is the metatext for Bazfoo's Metafield");
+		$item->setMetatext("Bazfoo's Metafield", "Modified text");
 		
-		$mt = $i->getMetatext("Bazfoo's Metafield");
+		$mt = $item->getMetatext("Bazfoo's Metafield");
 		
-		$this->assertNotNull($mt);
+		$this->assertEqual($mt, "Modified text");
 	}
 }
  

@@ -1,11 +1,17 @@
 <?php
-//Until Omeka's memory usage issues get resolved, here is a temporary solution
-ini_set('memory_limit', '32M');
-
 require_once 'globals.php';
-require_once 'Doctrine.php';
-//require_once 'Doctrine.compiled.php';
-spl_autoload_register(array('Doctrine', 'autoload'));
+
+//Strip out those bastard slashes
+if(get_magic_quotes_gpc()) {
+	$_POST = stripslashes_deep($_POST);
+	$_REQUEST = stripslashes_deep($_REQUEST);
+	$_GET = stripslashes_deep($_GET);
+}
+
+require_once 'Omeka.php';
+spl_autoload_register(array('Omeka', 'autoload'));
+
+require_once 'Zend/Registry.php';
 
 //Register the various path names so they can be accessed by the app
 Zend_Registry::set('path_names', $site);
@@ -24,8 +30,13 @@ try {
 	install_notification();
 }
 
+$db_obj = new Omeka_Db($dbh, $db->prefix);
+
+
+Zend_Registry::set('db', $db_obj);
+
 //Pull the options from the DB
-$option_stmt = $dbh->query('SELECT * FROM options');
+$option_stmt = $dbh->query("SELECT * FROM $db_obj->Option");
 if(!$option_stmt) {
 	install_notification();
 }
@@ -41,33 +52,14 @@ $options = array();
 foreach ($option_array as $opt) {
 	$options[$opt['name']] = $opt['value'];
 }
+
 Zend_Registry::set('options', $options);
-
-Doctrine_Manager::connection($dbh);
-
-// sets a final attribute validation setting to true
-$manager = Doctrine_Manager::getInstance();
-$manager->setAttribute(Doctrine::ATTR_VLD, true);
-
-//@todo Uncomment this prior to production release for increase in speed
-$manager->setAttribute(Doctrine::ATTR_FETCHMODE, Doctrine::FETCH_LAZY);
-$manager->setAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER, true);
-
-// Register the Doctrine Manager
-Zend_Registry::set('doctrine', $manager);
-
-//Check the current migration # in the DB against the hardcoded #
-//Migrate the DB if necessary and exit
-if(!isset($options['migration'])) {
-	$dbh->query("INSERT INTO `options` (name, value) VALUES ('migration',0)");
-	$options['migration'] = 0;
-}
 
 if((int) $options['migration'] < OMEKA_MIGRATION) {
 	$fromVersion = $options['migration'] or $fromVersion = 0;
 	$toVersion = OMEKA_MIGRATION;
 	require_once 'Omeka/Upgrader.php';
-	$upgrader = new Omeka_Upgrader($manager, $fromVersion, $toVersion);
+	$upgrader = new Omeka_Upgrader($fromVersion, $toVersion);
 	exit;
 }
 
@@ -98,10 +90,6 @@ Zend_Registry::set('acl', $acl);
 require_once 'plugins.php';
 $plugin_broker = new PluginBroker;
 
-$chainListeners = new Doctrine_EventListener_Chain();
-
-$manager->setAttribute(Doctrine::ATTR_LISTENER, $chainListeners);
-
 
 // Use Zend_Config_Ini to store the info for the routes and db ini files
 require_once 'Omeka.php';
@@ -124,7 +112,7 @@ Zend_Registry::set('auth', $auth);
 
 
 // Initialize some stuff
-$front = Omeka_Controller_Front::getInstance();
+$front = Zend_Controller_Front::getInstance();
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig(Zend_Registry::get('routes_ini'), 'routes');
 fire_plugin_hook('add_routes', $router);
@@ -133,6 +121,8 @@ $router->setFrontController($front);
 $front->setRouter($router);
 
 $front->getDispatcher()->setFrontController($front);
+
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 
 //Disable the ViewRenderer until we can refactor Omeka codebase to use it
 $front->setParam('noViewRenderer', true);
@@ -150,7 +140,7 @@ $response = new Zend_Controller_Response_Http();
 //Zend_Registry::set('response', $response);
 $front->setResponse($response);
 
-$front->throwExceptions((boolean) true);
+//$front->throwExceptions((boolean) true);
 
 //$front->addControllerDirectory(array('default'=>CONTROLLER_DIR));
 $front->addControllerDirectory(CONTROLLER_DIR);

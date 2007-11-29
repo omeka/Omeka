@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once 'Collection.php';
 require_once 'Type.php';
 require_once 'User.php';
@@ -7,407 +7,467 @@ require_once 'Tag.php';
 require_once 'Taggable.php';
 require_once 'Taggings.php';
 require_once 'Metatext.php';
-require_once 'ItemsPages.php';
-require_once 'Section.php';
-require_once 'ItemsRelations.php';
+require_once 'MetatextTable.php';
+require_once 'Exhibit.php';
 require_once 'Relatable.php';
 require_once 'ItemTable.php';
-require_once 'ItemTaggings.php';
-require_once 'ExhibitTaggings.php';
+require_once 'ItemPermissions.php';	
 /**
- * @package Omeka
- * 
- **/
+* Item
+*/
 class Item extends Omeka_Record
 {		
-	protected $error_messages = array(	'title' => array('notblank' => 'Item must be given a title.'));
-	
-	protected $constraints = array('collection_id','type_id','user_id');
-	
-	protected $_metatextToSave = array();
-			
-	public function setUp() {
-		$this->hasOne("Collection","Item.collection_id");
-		$this->hasOne("Type","Item.type_id");
-		$this->ownsMany("File as Files","File.item_id");
-		$this->ownsMany("Metatext", "Metatext.item_id");
-		$this->ownsMany("ItemTaggings", "ItemTaggings.relation_id");
-	//	$this->hasMany("Tag as Tags", "ItemTaggings.tag_id");
-
-		$this->ownsMany("ItemsPages","ItemsPages.item_id");
-		$this->ownsMany("ItemsRelations", "ItemsRelations.relation_id");
-//		$this->hasMany("SectionPage as ExhibitPages", "ItemsPages.page_id");
-		
-		parent::setUp();
-	}
-	
-	public function construct()
-	{
-		$this->_strategies[] = new Taggable($this);
-		$this->_strategies[] = new Relatable($this);
-	}
-	
-	public function setTableDefinition() {
-		
-		$this->option('type', 'MYISAM');
-		$this->setTableName('items');
-		
-		$this->hasColumn("title","string",255, array('notnull'=>true, 'default'=>''));
-        $this->hasColumn('publisher', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('language', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('relation', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('spatial_coverage', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('rights', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('description', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('source', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('subject', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('creator', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('additional_creator', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('date', 'date');
-        $this->hasColumn('type_id', 'integer');
-        $this->hasColumn('collection_id', 'integer');
-        $this->hasColumn('contributor', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('rights_holder', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('provenance', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('citation', 'string', null, array('notnull' => true, 'default'=>''));
-        $this->hasColumn('temporal_coverage_start', 'date');
-        $this->hasColumn('temporal_coverage_end', 'date');
-		$this->hasColumn("featured", "boolean", null,array('notnull' => true, 'default'=>'0'));
-		$this->hasColumn("public", "boolean", null,array('notnull' => true, 'default'=>'0'));		
-		
-		$this->index('featured', array('fields' => array('featured')));
-		$this->index('public', array('fields' => array('public')));
-		$this->index('type', array('fields' => array('type_id')));
-		$this->index('coll', array('fields' => array('collection_id')));
-		
-		$this->index('search_all', array('fields' => array( 
-												'title', 
-												'publisher', 
-												'language', 
-												'relation', 
-												'spatial_coverage', 
-												'rights', 
-												'description', 
-												'source', 
-												'subject', 
-												'creator', 
-												'additional_creator', 
-												'contributor', 
-												'rights_holder', 
-												'provenance', 
-												'citation'),
-											'type' => 'fulltext'));
-		$this->index('title_search', array( 'fields' => 'title', 'type' => 'fulltext'));
- 		$this->index('publisher_search', array( 'fields' => 'publisher', 'type' => 'fulltext'));
-		$this->index('language_search', array( 'fields' => 'language', 'type' => 'fulltext'));
- 		$this->index('relation_search', array( 'fields' => 'relation', 'type' => 'fulltext'));
- 		$this->index('spatial_coverage_search', array( 'fields' => 'spatial_coverage', 'type' => 'fulltext'));
- 		$this->index('rights_search', array( 'fields' => 'rights', 'type' => 'fulltext'));
- 		$this->index('description_search', array( 'fields' => 'description', 'type' => 'fulltext'));
- 		$this->index('source_search', array( 'fields' => 'source', 'type' => 'fulltext'));
- 		$this->index('subject_search', array( 'fields' => 'subject', 'type' => 'fulltext'));
- 		$this->index('creator_search', array( 'fields' => 'creator', 'type' => 'fulltext'));
- 		$this->index('additional_creator_search', array( 'fields' => 'additional_creator', 'type' => 'fulltext'));
- 		$this->index('contributor_search', array( 'fields' => 'contributor', 'type' => 'fulltext'));
- 		$this->index('rights_holder_search', array( 'fields' => 'rights_holder', 'type' => 'fulltext'));
- 		$this->index('provenance_search', array( 'fields' => 'provenance', 'type' => 'fulltext'));
- 		$this->index('citation_search', array( 'fields' => 'citation', 'type' => 'fulltext'));
-									
-	}
+	public $title;
+	public $publisher = '';
+	public $language = '';
+	public $relation = '';
+	public $spatial_coverage = '';
+	public $rights = '';
+	public $description = '';
+	public $source = '';
+	public $subject = '';
+	public $creator = '';
+	public $additional_creator = '';
+	public $date;
+	public $type_id;
+	public $collection_id;
+	public $contributor = '';
+	public $rights_holder = '';
+	public $provenance = '';
+	public $citation = '';
+	public $temporal_coverage_start;
+	public $temporal_coverage_end;
+	public $featured = 0;
+	public $public = 0;	
 	
 	/**
-	 * @duplication
-	 * @see Exhibit::postInsert()
-	 * @since 9/13/07
-	 **/
-	//Make sure you set the entity relationships
-	public function postInsert()
-	{
-		$entity = Omeka::loggedIn()->Entity;
-		
-		$this->setAddedBy($entity);
-	}
-	
-	//Make sure you set the entity relationships
-	public function postUpdate()
-	{
-		$entity = Omeka::loggedIn()->Entity;
-		
-		$this->setModifiedBy($entity);
-	}
-	
-	public function delete()
-	{
-		fire_plugin_hook('delete_item', $this);
-		
-		$this->deleteTaggings();
-		$this->deleteRelations();
-		
-		$id = (int) $this->id;
-		
-		//Delete all of the physical files
-		foreach ($this->Files as $file) {
-			$file->deleteFiles();
-		}
-		
-		//Delete metatext, files, items
-		$delete = "DELETE metatext, files, items FROM items
-		LEFT JOIN metatext ON metatext.item_id = items.id
-		LEFT JOIN files ON files.item_id = items.id
-		WHERE items.id = $id";
-		
-		$this->execute($delete);
-		
-		//Update the items_section_pages table to remove invalid item IDs
-		$update = "UPDATE items_section_pages SET item_id = NULL WHERE item_id = $id";
-		
-		$this->execute($update);
-	}
-	
-	/**
-	 * Optimized queries for obtaining related elements
 	 *
-	 * @return mixed
+	 * @see Item::setMetatext()
+	 *
+	 * @return void
 	 **/
-	public function get($name) {
-		switch ($name) {
-			case 'TypeMetadata':
-				/*This is the simplified version of the metatext field*/
-				$mt = $this->getTypeMetadata(true);
-				return $mt;
-					
-			case 'PluginTypeMetadata':
-				/*This returns type metadata for plugins*/
-				$mt = $this->getPluginTypeMetadata(true);
-				return $mt;
+	protected $_metatext;
+	
+	protected $_related = array(
+		'Collection'=>'getCollection', 
+		'TypeMetadata'=>'getTypeMetadata', 
+		'Tags'=>'getTags',
+		'Type'=>'getType',
+		'FormTypeMetadata'=>'getFullTypeMetadata',
+		'Files'=>'getFiles');
+
+	protected function construct()
+	{
+		$this->_modules[] = new Taggable($this);
+		$this->_modules[] = new Relatable($this);
+	}
+
+	//Pulling in related data
+	protected function getCollection()
+	{		
+			$lk_id = (int) $this->collection_id;
+			return $this->getTable('Collection')->find($lk_id);			
+	}
+		
+	protected function getTypeMetadata()
+	{
+		return $this->getTable('Metatext')->findTypeMetadata($this, true);
+	}
+	
+	protected function getFullTypeMetadata()
+	{
+		return $this->getTable('Metatext')->findTypeMetadata($this, false);
+	}
+	
+	protected function getType()
+	{
+		return $this->getTable('Type')->find($this->type_id);
+	}
+	
+	protected function getFiles()
+	{
+		return $this->getTable('File')->findByItem($this->id);
+	}
+	
+	protected function getUserWhoCreated()
+	{
+		$creator = $this->getRelatedEntities('added');
+		
+		if(is_array($creator)) $creator = current($creator);
+		
+		return $creator;
+	}
+	
+	/**
+	 * Stop the form submission if we are using the non-JS form to change the type or add files
+	 *
+	 * Also, do not allow people to change the public/featured status of an item unless they got permission
+	 *
+	 * @return void
+	 **/
+	protected function preSaveForm(&$post)
+	{
+
+		if(!empty($post['change_type'])) return false;
+		if(!empty($post['add_more_files'])) return false;
+		
+		if(!$this->userHasPermission('makePublic')) {
+			unset($post['public']);
+		}
+		
+		if(!$this->userHasPermission('makeFeatured')) {
+			unset($post['featured']);
+		}
+	}
+	
+	private function deleteFiles($ids = null) 
+	{
+		if(!is_array($ids)) return false;
+		
+		//Retrieve file objects so that we have the benefit of the plugin hooks
+		foreach ($ids as $file_id) {
+			$file = $this->getTable('File')->find($file_id);
+			$file->delete();
+		}		
+	}
+	
+	/**
+	 * Save metatext, tags, files provided from the form
+	 * Basically we can't do any of this stuff until the item has a valid item ID
+	 * 
+	 * @return void
+	 **/
+	protected function postSaveForm($post)
+	{
+		$this->saveFiles();
+		
+		//Removing tags from other users
+		if($this->userHasPermission('untagOthers')) {
 			
-			case 'PluginMetadata':
-				$mt = $this->getPluginMetadata(true);
-				return $mt;
-				
-			case 'added':
-			case 'modified':
-				return $this->timeOfLastRelationship($name);
-				break;
-				
-			case 'Tags':
-				return $this->getTags();
-				
-			default:
-				return parent::get($name);
-				break;
+			if(array_key_exists('remove_tag', $post)) {
+				$this->removeOtherTag($post['remove_tag']);
+			}
+		}
+		
+		//Delete files that have been designated by passing an array of IDs through the form
+		$this->deleteFiles($post['delete_files']);
+		
+		//Change the tags (remove some, add some)
+		if(array_key_exists('modify_tags', $post) || !empty($post['tags'])) {
+			$user = Omeka::loggedIn();
+			$entity = $user->Entity;
+			if($entity) {
+				$this->applyTagString($post['tags'], $entity);
+			}
+		}
+		
+		//Fire a plugin hook specifically for items that have had their 'public' status changed
+		if(isset($post['public']) and ($this->public == '1') ) {
+			fire_plugin_hook('make_item_public', $this);
+		}
+		
+		//Save metatext from the form
+		if(!empty($post['metafields'])) {
+			foreach ($post['metafields'] as $metafield_id => $mt_a) {
+				$mt_obj = get_db()->getTable('Metatext')->findByItemAndMetafield($this->id, $metafield_id);
+			
+				$mt_obj->text = (string) $mt_a['text'];
+				$mt_obj->save();
+			}			
 		}
 	}
 	
 	/**
+	 * Save metatext provided via Item::setMetatext
+	 *
+	 * @return void
+	 **/
+	protected function postSave()
+	{
+		$this->saveMetatext();
+	}
+	
+	private function removeOtherTag($tag_id)
+	{
+		//Special method for untagging other users' tags
+		
+		$tagToDelete = $this->getTable('Tag')->find($tag_id);
+		$current_user = Omeka::loggedIn();
+		if($tagToDelete) {
+			fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $current_user);
+	
+			//delete the tag from the Item
+			$tagsDeleted = $this->deleteTags($tagToDelete, null, true);
+		}
+	}
+	
+	/**
+	 * All of the custom code for deleting an item
+	 *
+	 * @return void
+	 **/
+	protected function _delete()
+	{	
+		//Delete files one by one
+		$files = $this->Files;
+		
+		foreach ($files as $file) {
+			$file->delete();
+		}
+		
+		//Delete metatext
+		$metatext = get_db()->getTable('Metatext')->findByItem($this->id);
+		
+		foreach ($metatext as $entry) {
+			$entry->delete();
+		}
+		
+		//Update the exhibits to get rid of all references to the item anywhere in there
+		$db = get_db();
+		
+		$update = "UPDATE $db->ExhibitPageEntry SET item_id = NULL WHERE item_id = ?";
+		$db->exec($update, array($this->id));
+	}
+	
+	private function saveFiles()
+	{
+		if(!empty($_FILES["file"]['name'][0])) {
+			//Handle the file uploads
+			foreach( $_FILES['file']['error'] as $key => $error )
+			{ 
+				try{
+					$file = new File();
+					$file->upload('file', $key);
+					$file->item_id = $this->id;
+					$file->save();
+					fire_plugin_hook('post_upload_file', $file, $this);
+				}catch(Exception $e) {
+					
+					//If the file entry isn't persistent in DB for some reason, 
+					//make sure to remove orphaned file
+					if(!$file->exists()) {
+						$file->unlinkFile();
+					}
+//					$conn->rollback();
+					throw $e;
+				}
+			}
+		}		
+	}	
+	
+	/**
+	 * Saves any extended metatext that was set via Item::setMetatext()
+	 *
+	 * @return void
+	 **/
+	private function saveMetatext()
+	{
+		if(!empty($this->_metatext)) {
+			foreach ($this->_metatext as $field => $text) {
+				//Retrieve the metafield_id given the name of the $field
+				$metafield_id = $this->getTable('Metafield')->findIdFromName($field);
+			
+				if(!$metafield_id) {
+					throw new Exception( 'There is no metafield with the name:' . $field . "!" );
+				}
+			
+				//Retrieve a metatext object corresponding to that field for this item
+				$mt_obj = $this->getTable('Metatext')->findByItemAndMetafield($this->id, $metafield_id);
+			
+				$mt_obj->text = $text;
+			
+				//Save the Metatext row
+				$mt_obj->save();
+			}			
+		}
+	}
+	
+	/**
+	 * There is some code duplication in this method, but only a couple of lines.  Remains to see if it is a problem.
+	 *
+	 * @return void
+	 **/
+	protected function filterInput($input)
+	{
+		$options = array('namespace'=>'Omeka_Filter');
+		
+		$filters = array(
+			
+			//Text values
+			'title' 	=> 	'StringTrim',
+			'subject' 	=> 	'StringTrim',
+			'description' 	=> 	'StringTrim',
+			'creator' 	=> 	'StringTrim',
+			'additional_creator' 	=> 	'StringTrim',
+			'source' 	=> 	'StringTrim',
+			'publisher' 	=> 	'StringTrim',
+			'language' 	=> 	'StringTrim',
+			'provenance' 	=> 	'StringTrim',
+			'citation' 	=> 	'StringTrim',
+			'tags' 	=> 	'StringTrim',
+			'contributor' 	=> 	'StringTrim',
+			'rights' 	=> 	'StringTrim',
+			'rights_holder' 	=> 	'StringTrim',
+			'relation' 	=> 	'StringTrim',
+			'spatial_coverage' 	=> 	'StringTrim',
+
+
+			//Date values
+			'date_year' 	=> 	array('StringTrim', 'Digits'),
+			'date_month' 	=> 	array('StringTrim', 'Digits'),
+			'date_day' 	=> 	array('StringTrim', 'Digits'),
+
+			'coverage_start_year' 	=> 	array('StringTrim', 'Digits'),
+			'coverage_start_month' 	=> 	array('StringTrim', 'Digits'),
+			'coverage_start_day' 	=> 	array('StringTrim', 'Digits'),
+
+			'coverage_end_year' 	=> 	array('StringTrim', 'Digits'),
+			'coverage_end_month' 	=> 	array('StringTrim', 'Digits'),
+			'coverage_end_day' 	=> 	array('StringTrim', 'Digits'),
+
+
+			//Foreign keys
+			'type_id' => 'ForeignKey',
+			'collection_id' => 'ForeignKey',
+			
+			//Booleans
+			'public'=>'Boolean',
+			'featured'=>'Boolean');
+			
+		$filter = new Zend_Filter_Input($filters, null, $input, $options);
+
+		$clean = $filter->getUnescaped();
+		
+		//Now handle proper parsing of the date fields
+		
+		//I couldn't get this to jive with Zend's thing so screw them
+		$dateFilter = new Omeka_Filter_Date;
+		
+		$clean['date'] = $dateFilter->filter($clean['date_year'], $clean['date_month'], $clean['date_day']);
+		
+		$clean['temporal_coverage_start'] = $dateFilter->filter($clean['coverage_start_year'], $clean['coverage_start_month'], $clean['coverage_start_day']);
+		
+		$clean['temporal_coverage_end'] = $dateFilter->filter($clean['coverage_end_year'], $clean['coverage_end_month'], $clean['coverage_end_day']);
+		
+		
+		//Ok now let's process the metafields
+		
+		if(!empty($clean['metafields'])) {
+			foreach ($clean['metafields'] as $key => $mf) {
+				$clean['metafields'][$key] = array_map('trim', $mf);
+			}			
+		}
+		
+		//Now, happy shiny user input
+		return $clean;		
+	}
+	
+	public function hasFiles()
+	{
+		$db = get_db();
+		$sql = "SELECT COUNT(f.id) FROM $db->File f WHERE f.item_id = ?";
+		$count = (int) $db->fetchOne($sql, array((int) $this->id));
+		
+		return $count > 0;
+	}
+	
+	/**
+	 * Provides an idiom for saving extended metadata outside the context of the form (useful for plugins)
+	 *
+	 * @return void
+	 **/
+	public function setMetatext($field, $value)
+	{
+		$this->_metatext[$field] = $value;
+	}
+	
+	/**
+	 * This will retrieve specific values for metatext.  It does this by retrieving/caching all the available 
+	 * metatext for the item, then checking that for whatever data is desired
+	 *
+	 * @return string|null
+	 **/
+	public function getMetatext($field)
+	{
+		if( !($metatext = $this->getCached('Metatext'))) {
+			$metatext = $this->getTable('Metatext')->findByItem($this->id);
+			
+			$this->addToCache($metatext, 'Metatext');
+		}
+		
+		$obj = $metatext[$field];
+		
+		if($this->_metatext[$field]) {
+			return $this->_metatext[$field];
+		}
+		elseif($obj) {
+			return $obj->text;
+		}
+	}
+	
+	/**
+	 * Easy facade for the Item class so that it almost acts like an iterator
+	 *
+	 * @return Item|false
+	 **/
+	public function previous()
+	{
+		return get_db()->getTable('Item')->findPrevious($this);
+	}
+	
+	public function next()
+	{
+		return get_db()->getTable('Item')->findNext($this);
+	}
+		
+	/**
+	 * Facade for the Exhibit Table's check method to see if an item is contained in an exhibit
+	 *
+	 * @return void
+	 **/
+	public function isInExhibit($exhibit)
+	{
+		return get_db()->getTable('Exhibit')->exhibitHasItem($exhibit->id, $this->id);
+	}
+	
+	//Everything past this is elements of the old code that may be changed or deprecated
+	
+		/**
 	 * Retrieve simply the names of the fields, converted to words and uppercase
 	 *
 	 * @return array
 	 **/
 	public static function fields($prefix=true)
 	{
-		$cols = Doctrine_Manager::getInstance()->getTable('Item')->getColumnNames();
 		
-		//Avoid certain fields because they are DB keys
+		//Hack to the get the list of columns
+		$cols = get_db()->getTable('Item')->getColumns();
+
+		//Avoid certain fields because they are DB keys or protected/private
 		$avoid = array('id', 'type_id', 'collection_id', 'featured', 'public');
-			
+
 		$fields = array();
 		foreach ($cols as $col) {
 			if(in_array($col, $avoid)) continue;
 			
 			//Field name should not have underscores and should be uppercase
-			$field = ucwords(str_replace('_', ' ', $col));
+			$field = humanize($col);
 			
 			$key = $prefix ? 'item_' . $col : $col; 
 			$fields[$key] = $field;
 		}
-		
 		return $fields;
-	}
-	
-	/**
-	 * Retrieve all extended metadata associated with the item (plugin or not)
-	 *
-	 * @return void
-	 **/
-	public function getAllExtendedMetadata($simple = true)
-	{
-		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('all'=>true), $simple);
-	}
-	
-	/**
-	 * Retrieve all plugin metadata associated with this item's type
-	 *
-	 * @return array
-	 **/
-	public function getPluginTypeMetadata($simple = true)
-	{
-		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('plugin'=>true, 'type'=>$this->Type), $simple);
-	}
-	
-	public function getPluginMetadata($simple = true)
-	{
-		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByItem($this, array('plugin'=>true), $simple);
-	}
-	
-	/**
-	 * Retrieve all (non-plugin) type metadata associated with this Item
-	 *
-	 * @return array
-	 **/
-	public function getTypeMetadata($simple = true)
-	{
-		return Doctrine_Manager::getInstance()->getTable('Metatext')->findByType($this, $this->type_id, $simple);
-	}
-	
-	
-	/**
-	 * Will set the metatext for a given metafield 
-	 *
-	 * @return void
-	 **/
-	public function setMetatext($field, $value=null)
-	{
-		//If passed an array, its a metafield name/value pair
-		if(is_array($field)) {
-			$mt = array_merge($this->_metatextToSave, $field);
-		}
-		else {
-			
-			//This is mapped to its implementation in MetatextTable::collectionFromArray
-			$this->_metatextToSave[$field]['name'] = $field;
-			$this->_metatextToSave[$field]['text'] = $value;
-		}
-	}
-	
-	public function saveMetatext($post=null)
-	{
-		$table = Doctrine_Manager::getInstance()->getTable('Metatext');
-		
-		if($post) {
-			//Save the metatext that was posted
-			$posted = $table->collectionFromArray($post, $this);
-			$posted->save();		
-		}
-		
-		//Save the metatext that was set elsewhere
-		$mt = $this->_metatextToSave;
-		
-		if($mt) {
-			$other =  $table->collectionFromArray($mt, $this);
-			$other->save();			
-		}
 	}
 	
 	public function hasThumbnail()
 	{
-		foreach ($this->Files as $k => $file) {
-			if($file->hasThumbnail()) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 * Next() and previous() are facade functions
-	 *
-	 * @return void
-	 **/
-	public function next()
-	{
-		return $this->getNearby('next');
-	}
-	
-	public function previous()
-	{
-		return $this->getNearby('previous');
-	}
-	
-	protected function getNearby($position = 'next')
-	{
-		//If the current item is not persistent in the database, there is no next item
-		if(!$this->exists()) {
-			return false;
-		}
-
-		//Create a Doctrine_Query object, as we need to pull an ActiveRecord object
-		$q = new Doctrine_Query;
-		$q->parseQuery("SELECT i.* FROM Item i");
+		$db = get_db();
 		
-		//If the user does not have permission to show items that are public
-		if(!$this->userHasPermission('showNotPublic')) {
-	
-			//Throw a flag that retrieves only public items
-			$q->addWhere('i.public = 1');
-		}
+		$sql = "SELECT COUNT(f.id) FROM $db->File f WHERE f.item_id = ? AND f.has_derivative_image = 1";
 		
-		//Now add conditions to pull down the item with an ID that is higher/lower than the current one
-		switch ($position) {
-			case 'next':
+		$count = $db->fetchOne($sql, array((int) $this->id));
 			
-				$q->addWhere('i.id > ?', $this->id);
-				$q->addOrderBy('i.id ASC');
-				
-				break;
-			case 'previous':
-			
-				$q->addWhere('i.id < ?', $this->id);
-				$q->addOrderBy('i.id DESC');
-				
-				break;
-			default:
-				throw new Exception( 'Invalid!' );
-				break;
-		}
-		
-		//Now say that we should only retrieve 1 Item
-		$q->limit(1);
-
-		//Execute the query and return the first result
-		return $q->execute()->getFirst();
-	}
-/**
-	 * Process the date info given, return false on invalid date given, otherwise set the appropriate field
-	 *
-	 * @return bool
-	 **/
-	public function processDate($field,$year,$month,$day) 
-	{
-			//Process the date fields, convert to YYYY-MM-DD
-			$date = array();
-			$date[0] = !empty($year) 	? $year 	: '0000';
-			$date[1] = !empty($month) 	? $month 	: '00';
-			$date[2] = !empty($day) 	? $day 		: '00';
-			
-			$mySqlDate = implode('-', $date);
-			
-			//If its a blank thing then its valid I suppose
-			
-			if($mySqlDate == '0000-00-00') {
-					$this->$field = null;
-					return true;
-			}
-			//If day or month is not included, then just check the year
-			if( ($date[2] == '00') or ($date[1] == '00') ) {
-				if($date[0] < 0 or $date[0] > date('Y')) {
-					return false;
-				}
-			}
-			//If somebody provides some random string as input, then it's not valid
-			elseif(!is_numeric($year) or !is_numeric($month) or !is_numeric($day)) 
-			{
-				return false;
-			}
-			//If the date is invalid, return false
-			elseif( !checkdate($date[1], $date[2], $date[0]) ) {
-
-					return false;
-			
-			}
-			
-			$this->$field = $mySqlDate;
-			return true;
+		return $count > 0;
 	}
 	
 	public function getCitation()
@@ -426,214 +486,6 @@ class Item extends Omeka_Record
 	    //$cite .= '('.date('F d Y, g:i a', strtotime($this->added)).')';
 	    return $cite;
 	 }
-	
-	///// METADATA METHODS /////
-		
-	public function getMetatext( $name, $return_text = true ) {	
-		//first check the available metatext
-		$mt = $this->_metatextToSave;
-		
-		if(isset($mt[$name])) {
-			//This whole check for whether or not it is an array is duplicated elsewhere (BAD!!!)
-			$text = is_array($mt[$name]) ? $mt[$name]['text'] : $mt[$name];
-			
-			if($return_text) return $text;
-			echo $text;
-			return;
-		}
-		
-		$all_mt = $this->getAllExtendedMetadata(true);
-		
-		$text = $all_mt[$name];
-		
-		if($return_text) 
-			return $text;
-		
-		echo $text;
-	}
-
-	///// END METADATA METHODS /////
-
-   public function getRandomFileWithImage()
-   {	
-		$dql = "SELECT f.* FROM File f WHERE f.item_id = {$this->id} AND f.has_derivative_image = 1";
-		if($res = $this->executeDql($dql)) {
-			return $res->getFirst();
-		}
-   }
-
-	public static function getRandomFeaturedItem($withImage=true)
-	{
-		if($withImage) {
-			$sql = "SELECT i.id, RAND() as rand 
-					FROM items i INNER JOIN files f ON f.item_id = i.id 
-					WHERE i.featured = 1 AND f.has_derivative_image = 1 ORDER BY rand DESC LIMIT 1";
-		}else {
-			$sql = "SELECT i.id, RAND() as rand 
-					FROM items i INNER JOIN files f ON f.item_id = i.id 
-					WHERE i.featured = 1 ORDER BY rand DESC LIMIT 1";
-		}
-		$conn = Zend_Registry::get( 'doctrine' )->connection();
-
-		$id = $conn->fetchOne($sql);
-		
-		if($id) {
-			return Zend_Registry::get( 'doctrine' )->getTable('Item')->find($id);
-		}
-	}
-
-	public function isInExhibit($exhibit_id)
-	{
-		$iTable = $this->getTableName();
-		$eTable = $this->getTableName('Exhibit');
-		$ipTable = $this->getTableName('ItemsPages');
-		$spTable = $this->getTableName('SectionPage');
-		$sTable = $this->getTableName('Section'); 
-		$sql = "SELECT COUNT(i.id) FROM $iTable i 
-				INNER JOIN $ipTable ip ON ip.item_id = i.id 
-				INNER JOIN $spTable sp ON sp.id = ip.page_id
-				INNER JOIN $sTable s ON s.id = sp.section_id
-				INNER JOIN $eTable e ON e.id = s.exhibit_id
-				WHERE e.id = ? AND i.id = ?";
-				
-		$count = $this->execute($sql, array($exhibit_id, $this->id), true);
-		
-		return ($count > 0);
-	}
-
-	protected function preCommitForm(&$clean, $options)
-	{
-		//Process the separate date fields
-		$validDate = $this->processDate('date',
-							$clean['date_year'],
-							$clean['date_month'],
-							$clean['date_day']);
-							
-		$validCoverageStart = $this->processDate('temporal_coverage_start', 
-							$clean['coverage_start_year'],
-							$clean['coverage_start_month'],
-							$clean['coverage_start_day']);
-							
-		$validCoverageEnd = $this->processDate('temporal_coverage_end', 
-							$clean['coverage_end_year'],
-							$clean['coverage_end_month'],
-							$clean['coverage_end_day']);				
-		
-		//Special method for untagging other users' tags
-		if($this->userHasPermission('untagOthers')) {
-			if(array_key_exists('remove_tag', $clean)) {
-				$tagId = (int) $clean['remove_tag'];
-				$tagToDelete = Doctrine_Manager::getInstance()->getTable('Tag')->find($tagId);
-				$current_user = Omeka::loggedIn();
-				if($tagToDelete) {
-					fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $current_user);
-			
-					//delete the tag from the Item
-					$tagsDeleted = $this->deleteTags($tagToDelete, null, true);
-				}
-			}				
-		}	
-		
-		//Check to see if the date was valid
-		if(!$validDate) {
-			throw new Exception( 'The date provided is invalid.  Please provide a correct date.' );
-		}	
-		
-		//If someone is providing coverage dates, they need to provide both a start and end or neither
-		if( (!$validCoverageStart and $validCoverageEnd) or ($validCoverageStart and !$validCoverageEnd) ) {
-			throw new Exception( 'For coverage, both start date and end date must be specified, otherwise neither may be specified.' );
-		}
-		
-		if(!empty($clean['change_type'])) return false;
-		if(!empty($clean['add_more_files'])) return false;
-		
-		if(!empty($_FILES["file"]['name'][0])) {
-			//Handle the file uploads
-			foreach( $_FILES['file']['error'] as $key => $error )
-			{ 
-				try{
-					$file = new File();
-					$file->upload('file', $key);
-					$this->Files->add($file);
-				}catch(Exception $e) {
-					$file->delete();
-//					$conn->rollback();
-					throw $e;
-				}
-			
-			}
-		}
-		
-		/* Delete files what that have been chosen as such */
-		if($filesToDelete = $clean['delete_files']) {
-			foreach ($this->Files as $key=> $file) {
-				if(in_array($file->id,$filesToDelete)) {
-					$file->delete();
-				}
-			}
-		}		
-							
-		//Handle the boolean vars
-		if(array_key_exists('public', $clean)) {
-			if($this->userHasPermission('makePublic')) {
-				//If item is being made public
-				if(!$this->public && $clean['public'] == 1) {
-					
-					//Set this value in the Registry so that postCommitForm will catch it (HACK)
-					Zend_Registry::set('item_is_public', true);
-				}
-				
-				$this->public = (bool) $clean['public'];
-			}
-		}
-		
-		if(array_key_exists('featured', $clean) and $this->userHasPermission('makeFeatured')) {
-			$this->featured = (bool) $clean['featured'];
-		}		
-	}
-
-	protected function postCommitForm($post, $options)
-	{
-		//Tagging must take place after the Item has been saved (b/c otherwise no Item ID is set)
-		if(array_key_exists('modify_tags', $post) || !empty($post['tags'])) {
-			if(isset($options['entity'])) {
-				$entity = $options['entity'];
-			}else {
-				$user = Omeka::loggedIn();
-				$entity = $user->Entity;
-			}
-
-			$this->applyTagString($post['tags'], $entity);
-		}
-		
-		//If the item was made public, fire the plugin hook
-		if(Zend_Registry::isRegistered('item_is_public')) {
-			fire_plugin_hook('make_item_public', $this);
-		}		
-	}
-	
-	protected function onFormError($post, $options=array())
-	{
-		//Reload the files b/c of a stupid bug
-		foreach ($this->Files as $key => $file) {
-			if(!$file->exists()) {
-				$file->delete();
-			}
-			unset($this->Files[$key]);
-		}		
-	}
-
-	public function postSave()
-	{
-		$this->saveMetatext($_POST['metafields']);
-		parent::postSave();
-	}
-
-	public function hasFiles()
-	{
-		return ($this->Files->count() > 0);
-	}
-		
-} // END class Item extends Omeka_Domain_Record
-
+}
+ 
 ?>

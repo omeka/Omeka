@@ -13,34 +13,35 @@ class Omeka_Auth_Adapter implements Zend_Auth_Adapter_Interface
 	{
 		$valid = false;
 		$identity = null;
-		$message = array();
+		$messages = array();
 		
 		$options = array('username'=>$this->username, 'password'=>$this->password);
 		
-		$user = Doctrine_Manager::connection()->getTable('User')
-											  ->findByDql('username LIKE :username AND password LIKE SHA1(:password) AND active = 1', $options);
+		$db = get_db();
+		$sql = "SELECT u.id FROM {$db->User} u WHERE u.username LIKE :username AND password LIKE SHA1(:password) AND active = 1 LIMIT 1";
 		
+		$user_id = (int) $db->fetchOne($sql, $options);
+				
 		// The user was logged in correctly
-		if (count($user) === 1) {
+		if ($user_id) {
 			$valid = true;
-			$user = $user[0];
-			
-			$user_id = $user->id;
+			$user = $user[0];			
 			return new Zend_Auth_Result($valid, $user_id);
 		}
 		else {
 			unset($options['password']);
-			$user = Doctrine_Manager::connection()->getTable('User')
-												  ->findByDql('username LIKE :username AND active = 1', $options);
 			
-			if (count($user) === 1) {
-				$message[] = "Invalid password";
+			$sql = "SELECT u.id FROM {$db->User} u WHERE u.username LIKE :username AND active = 1 LIMIT 1";
+			
+			$user_id = (int) $db->fetchOne($sql, $options);
+			
+			if ($user_id) {
+				$messages[] = "Invalid password";
 			}
 			else {
-				$message[] = "Cannot find a user with that username";
+				$messages[] = "Cannot find a user with that username";
 			}
-			unset($user);
 		}
-		return new Zend_Auth_Result($valid, $identity, $message);
+		return new Zend_Auth_Result($valid, $identity, $messages);
 	}
 }

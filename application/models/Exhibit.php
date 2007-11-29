@@ -1,95 +1,70 @@
 <?php
-require_once 'Section.php';
+require_once 'ExhibitSection.php';
 require_once 'Tag.php';
 require_once 'Taggings.php';
 require_once 'Taggable.php';
 require_once 'ExhibitTable.php';
-require_once 'ExhibitTaggings.php';
+require_once 'Orderable.php';
+require_once 'ExhibitPermissions.php';
+
 /**
  * Exhibit
  * @package: Omeka
  */
 class Exhibit extends Omeka_Record
 {
-	protected $error_messages = array(	
-		'slug' => array('notblank' => 'Exhibit must be given a valid slug.', 
-						'unique' => 'Your URL slug is already in use by another exhibit.  Please choose another.'),
-		'title' => array('notblank' => 'Exhibit must be given a title.')		
-				);
+	public $title;
+	public $description;
+	public $credits;
+	public $featured;
+	public $public;
 	
-	protected $_taggable;
+	public $theme;
+	public $slug;
 	
-	protected $_sections;
-	
-    public function setTableDefinition()
-    {
-		$this->option('type', 'MYISAM');
-		$this->setTableName('exhibits');
-		$this->hasColumn("title", "string", 255, "notblank");
-		$this->hasColumn("description", "string");
-		$this->hasColumn("credits", "string");
-		$this->hasColumn("featured", "boolean");
-		$this->hasColumn('public', 'boolean');
-		
-		//Display info (not archival)
-		$this->hasColumn("theme","string",30);
-		$this->hasColumn("slug", "string", 30,"unique|notblank");
-    }
+	protected $_related = array('Sections'=>'loadOrderedChildren', 'Tags'=>'getTags');
 
-    public function setUp()
-    {
-		$this->ownsMany('Section as Sections', array('local'=>'id', 'foreign' => 'exhibit_id') );
-		$this->ownsMany("ExhibitTaggings", "ExhibitTaggings.relation_id");
-    }
-	
-	public function get($name)
+	protected function _validate()
 	{
-		switch ($name) {
-			//I had to do this same damn thing in the Item model.  This is pissing me off.
-			case 'Tags':
-				return $this->getTags();
-				break;
-			case 'Sections':
-				if(empty($this->_sections)) {
-					$this->_sections = $this->loadSections();
-				}
-				return $this->_sections;
-			default:
-				return parent::get($name);
-				break;
+		if(empty($this->title)) {
+			$this->addError('title', 'Exhibit must be given a title.');
+		}
+		
+		if(strlen($this->title) > 255) {
+			$this->addError('title', 'Title for an exhibit must be 255 characters or less.');
+		}
+		
+		if(empty($this->slug)) {
+			$this->addError('slug', 'Exhibit must be given a valid slug.');
+		}
+		
+		if(!$this->fieldIsUnique('slug')) {
+			$this->addError('slug', 'Your URL slug is already in use by another exhibit.  Please choose another.');
+		}
+		
+		if(strlen($this->theme) > 30) {
+			$this->addError('theme', 'The name of your theme must be 30 characters or less.');
+		}
+		
+		if(strlen($this->slug) > 30) {
+			$this->addError('slug', 'The slug for your exhibit must be 30 characters or less.');
 		}
 	}
 	
-	public function set($name, $value)
+	protected function _delete()
 	{
-		switch ($name) {
-			case 'Sections':
-				$this->_sections = $value;
-				break;
-			
-			default:
-				return parent::set($name, $value);
-				break;
+		//Just delete the sections and the cascade will take care of the rest
+		
+		$sections = $this->Sections;
+		
+		foreach ($sections as $section) {
+			$section->delete();
 		}
-	}
-	
-	public function delete()
-	{
-		fire_plugin_hook('delete_exhibit', $this);
-		
-		//Manually delete from the sections, section_pages, items_section_pages, taggings tables
-		$exhibit_id = $this->id;
-		
-		if(empty($exhibit_id)) return;
-		
-		$this->deleteTaggings();
 				
-		//Delete everything from the entities_relations table
-		
-		$this->deleteRelations();
-		
+/*
 		//This query will delete everything from the exhibits tables when an exhibit is deleted
-		//This is semi-duplicated in the Section, SectionPage, ItemsPages models as necessary
+		//This is semi-duplicated in the Section, ExhibitPage, ExhibitPageEntry models as necessary
+		$exhibit_id = $this->id;
 		
 		$delete = "DELETE items_section_pages, section_pages, sections, exhibits FROM exhibits 
 		LEFT JOIN sections ON sections.exhibit_id = exhibits.id
@@ -97,100 +72,56 @@ class Exhibit extends Omeka_Record
 		LEFT JOIN items_section_pages ON items_section_pages.page_id = section_pages.id
 		WHERE exhibits.id = $exhibit_id;";
 		
-		$this->execute($delete);
+		$db->exec($delete);
+*/	
+		
+		
 	}
 	
 	public function construct()
 	{
-		$this->_strategies[] = new Taggable($this);
-		$this->_strategies[] = new Relatable($this);
+		$this->_modules[] = new Taggable($this);
+		$this->_modules[] = new Relatable($this);
+		$this->_modules[] = new Orderable($this, 'ExhibitSection', 'exhibit_id', 'Sections');		
 	}
-	
-	public function postInsert()
-	{
-		//Set the name of the entity who added this
-		$e = Omeka::loggedIn()->Entity;
 		
-		$this->setAddedBy($e);
-	}
-	
-	public function postUpdate()
-	{
-		//Set the name of the entity who edited this
-		$e = Omeka::loggedIn()->Entity;
-		
-		$this->setModifiedBy($e);
-	}
-	
-	public function generateSlug($title)
-	{
-		//Convert the title of the exhibit to a usable slug
-		$slug = $title;
-		
-		//Replace prohibited characters in the title with - 's
-		$prohibited = array(':', '/', ' ', '.');
-		$replace = array_fill(0, count($prohibited), '-');
-		$slug = str_replace($prohibited, $replace, strtolower($slug) );
-		return $slug;
-	}
-	
-	protected function preCommitForm(&$post, $options)
+	protected function preSaveForm(&$post)
 	{					
 		//Whether or not the exhibit is featured
 		$this->featured = (bool) $post['featured'];
 		unset($post['featured']);
 		
-		if(!empty($post['Sections'])) {
-			//Change the order of the sections
-			foreach ($post['Sections'] as $key => $section) {
-				$this->Sections[$key]->order = $section['order'];
-			}
-			$this->Sections->save();
-		}		
-		
 		//Make an exhibit slug if the posted slug is empty
 		//This is duplicated exactly in the Section class
 		$slugFodder = !empty($post['slug']) ? $post['slug'] : $post['title'];
-		$post['slug'] = $this->generateSlug($slugFodder);
+		$post['slug'] = generate_slug($slugFodder);
 	}
 	
-	protected function postCommitForm($post, $options)
+	/**
+	 * Check to see whether the slug field is empty, then provide one
+	 *
+	 * @return void
+	 **/
+	protected function preValidate()
+	{
+		if(empty($this->slug)) {
+			$this->slug = generate_slug($this->title);
+		}
+	}
+	
+	protected function postSaveForm($post)
 	{
 		//Add the tags after the form has been saved
 		$current_user = Omeka::loggedIn();		
-		$this->applyTagString($post['tags'], $current_user->Entity, true);
-		
-		//reload the sections b/c Doctrine is too dumb to do it
-		$this->loadSections();
-	}
-	
-	public function reorderSections()
-	{
-		$this->loadSections();
-		$i = 1;
-		foreach ($this->Sections as $key => $section) {
-			$section->order = $i;
-			$section->save();
-			$i++;
-		}
-		
-		return $this;
-	}
-
-	public function loadSections()
-	{
-		$id = (int) $this->id;
-		$dql = "SELECT s.* FROM Section s WHERE s.exhibit_id = $id ORDER BY s.section_order ASC";
-		$q = new Doctrine_Query;
-		$sections = $q->parseQuery($dql)->execute();
-		$this->Sections = $sections;
-		return $sections;
+		$this->applyTagString($post['tags'], $current_user->Entity, true);	
 	}
 	
 	public function getSection($slug)
 	{
-		$dql = "SELECT s.* FROM Section s LEFT JOIN s.Pages p WHERE s.slug = ? AND s.exhibit_id = ?";
-        return $this->executeDql($dql, array( strtolower($slug), $this->id), true);	
+		$db = get_db();
+		$sql = "SELECT s.* FROM $db->ExhibitSection s WHERE s.slug = ? AND s.exhibit_id = ?";
+
+        return $this->getTable('ExhibitSection')->fetchObjects($sql, array( strtolower($slug), (int) $this->id), true);	
 	}
 	
 	/**
@@ -200,8 +131,7 @@ class Exhibit extends Omeka_Record
 	 **/
 	public function getSectionCount()
 	{
-		$sql = "SELECT COUNT(*) FROM sections WHERE exhibit_id = ?";
-		return $this->execute($sql, array($this->id), true);
+		return $this->getChildCount();
 	}
 }
 

@@ -61,9 +61,9 @@
 			<?php endif; ?>
 		</dd>
 
-	<?php foreach($item->Metatext as $key => $metatext): ?>
-	<dt><?php echo $metatext->Metafield->name; ?></dt>
-	<dd><?php if($metatext->text): echo $metatext->text; else: ?>
+	<?php foreach($item->TypeMetadata as $field => $text): ?>
+	<dt><?php echo h($field); ?></dt>
+	<dd><?php if($text): echo h($text); else: ?>
 			<span>none available</span>
 			<?php endif; ?></dd>
 	<?php endforeach; ?>

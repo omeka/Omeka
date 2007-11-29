@@ -14,9 +14,9 @@ class Omeka_Upgrader
 	protected $current;
  	const VERSION_OPTION = 'migration';
 	
-	public function __construct($manager, $fromVersion, $toVersion)
+	public function __construct($fromVersion, $toVersion)
 	{
-		$this->manager = $manager;
+		$this->db = get_db();
 		$this->start = $fromVersion;
 		$this->end = $toVersion;
 		
@@ -124,59 +124,29 @@ class Omeka_Upgrader
 		
 		include $scriptPath;
 	}
-	
-	public function getTable($model) {
-		require_once $model.'.php';
-		return $this->manager->getTable($model);
-	}
-	
-	public function getTableName($model) {
-		$file = $model . '.php';
 
-		if(!file_exists(MODEL_DIR.DIRECTORY_SEPARATOR.$file)) {
-			throw new Exception( 'This model does not exist' );
-		}
-		require_once $model . '.php';
-		return $this->manager->getTable($model)->getTableName();
-	}
-	
-	public function buildTable($model) {
-		require_once $model.'.php';
-		return $this->manager->getTable($model)->export();
-	}
-	
 	public function incrementMigration() {
 		require_once 'Option.php';
-		$optTable = $this->getTableName('Option');
-		$this->query("UPDATE $optTable SET value = {$this->current} WHERE name = '".self::VERSION_OPTION. "'");
+		$optTable = $this->db->Option;
+		$this->db->exec("UPDATE $optTable SET value = {$this->current} WHERE name = '" . self::VERSION_OPTION . "'");
 	}
 	
 	public function hasTable($model) {
-		try {
-			$tbl = $this->getTableName($model);
-		} catch (Exception $e) {
-			$tbl = $model;
-		}
-				
+		$tbl = $this->db->$model;		
 		$res = $this->query("SHOW tables LIKE '$tbl'");
 		return !empty($res);
 	}
 	
 	public function tableHasColumn($model, $column) {
-		//If it is a model and not a table name, 
-		$file = MODEL_DIR.DIRECTORY_SEPARATOR.$model.'.php';
-		if(file_exists($file)) {
-			require_once $file;
-			$tblName = $this->getTableName($model);
-		}else {
-			$tblName = $model;
-		}
 		$col = $this->getColumnDefinition($tblName, $column);
 		return !empty($col);
 	}
 	
-	public function getColumnDefinition($tblName, $column) {
+	public function getColumnDefinition($table, $column) {
 		//Replace with SHOW COLUMNS		
+		
+		$tblName = $this->db->$table;
+		
 		$explain = $this->query("EXPLAIN `$tblName`");
 		foreach ($explain as $k => $col) {
 			if($column == $col['Field'] ) {
@@ -185,22 +155,5 @@ class Omeka_Upgrader
 		}
 		return false;
 	}
-	
-	public function query($sql, $params=array(), $fetchOne=false) {
-		//Echo each query as it is run
-		Zend_Debug::dump( $sql );
-		
-		$conn = $this->manager->connection();
-		
-		if($fetchOne)
-			return $conn->fetchOne($sql, $params);
-			
-		$res = $conn->execute($sql, $params);
-		if ($res->columnCount() != 0)
-			return $res->fetchAll(PDO::FETCH_ASSOC);
-		else
-			return array();
-	}
-	
 } // END class Omeka_Upgrader 
 ?>

@@ -30,6 +30,9 @@ class PluginBroker
 	//Any navigation elements that have been added via plugins
 	protected $_nav = array();
 	
+	//The data feeds that a plugin adds to the application
+	protected $_feeds = array();
+	
 	public function __construct() 
 	{
 		Zend_Registry::set('plugin_broker', $this);
@@ -48,7 +51,9 @@ class PluginBroker
 			$installed = array();
 			$active = array();
 			
-			$res = db_query('SELECT p.name, p.active FROM plugins p');
+			$db = get_db();
+			
+			$res = $db->query("SELECT p.name, p.active FROM $db->Plugin p");
 			foreach ($res as $row) {
 				$installed[$row['name']] = $row['name'];
 				
@@ -192,24 +197,27 @@ class PluginBroker
 		$install_hook = $this->_callbacks['install'][$plugin];
 
 		try {
+			$db = get_db();
+			
 			//Insert the plugin into the DB
-			db_query("INSERT IGNORE INTO plugins (name, active) VALUES ('$plugin', 1);");
-		
-			$res = db_query("SELECT LAST_INSERT_ID() as new_id");
-		
-			$plugin_id = (int) $res[0]['new_id'];
-		
+			$db->exec("INSERT IGNORE INTO $db->Plugin (name, active) VALUES ('$plugin', 1);");
+			
+			$plugin_id = $db->lastInsertId();
+								
 			$this->_last_insert_id = $plugin_id;
-		
+			
 			call_user_func_array($install_hook, array($plugin_id));
-		
+			
+			//If more than one plugin needs to install itself, don't reuse the same form submission
+			unset($_POST);
+			
 		} catch (Exception $e) {
-		
+			
 			echo "An error occurred when installing this plugin: ".$e->getMessage();
-		
+			
 			//If there was an error, remove the plugin from the DB so that we can retry the install
 			if(isset($plugin_id) and is_int($plugin_id)) {
-				db_query("DELETE FROM plugins WHERE id = $plugin_id");
+				get_db()->exec("DELETE FROM plugins WHERE id = $plugin_id");
 			}
 		}
 
@@ -222,7 +230,9 @@ class PluginBroker
 		//Get the ID of the last inserted plugin
 		$id = $this->_last_insert_id;
 		
-		db_query("INSERT IGNORE INTO metafields (name, description, plugin_id) VALUES (?, ?, ?)", array($name, $description, $id));
+		$db = get_db();
+		
+		$db->exec("INSERT IGNORE INTO $db->Metafield (name, description, plugin_id) VALUES (?, ?, ?)", array($name, $description, $id));
 	}
 	
 	/**
@@ -325,7 +335,7 @@ class PluginBroker
 	 **/
 	public function addControllerDir($path=null, $module=null)
 	{
-		$front = Omeka_Controller_Front::getInstance();
+		$front = Zend_Controller_Front::getInstance();
 		
 		$current = $this->getCurrentPlugin();
 		
@@ -337,6 +347,26 @@ class PluginBroker
 	
 		$front->addControllerDirectory($dir, $module);
 		
+	}
+	
+	/**
+	 * @since 11/26/07
+	 *
+	 * @return void
+	 **/
+	public function addFeed($format, $options)
+	{
+		$this->_feeds[$format][] = $options;
+	}
+	
+	public function hasFeed($format)
+	{
+		return (bool) (count($this->_feeds[$format]));
+	}
+	
+	public function getFeed($format)
+	{
+		return $this->_feeds[$format];
 	}
 	
 	/**
@@ -418,19 +448,6 @@ function add_plugin_hook($hook, $callback)
 	$broker->addHook($hook, $callback);
 } 
 
-function db_query($sql, $params=array())
-{
-	try {
-		$conn = Doctrine_Manager::getInstance()->connection();
-		$res = $conn->execute($sql, $params);
-		if ($res->columnCount() != 0) {
-			return $res->fetchAll(PDO::FETCH_ASSOC);
-		}
-	} catch (Exception $e) {
-		echo $e->getMessage();exit;
-	}
-}
-
 /**
  * fire_plugin_hook('save_item', $item, $arg2)  would call the plugin hook 'save_item' with those 2 arguments
  *
@@ -464,6 +481,11 @@ function add_theme_pages($dir, $theme='both')
 function add_controllers($dir='controllers')
 {
 	get_plugin_broker()->addControllerDir($dir);
+}
+
+function add_data_feed($format, $options=array())
+{
+	get_plugin_broker()->addFeed($format, $options);
 }
 
 function add_navigation($text, $link, $type='main', $permissions=null)

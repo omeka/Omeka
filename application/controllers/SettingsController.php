@@ -35,7 +35,7 @@ class SettingsController extends Omeka_Controller_Action
 		}
 				
 		$optionTable = $this->getTable('Option')->getTableName();
-		$conn = $this->getConn();
+		$conn = get_db();
 						
 		//process the form
 		if(!empty($_POST)) {
@@ -44,7 +44,7 @@ class SettingsController extends Omeka_Controller_Action
 			{
 				if(array_key_exists($key,$settings)) {
 					$value = get_magic_quotes_gpc() ? stripslashes( $value ) : $value;
-					$conn->execute($sql, array($value, $key));
+					$conn->exec($sql, array($value, $key));
 					$settings[$key] = $value;
 					$options[$key] = $value;
 				}

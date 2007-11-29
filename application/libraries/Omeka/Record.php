@@ -1,452 +1,500 @@
-<?php
+<?php 
 /**
- * Omeka_Record 
- *
- * Customized wrapper for Doctrine_Record
- *
- * @package Omeka
- * 
- **/
-abstract class Omeka_Record extends Doctrine_Record
-{		
-	/**
-	 * Ex.
-	 * $error_messages['title']['unique'] = "Title must be unique.  That title has already been used."
-	 *
-	 * @var array
-	 **/
-	protected $error_messages = array();
-	protected $constraints = array();
+* Replacement for Doctrine_Record class
+*/
+class Omeka_Record implements ArrayAccess
+{
+	//Every table has a unique ID field
+	public $id;
 	
-	protected $_strategies = array();
+	//Current validation errors	
+	protected $_errors = array();
+		
+	//Cache related elements so that we don't end up making extra SQL calls if we access them twice
+	protected $_cache = array();
 	
-	protected $_pluralized;
-	protected $_hidden;
-
-	/**
-	 * Retrieve the error message associated with a specific field if it exists, or retrieve all errors as a string
-	 *
-	 * @param string Name of the field (optional - if not given, all error messages are returned concatenated)
-	 * @return string
-	 **/
-	public function getErrorMsg($field = null) 
-	{
-		$stack = $this->getErrorStack();
-		$msg = '';
-		if(!$field) {
-			foreach( $stack as $name => $errors )
-			{
-				$msg .= $this->getErrorMsg($name);
-			}
-		}
-		if(isset($stack[$field])) {
-			$errors = $stack[$field];
-			foreach( $errors as $error )
-			{
-				if(isset($this->error_messages[$field][$error]))
-				{
-					$msg .= $this->error_messages[$field][$error];
-				}else{
-					$msg .= $field.": ".$error.".";
-				}
-			}
-		}
-		return $msg;
-	}
+	//Ex. Taggable, Relatable, any object that acts as a mixin for Omeka_Record
+	protected $_modules = array();
 	
 	/**
-	 * What I'm trying to do here is coalesce all the error messages into a single Record (usually the Item)
+	 * Would be declared like thus:  
 	 *
+	 * array $_related = array('Sections'=>'loadSections'), where key is a cacheable property and value is a callback to obtain it
+	 *  This will be used by self::__get() to automatically obtain/cache necessary elements
+	 *	Meanwhile, there is no need for retrieved data to be saveable, as form data is handled through a different mechanism entirely
 	 * @return void
 	 **/
-	public function gatherErrors(Doctrine_Validator_Exception $e)
+	protected $_related = array();
+	
+	private $_locked = false;
+	
+	public function __construct()
 	{
-		$this_stack = $this->getErrorStack();
-		$invalid = $e->getInvalidRecords();
-		foreach( $invalid as $record )
-		{
-			if($record->id != $this->id) {
-				$other_stack = $record->getErrorStack();
-				foreach( $other_stack as $field => $errors )
-				{
-					$this_stack->add(get_class($record), $record->getErrorMsg());
-				}
-			}
-		}
-		$this->errorStack($this_stack);
+		$this->construct();
 	}
 	
-	public function dump() {
-		foreach( $this as $key => $value )
-		{
-			echo $key . '=' . $value . '<br />';
-		}
-	}
+	protected function construct() {}
 	
-	public function dumpSave($dumpValues = false) {
-		try {
-			$this->save();
-		}catch( Doctrine_Validator_Exception $e) {
-			foreach( $e->getInvalidRecords() as $key => $record )
-			{
-				echo get_class( $record ).(($record->exists()) ? " with id = ".$record->id : "")."<br/>\n";
-				foreach( $record->getErrorStack() as $name => $stack )
-				{
-					echo "$name) ".print_r($stack, true). "<br/>\n";
-				}
+	//Delegate to the $_related callbacks for data retrieval (also have caching)
+	public function __get($prop)
+	{
+		$data = null;
+		$args = array();
+		
+		//Check the cache for data that has already been pulled
+		if( !($data = $this->getCached($prop)) ) {
+
+			//Check for a method that can pull the data
+			if(array_key_exists($prop, $this->_related)) {
+				$method = $this->_related[$prop];
 				
-				if($dumpValues) $record->dump();
-			}
-		}
-	}
-	
-	/**
-	 * Set all the record's values and relations given a multidimensional array
-	 *
-	 * @todo relational id fields should not have 0 as a value
-	 * @return void
-	 **/
-	public function setArray( $array, $callback = null ) {
-		foreach( $array as $key => $value )
-		{
-
-			if($this->hasRelation($key)) {
-				if(!is_array($value)) {
-					
-					//Set empty form entries to the default value (or null if no default)
-					//Otherwise force the form entry to be either a string or integer
-					$default = $this->getTable()->getDefaultValueOf($key);
-					
-					if(empty($value)) {
-						if($default !== null) {
-							$value = $default;
-						}else {
-							$value = null;
-						}
-					}
-					elseif($type == 'string' || $type == 'integer') {
-						settype($value, $type);
-					}
-
-					$this->$key = (!$callback) ? $value : call_user_func_array($callback, array($value) );
+				//If the method is an array, then the first arg is the callback and subsequent are the arguments
+				if(is_array($method)) {
+					$args = $method;
+					$method = array_shift($args);
 				}
-				else {
-					
-					if($this->hasRelation($key)) {
-					
-						if($this->$key instanceof Doctrine_Collection) {
-						
-							foreach( $value as $index => $coll_values )
-							{
-								$rel = $this->$key;
-								$rel[$index]->setArray($coll_values, $callback);
-							}
-						}
-						//its an instance of Doctrine_Record
-						else {
-							$this->$key->setArray($value, $callback);
-						}
-					}
-				}
+				$data = call_user_func_array(array($this, $method), $args);
+				
+				$this->addToCache($data, $prop);
 			}
 		}
-		return $this;
-	}
-	
-	public function strip($text) {
-		return strip_slashes($text);
-	}
-	
-	public function setFromForm($array) {
 
-		//Debatable as to whether this needs to go in the setArray() method or here - my guess is here
-		foreach ($this->constraints as $constraint) {
-			if(array_key_exists($constraint,$array) && empty($array[$constraint])) {
-				$array[$constraint] = null;
-			}
-		}
-		
-		//Avoid security holes
-		unset($array['id']);
-
-		return $this->setArray($array, array($this, 'strip'));
+		return $data;
 	}
 	
-	/**
-	 * toJson is an attempt to provide a relatively
-	 * simple implementation for converting Doctrine_Record
-	 * objects into JSON objects
-	 * 
-	 * This uses Zend_Json which does not seem to be able
-	 * to handle syntax like Item.id = '1'. Instead the entire
-	 * object needs to be represented by a hash like
-	 * {"class":"item", "id":"1"}
-	 * 
-	 * 
-	 */
-	public function toJson()
-	{
-		require_once 'Zend/Json.php';
-		$data = $this->getData();
-		$data['id'] = $this->id;
-		$data['class'] = ucfirst(strtolower(get_class($this)));
-		return Zend_Json::encode($data);
-	}
-	
-	/**
-	 * Take in a json string, instantiate a model from it
-	 * and assert that it is the same as the model in the
-	 * database
-	 */
-	public function fromJson()
-	{
-		throw new Exception('This function not yet implemented');
-	}
-	
-	public function getTableName($model=null)
-	{
-		if(!$model) {
-			return $this->getTable()->getTableName();
-		}
-		
-		return Zend_Registry::get('doctrine')->getTable($model)->getTableName();
-	}
-	
-	/**
-	 * Merge two records and all of their relevant join records together
-	 *
-	 * @return bool
-	 **/
-	public function merge($record)
-	{
-		throw new Exception( 'This function must be implemented for each relevant sub-class' );
-	}
-	
-	/**
-	 * This prevents access to a given field (both get and set) for the duration of the object's existence
-	 *
-	 * This is really a workaround for the most obvious solution, which is to not draw in the data from the DB in the first place
-	 * Unfortunately the ORM does not understand this, so this is the current solution.
-	 **/
-	public function hideField($field)
-	{
-		$this->_hidden[$field] = true;
-	}
-	
-	protected function fieldIsHidden($field)
-	{
-		$hidden = $this->_hidden;
-		$bool = ($hidden and isset($hidden[$field]));
-		return $bool;
-	}
-	
-	public function get($name)
-	{
-		//Return nothing if the field has been hidden
-		if($this->fieldIsHidden($name)) {
-			return false;
-		}else {
-			return parent::get($name);
-		}
-	}
-	
-	public function set($name, $value)
-	{
-		if($this->fieldIsHidden($name)) {
-			return false;
-		}else {
-			return parent::set($name, $value);
-		}
-	}
-	
-	//END HIDDEN FIELD MODIFICATIONS
-	
-	public function getPluralized($lower=true)
-	{
-		$pluralName = !empty($this->_pluralized) ? strtolower($this->_pluralized) : get_class($this) .'s';
-		return ($lower) ? strtolower($pluralName) : $pluralName;
-	}
-	
+	//Delegate to the $_modules for mixin-like behavior
 	public function __call($m, $a)
 	{
-		foreach ($this->_strategies as $k => $strat) {
-			if(method_exists($strat, $m)) {
-				return call_user_func_array(array($strat, $m), $a);
+		return $this->delegateToModules($m, $a);
+	}
+	
+	protected function delegateToModules($method, $args=array(), $all=false)
+	{
+		//Hack the arguments so that they are pass-by-reference
+/*
+		$hack = array();
+		foreach ($args as &$arg) {
+			$hack[] =& $arg;
+		}
+*/	
+	
+		foreach ($this->_modules as $k => $module) {
+			if(method_exists($module, $method)) {
+				$called = true;
+				$res = call_user_func_array(array($module, $method), $args);
+				if(!$all) return $res;
 			}
 		}
+		if(count($this->_modules) and !$called) {
+			throw new Exception( "Method named $method does not exist!"  );
+		}		
 	}
 	
 	/**
-	 * @example $record->hasStrategy('Relatable') --> bool (true)
+	 * Maybe this is an error in design, but right now there are 3 different types of callbacks
+	 * within Omeka_Record:
+	 *		Omeka_Record hooks like Omeka_Record::postDelete()
+	 *		Record module hooks like Taggable::postSave()
+	 *		Plugin hooks like 'pre_delete_item'
+	 * 
+	 * This function handles that stack in the proper order while reducing the duplication of code
 	 *
-	 * @return bool
+	 * @param $event string camelCased name for the event i.e. preDelete
+	 * @return void
 	 **/
-	public function hasStrategy($name)
+	protected function runCallbacks($event)
 	{
-		foreach ($this->_strategies as $k => $strat) {
-			if($name == get_class($strat)) return true;
-		}
+		//All arguments beyond the first are optional, and are sent to the various callbacks
+		$args = func_get_args();
+		array_shift($args);	
 		
-		return false;
-	}
-	
-	/**
-	 * This is a convenience method to execute SQL statements directly
-	 * within the record.  
-	 *
-	 * @return mixed
-	 **/
-	public function execute($sql, $params=array(), $fetchOne = false)
-	{
-		$res = $this->getTable()->getConnection()->execute($sql,$params);
-		if($fetchOne)
-			return $res->fetchColumn(0);
-		else 
-			if ($res->columnCount() != 0) {
-				return $res->fetchAll(PDO::FETCH_ASSOC);
-			}
-	}
-	
-	/**
-	 * Convenience method to execute DQL statements directly within the record
-	 *
-	 * @return mixed
-	 **/
-	public function executeDql($dql, $params=array(), $returnOne = false)
-	{
-		$q = new Doctrine_Query;
-		$res = $q->parseQuery($dql)->execute($params);
-		return ($returnOne) ? $res->getFirst() : $res;
-	}
-	
-	/**
-	 * Check if a given field is unique
-	 *
-	 * @return bool
-	 **/
-	public function isUnique($field)
-	{
-		if(is_array($field)) {
-			$where = join(' = ? AND ', $field) . ' = ?';
-			foreach ($field as $f) {
-				$values[] = $this->$f;
-			}
-		}else {
-			$where = "$field = ?";
-			$values = array($this->$field);
-		}
-		try {
-			$sql = "SELECT e.id as id FROM ".$this->getTableName()." e WHERE $where";
-			$id = $this->execute($sql, $values);
-			return (!count($id) or ( (count($id) == 1) and ($id[0]['id'] == $this->id) ));
+		//Callback from within the record
+		call_user_func_array(array($this, $event), $args);
+
+		//Module callbacks
+		$this->delegateToModules($event, $args, true);
+		
+		
+		//Format the name of the plugin hook so it's in all lowercase with underscores
+		//Taken from Doctrine::tableize()
+		$plugin_hook = strtolower(preg_replace('~(?<=\\w)([A-Z])~', '_$1', $event));
+		
+		$plugin_hook .= '_' . strtolower(get_class($this));
+		
+		//Plugins called from within the record always receive that record instance as the first argument
+		array_unshift($args, $this);
 				
-		} catch (Exception $e) {
-			return false;
-		}
+		//This is duplicated from the fire_plugin_hook() function
+		call_user_func_array(array(get_plugin_broker(), $plugin_hook), $args);
 	}
 	
-	/**
-	 * Processes and saves the form to the given record
-	 *
-	 * @param Omeka_Record
-	 * @return boolean True on success, false otherwise
-	 **/
-	public function commitForm(&$post, $save=true, $options=array())
+	protected function firePlugin($event)
 	{
-	/*
-		$conn = $this->_table->getConnection();
-		$conn->beginTransaction();
-	*/
-	
-		if(!empty($post))
-		{		
-			$clean = $post;
-			
-			if($this->preCommitForm($clean, $options) === false) {
-				return false;
-			}
-			
-			unset($clean['id']);
-			$this->setFromForm($clean);
-			if($save) {
-				try {
-					$this->save();
-					$this->postCommitForm($post, $options);
-				//	$conn->commit();
-					return true;
-				}
-				catch(Doctrine_Validator_Exception $e) {
-					$this->gatherErrors($e);
-					$this->onFormError($post, $options);
-					throw new Exception( $this->getErrorMsg() );
-				//	$conn->rollback();
-					return false;
-				}	
-			}
-			
-		}
-		return false;
+		$hook = $event . '_' . strtolower(get_class($this));
+		
+		fire_plugin_hook($hook, $this);
 	}
 	
+	protected function addToCache($obj, $name)
+	{
+		$this->_cache[$name] = $obj;
+	}
+	
+	protected function getCached($name)
+	{
+		return $this->_cache[$name];
+	}
+	
+	//In our simplified database models, the only necessary check is whether or not the ID is already set
+	public function exists() {return (bool) !empty($this->id);}
+		
 	/**
-	 * This is used solely by the commitForm() methods
+	 * This should wrap around a _validate() method and add hooks to call the plugins
 	 *
 	 * @return void
 	 **/
-	protected function userHasPermission($rule) {
-		$user = Omeka::loggedIn();
-		$resource = $this->getPluralized(false);
+	protected function validate() {
+		$this->runCallbacks('preValidate');
 		
-		/*	'default' permission level is hard-coded here, may change later */
-		$role = !$user ? 'default' : $user->role;
+		$validator = $this->_validate();
 		
-		$acl = Zend_Registry::get( 'acl' );
+		//If the custom validator returned an instance of Zend_Filter_Input, then mine it for broken shit
+/*
 		
-		//If the resource has no rule that would indicate permissions are necessary, then we assume access is allowed
-		if(!$acl->resourceHasRule($resource,$rule)){
-			return TRUE;
-		} 
+		if($validator and ($validator instanceof Zend_Filter_Input)) {
+			if($validator->hasMissing() or $validator->hasInvalid()) {
+			
+				$msgs = $validator->getMessages();
+			
+				foreach ($msgs as $field => $msg) {
+					$this->addError($field, join(', ', $msg));
+				}
+			}
+		}
+*/	
 		
-		return $acl->isAllowed($role, $resource, $rule);
+		$this->runCallbacks('postValidate');
 	}
 	
+	//Template method for validation
+	protected function _validate() {}
+	
+	public function isValid()
+	{
+		$this->validate();
+		
+		return !$this->hasErrors();	
+	}
+	
+	public function getErrors()
+	{
+		return $this->_errors;
+	}
+
+	protected function hasErrors()
+	{
+		return count($this->getErrors());
+	}
+	
+	protected function addError($field, $msg)
+	{
+		if($field == null) {
+			$this->_errors[] = $msg;
+		}else {
+			
+			//Only keep the first error that gets added, b/c subsequent 
+			//errors may be directly related or otherwise redundant
+			
+			if(!array_key_exists($field, $this->_errors)) {
+				$this->_errors[$field] = $msg;
+			}			
+		}
+	}
 	
 	/**
-	 * Wrap Doctrine's delete function with a plugin hook that fires whenever a record gets deleted
+	 * This function makes it so that the record cannot be saved 
+	 * (useful after manipulating the record for strictly display purposes)
+	 *
+	 **/
+	final public function lock()
+	{
+		$this->_locked = true;
+	}
+
+	//Retrieve the table class associated with the object
+	public function getTable($class = null)
+	{
+		if(!$class) $class = get_class($this);
+		
+		return get_db()->getTable($class);
+	}
+
+	/**
+	 * Get an array of all the fields and their values
+	 *
+	 * @return void
+	 **/
+	public function toArray()
+	{
+		$columns = $this->getTable()->getColumns();
+		
+		$fields = array();
+		
+		foreach ($columns as $col) {
+			$fields[$col] = $this->$col;
+		}	
+		
+		return $fields;
+	}	
+	
+	/**
+	 * Validate the record, then insert into the DB
+	 *
+	 * @throws Omeka_Db_Exception
+	 * @return bool
+	 **/
+	public function save()
+	{	
+		if($this->_locked) {
+			throw new Exception( 'Cannot save a locked record, man!' );
+		}
+			
+		if(!$this->isValid()) return false;
+		
+		$was_inserted = !$this->exists();
+		
+		//Some callbacks
+		if($was_inserted) {
+			$this->runCallbacks('preInsert');
+		}else {
+			$this->runCallbacks('preUpdate');
+		}
+		
+		$this->runCallbacks('preSave');
+		
+		//Only try to save columns in the $data that are actually defined columns for the model
+		$data_to_save = $this->toArray();
+	
+		$insert_id = get_db()->insert(get_class($this), $data_to_save);
+		
+		if(is_numeric($insert_id)) {
+			$this->id = $insert_id;
+		}
+
+		if($was_inserted) {
+			//Run the local postInsert hook, the modules postInsert hook, then the plugins' insert_record hook
+			$this->runCallbacks('postInsert');
+		}
+		else {
+			$this->runCallbacks('postUpdate');
+		}
+		
+		$this->runCallbacks('postSave');
+		
+		return true;
+	}
+	
+	/**
+	 * Subclasses are actually responsible for running the SQL queries that do the deleting
 	 *
 	 * @return void
 	 **/
 	public function delete()
 	{
-		//i.e. 'delete_item'
-		$hook = 'delete_' . strtolower(get_class($this));
-		fire_plugin_hook($hook, $this);
+		if($this->_locked) {
+			throw new Exception( 'Cannot delete a locked record!' );
+		}
 		
-		return parent::delete();
+		if(!$this->exists()) return false;
+		
+		//Check to see if the subclass delete() method exists
+		
+		$this->runCallbacks('preDelete');
+		
+		//Delete has an extra template method that is separate from the callbacks 
+		//This is because the callbacks execute prior to actually deleting anything
+		//So the state of the record must be maintained until all callbacks are done
+		//Then _delete() template method takes over and all bets are off
+		$this->_delete();
+		
+		//The main delete query
+		$table = $this->getTable()->getTableName();
+		
+		$query = "DELETE FROM $table WHERE {$table}.id = ? LIMIT 1";
+		get_db()->exec($query, array((int) $this->id));
+		
+		$this->id = null;
+		$this->runCallbacks('postDelete');
 	}
 	
-	public function postSave()
+	/**
+	 * Here is where the record should take of deleting all its nonsense
+	 *
+	 * @return void
+	 **/
+	protected function _delete() {}
+	
+	//Basic Callbacks
+	protected function preInsert() {}
+	
+	protected function postInsert() {}
+
+	protected function preSave() {}
+	
+	protected function postSave() {}
+	
+	protected function preUpdate() {}
+	
+	protected function postUpdate() {}
+	
+	protected function preDelete() {}
+	
+	protected function postDelete() {}
+
+	protected function preValidate() {}
+	
+	protected function postValidate() {}
+
+	//Setter methods 
+	public function setArray($data)
 	{
-		$hook = 'save_' . strtolower(get_class($this));
-		fire_plugin_hook($hook, $this);
+		$cols = $this->getTable()->getColumns();
+		foreach ($cols as $col) {
+			if(array_key_exists($col, $data)) {
+				$this->$col = $data[$col];
+			}
+		}
 	}
 	
-	public function postInsert()
+	//Implementation of ArrayAccess
+	
+	public function offsetExists($name) {
+		return isset($this->$name);
+	}
+	
+	public function offsetUnset($name) {
+		unset($this->$name);
+	}
+
+	public function offsetGet($name) {
+		return $this->$name;
+	}
+	
+	public function offsetSet($name, $value) {
+		$this->$name = $value;
+	}
+	
+	//Input-related
+
+
+	/**
+	 * Processes and saves the form to the given record
+	 *
+	 * @return boolean True on success, false otherwise
+	 **/
+	public function saveForm(&$post)
 	{
-		$hook = 'insert_' . strtolower(get_class($this));
-		fire_plugin_hook($hook, $this);
+	/*
+		get_db()->beginTransaction();
+	*/
+		if(!empty($post))
+		{		
+			$clean = $this->filterInput($post);
+			
+			//Can't get the runCallbacks() method to pass by reference
+			$this->preSaveForm($clean);
+			$this->delegateToModules('preSaveForm', array($clean), true);
+			$this->firePlugin('pre_save_form');
+			
+			unset($clean['id']);
+			
+			$this->setArray($clean);
+		
+			try {
+				//Save will return TRUE if there are no validation errors
+				if($this->save()) {
+					$this->runCallbacks('postSaveForm', $post);
+
+					//	get_db()->commit();
+					return true;
+				}
+				else {
+					//	get_db()->rollback();
+					$errors = $this->getErrors();
+					throw new Omeka_Validator_Exception( $errors );
+				}
+			} catch (Omeka_Db_Exception $e) {
+				header("HTTP/1.0 404 Not Found");
+				Zend_Debug::dump( $e );exit;
+			}
+			
+		}
+		return false;
 	}
 	
-	public function postUpdate()
+	//Form callbacks
+	protected function filterInput($post) { return $post; }
+	protected function preSaveForm(&$post) {return true; }
+	protected function postSaveForm(&$post) {}
+	
+	/**
+	 * Adapted from Doctrine_Validator_Unique
+	 *
+	 * Check to see whether a value for a specific field is allowed
+	 *
+	 * @return bool
+	 **/
+	protected function fieldIsUnique($field, $value=null)
 	{
-		$hook = 'update_' . strtolower(get_class($this));
-		fire_plugin_hook($hook, $this);
+		$table = $this->getTable()->getTableName();
+		$pk = 'id';
+
+        $sql   = 'SELECT ' . $pk . ' FROM ' . $table . ' WHERE ' . $field . ' = ?';
+        
+        $values = array();
+		
+		if(!$value) {
+			$value = $this->$field;
+		}
+
+        $values[] = $value;
+        
+        // If the record is not new we need to add primary key checks because its ok if the 
+        // unique value already exists in the database IF the record in the database is the same
+        // as the one that is validated here.
+        if ($this->exists()) {
+           $sql .= " AND {$pk} != ?";
+           $values[] = $this->$pk;
+        }
+        
+        $res = get_db()->query($sql, $values);
+
+        return ( ! is_array($res->fetch()));
 	}
 	
-	protected function preCommitForm(&$post, $options) {return true;}
-	
-	protected function postCommitForm($post, $options) {}
-	
-	protected function onFormError($post, $options) {}
-} // END abstract class Omeka_Record
+	//Legacy methods (deprecate and remove these)
+
+	/**
+	 * This function is kind of a hack, used instead of inflection because that would be slower
+	 *
+	 * @return string
+	 **/
+	public function getPluralized($lower=true)
+	{
+		$pluralName = !empty($this->_pluralized) ? strtolower($this->_pluralized) : get_class($this) .'s';
+		return ($lower) ? strtolower($pluralName) : $pluralName;
+	}
+
+	/**
+	 * @move this to the ACL
+	 *
+	 * @return void
+	 **/
+	protected function userHasPermission($rule) {
+		$resource = $this->getPluralized(false);				
+		$acl = get_acl();
+		return $acl->checkUserPermission($resource, $rule);
+	}
+}
+ 
 ?>

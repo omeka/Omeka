@@ -8,47 +8,51 @@ require_once 'Exhibit.php';
  **/
 class Tag extends Omeka_Record { 
   
-	public function setUp() {
-		$this->ownsMany("Taggings","Taggings.tag_id");
-		
-		$this->ownsMany("ItemTaggings", "ItemTaggings.tag_id");
-		$this->ownsMany("CollectionTaggings", "CollectionTaggings.tag_id");
-		$this->ownsMany("ExhibitTaggings", "ExhibitTaggings.tag_id");
-	
-	}
-	
-	public function setTableDefinition() {
-		$this->option('type', 'MYISAM');
-		$this->setTableName('tags');
-   		$this->hasColumn("name","string", 255, "unique|notblank");
- 	}
+	public $name;
 
 	public function __toString() {
 		return $this->name;
 	}
-
+	
 	/**
-	 * If an user ID is passed, then only delete the joins for that entity
+	 * Must also delete the taggings associated with this tag
 	 *
-	 * @return bool
+	 * @return void
 	 **/
-	public function delete($entity = null) {
-		fire_plugin_hook('delete_tag', $this);
+	protected function _delete()
+	{
+		$taggings = get_db()->getTable('Taggings')->findBySql('tag_id = ?', array((int) $this->id));
 		
-		$tag_id = (int) $this->id;
+		foreach ($taggings as $tagging) {
+			$tagging->delete();
+		}
+	}
+	
+	/**
+	 * Delete only the taggings entries for this specific tag/entity combination
+	 *
+	 * @return void
+	 **/
+	protected function deleteForEntity(Entity $entity)
+	{
+		$taggings = get_db()->getTable('Taggings')
+				->findBySql('entity_id = ? AND tag_id = ?', 
+					array( (int)$entity->id, (int) $this->id));
 		
-		//Delete all from taggings that have this specific tag
-		$delete = "DELETE taggings, tags FROM tags 
-		LEFT JOIN taggings ON taggings.tag_id = tags.id
-		WHERE tags.id = $tag_id";
+		foreach ($taggings as $tagging) {
+			$tagging->delete();
+		}
+	}
+	
+	protected function _validate()
+	{
+		if(empty($this->name)) {
+			$this->addError('name', 'Tags must be given a name');
+		}
 		
-		//Delete only for a specific entity if we have passed one
-		if($entity instanceof Entity) {
-			$entity_id = (int) $entity->id;
-			$delete .= " AND taggings.entity_id = $entity_id;";
-		}		
-		
-		$this->execute($delete);
+		if(!$this->fieldIsUnique('name')) {
+			$this->addError('name', 'That name is already taken for this tag');
+		}
 	}
 	
 	/**

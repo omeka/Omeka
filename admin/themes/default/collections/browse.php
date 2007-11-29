@@ -11,7 +11,7 @@
 
 			<div class="description">
 			<h3>Description</h3>
-			<p><?php echo nls2p($collection["description"]); ?><p>
+			<p><?php echo nls2p($collection->description); ?><p>
 			</div>
 
 			<div class="meta">

@@ -5,16 +5,8 @@
  */
 class EntityRelationships extends Omeka_Record
 {
-    public function setTableDefinition()
-    {
-		$this->setTableName('entity_relationships');
-		$this->hasColumn('name', 'string');
-		$this->hasColumn('description', 'string');
-    }
-    public function setUp()
-    {
-		$this->hasMany('EntitiesRelations', 'EntitiesRelations.relationship_id');
-    }
+	public $name;
+	public $description;	
 }
 
 ?>

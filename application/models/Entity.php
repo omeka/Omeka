@@ -4,118 +4,106 @@ require_once 'User.php';
 require_once 'Anonymous.php';
 require_once 'Institution.php';
 require_once 'Person.php';
+require_once 'EntityTable.php';
 /**
  * entity
  * @package: Omeka
  */
 class Entity extends Omeka_Record
 {
-	protected $error_messages = array(	'type' => array('notblank' => 'Must specify whether the name belongs to a Person or an Institution.'));
-	
+	public $first_name;
+	public $middle_name;
+	public $last_name;
+	public $email;
+	public $institution;
+	public $parent_id;
+	public $type;
+		
 	protected $_pluralized = 'Entities';
-
-	protected $_children;
 	
-    public function setTableDefinition()
-    {
-		$this->setTableName('entities');
-		$this->option('type', 'MYISAM');
+	protected $_related = array(
+		'name'=>'getName', 
+		'institution'=>'getInstitution', 
+		'Children'=>'getChildren', 
+		'Parent'=>'getParent',
+		'User'=>'getUser');
 	
-		$this->hasColumn('first_name', 'string');
-		$this->hasColumn('middle_name', 'string');
-		$this->hasColumn('last_name', 'string');
-		$this->hasColumn('email', 'string');
+	protected function getParent()
+	{
+		return $this->getTable()->findBySql('id = ?', array( (int) $this->parent_id ), true);
+	}
 		
-		$this->hasColumn('institution', 'string');
-		
-		$this->hasColumn('parent_id', 'integer');
-		
-		$this->hasColumn('type', 'string', 50, array('notblank'=>true));
-		
-		
-		$this->option('subclasses', array('Anonymous', 'Institution', 'Person'));
-//		$this->index('unique', array('fields'=>array('first_name', 'last_name', 'email', 'institution'), 'type'=>'unique'));
-    }
-
-    public function setUp()
-    {
-		$this->ownsMany('EntitiesRelations', 'EntitiesRelations.entity_id');
-		$this->ownsMany('Taggings', 'Taggings.entity_id');
-		$this->hasOne('User', 'User.entity_id');
-		$this->hasOne('Entity as Parent', 'Entity.parent_id');
-    }
-
 	/**
 	 * These are all the things that will cause saving an entity to fault
+	 *	 0) Not including a polymorphic type
 	 *   1) saving an entity with a parent_id = id
 	 *	 2) saving an entity so that the parent_id is one of its own descendants (circular relationship)
-	 *
+	 *	 3) blank first & last name for People
+	 *	 4) blank institution name for institutions
+	 *	 5) invalid email address
 	 * @return void
 	 **/
-	public function validate()
+	protected function _validate()
 	{
-		if(is_numeric($this->parent_id) and ($this->parent_id == $this->id)) {
-			$this->getErrorStack()->add('circular', 'An entity cannot be affiliated with itself.');
-		}
-		elseif($this->Parent->isDescendantOf($this)) {
-			$this->getErrorStack()->add('circular', 'This entity is already affiliated with '.$this->Parent->name);
+		if(empty($this->type)) {
+			$this->addError('type', 'Must specify whether the name belongs to a Person or an Institution, etc.');
 		}
 		
+		if(!empty($this->email) and !Zend_Validate::is($this->email, 'EmailAddress')) {
+			$this->addError('email', 'The email address provided is not valid.');
+		}
+		
+		if(is_numeric($this->parent_id)) {
+			
+			if($this->parent_id == $this->id) {
+				$this->addError(null, 'An entity cannot be affiliated with itself.');
+			}
+			elseif($this->Parent->isDescendantOf($this)) {
+				$this->addError(null, 'This entity is already affiliated with '.$this->Parent->name);
+			}
+		}
+				
 		//Blank first and last name for a 'Person' is not OK
 		if( ($this->type == 'Person') and empty($this->first_name) and empty($this->last_name)) {
-			$this->getErrorStack()->add('Name', 'A name for a Person may not be completely blank');
+			$this->addError('Name', 'The name for a person may not be completely blank.');
 		}
 		
 		//Blank institution name for an 'Institution' is not OK
 		if( ($this->type == 'Institution') and empty($this->institution)) {
-			$this->getErrorStack()->add('Name', 'The name of an institution may not be blank');
+			$this->addError('Name', 'The name of an institution may not be blank.');
 		}
 	}
 
-	public function set($name, $value)
+	protected function filterInput($input)
 	{
-		if($name == 'name') {
-			return $this->splitFullName($value);
-		}
-		else {
-			return parent::set($name, $value);
-		}
+		$options = array('namespace'=>'Omeka_Filter');
+		
+		$filters = array(
+			'first_name' 	=> 	'StringTrim',
+			'middle_name' 	=> 	'StringTrim',
+			'last_name' 	=> 	'StringTrim',
+			'email'=> 'StringTrim',
+			'institution'=>'StringTrim',
+			'parent_id' => 'ForeignKey',
+			'type'=>'Alpha');
+			
+		$filter = new Zend_Filter_Input($filters, null, $input, $options);
+
+		$clean = $filter->getUnescaped();
+
+		return $clean;
 	}
 	
-	public function get($name)
+	protected function getInstitution()
 	{
-		if($this->hasRelation($name)) {
-			$val = parent::get($name);
+		//Pull the institution name from the parent relationship
+		if(!empty($this->institution)) {
+			return $val;
 		}
 		
-		switch ($name) {
-			case 'name':
-				return $this->getName();
-				break;
-			//@remove Doctrine upgrade should take care of handling 
-			case 'Children':
-
-				if(empty($this->_children)) {
-					$this->_children = $this->getChildren();
-				}
-				return $this->_children;
-				
-				break;
-			case 'institution':
-			
-				//Pull the institution name from the parent relationship
-				if(!empty($val)) {
-					return $val;
-				}
-				
-				if($this->isPerson() and !empty($this->parent_id)) {
-					return $this->Parent->institution;
-				}
-				break;
-			default:
-				return $val;
-				break;
-		}
+		if($this->isPerson() and !empty($this->parent_id)) {
+			return $this->Parent->institution;
+		}		
 	}
 	
 	public function isPerson()
@@ -151,19 +139,6 @@ class Entity extends Omeka_Record
 		}
 	}
 
-	public function preSave()
-	{	
-		//@todo Remove this after upgrading Doctrine
-		if(!empty($this->institution) and ($this->isPerson())) {
-			$name = $this->institution;
-			$inst = $this->getTable('Institution')->findUniqueOrNew(array('institution'=>$name));
-			$inst->type = "Institution";
-			$this->Parent = $inst;
-			$this->Parent->save();
-			$this->institution = NULL;
-		}
-	}
-
 	//NESTED HIERARCHY (ADJACENCY LIST) CODE
 
 	/**
@@ -174,11 +149,11 @@ class Entity extends Omeka_Record
 	 **/
 	public function isDescendantOf($entity)
 	{
-		if(!$this->Parent->exists()) {
+		if(empty($this->parent_id)) {
 			return false;
 		}
 		
-		if($this->Parent->id == $entity->id) {
+		if($this->parent_id == $entity->id) {
 			return true;
 		}
 		
@@ -201,41 +176,55 @@ class Entity extends Omeka_Record
 	{
 		return count($this->Children) > 0;
 	}
-
-	public function getChildren()
+	
+	protected function getChildren()
 	{
 		if($this->exists()) {
-			$dql = "SELECT e.* FROM Entity e WHERE e.parent_id = {$this->id}";
-			return $this->executeDql($dql);
-		}else {
-			return new Doctrine_Collection('Entity');
+			$db = get_db();
+			
+			$sql = "SELECT e.* FROM $db->Entity e WHERE e.parent_id = ?";
+			$children = $this->getTable('Entity')->fetchObjects($sql, array($this->id));	
 		}
 		
-	}
-
-	//END ADJACENCY LIST CODE
-
-	public function delete()
-	{
-		fire_plugin_hook('delete_entity', $this);
+		if(!$children) return array();
 		
-		$id = (int) $this->id;
-		
-		//Delete also needs to clear out the parent_id fields of the entity's children	
-		$delete = "DELETE taggings, entities, users FROM entities
-		LEFT JOIN taggings ON taggings.entity_id = entities.id
-		LEFT JOIN users ON users.entity_id = entities.id
-		WHERE entities.id = $id;";
-		
-		$update = "UPDATE entities SET parent_id = NULL WHERE parent_id = $id;";
-		
-		$update_join = "UPDATE entities_relations SET entity_id = NULL WHERE entity_id = $id";
-		
-		$this->execute($update_join);		
-		$this->execute($delete);		
-		$this->execute($update);
+		return $children;
 	}
 	
+	//END ADJACENCY LIST CODE
+
+	public function getUser()
+	{
+		$id = (int) $this->id;
+		return get_db()->getTable('User')->findByEntity($id);
+	}
+
+	public function _delete()
+	{		
+		$id = (int) $this->id;
+		
+		//Check if there is a user account associated with this
+		
+		if($user = $this->User) {
+			$user->delete();
+		}
+		
+		$db = get_db();
+		
+		//Remove all taggings associated with this entity
+		$taggings = $db->getTable('Taggings')->findBy(array('entity'=>$id));
+		
+		foreach ($taggings as $tagging) {
+			$tagging->delete();
+		}
+		
+		//Delete also needs to clear out the parent_id fields of the entity's children	
+		$update = "UPDATE $db->Entity SET parent_id = NULL WHERE parent_id = ?;";
+		$update_join = "UPDATE $db->EntitiesRelations SET entity_id = NULL WHERE entity_id = ?";
+		
+		$db->exec($update_join, array($id));		
+		$db->exec($update, array($id));
+	}
 	
 	/**
 	 * This will merge $entity with $this, where $this is the record that remains in the db 
@@ -250,46 +239,23 @@ class Entity extends Omeka_Record
 				throw new Exception( 'Both of these Entities must be persistent in order to merge them.' );
 			}
 			
+			$db = get_db();
+			
 			//These are the classes where foreign keys will be affected
 			$joinClasses = array('EntitiesRelations'=>'entity_id', 'User'=>'entity_id', 'Entity'=>'parent_id');			
 					
 			//Sql statement to update the join tables
 			foreach ($joinClasses as $jc => $fk) {
-				$jt = $this->getTableName($jc);
-				$sql = "UPDATE $jt j SET j.$fk = $this->id WHERE j.$fk = $entity->id";
-				$this->execute($sql);
+				$jt = $db->$jc;
+				$sql = "UPDATE $jt j SET j.$fk = ? WHERE j.$fk = ?";
+				$db->exec($sql, array($this->id, $entity->id));
 			}
 			$entity->delete();
 			return true;
 			
 		} catch (Exception $e) {
-			return false;
+			Zend_Debug::dump( $e );exit;
 		}
-	}
-
-
-	public function splitFullName($name)
-	{		
-		throw new Exception( 'Not implemented yet' );
-/*
-			echo $name;
-		//Remove the excess spaces via regex
-		$name = preg_replace('/\s([\s\t]+)/', '', $name);
-		Zend_Debug::dump( $name );
-		
-		$name_a = explode(' ', trim($name));
-		
-		switch (count($name_a)) {
-			case 0:
-				# code...
-				break;
-			
-			default:
-				# code...
-				break;
-		}
-*/	
-		
 	}
 }
 

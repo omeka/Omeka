@@ -65,12 +65,12 @@
 		<div id="site-info">
 			<div id="site-meta">
 				<h2>Site Overview</h2>
-				<p><em><?php settings('site_title'); ?></em> contains <?php total_items(); ?> items, in <?php total_collections(); ?> collections, tagged with <?php total_tags(); ?> keywords. There are <?php total_users(); ?> users.</p>
+				<p><em><?php settings('site_title'); ?></em> contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> collections, tagged with <?php echo total_tags(); ?> keywords. There are <?php echo total_users(); ?> users.</p>
 			</div>
 			<div id="recent-items">
 				<h2>Recent Items</h2>
 				<?php $items = recent_items('5'); ?>
-				<?php if($items->count() == 0):?>
+				<?php if(count($items) == 0):?>
 					<div class="error">There are no items to display</div>	
 				<?php else: ?>
 				<ul>
