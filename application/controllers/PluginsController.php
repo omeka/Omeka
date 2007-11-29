@@ -71,9 +71,7 @@ class PluginsController extends Omeka_Controller_Action
 	{
 		//Get the plugin record, toggle its status and save it back
 		$plugin = get_db()->getTable('Plugin')->findBySql('name = ?', array($_POST['activate']), true );
-		
-		echo $plugin;
-		
+				
 		//Toggle!
 		$plugin->active = !($plugin->active);
 		
