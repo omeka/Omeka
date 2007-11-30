@@ -212,22 +212,7 @@ CREATE TABLE IF NOT EXISTS `$db->Item` (
   KEY `public_idx` (`public`),
   KEY `type_idx` (`type_id`),
   KEY `coll_idx` (`collection_id`),
-  FULLTEXT KEY `search_all_idx` (`title`,`publisher`,`language`,`relation`,`spatial_coverage`,`rights`,`description`,`source`,`subject`,`creator`,`additional_creator`,`contributor`,`rights_holder`,`provenance`,`citation`),
-  FULLTEXT KEY `title_search_idx` (`title`),
-  FULLTEXT KEY `publisher_search_idx` (`publisher`),
-  FULLTEXT KEY `language_search_idx` (`language`),
-  FULLTEXT KEY `relation_search_idx` (`relation`),
-  FULLTEXT KEY `spatial_coverage_search_idx` (`spatial_coverage`),
-  FULLTEXT KEY `rights_search_idx` (`rights`),
-  FULLTEXT KEY `description_search_idx` (`description`),
-  FULLTEXT KEY `source_search_idx` (`source`),
-  FULLTEXT KEY `subject_search_idx` (`subject`),
-  FULLTEXT KEY `creator_search_idx` (`creator`),
-  FULLTEXT KEY `additional_creator_search_idx` (`additional_creator`),
-  FULLTEXT KEY `contributor_search_idx` (`contributor`),
-  FULLTEXT KEY `rights_holder_search_idx` (`rights_holder`),
-  FULLTEXT KEY `provenance_search_idx` (`provenance`),
-  FULLTEXT KEY `citation_search_idx` (`citation`)
+  FULLTEXT KEY `search_all_idx` (`title`,`publisher`,`language`,`relation`,`spatial_coverage`,`rights`,`description`,`source`,`subject`,`creator`,`additional_creator`,`contributor`,`rights_holder`,`provenance`,`citation`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
