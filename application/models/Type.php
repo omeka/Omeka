@@ -95,7 +95,7 @@ class Type extends Omeka_Record {
 	 *
 	 * @return void
 	 **/
-	protected function postSaveForm($post)
+	protected function afterSaveForm($post)
 	{
 
 		//Add new metafields
@@ -132,7 +132,7 @@ class Type extends Omeka_Record {
 		$this->loadMetafields();
 	}
 	
-	protected function preSaveForm(&$clean)
+	protected function beforeSaveForm(&$clean)
 	{
 		//duplication (delete/remove existing metafields)
 		foreach( $this->Metafields as $key => $metafield )

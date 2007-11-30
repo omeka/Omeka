@@ -85,7 +85,7 @@ class Exhibit extends Omeka_Record
 		$this->_modules[] = new Orderable($this, 'ExhibitSection', 'exhibit_id', 'Sections');		
 	}
 		
-	protected function preSaveForm(&$post)
+	protected function beforeSaveForm(&$post)
 	{					
 		//Whether or not the exhibit is featured
 		$this->featured = (bool) $post['featured'];
@@ -102,14 +102,14 @@ class Exhibit extends Omeka_Record
 	 *
 	 * @return void
 	 **/
-	protected function preValidate()
+	protected function beforeValidate()
 	{
 		if(empty($this->slug)) {
 			$this->slug = generate_slug($this->title);
 		}
 	}
 	
-	protected function postSaveForm($post)
+	protected function afterSaveForm($post)
 	{
 		//Add the tags after the form has been saved
 		$current_user = Omeka::loggedIn();		

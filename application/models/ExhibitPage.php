@@ -56,7 +56,7 @@ class ExhibitPage extends Omeka_Record
 */	
 	}
 		
-	protected function postDelete()
+	protected function afterDelete()
 	{
 		$section = $this->Section;
 		$section->reorderChildren();		
@@ -72,7 +72,7 @@ class ExhibitPage extends Omeka_Record
 	 * 
 	 * @return void
 	 **/
-	public function postSaveForm($post)
+	public function afterSaveForm($post)
 	{			
 		$textCount = count($post['Text']);
 		$itemCount = count($post['Item']);

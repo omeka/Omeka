@@ -32,7 +32,7 @@ class Orderable extends Omeka_Record_Module
 		return $indexed;
 	}
 	
-	public function postSaveForm($post)
+	public function afterSaveForm($post)
 	{
 		$form = $post[$this->pluralized];
 		

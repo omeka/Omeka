@@ -6,7 +6,7 @@ require_once 'Entity.php';
  */
 class Anonymous extends Entity
 {
-	public function preSave()
+	public function beforeSave()
 	{
 		$this->type = "Anonymous";
 	}

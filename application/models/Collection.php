@@ -44,7 +44,7 @@ class Collection extends Omeka_Record
 		return ($this->exists()) ? $this->getRelatedEntities('collector') : array();
 	}
 
-	public function preSaveForm(&$post)
+	public function beforeSaveForm(&$post)
 	{
 		//Handle the boolean vars in the form
 		//This must be a radio button b/c checkboxes don't submit post correctly
@@ -59,7 +59,7 @@ class Collection extends Omeka_Record
 		}	
 	}
 	
-	protected function postSaveForm($post)
+	protected function afterSaveForm($post)
 	{
 		//Process the collectors that have been provided on the form
 		$collectorsPost = $post['collectors'];

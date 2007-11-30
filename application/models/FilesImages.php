@@ -56,7 +56,7 @@ class FilesImages extends Omeka_Record
 		
 	}
 	
-	protected function preSave()
+	protected function beforeSave()
 	{
 		if(is_array($this->exif_array)) {
 			$this->exif_array = serialize($this->exif_array);

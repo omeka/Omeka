@@ -11,7 +11,7 @@ class UsersActivations extends Omeka_Record
 	public $url;
 	public $added;
 		
-	protected function preSave()
+	protected function beforeSave()
 	{
 		$this->added = microtime(true);
 		$this->url = sha1(microtime(true));

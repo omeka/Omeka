@@ -24,7 +24,7 @@ class User extends Omeka_Record {
 		return $this->getTable('Entity')->find((int) $this->entity_id);
 	}
 	
-	public function preSave()
+	public function beforeSave()
 	{
 		$this->Entity->save();
 		$this->entity_id = $this->Entity->id;
@@ -46,7 +46,7 @@ class User extends Omeka_Record {
 		}
 	}
 
-	protected function preSaveForm(&$post)
+	protected function beforeSaveForm(&$post)
 	{
 		if(!$this->processEntity($post)) {
 			return false;

@@ -11,7 +11,7 @@ class Person extends Entity
 	 * Find the institution for the Entity and save it as parent_id
 	 *
 	 **/
-	public function preSave()
+	public function beforeSave()
 	{		
 		$this->type = "Person";	
 		

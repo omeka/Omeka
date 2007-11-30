@@ -22,18 +22,18 @@ class OmekaRecordTestCase extends OmekaTestCase
 		//The object that gets passed around is an ArrayObject so as to make it pass-by-reference
 		$passed_post = new ArrayObject($post);
 		
-		$broker->expectHooks(array('pre_save_form_item'), array($record, $passed_post));
+		$broker->expectHooks(array('before_save_form_item'), array($record, $passed_post));
 		
 		$broker->expectHooks(array(
-				'pre_validate_item',
-				'post_validate_item',
-				'pre_insert_item',
-				'pre_save_item',
-				'post_insert_item',
-				'post_save_item'), array($record));
+				'before_validate_item',
+				'after_validate_item',
+				'before_insert_item',
+				'before_save_item',
+				'after_insert_item',
+				'after_save_item'), array($record));
 		
 		$broker->expectHooks(
-			array('post_save_form_item'), array($record, $passed_post));
+			array('after_save_form_item'), array($record, $passed_post));
 		
 		$record->saveForm($post);
 	}

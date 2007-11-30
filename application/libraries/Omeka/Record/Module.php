@@ -11,18 +11,18 @@ abstract class Omeka_Record_Module
 		return call_user_func_array( array($this->record, $m), $a);
 	}
 	
-	public function preSave() {}
-	public function preUpdate() {}
-	public function preInsert() {}
-	public function postInsert() {}
-	public function postSave() {}
-	public function postUpdate() {}
-	public function postSaveForm(&$post) {}
-	public function preSaveForm(&$post) {}
-	public function preDelete() {}
-	public function postDelete() {}
-	public function preValidate() {}
-	public function postValidate() {}
+	public function beforeSave() {}
+	public function beforeUpdate() {}
+	public function beforeInsert() {}
+	public function afterInsert() {}
+	public function afterSave() {}
+	public function afterUpdate() {}
+	public function afterSaveForm(&$post) {}
+	public function beforeSaveForm(&$post) {}
+	public function beforeDelete() {}
+	public function afterDelete() {}
+	public function beforeValidate() {}
+	public function afterValidate() {}
 }
  
 ?>

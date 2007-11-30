@@ -93,13 +93,13 @@ class Omeka_Record implements ArrayAccess
 	/**
 	 * Maybe this is an error in design, but right now there are 3 different types of callbacks
 	 * within Omeka_Record:
-	 *		Omeka_Record hooks like Omeka_Record::postDelete()
-	 *		Record module hooks like Taggable::postSave()
-	 *		Plugin hooks like 'pre_delete_item'
+	 *		Omeka_Record hooks like Omeka_Record::afterDelete()
+	 *		Record module hooks like Taggable::afterSave()
+	 *		Plugin hooks like 'before_delete_item'
 	 * 
 	 * This function handles that stack in the proper order while reducing the duplication of code
 	 *
-	 * @param $event string camelCased name for the event i.e. preDelete
+	 * @param $event string camelCased name for the event i.e. beforeDelete
 	 * @return void
 	 **/
 	protected function runCallbacks($event)
@@ -154,7 +154,7 @@ class Omeka_Record implements ArrayAccess
 	 * @return void
 	 **/
 	protected function validate() {
-		$this->runCallbacks('preValidate');
+		$this->runCallbacks('beforeValidate');
 		
 		$validator = $this->_validate();
 		
@@ -173,7 +173,7 @@ class Omeka_Record implements ArrayAccess
 		}
 */	
 		
-		$this->runCallbacks('postValidate');
+		$this->runCallbacks('afterValidate');
 	}
 	
 	//Template method for validation
@@ -265,12 +265,12 @@ class Omeka_Record implements ArrayAccess
 		
 		//Some callbacks
 		if($was_inserted) {
-			$this->runCallbacks('preInsert');
+			$this->runCallbacks('beforeInsert');
 		}else {
-			$this->runCallbacks('preUpdate');
+			$this->runCallbacks('beforeUpdate');
 		}
 		
-		$this->runCallbacks('preSave');
+		$this->runCallbacks('beforeSave');
 		
 		//Only try to save columns in the $data that are actually defined columns for the model
 		$data_to_save = $this->toArray();
@@ -282,14 +282,14 @@ class Omeka_Record implements ArrayAccess
 		}
 
 		if($was_inserted) {
-			//Run the local postInsert hook, the modules postInsert hook, then the plugins' insert_record hook
-			$this->runCallbacks('postInsert');
+			//Run the local afterInsert hook, the modules afterInsert hook, then the plugins' insert_record hook
+			$this->runCallbacks('afterInsert');
 		}
 		else {
-			$this->runCallbacks('postUpdate');
+			$this->runCallbacks('afterUpdate');
 		}
 		
-		$this->runCallbacks('postSave');
+		$this->runCallbacks('afterSave');
 		
 		return true;
 	}
@@ -309,7 +309,7 @@ class Omeka_Record implements ArrayAccess
 		
 		//Check to see if the subclass delete() method exists
 		
-		$this->runCallbacks('preDelete');
+		$this->runCallbacks('beforeDelete');
 		
 		//Delete has an extra template method that is separate from the callbacks 
 		//This is because the callbacks execute prior to actually deleting anything
@@ -324,7 +324,7 @@ class Omeka_Record implements ArrayAccess
 		get_db()->exec($query, array((int) $this->id));
 		
 		$this->id = null;
-		$this->runCallbacks('postDelete');
+		$this->runCallbacks('afterDelete');
 	}
 	
 	/**
@@ -335,25 +335,25 @@ class Omeka_Record implements ArrayAccess
 	protected function _delete() {}
 	
 	//Basic Callbacks
-	protected function preInsert() {}
+	protected function beforeInsert() {}
 	
-	protected function postInsert() {}
+	protected function afterInsert() {}
 
-	protected function preSave() {}
+	protected function beforeSave() {}
 	
-	protected function postSave() {}
+	protected function afterSave() {}
 	
-	protected function preUpdate() {}
+	protected function beforeUpdate() {}
 	
-	protected function postUpdate() {}
+	protected function afterUpdate() {}
 	
-	protected function preDelete() {}
+	protected function beforeDelete() {}
 	
-	protected function postDelete() {}
+	protected function afterDelete() {}
 
-	protected function preValidate() {}
+	protected function beforeValidate() {}
 	
-	protected function postValidate() {}
+	protected function afterValidate() {}
 
 	//Setter methods 
 	public function setArray($data)
@@ -403,7 +403,7 @@ class Omeka_Record implements ArrayAccess
 			
 			$clean = new ArrayObject($clean);
 			
-			$this->runCallbacks('preSaveForm', $clean);
+			$this->runCallbacks('beforeSaveForm', $clean);
 			
 			unset($clean['id']);
 			
@@ -412,7 +412,7 @@ class Omeka_Record implements ArrayAccess
 			try {
 				//Save will return TRUE if there are no validation errors
 				if($this->save()) {
-					$this->runCallbacks('postSaveForm', $clean);
+					$this->runCallbacks('afterSaveForm', $clean);
 
 					//	get_db()->commit();
 					return true;
@@ -433,8 +433,8 @@ class Omeka_Record implements ArrayAccess
 	
 	//Form callbacks
 	protected function filterInput($post) { return $post; }
-	protected function preSaveForm(&$post) {return true; }
-	protected function postSaveForm(&$post) {}
+	protected function beforeSaveForm(&$post) {return true; }
+	protected function afterSaveForm(&$post) {}
 	
 	/**
 	 * Adapted from Doctrine_Validator_Unique

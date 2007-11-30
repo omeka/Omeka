@@ -105,7 +105,7 @@ class Item extends Omeka_Record
 	 *
 	 * @return void
 	 **/
-	protected function preSaveForm(&$post)
+	protected function beforeSaveForm(&$post)
 	{
 
 		if(!empty($post['change_type'])) return false;
@@ -137,7 +137,7 @@ class Item extends Omeka_Record
 	 * 
 	 * @return void
 	 **/
-	protected function postSaveForm($post)
+	protected function afterSaveForm($post)
 	{
 		$this->saveFiles();
 		
@@ -182,7 +182,7 @@ class Item extends Omeka_Record
 	 *
 	 * @return void
 	 **/
-	protected function postSave()
+	protected function afterSave()
 	{
 		$this->saveMetatext();
 	}
@@ -240,7 +240,7 @@ class Item extends Omeka_Record
 					$file->upload('file', $key);
 					$file->item_id = $this->id;
 					$file->save();
-					fire_plugin_hook('post_upload_file', $file, $this);
+					fire_plugin_hook('after_upload_file', $file, $this);
 				}catch(Exception $e) {
 					
 					//If the file entry isn't persistent in DB for some reason, 

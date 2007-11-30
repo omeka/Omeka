@@ -86,7 +86,7 @@ class ExhibitSection extends Omeka_Record
 	}
 		
 	//Deleting a section must re-order the other sections
-	protected function postDelete()
+	protected function afterDelete()
 	{
 		$exhibit = $this->Exhibit;
 		$exhibit->reorderChildren();
@@ -96,7 +96,7 @@ class ExhibitSection extends Omeka_Record
 	 * @since 7-24-07 Now with slugs!
 	 *
 	 **/
-	protected function preSaveForm(&$post)
+	protected function beforeSaveForm(&$post)
 	{
 		//We need to make a slug for this section
 		$slugFodder = !empty($post['slug']) ? $post['slug'] : $post['title'];

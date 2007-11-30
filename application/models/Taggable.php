@@ -19,7 +19,7 @@ class Taggable extends Omeka_Record_Module
 		$this->conn = get_db();
 	}
 		
-	public function preDelete()
+	public function beforeDelete()
 	{
 		$this->deleteTaggings();
 	}

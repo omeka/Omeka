@@ -70,18 +70,18 @@ class File extends Omeka_Record {
 		}
 	}
 	
-	protected function preInsert()
+	protected function beforeInsert()
 	{
 		$this->added = date("Y-m-d H:i:s");
 		$this->modified = date("Y-m-d H:i:s");		
 	}
 	
-	protected function preUpdate()
+	protected function beforeUpdate()
 	{
 		$this->modified = date("Y-m-d H:i:s");
 	}
 	
-	protected function preSaveForm(&$post)
+	protected function beforeSaveForm(&$post)
 	{
 		$immutable = array(
 			'id', 
@@ -356,7 +356,7 @@ class File extends Omeka_Record {
 	 *
 	 * @return void
 	 **/
-	protected function postSave()
+	protected function afterSave()
 	{
 		if($this->Extended instanceof Omeka_Record) {
 			$this->Extended->file_id = $this->id;
@@ -367,8 +367,7 @@ class File extends Omeka_Record {
 	protected function checkImage( $new_dir, $old_path, $convertPath) {
 		
 		if (!$this->checkForImageMagick($convertPath)) {
-			//throw new Exception( 'ImageMagick library is required for thumbnail generation' );
-			return null;
+			throw new Exception( 'ImageMagick library is required for thumbnail generation' );
 		}
 		
 		if (!is_dir($new_dir)) {

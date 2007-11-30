@@ -519,13 +519,13 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		$this->_view->assign($vars);
 		
-		fire_plugin_hook('pre_render_page', $page, $vars);
+		fire_plugin_hook('before_render_page', $page, $vars);
 		
 		$body = $this->_view->renderFormat($this->getOutputFormat(), $page);
 		
 		$this->getResponse()->appendBody($body);
 		
-		fire_plugin_hook('post_render_page', $page, $vars);
+		fire_plugin_hook('after_render_page', $page, $vars);
 	}
 	
 	private function getOutputFormat()

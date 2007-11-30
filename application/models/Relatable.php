@@ -17,7 +17,7 @@ class Relatable extends Omeka_Record_Module
 	 *
 	 * @return void
 	 **/
-	public function postUpdate()
+	public function afterUpdate()
 	{
 		$entity = Omeka::loggedIn()->Entity;
 		$this->setModifiedBy($entity);		
@@ -28,13 +28,13 @@ class Relatable extends Omeka_Record_Module
 	 *
 	 * @return void
 	 **/
-	public function postInsert()
+	public function afterInsert()
 	{
 		$entity = Omeka::loggedIn()->Entity;		
 		$this->setAddedBy($entity);		
 	}
 	
-	public function preDelete()
+	public function beforeDelete()
 	{
 		$this->deleteRelations();
 	}
