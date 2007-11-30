@@ -40,10 +40,11 @@ class MockPluginBroker extends AbstractMockPluginBroker
 {
 	private $hookCount = 0;
 	
-	public function expectHooks($hooks, $args)
+	public function expectHooks($hooks, $args=null)
 	{
 		foreach ($hooks as $key => $hook) {
-			$this->expectAt($this->hookCount, '__call', array($hook, $args));
+			$hook_args = $args ? array($hook, $args) : array($hook);
+			$this->expectAt($this->hookCount, '__call', $hook_args);
 			$this->hookCount++;
 		}
 	}	

@@ -398,22 +398,21 @@ class Omeka_Record implements ArrayAccess
 		get_db()->beginTransaction();
 	*/
 		if(!empty($post))
-		{		
+		{					
 			$clean = $this->filterInput($post);
 			
-			//Can't get the runCallbacks() method to pass by reference
-			$this->preSaveForm($clean);
-			$this->delegateToModules('preSaveForm', array($clean), true);
-			$this->firePlugin('pre_save_form');
+			$clean = new ArrayObject($clean);
+			
+			$this->runCallbacks('preSaveForm', $clean);
 			
 			unset($clean['id']);
 			
 			$this->setArray($clean);
-		
+	
 			try {
 				//Save will return TRUE if there are no validation errors
 				if($this->save()) {
-					$this->runCallbacks('postSaveForm', $post);
+					$this->runCallbacks('postSaveForm', $clean);
 
 					//	get_db()->commit();
 					return true;

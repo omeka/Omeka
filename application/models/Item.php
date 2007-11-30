@@ -343,13 +343,18 @@ class Item extends Omeka_Record
 		//I couldn't get this to jive with Zend's thing so screw them
 		$dateFilter = new Omeka_Filter_Date;
 		
-		$clean['date'] = $dateFilter->filter($clean['date_year'], $clean['date_month'], $clean['date_day']);
+		if($clean['date_year']) {
+			$clean['date'] = $dateFilter->filter($clean['date_year'], $clean['date_month'], $clean['date_day']);
+		}
+	
+		if($clean['coverage_start_year']) {
+			$clean['temporal_coverage_start'] = $dateFilter->filter($clean['coverage_start_year'], $clean['coverage_start_month'], $clean['coverage_start_day']);
+		}
 		
-		$clean['temporal_coverage_start'] = $dateFilter->filter($clean['coverage_start_year'], $clean['coverage_start_month'], $clean['coverage_start_day']);
-		
-		$clean['temporal_coverage_end'] = $dateFilter->filter($clean['coverage_end_year'], $clean['coverage_end_month'], $clean['coverage_end_day']);
-		
-		
+		if($clean['coverage_end_year']) {
+			$clean['temporal_coverage_end'] = $dateFilter->filter($clean['coverage_end_year'], $clean['coverage_end_month'], $clean['coverage_end_day']);			
+		}
+	
 		//Ok now let's process the metafields
 		
 		if(!empty($clean['metafields'])) {
