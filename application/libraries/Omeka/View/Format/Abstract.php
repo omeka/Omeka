@@ -154,9 +154,9 @@ abstract class Omeka_View_Format_Abstract
 		if(!$output) {
 			$output = $this->_render();
 		}
-		
+	
 		//Check for a set of records if the custom method doesn't return anything
-		if(!$output) {
+		if($output === null) {
 			$output = $this->renderRecords();
 		}
 		
