@@ -231,7 +231,9 @@ class Item extends Omeka_Record
 	
 	private function saveFiles()
 	{
-		if(!empty($_FILES["file"]['name'][0])) {
+		if(!empty($_FILES["file"]['name'][0])) {			
+			
+			File::handleUploadErrors('file');
 			//Handle the file uploads
 			foreach( $_FILES['file']['error'] as $key => $error )
 			{ 

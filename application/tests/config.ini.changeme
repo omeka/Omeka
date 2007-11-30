@@ -10,3 +10,5 @@ app.url = ""
 
 ; mimics the entry with the same name in the main config.ini file.  best to leave this on for testing
 debug.exceptions = true
+
+paths.imagemagick = ""

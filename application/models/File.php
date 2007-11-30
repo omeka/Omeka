@@ -209,8 +209,116 @@ class File extends Omeka_Record {
 	
 	public function hasFullsize()
 	{
-		
 		return file_exists($this->getPath('fullsize'));
+	}
+	
+	/**
+	 * Discover all the potential errors for uploaded files before going through the 
+	 * arduous process of actually uploading them.
+	 *
+	 * Throws an error for the first problem it finds.
+	 *
+	 * @throws Omeka_Upload_Exception
+	 * @return void
+	 **/
+	public function handleUploadErrors($file_form_name)
+	{	
+		$file_form = $_FILES[$file_form_name];
+
+		//Check the $_FILES array for errors
+		foreach ($file_form['error'] as $key => $error) {
+			if($error != UPLOAD_ERR_OK) {
+				switch( $error ) {
+
+					// 1 - File exceeds upload size in php.ini
+					// 2 - File exceeds upload size set in MAX_FILE_SIZE
+					case UPLOAD_ERR_INI_SIZE:
+					case UPLOAD_ERR_FORM_SIZE:
+						throw new Omeka_Upload_Exception(
+							$_FILES[$file_form_name]['name'][$key] . ' exceeds the maximum file size.' . $_FILES[$file_form_name]['size'][$key]
+						);
+					break;
+					
+					// 3 - File partially uploaded
+					case UPLOAD_ERR_PARTIAL:
+						throw new Omeka_Upload_Exception(
+							$_FILES[$file_form_name]['name'][$key] . ' was only partially uploaded.  Please try again.'
+						);
+					break;
+					
+					//4 - No file was provided on the form
+					case UPLOAD_ERR_NO_FILE:
+						//Make sure this doesn't upload and gum up the works, otherwise ignore it
+						unset($_FILES[$file_form_name]['error'][$key]);
+						unset($_FILES[$file_form_name]['name'][$key]);
+						unset($_FILES[$file_form_name]['type'][$key]);
+						unset($_FILES[$file_form_name]['tmp_name'][$key]);
+						unset($_FILES[$file_form_name]['size'][$key]);
+						continue;
+						//throw new Omeka_Upload_Exception( 'No file was uploaded!' );
+					break;
+					
+					// 6 - Missing Temp folder
+					// 7 - Can't write file to disk
+					case UPLOAD_ERR_NO_TMP_DIR:
+					case UPLOAD_ERR_CANT_WRITE:
+						throw new Omeka_Upload_Exception(
+							'There was a problem saving the files to the server.  Please contact an administrator for further assistance.'
+						);
+					break;
+				}				
+			}
+			
+			//Otherwise the file was uploaded correctly, so check to see if it is an image
+			if(getimagesize($file_form['tmp_name'][$key])) {
+				self::checkOmekaCanMakeDerivativeImages();
+			}
+		}
+		
+		//Check whether the POST upload content size is too big
+		$POST_MAX_SIZE = ini_get('post_max_size');
+		$mul = substr($POST_MAX_SIZE, -1);
+		$mul = ($mul == 'M' ? 1048576 : ($mul == 'K' ? 1024 : ($mul == 'G' ? 1073741824 : 1)));
+		if ($_SERVER['CONTENT_LENGTH'] > $mul*(int)$POST_MAX_SIZE && $POST_MAX_SIZE) {
+			throw new Omeka_Upload_Exception( 'The size of uploaded files exceeds the maximum size allowed by your hosting provider (' . $POST_MAX_SIZE . ')' );
+		}
+				
+		//Check directory permissions
+		//@todo Replace this with a call to the DB to retrieve the paths to the upload directories		
+		$writable_directories = array(FILES_DIR, FULLSIZE_DIR, THUMBNAIL_DIR, SQUARE_THUMBNAIL_DIR);
+		foreach ($writable_directories as $dir) {
+			if (!is_dir($dir)) {
+				throw new Omeka_Upload_Exception ("The $dir directory does not exist on the filesystem.  Please create this directory and have a systems administrator");
+			}
+			if(!is_writable($dir)) {
+				throw new Omeka_Upload_Exception ('Unable to write to '. $dir . ' directory; improper permissions');
+			}
+		}		
+	}
+	
+	protected static function checkOmekaCanMakeDerivativeImages()
+	{
+		//Check to see if ImageMagick is installed
+		if (!self::checkForImageMagick(get_option('path_to_convert'))) {
+			throw new Omeka_Upload_Exception( 'ImageMagick is not properly configured.  Please check your settings and then try again.' );
+		}		
+		
+		//Check the constraints to make sure they are valid
+		$constraints = array('fullsize_constraint', 'thumbnail_constraint', 'square_thumbnail_constraint');
+		
+		foreach ($constraints as $constraint) {
+			$constraint_size = get_option($constraint);
+			
+			if(!$constraint_size or !is_numeric($constraint_size)) {
+				throw new Omeka_Upload_Exception( 
+					"The sizes for derivative images have not been configured properly." );
+			}
+		}
+	}
+	
+	protected static function checkForImageMagick($path) {
+		exec( $path . ' -version', $convert_version, $convert_return );
+		return ( $convert_return == 0 );
 	}
 	
 	/**
@@ -219,80 +327,32 @@ class File extends Omeka_Record {
 	 * @return void
 	 * 
 	 **/
-	public function upload($form_name, $index, $useExif = false) {
-		$error = $_FILES[$form_name]['error'][$index];
-
-		$POST_MAX_SIZE = ini_get('post_max_size');
-		$mul = substr($POST_MAX_SIZE, -1);
-		$mul = ($mul == 'M' ? 1048576 : ($mul == 'K' ? 1024 : ($mul == 'G' ? 1073741824 : 1)));
-		if ($_SERVER['CONTENT_LENGTH'] > $mul*(int)$POST_MAX_SIZE && $POST_MAX_SIZE) $error = true;
+	public function upload($form_name, $index) {
+		$tmp = $_FILES[$form_name]['tmp_name'][$index];
+		$name = $_FILES[$form_name]['name'][$index];
+		$originalName = $name;
+		$name = $this->sanitizeFilename($name);
+		$new_name = explode( '.', $name );
+		$new_name[0] .= '_' . substr( md5( mt_rand() + microtime( true ) ), 0, 10 );
+		$new_name_string = implode( '.', $new_name );
+		$path = FILES_DIR.DIRECTORY_SEPARATOR.$new_name_string;
+						
+		if( !move_uploaded_file( $tmp, $path ) ) throw new Omeka_Upload_Exception('Could not save file.');
 		
+		//set the attributes of this file
+		$this->size = $_FILES[$form_name]['size'][$index];
+		$this->authentication = md5_file( $path );
+		
+		$this->mime_browser = $_FILES[$form_name]['type'][$index];
+		$this->mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $path ) ) ) );
+		$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
 
-		if( $error == UPLOAD_ERR_OK ) {
-				$tmp = $_FILES[$form_name]['tmp_name'][$index];
-				$name = $_FILES[$form_name]['name'][$index];
-				$originalName = $name;
-				$name = $this->sanitizeFilename($name);
-				$new_name = explode( '.', $name );
-				$new_name[0] .= '_' . substr( md5( mt_rand() + microtime( true ) ), 0, 10 );
-				$new_name_string = implode( '.', $new_name );
-				$path = FILES_DIR.DIRECTORY_SEPARATOR.$new_name_string;
-				
-				if( !is_writable(dirname($path)) )
-				{
-					throw new Exception ('Unable to write to '. dirname($path) . ' directory; improper permissions');
-				}
-				
-				if( !move_uploaded_file( $tmp, $path ) ) throw new Exception('Could not save file.');
-				
-				//set the attributes of this file
-				$this->size = $_FILES[$form_name]['size'][$index];
-				$this->authentication = md5_file( $path );
-				
-				$this->mime_browser = $_FILES[$form_name]['type'][$index];
-				$this->mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $path ) ) ) );
-				$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
-
-				$this->original_filename = $originalName;
-				$this->archive_filename = $new_name_string;
-				
-				$this->createDerivativeImages($path);
-				
-				$this->processExtendedMetadata($path);
-		} else {
-				switch( $error ) {
-
-					// 1 - File exceeds upload size in php.ini
-					// 2 - File exceeds upload size set in MAX_FILE_SIZE
-					case UPLOAD_ERR_INI_SIZE:
-					case UPLOAD_ERR_FORM_SIZE:
-						throw new Exception(
-							$_FILES[$file_form_name]['name'][$key] . ' exceeds the maximum file size.' . $_FILES[$file_form_name]['size'][$key]
-						);
-					break;
-					
-					// 3 - File partially uploaded
-					case UPLOAD_ERR_PARTIAL:
-						throw new Exception(
-							$_FILES[$file_form_name]['name'][$key] . ' was only partially uploaded.  Please try again.'
-						);
-					break;
-					
-					//
-					case UPLOAD_ERR_NO_FILE:
-						throw new Exception( 'No file was uploaded!' );
-					break;
-					
-					// 6 - Missing Temp folder
-					// 7 - Can't write file to disk
-					case UPLOAD_ERR_NO_TMP_DIR:
-					case UPLOAD_ERR_CANT_WRITE:
-						throw new Exception(
-							'There was a problem saving the files to the server.  Please contact an administrator for further assistance.'
-						);
-					break;
-				}
-		}
+		$this->original_filename = $originalName;
+		$this->archive_filename = $new_name_string;
+		
+		$this->createDerivativeImages($path);
+		
+		$this->processExtendedMetadata($path);
 	}
 	
 	public function createDerivativeImages($path)
@@ -364,25 +424,9 @@ class File extends Omeka_Record {
 		}
 	}
 	
-	protected function checkImage( $new_dir, $old_path, $convertPath) {
-		
-		if (!$this->checkForImageMagick($convertPath)) {
-			throw new Exception( 'ImageMagick library is required for thumbnail generation' );
-		}
-		
-		if (!is_dir($new_dir)) {
-			throw new Exception ('Invalid directory to put new image');
-		}
-		if (!is_writable($new_dir)) {
-			throw new Exception ('Unable to write to '. $new_dir . ' directory; improper permissions');
-		}
-	}
-
 	protected function createImage( $old_path, $new_dir, $constraint, $type=null) {
 			$convertPath = get_option('path_to_convert');
-			
-			$this->checkImage( $new_dir, $old_path, $convertPath);
-			
+						
 			if (file_exists($old_path) && is_readable($old_path) && getimagesize($old_path)) {	
 
 				$filename = basename( $old_path );
@@ -396,7 +440,7 @@ class File extends Omeka_Record {
 				$new_path = escapeshellarg( $new_path );
 
 				if(!$constraint) {
-					throw new Exception('Image creation failed - Image size constraint must be specified within application settings');
+					throw new Omeka_Upload_Exception('Image creation failed - Image size constraint must be specified within application settings');
 				}
 
 				switch ($type) {
@@ -417,21 +461,17 @@ class File extends Omeka_Record {
 
 					return $imagename;	
 				} else {
-					throw new Exception('Something went wrong with image creation.  Ensure that the thumbnail directories have appropriate write permissions.');
+					throw new Omeka_Upload_Exception('Something went wrong with image creation.  Please notify an administrator.');
 				}
 			}
-	}
-	
-	protected function checkForImageMagick($path) {
-		exec( $path . ' -version', $convert_version, $convert_return );
-		return ( $convert_return == 0 );
 	}
 	
 	public function unlinkFile() {
 		$files = array( 
 			$this->getPath('fullsize'), 
 			$this->getPath('thumbnail'), 
-			$this->getPath('archive') );
+			$this->getPath('archive'),
+			$this->getPath('square_thumbnail') );
 		
 		foreach( $files as $file )
 		{
