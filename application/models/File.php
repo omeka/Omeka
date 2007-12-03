@@ -154,6 +154,30 @@ class File extends Omeka_Record {
 		}
 	}
 	
+	/**
+	 * Duplication, evil evil copying of code!!
+	 *
+	 * @return void
+	 **/
+	public function getWebPath($type='fullsize')
+	{
+		$fn = $this->getDerivativeFilename();
+		
+		switch ($type) {
+			//Kind of hacky, but get the value of the directory constant
+			case 'fullsize':
+				return WEB_FULLSIZE . DIRECTORY_SEPARATOR . $fn;
+			case 'thumbnail':
+				return WEB_THUMBNAILS . DIRECTORY_SEPARATOR . $fn;
+			case 'square_thumbnail':
+				return WEB_SQUARE_THUMBNAILS . DIRECTORY_SEPARATOR . $fn;
+			case 'archive':
+				return WEB_FILES . DIRECTORY_SEPARATOR . $this->archive_filename;
+			default:
+				break;
+		}
+	}
+	
 	public function getDerivativeFilename()
 	{
 		list($base, $ext) = explode('.', $this->archive_filename);

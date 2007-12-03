@@ -54,21 +54,9 @@ class FilesController extends Omeka_Controller_Action
 
 		//Otherwise use the chosen format of the image
 		
-		$path = $file->getPath($format);
+		$path = $file->getWebPath($format);
 
-		header('Content-type: ' . (string) $file->mime_browser);
-
-		$type = $this->_getParam('type');
-		
-		if(!$this->isValidDisposition($type)) {
-			$this->forbiddenAction();
-		}
-
-		// It will be called downloaded.pdf
-		header('Content-Disposition: ' . $type . '; filename="' . $file->original_filename . '"');
-
-		// The PDF source is in original.pdf
-		readfile($path);
+		header('Location: '.$path);
 	}
 }
 ?>
