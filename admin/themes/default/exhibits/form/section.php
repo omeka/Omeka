@@ -32,7 +32,7 @@
 ?>
 
 <form method="post" accept-charset="utf-8" action="" id="section-form" class="exhibit-builder">
-	<input type="hidden" name="output" value="json" />			
+			
 		<?php 
 		//	submit('Exhibit', 'exhibit_form');
 		//	submit('New Page', 'page_form'); 

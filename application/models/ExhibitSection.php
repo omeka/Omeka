@@ -39,7 +39,7 @@ class ExhibitSection extends Omeka_Record
 			$this->addError('slug', "Slug must be given for each section of an exhibit.");
 		}
 		
-		if(!$this->slugIsUnique($slug)) {
+		if(!$this->slugIsUnique($this->slug)) {
 			$this->addError('slug', 'Slugs for sections of an exhibit must be unique within that exhibit.');
 		}
 	}
@@ -53,6 +53,7 @@ class ExhibitSection extends Omeka_Record
 		//with that slug that aren't this particular record
 		if($this->exists()) {
 			$sql = "SELECT COUNT(DISTINCT(s.id)) FROM $db->ExhibitSection s WHERE s.id != ? AND s.slug = ?";
+			
 			$count = (int) $db->fetchOne($sql, array((int) $this->id, $slug));			
 		}
 		//Otherwise if the record doesn't exist in DB yet,

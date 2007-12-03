@@ -11,7 +11,7 @@ class Omeka_View_Format_Json extends Omeka_View_Format_Abstract
 		
 		require_once HELPERS;
 		
-		if($msg = flash()) {
+		if($msg = flash(false)) {
 			$json_a['Flash'] = $msg;
 		}
 		
