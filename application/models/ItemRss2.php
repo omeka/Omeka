@@ -68,7 +68,7 @@ class ItemRss2 extends Omeka_Record_Feed_Abstract
 		//Branch on type to figure out what to put in the 'content' part
 		switch ($item->Type->name) {
 			case 'Document':
-				$entry['content'] = $item->getMetatext('Text');
+				$entry['description'] = $item->getMetatext('Text');
 				break;
 			
 			case 'Still Image':

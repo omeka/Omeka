@@ -274,7 +274,10 @@ class ExhibitsController extends Omeka_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
-		return $this->render('exhibits/form/exhibit.php',compact('exhibit'));
+		$pass_to_template = compact('exhibit');
+		$pass_to_template['record'] = $exhibit;
+		
+		return $this->render('exhibits/form/exhibit.php',$pass_to_template);
 	}
 	
 	/**
@@ -318,7 +321,7 @@ class ExhibitsController extends Omeka_Controller_Action
 			$this->flash($e->getMessage());
 			$retVal = false;
 		}
-		
+			
 		//If successful form submission
 		if($retVal)
 		{	
@@ -353,14 +356,12 @@ class ExhibitsController extends Omeka_Controller_Action
 			}				
 		}
 		
-		//If we are trying to render the JSON output, it's on a different page
-		if($this->_getParam('output') == 'json') {
-			return $this->render('exhibits/section.php', compact('section'));
-		}
-		//Otherwise we are rendering the admin theme's section form page
-		else {
-			return $this->render('exhibits/form/section.php',compact('exhibit','section'));		
-		}		
+		//For a data feed, the record we want to render is the ExhibitSection
+		$pass_to_template = compact('exhibit', 'section');
+		$pass_to_template['record'] = $section;
+		
+		return $this->render('exhibits/form/section.php', $pass_to_template);	
+			
 	}
 	
 	/**
@@ -566,7 +567,7 @@ class ExhibitsController extends Omeka_Controller_Action
 	{
 		$exhibit = $this->findOrNew();
 		
-		$this->render('exhibits/_section_list.php', compact('exhibit'));
+		return $this->render('exhibits/_section_list.php', compact('exhibit'));
 	}
 	
 	public function pageListAction()

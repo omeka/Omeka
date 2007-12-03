@@ -9,6 +9,12 @@ class Omeka_View_Format_Json extends Omeka_View_Format_Abstract
 		//In the case of JSON, rendering the records returns the JSON array sans encoding
 		$json_a = $this->renderRecords();
 		
+		require_once HELPERS;
+		
+		if($msg = flash()) {
+			$json_a['Flash'] = $msg;
+		}
+		
 		$json = Zend_Json::encode($json_a);
 		
 		//Prototype.js doesn't recognize JSON unless the header is X-JSON: {json} all on one line [KK]
