@@ -1,9 +1,9 @@
 <?php head(array('title'=>'Edit Tags', 'body_class'=>'tags')); ?>
-<?php echo flash(); ?>
 <?php common('archive-nav'); ?>
+<?php echo flash(); ?>
 
 <div id="primary">
-	<h1>Edit Tags</h1>
+	<h1>Rename Tags</h1>
 <form method="post">
 <select name="old_tag">
 	<?php foreach( $tags as $key => $tag ): ?>
@@ -11,9 +11,10 @@
 	<?php endforeach; ?>
 </select>
 
+<label for="new_tag">New name:</label>
 <input type="text" name="new_tag" />
 
-<input type="submit" name="submit" value="Edit these Tags" />
+<input type="submit" name="submit" value="Rename this tag" />
 
 </form>
 </div>

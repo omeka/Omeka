@@ -56,82 +56,106 @@ class Tag extends Omeka_Record {
 	}
 	
 	/**
+	 * The check for unique tag names must take into account CASE SENSITIVITY, 
+	 * which is accomplished via COLLATE utf8_bin sql
+	 *
+	 * @return bool
+	 **/
+	protected function fieldIsUnique($field)
+	{
+		if($field != 'name') {
+			return parent::fieldIsUnique($field);
+		}
+		else {
+			$db = get_db();
+			$sql = "SELECT id FROM $db->Tag WHERE name COLLATE utf8_bin LIKE ?";
+			$res = $db->query($sql, $this->name);
+			return ( ! is_array($res->fetch()));
+		}
+	}
+	
+	/**
 	 * Rename all the instances of a tag
 	 * 1) Find a set of all the joins that need to be updated
 	 * 2) Ignore the original tag if included in the list of new tags
 	 * 3) Loop through the new tags, loop through the joins and create a new one for each new tag
 	 * @return void
 	 **/
-	public function rename($newNames, $user_id = null, $delimiter=",") {
-		throw new Exception( 'rename taggings must be fixed' );
+	public function rename($new_names, $user_id = null, $delimiter=",") 
+	{
 		$joins = array();
-/*
+		
+		$find_criteria = array('tag'=>$this->name);
+		
+		if($user_id) {
+			$find_criteria['user'] = (int) $user_id;
+		}
+		
+		$taggings = $this->getTable('Taggings')->findBy($find_criteria);
 			
+/*
 		$dql = "SELECT j.* FROM Taggings j WHERE j.tag_id = ?";
 			if($user_id) {
 				$dql .= " AND j.user_id = $user_id";
 			}
 			$joins[$joinTable] = $this->executeDql($dql, array($this->id, ));
 		}
-		
 */	
-		if(in_array($this->name, $newNames)) {
+		
+	
+		if(in_array($this->name, $new_names)) {
+
 			//Remove the original name from the list
-			$newNames = array_diff($newNames,array($this->name));
+			$new_names = array_diff($new_names,array($this->name));
 			//Ignore the existing joins
 			
 			//If there are no new names left, finish
-			if(!count($newNames)) {
+			if(!count($new_names)) {
 				return true;
 			}
 			
 		}else {
 			//Otherwise take the first name and use it to update the existing joins
-			$newName = array_shift($newNames);
-		
+			$new_name = array_shift($new_names);
+				
 			//Find the tag or make a new one
-			$newTag = $this->getTable()->findOrNew($newName);
-			$newTag->save();
+			$new_tag = $this->getTable()->findOrNew($new_name);
+			$new_tag->forceSave();
 			
-			$newTagId = $newTag->id;
-			
-			//Update all the existing joins
-			foreach ($joins as $joinSet) {
-				foreach ($joinSet as $join) {
-					$join->tag_id = $newTagId;
+			$new_tag_id = $new_tag->id;
 					
-					//If saving doesn't work, its because of unique constraint violations
-					//So we should delete the join because it already exists
-					try {
-						$join->trySave();
-					} catch (Exception $e) {
-						$join->delete();
-					}
+			//Update all the existing joins
+			foreach ($taggings as $key => $tagging) {
+				$tagging->tag_id = $new_tag_id;
+			
+				//If saving doesn't work, its because of unique constraint violations
+				//So we should delete the join because it already exists
+				try {
+					$tagging->save();
+				} catch (Omeka_Db_Exception $e) {
+					$tagging->delete();
 				}
 			}
 		}
 		
 		//Create new joins for the newly entered tags (if applicable)
-		
-		foreach ($newNames as $k => $newName) {
-			$newTag = $this->getTable()->findOrNew($newName);
-			$newTag->save();
+		foreach ($new_names as $k => $new_name) {
+			$new_tag = $this->getTable()->findOrNew($new_name);
+			$new_tag->forceSave();
 			
-			$newTagId = $newTag->id;
-			
-			foreach ($joins as $joinSet) {
-				foreach ($joinSet as $join) {
+			$new_tag_id = $new_tag->id;
+						
+			foreach ($taggings as $tagging) {
 					//clone the existing join
-					$clone = $join->copy();
-					
+					$new_tagging = clone $tagging;
+				
 					//set the tag_id for the cloned join
 					
-					$clone->tag_id = $newTagId; 
+					$new_tagging->tag_id = $new_tag_id; 
 					
 					//save the new join
-					$clone->trySave();
+					$new_tagging->save();
 				}
-			}
 		}
 					
 	}

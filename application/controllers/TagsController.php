@@ -20,16 +20,9 @@ class TagsController extends Omeka_Controller_Action
 			if(!empty($_POST)) {				
 				$this->editTags($user);
 			}
-			
-			//Having 'rename' permissions really means that user can rename everyone's tags
-			if($this->isAllowed('rename')) {
-				$tags = $this->getTagListWithCount();
-			}else {
-				$tags = $this->getTagListWithCount($user->id);
-			}
-			
-			
-			
+					
+			$tags = $this->getTagsforAdministration();
+						
 			return $this->render('tags/edit.php', compact('tags'));
 		}
 	}
@@ -47,15 +40,31 @@ class TagsController extends Omeka_Controller_Action
 				}
 				$this->flash("Tag named '{$tag->name}' was successfully deleted.");
 			}
-			if($this->isAllowed('remove')) {
-				$tags = $this->getTagListWithCount();
-			}else {
-				$tags = $this->getTagListWithCount($user->id);
-			}
-			
+						
+			$tags = $this->getTagsForAdministration();
 			
 			return $this->render('tags/delete.php', compact('tags'));
 		}
+	}
+	
+	protected function getTagsForAdministration()
+	{
+		$user = Omeka::loggedIn();
+		
+		if(!$user) {
+			throw new Exception( 'You have to be logged in to edit tags!' );
+		}
+		
+		$criteria = array('sort'=>'most');
+		
+		//Having 'rename' permissions really means that user can rename everyone's tags
+		if(!$this->isAllowed('rename')) {
+			$criteria['user'] = $user->id;
+		}
+		
+		$tags = $this->_table->findBy($criteria);
+		
+		return $tags;	
 	}
 	
 	
@@ -105,8 +114,6 @@ class TagsController extends Omeka_Controller_Action
 		//Since tagType must correspond to a valid classname, this will barf an error on Injection attempts
 		if(!class_exists($for)) {
 			throw new Exception( 'Invalid tagType given' );
-		}else {
-			$classFor = new $for;
 		}
 		
 		if($record = $this->_getParam('record')) {
@@ -130,6 +137,8 @@ class TagsController extends Omeka_Controller_Action
 		//Plugin hook
 		fire_plugin_hook('browse_tags',  $tags, $for);
 		
-		return $this->render('tags/browse.php',compact('tags','total_tags'));
+		$browse_for = $for;
+		
+		return $this->render('tags/browse.php',compact('tags','total_tags', 'browse_for'));
 	}
 }

@@ -156,7 +156,21 @@ class Omeka_Db
 
 		return (int) $this->_conn->lastInsertId();
    }
-
+	
+	/**
+	 * Factory to determine the right Omeka database exception to throw in a given case
+	 *
+	 * @return Omeka_Db_Exception
+	 * @return void
+	 **/
+	protected function throwOmekaDbException(array $errorInfo, PDOException $e, $sql)
+	{
+		if( ($errorInfo[0] == "23000") and ($errorInfo[1] == 1048)) {
+			throw new Omeka_Db_NullColumnException($e, $sql);
+		}
+		throw new Omeka_Db_Exception($e, $sql);
+	}
+	
 	//The only way to use PDO::exec() with prepared queries
 	public function exec($sql, $params=array())
 	{
@@ -170,7 +184,7 @@ class Omeka_Db
 			$stmt = $this->_conn->prepare($sql);
 			return $stmt->execute($params);
 		} catch (PDOException $e) {
-			throw new Omeka_Db_Exception($e, $sql);
+			$this->throwOmekaDbException($stmt->errorInfo(), $e, $sql);
 		}
 	}
 	

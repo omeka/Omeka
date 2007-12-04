@@ -294,6 +294,20 @@ class Omeka_Record implements ArrayAccess
 		return true;
 	}
 	
+	public function forceSave()
+	{
+		if(!$this->isValid() or !$this->save()) {
+			throw new Omeka_Validator_Exception($this->getErrors());
+		}
+		
+		return true;
+	}
+	
+	public function __clone()
+	{
+		$this->id = null;
+	}
+	
 	/**
 	 * Subclasses are actually responsible for running the SQL queries that do the deleting
 	 *

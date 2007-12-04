@@ -10,7 +10,7 @@ class TagTable extends Omeka_Table
 {	
 	public function findOrNew($name) {
 		$db = get_db();
-		$sql = "SELECT t.* FROM {$db->Tag} t WHERE t.name = ? LIMIT 1";
+		$sql = "SELECT t.* FROM {$db->Tag} t WHERE t.name COLLATE utf8_bin LIKE ? LIMIT 1";
 		$tag = $this->fetchObjects($sql, array($name), true);
 		
 		if(!$tag) {
@@ -24,23 +24,21 @@ class TagTable extends Omeka_Table
 	/**
 	 * Retrieve a certain number of tags
 	 *
-	 * @param int limit
-	 * @param bool alphabetical order
-	 * @param bool ordered by count
-	 * @param bool ordered by most recent
-	 * @param Item only tags from this Item
-	 * @param User only tags from this User
-	 * @return Doctrine_Collection tags
+	 * @param array $params
+	 * 		'sort' => 'recent', 'least', 'most', 'alpha'
+	 *		'limit' => int
+	 * 		'record' => instanceof Omeka_Record
+	 *		'entity' => entity_id
+	 *		'user' => user_id
+	 *		'return' => 'array', 'object', 'count'
+	 * @return mixed
 	 **/
 	public function findBy($params=array(), $for=null)
 	{
 		$defaults = array(/*
 			'limit'=>100,
 		*/	
-							'alpha'=>false,
-							'recent'=>false,
-							'mostToLeast'=>false,
-							'leastToMost'=>false,
+							'sort'=>false,
 							'record'=>null,
 							'entity'=>null,
 							'user'=>null,
@@ -85,16 +83,22 @@ class TagTable extends Omeka_Table
 		}
 
 		if($params['return'] != 'count') {
-				if((bool) $params['recent']) {
-					$select->order('tg.time DESC');
-				}elseif($alpha) {
-					$select->order('t.name ASC');
-				}	
-				elseif((bool) $params['mostToLeast']) {
-					$select->order('tagCount DESC');
-				}elseif(isset($params['leastToMost'])) {
-					$select->order('tagCount ASC');
-				}	
+				switch ($params['sort']) {
+					case 'recent':
+						$select->order('tg.time DESC');
+						break;
+					case 'alpha':
+						$select->order('t.name ASC');
+						break;
+					case 'most':
+						$select->order('tagCount DESC');
+						break;
+					case 'least':
+						$select->order('tagCount ASC');
+						break;
+					default:
+						break;
+				}
 		}
 
 		//Showing tags related to items
@@ -205,28 +209,6 @@ class TagTable extends Omeka_Table
 							
 		return $tags;
 	}
-	
-	protected function getTagListWithCount($user_id=null) {
-			$select = new Omeka_Select;
-			$select->from('tags t', 't.*, (COUNT(tg.id) AS tagCount')
-					->joinLeft('taggings tg', 'tg.tag_id = t.id')
-					->joinLeft('entities e', 'e.id = tg.entity_id')
-					->joinLeft('users u', 'u.entity_id = e.id')
-					->group('t.id')
-					->having('tagCount > 0');
-			
-			
-			if($user_id) {
-				//This user can only edit their own tags
-				$select->where('u.id = ?', $user_id);
-				$tags = $select->execute()->fetchAll();
-			}else {
-				//This user can edit everyone's tags
-				$tags = $select->execute()->fetchAll();
-			}
-			
-			return $tags;		
-	} 
 } // END class TagTable extends Omeka_Table
 
 ?>
