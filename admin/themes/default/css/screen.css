@@ -89,6 +89,8 @@ input#tags-submit {display: inline;}
 	.navigation a {text-decoration:none;}
 
 .error {background:#f1c8ba; color:#933; margin:1.5em; font-size:1.2em; padding:1.5em;}
+.field .error {clear:both;}
+.success {background-color: #B9D5B9; color:#245525; font-size:1.2em;}
 .alert {background:#fff09e; font-size:1.2em; padding: 0.5em;}
 
 .tooltip {font-size:1.2em; line-height:1.5em;}
@@ -110,6 +112,7 @@ ul.tags, li.tag {display: inline;}
 .add,
 .delete,
 .error,
+.success,
 .edit,
 .browse,
 .editsettings,
@@ -144,6 +147,7 @@ ul.tags, li.tag {display: inline;}
 .add {background-image:url("../images/page_add.gif");}
 .delete,.delete-exhibit {background-image:url("../images/delete.gif");}
 .error {background-image:url("../images/error.gif");}
+.success {background-image:url("../images/tick.gif");}
 .browse {background-image:url("../images/book_open.gif");}
 .browse-exhibits {background-image:url("../images/pictures.gif");}
 .add-exhibit {background-image:url("../images/picture_add.gif");}

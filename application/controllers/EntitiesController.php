@@ -53,10 +53,14 @@ class EntitiesController extends Omeka_Controller_Action
 						
 			if($e->saveForm($_POST)) {
 				
-				$this->flash('Successfully added!');
+				$this->flashSuccess('Successfully added!');
 				
 				$this->_redirect('add');
 			} 
+		}
+		catch (Omeka_Validator_Exception $e)
+		{
+			$this->flashValidationErrors($e);
 		} catch (Exception $e) {
 			$this->flash($e->getMessage());
 		}

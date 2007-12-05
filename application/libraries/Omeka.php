@@ -21,6 +21,16 @@ final class Omeka
 
 		return false;
 	}
+
+	/**
+	 * Replace _ with spaces and capitalize words
+	 *
+	 * @return string
+	 **/	
+	static function humanize($value)
+	{
+		return ucwords(strtolower(str_replace('_', ' ', $value)));
+	}
 	
 	/**
 	 * Convenience method returns the logged in user

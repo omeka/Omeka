@@ -1,7 +1,6 @@
 <?php head(array('title'=>'Browse Users', 'body_class'=>'users'));?>
 <?php common('users-nav'); ?>
 <div id="primary">
-<?php echo flash(); ?>
 <h1 class="floater">Browse Users</h1>
 <table id="users">
 	<thead>

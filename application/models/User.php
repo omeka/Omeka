@@ -12,7 +12,7 @@ class User extends Omeka_Record {
 
 	public $username;
 	public $password;
-	public $active;
+	public $active = '0';
 	public $role;
 	public $entity_id;
 	
@@ -251,7 +251,7 @@ class User extends Omeka_Record {
 				$entity = new Person;
 			}
 		}
-			
+		
 		//The new email address is fully legit, so set the entity to the new info				
 		$entity->first_name = $post['first_name'];
 		$entity->last_name = $post['last_name'];

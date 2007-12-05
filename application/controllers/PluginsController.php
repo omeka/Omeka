@@ -40,7 +40,7 @@ class PluginsController extends Omeka_Controller_Action
 			return $this->render('plugins/config.php', compact('config', 'plugin'));
 		}
 		else {
-			$this->flash('Plugin configuration successfully changed!');
+			$this->flashSuccess('Plugin configuration successfully changed!');
 			$this->_redirect('plugins/browse');	
 		}
 	}
@@ -61,7 +61,7 @@ class PluginsController extends Omeka_Controller_Action
 				return $this->render('plugins/config.php', compact('config', 'plugin'));
 			}
 			else {
-				$this->flash("Plugin named '$plugin' was successfully installed!");
+				$this->flashSuccess("Plugin named '$plugin' was successfully installed!");
 				$this->_redirect('plugins/browse');
 			}			
 		}

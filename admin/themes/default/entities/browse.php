@@ -4,8 +4,6 @@
 <div id="primary">
 <h1>Browse Names</h1>
 
-<?php echo flash(); ?>
-
 <div id="names-browse">
 	
 <?php if(!$_GET['hierarchy']): //Let's lose the table for now'?>

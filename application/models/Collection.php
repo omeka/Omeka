@@ -44,6 +44,17 @@ class Collection extends Omeka_Record
 		return ($this->exists()) ? $this->getRelatedEntities('collector') : array();
 	}
 
+	protected function _validate()
+	{
+		if(empty($this->name)) {
+			$this->addError('name', 'Collection must be given a valid name.');
+		}
+		
+		if(strlen($this->name) > 255) {
+			$this->addError('name', 'Collection name must be less than 255 characters.');
+		}
+	}
+
 	public function beforeSaveForm(&$post)
 	{
 		//Handle the boolean vars in the form

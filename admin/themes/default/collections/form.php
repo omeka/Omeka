@@ -5,20 +5,25 @@
 
 <div class="field">
 <?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name, 'Collection Name'); ?>
+<?php echo form_error('name'); ?>
 </div>
 
 <div class="field">
+<?php echo form_error('description'); ?>
 <?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
 </div>
 
 <?php $entities = entities(); ?>
 
-<?php foreach( $collection->Collectors as $k => $collector ): ?>
-<h3>Collectors: </h3>
-<ul id="collectors">
-	<li><?php echo h($collector->getName()); ?></li>
-</ul>
-<?php endforeach; ?>
+<?php if(has_collectors($collection)): ?>
+	<h3>Collectors: </h3>
+	<?php foreach( $collection->Collectors as $k => $collector ): ?>
+
+	<ul id="collectors">
+		<li><?php echo h($collector->getName()); ?></li>
+	</ul>
+	<?php endforeach; ?>
+<?php endif; ?>
 
 <div class="field">
 <?php 

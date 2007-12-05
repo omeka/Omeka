@@ -6,7 +6,7 @@ require_once 'Entity.php';
  */
 class Institution extends Entity
 {
-	public function beforeSave()
+	public function construct()
 	{
 		$this->type = "Institution";
 	}

@@ -7,14 +7,16 @@ require_once 'Institution.php';
  */
 class Person extends Entity
 {	
+	protected function construct()
+	{
+		$this->type = "Person";
+	}
 	/**
 	 * Find the institution for the Entity and save it as parent_id
 	 *
 	 **/
 	public function beforeSave()
-	{		
-		$this->type = "Person";	
-		
+	{				
 		if(!empty($this->institution)) {
 			$this->setParentToInstitution();
 		}

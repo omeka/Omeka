@@ -38,7 +38,7 @@ class TagsController extends Omeka_Controller_Action
 				}else {
 					$tag->deleteForEntity($user->Entity);
 				}
-				$this->flash("Tag named '{$tag->name}' was successfully deleted.");
+				$this->flashSuccess("Tag named '{$tag->name}' was successfully deleted.");
 			}
 						
 			$tags = $this->getTagsForAdministration();

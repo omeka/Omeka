@@ -270,7 +270,11 @@ class ExhibitsController extends Omeka_Controller_Action
 				}			
 			}
 					
-		} catch (Exception $e) {
+		} 
+		catch (Omeka_Validator_Exception $e) {
+			$this->flashValidationErrors($e);
+		}
+		catch (Exception $e) {
 			$this->flash($e->getMessage());
 		}
 		

@@ -458,7 +458,7 @@ class Item extends Omeka_Record
 			if(in_array($col, $avoid)) continue;
 			
 			//Field name should not have underscores and should be uppercase
-			$field = humanize($col);
+			$field = Omeka::humanize($col);
 			
 			$key = $prefix ? 'item_' . $col : $col; 
 			$fields[$key] = $field;

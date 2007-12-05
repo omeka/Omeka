@@ -9,7 +9,7 @@ class UserTestCase extends OmekaTestCase
 		return parent::setUp();
 	}
 	
-	public function testUserFormDoesNotDieWhenCannotSave()
+	public function testUserFormValidatesCorrectly()
 	{
 		$this->setUpLiveDb();
 		
@@ -26,6 +26,7 @@ class UserTestCase extends OmekaTestCase
 		
 		$u = new User;
 		
+		//This should validate b/c the email address is used, but not by another user
 		$form = array('username'=>'whatever', 'first_name'=>'Alge', 'last_name'=>'Crumpler', 'email'=>'asdfasdf@omeka.org', 'role'=>'contributor');
 		
 		$u->saveForm($form);

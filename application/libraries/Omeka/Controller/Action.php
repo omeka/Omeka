@@ -351,13 +351,31 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 * @starred
 	 * 
 	 */
-	public function flash($msg=null)
+	public function flash($msg=null, $flash_code=null, $priority=null)
 	{
-		require_once 'Zend/Session.php';
-		$flash = new Zend_Session_Namespace('flash');
-		$flash->msg = $msg;
+		if(!$flash_code) $flash_code = Omeka_Controller_Flash::ALERT;
+		
+		$flash = new Omeka_Controller_Flash();
+		$flash->setFlash($flash_code, $msg, $priority);
 	}
-
+	
+	public function flashValidationErrors($e, $priority=null)
+	{
+		if(!$priority) $priority = Omeka_Controller_Flash::DISPLAY_NOW;
+		
+		$errors = $e->getErrors();
+		
+		$flash = new Omeka_Controller_Flash();
+		
+		$flash->setFlash(Omeka_Controller_Flash::VALIDATION_ERROR, $errors, $priority);
+	}
+	
+	public function flashSuccess($msg)
+	{
+		$flash = new Omeka_Controller_Flash;
+		$flash->setFlash(Omeka_Controller_Flash::SUCCESS, $msg, Omeka_Controller_Flash::DISPLAY_NEXT);
+	}
+	
 	///// BASIC CRUD INTERFACE /////
 	
 	public function homeAction()
@@ -440,7 +458,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		} 
 		catch (Omeka_Validator_Exception $e)
 		{
-			throw new Exception( 'Implement Omeka_Validator_Exception catching in default addAction()' );
+			$this->flashValidationErrors($e);
 		}
 		catch (Exception $e) {
 			$this->flash($e->getMessage());

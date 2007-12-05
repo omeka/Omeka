@@ -387,15 +387,39 @@ function current_uri($params=array())
 
 function flash($wrap=true)
 {
-	require_once 'Zend/Session.php';
-	$flash = new Zend_Session_Namespace('flash');
+	$flash = new Omeka_Controller_Flash;
 	
-	$msg = $flash->msg;
-	$flash->msg = null;
-	if ($msg === null) {
-		return false;
+	switch ($flash->getStatus()) {
+		case Omeka_Controller_Flash::SUCCESS:
+			$wrap_class = 'success';
+			break;
+		case Omeka_Controller_Flash::VALIDATION_ERROR:
+			$wrap_class = 'error';
+			break;
+		case Omeka_Controller_Flash::GENERAL_ERROR:
+			$wrap_class = 'error';
+			break;
+		case Omeka_Controller_Flash::ALERT:
+			$wrap_class = 'alert';
+			break;		
+		default:
+			break;
 	}
-	return $wrap ? '<div class="alert">'.nl2br($msg).'</div>' : $msg;
+	
+	return $wrap ? 
+		'<div class="' . $wrap_class . '">'.nl2br($flash->getMsg()).'</div>' : 
+		$flash->getMsg();
+}
+
+function form_error($field)
+{
+	$flash = new Omeka_Controller_Flash;
+	
+	if($flash->getStatus() != Omeka_Controller_Flash::VALIDATION_ERROR) return;
+	
+	if(($msg = $flash->getError($field))) {
+		return '<div class="error">'.$msg.'</div>';
+	}
 }
 
 ///// NAVIGATION /////

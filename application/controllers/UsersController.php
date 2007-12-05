@@ -124,7 +124,7 @@ class UsersController extends Omeka_Controller_Action
 				
 				$this->sendActivationEmail($user);
 				
-				$this->flash('User was added successfully!');
+				$this->flashSuccess('User was added successfully!');
 				
 				//If this is an AJAX request then we will want to return the alternative representation of the User object
 				if($this->isAjaxRequest()) {
@@ -134,8 +134,8 @@ class UsersController extends Omeka_Controller_Action
 				//Redirect to the main user browse page
 				$this->_redirect('users');
 			}
-		} catch (Exception $e) {
-			$this->flash($e->getMessage());
+		} catch (Omeka_Validator_Exception $e) {
+			$this->flashValidationErrors($e);
 		}
 			
 		if($this->isAjaxRequest()) {
@@ -181,10 +181,10 @@ class UsersController extends Omeka_Controller_Action
 				$user->changePassword($_POST['new_password1'], $_POST['new_password2'], $_POST['old_password']);
 				$user->save();
 			}
-			$this->flash('Password was changed successfully.');
+			$this->flashSuccess('Password was changed successfully.');
 			
-		} catch (Exception $e) {
-			$this->flash($e->getMessage());
+		} catch (Omeka_Validator_Exception $e) {
+			$this->flashValidationErrors($e, Omeka_Controller_Flash::DISPLAY_NEXT);
 		}
 		
 		$this->_redirect('users/edit/'.$user->id);

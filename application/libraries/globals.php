@@ -42,16 +42,6 @@ function current_user()
 	return Omeka::loggedIn();
 }
 
-/**
- * Replace _ with spaces and capitalize words
- *
- * @return string
- **/
-function humanize($value)
-{
-	return ucwords(str_replace('_', ' ', $value));
-}
-
 function get_db()
 {
 	return Zend_Registry::get('db');
