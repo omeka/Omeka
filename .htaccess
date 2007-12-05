@@ -20,8 +20,8 @@ Allow from all
 </Files>
 
 <IfModule mod_expires.c>
-  <FilesMatch "\.(js|css|gif|png)$">
-       ExpiresActive on
-       ExpiresDefault "access plus 10 day"
-   </FilesMatch>
+#  <FilesMatch "\.(js|css|gif|png)$">
+#       ExpiresActive on
+#       ExpiresDefault "access plus 10 day"
+#   </FilesMatch>
 </IfModule>
