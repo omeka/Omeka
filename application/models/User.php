@@ -24,11 +24,11 @@ class User extends Omeka_Record {
 		return $this->getTable('Entity')->find((int) $this->entity_id);
 	}
 	
-	public function beforeSave()
+	protected function beforeSave()
 	{
 		$this->Entity->save();
 		$this->entity_id = $this->Entity->id;
-	
+		
 		
 		//This part checks the password to see if it has been changed, then encrypts it accordingly
 		$db = get_db();
@@ -45,7 +45,7 @@ class User extends Omeka_Record {
 			$this->password = sha1($this->password);
 		}
 	}
-
+	
 	protected function beforeSaveForm(&$post)
 	{
 		if(!$this->processEntity($post)) {

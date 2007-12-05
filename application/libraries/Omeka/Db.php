@@ -189,7 +189,7 @@ class Omeka_Db
 	}
 	
 	//Use the PDO::query() with prepared queries
-	public function query($sql, $params=array(), $fetchMode=null)
+	public function query($sql, array $params=array(), $fetchMode=null)
 	{
 		
 if($_GET['sql']) {

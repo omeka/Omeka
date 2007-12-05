@@ -69,7 +69,7 @@ class Tag extends Omeka_Record {
 		else {
 			$db = get_db();
 			$sql = "SELECT id FROM $db->Tag WHERE name COLLATE utf8_bin LIKE ?";
-			$res = $db->query($sql, $this->name);
+			$res = $db->query($sql, array($this->name));
 			return ( ! is_array($res->fetch()));
 		}
 	}

@@ -63,8 +63,7 @@ WHERE tg.type = 'Item' AND u.id = '1'");
 FROM tags t 
 INNER JOIN taggings tg ON tg.tag_id = t.id 
 WHERE tg.relation_id = '2' AND tg.type = 'Item' 
-GROUP BY t.id 
-ORDER BY tagCount ASC");
+GROUP BY t.id");
 		
 		$table->findBy(array('record'=>$item));
 	}	
@@ -80,7 +79,7 @@ INNER JOIN taggings tg ON tg.tag_id = t.id
 INNER JOIN entities e ON e.id = tg.entity_id 
 INNER JOIN items i ON i.id = tg.relation_id 
 WHERE tg.type = 'Item' AND e.id = '2' 
-GROUP BY t.id ORDER BY tagCount ASC");
+GROUP BY t.id");
 		
 		$this->db->getTable('Tag')->findBy( array('entity'=>2), 'Item');		
 	}	
@@ -96,8 +95,7 @@ FROM tags t
 INNER JOIN taggings tg ON tg.tag_id = t.id 
 INNER JOIN items i ON i.id = tg.relation_id 
 WHERE tg.type = 'Item' AND i.public = 1 
-GROUP BY t.id 
-ORDER BY tagCount ASC");
+GROUP BY t.id");
 		
 		$this->db->getTable('Tag')->findBy( array('public'=>true), 'Item');		
 	}	
@@ -110,7 +108,6 @@ ORDER BY tagCount ASC");
 FROM tags t 
 INNER JOIN taggings tg ON tg.tag_id = t.id 
 GROUP BY t.id 
-ORDER BY tagCount ASC 
 LIMIT 5");
 		
 		$this->db->getTable('Tag')->findBy( array('limit'=>5), null );
@@ -129,7 +126,7 @@ WHERE tg.type = 'Item'
 GROUP BY t.id 
 ORDER BY tg.time DESC");
 		
-		$this->db->getTable('Tag')->findBy( array('recent'=>true), 'Item');		
+		$this->db->getTable('Tag')->findBy( array('sort'=>'recent'), 'Item');		
 	}	
 			
 	public function testOrderedMostToLeast()
@@ -141,13 +138,13 @@ INNER JOIN taggings tg ON tg.tag_id = t.id
 GROUP BY t.id 
 ORDER BY tagCount DESC");
 		
-		$this->db->getTable('Tag')->findBy( array('mostToLeast'=>true), null);		
+		$this->db->getTable('Tag')->findBy( array('sort'=>'most'), null);		
 	}	
 
 	public function testFindOrNew()
 	{
 	
-		$this->db->expectQuery("SELECT t.* FROM tags t WHERE t.name = ? LIMIT 1", array('Tag1'));
+		$this->db->expectQuery("SELECT t.* FROM tags t WHERE t.name COLLATE utf8_bin LIKE ? LIMIT 1", array('Tag1'));
 		
 		//Assert does not find persistent tag, but instead returns a new one with that name		
 		$tag = $this->db->getTable('Tag')->findOrNew('Tag1');
