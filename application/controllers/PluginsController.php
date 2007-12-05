@@ -99,7 +99,13 @@ class PluginsController extends Omeka_Controller_Action
 			foreach ($config as $key => $value) {
 				$info->$key = $value;
 			}
+			
+			
 		}
+		
+		$broker = get_plugin_broker();
+			
+		$info->has_config = (bool) $broker->getHook($plugin, 'config');
 		
 		return $info;
 	}

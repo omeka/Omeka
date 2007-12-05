@@ -16,7 +16,11 @@
 		<td><?php echo h($plugin->description);?></td>
 		<td><?php echo h($plugin->author);?></td>
 		<td><button name="activate" type="submit" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?></button></td>
-		<td><a href="<?php echo uri('plugins/config', array('name'=>$plugin->directory)); ?>">Configure</a></td>
+		<td>
+			<?php if ( $plugin->has_config ): ?>
+				<a href="<?php echo uri('plugins/config', array('name'=>$plugin->directory)); ?>">Configure</a>
+			<?php endif; ?>
+		</td>
 	</tr>
 <?php endforeach; 
 	else:
