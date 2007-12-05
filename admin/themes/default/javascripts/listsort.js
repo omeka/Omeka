@@ -16,7 +16,7 @@ function makeSortable(list) {
 	enableListForm(false);
 	
 	//Auto-update the form when someone clicks a delete link
-	var dl = listSorter.deleteLinks;
+	var dl = $$(listSorter.deleteLinks);
 	dl.each(function(e) {e.onclick = ajaxListDelete; });
 	
 	//When we submit the form, then enable the elements in the list so that they submit properly

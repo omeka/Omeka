@@ -162,7 +162,7 @@
 		listSorter.tag = 'li';
 		listSorter.handle = 'handle';
 		listSorter.confirmation = 'Are you sure you want to delete this section?';
-		listSorter.deleteLinks = $$('.section-delete a');
+		listSorter.deleteLinks = '.section-delete a';
 		listSorter.callback = styleExhibitBuilder;		
 									
 		if(listSorter.list) {
