@@ -189,6 +189,7 @@ class ItemTable extends Omeka_Table
 				i.creator, 
 				i.additional_creator, 
 				i.contributor, 
+				i.format,
 				i.rights_holder, 
 				i.provenance, 
 				i.citation) 
@@ -458,7 +459,7 @@ Zend_Debug::dump( $dumpTable );exit;
 		$select->where("i.id = ?", $id);
 		$select->limit(1);
 		
-		return $this->fetchObjects($select, null, true);
+		return $this->fetchObjects($select, array(), true);
 	}
 	
 	public function findPrevious($item)
@@ -494,7 +495,7 @@ Zend_Debug::dump( $dumpTable );exit;
 				break;
 		}
 
-		return $this->fetchObjects($select, null, true);
+		return $this->fetchObjects($select, array(), true);
 	}
 	
 	
@@ -519,7 +520,7 @@ Zend_Debug::dump( $dumpTable );exit;
 				
 //		echo $select;exit;		
 				
-		$item = $this->fetchObjects($select, null, true);
+		$item = $this->fetchObjects($select, array(), true);
 	
 		return $item;
 	}

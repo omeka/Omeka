@@ -21,6 +21,14 @@ abstract class OmekaTestCase extends UnitTestCase
 	protected function cleanDb(Omeka_Db $db)
 	{
 		$tables = $db->fetchCol("SHOW TABLES");
+			
+		if(empty($tables)) {
+			// Build the tables explicitly
+			include BASE_DIR . '/install/install.sql.php';
+			$db->execBlock($install_sql);
+		}
+
+		
 		foreach ($tables as $table) {
 			$db->exec("TRUNCATE `$table`");
 		}

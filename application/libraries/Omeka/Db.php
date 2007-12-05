@@ -184,7 +184,10 @@ class Omeka_Db
 			$stmt = $this->_conn->prepare($sql);
 			return $stmt->execute($params);
 		} catch (PDOException $e) {
-			$this->throwOmekaDbException($stmt->errorInfo(), $e, $sql);
+			if($stmt) $errorInfo = $stmt->errorInfo();
+			else $errorInfo = $this->_conn->errorInfo();
+			
+			$this->throwOmekaDbException($errorInfo, $e, $sql);
 		}
 	}
 	

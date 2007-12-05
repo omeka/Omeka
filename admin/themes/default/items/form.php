@@ -41,7 +41,7 @@
 	function makeTooltips()
 	{
 		//Now load the tooltip js
-			var tooltipIds = ['title', 'publisher', 'relation', 'language', 'spatial_coverage', 'rights', 'rights_holder', 'description', 'source', 'subject', 'creator', 'additional_creator', 'provenance', 'contributor', 'citation', 'temporal_coverage', 'date'];
+			var tooltipIds = ['title', 'publisher', 'relation', 'language', 'spatial_coverage', 'rights', 'rights_holder', 'description', 'source', 'subject', 'creator', 'additional_creator', 'provenance', 'contributor', 'citation', 'temporal_coverage', 'date', 'format'];
 			
 		for (var i=0; i < tooltipIds.length; i++) {
 			var elId = tooltipIds[i];
@@ -273,6 +273,12 @@
 		<label id="relation">Relation</label>
 		<input type="text" class="textinput" name="relation" value="<?php echo h($item->relation);?>" />
 		<span class="tooltip" id="relation_tooltip"><?php dublin_core('relation'); ?></span>
+		</div>
+		
+		<div class="field">
+		<label id="format">Format</label>
+		<input type="text" class="textinput" name="format" value="<?php echo h($item->format);?>" />
+		<span class="tooltip" id="format_tooltip"><?php dublin_core('format'); ?></span>
 		</div>
 		
 		<div class="field">

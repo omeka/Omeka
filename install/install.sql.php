@@ -196,6 +196,7 @@ CREATE TABLE IF NOT EXISTS `$db->Item` (
   `subject` text  NOT NULL,
   `creator` text  NOT NULL,
   `additional_creator` text  NOT NULL,
+  `format` text NOT NULL,
   `date` date default NULL,
   `type_id` bigint(20) default NULL,
   `collection_id` bigint(20) default NULL,
@@ -212,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `$db->Item` (
   KEY `public_idx` (`public`),
   KEY `type_idx` (`type_id`),
   KEY `coll_idx` (`collection_id`),
-  FULLTEXT KEY `search_all_idx` (`title`,`publisher`,`language`,`relation`,`spatial_coverage`,`rights`,`description`,`source`,`subject`,`creator`,`additional_creator`,`contributor`,`rights_holder`,`provenance`,`citation`)
+  FULLTEXT KEY `search_all_idx` (`title`,`publisher`,`language`,`relation`,`spatial_coverage`,`rights`,`description`,`source`,`subject`,`creator`,`additional_creator`,`contributor`,`format`,`rights_holder`,`provenance`,`citation`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------

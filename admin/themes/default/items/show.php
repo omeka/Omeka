@@ -179,6 +179,13 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<?php display_empty($item->contributor)?>
 	</div>
 	</div>
+	
+	<div id="format" class="field">
+	<h3>Format</h3>
+	<div>
+	<?php display_empty($item->format); ?>
+	</div>
+	</div>
 		
 	<div id="rights" class="field">
 	<h3>Rights</h3>

@@ -17,7 +17,7 @@ class EntityTable extends Omeka_Table
 		
 		$select->limit(1);
 		
-		$unique = $this->fetchObjects($select, null, true);
+		$unique = $this->fetchObjects($select, array(), true);
 		
 		if(!$unique) {
 			$unique = new Entity;

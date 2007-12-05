@@ -28,6 +28,7 @@ class Item extends Omeka_Record
 	public $subject = '';
 	public $creator = '';
 	public $additional_creator = '';
+	public $format = '';
 	public $date;
 	public $type_id;
 	public $collection_id;
