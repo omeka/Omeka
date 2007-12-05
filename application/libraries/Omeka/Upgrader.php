@@ -16,6 +16,8 @@ class Omeka_Upgrader
 	
 	public function __construct($fromVersion, $toVersion)
 	{
+		ini_set('max_execution_time', 0);
+		
 		$this->db = get_db();
 		$this->start = $fromVersion;
 		$this->end = $toVersion;
