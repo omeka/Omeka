@@ -130,6 +130,8 @@ require_once 'OmekaRecordTestCase.php';
 require_once 'PermissionsTestCase.php';
 require_once 'TypeTestCase.php';
 require_once 'UploadTestCase.php';
+require_once 'CollectionTestCase.php';
+require_once 'UserTestCase.php';
 //require_once 'controllers/ExhibitsControllerTestCase.php';
 
 $test = new TestSuite('Omeka Tests');
@@ -142,6 +144,8 @@ $test->addTestCase(new OmekaRecordTestCase());
 $test->addTestCase(new PermissionsTestCase());
 $test->addTestCase(new TypeTestCase());
 $test->addTestCase(new UploadTestCase());
+$test->addTestCase(new CollectionTestCase());
+$test->addTestCase(new UserTestCase());
 //$test->addTestCase(new ExhibitsControllerTestCase());
 
 $test->run(new HtmlReporter());
