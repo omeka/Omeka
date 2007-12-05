@@ -18,3 +18,10 @@ RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
 <Files index.php>
 Allow from all
 </Files>
+
+<IfModule mod_expires.c>
+  <FilesMatch "\.(js|css|gif|png)$">
+       ExpiresActive on
+       ExpiresDefault "access plus 10 day"
+   </FilesMatch>
+</IfModule>
