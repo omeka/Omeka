@@ -154,7 +154,7 @@ class Item extends Omeka_Record
 		$this->deleteFiles($post['delete_files']);
 		
 		//Change the tags (remove some, add some)
-		if(array_key_exists('modify_tags', $post) || !empty($post['tags'])) {
+		if(array_key_exists('tags', $post)) {
 			$user = Omeka::loggedIn();
 			$entity = $user->Entity;
 			if($entity) {

@@ -82,13 +82,10 @@ class Taggable extends Omeka_Record_Module
 			$findWith['entity'] = $entity;
 		}
 		
-		$tagging = $this->joinTable->findBy($findWith);
-		
-		$tagging = current($tagging);
-				
-		if($tagging) {		
-			return $tagging->delete();
-		}		
+		$taggings = $this->joinTable->findBy($findWith);
+		foreach ($taggings as $tagging) {
+			$tagging->delete();
+		}
 	}
 			
 	/** If the $tag were a string and the keys of Tags were just the names of the tags, this would be:
@@ -186,7 +183,7 @@ class Taggable extends Omeka_Record_Module
 	{
 		$tags = ($deleteTags) ? $this->record->Tags : $this->entityTags($entity);
 		$diff = $this->diffTagString($string, $tags, $delimiter);
-		
+	
 		if(!empty($diff['removed'])) {
 			$this->deleteTags($diff['removed'], $entity, $deleteTags);
 			

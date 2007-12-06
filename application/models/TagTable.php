@@ -150,8 +150,7 @@ class TagTable extends Omeka_Table
 			$tags = $this->fetchObjects($select);
 		}
 		else {
-			$bind = null;
-			$tags = $db->query((string) $select, null)->fetchAll();
+			$tags = $db->query((string) $select, array())->fetchAll();
 		}
 
 		if(!$tags) {
