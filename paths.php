@@ -7,6 +7,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 // Define some primitive settings
 // if we can reuse these that might not be a bad thing
 $site['application']	= 'application';
+$site['core']			= 'core';
 $site['libraries']		= 'libraries';
 $site['helpers']		= 'helpers';
 $site['controllers']	= 'controllers';
@@ -28,6 +29,7 @@ $site['public_theme']	= 'themes';
 // Define some constants based on those settings
 define('BASE_DIR', 			dirname(__FILE__));
 define('APP_DIR',			BASE_DIR.DIRECTORY_SEPARATOR.$site['application']);
+define('CORE_DIR',			APP_DIR.DIRECTORY_SEPARATOR.$site['core']);
 define('MODEL_DIR',			APP_DIR.DIRECTORY_SEPARATOR.$site['models']);
 define('CONTROLLER_DIR',	APP_DIR.DIRECTORY_SEPARATOR.$site['controllers']);
 define('LIB_DIR',			APP_DIR.DIRECTORY_SEPARATOR.$site['libraries']);

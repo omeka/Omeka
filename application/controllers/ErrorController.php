@@ -26,7 +26,7 @@ class ErrorController extends Omeka_Controller_Action
 		Omeka_Logger::logError( $e );
 				
 		if($debug) {
-			include BASE_DIR . DIRECTORY_SEPARATOR .'404.php';
+			include CORE_DIR . DIRECTORY_SEPARATOR .'404.php';
 			return;
 		}	
 		else {

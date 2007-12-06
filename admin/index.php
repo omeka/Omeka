@@ -6,7 +6,7 @@ define('APP_START', microtime(true));
 include '../paths.php';
 define('THEME_DIR', ADMIN_DIR.DIRECTORY_SEPARATOR.'themes');
 define('PUBLIC_THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
-require_once '../core.php';
+require_once CORE_DIR .DIRECTORY_SEPARATOR.'core.php';
 
 #############################################
 # HERE IS WHERE WE SET THE ADMIN SWITCH
@@ -24,7 +24,7 @@ $request->setParam('admin', true);
 #############################################
 # DISPATCH THE REQUEST, AND DO SOMETHING WITH THE OUTPUT
 #############################################
-require_once '../dispatch.php';
+require_once CORE_DIR . DIRECTORY_SEPARATOR . 'dispatch.php';
 
 if ((boolean) $config->debug->timer) {
 	echo microtime(true) - APP_START;

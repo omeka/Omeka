@@ -9,7 +9,7 @@ class PermissionsTestCase extends OmekaTestCase
 		parent::setUp();
 		
 		//Load in the hardcoded ACL setup
-		include BASE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
+		include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
 		
 		$this->acl = $acl;
 	}
