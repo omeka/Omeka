@@ -1,11 +1,5 @@
 <?php head(array('title'=>'Browse Items', 'body_class'=>'items')); ?>
 <?php common('archive-nav'); ?>
-<style type="text/css" media="screen">
-	
-	#rss_preview {float:right;display:inline;}
-	#rss {background-color: orange;color: white;font-size: 1.5em;width:10%;float:left;}
-	#rss a {padding: 2px;}
-</style>
 
 <?php js('search'); ?>
 
@@ -45,14 +39,6 @@
 <input type="submit" name="submit" value="Save Changes" />
 
 </form>
-
-<div id="rss_preview">
-<p>Click here to preview your RSS feed for Omeka.*</p>
-<div id="rss">
-<?php link_to_items_rss($_GET); ?>
-</div>
-<em>*RSS readers cannot log in to Omeka, so they can only access RSS feeds from the public site.</em>
-</div>
 
 <?php elseif(!total_items(true)): ?>
 	<div id="no-items">
