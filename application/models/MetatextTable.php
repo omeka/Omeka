@@ -88,8 +88,10 @@ class MetatextTable extends Omeka_Table
 		
 		$indexed = array();
 		
-		foreach ($mt_objs as $key => $mt) {
-			$indexed[$mt->name] = $mt;
+		if($mt_objs) {
+			foreach ($mt_objs as $key => $mt) {
+				$indexed[$mt->name] = $mt;
+			}			
 		}
 		
 		return $indexed;
