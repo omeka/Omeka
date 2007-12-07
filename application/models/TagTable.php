@@ -204,7 +204,7 @@ class TagTable extends Omeka_Table
 		
 		$select->where("t.id = ?", (int) $id)->limit(1);
 		
-		$tags = $this->fetchObjects($select, null, true);
+		$tags = $this->fetchObjects($select, array(), true);
 							
 		return $tags;
 	}

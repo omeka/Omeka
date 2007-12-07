@@ -231,16 +231,6 @@ class ExhibitsController extends Omeka_Controller_Action
 	{	
 		$exhibit = $this->findById();
 		
-/*		if(1==1) {
-			$q->addSelect("et.*");
-			$q->leftJoin("e.ExhibitsTags et");
-			$user_id = Omeka::loggedIn()->id;
-			$q->addWhere("et.user_id = :user_id", array('user_id'=>$user_id));
-		}
-*///		echo $q;exit;
-
-		
-		
 		return $this->processExhibitForm($exhibit);
 	}	
 	

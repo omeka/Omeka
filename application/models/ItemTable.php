@@ -379,8 +379,7 @@ Zend_Debug::dump( $dumpTable );exit;
 		if(isset($params['recent'])) {
 			$this->orderSelectByRecent($select);
 		}
-		
-//echo $select;exit;
+
 		$items = $this->fetchObjects($select);
 		
 		

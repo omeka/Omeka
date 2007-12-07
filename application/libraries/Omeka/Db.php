@@ -41,19 +41,25 @@ class Omeka_Db
 	{
 		$this->_conn = $conn;
 		
-		$this->_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		if($conn instanceof PDO) {
+			$this->_conn->getConnection()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		}
+			
+		$this->_conn->setFetchMode(Zend_Db::FETCH_ASSOC);
 		
 		$this->prefix = (string) $prefix;		
 	}
 	
-	//Delegate to the PDO connection
-	public function __call($m, $a)
+	public function quote($value)
 	{
-		if(method_exists($this->_conn, $m)) {
-			return call_user_func_array(array($this->_conn, $m), $a);
-		}
+		return $this->_conn->quote($value);
 	}
-
+	
+	public function prepare($sql)
+	{
+		return $this->_conn->prepare($sql);
+	}
+	
 	public function getTableName($class) {
 		$name = $this->_table_names[$class];
 		
@@ -177,13 +183,12 @@ class Omeka_Db
 		//Let's try a normal PDO::exec() if there are no parameters
 		
 		try {
-			if(!count($params)) {
-				return $this->_conn->exec($sql);
-			}
-			
-			$stmt = $this->_conn->prepare($sql);
-			return $stmt->execute($params);
-		} catch (PDOException $e) {
+			return $this->_conn->query($sql, $params);
+		} 
+		catch (Zend_Db_Statement_Exception $e) {
+			Zend_Debug::dump( $e );exit;
+		}
+		catch (PDOException $e) {
 			if($stmt) $errorInfo = $stmt->errorInfo();
 			else $errorInfo = $this->_conn->errorInfo();
 			
@@ -202,31 +207,20 @@ if($_GET['sql']) {
 	
 	Zend_Debug::dump( $this->queryCount );
 }				
-		
-		$stmt = $this->_conn->prepare($sql);
-		
+	
 		try {
-			$stmt->execute($params);
-		} catch (PDOException $e) {
+			$stmt = $this->_conn->query($sql, $params);
+		}
+		catch (Zend_Db_Statement_Exception $e) {
+			throw new Omeka_Db_Exception($e, $sql);
+		}
+		 catch (PDOException $e) {
 			throw new Omeka_Db_Exception($e, $sql);
 		}
 		
 		if(!$fetchMode) {
-			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+			$stmt->setFetchMode(Zend_Db::FETCH_ASSOC);
 		}
-/*
-			if($fetchMode) {
-			switch ($fetchMode) {
-				case PDO::FETCH_CLASS:
-					$class = func_get_arg(3);
-					$stmt->setFetchMode($fetchMode, $class);
-					break;
-				default:
-					$stmt->setFetchMode($fetchMode);
-					break;
-			}
-		}
-*/	
 		
 		return $stmt;
 	}
@@ -234,13 +228,14 @@ if($_GET['sql']) {
 	//Ripped-off from Doctrine_Connection::fetchOne()
 	public function fetchOne($sql, $params=array(), $colnum=0)
 	{
-		return $this->query($sql, $params)->fetchColumn($colnum);
+		$res = $this->query($sql, $params);
+		return $res->fetchColumn($colnum);
 	}
 	
 	public function fetchCol($sql, $params=array())
 	{
 		$stmt = $this->query($sql, $params);
-        $result = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+        $result = $stmt->fetchAll(Zend_Db::FETCH_COLUMN, 0);
         return $result;
 	}
 	
@@ -264,7 +259,7 @@ if($_GET['sql']) {
 	{
 		
 		$res = $this->query($sql, $params);
-		$res->setFetchMode(PDO::FETCH_ASSOC);
+		$res->setFetchMode(Zend_Db::FETCH_ASSOC);
 		
 		$return = array();
 		

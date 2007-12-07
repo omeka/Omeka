@@ -8,7 +8,27 @@ class TagTestCase extends OmekaTestCase
 		$this->db->setTable('Tag', false);
 	}
 	
-
+	public function testFindOrNew()
+	{
+		$this->setUpLiveDb();
+		
+		$tag = new Tag;
+		$tag->name = 'foo';
+		
+		$tag->save();
+		
+		$this->assertTrue((bool) $tag->id);
+		
+		$found_tag = $this->db->getTable('Tag')->findOrNew('foo');
+		
+		$this->assertEqual($found_tag->name, 'foo');
+		
+		//Assert does not find persistent tag, but instead returns a new one with that name		
+		$new_tag = $this->db->getTable('Tag')->findOrNew('Tag1');
+		
+		$this->assertFalse( $new_tag->exists() );
+		$this->assertEqual($new_tag->name, 'Tag1');	
+	}
 
 	public function testFind()
 	{
@@ -140,19 +160,6 @@ ORDER BY tagCount DESC");
 		
 		$this->db->getTable('Tag')->findBy( array('sort'=>'most'), null);		
 	}	
-
-	public function testFindOrNew()
-	{
-	
-		$this->db->expectQuery("SELECT t.* FROM tags t WHERE t.name COLLATE utf8_bin LIKE ? LIMIT 1", array('Tag1'));
-		
-		//Assert does not find persistent tag, but instead returns a new one with that name		
-		$tag = $this->db->getTable('Tag')->findOrNew('Tag1');
-		
-		$this->assertFalse( $tag->exists() );
-		$this->assertEqual($tag->name, 'Tag1');		
-	}	
-	
 /*
 	public function testFindAll()
 	{		

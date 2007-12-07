@@ -100,7 +100,7 @@ class TaggableTestCase extends OmekaTestCase
 		$item = $this->getItem();		
 	
 		$item->applyTagString('foo,       bar,', $entity);
-		
+
 		$tag_count = count($item->getTags());
 		
 		$this->assertEqual($tag_count, 2);
@@ -114,6 +114,7 @@ class TaggableTestCase extends OmekaTestCase
 		$this->assertEqual($tag_count, 2);
 		
 		$this->assertEqual($new_tags[1]->name, "crap");
+
 	}
 	
 }

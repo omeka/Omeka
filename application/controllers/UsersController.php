@@ -197,11 +197,11 @@ class UsersController extends Omeka_Controller_Action
 			require_once 'Zend/Session.php';
 
 			$session = new Zend_Session_Namespace;
-			
+	
 			$auth = $this->_auth;
 
 			$adapter = new Omeka_Auth_Adapter($_POST['username'], $_POST['password']);
-			
+	
 			$token = $auth->authenticate($adapter);
 
 			if ($token->isValid()) {

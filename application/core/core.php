@@ -16,24 +16,7 @@ require_once 'Zend/Registry.php';
 //Register the various path names so they can be accessed by the app
 Zend_Registry::set('path_names', $site);
 
-require_once 'Zend/Config/Ini.php';
-$db = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'db.ini', 'database');
-Zend_Registry::set('db_ini', $db);
-
-$dsn = 'mysql:host='.$db->host.';dbname='.$db->name;
-if(isset($db->port)) {
-	$dsn .= "port=" . $db->port;
-}
-try {
-	$dbh = new PDO($dsn, $db->username, $db->password);
-} catch (Exception $e) {
-	install_notification();
-}
-
-$db_obj = new Omeka_Db($dbh, $db->prefix);
-
-
-Zend_Registry::set('db', $db_obj);
+require_once CORE_DIR . DIRECTORY_SEPARATOR . 'db.php';
 
 //Pull the options from the DB
 $option_stmt = $dbh->query("SELECT * FROM $db_obj->Option");

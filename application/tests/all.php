@@ -22,7 +22,14 @@ $config = new Zend_Config_Ini(APP_DIR . DIRECTORY_SEPARATOR . 'tests' . DIRECTOR
 Zend_Registry::set('config_ini', $config);
 
 //DB dependency
-$dbh = new PDO('mysql:host=' . $config->db->host . ';dbname='.$config->db->name, $config->db->username, $config->db->password);
+$dbh = Zend_Db::factory('Mysqli', array(
+    'host'     => $config->db->host,
+    'username' => $config->db->username,
+    'password' => $config->db->password,
+    'dbname'   => $config->db->name
+	));
+
+//$dbh = new PDO('mysql:host=' . $config->db->host . ';dbname='.$config->db->name, $config->db->username, $config->db->password);
 Zend_Registry::set('pdo', $dbh);
 
 $db_obj = new Omeka_Db($dbh);
@@ -67,7 +74,7 @@ class MockOmeka_Db extends AbstractMockOmeka_Db
 					array(new IdenticalSqlExpectation($sql) ) );		
 	}
 	
-	public function expectQuery($sql, $params=null)
+	public function expectQuery($sql, $params=array())
 	{
 		$this->expectAtLeastOnce('query', 
 			array(new IdenticalSqlExpectation($sql), $params) );
@@ -123,6 +130,7 @@ require_once 'Omeka/Record.php';
 require_once 'Item.php';
 
 require_once 'TagTestCase.php';
+/*
 require_once 'TaggableTestCase.php';
 require_once 'ItemTestCase.php';
 require_once 'ExhibitSectionTestCase.php';
@@ -132,11 +140,13 @@ require_once 'TypeTestCase.php';
 require_once 'UploadTestCase.php';
 require_once 'CollectionTestCase.php';
 require_once 'UserTestCase.php';
+*/	
 //require_once 'controllers/ExhibitsControllerTestCase.php';
 
 $test = new TestSuite('Omeka Tests');
 
 $test->addTestCase(new TagTestCase());
+/*
 $test->addTestCase(new ItemTestCase());
 $test->addTestCase(new TaggableTestCase());
 $test->addTestCase(new ExhibitSectionTestCase());	
@@ -146,6 +156,7 @@ $test->addTestCase(new TypeTestCase());
 $test->addTestCase(new UploadTestCase());
 $test->addTestCase(new CollectionTestCase());
 $test->addTestCase(new UserTestCase());
+*/	
 //$test->addTestCase(new ExhibitsControllerTestCase());
 
 $test->run(new HtmlReporter());

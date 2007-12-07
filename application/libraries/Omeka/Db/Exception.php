@@ -6,7 +6,7 @@ class Omeka_Db_Exception extends Exception
 {
 	protected $e;
 	
-	public function __construct(PDOException $e, $sql)
+	public function __construct(Exception $e, $sql)
 	{
 		$this->e = $e;
 		$this->sql = $sql;

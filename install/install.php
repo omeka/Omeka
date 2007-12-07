@@ -13,42 +13,8 @@ require_once 'Omeka.php';
 spl_autoload_register(array('Omeka', 'autoload'));
 
 try {
-	//Check for the config file
-	$config_file = CONFIG_DIR . DIRECTORY_SEPARATOR . 'db.ini';
-	if (!file_exists($config_file)) {
-		throw new Exception('Your Omeka database configuration file is missing.');
-	}
-	if (!is_readable($config_file)) {
-		throw new Exception('Your Omeka database configuration file cannot be read by the application.');
-	}
-
-	$config = new Zend_Config_Ini($config_file, null);
-
-	Zend_Registry::set('config_ini', $config);
-
-	$db_config = $config->database->toArray();
-
-	//Fail on improperly configured db.ini file
-	if (!isset($db_config['host']) or ($db_config['host'] == 'XXXXXXX')) {
-		throw new Exception('Your Omeka database configuration file has not been set up properly.');
-	}
-
-	//Create the DSN
-	$dsn = 'mysql:host='.$db_config['host'].';dbname='.$db_config['name'];
-	if(isset($db_config['port'])) {
-		$dsn .= 'port='.$db_config['port'].';';
-	}	
-
-	//PDO Connection
-	//@todo Add "port" option to db.ini and all PDO connections within the app
-	$dbh = new PDO($dsn, $db_config['username'], $db_config['password']);
-	if (!$dbh instanceof PDO) {
-		throw new Exception('<h2>No database connection could be created</h2>');
-	}
-
-	$db = new Omeka_Db($dbh, $db_config['prefix']);
-	
-	Zend_Registry::set('db', $db);
+	//include the database connection
+	require_once CORE_DIR . DIRECTORY_SEPARATOR .'db.php';
 	
 	//Build the database if necessary
 	$res = $dbh->query("SHOW TABLES");

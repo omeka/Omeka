@@ -100,19 +100,36 @@ class Omeka_Table
 	
 	public function fetchObjects($sql, $params=array(), $onlyOne=false)
 	{
-		$res = $this->getConn()->query((string) $sql, $params);
+		$db = $this->getConn();
 		
-		$res->setFetchMode(PDO::FETCH_CLASS, $this->_target);
+		$res = $db->query((string) $sql, $params);
 		
-		if($onlyOne) return $res->fetch();
+		$data = $res->fetchAll();
+		
+		if(!count($data) or !$data) {
+			return null;
+		}
+					
+		if($onlyOne) return $this->recordFromData(current($data));
 		
 		//Would use fetchAll() but it can be memory-intensive
 		$objs = array();
-		foreach ($res as $key => $row) {
-			$objs[$key] = $row;
+		foreach ($data as $k => $row) {
+			$objs[$k] = $this->recordFromData($row);
 		}
 		
 		return $objs;
+	}
+	
+	protected function recordFromData(array $data)
+	{
+		$class = $this->_target;
+		$obj = new $class;
+		foreach ($data as $key => $value) {
+			$obj->$key = $value;
+		}
+		
+		return $obj;
 	}
 }
 
