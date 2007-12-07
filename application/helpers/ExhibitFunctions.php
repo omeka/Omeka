@@ -5,7 +5,7 @@ function exhibit_thumbnail($item, $props=array('class'=>'permalink'))
 {	
 	$uri = exhibit_item_uri($item);
 		
-	echo '<a href="' . $uri . '" rel="gb_page_center[640,640]">';
+	echo '<a href="' . $uri . '">';
 	
 	$file = $item->Files[0];
 	
@@ -23,7 +23,7 @@ function exhibit_fullsize($item, $props=array('class'=>'permalink'))
 {
 	$uri = exhibit_item_uri($item);
 		
-	echo '<a href="' . $uri . '" style="border:none">';
+	echo '<a href="' . $uri . '">';
 	
 	$file = $item->Files[0];
 	
@@ -79,7 +79,8 @@ function exhibit_item_uri($item, $exhibit=null, $section=null)
 	
 	//If the exhibit has a theme associated with it
 	if(!empty($exhibit->theme)) {
-		return uri('exhibits/' . $exhibit->slug . '/' . $section->slug . '/item/' . $item->id);
+	//	return uri('exhibits/' . $exhibit->slug . '/' . $section->slug . '/item/' . $item->id);
+		return generate_url(array('controller'=>'items','action'=>'show','id'=>$item->id), 'id');
 	}
 	
 	else {
@@ -312,7 +313,6 @@ function render_exhibit_page()
 {
 	$exhibit = Zend_Registry::get('exhibit');
 
-	
 	try {
 		$section = Zend_Registry::get('section');
 
