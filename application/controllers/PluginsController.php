@@ -112,7 +112,7 @@ class PluginsController extends Omeka_Controller_Action
 	
 	public function browseAction() {
 		$new_plugins = get_plugin_broker()->getNew();
-		
+
 		if(count($new_plugins)) {
 			$plugin_to_install = array_pop($new_plugins);
 			

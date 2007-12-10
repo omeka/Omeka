@@ -130,7 +130,7 @@ require_once 'Omeka/Record.php';
 require_once 'Item.php';
 
 require_once 'TagTestCase.php';
-/*
+
 require_once 'TaggableTestCase.php';
 require_once 'ItemTestCase.php';
 require_once 'ExhibitSectionTestCase.php';
@@ -140,13 +140,13 @@ require_once 'TypeTestCase.php';
 require_once 'UploadTestCase.php';
 require_once 'CollectionTestCase.php';
 require_once 'UserTestCase.php';
-*/	
+	
 //require_once 'controllers/ExhibitsControllerTestCase.php';
 
 $test = new TestSuite('Omeka Tests');
 
 $test->addTestCase(new TagTestCase());
-/*
+
 $test->addTestCase(new ItemTestCase());
 $test->addTestCase(new TaggableTestCase());
 $test->addTestCase(new ExhibitSectionTestCase());	
@@ -156,7 +156,7 @@ $test->addTestCase(new TypeTestCase());
 $test->addTestCase(new UploadTestCase());
 $test->addTestCase(new CollectionTestCase());
 $test->addTestCase(new UserTestCase());
-*/	
+
 //$test->addTestCase(new ExhibitsControllerTestCase());
 
 $test->run(new HtmlReporter());

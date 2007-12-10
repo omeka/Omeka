@@ -60,6 +60,11 @@ class Omeka_Db
 		return $this->_conn->prepare($sql);
 	}
 	
+	public function lastInsertId()
+	{
+		return $this->_conn->lastInsertId();
+	}
+	
 	public function getTableName($class) {
 		$name = $this->_table_names[$class];
 		

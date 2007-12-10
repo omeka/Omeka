@@ -24,9 +24,6 @@ class PluginBroker
 	//Theme directories that have been added by plugins
 	protected $_theme_dirs = array('public'=>array(),'admin'=>array());
 	
-	//Output directories that have been added by plugins
-	protected $_output_dirs = array('json'=>array(), 'rest'=>array());
-	
 	//Any navigation elements that have been added via plugins
 	protected $_nav = array();
 	
@@ -54,7 +51,7 @@ class PluginBroker
 			$db = get_db();
 			
 			$res = $db->query("SELECT p.name, p.active FROM $db->Plugin p");
-			foreach ($res as $row) {
+			foreach ($res->fetchAll() as $row) {
 				$installed[$row['name']] = $row['name'];
 				
 				//Only active plugins should be require'd
@@ -271,25 +268,6 @@ class PluginBroker
 			
 		$this->_theme_dirs[$theme][] = $path;
 	}
-
-	
-	/**
-	 * Make a directory containing files that output in a specific format (current options = 'rest' and 'json')
-	 *
-	 * @return void
-	 **/
-	public function addOutputDir($path, $type)
-	{
-		if(!in_array($type, array('json', 'rest'))) return;
-		
-		$this->_output_dirs[$type][] = $this->getCurrentPlugin() . DIRECTORY_SEPARATOR . $path;
-		
-	}
-	
-	public function loadOutputDirs(Omeka_View $view, $type)
-	{
-		$this->registerScriptPaths($view, $this->_output_dirs[$type]);
-	}
 	
 	/**
 	 * This will hook into the Zend_View API to add whatever is stored in self::$_theme_dirs to the script path
@@ -491,11 +469,6 @@ function add_data_feed($format, $options=array())
 function add_navigation($text, $link, $type='main', $permissions=null)
 {
 	get_plugin_broker()->addNavigation($text, $link, $type, $permissions);
-}
-
-function add_output_pages($dir, $output_type='rest')
-{
-	get_plugin_broker()->addOutputDir($dir, $output_type);
 }
 
 function get_acl()
