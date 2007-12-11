@@ -9,7 +9,6 @@ class ItemsController extends Omeka_Controller_Action
 {		
 	public function init() 
 	{
-		$this->_table = $this->getTable('Item');
 		$this->_modelClass = 'Item';
 	}
 	

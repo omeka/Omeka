@@ -8,7 +8,6 @@ class CollectionsController extends Omeka_Controller_Action
 {
 	public function init()
 	{
-		$this->_table = $this->getTable('Collection');
 		$this->_modelClass = 'Collection';
 	}
 }

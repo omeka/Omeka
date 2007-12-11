@@ -63,6 +63,7 @@ class Omeka_Logger
 			$final .= 'Date: ' . date( DATE_ISO8601, time() ) . "\n";
 			$final .= $e->getMessage()."\n";
 			$final .= $e->getFile().':'.$e->getLine()."\n";
+			$final .= $e->getTraceAsString()."\n";
 			$final .= '=======================' . "\n";
 			file_put_contents( self::$errorLog, $final, FILE_APPEND );
 		}

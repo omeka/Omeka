@@ -13,6 +13,7 @@ class ErrorController extends Omeka_Controller_Action
 		$e = $handler->exception;
 		
 		switch ($handler->type) {
+			//Errors that involve missing controller/action may be requests for static pages
 			case 'EXCEPTION_NO_CONTROLLER':
 			case 'EXCEPTION_NO_ACTION':
 				try {
@@ -20,10 +21,10 @@ class ErrorController extends Omeka_Controller_Action
 				} catch (Exception $e) {}
 				break;
 			default:
+				//Log errors that aren't just for pages that don't exist
+				Omeka_Logger::logError( $e );
 				break;
-		}
-				
-		Omeka_Logger::logError( $e );
+		}		
 				
 		if($debug) {
 			include CORE_DIR . DIRECTORY_SEPARATOR .'404.php';

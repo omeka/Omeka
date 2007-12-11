@@ -14,7 +14,6 @@ class PluginsController extends Omeka_Controller_Action
 	public function init()
 	{
 		$this->_modelClass = 'Plugin';
-		$this->_table = $this->getTable('Plugin');
 	}
 	
 	/**

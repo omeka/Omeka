@@ -9,7 +9,6 @@ class TypesController extends Omeka_Controller_Action
 	public function init()
 	{
 		$this->_modelClass = 'Type';
-		$this->_table = $this->getTable('Type');
 	}
 
 	public function metafieldsAction()

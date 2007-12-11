@@ -107,7 +107,7 @@ class Omeka_Table
 		$data = $res->fetchAll();
 		
 		if(!count($data) or !$data) {
-			return null;
+			return !$onlyOne ? array() : null;
 		}
 					
 		if($onlyOne) return $this->recordFromData(current($data));

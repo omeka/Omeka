@@ -12,7 +12,6 @@ class UsersController extends Omeka_Controller_Action
 	);
 	
 	public function init() {
-		$this->_table = $this->getTable('User');
 		$this->_modelClass = 'User';		
 	}
 	

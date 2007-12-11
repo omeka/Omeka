@@ -19,8 +19,9 @@ class Relatable extends Omeka_Record_Module
 	 **/
 	public function afterUpdate()
 	{
-		$entity = Omeka::loggedIn()->Entity;
-		$this->setModifiedBy($entity);		
+		if($entity = Omeka::loggedIn()->Entity) {
+			$this->setModifiedBy($entity);
+		}		
 	}
 	
 	/**
@@ -30,8 +31,9 @@ class Relatable extends Omeka_Record_Module
 	 **/
 	public function afterInsert()
 	{
-		$entity = Omeka::loggedIn()->Entity;		
-		$this->setAddedBy($entity);		
+		if($entity = Omeka::loggedIn()->Entity) {
+			$this->setAddedBy($entity);
+		}		
 	}
 	
 	public function beforeDelete()
@@ -119,7 +121,7 @@ class Relatable extends Omeka_Record_Module
 	
 		//If the entity_id is 0, die because that won't work
 		if($entity_id == 0) {
-		//	throw new Exception( 'Invalid entity provided!' );
+			throw new Exception( 'Invalid entity provided!' );
 		
 			//For now, fail silently because there's no use in bitching about it
 			return false;

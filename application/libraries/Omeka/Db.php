@@ -95,6 +95,16 @@ class Omeka_Db
 		}
 		return $table;
 	}
+	
+	/**
+	 * Here's a quick hackaround for plugins adding their own tables to the database
+	 *
+	 * @return void
+	 **/
+	public function addTable($model_name, $table_name)
+	{
+		$this->_table_names[$model_name] = $table_name;
+	}
 
 	public function __get($name)
 	{

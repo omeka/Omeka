@@ -13,7 +13,6 @@ class EntitiesController extends Omeka_Controller_Action
 	
 	public function init()
 	{
-		$this->_table = $this->getTable('Entity');
 		$this->_modelClass = 'Entity';
 	}
 	

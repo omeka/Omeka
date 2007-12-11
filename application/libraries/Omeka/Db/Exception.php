@@ -23,7 +23,8 @@ class Omeka_Db_Exception extends Exception
 			ob_start();
 			
 			echo "An error occurred within the following SQL statement:\n\n" . (string) $sql . 
-			"\n\nDump of the exception:\n";
+			"\n\n\rStack Trace:\n" . $e->getTraceAsString() .
+			"\n\n\rDump of the exception:\n";
 			var_dump( $e );
 			$this->message = ob_get_clean();
 		}

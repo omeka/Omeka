@@ -101,6 +101,11 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		$this->_redirects = array_merge($this->_crudRedirects, $this->_redirects);
 		
+		//Get the table obj by automatic
+		if( (!$this->_table) and $this->_modelClass) {
+			$this->_table = $this->getTable($this->_modelClass); 
+		}
+		
 		return $init;
 	}
 	
@@ -327,7 +332,12 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 */
 	public function getTable($table = null)
 	{
-		return get_db()->getTable($table);
+		if(!$table and $this->_table) {
+			return $this->_table;
+		}
+		else {
+			return get_db()->getTable($table);
+		}
 	}
 
 	public function getView()

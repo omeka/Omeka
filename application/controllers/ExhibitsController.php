@@ -21,7 +21,6 @@ class ExhibitsController extends Omeka_Controller_Action
 	public function init()
 	{
 		$this->_modelClass = 'Exhibit';
-		$this->_table = $this->getTable('Exhibit');
 		
 		require_once 'Zend/Session.php';
 		$this->session = new Zend_Session_Namespace('Exhibit');

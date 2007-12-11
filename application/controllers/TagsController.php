@@ -9,7 +9,6 @@ class TagsController extends Omeka_Controller_Action
 {	
 	public function init()
 	{
-		$this->_table = $this->getTable('Tag');
 		$this->_modelClass = 'Tag';	
 	}
 	

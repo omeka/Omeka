@@ -372,11 +372,8 @@ class Omeka_Record implements ArrayAccess
 	//Setter methods 
 	public function setArray($data)
 	{
-		$cols = $this->getTable()->getColumns();
-		foreach ($cols as $col) {
-			if(array_key_exists($col, $data)) {
-				$this->$col = $data[$col];
-			}
+		foreach ($data as $key => $value) {
+			$this->$key = $value;
 		}
 	}
 	

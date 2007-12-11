@@ -9,7 +9,6 @@ class FilesController extends Omeka_Controller_Action
 {
 	public function init() {
 		$this->_modelClass = 'File';
-		$this->_table = $this->getTable('File');		
 	}
 	
 	public function indexAction() { $this->_redirect('/'); }
