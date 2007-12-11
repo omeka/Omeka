@@ -8,7 +8,6 @@
  **/
 class MetafieldTable extends Omeka_Table
 {
-	
 	public function findIdFromName($name)
 	{
 		$db = get_db();

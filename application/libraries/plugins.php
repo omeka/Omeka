@@ -17,10 +17,7 @@ class PluginBroker
 	
 	//The name of the current plugin (when used for hooks)
 	protected $_current;
-	
-	//When we've just inserted a row into the plugins table, this will contain the ID
-	protected $_last_insert_id;
-	
+		
 	//Theme directories that have been added by plugins
 	protected $_theme_dirs = array('public'=>array(),'admin'=>array());
 	
@@ -196,13 +193,13 @@ class PluginBroker
 		try {
 			$db = get_db();
 			
-			//Insert the plugin into the DB
-			$db->exec("INSERT IGNORE INTO $db->Plugin (name, active) VALUES ('$plugin', 1);");
+			$plugin_obj = new Plugin;
+			$plugin_obj->active = 1;
+			$plugin_obj->name = $plugin;
+			$plugin_obj->forceSave();
 			
-			$plugin_id = $db->lastInsertId();
-								
-			$this->_last_insert_id = $plugin_id;
-			
+			$plugin_id = $plugin_obj->id;
+											
 			call_user_func_array($install_hook, array($plugin_id));
 			
 			//If more than one plugin needs to install itself, don't reuse the same form submission
@@ -213,8 +210,8 @@ class PluginBroker
 			echo "An error occurred when installing this plugin: ".$e->getMessage();
 			
 			//If there was an error, remove the plugin from the DB so that we can retry the install
-			if(isset($plugin_id) and is_int($plugin_id)) {
-				get_db()->exec("DELETE FROM plugins WHERE id = $plugin_id");
+			if($plugin_obj->exists()) {
+				$plugin_obj->delete();
 			}
 		}
 
@@ -224,12 +221,15 @@ class PluginBroker
 	{
 		$plugin = $this->getCurrentPlugin();
 		
-		//Get the ID of the last inserted plugin
-		$id = $this->_last_insert_id;
+		$plugin_obj = get_db()->getTable('Plugin')->findBySql('name = ?', array($plugin), true);
 		
-		$db = get_db();
-		
-		$db->exec("INSERT IGNORE INTO $db->Metafield (name, description, plugin_id) VALUES (?, ?, ?)", array($name, $description, $id));
+		if(!$plugin_obj) {
+			throw new Exception( 'Was unable to determine correct plugin to associate with a metafield!' );
+		}
+				
+		$metafield = new Metafield;
+		$metafield->setArray(array('name'=>$name, 'description'=>$description, 'plugin_id'=>$plugin_obj->id));
+		$metafield->forceSave();
 	}
 	
 	/**
