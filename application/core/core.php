@@ -42,6 +42,9 @@ foreach ($option_array as $opt) {
 
 Zend_Registry::set('options', $options);
 
+$config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
+Zend_Registry::set('config_ini', $config);
+
 if((int) $options['migration'] < OMEKA_MIGRATION) {
 	$fromVersion = $options['migration'] or $fromVersion = 0;
 	$toVersion = OMEKA_MIGRATION;
@@ -49,10 +52,6 @@ if((int) $options['migration'] < OMEKA_MIGRATION) {
 	$upgrader = new Omeka_Upgrader($fromVersion, $toVersion);
 	exit;
 }
-
-
-$config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
-Zend_Registry::set('config_ini', $config);
 
 if(isset($config->log)) {
 	require_once LIB_DIR.DIRECTORY_SEPARATOR.'Omeka'.DIRECTORY_SEPARATOR.'Logger.php';

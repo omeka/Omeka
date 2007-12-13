@@ -32,14 +32,19 @@ class Omeka_Upgrader
 			try {
 				//Start the upgrade script
 				$this->upgrade($i);
-			} catch (Exception $e) {
+			} catch (Omeka_Db_Exception $e) {
+				$db_exception = $e->getInitialException();
 				
 				$error = "Error in Migration #$i" . "\n\n";
-				$error .= "Message: " . $e->getMessage() . "\n\n"; 
-				$error .= "Code: " . $e->getCode() . "\n\n";
-				$error .= "Line: " . $e->getLine() . "\n\n";
-				$error .= "Output from upgrade: ". ob_get_contents();
+				$error .= "Message: " . $db_exception->getMessage() . "\n\n"; 
+				$error .= "Code: " . $db_exception->getCode() . "\n\n";
+				$error .= "Line: " . $db_exception->getLine() . "\n\n";
 				
+				$upgrade_output = ob_get_contents();
+				if($upgrade_output) {
+					$error .= "Output from upgrade: ". $upgrade_output;
+				}
+					
 				//If there was a problem with the upgrade, display the error message 
 				//and email it to the administrator
 				$email = get_option('administrator_email');
@@ -56,7 +61,7 @@ class Omeka_Upgrader
 			$this->incrementMigration();
 			
 			//Clean the contents of the output buffer
-			ob_end_clean();
+			echo ob_get_clean();
 			
 			if(!isset($error)) {
 				$this->displaySuccess();
