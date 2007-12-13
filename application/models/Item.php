@@ -138,7 +138,7 @@ class Item extends Omeka_Record
 	 * 
 	 * @return void
 	 **/
-	protected function afterSaveForm($post)
+	public function afterSaveForm($post)
 	{
 		$this->saveFiles();
 		
@@ -232,6 +232,7 @@ class Item extends Omeka_Record
 	
 	private function saveFiles()
 	{
+		
 		if(!empty($_FILES["file"]['name'][0])) {			
 			
 			File::handleUploadErrors('file');
@@ -245,17 +246,38 @@ class Item extends Omeka_Record
 					$file->save();
 					fire_plugin_hook('after_upload_file', $file, $this);
 				}catch(Exception $e) {
-					
-					//If the file entry isn't persistent in DB for some reason, 
-					//make sure to remove orphaned file
 					if(!$file->exists()) {
 						$file->unlinkFile();
 					}
-//					$conn->rollback();
-					throw $e;
+				throw $e;
+				}
+			}	
+		}
+/*		// handling this was causing some errors - I'm working on revising this tonight
+			[DL] - 12/12/07 9:30PM
+		
+		
+		if(!empty($_POST['file'])) {
+			// Handle the moving of files - sort of hacky and duplicates some code above
+			// Is there a better way to do this?  [DL]
+			foreach( $_POST['file'] as $filename )
+			{ 
+				try{
+					$file = new File();
+					$path = BASE_DIR.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'Dropbox'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$filename;
+					$file->moveToFileDir($path, $filename);
+					$file->item_id = $this->id;
+					$file->save();
+					fire_plugin_hook('after_upload_file', $file, $this);
+				}catch(Exception $e) {
+					if(!$file->exists()) {
+						$file->unlinkFile();
+					}
+				throw $e;
 				}
 			}
-		}		
+		
+		}	*/	
 	}	
 	
 	/**

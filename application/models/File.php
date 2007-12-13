@@ -132,50 +132,49 @@ class File extends Omeka_Record {
 	}
 	
 	/**
-	 * Retrieve the path for the image
+	 * Retrieve the path for the file
 	 *
 	 * @return string
 	 **/
 	public function getPath($type='fullsize')
 	{
 		$fn = $this->getDerivativeFilename();
-		switch ($type) {
-			case 'fullsize':
-				return FULLSIZE_DIR.DIRECTORY_SEPARATOR.$fn;
-				break;
-			case 'thumbnail':
-				return THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$fn;
-			case 'square_thumbnail':
-				return SQUARE_THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$fn;
-			case 'archive':
-			default:
-				return FILES_DIR.DIRECTORY_SEPARATOR.$this->archive_filename;
-				break;
+		
+		$path = array('fullsize' => FULLSIZE_DIR.DIRECTORY_SEPARATOR.$fn,
+			'thumbnail' => THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$fn,
+			'square_thumbnail' => SQUARE_THUMBNAIL_DIR.DIRECTORY_SEPARATOR.$fn,
+			'archive' => FILES_DIR.DIRECTORY_SEPARATOR.$this->archive_filename);
+
+		$hookdata = fire_plugin_hook('append_to_file_path', $path);
+
+		if ($hookdata) {
+			$path = array_merge($path, $hookdata);
 		}
+		
+		return $path[$type];
 	}
 	
 	/**
-	 * Duplication, evil evil copying of code!!
+	 * Retrieve the web path for the file
 	 *
 	 * @return void
 	 **/
 	public function getWebPath($type='fullsize')
 	{
 		$fn = $this->getDerivativeFilename();
-		
-		switch ($type) {
-			//Kind of hacky, but get the value of the directory constant
-			case 'fullsize':
-				return WEB_FULLSIZE . DIRECTORY_SEPARATOR . $fn;
-			case 'thumbnail':
-				return WEB_THUMBNAILS . DIRECTORY_SEPARATOR . $fn;
-			case 'square_thumbnail':
-				return WEB_SQUARE_THUMBNAILS . DIRECTORY_SEPARATOR . $fn;
-			case 'archive':
-				return WEB_FILES . DIRECTORY_SEPARATOR . $this->archive_filename;
-			default:
-				break;
+
+		$path = array('fullsize' => WEB_FULLSIZE.DIRECTORY_SEPARATOR.$fn,
+			'thumbnail' => WEB_THUMBNAILS.DIRECTORY_SEPARATOR.$fn,
+			'square_thumbnail' => WEB_SQUARE_THUMBNAILS.DIRECTORY_SEPARATOR.$fn,
+			'archive' => WEB_FILES.DIRECTORY_SEPARATOR.$this->archive_filename);
+
+		$hookdata = fire_plugin_hook('append_to_file_web_path', $path);
+
+		if ($hookdata) {
+			$path = array_merge($path, $hookdata);			
 		}
+		
+		return $path[$type];
 	}
 	
 	public function getDerivativeFilename()
@@ -247,8 +246,9 @@ class File extends Omeka_Record {
 	 **/
 	public function handleUploadErrors($file_form_name)
 	{	
-		$file_form = $_FILES[$file_form_name];
 
+//		$file_form = $_FILES[$file_form_name];
+		$file_form = $_POST['file'];
 		//Check the $_FILES array for errors
 		foreach ($file_form['error'] as $key => $error) {
 			if($error != UPLOAD_ERR_OK) {
@@ -356,9 +356,7 @@ class File extends Omeka_Record {
 		$name = $_FILES[$form_name]['name'][$index];
 		$originalName = $name;
 		$name = $this->sanitizeFilename($name);
-		$new_name = explode( '.', $name );
-		$new_name[0] .= '_' . substr( md5( mt_rand() + microtime( true ) ), 0, 10 );
-		$new_name_string = implode( '.', $new_name );
+		$new_name_string = $this->renameFileForArchive($name);
 		$path = FILES_DIR.DIRECTORY_SEPARATOR.$new_name_string;
 						
 		if( !move_uploaded_file( $tmp, $path ) ) throw new Omeka_Upload_Exception('Could not save file.');
@@ -372,6 +370,36 @@ class File extends Omeka_Record {
 		$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
 
 		$this->original_filename = $originalName;
+		$this->archive_filename = $new_name_string;
+		
+		$this->createDerivativeImages($path);
+		
+		$this->processExtendedMetadata($path);
+	}
+	
+	public function renameFileForArchive($name) {
+		$new_name = explode( '.', $name );
+		$new_name[0] .= '_' . substr( md5( mt_rand() + microtime( true ) ), 0, 10 );
+		$new_name_string = implode( '.', $new_name );
+		
+		return $new_name_string;
+	}
+
+	public function moveToFileDir($oldpath, $name) {
+		$name = $this->sanitizeFilename($name);
+		$new_name_string = $this->renameFileForArchive($name);
+		$path = FILES_DIR.DIRECTORY_SEPARATOR.$new_name_string;
+		
+		rename($oldpath, $path);
+
+		$this->size = filesize($path);
+		$this->authentication = md5_file( $path );
+
+		$this->mime_browser = mime_content_type($path);
+		$this->mime_os = trim( exec( 'file -ib ' . trim( escapeshellarg ( $path ) ) ) );
+		$this->type_os = trim( exec( 'file -b ' . trim( escapeshellarg ( $path ) ) ) );
+
+		$this->original_filename = $name;
 		$this->archive_filename = $new_name_string;
 		
 		$this->createDerivativeImages($path);
@@ -396,12 +424,12 @@ class File extends Omeka_Record {
 		
 	}
 
-	protected function processExtendedMetadata($path)
+	public function processExtendedMetadata($path)
 	{
 		$fi = new FilesImages;
 		$m = new FileMetaLookup;
 		
-		require_once 'getid3/getid3.php';
+		require_once LIB_DIR.DIRECTORY_SEPARATOR.'getid3/getid3.php';
 		//Instantiate this third-party sheit
 		$id3 = new getID3;
 		

@@ -406,7 +406,7 @@ class PluginBroker
 //var_dump( $hook );
 
 		if(empty($this->_callbacks[$hook]))	return;
-
+		$return_values = array();
 		foreach( $this->_callbacks[$hook] as $plugin=>$callback )
 		{
 			if($this->isActive($plugin)) {
@@ -414,9 +414,11 @@ class PluginBroker
 				//Make sure the callback executes within the scope of the current plugin
 				$this->setCurrentPlugin($plugin);
 				
-				call_user_func_array($callback, $a);
+				$return_values[$plugin] = call_user_func_array($callback, $a);
 			}
 		}
+		
+		return $return_values;
 	}
 }
 
@@ -437,7 +439,7 @@ function fire_plugin_hook()
 	
 	$hook = array_shift($args);
 		
-	call_user_func_array(array(get_plugin_broker(), $hook), $args);
+	return call_user_func_array(array(get_plugin_broker(), $hook), $args);
 }
 
 function get_plugin_broker()

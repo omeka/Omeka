@@ -214,13 +214,16 @@ ul.tags, li.tag {display: inline;}
 		
 		.index #primary-nav .nav-dashboard a,
 		.items #primary-nav .nav-archive a,
+		.archive-plugin #primary-nav .nav-archive a,
 		.tags #primary-nav .nav-archive a,
 		.files #primary-nav .nav-archive a,
 		.types #primary-nav .nav-archive a,
 		.collections #primary-nav .nav-archive a,
 		.exhibits #primary-nav .nav-exhibits a,
 		.users #primary-nav .nav-users a,
+		.users-plugin #primary-nav .nav-users a,
 		.settings #primary-nav .nav-settings a,
+		.settings-plugin #primary-nav .nav-settings a,
 		.themes #primary-nav .nav-settings a,
 		.plugins #primary-nav .nav-settings a,
 		.entities #primary-nav .nav-names a
