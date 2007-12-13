@@ -5,7 +5,6 @@ ini_set('memory_limit', '32M');
 require_once '../../paths.php';
 require_once 'globals.php';
 require_once 'plugins.php';
-require_once 'Omeka.php';
 
 //Simpletest includes
 require_once 'simpletest/unit_tester.php';
@@ -15,7 +14,8 @@ require_once 'simpletest/web_tester.php';
 
 require_once 'IdenticalSqlExpectation.php';
 
-spl_autoload_register(array('Omeka', 'autoload'));
+require_once 'Zend/Loader.php';
+Zend_Loader::registerAutoload();
 
 //Config dependency
 $config = new Zend_Config_Ini(APP_DIR . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR.'config.ini', 'testing');
@@ -140,6 +140,7 @@ require_once 'TypeTestCase.php';
 require_once 'UploadTestCase.php';
 require_once 'CollectionTestCase.php';
 require_once 'UserTestCase.php';
+require_once 'OmekaDbTestCase.php';
 	
 //require_once 'controllers/ExhibitsControllerTestCase.php';
 
@@ -156,7 +157,7 @@ $test->addTestCase(new TypeTestCase());
 $test->addTestCase(new UploadTestCase());
 $test->addTestCase(new CollectionTestCase());
 $test->addTestCase(new UserTestCase());
-
+$test->addTestCase(new OmekaDbTestCase());
 //$test->addTestCase(new ExhibitsControllerTestCase());
 
 $test->run(new HtmlReporter());

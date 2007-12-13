@@ -4,15 +4,20 @@
 */
 class MetatextTable extends Omeka_Table
 {
-	protected $_target = "Metatext";
 	
+	/**
+	 * Retrieve an array of extended metadata for a given item.  
+	 * In the top-level array each key is the name of the metafield.
+	 *
+	 * @return array
+	 **/	
 	public function findTypeMetadata($item, $simplified=false)
 	{
 		$db = $this->getConn();
 		
 		$type_id = (int) $item->type_id;
 		$item_id = (int) $item->id;
-		
+			
 		$sql = 
 		"SELECT mf.name, j.text, mf.id as metafield_id, mf.description, j.metatext_id
 		FROM $db->Metafield mf

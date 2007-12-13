@@ -74,6 +74,11 @@ class Entity extends Omeka_Record
 		}
 	}
 
+	/**
+	 * Trim all the data that comes in via the form, make sure that parent_id is a valid foreign key.
+	 *
+	 * @return array
+	 **/
 	protected function filterInput($input)
 	{
 		$options = array('namespace'=>'Omeka_Filter');
@@ -94,6 +99,11 @@ class Entity extends Omeka_Record
 		return $clean;
 	}
 	
+	/**
+	 * If the Entity in question is a Person, then only it's parent could be an institutio
+	 *
+	 * @return void
+	 **/
 	protected function getInstitution()
 	{
 		//Pull the institution name from the parent relationship

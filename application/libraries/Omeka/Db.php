@@ -7,6 +7,11 @@ class Omeka_Db
 {
 	protected $_conn;
 	
+	/**
+	 * All the table classes/names are stored here for easy access.  This could change in the future.
+	 *
+	 * @var array
+	 **/
 	protected $_table_names = array(
 		'Collection'=>'collections',
 		'Entity'=>'entities',
@@ -35,21 +40,29 @@ class Omeka_Db
 		'User'=>'users',
 		'UsersActivations'=>'users_activations');
 
+	/**
+	 * The prefix that every table in the omeka database will use.  If null this is ignored
+	 *
+	 * @var string
+	 **/
 	public $prefix = null;
 	
+	/**
+	 * @param Zend_Db_Adapter $conn A connection object courtesy of Zend Framework
+	 * @param string $prefix The prefix for the database (if applicable)
+	 * @return void
+	 **/
 	public function __construct($conn, $prefix=null)
 	{
-		$this->_conn = $conn;
-		
-		if($conn instanceof PDO) {
-			$this->_conn->getConnection()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}
-			
-		$this->_conn->setFetchMode(Zend_Db::FETCH_ASSOC);
-		
+		$this->_conn = $conn;		
 		$this->prefix = (string) $prefix;		
 	}
 	
+	/**
+	 * Delegate to the Zend_Db connection for a few specific actions like quoting, preparing, etc
+	 *
+	 * @return string
+	 **/
 	public function quote($value)
 	{
 		return $this->_conn->quote($value);
@@ -65,15 +78,15 @@ class Omeka_Db
 		return $this->_conn->lastInsertId();
 	}
 	
+	/**
+	 * Retrieve the name of the table (including the prefix)
+	 *
+	 * @return string
+	 **/
 	public function getTableName($class) {
 		$name = $this->_table_names[$class];
 		
-		if($this->hasPrefix()) {
-			return $this->prefix . $name;
-		}
-		else {
-			return $name;
-		}
+		return (string) $this->prefix . (string) $name;
 	}
 
 	public function hasTable($name) {
@@ -230,6 +243,7 @@ if($_GET['sql']) {
 			$stmt = $this->_conn->query($sql, $params);
 		}
 		catch (Zend_Db_Statement_Exception $e) {
+			Omeka_Logger::logSql($sql);
 			throw new Omeka_Db_Exception($e, $sql);
 		}
 		 catch (PDOException $e) {

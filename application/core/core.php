@@ -77,11 +77,6 @@ Zend_Registry::set('acl', $acl);
 require_once 'plugins.php';
 $plugin_broker = new PluginBroker;
 
-
-// Use Zend_Config_Ini to store the info for the routes and db ini files
-require_once 'Omeka.php';
-spl_autoload_register(array('Omeka', 'autoload'));
-
 Zend_Registry::set('routes_ini', new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini', null));
 
 // Require the front controller and router

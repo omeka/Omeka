@@ -68,16 +68,13 @@ class Omeka_Record implements ArrayAccess
 		return $this->delegateToModules($m, $a);
 	}
 	
+	/**
+	 * Instances of Omeka_Record_Modules (which are mostly plugins though they mix behavior)
+	 *
+	 * @return void
+	 **/
 	protected function delegateToModules($method, $args=array(), $all=false)
 	{
-		//Hack the arguments so that they are pass-by-reference
-/*
-		$hack = array();
-		foreach ($args as &$arg) {
-			$hack[] =& $arg;
-		}
-*/	
-	
 		foreach ($this->_modules as $k => $module) {
 			if(method_exists($module, $method)) {
 				$called = true;

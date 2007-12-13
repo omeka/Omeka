@@ -1,10 +1,16 @@
 <?php
 require_once 'Zend/Acl.php';
 require_once 'Omeka/Acl/Role/Registry.php';
+
+/**
+ * @todo ACL roles, resources & rules should all be stored in the database (3 separate tables)
+ * The previous solution involved serializing the entire ACL and storing that in the DB, but that causes
+ * fiery death whenever the Acl class definition changes, it would cause incomplete_class fatal error!
+ *
+ * @package Omeka
+ **/
 class Omeka_Acl extends Zend_Acl
-{
-	protected $_autosave = true;
-	
+{	
 	/**
 	 * Zend doesn't have a way of getting what rules/permissions are potentially
 	 * available for specific resources or for global resources, so here is an
@@ -31,7 +37,7 @@ class Omeka_Acl extends Zend_Acl
 	
 	public function deleteRules() {
 		$this->_permissions = array('GLOBAL' => array());
-		$this->autoSave();
+		
 	}
 	
 	public function registerRule(Zend_Acl_Resource_Interface $resource = null, $permissions) {
@@ -63,7 +69,7 @@ class Omeka_Acl extends Zend_Acl
 		}
 
 		// Auto save the acl object
-		$this->autoSave();
+		
 	}
 
 	public function removeRule($resource = null, $permissions)
@@ -112,7 +118,7 @@ class Omeka_Acl extends Zend_Acl
 		}
 		
 		// Auto save the acl object
-		$this->autoSave();
+		
 	}
 	
 	public function removeRulesByResource($resource)
@@ -131,7 +137,7 @@ class Omeka_Acl extends Zend_Acl
 
 		unset($this->_permissions[$resourceId]);
 		$this->remove($resourceId);
-		$this->autoSave();
+		
 	}
 	
 	/**
@@ -173,7 +179,7 @@ class Omeka_Acl extends Zend_Acl
 				$this->removeAllow($role, $resource, $rule);
 			}
 		}
-		$this->autoSave();
+		
 	}
 	
 	/**
@@ -210,18 +216,6 @@ class Omeka_Acl extends Zend_Acl
 			
 		}
 		return parent::isAllowed($role, $resource, $privilege);
-	}
-	
-	public function setAutoSave($bool) 
-	{
-		$this->_autosave = $bool;
-	}
-	
-	public function autoSave()
-	{
-		if($this->_autosave) {
-			$this->save();
-		}
 	}
 	
 	/**
