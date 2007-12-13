@@ -26,6 +26,16 @@ function not_empty_or($value, $default) {
  * @return void
  **/
 
+// Function to easily generate various xml outputs of items
+function items_output_uri($output="rss2") {
+	return uri('items/?output='.$output);
+}
+
+function auto_discovery_link_tag(){
+	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. items_output_uri() .'" />';
+	return $html;
+}
+
 function display_file($item, $props = array()) {
 	if(has_files($item)) {
 	if(count($item->Files) > 1) {
