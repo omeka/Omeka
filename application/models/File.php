@@ -359,7 +359,7 @@ class File extends Omeka_Record {
 		$new_name_string = $this->renameFileForArchive($name);
 		$path = FILES_DIR.DIRECTORY_SEPARATOR.$new_name_string;
 						
-		if( !move_uploaded_file( $tmp, $path ) ) throw new Omeka_Upload_Exception('Could not save file.');
+		if( !move_uploaded_file( $tmp, $path ) ) throw new Omeka_Upload_Exception('Could not save file.');	
 		
 		//set the attributes of this file
 		$this->size = $_FILES[$form_name]['size'][$index];
