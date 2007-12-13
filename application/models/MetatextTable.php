@@ -24,7 +24,7 @@ class MetatextTable extends Omeka_Table
 			WHERE mt.item_id = ? ) j ON j.metafield_id = mf.id
 		WHERE tm.type_id = ?";
 
-		$result = $db->query($sql, array($item_id, $type_id));
+		$result = $db->query($sql, array($item_id, $type_id))->fetchAll();
 		
 		$type_metadata = array();
 		
@@ -37,6 +37,7 @@ class MetatextTable extends Omeka_Table
 		}
 
 		return $type_metadata;
+		
 	}
 	
 	/**
