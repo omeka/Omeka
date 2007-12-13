@@ -29,6 +29,11 @@ class Omeka_Db_Exception extends Exception
 			$this->message = ob_get_clean();
 		}
 	}
+	
+	public function getInitialException()
+	{
+		return $this->e;
+	}
 }
  
 ?>
