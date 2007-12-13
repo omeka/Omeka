@@ -247,8 +247,8 @@ class File extends Omeka_Record {
 	public function handleUploadErrors($file_form_name)
 	{	
 
-//		$file_form = $_FILES[$file_form_name];
-		$file_form = $_POST['file'];
+		$file_form = $_FILES[$file_form_name];
+//		$file_form = $_POST['file'];
 		//Check the $_FILES array for errors
 		foreach ($file_form['error'] as $key => $error) {
 			if($error != UPLOAD_ERR_OK) {
