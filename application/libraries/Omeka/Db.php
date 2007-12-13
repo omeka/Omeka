@@ -222,7 +222,10 @@ if($_GET['sql']) {
 	
 	Zend_Debug::dump( $this->queryCount );
 }				
-	
+		if(is_object($sql)) {
+    		$sql = $sql->__toString();
+		}
+		
 		try {
 			$stmt = $this->_conn->query($sql, $params);
 		}

@@ -102,7 +102,7 @@ class Omeka_Table
 	{
 		$db = $this->getConn();
 		
-		$res = $db->query((string) $sql, $params);
+		$res = $db->query($sql, $params);
 		
 		$data = $res->fetchAll();
 		

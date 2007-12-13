@@ -19,8 +19,12 @@ Zend_Registry::set('path_names', $site);
 require_once CORE_DIR . DIRECTORY_SEPARATOR . 'db.php';
 
 //Pull the options from the DB
-$option_stmt = $dbh->query("SELECT * FROM $db_obj->Option");
-if(!$option_stmt) {
+try {
+	$option_stmt = $dbh->query("SELECT * FROM $db_obj->Option");
+	if(!$option_stmt) {
+		install_notification();
+	}
+} catch (Zend_Db_Statement_Exception $e) {
 	install_notification();
 }
 $option_array = $option_stmt->fetchAll();

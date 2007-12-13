@@ -15,9 +15,10 @@ spl_autoload_register(array('Omeka', 'autoload'));
 try {
 	//include the database connection
 	require_once CORE_DIR . DIRECTORY_SEPARATOR .'db.php';
+	$db = get_db();
 	
 	//Build the database if necessary
-	$res = $dbh->query("SHOW TABLES");
+	$res = $db->query("SHOW TABLES");
 	$tables = $res->fetchAll();
 	
 	if(empty($tables)) {
