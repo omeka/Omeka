@@ -92,7 +92,12 @@ class Omeka_Db
 	public function hasTable($name) {
 		return in_array($name, $this->_table_names) or array_key_exists($name, $this->_table_names);
 	}
-
+	
+	/**
+	 * A shortcut for checking to see whether the database tables have a prefix
+	 *
+	 * @return bool
+	 **/
 	public function hasPrefix() {
 		return !empty($this->prefix);
 	}
@@ -119,11 +124,14 @@ class Omeka_Db
 		$this->_table_names[$model_name] = $table_name;
 	}
 
+	/**
+	 * Magic getter is a synonym for Omeka_Db::getTableName()
+	 *
+	 * @return string|null
+	 **/
 	public function __get($name)
 	{
-		if($this->hasTable($name)) {
-			return $this->getTableName($name);
-		}
+		return $this->getTableName($name);
 	}
 	
 	/**
@@ -131,7 +139,11 @@ class Omeka_Db
 	 *	INSERT INTO table (field, field2, field3, ...) VALUES (?, ?, ?, ...) 
 	 *	ON DUPLICATE KEY UPDATE field = ?, field2 = ?, ...
 	 *
-	 * @return void
+	 * Note on portability: ON DUPLICATE KEY UPDATE is a MySQL extension.  
+	 * The advantage to using this is that it doesn't care whether a row exists already.
+	 * Basically it combines what would be insert() and update() methods in other ORMs into a single method
+	 * 
+	 * @return int The ID for the row that got inserted (or updated)
 	 **/
     public function insert($table, array $values = array()) {
 		$table = $this->getTableName($table);
@@ -211,16 +223,10 @@ class Omeka_Db
 		//Let's try a normal PDO::exec() if there are no parameters
 		
 		try {
-			return $this->_conn->query($sql, $params);
+			$stmt = $this->_conn->query($sql, $params);
 		} 
 		catch (Zend_Db_Statement_Exception $e) {
-			Zend_Debug::dump( $e );exit;
-		}
-		catch (PDOException $e) {
-			if($stmt) $errorInfo = $stmt->errorInfo();
-			else $errorInfo = $this->_conn->errorInfo();
-			
-			$this->throwOmekaDbException($errorInfo, $e, $sql);
+			throw new Omeka_Db_Exception($e, $sql);
 		}
 	}
 	
@@ -228,13 +234,15 @@ class Omeka_Db
 	public function query($sql, array $params=array(), $fetchMode=null)
 	{
 		
+/*
 if($_GET['sql']) {
 	if(!isset($this->queryCount)) $this->queryCount = 1;
 	else $this->queryCount++;
 	var_dump( (string) $sql );
 	
 	Zend_Debug::dump( $this->queryCount );
-}				
+}			
+*/		
 		if(is_object($sql)) {
     		$sql = $sql->__toString();
 		}

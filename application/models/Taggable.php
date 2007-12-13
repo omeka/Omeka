@@ -18,7 +18,13 @@ class Taggable extends Omeka_Record_Module
 		
 		$this->conn = get_db();
 	}
-		
+	
+	/**
+	 * Fires whenever deleting a record that is taggable
+	 * This will actually delete all the references to a specific tag for a specific record
+	 *
+	 * @return void
+	 **/	
 	public function beforeDelete()
 	{
 		$this->deleteTaggings();
@@ -43,26 +49,32 @@ class Taggable extends Omeka_Record_Module
 		$db->exec($delete);
 	}
 	
+	/**
+	 * Retrieve all the Taggings objects that represent between a specific tag and the current record
+	 * Called by whatever record has enabled this module
+	 *
+	 * @return array of Taggings
+	 **/
 	public function getTaggings()
 	{
 		return $this->joinTable->findBy(array('record'=>$this->record));
 	}
 	
+	/**
+	 * Get all the Tag records associated with this record
+	 *
+	 * @return array of Tag
+	 **/
 	public function getTags()
 	{
 		return $this->tagTable->findBy(array('record'=>$this->record, 'return'=>'object'), $this->type);
-	}
-
-	public function userTags($user)
-	{
-		$tags = $this->tagTable->findBy(array('user'=>$user, 'record'=>$this->record, 'return'=>'object'), $this->type);
-		return $tags;
 	}
 
 	public function entityTags($entity)
 	{
 		return $this->tagTable->findBy(array('entity'=>$entity, 'record'=>$this->record, 'return'=>'object'), $this->type);
 	}
+	
 	/**
 	 * Delete a tag from the record
 	 *
@@ -71,9 +83,7 @@ class Taggable extends Omeka_Record_Module
 	 * @return bool|array Whether or not the tag was deleted (false if tag doesn't exist)
 	 **/
 	public function deleteTags($tag, $entity=null, $deleteAll=false)
-	{
-		$joinType = 'Taggings';
-			
+	{			
 		$findWith['tag'] = $tag;
 		$findWith['record'] = $this->record;
 		
@@ -98,7 +108,14 @@ class Taggable extends Omeka_Record_Module
 		
 		return $count > 0;
 	}	
-		
+	
+	/**
+	 * Add tags for the record and for a specific entity
+	 *
+	 * @param array|string $tags Either an array of tags or a delimited string
+	 * @param Entity $entity The entity (in record form, for which a set of tags should be added)
+	 * @return void
+	 **/	
 	public function addTags($tags, $entity, $delimiter = ',') {
 		if(!$this->record->id) {
 			throw new Exception( 'A valid record ID # must be provided when tagging.' );

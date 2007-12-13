@@ -12,13 +12,20 @@ class Omeka_Controller_Flash
 	const DISPLAY_NOW = 5;
 	const DISPLAY_NEXT = 6;
 	
-
+	/**
+	 * The session object that stores the flash values
+	 *
+	 * @var Zend_Session_Namespace
+	 **/
 	protected static $_session;
-
-	protected static $_priority;
 	
-	protected $_errors;
-		
+	/**
+	 * Whether or not to display the flash during the current request or the next
+	 *
+	 * @var int
+	 **/
+	protected static $_priority;
+			
 	/**
 	 * Useful for storing message state outside the session
 	 * used for self::DISPLAY_NOW priority
@@ -55,6 +62,11 @@ class Omeka_Controller_Flash
 		}			
 	}
 	
+	/**
+	 * Set the temporary flash variables (temporary because they are stored in this obj instance and not the session)
+	 *
+	 * @return void
+	 **/
 	protected function setTempFlash($status, $msg)
 	{
 		self::$_flash = new stdClass;
@@ -62,6 +74,11 @@ class Omeka_Controller_Flash
 		self::$_flash->status = $status;		
 	}
 	
+	/**
+	 * Retrieve the flash info
+	 *
+	 * @return stdClass|Zend_Session_Namespace
+	 **/
 	protected function getFlash()
 	{
 		if(self::$_flash instanceof stdClass) return self::$_flash;
@@ -69,6 +86,13 @@ class Omeka_Controller_Flash
 		return $this->_session;
 	}	
 	
+	/**
+	 * Retrieve the status code for the flash
+	 * 
+	 * Possible status codes are class constants: SUCCESS, VALIDATION_ERROR, GENERAL_ERROR, ALERT
+	 *
+	 * @return int
+	 **/
 	public function getStatus()
 	{
 		return $this->getFlash()->status;
@@ -78,7 +102,7 @@ class Omeka_Controller_Flash
 	 * Retrieve a formatted version of the error/success message and then clean out the session.
 	 * Note: errors are preserved within the flash 
 	 *
-	 * @return void
+	 * @return string
 	 **/
 	public function getMsg()
 	{
@@ -93,7 +117,11 @@ class Omeka_Controller_Flash
 		return $msg;
 	}
 	
-	//Move the flash info from the session to the more temporary class vars (may need it for the rest of the request)
+	/**
+	 * Move the flash info from the session to the more temporary class vars (may need it for the rest of the request)
+	 *
+	 * @return void
+	 **/
 	protected function resetFlash()
 	{
 		if( ($flash = $this->getFlash())) {
@@ -105,6 +133,11 @@ class Omeka_Controller_Flash
 		}
 	}
 	
+	/**
+	 * Take an array of error messages and convert it into human-readable format
+	 *
+	 * @return string
+	 **/
 	protected function formatErrorsIntoNiceMessage($errors)
 	{
 		$msgs = array();
@@ -116,6 +149,11 @@ class Omeka_Controller_Flash
 		return join("\n", $msgs);			
 	}
 	
+	/**
+	 * Return the error message for a specific field
+	 *
+	 * @return string
+	 **/
 	public function getError($field)
 	{
 		$msg = $this->getFlash()->msg;

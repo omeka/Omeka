@@ -208,7 +208,16 @@ class Entity extends Omeka_Record
 		$id = (int) $this->id;
 		return get_db()->getTable('User')->findByEntity($id);
 	}
-
+	
+	/**
+	 * When deleting an entity, there is much else to be done.
+	 * 1) Delete any associated user account
+	 * 2) Delete all taggings associated with this entity
+	 * 3) Update the entities_relations table so that every reference to this entity are NULLed
+	 * 4) Remove any references to this entity within the parent_id fields of all the other entities (simple update to NULL)
+	 *
+	 * @return void
+	 **/
 	public function _delete()
 	{		
 		$id = (int) $this->id;

@@ -1,6 +1,9 @@
 <?php 
 /**
 * CollectionPermissions
+*
+* This will check the ACL To determine whether a user has permission to view collections that are not public yet 
+* then modify the SQL query accordingly
 */
 class CollectionPermissions
 {

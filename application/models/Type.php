@@ -43,6 +43,14 @@ class Type extends Omeka_Record {
 		return $this->getTable('Item')->findBy(array('type'=>$this->id));
 	}
 	
+	/**
+	 * Current validation rules for Type
+	 * 
+	 * 1) 'Name' field can't be blank
+	 * 2) 'Name' field must be unique
+	 *
+	 * @return void
+	 **/
 	protected function _validate()
 	{
 		if(empty($this->name)) {
@@ -54,6 +62,11 @@ class Type extends Omeka_Record {
 		}
 	}
 	
+	/**
+	 * Delete all the TypesMetafields joins
+	 *
+	 * @return void
+	 **/
 	protected function _delete()
 	{
 		$tm_objs = get_db()->getTable('TypesMetafields')->findBySql('type_id = ?', array( (int) $this->id));
@@ -63,6 +76,11 @@ class Type extends Omeka_Record {
 		}
 	}
 	
+	/**
+	 * Find a specific TypesMetafields join object and delete it (severing the connection between the two)
+	 *
+	 * @return void
+	 **/
 	protected function removeMetafield(Metafield $metafield)
 	{
 		//Find the join and delete it
@@ -72,6 +90,12 @@ class Type extends Omeka_Record {
 		$tm->delete();
 	}
 	
+	/**
+	 * Add a Metafield to this Type by creating a new join in the TypesMetafields table
+	 *
+	 * @param Metafield $metafield
+	 * @return void
+	 **/
 	public function addMetafield(Metafield $metafield)
 	{
 		//save the metafield if its a new one
@@ -84,9 +108,7 @@ class Type extends Omeka_Record {
 		
 		$tm->metafield_id = $metafield->id;
 		$tm->type_id = $this->id;
-		$tm->save();
-			
-		return true;
+		$tm->save();			
 	}
 	
 	/**
