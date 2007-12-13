@@ -36,19 +36,20 @@ function auto_discovery_link_tag(){
 	return $html;
 }
 
-function display_file($item, $props = array()) {
-	if(has_files($item)) {
-	if(count($item->Files) > 1) {
-		foreach($item->Files as $file) {
-			echo '<a href="'.file_download_uri($file).'" class="download-file">';
-			if($file->hasThumbnail()) square_thumbnail($file, array('class'=>'thumb')); 
-			else echo $file->original_filename;
-			echo '</a>';
-		}
-	} else {
-		
-	$file = $item->Files[0];
+function display_files($files, $props = array()) {
 	
+	if(is_array($files)) {
+		$output = '';
+		foreach ($files as $file) {
+			$output .= display_files($file);
+		}
+		return $output;
+	} else {
+
+		$file = $files;
+		
+		$html = '<div class="item-file">';
+		
 		switch ($file->mime_browser) {
 			case 'video/avi':
 			case 'video/msvideo':
@@ -66,7 +67,7 @@ function display_file($item, $props = array()) {
 
 			$defaults = array_merge($defaults, $props);
 			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-				$html 	 = 	'<object id="MediaPlayer" width="'.$defaults['width'].'" height="'.$defaults['height'].'"';
+				$html 	.= 	'<object id="MediaPlayer" width="'.$defaults['width'].'" height="'.$defaults['height'].'"';
 				$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
 				$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
 				$html	.=	'<param name="FileName" value="'.$path.'">'."\n";
@@ -78,7 +79,6 @@ function display_file($item, $props = array()) {
 				$html	.=	' width="'.$defaults['width'].'" height="'.$defaults['height'].'"'; 		
 				$html	.=	' ShowControls="'.$defaults['ShowControls'].'" ShowStatusBar="'.$defaults['ShowStatusBar'].'"'; 
 				$html	.=	' ShowDisplay="'.$defaults['ShowDisplay'].'" autoplay="'.$defaults['autostart'].'"></embed></object>';
-				echo $html;
 				break;
 		
 			//MOV
@@ -95,7 +95,7 @@ function display_file($item, $props = array()) {
 			$defaults = array_merge($defaults, $props);
 			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
 
-			$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$defaults['width'].'" height="'.$defaults['height'].'">
+			$html .= '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$defaults['width'].'" height="'.$defaults['height'].'">
 				<param name="src" value="'.$path.'">
 				<param name="controller" value="'.($defaults['controller'] ? 'true' : 'false').'">
 				<param name="autoplay" value="'.($defaults['autoplay'] ? 'true' : 'false').'">
@@ -103,10 +103,33 @@ function display_file($item, $props = array()) {
 
 				<embed src="'.$path.'" scale="tofit" width="'.$defaults['width'].'" height="'.$defaults['height'].'" controller="'.($defaults['controller'] ? 'true' : 'false').'" autoplay="'.($defaults['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
 				</object>';
-				echo $html;
-				break;			
+				break;
+				case 'image/jpeg':
+				case 'image/gif':
+				case 'image/png':
+				case 'image/tiff':
+				
+					$html .= '<a href="'.file_download_uri($file).'" class="download-file">';
+				
+					if($file->hasThumbnail()) {
+						ob_start();
+						square_thumbnail($file, array('class'=>'thumb'));
+						$html .= ob_get_clean();
+					} 
+					else { 
+						$html .= $file->original_filename;
+					}
+					
+					$html .= '</a>';
+					
+				break;
+				default:
+				$html .= '<a href="'. file_download_uri($file). '" class="download-file">'. $file->original_filename. '</a>';
 		}
-	}
+		$html .= '</div>';
+		$html .= "\n";
+		return $html;
+		
 	}
 }
 
@@ -413,6 +436,7 @@ function flash($wrap=true)
 			$wrap_class = 'alert';
 			break;		
 		default:
+			return;
 			break;
 	}
 	

@@ -103,24 +103,9 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 ?></p>
 
 <div id="item-images">
-	<div id="main-image">
-		<?php $mainfile = $item->Files[0]; ?>
-		<?php fullsize($mainfile); ?>
-	</div>
-	<?php if(count($item->Files) > 1):?>
-	<div id="files">
-		<?php foreach( $item->Files as $key => $file ): ?>
-			<?php if($file->hasThumbnail()): ?>
-
-			<a href="<?php echo file_display_uri($file); ?>">
-				<?php square_thumbnail($file, array('class'=>'thumb')); ?>
-			</a>
-			<?php endif; ?>
-		<?php endforeach; ?>
-	</div>
-	<?php endif;?>
+<?php echo display_files($item->Files); ?>
 	
-	</div>
+</div>
 <div id="core-metadata" class="showitem">
 
 <h2>Core Metadata</h2>
@@ -294,7 +279,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		</div>
+	</div>
 		
 <?php if(has_files($item)==null):?>
 	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
@@ -310,16 +295,14 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 
 	<?php endforeach; ?>
 	</ul>
-	</tbody>
-	</table>
 	</div>
 
 
 <?php endif;?>
-
+	<div id="additional-metadata">
+		<?php fire_plugin_hook('append_to_item_show', $item); ?>
+	</div>
+</div>
 </div>
 
-<div id="additional-metadata">
-	<?php fire_plugin_hook('append_to_item_show', $item); ?>
-</div>
 <?php foot();?>
