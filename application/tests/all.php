@@ -6,6 +6,9 @@ require_once '../../paths.php';
 require_once 'globals.php';
 require_once 'plugins.php';
 
+define('TEST_DIR', APP_DIR . DIRECTORY_SEPARATOR . 'tests');
+define('TEST_ASSETS_DIR', TEST_DIR .DIRECTORY_SEPARATOR . 'assets');
+
 //Simpletest includes
 require_once 'simpletest/unit_tester.php';
 require_once 'simpletest/reporter.php';
@@ -141,7 +144,7 @@ require_once 'UploadTestCase.php';
 require_once 'CollectionTestCase.php';
 require_once 'UserTestCase.php';
 require_once 'OmekaDbTestCase.php';
-	
+require_once 'FileMetadataTestCase.php';	
 //require_once 'controllers/ExhibitsControllerTestCase.php';
 
 $test = new TestSuite('Omeka Tests');
@@ -154,11 +157,14 @@ $test->addTestCase(new ExhibitSectionTestCase());
 $test->addTestCase(new OmekaRecordTestCase());
 $test->addTestCase(new PermissionsTestCase());
 $test->addTestCase(new TypeTestCase());
-$test->addTestCase(new UploadTestCase());
 $test->addTestCase(new CollectionTestCase());
 $test->addTestCase(new UserTestCase());
 $test->addTestCase(new OmekaDbTestCase());
+$test->addTestCase(new FileMetadataTestCase());
 //$test->addTestCase(new ExhibitsControllerTestCase());
+
+//DO NOT RUN THIS ON A PRODUCTION INSTALLATION
+$test->addTestCase(new UploadTestCase());
 
 $test->run(new HtmlReporter());
 ?>

@@ -17,6 +17,14 @@ class ExhibitPage extends Omeka_Record
 		$this->_modules[] = new Orderable($this, 'ExhibitPageEntry', 'page_id', 'ExhibitPageEntry');
 	}
 	
+	/**
+	 * In order to validate:
+	 * 1) must have a layout
+	 * 2) must be properly ordered
+	 * 3) Must be associated with a section
+	 *
+	 * @return void
+	 **/
 	protected function _validate()
 	{
 		if(empty($this->layout)) {
@@ -44,16 +52,6 @@ class ExhibitPage extends Omeka_Record
 		foreach ($this->ExhibitPageEntry as $ip) {
 			$ip->delete();
 		}
-
-/*
-		$id = (int) $this->id;
-		//Delete thyself and all thine dependencies
-		$delete = "DELETE items_section_pages, section_pages FROM section_pages
-		LEFT JOIN items_section_pages ON items_section_pages.page_id = section_pages.id
-		WHERE section_pages.id = $id;";
-		
-		get_db()->exec($delete);
-*/	
 	}
 		
 	protected function afterDelete()
