@@ -39,7 +39,7 @@ class FilesImages extends Omeka_Record
 		
 		//Convert the exif to a string as for to store it
 		$exif_string = '';
-			foreach ($exif as $k => $v) {
+			foreach ($this->exif_array as $k => $v) {
 				$exif_string .= $k . ':';
 				if(is_array($v)) {
 					$exif_string .= "\n";

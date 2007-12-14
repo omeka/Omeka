@@ -33,7 +33,7 @@ class UploadTestCase extends OmekaTestCase
 		$_FILES['item']['error'][0] = 0;
 		$_FILES['item']['tmp_name'][0] = $this->pathToTestFile;
 	}
-	
+		
 	protected function setUpImageMagick()
 	{
 		$config = Zend_Registry::get('config_ini');

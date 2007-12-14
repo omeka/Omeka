@@ -424,11 +424,76 @@ class File extends Omeka_Record {
 		
 	}
 
+	/**
+	 * Process the extended set of metadata for a file (contingent on its MIME type)
+	 *
+	 * @return bool
+	 **/
 	public function processExtendedMetadata($path)
 	{
+		if(!is_readable($path)) {
+			throw new Exception( 'File cannot be read!' );
+		}
+		
 		$fi = new FilesImages;
 		$m = new FileMetaLookup;
 		
+		//If we can use the browser mime_type instead of the ID3 extrapolation, do that
+		$mime_type = $this->mime_browser;	
+
+		if($this->mimeTypeIsAmbiguous($mime_type)) {
+			//If we can't determine MIME type via the browser, 
+			//we will pull down ID3 data, but be warned that this may cause a memory error on large files
+			$id3 = $this->retrieveID3Info($path);
+			$mime_type = $id3->info['mime_type'];
+		}
+		
+		if(!$mime_type) {
+			return false;
+		}
+			
+		//Determine the lookup ID from the given MIME type
+		$db = get_db();
+		$sql = "SELECT * FROM  $db->FileMetaLookup WHERE mime_type = ? LIMIT 1";
+		$res = $db->query($sql, array($mime_type))->fetchAll();
+				
+		//Generate the extended info
+		if(count($res)) {
+			$this->lookup_id = (int) $res[0]['id'];
+			
+			//Have the correct class
+			$extendedClass = $res[0]['table_class'];
+			
+			$metadata = new $extendedClass;
+					
+			if(!isset($id3)) {
+				$id3 = $this->retrieveID3Info($path);
+			}		
+
+			$info = $id3->info;
+			$metadata->generate($info, $path);
+			
+			$this->Extended = $metadata;
+			
+			return true;
+		}		
+		
+		return false;
+	}
+	
+	//References a list of ambiguous mime types from "http://msdn2.microsoft.com/en-us/library/ms775147.aspx"
+	protected function mimeTypeIsAmbiguous($mime_type)
+	{
+		return in_array($mime_type, array("text/plain", "application/octet-stream", '', null));
+	}
+	
+	/**
+	 * Pull down the file's extra metadata via getID3 library
+	 *
+	 * @return void
+	 **/
+	private function retrieveID3Info($path)
+	{
 		require_once LIB_DIR.DIRECTORY_SEPARATOR.'getid3/getid3.php';
 		//Instantiate this third-party sheit
 		$id3 = new getID3;
@@ -437,29 +502,10 @@ class File extends Omeka_Record {
 		
 		try {
 			$id3->Analyze($path);
+			
+			return $id3;
 		} catch (Exception $e) {
 			return false;
-		}
-		
-		$mime_type = $id3->info['mime_type'];
-		
-		//Get the lookup ID for the correct table
-		$db = get_db();
-		$sql = "SELECT * FROM  $db->FileMetaLookup WHERE mime_type = ? LIMIT 1";
-		$res = $db->query($sql, array($mime_type))->fetchAll();
-				
-		//Generate the extended info
-		if(count($res)) {
-			$this->lookup_id = $res[0]['id'];
-			//Have the correct class
-			$extendedClass = $res[0]['table_class'];
-			
-			$metadata = new $extendedClass;
-					
-			$info = $id3->info;
-			$metadata->generate($info, $path);
-			
-			$this->Extended = $metadata;
 		}		
 	}
 	
