@@ -16,6 +16,13 @@ class Omeka_View extends Zend_View_Abstract
 	protected $_request;
 	
 	/**
+	 * Maintains a key => value pairing corresponding to hard path => web path for possible assets for Omeka views
+	 *
+	 * @var array
+	 **/
+	protected $_asset_paths;
+	
+	/**
 	 * Using the current admin system, an option
 	 * is set by the admin controller upon authentication
 	 * that can then be used to verify that an admin request
@@ -36,7 +43,9 @@ class Omeka_View extends Zend_View_Abstract
 		
 		if(isset($config['request'])) {
 			$this->_request = $config['request'];
-		}				
+		}
+		
+		Zend_Registry::set('view', $this);				
 	}
 	
 	/**
@@ -84,6 +93,16 @@ class Omeka_View extends Zend_View_Abstract
 	public function getResponse()
 	{
 		return $this->_controller->getResponse();
+	}
+	
+	public function getAssetPaths()
+	{
+		return $this->_asset_paths;
+	}
+	
+	public function addAssetPath($physical_path, $web_path)
+	{
+		$this->_asset_paths[$physical_path] = $web_path;
 	}
 	
 	/**

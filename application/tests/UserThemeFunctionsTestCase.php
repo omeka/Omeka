@@ -62,30 +62,6 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		$this->assertFalse(has_permission('researcher'));
 	}
 	
-	public function testSrcFunction()
-	{
-		$hard_path = dirname(dirname(__FILE__));
-		$web_path = WEB_ROOT.DIRECTORY_SEPARATOR.'application';
-		Zend_Registry::set('theme_path',$hard_path);
-		Zend_Registry::set('theme_web',$web_path);
-		
-		ob_start();
-		src('setup.sql','tests',null);
-		$src = ob_get_clean();
-		$this->assertEqual($web_path.DIRECTORY_SEPARATOR.'tests/setup.sql',$src);
-		ob_flush();
-		
-		Zend_Registry::set('theme_path',dirname(__FILE__));
-		src('setup.sql',null);
-		$src = ob_get_clean();
-		$this->assertEqual($web_path.DIRECTORY_SEPARATOR.'setup.sql',$src);
-		ob_flush();
-		
-		Zend_Registry::set('theme_path','foobar');
-		$this->expectException(new Exception('Cannot find bar/foo.php'));
-		echo src('foo', 'bar', 'php', false);
-	}
-	
 	public function testJsFunction()
 	{
 		$hard_path = dirname(__FILE__);

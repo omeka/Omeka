@@ -206,48 +206,50 @@ function text_to_id($text, $prepend=null, $delimiter='-')
 //End CSS Helpers
 
 /**
- * Echos the physical path to the theme.
- * This should be used when you need to include a file through PHP.
- */
-function theme_path($return = false) {
-	$path = Zend_Registry::get('theme_path');
-	if($return) return $path;
-	else echo $path;
+ * Return the web path for an asset/resource within the theme
+ *
+ * @return string
+ **/
+function web_path_to($file)
+{
+	$view = Zend_Registry::get('view');
+	$paths = $view->getAssetPaths();
+	
+	foreach ($paths as $physical_path => $web_path) {
+		if(file_exists($physical_path . DIRECTORY_SEPARATOR . $file)) {
+			return $web_path . DIRECTORY_SEPARATOR . $file;
+		}
+	}
+	
+	throw new Exception( "Could not find file '$file'!" );
 }
 
 /**
- * Echos the web path of the theme.
- * This should be used when you need to link in an image or other file.
- */
-function web_path($return = false) {
-	$path = Zend_Registry::get('theme_web');
-	if($return) return $path;
-	else echo $path;
+ * Return the physical path for an asset/resource within the theme (or plugins, shared, etc.)
+ *
+ * @return string
+ **/
+function physical_path_to($file)
+{
+	$view = Zend_Registry::get('view');
+	$paths = $view->getAssetPaths();
+	
+	foreach ($paths as $physical_path => $web_path) {
+		if(file_exists($physical_path . DIRECTORY_SEPARATOR . $file)) {
+			return $physical_path . DIRECTORY_SEPARATOR . $file;
+		}
+	}
+	throw new Exception( "Could not find file '$file'!" );
 }
 
-function src($file, $dir=null, $ext = null, $return = false) {
+function src($file, $dir=null, $ext = null) {
 	if ($ext !== null) {
 		$file .= '.'.$ext;
 	}
 	if ($dir !== null) {
 		$file = $dir.DIRECTORY_SEPARATOR.$file;
 	}
-	$physical = theme_path(true).DIRECTORY_SEPARATOR.$file;
-	if (file_exists($physical)) {
-		$path = web_path(true).DIRECTORY_SEPARATOR.$file;
-		if($return) return $path;
-		else echo $path;
-	}
-	else {		
-		//Check the 'universal' directory to see if it is in there
-		$physical = SHARED_DIR.DIRECTORY_SEPARATOR.$file;
-		if(file_exists($physical)) {
-			$path = WEB_SHARED.DIRECTORY_SEPARATOR.$file;
-			if($return) return $path;
-			else echo $path;
-		}
-		throw new Exception('Cannot find '.$file);
-	}
+	return web_path_to($file);
 }
 
 /**
@@ -257,7 +259,7 @@ function src($file, $dir=null, $ext = null, $return = false) {
  * $file should not include the .js extension
  */
 function js($file, $dir = 'javascripts') {
-	echo '<script type="text/javascript" src="'.src($file, $dir, 'js', true).'"></script>'."\n";
+	echo '<script type="text/javascript" src="'.src($file, $dir, 'js').'"></script>'."\n";
 }
 
 /**
@@ -266,7 +268,7 @@ function js($file, $dir = 'javascripts') {
  * $file should not include the .css extension
  */
 function css($file, $dir = 'css') {
-	src($file, $dir, 'css');
+	echo src($file, $dir, 'css');
 }
 
 /**
@@ -275,29 +277,13 @@ function css($file, $dir = 'css') {
  * $file SHOULD include an extension, many image exensions are possible
  */
 function img($file, $dir = 'images') {
-	src($file, $dir);
+	echo src($file, $dir);
 }
 
 function common($file, $vars = array(), $dir = 'common') {
-	
-	$path = theme_path(true).DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file.'.php';
-	if (file_exists($path)) {
-		extract($vars);
-		include $path;
-	}else {			
-		//Grab the view paths for the plugins and then append the path for the shared directory
-		$paths = Zend_Registry::isRegistered('plugin_view_paths') ? Zend_Registry::get( 'plugin_view_paths' ) : array();
-		$paths = array_merge( array( SHARED_DIR => WEB_SHARED ), $paths);
-
-		foreach ($paths as $physicalPath => $webPath) {
-			$path = $physicalPath . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $file . '.php';
-
-			if(file_exists($path)) {
-				extract($vars);
-				include $path;
-			}
-		}		
-	}
+	$path = physical_path_to($dir . DIRECTORY_SEPARATOR . $file . '.php');
+	extract($vars);
+	include $path;
 }
 
 function head($vars = array(), $file = 'header') {
