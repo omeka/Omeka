@@ -121,8 +121,6 @@ $response = new Zend_Controller_Response_Http();
 //Zend_Registry::set('response', $response);
 $front->setResponse($response);
 
-//$front->throwExceptions((boolean) true);
-
 //$front->addControllerDirectory(array('default'=>CONTROLLER_DIR));
 $front->addControllerDirectory(CONTROLLER_DIR);
 ?>
