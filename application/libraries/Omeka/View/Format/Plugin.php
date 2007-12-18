@@ -48,7 +48,7 @@ class Omeka_View_Format_Plugin extends Omeka_View_Format_Abstract
 	/**
 	 * If we passed 'handler_class' => 'MyDataFeedClass' to the data feed options, it receives 
 	 *
-	 * @return void
+	 * @return string
 	 **/
 	protected function renderCustomClass($feed_options)
 	{
@@ -68,7 +68,7 @@ class Omeka_View_Format_Plugin extends Omeka_View_Format_Abstract
 	 * Plugin writer can pass a 'render_callback' option that would allow 
 	 * plugin writer to render a set of records retrieved by Omeka
 	 *
-	 * @return void
+	 * @return string
 	 **/
 	protected function renderCallback($feed_options)
 	{
@@ -82,6 +82,19 @@ class Omeka_View_Format_Plugin extends Omeka_View_Format_Abstract
 			}
 			
 			return call_user_func_array($callback, array($recordset));
+		}
+	}
+	
+	protected function renderPage($feed)
+	{
+		if($file_name = $feed['script_path']) {
+			
+			//Include the theme helpers
+			require_once HELPERS;
+			
+			$this->view->addScriptPath(dirname($file_name));
+			
+			return $this->view->render(basename($file_name));
 		}
 	}
 	
@@ -112,7 +125,7 @@ class Omeka_View_Format_Plugin extends Omeka_View_Format_Abstract
 			}
 		}
 		else {
-			throw new Omeka_View_Format_Exception( "Feed does not exist for '$format' data format!" );
+			throw new Omeka_View_Format_Invalid_Exception( "Feed does not exist for '$format' data format!" );
 		}		
 	}
 	
@@ -127,7 +140,7 @@ class Omeka_View_Format_Plugin extends Omeka_View_Format_Abstract
 		}
 		
 		//We have 3 different ways of rendering output via the plugins
-		$output_strategies = array('renderCustomClass', 'renderFilename', 'renderCallback');
+		$output_strategies = array('renderCustomClass', 'renderFilename', 'renderCallback', 'renderPage');
 		
 		foreach ($output_strategies as $func) {
 			if($output = $this->$func($feed)) {

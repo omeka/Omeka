@@ -13,13 +13,15 @@ class ErrorController extends Omeka_Controller_Action
 		//Are we in debugging mode?
 		$debug = Zend_Registry::get('config_ini')->debug->exceptions;
 		
-		//Make sure we always try to output the error pages as VALID XHTML
-		$this->getRequest()->setParam('output', 'xhtml');
-		
 		$handler = $this->_getParam('error_handler');
 		
 		//The exception that barfed (may need to handle this differently in future)
 		$e = $handler->exception;
+		
+		//Make sure we try to output the error pages as valid XHTML (if an invalid format was chosen)
+		if($e instanceof Omeka_View_Format_Invalid_Exception) {
+			$this->getRequest()->setParam('output', 'xhtml');
+		}		
 		
 		switch ($handler->type) {
 			//Errors that involve missing controller/action may be requests for static pages

@@ -20,7 +20,7 @@ class Omeka_View extends Zend_View_Abstract
 	 *
 	 * @var array
 	 **/
-	protected $_asset_paths;
+	protected $_asset_paths = array();
 	
 	/**
 	 * Using the current admin system, an option
