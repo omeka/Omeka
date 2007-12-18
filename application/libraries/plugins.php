@@ -287,21 +287,12 @@ class PluginBroker
 	 **/	
 	protected function registerScriptPaths($view, $paths)
 	{
-		//Grab the web paths of the other plugins
-		if(Zend_Registry::isRegistered('plugin_web_paths')) {
-			$webPaths = Zend_Registry::get( 'plugin_web_paths' );
-		}else {
-			$webPaths = array();
-		}
-
 		foreach ($paths as $path) {
 			$physicalPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $path;
+			$webPath = WEB_PLUGIN . DIRECTORY_SEPARATOR . $path;
 			$view->addScriptPath($physicalPath);
-			
-			$webPaths[$physicalPath] = WEB_PLUGIN . DIRECTORY_SEPARATOR . $path;
+			$view->addAssetPath($physicalPath, $webPath);
 		}
-		
-		Zend_Registry::set('plugin_view_paths', $webPaths);		
 	}
 	
 	/**

@@ -27,11 +27,10 @@ class Omeka_View_Format_Xhtml extends Omeka_View_Format_Abstract
 		$scriptPath = THEME_DIR.DIRECTORY_SEPARATOR.$theme_name;
 		$view->addScriptPath($scriptPath);
 		
-//		var_dump( $this->getScriptPaths() );exit;
+		$view->addAssetPath($scriptPath, WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);
 		
-		Zend_Registry::set('theme_web',		WEB_THEME.DIRECTORY_SEPARATOR.$theme_name);	
-		
-		Zend_Registry::set('theme_path',	$scriptPath);	
+		//Always included the shared paths
+		$view->addAssetPath(SHARED_DIR, WEB_SHARED);
 	}
 	
 	/**

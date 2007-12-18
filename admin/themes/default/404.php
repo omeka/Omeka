@@ -7,7 +7,7 @@
 <?php head(); ?>
 <?php echo flash(); ?>
 <div id="primary" class="filenotfound">
-	<h1>Wha Huh?</h1>
+	<h1>404: Wha Huh?</h1>
 	<p>You've tried to access a page that does not seem to exist. Sometimes this happens. Below is a quick break-down of the items, collections, and exhibits on this site. If this does not help, try contacting the <a href="#">site administrator</a>.</p>
 	<div id="recent-items">
 	<h2>Items</h2>

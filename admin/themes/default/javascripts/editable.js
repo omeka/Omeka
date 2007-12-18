@@ -13,7 +13,7 @@ EditableField.prototype = {
 	},
 	
 	escapeSomeHtml: function(str) {
-		//This is to make this compatible with allhtmlentities()
+		//This is to make this compatible with h()
 		//Right now the allowed tags are hard-coded but that may change
 		var html = str.escapeHTML();
 

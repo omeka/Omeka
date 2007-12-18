@@ -234,6 +234,7 @@ class Omeka_Db
 	public function query($sql, array $params=array(), $fetchMode=null)
 	{
 		
+
 /*
 if($_GET['sql']) {
 	if(!isset($this->queryCount)) $this->queryCount = 1;
@@ -241,8 +242,9 @@ if($_GET['sql']) {
 	var_dump( (string) $sql );
 	
 	Zend_Debug::dump( $this->queryCount );
-}			
+}		
 */		
+		
 		if(is_object($sql)) {
     		$sql = $sql->__toString();
 		}
@@ -295,7 +297,7 @@ if($_GET['sql']) {
 	}
 		
 	//Use this to fetch associative arrays using prepared queries
-	public function fetchArray($sql, $params=array(), $key_column = null)
+	public function fetchAssoc($sql, $params=array(), $key_column = null)
 	{
 		
 		$res = $this->query($sql, $params);
