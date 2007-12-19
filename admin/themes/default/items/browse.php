@@ -55,5 +55,7 @@
 	<?php items_search_form(array('id'=>'search'), uri('items/browse')); ?>
 <?php endif; ?>
 
+<?php fire_plugin_hook('append_to_items_browse', $items); ?>
+
 </div>
 <?php foot(); ?>
