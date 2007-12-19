@@ -61,7 +61,7 @@ class MetatextTable extends Omeka_Table
 		$exists = $db->getTable('Metafield')->checkExists($metafield_id);
 		
 		if(!$exists) {
-			throw new Exception( 'Metafield provided must be valid!' );
+			throw new Exception( "Metafield (ID#$metafield_id) does not exist!" );
 		}
 		
 		//If not, make a new one

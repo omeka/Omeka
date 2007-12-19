@@ -229,7 +229,7 @@ class PluginBroker
 				
 		$metafield = new Metafield;
 		$metafield->setArray(array('name'=>$name, 'description'=>$description, 'plugin_id'=>$plugin_obj->id));
-		$metafield->forceSave();
+		$metafield->save();
 	}
 	
 	/**
