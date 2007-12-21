@@ -427,7 +427,7 @@ function flash($wrap=true)
 	}
 	
 	return $wrap ? 
-		'<div class="' . $wrap_class . '">'.nl2br($flash->getMsg()).'</div>' : 
+		'<div class="' . $wrap_class . '">'.nl2br(h($flash->getMsg())).'</div>' : 
 		$flash->getMsg();
 }
 

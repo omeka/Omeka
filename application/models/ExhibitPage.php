@@ -46,9 +46,7 @@ class ExhibitPage extends Omeka_Record
 	}
 	
 	protected function _delete()
-	{	
-//		fire_plugin_hook('delete_exhibit_page', $this);
-		
+	{			
 		foreach ($this->ExhibitPageEntry as $ip) {
 			$ip->delete();
 		}

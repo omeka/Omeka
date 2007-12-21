@@ -524,9 +524,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		
 		$section = $this->findById(null,'ExhibitSection');
 		$exhibit = $section->Exhibit;
-		
-		fire_plugin_hook('delete_exhibit_section',  $section);
-		
+				
 		$section->delete();
 		
 		$this->_redirect('editExhibit', array('id'=>$exhibit->id) );
@@ -536,9 +534,7 @@ class ExhibitsController extends Omeka_Controller_Action
 	{
 		$page = $this->findById(null,'ExhibitPage');
 		$section = $page->Section;
-		
-		fire_plugin_hook('delete_exhibit_page',  $page);
-		
+				
 		$page->delete();
 		
 		$this->_redirect('editSection', array('id' => $section->id) );

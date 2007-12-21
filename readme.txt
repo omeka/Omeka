@@ -8,4 +8,4 @@ Omeka is distributed in the hope that it will be useful, but WITHOUT ANY WARRANT
 
 You should have received a copy of the GNU General Public License along with Omeka; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-Parts of Omeka include a modified version of Zend Framework relicensed under the GPL http://www.zend.com, UDASSS http://www.dustindiaz.com/udasss/, getID3 http://getid3.sourceforge.net/, Prototype http://www.prototypejs.org/, and Script.aculo.us http://script.aculo.us/.  Use and modifications of these libraries must comply with their respective licenses.
+Parts of Omeka include a modified version of Zend Framework relicensed under the GPL http://www.zend.com, getID3 http://getid3.sourceforge.net/, Prototype http://www.prototypejs.org/, and Script.aculo.us http://script.aculo.us/.  Use and modifications of these libraries must comply with their respective licenses.
