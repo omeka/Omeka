@@ -12,13 +12,19 @@ require_once 'globals.php';
 require_once 'Omeka.php';
 spl_autoload_register(array('Omeka', 'autoload'));
 
+$config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
+Zend_Registry::set('config_ini', $config);
+
 try {
 	//include the database connection
 	require_once CORE_DIR . DIRECTORY_SEPARATOR .'db.php';
 	$db = get_db();
 	
 	//Build the database if necessary
-	$res = $db->query("SHOW TABLES");
+	$show_tables_sql = "SHOW TABLES";
+	//Ensure that we don't confuse Omeka if there are already tables in the DB
+	if($db->prefix) $show_tables_sql .= " LIKE '$db->prefix%'";
+	$res = $db->query($show_tables_sql);
 	$tables = $res->fetchAll();
 	
 	if(empty($tables)) {
