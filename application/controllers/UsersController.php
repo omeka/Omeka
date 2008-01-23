@@ -61,7 +61,7 @@ class UsersController extends Omeka_Controller_Action
 				$site_title = get_option('site_title');
 				
 				//Send the email with the activation url
-				$url = $_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
+				$url = "http://".$_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
 				$body 	= "Please follow this link to reset your password:\n\n";
 				$body  .= $url."\n\n";
 				$body  .= "$site_title Administrator";		
@@ -90,7 +90,7 @@ class UsersController extends Omeka_Controller_Action
 	public function activateAction()
 	{
 		$hash = $this->_getParam('u');
-		$ua = $this->getTable('UsersActivations')->findByUrl($hash);
+		$ua = $this->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
 		
 		if(!$ua) {
 			$this->errorAction();
