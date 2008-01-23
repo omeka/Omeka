@@ -499,7 +499,10 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 					$this->_redirect('edit', array('controller'=>$pluralName, 'id'=>$$varName->id) );
 				}
 			}
-		} catch (Exception $e) {
+		} catch (Omeka_Validator_Exception $e) {
+			$this->flashValidationErrors($e);
+		}
+		catch (Exception $e) {
 			$this->flash($e->getMessage());
 		}
 		

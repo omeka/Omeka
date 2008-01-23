@@ -144,8 +144,8 @@ class User extends Omeka_Record {
 		}
 		
 		//Validate the username
-		if(strlen($this->username) < 6 or strlen($this->username) > 30) {
-			$this->addError('username', "Username must be between 6 and 30 characters long");
+		if(strlen($this->username) < 1 or strlen($this->username) > 30) {
+			$this->addError('username', "Username must be no more than 30 characters long");
 		}
 		
 		if(!Zend_Validate::is($this->username, 'Alnum')) {
