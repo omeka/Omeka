@@ -70,7 +70,7 @@ class Tag extends Omeka_Record {
 			$db = get_db();
 			$sql = "SELECT id FROM $db->Tag WHERE name COLLATE utf8_bin LIKE ?";
 			$res = $db->query($sql, array($this->name));
-			return ( ! is_array($res->fetch()));
+			return ( ! is_array($id = $res->fetch())) or ($this->exists() and $id['id'] == $this->id);
 		}
 	}
 	
@@ -92,17 +92,7 @@ class Tag extends Omeka_Record {
 		}
 		
 		$taggings = $this->getTable('Taggings')->findBy($find_criteria);
-			
-/*
-		$dql = "SELECT j.* FROM Taggings j WHERE j.tag_id = ?";
-			if($user_id) {
-				$dql .= " AND j.user_id = $user_id";
-			}
-			$joins[$joinTable] = $this->executeDql($dql, array($this->id, ));
-		}
-*/	
-		
-	
+
 		if(in_array($this->name, $new_names)) {
 
 			//Remove the original name from the list
