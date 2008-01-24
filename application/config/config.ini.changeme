@@ -29,6 +29,8 @@ debug.exceptions = false
 ; to the screen set this to 'true'
 debug.json = false
 
+debug.sql = false
+
 ; Log SQL statements
 log.sql = false
 

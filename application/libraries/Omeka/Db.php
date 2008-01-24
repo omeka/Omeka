@@ -217,10 +217,9 @@ class Omeka_Db
 		throw new Omeka_Db_Exception($e, $sql);
 	}
 	
-	//The only way to use PDO::exec() with prepared queries
 	public function exec($sql, $params=array())
 	{
-		//Let's try a normal PDO::exec() if there are no parameters
+		$this->debugSql($sql);
 		
 		try {
 			$stmt = $this->_conn->query($sql, $params);
@@ -229,19 +228,25 @@ class Omeka_Db
 			throw new Omeka_Db_Exception($e, $sql);
 		}
 	}
+
+	private function debugSql($sql)
+	{
+		if($_GET['sql']) {
+			$config = Zend_Registry::get('config_ini');
+			if($config->debug->sql) {
+				if(!isset($this->queryCount)) $this->queryCount = 1;
+				else $this->queryCount++;
+				var_dump( (string) $sql );
+	
+				Zend_Debug::dump( $this->queryCount );		
+			}
+		}					
+	}
 	
 	//Use the PDO::query() with prepared queries
 	public function query($sql, array $params=array(), $fetchMode=null)
 	{
-		
-
-if($_GET['sql']) {
-	if(!isset($this->queryCount)) $this->queryCount = 1;
-	else $this->queryCount++;
-	var_dump( (string) $sql );
-	
-	Zend_Debug::dump( $this->queryCount );
-}			
+		$this->debugSql($sql);
 		
 		if(is_object($sql)) {
     		$sql = $sql->__toString();
