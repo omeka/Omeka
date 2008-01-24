@@ -150,6 +150,7 @@ class ItemTable extends Omeka_Table
 	
 	/**
 	 * Search through the items and metatext table via fulltext, store results in a temporary table
+	 * Then search the tags table for atomized search terms (split via whitespace) and store results in the temp table
 	 * then join the main query to that temp table and order it by relevance values retrieved from the search
 	 *
 	 * @return void
@@ -158,6 +159,7 @@ class ItemTable extends Omeka_Table
 	{
 		$db = get_db();
 		
+		//Create a temporary search table (won't last beyond the current request)
 		$tempTable = "{$db->prefix}temp_search";
 		$db->exec("CREATE TEMPORARY TABLE IF NOT EXISTS $tempTable (item_id BIGINT UNIQUE, rank FLOAT(10), PRIMARY KEY(item_id))");
 
@@ -200,21 +202,29 @@ class ItemTable extends Omeka_Table
 					
 		$itemSelect->where($iSearchClause);
 
-/*
-$mDump = $db->query($itemSelect)->fetchAll();
-Zend_Debug::dump( $mDump );exit;
-*/	
-	
 		//Grab those results, place in the temp table		
 		$insert = "REPLACE INTO $tempTable (item_id, rank) ".$itemSelect->__toString();
 
 		$db->exec($insert);		
+
+		//Start pulling in search data for the tags
 	
-/*
-$dumpTable = $db->query("SELECT * FROM $tempTable ORDER BY rank DESC")->fetchAll();
-Zend_Debug::dump( $dumpTable );exit;
-*/	
-				
+		$tagRelevanceRanking = 1;
+		$tagSearchList = preg_split('/\s+/', $terms);
+		//Also make sure the tag list contains the whole search string, just in case that is found
+		$tagSearchList[] = $terms;
+		
+		$tagSelect = new Omeka_Select;
+		$tagSelect->from("$db->Tag t", "i.id as item_id, $tagRelevanceRanking as rank");
+		$tagSelect->innerJoin("$db->Taggings tg", "tg.tag_id = t.id");
+		$tagSelect->innerJoin("$db->Item i", "(i.id = tg.relation_id AND tg.type = 'Item')");
+		
+		foreach ($tagSearchList as $tag) {
+			$tagSelect->orWhere("t.name LIKE ?", $tag);
+		}
+		$db->exec("REPLACE INTO $tempTable (item_id, rank) " . $tagSelect->__toString());
+		
+		//Now add a join to the main SELECT SQL statement and sort the results by relevance ranking		
 		$select->innerJoin("$tempTable ts", 'ts.item_id = i.id');
 		$select->order('ts.rank DESC');
 	}
@@ -360,11 +370,10 @@ Zend_Debug::dump( $dumpTable );exit;
 		if($returnCount) {
 			
 //echo $select;exit;
-			$count = (int) get_db()->fetchOne($select);
+			$count = (int) $db->fetchOne($select);
 			
 			if(isset($params['search'])) {
-				//Drop the search table if it exists
-				get_db()->exec("DROP TABLE IF EXISTS {$db->prefix}_temp_search");
+				$this->clearSearch();
 			}
 		
 			return $count;
@@ -384,11 +393,21 @@ Zend_Debug::dump( $dumpTable );exit;
 		
 		
 		if(isset($params['search'])) {
-			//Drop the search table if it exists
-			get_db()->exec("DROP TABLE IF EXISTS {$db->prefix}_temp_search");
+			$this->clearSearch();
 		}
 
 		return $items;
+	}
+
+	/**
+	 * Remove the temporary search table
+	 *
+	 * @return void
+	 **/
+	private function clearSearch()
+	{
+		$db = get_db();
+		$db->exec("DROP TABLE IF EXISTS {$db->prefix}temp_search");
 	}
 	
 	/**
