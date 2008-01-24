@@ -55,10 +55,10 @@ class User extends Omeka_Record {
 		/* Permissions check to see if whoever is trying to change role to a super-user*/	
 		if(!empty($post['role'])) {
 			if($post['role'] == 'super' and !$this->userHasPermission('makeSuperUser')) {
-				throw new Exception( 'User may not change permissions to super-user' );
+				throw new Omeka_Validator_Exception( 'User may not change permissions to super-user' );
 			}
 			if(!$this->userHasPermission('changeRole')) {
-				throw new Exception('User may not change roles.');
+				throw new Omeka_Validator_Exception('User may not change roles.');
 			}
 		} 
 		
