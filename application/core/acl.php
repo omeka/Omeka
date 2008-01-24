@@ -39,7 +39,6 @@ $acl->allow('admin','Collections',array('add','edit','delete', 'showNotPublic'))
 $acl->allow('admin','Entities',array('add','edit','delete', 'displayEmail'));
 $acl->allow('admin','Files',array('edit','delete'));
 $acl->allow('admin','Tags',array('rename','remove'));
-$acl->allow('admin','Themes',array('browse'));
 $acl->allow('admin','Types',array('add','edit','delete'));
 $acl->allow('admin','Users',array('browse','show','add','edit','delete','showRoles', 'changeRole'));
 $acl->allow('admin','Exhibits',array('add', 'edit', 'delete', 'addPage', 'editPage', 'deletePage', 'addSection', 'editSection', 'deleteSection', 'save', 'showNotPublic'));
