@@ -86,7 +86,7 @@ class ExhibitPage extends Omeka_Record
 			$ip->text = (string) $text;
 			$ip->item_id = (int) is_numeric($item_id) ? $item_id : null;
 			$ip->order = (int) $i;
-			$ip->save();
+			$ip->forceSave();
 		}
 	}
 }
