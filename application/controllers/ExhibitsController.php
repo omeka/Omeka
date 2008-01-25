@@ -11,7 +11,7 @@ class ExhibitsController extends Omeka_Controller_Action
 	protected $_redirects = array(
 		'addSection' => array('exhibits/addSection/id', array('id')),
 		'editSection'=> array('exhibits/editSection/id', array('id')),
-		'saveExhibit'=> array('exhibits/slug/', array('slug')),
+		'saveExhibit'=> array('exhibits/browse'),
 		'editExhibit'=> array('exhibits/edit/id', array('id')),
 		'deleteExhibit'=>array('exhibits/browse'),
 		'addPage'=>array('exhibits/addPage/id', array('id')),
