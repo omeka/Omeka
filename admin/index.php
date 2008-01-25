@@ -11,7 +11,7 @@ require_once CORE_DIR .DIRECTORY_SEPARATOR.'core.php';
 #############################################
 # HERE IS WHERE WE SET THE ADMIN SWITCH
 #############################################
-$request->setParam('admin', true);
+$core->getRequest()->setParam('admin', true);
 #############################################
 # END ADMIN SWITCH
 #############################################
@@ -24,7 +24,7 @@ $request->setParam('admin', true);
 #############################################
 # DISPATCH THE REQUEST, AND DO SOMETHING WITH THE OUTPUT
 #############################################
-require_once CORE_DIR . DIRECTORY_SEPARATOR . 'dispatch.php';
+$core->dispatch();
 
 if ((boolean) $config->debug->timer) {
 	echo microtime(true) - APP_START;

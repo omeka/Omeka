@@ -9,9 +9,8 @@ define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
 
 require_once CORE_DIR . DIRECTORY_SEPARATOR .'core.php';
 
-require_once CORE_DIR . DIRECTORY_SEPARATOR .'dispatch.php';
-
 // Call the dispatcher which echos the response object automatically
+$core->dispatch();
 
 if ((boolean) $config->debug->timer) {
 	echo microtime(true) - APP_START;

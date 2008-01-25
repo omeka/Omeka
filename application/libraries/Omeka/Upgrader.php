@@ -12,6 +12,8 @@ class Omeka_Upgrader
 	protected $start;
 	protected $end;
 	protected $current;
+	protected $errors = array();
+	protected $output = array();
  	const VERSION_OPTION = 'migration';
 	
 	public function __construct($fromVersion, $toVersion)
@@ -20,99 +22,62 @@ class Omeka_Upgrader
 		
 		$this->db = get_db();
 		$this->start = $fromVersion;
-		$this->end = $toVersion;
+		$this->end = $toVersion;				
+	}
+	
+	public function getErrors()
+	{
+	    return $this->errors;
+	}
+	
+	private function emailAdministrator($error)
+	{
+        //If there was a problem with the upgrade, display the error message 
+		//and email it to the administrator
+		$email = get_option('administrator_email');
 		
-		//Display a nice omeka header for the upgrade tool
-		$this->displayHeader();
+		$header = 'From: '.$email. "\n" . 'X-Mailer: PHP/' . phpversion();
+		$title = "Omeka Upgrade Error";
+		$body = "This error was thrown when attempting to upgrade your Omeka installation:\n\n" . $error;
+		mail($email, $title, $body, $header);	    
+	}
+	
+	public function run()
+	{
+    	for ($i = $this->start+1; $i < $this->end+1; $i++) { 
 		
-		for ($i = $fromVersion+1; $i < $toVersion+1; $i++) { 
+    		//Start capturing the output
+    		ob_start();
+    		try {
+    			//Start the upgrade script
+    			$this->upgrade($i);
+    			
+    			$this->output[$i] = "Successfully migrated #$i";
+    		} catch (Omeka_Db_Exception $e) {
+    			$db_exception = $e->getInitialException();
 			
-			//Start capturing the output
-			ob_start();
-			try {
-				//Start the upgrade script
-				$this->upgrade($i);
-			} catch (Omeka_Db_Exception $e) {
-				$db_exception = $e->getInitialException();
-				
-				$error = "Error in Migration #$i" . "\n\n";
-				$error .= "Message: " . $db_exception->getMessage() . "\n\n"; 
-				$error .= "Code: " . $db_exception->getCode() . "\n\n";
-				$error .= "Line: " . $db_exception->getLine() . "\n\n";
-				
-				$upgrade_output = ob_get_contents();
-				if($upgrade_output) {
-					$error .= "Output from upgrade: ". $upgrade_output;
-				}
-					
-				//If there was a problem with the upgrade, display the error message 
-				//and email it to the administrator
-				$email = get_option('administrator_email');
-				
-				$header = 'From: '.$email. "\n" . 'X-Mailer: PHP/' . phpversion();
-				$title = "Omeka Upgrade Error";
-				$body = "This error was thrown when attempting to upgrade your Omeka installation:\n\n" . $error;
-				mail($email, $title, $body, $header);
-				$this->displayError($error);
-				
-				
-			}
-			$this->current = $i;
-			$this->incrementMigration();
-			
-			//Clean the contents of the output buffer
-			echo ob_get_clean();
-			
-			if(!isset($error)) {
-				$this->displaySuccess();
-			}
-			
-			unset($error);
-			
-			
-		}
+    			$error = "Error in Migration #$i" . "\n\n";
+    			$error .= "Message: " . $db_exception->getMessage() . "\n\n"; 
+    			$error .= "Code: " . $db_exception->getCode() . "\n\n";
+    			$error .= "Line: " . $db_exception->getLine() . "\n\n";
+								
+    			$this->errors[$i] = $error;
 		
-		$this->displayFooter();
-	}
-	
-	public function displayError($text) {
-?>
-	<p class="error">Omeka encountered an error when upgrading your installation.  The full text of this error has been emailed to your administrator:</p>
-	
-	<p class="error_text"><?php echo htmlentities($text); ?></p>
-<?php 		
-	}
-	
-	public function displaySuccess() {
-		?>
-		<p class="success">Successfully migrated #<?php echo $this->current; ?></p>
-<?php		
-	}
+    		} catch (Exception $e) {
+    		    $error = "Error in Migration #$i\n\n";
+    		    $error .= "Message: " . $e->getMessage() . "\n\n";
+		    
+    		    $this->errors[$i] = $error;
+    		}
+    		$this->current = $i;
+    		$this->incrementMigration();
 		
-	public function displayHeader() {
-		?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Upgrading Omeka</title>
-<style type="text/css" media="screen">
-	body {
-		font: arial, sans-serif;
-	}
-	
-</style>
-</head>
-
-<body>
-	<h2 class="instruction">Omeka is now upgrading itself.  Please refresh your screen once this page finishes loading.</h2>	
-<?php		
-	}
-	
-	public function displayFooter() {
-		?>
-	</body>	
-<?php		
+    		//Retrieve anything that an individual upgrade script may have output
+    		$output = ob_get_clean();
+    		if($output) {
+    		    $this->output[$i] .= $output;
+    		}
+    	}			    
 	}
 	
 	public function upgrade($version) {
@@ -161,6 +126,11 @@ class Omeka_Upgrader
 			}
 		}
 		return false;
+	}
+	
+	public function getOutput()
+	{
+	    return $this->output;
 	}
 } // END class Omeka_Upgrader 
 ?>
