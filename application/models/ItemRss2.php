@@ -50,51 +50,60 @@ class ItemRss2 extends Omeka_Record_Feed_Abstract
 		return $headers;
 	}
 	
+	protected function buildDescription($item)
+	{
+	    $description = '';
+	    
+	    //Output a list of the dublin core fields that have values
+	    $coreFields = Item::fields(false);
+	    foreach ($coreFields as $field => $readableField) {
+	        $text = $item->$field;
+	        if(!empty($text)) {
+	            $description .= nls2p("<strong>" . $readableField. "</strong>: " . h($text));
+	        }
+	    }
+   
+        //Item Type data
+        
+        if($type = $item->Type) {
+            $description .= "<p><strong>Item Type</strong>: {$type->name}</p>";
+        }
+        
+	    //Output all the metafields for the item
+	
+	    foreach ($item->TypeMetadata as $field => $text) {
+	       $description .= nls2p("<strong>" . $field . "</strong>: " . h($text));
+	    }
+	 
+	    //Output HTML that would display all the files in whatever way is possible
+	    $description .= display_files($item->Files);
+	    
+	    return $description;
+	}
+	
 	protected function itemToRSS($item)
 	{
+	    //Need to use the link helpers for this one
+		require_once HELPERS;
+	    
 		$entry = array();
 		
 		$entry['title'] = $item->title;
-		$entry['description'] = $item->description;
-		
-		//Need to use the link helpers for this one
-		require_once HELPERS;
+		$entry['description'] = $this->buildDescription($item);
 		
 		//Permalink (this is kind of duplicated elsewhere)
 		$entry['link'] = item_permalink_url($item);
 				
 		$entry['lastUpdate'] = strtotime($item->added);
 		
-		//Branch on type to figure out what to put in the 'content' part
-		switch ($item->Type->name) {
-			case 'Document':
-				$entry['description'] = $item->getMetatext('Text');
-				break;
-			
-			case 'Still Image':
-				
-				//Append the HTML for the image to the 'description' of the rss entry
-				ob_start();
-				fullsize($item);
-				$fullsize_html = ob_get_clean();
-				$entry['description'] .= $fullsize_html;
-	
-				//List the file as an enclosure (whatever that means)
-				if($item->Files and ($file = current($item->Files))) {
-					$entry['enclosure'] = array();
-					$enc['url'] = file_display_uri($file);
-					$enc['type'] = $file->mime_browser;
-					$enc['length'] = (int) $file->size;
-					$entry['enclosure'][] = $enc;
-				}
-				break;
-				
-			default:
-				//Do nothing
-				break;
+		//List the first file as an enclosure (only one per RSS feed)
+		if($item->Files and ($file = current($item->Files))) {
+			$entry['enclosure'] = array();
+			$enc['url'] = file_display_uri($file);
+			$enc['type'] = $file->mime_browser;
+			$enc['length'] = (int) $file->size;
+			$entry['enclosure'][] = $enc;
 		}
-				
-//		if($this->type_id) $entry['category'] = $this->Type->name;
 		
 		return $entry;		
 	}
