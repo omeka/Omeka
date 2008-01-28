@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once 'Omeka/Context.php';
 /**
 * 
@@ -77,7 +77,6 @@ class Omeka_Core
      **/
     public function initializeDb()
     {
-        //Copied directly from application/core/db.php
         try {
             $db = $this->getConfig('db');
 
@@ -278,23 +277,5 @@ class Omeka_Core
         $front = $this->getFrontController();
         $front->dispatch();
     }    
-}
-
-$core = new Omeka_Core;
-$core->initialize();
-
-require_once 'Zend/Registry.php';
-
-//Register the various path names so they can be accessed by the app
-Zend_Registry::set('path_names', $site);
-
-// Require the front controller and router
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Router/Rewrite.php';
-
-
-
-
-
-
+} 
 ?>

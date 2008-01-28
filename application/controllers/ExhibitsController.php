@@ -174,17 +174,18 @@ class ExhibitsController extends Omeka_Controller_Action
 		
 			$this->_view->addScriptPath(SHARED_DIR);
 			
-			$site = Zend_Registry::get('path_names');
-
+			//Hack to get just the directory name for the exhibit themes
+            $exhibitThemesDir = basename(EXHIBIT_THEMES_DIR);
+            
 			switch ($toRender) {
 				case 'show':
-					$renderPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'show.php';
+					$renderPath = $exhibitThemesDir.DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'show.php';
 					break;
 				case 'summary':
-					$renderPath = $site['exhibit_themes']. DIRECTORY_SEPARATOR . $exhibit->theme . DIRECTORY_SEPARATOR . 'summary.php';
+					$renderPath = $exhibitThemesDir. DIRECTORY_SEPARATOR . $exhibit->theme . DIRECTORY_SEPARATOR . 'summary.php';
 					break;
 				case 'item':
-					$renderPath = $site['exhibit_themes'].DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'item.php';
+					$renderPath = $exhibitThemesDir.DIRECTORY_SEPARATOR.$exhibit->theme.DIRECTORY_SEPARATOR.'item.php';
 					break;
 				default:
 					throw new Exception( 'Hey, you gotta render something!' );

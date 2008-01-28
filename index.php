@@ -7,7 +7,9 @@ require_once 'paths.php';
 define('ADMIN_THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'themes');
 define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
 
-require_once CORE_DIR . DIRECTORY_SEPARATOR .'core.php';
+require_once 'Omeka/Core.php';
+$core = new Omeka_Core;
+$core->initialize();
 
 // Call the dispatcher which echos the response object automatically
 $core->dispatch();
