@@ -72,12 +72,13 @@ class ThemesController extends Omeka_Controller_Action
 	{		
 		$themes = $this->getAvailable();
 		
-		$public = get_option('public_theme');
-
 		if(!empty($_POST) and $this->isAllowed('switch')) {
-			set_option('public_theme', $_POST['public_theme']);
+			set_option('public_theme', strip_tags($_POST['public_theme']));
+			$this->flashSuccess("Theme has been changed successfully.");
 		}
-
+        
+        $public = get_option('public_theme');
+        
 		$current = $this->getAvailable($public);
 
 		return $this->render('themes/browse.php', compact('current', 'themes'));
