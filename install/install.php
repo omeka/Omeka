@@ -5,20 +5,16 @@ require_once '../paths.php';
  * 2) This form detects a database connection, builds the tables
  * 3) Submit this form with all the relevant settings, they are saved to DB 
  */
-require_once 'Zend/Config/Ini.php';
-require_once 'plugins.php';
-require_once 'globals.php';
 
-require_once 'Omeka.php';
-spl_autoload_register(array('Omeka', 'autoload'));
-
-$config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
-Zend_Registry::set('config_ini', $config);
+require_once 'Omeka/Core.php';
+$core = new Omeka_Core;
+$core->sanitizeMagicQuotes();
+$core->initializeClassLoader();
+$core->initializeConfigFiles();
+$core->initializeDb();
 
 try {
-	//include the database connection
-	require_once CORE_DIR . DIRECTORY_SEPARATOR .'db.php';
-	$db = get_db();
+    $db = $core->getDb();
 	
 	//Build the database if necessary
 	$show_tables_sql = "SHOW TABLES";
@@ -57,12 +53,7 @@ $display_form = true;
 //Try to actually install the thing
 if (isset($_REQUEST['install_submit'])) {
 	
-	try {
-		//Validate the FORM POST
-		if(get_magic_quotes_gpc()) {
-			$_POST = stripslashes_deep($_POST);
-		}	
-				
+	try {		
 		$length_validator = new Zend_Validate_StringLength(4, 30);
 		
 		$validation = array(

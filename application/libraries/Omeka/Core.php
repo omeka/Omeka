@@ -108,7 +108,7 @@ class Omeka_Core
         	echo $e->getMessage();exit;
         }
         catch (Exception $e) {
-        	install_notification();
+        	$this->installerNotification();
         }
 
         $db_obj = new Omeka_Db($dbh, $db->prefix);
@@ -123,16 +123,18 @@ class Omeka_Core
             $db = $this->getDb();
         	$option_stmt = $db->query("SELECT * FROM $db->Option");
         	if(!$option_stmt) {
-        		install_notification();
+        		throw new Exception( 'Install me!' );
         	}
-        } catch (Zend_Db_Statement_Exception $e) {
-        	install_notification();
-        }
-        $option_array = $option_stmt->fetchAll();
+        	
+        	$option_array = $option_stmt->fetchAll();
 
-        // ****** CHECK TO SEE IF OMEKA IS INSTALLED ****** 
-        if(!count($option_array)) {
-        	install_notification();
+            // ****** CHECK TO SEE IF OMEKA IS INSTALLED ****** 
+            if(!count($option_array)) {
+            	throw new Exception( 'Install me!' );
+            }
+        } 
+        catch (Exception $e) {
+        	$this->installerNotification();
         }
 
         //Save the options so they can be accessed
@@ -276,6 +278,12 @@ class Omeka_Core
     {
         $front = $this->getFrontController();
         $front->dispatch();
-    }    
+    }   
+    
+    private function installerNotification()
+    {
+        include_once BASE_DIR . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR . 'notify.php';
+        exit;
+    } 
 } 
 ?>
