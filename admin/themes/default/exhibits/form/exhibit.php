@@ -71,7 +71,7 @@
 					parameters: {id: getExhibitId()},
 					onSuccess: function(t) {
 						//flash a happy message and get rid of the form
-						Omeka.flash('Section has been saved successfully!');
+						Omeka.flash('Section has been saved successfully!', 'success');
 						removeAddSectionForm();
 					},
 					onFailure: function(t) {
@@ -127,8 +127,12 @@
 			method:'post',
 
 			onSuccess: function(t, exhibit) {
-
-				Omeka.flash('Exhibit was saved successfully');
+                
+                if(!exhibit) {
+                    exhibit = eval('(' + t.responseText + ')');
+                }
+                
+				Omeka.flash('Exhibit was saved successfully', 'success');
 				setExhibitId(exhibit['id']);
 				
 				//After a successful save, update the exhibit slug b/c that is most likely to be auto-generated
@@ -141,9 +145,14 @@
 				//Update the form so that it has an action corresponding to edit rather than add
 				$('exhibit-form').action = "<?php echo uri('exhibits/edit/'); ?>" + exhibit_id;				
 			},
-
-			onFailure: function(t, exhibit) {
-				Omeka.flash(exhibit['Flash']);
+			on404: function(t, exhibit) {
+			    Omeka.flash("An error has occurred in saving the exhibit: " + t.responseText);
+			},
+			//An invalid form submission will return with a 422 response code
+			on422: function(t, exhibit) {
+			    //Prototype is supposed to do this but isn't for some reason - 1/30/08 [KK]
+			    var ex = eval('(' + t.responseText + ')');
+			    Omeka.flash(ex['Flash'], 'error');
 			}
 		});			
 	}

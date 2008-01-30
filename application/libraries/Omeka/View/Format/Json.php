@@ -21,7 +21,7 @@ class Omeka_View_Format_Json extends Omeka_View_Format_Abstract
 		$config = Zend_Registry::get('config_ini');
 		if (!(boolean) $config->debug->json) {
 			$this->setHeader("X-JSON: $json");
-			return 'JSON data is stored in X-JSON header';
+			return $json;
 		}else {
 			//We could even render this with a nice screen (pass this back to the view object and render a script)
 			return $json;

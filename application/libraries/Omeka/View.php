@@ -141,7 +141,7 @@ class Omeka_View extends Zend_View_Abstract
 	}
 		
 	/**
-	 * Get a View_Format object and then render the shit out of it
+	 * Get a View_Format object and then render it
 	 *
 	 * Filename of script to render (if applicable) gets passed as part of $options
 	 * 

@@ -1,16 +1,23 @@
 //Namespace for generic Omeka utility functions
 var Omeka = {
-	flash: function(msg) {
+	flash: function(msg, status) {
+		
+		if(typeof status == 'undefined') {
+			status = 'alert';
+		}
+		
 		var div = $('alert');
 		if(div == null) {
 			var form = $$('form').first();
-			new Insertion.Before(form, '<div id="alert"></div>');
+			new Insertion.Before(form, '<div id="alert" class="' + status + '"></div>');
 			div = $('alert');
+		}else {
+			div.className = status;
 		}
 
 		div.updateAppear(msg);
 		div.setStyle({display:'block'});
-		new Effect.Highlight(div, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'});
+//		new Effect.Highlight(div, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'});
 	},
 	
 	hideFlash: function() {

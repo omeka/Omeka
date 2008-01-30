@@ -127,7 +127,7 @@
 		?>
 		<p id="page-submits">
 			<button id="change_layout" name="change_layout" type="submit">Change the Current Layout</button> or 
-			<button id="section_form" name="section_form" type="submit">Save and Return to Section</button> or <button id="page_form" name="page_form" type="submit">Save and Add Another Page</button> or <button name="cancel" class="cancel">Cancel</button></p>
+			<button id="section_form" name="section_form" type="submit">Save and Return to Section</button> or <button id="page_form" name="page_form" type="submit">Save and Add Another Page</button> or <button name="cancel_and_section_form" class="cancel">Cancel</button></p>
 		
 	</form>
 </div>

@@ -596,13 +596,17 @@ class ExhibitsController extends Omeka_Controller_Action
 			$return = array();
 			try {
 				$exhibit->saveForm($_POST);
-			} catch (Exception $e) {
-				//We pass this stupid header b/c Prototype doesn't know anything otherwise
-				header ("HTTP/1.0 404 Not Found"); 
+			} catch (Omeka_Validator_Exception $e) {
+				//Set the 404 response code
+				$this->getResponse()->setHttpResponseCode(422); 
 				
-				$this->flash($e->getMessage());
+				$this->flashValidationErrors($e);
 			}
-			$this->render('exhibits/show.php', compact('exhibit'));
+			
+			//Required to pass a 'record' instance so that Omeka can automatically render the JSON for the exhibit
+			$passVariables = array('exhibit'=>$exhibit, 'record'=>$exhibit);
+			
+			$this->render('exhibits/show.php', $passVariables);
 		}
 	}
 	
