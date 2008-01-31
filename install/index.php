@@ -6,6 +6,7 @@
 
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow" />
 
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="install.css" />

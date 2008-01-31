@@ -76,7 +76,7 @@ fieldset {border:0; padding:0;}
 		#searchform, #news ul, #tagcloud ul {padding: 0 12px;}
 		#searchform {padding: 0 auto; margin: 0 0 1em;}
 		#searchform input {padding: .25em 12px; width: 200px;}
-		#searchform input#search { width: auto; padding: .25em .2em;}
+		#searchform #submit_search { width: auto; padding: .25em .2em;}
 		
 		#news li {list-style-type: square; list-style-position: outside; padding-left: .5em; margin-bottom: 1em; }
 		#show-item dl {margin-bottom: 2em;}

@@ -26,10 +26,8 @@
 
 		<div id="header">
 		<div id="searchwrap">
-			<form id="searchform" action="search.php" class="clear">
-				<input type="text" name="search" id="search"></input>
-				<input type="submit" name="submit" value="Search"></input>
-			</form>
+			<?php echo simple_search(array('id'=>'simple-search','name'=>'simple-search'),uri('items/browse')); ?>
+
 		</div><!--end searchwrap-->
 
 			<h1><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></h1>
