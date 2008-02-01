@@ -62,6 +62,7 @@ class Omeka_Core
         $this->initializePluginBroker();
         $this->initializeAuth();
         $this->initializeFrontController();
+        $this->initializeDefaultLogger();
     }
     
     public function initializeClassLoader()
@@ -178,9 +179,8 @@ class Omeka_Core
     public function initializeDefaultLogger()
     {
         $config = $this->getConfig('basic');
-        
         if(isset($config->log)) {
-        	require_once LIB_DIR.DIRECTORY_SEPARATOR.'Omeka'.DIRECTORY_SEPARATOR.'Logger.php';
+            
         	$logger = new Omeka_Logger;
 
         	if(isset($config->log->sql) && $config->log->sql) {
@@ -191,7 +191,6 @@ class Omeka_Core
         		$logger->setErrorLog(LOGS_DIR.DIRECTORY_SEPARATOR.'errors.log');
         		$logger->activateErrorLogging(true);
         	}
-        	
         	$this->setLogger($logger);
         }        
     }

@@ -37,7 +37,7 @@ class Omeka_Logger
 		self::$errorLog = $path;
 	}
 	
-	public static function logSQL( $sql, $params = array() )
+	public static function logSql( $sql, $params = array() )
 	{
 		if(self::$logSql) {
 			self::$totalQueryTime += $execTime;

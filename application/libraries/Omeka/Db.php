@@ -206,8 +206,7 @@ class Omeka_Db
 	/**
 	 * Factory to determine the right Omeka database exception to throw in a given case
 	 *
-	 * @return Omeka_Db_Exception
-	 * @return void
+	 * @throws Omeka_Db_Exception|Omeka_Db_NullColumnException
 	 **/
 	protected function throwOmekaDbException(array $errorInfo, PDOException $e, $sql)
 	{
