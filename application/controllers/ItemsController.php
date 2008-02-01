@@ -319,7 +319,7 @@ class ItemsController extends Omeka_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
-		$this->_redirect('items/browse');
+		$this->_redirect($_SERVER['HTTP_REFERER']);
 	}
 	
 }
