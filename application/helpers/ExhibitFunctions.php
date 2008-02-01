@@ -55,9 +55,9 @@ function exhibit_uri($exhibit, $section=null, $page=null)
 	
 	$page_num = ($page instanceof ExhibitPage) ? $page->order : $page;
 	
-	$uri = 'exhibits/' . $exhibit_slug . '/' . ( !empty($section_slug) ? $section_slug . (!empty($page_num) ? '/' . $page_num : ''): '');
+	$uri = WEB_ROOT . '/exhibits/' . $exhibit_slug . '/' . ( !empty($section_slug) ? $section_slug . (!empty($page_num) ? '/' . $page_num : ''): '');
 	
-	return uri($uri);
+	return $uri;
 }
 
 function link_to_exhibit_item($item, $props=array())
@@ -293,6 +293,8 @@ function page_nav()
 	}
 	
 	$section = Zend_Registry::get('section');
+	
+	$currentPage = Zend_Registry::get('page');
 		
 	echo '<ul class="exhibit-page-nav">';
 	
@@ -302,7 +304,7 @@ function page_nav()
 		$uri = exhibit_uri($section->Exhibit, $section, $page);
 		
 		//Create the link (also check if uri matches current uri)
-		echo '<li'. (is_current($uri) ? ' class="current"' : '').'><a href="'. $uri . '">Page '. $key .'</a></li>';
+		echo '<li'. ($page->id == $currentPage->id ? ' class="current"' : '').'><a href="'. $uri . '">Page '. $key .'</a></li>';
 	
 	}
 	
