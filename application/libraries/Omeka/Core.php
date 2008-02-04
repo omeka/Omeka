@@ -65,6 +65,39 @@ class Omeka_Core
         $this->initializeDefaultLogger();
     }
     
+    /**
+     * Provide phased loading of core Omeka functionality. Primarily used for Omeka scripts that run outside a web environment.
+     * @param string $stopPhase The phase where the user wants loading to stop. 
+     * @return void
+     **/
+    public function phasedLoading($stopPhase)
+    {
+        // Within this array put initializations in the most logical order.
+        $phases = array(
+            'sanitizeMagicQuotes', 
+            'initializeClassLoader', 
+            'initializeConfigFiles', 
+            'initializeDb', 
+            'initializeOptions', 
+            'loadModelClasses', 
+            'initializeAcl', 
+            'initializePluginBroker', 
+            'initializeAuth', 
+            'initializeFrontController'
+        );
+        
+        // Throw an error if the stop phase doesn't exist.
+        if (!in_array($stopPhase, $phases)) {
+            throw new Exception('The provided stop phase "'.$stopPhase.'" does not exist.');
+        }
+        
+        // Load initialization callbacks in the proper order.
+        foreach ($phases as $phase) {
+            call_user_func(array($this, $phase));
+            if ($phase == $stopPhase) break;
+        }
+    }
+    
     public function initializeClassLoader()
     {
         require_once 'Omeka.php';
