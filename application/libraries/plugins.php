@@ -21,6 +21,8 @@ class PluginBroker
     //Theme directories that have been added by plugins
     protected $_theme_dirs = array('public'=>array(),'admin'=>array());
     
+    protected $_controller_dirs = array();
+    
     //Any navigation elements that have been added via plugins
     protected $_nav = array();
     
@@ -291,16 +293,18 @@ class PluginBroker
      * @return void
      **/
     public function addControllerDir($path=null, $module=null)
-    {
-        $front = Zend_Controller_Front::getInstance();
-        
+    {        
         $current = $this->getCurrentPlugin();
         
         $dir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $current . ($path ? DIRECTORY_SEPARATOR . $path : ''); 
-
-        if(!$module) $module = strtolower($current);
+        
+        //Save the directory path in this folder so that 
+        $this->_controller_dirs[$current] = $dir;
+    }
     
-        $front->addControllerDirectory($dir, $module);
+    public function getControllerDirs()
+    {
+        return $this->_controller_dirs;
     }
     
     /**
@@ -369,7 +373,7 @@ class PluginBroker
             echo '<li class="' . text_to_id($text, 'nav') . (is_current($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>';
         }
     }
-    
+
     /**
      * This handles dispatching all plugin hooks
      *

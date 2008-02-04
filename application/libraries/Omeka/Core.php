@@ -269,7 +269,7 @@ class Omeka_Core
         $router = new Zend_Controller_Router_Rewrite();
         $router->addConfig(Zend_Registry::get('routes_ini'), 'routes');
         fire_plugin_hook('add_routes', $router);
-
+        
         $router->setFrontController($front);
         $front->setRouter($router);
 
@@ -280,6 +280,11 @@ class Omeka_Core
         
         //This plugin redirects outdated installations to the UpgradeController
         $front->registerPlugin(new Omeka_Controller_Plugin_Upgrader());
+        
+        //This plugin allows Omeka plugins to add controller directories to the 'default' namespace
+        //which prevents weird naming conventions like Contribution_IndexController.php
+        //and obviates the need to hack routes
+        $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack());
         
         //Disable the ViewRenderer until we can refactor Omeka codebase to use it
         $front->setParam('noViewRenderer', true);

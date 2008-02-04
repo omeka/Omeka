@@ -889,18 +889,13 @@ function has_permission($role,$privilege=null) {
 function _make_omeka_request($controller,$action,$params, $returnVars)
 {
 	$front = Zend_Controller_Front::getInstance();
-	$dirs = $front->getControllerDirectory();
 	
 	$className = ucwords($controller.'Controller');
 	
-	if(!empty($dirs)) {
-		//Include the controller
-		foreach ($dirs as $dir) {
-			$file = $dir.DIRECTORY_SEPARATOR.$className.".php";
-			if(file_exists($file)) {
-				require_once $file;
-			}
-		}
+    //Include the controller
+	$file = CONTROLLER_DIR.DIRECTORY_SEPARATOR.$className.".php";
+	if(file_exists($file)) {
+		require_once $file;
 	}
 	
 	//Merge together the existing parameters with the old ones
