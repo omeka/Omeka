@@ -133,44 +133,6 @@ function display_files($files, $props = array()) {
 	}
 }
 
-function display_item_list($items,$title_only=false,$display_content=false) {
-	foreach($items as $key => $item): ?>
-	<div class="item hentry">
-		<div class="item-meta">
-		<h3><?php link_to_item($item, 'show', null, array('class'=>'permalink')); ?></h3>
-		<?php if(!$title_only):?>
-
-		<?php if(has_thumbnail($item)): ?>
-		<div class="item-img">
-			<a href="<?php echo uri('items/show/'.$item->id); ?>"><?php echo thumbnail($item); ?></a>						
-		</div>
-		<?php endif; ?>
-
-		<?php if($item->description): ?>
-		<div class="desc"><h4>Description:</h4>
-		<?php echo "<p>" . h($item->description) . "</p>"; ?>
-		</div>
-		<?php endif; ?>
-
-		<?php if(count($item->Tags)): ?>
-		<div class="tagcloud"><p><strong>Tags:</strong> 
-		<?php foreach ($item->Tags as $tag): ?>
-		<a href="<?php echo uri('items/browse/tag/'.$tag->name); ?>" rel="tag"><?php echo h($tag->name); ?></a>
-		<?php endforeach; ?>
-		</div>
-		<?php endif;?></p>
-
-		<?php endif; ?>
-		</div>
-
-		<?php if($display_content):?>
-		<div class="item-content"><?php display_item($item); ?></div>
-		<?php endif; ?>
-	
-	</div>
-	<?php endforeach;
-}
-
 //CSS Helpers
 
 /**
@@ -706,7 +668,7 @@ function total_results($return = false) {
 }
 
 function has_type($item, $name=null) {
-	$exists = $item->Type->exists();
+	$exists = $item->Type and $item->Type->exists();
 	$hasName = (!empty($name) ? $item->Type->name == $name : true);
 	return ( $exists and $hasName );
 }
