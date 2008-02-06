@@ -14,16 +14,28 @@ class Omeka_View_Format_Plugin extends Omeka_View_Format_Abstract
 		return $this->options['format'];
 	}
 	
+	/**
+	 * Try to match the current URI against either a string URI or a Zend Route object
+	 *
+	 * @param $uri string|Zend_Controller_Router_Route_Interface
+	 *
+	 * @return bool
+	 **/
 	protected function uriMatchesCurrent($uri)
 	{		
 		$path = $this->getView()->getRequest()->getPathInfo();
+	
+        if ($uri instanceof Zend_Controller_Router_Route_Interface) {
+            return $uri->match($path);
+        }
+        elseif (is_string($uri)) {
+     		//Trim leading/trailing slashes
+    		$path = trim($path, " \n/");
 		
-		//Trim leading/trailing slashes
-		$path = trim($path, " \n/");
-		
-		$uri = trim($uri, " \n/");
-		
-		return ($path == $uri);
+    		$uri = trim($uri, " \n/");
+
+    		return ($path == $uri);           
+        }
 	}
 	
 	protected function getMimeType($feed_options)
