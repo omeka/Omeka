@@ -237,7 +237,7 @@
 		</form>
 	 <?php }
 	
-	function items_search_form($props=array(), $uri) {
+	function items_search_form($props=array(), $uri, $toggleSearch=true) {
 		?>
 		<h2 id="search-header" class="close">Search Items</h2>
 		
@@ -246,22 +246,24 @@
 		
 		//The functions that are used by the search form can be found in search.js
 		
-			Event.observe(window,'load',toggleSearch);
+		<?php if($toggleSearch): //Only load the following javascripts if we are allowing the search to toggle ?>
+			Event.observe(window,'load', Omeka.Search.toggleSearch);			
+		<?php endif; ?>
 			
 			//Here is javascript that will duplicate the advanced-search form entries
-			Event.observe(window,'load', activateSearchButtons );
-			
-			//This will let you switch between basic and advanced search
-			Event.observe(window, 'load', switchBasicAdvancedSearch);
-						
+			Event.observe(window,'load', Omeka.Search.activateSearchButtons );
+
 		//]]>	
 		</script>
 			
 		
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
-			<div id="search_choices">
-				<span id="basic_search_header">Simple</span> | <span id="advanced_search_header">Advanced</span>
+			
+		<?php if ( $toggleSearch ): //Only display the search options if we enable toggling ?>
+		  	<div id="search_choices">
+				<span id="advanced_search_header">Show Advanced Options</span>
 			</div>
+		<?php endif; ?>
 			
 			<fieldset id="basic_search">
 				<legend id="basic_search_header">Basic Search</legend>
@@ -326,7 +328,7 @@
 					
 				</div>
 				
-				<div>
+				<div id="search-by-range">
 					<?php text(
 						array('name'=>'range', 'class'=>'textinput'), 
 						@$_GET['range'], 
@@ -348,7 +350,10 @@
 			</div>
 			<div id="search-checkboxes">
 			<?php 
-				checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
+				if (has_permission('Items','showNotPublic')) {
+				    checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
+				}				
+				
 				checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
 			?>
 			</div>

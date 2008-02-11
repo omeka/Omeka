@@ -18,9 +18,7 @@
 <![endif]-->
 
 <!-- JavaScripts -->
-<?php js('prototype'); ?>
-<?php js('prototype-extensions'); ?>
-<?php js('scriptaculous');?>
+<?php js('default'); ?>
 <?php js('niftycube');?>
 <?php js('form-toggle');?>
 <?php js('globals'); ?>

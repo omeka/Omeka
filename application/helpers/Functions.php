@@ -219,9 +219,28 @@ function src($file, $dir=null, $ext = null) {
  * to a javascript file.
  * $dir defaults to 'javascripts'
  * $file should not include the .js extension
+ *
+ * @param string $file The name of the file, without .js extension.  Specifying 'default' will load 
+ * the default javascript files, such as prototype/scriptaculous
+ * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
  */
 function js($file, $dir = 'javascripts') {
-	echo '<script type="text/javascript" src="'.src($file, $dir, 'js').'"></script>'."\n";
+    
+    if($file == 'default') {
+        js('prototype', $dir); //Prototype library loads by default
+        js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
+        
+        //The following is a hack that loads only the 'effects' sub-library of Scriptaculous
+        ?>
+        <script src="<?php echo web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=effects,dragdrop'; ?>" type="text/javascript" charset="utf-8"></script>
+        <?php
+        js('search', $dir);
+        
+        //Do not try to load 'default.js'
+        return;
+    }
+    
+	echo '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
 }
 
 /**

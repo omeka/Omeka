@@ -34,10 +34,9 @@
 	{
 		//When the pagination loads, it is not the same kind of event as window.onload, 
 		//so we need to fire all those events manually
-		toggleSearch();
+		Omeka.Search.toggleSearch();
 		roundCorners();
-		activateSearchButtons();
-		switchBasicAdvancedSearch();
+		Omeka.Search.activateSearchButtons();
 		
 		new Effect.Highlight('item-list');
 		
