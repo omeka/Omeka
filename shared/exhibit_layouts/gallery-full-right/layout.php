@@ -8,8 +8,8 @@
 	<div class="primary">
 	<div class="item-full">
 		<?php $item = page_item(1); ?>
-		<?php exhibit_fullsize($item); ?>
-		<?php echo $item->title; ?>
+		<?php echo exhibit_fullsize($item); ?>
+		<?php echo h($item->title); ?>
 		<?php echo $item->description; ?>
 	</div>
 	</div><!--end primary-->
@@ -18,19 +18,19 @@
 		
 		<div class="exhibit-item">
 			<?php $item = page_item(2); ?>
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(3); ?>
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(4); ?>
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<div class="exhibit-item">
 			<?php $item = page_item(5); ?>
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 	</div><!--end secondary-->
 

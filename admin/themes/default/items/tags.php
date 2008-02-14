@@ -2,9 +2,9 @@
 <?php common('archive-nav'); ?>
 <div id="primary">
 <h2>Tags</h2>
-<?php if ( total_results(true) ): ?>
+<?php if ( total_results() ): ?>
 	<?php
-	tag_cloud($tags, uri('items/browse/'));
+	echo tag_cloud($tags, uri('items/browse/'));
 	?>
 <?php else: ?>
 	<h2>There are no tags to display.  You must first tag some items.</h2>

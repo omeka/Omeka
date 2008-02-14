@@ -6,7 +6,7 @@
 
 <div id="lgimage" class="section">
 <?php if ($file->hasThumbnail()): ?>
-	<?php fullsize($file, array(), 400); ?>
+	<?php echo fullsize($file, array(), 400); ?>
 <?php else: ?>
 	<?php echo h($file->original_filename); ?>
 <?php endif; ?>

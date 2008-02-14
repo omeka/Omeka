@@ -1,13 +1,13 @@
 <?php head(array('title'=>'Browse Items', 'body_class'=>'items')); ?>
 <?php common('archive-nav'); ?>
 
-<?php js('search'); ?>
+<?php echo js('search'); ?>
 
 <div id="primary">
 <?php echo flash(); ?>
-<?php if ( total_results(true) ): ?>
+<?php if ( total_results() ): ?>
 
-<h1 class="floater">Browse Items (<?php echo total_results(true);?> items total)</h1>
+<h1 class="floater">Browse Items (<?php echo total_results();?> items total)</h1>
 <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
 
 <?php items_search_form(array('id'=>'search'), uri('items/browse')); ?>

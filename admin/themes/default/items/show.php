@@ -1,7 +1,6 @@
 <?php head(array('title' => 'Item # '.$item->id, 'body_class'=>'items')); ?>
 <?php common('archive-nav'); ?>
 
-<?php js('editable');?>
 <script type="text/javascript" charset="utf-8">
 	
 	function setFavorite() {
@@ -48,19 +47,6 @@
 			modifyTags();
 			return false;
 		}
-		/*
-<?php if ( has_permission('Items','edit') ): ?>
-			editableElements = document.getElementsByClassName("editable");
-		
-		for(i=0;i<editableElements.length;i++) {
-			var editable = new EditableField(editableElements[i], 
-											editableElements[i].id, 
-											"<?php echo uri('json/items/edit/'); ?>", 
-											<?php echo h($item->id);?>, 
-											editableElements[i].getAttribute('rel'));
-		}
-<?php endif; ?>
-	*/
 	});
 	function swapImage(which,where) {
 	  var source = which.getAttribute("href");
@@ -88,18 +74,18 @@
 
 <ul class="item-pagination navigation">
 <li id="previous-item" class="previous">
-	<?php link_to_previous_item($item,'Previous'); ?>
+	<?php echo link_to_previous_item($item,'Previous'); ?>
 </li>
 <li id="next-item" class="next">
-	<?php link_to_next_item($item,'Next'); ?>
+	<?php echo link_to_next_item($item,'Next'); ?>
 </li>
 </ul>
 
 <h1 id="title">#<?php echo $item->id; ?> <?php echo h($item->title); ?></h1>
 <p id="edit-delete"> 
 <?php 
-link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
-//link_to_item($item, 'delete', 'Delete', array('class'=>'delete')); 
+echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
+//echo link_to_item($item, 'delete', 'Delete', array('class'=>'delete')); 
 ?></p>
 
 <div id="item-images">
@@ -113,42 +99,42 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<div id="subject" class="field">
 	<h3>Subject</h3>
 	<div>
-	<?php display_empty($item->subject); ?>
+	<?php echo display_empty($item->subject); ?>
 	</div>
 	</div>
 	
 	<div id="description" class="field">
 	<h3>Description</h3>
 	<div>
-	<?php display_empty($item->description,"No description available."); ?>
+	<?php echo display_empty($item->description,"No description available."); ?>
 	</div>
 	</div>
 	
 	<div id="creator" class="field">
 	<h3>Creator</h3>
 	<div>
-	<?php display_empty($item->creator); ?>
+	<?php echo display_empty($item->creator); ?>
 	</div>
 	</div>
 	
 	<div id="additional_creator" class="field">
 	<h3>Additional Creator</h3>
 	<div>
-	<?php display_empty($item->additional_creator); ?>
+	<?php echo display_empty($item->additional_creator); ?>
 	</div>
 	</div>
 	
 	<div id="source" class="field">
 	<h3>Source</h3>
 	<div>
-	<?php display_empty($item->source); ?>
+	<?php echo display_empty($item->source); ?>
 	</div>
 	</div>
 
 	<div id="publisher" class="field">
 	<h3>Publisher</h3>
 	<div>
-	<?php display_empty($item->publisher); ?>
+	<?php echo display_empty($item->publisher); ?>
 	</div>
 	</div>
 	
@@ -162,57 +148,57 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<div id="contributor" class="field">
 	<h3>Contributor</h3>
 	<div>
-	<?php display_empty($item->contributor)?>
+	<?php echo display_empty($item->contributor)?>
 	</div>
 	</div>
 		
 	<div id="rights" class="field">
 	<h3>Rights</h3>
 	<div>
-	<?php display_empty($item->rights); ?>
+	<?php echo display_empty($item->rights); ?>
 	</div>
 	</div>
 	
 	<div id="rights_holder" class="field">
 	<h3>Rights Holder</h3>
 	<div>
-	<?php display_empty($item->rights_holder)?>
+	<?php echo display_empty($item->rights_holder)?>
 	</div>
 	</div>
 	
 	<div id="relation" class="field">
 	<h3>Relation</h3>
 	<div>
-	<?php display_empty($item->relation); ?>
+	<?php echo display_empty($item->relation); ?>
 	</div>
 	</div>
 	
 	<div id="spatial-coverage" class="field">
 	<h3>Spatial Coverage</h3>
 	<div>
-	<?php display_empty($item->spatial_coverage)?>
+	<?php echo display_empty($item->spatial_coverage)?>
 	</div>
 	</div>
 	
 	<div id="temporal-coverage" class="field">
 	<h3>Temporal Coverage</h3>
 	<div>
-	<?php display_empty($item->temporal_coverage_start); ?> &mdash; 
-	<?php display_empty($item->temporal_coverage_end)?>
+	<?php echo display_empty($item->temporal_coverage_start); ?> &mdash; 
+	<?php echo display_empty($item->temporal_coverage_end)?>
 	</div>
 	</div>
 	
 	<div id="language" class="field">
 	<h3>Language</h3>
 	<div>
-	<?php display_empty($item->language); ?>
+	<?php echo display_empty($item->language); ?>
 	</div>
 	</div>
 
 	<div id="provenance" class="field">
 	<h3>Provenance</h3>
 	<div>
-	<?php display_empty($item->provenance)?>
+	<?php echo display_empty($item->provenance)?>
 	</div>
 	</div>
 	
@@ -289,7 +275,7 @@ link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<div id="file-list">
 		<ul>
 	<?php foreach( $item->Files as $key => $file ): ?>
-		<li><?php link_to($file, 'show', h($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?>
+		<li><?php echo link_to($file, 'show', h($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?>
 		</li>
 		
 

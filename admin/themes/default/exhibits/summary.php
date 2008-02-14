@@ -9,6 +9,6 @@
 <p><?php echo h($exhibit->credits); ?></p>
 
 
-<?php section_nav(); ?>
+<?php echo section_nav(); ?>
 </div>
 <?php foot(); ?>

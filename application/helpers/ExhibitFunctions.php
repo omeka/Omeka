@@ -1,35 +1,44 @@
 <?php 
 ///// EXHIBIT FUNCTIONS /////
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function exhibit_thumbnail($item, $props=array('class'=>'permalink')) 
 {	
 	$uri = exhibit_item_uri($item);
 		
-	echo '<a href="' . $uri . '">';
+	$output = '<a href="' . $uri . '">';
 	
 	$file = $item->Files[0];
 	
-	thumbnail($file);
+	$output .= thumbnail($file);
 	
-	echo '</a>';
+	$output .= '</a>';
+	
+	return $output;
 }
 
 /**
  * Duplication of exhibit_thumbnail()
  *
- * @return void
+ * @return string
  **/
 function exhibit_fullsize($item, $props=array('class'=>'permalink'))
 {
 	$uri = exhibit_item_uri($item);
 		
-	echo '<a href="' . $uri . '">';
+	$output = '<a href="' . $uri . '">';
 	
 	$file = $item->Files[0];
 	
-	fullsize($file, $props);
+	$output .= fullsize($file, $props);
 	
-	echo '</a>';
+	$output .= '</a>';
+	
+	return $output;
 }
 
 
@@ -44,7 +53,7 @@ function link_to_exhibit($exhibit, $text=null, $props=array(), $section=null, $p
 	
 	$text = !empty($text) ? $text : $exhibit->title;
 	
-	echo '<a href="'.$uri.'">' . h($text) . '</a>';
+	return '<a href="'.$uri.'">' . h($text) . '</a>';
 }
 
 function exhibit_uri($exhibit, $section=null, $page=null)
@@ -176,7 +185,7 @@ function layout_form_item($order, $label='Enter an Item ID #') {
 	if($item and $item->exists()) {
 		echo '<div class="item-drag"><div class="item_id">' . $item->id . '</div>';
 			if(has_thumbnail($item)){
-				thumbnail($item);
+				echo thumbnail($item);
 			} else {
 				echo h($item->title);
 			}
@@ -249,7 +258,7 @@ function exhibit_css($file)
 		$path = $ex->theme.DIRECTORY_SEPARATOR.$file.'.css';
 		
 		if(file_exists(EXHIBIT_THEMES_DIR.DIRECTORY_SEPARATOR.$path)) {
-			echo WEB_EXHIBIT_THEMES.DIRECTORY_SEPARATOR.$path;
+			return WEB_EXHIBIT_THEMES.DIRECTORY_SEPARATOR.$path;
 		}
 	}
 	
@@ -263,7 +272,7 @@ function layout_css($file='layout')
 		$path = $p->layout.DIRECTORY_SEPARATOR.$file.'.css';
 		
 		if(file_exists(EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$path)) {
-			echo WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$path;
+			return WEB_EXHIBIT_LAYOUTS.DIRECTORY_SEPARATOR.$path;
 		}
 	}
 }
@@ -273,17 +282,18 @@ function section_nav()
 	$exhibit = Zend_Registry::get('exhibit');
 
 	//Use class="section-nav"
-	echo '<ul class="exhibit-section-nav">';
+	$output = '<ul class="exhibit-section-nav">';
 
 	foreach ($exhibit->Sections as $key => $section) {		
 	
 		$uri = exhibit_uri($exhibit, $section);
 		
-		echo '<li><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . $section->title . '</a></li>';
+		$output .= '<li><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . $section->title . '</a></li>';
 	
 	}
 	
-	echo '</ul>';
+	$output .= '</ul>';
+	return $output;
 }
 
 function page_nav()
@@ -296,7 +306,7 @@ function page_nav()
 	
 	$currentPage = Zend_Registry::get('page');
 		
-	echo '<ul class="exhibit-page-nav">';
+	$output = '<ul class="exhibit-page-nav">';
 	
 	$key = 1;
 	foreach ($section->Pages as $key => $page) {
@@ -304,11 +314,13 @@ function page_nav()
 		$uri = exhibit_uri($section->Exhibit, $section, $page);
 		
 		//Create the link (also check if uri matches current uri)
-		echo '<li'. ($page->id == $currentPage->id ? ' class="current"' : '').'><a href="'. $uri . '">Page '. $key .'</a></li>';
+		$output .= '<li'. ($page->id == $currentPage->id ? ' class="current"' : '').'><a href="'. $uri . '">Page '. $key .'</a></li>';
 	
 	}
 	
-	echo '</ul>';
+	$output .= '</ul>';
+	
+	return $output;
 }
 
 function render_exhibit_page()

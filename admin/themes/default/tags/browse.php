@@ -46,12 +46,12 @@
 		<?php endif; ?>
 	</h3>
 
-<?php if ( total_results(true) ): ?>
+<?php if ( total_results() ): ?>
 	
 	
 	
 	<?php
-	tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/'));
+	echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/'));
 	?>
 <?php else: ?>
 	<h2>There are no tags to display.  You must first tag some items.</h2>

@@ -1,6 +1,6 @@
 <?php head(array('title'=>'Exhibit Page', 'body_class'=>'exhibits')); ?>
 
-<?php js('search'); ?>
+<?php echo js('search'); ?>
 
 <script type="text/javascript" charset="utf-8">
 /*
@@ -80,7 +80,7 @@
 	}
 	
 </script>
-<?php js('exhibits'); ?>
+<?php echo js('exhibits'); ?>
 <?php common('exhibits-nav'); ?>
 <div id="primary">
 <?php echo flash(); ?>

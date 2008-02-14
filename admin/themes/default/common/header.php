@@ -2,28 +2,28 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Omeka Admin: <?php settings('site_title'); ?> | <?php echo $title; ?></title>
+<title>Omeka Admin: <?php echo settings('site_title'); ?> | <?php echo $title; ?></title>
 
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
-<link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
-<link rel="stylesheet" media="screen" href="<?php css('niftyCorners'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
+<link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo css('niftyCorners'); ?>" />
 
-<link rel="stylesheet" media="screen" href="<?php layout_css(); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo layout_css(); ?>" />
 <!--[if lte IE 6]>
-<link rel="stylesheet" media="screen" href="<?php css('lte-ie6'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />
 <![endif]-->
 
 <!-- JavaScripts -->
-<?php js('default'); ?>
-<?php js('niftycube');?>
-<?php js('form-toggle');?>
-<?php js('globals'); ?>
-<?php js('exhibits'); ?>
-<?php js('archive'); ?>
+<?php echo js('default'); ?>
+<?php echo js('niftycube');?>
+<?php echo js('form-toggle');?>
+<?php echo js('globals'); ?>
+<?php echo js('exhibits'); ?>
+<?php echo js('archive'); ?>
 
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>
@@ -34,9 +34,9 @@
 	<div id="wrap">
 		
 		<div id="header">
-			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php settings('site_title'); ?></a></div>
+			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php echo settings('site_title'); ?></a></div>
 			<div id="user-meta"><p>Welcome, <?php echo current_user()->first_name; ?>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
-			<p><?php link_to_home_page('View Public Site', array('id'=>'public-link')); ?></p></div>
+			<p><?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?></p></div>
 									
 			<ul id="primary-nav" class="navigation">
 			<?php
@@ -56,7 +56,7 @@
 				if(has_permission('super')) {
 					$header_navigation['Settings'] = uri('settings');
 				}
-				admin_nav($header_navigation);
+				echo admin_nav($header_navigation);
 				fire_plugin_hook('load_navigation', 'main');
 			?>
 			</ul>

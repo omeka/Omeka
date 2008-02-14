@@ -5,7 +5,7 @@
 <h1>Edit File #<?php echo h($file->id); ?></h1>
 <p><a class="delete" href="<?php echo uri('files/delete/'.$file->id); ?>">Delete</a></p>
 <?php if($file->hasThumbnail()): ?>
-<div id="image"><?php thumbnail($file); ?><p>Thumbnail of File #<?php echo h($file->id); ?></div>
+<div id="image"><?php echo thumbnail($file); ?><p>Thumbnail of File #<?php echo h($file->id); ?></div>
 <?php endif; ?>
 	
 <form method="post" id="editfile" action="<?php echo uri('files/edit/'.$file->id); ?>" name="editFile">

@@ -8,14 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="<?php css('screen'); ?>" />
-<link rel="stylesheet" media="print" href="<?php css('print'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
+<link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 
 <!-- JavaScripts -->
-<?php js('prototype'); ?>
-<?php js('scriptaculous');?>
-<?php js('niftycube');?>
-<?php js('globals'); ?>
+<?php echo js('prototype'); ?>
+<?php echo js('scriptaculous');?>
+<?php echo js('niftycube');?>
+<?php echo js('globals'); ?>
 
 <!-- Plugin Stuff -->
 <?php plugin_header(); ?>

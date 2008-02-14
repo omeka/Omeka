@@ -1,7 +1,7 @@
 <div id="detailed">
 <?php foreach($items as $key => $item):?>
 <div class="item">
-	<h2><?php link_to_item($item); ?></h2>
+	<h2><?php echo link_to_item($item); ?></h2>
 
 	<div class="meta">
 		<ul>
@@ -16,14 +16,14 @@
 			<?php hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>	
 			</li>
 		</ul>
-		<p><?php link_to_item($item, 'edit', 'Edit', array('class'=>'edit')); ?></p>
+		<p><?php echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit')); ?></p>
 	</div>
 
 	<div class="description">
 	<?php if (has_thumbnail($item) == null): ?>
 		<?php echo nls2p(snippet($item->description, 0, 300)); ?>
 		<?php else: ?>
-		<?php link_to_thumbnail($item, array('class'=>'thumbnail')); ?>
+		<?php echo link_to_thumbnail($item, array('class'=>'thumbnail')); ?>
 		<?php echo nls2p(snippet($item->description, 0, 100)); ?>
 	<?php endif; ?>
 	</div>
