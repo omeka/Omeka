@@ -1,6 +1,6 @@
 <?php head(array('title'=>'Edit Settings', 'body_class'=>'settings')); ?>
 <?php common('settings-nav'); ?>
-<?php js('tooltip'); ?>
+<?php echo js('tooltip'); ?>
 
 <script type="text/javascript">
 function makeTooltips()

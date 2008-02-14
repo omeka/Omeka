@@ -45,8 +45,8 @@
 					</div>
 					
 					<div class="miscellaneous">
-					<?php link_to($entity, 'edit', '[Edit]'); ?>
-					<?php link_to($entity, 'delete', '[Delete]'); ?>
+					<?php echo link_to($entity, 'edit', '[Edit]'); ?>
+					<?php echo link_to($entity, 'delete', '[Delete]'); ?>
 					</div>
 					
 					<?php 

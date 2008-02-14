@@ -16,7 +16,7 @@
 	<form method="post" accept-charset="utf-8">
 		<?php include 'form.php'; ?>
 		<p id="form-submits"><button type="submit" name="submit">Save Changes</button> or <a href="<?php echo uri('entities/browse'); ?>">Cancel</a></p>
-		<p id="delete_item_link"><?php link_to($entity, 'delete', 'Delete This Name', array('class'=>'delete')); ?></p>
+		<p id="delete_item_link"><?php echo link_to($entity, 'delete', 'Delete This Name', array('class'=>'delete')); ?></p>
 	</form>
 	</div>
 

@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Add Exhibit', 'body_class'=>'exhibits')); ?>
-<?php js('listsort'); ?>
+<?php echo js('listsort'); ?>
 
 <script type="text/javascript" charset="utf-8">	
 //<![CDATA[

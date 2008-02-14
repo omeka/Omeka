@@ -65,7 +65,7 @@
 		<div id="site-info">
 			<div id="site-meta">
 				<h2>Site Overview</h2>
-				<p><em><?php settings('site_title'); ?></em> contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> collections, tagged with <?php echo total_tags(); ?> keywords. There are <?php echo total_users(); ?> users.</p>
+				<p><em><?php echo settings('site_title'); ?></em> contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> collections, tagged with <?php echo total_tags(); ?> keywords. There are <?php echo total_users(); ?> users.</p>
 			</div>
 			<div id="recent-items">
 				<h2>Recent Items</h2>
@@ -85,7 +85,7 @@
 			
 			<div id="tag-cloud">
 				<h2>Recent Tags</h2>
-				<?php tag_cloud(recent_tags(), uri('items/browse/')); ?>
+				<?php echo tag_cloud(recent_tags(), uri('items/browse/')); ?>
 			</div>
 		</div>
 		

@@ -12,7 +12,7 @@
  */
 function dublin_core($type) { 
 	$data = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'dublincore.ini', array('coremetadata')); 
-	echo h($data->$type); 
+	return h($data->$type); 
 } 
 
 function not_empty_or($value, $default) {
@@ -112,9 +112,7 @@ function display_files($files, $props = array()) {
 					$html .= '<a href="'.file_download_uri($file).'" class="download-file">';
 				
 					if($file->hasThumbnail()) {
-						ob_start();
-						square_thumbnail($file, array('class'=>'thumb'));
-						$html .= ob_get_clean();
+						$html .= square_thumbnail($file, array('class'=>'thumb'));
 					} 
 					else { 
 						$html .= $file->original_filename;
@@ -227,20 +225,19 @@ function src($file, $dir=null, $ext = null) {
 function js($file, $dir = 'javascripts') {
     
     if($file == 'default') {
-        js('prototype', $dir); //Prototype library loads by default
-        js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
+        $output  = js('prototype', $dir); //Prototype library loads by default
+        $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
         
         //The following is a hack that loads only the 'effects' sub-library of Scriptaculous
-        ?>
-        <script src="<?php echo web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=effects,dragdrop'; ?>" type="text/javascript" charset="utf-8"></script>
-        <?php
-        js('search', $dir);
+        $output .= '<script src="' . web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=effects,dragdrop" type="text/javascript" charset="utf-8"></script>' . "\n";
+        
+        $output .= js('search', $dir);
         
         //Do not try to load 'default.js'
-        return;
+        return $output;
     }
     
-	echo '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
+	return '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
 }
 
 /**
@@ -249,7 +246,7 @@ function js($file, $dir = 'javascripts') {
  * $file should not include the .css extension
  */
 function css($file, $dir = 'css') {
-	echo src($file, $dir, 'css');
+	return src($file, $dir, 'css');
 }
 
 /**
@@ -258,7 +255,7 @@ function css($file, $dir = 'css') {
  * $file SHOULD include an extension, many image exensions are possible
  */
 function img($file, $dir = 'images') {
-	echo src($file, $dir);
+	return src($file, $dir);
 }
 
 function common($file, $vars = array(), $dir = 'common') {
@@ -275,15 +272,16 @@ function foot($vars = array(), $file = 'footer') {
 	common($file, $vars);
 }
 
-function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
+/**
+ * Create a tag cloud made of divs that follow the hTagcloud microformat
+ *
+ * @return string HTML for the tag cloud
+ **/
+function tag_cloud($tags, $link = null, $maxClasses = 9)
 {
 	if(!$tags){
 		$html = '<div class="error">There are no tags to display</div>';
-		if($return) return $html;
-		else {
-			echo $html;
-			return;
-		}
+		return $html;
 	} 
 	
 	//Get the largest value in the tags array
@@ -325,8 +323,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
 	}
  	$html .= '</ul></div>';
 
-	if($return) return $html;
-	echo $html;
+	return $html;
 }
 
 /**
@@ -336,7 +333,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9, $return = false )
  * 
  * @param string $urlEnd The controller/action/parameter that specifies the link.
  * @example uri('items/browse/'.$item->id); 
- * @todo Work without mod_rewrite enabled: uri('items/show/3') -> ?controller=items&action=show&id=3
+ * @todo Work without mod_rewrite enabled: uri('items/show/3') -> ?u=items/show/3
  * @return string Url for the link href attribute.
  **/
 function uri($urlEnd, $params=array())
@@ -430,6 +427,7 @@ function form_error($field)
  *
  * @param array Key = Text of Navigation, Value = Link
  * @example primary_nav(array('Themes' => uri('themes/browse')));
+ * @return string
  **/
 function nav(array $links) {
 	
@@ -442,7 +440,7 @@ function nav(array $links) {
 		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
 		
 	}
-	echo $nav;
+	return $nav;
 }
 
 /**
@@ -459,7 +457,7 @@ function admin_nav(array $links) {
 	foreach ($links as $text => $link) {
 		$nav .= '<li class="' . text_to_id($text, 'nav') . '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
 	}
-	echo $nav;	
+	return $nav;	
 }
 
 function is_current($link, $req = null) {
@@ -498,6 +496,11 @@ function plugin_footer() {
 
 ///// END PLUGIN HELPER FUNCTIONS /////
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function tag_string($record, $link=null, $delimiter=', ')
 {
 	$string = array();
@@ -513,7 +516,7 @@ function tag_string($record, $link=null, $delimiter=', ')
 			if(!$link) {
 				$string[$key] = h($tag["name"]);
 			}else {
-				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'">'.h($tag["name"]).'</a>';
+				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'" rel="tag">'.h($tag["name"]).'</a>';
 			}
 		}
 		$string = join($delimiter,$string);
@@ -535,7 +538,7 @@ function link_to($record, $action='show', $text, $props = array())
 	$path = $record->getPluralized() . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $record->id;
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-	echo '<a href="'. uri($path) . '"' . $attr . '  title="View '.$text.'">' . h($text) . '</a>';
+	return '<a href="'. uri($path) . '"' . $attr . '  title="View '.$text.'">' . h($text) . '</a>';
 }
 
 function link_to_item($item, $action='show', $text=null, $props=array())
@@ -547,7 +550,7 @@ function link_to_item($item, $action='show', $text=null, $props=array())
 
 function link_to_items_rss($params=array())
 {	
-	echo '<a href="' . items_rss_uri($params) . '" class="rss">RSS</a>';
+	return '<a href="' . items_rss_uri($params) . '" class="rss">RSS</a>';
 }
 
 function items_rss_uri($params=array())
@@ -562,6 +565,11 @@ function items_rss_uri($params=array())
 	return $uri;
 }
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function items_rss_header()
 {
 	if($_GET and is_current(uri('items/browse'))) {
@@ -570,9 +578,14 @@ function items_rss_header()
 		$uri = items_rss_uri();
 	}
 	
-	echo '<link rel="alternate" type="application/rss+xml" title="'.get_option('site_title').'" href="'. $uri .'" />';
+	return '<link rel="alternate" type="application/rss+xml" title="'.get_option('site_title').'" href="'. $uri .'" />';
 }
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function link_to_next_item($item, $text="Next Item -->", $props=array())
 {
 	if($next = $item->next()) {
@@ -580,6 +593,11 @@ function link_to_next_item($item, $text="Next Item -->", $props=array())
 	}
 }
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function link_to_previous_item($item, $text="<-- Previous Item", $props=array())
 {
 	if($previous = $item->previous()) {
@@ -587,6 +605,11 @@ function link_to_previous_item($item, $text="<-- Previous Item", $props=array())
 	}
 }
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function link_to_collection($collection, $action='show', $text=null, $props=array())
 {
 	$text = (!empty($text) ? $text : (!empty($collection->name) ? $collection->name : '[Untitled]'));
@@ -594,52 +617,83 @@ function link_to_collection($collection, $action='show', $text=null, $props=arra
 	return link_to($collection, $action, $text, $props);
 }
 
+/**
+ * 
+ *
+ * @return string|false
+ **/
 function link_to_thumbnail($item, $props=array(), $action='show', $random=false)
 {
-	if(!$item or !$item->exists()) return false;
-	
-	$path = 'items/'.$action.'/' . $item->id;
-	echo '<a href="'. uri($path) . '" ' . _tag_attributes($props) . '>';
-	
-	if($random) {
-		thumbnail($item);
-	}else {
-		thumbnail($item->Files[0]);
-	}
-	echo '</a>';
+    return _link_to_archive_image($item, $props, $action, $random, 'thumbnail');
 }
 
 /**
- * Note to self: exact duplication of link_to_thumbnail()
  *
- * @return void|false
+ * @return string|false
  **/
 function link_to_fullsize($item, $props=array(), $action='show', $random=false)
+{
+    return _link_to_archive_image($item, $props, $action, $random, 'fullsize');
+}
+
+/**
+ * 
+ *
+ * @return string|false
+ **/
+function link_to_square_thumbnail($item, $props=array(), $action='show', $random=false)
+{
+    return _link_to_archive_image($item, $props, $action, $random, 'square_thumbnail');
+}
+
+/**
+ * Returns a link to an item, where the link has been populated by a specific image format for the item
+ *
+ * @return string|false
+ **/
+function _link_to_archive_image($item, $props=array(), $action='show', $random=false, $imageType = 'thumbnail')
 {
 	if(!$item or !$item->exists()) return false;
 	
 	$path = 'items/'.$action.'/' . $item->id;
-	echo '<a href="'. uri($path) . '" ' . _tag_attributes($props) . '>';
+	$output = '<a href="'. uri($path) . '" ' . _tag_attributes($props) . '>';
 	
 	if($random) {
-		fullsize($item);
+		$output .= archive_image($item, array(), null, null, $imageType);
 	}else {
-		fullsize($item->Files[0]);
+		$output .= archive_image($item->Files[0], array(), null, null, $imageType);
 	}
-	echo '</a>';	
+	$output .= '</a>';	
+	
+	return $output;
 }
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function link_to_home_page($text, $props = array())
 {
 	$uri = WEB_ROOT;
-	echo '<a href="'.$uri.'" '._tag_attributes($props).'>'.h($text)."</a>\n";
+	return '<a href="'.$uri.'" '._tag_attributes($props).'>'.h($text)."</a>\n";
 }
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function link_to_admin_home_page($text, $props = array())
 {
-	echo '<a href="'.admin_uri().'" '._tag_attributes($props).'>'.h($text)."</a>\n";
+	return '<a href="'.admin_uri().'" '._tag_attributes($props).'>'.h($text)."</a>\n";
 }
 
+/**
+ * 
+ *
+ * @return string
+ **/
 function admin_uri()
 {
 	return WEB_ROOT . DIRECTORY_SEPARATOR. 'admin' . DIRECTORY_SEPARATOR;
@@ -649,7 +703,7 @@ function admin_uri()
  * Retrieve the total number of items
  *
  * @since 11/7/07 This function can now be passed a $collection obj to return the total # of items in that collection
- * @return int
+ * @return integer
  **/
 function total_items($return = false) {
 	if($return instanceof Collection)
@@ -660,46 +714,89 @@ function total_items($return = false) {
 	return get_db()->getTable('Item')->count();
 }
 
+/**
+ * 
+ *
+ * @return integer
+ **/
 function total_collections() {
 	return get_db()->getTable('Collection')->count();
 }
 
+/**
+ * 
+ *
+ * @return integer
+ **/
 function total_tags() {
 	return get_db()->getTable('Tag')->count();
 }
 
+/**
+ * 
+ *
+ * @return integer
+ **/
 function total_users() {
 	return get_db()->getTable('User')->count();
 }
 
+/**
+ * 
+ *
+ * @return integer
+ **/
 function total_types() {
 	return get_db()->getTable('Type')->count();
 }
 
-function total_results($return = false) {
+/**
+ * 
+ *
+ * @return integer
+ **/
+function total_results() {
 	if(Zend_Registry::isRegistered('total_results')) {
 		$count = Zend_Registry::get('total_results');
 
-		
-		if($return) return $count;
-		echo $count;
+		return $count;
 	}
 }
 
+/**
+ * 
+ *
+ * @return boolean
+ **/
 function has_type($item, $name=null) {
 	$exists = $item->Type and $item->Type->exists();
 	$hasName = (!empty($name) ? $item->Type->name == $name : true);
 	return ( $exists and $hasName );
 }
 
+/**
+ * 
+ *
+ * @return boolean
+ **/
 function has_collection($item, $name=null) {
 	return !empty($item->collection_id);
 }
 
+/**
+ * 
+ *
+ * @return boolean
+ **/
 function has_collectors($collection) {
 	return $collection->hasCollectors();
 }
 
+/**
+ * 
+ *
+ * @return boolean
+ **/
 function has_tags($item, array $tags=array()) {
 	$hasSome = (count($item->Tags) > 0);
 	if(empty($tags) or !$hasSome){
@@ -713,6 +810,11 @@ function has_tags($item, array $tags=array()) {
 	return true;
 }
 
+/**
+ * 
+ *
+ * @return boolean
+ **/
 function has_files($item) {
 	return $item->hasFiles();
 }
@@ -911,11 +1013,10 @@ function _make_omeka_request($controller,$action,$params, $returnVars)
  *
  * @return string
  **/
-function settings($name, $return=false) {
+function settings($name) {
 	$name = get_option($name);
 	$name = h($name);
-	if($return) return $name;
-	echo $name;
+	return $name;
 }
 
 //Format of $date is YYYY-MM-DD
@@ -950,10 +1051,10 @@ function item_metadata($item, $field, $escape=true)
 /**
  * Display an alternative value if the given variable is empty
  *
- * @return void
+ * @return string
  **/
 function display_empty($val, $alternative="[Empty]") {
-	echo nls2p(h(!empty($val) ? $val : $alternative));
+	return nls2p(h(!empty($val) ? $val : $alternative));
 }
 
 /**
@@ -978,22 +1079,27 @@ function file_display_uri($file, $format='fullsize')
 	return generate_url($options, 'display');
 }
 
-function thumbnail($record, $props=array(), $width=null, $height=null,$return=false) 
+function thumbnail($record, $props=array(), $width=null, $height=null) 
 {
-       return archive_image($record, $props, $width, $height, 'thumbnail', $return);
+       return archive_image($record, $props, $width, $height, 'thumbnail');
 }
 
-function fullsize($record, $props=array(), $width=null, $height=null,$return=false)
+function fullsize($record, $props=array(), $width=null, $height=null)
 {
-       return archive_image($record, $props, $width, $height, 'fullsize', $return);
+       return archive_image($record, $props, $width, $height, 'fullsize');
 }
 
-function square_thumbnail($record, $props=array(), $width=null, $height=null,$return=false)
+function square_thumbnail($record, $props=array(), $width=null, $height=null)
 {
-       return archive_image($record, $props, $width, $height, 'square_thumbnail', $return);
+       return archive_image($record, $props, $width, $height, 'square_thumbnail');
 }
 
-function archive_image( $record, $props, $width, $height, $format, $return) 
+/**
+ * 
+ *
+ * @return string|false
+ **/
+function archive_image( $record, $props, $width, $height, $format) 
 {
 	if(!$record) {
 		return false;
@@ -1039,8 +1145,7 @@ function archive_image( $record, $props, $width, $height, $format, $return)
 		}
 	
 	   $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
-	   if($return) return $html;
-	   echo $html;
+	   return $html;
 }
 /**
  *	The pagination function from the old version of the software

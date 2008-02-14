@@ -1,4 +1,4 @@
-<?php js('tooltip'); ?>
+<?php echo js('tooltip'); ?>
 <script type="text/javascript" charset="utf-8">
 	Event.observe(window,'load', function() {
 		ajaxifyTagRemoval();
@@ -170,9 +170,6 @@
 			<?php foreach( $item->Files as $key => $file ): ?>
 				<tr>
 					<td class="file-link">
-						<?php //if ($file->hasThumbnail() ): ?>
-							<?php //thumbnail($file,array(),50,50); ?>
-						<?php// endif; ?>
 						<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">
 			
 							
@@ -198,43 +195,43 @@
 		<div class="field">
 		<label for="title" id="title">Title</label>
 		<input type="text" class="textinput" name="title" value="<?php echo h($item->title);?>" />
-		<span class="tooltip" id="title_tooltip"><?php dublin_core('title'); ?></span>
+		<span class="tooltip" id="title_tooltip"><?php echo dublin_core('title'); ?></span>
 		</div>
 
 		<div class="field">
 		<label id="subject">Subject</label>
 		<input type="text" class="textinput" name="subject" value="<?php echo h($item->subject);?>" />
-		<span class="tooltip" id="subject_tooltip"><?php dublin_core('subject'); ?></span>
+		<span class="tooltip" id="subject_tooltip"><?php echo dublin_core('subject'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="description">Description</label>
 		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo h($item->description); ?></textarea>
-		<span class="tooltip" id="description_tooltip"><?php dublin_core('description'); ?></span>
+		<span class="tooltip" id="description_tooltip"><?php echo dublin_core('description'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="creator">Creator</label>
 		<input type="text" class="textinput" name="creator" value="<?php echo h($item->creator);?>" />
-		<span class="tooltip" id="creator_tooltip"><?php dublin_core('creator'); ?></span>
+		<span class="tooltip" id="creator_tooltip"><?php echo dublin_core('creator'); ?></span>
 		</div>
 
 		<div class="field">
 		<label id="additional_creator">Additional Creator</label>
 		<input type="text" class="textinput" name="additional_creator" value="<?php echo h($item->additional_creator);?>" />
-		<span class="tooltip" id="additional_creator_tooltip"><?php dublin_core('additional_creator'); ?></span>
+		<span class="tooltip" id="additional_creator_tooltip"><?php echo dublin_core('additional_creator'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="source">Source</label>
 		<input type="text" class="textinput" name="source" value="<?php echo h($item->source);?>" />
-		<span class="tooltip" id="source_tooltip"><?php dublin_core('source'); ?></span>
+		<span class="tooltip" id="source_tooltip"><?php echo dublin_core('source'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="publisher">Publisher</label>
 		<input type="text" class="textinput" name="publisher" value="<?php echo h($item->publisher);?>" />
-		<span class="tooltip" id="publisher_tooltip"><?php dublin_core('publisher'); ?></span>
+		<span class="tooltip" id="publisher_tooltip"><?php echo dublin_core('publisher'); ?></span>
 		</div>
 		
 		<div class="field">
@@ -248,43 +245,43 @@
 		
 			</div>
 			</div>
-			<span class="tooltip" id="date_tooltip"><?php dublin_core('date'); ?></span>
+			<span class="tooltip" id="date_tooltip"><?php echo dublin_core('date'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="contributor">Contributor</label>
 		<input type="text" class="textinput" name="contributor" value="<?php echo h($item->contributor);?>" />
-		<span class="tooltip" id="contributor_tooltip"><?php dublin_core('contributor'); ?></span>
+		<span class="tooltip" id="contributor_tooltip"><?php echo dublin_core('contributor'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="rights">Rights</label>
 		<input type="text" class="textinput" name="rights" value="<?php echo h($item->rights);?>" />
-		<span class="tooltip" id="rights_tooltip"><?php dublin_core('rights'); ?></span>
+		<span class="tooltip" id="rights_tooltip"><?php echo dublin_core('rights'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="rights_holder">Rights Holder</label>
 		<input type="text" class="textinput" name="rights_holder" value="<?php echo h($item->rights_holder);?>" />
-		<span class="tooltip" id="rights_holder_tooltip"><?php dublin_core('rights_holder'); ?></span>
+		<span class="tooltip" id="rights_holder_tooltip"><?php echo dublin_core('rights_holder'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="relation">Relation</label>
 		<input type="text" class="textinput" name="relation" value="<?php echo h($item->relation);?>" />
-		<span class="tooltip" id="relation_tooltip"><?php dublin_core('relation'); ?></span>
+		<span class="tooltip" id="relation_tooltip"><?php echo dublin_core('relation'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="format">Format</label>
 		<input type="text" class="textinput" name="format" value="<?php echo h($item->format);?>" />
-		<span class="tooltip" id="format_tooltip"><?php dublin_core('format'); ?></span>
+		<span class="tooltip" id="format_tooltip"><?php echo dublin_core('format'); ?></span>
 		</div>
 		
 		<div class="field">
 		<label id="spatial_coverage">Spatial Coverage</label>
 		<input type="text" class="textinput" name="spatial_coverage" value="<?php echo h($item->spatial_coverage);?>" />
-		<span class="tooltip" id="spatial_coverage_tooltip"><?php dublin_core('spatial_coverage'); ?></span>
+		<span class="tooltip" id="spatial_coverage_tooltip"><?php echo dublin_core('spatial_coverage'); ?></span>
 		</div>
 		
 		<div class="field">
@@ -303,7 +300,7 @@
 					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>">
 				</span>
 			</div>
-			<span class="tooltip" id="temporal_coverage_tooltip"><?php dublin_core('temporal_coverage'); ?></span>
+			<span class="tooltip" id="temporal_coverage_tooltip"><?php echo dublin_core('temporal_coverage'); ?></span>
 		</div>
 
 			<div class="field">
@@ -320,19 +317,19 @@
 						'san'=>'Sanskrit'),
 					!empty($item->language) ? $item->language : 'eng'); 
 			?>
-			<span class="tooltip" id="language_tooltip"><?php dublin_core('language'); ?></span>
+			<span class="tooltip" id="language_tooltip"><?php echo dublin_core('language'); ?></span>
 			</div>
 
 			<div class="field">
 			<label id="provenance">Provenance</label>
 			<input type="text" class="textinput" name="provenance" value="<?php echo h($item->provenance);?>" />
-			<span class="tooltip" id="provenance_tooltip"><?php dublin_core('provenance'); ?></span>
+			<span class="tooltip" id="provenance_tooltip"><?php echo dublin_core('provenance'); ?></span>
 			</div>
 
 			<div class="field">
 			<label id="citation">Bibliographic Citation</label>
 			<input type="text" class="textinput" name="citation" value="<?php echo h($item->citation);?>" />
-			<span class="tooltip" id="citation_tooltip"><?php dublin_core('bibliographic_citation'); ?></span>
+			<span class="tooltip" id="citation_tooltip"><?php echo dublin_core('bibliographic_citation'); ?></span>
 			</div>
 	</fieldset>
 </div>

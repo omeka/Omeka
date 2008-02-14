@@ -70,7 +70,7 @@ class UserThemeFunctionsTestCase extends OmekaTestCase
 		Zend_Registry::set('theme_web',$web_path);
 		
 		ob_start();
-		js('test',null);
+		echo js('test',null);
 		$js = ob_get_clean();
 		$this->assertEqual('<script type="text/javascript" src="'.$web_path.'/test.js"></script>',$this->stripSpace($js));
 	}

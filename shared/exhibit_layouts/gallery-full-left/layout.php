@@ -8,9 +8,9 @@
 	<div class="primary">
 		<?php if($item = page_item(1)):?>
 		<div class="item-full">
-			<?php exhibit_fullsize($item, array('class'=>'permalink')); ?>
-			<?php echo $item->title; ?>
-			<?php echo $item->description; ?>
+			<?php echo exhibit_fullsize($item, array('class'=>'permalink')); ?>
+			<?php echo h($item->title); ?>
+			<?php echo h($item->description); ?>
 			<a href="<?php echo exhibit_item_uri($item); ?>">Item Link</a>
 		</div>
 		<?php endif; ?>
@@ -19,24 +19,24 @@
 	<div class="secondary gallery">
 		<?php if($item = page_item(2)):?>
 		<div class="exhibit-item">
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		
 		<?php if($item = page_item(3)):?>
 		<div class="exhibit-item">
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		
 		<?php if($item = page_item(4)):?>
 		<div class="exhibit-item">
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 		<?php if($item = page_item(5)):?>
 		<div class="exhibit-item">
-			<?php exhibit_thumbnail($item, array('class'=>'permalink')); ?>
+			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
 		</div>
 		<?php endif; ?>
 	</div>

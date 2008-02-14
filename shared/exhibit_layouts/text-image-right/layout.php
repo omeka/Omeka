@@ -8,7 +8,7 @@
 	<div class="primary">
 		<div class="exhibit-item">
 			<?php $item = page_item(1); ?>
-			<?php exhibit_fullsize($item); ?>
+			<?php echo exhibit_fullsize($item); ?>
 		</div>	
 	</div>
 	<div class="secondary">		

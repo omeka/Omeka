@@ -1,7 +1,6 @@
 <?php head(array('title'=>'Type: '.h($type->name),'body_class'=>'types'));?>
 <?php common('archive-nav'); ?>
 
-<?php js('editable');?>
 <div id="primary">
 	<div id="type-info">
 	<h1>Type: <?php echo h($type->name);?></h1>
