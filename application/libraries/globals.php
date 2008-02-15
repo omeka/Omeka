@@ -22,7 +22,7 @@ function generate_slug($text)
 	$slug = trim($text);
 	
 	//Replace prohibited characters in the title with - 's
-	$prohibited = array(':', '/', ' ', '.');
+	$prohibited = array(':', '/', ' ', '.', '#');
 	$replace = array_fill(0, count($prohibited), '-');
 	$slug = str_replace($prohibited, $replace, strtolower($slug) );
 	return $slug;

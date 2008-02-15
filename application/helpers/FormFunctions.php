@@ -231,9 +231,10 @@
 	
 	function simple_search($props=array(),$uri) { ?>
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
-		
-		<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
-		<?php submit("Submit","submit_search"); ?>
+		<fieldset>
+		    <input type="text" class="textinput" name="search" value="<?php echo htmlspecialchars($_REQUEST['search']); ?>"/>
+		    <?php submit("Submit","submit_search"); ?>
+		</fieldset>
 		</form>
 	 <?php }
 	

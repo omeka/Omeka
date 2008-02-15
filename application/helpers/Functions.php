@@ -70,11 +70,11 @@ function display_files($files, $props = array()) {
 				$html 	.= 	'<object id="MediaPlayer" width="'.$defaults['width'].'" height="'.$defaults['height'].'"';
 				$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
 				$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
-				$html	.=	'<param name="FileName" value="'.$path.'">'."\n";
-				$html	.=	'<param name="AutoPlay" value="'.($defaults['autostart'] ? 'true' : 'false').'">'."\n";
-				$html	.=	'<param name="ShowControls" value="'.($defaults['ShowControls'] ? 'true' : 'false').'">'."\n";
-				$html	.=	'<param name="ShowStatusBar" value="'.($defaults['ShowStatusBar'] ? 'true' : 'false').'">'."\n";
-				$html	.=	'<param name="ShowDisplay" value="'.($defaults['ShowDisplay'] ? 'true' : 'false').'">'."\n";
+				$html	.=	'<param name="FileName" value="'.$path.'" />'."\n";
+				$html	.=	'<param name="AutoPlay" value="'.($defaults['autostart'] ? 'true' : 'false').'" />'."\n";
+				$html	.=	'<param name="ShowControls" value="'.($defaults['ShowControls'] ? 'true' : 'false').'" />'."\n";
+				$html	.=	'<param name="ShowStatusBar" value="'.($defaults['ShowStatusBar'] ? 'true' : 'false').'" />'."\n";
+				$html	.=	'<param name="ShowDisplay" value="'.($defaults['ShowDisplay'] ? 'true' : 'false').'" />'."\n";
 				$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
 				$html	.=	' width="'.$defaults['width'].'" height="'.$defaults['height'].'"'; 		
 				$html	.=	' ShowControls="'.$defaults['ShowControls'].'" ShowStatusBar="'.$defaults['ShowStatusBar'].'"'; 
@@ -96,10 +96,10 @@ function display_files($files, $props = array()) {
 			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
 
 			$html .= '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$defaults['width'].'" height="'.$defaults['height'].'">
-				<param name="src" value="'.$path.'">
-				<param name="controller" value="'.($defaults['controller'] ? 'true' : 'false').'">
-				<param name="autoplay" value="'.($defaults['autoplay'] ? 'true' : 'false').'">
-				<param name="loop" value="'.($defaults['loop'] ? 'true' : 'false').'">
+				<param name="src" value="'.$path.'" />
+				<param name="controller" value="'.($defaults['controller'] ? 'true' : 'false').'" />
+				<param name="autoplay" value="'.($defaults['autoplay'] ? 'true' : 'false').'" />
+				<param name="loop" value="'.($defaults['loop'] ? 'true' : 'false').'" />
 
 				<embed src="'.$path.'" scale="tofit" width="'.$defaults['width'].'" height="'.$defaults['height'].'" controller="'.($defaults['controller'] ? 'true' : 'false').'" autoplay="'.($defaults['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
 				</object>';
@@ -538,7 +538,7 @@ function link_to($record, $action='show', $text, $props = array())
 	$path = $record->getPluralized() . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $record->id;
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-	return '<a href="'. uri($path) . '"' . $attr . '  title="View '.$text.'">' . h($text) . '</a>';
+	return '<a href="'. uri($path) . '"' . $attr . '  title="View '.h($text).'">' . h($text) . '</a>';
 }
 
 function link_to_item($item, $action='show', $text=null, $props=array())

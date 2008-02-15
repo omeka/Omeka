@@ -94,7 +94,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		$exhibit = $this->findBySlug();
 
 		if(!$exhibit) {
-			throw new Exception( 'Exhibit with that ID does not exist.' );
+			return $this->errorAction();
 		}
 				
 		$section = $this->_getParam('section');
@@ -105,6 +105,8 @@ class ExhibitsController extends Omeka_Controller_Action
 			$page_order = $this->_getParam('page');
 
 			$page = $section->getPage($page_order);			
+		}else {
+		    return $this->errorAction();
 		}
 		
 		$layout = $page->layout;
