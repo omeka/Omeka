@@ -142,6 +142,10 @@ class ExhibitsController extends Omeka_Controller_Action
 		}else {
 			$exhibit = $this->_table->findBySlug($slug);
 		}
+		
+		if(!$exhibit) {
+		    throw new Zend_Controller_Exception('Cannot find exhibit with slug: '. $slug);
+		}
 				
 		return $exhibit;
 	}

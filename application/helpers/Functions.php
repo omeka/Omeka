@@ -840,6 +840,16 @@ function random_featured_item($hasImage=true) {
 	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
 }
 
+function random_featured_collection()
+{
+    return get_db()->getTable('Collection')->findRandomFeatured();
+}
+
+function random_featured_exhibit()
+{
+    return get_db()->getTable('Exhibit')->findRandomFeatured();
+}
+
 function entities(array $params = array())
 {
 	return _get_recordset($params, 'entities');

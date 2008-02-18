@@ -30,6 +30,17 @@ class CollectionTable extends Omeka_Table
 		
 		return $db->fetchOne($select);
 	}
+	
+	public function findRandomFeatured()
+	{
+	    $db = get_db();
+	    
+	    $select = new Omeka_Select;
+	    
+	    $select->from("$db->Collection c")->where("c.featured = 1")->order("RAND()")->limit(1);
+	    
+	    return $this->fetchObjects($select, array(), true);
+	}
 }
  
 ?>

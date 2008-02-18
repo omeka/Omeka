@@ -20,6 +20,11 @@ class ErrorController extends Omeka_Controller_Action
 		if($e instanceof Omeka_View_Format_Invalid_Exception) {
 			$this->getRequest()->setParam('output', 'xhtml');
 		}		
+		//Controller Exceptions should render a 404 page
+		elseif($e instanceof Zend_Controller_Exception)
+		{
+		    return $this->render404();
+		}
 		
 		//Try to determine what kind of error occurred
 		switch ($handler->type) {
