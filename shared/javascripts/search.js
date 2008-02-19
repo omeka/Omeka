@@ -2,9 +2,7 @@ if(typeof Omeka == 'undefined') {
 	Omeka = {};
 }
 
-if(typeof Omeka.Search == 'undefined') {
-	Omeka.Search = {};
-}
+Omeka.Search = {};
 
 Object.extend(Omeka.Search, {
 	
