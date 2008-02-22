@@ -400,9 +400,9 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	}
 	
 	/**
-	 * Browsing strategy defaults to a full listing, can be switched to pagination by instantiating Omeka_Controller_Browse_Pagination in the init() method
+	 * 
 	 *
-	 * @return void
+	 * @return string
 	 **/
 	public function browseAction()
 	{		
@@ -410,7 +410,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		$pluralName = $this->getPluralized();
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
-				
+
 		$$pluralName = $this->getTable($this->_modelClass)->findAll();
 
 		$totalVar = 'total_'.$pluralName;

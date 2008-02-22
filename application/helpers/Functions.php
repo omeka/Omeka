@@ -829,7 +829,7 @@ function recent_tags($num = 30) {
 }
 
 function recent_collections($num = 10) {
-	return collections(array('recent'=>true,'limit'=>$num));
+	return collections(array('recent'=>true,'per_page'=>$num));
 }
 
 function recent_items($num = 10) {
@@ -909,7 +909,7 @@ function collection($id=null)
 
 function collections(array $params = array())
 {
-	return _get_recordset($params, 'collections');
+	return get_db()->getTable('Collection')->findBy($params);
 }
 
 function metafields(array $params = array())
