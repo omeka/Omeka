@@ -400,9 +400,9 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	}
 	
 	/**
-	 * Browsing strategy defaults to a full listing, can be switched to pagination by instantiating Omeka_Controller_Browse_Pagination in the init() method
+	 * 
 	 *
-	 * @return void
+	 * @return string
 	 **/
 	public function browseAction()
 	{		
@@ -410,7 +410,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		$pluralName = $this->getPluralized();
 		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
-				
+
 		$$pluralName = $this->getTable($this->_modelClass)->findAll();
 
 		$totalVar = 'total_'.$pluralName;
@@ -581,7 +581,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	{
 		$id = (!$id) ? $this->getRequest()->getParam('id') : $id;
 		
-		if(!$id) throw new Exception( get_class($this).': No ID passed to this request' );
+		if(!$id) throw new Omeka_Controller_Exception_404( get_class($this).': No ID passed to this request' );
 					
 		$table = !$table ? $this->_table : $this->getTable($table);			
 		
@@ -591,10 +591,10 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			
 			//Check to see whether to record exists at all
 			if(!$table->checkExists($id)) {
-				throw new Exception( get_class($this).": No record with ID # $id exists" );
+				throw new Omeka_Controller_Exception_404( get_class($this).": No record with ID # $id exists" );
 			}
 			else {
-				throw new Exception( 'You do not have permission to access this page.' );
+				throw new Omeka_Controller_Exception_403( 'You do not have permission to access this page.' );
 			}
 			
 		}

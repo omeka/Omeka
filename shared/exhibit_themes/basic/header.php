@@ -9,7 +9,7 @@
 
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php echo exhibit_css('screen'); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo layout_css('layout'); ?>">
+<link rel="stylesheet" media="screen" href="<?php echo layout_css('layout'); ?>" />
 <link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 
 <!-- JavaScripts -->
@@ -25,12 +25,12 @@
 	<h5><a href="<?php echo uri('exhibits'); ?>">Back to Exhibits</a></h5>
 	<h1><?php echo link_to_exhibit($exhibit); ?></h1>
 
-<div id="exhibit-nav">
-	<?php echo section_nav();?>
-</div>
+    <div id="exhibit-nav">
+    	<?php echo section_nav();?>
+    </div>
 
-<div id="content">
-	<?php echo page_nav(); ?>
-<?php echo flash(); ?>				
+    <div id="content">
+    	<?php echo page_nav(); ?>
+    <?php echo flash(); ?>				
 
 		

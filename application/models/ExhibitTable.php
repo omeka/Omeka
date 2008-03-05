@@ -90,6 +90,22 @@ class ExhibitTable extends Omeka_Table
 		
 		return $exhibits;
 	}
+	
+	/**
+	 * @duplication CollectionTable::findRandomFeatured(), ItemTable::findRandomFeatured()
+	 *
+	 * @return Exhibit|false
+	 **/
+	public function findRandomFeatured()
+	{
+	    $db = get_db();
+	    
+	    $select = new Omeka_Select;
+	    
+	    $select->from("$db->Exhibit e")->where("e.featured = 1")->order("RAND()")->limit(1);
+	    
+	    return $this->fetchObjects($select, array(), true);
+	}
 }
  
 ?>

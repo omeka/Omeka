@@ -1,6 +1,8 @@
 //Namespace for generic Omeka utility functions
-var Omeka = {
-	flash: function(msg, status) {
+if(typeof Omeka == 'undefined') {
+	Omeka = {};
+}
+Omeka.flash = function(msg, status) {
 		
 		if(typeof status == 'undefined') {
 			status = 'alert';
@@ -18,15 +20,14 @@ var Omeka = {
 		div.updateAppear(msg);
 		div.setStyle({display:'block'});
 //		new Effect.Highlight(div, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'});
-	},
+};
 	
-	hideFlash: function() {
+Omeka.hideFlash = function() {
 		$('alert').hide();
-	}
 };
 
 //Highlight 'alert' boxes after the page has loaded (different from Omeka.flash)
-function alertBox() {
+Omeka.alertBox = function() {
 	var alerts = $$('div.alert');
 	
 	for(var i=0;i<alerts.length;i++) {
@@ -64,12 +65,12 @@ function confirmDelete() {
 }
 
 	
-	const Person = "Person";
-	const Institution = "Institution";
-	
-	
-	
-	function switchForm(radio) {
+
+		
+Omeka.switchForm = function(radio) {
+		const Person = "Person";
+		const Institution = "Institution";
+
 		if(!document.getElementById) return;
 		var personElements = ['first_name','middle_name', 'last_name'];
 		var institutionElements = ['institution'];
@@ -110,7 +111,7 @@ function confirmDelete() {
 		}
 	}
 	
-function toggleNamesForm() {
+Omeka.toggleNamesForm = function() {
 	if(!document.getElementById) return;
 	if(!$('name-inputs') || !$('entity-type')) return;
 	var radioButtons = $$("#entity-type input");
@@ -118,17 +119,17 @@ function toggleNamesForm() {
 	allFields.hide();
 	for (var i=0; i < radioButtons.length; i++) {
 		radioButtons[i].onclick = function() {
-			switchForm(this);
+			Omeka.switchForm(this);
 			allFields.show();
 		};
 		if(radioButtons[i].checked) {
-			switchForm(radioButtons[i]);
+			Omeka.switchForm(radioButtons[i]);
 			allFields.show();
 		}
 	}
 }
 
-Event.observe(window,'load',toggleNamesForm);
+Event.observe(window,'load',Omeka.toggleNamesForm);
 Event.observe(window,'load',roundCorners);
-Event.observe(window,'load',alertBox);
+Event.observe(window,'load',Omeka.alertBox);
 Event.observe(window,'load',confirmDelete);

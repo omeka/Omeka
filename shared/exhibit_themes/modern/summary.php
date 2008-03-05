@@ -27,7 +27,7 @@
 		<?php echo flash(); ?>				
 		<h1><?php echo link_to_exhibit($exhibit); ?></h1>
 
-		<p><?php echo H($exhibit->description); ?></p>
+		<p><?php echo h($exhibit->description); ?></p>
 
 		<div id="exhibit-sections">	
 			<div>

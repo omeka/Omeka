@@ -166,30 +166,17 @@ class ItemsController extends Omeka_Controller_Action
 		 * 
 		 **/
 		$paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
-		$options = array(	'per_page'=>	4,
-							'page'		=> 	1,
+		$options = array(   'page'		=> 	1,
 							'pagination_url' => $paginationUrl);
 							
 		//check to see if these options were changed by request vars
 		$reqOptions = $this->_getAllParams();
 		
 		$options = array_merge($options, $reqOptions);
-		
-		$config_ini = Zend_Registry::get('config_ini');
-
-		if ($config_ini->pagination->per_page)
-		{
-			$per_page = $config_ini->pagination->per_page;
-		} else {
-			echo "copy your config.ini.changeme file over to the config.ini file in the application/config directory";
-		}
-		
+				
 		$params['page'] = $options['page'];
-		$params['per_page'] = $per_page;
 		
-		if($per_page = $this->_getParam('per_page')) {
-			$params['per_page'] = $per_page;
-		}
+		$params['per_page'] = $this->getItemsPerPage();
 		
 		//Retrieve the items themselves
 		$items = $this->getTable('Item')->findBy($params);
@@ -205,6 +192,25 @@ class ItemsController extends Omeka_Controller_Action
 		$pass_to_template['record_type'] = 'Item';
 		
 		return $this->render('items/browse.php', $pass_to_template);
+	}
+		
+	/**
+	 * Retrieve the number of items to display on any given browse page.
+	 * This can be modified as a query parameter provided that a user is actually logged in.
+	 *
+	 * @return integer
+	 **/	
+	protected function getItemsPerPage()
+	{
+        //Retrieve the number from the config file
+		$config_ini = Zend_Registry::get('config_ini');
+		$per_page = $config_ini->pagination->per_page;
+                
+        if($this->isAllowed('modifyPerPage') and $this->_getParam('per_page')) {
+			$per_page = $this->_getParam('per_page');
+		}	 
+		
+		return $per_page;   
 	}
 		
 	public function showAction() 

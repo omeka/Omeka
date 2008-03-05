@@ -63,11 +63,14 @@ class File extends Omeka_Record {
 	
 	public function __get($name)
 	{
-		$ext = $this->getExtendedMetadata();
-
-		if($data = $ext[$name]) {
-			return $data;
-		}
+	    if(!$this->_cache['Extended']) {
+	        $ext = $this->getExtendedMetadata();
+	        $this->_cache['Extended'] = $ext;
+	    }
+	    
+	    if($data = $this->_cache['Extended'][$name]) {
+	        return $data;
+	    }
 	}
 	
 	protected function beforeInsert()
@@ -116,18 +119,17 @@ class File extends Omeka_Record {
 		$metadataTable = $db->prefix . $metadataTable;
 		
 		$metadata = $db->query("SELECT d.* FROM $metadataTable d WHERE d.file_id = ? LIMIT 1", array((int) $this->id))->fetch();
-		
+			
 		$prepared = array();
 		
 		//We have to unserialize some of these extended metadata values
-		foreach ($metadata as $key => $value) {
-			
+		foreach($metadata as $key => $value) {
 			if($unserialized = @unserialize($value)) {
 				$value = $unserialized;
 			}
 			$prepared[$key] = $value;
 		}
-				
+						
 		return $prepared;
 	}
 	

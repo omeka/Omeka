@@ -309,15 +309,16 @@ function page_nav()
 	$output = '<ul class="exhibit-page-nav">';
 	
 	$key = 1;
-	foreach ($section->Pages as $key => $page) {
+    if($section) {
+    	foreach ($section->Pages as $key => $page) {
 	
-		$uri = exhibit_uri($section->Exhibit, $section, $page);
+    		$uri = exhibit_uri($section->Exhibit, $section, $page);
 		
-		//Create the link (also check if uri matches current uri)
-		$output .= '<li'. ($page->id == $currentPage->id ? ' class="current"' : '').'><a href="'. $uri . '">Page '. $key .'</a></li>';
+    		//Create the link (also check if uri matches current uri)
+    		$output .= '<li'. ($page->id == $currentPage->id ? ' class="current"' : '').'><a href="'. $uri . '">Page '. $key .'</a></li>';
 	
-	}
-	
+	    }
+    }
 	$output .= '</ul>';
 	
 	return $output;

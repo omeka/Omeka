@@ -26,7 +26,7 @@
 </form>
 
 <fieldset>
-	<p class="managethemes">Add new themes by downloading them from the <a href="http://omeka.org/extend/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Designing_a_Public_Theme">design your own</a>!<p>
+	<p class="managethemes">Add new themes by downloading them from the <a href="http://omeka.org/download/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Designing_a_Public_Theme">design your own</a>!<p>
 </fieldset>
 </div>
 <?php foot(); ?>

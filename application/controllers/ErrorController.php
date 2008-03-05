@@ -1,7 +1,6 @@
 <?php 
 /**
 * @todo In future, all errors in other controllers should throw exceptions, which cause the request to go here.
-* There should be different pages for different kinds of errors.  Not just 404.
 * Also find a way to respond to errors in requests for data feeds.
 *	Non-existent feed should route here (to XHTML output)
 *	Other errors should probably be handled by the Omeka_View_Format_Abstract implementations
@@ -10,16 +9,22 @@ class ErrorController extends Omeka_Controller_Action
 {
 	public function errorAction()
 	{
-		//Are we in debugging mode?		
-		$handler = $this->_getParam('error_handler');
-		
-		//The exception that barfed (may need to handle this differently in future)
+		//This is the pattern for retrieving the exception that occurred
+		$handler = $this->_getParam('error_handler');		
 		$e = $handler->exception;
 		
 		//Make sure we try to output the error pages as valid XHTML (if an invalid format was chosen)
 		if($e instanceof Omeka_View_Format_Invalid_Exception) {
 			$this->getRequest()->setParam('output', 'xhtml');
 		}		
+		
+		if($this->is404($e)) {
+		    return $this->render404($e);
+		}
+		
+		if($this->is403($e)) {
+		    return $this->render403($e);
+		}
 		
 		//Try to determine what kind of error occurred
 		switch ($handler->type) {
@@ -34,19 +39,45 @@ class ErrorController extends Omeka_Controller_Action
 				    //If there is an exception thrown from this, it means render the 404 page
 				    return $this->render404();
 				}
-				
 				break;
 			default:
-				//Log errors that aren't just for pages that don't exist
-				Omeka_Logger::logError( $e );
-				
 				break;
 		}		
+		
+		//Log errors that aren't just for pages that don't exist
+		Omeka_Logger::logError( $e );
 				
-        return $this->renderOtherError($e);
+        return $this->renderException($e);
 	}
 	
-	protected function renderOtherError(Exception $e)
+	/**
+	 * Check to see whether the error qualifies as a 404 error
+	 *
+	 * @return boolean
+	 **/
+	protected function is404(Exception $e)
+	{
+	    //Controller Exceptions should render a 404 page
+        if($e instanceof Omeka_Controller_Exception_404)
+		{
+		    return true;
+		}	    
+		
+		//@hack - If it's a 'script not found' error, its a 404
+		if($e instanceof Zend_View_Exception)
+		{
+		    $msg = $e->getMessage();
+		    
+		    return (bool) preg_match('/script.*not found in path/', $msg);
+		}
+	}
+	
+	protected function is403(Exception $e)
+	{
+	    return ($e instanceof Omeka_Controller_Exception_403);
+	}
+	
+	protected function renderException(Exception $e)
 	{
 //	    $this->_view->setScriptPath(CORE_DIR . DIRECTORY_SEPARATOR . 'templates');
 	    
@@ -80,28 +111,33 @@ class ErrorController extends Omeka_Controller_Action
 	    $body = $this->_view->render($file);
 	    $this->getResponse()->appendBody($body);
 	}
-	
-	/**
-	 * If we are in Debug mode, render the built-in 404 page.  Otherwise, render the theme's 404 page.
-	 *
-	 * @return void
-	 **/
+    
 	protected function render404()
 	{
-	    $this->getResponse()->setHttpResponseCode(400);
+	    $this->getResponse()->setHttpResponseCode(404);
 	    
-	    if($this->isInDebugMode()) {
+	    try {
+	        return $this->render('404.php');
+	    } catch (Exception $e) {
 	        $badUri = $this->getRequest()->getRequestUri();
 	        return $this->renderCoreTemplate('errors/404.php', compact('badUri'));
 	    }
-	    else {
-	        return $this->render('404.php');
-	    }
+	}
+	
+	protected function render403()
+	{
+	    $this->getResponse()->setHttpResponseCode(403);
+	    
+	    try {
+		    return $this->render('403.php');
+	    } catch (Exception $e) {
+	       return $this->renderCoreTemplate('errors/403.php');
+	    } 
 	}
 	
 	protected function isInDebugMode()
 	{
-	    return Zend_Registry::get('config_ini')->debug->exceptions;
+	    return (bool) Zend_Registry::get('config_ini')->debug->exceptions;
 	}
 	
 	protected function renderStaticPage($req)

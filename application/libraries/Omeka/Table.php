@@ -106,9 +106,19 @@ class Omeka_Table
 	}
 	
 	/**
+	 * Alias for self::findAll(), which may overridden by subclasses to actually handle parameters
+	 *
+	 * @return array|false
+	 **/
+	public function findBy($params=array())
+	{
+	    return $this->findAll();
+	}
+	
+	/**
 	 * Return a set of objects based on a SQL WHERE predicate (see RoR / other frameworks)
 	 *
-	 * @return void
+	 * @return array|false
 	 **/
 	public function findBySql($sql, array $params=null, $findOne=false)
 	{
