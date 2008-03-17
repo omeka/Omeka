@@ -1264,7 +1264,7 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 	 *
 	 * @see Zend/View/Helper/Url.php
 	 *
-	 * @return void
+	 * @return string
 	 **/
 	function generate_url($options, $name)
 	{
@@ -1278,6 +1278,10 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
         }
         
         $url = get_base_url();
+        
+        //Options that are passed will need to be properly encoded for use in URLs
+        $options = array_map('urlencode', $options);
+        
         $url .= $route->assemble($options);
          
         return $url;
