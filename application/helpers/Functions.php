@@ -833,7 +833,7 @@ function recent_collections($num = 10) {
 }
 
 function recent_items($num = 10) {
-	return items(array('recent'=>true,'per_page'=>$num));
+	return get_db()->getTable('Item')->findBy(array('recent'=>true,'per_page'=>(int) $num));
 }
 
 function random_featured_item($hasImage=true) {
