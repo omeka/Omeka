@@ -364,6 +364,31 @@ function render_layout_form($layout)
 	
 	include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'form.php';
 }
+
+/**
+ * A set of linked thumbnails for the items on a given exhibit page.  Each 
+ * thumbnail is wrapped with a div of class = "exhibit-item"
+ *
+ * @param int $start The range of items on the page to display as thumbnails
+ * @param int $end The end of the range
+ * @param array $props Properties to apply to the <img> tag for the thumbnails
+ * @return string HTML output
+ **/
+function display_exhibit_thumbnail_gallery($start, $end, $props=array())
+{
+    $output = '';
+    
+    for ($i=(int)$start; $i <= (int)$end; $i++) { 
+        if($item=page_item($i)) {    
+    	    $output .= "\n" . '<div class="exhibit-item">';
+    	    $output .= exhibit_thumbnail($item, $props);
+            $output .= '</div>' . "\n";
+        }
+    }
+    
+    return $output;
+}
+
 ///// END EXHIBIT FUNCTIONS /////
  
 ?>

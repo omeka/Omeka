@@ -1,5 +1,5 @@
 <?php exhibit_head(); ?>
-<h2><?php echo $section->title; ?></h2>			
+<h2><?php echo h($section->title); ?></h2>			
 			
 <div id="primary">
 	<div class="exhibit-content"><!--exhibit content-->
@@ -7,4 +7,4 @@
 	</div>
 </div><!--end primary-->
 	
-<?php exhibit_foot(); ?>>
+<?php exhibit_foot(); ?>
