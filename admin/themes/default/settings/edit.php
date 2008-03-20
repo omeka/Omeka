@@ -91,7 +91,7 @@ Event.observe(window,'load', function() {
 </div>
 
 <div class="field">
-	<label for="path_to_convert" id="path_to_convert">Square Thumbnail Constraint</label>
+	<label for="path_to_convert" id="path_to_convert">Path to Convert</label>
 	<?php text(array('name'=>'path_to_convert', 'class'=>'textinput'),$path_to_convert); ?>
 	<span class="tooltip" id="path_to_convert_tooltip">The path to your ImageMagick library.</span>
 	
