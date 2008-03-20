@@ -1,5 +1,5 @@
 <?php
-function h($str, $allowedTags = "a|i|em|b|strong|del|span|cite|blockquote") {
+function h($str, $allowedTags = "i|em|b|strong|del|span") {
 	
 	$html = htmlentities($str,ENT_QUOTES,"UTF-8"); 
 		
