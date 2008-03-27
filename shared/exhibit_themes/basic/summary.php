@@ -7,7 +7,7 @@
 <div id="exhibit-sections">	
 	<?php foreach($exhibit->Sections as $section) {
 		$uri = exhibit_uri($exhibit, $section);
-		echo '<h3><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . $section->title . '</a></h3><p>' . $section->description . '</p>';
+		echo '<h3><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . h($section->title) . '</a></h3><p>' . h($section->description) . '</p>';
 	} ?>
 </div>
 

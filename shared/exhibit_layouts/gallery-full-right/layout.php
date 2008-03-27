@@ -16,22 +16,7 @@
 	
 	<div class="secondary gallery">
 		
-		<div class="exhibit-item">
-			<?php $item = page_item(2); ?>
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
-		<div class="exhibit-item">
-			<?php $item = page_item(3); ?>
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
-		<div class="exhibit-item">
-			<?php $item = page_item(4); ?>
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
-		<div class="exhibit-item">
-			<?php $item = page_item(5); ?>
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
+		<?php echo display_exhibit_thumbnail_gallery(2, 5, array('class'=>'permalink')); ?>
 	</div><!--end secondary-->
 
 	<div id="item-full-text"><?php echo page_text(1); ?></div>

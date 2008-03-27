@@ -33,7 +33,7 @@
 			<div>
 			<?php foreach($exhibit->Sections as $section) {
 			$uri = exhibit_uri($exhibit, $section);
-			echo '<a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '><span class="section-title">' . $section->title . '</span>' . '<span class="section-desc">' . h($section->description) . '</span></a>';
+			echo '<a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '><span class="section-title">' . h($section->title) . '</span>' . '<span class="section-desc">' . h($section->description) . '</span></a>';
 			} ?>
 			</div>
 		</div>

@@ -19,10 +19,10 @@ try {
 	//Build the database if necessary
 	$show_tables_sql = "SHOW TABLES";
 	//Ensure that we don't confuse Omeka if there are already tables in the DB
-	if($db->prefix) $show_tables_sql .= " LIKE '$db->prefix%'";
+	$show_tables_sql .= " LIKE '{$db->prefix}options'";
 	$res = $db->query($show_tables_sql);
 	$tables = $res->fetchAll();
-	
+
 	if(empty($tables)) {
 		// Build the tables explicitly
 		include 'install.sql.php';

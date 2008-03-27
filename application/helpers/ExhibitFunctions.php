@@ -56,6 +56,11 @@ function link_to_exhibit($exhibit, $text=null, $props=array(), $section=null, $p
 	return '<a href="'.$uri.'">' . h($text) . '</a>';
 }
 
+/**
+ * @internal This relates to: ExhibitsController::showAction(), ExhibitsController::summaryAction()
+ *
+ * @return string
+ **/
 function exhibit_uri($exhibit, $section=null, $page=null)
 {
 	$exhibit_slug = ($exhibit instanceof Exhibit) ? $exhibit->slug : $exhibit;
@@ -64,8 +69,17 @@ function exhibit_uri($exhibit, $section=null, $page=null)
 	
 	$page_num = ($page instanceof ExhibitPage) ? $page->order : $page;
 	
-	$uri = WEB_ROOT . '/exhibits/' . $exhibit_slug . '/' . ( !empty($section_slug) ? $section_slug . (!empty($page_num) ? '/' . $page_num : ''): '');
-	
+	//If there is no section slug available, we want to build a URL for the summary page 
+	if(!$section_slug) {
+	    $uri = generate_url(array('slug'=>$exhibit_slug), 'exhibitSimple');
+	}else {
+	    $uri = generate_url(array('slug'=>$exhibit_slug, 'section'=>$section_slug, 'page'=>$page_num), 'exhibitShow');
+	}
+
+    //If we are in the admin theme, we have to hack a solution that sends you to the public theme
+    //Keep in mind, WEB_DIR can be /admin, but WEB_ROOT is always the public site
+    $uri = str_replace(WEB_DIR, WEB_ROOT, $uri);
+
 	return $uri;
 }
 
@@ -88,8 +102,7 @@ function exhibit_item_uri($item, $exhibit=null, $section=null)
 	
 	//If the exhibit has a theme associated with it
 	if(!empty($exhibit->theme)) {
-	//	return uri('exhibits/' . $exhibit->slug . '/' . $section->slug . '/item/' . $item->id);
-		return generate_url(array('controller'=>'items','action'=>'show','id'=>$item->id), 'id');
+		return generate_url(array('slug'=>$exhibit->slug,'section'=>$section->slug,'item_id'=>$item->id), 'exhibitItem');
 	}
 	
 	else {
@@ -287,8 +300,7 @@ function section_nav()
 	foreach ($exhibit->Sections as $key => $section) {		
 	
 		$uri = exhibit_uri($exhibit, $section);
-		
-		$output .= '<li><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . $section->title . '</a></li>';
+		$output .= '<li><a href="' . $uri . '"' . (is_current($uri) ? ' class="current"' : ''). '>' . h($section->title) . '</a></li>';
 	
 	}
 	
@@ -298,7 +310,7 @@ function section_nav()
 
 function page_nav()
 {
-	if(!Zend_Registry::isRegistered('section')) {
+	if(!Zend_Registry::isRegistered('section') or !Zend_Registry::isRegistered('page')) {
 		return false;
 	}
 	
@@ -352,6 +364,31 @@ function render_layout_form($layout)
 	
 	include EXHIBIT_LAYOUTS_DIR.DIRECTORY_SEPARATOR.$layout.DIRECTORY_SEPARATOR.'form.php';
 }
+
+/**
+ * A set of linked thumbnails for the items on a given exhibit page.  Each 
+ * thumbnail is wrapped with a div of class = "exhibit-item"
+ *
+ * @param int $start The range of items on the page to display as thumbnails
+ * @param int $end The end of the range
+ * @param array $props Properties to apply to the <img> tag for the thumbnails
+ * @return string HTML output
+ **/
+function display_exhibit_thumbnail_gallery($start, $end, $props=array())
+{
+    $output = '';
+    
+    for ($i=(int)$start; $i <= (int)$end; $i++) { 
+        if($item=page_item($i)) {    
+    	    $output .= "\n" . '<div class="exhibit-item">';
+    	    $output .= exhibit_thumbnail($item, $props);
+            $output .= '</div>' . "\n";
+        }
+    }
+    
+    return $output;
+}
+
 ///// END EXHIBIT FUNCTIONS /////
  
 ?>

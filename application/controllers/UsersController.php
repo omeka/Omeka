@@ -10,33 +10,108 @@ class UsersController extends Omeka_Controller_Action
 	protected $_redirects = array(
 		'add'=> array('users/show/id', array('id'))
 	);
-	
+		
 	public function init() {
-		$this->_modelClass = 'User';		
+		$this->_modelClass = 'User';
+		$this->before_filter('checkPermissions');		
 	}
 	
 	/**
-	 * @duplication
-	 * @see EntitiesController::deleteAction()
-	 * @since 9/13/07
+	 * Check some permissions that depend on what specific information is being accessed
+	 *
+	 * @return void
 	 **/
-	public function deleteAction()
+    protected function checkPermissions()
+    {
+        $action = $this->_request->getActionName();
+
+        $this->checkGeneralPerms($action);
+        $this->checkUserSpecificPerms($action);
+    }
+	
+	/**
+	 * @hack: this method is only here because the 'showRoles' ACL privilege is different from the 'roles' action that it protects
+	 *
+	 * @return void
+	 **/
+	private function checkGeneralPerms($action)
 	{
-		$user = $this->findById();
-		
-		if( ($user->role == 'super') and !$this->isAllowed('deleteSuperUser')) {
-			$this->flash('You are not allowed to delete super users!');
-			$this->_redirect('users/browse');
-		}
-		
-		$current = Omeka::loggedIn();
-		
-		if($current->id == $user->id) {
-			$this->flash('You are not allowed to delete yourself!');
-			$this->_redirect('users/browse');
-		}
-		
-		return parent::deleteAction();
+        //If we don't have a specific record that we are acting on, then check these permissions
+        switch ($action) {
+           case 'roles':
+               if(!$this->isAllowed('showRoles')) {
+        			$this->flash( 'Cannot view the list of user roles!' );
+    				$this->_redirect('users/browse');
+        		}
+               break;
+           
+           default:
+               break;
+        }	    
+	}
+	
+	/**
+	 * Check on permissions that require interaction between the logged-in user and the user record being manipulated
+	 * Ideally, permissions checks that require complicated logic should go here
+	 *
+	 * @return void
+	 **/
+	private function checkUserSpecificPerms($action)
+	{
+        $user = Omeka::loggedIn();
+        
+        try {
+           $record = $this->findById();
+        } 
+        //Silence exceptions, because it's easy
+        catch (Exception $e) {
+            return;
+        }	    
+
+        try {
+            switch ($action) {
+        
+     	        //If we are deleting users
+    	       case 'delete':
+       
+    	           	//Check whether or not we are allowed to delete Super Users
+            	    if( ($record->role == 'super') and !$this->isAllowed('deleteSuperUser')) {
+                    	throw new Exception( 'You are not allowed to delete super users!' );
+                    }
+
+                    //Can't delete yourself
+                    if($user->id == $record->id) {
+                    	throw new Exception('You are not allowed to delete yourself!');
+                    }
+    	           break;
+       
+               //If changing passwords 
+               case 'changePassword':
+       
+                    //Only super users and the actual user can change this user's password
+                    if(!$user or ( ($user->role != 'super') and ($record->id != $user->id) ) ) {
+                        throw new Exception( 'May not change another user\'s password!' );
+                    }
+            
+                    break;
+                    
+                case 'edit':
+                    
+                    //Non-super users cannot edit super user data
+                    //Note that super users can edit other super users' data
+                    if($user->id != $record->id and $record->role == 'super' and $user->role != 'super') {
+                        throw new Exception( 'You may not edit the data for super users!' );
+                    }
+                    
+                    break;
+                    
+    	       default:
+    	           break;
+    	    }	            
+        } catch (Exception $e) {
+            $this->flash($e->getMessage(), Omeka_Controller_Flash::GENERAL_ERROR);
+            $this->_redirect('users/browse');
+        }
 	}
 	
 	public function forgotPasswordAction()
@@ -120,7 +195,7 @@ class UsersController extends Omeka_Controller_Action
 		
 		try {
 			if($user->saveForm($_POST)) {
-				
+
 				$user->email = $_POST['email'];
 				$this->sendActivationEmail($user);
 				
@@ -167,15 +242,8 @@ class UsersController extends Omeka_Controller_Action
 	public function changePasswordAction()
 	{
 		$user = $this->findById();
-		
-		$current = Omeka::loggedIn();
-				
-		try {
-			//Only super users and the actual user can change this user's password
-			if(!$current or ( ($current->role != 'super') and ($user->id != $current->id) ) ) {
-				throw new Exception( 'May not change another user\'s password' );
-			}
-			
+						
+		try {	
 			//somebody is trying to change the password
 			if(!empty($_POST['new_password1'])) {
 				$user->changePassword($_POST['new_password1'], $_POST['new_password2'], $_POST['old_password']);
@@ -256,11 +324,6 @@ class UsersController extends Omeka_Controller_Action
  */		
 	public function rolesAction()
 	{
-		//Permissions check
-		if(!$this->isAllowed('showRoles')) {
-			$this->_redirect('403');
-			return;
-		}
 		$acl = $this->acl;
 		
 		$roles = array_keys($acl->getRoles());

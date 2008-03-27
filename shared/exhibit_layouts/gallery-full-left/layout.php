@@ -17,28 +17,7 @@
 	</div>
 	
 	<div class="secondary gallery">
-		<?php if($item = page_item(2)):?>
-		<div class="exhibit-item">
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
-		<?php endif; ?>
-		
-		<?php if($item = page_item(3)):?>
-		<div class="exhibit-item">
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
-		<?php endif; ?>
-		
-		<?php if($item = page_item(4)):?>
-		<div class="exhibit-item">
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
-		<?php endif; ?>
-		<?php if($item = page_item(5)):?>
-		<div class="exhibit-item">
-			<?php echo exhibit_thumbnail($item, array('class'=>'permalink')); ?>
-		</div>
-		<?php endif; ?>
+        <?php echo display_exhibit_thumbnail_gallery(2, 5, array('class'=>'permalink')); ?>
 	</div>
 	
 	<?php if($text = page_text(1)):?>
