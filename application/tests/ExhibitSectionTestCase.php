@@ -52,6 +52,39 @@ class ExhibitSectionTestCase extends OmekaTestCase
 		
 		$this->assertEqual($section->slug, 'foo-bar');
 	}
+	
+	public function testDeletingAPageReordersPages()
+	{
+		$e = $this->getExhibit();
+		
+		$s = new ExhibitSection;
+		$s->title = "Whatever";
+		$s->slug = "whatever";
+		$e->addChild($s);
+		$s->save();
+		
+		for($i=1; $i<=5; $i++) {
+			$p = new ExhibitPage;
+			$p->layout = $i . '-page-layout';
+			$s->addChild($p);
+			$p->save();
+		}
+		
+		$pages = $s->Pages;
+		
+		$lastPage = end($pages);
+		
+		$this->assertEqual($lastPage->order, 5);
+		
+		//Delete the 3rd page
+		$pages[2]->delete();	
+		
+		$pages = $s->loadOrderedChildren();
+		
+		$this->assertEqual(count($pages), 4);
+		
+		$this->assertEqual(end($pages)->order, 4);	
+	}
 
 }
  
