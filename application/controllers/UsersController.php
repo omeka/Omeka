@@ -196,6 +196,7 @@ class UsersController extends Omeka_Controller_Action
 		try {
 			if($user->saveForm($_POST)) {
 				
+				$user->email = $_POST['email'];
 				$this->sendActivationEmail($user);
 				
 				$this->flashSuccess('User was added successfully!');
