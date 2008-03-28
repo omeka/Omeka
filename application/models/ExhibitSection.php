@@ -40,7 +40,7 @@ class ExhibitSection extends Omeka_Record
 		}
 		
 		if(!$this->slugIsUnique($this->slug)) {
-			$this->addError('slug', 'Slugs for sections of an exhibit must be unique within that exhibit.');
+			$this->addError('slug', 'Slugs for sections of an exhibit must be unique within that exhibit.  Please modify the slug so that it is unique.');
 		}
 	}
 

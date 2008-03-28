@@ -85,6 +85,27 @@ class ExhibitSectionTestCase extends OmekaTestCase
 		
 		$this->assertEqual(end($pages)->order, 4);	
 	}
+	
+	public function testCanSaveTwoSectionsWithSameTitle()
+	{
+		$e = $this->getExhibit();
+		
+		$s1 = new ExhibitSection;
+		$s1->title = "whatever";
+		$s1->slug = "whatever";
+		$e->addChild($s1);
+		
+		$s1->forceSave();
+		
+		$s2 = new ExhibitSection;
+		$s2->title = "whatever";
+		$s2->slug = "whatever2";
+		
+		$e->addChild($s2);
+		
+		$s2->forceSave();		
+
+	}
 
 }
  

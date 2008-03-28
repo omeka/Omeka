@@ -109,12 +109,8 @@ class Omeka_Controller_Flash
 		$msg = $this->getFlash()->msg;
 		
 		$this->resetFlash();
-		
-		if(is_array($msg)) {
-			return $this->formatErrorsIntoNiceMessage($msg);
-		}
-		
-		return $msg;
+				
+		return (string) $msg;
 	}
 	
 	/**
@@ -134,22 +130,6 @@ class Omeka_Controller_Flash
 	}
 	
 	/**
-	 * Take an array of error messages and convert it into human-readable format
-	 *
-	 * @return string
-	 **/
-	protected function formatErrorsIntoNiceMessage($errors)
-	{
-		$msgs = array();
-		foreach ($errors as $field => $error) {
-	 
-			$msgs[] = (!is_numeric($field) ? (Omeka::humanize($field). ": ") : '') . $error; 
-		}
-
-		return join("\n", $msgs);			
-	}
-	
-	/**
 	 * Return the error message for a specific field
 	 *
 	 * @return string
@@ -158,7 +138,7 @@ class Omeka_Controller_Flash
 	{
 		$msg = $this->getFlash()->msg;
 		
-		return (is_array($msg) and array_key_exists($field, $msg)) ? $msg[$field] : null;
+		return @$msg[$field];		
 	}
 }
  

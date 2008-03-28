@@ -274,6 +274,15 @@ class ExhibitsController extends Omeka_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
+		//@duplication see ExhibitsController::processSectionForm()
+		//If the form submission was invalid 
+		if($this->isAjaxRequest() and !$retVal) {
+			//Send a header that will inform us that the request was a failure
+			//@see http://tech.groups.yahoo.com/group/rest-discuss/message/6183
+			$this->getResponse()->setHttpResponseCode(422);
+
+		}
+		
 		$pass_to_template = compact('exhibit');
 		$pass_to_template['record'] = $exhibit;
 		
@@ -307,6 +316,8 @@ class ExhibitsController extends Omeka_Controller_Action
 			$this->_redirect('editExhibit', array('id' => $section->exhibit_id));
 		}
 		
+		$retVal = false;
+		
 		try {
 			//Section form may be prefixed with Section (like name="Section[title]") or it may not be, depending
 			
@@ -317,14 +328,18 @@ class ExhibitsController extends Omeka_Controller_Action
 			}
 			
 			$retVal = $section->saveForm($toPost);
-		} catch (Exception $e) {
-			$this->flash($e->getMessage());
-			$retVal = false;
+		} 
+		catch (Omeka_Validator_Exception $e) {
+			$this->flashValidationErrors($e);
 		}
-			
+		catch (Exception $e) {
+			$this->flash($e->getMessage());
+		}
+					
 		//If successful form submission
 		if($retVal)
 		{	
+			$this->flashSuccess("Changes to the exhibit's section were saved successfully!");
 			//Forward around based on what submit button was pressed
 			
 			if(array_key_exists('exhibit_form',$_POST)) {
@@ -345,16 +360,13 @@ class ExhibitsController extends Omeka_Controller_Action
 			}
 		}
 				
-		//this is an AJAX request
-		if($this->isAjaxRequest()) {
-			//If the form submission was invalid 
-			if(!$retVal) {
-				//Send a header that will inform us that the request was a failure
-				//@see http://tech.groups.yahoo.com/group/rest-discuss/message/6183
-				header ("HTTP/1.0 422 Unprocessable Entity");
+		//If the form submission was invalid 
+		if($this->isAjaxRequest() and !$retVal) {
+			//Send a header that will inform us that the request was a failure
+			//@see http://tech.groups.yahoo.com/group/rest-discuss/message/6183
+			$this->getResponse()->setHttpResponseCode(422);
 
-			}				
-		}
+		}				
 		
 		//For a data feed, the record we want to render is the ExhibitSection
 		$pass_to_template = compact('exhibit', 'section');
@@ -363,7 +375,7 @@ class ExhibitsController extends Omeka_Controller_Action
 		return $this->render('exhibits/form/section.php', $pass_to_template);	
 			
 	}
-	
+
 	/**
 	 * Add a page to a section
 	 *
