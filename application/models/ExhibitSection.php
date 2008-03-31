@@ -39,7 +39,7 @@ class ExhibitSection extends Omeka_Record
 			$this->addError('slug', "Slug must be given for each section of an exhibit.");
 		}
 		
-		if(!$this->slugIsUnique($this->slug)) {
+		if($this->exhibit_id and !$this->slugIsUnique($this->slug)) {
 			$this->addError('slug', 'Slugs for sections of an exhibit must be unique within that exhibit.  Please modify the slug so that it is unique.');
 		}
 	}
@@ -49,21 +49,23 @@ class ExhibitSection extends Omeka_Record
 		$db = get_db();
 		$exhibit_id = (int) $this->exhibit_id;
 		
+		if(!$exhibit_id) {
+			$this->addError('exhibit_id', 'Section must be associated with a valid exhibit.');
+			return false;
+		}
+		
+		$sql = "SELECT COUNT(DISTINCT(s.id)) FROM $db->ExhibitSection s WHERE s.slug = ? AND s.exhibit_id = ?";
+		$pass = array($slug, $exhibit_id);
+		
 		//If the record is persistent, get the count of sections 
 		//with that slug that aren't this particular record
 		if($this->exists()) {
-			$sql = "SELECT COUNT(DISTINCT(s.id)) FROM $db->ExhibitSection s WHERE s.id != ? AND s.slug = ?";
-			
-			$count = (int) $db->fetchOne($sql, array((int) $this->id, $slug));			
+			$sql .= " AND s.id != ?";
+			$pass[] = (int) $this->id;			
 		}
-		//Otherwise if the record doesn't exist in DB yet,
-		//get the total number of records in the exhibit that share that slug
-		else {
-			$sql = "SELECT COUNT(DISTINCT(s.id)) FROM $db->ExhibitSection s WHERE s.slug = ? AND s.exhibit_id = ?";
-			$count = (int) $db->fetchOne($sql, array($slug, $exhibit_id));
-		}
-		
+				
 		//If there are no other sections with that particular slug, then it is unique
+		$count = (int) $db->fetchOne($sql, $pass);
 		return ($count == 0);
 		
 	}
