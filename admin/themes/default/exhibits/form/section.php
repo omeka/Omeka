@@ -15,7 +15,7 @@
 		listSorter.overlap = 'horizontal';
 		listSorter.constraint = 'horizontal';
 		listSorter.confirmation = 'Are you sure you want to delete this page?';
-		listSorter.deleteLinks = '.delete-page a';
+		listSorter.deleteLinks = 'a.delete-page';
 								
 		if(listSorter.list) {
 			//Create the sortable list
