@@ -1,8 +1,6 @@
 <?php head(array('title'=>'Browse Items', 'body_class'=>'items')); ?>
 <?php common('archive-nav'); ?>
 
-<?php echo js('search'); ?>
-
 <div id="primary">
 <?php echo flash(); ?>
 <?php if ( total_results() ): ?>
