@@ -136,6 +136,9 @@ function makeDraggable(containers) {
 		revert:true,
 		handle: 'handle',
 		snap: [20, 20],
+		scroll: window,
+		scrollSensitivity: 50,
+		scrollSpeed: 40,
 		onStart: function(draggable, event) {			
 			if(draggable.element.descendantOf('layout-form')) {
 				var oldContainer = draggable.element.parentNode;
