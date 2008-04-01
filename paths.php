@@ -52,11 +52,40 @@ define('HELPERS',			HELPER_DIR.DIRECTORY_SEPARATOR.'all.php');
 
 // Abs theme dir is set in the appropriate index.php file
 
-// Define Web routes
-$root = 'http://'.$_SERVER['HTTP_HOST'];
-//This looks ugly but plugin and shared directories are at the root of the site, whereas WEB_THEME is either root or root/admin depending - KK
-define('WEB_ROOT', 		$root.dirname(str_replace('/admin', '', $_SERVER['PHP_SELF'])));
-define('WEB_DIR',		$root.dirname($_SERVER['PHP_SELF']));
+/**
+ * Most of this has been borrowed directly from Drupal 6.1's 
+ * bootstrap code (bootstrap.inc, conf_init())
+ *
+ * @todo rename the WEB_ROOT, WEB_DIR constants and add a new one for the $base_path
+ * @return void
+ **/
+function _define_web_root()
+{
+    // Create base URL
+    $base_root = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
+
+    // As $_SERVER['HTTP_HOST'] is user input, ensure it only contains
+    // characters allowed in hostnames.
+    $base_url = $base_root .= '://'. preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
+
+    // $_SERVER['SCRIPT_NAME'] can, in contrast to $_SERVER['PHP_SELF'], not
+    // be modified by a visitor.
+    if ($dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/')) {
+      $base_path = "/$dir";
+      $base_url .= $base_path;
+      $base_path .= '/';
+    }
+    else {
+      $base_path = '/';
+    }   
+
+    //WEB_ROOT is always the root of the site, whereas WEB_DIR depends on the bootstrap used (public/admin)
+    define('WEB_ROOT', 		$base_root . '/' . rtrim($dir, '/admin') );
+    define('WEB_DIR',		$base_url);  
+    
+}
+
+_define_web_root();
 define('WEB_THEME',		WEB_DIR.DIRECTORY_SEPARATOR.'themes');
 define('WEB_SHARED',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['shared']);
 define('WEB_PLUGIN',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['plugins']);
@@ -68,7 +97,6 @@ define('WEB_FILES',		WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['files']);
 define('WEB_EXHIBIT_LAYOUTS', WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_layouts'] );
 define('WEB_EXHIBIT_THEMES',  WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
 define('WEB_PUBLIC_THEME',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['public_theme']);
-// Set the include path to the library path
-// do we want to include the model paths here too? [NA]
-set_include_path(get_include_path().PATH_SEPARATOR.BASE_DIR.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['libraries'].PATH_SEPARATOR.MODEL_DIR);
+
+set_include_path(get_include_path().PATH_SEPARATOR.LIB_DIR.PATH_SEPARATOR.MODEL_DIR);
 ?>
