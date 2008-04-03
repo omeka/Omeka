@@ -1,0 +1,44 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Site Configuration
+;
+; We define specific application configurations here.
+; These are primarily for developers who need to debug
+; aspects of the application.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[site]
+; set some basic routing variables for GET style requests
+uri.controller = c
+uri.action = a
+uri.admin = admin
+uri.output = output
+
+default.controller = index
+default.action = home
+
+; Display a runtime timer for page generation
+debug.timer = false
+
+; Throw exceptions; this should only be used in development mode
+debug.exceptions = false
+
+; Json request return Content-Type: text/x-json
+; In some browsers this will prompt for you to download a file, not a
+; problem for ajax, but if you want to debug and have the json printed
+; to the screen set this to 'true'
+debug.json = false
+
+debug.sql = false
+
+; Log SQL statements
+log.sql = false
+
+; Log errors (to be implemented)
+log.errors = false
+
+; Amount of time (in minutes) to allow before expiring an authenticated user
+login.expire = 500
+
+; Limit the number of items displayed
+pagination.per_page = 10

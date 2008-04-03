@@ -1,0 +1,30 @@
+<IfModule mod_php5.c>
+	php_value display_errors 1
+	php_flag zlib.output_compression On
+	php_flag register_globals off
+	php_value zlib.output_compression_level 5
+</IfModule>
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d [OR]
+# This ensures that Apache will not mistake the URL mysite.com/archive/ for a request for the physical directory that stores files
+RewriteCond %{REQUEST_URI}  .+\/archive\/
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+
+<FilesMatch "\.(php|ini)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+<Files index.php>
+Allow from all
+</Files>
+
+# Uncomment the lines below in order to enable caching of some files via Apache (after a finished site has gone live)
+<IfModule mod_expires.c>
+#  <FilesMatch "\.(js|css|gif|png)$">
+#       ExpiresActive on
+#       ExpiresDefault "access plus 10 day"
+#   </FilesMatch>
+</IfModule>

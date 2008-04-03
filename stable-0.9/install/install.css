@@ -1,0 +1,91 @@
+/* == Reset Styles == */
+@import url("reset.css");
+
+/* == Generic == */
+body {font:62.5% "Lucida Grande",verdana,arial,helvetica, sans-serif; color:#444; min-width:600px;background:#333;padding:36px 0;}
+body#login {width:346px; min-width:346px;margin:0 auto; padding:40px 0;border:none;}
+
+/* Headings */
+h1,h2,h3,h4,h5,h6 {font-family:"Gill Sans", sans-serif;}
+h1 {font-size:2.4em; line-height:1.5em;margin-bottom:0.75em;}
+h2 {font-size:2em; line-height:0.9em;margin-bottom:0.9em;}
+h3 {font-size:1.6em; line-height:1.25em; margin-bottom:1.25em;}
+h4 {font-size:1.4em; line-height:1.4825em;margin-bottom:1.4825em; font-weight:bold;}
+h5 {}
+h6 {}
+
+/* Links */
+a:link {color:#369;}
+a:visited {color:#369;}
+a:hover {color:#38c;}
+a:active {color:#38c;}
+h1 a, h2 a, h3 a {text-decoration:none;}
+
+/* Misc */
+p,ul,ol,dl,table,div.editable {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
+ul,ol {}
+	li {line-height:1.5em;}
+ul ul {font-size:1em; margin-left:1.5em;}
+li * {font-size:1em;}
+dl dt, dl dd {display:block;}
+dl dt {font-weight:bold;}
+dl dd {margin-bottom:1.5em;}
+dl * {font-size:1em;}
+
+dd ul {margin-left:1.5em;}
+table {font-size:1.2em; width:100%;line-height:1.5em; margin-bottom:1.5em;}
+thead {text-align:left;}
+td,th {padding:1.5em 0.833333em; line-height:1em;}
+
+thead tr {border:1px solid #cdcdc5; border-width:0 0 3px; font-weight:bold;}
+tbody tr {border-bottom:1px solid #cdcdc5;}
+
+col#col-edit, col#col-delete {background:#eee;}
+col#col-id {background:#eee;}
+
+/* Form Elements */
+form {display:block; overflow:hidden; margin-bottom: 3em;}
+input,textarea {font:1.2em "Lucida Grande",Verdana, Arial, Helvetica, sans-serif;}
+input[type="submit"] {display: block;}
+fieldset {margin-bottom:2em;border-top:1px dotted #ccc;height:auto; padding-top:1.8em;display:block;}
+legend {font-family:"Gill Sans", sans-serif; color:#444; font-size:2em; background:#fff; padding-right:1em; line-height:0.9em;display:block;}
+.toggle_content {overflow:hidden; height:auto;}
+.field label {overflow:hidden; position:relative; z-index:0; margin: 1em 0 0;}
+.field label img {float:left; margin-right:2em; position:absolute;top:2px; left:0;}
+label,.label {font-family:"Gill Sans", sans-serif; font-size:1.5em; line-height:1.2em; margin-bottom:0.4166666em;display:block;}
+.radio {margin: 1em 0;}
+	.field .radio label {margin: 0;}
+.textinput {display:block; border:1px solid #a2c9e8; background:#dae9f6;padding:4px; width:368px;}
+.textinput:focus {background:#fff; border:1px solid #A2C9E8;}
+textarea {font-size:1.2em;}
+select {border:1px solid #a2c9e8; padding:2px; margin: .5em 0 0;}
+	select#mergee {margin-bottom: 1.5em;}
+
+div.showitem {clear: both; margin-bottom: 2em; border-bottom: 1px solid #ccc;}
+div.showitem .field {overflow: hidden;}
+	div.showitem h2 {margin: .5em 0;}
+
+	div.showitem .field h3 {float:left; clear:left; width: 12em; margin-bottom: .5em;}
+	div.showitem .field label {display:block; float:left; width:246px;}
+	div.showitem .field .textinput {display:block; float:right;}
+	div.showitem .dateinput .textinput {width: 50px; display:inline; float:none;}
+	div.showitem .dateinput {display:inline;}
+#collection h2 {float:left; clear:left; width: 9.6em; }
+#collection div {font-size: 1.2em; line-height: 1.8em;}
+input#tags-submit {display: inline;}
+
+.dateinput input {width:auto; display:inline;}
+
+.dates span {display:inline;}
+.dates input {margin-bottom:0;}
+.dates {margin-bottom:1.5em;}
+
+/* Errors */
+.error {
+	background:#f1c8ba; color:#933;
+	margin-bottom: 1.5em;
+}
+
+/* == Wrap == */
+
+#wrap {background:#fff; overflow:hidden; width:380px; margin:0 auto; padding:18px;}

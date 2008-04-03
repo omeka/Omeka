@@ -1,0 +1,14 @@
+[testing]
+; connectivity for testing on a live database (DO NOT USE PRODUCTION DATABASES, THIS WILL WIPE YOUR DATABASE EVERY TIME)
+db.host = ""
+db.username = ""
+db.password = ""
+db.name = ""
+
+; Root URL of the testing installation, for use in web-based unit tests
+app.url = ""
+
+; mimics the entry with the same name in the main config.ini file.  best to leave this on for testing
+debug.exceptions = true
+
+paths.imagemagick = ""

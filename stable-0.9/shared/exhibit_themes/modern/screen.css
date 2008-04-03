@@ -1,0 +1,69 @@
+@import url('reset.css');
+
+/* == Generic == */
+body {font: 62.5% Verdana, Arial, sans-serif; color:#fffff8; background:#222;}
+
+h1 {font-size:1.8em;line-height:1em;margin:2em 0 1em;}
+h2 {font-size:1.6em; line-height:1.125em;padding: 18px 18px 9px 0;margin: 0;}
+h3 {font-size:1.4em; margin-bottom:1.2857em; line-height:1.2857em;clear: both;font-weight: bold;color: #444444;}
+h5 {background-color: #222;padding: 0 0 1em;}
+
+a img {border:none;}
+p,ul,ol,dl {font-size:1.2em; margin-bottom:1.5em;line-height:1.8em;}
+
+a:link,a:visited {color: #dd3300;}
+a:hover {color:#ff9900;}
+	h1 a {text-decoration: none;}
+	h5 a, h5 a:visited {color: #ccc;}
+
+/* ===== Structure ===== */
+#wrap {width:810px; margin:2em auto; background:#333;overflow:hidden; }
+
+#header {background:#fff; color:#333; padding:0; margin: 0;overflow: hidden;border-bottom: 9px solid #333;}
+
+/* =Exhibit Navigation= */	
+.exhibit-section-nav {float: left;padding-left:0; overflow:hidden; margin:0 0 0 18px;}
+	.exhibit-section-nav li {display:block; float:left; width:auto;padding: .5em 1.5em .5em 0;margin-right:1px;}
+	.exhibit-section-nav li a, .exhibit-section-nav li a:visited {display:block; float:left; text-decoration:none;padding:0.5em 0;text-align: left;}
+	.exhibit-section-nav li a:hover {text-decoration: underline;}
+	
+/* =Page Navigation= */
+.exhibit-page-nav {list-style:none; float: left; padding: 1em 0 0 1em; width: 100%;background-color: #222;}
+	.exhibit-page-nav li {display:inline;float: left; margin-right:2px;}
+	.exhibit-page-nav li a {display:block; width: 5em; text-decoration:none;padding:0.25em 0;text-align: center;background-color: #666;color: #fff;}
+	.exhibit-page-nav li.current a,.exhibit-page-nav li a:hover {background-color: #fff;color:#333;}
+
+/* == Content == */
+
+#content {overflow: hidden;background-color:#fff;color:#333;min-height:400px;padding: 0 18px;}
+	
+	#exhibit-sections {font-size: 1.2em; line-height: 1.8em;border-top: 1px solid #ff9900;}
+		#exhibit-sections a, #exhibit-sections a:visited {display: block;text-decoration: none;padding: 1em 0 0;border-bottom: 1px solid #ff9900;overflow: hidden;}
+		#exhibit-sections a:hover {background-color: #fff6e8;}
+		#exhibit-sections .section-title {clear: both; padding: 0 1% 1.5em 1%; width: 20%; float: left;font-size: 1.4em;}
+			#exhibit-sections a:hover .section-title {color: #dd3300;}
+		#exhibit-sections .section-desc {padding: 0 0 1.5em 1%; width: 77%; float: right; color: #333;}
+
+#exhibit-credits {padding: 1em 0;}
+
+#footer {margin-top: 1em; padding: 1em;background-color:#fff;}
+
+.commentary {background:#eee; padding:18px;}
+	.commentary p {font-size:1.1em; line-height:1.63636em;}
+	
+/* == Layout == */
+.gallery-full-left,
+.gallery-full-right,
+.gallery-thumbnails,
+.gallery-thumbnails-text-bottom,
+.gallery-thumbnails-text-top,
+.image-list-left,
+.image-list-left-thumbs,
+.image-list-right,
+.image-list-right-thumbs,
+.text-full,
+.text-image-left,
+.text-image-right
+	{clear: both;}
+
+.item img, .exhibit-item img {margin-bottom: 1.5em;}

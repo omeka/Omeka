@@ -1,0 +1,3 @@
+<FilesMatch "\.(php|ini)$">
+Allow from all
+</FilesMatch>

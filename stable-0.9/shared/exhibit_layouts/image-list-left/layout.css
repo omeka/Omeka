@@ -1,0 +1,3 @@
+.image-list-left {clear: both;}
+.image-list-left .exhibit-item {overflow:hidden;display:block; width:auto;float:none;clear:both;}
+	.image-list-left .exhibit-item img {float:left; margin-right:20px; margin-bottom:20px; border:green;}

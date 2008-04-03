@@ -1,0 +1,11 @@
+#content, #primary,#user-meta, {height:1%;}
+
+#view-all-items {height:1%;}
+#user-meta {padding:0; width:18em;}
+
+#recent-items li a {height:1%;}
+
+#detailed div.item {height: 1%;}
+.field label img {position: absolute; top: 0; left: -18px;}
+
+#login input.login {padding:0 0 0 -36px; }
