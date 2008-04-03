@@ -13,8 +13,23 @@ $core->initializeClassLoader();
 $core->initializeConfigFiles();
 $core->initializeDb();
 
+//Load up our script to verify that the installation requirements for Omeka have been met
+include 'verify.php';
+
 try {
     $db = $core->getDb();
+    
+    //Force the Zend_Db to make the connection and catch connection errors
+    try {
+        $mysqli = $db->getConnection()->getConnection();
+    } catch (Exception $e) {
+        throw new Exception("<h1>MySQL connection error: [" . mysqli_connect_errno() . "]</h1>" . "<p>" . $e->getMessage() . '</p>');
+    }
+	
+	//Check for the correct version of MySQL
+	if( version_compare($mysqli->server_info, '5.0', '<=') ) {
+	    throw new Exception("MySQL error: You must be running MySQL 5.0 or greater in order to install Omeka.");
+	}
 	
 	//Build the database if necessary
 	$show_tables_sql = "SHOW TABLES";
