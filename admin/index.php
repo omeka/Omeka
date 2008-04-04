@@ -2,6 +2,9 @@
 // Ladies and Gentlemen, start your timers
 define('APP_START', microtime(true));
 
+//Used by _define_web_root()
+define('ADMIN', true);
+
 // include the paths and define a theme path
 include '../paths.php';
 define('THEME_DIR', ADMIN_DIR.DIRECTORY_SEPARATOR.'themes');

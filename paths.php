@@ -80,9 +80,14 @@ function _define_web_root()
     }   
 
     //WEB_ROOT is always the root of the site, whereas WEB_DIR depends on the bootstrap used (public/admin)
-    define('WEB_ROOT', 		$base_root . '/' . rtrim($dir, '/admin') );
-    define('WEB_DIR',		$base_url);  
     
+    //@hack Remove the '/admin' part of the URL by regex (only if necessary)
+   if(defined('ADMIN')) {
+       $dir = preg_replace('/(.*)\/admin/', '$1', $dir, 1);
+   }
+   
+   define('WEB_ROOT', 		$base_root . '/' . $dir);
+   define('WEB_DIR',		$base_url);     
 }
 
 _define_web_root();

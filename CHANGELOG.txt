@@ -1,4 +1,8 @@
-Changelog in Omeka 0.9.1:
+Changelog for Omeka 0.9.1.1:
+
+* Fixes #381, base URL generation was broken
+
+Changelog for Omeka 0.9.1:
 
 * Adds the 'slug' field to the "add section" mini-form on the exhibit builder
 * Fixes a couple of security issues with determining base paths for URLs
