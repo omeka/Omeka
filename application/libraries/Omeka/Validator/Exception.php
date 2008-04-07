@@ -12,19 +12,16 @@ class Omeka_Validator_Exception extends Exception
 	 **/
 	public function __construct($errors)
 	{
-		if(is_array($errors)) {
-			$this->_errors = $errors;
+		$this->_errors = $errors;
+		
+		if($errors instanceof Omeka_Validator_Errors) {
+			$this->message = (string) $errors;
 		}
-		else {
-			$this->_errors[] = $errors;
-		}		
+		elseif(is_string($errors)) {
+			$this->message = $errors;
+		}
 	}	
-	
-	private function convertToMessage()
-	{
-
-	}
-	
+		
 	public function getErrors()
 	{
 		return $this->_errors;

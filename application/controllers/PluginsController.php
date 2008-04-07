@@ -68,9 +68,10 @@ class PluginsController extends Omeka_Controller_Action
 	
 	public function activateAction()
 	{
+		
 		//Get the plugin record, toggle its status and save it back
 		$plugin = get_db()->getTable('Plugin')->findBySql('name = ?', array($_POST['activate']), true );
-				
+			
 		//Toggle!
 		$plugin->active = !($plugin->active);
 		
@@ -110,17 +111,6 @@ class PluginsController extends Omeka_Controller_Action
 	}
 	
 	public function browseAction() {
-		$new_plugins = get_plugin_broker()->getNew();
-
-		if(count($new_plugins)) {
-			$plugin_to_install = array_pop($new_plugins);
-			
-			$this->_setParam('name', $plugin_to_install);
-			
-			//Run the config action with the installer turned on
-			return $this->installAction();
-		}
-				
 		//Get a list of all the plugins
 		
 		$broker = get_plugin_broker();
@@ -138,7 +128,7 @@ class PluginsController extends Omeka_Controller_Action
 			
 			$plugins[] = $plugin;
 		}
-		
+				
 		return $this->render('plugins/browse.php', compact('plugins'));
 	}
 	

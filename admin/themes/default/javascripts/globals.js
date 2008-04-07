@@ -68,8 +68,8 @@ function confirmDelete() {
 
 		
 Omeka.switchForm = function(radio) {
-		const Person = "Person";
-		const Institution = "Institution";
+		var Person = "Person";
+		var Institution = "Institution";
 
 		if(!document.getElementById) return;
 		var personElements = ['first_name','middle_name', 'last_name'];

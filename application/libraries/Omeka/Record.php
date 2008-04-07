@@ -30,6 +30,7 @@ class Omeka_Record implements ArrayAccess
 	
 	public function __construct()
 	{
+		$this->_errors = new Omeka_Validator_Errors;
 		$this->construct();
 	}
 	
@@ -190,7 +191,7 @@ class Omeka_Record implements ArrayAccess
 
 	protected function hasErrors()
 	{
-		return count($this->getErrors());
+		return (bool) count($this->getErrors());
 	}
 	
 	protected function addError($field, $msg)

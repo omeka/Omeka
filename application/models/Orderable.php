@@ -52,29 +52,28 @@ class Orderable extends Omeka_Record_Module
 	/**
 	 * This will realign the child nodes in ascending natural order after one is removed
 	 *
+	 * @param int
 	 * @return void
 	 **/
 	public function reorderChildren()
-	{
+	{		
 		//Retrieve all section IDs in ascending order, then update 
 		$db = get_db();
 		
 		$target = $this->childClass;
 		
 		$table = $db->$target;
+		$parentId = $this->record->id;
 		
-		$sql = "SELECT s.id, s.order FROM $table s WHERE s.{$this->childFk} = ? ORDER BY s.order ASC";
-		
-		$res = $db->query($sql, array($this->record->id));
-		
-		$i = 1;
-		$update = "UPDATE $table s SET s.order = ? WHERE s.id = ?";
-		
-		foreach ($res as $row) {
-			$child_id = (int) $row['id'];
-			$db->exec($update, array($i, $child_id));
-			$i++;
-		}
+		//I found this hot solution on the comments for this page:
+		//http://dev.mysql.com/doc/refman/5.0/en/update.html
+		$db->query("SET @pos=0;");
+		$db->query(
+			"UPDATE $table s 
+			SET s.`order` = (SELECT @pos := @pos + 1) 
+			WHERE s.{$this->childFk} = ? 
+			ORDER BY s.`order` ASC;", 
+			array($parentId));
 	}
 	
 	public function addChild(Omeka_Record $child)

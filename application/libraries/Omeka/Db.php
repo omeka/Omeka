@@ -58,6 +58,11 @@ class Omeka_Db
 		$this->prefix = (string) $prefix;		
 	}
 	
+	public function getConnection()
+	{
+	    return $this->_conn;
+	}
+	
 	/**
 	 * Delegate to the Zend_Db connection for a few specific actions like quoting, preparing, etc
 	 *

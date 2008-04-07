@@ -11,10 +11,8 @@
 			
 						
 			//If we don't have a valid exhibit ID, we need to save the exhibit first
-			if(isNaN(exhibit_id)) {
-				
+			if(isNaN(exhibit_id)) {				
 				saveNewExhibit();
-				
 			}
 			else {
 				loadSectionForm(exhibit_id);
@@ -88,9 +86,14 @@
 				});
 			},
 			//When adding a section does not work
-			onFailure: function(t, section) {
-				Omeka.flash(section['Flash']);
-			}
+			on422: function(t, section) {
+				var error = section['Flash'];
+				alert("Error:\n\n" + error);
+				Omeka.flash(error);
+				
+				//Update the section slug in case that is a cause of the error
+				$('section-slug').value = section['slug'];
+			},
 		})
 	}
 
@@ -126,17 +129,9 @@
 			parameters: $('exhibit-form').serialize() + "&output=json",
 			method:'post',
 
-			onSuccess: function(t, exhibit) {
-                
-                if(!exhibit) {
-                    exhibit = eval('(' + t.responseText + ')');
-                }
-                
+			onSuccess: function(t, exhibit) {                
 				Omeka.flash('Exhibit was saved successfully', 'success');
-				setExhibitId(exhibit['id']);
-				
-				//After a successful save, update the exhibit slug b/c that is most likely to be auto-generated
-				$('slug').value = exhibit['slug'];
+				setExhibitId(exhibit['id']);				
 				
 				exhibit_id = exhibit['id'];
 				
@@ -146,13 +141,15 @@
 				$('exhibit-form').action = "<?php echo uri('exhibits/edit/'); ?>" + exhibit_id;				
 			},
 			on404: function(t, exhibit) {
-			    Omeka.flash("An error has occurred in saving the exhibit: " + t.responseText);
+			    Omeka.flash("An error has occurred in saving the exhibit: " + t.responseText, 'error');
 			},
 			//An invalid form submission will return with a 422 response code
 			on422: function(t, exhibit) {
-			    //Prototype is supposed to do this but isn't for some reason - 1/30/08 [KK]
-			    var ex = eval('(' + t.responseText + ')');
-			    Omeka.flash(ex['Flash'], 'error');
+			    Omeka.flash(exhibit['Flash'], 'error');
+			},
+			onComplete: function(t, exhibit) {
+				//update the exhibit slug b/c that is most likely to be auto-generated
+				$('slug').value = exhibit['slug'];
 			}
 		});			
 	}

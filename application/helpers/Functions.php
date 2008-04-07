@@ -38,6 +38,9 @@ function auto_discovery_link_tag(){
 
 function display_files($files, $props = array()) {
 	
+	//If we don't have anything to display, don't render the empty HTML
+	if(empty($files)) {return;}
+	
 	if(is_array($files)) {
 		$output = '';
 		foreach ($files as $file) {
@@ -1075,7 +1078,7 @@ function display_empty($val, $alternative="[Empty]") {
  **/
 function file_download_uri($file, $format='fullsize')
 {
-	if(!$file->exists()) return false;
+	if(!$file or !$file->exists()) return false;
 	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
 	$uri = generate_url($options, 'download');
 	

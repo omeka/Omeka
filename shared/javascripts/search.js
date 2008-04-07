@@ -5,7 +5,6 @@ if(typeof Omeka == 'undefined') {
 Omeka.Search = {};
 
 Object.extend(Omeka.Search, {
-	
 	activateSearchButtons: function() {
 		var addButton = document.getElementsByClassName('add_search');
 	
@@ -101,6 +100,6 @@ Object.extend(Omeka.Search, {
 		//Hide the advanced form by default
 		advancedForm.getElementsBySelector('input, select').invoke('disable');
 		advancedForm.hide();
-	},
+	}
 
 });
