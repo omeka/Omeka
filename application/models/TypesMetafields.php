@@ -1,11 +1,18 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
 require_once 'Type.php';
 require_once 'Metafield.php';
+
 /**
- * TypesMetafields join record
- *
  * @package Omeka
- * 
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class TypesMetafields extends Omeka_Record
 {
@@ -23,6 +30,4 @@ class TypesMetafields extends Omeka_Record
 			$this->addError('metafield_id', 'Type must be related to a metafield');
 		}
 	}
-} // END class TypesMetafields extends Omeka_Record
-
-?>
+}

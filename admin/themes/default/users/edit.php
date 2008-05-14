@@ -8,7 +8,7 @@
 <input type="submit" name="submit" value="Save User Information" class="button" />
 </form>
 
-<form action="<?php echo uri('users/changePassword/', array('id'=>$user->id)); ?>" method="post" accept-charset="utf-8">
+<form action="<?php echo uri('users/change-password/', array('id'=>$user->id)); ?>" method="post" accept-charset="utf-8">
 
 <fieldset>
 	<legend>Change Password</legend>

@@ -1,7 +1,18 @@
 <?php 
 /**
-* Replacement for Doctrine_Record class
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * An implementation of ActiveRecord
+ *
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_Record implements ArrayAccess
 {
 	//Every table has a unique ID field
@@ -22,14 +33,21 @@ class Omeka_Record implements ArrayAccess
 	 * array $_related = array('Sections'=>'loadSections'), where key is a cacheable property and value is a callback to obtain it
 	 *  This will be used by self::__get() to automatically obtain/cache necessary elements
 	 *	Meanwhile, there is no need for retrieved data to be saveable, as form data is handled through a different mechanism entirely
-	 * @return void
+	 * @var array
 	 **/
 	protected $_related = array();
 	
 	private $_locked = false;
 	
-	public function __construct()
+	public function __construct($db=null)
 	{
+	    //Dependency injection, for testing
+	    if(!$db) {
+	        $db = Omeka_Context::getInstance()->getDb();
+	    }
+	    
+	    $this->_db = $db;
+	    
 		$this->_errors = new Omeka_Validator_Errors;
 		$this->construct();
 	}
@@ -115,15 +133,15 @@ class Omeka_Record implements ArrayAccess
 		
 		//Format the name of the plugin hook so it's in all lowercase with underscores
 		//Taken from Doctrine::tableize()
-		$plugin_hook = strtolower(preg_replace('~(?<=\\w)([A-Z])~', '_$1', $event));
-		
+		$plugin_hook = Inflector::underscore($event);
 		$plugin_hook .= '_' . strtolower(get_class($this));
 		
 		//Plugins called from within the record always receive that record instance as the first argument
 		array_unshift($args, $this);
 				
-		//This is duplicated from the fire_plugin_hook() function
-		call_user_func_array(array(get_plugin_broker(), $plugin_hook), $args);
+        if($broker = Omeka_Context::getInstance()->getPluginBroker()) {
+            call_user_func_array(array($broker, $plugin_hook), $args);
+        }
 	}
 	
 	protected function firePlugin($event)
@@ -224,9 +242,14 @@ class Omeka_Record implements ArrayAccess
 	{
 		if(!$class) $class = get_class($this);
 		
-		return get_db()->getTable($class);
+		return $this->getDb()->getTable($class);
 	}
-
+    
+    public function getDb()
+    {
+        return $this->_db;
+    }
+    
 	/**
 	 * Get an array of all the fields and their values
 	 *
@@ -248,7 +271,6 @@ class Omeka_Record implements ArrayAccess
 	/**
 	 * Validate the record, then insert into the DB
 	 *
-	 * @throws Omeka_Db_Exception
 	 * @return bool
 	 **/
 	public function save()
@@ -256,7 +278,7 @@ class Omeka_Record implements ArrayAccess
 		if($this->_locked) {
 			throw new Exception( 'Cannot save a locked record, man!' );
 		}
-			
+		
 		if(!$this->isValid()) return false;
 		
 		$was_inserted = !$this->exists();
@@ -273,7 +295,7 @@ class Omeka_Record implements ArrayAccess
 		//Only try to save columns in the $data that are actually defined columns for the model
 		$data_to_save = $this->toArray();
 	
-		$insert_id = get_db()->insert(get_class($this), $data_to_save);
+		$insert_id = $this->getDb()->insert(get_class($this), $data_to_save);
 		
 		if(is_numeric($insert_id)) {
 			$this->id = $insert_id;
@@ -333,7 +355,7 @@ class Omeka_Record implements ArrayAccess
 		$table = $this->getTable()->getTableName();
 		
 		$query = "DELETE FROM $table WHERE {$table}.id = ? LIMIT 1";
-		get_db()->exec($query, array((int) $this->id));
+		$this->getDb()->exec($query, array((int) $this->id));
 		
 		$this->id = null;
 		$this->runCallbacks('afterDelete');
@@ -404,7 +426,7 @@ class Omeka_Record implements ArrayAccess
 	public function saveForm(&$post)
 	{
 	/*
-		get_db()->beginTransaction();
+		$this->getDb()->beginTransaction();
 	*/
 		if(!empty($post))
 		{					
@@ -418,24 +440,18 @@ class Omeka_Record implements ArrayAccess
 			
 			$this->setArray($clean);
 	
-			try {
-				//Save will return TRUE if there are no validation errors
-				if($this->save()) {
-					$this->runCallbacks('afterSaveForm', $clean);
+			//Save will return TRUE if there are no validation errors
+			if($this->save()) {
+				$this->runCallbacks('afterSaveForm', $clean);
 
-					//	get_db()->commit();
-					return true;
-				}
-				else {
-					//	get_db()->rollback();
-					$errors = $this->getErrors();
-					throw new Omeka_Validator_Exception( $errors );
-				}
-			} catch (Omeka_Db_Exception $e) {
-				header("HTTP/1.0 404 Not Found");
-				Zend_Debug::dump( $e );exit;
+				//	$this->getDb()->commit();
+				return true;
 			}
-			
+			else {
+				//	$this->getDb()->rollback();
+				$errors = $this->getErrors();
+				throw new Omeka_Validator_Exception( $errors );
+			}			
 		}
 		return false;
 	}
@@ -475,34 +491,21 @@ class Omeka_Record implements ArrayAccess
            $values[] = $this->$pk;
         }
         
-        $res = get_db()->query($sql, $values);
+        $res = $this->getDb()->query($sql, $values);
 
         return ( ! is_array($res->fetch()));
 	}
 	
 	//Legacy methods (deprecate and remove these)
-
+	
 	/**
-	 * This function is kind of a hack, used instead of inflection because that would be slower
 	 *
-	 * @return string
-	 **/
-	public function getPluralized($lower=true)
-	{
-		$pluralName = !empty($this->_pluralized) ? strtolower($this->_pluralized) : get_class($this) .'s';
-		return ($lower) ? strtolower($pluralName) : $pluralName;
-	}
-
-	/**
-	 * @move this to the ACL
-	 *
-	 * @return void
+	 * @return boolean
 	 **/
 	protected function userHasPermission($rule) {
-		$resource = $this->getPluralized(false);				
-		$acl = get_acl();
-		return $acl->checkUserPermission($resource, $rule);
+		$resource = Inflector::pluralize(get_class($this));		
+		if($acl = Omeka_Context::getInstance()->getAcl()) {
+		    return $acl->checkUserPermission($resource, $rule);
+		}
 	}
 }
- 
-?>

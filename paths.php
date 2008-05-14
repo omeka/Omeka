@@ -25,6 +25,9 @@ $site['files']			= 'files';
 $site['exhibit_layouts']= 'exhibit_layouts';
 $site['exhibit_themes'] = 'exhibit_themes';
 $site['public_theme']	= 'themes';
+$site['views']          = 'views';
+$site['scripts']        = 'scripts';
+$site['migrations']     = 'migrations';
 
 // Define some constants based on those settings
 define('BASE_DIR', 			dirname(__FILE__));
@@ -46,6 +49,8 @@ define('FULLSIZE_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('FILES_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['files']);
 define('EXHIBIT_LAYOUTS_DIR',		SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_layouts']);
 define('EXHIBIT_THEMES_DIR',SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
+define('VIEW_SCRIPTS_DIR',  APP_DIR . DIRECTORY_SEPARATOR . $site['views'] . DIRECTORY_SEPARATOR . $site['scripts']);
+define('UPGRADE_DIR',       APP_DIR . DIRECTORY_SEPARATOR . $site['migrations']);
 
 //Define the main file that will load all the helpers
 define('HELPERS',			HELPER_DIR.DIRECTORY_SEPARATOR.'all.php');
@@ -102,6 +107,8 @@ define('WEB_FILES',		WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['files']);
 define('WEB_EXHIBIT_LAYOUTS', WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_layouts'] );
 define('WEB_EXHIBIT_THEMES',  WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
 define('WEB_PUBLIC_THEME',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['public_theme']);
+define('WEB_VIEW_SCRIPTS', WEB_ROOT.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['views'].DIRECTORY_SEPARATOR.$site['scripts']);
+
 
 set_include_path(get_include_path().PATH_SEPARATOR.LIB_DIR.PATH_SEPARATOR.MODEL_DIR);
 ?>

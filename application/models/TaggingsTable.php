@@ -1,7 +1,16 @@
 <?php 
 /**
-* TaggingsTable
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class TaggingsTable extends Omeka_Table
 {
 	/**
@@ -11,19 +20,19 @@ class TaggingsTable extends Omeka_Table
 	 **/
 	public function findBy($options=array(), $for=null, $returnCount=false) 
 	{
-		$select = new Omeka_Select;
-		$db = get_db();
+		$select = new Omeka_Db_Select;
+		$db = $this->getDb();
 		
 		if($returnCount) {
-			$select->from("$db->Taggings tg", "COUNT(DISTINCT(tg.id))");
+			$select->from(array('tg'=>$db->Taggings), "COUNT(DISTINCT(tg.id))");
 		}else {
-			$select->from("$db->Taggings tg", "tg.*");
+			$select->from(array('tg'=>$db->Taggings), "tg.*");
 		}
 				
 		if(isset($options['tag'])) {
 			
 			$tag = $options['tag'];
-			$select->innerJoin("$db->Tag t", "t.id = tg.tag_id");
+			$select->joinInner(array('t'=>$db->Tag), "t.id = tg.tag_id", array());
 			
 			if(is_array($tag)) {
 				$wheres = array();
@@ -43,7 +52,7 @@ class TaggingsTable extends Omeka_Table
 		
 		if(isset($options['entity']) or isset($options['user'])) {
 			
-			$select->innerJoin("$db->Entity e", "e.id = tg.entity_id");
+			$select->joinInner(array('e'=>$db->Entity), "e.id = tg.entity_id", array());
 			
 			if($entity = $options['entity']) {
 				
@@ -52,7 +61,7 @@ class TaggingsTable extends Omeka_Table
 				
 			}elseif($user = $options['user']) {
 				
-				$select->innerJoin("$db->User u", "u.entity_id = e.id");
+				$select->joinInner(array('u'=>$db->User), "u.entity_id = e.id", array());
 				
 				if(is_numeric($user)) {
 					$select->where("u.id = ?", $user);
@@ -80,5 +89,3 @@ class TaggingsTable extends Omeka_Table
 		}
 	}
 }
- 
-?>

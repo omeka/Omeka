@@ -1,9 +1,19 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
  * Taggable
  * Adaptation of the Rails Acts_as_taggable
- * @package: Omeka
- */
+ *
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Taggable extends Omeka_Record_Module
 {	
 	public function __construct(Omeka_Record $record) {
@@ -12,11 +22,11 @@ class Taggable extends Omeka_Record_Module
 		
 		$this->type = get_class($record);
 		
-		$this->tagTable = get_db()->getTable('Tag');
+		$this->tagTable = $this->getDb()->getTable('Tag');
 		
-		$this->joinTable = get_db()->getTable('Taggings');
+		$this->joinTable = $this->getDb()->getTable('Taggings');
 		
-		$this->conn = get_db();
+		$this->conn = $this->getDb();
 	}
 	
 	/**
@@ -34,7 +44,7 @@ class Taggable extends Omeka_Record_Module
 	{
 		$id = (int) $this->record->id;
 		
-		$db = get_db();
+		$db = $this->getDb();
 		
 		//What table should we be deleting taggings for
 		$record_type = $this->type;
@@ -218,5 +228,3 @@ class Taggable extends Omeka_Record_Module
 		
 	}
 }
-
-?>

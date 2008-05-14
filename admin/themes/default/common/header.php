@@ -12,7 +12,6 @@
 <link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 <link rel="stylesheet" media="screen" href="<?php echo css('niftyCorners'); ?>" />
 
-<link rel="stylesheet" media="screen" href="<?php echo layout_css(); ?>" />
 <!--[if lte IE 6]>
 <link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />
 <![endif]-->
@@ -42,10 +41,10 @@
 			<?php
 				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items'));
 				
-				if(has_permission('exhibits','add')){
+/* 				if(has_permission('exhibits','add')){
 				$header_navigation['Exhibits'] = uri('exhibits');
 			}
-				if(has_permission('Users','browse') ) {
+ */				if(has_permission('Users','browse') ) {
 					$header_navigation['Users'] = uri('users/browse');
 				}
 				
@@ -56,7 +55,7 @@
 				if(has_permission('super')) {
 					$header_navigation['Settings'] = uri('settings');
 				}
-				echo admin_nav($header_navigation);
+				echo nav($header_navigation);
 				fire_plugin_hook('load_navigation', 'main');
 			?>
 			</ul>

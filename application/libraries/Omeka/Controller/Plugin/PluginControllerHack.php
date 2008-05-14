@@ -1,5 +1,12 @@
 <?php 
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
  * Check to see if controllers added by plugins are being called.
  *
  * This is a hack that is necessary because as of ZF 1.0, the front controller
@@ -18,22 +25,21 @@ class Omeka_Controller_Plugin_PluginControllerHack extends Zend_Controller_Plugi
         $front = Zend_Controller_Front::getInstance();
         $dispatcher = $front->getDispatcher();
         $request = $this->getRequest();
-        $pluginBroker = Zend_Registry::get('plugin_broker');
+        if($pluginBroker = Omeka_Context::getInstance()->getPluginBroker()) {                    
+            $controllerDirs = $pluginBroker->getControllerDirs();
         
-        $controllerDirs = $pluginBroker->getControllerDirs();
-        
-        //This loop will check through all the controller directories added by plugins,
-        //provided that the current request is not dispatchable
-        while( !($isDispatchable = $dispatcher->isDispatchable($request)) ) {
-            $pluginDirectory = array_pop($controllerDirs);
+            //This loop will check through all the controller directories added by plugins,
+            //provided that the current request is not dispatchable
+            while( !($isDispatchable = $dispatcher->isDispatchable($request)) ) {
+                $pluginDirectory = array_pop($controllerDirs);
             
-            if($pluginDirectory) {
-                $front->setControllerDirectory($pluginDirectory);
-            }else {
-                break;
+                if($pluginDirectory) {
+                    $front->setControllerDirectory($pluginDirectory);
+                }else {
+                    break;
+                }
             }
         }
-        
         //If the request is still not dispatchable after all that nonsense
         //Then restore the controller directory to its original value
         //That way, it can find the ErrorController to handle the error
@@ -41,5 +47,4 @@ class Omeka_Controller_Plugin_PluginControllerHack extends Zend_Controller_Plugi
             $front->setControllerDirectory(CONTROLLER_DIR);
         }
     }
-} 
-?>
+}

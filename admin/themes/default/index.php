@@ -6,7 +6,7 @@
 			<div id="getting-started">
 				<h1>Getting Started with Omeka</h1>
 				<dl>
-					<dt class="archive"><a href="<?php echo uri('items'); ?>">Archive</a></dt>
+					<dt class="archive"><?php echo link_to('items', null, 'Archive'); ?></dt>
 					<dd class="archive">
 						<ul>
 							<li><a class="add" href="<?php echo uri('items/add'); ?>">Add an item to your archive</a></li>
@@ -15,7 +15,7 @@
 						<p>Manage items in your archive: add, edit, and delete items. Learn about item types and group items into collections.</p>
 					</dd>
 					
-				<?php if(has_permission('Exhibits','browse')): ?>
+				<?php /* if(has_permission('Exhibits','browse')): */ ?>
 					<dt class="exhibits"><a href="<?php echo uri('exhibits/browse'); ?>">Exhibits</a></dt>
 					<dd class="exhibits">
 						<ul>
@@ -24,7 +24,7 @@
 						</ul>
 						<p>Create and manage exhibits that display items from the archive.</p>
 					</dd>
-				<?php endif; ?>
+				<?php /* endif; */ ?>
 				
 				<?php if(has_permission('Users','browse')): ?>
 					<dt class="users"><a href="<?php echo uri('users/browse'); ?>">Users</a></dt>

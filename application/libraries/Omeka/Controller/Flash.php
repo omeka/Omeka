@@ -1,7 +1,23 @@
 <?php 
 /**
-* 
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * This is a replacement for Zend Framework's FlashMessenger
+ * that handles form validation errors and categorizes messages according
+ * to their status (currently SUCCESS, ERROR, ALERT). 
+ *
+ * @todo Refactor this so that it subclasses Zend's FlashMessenger action 
+ * helper (adding message status) and use Zend_Form's form validation
+ * instead of the form validation in this class.
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_Controller_Flash
 {
 	const SUCCESS = 1;
@@ -141,5 +157,3 @@ class Omeka_Controller_Flash
 		return @$msg[$field];		
 	}
 }
- 
-?>

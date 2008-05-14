@@ -33,5 +33,4 @@ class VersionedDirectoryIterator extends DirectoryIterator
 		}
 		return $dirs;
 	}
-} 
-?>
+}

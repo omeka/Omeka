@@ -6,15 +6,15 @@ class ExhibitTable extends Omeka_Table
 {
 	public function findBySlug($slug)
 	{
-		$db = get_db();
-		$select = new Omeka_Select;
-		$select->from("{$db->Exhibit} e", 'e.*');
+		$db = $this->getDb();
+		$select = new Omeka_Db_Select;
+		$select->from(array('e'=>$db->Exhibit), array('e.*'));
 		$select->where("e.slug = ?");
 		$select->limit(1);
 		
 		new ExhibitPermissions($select);
 		
-		return $this->fetchObjects($select, array($slug), true);		
+		return $this->fetchObject($select, array($slug));		
 	}
 	
 	/**
@@ -24,8 +24,8 @@ class ExhibitTable extends Omeka_Table
 	 **/
 	public function count()
 	{
-		$db = get_db();
-		$select = new Omeka_Select;
+		$db = $this->getDb();
+		$select = new Omeka_Db_Select;
 		
 		$select->from("$db->Exhibit e", "COUNT(DISTINCT(e.id))");
 		
@@ -36,21 +36,21 @@ class ExhibitTable extends Omeka_Table
 	
 	public function find($id)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
-		$select = new Omeka_Select;
+		$select = new Omeka_Db_Select;
 		
-		$select->from("$db->Exhibit e", "e.*");
+		$select->from(array('e'=>$db->Exhibit), array('e.*'));
 		$select->where("e.id = ?");
 		
 		new ExhibitPermissions($select);
 		
-		return $this->fetchObjects($select, array($id), true);
+		return $this->fetchObject($select, array($id));
 	}
 	
 	public function exhibitHasItem($exhibit_id, $item_id)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = "SELECT COUNT(i.id) FROM $db->Item i 
 				INNER JOIN $db->ExhibitPageEntry ip ON ip.item_id = i.id 
@@ -66,16 +66,16 @@ class ExhibitTable extends Omeka_Table
 	
 	public function findBy($params=array())
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
-		$select = new Omeka_Select;
+		$select = new Omeka_Db_Select;
 		
-		$select->from("{$db->Exhibit} e", 'e.*');
+		$select->from(array('e'=>$db->Exhibit), array('e.*'));
 
 		if(isset($params['tags'])) {
 			$tags = explode(',', $params['tags']);
-			$select->innerJoin("{$db->Taggings} tg", 'tg.relation_id = e.id');
-			$select->innerJoin("{$db->Tag} t", "t.id = tg.tag_id");
+			$select->joinInner(array('tg'=>$db->Taggings), 'tg.relation_id = e.id', array());
+			$select->joinInner(array('t'=>$db->Tag), "t.id = tg.tag_id", array());
 			foreach ($tags as $k => $tag) {
 				$select->where('t.name = ?', trim($tag));
 			}
@@ -98,13 +98,13 @@ class ExhibitTable extends Omeka_Table
 	 **/
 	public function findRandomFeatured()
 	{
-	    $db = get_db();
+	    $db = $this->getDb();
 	    
-	    $select = new Omeka_Select;
+	    $select = new Omeka_Db_Select;
 	    
-	    $select->from("$db->Exhibit e")->where("e.featured = 1")->order("RAND()")->limit(1);
+	    $select->from(array('e'=>$db->Exhibit))->where("e.featured = 1")->order("RAND()")->limit(1);
 	    
-	    return $this->fetchObjects($select, array(), true);
+	    return $this->fetchObject($select);
 	}
 }
  

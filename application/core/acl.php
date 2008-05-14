@@ -4,42 +4,56 @@
  * 
  **/
 
-$acl = new Omeka_Acl();
+//Define our resources/privileges in a flat list here
+$resources = array(
+    'Items'         =>  array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
+    'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
+    'Entities'      =>  array('add','edit','displayEmail','delete', 'browse'),
+    'Files'         =>  array('edit','delete'),
+    'Plugins'       =>  array('browse','config', 'install'),
+    'Settings'      =>  array('edit'),
+    'Upgrade'       =>  array('migrate'),
+    'Tags'          =>  array('rename','remove', 'browse'),
+    'Themes'        =>  array('browse','switch'),
+    'Types'         =>  array('add','edit','delete', 'browse'),
+    'Users'         =>  array('browse','show','add','edit','delete','showRoles','editRoles','makeSuperUser', 'changeRole', 'deleteSuperUser', 'togglePrivilege')
+);
+
+//Each entry in this array is the set of the values passed to $acl->allow()
+$allowList = array(
+    //Anyone can login, logout, retrieve lost password and activate their accounts
+    array(null,'Users',array('login', 'logout', 'forgot-password', 'activate')),
+    //Anyone can browse Items, Item Types, Tags and Collections
+    array(null, array('Items', 'Types', 'Tags', 'Collections'), array('browse')),
+    //Super user can do anything
+    array('super'),
+    //Researchers can view items and collections that are not yet public
+    array('researcher',array('Items', 'Collections'),array('showNotPublic')),
+    //Contributors can add and tag items, edit or delete their own items, and see their items that are not public
+    array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
+    array('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage')),
+    array('admin','Collections',array('add','edit','delete', 'showNotPublic')),
+    array('admin','Entities',array('add','edit','delete', 'displayEmail', 'browse')),
+    array('admin','Files',array('edit','delete')),
+    array('admin','Tags',array('rename','remove')),
+    array('admin','Types',array('add','edit','delete')),
+    array('admin','Users',array('browse','show','add','edit','delete','showRoles', 'changeRole')) 
+); 
+
+/* $acl = new Omeka_Acl($roles, $resources, $allowList);  */
+
+$acl = new Omeka_Acl;
+
+$acl->loadResourceList($resources);
+
+$acl->addRole(new Zend_Acl_Role('researcher'));
 
 $acl->addRole(new Zend_Acl_Role('super'));
-$acl->addRole(new Zend_Acl_Role('researcher'));
+$acl->addRole(new Zend_Acl_Role('admin'), 'super');
+
+//Contributors do not inherit from the other roles
 $acl->addRole(new Zend_Acl_Role('contributor'));
-$acl->addRole(new Zend_Acl_Role('admin'));
 
-//The default role has no special permissions and is used for site visitors who are not logged in
-//This should be referenced as little as possible in the event that the implementation changes (likely)
-$acl->addRole(new Zend_Acl_Role('default'));
+$acl->loadAllowList($allowList);
 
-$acl->registerRule(new Zend_Acl_Resource('Items'), array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage'));
-$acl->registerRule(new Zend_Acl_Resource('Collections'), array('add','edit','delete', 'showNotPublic'));
-$acl->registerRule(new Zend_Acl_Resource('Entities'), array('add','edit','displayEmail','delete'));
-$acl->registerRule(new Zend_Acl_Resource('Files'), array('edit','delete'));
-$acl->registerRule(new Zend_Acl_Resource('Plugins'), array('browse','show','config', 'install'));
-$acl->registerRule(new Zend_Acl_Resource('Settings'), array('edit'));
-$acl->registerRule(new Zend_Acl_Resource('Tags'), array('rename','remove'));
-$acl->registerRule(new Zend_Acl_Resource('Themes'), array('browse','switch'));
-$acl->registerRule(new Zend_Acl_Resource('Types'), array('add','edit','delete'));
-$acl->registerRule(new Zend_Acl_Resource('Users'), array('browse','show','add','edit','delete','showRoles','editRoles','makeSuperUser', 'changeRole', 'deleteSuperUser'));
-$acl->registerRule(new Zend_Acl_Resource('Exhibits'), array('add', 'edit', 'delete', 'addPage', 'editPage', 'deletePage', 'addSection', 'editSection', 'deleteSection', 'save', 'showNotPublic'));
-
-$acl->allow('super'); 
-
-$acl->allow('researcher','Items',array('showNotPublic'));
-$acl->allow('researcher','Collections',array('showNotPublic'));
-
-$acl->allow('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic'));
-
-$acl->allow('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage'));
-$acl->allow('admin','Collections',array('add','edit','delete', 'showNotPublic'));
-$acl->allow('admin','Entities',array('add','edit','delete', 'displayEmail'));
-$acl->allow('admin','Files',array('edit','delete'));
-$acl->allow('admin','Tags',array('rename','remove'));
-$acl->allow('admin','Types',array('add','edit','delete'));
-$acl->allow('admin','Users',array('browse','show','add','edit','delete','showRoles', 'changeRole'));
-$acl->allow('admin','Exhibits',array('add', 'edit', 'delete', 'addPage', 'editPage', 'deletePage', 'addSection', 'editSection', 'deleteSection', 'save', 'showNotPublic'));
 ?>

@@ -36,7 +36,7 @@ class UploadTestCase extends OmekaTestCase
 		
 	protected function setUpImageMagick()
 	{
-		$config = Zend_Registry::get('config_ini');
+		$config = Omeka_Context::getInstance()->getConfig('basic');
 		set_option('path_to_convert', $config->paths->imagemagick);		
 	}
 	

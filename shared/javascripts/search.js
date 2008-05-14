@@ -6,9 +6,9 @@ Omeka.Search = {};
 
 Object.extend(Omeka.Search, {
 	activateSearchButtons: function() {
-		var addButton = document.getElementsByClassName('add_search');
+		var addButton = $$('.add_search');
 	
-		var removeButtons = document.getElementsByClassName('remove_search');
+		var removeButtons = $$('.remove_search');
 	
 		var addAdvancedSearch = function() {
 			//Copy the div that is already on the search form
@@ -42,11 +42,11 @@ Object.extend(Omeka.Search, {
 			});	
 									
 			//Make the button special again
-			var add = div.getElementsByClassName('add_search').first();
+			var add = div.select('.add_search').first();
 	
 			add.onclick = addAdvancedSearch;
 	
-			var remove = div.getElementsByClassName('remove_search').first();
+			var remove = div.select('.remove_search').first();
 			removeAdvancedSearch(remove);
 		}
 	
@@ -75,14 +75,14 @@ Object.extend(Omeka.Search, {
 		var disableAndHide = function(form) {
 			new Effect.BlindUp(form);
 		//	form.hide();
-			form.getElementsBySelector('input, select').invoke('disable');
+			form.select('input, select').invoke('disable');
 			$('advanced_search_header').innerHTML = 'Show Advanced Options';
 		}
 	
 		var enableAndShow = function(form) {
 			new Effect.BlindDown(form);
 	//		form.show();
-			form.getElementsBySelector('input, select').invoke('enable');
+			form.select('input, select').invoke('enable');
 			$('advanced_search_header').innerHTML = 'Hide Advanced Options';
 		}
 	
@@ -98,7 +98,7 @@ Object.extend(Omeka.Search, {
 		Event.observe('advanced_search_header', 'click', toggleAdvancedForm);
 		
 		//Hide the advanced form by default
-		advancedForm.getElementsBySelector('input, select').invoke('disable');
+		advancedForm.select('input, select').invoke('disable');
 		advancedForm.hide();
 	}
 

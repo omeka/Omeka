@@ -1,34 +1,58 @@
 <?php 
 /**
-* Table classes are instantiated by Omeka_Db.  
-* A new instance is created for each call to a table method, so keep these lightweight
-* Classes that override Omeka_Table must follow the naming convention: model name + Table (e.g, ExhibitTable)
-* Classes that override Omeka_Table are not loaded automatically so must be req_once'd within the model itself
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * Table classes are instantiated by Omeka_Db.  
+ * A new instance is created for each call to a table method, so keep these 
+ * lightweight.  Classes that override Omeka_Table must follow the naming 
+ * convention: model name + Table (e.g, ExhibitTable).  Classes that override 
+ * Omeka_Table are not loaded automatically so they must be req_once'd within 
+ * the model itself.
+ *
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_Table
 {
 	//What kind of model should this table class retrieve from the DB
 	protected $_target;
 	
-	public function __construct($targetModel)
+	/**
+	 * Instantiate
+	 * 
+	 * @param string Class name of the table's model
+	 * @param Omeka_Db Database object to use for queries
+	 * @return void
+	 **/
+	public function __construct($targetModel, $db)
 	{
 		$this->_target = $targetModel;
+		$this->_db = $db;
 	}
 	
 	/**
-	 * A wrapper for retrieving the database connection in table classes (may not be necessary)
-	 *
-	 * @return Omeka_Db
-	 **/
-	public function getConn()
+     * @internal HACK But it will do for now.
+     * 
+     * @param string Class name
+     * @return string
+     **/
+    public function getTableAlias() {
+        return strtolower($this->_target[0]);
+    }
+	
+	public function getDb()
 	{
-		return get_db();
+	    return $this->_db;
 	}
 	
 	/**
 	 * Determine whether or not a model has a given column
-	 *
-	 * As of 12-11-07, only used in ItemTable class
 	 * 
 	 * @param string Field name
 	 * @return bool
@@ -61,7 +85,7 @@ class Omeka_Table
 	public function getTableName()
 	{
 		$target = $this->_target;
-		return $this->getConn()->$target;
+		return $this->getDb()->$target;
 	}
 	
 	/**
@@ -75,17 +99,10 @@ class Omeka_Table
 		//Cast to integer to prevent SQL injection
 		$id = (int) $id;
 
-		$table = $this->getTableName();
-
-		$sql = "SELECT t.* FROM $table t WHERE t.id = $id LIMIT 1";
-//var_dump( $sql );exit;
-		$records = $this->fetchObjects($sql);
-
-		if (count($records) === 0) {
-		    return false;
-		}
-
-		return current($records);
+		$select = $this->getSelect();
+		$select->where( $this->getTableAlias().'.id = ?', $id);
+		$select->limit(1);
+		return $this->fetchObject($select, array());
 	}
 	
 	/**
@@ -98,50 +115,100 @@ class Omeka_Table
 	 **/
 	public function findAll()
 	{
-		$table = $this->getTableName();
-		
-		$sql = "SELECT t.* FROM $table t";
-		
-		return $this->fetchObjects($sql);
+		$select = $this->getSelect();
+		return $this->fetchObjects($select);
+	}
+    
+    /**
+     * Retrieve a set of model objects based on a given number of parameters
+     * 
+     * @param array A set of parameters by which to filter the objects
+     * that get returned from the DB
+     * @return array|null The set of objects that is returned
+     **/
+	public function findBy($params=array())
+	{
+	    $select = $this->getSelectForFindBy($params);
+	    return $this->fetchObjects($select);
 	}
 	
 	/**
-	 * Alias for self::findAll(), which may overridden by subclasses to actually handle parameters
-	 *
-	 * @return array|false
+	 * Retrieve a Select object for this table
+	 * 
+	 * @param string
+	 * @return Omeka_Db_Select
 	 **/
-	public function findBy($params=array())
+	public function getSelect()
 	{
-	    return $this->findAll();
+	    $select = new Omeka_Db_Select;
+	    $alias = $this->getTableAlias();
+	    $select->from(array($alias=>$this->getTableName()), "$alias.*");	
+	    return $select;    
 	}
 	
+	/**
+	 * Retrieve a Select object that has had browsing filters applied to it
+	 * 
+	 * @param array
+	 * @return Omeka_Db_Select
+	 **/
+	public function getSelectForFindBy($params=array())
+	{
+	    $select = $this->getSelect();
+	    $this->applySearchFilters($select, $params);
+	    return $select;
+	}
+	
+	/**
+	 * Apply a set of filters to a SELECT statement based on the parameters given
+	 * 
+	 * @param Zend_Db_Select
+	 * @param array
+	 * @return void
+	 **/
+	public function applySearchFilters($select, $params) {}
+		
 	/**
 	 * Return a set of objects based on a SQL WHERE predicate (see RoR / other frameworks)
 	 *
 	 * @return array|false
 	 **/
-	public function findBySql($sql, array $params=null, $findOne=false)
+	public function findBySql($sql, array $params=array(), $findOne=false)
 	{
-		$table = $this->getTableName();
-		
-		$sql = "SELECT t.* FROM $table t WHERE $sql";
-		
-		return $this->fetchObjects($sql, $params, $findOne);
+        $select = $this->getSelect();
+		$select->where($sql, $params);
+		return $findOne ? $this->fetchObject($select, $params) : $this->fetchObjects($select, $params);
 	}
 	
 	/**
-	 * Retrieve a count of all the rows in the table
+	 * Retrieve a count of all the rows in the table.
 	 *
-	 * @return int
+	 * @return integer
 	 **/
-	public function count()
+	public function count($params=array())
 	{
-		$table = $this->getTableName();
-		
-		$select = new Omeka_Select;
-		$select->from("$table t ", "COUNT(DISTINCT(t.id))");
-		
-		return get_db()->fetchOne($select);
+		$select = $this->getSelectForCount($params);
+		return $this->getDb()->fetchOne($select);
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @param array
+	 * @return Omeka_Db_Select
+	 **/
+	public function getSelectForCount($params=array())
+	{
+        $select = $params ? $this->getSelectForFindBy($params) : $this->getSelect();
+        
+        //Make sure the SELECT only pulls down the COUNT() column
+        $select->reset('columns');        
+        $alias = $this->getTableAlias();
+        $select->from(array(), "COUNT(DISTINCT($alias.id))");
+        
+        //Reset the GROUP and ORDER BY clauses if necessary
+        $select->reset('order')->reset('group');
+        return $select;	    
 	}
 	
 	/**
@@ -154,13 +221,9 @@ class Omeka_Table
 	 **/
 	public function checkExists($id)
 	{
-		$table = $this->getTableName();
-		
-		$select = new Omeka_Select;
-		$select->from("$table t", "COUNT(DISTINCT(t.id))")
-				->where("t.id = ?", $id);
-				
-		$count = get_db()->fetchOne($select);
+	    $alias = $this->getTableAlias();
+		$select = $this->getSelectForCount()->where("$alias.id = ?", $id);
+		$count = $this->getDb()->fetchOne($select);
 		
 		return ($count == 1);
 	}
@@ -173,20 +236,11 @@ class Omeka_Table
 	 * @param bool $onlyOne If true, then return only the first object from the result set
 	 * @return mixed - array of Omeka_Record | Omeka_Record | null | empty array
 	 **/
-	public function fetchObjects($sql, $params=array(), $onlyOne=false)
-	{
-		$db = $this->getConn();
-		
-		$res = $db->query($sql, $params);
-		
+	public function fetchObjects($sql, $params=array())
+	{		
+		$res = $this->getDb()->query($sql, $params);
 		$data = $res->fetchAll();
-		
-		if(!count($data) or !$data) {
-			return !$onlyOne ? array() : null;
-		}
-					
-		if($onlyOne) return $this->recordFromData(current($data));
-		
+							
 		//Would use fetchAll() but it can be memory-intensive
 		$objs = array();
 		foreach ($data as $k => $row) {
@@ -197,7 +251,19 @@ class Omeka_Table
 	}
 	
 	/**
-	 * @see Omeka_Table::fetchObjects()
+	 * Populate and return one model object based on the SQL statement that
+	 * is provided.
+	 * 
+	 * @param string|Omeka_Db_Select
+	 * @return Omeka_Record
+	 **/
+	public function fetchObject($sql, array $params=array())
+	{
+	    $row = $this->getDb()->fetchRow($sql, $params);
+        return !empty($row) ? $this->recordFromData($row): null;
+	}
+	
+	/**
 	 *
 	 * @return Omeka_Record
 	 **/
@@ -209,5 +275,3 @@ class Omeka_Table
 		return $obj;
 	}
 }
-
-?>

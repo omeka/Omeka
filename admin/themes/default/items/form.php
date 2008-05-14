@@ -19,14 +19,13 @@
 			image.src = "<?php echo img('loader2.gif'); ?>";
 			var params = 'item_id=<?php echo $item->id; ?>&type_id='+this.getValue();
 						
-			new Ajax.Request('<?php echo uri("items/changeType") ?>', {
+			new Ajax.Request('<?php echo uri("items/change-type") ?>', {
 				parameters: params,
 				onCreate: function(t) {
 					typeSelectLabel.appendChild(image);
 				},
 				onFailure: function(t) {
 					alert(t.status);
-					image.remove();
 				},
 				onComplete: function(t) {
 					var form = $('type-metadata-form');
@@ -83,16 +82,12 @@
 			method: 'post',
 			onSuccess: function(t) {
 				//Fire the other ajax request to update the page
-				new Ajax.Request("<?php echo uri('items/_tags_remove/'); ?>", {
+				new Ajax.Updater('tag-form', "<?php echo uri('items/tag-form/'); ?>", {
 					parameters: {
 						'id': "<?php echo $item->id; ?>"
 					},
-					onSuccess: function(t) {
-						$('tags-list').hide();
-						$('tags-list').update(t.responseText);
-						Effect.Appear('tags-list', {duration: 1.0});
-					},
 					onComplete: function() {
+					    Effect.Appear('tag-form', {duration: 1.0});
 						ajaxifyTagRemoval();
 					}
 				});
@@ -128,7 +123,7 @@
 			<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
 			</div>
 			<div id="type-metadata-form">
-			<?php common('_type', compact('item'), 'items'); ?>
+			<?php common('change-type', compact('item'), 'items'); ?>
 			</div>
 			</fieldset>
 			<fieldset>
@@ -367,22 +362,9 @@
 	<fieldset>
 		<legend>Tagging</legend>
 			<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
-			<div class="field">
-			<label for="tags-field">Your Tags</label>
-			<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
+			<div id="tag-form">
+			<?php common('tag-form', compact('item'), 'items'); ?>
 			</div>
-		
-			<?php fire_plugin_hook('append_to_item_form_tags', $item); ?>
-			
-			<?php if(has_tags($item) and has_permission('Items','untagOthers')): ?>
-			<div class="field">
-				<label for="all-tags">Remove Other Users' Tags</label>
-				<ul id="tags-list">
-					<?php common('_tags_remove', compact('item'), 'items'); ?>
-				</ul>
-			</div>
-			<?php endif; ?>
-			
 	</fieldset>
 	<fieldset id="additional-plugin-data">
 		<?php fire_plugin_hook('append_to_item_form', $item); ?>

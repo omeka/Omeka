@@ -1,10 +1,15 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 /**
- * MetafieldTable
- *
  * @package Omeka
- * 
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class MetafieldTable extends Omeka_Table
 {
@@ -18,7 +23,7 @@ class MetafieldTable extends Omeka_Table
 	 **/
 	public function findIdFromName($name)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT mf.id FROM $db->Metafield mf WHERE mf.name = ? LIMIT 1";
 		return (int) $db->fetchOne($sql, array($name));
 	}
@@ -28,6 +33,4 @@ class MetafieldTable extends Omeka_Table
 		
 		return current($metafields);
 	}
-} // END class MetafieldTable extends Omeka_Table
-
-?>
+}

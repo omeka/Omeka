@@ -1,5 +1,5 @@
 <?php
-class MiscellaneousTestCase extends OmekaTestCase
+class MiscellaneousTestCase extends UnitTestCase
 {
 	public function testValidatorErrorsConvertsToNiceErrorMsg()
 	{

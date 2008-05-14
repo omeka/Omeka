@@ -1,7 +1,21 @@
 <?php 
 /**
-*  Current migration # is passed as an invoke argument to this controller
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * @see Omeka_Controller_Action
+ */
+require_once 'Omeka/Controller/Action.php';
+ 
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/ 
 class UpgradeController extends Omeka_Controller_Action
 {
 	/**
@@ -15,44 +29,19 @@ class UpgradeController extends Omeka_Controller_Action
 			parent::__construct($req, $resp, $invoke);
 		} catch (Exception $e) {}
 		
-		$this->_view = new Omeka_View($this);
-		$this->_view->addScriptPath(CORE_DIR . DIRECTORY_SEPARATOR . 'templates');
-		$this->_view->addAssetPath(
-		    CORE_DIR . DIRECTORY_SEPARATOR . 'templates', 
-		    WEB_ROOT . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'templates');
-		require_once HELPERS;		
-	}
-	
-	/**
-	 * Check to see if the migration is at the right #, then allow or disallow further access
-	 *
-	 * @return void
-	 **/
-	public function init()
-	{	    
-	    //Test to see whether we need to upgrade Omeka or not  
-		if(!$this->migrationIsNecessary()) {
-		    $this->getRequest()->setActionName('completed');
-		}
-	}
-	
-	/**
-	 * Quick way to determine whether or not it's necessary to migrate the data
-	 *
-	 * @return void
-	 **/
-	protected function migrationIsNecessary()
-	{
-	    $startMigration = $this->getStartMigration();
-  
-	    $endMigration = (int) OMEKA_MIGRATION;
-	    
-	    return ($startMigration < $endMigration);
+		//Make sure we only load the built-in view scripts when upgrading
+		$this->view->setScriptPath(VIEW_SCRIPTS_DIR);
+        $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);        
 	}
 	
 	protected function getStartMigration()
 	{
 	    return (int) get_option('migration');
+	}
+	
+	public function browseAction()
+	{
+	    $this->_forward('migrate');
 	}
 	
 	/**
@@ -61,40 +50,38 @@ class UpgradeController extends Omeka_Controller_Action
 	 * @return void
 	 **/
 	public function migrateAction()
-	{
-	    //If we've already migrated the database, somebody is trying to pass bad data
-	    if(!$this->migrationIsNecessary()) {
-	        return $this->completedAction();
-	    }
-	    
+	{	    
     	require_once 'Omeka/Upgrader.php';
-    	$upgrader = new Omeka_Upgrader($this->getStartMigration(), OMEKA_MIGRATION);	   
-    	$upgrader->run(); 
     	
-    	$output = $upgrader->getOutput();
-    	$errors = $upgrader->getErrors();
+    	$from = $this->getStartMigration();
+    	
+    	//The version# to migrate to can be set in the query string
+    	$to = $this->_getParam('to', OMEKA_MIGRATION);
+
+        $output = array();
+        $errors = array();
+        $success = false;
+
+        if(!is_numeric($to)) {
+            $errors[] = "A valid migration # must be passed to upgrade Omeka!";
+        }else {
+           	//If we don't have to migrate the data, show the 'completed' page instead
+        	if($from == $to) {
+        	    $this->redirect->goto('completed');
+        	}
+
+        	$upgrader = new Omeka_Upgrader($from, $to);	   
+        	$upgrader->run(); 
+
+        	$output = $upgrader->getOutput();
+        	$errors = $upgrader->getErrors();            
+        }
     	
     	$success = (bool) !count($errors);
     	
-    	$this->render('upgrade/status.php', compact('output','errors', 'success'));
+    	$this->render(compact('output','errors', 'success'));
 	}
 	
 	public function completedAction()
-	{   
-	    $this->render('upgrade/completed.php');	    
-	}
-	
-	/**
-	 * Simplified version of the parent::render() method
-	 *
-	 * @return void
-	 **/
-	public function render($file, $vars = array())
-	{
-	    $this->_view->assign($vars);
-	    $body = $this->_view->render($file);
-	    $this->getResponse()->appendBody($body);
-	}
+	{}
 }
- 
-?>

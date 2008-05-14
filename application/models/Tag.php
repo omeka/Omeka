@@ -1,10 +1,19 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
 require_once 'Item.php';
 require_once 'TagTable.php';
 require_once 'Exhibit.php';
+
 /**
  * @package Omeka
- * 
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class Tag extends Omeka_Record { 
   
@@ -21,7 +30,7 @@ class Tag extends Omeka_Record {
 	 **/
 	protected function _delete()
 	{
-		$taggings = get_db()->getTable('Taggings')->findBySql('tag_id = ?', array((int) $this->id));
+		$taggings = $this->getDb()->getTable('Taggings')->findBySql('tag_id = ?', array((int) $this->id));
 		
 		foreach ($taggings as $tagging) {
 			$tagging->delete();
@@ -35,7 +44,7 @@ class Tag extends Omeka_Record {
 	 **/
 	protected function deleteForEntity(Entity $entity)
 	{
-		$taggings = get_db()->getTable('Taggings')
+		$taggings = $this->getDb()->getTable('Taggings')
 				->findBySql('entity_id = ? AND tag_id = ?', 
 					array( (int)$entity->id, (int) $this->id));
 		
@@ -67,7 +76,7 @@ class Tag extends Omeka_Record {
 			return parent::fieldIsUnique($field);
 		}
 		else {
-			$db = get_db();
+			$db = $this->getDb();
 			$sql = "SELECT id FROM $db->Tag WHERE name COLLATE utf8_bin LIKE ?";
 			$res = $db->query($sql, array($this->name));
 			return ( ! is_array($id = $res->fetch())) or ($this->exists() and $id['id'] == $this->id);
@@ -122,7 +131,7 @@ class Tag extends Omeka_Record {
 				//So we should delete the join because it already exists
 				try {
 					$tagging->save();
-				} catch (Omeka_Db_Exception $e) {
+				} catch (Zend_Db_Exception $e) {
 					$tagging->delete();
 				}
 			}
@@ -150,5 +159,3 @@ class Tag extends Omeka_Record {
 					
 	}
 }
-
-?>

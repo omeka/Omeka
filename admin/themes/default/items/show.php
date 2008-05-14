@@ -2,52 +2,29 @@
 <?php common('archive-nav'); ?>
 
 <script type="text/javascript" charset="utf-8">
-	
-	function setFavorite() {
-		if(!document.getElementById('favorite')) return;
-		var opt = {
-			onComplete: function(t, item) {
-				if(item.favorite) {
-					$('favorite').update("Favorite");
-				} else {
-					$('favorite').update("Not Favorite");
-				}
-			}
-		}
-		new Ajax.Request("<?php echo uri('json/items/show/');?>?makeFavorite=true&id=<?php echo h($item->id);?>", opt);
-		return false;
-	}
-
+    
+    //Handles tagging of items via AJAX
 	function modifyTags() {
 		//Add the tags with this request
-		new Ajax.Request("<?php echo uri('items/show/'.$item->id); ?>", {
-			parameters: $('tags-form').serialize(),
-			method: 'post',
-			//Initial tagging request must be completed before displaying the new tags
+		$('tags-form').request({
 			onComplete: function(t) {
-				new Ajax.Request("<?php echo uri('items/ajaxTagsField/?id='.$item->id) ?>", {
-					onSuccess: function(t) {
-						$('tags').hide();
-						$('tags').update(t.responseText);
-						Effect.Appear('tags', {duration: 1.0});
-					}
-				});
-			}
-		});
-		return false;
+				$('tags').hide();
+				$('tags').update(t.responseText);
+				Effect.Appear('tags', {duration: 1.0});
+			}		    
+		});		
 	}
 	
 	Event.observe(window, 'load', function() {
-		if(!$('favorite')) return;
-		//Make the favorites thing work w/ AJAX
-		$('favorite').setAttribute('href', 'javascript:void(0)');
-		Event.observe("favorite", "click", setFavorite);
-		
-		$('tags-form').onsubmit = function() {
-			modifyTags();
-			return false;
-		}
+		$('tags-submit').observe('click', function(e){
+		    Event.stop(e);
+		    modifyTags();
+		});
 	});
+	
+	//End tagging functions
+	
+	//Image gallery functions
 	function swapImage(which,where) {
 	  var source = which.getAttribute("href");
 	  where.setAttribute("src",source);
@@ -68,6 +45,8 @@
 	}
 
 	new Event.observe(window,'load',imageGallery);
+	
+	//End image gallery functions
 </script>
 <div id="primary">
 <?php echo flash(); ?>
@@ -211,13 +190,6 @@ echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 
 </div>
 
-<?php /* ?>
-<div id="mark-favorite" class="field">
-	<h3>Favorite</h3>
-	<a href="<?php echo uri('items/show/'.$item->id).'?makeFavorite=true';?>" id="favorite"><?php if($item->isFavoriteOf($user)): echo "Favorite"; else: echo "Not favorite";endif;?></a>
-</div>
-<?php */ ?>
-
 <?php if ( has_collection($item) ): ?>
 	<div id="collection" class="field">
 	<h3>Collection</h3>
@@ -247,7 +219,8 @@ echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 	<?php if ( has_permission('Items','tag') ): ?>
 		<div id="my-tags" class="field">
 		<h3>My Tags</h3>
-		<form id="tags-form" method="post" action="">
+		<form id="tags-form" method="post" action="<?php echo uri('items/modify-tags/') ?>">
+		    <input type="hidden" name="id" value="<?php echo $item->id; ?>" id="item-id">
 			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
 			<input type="submit" name="modify_tags" value="Add/Change Your Tags" id="tags-submit">
 		</form>
@@ -258,11 +231,7 @@ echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 		<h3>All Tags</h3>
 		<div id="tags">
 			<ul class="tags">
-				<?php foreach( $item->Tags as $key => $tag ): ?>
-					<li class="tag">
-						<a href="<?php echo uri('items/browse/tag/'.urlencode($tag->name));?>" rel="<?php echo h($tag->id); ?>"><?php echo h($tag->name); ?></a>
-					</li>
-				<?php endforeach; ?>
+				<?php common('tag-list', compact('item'), 'items'); ?>
 			</ul>
 		</div>
 	</div>

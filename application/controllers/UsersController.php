@@ -1,19 +1,38 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'User.php';
-require_once 'Zend/Filter/Input.php';
+ 
+/**
+ * @see Omeka_Controller_Action
+ **/
 require_once 'Omeka/Controller/Action.php';
+
+/**
+ * @see User.php
+ */ 
+require_once 'User.php';
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class UsersController extends Omeka_Controller_Action
-{	
-	protected $_redirects = array(
-		'add'=> array('users/show/id', array('id'))
-	);
-		
+{			
 	public function init() {
 		$this->_modelClass = 'User';
-		$this->before_filter('checkPermissions');		
+		$this->beforeFilter('checkPermissions');		
+		
+		$this->_auth = Omeka_Context::getInstance()->getAuth();
+	}
+	
+	public function getAcl()
+	{
+	    return Omeka_Context::getInstance()->getAcl();
 	}
 	
 	/**
@@ -41,7 +60,7 @@ class UsersController extends Omeka_Controller_Action
            case 'roles':
                if(!$this->isAllowed('showRoles')) {
         			$this->flash( 'Cannot view the list of user roles!' );
-    				$this->_redirect('users/browse');
+    				$this->redirect->goto('browse');
         		}
                break;
            
@@ -58,7 +77,7 @@ class UsersController extends Omeka_Controller_Action
 	 **/
 	private function checkUserSpecificPerms($action)
 	{
-        $user = Omeka::loggedIn();
+        $user = $this->getCurrentUser();
         
         try {
            $record = $this->findById();
@@ -110,7 +129,7 @@ class UsersController extends Omeka_Controller_Action
     	    }	            
         } catch (Exception $e) {
             $this->flash($e->getMessage(), Omeka_Controller_Flash::GENERAL_ERROR);
-            $this->_redirect('users/browse');
+            $this->redirect->goto('browse');
         }
 	}
 	
@@ -157,32 +176,30 @@ class UsersController extends Omeka_Controller_Action
 				$this->flash('The email address you provided is invalid.');
 			}			
 
-		}
-		
-		return $this->render('users/forgotPassword.php');
+		}		
 	}
 	
 	public function activateAction()
 	{
 		$hash = $this->_getParam('u');
 		$ua = $this->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
-		
+			
 		if(!$ua) {
-			$this->errorAction();
-			return;
+            return $this->_forward('error');
 		}
 		
 		if(!empty($_POST)) {
 			if($_POST['new_password1'] == $_POST['new_password2']) {
 				$ua->User->password = $_POST['new_password1'];
+				
 				$ua->User->active = 1;
 				$ua->User->save();
 				$ua->delete();
-				$this->_redirect('login');				
+				return $this->_forward('login');				
 			}
 		}
 		$user = $ua->User;
-		$this->render('users/activate.php', compact('user'));
+		$this->render(compact('user'));
 	}
 	
 	/**
@@ -200,24 +217,15 @@ class UsersController extends Omeka_Controller_Action
 				$this->sendActivationEmail($user);
 				
 				$this->flashSuccess('User was added successfully!');
-				
-				//If this is an AJAX request then we will want to return the alternative representation of the User object
-				if($this->isAjaxRequest()) {
-					return $this->render('users/show.php', compact('user'));
-				}
-				
+								
 				//Redirect to the main user browse page
-				$this->_redirect('users');
+				$this->redirect->goto('browse');
 			}
 		} catch (Omeka_Validator_Exception $e) {
 			$this->flashValidationErrors($e);
 		}
-			
-		if($this->isAjaxRequest()) {
-			return $this->render('users/show.php', compact('user'));
-		}	
 		
-		return $this->_forward('browse', 'Users');
+		return $this->_forward('browse');
 	}
 
 	protected function sendActivationEmail($user)
@@ -255,7 +263,7 @@ class UsersController extends Omeka_Controller_Action
 			$this->flashValidationErrors($e, Omeka_Controller_Flash::DISPLAY_NEXT);
 		}
 		
-		$this->_redirect('users/edit/'.$user->id);
+		$this->redirect->goto('edit', null, null, array('id'=>$user->id));
 	}
 
 	public function loginAction()
@@ -268,24 +276,15 @@ class UsersController extends Omeka_Controller_Action
 	
 			$auth = $this->_auth;
 
-			$adapter = new Omeka_Auth_Adapter($_POST['username'], $_POST['password']);
+			$adapter = new Omeka_Auth_Adapter($_POST['username'], $_POST['password'], $this->getDb());
 	
 			$token = $auth->authenticate($adapter);
 
 			if ($token->isValid()) {
-				//Avoid a redirect by passing an extra parameter to the AJAX call
-				if($this->_getParam('noRedirect')) {
-					$this->_forward('home', 'index');
-				} else {
-					$this->_redirect($session->redirect);
-					unset($session->redirect);
-				}
-				return;
+				$this->redirect->gotoUrl($session->redirect);
 			}
-			$this->render('users/login.php', array('errorMessage' => $token->getMessages()));
-			return;
+			return $this->render(array('errorMessage' => $token->getMessages()));
 		}
-		$this->render('users/login.php');
 	}
 	
 	public function logoutAction()
@@ -293,7 +292,7 @@ class UsersController extends Omeka_Controller_Action
 		$auth = $this->_auth;
 		//http://framework.zend.com/manual/en/zend.auth.html
 		$auth->clearIdentity();
-		$this->_redirect('');
+		$this->redirect->gotoUrl('');
 	}
 
 	/**
@@ -305,7 +304,7 @@ class UsersController extends Omeka_Controller_Action
 	{		
 		$userActions = array('show','edit');
 				
-		if($current = Omeka::loggedIn()) {
+		if($current = $this->getCurrentUser()) {
 			try {
 				$user = $this->findById();
 				if($current->id == $user->id) {
@@ -319,26 +318,52 @@ class UsersController extends Omeka_Controller_Action
 		return parent::preDispatch();
 	}
 
+    /**
+     * AJAX Action for toggling permission for a role/resource/privilege combination
+     * 
+     * @todo Factor out the permissions check when that whole thing is fixed
+     * @return void
+     **/
+	public function togglePrivilegeAction()
+	{
+	    if(!$this->isAllowed('togglePrivilege')) {
+	        throw new Omeka_Controller_Exception_403('Toggle form privilege was incomplete!');
+	    }
+	    
+	    $acl = $this->getAcl();
+	    
+        $role = $this->_getParam('role');
+        $resource = $this->_getParam('resource');
+        $privilege = $this->_getParam('privilege');
+
+        if(!$role or !$resource or !$privilege) {
+            Zend_Debug::dump( $this->getCurrentUser() );exit;
+        }
+        
+        //If permission already exists for this, then deny it
+        if($acl->isAllowed($role, $resource, $privilege)) {
+            $acl->removeAllow($role, $resource, $privilege);
+            $acl->deny($role, $resource, $privilege);
+        }else {
+            $acl->allow($role, $resource, $privilege);
+        }
+        
+        $hasPermission = $acl->isAllowed($role, $resource, $privilege);
+        
+        set_option('acl', serialize($acl));
+        
+        //Render the form so that we can use it in the AJAX update
+        $this->render(compact('hasPermission', 'role', 'resource', 'privilege'), 'role-form');
+	}
+
 /**
  * Define Roles Actions
  */		
 	public function rolesAction()
 	{
-		$acl = $this->acl;
-		
-		$roles = array_keys($acl->getRoles());
-		
-		foreach($roles as $key => $val) {
-			$roles[$val] = $val;
-			unset($roles[$key]);
-		}
-
-		//Don't let people make users with the 'default' level
-		unset($roles['default']);
-		
-		$rules = $acl->getRules();
-		$resources = $acl->getResources();
-		return $this->render('users/roles.php', compact('roles','rules','resources','acl'));
+	    $acl = $this->getAcl();
+	    $resources = $acl->getResourceList();
+	    $roles = $acl->getRoleNames();
+	    $this->render(compact('acl', 'resources', 'roles'));
 	}
 }
-?>

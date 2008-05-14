@@ -1,15 +1,40 @@
 <?php 
-require_once 'Omeka/Context.php';
 /**
-* 
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * @see Omeka_Context
+ */ 
+require_once 'Omeka/Context.php';
+
+/**
+ * Core class used to bootstrap the Omeka environment.
+ * 
+ * Various duties include, but are not limited to, sanitizing magic_quotes,
+ * setting up class autoload, database, configuration files, logging, plugins,
+ * front controller, etc.
+ *
+ * This class delegates to the Omeka_Context instance, which holds all state
+ * that get initialized by this class.  Methods can be called on this class
+ * as though it were an instance of Omeka_Context.
+ *
+ * @uses Omeka_Context
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_Core
 {
     /**
-     * 'Context' is a term that describes a pattern for storing site-wide data in a singleton
-     * Stuff like the logger, acl, database objects, etc. is accessible through this object 
+     * 'Context' is a term that describes a pattern for storing site-wide data
+     * in a singleton.  Stuff like the logger, acl, database objects, etc. is 
+     * accessible through this object 
      *
-     * @var string
+     * @var Omeka_Context
      **/
     protected $_context;
     
@@ -40,6 +65,12 @@ class Omeka_Core
         return $this->_context;
     }
     
+    /**
+     * If magic_quotes has been enabled, then strip all slashes from the 
+     * $_GET, $_POST and $_REQUEST superglobals.
+     * 
+     * @return void
+     **/
     public function sanitizeMagicQuotes()
     {
         //Strip out those bastard slashes
@@ -50,23 +81,32 @@ class Omeka_Core
         }      
     }
     
+    /**
+     * Bootstrap the entire application.
+     *
+     * This will initialize all the elements of the application.
+     * 
+     * @return void
+     **/
     public function initialize()
     {
         $this->sanitizeMagicQuotes();
         $this->initializeClassLoader();
         $this->initializeConfigFiles();
+        $this->initializeLogger();
         $this->initializeDb();
         $this->initializeOptions();
         $this->loadModelClasses();
         $this->initializeAcl();
         $this->initializePluginBroker();
         $this->initializeAuth();
+        $this->initializeCurrentUser();
         $this->initializeFrontController();
-        $this->initializeDefaultLogger();
     }
     
     /**
      * Provide phased loading of core Omeka functionality. Primarily used for Omeka scripts that run outside a web environment.
+     *
      * @param string $stopPhase The phase where the user wants loading to stop. 
      * @return void
      **/
@@ -98,6 +138,12 @@ class Omeka_Core
         }
     }
     
+    /**
+     * Register the autoloader that will load classes based on Zend Framework
+     * naming conventions.
+     * 
+     * @return void
+     **/
     public function initializeClassLoader()
     {
         require_once 'Omeka.php';
@@ -105,8 +151,9 @@ class Omeka_Core
     }
     
     /**
-     * Initialize the default database connection for all Omeka requests
+     * Initialize the default database connection for all Omeka requests.
      *
+     * @uses Omeka_Db
      * @return void
      **/
     public function initializeDb()
@@ -150,6 +197,14 @@ class Omeka_Core
         $this->setDb($db_obj);   
     }
     
+    /**
+     * Retrieve all the options from the database.  
+     *
+     * Options are essentially site-wide variables that are stored in the 
+     * database, for example the title of the site.
+     * 
+     * @return void
+     **/
     public function initializeOptions()
     {
         //Pull the options from the DB
@@ -181,6 +236,12 @@ class Omeka_Core
                 
     }
     
+    /**
+     * Load the 3 required INI files for Omeka (config.ini, routes.ini and
+     * db.ini).
+     * 
+     * @return void
+     **/
     public function initializeConfigFiles()
     {
       	require_once 'Zend/Config/Ini.php';
@@ -193,56 +254,114 @@ class Omeka_Core
     	}
 
     	$db = new Zend_Config_Ini($db_file, 'database');
-    	Zend_Registry::set('db_ini', $db); 
- 
+    	 
         $this->setConfig('db', $db);
  
         $config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
-        
-        Zend_Registry::set('config_ini', $config);
-        
+                
         $this->setConfig('basic', $config);
         
         $routes = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini', null);
-        Zend_Registry::set('routes_ini', $routes);
         
         $this->setConfig('routes', $routes);
     }
     
-    public function initializeDefaultLogger()
+    /**
+     * If logging has been enabled in the config file, then set up 
+     * Zend's logging mechanism.
+     * 
+     * @uses Zend_Log
+     * @return void
+     **/
+    public function initializeLogger()
     {
         $config = $this->getConfig('basic');
-        if(isset($config->log)) {
-            
-        	$logger = new Omeka_Logger;
-
-        	if(isset($config->log->sql) && $config->log->sql) {
-        		$logger->setSqlLog(LOGS_DIR.DIRECTORY_SEPARATOR.'sql.log');
-        		$logger->activateSqlLogging(true);	
-        	}
-        	if(isset($config->log->errors) && $config->log->errors) {
-        		$logger->setErrorLog(LOGS_DIR.DIRECTORY_SEPARATOR.'errors.log');
-        		$logger->activateErrorLogging(true);
-        	}
-        	$this->setLogger($logger);
-        }        
+        
+        if(!$config->log->errors && !$config->log->sql) {
+            return;
+        }
+        
+        $logFile = LOGS_DIR.DIRECTORY_SEPARATOR.'errors.log';
+        
+        if(!is_writable($logFile)) {
+            throw new Exception( 'Error log file cannot be written to.  Please give this file read/write permissions for the web server.' );
+        }
+        
+        $writer = new Zend_Log_Writer_Stream($logFile);
+        $logger = new Zend_Log($writer);
+        
+        $this->setLogger($logger);
     }
     
+    /**
+     * Initializes Omeka's ACL
+     *
+     * Checks to see if there is a serialized copy of the ACL in the database, 
+     * then use that.  If not, then set up the ACL based on the hard-coded settings.
+     * 
+     * @uses Omeka_Acl
+     * @todo ACL settings should be stored in the database.  When ACL settings
+     * are properly stored in a normalized database configuration, then this
+     * method should populate a new Acl instance with those settings and store
+     * that Acl object in a session for quick access.
+     * @return void
+     **/
     public function initializeAcl()
     {
-        //Setup the ACL
-        include CORE_DIR . DIRECTORY_SEPARATOR .'acl.php';
-                
+        $options = $this->getOptions();
+        
+        if($serialized = $options['acl']) {
+            $acl = unserialize($serialized);
+        }
+        else { 
+            $acl = $this->setupAcl(); 
+        }
+        
         $this->setAcl($acl);     
     }
     
-    public function initializePluginBroker()
+    /**
+     * Load the ACL settings from a file and then save a serialized copy of 
+     * the object to the database.
+     * 
+     * @return void
+     **/
+    public function setupAcl()
     {
-        //Activate the plugins
-        require_once 'plugins.php';
-        $plugin_broker = new PluginBroker;
+        //Setup the ACL
+        include CORE_DIR . DIRECTORY_SEPARATOR .'acl.php';
+        set_option('acl', serialize($acl));        
+        return $acl;
     }
     
+    /**
+     * Initialize a copy of the plugin broker and load all the active plugins.
+     *
+     * This will also fire the 'initialize' hook for all plugins.  Note that
+     * this hook fires before the front controller has been initialized or
+     * dispatched, so the router is unavailable in this hook.
+     * 
+     * @uses Omeka_Plugin_Broker
+     * @return void
+     **/
+    public function initializePluginBroker()
+    {
+        //Initialize the plugin broker with the database object and the plugins/ directory
+        $broker = new Omeka_Plugin_Broker($this->getDb(), PLUGIN_DIR);
+        $this->setPluginBroker($broker);
+
+        $broker->loadActive();        
+        //Fire all the 'initialize' hooks for the plugins
+        $broker->initialize();
+    }
+    
+    /**
+     * Initialize the Auth object which handles authentication against the 
+     * Omeka database.
+     * 
+     * @uses Zend_Auth
+     * @return void
+     **/
     public function initializeAuth()
     {
         $authPrefix = get_option('auth_prefix');
@@ -256,18 +375,48 @@ class Omeka_Core
         $this->setAuth($auth);
     }
     
+    /**
+     * Initialize the User object for the currently logged-in user.  If no user
+     * has been authenticated, this value will be equivalent to false.
+     * 
+     * @uses Zend_Auth
+     * @return void
+     **/
+    public function initializeCurrentUser()
+    {
+		$auth = $this->getAuth();
+		
+		$user = false;
+		
+		if ($auth->hasIdentity()) {
+			$user_id = $auth->getIdentity();
+			
+			require_once 'User.php';
+						
+			$user = $this->getDb()->getTable('User')->find($user_id);
+		} 
+        
+        $this->setCurrentUser($user);
+    }
+    
     public function loadModelClasses()
     {
         require_once 'Item.php';
         require_once 'Option.php';
     }
     
+    /**
+     * @uses Zend_Controller_Front
+     * @uses Zend_Controller_Router_Rewrite
+     * @uses fire_plugin_broker()
+     * @return void
+     **/
     public function initializeFrontController()
     {
         // Initialize some stuff
         $front = Zend_Controller_Front::getInstance();
         $router = new Zend_Controller_Router_Rewrite();
-        $router->addConfig(Zend_Registry::get('routes_ini'), 'routes');
+        $router->addConfig($this->getConfig('routes'), 'routes');
         fire_plugin_hook('add_routes', $router);
         
         $router->setFrontController($front);
@@ -277,29 +426,22 @@ class Omeka_Core
         
         //This plugin redirects exceptions to the ErrorController (built in to ZF)
         $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
-        
-        //This plugin redirects outdated installations to the UpgradeController
-        $front->registerPlugin(new Omeka_Controller_Plugin_Upgrader());
-        
+                
         //This plugin allows Omeka plugins to add controller directories to the 'default' namespace
         //which prevents weird naming conventions like Contribution_IndexController.php
         //and obviates the need to hack routes
         $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack());
         
-        //Disable the ViewRenderer until we can refactor Omeka codebase to use it
-        $front->setParam('noViewRenderer', true);
-
+        $front->registerPlugin(new Omeka_Controller_Plugin_Admin());
+        $front->registerPlugin(new Omeka_Controller_Plugin_Debug());
+        
+        
         require_once 'Zend/Controller/Request/Http.php';
         $request = new Zend_Controller_Request_Http();
-
-        // Removed 3/9/07 n8
-        //Zend_Registry::set('request', $request);
         $front->setRequest($request);
 
         require_once 'Zend/Controller/Response/Http.php';
         $response = new Zend_Controller_Response_Http();
-        // Removed 3/9/07 n8
-        //Zend_Registry::set('response', $response);
         $front->setResponse($response);
 
         //$front->addControllerDirectory(array('default'=>CONTROLLER_DIR));
@@ -308,7 +450,65 @@ class Omeka_Core
         $this->setFrontController($front); 
         
         $this->setRequest($request);
-        $this->setResponse($response);    
+        $this->setResponse($response);  
+        
+        $this->initializeActionHelpers();
+    }
+    
+    private function initializeActionHelpers()
+    {
+        $this->initViewRenderer();
+        $this->initResponseContexts();
+        $this->initAclHelper();
+    }
+    
+    private function initAclHelper()
+    {
+        $acl = $this->getAcl();
+        $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl);
+        Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
+    }
+    
+    private function initViewRenderer()
+    {
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $view = new Omeka_View();
+        $viewRenderer->setView($view)
+                     ->setViewSuffix('php');        
+    }
+    
+    /**
+     * Define the custom response format contexts for Omeka.
+     * 
+     * @link http://framework.zend.com/manual/en/zend.controller.actionhelpers.html#zend.controller.actionhelpers.contextswitch
+     * 
+     * Example of a definition of a response context through the ZF API:
+     * 
+     * $contexts->addContext('dc', array(
+     *    'suffix'    => 'dc',
+     *    'headers'   => array('Content-Type' => 'text/xml'),
+     *    'callbacks' => array(
+     *        'init' => 'atBeginningDoThis',
+     *        'post' => 'afterwardsDoThis'
+     *    ) 
+     *  ));
+     * 
+     * @return void
+     **/    
+    private function initResponseContexts()
+    {
+        $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
+        $contexts->setContextParam('output');
+         $contexts->addContexts( array(
+            'dc' => array(
+                'suffix'    => 'dc',
+                'headers'   => array('Content-Type' => 'text/xml')
+            ),
+            'rss2' => array(
+                'suffix'    => 'rss2',
+                'headers'   => array('Content-Type' => 'text/xml')
+            )
+        )); 
     }
     
     public function dispatch()
@@ -322,5 +522,4 @@ class Omeka_Core
         include_once BASE_DIR . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR . 'notify.php';
         exit;
     } 
-} 
-?>
+}

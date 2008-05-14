@@ -18,17 +18,17 @@
 	<li><a id="detailed" href="<?php echo current_uri(array('view'=>'detailed')); ?>"<?php if($_GET['view'] == 'detailed') echo ' class="current"';?>>Detailed View</a></li>
 </ul>	
 </div>
-<form action="<?php echo uri('items/powerEdit'); ?>" method="post" accept-charset="utf-8">
+<form action="<?php echo uri('items/power-edit'); ?>" method="post" accept-charset="utf-8">
 
 <fieldset id="view-choice">
 	<?php 
 		switch ($_GET['view']) {
 			case 'detailed':
-				common('_detailed', compact('items'), 'items');
-				break;
+			    common('detailed-view', compact('items'), 'items');
+			    break;
 			case 'simple':
 			default:
-				common('_simple', compact('items'), 'items');
+				common('simple-view', compact('items'), 'items');
 				break;
 		}
 	 ?>

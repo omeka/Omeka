@@ -1,14 +1,23 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
 require_once 'EntitiesRelations.php';
 require_once 'User.php';
 require_once 'Anonymous.php';
 require_once 'Institution.php';
 require_once 'Person.php';
 require_once 'EntityTable.php';
+
 /**
- * entity
- * @package: Omeka
- */
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Entity extends Omeka_Record
 {
 	public $first_name;
@@ -18,9 +27,7 @@ class Entity extends Omeka_Record
 	public $institution;
 	public $parent_id;
 	public $type;
-		
-	protected $_pluralized = 'Entities';
-	
+			
 	protected $_related = array(
 		'name'=>'getName', 
 		'institution'=>'getInstitution', 
@@ -30,7 +37,7 @@ class Entity extends Omeka_Record
 	
 	protected function getParent()
 	{
-		return $this->getTable()->findBySql('id = ?', array( (int) $this->parent_id ), true);
+		return $this->getTable()->findBySql('e.id = ?', array( (int) $this->parent_id ), true);
 	}
 		
 	/**
@@ -81,7 +88,7 @@ class Entity extends Omeka_Record
 	 **/
 	protected function filterInput($input)
 	{
-		$options = array('namespace'=>'Omeka_Filter');
+		$options = array('inputNamespace'=>'Omeka_Filter');
 		
 		$filters = array(
 			'first_name' 	=> 	'StringTrim',
@@ -190,7 +197,7 @@ class Entity extends Omeka_Record
 	protected function getChildren()
 	{
 		if($this->exists()) {
-			$db = get_db();
+			$db = $this->getDb();
 			
 			$sql = "SELECT e.* FROM $db->Entity e WHERE e.parent_id = ?";
 			$children = $this->getTable('Entity')->fetchObjects($sql, array($this->id));	
@@ -206,7 +213,7 @@ class Entity extends Omeka_Record
 	public function getUser()
 	{
 		$id = (int) $this->id;
-		return get_db()->getTable('User')->findByEntity($id);
+		return $this->getDb()->getTable('User')->findByEntity($id);
 	}
 	
 	/**
@@ -228,7 +235,7 @@ class Entity extends Omeka_Record
 			$user->delete();
 		}
 		
-		$db = get_db();
+		$db = $this->getDb();
 		
 		//Remove all taggings associated with this entity
 		$taggings = $db->getTable('Taggings')->findBy(array('entity'=>$id));
@@ -258,7 +265,7 @@ class Entity extends Omeka_Record
 				throw new Exception( 'Both of these Entities must be persistent in order to merge them.' );
 			}
 			
-			$db = get_db();
+			$db = $this->getDb();
 			
 			//These are the classes where foreign keys will be affected
 			$joinClasses = array('EntitiesRelations'=>'entity_id', 'User'=>'entity_id', 'Entity'=>'parent_id');			
@@ -277,5 +284,3 @@ class Entity extends Omeka_Record
 		}
 	}
 }
-
-?>

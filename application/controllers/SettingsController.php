@@ -1,14 +1,29 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
+/**
+ * @see Omeka_Controller_Action
+ */
 require_once 'Omeka/Controller/Action.php';
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class SettingsController extends Omeka_Controller_Action
 {	
 	public function indexAction() {
-		$this->_forward('edit', 'settings');
+		$this->_forward('edit');
 	}
 	
 	public function browseAction() {
-		$this->_forward('edit', 'settings');
+		$this->_forward('edit');
 	}
 	
 	public function editAction() {
@@ -26,7 +41,7 @@ class SettingsController extends Omeka_Controller_Action
 			'fullsize_constraint', 
 			'path_to_convert');
 		
-		$options = Zend_Registry::get('options');
+		$options = Omeka_Context::getInstance()->getOptions();
 		
 		foreach ($options as $k => $v) {
 			if(in_array($k, $settingsList)) {
@@ -35,7 +50,7 @@ class SettingsController extends Omeka_Controller_Action
 		}
 				
 		$optionTable = $this->getTable('Option')->getTableName();
-		$conn = get_db();
+		$conn = $this->getDb();
 						
 		//process the form
 		if(!empty($_POST)) {
@@ -49,13 +64,11 @@ class SettingsController extends Omeka_Controller_Action
 					$options[$key] = $value;
 				}
 			}
-			Zend_Registry::set('options', $options);
+			Omeka_Context::getInstance()->setOptions($options);
 
 			$this->flash("Settings have been changed.");
 		}
 
-		$this->render('settings/edit.php', $settings);
+		$this->render($settings);
 	}
 }
-
-?>

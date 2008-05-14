@@ -2,13 +2,29 @@
 	
 
 	function ajaxify() {
-		div = $('add');
-		new Insertion.After(div, "<a href=\"javascript:void(0);\" id=\"add_existing_metafield\">Add a pre-existing metafield</a>");
-		new Insertion.After(div, "<a href=\"javascript:void(0);\" id=\"add_new_metafield\">Add a new metafield</a>");
+		var div = $('add');
 		
-		$('add_existing_metafield').onclick = function() { addMetafield('old'); }
+		var addExisting = document.createElement('a');
+		addExisting.href = "#";
+		addExisting.id = "add-existing-metafield";
+		addExisting.innerHTML = "Add a pre-existing metafield";
+		$(addExisting).observe('click', function(e){
+		    e.stop();
+		    addMetafield('existing');
+		});
 		
-		$('add_new_metafield').onclick = function() { addMetafield('new'); }
+		div.appendChild(addExisting);
+		
+		var addNew = document.createElement('a');
+		addNew.href = "#";
+		addNew.id = "add-new-metafield";
+		addNew.innerHTML = "Add a new metafield";
+		$(addNew).observe('click', function(e){
+		    Event.stop(e);
+		    addMetafield('new');
+		});
+		
+		div.appendChild(addNew);
 	}
 	
 	function getLastId() {
@@ -18,11 +34,11 @@
 			return 0;
 		}
 		if(select) {
-			selectId = parseInt(select.id.replace("metafield_", ""));
+			selectId = parseInt(select.id.replace("metafield-", ""));
 		}else {
 			selectId = 0;
 		}		
-		inputId = parseInt(input.id.replace("metafield_", ""));
+		inputId = parseInt(input.id.replace("metafield-", ""));
 		if(selectId > inputId) {
 			return selectId;
 		} else {
@@ -31,28 +47,17 @@
 	}
 	
 	function addMetafield(type) {
-		switch(type) {
-			case 'new':
-				var uri = "<?php echo uri('types/_new_metafield'); ?>";
-				break;
-			case 'old':
-				var uri = "<?php echo uri('types/_old_metafield'); ?>";
-				break;
-			default:
-				break;
-		}
+		var uri = "<?php echo uri('types/add-metafield'); ?>"
 		
-		num = getLastId()+1;
+		var index = getLastId() + 1;
 		
 		new Ajax.Request(uri, {
-			parameters: "id=" + num,
-			onSuccess: function(t) {
-				new Insertion.Bottom($('new-metafields'), t.responseText);	
-				$('field_'+num).hide();
-			},
+			parameters: {
+    		    index: index,
+    		    exists: (type == 'existing')
+    		},
 			onComplete: function(t) {
-				new Effect.BlindDown('field_'+num,{duration:1.0});
-				
+			    $('new-metafields').insert(t.responseText);
 			}
 		});
 	}
@@ -71,23 +76,12 @@
 </fieldset>
 <fieldset id="type-metafields">
 	<legend>Type Metafields</legend>
-<div id="old-metafields">
+	
+<div id="existing-metafields">
 <?php if($type->exists()): ?>
 <h2>Edit existing metafields:</h2>
-<?php foreach( $type->Metafields as $key => $metafield ):
-	echo '<div class="field">';
-/*	select(	array(	
-							'name'	=> "Metafields[$key][id]" ),
-							$metafields,
-							$metafield->id,
-							'id',
-							'name' ); */
-	text(array('name' => "Metafields[$key][name]"),$metafield->name);
-	echo '<span>Remove this metafield from the Type</span>';
-	checkbox(array('name' => "remove_metafield[$key]"));
-	echo '<span>Delete this metafield permanently</span>';
-	checkbox(array('name' => "delete_metafield[$key]"));
-	echo '</div>';
+<?php foreach( $type->Metafields as $index => $metafield ):
+	common('existing-metafield', compact('metafield', 'index'), 'types');
 endforeach; ?>
 
 <?php endif; ?>
@@ -99,6 +93,6 @@ endforeach; ?>
 <div id="add"></div>
 
 	<?php $totalMetafields = count($type->Metafields);?>
-	<?php common('_new_metafield', array('id'=>$totalMetafields), 'types'); ?>
+	<?php common('new-metafield', array('id'=>$totalMetafields), 'types'); ?>
 </div>
 </fieldset>

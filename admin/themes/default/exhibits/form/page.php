@@ -90,9 +90,9 @@
 
 	<?php 
 		if(!$page->exists()) {
-			$url = uri('exhibits/addPage').DIRECTORY_SEPARATOR.$section->id.DIRECTORY_SEPARATOR; 
+			$url = uri('exhibits/add-page').DIRECTORY_SEPARATOR.$section->id.DIRECTORY_SEPARATOR; 
 		}else {
-			$url = uri('exhibits/editPage').DIRECTORY_SEPARATOR.$page->id.DIRECTORY_SEPARATOR;
+			$url = uri('exhibits/edit-page').DIRECTORY_SEPARATOR.$page->id.DIRECTORY_SEPARATOR;
 		}
 		
 	?>

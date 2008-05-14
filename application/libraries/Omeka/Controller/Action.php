@@ -1,15 +1,25 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ **/
+
+/**
+ * @see Zend_Controller_Action
  */
 require_once 'Zend/Controller/Action.php';
+
+/**
+ * Base class for Omeka CRUD Controllers.
+ * 
+ * @abstract
+ * @package Omeka
+ * @author CHNM
+ **/
 abstract class Omeka_Controller_Action extends Zend_Controller_Action
-{		
-	/**
-	 * @var Omeka_View
-	 */
-	protected $_view;
-	
+{			
 	/**
 	 * Omeka_Table associated with the controller (initialized optionally within the init() method)
 	 *
@@ -23,242 +33,81 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	 * @var string
 	 **/
 	protected $_modelClass;
-	
+
 	/**
-	 * Current options for browsing involve either Pagination or a single page list
-	 *
-	 * @var Omeka_Controller_Browse_Interface
+	 * Before filter applies a named method to the controller
+	 * before calling the actual method.
 	 **/
-	protected $_browse;
+	protected $_beforeFilter = array();
 	
 	/**
-	 * Omeka_Acl
-	 *
-	 * @var Omeka_Acl
-	 **/
-	protected $acl;
-	
-	/**
-	 * Zend_Auth
-	 *
-	 * @var Zend_Auth
-	 **/
-	protected $_auth;
-	
-	/**
-	 * Temporarily allowed permissions
-	 *
-	 * @var array
-	 **/
-	protected $_allowed = array();
-	
-	protected $_broker;
-	
-	/**
-	 * Controller/Action list for admin actions that do not require being logged-in
-	 *
-	 * @var string
-	 **/
-	protected $_adminWhitelist = array(
-				array('controller'=>'users', 'action'=>'activate'), 
-				array('controller'=>'users', 'action'=>'login'),
-				array('controller'=>'users', 'action'=>'forgotPassword'));
-	
-	/**
-	 * Redirects should be defined up here (with opportunity to override them)
-	 * @example $_redirects = array('edit'=>array('items/show/id', array('id')));
+	 * Does the following things:
+	 * 
+	 * Aliases the redirector helper to clean up the syntax (is this bad?)
+	 * Sets the table object automatically if given the class of the model to use for CRUD
+	 * Sets all the built-in action contexts for the CRUD actions
+	 * 
+	 * @param string
 	 * @return void
-	 **/
-	private $_crudRedirects = array(
-		'edit' 	=> array('controller/show/id', array('controller','id')),
-		'add'	=> array('controller/browse/', array('controller')),
-		'login'	=> array('users/login'),
-		'delete'=> array('controller/browse', array('controller')),
-		'default'=> array('controller/action/id', array('controller', 'action', 'id')),
-		'forbidden'=>array('controller/forbidden', array('controller'))
-	);
-	protected $_redirects = array();
-		
-	/**
-	 * Attaches a view object to the controller.
-	 * The view also receives the current controller
-	 * object so it can interact with the request / response objects.
-	 */
+	 **/		
 	public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
-	{
-		$this->acl = Zend_Registry::get('acl');
-		
+	{		
 		// Zend_Controller_Action __construct finishes by running init()
 		$init = parent::__construct($request, $response, $invokeArgs);
-		
-		if(!array_key_exists('return',$invokeArgs)) {
-			$this->_view = new Omeka_View($this);
-		}
-		
-		$this->_auth = Zend_Registry::get('auth');
-		
-		$this->_broker = get_plugin_broker();
-		
-		$this->_redirects = array_merge($this->_crudRedirects, $this->_redirects);
-		
+				
+		$this->redirect = $this->_helper->redirector;
+				
 		//Get the table obj by automatic
 		if( (!$this->_table) and $this->_modelClass) {
 			$this->_table = $this->getTable($this->_modelClass); 
 		}
 		
+        $this->setActionContexts();
+		
 		return $init;
 	}
 	
 	/**
-	 * Process 
-	 *
+	 * @link http://framework.zend.com/manual/en/zend.controller.actionhelpers.html#zend.controller.actionhelpers.contextswitch
+	 * @uses Omeka_Context::getPluginBroker()
 	 * @return void
 	 **/
-
-	public function getRedirect($action, $vars=null) {
-
-		$uri = $this->_redirects[$action][0];
-
-		//Check for the presence of required fields
-		if(isset($this->_redirects[$action][1])) {
-			$reqs = $this->_redirects[$action][1];
-			foreach ($reqs as $r) {
-				if(!in_array($r, array_keys($vars))) {
-					throw new Exception( 'You are missing the '.$r.' field in this redirect' );
-				}else {
-					//Substitute the var into the uri
-					$uri = str_replace($r, $vars[$r], $uri);
-				}
-			}
-		}
-
-		//Process any optional fields
-		$optional = @$this->_redirects[$action][2];
-		if($optional) {
-			foreach ($optional as $k => $o) {
-				//If we passed the var then use it
-				if(in_array($o, array_keys($vars))) {
-					$uri = str_replace($o, $vars[$o], $uri);
-				}
-				//Otherwise remove that part of the url
-				else {
-					// The '//' is to get rid of the extra slash in the uri
-					$uri = str_replace($o, '', $uri);
-					$uri = str_replace('//', '/', $uri);
-				}
-			}
-		}
-
-		return $uri;
-	}	
-	
-	protected function getPluralized($lower=true)
+	protected function setActionContexts()
 	{
-		$class = $this->_modelClass;
-		$record = new $class;
-		return $record->getPluralized($lower);
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContexts(array(
+                'browse'     => array('xml', 'json', 'dc', 'rss2'),
+                'show'      => array('xml', 'json', 'dc')));
+        
+        //Plugins can hook in to add contexts to actions
+        if($broker = Omeka_Context::getInstance()->getPluginBroker()) {
+            $broker->add_action_contexts($contextSwitch);
+        }
+            
+        $contextSwitch->initContext();	    
 	}
 	
 	/**
-	 *	Streamline the process of adding static pages by automatically checking for 
-	 * 	arbitrarily added pages.
+	 * Declare a before filter that will run in preDispatch() for the controller
 	 * 
-	 */
-	public function __call($m, $a)
+	 * @param string Method name within the controller
+	 * @param array Array of actions for which this filter will not run
+	 * @return void
+	 **/	
+	protected function beforeFilter($function, $except = array())
 	{
-		$action = $this->getRequest()->getParam('action');
-		$controller = $this->getRequest()->getParam('controller');
-		
-		return $this->render($controller.DIRECTORY_SEPARATOR.$action.'.php');
+		$this->_beforeFilter[$function] = $except;
 	}
 	
 	/**
-	 * Before filter applies a named method to the controller
-	 * before calling the actual method.
-	 * Primarily used for logging in
-	 */
-	protected $_before_filter = array();
-	
-	protected function before_filter($function_to_run, $except = array())
-	{
-		$this->_before_filter[$function_to_run] = $except;
-	}
-	
+	 * Run any before filters prior to dispatching the action
+	 * 
+	 * @return void
+	 **/
 	public function preDispatch()
-	{
-		/**
-		 * Admin theme protection is here.
-		 * Kind of bugs me that it's obscured -n8
-		 * 
-		 * The admin theme protection is as follows:
-		 * A user with an account needs to have greater than public access.
-		 * Otherwise, each method can have a specific, admin set permission
-		 * level
-		 */
-		$request = $this->getRequest();
-		$action = $request->getActionName();
-		$controller = $request->getControllerName();
-		
-		$overrideLogin = false;
-		
-		/**
-		 *	Right now user activation is the only admin controller/action that doesn't require login (doesn't make sense to require it)
-		 */
-		if($request->getParam('admin')) {
-			foreach ($this->_adminWhitelist as $entry) {
-				if( ($entry['controller'] == $controller) and ($entry['action'] == $action) ) {
-					$overrideLogin = true;
-					break;
-				}
-			}
-			
-			//If we haven't overridden the need to login
-			if(!$overrideLogin) {
-			
-				//Deal with the login stuff
-			require_once 'Zend/Auth.php';
-			require_once 'Zend/Session.php';
-			require_once 'Omeka/Auth/Adapter.php';
-
-			$auth = $this->_auth;
-			if (!$auth->hasIdentity()) {
-				// capture the intended controller / action for the redirect
-				$session = new Zend_Session_Namespace;
-				$session->redirect = $request->getPathInfo();
-				
-				// do we need these sessions?  possibly delete
-				$session->controller = $request->getControllerName();
-				$session->action = $request->getActionName();
-
-				// finally, send to a login page
-				$this->_redirect('login');
-			}else {
-				/*	Access the authentication session and set it to expire after a certain amount
-				 	of time if there are no requests */
-				$auth_session = new Zend_Session_Namespace( $auth->getStorage()->getNamespace() );
-				
-				
-				$config = Zend_Registry::get('config_ini');
-				
-				if(isset($config->login->expire)) {
-					$minutesUntilExpiration = (int) $config->login->expire;
-				
-					//Default value in case for whatever reason it's not available
-					if(!$minutesUntilExpiration) $minutesUntilExpiration = 15;
-				
-					$auth_session->setExpirationSeconds($minutesUntilExpiration * 60);					
-				}
-
-			}					
-			
-			} 
-			
-		}
-				
-		$this->checkActionPermission($action);
-		
+	{						
 		$action = $this->_request->getActionName();
-		foreach ($this->_before_filter as $func => $exceptThese) {
+		foreach ($this->_beforeFilter as $func => $exceptThese) {
 			if (!in_array($action, $exceptThese)) {
 				if (!method_exists($this, $func)) {
 					throw new Zend_Controller_Exception('The before filter '.$func.' was not found.');
@@ -270,97 +119,50 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		}
 	}
 	
-	protected function checkActionPermission($action)
-	{
-		//Here is the permissions check for each action
-		try {
-			if(!$this->isAllowed($action)) {		
-				$this->_redirect('403');
-			}
-		} catch (Zend_Acl_Exception $e) {}		
-	}
-	
 	/**
-	 * Notifies whether the logged-in user has permission for the given rule
-	 * i.e., if the $rule is 'edit', then this will return TRUE if the user has permission to 'edit' for 
-	 * the current controller
-	 *
-	 * @return bool
+	 * CONVENIENCE METHODS
 	 **/
-	protected function isAllowed($rule, $resourceName=null) 
-	{
-		$allowed = $this->_allowed;
-		if(isset($allowed[$rule])) {
-			return $allowed[$rule];
-		}
-		
-		if(!$resourceName) {
-			$resourceName = $this->getName();
-		}
-		
-		return $this->acl->checkUserPermission($resourceName, $rule);
-	}
-	
-	/**
-	 * Temporarily override the ACL's permissions for this controller
-	 *
-	 * @return this
-	 **/
-	protected function setAllowed($rule,$isAllowed=true) 
-	{
-		$this->_allowed[$rule] = $isAllowed;
-		
-		return $this;
-	}
-	
-	/**
-	 * Define this here to avoid Zend's silly requirements
-	 */
-	public function noRouteAction()
-    {
-        $this->_redirect('/');
-    }
-
-
-	/**
-	 * CONVIENCE METHODS
-	 */
 	
 	/**
 	 * Retrieve the table for queries
 	 * 
-	 */
+	 **/
 	public function getTable($table = null)
 	{
 		if(!$table and $this->_table) {
 			return $this->_table;
 		}
 		else {
-			return get_db()->getTable($table);
+			return $this->getDb()->getTable($table);
 		}
 	}
-
-	public function getView()
+	
+	public function getDb()
 	{
-		return $this->_view;
+	    return Omeka_Context::getInstance()->getDb();
 	}
 	
-	public function getName($upper=true)
+	public function getCurrentUser()
 	{
-		$name = $this->getRequest()->getControllerName();
-		return $upper ? ucwords($name) : $name;
+	    return Omeka_Context::getInstance()->getCurrentUser();
 	}
 	
 	/**
-	 * Stolen directly from Rails.
-	 * Again, this may be redundant, in that message delivery
-	 * should allow for ajax and non ajax responses.
-	 * Session passed messages obviously do not necessarily allow
-	 * for this.
+	 * Alias for $this->_helper->acl->isAllowed()
 	 * 
-	 * @starred
-	 * 
-	 */
+	 * @param string $rule
+	 * @param string $resource
+	 * @return boolean
+	 **/
+	public function isAllowed($rule, $resource=null)
+	{
+	    return $this->_helper->acl->isAllowed($rule, $resource);
+	}
+	
+	/**
+	 * Flash Methods
+	 **/
+	
 	public function flash($msg=null, $flash_code=null, $priority=null)
 	{
 		if(!$flash_code) $flash_code = Omeka_Controller_Flash::ALERT;
@@ -388,82 +190,86 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 	
 	///// BASIC CRUD INTERFACE /////
 	
-	public function homeAction()
-	{
-		$this->indexAction();
-	}
-	
-	
+	/**
+	 * The index action of every controller will forward to the 'browse' action
+	 * 
+	 * @return void
+	 **/
 	public function indexAction()
 	{
-        $this->_forward('browse', $this->getRequest()->getControllerName());
+        $this->_forward('browse');
 	}
-	
-	/**
-	 * 
-	 *
-	 * @return string
-	 **/
+    
+    /**
+     * Retrieves and renders a set of records for the controller's model
+     * 
+     * Uses inflection based on the model class in order to determine
+     * which records to retrieve.  Registers the set of records with the
+     * pluralized name.  Retrieves all records by default.
+     *
+     * @todo Incorporate pagination into this CRUD method so that all CRUD controllers paginate by default
+     * @return void
+     **/
 	public function browseAction()
 	{		
 		if(empty($this->_modelClass)) throw new Exception( 'Scaffolding class has not been specified' );
 		
 		$pluralName = $this->getPluralized();
-		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'browse.php';
-
-		$$pluralName = $this->getTable($this->_modelClass)->findAll();
-
-		$totalVar = 'total_'.$pluralName;
+        
+        $params = $this->_getAllParams();
+                
+		$records = $this->getTable($this->_modelClass)->findBy($params);
 		
-		$$totalVar = count($$pluralName);
+		$totalRecords = count($records);
 		
-		Zend_Registry::set($pluralName, $$pluralName);
+		Zend_Registry::set($pluralName, $records);
 		
 		//Fire the plugin hook
-		fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $$pluralName);
-		
-		$pass_to_template = compact($pluralName,$totalVar);
-		$pass_to_template['recordset'] = $$pluralName;
-		$pass_to_template['record_type'] = $this->_modelClass;
-		
-		return $this->render($viewPage, $pass_to_template);
+		fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $records);
+				
+		return $this->render(array($pluralName=>$records, 'total_records'=>$totalRecords));
 	}
 	
+	/**
+	 * Retrieve a single record and render it
+	 * Every request to this action should pass an 'id' parameter.
+	 *
+	 * @return void
+	 **/
 	public function showAction()
 	{
 		$varName = strtolower($this->_modelClass);
+				
+		$record = $this->findById();		
 		
-		//duplicated from above
-		$pluralName = $this->getPluralized();
-		$viewPage = $pluralName.DIRECTORY_SEPARATOR.'show.php';
+		Zend_Registry::set($varName, $record);
 		
-		try{
-			$$varName = $this->findById();
-		}catch(Exception $e) {
-			echo $e->getMessage();exit;
-		}
+		fire_plugin_hook( 'show_' . strtolower(get_class($record)), $record );
 		
-		
-		Zend_Registry::set($varName, $$varName);
-		
-		fire_plugin_hook( 'show_' . strtolower(get_class($$varName)), $$varName );
-		
-		return $this->render($viewPage, compact($varName));
+		return $this->render(array($varName=>$record));
 	}
 	
+	/**
+	 * Add an instance of a record to the database.
+	 * This behaves differently based on the contents of the $_POST superglobal.
+	 * If the $_POST is empty or invalid, it will render the form used for data entry.
+	 * Otherwise, if the $_POST exists and is valid, it will save the new 
+	 * record and redirect to the 'browse' action.
+	 * 
+	 * @return void
+	 **/
 	public function addAction()
 	{
 		//Maybe this recurring bit should be abstracted out
 		$varName = strtolower($this->_modelClass);
 		$class = $this->_modelClass;
-		$pluralName = $this->getPluralized();
 		
-		$$varName = new $class();
+		$record = new $class();
 		
 		try {
-			if($$varName->saveForm($_POST))
+			if($record->saveForm($_POST))
 			{
-				$this->_redirect('add',array('controller'=>$pluralName));
+				$this->redirect->goto('browse');
 			}
 		} 
 		catch (Omeka_Validator_Exception $e)
@@ -474,30 +280,26 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			$this->flash($e->getMessage());
 		}
 
-		return $this->render($pluralName.'/add.php', compact($varName));			
+		return $this->render(array($varName=>$record));			
 	}
 	
+	/**
+	 * Similar to 'add' action, except this requires a pre-existing record.
+	 * 
+	 * The ID For this record must be passed via the 'id' parameter.
+	 *
+	 * @return void
+	 **/
 	public function editAction()
 	{
 		$varName = strtolower($this->_modelClass);
-		$pluralName = $this->getPluralized();
 		
-		try{
-			$$varName = $this->findById();
-		}catch(Exception $e) {
-			echo $e->getMessage();exit;
-		}
+		$record = $this->findById();
 		
 		try {
-			if($$varName->saveForm($_POST))
+			if($record->saveForm($_POST))
 			{	
-				//Avoid a redirect by passing an extra parameter to the AJAX call
-				if($this->_getParam('noRedirect')) {
-					$this->_forward('show', $pluralName);
-					return;
-				} else {
-					$this->_redirect('edit', array('controller'=>$pluralName, 'id'=>$$varName->id) );
-				}
+				$this->redirect->goto('show', null,null, array('id'=>$record->id));
 			}
 		} catch (Omeka_Validator_Exception $e) {
 			$this->flashValidationErrors($e);
@@ -506,75 +308,82 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
-		return $this->render($pluralName.'/edit.php', compact($varName));		
+		return $this->render(array($varName=>$record));		
 	}
 	
+	/**
+	 * Find a record based on ID, delete it and redirect to 'browse' action
+	 * 
+	 * @return void
+	 **/
 	public function deleteAction()
-	{
-		$controller = $this->getName(false);
-		
-		$record = $this->findById();
-				
+	{		
+		$record = $this->findById();			
 		$record->delete();
-		$this->_redirect('delete', array('controller'=>$controller));
+		$this->redirect->goto('browse');
+	}
+	
+	/**
+	 * Throws an exception that causes Omeka to reroute to the ErrorController
+	 * 
+	 * @throws Omeka_Controller_Exception_403
+	 * @return void
+	 **/
+	public function forbiddenAction()
+	{
+		throw new Omeka_Controller_Exception_403();
+	}
+	
+	/**
+	 * Throws an exception that causes Omeka to reroute to the ErrorController
+	 * 
+	 * @throws Omeka_Controller_Exception_403
+	 * @return void
+	 **/
+	public function errorAction()
+	{
+		throw new Omeka_Controller_Exception_404();
+	}
+	
+	/**
+	 * Convenience method to get the pluralized form of the CRUD data model
+	 * 
+	 * @param boolean Whether or not to return the name in lowercase
+	 * @return string
+	 **/
+	protected function getPluralized($lower=true)
+	{
+        $plural = Inflector::pluralize($this->_modelClass);
+        return $lower ? strtolower($plural) : $plural;
 	}
 	
 	///// END BASIC CRUD INTERFACE /////
 	
 	/**
-	 * Most convenient usage would be something like: $this->render("show.php", compact("items", "total", "foo", "bar"));
-	 *
-	 * @param string The page, including .php extension
-	 * @param array The variables to be included on that page, where key = name and value = contents.  see compact()
-	 * @return mixed|void
+	 * Mostly an alias for Zend_Controller_Action::render().  
 	 * 
+	 * Differences are that it 
+	 * 
+	 * @param string
+	 * @return void
 	 **/
-	public function render($page, array $vars = array())
-	{		
-		if($return = $this->getInvokeArg('return')){
-			if(is_array($return)) {
-				$returnThese = array();
-				foreach ($return as $r) {
-					$returnThese[$r] = $vars[$r];
-				}
-				return $returnThese;
-			} else {
-				return $vars[$return];
-			}
-		} 
-		/* Check if the page to render has been overridden by an arbitrary param
-			Make sure that this param is not set via the URL */
-		if(($toRender = $this->_getParam('renderPage')) and (!isset($_REQUEST['renderPage']))) {
-			$page = $toRender;
-		}
-		
-		$this->_view->assign($vars);
-		
-		fire_plugin_hook('before_render_page', $page, $vars);
-		
-		$body = $this->_view->renderFormat($this->getOutputFormat(), $page);
-		
-		$this->getResponse()->appendBody($body);
-		
-		fire_plugin_hook('after_render_page', $page, $vars);
-	}
-	
-	private function getOutputFormat()
-	{
-		$output = $this->_getParam('output');
-		
-		//The default output type is 'xhtml'
-		if(!$output) {
-			$output = 'xhtml';
-		}
-		
-		return (string) $output;
+	public function render(array $vars = array(), $action=null, $name=null, $noController=null)
+	{	
+		$this->view->assign($vars);
+
+	    //Take advantage of built-in behavior
+	    if($action) {
+	        return parent::render($action,$name,$noController);
+	    }
 	}
 	
 	/**
-	 * Find a particular record given its unique ID # and (optionally) its class name.  Essentially a convenience method
-	 * $this->_table must be initialized in the init() method if the particular model is to be chosen automagically
+	 * Find a particular record given its unique ID # and (optionally) its class name.  
 	 * 
+	 * @param int The ID of the record to find (optional)
+	 * @param string The model class corresponding to the table that should be checked (optional)
+	 * @throws Omeka_Controller_Exception_404
+	 * @throws Omeka_Controller_Exception_403
 	 * @return Omeka_Record
 	 **/
 	public function findById($id=null, $table=null)
@@ -601,46 +410,4 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
 		
 		return $record;
 	}
-	
-	public function forbiddenAction()
-	{
-		header ("HTTP/1.0 403 Access Forbidden"); 
-		$this->render('403.php');
-		return;
-	}
-	
-	public function errorAction()
-	{
-		$this->render('404.php');
-	}
-	
-	/**
-	 * @since 7-24-07 Supports detection of Prototype AJAX requests
-	 * @link http://www.sitepoint.com/article/painless-javascript-prototype/4
-	 * @return bool
-	 **/
-	protected function isAjaxRequest()
-	{
- 		return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
-     		$_SERVER ['HTTP_X_REQUESTED_WITH']  == 'XMLHttpRequest';
-	}
-	
-	/**
-	 * Overridden to support requests that only want to return data and not spit out pages
-	 *
-	 **/
-	protected function _redirect($action,array $vars=null, array $options=array()) 
-	{
-		if( ($return = $this->getInvokeArg('return')) or $this->isAjaxRequest() ) 
-		{
-			return null;
-		}else {
-			//Substitute var in url for actual value of var
-			$redirect = $this->getRedirect($action, $vars);
-			$redirect = !$redirect ? $action : $redirect;
-
-			return parent::_redirect($redirect,$options);
-		}
-	}
 }
-?>

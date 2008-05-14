@@ -1,12 +1,21 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
 require_once 'Type.php';
 require_once 'Plugin.php';
 require_once 'Metatext.php';
 require_once 'TypesMetafields.php';
 require_once 'MetafieldTable.php';
+
 /**
  * @package Omeka
- * 
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class Metafield extends Omeka_Record { 
 	
@@ -16,7 +25,7 @@ class Metafield extends Omeka_Record {
 		
 	protected function _delete()
 	{		
-		$db = get_db();
+		$db = $this->getDb();
 		
 		//Cascade delete the metatext and the types_metafields joins
 		$mt_objs = $db->getTable('Metatext')->findBySql("metafield_id = ?", array($this->id));
@@ -57,7 +66,7 @@ class Metafield extends Omeka_Record {
 	}
 	
 	public static function names($prefix=true) {
-		$db = get_db();
+		$db = Omeka_Context::getInstance()->getDb();
 		
 		$res = $db->query("SELECT m.name FROM $db->Metafield m ORDER BY m.name DESC");
 		
@@ -73,6 +82,3 @@ class Metafield extends Omeka_Record {
 		return $names;
 	}
 }
-
-
-?>

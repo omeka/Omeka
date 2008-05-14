@@ -1,10 +1,19 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 require_once 'CollectionPermissions.php';
 require_once 'CollectionTable.php';
+
 /**
-* Collection
-*/
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Collection extends Omeka_Record
 {		
 	public $name;
@@ -21,7 +30,7 @@ class Collection extends Omeka_Record
 	
 	public function hasCollectors()
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$id = (int) $this->id;
 				
 		$sql = "SELECT COUNT(er.entity_id) FROM $db->EntitiesRelations er 
@@ -36,7 +45,7 @@ class Collection extends Omeka_Record
 	public function totalItems()
 	{
 		//This will query the ItemTable for a count of all items associated with the collection
-		return get_db()->getTable('Item')->findBy(array('collection'=>$this->name), true);
+		return $this->getDb()->getTable('Item')->count(array('collection'=>$this->name));
 	}
 	
 	protected function getCollectors()
@@ -89,5 +98,3 @@ class Collection extends Omeka_Record
 		}
 	}
 }
- 
-?>

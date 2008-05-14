@@ -467,16 +467,16 @@ ul.tags, li.tag {display: inline;}
 			#type-items a .title {display:block; float:left; width: 55%;}
 			#type-items a .date {display:block; float:right; width: 41%;text-align:right;}
 	
-	#old-metafields h2, #new-metafields h2 {margin: 1em 0 .5em;}
-	#old-metafields div.field {margin: 0 0 1em;}
-		#old-metafields div.field label {margin: .5em 0;}
-		#old-metafields div.field input {border: 1px solid #a2c9e8; background: #dae9f6; padding: 4px;}
-		#old-metafields div.field span {font-size: 1.2em; padding: 0 1em;}
-			#old-metafields div.field input:focus {background:#fff; border:1px solid #A2C9E8;}
+	#existing-metafields h2, #new-metafields h2 {margin: 1em 0 .5em;}
+	#existing-metafields div.field {margin: 0 0 1em;}
+		#existing-metafields div.field label {margin: .5em 0;}
+		#existing-metafields div.field input {border: 1px solid #a2c9e8; background: #dae9f6; padding: 4px;}
+		#existing-metafields div.field span {font-size: 1.2em; padding: 0 1em;}
+			#existing-metafields div.field input:focus {background:#fff; border:1px solid #A2C9E8;}
 	#new-metafields {overflow:hidden;}
 		.new-metafield {float:left; clear:left;}
 
-	a#add_new_metafield, a#add_existing_metafield {display: block; padding: .5em 0; font-size: 1.2em;}
+	a#add-new-metafield, a#add-existing-metafield {display: block; padding: .5em 0; font-size: 1.2em;}
 
 	/* Users */
 	#add-user {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:7.5em; display:block;}
@@ -500,8 +500,8 @@ ul.tags, li.tag {display: inline;}
 	table#userroles caption {margin: 0 0 1em 0;}
 	table#userroles thead tr {border: none; }
 	table#userroles tbody tr {border-bottom:none;}
-	table#userroles th, table#userroles td {width: 8em;}
-	table#userroles th {text-align: right; font-weight: bold; padding: 1em; background-color: #fff; border-right: 1px solid #cdcdc5; vertical-align: bottom;}
+	table#userroles th, table#userroles td {width: 14em;}
+	table#userroles th {text-align: right; font-weight: bold; padding: 1em; background-color: #fff; border-right: 1px solid #cdcdc5; vertical-align: middle;}
 	table#userroles th.rolename {text-align: center; background-color: #F6DAE9;}
 	table#userroles tbody td {border: 1px solid #cdcdc5; text-align: center; padding: .833333em .833333em 0;}
 

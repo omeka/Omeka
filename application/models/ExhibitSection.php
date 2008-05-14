@@ -46,7 +46,7 @@ class ExhibitSection extends Omeka_Record
 
 	protected function slugIsUnique($slug)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$exhibit_id = (int) $this->exhibit_id;
 		
 		if(!$exhibit_id) {
@@ -84,7 +84,7 @@ class ExhibitSection extends Omeka_Record
 		LEFT JOIN items_section_pages ON items_section_pages.page_id = section_pages.id
 		WHERE sections.id = $id;";
 		
-		get_db()->exec($delete);
+		$this->getDb()->exec($delete);
 */					
 	}
 		
@@ -119,9 +119,9 @@ class ExhibitSection extends Omeka_Record
 	
 	public function getPage($order)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT p.* FROM $db->ExhibitPage p WHERE p.order = ? AND p.section_id = ?";
-		return $this->getTable('ExhibitPage')->fetchObjects($sql, array($order,$this->id), true);
+		return $this->getTable('ExhibitPage')->fetchObject($sql, array($order,$this->id));
 	}
 	
 	public function hasPages()

@@ -1,10 +1,26 @@
 <?php
-
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Tag.php';
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+
+/**
+ * @see Tag.php
+ */
+require_once 'Tag.php';
+
+/**
+ * @see Omeka_Controller_Action
+ **/
 require_once 'Omeka/Controller/Action.php';
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class TagsController extends Omeka_Controller_Action
 {	
 	public function init()
@@ -14,7 +30,7 @@ class TagsController extends Omeka_Controller_Action
 	
 	public function editAction()
 	{
-		if($user = Omeka::loggedIn()) {
+		if($user = $this->getCurrentUser()) {
 			
 			if(!empty($_POST)) {				
 				$this->editTags($user);
@@ -22,13 +38,13 @@ class TagsController extends Omeka_Controller_Action
 					
 			$tags = $this->getTagsforAdministration();
 						
-			return $this->render('tags/edit.php', compact('tags'));
+			return $this->render(compact('tags'));
 		}
 	}
 	
 	public function deleteAction()
 	{
-		if($user = Omeka::loggedIn()) {
+		if($user = $this->getCurrentUser()) {
 			if(!empty($_POST)) {
 				$tag_id = $_POST['delete_tag'];
 				$tag = $this->_table->find($tag_id);
@@ -42,13 +58,13 @@ class TagsController extends Omeka_Controller_Action
 						
 			$tags = $this->getTagsForAdministration();
 			
-			return $this->render('tags/delete.php', compact('tags'));
+			return $this->render(compact('tags'));
 		}
 	}
 	
 	protected function getTagsForAdministration()
 	{
-		$user = Omeka::loggedIn();
+		$user = $this->getCurrentUser();
 		
 		if(!$user) {
 			throw new Exception( 'You have to be logged in to edit tags!' );
@@ -120,13 +136,11 @@ class TagsController extends Omeka_Controller_Action
 		}
 		
 		//For the count, we only need to check based on permission levels
-		$count_params = array_merge($perms, array('return'=>'count', 'limit'=>false, 'recent'=>false));
+		$count_params = array_merge($perms, array('limit'=>false, 'recent'=>false, 'type'=>$for));
 		
-		$total_tags = $this->_table->findBy($count_params, $for, true);
-
+		$total_tags = $this->_table->count($count_params);
 		
-		$tags = $this->_table->findBy(array_merge($params, $perms), $for);
-
+		$tags = $this->_table->findBy(array_merge($params, $perms, array('type'=>$for)));
 		$total_results = count($tags);
 
 		Zend_Registry::set('total_tags', $total_tags);
@@ -138,6 +152,6 @@ class TagsController extends Omeka_Controller_Action
 		
 		$browse_for = $for;
 		
-		return $this->render('tags/browse.php',compact('tags','total_tags', 'browse_for'));
+		return $this->render(compact('tags','total_tags', 'browse_for'));
 	}
 }

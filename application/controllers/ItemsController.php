@@ -1,10 +1,23 @@
 <?php
-
-require_once 'Item.php';
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+
+require_once 'Item.php';
+
+/**
+ * @see Omeka_Controller_Action
+ **/
 require_once 'Omeka/Controller/Action.php';
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class ItemsController extends Omeka_Controller_Action
 {		
 	public function init() 
@@ -18,7 +31,7 @@ class ItemsController extends Omeka_Controller_Action
 	 **/
 	public function editAction()
 	{
-		if($user = Omeka::loggedIn()) {
+		if($user = $this->getCurrentUser()) {
 			
 			$item = $this->findById();
 		
@@ -40,25 +53,39 @@ class ItemsController extends Omeka_Controller_Action
 	 **/
 	public function deleteAction()
 	{
-		if($user = Omeka::loggedIn()) {
+		if($user = $this->getCurrentUser()) {
 			$item = $this->findById();
 			
 			//Permission check
 			if($this->isAllowed('deleteAll') or ( $this->isAllowed('deleteSelf') and $item->wasAddedBy($user) )) {
 				$item->delete();
 				
-				$this->_redirect('delete', array('controller'=>'items'));
+				$this->redirect->goto('browse');
 			}
 		}
 		
-		return $this->forbiddenAction();
+		return $this->_forward('forbidden');
 	}
-
+    
+    /**
+     * Finds all tags associated with items (used for tag cloud)
+     * 
+     * @return void
+     **/
 	public function tagsAction()
 	{
-		$this->_forward('browse', 'Tags', null, array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
+	    $params = array_merge($this->_getAllParams(), array('type'=>'Item'));
+		$tags = $this->getTable('Tag')->findBy($params);
+		$this->render(compact('tags'));
 	}
-
+    
+    /**
+     * Browse the items.  Encompasses search, pagination, and filtering of
+     * request parameters.  Should perhaps be split into a separate
+     * mechanism.
+     * 
+     * @return void
+     **/
 	public function browseAction()
 	{			
 		$perms = array();
@@ -115,7 +142,7 @@ class ItemsController extends Omeka_Controller_Action
 				$filter['tags'] = $tag;
 			}
 			
-			if(($excludeTags = $this->_getParam('withoutTags'))) {
+			if(($excludeTags = $this->_getParam('excludeTags'))) {
 				$filter['excludeTags'] = $excludeTags;
 			}
 			
@@ -150,17 +177,16 @@ class ItemsController extends Omeka_Controller_Action
 		} catch (Exception $e) {
 			$this->flash($e->getMessage());
 		}
-		
-		//Permissions are checked automatically at the SQL level
-		$total_items = $this->getTable('Item')->count();
-		Zend_Registry::set('total_items', $total_items);
-		
 		$params = array_merge($perms, $filter, $order);
 
 		//Get the item count after other filtering has been applied, which is the total number of items found
-		$total_results = $this->getTable('Item')->findBy($params, true);
-		Zend_Registry::set('total_results', $total_results);
-				
+		$totalResults = $this->getTable('Item')->count($params);
+		Zend_Registry::set('total_results', $totalResults);				
+
+		//Permissions are checked automatically at the SQL level
+		$totalItems = $this->getTable('Item')->count();
+		Zend_Registry::set('total_items', $totalItems);
+		
 		/** 
 		 * Now process the pagination
 		 * 
@@ -186,12 +212,8 @@ class ItemsController extends Omeka_Controller_Action
 		Zend_Registry::set('pagination', $pagination);
 		
 		fire_plugin_hook('browse_items', $items);
-		
-		$pass_to_template = compact('total_items', 'items');
-		$pass_to_template['recordset'] = $items;
-		$pass_to_template['record_type'] = 'Item';
-		
-		return $this->render('items/browse.php', $pass_to_template);
+						
+		return $this->render(compact('total_items', 'items'));
 	}
 		
 	/**
@@ -203,8 +225,8 @@ class ItemsController extends Omeka_Controller_Action
 	protected function getItemsPerPage()
 	{
         //Retrieve the number from the config file
-		$config_ini = Zend_Registry::get('config_ini');
-		$per_page = $config_ini->pagination->per_page;
+		$config = Omeka_Context::getInstance()->getConfig('basic');
+		$per_page = $config->pagination->per_page;
                 
         if($this->isAllowed('modifyPerPage') and $this->_getParam('per_page')) {
 			$per_page = $this->_getParam('per_page');
@@ -212,41 +234,8 @@ class ItemsController extends Omeka_Controller_Action
 		
 		return $per_page;   
 	}
-		
-	public function showAction() 
-	{
-		$item = $this->findById();
-		$user = Omeka::loggedIn();
-		
-		//Add the tags
-		 
-		if(array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
-			
-		 	if($this->isAllowed('tag')) {
-				$tagsAdded = $item->saveForm($_POST);
-				$item = $this->findById();
-			}else {
-				$this->flash('User does not have permission to add tags.');
-			}
-		}
 
-		//@todo Does makeFavorite require a permissions check?
-		if($this->getRequest()->getParam('makeFavorite')) {
-			$item->toggleFavorite($user);
-			fire_plugin_hook('make_item_favorite',  $item, $user);
-		}
-
-		$item = $this->findById();
-		
-		Zend_Registry::set('item', $item);
-		
-		fire_plugin_hook('show_item', $item);
-		
-		$pass_to_template = compact("item", 'user');
-		$pass_to_template['record'] = $item;
-		
-		return $this->render('items/show.php', $pass_to_template);
-	}
+	///// AJAX ACTIONS /////
 	
 	/**
 	 * Find or create an item for this mini-form
@@ -262,12 +251,57 @@ class ItemsController extends Omeka_Controller_Action
 		
 		$item->type_id = $_POST['type_id'];
 		
-		return $this->render('items/_type.php', compact('item'));
+		return $this->render(compact('item'));
 	}
 	
 	/**
+	 * Display the form for tags for a given item.
 	 * 
-	 * @since Supports public and featured changes on items
+	 * @return void
+	 **/
+	public function tagFormAction()
+	{
+	    $item = $this->findById();
+	    
+	    return $this->render(compact('item'));
+	}
+	
+	/**
+	 * Modify the tags for an item (add or remove).  If this is an AJAX request, it will
+	 * render the 'tag-list' partial, otherwise it will redirect to the
+	 * 'show' action.
+	 * 
+	 * @return void
+	 **/
+	public function modifyTagsAction()
+	{
+		$item = $this->findById();
+
+		//Add the tags
+		 
+		if(array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
+			
+		 	if($this->isAllowed('tag')) {
+				$tagsAdded = $item->saveForm($_POST);
+				$item = $this->findById();
+			}else {
+				$this->flash('User does not have permission to add tags.');
+			}
+		}
+		
+		if(!$this->getRequest()->isXmlHttpRequest()) {
+		    $itemId = $this->_getParam('id');
+		    return $this->redirect->gotoRoute(array('controller'=>'items', 'action'=>'show','id'=>$itemId), 'id');
+		}
+		
+		return $this->render(compact('item'), 'tag-list');	    
+	}
+	
+	///// END AJAX ACTIONS /////
+	
+	/**
+	 * Change the 'public' or 'featured' status of items
+	 * 
 	 * @return void
 	 **/
 	public function powerEditAction()
@@ -279,7 +313,7 @@ class ItemsController extends Omeka_Controller_Action
 					items[2]...etc
 		*/
 		if(empty($_POST)) {
-			$this->_redirect('items/browse');
+			$this->redirect->goto('browse');
 		}
 		
 		
@@ -325,8 +359,7 @@ class ItemsController extends Omeka_Controller_Action
 			$this->flash($e->getMessage());
 		}
 		
-		$this->_redirect($_SERVER['HTTP_REFERER']);
+		$this->redirect->gotoUrl($_SERVER['HTTP_REFERER']);
 	}
 	
 }
-?>

@@ -1,29 +1,44 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'File.php';
+
+/**
+ * @see File.php
+ **/
+require_once 'File.php';
 
 require_once 'Omeka/Controller/Action.php';
+
+/**
+ * All URLs for files are routed through this controller.
+ *
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class FilesController extends Omeka_Controller_Action
 {
 	public function init() {
 		$this->_modelClass = 'File';
 	}
 	
-	public function indexAction() { $this->_redirect('/'); }
+	public function indexAction() { $this->redirect->gotoUrl(''); }
 	
 	// Should not browse files by themselves
-	public function browseAction() { $this->indexAction(); }
+	public function browseAction() {}
 	
-	public function addAction() {$this->indexAction();}
+	public function addAction() {}
 	
 	public function showAction()
 	{
 		$file = $this->findById();
 														
 		Zend_Registry::set('file', $file);
-		$this->render('files/show.php',compact('file'));
+		$this->render(compact('file'));
 	}
 
 	protected function isValidFormat($format)
@@ -58,4 +73,3 @@ class FilesController extends Omeka_Controller_Action
 		header('Location: '.$path);
 	}
 }
-?>

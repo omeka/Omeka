@@ -112,16 +112,16 @@ class Exhibit extends Omeka_Record
 	protected function afterSaveForm($post)
 	{
 		//Add the tags after the form has been saved
-		$current_user = Omeka::loggedIn();		
+		$current_user = Omeka_Context::getInstance()->getCurrentUser();		
 		$this->applyTagString($post['tags'], $current_user->Entity, true);	
 	}
 	
 	public function getSection($slug)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT s.* FROM $db->ExhibitSection s WHERE s.slug = ? AND s.exhibit_id = ?";
 
-        return $this->getTable('ExhibitSection')->fetchObjects($sql, array( strtolower($slug), (int) $this->id), true);	
+        return $this->getTable('ExhibitSection')->fetchObject($sql, array( strtolower($slug), (int) $this->id));	
 	}
 	
 	/**
@@ -134,5 +134,3 @@ class Exhibit extends Omeka_Record
 		return $this->getChildCount();
 	}
 }
-
-?>

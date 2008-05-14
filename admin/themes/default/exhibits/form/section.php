@@ -8,7 +8,7 @@
 		listSorter.list = $('page-list');
 		listSorter.form = $('section-form');
 		listSorter.editUri = "<?php echo $_SERVER['REQUEST_URI']; ?>";
-		listSorter.partialUri = "<?php echo uri('exhibits/pageList'); ?>";
+		listSorter.partialUri = "<?php echo uri('exhibits/page-list'); ?>";
 		listSorter.recordId = '<?php echo h($section->id); ?>';
 		listSorter.tag = 'li';
 		listSorter.handle = 'handle';
@@ -70,7 +70,7 @@
 </form>
 
 <?php /*if ( $section->exists() ): ?>
-	<form action="<?php echo uri('exhibits/deleteSection/'.$section->id); ?>">
+	<form action="<?php echo uri('exhibits/delete-section/'.$section->id); ?>">
 		<input type="submit" name="submit" value="Delete this Section" />
 	</form>
 <?php endif;*/ ?>

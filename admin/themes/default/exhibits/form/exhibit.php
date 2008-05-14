@@ -24,7 +24,7 @@
 	function loadSectionForm(exhibit_id)
 	{
 		//Now submit the request for the 
-		new Ajax.Updater('new-section', "<?php echo uri('exhibits/sectionForm'); ?>", {
+		new Ajax.Updater('new-section', "<?php echo uri('exhibits/section-form'); ?>", {
 			parameters: "id=" + exhibit_id,
 			onFailure: function(t) {
 				Omeka.flash(t.responseText);
@@ -163,7 +163,7 @@
 		listSorter.list = list;
 		listSorter.form = $('exhibit-form');
 		listSorter.editUri = "<?php echo generate_url(array('controller'=>'exhibits','action'=>'edit'),'default'); ?>/" + exhibit_id;
-		listSorter.partialUri = "<?php echo uri('exhibits/sectionList'); ?>?id="+exhibit_id;
+		listSorter.partialUri = "<?php echo uri('exhibits/section-list'); ?>?id="+exhibit_id;
 		listSorter.recordId = exhibit_id;
 		listSorter.tag = 'li';
 		listSorter.handle = 'handle';

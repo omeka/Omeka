@@ -1,7 +1,16 @@
 <?php 
 /**
-* Relatable strategy
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Relatable extends Omeka_Record_Module
 {
 	protected $record;
@@ -19,7 +28,7 @@ class Relatable extends Omeka_Record_Module
 	 **/
 	public function afterUpdate()
 	{
-		if($entity = Omeka::loggedIn()->Entity) {
+		if($entity = Omeka_Context::getInstance()->getCurrentUser()->Entity) {
 			$this->setModifiedBy($entity);
 		}		
 	}
@@ -31,7 +40,7 @@ class Relatable extends Omeka_Record_Module
 	 **/
 	public function afterInsert()
 	{
-		if($entity = Omeka::loggedIn()->Entity) {
+		if($entity = Omeka_Context::getInstance()->getCurrentUser()->Entity) {
 			$this->setAddedBy($entity);
 		}		
 	}
@@ -53,7 +62,7 @@ class Relatable extends Omeka_Record_Module
 		
 		//What table should we be deleting taggings for
 		
-		$db = get_db();
+		$db = $this->getDb();
 		
 		//Polymorphic 'type' column in this table
 		$type = (string) get_class($this->record);
@@ -76,7 +85,7 @@ class Relatable extends Omeka_Record_Module
 	 **/
 	public function timeOfLastRelationship($rel)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = "SELECT ie.time as time
 				FROM {$db->EntitiesRelations} ie 
@@ -97,7 +106,7 @@ class Relatable extends Omeka_Record_Module
 	 **/
 	public function getRelatedEntities($rel)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 						
 		$sql = 
 		"SELECT e.* FROM {$db->Entity} e 
@@ -135,7 +144,7 @@ class Relatable extends Omeka_Record_Module
 			throw new Exception( 'Relationship called '.$relationship . ' does not exist.' );
 		}
 		
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = "INSERT INTO {$db->EntitiesRelations}
 					(entity_id, relation_id, relationship_id, time, `type`)
@@ -155,7 +164,7 @@ class Relatable extends Omeka_Record_Module
 		
 		$limit = (!empty($limit)) ? (int) $limit : null;
 		
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = 
 		"DELETE FROM {$db->EntitiesRelations}
@@ -171,7 +180,7 @@ class Relatable extends Omeka_Record_Module
 
 	protected function getRelationshipId($rel)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT r.id FROM {$db->EntityRelationships} r WHERE r.name = ?";
 		return $db->fetchOne($sql, array($rel));
 	}
@@ -189,25 +198,25 @@ class Relatable extends Omeka_Record_Module
 
 	public function isRelatedTo($entity_id, $rel=null)
 	{
-		$conn = get_db();
-		$select = new Omeka_Select;
+		$db = $this->getDb();
+		$select = new Omeka_Db_Select;
 		
 		$relation_id = $this->getRelationId();
 				
-		$db = get_db();		
+		$db = $this->getDb();		
 				
-		$select->from("{$db->EntitiesRelations} ie", "COUNT(ie.id)")
-				->innerJoin("{$db->Entity} e", "e.id = ie.entity_id")
+		$select->from(array('ie'=>$db->EntitiesRelations), "COUNT(ie.id)")
+				->joinInner(array('e'=>$db->Entity), "e.id = ie.entity_id", array())
 				->where("ie.relation_id = ?", $relation_id)
 				->where("ie.entity_id = ?", $entity_id)
 				->where("ie.type = ?", $this->type); 
 										
 		if(!empty($rel)) {
-			$select->innerJoin("{$db->EntityRelationships} ier", "ier.id = ie.relationship_id");
+			$select->joinInner(array('ier'=>$db->EntityRelationships), "ier.id = ie.relationship_id", array());
 			$select->where("ier.name = ?", $rel);
 		}
 
-		$count = $select->fetchOne();
+		$count = $db->fetchOne($select);
 				
 		return $count > 0;
 	}
@@ -275,5 +284,3 @@ class Relatable extends Omeka_Record_Module
 		return false;
 	}
 }
- 
-?>

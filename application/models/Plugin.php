@@ -1,10 +1,17 @@
 <?php
-require_once 'Metafield.php';
 /**
- * Used for plugin storage in the database
- *
- * @package default
- * 
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+require_once 'Metafield.php';
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class Plugin extends Omeka_Record
 {
@@ -17,7 +24,4 @@ class Plugin extends Omeka_Record
 			$this->addError('name', 'Names of plugins must not be blank');
 		}
 	}
-} // END class Location extends Omeka_Record
-
-
-?>
+}

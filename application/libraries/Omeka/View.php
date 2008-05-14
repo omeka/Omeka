@@ -1,20 +1,33 @@
 <?php
 /**
- * Customized view class
- *
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+ 
+/**
+ * @see Zend_View_Abstract
+ */
 require_once 'Zend/View/Abstract.php';
+
+/**
+ * Customized subclass of Zend Framework's View class.
+ *
+ * This adds the correct script paths for themes and plugins
+ * so that controllers can render the appropriate scripts.
+ *
+ * This will also inject directly into the view scripts
+ * all variables that have been assigned to the view,
+ * so that theme writers can access them as $item instead of
+ * $this->item, for example.
+ *
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_View extends Zend_View_Abstract
 {	
-	/**
-	 * Placeholder for Zend Request object
-	 * @var _request Zend_Controller_Request object
-	 */
-	protected $_controller;
-	
-	protected $_request;
-	
 	/**
 	 * Maintains a key => value pairing corresponding to hard path => web path for possible assets for Omeka views
 	 *
@@ -22,89 +35,112 @@ class Omeka_View extends Zend_View_Abstract
 	 **/
 	protected $_asset_paths = array();
 	
-	/**
-	 * Using the current admin system, an option
-	 * is set by the admin controller upon authentication
-	 * that can then be used to verify that an admin request
-	 * has been made through GET or via routes.
-	 * 
-	 * This is the only reason why we need to let the view
-	 * know about the request object, so that it can correctly
-	 * grab the admin template or the publicly available template.
-	 * 
-	 * 
-	 * @edited 2007-02-09
-	 */
-	public function __construct($controller, $config = array())
+	public function __construct($config = array())
 	{
-		parent::__construct($config);
-		
-		$this->_controller = $controller;
-		
-		if(isset($config['request'])) {
-			$this->_request = $config['request'];
-		}
-		
-		Zend_Registry::set('view', $this);				
+		parent::__construct($config);		
+		Zend_Registry::set('view', $this);	
+		$this->initPaths();		
 	}
 	
 	/**
-	 * Simple factory method for returning an instance of a View Format obj
-	 * 
-	 * Check based on some common string manipulation
+	 * Load order for view scripts:
+	 * themes
+	 * plugins
+	 * application/views
 	 *
-	 * @return void
+	 * Load order for asset paths:
+	 * themes
+	 * plugins
+	 * shared
+	 * application/views
+	 *
+	 * @todo Is there any reason why shared paths shouldn't load view scripts?
+	 * 
 	 **/
-	public function getFormat($format, $options)
+	private function initPaths()
 	{
-		//This will give us a class like Omeka_View_Format_Xml from 'xml'
-		$class = "Omeka_View_Format_" . ucwords(strtolower($format));
-		
-		try {
-			Zend_Loader::loadClass($class);
-			$format_class = new $class($this, $options);
-
-			if($format_class->canRender()) {
-				return $format_class;
-			}
-		} 
-		//Silence exceptions for missing classes
-		catch (Zend_Exception $e) {}		
-		
-		//Return the plugin handler as the default, which can handle whatever nonsense you throw towards it
-		$options['format'] = $format;
-		return new Omeka_View_Format_Plugin($this, $options);		
+	    //Baseline view scripts get checked first
+	    $this->addScriptPath(VIEW_SCRIPTS_DIR);
+	    
+	    //View scripts and shared directory get checked for assets 
+	    $this->addAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
+	    $this->addAssetPath(SHARED_DIR, WEB_SHARED);	    
+	    
+	    //Next add script paths for plugins and themes (in that order)
+	    //The admin bootstrap defines this simple constant to let us know
+	    if(defined('ADMIN')) {
+	        $this->addPluginPaths('admin');
+	        $this->addThemePaths('admin');
+	    }
+	    else {
+	        $this->addPluginPaths('public');
+	        $this->addThemePaths('public');
+	    }
+	    
+	    $this->addHelperPath(HELPER_DIR, 'Omeka_View_Helper');	    
 	}
 	
-	/**
-	 * Functions that see through to the controller
-	 * Simple stuff
-	 * 
-	 */
+	public function addPluginPaths($themeType)
+	{
+	    if($broker = Omeka_Context::getInstance()->getPluginBroker()) {
+	        $broker->loadThemeDirs($this, $themeType);
+	    }
+	}
+    
+    /**
+     * Retrieve the option from the database that contains the directory of
+     * the theme to render. 
+     * 
+     * @param string $type Currently either 'admin' or 'public'
+     * @return string
+     **/
+    protected function getThemeOption($type)
+    {
+        $options = Omeka_Context::getInstance()->getOptions();
+        return @$options[$type . '_theme'];
+    }
+    
+    /**
+     * Add asset and script paths for the chosen theme
+     * 
+     * @param string Currently 'admin' or 'public'
+     * @return void
+     **/
+	protected function addThemePaths($themeType)
+	{					
+		if($themeName = $this->getThemeOption($themeType)) {
+    		$scriptPath = THEME_DIR.DIRECTORY_SEPARATOR.$themeName;
+    		$this->addScriptPath($scriptPath);
+    		$this->addAssetPath($scriptPath, WEB_THEME.DIRECTORY_SEPARATOR.$themeName);		    
+		}	
+	}
+	
 	public function getRequest()
 	{
-		if(!empty($this->_request)) {
-			return $this->_request;
-		}
-		
-		return $this->_controller->getRequest();
+		return Omeka_Context::getInstance()->getRequest();
 	}
 	
 	public function getResponse()
 	{
-		return $this->_controller->getResponse();
+		return Omeka_Context::getInstance()->getResponse();
 	}
 	
 	public function getAssetPaths()
 	{
 		return $this->_asset_paths;
 	}
-	
-	public function addAssetPath($physical_path, $web_path)
+
+	public function addAssetPath($physical, $web)
 	{
-		$this->_asset_paths[$physical_path] = $web_path;
+	    array_unshift($this->_asset_paths, array($physical, $web));
 	}
 	
+	public function setAssetPath($physical, $web)
+	{
+	    $this->_asset_paths = array();
+	    $this->_asset_paths[] = array($physical, $web);
+	}
+		
 	/**
 	 * This allows for variables set to the view object
 	 * to be referenced in the view script by their actual name.
@@ -122,7 +158,9 @@ class Omeka_View extends Zend_View_Abstract
 	 */
 	public function _run() {
 		$vars = $this->getVars();
-	
+				
+		require_once HELPERS;
+		
 		try {
 			extract($vars);	
 			include func_get_arg(0);
@@ -132,31 +170,12 @@ class Omeka_View extends Zend_View_Abstract
 				This is b/c the only PHP executed beyond this point are theme functions */
 			echo 'Error:' . $e->getMessage();
 			
-			$config = Zend_Registry::get( 'config_ini' );
-			//Display a lot of info if exceptions are turned on
-			if($config->debug->exceptions) {	
-				echo nl2br( $e->getTraceAsString() );
+			if($config = Omeka_Context::getInstance()->getConfig('basic')) {
+    			//Display a lot of info if exceptions are turned on
+    			if($config->debug->exceptions) {	
+    				echo nl2br( $e->getTraceAsString() );
+    			}			    
 			}
 		}
 	}
-		
-	/**
-	 * Get a View_Format object and then render it
-	 *
-	 * Filename of script to render (if applicable) gets passed as part of $options
-	 * 
-	 * @return void
-	 **/
-	public function renderFormat($format, $file, $options=array())
-	{
-		$options['feed_filename'] = $file;
-		
-		$format_obj = $this->getFormat($format, $options);
-		
-		if(!$format_obj) {
-			throw new Exception( "Format named '$format' does not exist!" );
-		}
-		return $format_obj->render();
-	}
 }
-?>

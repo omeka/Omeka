@@ -6,14 +6,14 @@
 class ExhibitPermissions
 {
 	/**
-	 * Right now SQL must be an instance of Omeka_Select b/c that is the only way to add conditional SQL
+	 * Right now SQL must be an instance of Omeka_Db_Select b/c that is the only way to add conditional SQL
 	 *
-	 * @return Omeka_Select
+	 * @return Omeka_Db_Select
 	 **/
-	public function __construct(Omeka_Select $sql)
+	public function __construct(Omeka_Db_Select $sql)
 	{
-		$acl = get_acl();
-		$db = get_db();
+		$acl = Omeka_Context::getInstance()->getAcl();
+		$db = $this->getDb();
 		
 		$has_permission = $acl->checkUserPermission('Exhibits', 'showNotPublic');
 		

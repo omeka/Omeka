@@ -1,7 +1,16 @@
 <?php 
 /**
-* 
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Orderable extends Omeka_Record_Module
 {
 	public function __construct($record, $childClass, $childFk, $childPluralized)
@@ -15,7 +24,7 @@ class Orderable extends Omeka_Record_Module
 	public function loadOrderedChildren()
 	{
 		$id = (int) $this->record->id;
-		$db = get_db();
+		$db = $this->getDb();
 		$target = $this->childClass;
 				
 		$sql = "SELECT s.* FROM {$db->$target} s WHERE s.{$this->childFk} = $id ORDER BY s.`order` ASC";
@@ -58,7 +67,7 @@ class Orderable extends Omeka_Record_Module
 	public function reorderChildren()
 	{		
 		//Retrieve all section IDs in ascending order, then update 
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$target = $this->childClass;
 		
@@ -99,7 +108,7 @@ class Orderable extends Omeka_Record_Module
 	
 	public function getChildCount()
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$target = $this->childClass;
 		
@@ -107,5 +116,3 @@ class Orderable extends Omeka_Record_Module
 		return $db->fetchOne($sql, array($this->record->id));
 	}
 }
- 
-?>

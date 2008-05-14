@@ -1,7 +1,16 @@
 <?php 
 /**
-* 
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class MetatextTable extends Omeka_Table
 {
 	
@@ -13,7 +22,7 @@ class MetatextTable extends Omeka_Table
 	 **/	
 	public function findTypeMetadata($item, $simplified=false)
 	{
-		$db = $this->getConn();
+		$db = $this->getDb();
 		
 		$type_id = (int) $item->type_id;
 		$item_id = (int) $item->id;
@@ -54,10 +63,10 @@ class MetatextTable extends Omeka_Table
 	 **/
 	public function findByItemAndMetafield($item_id, $metafield_id)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT mt.* FROM $db->Metatext mt WHERE mt.item_id = ? AND mt.metafield_id = ? LIMIT 1";
-		$mt_obj = $this->fetchObjects($sql, array($item_id, $metafield_id), true);
-		
+		$mt_obj = $this->fetchObject($sql, array($item_id, $metafield_id));
+
 		$exists = $db->getTable('Metafield')->checkExists($metafield_id);
 		
 		if(!$exists) {
@@ -82,7 +91,7 @@ class MetatextTable extends Omeka_Table
 	 **/
 	public function findByItem($item_id)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = "SELECT DISTINCT(mf.name) as name, mt.id, mt.text as text, mt.metafield_id, mf.description, mt.item_id
 				FROM $db->Metatext mt 
@@ -103,5 +112,3 @@ class MetatextTable extends Omeka_Table
 		return $indexed;
 	}
 }
- 
-?>

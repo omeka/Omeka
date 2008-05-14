@@ -1,10 +1,19 @@
 <?php 
 /**
-* 
-*/
-class ItemRss2 extends Omeka_Record_Feed_Abstract
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
+class ItemRss2
 {
-	public function renderAll(array $records)
+	public function render(array $records)
 	{
 		$entries = array();
 		foreach ($records as $record) {
@@ -19,15 +28,9 @@ class ItemRss2 extends Omeka_Record_Feed_Abstract
 		
 		return $feed->saveXML();		
 	}
-	
-	public function renderOne(Omeka_Record $item)
-	{
-		throw new Exception( 'Cannot render an RSS feed for a single item!' );
-	}
 
 	protected function buildRSSHeaders()
 	{
-		require_once HELPERS;
 		$headers = array();
 
 //		How do we determine what title to give the RSS feed?		
@@ -82,10 +85,7 @@ class ItemRss2 extends Omeka_Record_Feed_Abstract
 	}
 	
 	protected function itemToRSS($item)
-	{
-	    //Need to use the link helpers for this one
-		require_once HELPERS;
-	    
+	{	    
 		$entry = array();
 		
 		$entry['title'] = $item->title;
@@ -108,5 +108,3 @@ class ItemRss2 extends Omeka_Record_Feed_Abstract
 		return $entry;		
 	}
 }
- 
-?>

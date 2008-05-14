@@ -1,4 +1,10 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 if ( ! function_exists ( 'mime_content_type' ) )
 {
@@ -15,9 +21,11 @@ require_once 'FileTable.php';
 require_once 'FilesImages.php';
 require_once 'FilesVideos.php';
 require_once 'FileMetaLookup.php';
+
 /**
  * @package Omeka
- * 
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class File extends Omeka_Record { 
     
@@ -107,7 +115,7 @@ class File extends Omeka_Record {
 			return;
 		}
 		
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$lookupTable = $db->FileMetaLookup;
 		$fileTable = $db->File;
@@ -343,7 +351,7 @@ class File extends Omeka_Record {
 	}
 	
 	protected static function checkForImageMagick($path) {
-		exec( $path . ' -version', $convert_version, $convert_return );
+		exec( $path, $convert_version, $convert_return );
 		return ( $convert_return == 0 );
 	}
 	
@@ -455,7 +463,7 @@ class File extends Omeka_Record {
 		}
 			
 		//Determine the lookup ID from the given MIME type
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT * FROM  $db->FileMetaLookup WHERE mime_type = ? LIMIT 1";
 		$res = $db->query($sql, array($mime_type))->fetchAll();
 				
@@ -496,7 +504,7 @@ class File extends Omeka_Record {
 	 **/
 	private function retrieveID3Info($path)
 	{
-		require_once LIB_DIR.DIRECTORY_SEPARATOR.'getid3/getid3.php';
+		require_once 'getid3/getid3.php';
 		//Instantiate this third-party sheit
 		$id3 = new getID3;
 		
@@ -583,5 +591,3 @@ class File extends Omeka_Record {
 		$this->unlinkFile();
 	}
 }  	 
-
-?>

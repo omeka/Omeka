@@ -1,8 +1,24 @@
 <?php 
 /**
-* This class knows most of the details for how to render model objects directly into XML
-*/
-abstract class Omeka_Record_Feed_Xml extends Omeka_Record_Feed_Abstract
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * Can convert one or more Omeka_Record objects into an XML representation.
+ *
+ * @todo There is no namespace for this XML and thus no standard (as of now),
+ * so this default XML representation has no value to the standards-oriented
+ * museum community.  We should either deprecate this XML format or refine
+ * and namespace it.  
+ * @see ItemXml.php
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
+class Omeka_Record_Feed_Xml
 {	
 	protected function sanitizeXML($xml)
 	{
@@ -18,7 +34,7 @@ abstract class Omeka_Record_Feed_Xml extends Omeka_Record_Feed_Abstract
 		$first = current($records);
 		
 		//For a set of Item objects, this would be 'items'
-		$root = $first->getPluralized();
+		$root = strtolower(Inflector::pluralize(get_class($first)));
 		
 		//Start the XML doc
 		$xml = "<$root>";
@@ -59,5 +75,3 @@ abstract class Omeka_Record_Feed_Xml extends Omeka_Record_Feed_Abstract
 		return $xml->asXML();
 	}
 }
- 
-?>

@@ -1,13 +1,21 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
 require_once 'UsersActivations.php';
 require_once 'UserTable.php';
 require_once 'Entity.php';
 require_once 'Item.php';
+
 /**
  * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
-
-
 class User extends Omeka_Record {
 
 	public $username;
@@ -31,7 +39,7 @@ class User extends Omeka_Record {
 		
 		
 		//This part checks the password to see if it has been changed, then encrypts it accordingly
-		$db = get_db();
+		$db = $this->getDb();
 				
 		if($this->exists()) {
 			$sql = "SELECT password FROM $db->User WHERE id = ?";
@@ -85,7 +93,7 @@ class User extends Omeka_Record {
 	 **/
 	protected function filterInput($input)
 	{
-		$options = array('namespace'=>'Omeka_Filter');
+		$options = array('inputNamespace'=>'Omeka_Filter');
 		
 		//Alphanumeric with no whitespace allowed, lowercase
 		$username_filter = array(new Zend_Filter_Alnum(false), 'StringToLower');
@@ -174,7 +182,7 @@ class User extends Omeka_Record {
 	 **/
 	private function emailIsUnique($email)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT u.id FROM $db->User u INNER JOIN $db->Entity e ON e.id = u.entity_id WHERE e.email = ?";
 		
 		$id = $db->query($sql, array($email))->fetchAll();
@@ -186,7 +194,7 @@ class User extends Omeka_Record {
 	
 	private function usernameIsUnique($username)
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = "SELECT u.id FROM $db->User u WHERE u.username = ? LIMIT 1";
 		
@@ -209,7 +217,7 @@ class User extends Omeka_Record {
 	public function changePassword($new1, $new2, $old)
 	{	
 		//super users can change the password without knowing the old one
-		$current = Omeka::loggedIn();
+		$current = Omeka_Context::getInstance()->getCurrentUser();
 		if($current->role == 'super') {
 			
 			if($new1 != $new2) {
@@ -287,4 +295,3 @@ class User extends Omeka_Record {
 		return $password;
 	}		
 }
-?>

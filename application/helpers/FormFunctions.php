@@ -1,4 +1,14 @@
 <?php
+    /**
+     * Used to generate attributes for XHTML tags
+     *
+     * @access private
+     * @param array|string $attributes Attributes for the tag.  If this is a 
+     * string, it will assign both 'name' and 'id' attributes that value for
+     * the tag.
+     * @param string
+     * @return void
+     **/
 	function _tag_attributes($attributes,$value=null) {
 	
 		if(is_string($attributes)) {

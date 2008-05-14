@@ -1,4 +1,11 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
 require_once 'Collection.php';
 require_once 'Type.php';
 require_once 'User.php';
@@ -12,9 +19,12 @@ require_once 'Exhibit.php';
 require_once 'Relatable.php';
 require_once 'ItemTable.php';
 require_once 'ItemPermissions.php';	
+
 /**
-* Item
-*/
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Item extends Omeka_Record
 {		
 	public $title;
@@ -155,7 +165,7 @@ class Item extends Omeka_Record
 		
 		//Change the tags (remove some, add some)
 		if(array_key_exists('tags', $post)) {
-			$user = Omeka::loggedIn();
+			$user = Omeka_Context::getInstance()->getCurrentUser();
 			$entity = $user->Entity;
 			if($entity) {
 				$this->applyTagString($post['tags'], $entity);
@@ -170,7 +180,7 @@ class Item extends Omeka_Record
 		//Save metatext from the form
 		if(!empty($post['metafields'])) {
 			foreach ($post['metafields'] as $metafield_id => $mt_a) {
-				$mt_obj = get_db()->getTable('Metatext')->findByItemAndMetafield($this->id, $metafield_id);
+				$mt_obj = $this->getDb()->getTable('Metatext')->findByItemAndMetafield($this->id, $metafield_id);
 			
 				$mt_obj->text = (string) $mt_a['text'];
 				$mt_obj->save();
@@ -193,7 +203,7 @@ class Item extends Omeka_Record
 		//Special method for untagging other users' tags
 		
 		$tagToDelete = $this->getTable('Tag')->find($tag_id);
-		$current_user = Omeka::loggedIn();
+		$current_user = Omeka_Context::getInstance()->getCurrentUser();
 		if($tagToDelete) {
 			fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $current_user);
 	
@@ -217,14 +227,14 @@ class Item extends Omeka_Record
 		}
 		
 		//Delete metatext
-		$metatext = get_db()->getTable('Metatext')->findByItem($this->id);
+		$metatext = $this->getDb()->getTable('Metatext')->findByItem($this->id);
 		
 		foreach ($metatext as $entry) {
 			$entry->delete();
 		}
 		
 		//Update the exhibits to get rid of all references to the item anywhere in there
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$update = "UPDATE $db->ExhibitPageEntry SET item_id = NULL WHERE item_id = ?";
 		$db->exec($update, array($this->id));
@@ -289,7 +299,7 @@ class Item extends Omeka_Record
 	 **/
 	protected function filterInput($input)
 	{
-		$options = array('namespace'=>'Omeka_Filter');
+		$options = array('inputNamespace'=>'Omeka_Filter');
 		
 		$filters = array(
 			
@@ -369,7 +379,7 @@ class Item extends Omeka_Record
 	
 	public function hasFiles()
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT COUNT(f.id) FROM $db->File f WHERE f.item_id = ?";
 		$count = (int) $db->fetchOne($sql, array((int) $this->id));
 		
@@ -417,12 +427,12 @@ class Item extends Omeka_Record
 	 **/
 	public function previous()
 	{
-		return get_db()->getTable('Item')->findPrevious($this);
+		return $this->getDb()->getTable('Item')->findPrevious($this);
 	}
 	
 	public function next()
 	{
-		return get_db()->getTable('Item')->findNext($this);
+		return $this->getDb()->getTable('Item')->findNext($this);
 	}
 		
 	/**
@@ -432,7 +442,7 @@ class Item extends Omeka_Record
 	 **/
 	public function isInExhibit($exhibit)
 	{
-		return get_db()->getTable('Exhibit')->exhibitHasItem($exhibit->id, $this->id);
+		return $this->getDb()->getTable('Exhibit')->exhibitHasItem($exhibit->id, $this->id);
 	}
 	
 	//Everything past this is elements of the old code that may be changed or deprecated
@@ -444,9 +454,10 @@ class Item extends Omeka_Record
 	 **/
 	public static function fields($prefix=true)
 	{
+		$db = Omeka_Context::getInstance()->getDb();
 		
 		//Hack to the get the list of columns
-		$cols = get_db()->getTable('Item')->getColumns();
+		$cols = $db->getTable('Item')->getColumns();
 
 		//Avoid certain fields because they are DB keys or protected/private
 		$avoid = array('id', 'type_id', 'collection_id', 'featured', 'public');
@@ -456,7 +467,7 @@ class Item extends Omeka_Record
 			if(in_array($col, $avoid)) continue;
 			
 			//Field name should not have underscores and should be uppercase
-			$field = Omeka::humanize($col);
+			$field = Inflector::humanize($col, 'all');
 			
 			$key = $prefix ? 'item_' . $col : $col; 
 			$fields[$key] = $field;
@@ -466,7 +477,7 @@ class Item extends Omeka_Record
 	
 	public function hasThumbnail()
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = "SELECT COUNT(f.id) FROM $db->File f WHERE f.item_id = ? AND f.has_derivative_image = 1";
 		
@@ -492,5 +503,3 @@ class Item extends Omeka_Record
 	    return $cite;
 	 }
 }
- 
-?>

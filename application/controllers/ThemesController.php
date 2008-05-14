@@ -1,16 +1,28 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+
+/**
+ * @package Omeka_Controller_Action
+ **/
 require_once 'Omeka/Controller/Action.php';
-require_once MODEL_DIR.DIRECTORY_SEPARATOR.'Theme.php';
+
+/**
+ * @see Theme.php
+ */
+require_once 'Theme.php';
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class ThemesController extends Omeka_Controller_Action
 {	
-	public function rerouteAction()
-	{
-		$this->_redirect('themes/browse');
-	}
-	
 	/**
 	 * Simple recursive function that scrapes the theme info for either a single theme or all of them, given a directory
 	 * @todo make it switch between public and admin
@@ -81,7 +93,6 @@ class ThemesController extends Omeka_Controller_Action
         
 		$current = $this->getAvailable($public);
 
-		return $this->render('themes/browse.php', compact('current', 'themes'));
+		return $this->render(compact('current', 'themes'));
 	}
 }
-?>

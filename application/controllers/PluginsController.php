@@ -1,19 +1,32 @@
 <?php
-require_once 'Plugin.php';
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+
+/**
+ * @see Plugin.php
+ */ 
+require_once 'Plugin.php';
+
+/**
+ * @see Omeka_Controller_Action
+ **/
 require_once 'Omeka/Controller/Action.php';
+
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class PluginsController extends Omeka_Controller_Action
 {
-	
-	protected $_redirects = array(
-		'install' => array('plugins/install/name', array('name'))
-	);
-	
 	public function init()
 	{
 		$this->_modelClass = 'Plugin';
+		$this->_pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
 	}
 	
 	/**
@@ -26,7 +39,7 @@ class PluginsController extends Omeka_Controller_Action
 	{
 		$plugin = $this->_getParam('name');
 
-		$broker = get_plugin_broker();
+		$broker = $this->_pluginBroker;
 		
 		if(!$plugin) {
 			$this->errorAction();
@@ -36,11 +49,11 @@ class PluginsController extends Omeka_Controller_Action
 		
 		//If the configuration function returns output, then we need to render that because it is a form
 		if($config !== null) {
-			return $this->render('plugins/config.php', compact('config', 'plugin'));
+			return $this->render(compact('config', 'plugin'));
 		}
 		else {
 			$this->flashSuccess('Plugin configuration successfully changed!');
-			$this->_redirect('plugins/browse');	
+			$this->redirect->goto('browse');	
 		}
 	}
 	
@@ -50,34 +63,33 @@ class PluginsController extends Omeka_Controller_Action
 
 		if(!$plugin) $this->errorAction();
 		
-		$broker = get_plugin_broker();
+		$broker = $this->_pluginBroker;
 
 		if(!$broker->isInstalled($plugin)) {
 
 			$config = $broker->install($plugin);
 			
 			if($config !== null) {
-				return $this->render('plugins/config.php', compact('config', 'plugin'));
+				return $this->render(compact('config', 'plugin'));
 			}
 			else {
 				$this->flashSuccess("Plugin named '$plugin' was successfully installed!");
-				$this->_redirect('plugins/browse');
+				$this->redirect->goto('browse');
 			}			
 		}
 	}
 	
 	public function activateAction()
 	{
-		
 		//Get the plugin record, toggle its status and save it back
-		$plugin = get_db()->getTable('Plugin')->findBySql('name = ?', array($_POST['activate']), true );
+		$plugin = $this->getTable()->findBySql('name = ?', array($_POST['activate']), true );
 			
 		//Toggle!
 		$plugin->active = !($plugin->active);
 		
 		$plugin->save();
 		
-		$this->_redirect('plugins');
+		$this->redirect->goto('browse');
 	}
 	
 	/**
@@ -102,10 +114,8 @@ class PluginsController extends Omeka_Controller_Action
 			
 			
 		}
-		
-		$broker = get_plugin_broker();
-			
-		$info->has_config = (bool) $broker->getHook($plugin, 'config');
+					
+		$info->has_config = (bool) $this->_pluginBroker->getHook($plugin, 'config');
 		
 		return $info;
 	}
@@ -113,7 +123,7 @@ class PluginsController extends Omeka_Controller_Action
 	public function browseAction() {
 		//Get a list of all the plugins
 		
-		$broker = get_plugin_broker();
+		$broker = $this->_pluginBroker;
 		
 		$list = $broker->getAll();
 		
@@ -129,11 +139,10 @@ class PluginsController extends Omeka_Controller_Action
 			$plugins[] = $plugin;
 		}
 				
-		return $this->render('plugins/browse.php', compact('plugins'));
+		return $this->render(compact('plugins'));
 	}
 	
-	public function deleteAction() {$this->_redirect('/');}
+	public function deleteAction() {$this->redirect->goto('browse');}
 	
-	public function addAction() {$this->_redirect('/');}
+	public function addAction() {$this->redirect->goto('browse');}
 }
-?>

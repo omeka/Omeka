@@ -1,8 +1,22 @@
 <?php 
 /**
-* Simplified wrapper for PDO
-* holds table names as well
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * Database manager object for Omeka
+ *
+ * While mostly a wrapper for a Zend_Db_Adapter instance, this also provides shortcuts for
+ * retrieving table objects and table names for use in SQL. 
+ *
+ * @uses Zend_Db_Adapter_Mysqli
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_Db
 {
 	protected $_conn;
@@ -56,33 +70,53 @@ class Omeka_Db
 	{
 		$this->_conn = $conn;		
 		$this->prefix = (string) $prefix;		
-	}
-	
-	public function getConnection()
-	{
-	    return $this->_conn;
+		
+		$this->_log = $this->loggingEnabled();		
 	}
 	
 	/**
-	 * Delegate to the Zend_Db connection for a few specific actions like quoting, preparing, etc
-	 *
-	 * @return string
+	 * Delegate to the Zend_Db_Adapter instance.  Log queries if necessary
+	 * 
+	 * @todo Come up with a better solution for logging bad queries.  
+	 *  Zend_Db_Profiler won't help with logging broken queries, so we need to 
+	 *  keep this for the sake of logging those.
+	 * @param string
+	 * @param array
+	 * @return mixed
 	 **/
-	public function quote($value)
+	public function __call($m, $a)
 	{
-		return $this->_conn->quote($value);
+	    //Log SQL for certain adapter calls
+	    $logFor = array('fetchOne', 'fetchAll', 'prepare', 'query');
+	    if(in_array($m, $logFor)) {
+	        $this->log($a[0]);
+	    }
+	    
+	    return call_user_func_array(array($this->_conn, $m), $a);
+	}
+		
+	private function loggingEnabled()
+	{
+	    $config = Omeka_Context::getInstance()->getConfig('basic');
+	    return (bool) $config->log->sql;
 	}
 	
-	public function prepare($sql)
+	/**
+	 * @deprecated
+	 * 
+	 * @param string
+	 * @return void
+	 **/
+	public function getConnection()
 	{
-		return $this->_conn->prepare($sql);
+	    return $this->getAdapter();
 	}
 	
-	public function lastInsertId()
+	public function getAdapter()
 	{
-		return $this->_conn->lastInsertId();
+	    return $this->_conn;
 	}
-	
+
 	/**
 	 * Retrieve the name of the table (including the prefix)
 	 *
@@ -106,15 +140,15 @@ class Omeka_Db
 	public function hasPrefix() {
 		return !empty($this->prefix);
 	}
-
+    
 	public function getTable($class) {
-
 		$tableClass = $class . 'Table';
+        
 		if(class_exists($tableClass)) {
-			$table = new $tableClass($class);
+			$table = new $tableClass($class, $this);
 		}
 		else {
-			$table = new Omeka_Table($class);
+			$table = new Omeka_Table($class, $this);
 		}
 		return $table;
 	}
@@ -170,15 +204,7 @@ class Omeka_Db
 		$query .= implode(', ', $a) . ')';
 		
 		$insert_params = array_values($values);
-/*
-			$insert_query = array();
-		foreach ($cols as $col) {
-			$insert_query[] = $this->_conn->quote($values[$col]);
-		}
-		
-		$query .= join(', ', $insert_query) . ')';
-*/	
-		
+
 		$update_query = array();
 		$update_params = $values;
 		
@@ -199,8 +225,6 @@ class Omeka_Db
 		
 		$query .= " ON DUPLICATE KEY UPDATE ". join(', ', $update_query);		
 
-//Zend_Debug::dump( $query );exit;
-
 		// prepare and execute the statement
 		$params = array_merge( $insert_params, $update_params);
 		$this->exec($query, $params);
@@ -208,86 +232,24 @@ class Omeka_Db
 		return (int) $this->_conn->lastInsertId();
    }
 	
-	/**
-	 * Factory to determine the right Omeka database exception to throw in a given case
-	 *
-	 * @throws Omeka_Db_Exception|Omeka_Db_NullColumnException
-	 **/
-	protected function throwOmekaDbException(array $errorInfo, PDOException $e, $sql)
+	protected function log($sql)
 	{
-		if( ($errorInfo[0] == "23000") and ($errorInfo[1] == 1048)) {
-			throw new Omeka_Db_NullColumnException($e, $sql);
-		}
-		throw new Omeka_Db_Exception($e, $sql);
+	    if($this->_log) {
+	        Omeka_Context::getInstance()->getLogger()->debug((string) $sql);
+	    }
 	}
 	
+	/**
+	 * @deprecated Since 4/30/08
+	 * @param string
+	 * @param array
+	 * @return Zend_Db_Statement
+	 **/
 	public function exec($sql, $params=array())
-	{
-		$this->debugSql($sql);
-		
-		try {
-			$stmt = $this->_conn->query($sql, $params);
-		} 
-		catch (Zend_Db_Statement_Exception $e) {
-			throw new Omeka_Db_Exception($e, $sql);
-		}
+	{	
+        return $this->query($sql, $params);
 	}
 
-	private function debugSql($sql)
-	{
-		if($_GET['sql']) {
-			$config = Zend_Registry::get('config_ini');
-			if($config->debug->sql) {
-				if(!isset($this->queryCount)) $this->queryCount = 1;
-				else $this->queryCount++;
-				var_dump( (string) $sql );
-	
-				Zend_Debug::dump( $this->queryCount );		
-			}
-		}					
-	}
-	
-	//Use the PDO::query() with prepared queries
-	public function query($sql, array $params=array(), $fetchMode=null)
-	{
-		$this->debugSql($sql);
-		
-		if(is_object($sql)) {
-    		$sql = $sql->__toString();
-		}
-		
-		try {
-			$stmt = $this->_conn->query($sql, $params);
-		}
-		catch (Zend_Db_Statement_Exception $e) {
-			Omeka_Logger::logSql($sql);
-			throw new Omeka_Db_Exception($e, $sql);
-		}
-		 catch (PDOException $e) {
-			throw new Omeka_Db_Exception($e, $sql);
-		}
-		
-		if(!$fetchMode) {
-			$stmt->setFetchMode(Zend_Db::FETCH_ASSOC);
-		}
-		
-		return $stmt;
-	}
-	
-	//Ripped-off from Doctrine_Connection::fetchOne()
-	public function fetchOne($sql, $params=array(), $colnum=0)
-	{
-		$res = $this->query($sql, $params);
-		return $res->fetchColumn($colnum);
-	}
-	
-	public function fetchCol($sql, $params=array())
-	{
-		$stmt = $this->query($sql, $params);
-        $result = $stmt->fetchAll(Zend_Db::FETCH_COLUMN, 0);
-        return $result;
-	}
-	
 	/**
 	 * Convenience function for when server setup disallows executing more than one SQL query at a time
 	 *
@@ -302,32 +264,4 @@ class Omeka_Db
 			}
 		}
 	}
-		
-	//Use this to fetch associative arrays using prepared queries
-	public function fetchAssoc($sql, $params=array(), $key_column = null)
-	{
-		
-		$res = $this->query($sql, $params);
-		$res->setFetchMode(Zend_Db::FETCH_ASSOC);
-		
-		$return = array();
-		
-		foreach ($res as $key => $row) {
-			if($key_column) {
-				$return[$row[$key_column]] = $row;
-			}else {
-				$return[$key] = $row;
-			}
-		}
-		
-		return $return;
-	}
-	
-	//Quick way to check whether or not a result set has rows in it
-	public function hasRows(PDOStatement $result)
-	{
-		return $result->columnCount() > 0;
-	}
 }
- 
-?>

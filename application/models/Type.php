@@ -1,9 +1,18 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
 require_once 'Metafield.php' ;
 require_once 'TypesMetafields.php' ;
+
 /**
  * @package Omeka
- * 
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class Type extends Omeka_Record { 
     
@@ -14,7 +23,7 @@ class Type extends Omeka_Record {
 	protected $_related = array('Metafields'=>'loadMetafields', 'Items'=>'getItems', 'Plugin'=>'getPlugin');
 
 	public function hasMetafield($name) {
-		$db = get_db();
+		$db = $this->getDb();
 		
 		$sql = "SELECT COUNT(m.id) FROM $db->Metafield m 
 		INNER JOIN $db->TypesMetafields tm ON tm.metafield_id = m.id
@@ -26,7 +35,7 @@ class Type extends Omeka_Record {
 	
 	protected function loadMetafields()
 	{
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT m.* FROM {$db->Metafield} m 	
 				INNER JOIN {$db->TypesMetafields} tm ON tm.metafield_id = m.id 
 				WHERE tm.type_id = ? GROUP BY m.id";
@@ -69,7 +78,7 @@ class Type extends Omeka_Record {
 	 **/
 	protected function _delete()
 	{
-		$tm_objs = get_db()->getTable('TypesMetafields')->findBySql('type_id = ?', array( (int) $this->id));
+		$tm_objs = $this->getDb()->getTable('TypesMetafields')->findBySql('type_id = ?', array( (int) $this->id));
 		
 		foreach ($tm_objs as $tm) {
 			$tm->delete();
@@ -84,7 +93,7 @@ class Type extends Omeka_Record {
 	protected function removeMetafield(Metafield $metafield)
 	{
 		//Find the join and delete it
-		$db = get_db();
+		$db = $this->getDb();
 		$sql = "SELECT tm.* FROM $db->TypesMetafields tm WHERE tm.type_id = ? AND tm.metafield_id = ? LIMIT 1";
 		$tm = $this->getTable('TypesMetafields')->fetchObjects($sql, array($this->id, $metafield->id), true);
 		$tm->delete();
@@ -126,7 +135,7 @@ class Type extends Omeka_Record {
 			$mf_name = $mf_array['name'];
 			
 			if(!empty($mf_name)) {
-				$mf = get_db()->getTable('Metafield')->findByName($mf_name);
+				$mf = $this->getDb()->getTable('Metafield')->findByName($mf_name);
 				if(!$mf) $mf = new Metafield;
 
 				if(!$this->hasMetafield($mf_name)) {
@@ -174,5 +183,3 @@ class Type extends Omeka_Record {
 		unset($clean['TypesMetafields']);
 	}
 }
-
-?>
