@@ -234,8 +234,8 @@ class Omeka_Db
 	
 	protected function log($sql)
 	{
-	    if($this->_log) {
-	        Omeka_Context::getInstance()->getLogger()->debug((string) $sql);
+	    if($this->_log and $logger = Omeka_Context::getInstance()->getLogger()) {
+	        $logger->debug((string) $sql);
 	    }
 	}
 	
