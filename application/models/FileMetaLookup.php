@@ -6,6 +6,8 @@
  * @package Omeka
  **/
 
+require_once 'FileMetaLookupTable.php';
+
 /**
  * @package Omeka
  * @author CHNM

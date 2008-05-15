@@ -13,6 +13,14 @@
  **/
 class EntityTable extends Omeka_Db_Table
 {
+    /**
+     * Table name needs to be hard-coded because PersonTable and InstitutionTable
+     * inherit and use the same table
+     *
+     * @var string
+     **/
+    protected $_name = 'entities';
+        
 	public function findUniqueOrNew($values, $other = array())
 	{	
 		$select = new Omeka_Db_Select;

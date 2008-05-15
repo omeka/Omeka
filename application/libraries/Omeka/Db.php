@@ -20,35 +20,6 @@
 class Omeka_Db
 {
 	protected $_conn;
-	
-	/**
-	 * All the table classes/names are stored here for easy access.  This could change in the future.
-	 *
-	 * @var array
-	 **/
-	protected $_table_names = array(
-		'Collection'=>'collections',
-		'Entity'=>'entities',
-		'EntitiesRelations'=>'entities_relations',
-		'EntityRelationships'=>'entity_relationships',
-		'File'=>'files',
-		'FilesImages'=>'files_images',
-		'FilesVideos'=>'files_videos',
-		'FileMetaLookup'=>'file_meta_lookup',
-		'Item'=>'items',
-		'Metafield'=>'metafields',
-		'Metatext'=>'metatext',
-		'Option'=>'options',
-		'Person'=>'entities',
-		'Institution'=>'entities',
-		'Anonymous'=>'entities',
-		'Plugin'=>'plugins',
-		'Taggings'=>'taggings',
-		'Tag'=>'tags',
-		'Type'=>'types',
-		'TypesMetafields'=>'types_metafields',
-		'User'=>'users',
-		'UsersActivations'=>'users_activations');
 
 	/**
 	 * The prefix that every table in the omeka database will use.  If null this is ignored
@@ -58,12 +29,19 @@ class Omeka_Db
 	public $prefix = null;
 	
 	/**
+	 * All the tables that are currently managed by this database object
+	 *
+	 * @var array
+	 **/
+	protected $_tables = array();
+	
+	/**
 	 * @param Zend_Db_Adapter $conn A connection object courtesy of Zend Framework
 	 * @param string $prefix The prefix for the database (if applicable)
 	 * @return void
 	 **/
 	public function __construct($conn, $prefix=null)
-	{
+	{   
 		$this->_conn = $conn;		
 		$this->prefix = (string) $prefix;		
 		
@@ -87,7 +65,7 @@ class Omeka_Db
 	    if(in_array($m, $logFor)) {
 	        $this->log($a[0]);
 	    }
-	    
+	    	    
 	    return call_user_func_array(array($this->_conn, $m), $a);
 	}
 		
@@ -119,9 +97,7 @@ class Omeka_Db
 	 * @return string
 	 **/
 	public function getTableName($class) {
-		$name = $this->_table_names[$class];
-		
-		return (string) $this->prefix . (string) $name;
+		return $this->getTable($class)->getTableName();
 	}
 
 	public function hasTable($name) {
@@ -137,8 +113,24 @@ class Omeka_Db
 		return !empty($this->prefix);
 	}
     
+    /**
+     * Retrieve a table object corresponding to the model class.
+     * 
+     * Table classes can be extended by inheriting off of Omeka_Db_Table
+     * and then calling your table ModelNameTable, i.e. ItemTable or 
+     * CollectionTable, etc.
+     * 
+     * @internal This will cache every table object so that tables
+     * are not instantiated multiple times for complicated web requests.
+     * @param string Model class name
+     * @return Omeka_Db_Table
+     **/
 	public function getTable($class) {
 		$tableClass = $class . 'Table';
+        
+        if(array_key_exists($class, $this->_tables)) {
+            return $this->_tables[$class];
+        }
         
 		if(class_exists($tableClass)) {
 			$table = new $tableClass($class, $this);
@@ -146,17 +138,10 @@ class Omeka_Db
 		else {
 			$table = new Omeka_Db_Table($class, $this);
 		}
+		
+		$this->_tables[$class] = $table;
+		
 		return $table;
-	}
-	
-	/**
-	 * Here's a quick hackaround for plugins adding their own tables to the database
-	 *
-	 * @return void
-	 **/
-	public function addTable($model_name, $table_name)
-	{
-		$this->_table_names[$model_name] = $table_name;
 	}
 
 	/**

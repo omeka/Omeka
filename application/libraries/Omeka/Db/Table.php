@@ -20,8 +20,20 @@
  **/
 class Omeka_Db_Table
 {
-	//What kind of model should this table class retrieve from the DB
+	/**
+	 * The name of the model that this table will retrieve objects for.
+	 *
+	 * @var string
+	 **/
 	protected $_target;
+	
+	/**
+	 * The name of the table (sans prefix).  If this is not given, it will
+	 * be inflected magically.
+	 *
+	 * @var string
+	 **/
+	protected $_name;
 	
 	/**
 	 * Instantiate
@@ -78,14 +90,29 @@ class Omeka_Db_Table
 	}
 	
 	/**
-	 * Retrieve the name of the table for the current table (used in SQL statements)
+	 * Retrieve the name of the table for the current table (used in SQL statements).
+	 * If the table name has not been set, then it will automagically inflect a table name
 	 *
 	 * @return string
 	 **/
 	public function getTableName()
 	{
-		$target = $this->_target;
-		return $this->getDb()->$target;
+		if(empty($this->_name)) {
+		   $this->setTableName();
+		}
+		
+		//Return the table name with the prefix added
+		return $this->getDb()->prefix . $this->_name;
+	}
+	
+	public function setTableName($name=null)
+	{
+	    if($name) {
+	        $this->_name = (string) $name;
+	    }
+	    else {
+	        $this->_name = Inflector::tableize($this->_target);
+	    }
 	}
 	
 	/**

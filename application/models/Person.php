@@ -8,6 +8,7 @@
 
 require_once 'Entity.php';
 require_once 'Institution.php';
+require_once 'PersonTable.php';
 
 /**
  * @package Omeka

@@ -13,6 +13,13 @@
  **/
 class MetatextTable extends Omeka_Db_Table
 {
+	/**
+	 * Have to hard code this table name b/c inflector thinks it should be
+	 * 'metatexts'
+	 *
+	 * @var string
+	 **/
+	protected $_name = 'metatext';
 	
 	/**
 	 * Retrieve an array of extended metadata for a given item.  

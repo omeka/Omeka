@@ -7,6 +7,7 @@
  **/
 
 require_once 'Entity.php';
+require_once 'InstitutionTable.php';
 
 /**
  * @package Omeka
