@@ -99,11 +99,7 @@ class Omeka_Db
 	public function getTableName($class) {
 		return $this->getTable($class)->getTableName();
 	}
-
-	public function hasTable($name) {
-		return in_array($name, $this->_table_names) or array_key_exists($name, $this->_table_names);
-	}
-	
+		
 	/**
 	 * A shortcut for checking to see whether the database tables have a prefix
 	 *
