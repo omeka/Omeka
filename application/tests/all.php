@@ -84,7 +84,6 @@ require_once 'TagTestCase.php';
 
 require_once 'TaggableTestCase.php';
 require_once 'ItemTestCase.php';
-require_once 'ExhibitSectionTestCase.php';
 require_once 'OmekaRecordTestCase.php';
 require_once 'TypeTestCase.php';
 require_once 'UploadTestCase.php';
@@ -93,7 +92,6 @@ require_once 'UserTestCase.php';
 require_once 'OmekaDbTestCase.php';
 require_once 'FileMetadataTestCase.php';
 require_once 'MiscellaneousTestCase.php';	
-//require_once 'controllers/ExhibitsControllerTestCase.php';
 require_once 'AclTestCase.php';
 require_once 'ViewHelpersTestCase.php';
 
@@ -103,15 +101,12 @@ $test = new TestSuite('Omeka Tests');
 
 $test->addTestCase(new ItemTestCase());
 $test->addTestCase(new TaggableTestCase());
-$test->addTestCase(new ExhibitSectionTestCase());	
 $test->addTestCase(new OmekaRecordTestCase());
 $test->addTestCase(new TypeTestCase());
 $test->addTestCase(new CollectionTestCase());
 $test->addTestCase(new UserTestCase());
 $test->addTestCase(new OmekaDbTestCase());
 $test->addTestCase(new FileMetadataTestCase());
-//$test->addTestCase(new ExhibitsControllerTestCase());
-
 
 //DO NOT RUN THIS ON A PRODUCTION INSTALLATION
 $test->addTestCase(new UploadTestCase()); */

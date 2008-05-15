@@ -102,7 +102,8 @@ function random_featured_collection()
 
 function random_featured_exhibit()
 {
-    return get_db()->getTable('Exhibit')->findRandomFeatured();
+    trigger_error('random_featured_exhibit() will not work until the new Exhibit builder is finished!'); 
+    //return get_db()->getTable('Exhibit')->findRandomFeatured();
 }
 
 function entities(array $params = array())

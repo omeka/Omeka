@@ -47,8 +47,3 @@ INSERT INTO `collections`
 VALUES 
 	(1 , 'Collection1', 'CollectionDescription1', '1', '1'), 
 	(2 , 'Collection2', 'CollectionDescription2', '0', '0');
-
-INSERT INTO `exhibits` 
-	( `id` , `title` , `description` , `credits` , `featured` , `slug` , `theme` )
-VALUES 
-	(1 , 'Exhibit1', 'Description1', 'Credits1', '1', 'exhibit1', '');

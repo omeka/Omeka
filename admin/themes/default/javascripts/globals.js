@@ -57,11 +57,6 @@ function confirmDelete() {
 			return confirm('Are you sure you want to delete this?');
 		}
 	});
-	$$('.delete-exhibit').each(function(el) {
-		el.onclick = function() {
-			return confirm( 'Are you sure you want to delete this exhibit and all of its data from the archive?' );
-		}
-	});
 }
 
 	

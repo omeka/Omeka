@@ -26,7 +26,7 @@ class SchemaScrub extends Omeka_Db_Migration
             CHANGE `relationship_id` `relationship_id` INT UNSIGNED NULL DEFAULT NULL; 
         ALTER TABLE `$db->EntityRelationships` 
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;  
-        ALTER TABLE `$db->Exhibit` 
+        ALTER TABLE `{$db->prefix}exhibits` 
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;
         ALTER TABLE `$db->File` 
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
@@ -54,7 +54,7 @@ class SchemaScrub extends Omeka_Db_Migration
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
             CHANGE `type_id` `type_id` INT UNSIGNED NULL DEFAULT NULL ,
             CHANGE `collection_id` `collection_id` INT UNSIGNED NULL DEFAULT NULL; 
-        ALTER TABLE `$db->ExhibitPageEntry` 
+        ALTER TABLE `{$db->prefix}items_section_pages` 
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
             CHANGE `item_id` `item_id` INT UNSIGNED NULL DEFAULT NULL ,
             CHANGE `page_id` `page_id` INT UNSIGNED NOT NULL;
@@ -69,10 +69,10 @@ class SchemaScrub extends Omeka_Db_Migration
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;  
         ALTER TABLE `$db->Plugin` 
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT;  
-        ALTER TABLE `$db->ExhibitSection` 
+        ALTER TABLE `{$db->prefix}sections` 
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
             CHANGE `exhibit_id` `exhibit_id` INT UNSIGNED NOT NULL; 
-        ALTER TABLE `$db->ExhibitPage` 
+        ALTER TABLE `{$db->prefix}section_pages` 
             CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
             CHANGE `section_id` `section_id` INT UNSIGNED NOT NULL; 
         ALTER TABLE `$db->Taggings` 

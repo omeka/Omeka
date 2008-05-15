@@ -15,7 +15,6 @@ require_once 'Taggable.php';
 require_once 'Taggings.php';
 require_once 'Metatext.php';
 require_once 'MetatextTable.php';
-require_once 'Exhibit.php';
 require_once 'Relatable.php';
 require_once 'ItemTable.php';
 require_once 'ItemPermissions.php';	
@@ -232,12 +231,6 @@ class Item extends Omeka_Record
 		foreach ($metatext as $entry) {
 			$entry->delete();
 		}
-		
-		//Update the exhibits to get rid of all references to the item anywhere in there
-		$db = $this->getDb();
-		
-		$update = "UPDATE $db->ExhibitPageEntry SET item_id = NULL WHERE item_id = ?";
-		$db->exec($update, array($this->id));
 	}
 	
 	private function saveFiles()
@@ -433,16 +426,6 @@ class Item extends Omeka_Record
 	public function next()
 	{
 		return $this->getDb()->getTable('Item')->findNext($this);
-	}
-		
-	/**
-	 * Facade for the Exhibit Table's check method to see if an item is contained in an exhibit
-	 *
-	 * @return void
-	 **/
-	public function isInExhibit($exhibit)
-	{
-		return $this->getDb()->getTable('Exhibit')->exhibitHasItem($exhibit->id, $this->id);
 	}
 	
 	//Everything past this is elements of the old code that may be changed or deprecated

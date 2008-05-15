@@ -22,8 +22,6 @@ $site['fullsize']		= 'fullsize';
 $site['thumbnails']		= 'thumbnails';
 $site['square_thumbnails'] = 'square_thumbnails';
 $site['files']			= 'files';
-$site['exhibit_layouts']= 'exhibit_layouts';
-$site['exhibit_themes'] = 'exhibit_themes';
 $site['public_theme']	= 'themes';
 $site['views']          = 'views';
 $site['scripts']        = 'scripts';
@@ -47,8 +45,6 @@ define('THUMBNAIL_DIR', 	ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['thumbnails']);
 define('SQUARE_THUMBNAIL_DIR', 	ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['square_thumbnails']);
 define('FULLSIZE_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('FILES_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['files']);
-define('EXHIBIT_LAYOUTS_DIR',		SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_layouts']);
-define('EXHIBIT_THEMES_DIR',SHARED_DIR.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
 define('VIEW_SCRIPTS_DIR',  APP_DIR . DIRECTORY_SEPARATOR . $site['views'] . DIRECTORY_SEPARATOR . $site['scripts']);
 define('UPGRADE_DIR',       APP_DIR . DIRECTORY_SEPARATOR . $site['migrations']);
 
@@ -104,8 +100,6 @@ define('WEB_THUMBNAILS',WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['thumbnails']);
 define('WEB_SQUARE_THUMBNAILS',  WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['square_thumbnails']);
 define('WEB_FULLSIZE',	WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('WEB_FILES',		WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['files']);
-define('WEB_EXHIBIT_LAYOUTS', WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_layouts'] );
-define('WEB_EXHIBIT_THEMES',  WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
 define('WEB_PUBLIC_THEME',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['public_theme']);
 define('WEB_VIEW_SCRIPTS', WEB_ROOT.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['views'].DIRECTORY_SEPARATOR.$site['scripts']);
 

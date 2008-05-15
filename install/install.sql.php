@@ -68,7 +68,7 @@ INSERT INTO `$db->EntityRelationships` (`id`, `name`, `description`) VALUES (1, 
 -- 
 -- Table structure for table `exhibits`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Exhibit` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}exhibits` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `title` varchar(255)  default NULL,
   `description` text ,
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `$db->Item` (
 -- Table structure for table `items_section_pages`
 -- 
 
-CREATE TABLE IF NOT EXISTS `$db->ExhibitPageEntry` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}items_section_pages` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `item_id` bigint(20) default NULL,
   `page_id` bigint(20) NOT NULL,
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `$db->Plugin` (
 -- Table structure for table `section_pages`
 -- 
 
-CREATE TABLE IF NOT EXISTS `$db->ExhibitPage` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}section_pages` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `section_id` bigint(20) NOT NULL,
   `layout` varchar(255) collate utf8_unicode_ci default NULL,
@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `$db->ExhibitPage` (
 -- Table structure for table `sections`
 -- 
 
-CREATE TABLE IF NOT EXISTS `$db->ExhibitSection` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}sections` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `title` varchar(255) collate utf8_unicode_ci default NULL,
   `description` text collate utf8_unicode_ci,

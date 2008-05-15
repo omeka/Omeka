@@ -8,7 +8,6 @@
 
 require_once 'Item.php';
 require_once 'TagTable.php';
-require_once 'Exhibit.php';
 
 /**
  * @package Omeka
