@@ -208,7 +208,7 @@ class ItemsController extends Omeka_Controller_Action
 		$items = $this->getTable('Item')->findBy($params);
 
 		//Serve up the pagination
-		$pagination = array('menu'=>$menu, 'page'=>$options['page'], 'per_page'=>$params['per_page'], 'total_results'=>$total_results, 'link'=>$options['pagination_url']);
+		$pagination = array('menu'=>$menu, 'page'=>$options['page'], 'per_page'=>$params['per_page'], 'total_results'=>$totalResults, 'link'=>$options['pagination_url']);
 		Zend_Registry::set('pagination', $pagination);
 		
 		fire_plugin_hook('browse_items', $items);
