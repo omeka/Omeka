@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class EntityTable extends Omeka_Table
+class EntityTable extends Omeka_Db_Table
 {
 	public function findUniqueOrNew($values, $other = array())
 	{	

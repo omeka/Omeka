@@ -48,7 +48,7 @@ class MockOmeka_Db extends AbstractMockOmeka_Db
 		$table_class = $record_class . 'Table';
 			
 		if(!class_exists($table_class)) {
-			$table_class = "Omeka_Table";
+			$table_class = "Omeka_Db_Table";
 		}
 		
 		//We should set up a mock table

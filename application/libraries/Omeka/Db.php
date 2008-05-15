@@ -144,7 +144,7 @@ class Omeka_Db
 			$table = new $tableClass($class, $this);
 		}
 		else {
-			$table = new Omeka_Table($class, $this);
+			$table = new Omeka_Db_Table($class, $this);
 		}
 		return $table;
 	}

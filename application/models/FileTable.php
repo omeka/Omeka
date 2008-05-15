@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class FileTable extends Omeka_Table
+class FileTable extends Omeka_Db_Table
 {
 	protected $_target = 'File';
 	

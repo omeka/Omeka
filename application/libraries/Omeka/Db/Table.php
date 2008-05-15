@@ -9,16 +9,16 @@
 /**
  * Table classes are instantiated by Omeka_Db.  
  * A new instance is created for each call to a table method, so keep these 
- * lightweight.  Classes that override Omeka_Table must follow the naming 
+ * lightweight.  Classes that override Omeka_Db_Table must follow the naming 
  * convention: model name + Table (e.g, ExhibitTable).  Classes that override 
- * Omeka_Table are not loaded automatically so they must be req_once'd within 
+ * Omeka_Db_Table are not loaded automatically so they must be req_once'd within 
  * the model itself.
  *
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Omeka_Table
+class Omeka_Db_Table
 {
 	//What kind of model should this table class retrieve from the DB
 	protected $_target;

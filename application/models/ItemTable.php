@@ -13,7 +13,7 @@ require_once 'ItemSearch.php';
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class ItemTable extends Omeka_Table
+class ItemTable extends Omeka_Db_Table
 {	
 	/**
 	 * Can specify a range of valid Item IDs or an individual ID

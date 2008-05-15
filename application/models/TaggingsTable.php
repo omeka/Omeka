@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class TaggingsTable extends Omeka_Table
+class TaggingsTable extends Omeka_Db_Table
 {
 	/**
 	 * Current options

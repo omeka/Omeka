@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class UserTable extends Omeka_Table
+class UserTable extends Omeka_Db_Table
 {
 	public function getSelect()
 	{

@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class CollectionTable extends Omeka_Table
+class CollectionTable extends Omeka_Db_Table
 {	
 	public function applySearchFilters($select, $params)
 	{

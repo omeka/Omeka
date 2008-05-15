@@ -21,9 +21,9 @@ require_once 'Zend/Controller/Action.php';
 abstract class Omeka_Controller_Action extends Zend_Controller_Action
 {			
 	/**
-	 * Omeka_Table associated with the controller (initialized optionally within the init() method)
+	 * Omeka_Db_Table associated with the controller (initialized optionally within the init() method)
 	 *
-	 * @var Omeka_Table
+	 * @var Omeka_Db_Table
 	 **/
 	protected $_table;
 	

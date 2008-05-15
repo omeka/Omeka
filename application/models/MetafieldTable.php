@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class MetafieldTable extends Omeka_Table
+class MetafieldTable extends Omeka_Db_Table
 {
 	/**
 	 * Used to retrieve the row ID given the name (which is unique)
