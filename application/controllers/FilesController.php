@@ -71,5 +71,8 @@ class FilesController extends Omeka_Controller_Action
 		$path = $file->getWebPath($format);
 
 		header('Location: '.$path);
+		
+		//Don't render anything
+		$this->_helper->viewRenderer->setNoRender();
 	}
 }
