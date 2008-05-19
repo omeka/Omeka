@@ -142,6 +142,21 @@ class PluginsController extends Omeka_Controller_Action
 		return $this->render(compact('plugins'));
 	}
 	
+	public function uninstallAction()
+	{
+	    $plugin = (string) $this->_getParam('name');
+	    $broker = $this->_pluginBroker;
+	    if($broker and $broker->isInstalled($plugin)) {
+	        $broker->uninstall($plugin);
+	        $this->flashSuccess("Plugin named '$plugin' was successfully uninstalled!");
+	    }
+	    else {
+	        $this->flash("Plugin named '$plugin' could not be found!");
+	    }
+	    
+	    $this->redirect->goto('browse');
+	}
+	
 	public function deleteAction() {$this->redirect->goto('browse');}
 	
 	public function addAction() {$this->redirect->goto('browse');}

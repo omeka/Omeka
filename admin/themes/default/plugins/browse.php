@@ -6,7 +6,6 @@
 <div id="primary">
 <h2>List of plugins:</h2>
 
-
 <table id="plugin-info">
 <?php if ($plugins): 
 	foreach( $plugins as $key => $plugin ): ?>
@@ -30,12 +29,22 @@
                 	<?php if ( $plugin->has_config ): ?>
                 		<a href="<?php echo uri('plugins/config', array('name'=>$plugin->directory)); ?>">Configure</a>
                 	<?php endif; ?>
-            
+                </td>
+                <td>
+                    <form action="<?php echo url_for(array(
+                        'controller'=>'plugins', 
+                        'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
+                       <input type="submit" name="uninstall" value="Uninstall" />
+                       <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+                    </form>
             <?php else: //The plugin has not been installed yet ?>
                 <form action="<?php echo uri('plugins/install'); ?>" method="post" accept-charset="utf-8">     
                     <button name="" type="submit" value="<?php echo $plugin->directory; ?>">Install</button>
                     <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
                 </form>
+                </td>
+                <td>
+                    &nbsp;
                 </td>
                 <td>
                     &nbsp;

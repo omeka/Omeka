@@ -51,7 +51,7 @@
 				
 				$header_navigation['Names'] = uri('entities');
 				}
-				if(has_permission('super')) {
+				if(has_permission('Settings', 'edit')) {
 					$header_navigation['Settings'] = uri('settings');
 				}
 				echo nav($header_navigation);

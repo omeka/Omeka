@@ -1,8 +1,22 @@
 <?php 
 /**
- *	Working model for base-level permissions settings
- * 
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
  **/
+ 
+/**
+ * Hard-coded baseline resources/privileges for the ACL.
+ * 
+ * These are loaded into the ACL object if an ACL object
+ * does not already exist in the database.  
+ *
+ * IMPORTANT: If you change this file and want to test new ACL settings, 
+ * delete the 'acl' entry in the 'options' table in your Omeka database.  
+ * That represents the serialized ACL object, which will be used instead of
+ * these hard coded settings if it is available.
+ */
 
 //Define our resources/privileges in a flat list here
 $resources = array(
@@ -10,7 +24,7 @@ $resources = array(
     'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
     'Entities'      =>  array('add','edit','displayEmail','delete', 'browse'),
     'Files'         =>  array('edit','delete'),
-    'Plugins'       =>  array('browse','config', 'install'),
+    'Plugins'       =>  array('browse','config', 'install', 'uninstall'),
     'Settings'      =>  array('edit'),
     'Upgrade'       =>  array('migrate'),
     'Tags'          =>  array('rename','remove', 'browse'),
@@ -56,4 +70,7 @@ $acl->addRole(new Zend_Acl_Role('contributor'));
 
 $acl->loadAllowList($allowList);
 
+//Deny a couple of specific privileges to admin users
+$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade'));
+$acl->deny('admin', 'Users', array('editRoles','makeSuperUser', 'deleteSuperUser', 'togglePrivilege'));
 ?>

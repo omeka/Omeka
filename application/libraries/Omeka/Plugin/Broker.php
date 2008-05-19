@@ -536,6 +536,27 @@ class Omeka_Plugin_Broker
     }
     
     /**
+     * Uninstall hook for plugins.  
+     *
+     * This will run the 'uninstall' hook for the given plugin, and then it
+     * will remove the entry in the DB corresponding to the plugin.
+     * 
+     * @param string Name of the plugin directory to uninstall
+     * @return void
+     **/
+    public function uninstall($plugin)
+    {
+        $uninstallHook = $this->getHook($plugin, 'uninstall');
+        
+        if($uninstallHook) {
+            call_user_func_array($uninstallHook);
+        }
+        
+        //Remove the entry from the database
+        $this->_db->query("DELETE FROM {$this->_db->Plugin} WHERE name = ? LIMIT 1", array($plugin));
+    }
+    
+    /**
      * This handles dispatching all plugin hooks
      *
      * @return array|void
