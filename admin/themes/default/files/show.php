@@ -4,14 +4,7 @@
 <div id="primary">
 <h1>File #<?php echo h($file->id); ?></h1>
 
-<div id="lgimage" class="section">
-<?php if ($file->hasThumbnail()): ?>
-	<?php echo fullsize($file, array(), 400); ?>
-<?php else: ?>
-	<?php echo h($file->original_filename); ?>
-<?php endif; ?>
-<a href="<?php echo file_download_uri($file); ?>">Download this file</a>
-</div>
+<?php echo display_file($file); ?>
 	
 <div id="core-metadata" class="section">
 <h2>Core Metadata</h2>

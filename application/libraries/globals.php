@@ -132,6 +132,11 @@ function add_navigation($text, $link, $type='main', $permissions=null)
     get_plugin_broker()->addNavigation($text, $link, $type, $permissions);
 }
 
+function add_mime_display_type($mimeTypes, $callback, array $options=array())
+{
+    get_plugin_broker()->addMediaAdapter($mimeTypes, $callback, $options);
+}
+
 function get_acl()
 {
     return Omeka_Context::getInstance()->getAcl();

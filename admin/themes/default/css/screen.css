@@ -402,7 +402,8 @@ ul.tags, li.tag {display: inline;}
 		div.showitem .field div {display:block; float:left; width:680px;}
 		
 		#tags-field {margin-bottom: .5em;}
-		
+	
+	.item-file {float:left;}
 	/* File Page Styles */
 	
 	div.section {clear: both; margin: 0 0 3em;overflow: hidden;}

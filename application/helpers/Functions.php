@@ -37,102 +37,21 @@ function auto_discovery_link_tag(){
  *
  * @return void
  **/
-function display_files($files, $props = array()) {
-	
-	//If we don't have anything to display, don't render the empty HTML
-	if(empty($files)) {return;}
-	
-	if(is_array($files)) {
-		$output = '';
-		foreach ($files as $file) {
-			$output .= display_files($file);
-		}
-		return $output;
-	} else {
+function display_files($files, array $props = array()) {
+    require_once 'Media.php';
+    $helper = new Omeka_View_Helper_Media;
+    $output = '';
+    foreach ($files as $file) {
+        $output .= $helper->media($file, $props);
+    }
+    return $output;
+}
 
-		$file = $files;
-		
-		$html = '<div class="item-file">';
-		
-		switch ($file->mime_browser) {
-			case 'video/avi':
-			case 'video/msvideo':
-			case 'video/x-msvideo':
-			case 'video/x-ms-wmv':
-			
-			$defaults = array(
-						'width' => '320', 
-						'height' => '240', 
-						'autostart' => 0, 
-						'ShowControls'=> 1, 
-						'ShowDisplay'=> 1,
-						'ShowStatusBar' => 1
-						);
-
-			$defaults = array_merge($defaults, $props);
-			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-				$html 	.= 	'<object id="MediaPlayer" width="'.$defaults['width'].'" height="'.$defaults['height'].'"';
-				$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
-				$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
-				$html	.=	'<param name="FileName" value="'.$path.'" />'."\n";
-				$html	.=	'<param name="AutoPlay" value="'.($defaults['autostart'] ? 'true' : 'false').'" />'."\n";
-				$html	.=	'<param name="ShowControls" value="'.($defaults['ShowControls'] ? 'true' : 'false').'" />'."\n";
-				$html	.=	'<param name="ShowStatusBar" value="'.($defaults['ShowStatusBar'] ? 'true' : 'false').'" />'."\n";
-				$html	.=	'<param name="ShowDisplay" value="'.($defaults['ShowDisplay'] ? 'true' : 'false').'" />'."\n";
-				$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
-				$html	.=	' width="'.$defaults['width'].'" height="'.$defaults['height'].'"'; 		
-				$html	.=	' ShowControls="'.$defaults['ShowControls'].'" ShowStatusBar="'.$defaults['ShowStatusBar'].'"'; 
-				$html	.=	' ShowDisplay="'.$defaults['ShowDisplay'].'" autoplay="'.$defaults['autostart'].'"></embed></object>';
-				break;
-		
-			//MOV
-			case 'video/quicktime':
-		
-			$defaults = array(
-						'width' => '320', 
-						'height' => '240', 
-						'autoplay' => 0, 
-						'controller'=> 1, 
-						'loop'=> 0
-						);
-
-			$defaults = array_merge($defaults, $props);
-			$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
-
-			$html .= '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$defaults['width'].'" height="'.$defaults['height'].'">
-				<param name="src" value="'.$path.'" />
-				<param name="controller" value="'.($defaults['controller'] ? 'true' : 'false').'" />
-				<param name="autoplay" value="'.($defaults['autoplay'] ? 'true' : 'false').'" />
-				<param name="loop" value="'.($defaults['loop'] ? 'true' : 'false').'" />
-
-				<embed src="'.$path.'" scale="tofit" width="'.$defaults['width'].'" height="'.$defaults['height'].'" controller="'.($defaults['controller'] ? 'true' : 'false').'" autoplay="'.($defaults['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
-				</object>';
-				break;
-				case 'image/jpeg':
-				case 'image/gif':
-				case 'image/png':
-				case 'image/tiff':
-				
-					$html .= '<a href="'.file_download_uri($file).'" class="download-file">';
-				
-					if($file->hasThumbnail()) {
-						$html .= square_thumbnail($file, array('class'=>'thumb'));
-					} 
-					else { 
-						$html .= $file->original_filename;
-					}
-					
-					$html .= '</a>';
-					
-				break;
-				default:
-				$html .= '<a href="'. file_download_uri($file). '" class="download-file">'. $file->original_filename. '</a>';
-		}
-		$html .= '</div>';
-		$html .= "\n";
-		return $html;
-		
-	}
+function display_file($file, array $props=array())
+{
+    require_once 'Media.php';
+    $helper = new Omeka_View_Helper_Media;
+    return $helper->media($file, $props);
 }
 
 //CSS Helpers
