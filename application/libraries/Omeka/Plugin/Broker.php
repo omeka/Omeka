@@ -423,6 +423,66 @@ class Omeka_Plugin_Broker
     }
     
     /**
+     * Set up the following directory structure for plugins:
+     * 
+     *      controllers/
+     *      models/
+     *      libraries/
+     *      views/
+     *          admin/
+     *          public/
+     *          both/
+     * 
+     *  This also adds these folders to the correct include paths so that
+     *  there is no overhead involved in directories
+     *  
+     *
+     * @return void
+     **/
+    public function addApplicationDirs()
+    {
+        //Get the name of the current plugin
+        $pluginName = $this->getCurrentPlugin();
+        
+        $baseDir = $this->_basePath . DIRECTORY_SEPARATOR . $pluginName;
+        
+        $modelDir =         $baseDir . DIRECTORY_SEPARATOR  . 'models';
+        $controllerDir =    $baseDir . DIRECTORY_SEPARATOR  . 'controllers';
+        $librariesDir =     $baseDir . DIRECTORY_SEPARATOR  . 'libraries';
+        $viewsDir =         $baseDir . DIRECTORY_SEPARATOR  . 'views';
+        $adminDir =         $viewsDir . DIRECTORY_SEPARATOR . 'admin';
+        $publicDir =        $viewsDir . DIRECTORY_SEPARATOR . 'public';
+        $sharedDir =        $viewsDir . DIRECTORY_SEPARATOR . 'shared';
+        
+        //Add 'models' and 'libraries' directories to the include path
+        if(file_exists($modelDir)) {
+            set_include_path(get_include_path() . PATH_SEPARATOR . $modelDir );
+        }
+        
+        if(file_exists($librariesDir)) {
+            set_include_path(get_include_path() . PATH_SEPARATOR . $librariesDir);
+        }
+
+        //If the controller directory exists, add that 
+        if(file_exists($controllerDir)) {
+            $this->addControllerDir('controllers');
+        }
+
+        //Add the views directories 
+        if(file_exists($adminDir)) {
+            $this->addThemeDir($adminDir, 'admin');
+        }
+        
+        if(file_exists($publicDir)) {
+            $this->addThemeDir($publicDir, 'public');
+        }
+        
+        if(file_exists($sharedDir)) {
+            $this->addThemeDir($sharedDir, 'both');
+        }
+    }
+    
+    /**
      * Adds a plugin hook to display files of a specific MIME type in a certain way.
      * 
      * This allows plugins to hook directly into the Omeka_View_Helper_Media

@@ -102,11 +102,22 @@ function fire_plugin_hook()
     return call_user_func_array(array(get_plugin_broker(), $hook), $args);
 }
 
+/**
+ * @return Omeka_Plugin_Broker|null
+ **/
 function get_plugin_broker()
 {
     return Omeka_Context::getInstance()->getPluginBroker();
 }
 
+/**
+ * Define a metafield through the plugin interface.
+ * 
+ * @param string
+ * @param string
+ * @param string
+ * @return void
+ **/
 function define_metafield($name, $description, $type=null)
 {
     get_plugin_broker()->defineMetafield($name, $description, $type);
@@ -140,4 +151,9 @@ function add_mime_display_type($mimeTypes, $callback, array $options=array())
 function get_acl()
 {
     return Omeka_Context::getInstance()->getAcl();
+}
+
+function add_plugin_directories()
+{
+    get_plugin_broker()->addApplicationDirs();
 }
