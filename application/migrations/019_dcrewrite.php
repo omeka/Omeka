@@ -1,4 +1,8 @@
 <?php
+// TO DO: add regular expressions in element types (see DcRewrite::et property and 
+//        DcRewrite::migrateElementTypes() method)
+// TO DO: add timestamps to every table?
+
 class DcRewrite extends Omeka_Db_Migration
 {
     const backupTableSuffix = '__backup__19';
@@ -16,9 +20,24 @@ class DcRewrite extends Omeka_Db_Migration
     
     // Array containing the new element types.
     protected $et = array(
-        array('name' => 'text',      'description' => 'A long, typically multi-line text string.'), 
-        array('name' => 'tinytext',  'description' => 'A short, one-line text string.'), 
-        array('name' => 'daterange', 'description' => 'A date range, start to end.'), 
+        array('name' => 'text',      'regular_expression' => '/(?<!.).{0,65535}(?!.)/s', 'description' => 'A long, typically multi-line text string. Up to 65535 characters. Renders a textarea in an HTML form.'), 
+        array('name' => 'tinytext',  'regular_expression' => '/(?<!.).{0,255}(?!.)/s', 'description' => 'A short, one-line text string. Up to 255 characters. Renders a text input in a HTML form.'), 
+        array('name' => 'daterange', 'regular_expression' => '/^(?:\-?[0-9]{1,9}(?:\-\b(?:0[1-9]|1[0-2])\b(?:\-\b(?:0[1-9]|[1-2][0-9]|3[0-1])\b)?)?)?(?: ?(?:\-?[0-9]{1,9}(?:\-\b(?:0[1-9]|1[0-2])\b(?:\-\b(?:0[1-9]|[1-2][0-9]|3[0-1])\b)?)?)?)?$/', 'description' => 'A date range, begin to end.
+In format yyyy-mm-dd yyyy-mm-dd: 
+    * No hyphen before a year indicates C.E.
+    * A hyphen before a year indicates B.C.E.
+    * At least one year must exist (begin and/or end date)
+    * Months are optional
+    * Days are optional
+    * The years must be between -999,999,999 and 999,999,999
+    * The months must be between 01 and 12 (zerofill)
+    * The days must be between 01 and 31 (zerofill)
+    * A space character separates the begin and end dates
+    * The begin or end date may be ommitted
+    * If the begin date is ommitted a space character precedes the end date
+There are some bugs in this regex:
+    * A match on "" (empty string) results true
+    * A match on "0" (zero) results true (there is no year zero)'), 
     );
     
     // Array containing the Dublin Core and miscellaneous elements taken from the 
@@ -167,9 +186,10 @@ class DcRewrite extends Omeka_Db_Migration
         
         DROP TABLE IF EXISTS `{$db->prefix}element_types`;
         CREATE TABLE `{$db->prefix}element_types` (
-          `id` int UNSIGNED NOT NULL auto_increment,
+          `id` int(10) unsigned NOT NULL auto_increment,
           `name` varchar(100) collate utf8_unicode_ci NOT NULL,
           `description` text collate utf8_unicode_ci,
+          `regular_expression` text collate utf8_unicode_ci,
           PRIMARY KEY  (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         
@@ -188,7 +208,7 @@ class DcRewrite extends Omeka_Db_Migration
           `id` int UNSIGNED NOT NULL auto_increment,
           `item_id` int UNSIGNED NOT NULL,
           `element_id` int UNSIGNED NOT NULL,
-          `text` text collate utf8_unicode_ci,
+          `text` mediumtext collate utf8_unicode_ci,
           PRIMARY KEY  (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         
