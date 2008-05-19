@@ -354,7 +354,7 @@ class ItemTable extends Omeka_Db_Table
 		
 		$select->from(array(), 'RAND() as rand');
 		
-		$select->joinInner( array('f'=>"$db->File"), 'f.item_id = i.id', array());
+		$select->joinLeft( array('f'=>"$db->File"), 'f.item_id = i.id', array());
 		$select->where('i.featured = 1');
 				
 		$select->order('rand DESC');
@@ -363,7 +363,7 @@ class ItemTable extends Omeka_Db_Table
 		if($withImage) {
 			$select->where('f.has_derivative_image = 1');
 		}
-				
+
 		$item = $this->fetchObject($select);
 	
 		return $item;
