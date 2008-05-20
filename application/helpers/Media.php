@@ -27,8 +27,6 @@ class Omeka_View_Helper_Media
 {   
     /**
      * Array of MIME types and the callbacks that can process it.
-     * 
-     * 
      *
      * Example:
      *
@@ -45,7 +43,12 @@ class Omeka_View_Helper_Media
 	    'video/msvideo'=>'wmv',
 	    'video/x-msvideo'=>'wmv',
 	    'video/x-ms-wmv'=>'wmv',
-	    'video/quicktime'=>'mov');
+	    'video/quicktime'=>'mov',
+	    'audio/x-wav'=>'audio',
+	    'audio/mpeg'=>'audio',
+	    'application/ogg'=>'audio',
+	    'audio/x-midi'=>'audio'
+	    );
 	    
     /**
      * The array consists of the default options
@@ -71,7 +74,13 @@ class Omeka_View_Helper_Media
 			'autoplay' => 0, 
 			'controller'=> 1, 
 			'loop'=> 0
-			));
+			),
+		'audio'=>array(
+		    'autoplay' => 'false',
+		    'autoStart' => 0,
+		    'width' => 200,
+		    'height' => 20
+		    ));
         
     protected $_wrapperClass = 'item-file';
     
@@ -162,7 +171,7 @@ class Omeka_View_Helper_Media
      **/ 
     public function wmv($file, array $options=array())
     {
-		$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
+		$path = $file->getWebPath('archive');
 		$html 	.= 	'<object id="MediaPlayer" width="'.$options['width'].'" height="'.$options['height'].'"';
 		$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
 		$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
@@ -187,17 +196,44 @@ class Omeka_View_Helper_Media
      **/ 
     public function mov($file, array $options=array())
     {
-		$path = WEB_FILES . DIRECTORY_SEPARATOR . $file->archive_filename;
+		$path = $file->getWebPath('archive');
 
-		$html .= '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">
+		$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">
 			<param name="src" value="'.$path.'" />
 			<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />
 			<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />
 			<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />
 
 			<embed src="'.$path.'" scale="tofit" width="'.$options['width'].'" height="'.$options['height'].'" controller="'.($options['controller'] ? 'true' : 'false').'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
-			</object>';        
+			</object>';
+			
+		return $html;        
     } 
+    
+    /**
+     * Default display of audio files via <object> tags.
+     * 
+     * @param File
+     * @param array $options The set of default options for this includes:
+     * 'autoplay', 'autoStart', 'width', 'height'
+     * @return string
+     **/
+    public function audio($file, array $options=array())
+    {
+        $path = $file->getWebPath('archive');
+        
+        $html = '<object type="'. $file->mime_browser . '" data="' . $path . 
+        '" width="' . $options['width'] . '" height="' . $options['height'] . '">
+          <param name="src" value="' . $path . '">
+          <param name="autoplay" value="' . $options['autoplay'] . '">
+          <param name="autoStart" value="' . $options['autoStart'] . '">
+          alt : <a href="' . $path . '">' . $file->original_filename . '</a>
+        </object>';
+        
+        return $html;
+    }
+    
+    // END DEFINED DISPLAY CALLBACKS
     
     public function setWrapperClass($class)
     {
@@ -261,15 +297,17 @@ class Omeka_View_Helper_Media
      **/
     public function media($file, array $props=array())
     {		
-        $html = $this->_wrapperClass ? '<div class="' . $this->_wrapperClass . '">' : ''; 		
-        
         $mimeType = $this->getMimeFromFile($file);
         $callback = $this->getCallback($mimeType);	 
-               
+       
         $options = array_merge($this->getDefaultOptions($callback), $props);
         
-        $html  .= $this->getHtml($file, $callback, $options);
-		$html .= ($this->_wrapperClass ? "</div>" : '') . "\n";
+        $html  = $this->getHtml($file, $callback, $options);
+
+        //Wrap the HTML in a div with a class (if class is not set to null)
+        $wrapper = $this->_wrapperClass ? '<div class="' . $this->_wrapperClass . '">' : ''; 
+        
+		$html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
 		
 		return $html;
     }
