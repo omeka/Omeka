@@ -63,7 +63,19 @@ class Collection extends Omeka_Record
 			$this->addError('name', 'Collection name must be less than 255 characters.');
 		}
 	}
-
+    
+    /**
+     * Remove a collector's name from being associated with the collection.
+     * 
+     * @param Entity|integer
+     * @return boolean Was successful or not.
+     **/
+    public function removeCollector($collector)
+    {
+        $result = $this->removeRelatedTo($collector, 'collector', 1);
+        return ($result->rowCount() == 1);
+    }
+    
 	public function beforeSaveForm(&$post)
 	{
 		//Handle the boolean vars in the form

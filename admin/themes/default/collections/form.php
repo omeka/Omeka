@@ -1,4 +1,23 @@
 <?php echo flash(); ?>
+<script type="text/javascript" charset="utf-8">
+    /**
+     * Clicking the [X] next to a collector's name removes it with AJAX
+     **/
+    Event.observe(window, 'load', function(){
+         $$('a.remove-collector').invoke('observe', 'click', function(e){
+            e.stop();
+            var removeLink = this;
+            new Ajax.Request(removeLink.href, {
+               parameters: "output=json",
+               onComplete: function(t) {
+                   if(t.responseJSON['result'] == true) {
+                       removeLink.up().destroy();
+                   }
+               } 
+            });
+        }); 
+    });
+</script>
 
 <fieldset id="editcollection">
 	<legend>Collection Details</legend>
@@ -20,7 +39,15 @@
 	<?php foreach( $collection->Collectors as $k => $collector ): ?>
 
 	<ul id="collectors">
-		<li><?php echo h($collector->getName()); ?></li>
+		<li>
+		<?php echo h($collector->getName()); ?>
+		<a class="remove-collector" href="<?php echo url_for(
+		    array(
+		    'controller'=>'collections', 
+		    'action'=>'remove-collector', 
+		    'collector_id'=>$collector->id, 
+		    'collection_id'=>$collection->id), 'default'); ?>">[X]</a>
+		</li>
 	</ul>
 	<?php endforeach; ?>
 <?php endif; ?>
