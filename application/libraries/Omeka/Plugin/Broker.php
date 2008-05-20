@@ -470,15 +470,15 @@ class Omeka_Plugin_Broker
 
         //Add the views directories 
         if(file_exists($adminDir)) {
-            $this->addThemeDir($adminDir, 'admin');
+            $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'admin', 'admin');
         }
         
         if(file_exists($publicDir)) {
-            $this->addThemeDir($publicDir, 'public');
+            $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'public', 'public');
         }
         
         if(file_exists($sharedDir)) {
-            $this->addThemeDir($sharedDir, 'both');
+            $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'shared', 'both');
         }
     }
     
