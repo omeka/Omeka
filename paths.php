@@ -23,6 +23,7 @@ $site['thumbnails']		= 'thumbnails';
 $site['square_thumbnails'] = 'square_thumbnails';
 $site['files']			= 'files';
 $site['public_theme']	= 'themes';
+$site['admin_theme']    = 'themes';
 $site['views']          = 'views';
 $site['scripts']        = 'scripts';
 $site['migrations']     = 'migrations';
@@ -47,6 +48,9 @@ define('FULLSIZE_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('FILES_DIR', 		ARCHIVE_DIR.DIRECTORY_SEPARATOR.$site['files']);
 define('VIEW_SCRIPTS_DIR',  APP_DIR . DIRECTORY_SEPARATOR . $site['views'] . DIRECTORY_SEPARATOR . $site['scripts']);
 define('UPGRADE_DIR',       APP_DIR . DIRECTORY_SEPARATOR . $site['migrations']);
+define('ADMIN_THEME_DIR',   BASE_DIR . DIRECTORY_SEPARATOR . $site['admin'] . DIRECTORY_SEPARATOR . $site['admin_theme']);
+define('PUBLIC_THEME_DIR',  BASE_DIR . DIRECTORY_SEPARATOR . $site['public_theme']);
+
 
 //Define the main file that will load all the helpers
 define('HELPERS',			HELPER_DIR.DIRECTORY_SEPARATOR.'all.php');
@@ -101,7 +105,8 @@ define('WEB_SQUARE_THUMBNAILS',  WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['square_t
 define('WEB_FULLSIZE',	WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['fullsize']);
 define('WEB_FILES',		WEB_ARCHIVE.DIRECTORY_SEPARATOR.$site['files']);
 define('WEB_PUBLIC_THEME',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['public_theme']);
-define('WEB_VIEW_SCRIPTS', WEB_ROOT.DIRECTORY_SEPARATOR.$site['application'].DIRECTORY_SEPARATOR.$site['views'].DIRECTORY_SEPARATOR.$site['scripts']);
+define('WEB_VIEW_SCRIPTS', WEB_ROOT . DIRECTORY_SEPARATOR . $site['application'] 
+    . DIRECTORY_SEPARATOR . $site['views'] . DIRECTORY_SEPARATOR . $site['scripts']);
 
 
 set_include_path(get_include_path().PATH_SEPARATOR.LIB_DIR.PATH_SEPARATOR.MODEL_DIR);

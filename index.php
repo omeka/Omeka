@@ -4,8 +4,7 @@ define('APP_START', microtime(true));
 
 require_once 'paths.php';
 
-define('ADMIN_THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'themes');
-define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
+define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.$site['public_theme']);
 
 require_once 'Omeka/Core.php';
 $core = new Omeka_Core;
