@@ -12,6 +12,7 @@ $core->sanitizeMagicQuotes();
 $core->initializeClassLoader();
 $core->initializeConfigFiles();
 $core->initializeDb();
+$core->loadModelClasses();
 
 //Load up our script to verify that the installation requirements for Omeka have been met
 include 'verify.php';
