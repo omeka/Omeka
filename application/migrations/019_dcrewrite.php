@@ -1,8 +1,4 @@
 <?php
-// TO DO: add regular expressions in element types (see DcRewrite::et property and 
-//        DcRewrite::migrateElementTypes() method)
-// TO DO: add timestamps to every table?
-
 class DcRewrite extends Omeka_Db_Migration
 {
     const backupTableSuffix = '__backup__19';
@@ -165,6 +161,10 @@ There are some bugs in this regex:
     protected function createNewTables()
     {
         $db = $this->db;
+        
+        // To do: add indexes, unique indexes, and fulltext indexes:
+        // unique index on elements.name
+        
         $sql = "
         DROP TABLE IF EXISTS `{$db->prefix}elements`;
         CREATE TABLE `{$db->prefix}elements` (
@@ -318,7 +318,7 @@ There are some bugs in this regex:
             `plugin_id`, 
             `name`, 
             `description` 
-        FROM `{$db->Metafield}" . self::backupTableSuffix . "`;";
+        FROM `{$db->prefix}metafields" . self::backupTableSuffix . "`;";
         $this->exec($sql);
     }
 
@@ -383,7 +383,7 @@ There are some bugs in this regex:
             `plugin_id`, 
             `name`, 
             `description` 
-        FROM `{$db->Type}" . self::backupTableSuffix . "`;";
+        FROM `{$db->prefix}types" . self::backupTableSuffix . "`;";
         $this->exec($sql);
     }
     
@@ -403,7 +403,7 @@ There are some bugs in this regex:
             `type_id`, 
             `metafield_id`, 
             `plugin_id` 
-        FROM `{$db->TypesMetafields}" . self::backupTableSuffix . "`";
+        FROM `{$db->prefix}types_metafields" . self::backupTableSuffix . "`";
         $this->exec($sql);
     }
     
@@ -430,7 +430,7 @@ There are some bugs in this regex:
             `item_id`, 
             `metafield_id`, 
             `text`
-        FROM `{$db->Metatext}" . self::backupTableSuffix . "` 
+        FROM `{$db->prefix}metatext" . self::backupTableSuffix . "` 
         WHERE `text` IS NOT NULL 
         AND `text` != '';";
         $this->exec($sql);
@@ -441,7 +441,7 @@ There are some bugs in this regex:
         $db = $this->db;
         
         // Get all item IDs from the old `items` table
-        $sql = "SELECT `id` FROM `{$db->Item}" . self::backupTableSuffix . "`";
+        $sql = "SELECT `id` FROM `{$db->prefix}items" . self::backupTableSuffix . "`";
         $items = $db->query($sql)->fetchAll();
              
         // Loop through the elements that are in an element set.
@@ -463,7 +463,7 @@ There are some bugs in this regex:
                     ?, 
                     {$elementSetElement['id']}, 
                     `$originalElementName` 
-                FROM `{$db->Item}" . self::backupTableSuffix . "` 
+                FROM `{$db->prefix}items" . self::backupTableSuffix . "` 
                 WHERE `id` = ? 
                 AND `$originalElementName` IS NOT NULL 
                 AND `$originalElementName` != ''";
@@ -489,7 +489,7 @@ There are some bugs in this regex:
                     ?, 
                     {$elementSetElement['id']}, 
                     CONCAT_WS('', `temporal_coverage_start`, ' ',`temporal_coverage_end`) 
-                FROM `{$db->Item}" . self::backupTableSuffix . "` 
+                FROM `{$db->prefix}items" . self::backupTableSuffix . "` 
                 WHERE `id` = ? 
                 AND (
                     (
@@ -530,7 +530,7 @@ There are some bugs in this regex:
             `collection_id`, 
             `featured`, 
             `public` 
-        FROM `{$db->Item}" . self::backupTableSuffix . "`";
+        FROM `{$db->prefix}items" . self::backupTableSuffix . "`";
         $this->exec($sql);
     }
 }
