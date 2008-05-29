@@ -1,5 +1,5 @@
 <?php
-define('OMEKA_MIGRATION', 19);
+define('OMEKA_MIGRATION', 18);
 define('OMEKA_VERSION', 'trunk');
 
 error_reporting(E_ALL ^ E_NOTICE);
