@@ -46,7 +46,6 @@ class Omeka_Core
     public function __construct()
     {
         require_once 'globals.php';
-        
         $this->_context = Omeka_Context::getInstance();
     }
     
@@ -74,10 +73,10 @@ class Omeka_Core
     public function sanitizeMagicQuotes()
     {
         //Strip out those bastard slashes
-        if(get_magic_quotes_gpc()) {
-        	$_POST = stripslashes_deep($_POST);
-        	$_REQUEST = stripslashes_deep($_REQUEST);
-        	$_GET = stripslashes_deep($_GET);
+        if (get_magic_quotes_gpc()) {
+            $_POST = stripslashes_deep($_POST);
+            $_REQUEST = stripslashes_deep($_REQUEST);
+            $_GET = stripslashes_deep($_GET);
         }      
     }
     
@@ -128,7 +127,7 @@ class Omeka_Core
         
         // Throw an error if the stop phase doesn't exist.
         if (!in_array($stopPhase, $phases)) {
-            throw new Exception('The provided stop phase "'.$stopPhase.'" does not exist.');
+            throw new Exception("The provided stop phase '$stopPhase' does not exist.");
         }
         
         // Load initialization callbacks in the proper order.
@@ -160,36 +159,33 @@ class Omeka_Core
     {
         try {
             $db = $this->getConfig('db');
-
-        	//Fail on improperly configured db.ini file
-        	if (!isset($db->host) or ($db->host == 'XXXXXXX')) {
-        		throw new Zend_Config_Exception('Your Omeka database configuration file has not been set up properly.  Please edit the configuration and reload this page.');
-        	}
-
-        	$dsn = 'mysql:host='.$db->host.';dbname='.$db->name;
-        	if(isset($db->port)) {
-        		$dsn .= "port=" . $db->port;
-        	}
-	
-        	$dbh = Zend_Db::factory('Mysqli', array(
-        	    'host'     => $db->host,
-        	    'username' => $db->username,
-        	    'password' => $db->password,
-        	    'dbname'   => $db->name));
-        } 
-        catch (Zend_Db_Adapter_Exception $e) {
-            // perhaps a failed login credential, or perhaps the RDBMS is not running
-        	echo $e->getMessage();exit;
-        } 
-        catch (Zend_Exception $e) {
-            // perhaps factory() failed to load the specified Adapter class
-        	echo $e->getMessage();exit;
-        }
-        catch (Zend_Config_Exception $e) {
-        	echo $e->getMessage();exit;
-        }
-        catch (Exception $e) {
-        	$this->installerNotification();
+            
+            // Fail on improperly configured db.ini file
+            if (!isset($db->host) || ($db->host == 'XXXXXXX')) {
+                throw new Zend_Config_Exception('Your Omeka database configuration file has not been set up properly.  Please edit the configuration and reload this page.');
+            }
+            
+            $dbh = Zend_Db::factory('Mysqli', array('host'     => $db->host,
+                                                    'username' => $db->username,
+                                                    'password' => $db->password,
+                                                    'dbname'   => $db->name));
+        
+        // perhaps a failed login credential, or perhaps the RDBMS is not running
+        } catch (Zend_Db_Adapter_Exception $e) {
+            echo $e->getMessage();
+            exit;
+        
+        // perhaps factory() failed to load the specified Adapter class
+        } catch (Zend_Exception $e) {
+            echo $e->getMessage();
+            exit;
+        
+        } catch (Zend_Config_Exception $e) {
+            echo $e->getMessage();
+            exit;
+        
+        } catch (Exception $e) {
+            $this->installerNotification();
         }
 
         $db_obj = new Omeka_Db($dbh, $db->prefix);
@@ -207,33 +203,33 @@ class Omeka_Core
      **/
     public function initializeOptions()
     {
-        //Pull the options from the DB
+        // Pull the options from the DB
         try {
             $db = $this->getDb();
-        	$option_stmt = $db->query("SELECT * FROM $db->Option");
-        	if(!$option_stmt) {
-        		throw new Exception( 'Install me!' );
-        	}
-        	
-        	$option_array = $option_stmt->fetchAll();
-
-            // ****** CHECK TO SEE IF OMEKA IS INSTALLED ****** 
-            if(!count($option_array)) {
-            	throw new Exception( 'Install me!' );
+            
+            $option_stmt = $db->query("SELECT * FROM $db->Option");
+            
+            if (!$option_stmt) {
+                throw new Exception('Install me!');
             }
-        } 
-        catch (Exception $e) {
-        	$this->installerNotification();
+            
+            $option_array = $option_stmt->fetchAll();
+            
+            // ****** CHECK TO SEE IF OMEKA IS INSTALLED ****** 
+            if (!count($option_array)) {
+                throw new Exception('Install me!');
+            }
+        } catch (Exception $e) {
+            $this->installerNotification();
         }
-
-        //Save the options so they can be accessed
+        
+        // Save the options so they can be accessed
         $options = array();
         foreach ($option_array as $opt) {
-        	$options[$opt['name']] = $opt['value'];
+            $options[$opt['name']] = $opt['value'];
         }
         
         $this->setOptions($options);
-                
     }
     
     /**
@@ -244,24 +240,27 @@ class Omeka_Core
      **/
     public function initializeConfigFiles()
     {
-      	require_once 'Zend/Config/Ini.php';
-    	$db_file = CONFIG_DIR . DIRECTORY_SEPARATOR . 'db.ini';
-    	if (!file_exists($db_file)) {
-    		throw new Zend_Config_Exception('Your Omeka database configuration file is missing.');
-    	}
-    	if (!is_readable($db_file)) {
-    		throw new Zend_Config_Exception('Your Omeka database configuration file cannot be read by the application.');
-    	}
-
-    	$db = new Zend_Config_Ini($db_file, 'database');
-    	 
+        require_once 'Zend/Config/Ini.php';
+        
+        $db_file = CONFIG_DIR . DIRECTORY_SEPARATOR . 'db.ini';
+        
+        if (!file_exists($db_file)) {
+            throw new Zend_Config_Exception('Your Omeka database configuration file is missing.');
+        }
+        
+        if (!is_readable($db_file)) {
+            throw new Zend_Config_Exception('Your Omeka database configuration file cannot be read by the application.');
+        }
+        
+        $db = new Zend_Config_Ini($db_file, 'database');
+         
         $this->setConfig('db', $db);
- 
-        $config = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'config.ini', 'site');
+        
+        $config = new Zend_Config_Ini(CONFIG_DIR . DIRECTORY_SEPARATOR . 'config.ini', 'site');
                 
         $this->setConfig('basic', $config);
         
-        $routes = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'routes.ini', null);
+        $routes = new Zend_Config_Ini(CONFIG_DIR . DIRECTORY_SEPARATOR . 'routes.ini', null);
         
         $this->setConfig('routes', $routes);
     }
@@ -277,14 +276,14 @@ class Omeka_Core
     {
         $config = $this->getConfig('basic');
         
-        if(!$config->log->errors && !$config->log->sql) {
+        if (!$config->log->errors && !$config->log->sql) {
             return;
         }
         
-        $logFile = LOGS_DIR.DIRECTORY_SEPARATOR.'errors.log';
+        $logFile = LOGS_DIR.DIRECTORY_SEPARATOR . 'errors.log';
         
-        if(!is_writable($logFile)) {
-            throw new Exception( 'Error log file cannot be written to.  Please give this file read/write permissions for the web server.' );
+        if (!is_writable($logFile)) {
+            throw new Exception('Error log file cannot be written to. Please give this file read/write permissions for the web server.');
         }
         
         $writer = new Zend_Log_Writer_Stream($logFile);
@@ -310,14 +309,13 @@ class Omeka_Core
     {
         $options = $this->getOptions();
         
-        if($serialized = $options['acl']) {
+        if ($serialized = $options['acl']) {
             $acl = unserialize($serialized);
-        }
-        else { 
-            $acl = $this->setupAcl(); 
+        } else {
+            $acl = $this->setupAcl();
         }
         
-        $this->setAcl($acl);     
+        $this->setAcl($acl);
     }
     
     /**
@@ -328,8 +326,8 @@ class Omeka_Core
      **/
     public function setupAcl()
     {
-        //Setup the ACL
-        include CORE_DIR . DIRECTORY_SEPARATOR .'acl.php';
+        // Setup the ACL
+        include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
         set_option('acl', serialize($acl));        
         return $acl;
     }
@@ -346,12 +344,13 @@ class Omeka_Core
      **/
     public function initializePluginBroker()
     {
-        //Initialize the plugin broker with the database object and the plugins/ directory
+        // Initialize the plugin broker with the database object and the plugins/ directory
         $broker = new Omeka_Plugin_Broker($this->getDb(), PLUGIN_DIR);
         $this->setPluginBroker($broker);
-
+        
         $broker->loadActive();        
-        //Fire all the 'initialize' hooks for the plugins
+        
+        // Fire all the 'initialize' hooks for the plugins
         $broker->initialize();
     }
     
@@ -365,13 +364,13 @@ class Omeka_Core
     public function initializeAuth()
     {
         $authPrefix = get_option('auth_prefix');
-
+        
         //Set up the authentication mechanism with the specially generated prefix
         $auth = Zend_Auth::getInstance();
-
+        
         require_once 'Zend/Auth/Storage/Session.php';
         $auth->setStorage(new Zend_Auth_Storage_Session($authPrefix));
-
+        
         $this->setAuth($auth);
     }
     
@@ -384,17 +383,17 @@ class Omeka_Core
      **/
     public function initializeCurrentUser()
     {
-		$auth = $this->getAuth();
-		
-		$user = false;
-		
-		if ($auth->hasIdentity()) {
-			$user_id = $auth->getIdentity();
-			
-			require_once 'User.php';
-						
-			$user = $this->getDb()->getTable('User')->find($user_id);
-		} 
+        $auth = $this->getAuth();
+        
+        $user = false;
+        
+        if ($auth->hasIdentity()) {
+            $user_id = $auth->getIdentity();
+            
+            require_once 'User.php';
+                        
+            $user = $this->getDb()->getTable('User')->find($user_id);
+        } 
         
         $this->setCurrentUser($user);
     }
@@ -421,15 +420,15 @@ class Omeka_Core
         
         $router->setFrontController($front);
         $front->setRouter($router);
-
+        
         $front->getDispatcher()->setFrontController($front);
         
-        //This plugin redirects exceptions to the ErrorController (built in to ZF)
+        // This plugin redirects exceptions to the ErrorController (built in to ZF)
         $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
                 
-        //This plugin allows Omeka plugins to add controller directories to the 'default' namespace
-        //which prevents weird naming conventions like Contribution_IndexController.php
-        //and obviates the need to hack routes
+        // This plugin allows Omeka plugins to add controller directories to the 'default' namespace
+        // which prevents weird naming conventions like Contribution_IndexController.php
+        // and obviates the need to hack routes
         $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack());
         
         $front->registerPlugin(new Omeka_Controller_Plugin_Admin());
@@ -439,11 +438,11 @@ class Omeka_Core
         require_once 'Zend/Controller/Request/Http.php';
         $request = new Zend_Controller_Request_Http();
         $front->setRequest($request);
-
+        
         require_once 'Zend/Controller/Response/Http.php';
         $response = new Zend_Controller_Response_Http();
         $front->setResponse($response);
-
+        
         //$front->addControllerDirectory(array('default'=>CONTROLLER_DIR));
         $front->addControllerDirectory(CONTROLLER_DIR);   
         

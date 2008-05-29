@@ -10,7 +10,7 @@
 	//Update the type metadata every time a different Item Type is selected	
 	function changeTypeMetadata()
 	{
-		var typeSelect = $('type');
+		var typeSelect = $('item-type');
 		$('change_type').hide();
 		typeSelect.onchange = function() {
 			
@@ -37,22 +37,27 @@
 		}
 	}
 	
+	/* Loop through all the spans with class="tooltip" and make them visible 
+	as tooltips */
 	function makeTooltips()
 	{
-		//Now load the tooltip js
-			var tooltipIds = ['title', 'publisher', 'relation', 'language', 'spatial_coverage', 'rights', 'rights_holder', 'description', 'source', 'subject', 'creator', 'additional_creator', 'provenance', 'contributor', 'citation', 'temporal_coverage', 'date', 'format'];
-			
-		for (var i=0; i < tooltipIds.length; i++) {
-			var elId = tooltipIds[i];
-			$(elId).style.cursor = "help";
-			var image = document.createElement('img');
-			image.src = "<?php echo img('information.png'); ?>";
-			$(elId).appendChild(image);
-			$(elId).style.paddingLeft = "20px";
-			var tooltipId = elId + '_tooltip';
-			var tooltip = new Tooltip(image, tooltipId, {default_css:true, zindex:100000});
-			$(tooltipId).addClassName('info-window');
-		};
+		var tooltipElements = $$('.tooltip');
+        
+		tooltipElements.each(function(span){
+		   //The div that wraps the tooltip and the form element
+		   var div = span.up();
+		   /* Make a helpful image that will show the tooltip when you hover
+		    your mouse over it. */
+		   var image = document.createElement('img');
+		   image.src = "<?php echo img('information.png'); ?>";
+		   image.style.cursor = "help";
+		   div.appendChild(image);
+		   div.style.paddingLeft = "20px";
+		   
+		   var tooltip = new Tooltip(image, span, 
+		       {default_css:true, zindex:100000});
+		   span.addClassName('info-window');
+		});			
 	}
 	
 	//Messing with the tag list should not submit the form.  Instead it runs an AJAX request to remove tags
@@ -112,14 +117,9 @@
 		<legend>Type Metadata</legend>
 
 			<div class="field" id="type-select">
-				<?php select(	array(	
-							'name'	=> 'type_id',
-							'id'	=> 'type' ),
-							types(),
-							$item->type_id,
-							'Item Type',
-							'id',
-							'name' ); ?>
+				<?php echo select_item_type(array(	
+            				'name'	=> 'item_type_id',
+            				'id'	=> 'item-type' )); ?>
 			<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
 			</div>
 			<div id="type-metadata-form">
@@ -153,7 +153,7 @@
 			
 			<?php fire_plugin_hook('append_to_item_form_upload', $item); ?>
 		
-		<?php if ( has_files($item) ): ?>
+		<?php if ( item_has_files() ): ?>
 			<div class="label">Edit File Metadata</div>
 			<div id="file-list">
 			<table>
@@ -187,47 +187,42 @@
 	<div id="step2" class="toggle">
 <fieldset id="core-metadata">
 	<legend>Core Metadata</legend>
-		<div class="field">
-		<label for="title" id="title">Title</label>
-		<input type="text" class="textinput" name="title" value="<?php echo h($item->title);?>" />
-		<span class="tooltip" id="title_tooltip"><?php echo dublin_core('title'); ?></span>
-		</div>
-
-		<div class="field">
-		<label id="subject">Subject</label>
-		<input type="text" class="textinput" name="subject" value="<?php echo h($item->subject);?>" />
-		<span class="tooltip" id="subject_tooltip"><?php echo dublin_core('subject'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="description">Description</label>
-		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo h($item->description); ?></textarea>
-		<span class="tooltip" id="description_tooltip"><?php echo dublin_core('description'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="creator">Creator</label>
-		<input type="text" class="textinput" name="creator" value="<?php echo h($item->creator);?>" />
-		<span class="tooltip" id="creator_tooltip"><?php echo dublin_core('creator'); ?></span>
-		</div>
-
-		<div class="field">
-		<label id="additional_creator">Additional Creator</label>
-		<input type="text" class="textinput" name="additional_creator" value="<?php echo h($item->additional_creator);?>" />
-		<span class="tooltip" id="additional_creator_tooltip"><?php echo dublin_core('additional_creator'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="source">Source</label>
-		<input type="text" class="textinput" name="source" value="<?php echo h($item->source);?>" />
-		<span class="tooltip" id="source_tooltip"><?php echo dublin_core('source'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="publisher">Publisher</label>
-		<input type="text" class="textinput" name="publisher" value="<?php echo h($item->publisher);?>" />
-		<span class="tooltip" id="publisher_tooltip"><?php echo dublin_core('publisher'); ?></span>
-		</div>
+	<?php $coreElementSet = array(
+	    'Title',
+	    'Subject', 
+	    'Description',
+	    'Creator',
+	    'Additional Creator',
+	    'Source',
+	    'Publisher',
+//	    'Date',
+	    'Contributor',
+	    'Rights',
+	    'Rights Holder',
+	    'Relation',
+	    'Format',
+	    'Spatial Coverage',
+//	    'Temporal Coverage',
+//	    'Language',
+	    'Provenance',
+	    'Citation'); ?>
+	    
+	    <?php foreach ($coreElementSet as $field): ?>
+	        <div class="field">
+	        <label id="<?php echo text_to_id($field); ?>"><?php echo $field; ?></label>
+            
+            <?php if (in_array($field, array('Description'))): 
+                //Descriptions are displayed as textareas ?>
+                <textarea class="textinput" name="description"  rows="15" cols="50"><?php echo item($field, 0); ?></textarea>
+            <?php else: ?>
+                <input type="text" class="textinput" name="Elements[<?php echo $field; ?>]" value="<?php echo item($field, 0);?>" />
+            <?php endif; ?>
+            
+            <span class="tooltip" id="<?php echo Inflector::underscore($field); ?>_tooltip">
+                <?php echo element_metadata($field, 'description'); ?>
+            </span>
+	        </div>
+	    <?php endforeach; ?>
 		
 		<div class="field">
 			<label for="date_year" id="date">Date <span class="notes">(YYYY-MM-DD)</span></label>
@@ -240,47 +235,11 @@
 		
 			</div>
 			</div>
-			<span class="tooltip" id="date_tooltip"><?php echo dublin_core('date'); ?></span>
+			<span class="tooltip" id="date_tooltip"><?php echo element_metadata('Date', 'description'); ?></span>
 		</div>
 		
 		<div class="field">
-		<label id="contributor">Contributor</label>
-		<input type="text" class="textinput" name="contributor" value="<?php echo h($item->contributor);?>" />
-		<span class="tooltip" id="contributor_tooltip"><?php echo dublin_core('contributor'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="rights">Rights</label>
-		<input type="text" class="textinput" name="rights" value="<?php echo h($item->rights);?>" />
-		<span class="tooltip" id="rights_tooltip"><?php echo dublin_core('rights'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="rights_holder">Rights Holder</label>
-		<input type="text" class="textinput" name="rights_holder" value="<?php echo h($item->rights_holder);?>" />
-		<span class="tooltip" id="rights_holder_tooltip"><?php echo dublin_core('rights_holder'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="relation">Relation</label>
-		<input type="text" class="textinput" name="relation" value="<?php echo h($item->relation);?>" />
-		<span class="tooltip" id="relation_tooltip"><?php echo dublin_core('relation'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="format">Format</label>
-		<input type="text" class="textinput" name="format" value="<?php echo h($item->format);?>" />
-		<span class="tooltip" id="format_tooltip"><?php echo dublin_core('format'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="spatial_coverage">Spatial Coverage</label>
-		<input type="text" class="textinput" name="spatial_coverage" value="<?php echo h($item->spatial_coverage);?>" />
-		<span class="tooltip" id="spatial_coverage_tooltip"><?php echo dublin_core('spatial_coverage'); ?></span>
-		</div>
-		
-		<div class="field">
-			<label id="temporal_coverage">Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
+			<label id="temporal-coverage">Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
 			<div class="dates">
 				<span>From</span>
 				<span class="dateinput">
@@ -295,7 +254,7 @@
 					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>">
 				</span>
 			</div>
-			<span class="tooltip" id="temporal_coverage_tooltip"><?php echo dublin_core('temporal_coverage'); ?></span>
+			<span class="tooltip" id="temporal_coverage_tooltip"><?php echo element_metadata('Temporal Coverage', 'description'); ?></span>
 		</div>
 
 			<div class="field">
@@ -312,20 +271,9 @@
 						'san'=>'Sanskrit'),
 					!empty($item->language) ? $item->language : 'eng'); 
 			?>
-			<span class="tooltip" id="language_tooltip"><?php echo dublin_core('language'); ?></span>
+			<span class="tooltip" id="language_tooltip"><?php echo element_metadata('Language', 'description'); ?></span>
 			</div>
-
-			<div class="field">
-			<label id="provenance">Provenance</label>
-			<input type="text" class="textinput" name="provenance" value="<?php echo h($item->provenance);?>" />
-			<span class="tooltip" id="provenance_tooltip"><?php echo dublin_core('provenance'); ?></span>
-			</div>
-
-			<div class="field">
-			<label id="citation">Bibliographic Citation</label>
-			<input type="text" class="textinput" name="citation" value="<?php echo h($item->citation);?>" />
-			<span class="tooltip" id="citation_tooltip"><?php echo dublin_core('bibliographic_citation'); ?></span>
-			</div>
+			
 	</fieldset>
 </div>
 <div id="step3" class="toggle">

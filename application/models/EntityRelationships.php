@@ -13,6 +13,6 @@
  **/
 class EntityRelationships extends Omeka_Record
 {
-	public $name;
-	public $description;	
+    public $name;
+    public $description;    
 }

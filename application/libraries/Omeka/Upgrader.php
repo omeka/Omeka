@@ -52,14 +52,14 @@ class Omeka_Upgrader
 	{
         $i = (int) $this->start;
         
-        while($i > (int) $this->end) {
+        while ($i > (int) $this->end) {
             ob_start();
             
-           $this->down($i);
-           $this->output[$i][] = "Successfully downgraded #$i";
+            $this->down($i);
+            $this->output[$i][] = "Successfully downgraded #$i";
             //Retrieve anything that an individual upgrade script may have output
     		$output = ob_get_clean();
-    		if($output) {
+    		if ($output) {
     		    $this->output[$i][] = $output;
     		}
             
@@ -72,7 +72,7 @@ class Omeka_Upgrader
 	{
 	    $i = $this->start + 1;
 	    
-        while($i <= (int) $this->end) { 
+        while ($i <= (int) $this->end) { 
 
     		ob_start();
             
@@ -86,7 +86,7 @@ class Omeka_Upgrader
             $this->output[$i][] = "Successfully migrated #$i";
             //Retrieve anything that an individual upgrade script may have output
     		$output = ob_get_clean();
-    		if($output) {
+    		if ($output) {
     		    $this->output[$i][] = $output;
     		}
             
@@ -113,14 +113,13 @@ class Omeka_Upgrader
 	private function addMigrationError($e) {
 	    $error = "Error in Migration #{$this->current}" . "\n\n";
 	    
-	    if($e instanceof Zend_Db_Adapter_Exception) {
+	    if ($e instanceof Zend_Db_Adapter_Exception) {
             $db_exception = $e->getChainedException();
             			
 			$error .= "Message: " . $db_exception->getMessage() . "\n\n"; 
 			$error .= "Code: " . $db_exception->getCode() . "\n\n";
 			$error .= "Line: " . $db_exception->getLine() . "\n\n";
-	    }
-	    else {
+	    } else {
 		    $error .= "Message: " . $e->getMessage() . "\n\n";	    
 	    }
 	    
@@ -131,7 +130,7 @@ class Omeka_Upgrader
 	    $class = $this->getMigrationClass($version);
 	    $migration = new $class($this->db);	    
 	    
-	    if(!method_exists($migration, 'down')) {
+	    if (!method_exists($migration, 'down')) {
 	        throw new Exception("Migration #$version is irreversible (there is no down() method)!");
 	    }
 	    
@@ -148,7 +147,7 @@ class Omeka_Upgrader
         
         $path = current($f);
         
-        if(!file_exists($path)) {
+        if (!file_exists($path)) {
             throw new Exception("Migration file does not exist for #$version!");
         }
         
@@ -158,13 +157,13 @@ class Omeka_Upgrader
 	    //Match the class name portion of the file name
 	    $filename = basename($path, '.php');
 	    
-	    if(!preg_match('/^\d{3}_(\w+)$/', $filename, $match)) {
+	    if (!preg_match('/^\d{3}_(\w+)$/', $filename, $match)) {
 	        throw new Exception('Migration file does not follow proper naming conventions!');
 	    }
 	    
 	    $class = ucfirst($match[1]);
 	    
-	    if ( !class_exists($class) ) {
+	    if (!class_exists($class)) {
 	        throw new Exception('Migration file named "' . $filename . '" does not contain a class named "' . $class . '"!');
 	    }
 	    
@@ -176,7 +175,7 @@ class Omeka_Upgrader
 		$migration = new $class($this->db);
 		
 		//Migrations can output HTML for a form that will then be processed by that migration
-		if(empty($_POST) and ($output = $migration->form())) {
+		if (empty($_POST) and ($output = $migration->form())) {
 			echo $output;
 			exit;
 		}
@@ -205,12 +204,11 @@ class Omeka_Upgrader
 	
 	public function getColumnDefinition($table, $column) {
 		//Replace with SHOW COLUMNS		
-		
 		$tblName = $this->db->$table;
 		
 		$explain = $this->query("EXPLAIN `$tblName`");
 		foreach ($explain as $k => $col) {
-			if($column == $col['Field'] ) {
+			if ($column == $col['Field'] ) {
 				return $col;
 			}
 		}
@@ -221,4 +219,4 @@ class Omeka_Upgrader
 	{
 	    return $this->output;
 	}
-} // END class Omeka_Upgrader 
+}

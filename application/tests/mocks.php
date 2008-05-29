@@ -31,12 +31,17 @@ class MockOmeka_Db extends AbstractMockOmeka_Db
 					array(new IdenticalSqlExpectation($sql) ) );		
 	}
 	
+	public function query($sql, $params=array())
+	{
+	    
+	}
+	
 	public function expectQuery($sql, $params=array())
 	{
 		$this->expectAtLeastOnce('query', 
 			array(new IdenticalSqlExpectation($sql), $params) );
 	}
-	
+
 	/**
 	 * @param mixed bool|object
 	 *

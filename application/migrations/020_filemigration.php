@@ -86,7 +86,7 @@ class FileMigration extends Omeka_Db_Migration
           `id` int(10) unsigned NOT NULL auto_increment,
           `file_id` int(10) unsigned NOT NULL,
           `element_id` int(10) unsigned NOT NULL,
-          `text` text collate utf8_unicode_ci,
+          `text` mediumtext collate utf8_unicode_ci,
           PRIMARY KEY  (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         

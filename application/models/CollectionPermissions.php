@@ -7,8 +7,8 @@
  **/
 
 /**
- * This will check the ACL To determine whether a user has permission to view collections that are not public yet 
- * then modify the SQL query accordingly
+ * This will check the ACL To determine whether a user has permission to view 
+ * collections that are not public yet then modify the SQL query accordingly
  *
  * @package Omeka
  * @author CHNM
@@ -16,21 +16,19 @@
  **/
 class CollectionPermissions
 {
-	public function __construct(Omeka_Db_Select $sql)
-	{
-		$acl = Omeka_Context::getInstance()->getAcl();
-		$db = Omeka_Context::getInstance()->getDb();
-		
-		$has_permission = $acl->checkUserPermission('Collections', 'showNotPublic');
-		
-		if(!$has_permission)
-		{
-			if($sql->hasJoin('c')) {
-				$sql->where("c.public = 1");
-			}
-			else {
-				throw new Exception( "Invalid query provided to CollectionPermissions check" );
-			}
-		}
-	}
+    public function __construct(Omeka_Db_Select $sql)
+    {
+        $acl = Omeka_Context::getInstance()->getAcl();
+        $db = Omeka_Context::getInstance()->getDb();
+        
+        $has_permission = $acl->checkUserPermission('Collections', 'showNotPublic');
+        
+        if (!$has_permission) {
+            if ($sql->hasJoin('c')) {
+                $sql->where("c.public = 1");
+            } else {
+                throw new Exception( "Invalid query provided to CollectionPermissions check" );
+            }
+        }
+    }
 }

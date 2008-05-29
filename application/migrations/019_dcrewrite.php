@@ -22,13 +22,14 @@ class DcRewrite extends Omeka_Db_Migration
     protected $et = array(
         array('name' => 'text',      'regular_expression' => '/(?<!.).{0,65535}(?!.)/s', 'description' => 'A long, typically multi-line text string. Up to 65535 characters. Renders a textarea in an HTML form.'), 
         array('name' => 'tinytext',  'regular_expression' => '/(?<!.).{0,255}(?!.)/s', 'description' => 'A short, one-line text string. Up to 255 characters. Renders a text input in a HTML form.'), 
-        array('name' => 'daterange', 'regular_expression' => '/^(?:\-?[0-9]{1,9}(?:\-\b(?:0[1-9]|1[0-2])\b(?:\-\b(?:0[1-9]|[1-2][0-9]|3[0-1])\b)?)?)?(?: ?(?:\-?[0-9]{1,9}(?:\-\b(?:0[1-9]|1[0-2])\b(?:\-\b(?:0[1-9]|[1-2][0-9]|3[0-1])\b)?)?)?)?$/', 'description' => 'A date range, begin to end.
-In format yyyy-mm-dd yyyy-mm-dd: 
+        array('name' => 'daterange', 'regular_expression' => '/^(?:\-?[0-9]{1,9}(?:\-\b(?:0[1-9]|1[0-2])\b(?:\-\b(?:0[1-9]|[1-2][0-9]|3[0-1])\b)?)?)?(?: ?(?:\-?[0-9]{1,9}(?:\-\b(?:0[1-9]|1[0-2])\b(?:\-\b(?:0[1-9]|[1-2][0-9]|3[0-1])\b)?)?)?)?$/', 'description' => 'A date range, begin to end. In format yyyy-mm-dd yyyy-mm-dd: 
     * No hyphen before a year indicates C.E.
     * A hyphen before a year indicates B.C.E.
     * At least one year must exist (begin and/or end date)
     * Months are optional
     * Days are optional
+    * Months must precede days
+    * Years must precede months
     * The years must be between -999,999,999 and 999,999,999
     * The months must be between 01 and 12 (zerofill)
     * The days must be between 01 and 31 (zerofill)
@@ -268,13 +269,15 @@ There are some bugs in this regex:
         INSERT INTO `{$db->prefix}element_types` (
             `id`, 
             `name`, 
-            `description`
-        ) VALUES (?, ?, ?)";
+            `description`, 
+            `regular_expression`
+        ) VALUES (?, ?, ?, ?)";
         foreach ($this->et as $elementType) {
-            $id          = null;
-            $name        = $elementType['name'];
-            $description = $elementType['description'];
-            $db->exec($sql, array($id, $name, $description));
+            $id                = null;
+            $name              = $elementType['name'];
+            $description       = $elementType['description'];
+            $regularExpression = $elementType['regular_expression'];
+            $db->exec($sql, array($id, $name, $description, $regularExpression));
         }
         $this->_setElementTypes();
     }

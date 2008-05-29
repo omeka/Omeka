@@ -17,11 +17,11 @@ require_once 'MetatextTable.php';
  **/
 class Metatext extends Omeka_Record { 
     
-	public $item_id;
-	public $metafield_id;
-	public $text;
-
-	public function __toString() {
-		return (string) $this->text;
-	}
+    public $item_id;
+    public $metafield_id;
+    public $text;
+    
+    public function __toString() {
+        return (string) $this->text;
+    }
 }

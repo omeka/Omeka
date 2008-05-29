@@ -3,16 +3,11 @@
 * 
 */
 class OmekaRecordTestCase extends OmekaTestCase
-{
-	public function setUp()
-	{
-		parent::setUp();
-		
-		$this->db->setTable('Item', false);
-	}
-	
+{	
 	public function testSaveFormFiresAllCallbacks()
 	{
+		$this->setUpLiveDb();
+		
 		$broker = get_plugin_broker();
 		
 		$record = new Item;

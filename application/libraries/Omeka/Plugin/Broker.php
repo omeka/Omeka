@@ -91,7 +91,7 @@ class Omeka_Plugin_Broker
     protected $_nav = array();
         
     public function __construct($db, $pathToPlugins) 
-    {        
+    {
         $this->_basePath = $pathToPlugins;
         $this->_db = $db;
         
@@ -124,7 +124,9 @@ class Omeka_Plugin_Broker
                 //Require the file that contains the plugin
                 $path = $this->getPluginFilePath($name);
                 
-                if (file_exists($path)) $this->_pluginPaths[] = $path;
+                if (file_exists($path)) {
+                    $this->_pluginPaths[] = $path;
+                }
             }
         }
         
@@ -163,7 +165,9 @@ class Omeka_Plugin_Broker
     
     public function getHook($plugin, $hook)
     {        
-        if (is_array($this->_callbacks[$hook])) return $this->_callbacks[$hook][$plugin];
+        if (is_array($this->_callbacks[$hook])) {
+            return $this->_callbacks[$hook][$plugin];
+        }
     }
     
     /**
@@ -212,20 +216,20 @@ class Omeka_Plugin_Broker
     public function config($plugin)
     {
         //Check if the POST is empty, then check for a configuration form    
-        if(empty($_POST)) {
+        if (empty($_POST)) {
 
             $config_form_hook = $this->getHook($plugin, 'config_form');
     
             //If there is a configuration form available, load that and return the output for rendering later
-            if($config_form_hook) {
+            if ($config_form_hook) {
                 
                 require_once HELPERS;
                 
                 ob_start();
                 call_user_func_array($config_form_hook, array($_POST)); 
                 $config = ob_get_clean();    
-        
-                return $config;                    
+                
+                return $config;
             }
         
         //Data has been POSTed to the configuration mechanism
@@ -234,10 +238,10 @@ class Omeka_Plugin_Broker
             //Run the 'config' hook, then run the rest of the installer
             $config_hook = $this->getHook($plugin, 'config');
             
-            if($config_hook) {
+            if ($config_hook) {
                 call_user_func_array($config_hook, array($_POST));
-            }            
-        }        
+            }
+        }
     }
     
     public function install($plugin) 
@@ -248,19 +252,21 @@ class Omeka_Plugin_Broker
         
         //Include the plugin file manually because it was not included via the constructor
         $file = $this->getPluginFilePath($plugin);
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             require_once $file;
         } else {
-            throw new Exception( "Plugin named '$plugin' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$plugin' directory." );
+            throw new Exception("Plugin named '$plugin' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$plugin' directory.");
         }
-    
+        
         $config = $this->config($plugin);
         
-        if($config !== null) return $config;
-                                
+        if ($config !== null) {
+            return $config;
+        }
+        
         //Now run the installer for the plugin
         $install_hook = $this->_callbacks['install'][$plugin];
-
+        
         try {            
             $plugin_obj = new Plugin;
             $plugin_obj->active = 1;
@@ -279,9 +285,10 @@ class Omeka_Plugin_Broker
             echo "An error occurred when installing this plugin: ".$e->getMessage();
             
             //If there was an error, remove the plugin from the DB so that we can retry the install
-            if ($plugin_obj->exists()) $plugin_obj->delete();
+            if ($plugin_obj->exists()) {
+                $plugin_obj->delete();
+            }
         }
-
     }
     
     public function defineMetafield($name, $description) 
@@ -290,10 +297,14 @@ class Omeka_Plugin_Broker
         
         $plugin_obj = $this->_db->getTable('Plugin')->findBySql('name = ?', array($plugin), true);
         
-        if (!$plugin_obj) throw new Exception( 'Was unable to determine correct plugin to associate with a metafield!' );
+        if (!$plugin_obj) {
+            throw new Exception( 'Was unable to determine correct plugin to associate with a metafield!');
+        }
                 
         $metafield = new Metafield;
-        $metafield->setArray(array('name'=>$name, 'description'=>$description, 'plugin_id'=>$plugin_obj->id));
+        $metafield->setArray(array('name'=>$name, 
+                             'description'=>$description, 
+                             'plugin_id'=>$plugin_obj->id));
         $metafield->save();
     }
     
@@ -304,7 +315,9 @@ class Omeka_Plugin_Broker
      **/
     public function addThemeDir($path, $theme)
     {
-        if (!in_array($theme, array('public','admin','both'))) return false;
+        if (!in_array($theme, array('public','admin','both'))) {
+            return false;
+        }
         
         //Path must begin from within the plugin's directory
         
@@ -385,7 +398,7 @@ class Omeka_Plugin_Broker
         $nav = $this->_nav;
         
         $new = array('text'=>$text,'link'=>$link, 'permissions'=>$permissions);
-
+        
         $nav[$type][] = $new;
         $this->_nav = $nav;
     }
@@ -398,7 +411,9 @@ class Omeka_Plugin_Broker
      **/
     public function load_navigation($type)
     {
-        if (!isset($this->_nav[$type])) return;
+        if (!isset($this->_nav[$type])) {
+            return;
+        }
         
         foreach ($this->_nav[$type] as $nav) {
             
@@ -411,12 +426,16 @@ class Omeka_Plugin_Broker
                 $resource = $permissions[0];
                 $rule     = $permissions[1];
                 
-                if (!has_permission($resource, $rule)) continue;
+                if (!has_permission($resource, $rule)) {
+                    continue;
+                }
             }
             
             //Actually create the link (test if it is local or not)
             //If it has an 'http' in it, its not local, otherwise it is
-            if (!preg_match('/^http/', $link)) $link = uri($link);        
+            if (!preg_match('/^http/', $link)) {
+                $link = uri($link);
+            }
             
             echo '<li class="' . text_to_id($text, 'nav') . (is_current($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>';
         }
@@ -446,38 +465,38 @@ class Omeka_Plugin_Broker
         
         $baseDir = $this->_basePath . DIRECTORY_SEPARATOR . $pluginName;
         
-        $modelDir =         $baseDir . DIRECTORY_SEPARATOR  . 'models';
-        $controllerDir =    $baseDir . DIRECTORY_SEPARATOR  . 'controllers';
-        $librariesDir =     $baseDir . DIRECTORY_SEPARATOR  . 'libraries';
-        $viewsDir =         $baseDir . DIRECTORY_SEPARATOR  . 'views';
-        $adminDir =         $viewsDir . DIRECTORY_SEPARATOR . 'admin';
-        $publicDir =        $viewsDir . DIRECTORY_SEPARATOR . 'public';
-        $sharedDir =        $viewsDir . DIRECTORY_SEPARATOR . 'shared';
+        $modelDir      = $baseDir . DIRECTORY_SEPARATOR  . 'models';
+        $controllerDir = $baseDir . DIRECTORY_SEPARATOR  . 'controllers';
+        $librariesDir  = $baseDir . DIRECTORY_SEPARATOR  . 'libraries';
+        $viewsDir      = $baseDir . DIRECTORY_SEPARATOR  . 'views';
+        $adminDir      = $viewsDir . DIRECTORY_SEPARATOR . 'admin';
+        $publicDir     = $viewsDir . DIRECTORY_SEPARATOR . 'public';
+        $sharedDir     = $viewsDir . DIRECTORY_SEPARATOR . 'shared';
         
         //Add 'models' and 'libraries' directories to the include path
-        if(file_exists($modelDir)) {
+        if (file_exists($modelDir)) {
             set_include_path(get_include_path() . PATH_SEPARATOR . $modelDir );
         }
         
-        if(file_exists($librariesDir)) {
+        if (file_exists($librariesDir)) {
             set_include_path(get_include_path() . PATH_SEPARATOR . $librariesDir);
         }
 
         //If the controller directory exists, add that 
-        if(file_exists($controllerDir)) {
+        if (file_exists($controllerDir)) {
             $this->addControllerDir('controllers');
         }
 
         //Add the views directories 
-        if(file_exists($adminDir)) {
+        if (file_exists($adminDir)) {
             $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'admin', 'admin');
         }
         
-        if(file_exists($publicDir)) {
+        if (file_exists($publicDir)) {
             $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'public', 'public');
         }
         
-        if(file_exists($sharedDir)) {
+        if (file_exists($sharedDir)) {
             $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'shared', 'both');
         }
     }
@@ -505,7 +524,7 @@ class Omeka_Plugin_Broker
      * string containing valid XHTML, which will be used to display the file.
      * @return void
      **/
-    public function addMediaAdapter($mimeTypes, $callback, array $defaultOptions=array())
+    public function addMediaAdapter($mimeTypes, $callback, array $defaultOptions = array())
     {
         //Create the keyed list of mimeType=>callback format, and merge it
         //with the current list.
@@ -548,7 +567,7 @@ class Omeka_Plugin_Broker
     {
         $uninstallHook = $this->getHook($plugin, 'uninstall');
         
-        if($uninstallHook) {
+        if ($uninstallHook) {
             call_user_func_array($uninstallHook);
         }
         
@@ -563,7 +582,9 @@ class Omeka_Plugin_Broker
      **/
     public function __call($hook, $a) {
         
-        if (empty($this->_callbacks[$hook])) return;
+        if (empty($this->_callbacks[$hook])) {
+            return;
+        }
         
         $return_values = array();
         

@@ -31,10 +31,9 @@ class Omeka_Validator_Exception extends Exception
 	{
 		$this->_errors = $errors;
 		
-		if($errors instanceof Omeka_Validator_Errors) {
+		if ($errors instanceof Omeka_Validator_Errors) {
 			$this->message = (string) $errors;
-		}
-		elseif(is_string($errors)) {
+		} else if (is_string($errors)) {
 			$this->message = $errors;
 		}
 	}	

@@ -38,7 +38,7 @@ abstract class Omeka_Db_Migration
     }
     
     abstract public function up();
-        
+    
     /**
      * If the migration requires a form submission, here's where to handle display of it
      * 

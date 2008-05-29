@@ -1,4 +1,4 @@
-<?php head(array('title' => 'Item # '.$item->id, 'body_class'=>'items')); ?>
+<?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items')); ?>
 <?php common('archive-nav'); ?>
 
 <script type="text/javascript" charset="utf-8">
@@ -53,148 +53,81 @@
 
 <ul class="item-pagination navigation">
 <li id="previous-item" class="previous">
-	<?php echo link_to_previous_item($item,'Previous'); ?>
+	<?php echo link_to_previous_item('Previous'); ?>
 </li>
 <li id="next-item" class="next">
-	<?php echo link_to_next_item($item,'Next'); ?>
+	<?php echo link_to_next_item('Next'); ?>
 </li>
 </ul>
 
-<h1 id="title">#<?php echo $item->id; ?> <?php echo h($item->title); ?></h1>
+<h1 id="title">#<?php echo item('id');?> 
+<?php echo item('Title', ', '); //Titles should all be displayed, separated by , ?></h1>
 <p id="edit-delete"> 
 <?php 
-echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
-//echo link_to_item($item, 'delete', 'Delete', array('class'=>'delete')); 
-?></p>
+echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 
 <div id="item-images">
-<?php echo display_files($item->Files); ?>
+<?php echo display_files_for_item(); ?>
 	
 </div>
 <div id="core-metadata" class="showitem">
 
 <h2>Core Metadata</h2>
 	
-	<div id="subject" class="field">
-	<h3>Subject</h3>
-	<div>
-	<?php echo display_empty($item->subject); ?>
-	</div>
-	</div>
+	<?php $coreElementSet = array(
+	    'Subject', 
+	    'Description',
+	    'Creator',
+	    'Additional Creator',
+	    'Source',
+	    'Publisher',
+	    'Date',
+	    'Contributor',
+	    'Rights',
+	    'Rights Holder',
+	    'Relation',
+	    'Format',
+	    'Spatial Coverage',
+	    'Temporal Coverage',
+	    'Language',
+	    'Provenance',
+	    'Citation'); ?>
 	
-	<div id="description" class="field">
-	<h3>Description</h3>
-	<div>
-	<?php echo display_empty($item->description,"No description available."); ?>
-	</div>
-	</div>
-	
-	<div id="creator" class="field">
-	<h3>Creator</h3>
-	<div>
-	<?php echo display_empty($item->creator); ?>
-	</div>
-	</div>
-	
-	<div id="additional_creator" class="field">
-	<h3>Additional Creator</h3>
-	<div>
-	<?php echo display_empty($item->additional_creator); ?>
-	</div>
-	</div>
-	
-	<div id="source" class="field">
-	<h3>Source</h3>
-	<div>
-	<?php echo display_empty($item->source); ?>
-	</div>
-	</div>
-
-	<div id="publisher" class="field">
-	<h3>Publisher</h3>
-	<div>
-	<?php echo display_empty($item->publisher); ?>
-	</div>
-	</div>
-	
-	<div id="date" class="field">
-	<h3>Date</h3>
-	<div>
-	<?php echo h($item->date);?>
-	</div>
-	</div>
-	
-	<div id="contributor" class="field">
-	<h3>Contributor</h3>
-	<div>
-	<?php echo display_empty($item->contributor)?>
-	</div>
-	</div>
-		
-	<div id="rights" class="field">
-	<h3>Rights</h3>
-	<div>
-	<?php echo display_empty($item->rights); ?>
-	</div>
-	</div>
-	
-	<div id="rights_holder" class="field">
-	<h3>Rights Holder</h3>
-	<div>
-	<?php echo display_empty($item->rights_holder)?>
-	</div>
-	</div>
-	
-	<div id="relation" class="field">
-	<h3>Relation</h3>
-	<div>
-	<?php echo display_empty($item->relation); ?>
-	</div>
-	</div>
-	
-	<div id="spatial-coverage" class="field">
-	<h3>Spatial Coverage</h3>
-	<div>
-	<?php echo display_empty($item->spatial_coverage)?>
-	</div>
-	</div>
+	<?php foreach ($coreElementSet as $field): ?>
+	   <div id="<?php echo text_to_id($field); ?>" class="field">
+	       <h3><?php echo $field; ?></h3>
+	       <div>
+	           <?php echo display_empty(item($field, '')); ?>
+	        </div>
+	   </div>
+	<?php endforeach ?>
 	
 	<div id="temporal-coverage" class="field">
 	<h3>Temporal Coverage</h3>
 	<div>
-	<?php echo display_empty($item->temporal_coverage_start); ?> &mdash; 
-	<?php echo display_empty($item->temporal_coverage_end)?>
-	</div>
-	</div>
-	
-	<div id="language" class="field">
-	<h3>Language</h3>
-	<div>
-	<?php echo display_empty($item->language); ?>
-	</div>
-	</div>
-
-	<div id="provenance" class="field">
-	<h3>Provenance</h3>
-	<div>
-	<?php echo display_empty($item->provenance)?>
+	<?php echo item('Temporal Coverage', ' '); 
+	/** 
+	 * @todo This is stored in a special format in the DB so it should be 
+	 * formatted w/ a filter before display.  Was previously the two dates
+	 * separated by an &mdash;
+	 */ ?>
 	</div>
 	</div>
 	
 	<div id="citation" class="field">
 	<h3>Bibliographic Citation</h3>
 	<div>
-	<p><?php echo $item->getCitation();?></p>
+	<p><?php echo item_citation();?></p>
 	</div>
 	</div>
 
 </div>
 
-<?php if ( has_collection($item) ): ?>
+<?php if ( item_belongs_to_collection() ): ?>
 	<div id="collection" class="field">
 	<h3>Collection</h3>
 	<div>
-		<p><?php echo h($item->Collection->name); ?></p>
+		<p><?php echo item('Collection Name'); ?></p>
 	</div>
 	</div>
 <?php endif; ?>
@@ -205,13 +138,13 @@ echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 
 	<div class="field">
 	<h3>Type Name</h3>
-		<div id="type_id" class="editableSelect"><p><?php echo h($item->Type->name); ?></p></div>
+		<div id="type_id" class="editableSelect"><p><?php echo item('Type Name'); ?></p></div>
 	</div>
 			
-	<?php foreach($item->TypeMetadata as $name => $value): ?>
+	<?php foreach(item_type_elements() as $field => $textSet): ?>
 		<div class="field">
-			<h3><?php echo h($name); ?></h3>
-			<div><?php echo h($value); ?></div>
+			<h3><?php echo $field; ?></h3>
+			<ul><li><?php echo join('</li><li>', $textSet); ?></li></ul>
 		</div>
 	<?php endforeach; ?>
 
@@ -220,8 +153,8 @@ echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 		<div id="my-tags" class="field">
 		<h3>My Tags</h3>
 		<form id="tags-form" method="post" action="<?php echo uri('items/modify-tags/') ?>">
-		    <input type="hidden" name="id" value="<?php echo $item->id; ?>" id="item-id">
-			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags($item)); ?>" />
+		    <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id">
+			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
 			<input type="submit" name="modify_tags" value="Add/Change Your Tags" id="tags-submit">
 		</form>
 		</div>
@@ -236,19 +169,20 @@ echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit'));
 		</div>
 	</div>
 		
-<?php if(has_files($item)==null):?>
-	<p>There are no files for this item. <a href="<?php echo uri('items/edit/'.$item->id); ?>">Add some</a>.</p>
+<?php if(!item_has_files()):?>
+	<p>There are no files for this item. <?php echo link_to_item('edit', 'Add some'); ?>.</p>
 <?php else: ?>
 
 <h2>View File Metadata</h2>
 	<div id="file-list">
 		<ul>
-	<?php foreach( $item->Files as $key => $file ): ?>
+	<?php while(loop_files_for_item()): ?>
+	    <?php $file = get_current_file(); ?>
 		<li><?php echo link_to($file, 'show', h($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?>
 		</li>
 		
 
-	<?php endforeach; ?>
+	<?php endwhile; ?>
 	</ul>
 	</div>
 

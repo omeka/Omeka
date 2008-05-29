@@ -1,3 +1,1 @@
-<?php 
-	metatext_form($item,'textarea', $item->FormTypeMetadata);
-?>
+<?php echo item_type_elements_form(); ?>

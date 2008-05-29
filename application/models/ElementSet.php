@@ -5,24 +5,15 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
-
-require_once 'Entity.php';
-require_once 'InstitutionTable.php';
-
+ 
 /**
+ * 
+ *
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Institution extends Entity
+class ElementSet extends Omeka_Record
 {
-    public function construct()
-    {
-        $this->type = "Institution";
-    }
     
-    public function getName()
-    {
-        return $this->institution;
-    }
 }

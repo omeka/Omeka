@@ -15,7 +15,7 @@ require_once 'FileMetaLookupTable.php';
  **/
 class FileMetaLookup extends Omeka_Record
 {
-	public $mime_type;
-	public $table_name;
-	public $table_class;
+    public $mime_type;
+    public $table_name;
+    public $table_class;
 }

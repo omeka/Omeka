@@ -21,7 +21,7 @@ class ItemDc
 
     public function recordToDc($item)
     {        
-        $xml .= '
+        $xml = '
     <rdf:Description rdf:about="' . item_permalink_url($item) . '">';
         // Iterate throught the DCMES.
         foreach ($this->dcmes as $element) {

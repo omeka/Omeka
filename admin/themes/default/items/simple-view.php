@@ -12,20 +12,20 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach($items as $key => $item):?>
+<?php while(loop_items()): ?>
 <tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
-	<td scope="row"><?php echo h($item->id);?></td> 
-	<td><?php echo link_to_item($item); ?></td>
-	<td><?php echo h($item->Type->name); ?></td>
-	<td><?php echo h($item->creator); ?></td>	
-	<td><?php echo date('m.d.Y', strtotime($item->added)); ?></td>
-	<td><?php checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></td>
-	<td><?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?>
-		<?php hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>
+	<td scope="row"><?php echo item('id');?></td> 
+	<td><?php echo link_to_item(); ?></td>
+	<td><?php echo item('Type Name'); ?></td>
+	<td><?php echo item('Creator', 0); ?></td>	
+	<td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
+	<td><?php checkbox(array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public"), item('public')); ?></td>
+	<td><?php checkbox(array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured"), item('featured')); ?>
+		<?php hidden(array('name'=>"items[" . item('id') . "][id]"), item('id')); ?>
 	</td>
-	<td><?php echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit')); ?></td>
+	<td><?php echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></td>
 </tr>
-<?php endforeach; ?>
+<?php endwhile; ?>
 </tbody>
 </table>
 

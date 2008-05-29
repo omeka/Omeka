@@ -27,7 +27,8 @@ class UpgradeController extends Omeka_Controller_Action
 	{
 		try {
 			parent::__construct($req, $resp, $invoke);
-		} catch (Exception $e) {}
+		} catch (Exception $e) {
+        }
 		
 		//Make sure we only load the built-in view scripts when upgrading
 		$this->view->setScriptPath(VIEW_SCRIPTS_DIR);
@@ -57,22 +58,22 @@ class UpgradeController extends Omeka_Controller_Action
     	
     	//The version# to migrate to can be set in the query string
     	$to = $this->_getParam('to', OMEKA_MIGRATION);
-
-        $output = array();
-        $errors = array();
+        
+        $output  = array();
+        $errors  = array();
         $success = false;
-
-        if(!is_numeric($to)) {
+        
+        if (!is_numeric($to)) {
             $errors[] = "A valid migration # must be passed to upgrade Omeka!";
-        }else {
+        } else {
            	//If we don't have to migrate the data, show the 'completed' page instead
-        	if($from == $to) {
+        	if ($from == $to) {
         	    $this->redirect->goto('completed');
         	}
-
+            
         	$upgrader = new Omeka_Upgrader($from, $to);	   
         	$upgrader->run(); 
-
+            
         	$output = $upgrader->getOutput();
         	$errors = $upgrader->getErrors();            
         }

@@ -20,13 +20,12 @@
  **/
 class Omeka_Controller_Flash
 {
-	const SUCCESS = 1;
+	const SUCCESS          = 1;
 	const VALIDATION_ERROR = 2;
-	const GENERAL_ERROR = 3;
-	const ALERT = 4;
-	
-	const DISPLAY_NOW = 5;
-	const DISPLAY_NEXT = 6;
+	const GENERAL_ERROR    = 3;
+	const ALERT            = 4;
+	const DISPLAY_NOW      = 5;
+	const DISPLAY_NEXT     = 6;
 	
 	/**
 	 * The session object that stores the flash values
@@ -52,7 +51,7 @@ class Omeka_Controller_Flash
 		
 	public function __construct()
 	{
-		if(!$this->_session) {
+		if (!$this->_session) {
 			$this->_session = new Zend_Session_Namespace('flash');
 		}		
 	}
@@ -97,7 +96,9 @@ class Omeka_Controller_Flash
 	 **/
 	protected function getFlash()
 	{
-		if(self::$_flash instanceof stdClass) return self::$_flash;
+		if (self::$_flash instanceof stdClass) {
+            return self::$_flash;
+        }
 		
 		return $this->_session;
 	}	
@@ -136,7 +137,7 @@ class Omeka_Controller_Flash
 	 **/
 	protected function resetFlash()
 	{
-		if( ($flash = $this->getFlash())) {
+		if (($flash = $this->getFlash())) {
 			if ($flash instanceof Zend_Session_Namespace) {
 				$this->setTempFlash($flash->status, $flash->msg);
 				unset($flash->msg);

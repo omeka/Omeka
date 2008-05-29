@@ -8,7 +8,18 @@
 abstract class OmekaTestCase extends UnitTestCase
 {	
 	public function setUp() {
-		include 'dependencies.php';		
+		setup_test_acl();
+        setup_test_plugin_broker();
+
+        //Database connection dependency
+        $db = new MockOmeka_Db;
+
+        //All queries should return a PDO Statement object unless told otherwise
+        $stmt = new PDOStatement;
+        $db->setReturnValue('query', $stmt);
+
+        Zend_Registry::set('db', $db);
+        $this->db = $db;
     }
 	
 	/**
@@ -33,29 +44,15 @@ abstract class OmekaTestCase extends UnitTestCase
 			$db->exec("TRUNCATE `$table`");
 		}
 	}
-	
-	/**
-	 * Use this to set the current DB object to a mock or actual DB for testing
-	 *
-	 * @return void
-	 **/
-	protected function setDb($db)
-	{
-		Zend_Registry::set('db', $db);
-	}
-	
-	protected function getLiveDb()
-	{
-		return Zend_Registry::get('live_db');
-	}
-	
+		
 	protected function setUpLiveDb()
 	{
-		$db = $this->getLiveDb();
-		
-		$this->setDb($db);
+	    setup_test_config();
+		$db = setup_live_db();
 		
 		$this->cleanDb($db);
+		
+		$this->db = $db;
 	}
 		
 	public function init() {}

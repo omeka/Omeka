@@ -27,12 +27,11 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         
         $debugRequests = $config->debug->request;
         
-        if($debugRequests) {
-/*             $route = $context->getFrontController()->getRouter()->getCurrentRoute();
-            
-            Zend_Debug::dump( $route );exit; */
-            
-            Zend_Debug::dump( $request );exit;
+        if ($debugRequests) {
+            //$route = $context->getFrontController()->getRouter()->getCurrentRoute();
+            //Zend_Debug::dump( $route );exit; 
+            Zend_Debug::dump($request);
+            exit;
         }
     }
 }

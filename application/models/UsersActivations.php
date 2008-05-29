@@ -15,20 +15,20 @@
  **/
 class UsersActivations extends Omeka_Record
 {
-	public $user_id;
-	public $url;
-	public $added;
-	
-	protected $_related = array('User'=>'getUser');
-		
-	protected function beforeSave()
-	{
-		$this->added = microtime(true);
-		$this->url = sha1(microtime(true));
-	}
-	
-	public function getUser()
-	{
-		return $this->getDb()->getTable('User')->find($this->user_id);
-	}
+    public $user_id;
+    public $url;
+    public $added;
+    
+    protected $_related = array('User' => 'getUser');
+        
+    protected function beforeSave()
+    {
+        $this->added = microtime(true);
+        $this->url = sha1(microtime(true));
+    }
+    
+    public function getUser()
+    {
+        return $this->getDb()->getTable('User')->find($this->user_id);
+    }
 }

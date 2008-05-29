@@ -15,12 +15,12 @@
  **/ 
 class Theme 
 {
-	public $path;
-	public $directory;
-	public $image;
-	public $author;
-	public $title;
-	public $description;
-	public $license;
-	public $website;
+    public $path;
+    public $directory;
+    public $image;
+    public $author;
+    public $title;
+    public $description;
+    public $license;
+    public $website;
 }

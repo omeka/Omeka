@@ -10,8 +10,8 @@ class VersionedDirectoryIterator extends DirectoryIterator
 	
 	public function valid()
 	{
-		if(parent::valid()) {
-			if( ($this->dirsOnly && !parent::isDir()) || parent::isDot() || (parent::getFileName() == '.svn') ) {
+		if (parent::valid()) {
+			if(($this->dirsOnly && !parent::isDir()) || parent::isDot() || (parent::getFileName() == '.svn') ) {
 				parent::next();
 				return $this->valid();
 			}

@@ -28,7 +28,7 @@ class CollectionsController extends Omeka_Controller_Action
 		
 		$contextSwitch = $this->_helper->getHelper('ContextSwitch');
         $contextSwitch->addActionContext('remove-collector', 'json')
-                ->initContext();
+                      ->initContext();
 	}
 	
 	/**
@@ -42,13 +42,14 @@ class CollectionsController extends Omeka_Controller_Action
 	public function removeCollectorAction()
 	{
 	    $collection = $this->findById($this->_getParam('collection_id'));
-	    $collector = $this->findById($this->_getParam('collector_id'), 'Entity');
+        $collector  = $this->findById($this->_getParam('collector_id'), 'Entity');
 	    	    
 	    $this->view->result = $collection->removeCollector($collector);
 	    	    
 	    //If the request is not done through AJAX, redirect
-	    if(!$this->getRequest()->isXmlHttpRequest()) {
-            $this->redirect->goto('show', null, null, array('id'=>$collection->id));
+	    if (!$this->getRequest()->isXmlHttpRequest()) {
+            $this->redirect->goto('show', null, 
+                                  null, array('id' => $collection->id));
         }
 	}
 }

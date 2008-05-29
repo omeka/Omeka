@@ -15,86 +15,85 @@
  **/
 class ErrorController extends Omeka_Controller_Action
 {
-	public function errorAction()
-	{
-	    //Drop down to built-in error views if and only if we are in debug mode
-	    //These are the default script paths that need to be known to the app
-	    //@internal does setAssetPath() need to have this same value in Omeka_View::__construct()?
-	    if($this->isInDebugMode()) {	        
-	        $this->view->setScriptPath(VIEW_SCRIPTS_DIR);
-	        $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
-	    }
-	    
-		//This is the pattern for retrieving the exception that occurred
-		$handler = $this->_getParam('error_handler');		
-		$e = $handler->exception;
-		
-		if($this->is404($e, $handler)) {
-		    return $this->render404($e);
-		}
-		
-		if($this->is403($e)) {
-		    return $this->render403($e);
-		}
-		
-		$this->logException($e, Zend_Log::ERR);
+    public function errorAction()
+    {
+        // Drop down to built-in error views if and only if we are in debug mode
+        // These are the default script paths that need to be known to the app
+        // @internal does setAssetPath() need to have this same value in 
+        // Omeka_View::__construct()?
+        if ($this->isInDebugMode()) {            
+            $this->view->setScriptPath(VIEW_SCRIPTS_DIR);
+            $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
+        }
+        
+        //This is the pattern for retrieving the exception that occurred
+        $handler = $this->_getParam('error_handler');        
+        $e = $handler->exception;
+        
+        if ($this->is404($e, $handler)) {
+            return $this->render404($e);
+        }
+        
+        if ($this->is403($e)) {
+            return $this->render403($e);
+        }
+        
+        $this->logException($e, Zend_Log::ERR);
         return $this->renderException($e);
-	}
-	
-	private function logException($e, $priority)
-	{
+    }
+    
+    private function logException($e, $priority)
+    {
         $logger = Omeka_Context::getInstance()->getLogger();
-		if($logger) {
-		    $logger->log($e->getMessage(), $priority);
-		}	    
-	}
-	
-	/**
-	 * Check to see whether the error qualifies as a 404 error
-	 *
-	 * @return boolean
-	 **/
-	protected function is404(Exception $e, $handler)
-	{
-        return (
-            $e instanceof Omeka_Controller_Exception_404 || 
-            $e instanceof Zend_View_Exception || 
-            $handler->type == 'EXCEPTION_NO_CONTROLLER' || 
-            $handler->type == 'EXCEPTION_NO_ACTION');
-	}
-	
-	protected function is403(Exception $e)
-	{
-	    return ($e instanceof Omeka_Controller_Exception_403);
-	}
-	
-	protected function renderException(Exception $e)
-	{	    
-	    if($this->isInDebugMode()) {
-	        ini_set('memory_limit', '64M');
-	        return $this->render(compact('e'), 'debug');
-	    }
-	    else {
-	        return $this->render(compact('e'), 'index');
-	    }
-	}
-	        
-	protected function render404($e)
-	{
-	    $this->getResponse()->setHttpResponseCode(404);
-	    return $this->render(array('badUri'=>$this->getRequest()->getRequestUri(), 'e'=>$e), '404');
-	}
-	
-	protected function render403($e)
-	{
-	    $this->getResponse()->setHttpResponseCode(403);
+        if ($logger) {
+            $logger->log($e->getMessage(), $priority);
+        }
+    }
+    
+    /**
+     * Check to see whether the error qualifies as a 404 error
+     *
+     * @return boolean
+     **/
+    protected function is404(Exception $e, $handler)
+    {
+        return ($e instanceof Omeka_Controller_Exception_404 
+                || $e instanceof Zend_View_Exception 
+                || $handler->type == 'EXCEPTION_NO_CONTROLLER' 
+                || $handler->type == 'EXCEPTION_NO_ACTION');
+    }
+    
+    protected function is403(Exception $e)
+    {
+        return ($e instanceof Omeka_Controller_Exception_403);
+    }
+    
+    protected function renderException(Exception $e)
+    {        
+        if ($this->isInDebugMode()) {
+            ini_set('memory_limit', '64M');
+            return $this->render(compact('e'), 'debug');
+        } else {
+            return $this->render(compact('e'), 'index');
+        }
+    }
+            
+    protected function render404($e)
+    {
+        $this->getResponse()->setHttpResponseCode(404);
+        return $this->render(array('badUri' => $this->getRequest()->getRequestUri(), 'e'=>$e), '404');
+    }
+    
+    protected function render403($e)
+    {
+        $this->getResponse()->setHttpResponseCode(403);
         return $this->render(array('e'=>$e), '403');
-	}
-	
-	protected function isInDebugMode()
-	{
-	    $config = Omeka_Context::getInstance()->getConfig('basic');
-	    return (bool) $config->debug->exceptions;
-	}
+    }
+    
+    protected function isInDebugMode()
+    {
+        $config = Omeka_Context::getInstance()->getConfig('basic');
+        return (bool) $config->debug->exceptions;
+    }
 
 }

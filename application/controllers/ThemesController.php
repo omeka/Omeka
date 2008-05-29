@@ -24,7 +24,8 @@ require_once 'Theme.php';
 class ThemesController extends Omeka_Controller_Action
 {	
 	/**
-	 * Simple recursive function that scrapes the theme info for either a single theme or all of them, given a directory
+	 * Simple recursive function that scrapes the theme info for either a single 
+     * theme or all of them, given a directory
 	 * @todo make it switch between public and admin
 	 *
 	 * @return void
@@ -36,27 +37,33 @@ class ThemesController extends Omeka_Controller_Action
 		 * theme.ini files and images paths if they are present
 		 */
 		$themes = array();
-		if(!$dir) {
-			// Iterate over the directory to get the file structure
+		if (!$dir) {
+			
+            // Iterate over the directory to get the file structure
 			$themes_dir = new DirectoryIterator(PUBLIC_THEME_DIR);
 			foreach($themes_dir as $dir) {
 				$fname = $dir->getFilename();
-				if (!$dir->isDot() and $fname[0] != '.' and $dir->isReadable() and $dir->isDir()) {
+				if (!$dir->isDot() 
+                    && $fname[0] != '.' 
+                    && $dir->isReadable() 
+                    && $dir->isDir()) {
 					$theme = $this->getAvailable($fname);
-				
+                    
 					// Finally set the array to the global array
 					$themes[$fname] = $theme;
 				}
 			}
-
+            
 		} else {
 			// Find that theme and return its info
 			
 			$theme = new Theme();
-			// Define a hard theme path for the theme
+			
+            // Define a hard theme path for the theme
 			$theme->path = PUBLIC_THEME_DIR.DIRECTORY_SEPARATOR.$dir;
 			$theme->directory = $dir;
-			// Test to see if an image is available to present the user
+			
+            // Test to see if an image is available to present the user
 			// when switching themes
 			$image_file = $theme->path.DIRECTORY_SEPARATOR.'theme.jpg';
 			if (file_exists($image_file) && is_readable($image_file)) {
@@ -71,8 +78,7 @@ class ThemesController extends Omeka_Controller_Action
 				foreach ($ini as $key => $value) {
 					$theme->$key = $value;
 				}
-			}
-			else {
+			} else {
 				// Display some sort of warning that the theme doesn't have an ini file
 			}
 			return $theme;
@@ -84,7 +90,7 @@ class ThemesController extends Omeka_Controller_Action
 	{		
 		$themes = $this->getAvailable();
 		
-		if(!empty($_POST) and $this->isAllowed('switch')) {
+		if (!empty($_POST) && $this->isAllowed('switch')) {
 			set_option('public_theme', strip_tags($_POST['public_theme']));
 			$this->flashSuccess("Theme has been changed successfully.");
 		}

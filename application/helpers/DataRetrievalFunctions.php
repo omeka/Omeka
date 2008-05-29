@@ -133,21 +133,6 @@ function items(array $params = array())
 	return get_db()->getTable('Item')->findBy($params);
 }
 
-
-function item($id=null) 
-{
-	if(!$id && Zend_Registry::isRegistered('item')) {
-		$item = Zend_Registry::get('item');
-
-		return $item;
-	}
-	
-	$item = get_db()->getTable('Item')->find($id);
-	
-	return $item;
-}
-
-
 function collection($id=null)
 {
 	if(!$id && Zend_Registry::isRegistered('collection')) {
@@ -170,27 +155,14 @@ function metafields(array $params = array())
 	return get_db()->getTable('Metafield')->findAll();
 }
 
-function type($id=null)
-{
-	if(!$id && Zend_Registry::isRegistered('type')) {
-		$t = Zend_Registry::get('type');
-
-		return $t;
-	}
-	
-	$t = get_db()->getTable('Type')->find($id);
-	
-	return $t;
-}
-
-function types(array $params = array())
-{
-	return get_db()->getTable('Type')->findAll();
-}
-
 function users(array $params = array())
 {
 	return get_db()->getTable('User')->findAll();
+}
+
+function item_types()
+{
+    return get_db()->getTable('ItemType')->findAll();
 }
 
 function get_user_roles(array $params = array())

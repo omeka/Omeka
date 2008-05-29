@@ -33,9 +33,13 @@ function link_to($record, $action=null, $text, $props = array())
 	return '<a href="'. $url . '"' . $attr . ' title="View '. htmlentities($text).'">' . h($text) . '</a>';
 }
 
-function link_to_item($item, $action='show', $text=null, $props=array())
+function link_to_item($action='show', $text=null, $props=array(), $item=null)
 {
-	$text = (!empty($text) ? $text : (!empty($item->title) ? $item->title : '[Untitled]'));
+    if(!$item) {
+        $item = get_current_item();
+    }
+
+	$text = (!empty($text) ? $text : item('Title', 0));
 	
 	return link_to($item, $action, $text, $props);
 }
@@ -50,8 +54,9 @@ function link_to_items_rss($params=array())
  *
  * @return string
  **/
-function link_to_next_item($item, $text="Next Item -->", $props=array())
+function link_to_next_item($text="Next Item -->", $props=array())
 {
+    $item = get_current_item();
 	if($next = $item->next()) {
 		return link_to($next, 'show', $text, $props);
 	}
@@ -62,8 +67,9 @@ function link_to_next_item($item, $text="Next Item -->", $props=array())
  *
  * @return string
  **/
-function link_to_previous_item($item, $text="<-- Previous Item", $props=array())
+function link_to_previous_item($text="<-- Previous Item", $props=array())
 {
+    $item = get_current_item();
 	if($previous = $item->previous()) {
 		return link_to($previous, 'show', $text, $props);
 	}
@@ -255,4 +261,3 @@ function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page
 		}
 		return $html;		
 	}
-

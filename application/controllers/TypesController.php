@@ -31,10 +31,10 @@ class TypesController extends Omeka_Controller_Action
 	public function addMetafieldAction()
 	{
 	    //If we're going to add a metafield that already exists, grab a current list	    
-	   if($this->_getParam('exists') == 'true') {	       
+	   if ($this->_getParam('exists') == 'true') {	       
 	       $metafields = $this->getTable('Metafield')->findAll();
 	       return $this->render(compact('metafields'), 'existing-metafield');
-	   }else {
+	   } else {
 	       return $this->render(array(), 'new-metafield');
 	   }
 	}

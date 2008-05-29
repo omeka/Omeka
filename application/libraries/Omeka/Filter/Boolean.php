@@ -26,8 +26,10 @@ class Omeka_Filter_Boolean implements Zend_Filter_Interface
      * @param mixed
      * @return string "1" or "0"
      **/
-	public function filter($value)
-	{
-		return in_array($value, array('true', 'On', 'on', 1, "1", true), true) ? "1" : "0";
-	}
+    public function filter($value)
+    {
+        return in_array($value, 
+                        array('true', 'On', 'on', 1, "1", true), 
+                        true) ? "1" : "0";
+    }
 }

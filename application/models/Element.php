@@ -6,23 +6,20 @@
  * @package Omeka
  **/
 
-require_once 'Entity.php';
-require_once 'InstitutionTable.php';
-
+require_once 'ElementTable.php';
+ 
 /**
+ * 
+ *
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Institution extends Entity
+class Element extends Omeka_Record
 {
-    public function construct()
-    {
-        $this->type = "Institution";
-    }
-    
-    public function getName()
-    {
-        return $this->institution;
-    }
+    public $element_type_id;
+    public $element_set_id;
+    public $plugin_id;
+    public $name = '';
+    public $description;
 }

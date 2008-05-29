@@ -1,4 +1,14 @@
 <?php
+/**
+ * 
+ * @todo Make sure all of these helper functions return HTML instead of 
+ * echo'ing it.
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
     /**
      * Used to generate attributes for XHTML tags
      *
@@ -285,9 +295,7 @@
 				
 				<?php 
 					//We need to retrieve a list of all the core metadata fields and the extended type metafields
-					$metafields = Metafield::names();
-					$core_fields = Item::fields();
-					$search_fields = array_merge($core_fields, $metafields);
+					$search_fields = Item::fields();
 					natsort($search_fields);
 				?>
 				<h3>Search by Specific fields</h3>
@@ -349,7 +357,7 @@
 				<div id="search-selects">
 			<?php 
 				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Search by Collection', 'id', 'name');
-				select(array('name'=>'type'), types(), $_REQUEST['type'], 'Search by Type', 'id', 'name'); 
+				select(array('name'=>'type'), item_types(), $_REQUEST['type'], 'Search by Type', 'id', 'name'); 
 			?>
 			<?php if(has_permission('Users', 'browse')): ?>
 			<?php 			
@@ -374,60 +382,5 @@
 			<input type="submit" name="submit_search" id="submit_search" value="Search" />
 			
 		</form><?php
-	}
-	
-	/**
-	 * Create the form for an item's metatext entries, just so the theme writer doesn't have to know the mechanics
-	 * Right now this is recursive to allow theme writer to use specific metafields
-	 * 
-	 * @todo Do we want this to take metafield names as arguments? Probably.
-	 *
-	 * @return void
-	 **/
-	function metatext_form($item, $input="textarea",$metafields=null) 
-	{
-		if(!empty($metafields)) {
-
-			//Loop through the metafields
-			if(is_array(current($metafields))) {
-				foreach ($metafields as $key => $metafield) {
-					metatext_form($item, $input, $metafield);
-				}
-			} else {
-				$field = $metafields;
-				$out = '';
-				$input_id = strtolower(str_replace(' ', '_', $field['name']));
-
-				$metafield_name = $field['name'];
-				$metafield_value = $field['text'];
-				$metafield_id = $field['metafield_id'];
-				
-				//Check for non-empty POST vars
-				if($post_text = @$_POST['metafields'][$metafield_id]['text']) {
-					$metafield_value = $post_text;
-				}
-				
-				//Process a single metafield for this item
-				switch ($input) {
-					case 'text':
-						$input = '<input type="text" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'" value="'.h($metafield_value).'" />' . "\n\t";
-						break;
-					case 'textarea':
-						$input = "\t" . '<textarea rows="15" cols="50" class="textinput" name="metafields['.$metafield_id.'][text]" id="'.$input_id.'">';
-						$input .= h($metafield_value);
-						$input .= '</textarea>' . "\n\t";
-						break;
-				}
-				$out .= '<div class="field">';
-				$out .= '<label for="'.$input_id.'">'.h($metafield_name);
-				$out .=	'</label>'."\n\t";
-				$out .= '<span class="tooltip" id="'.$input_id.'_tooltip">'. h($field['description']) .'</span>';
-				$out .= $input;		
-				$out .= '<input type="hidden" name="metafields['.$metafield_id.'][name]" value="' . h($metafield_name) . '" />';
-				$out .= '</div>'."\n\n\t";
-
-				echo $out;
-			}
-		}
 	}
 ?>

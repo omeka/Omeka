@@ -31,8 +31,7 @@ function generate_url($options, $name)
  * @return void
  **/
 function dublin_core($type) { 
-	$data = new Zend_Config_Ini(CONFIG_DIR.DIRECTORY_SEPARATOR.'dublincore.ini', array('coremetadata')); 
-	return h($data->$type); 
+	trigger_error('Do not use dublin_core() anymore!');
 } 
 
 /**
@@ -64,19 +63,20 @@ function admin_nav(array $links) {
 }
 
 /**
- * 
- *
- * @return string
+ * @deprecated 
+ * @see item_type_elements_form()
+ **/
+function metatext_form($item, $input="textarea",$metafields=null) 
+{
+    trigger_error('Use item_type_elements_form() instead!');
+}
+
+/**
+ * @deprecated
  **/
 function items_rss_header()
 {
-	if($_GET and is_current(uri('items/browse'))) {
-		$uri = items_rss_uri($_GET);
-	}else {
-		$uri = items_rss_uri();
-	}
-	
-	return '<link rel="alternate" type="application/rss+xml" title="'.get_option('site_title').'" href="'. $uri .'" />';
+	trigger_error('Use auto_discovery_link_tag() instead of items_rss_header()!');
 }
 
 //Format of $date is YYYY-MM-DD
@@ -103,9 +103,36 @@ function get_year($date)
 
 function item_metadata($item, $field, $escape=true)
 {
-	$text = $item->getMetatext($field);
-	
-	return $escape ? h($text) : $text;
+    trigger_error('Do not use item_metadata() to retrieve metadata for items.  Please use item() instead!');
+}
+
+function type($id=null)
+{
+    trigger_error('Do not use type() to retrieve an item type!');
+}
+
+function types(array $params = array())
+{
+    trigger_error('Do not use use types() to retrieve a list of item types!');
+}
+
+/**
+ * 
+ * @see has_type()
+ * @return boolean
+ **/
+function has_collection($item, $name=null) {
+    trigger_error('Use item_belongs_to_collection() instead of has_collection()!');
+}
+
+/**
+ * 
+ * @see item_has_files()
+ * @param Item
+ * @return boolean
+ **/
+function has_files($item) {
+	trigger_error('Use item_has_files() instead of has_files()!');
 }
 
 /**

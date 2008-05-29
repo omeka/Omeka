@@ -17,21 +17,23 @@ require_once 'simpletest/web_tester.php';
 require_once 'IdenticalSqlExpectation.php';
 
 require_once 'Omeka/Core.php';
-$core = new Omeka_Core;
 
+//Test bootstrap should automatically filter magic quotes and initialize the 
+//autoloader.
+$core = new Omeka_Core;
 $core->sanitizeMagicQuotes();
 $core->initializeClassLoader();
 
-function setup_test_config($core)
+function setup_test_config()
 {
     //Config dependency
     $config = new Zend_Config_Ini(APP_DIR . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR.'config.ini', 'testing');
-    $core->setConfig('testing', $config);
+    Omeka_Context::getInstance()->setConfig('testing', $config);
 }
 
-function setup_test_db($core)
+function setup_live_db()
 {
-    $config = $core->getConfig('testing');
+    $config = Omeka_Context::getInstance()->getConfig('testing');
     
     $dbh = Zend_Db::factory('Mysqli', array(
         'host'     => $config->db->host,
@@ -42,20 +44,32 @@ function setup_test_db($core)
 
     $dbObj = new Omeka_Db($dbh);
     
-    $core->setDb($dbObj);
+    Omeka_Context::getInstance()->setDb($dbObj);
     
     //Register the original DB object as 'live_db' in case test cases want to use it
     Zend_Registry::set('live_db', $dbObj);
+    
+    return $dbObj;
 }
 
-function setup_test_acl($core)
+function setup_test_acl()
 {
     Mock::generate('Omeka_Acl');
+    
+    //Acl dependency
+    $acl = new MockOmeka_Acl;
+
+    //For testing purposes, all permissions checks should be OK'ed
+    $acl->setReturnValue('checkUserPermission', true);
+    
+    Omeka_Context::getInstance()->setAcl($acl);
 }
 
-function setup_test_plugin_broker($core)
+function setup_test_plugin_broker()
 {
-    
+    require_once 'mocks.php';
+    $broker = new Mock_Plugin_Broker;
+    Omeka_Context::getInstance()->setPluginBroker($broker);
 }
 
 function setup_test_user($core)
@@ -80,36 +94,17 @@ require_once 'OmekaTestCase.php';
 require_once 'Omeka/Record.php';
 require_once 'Item.php';
 
-require_once 'TagTestCase.php';
-
-require_once 'TaggableTestCase.php';
-require_once 'ItemTestCase.php';
 require_once 'OmekaRecordTestCase.php';
-require_once 'TypeTestCase.php';
-require_once 'UploadTestCase.php';
-require_once 'CollectionTestCase.php';
-require_once 'UserTestCase.php';
 require_once 'OmekaDbTestCase.php';
-require_once 'FileMetadataTestCase.php';
 require_once 'MiscellaneousTestCase.php';	
 require_once 'AclTestCase.php';
 require_once 'ViewHelpersTestCase.php';
 
 $test = new TestSuite('Omeka Tests');
 
-/*$test->addTestCase(new TagTestCase());
 
-$test->addTestCase(new ItemTestCase());
-$test->addTestCase(new TaggableTestCase());
-$test->addTestCase(new OmekaRecordTestCase());
-$test->addTestCase(new TypeTestCase());
-$test->addTestCase(new CollectionTestCase());
-$test->addTestCase(new UserTestCase());
+//$test->addTestCase(new OmekaRecordTestCase());
 $test->addTestCase(new OmekaDbTestCase());
-$test->addTestCase(new FileMetadataTestCase());
-
-//DO NOT RUN THIS ON A PRODUCTION INSTALLATION
-$test->addTestCase(new UploadTestCase()); */
 $test->addTestCase(new MiscellaneousTestCase());
 $test->addTestCase(new AclTestCase());
 $test->addTestCase(new ViewHelpersTestCase());

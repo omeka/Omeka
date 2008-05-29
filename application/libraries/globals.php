@@ -8,50 +8,50 @@
  **/
  
 function get_option($name) {
-		$options = Omeka_Context::getInstance()->getOptions();
-		return $options[$name];
+    $options = Omeka_Context::getInstance()->getOptions();
+    return $options[$name];
 }
 
 function set_option($name, $value)
 {
-	$db = get_db();
-	$db->exec("REPLACE INTO $db->Option (name, value) VALUES (?,?)", array($name, $value));
-	
-	//Now update the options hash so that any subsequent requests have it available
-	$options = Omeka_Context::getInstance()->getOptions();
-	$options[$name] = $value;
-	
-	Omeka_Context::getInstance()->setOptions($options);
+    $db = get_db();
+    $db->exec("REPLACE INTO $db->Option (name, value) VALUES (?, ?)", array($name, $value));
+    
+    //Now update the options hash so that any subsequent requests have it available
+    $options = Omeka_Context::getInstance()->getOptions();
+    $options[$name] = $value;
+    
+    Omeka_Context::getInstance()->setOptions($options);
 }
 
 function generate_slug($text)
 {
-	$slug = trim($text);
-	
-	//Replace prohibited characters in the title with - 's
-	$prohibited = array(':', '/', ' ', '.', '#');
-	$replace = array_fill(0, count($prohibited), '-');
-	$slug = str_replace($prohibited, $replace, strtolower($slug) );
-	return $slug;
+    $slug = trim($text);
+    
+    //Replace prohibited characters in the title with - 's
+    $prohibited = array(':', '/', ' ', '.', '#');
+    $replace = array_fill(0, count($prohibited), '-');
+    $slug = str_replace($prohibited, $replace, strtolower($slug) );
+    return $slug;
 }
 
 function pluck($col, $array)
 {
-	$res = array();
-	foreach ($array as $k => $row) {
-		$res[$k] = $row[$col];
-	}
-	return $res;	
+    $res = array();
+    foreach ($array as $k => $row) {
+        $res[$k] = $row[$col];
+    }
+    return $res;    
 } 
 
 function current_user()
 {
-	return Omeka_Context::getInstance()->getCurrentUser();
+    return Omeka_Context::getInstance()->getCurrentUser();
 }
 
 function get_db()
 {
-	return Omeka_Context::getInstance()->getDb();
+    return Omeka_Context::getInstance()->getDb();
 }
 
 /**
@@ -65,7 +65,7 @@ function debug($msg)
 {
     $context = Omeka_Context::getInstance();
     $logger = $context->getLogger();
-    if($logger) {
+    if ($logger) {
         $logger->debug($msg);
     }
 }
@@ -76,11 +76,9 @@ function debug($msg)
  **/
 function stripslashes_deep($value)
 {
-	 $value = is_array($value) ?
-							 array_map('stripslashes_deep', $value) :
-							 stripslashes($value);
+     $value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
 
-	 return $value;
+     return $value;
 }
 
 function add_plugin_hook($hook, $callback)
@@ -96,9 +94,7 @@ function add_plugin_hook($hook, $callback)
 function fire_plugin_hook()
 {
     $args = func_get_args();
-    
     $hook = array_shift($args);
-        
     return call_user_func_array(array(get_plugin_broker(), $hook), $args);
 }
 

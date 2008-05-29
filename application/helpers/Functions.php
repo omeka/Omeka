@@ -436,14 +436,7 @@ function has_type($item, $name=null) {
 	return ( $exists and $hasName );
 }
 
-/**
- * 
- * @see has_type()
- * @return boolean
- **/
-function has_collection($item, $name=null) {
-	return !empty($item->collection_id);
-}
+
 
 /**
  * Determine whether or not the collection has any collectors.
@@ -472,15 +465,7 @@ function has_tags($item, array $tags=array()) {
 	return true;
 }
 
-/**
- * 
- * @see has_type()
- * @param Item
- * @return boolean
- **/
-function has_files($item) {
-	return $item->hasFiles();
-}
+
 
 /**
  * @see has_type()

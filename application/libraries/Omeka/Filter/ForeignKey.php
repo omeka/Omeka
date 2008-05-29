@@ -24,12 +24,12 @@ class Omeka_Filter_ForeignKey implements Zend_Filter_Interface
      * @param mixed
      * @return integer
      **/
-	public function filter($value)
-	{
-		if(empty($value) or ( (int) $value <= 0) ) {
-			return null;
-		}
-		
-		return (int) $value;
-	}
+    public function filter($value)
+    {
+        if (empty($value) || ((int) $value <= 0)) {
+            return null;
+        }
+        
+        return (int) $value;
+    }
 }
