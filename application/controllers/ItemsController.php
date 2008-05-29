@@ -227,13 +227,13 @@ class ItemsController extends Omeka_Controller_Action
     {
         //Retrieve the number from the config file
         $config = Omeka_Context::getInstance()->getConfig('basic');
-        $per_page = $config->pagination->per_page;
+        $perPage = $config->pagination->per_page;
                 
         if ($this->isAllowed('modifyPerPage') && $this->_getParam('per_page')) {
-            $per_page = $this->_getParam('per_page');
+            $perPage = $this->_getParam('per_page');
         }     
         
-        return $per_page;   
+        return $perPage;   
     }
     
     ///// AJAX ACTIONS /////
@@ -325,10 +325,10 @@ class ItemsController extends Omeka_Controller_Action
                 throw new Exception( 'User is not allowed to modify featured status of items' );
             }
             
-            if ($item_a = $this->_getParam('items')) {
+            if ($itemArray = $this->_getParam('items')) {
                                         
                 //Loop through the IDs given and toggle
-                foreach ($item_a as $k => $fields) {
+                foreach ($itemArray as $k => $fields) {
                     
                     $item = $this->findById($fields['id']);
                     

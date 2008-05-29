@@ -302,16 +302,16 @@ function flash($wrap=true)
 	
 	switch ($flash->getStatus()) {
 		case Omeka_Controller_Flash::SUCCESS:
-			$wrap_class = 'success';
+			$wrapClass = 'success';
 			break;
 		case Omeka_Controller_Flash::VALIDATION_ERROR:
-			$wrap_class = 'error';
+			$wrapClass = 'error';
 			break;
 		case Omeka_Controller_Flash::GENERAL_ERROR:
-			$wrap_class = 'error';
+			$wrapClass = 'error';
 			break;
 		case Omeka_Controller_Flash::ALERT:
-			$wrap_class = 'alert';
+			$wrapClass = 'alert';
 			break;		
 		default:
 			return;
@@ -319,7 +319,7 @@ function flash($wrap=true)
 	}
 	
 	return $wrap ? 
-		'<div class="' . $wrap_class . '">'.nl2br(h($flash->getMsg())).'</div>' : 
+		'<div class="' . $wrapClass . '">'.nl2br(h($flash->getMsg())).'</div>' : 
 		$flash->getMsg();
 }
 
@@ -564,21 +564,21 @@ function archive_image( $record, $props, $width, $height, $format)
 			return false;
 	   }
 
-       list($o_width, $o_height) = getimagesize( $path );
+       list($oWidth, $oHeight) = getimagesize( $path );
        if(!$width && !$height) 
        {
-			$width = $o_width;
-			$height = $o_height;
+			$width = $oWidth;
+			$height = $oHeight;
        }
-       elseif( $o_width > $width && !$height )
+       elseif( $oWidth > $width && !$height )
        {
-               $ratio = $width / $o_width;
-               $height = $o_height * $ratio;
+               $ratio = $width / $oWidth;
+               $height = $oHeight * $ratio;
        }
-       elseif( !$width && $o_height > $height)
+       elseif( !$width && $oHeight > $height)
        {
-               $ratio = $height / $o_height;
-               $width = $o_width * $ratio;
+               $ratio = $height / $oHeight;
+               $width = $oWidth * $ratio;
        }
 	   $props['width'] = $width;
 	   $props['height'] = $height;

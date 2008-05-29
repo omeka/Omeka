@@ -151,16 +151,16 @@ class UsersController extends Omeka_Controller_Action
                     $ua->user_id = $user->id;
                     $ua->save();
                     
-                    $site_title = get_option('site_title');
+                    $siteTitle = get_option('site_title');
                     
                     //Send the email with the activation url
                     $url   = "http://".$_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
                     $body  = "Please follow this link to reset your password:\n\n";
                     $body .= $url."\n\n";
-                    $body .= "$site_title Administrator";        
+                    $body .= "$siteTitle Administrator";        
                     
                     $admin_email = get_option('administrator_email');
-                    $title       = "[$site_title] Reset Your Password";
+                    $title       = "[$siteTitle] Reset Your Password";
                     $header      = 'From: '.$admin_email. "\n" . 'X-Mailer: PHP/' . phpversion();
                     
                     mail($email,$title, $body, $header);
@@ -232,10 +232,10 @@ class UsersController extends Omeka_Controller_Action
         
         //send the user an email telling them about their great new user account
                 
-        $site_title = get_option('site_title');
+        $siteTitle = get_option('site_title');
         $from       = get_option('administrator_email');
-        $body       = "Welcome!\n\nYour account for the $site_title archive has been created. Please click the following link to activate your account:\n\n" . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n$site_title Administrator";
-        $title      = "Activate your account with the ".$site_title." Archive";
+        $body       = "Welcome!\n\nYour account for the $siteTitle archive has been created. Please click the following link to activate your account:\n\n" . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n$siteTitle Administrator";
+        $title      = "Activate your account with the ".$siteTitle." Archive";
         $header     = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
         return mail($user->email, $title, $body, $header);
     }
