@@ -1,6 +1,6 @@
 <?php 
 $install_sql = <<<SQL
-CREATE TABLE IF NOT EXISTS `$db->Collection` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}collections` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(255)  NOT NULL,
   `description` text  NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `$db->Collection` (
 -- Table structure for table `entities`
 -- 
 
-CREATE TABLE IF NOT EXISTS `$db->Entity` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}entities` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `first_name` text ,
   `middle_name` text ,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `$db->Entity` (
 -- Table structure for table `entities_relations`
 -- 
 
-CREATE TABLE IF NOT EXISTS `$db->EntitiesRelations` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}entities_relations` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `entity_id` bigint(20) default NULL,
   `relation_id` int(11) default NULL,
@@ -51,14 +51,14 @@ CREATE TABLE IF NOT EXISTS `$db->EntitiesRelations` (
 -- 
 -- Table structure for table `entity_relationships`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->EntityRelationships` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}entity_relationships` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` text ,
   `description` text ,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `$db->EntityRelationships` (`id`, `name`, `description`) VALUES (1, 'added', NULL),
+INSERT INTO `{$db->prefix}entity_relationships` (`id`, `name`, `description`) VALUES (1, 'added', NULL),
 (2, 'modified', NULL),
 (3, 'favorite', NULL),
 (4, 'collector', NULL);
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}exhibits` (
 -- 
 -- Table structure for table `file_meta_lookup`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->FileMetaLookup` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}file_meta_lookup` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `mime_type` varchar(255)  default NULL,
   `table_name` varchar(255)  default NULL,
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `$db->FileMetaLookup` (
 -- 
 -- Table structure for table `files`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->File` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}files` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `title` text  NOT NULL,
   `publisher` text  NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `$db->File` (
 -- 
 -- Table structure for table `files_images`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->FilesImages` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}files_images` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `width` bigint(20) default NULL,
   `height` bigint(20) default NULL,
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `$db->FilesImages` (
 -- 
 -- Table structure for table `files_videos`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->FilesVideos` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}files_videos` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `bitrate` int(10) unsigned default NULL,
   `duration` bigint(20) unsigned default NULL,
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `$db->FilesVideos` (
 -- 
 -- Table structure for table `items`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Item` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}items` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `title` varchar(255)  NOT NULL default '',
   `publisher` text  NOT NULL,
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}items_section_pages` (
 -- 
 -- Table structure for table `metafields`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Metafield` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}metafields` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(255)  NOT NULL,
   `description` text  NOT NULL,
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `$db->Metafield` (
 -- 
 -- Table structure for table `metatext`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Metatext` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}metatext` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `item_id` bigint(20) unsigned NOT NULL,
   `metafield_id` bigint(20) unsigned NOT NULL,
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `$db->Metatext` (
 -- 
 -- Table structure for table `options`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Option` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}options` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(200)  NOT NULL,
   `value` text ,
@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `$db->Option` (
 -- 
 -- Table structure for table `plugins`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Plugin` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}plugins` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(255)  NOT NULL,
   `active` tinyint(1) NOT NULL,
@@ -326,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}sections` (
 -- 
 -- Table structure for table `tags`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Tag` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}tags` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(255)  default NULL,
   PRIMARY KEY  (`id`),
@@ -334,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `$db->Tag` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `$db->Taggings` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}taggings` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `relation_id` bigint(20) unsigned NOT NULL,
   `tag_id` bigint(20) unsigned NOT NULL,
@@ -349,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `$db->Taggings` (
 -- 
 -- Table structure for table `types`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->Type` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}types` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(255)  NOT NULL,
   `description` text  NOT NULL,
@@ -364,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `$db->Type` (
 -- Table structure for table `types_metafields`
 -- 
 
-CREATE TABLE `$db->TypesMetafields` (
+CREATE TABLE `{$db->prefix}types_metafields` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `type_id` bigint(20) NOT NULL,
   `metafield_id` bigint(20) NOT NULL,
@@ -380,7 +380,7 @@ CREATE TABLE `$db->TypesMetafields` (
 -- 
 -- Table structure for table `users`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->User` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}users` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `username` varchar(30)  NOT NULL,
   `password` varchar(40)  NOT NULL,
@@ -398,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `$db->User` (
 -- 
 -- Table structure for table `users_activations`
 -- 
-CREATE TABLE IF NOT EXISTS `$db->UsersActivations` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}users_activations` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `user_id` bigint(20) NOT NULL,
   `url` varchar(100)  default NULL,
@@ -408,82 +408,82 @@ CREATE TABLE IF NOT EXISTS `$db->UsersActivations` (
 
 -- Types and Metafields
 
-INSERT INTO `$db->Type` (id, name, description) VALUES (1, 'Document', 'A resource containing textual data.  Note that facsimiles or images of texts are still of the genre text.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (3, 'Moving Image', 'A series of visual representations that, when shown in succession, impart an impression of motion.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (4, 'Oral History', 'A resource containing historical information obtained in interviews with persons having firsthand knowledge.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (5, 'Sound', 'A resource whose content is primarily intended to be rendered as audio.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (6, 'Still Image', 'A static visual representation. Examples of still images are: paintings, drawings, graphic designs, plans and maps.  Recommended best practice is to assign the type "text" to images of textual materials.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (7, 'Website', 'A resource comprising of a web page or web pages and all related assets ( such as images, sound and video files, etc. ).');
-INSERT INTO `$db->Type` (id, name, description) VALUES (8, 'Event', 'A non-persistent, time-based occurrence.  Metadata for an event provides descriptive information that is the basis for discovery of the purpose, location, duration, and responsible agents associated with an event. Examples include an exhibition, webcast, conference, workshop, open day, performance, battle, trial, wedding, tea party, conflagration.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (1, 'Document', 'A resource containing textual data.  Note that facsimiles or images of texts are still of the genre text.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (3, 'Moving Image', 'A series of visual representations that, when shown in succession, impart an impression of motion.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (4, 'Oral History', 'A resource containing historical information obtained in interviews with persons having firsthand knowledge.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (5, 'Sound', 'A resource whose content is primarily intended to be rendered as audio.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (6, 'Still Image', 'A static visual representation. Examples of still images are: paintings, drawings, graphic designs, plans and maps.  Recommended best practice is to assign the type "text" to images of textual materials.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (7, 'Website', 'A resource comprising of a web page or web pages and all related assets ( such as images, sound and video files, etc. ).');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (8, 'Event', 'A non-persistent, time-based occurrence.  Metadata for an event provides descriptive information that is the basis for discovery of the purpose, location, duration, and responsible agents associated with an event. Examples include an exhibition, webcast, conference, workshop, open day, performance, battle, trial, wedding, tea party, conflagration.');
 
 
 
 -- Additions
-INSERT INTO `$db->Type` (id, name, description) VALUES (9, 'Email', 'A resource containing textual messages and binary attachments sent electronically from one person to another or one person to many people.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (10, 'Lesson Plan', 'Instructional materials.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (11, 'Hyperlink', 'Title, URL, Description or annotation.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (12, 'Person', 'An individual, biographical data, birth and death, etc.');
-INSERT INTO `$db->Type` (id, name, description) VALUES (13, 'Interactive Resource', 'A resource requiring interaction from the user to be understood, executed, or experienced. Examples include forms on Web pages, applets, multimedia learning objects, chat services, or virtual reality environments.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (9, 'Email', 'A resource containing textual messages and binary attachments sent electronically from one person to another or one person to many people.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (10, 'Lesson Plan', 'Instructional materials.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (11, 'Hyperlink', 'Title, URL, Description or annotation.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (12, 'Person', 'An individual, biographical data, birth and death, etc.');
+INSERT INTO `{$db->prefix}types` (id, name, description) VALUES (13, 'Interactive Resource', 'A resource requiring interaction from the user to be understood, executed, or experienced. Examples include forms on Web pages, applets, multimedia learning objects, chat services, or virtual reality environments.');
 
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (1, 'Text', 'Any textual data included in the document.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (2, 'Interviewer', 'The person(s) performing the interview.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (3, 'Interviewee', 'The person(s) being interviewed.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (4, 'Location', 'The location of the interview.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (5, 'Transcription', 'Any written text transcribed from a sound.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (6, 'Local URL', 'The URL of the local directory containing all assets of the website.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (1, 'Text', 'Any textual data included in the document.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (2, 'Interviewer', 'The person(s) performing the interview.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (3, 'Interviewee', 'The person(s) being interviewed.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (4, 'Location', 'The location of the interview.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (5, 'Transcription', 'Any written text transcribed from a sound.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (6, 'Local URL', 'The URL of the local directory containing all assets of the website.');
 
 -- Additions
 -- Document
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (7, 'Original Format', 'If the image is of an object, state the type of object, such as painting, sculpture, paper, photo, and additional data');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (7, 'Original Format', 'If the image is of an object, state the type of object, such as painting, sculpture, paper, photo, and additional data');
 
 -- Still Image
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (10, 'Physical Dimensions', 'The actual physical size of the original image.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (10, 'Physical Dimensions', 'The actual physical size of the original image.');
 
 -- Moving Image
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (11, 'Duration', 'Length of time involved (seconds, minutes, hours, days, class periods, etc.)');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (12, 'Compression', 'Type/rate of compression for moving image file (i.e. MPEG-4)');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (13, 'Producer', 'Name (or names) of the person who produced the video.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (14, 'Director', 'Name (or names) of the person who produced the video.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (11, 'Duration', 'Length of time involved (seconds, minutes, hours, days, class periods, etc.)');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (12, 'Compression', 'Type/rate of compression for moving image file (i.e. MPEG-4)');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (13, 'Producer', 'Name (or names) of the person who produced the video.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (14, 'Director', 'Name (or names) of the person who produced the video.');
 
 -- Sound
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (15, 'Bit Rate/Frequency', 'Rate at which bits are transferred (i.e. 96 kbit/s would be FM quality audio)');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (15, 'Bit Rate/Frequency', 'Rate at which bits are transferred (i.e. 96 kbit/s would be FM quality audio)');
 
 -- Oral History
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (16, 'Time Summary', 'A summary of an interview given for different time stamps throughout the interview');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (16, 'Time Summary', 'A summary of an interview given for different time stamps throughout the interview');
 
 -- Email
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (17, 'Email Body', 'The main body of the email, including all replied and forwarded text and headers.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (18, 'Subject Line', 'The content of the subject line of the email.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (19, 'From', 'The name and email address of the person sending the email.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (20, 'To', 'The name(s) and email address(es) of the person to whom the email was sent.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (21, 'CC', 'The name(s) and email address(es) of the person to whom the email was carbon copied.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (22, 'BCC', 'The name(s) and email address(es) of the person to whom the email was blind carbon copied.');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (23, 'Number of Attachments', 'The number of attachments to the email.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (17, 'Email Body', 'The main body of the email, including all replied and forwarded text and headers.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (18, 'Subject Line', 'The content of the subject line of the email.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (19, 'From', 'The name and email address of the person sending the email.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (20, 'To', 'The name(s) and email address(es) of the person to whom the email was sent.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (21, 'CC', 'The name(s) and email address(es) of the person to whom the email was carbon copied.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (22, 'BCC', 'The name(s) and email address(es) of the person to whom the email was blind carbon copied.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (23, 'Number of Attachments', 'The number of attachments to the email.');
 
 -- Lesson Plan
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (24, 'Standards', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (25, 'Objectives', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (26, 'Materials', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (27, 'Lesson Plan Text', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (24, 'Standards', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (25, 'Objectives', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (26, 'Materials', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (27, 'Lesson Plan Text', '');
 
 -- Hyperlink
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (28, 'URL', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (28, 'URL', '');
 
 -- Event
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (29, 'Event Type', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (30, 'Participants', 'Names of individuals or groups participating in the event.');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (29, 'Event Type', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (30, 'Participants', 'Names of individuals or groups participating in the event.');
 
 -- Person
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (31, 'Birth Date', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (32, 'Birthplace', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (33, 'Death Date', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (34, 'Occupation', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (35, 'Biographical Text', '');
-INSERT INTO `$db->Metafield` (id, name, description) VALUES (36, 'Bibliography', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (31, 'Birth Date', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (32, 'Birthplace', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (33, 'Death Date', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (34, 'Occupation', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (35, 'Biographical Text', '');
+INSERT INTO `{$db->prefix}metafields` (id, name, description) VALUES (36, 'Bibliography', '');
 
 -- Insert the types_metafields relationships
 
-INSERT INTO `$db->TypesMetafields` (`id`, `type_id`, `metafield_id`) VALUES (1, 1, 7),
+INSERT INTO `{$db->prefix}types_metafields` (`id`, `type_id`, `metafield_id`) VALUES (1, 1, 7),
 (2, 1, 1),
 (3, 6, 7),
 (6, 6, 10),
@@ -530,7 +530,7 @@ INSERT INTO `$db->TypesMetafields` (`id`, `type_id`, `metafield_id`) VALUES (1, 
 (47, 12, 36);
 
 
-INSERT INTO `$db->FileMetaLookup` ( `id` , `mime_type` , `table_name` , `table_class` ) 
+INSERT INTO `{$db->prefix}file_meta_lookup` ( `id` , `mime_type` , `table_name` , `table_class` ) 
 VALUES 
 (NULL , 'image/bmp', 'files_images', 'FilesImages'), 
 (NULL , 'image/gif', 'files_images', 'FilesImages'), 
@@ -559,7 +559,7 @@ VALUES
 (NULL , 'image/x-xwd', 'files_images', 'FilesImages'), 
 (NULL , 'image/x-xwindowdump', 'files_images', 'FilesImages');
 
-INSERT INTO `$db->FileMetaLookup` ( `id` , `mime_type` , `table_name` , `table_class` ) 
+INSERT INTO `{$db->prefix}file_meta_lookup` ( `id` , `mime_type` , `table_name` , `table_class` ) 
 VALUES
 (NULL , 'video/x-msvideo', 'files_videos', 'FilesVideos'), 
 (NULL , 'video/avi', 'files_videos', 'FilesVideos'), 
