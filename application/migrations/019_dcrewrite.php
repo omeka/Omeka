@@ -10,8 +10,8 @@ class DcRewrite extends Omeka_Db_Migration
     // Array containing the new element sets. file_image, and file_video will be 
     // added in a later migration. Do not change the order of these elements.
     protected $es = array(
-        array('name' => 'dublin_core', 'description' => 'The Dublin Core metadata element set. These elements are common to all Omeka resourses, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/.'), 
-        array('name' => 'item_legacy', 'description' => 'The metadata element set that, in addition to the Dublin Core element set, was included in the `items` table in previous versions of Omeka. These elements are common to all Omeka items. This set may be deprecated in future versions.')
+        array('name' => 'Dublin Core Metadata Element Set', 'description' => 'The Dublin Core metadata element set. These elements are common to all Omeka resourses, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/.'), 
+        array('name' => 'Omeka Legacy Elements',            'description' => 'The metadata element set that, in addition to the Dublin Core element set, was included in the `items` table in previous versions of Omeka. These elements are common to all Omeka items. This set may be deprecated in future versions.')
     );
     
     // Array containing the new element types.
@@ -44,28 +44,28 @@ There are some bugs in this regex:
     // "Temporal Coverage".
     protected $e = array(
         // Built-in Dublin Core elements:
-        array('name' => 'Contributor', '_originalName' => 'contributor', 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An entity responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service. Typically, the name of a Contributor should be used to indicate the entity.'), 
-        array('name' => 'Coverage',    '_originalName' => null,          'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant. Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates. Temporal topic may be a named period, date, or date range. A jurisdiction may be a named administrative entity or a geographic place to which the resource applies. Recommended best practice is to use a controlled vocabulary such as the Thesaurus of Geographic Names [TGN]. Where appropriate, named places or time periods can be used in preference to numeric identifiers such as sets of coordinates or date ranges.'), 
-        array('name' => 'Creator',     '_originalName' => 'creator',     'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An entity primarily responsible for making the resource. Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity.'), 
-        array('name' => 'Date',        '_originalName' => 'date',        'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A point or period of time associated with an event in the lifecycle of the resource. Date may be used to express temporal information at any level of granularity. Recommended best practice is to use an encoding scheme, such as the W3CDTF profile of ISO 8601 [W3CDTF].'), 
-        array('name' => 'Description', '_originalName' => 'description', 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An account of the resource. Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource.'), 
-        array('name' => 'Format',      '_originalName' => 'format',      'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The file format, physical medium, or dimensions of the resource. Examples of dimensions include size and duration. Recommended best practice is to use a controlled vocabulary such as the list of Internet Media Types [MIME].'), 
-        array('name' => 'Identifier',  '_originalName' => null,          'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An unambiguous reference to the resource within a given context. Recommended best practice is to identify the resource by means of a string conforming to a formal identification system.'), 
-        array('name' => 'Language',    '_originalName' => 'language',    'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A language of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].'), 
-        array('name' => 'Publisher',   '_originalName' => 'publisher',   'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An entity responsible for making the resource available. Examples of a Publisher include a person, an organization, or a service. Typically, the name of a Publisher should be used to indicate the entity.'), 
-        array('name' => 'Relation',    '_originalName' => 'relation',    'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A related resource. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.'), 
-        array('name' => 'Rights',      '_originalName' => 'rights',      'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'Information about rights held in and over the resource. Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.'), 
-        array('name' => 'Source',      '_originalName' => 'source',      'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A related resource from which the described resource is derived. The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.'), 
-        array('name' => 'Subject',     '_originalName' => 'subject',     'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The topic of the resource. Typically, the subject will be represented using keywords, key phrases, or classification codes. Recommended best practice is to use a controlled vocabulary. To describe the spatial or temporal topic of the resource, use the Coverage element.'), 
-        array('name' => 'Title',       '_originalName' => 'title',       'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A name given to the resource. Typically, a Title will be a name by which the resource is formally known.'), 
-        array('name' => 'Type',        '_originalName' => null,          'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE]. To describe the file format, physical medium, or dimensions of the resource, use the Format element.'), 
+        array('name' => 'Contributor', '_originalName' => 'contributor', 'order' => 8,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An entity responsible for making contributions to the resource. Examples of a Contributor include a person, an organization, or a service. Typically, the name of a Contributor should be used to indicate the entity.'), 
+        array('name' => 'Coverage',    '_originalName' => null,          'order' => 15, 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant. Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates. Temporal topic may be a named period, date, or date range. A jurisdiction may be a named administrative entity or a geographic place to which the resource applies. Recommended best practice is to use a controlled vocabulary such as the Thesaurus of Geographic Names [TGN]. Where appropriate, named places or time periods can be used in preference to numeric identifiers such as sets of coordinates or date ranges.'), 
+        array('name' => 'Creator',     '_originalName' => 'creator',     'order' => 4,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An entity primarily responsible for making the resource. Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity.'), 
+        array('name' => 'Date',        '_originalName' => 'date',        'order' => 7,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A point or period of time associated with an event in the lifecycle of the resource. Date may be used to express temporal information at any level of granularity. Recommended best practice is to use an encoding scheme, such as the W3CDTF profile of ISO 8601 [W3CDTF].'), 
+        array('name' => 'Description', '_originalName' => 'description', 'order' => 3,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An account of the resource. Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource.'), 
+        array('name' => 'Format',      '_originalName' => 'format',      'order' => 11, 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The file format, physical medium, or dimensions of the resource. Examples of dimensions include size and duration. Recommended best practice is to use a controlled vocabulary such as the list of Internet Media Types [MIME].'), 
+        array('name' => 'Identifier',  '_originalName' => null,          'order' => 14, 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An unambiguous reference to the resource within a given context. Recommended best practice is to identify the resource by means of a string conforming to a formal identification system.'), 
+        array('name' => 'Language',    '_originalName' => 'language',    'order' => 12, 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A language of the resource. Recommended best practice is to use a controlled vocabulary such as RFC 4646 [RFC4646].'), 
+        array('name' => 'Publisher',   '_originalName' => 'publisher',   'order' => 6,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'An entity responsible for making the resource available. Examples of a Publisher include a person, an organization, or a service. Typically, the name of a Publisher should be used to indicate the entity.'), 
+        array('name' => 'Relation',    '_originalName' => 'relation',    'order' => 10, 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A related resource. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.'), 
+        array('name' => 'Rights',      '_originalName' => 'rights',      'order' => 9,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'Information about rights held in and over the resource. Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.'), 
+        array('name' => 'Source',      '_originalName' => 'source',      'order' => 5,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A related resource from which the described resource is derived. The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.'), 
+        array('name' => 'Subject',     '_originalName' => 'subject',     'order' => 2,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The topic of the resource. Typically, the subject will be represented using keywords, key phrases, or classification codes. Recommended best practice is to use a controlled vocabulary. To describe the spatial or temporal topic of the resource, use the Coverage element.'), 
+        array('name' => 'Title',       '_originalName' => 'title',       'order' => 1,  'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'A name given to the resource. Typically, a Title will be a name by which the resource is formally known.'), 
+        array('name' => 'Type',        '_originalName' => null,          'order' => 13, 'element_set_id' => 1, 'elementTypeName' => 'text', 'description' => 'The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE]. To describe the file format, physical medium, or dimensions of the resource, use the Format element.'), 
         // Miscellaneous elements that are in a "built-in" element set for legacy reasons:
-        array('name' => 'Spatial Coverage',   '_originalName' => 'spatial_coverage',   'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
-        array('name' => 'Additional Creator', '_originalName' => 'additional_creator', 'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
-        array('name' => 'Rights Holder',      '_originalName' => 'rights_holder',      'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
-        array('name' => 'Provenance',         '_originalName' => 'provenance',         'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
-        array('name' => 'Citation',           '_originalName' => 'citation',           'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
-        array('name' => 'Temporal Coverage',  '_originalName' => null,                 'element_set_id' => 2, 'elementTypeName' => 'daterange', 'description' => ''), 
+        array('name' => 'Spatial Coverage',   '_originalName' => 'spatial_coverage',   'order' => 3, 'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
+        array('name' => 'Additional Creator', '_originalName' => 'additional_creator', 'order' => 1, 'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
+        array('name' => 'Rights Holder',      '_originalName' => 'rights_holder',      'order' => 2, 'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
+        array('name' => 'Provenance',         '_originalName' => 'provenance',         'order' => 5, 'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
+        array('name' => 'Citation',           '_originalName' => 'citation',           'order' => 6, 'element_set_id' => 2, 'elementTypeName' => 'text',      'description' => ''), 
+        array('name' => 'Temporal Coverage',  '_originalName' => null,                 'order' => 4, 'element_set_id' => 2, 'elementTypeName' => 'daterange', 'description' => ''), 
     );
     
     // Mapping array containing the column names of the old `items` table (keys) 
@@ -174,6 +174,7 @@ There are some bugs in this regex:
           `plugin_id` int(10) unsigned default NULL,
           `name` varchar(100) collate utf8_unicode_ci NOT NULL,
           `description` text collate utf8_unicode_ci,
+          `order` int(10) unsigned default NULL,
           PRIMARY KEY  (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         
@@ -334,8 +335,9 @@ There are some bugs in this regex:
             `element_set_id`, 
             `plugin_id`, 
             `name`, 
-            `description`
-        ) VALUES (?, ?, ?, ?, ?, ?)
+            `description`, 
+            `order`
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
         ";
         foreach ($this->e as $element) {
             $id              = null;
@@ -344,7 +346,8 @@ There are some bugs in this regex:
             $plugin_id       = null;
             $name            = $element['name'];
             $description     = $element['description'];
-            $db->exec($sql, array($id, $element_type_id, $element_set_id, $plugin_id, $name, $description));
+            $order           = $element['order'];
+            $db->exec($sql, array($id, $element_type_id, $element_set_id, $plugin_id, $name, $description, $order));
         }
     }
     
