@@ -23,13 +23,13 @@
 	<legend>Collection Details</legend>
 
 <div class="field">
-<?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name, 'Collection Name'); ?>
+<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name, 'Collection Name'); ?>
 <?php echo form_error('name'); ?>
 </div>
 
 <div class="field">
 <?php echo form_error('description'); ?>
-<?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
+<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
 </div>
 
 <?php $entities = entities(); ?>
@@ -62,14 +62,14 @@
 <div class="field">
 	<label for="public">Public</label>	
 <?php 
-	radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->public);
+	echo radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->public);
 ?>
 </div>
 
 <div class="field">
 	<label for="featured">Featured</label>	
 <?php 
-	radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->featured); 
+	echo radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->featured); 
 ?>
 </div>	
 

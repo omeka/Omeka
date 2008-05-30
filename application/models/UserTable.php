@@ -37,6 +37,16 @@ class UserTable extends Omeka_Db_Table
         return $select;
     }
     
+    public function findAllForSelectForm()
+    {
+        $select = $this->getSelect();
+        $db = $this->getDb();
+        $select->reset('columns')->from(array(), array('u.id', 
+            'u.name' => new Zend_db_Expr('CONCAT_WS(" ", e.first_name, e.middle_name, e.last_name)')));
+            
+        return $db->fetchPairs($select);
+    }
+    
     public function findByEntity($entity_id)
     {
         $select = $this->getSelect();

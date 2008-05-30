@@ -54,6 +54,16 @@ class CollectionTable extends Omeka_Db_Table
         return $per_page;
     }
     
+    public function findAllForSelectForm()
+    {
+        $select = $this->getSelect();
+        $select->reset('columns');
+        $select->from(array(), array('c.id', 'c.name'));
+        
+        $pairs = $this->getDb()->fetchPairs($select);
+        return $pairs;
+    }
+    
     /**
      * Apply permissions checks to all SQL statements retrieving collections from the table
      * 

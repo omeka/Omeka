@@ -14,7 +14,6 @@
 		var typeSelect = $('item-type');
 		$('change_type').hide();
 		typeSelect.onchange = function() {
-			
 			var typeSelectLabel = $$('#type-select label')[0];
 			var image = document.createElement('img');
 			image.src = "<?php echo img('loader2.gif'); ?>";
@@ -118,7 +117,9 @@
 		<legend>Type Metadata</legend>
 
 			<div class="field" id="type-select">
-				<?php echo select_item_type(array(	
+				<?php
+				echo label(array(), 'Item Type'); 
+				echo select_item_type_for_item(array(	
             				'name'	=> 'item_type_id',
             				'id'	=> 'item-type' )); ?>
 			<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
@@ -134,8 +135,8 @@
 				<div class="files">
 				<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
 				<?php 
-				text(array('name'=>'add_num_files','size'=>2),$numFiles);
-				submit('Add this many files', 'add_more_files'); 
+				echo text(array('name'=>'add_num_files','size'=>2),$numFiles);
+				echo submit('Add this many files', 'add_more_files'); 
 				?>
 				</div>
 			</div>
@@ -174,7 +175,7 @@
 						</a>
 					</td>
 					<td class="delete-link">
-						<?php checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
+						<?php echo checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
 					</td>	
 				</li>
 		
@@ -252,7 +253,7 @@
 			<div class="field">
 			<label id="language">Language</label>
 			<?php 
-				select(
+				echo select(
 					array('id'=>'language','name'=>'language'), 
 					array(
 						'eng'=>'English', 
@@ -272,12 +273,10 @@
 	<fieldset id="collection-metadata">
 		<legend>Collection Metadata</legend>
 		<div class="field">
-		<?php select('collection_id',
-					collections(),
-					$item->collection_id,
-					'Collection',
-					'id',
-					'name' ); ?>
+		<?php 
+		echo label(array(), 'Collection');
+		echo select_collection(array('name'=>'collection_id'),
+			$item->collection_id); ?>
 		</div>
 	</fieldset>
 
@@ -287,13 +286,13 @@
 		<?php if ( has_permission('Items', 'makePublic') ): ?>
 			<div class="field">
 				<div class="label">Item is public:</div> 
-				<div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
+				<div class="radio"><?php echo radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
 			</div>
 		<?php endif; ?>
 		<?php if ( has_permission('Items', 'makeFeatured') ): ?>
 			<div class="field">
 				<div class="label">Item is featured:</div> 
-				<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
+				<div class="radio"><?php echo radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
 			</div>
 		<?php endif; ?>
 	

@@ -19,9 +19,9 @@
 	<td><?php echo item('Type Name'); ?></td>
 	<td><?php echo item('Creator', 0); ?></td>	
 	<td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
-	<td><?php checkbox(array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public"), item('public')); ?></td>
-	<td><?php checkbox(array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured"), item('featured')); ?>
-		<?php hidden(array('name'=>"items[" . item('id') . "][id]"), item('id')); ?>
+	<td><?php echo checkbox(array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public"), item('public')); ?></td>
+	<td><?php echo checkbox(array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured"), item('featured')); ?>
+		<?php echo hidden(array('name'=>"items[" . item('id') . "][id]"), item('id')); ?>
 	</td>
 	<td><?php echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></td>
 </tr>

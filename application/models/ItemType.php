@@ -6,6 +6,8 @@
  * @package Omeka
  **/
 
+require_once 'ItemTypeTable.php';
+
 /**
  * @package Omeka
  * @author CHNM

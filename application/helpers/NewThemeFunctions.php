@@ -247,26 +247,53 @@ function item_has_files()
 /**
  * Use this to choose an item type from a <select>
  * 
+ * @uses ItemTypeTable::findAllForSelectForm()
  * @param array
+ * @param string Selected value
  * @return string HTML
  **/
-function select_item_type($props=array())
+function select_item_type($props=array(), $value=null)
 {
-    $itemTypes = get_db()->getTable('ItemType')->findAll();
-    $item = get_current_item();
-    
-    //Capture the output, because select() echo's it out (bad)
-    ob_start();
-    
-    select(	$props,
+    $itemTypes = get_db()->getTable('ItemType')->findAllForSelectForm();
+        
+    return select(	$props,
 			$itemTypes,
-			$item->item_type_id,
-			'Item Type',
-			'id',
-			'name' );
-	$output = ob_get_clean();
-	
-	return $output;
+			$value);	
+}
+
+function select_item_type_for_item($props=array())
+{
+    $item = get_current_item();
+    return select_item_type($props, $item->item_type_id);
+}
+
+/**
+ * @see CollectionTable::findAllForSelectForm()
+ * @param array
+ * @param string
+ * @return string
+ **/
+function select_collection($props = array(), $value=null)
+{
+    //$collectionInfo should be an array where key => collection_id, value =>
+    //collection name.
+    $collectionInfo = get_db()->getTable('Collection')->findAllForSelectForm();
+
+    return select($props, $collectionInfo, $value);
+}
+
+function select_user($props = array(), $value=null)
+{
+    $userInfo = get_db()->getTable('User')->findAllForSelectForm();
+    
+    return select($props, $userInfo, $value);
+}
+
+function select_institution($props = array(), $value = null)
+{
+    $institutionInfo = get_db()->getTable('Entity')->findInstitutionsForSelectForm();
+    
+    return select($props, $institutionInfo, $value);
 }
 
 /**

@@ -43,6 +43,16 @@ class EntityTable extends Omeka_Db_Table
         return $unique;
     }
     
+    public function findInstitutionsForSelectForm()
+    {
+        $select = $this->getSelect();
+        $select->reset('columns');
+        $select->from(array(), array('e.id', 'e.institution'))
+            ->where('e.type = "Institution"');
+            
+        return $this->getDb()->fetchPairs($select);
+    }
+    
     /**
      * Possible options include:
      * 

@@ -10,10 +10,10 @@
 				<?php if(has_collection($item)): ?>
 			<li><span class="fieldname">Collection:</span> <?php echo h($item->Collection->name); ?></li>
 			<?php endif; ?>
-			<li><span class="fieldname">Public</span> <?php checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></li>
+			<li><span class="fieldname">Public</span> <?php echo checkbox(array('name'=>"items[$item->id][public]",'class'=>"make-public"), $item->public); ?></li>
 			<li><span class="fieldname">Featured</span> 
-			<?php checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?>
-			<?php hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>	
+			<?php echo checkbox(array('name'=>"items[$item->id][featured]",'class'=>"make-featured"), $item->featured); ?>
+			<?php echo hidden(array('name'=>"items[$item->id][id]"), $item->id); ?>	
 			</li>
 		</ul>
 		<p><?php echo link_to_item($item, 'edit', 'Edit', array('class'=>'edit')); ?></p>

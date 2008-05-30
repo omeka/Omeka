@@ -16,7 +16,7 @@
 
 <div><label for="id">Identifier</label>
 <?php
-	text( array(	'name'	=> 'id',
+	echo text( array(	'name'	=> 'id',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->id );
 ?>
@@ -24,44 +24,44 @@
 
 <div><label for="title">Title</label>
 <?php
-	text( array(	'name'	=> 'title', 'class' => 'textinput'),$file->title );
+	echo text( array(	'name'	=> 'title', 'class' => 'textinput'),$file->title );
 ?>
 </div>
 
 <div><label for="creator">Creator</label>
 <?php
-	text( array(	'name'	=> 'creator', 'class' => 'textinput'),$file->creator );
+	echo text( array(	'name'	=> 'creator', 'class' => 'textinput'),$file->creator );
 ?>
 </div>
 
 <div><label for="subject">Subject</label>
 <?php
-	text( array(	'name'	=> 'subject', 'class' => 'textinput'),$file->subject );
+	echo text( array(	'name'	=> 'subject', 'class' => 'textinput'),$file->subject );
 ?>
 </div>
 
 <div><label for="description">Description</label>
 <?php
-	textarea( array(	'name'	=> 'description','class' => 'textinput' ),
+	echo textarea( array(	'name'	=> 'description','class' => 'textinput' ),
 						$file->description );
 ?>
 </div>
 
 <div><label for="publisher">Publisher</label>
 <?php
-	text( array(	'name'	=> 'publisher', 'class' => 'textinput'),$file->publisher );
+	echo text( array(	'name'	=> 'publisher', 'class' => 'textinput'),$file->publisher );
 ?>
 </div>
 
 <div><label for="creator">Other Creator</label>
 <?php
-	text( array(	'name'	=> 'additional_creator', 'class' => 'textinput'),$file->additional_creator );
+	echo text( array(	'name'	=> 'additional_creator', 'class' => 'textinput'),$file->additional_creator );
 ?>
 </div>
 
 <div><label for="date">Date</label>
 <?php
-	text( array(	'name'	=> 'date',
+	echo text( array(	'name'	=> 'date',
 							'class' => 'textinput',
 							'id'	=> 'date'),$file->date);
 							
@@ -89,38 +89,38 @@
 
 <div><label for="source">Source</label>
 <?php
-	text( array(	'name'	=> 'source', 'class' => 'textinput'),$file->source );
+	echo text( array(	'name'	=> 'source', 'class' => 'textinput'),$file->source );
 ?>
 </div>
 
 <div><label for="language">Language</label>
 <?php
-	text( array(	'name'	=> 'language',
+	echo text( array(	'name'	=> 'language',
 							'class' => 'textinput', 'class' => 'textinput'),$file->language );
 ?>
 </div>
 
 <div><label for="relation">Relation</label>
 <?php
-	textarea( array(	'name'	=> 'relation', 'class' => 'textinput' ),
+	echo textarea( array(	'name'	=> 'relation', 'class' => 'textinput' ),
 						$file->relation );
 ?>
 </div>
 
 <div><label for="coverage">Coverage</label>
 <?php
-	text( array(	'name' => 'coverage','class' => 'textinput'),$file->coverage);
+	echo text( array(	'name' => 'coverage','class' => 'textinput'),$file->coverage);
 ?>
 </div>
 <div><label for="rights">Rights</label>
 <?php
-	textarea( array(	'name'	=> 'rights', 'class' => 'textinput' ),
+	echo textarea( array(	'name'	=> 'rights', 'class' => 'textinput' ),
 						$file->rights );
 ?>
 </div>
 <div><label for="format">Format</label>
 <?php
-	textarea( array(	'name'	=> 'format' , 'class' => 'textinput'),
+	echo textarea( array(	'name'	=> 'format' , 'class' => 'textinput'),
 						$file->format );
 ?>
 </div>
@@ -131,27 +131,27 @@
 
 <div><label for="transcriber">Transcriber</label>
 <?php
-	text( array(	'name'	=> 'transcriber', 'class' => 'textinput'),$file->transcriber);
+	echo text( array(	'name'	=> 'transcriber', 'class' => 'textinput'),$file->transcriber);
 ?>
 </div>
 
 <div><label for="producer">Producer</label>
 <?php
-	text( array(	'name'	=> 'producer',
+	echo text( array(	'name'	=> 'producer',
 	'class' => 'textinput'),$file->producer );
 ?>
 </div>
 
 <div><label for="render_device">Render Device</label>
 <?php
-	text( array(	'name'	=> 'render_device',
+	echo text( array(	'name'	=> 'render_device',
 					'class' => 'textinput'),$file->render_device );
 ?>
 </div>
 
 <div><label for="render_details">Render Details (e.g. Duration, resolution, bit depth, width, height)</label>
 <?php
-	textarea( array(	'name'	=> 'render_details',
+	echo textarea( array(	'name'	=> 'render_details',
 						'class' => 'textinput' ),
 						$file->render_details );
 ?>
@@ -159,58 +159,58 @@
 
 <div><label for="capture_date">Capture Date</label>
 <?php
-	text( array(	'name'	=> 'capture_date',
+	echo text( array(	'name'	=> 'capture_date',
 							'id'	=> 'capture_date', 'class' => 'textinput'),$file->capture_date );
 ?>
 </div>
 
 <div><label for="capture_device">Capture Device</label>
 <?php
-	text( array(	'name'	=> 'capture_device' ,'class' => 'textinput'),$file->capture_device);
+	echo text( array(	'name'	=> 'capture_device' ,'class' => 'textinput'),$file->capture_device);
 ?>
 </div>
 
 <div><label for="capture_details">Capture Details (e.g. Duration, resolution, bit depth, width, height)</label>
 <?php
-	textarea( array(	'name'	=> 'capture_details','class' => 'textinput' ),
+	echo textarea( array(	'name'	=> 'capture_details','class' => 'textinput' ),
 					$file->capture_details );
 ?>
 </div>
 
 <div><label for="watermark">Watermark</label>
 <?php
-	text( array(	'name'	=> 'watermark', 'class' => 'textinput'),$file->watermark);
+	echo text( array(	'name'	=> 'watermark', 'class' => 'textinput'),$file->watermark);
 ?>
 </div>
 
 <div><label for="encryption">Encryption</label>
 <?php
-	text( array(	'name'	=> 'encryption', 'class' => 'textinput'),$file->encryption);
+	echo text( array(	'name'	=> 'encryption', 'class' => 'textinput'),$file->encryption);
 ?>
 </div>
 
 <div><label for="compression">Compression</label>
 <?php
-	text( array(	'name'	=> 'compression', 'class' => 'textinput'),$file->compression);
+	echo text( array(	'name'	=> 'compression', 'class' => 'textinput'),$file->compression);
 ?>
 </div>
 
 <div><label for="post_processing">Post Processing</label>
 <?php
-	text( array(	'name'	=> 'post_processing', 'class' => 'textinput'),$file->post_processing);
+	echo text( array(	'name'	=> 'post_processing', 'class' => 'textinput'),$file->post_processing);
 ?>
 </div>
 
 <div><label for="change_history">Change History</label>
 <?php
-	textarea( array(	'name'	=> 'change_history', 'class' => 'textinput' ),
+	echo textarea( array(	'name'	=> 'change_history', 'class' => 'textinput' ),
 						$file->change_history );
 ?>
 </div>
 
 <div><label class="readonly" for="archive_filename">Archive Filename <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'archive_filename',
+	echo text( array(	'name'	=> 'archive_filename',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->archive_filename );
 ?>
@@ -218,7 +218,7 @@
 
 <div><label class="readonly" for="original_filename">Original File Name <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'original_filename',
+	echo text( array(	'name'	=> 'original_filename',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->original_filename);
 ?>
@@ -226,7 +226,7 @@
 
 <div><label class="readonly" for="size">File Size <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'size',
+	echo text( array(	'name'	=> 'size',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->size);
 ?>
@@ -237,7 +237,7 @@
 	<legend>Type Metadata</legend>
 <div><label class="readonly" for="mime_browser">File Mime Browser <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'mime_browser',
+	echo text( array(	'name'	=> 'mime_browser',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->mime_browser );
 ?>
@@ -245,7 +245,7 @@
 
 <div><label class="readonly" for="mime_os">File Mime OS <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'mime_os',
+	echo text( array(	'name'	=> 'mime_os',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->mime_os);
 ?>
@@ -253,7 +253,7 @@
 
 <div><label class="readonly" for="type_os">File Type OS <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'type_os',
+	echo text( array(	'name'	=> 'type_os',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->type_os );
 ?>
@@ -264,14 +264,14 @@
 	<legend>File History</legend>
 	<div><div><label class="readonly" for="added">File Added <span class="readonly">(read only)</span></label>
 	<?php
-		text( array(	'name'	=> 'added',
+		echo text( array(	'name'	=> 'added',
 								'readonly' => 'readonly',
 								'class' => 'readonly textinput'),$file->added );
 	?>
 </div>
 <div><label class="readonly" for="modified">File Modified <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'modified',
+	echo text( array(	'name'	=> 'modified',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->modified );
 ?>
@@ -279,7 +279,7 @@
 
 <div><label for="authentication">Authentication <span class="readonly">(read only)</span></label>
 <?php
-	text( array(	'name'	=> 'authentication',
+	echo text( array(	'name'	=> 'authentication',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->authentication);
 ?>

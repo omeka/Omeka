@@ -37,184 +37,110 @@
 		return join(' ',$attr);
 	}
 
-	/**
-	 * Make a label for a form element
-	 *
-	 * @param mixed an array of attributes, or just the string id to be used in the 'for' attribute
-	 * @param string text of the form label
-	 * @param boolean whether or not to return the label HTML
-	 * @return mixed
-	 **/
-	function label($attributes, $text, $return = false) 
-	{
-		if(!is_array($attributes)) {
-			$id = $attributes;
-			$label = '<label'.(!$id ? '' : ' for="'.h($id).'"').'>'.$text.'</label>';;
-		} else {
-			$label = '<label '._tag_attributes($attributes).">".$text."</label>";
-		}
-		
-		if($return) return $label;
-		else echo $label;
-	}
-	
-	function text( $attributes, $default=null, $label = null )
-	{
-		$input = '';
-		if($label) 
-		{
-			label(@$attributes['id'],h($label));
-		}
-		
-		if(is_array($attributes)) {
-			if(!$default and !empty($attributes['value'])) 
-			{
-				$default = $attributes['value'];
-				unset($attributes['value']);
-			}			
-		}
-		
-		$input .= '<input type="text"';
-		if(!empty($attributes)) {
-			$input .= ' '._tag_attributes($attributes);
-		}
-		$input .= ' value="'.h($default).'" ';
-		
-		$input .= '/>';
-		$input .= "\n";
-		echo $input;
-	}
-	
-	function password( $attributes, $default=null, $label = null )
-	{
-		$input = '';
-		if($label) 
-		{
-			label(@$attributes['id'],h($label));
-		}
-		
-		if(!$default and !empty($attributes['value'])) 
-		{
-			$default = $attributes['value'];
-			unset($attributes['value']);
-		}
-		
-		$input .= '<input type="password"';
-		if(!empty($attributes)) {
-			$input .= ' '._tag_attributes($attributes);
-		}
-		$input .= ' value="'.h($default).'" ';
-		
-		$input .= '/>';
-		$input .= "\n";
-		echo $input;
-	}
+/**
+ * Make a label for a form element
+ *
+ * @param mixed an array of attributes, or just the string id to be used in the 'for' attribute
+ * @param string text of the form label
+ * @return mixed
+ **/
+function label($attributes, $text) 
+{
+    if (is_string($attributes)) {
+        $name = $attributes;
+        $attributes = array();
+    } else if (is_array($attributes)) {
+       $name = $attributes['name']; 
+    } else if (!$attributes) {
+        $attributes = array();
+    }
+	return __v()->formLabel($name, $text, $attributes);
+}
 
-	/**
-	 * 7/12/07 - $optionDesc can be complex like "%last_name%, %first_name%" instead of array('last_name','first_name')
-	 *
-	 **/
-	function select( $attributes, $values = null, $default = null, $label=null, $optionValue = null, $optionDesc = null )
-	{
-		$select = '<select '._tag_attributes($attributes).'>';
-		$select .= "\n\t" . '<option value="">Select Below&nbsp;</option>' . "\n"; 
-		if( !$optionValue && !$optionDesc )
-		{
-			foreach( $values as $k => $v )
-			{
-				$select .= "\t" . '<option value="' . h( $k ) . '"';
-				if( $default == $k ) $select .= ' selected="selected"';
-				$select .= '>' . h( $v ) . '</option>' . "\n";
-			}
-		}
-		else
-		{
-			foreach( $values as $obj_array )
-			{
-				$select .= "\t" . '<option value="' . h( $obj_array[$optionValue] ) . '"';
-				if( $default == $obj_array[$optionValue] ) $select .= ' selected="selected"';
-				$select .= '>';
-				if( is_array( $optionDesc ) )
-				{
-					foreach( $optionDesc as $text )
-					{
-						$select .= h( $obj_array[$text] ) . ' ';
-					}
-					$select .= '</option>' . "\n";
-				}
-				elseif( is_string( $optionDesc ) )
-				{
-					//if we have % in the desc then its a complex description
-					if(strpos($optionDesc, '%') !== false) {
-						$desc = preg_match_all('/%(\w+)%/', $optionDesc, $matches);
-	
-						$search = $matches[0];
-						$fields = $matches[1];
-		
-						foreach ($fields as $k => $field) {
-							$optionDesc = str_replace($search[$k], $entity[$field], $optionDesc);
-						}
-						$select .= h( $optionDesc ) . '</option>' . "\n";
-					}
-					else {
-						$select .= h( $obj_array[$optionDesc] ) . '</option>' . "\n";	
-					}					
-				}
-			}
-		}
-		$select .= '</select>' . "\n";
-		
-		if($label) {
-			if(is_string($attributes)) {
-				label($attributes, h($label));
-				echo "\n".$select;
-			}
-			//Label attribute must either have an associated id element or be wrapped around the select 
-			//http://checker.atrc.utoronto.ca/servlet/ShowCheck?check=91
-			elseif(array_key_exists('id',$attributes)) {
-				label(@$attributes['id'],h($label));
-				echo "\n".$select;
-			}else {
-				label(null,h($label) ."\n\t". $select);
-			}
-		}else {
-			echo $select;
-		}
+/**
+ * Facade for Zend_View_Helper_FormText.  This maintains the same function
+ * signature as previous Omeka versions for backward compatibility.
+ * 
+ * @param array
+ * @param string|null
+ * @param string|null
+ * @return string HTML for the form element
+ **/	
+function text( $attributes, $default=null, $label = null )
+{
+    $html = '';
+    
+	if($label) {
+	    // This is a hack to only apply the 'class' attribute to the input
+	    // and not to the label 
+	    $labelAttribs = $attributes;
+	    unset($labelAttribs['class']);
+	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttribs);
 	}
+	
+	$html .= __v()->formText($attributes['name'], $default, $attributes);
+    return $html;
+}
+	
+function password( $attributes, $default=null, $label = null )
+{
+    $html = '';
+
+	if($label) {
+	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
+	}
+	
+    $html .= __v()->formPassword($attributes['name'], $default, $attributes);
+    
+    return $html;
+}
+
+function select( $attributes, $values = null, $default = null, $label=null)
+{   
+    $html = '';
+    
+    //First option is always the "Select Below" empty entry
+    $values = (array) $values;
+    $values = array('' => 'Select Below ') + $values;
+        
+    //Duplication
+	if($label) {
+	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
+	}
+	
+    $html .= __v()->formSelect($attributes['name'], $default, $attributes, $values);
+    
+    return $html;
+}
 	
 
-	function textarea($attributes, $default = null, $label = null )
-	{
-		if($label) label(@$attributes['id'],$label);
-		$ta = '<textarea';
-		if(!empty($attributes)) {
-			$ta .= ' '._tag_attributes($attributes);
-		}
-		$ta .= '>' .  h($default)  . '</textarea>'."\n";
-		echo $ta;
+function textarea($attributes, $default = null, $label = null )
+{		
+	$html = '';
+	
+	if($label) {
+	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
 	}
 	
-	function radio( $attributes, array $values, $default = null, $label_class = 'radiolabel' )
-	{
-		foreach( $values as $k => $v )
-		{
-			
-			$radio = '<label class="' . $label_class . '"><input type="radio"';
-			if(!empty($attributes)) {
-				$radio .= ' '._tag_attributes($attributes);
-			}
-			$radio .= ' value="' . h($k) . '"';
-			if($default == $k )
-			{
-				$radio .= ' checked="checked" />' . h($v) . '</label>';
-			}
-			else
-			{
-				$radio .= ' />' . h($v) . '</label>';
-			}
-			echo $radio;
-		}
-	}
+	$html .= __v()->formTextarea($attributes['name'], $default, $attributes);
+	
+	return $html;
+}
+
+/**
+ * Facade for Zend_View_Helper_FormRadio.  
+ * 
+ * @param array
+ * @param array Key => value of the radio button, Value => label for the 
+ * radio button.
+ * @param string|null
+ * @return string HTML
+ **/	
+function radio( $attributes, array $values, $default = null, $label_class = 'radiolabel' )
+{
+    $attributes['label_class'] = $label_class;
+	return __v()->formRadio($attributes['name'], $default, $attributes, $values);
+}
 	
 	function hidden( $attributes, $value )
 	{
@@ -226,34 +152,41 @@
 		$input .= ' />' . "\n";
 		echo $input;
 	}
-	
-	function checkbox($attributes, $checked = FALSE, $value=null, $label = null )
-	{
-		$checkbox = '<input type="checkbox"';
-		if( $checked ) {
-			$attributes['checked'] = 'checked';
-		}
-		if(!empty($attributes)) {
-			$checkbox .= ' '._tag_attributes($attributes);
-		}
-		if($value) {
-			$checkbox .= ' value="'.h($value).'"';
-		}
-		$checkbox .= ' />' . "\n";
-		if($label) label(@$attributes['id'],$label);
-		echo $checkbox;
+
+/**
+ * Facade for Zend_View_Helper_FormCheckbox
+ * 
+ * @param array
+ * @param boolean|null
+ * @param string|null
+ * @param string|null
+ * @return string
+ **/	
+function checkbox($attributes, $checked = FALSE, $value=null, $label = null )
+{
+    if($checked !== null) {
+        $attributes['checked'] = $checked;
+    }
+
+    $html = __v()->formCheckbox($attributes['name'], $value, $attributes);
+
+	if($label) {
+	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
 	}
 	
-	function submit($value="Submit",$name="submit")
-	{
-		echo '<input type="submit" name="'.$name.'" id="'.$name.'" value="'.$value.'" />';
-	}
+	return $html;
+}
+	
+function submit($value="Submit",$name="submit")
+{
+	return __v()->formSubmit($name, $value, array());
+}
 	
 	function simple_search($props=array(),$uri) { ?>
 		<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
 		<fieldset>
 		    <input type="text" class="textinput" name="search" value="<?php echo htmlspecialchars($_REQUEST['search']); ?>"/>
-		    <?php submit("Submit","submit_search"); ?>
+		    <?php echo submit("Submit","submit_search"); ?>
 		</fieldset>
 		</form>
 	 <?php }
@@ -320,13 +253,13 @@
 								//[type] = 'contains'
 								//[terms] = 'foobar'
 							//etc
-							select(
+							echo select(
 								array('name'=>"advanced[$i][field]"), 
 								$search_fields, 
 								@$rows['field']); ?>
 							
 							<?php 
-								select(
+								echo select(
 									array('name'=>"advanced[$i][type]"),
 									array('contains'=>'contains', 'does not contain'=>'does not contain', 'is empty'=>'is empty', 'is not empty'=>'is not empty'),
 									@$rows['type']
@@ -334,7 +267,7 @@
 							?>
 							
 							<?php 
-								text(
+								echo text(
 									array('name'=>"advanced[$i][terms]", 'size'=>20),
 									@$rows['terms']); 
 							?>
@@ -348,7 +281,7 @@
 				</div>
 				
 				<div id="search-by-range">
-					<?php text(
+					<?php echo text(
 						array('name'=>'range', 'class'=>'textinput'), 
 						@$_GET['range'], 
 						'Search by a range of ID#s (example: 1-4, 156, 79)'); ?>
@@ -356,12 +289,15 @@
 				
 				<div id="search-selects">
 			<?php 
-				select(array('name'=>'collection'), collections(), $_REQUEST['collection'], 'Search by Collection', 'id', 'name');
-				select(array('name'=>'type'), item_types(), $_REQUEST['type'], 'Search by Type', 'id', 'name'); 
+			    echo label(array(), 'Search By Collection');
+				echo select_collection(array('name'=>'collection'), $_REQUEST['collection']);
+				echo label(array(), 'Search By Type');
+				echo select_item_type(array('name'=>'type'), $_REQUEST['type']); 
 			?>
 			<?php if(has_permission('Users', 'browse')): ?>
 			<?php 			
-				 select(array('name'=>'user'), users(), $_REQUEST['user'], 'Search By User', 'id', array('first_name', 'last_name'));
+			    echo label(array(), 'Search By User');
+				echo select_user(array('name'=>'user'), $_REQUEST['user']);
 			?>
 			<?php endif; ?>
 			<label for="tags">Search by Tags</label>
@@ -370,10 +306,10 @@
 			<div id="search-checkboxes">
 			<?php 
 				if (has_permission('Items','showNotPublic')) {
-				    checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
+				    echo checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
 				}				
 				
-				checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
+				echo checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
 			?>
 			</div>
 			</fieldset>
