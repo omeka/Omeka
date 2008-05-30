@@ -14,7 +14,6 @@ function uri($urlEnd, $params=array())
 
 /**
  * @deprecated
- *
  * @return string
  **/
 function generate_url($options, $name)
@@ -50,7 +49,7 @@ function not_empty_or($value, $default) {
  * via the plugins, but also different in the way it handles CSS.  Instead of class="current"
  * because of all the whacked-out navigation on the admin theme, we give each link an class of 'nav-'
  * + the link text.
- *
+ * @deprecated
  **/
 function admin_nav(array $links) {
 	$current = $_SERVER['REQUEST_URI'];
@@ -79,7 +78,9 @@ function items_rss_header()
 	trigger_error('Use auto_discovery_link_tag() instead of items_rss_header()!');
 }
 
-//Format of $date is YYYY-MM-DD
+/**
+ * @deprecated
+ */
 function get_month($date)
 {
 	$parts = explode('-',$date);
@@ -87,6 +88,9 @@ function get_month($date)
 	return $parts[1];
 }
 
+/**
+ * @deprecated
+ */
 function get_day($date)
 {
 	$parts = explode('-',$date);
@@ -94,6 +98,9 @@ function get_day($date)
 	return $parts[2];
 }
 
+/**
+ * @deprecated
+ */
 function get_year($date)
 {
 	$parts = explode('-',$date);
@@ -101,23 +108,32 @@ function get_year($date)
 	return $parts[0];
 }
 
+/**
+ * @deprecated
+ */
 function item_metadata($item, $field, $escape=true)
 {
     trigger_error('Do not use item_metadata() to retrieve metadata for items.  Please use item() instead!');
 }
 
+/**
+ * @deprecated
+ */
 function type($id=null)
 {
     trigger_error('Do not use type() to retrieve an item type!');
 }
 
+/**
+ * @deprecated
+ */
 function types(array $params = array())
 {
     trigger_error('Do not use use types() to retrieve a list of item types!');
 }
 
 /**
- * 
+ * @deprecated
  * @see has_type()
  * @return boolean
  **/
@@ -126,7 +142,7 @@ function has_collection($item, $name=null) {
 }
 
 /**
- * 
+ * @deprecated
  * @see item_has_files()
  * @param Item
  * @return boolean
@@ -137,7 +153,7 @@ function has_files($item) {
 
 /**
  * Display an alternative value if the given variable is empty
- *
+ * @deprecated
  * @return string
  **/
 function display_empty($val, $alternative="[Empty]") {
