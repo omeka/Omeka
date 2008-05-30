@@ -442,7 +442,7 @@ class Item extends Omeka_Record
         $cols = $db->getTable('Item')->getColumns();
 
         //Avoid certain fields because they are DB keys or protected/private
-        $avoid = array('id', 'type_id', 'collection_id', 'featured', 'public');
+        $avoid = array('id', 'item_type_id', 'collection_id', 'featured', 'public');
 
         $fields = array();
         foreach ($cols as $col) {

@@ -67,10 +67,7 @@ function item_type_elements()
  * items form.
  * 
  * @todo Test with live data.
- * @todo Modify HTML markup to work with more than one input per element.  
- * The CSS ID should not be applied to the form input because there can 
- * be more than one form input per element.  Perhaps it should be on the
- * div wrapper around the element.
+ *
  * @return string HTML
  **/
 function item_type_elements_form()
@@ -81,59 +78,98 @@ function item_type_elements_form()
     //Loop through all of the element records for the item's item type
     $elements = $item->getTypeElements();   
     foreach ($elements as $key => $element) {
-        
-        //The CSS ID of the field is just
-        $fieldId = text_to_id($element['name']);
-        $fieldLabel = htmlentities($element['name']);
-        $fieldDescription = htmlentities($element['description']);
-        
-        $input = '';
-        
-        //There can be an arbitrary # of values in element->text
-        //It's an array (not hash) at this point
-        $numFieldValues = count($element['text']);
-        for ($i=0; $i < $numFieldValues; $i++) { 
-            
-            //The name of the input on the form
-            $fieldName = "Elements[" . $element['id'] . "][$i]";
-            
-            //The value in the form field should be the text for that element
-            $fieldValue = htmlentities($element['text'][$i]);
-                        
-            //Check the POST to see if there is a value for that field saved already
-            $postValue = $_POST['Elements'][$element['id']][$i];
-            $fieldValue = !empty($postValue) ? htmlentities($postValue) : $fieldValue;
-            
-            //Create a form input based on the element type name
-            switch ($element['type_name']) {
-                //Tinytext => input type="text"
-                case 'tinytext':
-                    $input .= '<input type="text" class="textinput" name="';
-                    $input .= $fieldName . '" id="' . $fieldId . '" value="';
-                    $input .= $fieldValue . '" />';
-                    break;
-                //Text => textarea
-                case 'text':
-                    $input .= '<textarea rows="15" cols="50" class="textinput"';
-                    $input .= ' name="' . $fieldName . '" id="' . $fieldId . '">';
-                    $input .= $fieldValue . "</textarea>\n\t";
-                    break;
-            }
-        }
-
-        //Wrap the input with a <div class="field">
-        $html .= '<div class="field">';
-		$html .= '<label for="' . $fieldId . '">' . $fieldLabel;
-		$html .= '</label>'."\n\t";
-		
-		$html .= $input;
-		
-		//Tooltips should be in a <span class="tooltip">
-		$html .= '<span class="tooltip" id="' . $fieldId . '-tooltip">';
-		$html .= $fieldDescription .'</span></div>';		
+        $html .= display_form_input_for_element($element);		
     }
     
     return $html;
+}
+
+/**
+ * Retrieve the proper HTML for a form input for a given Element record.
+ * 
+ * Assume that the given element has access to all of its values (for example,
+ * all values of a Title element for a given Item).
+ *
+ * This will output as many form inputs as there are values for a given
+ * element.  In addition to that, it will give each set of inputs a label and
+ * a span with class="tooltip" containing the description for the element.
+ * This span can either be displayed, hidden with CSS or converted into a 
+ * tooltip with javascript.
+ *
+ * All sets of form inputs for elements will be wrapped in a div with
+ * class="field".
+ *
+ * @todo Modify HTML markup to work with more than one input per element.  
+ * The CSS ID should not be applied to the form input because there can 
+ * be more than one form input per element.  Perhaps it should be on the
+ * div wrapper around the element.
+ * @todo Plugins should be able to hook in to displaying elements in a certain
+ * way.
+ * @param Element
+ * @return string HTML
+ **/
+function display_form_input_for_element($element)
+{
+    $html = '';
+    
+    $fieldId = text_to_id($element['name']);
+    $fieldLabel = htmlentities($element['name']);
+    $fieldDescription = htmlentities($element['description']);
+    
+    $input = '';
+    
+    //There can be an arbitrary # of values in element->text
+    //It's an array (not hash) at this point
+    $numFieldValues = count($element['text']);
+    $numFieldValues = $numFieldValues ? $numFieldValues : 1;
+    for ($i=0; $i < $numFieldValues; $i++) { 
+        
+        //The name of the input on the form
+        $fieldName = "Elements[" . $element['id'] . "][$i]";
+        
+        //The value in the form field should be the text for that element
+        $fieldValue = htmlentities($element['text'][$i]);
+                    
+        //Check the POST to see if there is a value for that field saved already
+        $postValue = $_POST['Elements'][$element['id']][$i];
+        $fieldValue = !empty($postValue) ? htmlentities($postValue) : $fieldValue;
+        
+        //Here is where plugins should hook in to deal with display of certain
+        //elements
+        
+        //Create a form input based on the element type name
+        switch ($element['type_name']) {
+            //Tinytext => input type="text"
+            case 'tinytext':
+                $input .= '<input type="text" class="textinput" name="';
+                $input .= $fieldName . '" id="' . $fieldId . '" value="';
+                $input .= $fieldValue . '" />';
+                break;
+            //Text => textarea
+            case 'text':
+                $input .= '<textarea rows="15" cols="50" class="textinput"';
+                $input .= ' name="' . $fieldName . '" id="' . $fieldId . '">';
+                $input .= $fieldValue . "</textarea>\n\t";
+                break;
+            default:
+                throw new Exception('Cannot display a form input for "' . 
+                $element['name'] . '" if element type name is not given!');
+                break;
+        }
+    }
+
+    //Wrap the input with a <div class="field">
+    $html .= '<div class="field">';
+	$html .= '<label for="' . $fieldId . '">' . $fieldLabel;
+	$html .= '</label>'."\n\t";
+	
+	$html .= $input;
+	
+	//Tooltips should be in a <span class="tooltip">
+	$html .= '<span class="tooltip" id="' . $fieldId . '-tooltip">';
+	$html .= $fieldDescription .'</span></div>';    
+	
+	return $html;
 }
 
 /**

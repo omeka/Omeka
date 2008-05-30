@@ -19,6 +19,20 @@ class ElementTable extends Omeka_Db_Table
         return $this->indexRecordsByName($objs);
     }
     
+    /**
+     * Overriding getSelect() to always return the type_name for retrieved
+     * elements.
+     * 
+     * @return Omeka_Db_Select
+     **/
+    public function getSelect()
+    {
+        $select = parent::getSelect();
+        $db = $this->getDb();
+        $select->joinLeft(array('et'=>$db->ElementType), 'et.id = e.element_type_id', array('type_name'=>'et.name'));
+        return $select;
+    }
+    
     public function getSelectForItem($itemId)
     {
         $select = $this->getSelect();
@@ -63,6 +77,57 @@ class ElementTable extends Omeka_Db_Table
     {
         //Retrieve dummy data
         return array('Physical Dimensions', 'Original Transcript');
+    }
+    
+    /**
+     * Retrieve all elements for a set (containing text only for the item)
+     * 
+     * @see items/form.php
+     * @see display_form_input_for_element()
+     * @param Item
+     * @param string The name of the set it belongs to.
+     * @return Element
+     **/
+    public function findForItemBySet($item, $elementSet)
+    {
+        //Select all the elements for a given set
+        $select = $this->getSelect();
+        $db = $this->getDb();
+        
+        $select->joinInner(array('es'=>$db->ElementSet), 'es.id = e.element_set_id', array());
+        $select->where('es.name = ?', (string) $elementSet);
+        
+        $elements = $this->fetchObjects($select);
+       
+       //Populate those element records with the values for a given item
+       
+       //Get the IDs of all the elements we pulled (no need for another query)
+       $elementIds = array();
+       foreach ($elements as $key => $element) {
+        $elementIds[$key] = $element->id;
+        $element->text = array();
+       }
+
+       //Select all the values for an item (grouped by element_id)        
+        $select = new Omeka_Db_Select;
+        $select->from(array('ie'=>$db->ItemsElements), array('ie.text', 'ie.element_id'));
+        $select->where('ie.item_id = ?', $item->id);
+        
+        $select->where('ie.element_id IN (?)', array($elementIds));
+        
+        $resultSet = $db->fetchAll($select);
+        
+        /* Maybe there is a quicker way to do this?  I'm a little rusty on my 
+        set theory [KBK] */
+        foreach ($elements as $elementKey => $element) {
+            foreach ($resultSet as $row) {
+                if($row['element_id'] == $element->id) {
+                    $element->text[] = $row['text'];
+                }
+            }
+        }
+        
+        return $elements;
     }
     
     /**

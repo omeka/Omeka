@@ -2,7 +2,8 @@
 <script type="text/javascript" charset="utf-8">
 	Event.observe(window,'load', function() {
 		ajaxifyTagRemoval();
-		makeTooltips();
+		//Create tooltips for all spans with class="tooltip"
+		makeTooltips($$('.tooltip'));
 		changeTypeMetadata();
 		filesAdding();
 	});
@@ -31,6 +32,8 @@
 					var form = $('type-metadata-form');
 					image.remove();
 					form.update(t.responseText);
+					var spans = form.select('.tooltip');
+					makeTooltips(spans);
 					Effect.BlindDown(form);
 				}
 			});
@@ -39,10 +42,8 @@
 	
 	/* Loop through all the spans with class="tooltip" and make them visible 
 	as tooltips */
-	function makeTooltips()
-	{
-		var tooltipElements = $$('.tooltip');
-        
+	function makeTooltips(tooltipElements)
+	{        
 		tooltipElements.each(function(span){
 		   //The div that wraps the tooltip and the form element
 		   var div = span.up();
@@ -186,7 +187,7 @@
 	</div>
 	<div id="step2" class="toggle">
 <fieldset id="core-metadata">
-	<legend>Core Metadata</legend>
+	<legend>Dublin Core Metadata</legend>
 	<?php $coreElementSet = array(
 	    'Title',
 	    'Subject', 
@@ -205,25 +206,16 @@
 //	    'Temporal Coverage',
 //	    'Language',
 	    'Provenance',
-	    'Citation'); ?>
+	    'Citation'); 
 	    
-	    <?php foreach ($coreElementSet as $field): ?>
-	        <div class="field">
-	        <label id="<?php echo text_to_id($field); ?>"><?php echo $field; ?></label>
-            
-            <?php if (in_array($field, array('Description'))): 
-                //Descriptions are displayed as textareas ?>
-                <textarea class="textinput" name="description"  rows="15" cols="50"><?php echo item($field, 0); ?></textarea>
-            <?php else: ?>
-                <input type="text" class="textinput" name="Elements[<?php echo $field; ?>]" value="<?php echo item($field, 0);?>" />
-            <?php endif; ?>
-            
-            <span class="tooltip" id="<?php echo Inflector::underscore($field); ?>_tooltip">
-                <?php echo element_metadata($field, 'description'); ?>
-            </span>
-	        </div>
-	    <?php endforeach; ?>
-		
+	    //@todo Move this to the controller.
+	    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, 'dublin_core');
+
+	    foreach ($dublinCoreElements as $key => $element) {
+	       echo display_form_input_for_element($element);
+	    }
+	    ?>
+	    
 		<div class="field">
 			<label for="date_year" id="date">Date <span class="notes">(YYYY-MM-DD)</span></label>
 			
