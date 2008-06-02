@@ -58,6 +58,11 @@ class Omeka_Db_Table
         return strtolower($this->_target[0]);
     }
     
+    /**
+     * Retrieve the Omeka_Db instance.
+     * 
+     * @return Omeka_Db
+     **/
     public function getDb()
     {
         return $this->_db;

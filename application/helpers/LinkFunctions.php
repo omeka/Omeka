@@ -119,6 +119,7 @@ function link_to_square_thumbnail($item, $props=array(), $action='show', $random
 /**
  * Returns a link to an item, where the link has been populated by a specific image format for the item
  *
+ * @access private
  * @return string|false
  **/
 function _link_to_archive_image($item, $props=array(), $action='show', $random=false, $imageType = 'thumbnail')

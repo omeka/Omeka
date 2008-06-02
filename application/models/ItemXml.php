@@ -13,6 +13,10 @@
  **/
 class ItemXml extends Omeka_Record_Feed_Xml
 {
+    /**
+     * @param Item
+     * @return string Valid XML.
+     **/
     public function recordToXml($item)
     {
         //Get a SimpleXML object

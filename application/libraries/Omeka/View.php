@@ -114,16 +114,25 @@ class Omeka_View extends Zend_View_Abstract
         }    
     }
     
+    /**
+     * @return Zend_Controller_Request_Http
+     **/
     public function getRequest()
     {
         return Omeka_Context::getInstance()->getRequest();
     }
     
+    /**
+     * @return Zend_Controller_Request_Http
+     **/    
     public function getResponse()
     {
         return Omeka_Context::getInstance()->getResponse();
     }
     
+    /**
+     * @return array
+     **/
     public function getAssetPaths()
     {
         return $this->_asset_paths;

@@ -9,6 +9,12 @@ function h($str, $allowedTags = "i|em|b|strong|del|span") {
 		return $html;
 }
 
+/**
+ * @access private
+ * 
+ * @param string
+ * @return string
+ **/
 function unescapeTags($matches) {
   	return str_replace( array("&gt;", "&lt;", "&quot;", "&amp;"), array(">", "<", "\"", "&"), $matches[0]);
 }	

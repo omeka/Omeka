@@ -61,6 +61,7 @@ define('HELPERS',			HELPER_DIR.DIRECTORY_SEPARATOR.'all.php');
  * Most of this has been borrowed directly from Drupal 6.1's 
  * bootstrap code (bootstrap.inc, conf_init())
  *
+ * @access private
  * @todo rename the WEB_ROOT, WEB_DIR constants and add a new one for the $base_path
  * @return void
  **/

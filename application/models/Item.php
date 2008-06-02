@@ -41,7 +41,6 @@ class Item extends Omeka_Record
     protected $_related = array('Collection'=>'getCollection', 
                                 'TypeMetadata'=>'getTypeMetadata', 
                                 'Tags'=>'getTags',
-                                'Type'=>'getType',
                                 'Files'=>'getFiles',
                                 'Elements'=>'getElements',
                                 'TypeElements'=>'getTypeElements');
@@ -52,24 +51,41 @@ class Item extends Omeka_Record
         $this->_modules[] = new Relatable($this);
     }
     
-    //Pulling in related data
+    /**
+     * @return null|Collection
+     **/
     public function getCollection()
     {
         $lk_id = (int) $this->collection_id;
         return $this->getTable('Collection')->find($lk_id);            
     }
-
-    public function getType()
+    
+    /**
+     * Retrieve the ItemType record associated with this Item.
+     * 
+     * @return ItemType|null
+     **/
+    public function getItemType()
     {
         $itemType = $this->getTable('ItemType')->find($this->item_type_id);
         return $itemType;
     }
     
+    /**
+     * Retrieve the set of File records associated with this Item.
+     * 
+     * @return array
+     **/
     public function getFiles()
     {
         return $this->getTable('File')->findByItem($this->id);
     }
     
+    /**
+     * Retrieve the set of Element records associated with this Item.
+     * 
+     * @return array
+     **/
     public function getElements()
     {
         return $this->getTable('Element')->findByItem($this->id);
@@ -91,6 +107,11 @@ class Item extends Omeka_Record
             ->findByItemAndType($this->id, $this->item_type_id);
     }
     
+    /**
+     * Retrieve the User record that represents the creator of this Item.
+     * 
+     * @return User
+     **/
     public function getUserWhoCreated()
     {
         $creator = $this->getRelatedEntities('added');
@@ -99,7 +120,7 @@ class Item extends Omeka_Record
             $creator = current($creator);
         }
         
-        return $creator;
+        return $creator->User;
     }
     
     /**
@@ -369,6 +390,11 @@ class Item extends Omeka_Record
         return $clean;        
     }
     
+    /**
+     * Whether or not the Item has files associated with it.
+     * 
+     * @return boolean
+     **/
     public function hasFiles()
     {
         $db = $this->getDb();
@@ -381,38 +407,6 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Provides an idiom for saving extended metadata outside the context of the form (useful for plugins)
-     *
-     * @return void
-     **/
-    public function setMetatext($field, $value)
-    {
-        $this->_metatext[$field] = $value;
-    }
-    
-    /**
-     * This will retrieve specific values for metatext.  It does this by retrieving/caching all the available 
-     * metatext for the item, then checking that for whatever data is desired
-     *
-     * @return string|null
-     **/
-    public function getMetatext($field)
-    {
-        if (!$metatext = $this->getCached('Metatext')) {
-            $metatext = $this->getTable('Metatext')->findByItem($this->id);
-            $this->addToCache($metatext, 'Metatext');
-        }
-        
-        $obj = $metatext[$field];
-        
-        if ($this->_metatext[$field]) {
-            return $this->_metatext[$field];
-        } elseif($obj) {
-            return $obj->text;
-        }
-    }
-    
-    /**
      * Easy facade for the Item class so that it almost acts like an iterator
      *
      * @return Item|false
@@ -422,6 +416,11 @@ class Item extends Omeka_Record
         return $this->getDb()->getTable('Item')->findPrevious($this);
     }
     
+    /**
+     * Retrieve the Item that is next in the database after this Item.
+     * 
+     * @return Item|false
+     **/
     public function next()
     {
         return $this->getDb()->getTable('Item')->findNext($this);
@@ -459,6 +458,11 @@ class Item extends Omeka_Record
         return $fields;
     }
     
+    /**
+     * Whether or not the Item has a File with derivative images (like thumbnails).
+     * 
+     * @return boolean
+     **/
     public function hasThumbnail()
     {
         $db = $this->getDb();

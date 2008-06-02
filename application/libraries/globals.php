@@ -7,11 +7,17 @@
  * @package Omeka
  **/
  
+/**
+ * @return string
+ **/ 
 function get_option($name) {
     $options = Omeka_Context::getInstance()->getOptions();
     return $options[$name];
 }
 
+/**
+ * @return void
+ **/
 function set_option($name, $value)
 {
     $db = get_db();
@@ -24,6 +30,9 @@ function set_option($name, $value)
     Omeka_Context::getInstance()->setOptions($options);
 }
 
+/**
+ * @return string
+ **/
 function generate_slug($text)
 {
     $slug = trim($text);
@@ -35,6 +44,11 @@ function generate_slug($text)
     return $slug;
 }
 
+/**
+ * @access private
+ * @param string
+ * @return void
+ **/
 function pluck($col, $array)
 {
     $res = array();
@@ -44,11 +58,17 @@ function pluck($col, $array)
     return $res;    
 } 
 
+/**
+ * @return User|null
+ **/
 function current_user()
 {
     return Omeka_Context::getInstance()->getCurrentUser();
 }
 
+/**
+ * @return Omeka_Db
+ **/
 function get_db()
 {
     return Omeka_Context::getInstance()->getDb();
@@ -57,7 +77,7 @@ function get_db()
 /**
  * Useful for debugging things.
  * 
- * @note This will die fiery death if the logger is not enabled
+ * @access private
  * @param string
  * @return void
  **/
@@ -71,7 +91,7 @@ function debug($msg)
 }
 
 /**
- *
+ * @access private
  * @return mixed
  **/
 function stripslashes_deep($value)
@@ -81,15 +101,19 @@ function stripslashes_deep($value)
      return $value;
 }
 
+/**
+ * @return void
+ **/
 function add_plugin_hook($hook, $callback)
 {
     get_plugin_broker()->addHook($hook, $callback);
 } 
 
 /**
- * fire_plugin_hook('save_item', $item, $arg2)  would call the plugin hook 'save_item' with those 2 arguments
+ * fire_plugin_hook('after_save_item', $item, $arg2)  would call the plugin hook 
+ * 'after_save_item' with those 2 arguments.
  *
- * @return void
+ * @return array
  **/
 function fire_plugin_hook()
 {
@@ -134,6 +158,9 @@ function add_data_feed($format, $options=array())
     get_plugin_broker()->addFeed($format, $options);
 }
 
+/**
+ * @return void
+ **/
 function add_navigation($text, $link, $type='main', $permissions=null)
 {
     get_plugin_broker()->addNavigation($text, $link, $type, $permissions);
@@ -144,6 +171,9 @@ function add_mime_display_type($mimeTypes, $callback, array $options=array())
     get_plugin_broker()->addMediaAdapter($mimeTypes, $callback, $options);
 }
 
+/**
+ * @return Omeka_Acl
+ **/
 function get_acl()
 {
     return Omeka_Context::getInstance()->getAcl();
