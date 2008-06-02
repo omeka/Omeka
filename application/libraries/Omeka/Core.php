@@ -30,6 +30,26 @@ require_once 'Omeka/Context.php';
 class Omeka_Core
 {
     /**
+     * Array containing all core loading phase methods in sequential order. 
+     * Modify this array if any phase is added or deleted.
+     *
+     * @access protected
+     * @var array
+     */
+    protected $_phases = array('sanitizeMagicQuotes', 
+                               'initializeClassLoader', 
+                               'initializeConfigFiles', 
+                               'initializeLogger', 
+                               'initializeDb', 
+                               'initializeOptions', 
+                               'loadModelClasses', 
+                               'initializeAcl', 
+                               'initializePluginBroker', 
+                               'initializeAuth', 
+                               'initializeCurrentUser', 
+                               'initializeFrontController');
+    
+    /**
      * 'Context' is a term that describes a pattern for storing site-wide data
      * in a singleton.  Stuff like the logger, acl, database objects, etc. is 
      * accessible through this object 
@@ -65,8 +85,8 @@ class Omeka_Core
     }
     
     /**
-     * If magic_quotes has been enabled, then strip all slashes from the 
-     * $_GET, $_POST and $_REQUEST superglobals.
+     * If magic_quotes has been enabled, then strip all slashes from the $_GET, 
+     * $_POST and $_REQUEST superglobals.
      * 
      * @return void
      **/
@@ -74,10 +94,10 @@ class Omeka_Core
     {
         //Strip out those bastard slashes
         if (get_magic_quotes_gpc()) {
-            $_POST = stripslashes_deep($_POST);
+            $_POST    = stripslashes_deep($_POST);
             $_REQUEST = stripslashes_deep($_REQUEST);
-            $_GET = stripslashes_deep($_GET);
-        }      
+            $_GET     = stripslashes_deep($_GET);
+        }
     }
     
     /**
@@ -89,51 +109,39 @@ class Omeka_Core
      **/
     public function initialize()
     {
-        $this->sanitizeMagicQuotes();
-        $this->initializeClassLoader();
-        $this->initializeConfigFiles();
-        $this->initializeLogger();
-        $this->initializeDb();
-        $this->initializeOptions();
-        $this->loadModelClasses();
-        $this->initializeAcl();
-        $this->initializePluginBroker();
-        $this->initializeAuth();
-        $this->initializeCurrentUser();
-        $this->initializeFrontController();
+        foreach ($this->_phases as $phase) {
+            if (method_exists($this, $phase)) {
+                $this->$phase();
+            } else {
+                exit("Error: The core initialize phase method \"$phase\" does not exist.");
+            }
+        }
     }
     
     /**
-     * Provide phased loading of core Omeka functionality. Primarily used for Omeka scripts that run outside a web environment.
+     * Provide phased loading of core Omeka functionality. Primarily used for 
+     * Omeka scripts that run outside a web environment.
      *
      * @param string $stopPhase The phase where the user wants loading to stop. 
      * @return void
      **/
     public function phasedLoading($stopPhase)
     {
-        // Within this array put initializations in the most logical order.
-        $phases = array(
-            'sanitizeMagicQuotes', 
-            'initializeClassLoader', 
-            'initializeConfigFiles', 
-            'initializeDb', 
-            'initializeOptions', 
-            'loadModelClasses', 
-            'initializeAcl', 
-            'initializePluginBroker', 
-            'initializeAuth', 
-            'initializeFrontController'
-        );
-        
         // Throw an error if the stop phase doesn't exist.
-        if (!in_array($stopPhase, $phases)) {
-            throw new Exception("The provided stop phase '$stopPhase' does not exist.");
+        if (!in_array($stopPhase, $this->_phases)) {
+            exit("Error: The provided stop phase method \"$stopPhase\" does not exist.");
         }
         
         // Load initialization callbacks in the proper order.
-        foreach ($phases as $phase) {
-            call_user_func(array($this, $phase));
-            if ($phase == $stopPhase) break;
+        foreach ($this->_phases as $phase) {
+            if (method_exists($this, $phase)) {
+                call_user_func(array($this, $phase));
+                if ($phase == $stopPhase) {
+                    break;
+                }
+            } else {
+                exit("Error: The core phase method \"$phase\" does not exist.");
+            }
         }
     }
     
@@ -253,11 +261,11 @@ class Omeka_Core
         }
         
         $db = new Zend_Config_Ini($db_file, 'database');
-         
+        
         $this->setConfig('db', $db);
         
         $config = new Zend_Config_Ini(CONFIG_DIR . DIRECTORY_SEPARATOR . 'config.ini', 'site');
-                
+        
         $this->setConfig('basic', $config);
         
         $routes = new Zend_Config_Ini(CONFIG_DIR . DIRECTORY_SEPARATOR . 'routes.ini', null);
@@ -296,7 +304,8 @@ class Omeka_Core
      * Initializes Omeka's ACL
      *
      * Checks to see if there is a serialized copy of the ACL in the database, 
-     * then use that.  If not, then set up the ACL based on the hard-coded settings.
+     * then use that.  If not, then set up the ACL based on the hard-coded 
+     * settings.
      * 
      * @uses Omeka_Acl
      * @todo ACL settings should be stored in the database.  When ACL settings
@@ -344,7 +353,8 @@ class Omeka_Core
      **/
     public function initializePluginBroker()
     {
-        // Initialize the plugin broker with the database object and the plugins/ directory
+        // Initialize the plugin broker with the database object and the 
+        // plugins/ directory
         $broker = new Omeka_Plugin_Broker($this->getDb(), PLUGIN_DIR);
         $this->setPluginBroker($broker);
         
@@ -365,7 +375,8 @@ class Omeka_Core
     {
         $authPrefix = get_option('auth_prefix');
         
-        //Set up the authentication mechanism with the specially generated prefix
+        // Set up the authentication mechanism with the specially generated 
+        // prefix
         $auth = Zend_Auth::getInstance();
         
         require_once 'Zend/Auth/Storage/Session.php';
@@ -426,9 +437,9 @@ class Omeka_Core
         // This plugin redirects exceptions to the ErrorController (built in to ZF)
         $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
                 
-        // This plugin allows Omeka plugins to add controller directories to the 'default' namespace
-        // which prevents weird naming conventions like Contribution_IndexController.php
-        // and obviates the need to hack routes
+        // This plugin allows Omeka plugins to add controller directories to the 
+        // 'default' namespace which prevents weird naming conventions like 
+        // Contribution_IndexController.php and obviates the need to hack routes
         $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack());
         
         $front->registerPlugin(new Omeka_Controller_Plugin_Admin());
