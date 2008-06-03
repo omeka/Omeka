@@ -86,8 +86,8 @@ function _define_web_root()
        $dir = preg_replace('/(.*)\/admin/', '$1', $dir, 1);
    }
    
-   define('WEB_ROOT', 		$base_root . '/' . $dir);
-   define('WEB_DIR',		$base_url);     
+   define('WEB_ROOT', 		$base_root . (!empty($dir) ? '/' . $dir : '') );
+   define('WEB_DIR',		$base_url);  
 }
 
 _define_web_root();
