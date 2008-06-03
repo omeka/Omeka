@@ -161,104 +161,14 @@ function link_to_admin_home_page($text, $props = array())
 }
 
 /**
- *	The pagination function from the old version of the software
- *  It looks more complicated than it might need to be, but its also more flexible.  We may decide to simplify it later
- */
-function pagination_links( $num_links = 5, $menu = null, $page = null, $per_page = null, $total_results=null, $link=null, $page_query = null )
+ * Alias for pagination().
+ *
+ * @todo Reimplement the menu option (for choosing # of results to show per_page).
+ * @see pagination()
+ * @param array
+ * @return string
+ **/
+function pagination_links(array $options=array())
 {
-	
-	//If no args passed, retrieve the stored 'pagination' value
-	if(Zend_Registry::isRegistered('pagination')) {
-		$p = Zend_Registry::get('pagination');
-	}
-	
-	if(empty($per_page)) {
-		$per_page = $p['per_page'];
-	} 
-	if(empty($num_links)) {
-		$num_links = $p['num_links'];
-	}
-	if(empty($total_results)) {
-		$total_results = $p['total_results'];
-	}
-	if(empty($page)) {
-		$page = $p['page'];
-	}
-	if(empty($link)) {
-		$link = $p['link'];
-	}
-
-	//Avoid division by zero error
-	if(!$per_page) return;
-
-		$num_pages = ceil( $total_results / $per_page );
-		$num_links = ($num_links > $num_pages) ? $num_pages : $num_links;
-				
-		$query = !empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : null;
-		
-		if ( $page_query )
-		{
-			//Using the power of regexp we replace only part of the query string related to the pagination
-			if( preg_match( '/[\?&]'.$page_query.'/', $query ) ) 
-			{
-				$p = '/([\?&])('.preg_quote($page_query) . ')=([0-9]*)/';
-				$pattern = preg_replace( $p, '$1$2='.preg_quote('%PAGE%'), $query );
-			}
-			else $pattern = ( !empty($query) )  ? $query . '&' . $page_query . '=' . '%PAGE%' : '?' . $page_query . '=' . '%PAGE%' ; 
-	
-		}
-		else
-		{
-			$pattern = '%PAGE%' . $query;
-		}
-
-		//We don't have enough for pagination
-		if($total_results < $per_page) {
-			$html = '';
-		} else {
-			
-		if( $page > 1 ) {
-			$html = '<ul><li class="first"><a href="' . $link . str_replace('%PAGE%', 1, $pattern) . '">First</a></li><li class="previous"><a href="' . $link . str_replace('%PAGE%', ($page - 1), $pattern) . '">Previous</a></li>';
-		} elseif( $page == 1) {
-			$html = '<ul>';
-		}
-
-		$buffer = floor( ( $num_links - 1 ) / 2 );
-		$start_link = ( ($page - $buffer) > 0 ) ? ($page - $buffer) : 1;
-		$end_link = ( ($page + $buffer) < $num_pages ) ? ($page + $buffer) : $num_pages;
-
-		if( $start_link == 1 ) {
-			$end_link += ( $num_links - $end_link );
-		}elseif( $end_link == $num_pages ) {
-			$start_link -= ( $num_links - ($end_link - $start_link ) - 1 );
-		}
-
-		for( $i = $start_link; $i < $end_link+1; $i++) {
-			if( $i <= $num_pages ) {
-				if( $page == $i ) {
-					$html .= '<li class="current">' . $i . '</li>';
-				} else {
-					$html .= '<li><a href="' . $link . str_replace('%PAGE%', $i, $pattern) . '">' . ($i) . '</a></li>';
-				}
-			}
-		}
-
-		if( $page < $num_pages ) {
-			$html .= '<li class="next"><a href="' . $link . str_replace('%PAGE%', ($page + 1), $pattern). '">Next</a></li><li class="last"><a href="' . $link . str_replace('%PAGE%', ($num_pages), $pattern) . '">Last</a></li>';
-		}
-
-		$html .= '</ul>';
-			
-		if ($menu) {
-			$html .= '<select class="pagination-link" onchange="location.href = \''.$link . $page . '?per_page=' . ('\' + this.value + \'') .'\'">';
-			$html .= '<option>Results Per Page:&nbsp;</option>';
-			$per_page_limits = array(10, 25, 50);
-			foreach ($per_page_limits as $per_page_limit) {
-				$html .= '<option value="' . $per_page_limit . '"';
-				$html .= '>' . $per_page_limit . ' results' . '</option>';
-			}
-			$html .= '</select>';
-		}
-		}
-		return $html;		
-	}
+    return pagination($options);
+}
