@@ -85,158 +85,62 @@ class Omeka_View_Helper_Pagination
     )
     {
         // Sanitize passed variables.
-        $page          = $this->_sanitizePage($page);
-        $perPageCount  = $this->_sanitizePerPageCount($perPageCount);
-        $totalCount    = $this->_sanitizeTotalCount($totalCount);
-        $pageName      = $this->_sanitizePageName($options['pageName']);
-        $url           = $this->_sanitizeUrl($options['url']);
-        $queryArray    = $this->_sanitizeQueryArray($options['queryArray']);
-        $pagesType     = $this->_sanitizePagesType($options['pagesType']);
-        $displayFormat = $this->_sanitizeDisplayFormat($options['displayFormat']);
-        $classes       = $this->_sanitizeClasses($options['classes']);
-        $texts         = $this->_sanitizeTexts($options['texts']);
+        $this->page          = $this->_sanitizePage($page);
+        $this->perPageCount  = $this->_sanitizePerPageCount($perPageCount);
+        $this->totalCount    = $this->_sanitizeTotalCount($totalCount);
+        $this->pageName      = $this->_sanitizePageName($options['pageName']);
+        $this->url           = $this->_sanitizeUrl($options['url']);
+        $this->queryArray    = $this->_sanitizeQueryArray($options['queryArray']);
+        $this->pagesType     = $this->_sanitizePagesType($options['pagesType']);
+        $this->displayFormat = $this->_sanitizeDisplayFormat($options['displayFormat']);
+        $this->classes       = $this->_sanitizeClasses($options['classes']);
+        $this->texts         = $this->_sanitizeTexts($options['texts']);
         
         // Set the total number of pages.
-        $totalPages = ceil($totalCount / $perPageCount);
+        $this->totalPages = ceil($totalCount / $perPageCount);
         
         // Begin building the pagination string.
-        $pagination = '
-<ul class="'.$classes['pagination'].'">';
+        $pagination = "\n" . '<ul class="'.$classes['pagination'].'">';
         
-        if (in_array($displayFormat, array(1,2,3,4))) {
-            // The "first" link.
-            if (1 != $page) {
-                $pagination .= '
-    <li class="'.$classes['first'].'"><a href="'.$this->_buildUrl(1, $pageName, $url, $queryArray).'">'.$texts['first'].'</a></li>';
-            } else {
-                if (in_array($displayFormat, array(1,3))) $pagination .= '
-    <li class="'.$classes['firstGhost'].'">'.$texts['first'].'</li>';
-            }
-            // The "previous" link.
-            if (1 < $page) {
-                $pagination .= '
-    <li class="'.$classes['previous'].'"><a href="'.$this->_buildUrl($page - 1, $pageName, $url, $queryArray).'">'.$texts['previous'].'</a></li>';
-            } else {
-                if (in_array($displayFormat, array(1,3))) $pagination .= '
-    <li class="'.$classes['previousGhost'].'">'.$texts['previous'].'</li>';
-            }
+        if (in_array($this->displayFormat, array(1,2,3,4))) {
+            $pagination .= $this->_createFirstLink();
+            $pagination .= $this->_createPreviousLink();
         }
         
         // Use the "show" pagination type.
-        if (array_key_exists('show', $pagesType) && in_array($displayFormat, array(1,2,5))) {
-            
-            $show    = $pagesType['show'];
-            $prePad  = floor($show/2);
-            $postPad = ceil($show/2);
-            
-            // Show all pages and no ellipses if the show number is greater than 
-            // or equal to the total number of pages.
-            if ($show >= $totalPages) {
-                for ($i = 1; $i <= $totalPages; $i++) {
-                    if ($page == $i) {
-                        $pagination .= '
-    <li class="'.$classes['currentPage'].'">'.$i.'</li>';
-                    } else {
-                        $pagination .= '
-    <li class="'.$classes['pages'].'"><a href="'.$this->_buildUrl($i, $pageName, $url, $queryArray).'">'.$i.'</a></li>';
-                    }
-                }
-            // Oterwise, perform calculations to show the specified number of 
-            // pages in the pagination.
-            } else {
-                if (1 < $page - $prePad) {
-                    $pagination .= '
-    <li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
-                }
-                if (1 > $page - $prePad) {
-                    for ($i = 1; $i <= $show; $i++) {
-                        if ($page == $i) {
-                            $pagination .= '
-    <li class="'.$classes['currentPage'].'">'.$i.'</li>';
-                        } else {
-                            $pagination .= '
-    <li class="'.$classes['pages'].'"><a href="'.$this->_buildUrl($i, $pageName, $url, $queryArray).'">'.$i.'</a></li>';
-                        }
-                    }
-                }
-                if (1 <= $page - $prePad && $totalPages >= $page + $postPad - 1) {
-                    for ($i = $page - $prePad; $i <= $page + $postPad - 1; $i++) {
-                        if ($page == $i) {
-                            $pagination .= '
-    <li class="'.$classes['currentPage'].'">'.$i.'</li>';
-                        } else {
-                            $pagination .= '
-    <li class="'.$classes['pages'].'"><a href="'.$this->_buildUrl($i, $pageName, $url, $queryArray).'">'.$i.'</a></li>';
-                        }
-                    }
-                }
-                if ($totalPages < $page + $postPad - 1) {
-                    for ($i = $totalPages - $show + 1; $i <= $totalPages; $i++) {
-                        if ($page == $i) {
-                            $pagination .= '
-    <li class="'.$classes['currentPage'].'">'.$i.'</li>';
-                        } else {
-                            $pagination .= '
-    <li class="'.$classes['pages'].'"><a href="'.$this->_buildUrl($i, $pageName, $url, $queryArray).'">'.$i.'</a></li>';
-                        }
-                    }
-                }
-                if ($totalPages > $page + $postPad - 1) {
-                    $pagination .= '
-    <li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
-                }
-            }
-            
+        if (array_key_exists('show', $this->pagesType) && in_array($this->displayFormat, array(1,2,5))) {
+            $pagination .= $this->_createShowPagination();
+
         // Use the "pad" pagination type.
-        } elseif (array_key_exists('pad', $pagesType) && in_array($displayFormat, array(1,2,5))) {
-        
-            $pad = $pagesType['pad'];
-            
-            if (1 < $page - $pad) {
-                $pagination .= '
-    <li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
-            }
-            for ($i = $page - $pad; $i <= $page + $pad; $i++) {
-                if ($page == $i) {
-                    $pagination .= '
-    <li class="'.$classes['currentPage'].'">'.$i.'</li>';
-                } elseif (0 < $i && $totalPages >= $i) {
-                    $pagination .= '
-    <li class="'.$classes['pages'].'"><a href="'.$this->_buildUrl($i, $pageName, $url, $queryArray).'">'.$i.'</a></li>';
-                }
-            }
-            if ($page < $totalPages - $pad) {
-                $pagination .= '<li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
-            }
+        } elseif (array_key_exists('pad', $this->pagesType) && in_array($this->displayFormat, array(1,2,5))) {
+            $pagination .= $this->_createPadPagination();
         }
         
-        if (in_array($displayFormat, array(1,2,3,4))) {
-            // The "next" link.
-            if ($totalCount > $page * $perPageCount) {
-                $pagination .= '
-    <li class="'.$classes['next'].'"><a href="'.$this->_buildUrl($page + 1, $pageName, $url, $queryArray).'">'.$texts['next'].'</a></li>';
-            } else {
-                if (in_array($displayFormat, array(1,3))) $pagination .= '
-    <li class="'.$classes['nextGhost'].'">'.$texts['next'].'</li>';
-            }
-            // The "last" link.
-            if ($totalPages != $page) {
-                $pagination .= '
-    <li class="'.$classes['last'].'"><a href="'.$this->_buildUrl($totalPages, $pageName, $url, $queryArray).'">'.$texts['last'].'</a></li>';
-            } else {
-                if (in_array($displayFormat, array(1,3))) $pagination .= '
-    <li class="'.$classes['lastGhost'].'">'.$texts['last'].'</li>';
-            }
+        if (in_array($this->displayFormat, array(1,2,3,4))) {
+            $pagination .= $this->_createNextLink();
+            $pagination .= $this->_createLastLink();            
         }
         
-        $pagination .= '
-</ul>';
+        $pagination .= "\n</ul>";
         
         return $pagination;
     }
     
-    protected function _buildUrl($subsequentPage, $pageName, $url, $queryArray)
+    protected function _buildUrl($subsequentPage, $pageName=null, $url=null, $queryArray=array())
     {
+        //Use the properties of this object if none are passed
+        if (!$pageName) {
+            $pageName = $this->pageName;
+        }
+        
+        if(!$url) {
+            $url = $this->url;
+        }
+        
+        if(!$queryArray) {
+            $queryArray = $this->queryArray;
+        }
+        
         // Remove the page element from the $queryArray, since it will be added 
         // below.
         if (array_key_exists($pageName, $queryArray)) unset($queryArray[$pageName]);
@@ -253,6 +157,184 @@ class Omeka_View_Helper_Pagination
             $queryString = count($queryArray) ? '/?'.http_build_query($queryArray, '', '&amp;') : '';
             return $url.$subsequentPage.$queryString;
         }
+    }
+    
+    /**
+     * Create a list item link for each of the pagination links.
+     * 
+     * @param string
+     * @param integer
+     * @param boolean
+     * @param string
+     * @param string
+     * @return string
+     **/
+    protected function _createLink($page, $text, $useLink, $listClass, $alternateClass)
+    {
+        if ($useLink) {
+            $href = $this->_buildUrl($page);
+            $html = "\n" . '<li class="' . $listClass . '">';
+            $html .= '<a href="' . $href . '">' . $text . '</a>';
+        } else {
+            $html = "\n" . '<li class="' . $alternateClass . '">';
+            $html .= $text;
+        }
+        
+        $html .= '</li>';
+        return $html;
+    }
+    
+    protected function _createFirstLink() 
+    {
+        extract(get_object_vars($this));
+        
+        $makeLink = (1 != $page);
+        
+        //If we're on the first page and using display format 2 or 4, don't do it
+        if (!$makeLink and in_array($displayFormat, array(2, 4))) {
+            return;
+        }
+        
+        return $this->_createLink(1, $texts['first'], $makeLink, 
+            $classes['first'], $classes['firstGhost']);  
+    }
+    
+    protected function _createPreviousLink()
+    {
+        extract(get_object_vars($this));
+        
+        // Make hyperlink whenever we are past the first page
+        $makeLink = ($page > 1);
+        
+        // Don't show un-linked text if using display format 2 or 4
+        if (!$makeLink and in_array($displayFormat, array(2, 4))) {
+            return;
+        }
+        
+        return $this->_createLink($page - 1, $texts['previous'], $makeLink,
+            $classes['previous'], $classes['previousGhost']);     
+    }
+    
+    protected function _createNextLink()
+    {
+        extract(get_object_vars($this));
+        
+        // Only make "next" a hyperlink if the total result count is greater 
+        // than what has been shown so far.
+        $makeLink = $totalCount > $page * $perPageCount;
+        
+        // Don't show un-linked text if using display format 2 or 4
+        if(!$makeLink and in_array($displayFormat, array(2,4))) {
+            return;
+        }
+        
+        return $this->_createLink($page + 1, $texts['next'], $makeLink, 
+            $classes['next'], $classes['nextGhost']);
+    }
+    
+    /**
+     * @internal There is still some duplication in all of these methods
+     * but less than before.
+     * @return string
+     **/
+    protected function _createLastLink()
+    {
+        extract(get_object_vars($this));
+        
+        $makeLink = ($totalPages != $page);
+        
+        // Don't show un-linked text if using display format 2 or 4
+        if(!$makeLink and in_array($displayFormat, array(2,4))) {
+            return;
+        }
+        
+        return $this->_createLink($totalPages, $texts['last'], $makeLink, 
+            $classes['last'], $classes['lastGhost']);
+    }
+    
+    /**
+     * Create the set of page links.  All pages should be hyperlinked unless
+     * except the current page.  All current pages should have the 'currentPage'
+     * class setting as its class, whereas the pages that aren't current
+     * should have the 'pages' class setting as their class.
+     * 
+     * @param integer
+     * @param integer
+     * @return string
+     **/
+    protected function _createPageLinks($start, $finish)
+    {
+        $html = '';
+        for ($i= $start; $i <= $finish; $i++) { 
+            $html .= $this->_createLink($i, $i, ($this->page != $i), 
+                $this->classes['currentPage'], $this->classes['pages']);
+        }
+        return $html;
+    }
+    
+    protected function _createShowPagination()
+    {
+        extract(get_object_vars($this));
+        
+        $show    = $pagesType['show'];
+        $prePad  = floor($show/2);
+        $postPad = ceil($show/2);
+
+        // Show all pages and no ellipses if the show number is greater than 
+        // or equal to the total number of pages.
+        if ($show >= $totalPages) {
+            $pagination .= $this->_createPageLinks(1, $totalPages);
+        // Oterwise, perform calculations to show the specified number of 
+        // pages in the pagination.
+        } else {
+            if (1 < $page - $prePad) {
+                $pagination .= '
+<li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
+            }
+            if (1 > $page - $prePad) {
+                $pagination .= $this->_createPageLinks(1, $show);
+            }
+            if (1 <= $page - $prePad && $totalPages >= $page + $postPad - 1) {
+                $start = $page - $prePad;
+                $finish = $page + $postPad - 1;
+                $pagination .= $this->_createPageLinks($start, $finish);
+            }
+            if ($totalPages < $page + $postPad - 1) {
+                $pagination .= $this->_createPageLinks($totalPages - $show + 1, 
+                    $totalPages);
+            }
+            if ($totalPages > $page + $postPad - 1) {
+                $pagination .= '
+<li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
+            }
+        }
+        
+        return $pagination;
+    }
+    
+    protected function _createPadPagination()
+    {
+        extract(get_object_vars($this));
+
+        $pad = $pagesType['pad'];
+
+        if (1 < $page - $pad) {
+            $pagination .= '<li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
+        }
+                
+        // We won't link to pages that are below 1 (doesn't exist)
+        $start = ($page - $pad) > 0 ? $page - $pad : 1;
+        
+        // We won't link to pages that are above the total # of pages
+        $finish = ($page + $pad) < $totalPages ? $page + $pad : $totalPages;
+        
+        $pagination .= $this->_createPageLinks($start, $finish);
+
+        if ($page < $totalPages - $pad) {
+            $pagination .= '<li class="'.$classes['ellipsis'].'">'.$texts['ellipsis'].'</li>';
+        }
+                
+        return $pagination;        
     }
     
     protected function _sanitizePage($page)
