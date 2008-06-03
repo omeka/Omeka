@@ -423,45 +423,34 @@ class Omeka_Core
      **/
     public function initializeFrontController()
     {
-        // Initialize some stuff
+        // Front controller
         $front = Zend_Controller_Front::getInstance();
-        $router = new Zend_Controller_Router_Rewrite();
-        $router->addConfig($this->getConfig('routes'), 'routes');
-        fire_plugin_hook('add_routes', $router);
-        
-        $router->setFrontController($front);
-        $front->setRouter($router);
-        
-        $front->getDispatcher()->setFrontController($front);
-        
-        // This plugin redirects exceptions to the ErrorController (built in to ZF)
-        $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
-                
+        $front->setControllerDirectory(CONTROLLER_DIR);
+        $front->setRequest(new Zend_Controller_Request_Http);
+        $front->setResponse(new Zend_Controller_Response_Http);
         // This plugin allows Omeka plugins to add controller directories to the 
         // 'default' namespace which prevents weird naming conventions like 
         // Contribution_IndexController.php and obviates the need to hack routes
-        $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack());
+        $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack);
+        // This plugin allows for all functionality that is specific to the 
+        // admin theme.
+        $front->registerPlugin(new Omeka_Controller_Plugin_Admin);
+        // This plugin allows for debugging request objects without inserting 
+        // debugging code into the Zend Framework code files.        
+        $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
         
-        $front->registerPlugin(new Omeka_Controller_Plugin_Admin());
-        $front->registerPlugin(new Omeka_Controller_Plugin_Debug());
+        // Routing
+        $router = new Zend_Controller_Router_Rewrite();
+        $router->addConfig($this->getConfig('routes'), 'routes');
+        fire_plugin_hook('add_routes', $router);
+        $front->setRouter($router);
         
+        // Set contexts
+        $this->setFrontController($front);
+        $this->setRequest($front->getRequest());
+        $this->setResponse($front->getResponse());
         
-        require_once 'Zend/Controller/Request/Http.php';
-        $request = new Zend_Controller_Request_Http();
-        $front->setRequest($request);
-        
-        require_once 'Zend/Controller/Response/Http.php';
-        $response = new Zend_Controller_Response_Http();
-        $front->setResponse($response);
-        
-        //$front->addControllerDirectory(array('default'=>CONTROLLER_DIR));
-        $front->addControllerDirectory(CONTROLLER_DIR);   
-        
-        $this->setFrontController($front); 
-        
-        $this->setRequest($request);
-        $this->setResponse($response);  
-        
+        // Action helpers
         $this->initializeActionHelpers();
     }
     
