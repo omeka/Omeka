@@ -99,6 +99,11 @@ class Omeka_View_Helper_Pagination
         // Set the total number of pages.
         $this->totalPages = ceil($totalCount / $perPageCount);
         
+        // Don't output anything (even <ul>) if we have less results than pages
+        if ( ((float) $totalCount / $perPageCount) < 1) {
+            return;
+        }
+        
         // Begin building the pagination string.
         $pagination = "\n" . '<ul class="'.$classes['pagination'].'">';
         
