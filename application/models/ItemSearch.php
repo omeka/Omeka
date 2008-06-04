@@ -143,9 +143,13 @@ class ItemSearch
     }
     
     /**
-     * Search through the items and metatext table via fulltext, store results in a temporary table
-     * Then search the tags table for atomized search terms (split via whitespace) and store results in the temp table
-     * then join the main query to that temp table and order it by relevance values retrieved from the search
+     * Search query consists of a derived table that is INNER JOIN'ed to
+     * the main SQL query.  That derived table is a union of two SELECT
+     * queries.  The first query searches the FULLTEXT index on the 
+     * items_elements table, and the second query searches the tags table
+     * for every word in the search terms and assigns each found result 
+     * a rank of '1'. That should make tagged items show up higher on the found
+     * results list for a given search.
      *
      * @return void
      **/    
@@ -154,98 +158,68 @@ class ItemSearch
         $db = $this->getDb();
         $select = $this->getSelect();
         
-        // Create a temporary search table (won't last beyond the current request)
-        $tempTable = "{$db->prefix}temp_search";
-        $db->exec("
-            CREATE TEMPORARY TABLE IF NOT EXISTS $tempTable (
-                item_id BIGINT UNIQUE, 
-                rank FLOAT(10) DEFAULT 1, 
-                PRIMARY KEY(item_id)
-            )");
+        /*
+        SELECT i.*, s.rank
+        FROM items i
+        INNER JOIN 
+        (
+            SELECT i.id as item_id, MATCH (ie.text) AGAINST ('foo bar') as rank
+            FROM items i
+            INNER JOIN items_elements ie ON ie.item_id = i.id
+            WHERE MATCH (ie.text) AGAINST ('foo bar')
+            UNION 
+            SELECT i.id as item_id, 1 as rank
+            FROM items i
+            INNER JOIN taggings tg ON (tg.relation_id = i.id AND tg.type = "Item")
+            INNER JOIN tags t ON t.id = tg.tag_id
+            WHERE (t.name = 'foo' OR t.name = 'bar')
+        ) s ON s.item_id = i.id
+        */
         
-        // Search the metatext table
-        $mSelect = new Omeka_Db_Select;
-        $mSearchClause = "MATCH (m.text) AGAINST (".$db->quote($terms).")";
+        $searchQuery  = (string) $this->_getElementsQuery($terms) . " UNION ";
+        $searchQuery .= (string) $this->_getTagsQuery($terms);
+                
+        // INNER JOIN to the main SQL query and then ORDER BY rank DESC
+        $select->joinInner(array('s'=>new Zend_Db_Expr('('. $searchQuery . ')')), 's.item_id = i.id', array())
+            ->order('s.rank DESC'); 
+    }
+    
+    protected function _getElementsQuery($terms)
+    {
+        $db = $this->getDb();
+        $quotedTerms = $db->quote($terms);
+                
+        // This doesn't really need to use a Select object because this query
+        // is not dynamic.  
+        $query = "
+            SELECT i.id as item_id, MATCH (ie.text) AGAINST ($quotedTerms) as rank
+            FROM $db->Item i 
+            INNER JOIN $db->ItemsElements ie ON ie.item_id = i.id
+            WHERE MATCH (ie.text) AGAINST ($quotedTerms)";
         
-        $mSelect->from( array('m'=>"$db->Metatext"), "m.item_id, $mSearchClause as rank");
+        return $query;
+    }
+    
+    protected function _getTagsQuery($terms)
+    {
+        $db = $this->getDb();
         
-        $mSelect->where($mSearchClause);
-        //echo $mSelect;
-        
-        //Put those results in the temp table
-        $insert = "REPLACE INTO $tempTable (item_id, rank) ".$mSelect->__toString();
-        $db->exec($insert);
-        
-        //Search the items table
-        $iSearchClause = "
-        MATCH (
-            i.title, 
-            i.publisher, 
-            i.language, 
-            i.relation, 
-            i.spatial_coverage, 
-            i.rights, 
-            i.description, 
-            i.source, 
-            i.subject, 
-            i.creator, 
-            i.additional_creator, 
-            i.contributor, 
-            i.format,
-            i.rights_holder, 
-            i.provenance, 
-            i.citation
-        ) AGAINST (".$db->quote($terms).")";
-        
-        $itemSelect = new Omeka_Db_Select;
-        $itemSelect->from(array('i'=>"$db->Item"), 
-                          array('item_id'=>'i.id', 'rank'=>$iSearchClause));
-                    
-        $itemSelect->where($iSearchClause);
-        
-        //Grab those results, place in the temp table        
-        $insert = "
-        REPLACE INTO $tempTable (
-            item_id, 
-            rank
-        ) ".$itemSelect->__toString();
-        
-        $db->exec($insert);        
-        
-        //Start pulling in search data for the tags
-        
-        $tagSearchList = preg_split('/\s+/', $terms);
+        $rank = 1;
+
+        $tagList = preg_split('/\s+/', $terms);
         //Also make sure the tag list contains the whole search string, just in case that is found
-        $tagSearchList[] = $terms;
-        
-        $tagSelect = new Omeka_Db_Select;
-        $tagSelect->from(array('t'=>"$db->Tag"), array('item_id'=>'i.id'));
-        $tagSelect->joinInner(array('tg'=>"$db->Taggings"), "tg.tag_id = t.id", array());
-        $tagSelect->joinInner(array('i'=>"$db->Item"), "(i.id = tg.relation_id AND tg.type = 'Item')", array());
-        
-        foreach ($tagSearchList as $tag) {
-            $tagSelect->orWhere("t.name LIKE ?", $tag);
+        $tagList[] = $terms; 
+            
+        $select = new Omeka_Db_Select;
+        $select->from( array('i'=>$db->Item), array('item_id'=>'i.id', 'rank'=>new Zend_Db_Expr($rank)))
+            ->joinInner( array('tg'=>$db->Taggings), 'tg.relation_id = i.id AND tg.type = "Item"', array())
+            ->joinInner( array('t'=>$db->Tag), 't.id = tg.tag_id', array());
+            
+        foreach ($tagList as $tag) {
+            $select->orWhere('t.name LIKE ?', $tag);
         }
-        $db->exec("REPLACE INTO $tempTable (item_id) " . $tagSelect->__toString());
         
-        //Now add a join to the main SELECT SQL statement and sort the results by relevance ranking        
-        $select->joinInner(array('ts'=>$tempTable), 'ts.item_id = i.id', array());
-        $select->order('ts.rank DESC');
-    }
-    
-    /**
-     * Remove the temporary search table
-     *
-     * @return void
-     **/
-    private function clearSearch()
-    {
-        $this->getDb()->query("DROP TABLE IF EXISTS {$db->prefix}temp_search");
-    }
-    
-    public function __destruct()
-    {
-        $this->clearSearch();
+        return $select;
     }
     
 }
