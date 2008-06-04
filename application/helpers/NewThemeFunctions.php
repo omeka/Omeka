@@ -14,8 +14,7 @@
  **/
 function item($field, $options=array())
 {
-    $helper = __get_item_helper();
-    return $helper->item($field, $options);
+    return __v()->item($field, $options);
 }
 
 /**
@@ -37,17 +36,6 @@ function element_metadata($elementName, $field)
             # code...
             break;
     }
-}
-
-/**
- * @access private
- * @return void
- **/
-function __get_item_helper()
-{
-    require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Item.php';
-    $helper = new Omeka_View_Helper_Item;
-    return $helper;   
 }
 
 /**
@@ -309,6 +297,14 @@ function select_item_type($props=array(), $value=null)
 			$value);	
 }
 
+/**
+ * Select the Item Type for the current Item.  This probably won't
+ * be used by any theme writers because it only applies to the form
+ * that the items are on.
+ * 
+ * @param array
+ * @return string HTML for the form input.
+ **/
 function select_item_type_for_item($props=array())
 {
     $item = get_current_item();
@@ -473,11 +469,6 @@ function get_current_file()
 }
 
 function add_item_filter($field, $callback)
-{
-    
-}
-
-function add_filter()
 {
     
 }
