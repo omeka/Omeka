@@ -125,9 +125,6 @@ class EntitiesController extends Omeka_Controller_Action
             $subject = $this->findById($subjectId);
             $object  = $this->findById($objectId);
             
-            echo $subject;
-            echo $object;
-            
             if (!$subject->merge($object)) {
                 throw new Exception( 'Merge failed!' );            
             }
