@@ -1,5 +1,12 @@
 <?php 
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
  * Retrieve the values for a given field in the current item.
  * 
  * @param string
@@ -199,6 +206,45 @@ function item_citation()
     return $cite;
 }
 
+/**
+ * @access private
+ * @param Omeka_Record
+ * @return string
+ **/
+function url_for_record(Omeka_Record $record, $action, $controller = null)
+{
+    $options = array();
+    // Inflect the name of the controller from the record class if no
+    // controller name is given
+    $options['controller'] = !$controller ? 
+        strtolower(Inflector::pluralize(get_class($record))) : $controller;
+    $options['id'] = $record->id;
+    $options['action'] = $action;
+    
+    // Use the 'id' route for all urls pointing to records
+    return url_for($options, 'id');
+}
+
+/**
+ * Retrieve a URL for the current item
+ * 
+ * @param string Action to link to for this item.
+ * @return string URL
+ **/
+function url_for_item($action = 'show')
+{
+    return url_for_record(get_current_item(), $action);
+}
+
+/**
+ * Determine whether or not the current item belongs to a collection.
+ * 
+ * @param string|null The name of the collection that the item would belong
+ * to.  If null, then this will check to see whether the item belongs to
+ * any collection.
+ * @param Item|null Check for this specific item record (current item if null).
+ * @return boolean
+ **/
 function item_belongs_to_collection($name=null, $item=null)
 {
     //Dependency injection
@@ -225,7 +271,7 @@ function display_files_for_item($options=array())
  * @uses current_user_tags()
  * @uses get_current_item()
  * @param string
- * @return void
+ * @return array
  **/
 function current_user_tags_for_item()
 {
@@ -234,6 +280,8 @@ function current_user_tags_for_item()
 }
 
 /**
+ * Determine whether or not the item has any files associated with it.
+ * 
  * @see has_files()
  * @uses Item::hasFiles()
  * @return boolean
@@ -282,6 +330,9 @@ function select_collection($props = array(), $value=null)
     return select($props, $collectionInfo, $value);
 }
 
+/**
+ * @see select_collection()
+ */
 function select_user($props = array(), $value=null)
 {
     $userInfo = get_db()->getTable('User')->findAllForSelectForm();
@@ -289,6 +340,9 @@ function select_user($props = array(), $value=null)
     return select($props, $userInfo, $value);
 }
 
+/**
+ * @see select_institution()
+ */
 function select_institution($props = array(), $value = null)
 {
     $institutionInfo = get_db()->getTable('Entity')->findInstitutionsForSelectForm();
@@ -319,6 +373,24 @@ function set_current_item(Item $item)
     $view = __v();
     $view->previous_item = $view->item;
     $view->item = $item;
+}
+
+/**
+ * @access private
+ */
+function set_items_for_loop($items)
+{
+    $view = __v();
+    $view->items = $items;
+}
+
+/**
+ * @return boolean
+ */
+function has_items_for_loop()
+{
+    $view = __v();
+    return ($view->items and count($view->items));
 }
 
 /**

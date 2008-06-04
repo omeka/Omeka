@@ -1,6 +1,6 @@
 <?php 
 	header ("HTTP/1.0 404 Not Found"); 
-	$items = recent_items('10');
+	$items = set_items_for_loop(recent_items('10'));
 	$collections = recent_collections('5');
 ?>
 
@@ -12,9 +12,9 @@
 	<div id="recent-items">
 	<h2>Items</h2>
 	<ul class="items">
-		<?php foreach($items as $item):?>
-		<li class="item"><?php echo link_to_item($item); ?></li>
-		<?php endforeach; ?>
+		<?php while(loop_items()):?>
+		<li class="item"><?php echo link_to_item(); ?></li>
+		<?php endwhile; ?>
 	</ul>
 	</div>
 	<div id="recent-collections">
