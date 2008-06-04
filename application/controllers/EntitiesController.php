@@ -65,8 +65,6 @@ class EntitiesController extends Omeka_Controller_Action
         return parent::deleteAction();
     }
     
-    
-    
     public function addAction()
     {
         $e = new Entity;
@@ -107,7 +105,7 @@ class EntitiesController extends Omeka_Controller_Action
         
         $entities = $this->getTable()->findBy($options);
                     
-        return $this->render(compact('entities'));
+        $this->view->assign(compact('entities'));
     }
 
     public function mergeAction()

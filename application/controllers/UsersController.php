@@ -22,7 +22,7 @@ require_once 'User.php';
  * @copyright Center for History and New Media, 2007-2008
  **/
 class UsersController extends Omeka_Controller_Action
-{            
+{
     public function init() {
         $this->_modelClass = 'User';
         $this->beforeFilter('checkPermissions');
@@ -66,7 +66,7 @@ class UsersController extends Omeka_Controller_Action
                break;
            default:
                break;
-        }        
+        }
     }
     
     /**
@@ -147,7 +147,7 @@ class UsersController extends Omeka_Controller_Action
             
             if ($user) {
                 //Create the activation url
-                try {    
+                try {
                     $ua->user_id = $user->id;
                     $ua->save();
                     
@@ -157,14 +157,14 @@ class UsersController extends Omeka_Controller_Action
                     $url   = "http://".$_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
                     $body  = "Please follow this link to reset your password:\n\n";
                     $body .= $url."\n\n";
-                    $body .= "$siteTitle Administrator";        
+                    $body .= "$siteTitle Administrator";
                     
                     $admin_email = get_option('administrator_email');
                     $title       = "[$siteTitle] Reset Your Password";
                     $header      = 'From: '.$admin_email. "\n" . 'X-Mailer: PHP/' . phpversion();
                     
                     mail($email,$title, $body, $header);
-                    $this->flash('Your password has been emailed');    
+                    $this->flash('Your password has been emailed');
                 } catch (Exception $e) {
                       $this->flash('your password has already been sent to your email address');
                 }
@@ -191,19 +191,19 @@ class UsersController extends Omeka_Controller_Action
                 $ua->User->active = 1;
                 $ua->User->save();
                 $ua->delete();
-                return $this->_forward('login');                
+                return $this->_forward('login');
             }
         }
         $user = $ua->User;
-        $this->render(compact('user'));
+        $this->view->assign(compact('user'));
     }
     
     /**
      *
      * @return void
      **/
-    public function addAction() 
-    {    
+    public function addAction()
+    {
         $user = new User();
         
         try {
@@ -231,8 +231,8 @@ class UsersController extends Omeka_Controller_Action
         $ua->save();
         
         //send the user an email telling them about their great new user account
-                
-        $siteTitle = get_option('site_title');
+        
+        $siteTitle  = get_option('site_title');
         $from       = get_option('administrator_email');
         $body       = "Welcome!\n\nYour account for the $siteTitle archive has been created. Please click the following link to activate your account:\n\n" . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n$siteTitle Administrator";
         $title      = "Activate your account with the ".$siteTitle." Archive";
@@ -245,7 +245,7 @@ class UsersController extends Omeka_Controller_Action
     {
         $user = $this->findById();
         
-        try {    
+        try {
             //somebody is trying to change the password
             if (!empty($_POST['new_password1'])) {
                 $user->changePassword($_POST['new_password1'], $_POST['new_password2'], $_POST['old_password']);
@@ -275,7 +275,7 @@ class UsersController extends Omeka_Controller_Action
             if ($token->isValid()) {
                 $this->redirect->gotoUrl($session->redirect);
             }
-            return $this->render(array('errorMessage' => $token->getMessages()));
+            $this->view->assign(array('errorMessage' => $token->getMessages()));
         }
     }
     
@@ -293,9 +293,9 @@ class UsersController extends Omeka_Controller_Action
      *
      **/
     public function preDispatch()
-    {        
+    {
         $userActions = array('show','edit');
-                
+        
         if ($current = $this->getCurrentUser()) {
             try {
                 $user = $this->findById();
@@ -303,7 +303,7 @@ class UsersController extends Omeka_Controller_Action
                     foreach ($userActions as $action) {
                         $this->setAllowed($action);
                     }
-                }    
+                }
             } catch (Exception $e) {
             }
         }
@@ -327,7 +327,7 @@ class UsersController extends Omeka_Controller_Action
         $role      = $this->_getParam('role');
         $resource  = $this->_getParam('resource');
         $privilege = $this->_getParam('privilege');
-
+        
         if (!$role || !$resource || !$privilege) {
             Zend_Debug::dump( $this->getCurrentUser() );
             exit;
@@ -346,17 +346,18 @@ class UsersController extends Omeka_Controller_Action
         set_option('acl', serialize($acl));
         
         //Render the form so that we can use it in the AJAX update
-        $this->render(compact('hasPermission', 'role', 'resource', 'privilege'), 'role-form');
+        $this->view->assign(compact('hasPermission', 'role', 'resource', 'privilege'));
+        $this->render('role-form');
     }
-
-/**
- * Define Roles Actions
- */        
+    
+    /**
+     * Define Roles Actions
+     */
     public function rolesAction()
     {
         $acl = $this->getAcl();
         $resources = $acl->getResourceList();
         $roles = $acl->getRoleNames();
-        $this->render(compact('acl', 'resources', 'roles'));
+        $this->view->assign(compact('acl', 'resources', 'roles'));
     }
 }

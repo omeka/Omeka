@@ -22,10 +22,10 @@ require_once 'Omeka/Controller/Action.php';
  * @copyright Center for History and New Media, 2007-2008
  **/
 class TagsController extends Omeka_Controller_Action
-{    
+{
     public function init()
     {
-        $this->_modelClass = 'Tag';    
+        $this->_modelClass = 'Tag';
     }
     
     public function editAction()
@@ -35,10 +35,10 @@ class TagsController extends Omeka_Controller_Action
             if (!empty($_POST)) {
                 $this->editTags($user);
             }
-                    
+            
             $tags = $this->getTagsforAdministration();
-                        
-            return $this->render(compact('tags'));
+            
+            $this->view->assign(compact('tags'));
         }
     }
     
@@ -57,9 +57,9 @@ class TagsController extends Omeka_Controller_Action
                 }
                 $this->flashSuccess("Tag named '{$tag->name}' was successfully deleted.");
             }
-                        
+            
             $tags = $this->getTagsForAdministration();
-            return $this->render(compact('tags'));
+            $this->view->assign(compact('tags'));
         }
     }
     
@@ -127,7 +127,7 @@ class TagsController extends Omeka_Controller_Action
         }
         //Since tagType must correspond to a valid classname, this will barf an error on Injection attempts
         if (!class_exists($for)) {
-            throw new Exception( 'Invalid tagType given' );
+            throw new Exception('Invalid tagType given');
         }
         
         if($record = $this->_getParam('record')) {
@@ -152,6 +152,6 @@ class TagsController extends Omeka_Controller_Action
         
         $browse_for = $for;
         
-        return $this->render(compact('tags','total_tags', 'browse_for'));
+        $this->view->assign(compact('tags', 'total_tags', 'browse_for'));
     }
 }

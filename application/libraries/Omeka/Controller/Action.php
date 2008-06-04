@@ -237,8 +237,8 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         // Fire the plugin hook
         fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $records);
                 
-        return $this->render(array($pluralName => $records, 
-                                   'total_records' => $totalRecords));
+        $this->view->assign(array($pluralName     => $records, 
+                                  'total_records' => $totalRecords));
     }
     
     /**
@@ -257,7 +257,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         
         fire_plugin_hook('show_' . strtolower(get_class($record)), $record);
         
-        return $this->render(array($varName => $record));
+        $this->view->assign(array($varName => $record));
     }
     
     /**
@@ -287,7 +287,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             $this->flash($e->getMessage());
         }
 
-        return $this->render(array($varName=>$record));            
+        $this->view->assign(array($varName=>$record));            
     }
     
     /**
@@ -313,7 +313,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             $this->flash($e->getMessage());
         }
         
-        return $this->render(array($varName=>$record));        
+        $this->view->assign(array($varName=>$record));        
     }
     
     /**
@@ -363,24 +363,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     }
     
     ///// END BASIC CRUD INTERFACE /////
-    
-    /**
-     * Mostly an alias for Zend_Controller_Action::render().  
-     * 
-     * Differences are that it 
-     * 
-     * @param string
-     * @return void
-     **/
-    public function render(array $vars = array(), $action=null, $name=null, $noController=null)
-    {    
-        $this->view->assign($vars);
-
-        //Take advantage of built-in behavior
-        if ($action) {
-            return parent::render($action,$name,$noController);
-        }
-    }
     
     /**
      * Find a particular record given its unique ID # and (optionally) its class name.  

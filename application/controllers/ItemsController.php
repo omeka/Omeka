@@ -19,7 +19,7 @@ require_once 'Omeka/Controller/Action.php';
  * @copyright Center for History and New Media, 2007-2008
  **/
 class ItemsController extends Omeka_Controller_Action
-{        
+{
     public function init() 
     {
         $this->_modelClass = 'Item';
@@ -42,8 +42,8 @@ class ItemsController extends Omeka_Controller_Action
                 return parent::editAction();    
             }
         }
-
-        return $this->forbiddenAction();
+        
+        $this->forbiddenAction();
     }
     
     /**
@@ -63,7 +63,7 @@ class ItemsController extends Omeka_Controller_Action
             }
         }
         
-        return $this->_forward('forbidden');
+        $this->_forward('forbidden');
     }
     
     /**
@@ -75,7 +75,7 @@ class ItemsController extends Omeka_Controller_Action
     {
         $params = array_merge($this->_getAllParams(), array('type'=>'Item'));
         $tags = $this->getTable('Tag')->findBy($params);
-        $this->render(compact('tags'));
+        $this->view->assign(compact('tags'));
     }
     
     /**
@@ -213,8 +213,8 @@ class ItemsController extends Omeka_Controller_Action
         Zend_Registry::set('pagination', $pagination);
         
         fire_plugin_hook('browse_items', $items);
-                        
-        return $this->render(compact('total_items', 'items'));
+        
+        $this->view->assign(compact('total_items', 'items'));
     }
         
     /**
@@ -233,7 +233,7 @@ class ItemsController extends Omeka_Controller_Action
             $perPage = $this->_getParam('per_page');
         }     
         
-        return $perPage;   
+        return $perPage;
     }
     
     ///// AJAX ACTIONS /////
@@ -251,7 +251,7 @@ class ItemsController extends Omeka_Controller_Action
         }
         
         $item->item_type_id = (int) $_POST['type_id'];
-        return $this->render(compact('item'));
+        $this->view->assign(compact('item'));
     }
     
     /**
@@ -262,7 +262,7 @@ class ItemsController extends Omeka_Controller_Action
     public function tagFormAction()
     {
         $item = $this->findById();
-        return $this->render(compact('item'));
+        $this->view->assign(compact('item'));
     }
     
     /**
@@ -294,7 +294,8 @@ class ItemsController extends Omeka_Controller_Action
                                                     'id'         => $itemId), 'id');
         }
         
-        return $this->render(compact('item'), 'tag-list');        
+        $this->view->assign(compact('item'));
+        $this->render('tag-list');
     }
     
     ///// END AJAX ACTIONS /////
@@ -342,14 +343,14 @@ class ItemsController extends Omeka_Controller_Action
                     if (!$old and $new) {
                         fire_plugin_hook('make_item_public', $item);
                     }
-                                    
+                    
                     //If public has been checked
                     $item->public = $new;
                     
                     $item->featured = array_key_exists('featured', $fields);
-                                    
+                    
                     $item->save();
-                }        
+                }
             }
             
             $this->flashSuccess('Changes were successful');

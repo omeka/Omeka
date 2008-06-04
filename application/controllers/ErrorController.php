@@ -39,6 +39,7 @@ class ErrorController extends Omeka_Controller_Action
         }
         
         $this->logException($e, Zend_Log::ERR);
+        
         return $this->renderException($e);
     }
     
@@ -69,25 +70,29 @@ class ErrorController extends Omeka_Controller_Action
     }
     
     protected function renderException(Exception $e)
-    {        
+    {
+        $this->view->assign(compact('e'));
         if ($this->isInDebugMode()) {
             ini_set('memory_limit', '64M');
-            return $this->render(compact('e'), 'debug');
+            $this->render('debug');
         } else {
-            return $this->render(compact('e'), 'index');
+            $this->render('index');
         }
     }
-            
+    
     protected function render404($e)
     {
         $this->getResponse()->setHttpResponseCode(404);
-        return $this->render(array('badUri' => $this->getRequest()->getRequestUri(), 'e'=>$e), '404');
+        $this->view->assign(array('badUri' => $this->getRequest()->getRequestUri(), 
+                                  'e' => $e));
+        $this->render('404');
     }
     
     protected function render403($e)
     {
         $this->getResponse()->setHttpResponseCode(403);
-        return $this->render(array('e'=>$e), '403');
+        $this->view->assign(array('e' => $e));
+        $this->render('403');
     }
     
     protected function isInDebugMode()
@@ -95,5 +100,4 @@ class ErrorController extends Omeka_Controller_Action
         $config = Omeka_Context::getInstance()->getConfig('basic');
         return (bool) $config->debug->exceptions;
     }
-
 }

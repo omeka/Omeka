@@ -27,8 +27,6 @@ class SettingsController extends Omeka_Controller_Action
     }
     
     public function editAction() {
-        
-        
         //Any changes to this list should be reflected in the install script (and possibly the view functions)        
         $settingsList = array('site_title', 
                               'copyright',
@@ -47,10 +45,10 @@ class SettingsController extends Omeka_Controller_Action
                 $settings[$k] = $v;
             }
         }
-                
+        
         $optionTable = $this->getTable('Option')->getTableName();
         $conn = $this->getDb();
-                        
+        
         //process the form
         if (!empty($_POST)) {
             $sql = "UPDATE $optionTable SET value = ? WHERE name = ?";
@@ -67,6 +65,6 @@ class SettingsController extends Omeka_Controller_Action
             $this->flash("Settings have been changed.");
         }
         
-        $this->render($settings);
+        $this->view->assign($settings);
     }
 }

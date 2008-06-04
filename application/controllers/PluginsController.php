@@ -51,7 +51,7 @@ class PluginsController extends Omeka_Controller_Action
         // If the configuration function returns output, then we need to render 
         // that because it is a form
         if ($config !== null) {
-            return $this->render(compact('config', 'plugin'));
+            $this->view->assign(compact('config', 'plugin'));
         } else {
             $this->flashSuccess('Plugin configuration successfully changed!');
             $this->redirect->goto('browse');    
@@ -73,18 +73,18 @@ class PluginsController extends Omeka_Controller_Action
             $config = $broker->install($plugin);
             
             if ($config !== null) {
-                return $this->render(compact('config', 'plugin'));
+                $this->view->assign(compact('config', 'plugin'));
             } else {
                 $this->flashSuccess("Plugin named '$plugin' was successfully installed!");
                 $this->redirect->goto('browse');
-            }            
+            }
         }
     }
     
     public function activateAction()
     {
         // Get the plugin record, toggle its status and save it back
-        $plugin = $this->getTable()->findBySql('name = ?', array($_POST['activate']), true );
+        $plugin = $this->getTable()->findBySql('name = ?', array($_POST['activate']), true);
             
         // Toggle!
         $plugin->active = !($plugin->active);
@@ -137,8 +137,8 @@ class PluginsController extends Omeka_Controller_Action
             
             $plugins[] = $plugin;
         }
-                
-        return $this->render(compact('plugins'));
+        
+        $this->view->assign(compact('plugins'));
     }
     
     public function uninstallAction()

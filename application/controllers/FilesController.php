@@ -22,62 +22,62 @@ require_once 'Omeka/Controller/Action.php';
  **/
 class FilesController extends Omeka_Controller_Action
 {
-	public function init()
+    public function init()
     {
-		$this->_modelClass = 'File';
-	}
-	
-	public function indexAction()
+        $this->_modelClass = 'File';
+    }
+    
+    public function indexAction()
     {
         $this->redirect->gotoUrl('');
     }
-	
-	// Should not browse files by themselves
-	public function browseAction() {}
-	
-	public function addAction() {}
-	
-	public function showAction()
-	{
-		$file = $this->findById();
-														
-		Zend_Registry::set('file', $file);
-		$this->render(compact('file'));
-	}
     
-	protected function isValidFormat($format)
-	{
-		return in_array($format, array('fullsize', 'thumbnail', 
+    // Should not browse files by themselves
+    public function browseAction() {}
+    
+    public function addAction() {}
+    
+    public function showAction()
+    {
+        $file = $this->findById();
+        
+        Zend_Registry::set('file', $file);
+        $this->view->assign(compact('file'));
+    }
+    
+    protected function isValidFormat($format)
+    {
+        return in_array($format, array('fullsize', 'thumbnail', 
                                        'archive', 'square_thumbnail'));
-	}
+    }
     
-	protected function isValidDisposition($type)
-	{
-		return in_array($type, array('attachment', 'inline'));
-	}
+    protected function isValidDisposition($type)
+    {
+        return in_array($type, array('attachment', 'inline'));
+    }
     
-	public function getAction()
-	{
-		$format = $this->_getParam('format');
-		
-		if (!$this->isValidFormat($format)) {
-			$this->forbiddenAction();
-		}
-		
-		$file = $this->findById();		
-		
-		// If we don't have any images associated with this file, then use the 
+    public function getAction()
+    {
+        $format = $this->_getParam('format');
+        
+        if (!$this->isValidFormat($format)) {
+            $this->forbiddenAction();
+        }
+        
+        $file = $this->findById();
+        
+        // If we don't have any images associated with this file, then use the 
         // full archive path
-		if (!$file->has_derivative_image) {
-			$format = 'archive';
-		}
+        if (!$file->has_derivative_image) {
+            $format = 'archive';
+        }
         
-		// Otherwise use the chosen format of the image
-		$path = $file->getWebPath($format);
+        // Otherwise use the chosen format of the image
+        $path = $file->getWebPath($format);
         
-		header('Location: '.$path);
-		
-		//Don't render anything
-		$this->_helper->viewRenderer->setNoRender();
-	}
+        header('Location: '.$path);
+        
+        //Don't render anything
+        $this->_helper->viewRenderer->setNoRender();
+    }
 }

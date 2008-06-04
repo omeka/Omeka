@@ -18,24 +18,25 @@ require_once 'Omeka/Controller/Action.php';
  **/
 class TypesController extends Omeka_Controller_Action
 {
-	public function init()
-	{
-		$this->_modelClass = 'Type';
-	}
-	
-	/**
-	 * Ajax Action for adding metafields to the type form
-	 * 
-	 * @return void
-	 **/
-	public function addMetafieldAction()
-	{
-	    //If we're going to add a metafield that already exists, grab a current list	    
-	   if ($this->_getParam('exists') == 'true') {	       
-	       $metafields = $this->getTable('Metafield')->findAll();
-	       return $this->render(compact('metafields'), 'existing-metafield');
-	   } else {
-	       return $this->render(array(), 'new-metafield');
-	   }
-	}
+    public function init()
+    {
+        $this->_modelClass = 'Type';
+    }
+    
+    /**
+     * Ajax Action for adding metafields to the type form
+     * 
+     * @return void
+     **/
+    public function addMetafieldAction()
+    {
+        //If we're going to add a metafield that already exists, grab a current list        
+       if ($this->_getParam('exists') == 'true') {           
+           $metafields = $this->getTable('Metafield')->findAll();
+           $this->view->assign(compact('metafields'));
+           $this->render('existing-metafield');
+       } else {
+           $this->render('new-metafield');
+       }
+    }
 }
