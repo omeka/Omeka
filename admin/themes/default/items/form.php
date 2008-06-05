@@ -1,17 +1,17 @@
 <?php echo js('tooltip'); ?>
 <script type="text/javascript" charset="utf-8">
 	Event.observe(window,'load', function() {
-		ajaxifyTagRemoval();
+		Omeka.ItemForm.enableTagRemoval();
 		//Create tooltips for all spans with class="tooltip"
-		makeTooltips($$('.tooltip'));
-		changeTypeMetadata();
+		Omeka.ItemForm.makeTooltips($$('.tooltip'));
+		Omeka.ItemForm.changeItemType();
 		filesAdding();
 	});
-	
-	//Update the type metadata every time a different Item Type is selected	
-	function changeTypeMetadata()
-	{
-		var typeSelect = $('item-type');
+
+    Omeka.ItemForm = Omeka.ItemForm || {};
+        
+    Omeka.ItemForm.changeItemType = function() {
+        var typeSelect = $('item-type');
 		$('change_type').hide();
 		typeSelect.onchange = function() {
 			var typeSelectLabel = $$('#type-select label')[0];
@@ -32,17 +32,16 @@
 					image.remove();
 					form.update(t.responseText);
 					var spans = form.select('.tooltip');
-					makeTooltips(spans);
+					Omeka.ItemForm.makeTooltips(spans);
 					Effect.BlindDown(form);
 				}
 			});
-		}
-	}
-	
-	/* Loop through all the spans with class="tooltip" and make them visible 
+		}        
+    };
+    
+    /* Loop through all the spans with class="tooltip" and make them visible 
 	as tooltips */
-	function makeTooltips(tooltipElements)
-	{        
+    Omeka.ItemForm.makeTooltips = function(tooltipElements) {
 		tooltipElements.each(function(span){
 		   //The div that wraps the tooltip and the form element
 		   var div = span.up();
@@ -57,28 +56,23 @@
 		   var tooltip = new Tooltip(image, span, 
 		       {default_css:true, zindex:100000});
 		   span.addClassName('info-window');
-		});			
-	}
+		});        
+    }
 	
-	//Messing with the tag list should not submit the form.  Instead it runs an AJAX request to remove tags
-	function ajaxifyTagRemoval()
-	{
-		if(!$('tags-list')) return;
-		var buttons = $('tags-list').getElementsByTagName('input');
+	/* Messing with the tag list should not submit the form.  Instead it runs 
+	an AJAX request to remove tags */
+	Omeka.ItemForm.enableTagRemoval = function() {		
+		if ( !(buttons = $$('#tags-list input')) ) {
+		    return;
+		}
 		
-		for (var i=0; i < buttons.length; i++) {
-			buttons[i].onsubmit = function() {
-				return false;
-			}
-			buttons[i].onclick = function() {
-				removeTag(this);
-				return false;
-			};
-		};		
+		buttons.invoke('observe', 'click', function(e) {
+		    e.stop();
+		    Omeka.ItemForm.removeTag(this);
+		});
 	}
 	
-	function removeTag(button)
-	{
+	Omeka.ItemForm.removeTag = function(button) {
 		var tagId = button.value;
 		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
 
@@ -93,7 +87,7 @@
 					},
 					onComplete: function() {
 					    Effect.Appear('tag-form', {duration: 1.0});
-						ajaxifyTagRemoval();
+						Omeka.ItemForm.enableTagRemoval();
 					}
 				});
 			},
