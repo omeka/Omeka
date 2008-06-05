@@ -43,6 +43,12 @@ class EntityTable extends Omeka_Db_Table
         return $unique;
     }
     
+    protected function _getColumnPairs()
+    {
+        return array('e.id', 'e.name' => new Zend_db_Expr( 
+            'CONCAT_WS(" ", e.first_name, e.middle_name, e.last_name, e.institution)'));
+    }
+    
     public function findInstitutionsForSelectForm()
     {
         $select = $this->getSelect();

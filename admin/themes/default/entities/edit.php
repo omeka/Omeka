@@ -6,7 +6,8 @@
 		<input type="hidden" name="merger" value="<?php echo h($entity->id); ?>" />
 		<?php $entities = entities(); ?>
 		<?php 
-			select('mergee', $entities, null, 'Choose an entity to merge with the current one:', 'id', 'name'); 
+		    echo label(array('for'=>'mergee'), 'Choose an entity to merge with the current one:');
+		    echo select_entity(array('name'=>'mergee'));
 		?>
 		<input type="submit" name="submit" value="Merge these" />
 	</form>

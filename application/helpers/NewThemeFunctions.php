@@ -290,11 +290,19 @@ function item_has_files()
  **/
 function select_item_type($props=array(), $value=null)
 {
-    $itemTypes = get_db()->getTable('ItemType')->findAllForSelectForm();
-        
-    return select(	$props,
-			$itemTypes,
-			$value);	
+    return _select_from_table('ItemType', $props, $value);	
+}
+
+/**
+ * @access private
+ * @param array
+ * @param mixed
+ * @return string HTML for a <select> input.
+ **/
+function _select_from_table($tableClass, $props = array(), $value = null)
+{
+    $options = get_db()->getTable($tableClass)->findPairsForSelectForm();
+    return select($props, $options, $value);
 }
 
 /**
@@ -312,38 +320,36 @@ function select_item_type_for_item($props=array())
 }
 
 /**
- * @see CollectionTable::findAllForSelectForm()
  * @param array
  * @param string
  * @return string
  **/
 function select_collection($props = array(), $value=null)
 {
-    //$collectionInfo should be an array where key => collection_id, value =>
-    //collection name.
-    $collectionInfo = get_db()->getTable('Collection')->findAllForSelectForm();
-
-    return select($props, $collectionInfo, $value);
+    return _select_from_table('Collection', $props, $value);
 }
 
 /**
- * @see select_collection()
+ * @uses _select_from_table()
  */
 function select_user($props = array(), $value=null)
 {
-    $userInfo = get_db()->getTable('User')->findAllForSelectForm();
-    
-    return select($props, $userInfo, $value);
+    return _select_from_table('User', $props, $value);
 }
 
-/**
- * @see select_institution()
- */
 function select_institution($props = array(), $value = null)
 {
     $institutionInfo = get_db()->getTable('Entity')->findInstitutionsForSelectForm();
     
     return select($props, $institutionInfo, $value);
+}
+
+/**
+ * @uses _select_from_table()
+ */
+function select_entity($props = array(), $value = null)
+{
+    return _select_from_table('Entity', $props, $value);
 }
 
 /**

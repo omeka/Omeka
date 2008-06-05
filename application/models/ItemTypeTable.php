@@ -15,22 +15,10 @@
  **/
 class ItemTypeTable extends Omeka_Db_Table
 {
-    /**
-     * Duplicated from findAllForSelectForm().  May be useful as a method
-     * in Omeka_Db_Table, but it remains to be seen whether implementation
-     * will require it.
-     * 
-     * @see CollectionTable::findAllForSelectForm()
-     * @see select_item_type()
-     * @return array
-     **/
-    public function findAllForSelectForm()
+    protected $_alias = 'it';
+    
+    protected function _getColumnPairs()
     {
-        $select = new Omeka_Db_Select;
-        $db = $this->getDb();
-        $select->from(array('it'=>$db->ItemType), array('it.id', 'it.name'));
-
-        $pairs = $db->fetchPairs($select);
-        return $pairs;
+        return array('it.id', 'it.name');
     }
 }

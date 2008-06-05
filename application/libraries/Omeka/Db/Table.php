@@ -36,6 +36,14 @@ class Omeka_Db_Table
     protected $_name;
     
     /**
+     * The alias used for this table.  If not given, it will be inflected.
+     * 
+     * @see Omeka_Db_Table::getTableAlias()
+     * @var string
+     **/
+    protected $_alias;
+    
+    /**
      * Instantiate
      * 
      * @param string Class name of the table's model
@@ -55,7 +63,7 @@ class Omeka_Db_Table
      * @return string
      **/
     public function getTableAlias() {
-        return strtolower($this->_target[0]);
+        return !empty($this->_alias) ? $this->_alias : strtolower($this->_target[0]);
     }
     
     /**
@@ -148,6 +156,37 @@ class Omeka_Db_Table
     {
         $select = $this->getSelect();
         return $this->fetchObjects($select);
+    }
+    
+    /**
+     * Retrieve an array of key=>value pairs that can be used as options in a 
+     * <select> form input.  As it applies to the given table.
+     * 
+     * @return array
+     **/
+    public function findPairsForSelectForm()
+    {
+        $select = $this->getSelect();
+        $select->reset('columns');
+        $select->from(array(), $this->_getColumnPairs());
+        $pairs = $this->getDb()->fetchPairs($select);
+        return $pairs;
+    }
+    
+    /**
+     * Retrieve the array of columns that are used by findPairsForSelectForm().
+     * 
+     * This is a template method because these columns are different for every
+     * table, but the underlying logic that retrieves the pairs from the 
+     * database is the same in every instance.  This is an attempt to stay DRY.
+     * 
+     * @see Omeka_Db_Table::findPairsForSelectForm()
+     * @return array
+     **/
+    protected function _getColumnPairs()
+    {
+        throw new Exception('Column pairs must be defined in order to use ' .
+            'Omeka_Db_Table::findPairsForSelectForm()!');
     }
     
     /**
