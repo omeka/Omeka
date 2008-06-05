@@ -1,8 +1,19 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 /**
-* 
-*/
+ * Helper used to retrieve metadata for an item.
+ *
+ * @see item()
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_View_Helper_Item
 {
     /**
@@ -12,38 +23,89 @@ class Omeka_View_Helper_Item
      * Will create a set of list elements for titles. 
      * 
      * @param string Field name to retrieve
+     * @param mixed Options for formatting the metadata for display.
+     * Default options: 
+     *  'delimiter' => return the entire set of metadata
+     *      as a string, where each entry is separated by the string delimiter.
+     *  'index' => return the metadata entry at the specific index (starting)
+     *      from 0. 
+     *  'noFilter' => return the set of metadata without running any of the 
+     *      filters.
+     *
      * @return string|array|null Null if field does not exist for item.  String
      * if certain options are passed.  Array otherwise.
      **/
     public function item($field, $options=array())
     {
-        $text = $this->getElementText($field);
+        //Convert the shortcuts for the options into a proper array
+        $options = $this->_getOptions($options);
         
-        $text = $this->filterElementText($text);
+        $text = $this->getElementText($field, $options);
         
-        //If this is an integer, return the text at that particular index
-        if(is_integer($options)) {
-            return @$text[$options];
+        if(!isset($options['noFilter'])) {
+            $text = $this->filterElementText($text, $field);
         }
         
-        //If options is a string, join the element text on that string
-        if(is_string($options)) {
-            return join($options, $text);
-        }     
+        return $this->_formatWithOptions($text, $options);        
+    }
+    
+    /**
+     * Format the set of text based on the options passed to the helper.
+     * 
+     * @param array|string
+     * @param array
+     * @return mixed
+     **/
+    protected function _formatWithOptions($text, array $options)
+    {
+        // Return the join'd text
+        if(isset($options['delimiter'])) {
+            return join($options['delimiter'], (array) $text);
+        }
+        
+        // Return the text at that index (suppress errors)
+        if(isset($options['index'])) {
+            return @$text[$options['index']];
+        }
         
         return $text;
+    }
+    
+    /**
+     * Options can sometimes be an integer or a string instead of an array,
+     * which functions as a handy shortcut for theme writers.  This converts
+     * the short form of the options into its proper array form.
+     * 
+     * @param mixed
+     * @return array
+     **/
+    protected function _getOptions($options)
+    {
+        if(is_integer($options)) {
+            return array('index'=>$options);
+        }
+        
+        if(is_string($options)) {
+            return array('delimiter'=>$options);
+        }
+        
+        return (array) $options;
     }
     
     /**
      * Apply filters a set of element text.
      * 
      * @todo
-     * @param array Hash of element names containing arrays of element text
+     * @param array Set of element text.
      * values.
      * @return array Same structure but run through filters.
      **/
-    public function filterElementText($elements)
+    public function filterElementText($elements, $field)
     {
+        // if($pluginBroker = Omeka_Context::getInstance()->getPluginBroker()) {
+        //     $elements = $pluginBroker->applyOutputFilters($field, $elements);
+        // }
+        
         return $elements;
     }
     
@@ -65,6 +127,15 @@ class Omeka_View_Helper_Item
             
     }
     
+    /**
+     * Retrieve the value of any field for an item that does not correspond to
+     * an Element record.  Examples include the database ID of the item, the
+     * name of the item type, the name of the collection, etc.
+     * 
+     * @param string
+     * @param Item
+     * @return mixed
+     **/
     public function getOtherField($field, $item)
     {
         switch (strtolower($field)) {
@@ -86,7 +157,13 @@ class Omeka_View_Helper_Item
         }
     }
     
-    public function getElementText($field)
+    /**
+     * Retrieve the set of element text for the item.
+     * 
+     * @param string
+     * @return array|string
+     **/
+    public function getElementText($field, array $options)
     {
         $item = get_current_item();
         
