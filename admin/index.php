@@ -16,27 +16,29 @@
 // Ladies and Gentlemen, start your timers
 define('APP_START', microtime(true));
 
-//Used by _define_web_root()
+// Flag this as the admin theme. Used by _define_web_root() function in paths.php.
 define('ADMIN', true);
 
-// include the paths and define a theme path
+// Define the directory and web paths.
 include '../paths.php';
-define('THEME_DIR', ADMIN_DIR.DIRECTORY_SEPARATOR.$site['admin_theme']);
 
+// Define the admin theme directory path.
+define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . $site['admin_theme']);
+
+// Initialize Omeka.
 require_once 'Omeka/Core.php';
 $core = new Omeka_Core;
 $core->initialize();
 
-//Let the request know that we want to go through the admin interface.
+// Let the request know that we want to go through the admin interface.
 $core->getRequest()->setParam('admin', true);
 
-#############################################
-# DISPATCH THE REQUEST
-#############################################
+// Call the dispatcher which echos the response object automatically
 $core->dispatch();
 
+// Ladies and Gentlemen, stop your timers
 if ((boolean) $config->debug->timer) {
-	echo microtime(true) - APP_START;
+    echo microtime(true) - APP_START;
 }
 
-?>
+// We're done here.
