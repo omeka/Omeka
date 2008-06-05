@@ -89,7 +89,7 @@ function _define_web_root()
     
     // As $_SERVER['HTTP_HOST'] is user input, ensure it only contains 
     // characters allowed in hostnames.
-    $base_url = $base_root . '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
+    $base_url = $base_root .= '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
     
     // $_SERVER['SCRIPT_NAME'] can, in contrast to $_SERVER['PHP_SELF'], not
     // be modified by a visitor.
