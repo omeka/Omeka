@@ -30,7 +30,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-abstract class Omeka_Record_Module
+abstract class Omeka_Record_Mixin
 {
 	protected $record;
 	

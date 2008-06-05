@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Taggable extends Omeka_Record_Module
+class Taggable extends Omeka_Record_Mixin
 {    
     public function __construct(Omeka_Record $record) {
         

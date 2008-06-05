@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Orderable extends Omeka_Record_Module
+class Orderable extends Omeka_Record_Mixin
 {
     public function __construct($record, $childClass, $childFk, $childPluralized)
     {

@@ -25,7 +25,7 @@ class Collection extends Omeka_Record
     
     public function construct()
     {
-        $this->_modules[] = new Relatable($this);
+        $this->_mixins[] = new Relatable($this);
     }
     
     public function hasCollectors()

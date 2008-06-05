@@ -39,8 +39,8 @@ class Item extends Omeka_Record
     
     protected function construct()
     {
-        $this->_modules[] = new Taggable($this);
-        $this->_modules[] = new Relatable($this);
+        $this->_mixins[] = new Taggable($this);
+        $this->_mixins[] = new Relatable($this);
     }
     
     /**
@@ -197,16 +197,6 @@ class Item extends Omeka_Record
                 $mt_obj->save();
             }            
         }
-    }
-    
-    /**
-     * Save metatext provided via Item::setMetatext
-     *
-     * @return void
-     **/
-    protected function afterSave()
-    {
-        $this->saveMetatext();
     }
     
     private function removeOtherTag($tag_id)

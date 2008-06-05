@@ -26,7 +26,7 @@ class Omeka_Record implements ArrayAccess
     protected $_cache = array();
     
     // Ex. Taggable, Relatable, any object that acts as a mixin for Omeka_Record
-    protected $_modules = array();
+    protected $_mixins = array();
     
     /**
      * Would be declared like thus:  
@@ -83,27 +83,27 @@ class Omeka_Record implements ArrayAccess
         return $data;
     }
     
-    //Delegate to the $_modules for mixin-like behavior
+    //Delegate to the $_mixins for mixin-like behavior
     public function __call($m, $a)
     {
-        return $this->delegateToModules($m, $a);
+        return $this->delegateToMixins($m, $a);
     }
     
     /**
-     * Instances of Omeka_Record_Modules (which are mostly plugins though they mix behavior)
+     * Instances of Omeka_Record_Mixins (which are mostly plugins though they mix behavior)
      *
      * @return void
      **/
-    protected function delegateToModules($method, $args = array(), $all = false)
+    protected function delegateToMixins($method, $args = array(), $all = false)
     {
-        foreach ($this->_modules as $k => $module) {
-            if (method_exists($module, $method)) {
+        foreach ($this->_mixins as $k => $mixin) {
+            if (method_exists($mixin, $method)) {
                 $called = true;
-                $res = call_user_func_array(array($module, $method), $args);
+                $res = call_user_func_array(array($mixin, $method), $args);
                 if (!$all) return $res;
             }
         }
-        if (count($this->_modules) and !$called) {
+        if (count($this->_mixins) and !$called) {
             throw new Exception( "Method named $method does not exist!"  );
         }
     }
@@ -112,7 +112,7 @@ class Omeka_Record implements ArrayAccess
      * Maybe this is an error in design, but right now there are 3 different 
      * types of callbacks within Omeka_Record:
      *        Omeka_Record hooks like Omeka_Record::afterDelete()
-     *        Record module hooks like Taggable::afterSave()
+     *        Record mixin hooks like Taggable::afterSave()
      *        Plugin hooks like 'before_delete_item'
      * 
      * This function handles that stack in the proper order while reducing the 
@@ -132,7 +132,7 @@ class Omeka_Record implements ArrayAccess
         call_user_func_array(array($this, $event), $args);
         
         // Module callbacks
-        $this->delegateToModules($event, $args, true);
+        $this->delegateToMixins($event, $args, true);
         
         
         // Format the name of the plugin hook so it's in all lowercase with 
