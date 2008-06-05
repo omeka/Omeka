@@ -250,7 +250,7 @@ class Omeka_Core
     {
         require_once 'Zend/Config/Ini.php';
         
-        $db_file = CONFIG_DIR . DIRECTORY_SEPARATOR . 'db.ini';
+        $db_file = BASE_DIR . DIRECTORY_SEPARATOR . 'db.ini';
         
         if (!file_exists($db_file)) {
             throw new Zend_Config_Exception('Your Omeka database configuration file is missing.');
