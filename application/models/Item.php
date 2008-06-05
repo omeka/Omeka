@@ -30,14 +30,6 @@ class Item extends Omeka_Record
     public $featured = 0;
     public $public = 0;    
     
-    /**
-     *
-     * @see Item::setMetatext()
-     *
-     * @return void
-     **/
-    protected $_metatext;
-    
     protected $_related = array('Collection'=>'getCollection', 
                                 'TypeMetadata'=>'getTypeMetadata', 
                                 'Tags'=>'getTags',
@@ -272,33 +264,6 @@ class Item extends Omeka_Record
                     throw $e;
                 }
             }
-        }
-    }
-    
-    /**
-     * Saves any extended metatext that was set via Item::setMetatext()
-     *
-     * @return void
-     **/
-    private function saveMetatext()
-    {
-        if (!empty($this->_metatext)) {
-            foreach ($this->_metatext as $field => $text) {
-                //Retrieve the metafield_id given the name of the $field
-                $metafield_id = $this->getTable('Metafield')->findIdFromName($field);
-                
-                if (!$metafield_id) {
-                    throw new Exception( 'There is no metafield with the name:' . $field . "!" );
-                }
-                
-                //Retrieve a metatext object corresponding to that field for this item
-                $mt_obj = $this->getTable('Metatext')->findByItemAndMetafield($this->id, $metafield_id);
-                
-                $mt_obj->text = $text;
-                
-                //Save the Metatext row
-                $mt_obj->save();
-            }            
         }
     }
     

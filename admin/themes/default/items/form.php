@@ -210,7 +210,7 @@
 	    'Citation'); 
 	    
 	    //@todo Move this to the controller.
-	    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, 'dublin_core');
+	    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, 'Dublin Core Metadata Element Set');
 
 	    foreach ($dublinCoreElements as $key => $element) {
 	       echo display_form_input_for_element($element);
