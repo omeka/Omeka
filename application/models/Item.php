@@ -32,6 +32,7 @@ class Item extends Omeka_Record
     
     protected $_related = array('Collection'=>'getCollection', 
                                 'TypeMetadata'=>'getTypeMetadata', 
+                                'Type'=>'getItemType',
                                 'Tags'=>'getTags',
                                 'Files'=>'getFiles',
                                 'Elements'=>'getElements',
