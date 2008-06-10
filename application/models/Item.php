@@ -125,7 +125,8 @@ class Item extends Omeka_Record
      **/
     protected function beforeSaveForm(&$post)
     {
-
+        $this->_beforeSaveElements($post);
+        
         if (!empty($post['change_type'])) {
             return false;
         }
@@ -137,6 +138,88 @@ class Item extends Omeka_Record
         }
         if (!$this->userHasPermission('makeFeatured')) {
             unset($post['featured']);
+        }
+    }
+    
+    /**
+     * @see Item::beforeSaveForm()
+     * 
+     * @param string
+     * @return void
+     **/
+    protected function _beforeSaveElements(&$post)
+    {
+        // Maybe this should go in the filterInput() method.
+        $this->_filterInputForElements($post);
+        $this->_elementsToSave = $this->_getElementsFromPost($post);
+        $this->_validateElements($this->_elementsToSave);        
+    }
+    
+    /**
+     * For now, only trim the text in each one. 
+     * 
+     * @todo Cast all of the text fields to strings to prevent injection of
+     * badness.
+     * @see Item::_getElementsFromPost()
+     * @param ArrayObject
+     * @return void
+     **/
+    protected function _filterInputForElements(&$post)
+    {        
+        // Trim the text for all the POST'ed elements
+        foreach ($post['Elements'] as $key => $element) {
+            foreach ($element as $index => $text) {
+                $post['Elements'][$key][$index] = trim($text);
+            }
+        }
+    }
+    
+    /**
+     * The POST should have a key called "Elements" that contains an array
+     * that is keyed to an element's ID.  That array should contain all the 
+     * text values for that element. For example:
+     *
+     *      * Elements:
+     *          * 1:
+     *              * 0: 'Foobar'
+     *              * 1: 'Baz'
+     * 
+     * @todo May want to throw an Exception if an element in the POST doesn't
+     * actually exist.
+     * @param array
+     * @return array Set of Element records.
+     **/
+    protected function _getElementsFromPost($post)
+    {
+        $elementPost = $post['Elements'];
+        $elements = array();
+        $table = $this->getDb()->getTable('Element');
+        foreach ($elementPost as $id => $texts) {
+            $element = $table->find((int) $id);
+            if($element instanceof Element) {
+                $element->setText( (array) $texts);
+                $elements[] = $element;
+            }
+        }
+        
+        return $elements;
+    }
+    
+    /**
+     * Validate all the elements one by one.  This is potentially a lot slower
+     * than batch processing the form, but it gives the added bonus of being 
+     * able to encapsulate the logic for validation of Elements.
+     * 
+     * @see Item::_beforeSaveElements()
+     * @param array Set of Element records.
+     * @return void
+     **/
+    protected function _validateElements($elements)
+    {
+        foreach ($elements as $key => $element) {
+            if(!$element->isValid()) {
+                $this->addErrorsFrom($element);
+            }
         }
     }
     
@@ -163,6 +246,8 @@ class Item extends Omeka_Record
     {
         $this->saveFiles();
         
+        $this->saveElementText($this->_elementsToSave);
+        
         //Removing tags from other users
         if ($this->userHasPermission('untagOthers')) {
             
@@ -186,17 +271,6 @@ class Item extends Omeka_Record
         //Fire a plugin hook specifically for items that have had their 'public' status changed
         if (isset($post['public']) && ($this->public == '1')) {
             fire_plugin_hook('make_item_public', $this);
-        }
-        
-        //Save metatext from the form
-        if (!empty($post['metafields'])) {
-            foreach ($post['metafields'] as $metafield_id => $mt_a) {
-                $mt_obj = $this->getDb()
-                               ->getTable('Metatext')
-                               ->findByItemAndMetafield($this->id, $metafield_id);
-                $mt_obj->text = (string) $mt_a['text'];
-                $mt_obj->save();
-            }            
         }
     }
     
@@ -231,6 +305,21 @@ class Item extends Omeka_Record
         
         foreach ($metatext as $entry) {
             $entry->delete();
+        }
+    }
+    
+    /**
+     * Save a set of elements text.
+     * 
+     * @see Item::afterSaveForm()
+     * @uses Element::saveTextFor()
+     * @param array Set of Element records
+     * @return void
+     **/
+    public function saveElementText($elements)
+    {
+        foreach ($elements as $index => $element) {
+            $element->saveTextFor($this);
         }
     }
     

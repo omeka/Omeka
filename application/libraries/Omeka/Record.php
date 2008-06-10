@@ -235,6 +235,22 @@ class Omeka_Record implements ArrayAccess
     }
     
     /**
+     * Combine errors from a different Omeka_Record instance with the errors
+     * already on this record.
+     *
+     * @see Item::_validateElements()
+     * @param Omeka_Record
+     * @return void
+     **/
+    public function addErrorsFrom(Omeka_Record $record)
+    {
+        $errors = $record->getErrors();
+        foreach ($errors->get() as $field => $error) {
+            $this->addError($field, $error);
+        }
+    }
+    
+    /**
      * This function makes it so that the record cannot be saved 
      * (useful after manipulating the record for strictly display purposes)
      *

@@ -37,6 +37,16 @@ class Omeka_Validator_Errors extends ArrayObject
         $this->_errors[$key] = $val;
     }
     
+    /**
+     * Shouldn't there be an analog for this in ArrayObject?  Seems retarded.
+     * @see Omeka_Record::addErrorsFrom()
+     * @return array
+     **/
+    public function get()
+    {
+        return $this->_errors;
+    }
+    
     public function count()
     {
         return count($this->_errors);

@@ -103,7 +103,7 @@ function item_type_elements_form()
  * @param Element
  * @return string HTML
  **/
-function display_form_input_for_element($element)
+function display_form_input_for_element(Element $element)
 {
     $html = '';
     
@@ -115,7 +115,7 @@ function display_form_input_for_element($element)
     
     //There can be an arbitrary # of values in element->text
     //It's an array (not hash) at this point
-    $numFieldValues = count($element['text']);
+    $numFieldValues = count($element->getText());
     $numFieldValues = $numFieldValues ? $numFieldValues : 1;
     for ($i=0; $i < $numFieldValues; $i++) { 
         
@@ -123,7 +123,7 @@ function display_form_input_for_element($element)
         $fieldName = "Elements[" . $element['id'] . "][$i]";
         
         //The value in the form field should be the text for that element
-        $fieldValue = htmlentities($element['text'][$i]);
+        $fieldValue = htmlentities($element->getText($i));
                     
         //Check the POST to see if there is a value for that field saved already
         $postValue = $_POST['Elements'][$element['id']][$i];
@@ -153,14 +153,17 @@ function display_form_input_for_element($element)
         }
     }
 
-    //Wrap the input with a <div class="field">
+    // Wrap the input with a <div class="field">
     $html .= '<div class="field">';
 	$html .= '<label for="' . $fieldId . '">' . $fieldLabel;
-	$html .= '</label>'."\n\t";
+	$html .= '</label>'."\n\t";	
 	
 	$html .= $input;
 	
-	//Tooltips should be in a <span class="tooltip">
+	// Errors for form inputs should go below the input itself?  Or above?
+	$html .= form_error($element['name']);
+	
+	// Tooltips should be in a <span class="tooltip">
 	$html .= '<span class="tooltip" id="' . $fieldId . '-tooltip">';
 	$html .= $fieldDescription .'</span></div>';    
 	

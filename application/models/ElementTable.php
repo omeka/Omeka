@@ -20,8 +20,8 @@ class ElementTable extends Omeka_Db_Table
     }
     
     /**
-     * Overriding getSelect() to always return the type_name for retrieved
-     * elements.
+     * Overriding getSelect() to always return the type_name and type_regex
+     * for retrieved elements.
      * 
      * @return Omeka_Db_Select
      **/
@@ -29,7 +29,8 @@ class ElementTable extends Omeka_Db_Table
     {
         $select = parent::getSelect();
         $db = $this->getDb();
-        $select->joinLeft(array('et'=>$db->ElementType), 'et.id = e.element_type_id', array('type_name'=>'et.name'));
+        $select->joinLeft(array('et'=>$db->ElementType), 'et.id = e.element_type_id', 
+            array('type_name'=>'et.name', 'type_regex'=>'et.regular_expression'));
         return $select;
     }
     
@@ -90,25 +91,25 @@ class ElementTable extends Omeka_Db_Table
      **/
     public function findForItemBySet($item, $elementSet)
     {
-        //Select all the elements for a given set
+        // Select all the elements for a given set
         $select = $this->getSelect();
         $db = $this->getDb();
         
+        // Join on the element_sets table
         $select->joinInner(array('es'=>$db->ElementSet), 'es.id = e.element_set_id', array());
         $select->where('es.name = ?', (string) $elementSet);
         
         $elements = $this->fetchObjects($select);
        
-       //Populate those element records with the values for a given item
+       // Populate those element records with the values for a given item
        
-       //Get the IDs of all the elements we pulled (no need for another query)
+       // Get the IDs of all the elements we pulled (no need for another query)
        $elementIds = array();
        foreach ($elements as $key => $element) {
         $elementIds[$key] = $element->id;
-        $element->text = array();
        }
 
-       //Select all the values for an item (grouped by element_id)        
+       // Select all the values for an item (grouped by element_id)        
         $select = new Omeka_Db_Select;
         $select->from(array('ie'=>$db->ItemsElements), array('ie.text', 'ie.element_id'));
         $select->where('ie.item_id = ?', $item->id);
@@ -122,7 +123,7 @@ class ElementTable extends Omeka_Db_Table
         foreach ($elements as $elementKey => $element) {
             foreach ($resultSet as $row) {
                 if($row['element_id'] == $element->id) {
-                    $element->text[] = $row['text'];
+                    $element->addText($row['text']);
                 }
             }
         }
@@ -154,8 +155,7 @@ echo $select;exit;
            $element->id = $i + 1;
            $element->name = "Dummy Element " . $i;
            $element->description = "Dummy Description for Dummy Element " . $i;
-           $text = array('Dummy Text ' . $i);
-           $element->text = $text;
+           $element->setText(array('Dummy Text ' . $i));
            $element->element_type_id = 1;
 
            //'type_name' doesn't exist in the table but assume that it comes from
