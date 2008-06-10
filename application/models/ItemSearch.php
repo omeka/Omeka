@@ -38,26 +38,40 @@ class ItemSearch
     
     /**
      * The trail of this function:
-     *     items_search_form() form helper  --> ItemsController::browseAction()  --> ItemTable::findBy() --> here
+     *     items_search_form() form helper  --> ItemsController::browseAction()  
+     * --> ItemTable::findBy() --> here
      *
      * @return void
      **/
     public function advanced($advanced)
     {
         $db = $this->getDb();
-        
+
         $select = $this->getSelect();
-        
-        $metafields = array();
+                
+        $select->joinInner(array('ie'=>$db->ItemsElements), 'ie.item_id = i.id', array());
         
         foreach ($advanced as $k => $v) {
             
-            $field = $v['field'];
-            $type = $v['type'];
             $value = $v['terms'];
             
-            //Determine what the SQL clause should look like
-            switch ($type) {
+            // SELECT i.* FROM omeka_items i
+            // WHERE i.id IN (
+            //     SELECT i.id FROM omeka_items i
+            //         LEFT JOIN omeka_items_elements ie 
+            //         ON ie.item_id = i.id AND ie.element_id = 3
+            //         WHERE
+            //             ie.text IS NULL)
+            // 
+            //     AND i.id IN (
+            //         ...
+            //         WHERE 
+            //         ie.text LIKE '%foo%'
+            // 
+            //     )
+
+            //Determine what the WHERE clause should look like
+            switch ($v['type']) {
                 case 'contains':
                     $predicate = "LIKE " . $db->quote('%'.$value .'%');
                     break;
@@ -65,80 +79,32 @@ class ItemSearch
                     $predicate = "NOT LIKE " . $db->quote('%'.$value .'%');
                     break;
                 case 'is empty':    
-                    $predicate = "= ''";
+                    $predicate = "IS NULL";
                     break;
                 case 'is not empty':
-                    $predicate = "!= ''";
+                    $predicate = "IS NOT NULL";
                     break;
                 default:
                     throw new Exception( 'Invalid search type given!' );
                     break;
             }
             
-            // Strip out the prefix to figure out what table it comin from
-            $field_a = explode('_', $field);
-            $prefix = array_shift($field_a);
-            $field = implode('_', $field_a);
+            $elementId = (int) $v['element_id'];
             
-            // Process the joins differently depending on what table it needs
-            switch ($prefix) {
-                case 'item':
-                    // We don't need any joins because we are already searching 
-                    // the items table
-                    if (!$db->getTable('Item')->hasColumn($field)) {
-                        throw new Exception( 'Invalid field given!' );
-                    }
-                    
-                    //We're good, so start building the WHERE clause
-                    $where = '(i.' . $field . ' ' . $predicate . ')';
-                    
-                    $select->where($where);
-                    
-                    break;
-                case 'metafield':
-                    // Ugh, the Metafields query needs to be dealt with separately 
-                    // because just tacking on multiple metafields will not 
-                    // return correct results
-                    
-                    //We need to join on the metafields and metatext tables
-                    $select->joinInner(array('mt'=>"$db->Metatext"), 'mt.item_id = i.id', array());
-                    $select->joinInner(array('m'=>"$db->Metafield"), 'm.id = mt.metafield_id', array());
-
-                    //Start building the where clause
-                    $where = "(m.name = ". $db->quote($field) . " AND mt.text $predicate)";
-
-                    $metafields[] = $where;
-
-                    break;
-                default:
-                    throw new Exception( 'Search failed!' );
-                    break;
-            }    
-
-            // Build the metafields WHERE clause
-            // Should look something like the query below
-            /*
-            mt.id IN 
-            (
-            SELECT mt.id 
-            FROM metatext mt 
-            INNER JOIN metafields m ON m.id = mt.metafield_id
-            WHERE 
-                (m.name = 'Process Edit' AND mt.text != '') 
-            OR 
-                (m.name = 'Process Review' AND mt.text = '')
-            )
-                }
-            }
-            */
+            // For example:
+            // SELECT i.id FROM omeka_items i
+            //  LEFT JOIN omeka_items_elements ie 
+            //  ON ie.item_id = i.id AND ie.element_id = 3
+            //  WHERE ie.text IS NULL
+            $subQuery = new Omeka_Db_Select;
+            $subQuery->from(array('i'=>$db->Item), array('i.id'))
+                ->joinLeft(array('ie'=>$db->ItemsElements), 
+                'ie.item_id = i.id AND ie.element_id = ' . $elementId, array())
+                ->where('ie.text '. $predicate);
             
-            if (count($metafields)) {
-                $subQuery = new Omeka_Db_Select;
-                $subQuery->from(array('mt'=>"$db->Metatext"), array('mt.id'))
-                                ->joinInner(array('m'=>"$db->Metafield"), 'm.id = mt.metafield_id', array())
-                                ->where(join(' OR ', $metafields));
-                $select->where('mt.id IN ('. $subQuery->__toString().')');            
-            }
+            // Each advanced search mini-form represents another subquery
+           $select->where('i.id IN ( ' . (string) $subQuery . ' )'); 
+
         }
     }
     

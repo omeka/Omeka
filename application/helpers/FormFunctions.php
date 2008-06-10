@@ -226,11 +226,6 @@ function submit($value="Submit",$name="submit")
 			<fieldset id="advanced_search">
 				<legend id="advanced_search_header">Advanced Search</legend>
 				
-				<?php 
-					//We need to retrieve a list of all the core metadata fields and the extended type metafields
-					$search_fields = Item::fields();
-					natsort($search_fields);
-				?>
 				<h3>Search by Specific fields</h3>
 				
 				<div id="advanced-search">
@@ -253,10 +248,9 @@ function submit($value="Submit",$name="submit")
 								//[type] = 'contains'
 								//[terms] = 'foobar'
 							//etc
-							echo select(
-								array('name'=>"advanced[$i][field]"), 
-								$search_fields, 
-								@$rows['field']); ?>
+							echo select_element(
+								array('name'=>"advanced[$i][element_id]"), 
+								@$rows['element_id']); ?>
 							
 							<?php 
 								echo select(

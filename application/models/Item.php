@@ -155,8 +155,6 @@ class Item extends Omeka_Record
      **/
     protected function _beforeSaveElements(&$post)
     {
-        // Maybe this should go in the filterInput() method.
-        
         $this->_elementsToSave = $this->_getElementsFromPost($post);
         $this->_validateElements($this->_elementsToSave);        
     }
@@ -509,37 +507,7 @@ class Item extends Omeka_Record
     }
     
     //Everything past this is elements of the old code that may be changed or deprecated
-    
-    /**
-     * Retrieve simply the names of the fields, converted to words and uppercase
-     *
-     * @return array
-     **/
-    public static function fields($prefix=true)
-    {
-        $db = Omeka_Context::getInstance()->getDb();
         
-        //Hack to the get the list of columns
-        $cols = $db->getTable('Item')->getColumns();
-
-        //Avoid certain fields because they are DB keys or protected/private
-        $avoid = array('id', 'item_type_id', 'collection_id', 'featured', 'public');
-
-        $fields = array();
-        foreach ($cols as $col) {
-            if (in_array($col, $avoid)) {
-                continue;
-            }
-            
-            //Field name should not have underscores and should be uppercase
-            $field = Inflector::humanize($col, 'all');
-            
-            $key = $prefix ? 'item_' . $col : $col; 
-            $fields[$key] = $field;
-        }
-        return $fields;
-    }
-    
     /**
      * Whether or not the Item has a File with derivative images (like thumbnails).
      * 

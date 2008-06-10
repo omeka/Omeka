@@ -81,6 +81,30 @@ class ElementTable extends Omeka_Db_Table
     }
     
     /**
+     * Return the element's name and id for <select> tags on it.
+     * 
+     * @see Omeka_Db_Table::findPairsForSelectForm()
+     * @param string
+     * @return void
+     **/
+    protected function _getColumnPairs()
+    {
+        return array('e.id', 'e.name');
+    }
+    
+    /**
+     * Overridden to natsort() the columns.
+     * 
+     * @return array
+     **/
+    public function findPairsForSelectForm()
+    {
+        $pairs = parent::findPairsForSelectForm();
+        natsort($pairs);
+        return $pairs;
+    }
+    
+    /**
      * Retrieve all elements for a set (containing text only for the item)
      * 
      * @see items/form.php

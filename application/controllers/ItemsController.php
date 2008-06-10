@@ -159,7 +159,7 @@ class ItemsController extends Omeka_Controller_Action
                 
                 //We need to filter out the empty entries if any were provided
                 foreach ($advanced as $k => $entry) {                    
-                    if (empty($entry['field']) || empty($entry['type'])) {
+                    if (empty($entry['element_id']) || empty($entry['type'])) {
                         unset($advanced[$k]);
                     }
                 }

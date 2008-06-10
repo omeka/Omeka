@@ -333,6 +333,16 @@ function select_collection($props = array(), $value=null)
 }
 
 /**
+ * @param array
+ * @param mixed
+ * @return string HTML
+ **/
+function select_element($props = array(), $value = null)
+{
+    return _select_from_table('Element', $props, $value);
+}
+
+/**
  * @uses _select_from_table()
  */
 function select_user($props = array(), $value=null)
