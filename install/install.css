@@ -84,6 +84,7 @@ input#tags-submit {display: inline;}
 .error {
 	background:#f1c8ba; color:#933;
 	margin-bottom: 1.5em;
+    padding: 1.5em;
 }
 
 /* == Wrap == */

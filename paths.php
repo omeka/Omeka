@@ -30,6 +30,7 @@ $site['admin_theme']       = 'themes';
 $site['views']             = 'views';
 $site['scripts']           = 'scripts';
 $site['migrations']        = 'migrations';
+$site['install']           = 'install';
 
 // Define directory path constants:
 define('BASE_DIR',         dirname(__FILE__));
@@ -40,6 +41,7 @@ define('ADMIN_DIR',        BASE_DIR . DIRECTORY_SEPARATOR . $site['admin']);
 define('ARCHIVE_DIR',      BASE_DIR . DIRECTORY_SEPARATOR . $site['archive']);
 define('ADMIN_THEME_DIR',  BASE_DIR . DIRECTORY_SEPARATOR . $site['admin'] . DIRECTORY_SEPARATOR . $site['admin_theme']);
 define('PUBLIC_THEME_DIR', BASE_DIR . DIRECTORY_SEPARATOR . $site['public_theme']);
+define('INSTALL_DIR',      BASE_DIR . DIRECTORY_SEPARATOR . $site['install']);
 define('CORE_DIR',         APP_DIR . DIRECTORY_SEPARATOR . $site['core']);
 define('MODEL_DIR',        APP_DIR . DIRECTORY_SEPARATOR . $site['models']);
 define('CONTROLLER_DIR',   APP_DIR . DIRECTORY_SEPARATOR . $site['controllers']);

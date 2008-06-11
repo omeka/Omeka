@@ -41,8 +41,8 @@ class Omeka_Core
                                'initializeConfigFiles', 
                                'initializeLogger', 
                                'initializeDb', 
-                               'initializeOptions', 
                                'loadModelClasses', 
+                               'initializeOptions', 
                                'initializeAcl', 
                                'initializePluginBroker', 
                                'initializeAuth', 
@@ -518,7 +518,7 @@ class Omeka_Core
     
     private function installerNotification()
     {
-        include_once BASE_DIR . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR . 'notify.php';
+        include_once INSTALL_DIR . DIRECTORY_SEPARATOR . 'notify.php';
         exit;
     } 
 }
