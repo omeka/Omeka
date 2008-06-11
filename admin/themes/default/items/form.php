@@ -51,7 +51,9 @@
 		   var image = document.createElement('img');
 		   image.src = "<?php echo img('information.png'); ?>";
 		   image.style.cursor = "help";
-		   div.appendChild(image);
+		   
+		   // Insert the informational image right after the label for the field
+		   div.select('label').first().insert({after:image});
 		   div.style.paddingLeft = "20px";
 		   
 		   var tooltip = new Tooltip(image, span, 
@@ -95,6 +97,11 @@
 	    // When button is clicked, remove the last input that was added
 	    $$('.remove-element').invoke('observe', 'click', function(e){
 	        e.stop();
+	        
+	        if(!confirm('Do you want to delete this?')) {
+	            return;
+	        }
+	        
 	        // The main div for this element is 2 levels up
 	        var elementDiv = this.up().up();
 	        

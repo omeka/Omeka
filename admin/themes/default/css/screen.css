@@ -362,6 +362,10 @@ ul.tags, li.tag {display: inline;}
 	#delete_item_link, #delete_link {float:right;display:block; text-align:right; width:400px;}
 		#delete_item_link a, #delete_link a {background-color:#f1c8ba; width: 8em; display:block; color:#900;float:right;padding:0.5em 1em 0.5em 3em;background-position: 12px 50%;}
 
+    /* Elements Form Inputs */
+    div.controls {display:inline;}
+    div.controls input[type="submit"] {display:inline;}
+    
 	/* Item Browse styles */
 	#add-item {background-color:#d4ecb5; float:right; padding:12px 12px 12px 30px; background-position:8px 50%; font-size:1.4em; color:#060;width:6em; display:block;}
 	#add-item:hover {background-color:#e9f6da;}
