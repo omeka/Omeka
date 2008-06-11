@@ -100,6 +100,8 @@ function item_type_elements_form()
  * div wrapper around the element.
  * @todo Plugins should be able to hook in to displaying elements in a certain
  * way.
+ * @todo Form submission of items should be able to respond to the +/- buttons
+ * without javascript enabled.
  * @param Element
  * @return string HTML
  **/
@@ -120,7 +122,7 @@ function display_form_input_for_element(Element $element)
     for ($i=0; $i < $numFieldValues; $i++) { 
         
         //The name of the input on the form
-        $fieldName = "Elements[" . $element['id'] . "][$i]";
+        $fieldName = "Elements[" . $element['id'] . "][]";
         
         //The value in the form field should be the text for that element
         $fieldValue = htmlentities($element->getText($i));
@@ -158,14 +160,34 @@ function display_form_input_for_element(Element $element)
 	$html .= '<label for="' . $fieldId . '">' . $fieldLabel;
 	$html .= '</label>'."\n\t";	
 	
+	// Input itself is wrapped in a class="input" div.  Used by Javascript.
+	$html .= '<div class="input">';
 	$html .= $input;
+	$html .= '</div>';
 	
 	// Errors for form inputs should go below the input itself?  Or above?
 	$html .= form_error($element['name']);
 	
 	// Tooltips should be in a <span class="tooltip">
 	$html .= '<span class="tooltip" id="' . $fieldId . '-tooltip">';
-	$html .= $fieldDescription .'</span></div>';    
+	$html .= $fieldDescription .'</span>';
+	
+	// The + button that will allow a user to add another form input.
+	// The name of the submit input is 'add_element_#' and it has a class of 
+	// 'add-element', which is used by the Javascript to do stuff.
+	
+	// Used by Javascript.
+	$html .= '<div class="controls">';
+	
+	$html .= __v()->formSubmit('add_element_' . $element['id'], '+', 
+	    array('class'=>'add-element'));
+	
+	$html .= __v()->formSubmit('remove_element_' . $element['id'], '-', 
+	    array('class'=>'remove-element'));
+	
+	$html .= '</div>'; // Close 'controls' div
+	
+	$html .= '</div>'; // Close 'field' div
 	
 	return $html;
 }

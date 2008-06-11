@@ -110,16 +110,18 @@ class Element extends Omeka_Record
             case 'Item':
                 // Get some join records and save that jax to the database
                 $ies = $this->getTable('ItemsElements')
-                ->findOrNewByItemAndElement($record->id, $this->id);
-                
+                ->findOrNewByItemAndElement($record->id, $this->id, count($text));
+
                 // Loop through all the element text values save them
                 // Maybe this should be a separate method.
                 foreach ($text as $key => $value) {
                     $ie = $ies[$key];
-                    
+
                     // If the text is empty, we should delete the record
-                    if(empty($value)) {
-                        $ie->delete();
+                    if (empty($value)) {
+                        if ($ie->exists()) {
+                            $ie->delete();
+                        }
                     } else {
                     // Otherwise we should set the text and save the record
                         $ie->text = $value;

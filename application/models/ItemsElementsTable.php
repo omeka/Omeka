@@ -20,24 +20,30 @@ class ItemsElementsTable extends Omeka_Db_Table
      * @see Element::saveTextFor()
      * @param integer
      * @param integer
-     * @return array Set of ItemsElements records.
+     * @param integer
+     * @return array Set of ItemsElements records, some of which may be new.
      **/
-    public function findOrNewByItemAndElement($itemId, $elementId)
+    public function findOrNewByItemAndElement($itemId, $elementId, $numToFind)
     {
+        $records = array();
         $select = $this->getSelect();
         
         $select->where('ie.item_id = ?', $itemId);
         $select->where('ie.element_id = ?', $elementId);
         
+        $select->limit($numToFind);
+        
         $records = $this->fetchObjects($select);
         
-        if(!$records) {
-            $record = new ItemsElements;
-            $record->item_id = $itemId;
-            $record->element_id = $elementId;
-            $records = array($record);
+        for ($i=0; $i < $numToFind; $i++) { 
+            if(!$records[$i]) {
+                $record = new ItemsElements;
+                $record->item_id = $itemId;
+                $record->element_id = $elementId;
+                $records[$i] = $record;
+            }
         }
-        
+                
         return $records;
     }
 }

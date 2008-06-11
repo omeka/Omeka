@@ -5,6 +5,7 @@
 		//Create tooltips for all spans with class="tooltip"
 		Omeka.ItemForm.makeTooltips($$('.tooltip'));
 		Omeka.ItemForm.changeItemType();
+		Omeka.ItemForm.elementControls();
 		filesAdding();
 	});
 
@@ -71,6 +72,39 @@
 		    Omeka.ItemForm.removeTag(this);
 		});
 	}
+	
+	Omeka.ItemForm.elementControls = function() {
+	    // Class name is hard coded here b/c it is hard coded in the helper
+	    // function as well.
+	    $$('.add-element').invoke('observe', 'click', function(e){
+	        // Stop form submissions
+	        e.stop();
+	        
+	        // Get the input div and copy it.
+	        var input = this.up().previous('.input');
+	        var newInput = input.cloneNode(true);
+	        
+	        // 1) Empty the new form element
+	        // 2) Put it on the page directly below the existing one
+	        var formElement = newInput.down();
+	        formElement.value = '';
+
+	        input.insert({after: newInput});
+	    });
+	    
+	    // When button is clicked, remove the last input that was added
+	    $$('.remove-element').invoke('observe', 'click', function(e){
+	        e.stop();
+	        // The main div for this element is 2 levels up
+	        var elementDiv = this.up().up();
+	        
+	        //Check if there is more than one element, if so then OK to delete.
+	        var inputDivs = elementDiv.select('div.input');
+	        if(inputDivs.size() > 1) {
+	            inputDivs.last().destroy();
+	        }
+	    });
+	};
 	
 	Omeka.ItemForm.removeTag = function(button) {
 		var tagId = button.value;
