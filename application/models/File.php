@@ -48,6 +48,7 @@ class File extends Omeka_Record {
 	public $watermark = '';
 	public $authentication = '';
 	public $encryption = '';
+	public $compression = '';
 	public $post_processing = '';
 	public $archive_filename;
 	public $original_filename;
