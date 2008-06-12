@@ -6,8 +6,6 @@
  * @package Omeka
  **/
 
-require_once 'Metafield.php';
-
 /**
  * @package Omeka
  * @author CHNM
