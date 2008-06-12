@@ -134,28 +134,27 @@ class ElementTable extends Omeka_Db_Table
         $elements = $this->fetchObjects($select);
        
        // Populate those element records with the values for a given item
-       
-       // Get the IDs of all the elements we pulled (no need for another query)
-       $elementIds = array();
-       foreach ($elements as $key => $element) {
-        $elementIds[$key] = $element->id;
-       }
-
-       // Select all the values for an item (grouped by element_id)        
-        $select = new Omeka_Db_Select;
-        $select->from(array('ie'=>$db->ItemsElements), array('ie.text', 'ie.element_id'));
-        $select->where('ie.item_id = ?', $item->id);
-        
-        $select->where('ie.element_id IN (?)', array($elementIds));
-        
-        $resultSet = $db->fetchAll($select);
-        
-        /* Maybe there is a quicker way to do this?  I'm a little rusty on my 
-        set theory [KBK] */
-        foreach ($elements as $elementKey => $element) {
-            foreach ($resultSet as $row) {
-                if($row['element_id'] == $element->id) {
-                    $element->addText($row['text']);
+       return $this->assignTextToElements($elements, $item->ItemsElements);
+    }
+    
+    /**
+     * Assign a set of Element texts to a set of Elements.
+     *
+     * @internal I'm not sure this belongs in the ElementTable class, because its
+     * not a finder method, but currently the code is split across multiple places
+     * and this is an attempt to consolidate it.
+     * @param array Set of Element records.
+     * @param array Set of ItemsElements records.
+     * @return array Set of elements with text assigned to it.
+     **/
+    public function assignTextToElements($elements, $itemsElements)
+    {
+        // Sort the ItemsElements text values into their correct Element records                    
+        // Speed could be improved on this.  
+        foreach ($elements as $key => $element) {
+            foreach ($itemsElements as $iKey => $itemElement) {
+                if ($itemElement->element_id == $element->id) {
+                    $element->addText($itemElement);
                 }
             }
         }

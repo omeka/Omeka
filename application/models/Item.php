@@ -115,15 +115,7 @@ class Item extends Omeka_Record
         element contains an array of all the values for that element */
         $elements = $this->getTable('Element')->findByItemType($this->item_type_id);
             
-        // Sort the ItemsElements text values into their correct Element records                    
-        // Speed could be improved on this.  
-        foreach ($elements as $key => $element) {
-            foreach ($this->ItemsElements as $iKey => $itemElement) {
-                if ($itemElement->element_id == $element->id) {
-                    $element->addText($itemElement);
-                }
-            }
-        }
+        return $this->getTable('Element')->assignTextToElements($elements, $this->ItemsElements);
 
         return $elements;
     }
