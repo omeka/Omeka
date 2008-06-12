@@ -83,7 +83,8 @@ function _define_web_root()
     
     //@hack Remove the '/admin' part of the URL by regex (only if necessary)
    if(defined('ADMIN')) {
-       $dir = preg_replace('/(.*)\/admin/', '$1', $dir, 1);
+       $dir = preg_replace('/(.*)admin$/', '$1', $dir, 1);
+       $dir = rtrim($dir, '/');
    }
    
    define('WEB_ROOT', 		$base_root . (!empty($dir) ? '/' . $dir : '') );
