@@ -71,7 +71,7 @@ function item_type_elements_form()
     $html = '';
     
     //Loop through all of the element records for the item's item type
-    $elements = $item->getTypeElements();   
+    $elements = $item->getItemTypeElements();   
     foreach ($elements as $key => $element) {
         $html .= display_form_input_for_element($element);		
     }

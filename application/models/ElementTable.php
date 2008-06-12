@@ -1,8 +1,16 @@
 <?php
-
 /**
-* 
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class ElementTable extends Omeka_Db_Table
 {
     /**
@@ -156,41 +164,20 @@ class ElementTable extends Omeka_Db_Table
     }
     
     /**
-     * Retrieve a set of Element records that are indexed by the name of the element.
+     * Retrieve a set of Element records that belong to a specific Item Type.
      * 
-     * @see Item::getTypeElements()
-     * @todo Make this use live data instead of dummy data.
+     * @see Item::getItemTypeElements()
      * @param integer
-     * @param integer
-     * @return array
+     * @return array Set of element records.
      **/
-    public function findByItemAndType($itemId, $itemTypeId)
+    public function findByItemType($itemTypeId)
     {
-/*         $select = $this->getSelectForItem($itemId);
+        $select = $this->getSelect();
         $db = $this->getDb();
-        $select->joinInner(array('ite'=>$db->ItemTypesElements), 'ite.item_type_id = i.item_type_id', array());
-        $select->where('i.item_type_id = ?');
-echo $select;exit;        
-       return $this->indexRecordsByName( $this->fetchObjects($select, array($itemTypeId)) ); */
-       
-       $elements = array();
-       for ($i=0; $i < 10; $i++) { 
-           $element = new Element;
-           $element->id = $i + 1;
-           $element->name = "Dummy Element " . $i;
-           $element->description = "Dummy Description for Dummy Element " . $i;
-           $element->setText(array('Dummy Text ' . $i));
-           $element->element_type_id = 1;
-
-           //'type_name' doesn't exist in the table but assume that it comes from
-           //the element_types table.  
-       
-           //Alternate between small and large elements for testing purposes
-           $element->type_name = ($i % 2) ? 'tinytext' : 'text';
-           //$element->type_regex = "/(?<!.).{0,255}(?!.)/s";
-
-           $elements[] = $element;
-       }
+        $select->joinInner(array('ite'=>$db->ItemTypesElements), 'ite.element_id = e.id', array());
+        $select->where('ite.item_type_id = ?');
+        
+        $elements = $this->fetchObjects($select, array($itemTypeId)); 
 
        return $elements;
     }

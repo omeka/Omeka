@@ -16,6 +16,12 @@ class ItemsElementsTable extends Omeka_Db_Table
     
     protected $_alias = 'ie';
     
+    public function findByItem($itemId)
+    {
+        $select = $this->getSelect()->where('ie.item_id = ?', $itemId);
+        return $this->fetchObjects($select);
+    }
+    
     /**
      * @see Element::saveTextFor()
      * @param integer

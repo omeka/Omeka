@@ -29,14 +29,15 @@ class Item extends Omeka_Record
     public $collection_id;
     public $featured = 0;
     public $public = 0;    
-    
+        
     protected $_related = array('Collection'=>'getCollection', 
                                 'TypeMetadata'=>'getTypeMetadata', 
                                 'Type'=>'getItemType',
                                 'Tags'=>'getTags',
                                 'Files'=>'getFiles',
                                 'Elements'=>'getElements',
-                                'TypeElements'=>'getTypeElements');
+                                'ItemTypeElements'=>'getItemTypeElements',
+                                'ItemsElements'=>'getItemsElements');
     
     protected function construct()
     {
@@ -85,21 +86,46 @@ class Item extends Omeka_Record
     {
         return $this->getTable('Element')->findByItem($this->id);
     }
-
+    
+    /**
+     * Retrieve all the ItemsElements records associated with the item.
+     * 
+     * @return array Set of ItemsElements records
+     **/
+    public function getItemsElements()
+    {
+        return $this->getTable('ItemsElements')->findByItem($this->id);
+    }
+    
     /**
      * Retrieve a set of elements associated with the item type of the item.
      *
+     * Each one of the Element records that is retrieved should contain all the 
+     * element text values associated with it.
+     *
      * @see item_type_elements_form()
+     * @uses ElementTable::findByItemType()
      * @return array Element records that are associated with the item type of
      * the item.  This array will be empty if the item does not have an 
      * associated type.
      **/    
-    public function getTypeElements()
+    public function getItemTypeElements()
     {    
         /* My hope is that this will retrieve a set of elements, where each
         element contains an array of all the values for that element */
-        return $this->getTable('Element')
-            ->findByItemAndType($this->id, $this->item_type_id);
+        $elements = $this->getTable('Element')->findByItemType($this->item_type_id);
+            
+        // Sort the ItemsElements text values into their correct Element records                    
+        // Speed could be improved on this.  
+        foreach ($elements as $key => $element) {
+            foreach ($this->ItemsElements as $iKey => $itemElement) {
+                if ($itemElement->element_id == $element->id) {
+                    $element->addText($itemElement);
+                }
+            }
+        }
+
+        return $elements;
     }
     
     /**
