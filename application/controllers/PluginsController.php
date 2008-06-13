@@ -126,6 +126,8 @@ class PluginsController extends Omeka_Controller_Action
         
         $list = $broker->getAll();
         
+		natsort($list);
+		
         $plugins = array();
         
         foreach ($list as $name) {
