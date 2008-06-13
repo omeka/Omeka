@@ -1,14 +1,15 @@
 <?php
 class FileMigration extends Omeka_Db_Migration
 {
-    const backupTableSuffix = '__backup__20';
+    const backupTableSuffix = '__backup__21';
     
     protected $elementSets;
     
     // Element sets.
     protected $es = array(
-        array('name' => 'file_image', 'description' => 'The metadata element set that was included in the `files_images` table in previous versions of Omeka. These elements are common to all image files.'), 
-        array('name' => 'file_video', 'description' => 'The metadata element set that was included in the `files_videos` table in previous versions of Omeka. These elements are common to all video files.'), 
+        array('name' => 'Omeka Legacy File Elements', 'description' => 'The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions.'), 
+        array('name' => 'Omeka Image File Elements',  'description' => 'The metadata element set that was included in the `files_images` table in previous versions of Omeka. These elements are common to all image files.'), 
+        array('name' => 'Omeka Video File Elements',  'description' => 'The metadata element set that was included in the `files_videos` table in previous versions of Omeka. These elements are common to all video files.'), 
     );
     
     public function up()
@@ -50,7 +51,7 @@ class FileMigration extends Omeka_Db_Migration
         `{$db->prefix}file_meta_lookup" . self::backupTableSuffix . "` TO `{$db->prefix}file_meta_lookup`;";
         $db->exec($sql);
     }
-
+    
     protected function renameTablesBackup()
     {
         $db = $this->db;
@@ -71,12 +72,12 @@ class FileMigration extends Omeka_Db_Migration
         CREATE TABLE `{$db->prefix}files` (
           `id` int(10) unsigned NOT NULL auto_increment,
           `item_id` int(10) unsigned NOT NULL,
-          `archive_filename` text character set latin1,
-          `original_filename` text character set latin1,
+          `archive_filename` text collate utf8_unicode_ci,
+          `original_filename` text collate utf8_unicode_ci,
           `size` int(10) unsigned default NULL,
-          `mime_browser` text character set latin1,
-          `mime_os` text character set latin1,
-          `type_os` text character set latin1,
+          `mime_browser` text collate utf8_unicode_ci,
+          `mime_os` text collate utf8_unicode_ci,
+          `type_os` text collate utf8_unicode_ci,
           `has_derivative_image` tinyint(1) NOT NULL,
           PRIMARY KEY  (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -94,7 +95,7 @@ class FileMigration extends Omeka_Db_Migration
         CREATE TABLE `{$db->prefix}file_element_set_lookup` (
           `id` int(10) unsigned NOT NULL auto_increment,
           `element_set_id` int(10) unsigned NOT NULL,
-          `mime_type` varchar(100) character set latin1 NOT NULL,
+          `mime_type` varchar(100) collate utf8_unicode_ci NOT NULL,
           PRIMARY KEY  (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
         $db->execBlock($sql);
@@ -127,12 +128,13 @@ class FileMigration extends Omeka_Db_Migration
 Which columns in `files` should be elements in the new `elements` table?
 Which columns in `files` should be columns in the new `files` table?
 
-F    = `files` columns
-FML  = `file_meta_lookup` columns
-E-DC = built-in Dublin Core elements
-E-I  = built-in image elements
-E-V  = built-in video elements
-D    = depricated
+F     = `files` columns
+FESL  = `file_element_set_lookup` columns
+E-DC  = built-in Dublin Core elements
+E-F   = built-in legacy file elements
+E-I   = built-in image elements
+E-V   = built-in video elements
+D     = depricated
 
 files
 --------------------------
@@ -208,8 +210,8 @@ E-V     height
 
 file_meta_lookup
 -------------------------------
-FML     id
-FML     mime_type
+FESL     id
+FESL     mime_type
 D       table_name
 D       table_class
 
