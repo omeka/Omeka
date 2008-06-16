@@ -15,8 +15,9 @@ class UsersActivations extends Omeka_Record
 		
 	protected function beforeSave()
 	{
-		$this->added = microtime(true);
-		$this->url = sha1(microtime(true));
+		$timestamp = microtime(true);
+		$this->added = date('Y-m-d H:i:s', $timestamp);
+		$this->url = sha1($timestamp);
 	}
 	
 	public function getUser()
