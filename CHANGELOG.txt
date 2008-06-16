@@ -1,3 +1,11 @@
+Changelog for Omeka 0.9.2:
+
+* Fixes an error with base URL generation that was causing problems with loading
+ Javascript files and CSS.
+* Fixes a problem with file uploads that was causing it to fail when saving to 
+the database.
+* Fixes a bug with invalid timestamps in the users_activations table.
+
 Changelog for Omeka 0.9.1.1:
 
 * Fixes #381, base URL generation was broken
