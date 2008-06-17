@@ -104,5 +104,5 @@ define('WEB_EXHIBIT_LAYOUTS', WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_layo
 define('WEB_EXHIBIT_THEMES',  WEB_SHARED.DIRECTORY_SEPARATOR.$site['exhibit_themes']);
 define('WEB_PUBLIC_THEME',	WEB_ROOT.DIRECTORY_SEPARATOR.$site['public_theme']);
 
-set_include_path(get_include_path().PATH_SEPARATOR.LIB_DIR.PATH_SEPARATOR.MODEL_DIR);
+set_include_path(LIB_DIR.PATH_SEPARATOR.MODEL_DIR);
 ?>
