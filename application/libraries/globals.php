@@ -102,6 +102,8 @@ function stripslashes_deep($value)
 }
 
 /**
+ * @param string
+ * @param callback
  * @return void
  **/
 function add_plugin_hook($hook, $callback)
@@ -113,6 +115,7 @@ function add_plugin_hook($hook, $callback)
  * fire_plugin_hook('after_save_item', $item, $arg2)  would call the plugin hook 
  * 'after_save_item' with those 2 arguments.
  *
+ * @access private
  * @return array
  **/
 function fire_plugin_hook()
@@ -123,6 +126,7 @@ function fire_plugin_hook()
 }
 
 /**
+ * @access private
  * @return Omeka_Plugin_Broker|null
  **/
 function get_plugin_broker()
@@ -143,22 +147,41 @@ function define_metafield($name, $description, $type=null)
     get_plugin_broker()->defineMetafield($name, $description, $type);
 }
 
+/**
+ * @deprecated Please put your view scripts in the views/$theme directory in
+ * your plugin, where $theme could be 'admin', 'public' or 'shared'.
+ * @param string
+ * @param string
+ * @return void
+ **/
 function add_theme_pages($dir, $theme='both')
 {
     get_plugin_broker()->addThemeDir($dir, $theme);
 }
 
+/**
+ * @deprecated
+ * @param string
+ * @return void
+ **/
 function add_controllers($dir='controllers')
 {
     get_plugin_broker()->addControllerDir($dir);
 }
 
+/**
+ * @deprecated
+ * @param string
+ * @param array 
+ * @return void
+ **/
 function add_data_feed($format, $options=array())
 {
     get_plugin_broker()->addFeed($format, $options);
 }
 
 /**
+ * @deprecated Please use filters for adding navigation instead.
  * @return void
  **/
 function add_navigation($text, $link, $type='main', $permissions=null)
@@ -166,6 +189,11 @@ function add_navigation($text, $link, $type='main', $permissions=null)
     get_plugin_broker()->addNavigation($text, $link, $type, $permissions);
 }
 
+/**
+ * 
+ * @param string
+ * @return void
+ **/
 function add_mime_display_type($mimeTypes, $callback, array $options=array())
 {
     get_plugin_broker()->addMediaAdapter($mimeTypes, $callback, $options);
