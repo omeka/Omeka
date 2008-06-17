@@ -92,6 +92,10 @@ class Omeka_Plugin_Broker
         
     public function __construct($db, $pathToPlugins) 
     {
+        // Should be able to delegate to the plugin filters
+        $this->_delegates = array();
+        $this->_delegates[] = new Omeka_Plugin_Filters($this);
+        
         $this->_basePath = $pathToPlugins;
         $this->_db = $db;
         
@@ -171,8 +175,9 @@ class Omeka_Plugin_Broker
     }
     
     /**
-     * The plugin helper functions do not have any way of determining what plugin to is currently in focus
-     * These get/setCurrentPlugin methods allow the broker to know how to delegate to specific plugins if necessary
+     * The plugin helper functions do not have any way of determining what
+     *  plugin to is currently in focus.  These get/setCurrentPlugin methods
+     *  allow the broker to know how to delegate to specific plugins if necessary.
      *
      * @return string
      **/
@@ -181,7 +186,7 @@ class Omeka_Plugin_Broker
         $this->_current = $plugin;
     }
     
-    protected function getCurrentPlugin()
+    public function getCurrentPlugin()
     {
         return $this->_current;
     }
@@ -576,12 +581,14 @@ class Omeka_Plugin_Broker
     }
     
     /**
-     * This handles dispatching all plugin hooks
-     *
-     * @return array|void
+     * @see Omeka_Plugin_Broker::__call()
+     * @param string Name of the hook.
+     * @param array Arguments that are passed to each hook implementation.
+     * @return array Keyed to the names of plugins, this will contain an array of 
+     * all the return values of the hook implementations.
      **/
-    public function __call($hook, $a) {
-        
+    public function callHook($hook, $args)
+    {
         if (empty($this->_callbacks[$hook])) {
             return;
         }
@@ -592,9 +599,35 @@ class Omeka_Plugin_Broker
             if ($this->isActive($plugin)) {
                 //Make sure the callback executes within the scope of the current plugin
                 $this->setCurrentPlugin($plugin);
-                $return_values[$plugin] = call_user_func_array($callback, $a);
+                $return_values[$plugin] = call_user_func_array($callback, $args);
             }
         }
-        return $return_values;
+        
+        // Reset the value for current plugin after this loop finishes
+        $this->setCurrentPlugin(null);
+        
+        return $return_values;        
+    }
+    
+    /**
+     * This handles dispatching all plugin hooks.
+     *
+     * Check for delegating to other classes that handle plugin API stuff first,
+     * i.e. Omeka_Plugin_Filters etc.
+     *
+     * @see Omeka_Plugin_Broker::__construct()
+     * @return mixed
+     **/
+    public function __call($hook, $args) {
+        
+        // Delegation
+        foreach ($this->_delegates as $delegator) {
+            if(method_exists($delegator, $hook)) {
+                return call_user_func_array(array($delegator, $hook), $args);
+            }
+        }
+        
+        // Call the hook for the plugins
+        return $this->callHook($hook, $args);
     }
 }

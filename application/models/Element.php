@@ -40,7 +40,7 @@ class Element extends Omeka_Record
      **/
     public function addText($text)
     {
-        $this->_texts[] = (string) $text;
+        $this->_texts[] = $text;
     }
     
     /**
@@ -52,12 +52,36 @@ class Element extends Omeka_Record
     }
     
     /**
-     * Retrieve text values for this element
+     * Retrieve only the text values (useful for for display).
+     *
+     * @todo Should filters run here?
+     * @param integer
+     * @return string|array|null
+     **/
+    public function getTextValues($index=null)
+    {
+        if (is_integer($index)) {
+            $obj = $this->_texts[$index];
+            if ($obj) {
+                return $obj->text;
+            }
+        } else {
+            $texts = array();
+            foreach ($this->_texts as $key => $obj) {
+                $texts[$key] = $obj->text;
+            }
+            
+            return $texts;
+        }
+    }
+    
+    /**
+     * Retrieve text values for this element.
      * 
-     * @param string
+     * @param integer
      * @return string|array
      **/
-    public function getText($index=null)
+    public function getTextObjects($index=null)
     {
         if (is_integer($index)) {
             return $this->_texts[$index];
@@ -65,7 +89,7 @@ class Element extends Omeka_Record
         
         return $this->_texts;
     }
-    
+        
     /**
      * Use the type_regex field to validate this Element record.
      * 
@@ -73,7 +97,7 @@ class Element extends Omeka_Record
      **/
     protected function _validate()
     {
-        foreach ($this->getText() as $index => $text) {
+        foreach ($this->getTextValues() as $index => $text) {
             // preg_match returns 1 or 0 (true/false equivalent) based on 
             // whether the text passes the regex
             if (!preg_match($this->type_regex, $text)) {
@@ -82,6 +106,38 @@ class Element extends Omeka_Record
                 "  Please see the description of this field for more information." );
             }
         }
+    }
+    
+    /**
+     * The filter naming here is kind of goofy, example:
+     *
+     * The following will apply 4 filters in progressively more descriptive fashion:
+     *
+     * array('Save', 'Item', 'Title', 'Dublin Core Element Set') 
+     *
+     * First it will apply the array('Item') filter, then array(Item, Save), etc.
+     * 
+     * @param Omeka_Record
+     * @param string Text for this element
+     * @return string
+     **/
+    protected function applySaveFiltersFor($record, $value)
+    {
+        // This is always a 'Save' hook first and foremost
+        $filterName = array('Save');
+        
+        // Item or File, currently
+        $filterName[] = get_class($record);
+        
+        // Name of the element
+        $filterName[] = $this->name;
+        
+        // Name of the element set (if applicable)
+        if($this->set_name) {
+            $filterName[] = $this->set_name;
+        }
+        
+        return get_plugin_broker()->applySubFilters($filterName, $value, $record, $this);
     }
     
     /**
@@ -96,8 +152,7 @@ class Element extends Omeka_Record
      **/
     public function saveTextFor(Omeka_Record $record)
     {
-        // Should return an array
-        $text = $this->getText();
+        $text = $this->getTextValues();
         
         // Can't do this if one or both of these records doesn't exist
         if(!$record->exists() or !$this->exists()) {
@@ -112,11 +167,14 @@ class Element extends Omeka_Record
                 $ies = $this->getTable('ItemsElements')
                 ->findOrNewByItemAndElement($record->id, $this->id, count($text));
 
-                // Loop through all the element text values save them
+                // Loop through all the element text records and save them
                 // Maybe this should be a separate method.
                 foreach ($text as $key => $value) {
                     $ie = $ies[$key];
-
+                    
+                    // Element filter names are all arrays (makes more readable)
+                    $value = $this->applySaveFiltersFor($record, $value);                    
+                    
                     // If the text is empty, we should delete the record
                     if (empty($value)) {
                         if ($ie->exists()) {

@@ -217,7 +217,11 @@ class Item extends Omeka_Record
         foreach ($elementPost as $id => $texts) {
             $element = $table->find((int) $id);
             if($element instanceof Element) {
-                $element->setText( (array) $texts);
+                foreach ($texts as $key => $text) {
+                    $textRecord = new ItemsElements;
+                    $textRecord->text = $text;
+                    $element->addText($textRecord);
+                }
                 $elements[] = $element;
             }
         }

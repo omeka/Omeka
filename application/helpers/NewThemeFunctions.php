@@ -117,7 +117,7 @@ function display_form_input_for_element(Element $element)
     
     //There can be an arbitrary # of values in element->text
     //It's an array (not hash) at this point
-    $numFieldValues = count($element->getText());
+    $numFieldValues = count($element->getTextValues());
     $numFieldValues = $numFieldValues ? $numFieldValues : 1;
     for ($i=0; $i < $numFieldValues; $i++) { 
         
@@ -125,7 +125,7 @@ function display_form_input_for_element(Element $element)
         $fieldName = "Elements[" . $element['id'] . "][]";
         
         //The value in the form field should be the text for that element
-        $fieldValue = htmlentities($element->getText($i));
+        $fieldValue = htmlentities($element->getTextValues($i));
                     
         //Check the POST to see if there is a value for that field saved already
         $postValue = $_POST['Elements'][$element['id']][$i];

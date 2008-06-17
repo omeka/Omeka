@@ -37,8 +37,13 @@ class ElementTable extends Omeka_Db_Table
     {
         $select = parent::getSelect();
         $db = $this->getDb();
+        // Join on the element_types table to retrieve type regex and type name
         $select->joinLeft(array('et'=>$db->ElementType), 'et.id = e.element_type_id', 
             array('type_name'=>'et.name', 'type_regex'=>'et.regular_expression'));
+            
+        // Join on the element_sets table to retrieve set name
+        $select->joinLeft(array('es'=>$db->ElementSet), 'es.id = e.element_set_id',
+            array('set_name'=>'es.name'));
         return $select;
     }
     
@@ -127,8 +132,6 @@ class ElementTable extends Omeka_Db_Table
         $select = $this->getSelect();
         $db = $this->getDb();
         
-        // Join on the element_sets table
-        $select->joinInner(array('es'=>$db->ElementSet), 'es.id = e.element_set_id', array());
         $select->where('es.name = ?', (string) $elementSet);
         
         $elements = $this->fetchObjects($select);

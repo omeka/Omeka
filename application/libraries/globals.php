@@ -172,6 +172,31 @@ function add_mime_display_type($mimeTypes, $callback, array $options=array())
 }
 
 /**
+ * @since 6/13/08
+ * @uses Omeka_Plugin_Filters::applyFilters()
+ * @param string|array
+ * @param mixed
+ * @return mixed
+ **/
+function apply_filters($filterName, $valueToFilter)
+{
+    $extraOptions = array_slice(func_get_args(), 2);
+    return get_plugin_broker()->applyFilters($filterName, $valueToFilter, $extraOptions);
+}
+
+/**
+ * @since 6/13/08
+ * @param string|array
+ * @param callback
+ * @param integer
+ * @return void
+ **/
+function add_filter($filterName, $callback, $priority = 10)
+{
+    get_plugin_broker()->addFilter($filterName, $callback, $priority);
+}
+
+/**
  * @return Omeka_Acl
  **/
 function get_acl()
