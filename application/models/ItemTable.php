@@ -177,6 +177,10 @@ class ItemTable extends Omeka_Db_Table
         }
         
         $db = $this->getDb();
+        
+        // For each of the tags, create a SELECT subquery using Omeka_Db_Select.
+        // This subquery should only return item IDs, so that the subquery can be
+        // appended to the main query by WHERE i.id IN (SUBQUERY).
         foreach ($tags as $tagName) {
             
             $subSelect = new Omeka_Db_Select;
