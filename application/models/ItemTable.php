@@ -141,21 +141,51 @@ class ItemTable extends Omeka_Db_Table
         }        
     }
     
+    /**
+     * Query must look like the following in order to correctly retrieve items     
+     * that have all the tags provided (in this example, all items that are
+     * tagged both 'foo' and 'bar'):
+     *
+     *    SELECT i.id 
+     *    FROM omeka_items i
+     *    WHERE 
+     *    (
+     *    i.id IN 
+     *        (SELECT tg.relation_id as id
+     *        FROM omeka_taggings tg
+     *        INNER JOIN omeka_tags t ON t.id = tg.tag_id
+     *        WHERE t.name = 'foo' AND tg.type = 'Item')
+     *    AND i.id IN
+     *       (SELECT tg.relation_id as id
+     *       FROM omeka_taggings tg
+     *       INNER JOIN omeka_tags t ON t.id = tg.tag_id
+     *       WHERE t.name = 'bar' AND tg.type = 'Item')
+     *    )
+     *      ...
+     *
+     *
+     * @todo Should tag delimiter (,) be a site-wide setting?
+     * @param Omeka_Db_Select
+     * @param string|array A comma-delimited string or an array of tag names.
+     * @return void
+     **/
     public function filterByTags($select, $tags)
-    {        
-        $select->joinInner(array('tg' => $this->getDb()->Taggings), 
-                           'tg.relation_id = i.id', 
-                           array());
-        $select->joinInner(array('t' => $this->getDb()->Tag), 
-                           'tg.tag_id = t.id', 
-                           array());
+    {   
+        // Split the tags into an array if they aren't already     
         if (!is_array($tags)) {
             $tags = explode(',', $tags);
         }
-        foreach ($tags as $key => $t) {
-            $select->where('t.name = ?', trim($t));
+        
+        $db = $this->getDb();
+        foreach ($tags as $tagName) {
+            
+            $subSelect = new Omeka_Db_Select;
+            $subSelect->from(array('tg'=>$db->Taggings), array('id'=>'tg.relation_id'))
+                ->joinInner(array('t'=>$db->Tag), 't.id = tg.tag_id', array())
+                ->where('t.name = ? AND tg.`type` = "Item"', trim($tagName));
+            
+            $select->where('i.id IN (' . (string) $subSelect . ')');
         }    
-        $select->where('tg.type= "Item"');        
     }
     
     /**
