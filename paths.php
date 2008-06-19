@@ -73,7 +73,7 @@ define('WEB_FULLSIZE',          WEB_ARCHIVE . DIRECTORY_SEPARATOR . $site['fulls
 define('WEB_FILES',             WEB_ARCHIVE . DIRECTORY_SEPARATOR . $site['files']);
 
 // Set the include path for the models directory.
-set_include_path(get_include_path() . PATH_SEPARATOR . LIB_DIR.PATH_SEPARATOR . MODEL_DIR);
+set_include_path(LIB_DIR.PATH_SEPARATOR . MODEL_DIR);
 
 /**
  * Most of this has been borrowed directly from Drupal 6.1's 
