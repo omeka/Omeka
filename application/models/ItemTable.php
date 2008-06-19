@@ -305,16 +305,20 @@ class ItemTable extends Omeka_Table
 		if(isset($params['tags'])) {
 			$tags = $params['tags'];
 			
-			$select->innerJoin("$db->Taggings tg",'tg.relation_id = i.id');
-			$select->innerJoin("$db->Tag t", 'tg.tag_id = t.id');
 			if(!is_array($tags) )
 			{
 				$tags = explode(',', $tags);
 			}
-			foreach ($tags as $key => $t) {
-				$select->where('t.name = ?', trim($t));
+			
+			// Backports fix for [2454], search on multiple tags not working.
+			foreach ($tags as $key => $tagName) {
+				$subSelect = new Omeka_Select;
+                $subSelect->from("$db->Taggings tg", 'tg.relation_id')
+                    ->innerJoin("$db->Tag t", 't.id = tg.tag_id')
+                    ->where('t.name = ? AND tg.`type` = "Item"', trim($tagName));
+
+                $select->where('i.id IN (' . (string) $subSelect . ')');
 			}	
-			$select->where('tg.type= "Item"');		
 		}
 		
 		//exclude Items with given tags
@@ -375,7 +379,7 @@ class ItemTable extends Omeka_Table
 			if(isset($params['search'])) {
 				$this->clearSearch();
 			}
-		
+
 			return $count;
 		}else {
 			
