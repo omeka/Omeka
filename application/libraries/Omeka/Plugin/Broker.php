@@ -82,13 +82,6 @@ class Omeka_Plugin_Broker
     protected $_theme_dirs = array('public'=>array(),'admin'=>array());
     
     protected $_controller_dirs = array();
-    
-    /**
-     * Any navigation elements that have been added via plugins
-     *
-     * @var array
-     **/
-    protected $_nav = array();
         
     public function __construct($db, $pathToPlugins) 
     {
@@ -391,59 +384,6 @@ class Omeka_Plugin_Broker
     public function getControllerDirs()
     {
         return $this->_controller_dirs;
-    }
-    
-    /**
-     * @since 10/2/07 current navigation types include: 'main', 'archive', 'settings', 'users'
-     *
-     * @return void
-     **/
-    public function addNavigation($text, $link, $type='main', $permissions)
-    {
-        $nav = $this->_nav;
-        
-        $new = array('text'=>$text,'link'=>$link, 'permissions'=>$permissions);
-        
-        $nav[$type][] = $new;
-        $this->_nav = $nav;
-    }
-    
-    /**
-     * This gets fired from within the admin theme to load plugin-defined navigation elements
-     *
-     * @see nav() theme helper function
-     * @return void
-     **/
-    public function load_navigation($type)
-    {
-        if (!isset($this->_nav[$type])) {
-            return;
-        }
-        
-        foreach ($this->_nav[$type] as $nav) {
-            
-            $link = $nav['link'];
-            $text = $nav['text'];
-            $permissions = $nav['permissions'];
-            
-            //Make a quick permissions check
-            if ($permissions) {
-                $resource = $permissions[0];
-                $rule     = $permissions[1];
-                
-                if (!has_permission($resource, $rule)) {
-                    continue;
-                }
-            }
-            
-            //Actually create the link (test if it is local or not)
-            //If it has an 'http' in it, its not local, otherwise it is
-            if (!preg_match('/^http/', $link)) {
-                $link = uri($link);
-            }
-            
-            echo '<li class="' . text_to_id($text, 'nav') . (is_current($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>';
-        }
     }
     
     /**

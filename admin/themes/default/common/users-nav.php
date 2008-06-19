@@ -1,8 +1,9 @@
 <ul id="secondary-nav" class="navigation">
 	<?php 
+	    $navArray = array();
 		if(has_permission('Users','add')) {
-			echo nav(array('Browse Users' => uri('users/browse'), 'User Roles' => uri('users/roles')));
+			$navArray = array('Browse Users' => uri('users/browse'), 'User Roles' => uri('users/roles'));
 		}
-		fire_plugin_hook('load_navigation', 'users');	
+		echo nav(apply_filters('admin_navigation_users', $navArray));
 	?>
 </ul>

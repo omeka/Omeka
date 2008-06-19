@@ -250,6 +250,49 @@ function url_for_item($action = 'show')
 }
 
 /**
+ * Helper function to be used in public themes to allow plugins to modify the navigation of those themes.
+ *
+ * Plugins can modify navigation by adding filters to specific subsets of the
+ *  navigation. For instance, most themes will have what might be called a 'main'
+ *  navigation set on the header of the site. This main navigation header would
+ *  be attached to a filter called 'public_navigation_main', which would always
+ *  act on that particular navigation. You would signal to the plugins to
+ *  differentiate between the different navigation elements by passing the 2nd
+ *  argument as 'main', so that it knew that this was the main navigation.
+ *
+ *
+ * @see apply_filters()
+ * @param array
+ * @param string|null
+ * @return string HTML
+ **/
+function public_nav(array $navArray, $navType=null)
+{
+    if ($navType) {
+        $filterName = 'public_navigation_' . $navType;
+        $navArray = apply_filters($filterName, $navArray);
+    }
+    
+    return nav($navArray);
+}
+
+/**
+ * Alias for public_nav($array, 'main'). This is to avoid potential typos so
+ *  that all plugins can count on having at least a 'main' navigation filter in
+ *  the public themes.
+ * 
+ * @todo Should we hard code the navigation that is in all themes into this
+ *  array?
+ * @param array
+ * @uses public_nav()
+ * @return string
+ **/
+function public_nav_main(array $navArray)
+{
+    return public_nav($navArray, 'main');
+}
+
+/**
  * Determine whether or not the current item belongs to a collection.
  * 
  * @param string|null The name of the collection that the item would belong

@@ -38,24 +38,24 @@
 									
 			<ul id="primary-nav" class="navigation">
 			<?php
-				$header_navigation = array('Dashboard' => uri(''), 'Archive' => uri('items'));
+				$headerNav = array('Dashboard' => uri(''), 'Archive' => uri('items'));
 				
 /* 				if(has_permission('exhibits','add')){
-				$header_navigation['Exhibits'] = uri('exhibits');
+				$headerNav['Exhibits'] = uri('exhibits');
 			}
  */				if(has_permission('Users','browse') ) {
-					$header_navigation['Users'] = uri('users/browse');
+					$headerNav['Users'] = uri('users/browse');
 				}
 				
 				if(has_permission('entities','add')) {
 				
-				$header_navigation['Names'] = uri('entities');
+				$headerNav['Names'] = uri('entities');
 				}
 				if(has_permission('Settings', 'edit')) {
-					$header_navigation['Settings'] = uri('settings');
+					$headerNav['Settings'] = uri('settings');
 				}
-				echo nav($header_navigation);
-				fire_plugin_hook('load_navigation', 'main');
+				
+				echo nav(apply_filters('admin_navigation_main', $headerNav));
 			?>
 			</ul>
 		</div>

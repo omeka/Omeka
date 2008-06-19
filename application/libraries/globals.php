@@ -186,7 +186,7 @@ function add_data_feed($format, $options=array())
  **/
 function add_navigation($text, $link, $type='main', $permissions=null)
 {
-    get_plugin_broker()->addNavigation($text, $link, $type, $permissions);
+    trigger_error('add_navigation() has been deprecated.  To add navigation via plugins, please use filters instead.');
 }
 
 /**

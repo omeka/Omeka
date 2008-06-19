@@ -1,9 +1,7 @@
 <ul id="secondary-nav" class="navigation">
-	<?php echo nav(array('Items' => uri('items'),
+	<?php $navArray = array('Items' => uri('items'),
 					'Types' => uri('types'),
 					'Collections'=>uri('collections'),
-					'Tags' => uri('tags')
-					));
-	fire_plugin_hook('load_navigation', 'archive');				
-	?>
+					'Tags' => uri('tags'));
+	echo nav(apply_filters('admin_navigation_archive', $navArray));	?>
 </ul>

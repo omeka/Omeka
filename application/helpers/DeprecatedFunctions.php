@@ -45,23 +45,6 @@ function not_empty_or($value, $default) {
 }
 
 /**
- * This works different from the above function in that it may/may not append navigation
- * via the plugins, but also different in the way it handles CSS.  Instead of class="current"
- * because of all the whacked-out navigation on the admin theme, we give each link an class of 'nav-'
- * + the link text.
- * @deprecated
- **/
-function admin_nav(array $links) {
-	$current = $_SERVER['REQUEST_URI'];
-	
-	$nav = '';
-	foreach ($links as $text => $link) {
-		$nav .= '<li class="' . text_to_id($text, 'nav') . '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
-	}
-	return $nav;	
-}
-
-/**
  * @deprecated 
  * @see item_type_elements_form()
  **/

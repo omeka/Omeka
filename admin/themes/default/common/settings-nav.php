@@ -1,8 +1,7 @@
 <ul id="secondary-nav" class="navigation">
-<?php echo nav(array('General' => uri('settings'),
+<?php $navArray = array('General' => uri('settings'),
 					'Themes' => uri('themes'),
 					'Plugins'=>uri('plugins')
-					));
-	fire_plugin_hook('load_navigation', 'settings');					
-				?>
+					);
+	echo nav(apply_filters('admin_navigation_settings', $navArray)); ?>
 </ul>
