@@ -5,6 +5,9 @@ Changelog for Omeka 0.9.2:
 * Fixes a problem with file uploads that was causing it to fail when saving to 
 the database.
 * Fixes a bug with invalid timestamps in the users_activations table.
+* Fixes a naming conflict with pre-existing PEAR modules by reseting Omeka's
+  include path.
+* Fixes an SQL bug that caused searching by multiple tags to retrieve no results.
 
 Changelog for Omeka 0.9.1.1:
 
