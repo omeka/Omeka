@@ -1,11 +1,16 @@
-<?php echo js('tooltip'); ?>
+<?php echo js('tooltip'); 
+echo js('tiny_mce/tiny_mce');
+?>
 <script type="text/javascript" charset="utf-8">
+//<![CDATA[
+
 	Event.observe(window,'load', function() {
 		Omeka.ItemForm.enableTagRemoval();
 		//Create tooltips for all spans with class="tooltip"
 		Omeka.ItemForm.makeTooltips($$('.tooltip'));
 		Omeka.ItemForm.changeItemType();
 		Omeka.ItemForm.elementControls();
+		Omeka.ItemForm.enableWysiwyg();
 		filesAdding();
 	});
 
@@ -139,6 +144,52 @@
 		
 		return false;
 	}
+	
+	Omeka.ItemForm.enableWysiwyg = function() {
+	    
+	    // Create a checkbox field within the 'input' div of each element.
+        // This checkbox will determine whether or not a specific field contains
+        // HTML and needs to use the WYSIWYG editor as a result.
+	    $$('div.input').each(function(div){
+	        var checkbox = document.createElement('input');
+	        checkbox.type = 'checkbox';
+	        div.appendChild(checkbox);
+	        var textarea = div.select('textarea').first();
+	        
+	        // The 'html-editor' class is initially set by the PHP helper function.
+	        if (textarea.hasClassName('html-editor')) {
+	            checkbox.checked = true;
+	        };
+	        
+	        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
+	        Event.observe(checkbox, 'click', function(e) {
+	            // Toggle on when checked.
+              if(checkbox.checked) {
+                 tinyMCE.execCommand("mceAddControl", false, textarea.id);               
+              } else {
+                tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
+              }
+            });
+	    });
+
+        // This will activate the WYSIWYG editor for all of the textareas by default.
+        // $$('textarea').invoke('addClassName', 'html-editor');
+    
+	    //WYSIWYG Editor
+       tinyMCE.init({
+        mode: "specific_textareas",
+        editor_selector : "html-editor",    // Put the editor in for all textareas with an 'html-editor' class.
+       	theme: "advanced",
+       	theme_advanced_toolbar_location : "top",
+       	theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect",
+		theme_advanced_buttons2 : "",
+		theme_advanced_buttons3 : "",
+		theme_advanced_toolbar_align : "left"
+       });   
+	}
+
+
+//]]>	
 </script>
 
 <?php echo flash(); ?>

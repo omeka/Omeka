@@ -126,6 +126,7 @@ function display_form_input_for_element(Element $element)
         
         //The value in the form field should be the text for that element
         $fieldValue = htmlentities($element->getTextValues($i));
+        // $fieldValue = $element->getTextValues($i);
                     
         //Check the POST to see if there is a value for that field saved already
         $postValue = $_POST['Elements'][$element['id']][$i];
@@ -134,19 +135,21 @@ function display_form_input_for_element(Element $element)
         //Here is where plugins should hook in to deal with display of certain
         //elements
         
+        
+        // Options that apply to any input type
+        $inputOptions = array('id'=>$fieldId, 'class'=>'textinput');
+        
         //Create a form input based on the element type name
         switch ($element['type_name']) {
+                
             //Tinytext => input type="text"
             case 'tinytext':
-                $input .= '<input type="text" class="textinput" name="';
-                $input .= $fieldName . '" id="' . $fieldId . '" value="';
-                $input .= $fieldValue . '" />';
+                $input .= __v()->formText($fieldName, $fieldValue, $inputOptions);
                 break;
             //Text => textarea
             case 'text':
-                $input .= '<textarea rows="15" cols="50" class="textinput"';
-                $input .= ' name="' . $fieldName . '" id="' . $fieldId . '">';
-                $input .= $fieldValue . "</textarea>\n\t";
+                $input .= __v()->formTextarea($fieldName, $fieldValue, 
+                    array_merge($inputOptions, array('rows'=>15, 'cols'=>50)));
                 break;
             default:
                 throw new Exception('Cannot display a form input for "' . 
