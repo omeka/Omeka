@@ -116,13 +116,12 @@ class Omeka_Plugin_Broker
             if ($row['active']) {
                 $active[$name] = $name;
                 
-                $this->setCurrentPlugin($name);
                 
                 //Require the file that contains the plugin
                 $path = $this->getPluginFilePath($name);
                 
                 if (file_exists($path)) {
-                    $this->_pluginPaths[] = $path;
+                    $this->_pluginPaths[$name] = $path;
                 }
             }
         }
@@ -138,8 +137,10 @@ class Omeka_Plugin_Broker
      **/
     public function loadActive()
     {        
-        foreach ($this->_pluginPaths as $path) {
+        foreach ($this->_pluginPaths as $name => $path) {
+            $this->setCurrentPlugin($name);
            require_once $path;
+           $this->setCurrentPlugin(null);
         } 
     }
     
