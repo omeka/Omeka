@@ -377,7 +377,7 @@ function nav(array $links) {
  * @return void
  **/
 function plugin_header() {
-	fire_plugin_hook('theme_header');
+	fire_plugin_hook('public_theme_header');
 }
 
 /**

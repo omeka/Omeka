@@ -479,6 +479,9 @@ class Omeka_Core
     /**
      * Define the custom response format contexts for Omeka.
      * 
+     * Plugin writers should use the 'define_response_contexts' filter to modify
+     * or expand the list of formats that existing controllers may respond to.
+     *
      * @link http://framework.zend.com/manual/en/zend.controller.actionhelpers.html#zend.controller.actionhelpers.contextswitch
      * 
      * Example of a definition of a response context through the ZF API:
@@ -498,16 +501,23 @@ class Omeka_Core
     {
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
         $contexts->setContextParam('output');
-         $contexts->addContexts( array(
-            'dc' => array(
-                'suffix'    => 'dc',
-                'headers'   => array('Content-Type' => 'text/xml')
-            ),
-            'rss2' => array(
-                'suffix'    => 'rss2',
-                'headers'   => array('Content-Type' => 'text/xml')
-            )
-        )); 
+ 
+        $contextArray = array(
+             'dc' => array(
+                 'suffix'    => 'dc',
+                 'headers'   => array('Content-Type' => 'text/xml')
+             ),
+             'rss2' => array(
+                 'suffix'    => 'rss2',
+                 'headers'   => array('Content-Type' => 'text/xml')
+             )
+         );
+
+        if ($pluginBroker = $this->getPluginBroker()) {
+             $pluginBroker->applyFilters('define_response_contexts', $contextArray);
+        }
+ 
+        $contexts->addContexts($contextArray); 
     }
     
     public function dispatch()

@@ -78,17 +78,24 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      **/
     protected function setActionContexts()
     {
-        $contextSwitch = $this->_helper->getHelper('contextSwitch');
-        $contextSwitch->addActionContexts(array(
+        $contextSwitcher = $this->_helper->getHelper('contextSwitch');
+        
+        $contextArray = array(
                 'browse' => array('xml', 'json', 'dc', 'rss2'),
-                'show'   => array('xml', 'json', 'dc')));
+                'show'   => array('xml', 'json', 'dc'));
         
         // Plugins can hook in to add contexts to actions
         if ($broker = Omeka_Context::getInstance()->getPluginBroker()) {
-            $broker->add_action_contexts($contextSwitch);
-        }
-            
-        $contextSwitch->initContext();        
+            // The 'define_action_contexts' filter receives the controller
+            // object as the 2st argument and the context switcher object as the
+            // 3nd (in case custom modification is required).
+            $contextArray = $broker->applyFilters('define_action_contexts', $contextArray,
+            array($this, $contextSwitcher));
+        }                
+        
+        $contextSwitcher->addActionContexts($contextArray);
+
+        $contextSwitcher->initContext();        
     }
     
     /**

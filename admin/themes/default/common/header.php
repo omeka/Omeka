@@ -24,7 +24,7 @@
 <?php echo js('archive'); ?>
 
 <!-- Plugin Stuff -->
-<?php plugin_header(); ?>
+<?php admin_plugin_header(); ?>
 
 </head>
 <body class="<?php echo $body_class; ?>">

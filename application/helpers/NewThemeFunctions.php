@@ -296,6 +296,34 @@ function public_nav_main(array $navArray)
 }
 
 /**
+ * Plugins should be able to hook into the header script for either admin or
+ * public themes, or both. The hooks involved are 'admin_theme_header',
+ * 'public_theme_header' and 'theme_header' (which could be changed to
+ * 'shared_theme_header' if necessary). This will allow us to disambiguate (is
+ * that an actual word?).
+ *
+ * Each hook implementation will receive the request object, which is the
+ * easiest way to determine what page you are actually on at any given time. For
+ * example:
+ *
+ * function myplugin_admin_header($request)
+ * {
+ *      if ($request->get('controller') == 'items') {
+ *          // Load a stylesheet that you only want on the items pages 
+ *      }  
+ * }
+ *
+ * 
+ * @return void
+ **/
+function admin_plugin_header()
+{
+    $request = Omeka_Context::getInstance()->getRequest();
+    fire_plugin_hook('admin_theme_header', $request);
+    fire_plugin_hook('theme_header', $request);
+}
+
+/**
  * Determine whether or not the current item belongs to a collection.
  * 
  * @param string|null The name of the collection that the item would belong
@@ -320,7 +348,7 @@ function item_belongs_to_collection($name=null, $item=null)
  * @param array
  * @return string HTML
  **/
-function display_files_for_item($options=array())
+function display_files_for_item($options = array())
 {
     $item = get_current_item();
     return display_files($item->Files, $options);
@@ -349,6 +377,11 @@ function item_has_files()
 {
     $item = get_current_item();
     return $item->hasFiles();
+}
+
+function item_has_thumbnail()
+{
+    return get_current_item()->hasThumbnail();
 }
 
 /**
