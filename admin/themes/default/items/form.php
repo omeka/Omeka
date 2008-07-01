@@ -8,18 +8,17 @@ echo js('tiny_mce/tiny_mce');
         Omeka.ItemForm.enableTagRemoval();
         // //Create tooltips for all spans with class="tooltip"
         Omeka.ItemForm.makeTooltips($$('.tooltip'));
-        Omeka.ItemForm.elementControls();
+        Omeka.ItemForm.makeElementControls();
         Omeka.ItemForm.enableWysiwyg();
-		Omeka.ItemForm.filesAdding();
+		Omeka.ItemForm.enableAddFiles();
         Omeka.ItemForm.changeItemType();
 	});
+    
+    Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
 
-    Omeka.ItemForm = Omeka.ItemForm || {};
-        
-    Omeka.ItemForm.changeItemType = function() {
-        var typeSelect = $('item-type');
+    changeItemType: function() {
 		$('change_type').hide();
-		typeSelect.onchange = function() {
+		$('item-type').onchange = function() {
 			var typeSelectLabel = $$('#type-select label')[0];
 			var image = document.createElement('img');
 			image.src = "<?php echo img('loader2.gif'); ?>";
@@ -45,11 +44,11 @@ echo js('tiny_mce/tiny_mce');
 				}
 			});
 		}        
-    };
+    },
     
     /* Loop through all the spans with class="tooltip" and make them visible 
 	as tooltips */
-    Omeka.ItemForm.makeTooltips = function(tooltipElements) {
+    makeTooltips: function(tooltipElements) {
 		tooltipElements.each(function(span){
 		   //The div that wraps the tooltip and the form element
 		   var div = span.up();
@@ -67,22 +66,49 @@ echo js('tiny_mce/tiny_mce');
 		       {default_css:true, zindex:100000});
 		   span.addClassName('info-window');
 		});        
-    }
+    },
 	
 	/* Messing with the tag list should not submit the form.  Instead it runs 
-	an AJAX request to remove tags */
-	Omeka.ItemForm.enableTagRemoval = function() {		
+	an AJAX request to remove tags. */
+	enableTagRemoval: function() {		
 		if ( !(buttons = $$('#tags-list input')) ) {
 		    return;
 		}
+
+    	function removeTag(button) {
+    		var tagId = parseInt(button.value);
+    		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
+
+    		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
+    			parameters: 'remove_tag='+ tagId,
+    			method: 'post',
+    			onSuccess: function(t) {
+    				//Fire the other ajax request to update the page
+    				new Ajax.Updater('tag-form', "<?php echo uri('items/tag-form/'); ?>", {
+    					parameters: {
+    						'id': "<?php echo $item->id; ?>"
+    					},
+    					onComplete: function() {
+    					    Effect.Appear('tag-form', {duration: 1.0});
+    						Omeka.ItemForm.enableTagRemoval();
+    					}
+    				});
+    			},
+    			onFailure: function(t) {
+    				alert(t.status);
+    			}
+    		});
+
+    		return false;
+    	}
 		
 		buttons.invoke('observe', 'click', function(e) {
 		    e.stop();
-		    Omeka.ItemForm.removeTag(this);
+		    removeTag(this);
 		});
-	}
+	},
 	
-	Omeka.ItemForm.elementControls = function() {
+	makeElementControls: function() {
 	    // Class name is hard coded here b/c it is hard coded in the helper
 	    // function as well.
 	    $$('.add-element').invoke('observe', 'click', function(e){
@@ -118,36 +144,13 @@ echo js('tiny_mce/tiny_mce');
 	            inputDivs.last().destroy();
 	        }
 	    });
-	};
+	},
 	
-	Omeka.ItemForm.removeTag = function(button) {
-		var tagId = button.value;
-		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
-
-		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
-			parameters: 'remove_tag='+ tagId,
-			method: 'post',
-			onSuccess: function(t) {
-				//Fire the other ajax request to update the page
-				new Ajax.Updater('tag-form', "<?php echo uri('items/tag-form/'); ?>", {
-					parameters: {
-						'id': "<?php echo $item->id; ?>"
-					},
-					onComplete: function() {
-					    Effect.Appear('tag-form', {duration: 1.0});
-						Omeka.ItemForm.enableTagRemoval();
-					}
-				});
-			},
-			onFailure: function(t) {
-				alert(t.status);
-			}
-		});
-		
-		return false;
-	}
-	
-	Omeka.ItemForm.filesAdding = function() {
+	/**
+	 * Adds an arbitrary number of file input elements to the items form so that
+     * more than one file can be uploaded at once.
+	 */
+    enableAddFiles: function() {
         if(!$('add-more-files')) return;
         if(!$('file-inputs')) return;
         if(!$$('#file-inputs .files')) return;
@@ -156,14 +159,13 @@ echo js('tiny_mce/tiny_mce');
         //This is where we put the new file inputs
         var filesDiv = $$('#file-inputs .files').first();
 
-        debugger;
-
         var filesDivWrap = $('file-inputs');
         //Make a link that will add another file input to the page
         var link = $(document.createElement('a')).writeAttribute(
             {href:'#',id: 'add-file', className: 'add-file'}).update('Add Another File');
 
-        Event.observe(link, 'click', function(){
+        Event.observe(link, 'click', function(e){
+            e.stop();
             var inputs = $A(filesDiv.getElementsByTagName('input'));
             var inputCount = inputs.length;
             var fileHtml = '<div id="fileinput'+inputCount+'" class="fileinput"><input name="file['+inputCount+']" id="file['+inputCount+']" type="file" class="fileinput" /></div>';
@@ -176,9 +178,14 @@ echo js('tiny_mce/tiny_mce');
         nonJsFormDiv.update();
 
         filesDivWrap.appendChild(link);
-    }
+    },
 	
-	Omeka.ItemForm.enableWysiwyg = function() {
+	/**
+	 * Make it so that checking a box will enable the WYSIWYG HTML editor for
+     * any given element field. This can be enabled on a per-textarea basis as
+     * opposed to all fields for the element.
+	 */
+	enableWysiwyg: function() {
 	    
 	    // Create a checkbox field within the 'input' div of each element.
         // This checkbox will determine whether or not a specific field contains
@@ -226,6 +233,10 @@ echo js('tiny_mce/tiny_mce');
 		theme_advanced_toolbar_align : "left"
        });   
 	}
+
+    });
+
+
 
 
 //]]>	
