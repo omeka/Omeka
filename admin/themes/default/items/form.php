@@ -5,13 +5,13 @@ echo js('tiny_mce/tiny_mce');
 //<![CDATA[
 
 	Event.observe(window,'load', function() {
-		Omeka.ItemForm.enableTagRemoval();
-		//Create tooltips for all spans with class="tooltip"
-		Omeka.ItemForm.makeTooltips($$('.tooltip'));
-		Omeka.ItemForm.changeItemType();
-		Omeka.ItemForm.elementControls();
-		Omeka.ItemForm.enableWysiwyg();
-		filesAdding();
+        Omeka.ItemForm.enableTagRemoval();
+        // //Create tooltips for all spans with class="tooltip"
+        Omeka.ItemForm.makeTooltips($$('.tooltip'));
+        Omeka.ItemForm.elementControls();
+        Omeka.ItemForm.enableWysiwyg();
+		Omeka.ItemForm.filesAdding();
+        Omeka.ItemForm.changeItemType();
 	});
 
     Omeka.ItemForm = Omeka.ItemForm || {};
@@ -39,6 +39,8 @@ echo js('tiny_mce/tiny_mce');
 					form.update(t.responseText);
 					var spans = form.select('.tooltip');
 					Omeka.ItemForm.makeTooltips(spans);
+					Omeka.ItemForm.elementControls();
+                    Omeka.ItemForm.enableWysiwyg();
 					Effect.BlindDown(form);
 				}
 			});
@@ -145,6 +147,37 @@ echo js('tiny_mce/tiny_mce');
 		return false;
 	}
 	
+	Omeka.ItemForm.filesAdding = function() {
+        if(!$('add-more-files')) return;
+        if(!$('file-inputs')) return;
+        if(!$$('#file-inputs .files')) return;
+        var nonJsFormDiv = $('add-more-files');
+
+        //This is where we put the new file inputs
+        var filesDiv = $$('#file-inputs .files').first();
+
+        debugger;
+
+        var filesDivWrap = $('file-inputs');
+        //Make a link that will add another file input to the page
+        var link = $(document.createElement('a')).writeAttribute(
+            {href:'#',id: 'add-file', className: 'add-file'}).update('Add Another File');
+
+        Event.observe(link, 'click', function(){
+            var inputs = $A(filesDiv.getElementsByTagName('input'));
+            var inputCount = inputs.length;
+            var fileHtml = '<div id="fileinput'+inputCount+'" class="fileinput"><input name="file['+inputCount+']" id="file['+inputCount+']" type="file" class="fileinput" /></div>';
+            new Insertion.After(inputs.last(), fileHtml);
+            $('fileinput'+inputCount).hide();
+            new Effect.SlideDown('fileinput'+inputCount,{duration:0.2});
+            //new Effect.Highlight('file['+inputCount+']');
+        });
+
+        nonJsFormDiv.update();
+
+        filesDivWrap.appendChild(link);
+    }
+	
 	Omeka.ItemForm.enableWysiwyg = function() {
 	    
 	    // Create a checkbox field within the 'input' div of each element.
@@ -154,7 +187,13 @@ echo js('tiny_mce/tiny_mce');
 	        var checkbox = document.createElement('input');
 	        checkbox.type = 'checkbox';
 	        div.appendChild(checkbox);
+
 	        var textarea = div.select('textarea').first();
+	        
+	        // We can't use the editor for any field that isn't a textarea
+	        if (Object.isUndefined(textarea)) {
+	            return;
+	        };
 	        
 	        // The 'html-editor' class is initially set by the PHP helper function.
 	        if (textarea.hasClassName('html-editor')) {

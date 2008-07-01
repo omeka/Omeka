@@ -1,9 +1,6 @@
 /* == Reset Styles == */
 @import url("reset.css");
 
-/* == Misc Imports == */
-@import url("exhibits.css");
-
 /* == Generic == */
 body {font:62.5% "Lucida Grande",verdana,arial,helvetica, sans-serif; color:#444; min-width:1000px;background:#333;}
 
