@@ -530,7 +530,7 @@ function loop_items($reset=false)
     //in the loop and 
     if(list($key, $item) = each($set)) {
         set_current_item($item);
-        return true;
+        return $item;
     }
     
     //Reset the set of items if the loop has finished (so we can run it again
