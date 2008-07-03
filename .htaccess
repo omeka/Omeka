@@ -1,8 +1,6 @@
 <IfModule mod_php5.c>
 	php_value display_errors 1
-	php_flag zlib.output_compression On
 	php_flag register_globals off
-	php_value zlib.output_compression_level 5
 </IfModule>
 
 RewriteEngine on
