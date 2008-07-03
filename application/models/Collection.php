@@ -18,8 +18,8 @@ class Collection extends Omeka_Record
 {        
     public $name;
     public $description;
-    public $public;
-    public $featured;
+    public $public = 0;
+    public $featured = 0;
     
     protected $_related = array('Collectors' => 'getCollectors');
     

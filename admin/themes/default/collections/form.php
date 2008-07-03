@@ -54,7 +54,8 @@
 
 <div class="field">
 <?php 
-	select(array('name'=>'collectors[]', 'id'=>'collector'), $entities, null, 'Add a Collector (optional)', 'id', 'name'); 
+    echo label(array('for'=>'collectors'), 'Add a Collector (optional)');
+	echo select_entity(array('name'=>'collectors[]', 'id'=>'collector')); 
 ?>
 </div>
 
