@@ -276,7 +276,13 @@ class DcRewriteFix extends Omeka_Db_Migration
         ADD INDEX `element_set_id` (`element_set_id`);
         
         ALTER TABLE `{$db->prefix}elements` 
-        MODIFY `element_set_id` int(10) unsigned NOT NULL;";
+        MODIFY `element_set_id` int(10) unsigned NOT NULL;
+        
+        ALTER TABLE `{$db->prefix}elements` 
+        MODIFY `order` int(10) unsigned default NULL AFTER `element_set_id`;
+        
+        ALTER TABLE `{$db->prefix}elements` 
+        ADD UNIQUE `order_element_set_id` (`element_set_id`,`order`) ";
         $db->execBlock($sql);
     }
     
