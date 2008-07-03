@@ -108,10 +108,12 @@ class PluginsController extends Omeka_Controller_Action
         $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin . DIRECTORY_SEPARATOR . 'plugin.ini';
         
         if (file_exists($path)) {
-            $config = new Zend_Config_Ini($path, 'info');
-            foreach ($config as $key => $value) {
-                $info->$key = $value;
-            }
+            try {
+                $config = new Zend_Config_Ini($path, 'info');
+	            foreach ($config as $key => $value) {
+	                $info->$key = $value;
+	            }
+            } catch (Zend_Config_Exception $e) {}        
         }
                     
         $info->has_config = (bool) $this->_pluginBroker->getHook($plugin, 'config');
