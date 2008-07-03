@@ -18,7 +18,7 @@ class ItemsElementsTable extends Omeka_Db_Table
     
     public function findByItem($itemId)
     {
-        $select = $this->getSelect()->where('ie.item_id = ?', $itemId);
+        $select = $this->getSelect()->where('ie.item_id = ?', (int) $itemId);
         return $this->fetchObjects($select);
     }
     
