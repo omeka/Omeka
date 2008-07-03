@@ -369,27 +369,6 @@ function nav(array $links) {
 
 ///// END NAVIGATION /////
 
-///// PLUGIN HELPER FUNCTIONS /////
-
-/**
- * similar to wp_header() from Wordpress, hooks into the plugin system within the header
- *
- * @return void
- **/
-function plugin_header() {
-	fire_plugin_hook('public_theme_header');
-}
-
-/**
- * @see plugin_header()
- * @return void
- **/
-function plugin_footer() {
-	fire_plugin_hook('theme_footer');
-}
-
-///// END PLUGIN HELPER FUNCTIONS /////
-
 /**
  * Output a tag string given an Item, Exhibit, or a set of tags.
  *

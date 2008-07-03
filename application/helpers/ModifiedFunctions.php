@@ -20,3 +20,25 @@
 function random_featured_item($hasImage=false) {
 	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
 }
+
+/**
+ * similar to wp_header() from Wordpress, hooks into the plugin system within the header
+ *
+ * @since 7/3/08 The 'public_theme_header' hook will receive the request object as
+ *  its first argument. That allows the plugin writer to tailor the header output
+ *  to a specific page or pages within the public theme.
+ * @return void
+ **/
+function plugin_header() {
+    $request = Omeka_Context::getInstance()->getRequest();
+	fire_plugin_hook('public_theme_header', $request);
+}
+
+/**
+ * @see plugin_header()
+ * @return void
+ **/
+function plugin_footer() {
+    $request = Omeka_Context::getInstance()->getRequest();
+	fire_plugin_hook('public_theme_footer', $request);
+}

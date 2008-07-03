@@ -296,9 +296,8 @@ function public_nav_main(array $navArray)
 
 /**
  * Plugins should be able to hook into the header script for either admin or
- * public themes, or both. The hooks involved are 'admin_theme_header',
- * 'public_theme_header' and 'theme_header' (which could be changed to
- * 'shared_theme_header' if necessary). This will allow us to disambiguate (is
+ * public themes. The hooks involved are 'admin_theme_header',
+ * 'public_theme_header'. This will allow us to disambiguate between themes(is
  * that an actual word?).
  *
  * Each hook implementation will receive the request object, which is the
@@ -319,7 +318,12 @@ function admin_plugin_header()
 {
     $request = Omeka_Context::getInstance()->getRequest();
     fire_plugin_hook('admin_theme_header', $request);
-    fire_plugin_hook('theme_header', $request);
+}
+
+function admin_plugin_footer()
+{
+    $request = Omeka_Context::getInstance()->getRequest();
+    fire_plugin_hook('admin_theme_footer', $request);
 }
 
 /**
