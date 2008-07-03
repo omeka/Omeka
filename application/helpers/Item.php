@@ -31,6 +31,8 @@ class Omeka_View_Helper_Item
      *      from 0. 
      *  'noFilter' => return the set of metadata without running any of the 
      *      filters.
+     *  'snippet' => trim the length of each piece of text to the given length
+     *      (integer).
      *
      * @return string|array|null Null if field does not exist for item.  String
      * if certain options are passed.  Array otherwise.
@@ -58,6 +60,13 @@ class Omeka_View_Helper_Item
      **/
     protected function _formatWithOptions($text, array $options)
     {
+        // If a snippet length is given, trim the text down to that length
+        if (isset($options['snippet'])) {
+            foreach ($text as $key => $value) {
+                $text[$key] = snippet($value, 0, (int) $options['snippet']);
+            }
+        }
+        
         // Return the join'd text
         if(isset($options['delimiter'])) {
             return join($options['delimiter'], (array) $text);
