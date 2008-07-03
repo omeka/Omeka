@@ -18,18 +18,24 @@ class CollectionTable extends Omeka_Db_Table
         /*****************************
          * PAGINATION
          *****************************/
-        $page = 1;
-        $per_page = $this->getNumRecordsPerPage();
         
-        if (isset($params['per_page'])) {
-            $per_page = (int) $params['per_page'];
+        // We should only paginate if these parameters have been passed (many
+        // cases in which pagination is not desirable for collections).
+        if(array_key_exists('page', $params) and array_key_exists('per_page', $params)) {
+            $page = 1;
+            $per_page = $this->getNumRecordsPerPage();
+    
+            if (isset($params['per_page'])) {
+                $per_page = (int) $params['per_page'];
+            }
+    
+            if (isset($params['page'])) {
+                $page = (int) $params['page'];
+            }
+    
+            $select->limitPage($page, $per_page);    
         }
-        
-        if (isset($params['page'])) {
-            $page = (int) $params['page'];
-        }
-        
-        $select->limitPage($page, $per_page);
+
         
         /****************************
          * END PAGINATION
