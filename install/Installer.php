@@ -13,10 +13,7 @@ class Installer
     private $installFormValidationErrorMessage;
     
     public function __construct()
-    {
-        // Define the web and directory paths.
-        require_once '../paths.php';
-        
+    {   
         // Load the necessary core phases.
         require_once 'Omeka/Core.php';
         $core = new Omeka_Core;
