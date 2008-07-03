@@ -91,10 +91,6 @@ function recent_items($num = 10) {
 	return get_db()->getTable('Item')->findBy(array('recent'=>true,'per_page'=>(int) $num));
 }
 
-function random_featured_item($hasImage=true) {
-	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
-}
-
 function random_featured_collection()
 {
     return get_db()->getTable('Collection')->findRandomFeatured();
