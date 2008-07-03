@@ -509,6 +509,16 @@ function has_items_for_loop()
 }
 
 /**
+ * Determine whether or not the current request is on the admin theme.
+ * 
+ * @return boolean
+ **/
+function theme_is_admin()
+{
+    return defined('ADMIN');
+}
+
+/**
  * Use in while statement to loop through a set of Item records.  This will
  * set the current item.
  * 
