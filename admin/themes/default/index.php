@@ -3,7 +3,7 @@
 	<div id="primary">
 		<div id="welcome">
             
-            <?php if (OMEKA_MIGRATION >= (int) get_option('migration')): ?>
+            <?php if (OMEKA_MIGRATION > (int) get_option('migration')): ?>
                 <div class="error">
                     Warning: Your Omeka database is not compatible with the
                     version of Omeka that you are running.  
