@@ -79,20 +79,7 @@ class ElementTable extends Omeka_Db_Table
         
         return $indexed;        
     }
-    
-    /**
-     * Retrieve the names of all the elements for a given Item Type
-     * 
-     * @see item_type_elements()
-     * @param integer
-     * @return array
-     **/
-    public function findNamesByItemType($itemTypeId)
-    {
-        //Retrieve dummy data
-        return array('Physical Dimensions', 'Original Transcript');
-    }
-    
+
     /**
      * Return the element's name and id for <select> tags on it.
      * 

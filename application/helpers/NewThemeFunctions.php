@@ -46,10 +46,9 @@ function element_metadata($elementName, $field)
 function item_type_elements()
 {
     $item = get_current_item();
-    $fieldNames = get_db()->getTable('Element')->findNamesByItemType($item->item_type_id);
-    $elementText = array();
-    foreach ($fieldNames as $field) {
-        $elementText[$field] = item($field);
+    $elements = $item->getItemTypeElements();
+    foreach ($elements as $element) {
+        $elementText[$element->name] = item($element->name);
     }
     return $elementText;
 }
