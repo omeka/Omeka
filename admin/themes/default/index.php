@@ -80,7 +80,11 @@
 		<div id="site-info">
 			<div id="site-meta">
 				<h2>Site Overview</h2>
-				<p><em><?php echo settings('site_title'); ?></em> contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> collections, tagged with <?php echo total_tags(); ?> keywords. There are <?php echo total_users(); ?> users.</p>
+                <p><em><?php echo settings('site_title'); ?></em> 
+                contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> 
+                collections, tagged with <?php echo total_tags(); ?> keywords. 
+                There are <?php echo total_users(); ?> users. This is
+                Omeka version <em><?php echo OMEKA_VERSION; ?></em>.</p>
 			</div>
 			<div id="recent-items">
 				<h2>Recent Items</h2>
