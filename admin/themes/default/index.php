@@ -2,7 +2,22 @@
 
 	<div id="primary">
 		<div id="welcome">
+            
+            <?php if (OMEKA_MIGRATION >= (int) get_option('migration')): ?>
+                <div class="error">
+                    Warning: Your Omeka database is not compatible with the
+                    version of Omeka that you are running.  
 
+                    <?php if (has_permission('Upgrade', 'migrate')): ?>
+                        Please backup your existing database and then click the
+                        following link to upgrade:
+                        <?php echo link_to('upgrade', null, 'Upgrade', array('class'=>'upgrade-link')); ?>                    
+                    <?php else: ?>
+                        Please notify an administrator to upgrade the database.
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            
 			<div id="getting-started">
 				<h1>Getting Started with Omeka</h1>
 				<dl>
