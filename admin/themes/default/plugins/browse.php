@@ -20,9 +20,11 @@
             //I hate IE so much.  
             if($plugin->installed): ?>
                 <form action="<?php echo uri('plugins/activate'); ?>" method="post" accept-charset="utf-8">
+                    <fieldset>
                     <button name="" type="submit" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?>
                     </button>
                     <input type="hidden" name="activate" value="<?php echo $plugin->directory; ?>" />
+                    </fieldset>
                 </form>
                 </td>
                 <td>
@@ -34,13 +36,17 @@
                     <form action="<?php echo url_for(array(
                         'controller'=>'plugins', 
                         'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
-                       <input type="submit" name="uninstall" value="Uninstall" />
-                       <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+                        <fieldset>
+                            <input type="submit" name="uninstall" value="Uninstall" />
+                            <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+                        </fieldset>
                     </form>
             <?php else: //The plugin has not been installed yet ?>
                 <form action="<?php echo uri('plugins/install'); ?>" method="post" accept-charset="utf-8">     
-                    <button name="" type="submit" value="<?php echo $plugin->directory; ?>">Install</button>
-                    <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+                    <fieldset>
+                        <button name="" type="submit" value="<?php echo $plugin->directory; ?>">Install</button>
+                        <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+                    </fieldset>
                 </form>
                 </td>
                 <td>
@@ -59,7 +65,7 @@
 
 
 <fieldset>
-	<p class="manageplugins">Add new plugins by downloading them from the <a href="http://omeka.org/download/plugins/">Omeka Plugins  Directory</a>, or <a href="http://omeka.org/codex/index.php?title=Writing_a_Plugin">write your own</a>!<p>
+	<p class="manageplugins">Add new plugins by downloading them from the <a href="http://omeka.org/download/plugins/">Omeka Plugins  Directory</a>, or <a href="http://omeka.org/codex/index.php?title=Writing_a_Plugin">write your own</a>!</p>
 </fieldset>
 </div>
 

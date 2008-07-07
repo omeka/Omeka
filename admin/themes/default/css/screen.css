@@ -530,7 +530,11 @@ ul.tags, li.tag {display: inline;}
 	#names-edit {}
 	#names-combine {float:right; width: 364px; background:#dae9f6;}
 	
+	/* Plugins styles */
 	#plugin-info form {overflow:auto;padding-bottom:0;width:100px;}
+    /* Reset the styling for fieldsets on the plugins page. Setting margin-bottom gets rid of a weird scroll bar thing. */
+	#plugin-info fieldset {border-top:0;margin-bottom:0.5em;padding-top:0;}
+	
 /* == Footer styles == */
 
 #footer {background:#333; color:#fff; padding-bottom:3.6em;}
