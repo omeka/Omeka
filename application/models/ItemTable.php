@@ -127,10 +127,10 @@ class ItemTable extends Omeka_Db_Table
      * @param Type|integer|string Type object, Type ID or Type name
      * @return void
      **/
-    public function filterByType($select, $type)
+    public function filterByItemType($select, $type)
     {        
-        $select->joinInner(array('ty' => $this->getDb()->Type), 
-                           'i.type_id = ty.id', 
+        $select->joinInner(array('ty' => $this->getDb()->ItemType), 
+                           'i.item_type_id = ty.id', 
                            array());
         if ($type instanceof Type) {
             $select->where('ty.id = ?', $type->id);
@@ -283,7 +283,7 @@ class ItemTable extends Omeka_Db_Table
                 
         // filter based on type
         if (isset($params['type'])) {
-            $this->filterByType($select, $params['type']);
+            $this->filterByItemType($select, $params['type']);
         }
         
         // filter based on tags
