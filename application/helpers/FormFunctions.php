@@ -139,7 +139,7 @@ function textarea($attributes, $default = null, $label = null )
 function radio( $attributes, array $values, $default = null, $label_class = 'radiolabel' )
 {
     $attributes['label_class'] = $label_class;
-	return __v()->formRadio($attributes['name'], $default, $attributes, $values);
+	return __v()->formRadio($attributes['name'], $default, $attributes, $values, null);
 }
 	
 	function hidden( $attributes, $value )
