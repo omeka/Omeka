@@ -160,6 +160,12 @@ class Omeka_View_Helper_Item
             case 'collection name':
                 return $item->Collection->name;
                 break;
+            case 'featured':
+                return $item->featured;
+                break;
+            case 'public':
+                return $item->public;
+                break;
             default:
                 # code...
                 break;
@@ -175,7 +181,7 @@ class Omeka_View_Helper_Item
     public function getElementText($field, array $options)
     {
         $item = get_current_item();
-        
+
         //Any built-in fields or special naming schemes
         if($this->hasOtherField($field)) {
             return $this->getOtherField($field, $item);

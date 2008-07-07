@@ -325,11 +325,17 @@ class ItemsController extends Omeka_Controller_Action
             if (!$this->isAllowed('makeFeatured')) {
                 throw new Exception( 'User is not allowed to modify featured status of items' );
             }
-            
+
             if ($itemArray = $this->_getParam('items')) {
-                                        
+                    
                 //Loop through the IDs given and toggle
                 foreach ($itemArray as $k => $fields) {
+                    
+                    if(!array_key_exists('id', $fields) or
+                    !array_key_exists('public', $fields) or
+                    !array_key_exists('featured', $fields)) { 
+                        throw new Exception( 'Power-edit request was mal-formed!' ); 
+                    }
                     
                     $item = $this->findById($fields['id']);
                     
@@ -337,7 +343,7 @@ class ItemsController extends Omeka_Controller_Action
                     
                     //Existing status must be compared against new status for the sake of plugin hooks
                     $old = $item->public;
-                    $new = array_key_exists('public', $fields);
+                    $new = (int) $fields['public'];
                     
                     //If the item was made public, fire the plugin hook
                     if (!$old and $new) {
@@ -347,7 +353,7 @@ class ItemsController extends Omeka_Controller_Action
                     //If public has been checked
                     $item->public = $new;
                     
-                    $item->featured = array_key_exists('featured', $fields);
+                    $item->featured = (int) $fields['featured'];
                     
                     $item->save();
                 }
