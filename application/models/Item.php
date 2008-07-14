@@ -17,7 +17,7 @@ require_once 'Element.php';
 require_once 'Relatable.php';
 require_once 'ItemTable.php';
 require_once 'ItemPermissions.php';    
-
+require_once 'ElementText.php';
 /**
  * @package Omeka
  * @author CHNM
@@ -37,7 +37,7 @@ class Item extends Omeka_Record
                                 'Files'=>'getFiles',
                                 'Elements'=>'getElements',
                                 'ItemTypeElements'=>'getItemTypeElements',
-                                'ItemsElements'=>'getItemsElements');
+                                'ItemsElements'=>'getElementText');
     
     protected function construct()
     {
@@ -92,9 +92,9 @@ class Item extends Omeka_Record
      * 
      * @return array Set of ItemsElements records
      **/
-    public function getItemsElements()
+    public function getElementText()
     {
-        return $this->getTable('ItemsElements')->findByItem($this->id);
+        return $this->getTable('ElementText')->findByItem($this->id);
     }
     
     /**
@@ -166,9 +166,16 @@ class Item extends Omeka_Record
     }
     
     /**
+     * The application flow is thus:
+     *
+     *  1) Build ElementText objects from the POST.
+     *  2) Validate the ElementText objects and assign error messages if necessary.
+     *  3) After the item saves correctly, delete all the ElementText records for the Item.
+     *  4) Save the new ElementText objects to the database.
+     *
      * @see Item::beforeSaveForm()
      * 
-     * @param string
+     * @param array
      * @return void
      **/
     protected function _beforeSaveElements(&$post)
@@ -178,10 +185,9 @@ class Item extends Omeka_Record
     }
     
     /**
-     * For now, only trim the text in each one. 
+     * @internal For now, only trim the text in each one and cast the 'html'
+     *  flag to boolean.
      * 
-     * @todo Cast all of the text fields to strings to prevent injection of
-     * badness.
      * @see Item::_getElementsFromPost()
      * @param ArrayObject
      * @return void
@@ -189,8 +195,11 @@ class Item extends Omeka_Record
     protected function _filterInputForElements(&$post)
     {        
         // Trim the text for all the POST'ed elements
-        foreach ($post['Elements'] as $key => $element) {
-            $post['Elements'][$key] = array_map('trim', $element);
+        foreach ($post['Elements'] as $elementId => $elementText) {
+            foreach ($elementText as $index => $attributes) {
+                $post['Elements'][$elementId][$index]['text'] = trim( (string) $attributes['text']);
+                $post['Elements'][$elementId][$index]['html'] = (int) $attributes['html'];
+            }
         }
     }
     
@@ -201,7 +210,9 @@ class Item extends Omeka_Record
      *
      *      * Elements:
      *          * 1:
-     *              * 0: 'Foobar'
+     *              * 0: 
+     *                  'text': 'Foobar'
+     *                  'html': '0'
      *              * 1: 'Baz'
      * 
      * @todo May want to throw an Exception if an element in the POST doesn't
@@ -214,18 +225,30 @@ class Item extends Omeka_Record
         $elementPost = $post['Elements'];
         $elements = array();
         $table = $this->getDb()->getTable('Element');
+        $itemRecordTypeId = $this->_getItemRecordTypeId();
         foreach ($elementPost as $id => $texts) {
             $element = $table->find((int) $id);
-            if($element instanceof Element) {
-                foreach ($texts as $key => $text) {
-                    $textRecord = new ItemsElements;
-                    $textRecord->text = $text;
-                    $element->addText($textRecord);
-                }
-                $elements[] = $element;
+            // If we can't find an element with a given ID, something fishy is going on.
+            if (!$element instanceof Element) {
+                throw new Exception('Cannot find an element with ID#' . (int) $id);
             }
+            
+            foreach ($texts as $key => $textAttributes) {
+                // Ignore fields that are empty (no text)
+                if (empty($textAttributes['text'])) {
+                    continue;
+                }
+                
+                $textRecord = new ElementText;
+                $textRecord->text = $textAttributes['text'];
+                $textRecord->html = (int) (boolean) $textAttributes['html'];
+                $textRecord->element_id = $element->id;
+                $textRecord->record_type_id = $itemRecordTypeId;
+                $element->addText($textRecord);
+            }
+            $elements[] = $element;
         }
-        
+
         return $elements;
     }
     
@@ -390,21 +413,44 @@ class Item extends Omeka_Record
      **/
     protected function _deleteElementText()
     {
-        
+        // $itemRecordTypeId = $this->_getItemRecordTypeId();
+        $db = $this->getDb();
+        $db->query(
+            "DELETE etx FROM $db->ElementText etx 
+            INNER JOIN $db->Item i ON i.id = etx.record_id 
+            INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
+            WHERE rty.name = 'Item' AND i.id = ?", array($this->id));
+    }
+    
+    protected function _getItemRecordTypeId()
+    {
+        return $this->getDb()->getTable('RecordType')->findIdFromName('Item');
     }
     
     /**
      * Save a set of elements text.
      * 
      * @see Item::afterSaveForm()
-     * @uses Element::saveTextFor()
      * @param array Set of Element records
      * @return void
      **/
     public function saveElementText($elements)
     {
+        if (!$this->exists()) {
+            throw new Exception('Cannot save element text for records that are not yet persistent!');
+        }
+        
+        // Delete all the existing element text before adding the new stuff.
+        $this->_deleteElementText();
+        
         foreach ($elements as $index => $element) {
-            $element->saveTextFor($this);
+            // Set the item_id for the element text record
+            if ($textRecords = $element->getTextObjects()) {
+                foreach ($textRecords as $textRecord) {
+                    $textRecord->record_id = $this->id;
+                    $textRecord->save();
+                }
+            }
         }
     }
     

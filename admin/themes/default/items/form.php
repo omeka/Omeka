@@ -114,17 +114,41 @@ echo js('tiny_mce/tiny_mce');
 	    $$('.add-element').invoke('observe', 'click', function(e){
 	        // Stop form submissions
 	        e.stop();
-	        
-	        // Get the input div and copy it.
-	        var input = this.up().previous('.input');
-	        var newInput = input.cloneNode(true);
-	        
-	        // 1) Empty the new form element
+            
+	        // Get the last input div and copy it.
+	        var lastInput = this.up('div.field').select('div.input').last();
+	        var newInput = lastInput.cloneNode(true);
+	        	        
+	        // 1) Empty the new form elements
 	        // 2) Put it on the page directly below the existing one
-	        var formElement = newInput.down();
-	        formElement.value = '';
-
-	        input.insert({after: newInput});
+	        var formInputs = newInput.select('textarea, input');
+	        
+	        formInputs.each(function(input){
+	            // Force it to have an ID if it doesn't already
+	            input.identify();
+	            
+	            // Set its name to a proper value so that it saves.
+	            // This involves grepping the name for its specific index and incrementing that.
+	            // Elements[##][1][text] --> Elements[##][2][text]
+	            input.name = input.name.gsub(/(Elements\[\d+\]\[)(\d+)\]/, function(match) {
+	                return match[1] + (parseInt(match[2]) + 1) + ']'
+	            });
+	            
+	            // Reset its value
+	            input.value = '';
+	            
+	            // Hidden values for each input field should be set to 0
+	            if (input.type == 'hidden') {
+	                input.value = '0';
+	            };
+	            
+	            // Enable the wysiwyg checkbox
+	            if (input.type == 'checkbox') {
+                    Omeka.ItemForm.enableWysiwygCheckbox(input);
+	            };
+	        });
+	        	        	        	                    
+	        lastInput.insert({after: newInput});
 	    });
 	    
 	    // When button is clicked, remove the last input that was added
@@ -141,7 +165,7 @@ echo js('tiny_mce/tiny_mce');
 	        //Check if there is more than one element, if so then OK to delete.
 	        var inputDivs = elementDiv.select('div.input');
 	        if(inputDivs.size() > 1) {
-	            inputDivs.last().destroy();
+	            inputDivs.last().remove();
 	        }
 	    });
 	},
@@ -180,6 +204,28 @@ echo js('tiny_mce/tiny_mce');
         filesDivWrap.appendChild(link);
     },
 	
+	enableWysiwygCheckbox: function(checkbox) {
+	            
+        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
+        Event.observe(checkbox, 'click', function(e) {
+            var textarea = checkbox.previous('textarea', 0);
+
+            // We can't use the editor for any field that isn't a textarea
+            if (Object.isUndefined(textarea)) {
+                return;
+            };
+
+            textarea.identify();
+        
+            // Toggle on when checked.
+          if(checkbox.checked) {
+             tinyMCE.execCommand("mceAddControl", false, textarea.id);               
+          } else {
+            tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
+          }
+        });
+	},
+	
 	/**
 	 * Make it so that checking a box will enable the WYSIWYG HTML editor for
      * any given element field. This can be enabled on a per-textarea basis as
@@ -187,35 +233,10 @@ echo js('tiny_mce/tiny_mce');
 	 */
 	enableWysiwyg: function() {
 	    
-	    // Create a checkbox field within the 'input' div of each element.
-        // This checkbox will determine whether or not a specific field contains
-        // HTML and needs to use the WYSIWYG editor as a result.
-	    $$('div.input').each(function(div){
-	        var checkbox = document.createElement('input');
-	        checkbox.type = 'checkbox';
-	        div.appendChild(checkbox);
-
-	        var textarea = div.select('textarea').first();
-	        
-	        // We can't use the editor for any field that isn't a textarea
-	        if (Object.isUndefined(textarea)) {
-	            return;
-	        };
-	        
-	        // The 'html-editor' class is initially set by the PHP helper function.
-	        if (textarea.hasClassName('html-editor')) {
-	            checkbox.checked = true;
-	        };
-	        
-	        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
-	        Event.observe(checkbox, 'click', function(e) {
-	            // Toggle on when checked.
-              if(checkbox.checked) {
-                 tinyMCE.execCommand("mceAddControl", false, textarea.id);               
-              } else {
-                tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
-              }
-            });
+	    $$('div.inputs').each(function(div){
+            // Get all the WYSIWYG checkboxes
+            var checkboxes = div.select('input[type="checkbox"]');
+            checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
 	    });
 
         // This will activate the WYSIWYG editor for all of the textareas by default.
@@ -346,7 +367,7 @@ echo js('tiny_mce/tiny_mce');
 	    'Citation'); 
 	    
 	    //@todo Move this to the controller.
-	    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, 'Dublin Core Metadata Element Set');
+	    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, 'Dublin Core');
 
 	    foreach ($dublinCoreElements as $key => $element) {
 	       echo display_form_input_for_element($element);

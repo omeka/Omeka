@@ -38,8 +38,8 @@ class ElementTable extends Omeka_Db_Table
         $select = parent::getSelect();
         $db = $this->getDb();
         // Join on the element_types table to retrieve type regex and type name
-        $select->joinLeft(array('et'=>$db->ElementType), 'et.id = e.element_type_id', 
-            array('type_name'=>'et.name', 'type_regex'=>'et.regular_expression'));
+        $select->joinLeft(array('dt'=>$db->DataType), 'dt.id = e.data_type_id', 
+            array('data_type_name'=>'dt.name'));
             
         // Join on the element_sets table to retrieve set name
         $select->joinLeft(array('es'=>$db->ElementSet), 'es.id = e.element_set_id',
@@ -52,11 +52,18 @@ class ElementTable extends Omeka_Db_Table
         $select = $this->getSelect();
         $db = $this->getDb();
         
-        $select->joinInner(array('il' => $db->ItemsElements), 
-                           'il.element_id = e.id', 
-                           array('il.text'));
+        $select->joinInner(array('etx' => $db->ElementText), 
+                           'etx.element_id = e.id', 
+                           array('etx.text'));
+        
+        // Join against the record_types table to pull only element text for Items
+        $select->joinInner(array('rty'=> $db->RecordType),
+                            'rty.id = etx.record_type_id AND rty.name = "Item"',
+                            array('record_type_name'=>'rty.name'));
+        
+        // Join against the items table finally, with a specific item ID in the WHERE
         $select->joinInner(array('i' => $db->Item), 
-                           'il.item_id = i.id', 
+                           'etx.record_id = i.id', 
                            array());
         
         $select->where('i.id = ?', $itemId);

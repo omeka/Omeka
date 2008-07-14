@@ -4,7 +4,7 @@
 	
 	<h1>Edit &#8220;<?php echo item('Title', ', '); ?>&#8221;</h1>
 
-	<form method="post" enctype="multipart/form-data" id="item-form">
+	<form method="post" enctype="multipart/form-data" id="item-form" action="">
 		<?php include 'form.php'; ?>
 		</div>
 		<p id="item-form-submits">
