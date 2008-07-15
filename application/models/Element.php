@@ -45,30 +45,6 @@ class Element extends Omeka_Record
     }
     
     /**
-     * Retrieve only the text values (useful for for display).
-     *
-     * @todo Should filters run here?
-     * @param integer
-     * @return string|array|null
-     **/
-    public function getTextValues($index=null)
-    {
-        if (is_integer($index)) {
-            $obj = $this->_texts[$index];
-            if ($obj) {
-                return $obj->text;
-            }
-        } else {
-            $texts = array();
-            foreach ($this->_texts as $key => $obj) {
-                $texts[$key] = $obj->text;
-            }
-            
-            return $texts;
-        }
-    }
-    
-    /**
      * Retrieve text values for this element.
      * 
      * @param integer
@@ -91,7 +67,7 @@ class Element extends Omeka_Record
      **/
     protected function _validate()
     {
-        foreach ($this->getTextValues() as $index => $text) {
+        foreach ($this->getTextObjects() as $index => $text) {
             // preg_match returns 1 or 0 (true/false equivalent) based on 
             // whether the text passes the regex
             // if (!preg_match($this->type_regex, $text)) {

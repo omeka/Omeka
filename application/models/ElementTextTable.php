@@ -18,11 +18,12 @@ class ElementTextTable extends Omeka_Db_Table
     
     public function findByItem($itemId)
     {
-        $select = $this->getSelectForItems($itemId);
-        return $this->fetchObjects($select);
+        $select = $this->getSelectForItem($itemId);
+        $records = $this->fetchObjects($select);
+        return $this->indexByElementId($records);
     }
     
-    public function getSelectForItems($itemId=null)
+    public function getSelectForItem($itemId=null)
     {
         $select = $this->getSelect();
         $db = $this->getDb();
@@ -34,6 +35,16 @@ class ElementTextTable extends Omeka_Db_Table
         $select->where( $this->_alias . '.record_id = ?', (int) $itemId);
         
         return $select;
+    }
+    
+    public function indexByElementId($textRecords)
+    {
+        $indexed = array();
+        foreach ($textRecords as $textRecord) {
+            $indexed[$textRecord->element_id][] = $textRecord;
+        }
+        
+        return $indexed;
     }
     
     /**

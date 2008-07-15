@@ -118,7 +118,7 @@ function display_form_input_for_element(Element $element)
     
     //There can be an arbitrary # of values in element->text
     //It's an array (not hash) at this point
-    $numFieldValues = count($element->getTextValues());
+    $numFieldValues = count($element->getTextObjects());
     $numFieldValues = $numFieldValues ? $numFieldValues : 1;
     for ($i=0; $i < $numFieldValues; $i++) { 
         

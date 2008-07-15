@@ -21,5 +21,25 @@ class ElementText extends Omeka_Record
     public $record_type_id;
     public $element_id;
     public $html;
-    public $text;    
+    public $text;
+    
+    public function __toString()
+    {
+        return (string) $text;
+    }    
+    
+    public function setText($text)
+    {
+        $this->text = (string) $text;
+    }
+    
+    public function getText()
+    {
+        return (string) $this->text;
+    }
+    
+    public function isHtml()
+    {
+        return (boolean) $this->html;
+    }
 }

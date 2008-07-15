@@ -14,17 +14,27 @@
 class ElementTable extends Omeka_Db_Table
 {
     /**
-     * Retrieve a set of Element records for the item. This set of records
-     * will be indexed by the name of the element.
+     * Find all of the element records that apply to Items.
      * 
-     * @param integer ID of the item
+     * @todo There should be a lightweight method that retrieves only the
+     *  elements that are actually used for this item. This method itself should
+     *  be used primarily for retrieving data for the forms, since that is the
+     *  most likely instance where all of the Element records will be needed.
      * @return array
      **/
-    public function findByItem($id)
+    public function findAllForItems()
     {
-        $select = $this->getSelectForItem($id);
+        $select = $this->getSelect();
+        $db = $this->getDb();
+
+        // Join against the record_types table to pull only elements for Items
+         $select->joinInner(array('rty'=> $db->RecordType),
+                             'rty.id = e.record_type_id',
+                             array('record_type_name'=>'rty.name'));
+        $select->where('rty.name = "Item" OR rty.name = "All"');
+
         $objs = $this->fetchObjects($select);
-        return $this->indexRecordsByName($objs);
+        return $this->indexByNameAndSet($objs);
     }
     
     /**
@@ -47,43 +57,18 @@ class ElementTable extends Omeka_Db_Table
         return $select;
     }
     
-    public function getSelectForItem($itemId)
-    {
-        $select = $this->getSelect();
-        $db = $this->getDb();
-        
-        $select->joinInner(array('etx' => $db->ElementText), 
-                           'etx.element_id = e.id', 
-                           array('etx.text'));
-        
-        // Join against the record_types table to pull only element text for Items
-        $select->joinInner(array('rty'=> $db->RecordType),
-                            'rty.id = etx.record_type_id AND rty.name = "Item"',
-                            array('record_type_name'=>'rty.name'));
-        
-        // Join against the items table finally, with a specific item ID in the WHERE
-        $select->joinInner(array('i' => $db->Item), 
-                           'etx.record_id = i.id', 
-                           array());
-        
-        $select->where('i.id = ?', $itemId);
-        
-        return $select;       
-    }
-    
     /**
      * Index a set of Elements based on their name.
      * 
      * @param array
      * @return array
      **/
-    protected function indexRecordsByName(array $objs)
+    protected function indexByNameAndSet(array $elementRecords)
     {
         $indexed = array();
-        foreach($objs as $obj) {
-            $indexed[$obj->name][] = $obj;
+        foreach($elementRecords as $record) {
+            $indexed[$record->name][$record->set_name] = $record;
         }
-        
         return $indexed;        
     }
 
@@ -130,8 +115,9 @@ class ElementTable extends Omeka_Db_Table
         
         $elements = $this->fetchObjects($select);
        
-       // Populate those element records with the values for a given item
-       return $this->assignTextToElements($elements, $item->ItemsElements);
+       // Populate those element records with the values for a given item.
+       // Do this because display_form_input_for_element() requires the text records.
+       return $this->assignTextToElements($elements, $item->ElementTexts);
     }
     
     /**
@@ -141,17 +127,17 @@ class ElementTable extends Omeka_Db_Table
      * not a finder method, but currently the code is split across multiple places
      * and this is an attempt to consolidate it.
      * @param array Set of Element records.
-     * @param array Set of ItemsElements records.
+     * @param array Set of ElementText records.
      * @return array Set of elements with text assigned to it.
      **/
-    public function assignTextToElements($elements, $itemsElements)
+    public function assignTextToElements($elements, $textRecords)
     {
-        // Sort the ItemsElements text values into their correct Element records                    
-        // Speed could be improved on this.  
         foreach ($elements as $key => $element) {
-            foreach ($itemsElements as $iKey => $itemElement) {
-                if ($itemElement->element_id == $element->id) {
-                    $element->addText($itemElement);
+            // ElementText records are indexed by element_id
+            if ($textRecordSet = @$textRecords[$element->id]) {
+                // This could be shortened such to cut out the extra foreach loop.
+                foreach ($textRecordSet as $record) {
+                    $element->addText($record);
                 }
             }
         }

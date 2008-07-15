@@ -37,7 +37,7 @@ class Item extends Omeka_Record
                                 'Files'=>'getFiles',
                                 'Elements'=>'getElements',
                                 'ItemTypeElements'=>'getItemTypeElements',
-                                'ItemsElements'=>'getElementText');
+                                'ElementTexts'=>'getElementText');
     
     protected function construct()
     {
@@ -84,7 +84,7 @@ class Item extends Omeka_Record
      **/
     public function getElements()
     {
-        return $this->getTable('Element')->findByItem($this->id);
+        return $this->getTable('Element')->findAllForItems();
     }
     
     /**
@@ -115,7 +115,7 @@ class Item extends Omeka_Record
         element contains an array of all the values for that element */
         $elements = $this->getTable('Element')->findByItemType($this->item_type_id);
             
-        return $this->getTable('Element')->assignTextToElements($elements, $this->ItemsElements);
+        return $this->getTable('Element')->assignTextToElements($elements, $this->ElementTexts);
 
         return $elements;
     }
