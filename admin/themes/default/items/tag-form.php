@@ -7,7 +7,7 @@
 
 <?php if(has_tags($item) and has_permission('Items','untagOthers')): ?>
 <div class="field">
-	<label for="all-tags">Remove Other Users' Tags</label>
+	<label for="tags-list">Remove Other Users' Tags</label>
 	<ul id="tags-list">
 		<?php foreach( $item->Tags as $key => $tag ): ?>
         	<li>

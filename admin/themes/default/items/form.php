@@ -253,7 +253,7 @@ echo js('tiny_mce/tiny_mce');
 
 			<div class="field" id="type-select">
 				<?php
-				echo label(array(), 'Item Type'); 
+				echo label('item-type', 'Item Type'); 
 				echo select_item_type_for_item(array(	
             				'name'	=> 'item_type_id',
             				'id'	=> 'item-type' )); ?>
@@ -279,11 +279,11 @@ echo js('tiny_mce/tiny_mce');
 			<div class="field" id="file-inputs">
 			<!-- MAX_FILE_SIZE must precede the file input field -->
 				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-				<label for="file[<?php echo $i; ?>]">Find a File</label>
+				<label>Find a File</label>
 					
 				<?php for($i=0;$i<$numFiles;$i++): ?>
 				<div class="files">
-					<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="fileinput" />			
+					<input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />			
 				</div>
 				<?php endfor; ?>
 			</div>
@@ -298,6 +298,8 @@ echo js('tiny_mce/tiny_mce');
 					<tr>
 						<th>File Name</th>
 						<th>Delete?</th>
+					</tr>
+				</thead>
 				<tbody>
 			<?php foreach( $item->Files as $key => $file ): ?>
 				<tr>
@@ -312,7 +314,7 @@ echo js('tiny_mce/tiny_mce');
 					<td class="delete-link">
 						<?php echo checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
 					</td>	
-				</li>
+				</tr>
 		
 			<?php endforeach; ?>
 			</tbody>
@@ -357,9 +359,9 @@ echo js('tiny_mce/tiny_mce');
 			
 			<div class="dates">
 			<div class="dateinput">
-		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['date_year'], get_year($item->date)); ?>">
+		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['date_year'], get_year($item->date)); ?>" />
 		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['date_month'], get_month($item->date)); ?>" />
-		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['date_day'], get_day($item->date)); ?>">
+		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['date_day'], get_day($item->date)); ?>" />
 		
 			</div>
 			</div>
@@ -371,22 +373,22 @@ echo js('tiny_mce/tiny_mce');
 			<div class="dates">
 				<span>From</span>
 				<span class="dateinput">
-					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>"> 
-					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>">
+					<input type="text" class="textinput" name="coverage_start_year" id="coverage-start-year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_start_month" id="coverage-start-month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_start_day" id="coverage-start-day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>" />
 				</span>
 				<span>to</span>
 				<span class="dateinput">
-					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>"> 
-					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>">
+					<input type="text" class="textinput" name="coverage_end_year" id="coverage-end-year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_end_month" id="coverage-end-month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
+					<input type="text" class="textinput" name="coverage_end_day" id="coverage-end-day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>" />
 				</span>
 			</div>
 			<span class="tooltip" id="temporal_coverage_tooltip"><?php echo element_metadata('Temporal Coverage', 'description'); ?></span>
 		</div>
 
 			<div class="field">
-			<label id="language">Language</label>
+			<label for="language">Language</label>
 			<?php 
 				echo select(
 					array('id'=>'language','name'=>'language'), 
@@ -409,8 +411,8 @@ echo js('tiny_mce/tiny_mce');
 		<legend>Collection Metadata</legend>
 		<div class="field">
 		<?php 
-		echo label(array(), 'Collection');
-		echo select_collection(array('name'=>'collection_id'),
+		echo label('collection-id', 'Collection');
+		echo select_collection(array('name'=>'collection_id', 'id'=>'collection-id'),
 			$item->collection_id); ?>
 		</div>
 	</fieldset>

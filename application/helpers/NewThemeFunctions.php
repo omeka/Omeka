@@ -157,7 +157,6 @@ function display_form_input_for_element(Element $element)
         // Options that apply to any input type
         $inputOptions = array(
             // 'id'=> $fieldIdStart . '-' . $i, 
-            'id' => '',
             'class'=>'textinput');
         
         // Wrap each input and its 'html' flag checkbox in a div class="input"
@@ -192,7 +191,7 @@ function display_form_input_for_element(Element $element)
 
     // Wrap the input with a <div class="field">
     $html .= '<div class="field">';
-	$html .= '<label for="' . $fieldId . '">' . $fieldLabel;
+	$html .= '<label>' . $fieldLabel;
 	$html .= '</label>'."\n\t";	
 	
 	// Input itself is wrapped in a class="input" div.  Used by Javascript.
