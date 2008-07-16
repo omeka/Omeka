@@ -60,7 +60,7 @@
 </li>
 </ul>
 
-<h1 id="title"><?php echo item('id');?> 
+<h1 id="title">#<?php echo item('id');?> 
 <?php echo item('Title', ', '); //Titles should all be displayed, separated by , ?></h1>
 <p id="edit-delete"> 
 <?php 
