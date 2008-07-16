@@ -9,6 +9,12 @@ echo js('tiny_mce/tiny_mce');
         // //Create tooltips for all spans with class="tooltip"
         Omeka.Form.makeTooltips($$('.tooltip'), "<?php echo img('information.png'); ?>");
         Omeka.ItemForm.makeElementControls();
+        
+        // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.
+        $$('div.field textarea').each(function(el){
+            el.id = null;
+        });
+        
         Omeka.ItemForm.enableWysiwyg();
 		Omeka.ItemForm.enableAddFiles();
         Omeka.ItemForm.changeItemType();
@@ -192,7 +198,6 @@ echo js('tiny_mce/tiny_mce');
             if (Object.isUndefined(textarea)) {
                 return;
             };
-
             textarea.identify();
         
             // Toggle on when checked.
