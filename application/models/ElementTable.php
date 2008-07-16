@@ -117,7 +117,8 @@ class ElementTable extends Omeka_Db_Table
        
        // Populate those element records with the values for a given item.
        // Do this because display_form_input_for_element() requires the text records.
-       return $this->assignTextToElements($elements, $item->ElementTexts);
+       // Cannot use the cached values ($item->ElementTexts) because they may have been filtered already.
+       return $this->assignTextToElements($elements, $item->getElementText());
     }
     
     /**
