@@ -50,7 +50,7 @@ class Omeka_View_Helper_Item
         
         // Apply any plugin filters to the text prior to escaping it to valid HTML.
         if (!isset($options['noFilter'])) {
-            $text = $this->filterElementText($text, $field);
+            $text = $this->_filterElementText($text, $field, $options);
         }
         
         // Apply the 'snippet' option before escaping the HTML. If applied after
@@ -145,18 +145,6 @@ class Omeka_View_Helper_Item
     }
     
     /**
-     * Format the set of text based on the options passed to the helper.
-     * 
-     * @param array|string
-     * @param array
-     * @return mixed
-     **/
-    protected function _formatWithOptions($texts, array $options)
-    {        
-
-    }
-    
-    /**
      * Options can sometimes be an integer or a string instead of an array,
      * which functions as a handy shortcut for theme writers.  This converts
      * the short form of the options into its proper array form.
@@ -185,13 +173,36 @@ class Omeka_View_Helper_Item
      * values.
      * @return array Same structure but run through filters.
      **/
-    public function filterElementText($elements, $field)
+    protected function _filterElementText($text, $field)
     {
-        // if($pluginBroker = Omeka_Context::getInstance()->getPluginBroker()) {
-        //     $elements = $pluginBroker->applyOutputFilters($field, $elements);
-        // }
+        // Build the name of the filter to use.
+        // This will end up looking like: array('Display', 'Item', 'Title', 'Dublin Core') or something similar.
+        $filterName = array('Display', 'Item', $field);
+        if (isset($options['set_name'])) {
+            $filterName[] = (string) $options['set_name'];
+        }
+
+        if (is_array($text)) {
+            
+            // What to do if there is no text to filter?  For now, filter an empty string.
+            if (empty($text)) {
+                $text[] = new ElementText;
+            }
+            
+            if (!(reset($text) instanceof ElementText)) {
+                throw new Exception('AAAAAAAAAAAAAAAAAAAH');
+            }
+            
+            // Apply the filters individually to each text record.
+            foreach ($text as $key => $record) {
+                // This filter receives the Item record as well as the ElementText record
+                $record->setText(apply_filters($filterName, $record->getText(), $item, $record));
+            }
+        } else {
+            $text = apply_filters($filterName, $text, $item, $record);
+        }     
         
-        return $elements;
+        return $text;
     }
     
     /**

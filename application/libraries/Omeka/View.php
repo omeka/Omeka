@@ -43,6 +43,8 @@ class Omeka_View extends Zend_View_Abstract
         
         // Setting the XHTML1_STRICT doctype fixes validation errors for ZF's form elements
         $this->doctype()->setDoctype('XHTML1_STRICT');
+        
+        $this->_loadCustomThemeScripts();
     }
     
     /**
@@ -150,6 +152,21 @@ class Omeka_View extends Zend_View_Abstract
     {
         $this->_asset_paths = array();
         $this->_asset_paths[] = array($physical, $web);
+    }
+    
+    /**
+     * Look for a 'custom.php' script in all script paths and run the file if it exists.
+     * 
+     * @return void
+     **/
+    private function _loadCustomThemeScripts()
+    {
+        foreach ($this->getScriptPaths() as $path) {
+            $customScriptPath = $path . 'custom.php';
+            if (file_exists($customScriptPath)) {
+                include_once $customScriptPath;
+            }
+        }
     }
         
     /**
