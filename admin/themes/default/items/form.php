@@ -7,7 +7,7 @@ echo js('tiny_mce/tiny_mce');
 	Event.observe(window,'load', function() {
         Omeka.ItemForm.enableTagRemoval();
         // //Create tooltips for all spans with class="tooltip"
-        Omeka.ItemForm.makeTooltips($$('.tooltip'));
+        Omeka.Form.makeTooltips($$('.tooltip'), "<?php echo img('information.png'); ?>");
         Omeka.ItemForm.makeElementControls();
         Omeka.ItemForm.enableWysiwyg();
 		Omeka.ItemForm.enableAddFiles();
@@ -37,35 +37,13 @@ echo js('tiny_mce/tiny_mce');
 					image.remove();
 					form.update(t.responseText);
 					var spans = form.select('.tooltip');
-					Omeka.ItemForm.makeTooltips(spans);
+					Omeka.Form.makeTooltips(spans);
 					Omeka.ItemForm.elementControls();
                     Omeka.ItemForm.enableWysiwyg();
 					Effect.BlindDown(form);
 				}
 			});
 		}        
-    },
-    
-    /* Loop through all the spans with class="tooltip" and make them visible 
-	as tooltips */
-    makeTooltips: function(tooltipElements) {
-		tooltipElements.each(function(span){
-		   //The div that wraps the tooltip and the form element
-		   var div = span.up();
-		   /* Make a helpful image that will show the tooltip when you hover
-		    your mouse over it. */
-		   var image = document.createElement('img');
-		   image.src = "<?php echo img('information.png'); ?>";
-		   image.style.cursor = "help";
-		   
-		   // Insert the informational image right after the label for the field
-		   div.select('label').first().insert({after:image});
-		   div.style.paddingLeft = "20px";
-		   
-		   var tooltip = new Tooltip(image, span, 
-		       {default_css:true, zindex:100000});
-		   span.addClassName('info-window');
-		});        
     },
 	
 	/* Messing with the tag list should not submit the form.  Instead it runs 
