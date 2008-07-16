@@ -220,11 +220,11 @@ function submit($value="Submit",$name="submit")
 		<?php endif; ?>
 			
 			<fieldset id="basic_search">
-				<legend id="basic_search_header">Basic Search</legend>
+				<legend>Basic Search</legend>
 				<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
 			</fieldset>
 			<fieldset id="advanced_search">
-				<legend id="advanced_search_header">Advanced Search</legend>
+				<legend>Advanced Search</legend>
 				
 				<h3>Search by Specific fields</h3>
 				
@@ -283,19 +283,19 @@ function submit($value="Submit",$name="submit")
 				
 				<div id="search-selects">
 			<?php 
-			    echo label(array(), 'Search By Collection');
-				echo select_collection(array('name'=>'collection'), $_REQUEST['collection']);
-				echo label(array(), 'Search By Type');
-				echo select_item_type(array('name'=>'type'), $_REQUEST['type']); 
+			    echo label('collection-search', 'Search By Collection');
+				echo select_collection(array('name'=>'collection', 'id'=>'collection-search'), $_REQUEST['collection']);
+				echo label('item-type-search', 'Search By Type');
+				echo select_item_type(array('name'=>'type', 'id'=>'item-type-search'), $_REQUEST['type']); 
 			?>
 			<?php if(has_permission('Users', 'browse')): ?>
 			<?php 			
-			    echo label(array(), 'Search By User');
-				echo select_user(array('name'=>'user'), $_REQUEST['user']);
+			    echo label('user-search', 'Search By User');
+				echo select_user(array('name'=>'user', 'id'=>'user-search'), $_REQUEST['user']);
 			?>
 			<?php endif; ?>
-			<label for="tags">Search by Tags</label>
-				<input type="text" class="textinput" name="tags" value="<?php echo h($_REQUEST['tags']); ?>" />
+			    <label for="tag-search">Search by Tags</label>
+				<input type="text" class="textinput" name="tags" id="tag-search" value="<?php echo h($_REQUEST['tags']); ?>" />
 			</div>
 			<div id="search-checkboxes">
 			<?php 
@@ -309,8 +309,9 @@ function submit($value="Submit",$name="submit")
 			</fieldset>
 			
 			<?php fire_plugin_hook('append_to_search_form'); ?>
-			<input type="submit" name="submit_search" id="submit_search" value="Search" />
-			
+			<fieldset>
+			    <input type="submit" name="submit_search" id="submit_search" value="Search" />
+			</fieldset>
 		</form><?php
 	}
 ?>

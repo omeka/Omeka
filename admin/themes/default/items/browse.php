@@ -14,8 +14,8 @@
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
 <ul class="navigation" id="view-style">
-	<li><a id="simple" href="<?php echo current_uri(array('view'=>'simple')); ?>"<?php if($_GET['view'] == 'simple' || $_GET['view'] == '') echo ' class="current"';?>>List View</a></li>
-	<li><a id="detailed" href="<?php echo current_uri(array('view'=>'detailed')); ?>"<?php if($_GET['view'] == 'detailed') echo ' class="current"';?>>Detailed View</a></li>
+	<li><a id="simple-view" href="<?php echo current_uri(array('view'=>'simple')); ?>"<?php if($_GET['view'] == 'simple' || $_GET['view'] == '') echo ' class="current"';?>>List View</a></li>
+	<li><a id="detailed-view" href="<?php echo current_uri(array('view'=>'detailed')); ?>"<?php if($_GET['view'] == 'detailed') echo ' class="current"';?>>Detailed View</a></li>
 </ul>	
 </div>
 <form action="<?php echo uri('items/power-edit'); ?>" method="post" accept-charset="utf-8">
@@ -34,7 +34,9 @@
 	 ?>
 </fieldset>
 
-<input type="submit" name="submit" value="Save Changes" />
+<fieldset>
+    <input type="submit" name="submit" value="Save Changes" />
+</fieldset>
 
 </form>
 

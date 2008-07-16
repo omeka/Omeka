@@ -3,6 +3,7 @@
 <?php echo js('tooltip'); ?>
 
 <script type="text/javascript">
+//<![CDATA[
 function makeTooltips()
 {
 	//Now load the tooltip js
@@ -25,6 +26,7 @@ function makeTooltips()
 Event.observe(window,'load', function() {
 	makeTooltips();
 });
+//]]>
 </script>
 <div id="primary">
 <?php echo flash(); ?>
@@ -32,7 +34,7 @@ Event.observe(window,'load', function() {
 
 <?php fire_plugin_hook('prepend_to_settings_form'); ?>
 
-<form method="post">
+<form method="post" action="">
 	<fieldset>
 <div class="field">
 	<label for="site_title" id="site_title">Site Title</label>
