@@ -40,9 +40,9 @@ class UpgradeController extends Omeka_Controller_Action
         return (int) get_option('migration');
     }
     
-    public function browseAction()
+    public function indexAction()
     {
-        $this->_forward('migrate');
+        
     }
     
     /**
