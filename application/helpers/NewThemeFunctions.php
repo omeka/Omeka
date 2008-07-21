@@ -93,10 +93,6 @@ function item_type_elements_form()
  * All sets of form inputs for elements will be wrapped in a div with
  * class="field".
  *
- * @todo Modify HTML markup to work with more than one input per element.  
- * The CSS ID should not be applied to the form input because there can 
- * be more than one form input per element.  Perhaps it should be on the
- * div wrapper around the element.
  * @todo Plugins should be able to hook in to displaying elements in a certain
  * way.
  * @todo Form submission of items should be able to respond to the +/- buttons
@@ -106,123 +102,7 @@ function item_type_elements_form()
  **/
 function display_form_input_for_element(Element $element)
 {
-    $html = '';
-    
-    // The first part of each input's ID is the hyphenated name of the element.
-    // For example, the id of the first title field would be 'title-1'.
-    $fieldIdStart = text_to_id($element['name']);
-    $fieldLabel = htmlentities($element['name']);
-    $fieldDescription = htmlentities($element['description']);
-    
-    $input = '';
-    
-    //There can be an arbitrary # of values in element->text
-    //It's an array (not hash) at this point
-    $numFieldValues = count($element->getTextObjects());
-    $numFieldValues = $numFieldValues ? $numFieldValues : 1;
-    for ($i=0; $i < $numFieldValues; $i++) { 
-        
-        //The name of the input on the form
-        $fieldName = "Elements[" . $element['id'] . "][$i]";
-        $textFieldName = $fieldName . '[text]';
-        $htmlFlagFieldName = $fieldName . '[html]';
-                    
-        //Check the POST to see if there is a value for that field saved already
-        $postValue = $_POST['Elements'][$element['id']][$i]['text'];
-        
-        //The value that was stored in the database
-        $storedElementText = $element->getTextObjects($i);
-
-        if (!empty($postValue)) {
-            //Determine whether to escape the field value if the field is html
-            $isHtml = (boolean) $_POST['Elements'][$element['id']][$i]['html'];
-            $fieldValue = $postValue;
-        } else {
-            $isHtml = (boolean) $storedElementText->html;
-            $fieldValue = $storedElementText->text;
-        }
-        
-        //Here is where plugins should hook in to deal with display of certain
-        //elements
-        
-        // Do not escape the field if it is HTML, because TinyMCE won't display
-        // it properly if it is already escaped prior to display.
-        // if (!$isHtml) {
-            // The default filter should be htmlentities()
-            
-            // $fieldValue = htmlentities($fieldValue);
-            // $fieldValue = apply_filters('html_escape', $fieldValue);
-        // }
-
-        // Options that apply to any input type
-        $inputOptions = array(
-            // 'id'=> $fieldIdStart . '-' . $i, 
-            'class'=>'textinput');
-        
-        // Wrap each input and its 'html' flag checkbox in a div class="input"
-        $input .= '<div class="input">';
-        
-        //Create a form input based on the element type name
-        switch ($element['data_type_name']) {
-                
-            //Tiny Text => input type="text"
-            case 'Tiny Text':
-                $input .= __v()->formText($textFieldName, $fieldValue, $inputOptions);
-                break;
-            //Text => textarea
-            case 'Text':
-                $textareaOptions = array_merge($inputOptions, 
-                    array('rows'=>15, 'cols'=>50), 
-                    // If the field is HTML, we need to add the 'html-editor' class so that TinyMCE picks it up.
-                    $isHtml ? array('class'=>'textinput html-editor') : array());
-                $input .= __v()->formTextarea($textFieldName, $fieldValue, $textareaOptions);
-                break;
-            default:
-                throw new Exception('Cannot display a form input for "' . 
-                $element['name'] . '" if element type name is not given!');
-                break;
-        }
-        
-        // Add a checkbox for the 'html' flag (always for any field)
-    	$input .= __v()->formCheckbox($htmlFlagFieldName, 1, array('checked'=>$isHtml));
-    	
-    	$input .= '</div>';
-    }
-
-    // Wrap the input with a <div class="field">
-    $html .= '<div class="field">';
-	$html .= '<label>' . $fieldLabel;
-	$html .= '</label>'."\n\t";	
-	
-	// Input itself is wrapped in a class="input" div.  Used by Javascript.
-	$html .= '<div class="inputs">';
-	$html .= $input;	
-	$html .= '</div>';
-	
-	// Errors for form inputs should go below the input itself?  Or above?
-	$html .= form_error($element['name']);
-	
-	// Tooltips should be in a <span class="tooltip">
-	$html .= '<span class="tooltip" id="' . $fieldIdStart . '-tooltip">';
-	$html .= $fieldDescription .'</span>';
-	
-	// The + button that will allow a user to add another form input.
-	// The name of the submit input is 'add_element_#' and it has a class of 
-	// 'add-element', which is used by the Javascript to do stuff.
-	
-	// Used by Javascript.
-	$html .= '<div class="controls">';
-	
-	$html .= __v()->formSubmit('add_element_' . $element['id'], '+', 
-	    array('class'=>'add-element'));
-	
-	$html .= __v()->formSubmit('remove_element_' . $element['id'], '-', 
-	    array('class'=>'remove-element'));
-	
-	$html .= '</div>'; // Close 'controls' div
-	
-	$html .= '</div>'; // Close 'field' div
-	
+	$html = __v()->elementForm($element);
 	return $html;
 }
 
