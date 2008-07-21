@@ -189,23 +189,37 @@ echo js('tiny_mce/tiny_mce');
     },
 	
 	enableWysiwygCheckbox: function(checkbox) {
-	            
-        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
-        Event.observe(checkbox, 'click', function(e) {
-            var textarea = checkbox.previous('textarea', 0);
+	    
+	    function getTextarea(checkbox) {
+	        var textarea = checkbox.previous('textarea', 0);
 
             // We can't use the editor for any field that isn't a textarea
             if (Object.isUndefined(textarea)) {
                 return;
             };
+            
             textarea.identify();
-        
-            // Toggle on when checked.
-          if(checkbox.checked) {
-             tinyMCE.execCommand("mceAddControl", false, textarea.id);               
-          } else {
-            tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
-          }
+            return textarea;
+	    }
+	    
+	    // Add the 'html-editor' class to all textareas that are flagged as HTML.
+	    var textarea = getTextarea(checkbox);
+	    if (checkbox.checked && textarea) {
+            textarea.addClassName('html-editor');
+	    };
+	            
+        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
+        Event.observe(checkbox, 'click', function(e) {
+            var textarea = getTextarea(checkbox);
+            
+            if (textarea) {
+                // Toggle on when checked.
+                if(checkbox.checked) {
+                   tinyMCE.execCommand("mceAddControl", false, textarea.id);               
+                } else {
+                  tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
+                }                
+            };
         });
 	},
 	
@@ -221,9 +235,6 @@ echo js('tiny_mce/tiny_mce');
             var checkboxes = div.select('input[type="checkbox"]');
             checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
 	    });
-
-        // This will activate the WYSIWYG editor for all of the textareas by default.
-        // $$('textarea').invoke('addClassName', 'html-editor');
     
 	    //WYSIWYG Editor
        tinyMCE.init({
