@@ -39,17 +39,6 @@ Omeka.alertBox = function() {
 	}
 }
 
-//Adds rounded corners to the admin theme
-function roundCorners() {
-	Nifty('#primary-nav a,#secondary-nav a','top transparent');
-	Nifty('#view-style a,#browse-meta','top transparent');
-	Nifty('#user-meta','bottom big');
-	Nifty('#login #content,#site-meta,#recent-items,#tag-cloud,#type-items,#getting-started ul');
-	Nifty('#view-all-items a','transparent');
-	Nifty('#search,#names-add','big');
-	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit,#new-user-form','transparent');
-}
-
 //This will add confirmation for deleting files and the item
 function confirmDelete() {
 	$$('.delete').each( function(el) {
@@ -150,6 +139,5 @@ Omeka.toggleNamesForm = function() {
 }
 
 Event.observe(window,'load',Omeka.toggleNamesForm);
-Event.observe(window,'load',roundCorners);
 Event.observe(window,'load',Omeka.alertBox);
 Event.observe(window,'load',confirmDelete);

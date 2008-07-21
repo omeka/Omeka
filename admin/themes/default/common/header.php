@@ -18,7 +18,6 @@
 
 <!-- JavaScripts -->
 <?php echo js('default'); ?>
-<?php echo js('niftycube');?>
 <?php echo js('form-toggle');?>
 <?php echo js('globals'); ?>
 <?php echo js('archive'); ?>
