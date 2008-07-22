@@ -14,8 +14,6 @@ Event.observe(window,'load', function() {
 <?php echo flash(); ?>
 <h2>Edit Settings</h2>
 
-<?php fire_plugin_hook('prepend_to_settings_form'); ?>
-
 <form method="post" action="">
 	<fieldset>
 <div class="field">
@@ -79,8 +77,6 @@ Event.observe(window,'load', function() {
 	<span class="tooltip" id="path_to_convert_tooltip">The path to your ImageMagick library.</span>
 	
 </div>
-
-<?php fire_plugin_hook('append_to_settings_form'); ?>	
 
 	</fieldset>
 	
