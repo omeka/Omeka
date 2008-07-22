@@ -151,10 +151,10 @@ class Omeka_View_Helper_ElementForm
                 
             //Tiny Text => input type="text"
             case 'Tiny Text':
-                return $this->view->formText(
+                return $this->view->formTextarea(
                     $inputNameStem . '[text]', 
                     $value, 
-                    array('class'=>'textinput'));
+                    array('class'=>'textinput', 'rows'=>2, 'cols'=>50));
                 break;
             //Text => textarea
             case 'Text':
