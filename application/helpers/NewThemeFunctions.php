@@ -54,31 +54,6 @@ function item_type_elements()
 }
 
 /**
- * Retrieve the form for the item type elements, based on the current item.
- *
- * The form input names correspond to Elements[element_id][order].  This allows
- * maximum flexibility of being able to associate data for any Element via the 
- * items form.
- * 
- * @todo Test with live data.
- *
- * @return string HTML
- **/
-function item_type_elements_form()
-{
-    $item = get_current_item();
-    $html = '';
-    
-    //Loop through all of the element records for the item's item type
-    $elements = $item->getItemTypeElements();   
-    foreach ($elements as $key => $element) {
-        $html .= display_form_input_for_element($element);		
-    }
-    
-    return $html;
-}
-
-/**
  * Retrieve the proper HTML for a form input for a given Element record.
  * 
  * Assume that the given element has access to all of its values (for example,
@@ -95,15 +70,36 @@ function item_type_elements_form()
  *
  * @todo Plugins should be able to hook in to displaying elements in a certain
  * way.
- * @todo Form submission of items should be able to respond to the +/- buttons
- * without javascript enabled.
- * @param Element
+ * @param Element|array
  * @return string HTML
  **/
-function display_form_input_for_element(Element $element)
+function display_form_input_for_element($element)
 {
-	$html = __v()->elementForm($element);
+    $html = '';
+    
+    // If we have an array of Elements, loop through the form to display them.
+    if (is_array($element)) {
+        foreach ($element as $key => $e) {
+            $html .= __v()->elementForm($e);
+        }
+    } else {
+        $html = __v()->elementForm($element);
+    }
+	
 	return $html;
+}
+
+function display_element_set_form_for_item($item, $elementSetName)
+{
+    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, $elementSetName);
+    
+    $html = '';
+    
+    foreach ($dublinCoreElements as $key => $element) {
+       $html .= display_form_input_for_element($element);
+    }
+    
+    return $html;
 }
 
 /**

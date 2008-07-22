@@ -342,67 +342,14 @@ echo js('tiny_mce/tiny_mce');
 	<div id="step2" class="toggle">
 <fieldset id="core-metadata">
 	<legend>Dublin Core Metadata</legend>
-	<?php $coreElementSet = array(
-	    'Title',
-	    'Subject', 
-	    'Description',
-	    'Creator',
-	    'Additional Creator',
-	    'Source',
-	    'Publisher',
-//	    'Date',
-	    'Contributor',
-	    'Rights',
-	    'Rights Holder',
-	    'Relation',
-	    'Format',
-	    'Spatial Coverage',
-//	    'Temporal Coverage',
-//	    'Language',
-	    'Provenance',
-	    'Citation'); 
+	<?php echo display_element_set_form_for_item($item, 'Dublin Core'); ?>
+	
+	<?php echo display_element_set_form_for_item($item, 'Omeka Legacy Item'); ?>
 	    
-	    //@todo Move this to the controller.
-	    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, 'Dublin Core');
-
-	    foreach ($dublinCoreElements as $key => $element) {
-	       echo display_form_input_for_element($element);
-	    }
-	    ?>
-	    
-		<div class="field">
-			<label for="date_year" id="date">Date <span class="notes">(YYYY-MM-DD)</span></label>
-			
-			<div class="dates">
-			<div class="dateinput">
-		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['date_year'], get_year($item->date)); ?>" />
-		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['date_month'], get_month($item->date)); ?>" />
-		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['date_day'], get_day($item->date)); ?>" />
-		
-			</div>
-			</div>
-			<span class="tooltip" id="date_tooltip"><?php echo element_metadata('Date', 'description'); ?></span>
-		</div>
-		
-		<div class="field">
-			<label id="temporal-coverage">Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
-			<div class="dates">
-				<span>From</span>
-				<span class="dateinput">
-					<input type="text" class="textinput" name="coverage_start_year" id="coverage-start-year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_start_month" id="coverage-start-month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_start_day" id="coverage-start-day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>" />
-				</span>
-				<span>to</span>
-				<span class="dateinput">
-					<input type="text" class="textinput" name="coverage_end_year" id="coverage-end-year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_end_month" id="coverage-end-month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_end_day" id="coverage-end-day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>" />
-				</span>
-			</div>
-			<span class="tooltip" id="temporal_coverage_tooltip"><?php echo element_metadata('Temporal Coverage', 'description'); ?></span>
-		</div>
-
+         <!-- The language field is the last field on this form that is not
+         accurately represented by the ElementForm class. This needs to be
+         overridden by a filter defined on the admin theme to display the
+         correct languages on this form element. -->
 			<div class="field">
 			<label for="language">Language</label>
 			<?php 
@@ -417,7 +364,7 @@ echo js('tiny_mce/tiny_mce');
 						'san'=>'Sanskrit'),
 					!empty($item->language) ? $item->language : 'eng'); 
 			?>
-			<span class="tooltip" id="language_tooltip"><?php echo element_metadata('Language', 'description'); ?></span>
+			<span class="tooltip"><?php echo element_metadata('Language', 'description'); ?></span>
 			</div>
 			
 	</fieldset>

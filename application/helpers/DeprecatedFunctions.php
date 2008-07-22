@@ -46,11 +46,10 @@ function not_empty_or($value, $default) {
 
 /**
  * @deprecated 
- * @see item_type_elements_form()
  **/
 function metatext_form($item, $input="textarea",$metafields=null) 
 {
-    trigger_error('Use item_type_elements_form() instead!');
+    trigger_error("Don't use this anymore!");
 }
 
 /**

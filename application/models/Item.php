@@ -103,7 +103,6 @@ class Item extends Omeka_Record
      * Each one of the Element records that is retrieved should contain all the 
      * element text values associated with it.
      *
-     * @see item_type_elements_form()
      * @uses ElementTable::findByItemType()
      * @return array Element records that are associated with the item type of
      * the item.  This array will be empty if the item does not have an 
