@@ -16,68 +16,26 @@ Event.observe(window,'load', function() {
 
 <form method="post" action="">
 	<fieldset>
-<div class="field">
-	<label for="site_title">Site Title</label>
-	<?php echo text(array('name'=>'site_title', 'class'=>'textinput'),$site_title); ?>
-	<span class="tooltip" id="site_title_tooltip">The title of your website</span>
-</div>
+	<?php $siteSettings = array(
+	    array('name'=>'site_title', 'description' => 'The title of your website.'),
+	    array('name'=>'administrator_email', 'description' => 'The email address of your site&#8217;s administrator.'),
+	    array('name'=>'copyright', 'description' => 'Copyright for the site.'),
+	    array('name'=>'author', 'description' => 'The author of the site.'),
+	    array('name'=>'description', 'description' => 'A description for your site.'),
+	    array('name'=>'thumbnail_constraint', 'description' => 'The maximum size (in pixels) of the longest side for thumbnails of uploaded images.'),
+	    array('name'=>'square_thumbnail_constraint', 'description' => 'The maximum size (in pixels) for square thumbnails of uploaded images.'),
+	    array('name'=>'fullsize_constraint', 'description' => 'The maximum size (in pixels) of the longest side for fullsize versions of uploaded images.'),
+	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.')); ?>    
 
-<div class="field">
-	<label for="administrator_email">Administrator Email</label>
-	<?php echo text(array('name'=>'administrator_email', 'class'=>'textinput'),$administrator_email); ?>
-	<span class="tooltip" id="administrator_email_tooltip">The email address of your site&#8217;s administrator</span>
-	
-</div>
-
-<div class="field">
-	<label for="copyright">Copyright</label>
-	<?php echo text(array('name'=>'copyright', 'class'=>'textinput'),$copyright); ?>
-	<span class="tooltip" id="copyright_tooltip">Copyright for the site.</span>
-	
-</div>
-
-<div class="field">
-	<label for="author">Author</label>
-	<?php echo text(array('name'=>'author', 'class'=>'textinput'),$author); ?>
-	<span class="tooltip" id="author_tooltip">The author of the site</span>
-	
-</div>
-
-<div class="field">    
-	<label for="description">Description</label>
-	<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'rows'=>'10'),$description); ?>
-	<span class="tooltip" id="description_tooltip">A description for your site</span>
-	
-</div>
-
-<div class="field">    
-	<label for="thumbnail_constraint">Thumbnail Constraint</label>
-	<?php echo text(array('name'=>'thumbnail_constraint', 'class'=>'textinput'),$thumbnail_constraint); ?>
-	<span class="tooltip" id="thumbnail_constraint_tooltip">The maximum size (in pixels) of the longest side for thumbnails of uploaded images.</span>
-	
-</div>
-
-<div class="field">
-	<label for="square_thumbnail_constraint">Square Thumbnail Constraint</label>
-	<?php echo text(array('name'=>'square_thumbnail_constraint', 'class'=>'textinput'),$square_thumbnail_constraint); ?>
-	<span class="tooltip" id="square_thumbnail_constraint_tooltip">The maximum size (in pixels) for square thumbnails of uploaded images.</span>
-	
-</div>
-
-<div class="field">
-	<label for="fullsize_constraint">Fullsize Constraint</label>
-	<?php echo text(array('name'=>'fullsize_constraint', 'class'=>'textinput'),$fullsize_constraint); ?>
-	<span class="tooltip" id="fullsize_constraint_tooltip">The maximum size (in pixels) of the longest side for fullsize versions of uploaded images.</span>
-	
-</div>
-
-<div class="field">
-	<label for="path_to_convert">Path to Convert</label>
-	<?php echo text(array('name'=>'path_to_convert', 'class'=>'textinput'),$path_to_convert); ?>
-	<span class="tooltip" id="path_to_convert_tooltip">The path to your ImageMagick library.</span>
-	
-</div>
-
+<?php foreach ($siteSettings as $key => $setting): ?>
+    <div class="field">
+        <?php $settingName =  $setting['name']; ?>
+        <label for="<?php echo $settingName; ?>"><?php echo ucwords(Inflector::humanize($settingName)); ?></label>
+        <?php echo $this->formText($settingName, $$settingName, array('class'=>'textinput')); ?>
+        <img src="<?php echo img('information.png'); ?>" />
+        <span class="tooltip"><?php echo $setting['description']; ?></span>
+    </div>
+<?php endforeach; ?>
 	</fieldset>
 	
 	<fieldset>
