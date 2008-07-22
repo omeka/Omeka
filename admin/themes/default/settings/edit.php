@@ -6,7 +6,7 @@
 //<![CDATA[
 
 Event.observe(window,'load', function() {
-	Omeka.Form.makeTooltips($$('.tooltip'), "<?php echo img('information.png'); ?>");
+	Omeka.Form.makeTooltips($$('.tooltip'));
 });
 //]]>
 </script>

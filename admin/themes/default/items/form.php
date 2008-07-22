@@ -7,7 +7,7 @@ echo js('tiny_mce/tiny_mce');
 	Event.observe(window,'load', function() {
         Omeka.ItemForm.enableTagRemoval();
         // //Create tooltips for all spans with class="tooltip"
-        Omeka.Form.makeTooltips($$('.tooltip'), "<?php echo img('information.png'); ?>");
+        Omeka.Form.makeTooltips($$('.tooltip'));
         Omeka.ItemForm.makeElementControls();
         
         // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.

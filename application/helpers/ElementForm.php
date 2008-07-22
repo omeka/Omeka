@@ -236,6 +236,7 @@ class Omeka_View_Helper_ElementForm
     protected function _displayTooltip()
     {
         // Tooltips should be in a <span class="tooltip">
+        $html .= '<img src="' . img('information.png') . '" />';
     	$html .= '<span class="tooltip">';
     	$html .= $this->_getFieldDescription() .'</span>';
     	

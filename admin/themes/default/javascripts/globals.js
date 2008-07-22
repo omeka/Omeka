@@ -51,18 +51,15 @@ function confirmDelete() {
 Omeka.Form = Object.extend({}, {
     /* Loop through all the spans with class="tooltip" and make them visible 
 	as tooltips */
-    makeTooltips: function(tooltipElements, pathToImage) {
-        if (pathToImage) {
-            this.pathToImage = pathToImage;
-        };
-        
+    makeTooltips: function(tooltipElements) {        
 		tooltipElements.each(function(span){
 		   //The div that wraps the tooltip and the form element
 		   var div = span.up();
-		   /* Make a helpful image that will show the tooltip when you hover
-		    your mouse over it. */
-		   var image = document.createElement('img');
-		   image.src = this.pathToImage;
+
+		   var image = span.previous('img');
+		   if (!image) {
+		       return;
+		   };
 		   image.style.cursor = "help";
 		   
 		   // Insert the informational image right after the label for the field
