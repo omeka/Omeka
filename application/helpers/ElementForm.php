@@ -169,6 +169,11 @@ class Omeka_View_Helper_ElementForm
                     $value, 
                     array());
                 break;
+            case 'Date Range':
+                return $this->_dateRangeField(
+                    $inputNameStem,
+                    $value,
+                    array());
             default:
                 throw new Exception('Cannot display a form input for "' . 
                 $element['name'] . '" if element type name is not given!');
@@ -190,6 +195,29 @@ class Omeka_View_Helper_ElementForm
     	$html .= '</div>';
     	
     	return $html;
+    }
+    
+    protected function _dateRangeField($inputNameStem, $dateValue, $options = array())
+    {
+        list($startDate, $endDate) = explode(' ', $dateValue);
+        
+        $html = '<div class="dates">';
+        
+        // The name of the form elements for date ranges should eventually look like:
+        // Elements[##][0][start][year], where ## is the element_id
+        // Elements[##][0][end][month], etc.
+        $startStem = $inputNameStem . '[start]';
+        $endStem = $inputNameStem . '[end]';
+        
+        $html .= '<span>From</span>';
+        $html .= $this->_dateField($startStem, $startDate, $options);
+        
+        $html .= '<span>To</span>';
+        $html .= $this->_dateField($endStem, $endDate, $options);
+        
+        $html .= '</div>';
+        
+        return $html;
     }
     
     protected function _displayHtmlFlag($inputNameStem, $index)
