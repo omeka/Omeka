@@ -22,23 +22,25 @@ class Omeka_View_Helper_Item
      * <li><?php echo item('Title', '</li><li>'); ?></li> 
      * Will create a set of list elements for titles. 
      * 
-     * @param string Field name to retrieve
+     * @param string Field name to retrieve, which can be the name of an element 
+     *     or a selected field name related to items.
      * @param mixed Options for formatting the metadata for display.
      * Default options: 
-     *  'delimiter' => return the entire set of metadata
-     *      as a string, where each entry is separated by the string delimiter.
+     *  'delimiter' => return the entire set of metadata as a string, where each 
+     *      entry is separated by the string delimiter.
      *  'index' => return the metadata entry at the specific index (starting)
      *      from 0. 
-     *  'noFilter' => return the set of metadata without running any of the 
+     *  'no_filter' => return the set of metadata without running any of the 
      *      filters.
      *  'snippet' => trim the length of each piece of text to the given length
      *      (integer).
-     *  'set_name' => retrieve the element text for an element that belongs to a specific set.
+     *  'element_set' => retrieve the element text for an element that belongs 
+     *      to a specific set.
      *
-     * @return string|array|null Null if field does not exist for item.  String
+     * @return string|array|null Null if field does not exist for item. String
      * if certain options are passed.  Array otherwise.
      **/
-    public function item($field, $options=array())
+    public function item($field, $options = array())
     {
         //Convert the shortcuts for the options into a proper array
         $options = $this->_getOptions($options);
@@ -48,8 +50,9 @@ class Omeka_View_Helper_Item
         // given field.
         $text = $this->getElementText($field, $options);
         
-        // Apply any plugin filters to the text prior to escaping it to valid HTML.
-        if (!isset($options['noFilter'])) {
+        // Apply any plugin filters to the text prior to escaping it to valid 
+        // HTML.
+        if (!isset($options['no_filter'])) {
             $text = $this->_filterElementText($text, $field, $options);
         }
         
@@ -65,22 +68,23 @@ class Omeka_View_Helper_Item
         // Extract the text from the records into an array.
         // This has to happen after escaping the HTML because the 'html' flag is
         // located within the ElementText record.
-        if (is_array($text) and reset($text) instanceof ElementText) {
+        if (is_array($text) && reset($text) instanceof ElementText) {
            $text = $this->_extractTextFromRecords($text); 
         }
 
-        // Apply additional formatting options on that array, including 'delimiter' and 'index'.
+        // Apply additional formatting options on that array, including 
+        // 'delimiter' and 'index'.
         
         // Return the join'd text
-        if(isset($options['delimiter'])) {
+        if (isset($options['delimiter'])) {
             return join((string) $options['delimiter'], (array) $text);
         }
         
         // Return the text at that index (suppress errors)
-        if(isset($options['index'])) {
+        if (isset($options['index'])) {
             return @$text[$options['index']];
         }
-
+        
         return $text;
     }
     
@@ -89,15 +93,11 @@ class Omeka_View_Helper_Item
         // Integers get no formatting
         if (is_int($texts)) {
             return $texts;
-        }
-        
-        if (is_string($texts)) {
+        } else if (is_string($texts)) {
             return snippet($texts, 0, $length);
-        }
-        
-        if (is_array($texts)) {
-            foreach ($texts as $key => $textRecord) {
-                $textRecord->setText( snippet($textRecord->getText(), 0, $snippetLength) );
+        } else if (is_array($texts)) {
+            foreach ($texts as $textRecord) {
+                $textRecord->setText(snippet($textRecord->getText(), 0, $snippetLength));
             }   
             return $texts;         
         }
@@ -115,7 +115,7 @@ class Omeka_View_Helper_Item
     }
     
     /**
-     * This applies all filters defined for the 'html_escape' filter. This will
+     *  This applies all filters defined for the 'html_escape' filter. This will
      *  only be applied to string values or element text records that are not
      *  marked as HTML. If they are marked as HTML, then there should be no
      *  escaping because the values are already stored in the database as fully
@@ -131,15 +131,16 @@ class Omeka_View_Helper_Item
         // collection name, etc.) will need to be escaped.
         if (is_string($texts)) {
             return apply_filters('html_escape', $texts);
-        } elseif (is_array($texts)) {
-            foreach ($texts as $key => $record) {
+        } else if (is_array($texts)) {
+            foreach ($texts as $record) {
                  if (!$record->isHtml()) {
                      $record->setText(apply_filters('html_escape', $record->getText()));
                  }
              }
              return $texts;
         } else {
-            // Just return the text as it is if it is neither a string nor an array.
+            // Just return the text as it is if it is neither a string nor an 
+            // array.
             return $texts;
         }
     }
@@ -154,12 +155,10 @@ class Omeka_View_Helper_Item
      **/
     protected function _getOptions($options)
     {
-        if(is_integer($options)) {
-            return array('index'=>$options);
-        }
-        
-        if(is_string($options)) {
-            return array('delimiter'=>$options);
+        if (is_integer($options)) {
+            return array('index' => $options);
+        } else if (is_string($options)) {
+            return array('delimiter' => $options);
         }
         
         return (array) $options;
@@ -175,16 +174,17 @@ class Omeka_View_Helper_Item
      **/
     protected function _filterElementText($text, $field)
     {
-        // Build the name of the filter to use.
-        // This will end up looking like: array('Display', 'Item', 'Title', 'Dublin Core') or something similar.
+        // Build the name of the filter to use. This will end up looking like: 
+        // array('Display', 'Item', 'Title', 'Dublin Core') or something similar.
         $filterName = array('Display', 'Item', $field);
-        if (isset($options['set_name'])) {
-            $filterName[] = (string) $options['set_name'];
+        if (isset($options['element_set'])) {
+            $filterName[] = (string) $options['element_set'];
         }
-
+        
         if (is_array($text)) {
             
-            // What to do if there is no text to filter?  For now, filter an empty string.
+            // What to do if there is no text to filter?  For now, filter an 
+            // empty string.
             if (empty($text)) {
                 $text[] = new ElementText;
             }
@@ -194,8 +194,9 @@ class Omeka_View_Helper_Item
             }
             
             // Apply the filters individually to each text record.
-            foreach ($text as $key => $record) {
-                // This filter receives the Item record as well as the ElementText record
+            foreach ($text as $record) {
+                // This filter receives the Item record as well as the 
+                // ElementText record
                 $record->setText(apply_filters($filterName, $record->getText(), $item, $record));
             }
         } else {
@@ -214,13 +215,12 @@ class Omeka_View_Helper_Item
     public function hasOtherField($field)
     {
         return in_array(strtolower($field),
-            array('id',
-            'featured',
-            'public',
-            'type name',
-            'date added',
-            'collection name'));
-            
+            array('id', 
+                  'featured', 
+                  'public', 
+                  'item type name', 
+                  'date added', 
+                  'collection name'));
     }
     
     /**
@@ -238,7 +238,7 @@ class Omeka_View_Helper_Item
             case 'id':
                 return $item->id;
                 break;
-            case 'type name':
+            case 'item type name':
                 return $item->Type->name;
                 break;
             case 'date added':
@@ -267,13 +267,13 @@ class Omeka_View_Helper_Item
      * @param string Name of the set to which the element belongs.
      * @return Element|null
      **/
-    protected function getElementRecordByName($item, $elementName, $setName=null)
+    protected function getElementRecordByName($item, $elementName, $setName = null)
     {
         // Get the set of all elements.
         $namedElements = $item->Elements[$elementName];
         
         if (!is_array($namedElements)) {
-            throw new Exception("Element named '$elementName' does not exist for this item!");
+            throw new Exception("An element named '$elementName' does not exist for this item!");
         }
         
         // These are further indexed by the set, so if a set name is passed, 
@@ -283,9 +283,7 @@ class Omeka_View_Helper_Item
             return @$namedElements[$setName];
         } else {
             if (count($namedElements) > 1) {
-                throw new Exception('More than one element named "' .
-                $elementName . '" exists, so you must choose the name of the set
-                when displaying these elements!');
+                throw new Exception("More than one element named '$elementName' exists, so you must choose the name of the element set when displaying these elements!");
             } else {
                 return current($namedElements);
             }
@@ -301,22 +299,23 @@ class Omeka_View_Helper_Item
     public function getElementText($field, array $options)
     {
         $item = get_current_item();
-
-        //Any built-in fields or special naming schemes
-        if($this->hasOtherField($field)) {
+        
+        // Any built-in fields or special naming schemes
+        if ($this->hasOtherField($field)) {
             return $this->getOtherField($field, $item);
         }        
         
-        $element = $this->getElementRecordByName($item, $field, @$options['set_name']);
+        $element = $this->getElementRecordByName($item, $field, @$options['element_set']);
         
         // Get all the text records for this item.
         
-        // The element text records are indexed by the element_id for easy lookup.
+        // The element text records are indexed by the element_id for easy 
+        // lookup.
         $elementText = (array) $item->ElementTexts[$element->id];
         
         // Lock the records so that they can't be accidentally saved back to the
         // database, since we are modifying their values directly at this point.
-        foreach ($elementText as $key => $record) {
+        foreach ($elementText as $record) {
             $record->lock();
         }
         
