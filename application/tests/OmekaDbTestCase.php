@@ -1,26 +1,20 @@
 <?php 
-Mock::generate('Zend_Db_Adapter_Mysqli');
-/**
-* 
-*/
-class OmekaDbTestCase extends OmekaTestCase
+class OmekaDbTestCase extends PHPUnit_Framework_TestCase
 {
 	protected $adapter;
-	
-	public function setUp()
-	{
-		$this->adapter = new MockZend_Db_Adapter_Mysqli;
-	}
-	
+		
 	public function testDbCanRetrieveTableNameWithPrefix()
 	{
+	    // false as 5th argument makes the constructor not be called
+	    $this->adapter = $this->getMock('Zend_Db_Adapter_Mysqli', array(), array(), '', false);
+	    
 		$db_with_prefix = new Omeka_Db($this->adapter, 'foobar_');
 		
-		$this->assertEqual($db_with_prefix->Item, 'foobar_items');
+		$this->assertEquals($db_with_prefix->Item, 'foobar_items');
 		
 		$db_without_prefix = new Omeka_Db($this->adapter);
 		
-		$this->assertEqual($db_without_prefix->Item, 'items');
+		$this->assertEquals($db_without_prefix->Item, 'items');
 	}
 }
  

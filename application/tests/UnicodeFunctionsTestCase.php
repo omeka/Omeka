@@ -9,7 +9,7 @@ class UnicodeFunctionsTestCase extends OmekaTestCase
 				
 		$trans = h($testAmps);
 		
-		$this->assertEqual($trans,"cookies &amp; cream");
+		$this->assertEquals($trans,"cookies &amp; cream");
 		
 		
 		//Should convert curly quotes to entities
@@ -17,7 +17,7 @@ class UnicodeFunctionsTestCase extends OmekaTestCase
 		
 		$trans = h($testCurlyQuotes);
 								
-		$this->assertEqual($trans,"&ldquo;hello there&rdquo;");
+		$this->assertEquals($trans,"&ldquo;hello there&rdquo;");
 		
 		
 		//Default args should only escape quotes that are outside of the allowed tags
@@ -25,7 +25,7 @@ class UnicodeFunctionsTestCase extends OmekaTestCase
 		
 		$trans = h($testNormalQuotes);
 		
-		$this->assertEqual($trans,'&quot;hello there&quot; <em class="foo">');
+		$this->assertEquals($trans,'&quot;hello there&quot; <em class="foo">');
 		
 		
 		//Should convert all other weird unicode to entities
@@ -33,32 +33,32 @@ class UnicodeFunctionsTestCase extends OmekaTestCase
 		
 		$trans = h($testXMLEntities);
 		
-		$this->assertEqual($trans,"&copy;&mdash;&ndash;&amp;&trade;&ldquo;&rdquo;&lsquo;&rsquo;&hellip;&amp;");
+		$this->assertEquals($trans,"&copy;&mdash;&ndash;&amp;&trade;&ldquo;&rdquo;&lsquo;&rsquo;&hellip;&amp;");
 		
 		//Default args should avoid conversion of <em> tags
 		$testEmConversion = "“hello there” <em>dude</em>";
 				
 		$trans = h($testEmConversion);
 				
-		$this->assertEqual($trans,"&ldquo;hello there&rdquo; <em>dude</em>", 'h() does not avoid converting <em> tags by default');
+		$this->assertEquals($trans,"&ldquo;hello there&rdquo; <em>dude</em>", 'h() does not avoid converting <em> tags by default');
 		
 		//Default args should convert other tags like <div>
 		$testDivConversion = "<div>hello there</div>";
 		
 		$trans = h($testDivConversion);
 		
-		$this->assertEqual($trans, "&lt;div&gt;hello there&lt;/div&gt;");
+		$this->assertEquals($trans, "&lt;div&gt;hello there&lt;/div&gt;");
 		
 		//Second arg set to 'false' or 'null' should disallow tags and convert all to entities (for forms)
 		$trans = h($testEmConversion,false);
 		
-		$this->assertEqual($trans,"&ldquo;hello there&rdquo; &lt;em&gt;dude&lt;/em&gt;", 'h() is not converting all tags to entities');
+		$this->assertEquals($trans,"&ldquo;hello there&rdquo; &lt;em&gt;dude&lt;/em&gt;", 'h() is not converting all tags to entities');
 		
 		$testSpanConversion = '“hello there” <span class="foo">dude</span>';
 		
 		$trans = h($testSpanConversion,false);
 		
-		$this->assertEqual($trans, '&ldquo;hello there&rdquo; &lt;span class=&quot;foo&quot;&gt;dude&lt;/span&gt;');
+		$this->assertEquals($trans, '&ldquo;hello there&rdquo; &lt;span class=&quot;foo&quot;&gt;dude&lt;/span&gt;');
 	}
 	
 	/**

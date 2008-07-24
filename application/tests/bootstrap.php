@@ -1,20 +1,15 @@
-<?php 
+<?php
+
 ini_set('max_execution_time', 900);
 ini_set('memory_limit', '32M');
 
 require_once '../../paths.php';
 require_once 'globals.php';
 
+// require_once 'PHPUnit/Framework.php';
+
 define('TEST_DIR', APP_DIR . DIRECTORY_SEPARATOR . 'tests');
 define('TEST_ASSETS_DIR', TEST_DIR .DIRECTORY_SEPARATOR . 'assets');
-
-//Simpletest includes
-require_once 'simpletest/unit_tester.php';
-require_once 'simpletest/reporter.php';
-require_once 'simpletest/mock_objects.php';
-require_once 'simpletest/web_tester.php';
-
-require_once 'IdenticalSqlExpectation.php';
 
 require_once 'Omeka/Core.php';
 
@@ -84,30 +79,3 @@ function setup_test_user($core)
 
     $core->setCurrentUser($user);
 }
-
-//Class definitions for mock objects
-require_once 'mocks.php';
-
-require_once 'OmekaTestCase.php';
-//require_once 'OmekaControllerTestCase.php';
-
-require_once 'Omeka/Record.php';
-require_once 'Item.php';
-
-require_once 'OmekaRecordTestCase.php';
-require_once 'OmekaDbTestCase.php';
-require_once 'MiscellaneousTestCase.php';	
-require_once 'AclTestCase.php';
-require_once 'ViewHelpersTestCase.php';
-
-$test = new TestSuite('Omeka Tests');
-
-
-//$test->addTestCase(new OmekaRecordTestCase());
-$test->addTestCase(new OmekaDbTestCase());
-$test->addTestCase(new MiscellaneousTestCase());
-$test->addTestCase(new AclTestCase());
-$test->addTestCase(new ViewHelpersTestCase());
-
-$test->run(new HtmlReporter());
-?>

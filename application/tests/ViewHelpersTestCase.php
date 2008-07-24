@@ -3,7 +3,7 @@
 /**
 * 
 */
-class ViewHelpersTestCase extends UnitTestCase
+class ViewHelpersTestCase extends PHPUnit_Framework_TestCase
 {
     protected $view, $router;
     
@@ -23,8 +23,8 @@ class ViewHelpersTestCase extends UnitTestCase
     
     public function testUrlHelperWorks()
     {
-        $this->assertEqual('/items', $this->view->url(array('controller'=>'items')) );
-        $this->assertEqual('/items', $this->view->url('items'));
+        $this->assertEquals('/items', $this->view->url(array('controller'=>'items')) );
+        $this->assertEquals('/items', $this->view->url('items'));
     }
     
     public function testLinkToCanLinkToRecords()
@@ -33,16 +33,17 @@ class ViewHelpersTestCase extends UnitTestCase
         $this->router->addRoute('id', new Zend_Controller_Router_Route(':controller/:action/:id'));
         
         //Configure a mock database connection so that the Item doesn't die
-        $db = new MockOmeka_Db;
+        $db = $this->getMock('Omeka_Db', array(), array(), '', false);
+        require_once 'Item.php';
         $item = new Item($db);
         $item->id = 1;
         
-        $this->assertEqual('<a href="/items/show/1" title="View Test">Test</a>', link_to($item, 'show', 'Test'));
+        $this->assertEquals('<a href="/items/show/1" title="View Test">Test</a>', link_to($item, 'show', 'Test'));
     }
     
     public function testLinkToCanLinkWithoutARecord()
     {
-        $this->assertEqual('<a href="/items" title="View Test">Test</a>', link_to('items', null, 'Test'));
+        $this->assertEquals('<a href="/items" title="View Test">Test</a>', link_to('items', null, 'Test'));
     }
     
 /* 	public function testUrlForCanGenerateProperUrls()
@@ -52,11 +53,11 @@ class ViewHelpersTestCase extends UnitTestCase
 	    require_once HELPERS;
 	    $url = url_for(array('controller'=>'foo', 'action'=>'bar'));
 
-	    $this->assertEqual("/foo/bar", $url);
+	    $this->assertEquals("/foo/bar", $url);
 
 	    $url = url_for('/foo/bar');
 
-	    $this->assertEqual("/foo/bar", $url);
+	    $this->assertEquals("/foo/bar", $url);
 	} */
 	
 	
