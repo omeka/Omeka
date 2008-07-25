@@ -6,6 +6,7 @@ require_once 'OmekaDbTestCase.php';
 require_once 'MiscellaneousTestCase.php';	
 require_once 'AclTestCase.php';
 require_once 'ViewHelpersTestCase.php';
+require_once 'UsersControllerTest.php';
 
 class AllTests
 {
@@ -18,6 +19,7 @@ class AllTests
         $suite->addTestSuite('MiscellaneousTestCase');
         $suite->addTestSuite('AclTestCase');
         $suite->addTestSuite('ViewHelpersTestCase');
+        $suite->addTestSuite('UsersControllerTest');
         
         return $suite;
     }

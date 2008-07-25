@@ -3,20 +3,34 @@
 ini_set('max_execution_time', 900);
 ini_set('memory_limit', '32M');
 
-require_once '../../paths.php';
-require_once 'globals.php';
+// Load this while the include path contains the path to PEAR (which has
+// conflicts because of naming clashes).
+require_once 'PHPUnit/Framework.php';
 
-// require_once 'PHPUnit/Framework.php';
+// Set the include path and all the constants.
+require_once '../../paths.php';
+
+// Reset the include path but include the libraries/ directory so that the
+// following include works.
+restore_include_path();
+set_include_path(get_include_path() . PATH_SEPARATOR . LIB_DIR);
+
+require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
+
+// No more PHPUnit includes from here on out.
+// Now reset the path to what it should be for Omeka.
+restore_include_path();
+set_include_path(LIB_DIR . PATH_SEPARATOR . MODEL_DIR);
+
+require_once 'globals.php';
 
 define('TEST_DIR', APP_DIR . DIRECTORY_SEPARATOR . 'tests');
 define('TEST_ASSETS_DIR', TEST_DIR .DIRECTORY_SEPARATOR . 'assets');
 
 require_once 'Omeka/Core.php';
 
-//Test bootstrap should automatically filter magic quotes and initialize the 
-//autoloader.
+//Test bootstrap should automatically initialize the autoloader.
 $core = new Omeka_Core;
-$core->sanitizeMagicQuotes();
 $core->initializeClassLoader();
 
 function setup_test_config()
