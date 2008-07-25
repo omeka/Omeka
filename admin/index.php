@@ -13,9 +13,6 @@
  * @package Omeka
  **/
 
-// Ladies and Gentlemen, start your timers
-define('APP_START', microtime(true));
-
 // Flag this as the admin theme. Used by _define_web_root() function in paths.php.
 define('ADMIN', true);
 
@@ -25,20 +22,16 @@ include '../paths.php';
 // Define the admin theme directory path.
 define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . $site['admin_theme']);
 
-// Initialize Omeka.
+// Requires for the plugins loaded by default.
 require_once 'Omeka/Core.php';
-$core = new Omeka_Core;
-$core->initialize();
+require_once 'Omeka/Controller/Plugin/Admin.php';
 
-// Let the request know that we want to go through the admin interface.
-$core->getRequest()->setParam('admin', true);
+require_once 'Zend/Controller/Front.php';
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Omeka_Core());
 
-// Call the dispatcher which echos the response object automatically
-$core->dispatch();
+// This plugin allows for all functionality that is specific to the 
+// admin theme.
+$front->registerPlugin(new Omeka_Controller_Plugin_Admin);
 
-// Ladies and Gentlemen, stop your timers
-if ((boolean) $config->debug->timer) {
-    echo microtime(true) - APP_START;
-}
-
-// We're done here.
+$front->dispatch();

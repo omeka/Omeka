@@ -27,11 +27,12 @@ class Omeka_Context
         $_auth, 
         $_logger,
         $_front,
-        $_options,
+        $_options = array(),
         $_pluginBroker,
         $_request,
         $_response,
-        $_user;
+        $_user,
+        $_installed = true; // Omeka is thought to be installed until proven otherwise.
     
 	/**
 	 * Singleton instance
@@ -52,6 +53,24 @@ class Omeka_Context
     public function resetInstance()
     {
         self::$_instance = new self();
+    }
+    
+    /**
+     * Verify that Omeka has been installed.  
+     *
+     * The criteria for Omeka being installed includes:
+     * - the existence of the database options, which would be missing if the
+     *  'options' table was either empty or non-existent.
+     * 
+     **/
+    public function omekaIsInstalled()
+    {        
+        return $this->_installed;
+    }
+    
+    public function setOmekaIsInstalled($flag)
+    {
+        $this->_installed = (boolean)$flag;
     }
     
 	public function setDb(Omeka_Db $db)

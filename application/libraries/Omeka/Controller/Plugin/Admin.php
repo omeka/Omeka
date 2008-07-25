@@ -12,6 +12,8 @@
  * For now, all this includes is preventing unauthenticated access to all admin pages, 
  * with the exception of a few white-listed URLs, which are stored in this plugin.
  *
+ * This controller plugin should be loaded only in the admin bootstrap.  
+ *
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
@@ -25,16 +27,28 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
      **/
     protected $_adminWhitelist = array(array('controller' => 'users', 'action' => 'activate'), 
                                        array('controller' =>'users', 'action' => 'login'),
-                                       array('controller' => 'users', 'action' => 'forgot-password'));
-
+                                       array('controller' => 'users', 'action' => 'forgot-password'),
+                                       array('controller' => 'installer', 'action' => 'notify'));
+    
+    /**
+    *
+    * @param Zend_Controller_Request_Abstract $request
+    * @return void
+    */
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    {
+        // Let the request know that we want to go through the admin interface.
+        $request->setParam('admin', true);
+    }
+    
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $action = $request->getActionName();
         $controller = $request->getControllerName();
         
         $overrideLogin = false;
-        
-        if ($request->getParam('admin')) {
+
+        // if ($request->getParam('admin')) {
             foreach ($this->_adminWhitelist as $entry) {
                 if (($entry['controller'] == $controller) && ($entry['action'] == $action)) {
                     $overrideLogin = true;
@@ -50,7 +64,9 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
                 require_once 'Zend/Session.php';
                 require_once 'Omeka/Auth/Adapter.php';
 
-                $auth = $this->getAuth();
+                if (!($auth = $this->getAuth())) {
+                    throw new Exception('Auth object must be available when routing admin requests!');
+                }
             
                 if (!$auth->hasIdentity()) {
                     // capture the intended controller / action for the redirect
@@ -79,7 +95,7 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
                     }
                 }
             }
-        }
+        // }
     }
     
     public function getRedirector()

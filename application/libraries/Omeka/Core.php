@@ -12,6 +12,11 @@
 require_once 'Omeka/Context.php';
 
 /**
+ * @see Zend_Controller_Plugin_Abstract
+ */
+require_once 'Zend/Controller/Plugin/Abstract.php';
+
+/**
  * Core class used to bootstrap the Omeka environment.
  * 
  * Various duties include, but are not limited to, sanitizing magic_quotes,
@@ -27,7 +32,7 @@ require_once 'Omeka/Context.php';
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Omeka_Core
+class Omeka_Core extends Zend_Controller_Plugin_Abstract
 {
     /**
      * Array containing all core loading phase methods in sequential order. 
@@ -82,6 +87,53 @@ class Omeka_Core
     public function getContext()
     {
         return $this->_context;
+    }
+    
+    /**
+     * This makes Omeka_Core work as a Zend_Controller_Front plugin.
+     * 
+     **/
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    {
+        try {
+            $this->initialize();
+        } catch (Zend_Db_Adapter_Exception $e) {
+            // Database adapter exceptions indicate that something has gone
+            // wrong on the adapter level. Usually this will occur as a result of a
+            // database not existing, or not being able to connect to the host.
+            // This should redirect to an error page. For now, just dump the error.
+            echo $e->getMessage();exit; 
+        } catch (Zend_Db_Statement_Exception $e) {
+            // Database statement exceptions indicate that something has gone
+            // wrong within the actual database.  During initialization, this
+            // will only occur when trying to access the 'options' table, so it
+            // directly indicates that Omeka has not been installed. Since we're
+            // going to continue dispatching in order to get to the install script,
+            // load the skeleton of the initialization script.
+            $this->setOmekaIsInstalled(false);
+            $this->initializeSkeleton();
+        } catch (Zend_Config_Exception $e) {
+            // These exceptions will be thrown for config files, when they don't
+            // exist or are improperly structured. Should do something similar to
+            // the database exception errors.
+            echo "Error in Omeka's configuration file(s): " . $e->getMessage();exit; 
+        } catch (Exception $e) {
+            // No idea what this exception would be.  Just start crying.
+            echo $e->getMessage();exit;
+        }
+    }
+    
+    /**
+     * If Omeka has not been installed yet, make sure we dispatch to the
+     *  notification in the InstallerController.
+     * 
+     **/
+    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
+    {
+        if (!$this->omekaIsInstalled()) {
+            $request->setControllerName('installer');
+            $request->setActionName('notify');
+        }        
     }
     
     /**
@@ -165,36 +217,18 @@ class Omeka_Core
      **/
     public function initializeDb()
     {
-        try {
-            $db = $this->getConfig('db');
-            
-            // Fail on improperly configured db.ini file
-            if (!isset($db->host) || ($db->host == 'XXXXXXX')) {
-                throw new Zend_Config_Exception('Your Omeka database configuration file has not been set up properly.  Please edit the configuration and reload this page.');
-            }
-            
-            $dbh = Zend_Db::factory('Mysqli', array('host'     => $db->host,
-                                                    'username' => $db->username,
-                                                    'password' => $db->password,
-                                                    'dbname'   => $db->name));
+        $db = $this->getConfig('db');
         
-        // perhaps a failed login credential, or perhaps the RDBMS is not running
-        } catch (Zend_Db_Adapter_Exception $e) {
-            echo $e->getMessage();
-            exit;
-        
-        // perhaps factory() failed to load the specified Adapter class
-        } catch (Zend_Exception $e) {
-            echo $e->getMessage();
-            exit;
-        
-        } catch (Zend_Config_Exception $e) {
-            echo $e->getMessage();
-            exit;
-        
-        } catch (Exception $e) {
-            $this->installerNotification();
+        // Fail on improperly configured db.ini file
+        if (!isset($db->host) || ($db->host == 'XXXXXXX')) {
+            throw new Zend_Config_Exception('Your Omeka database configuration file has not been set up properly.  Please edit the configuration and reload this page.');
         }
+        
+        $dbh = Zend_Db::factory('Mysqli', array('host'     => $db->host,
+                                                'username' => $db->username,
+                                                'password' => $db->password,
+                                                'dbname'   => $db->name));
+        
 
         $db_obj = new Omeka_Db($dbh, $db->prefix);
                 
@@ -210,32 +244,12 @@ class Omeka_Core
      * @return void
      **/
     public function initializeOptions()
-    {
+    {        
         // Pull the options from the DB
-        try {
-            $db = $this->getDb();
-            
-            $option_stmt = $db->query("SELECT * FROM $db->Option");
-            
-            if (!$option_stmt) {
-                throw new Exception('Install me!');
-            }
-            
-            $option_array = $option_stmt->fetchAll();
-            
-            // ****** CHECK TO SEE IF OMEKA IS INSTALLED ****** 
-            if (!count($option_array)) {
-                throw new Exception('Install me!');
-            }
-        } catch (Exception $e) {
-            $this->installerNotification();
-        }
+        $db = $this->getDb();
         
-        // Save the options so they can be accessed
-        $options = array();
-        foreach ($option_array as $opt) {
-            $options[$opt['name']] = $opt['value'];
-        }
+        // This will throw an exception if the options table does not exist
+        $options = $db->fetchPairs("SELECT name, value FROM $db->Option");
         
         $this->setOptions($options);
     }
@@ -317,7 +331,7 @@ class Omeka_Core
     public function initializeAcl()
     {
         $options = $this->getOptions();
-        
+                
         if ($serialized = $options['acl']) {
             $acl = unserialize($serialized);
         } else {
@@ -428,13 +442,11 @@ class Omeka_Core
         $front->setControllerDirectory(CONTROLLER_DIR);
         $front->setRequest(new Zend_Controller_Request_Http);
         $front->setResponse(new Zend_Controller_Response_Http);
+        
         // This plugin allows Omeka plugins to add controller directories to the 
         // 'default' namespace which prevents weird naming conventions like 
         // Contribution_IndexController.php and obviates the need to hack routes
         $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack);
-        // This plugin allows for all functionality that is specific to the 
-        // admin theme.
-        $front->registerPlugin(new Omeka_Controller_Plugin_Admin);
         // This plugin allows for debugging request objects without inserting 
         // debugging code into the Zend Framework code files.        
         $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
@@ -445,6 +457,9 @@ class Omeka_Core
         fire_plugin_hook('add_routes', $router);
         $front->setRouter($router);
         
+        // Add the default routes
+        $router->addDefaultRoutes();
+        
         // Set contexts
         $this->setFrontController($front);
         $this->setRequest($front->getRequest());
@@ -452,6 +467,39 @@ class Omeka_Core
         
         // Action helpers
         $this->initializeActionHelpers();
+    }
+    
+    /**
+     * Used only when installing Omeka, under certain error conditions where
+     * the rest of the Omeka configuration cannot be loaded, or when running
+     * automated tests in Omeka.
+     **/
+    public function initializeSkeleton()
+    {
+        // Initialize a blank ACL.
+        $this->setAcl(new Omeka_Acl);
+        
+        // Initialize the auth mechanism but do not specify storage for it.
+        $auth = Zend_Auth::getInstance();
+        $this->setAuth($auth);
+                
+        // Initialize front controller with no plugins
+        $front = Zend_Controller_Front::getInstance();
+        $front->setControllerDirectory(CONTROLLER_DIR);
+        $front->setRequest(new Zend_Controller_Request_Http);
+        $front->setResponse(new Zend_Controller_Response_Http);  
+        
+        // View renderer has to be initialized because Omeka uses the .php
+        // extension for view scripts.
+        $this->initViewRenderer();
+        
+        // Controllers must have access to the default response contexts or
+        // Omeka_Controller_Action instances will die.
+        $this->initResponseContexts();
+        
+        // Uncaught exceptions should bubble up to the browser level since we
+        // are essentially in debug/install mode.
+        $front->throwExceptions(true);              
     }
     
     private function initializeActionHelpers()
@@ -501,7 +549,7 @@ class Omeka_Core
     {
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
         $contexts->setContextParam('output');
- 
+
         $contextArray = array(
              'dc' => array(
                  'suffix'    => 'dc',
@@ -518,17 +566,5 @@ class Omeka_Core
         }
  
         $contexts->addContexts($contextArray); 
-    }
-    
-    public function dispatch()
-    {
-        $front = $this->getFrontController();
-        $front->dispatch();
     }   
-    
-    private function installerNotification()
-    {
-        include_once INSTALL_DIR . DIRECTORY_SEPARATOR . 'notify.php';
-        exit;
-    } 
 }

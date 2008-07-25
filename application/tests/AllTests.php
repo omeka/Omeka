@@ -14,7 +14,6 @@ class AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite();
 
-        //$test->addTestCase(new OmekaRecordTestCase());
         $suite->addTestSuite('OmekaDbTestCase');
         $suite->addTestSuite('MiscellaneousTestCase');
         $suite->addTestSuite('AclTestCase');
