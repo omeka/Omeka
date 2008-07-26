@@ -16,7 +16,7 @@
 <tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
 	<td scope="row"><?php echo item('id');?></td> 
 	<td><?php echo link_to_item(); ?></td>
-	<td><?php echo item('Type Name'); ?></td>
+	<td><?php echo item('Item Type Name'); ?></td>
 	<td><?php echo item('Creator', 0); ?></td>	
 	<td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
 	<td><?php echo checkbox(array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public"), item('public')); ?></td>
