@@ -37,8 +37,7 @@ class Omeka_View extends Zend_View_Abstract
     
     public function __construct($config = array())
     {
-        parent::__construct($config);        
-        Zend_Registry::set('view', $this);    
+        parent::__construct($config);         
         $this->initPaths();     
         
         // Setting the XHTML1_STRICT doctype fixes validation errors for ZF's form elements

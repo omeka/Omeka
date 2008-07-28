@@ -228,7 +228,9 @@ function apply_filters($filterName, $valueToFilter)
  **/
 function add_filter($filterName, $callback, $priority = 10)
 {
-    get_plugin_broker()->addFilter($filterName, $callback, $priority);
+    if ($pluginBroker = get_plugin_broker()) {
+        $pluginBroker->addFilter($filterName, $callback, $priority);
+    }
 }
 
 /**

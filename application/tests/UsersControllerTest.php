@@ -3,6 +3,8 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $core;
     
+    protected $_themePhysicalPath, $_themeWebPath;
+    
     public function setUp()
     {
         $this->bootstrap = array($this, 'controllerBootstrap');
@@ -18,30 +20,37 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         //     acl
         //     auth
         //     plugin broker
+        Omeka_Context::resetInstance();
 
         require_once 'Omeka/Core.php';
         $core = new Omeka_Core;
- 
-        // Reset some MVC stuff, like action helpers that have been initialized.
-        $this->reset();
+                
+        // Load up the admin controller plugin.
+        $front = Zend_Controller_Front::getInstance();
+        $front->registerPlugin(new Omeka_Controller_Plugin_Admin);
         
         // Set Theme directories and database options (this must take place
         // before the ViewRenderer is initialized).
-        $core->setOptions(array('public_theme'=>'default'));
-        
-        // Define this constant for the path to the public theme (need to get
-        // rid of this, or just have it as a convenience for plugin writers).
-        // That is because it can't be easily modified for testing purposes.
-        // In fact, we can't test controller responses on the admin theme until
-        // this is fixed.
-        if (!defined('THEME_DIR')) {
-            define('THEME_DIR', BASE_DIR . DIRECTORY_SEPARATOR . 'themes');
-        }
+        $core->setOptions(array('admin_theme'=>'default'));
         
         // Special skeleton initializer (so that Omeka can work without plugins
         // or a functioning database).
         $core->initializeSkeleton();
+
+        require_once 'Item.php';
+
+        // Initialize the paths within the view scripts. We do this here instead
+        // of allowing the view object to take care of it, because the view object
+        // uses database options and hard coded constants that don't translate
+        // well into the testing environment. Specifically, the view object uses a
+        // THEME_DIR constant that doesn't work well with the testing
+        // environment, because you can't change it to use the admin theme instead
+        // of the public theme midway through testing.
+        $view = Zend_Registry::get('view');
         
+        $themeName = 'default';
+        $this->_setThemePath($view, 'admin' . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName);
+                        
         // Set up the mock config file
         setup_test_config();
                 
@@ -49,6 +58,23 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         // $core->setPluginBroker($this->_getMockPluginBroker());
                 
         $this->core = $core;
+    }
+    
+    /**
+     * @todo This can actually be abstracted to the view object itself in order
+     * to eventually bypass the use of constants.
+     * 
+     * @param Omeka_View
+     * @param string
+     * @return void
+     **/
+    protected function _setThemePath($view, $physicalPath)
+    {
+        $webPath = join('/', explode(DIRECTORY_SEPARATOR, $physicalPath));
+        
+        $view->addScriptPath(BASE_DIR . DIRECTORY_SEPARATOR . $physicalPath);
+        
+        $view->addAssetPath(BASE_DIR . DIRECTORY_SEPARATOR . $physicalPath, WEB_ROOT . DIRECTORY_SEPARATOR . $webPath);
     }
     
     protected function _getMockPluginBroker()
@@ -80,7 +106,6 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         $tableClass = $class . 'Table';
         
-        // Get the database table object to respond to findRandomFeatured() by returning a blank item.
         $mockDbTable = $this->getMock($tableClass, array(), array(), '', false);
         
         $expectation = ($index !== null) ? $this->at($index) : $this->any();
@@ -90,31 +115,60 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         return $mockDbTable;     
     }
     
+    protected function _getRequestException()
+    {
+        return $this->getRequest()->getParam('error_handler')->exception;
+    }
+    
     public function testHomePageIsIndexControllerIndexAction()
-    {        
-        $db = $this->_getMockDb();
-        
-        $table = $this->_getMockTableFor($db, 'Item', 0);
-        $table = $this->_getMockTableFor($db, 'Collection', 1);
+    {     
+        // Mock tables should be fine for this, since we're not using any complex data queries.   
+        $db = $this->_getMockDbWithMockTables();        
         
         $this->core->setDb($db);
                         
         $this->dispatch('/');
+
         $this->assertController('index');
         $this->assertAction('index');
     }    
     
-    public function testUsersControllerRendersAs404OnPublicTheme()
+    public function testInvalidControllerRendersAs404OnAdminTheme()
     {   
         // Set up a mock DB
         $mockDb = $this->_getMockDbWithMockTables();
         $this->core->setDb($mockDb);
                 
-        $this->dispatch('/users');
+        $this->dispatch('/foobar');
         $this->assertController('error');
         $this->assertAction('error');
         
         // Check the http response code is equal to 404
         $this->assertResponseCode(404);
+    }
+    
+    public function testItemsControllerRendersBrowsePage()
+    {
+        // Mock the database.
+        $db = $this->_getMockDb();
+        $table = $this->_getMockTableFor($db, 'Item');
+        $this->core->setDb($db);
+        
+        // Mock the ACL, since we are using the admin/ theme.
+        $acl = Omeka_Context::getInstance()->getAcl();
+        $acl->loadResourceList(array('Items'=>array('browse')));
+        
+        // Allow access.
+        $acl->allow();
+                
+        $this->dispatch('/items');
+        $this->assertController('items');
+        
+        // Deny access and see where it goes.
+        $acl->deny();
+        
+        $this->dispatch('/items');
+        $this->assertController('error');
+        $this->assertResponseCode(403);
     }
 }

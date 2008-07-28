@@ -481,15 +481,9 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         // Initialize front controller with no plugins
         $front = Zend_Controller_Front::getInstance();
         $front->setControllerDirectory(CONTROLLER_DIR);
-        
-        // View renderer has to be initialized because Omeka uses the .php
-        // extension for view scripts.
-        $this->initViewRenderer();
-        
-        // Controllers must have access to the default response contexts or
-        // Omeka_Controller_Action instances will die.
-        $this->initResponseContexts();
-        
+                
+        $this->initializeActionHelpers();
+                
         $this->_context->setFrontController($front);
         
         // Uncaught exceptions should bubble up to the browser level since we
@@ -520,7 +514,10 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $view = new Omeka_View();
         $viewRenderer->setView($view)
-                     ->setViewSuffix('php');        
+                     ->setViewSuffix('php');  
+                     
+        // Register the view object so that it can be called by the view helpers.
+        Zend_Registry::set('view', $view);   
     }
     
     /**
