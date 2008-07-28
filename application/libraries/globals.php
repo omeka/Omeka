@@ -120,9 +120,11 @@ function add_plugin_hook($hook, $callback)
  **/
 function fire_plugin_hook()
 {
-    $args = func_get_args();
-    $hook = array_shift($args);
-    return call_user_func_array(array(get_plugin_broker(), $hook), $args);
+    if ($pluginBroker = get_plugin_broker()) {
+        $args = func_get_args();
+        $hook = array_shift($args);
+        return call_user_func_array(array($pluginBroker, $hook), $args);
+    }
 }
 
 /**
@@ -208,8 +210,13 @@ function add_mime_display_type($mimeTypes, $callback, array $options=array())
  **/
 function apply_filters($filterName, $valueToFilter)
 {
-    $extraOptions = array_slice(func_get_args(), 2);
-    return get_plugin_broker()->applyFilters($filterName, $valueToFilter, $extraOptions);
+    if ($pluginBroker = get_plugin_broker()) {
+        $extraOptions = array_slice(func_get_args(), 2);
+        return $pluginBroker->applyFilters($filterName, $valueToFilter, $extraOptions);
+    }
+    
+    // If the plugin broker is not enabled for this request (possibly for testing), return the original value.
+    return $valueToFilter;
 }
 
 /**

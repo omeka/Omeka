@@ -6,21 +6,16 @@ ini_set('memory_limit', '32M');
 // Load this while the include path contains the path to PEAR (which has
 // conflicts because of naming clashes).
 require_once 'PHPUnit/Framework.php';
+require_once 'PHPUnit/Framework/Constraint.php';
 
 // Set the include path and all the constants.
 require_once '../../paths.php';
 
-// Reset the include path but include the libraries/ directory so that the
-// following include works.
+// Restore the include path to use PEAR modules.
 restore_include_path();
-set_include_path(get_include_path() . PATH_SEPARATOR . LIB_DIR);
+set_include_path(LIB_DIR . PATH_SEPARATOR . MODEL_DIR . PATH_SEPARATOR . get_include_path());
 
 require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
-
-// No more PHPUnit includes from here on out.
-// Now reset the path to what it should be for Omeka.
-restore_include_path();
-set_include_path(LIB_DIR . PATH_SEPARATOR . MODEL_DIR);
 
 require_once 'globals.php';
 
@@ -72,13 +67,6 @@ function setup_test_acl()
     $acl->setReturnValue('checkUserPermission', true);
     
     Omeka_Context::getInstance()->setAcl($acl);
-}
-
-function setup_test_plugin_broker()
-{
-    require_once 'mocks.php';
-    $broker = new Mock_Plugin_Broker;
-    Omeka_Context::getInstance()->setPluginBroker($broker);
 }
 
 function setup_test_user($core)

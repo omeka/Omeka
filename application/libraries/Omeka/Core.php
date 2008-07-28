@@ -440,9 +440,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         // Front controller
         $front = Zend_Controller_Front::getInstance();
         $front->setControllerDirectory(CONTROLLER_DIR);
-        $front->setRequest(new Zend_Controller_Request_Http);
-        $front->setResponse(new Zend_Controller_Response_Http);
-        
+                
         // This plugin allows Omeka plugins to add controller directories to the 
         // 'default' namespace which prevents weird naming conventions like 
         // Contribution_IndexController.php and obviates the need to hack routes
@@ -451,6 +449,8 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         // debugging code into the Zend Framework code files.        
         $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
         
+        $this->_context->setFrontController($front);
+                
         // Routing
         $router = new Zend_Controller_Router_Rewrite();
         $router->addConfig($this->getConfig('routes'), 'routes');
@@ -459,14 +459,9 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         
         // Add the default routes
         $router->addDefaultRoutes();
-        
-        // Set contexts
-        $this->setFrontController($front);
-        $this->setRequest($front->getRequest());
-        $this->setResponse($front->getResponse());
-        
+                
         // Action helpers
-        $this->initializeActionHelpers();
+        $this->initializeActionHelpers();        
     }
     
     /**
@@ -486,8 +481,6 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         // Initialize front controller with no plugins
         $front = Zend_Controller_Front::getInstance();
         $front->setControllerDirectory(CONTROLLER_DIR);
-        $front->setRequest(new Zend_Controller_Request_Http);
-        $front->setResponse(new Zend_Controller_Response_Http);  
         
         // View renderer has to be initialized because Omeka uses the .php
         // extension for view scripts.
@@ -497,9 +490,15 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         // Omeka_Controller_Action instances will die.
         $this->initResponseContexts();
         
+        $this->_context->setFrontController($front);
+        
         // Uncaught exceptions should bubble up to the browser level since we
-        // are essentially in debug/install mode.
-        $front->throwExceptions(true);              
+        // are essentially in debug/install mode. Otherwise, we should make use
+        // of the ErrorController, which WILL NOT LOAD IF YOU ENABLE EXCEPTIONS
+        // (took me awhile to figure this out).
+        if (($config = $this->getConfig('basic')) and ((boolean)$config->debug->exceptions)) {
+            $front->throwExceptions(true);  
+        } 
     }
     
     private function initializeActionHelpers()
