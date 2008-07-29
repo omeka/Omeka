@@ -22,12 +22,6 @@ require_once 'globals.php';
 define('TEST_DIR', APP_DIR . DIRECTORY_SEPARATOR . 'tests');
 define('TEST_ASSETS_DIR', TEST_DIR .DIRECTORY_SEPARATOR . 'assets');
 
-require_once 'Omeka/Core.php';
-
-//Test bootstrap should automatically initialize the autoloader.
-$core = new Omeka_Core;
-$core->initializeClassLoader();
-
 function setup_test_config()
 {
     //Config dependency
@@ -54,30 +48,4 @@ function setup_live_db()
     Zend_Registry::set('live_db', $dbObj);
     
     return $dbObj;
-}
-
-function setup_test_acl()
-{
-    Mock::generate('Omeka_Acl');
-    
-    //Acl dependency
-    $acl = new MockOmeka_Acl;
-
-    //For testing purposes, all permissions checks should be OK'ed
-    $acl->setReturnValue('checkUserPermission', true);
-    
-    Omeka_Context::getInstance()->setAcl($acl);
-}
-
-function setup_test_user($core)
-{
-    //logged-in user dependency
-    $user = new stdClass;
-    $user->id = 1;
-    $user->username = "foobar";
-    $user->first_name = "Foo";
-    $user->last_name = "Bar";
-    $user->role = "super";
-
-    $core->setCurrentUser($user);
 }

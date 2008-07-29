@@ -98,7 +98,7 @@ class Omeka_Context
 	    return $this->_config[$name];
 	}
 	
-	public function setAcl(Zend_Acl $acl)
+	public function setAcl($acl)
 	{
 	    $this->_acl = $acl;
 	}

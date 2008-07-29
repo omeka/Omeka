@@ -25,6 +25,7 @@ class Omeka_Controller_Plugin_PluginControllerHack extends Zend_Controller_Plugi
         $front = Zend_Controller_Front::getInstance();
         $dispatcher = $front->getDispatcher();
         $request = $this->getRequest();
+        $isDispatchable = $dispatcher->isDispatchable($request);
         if ($pluginBroker = Omeka_Context::getInstance()->getPluginBroker()) {                    
             $controllerDirs = $pluginBroker->getControllerDirs();
         

@@ -52,7 +52,9 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                'initializePluginBroker', 
                                'initializeAuth', 
                                'initializeCurrentUser', 
-                               'initializeFrontController');
+                               'initializeFrontController',
+                               'initializeRoutes',
+                               'initializeDebugging');
     
     /**
      * 'Context' is a term that describes a pattern for storing site-wide data
@@ -111,7 +113,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
             // going to continue dispatching in order to get to the install script,
             // load the skeleton of the initialization script.
             $this->setOmekaIsInstalled(false);
-            $this->initializeSkeleton();
+            $this->initializeFrontController();
         } catch (Zend_Config_Exception $e) {
             // These exceptions will be thrown for config files, when they don't
             // exist or are improperly structured. Should do something similar to
@@ -217,6 +219,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      **/
     public function initializeDb()
     {
+        require_once 'Omeka/Db.php';
         $db = $this->getConfig('db');
         
         // Fail on improperly configured db.ini file
@@ -229,7 +232,6 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                                 'password' => $db->password,
                                                 'dbname'   => $db->name));
         
-
         $db_obj = new Omeka_Db($dbh, $db->prefix);
                 
         $this->setDb($db_obj);   
@@ -351,7 +353,9 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     {
         // Setup the ACL
         include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
-        set_option('acl', serialize($acl));        
+        if ($this->getDb()) {
+            set_option('acl', serialize($acl));  
+        }
         return $acl;
     }
     
@@ -445,51 +449,37 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         // 'default' namespace which prevents weird naming conventions like 
         // Contribution_IndexController.php and obviates the need to hack routes
         $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack);
-        // This plugin allows for debugging request objects without inserting 
-        // debugging code into the Zend Framework code files.        
-        $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
-        
+
         $this->_context->setFrontController($front);
-                
-        // Routing
-        $router = $front->getRouter();
-        $router->addConfig($this->getConfig('routes'), 'routes');
-        fire_plugin_hook('add_routes', $router);
-        $front->setRouter($router);
-                        
+                                        
         // Action helpers
         $this->initializeActionHelpers();        
     }
     
-    /**
-     * Used only when installing Omeka, under certain error conditions where
-     * the rest of the Omeka configuration cannot be loaded, or when running
-     * automated tests in Omeka.
-     **/
-    public function initializeSkeleton()
+    public function initializeRoutes()
     {
-        // Initialize a blank ACL.
-        $this->setAcl(new Omeka_Acl);
-        
-        // Initialize the auth mechanism but do not specify storage for it.
-        $auth = Zend_Auth::getInstance();
-        $this->setAuth($auth);
-                
-        // Initialize front controller with no plugins
         $front = Zend_Controller_Front::getInstance();
-        $front->setControllerDirectory(CONTROLLER_DIR);
-                
-        $this->initializeActionHelpers();
-                
-        $this->_context->setFrontController($front);
-        
+        $router = $front->getRouter();
+        $router->addConfig($this->getConfig('routes'), 'routes');
+        fire_plugin_hook('add_routes', $router);
+        $front->setRouter($router);
+    }
+    
+    public function initializeDebugging()
+    {
+        $front = Zend_Controller_Front::getInstance();
+
         // Uncaught exceptions should bubble up to the browser level since we
         // are essentially in debug/install mode. Otherwise, we should make use
         // of the ErrorController, which WILL NOT LOAD IF YOU ENABLE EXCEPTIONS
         // (took me awhile to figure this out).
         if (($config = $this->getConfig('basic')) and ((boolean)$config->debug->exceptions)) {
             $front->throwExceptions(true);  
-        } 
+        }
+        
+        // This plugin allows for debugging request objects without inserting 
+        // debugging code into the Zend Framework code files.        
+        $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
     }
     
     private function initializeActionHelpers()

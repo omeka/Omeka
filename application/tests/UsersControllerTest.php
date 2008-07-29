@@ -12,69 +12,49 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     }
     
     public function controllerBootstrap()
-    {
-        // Load mock copies of the:
-        //     database
-        //     config files
-        //     database options
-        //     acl
-        //     auth
-        //     plugin broker
+    {        
+        require_once 'Omeka/Context.php';
         Omeka_Context::resetInstance();
-
-        require_once 'Omeka/Core.php';
-        $core = new Omeka_Core;
+        
+        // This is a subclass of Omeka_Core, which has had its routeStartup()
+        // hook redefined to load a custom sequence that is easier to test with.
+        // This may point towards the need for further refactorings.
+        require_once 'CoreTestPlugin.php';
+        $core = new CoreTestPlugin;
                 
-        // Load up the admin controller plugin.
         $front = Zend_Controller_Front::getInstance();
-        $front->registerPlugin(new Omeka_Controller_Plugin_Admin);
-        
-        // Set Theme directories and database options (this must take place
-        // before the ViewRenderer is initialized).
-        $core->setOptions(array('admin_theme'=>'default'));
-        
-        // Special skeleton initializer (so that Omeka can work without plugins
-        // or a functioning database).
-        $core->initializeSkeleton();
+        $front->registerPlugin($core);
 
-        require_once 'Item.php';
-
-        // Initialize the paths within the view scripts. We do this here instead
-        // of allowing the view object to take care of it, because the view object
-        // uses database options and hard coded constants that don't translate
-        // well into the testing environment. Specifically, the view object uses a
-        // THEME_DIR constant that doesn't work well with the testing
-        // environment, because you can't change it to use the admin theme instead
-        // of the public theme midway through testing.
-        $view = Zend_Registry::get('view');
+        // 
+        // // Initialize a test user 
+        // $this->_setLoggedInUser($core, 'super');
         
-        $themeName = 'default';
-        $this->_setThemePath($view, 'admin' . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName);
-                        
-        // Set up the mock config file
-        setup_test_config();
-                
-        // Let's try this without the plugin broker enabled.
-        // $core->setPluginBroker($this->_getMockPluginBroker());
+        // Initialize a Mock Auth object. Mocks can only be initialized within
+        // the testing class, so this would be here and not inside the
+        // CoreTestPlugin class.  This auth object will always signal that a user has been authenticated.
+        require_once 'Zend/Auth.php';
+        $auth = $this->getMock('Zend_Auth', array('hasIdentity'), array(), '', false);
+        $auth->expects($this->any())->method('hasIdentity')->will($this->returnValue(true));
+        $core->setAuth($auth);        
                 
         $this->core = $core;
+        
+        // Mock the ACL to always give access.
+        $this->_setMockAcl(true);
+        
     }
     
-    /**
-     * @todo This can actually be abstracted to the view object itself in order
-     * to eventually bypass the use of constants.
-     * 
-     * @param Omeka_View
-     * @param string
-     * @return void
-     **/
-    protected function _setThemePath($view, $physicalPath)
-    {
-        $webPath = join('/', explode(DIRECTORY_SEPARATOR, $physicalPath));
-        
-        $view->addScriptPath(BASE_DIR . DIRECTORY_SEPARATOR . $physicalPath);
-        
-        $view->addAssetPath(BASE_DIR . DIRECTORY_SEPARATOR . $physicalPath, WEB_ROOT . DIRECTORY_SEPARATOR . $webPath);
+    protected function _setLoggedInUser($userRole = 'super')
+    {        
+        //logged-in user dependency
+        $user = new User;
+        $user->id = 1;
+        $user->username = "foobar";
+        $user->first_name = "Foo";
+        $user->last_name = "Bar";
+        $user->role = $userRole;
+
+        $this->core->setCurrentUser($user);
     }
     
     protected function _getMockPluginBroker()
@@ -99,6 +79,8 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     
     protected function _getMockDb()
     {
+        require_once 'Omeka/Db.php';
+        require_once 'Omeka/Db/Table.php';
         return $this->getMock('Omeka_Db', array('getTable'), array(), '', false);
     }
     
@@ -115,6 +97,20 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         return $mockDbTable;     
     }
     
+    protected function _setMockDbForItem()
+    {
+        // Mock the database.
+        $db = $this->_getMockDb();
+        $table = $this->_getMockTableFor($db, 'Item');
+        $this->core->setDb($db);
+    }
+    
+    /**
+     * Easiest usage to dump exceptions thrown during the tests:
+     * var_dump($this->_getRequestException()->getMessage());exit;
+     * 
+     * @return Exception
+     **/
     protected function _getRequestException()
     {
         return $this->getRequest()->getParam('error_handler')->exception;
@@ -141,34 +137,77 @@ class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                 
         $this->dispatch('/foobar');
         $this->assertController('error');
-        $this->assertAction('error');
+        $this->assertAction('not-found');
         
         // Check the http response code is equal to 404
         $this->assertResponseCode(404);
     }
     
+    protected function _setMockAcl($allowAccess=true)
+    {
+        // Mock the ACL.
+         $acl = $this->getMock('Omeka_Acl', array('isAllowed', 'get', 'checkUserPermission'), array(), '', false);
+
+         $acl->expects($this->any())->method('isAllowed')->will($this->returnValue($allowAccess));
+         $acl->expects($this->any())->method('checkUserPermission')->will($this->returnValue($allowAccess));
+         $this->core->setAcl($acl);        
+    }
+    
     public function testItemsControllerRendersBrowsePage()
     {
         // Mock the database.
-        $db = $this->_getMockDb();
-        $table = $this->_getMockTableFor($db, 'Item');
-        $this->core->setDb($db);
-        
-        // Mock the ACL, since we are using the admin/ theme.
-        $acl = Omeka_Context::getInstance()->getAcl();
-        $acl->loadResourceList(array('Items'=>array('browse')));
-        
-        // Allow access.
-        $acl->allow();
+        $this->_setMockDbForItem();
                 
         $this->dispatch('/items');
+        
         $this->assertController('items');
+        $this->assertAction('browse');
+        $this->assertNotRedirect();
+        $this->assertResponseCode(200);
+    }
+    
+    public function testAccessDeniedErrorsGoTo403Page()
+    {
+        $this->_setMockDbForItem();
         
         // Deny access and see where it goes.
-        $acl->deny();
+        $this->_setMockAcl(false);
+            
+        // User should still be logged in.
+        $this->_setLoggedInUser('super');
         
+        // Assert that the current user is a super user.
+        $this->assertEquals('super', $this->core->getCurrentUser()->role);    
+        
+        // Assert that this user does not have access.
+        $this->assertFalse($this->core->getAcl()->isAllowed('super', 'Items', 'browse'));
+        
+        // Assert that we aren't throwing exceptions for this request.
+        $this->assertFalse($this->frontController->throwExceptions());
+                
         $this->dispatch('/items');
+        // var_dump($this->getResponse());exit;
+        // var_dump($this->getRequest()->getActionName());exit;
+        
         $this->assertController('error');
-        $this->assertResponseCode(403);
+        $this->assertAction('forbidden');
+        // var_dump($this->_getRequestException()->getMessage());exit;
+        $this->assertResponseCode(403);        
+    }
+    
+    public function testCanRouteToItemShowPage()
+    {
+        $this->_setMockDbForItem();
+        
+        // Mock the table to return a blank new item for ID = 1.
+        $this->core->getDb()->getTable('Item')->expects($this->any())->method('find')->with('1')->will($this->returnValue(new Item));
+                
+        $this->dispatch('/items/show/1');
+        
+        $this->assertController('items');
+        $this->assertAction('show');
+        // This should most definitely not be a redirect to the login page.
+        $this->assertNotRedirect();
+        $this->assertResponseCode(200);
     }
 }

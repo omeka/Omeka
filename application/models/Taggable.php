@@ -22,11 +22,21 @@ class Taggable extends Omeka_Record_Mixin
         
         $this->type = get_class($record);
         
-        $this->tagTable = $this->getDb()->getTable('Tag');
-        
-        $this->joinTable = $this->getDb()->getTable('Taggings');
-        
         $this->conn = $this->getDb();
+    }
+    
+    public function __get($prop)
+    {
+        switch ($prop) {
+            case 'tagTable':
+                return $this->getDb()->getTable('Tag');
+                break;
+            case 'joinTable':
+                return $this->getDb()->getTable('Taggings');
+            default:
+                throw new Exception('No property exists!');
+                break;
+        }
     }
     
     /**

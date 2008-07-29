@@ -43,7 +43,13 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     
     public function preDispatch()
     {
-        $this->checkActionPermission($this->getRequest()->getActionName());
+        try {
+            $this->checkActionPermission($this->getRequest()->getActionName());
+        } catch (Omeka_Controller_Exception_403 $e) {
+            $this->getRequest()->setControllerName('error')->setActionName('forbidden')->setDispatched(false);
+            // Here's a (kind of) hack that lets this happen.
+            $this->_allowed['forbidden'] = true;
+        }
     }
     
 	protected function checkActionPermission($action)
@@ -75,7 +81,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
 		if(!$resource) {
 			$resource = ucwords($this->getRequest()->getControllerName());
 		}
-		
+
 		//If the resource exists (Controller) but the tested privilege (action) has not been defined in the ACL, then allow access
         if(($resource = $this->_acl->get($resource)) && (!$resource->has($privilege))) {
             return true;

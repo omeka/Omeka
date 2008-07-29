@@ -26,21 +26,47 @@ class ErrorController extends Omeka_Controller_Action
             $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
         }
         
-        //This is the pattern for retrieving the exception that occurred
         $handler = $this->_getParam('error_handler');        
         $e = $handler->exception;
         
         if ($this->is404($e, $handler)) {
-            return $this->render404($e);
+            return $this->_forward('not-found');
         }
         
         if ($this->is403($e)) {
-            return $this->render403($e);
+            return $this->_forward('forbidden');
         }
         
         $this->logException($e, Zend_Log::ERR);
         
         return $this->renderException($e);
+    }
+    
+    protected function _getException()
+    {
+        $handler = $this->_getParam('error_handler');        
+        return $handler->exception;
+    }
+    
+    /**
+     * Generic action to render a 404 page.
+     * 
+     * @param string
+     * @return void
+     **/
+    public function notFoundAction()
+    {
+        $this->getResponse()->setHttpResponseCode(404);
+        $this->view->assign(array('badUri' => $this->getRequest()->getRequestUri(), 
+                                  'e' => $this->_getException()));
+        $this->render('404');
+    }
+    
+    public function forbiddenAction()
+    {
+        $this->getResponse()->setHttpResponseCode(403);
+        $this->view->assign(array('e' => $this->_getException()));
+        $this->render('403');
     }
     
     private function logException($e, $priority)
@@ -78,21 +104,6 @@ class ErrorController extends Omeka_Controller_Action
         } else {
             $this->render('index');
         }
-    }
-    
-    protected function render404($e)
-    {
-        $this->getResponse()->setHttpResponseCode(404);
-        $this->view->assign(array('badUri' => $this->getRequest()->getRequestUri(), 
-                                  'e' => $e));
-        $this->render('404');
-    }
-    
-    protected function render403($e)
-    {
-        $this->getResponse()->setHttpResponseCode(403);
-        $this->view->assign(array('e' => $e));
-        $this->render('403');
     }
     
     protected function isInDebugMode()
