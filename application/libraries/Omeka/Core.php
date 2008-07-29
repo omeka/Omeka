@@ -452,14 +452,11 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $this->_context->setFrontController($front);
                 
         // Routing
-        $router = new Zend_Controller_Router_Rewrite();
+        $router = $front->getRouter();
         $router->addConfig($this->getConfig('routes'), 'routes');
         fire_plugin_hook('add_routes', $router);
         $front->setRouter($router);
-        
-        // Add the default routes
-        $router->addDefaultRoutes();
-                
+                        
         // Action helpers
         $this->initializeActionHelpers();        
     }
