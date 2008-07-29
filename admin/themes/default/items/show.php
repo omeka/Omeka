@@ -138,7 +138,7 @@ echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 
 	<div class="field">
 	<h3>Type Name</h3>
-		<div id="type_id" class="editableSelect"><p><?php echo item('Type Name'); ?></p></div>
+		<div id="type_id" class="editableSelect"><p><?php echo item('Item Type Name'); ?></p></div>
 	</div>
 			
 	<?php foreach(item_type_elements() as $field => $textSet): ?>
