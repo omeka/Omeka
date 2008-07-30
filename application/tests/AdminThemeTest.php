@@ -1,5 +1,5 @@
 <?php
-class UsersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+class AdminThemeTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $core;
     
