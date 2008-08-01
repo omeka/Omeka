@@ -24,10 +24,6 @@ class AdminThemeTest extends Zend_Test_PHPUnit_ControllerTestCase
                 
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin($core);
-
-        // 
-        // // Initialize a test user 
-        // $this->_setLoggedInUser($core, 'super');
         
         // Initialize a Mock Auth object. Mocks can only be initialized within
         // the testing class, so this would be here and not inside the
@@ -115,6 +111,26 @@ class AdminThemeTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         return $this->getRequest()->getParam('error_handler')->exception;
     }
+
+    protected function _setMockAcl($allowAccess=true)
+    {
+        // Mock the ACL.
+         $acl = $this->getMock('Omeka_Acl', array('isAllowed', 'get', 'checkUserPermission'), array(), '', false);
+
+         $acl->expects($this->any())->method('isAllowed')->will($this->returnValue($allowAccess));
+         $acl->expects($this->any())->method('checkUserPermission')->will($this->returnValue($allowAccess));
+         $this->core->setAcl($acl);        
+    }
+    
+    public function assertAdmin404Page()
+    {
+        $this->assertController('error');
+        $this->assertAction('not-found');
+        // Check the http response code is equal to 404
+        $this->assertResponseCode(404);
+                        
+        $this->assertQuery('div.filenotfound', "Could not find a div with class = filenotfound.  This indicates that the admin theme 404 page is not loading properly.");        
+    }
     
     public function testHomePageIsIndexControllerIndexAction()
     {     
@@ -134,25 +150,12 @@ class AdminThemeTest extends Zend_Test_PHPUnit_ControllerTestCase
         // Set up a mock DB
         $mockDb = $this->_getMockDbWithMockTables();
         $this->core->setDb($mockDb);
-                
-        $this->dispatch('/foobar');
-        $this->assertController('error');
-        $this->assertAction('not-found');
         
-        // Check the http response code is equal to 404
-        $this->assertResponseCode(404);
+        // Zend_Controller_Front::getInstance()->getResponse()->headersSentThrowsException = false;
+        $this->dispatch('/foobar');
+        $this->assertAdmin404Page();
     }
-    
-    protected function _setMockAcl($allowAccess=true)
-    {
-        // Mock the ACL.
-         $acl = $this->getMock('Omeka_Acl', array('isAllowed', 'get', 'checkUserPermission'), array(), '', false);
 
-         $acl->expects($this->any())->method('isAllowed')->will($this->returnValue($allowAccess));
-         $acl->expects($this->any())->method('checkUserPermission')->will($this->returnValue($allowAccess));
-         $this->core->setAcl($acl);        
-    }
-    
     public function testItemsControllerRendersBrowsePage()
     {
         // Mock the database.
@@ -191,23 +194,70 @@ class AdminThemeTest extends Zend_Test_PHPUnit_ControllerTestCase
         
         $this->assertController('error');
         $this->assertAction('forbidden');
-        // var_dump($this->_getRequestException()->getMessage());exit;
         $this->assertResponseCode(403);        
     }
     
     public function testCanRouteToItemShowPage()
     {
-        $this->_setMockDbForItem();
+        // Fake a database connection and wrap it in a legit Omeka_Db instance (with no prefix).
+        $mockDbh = $this->getMock('Zend_Db_Adapter_Mysqli', array(), array(), '', false);
+        $realDb = new Omeka_Db($mockDbh);
+        $this->core->setDb($realDb);
         
-        // Mock the table to return a blank new item for ID = 1.
-        $this->core->getDb()->getTable('Item')->expects($this->any())->method('find')->with('1')->will($this->returnValue(new Item));
+        // All queries to this fake db connection should return fake statement objects (so we don't worry about the results).
+        $mockStmt = $this->getMock('Zend_Db_Statement_Mysqli', array(), array(), '', false);
+        $mockDbh->expects($this->any())->method('query')->will($this->returnValue($mockStmt));
+        
+        // For the sake of testing, any rows that are fetched from the DB should appear to be a row from the items table.
+        $mockDbh->expects($this->atLeastOnce())->method('fetchRow')->will($this->returnValue(array('id'=>1, 'public'=>0, 'featured'=>0)));
                 
         $this->dispatch('/items/show/1');
         
         $this->assertController('items');
         $this->assertAction('show');
+        // Assert that the <body> tag has a class="items".  This is how we verify that the HTML has actually loaded.
+        $this->assertQuery('body.items');
         // This should most definitely not be a redirect to the login page.
         $this->assertNotRedirect();
         $this->assertResponseCode(200);
+    }
+    
+    public function testAccessingAnInvalidItemRedirectsToNotFoundWithAHelpfulMessage()
+    {
+        // Make a mock database object that uses all mock tables. That way, no
+        // items will appear to exist in the database.
+        $mockDb = $this->_getMockDbWithMockTables();
+        $this->core->setDb($mockDb);
+        
+        $mockTable = $mockDb->getTable('Item');
+        
+        // All finds should return null.
+        $mockTable->expects($this->any())->method('find')->will($this->returnValue(null));
+        
+        // The item does not exist in the table, as far as we're concerned.
+        $mockTable->expects($this->any())->method('checkExists')->will($this->returnValue(false));
+        
+        $this->dispatch('/items/show/1');        
+        $this->assertAdmin404Page();
+    }
+    
+    public function testLoginPageWillDisplayWhenAttemptingToAccessAdminInterface()
+    {
+        // Make an auth object that refuses to believe that anyone is authenticated.
+        $mockAuth = $this->getMock('Zend_Auth', array('hasIdentity'), array(), '', false);
+        $mockAuth->expects($this->any())->method('hasIdentity')->will($this->returnValue(false));
+        $this->core->setAuth($mockAuth);
+        
+        // Make a mock db object.
+        $mockDb = $this->_getMockDbWithMockTables();
+        $this->core->setDb($mockDb);
+        
+        // Verify that a user has not been authenticated.
+        $this->assertFalse(Omeka_Context::getInstance()->getAuth()->hasIdentity());
+        
+        $this->dispatch('/items');
+        // var_dump($this->_getRequestException()->getMessage());exit;
+        $this->assertController('users');
+        $this->assertAction('login');
     }
 }

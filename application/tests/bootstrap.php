@@ -1,5 +1,4 @@
 <?php
-
 ini_set('max_execution_time', 900);
 ini_set('memory_limit', '32M');
 
@@ -10,6 +9,11 @@ require_once 'PHPUnit/Framework/Constraint.php';
 
 // Set the include path and all the constants.
 require_once '../../paths.php';
+
+// THIS TOOK AN UNFORTUNATE AMOUNT OF TIME TO FIGURE OUT, BUT WARNINGS NEED TO
+// BE SUPPRESSED IN ORDER TO GET THE DISPATCHING OF 404s IN THE CONTROLLER TESTS TO
+// WORK.
+error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 
 // Restore the include path to use PEAR modules.
 restore_include_path();
