@@ -333,7 +333,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     public function initializeAcl()
     {
         $options = $this->getOptions();
-                
+
         if ($serialized = $options['acl']) {
             $acl = unserialize($serialized);
         } else {
@@ -491,9 +491,15 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     
     private function initAclHelper()
     {
-        $acl = $this->getAcl();
-        $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl);
-        Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
+        // If the ACL has not been initialized, we should not enable this action helper.  
+        // The ACL will not be initialized under the following conditions:
+        // A) Installation.
+        // B) Error conditions that occur before the ACL phase could be loaded.
+        // C) Testing conditions which don't require use of the ACL.
+        if ($acl = $this->getAcl()) {
+            $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl);
+            Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
+        }
     }
     
     private function initViewRenderer()
