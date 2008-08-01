@@ -254,10 +254,8 @@ class AdminThemeTest extends Zend_Test_PHPUnit_ControllerTestCase
         
         // Verify that a user has not been authenticated.
         $this->assertFalse(Omeka_Context::getInstance()->getAuth()->hasIdentity());
-        
+                
         $this->dispatch('/items');
-        // var_dump($this->_getRequestException()->getMessage());exit;
-        $this->assertController('users');
-        $this->assertAction('login');
+        $this->assertRedirectTo('/users/login');
     }
 }
