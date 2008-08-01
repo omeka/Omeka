@@ -90,7 +90,7 @@ class DcRewriteFix extends Omeka_Db_Migration
     {
         $db = $this->db;
         $sql = "
-        CREATE TABLE IF NOT EXISTS `record_types` (
+        CREATE TABLE IF NOT EXISTS `{$db->prefix}record_types` (
             `id` int(10) unsigned NOT NULL auto_increment,
             `name` varchar(255) collate utf8_unicode_ci NOT NULL,
             `description` text collate utf8_unicode_ci,
