@@ -245,3 +245,8 @@ function add_plugin_directories()
 {
     get_plugin_broker()->addApplicationDirs();
 }
+
+function is_admin_theme()
+{
+    return defined('ADMIN');
+}
