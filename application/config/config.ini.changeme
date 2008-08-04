@@ -25,6 +25,3 @@ log.errors = false
 
 ; Amount of time (in minutes) to allow before expiring an authenticated user
 login.expire = 500
-
-; Limit the number of items displayed
-pagination.per_page = 10

@@ -36,6 +36,8 @@ class SettingsController extends Omeka_Controller_Action
                               'thumbnail_constraint', 
                               'square_thumbnail_constraint',
                               'fullsize_constraint', 
+                              'per_page_admin', 
+                              'per_page_public', 
                               'path_to_convert');
         
         $options = Omeka_Context::getInstance()->getOptions();

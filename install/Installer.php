@@ -206,6 +206,8 @@ class Installer
                             'thumbnail_constraint'        => "Digits",
                             'fullsize_constraint'         => "Digits",
                             'square_thumbnail_constraint' => "Digits",
+                            'per_page_admin'              => "Digits",
+                            'per_page_public'             => "Digits",
                             'username'                    => array('Alnum', $lengthValidator), 
                             'password'                    => $lengthValidator); 
         $filter = new Zend_Filter_Input(null, $validation, $_POST);
@@ -274,6 +276,8 @@ class Installer
                           'thumbnail_constraint', 
                           'square_thumbnail_constraint', 
                           'fullsize_constraint', 
+                          'per_page_admin', 
+                          'per_page_public', 
                           'path_to_convert');
         foreach ($settings as $v) {
             $db->exec($optionSql, array($v, $_POST[$v]));

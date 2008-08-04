@@ -225,9 +225,14 @@ class ItemsController extends Omeka_Controller_Action
      **/
     protected function getItemsPerPage()
     {
-        //Retrieve the number from the config file
-        $config = Omeka_Context::getInstance()->getConfig('basic');
-        $perPage = $config->pagination->per_page;
+        //Retrieve the number from the options table
+        $options = Omeka_Context::getInstance()->getOptions();
+        
+        if (is_admin_theme()) {
+            $perPage = (int) $options['per_page_admin'];
+        } else {
+            $perPage = (int) $options['per_page_public'];
+        }
                 
         if ($this->isAllowed('modifyPerPage') && $this->_getParam('per_page')) {
             $perPage = $this->_getParam('per_page');

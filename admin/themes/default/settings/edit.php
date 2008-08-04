@@ -25,6 +25,8 @@ Event.observe(window,'load', function() {
 	    array('name'=>'thumbnail_constraint', 'description' => 'The maximum size (in pixels) of the longest side for thumbnails of uploaded images.'),
 	    array('name'=>'square_thumbnail_constraint', 'description' => 'The maximum size (in pixels) for square thumbnails of uploaded images.'),
 	    array('name'=>'fullsize_constraint', 'description' => 'The maximum size (in pixels) of the longest side for fullsize versions of uploaded images.'),
+	    array('name'=>'per_page_admin', 'description' => 'Limit the number of items displayed per page in the administrative interface.'),
+	    array('name'=>'per_page_public', 'description' => 'Limit the number of items displayed per page in the public interface.'),
 	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.')); ?>    
 
 <?php foreach ($siteSettings as $key => $setting): ?>

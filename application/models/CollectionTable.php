@@ -55,9 +55,12 @@ class CollectionTable extends Omeka_Db_Table
     
     protected function getNumRecordsPerPage()
     {
-        $config_ini = Omeka_Context::getInstance()->getConfig('basic');
-        $per_page = (int) $config_ini->pagination->per_page;
-        return $per_page;
+        $options = Omeka_Context::getInstance()->getOptions();
+        if (is_admin_theme()) {
+            return (int) $options['per_page_admin'];
+        } else {
+            return (int) $options['per_page_public'];
+        }
     }
     
     protected function _getColumnPairs()
