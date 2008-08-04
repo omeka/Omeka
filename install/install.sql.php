@@ -290,9 +290,11 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}files` (
   `type_os` varchar(255) collate utf8_unicode_ci default NULL,
   `archive_filename` text collate utf8_unicode_ci NOT NULL,
   `original_filename` text collate utf8_unicode_ci NOT NULL,
+  `modified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `added` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`),
   KEY `item_id` (`item_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
