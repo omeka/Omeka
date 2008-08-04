@@ -5,10 +5,7 @@
 	if (isset($errorMessage)):
 		?><div class="error">Error: <span>
 			
-		<?php 
-			foreach ($errorMessage as $msg): ?>
-			<?php echo $msg; ?>
-		<?php endforeach; ?>
+		<?php echo htmlentities($errorMessage); ?>
 		</span></div>
 	<?php endif; ?>
 	

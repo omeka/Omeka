@@ -261,22 +261,80 @@ class UsersController extends Omeka_Controller_Action
     
     public function loginAction()
     {
+        // If a user is already logged in, they should always get redirected back to the dashboard.
+        if ($loggedInUser = Omeka_Context::getInstance()->getCurrentUser()) {
+            $this->redirect->goto('index', 'index');
+        }
+        
         if (!empty($_POST)) {
             
             require_once 'Zend/Session.php';
             
             $session = new Zend_Session_Namespace;
-            $auth = $this->_auth;
-            $adapter = new Omeka_Auth_Adapter($_POST['username'], 
-                                              $_POST['password'], 
-                                              $this->getDb());
-            $token = $auth->authenticate($adapter);
+            $result = $this->authenticate();
             
-            if ($token->isValid()) {
+            if ($result->isValid()) {
                 $this->redirect->gotoUrl($session->redirect);
             }
-            $this->view->assign(array('errorMessage' => $token->getMessages()));
+            $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($result)));
         }
+    }
+    
+    /**
+     * This encapsulates authentication through Omeka's login mechanism. This
+     *  could be abstracted into a helper class or function or something, maybe.
+     *  It'd probably be easier just to add a filter somewhere that would allow a
+     *  plugin writer to switch out the Auth adapter with something else.
+     * 
+     * @param string
+     * @return void
+     **/
+    public function authenticate()
+    {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $db = $this->getDb();
+        $dbAdapter = $db->getAdapter();
+        // Authenticate against the 'users' table in Omeka.
+        $adapter = new Zend_Auth_Adapter_DbTable($dbAdapter, $db->User, 'username', 'password', 'SHA1(?) AND active = 1');
+        $adapter->setIdentity($username)
+                    ->setCredential($password);
+        $result = $this->_auth->authenticate($adapter);
+        if ($result->isValid()) {
+            $this->_auth->getStorage()->write($adapter->getResultRowObject(array('id', 'username', 'role', 'entity_id')));
+        }
+        return $result;
+    }
+    
+    /**
+     * This exists to customize the messages that people see when their attempt
+     * to login fails. ZF has some built-in default messages, but it seems like
+     * those messages may not make sense to a majority of people using the
+     * software.
+     * 
+     * @param Zend_Auth_Result
+     * @return string
+     **/
+    public function getLoginErrorMessages(Zend_Auth_Result $result)
+    {
+        $code = $result->getCode();
+        switch ($code) {
+            case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
+                return "Username could not be found.";
+                break;
+            case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
+                return "Invalid password.";
+                break;
+            case Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS:
+                // There can never be ambiguous identities b/c the 'username'
+                // field is unique in the database. Not sure what this message
+                // would say.
+            case Zend_Auth_Result::FAILURE_UNCATEGORIZED:
+                // All other potential errors fall under this code.
+            default:
+                return implode("\n", $result->getMessages());
+                break;
+        }        
     }
     
     public function logoutAction()

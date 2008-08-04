@@ -417,11 +417,13 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $user = false;
         
         if ($auth->hasIdentity()) {
-            $user_id = $auth->getIdentity();
-            
+            $user = $auth->getIdentity();
+            // This extra database call seems unnecessary at face value, but it
+            // actually retrieves the entity metadata about the user as well as the
+            // username/role info that is already stored in the auth identity.
             require_once 'User.php';
                         
-            $user = $this->getDb()->getTable('User')->find($user_id);
+            $user = $this->getDb()->getTable('User')->find($user->id);
         } 
         
         $this->setCurrentUser($user);
