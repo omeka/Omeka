@@ -691,6 +691,7 @@ class FileMigration extends Omeka_Db_Migration
         $db = $this->db;
         $sql = "
         INSERT `{$db->prefix}files` (
+            `id`, 
             `item_id`, 
             `size`, 
             `has_derivative_image`, 
@@ -701,6 +702,7 @@ class FileMigration extends Omeka_Db_Migration
             `original_filename`
         ) 
         SELECT 
+            `id`, 
             `item_id`, 
             `size`, 
             `has_derivative_image`, 
