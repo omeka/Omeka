@@ -19,7 +19,7 @@ require_once 'RecordType.php';
  **/
 class Element extends Omeka_Record
 {
-    public $element_type_id;
+    public $data_type_id;
     public $element_set_id;
     public $plugin_id;
     public $name = '';
