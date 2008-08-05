@@ -262,7 +262,7 @@ class Omeka_View_Helper_Media
     protected function getDefaultOptions($callback)
     {
         $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
-        return $this->_callbackOptions[$callbackKey];
+        return (array) $this->_callbackOptions[$callbackKey];
     }
     
     /**
