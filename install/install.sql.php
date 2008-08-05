@@ -132,7 +132,6 @@ INSERT INTO `{$db->prefix}elements` VALUES (64, 3, 1, 4, 7, 'Capture Device', ''
 INSERT INTO `{$db->prefix}elements` VALUES (65, 3, 1, 4, 8, 'Capture Details', '');
 INSERT INTO `{$db->prefix}elements` VALUES (66, 3, 1, 4, 9, 'Change History', '');
 INSERT INTO `{$db->prefix}elements` VALUES (67, 3, 1, 4, 10, 'Watermark', '');
-INSERT INTO `{$db->prefix}elements` VALUES (68, 3, 1, 4, 11, 'Authentication', '');
 INSERT INTO `{$db->prefix}elements` VALUES (69, 3, 1, 4, 12, 'Encryption', '');
 INSERT INTO `{$db->prefix}elements` VALUES (70, 3, 1, 4, 13, 'Compression', '');
 INSERT INTO `{$db->prefix}elements` VALUES (71, 3, 1, 4, 14, 'Post Processing', '');
@@ -280,11 +279,12 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}exhibits` (
 -- Table structure for table `files`
 -- 
 
-CREATE TABLE IF NOT EXISTS `{$db->prefix}files` (
+CREATE TABLE `{$db->prefix}files` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `item_id` int(10) unsigned NOT NULL,
   `size` int(10) unsigned NOT NULL,
   `has_derivative_image` tinyint(1) NOT NULL,
+  `authentication` char(32) collate utf8_unicode_ci default NULL,
   `mime_browser` varchar(255) collate utf8_unicode_ci default NULL,
   `mime_os` varchar(255) collate utf8_unicode_ci default NULL,
   `type_os` varchar(255) collate utf8_unicode_ci default NULL,
