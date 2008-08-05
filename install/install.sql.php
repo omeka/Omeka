@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}exhibits` (
 -- Table structure for table `files`
 -- 
 
-CREATE TABLE `{$db->prefix}files` (
+CREATE TABLE IF NOT EXISTS `{$db->prefix}files` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `item_id` int(10) unsigned NOT NULL,
   `size` int(10) unsigned NOT NULL,
