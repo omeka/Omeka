@@ -243,10 +243,10 @@ class Omeka_Db_Table
      *
      * @return array|false
      **/
-    public function findBySql($sql, array $params=array(), $findOne=false)
+    public function findBySql($sqlWhereClause, array $params=array(), $findOne=false)
     {
         $select = $this->getSelect();
-        $select->where($sql, $params);
+        $select->where($sqlWhereClause, $params);
         return $findOne ? $this->fetchObject($select, $params) : $this->fetchObjects($select, $params);
     }
     
