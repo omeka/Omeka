@@ -20,7 +20,7 @@ class ElementText extends Omeka_Record
     public $record_id;
     public $record_type_id;
     public $element_id;
-    public $html;
+    public $html = 0;
     public $text;
     
     public function __toString()

@@ -38,6 +38,38 @@ class ElementTable extends Omeka_Db_Table
     }
     
     /**
+     * Find all the Element records that have a specific record type or the
+     * record type 'All', indicating that these elements would apply to any
+     * record type.
+     * 
+     * @param string
+     * @return array
+     **/
+    public function findByRecordType($recordTypeName)
+    {
+        $select = $this->getSelect();
+        $db = $this->getDb();
+
+        // Join against the record_types table to pull only elements for Items
+         $select->joinInner(array('rty'=> $db->RecordType),
+                             'rty.id = e.record_type_id',
+                             array('record_type_name'=>'rty.name'));
+        $select->where('rty.name = ? OR rty.name = "All"', $recordTypeName);
+
+        return $this->fetchObjects($select);
+    }
+    
+    public function findForFilesByMimeType($mimeType = null)
+    {
+        $db = $this->getDb(); 
+        $sqlMimeTypeElements = $this->getSelect()
+        ->joinInner(array('mesl'=>$db->MimeElementSetLookup), 'mesl.element_set_id = es.id')
+        ->where('mesl.mime = ?', $mimeType);
+        
+        return $this->fetchObjects($sqlMimeTypeElements);        
+    }
+    
+    /**
      * Overriding getSelect() to always return the type_name and type_regex
      * for retrieved elements.
      * 
@@ -60,6 +92,7 @@ class ElementTable extends Omeka_Db_Table
     /**
      * Index a set of Elements based on their name.
      * 
+     * @todo Deprecate and move to ActsAsElementText::indexByNameAndSet().
      * @param array
      * @return array
      **/

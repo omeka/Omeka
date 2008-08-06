@@ -15,10 +15,11 @@ if (!function_exists('mime_content_type')) {
 define('IMAGE_DERIVATIVE_EXT', 'jpg');
 
 require_once 'Item.php';
+require_once 'ActsAsElementText.php';
 require_once 'FileTable.php';
 require_once 'FilesImages.php';
 require_once 'FilesVideos.php';
-require_once 'FileMetaLookup.php';
+require_once 'MimeElementSetLookup.php';
 
 /**
  * @package Omeka
@@ -26,59 +27,25 @@ require_once 'FileMetaLookup.php';
  * @copyright Center for History and New Media, 2007-2008
  **/
 class File extends Omeka_Record { 
-    
-    public $title = '';
-    public $publisher = '';
-    public $language = '';
-    public $relation = '';
-    public $coverage = '';
-    public $rights = '';
-    public $description = '';
-    public $source = '';
-    public $subject = '';
-    public $creator = '';
-    public $additional_creator = '';
-    public $date;
-    public $added;
-    public $modified;
+
     public $item_id;
-    public $format = '';
-    public $transcriber = '';
-    public $producer = '';
-    public $render_device = '';
-    public $render_details = '';
-    public $capture_date;
-    public $capture_device = '';
-    public $capture_details = '';
-    public $change_history = '';
-    public $watermark = '';
-    public $authentication = '';
-    public $encryption = '';
-    public $compression = '';
-    public $post_processing = '';
     public $archive_filename;
     public $original_filename;
     public $size = '0';
+    public $authentication;
     public $mime_browser;
     public $mime_os;
     public $type_os;
     public $has_derivative_image = '0';
-    public $lookup_id;
+    public $added;
+    public $modified;
+
     
-    protected $_related = array('Extended' => 'getExtendedMetadata');
-    
-    public function __get($name)
+    public function construct()
     {
-        if (!$this->_cache['Extended']) {
-            $ext = $this->getExtendedMetadata();
-            $this->_cache['Extended'] = $ext;
-        }
-        
-        if ($data = $this->_cache['Extended'][$name]) {
-            return $data;
-        }
+        $this->_mixins[] = new ActsAsElementText($this);
     }
-    
+        
     protected function beforeInsert()
     {
         $this->added = date("Y-m-d H:i:s");
@@ -95,51 +62,10 @@ class File extends Omeka_Record {
         $immutable = array('id', 'modified', 'added', 
                            'authentication', 'archive_filename', 
                            'original_filename', 'mime_browser', 
-                           'mime_os', 'type_os');
+                           'mime_os', 'type_os', 'item_id');
         foreach ($immutable as $value) {
             unset($post[$value]);
         }
-    }
-    
-    protected function getExtendedMetadata()
-    {
-        if (!$this->lookup_id) {
-            return;
-        }
-        
-        $db = $this->getDb();
-        
-        $lookupTable = $db->FileMetaLookup;
-        $fileTable = $db->File;
-        
-        $sql = "
-        SELECT table_name 
-        FROM $lookupTable l 
-        WHERE l.id = ? 
-        LIMIT 1";
-        
-        //We've got the name of the table that holds the extended data
-        $metadataTable = $db->fetchOne($sql, array($this->lookup_id));
-        
-        $metadataTable = $db->prefix . $metadataTable;
-        
-        $metadata = $db->query("
-        SELECT d.* 
-        FROM $metadataTable d 
-        WHERE d.file_id = ? 
-        LIMIT 1", array((int) $this->id))->fetch();
-            
-        $prepared = array();
-        
-        //We have to unserialize some of these extended metadata values
-        foreach ($metadata as $key => $value) {
-            if ($unserialized = @unserialize($value)) {
-                $value = $unserialized;
-            }
-            $prepared[$key] = $value;
-        }
-                        
-        return $prepared;
     }
     
     /**
@@ -195,6 +121,20 @@ class File extends Omeka_Record {
         return $fn;        
     }
     
+    /**
+     * Strip out whitespace, non-printable characters, extra . characters, and 
+     * convert all spaces to dashes.  This is applied to every file that is uploaded
+     * to Omeka so that there will be no problems with funky characters in filenames.  
+     * 
+     * @todo It may be easier just to generate a long string of random numbers 
+     * and characters for each new file, rather than actually trying to maintain 
+     * the old filename, which is still stored in the database.  This would only 
+     * be an issue if the archives directory needs to be human-readable, and there 
+     * is no guarantee that it does.
+     * 
+     * @param string
+     * @return string
+     **/
     public function sanitizeFilename($name)
     {
         //Strip whitespace
@@ -312,13 +252,7 @@ class File extends Omeka_Record {
             }
         }
         
-        //Check whether the POST upload content size is too big
-        $POST_MAX_SIZE = ini_get('post_max_size');
-        $mul = substr($POST_MAX_SIZE, -1);
-        $mul = ($mul == 'M' ? 1048576 : ($mul == 'K' ? 1024 : ($mul == 'G' ? 1073741824 : 1)));
-        if ($_SERVER['CONTENT_LENGTH'] > $mul * (int)$POST_MAX_SIZE && $POST_MAX_SIZE) {
-            throw new Omeka_Upload_Exception('The size of uploaded files exceeds the maximum size allowed by your hosting provider (' . $POST_MAX_SIZE . ')');
-        }
+        self::checkIfPostSizeExceedsLimit();
                 
         //Check directory permissions
         //@todo Replace this with a call to the DB to retrieve the paths to the upload directories        
@@ -331,6 +265,26 @@ class File extends Omeka_Record {
             if (!is_writable($dir)) {
                 throw new Omeka_Upload_Exception ('Unable to write to '. $dir . ' directory; improper permissions');
             }
+        }        
+    }
+    
+    /**
+     * This method supposedly determines whether or not the POST size has been
+     *  exceeded for a given file upload.
+     *
+     * @todo I'm not convinced that it actually works, but will have to be
+     * tested further to determine whether it should remain in the codebase.
+     * 
+     * @return boolean
+     **/
+    protected static function checkIfPostSizeExceedsLimit()
+    {
+        //Check whether the POST upload content size is too big
+        $POST_MAX_SIZE = ini_get('post_max_size');
+        $mul = substr($POST_MAX_SIZE, -1);
+        $mul = ($mul == 'M' ? 1048576 : ($mul == 'K' ? 1024 : ($mul == 'G' ? 1073741824 : 1)));
+        if ($_SERVER['CONTENT_LENGTH'] > $mul * (int)$POST_MAX_SIZE && $POST_MAX_SIZE) {
+            throw new Omeka_Upload_Exception('The size of uploaded files exceeds the maximum size allowed by your hosting provider (' . $POST_MAX_SIZE . ')');
         }        
     }
     
@@ -356,47 +310,70 @@ class File extends Omeka_Record {
         }
     }
     
+    /**
+     * Determine whether or not ImageMagick has been correctly installed or configured for Omeka to use.  
+     * 
+     * This appears to work on most hosting environments, but there are some
+     * where ImageMagick may return codes other than 0 even though it appears to
+     * be loaded on the host machine. It remains to be seen whether this is an
+     * error in configuring their servers or an error where Omeka should
+     * examine/accept other return status codes.
+     *
+     * @param string
+     * @return boolean True if the command line return status is 0 when
+     * attempting to run ImageMagick's convert utility, false otherwise.
+     **/
     protected static function checkForImageMagick($path) {
         exec($path, $convert_version, $convert_return);
         return($convert_return == 0);
     }
     
     /**
-     * Stole this jazz from the old File model
-     *
-     * @return void
+     * Process all of the internals related to uploading a file through Omeka.
      * 
+     * The list of things that has to happen includes:
+     *  1) Move the file to its final location in the archive/files directory.
+     *  2) Set all of the default values to be stored in the 'files' table.
+     *  3) Create derivative images based on this file, if applicable.
+     *  4) Extract and store additional metadata depending on the MIME type of the file.
+     * 
+     * @internal There is a lot of duplication between this and the
+     * moveToFileDir() method, which I suspect is used exclusively by the
+     * Dropbox plugin. We should factor that out so that there is only method
+     * that can be called from anywhere within the Omeka environment. This should
+     * also be extensible by plugins so that plugins could potentially redefine
+     * information about how the files are stored (perhaps storing in a database,
+     * or uploading to Flickr, etc.).
+     * @return void
      **/
     public function upload($form_name, $index) {
         
         $tmp             = $_FILES[$form_name]['tmp_name'][$index];
         $name            = $_FILES[$form_name]['name'][$index];
-        $originalName    = $name;
-        $name            = $this->sanitizeFilename($name);
-        $new_name_string = $this->renameFileForArchive($name);
-        $path            = FILES_DIR.DIRECTORY_SEPARATOR.$new_name_string;
-                        
-        if (!move_uploaded_file($tmp, $path)) {
-            throw new Omeka_Upload_Exception('Could not save file.');
-        }
         
-        //set the attributes of this file
-        $this->size = $_FILES[$form_name]['size'][$index];
-        $this->authentication = md5_file($path);
+        $path = $this->moveFileToArchive($tmp, $name);
         
+        $this->setDefaults($path);
+        
+        // 'mime_browser' is also set in the setDefaults() method, but this may override that value.
         $this->mime_browser = $_FILES[$form_name]['type'][$index];
-        $this->mime_os      = trim(exec('file -ib ' . trim(escapeshellarg($path))));
-        $this->type_os      = trim(exec('file -b ' . trim(escapeshellarg($path))));
-        
-        $this->original_filename = $originalName;
-        $this->archive_filename  = $new_name_string;
+        $this->original_filename = $name;
         
         $this->createDerivativeImages($path);
         
         $this->processExtendedMetadata($path);
     }
     
+    /**
+     * Sanitize the filename and append a set of random characters to the end of
+     *  the filename but before the suffix.
+     * 
+     * @param string
+     * @return string
+     **/
     public function renameFileForArchive($name) {
+        
+        $name = $this->sanitizeFilename($name);
         
         $new_name     = explode('.', $name);
         $new_name[0] .= '_' . substr(md5(mt_rand() + microtime(true)), 0, 10);
@@ -405,29 +382,99 @@ class File extends Omeka_Record {
         return $new_name_string;
     }
     
-    public function moveToFileDir($oldpath, $name) {
+    /**
+     * Move a file from wherever it is (typically in a temporary upload 
+     * directory, or if you're a plugin, anywhere else) to the archive/files 
+     * directory.
+     * 
+     * @throws Omeka_Upload_Exception
+     * @param string The path to the file's current location.
+     * @param string The name that the file should be given when stored in the
+     * archive/ directory. This will be sanitized and have nonsense appended to
+     * it to avoid naming collisions.
+     * @return string The full path to the location that file has been moved to.
+     **/
+    public function moveFileToArchive($oldFilePath, $newFilename, $isUpload = true)
+    {
+        $newFilePath = FILES_DIR . DIRECTORY_SEPARATOR . $this->renameFileForArchive($newFilename);
         
-        $name = $this->sanitizeFilename($name);
-        $new_name_string = $this->renameFileForArchive($name);
-        $path = FILES_DIR.DIRECTORY_SEPARATOR . $new_name_string;
+        if (is_uploaded_file($oldFilePath)) {
+            // Moving uploaded files through PHP requires this special function.
+            if (!move_uploaded_file($oldFilePath, $newFilePath)) {
+                // The file could not be moved for some reason.
+                throw new Omeka_Upload_Exception("Uploaded file could not be saved to the filesystem.  Please notify an administrator.");
+            }
+        } else if ($isUpload) {
+            // If this is flagged as an upload, but PHP doesn't think it's a
+            // valid upload, throw an error.
+            throw new Omeka_Upload_Exception("Path to uploaded file is not valid.  This may indicate a possible upload attack.");
+        } else {
+            // Otherwise this is indicated as not an upload, so just move the file.
+            rename($oldFilePath, $newFilePath);
+        }
         
-        rename($oldpath, $path);
-
-        $this->size = filesize($path);
-        $this->authentication = md5_file( $path );
-
-        $this->mime_browser = mime_content_type($path);
-        $this->mime_os      = trim(exec('file -ib ' . trim(escapeshellarg($path))));
-        $this->type_os      = trim(exec('file -b ' . trim(escapeshellarg($path))));
-
+        return $newFilePath;
+    }
+    
+    /**
+     * Set the default values that will be stored for this file in the 'files' table.
+     * 
+     * These values include 'size', 'authentication', 'mime_browser', 'mime_os', 'type_os'
+     * and 'archive_filename.
+     * 
+     * @param string
+     * @return void
+     **/
+    public function setDefaults($filepath, array $options = array())
+    {
+        $this->size = filesize($filepath);
+        $this->authentication = md5_file( $filepath );
+        
+        $this->mime_browser = mime_content_type($filepath);
+        $this->mime_os      = trim(exec('file -ib ' . trim(escapeshellarg($filepath))));
+        $this->type_os      = trim(exec('file -b ' . trim(escapeshellarg($filepath))));
+        
+        $this->archive_filename = basename($filepath);
+    }
+    
+    /**
+     * This could be refactored to combine better with upload().  It goes through 
+     * the same flow as upload(), the only different being that the original 
+     * filename is set directly rather than being extracted from the $_FILES array.
+     * 
+     * This may be used exclusively by the Dropbox plugin, in which case it should
+     * be factored out in favor of a public interface that a plugin could use to
+     * simulate the same behavior.  At the very least, the code in this method 
+     * could be copied directly into the plugin so that it wouldn't be repeated 
+     * in the core codebase.
+     * 
+     * @param string
+     * @param string
+     * @return void
+     **/
+    public function moveToFileDir($oldpath, $name) {        
+        $path = $this->moveFileToArchive($oldpath, $name);
+        
+        $this->setDefaults($path);
+        
         $this->original_filename = $name;
-        $this->archive_filename  = $new_name_string;
         
         $this->createDerivativeImages($path);
         
         $this->processExtendedMetadata($path);
     }
     
+    /**
+     * Generate all the derivative images for this file.  
+     * 
+     * Currently, derivative images include 'fullsize', 'thumbnail' and 
+     * 'square_thumbnail' sizes. New sizes could be added if a plugin were to 
+     * hook into the 'after_file_upload' hook, so this method does not need to 
+     * be extensible.
+     * 
+     * @param string
+     * @return void
+     **/
     public function createDerivativeImages($path)
     {
         //Function processes derivatives of every image uploaded - additional images may be created using createImage function.  Additionally, plugin hooks allow you to add your own additional image sizes [DL]
@@ -444,76 +491,117 @@ class File extends Omeka_Record {
     }
     
     /**
-     * Process the extended set of metadata for a file (contingent on its MIME type)
+     * Take a set of Element records and populate them with element text that is 
+     * auto-generated based on the getID3 metadata extraction library.
+     * 
+     * @param array Set of Element records.
+     * @param array Info extracted from the file by the getID3 library.
+     * @param string Either 'FilesVideos' or 'FilesImages' depending.
+     * @return void
+     **/
+    protected function populateMimeTypeElements($elements, $id3Info, $extractionStrategy)
+    {
+        $helperClass = new $extractionStrategy;
+        
+        $helperClass->initialize($id3Info, $this->getPath('archive'));
+        
+        // Loop through the elements provided and extract the auto-generated text
+        // for each of them.
+        foreach ($elements as $element) {
+            // Method that is named the same as the element, which is how the data 
+            // gets retrieved. E.g. FilesVideos::getBitrate() for the Bitrate element. 
+            
+            // Strip out whitespace and prepend 'get' to adhere to naming conventions.
+            $helperFunction = 'get' . preg_replace('/\s*/', '', $element->name);
+            
+            if (!method_exists($helperClass, $helperFunction)) {
+                throw new Exception("Cannot retrieve metadata for the element called '$element->name'!");
+            }
+            $elementText = $helperClass->$helperFunction();
+            
+            $this->addTextForElement($element, $elementText);
+        }        
+    }
+    
+    /**
+     * @todo Implement this!
+     * 
+     * @param string
+     * @return void
+     **/
+    protected function saveMimeTypeElements()
+    {
+        exit('Saving MIME-specific data for files has not been implemented yet!');
+    }
+    
+    protected function getMimeTypeElements($mimeType)
+    {
+        return $this->getTable('Element')->findForFilesByMimeType($mimeType);
+    }
+    
+    /**
+     * Process the extended set of metadata for a file (contingent on its MIME type).
      *
-     * @return bool
+     * @return void
      **/
     public function processExtendedMetadata($path)
     {
         if (!is_readable($path)) {
             throw new Exception( 'File cannot be read!' );
         }
-        
-        $fi = new FilesImages;
-        $m = new FileMetaLookup;
-        
+                
         //If we can use the browser mime_type instead of the ID3 extrapolation, do that
         $mime_type = $this->mime_browser;    
-
+        
+        $id3 = $this->retrieveID3Info($path);
+        
         if ($this->mimeTypeIsAmbiguous($mime_type)) {
             //If we can't determine MIME type via the browser, 
-            //we will pull down ID3 data, but be warned that this may cause a memory error on large files
-            $id3 = $this->retrieveID3Info($path);
+            //we will use the ID3 data, but be warned that this may cause a memory error on large files
             $mime_type = $id3->info['mime_type'];
         }
         
         if (!$mime_type) {
             return false;
         }
-            
-        //Determine the lookup ID from the given MIME type
-        $db = $this->getDb();
-        $sql = "
-        SELECT * 
-        FROM  $db->FileMetaLookup 
-        WHERE mime_type = ? 
-        LIMIT 1";
-        $res = $db->query($sql, array($mime_type))->fetchAll();
-                
-        //Generate the extended info
-        if (count($res)) {
-            $this->lookup_id = (int) $res[0]['id'];
-            
-            //Have the correct class
-            $extendedClass = $res[0]['table_class'];
-            
-            $metadata = new $extendedClass;
-                    
-            if (!isset($id3)) {
-                $id3 = $this->retrieveID3Info($path);
-            }        
-
-            $info = $id3->info;
-            $metadata->generate($info, $path);
-            
-            $this->Extended = $metadata;
-            
-            return true;
-        }        
         
-        return false;
+        $elements = $this->getMimeTypeElements($mime_type);
+        
+        if (empty($elements)) {
+            return;
+        }
+        
+        // Figure out what kind of extraction strategy to use for retrieving the metadata from ID3.
+        // Current possibilities include either FilesImages or FilesVideos
+        switch (current($elements)->set_name) {
+            case 'Omeka Video File':
+                $extraction = 'FilesVideos';
+                break;
+            case 'Omeka Image File':
+                $extraction = 'FilesImages';
+            default:
+                throw new Exception('Cannot extract metadata for these elements!');
+                break;
+        }
+                
+        $this->populateMimeTypeElements($elements, $id3->info, $extraction);        
     }
     
-    //References a list of ambiguous mime types from "http://msdn2.microsoft.com/en-us/library/ms775147.aspx"
+    /**
+     * References a list of ambiguous mime types from "http://msdn2.microsoft.com/en-us/library/ms775147.aspx".
+     * 
+     * @param string
+     * @return boolean
+     **/
     protected function mimeTypeIsAmbiguous($mime_type)
     {
         return in_array($mime_type, array("text/plain", "application/octet-stream", '', null));
     }
     
     /**
-     * Pull down the file's extra metadata via getID3 library
+     * Pull down the file's extra metadata via getID3 library.
      *
-     * @return void
+     * @return getID3
      **/
     private function retrieveID3Info($path)
     {
@@ -532,18 +620,41 @@ class File extends Omeka_Record {
     }
     
     /**
-     * Save extended metadata if we got it
+     * Save extended metadata if we got it.
      *
      * @return void
      **/
     protected function afterSave()
     {
-        if ($this->Extended instanceof Omeka_Record) {
-            $this->Extended->file_id = $this->id;
-            $this->Extended->save();
-        }
+        $this->saveMimeTypeElements();
     }
     
+    /**
+     * Generate a derivative image from an existing image stored in Omeka's archive.  
+     * 
+     * This image will be generated based on a constraint given in pixels.  For 
+     * example, if the constraint is 500, the resulting image file will be scaled 
+     * so that the largest side is 500px. If the image is less than 500px on both 
+     * sides, the image will not be resized.
+     * 
+     * All derivative images will be JPEG, which is specified by the constant 
+     * IMAGE_DERIVATIVE_EXT.  
+     * 
+     * Currently, derivative images will only be generated for file types that 
+     * can be read by PHP's getimagesize() function.  Documentation for supported 
+     * file types can be found on PHP.net's doc page for getimagesize() or 
+     * image_type_to_mime_type().
+     * 
+     * @throws Omeka_Upload_Exception
+     * @param string The full path to the archived file.
+     * @param string The full path to the directory in which to create the derivative image.
+     * @param integer The size constraint for the image (in pixels).
+     * @param string The type of the image to generate (optional).  If the type 
+     * specified is "square", Omeka will generated a derivative image that is 
+     * centered and cropped to a square.  This is primarily used for generation 
+     * of square thumbnails, though a plugin could also take advantage of it.
+     * @return string The filename of the generated image file.
+     **/
     protected function createImage( $old_path, $new_dir, $constraint, $type=null) {
             
         $convertPath = get_option('path_to_convert');

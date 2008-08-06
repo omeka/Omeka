@@ -6,6 +6,8 @@
  * @package Omeka
  **/
 
+require_once 'MimeElementSetLookupTable.php';
+
 /**
  * MimeElementSetLookup
  *

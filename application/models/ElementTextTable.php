@@ -37,6 +37,38 @@ class ElementTextTable extends Omeka_Db_Table
         return $select;
     }
     
+    /**
+     * @todo Refactor getSelectForItem() to use this instead.
+     * @param integer
+     * @param string
+     * @return Omeka_Db_Select
+     **/
+    public function getSelectForRecord($recordId, $recordType)
+    {
+        $select = $this->getSelect();
+        $db = $this->getDb();
+        
+        // Join against the record_types table to only retrieve text for items.
+        $select->joinInner(array('rty'=>$db->RecordType), 
+            'rty.id = ' . $this->_alias . '.record_type_id AND rty.name = "' . (string)$recordType . '"', array());
+        
+        $select->where( $this->_alias . '.record_id = ?', (int) $recordId);
+        
+        return $select;
+    }
+    
+    /**
+     * Find all ElementText records for a given database record (Item, File, etc).
+     * 
+     * @param Omeka_Record
+     * @return array
+     **/
+    public function findByRecord(Omeka_Record $record)
+    {
+        $select = $this->getSelectForRecord($record->id, get_class($record));
+        return $this->fetchObjects($select);
+    }
+    
     public function indexByElementId($textRecords)
     {
         $indexed = array();

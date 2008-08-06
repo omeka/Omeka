@@ -5,42 +5,43 @@
 <h1>File #<?php echo h($file->id); ?></h1>
 
 <?php echo display_file($file); ?>
+
+<?php
+
+function display_definition_list_for_elements($file, $elements)
+{
+    $html = '';
+    foreach ($elements as $element): 
+        $html .= '<dt>' . $element->name . '</dt>';
+        $texts = $file->getTextsByElement($element);
+        $html .= '<dd>';
+        foreach ($texts as $textRecord): 
+            $html .= $textRecord->text; 
+        endforeach;
+        $html .= '</dd>';
+    endforeach; 
+    return $html;
+}
+
+function display_definition_list_for_elements_by_set($file, $elementSetName)
+{
+    $elements = $file->getElementsBySetName($elementSetName);
+    return display_definition_list_for_elements($file, $elements);
+}
+
+?>
 	
 <div id="core-metadata" class="section">
 <h2>Core Metadata</h2>
-<dl>	
-<dt>Identifier:</dt> <dd><?php if ($file->id): ?><?php echo h($file->id); ?><?php endif; ?></dd>
-<dt>Title:</dt> <dd><?php if ($file->title): ?><?php echo h($file->title); ?><?php endif; ?></dd>
-<dt>Creator:</dt> <dd><?php if ($file->creator): ?><?php echo h($file->creator); ?><?php endif; ?></dd>
-<dt>Subject:</dt> <dd><?php if ($file->subject): ?><?php echo h($file->subject); ?><?php endif; ?></dd>
-<dt>Description:</dt> <dd><?php if ($file->description): ?><?php echo h($file->description); ?><?php endif; ?></dd>
-<dt>Publisher:</dt> <dd><?php if ($file->publisher): ?><?php echo h($file->publisher); ?><?php endif; ?></dd>
-<dt>Other Creator:</dt> <dd><?php if ($file->additional_creator): ?><?php echo h($file->additional_creator); ?><?php endif; ?></dd>
-<dt>Date:</dt> <dd><?php if ($file->date): ?><?php echo h($file->date); ?><?php endif; ?></dd>
-<dt>Source:</dt> <dd><?php if ($file->source): ?><?php echo h($file->source); ?><?php endif; ?></dd>
-<dt>Language:</dt> <dd><?php if ($file->language): ?><?php echo h($file->language); ?><?php endif; ?></dd>
-<dt>Relation:</dt> <dd><?php if ($file->relation): ?><?php echo h($file->relation); ?><?php endif; ?></dd>
-<dt>Coverage</dt> <dd><?php if ($file->coverage): ?><?php echo h($file->coverage); ?><?php endif; ?></dd>
-<dt>Rights:</dt> <dd><?php if ($file->rights): ?><?php echo h($file->rights); ?><?php endif; ?></dd>
-<dt>Format:</dt> <dd><?php if ($file->format): ?><?php echo h($file->format); ?><?php endif; ?></dd>
+<dl>
+<?php echo display_definition_list_for_elements_by_set($file, 'Dublin Core'); ?>
 </dl>
 </div>
 
 <div id="format-metadata" class="section">
 <h2>Format Metadata</h2>
 <dl>
-<dt>Transcriber:</dt> <dd><?php if ($file->transcriber): ?><?php echo h($file->transcriber); ?><?php endif; ?></dd>
-<dt>Producer:</dt> <dd><?php if ($file->producer): ?><?php echo h($file->producer); ?><?php endif; ?></dd>
-<dt>Render Device:</dt> <dd><?php if ($file->render_device): ?><?php echo h($file->render_device); ?><?php endif; ?></dd>
-<dt>Render Details:</dt> <dd><?php if ($file->render_details): ?><?php echo h($file->render_details); ?><?php endif; ?></dd>
-<dt>Capture Date:</dt> <dd><?php if ($file->capture_date): ?><?php echo h($file->capture_date); ?><?php endif; ?></dd>
-<dt>Capture Device:</dt> <dd><?php if ($file->capture_device): ?><?php echo h($file->capture_device); ?><?php endif; ?></dd>
-<dt>Capture Details:</dt> <dd><?php if ($file->capture_details): ?><?php echo h($file->capture_details); ?><?php endif; ?></dd>
-<dt>Watermark:</dt> <dd><?php if ($file->watermark): ?><?php echo h($file->watermark); ?><?php endif; ?></dd>
-<dt>Encryption:</dt> <dd><?php if ($file->encryption): ?><?php echo h($file->encryption); ?><?php endif; ?></dd>
-<dt>Compression:</dt> <dd><?php if ($file->compression): ?><?php echo h($file->compression); ?><?php endif; ?></dd>
-<dt>Post-processing:</dt> <dd><?php if ($file->post_processing): ?><?php echo h($file->post_processing); ?><?php endif; ?></dd>
-<dt>Change History:</dt> <dd><?php if ($file->change_history): ?><?php echo h($file->change_history); ?><?php endif; ?></dd>
+<?php echo display_definition_list_for_elements_by_set($file, 'Omeka Legacy File'); ?>
 <dt>Archive Filename:</dt> <dd><?php if ($file->archive_filename): ?><?php echo h($file->archive_filename); ?><?php endif; ?></dd>
 <dt>Original Filename:</dt> <dd><?php if ($file->original_filename): ?><?php echo h($file->original_filename); ?><?php endif; ?></dd>
 <dt>File Size:</dt> <dd><?php if ($file->size): ?><?php echo h($file->size); ?> bytes<?php endif; ?></dd>

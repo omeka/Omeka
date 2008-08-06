@@ -11,48 +11,59 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class FilesVideos extends Omeka_Record
-{    
-    public $bitrate;
-    public $duration;
-    public $codec;
-    public $sample_rate;
-    public $width;
-    public $height;
-    public $file_id;
+class FilesVideos
+{        
+    public function initialize($id3, $pathToFile)
+    {
+        $this->info = $id3;
+        $this->pathToFile = $pathToFile;
 
-    protected $id3;
-
-    public function generate($info, $path)
-    {        
-        $this->id3 = $info;
-        
         $stream = array();
-        if (array_key_exists('video', $info)) {
+        if (array_key_exists('video', $id3)) {
             
-            if (array_key_exists('streams', $info['video'])) {
-                $stream = array_pop($info['video']['streams']);
+            if (array_key_exists('streams', $id3['video'])) {
+                $stream = array_pop($id3['video']['streams']);
             } else {
-                $stream = $info['video'];
+                $stream = $id3['video'];
             }
         }
-                
-        $this->bitrate     = (int) $info['bitrate'];
-        $this->duration    = (int) $info['playtime_seconds'];
-        $this->codec       = $stream['codec'];
-        $this->width       = (int) $stream['resolution_x'];
-        $this->height      = (int) $stream['resolution_y'];
-        $this->sample_rate = $this->getSampleRate();
+        
+        $this->stream = $stream;
+    }
+        
+    public function getBitrate()
+    {
+        return (int) $this->info['bitrate'];
     }
     
-    protected function getSampleRate()
+    public function getDuration()
     {
-        if (array_key_exists('quicktime', $this->id3)) {
+        return (int) $this->info['playtime_seconds'];
+    }
+    
+    public function getCodec()
+    {
+        return $this->stream['codec'];
+    }
+    
+    public function getWidth()
+    {
+        return (int) $this->stream['resolution_x'];
+    }
+    
+    public function getHeight()
+    {
+        return (int) $this->stream['resolution_y'];
+    }
+
+    public function getSampleRate()
+    {
+        if (array_key_exists('quicktime', $this->info)) {
             // Screw quicktime (no consistencies in data format)
             return '0';
             // return (int) $this->id3['quicktime']['audio']['sample_rate'];
         } else {
-            return (int) $this->id3['audio']['sample_rate'];
+            return (int) $this->info['audio']['sample_rate'];
         }
     }    
 }
