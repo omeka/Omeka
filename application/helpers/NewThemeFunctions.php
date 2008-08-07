@@ -509,6 +509,12 @@ function get_current_file()
     return __v()->file;
 }
 
+function link_to_advanced_search()
+{
+    // Is appending the query string directly a security issue?  We should figure that out.
+    return '<a href="' . url_for('items/advanced-search') .'?' . $_SERVER['QUERY_STRING'].  '">Advanced Search</a>';
+}
+
 function add_item_filter($field, $callback)
 {
     

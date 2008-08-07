@@ -64,42 +64,6 @@ Object.extend(Omeka.Search, {
 		removeButtons.each(function(button) {
 			removeAdvancedSearch(button);
 		});
-	},
-
-	//Hey we want to be able to toggle the advanced search
-	toggleSearch: function() {
-
-		var basicForm = $('basic_search');
-		var advancedForm = $('advanced_search');
-
-		var disableAndHide = function(form) {
-			new Effect.BlindUp(form);
-		//	form.hide();
-			form.select('input, select').invoke('disable');
-			$('advanced_search_header').innerHTML = 'Show Advanced Options';
-		}
-	
-		var enableAndShow = function(form) {
-			new Effect.BlindDown(form);
-	//		form.show();
-			form.select('input, select').invoke('enable');
-			$('advanced_search_header').innerHTML = 'Hide Advanced Options';
-		}
-	
-		var toggleAdvancedForm = function() {
-			if(advancedForm.visible()) {
-				disableAndHide(advancedForm);
-			}else {
-				enableAndShow(advancedForm);
-			}
-		}
-	
-		//Show the advanced form
-		Event.observe('advanced_search_header', 'click', toggleAdvancedForm);
-		
-		//Hide the advanced form by default
-		advancedForm.select('input, select').invoke('disable');
-		advancedForm.hide();
 	}
 
 });

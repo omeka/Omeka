@@ -6,7 +6,9 @@
 <h1 class="floater">Browse Items (<?php echo total_results();?> items total)</h1>
 <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
 
-<?php items_search_form(array('id'=>'search'), uri('items/browse')); ?>
+<?php echo simple_search(array('id'=>'search'), url_for('items/browse')); ?>
+
+<?php echo link_to_advanced_search(); ?>
 
 <div id="browse-meta">
 <div class="pagination"><?php echo pagination_links(); ?></div>

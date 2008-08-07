@@ -26,6 +26,21 @@ class ItemsController extends Omeka_Controller_Action
     }
     
     /**
+     * This only loads the script for the advanced search page.
+     * 
+     * @return void
+     **/
+    public function advancedSearchAction()
+    {
+        $this->view->isPartial = ($this->getRequest()->isXmlHttpRequest() or (boolean)$this->_getParam('is_partial'));
+        
+        $this->view->formAttributes = $this->_getParam('form_attributes');
+        if (!$this->view->formAttributes) {
+            $this->view->formAttributes = array();
+        }        
+    }
+    
+    /**
      * This wraps the builtin method with permissions checks
      *
      **/
