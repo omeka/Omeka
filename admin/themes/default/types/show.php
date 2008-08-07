@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Type: '.h($type->name),'body_class'=>'types'));?>
-<?php common('archive-nav'); ?>
+
 
 <div id="primary">
 	<div id="type-info">

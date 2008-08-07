@@ -1,5 +1,4 @@
 <?php head(array('title'=>'Browse Collections', 'body_class'=>'collections')); ?>
-<?php common('archive-nav'); ?>
 <div id="primary">
 	<h1 class="floater">Collections</h1>
 	<a href="<?php echo uri('collections/add'); ?>" id="add-collection" class="add-collection">Add a Collection</a>

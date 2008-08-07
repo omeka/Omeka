@@ -1,4 +1,5 @@
 <?php head(array('title'=>'Browse Users', 'body_class'=>'users'));?>
+<?php common('settings-nav'); ?>
 <?php common('users-nav'); ?>
 <div id="primary">
 <h1 class="floater">Browse Users</h1>

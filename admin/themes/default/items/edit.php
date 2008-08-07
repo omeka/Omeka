@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Edit Item', 'body_class'=>'items'));?>
-<?php common('archive-nav'); ?>
+
 <div id="primary">
 	
 	<h1>Edit &#8220;<?php echo item('Title', ', '); ?>&#8221;</h1>

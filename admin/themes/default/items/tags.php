@@ -1,5 +1,5 @@
 <?php head(); ?>
-<?php common('archive-nav'); ?>
+
 <div id="primary">
 <h2>Tags</h2>
 <?php if ( count($tags) ): ?>

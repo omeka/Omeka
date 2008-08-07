@@ -1,5 +1,5 @@
 <?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items')); ?>
-<?php common('archive-nav'); ?>
+
 
 <script type="text/javascript" charset="utf-8">
     

@@ -1,6 +1,6 @@
 <?php head(array('title'=>'Add Item', 'body_class'=>'items'));?>
 
-<?php common('archive-nav'); ?>
+
 
 <div id="primary">
 	<h1>Add an Item</h1>

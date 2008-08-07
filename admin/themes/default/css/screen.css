@@ -201,6 +201,8 @@ ul.tags, li.tag {display: inline;}
 
 /* == Navigation == */
 	
+	#site-settings-admin {float:right;display:block;}
+	
 	/* Primary Navigation */
 	#primary-nav {clear:both;background:#2c2c2c url("../images/primary-nav-bg.gif") 0 100% repeat-x; margin:0; padding:0 36px;text-align:center;font-size:1.2em;margin-bottom:0; overflow:hidden; border-width:0 0 9px; width: 100%;}
 		#primary-nav li {float: left;}

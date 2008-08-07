@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Edit Tags', 'body_class'=>'tags')); ?>
-<?php common('archive-nav'); ?>
+
 <?php echo flash(); ?>
 
 <div id="primary">

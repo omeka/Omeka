@@ -1,5 +1,4 @@
 <?php head(array('title'=>'Edit Collection #'.$collection->id, 'body_class'=>'collections')); ?>
-<?php common('archive-nav'); ?>
 <div id="primary">
 	
 <h2><?php echo h($collection->name); ?></h2>

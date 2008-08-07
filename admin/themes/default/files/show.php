@@ -1,5 +1,5 @@
 <?php head(); ?>
-<?php common('archive-nav'); ?>
+
 
 <div id="primary">
 <h1>File #<?php echo h($file->id); ?></h1>

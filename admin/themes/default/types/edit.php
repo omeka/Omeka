@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Edit Type: '.h($type->name),'body_class'=>'types')); ?>
-<?php common('archive-nav'); ?>
+
 <div id="primary">
 <h1><?php echo h($type->name); ?></h1>
 <form method="post">
