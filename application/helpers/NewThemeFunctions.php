@@ -524,55 +524,41 @@ function add_item_filter($field, $callback)
  * Return the pagination string.
  * 
  **/
-function pagination($options = array('page'          => null, 
-                                     'perPageCount'  => null, 
-                                     'totalCount'    => null, 
-                                     'pageName'      => null, 
-                                     'url'           => null, 
-                                     'queryArray'    => null, 
-                                     'pagesType'     => null, 
-                                     'displayFormat' => null, 
-                                     'classes'       => null, 
-                                     'texts'         => null))
+function pagination($options = array('scrolling_style' => null, 
+                                     'partial_file'    => null, 
+                                     'page_range'      => null, 
+                                     'total_results'   => null, 
+                                     'page'            => null, 
+                                     'per_page'        => null))
 {
     if (Zend_Registry::isRegistered('pagination')) {
-		$p = Zend_Registry::get('pagination');
-	}
+        // If the pagination variables are registered, set them for local use.
+        $p = Zend_Registry::get('pagination');
+	} else {
+        // If the pagination variables are not registered, set required defaults 
+        // arbitrarily to avoid errors.
+        $p = array('total_results'   => 1, 
+                   'page'            => 1, 
+                   'per_page'        => 1);
+    }
     
-	$page          = $options['page']          ? $options['page']          : $p['page'];
-	$perPageCount  = $options['perPageCount']  ? $options['perPageCount']  : $p['per_page'];
-	$totalCount    = $options['totalCount']    ? $options['totalCount']    : $p['total_results'];
-    $pageName      = $options['pageName']      ? $options['pageName']      : false;
-    $url           = $options['url']           ? $options['url']           : $p['link'];
-    $queryArray    = $options['queryArray']    ? $options['queryArray']    : null;
-    $pagesType     = $options['pagesType']     ? $options['pagesType']     : array('show' => 5);
-    $displayFormat = $options['displayFormat'] ? $options['displayFormat'] : 2;
-    $classes       = $options['classes']       ? $options['classes']       : array('pagination'    => '', 
-                                                                                   'first'         => 'first', 
-                                                                                   'firstGhost'    => '', 
-                                                                                   'previous'      => 'previous', 
-                                                                                   'previousGhost' => '', 
-                                                                                   'ellipsis'      => '', 
-                                                                                   'currentPage'   => 'current', 
-                                                                                   'pages'         => '', 
-                                                                                   'next'          => 'next', 
-                                                                                   'nextGhost'     => '', 
-                                                                                   'last'          => 'last', 
-                                                                                   'lastGhost'     => '');
-    $texts         = $options['texts']         ? $options['texts']         : array('first'    => 'First', 
-                                                                                   'previous' => 'Previous', 
-                                                                                   'ellipsis' => '&#8230;', 
-                                                                                   'next'     => 'Next', 
-                                                                                   'last'     => 'Last');
+    // Set preferred settings.
+    $scrollingStyle   = $options['scrolling_style'] ? $options['scrolling_style']     : 'Sliding';
+    $partial          = $options['partial_file']    ? $options['partial_file']        : 'common' . DIRECTORY_SEPARATOR . 'pagination_control.php';
+    $pageRange        = $options['page_range']      ? (int) $options['page_range']    : 5;
+    $totalCount       = $options['total_results']   ? (int) $options['total_results'] : (int) $p['total_results'];
+    $pageNumber       = $options['page']            ? (int) $options['page']          : (int) $p['page'];
+    $itemCountPerPage = $options['per_page']        ? (int) $options['per_page']      : (int) $p['per_page'];
     
-    return __v()->pagination($page, 
-                             $perPageCount, 
-                             $totalCount, 
-                             array('pageName'     => $pageName, 
-                                   'url'          => $url, 
-                                   'queryArray'   => $queryArray, 
-                                   'pagesType'    => $pagesType, 
-                                   'displayFormat'=> $displayFormat, 
-                                   'classes'      => $classes, 
-                                   'texts'        => $texts));
+    // Create an instance of Zend_Paginator.
+    $paginator = Zend_Paginator::factory($totalCount);
+    
+    // Configure the instance.
+    $paginator->setCurrentPageNumber($pageNumber)
+              ->setItemCountPerPage($itemCountPerPage)
+              ->setPageRange($pageRange);
+    
+    return __v()->paginationControl($paginator, 
+                                    $scrollingStyle, 
+                                    $partial);
 }
