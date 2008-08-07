@@ -148,6 +148,7 @@ class ItemSearch
         // INNER JOIN to the main SQL query and then ORDER BY rank DESC
         $select->joinInner(array('s'=>new Zend_Db_Expr('('. $searchQuery . ')')), 's.item_id = i.id', array())
             ->order('s.rank DESC'); 
+                        
     }
     
     protected function _getElementsQuery($terms)
@@ -158,10 +159,11 @@ class ItemSearch
         // This doesn't really need to use a Select object because this query
         // is not dynamic.  
         $query = "
-            SELECT i.id as item_id, MATCH (ie.text) AGAINST ($quotedTerms) as rank
+            SELECT i.id as item_id, MATCH (etx.text) AGAINST ($quotedTerms) as rank
             FROM $db->Item i 
-            INNER JOIN $db->ItemsElements ie ON ie.item_id = i.id
-            WHERE MATCH (ie.text) AGAINST ($quotedTerms)";
+            INNER JOIN $db->ElementText etx ON etx.record_id = i.id
+            INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id AND rty.name = 'Item'
+            WHERE MATCH (etx.text) AGAINST ($quotedTerms)";
         
         return $query;
     }
