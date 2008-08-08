@@ -496,7 +496,7 @@ function has_permission($role,$privilege=null) {
  * @return string
  **/
 function settings($name) {
-	$name = get_option($name);
+	$name = apply_filters("display_setting_$name", get_option($name));
 	$name = h($name);
 	return $name;
 }
