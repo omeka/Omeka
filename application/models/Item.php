@@ -435,6 +435,10 @@ class Item extends Omeka_Record
      **/
     public function saveElementText($elements)
     {
+        if (empty($elements)) {
+            throw new Exception('Cannot save element texts if no elements have been specified!');
+        }
+        
         if (!$this->exists()) {
             throw new Exception('Cannot save element text for records that are not yet persistent!');
         }
