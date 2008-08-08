@@ -7,7 +7,6 @@
  **/
 
 require_once 'ElementTable.php';
-require_once 'ItemsElements.php';
 require_once 'RecordType.php';
  
 /**
