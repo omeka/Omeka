@@ -276,11 +276,11 @@ ul.tags, li.tag {display: inline;}
 	#search label {font-size:1.2em;}
 	#search label select {display:block; float:none; margin: 9px 0 18px;}
 	
-	#search-checkboxes label {clear: both; float: left; width: 10em; margin: 0 0 .5em;}
-	#search-checkboxes input {position: absolute; left: 11em; top: 0;}
-		#search-checkboxes input#public {position: absolute; left: 11em; top: 0em;}
-		#search-checkboxes input#featured {position: absolute; left: 11em; top: 1.7em;}
-	
+/*  #search-checkboxes label {clear: both; float: left; width: 10em; margin: 0 0 .5em;}
+    #search-checkboxes input {position: absolute; left: 11em; top: 0;}
+        #search-checkboxes input#public {position: absolute; left: 11em; top: 0em;}
+        #search-checkboxes input#featured {position: absolute; left: 11em; top: 1.7em;}
+*/	
 	/* Advanced Search - [KBK] - added 9/5/07 */
 	#search div.search-entry select {display:inline;}
 	#search div.search-entry {clear:both;}
