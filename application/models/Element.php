@@ -24,41 +24,7 @@ class Element extends Omeka_Record
     public $order;
     public $name = '';
     public $description;
-    
-    /**
-     * Store element text within the element record itself.  Makes saving to 
-     * the database convenient.
-     * 
-     * @var array
-     **/
-    protected $_texts = array();
-    
-    /**
-     * Add some text to the element.
-     * 
-     * @param string
-     * @return void
-     **/
-    public function addText($text)
-    {
-        $this->_texts[] = $text;
-    }
-    
-    /**
-     * Retrieve text values for this element.
-     * 
-     * @param integer
-     * @return string|array
-     **/
-    public function getTextObjects($index=null)
-    {
-        if (is_integer($index)) {
-            return $this->_texts[$index];
-        }
-        
-        return $this->_texts;
-    }
-            
+
     /**
      * 
      * @todo Make the validation against the data type of the element. This

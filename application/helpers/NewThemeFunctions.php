@@ -73,17 +73,17 @@ function item_type_elements()
  * @param Element|array
  * @return string HTML
  **/
-function display_form_input_for_element($element)
+function display_form_input_for_element($element, $item)
 {
     $html = '';
-    
+        
     // If we have an array of Elements, loop through the form to display them.
     if (is_array($element)) {
         foreach ($element as $key => $e) {
-            $html .= __v()->elementForm($e);
+            $html .= __v()->elementForm($e, $item);
         }
     } else {
-        $html = __v()->elementForm($element);
+        $html = __v()->elementForm($element, $item);
     }
 	
 	return $html;
@@ -96,7 +96,7 @@ function display_element_set_form_for_item($item, $elementSetName)
     $html = '';
     
     foreach ($dublinCoreElements as $key => $element) {
-       $html .= display_form_input_for_element($element);
+       $html .= display_form_input_for_element($element, $item);
     }
     
     return $html;

@@ -12,9 +12,16 @@ class Omeka_View_Helper_ElementForm
      **/
     protected $_element;
     
-    public function elementForm(Element $element)
+    protected $_record;
+    
+    public function elementForm(Element $element, Omeka_Record $record)
     {
         $this->_element = $element;
+        
+        // This will load all the Elements available for the record and fatal error
+        // if $record does not use the ActsAsElementText mixin.
+        $record->loadElementsAndTexts();
+        $this->_record = $record;
         
         $html = '<div class="field">';
         
@@ -53,7 +60,8 @@ class Omeka_View_Helper_ElementForm
      **/
     protected function _getFormFieldCount()
     {
-        $numFieldValues = count($this->_element->getTextObjects());
+        $numFieldValues = count($this->getElementTexts());
+        // Should always show at least one field.
         return $numFieldValues ? $numFieldValues : 1;
     }
     
@@ -78,16 +86,7 @@ class Omeka_View_Helper_ElementForm
         $postArray = $_POST['Elements'][$this->_element['id']][$index];
         
         // Flatten this POST array into a string so as to be passed to the necessary helper functions.
-        
-        if (isset($postArray['text'])) {
-            // If its a text value, return that.
-            return $postArray['text'];
-        } else if (isset($postArray['year'])) {
-            // Flatten this date array into a string for display's sake. 
-            return implode('-', $postArray);
-        }    
-        
-        return $postArray;    
+        return ActsAsElementText::getTextStringFromFormPost($postArray, $this->_element);
     }
     
     protected function _getHtmlFlagForField($index)
@@ -95,7 +94,7 @@ class Omeka_View_Helper_ElementForm
         if (!empty($_POST)) {
             $isHtml = (boolean) $_POST['Elements'][$this->_element['id']][$index]['html'];
         } else {
-            $isHtml = (boolean) $this->_element->getTextObjects($index)->html;
+            $isHtml = (boolean) $this->getElementTexts($index)->html;
         }
 
         return $isHtml;
@@ -112,8 +111,23 @@ class Omeka_View_Helper_ElementForm
         if ($post = $this->_getPostValueForField($index)) {
             return $post;
         } else {
-            return $this->_element->getTextObjects($index)->text;
+            return $this->getElementTexts($index)->text;
         }
+    }
+    
+    /**
+     * If index is not given, return all texts.
+     * 
+     * @param string
+     * @return void
+     **/
+    public function getElementTexts($index=null)
+    {
+        $texts = $this->_record->getTextsByElement($this->_element);
+        if ($index !== null) {
+            return $texts[$index];
+        }
+        return $texts;
     }
     
     protected function _displayFormFields()
@@ -126,7 +140,7 @@ class Omeka_View_Helper_ElementForm
             $html .= '<div class="input">';
             
             $fieldStem = $this->_getFieldNameStem($i);
-
+            
             $html .= $this->_displayFormInput($fieldStem, $this->_getValueForField($i));
             
             $html .= $this->_displayHtmlFlag($fieldStem, $i);
@@ -145,7 +159,7 @@ class Omeka_View_Helper_ElementForm
     protected function _displayFormInput($inputNameStem, $value, $options=array())
     {
         $fieldDataType = $this->_getElementDataType();
-                
+                        
         //Create a form input based on the element type name
         switch ($fieldDataType) {
                 
@@ -190,7 +204,7 @@ class Omeka_View_Helper_ElementForm
     	
     	$html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4'));
     	$html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2'));
-    	$html .= $this->view->formText($inputNameStem . '[day]', $year, array('class'=>'textinput', 'size'=>'2'));
+    	$html .= $this->view->formText($inputNameStem . '[day]', $day, array('class'=>'textinput', 'size'=>'2'));
     	
     	$html .= '</div>';
     	
@@ -202,7 +216,7 @@ class Omeka_View_Helper_ElementForm
         list($startDate, $endDate) = explode(' ', $dateValue);
         
         $html = '<div class="dates">';
-        
+
         // The name of the form elements for date ranges should eventually look like:
         // Elements[##][0][start][year], where ## is the element_id
         // Elements[##][0][end][month], etc.

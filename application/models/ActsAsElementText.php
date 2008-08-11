@@ -364,7 +364,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @param Element
      * @return string
      **/
-    public function getTextStringFromFormPost($postArray, $element)
+    public static function getTextStringFromFormPost($postArray, $element)
     {
         $elementDataType = $element->data_type_name;
         switch ($elementDataType) {
@@ -443,7 +443,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
                 // One or both of these dates can be empty, but if they aren't 
                 // empty then they have to validate as dates.
                 list($startDate, $endDate) = explode(' ', $textValue);
-                $isValid = (empty($startDate) or Zend_Validate::is($startDate)) and (empty($endDate) or Zend_Validate::is($endDate));
+                $isValid = (empty($startDate) or Zend_Validate::is($startDate, 'Date')) and (empty($endDate) or Zend_Validate::is($endDate, 'Date'));
                 break;
             default:
                 throw new Exception("Cannot validate an element of data type '$elementDataType'!");
@@ -483,6 +483,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
         if (!$this->_record->exists()) {
             throw new Exception('Cannot save element text for records that are not yet persistent!');
         }
+        
+        // var_dump($this->_textsToSave);exit;
         
         // Delete all the elements that were displayed on the form before adding the new stuff.
         $elementIdsFromForm = array_keys($this->_elementsOnForm);
