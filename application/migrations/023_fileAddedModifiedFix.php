@@ -46,6 +46,13 @@ class fileAddedModifiedFix extends Omeka_Db_Migration
     private function _migrate()
     {
         $db = $this->db;
+        
+        // Return if the backup table doesn't exist.
+        if (!in_array("{$db->prefix}files__backup__21", $db->listTables())) {
+            echo 'POOP!';
+            return;
+        }
+        
         $sql = "
         UPDATE `{$db->prefix}files` f, `{$db->prefix}files__backup__21` fb
         SET f.`modified` = fb.`modified`, 
