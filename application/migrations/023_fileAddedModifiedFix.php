@@ -49,7 +49,6 @@ class fileAddedModifiedFix extends Omeka_Db_Migration
         
         // Return if the backup table doesn't exist.
         if (!in_array("{$db->prefix}files__backup__21", $db->listTables())) {
-            echo 'POOP!';
             return;
         }
         
