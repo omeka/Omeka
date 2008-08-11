@@ -43,6 +43,7 @@ class Item extends Omeka_Record
     {
         $this->_mixins[] = new Taggable($this);
         $this->_mixins[] = new Relatable($this);
+        $this->_mixins[] = new ActsAsElementText($this);
     }
     
     // Accessor methods
@@ -78,23 +79,11 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Retrieve the set of Element records associated with this Item.
-     * 
-     * @return array
-     **/
-    public function getElements()
-    {
-        return $this->getTable('Element')->findAllForItems();
-    }
-    
-    /**
-     * Retrieve all the ItemsElements records associated with the item.
-     * 
-     * @return array Set of ItemsElements records
+     * @return array Set of ElementText records.
      **/
     public function getElementText()
     {
-        return $this->getTable('ElementText')->findByItem($this->id);
+        return $this->getElementTextRecords();
     }
     
     /**
@@ -148,7 +137,7 @@ class Item extends Omeka_Record
      **/
     protected function beforeSaveForm(&$post)
     {
-        $this->_beforeSaveElements($post);
+        $this->beforeSaveElements($post);
         
         if (!empty($post['change_type'])) {
             return false;
@@ -161,111 +150,6 @@ class Item extends Omeka_Record
         }
         if (!$this->userHasPermission('makeFeatured')) {
             unset($post['featured']);
-        }
-    }
-    
-    /**
-     * The application flow is thus:
-     *
-     *  1) Build ElementText objects from the POST.
-     *  2) Validate the ElementText objects and assign error messages if necessary.
-     *  3) After the item saves correctly, delete all the ElementText records for the Item.
-     *  4) Save the new ElementText objects to the database.
-     *
-     * @see Item::beforeSaveForm()
-     * 
-     * @param array
-     * @return void
-     **/
-    protected function _beforeSaveElements(&$post)
-    {
-        $this->_elementsToSave = $this->_getElementsFromPost($post);
-        $this->_validateElements($this->_elementsToSave);        
-    }
-    
-    /**
-     * @internal For now, only trim the text in each one and cast the 'html'
-     *  flag to boolean.
-     * 
-     * @see Item::_getElementsFromPost()
-     * @param ArrayObject
-     * @return void
-     **/
-    protected function _filterInputForElements(&$post)
-    {        
-        // Trim the text for all the POST'ed elements
-        foreach ($post['Elements'] as $elementId => $elementText) {
-            foreach ($elementText as $index => $attributes) {
-                $post['Elements'][$elementId][$index]['text'] = trim( (string) $attributes['text']);
-                $post['Elements'][$elementId][$index]['html'] = (int) $attributes['html'];
-            }
-        }
-    }
-    
-    /**
-     * The POST should have a key called "Elements" that contains an array
-     * that is keyed to an element's ID.  That array should contain all the 
-     * text values for that element. For example:
-     *
-     *      * Elements:
-     *          * 1:
-     *              * 0: 
-     *                  'text': 'Foobar'
-     *                  'html': '0'
-     *              * 1: 'Baz'
-     * 
-     * @todo May want to throw an Exception if an element in the POST doesn't
-     * actually exist.
-     * @param array
-     * @return array Set of Element records.
-     **/
-    protected function _getElementsFromPost($post)
-    {
-        $elementPost = $post['Elements'];
-        $elements = array();
-        $table = $this->getDb()->getTable('Element');
-        $itemRecordTypeId = $this->_getItemRecordTypeId();
-        foreach ($elementPost as $id => $texts) {
-            $element = $table->find((int) $id);
-            // If we can't find an element with a given ID, something fishy is going on.
-            if (!$element instanceof Element) {
-                throw new Exception('Cannot find an element with ID#' . (int) $id);
-            }
-            
-            foreach ($texts as $key => $textAttributes) {
-                // Ignore fields that are empty (no text)
-                if (empty($textAttributes['text'])) {
-                    continue;
-                }
-                
-                $textRecord = new ElementText;
-                $textRecord->text = $textAttributes['text'];
-                $textRecord->html = (int) (boolean) $textAttributes['html'];
-                $textRecord->element_id = $element->id;
-                $textRecord->record_type_id = $itemRecordTypeId;
-                $element->addText($textRecord);
-            }
-            $elements[] = $element;
-        }
-
-        return $elements;
-    }
-    
-    /**
-     * Validate all the elements one by one.  This is potentially a lot slower
-     * than batch processing the form, but it gives the added bonus of being 
-     * able to encapsulate the logic for validation of Elements.
-     * 
-     * @see Item::_beforeSaveElements()
-     * @param array Set of Element records.
-     * @return void
-     **/
-    protected function _validateElements($elements)
-    {
-        foreach ($elements as $key => $element) {
-            if(!$element->isValid()) {
-                $this->addErrorsFrom($element);
-            }
         }
     }
     
@@ -363,7 +247,7 @@ class Item extends Omeka_Record
     {
         $this->_saveFiles();
         
-        $this->saveElementText($this->_elementsToSave);
+        $this->saveElementTexts();
         
         // Remove a single tag based on the form submission.
         $this->_removeTagByForm((int) $post['remove_tag']);
@@ -385,7 +269,7 @@ class Item extends Omeka_Record
     protected function _delete()
     {    
         $this->_deleteFiles();
-        $this->_deleteElementText();
+        $this->deleteElementTexts();
     }
     
     /**
@@ -401,60 +285,6 @@ class Item extends Omeka_Record
         foreach ($this->Files as $file) {
             $file->delete();
         }        
-    }
-    
-    /**
-     * Delete all element text associated with this Item.
-     * 
-     * @see Item::_delete()
-     * @todo Not implemented yet.
-     * @return void
-     **/
-    protected function _deleteElementText()
-    {
-        // $itemRecordTypeId = $this->_getItemRecordTypeId();
-        $db = $this->getDb();
-        $db->query(
-            "DELETE etx FROM $db->ElementText etx 
-            INNER JOIN $db->Item i ON i.id = etx.record_id 
-            INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
-            WHERE rty.name = 'Item' AND i.id = ?", array($this->id));
-    }
-    
-    protected function _getItemRecordTypeId()
-    {
-        return $this->getDb()->getTable('RecordType')->findIdFromName('Item');
-    }
-    
-    /**
-     * Save a set of elements text.
-     * 
-     * @see Item::afterSaveForm()
-     * @param array Set of Element records
-     * @return void
-     **/
-    public function saveElementText($elements)
-    {
-        if (empty($elements)) {
-            throw new Exception('Cannot save element texts if no elements have been specified!');
-        }
-        
-        if (!$this->exists()) {
-            throw new Exception('Cannot save element text for records that are not yet persistent!');
-        }
-        
-        // Delete all the existing element text before adding the new stuff.
-        $this->_deleteElementText();
-        
-        foreach ($elements as $index => $element) {
-            // Set the item_id for the element text record
-            if ($textRecords = $element->getTextObjects()) {
-                foreach ($textRecords as $textRecord) {
-                    $textRecord->record_id = $this->id;
-                    $textRecord->save();
-                }
-            }
-        }
     }
     
     /**
@@ -534,9 +364,7 @@ class Item extends Omeka_Record
                                                                   $clean['coverage_end_month'], 
                                                                   $clean['coverage_end_day']);            
         }
-        
-        $this->_filterInputForElements($clean);
-                
+                        
         // Now, happy shiny user input
         return $clean;        
     }

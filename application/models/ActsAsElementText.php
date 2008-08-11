@@ -16,11 +16,67 @@
 class ActsAsElementText extends Omeka_Record_Mixin
 {
     
-    protected $_textsByNaturalOrder;
-    protected $_textsByElementId;
-    protected $_elementsByNaturalOrder;
-    protected $_elementsByNameAndSet;
-    protected $_elementsBySet;
+    /**
+     * ElementText records stored in the order they were retrieved from the database.
+     *
+     * @var array
+     **/
+    protected $_textsByNaturalOrder = array();
+    
+    /**
+     * ElementText records indexed by the element_id.
+     * 
+     * @var array
+     **/
+    protected $_textsByElementId = array();
+    
+    /**
+     * Element records in the order they were retrieved from the database.
+     *
+     * @var array
+     **/
+    protected $_elementsByNaturalOrder = array();
+    
+    /**
+     * Element records indexed by name and element set name, so that it looks like this:
+     * 
+     * $elements['Title']['Dublin Core'] = Element instance;
+     *
+     * @var array
+     **/
+    protected $_elementsByNameAndSet = array();
+    
+    /**
+     * Element records indexed by set name, so that it looks like:
+     * 
+     * $elements['Dublin Core'] = array(Element instance, Element instance, ...).
+     *
+     * @var array
+     **/
+    protected $_elementsBySet = array();
+    
+    /**
+     * Element records indexed by ID.
+     *
+     * @var array
+     **/
+    protected $_elementsById = array();
+    
+    /**
+     * List of elements that were output on the form.  This can be used to 
+     * determine the DELETE SQL to use to reset the elements when saving the form.
+     *
+     * @see ActsAsElementText::getElementTextsToSaveFromPost()
+     * @var array
+     **/
+    protected $_elementsOnForm = array();
+    
+    /**
+     * Set of ElementText records to save when submitting the form.  These will 
+     * only be saved to the database if they successfully validate.
+     *
+     * @var array
+     **/
     protected $_textsToSave = array();
     
     public function __construct($record)
@@ -28,14 +84,24 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $this->_record = $record;
     }
     
+    public function getDb()
+    {
+        return $this->_record->getDb();
+    }
+    
     protected function getRecordType()
     {
         return get_class($this->_record);
     }
     
-    protected function getTextRecordTypeId()
+    /**
+     * Retrieve the record_type_id for this record.
+     * 
+     * @return integer
+     **/
+    protected function getRecordTypeId()
     {
-        var_dump('get record type ID!');exit;
+        return (int) $this->getDb()->getTable('RecordType')->findIdFromName($this->getRecordType());
     }
     
     /**
@@ -50,12 +116,13 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $elementTextRecords = $this->getElementTextRecords();
         
         $this->_textsByNaturalOrder = $elementTextRecords;
-        $this->_textsByElementId = $this->indexByElementId($elementTextRecords);
+        $this->_textsByElementId = $this->indexTextsByElementId($elementTextRecords);
         
         $elements = $this->getElements();
         $this->_elementsByNaturalOrder = $elements;
         $this->_elementsByNameAndSet = $this->indexElementsByNameAndSet($elements);
         $this->_elementsBySet = $this->indexElementsBySet($elements);
+        $this->_elementsById = $this->indexElementsById($elements);
     }
     
     /**
@@ -79,10 +146,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
 
     /**
-     * undocumented function
-     * 
      * @param string
-     * @return void
+     * @return array Set of ElementText records.
      **/
     public function getTextsByElement($element)
     {
@@ -95,6 +160,25 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return !empty($texts) ? $texts : array();
     }
     
+    public function getElementTextsByElementNameAndSetName($elementName, $elementSetName = null)
+    {
+        $element = $this->getElementByNameAndSetName($elementName, $elementSetName);
+        return $this->getTextsByElement($element);
+    }
+    
+    public function getElementById($elementId)
+    {
+        if (!$this->_elementsById) {
+            $this->loadElementsAndTexts();
+        }
+        
+        if (!array_key_exists($elementId, $this->_elementsById)) {
+            throw new Exception("Cannot find an element with an ID of '$elementId'!");
+        }
+        
+        return $this->_elementsById[$elementId];
+    }
+    
     public function getElementsBySetName($elementSetName)
     {
         if (!$this->_elementsBySet) {
@@ -105,13 +189,43 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return !empty($elements) ? $elements : array();
     }
     
+    public function getElementByNameAndSetName($elementName, $elementSetName = null)
+    {
+        if (!$this->_elementsByNameAndSet) {
+            $this->loadElementsAndTexts();
+        }
+        
+        if (!$elementSetName) {
+            $element = @$this->_elementsByNameAndSet[$elementName];
+            // We can safely assume that $element is an array, even if empty.
+            if (count($element) > 1) {
+                throw new Exception('Element name is ambiguous!  There is more than one element set containing an element named "' . $elementName . '"!');
+            } else if(empty($element)) {
+                throw new Exception("There is no element named '$elementName'!");
+            }
+            // Grab the first element of the result array.
+            $element = current($element);
+        } else {
+            $elements = $this->_elementsByNameAndSet[$elementName];
+            if (!$elements) {
+                throw new Exception("There is no element named '$elementName'!");
+            }
+            $element = @$elements[$elementSetName];
+            if (!$element) {
+                throw new Exception("There is no element named '$elementName' in the set named '$elementSetName'!");
+            }
+        }
+
+        return $element;
+    }
+    
     /**
      * @todo Duplicated in ElementTextTable.  Remove from there and put here instead.
      * 
      * @param array
      * @return array
      **/
-    public function indexByElementId($textRecords)
+    public function indexTextsByElementId($textRecords)
     {
         $indexed = array();
         foreach ($textRecords as $textRecord) {
@@ -151,6 +265,15 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return $indexed;
     }
     
+    protected function indexElementsById(array $elementRecords)
+    {
+        $indexed = array();
+        foreach($elementRecords as $record) {
+            $indexed[$record->id] = $record;
+        }
+        return $indexed;
+    }
+    
     /**
      * Add a string of text for an element.
      * 
@@ -175,6 +298,180 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
+     * The application flow is thus:
+     *
+     *  1) Build ElementText objects from the POST.
+     *  2) Validate the ElementText objects and assign error messages if necessary.
+     *  3) After the item saves correctly, delete all the ElementText records for the Item.
+     *  4) Save the new ElementText objects to the database.
+     *
+     * @see Item::beforeSaveForm()
+     * 
+     * @param array
+     * @return void
+     **/
+    public function beforeSaveElements(&$post)
+    {
+        $this->getElementTextsToSaveFromPost($post);
+        $this->validateElementTexts();        
+    }
+
+    /**
+     * The POST should have a key called "Elements" that contains an array
+     * that is keyed to an element's ID.  That array should contain all the 
+     * text values for that element. For example:
+     *
+     *      * Elements:
+     *          * 1:
+     *              * 0: 
+     *                  'text': 'Foobar'
+     *                  'html': '0'
+     *              * 1: 'Baz'
+     * 
+     * @todo May want to throw an Exception if an element in the POST doesn't
+     * actually exist.
+     * @param array
+     * @return void
+     **/
+    public function getElementTextsToSaveFromPost($post)
+    {
+        $elementPost = $post['Elements'];
+        
+        foreach ($elementPost as $elementId => $texts) {
+            // Pull this from the list of prior retrieved data instead of a new SQL query each time.
+            $element = $this->getElementById($elementId);
+            
+            // Add this to the stack of elements that are stored on the form.
+            $this->_elementsOnForm[$element->id] = $element;
+            
+            foreach ($texts as $key => $textAttributes) {
+                $elementText = $this->getTextStringFromFormPost($textAttributes, $element);
+                
+                // Ignore fields that are empty (no text)
+                if (empty($elementText)) {
+                    continue;
+                }
+                
+                $isHtml = (int) (boolean) $textAttributes['html'];
+                $this->addTextForElement($element, $elementText, $isHtml);
+            }
+        }
+    }
+    
+    /**
+     * @todo Hook into plugins.
+     * @param array
+     * @param Element
+     * @return string
+     **/
+    public function getTextStringFromFormPost($postArray, $element)
+    {
+        $elementDataType = $element->data_type_name;
+        switch ($elementDataType) {
+            case 'Tiny Text':
+            case 'Text':
+                return $postArray['text'];
+                break;
+            case 'Date':
+                // Almost forgot that I had already created this awhile back.
+                $dateFilter = new Omeka_Filter_Date;
+                return $dateFilter->filter($postArray['year'], 
+                                        $postArray['month'], 
+                                        $postArray['day']);
+            case 'Date Range':
+                $dateFilter = new Omeka_Filter_Date;
+                $startDate = $dateFilter->filter($postArray['start']['year'], 
+                                        $postArray['start']['month'], 
+                                        $postArray['start']['day']);
+                $endDate = $dateFilter->filter($postArray['end']['year'], 
+                                        $postArray['end']['month'], 
+                                        $postArray['end']['day']);
+                // Should come out to be start date and end date separated by a space.
+                // Or if we don't have either a start or end date, it should not store anything.
+                if (!$startDate and !$endDate) {
+                    return null;
+                }
+                return $startDate . ' ' . $endDate;
+            default:
+                throw new Exception("Cannot process form input for element with data type '$elementDataType'!");
+                break;
+        }
+    }
+        
+    /**
+     * Validate all the elements one by one.  This is potentially a lot slower
+     * than batch processing the form, but it gives the added bonus of being 
+     * able to encapsulate the logic for validation of Elements.
+     * 
+     * @param array Set of Element records.
+     * @return void
+     **/
+    public function validateElementTexts()
+    {
+        foreach ($this->_textsToSave as $key => $textRecord) {
+            if (!$this->elementTextIsValid($textRecord)) {
+                $elementRecord = $this->getElementById($textRecord->element_id);
+                $errorMessage = "'$elementRecord->name' field has at least one invalid value!";
+                $this->_record->addError($elementRecord->name, $errorMessage); 
+            }
+        }
+    }
+    
+    /**
+     * @todo Testing.
+     * @todo Plugins must hook into this.
+     * @param string
+     * @return void
+     **/
+    public function elementTextIsValid($elementTextRecord)
+    {
+        $elementRecord = $this->getElementById($elementTextRecord->element_id);
+        $textValue = $elementTextRecord->text;
+        $elementDataType = $elementRecord->data_type_name;
+        // Start out as valid by default.
+        $isValid = true;
+        switch ($elementDataType) {
+            // Tiny Text and Text are always valid?
+            case 'Tiny Text':
+            case 'Text':
+                break;
+            case 'Date':
+                $isValid = (empty($textValue) or Zend_Validate::is($textValue, 'Date'));
+                break;
+            case 'Date Range':
+                // Start and end dates are separated by a single whitespace.
+                // One or both of these dates can be empty, but if they aren't 
+                // empty then they have to validate as dates.
+                list($startDate, $endDate) = explode(' ', $textValue);
+                $isValid = (empty($startDate) or Zend_Validate::is($startDate)) and (empty($endDate) or Zend_Validate::is($endDate));
+                break;
+            default:
+                throw new Exception("Cannot validate an element of data type '$elementDataType'!");
+                break;
+        }
+        // Hook into this for plugins.
+        // array('Validate', 'Item', 'Title', 'Dublin Core')
+        // add_filter(array('Validate', 'Item', 'Title', 'Dublin Core'), 'my_filter_name');
+        
+        // function my_filter_name($isValid, $elementText, $item, $element)
+        // {
+        //      if (!in_array($elementText, array('foo'))) {
+        //          return false;
+        //      }
+        // }
+        
+        $filterName = array('Validate', $this->getRecordType(), $elementRecord->name, $elementRecord->set_name);
+        // Order of the parameters that are passed to this:
+        // $isValid = the current value indicating whether or not the element text has validated.
+        // $textValue = the string value that needs to be validated
+        // $record = the Item or File or whatever record that the element text needs to apply to.
+        // $element = the Element record that the text belongs to.
+        $isValid = apply_filters($filterName, $isValid, $textValue, $this->_record, $element);
+
+        return $isValid;
+    }
+    
+    /**
      * Save all ElementText records that were associated with a record.
      *
      * Typically called in the afterSave() hook for a record.
@@ -182,25 +479,36 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @return void
      **/
     public function saveElementTexts()
-    {
-        var_dump($this->_textsToSave);exit;
+    {        
+        if (!$this->_record->exists()) {
+            throw new Exception('Cannot save element text for records that are not yet persistent!');
+        }
+        
+        // Delete all the elements that were displayed on the form before adding the new stuff.
+        $elementIdsFromForm = array_keys($this->_elementsOnForm);
+        $this->deleteElementTextsByElementId($elementIdsFromForm);
+        
+        foreach ($this->_textsToSave as $textRecord) {
+            $textRecord->record_id = $this->_record->id;
+            $textRecord->forceSave();
+        }
     }
     
     /**
-     * @todo Not implemented yet. Also, current behavior in Item model is to
-     * delete all ElementText records, but for files this can't work b/c there
-     * are some ElementText fields that are auto-generated from getID3. There is
-     * no need to auto-delete these because they will never be modified on the
-     * form. One solution is to display it on the form anyway and make it so
-     * that those fields can't be edited.  Another solution would be to override 
-     * behavior of this method in the File model so that it specifically does not 
-     * delete the ElementText records belonging to auto-generated ID3 data.
+     * Deletes all the element texts for element_id's that have been provided.
      * 
-     * @param string
+     * @param array
      * @return void
      **/
-    public function deleteElementTexts()
+    public function deleteElementTextsByElementId(array $elementIdArray = array())
     {
-        
+        $db = $this->getDb();
+        $recordTableName = $this->_record->getTable()->getTableName();
+        $recordTypeName = $this->getRecordType();
+        return $db->query(
+            "DELETE etx FROM $db->ElementText etx 
+            INNER JOIN $recordTableName i ON i.id = etx.record_id 
+            INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
+            WHERE rty.name = ? AND i.id = ? AND etx.element_id IN (?)", array($recordTypeName, $this->_record->id, $elementIdArray));        
     }
 }

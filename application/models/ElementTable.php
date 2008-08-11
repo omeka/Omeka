@@ -12,31 +12,7 @@
  * @copyright Center for History and New Media, 2007-2008
  **/
 class ElementTable extends Omeka_Db_Table
-{
-    /**
-     * Find all of the element records that apply to Items.
-     * 
-     * @todo There should be a lightweight method that retrieves only the
-     *  elements that are actually used for this item. This method itself should
-     *  be used primarily for retrieving data for the forms, since that is the
-     *  most likely instance where all of the Element records will be needed.
-     * @return array
-     **/
-    public function findAllForItems()
-    {
-        $select = $this->getSelect();
-        $db = $this->getDb();
-
-        // Join against the record_types table to pull only elements for Items
-         $select->joinInner(array('rty'=> $db->RecordType),
-                             'rty.id = e.record_type_id',
-                             array('record_type_name'=>'rty.name'));
-        $select->where('rty.name = "Item" OR rty.name = "All"');
-
-        $objs = $this->fetchObjects($select);
-        return $this->indexByNameAndSet($objs);
-    }
-    
+{   
     /**
      * Find all the Element records that have a specific record type or the
      * record type 'All', indicating that these elements would apply to any

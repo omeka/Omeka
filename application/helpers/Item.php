@@ -260,37 +260,6 @@ class Omeka_View_Helper_Item
     }
     
     /**
-     * Retrieve an Element record which will contain all of the text records for
-     * the current item.
-     * 
-     * @param string Name of the element
-     * @param string Name of the set to which the element belongs.
-     * @return Element|null
-     **/
-    protected function getElementRecordByName($item, $elementName, $setName = null)
-    {
-        // Get the set of all elements.
-        $namedElements = $item->Elements[$elementName];
-        
-        if (!is_array($namedElements)) {
-            throw new Exception("An element named '$elementName' does not exist for this item!");
-        }
-        
-        // These are further indexed by the set, so if a set name is passed, 
-        // then look for that element, otherwise return the one element. If
-        // there is more than one element, throw an error.
-        if ($setName) {
-            return @$namedElements[$setName];
-        } else {
-            if (count($namedElements) > 1) {
-                throw new Exception("More than one element named '$elementName' exists, so you must choose the name of the element set when displaying these elements!");
-            } else {
-                return current($namedElements);
-            }
-        }                
-    }
-    
-    /**
      * Retrieve the set of element text for the item.
      * 
      * @param string
@@ -305,13 +274,10 @@ class Omeka_View_Helper_Item
             return $this->getOtherField($field, $item);
         }        
         
-        $element = $this->getElementRecordByName($item, $field, @$options['element_set']);
+        $elementName = $field;
+        $elementSetName = @$options['element_set'];
         
-        // Get all the text records for this item.
-        
-        // The element text records are indexed by the element_id for easy 
-        // lookup.
-        $elementText = (array) $item->ElementTexts[$element->id];
+        $elementText = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
         
         // Lock the records so that they can't be accidentally saved back to the
         // database, since we are modifying their values directly at this point.

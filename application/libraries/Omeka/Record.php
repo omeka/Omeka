@@ -221,7 +221,7 @@ class Omeka_Record implements ArrayAccess
         return (bool) count($this->getErrors());
     }
     
-    protected function addError($field, $msg)
+    public function addError($field, $msg)
     {
         if ($field == null) {
             $this->_errors[] = $msg;
