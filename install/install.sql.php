@@ -172,10 +172,11 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}element_sets` (
 
 INSERT INTO `{$db->prefix}element_sets` VALUES (1, 1, 'Dublin Core', 'The Dublin Core metadata element set. These elements are common to all Omeka resourses, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (2, 2, 'Omeka Legacy Item', 'The metadata element set that, in addition to the Dublin Core element set, was included in the `items` table in previous versions of Omeka. These elements are common to all Omeka items. This set may be deprecated in future versions.');
-INSERT INTO `{$db->prefix}element_sets` VALUES (3, 2, 'Generic Item', 'The generic item metadata element set, consisting of all item elements bundled with Omeka and all item elements created by an administrator and not assigned to a particular element set.');
+INSERT INTO `{$db->prefix}element_sets` VALUES (3, 2, 'Item Type', 'The item type metadata element set, consisting of all item type elements bundled with Omeka and all item type elements created by an administrator.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (4, 3, 'Omeka Legacy File', 'The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (5, 3, 'Omeka Image File', 'The metadata element set that was included in the `files_images` table in previous versions of Omeka. These elements are common to all image files.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (6, 3, 'Omeka Video File', 'The metadata element set that was included in the `files_videos` table in previous versions of Omeka. These elements are common to all video files.');
+INSERT INTO `{$db->prefix}element_sets` VALUES (7, 2, 'Generic Item', 'The generic item metadata element set, consisting of all item elements created by an administrator and not assigned to an item type, and elements created by plugins and not assigned to an item type or element set.');
 
 -- --------------------------------------------------------
 
