@@ -507,10 +507,13 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $db = $this->getDb();
         $recordTableName = $this->_record->getTable()->getTableName();
         $recordTypeName = $this->getRecordType();
-        return $db->query(
-            "DELETE etx FROM $db->ElementText etx 
+        // For some reason, this needs the parameters to be quoted directly into the
+        // SQL statement in order for the DELETE to work. It may have something to
+        // do with quoting the array of element IDs into a string.
+        $deleteSql =  "DELETE etx FROM $db->ElementText etx 
             INNER JOIN $recordTableName i ON i.id = etx.record_id 
             INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
-            WHERE rty.name = ? AND i.id = ? AND etx.element_id IN (?)", array($recordTypeName, $this->_record->id, $elementIdArray));        
+            WHERE rty.name = " . $db->quote($recordTypeName) . " AND i.id = " . $db->quote($this->_record->id) . " AND etx.element_id IN (" . $db->quote($elementIdArray) . ")";
+        return $db->query($deleteSql);
     }
 }
