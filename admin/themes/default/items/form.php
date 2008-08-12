@@ -345,27 +345,6 @@ echo js('tiny_mce/tiny_mce');
 	<?php echo display_element_set_form_for_item($item, 'Dublin Core'); ?>
 	
 	<?php echo display_element_set_form_for_item($item, 'Omeka Legacy Item'); ?>
-	    
-         <!-- The language field is the last field on this form that is not
-         accurately represented by the ElementForm class. This needs to be
-         overridden by a filter defined on the admin theme to display the
-         correct languages on this form element. -->
-			<div class="field">
-			<label for="language">Language</label>
-			<?php 
-				echo select(
-					array('id'=>'language','name'=>'language'), 
-					array(
-						'eng'=>'English', 
-						'rus'=>'Russian',
-						'deu'=>'German',
-						'fra'=>'French',
-						'spa'=>'Spanish',
-						'san'=>'Sanskrit'),
-					!empty($item->language) ? $item->language : 'eng'); 
-			?>
-			<span class="tooltip"><?php echo element_metadata('Language', 'description'); ?></span>
-			</div>
 			
 	</fieldset>
 </div>

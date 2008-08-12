@@ -156,10 +156,31 @@ class Omeka_View_Helper_ElementForm
         return "Elements[" . $this->_element['id'] . "][$index]";
     }
     
+    protected function _getPluginFilterForFormInput()
+    {
+        return array(
+            'Form', 
+            get_class($this->_record), 
+            $this->_element->name,
+            $this->_element->set_name);
+    }
+    
     protected function _displayFormInput($inputNameStem, $value, $options=array())
     {
         $fieldDataType = $this->_getElementDataType();
-                        
+        
+        // Plugins should apply a filter to this blank HTML in order to display it in a certain way.
+        $html = '';
+        
+        $filterName = $this->_getPluginFilterForFormInput();
+            
+        $html = apply_filters($filterName, $html, $inputNameStem, $value, $options, $this->_record, $this->_element);
+        
+        // Short-circuit the default display functions b/c we already have the HTML we need.
+        if (!empty($html)) {
+            return $html;
+        }
+                                
         //Create a form input based on the element type name
         switch ($fieldDataType) {
                 
