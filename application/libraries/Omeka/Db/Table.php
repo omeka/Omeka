@@ -247,7 +247,7 @@ class Omeka_Db_Table
     {
         $select = $this->getSelect();
         $select->where($sqlWhereClause, $params);
-        return $findOne ? $this->fetchObject($select, $params) : $this->fetchObjects($select, $params);
+        return $findOne ? $this->fetchObject($select) : $this->fetchObjects($select);
     }
     
     /**
