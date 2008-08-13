@@ -189,6 +189,15 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return !empty($elements) ? $elements : array();
     }
     
+    public function getAllElementsBySet()
+    {
+        if (!$this->_elementsBySet) {
+            $this->loadElementsAndTexts();
+        }
+        
+        return $this->_elementsBySet;
+    }
+    
     public function getElementByNameAndSetName($elementName, $elementSetName = null)
     {
         if (!$this->_elementsByNameAndSet) {
@@ -251,16 +260,36 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * @todo May need to apply ksort() to this to ensure that all sub-arrays are in the correct order.
+     * @todo May need to apply ksort() to this to ensure that all sub-arrays are 
+     *       in the correct order.
+     * @todo May need to optimize this method so we avoid three foreach loops. 
+     *       Somehow using SQL to auto-order unordered elements?
      * 
      * @param array
      * @return array
      **/
     protected function indexElementsBySet(array $elementRecords)
     {
-        $indexed = array();
+        // Account for elements without an order by separating them from 
+        // elements with an order.
+        $orderedRecords = array();
+        $unorderedRecords = array();
         foreach($elementRecords as $record) {
-            $indexed[$record->set_name][(int) $record->order] = $record;
+            if ((int) $record->order) {
+                $orderedRecords[] = $record;
+            } else {
+                $unorderedRecords[] = $record;
+            }
+        }
+        // Now build the index by iterating through the ordered elements first 
+        // then pushing the unordered elements onto the end of the index in 
+        // natural order.
+        $indexed = array();
+        foreach ($orderedRecords as $orderedRecord) {
+            $indexed[$orderedRecord->set_name][(int) $orderedRecord->order] = $orderedRecord;
+        }
+        foreach ($unorderedRecords as $unorderedRecord) {
+            $indexed[$unorderedRecord->set_name][] = $unorderedRecord;
         }
         return $indexed;
     }

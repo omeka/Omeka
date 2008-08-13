@@ -73,7 +73,6 @@ echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 <div id="core-metadata" class="showitem">
 
 <h2>Core Metadata</h2>
-	
 	<?php $coreElementSet = array(
 	    'Subject', 
 	    'Description',

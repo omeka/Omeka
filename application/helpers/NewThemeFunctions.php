@@ -562,3 +562,9 @@ function pagination($options = array('scrolling_style' => null,
                                     $scrollingStyle, 
                                     $partial);
 }
+
+function show_item_metadata(array $options = array())
+{
+    $item = get_current_item();
+    return __v()->itemShow($item, $options);
+}
