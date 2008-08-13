@@ -68,20 +68,20 @@
 <fieldset id="type-information">
 	<legend>Type Information</legend>
 <div class="field">
-<?php text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$type->name, 'Type Name'); ?>
+<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name, 'Name'); ?>
 </div>
 <div class="field">
-<?php textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description', 'rows'=>'10'),$type->description, 'Type Description'); ?>
+<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description', 'rows'=>'10'),$itemtype->description, 'Description'); ?>
 </div>
 </fieldset>
 <fieldset id="type-metafields">
 	<legend>Type Metafields</legend>
 	
 <div id="existing-metafields">
-<?php if($type->exists()): ?>
+<?php if($itemtype->exists()): ?>
 <h2>Edit existing metafields:</h2>
-<?php foreach( $type->Metafields as $index => $metafield ):
-	common('existing-metafield', compact('metafield', 'index'), 'types');
+<?php foreach( $itemtype->Elements as $index => $element ):
+	common('existing-metafield', compact('element', 'index', 'elements'), 'item-types');
 endforeach; ?>
 
 <?php endif; ?>
@@ -93,6 +93,6 @@ endforeach; ?>
 <div id="add"></div>
 
 	<?php $totalMetafields = count($type->Metafields);?>
-	<?php common('new-metafield', array('id'=>$totalMetafields), 'types'); ?>
+	<?php common('new-metafield', array('id'=>$totalMetafields), 'item-types'); ?>
 </div>
 </fieldset>

@@ -8,7 +8,7 @@
                 'id', 
                 'name'); ?>
     <?php else: ?>            
-        <?php echo text(array('name' => "ExistingMetafields[$index][name]"),$metafield->name); ?>    
+        <?php echo text(array('name' => "ExistingMetafields[$index][name]"),$element->name); ?>    
     <?php endif; ?>
     <span>Remove this metafield from the Type</span> 
     <?php echo checkbox(array('name' => "remove_metafield[$index]")); ?>

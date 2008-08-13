@@ -17,13 +17,12 @@ class ItemType extends Omeka_Record {
     
     public $name;
     public $description = '';
-    public $plugin_id;
 
-    protected $_related = array('Metafields' => 'loadMetafields', 
-                                'Items'=>'getItems', 
-                                'Plugin'=>'getPlugin');
+    protected $_related = array('Elements' => 'getElements', 
+                                'Items'=>'getItems');
 
-    public function hasMetafield($name) {
+    public function hasElement($name) {
+        var_dump('fix me!');exit;
         $db = $this->getDb();
         
         $sql = "
@@ -38,23 +37,9 @@ class ItemType extends Omeka_Record {
         return $count > 0;
     }
     
-    protected function loadMetafields()
+    protected function getElements()
     {
-        $db = $this->getDb();
-        $sql = "
-        SELECT m.* 
-        FROM {$db->Metafield} m     
-        INNER JOIN {$db->TypesMetafields} tm 
-        ON tm.metafield_id = m.id 
-        WHERE tm.type_id = ? 
-        GROUP BY m.id";
-        
-        return $this->getTable('Metafield')->fetchObjects($sql, array($this->id));
-    }
-    
-    protected function getPlugin()
-    {
-        return $this->getTable('Plugin')->find($this->plugin_id);
+        return $this->getTable('Element')->findByItemType($this->id);
     }
     
     protected function getItems()
@@ -73,11 +58,11 @@ class ItemType extends Omeka_Record {
     protected function _validate()
     {
         if (empty($this->name)) {
-            $this->addError('name', 'Type name must not be blank');
+            $this->addError('name', 'Item type name must not be blank.');
         }
         
         if (!$this->fieldIsUnique('name')) {
-            $this->addError('name', 'That name has already been used for a different Type');
+            $this->addError('name', 'That name has already been used for a different Type.');
         }
     }
     
@@ -88,7 +73,7 @@ class ItemType extends Omeka_Record {
      **/
     protected function _delete()
     {
-        $tm_objs = $this->getDb()->getTable('TypesMetafields')->findBySql('type_id = ?', array( (int) $this->id));
+        $tm_objs = $this->getDb()->getTable('ItemTypesElements')->findBySql('item_type_id = ?', array( (int) $this->id));
         
         foreach ($tm_objs as $tm) {
             $tm->delete();
@@ -154,7 +139,7 @@ class ItemType extends Omeka_Record {
                 if (!$mf) {
                     $mf = new Metafield;
                 }
-                if (!$this->hasMetafield($mf_name)) {
+                if (!$this->hasElement($mf_name)) {
                     $mf->setArray($mf_array);
                     $this->addMetafield($mf);
                 }

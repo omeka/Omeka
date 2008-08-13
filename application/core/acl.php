@@ -29,7 +29,7 @@ $resources = array(
     'Upgrade'       =>  array('migrate'),
     'Tags'          =>  array('rename','remove', 'browse'),
     'Themes'        =>  array('browse','switch'),
-    'Types'         =>  array('add','edit','delete', 'browse'),
+    'ItemTypes'     =>  array('add','edit','delete', 'browse'),
     'Users'         =>  array('browse','show','add','edit','delete','showRoles','editRoles','makeSuperUser', 'changeRole', 'deleteSuperUser', 'togglePrivilege')
 );
 
@@ -38,7 +38,7 @@ $allowList = array(
     //Anyone can login, logout, retrieve lost password and activate their accounts
     array(null,'Users',array('login', 'logout', 'forgot-password', 'activate')),
     //Anyone can browse Items, Item Types, Tags and Collections
-    array(null, array('Items', 'Types', 'Tags', 'Collections'), array('browse')),
+    array(null, array('Items', 'ItemTypes', 'Tags', 'Collections'), array('browse')),
     //Super user can do anything
     array('super'),
     //Researchers can view items and collections that are not yet public
@@ -50,7 +50,7 @@ $allowList = array(
     array('admin','Entities',array('add','edit','delete', 'displayEmail', 'browse')),
     array('admin','Files',array('edit','delete')),
     array('admin','Tags',array('rename','remove')),
-    array('admin','Types',array('add','edit','delete')),
+    array('admin','ItemTypes',array('add','edit','delete')),
     array('admin','Users',array('browse','show','add','edit','delete','showRoles', 'changeRole')) 
 ); 
 

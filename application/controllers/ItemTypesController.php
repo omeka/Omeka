@@ -16,11 +16,11 @@ require_once 'Omeka/Controller/Action.php';
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class TypesController extends Omeka_Controller_Action
+class ItemTypesController extends Omeka_Controller_Action
 {
     public function init()
     {
-        $this->_modelClass = 'Type';
+        $this->_modelClass = 'ItemType';
     }
     
     /**
@@ -38,5 +38,12 @@ class TypesController extends Omeka_Controller_Action
        } else {
            $this->render('new-metafield');
        }
+    }
+    
+    public function editAction()
+    {
+        $this->view->elements = get_db()->getTable('Element')->findBySql('es.name = ?', array('Item Type'));
+        parent::editAction();
+        
     }
 }
