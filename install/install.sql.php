@@ -370,6 +370,7 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}item_types_elements` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `item_type_id` int(10) unsigned NOT NULL,
   `element_id` int(10) unsigned NOT NULL,
+  `order` int(10) unsigned default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `item_type_id_element_id` (`item_type_id`,`element_id`),
   KEY `item_type_id` (`item_type_id`),
