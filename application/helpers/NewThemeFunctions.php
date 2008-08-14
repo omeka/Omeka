@@ -310,7 +310,19 @@ function select_item_type($props=array(), $value=null)
 
 function select_item_type_elements($props = array(), $value = null)
 {
-    return _select_from_table('ItemTypesElements', $props, $value);
+    // We need a custom SQL statement for this particular select input, since we
+    // are retrieving the elements in a specific set in a specific order.
+    
+    // Retrieve element ID and name for all elements in the Item Type element set.
+    $db = get_db();
+    $sql = $db->getTable('Element')->getSelect()
+            ->where('es.name = ?', 'Item Type')
+            ->reset('columns')->from(array(), array('e.id', 'e.name'))
+            ->order('e.name ASC'); // Sort alphabetically
+    
+    $pairs = $db->fetchPairs($sql);
+    
+    return select($props, $pairs, $value);    
 }
 
 /**

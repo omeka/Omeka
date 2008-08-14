@@ -114,6 +114,22 @@ class ItemTypesController extends Omeka_Controller_Action
         $this->view->elements = $itemType->Elements;
     }
     
+    public function deleteElementAction()
+    {
+        $itemType = $this->findById($this->_getParam('item-type-id'));
+        $elementId = (int)$this->_getParam('element-id');
+                
+        $itemType->removeElement($elementId);
+        
+        // If this is an AJAX request, render the element list again.
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            return $this->_forward('element-list', null, null, array('item-type-id'=>$itemType->id));
+        } else {
+            // If this is a normal HTTP request, redirect to the show page.
+            return $this->redirect->goto('show', null, null, array('id'=>$itemType->id));
+        }
+    }
+    
     protected function getElementFromPost($element)
     {
         // If we are adding an existing element to this item type.

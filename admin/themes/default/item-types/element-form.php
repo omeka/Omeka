@@ -26,7 +26,7 @@
     </div> 
     
     <div class="field" id="select-data-type">
-        <?php echo __v()->formLabel('element-data-type-id', ) ?>
+        <?php echo __v()->formLabel('element-data-type-id', 'Data Type'); ?>
         <?php echo __v()->formRadio('element-data-type-id', 1, array('label_class'=>'radiolabel', 'label_style'=>'float:left;'), $datatypes, ''); ?>
     </div>
     

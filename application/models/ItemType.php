@@ -83,44 +83,25 @@ class ItemType extends Omeka_Record {
     }
     
     /**
-     * Find a specific TypesMetafields join object and delete it (severing the connection between the two)
-     *
+     * Remove a single Element from this item type.
+     * 
+     * @param string
      * @return void
      **/
-    protected function removeMetafield(Metafield $metafield)
+    public function removeElement($elementId)
     {
-        //Find the join and delete it
-        $db  = $this->getDb();
-        $sql = "
-        SELECT tm.* 
-        FROM $db->TypesMetafields tm 
-        WHERE tm.type_id = ? 
-        AND tm.metafield_id = ? 
-        LIMIT 1";
-        $tm  = $this->getTable('TypesMetafields')
-                    ->fetchObjects($sql, array($this->id, $metafield->id), true);
-        $tm->delete();
-    }
-    
-    /**
-     * Add a Metafield to this Type by creating a new join in the TypesMetafields table
-     *
-     * @param Metafield $metafield
-     * @return void
-     **/
-    public function addMetafield(Metafield $metafield)
-    {
-        //save the metafield if its a new one
-        if (!$metafield->exists()) {
-            $metafield->save();
+        if (!$this->exists()) {
+            throw new Exception('Cannot remove elements from an item type that is not persistent in the database!');
         }
         
-        //Add a join row in the TypesMetafields table
-        $tm = new TypesMetafields;
+        // Find the join record and delete it.
+        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?', array($elementId, $this->id), true);
+    
+        if (!$iteJoin) {
+            throw new Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
+        }
         
-        $tm->metafield_id = $metafield->id;
-        $tm->type_id = $this->id;
-        $tm->save();            
+        return $iteJoin->delete();
     }
     
     /**
@@ -162,23 +143,5 @@ class ItemType extends Omeka_Record {
             }            
         }
         $this->loadMetafields();
-    }
-    
-    protected function beforeSaveForm(&$clean)
-    {
-        //duplication (delete/remove existing metafields)
-        foreach( $this->Metafields as $key => $metafield ) {
-            if ($clean['delete_metafield'][$key] == 'on') {
-                $metafield->delete();
-            }
-            if (empty($metafield->name) || $clean['remove_metafield'][$key] == 'on') {                
-                $this->removeMetafield($metafield);
-                //$this->Metafields->remove($key);
-            }
-        }
-        
-        //Make sure that the form doesn't directly set the Metafields and TypesMetafields
-        unset($clean['Metafields']);
-        unset($clean['TypesMetafields']);
     }
 }
