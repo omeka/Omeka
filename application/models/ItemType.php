@@ -8,6 +8,8 @@
 
 require_once 'ItemTypeTable.php';
 
+require_once 'ItemTypesElements.php';
+
 /**
  * @package Omeka
  * @author CHNM

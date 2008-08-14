@@ -5,6 +5,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+
+require_once 'ItemTypesElementsTable.php';
  
 /**
  * 
@@ -17,5 +19,4 @@ class ItemTypesElements extends Omeka_Record
 {
     public $item_type_id;
     public $element_id;
-    public $plugin_id;
 }

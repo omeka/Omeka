@@ -15,5 +15,7 @@
  **/
 class ElementSet extends Omeka_Record
 {
-    
+    public $record_type_id;
+    public $name;
+    public $description;
 }

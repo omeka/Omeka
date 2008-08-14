@@ -6,6 +6,8 @@
  * @package Omeka
  **/
 
+require_once 'DataTypeTable.php';
+
 /**
  * DataType
  *

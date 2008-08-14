@@ -308,6 +308,11 @@ function select_item_type($props=array(), $value=null)
     return _select_from_table('ItemType', $props, $value);	
 }
 
+function select_item_type_elements($props = array(), $value = null)
+{
+    return _select_from_table('ItemTypesElements', $props, $value);
+}
+
 /**
  * @access private
  * @param array
