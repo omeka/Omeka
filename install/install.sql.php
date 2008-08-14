@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}element_sets` (
 -- Dumping data for table `element_sets`
 -- 
 
-INSERT INTO `{$db->prefix}element_sets` VALUES (1, 1, 'Dublin Core', 'The Dublin Core metadata element set. These elements are common to all Omeka resourses, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/.');
+INSERT INTO `{$db->prefix}element_sets` VALUES (1, 1, 'Dublin Core', 'The Dublin Core metadata element set. These elements are common to all Omeka resources, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (2, 2, 'Omeka Legacy Item', 'The metadata element set that, in addition to the Dublin Core element set, was included in the `items` table in previous versions of Omeka. These elements are common to all Omeka items. This set may be deprecated in future versions.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (3, 2, 'Item Type', 'The item type metadata element set, consisting of all item type elements bundled with Omeka and all item type elements created by an administrator.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (4, 3, 'Omeka Legacy File', 'The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions.');
@@ -254,25 +254,6 @@ INSERT INTO `{$db->prefix}entity_relationships` (`id`, `name`, `description`) VA
 (3, 'favorite', NULL),
 (4, 'collector', NULL);
 
--- --------------------------------------------------------
-
--- 
--- Table structure for table `exhibits`
--- 
-
-CREATE TABLE IF NOT EXISTS `{$db->prefix}exhibits` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `title` varchar(255) collate utf8_unicode_ci default NULL,
-  `description` text collate utf8_unicode_ci,
-  `credits` text collate utf8_unicode_ci,
-  `featured` tinyint(1) default '0',
-  `public` tinyint(1) default '0',
-  `theme` varchar(30) collate utf8_unicode_ci default NULL,
-  `slug` varchar(30) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `slug` (`slug`),
-  KEY `public` (`public`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -312,21 +293,6 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}items` (
   PRIMARY KEY  (`id`),
   KEY `item_type_id` (`item_type_id`),
   KEY `collection_id` (`collection_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `items_section_pages`
--- 
-
-CREATE TABLE IF NOT EXISTS `{$db->prefix}items_section_pages` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `item_id` int(10) unsigned default NULL,
-  `page_id` int(10) unsigned NOT NULL,
-  `text` text collate utf8_unicode_ci,
-  `order` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -530,37 +496,6 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}record_types` (
 INSERT INTO `{$db->prefix}record_types` VALUES (1, 'All', 'Elements, element sets, and element texts assigned to this record type relate to all possible records.');
 INSERT INTO `{$db->prefix}record_types` VALUES (2, 'Item', 'Elements, element sets, and element texts assigned to this record type relate to item records.');
 INSERT INTO `{$db->prefix}record_types` VALUES (3, 'File', 'Elements, element sets, and element texts assigned to this record type relate to file records.');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `section_pages`
--- 
-
-CREATE TABLE IF NOT EXISTS `{$db->prefix}section_pages` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `section_id` int(10) unsigned NOT NULL,
-  `layout` varchar(255) collate utf8_unicode_ci default NULL,
-  `order` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `sections`
--- 
-
-CREATE TABLE IF NOT EXISTS `{$db->prefix}sections` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `title` varchar(255) collate utf8_unicode_ci default NULL,
-  `description` text collate utf8_unicode_ci,
-  `exhibit_id` int(10) unsigned NOT NULL,
-  `order` tinyint(3) unsigned NOT NULL,
-  `slug` varchar(30) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`),
-  KEY `slug` (`slug`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
