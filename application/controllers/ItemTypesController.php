@@ -48,51 +48,36 @@ class ItemTypesController extends Omeka_Controller_Action
      **/
     public function addElementAction()
     {
+        $itemTypeId = (int)$this->_getParam('item-type-id');
+        
+        // This should throw an exception if the item type is not valid.
+        $itemType = $this->findById($itemTypeId);
+        $this->view->itemtype = $itemType;
+        
+        // Retrieve a list of the data types that we can use for creating new fields in Omeka.
+        $this->view->datatypes = $this->getDb()->getTable('DataType')->findPairsForSelectForm();
+        
         if (!$_POST) {
-            // Retrieve a list of the data types that we can use for creating new fields in Omeka.
-            $this->view->datatypes = $this->getDb()->getTable('DataType')->findPairsForSelectForm();
-            
             $this->render('element-form');
         } else {
             // Submit the post to create a new element and a new join on the item_types_elements table.
-            $itemTypeId = (int)$this->_getParam('item-type-id');
-            if (empty($itemTypeId)) {
-                // This is an invalid form submission, meaning that the Omeka
-                // form was not actually submitted, or someone tweaked the POST
-                // array.  Should we show an error message or just return nothing?
-                var_dump("Item Type ID was not passed to this request!");exit;
-                return;
-            }
-            
             try {
                 // Try to get the Element record based on the form submission.
                 $element = new Element;
                 $element = $this->getElementFromPost($element);
                 
-                // Once we have a persistent Element record, build the join record.
-                $itemTypeElementJoin = new ItemTypesElements;
-                $itemTypeElementJoin->element_id = $element->id;
-                $itemTypeElementJoin->item_type_id = $itemTypeId;
-                
-                // @todo Order field for this join table must be filled out.
-                
-                $itemTypeElementJoin->forceSave();
+                $itemType->addElement($element->id);
                 
             } catch (Omeka_Validator_Exception $e) {
                 $errors = (string)$element->getErrors();
                 $this->flashValidationErrors($e);
             } catch (Exception $e) {
                 $errors = $e->getMessage();
-                $this->flash($errors, Omeka_Controller_Flash::ERROR);
-            }
-            
-            // If we have an invalid form submission.
-            if (isset($errors)) {
-                var_dump($errors);exit;
+                $this->flash($errors, Omeka_Controller_Flash::GENERAL_ERROR);
             }
             
             // For a valid form submission
-            if (!isset($errors) and $itemTypeElementJoin and $itemTypeElementJoin->exists()) {
+            if (!isset($errors)) {
                 //Check if we're an ajax request
                 
                 // If this is an AJAX request, re-render the partial that displays
@@ -102,6 +87,10 @@ class ItemTypesController extends Omeka_Controller_Action
                 } else {
                     $this->redirect->goto('show', null, null, array('id'=>$itemTypeId));
                 }
+            } else {
+                // If we have an invalid form submission.
+                $this->getResponse()->setHttpResponseCode(422);
+                $this->render('element-form');
             }
         }
     }

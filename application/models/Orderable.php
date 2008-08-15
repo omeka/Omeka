@@ -37,11 +37,16 @@ class Orderable extends Omeka_Record_Mixin
         
         //Now index them according to their order
         $indexed = array();
-        
+
         foreach ($children as $child) {
-            $indexed[(int) $child->order] = $child;
+            // The order could be thrown out of sync by invalid values being stored, 
+            // so this will just append to the array if the index is already taken.
+            if (($order = (int)$child->order) and !array_key_exists($order, $children)) {
+                $indexed[$order] = $child;
+            } else {
+                $indexed[] = $child;
+            }
         }
-        
         return $indexed;
     }
     
@@ -56,7 +61,7 @@ class Orderable extends Omeka_Record_Mixin
             //Change the order of the sections
             foreach ($form as $key => $entry) {
                 $child = $children[$key];
-                $child->order = $entry['order'];                
+                $child->order = (int)$entry['order'];                
                 $child->save();
             }
         }                

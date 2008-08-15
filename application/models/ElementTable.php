@@ -66,22 +66,6 @@ class ElementTable extends Omeka_Db_Table
     }
     
     /**
-     * Index a set of Elements based on their name.
-     * 
-     * @todo Deprecate and move to ActsAsElementText::indexByNameAndSet().
-     * @param array
-     * @return array
-     **/
-    protected function indexByNameAndSet(array $elementRecords)
-    {
-        $indexed = array();
-        foreach($elementRecords as $record) {
-            $indexed[$record->name][$record->set_name] = $record;
-        }
-        return $indexed;        
-    }
-
-    /**
      * Return the element's name and id for <select> tags on it.
      * 
      * @see Omeka_Db_Table::findPairsForSelectForm()
@@ -168,6 +152,7 @@ class ElementTable extends Omeka_Db_Table
         $db = $this->getDb();
         $select->joinInner(array('ite'=>$db->ItemTypesElements), 'ite.element_id = e.id', array());
         $select->where('ite.item_type_id = ?');
+        $select->order('ite.order ASC');
         
         $elements = $this->fetchObjects($select, array($itemTypeId)); 
 

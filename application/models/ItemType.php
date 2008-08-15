@@ -7,7 +7,7 @@
  **/
 
 require_once 'ItemTypeTable.php';
-
+require_once 'Orderable.php';
 require_once 'ItemTypesElements.php';
 
 /**
@@ -21,22 +21,23 @@ class ItemType extends Omeka_Record {
     public $description = '';
 
     protected $_related = array('Elements' => 'getElements', 
-                                'Items'=>'getItems');
+                                'Items'=>'getItems',
+                                'ItemTypesElements'=>'loadOrderedChildren');
 
-    public function hasElement($name) {
-        var_dump('fix me!');exit;
-        $db = $this->getDb();
-        
-        $sql = "
-        SELECT COUNT(m.id) 
-        FROM $db->Metafield m 
-        INNER JOIN $db->TypesMetafields tm 
-        ON tm.metafield_id = m.id
-        WHERE tm.type_id = ? 
-        AND m.name = ?";
-        
-        $count = (int) $db->fetchOne($sql, array($this->id, $name));
-        return $count > 0;
+    public function construct()
+    {
+        // For future reference, these arguments mean: 
+        // 1) the current object
+        // 2) the name of the model that represents the 'child' objects, otherwise 
+        // known as the ordered set belonging to this object.
+        // 3) the foreign key in that model that corresponds to the primary key in this model
+        // 4) The name for the part of the form that contains info about how
+        // these child objects are ordered. The post for this model's form should
+        // always contain the 'Elements' key with a subkey called 'order', so that
+        // the array looks something like this: $_POST['Elements'][0]['order'] = 1, etc.
+        // NOTE: this has been changed to 'fooobar' in order to circumvent using
+        // Orderable::afterSaveForm() in favor of ItemType::reorderElementsFromPost().
+        $this->_mixins[] = new Orderable($this, 'ItemTypesElements', 'item_type_id', 'fooobar');
     }
     
     protected function getElements()
@@ -83,6 +84,59 @@ class ItemType extends Omeka_Record {
     }
     
     /**
+     * Whenever we save the item-type form, reorder the elements based on the keys given in the post.
+     * 
+     * @param string
+     * @return void
+     **/
+    protected function beforeSaveForm($post)
+    {
+        if ($this->exists()) {
+            $this->reorderElementsFromPost($post);
+        }
+    }
+
+    /**
+     * This extracts the ordering for the elements from the form's POST, then uses 
+     * the given ordering to resort the join records from item_types_elements into
+     * a new ordering, which is then saved.
+     * 
+     * @param string
+     * @return void
+     **/
+    public function reorderElementsFromPost(&$post)
+    {
+        $elementPostArray = $post['Elements'];
+        
+        if (!array_key_exists('order', current($elementPostArray))) {
+            throw new Exception('Form was submitted in an invalid format!');
+        }
+        
+        // This is how we sort the multi-dimensional array based on the element_order.
+        $ordering = pluck('order', $elementPostArray);
+        $joinRecordArray = $this->ItemTypesElements;        
+        // This is essentially voodoo magic.
+        array_multisort($ordering, SORT_ASC, SORT_NUMERIC, $joinRecordArray);
+        
+        $i = 0;
+        foreach ($joinRecordArray as $key => $joinRecord) {
+            $joinRecord->order = ++$i;
+            $joinRecord->forceSave();
+        }
+    }
+    
+    public function addElement($elementId)
+    {
+        // Once we have a persistent Element record, build the join record.
+        $iteJoin = new ItemTypesElements;
+        $iteJoin->element_id = $elementId;
+        $iteJoin->item_type_id = $this->id;
+        // 'order' should be last by default.
+        $iteJoin->order = $this->getChildCount() + 1;
+        $iteJoin->forceSave();
+    }
+    
+    /**
      * Remove a single Element from this item type.
      * 
      * @param string
@@ -101,47 +155,9 @@ class ItemType extends Omeka_Record {
             throw new Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
         }
         
-        return $iteJoin->delete();
-    }
-    
-    /**
-     * Post commit hook that will add metafields to a type
-     * This occurs post-commit because that ensures that the Type has a valid ID
-     *
-     * @return void
-     **/
-    protected function afterSaveForm($post)
-    {
-        //Add new metafields
-        foreach ($post['NewMetafields'] as $key => $mf_array) {
-            
-            $mf_name = $mf_array['name'];
-            
-            if (!empty($mf_name)) {
-                $mf = $this->getDb()->getTable('Metafield')->findByName($mf_name);
-                if (!$mf) {
-                    $mf = new Metafield;
-                }
-                if (!$this->hasElement($mf_name)) {
-                    $mf->setArray($mf_array);
-                    $this->addMetafield($mf);
-                }
-            }
-        }
+        $iteJoin->delete();
         
-        //Add new joins for pre-existing metafields
-        if (!empty($post['ExistingMetafields'])) {
-            foreach ($post['ExistingMetafields'] as $key => $tm_array) {            
-                $tm = new TypesMetafields;
-                $tm->metafield_id = $tm_array['metafield_id'];
-                $tm->type_id = $this->id;
-            
-                //Save & suppress duplicate key errors
-                try {
-                    $tm->save();
-                } catch (Exception $e) {}
-            }            
-        }
-        $this->loadMetafields();
+        // Deleting one of the joins throws the whole thing out of whack, so we need to reset the ordering.
+        $this->reorderChildren();
     }
 }

@@ -1,26 +1,38 @@
 <script type="text/javascript" charset="utf-8">
 	
 	Event.observe(window, 'load', function(){	  
-	    // When we submit the form, AJAX request it instead and examine the results.  
-	    $('add-element-form').observe('submit', function(e){
-	        e.stop();
-	        this.request({
-	            onComplete: function(t) {
-	                var list = $('element-list');
-	                list.update(t.responseText);
-	                $('type-elements').scrollTo();
-	                new Effect.Highlight(list);
-	                
-	                activateDeleteElementLinks();
-	            },
-	            onFailure: function(t) {
-	                
-	            },
-	            onSuccess: function(t) {
-	                
-	            }
-	        });
-	    });
+	    
+	    var activateElementForm = function() {
+	        // When we submit the form to add an element to an item type, AJAX 
+	        // request it instead and branch on the results.
+	        // This AJAX request will either return the form partial on failure,
+	        // or the form's list of elements on success.  
+    	    $('add-element-form').observe('submit', function(e){
+    	        e.stop();
+    	        this.request({
+    	            // Update the element-form partial when this fails (validation errors, etc.)
+    	            onFailure: function(t) {
+    	                var partial = $('element-form');
+    	                partial.update(t.responseText);
+    	                new Effect.Highlight(partial);
+    	                
+    	                activateElementForm();
+    	            },
+    	            // Update the element-list partial when this succeeds.
+    	            onSuccess: function(t) {
+    	                var list = $('element-list');
+    	                list.update(t.responseText);
+    	                // Scroll to the list's header so you can see everything.
+    	                $('type-elements').scrollTo();
+    	                new Effect.Highlight(list);
+
+    	                activateDeleteElementLinks();
+    	            }
+    	        });
+    	    });
+	    };
+	    
+	    activateElementForm();
 	    
 	    var activateDeleteElementLinks = function() {
     	    // Turn all the links into AJAX requests that will actually delete the element and reload the list.
@@ -28,11 +40,12 @@
     	        e.stop();
 
     	        new Ajax.Request(this.href, {
+    	            // Update the text and make sure this responds to ajax requests.
     	            onSuccess: function(t) {
-    	                // Update the text and make sure this responds to ajax requests.
     	                $('element-list').update(t.responseText);
     	                activateDeleteElementLinks();
     	            },
+    	            // What to do in this case?  Freak out.
     	            onFailure: function(t) {
     	                alert(t.status);
     	            }

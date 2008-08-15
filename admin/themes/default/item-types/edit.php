@@ -8,7 +8,11 @@
 	<p id="delete_link"><a class="delete" href="<?php echo url_for_record($itemtype, 'delete', 'item-types'); ?>">Delete This Type</a></p>
 </form>
 
-<?php echo $this->action('add-element', 'item-types'); ?>
+<div id="element-form">
+<?php 
+// Render the add-element action, which renders the element-form partial.
+echo $this->action('add-element', 'item-types', null, array('item-type-id'=>$itemtype->id)); ?>
+</div>
 
 </div>
 <?php foot(); ?>

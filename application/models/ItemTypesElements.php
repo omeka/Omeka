@@ -19,4 +19,5 @@ class ItemTypesElements extends Omeka_Record
 {
     public $item_type_id;
     public $element_id;
+    public $order;
 }

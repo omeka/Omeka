@@ -1,3 +1,5 @@
+<?php echo flash(); ?>
+
 <form action="<?php echo url_for('item-types/add-element'); ?>" method="post" accept-charset="utf-8" id="add-element-form">
 
 <h2>Add an Element to this Item Type</h2>
