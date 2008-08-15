@@ -258,132 +258,49 @@ echo js('tiny_mce/tiny_mce');
 </script>
 
 <?php echo flash(); ?>
-<ul id="tertiary-nav" class="navigation">
-	<li id="stepbutton1"><a href="#step1">Step One</a></li>
-	<li id="stepbutton2"><a href="#step2">Step Two</a></li>
-	<li id="stepbutton3"><a href="#step3">Step Three</a></li>
-</ul>
-<div class="toggle" id="step1">
-	<fieldset>
-		<legend>Type Metadata</legend>
 
-			<div class="field" id="type-select">
-				<?php
-				echo label('item-type', 'Item Type'); 
-				echo select_item_type_for_item(array(	
-            				'name'	=> 'item_type_id',
-            				'id'	=> 'item-type' )); ?>
-			<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
-			</div>
-			<div id="type-metadata-form">
-			<?php common('change-type', compact('item'), 'items'); ?>
-			</div>
-			</fieldset>
-			<fieldset>
-			<legend>Add Files</legend>
-			<div class="field" id="add-more-files">
-			<label for="add_num_files">Add Files</label>
-				<div class="files">
-				<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
-				<?php 
-				echo text(array('name'=>'add_num_files','size'=>2),$numFiles);
-				echo submit('Add this many files', 'add_more_files'); 
-				?>
-				</div>
-			</div>
-			
-			<div class="field" id="file-inputs">
-			<!-- MAX_FILE_SIZE must precede the file input field -->
-				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-				<label>Find a File</label>
-					
-				<?php for($i=0;$i<$numFiles;$i++): ?>
-				<div class="files">
-					<input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />			
-				</div>
-				<?php endfor; ?>
-			</div>
-			
-			<?php fire_plugin_hook('append_to_item_form_upload', $item); ?>
-		
-		<?php if ( item_has_files() ): ?>
-			<div class="label">Edit File Metadata</div>
-			<div id="file-list">
-			<table>
-				<thead>
-					<tr>
-						<th>File Name</th>
-						<th>Delete?</th>
-					</tr>
-				</thead>
-				<tbody>
-			<?php foreach( $item->Files as $key => $file ): ?>
-				<tr>
-					<td class="file-link">
-						<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">
-			
-							
-								
-								<?php echo h($file->original_filename); ?>
-						</a>
-					</td>
-					<td class="delete-link">
-						<?php echo checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
-					</td>	
-				</tr>
-		
-			<?php endforeach; ?>
-			</tbody>
-			</table>
-			</div>
-			<?php endif; ?>
-			</fieldset>
-	</div>
-	<div id="step2" class="toggle">
-<fieldset id="core-metadata">
-	<legend>Dublin Core Metadata</legend>
-	<?php echo display_element_set_form_for_item($item, 'Dublin Core'); ?>
-	
-	<?php echo display_element_set_form_for_item($item, 'Omeka Legacy Item'); ?>
-			
-	</fieldset>
+<!-- Create the tabs for the various element sets -->
+<?php foreach ($elementSets as $key => $elementSet): ?>
+<div class="tabs" id="<?php echo text_to_id($elementSet->name); ?>-metadata">
+    <fieldset>
+        <legend><?php echo htmlentities($elementSet->name); ?> Metadata</legend>
+        <?php 
+        // Would prefer to display all the metadata sets in the same way, but this
+        // necessitates branching for the Item Type set.
+        switch ($elementSet->name):
+            case 'Item Type':
+                include 'item-type-form.php';
+                break;
+            default:
+                echo display_element_set_form_for_item($item, $elementSet->name);
+                break;
+        endswitch; ?>        
+    </fieldset>
 </div>
-<div id="step3" class="toggle">
-	<fieldset id="collection-metadata">
-		<legend>Collection Metadata</legend>
-		<div class="field">
-		<?php 
-		echo label('collection-id', 'Collection');
-		echo select_collection(array('name'=>'collection_id', 'id'=>'collection-id'),
-			$item->collection_id); ?>
-		</div>
-	</fieldset>
+<?php endforeach; ?>
 
-	<fieldset id="miscellaneous">
-		<legend>Miscellaneous</legend>
-		
-		<?php if ( has_permission('Items', 'makePublic') ): ?>
-			<div class="field">
-				<div class="label">Item is public:</div> 
-				<div class="radio"><?php echo radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
-			</div>
-		<?php endif; ?>
-		<?php if ( has_permission('Items', 'makeFeatured') ): ?>
-			<div class="field">
-				<div class="label">Item is featured:</div> 
-				<div class="radio"><?php echo radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
-			</div>
-		<?php endif; ?>
-	
-	</fieldset>
-	
-	<fieldset>
-		<legend>Tagging</legend>
-			<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
-			<div id="tag-form">
-			<?php common('tag-form', compact('item'), 'items'); ?>
-			</div>
-	</fieldset>
-	<fieldset id="additional-plugin-data">
-		<?php fire_plugin_hook('append_to_item_form', $item); ?>
-	</fieldset>
+<!-- Create the tabs for the rest of the form -->
+<?php 
+// Each one of these tabs is a partial file for purposes of clean separation.
+$otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
+<?php foreach ($otherTabs as $tabName): ?>
+    <div class="tabs" id="<?php echo text_to_id($tabName);?>-metadata">
+    <fieldset>
+        <legend><?php echo $tabName; ?></legend>
+    <?php switch ($tabName): 
+            case 'Collection':
+                require 'collection-form.php';
+            break;
+            case 'Files':
+                require 'files-form.php';
+            break;
+            case 'Tags':
+                require 'tag-form.php';
+            break;
+            case 'Miscellaneous':
+                require 'miscellaneous-form.php';
+            break; 
+        endswitch; ?>
+    </fieldset>
+    </div>
+<?php endforeach; ?>

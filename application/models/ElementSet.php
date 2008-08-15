@@ -5,6 +5,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+
+require_once 'ElementSetTable.php';
  
 /**
  * 

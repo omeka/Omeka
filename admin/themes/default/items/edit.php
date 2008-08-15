@@ -6,7 +6,6 @@
 
 	<form method="post" enctype="multipart/form-data" id="item-form" action="">
 		<?php include 'form.php'; ?>
-		</div>
 		<p id="item-form-submits">
 		    <button type="submit" name="submit">Save Changes</button> or 
 		    <?php echo link_to_item('show', 'Cancel', 

@@ -40,12 +40,22 @@ class ItemsController extends Omeka_Controller_Action
         }        
     }
     
+    protected function _getItemElementSets()
+    {
+        return $this->getTable('ElementSet')->findForItems();
+    }
+    
     /**
-     * This wraps the builtin method with permissions checks
+     * Adds an additional permissions check to the built-in edit action.
+     * 
+     * Also 
      *
      **/
     public function editAction()
     {
+        // Get all the element sets that apply to the item.
+        $this->view->elementSets = $this->_getItemElementSets();
+        
         if ($user = $this->getCurrentUser()) {
             
             $item = $this->findById();
