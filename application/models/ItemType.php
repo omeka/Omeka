@@ -45,9 +45,13 @@ class ItemType extends Omeka_Record {
         return $this->getTable('Element')->findByItemType($this->id);
     }
     
-    protected function getItems()
+    protected function getItems($count = 10, $recent=true)
     {
-        return $this->getTable('Item')->findBy(array('type'=>$this->id));
+        $params = array('type'=>$this->id, 'per_page'=>$count);
+        if ($recent) {
+            $params['recent'] = true;
+        }
+        return $this->getTable('Item')->findBy($params);
     }
     
     /**
