@@ -71,6 +71,14 @@ class ItemsController extends Omeka_Controller_Action
         $this->forbiddenAction();
     }
     
+    public function addAction()
+    {
+        // Get all the element sets that apply to the item.
+        $this->view->elementSets = $this->_getItemElementSets();
+        
+        return parent::addAction();
+    }
+    
     /**
      * Wrapping this crap with permissions checks
      *
