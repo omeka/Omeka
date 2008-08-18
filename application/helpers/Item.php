@@ -97,7 +97,7 @@ class Omeka_View_Helper_Item
             return snippet($texts, 0, $length);
         } else if (is_array($texts)) {
             foreach ($texts as $textRecord) {
-                $textRecord->setText(snippet($textRecord->getText(), 0, $snippetLength));
+                $textRecord->setText(snippet($textRecord->getText(), 0, $length));
             }   
             return $texts;         
         }
