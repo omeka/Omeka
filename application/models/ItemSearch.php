@@ -48,9 +48,7 @@ class ItemSearch
         $db = $this->getDb();
 
         $select = $this->getSelect();
-                
-        $select->joinInner(array('ie'=>$db->ItemsElements), 'ie.item_id = i.id', array());
-        
+                        
         foreach ($advanced as $k => $v) {
             
             $value = $v['terms'];
@@ -91,21 +89,20 @@ class ItemSearch
             
             $elementId = (int) $v['element_id'];
             
-            // For example:
-            // SELECT i.id FROM omeka_items i
-            //  LEFT JOIN omeka_items_elements ie 
-            //  ON ie.item_id = i.id AND ie.element_id = 3
-            //  WHERE ie.text IS NULL
-            $subQuery = new Omeka_Db_Select;
-            $subQuery->from(array('i'=>$db->Item), array('i.id'))
-                ->joinLeft(array('ie'=>$db->ItemsElements), 
-                'ie.item_id = i.id AND ie.element_id = ' . $elementId, array())
-                ->where('ie.text '. $predicate);
+            // This does not use Omeka_Db_Select b/c there is no conditional SQL
+            // and it is easier to read without all the extra cruft.
+            $subQuery = "SELECT i.id FROM $db->Item i 
+                        LEFT JOIN $db->ElementText etx 
+                        ON etx.record_id = i.id AND etx.element_id = " . $db->quote($elementId) ."
+                        LEFT JOIN $db->RecordType rty
+                        ON etx.record_type_id = rty.id AND rty.name = 'Item'
+                        WHERE etx.text $predicate";
             
             // Each advanced search mini-form represents another subquery
            $select->where('i.id IN ( ' . (string) $subQuery . ' )'); 
 
         }
+
     }
     
     /**
