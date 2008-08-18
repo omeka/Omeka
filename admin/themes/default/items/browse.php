@@ -1,14 +1,15 @@
 <?php head(array('title'=>'Browse Items', 'body_class'=>'items')); ?>
 <div id="primary">
 <?php echo flash(); ?>
-<?php if ( total_results() ): ?>
 
-<h1 class="floater">Browse Items (<?php echo total_results();?> items total)</h1>
 <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
 
 <?php echo simple_search(array('id'=>'search'), url_for('items/browse')); ?>
 
 <?php echo link_to_advanced_search(); ?>
+<?php if ( total_results() ): ?>
+
+<h1 class="floater">Browse Items (<?php echo total_results();?> items total)</h1>
 
 <div id="browse-meta">
 <div class="pagination"><?php echo pagination(); ?></div>
