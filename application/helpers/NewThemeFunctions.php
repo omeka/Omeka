@@ -397,13 +397,18 @@ function select_entity($props = array(), $value = null)
 /**
  * Retrieve the current Item record
  * 
+ * @throws Exception
  * @access private
  * @param string
  * @return void
  **/
 function get_current_item()
 {
-    return __v()->item;
+    if (!($item = __v()->item)) {
+        throw new Exception('An item has not been set to be displayed on this theme page!  Please see Omeka documentation for details.');
+    }
+    
+    return $item;
 }
 
 /**
