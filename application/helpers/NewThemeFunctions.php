@@ -266,6 +266,58 @@ function display_files_for_item($options = array())
 }
 
 /**
+ * Returns the HTML markup for displaying a random featured item.  Most commonly
+ * used on the home page of public themes.
+ * 
+ * @param boolean Whether or not the featured item should have an image associated 
+ * with it.  If set to true, this will either display a clickable square thumbnail 
+ * for an item, or it will display "You have no featured items." if there are 
+ * none with images.
+ * @return string HTML
+ **/
+function display_random_featured_item($withImage=false)
+{
+    $featuredItem = random_featured_item();
+    set_current_item($featuredItem); // Needed for transparent access of item metadata.
+	$html = '<h2>Featured Item</h2>';
+	if ($featuredItem) {
+	   $html .= '<h3>' . link_to_item() . '</h3>';
+	   if (item_has_thumbnail()) {
+	       $html .= link_to_square_thumbnail($featuredItem, array('class'=>'image'));
+	   }
+	   // Grab the 1st Dublin Core description field (first 150 characters)
+	   $itemDescription = item('Description', array('snippet'=>150, 'index'=>0, 'element_set'=>'Dublin Core'));
+	   $html .= '<p class="item-description">' . $itemDescription . '</p>';
+	} else {
+	   $html .= '<p>You have no featured items.</p>';
+	}
+    
+    return $html;
+}
+
+/**
+ * Returns the HTML markup for displaying a random featured collection.  This will display an 
+ * 
+ * @param string
+ * @return void
+ **/
+function display_random_featured_collection()
+{
+    $featuredCollection = random_featured_collection();
+    $html = '<h2>Featured Collection</h2>';
+    if ( $featuredCollection ) {
+        $html .= '<h3>' . link_to_collection($featuredCollection) . '</h3>';
+        if ($featuredCollection->description) {
+            $html .= '<p class="collection-description">' . apply_filters('html_escape', snippet($featuredCollection->description, 0, 150)) . '</p>';
+        }
+        
+    } else {
+        $html .= '<p>You have no featured collections.</p>';
+    }
+    return $html;
+}
+
+/**
  * @uses current_user_tags()
  * @uses get_current_item()
  * @param string
