@@ -32,28 +32,18 @@
 		
 		<div id="header">
 			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php echo settings('site_title'); ?></a></div>
-			<div id="user-meta"><p>Welcome, <?php echo current_user()->first_name; ?>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
+			<div id="user-meta"><p>Welcome, <a href="<?php echo uri('users/show/'.current_user()->id); ?>"><?php echo current_user()->first_name; ?></a>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
 			<p><?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?></p></div>
 			
 			<?php if (has_permission('Settings', 'edit')): ?>
+			    
     			<a id="site-settings-admin" href="<?php echo url_for('settings'); ?>">Site Settings</a>
 			<?php endif; ?>
 									
-			<ul id="primary-nav" class="navigation">
-			<?php
-				$headerNav = array(
-				    'Dashboard' => url_for(''), 
-				    'Items' => url_for('items'), 
-				    'Collections' => url_for('collections'),
-				    'Item Types' => url_for('item-types'),
-				    'Tags' => url_for('tags'));
-							
-				echo nav(apply_filters('admin_navigation_main', $headerNav));
-			?>
-			</ul>
+            <?php echo common('primary-nav'); ?>
 		</div>
 		
 		
 		
 		<div id="content">
-			
+			<div class="wrapper">

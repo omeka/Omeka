@@ -12,10 +12,12 @@
 		</tr>
 	</thead>
 	<tbody>
+	    <?php $key = 0; ?>
 <?php while(loop_items()): ?>
-<tr class="item<?php if($key%2==1) echo ' even'; else echo ' odd'; ?>">
-	<td scope="row"><?php echo item('id');?></td> 
-	<td><?php echo link_to_item(); ?></td>
+<tr class="item<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
+	<td scope="row"><?php echo item('id');?>
+    </td> 
+	<td class="title"><?php echo link_to_item(); ?></td>
 	<td><?php echo item('Item Type Name'); ?></td>
 	<td><?php echo item('Creator', 0); ?></td>	
 	<td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>

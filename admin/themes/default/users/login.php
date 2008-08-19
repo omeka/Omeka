@@ -1,4 +1,4 @@
-<?php head(array(), 'login'); ?>
+<?php head(array('bodyclass'=>'login'), 'login-header'); ?>
 
 <h1>Login</h1>
 	<?php
@@ -28,4 +28,4 @@
 <li id="forgotpassword"><a href="<?php echo uri('users/forgot-password'); ?>">Lost your password?</a></li>
 </ul>
 
-<?php foot(); ?>
+<?php foot(array(),'login-footer'); ?>

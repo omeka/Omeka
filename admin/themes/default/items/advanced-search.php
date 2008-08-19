@@ -4,7 +4,7 @@ head(array('title'=>'Advanced Search')); ?>
 <div id="primary">    
 <?php endif; ?>
 
-<h2 id="search-header" class="close">Search Items</h2>
+<h1>Search Items</h1>
 
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
@@ -16,19 +16,13 @@ head(array('title'=>'Advanced Search')); ?>
 //]]>	
 </script>
 	
-
 <form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo url_for('items/browse'); ?>" method="get">
 	
-	<fieldset id="basic_search">
-		<legend>Basic Search</legend>
 		<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
-	</fieldset>
-	<fieldset id="advanced_search">
-		<legend>Advanced Search</legend>
 		
 		<h3>Search by Specific fields</h3>
 		
-		<div id="advanced-search">
+		<div id="advanced-search" class="field">
 			
 				<?php 
 				//If the form has been submitted, retain the number of search fields used and rebuild the form
@@ -74,11 +68,12 @@ head(array('title'=>'Advanced Search')); ?>
 			
 		</div>
 		
-		<div id="search-by-range">
+		<div id="search-by-range" class="field">
+		    <h3>Search by a range of ID#s (example: 1-4, 156, 79)</h3>
 			<?php echo text(
 				array('name'=>'range', 'class'=>'textinput'), 
 				@$_GET['range'], 
-				'Search by a range of ID#s (example: 1-4, 156, 79)'); ?>
+				'Range'); ?>
 		</div>
 		
 		<div id="search-selects">
@@ -94,15 +89,16 @@ head(array('title'=>'Advanced Search')); ?>
 		echo select_user(array('name'=>'user', 'id'=>'user-search'), $_REQUEST['user']);
 	?>
 	<?php endif; ?>
-	    <label for="tag-search">Search by Tags</label>
-		<input type="text" class="textinput" name="tags" id="tag-search" value="<?php echo h($_REQUEST['tags']); ?>" />
+	<?php 
+	echo label('tags', 'Search By Tags'); 
+	echo text(array('name'=>'tags','id'=>'tag-search','class'=>'textinput'),$_REQUEST['tags']);
+	?>
 	</div>
 	<div id="search-checkboxes">
 	<?php 
-		if (has_permission('Items','showNotPublic')) {
-		    echo checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 
-		}				
 		
+	    if (has_permission('Items','showNotPublic')) { echo checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 			
+	}
 		echo checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
 	?>
 	</div>

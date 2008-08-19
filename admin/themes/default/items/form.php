@@ -252,16 +252,30 @@ echo js('tiny_mce/tiny_mce');
     });
 
 
-
-
 //]]>	
 </script>
 
 <?php echo flash(); ?>
+<!-- Create the sections for the various element sets -->
 
-<!-- Create the tabs for the various element sets -->
+<ul class="secondary-nav" id="form-navigation">
+    
+    <?php foreach ($elementSets as $key => $elementSet): ?>
+    <li><a href="#<?php echo text_to_id($elementSet->name); ?>-metadata"><?php echo $elementSet->name; ?></a></li>
+    
+    <?php endforeach; ?>
+    
+    <?php 
+    $otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
+    <?php foreach ($otherTabs as $tabName): ?>
+    <li><a href="#<?php echo text_to_id($tabName);?>-metadata"><?php echo $tabName; ?></a></li>
+    <?php endforeach; ?>
+    
+</ul>
+
+<div id="item-metadata">
 <?php foreach ($elementSets as $key => $elementSet): ?>
-<div class="tabs" id="<?php echo text_to_id($elementSet->name); ?>-metadata">
+<div class="set" id="<?php echo text_to_id($elementSet->name); ?>-metadata">
     <fieldset>
         <legend><?php echo htmlentities($elementSet->name); ?> Metadata</legend>
         <?php 
@@ -284,7 +298,7 @@ echo js('tiny_mce/tiny_mce');
 // Each one of these tabs is a partial file for purposes of clean separation.
 $otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
 <?php foreach ($otherTabs as $tabName): ?>
-    <div class="tabs" id="<?php echo text_to_id($tabName);?>-metadata">
+    <div class="set" id="<?php echo text_to_id($tabName);?>-metadata">
     <fieldset>
         <legend><?php echo $tabName; ?></legend>
     <?php switch ($tabName): 
@@ -304,3 +318,4 @@ $otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
     </fieldset>
     </div>
 <?php endforeach; ?>
+</div>

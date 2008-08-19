@@ -36,17 +36,18 @@
 </fieldset>
 
 <fieldset>
-    <input type="submit" name="submit" value="Save Changes" />
+    <input type="submit" class="submit" id="save-changes" name="submit" value="Save Changes" />
 </fieldset>
 
 </form>
 
 <?php elseif(!total_items(true)): ?>
 	<div id="no-items">
-	<h1>There are no items in the archive yet.
+	    <h1>Browse Items</h1>
+	<p>There are no items in the archive yet.
 	
 	<?php if(has_permission('Items','add')): ?>
-		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?</h1>
+		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?</p>
 	<?php endif; ?>
 </div>
 	

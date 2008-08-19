@@ -12,7 +12,7 @@ Event.observe(window,'load', function() {
 </script>
 <div id="primary">
 <?php echo flash(); ?>
-<h2>Edit Settings</h2>
+<h1>General Settings</h1>
 
 <form method="post" action="">
 	<fieldset>

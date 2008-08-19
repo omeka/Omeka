@@ -61,7 +61,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#a1988
 	label {font-size:1.2em; font-weight:bold; margin-bottom:0.5em;}
 	input, select {border:0; background-color:transparent !important;}
 	input.textinput {border:1px solid #DDDAD3;padding:3px;background:#fff !important;}
-	legend {font-size:1.5em;font-weight:normal; line-height:1.2em; margin-bottom:1.2em; color:#c50; }
+	
 	
 	/* Misc Classes */
 	.navigation {overflow:hidden; zoom:1;}
@@ -199,19 +199,6 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#a1988
 	#add-item {background-color:#d4ecb5; border:1px solid #ccc;border-width:1px; border-right-color: #696; border-bottom-color: #696;position:absolute; top:18px; right:18px;float:right; padding:8px 12px 8px 30px; background-position:8px 50%; font-size:1.2em; color:#060;width:6em; display:block;}
 	#add-item:hover {background-color:#e9f6da;}
 	
-	#view-style {list-style:none; font-size:1.1em;overflow:hidden; zoom:1; border-bottom: 6px solid #389;margin-bottom:18px;}
-	#view-style li {display:block; float:left; width: 10em;margin:0 1px 0 0;}
-	#view-style li a {display:block; float:left; width: 8em;padding: 1em;border-bottom:1px solid #fff;text-align:center;color:#fff; text-decoration:none; background: #7DB3BE;}
-		#view-style li a:hover {background: #589EAC;}
-		#view-style a.current, #view-style a.current:hover {background: #389;border-bottom-color: #389;}
-	
-	table#items {margin-top:-12px;}
-	
-	/* Item Add/Edit Styles */
-	
-	#form-navigation {float:left; width: 270px; font-size:1.5em;}
-		#form-navigation a {text-decoration:none; display:block; background: #d3cfc6; color: #333; margin-bottom:1px;padding: 8px 12px;}
-	#item-metadata {margin-left: 298px;}
 	/* Collection Browse styles */
 	#add-collection {background-color:#d4ecb5; border:1px solid #ccc;border-width:1px; border-right-color: #696; border-bottom-color: #696;position:absolute; top:18px; right:18px;float:right; padding:8px 12px 8px 30px; background-position:8px 50%; font-size:1.2em; color:#060;width:8em; display:block;}
 	#add-collection:hover {background-color:#e9f6da;}
@@ -236,6 +223,3 @@ input.login:hover, #add_item:hover {background-position:0 -31px !important;curso
 #login-form input.login, #add_item {float:right;margin-top:9px; text-transform: uppercase; letter-spacing:1px; font-size:0.8em;}
 #login-form div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
 #login-form label {}
-
-#add_item, #save-changes {background:none; float:right;color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
-#add_item:hover, #save-changes:hover {background-position:0 0 !important;cursor:pointer;}

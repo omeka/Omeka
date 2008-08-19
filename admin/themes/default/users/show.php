@@ -2,7 +2,7 @@
 <?php common('users-nav'); ?>
 
 <div id="primary">
-<h2>User: <?php echo h($user->first_name); ?> <?php echo h($user->last_name); ?> <a class="edit" href="<?php echo uri('users/edit/'.$user->id); ?>">(Edit)</a></h2>
+<h1>User: <?php echo h($user->first_name); ?> <?php echo h($user->last_name); ?> <a class="edit" href="<?php echo uri('users/edit/'.$user->id); ?>">(Edit)</a></h1>
 <dl>
 	<dt>Username</dt>
 	<dd><?php echo h($user->username); ?></dd>
