@@ -241,6 +241,19 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     }
     
     /**
+     * Convert the element set name and element name to a valid CSS ID. Must use 
+     * both names because their combination is unique.
+     * @uses text_to_id()
+     * @return string
+     */
+    private function _getCurrentElementCssId()
+    {
+        $elementName = $this->_currentElement->name;
+        $elementSetName = $this->_currentElement->set_name;
+        return text_to_id("$elementSetName $elementName");
+    }
+    
+    /**
      * Output the default format for displaying item metadata.
      * @return void 
      */
@@ -256,7 +269,7 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     <h2><?php echo $setName ?></h2>
     <?php foreach ($elementsInSet as $element): ?>
     <?php if ($this->_elementIsShowable($element)): ?>
-    <div class="element">
+    <div id="<?php echo $this->_getCurrentElementCssId(); ?>" class="element">
         <h3><?php echo $this->_currentElement->name; ?></h3>
         <?php if (!empty($this->_currentElementTexts)): ?>
         <?php foreach ($this->_currentElementTexts as $text): ?>
