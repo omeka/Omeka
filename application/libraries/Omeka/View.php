@@ -68,7 +68,6 @@ class Omeka_View extends Zend_View_Abstract
         
         //View scripts and shared directory get checked for assets 
         $this->addAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
-        $this->addAssetPath(SHARED_DIR, WEB_SHARED);        
         
         //Next add script paths for plugins and themes (in that order)
         //The admin bootstrap defines this simple constant to let us know
