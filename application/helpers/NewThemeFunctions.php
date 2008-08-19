@@ -278,9 +278,10 @@ function display_files_for_item($options = array())
 function display_random_featured_item($withImage=false)
 {
     $featuredItem = random_featured_item();
-    set_current_item($featuredItem); // Needed for transparent access of item metadata.
+
 	$html = '<h2>Featured Item</h2>';
 	if ($featuredItem) {
+        set_current_item($featuredItem); // Needed for transparent access of item metadata.
 	   $html .= '<h3>' . link_to_item() . '</h3>';
 	   if (item_has_thumbnail()) {
 	       $html .= link_to_square_thumbnail($featuredItem, array('class'=>'image'));
