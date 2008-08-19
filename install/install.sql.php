@@ -31,13 +31,8 @@ INSERT INTO `{$db->prefix}data_types` VALUES (1, 'Text', 'A long, typically mult
 INSERT INTO `{$db->prefix}data_types` VALUES (2, 'Tiny Text', 'A short, typically one-line text string. Up to 255 characters.');
 INSERT INTO `{$db->prefix}data_types` VALUES (3, 'Date Range', 'A date range, begin to end. In format yyyy-mm-dd yyyy-mm-dd.');
 INSERT INTO `{$db->prefix}data_types` VALUES (4, 'Integer', 'Set of numbers consisting of the natural numbers including 0 (0, 1, 2, 3, ...) and their negatives (0, âˆ’1, âˆ’2, âˆ’3, ...).');
-INSERT INTO `{$db->prefix}data_types` VALUES (5, 'Floating Point', 'A number with a specified number decimal places, or fractional part.');
-INSERT INTO `{$db->prefix}data_types` VALUES (6, 'Boolean', 'A primitive datatype having one of two values: true or false, off or on, 1 or 0.');
-INSERT INTO `{$db->prefix}data_types` VALUES (7, 'Time', 'A time in format hh:mm:ss');
-INSERT INTO `{$db->prefix}data_types` VALUES (8, 'Time Range', 'A time range in format hh:mm:ss hh:mm:ss');
 INSERT INTO `{$db->prefix}data_types` VALUES (9, 'Date', 'A date in format yyyy-mm-dd');
 INSERT INTO `{$db->prefix}data_types` VALUES (10, 'Date Time', 'A date and time combination in the format: yyyy-mm-dd hh:mm:ss');
-INSERT INTO `{$db->prefix}data_types` VALUES (11, 'Date Time Range', 'A date and time combination range, begin to end. In format yyyy-mm-dd hh:mm:ss yyyy-mm-dd hh:mm:ss');
 
 -- --------------------------------------------------------
 
