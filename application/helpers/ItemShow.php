@@ -139,10 +139,18 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     private function _getElementsBySet()
     {
         $elementsBySet = $this->_item->getAllElementsBySet();
-        // Overwrite elements assigned to the item type element set with only 
-        // those that belong to this item's particular item type. This is 
-        // necessary because, otherwise, all item type elements will be shown.
-        $elementsBySet[self::ELEMENT_SET_ITEM_TYPE] = $this->_item->getItemTypeElements();
+        
+         // Unset the existing 'Item Type' element set b/c it shows elements for all item types.
+         unset($elementsBySet[self::ELEMENT_SET_ITEM_TYPE]);
+        
+        if ($this->_item->item_type_id) {
+            // Overwrite elements assigned to the item type element set with only 
+            // those that belong to this item's particular item type. This is 
+            // necessary because, otherwise, all item type elements will be shown.
+            $itemTypeElementSetName = item('Item Type Name') . ' ' . self::ELEMENT_SET_ITEM_TYPE;
+            $elementsBySet[$itemTypeElementSetName] = $this->_item->getItemTypeElements();
+        }
+        
         return $elementsBySet;
     }
     
