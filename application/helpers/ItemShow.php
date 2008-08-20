@@ -22,36 +22,10 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     const ELEMENT_SET_ITEM_TYPE = 'Item Type';
     
     /**
-     * The prefix of the delegated methods that output metadata. If this changes 
-     * all output methods must be changed as well.
-     */
-    const OUTPUT_METHOD_PREFIX = '_output';
-    
-    /**
      * The Item object.
      * @var object
      */
     private $_item;
-    
-    /**
-     * The cache of the current Element object.
-     * @see self::_elementIsShowable()
-     * @var object
-     */
-    private $_currentElement;
-    
-    /**
-     * The cache of the current array of ElementText objects.
-     * @see self::_elementIsShowable()
-     * @var array
-     */
-    private $_currentElementTexts;
-    
-    /**
-     * The format of the output.
-     * @var string
-     */
-    private $_outputFormat = 'Default';
     
     /**
      * Flag to indicate whether to show elements that do not have text.
@@ -72,18 +46,18 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      * @param Item
      * @param array $options
      * Available options:
-     * 'output_format' => string Must match the ending of a 
      * 'show_empty_elements' => bool|string Whether to show elements that 
      *     do not contain text. A string will set self::$_showEmptyElements to 
      *     true and set self::$_emptyElementString to the provided string.
      * @return void View helpers normally return a string here, but this helper 
-     * outputs directly through the delegated self::_output*() methods.
+     * outputs directly from a view partial.  
+     * @todo This output should be buffered into a string that is then returned by this function.
      */
     public function itemShow(Item $item, array $options = array())
     {
         $this->_item = $item;
         $this->_setOptions($options);
-        $this->_delegateToOutput();
+        $this->_output();
     }
     
     /**
@@ -93,23 +67,6 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      */
     private function _setOptions(array $options)
     {
-        // Handle output_format option.
-        if (array_key_exists('output_format', $options)) {
-            
-            // Cast to a mixed case string without whitespace. For example, 
-            // "definition list" changes to "DefinitionList".
-            $outputFormat = preg_replace('/\s/', 
-                                         '', 
-                                         ucwords((string) $options['output_format']));
-            
-            // Throw an exception if this is not a valid output method.
-            if (!method_exists($this, self::OUTPUT_METHOD_PREFIX . $outputFormat)) {
-                throw new Exception('Invalid output format.');
-            }
-            
-            $this->_outputFormat = $outputFormat;
-        }
-        
         // Handle show_empty_elements option
         if (array_key_exists('show_empty_elements', $options)) {
             if (is_string($options['show_empty_elements'])) {
@@ -118,16 +75,6 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
                 $this->_showEmptyElements = (bool) $options['show_empty_elements'];
             }
         }
-    }
-    
-    /**
-     * Delegate to the methods that output metadata.
-     * @return void
-     */
-    private function _delegateToOutput()
-    {
-        $outputMethod = self::OUTPUT_METHOD_PREFIX . $this->_outputFormat;
-        $this->$outputMethod();
     }
     
     /**
@@ -175,47 +122,15 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      * @param Element
      * @return bool
      */
-    private function _elementIsShowable(Element $element)
-    {
-        // Cache the current Element object.
-        $this->_currentElement = $element;
-        // Cache the current array of ElementText objects.
-        $this->_currentElementTexts = $this->_getTextsByElement($element);
+    private function _elementIsShowable(Element $element, $texts)
+    {        
         // If the condidtions are met, this element is showable.
-        if (!empty($this->_currentElementTexts) 
-            || (empty($this->_currentElementTexts) && $this->_showEmptyElements)) {
+        if (!empty($texts) 
+            || (empty($texts) && $this->_showEmptyElements)) {
             return true;
         }
         // This element is not showable.
         return false;
-    }
-    
-    /**
-     * Prepare text for display by applying filters to the text and returning an 
-     * escaped or raw (HTML) string.
-     * @param string|ElementText
-     * @return string
-     */
-    private function _prepareText($text)
-    {
-        // The HTML flag is false by default.
-        $html = false;
-        // Set variables id $text is an instance of ElementText
-        if ($text instanceof ElementText) {
-            $text = $text->text;
-            $html = $text->html ? true : false;
-        }
-        // Apply filters. Pass the text string, the Item object, and the current 
-        // Element object.
-        $text = apply_filters(array('Display', 
-                                    'Item', 
-                                    $this->_currentElement->name, 
-                                    $this->_currentElement->set_name), 
-                              $text, 
-                              $this->_item, 
-                              $this->_currentElement);
-        // Return an escaped string or a raw (HTML) string.
-        return $html ? $text : htmlentities($text);
     }
     
     /**
@@ -247,51 +162,48 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
             fire_plugin_hook('public_append_to_item_show', $this->_item);
         }
     }
-    
-    /**
-     * Convert the element set name and element name to a valid CSS ID. Must use 
-     * both names because their combination is unique.
-     * @uses text_to_id()
-     * @return string
-     */
-    private function _getCurrentElementCssId()
-    {
-        $elementName = $this->_currentElement->name;
-        $elementSetName = $this->_currentElement->set_name;
-        return text_to_id("$elementSetName $elementName");
-    }
-    
+
     /**
      * Output the default format for displaying item metadata.
      * @return void 
      */
-    // You must call self::_elementIsShowable() immediately after the 
-    // $elementsInSet loop, at least if you want to take advantage of the 
-    // Element and ElementText caching and use self::_prepareText().
-    private function _outputDefault()
+    private function _output()
     {
-?>
-<?php $this->_callPrependHooks(); ?>
-<?php foreach ($this->_getElementsBySet() as $setName => $elementsInSet): ?>
-<div class="element-set">
-    <h2><?php echo $setName ?></h2>
-    <?php foreach ($elementsInSet as $element): ?>
-    <?php if ($this->_elementIsShowable($element)): ?>
-    <div id="<?php echo $this->_getCurrentElementCssId(); ?>" class="element">
-        <h3><?php echo $this->_currentElement->name; ?></h3>
-        <?php if (!empty($this->_currentElementTexts)): ?>
-        <?php foreach ($this->_currentElementTexts as $text): ?>
-        <div class="element-text"><?php echo $this->_prepareText($text); ?></div>
-        <?php endforeach; ?>
-        <?php else: ?>
-        <div class="element-text-empty"><?php echo $this->_prepareText($this->_emptyElementString); ?></div>
-        <?php endif; ?>
-    </div><!-- end element -->
-    <?php endif; ?>
-    <?php endforeach; ?>
-</div><!-- end element-set -->
-<?php endforeach; ?>
-<?php $this->_callAppendHooks(); ?>
-<?php
+        $this->_callPrependHooks();
+        // Prepare the metadata for display on the partial.  There should be no 
+        // need for method calls by default in the view partial.
+        $elementSets = $this->_getElementsBySet();
+        foreach ($elementSets as $setName => $elementsInSet) {
+            foreach ($elementsInSet as $key => $element) {
+                $elementName = $element->name;
+                $elementsInSet[$key] = array();
+                $elementsInSet[$key]['element'] = $element;
+                $elementsInSet[$key]['elementName'] = $element->name;
+                $elementTexts = $this->_getTextsByElement($element);
+                $elementsInSet[$key]['isShowable'] = $this->_elementIsShowable($element, $elementTexts);
+                $elementsInSet[$key]['isEmpty'] = empty($elementTexts);
+                $elementsInSet[$key]['emptyText'] = htmlentities($this->_emptyElementString);
+            }
+            $elementSets[$setName] = $elementsInSet;
+            
+            // We're done preparing the data for display, so display it.
+            $varsToInject = array('elementSets'=>$elementSets, 'setName'=>$setName, 
+            'elementsInSet'=>$elementsInSet, 'item'=>$this->_item);
+            $this->_loadViewPartial($varsToInject);
+        }
+        $this->_callAppendHooks();    
+    }
+    
+    /**
+     * @todo Could pass the name of the partial in as an argument rather than hard
+     * coding it.  That would allow us to use arbitrary partials for purposes such as 
+     * repackaging the data for RSS/XML or other data formats.
+     * 
+     * @param array
+     * @return void
+     **/
+    private function _loadViewPartial($vars = array())
+    {
+        return common('item-metadata', $vars, 'items');
     }
 }
