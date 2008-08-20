@@ -109,13 +109,11 @@ function display_element_set_form_for_item($item, $elementSetName)
  * whole lot of sense though, given that it is very much an element of the View
  * and not directly related to the business logic of the app.
  * @todo Make sure this citation follows some sort of standard.  MLA? Other?
- * @todo Ideally this would be able to hook into plugins being able to define
- * new citation formats.  ZoterOmeka anyone?
  * @return string
  **/
 function item_citation()
 {
-    if($citation = item('Citation')) {
+    if($citation = item('Citation', 0)) {
 		return $citation;
 	}
 
