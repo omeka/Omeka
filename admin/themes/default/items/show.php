@@ -72,46 +72,7 @@ echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 </div>
 <div id="core-metadata" class="showitem">
 
-<h2>Core Metadata</h2>
-	<?php $coreElementSet = array(
-	    'Subject', 
-	    'Description',
-	    'Creator',
-	    'Additional Creator',
-	    'Source',
-	    'Publisher',
-	    'Date',
-	    'Contributor',
-	    'Rights',
-	    'Rights Holder',
-	    'Relation',
-	    'Format',
-	    'Spatial Coverage',
-	    'Temporal Coverage',
-	    'Language',
-	    'Provenance',
-	    'Citation'); ?>
-	
-	<?php foreach ($coreElementSet as $field): ?>
-	   <div id="<?php echo text_to_id($field); ?>" class="field">
-	       <h3><?php echo $field; ?></h3>
-	       <div>
-	           <?php echo display_empty(item($field, '')); ?>
-	        </div>
-	   </div>
-	<?php endforeach ?>
-	
-	<div id="temporal-coverage" class="field">
-	<h3>Temporal Coverage</h3>
-	<div>
-	<?php echo item('Temporal Coverage', ' '); 
-	/** 
-	 * @todo This is stored in a special format in the DB so it should be 
-	 * formatted w/ a filter before display.  Was previously the two dates
-	 * separated by an &mdash;
-	 */ ?>
-	</div>
-	</div>
+<?php echo show_item_metadata(); ?>
 	
 	<div id="citation" class="field">
 	<h3>Bibliographic Citation</h3>
@@ -132,20 +93,6 @@ echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 <?php endif; ?>
 
 <div id="type-metadata" class="showitem">
-
-<h2>Type Metadata</h2>
-
-	<div class="field">
-	<h3>Type Name</h3>
-		<div id="type_id" class="editableSelect"><p><?php echo item('Item Type Name'); ?></p></div>
-	</div>
-			
-	<?php foreach(item_type_elements() as $field => $textSet): ?>
-		<div class="field">
-			<h3><?php echo $field; ?></h3>
-			<ul><li><?php echo join('</li><li>', $textSet); ?></li></ul>
-		</div>
-	<?php endforeach; ?>
 
 <h2>Tags</h2>
 	<?php if ( has_permission('Items','tag') ): ?>
