@@ -105,7 +105,7 @@ function _define_web_root()
     } else {
         $base_path = '/';
     }
-    
+        
     // WEB_ROOT is always the root of the site, whereas WEB_DIR depends on the 
     // bootstrap used (public/admin)
     
@@ -118,3 +118,26 @@ function _define_web_root()
    define('WEB_ROOT', $base_root . (!empty($dir) ? '/' . $dir : '') );
    define('WEB_DIR',  $base_url);  
 }
+
+// function _define_url_constants()
+// {
+    // Get the directory that the bootstrap sits in.
+    $dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/');
+    // current path should be empty and not a '/' if there is no directory path.
+    $currentPath = !empty($dir) ? "/$dir" : '';
+    $adminDir = $site['admin'];
+    // This is how we determine whether or not we are in the admin bootstrap.
+    if (defined('ADMIN')) {
+        $adminPath = $currentPath;
+        // Strip off the admin directory to get the public dir.
+        // @hack Remove the '/admin' part of the URL by regex (only if necessary).
+        $publicPath = rtrim(preg_replace("/(.*)$adminDir$/", '$1', $currentPath, 1), '/');
+    } else {
+        $adminPath = "$currentPath/$adminDir";
+        $publicPath = $currentPath;
+    }
+    
+    define('ADMIN_BASE_URL', $adminPath);
+    define('PUBLIC_BASE_URL', $publicPath);
+    define('CURRENT_BASE_URL', $currentPath);    
+// }

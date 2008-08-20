@@ -201,6 +201,29 @@ function public_nav_main(array $navArray)
 }
 
 /**
+ * Example: set_base_url_for_theme('public');  url_for('items');  --> example.com/items.
+ * @access private
+ * @param string
+ * @return void
+ **/
+function set_base_url_for_theme($theme = null)
+{
+    switch ($theme) {
+        case 'public':
+            $baseUrl = PUBLIC_BASE_URL;
+            break;
+        case 'admin':
+            $baseUrl = ADMIN_BASE_URL;
+            break;
+        default:
+            $baseUrl = CURRENT_BASE_URL;
+            break;
+    }
+    
+    return Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
+}
+
+/**
  * Plugins should be able to hook into the header script for either admin or
  * public themes. The hooks involved are 'admin_theme_header',
  * 'public_theme_header'. This will allow us to disambiguate between themes(is
