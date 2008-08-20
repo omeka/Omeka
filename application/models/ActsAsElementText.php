@@ -399,6 +399,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         switch ($elementDataType) {
             case 'Tiny Text':
             case 'Text':
+            case 'Integer':
                 return $postArray['text'];
                 break;
             case 'Date':
@@ -463,6 +464,9 @@ class ActsAsElementText extends Omeka_Record_Mixin
             // Tiny Text and Text are always valid?
             case 'Tiny Text':
             case 'Text':
+                break;
+            case 'Integer':
+                $isValid = is_numeric($textValue);
                 break;
             case 'Date':
                 $isValid = (empty($textValue) or Zend_Validate::is($textValue, 'Date'));

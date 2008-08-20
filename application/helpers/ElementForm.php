@@ -76,13 +76,16 @@ class Omeka_View_Helper_ElementForm
     }
     
     /**
-     * @todo Make this work with Date fields (and all others).
-     * 
      * @param integer
      * @return mixed
      **/
     protected function _getPostValueForField($index)
     {
+        if (!$_POST) {
+            // Return if there are no posted data.
+            return null;
+        }
+        
         $postArray = $_POST['Elements'][$this->_element['id']][$index];
         
         // Flatten this POST array into a string so as to be passed to the necessary helper functions.
@@ -209,6 +212,11 @@ class Omeka_View_Helper_ElementForm
                     $inputNameStem,
                     $value,
                     array());
+            case 'Integer':
+                return $this->view->formText(
+                    $inputNameStem . '[text]',
+                    $value,
+                    array('class' => 'textinput', 'size' => 40));
             default:
                 throw new Exception('Cannot display a form input for "' . 
                 $element['name'] . '" if element type name is not given!');
