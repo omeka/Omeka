@@ -418,10 +418,23 @@ class ActsAsElementText extends Omeka_Record_Mixin
                                         $postArray['end']['day']);
                 // Should come out to be start date and end date separated by a space.
                 // Or if we don't have either a start or end date, it should not store anything.
-                if (!$startDate and !$endDate) {
+                if (!$startDate && !$endDate) {
                     return null;
                 }
                 return $startDate . ' ' . $endDate;
+            case 'Date Time':
+                $dateFilter = new Omeka_Filter_Date;
+                $date = $dateFilter->filter($postArray['year'], 
+                                            $postArray['month'], 
+                                            $postArray['day']);
+                $timeFilter = new Omeka_Filter_Time;
+                $time = $timeFilter->filter($postArray['hour'], 
+                                            $postArray['minute'], 
+                                            $postArray['second']);
+                if (!$date && !$time) {
+                    return null;
+                }
+                return "$date $time";
             default:
                 throw new Exception("Cannot process form input for element with data type '$elementDataType'!");
                 break;
@@ -466,17 +479,35 @@ class ActsAsElementText extends Omeka_Record_Mixin
             case 'Text':
                 break;
             case 'Integer':
-                $isValid = is_numeric($textValue);
+                $isValid = (empty($textValue) || is_numeric($textValue));
                 break;
             case 'Date':
-                $isValid = (empty($textValue) or Zend_Validate::is($textValue, 'Date'));
+                $isValid = (empty($textValue) || Zend_Validate::is($textValue, 'Date'));
                 break;
             case 'Date Range':
                 // Start and end dates are separated by a single whitespace.
                 // One or both of these dates can be empty, but if they aren't 
                 // empty then they have to validate as dates.
                 list($startDate, $endDate) = explode(' ', $textValue);
-                $isValid = (empty($startDate) or Zend_Validate::is($startDate, 'Date')) and (empty($endDate) or Zend_Validate::is($endDate, 'Date'));
+                $isValid = (empty($startDate) || Zend_Validate::is($startDate, 'Date')) 
+                            && (empty($endDate) || Zend_Validate::is($endDate, 'Date'));
+                break;
+            case 'Date Time':
+                list($date, $time) = explode(' ', $textValue);
+                list($hour, $minute, $second) = explode(':', $time);
+                
+                $isEmpty  = empty($textValue);
+                $isDate   = Zend_Validate::is($date, 'Date');
+                // Match 00-23
+                $isHour   = preg_match('/^(?:[0-1][0-9])|(?:2[0-3])$/', $hour);
+                // Match 00-59
+                $isMinute = preg_match('/^(?:[0-4][0-9])|(?:5[0-9])$/', $minute);
+                // Match 00-59
+                $isSecond = preg_match('/^(?:[0-4][0-9])|(?:5[0-9])$/', $second);
+                $isTime = ($isHour && $isMinute && $isSecond);
+                $isDateTime = ($isDate && $isTime);
+                
+                $isValid = ($isEmpty || $isDateTime);
                 break;
             default:
                 throw new Exception("Cannot validate an element of data type '$elementDataType'!");

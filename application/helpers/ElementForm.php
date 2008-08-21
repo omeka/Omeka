@@ -217,6 +217,11 @@ class Omeka_View_Helper_ElementForm
                     $inputNameStem . '[text]',
                     $value,
                     array('class' => 'textinput', 'size' => 40));
+            case 'Date Time':
+                return $this->_dateTimeField(
+                    $inputNameStem,
+                    $value,
+                    array());
             default:
                 throw new Exception('Cannot display a form input for "' . 
                 $element['name'] . '" if element type name is not given!');
@@ -225,6 +230,28 @@ class Omeka_View_Helper_ElementForm
         
     }
     
+    // yyyy-mm-dd hh:mm:ss
+    protected function _dateTimeField($inputNameStem, $value, $options = array())
+    {
+        list($date, $time) = explode(' ', $value);
+        list($year, $month, $day) = explode('-', $date);
+        list($hour, $minute, $second) = explode(':', $time);
+        
+        $html .= '<div class="dateinput">';
+    	
+    	$html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4'));
+    	$html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2'));
+    	$html .= $this->view->formText($inputNameStem . '[day]', $day, array('class'=>'textinput', 'size'=>'2'));
+    	
+        $html .= $this->view->formText($inputNameStem . '[hour]', $hour, array('class'=>'textinput', 'size'=>'2'));
+    	$html .= $this->view->formText($inputNameStem . '[minute]', $minute, array('class'=>'textinput', 'size'=>'2'));
+    	$html .= $this->view->formText($inputNameStem . '[second]', $second, array('class'=>'textinput', 'size'=>'2'));
+    	
+    	$html .= '</div>';
+    	
+    	return $html;
+    }
+
     protected function _dateField($inputNameStem, $value, $options = array())
     {
         list($year, $month, $day) = explode('-', $value);
