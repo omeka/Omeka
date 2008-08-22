@@ -28,6 +28,6 @@ following button to upgrade:</p>
 Please notify an administrator to upgrade the database.
 <?php endif; ?>
 <?php else: ?>
-<p>Your Omeka database is up-to-date. Enjoy your Omeka experience!</p>
+<p>Your Omeka database is up-to-date! <a href="<?php echo url_for(''); ?>">Return to Dashboard</a></p>
 <?php endif; ?>
 <?php foot();?>
