@@ -469,6 +469,40 @@ function select_entity($props = array(), $value = null)
 }
 
 /**
+ * Retrieve the Collection object for the current item.
+ * 
+ * @internal This is meant to be a simple facade for OO-based access to the Collection object.
+ * Ideally theme writers won't have to interact with the actual collection object, so more helpers
+ * should be built to provide syntactic sugar for this.
+ * @access private
+ * @return void
+ **/
+function get_collection_for_item()
+{
+    return get_current_item()->Collection;
+}
+
+/**
+ * Link to the collection that the current item belongs to.
+ * 
+ * The default text displayed for this link will be the name of the collection,
+ * but that can be changed by passing a string argument.
+ * 
+ * @param string
+ * @return void
+ **/
+function link_to_collection_for_item($text = null, $action = 'show')
+{
+    return link_to_collection(get_collection_for_item(), $action, $text);
+}
+
+function tags_for_item_as_string($delimiter = "\n", $tagsAreLinked = true)
+{
+    $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
+    return tag_string(get_current_item()->Tags, $urlToLinkTo, $delimiter);
+}
+
+/**
  * Retrieve the current Item record
  * 
  * @throws Exception
