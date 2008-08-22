@@ -13,26 +13,24 @@
  **/
 class ItemDc
 {
-    // Set the Dublin Core Metadata Element Set (DCMES).
-    public $dcmes = array('contributor', 'coverage', 'creator', 'date', 
-                          'description', 'format', 'identifier', 'language', 
-                          'publisher', 'relation', 'rights', 'source', 
-                          'subject', 'title', 'type');
-
     public function recordToDc($item)
-    {        
-        $xml = '
-    <rdf:Description rdf:about="' . item_permalink_url($item) . '">';
+    {      
+        $dcElements = $item->getElementsBySetName('Dublin Core');
+    
+        $xml = "\n" . '<rdf:Description rdf:about="' . item_permalink_url($item) . '">';
         // Iterate throught the DCMES.
-        foreach ($this->dcmes as $element) {
-            if (isset($item->$element) && strlen($item->$element)) {
-                $xml .= '
-        <dc:' . $element . '>' . htmlspecialchars($item->$element) . '</dc:' . $element . '>';
+        foreach ($dcElements as $element) {
+            $elementName = $element->name;
+            if ($text = item($elementName)) {
+                foreach ($text as $k => $v) {
+                    if (!empty($v)) {
+                        $xml .= "\n" . '<dc:' . strtolower($elementName) . '><![CDATA[' 
+                            . $v . ']]></dc:' . strtolower($elementName) . '>';
+                    }
+                }
             }
         }
-        $xml .= '
-    </rdf:Description>';
-        
+        $xml .= "\n" . '</rdf:Description>';
         return $xml;        
     }
 }
