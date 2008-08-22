@@ -141,7 +141,7 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      */
     private function _callPrependHooks()
     {
-        if (theme_is_admin()) {
+        if (is_admin_theme()) {
             fire_plugin_hook('admin_prepend_to_item_show', $this->_item);
         } else {
             fire_plugin_hook('public_prepend_to_item_show', $this->_item);
@@ -156,7 +156,7 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      */
     private function _callAppendHooks()
     {
-        if (theme_is_admin()) {
+        if (is_admin_theme()) {
             fire_plugin_hook('admin_append_to_item_show', $this->_item);
         } else {
             fire_plugin_hook('public_append_to_item_show', $this->_item);
