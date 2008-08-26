@@ -1,22 +1,18 @@
-<?php if ($this->pageCount): ?>
+<?php if ($this->pageCount > 1): ?>
 <ul class="pagination_list">
+    
+    <?php if ($this->first != $this->current): ?>
     <!-- First page link --> 
     <li class="pagination_first">
-    <?php if ($this->first != $this->current): ?>
     <a href="<?php echo $this->url(array('page' => $this->first), null, $_GET); ?>">First</a>
-    <?php else: ?>
-    First
     <?php endif; ?>
-    </li>
     
+    <?php if (isset($this->previous)): ?>
     <!-- Previous page link --> 
     <li class="pagination_previous">
-    <?php if (isset($this->previous)): ?>
     <a href="<?php echo $this->url(array('page' => $this->previous), null, $_GET); ?>">Previous</a>
-    <?php else: ?>
-    Previous
-    <?php endif; ?>
     </li>
+    <?php endif; ?>
     
     <!-- Numbered page links -->
     <?php foreach ($this->pagesInRange as $page): ?> 
@@ -27,22 +23,18 @@
     <?php endif; ?>
     <?php endforeach; ?>
     
+    <?php if (isset($this->next)): ?> 
     <!-- Next page link -->
     <li class="pagination_next">
-    <?php if (isset($this->next)): ?> 
     <a href="<?php echo $this->url(array('page' => $this->next), null, $_GET); ?>">Next</a>
-    <?php else: ?>
-    Next
-    <?php endif; ?>
     </li>
+    <?php endif; ?>
     
+    <?php if ($this->last != $this->current): ?>
     <!-- Last page link --> 
     <li class="pagination_last">
-    <?php if ($this->last != $this->current): ?>
     <a href="<?php echo $this->url(array('page' => $this->last), null, $_GET); ?>">Last</a>
-    <?php else: ?>
-    First
-    <?php endif; ?>
     </li>
+    <?php endif; ?>
 </ul>
 <?php endif; ?>
