@@ -7,10 +7,6 @@
  **/
  
 /**
- * @todo This should be removed and replaced with a better date processing
- * algorithm, especially since we no longer rely on MySQL date fields for
- * storing dates in the Omeka database.
- * @deprecated
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
@@ -19,9 +15,7 @@ class Omeka_Filter_Time
 {
     /**
      * Convert a hour, minute and second into a valid MySQL time.
-     *
-     * If the resulting time would be 00-00-00, return null instead.
-     *  
+     * If the resulting time would be 00:00:00, return null instead.
      * @param string
      * @param string
      * @param string
@@ -30,9 +24,9 @@ class Omeka_Filter_Time
     public function filter($hour, $minute, $second)
     {
         $time = array();
-        $time[0] = !empty($hour)  ? str_pad($hour, 2, '0', STR_PAD_LEFT)  : '00';
+        $time[0] = !empty($hour)   ? str_pad($hour,   2, '0', STR_PAD_LEFT) : '00';
         $time[1] = !empty($minute) ? str_pad($minute, 2, '0', STR_PAD_LEFT) : '00';
-        $time[2] = !empty($second)   ? str_pad($second, 2, '0', STR_PAD_LEFT)   : '00';        
+        $time[2] = !empty($second) ? str_pad($second, 2, '0', STR_PAD_LEFT) : '00';        
         
         $time = implode(':', $time);
         
@@ -53,7 +47,9 @@ class Omeka_Filter_Time
     {
         $time_array = explode(':', $time);
         
-        //hour, minute, second
-        return array('hour'=>$time[0], 'minute'=>$date[1], 'second'=>$date[2]);
+        // hour, minute, second
+        return array('hour'   => $time[0], 
+                     'minute' => $date[1], 
+                     'second' => $date[2]);
     }
 }
