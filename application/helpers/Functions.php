@@ -243,7 +243,7 @@ function foot($vars = array(), $file = 'footer') {
 function tag_cloud($tags, $link = null, $maxClasses = 9)
 {
 	if(!$tags){
-		$html = '<div class="error">There are no tags to display</div>';
+		$html = '<p>There are no tags to display</p>';
 		return $html;
 	} 
 	
