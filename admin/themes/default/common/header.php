@@ -10,7 +10,6 @@
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
 <link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo css('niftyCorners'); ?>" />
 
 <!--[if lte IE 6]>
 <link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />

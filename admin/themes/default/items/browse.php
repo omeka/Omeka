@@ -4,12 +4,14 @@
 
 <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
 
-<?php echo simple_search(array('id'=>'search'), url_for('items/browse')); ?>
+<div id="search">
+<?php echo simple_search(array(), url_for('items/browse')); ?>
 
 <?php echo link_to_advanced_search(); ?>
+</div>
 <?php if ( total_results() ): ?>
 
-<h1 class="floater">Browse Items (<?php echo total_results();?> items total)</h1>
+<h1>Browse Items (<?php echo total_results();?> items total)</h1>
 
 <div id="browse-meta">
 <div class="pagination"><?php echo pagination(); ?></div>

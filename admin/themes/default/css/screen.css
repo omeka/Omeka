@@ -57,16 +57,25 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#a1988
 	table * {font-size:1em;margin:0;}
 	
 	/* Forms */
-	div.field {overflow:hidden; zoom:1;}
+	div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 	label {font-size:1.2em; font-weight:bold; margin-bottom:0.5em;}
 	input, select {border:0; background-color:transparent !important;}
-	input.textinput {border:1px solid #DDDAD3;padding:3px;background:#fff !important;}
+	input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important;}
 	legend {font-size:1.5em;font-weight:normal; line-height:1.2em; margin-bottom:1.2em; color:#c50; }
+	
+	.field .explanation {font-size:1.1em; color: #999; float:right; clear:right; text-align:left; width: 558px;}
+	
+		.field label {float:left; text-align:right; width: 270px;}
+		.field input.textinput, .field textarea {width: 550px; float:right; margin-bottom:6px;}
+	
+	/* Form Buttons */
+	#add_item, #save-changes {background:none; float:right;color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
+	#add_item:hover, #save-changes:hover {background-position:0 0 !important;cursor:pointer;}
 	
 	/* Misc Classes */
 	.navigation {overflow:hidden; zoom:1;}
 	.hide {width:0; height:0; position:absolute; left:-999em;}
-	.error {background:#f1c8ba; color:#933; margin:1.5em; font-size:1.2em; padding:1.5em;}
+	.error {background:#f1c8ba; color:#933; margin:1.5em 0; font-size:1.2em; padding:1.5em;}
 	.field .error {clear:both;}
 	.success {background-color: #B9D5B9; color:#245525; font-size:1.2em;}
 	.alert {background:#fff09e; font-size:1.2em; padding: 0.5em;}
@@ -104,7 +113,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#a1988
 	.add-file,
 	.previous a,
 	.browse-names
-	{background-position:top left; background-repeat:no-repeat; padding:2px 4px 2px 20px; text-decoration:none;}
+	{background-position: 12px 50%; background-repeat:no-repeat; padding-left: 32px; text-decoration:none;}
 
 	.go,
 	.next a
@@ -167,8 +176,8 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#a1988
 		#user-meta p {display:inline; font-size:1.1em;border-right:1px solid #333;padding:18px 18px 0; margin:0;}
 		
 /* == Content == */
-#content {}
-	#content .wrapper {background:#fff;border-top:1px solid #fff; z-index:1000; margin-top:-1px; position:relative;margin:0 36px; min-width:882px;overflow:hidden; zoom:1;}
+#content {border-top:1px solid #fff;}
+	#content .wrapper {background:#fff;border-top:1px solid #fff; z-index:1000; margin-top:-1px; position:relative;margin:0 36px; width:882px;overflow:hidden; zoom:1;}
 	
 	/* Homepage */
 	#site-info {margin-left: 576px; min-width: 270px;}
@@ -208,34 +217,18 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#a1988
 	table#items {margin-top:-12px;}
 	
 	/* Item Add/Edit Styles */
-	
 	#form-navigation {float:left; width: 270px; font-size:1.5em;}
 		#form-navigation a {text-decoration:none; display:block; background: #d3cfc6; color: #333; margin-bottom:1px;padding: 8px 12px;}
 	#item-metadata {margin-left: 298px;}
+	
 	/* Collection Browse styles */
 	#add-collection {background-color:#d4ecb5; border:1px solid #ccc;border-width:1px; border-right-color: #696; border-bottom-color: #696;position:absolute; top:18px; right:18px;float:right; padding:8px 12px 8px 30px; background-position:8px 50%; font-size:1.2em; color:#060;width:8em; display:block;}
 	#add-collection:hover {background-color:#e9f6da;}
 	
 /* == Footer == */
-#footer {clear:both; padding: 18px 18px 1px;  overflow:hidden; zoom:1;margin:0 36px; min-width: 846px;background: #d3cfc6;}
+#footer {clear:both; padding: 18px 18px 1px;  overflow:hidden; zoom:1;margin:0 36px; width: 846px;background: #d3cfc6;}
 	#footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}
 	#footer a {text-decoration:none; font-weight:bold; color: #c50;}
 	#footer .primary-nav {float:right; width: 50%; text-align:right;}
 	#footer p {float:left; width: 30%;}
 	#footer .primary-nav li {display:inline;margin-left:1em;}
-	
-/* == Login Form */
-#login #header, #login #footer {width: 414px; padding:18px; margin:0 auto;min-width: 414px;}
-#login #content {background:#fff; width: 414px;padding:18px; margin:0 auto;}
-
-
-#login #login-form .textinput {float:right; width: 280px;}
-#login-form label {float:left; width: 72px; text-align:right;}
-input.login, #add_item {background:none; color:#fff;border:none;width: 71px; height: 31px; _overflow:hidden; background:#333 url("../images/login-button.gif") 0 0 no-repeat !important;}
-input.login:hover, #add_item:hover {background-position:0 -31px !important;cursor:pointer;}
-#login-form input.login, #add_item {float:right;margin-top:9px; text-transform: uppercase; letter-spacing:1px; font-size:0.8em;}
-#login-form div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
-#login-form label {}
-
-#add_item, #save-changes {background:none; float:right;color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
-#add_item:hover, #save-changes:hover {background-position:0 0 !important;cursor:pointer;}

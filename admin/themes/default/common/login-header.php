@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
+<link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
 <link rel="stylesheet" media="screen" href="<?php echo css('login'); ?>" />
 <link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 
