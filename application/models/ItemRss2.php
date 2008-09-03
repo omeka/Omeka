@@ -55,24 +55,14 @@ class ItemRss2
         $description = '';
         
         //Output a list of the dublin core fields that have values
-        $coreFields = Item::fields(false);
-        foreach ($coreFields as $field => $readableField) {
-            $text = $item->$field;
-            if (!empty($text)) {
-                $description .= nls2p("<strong>" . $readableField. "</strong>: " . h($text));
+        $dublinCoreElements = $item->getElementsBySetName('Dublin Core');
+        foreach ($dublinCoreElements as $element) {
+            $textArray = item($element->name);
+            foreach ($textArray as $elementText) {
+                $description .= nls2p("<strong>" . htmlentities($element->name). "</strong>: " . $elementText);
             }
         }
         
-        //Item Type data
-        if ($type = $item->Type) {
-            $description .= "<p><strong>Item Type</strong>: {$type->name}</p>";
-        }
-        
-        //Output all the metafields for the item
-        foreach ($item->TypeMetadata as $field => $text) {
-           $description .= nls2p("<strong>" . $field . "</strong>: " . h($text));
-        }
-     
         //Output HTML that would display all the files in whatever way is possible
         $description .= display_files($item->Files);
         
@@ -82,8 +72,8 @@ class ItemRss2
     protected function itemToRSS($item)
     {        
         $entry = array();
-        
-        $entry['title'] = $item->title;
+        set_current_item($item);
+        $entry['title'] = item('Title', array('element_set'=>'Dublin Core', 'index'=>0));
         $entry['description'] = $this->buildDescription($item);
         
         //Permalink (this is kind of duplicated elsewhere)
@@ -99,7 +89,7 @@ class ItemRss2
             $enc['length']        = (int) $file->size;
             $entry['enclosure'][] = $enc;
         }
-        
+
         return $entry;        
     }
 }
