@@ -1,17 +1,11 @@
 <?php head(array('title'=>'Browse Items', 'body_class'=>'items')); ?>
 <div id="primary">
+    <h1>Browse Items (<?php echo total_results();?> items total)</h1>
+    
 <?php echo flash(); ?>
 
-<a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
-
-<div id="search">
-<?php echo simple_search(array(), url_for('items/browse')); ?>
-
-<?php echo link_to_advanced_search(); ?>
-</div>
 <?php if ( total_results() ): ?>
 
-<h1>Browse Items (<?php echo total_results();?> items total)</h1>
 
 <div id="browse-meta">
 <div class="pagination"><?php echo pagination(); ?></div>
@@ -61,5 +55,14 @@
 
 <?php fire_plugin_hook('append_to_items_browse', $items); ?>
 
+</div>
+<div id="secondary">
+    <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
+
+    <div id="search">
+    <?php echo simple_search(array(), url_for('items/browse')); ?>
+
+    <?php echo link_to_advanced_search(); ?>
+    </div>
 </div>
 <?php foot(); ?>

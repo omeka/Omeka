@@ -1,6 +1,6 @@
-<?php head(array('body_class'=>'index', 'title'=>'Dashboard')); ?>
-
+<?php head(array('body_class'=>'index narrow', 'title'=>'Dashboard')); ?>
 	<div id="primary">
+	    
 		<?php if (OMEKA_MIGRATION > (int) get_option('migration')): ?>
             <div class="error">
                 Warning: Your Omeka database is not compatible with the
@@ -15,7 +15,6 @@
                 <?php endif; ?>
             </div>
         <?php endif; ?>
-		<div id="welcome">
             
 			<div id="getting-started">
 				<h1>Getting Started with Omeka</h1>
@@ -69,8 +68,9 @@
 			</div>
 			
 		</div>
-		<div id="site-info">
-			<div id="site-meta" class="info-bubble">
+		
+		<div id="secondary">
+			<div id="site-meta" class="info-panel">
 				<h2>Site Overview</h2>
                 <p><em><?php echo settings('site_title'); ?></em> 
                 contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> 
@@ -78,7 +78,7 @@
                 There are <?php echo total_users(); ?> users. This is
                 Omeka version <em><?php echo OMEKA_VERSION; ?></em>.</p>
 			</div>
-			<div id="recent-items" class="info-bubble">
+			<div id="recent-items" class="info-panel">
 				<h2>Recent Items</h2>
 				<?php set_items_for_loop(recent_items('5')); ?>
 				<?php if(!has_items_for_loop()):?>
@@ -100,12 +100,9 @@
 				<?php endif; ?>
 			</div>
 			
-			<div id="tag-cloud" class="info-bubble">
+			<div id="tag-cloud" class="info-panel">
 				<h2>Recent Tags</h2>
 				<?php echo tag_cloud(recent_tags(), uri('items/browse/')); ?>
 			</div>
 		</div>
-		
-		
-	</div>
 <?php foot(); ?>

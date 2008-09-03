@@ -1,0 +1,82 @@
+/* Misc Classes */
+.navigation {overflow:hidden; zoom:1;}
+.hide {width:0; height:0; position:absolute; left:-999em;}
+.error {background:#f1c8ba; color:#933; margin:1.5em 0; font-size:1.2em; padding:1.5em;}
+.field .error {clear:both;}
+.success {background-color: #B9D5B9; color:#245525; font-size:1.2em;}
+.alert {background:#fff09e; font-size:1.2em; padding: 0.5em;}
+
+.tooltip {font-size:1.2em; line-height:1.5em;}
+
+/* Page Widths and Columns */
+
+/* Side info panels */
+.info-panel {background:#b6d9e8; z-index:100;display:block;margin-bottom:18px; padding:18px 18px 1px;}
+	.info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif; border-bottom:1px solid #fff;font-size:1.2em;padding: 9px 18px; color: #fff; background: #94b3c0;}
+
+	.info-panel li a {text-decoration:none; display:block; margin:-18px -18px 18px; padding: 9px 18px; border-bottom:1px solid #fff;}
+	
+	.info-panel p, .info-panel ul, .info-panel ol {font-size:1.1em;}
+
+/* Previous/Next navigation */
+.previous, .next {float:left; display:block; width: 48%;}
+	.next {float:right; text-align:right;}
+
+/* Icons */
+.contributor,
+.super,
+.admin,
+.researcher,
+.default,
+.add,
+.delete,
+.error,
+.success,
+.edit,
+.browse,
+.editsettings,
+.managethemes,
+.manageplugins,
+.browse-users,
+.add-user,
+.edit-user,
+.browse-collections,
+.add-collection,
+.browse-exhibits,
+.add-exhibit,
+.edit-exhibit,
+.delete-exhibit,
+.add-file,
+.previous a
+{background-position: 12px 50%; background-repeat:no-repeat; padding-left: 32px; text-decoration:none;}
+
+.go,
+.next a
+{background-position:center right; text-align:right;background-repeat:no-repeat; padding:2px 18px 2px 0; text-decoration:none;background-image:url("../images/bullet_go.gif");}
+
+.previous a {background-image:url("../images/bullet_back.gif");}
+.next a {background-image:url("../images/bullet_go.gif");}
+.contributor {background-image:url("../images/user_red.gif");}
+.super {background-image:url("../images/user_suit.gif");}
+.admin {background-image:url("../images/user_orange.gif");}
+.researcher {background-image:url("../images/user_green.gif");}
+.default {background-image:url("../images/user_gray.gif");}
+.add-file {background-image:url("../images/disk_multiple.gif");}
+.add {background-image:url("../images/page_add.gif");}
+.delete,.delete-exhibit {background-image:url("../images/delete.gif");}
+.error {background-image:url("../images/error.gif");}
+.success {background-image:url("../images/tick.gif");}
+.browse {background-image:url("../images/book_open.gif");}
+.browse-exhibits {background-image:url("../images/pictures.gif");}
+.add-exhibit {background-image:url("../images/picture_add.gif");}
+.edit-exhibit {background-image:url("../images/picture_edit.gif");}
+.add-collection {background-image:url("../images/folder_add.gif");}
+.browse-collections {background-image:url("../images/folder.gif");}
+.editsettings {background-image:url("../images/cog.gif");}
+.managethemes {background-image:url("../images/layout.gif");}
+.manageplugins {background-image:url("../images/plugin.gif");}
+.browse-users {background-image:url("../images/user_female.gif");}
+.add-user {background-image:url("../images/user_add.gif");}
+.edit-user {background-image:url("../images/pencil_go.gif");}
+.edit {background-image:url("../images/pencil_go.gif");}
+.browse-names {background-image:url("../images/group.gif");}
