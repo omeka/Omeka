@@ -57,6 +57,21 @@ class Omeka_Db_Table
     }
     
     /**
+     * Delegate to the DB adapter. Used primarily as a convenience method.
+     * 
+     * For example, now you can call fetchOne() from this table object.
+     * 
+     * @since 0.10
+     * @param string
+     * @param array
+     * @return mixed
+     */
+    public function __call($m, $a)
+    {
+        return call_user_func_array(array($this->_db, $m), $a);
+    }
+    
+    /**
      * @internal HACK But it will do for now.
      * 
      * @param string Class name
