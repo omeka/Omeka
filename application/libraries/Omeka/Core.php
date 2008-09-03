@@ -445,15 +445,10 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     {
         // Front controller
         $front = Zend_Controller_Front::getInstance();
-        $front->setControllerDirectory(CONTROLLER_DIR);
-                
-        // This plugin allows Omeka plugins to add controller directories to the 
-        // 'default' namespace which prevents weird naming conventions like 
-        // Contribution_IndexController.php and obviates the need to hack routes
-        $front->registerPlugin(new Omeka_Controller_Plugin_PluginControllerHack);
-
+        $front->addControllerDirectory(CONTROLLER_DIR, 'default');
+            
         $this->_context->setFrontController($front);
-                                        
+                                                
         // Action helpers
         $this->initializeActionHelpers();        
     }

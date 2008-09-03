@@ -80,9 +80,7 @@ class Omeka_Plugin_Broker
         
     //Theme directories that have been added by plugins
     protected $_theme_dirs = array('public'=>array(),'admin'=>array());
-    
-    protected $_controller_dirs = array();
-        
+            
     public function __construct($db, $pathToPlugins) 
     {
         // Should be able to delegate to the plugin filters
@@ -366,25 +364,21 @@ class Omeka_Plugin_Broker
     }
     
     /**
-     * This will make an entire directory of controllers available to the front controller
-     * If no directory is provided then the current plugin directory is used
-     * People who don't know MVC probably won't use this much
+     * This will make an entire directory of controllers available to the front controller.
+     * 
+     * This has to use addControllerDirectory() instead of addModuleDirectory() because module names
+     * are case-sensitive and module directories need to be lowercased to conform to Zend's weird naming conventions.
      * 
      * @return void
      **/
-    public function addControllerDir($path=null, $module=null)
+    public function addControllerDir()
     {        
         $current = $this->getCurrentPlugin();
         
-        $dir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $current . ($path ? DIRECTORY_SEPARATOR . $path : ''); 
-        
-        //Save the directory path in this folder so that 
-        $this->_controller_dirs[$current] = $dir;
-    }
-    
-    public function getControllerDirs()
-    {
-        return $this->_controller_dirs;
+        $contrDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $current . DIRECTORY_SEPARATOR . 'controllers';
+        // Module name needs to be lowercased (plugin directories are not, typically).
+        $moduleName = strtolower($current);
+        Zend_Controller_Front::getInstance()->addControllerDirectory($contrDir, $moduleName);
     }
     
     /**
