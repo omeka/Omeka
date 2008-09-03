@@ -1,10 +1,11 @@
 <?php head(array('title'=>'Plugins', 'body_class'=>'plugins narrow')); ?>
+<h1>Plugins</h1>
+
 <?php common('settings-nav'); ?>
 
 <?php echo flash(); ?>
 
 <div id="primary">
-<h2>List of plugins:</h2>
 
 <table id="plugin-info">
 <?php if ($plugins): 

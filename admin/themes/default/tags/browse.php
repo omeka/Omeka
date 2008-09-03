@@ -2,6 +2,7 @@
 
 <div id="primary">
 <h1>Tags</h1>
+<?php if ( total_results() ): ?>
 
 <?php if(has_permission('Tags', 'edit')): ?>
 	<h2><a href="<?php echo uri('tags/edit'); ?>">Edit/Rename</a></h2>
@@ -46,7 +47,6 @@
 		<?php endif; ?>
 	</h3>
 
-<?php if ( total_results() ): ?>
 	
 	
 	
@@ -54,7 +54,7 @@
 	echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/'));
 	?>
 <?php else: ?>
-	<h2>There are no tags to display.  You must first tag some items.</h2>
+	<p>There are no tags to display.  You must first tag some items.</p>
 <?php endif; ?>
 </div>
 <?php foot(); ?>

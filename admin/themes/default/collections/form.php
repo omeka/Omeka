@@ -20,7 +20,7 @@
 </script>
 
 <fieldset id="editcollection">
-	<legend>Collection Details</legend>
+	<h2>Collection Details</h2>
 
 <div class="field">
 <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name, 'Collection Name'); ?>
@@ -35,7 +35,7 @@
 <?php $entities = entities(); ?>
 
 <?php if(has_collectors($collection)): ?>
-	<h3>Collectors: </h3>
+	<h2>Collectors:</h2>
 	<?php foreach( $collection->Collectors as $k => $collector ): ?>
 
 	<ul id="collectors">
@@ -59,7 +59,7 @@
 ?>
 </div>
 
-<h3>Status: </h3>
+<h2>Status: </h2>
 <div class="field">
 	<label for="public">Public</label>	
 <?php 

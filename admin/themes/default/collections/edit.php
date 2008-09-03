@@ -1,7 +1,8 @@
 <?php head(array('title'=>'Edit Collection #'.$collection->id, 'body_class'=>'collections')); ?>
+<h1>Edit <?php echo h($collection->name); ?></h1>
+
 <div id="primary">
 	
-<h2><?php echo h($collection->name); ?></h2>
 
 <form method="post">
 <?php include 'form.php';?>	

@@ -1,7 +1,8 @@
 <?php head(array('title'=>'Themes', 'body_class'=>'themes narrow'));?>
+<h1>Themes</h1>
+
 <?php common('settings-nav'); ?>
 <div id="primary">
-	<h1>Themes</h1>
     <?php echo flash(); ?>
 <form method="post" id="themeswitch">
 	<?php foreach($this->themes as $theme): ?>

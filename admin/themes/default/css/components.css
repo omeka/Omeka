@@ -10,6 +10,14 @@
 
 /* Page Widths and Columns */
 
+
+/* Navigation */
+
+.vertical {margin:0; padding:0;float:left; width: 144px;font-size:1.1em;margin-top:18px;background:transparent url("../images/list-border-tan.gif") bottom left repeat-x;}
+	.vertical a {text-decoration:none; display:block;padding:9px 9px 6px;background:transparent url("../images/list-border-tan.gif") top left repeat-x;}
+	.vertical a:hover {background-color:#f6f5e9;}
+	.vertical .current a {background:#fff; color: #c60;border:1px solid #d7d5c4;border-width:1px 0 0 1px;}
+
 /* Side info panels */
 .info-panel {background:#b6d9e8; z-index:100;display:block;margin-bottom:18px; padding:18px 18px 1px;}
 	.info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif; border-bottom:1px solid #fff;font-size:1.2em;padding: 9px 18px; color: #fff; background: #94b3c0;}

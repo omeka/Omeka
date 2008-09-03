@@ -1,8 +1,9 @@
-<?php head(array('title'=>'Browse Users', 'body_class'=>'users'));?>
+<?php head(array('title'=>'Browse Users', 'body_class'=>'users narrow'));?>
+<h1>Users</h1>
 <?php common('settings-nav'); ?>
-<?php common('users-nav'); ?>
+
 <div id="primary">
-<h1 class="floater">Browse Users</h1>
+    
 <table id="users">
 	<thead>
 		<tr>

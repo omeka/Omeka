@@ -1,5 +1,4 @@
-<?php head(array('title'=>'Edit Settings', 'body_class'=>'settings')); ?>
-<?php common('settings-nav'); ?>
+<?php head(array('title'=>'Edit Settings', 'body_class'=>'settings narrow')); ?>
 <?php echo js('tooltip'); ?>
 
 <script type="text/javascript">
@@ -10,9 +9,12 @@ Event.observe(window,'load', function() {
 });
 //]]>
 </script>
+<h1>General Settings</h1>
+
+<?php common('settings-nav'); ?>
+
 <div id="primary">
 <?php echo flash(); ?>
-<h1>General Settings</h1>
 
 <form method="post" action="">
 	<fieldset>
