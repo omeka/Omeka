@@ -548,9 +548,9 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
          );
 
         if ($pluginBroker = $this->getPluginBroker()) {
-             $pluginBroker->applyFilters('define_response_contexts', $contextArray);
+             $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
         }
- 
+        
         $contexts->addContexts($contextArray); 
     }   
 }
