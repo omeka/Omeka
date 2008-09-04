@@ -254,16 +254,7 @@ class Omeka_Plugin_Broker
         } else {
             throw new Exception("Plugin named '$plugin' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$plugin' directory.");
         }
-        
-        $config = $this->config($plugin);
-        
-        if ($config !== null) {
-            return $config;
-        }
-        
-        //Now run the installer for the plugin
-        $install_hook = $this->_callbacks['install'][$plugin];
-        
+
         try {            
             $plugin_obj = new Plugin;
             $plugin_obj->active = 1;
@@ -271,12 +262,11 @@ class Omeka_Plugin_Broker
             $plugin_obj->forceSave();
             
             $plugin_id = $plugin_obj->id;
+            
+            //Now run the installer for the plugin
+            $install_hook = $this->getHook($plugin, 'install');
                                             
-            call_user_func_array($install_hook, array($plugin_id));
-            
-            //If more than one plugin needs to install itself, don't reuse the same form submission
-            unset($_POST);
-            
+            call_user_func_array($install_hook, array($plugin_id));            
         } catch (Exception $e) {
             
             echo "An error occurred when installing this plugin: ".$e->getMessage();

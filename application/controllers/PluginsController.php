@@ -70,14 +70,10 @@ class PluginsController extends Omeka_Controller_Action
         
         if (!$broker->isInstalled($plugin)) {
             
-            $config = $broker->install($plugin);
+            $broker->install($plugin);
+            $this->flashSuccess("Plugin named '$plugin' was successfully installed!");
             
-            if ($config !== null) {
-                $this->view->assign(compact('config', 'plugin'));
-            } else {
-                $this->flashSuccess("Plugin named '$plugin' was successfully installed!");
-                $this->redirect->goto('browse');
-            }
+            $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin));
         }
     }
     
