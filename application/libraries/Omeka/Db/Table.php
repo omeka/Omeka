@@ -150,12 +150,7 @@ class Omeka_Db_Table
      **/
     public function find($id)
     {        
-        //Cast to integer to prevent SQL injection
-        $id = (int) $id;
-
-        $select = $this->getSelect();
-        $select->where( $this->getTableAlias().'.id = ?', $id);
-        $select->limit(1);
+        $select = $this->getSelectForFind($id);
         return $this->fetchObject($select, array());
     }
     
@@ -242,6 +237,18 @@ class Omeka_Db_Table
         $select = $this->getSelect();
         $this->applySearchFilters($select, $params);
         return $select;
+    }
+    
+    public function getSelectForFind($recordId)
+    {
+        //Cast to integer to prevent SQL injection
+        $id = (int) $id;
+
+        $select = $this->getSelect();
+        $select->where( $this->getTableAlias().'.id = ?', $recordId);
+        $select->limit(1);     
+        
+        return $select;   
     }
     
     /**
