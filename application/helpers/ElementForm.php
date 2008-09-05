@@ -295,7 +295,11 @@ class Omeka_View_Helper_ElementForm
         $isHtml = $this->_getHtmlFlagForField($index);
         
         // Add a checkbox for the 'html' flag (always for any field)
-    	return $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
+        $html .= '<label class="use-html">Use HTML ';
+        $html .= $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
+        $html .= '</label>';
+        
+        return $html;
     }
     
     protected function _displayValidationErrors()
