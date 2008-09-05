@@ -159,16 +159,3 @@ function link_to_admin_home_page($text, $props = array())
 {
 	return '<a href="'.admin_url_for('').'" '._tag_attributes($props).'>'.htmlentities($text)."</a>\n";
 }
-
-/**
- * Alias for pagination().
- *
- * @todo Reimplement the menu option (for choosing # of results to show per_page).
- * @see pagination()
- * @param array
- * @return string
- **/
-function pagination_links(array $options=array())
-{
-    return pagination($options);
-}

@@ -8,7 +8,7 @@
 
 
 <div id="browse-meta">
-<div class="pagination"><?php echo pagination(); ?></div>
+<div class="pagination"><?php echo pagination_links(); ?></div>
 
 <ul class="navigation" id="view-style">
 	<li><a id="simple-view" href="<?php echo current_uri(array('view'=>'simple')); ?>"<?php if($_GET['view'] == 'simple' || $_GET['view'] == '') echo ' class="current"';?>>List View</a></li>

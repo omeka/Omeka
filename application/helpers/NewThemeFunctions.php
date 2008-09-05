@@ -675,7 +675,7 @@ function add_item_filter($field, $callback)
  * Return the pagination string.
  * 
  **/
-function pagination($options = array('scrolling_style' => null, 
+function pagination_links($options = array('scrolling_style' => null, 
                                      'partial_file'    => null, 
                                      'page_range'      => null, 
                                      'total_results'   => null, 
