@@ -158,6 +158,22 @@ function url_for_item($action = 'show')
 }
 
 /**
+ * This behaves as url_for() except it always provides a url to the public theme.
+ * 
+ * @see url_for()
+ * @param string
+ * @return void
+ **/
+function public_url_for()
+{
+    set_base_url_for_theme('public');
+    $args = func_get_args();
+    $url = call_user_func_array('url_for', $args);
+    set_base_url_for_theme();
+    return $url;
+}
+
+/**
  * Helper function to be used in public themes to allow plugins to modify the navigation of those themes.
  *
  * Plugins can modify navigation by adding filters to specific subsets of the
