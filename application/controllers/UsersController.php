@@ -140,6 +140,11 @@ class UsersController extends Omeka_Controller_Action
         if (!empty($_POST)) {
             
             $email = $_POST['email'];
+            
+            if (!Zend_Validate::is($email, 'EmailAddress')) {
+                return $this->flash('The email address you provided is invalid.  Please enter a valid email address.');
+            }
+            
             $ua = new UsersActivations;
             
             $user = $this->_table->findByEmail($email);
@@ -171,7 +176,7 @@ class UsersController extends Omeka_Controller_Action
             
             } else {
                 //If that email address doesn't exist
-                $this->flash('The email address you provided is invalid.');
+                $this->flash('The email address you provided does not correspond to an Omeka user.');
             }
         }
     }
