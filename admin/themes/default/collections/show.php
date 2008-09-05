@@ -19,14 +19,13 @@
 <div id="collection-items">
 	<h2>Recently Added to <?php echo h($collection->name); ?></h2>
 	<?php
-		$items = items(array('collection'=>$collection->name, 'recent'=>true));
+		$items = items(array('collection'=>$collection->name, 'recent'=>true, 'per_page'=>10));
+		set_items_for_loop($items);
 	?>
 	<ul>
-	<?php foreach ($items as $key => $item): ?>
-		<?php if ($key < 10): ?>
-		<li><span class="title"><?php echo link_to_item($item); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></li>
-		<?php endif; ?> 
-	<?php endforeach;?>
+	<?php while (loop_items()): ?>
+		<li><span class="title"><?php echo link_to_item(); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span></li>
+	<?php endwhile;?>
 	</ul>
 	<h4>Total Number of Items in Collection: <?php echo total_items($collection);?></h4>
 	
