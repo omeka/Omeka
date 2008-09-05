@@ -106,37 +106,7 @@ class ElementTable extends Omeka_Db_Table
         
         $select->where('es.name = ?', (string) $elementSet);
         
-        $elements = $this->fetchObjects($select);
-       
-       // Populate those element records with the values for a given item.
-       // Do this because display_form_input_for_element() requires the text records.
-       // Cannot use the cached values ($item->ElementTexts) because they may have been filtered already.
-       return $this->assignTextToElements($elements, $item->getElementText());
-    }
-    
-    /**
-     * Assign a set of Element texts to a set of Elements.
-     *
-     * @internal I'm not sure this belongs in the ElementTable class, because its
-     * not a finder method, but currently the code is split across multiple places
-     * and this is an attempt to consolidate it.
-     * @param array Set of Element records.
-     * @param array Set of ElementText records.
-     * @return array Set of elements with text assigned to it.
-     **/
-    public function assignTextToElements($elements, $textRecords)
-    {
-        foreach ($elements as $key => $element) {
-            // ElementText records are indexed by element_id
-            if ($textRecordSet = @$textRecords[$element->id]) {
-                // This could be shortened such to cut out the extra foreach loop.
-                foreach ($textRecordSet as $record) {
-                    $element->addText($record);
-                }
-            }
-        }
-        
-        return $elements;
+        return $this->fetchObjects($select);       
     }
     
     /**

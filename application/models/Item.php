@@ -102,9 +102,7 @@ class Item extends Omeka_Record
         /* My hope is that this will retrieve a set of elements, where each
         element contains an array of all the values for that element */
         $elements = $this->getTable('Element')->findByItemType($this->item_type_id);
-            
-        return $this->getTable('Element')->assignTextToElements($elements, $this->ElementTexts);
-
+        
         return $elements;
     }
     
