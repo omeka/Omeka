@@ -154,7 +154,8 @@ class Omeka_Controller_Flash
 	public function getError($field)
 	{
 		$msg = $this->getFlash()->msg;
-		
-		return @$msg[$field];		
+		if (is_array($msg)) {
+		  return @$msg[$field];
+		}
 	}
 }
