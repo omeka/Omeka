@@ -134,6 +134,16 @@ function has_files($item) {
 }
 
 /**
+ * @deprecated
+ * @return string
+ **/
+function admin_uri()
+{
+    trigger_error('Please use admin_url_for() to build URLs to the admin theme.');
+	return WEB_ROOT . '/admin/';
+}
+
+/**
  * Display an alternative value if the given variable is empty
  * @deprecated
  * @return string

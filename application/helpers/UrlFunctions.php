@@ -70,16 +70,6 @@ function items_rss_uri($params=array())
 	return $uri;
 }
 
-/**
- * 
- *
- * @return string
- **/
-function admin_uri()
-{
-	return WEB_ROOT . '/admin/';
-}
-
 
 function item_permalink_url($item)
 {

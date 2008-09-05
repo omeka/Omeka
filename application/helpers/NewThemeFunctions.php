@@ -161,8 +161,9 @@ function url_for_item($action = 'show')
  * This behaves as url_for() except it always provides a url to the public theme.
  * 
  * @see url_for()
- * @param string
- * @return void
+ * @see admin_url_for()
+ * @param mixed
+ * @return string
  **/
 function public_url_for()
 {
@@ -171,6 +172,20 @@ function public_url_for()
     $url = call_user_func_array('url_for', $args);
     set_base_url_for_theme();
     return $url;
+}
+
+/**
+ * @see public_url_for()
+ * @param mixed
+ * @return mixed
+ **/
+function admin_url_for()
+{
+    set_base_url_for_theme('admin');
+    $args = func_get_args();
+    $url = call_user_func_array('url_for', $args);
+    set_base_url_for_theme();
+    return $url;    
 }
 
 /**

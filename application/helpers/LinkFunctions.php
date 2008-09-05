@@ -157,7 +157,7 @@ function link_to_home_page($text, $props = array())
  **/
 function link_to_admin_home_page($text, $props = array())
 {
-	return '<a href="'.admin_uri().'" '._tag_attributes($props).'>'.h($text)."</a>\n";
+	return '<a href="'.admin_url_for('').'" '._tag_attributes($props).'>'.htmlentities($text)."</a>\n";
 }
 
 /**
