@@ -1,5 +1,5 @@
 <?php head();?>
-<?php common('users-nav'); ?>
+<?php common('settings-nav'); ?>
 
 <div id="primary">
 <h1>Edit a User</h1>

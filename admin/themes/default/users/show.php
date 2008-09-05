@@ -1,5 +1,5 @@
 <?php head();?>
-<?php common('users-nav'); ?>
+<?php common('settings-nav'); ?>
 
 <div id="primary">
 <h1>User: <?php echo h($user->first_name); ?> <?php echo h($user->last_name); ?> <a class="edit" href="<?php echo uri('users/edit/'.$user->id); ?>">(Edit)</a></h1>
