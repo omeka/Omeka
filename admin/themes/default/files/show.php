@@ -8,13 +8,16 @@
 
 <?php
 
-function display_definition_list_for_elements($file, $elements)
+function display_definition_list_for_elements($file, $elements, $emptyText = '[Empty]')
 {
     $html = '';
     foreach ($elements as $element): 
         $html .= '<dt>' . $element->name . '</dt>';
         $texts = $file->getTextsByElement($element);
         $html .= '<dd>';
+        if (!count($texts)) {
+            $html .= $emptyText;
+        }
         foreach ($texts as $textRecord): 
             $html .= $textRecord->text; 
         endforeach;
@@ -65,6 +68,16 @@ function display_definition_list_for_elements_by_set($file, $elementSetName)
 <dt>Authentication:</dt> <dd><?php if ($file->authentication): ?><?php echo h($file->authentication); ?><?php endif; ?></dd>
 </dl>
 </div>
+
+<?php if ($mimeTypeElements = $file->getMimeTypeElements()): ?>
+    
+<div id="extended-metadata" class="section">
+    <h2>Special metadata extracted for &quot;<?php echo htmlentities($file->getMimeType()); ?>&quot;</h2>
+    <dl>
+    <?php echo display_definition_list_for_elements($file, $mimeTypeElements); ?>
+    </dl>
+</div>
+<?php endif; ?>
 
 </div><!--end primary-->
 <?php foot();?>

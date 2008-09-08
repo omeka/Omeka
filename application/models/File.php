@@ -68,6 +68,11 @@ class File extends Omeka_Record {
         }
     }
     
+    protected function afterSave()
+    {
+        $this->saveElementTexts();
+    }
+    
     /**
      * Retrieve the path for the file
      *
@@ -361,7 +366,7 @@ class File extends Omeka_Record {
         
         $this->createDerivativeImages($path);
         
-        $this->processExtendedMetadata($path);
+        $this->extractMimeMetadata($path);
     }
     
     /**
@@ -461,7 +466,7 @@ class File extends Omeka_Record {
         
         $this->createDerivativeImages($path);
         
-        $this->processExtendedMetadata($path);
+        $this->extractMimeMetadata($path);
     }
     
     /**
@@ -518,25 +523,41 @@ class File extends Omeka_Record {
                 throw new Exception("Cannot retrieve metadata for the element called '$element->name'!");
             }
             $elementText = $helperClass->$helperFunction();
-            
             $this->addTextForElement($element, $elementText);
         }        
     }
     
+    public function getMimeTypeElements($mimeType = null)
+    {
+        if (!$mimeType) {
+            $mimeType = $this->getMimeType();
+        }
+        
+        return $this->getTable('Element')->findForFilesByMimeType($mimeType);
+    }
+    
     /**
-     * @todo Implement this!
+     * Retrieve the definitive MIME type for this file.
+     * 
+     * @param string
+     * @return string
+     **/
+    public function getMimeType()
+    {
+        return $this->mime_browser;
+    }
+    
+    /**
+     * @internal Seems kind of arbitrary that 'mime_browser' contains the
+     * definitive MIME type, but at least we can abstract it so that it's
+     * easier to change later if necessary.
      * 
      * @param string
      * @return void
      **/
-    protected function saveMimeTypeElements()
+    public function setMimeType($mimeType)
     {
-        exit('Saving MIME-specific data for files has not been implemented yet!');
-    }
-    
-    protected function getMimeTypeElements($mimeType)
-    {
-        return $this->getTable('Element')->findForFilesByMimeType($mimeType);
+        $this->mime_browser = $mimeType;
     }
     
     /**
@@ -544,14 +565,14 @@ class File extends Omeka_Record {
      *
      * @return void
      **/
-    public function processExtendedMetadata($path)
+    public function extractMimeMetadata($path)
     {
         if (!is_readable($path)) {
             throw new Exception( 'File cannot be read!' );
         }
                 
         //If we can use the browser mime_type instead of the ID3 extrapolation, do that
-        $mime_type = $this->mime_browser;    
+        $mime_type = $this->getMimeType();    
         
         $id3 = $this->retrieveID3Info($path);
         
@@ -563,10 +584,12 @@ class File extends Omeka_Record {
         
         if (!$mime_type) {
             return false;
+        } else {
+            $this->setMimeType($mime_type);
         }
         
         $elements = $this->getMimeTypeElements($mime_type);
-        
+
         if (empty($elements)) {
             return;
         }
@@ -617,16 +640,6 @@ class File extends Omeka_Record {
         } catch (Exception $e) {
             return false;
         }        
-    }
-    
-    /**
-     * Save extended metadata if we got it.
-     *
-     * @return void
-     **/
-    protected function afterSave()
-    {
-        $this->saveMimeTypeElements();
     }
     
     /**

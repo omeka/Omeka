@@ -39,7 +39,7 @@ class ElementTable extends Omeka_Db_Table
     {
         $db = $this->getDb(); 
         $sqlMimeTypeElements = $this->getSelect()
-        ->joinInner(array('mesl'=>$db->MimeElementSetLookup), 'mesl.element_set_id = es.id')
+        ->joinInner(array('mesl'=>$db->MimeElementSetLookup), 'mesl.element_set_id = es.id', array())
         ->where('mesl.mime = ?', $mimeType);
         
         return $this->fetchObjects($sqlMimeTypeElements);        

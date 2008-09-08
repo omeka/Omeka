@@ -309,6 +309,9 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * Creates a new ElementText record, populates it with the specified text value 
      * and assigns it to the element.
      * 
+     * saveElementTexts() must be called after this in order to save the element
+     * texts to the database.  
+     * 
      * @param string
      * @return void
      **/
@@ -320,9 +323,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $textRecord->record_type_id = $this->getRecordTypeId();
         $textRecord->text = $elementText;
         $textRecord->html = (int)$isHtml;
-        
-        $element->addText($textRecord);
-        
+            
         $this->_textsToSave[] = $textRecord;
     }
     
@@ -552,8 +553,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
         
         // Delete all the elements that were displayed on the form before adding the new stuff.
         $elementIdsFromForm = array_keys($this->_elementsOnForm);
-        $this->deleteElementTextsByElementId($elementIdsFromForm);
-        
+        if (count($elementIdsFromForm)) {
+            $this->deleteElementTextsByElementId($elementIdsFromForm);
+        }
+                
         foreach ($this->_textsToSave as $textRecord) {
             $textRecord->record_id = $this->_record->id;
             $textRecord->forceSave();
