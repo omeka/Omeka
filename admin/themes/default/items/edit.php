@@ -1,9 +1,9 @@
-<?php head(array('title'=>'Edit Item', 'body_class'=>'items narrow'));?>
+<?php head(array('title'=>'Edit Item', 'body_class'=>'items primary','content_class' => 'vertical-nav'));?>
 <h1>Edit &#8220;<?php echo item('Title', ', '); ?>&#8221;</h1>
 
 <!-- Create the sections for the various element sets -->
 
-<ul id="section-nav" class="vertical navigation">
+<ul id="section-nav" class="navigation">
     
     <?php foreach ($elementSets as $key => $elementSet): ?>
     <li><a href="#<?php echo text_to_id($elementSet->name); ?>-metadata"><?php echo $elementSet->name; ?></a></li>
@@ -23,9 +23,7 @@
 	<form method="post" enctype="multipart/form-data" id="item-form" action="">
 		<?php include 'form.php'; ?>
 		<p id="item-form-submits">
-		    <button type="submit" name="submit">Save Changes</button> or 
-		    <?php echo link_to_item('show', 'Cancel', 
-		        array('id'=>'cancel_changes', 'class'=>'cancel')); ?>
+		    <input type="submit" name="submit" id="save-changes" class="submit" value="Save Changes" />
 		</p>
 		<p id="delete_item_link">
 		    <?php echo link_to_item('delete', 'Delete This Item', 
@@ -36,4 +34,5 @@
 
 
 </div>
+
 <?php foot();?>

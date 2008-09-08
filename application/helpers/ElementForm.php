@@ -295,9 +295,9 @@ class Omeka_View_Helper_ElementForm
         $isHtml = $this->_getHtmlFlagForField($index);
         
         // Add a checkbox for the 'html' flag (always for any field)
-        $html .= '<label class="use-html">Use HTML ';
+       // $html .= '<label class="use-html">Use HTML ';
         $html .= $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
-        $html .= '</label>';
+       // $html .= '</label>';
         
         return $html;
     }
@@ -332,10 +332,10 @@ class Omeka_View_Helper_ElementForm
         // Used by Javascript.
     	$html .= '<div class="controls">';
 
-    	$html .= $this->view->formSubmit('add_element_' . $this->_element['id'], '+', 
+    	$html .= $this->view->formSubmit('add_element_' . $this->_element['id'], 'Add Input', 
     	    array('class'=>'add-element'));
 
-    	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], '-', 
+    	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], 'Remove Input', 
     	    array('class'=>'remove-element'));
 
     	$html .= '</div>'; // Close 'controls' div

@@ -17,7 +17,7 @@
 
 <!-- JavaScripts -->
 <?php echo js('default'); ?>
-<?php echo js('form-toggle');?>
+<?php //echo js('form-toggle');?>
 <?php echo js('globals'); ?>
 <?php echo js('archive'); ?>
 
@@ -48,5 +48,4 @@
 		
 		
 		
-		<div id="content">
-			<div class="wrapper">
+		<div id="content" <?php if(!empty($content_class)) echo ' class="'. $content_class .'"'; ?>>

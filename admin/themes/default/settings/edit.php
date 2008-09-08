@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Edit Settings', 'body_class'=>'settings narrow')); ?>
+<?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'body_class'=>'settings primary')); ?>
 <?php echo js('tooltip'); ?>
 
 <script type="text/javascript">
@@ -16,7 +16,7 @@ Event.observe(window,'load', function() {
 <div id="primary">
 <?php echo flash(); ?>
 
-<form method="post" action="">
+<form method="post" action="" id="settings-form">
 	<fieldset>
 	<?php $siteSettings = array(
 	    array('name'=>'site_title', 'description' => 'The title of your website.'),
@@ -36,14 +36,13 @@ Event.observe(window,'load', function() {
         <?php $settingName =  $setting['name']; ?>
         <label for="<?php echo $settingName; ?>"><?php echo ucwords(Inflector::humanize($settingName)); ?></label>
         <?php echo $this->formText($settingName, $$settingName, array('class'=>'textinput')); ?>
-        <img src="<?php echo img('information.png'); ?>" />
-        <span class="tooltip"><?php echo $setting['description']; ?></span>
+        <p class="explanation"><?php echo $setting['description']; ?></p>
     </div>
 <?php endforeach; ?>
 	</fieldset>
 	
 	<fieldset>
-	    <input type="submit" name="submit" value="Save Changes" />
+	    <input type="submit" id="settings-submit" name="submit" class="submit submit-medium" value="Save Changes" />
 	</fieldset>
 </form>
 </div>

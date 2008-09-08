@@ -64,7 +64,6 @@ Omeka.Form = Object.extend({}, {
 		   
 		   // Insert the informational image right after the label for the field
 		   div.select('label').first().insert({after:image});
-		   div.style.paddingLeft = "20px";
 		   
 		   var tooltip = new Tooltip(image, span, 
 		       {default_css:true, zindex:100000});

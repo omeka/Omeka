@@ -1,8 +1,9 @@
 <?php head(array('title'=>'Collection # '.$collection->id, 'body_class'=>'collections')); ?>
+<h1>Collection: <?php echo h($collection->name);?></h1>
+
 <div id="primary">
 <div id="collection-info">
 
-<h1>Collection: <?php echo h($collection->name);?></h1>
 
 <p> <a class="edit" href="<?php echo uri('collections/edit/').$collection->id; ?>">Edit</a></p>
 

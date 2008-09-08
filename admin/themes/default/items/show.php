@@ -1,4 +1,9 @@
 <?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items')); ?>
+<h1 id="title">#<?php echo item('id');?> 
+<?php echo item('Title', ', '); //Titles should all be displayed, separated by , ?></h1>
+<p id="edit-delete"> 
+<?php 
+echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 
 
 <script type="text/javascript" charset="utf-8">
@@ -60,11 +65,6 @@
 </li>
 </ul>
 
-<h1 id="title">#<?php echo item('id');?> 
-<?php echo item('Title', ', '); //Titles should all be displayed, separated by , ?></h1>
-<p id="edit-delete"> 
-<?php 
-echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 
 <div id="item-images">
 <?php echo display_files_for_item(); ?>

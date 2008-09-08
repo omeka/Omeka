@@ -1,4 +1,4 @@
-<ul id="secondary-nav" class="navigation vertical">
+<ul id="section-nav" class="navigation vertical">
 <?php $navArray = array('General Settings' => url_for('settings'),
                     'Element Sets' => url_for('element-sets'),
 					'Themes' => url_for('themes'),

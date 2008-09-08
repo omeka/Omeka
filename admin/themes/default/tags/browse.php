@@ -1,16 +1,11 @@
-<?php head(array('title'=>'Browse Tags', 'body_class'=>'tags')); ?>
+<?php head(array('title'=>'Browse Tags', 'content_class' => 'horizontal-nav','body_class'=>'tags primary')); ?>
+<h1>Tags</h1>
+
+<?php common('tags-nav'); ?>
 
 <div id="primary">
-<h1>Tags</h1>
 <?php if ( total_results() ): ?>
 
-<?php if(has_permission('Tags', 'edit')): ?>
-	<h2><a href="<?php echo uri('tags/edit'); ?>">Edit/Rename</a></h2>
-<?php endif; ?>
-
-<?php if(has_permission('Tags', 'remove')): ?>
-	<h2><a href="<?php echo uri('tags/delete'); ?>">Delete</a></h2>
-<?php endif; ?>
 
 <h3>View tags for: 
 	<?php

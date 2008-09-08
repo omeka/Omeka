@@ -1,19 +1,33 @@
-<?php head(array('title'=>'Browse Items', 'body_class'=>'items')); ?>
+<?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'body_class'=>'items')); ?>
+<h1>Browse Items (<?php echo total_results();?> items total)</h1>
+<p id="add-item" class="add-button"><a class="add" href="<?php echo uri('items/add'); ?>">Add an Item</a></p>
+<div id="search">
+<?php echo simple_search(array(), url_for('items/browse')); ?>
+
+<?php echo link_to_advanced_search(); ?>
+</div>
+<ul id="section-nav" class="navigation">
+<?php
+	$section_nav = array(
+	    'List View' => current_uri(array('view'=>'simple')), 
+	    'Detailed View' => current_uri(array('view'=>'detailed'))
+	    );
+				
+	echo nav($section_nav);
+?>
+</ul>
+
+
 <div id="primary">
-    <h1>Browse Items (<?php echo total_results();?> items total)</h1>
-    
+
 <?php echo flash(); ?>
 
 <?php if ( total_results() ): ?>
 
-
 <div id="browse-meta">
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
-<ul class="navigation" id="view-style">
-	<li><a id="simple-view" href="<?php echo current_uri(array('view'=>'simple')); ?>"<?php if($_GET['view'] == 'simple' || $_GET['view'] == '') echo ' class="current"';?>>List View</a></li>
-	<li><a id="detailed-view" href="<?php echo current_uri(array('view'=>'detailed')); ?>"<?php if($_GET['view'] == 'detailed') echo ' class="current"';?>>Detailed View</a></li>
-</ul>	
+	
 </div>
 <form action="<?php echo uri('items/power-edit'); ?>" method="post" accept-charset="utf-8">
 
@@ -32,7 +46,7 @@
 </fieldset>
 
 <fieldset>
-    <input type="submit" class="submit" id="save-changes" name="submit" value="Save Changes" />
+    <input type="submit" class="submit submit-medium" id="save-changes" name="submit" value="Save Changes" />
 </fieldset>
 
 </form>
@@ -57,12 +71,6 @@
 
 </div>
 <div id="secondary">
-    <a class="add" id="add-item" href="<?php echo uri('items/add'); ?>">Add an Item</a>
-
-    <div id="search">
-    <?php echo simple_search(array(), url_for('items/browse')); ?>
-
-    <?php echo link_to_advanced_search(); ?>
-    </div>
+    
 </div>
 <?php foot(); ?>

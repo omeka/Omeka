@@ -1,9 +1,10 @@
 <?php head(array('title'=>'Browse Collections', 'body_class'=>'collections')); ?>
+<h1>Collections</h1>
+	<p id="add-collection" class="add-button"><a href="<?php echo uri('collections/add'); ?>" class="add-collection">Add a Collection</a></p>
 <div id="primary">
 
-	<h1>Collections</h1>
 	<?php if(!empty($collections)): ?>
-	<a href="<?php echo uri('collections/add'); ?>" id="add-collection" class="add-collection">Add a Collection</a>
+
 		<table id="items" class="simple" cellspacing="0" cellpadding="0">
         	<thead>
         		<tr>

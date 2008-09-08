@@ -1,4 +1,5 @@
-<?php head(array('body_class'=>'index narrow', 'title'=>'Dashboard')); ?>
+<?php head(array('body_class'=>'index primary-secondary', 'title'=>'Dashboard')); ?>
+<h1>Dashboard</h1>
 	<div id="primary">
 	    
 		<?php if (OMEKA_MIGRATION > (int) get_option('migration')): ?>
@@ -17,7 +18,7 @@
         <?php endif; ?>
             
 			<div id="getting-started">
-				<h1>Getting Started with Omeka</h1>
+				<h2>Getting Started with Omeka</h2>
 				<dl>
 					<dt class="items"><?php echo link_to('items', null, 'Items'); ?></dt>
 					<dd class="items">
@@ -87,6 +88,7 @@
 				<ul>
 				    <?php $key = 0; ?>
 					<?php while(loop_items()): ?>
+					    <?php $item_type = strtolower(item('Item Type Name'));?>
 						<li class="<?php echo is_odd($key++) ? 'even' : 'odd'; ?>">
 						    <a href="<?php echo url_for_item(); ?>">
 						        <span class="title"><?php  echo item('Title', 0); ?></span> 

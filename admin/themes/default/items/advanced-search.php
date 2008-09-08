@@ -1,10 +1,11 @@
 <?php 
 if (!$isPartial): // If we are using the partial view of this search form.
 head(array('title'=>'Advanced Search')); ?>
+<h1>Search Items</h1>
+
 <div id="primary">    
 <?php endif; ?>
 
-<h1>Search Items</h1>
 
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
@@ -17,10 +18,10 @@ head(array('title'=>'Advanced Search')); ?>
 </script>
 	
 <form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo url_for('items/browse'); ?>" method="get">
-	
+	    <h2>Search for Keywords</h2>
 		<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
 		
-		<h3>Search by Specific fields</h3>
+		<h2>Narrow by Specific fields</h2>
 		
 		<div id="advanced-search" class="field">
 			
@@ -69,7 +70,7 @@ head(array('title'=>'Advanced Search')); ?>
 		</div>
 		
 		<div id="search-by-range" class="field">
-		    <h3>Search by a range of ID#s (example: 1-4, 156, 79)</h3>
+		    <h2>Search by a range of ID#s (example: 1-4, 156, 79)</h2>
 			<?php echo text(
 				array('name'=>'range', 'class'=>'textinput'), 
 				@$_GET['range'], 
@@ -102,12 +103,9 @@ head(array('title'=>'Advanced Search')); ?>
 		echo checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
 	?>
 	</div>
-	</fieldset>
 	
 	<?php fire_plugin_hook('append_to_search_form'); ?>
-	<fieldset>
 	    <input type="submit" name="submit_search" id="submit_search" value="Search" />
-	</fieldset>
 </form>
 
 <?php if (!$isPartial): ?>

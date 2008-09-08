@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Themes', 'body_class'=>'themes narrow'));?>
+<?php head(array('title'=>'Themes', 'content_class' => 'vertical-nav', 'body_class'=>'themes primary'));?>
 <h1>Themes</h1>
 
 <?php common('settings-nav'); ?>

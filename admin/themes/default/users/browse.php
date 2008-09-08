@@ -1,9 +1,9 @@
-<?php head(array('title'=>'Browse Users', 'body_class'=>'users narrow'));?>
+<?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'body_class'=>'users primary'));?>
 <h1>Users</h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">
-    
+<h2>Current Users</h2>
 <table id="users">
 	<thead>
 		<tr>
@@ -29,10 +29,11 @@
 </table>
 
 <div>
+    <h2>Add a User</h2>
 	<form id="new-user-form" action="<?php echo uri('users/add'); ?>" method="post" accept-charset="utf-8">
 		<?php common('form', array(), 'users'); ?>
 		
-		<input type="submit" name="submit" value="Add User" />
+		<input type="submit" name="submit" class="submit submit-medium" value="Add User" />
 	</form>
 	
 </div>
