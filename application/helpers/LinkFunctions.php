@@ -10,7 +10,7 @@
  * @param array $props Attributes for the <a> tag
  * @return string HTML
  **/
-function link_to($record, $action=null, $text, $props = array())
+function link_to($record, $action=null, $text='View', $props = array())
 {
     $urlOptions = array();
     //Use Zend Framework's built-in 'default' route
@@ -30,7 +30,7 @@ function link_to($record, $action=null, $text, $props = array())
 	$url = url_for($urlOptions, $route);
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-	return '<a href="'. $url . '"' . $attr . ' title="View '. htmlentities($text).'">' . h($text) . '</a>';
+	return '<a href="'. $url . '"' . $attr . ' title="'. htmlentities($text).'">' . h($text) . '</a>';
 }
 
 function link_to_item($action='show', $text=null, $props=array(), $item=null)
