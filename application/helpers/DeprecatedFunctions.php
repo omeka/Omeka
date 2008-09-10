@@ -144,6 +144,16 @@ function admin_uri()
 }
 
 /**
+ * Determine whether or not the collection has any collectors.
+ * 
+ * @return boolean
+ **/
+function has_collectors($collection) {
+    trigger_error('Please use collection_has_collectors() instead of has_collectors()!');
+	return $collection->hasCollectors();
+}
+
+/**
  * Display an alternative value if the given variable is empty
  * @deprecated
  * @return string

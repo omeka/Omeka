@@ -630,12 +630,178 @@ function loop_files_for_item($reset=false)
     
     if(list($key, $file) = each($files)) {
         set_current_file($file);
-        return true;
+        return $file;
     }
     
     //Reset loop at end
     $files = null;
     return false;
+}
+
+/**
+ * Loop through the collections that have been set for use.
+ * 
+ * @param string
+ * @return void
+ **/
+function loop_collections()
+{
+    static $collections = null;
+    if (!$collections) {
+        $collections = __v()->collections;
+    }
+    
+    if (list($key, $collection) = each($collections)) {
+        set_current_collection($collection);
+        return $collection;
+    }
+    
+    $collections = null;
+    return false;
+}
+
+/**
+ * @access private
+ * @param Collection
+ * @return void
+ **/
+function set_current_collection($collection)
+{
+    __v()->collection = $collection;
+}
+
+/**
+ * 
+ * @param string
+ * @return void
+ **/
+function set_collections_for_loop($collections)
+{
+    __v()->collections = $collections;
+}
+
+/**
+ * @access private
+ * @return Collection|null
+ **/
+function get_current_collection()
+{
+    return __v()->collection;
+}
+
+/**
+ * This is a similar interface to item(), except for accessing metadata about collections.
+ * 
+ * As of the date of writing, it is greatly simplified in comparison to item(), 
+ * mostly because collections do not (and may not ever) utilize the 'elements'
+ * metadata schema.
+ * 
+ * @see item()
+ * @param string
+ * @param array $options
+ * @return string|array
+ **/
+function collection($fieldName, $options=array())
+{
+    $collection = get_current_collection();
+    
+    // Retrieve the data to display.  
+    switch (strtolower($fieldName)) {
+        case 'id':
+            $text = $collection->id;
+            break;
+        case 'name':
+        case 'title':   // Title and Name are aliased (since technically collections should have a title, not a name).
+            $text = $collection->name;
+            break;
+        case 'description':
+            $text = $collection->description;
+            break;
+        case 'public':
+            $text = $collection->public;
+            break;
+        case 'featured':
+            $text = $collection->featured;
+            break;
+        case 'collectors': // The names of collectors
+            $textArray = array();
+            foreach ($collection->Collectors as $key => $collector) {
+                $textArray[$key] = $collector->name;
+            }
+            break;
+        default:
+            throw new Exception('Field does not exist for collections!');
+            break;
+    }
+    
+    // Apply any options to it.
+    if (isset($options['snippet'])) {
+        $text = snippet($text, 0, (int)$options['snippet']);
+    }
+    
+    if (isset($options['delimiter']) and isset($textArray)) {
+        $text = join($options['delimiter'], $textArray);
+    }
+    
+    // Escape it for display as HTML.
+    if (isset($text)) {
+        return apply_filters('html_escape', $text);
+    } else {
+        foreach ($textArray as $key => $value) {
+            $textArray[$key] = apply_filters('html_escape', $value);
+        }
+        return $textArray;
+    }
+}
+
+/**
+ * Retrieve a certain # of items in the collection
+ * 
+ * @param string
+ * @return void
+ **/
+function loop_items_in_collection($num = 10, $options = array())
+{
+    // Cache this so we don't end up calling the DB query over and over again
+    // inside the loop.
+    static $loopIsRun = false;
+    if (!$loopIsRun) {
+        // Retrieve a limited # of items based on the collection given.
+        $items = items(array('collection'=>get_current_collection()->id, 'per_page'=>$num));
+        set_items_for_loop($items);
+    }
+    
+    return loop_items();
+}
+
+function total_items_in_collection()
+{
+    return total_items(get_current_collection());
+}
+
+function collection_has_collectors()
+{
+    return get_current_collection()->hasCollectors();
+}
+
+function collection_is_public()
+{
+    return get_current_collection()->public;
+}
+
+function collection_is_featured()
+{
+    return get_current_collection()->featured;
+}
+
+function link_to_current_collection()
+{
+    return link_to_collection(get_current_collection());
+}
+
+function url_to_browse_items_by_collection()
+{
+     return uri('items/browse/', array('collection'=>collection('Id')));
 }
 
 /**

@@ -129,17 +129,17 @@ function items(array $params = array())
 	return get_db()->getTable('Item')->findBy($params);
 }
 
-function collection($id=null)
-{
-	if(!$id && Zend_Registry::isRegistered('collection')) {
-		$c = Zend_Registry::get('collection');
-
-		return $c;
-	}
-	
-	$c = get_db()->getTable('Collection')->find($id);
-	return $c;
-}
+// function collection($id=null)
+// {
+//  if(!$id && Zend_Registry::isRegistered('collection')) {
+//      $c = Zend_Registry::get('collection');
+// 
+//      return $c;
+//  }
+//  
+//  $c = get_db()->getTable('Collection')->find($id);
+//  return $c;
+// }
 
 function collections(array $params = array())
 {

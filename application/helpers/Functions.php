@@ -416,16 +416,6 @@ function has_type($item, $name=null) {
 }
 
 
-
-/**
- * Determine whether or not the collection has any collectors.
- * 
- * @return boolean
- **/
-function has_collectors($collection) {
-	return $collection->hasCollectors();
-}
-
 /**
  * 
  *
