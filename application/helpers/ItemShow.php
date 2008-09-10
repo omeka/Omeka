@@ -19,7 +19,7 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      * The name of the item type element set. Change this constant if the name 
      * changes in the database.
      */
-    const ELEMENT_SET_ITEM_TYPE = 'Item Type';
+    const ELEMENT_SET_ITEM_TYPE = 'Item Type Metadata';
     
     /**
      * The Item object.
