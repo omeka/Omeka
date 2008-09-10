@@ -261,12 +261,12 @@ echo js('tiny_mce/tiny_mce');
 <div id="item-metadata">
 <?php foreach ($elementSets as $key => $elementSet): ?>
 <fieldset class="set" id="<?php echo text_to_id($elementSet->name); ?>-metadata">
-        <legend><?php echo htmlentities($elementSet->name); ?> Metadata</legend>
+        <legend><?php echo htmlentities($elementSet->name); ?></legend>
         <?php 
         // Would prefer to display all the metadata sets in the same way, but this
         // necessitates branching for the Item Type set.
         switch ($elementSet->name):
-            case 'Item Type':
+            case 'Item Type Metadata':
                 include 'item-type-form.php';
                 break;
             default:
