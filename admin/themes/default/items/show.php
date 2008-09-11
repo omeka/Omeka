@@ -3,7 +3,7 @@
 <?php echo item('Title', ', '); //Titles should all be displayed, separated by , ?></h1>
 <p id="edit-delete"> 
 <?php 
-echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
+echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
 <ul class="item-pagination navigation">
 <li id="previous-item" class="previous">
 	<?php echo link_to_previous_item('Previous'); ?>
@@ -127,7 +127,7 @@ echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 	    <h2>View File Metadata</h2>
         	<div id="file-list">
         	    <?php if(!item_has_files()):?>
-                	<p>There are no files for this item. <?php echo link_to_item('edit', 'Add some'); ?>.</p>
+                	<p>There are no files for this item. <?php echo link_to_item('Add some', array(), 'edit'); ?>.</p>
                 <?php else: ?>
         		<ul>
         	<?php while(loop_files_for_item()): ?>

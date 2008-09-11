@@ -16,7 +16,7 @@
 			<?php echo hidden(array('name'=>"items[" . item('id') . "][id]"), item('id')); ?>	
 			</li>
 		</ul>
-		<p><?php echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
+		<p><?php echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
 	</div>
 
 	<div class="description">

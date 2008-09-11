@@ -26,8 +26,8 @@
 		    <input type="submit" name="submit" id="save-changes" class="submit submit-medium" value="Save Changes" />
 		</p>
 		<p id="delete_item_link">
-		    <?php echo link_to_item('delete', 'Delete This Item', 
-		        array('class'=>'delete')); ?>
+		    <?php echo link_to_item('Delete This Item', 
+		        array('class'=>'delete'), 'delete'); ?>
 		</p>
 	</form>
 
