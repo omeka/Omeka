@@ -665,7 +665,12 @@ function has_items_for_loop()
  **/
 function has_items()
 {
-    return (get_db()->getTable('Item')->count() > 0);    
+    return (total_items() > 0);    
+}
+
+function has_collections()
+{
+    return (total_collections() > 0);
 }
 
 /**
@@ -728,14 +733,31 @@ function loop_files_for_item($reset=false)
 /**
  * Loop through the collections that have been set for use.
  * 
- * @param string
- * @return void
+ * @internal There is a lot of duplication between this and loop_items(), loop_files_for_item(), etc.
+ * It might be good to factor this out at a later date.
+ * @param array Set of parameters to use for the database call.
+ * @param integer
+ * @return Collection|false
  **/
-function loop_collections()
+function loop_collections($params = array(), $limit = 10)
 {
     static $collections = null;
     if (!$collections) {
-        $collections = __v()->collections;
+        // Set up the collections to use for the loop.  Most cases will involve
+        // collection data that has been retrieved already via the controller.
+        // In that case using these parameters is discouraged.
+        if (!empty($params)) {
+            // This is necessary b/c CollectionTable takes a 'per_page' parameter
+            // instead of a 'limit' parameter.  This may need to change in the future.
+            $params['per_page'] = $limit;
+            
+            // Retrieve the collections directly from the database.  
+            $collections = get_db()->getTable('Collection')->findBy($params);
+        } else {
+            // If we haven't passed in any parameters, this should get the 
+            // pre-designated collections for the loop.
+            $collections = get_collections_for_loop();
+        }
     }
     
     if (list($key, $collection) = each($collections)) {
@@ -765,6 +787,11 @@ function set_current_collection($collection)
 function set_collections_for_loop($collections)
 {
     __v()->collections = $collections;
+}
+
+function get_collections_for_loop()
+{
+    return __v()->collections;
 }
 
 /**
