@@ -1,5 +1,10 @@
 <?php 
-add_filter('html_escape', 'htmlentities');
+add_filter('html_escape', 'utf8_htmlentities');
+
+function utf8_htmlentities($value)
+{
+    return htmlentities($value, ENT_QUOTES, "UTF-8");
+}
 
 // This messes up the form inputs that use the item's ID, but it still serves as
 // an example of what the system can do.
