@@ -25,7 +25,7 @@
 	<td><?php echo checkbox(array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured"), item('featured')); ?>
 		<?php echo hidden(array('name'=>"items[" . item('id') . "][id]"), item('id')); ?>
 	</td>
-	<td><?php echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></td>
+	<td><?php echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></td>
 </tr>
 <?php endwhile; ?>
 </tbody>
