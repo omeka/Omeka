@@ -1,11 +1,17 @@
-<?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items')); ?>
+<?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items primary-secondary')); ?>
 <h1 id="title">#<?php echo item('id');?> 
 <?php echo item('Title', ', '); //Titles should all be displayed, separated by , ?></h1>
 <p id="edit-delete"> 
 <?php 
 echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
-
-
+<ul class="item-pagination navigation">
+<li id="previous-item" class="previous">
+	<?php echo link_to_previous_item('Previous'); ?>
+</li>
+<li id="next-item" class="next">
+	<?php echo link_to_next_item('Next'); ?>
+</li>
+</ul>
 <script type="text/javascript" charset="utf-8">
     
     //Handles tagging of items via AJAX
@@ -56,88 +62,84 @@ echo link_to_item('edit', 'Edit', array('class'=>'edit')); ?></p>
 <div id="primary">
 <?php echo flash(); ?>
 
-<ul class="item-pagination navigation">
-<li id="previous-item" class="previous">
-	<?php echo link_to_previous_item('Previous'); ?>
-</li>
-<li id="next-item" class="next">
-	<?php echo link_to_next_item('Next'); ?>
-</li>
-</ul>
+
 
 
 <div id="item-images">
-<?php echo display_files_for_item(); ?>
-	
+<?php echo display_files_for_item(); ?>	
 </div>
+
 <div id="core-metadata" class="showitem">
-
 <?php echo show_item_metadata(); ?>
-	
-	<div id="citation" class="field">
-	<h3>Bibliographic Citation</h3>
-	<div>
-	<p><?php echo item_citation();?></p>
-	</div>
-	</div>
-
 </div>
 
-<?php if ( item_belongs_to_collection() ): ?>
-	<div id="collection" class="field">
-	<h3>Collection</h3>
-	<div>
-		<p><?php echo item('Collection Name'); ?></p>
-	</div>
-	</div>
-<?php endif; ?>
+<div id="additional-metadata">
+	<?php fire_plugin_hook('append_to_item_show', $item); ?>
+</div>
 
-<div id="type-metadata" class="showitem">
-
-<h2>Tags</h2>
-	<?php if ( has_permission('Items','tag') ): ?>
-		<div id="my-tags" class="field">
-		<h3>My Tags</h3>
-		<form id="tags-form" method="post" action="<?php echo uri('items/modify-tags/') ?>">
-		    <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id">
-			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
-			<input type="submit" name="modify_tags" value="Add/Change Your Tags" id="tags-submit">
-		</form>
-		</div>
-	<?php endif; ?>
-
-	<div class="field">
-		<h3>All Tags</h3>
-		<div id="tags">
-			<ul class="tags">
+</div>
+<div id="secondary">
+    
+    <div class="info-panel">
+    	<h2>Bibliographic Citation</h2>
+    	<div>
+    	<p><?php echo item_citation();?></p>
+    	</div>
+    </div>
+    
+    <?php if ( item_belongs_to_collection() ): ?>
+    	<div id="collection" class="info-panel">
+    	<h2>Collection</h2>
+    	<div>
+    		<p><?php echo item('Collection Name'); ?></p>
+    	</div>
+    	</div>
+    <?php endif; ?>
+    
+    <div id="tags" class="info-panel">
+		<h2>Tags</h2>
+		<div id="tag-cloud">
+		    <h3>All Tags</h3>
+			<ul>
 				<?php common('tag-list', compact('item'), 'items'); ?>
 			</ul>
 		</div>
-	</div>
 		
-<?php if(!item_has_files()):?>
-	<p>There are no files for this item. <?php echo link_to_item('edit', 'Add some'); ?>.</p>
-<?php else: ?>
-
-<h2>View File Metadata</h2>
-	<div id="file-list">
-		<ul>
-	<?php while(loop_files_for_item()): ?>
-	    <?php $file = get_current_file(); ?>
-		<li><?php echo link_to($file, 'show', h($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?>
-		</li>
+		<?php if ( has_permission('Items','tag') ): ?>
+        
+		<h3>My Tags</h3>
+		<div id="my-tags">
 		
-
-	<?php endwhile; ?>
-	</ul>
+		<form id="tags-form" method="post" action="<?php echo uri('items/modify-tags/') ?>">
+		    <div class="input">
+		    <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id">
+			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
+			</div>
+			<input type="submit" class="submit submit-medium" name="modify_tags" value="Save Tags" id="tags-submit" />
+		</form>
+		</div>
+		
+		<?php endif; ?>
+    	
 	</div>
+	
+	<div class="info-panel">
+	    <h2>View File Metadata</h2>
+        	<div id="file-list">
+        	    <?php if(!item_has_files()):?>
+                	<p>There are no files for this item. <?php echo link_to_item('edit', 'Add some'); ?>.</p>
+                <?php else: ?>
+        		<ul>
+        	<?php while(loop_files_for_item()): ?>
+        	    <?php $file = get_current_file(); ?>
+        		<li><?php echo link_to($file, 'show', h($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?></li>
 
 
-<?php endif;?>
-	<div id="additional-metadata">
-		<?php fire_plugin_hook('append_to_item_show', $item); ?>
+        	<?php endwhile; ?>
+
+        	</ul>
+        	<?php endif;?>
+        	</div>
 	</div>
 </div>
-</div>
-
 <?php foot();?>

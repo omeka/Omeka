@@ -23,7 +23,10 @@
 	<h2>Collection Details</h2>
 
 <div class="field">
-<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name, 'Collection Name'); ?>
+    <?php echo label(array('for' => 'name'),'Collection Name'); ?>
+    <div class="input">
+        <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name); ?>
+    </div>
 <?php echo form_error('name'); ?>
 </div>
 
@@ -54,9 +57,12 @@
 
 <div class="field">
 <?php 
-    echo label(array('for'=>'collectors'), 'Add a Collector (optional)');
-	echo select_entity(array('name'=>'collectors[]', 'id'=>'collector')); 
+    echo label(array('for'=>'collectors'), 'Add a Collector (optional)'); ?>
+    <div class="inputs">
+        <div class="input">
+	<?php echo select_entity(array('name'=>'collectors[]', 'id'=>'collector')); 
 ?>
+</div></div>
 </div>
 
 <h2>Status: </h2>

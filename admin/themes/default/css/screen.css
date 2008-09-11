@@ -33,7 +33,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	h1 {color:#a74c29;}
 	h2,form legend {color:#467;}
 	
-	h1,h2,h3,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
+	h1,h2,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
 
 	/* Links */
 	a:link {color:#389;}
@@ -46,7 +46,8 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 	/* Misc elements */
 	p,ul,ol,dl,address {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
-	ul ul, dd * {font-size:1em; margin-left:1.5em;}
+	ul ul {font-size:1em; margin-left:1.5em;}
+	dd * {font-size:1em;}
 	ul {list-style:none;}
 
 	em,i {font-style:italic;}
@@ -64,26 +65,46 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	/* Forms */
 	form {display:block;}
 		div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
-		label {font-size:1.2em; font-weight:bold; margin-bottom:0.5em; width: 128px; float:left;}
-		input, select {border:0; background-color:transparent !important;}
-		input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important;}
-	
-		.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 486px;}
-	
-		.field label {float:left; text-align:right; width: 270px;}
 		
-		.field input.textinput, .field textarea {width: 550px; float:right; margin-bottom:6px;}
+		label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:right;display:block;width: 126px; float:left;}
+		
+		input, select {border:0; background-color:transparent !important;}
+		
+		input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; width: 694px;}
 	
+		input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
+		
+		/* Replaces tooltips */
+		.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
+		
+		/* Changes the width of inputs depending on the layout */
+	
+			.field label {float:left; margin:0; width: 126px;}
+
+			/* .input used to wrap input fields in items/add form */
+			.field .input {float:right; width: 486px; overflow:hidden; zoom:1;}
+			
+			/* Changes width based on default border and padding */
+			
+			/* Elements specific to items-add form */
+			.controls {float:left; clear:left;width: 486px; margin-left:128px;margin-top:-18px;text-align:left;}
+
+				.field label.use-html { float:right; clear:both;display:block; width: 128px; font-size:1.1em;margin:0;}
+				label.use-html input {display:inline; float:none;padding:0;}
+			#item-form .explanation {margin-top:18px;}
+			
 	/* Form Buttons */
 	#add-item, #save-changes {float:right; text-decoration:none;}
 	.submit-medium {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
 	#add-item:hover, #save-changes:hover, .submit-medium:hover {background-position:0 0 !important;cursor:pointer;}
 	
 	/* Simple Search */
-	div#search {padding:6px;width: 212px; float:right;margin-top:-18px;}
-	div#search input.textinput {border:0; background:#eee url("../images/search-input-bg.gif") top left no-repeat !important;display:block; float:left; width:143px; height: 15px;padding:5px 0 5px 5px;}
-	div#search input#submit_search {background:none; color:#fff;border:none;width: 62px; height: 25px; _overflow:hidden; background:#333 url("../images/search-submit-bg.gif") 0 0 no-repeat !important;}
-	div#search input#submit_search:hover {background-position:0 -25px !important;cursor:pointer;}
+	#search {padding:6px;width: 212px; float:right;margin-top:-18px;}
+		#search input.textinput {border:0; background:#eee url("../images/search-input-bg.gif") top left no-repeat !important;display:block; float:left; width:143px; height: 15px;padding:5px 0 5px 5px;}
+		#search input#submit_search {background:none; color:#fff;border:none;width: 62px; height: 25px; _overflow:hidden; background:#333 url("../images/search-submit-bg.gif") 0 0 no-repeat !important;}
+		#search input#submit_search:hover {background-position:0 -25px !important;cursor:pointer;}
+		#search a {float:right; text-align:right; text-decoration:none; font-weight:bold; padding-top:4px;}
+
 /* == Wrap == */
 #wrap {}
 
@@ -109,9 +130,9 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		.users .primary-nav li.nav-settings a {background:#eae9db; color: #333; font-weight:bold;}
 		
 /* == Content == */
-#content { z-index:1000; margin-top:-1px; position:relative;margin:0 36px; padding:18px 0 0;width:882px;overflow:hidden; zoom:1;}
+#content { z-index:1000; margin-top:-1px; position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;overflow:hidden; zoom:1;}
 	
-	#content h1 {background: #eae9db;margin:-18px 0 18px; padding:18px 0 0; width: 882px;}
+	#content h1 {background: #eae9db;margin:-18px 0 18px; padding:18px 0 0; width: 846px;}
 	
 	/* Homepage */
 	
@@ -119,11 +140,11 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		#getting-started dl * {font-size:1em;}
 			#getting-started a {text-decoration:none;}
 			#getting-started dt {clear: both; border-bottom:1px dotted #ccc; font-size:1.4em; display:block; padding-bottom:8px;margin-bottom:9px;}
-			#getting-started dl ul {float:left; width:270px;margin:0 0 18px; padding:0;}
+			#getting-started dl ul {float:left; width:252px;margin:0 0 18px; padding:0;}
 			#getting-started dl li {margin:0 0 0.5em;}
 			#getting-started dd {overflow: hidden; display: inline;}
-			#getting-started dd p {float:right; width: 270px;padding:0; margin:0 0 18px;}
-				#getting-started p.help	{clear:both; padding: 1em 0 0; border-top:1px dotted #ccc; width}
+			#getting-started dd p {float:right; width: 252px;padding:0; margin:0 0 18px;}
+				#getting-started p.help	{clear:both; padding: 1em 0 0; border-top:1px dotted #ccc;}
 
 		/* Info Panels - styles that enhance or override the component library styles */	
 		#tag-cloud li, #tag-cloud li a {padding:0; border:none;background-image:none; display:inline;}
@@ -136,16 +157,37 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 	/* Item Browse styles */
 	#browse-meta {clear:both;}		
+	
 	table#items {width:100%;}
+	
 	#add-item {position:absolute; top:18px; right:0;}
+	
 	.items #primary {clear:right;}
+	
+	/* Item show styles */
+	.element-text {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
+		.element-text * {font-size:1em;}
+		
+	/* Item add-edit styles */
+	#public-featured {position:absolute; top:36px; right:0; text-align:right;}	
+		#public-featured .checkbox {text-align:right;float:none; overflow:hidden; display:inline;}
+		#public-featured label, #public-featured input {display:inline; text-align:right;float:none; width: auto;}
+	
 	/* Collection Browse styles */
+	
 	
 	/* Settings */
 	#settings-form .submit {float:right;}
 	
 	/* Users */
 	#new-user-form .submit {float:right;}
+	
+	/* Themes */
+	#themeswitch {margin-right:-18px;}
+	#themeswitch .theme {overflow:hidden; zoom:1; width: 198px; float:left; margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;}
+		#themeswitch .theme img {border:1px solid #d7d5c4;padding:8px;}
+		#themeswitch label {float:;}
+
 /* == Footer == */
 #footer {clear:both; padding: 18px 0 1px;  overflow:hidden; zoom:1;margin:0 36px; width: 882px;background: #eae9db;}
 	#footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}

@@ -1,9 +1,8 @@
 <?php head(array('title'=>'Type: '.h($itemtype->name),'body_class'=>'types'));?>
-
+<h1>Type: <?php echo h($itemtype->name);?></h1>
 
 <div id="primary">
 	<div id="type-info">
-	    <h1>Type: <?php echo h($itemtype->name);?></h1>
 
 		<p><?php if ( has_permission('ItemTypes','edit') ): ?>
 		 	<a class="edit" href="<?php echo url_for_record($itemtype, 'edit', 'item-types'); ?>">Edit</a>

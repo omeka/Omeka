@@ -2,11 +2,15 @@
 <h1>Themes</h1>
 
 <?php common('settings-nav'); ?>
+
+
+<?php // print_r($current); ?>
+
 <div id="primary">
     <?php echo flash(); ?>
 <form method="post" id="themeswitch">
 	<?php foreach($this->themes as $theme): ?>
-	<div class="<?php echo 'theme';//if($theme == $current_admin) echo 'current_admin'; else echo 'theme';?>">
+	<div class="theme<?php if($current == $theme) echo ' current-theme';?>">
 		<div class="meta">
 		<label><input type="radio" name="public_theme" value="<?php echo h($theme->directory); ?>" <?php if($current == $theme):  ?>checked="checked" <?php endif; ?>/>	
 		<?php echo h($theme->title); ?></label>

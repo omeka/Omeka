@@ -23,7 +23,7 @@
 	<form method="post" enctype="multipart/form-data" id="item-form" action="">
 		<?php include 'form.php'; ?>
 		<p id="item-form-submits">
-		    <input type="submit" name="submit" id="save-changes" class="submit" value="Save Changes" />
+		    <input type="submit" name="submit" id="save-changes" class="submit submit-medium" value="Save Changes" />
 		</p>
 		<p id="delete_item_link">
 		    <?php echo link_to_item('delete', 'Delete This Item', 

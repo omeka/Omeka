@@ -1,8 +1,8 @@
 <?php head(); ?>
 
+<h1>File #<?php echo h($file->id); ?></h1>
 
 <div id="primary">
-<h1>File #<?php echo h($file->id); ?></h1>
 
 <?php echo display_file($file); ?>
 

@@ -33,10 +33,10 @@ class Omeka_View_Helper_ElementForm
         $html .= '<div class="inputs">';
         $html .= $this->_displayFormFields();
         $html .= '</div>'; // Close 'inputs' div
+        $html .= $this->_displayFormControls();
         
         $html .= $this->_displayTooltip();
         
-        $html .= $this->_displayFormControls();
         
         $html .= '</div>'; // Close 'field' div
         
@@ -295,9 +295,9 @@ class Omeka_View_Helper_ElementForm
         $isHtml = $this->_getHtmlFlagForField($index);
         
         // Add a checkbox for the 'html' flag (always for any field)
-       // $html .= '<label class="use-html">Use HTML ';
+        $html .= '<label class="use-html">Use HTML ';
         $html .= $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
-       // $html .= '</label>';
+        $html .= '</label>';
         
         return $html;
     }
@@ -310,9 +310,8 @@ class Omeka_View_Helper_ElementForm
     protected function _displayTooltip()
     {
         // Tooltips should be in a <span class="tooltip">
-        $html .= '<img src="' . img('information.png') . '" />';
-    	$html .= '<span class="tooltip">';
-    	$html .= $this->_getFieldDescription() .'</span>';
+    	$html .= '<p class="explanation">';
+    	$html .= $this->_getFieldDescription() .'</p>';
     	
     	return $html;
     }

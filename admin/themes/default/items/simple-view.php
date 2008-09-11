@@ -12,7 +12,8 @@
 		</tr>
 	</thead>
 	<tbody>
-	    <?php $key = 0; ?>
+<?php $key = 0; ?>
+
 <?php while(loop_items()): ?>
 <tr class="item<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
 	<td scope="row"><?php echo item('id');?>

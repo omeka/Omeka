@@ -257,7 +257,20 @@ echo js('tiny_mce/tiny_mce');
 
 <?php echo flash(); ?>
 
-
+<div id="public-featured">
+    <?php if ( has_permission('Items', 'makePublic') ): ?>
+    	<div class="checkbox">
+    		<label for="public">Public:</label> 
+    		<div class="checkbox"><?php echo checkbox(array('name'=>'public', 'id'=>'public'), $item->public); ?></div>
+    	</div>
+    <?php endif; ?>
+    <?php if ( has_permission('Items', 'makeFeatured') ): ?>
+    	<div class="checkbox">
+    		<label for="featured">Featured:</label> 
+    		<div class="checkbox"><?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?></div>
+    	</div>
+    <?php endif; ?>
+</div>
 <div id="item-metadata">
 <?php foreach ($elementSets as $key => $elementSet): ?>
 <fieldset class="set" id="<?php echo text_to_id($elementSet->name); ?>-metadata">
