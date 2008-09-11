@@ -104,7 +104,7 @@ class Relatable extends Omeka_Record_Mixin
         
         $relation_id = $this->getRelationId();
                 
-        return $db->query($sql, array($relation_id, $rel, $this->type), true);
+        return $db->fetchOne($sql, array($relation_id, $rel, $this->type));
     }
     
     /**

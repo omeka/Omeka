@@ -837,10 +837,16 @@ function collection($fieldName, $options=array())
         case 'featured':
             $text = $collection->featured;
             break;
+        case 'date added':
+            $text = $collection->timeOfLastRelationship('added');
+            break;
+        case 'date modified':
+            $text = $collection->timeOfLastRelationship('modified');
+            break;
         case 'collectors': // The names of collectors
-            $textArray = array();
+            $text = array();
             foreach ($collection->Collectors as $key => $collector) {
-                $textArray[$key] = $collector->name;
+                $text[$key] = $collector->name;
             }
             break;
         default:
@@ -853,19 +859,20 @@ function collection($fieldName, $options=array())
         $text = snippet($text, 0, (int)$options['snippet']);
     }
     
-    if (isset($options['delimiter']) and isset($textArray)) {
-        $text = join($options['delimiter'], $textArray);
+    // Escape it for display as HTML.
+    if (!is_array($text)) {
+        $text = apply_filters('html_escape', $text);
+    } else {
+        foreach ($text as $key => $value) {
+            $text[$key] = apply_filters('html_escape', $value);
+        }
     }
     
-    // Escape it for display as HTML.
-    if (isset($text)) {
-        return apply_filters('html_escape', $text);
-    } else {
-        foreach ($textArray as $key => $value) {
-            $textArray[$key] = apply_filters('html_escape', $value);
-        }
-        return $textArray;
+    // Return the join'd text
+    if (isset($options['delimiter'])) {
+        $text = join((string) $options['delimiter'], (array) $text);
     }
+    return $text;
 }
 
 /**
