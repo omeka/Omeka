@@ -66,7 +66,7 @@ class migrateItemTimestamps extends Omeka_Db_Migration
             AND er.`type` = '" . self::ENTITIES_RELATIONS_TYPE_ITEM . "' 
             AND er.`relationship_id` = (
                 SELECT ers.`id` 
-                FROM `entity_relationships` ers 
+                FROM `{$db->prefix}entity_relationships` ers 
                 WHERE ers.`name` = '".self::ENTITY_RELATIONSHIPS_ADDED."' 
             )
             ORDER BY er.`time` ASC 
@@ -100,7 +100,7 @@ class migrateItemTimestamps extends Omeka_Db_Migration
             AND er.`type` = '" . self::ENTITIES_RELATIONS_TYPE_ITEM . "' 
             AND er.`relationship_id` = (
                 SELECT ers.`id` 
-                FROM `entity_relationships` ers 
+                FROM `{$db->prefix}entity_relationships` ers 
                 WHERE ers.`name` = '".self::ENTITY_RELATIONSHIPS_MODIFIED."' 
             )
             ORDER BY er.`time` DESC 
