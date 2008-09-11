@@ -1,5 +1,7 @@
 <?php 
 /**
+ * All theme API functions that are new to 0.10 .
+ * 
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
@@ -357,11 +359,12 @@ function display_random_featured_item($withImage=false)
 function display_random_featured_collection()
 {
     $featuredCollection = random_featured_collection();
+    set_current_collection($featuredCollection);
     $html = '<h2>Featured Collection</h2>';
     if ( $featuredCollection ) {
-        $html .= '<h3>' . link_to_collection($featuredCollection) . '</h3>';
+        $html .= '<h3>' . link_to_collection() . '</h3>';
         if ($featuredCollection->description) {
-            $html .= '<p class="collection-description">' . apply_filters('html_escape', snippet($featuredCollection->description, 0, 150)) . '</p>';
+            $html .= '<p class="collection-description">' . collection('Description', array('snippet'=>150)) . '</p>';
         }
         
     } else {
@@ -398,6 +401,50 @@ function item_has_files()
 function item_has_thumbnail()
 {
     return get_current_item()->hasThumbnail();
+}
+
+/**
+ * @todo Should item_has_tags() check for certain tags?
+ * @return boolean
+ **/
+function item_has_tags()
+{
+    $item = get_current_item();
+    return (count($item->Tags) > 0);
+}
+
+function item_image($imageType, $props = array(), $index = 0, $item = null)
+{
+    if (!$item) {
+        $item = get_current_item();
+    }
+    
+    $imageFile = $item->Files[$index];
+    $width = @$props['width'];
+    $height = @$props['height'];
+    return archive_image( $imageFile, $props, $width, $height, $imageType ); 
+}
+
+/**
+ * HTML for a thumbnail image associated with an item.  Default parameters will
+ * use the first image, but 
+ * 
+ * @param string
+ * @return void
+ **/
+function item_thumbnail($props = array(), $index = 0)
+{
+    return item_image('thumbnail', $props, $index);
+}
+
+function item_square_thumbnail($props = array(), $index = 0)
+{
+    return item_image('square_thumbnail', $props, $index);
+}
+
+function item_fullsize($props = array(), $index = 0)
+{
+    return item_image('fullsize', $props, $index);
 }
 
 /**
@@ -522,15 +569,31 @@ function get_collection_for_item()
  * @param string
  * @return void
  **/
-function link_to_collection_for_item($text = null, $action = 'show')
+function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
 {
-    return link_to_collection(get_collection_for_item(), $action, $text);
+    return link_to_collection($text, $props, $action, get_collection_for_item());
 }
 
-function tags_for_item_as_string($delimiter = "\n", $tagsAreLinked = true)
+/**
+ * Output the tags for the current item as a string.
+ * 
+ * @todo Should this take a set of parameters instead of $order?  That would be 
+ * good for limiting the # of tags returned by the query.
+ * 
+ * @param string $delimiter String that separates each tag.  Default is a comma 
+ * and space.
+ * @param string|null $order Options include 'recent', 'most', 'least', 'alpha'.  
+ * Default is null, which means that tags will display in the order they were
+ * entered via the form.
+ * @param boolean $tagsAreLinked If tags should be linked or just represented as
+ * text.  Default is true.
+ * @return string HTML
+ **/
+function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked = true)
 {
+    $tags = tags(array('sort'=>$order, 'record'=>get_current_item()));
     $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
-    return tag_string(get_current_item()->Tags, $urlToLinkTo, $delimiter);
+    return tag_string($tags, $urlToLinkTo, $delimiter);
 }
 
 /**
@@ -579,6 +642,16 @@ function has_items_for_loop()
 {
     $view = __v();
     return ($view->items and count($view->items));
+}
+
+/**
+ * Determine whether or not there are any items in the database.
+ * 
+ * @return boolean
+ **/
+function has_items()
+{
+    return (get_db()->getTable('Item')->count() > 0);    
 }
 
 /**
@@ -794,16 +867,6 @@ function collection_is_featured()
     return get_current_collection()->featured;
 }
 
-function link_to_current_collection()
-{
-    return link_to_collection(get_current_collection());
-}
-
-function url_to_browse_items_by_collection()
-{
-     return uri('items/browse/', array('collection'=>collection('Id')));
-}
-
 /**
  * @internal Duplication between this and set_current_item().  Factor into
  * separate
@@ -832,9 +895,20 @@ function link_to_advanced_search()
     return '<a href="' . url_for('items/advanced-search') .'?' . $_SERVER['QUERY_STRING'].  '">Advanced Search</a>';
 }
 
-function add_item_filter($field, $callback)
+/**
+ * Get the proper HTML for a link to the browse page for items, with any appropriate
+ * filtering parameters passed to the URL.
+ * 
+ * @param string Text to display in the link.
+ * @param array Any parameters to use to build the browse page URL, e.g.
+ * array('collection' => 1) would build items/browse?collection=1 as the URL.
+ * @return string HTML
+ **/
+function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
 {
-    
+    // Set the link href to the items/browse page.
+    $linkProperties['href'] = url_for(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
+    return "<a " . _tag_attributes($linkProperties) . ">$text</a>";
 }
 
 /**

@@ -154,6 +154,34 @@ function has_collectors($collection) {
 }
 
 /**
+ * 
+ *
+ * @return boolean
+ **/
+function has_tags($item, array $tags=array()) {
+	$hasSome = (count($item->Tags) > 0);
+	if(empty($tags) or !$hasSome){
+		return $hasSome;
+	}
+	foreach ($tags as $key => $tag) {
+		if(!$item->hasTag($tag)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
+ * @see has_type()
+ * 
+ * @param Item
+ * @return boolean
+ **/
+function has_thumbnail($item) {
+	return $item->hasThumbnail();
+}
+
+/**
  * Display an alternative value if the given variable is empty
  * @deprecated
  * @return string

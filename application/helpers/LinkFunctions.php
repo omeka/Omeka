@@ -1,6 +1,9 @@
 <?php
 /**
- * Uses url_for() to generate <a> tags for a given link
+ * Uses url_for() to generate <a> tags for a given link.
+ * 
+ * @since 0.10 No longer escapes the text for the link.  This text must be valid
+ * HTML.
  *
  * @param Omeka_Record|string $record The name of the controller to use for the
  * link.  If a record instance is passed, then it inflects the name of the 
@@ -30,10 +33,24 @@ function link_to($record, $action=null, $text='View', $props = array())
 	$url = url_for($urlOptions, $route);
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-	return '<a href="'. $url . '"' . $attr . ' title="'. htmlentities($text).'">' . h($text) . '</a>';
+	return '<a href="'. $url . '"' . $attr . ' title="'. htmlentities($text) . '">' . $text . '</a>';
 }
 
-function link_to_item($action='show', $text=null, $props=array(), $item=null)
+/**
+ * @since 0.10 Function signature has changed so that the item to link to can be
+ * determined by the context of the function call.  Also, text passed to the link
+ * must be valid HTML (will not be automatically escaped because any HTML can be
+ * passed in, e.g. an <img /> or the like).
+ * 
+ * @param string HTML for the text of the link.
+ * @param array Properties for the <a> tag. (optional)
+ * @param string The page to link to (this will be the 'show' page almost always
+ * within the public theme).
+ * @param Item Used for dependency injection testing or to use this function outside
+ * the context of a loop.
+ * @return string HTML
+ **/
+function link_to_item($text = null, $props = array(), $action = 'show', $item=null)
 {
     if(!$item) {
         $item = get_current_item();
@@ -80,11 +97,15 @@ function link_to_previous_item($text="<-- Previous Item", $props=array())
  *
  * @return string
  **/
-function link_to_collection($collection, $action='show', $text=null, $props=array())
+function link_to_collection($text=null, $props=array(), $action='show', $collectionObj = null)
 {
-	$text = (!empty($text) ? $text : (!empty($collection->name) ? $collection->name : '[Untitled]'));
+    if (!$collectionObj) {
+        $collectionObj = get_current_collection();
+    }
+    
+	$text = (!empty($text) ? $text : (!empty($collectionObj->name) ? $collectionObj->name : '[Untitled]'));
 	
-	return link_to($collection, $action, $text, $props);
+	return link_to($collectionObj, $action, $text, $props);
 }
 
 /**
@@ -141,13 +162,19 @@ function _link_to_archive_image($item, $props=array(), $action='show', $random=f
 
 /**
  * 
- *
+ * @since 0.10 All arguments to this function are optional.  If no text is given,
+ * it will automatically use the text for the 'site_title' option.
+ * @since 0.10 The text passed to this function will not be automatically escaped
+ * with htmlentities(), which allows for passing images or other HTML in place of text.
  * @return string
  **/
-function link_to_home_page($text, $props = array())
+function link_to_home_page($text = null, $props = array())
 {
+    if (!$text) {
+        $text = settings('site_title');
+    }
 	$uri = WEB_ROOT;
-	return '<a href="'.$uri.'" '._tag_attributes($props).'>'.h($text)."</a>\n";
+	return '<a href="'.$uri.'" '._tag_attributes($props).'>' . $text . "</a>\n";
 }
 
 /**
