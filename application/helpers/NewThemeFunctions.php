@@ -580,6 +580,7 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
  * @todo Should this take a set of parameters instead of $order?  That would be 
  * good for limiting the # of tags returned by the query.
  * 
+ * @see item_tags_as_cloud()
  * @param string $delimiter String that separates each tag.  Default is a comma 
  * and space.
  * @param string|null $order Options include 'recent', 'most', 'least', 'alpha'.  
@@ -594,6 +595,19 @@ function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked =
     $tags = tags(array('sort'=>$order, 'record'=>get_current_item()));
     $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
     return tag_string($tags, $urlToLinkTo, $delimiter);
+}
+
+/**
+ * @see item_tags_as_string()
+ * @param string
+ * @param boolean
+ * @return string
+ **/
+function item_tags_as_cloud($order = null, $tagsAreLinked = true)
+{
+    $tags = tags(array('sort'=>$order, 'record'=>get_current_item()));
+    $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
+    return tag_cloud($tags, $urlToLinkTo);
 }
 
 /**
