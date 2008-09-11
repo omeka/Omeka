@@ -29,6 +29,9 @@ class Item extends Omeka_Record
     public $collection_id;
     public $featured = 0;
     public $public = 0;    
+    public $added;
+    public $modified;
+    
         
     protected $_related = array('Collection'=>'getCollection', 
                                 'TypeMetadata'=>'getTypeMetadata', 

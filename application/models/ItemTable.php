@@ -323,41 +323,16 @@ class ItemTable extends Omeka_Db_Table
      * This is a kind of simple factory that spits out proper beginnings 
      * of SQL statements when retrieving items
      *
-     * @param $type string full|simple|count|id
      * @return Omeka_Db_Select
      **/
-    public function getSelect($type = 'full')
+    public function getSelect()
     {
         // @duplication self::findBy()
         $select = new Omeka_Db_Select;
         
         $db = $this->getDb();
         
-        switch ($type) {
-            case 'full':
-                
-                $select->from(array('i'=>$db->Item), 
-                              array('i.*', 'added' => 'added.time', 'modified' => 'modded.time'));
-                
-                //Join on the entities_relations table so we can pull timestamps
-                $select->joinLeft(array('modded' => "$db->EntitiesRelations"), 
-                                  'modded.relation_id = i.id AND modded.type = "Item"', 
-                                  array());
-                $select->joinLeft(array('mod_r' => "$db->EntityRelationships"), 
-                                  'mod_r.id = modded.relationship_id AND mod_r.name = "modified"', 
-                                  array());
-                $select->joinLeft(array('added' => "$db->EntitiesRelations"), 
-                                  'added.relation_id = i.id AND added.type = "Item"', 
-                                  array());
-                $select->joinLeft(array('add_r' => "$db->EntityRelationships"), 
-                                  'add_r.id = added.relationship_id AND add_r.name = "added"', 
-                                  array());
-                break;            
-            default:
-                # code...
-                break;
-        }
-        
+        $select->from(array('i'=>$db->Item), array('i.*'));                         
         new ItemPermissions($select);
         
         return $select;
