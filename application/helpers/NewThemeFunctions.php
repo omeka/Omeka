@@ -6,6 +6,7 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage NewThemeAPI
  **/
 
 /**
@@ -286,6 +287,96 @@ function admin_plugin_footer()
 {
     $request = Omeka_Context::getInstance()->getRequest();
     fire_plugin_hook('admin_theme_footer', $request);
+}
+
+/**
+ * Retrieve an Item object directly by its ID.
+ * 
+ * Example of usage on a public theme page:
+ * 
+ * $item = get_item_by_id(4);
+ * set_current_item($item); // necessary to use item() and other similar theme API calls.
+ * echo item('Title', 0);
+ * 
+ * @param integer
+ * @return Item|null
+ **/
+function get_item_by_id($itemId)
+{
+    return get_db()->getTable('Item')->find($itemId);
+}
+
+/**
+ * @see get_item_by_id()
+ * @param string
+ * @return Collection|null
+ **/
+function get_collection_by_id($collectionId)
+{
+    return get_db()->getTable('Collection')->find($collectionId);
+}
+
+function get_user_by_id($userId)
+{
+    return get_db()->getTable('User')->find($userId);
+}
+
+function get_tags($params = array(), $limit = 10)
+{
+    $params['limit'] = $limit;
+    return get_db()->getTable('Tag')->findBy($params);
+}
+
+function get_items($params = array(), $limit = 10)
+{
+    $params['per_page'] = $limit;
+    return get_db()->getTable('Item')->findBy($params);
+}
+
+/**
+ * @see get_items()
+ * @see get_tags()
+ * @param array
+ * @param integer
+ * @return array
+ **/
+function get_users($params = array(), $limit = 10)
+{
+    $params['limit'] = $limit;
+    return get_db()->getTable('User')->findBy($params);
+}
+
+/**
+ * @todo 'limit' and 'per_page' parameters should be combined across models
+ * so that there is only one parameter for data retrieval (should be 'limit')
+ * instead of 'per_page'.
+ * 
+ * @param array
+ * @param integer
+ * @return array
+ **/
+function get_collections($params = array(), $limit = 10)
+{
+    $params['per_page'] = $limit;
+    // This line should be implied, may signal a need for refactoring.
+    $params['page'] = 1;
+    return get_db()->getTable('Collection')->findBy($params);
+}
+
+/**
+ * Retrieve a full set of ItemType objects currently available to Omeka.
+ * 
+ * Keep in mind that the $params and $limit arguments are in place for the sake
+ * of consistency with other data retrieval functions, though in this case
+ * they don't have any effect on the number of results returned.
+ * 
+ * @param array
+ * @param integer
+ * @return array
+ **/
+function get_item_types($params = array(), $limit = 10)
+{
+    return get_db()->getTable('ItemType')->findAll();
 }
 
 /**
@@ -888,7 +979,7 @@ function loop_items_in_collection($num = 10, $options = array())
     static $loopIsRun = false;
     if (!$loopIsRun) {
         // Retrieve a limited # of items based on the collection given.
-        $items = items(array('collection'=>get_current_collection()->id, 'per_page'=>$num));
+        $items = get_items(array('collection'=>get_current_collection()->id, 'per_page'=>$num));
         set_items_for_loop($items);
     }
     
@@ -897,7 +988,7 @@ function loop_items_in_collection($num = 10, $options = array())
 
 function total_items_in_collection()
 {
-    return total_items(get_current_collection());
+    return get_current_collection()->totalItems();
 }
 
 function collection_has_collectors()
