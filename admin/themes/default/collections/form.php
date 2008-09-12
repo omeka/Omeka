@@ -35,9 +35,7 @@
 <?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
 </div>
 
-<?php $entities = entities(); ?>
-
-<?php if(has_collectors($collection)): ?>
+<?php if (collection_has_collectors()): ?>
 	<h2>Collectors:</h2>
 	<?php foreach( $collection->Collectors as $k => $collector ): ?>
 

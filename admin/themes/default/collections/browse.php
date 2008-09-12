@@ -36,7 +36,7 @@
     			
     			</td>	
             	<td><?php if($time = collection('Date Added')):?>
-        		    <?php echo date('m.d.Y', $time); ?>
+        		    <?php echo date('m.d.Y', strtotime($time)); ?>
         		<?php endif; ?>
 				</td>
 				<td>
