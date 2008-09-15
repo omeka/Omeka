@@ -17,13 +17,14 @@ require_once '../paths.php'; ?>
 
 <body>
 <div id="wrap">
+	<div id="primary">
+    
 <?php
 try {
     require_once 'Installer.php';
     $installer = new Installer();
     if ($installer->getShowInstallForm()) {
         ?>
-        <div id="intro">
             <h1>Welcome to Omeka!</h1>
             <?php if ($warningMessage = $installer->getWarningMessage()): ?>
             <div class="error">
@@ -36,7 +37,6 @@ try {
             </div>
             <?php endif; ?>
             <p>To complete the installation process, please fill out the form below:</p>
-        </div>
         <?php
         include 'install_form.php';
     } else {
@@ -52,6 +52,8 @@ try {
     echo $e->getMessage();
 }
 ?>
+</div>
+
 </div>
 </body>
 </html>

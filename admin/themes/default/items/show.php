@@ -62,9 +62,6 @@ echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
 <div id="primary">
 <?php echo flash(); ?>
 
-
-
-
 <div id="item-images">
 <?php echo display_files_for_item(); ?>	
 </div>

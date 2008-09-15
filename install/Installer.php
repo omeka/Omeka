@@ -294,11 +294,11 @@ class Installer
         if (empty($this->warnings)) {
             return false;
         }
-        $warningMessage = "<h2>Installation Warning</h1>
+        $warningMessage = "<h1>Installation Warning</h1>
         <p>The following issues will not affect installation, but they may negatively 
         affect the behavior of Omeka:</p>";
         foreach ($this->warnings as $warning) {
-            $warningMessage .= "<h3>{$warning['header']}</h3><p>{$warning['msg']}</p>";
+            $warningMessage .= "<h2>{$warning['header']}</h2><p>{$warning['msg']}</p>";
         }
         return $warningMessage;
     }

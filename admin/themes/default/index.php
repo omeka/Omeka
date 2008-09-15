@@ -83,7 +83,7 @@
 				<h2>Recent Items</h2>
 				<?php set_items_for_loop(recent_items('5')); ?>
 				<?php if(!has_items_for_loop()):?>
-					<div class="error">There are no items to display</div>	
+					<p>There are no items to display.</p>	
 				<?php else: ?>
 				<ul>
 				    <?php $key = 0; ?>

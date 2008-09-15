@@ -273,7 +273,8 @@ echo js('tiny_mce/tiny_mce');
 </div>
 <div id="item-metadata">
 <?php foreach ($elementSets as $key => $elementSet): ?>
-<fieldset class="set" id="<?php echo text_to_id($elementSet->name); ?>-metadata">
+	<div id="<?php echo text_to_id($elementSet->name); ?>-metadata">
+<fieldset class="set">
         <legend><?php echo htmlentities($elementSet->name); ?></legend>
         <?php 
         // Would prefer to display all the metadata sets in the same way, but this
@@ -287,6 +288,7 @@ echo js('tiny_mce/tiny_mce');
                 break;
         endswitch; ?>        
 </fieldset>
+</div>
 <?php endforeach; ?>
 
 <!-- Create the tabs for the rest of the form -->
@@ -295,6 +297,7 @@ echo js('tiny_mce/tiny_mce');
 $otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
 <?php foreach ($otherTabs as $tabName): ?>
     <div class="set" id="<?php echo text_to_id($tabName);?>-metadata">
+	<fieldset>
         <legend><?php echo $tabName; ?></legend>
     <?php switch ($tabName): 
             case 'Collection':
@@ -310,6 +313,7 @@ $otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
                 require 'miscellaneous-form.php';
             break; 
         endswitch; ?>
+</fieldset>
     </div>
 <?php endforeach; ?>
 </div>

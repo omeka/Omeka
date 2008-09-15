@@ -1,6 +1,8 @@
 <?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'body_class'=>'items primary browse-items')); ?>
 <h1>Browse Items (<?php echo total_results();?> items total)</h1>
 <p id="add-item" class="add-button"><a class="add" href="<?php echo uri('items/add'); ?>">Add an Item</a></p>
+
+<?php if ( total_results() ): ?>
 <div id="search">
 <?php echo simple_search(array(), url_for('items/browse')); ?>
 
@@ -16,7 +18,7 @@
 	echo nav($section_nav);
 ?>
 </ul>
-
+<?php endif; ?>
 
 <div id="primary">
 
@@ -53,11 +55,10 @@
 
 <?php elseif(!total_items(true)): ?>
 	<div id="no-items">
-	    <h1>Browse Items</h1>
 	<p>There are no items in the archive yet.
 	
 	<?php if(has_permission('Items','add')): ?>
-		  Why don't you <a href="<?php echo uri('items/add'); ?>">add some</a>?</p>
+		  Why don&#8217;t you <a href="<?php echo url_for('items/add'); ?>">add one</a>?</p>
 	<?php endif; ?>
 </div>
 	

@@ -67,5 +67,5 @@ function formValue($name, $defaultValue = '')
             <input class="textinput" type="text" name="super_email" id="super_email" value="<?php echo formValue('super_email'); ?>">
         </div>
     </fieldset>
-    <p><input type="submit" value="Continue" name="install_submit" /></p>
+    <p><input type="submit" class="submit submit-medium" value="Continue" name="install_submit" /></p>
 </form>

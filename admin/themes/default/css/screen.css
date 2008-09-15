@@ -165,8 +165,8 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	.items #primary {clear:right;}
 	
 	/* Item show styles */
-	.element-text {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
-		.element-text * {font-size:1em;}
+	.element-text, .element-text-empty {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
+		.element-text *, .element-text-empty * {font-size:1em;}
 		
 	/* Item add-edit styles */
 	#public-featured {position:absolute; top:36px; right:0; text-align:right;}	

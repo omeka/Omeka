@@ -3,5 +3,4 @@ Event.observe(window,'load',function() {
 	$('cancel_changes').onclick = function() {
 		return confirm( 'Are you sure you want to cancel your changes? Anything you added will not be saved!' );
 	};
-
 });
