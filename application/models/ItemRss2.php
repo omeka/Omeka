@@ -73,7 +73,7 @@ class ItemRss2
     {        
         $entry = array();
         set_current_item($item);
-        $entry['title'] = item('Title', array('element_set'=>'Dublin Core', 'index'=>0));
+        $entry['title'] = item('Title');
         $entry['description'] = $this->buildDescription($item);
         
         //Permalink (this is kind of duplicated elsewhere)

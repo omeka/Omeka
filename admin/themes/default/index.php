@@ -91,7 +91,7 @@
 					    <?php $item_type = strtolower(item('Item Type Name'));?>
 						<li class="<?php echo is_odd($key++) ? 'even' : 'odd'; ?>">
 						    <a href="<?php echo url_for_item(); ?>">
-						        <span class="title"><?php  echo item('Title', 0); ?></span> 
+						        <span class="title"><?php  echo item('Title'); ?></span> 
 						        <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span>
 						    </a>
 						</li>	

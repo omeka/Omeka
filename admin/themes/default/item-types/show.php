@@ -1,5 +1,5 @@
-<?php head(array('title'=>'Type: '.h($itemtype->name),'body_class'=>'types'));?>
-<h1>Type: <?php echo h($itemtype->name);?></h1>
+<?php head(array('title'=>'Type: '.htmlentities($itemtype->name),'body_class'=>'types'));?>
+<h1>Type: <?php echo htmlentities($itemtype->name);?></h1>
 
 <div id="primary">
 	<div id="type-info">
@@ -26,7 +26,7 @@
 		<ul>
 	    <?php set_items_for_loop($itemtype->Items); ?>
 		<?php while(loop_items()): ?>
-		<li><a href="<?php echo url_for_item(); ?>"><span class="title"><?php echo item('Title', ', '); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span></a></li>
+		<li><a href="<?php echo url_for_item(); ?>"><span class="title"><?php echo item('Title'); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span></a></li>
 		<?php endwhile;?>
 		</ul>
 	

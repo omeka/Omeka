@@ -116,14 +116,14 @@ function display_element_set_form_for_item($item, $elementSetName)
  **/
 function item_citation()
 {
-    if($citation = item('Citation', 0)) {
+    if($citation = item('Citation')) {
 		return $citation;
 	}
 
 	$cite = '';
-    $cite .= item('Creator', 0);
+    $cite .= item('Creator');
     if ($cite != '') $cite .= ', ';
-    $cite .= '"' . item('Title', ', ') . '". ';
+    $cite .= '"' . item('Title', array('all'=>true, 'delimiter'=>', ')) . '". ';
     $cite .= '<em>'.settings('site_title').'</em>, ';
     $cite .= 'Item #'.item('id').' ';
     $cite .= '(accessed '.date('F d Y, g:i a').') ';
@@ -296,7 +296,7 @@ function admin_plugin_footer()
  * 
  * $item = get_item_by_id(4);
  * set_current_item($item); // necessary to use item() and other similar theme API calls.
- * echo item('Title', 0);
+ * echo item('Title');
  * 
  * @param integer
  * @return Item|null
@@ -432,7 +432,7 @@ function display_random_featured_item($withImage=false)
 	       $html .= link_to_square_thumbnail($featuredItem, array('class'=>'image'));
 	   }
 	   // Grab the 1st Dublin Core description field (first 150 characters)
-	   $itemDescription = item('Description', array('snippet'=>150, 'index'=>0, 'element_set'=>'Dublin Core'));
+	   $itemDescription = item('Description', array('snippet'=>150));
 	   $html .= '<p class="item-description">' . $itemDescription . '</p>';
 	} else {
 	   $html .= '<p>You have no featured items.</p>';

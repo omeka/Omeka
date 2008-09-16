@@ -1,6 +1,6 @@
 <?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items primary-secondary')); ?>
 <h1 id="title">#<?php echo item('id');?> 
-<?php echo item('Title', ', '); //Titles should all be displayed, separated by , ?></h1>
+<?php echo item('Title'); ?></h1>
 <p id="edit-delete"> 
 <?php 
 echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>

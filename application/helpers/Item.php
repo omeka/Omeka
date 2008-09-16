@@ -17,10 +17,11 @@
 class Omeka_View_Helper_Item
 {
     /**
-     * Currently, options can be: a string to join the text with:
-     * i.e. '</li><li>', so that doing the following:
-     * <li><?php echo item('Title', '</li><li>'); ?></li> 
-     * Will create a set of list elements for titles. 
+     * Retrieve metadata for a specific field (henceforth known as 'element') for
+     * an item.  The simplest form of this function will retrieve a single text 
+     * value for a given field, e.g. item('Title') will return a string corresponding
+     * to the first available title.  There are a number of options that can be
+     * passed via an array as the second argument.
      * 
      * @param string Field name to retrieve, which can be the name of an element 
      *     or a selected field name related to items.
@@ -39,8 +40,8 @@ class Omeka_View_Helper_Item
      *  'all' => if set to true, this will retrieve an array containing all values
      *      for a single element rather than a specific value.
      *
-     * @return string|array|null Null if field does not exist for item. String
-     * if certain options are passed.  Array otherwise.
+     * @return string|array|null Null if field does not exist for item. Array
+     * if certain options are passed.  String otherwise.
      **/
     public function item($field, $options = array())
     {
