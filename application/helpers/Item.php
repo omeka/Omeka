@@ -36,6 +36,8 @@ class Omeka_View_Helper_Item
      *      (integer).
      *  'element_set' => retrieve the element text for an element that belongs 
      *      to a specific set.
+     *  'all' => if set to true, this will retrieve an array containing all values
+     *      for a single element rather than a specific value.
      *
      * @return string|array|null Null if field does not exist for item. String
      * if certain options are passed.  Array otherwise.
@@ -61,7 +63,7 @@ class Omeka_View_Helper_Item
         if ($snippetLength = (int) @$options['snippet']) {
             $text = $this->_formatSubstring($text, $snippetLength);
         }
-        
+                
         // Escape the non-HTML text if necessary.
         $text = $this->_escapeForHtml($text, $options);
         
@@ -71,7 +73,7 @@ class Omeka_View_Helper_Item
         if (is_array($text) && reset($text) instanceof ElementText) {
            $text = $this->_extractTextFromRecords($text); 
         }
-
+        
         // Apply additional formatting options on that array, including 
         // 'delimiter' and 'index'.
         
@@ -85,7 +87,16 @@ class Omeka_View_Helper_Item
             return @$text[$options['index']];
         }
         
-        return $text;
+        // If the 'all' option is set, return the entire array of escaped data
+        if (isset($options['all'])) {
+            return $text;
+        } elseif (isset($options['index'])) {
+            // Return the value at a specific index.
+            return @$text[$options['index']];
+        } 
+        
+        // Return the first entry in the array or the whole thing if it's a string.
+        return is_array($text) ? reset($text) : $text;
     }
     
     protected function _formatSubstring($texts, $length)
@@ -189,6 +200,7 @@ class Omeka_View_Helper_Item
                 $text[] = new ElementText;
             }
             
+            // This really needs to be an instance of ElementText for the following to work.
             if (!(reset($text) instanceof ElementText)) {
                 throw new Exception('AAAAAAAAAAAAAAAAAAAH');
             }
@@ -277,14 +289,14 @@ class Omeka_View_Helper_Item
         $elementName = $field;
         $elementSetName = @$options['element_set'];
         
-        $elementText = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
+        $elementTexts = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
         
         // Lock the records so that they can't be accidentally saved back to the
         // database, since we are modifying their values directly at this point.
-        foreach ($elementText as $record) {
+        foreach ($elementTexts as $record) {
             $record->lock();
         }
         
-        return $elementText;
+        return $elementTexts;
     }
 }
