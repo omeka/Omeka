@@ -23,7 +23,7 @@
 	<?php if (!item_has_thumbnail()): ?>
 		<?php echo item('Description', array('index'=>0, 'snippet'=>300)); ?>
 		<?php else: ?>
-		<?php echo link_to_thumbnail($item, array('class'=>'thumbnail')); ?>
+		<?php echo link_to_item(item_thumbnail(), array('class'=>'thumbnail')); ?>
 		<?php echo item('Description', array('index'=>0, 'snippet'=>300)); ?>
 	<?php endif; ?>
 	</div>

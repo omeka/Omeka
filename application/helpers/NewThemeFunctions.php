@@ -683,7 +683,7 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
  **/
 function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked = true)
 {
-    $tags = tags(array('sort'=>$order, 'record'=>get_current_item()));
+    $tags = get_tags(array('sort'=>$order, 'record'=>get_current_item()));
     $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
     return tag_string($tags, $urlToLinkTo, $delimiter);
 }
@@ -696,9 +696,31 @@ function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked =
  **/
 function item_tags_as_cloud($order = null, $tagsAreLinked = true)
 {
-    $tags = tags(array('sort'=>$order, 'record'=>get_current_item()));
+    $tags = get_tags(array('sort'=>$order, 'record'=>get_current_item()));
     $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
     return tag_cloud($tags, $urlToLinkTo);
+}
+
+/**
+ * Retrieve the next item in the database.  
+ * 
+ * @todo Should this look for the next item in the loop, or just via the database?
+ * 
+ * @return Item|null
+ **/
+function get_next_item()
+{
+    return get_current_item()->next();
+}
+
+/**
+ * @see get_previous_item()
+ * 
+ * @return Item|null
+ **/
+function get_previous_item()
+{
+    return get_current_item()->previous();
 }
 
 /**
