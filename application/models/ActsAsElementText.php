@@ -208,7 +208,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
             $element = @$this->_elementsByNameAndSet[$elementName];
             // We can safely assume that $element is an array, even if empty.
             if (count($element) > 1) {
-                throw new Exception('Element name is ambiguous!  There is more than one element set containing an element named "' . $elementName . '"!');
+                // If we have more than one element set with an element of that name,
+                // return the first one.
+                // throw new Exception('Element name is ambiguous!  There is more than one element set containing an element named "' . $elementName . '"!');
+                debug('Element name is ambiguous!  There is more than one element set containing an element named "' . $elementName . '"!');
+                return current($element);
             } else if(empty($element)) {
                 throw new Exception("There is no element named '$elementName'!");
             }
