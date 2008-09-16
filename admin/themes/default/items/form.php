@@ -108,7 +108,9 @@ echo js('tiny_mce/tiny_mce');
 	        var formInputs = newInput.select('textarea, input');
 	        
 	        formInputs.each(function(input){
-	            // Force it to have an ID if it doesn't already
+	            // Reset the ID of the inputs so that there are no conflicts
+	            // when enabling/disabling the WYSIWYG editor.
+	            input.id = '';
 	            input.identify();
 	            
 	            // Set its name to a proper value so that it saves.
