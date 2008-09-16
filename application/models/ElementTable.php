@@ -31,7 +31,13 @@ class ElementTable extends Omeka_Db_Table
                              'rty.id = e.record_type_id',
                              array('record_type_name'=>'rty.name'));
         $select->where('rty.name = ? OR rty.name = "All"', $recordTypeName);
-
+        
+        // ORDER BY e.order ASC, es.name ASC
+        // This SQL statement will return results ordered each element set,
+        // and for each element set these will be in the proper designated order.
+        $select->order($this->getTableAlias() . '.order ASC');
+        $select->order('es.name ASC');
+        
         return $this->fetchObjects($select);
     }
     
@@ -90,10 +96,12 @@ class ElementTable extends Omeka_Db_Table
     }
     
     /**
-     * Retrieve all elements for a set (containing text only for the item)
+     * Retrieve all elements for a set.
      * 
      * @see items/form.php
      * @see display_form_input_for_element()
+     * @see ElementTable::findByRecordType() There is some duplication in the 
+     * ORDER clause of the SQL statement.
      * @param Item
      * @param string The name of the set it belongs to.
      * @return Element
@@ -105,6 +113,12 @@ class ElementTable extends Omeka_Db_Table
         $db = $this->getDb();
         
         $select->where('es.name = ?', (string) $elementSet);
+        
+        // ORDER BY e.order ASC, es.name ASC
+        // This SQL statement will return results ordered each element set,
+        // and for each element set these will be in the proper designated order.
+        $select->order($this->getTableAlias() . '.order ASC');
+        $select->order('es.name ASC');
         
         return $this->fetchObjects($select);       
     }
