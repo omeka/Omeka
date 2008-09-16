@@ -30,6 +30,22 @@ function set_option($name, $value)
     Omeka_Context::getInstance()->setOptions($options);
 }
 
+function delete_option($name)
+{
+    $db = get_db();
+    $sql = "
+    DELETE 
+    FROM $db->Option 
+    WHERE `name` = ?";
+    $db->query($sql, array($name));
+    
+    $options = Omeka_Context::getInstance()->getOptions();
+    if (isset($options[$name])) {
+        unset($options[$name]);
+    }
+    Omeka_Context::getInstance()->setOptions($options);
+}
+
 /**
  * @return string
  **/
