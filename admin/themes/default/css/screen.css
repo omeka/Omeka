@@ -87,7 +87,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 			/* Changes width based on default border and padding */
 			
 			/* Elements specific to items-add form */
-			.controls {float:left; clear:left;width: 486px; margin-left:128px;margin-top:-18px;text-align:left;}
+			.controls {float:left; clear:left;width: 300px; margin-left:128px;margin-top:-18px;text-align:left;}
 
 				.field label.use-html { float:right; clear:both;display:block; width: 128px; font-size:1.1em;margin:0;}
 				label.use-html input {display:inline; float:none;padding:0;}
@@ -97,7 +97,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	#add-item, #save-changes {float:right; text-decoration:none;}
 	.submit-medium {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
 	#add-item:hover, #save-changes:hover, .submit-medium:hover {background-position:0 0 !important;cursor:pointer;}
-	
+	.submit-medium-red {background-position:0 0 !important;}
 	/* Simple Search */
 	#search {padding:6px;width: 212px; float:right;margin-top:-18px;}
 		#search input.textinput {border:0; background:#eee url("../images/search-input-bg.gif") top left no-repeat !important;display:block; float:left; width:143px; height: 15px;padding:5px 0 5px 5px;}

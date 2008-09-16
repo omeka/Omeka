@@ -3,11 +3,7 @@
 <p id="add-item" class="add-button"><a class="add" href="<?php echo uri('items/add'); ?>">Add an Item</a></p>
 
 <?php if ( total_results() ): ?>
-<div id="search">
-<?php echo simple_search(array(), uri('items/browse')); ?>
 
-<?php echo link_to_advanced_search(); ?>
-</div>
 <ul id="section-nav" class="navigation">
 <?php
 	$section_nav = array(
@@ -21,7 +17,11 @@
 <?php endif; ?>
 
 <div id="primary">
+	<div id="search">
+	<?php echo simple_search(array(), uri('items/browse')); ?>
 
+	<?php echo link_to_advanced_search(); ?>
+	</div>
 <?php echo flash(); ?>
 
 <?php if ( total_results() ): ?>
@@ -58,7 +58,7 @@
 	<p>There are no items in the archive yet.
 	
 	<?php if(has_permission('Items','add')): ?>
-		  Why don&#8217;t you <a href="<?php echo url_for('items/add'); ?>">add one</a>?</p>
+		  Why don&#8217;t you <a href="<?php echo uri('items/add'); ?>">add one</a>?</p>
 	<?php endif; ?>
 </div>
 	
