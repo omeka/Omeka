@@ -1,6 +1,6 @@
 <?php
 /**
- * Uses url_for() to generate <a> tags for a given link.
+ * Uses uri() to generate <a> tags for a given link.
  * 
  * @since 0.10 No longer escapes the text for the link.  This text must be valid
  * HTML.
@@ -30,7 +30,7 @@ function link_to($record, $action=null, $text='View', $props = array())
     
     if($action) $urlOptions['action'] = (string) $action;
     
-	$url = url_for($urlOptions, $route);
+	$url = uri($urlOptions, $route);
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
 	return '<a href="'. $url . '"' . $attr . ' title="'. htmlentities($text) . '">' . $text . '</a>';
@@ -184,5 +184,5 @@ function link_to_home_page($text = null, $props = array())
  **/
 function link_to_admin_home_page($text, $props = array())
 {
-	return '<a href="'.admin_url_for('').'" '._tag_attributes($props).'>'.htmlentities($text)."</a>\n";
+	return '<a href="'.admin_uri('').'" '._tag_attributes($props).'>'.htmlentities($text)."</a>\n";
 }

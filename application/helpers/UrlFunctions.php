@@ -14,7 +14,7 @@ function items_output_uri($output="rss2") {
  * @param array Set of query parameters to append to the URL (optional)
  * @return string
  **/
-function url_for($options=array(), $route=null, $queryParams=array())
+function uri($options=array(), $route=null, $queryParams=array(), $reset = false, $encode = true)
 {
     return __v()->url($options, $route, $queryParams);
 }
@@ -86,7 +86,7 @@ function file_download_uri($file, $format='fullsize')
 {
 	if(!$file or !$file->exists()) return false;
 	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
-	$uri = url_for($options, 'download');
+	$uri = uri($options, 'download');
 	
 	return $uri;
 }
@@ -95,7 +95,7 @@ function file_display_uri($file, $format='fullsize')
 {
 	if(!$file->exists()) return false;
 	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
-	return url_for($options, 'display');
+	return uri($options, 'display');
 }
 
 

@@ -18,6 +18,6 @@
     </div>
 <?php endforeach; ?>    
 
-<a href="<?php echo url_for(''); ?>">Return to Dashboard</a>
+<a href="<?php echo uri(''); ?>">Return to Dashboard</a>
 
 <?php foot(); ?>

@@ -51,11 +51,11 @@ class ViewHelpersTestCase extends PHPUnit_Framework_TestCase
 	    
 
 	    require_once HELPERS;
-	    $url = url_for(array('controller'=>'foo', 'action'=>'bar'));
+	    $url = uri(array('controller'=>'foo', 'action'=>'bar'));
 
 	    $this->assertEquals("/foo/bar", $url);
 
-	    $url = url_for('/foo/bar');
+	    $url = uri('/foo/bar');
 
 	    $this->assertEquals("/foo/bar", $url);
 	} */

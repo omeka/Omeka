@@ -1,25 +1,12 @@
 <?php
 /**
- *
- * @deprecated 
- * @param string $urlEnd The controller/action/parameter that specifies the link.
- * @example uri('items/browse/'.$item->id); 
- * @todo Work without mod_rewrite enabled: uri('items/show/3') -> ?u=items/show/3
- * @return string Url for the link href attribute.
- **/
-function uri($urlEnd, $params=array())
-{    
-    return url_for($urlEnd, null, $params);
-}
-
-/**
  * @deprecated
  * @return string
  **/
 function generate_url($options, $name)
 {
-    trigger_error('generate_url() is deprecated, please use url_for() instead!');
-	return url_for($options, $name);
+    trigger_error('generate_url() is deprecated, please use uri() instead!');
+	return uri($options, $name);
 }
 
 /**
@@ -197,16 +184,6 @@ function has_collection($item, $name=null) {
  **/
 function has_files($item) {
 	trigger_error('Use item_has_files() instead of has_files()!');
-}
-
-/**
- * @deprecated
- * @return string
- **/
-function admin_uri()
-{
-    trigger_error('Please use admin_url_for() to build URLs to the admin theme.');
-	return WEB_ROOT . '/admin/';
 }
 
 /**

@@ -36,7 +36,7 @@
                 <input type="hidden" name="activate" value="<?php echo $plugin->directory; ?>" />
             </form>
             <br />
-            <form action="<?php echo url_for(array(
+            <form action="<?php echo uri(array(
                 'controller'=>'plugins', 
                 'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
                     <input type="submit" name="uninstall" class="submit-medium" value="Uninstall" />

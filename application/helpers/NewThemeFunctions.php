@@ -146,7 +146,7 @@ function url_for_record(Omeka_Record $record, $action, $controller = null)
     $options['action'] = $action;
     
     // Use the 'id' route for all urls pointing to records
-    return url_for($options, 'id');
+    return uri($options, 'id');
 }
 
 /**
@@ -161,14 +161,14 @@ function url_for_item($action = 'show')
 }
 
 /**
- * This behaves as url_for() except it always provides a url to the public theme.
+ * This behaves as uri() except it always provides a url to the public theme.
  * 
- * @see url_for()
- * @see admin_url_for()
+ * @see uri()
+ * @see admin_uri()
  * @param mixed
  * @return string
  **/
-function public_url_for()
+function public_uri()
 {
     set_base_url_for_theme('public');
     $args = func_get_args();
@@ -178,11 +178,11 @@ function public_url_for()
 }
 
 /**
- * @see public_url_for()
+ * @see public_uri()
  * @param mixed
  * @return mixed
  **/
-function admin_url_for()
+function admin_uri()
 {
     set_base_url_for_theme('admin');
     $args = func_get_args();
@@ -235,7 +235,7 @@ function public_nav_main(array $navArray)
 }
 
 /**
- * Example: set_base_url_for_theme('public');  url_for('items');  --> example.com/items.
+ * Example: set_base_url_for_theme('public');  uri('items');  --> example.com/items.
  * @access private
  * @param string
  * @return void
@@ -684,7 +684,7 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
 function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked = true)
 {
     $tags = get_tags(array('sort'=>$order, 'record'=>get_current_item()));
-    $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
+    $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_string($tags, $urlToLinkTo, $delimiter);
 }
 
@@ -697,7 +697,7 @@ function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked =
 function item_tags_as_cloud($order = null, $tagsAreLinked = true)
 {
     $tags = get_tags(array('sort'=>$order, 'record'=>get_current_item()));
-    $urlToLinkTo = ($tagsAreLinked) ? url_for('items/browse/tag/') : null;
+    $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_cloud($tags, $urlToLinkTo);
 }
 
@@ -1053,7 +1053,7 @@ function get_current_file()
 function link_to_advanced_search()
 {
     // Is appending the query string directly a security issue?  We should figure that out.
-    return '<a href="' . url_for('items/advanced-search') .'?' . $_SERVER['QUERY_STRING'].  '">Advanced Search</a>';
+    return '<a href="' . uri('items/advanced-search') .'?' . $_SERVER['QUERY_STRING'].  '">Advanced Search</a>';
 }
 
 /**
@@ -1068,7 +1068,7 @@ function link_to_advanced_search()
 function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
 {
     // Set the link href to the items/browse page.
-    $linkProperties['href'] = url_for(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
+    $linkProperties['href'] = uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
     return "<a " . _tag_attributes($linkProperties) . ">$text</a>";
 }
 

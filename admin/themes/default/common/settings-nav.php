@@ -1,8 +1,8 @@
 <ul id="section-nav" class="navigation vertical">
-<?php $navArray = array('General Settings' => url_for('settings'),
-                    'Element Sets' => url_for('element-sets'),
-					'Themes' => url_for('themes'),
-					'Plugins'=>url_for('plugins'));
+<?php $navArray = array('General Settings' => uri('settings'),
+                    'Element Sets' => uri('element-sets'),
+					'Themes' => uri('themes'),
+					'Plugins'=>uri('plugins'));
 		
     if(has_permission('Users','browse') ) {
     	$navArray['Users'] = uri('users/browse');

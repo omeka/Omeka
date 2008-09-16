@@ -42,7 +42,7 @@
 	<ul id="collectors">
 		<li>
 		<?php echo h($collector->getName()); ?>
-		<a class="remove-collector" href="<?php echo url_for(
+		<a class="remove-collector" href="<?php echo uri(
 		    array(
 		    'controller'=>'collections', 
 		    'action'=>'remove-collector', 

@@ -1,14 +1,14 @@
 <ul class="primary-nav navigation">
 <?php
 	$primaryNav = array(
-	    'Items' => url_for('items'), 
-	    'Collections' => url_for('collections'),
-	    'Item Types' => url_for('item-types'),
-	    'Tags' => url_for('tags')
+	    'Items' => uri('items'), 
+	    'Collections' => uri('collections'),
+	    'Item Types' => uri('item-types'),
+	    'Tags' => uri('tags')
 	    );
 if (has_permission('Settings', 'edit')) 
 {
-    $primaryNav['Settings'] = url_for('settings');
+    $primaryNav['Settings'] = uri('settings');
 	
 }
 				

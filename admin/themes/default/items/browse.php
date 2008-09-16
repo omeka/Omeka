@@ -4,7 +4,7 @@
 
 <?php if ( total_results() ): ?>
 <div id="search">
-<?php echo simple_search(array(), url_for('items/browse')); ?>
+<?php echo simple_search(array(), uri('items/browse')); ?>
 
 <?php echo link_to_advanced_search(); ?>
 </div>

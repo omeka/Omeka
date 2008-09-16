@@ -17,7 +17,7 @@ head(array('title'=>'Advanced Search')); ?>
 //]]>	
 </script>
 	
-<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo url_for('items/browse'); ?>" method="get">
+<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo uri('items/browse'); ?>" method="get">
 	    <h2>Search for Keywords</h2>
 		<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
 		
