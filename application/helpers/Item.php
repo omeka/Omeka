@@ -16,6 +16,8 @@
  **/
 class Omeka_View_Helper_Item
 {
+    protected $_item;
+    
     /**
      * Retrieve metadata for a specific field (henceforth known as 'element') for
      * an item.  The simplest form of this function will retrieve a single text 
@@ -23,6 +25,8 @@ class Omeka_View_Helper_Item
      * to the first available title.  There are a number of options that can be
      * passed via an array as the second argument.
      * 
+     * @param Item Database record representing the item to retrieve the field 
+     * data from.
      * @param string Field name to retrieve, which can be the name of an element 
      *     or a selected field name related to items.
      * @param mixed Options for formatting the metadata for display.
@@ -43,8 +47,10 @@ class Omeka_View_Helper_Item
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      **/
-    public function item($field, $options = array())
+    public function item($item, $field, $options = array())
     {
+        $this->_item = $item;
+        
         //Convert the shortcuts for the options into a proper array
         $options = $this->_getOptions($options);
         
@@ -280,7 +286,7 @@ class Omeka_View_Helper_Item
      **/
     public function getElementText($field, array $options)
     {
-        $item = get_current_item();
+        $item = $this->_item;
         
         // Any built-in fields or special naming schemes
         if ($this->hasOtherField($field)) {

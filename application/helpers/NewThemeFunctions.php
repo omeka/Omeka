@@ -17,7 +17,7 @@
  **/
 function item($field, $options=array())
 {
-    return __v()->item($field, $options);
+    return __v()->item(get_current_item(), $field, $options);
 }
 
 /**
