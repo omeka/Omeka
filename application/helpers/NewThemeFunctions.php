@@ -21,27 +21,6 @@ function item($field, $options=array())
 }
 
 /**
- * Retrieve the metadata for a specific element, given its name.
- * 
- * @todo Switch out dummy data with live database.
- * @param string Name of the element
- * @param string Possible fields include 'description', 'type name', 
- * 'type description', 'type regex', 'set name', 'set description'
- * @return string
- **/
-function element_metadata($elementName, $field)
-{
-    switch ($field) {
-        case 'description':
-            return "Dummy description!";
-            break;
-        default:
-            # code...
-            break;
-    }
-}
-
-/**
  * Retrieve the set of values for item type elements.
  * 
  * @return array
