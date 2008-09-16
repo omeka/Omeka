@@ -71,7 +71,7 @@ function link_to_items_rss($params=array())
  *
  * @return string
  **/
-function link_to_next_item($text="Next Item -->", $props=array())
+function link_to_next_item($text="Next Item --&gt;", $props=array())
 {
     $item = get_current_item();
 	if($next = $item->next()) {
@@ -84,7 +84,7 @@ function link_to_next_item($text="Next Item -->", $props=array())
  *
  * @return string
  **/
-function link_to_previous_item($text="<-- Previous Item", $props=array())
+function link_to_previous_item($text="&lt;-- Previous Item", $props=array())
 {
     $item = get_current_item();
 	if($previous = $item->previous()) {
