@@ -367,7 +367,9 @@ class Omeka_Plugin_Broker
         
         $contrDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $current . DIRECTORY_SEPARATOR . 'controllers';
         // Module name needs to be lowercased (plugin directories are not, typically).
-        $moduleName = strtolower($current);
+        // Module name needs to go from camelCased to dashed (ElementSets --> element-sets).
+        $inflector = new Zend_Filter_Word_CamelCaseToDash();
+        $moduleName = strtolower($inflector->filter($current));
         Zend_Controller_Front::getInstance()->addControllerDirectory($contrDir, $moduleName);
     }
     
