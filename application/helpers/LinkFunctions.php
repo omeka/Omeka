@@ -15,22 +15,19 @@
  **/
 function link_to($record, $action=null, $text='View', $props = array())
 {
-    $urlOptions = array();
-    //Use Zend Framework's built-in 'default' route
-    $route = 'default';
-    
+    // If we're linking to a record somewhere, we have to 
     if($record instanceof Omeka_Record) {
-        $urlOptions['controller'] = strtolower(Inflector::pluralize(get_class($record)));
-        $urlOptions['id'] = $record->id;
-        $route = 'id';
+        $url = url_for_record($record, $action);
     }
     else {
+        // Otherwise $record is the name of the controller to link to.
+        $urlOptions = array();
+        //Use Zend Framework's built-in 'default' route
+        $route = 'default';
         $urlOptions['controller'] = (string) $record;
+        if($action) $urlOptions['action'] = (string) $action;
+        $url = uri($urlOptions, $route);
     }
-    
-    if($action) $urlOptions['action'] = (string) $action;
-    
-	$url = uri($urlOptions, $route);
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
 	return '<a href="'. $url . '"' . $attr . ' title="'. htmlentities($text) . '">' . $text . '</a>';

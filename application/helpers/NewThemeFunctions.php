@@ -118,9 +118,16 @@ function url_for_record(Omeka_Record $record, $action, $controller = null)
 {
     $options = array();
     // Inflect the name of the controller from the record class if no
-    // controller name is given
-    $options['controller'] = !$controller ? 
-        strtolower(Inflector::pluralize(get_class($record))) : $controller;
+    // controller name is given.
+    if (!$controller) {
+        $recordClass = get_class($record);
+        $inflector = new Zend_Filter_Word_CamelCaseToDash();
+        // Convert the record class name from CamelCased to dashed-lowercase.
+        $controller = strtolower($inflector->filter($recordClass));
+        // Pluralize the record class name.
+        $controller = Inflector::pluralize($controller);
+    }
+    $options['controller'] = $controller;
     $options['id'] = $record->id;
     $options['action'] = $action;
     
