@@ -42,7 +42,7 @@ class configMigration extends Omeka_Db_Migration
         $config = new Zend_Config_Ini(CONFIG_DIR 
                                     . DIRECTORY_SEPARATOR 
                                     . 'config.ini', 'site');
-        if (isset($config->pagination->per_page)) {
+        if (@isset($config->pagination->per_page)) {
             $perPage = $config->pagination->per_page;
         } else {
             $perPage = 10;
