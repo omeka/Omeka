@@ -32,11 +32,7 @@ class ElementTable extends Omeka_Db_Table
                              array('record_type_name'=>'rty.name'));
         $select->where('rty.name = ? OR rty.name = "All"', $recordTypeName);
         
-        // ORDER BY e.order ASC, es.name ASC
-        // This SQL statement will return results ordered each element set,
-        // and for each element set these will be in the proper designated order.
-        $select->order($this->getTableAlias() . '.order ASC');
-        $select->order('es.name ASC');
+        $this->orderElements($select);
         
         return $this->fetchObjects($select);
     }
@@ -95,6 +91,15 @@ class ElementTable extends Omeka_Db_Table
         return $pairs;
     }
     
+    protected function orderElements($select)
+    {
+        // ORDER BY e.order ASC, es.name ASC
+        // This SQL statement will return results ordered each element set,
+        // and for each element set these will be in the proper designated order.
+        $select->order($this->getTableAlias() . '.order ASC');
+        $select->order('e.element_set_id ASC');
+    }
+    
     /**
      * Retrieve all elements for a set.
      * 
@@ -114,11 +119,7 @@ class ElementTable extends Omeka_Db_Table
         
         $select->where('es.name = ?', (string) $elementSet);
         
-        // ORDER BY e.order ASC, es.name ASC
-        // This SQL statement will return results ordered each element set,
-        // and for each element set these will be in the proper designated order.
-        $select->order($this->getTableAlias() . '.order ASC');
-        $select->order('es.name ASC');
+        $this->orderElements($select);
         
         return $this->fetchObjects($select);       
     }
