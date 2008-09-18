@@ -19,9 +19,9 @@ echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
 		//Add the tags with this request
 		$('tags-form').request({
 			onComplete: function(t) {
-				$('tags').hide();
-				$('tags').update(t.responseText);
-				Effect.Appear('tags', {duration: 1.0});
+				$('tag-cloud').hide();
+				$('tag-cloud').update(t.responseText);
+				Effect.Appear('tag-cloud', {duration: 1.0});
 			}		    
 		});		
 	}
@@ -96,10 +96,7 @@ echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
     <div id="tags" class="info-panel">
 		<h2>Tags</h2>
 		<div id="tag-cloud">
-		    <h3>All Tags</h3>
-			<ul>
-				<?php common('tag-list', compact('item'), 'items'); ?>
-			</ul>
+		    <?php common('tag-list', compact('item'), 'items'); ?>
 		</div>
 		
 		<?php if ( has_permission('Items','tag') ): ?>

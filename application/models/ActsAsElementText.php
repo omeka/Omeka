@@ -369,7 +369,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
      **/
     public function getElementTextsToSaveFromPost($post)
     {
-        $elementPost = $post['Elements'];
+        
+        if (!$elementPost = $post['Elements']) {
+            return;
+        }
         
         foreach ($elementPost as $elementId => $texts) {
             // Pull this from the list of prior retrieved data instead of a new SQL query each time.
