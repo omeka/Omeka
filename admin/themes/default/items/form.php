@@ -107,33 +107,35 @@ echo js('tiny_mce/tiny_mce');
         var formInputs = newInput.select('div.input').first().select('textarea, select, input');
         
         formInputs.each(function(input){
+            
             // Reset the ID of the inputs so that there are no conflicts
             // when enabling/disabling the WYSIWYG editor.
             input.id = '';
             input.identify();
-            
+                        
             // Set its name to a proper value so that it saves.
             // This involves grepping the name for its specific index and incrementing that.
             // Elements[##][1][text] --> Elements[##][2][text]
             input.name = input.name.gsub(/(Elements\[\d+\]\[)(\d+)\]/, function(match) {
                 return match[1] + (parseInt(match[2]) + 1) + ']'
             });
-            
+                        
             // Reset its value
             input.value = '';
             
             // Hidden values for each input field should be set to 0
             if (input.type == 'hidden') {
                 input.value = '0';
-            };
-            
-            // Enable the wysiwyg checkbox
-            if (input.type == 'checkbox') {
-                Omeka.ItemForm.enableWysiwygCheckbox(input);
-            };
+            };            
         });
-                                                        
+        
         lastInput.insert({after: newInput});
+        
+        // Extract the Is HTML checkbox and make it enable the WYSIWYG editor.
+        var htmlCheckbox = newInput.select('.use-html input[type="checkbox"]').first();
+        if (htmlCheckbox) {
+            Omeka.ItemForm.enableWysiwygCheckbox(htmlCheckbox);
+        };
 	},
     
     deleteElementControl: function(e){
