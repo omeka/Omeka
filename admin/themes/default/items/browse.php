@@ -17,7 +17,7 @@
 <?php endif; ?>
 
 <div id="primary">
-	<div id="search">
+	<div id="search-form">
 	<?php echo simple_search(); ?>
 
 	<?php echo link_to_advanced_search(); ?>
