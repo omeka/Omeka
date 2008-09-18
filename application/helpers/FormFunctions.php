@@ -182,12 +182,21 @@ function submit($value="Submit",$name="submit")
 	return __v()->formSubmit($name, $value, array());
 }
 	
-function simple_search($props=array(),$uri) { ?>
-	<form <?php echo _tag_attributes($props); ?> action="<?php echo $uri; ?>" method="get">
-	<fieldset>
-	    <input type="text" class="textinput" name="search" value="<?php echo htmlspecialchars($_REQUEST['search']); ?>"/>
-	    <?php echo submit("Search","submit_search"); ?>
-	</fieldset>
-	</form>
-<?php }
-?>
+function simple_search($buttonText = "Search", $formProperties=array('id'=>'simple-search'), $uri = null) 
+{ 
+    // Always post the 'items/browse' page by default (though can be overridden).
+    if (!$uri) {
+        $uri = uri('items/browse');
+    }
+    
+    $formProperties['action'] = $uri;
+    $formProperties['method'] = 'get';
+    $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
+    $html .= '<fieldset>' . "\n\n";
+    $html .= __v()->formText('search', htmlspecialchars($_REQUEST['search']), array('name'=>'textinput'));
+    $html .= __v()->formSubmit('submit_search', $buttonText);
+    $html .= '</fieldset>' . "\n\n";
+    $html .= '</form>';
+    
+    return $html;
+}
