@@ -17,7 +17,7 @@ function link_to($record, $action=null, $text='View', $props = array())
 {
     // If we're linking to a record somewhere, we have to 
     if($record instanceof Omeka_Record) {
-        $url = url_for_record($record, $action);
+        $url = record_uri($record, $action);
     }
     else {
         // Otherwise $record is the name of the controller to link to.

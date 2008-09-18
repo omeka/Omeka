@@ -5,7 +5,7 @@
 	<div id="type-info">
 
 		<p><?php if ( has_permission('ItemTypes','edit') ): ?>
-		 	<a class="edit" href="<?php echo url_for_record($itemtype, 'edit', 'item-types'); ?>">Edit</a>
+		 	<a class="edit" href="<?php echo record_uri($itemtype, 'edit', 'item-types'); ?>">Edit</a>
 		 <?php endif; ?></p>
 		
 		<p><?php echo htmlentities($itemtype->description); ?></p>

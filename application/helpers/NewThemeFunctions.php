@@ -114,7 +114,7 @@ function item_citation()
  * @param Omeka_Record
  * @return string
  **/
-function url_for_record(Omeka_Record $record, $action, $controller = null)
+function record_uri(Omeka_Record $record, $action, $controller = null)
 {
     $options = array();
     // Inflect the name of the controller from the record class if no
@@ -143,7 +143,7 @@ function url_for_record(Omeka_Record $record, $action, $controller = null)
  **/
 function url_for_item($action = 'show')
 {
-    return url_for_record(get_current_item(), $action);
+    return record_uri(get_current_item(), $action);
 }
 
 /**
