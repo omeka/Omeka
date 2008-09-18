@@ -106,19 +106,24 @@ echo js('tiny_mce/tiny_mce');
         // 2) Put it on the page directly below the existing one
         var formInputs = newInput.select('div.input').first().select('textarea, select, input');
         
+        // Set its name to a proper value so that it saves.
+        // This involves grepping the name for its specific index and incrementing that.
+        // Elements[##][1][text] --> Elements[##][2][text]
+        function incrementElementFormIndex(inputName)
+        {
+            return inputName.gsub(/(Elements\[\d+\]\[)(\d+)\]/, function(match) {
+                return match[1] + (parseInt(match[2]) + 1) + ']'
+            });
+        }
+        
         formInputs.each(function(input){
             
             // Reset the ID of the inputs so that there are no conflicts
             // when enabling/disabling the WYSIWYG editor.
             input.id = '';
             input.identify();
-                        
-            // Set its name to a proper value so that it saves.
-            // This involves grepping the name for its specific index and incrementing that.
-            // Elements[##][1][text] --> Elements[##][2][text]
-            input.name = input.name.gsub(/(Elements\[\d+\]\[)(\d+)\]/, function(match) {
-                return match[1] + (parseInt(match[2]) + 1) + ']'
-            });
+                          
+            input.name = incrementElementFormIndex(input.name);
                         
             // Reset its value
             input.value = '';
@@ -134,6 +139,12 @@ echo js('tiny_mce/tiny_mce');
         // Extract the Is HTML checkbox and make it enable the WYSIWYG editor.
         var htmlCheckbox = newInput.select('.use-html input[type="checkbox"]').first();
         if (htmlCheckbox) {
+            // Make sure the checkbox and its hidden field counterpart have proper
+            // indices so that the form saves correctly.
+            var hiddenBuddy = htmlCheckbox.previous('input[type="hidden"]');
+            hiddenBuddy.name = incrementElementFormIndex(hiddenBuddy.name);
+            
+            htmlCheckbox.name = incrementElementFormIndex(htmlCheckbox.name);
             Omeka.ItemForm.enableWysiwygCheckbox(htmlCheckbox);
         };
 	},
