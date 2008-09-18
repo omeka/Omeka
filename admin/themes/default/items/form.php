@@ -201,8 +201,7 @@ echo js('tiny_mce/tiny_mce');
 	enableWysiwygCheckbox: function(checkbox) {
 	    
 	    function getTextarea(checkbox) {
-	        var textarea = checkbox.up().previous('textarea', 0);
-
+	        var textarea = checkbox.up('.input-block').down('textarea', 0);
             // We can't use the editor for any field that isn't a textarea
             if (Object.isUndefined(textarea)) {
                 return;
