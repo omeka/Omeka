@@ -13,7 +13,7 @@
 <link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 
 <!-- Plugin Stuff -->
-<?php plugin_header(); ?>
+<?php admin_plugin_header(); ?>
 
 </head>
 <body id="login">
