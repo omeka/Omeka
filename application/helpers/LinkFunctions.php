@@ -30,7 +30,7 @@ function link_to($record, $action=null, $text='View', $props = array())
     }
 
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-	return '<a href="'. $url . '"' . $attr . ' title="'. htmlentities($text) . '">' . $text . '</a>';
+	return '<a href="'. $url . '"' . $attr . '>' . $text . '</a>';
 }
 
 /**
