@@ -1106,3 +1106,13 @@ function show_item_metadata(array $options = array())
     $item = get_current_item();
     return __v()->itemShow($item, $options);
 }
+
+function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
+{
+    $phraseArray = explode(' ', $phrase);
+    if (count($phraseArray) > $maxWords && $maxWords > 0) {
+        $phrase = implode(' ', array_slice($phraseArray, 0, $maxWords)) . $ellipsis;
+    }
+    return $phrase;
+}
+
