@@ -33,7 +33,9 @@ class Omeka_View_Helper_ElementForm
         $html .= '<div class="inputs">';
         $html .= $this->_displayFormFields();
         $html .= '</div>'; // Close 'inputs' div
-        $html .= $this->_displayFormControls();
+    	
+        $html .= $this->view->formSubmit('add_element_' . $this->_element['id'], 'Add Input', 
+    	    array('class'=>'add-element'));
         
         $html .= $this->_displayTooltip();
         
@@ -140,14 +142,18 @@ class Omeka_View_Helper_ElementForm
         $html = '';
                 
         for ($i=0; $i < $fieldCount; $i++) { 
-            $html .= '<div class="input">';
+            $html .= '<div class="input-block">';
             
             $fieldStem = $this->_getFieldNameStem($i);
             
+            $html .= '<div class="input">';
             $html .= $this->_displayFormInput($fieldStem, $this->_getValueForField($i));
+            $html .= '</div>';
+            
+            $html .= $this->_displayFormControls();
             
             $html .= $this->_displayHtmlFlag($fieldStem, $i);
-                        
+            
             $html .= '</div>';
         }
         
@@ -330,9 +336,6 @@ class Omeka_View_Helper_ElementForm
     {
         // Used by Javascript.
     	$html .= '<div class="controls">';
-
-    	$html .= $this->view->formSubmit('add_element_' . $this->_element['id'], 'Add Input', 
-    	    array('class'=>'add-element'));
 
     	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], 'Remove Input', 
     	    array('class'=>'remove-element'));

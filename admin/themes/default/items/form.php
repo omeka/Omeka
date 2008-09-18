@@ -92,68 +92,76 @@ echo js('tiny_mce/tiny_mce');
 		});
 	},
 	
-	makeElementControls: function() {
+	addElementControl: function(e){
+        // Stop form submissions
+        e.stop();
+        
+        // Get the last input div and copy it.
+        var lastInput = this.up('div.field').select('div.input-block').last();
+        var newInput = lastInput.cloneNode(true);
+        
+        newInput.select('input.remove-element').invoke('observe', 'click', Omeka.ItemForm.deleteElementControl);
+        
+        // 1) Empty the new form elements
+        // 2) Put it on the page directly below the existing one
+        var formInputs = newInput.select('div.input').first().select('textarea, select, input');
+        
+        formInputs.each(function(input){
+            // Reset the ID of the inputs so that there are no conflicts
+            // when enabling/disabling the WYSIWYG editor.
+            input.id = '';
+            input.identify();
+            
+            // Set its name to a proper value so that it saves.
+            // This involves grepping the name for its specific index and incrementing that.
+            // Elements[##][1][text] --> Elements[##][2][text]
+            input.name = input.name.gsub(/(Elements\[\d+\]\[)(\d+)\]/, function(match) {
+                return match[1] + (parseInt(match[2]) + 1) + ']'
+            });
+            
+            // Reset its value
+            input.value = '';
+            
+            // Hidden values for each input field should be set to 0
+            if (input.type == 'hidden') {
+                input.value = '0';
+            };
+            
+            // Enable the wysiwyg checkbox
+            if (input.type == 'checkbox') {
+                Omeka.ItemForm.enableWysiwygCheckbox(input);
+            };
+        });
+                                                        
+        lastInput.insert({after: newInput});
+	},
+    
+    deleteElementControl: function(e){
+        e.stop();
+        
+        if(!confirm('Do you want to delete this?')) {
+            return;
+        }
+        
+        // The main div for this element is 2 levels up
+        var elementDiv = this.up().up().remove();
+        
+        /*
+        //Check if there is more than one element, if so then OK to delete.
+        var inputDivs = elementDiv.select('div.input');
+        if(inputDivs.size() > 1) {
+            inputDivs.last().remove();
+        }
+        */
+	},
+    
+    makeElementControls: function() {
 	    // Class name is hard coded here b/c it is hard coded in the helper
 	    // function as well.
-	    $$('.add-element').invoke('observe', 'click', function(e){
-	        // Stop form submissions
-	        e.stop();
-            
-	        // Get the last input div and copy it.
-	        var lastInput = this.up('div.field').select('div.input').last();
-	        var newInput = lastInput.cloneNode(true);
-	        	        
-	        // 1) Empty the new form elements
-	        // 2) Put it on the page directly below the existing one
-	        var formInputs = newInput.select('textarea, input');
-	        
-	        formInputs.each(function(input){
-	            // Reset the ID of the inputs so that there are no conflicts
-	            // when enabling/disabling the WYSIWYG editor.
-	            input.id = '';
-	            input.identify();
-	            
-	            // Set its name to a proper value so that it saves.
-	            // This involves grepping the name for its specific index and incrementing that.
-	            // Elements[##][1][text] --> Elements[##][2][text]
-	            input.name = input.name.gsub(/(Elements\[\d+\]\[)(\d+)\]/, function(match) {
-	                return match[1] + (parseInt(match[2]) + 1) + ']'
-	            });
-	            
-	            // Reset its value
-	            input.value = '';
-	            
-	            // Hidden values for each input field should be set to 0
-	            if (input.type == 'hidden') {
-	                input.value = '0';
-	            };
-	            
-	            // Enable the wysiwyg checkbox
-	            if (input.type == 'checkbox') {
-                    Omeka.ItemForm.enableWysiwygCheckbox(input);
-	            };
-	        });
-	        	        	        	                    
-	        lastInput.insert({after: newInput});
-	    });
+	    $$('.add-element').invoke('observe', 'click', Omeka.ItemForm.addElementControl);
 	    
 	    // When button is clicked, remove the last input that was added
-	    $$('.remove-element').invoke('observe', 'click', function(e){
-	        e.stop();
-	        
-	        if(!confirm('Do you want to delete this?')) {
-	            return;
-	        }
-	        
-	        // The main div for this element is 2 levels up
-	        var elementDiv = this.up().up();
-	        
-	        //Check if there is more than one element, if so then OK to delete.
-	        var inputDivs = elementDiv.select('div.input');
-	        if(inputDivs.size() > 1) {
-	            inputDivs.last().remove();
-	        }
-	    });
+	    $$('.remove-element').invoke('observe', 'click', Omeka.ItemForm.deleteElementControl);
 	},
 	
 	/**
