@@ -18,7 +18,7 @@
 
 <div id="primary">
 	<div id="search">
-	<?php echo simple_search(array(), uri('items/browse')); ?>
+	<?php echo simple_search(); ?>
 
 	<?php echo link_to_advanced_search(); ?>
 	</div>
