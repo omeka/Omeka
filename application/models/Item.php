@@ -67,8 +67,10 @@ class Item extends Omeka_Record
      **/
     public function getItemType()
     {
-        $itemType = $this->getTable('ItemType')->find($this->item_type_id);
-        return $itemType;
+        if ($this->item_type_id) {
+            $itemType = $this->getTable('ItemType')->find($this->item_type_id);
+            return $itemType;
+        }
     }
     
     /**
