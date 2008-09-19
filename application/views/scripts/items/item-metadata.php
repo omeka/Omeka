@@ -8,7 +8,7 @@
         <?php if ($info['isEmpty']): ?>
             <div class="element-text-empty"><?php echo $info['emptyText']; ?></div>
         <?php else: ?>
-        <?php foreach (item($elementName, array('all'=>true)) as $text): ?>
+        <?php foreach (item($elementName, array('all'=>true, 'element_set'=>$setName)) as $text): ?>
             <div class="element-text"><?php echo $text; ?></div>
         <?php endforeach; ?>
         <?php endif; ?>
