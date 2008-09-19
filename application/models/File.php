@@ -593,7 +593,7 @@ class File extends Omeka_Record {
         if (empty($elements)) {
             return;
         }
-        
+                
         // Figure out what kind of extraction strategy to use for retrieving the metadata from ID3.
         // Current possibilities include either FilesImages or FilesVideos
         switch (current($elements)->set_name) {
@@ -602,6 +602,7 @@ class File extends Omeka_Record {
                 break;
             case 'Omeka Image File':
                 $extraction = 'FilesImages';
+                break;
             default:
                 throw new Exception('Cannot extract metadata for these elements!');
                 break;

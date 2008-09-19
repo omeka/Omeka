@@ -85,4 +85,14 @@ class FilesImages
             }
         return $exif_string;       
     }
+    
+    public function getIPTCArray()
+    {
+        return $this->iptc;
+    }
+    
+    public function getIPTCString()
+    {
+        return print_r($this->iptc, true);
+    }
 }
