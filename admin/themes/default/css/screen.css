@@ -87,7 +87,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 			/* Changes width based on default border and padding */
 			
 			/* Elements specific to items-add form */
-			.controls {float:left; clear:left;width: 300px; margin-left:128px;margin-top:-18px;text-align:left;}
+			.controls {float:left; clear:left;width: 300px; margin-left:128px;text-align:left;}
 
 				.field label.use-html { float:right; clear:both;display:block; width: 128px; font-size:1.1em;margin:0;}
 				label.use-html input {display:inline; float:none;padding:0;}
