@@ -500,7 +500,7 @@ class Omeka_Plugin_Broker
         $uninstallHook = $this->getHook($plugin, 'uninstall');
         
         if ($uninstallHook) {
-            call_user_func_array($uninstallHook);
+            call_user_func($uninstallHook);
         }
         
         //Remove the entry from the database
