@@ -12,16 +12,16 @@ function display_definition_list_for_elements($file, $elements, $emptyText = '[E
 {
     $html = '';
     foreach ($elements as $element): 
-        $html .= '<dt>' . $element->name . '</dt>';
+        $html .= '<h3>' . $element->name . '</h3>';
         $texts = $file->getTextsByElement($element);
-        $html .= '<dd>';
+        $html .= '<div>';
         if (!count($texts)) {
             $html .= $emptyText;
         }
         foreach ($texts as $textRecord): 
-            $html .= $textRecord->text; 
+            $html .= '<p><pre>'.$textRecord->text.'</pre></p>'; 
         endforeach;
-        $html .= '</dd>';
+        $html .= '</div>';
     endforeach; 
     return $html;
 }

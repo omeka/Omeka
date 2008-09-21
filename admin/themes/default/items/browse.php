@@ -17,21 +17,18 @@
 <?php endif; ?>
 
 <div id="primary">
-	<div id="search-form">
+	<div id="simple-search-form">
 	<?php echo simple_search(); ?>
-
 	<?php echo link_to_advanced_search(); ?>
 	</div>
 <?php echo flash(); ?>
 
 <?php if ( total_results() ): ?>
 
-<div id="browse-meta">
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
 	
-</div>
-<form action="<?php echo uri('items/power-edit'); ?>" method="post" accept-charset="utf-8">
+<form id="items-browse" action="<?php echo uri('items/power-edit'); ?>" method="post" accept-charset="utf-8">
 
 <fieldset id="view-choice">
 	<?php 

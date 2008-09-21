@@ -89,10 +89,7 @@
 				    <?php $key = 0; ?>
 					<?php while(loop_items()): ?>
 						<li class="<?php echo is_odd($key++) ? 'even' : 'odd'; ?>">
-						    <a href="<?php echo url_for_item(); ?>">
-						        <span class="title"><?php  echo item('Title'); ?></span> 
-						        <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span>
-						    </a>
+							<?php echo link_to_item();?>
 						</li>	
 					<?php endwhile; ?>
 				</ul>
