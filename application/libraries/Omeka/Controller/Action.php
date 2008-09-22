@@ -203,6 +203,14 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
                          Omeka_Controller_Flash::DISPLAY_NEXT);
     }
     
+    public function flashError($msg)
+    {
+        $flash = new Omeka_Controller_Flash;
+        $flash->setFlash(Omeka_Controller_Flash::GENERAL_ERROR, 
+                         $msg, 
+                         Omeka_Controller_Flash::DISPLAY_NEXT);
+    }
+
     ///// BASIC CRUD INTERFACE /////
     
     /**
