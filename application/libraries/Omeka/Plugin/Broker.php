@@ -260,21 +260,16 @@ class Omeka_Plugin_Broker
             $plugin_obj->active = 1;
             $plugin_obj->name = $plugin;
             $plugin_obj->forceSave();
-            
             $plugin_id = $plugin_obj->id;
-            
             //Now run the installer for the plugin
             $install_hook = $this->getHook($plugin, 'install');
-                                            
             call_user_func_array($install_hook, array($plugin_id));            
         } catch (Exception $e) {
-            
-            echo "An error occurred when installing this plugin: ".$e->getMessage();
-            
             //If there was an error, remove the plugin from the DB so that we can retry the install
             if ($plugin_obj->exists()) {
                 $plugin_obj->delete();
             }
+            throw new Exception($e->getMessage());
         }
     }
     
@@ -497,14 +492,16 @@ class Omeka_Plugin_Broker
      **/
     public function uninstall($plugin)
     {
-        $uninstallHook = $this->getHook($plugin, 'uninstall');
-        
-        if ($uninstallHook) {
-            call_user_func($uninstallHook);
+        try {
+            $uninstallHook = $this->getHook($plugin, 'uninstall');
+            if ($uninstallHook) {
+                call_user_func($uninstallHook);
+            }
+            //Remove the entry from the database
+            $this->_db->query("DELETE FROM {$this->_db->Plugin} WHERE name = ? LIMIT 1", array($plugin));
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
-        
-        //Remove the entry from the database
-        $this->_db->query("DELETE FROM {$this->_db->Plugin} WHERE name = ? LIMIT 1", array($plugin));
     }
     
     /**

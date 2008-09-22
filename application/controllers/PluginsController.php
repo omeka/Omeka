@@ -70,10 +70,14 @@ class PluginsController extends Omeka_Controller_Action
         
         if (!$broker->isInstalled($plugin)) {
             
-            $broker->install($plugin);
-            $this->flashSuccess("Plugin named '$plugin' was successfully installed!");
-            
-            $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin));
+            try {
+                $broker->install($plugin);
+                $this->flashSuccess("Plugin named '$plugin' was successfully installed!");
+                $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin));
+            } catch (Exception $e) {
+                $this->flashError("The following error occurred while installing the '$plugin' plugin: " . $e->getMessage());
+                $this->redirect->goto('browse');
+            }
         }
     }
     
@@ -146,8 +150,13 @@ class PluginsController extends Omeka_Controller_Action
         $plugin = (string) $this->_getParam('name');
         $broker = $this->_pluginBroker;
         if ($broker && $broker->isInstalled($plugin)) {
-            $broker->uninstall($plugin);
-            $this->flashSuccess("Plugin named '$plugin' was successfully uninstalled!");
+            try {
+                $broker->uninstall($plugin);
+                $this->flashSuccess("Plugin named '$plugin' was successfully uninstalled!");
+            } catch (Exception $e) {
+                $this->flashError("The following error occurred while uninstalling the '$plugin' plugin: " . $e->getMessage());
+                $this->redirect->goto('browse');
+            }
         } else {
             $this->flash("Plugin named '$plugin' could not be found!");
         }
