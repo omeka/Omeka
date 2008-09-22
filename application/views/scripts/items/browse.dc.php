@@ -6,7 +6,7 @@ xmlns:dc="http://purl.org/dc/elements/1.1/">
 <?php 
 require_once 'ItemDc.php';
 $convert = new ItemDc; 
-foreach ($items as $item) {
+while ($item = loop_items()) {
     echo $convert->recordToDc($item);
 }
 ?>
