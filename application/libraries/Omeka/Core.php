@@ -334,11 +334,11 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     {
         $options = $this->getOptions();
 
-        if ($serialized = $options['acl']) {
-            $acl = unserialize($serialized);
-        } else {
+        // if ($serialized = $options['acl']) {
+        //     $acl = unserialize($serialized);
+        // } else {
             $acl = $this->setupAcl();
-        }
+        // }
         
         $this->setAcl($acl);
     }

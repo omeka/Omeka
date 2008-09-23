@@ -22,6 +22,7 @@
 $resources = array(
     'Items'         =>  array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
     'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
+    'ElementSets'   =>  array('browse', 'delete'),
     'Entities'      =>  array('add','edit','displayEmail','delete', 'browse'),
     'Files'         =>  array('edit','delete'),
     'Plugins'       =>  array('browse','config', 'install', 'uninstall'),
@@ -63,14 +64,15 @@ $acl->loadResourceList($resources);
 $acl->addRole(new Zend_Acl_Role('researcher'));
 
 $acl->addRole(new Zend_Acl_Role('super'));
+// Admins inherit privileges from super users.
 $acl->addRole(new Zend_Acl_Role('admin'), 'super');
 
-//Contributors do not inherit from the other roles
+//Contributors do not inherit from the other roles.
 $acl->addRole(new Zend_Acl_Role('contributor'));
 
 $acl->loadAllowList($allowList);
 
 //Deny a couple of specific privileges to admin users
-$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade'));
+$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets'));
 $acl->deny('admin', 'Users', array('editRoles','makeSuperUser', 'deleteSuperUser', 'togglePrivilege'));
 ?>

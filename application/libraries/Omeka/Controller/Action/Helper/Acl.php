@@ -79,7 +79,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
 		}
 		
 		if(!$resource) {
-			$resource = ucwords($this->getRequest()->getControllerName());
+			$resource = $this->getResourceName();
 		}
 
 		//If the resource exists (Controller) but the tested privilege (action) has not been defined in the ACL, then allow access
@@ -89,6 +89,24 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
 		
 		return $this->_acl->checkUserPermission($resource, $privilege);
 	}
+    
+    /**
+     * Retrieve the name of the ACL resource based on the name of the controller.
+     *  
+     * @todo Should use the Zend inflection, though mine works better at the moment [KBK].
+     * @return string
+     **/
+    public function getResourceName()
+    {
+        $controllerName = $this->getRequest()->getControllerName();
+        // This ZF inflector should work but it doesn't!
+        // $inflector = new Zend_Filter_Word_DashToCamelCase();
+        // return $inflector->filter($controllerName);
+        
+        // Instead we are going to inflect from dashed-lowercase to CamelCase.
+        $controllerName = implode('', array_map('ucwords', explode('-', $controllerName) ));
+        return $controllerName;
+    }
     
 	/**
 	 * Temporarily override the ACL's permissions for this controller
