@@ -1,7 +1,7 @@
 <?php 
 	header ("HTTP/1.0 404 Not Found"); 
-	$items = set_items_for_loop(recent_items('10'));
-	$collections = recent_collections('5');
+	set_items_for_loop(recent_items('10'));
+	set_collections_for_loop(recent_collections('5'));
 ?>
 
 <?php head(); ?>
@@ -22,9 +22,9 @@
 	<div id="recent-collections">
 	<h2>Collections</h2>
 	<ul class="collections">
-		<?php foreach($collections as $collection):?>
-		<li class="collection"><?php echo link_to_collection($collection); ?></li>
-		<?php endforeach; ?>
+		<?php while (loop_collections()):?>
+		<li class="collection"><?php echo link_to_collection(); ?></li>
+		<?php endwhile; ?>
 	</ul>
 	</div>
 
