@@ -1,8 +1,11 @@
 <?php 
 
 /**
-* 
-*/
+ * @package Omeka
+ * @subpackage Models
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class ElementSetTable extends Omeka_Db_Table
 {
     protected $_alias = 'es';

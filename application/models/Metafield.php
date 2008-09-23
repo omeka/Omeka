@@ -13,7 +13,9 @@ require_once 'TypesMetafields.php';
 require_once 'MetafieldTable.php';
 
 /**
+ * @deprecated
  * @package Omeka
+ * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/

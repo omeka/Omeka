@@ -16,6 +16,7 @@ require_once 'Omeka/Controller/Action.php';
  * at index.php within any given theme.
  *
  * @package Omeka
+ * @subpackage Controllers
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/

@@ -8,6 +8,7 @@
 
 /**
  * @package Omeka
+ * @subpackage Mixins
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/

@@ -1,4 +1,11 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ * @subpackage UrlHelpers
+ **/
 
 // Function to easily generate various xml outputs of items
 function items_output_uri($output="rss2") {
@@ -96,11 +103,4 @@ function file_display_uri($file, $format='fullsize')
 	if(!$file->exists()) return false;
 	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
 	return uri($options, 'display');
-}
-
-
-function get_base_url($use_relative_uri=false)
-{
-	$base = ($use_relative_uri) ? Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl() : WEB_DIR;
-	return rtrim($base , '/') . '/';
 }

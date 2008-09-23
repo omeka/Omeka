@@ -10,8 +10,7 @@
 /**
  * Class for SQL SELECT generation and results.
  *
- * @category   Zend
- * @package    Zend_Db
+ * @package    Omeka
  * @subpackage Select
  * @copyright  Copyright (c) 2005-2007 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

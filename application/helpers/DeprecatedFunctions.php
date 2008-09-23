@@ -1,6 +1,15 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ * @subpackage DeprecatedHelpers
+ **/
+
+/**
  * @deprecated
+ * @see uri()
  * @return string
  **/
 function generate_url($options, $name)
@@ -41,6 +50,7 @@ function metatext_form($item, $input="textarea",$metafields=null)
 
 /**
  * @deprecated
+ * @see auto_discovery_link_tag()
  **/
 function items_rss_header()
 {
@@ -79,6 +89,7 @@ function get_year($date)
 
 /**
  * @deprecated
+ * @see item()
  */
 function item_metadata($item, $field, $escape=true)
 {
@@ -95,6 +106,7 @@ function type($id=null)
 
 /**
  * @deprecated
+ * @see get_item_types()
  */
 function types(array $params = array())
 {
@@ -103,6 +115,7 @@ function types(array $params = array())
 
 /**
  * @deprecated
+ * @see get_tags()
  */
 function tags(array $params = array()) 
 {
@@ -112,6 +125,7 @@ function tags(array $params = array())
 
 /**
  * @deprecated
+ * @see get_items()
  */
 function items(array $params = array())
 {
@@ -121,6 +135,7 @@ function items(array $params = array())
 
 /**
  * @deprecated
+ * @see get_users()
  */
 function users(array $params = array())
 {
@@ -155,7 +170,6 @@ function metafields(array $params = array())
 
 /**
  * @deprecated
- * 
  * @param string
  * @return void
  **/
@@ -169,7 +183,7 @@ function people(array $params = array())
 
 /**
  * @deprecated
- * @see has_type()
+ * @see item_belongs_to_collection()
  * @return boolean
  **/
 function has_collection($item, $name=null) {
@@ -200,6 +214,7 @@ function current_user_tags($item)
 
 /**
  * @deprecated
+ * @see get_item_types()
  */
 function item_types()
 {
@@ -209,6 +224,7 @@ function item_types()
 
 /**
  * @deprecated
+ * @see get_collections()
  */
 function collections(array $params = array())
 {
@@ -226,6 +242,7 @@ function entities(array $params = array())
 /**
  * Determine whether or not the collection has any collectors.
  * 
+ * @see collection_has_collectors()
  * @deprecated
  * @return boolean
  **/
@@ -235,7 +252,7 @@ function has_collectors($collection) {
 }
 
 /**
- * 
+ * @see item_has_tags()
  * @deprecated
  * @return boolean
  **/
@@ -254,8 +271,7 @@ function has_tags($item, array $tags=array()) {
 
 /**
  * @deprecated
- * @see has_type()
- * 
+ * @see item_has_thumbnail()
  * @param Item
  * @return boolean
  **/
@@ -278,4 +294,15 @@ function display_empty($val, $alternative="[Empty]") {
 function items_search_form($props=array()) {
     return __v()->action('advanced-search', 'items', null, array('is_partial'=>true, 'form_attributes'=>$props));
     // trigger_error('The advanced search form should be on a page called "items/advanced-search.php" in your theme.  Do not use this helper anymore.');
+}
+
+/**
+ * @deprecated
+ * @param boolean
+ * @return string
+ **/
+function get_base_url($use_relative_uri=false)
+{
+	$base = ($use_relative_uri) ? Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl() : WEB_DIR;
+	return rtrim($base , '/') . '/';
 }

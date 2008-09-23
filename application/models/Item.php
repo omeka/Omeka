@@ -20,6 +20,7 @@ require_once 'ItemPermissions.php';
 require_once 'ElementText.php';
 /**
  * @package Omeka
+ * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/

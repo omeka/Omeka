@@ -7,9 +7,10 @@
  **/
 
 /**
- * Handles all exceptions that are thrown in controllers
+ * Handles all exceptions that are thrown in controllers.
  *
  * @package Omeka
+ * @subpackage Controllers
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/

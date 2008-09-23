@@ -1,8 +1,12 @@
 <?php
 require_once 'ElementSet.php';
+
 /**
-* 
-*/
+ * @package Omeka
+ * @subpackage Controllers
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class ElementSetsController extends Omeka_Controller_Action
 {
     public function init()

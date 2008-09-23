@@ -12,6 +12,7 @@ require_once 'MimeElementSetLookupTable.php';
  * MimeElementSetLookup
  *
  * @package Omeka
+ * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/

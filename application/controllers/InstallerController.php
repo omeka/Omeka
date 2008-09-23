@@ -1,11 +1,20 @@
 <?php
 /**
- * @todo The entire install process should eventually be routed through this
- *  controller. For the moment, it's enough that this correctly redirects to the
- *  install script directory.
  * 
  * @param string
  * @return void
+ **/
+ 
+/**
+ * @todo The entire install process should eventually be routed through this
+ * controller. For the moment, it's enough that this correctly redirects to the
+ * install script directory.
+ *
+ *
+ * @package Omeka
+ * @subpackage Controllers
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
  **/
 class InstallerController extends Zend_Controller_Action
 {
