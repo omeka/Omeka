@@ -141,7 +141,7 @@ function record_uri(Omeka_Record $record, $action, $controller = null)
  * @param string Action to link to for this item.
  * @return string URL
  **/
-function url_for_item($action = 'show')
+function item_uri($action = 'show')
 {
     return record_uri(get_current_item(), $action);
 }
