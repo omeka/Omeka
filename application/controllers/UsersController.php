@@ -196,7 +196,7 @@ class UsersController extends Omeka_Controller_Action
                 $ua->User->active = 1;
                 $ua->User->save();
                 $ua->delete();
-                return $this->_forward('login');
+                $this->redirect->goto('login');
             }
         }
         $user = $ua->User;
