@@ -1036,10 +1036,11 @@ function get_current_file()
     return __v()->file;
 }
 
-function link_to_advanced_search()
+function link_to_advanced_search($text = 'Advanced Search', $props = array())
 {
     // Is appending the query string directly a security issue?  We should figure that out.
-    return '<a href="' . uri('items/advanced-search') .'?' . $_SERVER['QUERY_STRING'].  '">Advanced Search</a>';
+    $props['href'] = uri('items/advanced-search') . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+    return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
 }
 
 /**
