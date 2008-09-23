@@ -748,6 +748,11 @@ function set_items_for_loop($items)
     $view->items = $items;
 }
 
+function get_items_for_loop()
+{
+    return __v()->items;
+}
+
 /**
  * @return boolean
  */
@@ -773,98 +778,83 @@ function has_collections()
 }
 
 /**
- * Use in while statement to loop through a set of Item records.  This will
- * set the current item.
- * 
- * If the reset parameter is passed, it will reset the loop.
- *
- * @param boolean
- * @return boolean
- **/
-function loop_items($reset=false)
+ * Loops through items assigned to the current view.
+ * @return mixed The current item
+ */
+function loop_items()
 {
-    static $set = null;
-    
-    if(!$set) {
-        $set = __v()->items;
-    }
-    
-    //If we haven't reached the end of the loop, set the current item
-    //in the loop and 
-    if(list($key, $item) = each($set)) {
-        set_current_item($item);
-        return $item;
-    }
-    
-    //Reset the set of items if the loop has finished (so we can run it again
-    //if necessary)
-    $set = null;
-    return false;
+    return loop_records('items', get_items_for_loop());
 }
 
 /**
- * @internal There is some serious duplication between this and loop_items().
- * It would be good to factor this out before release.
- * @todo Refactoring
+ * Loops through files assigned to the current item.
+ * @return mixed The current file for an item
+ */
+function loop_files_for_item()
+{
+    $files = get_current_item()->Files;
+    return loop_records('files_for_item', $files);
+}
+
+/**
+ * Loops through collections assigned to the current view.
+ * @return mixed The current collection
+ */
+function loop_collections()
+{
+    return loop_records('collections', get_collections_for_loop());
+}
+
+/**
+ * Loops through a specific record set, setting the current record to a globally 
+ * accessible scope and returning it.
+ * 
  * @see loop_items()
- * @uses set_current_file()
- * @uses get_current_item()
- * @param boolean
- * @return boolean
- **/
-function loop_files_for_item($reset=false)
+ * @see loop_files_for_item()
+ * @see loop_collections()
+ * @param string $recordType The type of record to loop through
+ * @param mixed $records The iterable set of records
+ * @return mixed The current record
+ */
+function loop_records($recordType, $records)
 {
-    static $files = null;
-    if(!$files) {
-        $files = get_current_item()->Files;
+    // If this is the first call to loop_records(), set a static record loop and 
+    // set it to NULL.
+    static $recordLoop = null;
+    
+    // If the record type index does not exist, set it with the provided 
+    // records. We do this so multiple record types can coexist.
+    if (!isset($recordLoop[$recordType])) {
+        $recordLoop[$recordType] = $records;
     }
     
-    if(list($key, $file) = each($files)) {
-        set_current_file($file);
-        return $file;
-    }
-    
-    //Reset loop at end
-    $files = null;
-    return false;
-}
-
-/**
- * Loop through the collections that have been set for use.
- * 
- * @internal There is a lot of duplication between this and loop_items(), loop_files_for_item(), etc.
- * It might be good to factor this out at a later date.
- * @param array Set of parameters to use for the database call.
- * @param integer
- * @return Collection|false
- **/
-function loop_collections($params = array(), $limit = 10)
-{
-    static $collections = null;
-    if (!$collections) {
-        // Set up the collections to use for the loop.  Most cases will involve
-        // collection data that has been retrieved already via the controller.
-        // In that case using these parameters is discouraged.
-        if (!empty($params)) {
-            // This is necessary b/c CollectionTable takes a 'per_page' parameter
-            // instead of a 'limit' parameter.  This may need to change in the future.
-            $params['per_page'] = $limit;
-            
-            // Retrieve the collections directly from the database.  
-            $collections = get_db()->getTable('Collection')->findBy($params);
-        } else {
-            // If we haven't passed in any parameters, this should get the 
-            // pre-designated collections for the loop.
-            $collections = get_collections_for_loop();
+    // If we haven't reached the end of the loop, set the current record in the 
+    // loop and return it. This advances the array cursor so the next loop 
+    // iteration will get the next record.
+    if (list($key, $record) = each($recordLoop[$recordType])) {
+        
+        // Set the current records, depending on the record type.
+        switch ($recordType) {
+            case 'items':
+                set_current_item($record);
+                break;
+            case 'files_for_item':
+                set_current_file($record);
+                break;
+            case 'collections':
+                set_current_collection($record);
+                break;
+            default:
+                throw new Exception('Error: Invalid record type was provided for the loop.');
+                break;
         }
+        
+        return $record;
     }
     
-    if (list($key, $collection) = each($collections)) {
-        set_current_collection($collection);
-        return $collection;
-    }
-    
-    $collections = null;
+    // Reset the particular record loop if the loop has finished (so we can run 
+    // it again if necessary). Return false to indicate the end of the loop.
+    unset($recordLoop[$recordType]);
     return false;
 }
 
