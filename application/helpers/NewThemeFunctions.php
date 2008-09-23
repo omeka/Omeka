@@ -156,10 +156,10 @@ function item_uri($action = 'show')
  **/
 function public_uri()
 {
-    set_base_url_for_theme('public');
+    set_theme_base_uri('public');
     $args = func_get_args();
-    $url = call_user_func_array('url_for', $args);
-    set_base_url_for_theme();
+    $url = call_user_func_array('uri', $args);
+    set_theme_base_uri();
     return $url;
 }
 
@@ -170,11 +170,11 @@ function public_uri()
  **/
 function admin_uri()
 {
-    set_base_url_for_theme('admin');
+    set_theme_base_uri('admin');
     $args = func_get_args();
-    $url = call_user_func_array('url_for', $args);
-    set_base_url_for_theme();
-    return $url;    
+    $url = call_user_func_array('uri', $args);
+    set_theme_base_uri();
+    return $url;
 }
 
 /**
@@ -221,12 +221,12 @@ function public_nav_main(array $navArray)
 }
 
 /**
- * Example: set_base_url_for_theme('public');  uri('items');  --> example.com/items.
+ * Example: set_theme_base_uri('public');  uri('items');  --> example.com/items.
  * @access private
  * @param string
  * @return void
  **/
-function set_base_url_for_theme($theme = null)
+function set_theme_base_uri($theme = null)
 {
     switch ($theme) {
         case 'public':
