@@ -35,8 +35,10 @@ Event.observe(window,'load', function() {
     <div class="field">
         <?php $settingName =  $setting['name']; ?>
         <label for="<?php echo $settingName; ?>"><?php echo ucwords(Inflector::humanize($settingName)); ?></label>
-        <?php echo $this->formText($settingName, $$settingName, array('class'=>'textinput')); ?>
+<div class="inputs">
+        <?php echo $this->formText($settingName, $$settingName, array('class'=>'textinput', 'size'=>'30')); ?>
         <p class="explanation"><?php echo $setting['description']; ?></p>
+</div>
     </div>
 <?php endforeach; ?>
 	</fieldset>

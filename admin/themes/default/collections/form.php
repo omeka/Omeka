@@ -24,22 +24,27 @@
 
 <div class="field">
     <?php echo label(array('for' => 'name'),'Collection Name'); ?>
-    <div class="input">
-        <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$collection->name); ?>
+    <div class="inputs">
+        <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name', 'size'=>'30'),$collection->name); ?>
     </div>
 <?php echo form_error('name'); ?>
 </div>
 
 <div class="field">
+	<?php echo label(array('for' => 'description'),'Collection Description'); ?>
+    
 <?php echo form_error('description'); ?>
-<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description, 'Collection Description'); ?>
+<div class="inputs">
+<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10','cols'=>'40'),$collection->description); ?>
+</div>
 </div>
 
+<h2>Collectors</h2>
+
 <?php if (collection_has_collectors()): ?>
-	<h2>Collectors:</h2>
 	<?php foreach( $collection->Collectors as $k => $collector ): ?>
 
-	<ul id="collectors">
+	<ul id="collectors-list">
 		<li>
 		<?php echo h($collector->getName()); ?>
 		<a class="remove-collector" href="<?php echo uri(
@@ -51,6 +56,8 @@
 		</li>
 	</ul>
 	<?php endforeach; ?>
+<?php else: ?>
+	<p>This collection has no collectors.</p>
 <?php endif; ?>
 
 <div class="field">

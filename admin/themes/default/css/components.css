@@ -23,6 +23,40 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 .alert {background:#fff09e; font-size:1.2em; padding: 1.5em;}
 .tooltip {font-size:1.2em; line-height:1.5em;}
 
+/* == Form Components == */
+
+div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
+	
+	label, div.label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:right;display:block;width: 198px; float:left;}
+	
+	input, select {border:0; background-color:transparent !important;}
+	
+	input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
+
+	input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
+	
+	/* Replaces tooltips */
+	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
+	
+	/* Changes the width of inputs depending on the layout */
+
+		.vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
+
+		/* .input used to wrap input fields in items/add form */
+		.field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
+		.vertical-nav .field .inputs {width: 468px;}
+		/* Changes width based on default border and padding */
+		
+		/* Elements specific to items-add form */
+		.controls {float:left; clear:left;width: 300px; margin-left:128px;text-align:left;}
+
+			.field label.use-html { float:right; clear:both;display:block; width: 128px; font-size:1.1em;margin:0;}
+		label.use-html input {display:inline; float:none;padding:0;}
+	
+		#item-form .explanation {margin-top:18px;}
+
+
+
 /* == Layout == */
 
 #primary { background:#fff; padding:18px;border:1px solid #d7d5c4; border-width: 3px 0;}
@@ -31,7 +65,7 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 
 /* .primary */
 .primary .vertical-nav #primary {width: 612px;}
-.primary .vertical-nav #primary .textinput, .primary .vertical-nav #primary select {float:right; width:460px;}
+.primary .vertical-nav #primary .textinput, .primary .vertical-nav #primary select {}
 
 /* .primary-secondary */
 .primary-secondary #primary, .vertical-nav #primary {float:left; width: 522px;}

@@ -1,8 +1,9 @@
-<?php head();?>
+<?php head(array('title'=>'Edit User '.$user->username, 'content_class' => 'vertical-nav', 'body_class'=>'users primary'));?>
+<h1>Edit User: <?php echo $user->username; ?></h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">
-<h1>Edit a User</h1>
+	<h2>User Information</h2>
 <form method="post">
 <?php include('form.php'); ?>
 <input type="submit" name="submit" value="Save User Information" class="button" />
@@ -14,18 +15,24 @@
 	<legend>Change Password</legend>
 	
 	<div class="field">
-		<label for="new_password1">New Password</label>	
+		<?php echo label('new_password1','New Password'); ?>
+		<div class="inputs">
 		<input type="password" name="new_password1" id="new_password1" class="textinput" />
+		</div>
 	</div>
 
 	<div class="field">
-		<label for="new_password2">Repeat New Password</label>	
+		<?php echo label('new_password2','Repeat New Password'); ?>
+		<div class="inputs">	
 		<input type="password" name="new_password2" id="new_password2" class="textinput" />
+		</div>
 	</div>
 	
 	<div class="field">
-		<label for="old_password">Current password</label>
+		<?php echo label('old_password','Current Password'); ?>
+		<div class="inputs">
 		<input type="password" name="old_password" id="old_password" <?php if(has_permission('super')): ?>disabled="disabled" class="textinput disabled"<?php else: ?>class="textinput"<?php endif; ?>/>
+		</div>
 	</div>
 </fieldset>
 

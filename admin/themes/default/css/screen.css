@@ -61,37 +61,6 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		tbody tr {border-bottom:1px dotted #d7d5c4;}
 	
 	table * {font-size:1em;margin:0;}
-	
-	/* Forms */
-	form {display:block;}
-		div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
-		
-		label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:right;display:block;width: 126px; float:left;}
-		
-		input, select {border:0; background-color:transparent !important;}
-		
-		input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; width: 694px;}
-	
-		input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
-		
-		/* Replaces tooltips */
-		.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
-		
-		/* Changes the width of inputs depending on the layout */
-	
-			.field label {float:left; margin:0; width: 126px;}
-
-			/* .input used to wrap input fields in items/add form */
-			.field .input {float:right; width: 486px; overflow:hidden; zoom:1;}
-			
-			/* Changes width based on default border and padding */
-			
-			/* Elements specific to items-add form */
-			.controls {float:left; clear:left;width: 300px; margin-left:128px;text-align:left;}
-
-				.field label.use-html { float:right; clear:both;display:block; width: 128px; font-size:1.1em;margin:0;}
-				label.use-html input {display:inline; float:none;padding:0;}
-			#item-form .explanation {margin-top:18px;}
 			
 	/* Form Buttons */
 	#add-item, #save-changes {float:right; text-decoration:none;}
@@ -100,12 +69,13 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	.submit-medium-red {background-position:0 0 !important;}
 	
 	/* Simple Search */
-	#simple-search-form {padding:0;width: 212px;background:#ccc; float:right;margin-top:0;text-align:right;}
-		#simple-search input.textinput {border:0; background:#eee url("../images/search-input-bg.gif") top left no-repeat !important;display:block; float:left; width:143px; height: 15px;padding:5px 0 5px 5px;}
+	#simple-search-form {padding:0;width: 212px;float:right;margin-top:0;text-align:right;}
+		#simple-search input.textinput {border:0; background:#fff url("../images/search-input-bg.gif") top left no-repeat !important;display:block; float:left; width:143px; height: 15px;padding:5px 0 5px 5px;}
 		#simple-search input#submit_search {background:none; color:#fff;border:none;width: 62px; height: 25px; _overflow:hidden; background:#333 url("../images/search-submit-bg.gif") 0 0 no-repeat !important;}
 		#simple-search input#submit_search:hover {background-position:0 -25px !important;cursor:pointer;}
 		#simple-search a {float:right; text-align:right; text-decoration:none; font-weight:bold; padding-top:4px;}
 
+		#advanced-search-link a {text-decoration:none; font-weight:bold; color: #389;display:block; text-align:right;padding-top:5px; font-size:1.1em;}
 	/* Pagination */
 	
 	.pagination {float:left; width: 414px;}
@@ -202,7 +172,8 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 	/* Item Browse styles */
 	#items-browse {clear:both;}
-	table#items {width:100%;}
+	#browse-meta {overflow:hidden; zoom:1;padding-bottom:18px;border-bottom:2px solid #d7d5c4;}
+	table#items {width:100%;} 
 	
 	#add-item {position:absolute; top:18px; right:0;}
 	

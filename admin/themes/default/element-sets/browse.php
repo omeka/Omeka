@@ -1,4 +1,6 @@
-<?php head(); ?>
+<?php head(array('title'=>'Element Sets', 'content_class' => 'vertical-nav', 'body_class'=>'element-sets primary'));?>
+<h1>Element Sets</h1>
+<?php common('settings-nav'); ?>
 
 <div id="primary">
 
@@ -13,13 +15,13 @@
     <tbody>
     <?php foreach ($elementsets as $elementSet): ?>
         <tr>
-            <td>
+            <td width="30%">
                 <?php echo htmlentities($elementSet->name); ?>
             </td>
             <td>
                 <?php echo htmlentities($elementSet->description); ?>
             </td>
-            <td><?php echo link_to($elementSet, 'delete', '[Delete]', array('class'=>'delete')); ?>
+            <td><?php echo link_to($elementSet, 'delete', 'Delete', array('class'=>'delete')); ?>
             </td>
         </tr>
     <?php endforeach; ?>

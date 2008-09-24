@@ -67,11 +67,16 @@
 <fieldset id="type-information">
 	<legend>Item Type Information</legend>
 <div class="field">
-<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name, 'Name'); ?>
+	<?php echo label('name','Name'); ?>
+	<div class="inputs">
+<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name); ?>
+</div>
 </div>
 <div class="field">
 <?php echo label('description', 'Description'); ?>
-<?php echo $this->formTextarea('description' ,$itemtype->description, array('class'=>'textinput', 'rows'=>'10')); ?>
+<div class="inputs">
+<?php echo $this->formTextarea('description' ,$itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
+</div>
 </div>
 </fieldset>
 <fieldset id="type-elements">

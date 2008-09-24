@@ -4,29 +4,31 @@
 
 <h2>Add an Element to this Item Type</h2>
 
-<fieldset>
-    <legend>Choose an existing element</legend>
-    <div class="field">
+<div class="field">
+    <label for="element-id">Choose an existing element</label>
+    <div class="inputs">
     <?php echo select_item_type_elements(array('name'=>'element-id')); ?>
     </div>
-</fieldset>
+</div>
 
-<fieldset>
-    <legend>Or Create a new Element</legend>
-    <div class="field">
+<div class="field">
+    <label>Or Create a new Element</label>
+    <div class="inputs">
     <?php   
-        echo __v()->formLabel('element-name', 'Name');
+       /// echo __v()->formLabel('element-name', 'Name');
         echo __v()->formText('element-name', null, array('class'=>'textinput')); 
     ?>   
     </div>
-    
+ </div>
     <div class="field">
     <?php   
-        echo __v()->formLabel('element-description', 'Description');
-        echo __v()->formTextarea('element-description', null, array('class'=>'textinput', 'cols'=>80, 'rows'=>10)); 
+        echo __v()->formLabel('element-description', 'Description'); ?>
+<div class="inputs">
+<?php
+        echo __v()->formTextarea('element-description', null, array('class'=>'textinput', 'cols'=>40, 'rows'=>10)); 
     ?>   
     </div> 
-    
+</div>
     <div class="field" id="select-data-type">
         <?php echo __v()->formLabel('element-data-type-id', 'Data Type'); ?>
         <?php echo __v()->formRadio('element-data-type-id', 1, array('label_class'=>'radiolabel', 'label_style'=>'float:left;'), $datatypes, ''); ?>

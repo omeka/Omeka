@@ -1,6 +1,6 @@
 /* == Login Form */
 
-body#login {width: 342px; margin: 54px auto;}
+body#login {width: 414px; margin: 54px auto;}
 
 #login #site-title {margin-left:0; margin-bottom:0; margin-top:0;}
 
@@ -8,10 +8,10 @@ body#login {width: 342px; margin: 54px auto;}
 #login #content {overflow:hidden; zoom:1;}
 #login #login-links {float:left; width: 60%; color:#999; margin-top:18px;margin-bottom:0; font-size:1.1em;}
 	#login #login-links a {text-decoration:none; font-weight:bold;}
-#login #header, #login #footer {width: 342px; padding:18px; margin:0 auto; }
+#login #header, #login #footer {width: 414px; padding:18px; margin:0 auto; }
 #login #footer {padding:18px 0; margin:0 auto;}
 	#login #footer p {margin:0; width: auto; }
-#login #content {background:#fff; width: 342px;padding:18px; margin:0 auto;}
+#login #content {background:#fff; width: 414px;padding:18px; margin:0 auto;}
 
 #login #login-form .textinput {float:right; width: 280px;}
 #login-form label {float:left; width: 72px; text-align:right;}
