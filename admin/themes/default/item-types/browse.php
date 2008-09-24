@@ -16,7 +16,7 @@
 <tr class="itemtype">
 	 <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo htmlentities($itemtype->name); ?></a></td>
 	<td width="70%"><?php echo htmlentities($itemtype->description); ?></td>
-	<td><a href="<?php echo uri('item-types/edit/'.$itemtype->id); ?>">Edit</a></td>
+	<td><a class="edit" href="<?php echo uri('item-types/edit/'.$itemtype->id); ?>">Edit</a></td>
 </tr>
 <?php endforeach; ?>
 </tbody>

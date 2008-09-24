@@ -121,6 +121,12 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		.vvvvvvv-popular a:hover {color: #389;}
 		.vvvvvvvv-popular a:hover {color: #389;}
 		
+		
+	/* Misc Classes */
+	.add-button {position:absolute; top:20px; right:0; text-align:right; }
+	.add-button a {background-color: #F4F3EB; color: #c50;padding-top:10px; padding-bottom:10px;padding-right: 10px;}
+	.add-button a:hover {background-color: #FAFAF7;color: #333;}
+	
 /* == Wrap == */
 #wrap {}
 
@@ -177,9 +183,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	#items-browse {clear:both;}
 	#browse-meta {overflow:hidden; zoom:1;padding-bottom:18px;border-bottom:2px solid #d7d5c4;}
 	table#items {width:100%;} 
-	
-	#add-item {position:absolute; top:18px; right:0;}
-	
+		
 	.items #primary {clear:right;}
 	
 	/* Item show styles */
