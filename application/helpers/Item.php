@@ -57,7 +57,7 @@ class Omeka_View_Helper_Item
         // Retrieve the ElementText records (or other values, like strings,
         // integers, booleans) that correspond to all the element text for the
         // given field.
-        $text = $this->getElementText($field, $options);
+        $text = $this->_getElementText($field, $options);
         
         // Apply any plugin filters to the text prior to escaping it to valid 
         // HTML.
@@ -190,7 +190,7 @@ class Omeka_View_Helper_Item
      * values.
      * @return array Same structure but run through filters.
      **/
-    protected function _filterElementText($text, $field)
+    protected function _filterElementText($text, $field, $options)
     {
         // Build the name of the filter to use. This will end up looking like: 
         // array('Display', 'Item', 'Title', 'Dublin Core') or something similar.
@@ -209,7 +209,7 @@ class Omeka_View_Helper_Item
             
             // This really needs to be an instance of ElementText for the following to work.
             if (!(reset($text) instanceof ElementText)) {
-                throw new Exception('AAAAAAAAAAAAAAAAAAAH');
+                throw new Exception('The provided text needs to be an instance of ElementText.');
             }
             
             // Apply the filters individually to each text record.
@@ -231,7 +231,7 @@ class Omeka_View_Helper_Item
      * @param string
      * @return boolean
      **/
-    public function hasOtherField($field)
+    protected function _hasOtherField($field)
     {
         return in_array(strtolower($field),
             array('id', 
@@ -251,7 +251,7 @@ class Omeka_View_Helper_Item
      * @param Item
      * @return mixed
      **/
-    public function getOtherField($field, $item)
+    protected function _getOtherField($field, $item)
     {
         switch (strtolower($field)) {
             case 'id':
@@ -284,13 +284,13 @@ class Omeka_View_Helper_Item
      * @param string
      * @return array|string
      **/
-    public function getElementText($field, array $options)
+    protected function _getElementText($field, array $options)
     {
         $item = $this->_item;
         
         // Any built-in fields or special naming schemes
-        if ($this->hasOtherField($field)) {
-            return $this->getOtherField($field, $item);
+        if ($this->_hasOtherField($field)) {
+            return $this->_getOtherField($field, $item);
         }        
         
         $elementName = $field;
@@ -298,9 +298,12 @@ class Omeka_View_Helper_Item
         
         $elementTexts = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
         
-        // Lock the records so that they can't be accidentally saved back to the
-        // database, since we are modifying their values directly at this point.
-        foreach ($elementTexts as $record) {
+        // Lock the records so that they can't be accidentally saved back to the 
+        // database, since we are modifying their values directly at this point. 
+        // Also clone the record because otherwise it would be passed by 
+        // reference to all the display filters, which results in munged text.
+        foreach ($elementTexts as $key => $record) {
+            $elementTexts[$key] = clone $record;
             $record->lock();
         }
         
