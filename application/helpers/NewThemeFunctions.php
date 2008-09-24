@@ -55,17 +55,17 @@ function item_type_elements()
  * @param Element|array
  * @return string HTML
  **/
-function display_form_input_for_element($element, $item)
+function display_form_input_for_element($element, $item, $options = array())
 {
     $html = '';
         
     // If we have an array of Elements, loop through the form to display them.
     if (is_array($element)) {
         foreach ($element as $key => $e) {
-            $html .= __v()->elementForm($e, $item);
+            $html .= __v()->elementForm($e, $item, $options);
         }
     } else {
-        $html = __v()->elementForm($element, $item);
+        $html = __v()->elementForm($element, $item, $options);
     }
 	
 	return $html;

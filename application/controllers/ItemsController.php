@@ -250,6 +250,26 @@ class ItemsController extends Omeka_Controller_Action
         
         $this->view->assign(compact('total_items', 'items'));
     }
+    
+    public function elementFormAction()
+    {
+        // var_dump($_POST);exit;
+        $elementId = (int)$_POST['element_id'];
+        $itemId  = (int)$_POST['item_id'];
+        
+        // Re-index the element form posts so that they are displayed in the correct order
+        // when one is removed.
+        $_POST['Elements'][$elementId] = array_merge($_POST['Elements'][$elementId]);
+
+        $element = $this->getTable('Element')->find($elementId);
+        try {
+            $item = $this->findById($itemId);
+        } catch (Exception $e) {
+            $item = new Item;
+        }
+        
+        $this->view->assign(compact('element', 'item'));
+    }
         
     /**
      * Retrieve the number of items to display on any given browse page.

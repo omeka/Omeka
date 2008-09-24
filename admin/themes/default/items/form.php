@@ -6,19 +6,23 @@ echo js('tiny_mce/tiny_mce');
 
 	Event.observe(window,'load', function() {
         Omeka.ItemForm.enableTagRemoval();
-        // //Create tooltips for all spans with class="tooltip"
-        Omeka.Form.makeTooltips($$('.tooltip'));
-        Omeka.ItemForm.makeElementControls();
+        
+        document.fire('omeka:elementformload');
         
         // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.
         $$('div.field textarea').each(function(el){
             el.id = null;
         });
         
-        Omeka.ItemForm.enableWysiwyg();
 		Omeka.ItemForm.enableAddFiles();
         Omeka.ItemForm.changeItemType();
 	});
+    
+    document.observe('omeka:elementformload', function(e){
+        var elementFieldDiv = e.target;
+        Omeka.ItemForm.makeElementControls();
+        Omeka.ItemForm.enableWysiwyg();
+    });
     
     Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
 
@@ -42,10 +46,7 @@ echo js('tiny_mce/tiny_mce');
 					var form = $('type-metadata-form');
 					image.remove();
 					form.update(t.responseText);
-					var spans = form.select('.tooltip');
-					Omeka.Form.makeTooltips(spans);
-					Omeka.ItemForm.elementControls();
-                    Omeka.ItemForm.enableWysiwyg();
+					form.fire('omeka:elementformload');
 					Effect.BlindDown(form);
 				}
 			});
@@ -92,84 +93,61 @@ echo js('tiny_mce/tiny_mce');
 		});
 	},
 	
-	addElementControl: function(e){
-        // Stop form submissions
-        e.stop();
+	/**
+	 * Send an AJAX request to update a <div class="field"> that contains all 
+	 * the form inputs for an element.
+	 */
+	elementFormRequest: function(fieldDiv, params) {
+        var elementId = fieldDiv.id.gsub(/element-/, '');
         
-        // Get the last input div and copy it.
-        var lastInput = this.up('div.field').select('div.input-block').last();
-        var newInput = lastInput.cloneNode(true);
+        // Isolate the inputs on this part of the form.
+        var inputs = fieldDiv.select('input', 'textarea', 'select');
+        var postString = inputs.invoke('serialize').join('&');        
+        params.element_id = elementId;
+
+        // note to yourself that this php is hard coded into the javascript
+        // you cannot move this javascript to another file even if you wanted to
+        var elementFormPartialUri = "<?php echo uri('items/element-form'); ?>";
+        params.item_id = "<?php echo item('id'); ?>";
         
-        newInput.select('input.remove-element').invoke('observe', 'click', Omeka.ItemForm.deleteElementControl);
+        // Make sure that we put in that we want to add one input to the form
+        postString += '&' + $H(params).toQueryString();
         
-        // 1) Empty the new form elements
-        // 2) Put it on the page directly below the existing one
-        var formInputs = newInput.select('div.input').first().select('textarea, select, input');
-        
-        // Set its name to a proper value so that it saves.
-        // This involves grepping the name for its specific index and incrementing that.
-        // Elements[##][1][text] --> Elements[##][2][text]
-        function incrementElementFormIndex(inputName)
-        {
-            return inputName.gsub(/(Elements\[\d+\]\[)(\d+)\]/, function(match) {
-                return match[1] + (parseInt(match[2]) + 1) + ']'
-            });
-        }
-        
-        formInputs.each(function(input){
-            
-            // Reset the ID of the inputs so that there are no conflicts
-            // when enabling/disabling the WYSIWYG editor.
-            input.id = '';
-            input.identify();
-                          
-            input.name = incrementElementFormIndex(input.name);
-                        
-            // Reset its value
-            input.value = '';
-            
-            // Hidden values for each input field should be set to 0
-            if (input.type == 'hidden') {
-                input.value = '0';
-            };            
+        new Ajax.Updater(fieldDiv, elementFormPartialUri, {
+            parameters: postString,
+            onComplete: function(t) {
+                fieldDiv.fire('omeka:elementformload');
+            }
         });
-        
-        lastInput.insert({after: newInput});
-        
-        // Extract the Is HTML checkbox and make it enable the WYSIWYG editor.
-        var htmlCheckbox = newInput.select('.use-html input[type="checkbox"]').first();
-        if (htmlCheckbox) {
-            // Make sure the checkbox and its hidden field counterpart have proper
-            // indices so that the form saves correctly.
-            var hiddenBuddy = htmlCheckbox.previous('input[type="hidden"]');
-            hiddenBuddy.name = incrementElementFormIndex(hiddenBuddy.name);
-            
-            htmlCheckbox.name = incrementElementFormIndex(htmlCheckbox.name);
-            Omeka.ItemForm.enableWysiwygCheckbox(htmlCheckbox);
-        };
 	},
+	
+	addElementControl: function(e){
+        e.stop();
+        var addButton = Event.element(e);
+        var fieldDiv = addButton.up('div.field');
+        Omeka.ItemForm.elementFormRequest(fieldDiv, {add:'1'});
+    },
     
     deleteElementControl: function(e){
         e.stop();
         
+        var removeButton = Event.element(e);
+
+        //Check if there is only one input.
+        var inputCount = removeButton.up('div.field').select('div.input-block').size();
+        if (inputCount == 1) {
+            return;
+        };
+
         if(!confirm('Do you want to delete this?')) {
             return;
         }
-        
-        // The main div for this element is 2 levels up
-        var elementDiv = this.up().up().remove();
-        
-        /*
-        //Check if there is more than one element, if so then OK to delete.
-        var inputDivs = elementDiv.select('div.input');
-        if(inputDivs.size() > 1) {
-            inputDivs.last().remove();
-        }
-        */
+                
+        removeButton.up('div.input-block').remove();
 	},
     
     makeElementControls: function() {
-	    // Class name is hard coded here b/c it is hard coded in the helper
+ 	    // Class name is hard coded here b/c it is hard coded in the helper
 	    // function as well.
 	    $$('.add-element').invoke('observe', 'click', Omeka.ItemForm.addElementControl);
 	    
@@ -272,8 +250,6 @@ echo js('tiny_mce/tiny_mce');
 	}
 
     });
-
-
 //]]>	
 </script>
 

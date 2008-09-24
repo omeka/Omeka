@@ -17,8 +17,12 @@ class Omeka_View_Helper_ElementForm
     
     protected $_record;
     
-    public function elementForm(Element $element, Omeka_Record $record)
+    public function elementForm(Element $element, Omeka_Record $record, 
+        $options = array())
     {
+        $divWrap = isset($options['divWrap']) ? $options['divWrap'] : true;
+        $extraFieldCount = isset($options['extraFieldCount']) ? $options['extraFieldCount'] : null;
+        
         $this->_element = $element;
         
         // This will load all the Elements available for the record and fatal error
@@ -26,7 +30,7 @@ class Omeka_View_Helper_ElementForm
         $record->loadElementsAndTexts();
         $this->_record = $record;
         
-        $html = '<div class="field">';
+        $html = $divWrap ? '<div class="field" id="element-' . $element->id . '">' : '';
         
         // Put out the label for the field
         $html .= $this->_displayFieldLabel();
@@ -34,7 +38,7 @@ class Omeka_View_Helper_ElementForm
         $html .= $this->_displayValidationErrors();
         
         $html .= '<div class="inputs">';
-        $html .= $this->_displayFormFields();
+        $html .= $this->_displayFormFields($extraFieldCount);
         $html .= '</div>'; // Close 'inputs' div
     	
         $html .= $this->view->formSubmit('add_element_' . $this->_element['id'], 'Add Input', 
@@ -43,7 +47,7 @@ class Omeka_View_Helper_ElementForm
         $html .= $this->_displayTooltip();
         
         
-        $html .= '</div>'; // Close 'field' div
+        $html .= $divWrap ? '</div>' : ''; // Close 'field' div
         
         return $html;
     }
@@ -58,6 +62,17 @@ class Omeka_View_Helper_ElementForm
         return htmlentities($this->_element['description']);
     }
     
+    protected function _isPosted()
+    {
+        $postArray = $this->_getPostArray();
+        return !empty($postArray);
+    }
+    
+    protected function _getPostArray()
+    {
+        return $_POST['Elements'][$this->_element['id']];
+    }
+    
     /**
      * How many form inputs to display for a given element.
      * 
@@ -65,7 +80,12 @@ class Omeka_View_Helper_ElementForm
      **/
     protected function _getFormFieldCount()
     {
-        $numFieldValues = count($this->getElementTexts());
+        if ($this->_isPosted()) {
+            $numFieldValues = count($this->_getPostArray());
+        } else {
+            $numFieldValues = count($this->getElementTexts());
+        }
+
         // Should always show at least one field.
         return $numFieldValues ? $numFieldValues : 1;
     }
@@ -86,12 +106,13 @@ class Omeka_View_Helper_ElementForm
      **/
     protected function _getPostValueForField($index)
     {
-        if (!$_POST) {
+        if (!$this->_isPosted()) {
             // Return if there are no posted data.
             return null;
         }
         
-        $postArray = $_POST['Elements'][$this->_element['id']][$index];
+        $postArray = $this->_getPostArray();
+        $postArray = $postArray[$index];
         
         // Flatten this POST array into a string so as to be passed to the necessary helper functions.
         return ActsAsElementText::getTextStringFromFormPost($postArray, $this->_element);
@@ -99,7 +120,7 @@ class Omeka_View_Helper_ElementForm
     
     protected function _getHtmlFlagForField($index)
     {
-        if (!empty($_POST)) {
+        if ($this->_isPosted()) {
             $isHtml = (boolean) $_POST['Elements'][$this->_element['id']][$index]['html'];
         } else {
             $isHtml = (boolean) $this->getElementTexts($index)->html;
@@ -116,8 +137,8 @@ class Omeka_View_Helper_ElementForm
      **/
     protected function _getValueForField($index)
     {        
-        if ($post = $this->_getPostValueForField($index)) {
-            return $post;
+        if ($this->_isPosted()) {
+            return $this->_getPostValueForField($index);
         } else {
             return $this->getElementTexts($index)->text;
         }
@@ -138,10 +159,10 @@ class Omeka_View_Helper_ElementForm
         return $texts;
     }
     
-    protected function _displayFormFields()
-    {        
-        $fieldCount = $this->_getFormFieldCount();
-        
+    protected function _displayFormFields($extraFieldCount = null)
+    {     
+        $fieldCount = $this->_getFormFieldCount() + (int) $extraFieldCount;   
+
         $html = '';
                 
         for ($i=0; $i < $fieldCount; $i++) { 
