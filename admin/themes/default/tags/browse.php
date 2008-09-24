@@ -5,16 +5,6 @@
 
 <div id="primary">
 <?php if ( total_results() ): ?>
-
-
-<h3>View tags for: 
-	<?php
-		if ( $browse_for == 'Item' ): ?>
-		<em>Items</em> <a href="<?php echo current_uri(array('tagType'=>'Exhibit')); ?>">Exhibits</a>
-	<?php else: ?>
-		<a href="<?php echo current_uri(array('tagType'=>'Item')); ?>">Items</a> <em>Exhibits</em>		
-	<?php endif; ?>	
-</h3>
 	
 	<h3>Sort by: 		
 		<?php if($_GET['sort'] != 'most'): ?>

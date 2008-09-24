@@ -31,10 +31,11 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	
 	input, select {border:0; background-color:transparent !important;}
 	
-	input, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
+	input, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
 	input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
 	
+	input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
 	/* Replaces tooltips */
 	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
 	

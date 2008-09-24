@@ -56,7 +56,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	/* Tables */
 	table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;}
 		thead { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
-		th,td {padding:0.5em 0.5em 0.4em;}
+		th,td {padding:0.75em 0.5em 0.5em;}
 		tbody tr.even {}
 		tbody tr {border-bottom:1px dotted #d7d5c4;}
 	
@@ -76,8 +76,8 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		#simple-search a {float:right; text-align:right; text-decoration:none; font-weight:bold; padding-top:4px;}
 
 		#advanced-search-link a {text-decoration:none; font-weight:bold; color: #389;display:block; text-align:right;padding-top:5px; font-size:1.1em;}
-	/* Pagination */
 	
+	/* Pagination */
 	.pagination {float:left; width: 414px;}
 	.pagination li {display:inline;padding: 3px 6px;}
 	.pagination li.pagination_current {display:inline;background:#389; color:#fff;}
@@ -85,8 +85,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	.pagination a {text-decoration:none; color:#333;background: #eae9db; padding: 3px 6px;}
 	.pagination a:hover {background: #c60; color: #fff;}
 	
-	/* Tagclouds */
-	
+	/* Tagclouds */	
 	.hTagcloud ul {list-style:none; margin-left:0; padding-left:0; line-height: 3em;}
 		.hTagcloud li {display:inline;}
 		.hTagcloud a {text-decoration:none;}
@@ -128,12 +127,16 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 /* == Header == */
 #header {background:#251e16; padding-top: 0;clear:both;overflow:hidden; zoom:1;}
 
-	#site-title {margin:1em 0;margin-left:36px;float:left; width: 20em;}
+	#site-title {margin:18px 0;margin-left:36px;float:left; width: 20em;}
 	#site-title a {text-decoration:none; color:#fff;}
 	
-	#user-meta {float:right; background: #1E1912;width: 162px;border:1px solid #777; padding: 18px 18px 1px; border-width: 0 0 0 1px;}
-		#user-meta p {display:block; margin-bottom:9px;color: #999; margin-right:18px; font-size:1.1em;}
-		#user-meta a {color:#fff; text-decoration:none;}
+	#site-info {float:right; text-align:right; padding-top:10px;margin-right: 3px;}
+	#site-info a {color:#fff; text-decoration:none;}
+	
+		#welcome {display:inline; padding: 8px 12px;color: #999; font-size:1.1em;}
+		#settings-link {display:inline; font-size:1.1em; text-align:right; padding: 8px 12px; background: #a74c29;}
+		#settings-link:hover {background: #c60;}
+		#public-link {display:inline;padding: 8px 12px; font-size:1.1em;background: #467;}
 		
 	/* Primary Nav */
 	.primary-nav {overflow:hidden; zoom:1;border:1px solid #777;background:#382e22;clear:both; margin-bottom:0;padding-left:36px;border-width:1px 0 0; font-size:1.1em; font-weight:normal;}

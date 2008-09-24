@@ -33,11 +33,15 @@
 		<div id="header">
 			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php echo settings('site_title'); ?></a></div>
 			
-			<div id="user-meta">
-			    <p id="welcome">Welcome, <a href="<?php echo uri('users/show/'.current_user()->id); ?>"><?php echo current_user()->first_name; ?></a>! <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
-			    <p id="view-public-site"><?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?></p>
+			<div id="site-info">
+			    <p id="welcome">Welcome, <a href="<?php echo uri('users/show/'.current_user()->id); ?>"><?php echo current_user()->first_name; ?></a> | <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
+				<?php if (has_permission('Settings', 'edit')) 
+				{
+				    echo '<a href="'.uri('settings').'" id="settings-link">Settings</a>';
 
-			    </div>
+				} ?>
+				<?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?>
+			</div>
 			
 
 									

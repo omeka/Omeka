@@ -4,10 +4,27 @@
 <?php common('settings-nav'); ?>
 
 
-<?php // print_r($current); ?>
 
 <div id="primary">
     <?php echo flash(); ?>
+	<h2>Current Theme: <?php echo h($current->title); ?></h2>
+
+<div id="current-theme">
+	
+	<div class="meta">
+	<ul>
+		<li><span class="type">Author:</span> <span class="value"><?php echo h($current->author); ?></span></li>
+		<li><span class="type">License:</span> <span class="value"><?php echo h($current->license); ?></span></li>
+		<li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo h($current->website); ?>"><?php echo h($current->website); ?></a></span></li>
+	</ul>
+	</div>
+	<div class="description">
+	<img src="<?php echo h($current->image); ?>" width="180"/>
+	<p><?php echo h($current->description); ?></p>
+	</div>
+</div>
+
+<h2>Change Theme</h2>
 <form method="post" id="themeswitch">
 	<?php foreach($this->themes as $theme): ?>
 	<div class="theme<?php if($current == $theme) echo ' current-theme';?>">
