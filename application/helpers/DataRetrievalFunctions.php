@@ -71,11 +71,11 @@ function total_results() {
  * @return array
  **/
 function recent_tags($num = 30) {
-	return get_tags(array('recent'=>true,'limit'=>$num));
+	return get_tags(array('recent'=>true), $num);
 }
 
 function recent_collections($num = 10) {
-	return get_collections(array('recent'=>true,'per_page'=>$num));
+	return get_collections(array('recent'=>true), $num);
 }
 
 function recent_items($num = 10) {
