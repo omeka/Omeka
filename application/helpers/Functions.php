@@ -410,22 +410,6 @@ function tag_string($record, $link=null, $delimiter=', ')
 }
 
 /**
- * Determine whether or not the item has a given type.  If no name is provided,
- * this will return true if the item has any type at all.
- *
- * @param Item $item 
- * @param string|null $name Name of the type
- * @return boolean
- **/
-function has_type($item, $name=null) {
-	$exists = $item->Type and $item->Type->exists();
-	$hasName = (!empty($name) ? $item->Type->name == $name : true);
-	return ( $exists and $hasName );
-}
-
-
-
-/**
  * Check the ACL to determine whether the current user has proper permissions.
  * 
  * This can be called with different syntax:

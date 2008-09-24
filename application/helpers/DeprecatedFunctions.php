@@ -280,6 +280,21 @@ function has_thumbnail($item) {
 }
 
 /**
+ * Determine whether or not the item has a given type.  If no name is provided,
+ * this will return true if the item has any type at all.
+ *
+ * @deprecated
+ * @param Item $item 
+ * @param string|null $name Name of the type
+ * @return boolean
+ **/
+function has_type($item, $name=null) {
+	$exists = $item->Type and $item->Type->exists();
+	$hasName = (!empty($name) ? $item->Type->name == $name : true);
+	return ( $exists and $hasName );
+}
+
+/**
  * Display an alternative value if the given variable is empty
  * @deprecated
  * @return string

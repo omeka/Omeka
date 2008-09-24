@@ -385,6 +385,22 @@ function item_belongs_to_collection($name=null, $item=null)
 }
 
 /**
+ * Determine whether an item has an item type.  
+ * 
+ * If no $name is given, this will return true if the item has any item type 
+ * (items do not have to have an item type).  If $name is given, then this will
+ * determine if an item has a specific item type.
+ * 
+ * @param string|null
+ * @return boolean
+ **/
+function item_has_type($name = null)
+{
+    $itemTypeName = item('Item Type Name');
+    return ($name and ($itemTypeName == $name)) or (!$name and !empty($itemTypeName));
+}
+
+/**
  * @uses display_files()
  * @uses get_current_item()
  * @param array
