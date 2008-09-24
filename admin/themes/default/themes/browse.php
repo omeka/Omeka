@@ -19,13 +19,14 @@
 	</ul>
 	</div>
 	<div class="description">
-	<img src="<?php echo h($current->image); ?>" width="180"/>
+	<img src="<?php echo h($current->image); ?>" />
 	<p><?php echo h($current->description); ?></p>
 	</div>
 </div>
 
 <h2>Change Theme</h2>
 <form method="post" id="themeswitch">
+	<div class="themes">
 	<?php foreach($this->themes as $theme): ?>
 	<div class="theme<?php if($current == $theme) echo ' current-theme';?>">
 		<div class="meta">
@@ -38,17 +39,14 @@
 		</ul>
 		</div>
 		<div class="description">
-		<img src="<?php echo h($theme->image); ?>" width="180"/>
-		<p><?php echo h($theme->description); ?></p>
+		<img src="<?php echo h($theme->image); ?>" width="190px"/>
 		</div>
 	</div>
 	<?php endforeach; ?>
-	
-	<input type="submit" name="submit" id="submit" value="Switch this theme" />
+	</div>
+	<input type="submit" name="submit" class="submit submit-medium" id="submit" value="Switch Theme" />
 </form>
 
-<fieldset>
-	<p class="managethemes">Add new themes by downloading them from the <a href="http://omeka.org/download/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Designing_a_Public_Theme">design your own</a>!<p>
-</fieldset>
+<p class="managethemes">Add new themes by downloading them from the <a href="http://omeka.org/download/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Designing_a_Public_Theme">design your own</a>!</p>
 </div>
 <?php foot(); ?>

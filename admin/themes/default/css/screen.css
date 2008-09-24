@@ -209,10 +209,10 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	#new-user-form .submit {float:right;}
 	
 	/* Themes */
-	#themeswitch {margin-right:-18px; overflow:hidden; zoom:1;}
-	#themeswitch .theme {overflow:hidden; zoom:1; margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;}
+	#themeswitch .themes {margin-right:-18px; overflow:hidden; zoom:1;margin-bottom:-18px;}
+	#themeswitch .theme {overflow:hidden; zoom:1; margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;float:left; width: 192px;}
 		#themeswitch .theme img {border:1px solid #d7d5c4;}
-		#themeswitch label {float:none !important; text-align:left; font-size:1.4em;width: auto;}
+		#themeswitch label {float:none !important; text-align:left; font-size:1.2em;width: auto;}
 
 		#current-theme {background: #D1E5EF; padding: 18px;margin-bottom:18px;}
 		#current-theme * {color: #467;}

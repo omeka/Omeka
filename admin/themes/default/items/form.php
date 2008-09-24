@@ -207,7 +207,7 @@ echo js('tiny_mce/tiny_mce');
         });
 
         nonJsFormDiv.update();
-
+		
         filesDivWrap.appendChild(link);
     },
 	

@@ -31,7 +31,7 @@ document.write('<style>#api, #resources { display:none; }</style>');
 
 		<form method="post" enctype="multipart/form-data" id="item-form">
 			<?php include('form.php'); ?>
-			<input type="submit" name="submit" id="add_item" value="Add Item" />
+			<input type="submit" name="submit" class="submit submit-medium" id="add_item" value="Add Item" />
 		</form>
 </div>
 
