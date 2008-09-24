@@ -144,7 +144,7 @@ class ItemTypesController extends Omeka_Controller_Action
     protected function getItemTypeElementSet()
     {
         // Element should belong to the 'Item Type' element set.
-        return $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array('Item Type'), true);
+        return $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array(ELEMENT_SET_ITEM_TYPE), true);
     }
     
     protected function getItemRecordTypeId()
