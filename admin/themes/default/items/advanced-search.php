@@ -1,7 +1,7 @@
 <?php 
 if (!$isPartial): // If we are using the partial view of this search form.
 head(array('title'=>'Advanced Search')); ?>
-<h1>Search Items</h1>
+<h1>Advanced Search</h1>
 
 <div id="primary">    
 <?php endif; ?>
@@ -18,13 +18,17 @@ head(array('title'=>'Advanced Search')); ?>
 </script>
 	
 <form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo uri('items/browse'); ?>" method="get">
-	    <h2>Search for Keywords</h2>
-		<input type="text" class="textinput" name="search" value="<?php echo h($_REQUEST['search']); ?>"/>
+	<div class="field">    
+		<?php echo label('search','Search for Keywords'); ?>
+		<div class="inputs">
+		<?php echo text(array('name'=>'search','size' => '40','id'=>'search','class'=>'textinput'),$_REQUEST['search']); ?>
+		</div>
+	</div>
+	<div id="advanced-search" class="field">
+	
+		<div class="label">Narrow by Specific fields</div>
 		
-		<h2>Narrow by Specific fields</h2>
-		
-		<div id="advanced-search" class="field">
-			
+			<div class="inputs">
 				<?php 
 				//If the form has been submitted, retain the number of search fields used and rebuild the form
 				if(!empty($_GET['advanced'])) {
@@ -62,50 +66,64 @@ head(array('title'=>'Advanced Search')); ?>
 					?>
 					
 					<button type="button" class="add_search">+</button>
-					<button type="button" class="remove_search">-</button>
-					</div>		 				
+					<button type="button" class="remove_search">-</button>					
+					</div>
 				<?php endforeach; ?>	
-				
+				</div>
 			
 		</div>
 		
 		<div id="search-by-range" class="field">
-		    <h2>Search by a range of ID#s (example: 1-4, 156, 79)</h2>
+		    <label for="range">Search by a range of ID#s (example: 1-4, 156, 79)</label>
+			<div class="inputs">
 			<?php echo text(
-				array('name'=>'range', 'class'=>'textinput'), 
-				@$_GET['range'], 
-				'Range'); ?>
+				array('name'=>'range', 'size'=>'40','class'=>'textinput'), 
+				@$_GET['range']); ?>
+				</div>
 		</div>
 		
 		<div id="search-selects">
-	<?php 
-	    echo label('collection-search', 'Search By Collection');
-		echo select_collection(array('name'=>'collection', 'id'=>'collection-search'), $_REQUEST['collection']);
-		echo label('item-type-search', 'Search By Type');
-		echo select_item_type(array('name'=>'type', 'id'=>'item-type-search'), $_REQUEST['type']); 
-	?>
-	<?php if(has_permission('Users', 'browse')): ?>
-	<?php 			
-	    echo label('user-search', 'Search By User');
-		echo select_user(array('name'=>'user', 'id'=>'user-search'), $_REQUEST['user']);
-	?>
-	<?php endif; ?>
-	<?php 
-	echo label('tags', 'Search By Tags'); 
-	echo text(array('name'=>'tags','id'=>'tag-search','class'=>'textinput'),$_REQUEST['tags']);
-	?>
+	<div class="field">
+	<?php echo label('collection-search', 'Search By Collection'); ?>
+	<div class="inputs"><?php echo select_collection(array('name'=>'collection', 'id'=>'collection-search'), $_REQUEST['collection']); ?></div>
 	</div>
-	<div id="search-checkboxes">
-	<?php 
-		
-	    if (has_permission('Items','showNotPublic')) { echo checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null, 'Only Public Items'); 			
-	}
-		echo checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null, 'Only Featured Items');
-	?>
+	<div class="field">
+	<?php echo label('item-type-search', 'Search By Type'); ?>
+	<div class="inputs"><?php echo select_item_type(array('name'=>'type', 'id'=>'item-type-search'), $_REQUEST['type']); ?></div>
 	</div>
 	
+	<?php if(has_permission('Users', 'browse')): ?>
+	<div class="field">
+	<?php 			
+	    echo label('user-search', 'Search By User');?>
+	<div class="inputs"><?php echo select_user(array('name'=>'user', 'id'=>'user-search'), $_REQUEST['user']);
+	?></div>
+	</div>
+	<?php endif; ?>
+	<div class="field">
+	<?php echo label('tags', 'Search By Tags'); ?>
+	<div class="inputs"><?php echo text(array('name'=>'tags','size' => '40','id'=>'tag-search','class'=>'textinput'),$_REQUEST['tags']); ?></div>
+	</div>
+	</div>
+	<?php if (has_permission('Items','showNotPublic')): ?>
+	<div class="field">
+		<?php echo label('public','Only Public Items'); ?>
+		<div class="inputs">
+	<?php echo checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null); ?>
+	</div>
+	</div>
+	
+	<div class="field">
+		<?php echo label('featured','Only Featured Items'); ?>
+		<div class="inputs">
+	<?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null);
+	?>
+	</div>
+	</div>
+	<?php endif; ?>
+	
 	<?php fire_plugin_hook('append_to_search_form'); ?>
-	    <input type="submit" name="submit_search" id="submit_search" value="Search" />
+	    <input type="submit" class="submit submit-medium" name="submit_search" id="submit_search" value="Search" />
 </form>
 
 <?php if (!$isPartial): ?>

@@ -24,7 +24,7 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 .tooltip {font-size:1.2em; line-height:1.5em;}
 
 /* == Form Components == */
-
+form{overflow:hidden; zoom:1;}
 div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 	
 	label, div.label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:right;display:block;width: 198px; float:left;}
@@ -33,7 +33,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	
 	input, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
-	input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
+	input.submit {clear:both; margin:18px 0;background-color:#389 !important; float:right; color:#fff;}
 	
 	input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
 	/* Replaces tooltips */

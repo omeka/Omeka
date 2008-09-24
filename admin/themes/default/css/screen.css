@@ -191,6 +191,10 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		#public-featured .checkbox {text-align:right;float:none; overflow:hidden; display:inline;}
 		#public-featured label, #public-featured input {display:inline; text-align:right;float:none; width: auto;}
 	
+	/* Advanced Search Form */
+	.search-entry {margin-bottom:6px; overflow:hidden;zoom:1;}
+	
+	
 	/* Collection Browse styles */
 	
 	

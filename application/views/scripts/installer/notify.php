@@ -13,5 +13,10 @@
 
 <body>
 <div id="wrap">
-
-<?php die('<h1>Welcome to Omeka!</h1><p>It looks like you have not installed Omeka. <a href="'.WEB_ROOT.DIRECTORY_SEPARATOR.'install/">Begin the installation process.</a></p></div></body></html>'); ?>
+<div id="primary">
+<h1>Welcome to Omeka!</h1>
+<p>It looks like you have not installed Omeka. <a href="<?php echo WEB_ROOT.DIRECTORY_SEPARATOR; ?>install/">Begin the installation process.</a></p>
+</div>
+</div>
+</body>
+</html>

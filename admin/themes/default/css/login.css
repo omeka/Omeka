@@ -5,18 +5,24 @@ body#login {width: 414px; margin: 54px auto;}
 #login #site-title {margin-left:0; margin-bottom:0; margin-top:0;}
 
 #login h1 {background:transparent; margin:0 0 1em; padding:0;}
-#login #content {overflow:hidden; zoom:1;}
-#login #login-links {float:left; width: 60%; color:#999; margin-top:18px;margin-bottom:0; font-size:1.1em;}
-	#login #login-links a {text-decoration:none; font-weight:bold;}
-#login #header, #login #footer {width: 414px; padding:18px; margin:0 auto; }
-#login #footer {padding:18px 0; margin:0 auto;}
-	#login #footer p {margin:0; width: auto; }
-#login #content {background:#fff; width: 414px;padding:18px; margin:0 auto;}
 
-#login #login-form .textinput {float:right; width: 280px;}
-#login-form label {float:left; width: 72px; text-align:right;}
-input.login, #add_item {background:none; color:#fff;border:none;width: 71px; height: 31px; _overflow:hidden; background:#333 url("../images/login-button.gif") 0 0 no-repeat !important;}
-input.login:hover, #add_item:hover {background-position:0 -31px !important;cursor:pointer;}
-#login-form input.login, #add_item {float:right;margin-top:9px; text-transform: uppercase; letter-spacing:1px; font-size:0.8em;}
-#login-form div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
-#login-form label {}
+#login #header {width: 414px; padding:18px; margin:0 auto; }
+
+#login #content {background:#fff; width: 414px;padding:18px; margin:0 auto;overflow:hidden; zoom:1;}
+	#login #login-form .textinput {float:right; width: 280px;}
+	#login-form label {float:left; width: 72px; text-align:right;}
+	
+	#login #login-links {float:left; width: 60%; color:#999; margin-top:18px;margin-bottom:0; font-size:1.1em;}
+		#login #login-links a {text-decoration:none; font-weight:bold;}
+
+		#login-form div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
+
+		input.login {background:none; color:#fff;border:none;width: 71px; height: 31px; _overflow:hidden; background:#333 url("../images/login-button.gif") 0 0 no-repeat !important;}
+
+		input.login:hover {background-position:0 -31px !important;cursor:pointer;}
+
+		#login-form input.login {float:right;margin-top:9px; text-transform: uppercase; letter-spacing:1px; font-size:0.8em;}
+
+#login #footer {padding:18px; margin:0 auto;width: 414px;}
+	#login #footer p {margin:0; width: auto; }
+
