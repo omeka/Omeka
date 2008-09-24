@@ -82,6 +82,17 @@ function recent_items($num = 10) {
 	return get_db()->getTable('Item')->findBy(array('recent'=>true,'per_page'=>(int) $num));
 }
 
+/**
+ * @since 7/3/08 This will retrieve featured items with or without images by
+ *  default. The prior behavior was to retrieve only items with images by
+ *  default.
+ * @param string $hasImage 
+ * @return Item
+ */
+function random_featured_item($hasImage=false) {
+	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
+}
+
 function random_featured_collection()
 {
     return get_db()->getTable('Collection')->findRandomFeatured();
