@@ -12,6 +12,7 @@
 			<th>Role</th>
 			<th>Active?</th>
 			<th>Edit</th>
+			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -23,6 +24,8 @@
 		
 		<td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
 		<td><a class="edit" href="<?php echo uri('users/edit/'.$user->id);?>">Edit</a></td>
+		<td><a class="delete" href="<?php echo uri('users/delete/'.$user->id);?>">Delete</a></td>
+		
 	</tr>
 <?php endforeach; ?>
 </tbody>
