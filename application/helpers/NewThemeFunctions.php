@@ -561,10 +561,9 @@ function select_item_type_elements($props = array(), $value = null)
     // Retrieve element ID and name for all elements in the Item Type element set.
     $db = get_db();
     $sql = $db->getTable('Element')->getSelect()
-            ->where('es.name = ?', 'Item Type')
+            ->where('es.name = ?', ELEMENT_SET_ITEM_TYPE)
             ->reset('columns')->from(array(), array('e.id', 'e.name'))
             ->order('e.name ASC'); // Sort alphabetically
-    
     $pairs = $db->fetchPairs($sql);
     
     return select($props, $pairs, $value);    

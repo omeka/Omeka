@@ -5,6 +5,12 @@ define('OMEKA_MIGRATION', 30);
 // Define the current version.
 define('OMEKA_VERSION', 'trunk');
 
+// The name of the Item Type Metadata element set. This is used wherever it is 
+// important to distinguish this particular element set from other element sets.
+// @todo Localize this and other constants to avoid too many things in the 
+// global scope.
+define('ELEMENT_SET_ITEM_TYPE', 'Item Type Metadata');
+
 // Report all errors except E_NOTICE.
 error_reporting(E_ALL ^ E_NOTICE);
 
