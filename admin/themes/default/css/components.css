@@ -31,7 +31,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	
 	input, select {border:0; background-color:transparent !important;}
 	
-	input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
+	input, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
 	input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
 	
