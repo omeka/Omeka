@@ -6,31 +6,16 @@
 <div id="primary">
 <?php if ( total_results() ): ?>
 	
-	<h3>Sort by: 		
-		<?php if($_GET['sort'] != 'most'): ?>
-			<a href="<?php echo current_uri(array('sort'=>'most')); ?>">Most</a>
-		<?php else: ?>
-			<em>Most</em>
-		<?php endif; ?>
+	<p id="tags-nav">Sort by:	
 		
-		<?php if($_GET['sort'] != 'least'):?>
-			<a href="<?php echo current_uri(array('sort'=>'least')); ?>">Least</a> 
-		<?php else: ?> 
-			<em>Least</em>
-		<?php endif; ?>
-		
-		<?php if($_GET['sort'] != 'alpha'): ?>
-			<a href="<?php echo current_uri(array('sort'=>'alpha')); ?>">Alphabetical</a>
-		<?php else: ?>
-			<em>Alphabetical</em>
-		<?php endif; ?>
-		
-		<?php if($_GET['sort'] != 'recent'): ?>
-			<a href="<?php echo current_uri(array('sort'=>'recent')); ?>">Recent</a>
-		<?php else: ?>
-			<em>Recent</em>
-		<?php endif; ?>
-	</h3>
+		<a href="<?php echo current_uri(array('sort'=>'most')); ?>"<?php if($_GET['sort'] == 'most') echo ' class="current"'; ?>>Most</a>
+			<a href="<?php echo current_uri(array('sort'=>'least')); ?>"<?php if($_GET['sort'] == 'least') echo ' class="current"'; ?>>Least</a> 
+
+			<a href="<?php echo current_uri(array('sort'=>'alpha')); ?>"<?php if($_GET['sort'] == 'alpha') echo ' class="current"'; ?>>Alphabetical</a>
+
+			<a href="<?php echo current_uri(array('sort'=>'recent')); ?>"<?php if($_GET['sort'] == 'recent') echo ' class="current"'; ?>>Recent</a>
+
+	</p>
 
 	
 	

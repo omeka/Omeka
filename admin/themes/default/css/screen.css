@@ -99,28 +99,6 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		.vvvvvv-popular {font-size:400%;}
 		.vvvvvvv-popular {font-size:450%;}
 		.vvvvvvvv-popular {font-size:500%;}
-
-		.popular a, .popular a:visited {color: #ccc;}
-		.-popular a, .-popular a:visited {color: #ccc;}
-		.v-popular a, .v-popular a:visited {color: #ccc;}
-		.vv-popular a, .vv-popular a:visited {color: #bebebe;}
-		.vvv-popular a, .vvv-popular a:visited {color: #b1b1b1;}
-		.vvvv-popular a, .vvvv-popular a:visited {color: #a3a3a3;}
-		.vvvvv-popular a, .vvvvv-popular a:visited {color: #959595;}
-		.vvvvvv-popular a, .vvvvvv-popular a:visited {color: #888;}
-		.vvvvvvv-popular a, .vvvvvvv-popular a:visited {color: #7a7a7a;}
-		.vvvvvvvv-popular a, .vvvvvvvv-popular a:visited {color: #6d6d6d;}
-
-		.popular a:hover, .-popular a:hover {color: #389;}
-		.v-popular a:hover {color: #389;}
-		.vv-popular a:hover {color: #389;}
-		.vvv-popular a:hover {color: #389;}
-		.vvvv-popular a:hover {color: #389;}
-		.vvvvv-popular a:hover {color: #389;}
-		.vvvvvv-popular a:hover {color: #389;}
-		.vvvvvvv-popular a:hover {color: #389;}
-		.vvvvvvvv-popular a:hover {color: #389;}
-		
 		
 	/* Misc Classes */
 	.add-button {position:absolute; top:20px; right:0; text-align:right; }
@@ -143,7 +121,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		#settings-link {display:inline; font-size:1.1em; text-align:right; padding: 8px 12px; background: #a74c29;}
 		#settings-link:hover {background: #c60;}
 		#public-link {display:inline;padding: 8px 12px; font-size:1.1em;background: #467;}
-		
+		#public-link:hover {background: #389;}
 	/* Primary Nav */
 	.primary-nav {overflow:hidden; zoom:1;border:1px solid #777;background:#382e22;clear:both; margin-bottom:0;padding-left:36px;border-width:1px 0 0; font-size:1.1em; font-weight:normal;}
 		.primary-nav li {display:block; float:left; width: 125px;border-right:1px solid #d7d5c4;}
@@ -198,7 +176,11 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	/* Advanced Search Form */
 	.search-entry {margin-bottom:6px; overflow:hidden;zoom:1;}
 	
-	
+	/* Tags Browse */
+	#tags-nav {font-size:1.1em;margin-bottom:1.8em;}
+	#tags-nav a {display:inline;color:#fff; text-decoration:none; text-align:right; padding: 6px 9px; background: #c60;}
+	#tags-nav a:hover {background: #a74c29;}
+	#tags-nav a.current {background: #467;}
 	/* Collection Browse styles */
 	
 	
