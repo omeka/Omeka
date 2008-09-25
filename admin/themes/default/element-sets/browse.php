@@ -15,13 +15,18 @@
     <tbody>
     <?php foreach ($elementsets as $elementSet): ?>
         <tr>
+            <?php $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File'); ?>
+            
             <td width="30%">
                 <?php echo htmlentities($elementSet->name); ?>
             </td>
             <td>
                 <?php echo htmlentities($elementSet->description); ?>
             </td>
-            <td><?php echo link_to($elementSet, 'delete', 'Delete', array('class'=>'delete')); ?>
+            <td>
+                <?php if (!in_array($elementSet->name, $doNotDelete)): ?>
+                    <?php echo link_to($elementSet, 'delete', 'Delete', array('class'=>'delete')); ?>
+                <?php endif; ?>
             </td>
         </tr>
     <?php endforeach; ?>
