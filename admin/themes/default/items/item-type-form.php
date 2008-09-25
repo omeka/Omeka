@@ -10,7 +10,3 @@
 <div id="type-metadata-form">
 <?php common('change-type', compact('item'), 'items'); ?>
 </div>
-
-img_tag
-
-a_tag
