@@ -4,7 +4,7 @@
 <div id="primary">
 <form method="post" action="">
 	<?php include 'form.php';?>
-	<p id="form_submits"><button type="submit" name="submit">Save Changes</button> or <a class="cancel" href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>">Cancel</a></p>
+<input type="submit" name="submit" value="Save Changes" class="submit submit-medium" /></p>
 	<p id="delete_link"><a class="delete" href="<?php echo record_uri($itemtype, 'delete', 'item-types'); ?>">Delete This Type</a></p>
 </form>
 

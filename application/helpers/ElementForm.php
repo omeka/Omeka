@@ -361,7 +361,7 @@ class Omeka_View_Helper_ElementForm
         // Used by Javascript.
     	$html .= '<div class="controls">';
 
-    	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], 'Remove Input', 
+    	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], 'Remove', 
     	    array('class'=>'remove-element'));
 
     	$html .= '</div>'; // Close 'controls' div

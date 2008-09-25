@@ -57,27 +57,22 @@
 	});
 </script>
 
-<style type="text/css" media="screen">
-    #element-list div.element-name {float:right;clear:none;}
-    #element-list {width: 50%;}
-</style>
-
 <?php echo flash(); ?>
 
 <fieldset id="type-information">
 	<legend>Item Type Information</legend>
-<div class="field">
-	<?php echo label('name','Name'); ?>
-	<div class="inputs">
-<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name); ?>
-</div>
-</div>
-<div class="field">
-<?php echo label('description', 'Description'); ?>
-<div class="inputs">
-<?php echo $this->formTextarea('description' ,$itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
-</div>
-</div>
+	<div class="field">
+		<?php echo label('name','Name'); ?>
+		<div class="inputs">
+		<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name); ?>
+		</div>
+	</div>
+	<div class="field">
+	<?php echo label('description', 'Description'); ?>
+		<div class="inputs">
+		<?php echo $this->formTextarea('description' ,$itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
+		</div>
+	</div>
 </fieldset>
 <fieldset id="type-elements">
 	<legend>Elements</legend>

@@ -6,7 +6,7 @@
 	<h2>User Information</h2>
 <form method="post">
 <?php include('form.php'); ?>
-<input type="submit" name="submit" value="Save User Information" class="button" />
+<input type="submit" name="submit" value="Save Changes" class="submit submit-medium" />
 </form>
 
 <form action="<?php echo uri('users/change-password/', array('id'=>$user->id)); ?>" method="post" accept-charset="utf-8">
@@ -36,7 +36,7 @@
 	</div>
 </fieldset>
 
-	<input type="submit" name="submit" value="Change Password"  class="button" />
+	<input type="submit" class="submit submit-medium" name="submit" value="Save Password"  class="button" />
 </form>
 </div>
 <?php foot();?>

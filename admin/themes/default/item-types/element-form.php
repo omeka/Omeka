@@ -2,7 +2,7 @@
 
 <form action="<?php echo uri('item-types/add-element'); ?>" method="post" accept-charset="utf-8" id="add-element-form">
 
-<h2>Add an Element to this Item Type</h2>
+<h3>Add an Element to this Item Type</h3>
 
 <div class="field">
     <label for="element-id">Choose an existing element</label>
@@ -37,8 +37,7 @@
     <?php echo __v()->formHidden('item-type-id', $itemtype->id); ?>
 </fieldset>
 
-<fieldset>
-    <p><?php echo __v()->formSubmit('element-form-submit', 'Add This Element'); ?></p>
-</fieldset>
+<?php echo __v()->formSubmit('element-form-submit', 'Add Element', array('class'=>'submit submit-medium')); ?>
+
 
 </form>

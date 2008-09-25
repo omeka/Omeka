@@ -27,15 +27,17 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 form{overflow:hidden; zoom:1;}
 div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 	
-	label, div.label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:right;display:block;width: 198px; float:left;}
+	label, div.label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
 	
 	input, select {border:0; background-color:transparent !important;}
 	
 	input, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
-	input.submit {clear:both; margin:18px 0;background-color:#389 !important; float:right; color:#fff;}
+	input.submit {clear:both; font-size:1.1em;margin:18px 0;background-color:#389 !important; float:right; color:#fff;}
 	
 	input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
+	
+	.dateinput input {margin-right: 3px;}
 	/* Replaces tooltips */
 	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
 	
@@ -48,13 +50,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 		.vertical-nav .field .inputs {width: 468px;}
 		/* Changes width based on default border and padding */
 		
-		/* Elements specific to items-add form */
-		.controls {float:left; clear:left;width: 300px; margin-left:128px;text-align:left;}
-
-			.field label.use-html { float:right; clear:both;display:block; width: 128px; font-size:1.1em;margin:0;}
-		label.use-html input {display:inline; float:none;padding:0;}
 	
-		#item-form .explanation {margin-top:18px;}
 
 
 
@@ -86,7 +82,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 .vertical-nav ul#section-nav {margin:0; padding:0;float:left; width: 198px;font-size:1.1em;margin-top:18px;background:transparent url("../images/list-border-tan.gif") bottom left repeat-x;}
 	.vertical-nav ul#section-nav a {text-decoration:none; display:block;padding:9px 9px 6px; color: #467;background:transparent url("../images/list-border-tan.gif") top left repeat-x;}
 	.vertical-nav ul#section-nav a:hover {background-color:#f6f5e9;}
-	.vertical-nav ul#section-nav li.current a, .vertical-nav ul#section-nav li a.active {background:#fff !important; font-weight:bold;color: #c60;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
+	.vertical-nav ul#section-nav li.current a, .vertical-nav ul#section-nav li a:active {background:#fff !important; font-weight:bold;color: #c60;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 
 .horizontal-nav ul#section-nav {margin:0; padding:0;font-size:1.1em; padding:9px 0 12px;}
 	.horizontal-nav ul#section-nav li {display:inline;}

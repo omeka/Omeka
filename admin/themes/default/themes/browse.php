@@ -10,18 +10,15 @@
 	<h2>Current Theme: <?php echo h($current->title); ?></h2>
 
 <div id="current-theme">
+	<img src="<?php echo h($current->image); ?>" width="342px" />
 	
-	<div class="meta">
 	<ul>
 		<li><span class="type">Author:</span> <span class="value"><?php echo h($current->author); ?></span></li>
 		<li><span class="type">License:</span> <span class="value"><?php echo h($current->license); ?></span></li>
 		<li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo h($current->website); ?>"><?php echo h($current->website); ?></a></span></li>
+		<li><span class="type">Description:</span> <span class="value"><?php echo h($current->description); ?></span></li>
+		
 	</ul>
-	</div>
-	<div class="description">
-	<img src="<?php echo h($current->image); ?>" />
-	<p><?php echo h($current->description); ?></p>
-	</div>
 </div>
 
 <h2>Change Theme</h2>

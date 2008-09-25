@@ -172,6 +172,26 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	#public-featured {position:absolute; top:36px; right:0; text-align:right;}	
 		#public-featured .checkbox {text-align:right;float:none; overflow:hidden; display:inline;}
 		#public-featured label, #public-featured input {display:inline; text-align:right;float:none; width: auto;}
+		
+			/* Elements specific to items-add form */
+			.controls {float:right; width: 300px; text-align:left;}
+
+		 	label.use-html { position:relative;float:left;padding-left: 16px;width: 8em;text-align:left; font-size:1.1em;margin:0;}
+		
+			.input-block {clear:both;position:relative;overflow:hidden; zoom:1;padding-top:2em;}
+			
+			label.use-html input {position:absolute; top:0; left:0; margin:0;float:none;padding:0;}
+
+			#item-form .explanation {margin-top:18px;}
+			
+			input.remove-element {background-color: transparent !important; color: #900;padding-left:18px;}
+			
+			input.add-element {background-color: transparent !important; color: #359; font-weight:bold; color:#76bb5f;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
+			
+			input.add-element, input.remove-element {cursor:pointer;font-size:1.1em;padding-top:0; background-position: 0 50%;padding-bottom:0px;}
+	
+	#delete_item_link {padding: 18px 8px 8px 0;}
+	#delete_item_link .delete {font-weight:bold;background-position:0 %50;padding-left:36px; color: #900;}
 	
 	/* Advanced Search Form */
 	.search-entry {margin-bottom:6px; overflow:hidden;zoom:1;}
@@ -181,6 +201,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	#tags-nav a {display:inline;color:#fff; text-decoration:none; text-align:right; padding: 6px 9px; background: #c60;}
 	#tags-nav a:hover {background: #a74c29;}
 	#tags-nav a.current {background: #467;}
+	
 	/* Collection Browse styles */
 	
 	
@@ -188,6 +209,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	#settings-form .submit {float:right;}
 	
 	/* Users */
+	.users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 	#new-user-form .submit {float:right;}
 	
 	/* Themes */
@@ -196,8 +218,8 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		#themeswitch .theme img {border:1px solid #d7d5c4;}
 		#themeswitch label {float:none !important; text-align:left; font-size:1.2em;width: auto;}
 
-		#current-theme {background: #D1E5EF; padding: 18px;margin-bottom:18px;}
-		#current-theme * {color: #467;}
+		#current-theme {background: #F2F1E8; overflow:hidden; zoom:1;padding: 18px;margin-bottom:18px;}
+		#current-theme img {border:6px solid #fff; float:right; margin-left:18px;}
 /* == Footer == */
 #footer {clear:both; padding: 18px 0 1px;  overflow:hidden; zoom:1;margin:0 36px; width: 882px;background: #eae9db;}
 	#footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}
