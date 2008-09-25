@@ -20,6 +20,9 @@
     	            },
     	            // Update the element-list partial when this succeeds.
     	            onSuccess: function(t) {
+    	                // Clear the element ID selector so that we can pick/make
+    	                // a new element. 
+            	        $('element-id').clear();
     	                var list = $('element-list');
     	                list.update(t.responseText);
     	                // Scroll to the list's header so you can see everything.
