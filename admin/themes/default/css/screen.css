@@ -204,7 +204,18 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 	/* Collection Browse styles */
 	
+	/* Item Types */
 	
+	#add-element-form{ background:#fff;padding:0;}
+	#add-element-form h3 {background:#fff;margin:0;padding-bottom:18px;}
+		#add-element-form .field {border-bottom:1px solid #fff;background:#DDEBEE;}
+		#add-element-form label {text-indent:18px;}
+		#element-choice {font-size:1.1em; margin:0; padding: 10px 0;border-bottom:3px solid #389;}
+		#element-choice li {display:inline;}
+		#element-choice a {text-decoration:none;background: #77B0BB; color: #fff;padding: 8px 12px;border-bottom:3px solid #fff;}
+		#element-choice a.active {background: #389;border-bottom-color: #389;}
+		
+		#add-element-form input, #add-element-form textarea, #add-element-form select {border-color: #99C4CC;}
 	/* Settings */
 	#settings-form .submit {float:right;}
 	

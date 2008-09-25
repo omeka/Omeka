@@ -15,7 +15,7 @@
 	<label>Find a File</label>
 		
 	<?php for($i=0;$i<$numFiles;$i++): ?>
-	<div class="files">
+	<div class="files inputs">
 		<input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />			
 	</div>
 	<?php endfor; ?>
