@@ -39,12 +39,12 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	
 	.dateinput input {margin-right: 3px;}
 	/* Replaces tooltips */
-	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
+	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; margin-left:216px; float:right; clear:right;}
 	
 	/* Changes the width of inputs depending on the layout */
 
 		.vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
-
+		.vertical-nav .field .explanation {margin-left: 144px;}
 		/* .input used to wrap input fields in items/add form */
 		.field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
 		.vertical-nav .field .inputs {width: 468px;}
