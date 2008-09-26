@@ -47,7 +47,12 @@ class PluginsController extends Omeka_Controller_Action
             $this->errorAction();
         }
         
-        $config = $broker->config($plugin);
+        try {
+            $config = $broker->config($plugin);
+        } catch (Exception $e) {
+            $this->flashError($e->getMessage());
+            $this->redirect->goto('config', null, null, array('name' => $plugin));    
+        }
         
         // If the configuration function returns output, then we need to render 
         // that because it is a form
