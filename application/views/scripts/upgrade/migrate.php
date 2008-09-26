@@ -1,4 +1,5 @@
 <?php head(); ?>
+<div id="primary">
 <h2 class="instruction">Omeka is now upgrading itself.  Please refresh your screen once this page finishes loading.</h2>
 
 <?php if(!$success): ?>
@@ -19,5 +20,5 @@
 <?php endforeach; ?>    
 
 <a href="<?php echo uri(''); ?>">Return to Dashboard</a>
-
+</div>
 <?php foot(); ?>

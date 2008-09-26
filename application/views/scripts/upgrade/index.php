@@ -12,6 +12,7 @@
     });
 </script>
 */ ?>
+<div id="primary">
 <h2>Upgrade Omeka</h2>
 <?php if (OMEKA_MIGRATION > (int) get_option('migration')): ?>
 <p>Warning: Your Omeka database is not compatible with the 
@@ -30,4 +31,5 @@ Please notify an administrator to upgrade the database.
 <?php else: ?>
 <p>Your Omeka database is up-to-date! <a href="<?php echo uri(''); ?>">Return to Dashboard</a></p>
 <?php endif; ?>
+</div>
 <?php foot();?>
