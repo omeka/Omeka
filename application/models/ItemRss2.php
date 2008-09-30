@@ -53,15 +53,8 @@ class ItemRss2
     protected function buildDescription($item)
     {
         $description = '';
-        
-        //Output a list of the dublin core fields that have values
-        $dublinCoreElements = $item->getElementsBySetName('Dublin Core');
-        foreach ($dublinCoreElements as $element) {
-            $textArray = item($element->name);
-            foreach ($textArray as $elementText) {
-                $description .= nls2p("<strong>" . htmlentities($element->name). "</strong>: " . $elementText);
-            }
-        }
+
+        $description .= show_item_metadata();
         
         //Output HTML that would display all the files in whatever way is possible
         $description .= display_files($item->Files);
