@@ -227,10 +227,18 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
             throw new Zend_Config_Exception('Your Omeka database configuration file has not been set up properly.  Please edit the configuration and reload this page.');
         }
         
-        $dbh = Zend_Db::factory('Mysqli', array('host'     => $db->host,
+        $connectionParams = array('host'     => $db->host,
                                                 'username' => $db->username,
                                                 'password' => $db->password,
-                                                'dbname'   => $db->name));
+                                                'dbname'   => $db->name);
+        
+        // 'port' parameter was introduced in 0.10, conditional check needed
+        // for backwards compatibility.
+        if (isset($db->port)) {
+            $connectionParams['port'] = $db->port;
+        }
+        
+        $dbh = Zend_Db::factory('Mysqli', $connectionParams);
         
         $db_obj = new Omeka_Db($dbh, $db->prefix);
                 
