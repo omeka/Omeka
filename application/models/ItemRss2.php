@@ -66,18 +66,19 @@ class ItemRss2
     {        
         $entry = array();
         set_current_item($item);
-        $entry['title'] = item('Title');
+        $entry['title'] = strip_tags(item('Title'));
         $entry['description'] = $this->buildDescription($item);
         
         //Permalink (this is kind of duplicated elsewhere)
         $entry['link'] = item_permalink_url($item);
                 
         $entry['lastUpdate'] = strtotime($item->added);
-        
+                
         //List the first file as an enclosure (only one per RSS feed)
         if($item->Files && ($file = current($item->Files))) {
             $entry['enclosure']   = array();
-            $enc['url']           = file_display_uri($file);
+            $fileDownloadUrl = abs_uri(array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>'fullsize'), 'download');
+            $enc['url']           = $fileDownloadUrl;
             $enc['type']          = $file->mime_browser;
             $enc['length']        = (int) $file->size;
             $entry['enclosure'][] = $enc;
