@@ -178,6 +178,33 @@ function admin_uri()
 }
 
 /**
+ * Generate an absolute URI.
+ * 
+ * Useful because Zend Framework's default URI helper generates relative URLs,
+ * though absolute URIs are required in some contexts.
+ * 
+ * @internal The code for generating the base URL is copied directly from paths.php.
+ * Not sure whether this would be better defined as a constant in paths.php, 
+ * though my feeling is that paths.php is too cluttered and that having too many
+ * constants makes the app harder to test.  Also the WEB_ROOT is already defined
+ * as the root path to Omeka, not just the http://domain part of the URL, which 
+ * is what we need in this instance.  This function will be used sparingly 
+ * anyway, since relative URIs are better in most instances.
+ * 
+ * @uses uri()
+ * @param mixed
+ * @return string HTML
+ **/
+function abs_uri()
+{
+    // Create base URL
+    $base_root = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
+    $base_root .= '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);    
+    $args = func_get_args();
+    return $base_root . call_user_func_array('uri', $args);
+}
+
+/**
  * Helper function to be used in public themes to allow plugins to modify the navigation of those themes.
  *
  * Plugins can modify navigation by adding filters to specific subsets of the
