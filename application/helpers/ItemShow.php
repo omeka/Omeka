@@ -57,7 +57,11 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     {
         $this->_item = $item;
         $this->_setOptions($options);
+        ob_start();
         $this->_output();
+        $output = ob_get_contents();
+        ob_end_clean();
+        return $output;
     }
     
     /**
