@@ -120,135 +120,27 @@ class ItemsController extends Omeka_Controller_Action
      * @return void
      **/
     public function browseAction()
-    {            
-        $perms  = array();
-        $filter = array();
-        $order  = array();
-        
-        //Show only public items
-        if ($this->_getParam('public')) {
-            $perms['public'] = true;
-        }
-        
-        //Here we add some filtering for the request    
-        try {
-            
-            // User-specific item browsing
-            if ($userToView = $this->_getParam('user')) {
-                        
-                // Must be logged in to view items specific to certain users
-                if (!$this->isAllowed('browse', 'Users')) {
-                    throw new Exception( 'May not browse by specific users.' );
-                }
-                
-                if (is_numeric($userToView)) {
-                    $filter['user'] = $userToView;
-                }
-            }
-            
-            // Entity-specific browsing, @duplication
-            if ($entityToView = $this->_getParam('entity')) {
-                if (!$this->isAllowed('browse', 'Entities')) {
-                    throw new Exception( 'May not browse by specific entities' );
-                }
-                
-                if (is_numeric($entityToView)) {
-                    $filter['entity'] = $entityToView;
-                }
-            }
-            
-            if ($this->_getParam('featured')) {
-                $filter['featured'] = true;
-            }
-            
-            if ($collection = $this->_getParam('collection')) {
-                $filter['collection'] = $collection;
-            }
-            
-            if ($type = $this->_getParam('type')) {
-                $filter['type'] = $type;
-            }
-            
-            if (($tag = $this->_getParam('tag')) || ($tag = $this->_getParam('tags'))) {
-                $filter['tags'] = $tag;
-            }
-            
-            if (($excludeTags = $this->_getParam('excludeTags'))) {
-                $filter['excludeTags'] = $excludeTags;
-            }
-            
-            $recent = $this->_getParam('recent');
-            if ($recent !== 'false') {
-                $order['recent'] = true;
-            }
-            
-            if ($search = $this->_getParam('search')) {
-                $filter['search'] = $search;
-                //Don't order by recent-ness if we're doing a search
-                unset($order['recent']);
-            }
-            
-            //The advanced or 'itunes' search
-            if ($advanced = $this->_getParam('advanced')) {
-                
-                //We need to filter out the empty entries if any were provided
-                foreach ($advanced as $k => $entry) {                    
-                    if (empty($entry['element_id']) || empty($entry['type'])) {
-                        unset($advanced[$k]);
-                    }
-                }
-                $filter['advanced_search'] = $advanced;
-            };
-            
-            if ($range = $this->_getParam('range')) {
-                $filter['range'] = $range;
-            }
-            
-        } catch (Exception $e) {
-            $this->flash($e->getMessage());
-        }
-        $params = array_merge($perms, $filter, $order);
-        
-        //Get the item count after other filtering has been applied, which is the total number of items found
-        $totalResults = $this->getTable('Item')->count($params);
-        Zend_Registry::set('total_results', $totalResults);                
-        
-        //Permissions are checked automatically at the SQL level
-        $totalItems = $this->getTable('Item')->count();
-        Zend_Registry::set('total_items', $totalItems);
+    {   
+        $results = $this->_helper->searchItems(array('foobar'=>true));
         
         /** 
          * Now process the pagination
          * 
          **/
         $paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
-        $options = array('page'           => 1,
-                         'pagination_url' => $paginationUrl);
-                            
-        //check to see if these options were changed by request vars
-        $reqOptions = $this->_getAllParams();
-        
-        $options = array_merge($options, $reqOptions);
-                
-        $params['page'] = $options['page'];
-        
-        $params['per_page'] = $this->getItemsPerPage();
-        
-        //Retrieve the items themselves
-        $items = $this->getTable('Item')->findBy($params);
 
         //Serve up the pagination
-        $pagination = array('menu'          => $menu, 
-                            'page'          => $options['page'], 
-                            'per_page'      => $params['per_page'], 
-                            'total_results' => $totalResults, 
-                            'link'          => $options['pagination_url']);
+        $pagination = array('menu'          => $menu, // This hasn't done anything since $menu was never instantiated in ItemsController::browseAction()
+                            'page'          => $results['page'], 
+                            'per_page'      => $results['per_page'], 
+                            'total_results' => $results['total_results'], 
+                            'link'          => $paginationUrl);
         
         Zend_Registry::set('pagination', $pagination);
         
         fire_plugin_hook('browse_items', $items);
         
-        $this->view->assign(compact('total_items', 'items'));
+        $this->view->assign(array('items'=>$results['items'], 'total_items'=>$results['total_items']));
     }
     
     public function elementFormAction()
@@ -269,30 +161,6 @@ class ItemsController extends Omeka_Controller_Action
         }
         
         $this->view->assign(compact('element', 'item'));
-    }
-        
-    /**
-     * Retrieve the number of items to display on any given browse page.
-     * This can be modified as a query parameter provided that a user is actually logged in.
-     *
-     * @return integer
-     **/
-    protected function getItemsPerPage()
-    {
-        //Retrieve the number from the options table
-        $options = Omeka_Context::getInstance()->getOptions();
-        
-        if (is_admin_theme()) {
-            $perPage = (int) $options['per_page_admin'];
-        } else {
-            $perPage = (int) $options['per_page_public'];
-        }
-                
-        if ($this->isAllowed('modifyPerPage') && $this->_getParam('per_page')) {
-            $perPage = $this->_getParam('per_page');
-        }     
-        
-        return $perPage;
     }
     
     ///// AJAX ACTIONS /////

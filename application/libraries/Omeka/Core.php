@@ -492,6 +492,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $this->initViewRenderer();
         $this->initResponseContexts();
         $this->initAclHelper();
+        $this->initSearchHelper();
     }
     
     private function initAclHelper()
@@ -505,6 +506,12 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
             $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl);
             Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
         }
+    }
+    
+    private function initSearchHelper()
+    {
+        $searchHelper = new Omeka_Controller_Action_Helper_SearchItems;
+        Zend_Controller_Action_HelperBroker::addHelper($searchHelper);
     }
     
     private function initViewRenderer()
