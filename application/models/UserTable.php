@@ -30,11 +30,18 @@ class UserTable extends Omeka_Db_Table
                              'e.first_name', 
                              'e.middle_name', 
                              'e.last_name', 
-                             'e.institution', 
                              'e.email', 
                              'entity_type'=>'e.type'))
                       ->joinInner(array('e'=>$db->Entity), 
-                                  "e.id = u.entity_id", array());
+                                  "e.id = u.entity_id", array())
+                    
+                    // Need to join on the parent table to retrieve the 'institution'
+                    // value for the user model.  this is b/c of the nested
+                    // relationship between entities.              
+                    ->joinLeft(array('e_parent'=>$db->Entity),
+                                "e_parent.id = e.parent_id",
+                                array('institution'=>"IFNULL(e.institution, e_parent.institution)"));
+
         return $select;
     }
     

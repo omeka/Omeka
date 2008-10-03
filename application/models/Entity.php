@@ -114,7 +114,7 @@ class Entity extends Omeka_Record
     {
         //Pull the institution name from the parent relationship
         if (!empty($this->institution)) {
-            return $val;
+            return $this->institution;
         }
         
         if ($this->isPerson() && !empty($this->parent_id)) {
