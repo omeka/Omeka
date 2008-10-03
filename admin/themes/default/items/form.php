@@ -1,5 +1,6 @@
 <?php echo js('tooltip'); 
-echo js('tiny_mce/tiny_mce');
+echo js('tiny_mce/tiny_mce'); 
+// echo js('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
 ?>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
@@ -7,12 +8,13 @@ echo js('tiny_mce/tiny_mce');
 	Event.observe(window,'load', function() {
         Omeka.ItemForm.enableTagRemoval();
         
-        document.fire('omeka:elementformload');
-        
         // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.
         $$('div.field textarea').each(function(el){
             el.id = null;
         });
+        
+        // Must run the element form scripts AFTER reseting textarea ids.
+        document.fire('omeka:elementformload');
         
 		Omeka.ItemForm.enableAddFiles();
         Omeka.ItemForm.changeItemType();
