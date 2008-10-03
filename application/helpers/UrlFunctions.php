@@ -23,7 +23,7 @@ function items_output_uri($output="rss2") {
  **/
 function uri($options=array(), $route=null, $queryParams=array(), $reset = false, $encode = true)
 {
-    return __v()->url($options, $route, $queryParams);
+    return __v()->url($options, $route, $queryParams, $reset, $encode);
 }
 
 /**
