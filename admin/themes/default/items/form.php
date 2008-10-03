@@ -272,48 +272,14 @@ echo js('tiny_mce/tiny_mce');
     <?php endif; ?>
 </div>
 <div id="item-metadata">
-<?php foreach ($elementSets as $key => $elementSet): ?>
-	<div id="<?php echo text_to_id($elementSet->name); ?>-metadata">
-<fieldset class="set">
-        <legend><?php echo htmlentities($elementSet->name); ?></legend>
-        <?php 
-        // Would prefer to display all the metadata sets in the same way, but this
-        // necessitates branching for the Item Type set.
-        switch ($elementSet->name):
-            case 'Item Type Metadata':
-                include 'item-type-form.php';
-                break;
-            default:
-                echo display_element_set_form_for_item($item, $elementSet->name);
-                break;
-        endswitch; ?>        
-</fieldset>
-</div>
-<?php endforeach; ?>
-
-<!-- Create the tabs for the rest of the form -->
-<?php 
-// Each one of these tabs is a partial file for purposes of clean separation.
-$otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
-<?php foreach ($otherTabs as $tabName): ?>
-    <div class="set" id="<?php echo text_to_id($tabName);?>-metadata">
-	<fieldset>
-        <legend><?php echo $tabName; ?></legend>
-    <?php switch ($tabName): 
-            case 'Collection':
-                require 'collection-form.php';
-            break;
-            case 'Files':
-                require 'files-form.php';
-            break;
-            case 'Tags':
-                require 'tag-form.php';
-            break;
-            case 'Miscellaneous':
-                require 'miscellaneous-form.php';
-            break; 
-        endswitch; ?>
-</fieldset>
-    </div>
+<?php foreach ($tabs as $tabName => $tabContent): ?>
+	<?php if (!empty($tabContent)): ?>
+    	<div id="<?php echo text_to_id($tabName); ?>-metadata">
+        <fieldset class="set">
+            <legend><?php echo htmlentities($tabName); ?></legend>
+            <?php echo $tabContent; ?>        
+        </fieldset>
+        </div>	   
+	<?php endif; ?>
 <?php endforeach; ?>
 </div>

@@ -9,24 +9,10 @@ $$('.tabs').each(function(tab_group){
 });
 
 </script>
-<!-- Create the sections for the various element sets -->
 
-<ul id="section-nav" class="navigation tabs">
-    
-    <?php foreach ($elementSets as $key => $elementSet): ?>
-    <li><a href="#<?php echo text_to_id($elementSet->name); ?>-metadata"><?php echo $elementSet->name; ?></a></li>
-    
-    <?php endforeach; ?>
-    
-    <?php 
-    $otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
-    <?php foreach ($otherTabs as $tabName): ?>
-    <li><a href="#<?php echo text_to_id($tabName);?>-metadata"><?php echo $tabName; ?></a></li>
-    <?php endforeach; ?>
-    
-</ul>
+<?php include 'form-tabs.php'; // Definitions for all the tabs for the form. ?>
+
 <div id="primary">
-	
 
 	<form method="post" enctype="multipart/form-data" id="item-form" action="">
 		<?php include 'form.php'; ?>

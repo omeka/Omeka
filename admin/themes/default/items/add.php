@@ -11,22 +11,7 @@ document.observe('dom:loaded',function(){
 document.write('<style>#api, #resources { display:none; }</style>');
 </script>
 <h1>Add an Item</h1>
-<!-- Create the sections for the various element sets -->
-
-<ul id="section-nav" class="vertical navigation">
-    
-    <?php foreach ($elementSets as $key => $elementSet): ?>
-    <li class="tab"><a href="#<?php echo text_to_id($elementSet->name); ?>-metadata"><?php echo $elementSet->name; ?></a></li>
-    
-    <?php endforeach; ?>
-    
-    <?php 
-    $otherTabs = array('Collection', 'Files', 'Tags', 'Miscellaneous'); ?>
-    <?php foreach ($otherTabs as $tabName): ?>
-    <li class="tab"><a href="#<?php echo text_to_id($tabName);?>-metadata"><?php echo $tabName; ?></a></li>
-    <?php endforeach; ?>
-    
-</ul>
+<?php include 'form-tabs.php'; ?>
 <div id="primary">
 
 		<form method="post" enctype="multipart/form-data" id="item-form">
