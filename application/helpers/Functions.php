@@ -30,9 +30,10 @@ function is_odd($num)
 }
 
 /**
- * Output a <link> tag for the RSS feed so the browser can auto-discover the field
+ * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
  * 
- * @return void
+ * @uses items_output_uri()
+ * @return string HTML
  **/
 function auto_discovery_link_tag(){
 	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. items_output_uri() .'" />';

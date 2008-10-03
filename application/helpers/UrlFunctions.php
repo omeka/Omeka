@@ -7,9 +7,28 @@
  * @subpackage UrlHelpers
  **/
 
-// Function to easily generate various xml outputs of items
+/**
+ * @since 0.10 Incorporates search parameters into the query string for the URI.
+ * This enables auto_discovery_link_tag() to automatically discover the RSS feed
+ * for any search.
+ * 
+ * @internal This filters query parameters via a blacklist instead of a whitelist,
+ * because conceivably plugins could add extra fields to the advanced search.
+ * @param string
+ * @return string URI
+ **/
 function items_output_uri($output="rss2") {
-	return uri('items/?output='.$output);
+    // Copy $_GET and filter out all the cruft.
+    $queryParams = $_GET;
+    // The submit button the search form.
+    unset($queryParams['submit_search']);
+    // If 'page' is passed in query string and not via the route
+    // Page should always be the first so that accurate results are retrieved
+    // for the RSS.  Does it make sense to get an RSS feed of the 2nd page?
+    unset($queryParams['page']);
+    
+    $queryParams['output'] = $output;
+    return uri(array('controller'=>'items', 'action'=>'browse'), null, $queryParams);
 }
 
 /**
