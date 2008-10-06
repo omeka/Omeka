@@ -85,28 +85,46 @@ function display_element_set_form_for_item($item, $elementSetName)
 }
 
 /**
- * Retrieve a valid citation for the current item.  
+ * Retrieve a valid citation for the current item.
+ *
+ * Generally follows Chicago Manual of Style note format for webpages. Since 
+ * Omeka items can be or represent anything, it's presumptuous to cite it as 
+ * anything else. Also, this does not account for multiple creators or titles. 
+ * If you want stricter adherence to a format, write a new helper function.
  * 
  * @internal Was previously located at Item::getCitation().  This made not a 
  * whole lot of sense though, given that it is very much an element of the View
  * and not directly related to the business logic of the app.
- * @todo Make sure this citation follows some sort of standard.  MLA? Other?
  * @return string
  **/
 function item_citation()
 {
-    if($citation = item('Citation')) {
+    if ($citation = item('Citation')) {
 		return $citation;
 	}
-
-	$cite = '';
-    $cite .= item('Creator');
-    if ($cite != '') $cite .= ', ';
-    $cite .= '"' . item('Title', array('all'=>true, 'delimiter'=>', ')) . '". ';
-    $cite .= '<em>'.settings('site_title').'</em>, ';
-    $cite .= 'Item #'.item('id').' ';
-    $cite .= '(accessed '.date('F d Y, g:i a').') ';
-    return $cite;
+    
+    $creator    = item('Creator');
+    $title      = item('Title');
+    $siteTitle  = get_option('site_title');
+    $itemId     = item('id');
+    $accessDate = date('F j, Y');
+    $uri        = abs_uri();
+    
+    $cite = '';
+    if ($creator) {
+        $cite .= "$creator, ";
+    }
+    if ($title) {
+        $cite .= "\"$title,\" ";
+    }
+    if ($siteTitle) {
+        $cite .= "in $siteTitle, ";
+    }
+    $cite .= "Item #$itemId, ";
+    $cite .= "$uri ";
+    $cite .= "(accessed $accessDate).";
+    
+	return $cite;
 }
 
 /**
