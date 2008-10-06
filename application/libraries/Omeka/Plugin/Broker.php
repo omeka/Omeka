@@ -341,7 +341,7 @@ class Omeka_Plugin_Broker
     {
         foreach ($paths as $path) {
             $physicalPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $path;
-            $webPath      = WEB_PLUGIN . DIRECTORY_SEPARATOR . $path;
+            $webPath      = WEB_PLUGIN . '/' . $path;
             
             $view->addScriptPath($physicalPath);
             $view->addAssetPath($physicalPath, $webPath);

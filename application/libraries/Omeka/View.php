@@ -113,7 +113,7 @@ class Omeka_View extends Zend_View_Abstract
         if ($themeName = $this->getThemeOption($themeType)) {
             $scriptPath = THEME_DIR.DIRECTORY_SEPARATOR . $themeName;
             $this->addScriptPath($scriptPath);
-            $this->addAssetPath($scriptPath, WEB_THEME.DIRECTORY_SEPARATOR . $themeName);            
+            $this->addAssetPath($scriptPath, WEB_THEME.'/' . $themeName);            
         }    
     }
     

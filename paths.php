@@ -71,18 +71,18 @@ define('HELPERS', HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php');
 
 // Define the web address constants:
 _define_web_root();
-define('WEB_THEME', WEB_DIR . DIRECTORY_SEPARATOR . 'themes');
-define('WEB_PLUGIN',       WEB_ROOT . DIRECTORY_SEPARATOR . $site['plugins']);
-define('WEB_ARCHIVE',      WEB_ROOT . DIRECTORY_SEPARATOR . $site['archive']);
-define('WEB_PUBLIC_THEME', WEB_ROOT . DIRECTORY_SEPARATOR . $site['public_theme']);
-define('WEB_VIEW_SCRIPTS', WEB_ROOT . DIRECTORY_SEPARATOR . $site['application'] . DIRECTORY_SEPARATOR . $site['views'] . DIRECTORY_SEPARATOR . $site['scripts']);
-define('WEB_THUMBNAILS',        WEB_ARCHIVE . DIRECTORY_SEPARATOR . $site['thumbnails']);
-define('WEB_SQUARE_THUMBNAILS', WEB_ARCHIVE . DIRECTORY_SEPARATOR . $site['square_thumbnails']);
-define('WEB_FULLSIZE',          WEB_ARCHIVE . DIRECTORY_SEPARATOR . $site['fullsize']);
-define('WEB_FILES',             WEB_ARCHIVE . DIRECTORY_SEPARATOR . $site['files']);
+define('WEB_THEME', WEB_DIR . '/themes');
+define('WEB_PLUGIN',       WEB_ROOT . '/' . $site['plugins']);
+define('WEB_ARCHIVE',      WEB_ROOT . '/' . $site['archive']);
+define('WEB_PUBLIC_THEME', WEB_ROOT . '/' . $site['public_theme']);
+define('WEB_VIEW_SCRIPTS', WEB_ROOT . '/' . $site['application'] . '/' . $site['views'] . '/' . $site['scripts']);
+define('WEB_THUMBNAILS',        WEB_ARCHIVE . '/' . $site['thumbnails']);
+define('WEB_SQUARE_THUMBNAILS', WEB_ARCHIVE . '/' . $site['square_thumbnails']);
+define('WEB_FULLSIZE',          WEB_ARCHIVE . '/' . $site['fullsize']);
+define('WEB_FILES',             WEB_ARCHIVE . '/' . $site['files']);
 
 // Set the include path for the models directory.
-set_include_path(LIB_DIR.PATH_SEPARATOR . MODEL_DIR);
+set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR);
 
 /**
  * Most of this has been borrowed directly from Drupal 6.1's 

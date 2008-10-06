@@ -68,7 +68,7 @@ class ThemesController extends Omeka_Controller_Action
             // when switching themes
             $imageFile = $theme->path.DIRECTORY_SEPARATOR.'theme.jpg';
             if (file_exists($imageFile) && is_readable($imageFile)) {
-                $img = WEB_PUBLIC_THEME.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.'theme.jpg';
+                $img = WEB_PUBLIC_THEME.'/'.$dir.'/theme.jpg';
                 $theme->image = $img;
             }
             

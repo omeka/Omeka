@@ -106,10 +106,10 @@ class File extends Omeka_Record {
     {
         $fn = $this->getDerivativeFilename();
         
-        $path = array('fullsize'         => WEB_FULLSIZE.DIRECTORY_SEPARATOR . $fn,
-                      'thumbnail'        => WEB_THUMBNAILS.DIRECTORY_SEPARATOR . $fn,
-                      'square_thumbnail' => WEB_SQUARE_THUMBNAILS.DIRECTORY_SEPARATOR . $fn,
-                      'archive'          => WEB_FILES.DIRECTORY_SEPARATOR . $this->archive_filename);
+        $path = array('fullsize'         => WEB_FULLSIZE.'/' . $fn,
+                      'thumbnail'        => WEB_THUMBNAILS.'/' . $fn,
+                      'square_thumbnail' => WEB_SQUARE_THUMBNAILS.'/' . $fn,
+                      'archive'          => WEB_FILES.'/' . $this->archive_filename);
         
         $hookdata = fire_plugin_hook('append_to_file_web_path', $path);
         
