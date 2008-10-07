@@ -20,7 +20,7 @@
     </td> 
 	<td class="title"><?php echo link_to_item(); ?></td>
 	<td><?php echo item('Item Type Name'); ?></td>
-	<td><?php echo item('Creator'); ?></td>	
+	<td><?php echo item('Dublin Core: Creator'); ?></td>	
 	<td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
 	<td><?php echo checkbox(array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public"), item('public')); ?></td>
 	<td><?php echo checkbox(array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured"), item('featured')); ?>

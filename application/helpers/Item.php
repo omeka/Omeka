@@ -21,7 +21,7 @@ class Omeka_View_Helper_Item
     /**
      * Retrieve metadata for a specific field (henceforth known as 'element') for
      * an item.  The simplest form of this function will retrieve a single text 
-     * value for a given field, e.g. item('Title') will return a string corresponding
+     * value for a given field, e.g. item('Dublin Core: Title') will return a string corresponding
      * to the first available title.  There are a number of options that can be
      * passed via an array as the second argument.
      * 
@@ -39,8 +39,6 @@ class Omeka_View_Helper_Item
      *      filters.
      *  'snippet' => trim the length of each piece of text to the given length
      *      (integer).
-     *  'element_set' => retrieve the element text for an element that belongs 
-     *      to a specific set.
      *  'all' => if set to true, this will retrieve an array containing all values
      *      for a single element rather than a specific value.
      *
@@ -279,6 +277,29 @@ class Omeka_View_Helper_Item
     }
     
     /**
+     * Parse the name of the field that is passed in, which should be in the form
+     * Element Set: Element Name.  If the phrase contains more than one colon,
+     * it will assume that everything after the first colon is the name of the 
+     * element.  Behavior is undefined for element set names containing colons.
+     * 
+     * @param string
+     * @return array Element set name and Element name
+     **/
+    protected function _parseFieldName($field)
+    {
+        $fields = explode(':', $field);
+        
+        if (count($fields) <= 1) {
+            throw new Exception('"' . $field . '" does not follow the "Element Set: Element Name" convention!');
+        }
+        
+        $elementSet = trim(array_shift($fields));
+        $elementName = trim(join(':', $fields));
+        
+        return array($elementSet, $elementName);
+    }
+    
+    /**
      * Retrieve the set of element text for the item.
      * 
      * @param string
@@ -293,8 +314,7 @@ class Omeka_View_Helper_Item
             return $this->_getOtherField($field, $item);
         }        
         
-        $elementName = $field;
-        $elementSetName = @$options['element_set'];
+        list($elementSetName, $elementName) = $this->_parseFieldName($field);
         
         $elementTexts = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
         

@@ -5,7 +5,7 @@
 
 	<div class="meta">
 		<ul>
-			<li><span class="fieldname">Creator:</span> <?php echo item('Creator', array('delimiter'=>', ', 'all'=>true)); ?></li>
+			<li><span class="fieldname">Creator:</span> <?php echo item('Dublin Core: Creator', array('delimiter'=>', ', 'all'=>true)); ?></li>
 			<li><span class="fieldname">Added:</span> <?php echo item('Date Added'); ?></li>
 			<?php if (item_belongs_to_collection()): ?>
 			<li><span class="fieldname">Collection:</span> <?php echo item('Collection Name'); ?></li>
@@ -21,10 +21,10 @@
 
 	<div class="description">
 	<?php if (!item_has_thumbnail()): ?>
-		<?php echo item('Description', array('snippet'=>300)); ?>
+		<?php echo item('Dublin Core: Description', array('snippet'=>300)); ?>
 		<?php else: ?>
 		<?php echo link_to_item(item_thumbnail(), array('class'=>'thumbnail')); ?>
-		<?php echo item('Description', array('snippet'=>300)); ?>
+		<?php echo item('Dublin Core: Description', array('snippet'=>300)); ?>
 	<?php endif; ?>
 	</div>
 
