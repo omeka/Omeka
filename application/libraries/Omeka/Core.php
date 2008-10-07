@@ -48,8 +48,8 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                'initializeDb', 
                                'loadModelClasses', 
                                'initializeOptions', 
-                               'initializeAcl', 
                                'initializePluginBroker', 
+                               'initializeAcl', 
                                'initializeAuth', 
                                'initializeCurrentUser', 
                                'initializeFrontController',
@@ -331,6 +331,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      * then use that.  If not, then set up the ACL based on the hard-coded 
      * settings.
      * 
+     * @since 0.10 Plugins must use the 'define_acl' hook to modify ACL definitions.
      * @uses Omeka_Acl
      * @todo ACL settings should be stored in the database.  When ACL settings
      * are properly stored in a normalized database configuration, then this
@@ -349,6 +350,8 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         // }
         
         $this->setAcl($acl);
+        
+        fire_plugin_hook('define_acl', $acl);
     }
     
     /**
@@ -461,11 +464,19 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $this->initializeActionHelpers();        
     }
     
+    /**
+     * @since 0.10 'add_routes' hook is deprecated in favor of 'define_routes'.
+     * @return void
+     **/
     public function initializeRoutes()
     {
         $front = Zend_Controller_Front::getInstance();
         $router = $front->getRouter();
         $router->addConfig($this->getConfig('routes'), 'routes');
+        
+        fire_plugin_hook('define_routes', $router);
+        
+        // Deprecated in 0.10 (use 'define_routes' instead).
         fire_plugin_hook('add_routes', $router);
         $front->setRouter($router);
     }
