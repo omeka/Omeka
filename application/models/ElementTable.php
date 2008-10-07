@@ -104,15 +104,11 @@ class ElementTable extends Omeka_Db_Table
     /**
      * Retrieve all elements for a set.
      * 
-     * @see items/form.php
-     * @see display_form_input_for_element()
-     * @see ElementTable::findByRecordType() There is some duplication in the 
-     * ORDER clause of the SQL statement.
-     * @param Item
-     * @param string The name of the set it belongs to.
+     * @see display_element_set_form_for_item()
+     * @param string The name of the set to which elements belong.
      * @return Element
      **/
-    public function findForItemBySet($item, $elementSet)
+    public function findBySet($elementSet)
     {
         // Select all the elements for a given set
         $select = $this->getSelect();

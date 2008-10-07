@@ -16,18 +16,16 @@
 class DataTypeTable extends Omeka_Db_Table
 {
     /**
-     * @todo This is duplicated in RecordTypeTable.  There should be an analog 
-     * for this type of name-id reverse lookup in Omeka_Db_Table.  Not sure how 
-     * best to do that though.
+     * @internal This is duplicated in RecordTypeTable.
      * 
      * @param string
      * @return integer|false
      **/
-    public function getIdFromName($dataTypeName)
+    public function findIdFromName($dataTypeName)
     {
         $table = $this->getTableName();
         $select = "SELECT d.id FROM $table d WHERE d.name = ?";
-        var_dump($this->getDb()->fetchOne($select, array($dataTypeName)));exit;
+        return $this->getDb()->fetchOne($select, array($dataTypeName));
     }
     
     protected function _getColumnPairs()

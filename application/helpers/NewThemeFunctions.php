@@ -73,11 +73,11 @@ function display_form_input_for_element($element, $item, $options = array())
 
 function display_element_set_form_for_item($item, $elementSetName)
 {
-    $dublinCoreElements = get_db()->getTable('Element')->findForItemBySet($item, $elementSetName);
+    $elements = get_db()->getTable('Element')->findBySet($elementSetName);
     
     $html = '';
     
-    foreach ($dublinCoreElements as $key => $element) {
+    foreach ($elements as $key => $element) {
        $html .= display_form_input_for_element($element, $item);
     }
     

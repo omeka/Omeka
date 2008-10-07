@@ -53,6 +53,12 @@ class ElementTextTable extends Omeka_Db_Table
         return $this->fetchObjects($select);
     }
     
+    public function findByElement($elementId)
+    {
+        $select = $this->getSelect()->where($this->_alias . '.element_id = ?', (int)$elementId);
+        return $this->fetchObjects($select);
+    }
+    
     /**
      * 
      * @param string

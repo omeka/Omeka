@@ -24,7 +24,7 @@ class Element extends Omeka_Record
     public $element_set_id;
     public $order;
     public $name = '';
-    public $description;
+    public $description = '';
 
     protected function _validate()
     {
@@ -38,6 +38,15 @@ class Element extends Omeka_Record
         
         if (empty($this->record_type_id)) {
             $this->addError('record_type_id', 'Element must have a valid record type!');
+        }
+    }
+    
+    protected function _delete()
+    {
+        // Cascade delete all element texts associated with an element when deleting the element.
+        $elementTexts = $this->getTable('ElementText')->findByElement($this->id);
+        foreach ($elementTexts as $elementText) {
+            $elementText->delete();
         }
     }
 }
