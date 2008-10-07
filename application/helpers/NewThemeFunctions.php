@@ -974,7 +974,6 @@ function collection($fieldName, $options=array())
             $text = $collection->id;
             break;
         case 'name':
-        case 'title':   // Title and Name are aliased (since technically collections should have a title, not a name).
             $text = $collection->name;
             break;
         case 'description':
@@ -999,7 +998,7 @@ function collection($fieldName, $options=array())
             }
             break;
         default:
-            throw new Exception('Field does not exist for collections!');
+            throw new Exception('"' . $fieldName . '" does not exist for collections!');
             break;
     }
     

@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Collection # '.collection('Id'), 'body_class'=>'collections')); ?>
-<h1>Collection: <?php echo collection('Title');?></h1>
+<h1>Collection: <?php echo collection('Name');?></h1>
 
 <div id="primary">
 <div id="collection-info">
@@ -16,7 +16,7 @@
 
 </div>
 <div id="collection-items">
-	<h2>Recently Added to <?php echo collection('Title'); ?></h2>
+	<h2>Recently Added to <?php echo collection('Name'); ?></h2>
 	
 	<ul>
 	<?php while (loop_items_in_collection(10)): ?>
