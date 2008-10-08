@@ -260,11 +260,11 @@ class UsersController extends Omeka_Controller_Action
             //somebody is trying to change the password
             if (!empty($_POST['new_password1'])) {
                 $user->changePassword($_POST['new_password1'], $_POST['new_password2'], $_POST['old_password']);
-                $user->save();
+                $user->forceSave();
             }
             $this->flashSuccess('Password was changed successfully.');
-        } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e, Omeka_Controller_Flash::DISPLAY_NEXT);
+        } catch (Exception $e) {
+            $this->flashError($e->getMessage());
         }
         
         $this->redirect->goto('edit', null, null, array('id'=>$user->id));
