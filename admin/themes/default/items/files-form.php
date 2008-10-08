@@ -4,7 +4,7 @@
 	<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
 	<?php 
 	echo text(array('name'=>'add_num_files','size'=>2),$numFiles);
-	echo submit('Add this many files', 'add_more_files'); 
+	echo submit('add_more_files', 'Add this many files'); 
 	?>
 	</div>
 </div>

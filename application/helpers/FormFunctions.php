@@ -178,9 +178,13 @@ function checkbox($attributes, $checked = FALSE, $value=null, $label = null )
 	return $html;
 }
 	
-function submit($value="Submit",$name="submit")
+function submit($attributes, $value="Submit")
 {
-	return __v()->formSubmit($name, $value, array());
+    // This is a hack that makes this work.
+    if (is_array($attributes)) {
+        $otherAttribs = $attributes;
+    }
+    return __v()->formSubmit($attributes, $value, $otherAttribs);
 }
 	
 function simple_search($buttonText = "Search", $formProperties=array('id'=>'simple-search'), $uri = null) 
