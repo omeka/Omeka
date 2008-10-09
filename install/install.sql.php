@@ -201,8 +201,6 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}entities` (
   `last_name` text collate utf8_unicode_ci,
   `email` text collate utf8_unicode_ci,
   `institution` text collate utf8_unicode_ci,
-  `parent_id` int(10) unsigned default NULL,
-  `type` varchar(50) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

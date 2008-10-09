@@ -152,8 +152,6 @@ function users(array $params = array())
 function institutions(array $params = array())
 {
     trigger_error('institutions() is no longer supported in Omeka 0.10!');
-	$params = array_merge($params, array('type'=>'Institution'));
-	return get_db()->getTable('Entity')->findBy($params);
 }
 
 /**
@@ -165,7 +163,6 @@ function institutions(array $params = array())
 function metafields(array $params = array())
 {
     trigger_error('metafields() is no longer supported in Omeka 0.10!');
-	return get_db()->getTable('Metafield')->findAll();
 }
 
 /**
@@ -176,8 +173,6 @@ function metafields(array $params = array())
 function people(array $params = array())
 {
     trigger_error('people() is no longer supported in Omeka 0.10!');
-	$params = array_merge($params, array('type'=>'Person'));
-	return get_db()->getTable('Entity')->findBy($params);
 }
 
 

@@ -231,19 +231,17 @@ class Installer
         
         // Create the default user
         require_once 'User.php';
-        require_once 'Person.php';
         
         $userTable = $db->User;
         $entityTable = $db->Entity;
         
         $entitySql = "
         INSERT INTO $entityTable (
-            type, 
             email, 
             first_name, 
             last_name
-        ) VALUES (?, ?, ?, ?)";
-        $db->exec($entitySql, array("Person", $_POST['super_email'], 'Super', 'User'));
+        ) VALUES (?, ?, ?)";
+        $db->exec($entitySql, array($_POST['super_email'], 'Super', 'User'));
         
         $userSql = "
         INSERT INTO $userTable (

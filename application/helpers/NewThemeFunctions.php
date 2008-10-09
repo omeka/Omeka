@@ -668,13 +668,6 @@ function select_user($props = array(), $value=null)
     return _select_from_table('User', $props, $value);
 }
 
-function select_institution($props = array(), $value = null)
-{
-    $institutionInfo = get_db()->getTable('Entity')->findInstitutionsForSelectForm();
-    
-    return select($props, $institutionInfo, $value);
-}
-
 /**
  * @uses _select_from_table()
  */

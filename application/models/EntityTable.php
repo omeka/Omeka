@@ -14,14 +14,6 @@
  **/
 class EntityTable extends Omeka_Db_Table
 {
-    /**
-     * Table name needs to be hard-coded because PersonTable and InstitutionTable
-     * inherit and use the same table
-     *
-     * @var string
-     **/
-    protected $_name = 'entities';
-        
     public function findUniqueOrNew($values, $other = array())
     {    
         $select = new Omeka_Db_Select;
@@ -49,22 +41,11 @@ class EntityTable extends Omeka_Db_Table
         return array('e.id', 'e.name' => new Zend_db_Expr( 
             'CONCAT_WS(" ", e.first_name, e.middle_name, e.last_name, e.institution)'));
     }
-    
-    public function findInstitutionsForSelectForm()
-    {
-        $select = $this->getSelect();
-        $select->reset('columns');
-        $select->from(array(), array('e.id', 'e.institution'))
-            ->where('e.type = "Institution"');
-            
-        return $this->getDb()->fetchPairs($select);
-    }
-    
+
     /**
      * Possible options include:
      * 
      * get_email
-     * type
      *
      * @param Omeka_Db_Select
      * @param array
@@ -78,13 +59,7 @@ class EntityTable extends Omeka_Db_Table
                                          'e.first_name', 
                                          'e.middle_name', 
                                          'e.last_name', 
-                                         'e.institution', 
-                                         'e.parent_id', 
-                                         'e.type') );
+                                         'e.institution') );
         }
-        
-        if ($params['type']) {
-            $select->where('`e`.`type` = ?', (string) $params['type']);
-        }        
     }
 }

@@ -1,6 +1,6 @@
 <?php
 // Define the current migration.
-define('OMEKA_MIGRATION', 30);
+define('OMEKA_MIGRATION', 31);
 
 // Define the current version.
 define('OMEKA_VERSION', 'trunk');

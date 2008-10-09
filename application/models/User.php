@@ -115,18 +115,21 @@ class User extends Omeka_Record {
         // validation.
         if ($entity = $this->Entity) {
             
-            // Check the name fields to make sure they are filled out
-            if (get_class($entity) == 'Person') {
-                if (empty($entity->first_name)) {
-                    $this->addError('first_name', 'First name is required for user accounts.' );
+            if (empty($entity->institution) and empty($entity->first_name) and empty($entity->last_name)) {
+                $this->addError('institution', 'Name of the institution is required if not providing first/last name.' );
+            }
+            // Either need first and last name (or institution name) to validate.
+            else if (empty($entity->institution)) {
+                if (empty($entity->first_name) and empty($this->last_name)) {
+                    $this->addError('name', 'Either first and last name or the name of the institution is required.');
                 }
-                if (empty($entity->last_name)) {
-                    $this->addError('last_name', 'Last name is required for user accounts.'); 
-                }
-            // For institutions, only the 'institution' field needs to be filled out
-            } else if (get_class($entity) == 'Institution') {
-                if (empty($entity->institution)) {
-                    $this->addError('institution', 'Name of the institution is required for user accounts.' );
+                else {
+                    if (empty($entity->first_name)) {
+                        $this->addError('first_name', 'First name is required for user accounts.' );
+                    }
+                    if (empty($entity->last_name)) {
+                        $this->addError('last_name', 'Last name is required for user accounts.'); 
+                    }
                 }
             }
             
@@ -249,14 +252,7 @@ class User extends Omeka_Record {
         
         //If the entity is new, then determine whether it is an institution or a person
         if (empty($entity)) {
-            //Institution provided with no name
-            if (empty($post['last_name']) && empty($post['first_name']) && !empty($post['institution'])) {
-                require_once 'Institution.php';
-                $entity = new Institution;
-            } else {
-                require_once 'Person.php';
-                $entity = new Person;
-            }
+            $entity = new Entity;
         }
         
         //The new email address is fully legit, so set the entity to the new info                
