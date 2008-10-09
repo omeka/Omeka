@@ -15,9 +15,9 @@
  * @param string
  * @return array
  **/
-function item($field, $options=array())
+function item($elementSetName, $elementName = null, $options = array())
 {
-    return __v()->item(get_current_item(), $field, $options);
+    return __v()->item(get_current_item(), $elementSetName, $elementName, $options);
 }
 
 /**
@@ -30,7 +30,7 @@ function item_type_elements()
     $item = get_current_item();
     $elements = $item->getItemTypeElements();
     foreach ($elements as $element) {
-        $elementText[$element->name] = item(ELEMENT_SET_ITEM_TYPE . ": " . $element->name);
+        $elementText[$element->name] = item(ELEMENT_SET_ITEM_TYPE, $element->name);
     }
     return $elementText;
 }
@@ -99,12 +99,12 @@ function display_element_set_form_for_item($item, $elementSetName)
  **/
 function item_citation()
 {
-    if ($citation = item('Additional Item Metadata: Citation')) {
+    if ($citation = item('Additional Item Metadata', 'Citation')) {
 		return $citation;
 	}
     
-    $creator    = item('Dublin Core: Creator');
-    $title      = item('Dublin Core: Title');
+    $creator    = item('Dublin Core', 'Creator');
+    $title      = item('Dublin Core', 'Title');
     $siteTitle  = get_option('site_title');
     $itemId     = item('id');
     $accessDate = date('F j, Y');
@@ -327,7 +327,7 @@ function admin_plugin_footer()
  * 
  * $item = get_item_by_id(4);
  * set_current_item($item); // necessary to use item() and other similar theme API calls.
- * echo item('Dublin Core: Title');
+ * echo item('Dublin Core', 'Title');
  * 
  * @param integer
  * @return Item|null
@@ -479,7 +479,7 @@ function display_random_featured_item($withImage=false)
 	       $html .= link_to_square_thumbnail($featuredItem, array('class'=>'image'));
 	   }
 	   // Grab the 1st Dublin Core description field (first 150 characters)
-	   $itemDescription = item('Dublin Core: Description', array('snippet'=>150));
+	   $itemDescription = item('Dublin Core', 'Description', array('snippet'=>150));
 	   $html .= '<p class="item-description">' . $itemDescription . '</p>';
 	} else {
 	   $html .= '<p>You have no featured items.</p>';

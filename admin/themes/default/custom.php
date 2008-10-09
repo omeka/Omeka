@@ -16,7 +16,7 @@ function utf8_htmlentities($value)
 //     return '#' . $id;
 // }
 
-add_filter(array('Display', 'Item', 'Title'), 'show_untitled_items');
+add_filter(array('Display', 'Item', 'Title', 'Dublin Core'), 'show_untitled_items');
 
 function show_untitled_items($title)
 {

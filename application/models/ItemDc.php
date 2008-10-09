@@ -21,7 +21,7 @@ class ItemDc
         // Iterate throught the DCMES.
         foreach ($dcElements as $element) {
             $elementName = $element->name;
-            if ($text = item("Dublin Core: $elementName", array('all'=>true))) {
+            if ($text = item('Dublin Core', $elementName, 'all')) {
                 foreach ($text as $k => $v) {
                     if (!empty($v)) {
                         $xml .= "\n" . '<dc:' . strtolower($elementName) . '><![CDATA[' 

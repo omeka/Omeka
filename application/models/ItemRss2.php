@@ -66,7 +66,7 @@ class ItemRss2
     {        
         $entry = array();
         set_current_item($item);
-        $entry['title'] = strip_tags(item('Dublin Core: Title'));
+        $entry['title'] = strip_tags(item('Dublin Core', 'Title'));
         $entry['description'] = $this->buildDescription($item);
         
         //Permalink (this is kind of duplicated elsewhere)

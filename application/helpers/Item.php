@@ -1,10 +1,10 @@
-<?php 
+<?php
 /**
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package OmekaThemes
- **/
+ */
 
 /**
  * Helper used to retrieve metadata for an item.
@@ -13,152 +13,115 @@
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
- **/
+ */
 class Omeka_View_Helper_Item
 {
-    protected $_item;
+    private $_item;
+    private $_elementSetName;
+    private $_elementName;
+    private $_options;
+    private $_text;
     
     /**
-     * Retrieve metadata for a specific field (henceforth known as 'element') for
-     * an item.  The simplest form of this function will retrieve a single text 
-     * value for a given field, e.g. item('Dublin Core: Title') will return a string corresponding
-     * to the first available title.  There are a number of options that can be
-     * passed via an array as the second argument.
+     * Retrieve a specific piece of an item's metadata.
      * 
-     * @param Item Database record representing the item to retrieve the field 
-     * data from.
-     * @param string Field name to retrieve, which can be the name of an element 
-     *     or a selected field name related to items.
-     * @param mixed Options for formatting the metadata for display.
-     * Default options: 
-     *  'delimiter' => return the entire set of metadata as a string, where each 
-     *      entry is separated by the string delimiter.
-     *  'index' => return the metadata entry at the specific index (starting)
-     *      from 0. 
-     *  'no_filter' => return the set of metadata without running any of the 
-     *      filters.
-     *  'snippet' => trim the length of each piece of text to the given length
-     *      (integer).
-     *  'all' => if set to true, this will retrieve an array containing all values
-     *      for a single element rather than a specific value.
+     * The most common use of this method is to retrieve a single text value for 
+     * a given element, e.g. item([Item Record], 'Dublin Core, 'Title') will 
+     * return a string corresponding to the first available 'Title' in the 
+     * 'Dublin Core' element set. For item metadata not belonging to an element 
+     * set (e.g. id, date added, and public), use the simple syntax: 
+     * item([Item Record], 'id'). There are a number of options that can be 
+     * passed via an array as the fourth argument.
+     * 
+     * @param Item Database record representing the item from which to retrieve 
+     * field data.
+     * @param string The element set name of a specified element OR the special 
+     * value of the item record.
+     * @param string The element belonging to the specified element set. If this 
+     * parameter is not set, or if it is null, the code assumes the previous 
+     * parameter is a special value.
+     * @param array|string|integer Options for formatting the metadata for 
+     * display.
+     * Default array options:
+     *   'delimiter' => Return the entire set of metadata as a string, where 
+     *       each entry is separated by the string delimiter.
+     *   'index' => Return the metadata entry at the specific integer index, 
+     *       starting at 0.
+     *   'no_filter' => If set to true, return the set of metadata without 
+     *       running any of the filters.
+     *   'snippet' => Trim the length of each piece of text to the given integer 
+     *       length.
+     *   'all' => If set to true, this will retrieve an array containing all 
+     *       values for a single element rather than a specific value.
+     * Default string option:
+     *     Passing the string 'all' will retrieve an array containing all values 
+     *     for a single element rather than a specific value.
+     * Default integer option:
+     *     Passing an integer will return the metadata entry at the specific 
+     *     integer index, starting at 0.
      *
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
-     **/
-    public function item($item, $field, $options = array())
+     */
+    public function item(Item $item, 
+                         $elementSetName, 
+                         $elementName = null, 
+                         $options     = array())
     {
-        $this->_item = $item;
+        // Set this object's properties.
+        $this->_item           = $item;
+        $this->_elementSetName = $elementSetName;
+        $this->_elementName    = $elementName;
+        $this->_options        = $options;
         
-        //Convert the shortcuts for the options into a proper array
-        $options = $this->_getOptions($options);
+        // Convert the shortcuts for the options into a proper array.
+        $this->_setOptions();
         
-        // Retrieve the ElementText records (or other values, like strings,
-        // integers, booleans) that correspond to all the element text for the
-        // given field.
-        $text = $this->_getElementText($field, $options);
+        // Set the initial text value, which is either an array of ElementText 
+        // records, or a special value string.
+        $this->_setText();
         
-        // Apply any plugin filters to the text prior to escaping it to valid 
-        // HTML.
-        if (!isset($options['no_filter'])) {
-            $text = $this->_filterElementText($text, $field, $options);
-        }
+        // Apply plugin filters to the text prior to making a snippet or 
+        // escaping text HTML.
+        $this->_filterText();
         
-        // Apply the 'snippet' option before escaping the HTML. If applied after
+        // Apply the snippet option before escaping text HTML. If applied after
         // escaping the HTML, this may result in invalid markup.
-        if ($snippetLength = (int) @$options['snippet']) {
-            $text = $this->_formatSubstring($text, $snippetLength);
-        }
-                
-        // Escape the non-HTML text if necessary.
-        $text = $this->_escapeForHtml($text, $options);
+        $this->_snippetText();
         
-        // Extract the text from the records into an array.
-        // This has to happen after escaping the HTML because the 'html' flag is
-        // located within the ElementText record.
-        if (is_array($text) && reset($text) instanceof ElementText) {
-           $text = $this->_extractTextFromRecords($text); 
-        }
+        // Escape the non-HTML text if necessary.
+        $this->_escapeTextHtml();
+        
+        // Extract the text from the records into an array. This has to happen 
+        // after escaping text HTML because the html flag is located within the 
+        // ElementText record.
+        $this->_extractText();
         
         // Apply additional formatting options on that array, including 
         // 'delimiter' and 'index'.
         
         // Return the join'd text
-        if (isset($options['delimiter'])) {
-            return join((string) $options['delimiter'], (array) $text);
+        if (isset($this->_options['delimiter'])) {
+            return join((string) $this->_options['delimiter'], (array) $this->_text);
         }
         
-        // Return the text at that index (suppress errors)
-        if (isset($options['index'])) {
-            return @$text[$options['index']];
+        // Return the text at that index.
+        if (is_array($this->_text) && isset($this->_options['index'])) {
+            // Return null if the index doesn't exist for the item.
+            if (!isset($this->_text[$this->_options['index']])) {
+                return null;
+            }
+            return $this->_text[$this->_options['index']];
         }
         
-        // If the 'all' option is set, return the entire array of escaped data
-        if (isset($options['all'])) {
-            return $text;
-        } elseif (isset($options['index'])) {
-            // Return the value at a specific index.
-            return @$text[$options['index']];
-        } 
-        
-        // Return the first entry in the array or the whole thing if it's a string.
-        return is_array($text) ? reset($text) : $text;
-    }
-    
-    protected function _formatSubstring($texts, $length)
-    {
-        // Integers get no formatting
-        if (is_int($texts)) {
-            return $texts;
-        } else if (is_string($texts)) {
-            return snippet($texts, 0, $length);
-        } else if (is_array($texts)) {
-            foreach ($texts as $textRecord) {
-                $textRecord->setText(snippet($textRecord->getText(), 0, $length));
-            }   
-            return $texts;         
+        // If the all option is set, return the entire array of escaped data
+        if (is_array($this->_text) && isset($this->_options['all'])) {
+            return $this->_text;
         }
         
-        throw new Exception('Cannot retrieve a text snippet for a data type that is a '. gettype($texts));
-    }
-    
-    protected function _extractTextFromRecords($text)
-    {
-        $extracted = array();
-        foreach ($text as $key => $record) {
-            $extracted[$key] = $record->getText();
-        }
-        return $extracted;
-    }
-    
-    /**
-     *  This applies all filters defined for the 'html_escape' filter. This will
-     *  only be applied to string values or element text records that are not
-     *  marked as HTML. If they are marked as HTML, then there should be no
-     *  escaping because the values are already stored in the database as fully
-     *  valid HTML markup. Any errors resulting from displaying that HTML is the
-     *  responsibility of the administrator to fix.
-     * 
-     * @param string|array
-     * @return string|array
-     **/
-    protected function _escapeForHtml($texts, array $options)
-    {   
-        // The assumption here is that all string values (item type name,
-        // collection name, etc.) will need to be escaped.
-        if (is_string($texts)) {
-            return apply_filters('html_escape', $texts);
-        } else if (is_array($texts)) {
-            foreach ($texts as $record) {
-                 if (!$record->isHtml()) {
-                     $record->setText(apply_filters('html_escape', $record->getText()));
-                 }
-             }
-             return $texts;
-        } else {
-            // Just return the text as it is if it is neither a string nor an 
-            // array.
-            return $texts;
-        }
+        // Return the first entry in the array or the whole thing if it's a 
+        // string.
+        return is_array($this->_text) ? reset($this->_text) : $this->_text;
     }
     
     /**
@@ -166,92 +129,51 @@ class Omeka_View_Helper_Item
      * which functions as a handy shortcut for theme writers.  This converts
      * the short form of the options into its proper array form.
      * 
-     * @param mixed
-     * @return array
+     * @return void
      **/
-    protected function _getOptions($options)
+    private function _setOptions()
     {
+        $options = $this->_options;
         if (is_integer($options)) {
-            return array('index' => $options);
-        } else if (is_string($options)) {
-            return array('delimiter' => $options);
-        }
-        
-        return (array) $options;
-    }
-    
-    /**
-     * Apply filters a set of element text.
-     * 
-     * @todo
-     * @param array Set of element text.
-     * values.
-     * @return array Same structure but run through filters.
-     **/
-    protected function _filterElementText($text, $field, $options)
-    {
-        // Build the name of the filter to use. This will end up looking like: 
-        // array('Display', 'Item', 'Title', 'Dublin Core') or something similar.
-        $filterName = array('Display', 'Item', $field);
-        if (isset($options['element_set'])) {
-            $filterName[] = (string) $options['element_set'];
-        }
-        
-        if (is_array($text)) {
-            
-            // What to do if there is no text to filter?  For now, filter an 
-            // empty string.
-            if (empty($text)) {
-                $text[] = new ElementText;
-            }
-            
-            // This really needs to be an instance of ElementText for the following to work.
-            if (!(reset($text) instanceof ElementText)) {
-                throw new Exception('The provided text needs to be an instance of ElementText.');
-            }
-            
-            // Apply the filters individually to each text record.
-            foreach ($text as $record) {
-                // This filter receives the Item record as well as the 
-                // ElementText record
-                $record->setText(apply_filters($filterName, $record->getText(), $item, $record));
-            }
+            $this->_options = array('index' => $options);
+        } else if ('all' == $options) {
+            $this->_options = array('all' => true);
         } else {
-            $text = apply_filters($filterName, $text, $item, $record);
-        }     
-        
-        return $text;
+            $this->_options = (array) $options;
+        }
     }
     
-    /**
-     * List of fields besides elements that an item can display.
-     * 
-     * @param string
-     * @return boolean
-     **/
-    protected function _hasOtherField($field)
+    private function _setText()
     {
-        return in_array(strtolower($field),
-            array('id', 
-                  'featured', 
-                  'public', 
-                  'item type name', 
-                  'date added', 
-                  'collection name'));
+        $elementSetName = $this->_elementSetName;
+        $elementName = $this->_elementName;
+        
+        // If $elementName is null we assume that $elementSetName is actually a 
+        // special value, e.g. id, item type name, date added, etc.
+        if (null === $elementName) {
+            $text = $this->_getSpecialValue($elementSetName);
+            
+        // Retrieve the ElementText records (or other values, like strings,
+        // integers, booleans) that correspond to all the element text for the
+        // given field.
+        } else {
+            $text = $this->_getElementText($elementSetName, $elementName);
+        }
+        $this->_text = $text;
     }
     
     /**
-     * Retrieve the value of any field for an item that does not correspond to
-     * an Element record.  Examples include the database ID of the item, the
+     * Retrieve a special value of an item that does not correspond to an 
+     * Element record. Examples include the database ID of the item, the
      * name of the item type, the name of the collection, etc.
      * 
      * @param string
-     * @param Item
      * @return mixed
      **/
-    protected function _getOtherField($field, $item)
+    private function _getSpecialValue($specialValue)
     {
-        switch (strtolower($field)) {
+        $item = $this->_item;
+        switch (strtolower($specialValue)) {
             case 'id':
                 return $item->id;
                 break;
@@ -271,50 +193,14 @@ class Omeka_View_Helper_Item
                 return $item->public;
                 break;
             default:
-                # code...
+                throw new Exception("'$specialValue' is an invalid special value.");
                 break;
         }
     }
     
-    /**
-     * Parse the name of the field that is passed in, which should be in the form
-     * Element Set: Element Name.  If the phrase contains more than one colon,
-     * it will assume that everything after the first colon is the name of the 
-     * element.  Behavior is undefined for element set names containing colons.
-     * 
-     * @param string
-     * @return array Element set name and Element name
-     **/
-    protected function _parseFieldName($field)
-    {
-        $fields = explode(':', $field);
-        
-        if (count($fields) <= 1) {
-            throw new Exception('"' . $field . '" does not follow the "Element Set: Element Name" convention!');
-        }
-        
-        $elementSet = trim(array_shift($fields));
-        $elementName = trim(join(':', $fields));
-        
-        return array($elementSet, $elementName);
-    }
-    
-    /**
-     * Retrieve the set of element text for the item.
-     * 
-     * @param string
-     * @return array|string
-     **/
-    protected function _getElementText($field, array $options)
+    private function _getElementText($elementSetName, $elementName)
     {
         $item = $this->_item;
-        
-        // Any built-in fields or special naming schemes
-        if ($this->_hasOtherField($field)) {
-            return $this->_getOtherField($field, $item);
-        }        
-        
-        list($elementSetName, $elementName) = $this->_parseFieldName($field);
         
         $elementTexts = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
         
@@ -328,5 +214,126 @@ class Omeka_View_Helper_Item
         }
         
         return $elementTexts;
+    }
+    
+    /**
+     * Apply filters a set of element text.
+     * 
+     * @return void
+     **/
+    private function _filterText()
+    {
+        if (isset($this->_options['no_filter'])) {
+            return;
+        }
+        
+        $text = $this->_text;
+        $elementSetName = $this->_elementSetName;
+        $elementName = $this->_elementName;
+        
+        // Build the name of the filter to use. This will end up looking like: 
+        // array('Display', 'Item', 'Title', 'Dublin Core') or something similar.
+        $filterName = array('Display', 'Item');
+        if (null === $elementName) {
+            $filterName[] = $elementSetName;
+        } else {
+            $filterName[] = $elementName;
+            $filterName[] = $elementSetName;
+        }
+        
+        if (is_array($text)) {
+            
+            // What to do if there is no text to filter?  For now, filter an 
+            // empty string.
+            if (empty($text)) {
+                $text[] = new ElementText;
+            }
+            
+            // This really needs to be an instance of ElementText for the 
+            // following to work.
+            if (!(reset($text) instanceof ElementText)) {
+                throw new Exception('The provided text needs to be an instance of ElementText.');
+            }
+            
+            // Apply the filters individually to each text record.
+            foreach ($text as $record) {
+                // This filter receives the Item record as well as the 
+                // ElementText record
+                $record->setText(apply_filters($filterName, $record->getText(), $item, $record));
+            }
+        } else {
+            $text = apply_filters($filterName, $text, $item, $record);
+        }     
+        
+        $this->_text = $text;
+    }
+    
+    private function _snippetText()
+    {
+        if (!isset($options['snippet'])) {
+            return;
+        }
+        
+        $length = (int) $this->_options['snippet'];
+        $text = $this->_text;
+        
+        // Integers get no formatting
+        if (is_int($text)) {
+            $this->_text = $text;
+        } else if (is_string($text)) {
+            $this->_text = snippet($text, 0, $length);
+        } else if (is_array($text)) {
+            foreach ($text as $textRecord) {
+                $textRecord->setText(snippet($textRecord->getText(), 0, $length));
+            }   
+            $this->_text = $text;         
+        } else {
+            throw new Exception('Cannot retrieve a text snippet for a data type that is a '. gettype($text));
+        }
+    }
+    
+    /**
+     *  This applies all filters defined for the 'html_escape' filter. This will
+     *  only be applied to string values or element text records that are not
+     *  marked as HTML. If they are marked as HTML, then there should be no
+     *  escaping because the values are already stored in the database as fully
+     *  valid HTML markup. Any errors resulting from displaying that HTML is the
+     *  responsibility of the administrator to fix.
+     * 
+     * @return void
+     */
+    private function _escapeTextHtml()
+    {   
+        $text = $this->_text;
+        
+        // The assumption here is that all string values (item type name, 
+        // collection name, etc.) will need to be escaped.
+        if (is_string($text)) {
+            $this->_text = apply_filters('html_escape', $text);
+        } else if (is_array($text)) {
+            foreach ($text as $record) {
+                 if (!$record->isHtml()) {
+                     $record->setText(apply_filters('html_escape', $record->getText()));
+                 }
+             }
+             $this->_text = $text;
+        } else {
+            // Just return the text as it is if it is neither a string nor an 
+            // array.
+            $this->_text = $text;
+        }
+    }
+    
+    private function _extractText()
+    {
+        if (!is_array($this->_text) || !(reset($this->_text) instanceof ElementText)) {
+            return;
+        }
+        $text = $this->_text;
+        $extractedText = array();
+        foreach ($text as $key => $record) {
+            $extractedText[$key] = $record->getText();
+        }
+        $this->_text = $extractedText;
     }
 }

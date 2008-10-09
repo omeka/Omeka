@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Edit Item', 'body_class'=>'items primary','content_class' => 'vertical-nav'));?>
-<h1>Edit &#8220;<?php echo item('Dublin Core: Title'); ?>&#8221;</h1>
+<h1>Edit &#8220;<?php echo item('Dublin Core', 'Title'); ?>&#8221;</h1>
 <script type="text/javascript">
 
 Event.observe(window,'load',function(){
