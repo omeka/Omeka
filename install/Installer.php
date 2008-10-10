@@ -203,6 +203,7 @@ class Installer
     {
         $lengthValidator = new Zend_Validate_StringLength(4, 30);
         $validation = array('administrator_email'         => "EmailAddress",
+                            'super_email'                 => "EmailAddress",
                             'thumbnail_constraint'        => "Digits",
                             'fullsize_constraint'         => "Digits",
                             'square_thumbnail_constraint' => "Digits",
