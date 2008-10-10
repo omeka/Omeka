@@ -271,6 +271,13 @@ class User extends Omeka_Record {
         return true;
     }
     
+    protected function afterDelete()
+    {
+        if ($this->entity_id) {
+            $this->Entity->delete();
+        }
+    }
+    
     /* Generate password. (i.e. jachudru, cupheki) */
     // http://www.zend.com/codex.php?id=215&single=1
     protected function generatePassword($length) 
