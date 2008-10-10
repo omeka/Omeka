@@ -551,6 +551,29 @@ function item_has_tags()
     return (count($item->Tags) > 0);
 }
 
+/**
+ * Determine whether or not a specific element uses HTML.  By default this will
+ * test the first element text, though it is possible to test against a different
+ * element text by modifying the $index parameter.
+ * 
+ * @param string
+ * @param string
+ * @param integer
+ * @param Item|null
+ * @return boolean
+ **/
+function item_field_uses_html($elementSetName, $elementName, $index=0, $item = null)
+{
+    if (!$item) {
+        $item = get_current_item();
+    }
+    
+    $textRecords = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
+    $textRecord = @$textRecords[$index];
+    
+    return ($textRecord instanceof ElementText and $textRecord->isHtml());
+}
+
 function item_image($imageType, $props = array(), $index = 0, $item = null)
 {
     if (!$item) {
