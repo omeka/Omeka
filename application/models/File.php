@@ -524,7 +524,11 @@ class File extends Omeka_Record {
                 throw new Exception("Cannot retrieve metadata for the element called '$element->name'!");
             }
             $elementText = $helperClass->$helperFunction();
-            $this->addTextForElement($element, $elementText);
+            
+            // Don't bother saving element texts with null values.
+            if ($elementText) {
+                $this->addTextForElement($element, $elementText);
+            }
         }        
     }
     
