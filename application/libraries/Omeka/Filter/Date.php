@@ -30,17 +30,30 @@ class Omeka_Filter_Date
     public function filter($year, $month, $day)
     {
         $date = array();
-        $date[0] = !empty($year)  ? str_pad($year, 4, '0', STR_PAD_LEFT)  : '0000';
-        $date[1] = !empty($month) ? str_pad($month, 2, '0', STR_PAD_LEFT) : '00';
-        $date[2] = !empty($day)   ? str_pad($day, 2, '0', STR_PAD_LEFT)   : '00';        
-        
-        $date = implode('-', $date);
-        
-        if ($date == '0000-00-00') {
-            return null;
+ 
+        if (!empty($year)) {
+            $date[0] = str_pad($year, 4, '0', STR_PAD_LEFT);
         }
+
+        if (!empty($month)) {
+            $date[1] = str_pad($month, 2, '0', STR_PAD_LEFT);
+        } else if (empty($month) and !empty($day)) {
+            // If the month is empty but the day is not, it should put an empty
+            // string in there as a place-holder.
+            $date[1] = '';
+        }        
         
-        return $date;
+        if (!empty($day)) {
+            $date[2] = str_pad($day, 2, '0', STR_PAD_LEFT);
+        }         
+         
+        $date = implode('-', $date);
+
+        if (empty($date)) {
+             return null;
+        } else {
+            return $date;
+        }
     }
     
     /**

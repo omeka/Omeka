@@ -480,46 +480,30 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $elementDataType = $elementRecord->data_type_name;
         // Start out as valid by default.
         $isValid = true;
-        switch ($elementDataType) {
-            // Tiny Text and Text are always valid?
-            case 'Tiny Text':
-            case 'Text':
-                break;
-            case 'Integer':
-                $isValid = (empty($textValue) || is_numeric($textValue));
-                break;
-            case 'Date':
-                $isValid = (empty($textValue) || Zend_Validate::is($textValue, 'Date'));
-                break;
-            case 'Date Range':
-                // Start and end dates are separated by a single whitespace.
-                // One or both of these dates can be empty, but if they aren't 
-                // empty then they have to validate as dates.
-                list($startDate, $endDate) = explode(' ', $textValue);
-                $isValid = (empty($startDate) || Zend_Validate::is($startDate, 'Date')) 
-                            && (empty($endDate) || Zend_Validate::is($endDate, 'Date'));
-                break;
-            case 'Date Time':
-                list($date, $time) = explode(' ', $textValue);
-                list($hour, $minute, $second) = explode(':', $time);
-                
-                $isEmpty  = empty($textValue);
-                $isDate   = Zend_Validate::is($date, 'Date');
-                // Match 00-23
-                $isHour   = preg_match('/^(?:[0-1][0-9])|(?:2[0-3])$/', $hour);
-                // Match 00-59
-                $isMinute = preg_match('/^(?:[0-4][0-9])|(?:5[0-9])$/', $minute);
-                // Match 00-59
-                $isSecond = preg_match('/^(?:[0-4][0-9])|(?:5[0-9])$/', $second);
-                $isTime = ($isHour && $isMinute && $isSecond);
-                $isDateTime = ($isDate && $isTime);
-                
-                $isValid = ($isEmpty || $isDateTime);
-                break;
-            default:
+        $validators = array(
+            'Tiny Text' => null,
+            'Text'      => null,
+            'Integer'   => 'Zend_Validate_Int',
+            'Date'      => 'Omeka_Validate_PartialDate',
+            'Date Range'=> 'Omeka_Validate_PartialDateRange',
+            'Date Time' => 'Omeka_Validate_DateTime');
+        
+        // Empty values validate by default b/c it just means they won't
+        // be saved to the database.    
+        if (!empty($textValue)) {
+            // Even for plugins hooking into the validation, each element must
+            // have one of these default data types.
+            if (!array_key_exists($elementDataType, $validators)) {
                 throw new Exception("Cannot validate an element of data type '$elementDataType'!");
-                break;
+            }
+            $validatorClass = $validators[$elementDataType];
+            // Text and Tiny Text have no default validation so skip those.
+            if ($validatorClass) {
+                $validator = new $validatorClass;
+                $isValid = $validator->isValid($textValue);
+            }
         }
+
         // Hook into this for plugins.
         // array('Validate', 'Item', 'Title', 'Dublin Core')
         // add_filter(array('Validate', 'Item', 'Title', 'Dublin Core'), 'my_filter_name');

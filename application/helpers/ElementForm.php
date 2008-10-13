@@ -269,12 +269,12 @@ class Omeka_View_Helper_ElementForm
         
         $html .= '<div class="dateinput">';
     	
-    	$html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4'));
-    	$html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2'));
+    	$html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4')) . '/';
+    	$html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2')) . '/';
     	$html .= $this->view->formText($inputNameStem . '[day]', $day, array('class'=>'textinput', 'size'=>'2'));
     	
-        $html .= $this->view->formText($inputNameStem . '[hour]', $hour, array('class'=>'textinput', 'size'=>'2'));
-    	$html .= $this->view->formText($inputNameStem . '[minute]', $minute, array('class'=>'textinput', 'size'=>'2'));
+        $html .= $this->view->formText($inputNameStem . '[hour]', $hour, array('class'=>'textinput', 'size'=>'2')) . ':';
+    	$html .= $this->view->formText($inputNameStem . '[minute]', $minute, array('class'=>'textinput', 'size'=>'2')) . ':';
     	$html .= $this->view->formText($inputNameStem . '[second]', $second, array('class'=>'textinput', 'size'=>'2'));
     	
     	$html .= '</div>';
