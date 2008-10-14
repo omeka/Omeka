@@ -86,3 +86,5 @@
     <?php endif; ?>
     </div>
 </fieldset>
+
+<?php fire_plugin_hook('admin_append_to_item_types_form', $itemtype); ?>

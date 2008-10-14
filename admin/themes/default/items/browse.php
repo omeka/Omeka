@@ -10,6 +10,8 @@
 	    'List View' => current_uri(array('view'=>'simple')), 
 	    'Detailed View' => current_uri(array('view'=>'detailed'))
 	    );
+	
+	$section_nav = apply_filters('admin_navigation_items_browse', $section_nav, $items);
 				
 	echo nav($section_nav);
 ?>
@@ -67,7 +69,9 @@
 	<?php items_search_form(array('id'=>'search'), uri('items/browse')); ?>
 <?php endif; ?>
 
-<?php fire_plugin_hook('append_to_items_browse', $items); ?>
+<?php fire_plugin_hook('append_to_items_browse', $items); // Deprecated in 0.10 ?>
+
+<?php fire_plugin_hook('admin_append_to_items_browse_primary', $items); ?>
 
 </div>
 <?php foot(); ?>

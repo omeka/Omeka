@@ -34,7 +34,10 @@ foreach (array('Collection', 'Files', 'Tags', 'Miscellaneous') as $tabName) {
     }
     $tabs[$tabName] = ob_get_contents();
     ob_end_clean();
-} ?>
+} 
+
+$tabs = apply_filters('admin_items_form_tabs', $tabs, $item);
+?>
 
 * <!-- Create the sections for the various element sets -->
 

@@ -86,3 +86,5 @@
 </div>	
 
 </fieldset>
+
+<?php fire_plugin_hook('admin_append_to_collections_form', $collection); ?>

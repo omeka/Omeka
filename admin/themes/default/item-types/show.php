@@ -35,5 +35,7 @@
 		<?php endif;?>
 		
 	</div>
+	
+	<?php fire_plugin_hook('admin_append_to_item_types_show_primary', $itemtype); ?>
 </div>
 <?php foot();?>

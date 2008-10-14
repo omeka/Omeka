@@ -21,5 +21,6 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+<?php fire_plugin_hook('admin_append_to_item_types_browse_primary', $itemtypes); ?>
 </div>
 <?php foot(); ?>

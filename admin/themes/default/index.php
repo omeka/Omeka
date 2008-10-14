@@ -66,8 +66,8 @@
 					</dd>
 			<?php endif; ?>
 			<p class="help">Need help with Omeka? Visit our <a href="http://omeka.org/codex/">codex</a> for detailed instructions for using and customizing our application.</p>
+			<?php fire_plugin_hook('admin_append_to_dashboard_primary'); ?>
 			</div>
-			
 		</div>
 		
 		<div id="secondary">
@@ -102,5 +102,7 @@
 				<h2>Recent Tags</h2>
 				<?php echo tag_cloud(recent_tags(), uri('items/browse/')); ?>
 			</div>
+			
+			<?php fire_plugin_hook('admin_append_to_dashboard_secondary'); ?>
 		</div>
 <?php foot(); ?>

@@ -26,5 +26,7 @@
 	<h4>Total Number of Items in Collection: <?php echo total_items_in_collection();?></h4>
 	
 </div>
+
+<?php fire_plugin_hook('admin_append_to_collections_show_primary', $collection); ?>
 </div>
 <?php foot(); ?>

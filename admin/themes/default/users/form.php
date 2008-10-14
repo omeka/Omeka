@@ -68,3 +68,4 @@
 <?php endif; ?>
 
 </fieldset>
+<?php fire_plugin_hook('admin_append_to_users_form', $user); ?>

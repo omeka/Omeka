@@ -1,28 +1,3 @@
-<div class="field" id="add-more-files">
-<label for="add_num_files">Add Files</label>
-	<div class="files">
-	<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
-	<?php 
-	echo text(array('name'=>'add_num_files','size'=>2),$numFiles);
-	echo submit('add_more_files', 'Add this many files'); 
-	?>
-	</div>
-</div>
-
-<div class="field" id="file-inputs">
-<!-- MAX_FILE_SIZE must precede the file input field -->
-	<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-	<label>Find a File</label>
-		
-	<?php for($i=0;$i<$numFiles;$i++): ?>
-	<div class="files inputs">
-		<input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />			
-	</div>
-	<?php endfor; ?>
-</div>
-
-<?php fire_plugin_hook('append_to_item_form_upload', $item); ?>
-
 <?php if ( item_has_files() ): ?>
 	<div class="label">Edit File Metadata</div>
 	<div id="file-list">
@@ -51,3 +26,29 @@
 	</table>
 	</div>
 <?php endif; ?>
+
+<div class="field" id="add-more-files">
+<label for="add_num_files">Add Files</label>
+	<div class="files">
+	<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
+	<?php 
+	echo text(array('name'=>'add_num_files','size'=>2),$numFiles);
+	echo submit('add_more_files', 'Add this many files'); 
+	?>
+	</div>
+</div>
+
+<div class="field" id="file-inputs">
+<!-- MAX_FILE_SIZE must precede the file input field -->
+	<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+	<label>Find a File</label>
+		
+	<?php for($i=0;$i<$numFiles;$i++): ?>
+	<div class="files inputs">
+		<input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />			
+	</div>
+	<?php endfor; ?>
+</div>
+
+<?php fire_plugin_hook('append_to_item_form_upload', $item); // Deprecated in 0.10 ?>
+<?php fire_plugin_hook('admin_append_to_items_form_files', $item); ?>

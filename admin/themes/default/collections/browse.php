@@ -53,5 +53,7 @@
 	    <p>There are no collections in your archive. Why don't you <a href="<?php echo uri('collections/add'); ?>" >add one</a>?</p>
     	
 	<?php endif; ?>
+	
+	<?php fire_plugin_hook('admin_append_to_collections_browse_primary', $collections); ?>
 </div>		
 <?php foot(); ?>

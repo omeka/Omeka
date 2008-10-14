@@ -71,8 +71,10 @@ echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
 </div>
 
 <div id="additional-metadata">
-	<?php fire_plugin_hook('append_to_item_show', $item); ?>
+	<?php fire_plugin_hook('append_to_item_show', $item); // Deprecated in 0.10 ?>
 </div>
+
+<?php fire_plugin_hook('admin_append_to_items_show_primary', $item); ?>
 
 </div>
 <div id="secondary">
@@ -135,5 +137,7 @@ echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
         	<?php endif;?>
         	</div>
 	</div>
+	
+	<?php fire_plugin_hook('admin_append_to_items_show_secondary', $item); ?>
 </div>
 <?php foot();?>
