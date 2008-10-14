@@ -111,8 +111,6 @@ INSERT INTO `{$db->prefix}elements` VALUES (48, 1, 2, 1, 5, 'Source', 'A related
 INSERT INTO `{$db->prefix}elements` VALUES (49, 1, 2, 1, 2, 'Subject', 'The topic of the resource. Typically, the subject will be represented using keywords, key phrases, or classification codes. Recommended best practice is to use a controlled vocabulary. To describe the spatial or temporal topic of the resource, use the Coverage element.');
 INSERT INTO `{$db->prefix}elements` VALUES (50, 1, 2, 1, 1, 'Title', 'A name given to the resource. Typically, a Title will be a name by which the resource is formally known.');
 INSERT INTO `{$db->prefix}elements` VALUES (51, 1, 2, 1, 13, 'Type', 'The nature or genre of the resource. Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMITYPE]. To describe the file format, physical medium, or dimensions of the resource, use the Format element.');
-INSERT INTO `{$db->prefix}elements` VALUES (55, 2, 1, 7, 5, 'Provenance', '');
-INSERT INTO `{$db->prefix}elements` VALUES (56, 2, 1, 7, 6, 'Citation', '');
 INSERT INTO `{$db->prefix}elements` VALUES (58, 3, 1, 4, 1, 'Additional Creator', '');
 INSERT INTO `{$db->prefix}elements` VALUES (59, 3, 1, 4, 2, 'Transcriber', '');
 INSERT INTO `{$db->prefix}elements` VALUES (60, 3, 1, 4, 3, 'Producer', '');
@@ -166,7 +164,6 @@ INSERT INTO `{$db->prefix}element_sets` VALUES (3, 2, 'Item Type Metadata', 'The
 INSERT INTO `{$db->prefix}element_sets` VALUES (4, 3, 'Omeka Legacy File', 'The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (5, 3, 'Omeka Image File', 'The metadata element set that was included in the `files_images` table in previous versions of Omeka. These elements are common to all image files.');
 INSERT INTO `{$db->prefix}element_sets` VALUES (6, 3, 'Omeka Video File', 'The metadata element set that was included in the `files_videos` table in previous versions of Omeka. These elements are common to all video files.');
-INSERT INTO `{$db->prefix}element_sets` VALUES (7, 2, 'Additional Item Metadata', 'The additional item metadata element set, consisting of all item elements created by an administrator and not assigned to an item type, and item elements created by plugins and not assigned to an item type or other element set.');
 
 -- --------------------------------------------------------
 
