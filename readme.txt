@@ -7,4 +7,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Parts of Omeka include a modified version of Zend Framework relicensed under the GPL http://www.zend.com, getID3 http://getid3.sourceforge.net/, Prototype http://www.prototypejs.org/, and Script.aculo.us http://script.aculo.us/.  Use and modifications of these libraries must comply with their respective licenses.
+Parts of Omeka include a modified version of Zend Framework relicensed under the GPL http://www.zend.com, getID3 http://getid3.sourceforge.net/, Prototype http://www.prototypejs.org/, Script.aculo.us http://script.aculo.us/, and Famfamfam Icons http://famfamfam.com.  Use and modifications of these libraries must comply with their respective licenses.
