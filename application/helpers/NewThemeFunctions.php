@@ -99,10 +99,6 @@ function display_element_set_form_for_item($item, $elementSetName)
  **/
 function item_citation()
 {
-    if ($citation = item('Additional Item Metadata', 'Citation')) {
-		return $citation;
-	}
-    
     $creator    = item('Dublin Core', 'Creator');
     $title      = item('Dublin Core', 'Title');
     $siteTitle  = get_option('site_title');
