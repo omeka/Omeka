@@ -81,7 +81,7 @@ class Omeka_Acl extends Zend_Acl
              $this->add($resource);
          }
 
-         $this->_resourceList = $resources;        
+         $this->_resourceList = array_merge($this->_resourceList, $resources);        
     }
     
     /**
