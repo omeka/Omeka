@@ -201,7 +201,8 @@ class Installer
     
     private function validateInstallForm()
     {
-        $lengthValidator = new Zend_Validate_StringLength(4, 30);
+        $usernameValidator = new Zend_Validate_StringLength(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH);
+        $passwordValidator = new Zend_Validate_StringLength(User::PASSWORD_MIN_LENGTH, User::PASSWORD_MAX_LENGTH);
         $validation = array('administrator_email'         => "EmailAddress",
                             'super_email'                 => "EmailAddress",
                             'thumbnail_constraint'        => "Digits",
@@ -209,8 +210,8 @@ class Installer
                             'square_thumbnail_constraint' => "Digits",
                             'per_page_admin'              => "Digits",
                             'per_page_public'             => "Digits",
-                            'username'                    => array('Alnum', $lengthValidator), 
-                            'password'                    => $lengthValidator); 
+                            'username'                    => array('Alnum', $usernameValidator), 
+                            'password'                    => $passwordValidator); 
         $filter = new Zend_Filter_Input(null, $validation, $_POST);
         
         // We got some errors

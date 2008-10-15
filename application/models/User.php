@@ -25,6 +25,11 @@ class User extends Omeka_Record {
     public $role;
     public $entity_id;
     
+    const USERNAME_MIN_LENGTH = 1;
+    const USERNAME_MAX_LENGTH = 30;
+    const PASSWORD_MIN_LENGTH = 6;
+    const PASSWORD_MAX_LENGTH = 40;
+    
     protected $_related = array('Entity'=>'getEntity');
     
     protected function getEntity()
@@ -148,7 +153,7 @@ class User extends Omeka_Record {
         }
         
         // Validate the username
-        if (strlen($this->username) < 1 or strlen($this->username) > 30) {
+        if (strlen($this->username) < self::USERNAME_MIN_LENGTH or strlen($this->username) > self::USERNAME_MAX_LENGTH) {
             $this->addError('username', "Username must be no more than 30 characters long");
         }
         
@@ -165,8 +170,8 @@ class User extends Omeka_Record {
         
         if (empty($pass)) {
             $this->addError('password', "Password must not be empty");
-        } else if (strlen($pass) < 6 or strlen($pass) > 40) {
-            $this->addError('password', "Password must be between 6 and 40 characters"); 
+        } else if (strlen($pass) < self::PASSWORD_MIN_LENGTH or strlen($pass) > self::PASSWORD_MAX_LENGTH) {
+            $this->addError('password', "Password must be between " . self::PASSWORD_MIN_LENGTH . " and " . self::PASSWORD_MAX_LENGTH . " characters"); 
         }
     }
     
