@@ -576,14 +576,19 @@ class File extends Omeka_Record {
             throw new Exception( 'File cannot be read!' );
         }
                 
-        //If we can use the browser mime_type instead of the ID3 extrapolation, do that
+        // If we can use the browser mime_type instead of the ID3 extrapolation, 
+        // do that
         $mime_type = $this->getMimeType();    
         
-        $id3 = $this->retrieveID3Info($path);
+        // Return if getid3 did not return a valid object.
+        if (!$id3 = $this->retrieveID3Info($path)) {
+            return;
+        }
         
         if ($this->mimeTypeIsAmbiguous($mime_type)) {
-            //If we can't determine MIME type via the browser, 
-            //we will use the ID3 data, but be warned that this may cause a memory error on large files
+            // If we can't determine MIME type via the browser, we will use the 
+            // ID3 data, but be warned that this may cause a memory error on 
+            // large files
             $mime_type = $id3->info['mime_type'];
         }
         
@@ -599,8 +604,9 @@ class File extends Omeka_Record {
             return;
         }
                 
-        // Figure out what kind of extraction strategy to use for retrieving the metadata from ID3.
-        // Current possibilities include either FilesImages or FilesVideos
+        // Figure out what kind of extraction strategy to use for retrieving the 
+        // metadata from ID3. Current possibilities include either FilesImages 
+        // or FilesVideos
         switch (current($elements)->set_name) {
             case 'Omeka Video File':
                 $extraction = 'FilesVideos';
@@ -634,10 +640,14 @@ class File extends Omeka_Record {
      **/
     private function retrieveID3Info($path)
     {
-        require_once 'getid3/getid3.php';
-        //Instantiate this third-party sheit
-        $id3 = new getID3;
+        // Do not extract metadata if the exif module is not loaded. This 
+        // applies to all files, not just files with Exif data -- i.e. images.
+        if (!extension_loaded('exif')) {
+            return false;
+        }
         
+        require_once 'getid3/getid3.php';
+        $id3 = new getID3;
         $id3->encoding = 'UTF-8';
         
         try {

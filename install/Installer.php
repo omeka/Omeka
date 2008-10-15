@@ -37,6 +37,7 @@ class Installer
         $this->checkMysqlVersion();
         $this->checkHtaccessFileExists();
         $this->checkRegisterGlobalsIsOff();
+        $this->checkExifModuleLoaded();
         $this->checkModRewriteEnabled();
         $this->checkArchiveDirectoriesWritable();
         if (count($this->errors)) {
@@ -159,6 +160,16 @@ class Installer
             parsed by Apache, which can cause any number of strange errors.  It 
             is recommended (but not required) that you disable register_globals 
             for your Omeka installation.";
+            $this->warnings[] = compact('header', 'msg');
+        }
+    }
+    
+    private function checkExifModuleLoaded()
+    {
+        if (!extension_loaded('exif')) {
+            $header = "'exif' module not loaded";
+            $msg = "Without the 'exif' module loaded into PHP, Exif data 
+            cannot be automatically extracted from uploaded images.";
             $this->warnings[] = compact('header', 'msg');
         }
     }
