@@ -369,8 +369,8 @@ function nav(array $links) {
 	$nav = '';
 	foreach( $links as $text => $link )
 	{		
-		//$nav .= "<li".(is_current($link) ? ' class="current"':'')."><a href=\"$link\">".h($text)."</a></li>\n";
-		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
+		//$nav .= "<li".(is_current_uri($link) ? ' class="current"':'')."><a href=\"$link\">".h($text)."</a></li>\n";
+		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
 		
 	}
 	return $nav;

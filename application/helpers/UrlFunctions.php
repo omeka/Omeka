@@ -67,7 +67,7 @@ function current_uri($params=array())
 	return $uri;
 }
 
-function is_current($link, $req = null) {
+function is_current_uri($link, $req = null) {
 		
 	if(!$req) {
 		$req = Zend_Controller_Front::getInstance()->getRequest();

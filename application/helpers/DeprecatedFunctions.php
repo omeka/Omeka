@@ -339,3 +339,28 @@ function h($str, $allowedTags = "i|em|b|strong|del|span") {
 function unescapeTags($matches) {
   	return str_replace( array("&gt;", "&lt;", "&quot;", "&amp;"), array(">", "<", "\"", "&"), $matches[0]);
 }
+
+/**
+ * @deprecated
+ * @see is_current()
+ * @param string
+ * @param Zend_Controller_Front_Request
+ * @return boolean
+ **/
+function is_current($link, $req = null) {
+		
+	if(!$req) {
+		$req = Zend_Controller_Front::getInstance()->getRequest();
+	}
+	$current = $req->getRequestUri();
+	$base = $req->getBaseUrl();
+
+	//Strip out the protocol, host, base URI, rightmost slash before comparing the link to the current one
+	$strip_out = array(WEB_DIR, $_SERVER['HTTP_HOST'], $base);
+	$current = rtrim( str_replace($strip_out, '', $current), '/');
+	$link = rtrim( str_replace($strip_out, '', $link), '/');
+	
+	if(strlen($link) == 0) return (strlen($current) == 0);
+	return ($link == $current) or (strpos($current, $link) === 0);
+}
+
