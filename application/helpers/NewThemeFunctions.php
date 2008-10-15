@@ -316,6 +316,41 @@ function admin_plugin_footer()
     fire_plugin_hook('admin_theme_footer', $request);
 }
 
+function plugin_append_to_items_browse_each()
+{
+    return get_plugin_hook_output('public_append_to_items_browse_each');
+}
+
+function plugin_append_to_items_browse()
+{
+    return get_plugin_hook_output('public_append_to_items_browse');
+}
+
+function plugin_append_to_items_show()
+{
+    return get_plugin_hook_output('public_append_to_items_show');
+}
+
+function plugin_append_to_collections_browse_each()
+{
+    return get_plugin_hook_output('public_append_to_collections_browse_each');
+}
+
+function plugin_append_to_collections_browse()
+{
+    return get_plugin_hook_output('public_append_to_collections_browse');
+}
+
+function plugin_append_to_collections_show()
+{
+    return get_plugin_hook_output('public_append_to_collections_show');
+}
+
+function plugin_append_to_advanced_search()
+{
+    return get_plugin_hook_output('public_append_to_advanced_search');
+}
+
 /**
  * Retrieve an Item object directly by its ID.
  * 

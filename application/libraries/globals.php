@@ -143,6 +143,16 @@ function fire_plugin_hook()
     }
 }
 
+function get_plugin_hook_output() 
+{
+    $args = func_get_args();
+    ob_start();
+    call_user_func_array('fire_plugin_hook', $args);
+    $content = ob_get_contents();
+    ob_end_clean();
+    return $content;
+}
+
 /**
  * @access private
  * @return Omeka_Plugin_Broker|null

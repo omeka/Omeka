@@ -122,7 +122,8 @@ head(array('title'=>'Advanced Search')); ?>
 	</div>
 	<?php endif; ?>
 	
-	<?php fire_plugin_hook('append_to_search_form'); ?>
+	<?php fire_plugin_hook('append_to_search_form'); // Deprecated in 0.10 ?>
+	<?php is_admin_theme() ? fire_plugin_hook('admin_append_to_advanced_search') : fire_plugin_hook('public_append_to_advanced_search'); ?>
 	    <input type="submit" class="submit submit-medium" name="submit_search" id="submit_search" value="Search" />
 </form>
 
