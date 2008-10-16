@@ -4,6 +4,10 @@ class Installer
     const OMEKA_PHP_VERSION = '5.2';
     const OMEKA_MYSQL_VERSION = '5.0';
     
+    const DEFAULT_FULLSIZE_CONSTRAINT = 800;
+    const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
+    const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
+    
     private $warnings = array();
     private $errors = array();
     

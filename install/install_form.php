@@ -29,15 +29,15 @@ function formValue($name, $defaultValue = '')
         </div>
         <div class="field">
             <label for="thumbnail_constraint">Maximum Thumbnail Size Constraint (px)</label>
-            <input type="text" class="textinput" name="thumbnail_constraint" id="thumbnail_constraint" value="<?php echo formValue('thumbnail_constraint', '150'); ?>" />
+            <input type="text" class="textinput" name="thumbnail_constraint" id="thumbnail_constraint" value="<?php echo formValue('thumbnail_constraint', Installer::DEFAULT_THUMBNAIL_CONSTRAINT); ?>" />
         </div>
         <div class="field">
             <label for="square_thumbnail_constraint">Maximum Square Thumbnail Size Constraint (px)</label>
-            <input type="text" class="textinput" name="square_thumbnail_constraint" id="square_thumbnail_constraint" value="<?php echo formValue('square_thumbnail_constraint', '100'); ?>" />
+            <input type="text" class="textinput" name="square_thumbnail_constraint" id="square_thumbnail_constraint" value="<?php echo formValue('square_thumbnail_constraint', Installer::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT); ?>" />
         </div>
         <div class="field">
             <label for="fullsize_constraint">Maximum Fullsize Image Size Constraint (px)</label> 
-            <input type="text" class="textinput" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo formValue('fullsize_constraint', '600'); ?>" />
+            <input type="text" class="textinput" name="fullsize_constraint" id="fullsize_constraint" value="<?php echo formValue('fullsize_constraint', Installer::DEFAULT_FULLSIZE_CONSTRAINT); ?>" />
         </div>
         <div class="field">
             <label for="per_page_admin">Limit the number of items displayed per page in the administrative interface.</label>
