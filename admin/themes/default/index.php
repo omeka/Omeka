@@ -65,7 +65,6 @@
 						<p>Manage your general settings for the site, including title, description, and themes.</p>
 					</dd>
 			<?php endif; ?>
-			<p class="help">Need help with Omeka? Visit our <a href="http://omeka.org/codex/">codex</a> for detailed instructions for using and customizing our application.</p>
 			<?php fire_plugin_hook('admin_append_to_dashboard_primary'); ?>
 			</div>
 		</div>
