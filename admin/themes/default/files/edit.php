@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('body_class'=>'items primary')); ?>
 <h1>Edit File #<?php echo h($file->id); ?></h1>
 
 
@@ -14,53 +14,61 @@
 
 <legend>Core Metadata</legend>	
 
-<div><label for="id">Identifier</label>
-<?php
+<div class="field">
+	<label for="id">Identifier</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'id',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->id );
-?>
+?></div>
 </div>
 
-<div><label for="title">Title</label>
-<?php
+<div class="field">
+	<label for="title">Title</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'title', 'class' => 'textinput'),$file->title );
-?>
+?></div>
 </div>
 
-<div><label for="creator">Creator</label>
-<?php
+<div class="field">
+	<label for="creator">Creator</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'creator', 'class' => 'textinput'),$file->creator );
-?>
+?></div>
 </div>
 
-<div><label for="subject">Subject</label>
-<?php
+<div class="field">
+	<label for="subject">Subject</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'subject', 'class' => 'textinput'),$file->subject );
-?>
+?></div>
 </div>
 
-<div><label for="description">Description</label>
-<?php
-	echo textarea( array(	'name'	=> 'description','class' => 'textinput' ),
+<div class="field">
+	<label for="description">Description</label>
+<div class="inputs"><?php
+	echo textarea( array('name'	=> 'description','class' => 'textinput','cols' => '40', 'rows' => '20' ),
 						$file->description );
-?>
+?></div>
 </div>
 
-<div><label for="publisher">Publisher</label>
-<?php
+<div class="field">
+	<label for="publisher">Publisher</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'publisher', 'class' => 'textinput'),$file->publisher );
-?>
+?></div>
 </div>
 
-<div><label for="creator">Other Creator</label>
-<?php
+<div class="field">
+	<label for="creator">Other Creator</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'additional_creator', 'class' => 'textinput'),$file->additional_creator );
-?>
+?></div>
 </div>
 
-<div><label for="date">Date</label>
-<?php
+<div class="field">
+	<label for="date">Date</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'date',
 							'class' => 'textinput',
 							'id'	=> 'date'),$file->date);
@@ -84,210 +92,216 @@
 								'id'	=> 'date_year',
 								'size'		=> 4,
 								'maxlength' => 4),$file->date_year);	*/									
-?>
+?></div>
 </div>
 
-<div><label for="source">Source</label>
-<?php
+<div class="field">
+	<label for="source">Source</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'source', 'class' => 'textinput'),$file->source );
-?>
+?></div>
 </div>
 
-<div><label for="language">Language</label>
-<?php
+<div class="field">
+	<label for="language">Language</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'language',
 							'class' => 'textinput', 'class' => 'textinput'),$file->language );
-?>
+?></div>
 </div>
 
-<div><label for="relation">Relation</label>
-<?php
-	echo textarea( array(	'name'	=> 'relation', 'class' => 'textinput' ),
+<div class="field">
+	<label for="relation">Relation</label>
+<div class="inputs"><?php
+	echo textarea( array(	'rows'=>'20','cols'=>'40','name'	=> 'relation', 'class' => 'textinput' ),
 						$file->relation );
-?>
+?></div>
 </div>
 
-<div><label for="coverage">Coverage</label>
-<?php
+<div class="field">
+	<label for="coverage">Coverage</label>
+<div class="inputs"><?php
 	echo text( array(	'name' => 'coverage','class' => 'textinput'),$file->coverage);
-?>
+?></div>
 </div>
-<div><label for="rights">Rights</label>
-<?php
-	echo textarea( array(	'name'	=> 'rights', 'class' => 'textinput' ),
+<div class="field">
+	<label for="rights">Rights</label>
+<div class="inputs"><?php
+	echo textarea( array(	'rows'=>'20','cols'=>'40','name'	=> 'rights', 'class' => 'textinput' ),
 						$file->rights );
-?>
+?></div>
 </div>
-<div><label for="format">Format</label>
-<?php
-	echo textarea( array(	'name'	=> 'format' , 'class' => 'textinput'),
+<div class="field">
+	<label for="format">Format</label>
+<div class="inputs"><?php
+	echo textarea( array(	'rows'=>'20','cols'=>'40','name'	=> 'format' , 'class' => 'textinput'),
 						$file->format );
-?>
+?></div>
 </div>
 </fieldset>
 
 <fieldset>
 <legend>Format Metadata</legend>	
 
-<div><label for="transcriber">Transcriber</label>
-<?php
+<div class="field"><label for="transcriber">Transcriber</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'transcriber', 'class' => 'textinput'),$file->transcriber);
-?>
+?></div>
 </div>
 
-<div><label for="producer">Producer</label>
-<?php
+<div class="field"><label for="producer">Producer</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'producer',
 	'class' => 'textinput'),$file->producer );
-?>
+?></div>
 </div>
 
-<div><label for="render_device">Render Device</label>
-<?php
+<div class="field"><label for="render_device">Render Device</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'render_device',
 					'class' => 'textinput'),$file->render_device );
-?>
+?></div>
 </div>
 
-<div><label for="render_details">Render Details (e.g. Duration, resolution, bit depth, width, height)</label>
-<?php
-	echo textarea( array(	'name'	=> 'render_details',
+<div class="field"><label for="render_details">Render Details (e.g. Duration, resolution, bit depth, width, height)</label>
+<div class="inputs"><?php
+	echo textarea( array(	'rows'=>'20','cols'=>'40','name'	=> 'render_details',
 						'class' => 'textinput' ),
 						$file->render_details );
-?>
+?></div>
 </div>
 
-<div><label for="capture_date">Capture Date</label>
-<?php
+<div class="field"><label for="capture_date">Capture Date</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'capture_date',
 							'id'	=> 'capture_date', 'class' => 'textinput'),$file->capture_date );
-?>
+?></div>
 </div>
 
-<div><label for="capture_device">Capture Device</label>
-<?php
+<div class="field"><label for="capture_device">Capture Device</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'capture_device' ,'class' => 'textinput'),$file->capture_device);
-?>
+?></div>
 </div>
 
-<div><label for="capture_details">Capture Details (e.g. Duration, resolution, bit depth, width, height)</label>
-<?php
-	echo textarea( array(	'name'	=> 'capture_details','class' => 'textinput' ),
+<div class="field"><label for="capture_details">Capture Details (e.g. Duration, resolution, bit depth, width, height)</label>
+<div class="inputs"><?php
+	echo textarea( array(	'rows'=>'20','cols'=>'40','name'	=> 'capture_details','class' => 'textinput' ),
 					$file->capture_details );
-?>
+?></div>
 </div>
 
-<div><label for="watermark">Watermark</label>
-<?php
+<div class="field"><label for="watermark">Watermark</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'watermark', 'class' => 'textinput'),$file->watermark);
-?>
+?></div>
 </div>
 
-<div><label for="encryption">Encryption</label>
-<?php
+<div class="field"><label for="encryption">Encryption</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'encryption', 'class' => 'textinput'),$file->encryption);
-?>
+?></div>
 </div>
 
-<div><label for="compression">Compression</label>
-<?php
+<div class="field"><label for="compression">Compression</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'compression', 'class' => 'textinput'),$file->compression);
-?>
+?></div>
 </div>
 
-<div><label for="post_processing">Post Processing</label>
-<?php
+<div class="field"><label for="post_processing">Post Processing</label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'post_processing', 'class' => 'textinput'),$file->post_processing);
-?>
+?></div>
 </div>
 
-<div><label for="change_history">Change History</label>
-<?php
-	echo textarea( array(	'name'	=> 'change_history', 'class' => 'textinput' ),
+<div class="field"><label for="change_history">Change History</label>
+<div class="inputs"><?php
+	echo textarea( array('rows'=>'20','cols'=>'40',	'name'	=> 'change_history', 'class' => 'textinput' ),
 						$file->change_history );
-?>
+?></div>
 </div>
 
-<div><label class="readonly" for="archive_filename">Archive Filename <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label class="readonly" for="archive_filename">Archive Filename <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'archive_filename',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->archive_filename );
-?>
+?></div>
 </div>
 
-<div><label class="readonly" for="original_filename">Original File Name <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label class="readonly" for="original_filename">Original File Name <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'original_filename',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->original_filename);
-?>
+?></div>
 </div>
 
-<div><label class="readonly" for="size">File Size <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label class="readonly" for="size">File Size <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'size',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->size);
-?>
+?></div>
 </div>
 </fieldset>
 
 <fieldset>
 	<legend>Type Metadata</legend>
-<div><label class="readonly" for="mime_browser">File Mime Browser <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label class="readonly" for="mime_browser">File Mime Browser <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'mime_browser',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->mime_browser );
-?>
+?></div>
 </div>
 
-<div><label class="readonly" for="mime_os">File Mime OS <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label class="readonly" for="mime_os">File Mime OS <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'mime_os',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->mime_os);
-?>
+?></div>
 </div>
 
-<div><label class="readonly" for="type_os">File Type OS <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label class="readonly" for="type_os">File Type OS <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'type_os',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->type_os );
-?>
+?></div>
 </div>
 </fieldset>
 
 <fieldset>
 	<legend>File History</legend>
-	<div><div><label class="readonly" for="added">File Added <span class="readonly">(read only)</span></label>
-	<?php
+	<div class="field"><label class="readonly" for="added">File Added <span class="readonly">(read only)</span></label>
+<div class="inputs">	<?php
 		echo text( array(	'name'	=> 'added',
 								'readonly' => 'readonly',
 								'class' => 'readonly textinput'),$file->added );
-	?>
+	?></div>
 </div>
-<div><label class="readonly" for="modified">File Modified <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label class="readonly" for="modified">File Modified <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'modified',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->modified );
-?>
+?></div>
 </div>
 
-<div><label for="authentication">Authentication <span class="readonly">(read only)</span></label>
-<?php
+<div class="field"><label for="authentication">Authentication <span class="readonly">(read only)</span></label>
+<div class="inputs"><?php
 	echo text( array(	'name'	=> 'authentication',
 							'readonly' => 'readonly',
 							'class' => 'readonly textinput'),$file->authentication);
-?>
+?></div>
 </div>
 </fieldset>
 
 <fieldset>
-<input type="submit" name="submit" value="Save Changes" id="file_edit" />
+<input type="submit" name="submit" class="submit submit-medium" value="Save Changes" id="file_edit" />
 </fieldset>
 
 </form>

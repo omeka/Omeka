@@ -86,14 +86,13 @@ echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
     	</div>
     </div>
     
-    <?php if ( item_belongs_to_collection() ): ?>
     	<div id="collection" class="info-panel">
     	<h2>Collection</h2>
     	<div>
-    		<p><?php echo item('Collection Name'); ?></p>
+		   <p><?php if ( item_belongs_to_collection() ) echo item('Collection Name'); else echo 'No Collection'; ?></p>
+
     	</div>
     	</div>
-    <?php endif; ?>
     
     <div id="tags" class="info-panel">
 		<h2>Tags</h2>
