@@ -1,4 +1,9 @@
 /* 
+Icons used in interface are Silk Icons, created by FamFamFam, and 
+available at http://www.famfamfam.com/lab/icons/silk/ 
+*/
+
+/* 
 Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 1 = 54px
 2 = 126px (6 columns)
@@ -107,6 +112,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	.next {float:right; text-align:right;}
 
 /* Icons */
+
 .use-icon,
 .contributor,
 .super,

@@ -39,7 +39,7 @@ foreach (array('Collection', 'Files', 'Tags', 'Miscellaneous') as $tabName) {
 $tabs = apply_filters('admin_items_form_tabs', $tabs, $item);
 ?>
 
-* <!-- Create the sections for the various element sets -->
+<!-- Create the sections for the various element sets -->
 
 <ul id="section-nav" class="navigation tabs">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
