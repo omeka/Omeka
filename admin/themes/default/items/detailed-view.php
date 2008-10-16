@@ -27,7 +27,7 @@
 		<?php echo item('Dublin Core', 'Description', array('snippet'=>300)); ?>
 	<?php endif; ?>
 	</div>
-
+    <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
 </div>
 <?php endwhile; ?>
 </div>
