@@ -138,42 +138,11 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     }
     
     /**
-     * Fire prepend hooks.
-     * @todo Abstract this out into a global helper function.
-     * @see self::_callAppendHooks()
-     * @return void
-     */
-    private function _callPrependHooks()
-    {
-        if (is_admin_theme()) {
-            fire_plugin_hook('admin_prepend_to_item_show', $this->_item);
-        } else {
-            fire_plugin_hook('public_prepend_to_item_show', $this->_item);
-        }
-    }
-    
-    /**
-     * Fire append hooks.
-     * @todo Abstract this out into a global helper function.
-     * @see self::_callPrependHooks()
-     * @return void
-     */
-    private function _callAppendHooks()
-    {
-        if (is_admin_theme()) {
-            fire_plugin_hook('admin_append_to_item_show', $this->_item);
-        } else {
-            fire_plugin_hook('public_append_to_item_show', $this->_item);
-        }
-    }
-
-    /**
      * Output the default format for displaying item metadata.
      * @return void 
      */
     private function _output()
     {
-        $this->_callPrependHooks();
         // Prepare the metadata for display on the partial.  There should be no 
         // need for method calls by default in the view partial.
         $elementSets = $this->_getElementsBySet();
@@ -195,7 +164,6 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
             'elementsInSet'=>$elementsInSet, 'item'=>$this->_item);
             $this->_loadViewPartial($varsToInject);
         }
-        $this->_callAppendHooks();    
     }
     
     /**
