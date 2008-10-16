@@ -152,7 +152,6 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 
 		/* Info Panels - styles that enhance or override the component library styles */	
 		#tag-cloud li, #tag-cloud li a {padding:0; border:none;background-image:none; display:inline;}
-
 		#recent-items ul {margin-bottom:0;}
 		#recent-items ul a {overflow:hidden; zoom:1;}
 		#recent-items #view-all-items a {display:block; text-decoration:none; background:url("../images/bullet_go.gif") 100% 6px no-repeat; width: 7em;float:right;padding:6px 18px;}
@@ -163,7 +162,20 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	table#items {width:100%;} 
 		
 	.items #primary {clear:right;}
+	#detailed {padding-top:18px;}
+	#detailed .item {overflow:hidden; zoom:1; position:relative; border-bottom: 1px dotted #ccc;margin-bottom:18px;}
+	#detailed .item h2, #detailed .item .edit-item {display:inline;}
+	#detailed .item-description {float:left; width: 396px; font-size:1.2em; line-height:1.5em;margin-right:18px;margin-top:18px;}
+		#detailed .item-description img {float:left; margin-right:18px;}
+	#detailed .item-meta {float:left; width: 396px;margin-top:18px;}
+	#detailed .item-meta ul {font-size:1.1em;}
+	#detailed .item-meta li {padding: 9px 18px; background: #fafaf7; text-align:right; overflow:hidden; zoom:1;border-bottom:2px solid #fff;}
+	#detailed .item-meta li span {font-weight:bold;float:left; width: 10%;}
 	
+	#detailed .public-featured-checkboxes {position:absolute; top:0; right: 0;margin-bottom:18px;}
+		#detailed .public-featured-checkboxes li {display:inline;}
+	
+	#detailed .append-to-item-detail {clear:both;}
 	/* Item show styles */
 	.element-text, .element-text-empty {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
 		.element-text *, .element-text-empty * {font-size:1em;}
