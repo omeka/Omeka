@@ -255,14 +255,16 @@ class UsersController extends Omeka_Controller_Action
     public function changePasswordAction()
     {
         $user = $this->findById();
-        
+
         try {
             //somebody is trying to change the password
-            if (!empty($_POST['new_password1'])) {
+            if (!empty($_POST['new_password1']) or !empty($_POST['new_password2'])) {
                 $user->changePassword($_POST['new_password1'], $_POST['new_password2'], $_POST['old_password']);
                 $user->forceSave();
+                $this->flashSuccess('Password was changed successfully.');
+            } else {
+                $this->flashError('Password field must be properly filled out.');
             }
-            $this->flashSuccess('Password was changed successfully.');
         } catch (Exception $e) {
             $this->flashError($e->getMessage());
         }
