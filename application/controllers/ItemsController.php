@@ -121,7 +121,7 @@ class ItemsController extends Omeka_Controller_Action
      **/
     public function browseAction()
     {   
-        $results = $this->_helper->searchItems(array('foobar'=>true));
+        $results = $this->_helper->searchItems();
         
         /** 
          * Now process the pagination
