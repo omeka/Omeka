@@ -2,12 +2,28 @@
 <?php while($item = loop_items()):?>
 <div class="item">
 	<h2><?php echo link_to_item(); ?></h2>
-	<p class="edit-item"><?php echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?>
+	
+	<?php 
+	// Note: this is duplicated elsewhere (items/show page).
+	if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
+    <p class="edit-item"><?php echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
+	<?php endif; ?>
 	
 	<ul class="public-featured-checkboxes">
-	<li><span class="fieldname">Public</span> <?php echo checkbox(array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public"), item('Public')); ?></li>
+	<li><span class="fieldname">Public</span> 
+	<?php 
+	$publicCheckboxProps = array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public");
+	if (!has_permission('Items', 'makePublic')) {
+	   $publicCheckboxProps['disabled'] = 'disabled';
+	}
+	echo checkbox($publicCheckboxProps, item('Public')); ?></li>
 	<li><span class="fieldname">Featured</span> 
-	<?php echo checkbox(array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured"), item('Featured')); ?>
+	<?php 
+	$featuredCheckboxProps = array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured");
+	if (!has_permission('Items', 'makeFeatured')) {
+	   $featuredCheckboxProps['disabled'] = 'disabled';
+	}
+	echo checkbox($featuredCheckboxProps, item('Featured')); ?>
 	<?php echo hidden(array('name'=>"items[" . item('id') . "][id]"), item('id')); ?>	
 	</li>
 	</ul>
