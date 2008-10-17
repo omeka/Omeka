@@ -28,6 +28,7 @@ class FileTable extends Omeka_Db_Table
         $db = $this->getDb();
         $select->joinInner(array('i' => $db->Item), "i.id = f.item_id", array());
         new ItemPermissions($select);
+        $select->group('f.id');
         return $select;
     }
     
