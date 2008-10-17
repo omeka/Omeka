@@ -138,7 +138,7 @@ class ItemsController extends Omeka_Controller_Action
         
         Zend_Registry::set('pagination', $pagination);
         
-        fire_plugin_hook('browse_items', $items);
+        fire_plugin_hook('browse_items', $results['items']);
         
         $this->view->assign(array('items'=>$results['items'], 'total_items'=>$results['total_items']));
     }
