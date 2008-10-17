@@ -4,6 +4,10 @@
 
 <div id="primary">
 
+<?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>
+    <p><?php echo link_to($file, 'edit', 'Edit', array('class'=>'edit')); ?></p>
+<?php endif; ?>
+
 <?php echo display_file($file); ?>
 
 <?php

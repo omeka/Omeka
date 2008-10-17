@@ -74,6 +74,11 @@ class File extends Omeka_Record {
         $this->saveElementTexts();
     }
     
+    public function getItem()
+    {
+        return $this->getTable('Item')->find($this->item_id);
+    }
+    
     /**
      * Retrieve the path for the file
      *

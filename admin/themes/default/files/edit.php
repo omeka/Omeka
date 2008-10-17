@@ -3,7 +3,10 @@
 
 
 <div id="primary">
-<p><a class="delete" href="<?php echo uri('files/delete/'.$file->id); ?>">Delete</a></p>
+<?php if (has_permission('Files', 'delete')): ?>
+<p><?php echo link_to($file, 'delete', 'Delete', array('class'=>'delete')); ?></p>    
+<?php endif; ?>
+
 <?php if($file->hasThumbnail()): ?>
 <div id="image"><?php echo thumbnail($file); ?><p>Thumbnail of File #<?php echo h($file->id); ?></div>
 <?php endif; ?>
