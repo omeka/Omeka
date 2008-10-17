@@ -108,10 +108,15 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * 
      * Also load all the Element records and index those by their name and set name.
      * 
+     * @param boolean $reload Whether or not reload all the data that was previously loaded.
      * @return void
      **/
-    public function loadElementsAndTexts()
+    public function loadElementsAndTexts($reload=false)
     {
+        if ($this->_recordsAreLoaded and !$reload) {
+            return;
+        }
+        
         $elementTextRecords = $this->getElementTextRecords();
         
         $this->_textsByNaturalOrder = $elementTextRecords;
@@ -122,6 +127,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $this->_elementsByNameAndSet = $this->indexElementsByNameAndSet($elements);
         $this->_elementsBySet = $this->indexElementsBySet($elements);
         $this->_elementsById = $this->indexElementsById($elements);
+        
+        $this->_recordsAreLoaded = true;
     }
     
     /**
@@ -149,12 +156,12 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @return array Set of ElementText records.
      **/
     public function getTextsByElement($element)
-    {
+    {        
         // Load 'em if we need 'em.
         if (!$this->_textsByElementId) {
             $this->loadElementsAndTexts();
         }
-        
+
         $texts = @$this->_textsByElementId[$element->id];
         return !empty($texts) ? $texts : array();
     }
