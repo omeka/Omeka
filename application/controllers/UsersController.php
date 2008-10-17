@@ -26,7 +26,8 @@ class UsersController extends Omeka_Controller_Action
 {
     public function init() {
         $this->_modelClass = 'User';
-        $this->beforeFilter('checkPermissions');
+        $this->_table = $this->getTable('User');
+        $this->checkPermissions();  //Cannot execute as a beforeFilter b/c ACL permissions are checked before that.
         $this->_auth = Omeka_Context::getInstance()->getAuth();
     }
     
@@ -80,7 +81,7 @@ class UsersController extends Omeka_Controller_Action
     private function checkUserSpecificPerms($action)
     {
         $user = $this->getCurrentUser();
-        
+
         try {
            $record = $this->findById();
         // Silence exceptions, because it's easy
@@ -115,7 +116,12 @@ class UsersController extends Omeka_Controller_Action
                     break;
                     
                 case 'edit':
-                    
+                    // Allow access to the 'edit' action if a user is editing their 
+                    // own account info.
+                    if ($user->id == $record->id) {
+                        $this->_helper->acl->setAllowed('edit');
+                    }
+                     
                     //Non-super users cannot edit super user data
                     //Note that super users can edit other super users' data
                     if ($user->id != $record->id 
@@ -124,7 +130,13 @@ class UsersController extends Omeka_Controller_Action
                         throw new Exception( 'You may not edit the data for super users!' );
                     }
                     break;
-                    
+                case 'show':
+                    // Allow access to the 'show' action if a user is viewing their 
+                    // own account info.
+                    if ($user->id == $record->id) {
+                        $this->_helper->acl->setAllowed('show');
+                    }
+                    break;    
                default:
                    break;
             }                

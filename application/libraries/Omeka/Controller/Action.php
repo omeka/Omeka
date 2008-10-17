@@ -395,8 +395,12 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         if (!$id) {
             throw new Omeka_Controller_Exception_404(get_class($this) . ': No ID passed to this request' );
         }
-                    
+
         $table = !$table ? $this->_table : $this->getTable($table);            
+        
+        if (!$table) {
+            throw new Exception('A table must be defined in order to use findById()!');
+        }
         
         $record = $table->find($id);
         
