@@ -1,6 +1,9 @@
 <?php head(array('title'=>'Browse Collections', 'body_class'=>'collections')); ?>
 <h1>Collections</h1>
+<?php if (has_permission('Collections', 'add')): ?>
 	<p id="add-collection" class="add-button"><a href="<?php echo uri('collections/add'); ?>" class="add-collection">Add a Collection</a></p>
+<?php endif; ?>
+
 <div id="primary">
 
 	<?php if (has_collections()): ?>
@@ -12,7 +15,9 @@
         		<th scope="col">Name</th>
         		<th scope="col">Collectors</th>
         		<th scope="col">Date Added</th>
-        		<th scope="col">Edit?</th>
+        		<?php if (has_permission('Collections', 'edit')): ?>
+            		<th scope="col">Edit?</th>       		  
+        		<?php endif; ?>
         		</tr>
         	</thead>
         	<tbody>
@@ -39,9 +44,11 @@
         		    <?php echo date('m.d.Y', strtotime($time)); ?>
         		<?php endif; ?>
 				</td>
+				<?php if (has_permission('Collections', 'edit')): ?>
 				<td>
 				    <?php echo link_to_collection('Edit', array('class'=>'edit'), 'edit'); ?>
 				</td>
+			    <?php endif; ?>
             </tr>
         
 			

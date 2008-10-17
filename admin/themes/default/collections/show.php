@@ -4,8 +4,9 @@
 <div id="primary">
 <div id="collection-info">
 
-
+<?php if (has_permission('Collections', 'edit')): ?>    
 <p> <?php echo link_to_collection('Edit', array('class'=>'edit'), 'edit'); ?></p>
+<?php endif; ?>
 
 <h2>Description:</h2> <p><?php echo collection('Description'); ?></p>
 
