@@ -137,6 +137,7 @@ class Omeka_Plugin_Broker
     {        
         foreach ($this->_pluginPaths as $name => $path) {
             $this->setCurrentPlugin($name);
+            $this->addApplicationDirs($name);
            require_once $path;
            $this->setCurrentPlugin(null);
         } 
@@ -379,17 +380,13 @@ class Omeka_Plugin_Broker
      *          public/
      *          both/
      * 
-     *  This also adds these folders to the correct include paths so that
-     *  there is no overhead involved in directories
+     *  This also adds these folders to the correct include paths.
      *  
      *
      * @return void
      **/
-    public function addApplicationDirs()
-    {
-        //Get the name of the current plugin
-        $pluginName = $this->getCurrentPlugin();
-        
+    public function addApplicationDirs($pluginName)
+    {        
         $baseDir = $this->_basePath . DIRECTORY_SEPARATOR . $pluginName;
         
         $modelDir      = $baseDir . DIRECTORY_SEPARATOR  . 'models';
