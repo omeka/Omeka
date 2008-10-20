@@ -99,9 +99,9 @@ function display_element_set_form_for_item($item, $elementSetName)
  **/
 function item_citation()
 {
-    $creator    = item('Dublin Core', 'Creator');
-    $title      = item('Dublin Core', 'Title');
-    $siteTitle  = get_option('site_title');
+    $creator    = strip_formatting(item('Dublin Core', 'Creator'));
+    $title      = strip_formatting(item('Dublin Core', 'Title'));
+    $siteTitle  = strip_formatting(get_option('site_title'));
     $itemId     = item('id');
     $accessDate = date('F j, Y');
     $uri        = abs_uri();
@@ -1211,5 +1211,27 @@ function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
         $phrase = implode(' ', array_slice($phraseArray, 0, $maxWords)) . $ellipsis;
     }
     return $phrase;
+}
+
+/**
+ * Strip HTML formatting (i.e. tags) from the provided string.
+ *
+ * This is essentially a wrapper around PHP's strip_tags() function, with the 
+ * added benefit of returning a fallback string in case the resulting stripped 
+ * string is empty or contains only whitespace.
+ * 
+ * @uses strip_tags()
+ * @param The string to be stripped of HTML formatting.
+ * @param The string to be used as a fallback.
+ * @param The string of tags to allow when stripping tags.
+ * @return The stripped string.
+ */
+function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
+{
+    $str = strip_tags($str, $allowableTags);
+    if (preg_match('/^\s*$/', $str)) {
+        return $fallbackStr;
+    }
+    return $str;
 }
 
