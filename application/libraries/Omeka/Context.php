@@ -160,12 +160,12 @@ class Omeka_Context
     
     public function setRequest($request)
     {
-        $this->_request = $request;
+        return Zend_Controller_Front::getInstance()->setRequest($request);
     }
     
     public function getRequest()
     {
-        return $this->_request;
+        return Zend_Controller_Front::getInstance()->getRequest();
     }
     
     public function setResponse($response)
