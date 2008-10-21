@@ -747,5 +747,6 @@ class File extends Omeka_Record {
     
     protected function _delete() {
         $this->unlinkFile();
+        $this->deleteElementTexts();
     }
 }       
