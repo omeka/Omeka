@@ -53,6 +53,9 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 		/* .input used to wrap input fields in items/add form */
 		.field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
 		.vertical-nav .field .inputs {width: 468px;}
+		
+		.primary-secondary .field .inputs {width:;}
+		
 		/* Changes width based on default border and padding */
 		
 	
@@ -70,12 +73,12 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 .primary .vertical-nav #primary .textinput, .primary .vertical-nav #primary select {}
 
 /* .primary-secondary */
-.primary-secondary #primary, .vertical-nav #primary {float:left; width: 522px;}
-.primary-secondary #secondary {float:right; width: 270px;}
+.primary-secondary #primary, .vertical-nav #primary {float:left; width: 558px;}
+.primary-secondary #secondary {float:right; width: 224px;}
 
 /* .primary-secondary-tertiary */
 .primary-secondary-tertiary #primary {float:left; width: 558px;}
-.primary-secondary-tertiary #secondary {float:right; width: 270px;}
+.primary-secondary-tertiary #secondary {float:right; width: 224px;}
 .primary-secondary-tertiary #tertiary {clear:both;}
 
 /* Secondary content */
