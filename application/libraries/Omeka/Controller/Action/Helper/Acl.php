@@ -91,7 +91,8 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
 	}
     
     /**
-     * Retrieve the name of the ACL resource based on the name of the controller.
+     * Retrieve the name of the ACL resource based on the name of the controller 
+     * and, if not the default module, the name of the module.
      *  
      * @todo Should use the Zend inflection, though mine works better at the moment [KBK].
      * @return string
@@ -99,13 +100,25 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     public function getResourceName()
     {
         $controllerName = $this->getRequest()->getControllerName();
+        $moduleName     = $this->getRequest()->getModuleName();
+        
         // This ZF inflector should work but it doesn't!
         // $inflector = new Zend_Filter_Word_DashToCamelCase();
         // return $inflector->filter($controllerName);
-        
         // Instead we are going to inflect from dashed-lowercase to CamelCase.
-        $controllerName = implode('', array_map('ucwords', explode('-', $controllerName) ));
-        return $controllerName;
+        $inflectedControllerName = implode('', array_map('ucwords', explode('-', $controllerName)));
+        
+        if ('default' == $moduleName) {
+            // This is the default moduloe, so there is no need to add a 
+            // namespace to the resource name.
+            $resourceName = $inflectedControllerName;
+        } else {
+            // This is not a default module (i.e. plugin), so we need to add a 
+            // namespace to the resource name.
+            $inflectedModuleName = implode('', array_map('ucwords', explode('-', $moduleName)));
+            $resourceName = $inflectedModuleName . '_' . $inflectedModuleName;
+        }
+        return $resourceName;
     }
     
 	/**
