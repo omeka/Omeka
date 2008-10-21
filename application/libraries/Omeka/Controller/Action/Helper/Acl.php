@@ -116,7 +116,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
             // This is not a default module (i.e. plugin), so we need to add a 
             // namespace to the resource name.
             $inflectedModuleName = implode('', array_map('ucwords', explode('-', $moduleName)));
-            $resourceName = $inflectedModuleName . '_' . $inflectedModuleName;
+            $resourceName = $inflectedModuleName . '_' . $inflectedControllerName;
         }
         return $resourceName;
     }
