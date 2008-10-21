@@ -232,13 +232,13 @@ class Omeka_View_Helper_Item
         $elementName = $this->_elementName;
         
         // Build the name of the filter to use. This will end up looking like: 
-        // array('Display', 'Item', 'Title', 'Dublin Core') or something similar.
+        // array('Display', 'Item', 'Dublin Core', 'Title') or something similar.
         $filterName = array('Display', 'Item');
         if (null === $elementName) {
-            $filterName[] = $elementSetName;
-        } else {
             $filterName[] = $elementName;
+        } else {
             $filterName[] = $elementSetName;
+            $filterName[] = $elementName;
         }
         
         if (is_array($text)) {

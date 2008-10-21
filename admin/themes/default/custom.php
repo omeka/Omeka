@@ -16,7 +16,7 @@ function utf8_htmlentities($value)
 //     return '#' . $id;
 // }
 
-add_filter(array('Display', 'Item', 'Title', 'Dublin Core'), 'show_untitled_items');
+add_filter(array('Display', 'Item', 'Dublin Core', 'Title'), 'show_untitled_items');
 
 function show_untitled_items($title)
 {
@@ -27,7 +27,7 @@ function show_untitled_items($title)
 }
 
 // A filter for displaying the <select> menu for Language on the Item form.
-add_filter(array('Form', 'Item', 'Language', 'Dublin Core'), 'display_language_form_input');
+add_filter(array('Form', 'Item', 'Dublin Core', 'Language'), 'display_language_form_input');
 
 function display_language_form_input($html, $inputNameStem, $language, $options, $item, $element)
 {

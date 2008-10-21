@@ -117,37 +117,6 @@ class Omeka_Plugin_Filters
     }
     
     /**
-     * If we pass an array of filter names, this will apply sequentially more
-     *  specific filters to the value in question.
-     *  
-     * For example: if we have a filter called array('Save', 'Item', 'Title'),
-     * it will apply the array('Save') filter, then the array('Save', 'Item'),
-     * then the filter for array('Save', 'Item', 'Title').
-     * 
-     * @todo Should this actually apply the filters in reverse order? Not sure
-     *  what makes more sense, to go from general to specific or vice versa.
-     * @param array The name of the filter.
-     * @param mixed The value to filter
-     * @return mixed
-     **/
-    public function applySubFilters(array $filterName, $valueToFilter)
-    {
-        // Run as many filters as there are entries in the array 
-        $runCount = count($filterName);
-        
-        // All other arguments that were passed beyond the 2 defined.
-        $extraArgs = array_slice(func_get_args(), 2);
-        
-        for ($i=1; $i < $runCount+1; $i++) { 
-            $filterToRun = array_slice($filterName, 0, $i);            
-            $valueToFilter = $this->applyFilters($filterToRun, $valueToFilter, $extraArgs);
-        }
-
-        return $valueToFilter;
-
-    }
-        
-    /**
      * Run an arbitrary value through a set of filters.
      * 
      * @see Omeka_Plugin_Filters::addFilter()

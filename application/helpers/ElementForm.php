@@ -194,8 +194,8 @@ class Omeka_View_Helper_ElementForm
         return array(
             'Form', 
             get_class($this->_record), 
-            $this->_element->name,
-            $this->_element->set_name);
+            $this->_element->set_name, 
+            $this->_element->name);
     }
     
     protected function _displayFormInput($inputNameStem, $value, $options=array())
