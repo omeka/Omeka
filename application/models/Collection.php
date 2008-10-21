@@ -8,6 +8,7 @@
 
 require_once 'CollectionPermissions.php';
 require_once 'CollectionTable.php';
+require_once 'PublicFeatured.php';
 
 /**
  * @package Omeka
@@ -27,6 +28,7 @@ class Collection extends Omeka_Record
     public function construct()
     {
         $this->_mixins[] = new Relatable($this);
+        $this->_mixins[] = new PublicFeatured($this);
     }
     
     public function hasCollectors()
@@ -81,21 +83,6 @@ class Collection extends Omeka_Record
     {
         $result = $this->removeRelatedTo($collector, 'collector', 1);
         return $result->rowCount() == 1;
-    }
-    
-    public function beforeSaveForm(&$post)
-    {
-        // Handle the boolean vars in the form. This must be a radio button b/c 
-        // checkboxes don't submit post correctly
-        if (array_key_exists('public', $post)) {
-            $this->public = (bool) $post['public'];
-            unset($post['public']);
-        }
-        
-        if (array_key_exists('featured', $post)) {
-            $this->featured = (bool) $post['featured'];
-            unset($post['featured']);
-        }
     }
     
     protected function afterSaveForm($post)

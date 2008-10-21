@@ -18,6 +18,7 @@ require_once 'Relatable.php';
 require_once 'ItemTable.php';
 require_once 'ItemPermissions.php';    
 require_once 'ElementText.php';
+require_once 'PublicFeatured.php';
 /**
  * @package Omeka
  * @subpackage Models
@@ -48,6 +49,7 @@ class Item extends Omeka_Record
         $this->_mixins[] = new Taggable($this);
         $this->_mixins[] = new Relatable($this);
         $this->_mixins[] = new ActsAsElementText($this);
+        $this->_mixins[] = new PublicFeatured($this);
     }
     
     // Accessor methods
@@ -127,6 +129,8 @@ class Item extends Omeka_Record
         
         return $creator->User;
     }
+    
+
     
     // End accessor methods
     
@@ -221,24 +225,7 @@ class Item extends Omeka_Record
             }
         }        
     }
-    
-    /**
-     * Fire a plugin hook if the Item has had it's status changed to 'public'.
-     * 
-     * @todo All special hooks that fire after a form has been saved should go
-     * here.  For example, 'make_item_featured', etc.
-     * @param ArrayObject
-     * @return void
-     **/
-    protected function _pluginHooksAfterSaveForm($post)
-    {
-        // Fire a plugin hook specifically for items that have had their 
-        // 'public' status changed
-        if (isset($post['public']) && ($this->public == '1')) {
-            fire_plugin_hook('make_item_public', $this);
-        }        
-    }
-    
+        
     /**
      * Save all metadata for the item that has been received through the form.
      *
@@ -261,8 +248,6 @@ class Item extends Omeka_Record
         $this->deleteFiles($post['delete_files']);
         
         $this->_modifyTagsByForm($post);
-                
-        $this->_pluginHooksAfterSaveForm($post);
     }
         
     /**

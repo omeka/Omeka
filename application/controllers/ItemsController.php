@@ -265,22 +265,11 @@ class ItemsController extends Omeka_Controller_Action
                     }
                     
                     $item = $this->findById($fields['id']);
-                    
-                    //Process the public field
-                    
-                    //Existing status must be compared against new status for the sake of plugin hooks
-                    $old = $item->public;
-                    $new = (int) $fields['public'];
-                    
-                    //If the item was made public, fire the plugin hook
-                    if (!$old and $new) {
-                        fire_plugin_hook('make_item_public', $item);
-                    }
-                    
+
                     //If public has been checked
-                    $item->public = $new;
+                    $item->setPublic($fields['public']);
                     
-                    $item->featured = (int) $fields['featured'];
+                    $item->setFeatured($fields['featured']);
                     
                     $item->save();
                 }

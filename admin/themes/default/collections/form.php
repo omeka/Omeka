@@ -74,14 +74,14 @@
 <div class="field">
 	<label for="public">Public</label>	
 <?php 
-	echo radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->public);
+	echo radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->isPublic());
 ?>
 </div>
 
 <div class="field">
 	<label for="featured">Featured</label>	
 <?php 
-	echo radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->featured); 
+	echo radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->isFeatured()); 
 ?>
 </div>	
 
