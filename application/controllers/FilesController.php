@@ -31,6 +31,9 @@ class FilesController extends Omeka_Controller_Action
     
     protected function checkUserPermissions()
     {
+        if (!$this->_getParam('id')) {
+            $this->_helper->redirector->goto('browse', 'items');
+        }
         $file = $this->findById(null, 'File');
         $user = $this->getCurrentUser();
         
