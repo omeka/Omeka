@@ -81,16 +81,16 @@ class Omeka_View_Helper_Item
         // records, or a special value string.
         $this->_setText();
         
-        // Apply plugin filters to the text prior to making a snippet or 
-        // escaping text HTML.
-        $this->_filterText();
-        
         // Apply the snippet option before escaping text HTML. If applied after
         // escaping the HTML, this may result in invalid markup.
         $this->_snippetText();
         
         // Escape the non-HTML text if necessary.
         $this->_escapeTextHtml();
+        
+        // Apply plugin filters to the text prior to making a snippet or 
+        // escaping text HTML.
+        $this->_filterText();
         
         // Extract the text from the records into an array. This has to happen 
         // after escaping text HTML because the html flag is located within the 
