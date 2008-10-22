@@ -92,13 +92,7 @@ class File extends Omeka_Record {
                       'thumbnail'        => THUMBNAIL_DIR.DIRECTORY_SEPARATOR . $fn,
                       'square_thumbnail' => SQUARE_THUMBNAIL_DIR.DIRECTORY_SEPARATOR . $fn,
                       'archive'          => FILES_DIR.DIRECTORY_SEPARATOR . $this->archive_filename);
-        
-        $hookdata = fire_plugin_hook('append_to_file_path', $path);
-        
-        if ($hookdata) {
-            $path = array_merge($path, $hookdata);
-        }
-        
+
         return $path[$type];
     }
     
@@ -115,13 +109,7 @@ class File extends Omeka_Record {
                       'thumbnail'        => WEB_THUMBNAILS.'/' . $fn,
                       'square_thumbnail' => WEB_SQUARE_THUMBNAILS.'/' . $fn,
                       'archive'          => WEB_FILES.'/' . $this->archive_filename);
-        
-        $hookdata = fire_plugin_hook('append_to_file_web_path', $path);
-        
-        if ($hookdata) {
-            $path = array_merge($path, $hookdata);            
-        }
-        
+
         return $path[$type];
     }
     
