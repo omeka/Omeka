@@ -500,14 +500,14 @@ function display_files_for_item($options = array())
  **/
 function display_random_featured_item($withImage=false)
 {
-    $featuredItem = random_featured_item();
+    $featuredItem = random_featured_item($withImage);
 
 	$html = '<h2>Featured Item</h2>';
 	if ($featuredItem) {
         set_current_item($featuredItem); // Needed for transparent access of item metadata.
 	   $html .= '<h3>' . link_to_item() . '</h3>';
 	   if (item_has_thumbnail()) {
-	       $html .= link_to_square_thumbnail($featuredItem, array('class'=>'image'));
+	       $html .= link_to_item(item_square_thumbnail(), array('class'=>'image'));
 	   }
 	   // Grab the 1st Dublin Core description field (first 150 characters)
 	   $itemDescription = item('Dublin Core', 'Description', array('snippet'=>150));
