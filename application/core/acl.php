@@ -6,18 +6,6 @@
  * @package Omeka
  **/
  
-/**
- * Hard-coded baseline resources/privileges for the ACL.
- * 
- * These are loaded into the ACL object if an ACL object
- * does not already exist in the database.  
- *
- * IMPORTANT: If you change this file and want to test new ACL settings, 
- * delete the 'acl' entry in the 'options' table in your Omeka database.  
- * That represents the serialized ACL object, which will be used instead of
- * these hard coded settings if it is available.
- */
-
 //Define our resources/privileges in a flat list here
 $resources = array(
     'Items'         =>  array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
@@ -29,7 +17,8 @@ $resources = array(
     'Upgrade'       =>  array('migrate'),
     'Tags'          =>  array('rename','remove', 'browse'),
     'Themes'        =>  array('browse','switch'),
-    'ItemTypes'     =>  array('add','edit','delete', 'browse'),
+    // 'delete-element' and 'add-element' are actions that allow AJAX requests to manipulate the elements for an item type.
+    'ItemTypes'     =>  array('add','edit','delete', 'browse', 'delete-element', 'add-element'),
     // 'makeSuperUser' should be deprecated, since it can only be called if non-super users can choose the roles for user accounts.
     // 'changeRole' determines whether the role of a user account can be changed.  only super users can do this.
     'Users'         =>  array('browse','show','add','edit','delete','makeSuperUser', 'changeRole')
@@ -44,12 +33,7 @@ $allowList = array(
     //Researchers can view items and collections that are not yet public
     array('researcher',array('Items', 'Collections'),array('showNotPublic')),
     //Contributors can add and tag items, edit or delete their own items, and see their items that are not public
-    array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
-    array('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage')),
-    array('admin','Collections',array('add','edit','delete', 'showNotPublic')),
-    array('admin','Files',array('edit','delete')),
-    array('admin','Tags',array('rename','remove')),
-    array('admin','ItemTypes',array('add','edit','delete'))
+    array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic'))
 ); 
 
 /* $acl = new Omeka_Acl($roles, $resources, $allowList);  */
@@ -71,4 +55,5 @@ $acl->loadAllowList($allowList);
 
 //Deny a couple of specific privileges to admin users
 $acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets', 'Users'));
+$acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

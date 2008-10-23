@@ -10,7 +10,9 @@
 			<tr>
 				<th>Type Name</th>
 				<th>Description</th>
+				<?php if (has_permission('ItemTypes', 'edit')): ?>
 				<th>Action</th>
+				<?php endif; ?>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,10 +20,10 @@
 <tr class="itemtype">
 	 <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo htmlentities($itemtype->name); ?></a></td>
 	<td width="70%"><?php echo htmlentities($itemtype->description); ?></td>
-	<td><?php if (has_permission('ItemTypes', 'edit')): ?>
+	<?php if (has_permission('ItemTypes', 'edit')): ?><td>
 	    <a class="edit" href="<?php echo uri('item-types/edit/'.$itemtype->id); ?>">Edit</a>
-	    <?php endif; ?>
-	</td>
+	</td><?php endif; ?>
+	
 </tr>
 <?php endforeach; ?>
 </tbody>
