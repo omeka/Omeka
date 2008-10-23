@@ -1,9 +1,11 @@
 <?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'body_class'=>'users primary'));?>
 <h1>Users</h1>
 <?php common('settings-nav'); ?>
-
+<?php print_r($current_user); ?>
 <div id="primary">
 <h2>Current Users</h2>
+<?php echo flash(); ?>
+
 <table id="users">
 	<thead>
 		<tr>
@@ -17,14 +19,14 @@
 	</thead>
 	<tbody>
 <?php foreach( $users as $key => $user ): ?>
-	<tr class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
+	<tr class="<?php if(current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
 		<td><?php  echo h($user->username); ?></td>
 		<td><?php echo h($user->first_name); ?> <?php echo h($user->last_name); ?></td>
 		<td><span class="<?php echo h($user->role); ?>"><?php echo h($user->role); ?></span></td>
 		
 		<td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
 		<td><a class="edit" href="<?php echo uri('users/edit/'.$user->id);?>">Edit</a></td>
-		<td><a class="delete" href="<?php echo uri('users/delete/'.$user->id);?>">Delete</a></td>
+		<td><?php if(current_user()->id != $user->id): ?><a class="delete" href="<?php echo uri('users/delete/'.$user->id);?>">Delete</a><?php endif; ?></td>
 		
 	</tr>
 <?php endforeach; ?>

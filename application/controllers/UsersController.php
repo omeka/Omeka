@@ -142,7 +142,7 @@ class UsersController extends Omeka_Controller_Action
             }                
         } catch (Exception $e) {
             $this->flash($e->getMessage(), Omeka_Controller_Flash::GENERAL_ERROR);
-            $this->redirect->goto('browse');
+            $this->_helper->redirector->goto('browse');
         }
     }
     
