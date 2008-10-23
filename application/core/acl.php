@@ -23,7 +23,6 @@ $resources = array(
     'Items'         =>  array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
     'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
     'ElementSets'   =>  array('browse', 'delete'),
-    'Entities'      =>  array('add','edit','displayEmail','delete', 'browse'),
     'Files'         =>  array('edit','delete'),
     'Plugins'       =>  array('browse','config', 'install', 'uninstall'),
     'Settings'      =>  array('edit'),
@@ -31,13 +30,13 @@ $resources = array(
     'Tags'          =>  array('rename','remove', 'browse'),
     'Themes'        =>  array('browse','switch'),
     'ItemTypes'     =>  array('add','edit','delete', 'browse'),
-    'Users'         =>  array('browse','show','add','edit','delete','showRoles','editRoles','makeSuperUser', 'changeRole', 'deleteSuperUser', 'togglePrivilege')
+    // 'makeSuperUser' should be deprecated, since it can only be called if non-super users can choose the roles for user accounts.
+    // 'changeRole' determines whether the role of a user account can be changed.  only super users can do this.
+    'Users'         =>  array('browse','show','add','edit','delete','makeSuperUser', 'changeRole')
 );
 
 //Each entry in this array is the set of the values passed to $acl->allow()
 $allowList = array(
-    //Anyone can login, logout, retrieve lost password and activate their accounts
-    array(null,'Users',array('login', 'logout', 'forgot-password', 'activate')),
     //Anyone can browse Items, Item Types, Tags and Collections
     array(null, array('Items', 'ItemTypes', 'Tags', 'Collections'), array('browse')),
     //Super user can do anything
@@ -48,11 +47,9 @@ $allowList = array(
     array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
     array('admin','Items',array('add','editAll','deleteAll','tag', 'showNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage')),
     array('admin','Collections',array('add','edit','delete', 'showNotPublic')),
-    array('admin','Entities',array('add','edit','delete', 'displayEmail', 'browse')),
     array('admin','Files',array('edit','delete')),
     array('admin','Tags',array('rename','remove')),
-    array('admin','ItemTypes',array('add','edit','delete')),
-    array('admin','Users',array('browse','show','add','edit','delete','showRoles', 'changeRole')) 
+    array('admin','ItemTypes',array('add','edit','delete'))
 ); 
 
 /* $acl = new Omeka_Acl($roles, $resources, $allowList);  */
@@ -73,6 +70,5 @@ $acl->addRole(new Zend_Acl_Role('contributor'));
 $acl->loadAllowList($allowList);
 
 //Deny a couple of specific privileges to admin users
-$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets'));
-$acl->deny('admin', 'Users', array('editRoles','makeSuperUser', 'deleteSuperUser', 'togglePrivilege'));
+$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets', 'Users'));
 ?>

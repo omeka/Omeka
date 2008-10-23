@@ -65,18 +65,7 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                     $filter['user'] = $userToView;
                 }
             }
-            
-            // Entity-specific browsing, @duplication
-            if ($entityToView = $request->get('entity')) {
-                if (!$this->isAllowed('browse', 'Entities')) {
-                    throw new Exception( 'May not browse by specific entities' );
-                }
-                
-                if (is_numeric($entityToView)) {
-                    $filter['entity'] = $entityToView;
-                }
-            }
-            
+
             if ($request->get('featured')) {
                 $filter['featured'] = true;
             }

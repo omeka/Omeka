@@ -45,30 +45,7 @@ class UsersController extends Omeka_Controller_Action
     protected function checkPermissions()
     {
         $action = $this->_request->getActionName();
-        $this->checkGeneralPerms($action);
         $this->checkUserSpecificPerms($action);
-    }
-    
-    /**
-     * @hack: this method is only here because the 'showRoles' ACL privilege is 
-     * different from the 'roles' action that it protects
-     *
-     * @return void
-     **/
-    private function checkGeneralPerms($action)
-    {
-        // If we don't have a specific record that we are acting on, then check 
-        // these permissions
-        switch ($action) {
-           case 'roles':
-               if (!$this->isAllowed('showRoles')) {
-                    $this->flash( 'Cannot view the list of user roles!' );
-                    $this->redirect->goto('browse');
-                }
-               break;
-           default:
-               break;
-        }
     }
     
     /**
@@ -93,12 +70,7 @@ class UsersController extends Omeka_Controller_Action
             switch ($action) {
                
                 // If we are deleting users
-               case 'delete':
-                   
-                   //Check whether or not we are allowed to delete Super Users
-                   if (($record->role == 'super') && !$this->isAllowed('deleteSuperUser')) {
-                       throw new Exception( 'You are not allowed to delete super users!' );
-                   }
+               case 'delete':                   
                    // Can't delete yourself
                    if ($user->id == $record->id) {
                        throw new Exception('You are not allowed to delete yourself!');
@@ -391,56 +363,5 @@ class UsersController extends Omeka_Controller_Action
             }
         }
         return parent::preDispatch();
-    }
-    
-    /**
-     * AJAX Action for toggling permission for a role/resource/privilege combination
-     * 
-     * @todo Factor out the permissions check when that whole thing is fixed
-     * @return void
-     **/
-    public function togglePrivilegeAction()
-    {
-        if (!$this->isAllowed('togglePrivilege')) {
-            throw new Omeka_Controller_Exception_403('Toggle form privilege was incomplete!');
-        }
-        
-        $acl = $this->getAcl();
-        
-        $role      = $this->_getParam('role');
-        $resource  = $this->_getParam('resource');
-        $privilege = $this->_getParam('privilege');
-        
-        if (!$role || !$resource || !$privilege) {
-            Zend_Debug::dump( $this->getCurrentUser() );
-            exit;
-        }
-        
-        //If permission already exists for this, then deny it
-        if ($acl->isAllowed($role, $resource, $privilege)) {
-            $acl->removeAllow($role, $resource, $privilege);
-            $acl->deny($role, $resource, $privilege);
-        } else {
-            $acl->allow($role, $resource, $privilege);
-        }
-        
-        $hasPermission = $acl->isAllowed($role, $resource, $privilege);
-        
-        set_option('acl', serialize($acl));
-        
-        //Render the form so that we can use it in the AJAX update
-        $this->view->assign(compact('hasPermission', 'role', 'resource', 'privilege'));
-        $this->render('role-form');
-    }
-    
-    /**
-     * Define Roles Actions
-     */
-    public function rolesAction()
-    {
-        $acl = $this->getAcl();
-        $resources = $acl->getResourceList();
-        $roles = $acl->getRoleNames();
-        $this->view->assign(compact('acl', 'resources', 'roles'));
     }
 }

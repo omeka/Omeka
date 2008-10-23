@@ -48,7 +48,7 @@
 	</div>
 </div>
 
-<?php if ( has_permission('Users','showRoles') ): ?>
+<?php if ( has_permission('Users','changeRole') ): ?>
 	<div class="field">
 		<?php echo label('role','Role'); ?>
 		<div class="inputs">
