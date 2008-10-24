@@ -177,9 +177,13 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 	#detailed .append-to-item-detail {clear:both;}
 	/* Item show styles */
+	#item-title, .show #edit-item {display:inline;}
+	
 	.element-text, .element-text-empty {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
 		.element-text *, .element-text-empty * {font-size:1em;}
-		
+	
+	.item-pagination {margin-top:18px;}	
+	
 	/* Item add-edit styles */
 	#public-featured {position:absolute; top:36px; right:0; text-align:right;}	
 		#public-featured .checkbox {text-align:right;float:none; overflow:hidden; display:inline;}
@@ -204,8 +208,18 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 		#file-inputs a {float:left;display:block; font-size:1.2em; margin-left: 132px;margin-top:6px;}
 		#file-inputs input {margin-bottom:6px;}
-	#delete_item_link {padding: 18px 8px 8px 0;}
-	#delete_item_link .delete {font-weight:bold;background-position:0 50%;padding-left:36px; color: #900;}
+		
+		#delete_item_link {padding: 18px 8px 8px 0;}
+		#delete_item_link .delete {font-weight:bold;background-position:0 50%;padding-left:36px; color: #900;}
+	
+		#edit-all-tags {float:left; width: 288px;}
+			#tags-list {line-height: 2em;}
+			#edit-all-tags li {display:block; float:left; position:relative; border:1px solid #ccc;padding: 2px 8px 2px 24px; margin-bottom: 12px; margin-right: 4px;}
+			#edit-all-tags input {border-width: 0;padding:0 !important; position:absolute; top: 6px; left:4px;margin:0 !important;}
+		
+		#edit-your-tags {float:right; width: 252px; padding:18px 18px 0; background: #F2F1E8;}
+			#edit-your-tags .explanation {font-size:1.1em; color: #777;margin-top:0;}
+			#edit-your-tags input {border-color: #bbb; margin-bottom:4px;}
 	
 	/* Advanced Search Form */
 	.search-entry {margin-bottom:6px; overflow:hidden;zoom:1;}
@@ -218,9 +232,12 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 	/* Collection Browse styles */
 	
-	/* Item Types */
 	
-	#add-element-form{ background:#fff;padding:0;}
+	/* Collection Show styles */
+	.collections h1 {display:inline;}
+	.collections #primary {margin-top:18px;}
+	/* Item Types */
+	#add-element-form {background:#fff;padding:0;}
 	#add-element-form h3 {background:#fff;margin:0;padding-bottom:18px;}
 		#add-element-form .field {border-bottom:1px solid #fff;background:#DDEBEE;}
 		#add-element-form label {text-indent:18px;}

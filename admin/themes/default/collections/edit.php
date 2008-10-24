@@ -6,7 +6,7 @@
 
 <form method="post">
 <?php include 'form.php';?>	
-<p id="form_submits"><button type="submit" name="submit" id="save-changes">Save Changes</button> or <a class="cancel" href="<?php echo uri('collections/show/').$collection->id; ?>">Cancel</a></p>
+<input type="submit" name="submit" class="submit submit-medium" id="save-changes" value="Save Changes" />
 <p id="delete_link"><a class="delete" href="<?php echo uri('collections/delete/').$collection->id; ?>">Delete This Collection</a></p>
 </form>
 

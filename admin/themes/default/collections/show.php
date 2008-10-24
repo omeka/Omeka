@@ -1,16 +1,15 @@
-<?php head(array('title'=>'Collection # '.collection('Id'), 'body_class'=>'collections')); ?>
+<?php head(array('title'=>'Collection # '.collection('Id'), 'body_class'=>'collections show')); ?>
 <h1>Collection: <?php echo strip_formatting(collection('Name'));?></h1>
+<?php if (has_permission('Collections', 'edit')): ?>    
+<p id="edit"><?php echo link_to_collection('Edit', array('class'=>'edit'), 'edit'); ?></p>
+<?php endif; ?>
 
 <div id="primary">
 <div id="collection-info">
+<h2>Description</h2> 
+<p><?php echo collection('Description'); ?></p>
 
-<?php if (has_permission('Collections', 'edit')): ?>    
-<p> <?php echo link_to_collection('Edit', array('class'=>'edit'), 'edit'); ?></p>
-<?php endif; ?>
-
-<h2>Description:</h2> <p><?php echo collection('Description'); ?></p>
-
-	<h2>Collectors:</h2>
+	<h2>Collectors</h2>
 	<ul id="collector-list">
 		<li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
 	</ul>

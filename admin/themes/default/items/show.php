@@ -1,11 +1,10 @@
-<?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items primary-secondary')); ?>
-<h1 id="title">#<?php echo item('id');?> 
+<?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items show primary-secondary')); ?>
+<h1 id="item-title">#<?php echo item('id');?> 
 <?php echo strip_formatting(item('Dublin Core', 'Title')); ?></h1>
 
 <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
-<p id="edit-delete"> 
-<?php 
-echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>    
+<p id="edit-item"><?php 
+echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>   
 <?php endif; ?>
 
 <ul class="item-pagination navigation">
@@ -131,7 +130,7 @@ echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
         		<ul>
         	<?php while(loop_files_for_item()): ?>
         	    <?php $file = get_current_file(); ?>
-        		<li><?php echo link_to($file, 'show', h($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?></li>
+        		<li><?php echo link_to($file, 'show', htmlentities($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?></li>
 
 
         	<?php endwhile; ?>
