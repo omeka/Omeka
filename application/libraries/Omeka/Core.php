@@ -343,11 +343,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     {
         $options = $this->getOptions();
 
-        // if ($serialized = $options['acl']) {
-        //     $acl = unserialize($serialized);
-        // } else {
-            $acl = $this->setupAcl();
-        // }
+        $acl = $this->setupAcl();
         
         $this->setAcl($acl);
         
@@ -364,9 +360,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     {
         // Setup the ACL
         include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
-        if ($this->getDb()) {
-            set_option('acl', serialize($acl));  
-        }
+
         return $acl;
     }
     
@@ -560,6 +554,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     private function initResponseContexts()
     {
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
+
         $contexts->setContextParam('output');
 
         $contextArray = array(

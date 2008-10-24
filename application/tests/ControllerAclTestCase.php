@@ -7,7 +7,8 @@
  **/
 
 /**
- * Set of functional tests for checking to see if ACL access is denied for a specific user.
+ * Set of functional tests for checking to see if ACL access for a set of actions if 
+ * a user is not logged in.
  *
  * @package Omeka
  * @author CHNM
@@ -67,5 +68,23 @@ class ControllerAclTestCase extends OmekaControllerTestCase
     {
         $this->dispatch('item-types/add');
         $this->assertAccessForbidden();        
+    }
+    
+    public function testCannotRemoveCollectorFromCollection()
+    {
+        $this->dispatch('collections/remove-collector');
+        $this->assertAccessForbidden();                
+    }
+    
+    public function testCannotUpgradeOmeka()
+    {
+        $this->dispatch('upgrade');
+        $this->assertAccessForbidden();
+    }
+    
+    public function testCannotSeeUpgradedNotice()
+    {
+        $this->dispatch('upgrade/completed');
+        $this->assertAccessForbidden();
     }
 }

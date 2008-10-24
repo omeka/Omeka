@@ -14,7 +14,7 @@ $resources = array(
     'Files'         =>  array('edit','delete'),
     'Plugins'       =>  array('browse','config', 'install', 'uninstall'),
     'Settings'      =>  array('edit'),
-    'Upgrade'       =>  array('migrate'),
+    'Upgrade'       =>  array('migrate', 'index', 'completed'),
     'Tags'          =>  array('rename','remove', 'browse'),
     'Themes'        =>  array('browse','switch'),
     // 'delete-element' and 'add-element' are actions that allow AJAX requests to manipulate the elements for an item type.

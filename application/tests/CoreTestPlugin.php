@@ -42,7 +42,6 @@ class CoreTestPlugin extends Omeka_Core
                 // $this->initializeCurrentUser(); 
                 $this->initializeFrontController();
 
-    
                 // Initialize the paths within the view scripts. We do this here instead
                 // of allowing the view object to take care of it, because the view object
                 // uses database options and hard coded constants that don't translate
@@ -128,4 +127,9 @@ class CoreTestPlugin extends Omeka_Core
     {
         $this->_envName = $envName;
     }
+    
+    // public function routeShutdown()
+    // {
+    //     Zend_Controller_Action_HelperBroker::resetHelpers();
+    // }
 }

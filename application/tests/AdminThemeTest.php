@@ -128,7 +128,6 @@ class AdminThemeTest extends OmekaControllerTestCase
         $mockDbh->expects($this->atLeastOnce())->method('fetchRow')->will($this->returnValue(array('id'=>1, 'public'=>0, 'featured'=>0)));
                 
         $this->dispatch('/items/show/1');
-        
         $this->assertController('items');
         $this->assertAction('show');
         // Assert that the <body> tag has a class="items".  This is how we verify that the HTML has actually loaded.
