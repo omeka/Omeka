@@ -18,8 +18,8 @@
 		<tbody>
 <?php foreach( $itemtypes as $itemtype ): ?>
 <tr class="itemtype">
-	 <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo htmlentities($itemtype->name); ?></a></td>
-	<td width="70%"><?php echo htmlentities($itemtype->description); ?></td>
+	 <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo strip_formatting($itemtype->name); ?></a></td>
+	<td width="70%"><?php echo strip_formatting($itemtype->description); ?></td>
 	<?php if (has_permission('ItemTypes', 'edit')): ?><td>
 	    <a class="edit" href="<?php echo uri('item-types/edit/'.$itemtype->id); ?>">Edit</a>
 	</td><?php endif; ?>

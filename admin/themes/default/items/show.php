@@ -1,6 +1,6 @@
 <?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items primary-secondary')); ?>
 <h1 id="title">#<?php echo item('id');?> 
-<?php echo item('Dublin Core', 'Title'); ?></h1>
+<?php echo strip_formatting(item('Dublin Core', 'Title')); ?></h1>
 
 <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
 <p id="edit-delete"> 

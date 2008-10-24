@@ -29,15 +29,15 @@
 	</ul>
 	<div class="item-description">
 	<?php if (!item_has_thumbnail()): ?>
-		<?php echo item('Dublin Core', 'Description', array('snippet'=>300)); ?>
+		<?php echo strip_formatting(item('Dublin Core', 'Description', array('snippet'=>300))); ?>
 		<?php else: ?>
 		<?php echo link_to_item(item_thumbnail(), array('class'=>'thumbnail')); ?>
-		<?php echo item('Dublin Core', 'Description', array('snippet'=>300)); ?>
+		<?php echo strip_formatting(item('Dublin Core', 'Description', array('snippet'=>300))); ?>
 	<?php endif; ?>
 	</div>
 	<div class="item-meta">
 		<ul>
-			<li><span class="fieldname">Creator:</span> <?php echo item('Dublin Core', 'Creator', array('delimiter'=>', ', 'all'=>true)); ?></li>
+			<li><span class="fieldname">Creator:</span> <?php echo strip_formatting(item('Dublin Core', 'Creator', array('delimiter'=>', ', 'all'=>true))); ?></li>
 			<li><span class="fieldname">Added:</span> <?php echo item('Date Added'); ?></li>
 			<li><span class="fieldname">Collection:</span> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
 		</ul>

@@ -20,7 +20,7 @@
     </td> 
 	<td class="title"><?php echo link_to_item(); ?></td>
 	<td><?php echo item('Item Type Name'); ?></td>
-	<td><?php echo item('Dublin Core', 'Creator'); ?></td>	
+	<td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>	
 	<td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
 	<td><?php 
 	$publicCheckboxProps = array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public");

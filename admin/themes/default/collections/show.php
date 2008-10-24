@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Collection # '.collection('Id'), 'body_class'=>'collections')); ?>
-<h1>Collection: <?php echo collection('Name');?></h1>
+<h1>Collection: <?php echo strip_formatting(collection('Name'));?></h1>
 
 <div id="primary">
 <div id="collection-info">
