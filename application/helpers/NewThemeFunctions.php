@@ -1228,10 +1228,15 @@ function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
  */
 function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
 {
+    // Strip the tags.
     $str = strip_tags($str, $allowableTags);
+    // Remove non-breaking space html entities.
+    $str = str_replace('&nbsp;', '', $str);
+    // If only whitepace remains, return the fallback string.
     if (preg_match('/^\s*$/', $str)) {
         return $fallbackStr;
     }
+    // Return the deformatted string.
     return $str;
 }
 
