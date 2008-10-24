@@ -1,19 +1,21 @@
 <?php if ( item_has_files() ): ?>
-	<div class="label">Edit File Metadata</div>
+	<h3>Current Files</h3>
 	<div id="file-list">
 	<table>
 		<thead>
 			<tr>
 				<th>File Name</th>
+				<th>Edit File Metadata</th>
 				<th>Delete?</th>
 			</tr>
 		</thead>
 		<tbody>
 	<?php foreach( $item->Files as $key => $file ): ?>
 		<tr>
+			<td><?php echo h($file->original_filename); ?></td>
 			<td class="file-link">
 				<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">
-						<?php echo h($file->original_filename); ?>
+					Edit	
 				</a>
 			</td>
 			<td class="delete-link">
@@ -26,9 +28,10 @@
 	</table>
 	</div>
 <?php endif; ?>
+<h3>Add New Files</h3>
 
-<div class="field" id="add-more-files">
-<label for="add_num_files">Add Files</label>
+<div id="add-more-files">
+<label for="add_num_files">Find a File</label>
 	<div class="files">
 	<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
 	<?php 

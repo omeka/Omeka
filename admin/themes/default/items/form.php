@@ -7,6 +7,7 @@ echo js('tiny_mce/tiny_mce');
 
 	Event.observe(window,'load', function() {
         Omeka.ItemForm.enableTagRemoval();
+		Omeka.ItemForm.makeFileWindow();
         
         // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.
         $$('div.field textarea').each(function(el){
@@ -28,6 +29,14 @@ echo js('tiny_mce/tiny_mce');
     
     Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
 
+	makeFileWindow: function() {
+		$$('#file-list a.edit').each(function(link) {
+			link.onclick = function() {
+				window.open(link.getAttribute("href"));
+				return false;
+			}
+		});
+	},
     changeItemType: function() {
 		$('change_type').hide();
 		$('item-type').onchange = function() {
