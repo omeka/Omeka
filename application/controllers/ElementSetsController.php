@@ -21,8 +21,12 @@ class ElementSetsController extends Omeka_Controller_Action
      * @return void
      **/
     public function addAction()
-    {}
+    {
+        throw new Omeka_Controller_Exception_403();
+    }
     
     public function editAction()
-    {}
+    {
+        throw new Omeka_Controller_Exception_403();
+    }
 }

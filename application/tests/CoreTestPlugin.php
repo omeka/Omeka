@@ -7,6 +7,7 @@
  **/
 
 require_once 'Omeka/Core.php'; 
+require_once 'Omeka/Controller/Action/Helper/Acl.php';
  
 /**
  * Extends off the Core plugin to implement behavior that is specific to the plugin initializer.
@@ -17,19 +18,49 @@ require_once 'Omeka/Core.php';
  **/
 class CoreTestPlugin extends Omeka_Core
 {
-    protected $_envName = null;
+    protected $_envName = 'adminTheme';
     
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
         $front = Zend_Controller_Front::getInstance();
         
         switch ($this->_envName) {
-            case 'whatever':
-                # code...
-                break;
+            case 'publicTheme':
+                $this->sanitizeMagicQuotes();
+                $this->initializeClassLoader(); 
+                $this->initializeConfigFiles(); 
+                // $this->initializeLogger(); 
+                // $this->initializeDb(); 
+                $this->loadModelClasses(); 
+                // $this->initializeOptions(); 
+                $this->setOptions(array('public_theme'=>'default'));
+            
+                $this->initializeAcl(); 
+                // $this->initializePluginBroker(); 
+                // $this->initializeAuth(); 
+                            
+                // $this->initializeCurrentUser(); 
+                $this->initializeFrontController();
+
+    
+                // Initialize the paths within the view scripts. We do this here instead
+                // of allowing the view object to take care of it, because the view object
+                // uses database options and hard coded constants that don't translate
+                // well into the testing environment. Specifically, the view object uses a
+                // THEME_DIR constant that doesn't work well with the testing
+                // environment, because you can't change it to use the admin theme instead
+                // of the public theme midway through testing.
+            
+                // Get the view object and initialize the script path to the theme.
+                $view = Zend_Registry::get('view');
+                $themeName = 'default';
+                $this->setThemePath($view, 'themes' . DIRECTORY_SEPARATOR . $themeName);
+            
+                $this->initializeRoutes();
+                // $this->initializeDebugging();                
+            break;
             
             case 'adminTheme':
-            default:
                 // define('ADMIN', true);
             
                 require_once 'Omeka/Controller/Plugin/Admin.php';
@@ -70,6 +101,9 @@ class CoreTestPlugin extends Omeka_Core
                 $this->initializeRoutes();
                 // $this->initializeDebugging();
                 break;
+            default:
+                throw new Exception("Start-up environment called '{$this->_envName}' doesn't exist!");
+                break;
         }
     }
     
@@ -92,6 +126,6 @@ class CoreTestPlugin extends Omeka_Core
     
     public function setStartupEnvironment($envName)
     {
-        
+        $this->_envName = $envName;
     }
 }

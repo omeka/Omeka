@@ -165,6 +165,11 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
             $perPage = $queryPerPage;
         }     
         
+        // We can never show less than one item per page (bombs out).
+        if ($perPage < 1) {
+            $perPage = 1;
+        }
+        
         return $perPage;
     }
 }
