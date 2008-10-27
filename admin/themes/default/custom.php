@@ -20,7 +20,10 @@ add_filter(array('Display', 'Item', 'Dublin Core', 'Title'), 'show_untitled_item
 
 function show_untitled_items($title)
 {
-    if (empty($title)) {
+    // Remove all whitespace and formatting before checking to see if the title 
+    // is empty.
+    $prepTitle = trim(strip_formatting($title));
+    if (empty($prepTitle)) {
         return '[Untitled]';
     }
     return $title;
