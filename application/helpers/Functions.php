@@ -538,11 +538,7 @@ function archive_image( $record, $props, $width, $height, $format)
        }
 	   $props['width'] = $width;
 	   $props['height'] = $height;
-	
-	   if(!isset($props['alt'])) {
-			$props['alt'] = $file->title;
-		}
-	
+
 	   $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
 	   return $html;
 }
@@ -558,6 +554,14 @@ function archive_image( $record, $props, $width, $height, $format)
 	
 	}
 	
+	/**
+	 * Retrieve a substring of a given piece of text. 
+	 * 
+	 * Note that this will only split strings on the space character.
+	 * 
+	 * @param string
+	 * @return void
+	 **/
 	function snippet($text, $start_pos, $end_pos, $append = '…')
 	{
 	$start_pos = ( !$start_pos ) ? 0 : strrpos( $text, ' ', $start_pos - strlen($text) ); 

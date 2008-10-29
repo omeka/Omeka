@@ -165,6 +165,7 @@ function get_plugin_broker()
 /**
  * Define a metafield through the plugin interface.
  * 
+ * @deprecated
  * @param string
  * @param string
  * @param string

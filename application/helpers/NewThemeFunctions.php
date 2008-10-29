@@ -614,6 +614,10 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
     $imageFile = $item->Files[$index];
     $width = @$props['width'];
     $height = @$props['height'];
+    
+    $defaultProps = array('alt'=>strip_formatting(item('Dublin Core', 'Title')));
+    $props = array_merge($defaultProps, $props);
+    
     return archive_image( $imageFile, $props, $width, $height, $imageType ); 
 }
 
