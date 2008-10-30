@@ -39,7 +39,7 @@
             <form action="<?php echo uri(array(
                 'controller'=>'plugins', 
                 'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
-                    <input type="submit" name="uninstall" class="submit-medium" value="Uninstall" />
+                    <input type="submit" name="uninstall" class="uninstall submit-medium" value="Uninstall" />
                     <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
             </form>
         </td>
