@@ -5,17 +5,6 @@ head(array('title'=>'Advanced Search')); ?>
 
 <div id="primary">    
 <?php endif; ?>
-
-
-<script type="text/javascript" charset="utf-8">
-//<![CDATA[
-
-//The functions that are used by the search form can be found in search.js	
-	//Here is javascript that will duplicate the advanced-search form entries
-	Event.observe(window,'load', Omeka.Search.activateSearchButtons );
-
-//]]>	
-</script>
 	
 <form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo uri('items/browse'); ?>" method="get">
 	<div class="field">    
