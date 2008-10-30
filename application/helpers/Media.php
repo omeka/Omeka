@@ -44,7 +44,8 @@ class Omeka_View_Helper_Media
 	    'video/x-msvideo'=>'wmv',
 	    'video/x-ms-wmv'=>'wmv',
 	    'video/quicktime'=>'mov',
-	    'video/mpeg'=>'videoMpeg',
+		'video/mp4'=>'mov',
+	    'video/mpeg'=>'mov',
 	    'audio/x-wav'=>'audio',
 	    'audio/mpeg'=>'audio',
 	    'application/ogg'=>'audio',
@@ -76,11 +77,6 @@ class Omeka_View_Helper_Media
 			'controller'=> 1, 
 			'loop'=> 0
 			),
-	    'videoMpeg'=>array(
-	        'width' => '320',
-	        'height' => '240',
-	        'autostart' => 0,
-	        ),
 		'audio'=>array(
 		    'autoplay' => 'false',
 		    'autoStart' => 0,
@@ -215,25 +211,6 @@ class Omeka_View_Helper_Media
 			
 		return $html;        
     } 
-    
-    public function videoMpeg($file, array $options=array())
-    {
-        $path = $file->getWebPath('archive');
-        $html = "<object classid=\"clsid:22D6f312-B0F6-11D0-94AB-0080C74C7E95\" codebase=\"http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112\" width=\"".$options['width']."\" height=\"".$options['height']."\" type=\"application/x-oleobject\">
-        <param name=\"filename\" value=\"$path\" /><param name=\"autostart\" value=\"". ($options['autostart'] ? 'true': 'false') . "\" />
-        <param name=\"showcontrols\" value=\"true\" />
-        <!--[if !IE]> <--><object data=\"$path\" width=\"".$options['width']."\" height=\"".$options['height']."\" type=\"application/x-mplayer2\">
-        <param name=\"pluginurl\" value=\"http://www.microsoft.com/Windows/MediaPlayer/\" />
-        <param name=\"ShowControls\" value=\"true\" />
-        <param name=\"ShowStatusBar\" value=\"true\" />
-        <param name=\"ShowDisplay\" value=\"true\" />
-        <param name=\"Autostart\" value=\"" . $options['autostart'] . "\" />
-        </object><!--> 
-        <![endif]-->
-        </object>";
-        
-        return $html;
-    }
     
     /**
      * Default display of audio files via <object> tags.

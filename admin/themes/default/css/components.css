@@ -55,15 +55,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 		/* .input used to wrap input fields in items/add form */
 		.field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
 		.vertical-nav .field .inputs {width: 468px;}
-		
-		.primary-secondary .field .inputs {width:;}
-		
-		/* Changes width based on default border and padding */
-		
-	
-
-
-
+				
 /* == Layout == */
 
 #primary { background:#fff; padding:18px;border:1px solid #d7d5c4; border-width: 3px 0;}
@@ -110,7 +102,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	.info-panel li a:hover {color:#389;}
 	.info-panel p, .info-panel ul, .info-panel ol {font-size:1.1em;}
 
-	.info-panel .textinput, .info-panel textarea {width: 226px;}
+	.info-panel input.textinput, .info-panel textarea {width: 180px !important;}
 
 /* Previous/Next navigation */
 .previous, .next {float:left; display:block; width: 48%;}
