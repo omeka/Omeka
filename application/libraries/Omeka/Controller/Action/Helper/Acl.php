@@ -46,7 +46,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         try {
             $this->checkActionPermission($this->getRequest()->getActionName());
         } catch (Omeka_Controller_Exception_403 $e) {
-            $this->getRequest()->setControllerName('error')->setActionName('forbidden')->setDispatched(false);
+            $this->getRequest()->setControllerName('error')->setActionName('forbidden')->setModuleName('default')->setDispatched(false);
             // Here's a (kind of) hack that lets this happen.
             $this->_allowed['forbidden'] = true;
         }
