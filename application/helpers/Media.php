@@ -85,7 +85,7 @@ class Omeka_View_Helper_Media
 		    'height' => 20
 		    ));
         
-    protected $_wrapperClass = 'item-file';
+    protected $_wrapperClass = null;
     
     /**
      * Retrieve all the callbacks and default options from the plugins.  They

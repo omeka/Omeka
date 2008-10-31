@@ -46,9 +46,10 @@ function auto_discovery_link_tag(){
  *
  * @return void
  **/
-function display_files($files, array $props = array()) {
+function display_files($files, array $props = array(), $wrapperClass = 'item-file') {
     require_once 'Media.php';
     $helper = new Omeka_View_Helper_Media;
+    $helper->setWrapperClass($wrapperClass);
     $output = '';
     foreach ($files as $file) {
         $output .= $helper->media($file, $props);
@@ -56,10 +57,11 @@ function display_files($files, array $props = array()) {
     return $output;
 }
 
-function display_file($file, array $props=array())
+function display_file($file, array $props=array(), $wrapperClass = 'item-file')
 {
     require_once 'Media.php';
     $helper = new Omeka_View_Helper_Media;
+    $helper->setWrapperClass($wrapperClass);
     return $helper->media($file, $props);
 }
 
