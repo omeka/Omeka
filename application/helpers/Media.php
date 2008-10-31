@@ -60,7 +60,8 @@ class Omeka_View_Helper_Media
      **/
     protected $_callbackOptions = array(
         'image'=>array(
-            'imageSize'=>'square_thumbnail'
+            'imageSize'=>'square_thumbnail',
+            'linkToFile'=>true
             ),
         'wmv'=>array(
 			'width' => '320', 
@@ -137,7 +138,11 @@ class Omeka_View_Helper_Media
      **/
     public function image($file, array $options=array())
     {
-		$html .= '<a href="'.file_download_uri($file).'" class="download-file">';
+        $html = '';
+        
+        if ($options['linkToFile']) {
+            $html .= '<a href="'.file_download_uri($file).'" class="download-file">';
+        }
         
         $img = '';
         switch ($options['imageSize']) {
@@ -155,7 +160,10 @@ class Omeka_View_Helper_Media
         }
 		
 		$html .= !empty($img) ? $img : htmlentities($file->original_filename);	
-		$html .= '</a>';
+		
+		if ($options['linkToFile']) {
+		  $html .= '</a>';
+		}
 		
 		return $html;        
     }
