@@ -23,13 +23,13 @@
 	<td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>	
 	<td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
 	<td><?php 
-	$publicCheckboxProps = array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public");
+	$publicCheckboxProps = array('name'=>"items[" . item('id') . "][public]",'class'=>"checkbox make-public");
 	if (!has_permission('Items', 'makePublic')) {
 	   $publicCheckboxProps['disabled'] = 'disabled';
 	}
 	echo checkbox($publicCheckboxProps, item('Public')); ?></td>
 	<td><?php 
-	$featuredCheckboxProps = array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured");
+	$featuredCheckboxProps = array('name'=>"items[" . item('id') . "][featured]",'class'=>"checkbox make-featured");
 	if (!has_permission('Items', 'makeFeatured')) {
 	   $featuredCheckboxProps['disabled'] = 'disabled';
 	}

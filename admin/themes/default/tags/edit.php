@@ -20,7 +20,7 @@
 <div class="field">
 	<label for="new_tag">Enter a new tag name:</label>
 	<div class="inputs">
-		<input type="text" size="40" name="new_tag" />
+		<input type="text" class="textinput" size="40" name="new_tag" />
 	</div>
 </div>
 <input type="submit" name="submit" class="submit submit-medium" value="Save Changes" />

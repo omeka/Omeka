@@ -25,7 +25,7 @@
 <div class="field">
     <?php echo label(array('for' => 'name'),'Collection Name'); ?>
     <div class="inputs">
-        <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name', 'size'=>'30'),$collection->name); ?>
+        <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name', 'size'=>'40'),$collection->name); ?>
     </div>
 <?php echo form_error('name'); ?>
 </div>
@@ -35,7 +35,7 @@
     
 <?php echo form_error('description'); ?>
 <div class="inputs">
-<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10','cols'=>'40'),$collection->description); ?>
+<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10','cols'=>'60'),$collection->description); ?>
 </div>
 </div>
 

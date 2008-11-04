@@ -21,10 +21,10 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 @import url("components.css");
 
 /* == Global Styles == */
-body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9db;color: #333;min-width:882px;}
+body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; background:#eae9db;color: #333;min-width:882px;}
 	
 	/* Headings */
-	h1,#site-title {font-weight:normal; font-size:2.2em; margin-bottom:1em; line-height:1em;margin-right:12em;}
+	h1,#site-title {font-weight:normal; font-size:2.4em; margin-bottom:1em; line-height:1.5em;margin-right:12em;}
 	h2, legend {font-size:1.8em; font-weight:normal; line-height:1.2em; margin-bottom:1.2em;}
 	h3 {font-size:1.4em; line-height:1.2em; margin-bottom:0.4em;}
 	h4 {font-size:1.2em; line-height:1.5em; font-weight:bold;}
@@ -55,10 +55,10 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	
 	/* Tables */
 	table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;}
-		thead { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
+		th { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
 		th,td {padding:0.75em 0.5em 0.5em;}
-		tbody tr.even {}
-		tbody tr {border-bottom:1px dotted #d7d5c4;}
+		tr.even {}
+		tr td {border-bottom:1px dotted #d7d5c4;}
 	
 	table * {font-size:1em;margin:0;}
 			
@@ -118,17 +118,21 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 	#site-info a {color:#fff; text-decoration:none;}
 	
 		#welcome {display:inline; padding: 8px 12px;color: #999; font-size:1.1em;}
+		
 		#settings-link {display:inline; font-size:1.1em; text-align:right; padding: 8px 12px; background: #a74c29;}
 		#settings-link:hover {background: #c60;}
+		
 		#public-link {display:inline;padding: 8px 12px; font-size:1.1em;background: #467;}
 		#public-link:hover {background: #389;}
+	
 	/* Primary Nav */
 	.primary-nav {overflow:hidden; zoom:1;border:1px solid #777;background:#382e22;clear:both; margin-bottom:0;padding-left:36px;border-width:1px 0 0; font-size:1.1em; font-weight:normal;}
 		.primary-nav li {display:block; float:left; width: 125px;border-right:1px solid #d7d5c4;}
 		.primary-nav a {text-decoration:none;display:block; float:left; text-indent:12px;color:#fafafa;width: 125px;padding: 8px 0 16px;background:#2E261C;}
-		.primary-nav a:hover {background:#382E22;}
+		.primary-nav a:visited {color:#fafafa;}
+		.primary-nav a:hover {background:#382E22; color: #fafafa;}
 		.primary-nav li.nav-items {border-left:1px solid #d7d5c4;}
-		.primary-nav li.current a, 
+		.primary-nav li.current a, .primary-nav li.current a:visited,
 		.themes .primary-nav li.nav-settings a, 
 		.plugins .primary-nav li.nav-settings a,
 		.users .primary-nav li.nav-settings a {background:#eae9db; color: #333; font-weight:bold;}
@@ -176,6 +180,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		#detailed .public-featured-checkboxes li {display:inline;}
 	
 	#detailed .append-to-item-detail {clear:both;}
+	
 	/* Item show styles */
 	#item-title, .show #edit-item {display:inline;}
 	
@@ -247,6 +252,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		#element-choice a.active {background: #389;border-bottom-color: #389;}
 		
 		#add-element-form input, #add-element-form textarea, #add-element-form select {border-color: #99C4CC;}
+	
 	/* Settings */
 	#settings-form .submit {float:right;}
 	
@@ -262,6 +268,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 
 		#current-theme {background: #F2F1E8; overflow:hidden; zoom:1;padding: 18px;margin-bottom:18px;}
 		#current-theme img {border:6px solid #fff; float:right; margin-left:18px;}
+
 /* == Footer == */
 #footer {clear:both; padding: 18px 0 1px;  overflow:hidden; zoom:1;margin:0 36px; width: 882px;background: #eae9db;}
 	#footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}
