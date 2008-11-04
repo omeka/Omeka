@@ -4,16 +4,20 @@ body#login {width: 414px; margin: 54px auto;}
 
 #login #site-title {margin-left:0; margin-bottom:0; margin-top:0;}
 
-#login h1 {background:transparent; margin:0 0 1em; padding:0;}
+#login h1 {background:transparent; margin:0 0 1em; padding:0; display:inline;float:left; width: 35%;}
 
 #login #header {width: 414px; padding:18px; margin:0 auto; }
 
-#login #content {background:#fff; width: 414px;padding:18px; margin:0 auto;overflow:hidden; zoom:1;}
+#login #login-links {display:block; float:right; width: 60%; text-align:right;color:#999; margin-top: 0.5em;margin-bottom:0; font-size:1.1em;}
+	#login #login-links a {text-decoration:none; font-weight:bold; }
+
+#login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1;}
+
+#login #content form {clear:both;}
 	#login #login-form .textinput {float:right; width: 280px;}
 	#login-form label {float:left; width: 72px; text-align:right;}
 	
-	#login #login-links {float:left; width: 60%; color:#999; margin-top:18px;margin-bottom:0; font-size:1.1em;}
-		#login #login-links a {text-decoration:none; font-weight:bold;}
+
 
 		#login-form div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
 

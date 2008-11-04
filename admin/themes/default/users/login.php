@@ -1,6 +1,9 @@
 <?php head(array('bodyclass'=>'login'), 'login-header'); ?>
 
 <h1>Login</h1>
+<p id="login-links">
+<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><a href="<?php echo uri('users/forgot-password'); ?>">Lost your password?</a></spans>
+</p>
 	<?php
 	if (isset($errorMessage)):
 		?><div class="error">Error: <span>
@@ -22,9 +25,5 @@
 	</fieldset>
 	<input type="submit" class="login" value="Login" />
 </form>
-
-<p id="login-links">
-<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><a href="<?php echo uri('users/forgot-password'); ?>">Lost your password?</a></spans>
-</p>
 
 <?php foot(array(),'login-footer'); ?>
