@@ -12,6 +12,10 @@
 <link rel="stylesheet" media="screen" href="<?php echo css('login'); ?>" />
 <link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 
+<!--[if lte IE 6]>
+<link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />
+<![endif]-->
+
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
 

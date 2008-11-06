@@ -81,9 +81,13 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	.pagination {float:left; width: 414px;}
 	.pagination li {display:inline;padding: 3px 6px;}
 	.pagination li.pagination_current {display:inline;background:#389; color:#fff;}
-	.pagination li.pagination_range, .pagination li.pagination_previous, .pagination li.pagination_first, .pagination li.pagination_next, .pagination li.pagination_last {padding:0;display:inline;}
-	.pagination a {text-decoration:none; color:#333;background: #eae9db; padding: 3px 6px;}
-	.pagination a:hover {background: #c60; color: #fff;}
+	.pagination li.pagination_range, 
+	.pagination li.pagination_previous, 
+	.pagination li.pagination_first, 
+	.pagination li.pagination_next, 
+	.pagination li.pagination_last {padding:0;display:inline;}
+		.pagination a {text-decoration:none; color:#333;background: #eae9db; padding: 3px 6px;}
+		.pagination a:hover {background: #c60; color: #fff;}
 	
 	/* Tagclouds */	
 	.hTagcloud ul {list-style:none; margin-left:0; padding-left:0; line-height: 3em;}
