@@ -1,11 +1,20 @@
-#content, #primary,#user-meta, {height:1%;}
+body {font:62.5% Arial, Helvetica, sans-serif;}
 
-#view-all-items {height:1%;}
-#user-meta {padding:0; width:18em;}
+#site-title {margin-left: 18px;}
+tr td {border-bottom:1px solid #d7d5c4;}
 
-#recent-items li a {height:1%;}
+input.textinput,select,textarea {font-family:Arial, sans-serif;}
 
-#detailed div.item {height: 1%;}
-.field label img {position: absolute; top: 0; left: -18px;}
+input.submit {font-size:1.2em;}
 
-#login input.login {padding:0 0 0 -36px; }
+a.add {display:block; padding: 8px 8px 8px 36px;}
+
+.vertical-nav ul#section-nav li a {display:inline-block;}
+.vertical-nav ul#section-nav li a {display:block;}
+
+.info-panel {overflow:auto; width: 200px;}
+
+#simple-search-form {width: 226px;}
+#simple-search-form input {margin:0;}
+
+.field p.explanation {clear:both !important; display:block; margin-top: 0 !important; float:none !important;}
