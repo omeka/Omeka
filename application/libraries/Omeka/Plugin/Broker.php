@@ -78,8 +78,8 @@ class Omeka_Plugin_Broker
      **/
     protected $_media = array('callbacks'=>array(), 'options'=>array());    
         
-    //Theme directories that have been added by plugins
-    protected $_theme_dirs = array('public'=>array(),'admin'=>array());
+    //View script directories that have been added by plugins
+    protected $_pluginViewDirs = array();
             
     public function __construct($db, $pathToPlugins) 
     {
@@ -297,57 +297,39 @@ class Omeka_Plugin_Broker
      *
      * @return void
      **/
-    public function addThemeDir($path, $theme)
+    protected function addThemeDir($pluginName, $path, $themeType, $moduleName)
     {
-        if (!in_array($theme, array('public','admin','both'))) {
+        if (!in_array($themeType, array('public','admin','shared'))) {
             return false;
         }
         
         //Path must begin from within the plugin's directory
         
-        $path = $this->getCurrentPlugin() . DIRECTORY_SEPARATOR . $path;
-        
-        switch ($theme) {
+        $path = $pluginName . DIRECTORY_SEPARATOR . $path;
+                
+        switch ($themeType) {
             case 'public':
-                $this->_theme_dirs['public'][] = $path;
+                $this->_pluginViewDirs[$moduleName]['public'][] = $path;
                 break;
             case 'admin':
-                $this->_theme_dirs['admin'][] = $path;
+                $this->_pluginViewDirs[$moduleName]['admin'][] = $path;
                 break;
-            case 'both':
-                $this->_theme_dirs['public'][] = $path;
-                $this->_theme_dirs['admin'][] = $path;
+            case 'shared':
+                $this->_pluginViewDirs[$moduleName]['public'][] = $path;
+                $this->_pluginViewDirs[$moduleName]['admin'][] = $path;
                 break;
             default:
                 break;
-        }            
+        }
+        // var_dump($this->_pluginViewDirs);                    
     }
     
-    /**
-     * This will hook into the Zend_View API to add whatever is stored in self::$_theme_dirs to the script path
-     *
-     * 
-     * @return void
-     **/
-    public function loadThemeDirs(Omeka_View $view, $theme)
+    public function getModuleViewScriptDirs($moduleName=null)
     {
-        $this->registerScriptPaths($view, $this->_theme_dirs[$theme]);
-    }
-        
-    /**
-     * @see Omeka_View::setThemePath()
-     *
-     * @return void
-     **/    
-    protected function registerScriptPaths($view, $paths)
-    {
-        foreach ($paths as $path) {
-            $physicalPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $path;
-            $webPath      = WEB_PLUGIN . '/' . $path;
-            
-            $view->addScriptPath($physicalPath);
-            $view->addAssetPath($physicalPath, $webPath);
+        if ($moduleName) {
+            return $this->_pluginViewDirs[$moduleName];
         }
+        return $this->_pluginViewDirs;
     }
     
     /**
@@ -368,6 +350,8 @@ class Omeka_Plugin_Broker
         $inflector = new Zend_Filter_Word_CamelCaseToDash();
         $moduleName = strtolower($inflector->filter($current));
         Zend_Controller_Front::getInstance()->addControllerDirectory($contrDir, $moduleName);
+        
+        return $moduleName;
     }
     
     /**
@@ -379,7 +363,7 @@ class Omeka_Plugin_Broker
      *      views/
      *          admin/
      *          public/
-     *          both/
+     *          shared/
      * 
      *  This also adds these folders to the correct include paths.
      *  
@@ -409,20 +393,22 @@ class Omeka_Plugin_Broker
 
         //If the controller directory exists, add that 
         if (file_exists($controllerDir)) {
-            $this->addControllerDir('controllers');
-        }
+            $moduleName = $this->addControllerDir();
+            
+            //Add the views directories if the controller dir also exists.
+            // file_exists() may not be necessary if ZF already checks for that. 
+            
+            if (file_exists($sharedDir)) {
+                $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'shared', 'shared', $moduleName);
+            }
+            
+            if (file_exists($adminDir)) {
+                $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'admin', 'admin', $moduleName);
+            }
 
-        //Add the views directories 
-        if (file_exists($adminDir)) {
-            $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'admin', 'admin');
-        }
-        
-        if (file_exists($publicDir)) {
-            $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'public', 'public');
-        }
-        
-        if (file_exists($sharedDir)) {
-            $this->addThemeDir('views' . DIRECTORY_SEPARATOR . 'shared', 'both');
+            if (file_exists($publicDir)) {
+                $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'public', 'public', $moduleName);
+            }
         }
     }
     

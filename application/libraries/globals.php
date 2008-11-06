@@ -185,7 +185,7 @@ function define_metafield($name, $description, $type=null)
  **/
 function add_theme_pages($dir, $theme='both')
 {
-    get_plugin_broker()->addThemeDir($dir, $theme);
+    trigger_error('Deprecated in 0.10!');
 }
 
 /**

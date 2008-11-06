@@ -38,99 +38,11 @@ class Omeka_View extends Zend_View_Abstract
     public function __construct($config = array())
     {
         parent::__construct($config);         
-        $this->initPaths();     
         
         // Setting the XHTML1_STRICT doctype fixes validation errors for ZF's form elements
         $this->doctype()->setDoctype('XHTML1_STRICT');
         
-        $this->_loadCustomThemeScripts();
-    }
-    
-    /**
-     * Load order for view scripts:
-     * themes
-     * plugins
-     * application/views
-     *
-     * Load order for asset paths:
-     * themes
-     * plugins
-     * shared
-     * application/views
-     *
-     * @todo Is there any reason why shared paths shouldn't load view scripts?
-     * 
-     **/
-    private function initPaths()
-    {
-        //Baseline view scripts get checked first
-        $this->addScriptPath(VIEW_SCRIPTS_DIR);
-        
-        //View scripts and shared directory get checked for assets 
-        $this->addAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
-        
-        //Next add script paths for plugins and themes (in that order)
-        //The admin bootstrap defines this simple constant to let us know
-        if (defined('ADMIN')) {
-            $this->addPluginPaths('admin');
-            $this->addThemePaths('admin');
-        } else {
-            $this->addPluginPaths('public');
-            $this->addThemePaths('public');
-        }
-        
-        $this->addHelperPath(HELPER_DIR, 'Omeka_View_Helper');        
-    }
-    
-    public function addPluginPaths($themeType)
-    {
-        if ($broker = Omeka_Context::getInstance()->getPluginBroker()) {
-            $broker->loadThemeDirs($this, $themeType);
-        }
-    }
-    
-    /**
-     * Retrieve the option from the database that contains the directory of
-     * the theme to render. 
-     * 
-     * @param string $type Currently either 'admin' or 'public'
-     * @return string
-     **/
-    protected function getThemeOption($type)
-    {
-        $options = Omeka_Context::getInstance()->getOptions();
-        return @$options[$type . '_theme'];
-    }
-    
-    /**
-     * Add asset and script paths for the chosen theme
-     * 
-     * @param string Currently 'admin' or 'public'
-     * @return void
-     **/
-    protected function addThemePaths($themeType)
-    {                    
-        if ($themeName = $this->getThemeOption($themeType)) {
-            $scriptPath = THEME_DIR.DIRECTORY_SEPARATOR . $themeName;
-            $this->addScriptPath($scriptPath);
-            $this->addAssetPath($scriptPath, WEB_THEME.'/' . $themeName);            
-        }    
-    }
-    
-    /**
-     * @return Zend_Controller_Request_Http
-     **/
-    public function getRequest()
-    {
-        return Omeka_Context::getInstance()->getRequest();
-    }
-    
-    /**
-     * @return Zend_Controller_Request_Http
-     **/    
-    public function getResponse()
-    {
-        return Omeka_Context::getInstance()->getResponse();
+        $this->addHelperPath(HELPER_DIR, 'Omeka_View_Helper');
     }
     
     /**
@@ -150,21 +62,6 @@ class Omeka_View extends Zend_View_Abstract
     {
         $this->_asset_paths = array();
         $this->_asset_paths[] = array($physical, $web);
-    }
-    
-    /**
-     * Look for a 'custom.php' script in all script paths and run the file if it exists.
-     * 
-     * @return void
-     **/
-    private function _loadCustomThemeScripts()
-    {
-        foreach ($this->getScriptPaths() as $path) {
-            $customScriptPath = $path . 'custom.php';
-            if (file_exists($customScriptPath)) {
-                include_once $customScriptPath;
-            }
-        }
     }
         
     /**

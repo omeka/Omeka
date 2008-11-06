@@ -456,6 +456,8 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                                 
         // Action helpers
         $this->initializeActionHelpers();        
+        
+        $front->registerPlugin(new Omeka_Controller_Plugin_ViewScripts);
     }
     
     /**
