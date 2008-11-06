@@ -104,7 +104,7 @@ class ElementTable extends Omeka_Db_Table
     /**
      * Retrieve all elements for a set.
      * 
-     * @see display_element_set_form_for_item()
+     * @see display_element_set_form()
      * @param string The name of the set to which elements belong.
      * @return Element
      **/

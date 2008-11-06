@@ -67,6 +67,8 @@ class File extends Omeka_Record {
         foreach ($immutable as $value) {
             unset($post[$value]);
         }
+        
+        $this->beforeSaveElements($post);
     }
     
     protected function afterSave()

@@ -71,14 +71,14 @@ function display_form_input_for_element($element, $item, $options = array())
 	return $html;
 }
 
-function display_element_set_form_for_item($item, $elementSetName)
+function display_element_set_form($record, $elementSetName)
 {
     $elements = get_db()->getTable('Element')->findBySet($elementSetName);
     
     $html = '';
     
     foreach ($elements as $key => $element) {
-       $html .= display_form_input_for_element($element, $item);
+       $html .= display_form_input_for_element($element, $record);
     }
     
     return $html;

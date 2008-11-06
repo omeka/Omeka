@@ -15,7 +15,7 @@ foreach ($elementSets as $key => $elementSet) {
             $tabContent  = '<span class="element-set-description" id="';
             $tabContent .= text_to_id($elementSet->name) . '-description">'; 
             $tabContent .= htmlentities($elementSet->description) . '</span>' . "\n\n";
-            $tabContent .= display_element_set_form_for_item($item, $elementSet->name);
+            $tabContent .= display_element_set_form($item, $elementSet->name);
             $tabs[$tabName] = $tabContent;
             break;
     }
