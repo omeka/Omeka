@@ -28,6 +28,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      **/
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
+        
         // Getting the module name from the request object is pretty much the main
         // reason why this needs to be in a controller plugin and can't be localized
         // to the view script.
@@ -84,7 +85,13 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     
     protected function _addPathsForModule($themeType, $moduleName = null)
     {
+        // This part of the controller plugin depends on Omeka's plugin broker.
+        // If the plugin broker is not installed, can't do anything.
         $pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
+        if (!$pluginBroker) {
+            return;
+        }
+        
         $scriptDirs = $pluginBroker->getModuleViewScriptDirs($moduleName);
         
         // IF we have chosen a specific module to add paths for.
@@ -112,12 +119,6 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         $webPath      = WEB_PLUGIN . '/' . $scriptPath;
         $view->addAssetPath($physicalPath, $webPath);
         $view->addScriptPath($physicalPath);
-    }
-
-    protected function _getPluginViewScriptPaths()
-    {
-        $pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
-        return $pluginBroker->getModuleViewScriptDirs();
     }
     
     protected function _getView()
