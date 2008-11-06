@@ -247,6 +247,10 @@ echo js('tiny_mce/tiny_mce');
             checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
 	    });
     
+        // The configuration bombs out in IE6, so we have to avoid configuring TinyMCE
+        // in IE6/7.  
+        if (Prototype.Browser.IE) {return };
+    
 	    //WYSIWYG Editor
        tinyMCE.init({
         mode: "specific_textareas",
