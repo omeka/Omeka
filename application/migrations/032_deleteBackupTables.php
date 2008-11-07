@@ -27,7 +27,10 @@ class deleteBackupTables extends Omeka_Db_Migration
     
     public function up()
     {
-        $sql = "DROP TABLE IF EXISTS " . implode(', ', $this->_backupTables) . "";
-        $this->db->query($sql);
+        $db = $this->db;
+        foreach ($this->_backupTables as $backupTable) {
+            $sql = "DROP TABLE IF EXISTS `{$db->prefix}{$backupTable}`";
+            $db->query($sql);
+        }
     }
 }
