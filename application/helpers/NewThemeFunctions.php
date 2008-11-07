@@ -12,8 +12,12 @@
 /**
  * Retrieve the values for a given field in the current item.
  * 
- * @param string
- * @return array
+ * @see Omeka_View_Helper_Item::item()
+ * @uses Omeka_View_Helper_Item
+ * @param string $elementSetName
+ * @param string $elementName
+ * @param array $options
+ * @return string|array|null
  **/
 function item($elementSetName, $elementName = null, $options = array())
 {
@@ -50,27 +54,34 @@ function item_type_elements()
  * All sets of form inputs for elements will be wrapped in a div with
  * class="field".
  *
- * @todo Plugins should be able to hook in to displaying elements in a certain
- * way.
  * @param Element|array
  * @return string HTML
  **/
-function display_form_input_for_element($element, $item, $options = array())
+function display_form_input_for_element($element, $record, $options = array())
 {
     $html = '';
         
     // If we have an array of Elements, loop through the form to display them.
     if (is_array($element)) {
         foreach ($element as $key => $e) {
-            $html .= __v()->elementForm($e, $item, $options);
+            $html .= __v()->elementForm($e, $record, $options);
         }
     } else {
-        $html = __v()->elementForm($element, $item, $options);
+        $html = __v()->elementForm($element, $record, $options);
     }
 	
 	return $html;
 }
 
+/**
+ * Used within the admin theme (and potentially within plugins) to display a form
+ * for an item for a given element set.  
+ * 
+ * @uses display_form_input_for_element()
+ * @param Omeka_Record $record 
+ * @param string $elementSetName The name of the element set.
+ * @return void
+ **/
 function display_element_set_form($record, $elementSetName)
 {
     $elements = get_db()->getTable('Element')->findBySet($elementSetName);
@@ -87,10 +98,8 @@ function display_element_set_form($record, $elementSetName)
 /**
  * Retrieve a valid citation for the current item.
  *
- * Generally follows Chicago Manual of Style note format for webpages. Since 
- * Omeka items can be or represent anything, it's presumptuous to cite it as 
- * anything else. Also, this does not account for multiple creators or titles. 
- * If you want stricter adherence to a format, write a new helper function.
+ * Generally follows Chicago Manual of Style note format for webpages.  Does not 
+ * account for multiple creators or titles. 
  * 
  * @internal Was previously located at Item::getCitation().  This made not a 
  * whole lot of sense though, given that it is very much an element of the View
@@ -124,7 +133,10 @@ function item_citation()
 }
 
 /**
- * @access private
+ * Given an Omeka_Record instance and the name of an action, this will generated
+ * the URI for that record.  Used primarily by other theme helpers and most likely
+ * not useful for theme writers.
+ * 
  * @param Omeka_Record
  * @return string
  **/
@@ -150,9 +162,10 @@ function record_uri(Omeka_Record $record, $action, $controller = null)
 }
 
 /**
- * Retrieve a URL for the current item
+ * Retrieve a URL for the current item.
  * 
- * @param string Action to link to for this item.
+ * @param string Action to link to for this item.  Default is 'show'.
+ * @uses record_uri()
  * @return string URL
  **/
 function item_uri($action = 'show')
@@ -205,6 +218,8 @@ function admin_uri()
  * is what we need in this instance.  This function will be used sparingly 
  * anyway, since relative URIs are better in most instances.
  * 
+ * @todo Code that generates the http://hostname part of the URI might be better
+ * to have as a separate helper function, called by this one.
  * @uses uri()
  * @param mixed
  * @return string HTML
@@ -218,6 +233,12 @@ function abs_uri()
     return $base_root . call_user_func_array('uri', $args);
 }
 
+/**
+ * Generate an absolute URI to an item.  Primarily useful for generating permalinks.
+ * 
+ * @param Item $item Optional Item record to use for URI generation.
+ * @return void
+ **/
 function abs_item_uri($item = null)
 {
     if (!$item) {
@@ -310,7 +331,7 @@ function set_theme_base_uri($theme = null)
  *      }  
  * }
  *
- * 
+ * @access private
  * @return void
  **/
 function admin_plugin_header()
@@ -319,27 +340,51 @@ function admin_plugin_header()
     fire_plugin_hook('admin_theme_header', $request);
 }
 
+/**
+ * @access private
+ * @see admin_plugin_footer()
+ * @return void
+ **/
 function admin_plugin_footer()
 {
     $request = Omeka_Context::getInstance()->getRequest();
     fire_plugin_hook('admin_theme_footer', $request);
 }
 
+/**
+ * Retrieve the HTML that is output by the 'public_append_to_items_browse_each'
+ * hook.  This hook is fired on the public theme, inside the items/browse loop.
+ * 
+ * @return string
+ **/
 function plugin_append_to_items_browse_each()
 {
     return get_plugin_hook_output('public_append_to_items_browse_each');
 }
 
+/**
+ * Hook is fired at the end of the items/browse page, after the loop.
+ * 
+ * @see plugin_append_to_items_browse_each()
+ */
 function plugin_append_to_items_browse()
 {
     return get_plugin_hook_output('public_append_to_items_browse');
 }
 
+/**
+ * Hook is fired at the end of the items/show page.
+ * 
+ * @see plugin_append_to_items_browse_each()
+ */
 function plugin_append_to_items_show()
 {
     return get_plugin_hook_output('public_append_to_items_show');
 }
 
+/**
+ * @see plugin_append_to_items_browse_each()
+ */
 function plugin_append_to_collections_browse_each()
 {
     return get_plugin_hook_output('public_append_to_collections_browse_each');
@@ -379,7 +424,7 @@ function get_item_by_id($itemId)
 
 /**
  * @see get_item_by_id()
- * @param string
+ * @param integer
  * @return Collection|null
  **/
 function get_collection_by_id($collectionId)
@@ -387,17 +432,39 @@ function get_collection_by_id($collectionId)
     return get_db()->getTable('Collection')->find($collectionId);
 }
 
+/**
+ * @see get_item_by_id()
+ * @param integer
+ * @return User|null
+ **/
 function get_user_by_id($userId)
 {
     return get_db()->getTable('User')->find($userId);
 }
 
+/**
+ * @see get_items()
+ * @return array
+ */
 function get_tags($params = array(), $limit = 10)
 {
     $params['limit'] = $limit;
     return get_db()->getTable('Tag')->findBy($params);
 }
 
+/**
+ * Retrieve a set of Item records corresponding to the criteria given by $params.
+ * 
+ * This could be used on the public theme like so:
+ * 
+ * set_items_for_loop(get_items('tags'=>'foo, bar', 'recent'=>true), 10);
+ * while (loop_items()): ....
+ * 
+ * @see ItemTable::applySearchFilters()
+ * @param array $params
+ * @param integer $limit The maximum number of items to return.
+ * @return array
+ **/
 function get_items($params = array(), $limit = 10)
 {
     $params['per_page'] = $limit;
@@ -576,6 +643,12 @@ function item_has_files()
     return $item->hasFiles();
 }
 
+/**
+ * Determine whether or not the item has a thumbnail image that it can display.
+ * 
+ * @param string
+ * @return void
+ **/
 function item_has_thumbnail()
 {
     return get_current_item()->hasThumbnail();
@@ -614,6 +687,14 @@ function item_field_uses_html($elementSetName, $elementName, $index=0, $item = n
     return ($textRecord instanceof ElementText and $textRecord->isHtml());
 }
 
+/**
+ * Primarily used internally by other theme helpers, not intended to be used 
+ * within themes.  Plugin writers creating new helpers may want to use this 
+ * function to display a customized derivative image.
+ * 
+ * @param string
+ * @return void
+ **/
 function item_image($imageType, $props = array(), $index = 0, $item = null)
 {
     if (!$item) {
@@ -632,21 +713,38 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 
 /**
  * HTML for a thumbnail image associated with an item.  Default parameters will
- * use the first image, but 
+ * use the first image, but that can be changed by modifying $index.
  * 
- * @param string
- * @return void
+ * @uses item_image()
+ * @param array $props A set of attributes for the <img /> tag.
+ * @param integer $index The position of the file to use (starting with 0 for 
+ * the first file).  
+ * @return string HTML
  **/
 function item_thumbnail($props = array(), $index = 0)
 {
     return item_image('thumbnail', $props, $index);
 }
 
+/**
+ * @see item_thumbnail()
+ * 
+ * @param array $props
+ * @param integer $index
+ * @return string HTML
+ **/
 function item_square_thumbnail($props = array(), $index = 0)
 {
     return item_image('square_thumbnail', $props, $index);
 }
 
+/**
+ * @see item_thumbnail()
+ * 
+ * @param array $props
+ * @param integer $index
+ * @return string HTML
+ **/
 function item_fullsize($props = array(), $index = 0)
 {
     return item_image('fullsize', $props, $index);
@@ -665,6 +763,16 @@ function select_item_type($props=array(), $value=null)
     return _select_from_table('ItemType', $props, $value);	
 }
 
+/**
+ * Used primarily within the admin theme to build a <select> form input containing
+ * the names and IDs of all elements that belong to the Item Type element set.
+ * 
+ * Not meant to used by theme writers, possibly useful for plugin writers.
+ * 
+ * @param array 
+ * @param string|integer Optional value of the selected option.
+ * @return string HTML
+ **/
 function select_item_type_elements($props = array(), $value = null)
 {
     // We need a custom SQL statement for this particular select input, since we

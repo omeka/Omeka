@@ -41,10 +41,17 @@ function auto_discovery_link_tag(){
 }
 
 /**
- * Default display for a given item type
- * Example: Still Image would display a fullsize image, Moving Image would embed the movie via object tag
- *
- * @return void
+ * Displays a set of files based on the file's MIME type and any options that are
+ * passed.  This is primarily used by other helper functions and will not be used
+ * by theme writers in most cases.
+ * 
+ * @since 0.10 Now uses the Omeka_View_Helper_Media class to display the files.
+ * @since 0.10 Adds a third argument, which is the class name to give the div that
+ * wraps each file.  Passing null as this argument will ensure that none of the files
+ * are wrapped in divs.
+ * @see Omeka_View_Helper_Media
+ * @param array $files An array of File records to display.
+ * @return string HTML
  **/
 function display_files($files, array $props = array(), $wrapperClass = 'item-file') {
     require_once 'Media.php';
@@ -57,6 +64,13 @@ function display_files($files, array $props = array(), $wrapperClass = 'item-fil
     return $output;
 }
 
+/**
+ * @see display_files()
+ * @uses Omeka_View_Helper_Media
+ * @param File $file One File record.
+ * @param array $props
+ * @return string HTML
+ **/
 function display_file($file, array $props=array(), $wrapperClass = 'item-file')
 {
     require_once 'Media.php';
@@ -382,9 +396,10 @@ function nav(array $links) {
 
 
 /**
- * similar to wp_header() from Wordpress, hooks into the plugin system within the header
+ * Allows plugins to hook in to the header of public themes.
  *
- * @since 7/3/08 The 'public_theme_header' hook will receive the request object as
+ * @since 0.10 Uses the 'public_theme_header' hook instead of 'theme_header'.
+ * @since 0.10 The 'public_theme_header' hook will receive the request object as
  *  its first argument. That allows the plugin writer to tailor the header output
  *  to a specific page or pages within the public theme.
  * @return void
@@ -395,6 +410,7 @@ function plugin_header() {
 }
 
 /**
+ * @since 0.10 Uses 'public_theme_footer' hook instead of 'theme_footer'.
  * @see plugin_header()
  * @return void
  **/
@@ -470,8 +486,13 @@ function has_permission($role,$privilege=null) {
 }
 
 /**
- * Retrieve the value of a particular site setting
+ * Retrieve the value of a particular site setting.  This can be used to display
+ * any option that would be retrieved with get_option().
  *
+ * @uses get_option()
+ * @since 0.10 Content for any specific option can be filtered by implementing
+ * a filter called 'display_setting_' + the name of the option, e.g. 
+ * 'display_setting_site_title'.
  * @return string
  **/
 function settings($name) {
@@ -505,7 +526,8 @@ function square_thumbnail($record, $props=array(), $width=null, $height=null)
 }
 
 /**
- * @deprecated
+ * @deprecated Used internally by other theme helpers.  Implementation may change
+ * in future versions, do not rely on this within themes.
  * @return string|false
  **/
 function archive_image( $record, $props, $width, $height, $format) 

@@ -12,18 +12,20 @@
  * 
  * @since 0.10 No longer escapes the text for the link.  This text must be valid
  * HTML.
+ * @since 0.10 No longer prepends the word 'View' to the text of the link.  Instead
+ * 'View' is the default text.
  *
  * @param Omeka_Record|string $record The name of the controller to use for the
  * link.  If a record instance is passed, then it inflects the name of the 
  * controller from the record class.
  * @param string $action The action to use for the link (optional)
- * @param string $text The text to put in the link
+ * @param string $text The text to put in the link.  Default is 'View'.
  * @param array $props Attributes for the <a> tag
  * @return string HTML
  **/
 function link_to($record, $action=null, $text='View', $props = array())
 {
-    // If we're linking to a record somewhere, we have to 
+    // If we're linking directly to a record, use the URI for that record.
     if($record instanceof Omeka_Record) {
         $url = record_uri($record, $action);
     }
@@ -82,8 +84,12 @@ function link_to_items_rss($text = 'RSS', $params=array())
 }
 
 /**
+ * Link to the item immediately following the current one.
  * 
- *
+ * @since 0.10 Signature has changed to reflect the use of get_current_item()
+ * instead of passing the $item object as the first argument.
+ * @uses get_current_item()
+ * @uses link_to()
  * @return string
  **/
 function link_to_next_item($text="Next Item --&gt;", $props=array())
@@ -95,8 +101,7 @@ function link_to_next_item($text="Next Item --&gt;", $props=array())
 }
 
 /**
- * 
- *
+ * @see link_to_next_item()
  * @return string
  **/
 function link_to_previous_item($text="&lt;-- Previous Item", $props=array())
@@ -109,7 +114,15 @@ function link_to_previous_item($text="&lt;-- Previous Item", $props=array())
 
 /**
  * 
- *
+ * @since 0.10 Signature has changed so that $text is the first argument.  Uses
+ * get_current_collection() to determine what collection to link to.  Or you can 
+ * pass it the Collection record as the last argument.
+ * @param string $text Optional text to use for the title of the collection.  Default
+ * behavior is to use the name of the collection.
+ * @param array $props Set of attributes to use for the link.
+ * @param array $action The action to link to for the collection.  Default is 'show'.
+ * @param array $collectionObj Optional Collection record can be passed to this
+ * to override the collection object retrieved by get_current_collection().
  * @return string
  **/
 function link_to_collection($text=null, $props=array(), $action='show', $collectionObj = null)
