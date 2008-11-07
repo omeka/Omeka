@@ -11,13 +11,16 @@
  * @since 0.10 Incorporates search parameters into the query string for the URI.
  * This enables auto_discovery_link_tag() to automatically discover the RSS feed
  * for any search.
- * 
+ * @since 0.10 Adds a second argument so that extra query parameters can be used 
+ * to build the URI for the output feed.
  * @internal This filters query parameters via a blacklist instead of a whitelist,
  * because conceivably plugins could add extra fields to the advanced search.
  * @param string
+ * @param array $otherParams Optional set of query parameters to merge in to the 
+ * default output feed URI query string.
  * @return string URI
  **/
-function items_output_uri($output="rss2") {
+function items_output_uri($output="rss2", $otherParams = array()) {
     // Copy $_GET and filter out all the cruft.
     $queryParams = $_GET;
     // The submit button the search form.
@@ -26,6 +29,8 @@ function items_output_uri($output="rss2") {
     // Page should always be the first so that accurate results are retrieved
     // for the RSS.  Does it make sense to get an RSS feed of the 2nd page?
     unset($queryParams['page']);
+    
+    $queryParams = array_merge($queryParams, $otherParams);
     
     $queryParams['output'] = $output;
     return uri(array('controller'=>'items', 'action'=>'browse'), null, $queryParams);
@@ -84,6 +89,10 @@ function is_current_uri($link, $req = null) {
 	return ($link == $current) or (strpos($current, $link) === 0);
 }
 
+/**
+ * @deprecated Use items_output_uri().  
+ * @see items_output_uri()
+ */
 function items_rss_uri($params=array())
 {
 	$params['output'] = 'rss2';
@@ -96,10 +105,13 @@ function items_rss_uri($params=array())
 	return $uri;
 }
 
-
+/**
+ * @deprecated Use abs_item_uri() instead.
+ * @see abs_item_uri()
+ */
 function item_permalink_url($item)
 {
-	return WEB_DIR . '/items/show/' . $item->id;
+    return abs_item_uri($item);
 }
 
 /**

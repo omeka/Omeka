@@ -480,24 +480,32 @@ function settings($name) {
 	return $name;
 }
 
+/**
+ * @deprecated
+ **/
 function thumbnail($record, $props=array(), $width=null, $height=null) 
 {
        return archive_image($record, $props, $width, $height, 'thumbnail');
 }
 
+/**
+ * @deprecated
+ **/
 function fullsize($record, $props=array(), $width=null, $height=null)
 {
        return archive_image($record, $props, $width, $height, 'fullsize');
 }
 
+/**
+ * @deprecated
+ **/
 function square_thumbnail($record, $props=array(), $width=null, $height=null)
 {
        return archive_image($record, $props, $width, $height, 'square_thumbnail');
 }
 
 /**
- * 
- *
+ * @deprecated
  * @return string|false
  **/
 function archive_image( $record, $props, $width, $height, $format) 

@@ -17,7 +17,7 @@ class ItemDc
     {      
         $dcElements = $item->getElementsBySetName('Dublin Core');
     
-        $xml = "\n" . '<rdf:Description rdf:about="' . item_permalink_url($item) . '">';
+        $xml = "\n" . '<rdf:Description rdf:about="' . abs_item_uri($item) . '">';
         // Iterate throught the DCMES.
         foreach ($dcElements as $element) {
             $elementName = $element->name;

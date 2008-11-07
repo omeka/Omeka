@@ -66,9 +66,19 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
 	return link_to($item, $action, $text, $props);
 }
 
-function link_to_items_rss($params=array())
+/**
+ * @since 0.10 First argument is now the text of the link, 2nd argument are the 
+ * query parameters to merge in to the href for the link.
+ * 
+ * @param string $text The text of the link.
+ * @param array $params A set of query string parameters to merge in to the href
+ * of the link.  E.g., if this link was clicked on the items/browse?collection=1
+ * page, and array('foo'=>'bar') was passed as this argument, the new URI would be
+ * items/browse?collection=1&foo=bar.
+ */
+function link_to_items_rss($text = 'RSS', $params=array())
 {	
-	return '<a href="' . items_rss_uri($params) . '" class="rss">RSS</a>';
+	return '<a href="' . items_output_uri('rss2', $params) . '" class="rss">' . $text . '</a>';
 }
 
 /**
@@ -114,8 +124,7 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
 }
 
 /**
- * 
- *
+ * @deprecated Please use link_to_item(item_thumbnail()) instead.
  * @return string|false
  **/
 function link_to_thumbnail($item, $props=array(), $action='show', $random=false)
@@ -124,7 +133,7 @@ function link_to_thumbnail($item, $props=array(), $action='show', $random=false)
 }
 
 /**
- *
+ * @deprecated Please use link_to_item(item_fullsize()) instead.
  * @return string|false
  **/
 function link_to_fullsize($item, $props=array(), $action='show', $random=false)
@@ -133,8 +142,7 @@ function link_to_fullsize($item, $props=array(), $action='show', $random=false)
 }
 
 /**
- * 
- *
+ * @deprecated Please use link_to_item(item_square_thumbnail()) instead.
  * @return string|false
  **/
 function link_to_square_thumbnail($item, $props=array(), $action='show', $random=false)
@@ -143,8 +151,9 @@ function link_to_square_thumbnail($item, $props=array(), $action='show', $random
 }
 
 /**
- * Returns a link to an item, where the link has been populated by a specific image format for the item
- *
+ * Returns a link to an item, where the link has been populated by a specific image format for the item.
+ * 
+ * @deprecated Used internally by deprecated helpers, do not use this.
  * @access private
  * @return string|false
  **/
@@ -184,10 +193,14 @@ function link_to_home_page($text = null, $props = array())
 
 /**
  * 
- *
+ * @since 0.10 Arguments follow the same pattern as link_to_home_page().
+ * @see link_to_home_page()
  * @return string
  **/
-function link_to_admin_home_page($text, $props = array())
+function link_to_admin_home_page($text = null, $props = array())
 {
-	return '<a href="'.admin_uri('').'" '._tag_attributes($props).'>'.htmlentities($text)."</a>\n";
+    if (!$text) {
+        $text = settings('site_title');
+    }
+	return '<a href="'.admin_uri('').'" '._tag_attributes($props).'>'. $text."</a>\n";
 }

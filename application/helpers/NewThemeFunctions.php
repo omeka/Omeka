@@ -218,6 +218,15 @@ function abs_uri()
     return $base_root . call_user_func_array('uri', $args);
 }
 
+function abs_item_uri($item = null)
+{
+    if (!$item) {
+        $item = get_current_item();
+    }
+    
+    return abs_uri(array('controller'=>'items', 'action'=>'show', 'id'=>$item->id), 'id');
+}
+
 /**
  * Helper function to be used in public themes to allow plugins to modify the navigation of those themes.
  *

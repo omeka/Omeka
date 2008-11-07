@@ -70,7 +70,7 @@ class ItemRss2
         $entry['description'] = $this->buildDescription($item);
         
         //Permalink (this is kind of duplicated elsewhere)
-        $entry['link'] = item_permalink_url($item);
+        $entry['link'] = abs_item_uri($item);
                 
         $entry['lastUpdate'] = strtotime($item->added);
                 
