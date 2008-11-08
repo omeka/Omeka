@@ -71,7 +71,7 @@
 <p>You don't have any plugins installed.  Add them to the plugins directory to see them listed here.</p>
 <?php endif; ?>
 
-<p class="manageplugins">Add new plugins by downloading them from the <a href="http://omeka.org/download/plugins/">Omeka Plugins  Directory</a>, or <a href="http://omeka.org/codex/index.php?title=Writing_a_Plugin">write your own</a>!</p>
+<p class="manageplugins">Add new plugins by downloading them from the <a href="http://omeka.org/add-ons/plugins/">Omeka Plugins  Directory</a>, or <a href="http://omeka.org/codex/Plugin_Writing_Best_Practices">write your own</a>!</p>
 </div>
 
 <?php foot(); ?>

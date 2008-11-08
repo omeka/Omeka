@@ -44,6 +44,6 @@
 	<input type="submit" name="submit" class="submit submit-medium" id="submit" value="Switch Theme" />
 </form>
 
-<p class="managethemes">Add new themes by downloading them from the <a href="http://omeka.org/download/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Designing_a_Public_Theme">design your own</a>!</p>
+<p class="managethemes">Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices">design your own</a>!</p>
 </div>
 <?php foot(); ?>
