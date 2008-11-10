@@ -4,6 +4,7 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package OmekaThemes
+ * @subpackage Omeka_View_Helper
  **/
 
 class Omeka_View_Helper_ElementForm
