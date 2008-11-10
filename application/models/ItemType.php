@@ -75,7 +75,7 @@ class ItemType extends Omeka_Record {
     }
     
     /**
-     * Delete all the TypesMetafields joins
+     * Delete all the ItemTypesElements joins
      *
      * @return void
      **/

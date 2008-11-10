@@ -274,24 +274,7 @@ class Omeka_Plugin_Broker
             throw new Exception($e->getMessage());
         }
     }
-    
-    public function defineMetafield($name, $description) 
-    {
-        $plugin = $this->getCurrentPlugin();
         
-        $plugin_obj = $this->_db->getTable('Plugin')->findBySql('name = ?', array($plugin), true);
-        
-        if (!$plugin_obj) {
-            throw new Exception( 'Was unable to determine correct plugin to associate with a metafield!');
-        }
-                
-        $metafield = new Metafield;
-        $metafield->setArray(array('name'=>$name, 
-                             'description'=>$description, 
-                             'plugin_id'=>$plugin_obj->id));
-        $metafield->save();
-    }
-    
     /**
      * used by the add_theme_pages() helper to create a list of directories that can store static pages that integrate into the themes
      *

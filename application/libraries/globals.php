@@ -173,7 +173,7 @@ function get_plugin_broker()
  **/
 function define_metafield($name, $description, $type=null)
 {
-    get_plugin_broker()->defineMetafield($name, $description, $type);
+    trigger_error('Deprecated in 0.10!');
 }
 
 /**
