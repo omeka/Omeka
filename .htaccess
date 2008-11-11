@@ -1,5 +1,5 @@
 <IfModule mod_php5.c>
-	php_value display_errors 1
+	php_value display_errors 0
 	php_flag register_globals off
 </IfModule>
 
