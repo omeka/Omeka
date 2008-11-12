@@ -289,7 +289,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9)
 	foreach( $tags as $tag )
 	{
 
-		$size = ($tag["tagCount"] * $maxClasses) / $largest - 1;
+		$size = (int)(($tag["tagCount"] * $maxClasses) / $largest - 1);
 
 		$class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
 
@@ -300,7 +300,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9)
 			$html .= '<a href="' . $link . '?tags=' . urlencode($tag['name']) . '">';
 		}
 
-		$html .= $tag['name'];
+		$html .= htmlspecialchars($tag['name']);
 
 		if( $link )
 		{
