@@ -57,7 +57,6 @@ class SettingsController extends Omeka_Controller_Action
             $sql = "UPDATE $optionTable SET value = ? WHERE name = ?";
             foreach ( $_POST as $key => $value ) {
                 if (array_key_exists($key,$settings)) {
-                    $value = get_magic_quotes_gpc() ? stripslashes( $value ) : $value;
                     $conn->exec($sql, array($value, $key));
                     $settings[$key] = $value;
                     $options[$key] = $value;
