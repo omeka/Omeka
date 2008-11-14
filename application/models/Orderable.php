@@ -42,7 +42,7 @@ class Orderable extends Omeka_Record_Mixin
         foreach ($children as $child) {
             // The order could be thrown out of sync by invalid values being stored, 
             // so this will just append to the array if the index is already taken.
-            if (($order = (int)$child->order) and !array_key_exists($order, $children)) {
+            if (($order = (int)$child->order) and !array_key_exists($order, $indexed)) {
                 $indexed[$order] = $child;
             } else {
                 $indexed[] = $child;
