@@ -73,7 +73,7 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
                     $session->redirect = $request->getPathInfo();
                 
                     // finally, send to a login page
-                    $this->getRedirector()->goto('login', 'users');
+                    $this->getRedirector()->goto('login', 'users', 'default');
                 } else {
                     // Access the authentication session and set it to expire 
                     // after a certain amount of time if there are no requests.
