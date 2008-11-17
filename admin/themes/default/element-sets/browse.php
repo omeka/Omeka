@@ -24,7 +24,7 @@
                 <?php echo htmlentities($elementSet->description); ?>
             </td>
             <td>
-                <?php if (!in_array($elementSet->name, $doNotDelete)): ?>
+                <?php if (has_permission('ElementSets', 'delete') and !in_array($elementSet->name, $doNotDelete)): ?>
                     <?php echo link_to($elementSet, 'delete', 'Delete', array('class'=>'delete')); ?>
                 <?php endif; ?>
             </td>
