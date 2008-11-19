@@ -138,7 +138,7 @@ class Omeka_Record implements ArrayAccess
         // Format the name of the plugin hook so it's in all lowercase with 
         // underscores. Taken from Doctrine::tableize()
         $plugin_hook = Inflector::underscore($event);
-        $plugin_hook .= '_' . strtolower(get_class($this));
+        $plugin_hook .= '_' . Inflector::underscore(get_class($this));
         
         // Plugins called from within the record always receive that record 
         // instance as the first argument
