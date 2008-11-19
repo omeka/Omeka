@@ -390,6 +390,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
             foreach ($texts as $key => $textAttributes) {
                 $elementText = $this->getTextStringFromFormPost($textAttributes, $element);
                 
+                // Save element text filter.
+                $filterName = array('Save', $this->getRecordType(), $element->set_name, $element->name);
+                $elementText = apply_filters($filterName, $elementText, $this->_record, $element);
+                
                 // Ignore fields that are empty (no text)
                 if (empty($elementText)) {
                     continue;
