@@ -522,7 +522,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         //      }
         // }
         
-        $filterName = array('Validate', $this->getRecordType(), $elementRecord->name, $elementRecord->set_name);
+        $filterName = array('Validate', $this->getRecordType(), $elementRecord->set_name, $elementRecord->name);
         // Order of the parameters that are passed to this:
         // $isValid = the current value indicating whether or not the element text has validated.
         // $textValue = the string value that needs to be validated
