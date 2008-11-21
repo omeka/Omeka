@@ -272,7 +272,7 @@ class Omeka_View_Helper_Item
     
     private function _snippetText()
     {
-        if (!isset($options['snippet'])) {
+        if (!isset($this->_options['snippet'])) {
             return;
         }
         
