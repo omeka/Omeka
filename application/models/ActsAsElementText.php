@@ -390,6 +390,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
             foreach ($texts as $key => $textAttributes) {
                 $elementText = $this->getTextStringFromFormPost($textAttributes, $element);
                 
+                // Save element text filter.
+                $filterName = array('Save', $this->getRecordType(), $element->set_name, $element->name);
+                $elementText = apply_filters($filterName, $elementText, $this->_record, $element);
+                
                 // Ignore fields that are empty (no text)
                 if (empty($elementText)) {
                     continue;
@@ -522,7 +526,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         //      }
         // }
         
-        $filterName = array('Validate', $this->getRecordType(), $elementRecord->name, $elementRecord->set_name);
+        $filterName = array('Validate', $this->getRecordType(), $elementRecord->set_name, $elementRecord->name);
         // Order of the parameters that are passed to this:
         // $isValid = the current value indicating whether or not the element text has validated.
         // $textValue = the string value that needs to be validated

@@ -13,8 +13,12 @@
 			<th>Real Name</th>
 			<th>Role</th>
 			<th>Active?</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<?php if (has_permission('Users', 'edit')): ?>
+    			<th>Edit</th>			 
+			<?php endif; ?>
+			<?php if (has_permission('Users', 'delete')): ?>
+    			<th>Delete</th>			 
+			<?php endif; ?>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,8 +29,20 @@
 		<td><span class="<?php echo h($user->role); ?>"><?php echo h($user->role); ?></span></td>
 		
 		<td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
-		<td><a class="edit" href="<?php echo uri('users/edit/'.$user->id);?>">Edit</a></td>
-		<td><?php if(current_user()->id != $user->id): ?><a class="delete" href="<?php echo uri('users/delete/'.$user->id);?>">Delete</a><?php endif; ?></td>
+		
+		<?php if (has_permission('Users', 'edit')): ?>
+		<td>
+		  <a class="edit" href="<?php echo uri('users/edit/'.$user->id);?>">Edit</a>
+		</td>
+		<?php endif; ?>	    
+		
+		<?php if (has_permission('Users', 'delete')): ?>  
+		<td><?php if((current_user()->id != $user->id)): ?>
+		    <a class="delete" href="<?php echo uri('users/delete/'.$user->id);?>">Delete</a>
+		    <?php endif; ?>
+		</td>
+		<?php endif; ?>
+		
 		
 	</tr>
 <?php endforeach; ?>
@@ -34,13 +50,14 @@
 </table>
 
 <div>
-    <h2>Add a User</h2>
-	<form id="new-user-form" action="<?php echo uri('users/add'); ?>" method="post" accept-charset="utf-8">
-		<?php common('form', array(), 'users'); ?>
-		
-		<input type="submit" name="submit" class="submit submit-medium" value="Add User" />
-	</form>
-	
+    <?php if (has_permission('Users', 'add')): ?>
+        <h2>Add a User</h2>
+    	<form id="new-user-form" action="<?php echo uri('users/add'); ?>" method="post" accept-charset="utf-8">
+    		<?php common('form', array(), 'users'); ?>
+
+    		<input type="submit" name="submit" class="submit submit-medium" value="Add User" />
+    	</form>        
+    <?php endif; ?>	
 </div>
 
 </div>

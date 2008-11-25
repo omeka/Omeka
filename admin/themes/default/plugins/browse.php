@@ -30,30 +30,36 @@
         //If the plugin has been installed, then there should be separate forms for activation/configuration
         //I hate IE so much.  
         if($plugin->installed): ?>
-            <form action="<?php echo uri('plugins/activate'); ?>" method="post" accept-charset="utf-8">
-                <button name="" type="submit" class="submit-medium" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?>
-                </button>
-                <input type="hidden" name="activate" value="<?php echo $plugin->directory; ?>" />
-            </form>
+            <?php if (has_permission('Plugins', 'activate')): ?>
+                <form action="<?php echo uri('plugins/activate'); ?>" method="post" accept-charset="utf-8">
+                    <button name="" type="submit" class="submit-medium" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?>
+                    </button>
+                    <input type="hidden" name="activate" value="<?php echo $plugin->directory; ?>" />
+                </form>                
+            <?php endif; ?>
             <br />
-            <form action="<?php echo uri(array(
-                'controller'=>'plugins', 
-                'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
-                    <input type="submit" name="uninstall" class="uninstall submit-medium" value="Uninstall" />
-                    <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
-            </form>
+            <?php if (has_permission('Plugins', 'uninstall')): ?>
+                <form action="<?php echo uri(array(
+                    'controller'=>'plugins', 
+                    'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
+                        <input type="submit" name="uninstall" class="uninstall submit-medium" value="Uninstall" />
+                        <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+                </form>                
+            <?php endif; ?>
         </td>
         <td>
-        	<?php if ( $plugin->has_config ): ?>
+        	<?php if ( has_permission('Plugins', 'config') and $plugin->has_config ): ?>
         		<a href="<?php echo uri('plugins/config', array('name'=>$plugin->directory)); ?>">Configure</a>
         	<?php endif; ?>
         </td>
 
     <?php else: //The plugin has not been installed yet ?>
-        <form action="<?php echo uri('plugins/install'); ?>" method="post" accept-charset="utf-8">     
-                <button name="" type="submit" class="submit-medium" value="<?php echo $plugin->directory; ?>">Install</button>
-                <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
-        </form>
+        <?php if (has_permission('Plugins', 'install')): ?>
+            <form action="<?php echo uri('plugins/install'); ?>" method="post" accept-charset="utf-8">     
+                    <button name="" type="submit" class="submit-medium" value="<?php echo $plugin->directory; ?>">Install</button>
+                    <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+            </form> 
+        <?php endif; ?>
         </td>
         <td>
             &nbsp;
