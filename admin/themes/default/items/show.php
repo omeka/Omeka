@@ -3,8 +3,8 @@
 <?php echo strip_formatting(item('Dublin Core', 'Title')); ?></h1>
 
 <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
-<p id="edit-item"><?php 
-echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>   
+<p id="edit-item" class="edit-button"><?php 
+echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>   
 <?php endif; ?>
 
 <ul class="item-pagination navigation">

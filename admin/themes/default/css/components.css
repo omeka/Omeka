@@ -28,10 +28,8 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 .alert {background:#fff09e; font-size:1.2em; padding: 1.5em;}
 .tooltip {font-size:1.2em; line-height:1.5em;}
 
-.show #edit {display:inline;margin-bottom:18px;}
-
 /* == Form Components == */
-form{overflow:hidden; zoom:1;}
+form {overflow:hidden; zoom:1;}
 div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 	
 	label, div.label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
