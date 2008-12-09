@@ -1,12 +1,13 @@
 <?php head(array('title'=>'Type: '.htmlentities($itemtype->name),'body_class'=>'types'));?>
 <h1>Type: <?php echo htmlentities($itemtype->name);?></h1>
+<?php if ( has_permission('ItemTypes','edit') ): ?>
+<p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo record_uri($itemtype, 'edit', 'item-types'); ?>">Edit this Item Type</a></p>
+<?php endif; ?>
 
 <div id="primary">
 	<div id="type-info">
 
-		<p><?php if ( has_permission('ItemTypes','edit') ): ?>
-		 	<a class="edit" href="<?php echo record_uri($itemtype, 'edit', 'item-types'); ?>">Edit</a>
-		 <?php endif; ?></p>
+
 		
 		<p><?php echo htmlentities($itemtype->description); ?></p>
 		<h2>Type Metadata</h2>

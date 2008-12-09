@@ -63,7 +63,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	table * {font-size:1em;margin:0;}
 			
 	/* Form Buttons */
-	#add-item, #save-changes {float:right; text-decoration:none;}
+	#add-item, #save-changes, #edit-item {float:right; text-decoration:none;}
 	.submit-medium {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
 	#add-item:hover, #save-changes:hover, .submit-medium:hover {background-position:0 0 !important;cursor:pointer;}
 	.submit-medium-red {background-position:0 0 !important;}
@@ -105,9 +105,13 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		.vvvvvvvv-popular {font-size:500%;}
 		
 	/* Misc Classes */
-	.add-button {position:absolute; top:20px; right:0; text-align:right; }
+	.add-button {position:absolute; top:20px; right:0; text-align:right;}
 	.add-button a {background-color: #F4F3EB; color: #c50;padding-top:10px; padding-bottom:10px;padding-right: 10px;}
 	.add-button a:hover {background-color: #FAFAF7;color: #333;}
+	
+	.edit-button {position:absolute; top:20px; right:0; text-align:right;}
+	.edit-button a {background-color: #F4F3EB; color: #c50;padding-top:10px; padding-bottom:10px;padding-right: 10px;}
+	.edit-button a:hover {background-color: #FAFAF7;color: #333;}
 	
 /* == Wrap == */
 #wrap {}
@@ -144,7 +148,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 /* == Content == */
 #content { z-index:1000; margin-top:-1px; position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;overflow:hidden; zoom:1;}
 	
-	#content h1 {background: #eae9db;margin:-18px 0 18px; padding:18px 0 0; width: 846px;}
+	#content h1 {margin:-18px 0 18px; padding:18px 0 0; margin-right:8em;}
 	
 	/* Homepage */
 	
@@ -186,7 +190,6 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#detailed .append-to-item-detail {clear:both;}
 	
 	/* Item show styles */
-	#item-title, .show #edit-item {display:inline;}
 	
 	.element-text, .element-text-empty {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
 		.element-text *, .element-text-empty * {font-size:1em;}
@@ -214,7 +217,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 			input.add-element {background-color: transparent !important; color: #359; font-weight:bold; color:#76bb5f;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
 			
 			input.add-element, input.remove-element {cursor:pointer;font-size:1.1em;padding-top:0; background-position: 0 50%;padding-bottom:0px;}
-	
+		
+		#file-list td.file-link {width: 25%;}
+		#file-list td.delete-link {width: 10%;}
 		#file-inputs a {float:left;display:block; font-size:1.2em; margin-left: 132px;margin-top:6px;}
 		#file-inputs input {margin-bottom:6px;}
 		

@@ -1,7 +1,7 @@
 <?php head(array('title'=>'Collection # '.collection('Id'), 'body_class'=>'collections show')); ?>
 <h1>Collection: <?php echo strip_formatting(collection('Name'));?></h1>
 <?php if (has_permission('Collections', 'edit')): ?>    
-<p id="edit"><?php echo link_to_collection('Edit', array('class'=>'edit'), 'edit'); ?></p>
+<p id="edit-collection" class="edit-button"><?php echo link_to_collection('Edit this Collection', array('class'=>'edit'), 'edit'); ?></p>
 <?php endif; ?>
 
 <div id="primary">

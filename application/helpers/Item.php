@@ -242,7 +242,7 @@ class Omeka_View_Helper_Item
             $filterName[] = $elementSetName;
             $filterName[] = $elementName;
         }
-        
+
         if (is_array($text)) {
             
             // What to do if there is no text to filter?  For now, filter an 
@@ -261,10 +261,10 @@ class Omeka_View_Helper_Item
             foreach ($text as $record) {
                 // This filter receives the Item record as well as the 
                 // ElementText record
-                $record->setText(apply_filters($filterName, $record->getText(), $item, $record));
+                $record->setText(apply_filters($filterName, $record->getText(), $this->_item, $record));
             }
         } else {
-            $text = apply_filters($filterName, $text, $item, $record);
+            $text = apply_filters($filterName, $text, $this->_item, $record);
         }     
         
         $this->_text = $text;

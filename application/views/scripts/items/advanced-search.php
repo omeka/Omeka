@@ -1,6 +1,9 @@
 <?php 
 if (!$isPartial): // If we are using the partial view of this search form.
 head(array('title'=>'Advanced Search')); ?>
+<script type="text/javascript" charset="utf-8">
+    Event.observe(window, 'load', Omeka.Search.activateSearchButtons);
+</script>
 <h1>Advanced Search</h1>
 
 <div id="primary">    

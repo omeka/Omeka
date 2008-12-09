@@ -11,6 +11,10 @@
 <link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
 <link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 
+<!--[if IE 7]>
+<link rel="stylesheet" media="screen" href="<?php echo css('ie7'); ?>" />
+<![endif]-->
+
 <!--[if lte IE 6]>
 <link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />
 <![endif]-->
