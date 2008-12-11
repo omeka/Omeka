@@ -65,8 +65,6 @@
 	
 <?php else: ?>
 	<h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
-	
-	<?php items_search_form(array('id'=>'search'), uri('items/browse')); ?>
 <?php endif; ?>
 
 <?php fire_plugin_hook('append_to_items_browse', $items); // Deprecated in 0.10 ?>

@@ -8,8 +8,12 @@ head(array('title'=>'Advanced Search', 'body_class' => 'advanced-search', 'body_
 
 <div id="primary">    
 <?php endif; ?>
+
+<?php if (!$formActionUri): ?>
+    <?php $formActionUri = uri(array('controller'=>'items', 'action'=>'browse')); ?>
+<?php endif; ?>
 	
-<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo uri('items/browse'); ?>" method="get">
+<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo $formActionUri; ?>" method="get">
 	<div id="search-keywords" class="field">    
 		<?php echo label('search','Search for Keywords'); ?>
 		<div class="inputs">

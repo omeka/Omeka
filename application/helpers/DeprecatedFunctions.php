@@ -300,14 +300,6 @@ function display_empty($val, $alternative="[Empty]") {
 
 /**
  * @deprecated
- */
-function items_search_form($props=array()) {
-    return __v()->action('advanced-search', 'items', null, array('is_partial'=>true, 'form_attributes'=>$props));
-    // trigger_error('The advanced search form should be on a page called "items/advanced-search.php" in your theme.  Do not use this helper anymore.');
-}
-
-/**
- * @deprecated
  * @param boolean
  * @return string
  **/
