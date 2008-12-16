@@ -3,6 +3,6 @@
     $output = ob_get_contents();
     ob_end_clean(); 
     if (!empty($output)): ?>
-    <fieldset id="additional-plugin-data">
+    <div id="additional-plugin-data">
         <?php echo $output; ?>
-    </fieldset><?php endif; ?>
+    </div><?php endif; ?>
