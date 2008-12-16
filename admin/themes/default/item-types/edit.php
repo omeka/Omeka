@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Edit Type: '.htmlentities($itemtype->name),'body_class'=>'types')); ?>
+<?php head(array('title'=>'Edit Type: '.htmlentities($itemtype->name),'bodyclass'=>'item-types')); ?>
 <h1><?php echo htmlentities($itemtype->name); ?></h1>
 
 <div id="primary">

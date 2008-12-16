@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Users: '.$user->username, 'content_class' => 'vertical-nav', 'body_class'=>'themes primary'));?>
+<?php head(array('title'=>'Users: '.$user->username, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
 <h1>User: <?php echo h($user->first_name); ?> <?php echo h($user->last_name); ?> <a class="edit" href="<?php echo uri('users/edit/'.$user->id); ?>">(Edit)</a></h1>
 
 <?php common('settings-nav'); ?>

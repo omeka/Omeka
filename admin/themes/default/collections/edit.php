@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Edit Collection #'.$collection->id, 'body_class'=>'collections')); ?>
+<?php head(array('title'=>'Edit Collection #'.$collection->id, 'bodyclass'=>'collections')); ?>
 <h1>Edit <?php echo h($collection->name); ?></h1>
 
 <div id="primary">

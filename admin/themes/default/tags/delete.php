@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Remove Tags', 'content_class' => 'horizontal-nav','body_class'=>'tags')); ?>
+<?php head(array('title'=>'Remove Tags', 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
 <?php echo flash(); ?>
 
 <h1>Delete Tags</h1>

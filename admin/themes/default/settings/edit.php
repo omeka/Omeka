@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'body_class'=>'settings primary')); ?>
+<?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <?php echo js('tooltip'); ?>
 
 <script type="text/javascript">

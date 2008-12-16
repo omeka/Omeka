@@ -1,6 +1,6 @@
 <?php 
 if (!$isPartial): // If we are using the partial view of this search form.
-head(array('title'=>'Advanced Search', 'body_class' => 'advanced-search', 'body_id' => 'advanced-search-page')); ?>
+head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid' => 'advanced-search-page')); ?>
 <script type="text/javascript" charset="utf-8">
     Event.observe(window, 'load', Omeka.Search.activateSearchButtons);
 </script>

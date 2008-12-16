@@ -1,4 +1,4 @@
-<?php head(array('title' => 'Item # '.item('id'), 'body_class'=>'items show primary-secondary')); ?>
+<?php head(array('title' => 'Item # '.item('id'), 'bodyclass'=>'items show primary-secondary')); ?>
 <h1 id="item-title">#<?php echo item('id');?> 
 <?php echo strip_formatting(item('Dublin Core', 'Title')); ?></h1>
 

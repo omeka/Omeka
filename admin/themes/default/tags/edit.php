@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Edit Tags', 'content_class' => 'horizontal-nav','body_class'=>'tags')); ?>
+<?php head(array('title'=>'Edit Tags', 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
 
 <h1>Rename Tags</h1>
 <?php common('tags-nav'); ?>

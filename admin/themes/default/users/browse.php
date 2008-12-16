@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'body_class'=>'users primary'));?>
+<?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 <h1>Users</h1>
 <?php common('settings-nav'); ?>
 <?php print_r($current_user); ?>

@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Element Sets', 'content_class' => 'vertical-nav', 'body_class'=>'element-sets primary'));?>
+<?php head(array('title'=>'Element Sets', 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
 <h1>Element Sets</h1>
 <?php common('settings-nav'); ?>
 

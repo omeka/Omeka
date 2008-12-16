@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Add Type','body_class'=>'types')); ?>
+<?php head(array('title'=>'Add Type','bodyclass'=>'item-types')); ?>
 <h1>Add an Item Type</h1>
 
 <div id="primary">

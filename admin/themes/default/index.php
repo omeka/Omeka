@@ -1,4 +1,4 @@
-<?php head(array('body_class'=>'index primary-secondary', 'title'=>'Dashboard')); ?>
+<?php head(array('bodyclass'=>'index primary-secondary', 'title'=>'Dashboard')); ?>
 <h1>Dashboard</h1>
 	<div id="primary">
 	    

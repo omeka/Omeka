@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Plugins', 'content_class' => 'vertical-nav', 'body_class'=>'plugins primary')); ?>
+<?php head(array('title'=>'Plugins', 'content_class' => 'vertical-nav', 'bodyclass'=>'plugins primary')); ?>
 <h1>Plugins</h1>
 
 <?php common('settings-nav'); ?>
