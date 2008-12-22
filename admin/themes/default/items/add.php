@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Add Item','content_class' => 'vertical-nav', 'body_class'=>'items primary'));?>
+<?php head(array('title'=>'Add Item','content_class' => 'vertical-nav', 'bodyclass'=>'items primary'));?>
 
 <script type="text/javascript">
 

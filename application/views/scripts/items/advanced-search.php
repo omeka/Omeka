@@ -1,6 +1,6 @@
 <?php 
 if (!$isPartial): // If we are using the partial view of this search form.
-head(array('title'=>'Advanced Search')); ?>
+head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid' => 'advanced-search-page')); ?>
 <script type="text/javascript" charset="utf-8">
     Event.observe(window, 'load', Omeka.Search.activateSearchButtons);
 </script>
@@ -8,15 +8,19 @@ head(array('title'=>'Advanced Search')); ?>
 
 <div id="primary">    
 <?php endif; ?>
+
+<?php if (!$formActionUri): ?>
+    <?php $formActionUri = uri(array('controller'=>'items', 'action'=>'browse')); ?>
+<?php endif; ?>
 	
-<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo uri('items/browse'); ?>" method="get">
-	<div class="field">    
+<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo $formActionUri; ?>" method="get">
+	<div id="search-keywords" class="field">    
 		<?php echo label('search','Search for Keywords'); ?>
 		<div class="inputs">
 		<?php echo text(array('name'=>'search','size' => '40','id'=>'search','class'=>'textinput'),$_REQUEST['search']); ?>
 		</div>
 	</div>
-	<div id="advanced-search" class="field">
+	<div id="search-narrow-by-fields" class="field">
 	
 		<div class="label">Narrow by Specific fields</div>
 		

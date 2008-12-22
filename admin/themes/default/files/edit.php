@@ -1,4 +1,4 @@
-<?php head(array('body_class'=>'items primary')); ?>
+<?php head(array('bodyclass'=>'files primary')); ?>
 <script type="text/javascript" charset="utf-8">
     Event.observe(window, 'load', function(){
         // Get rid of the add/remove buttons and 'Use HTML' checkbox.

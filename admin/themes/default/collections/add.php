@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Add Collection', 'body_class'=>'collections')); ?>
+<?php head(array('title'=>'Add Collection', 'bodyclass'=>'collections')); ?>
 <h1>Add a Collection</h1>
 
 <div id="primary">

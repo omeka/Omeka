@@ -27,18 +27,21 @@ class ItemsController extends Omeka_Controller_Action
     }
     
     /**
-     * This only loads the script for the advanced search page.
+     * This shows the advanced search form for items by going to the correct URI.
+     * 
+     * This form can be loaded as a partial by calling items_search_form().
      * 
      * @return void
      **/
     public function advancedSearchAction()
     {
-        $this->view->isPartial = ($this->getRequest()->isXmlHttpRequest() or (boolean)$this->_getParam('is_partial'));
+        // Only show this form as a partial if it's being pulled via XmlHttpRequest
+        $this->view->isPartial = $this->getRequest()->isXmlHttpRequest();
         
-        $this->view->formAttributes = $this->_getParam('form_attributes');
-        if (!$this->view->formAttributes) {
-            $this->view->formAttributes = array();
-        }        
+        // If this is set to null, use the default items/browse action.
+        $this->view->formActionUri = null;
+        
+        $this->view->formAttributes = array('id'=>'search');
     }
     
     protected function _getItemElementSets()

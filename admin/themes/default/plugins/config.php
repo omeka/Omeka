@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Plugin Configuration', 'body_class'=>'plugins')); ?>
+<?php head(array('title'=>'Plugin Configuration', 'bodyclass'=>'plugins')); ?>
 
 <div id="primary">
 <?php echo flash(); ?>

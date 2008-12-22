@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Browse Tags', 'content_class' => 'horizontal-nav','body_class'=>'tags primary')); ?>
+<?php head(array('title'=>'Browse Tags', 'content_class' => 'horizontal-nav','bodyclass'=>'tags primary')); ?>
 <h1>Tags</h1>
 
 <?php common('tags-nav'); ?>

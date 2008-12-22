@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'body_class'=>'items primary browse-items')); ?>
+<?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 <h1>Browse Items (<?php echo total_results();?> items total)</h1>
 <p id="add-item" class="add-button"><a class="add" href="<?php echo uri('items/add'); ?>">Add an Item</a></p>
 
@@ -65,8 +65,6 @@
 	
 <?php else: ?>
 	<h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
-	
-	<?php items_search_form(array('id'=>'search'), uri('items/browse')); ?>
 <?php endif; ?>
 
 <?php fire_plugin_hook('append_to_items_browse', $items); // Deprecated in 0.10 ?>

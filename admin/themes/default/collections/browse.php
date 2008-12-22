@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Browse Collections', 'body_class'=>'collections')); ?>
+<?php head(array('title'=>'Browse Collections', 'bodyclass'=>'collections')); ?>
 <h1>Collections</h1>
 <?php if (has_permission('Collections', 'add')): ?>
 	<p id="add-collection" class="add-button"><a href="<?php echo uri('collections/add'); ?>" class="add add-collection">Add a Collection</a></p>

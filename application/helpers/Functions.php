@@ -604,3 +604,7 @@ function archive_image( $record, $props, $width, $height, $format)
 			return  $snippet . $append; 
 		}
 	}
+	
+function items_search_form($props=array(), $formActionUri = null) {
+    return __v()->partial('items/advanced-search.php', array('isPartial'=>true, 'formAttributes'=>$props, 'formActionUri'=>$formActionUri));
+}	

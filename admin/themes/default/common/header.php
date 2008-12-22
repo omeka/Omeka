@@ -30,7 +30,7 @@
 <?php admin_plugin_header(); ?>
 
 </head>
-<body class="<?php echo $body_class; ?>">
+<body class="<?php echo $bodyclass; ?>">
 	<div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
 	<div id="wrap">
 		
