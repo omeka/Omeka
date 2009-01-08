@@ -138,24 +138,42 @@ class Omeka_View_Helper_Media
      * options include: 'imageSize'
      * @return string HTML for display
      **/
+
+    
     public function image($file, array $options=array())
     {
         $html = '';
-        
+        $item_title = item('Dublin Core', 'Title');
         if ($options['linkToFile']) {
             $html .= '<a href="'.file_download_uri($file).'" class="download-file">';
+        }
+        /** 
+         * Setting a variable for content for the alt attribute for images.
+         * Problem with alternative text is that it shoudl describe what's going
+         * on in the image, so should use the file description first. Item title 
+         * usually doesn't describe what's in the image specifically, but is provided 
+         * as a last resort.
+         **/
+        if (!empty($file->description)) {
+            $alt = $file->description;
+        }
+        elseif (!empty($file->title)) {
+            $alt = $file->title;
+        }
+        elseif (!empty($item_title)) {
+            $alt = $item_title;
         }
         
         $img = '';
         switch ($options['imageSize']) {
             case 'thumbnail':
-                $img = thumbnail($file, array('class'=>'thumb'));
+                $img = thumbnail($file, array('class'=>'thumb', 'alt' => $alt));
                 break;
             case 'square_thumbnail':
-                $img = square_thumbnail($file, array('class'=>'thumb'));
+                $img = square_thumbnail($file, array('class'=>'thumb', 'alt' => $alt));
                 break;
             case 'fullsize':
-                $img = fullsize($file, array('class'=>'full'));
+                $img = fullsize($file, array('class'=>'full', 'alt' => $alt));
                 break;
             default:
                 break;
