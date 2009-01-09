@@ -272,3 +272,36 @@ function is_admin_theme()
 {
     return defined('ADMIN');
 }
+
+/**
+ * A prototype of the insert_item() helper, which will be in the core in 1.0.
+ *
+ * @uses InsertItemHelper
+ * @param array $itemMetadata 
+ * @param array $elementTexts 
+ * @return Item
+ * @throws Omeka_Validator_Exception
+ * @throws Exception
+ **/
+function insert_item($metadata = array(), $elementTexts = array())
+{
+    // Passing null means this will create a new item.
+    $helper = new InsertItemHelper(null, $metadata, $elementTexts);
+    $helper->run();
+    return $helper->getItem();
+}
+
+/**
+ * @see insert_item()
+ * @uses InsertItemHelper
+ * @param Item|int $item Either an Item object or the ID for the item.
+ * @param array $itemMetadata Set of options that can be passed to the item.
+ * @param array $elementTexts
+ * @return Item
+ **/
+function update_item($item, $metadata = array(), $elementTexts = array())
+{
+    $helper = new InsertItemHelper($item, $metadata, $elementTexts);
+    $helper->run();
+    return $helper->getItem();
+}
