@@ -250,6 +250,10 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	/* Collection Show styles */
 	.collections h1 {display:inline;}
 	.collections #primary {margin-top:18px;}
+	
+	/* Collection Edit */
+	#collectors-list a.remove-collector {text-decoration:none; background: #ccc; font-size:0.85em;}
+	
 	/* Item Types */
 	#add-element-form {background:#fff;padding:0;}
 	#add-element-form h3 {background:#fff;margin:0;padding-bottom:18px;}

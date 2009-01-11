@@ -52,7 +52,7 @@
 		    'controller'=>'collections', 
 		    'action'=>'remove-collector', 
 		    'collector_id'=>$collector->id, 
-		    'collection_id'=>$collection->id), 'default'); ?>">[X]</a>
+		    'collection_id'=>$collection->id), 'default'); ?>">Remove</a>
 		</li>
 	</ul>
 	<?php endforeach; ?>
