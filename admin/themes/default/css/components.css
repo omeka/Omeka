@@ -25,7 +25,7 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 .error {background:#f1c8ba; color:#933; margin:1.5em 0; font-size:1.2em; padding:1.5em;}
 .field .error {clear:both;}
 .success {background-color: #B9D5B9; color:#245525; font-size:1.2em;padding:1.5em;}
-.alert {background:#fff09e; font-size:1.2em; padding: 1.5em;}
+.alert {background:#fff09e; font-size:1.2em; padding: 1.5em;margin-bottom:0.5em;}
 .tooltip {font-size:1.2em; line-height:1.5em;}
 
 /* == Form Components == */
@@ -41,11 +41,18 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
 	
 	.dateinput input {margin-right: 3px;}
+	
+	/* Submit buttons - different sizes, uses background images */
+	.submit-extrasmall {background:none; color:#fff;border:none;width: 46px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-extrasmall.gif") 0 -30px no-repeat !important;}
+	.submit-small {background:none; color:#fff;border:none;width: 70px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-small.gif") 0 -30px no-repeat !important;}
+	.submit-medium {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
+	.submit-medium:hover, .submit-small:hover, .submit-extrasmall:hover {background-position:0 0 !important;cursor:pointer;}
+	
 	/* Replaces tooltips */
 	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999;}
 	#item-form .field .explanation {margin-left:216px; float:left; clear:right;}
+	
 	/* Changes the width of inputs depending on the layout */
-
 		.vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
 		.vertical-nav #item-form .field .explanation {margin-left: 144px;}
 		/* .input used to wrap input fields in items/add form */

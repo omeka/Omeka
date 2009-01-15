@@ -4,29 +4,28 @@ body#login {width: 414px; margin: 54px auto;}
 
 #login #site-title {margin-left:0; margin-bottom:0; margin-top:0;}
 
-#login h1 {background:transparent; margin:0 0 1em; padding:0; display:inline;float:left; width: 25%;}
+#login h1 {background:transparent; font-size:2em;margin:0 0 1em; padding:0; display:inline;float:left;}
 
+#login .error {clear:both; margin-bottom:0.5em;}
 #login #header {width: 414px; padding:18px; margin:0 auto 0; }
 
-#login #login-links {display:block; float:right; width: 70%; text-align:right;color:#999; margin-top: 1em;margin-bottom:0; font-size:1.1em;}
+#login #login-links {display:block; float:right; width: 60%; text-align:right;color:#999; margin-top: 1em;margin-bottom:0; font-size:1.1em;}
+
 	#login #login-links a {text-decoration:none; font-weight:bold; }
 
 #login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1;}
 
 #login #content form {clear:both;}
-	#login #login-form .textinput {float:right; width: 280px;}
-	#login-form label {float:left; width: 72px; text-align:right;}
-	
+	#login .textinput {float:right; width: 280px;}
+	#login label {float:left; width: 72px; text-align:right;}
+	p.clear {clear:both;}
 
 
-		#login-form div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
+		#login div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
 
-		input.login {background:none; color:#fff;border:none;width: 71px; height: 31px; _overflow:hidden; background:#333 url("../images/login-button.gif") 0 0 no-repeat !important; font-size:1.2em;}
-
-		input.login:hover {background-position:0 -31px !important;cursor:pointer;}
-
-		#login-form input.login {float:right;margin-top:9px; text-transform: uppercase; letter-spacing:1px; font-size:1em;}
-
+		#login input.submit {float:right;margin-top:6px;margin-bottom:0;}
+		
+		#back-to-login {text-align:left; float:left; width: 280px;margin-bottom:0;}
 #login #footer {padding:18px; margin:0 auto;width: 414px;}
 	#login #footer p {margin:0; width: auto; }
 
