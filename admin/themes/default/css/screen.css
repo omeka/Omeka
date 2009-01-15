@@ -168,7 +168,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	
 	/* Item Browse styles */
 	
-	.browse-items .detailed li.nav-list-view a {background: #eae9db !important;}
+	.browse-items .simple li.nav-list-view a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
+	
 	#items-browse {clear:both;}
 	#browse-meta {overflow:hidden; zoom:1;padding-bottom:18px;border-bottom:2px solid #d7d5c4;}
 	table#items {width:100%;} 
