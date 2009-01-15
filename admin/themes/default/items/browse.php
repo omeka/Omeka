@@ -4,10 +4,10 @@
 
 <?php if ( total_results() ): ?>
 
-<ul id="section-nav" class="navigation">
+<ul id="section-nav" class="navigation<?php if(@$_GET['view'] == 'detailed') echo ' detailed'; ?>">
 <?php
 	$section_nav = array(
-	    'List View' => current_uri(array('view'=>'simple')), 
+	    'List View' => current_uri(), 
 	    'Detailed View' => current_uri(array('view'=>'detailed'))
 	    );
 	

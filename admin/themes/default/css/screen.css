@@ -169,6 +169,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		#recent-items #view-all-items a {display:block; text-decoration:none; background:url("../images/bullet_go.gif") 100% 6px no-repeat; width: 7em;float:right;padding:6px 18px;}
 	
 	/* Item Browse styles */
+	
+	.browse-items .detailed li.nav-list-view a {background: #eae9db !important;}
 	#items-browse {clear:both;}
 	#browse-meta {overflow:hidden; zoom:1;padding-bottom:18px;border-bottom:2px solid #d7d5c4;}
 	table#items {width:100%;} 
