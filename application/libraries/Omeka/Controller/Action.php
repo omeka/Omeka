@@ -43,6 +43,17 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     protected $_beforeFilter = array();
     
     /**
+     * The number of records to browse per page.  If this is left null, then
+     * results will not paginate.
+     * 
+     * This is partially because not every controller will want to paginate
+     * records and also to avoid BC breaks for plugins.
+     *
+     * @var string
+     **/
+    protected $_browseRecordsPerPage;
+
+    /**
      * Does the following things:
      * 
      * Aliases the redirector helper to clean up the syntax (is this bad?)
@@ -242,18 +253,44 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $pluralName = $this->getPluralized();
         
         $params = $this->_getAllParams();
-                
-        $records = $this->getTable($this->_modelClass)->findBy($params);
         
-        $totalRecords = count($records);
+        $recordsPerPage = $this->_getBrowseRecordsPerPage();
+        $currentPage = $this->_getBrowseRecordsPage();
+        
+        $table = $this->getTable($this->_modelClass);
+        
+        $records = $table->findBy($params, $recordsPerPage, $currentPage);
+        
+        $totalRecords = $table->count($params);
         
         Zend_Registry::set($pluralName, $records);
         
         // Fire the plugin hook
         fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $records);
+        
+        // If we are using the pagination, we'll need to set some info in the
+        // registry.
+        if ($recordsPerPage) {
+            $pagination = array('page'          => $currentPage, 
+                                'per_page'      => $recordsPerPage, 
+                                'total_results' => $totalRecords);
+            Zend_Registry::set('pagination', $pagination);
+        }
                 
         $this->view->assign(array($pluralName     => $records, 
                                   'total_records' => $totalRecords));
+    }
+    
+    protected function _getBrowseRecordsPerPage()
+    {
+        // Don't care about the 'per_page' query parameter by default.
+        // This can be overridden in subclasses by redefining this method.
+        return $this->_browseRecordsPerPage;
+    }
+    
+    protected function _getBrowseRecordsPage()
+    {
+        return $this->_getParam('page', 1);
     }
     
     /**

@@ -298,10 +298,7 @@ class ItemTable extends Omeka_Db_Table
         }
         
         $this->filterBySearch($select, $params);
-        
-        // Pagination
-        $select->limitPage($params['page'], $params['per_page']);
-        
+                
         if (isset($params['range'])) {
             $this->filterByRange($select, $params['range']);
         }

@@ -448,8 +448,7 @@ function get_user_by_id($userId)
  */
 function get_tags($params = array(), $limit = 10)
 {
-    $params['limit'] = $limit;
-    return get_db()->getTable('Tag')->findBy($params);
+    return get_db()->getTable('Tag')->findBy($params, $limit);
 }
 
 /**
@@ -467,8 +466,7 @@ function get_tags($params = array(), $limit = 10)
  **/
 function get_items($params = array(), $limit = 10)
 {
-    $params['per_page'] = $limit;
-    return get_db()->getTable('Item')->findBy($params);
+    return get_db()->getTable('Item')->findBy($params, $limit);
 }
 
 /**
@@ -480,25 +478,17 @@ function get_items($params = array(), $limit = 10)
  **/
 function get_users($params = array(), $limit = 10)
 {
-    $params['limit'] = $limit;
-    return get_db()->getTable('User')->findBy($params);
+    return get_db()->getTable('User')->findBy($params, $limit);
 }
 
 /**
- * @todo 'limit' and 'per_page' parameters should be combined across models
- * so that there is only one parameter for data retrieval (should be 'limit')
- * instead of 'per_page'.
- * 
  * @param array
  * @param integer
  * @return array
  **/
 function get_collections($params = array(), $limit = 10)
 {
-    $params['per_page'] = $limit;
-    // This line should be implied, may signal a need for refactoring.
-    $params['page'] = 1;
-    return get_db()->getTable('Collection')->findBy($params);
+    return get_db()->getTable('Collection')->findBy($params, $limit);
 }
 
 /**
@@ -1204,7 +1194,7 @@ function loop_items_in_collection($num = 10, $options = array())
     static $loopIsRun = false;
     if (!$loopIsRun) {
         // Retrieve a limited # of items based on the collection given.
-        $items = get_items(array('collection'=>get_current_collection()->id, 'per_page'=>$num));
+        $items = get_items(array('collection'=>get_current_collection()->id), $num);
         set_items_for_loop($items);
     }
     

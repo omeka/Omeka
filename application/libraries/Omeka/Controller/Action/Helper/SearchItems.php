@@ -127,19 +127,17 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         Zend_Registry::set('total_items', $totalItems);
         
         // Now that we are retrieving the actual result set, limit and offset are applied.        
-        $params['page'] = $resultPage;
-        
-        $params['per_page'] = $this->getItemsPerPage();
+        $itemsPerPage = $this->getItemsPerPage();
         
         //Retrieve the items themselves
-        $items = $itemTable->findBy($params);
+        $items = $itemTable->findBy($params, $itemsPerPage, $resultPage);
         
         return array(
             'items'=>$items, 
             'total_results'=>$totalResults, 
             'total_items' => $totalItems, 
             'page' => $resultPage, 
-            'per_page' => $params['per_page']);
+            'per_page' => $itemsPerPage);
     }
     
     /**

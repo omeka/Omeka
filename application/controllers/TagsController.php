@@ -136,13 +136,12 @@ class TagsController extends Omeka_Controller_Action
         }
         
         //For the count, we only need to check based on permission levels
-        $count_params = array_merge($perms, array('limit' => false, 
-                                                  'recent' => false, 
+        $count_params = array_merge($perms, array('recent' => false, 
                                                   'type' => $for));
         
         $total_tags = $this->_table->count($count_params);
         
-        $tags = $this->_table->findBy(array_merge($params, $perms, array('type' => $for)));
+        $tags = $this->_table->findBy(array_merge($params, $perms, array('type' => $for)), $params['limit']);
         $total_results = count($tags);
         
         Zend_Registry::set('total_tags', $total_tags);

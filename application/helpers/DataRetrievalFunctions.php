@@ -79,7 +79,7 @@ function recent_collections($num = 10) {
 }
 
 function recent_items($num = 10) {
-	return get_db()->getTable('Item')->findBy(array('recent'=>true,'per_page'=>(int) $num));
+	return get_db()->getTable('Item')->findBy(array('recent'=>true), $num);
 }
 
 /**

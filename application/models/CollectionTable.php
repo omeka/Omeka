@@ -16,32 +16,6 @@ class CollectionTable extends Omeka_Db_Table
 {    
     public function applySearchFilters($select, $params)
     {
-        /*****************************
-         * PAGINATION
-         *****************************/
-        
-        // We should only paginate if these parameters have been passed (many
-        // cases in which pagination is not desirable for collections).
-        if(array_key_exists('page', $params) and array_key_exists('per_page', $params)) {
-            $page = 1;
-            $per_page = $this->getNumRecordsPerPage();
-    
-            if (isset($params['per_page'])) {
-                $per_page = (int) $params['per_page'];
-            }
-    
-            if (isset($params['page'])) {
-                $page = (int) $params['page'];
-            }
-    
-            $select->limitPage($page, $per_page);    
-        }
-
-        
-        /****************************
-         * END PAGINATION
-         ****************************/
-        
         /****************************
          * FIND RECENT COLLECTIONS
          *
@@ -52,16 +26,6 @@ class CollectionTable extends Omeka_Db_Table
          if ($params['recent'] === true) {             
              $select->order('c.id DESC');
          }        
-    }
-    
-    protected function getNumRecordsPerPage()
-    {
-        $options = Omeka_Context::getInstance()->getOptions();
-        if (is_admin_theme()) {
-            return (int) $options['per_page_admin'];
-        } else {
-            return (int) $options['per_page_public'];
-        }
     }
     
     protected function _getColumnPairs()

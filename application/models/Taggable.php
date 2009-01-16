@@ -92,12 +92,12 @@ class Taggable extends Omeka_Record_Mixin
      **/
     public function getTags()
     {
-        return $this->tagTable->findBy(array('record'=>$this->record, 'return'=>'object'), $this->type);
+        return $this->tagTable->findBy(array('record'=>$this->record, 'for'=>$this->type));
     }
 
     public function entityTags($entity)
     {
-        return $this->tagTable->findBy(array('entity'=>$entity, 'record'=>$this->record, 'return'=>'object'), $this->type);
+        return $this->tagTable->findBy(array('entity'=>$entity, 'record'=>$this->record, 'for'=>$this->type));
     }
     
     /**

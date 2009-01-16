@@ -157,36 +157,10 @@ class TagTable extends Omeka_Db_Table
         if ($params['sort']) {
             $this->sortBy($select, (string) $params['sort']);
         }
-                
-        if ($limit = (int) $params['limit']) {
-            $select->limit($limit);
-        }
-        
+                        
         $select->group("t.id");
     }
-    
-    /**
-     * 
-     * @param string
-     * @return array Either an array of Tag objects or a flat array of tags 
-     * (when displaying cloud)
-     **/
-    public function findBy($params=array())
-    {
-        $select = $this->getSelectForFindBy($params);
         
-        if($params['return'] == 'array') {
-            $tags = $this->getDb()->query($select)->fetchAll();
-            if(!$tags) {
-                return array();
-            }
-        }
-        else {
-            $tags = $this->fetchObjects($select);
-        }
-        return $tags;        
-    }
-    
     /**
      * @internal SELECT statements should always pull a count of how many times 
      * the tag occurs as a tagCount field in the Tag object.

@@ -141,7 +141,7 @@ class Omeka_Db_Table
             $this->_name = Inflector::tableize($this->_target);
         }
     }
-    
+
     /**
      * Retrieve a single record given an ID
      *
@@ -203,12 +203,18 @@ class Omeka_Db_Table
      * Retrieve a set of model objects based on a given number of parameters
      * 
      * @param array A set of parameters by which to filter the objects
-     * that get returned from the DB
+     * that get returned from the DB.
+     * @param integer $limit
+     * @param integer $page
      * @return array|null The set of objects that is returned
      **/
-    public function findBy($params=array())
+    public function findBy($params=array(), $limit = null, $page = null)
     {
         $select = $this->getSelectForFindBy($params);
+
+        if ($limit) {
+            $this->applyPagination($select, $limit, $page);
+        }
         return $this->fetchObjects($select);
     }
     
@@ -259,7 +265,26 @@ class Omeka_Db_Table
      * @return void
      **/
     public function applySearchFilters($select, $params) {}
-        
+    
+    /**
+     * Apply pagination to a SELECT statement via the LIMIT and OFFSET clauses.
+     * 
+     * @param Zend_Db_Select
+     * @param integer
+     * @param integer|null
+     * @return Zend_Db_Select
+     **/
+    public function applyPagination($select, $limit, $page = null) 
+    {
+        if ($page) {
+            $select->limitPage($page, $limit);   
+        } else {
+            $select->limit($limit);
+        }
+             
+        return $select;
+    }   
+     
     /**
      * Return a set of objects based on a SQL WHERE predicate (see RoR / other frameworks)
      *

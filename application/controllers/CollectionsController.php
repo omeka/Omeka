@@ -23,6 +23,8 @@ require_once 'Omeka/Controller/Action.php';
  **/
 class CollectionsController extends Omeka_Controller_Action
 {
+    protected $_browseRecordsPerPage = 10;
+    
     public function init()
     {
         $this->_modelClass = 'Collection';
