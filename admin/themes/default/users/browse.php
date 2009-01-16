@@ -5,6 +5,27 @@
 <div id="primary">
 <h2>Current Users</h2>
 
+<form action="<?php echo current_uri(); ?>" method="get" accept-charset="utf-8">
+    <fieldset>
+        <?php echo $this->formSelect('role', $_GET['role'], array(), 
+            array(''=>'Select Role') + get_user_roles()); ?>
+        <?php echo $this->formSelect('active', $_GET['active'], array(),
+            array(''=>'Select Status',  '1'=>'Active', '0'=>'Inactive')); ?>
+        <?php echo $this->formSelect('sort', $_GET['sort'], array(),
+            array(  ''=>'Sort By', 
+                    'first_name'=>'First Name',
+                    'last_name'=>'Last Name',
+                    'institution'=>'Institution Name',
+                    'role'=>'Role',
+                    'username'=>'Username')); ?>
+        <?php echo $this->formSelect('sortOrder', $_GET['sortOrder'], array(),
+            array( ''=>'Sort Order',
+                   'asc'=>'Ascending',
+                   'desc'=>'Descending')); ?>
+        <input type="submit" class="submit submit-medium" name="submit" value="Submit" />
+    </fieldset>
+</form>
+
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
 <?php echo flash(); ?>
