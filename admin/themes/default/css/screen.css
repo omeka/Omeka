@@ -290,3 +290,28 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#footer .primary-nav {float:right; width: 50%; text-align:right;}
 	#footer p {float:left; width: 50%;}
 	#footer .primary-nav li {display:inline;margin-left:1em;}
+	
+/* == Autocomplete (used for Scriptaculous Autocomplete) == */	
+div.autocomplete {
+  position:absolute;
+  width:250px;
+  background-color:white;
+  border:1px solid #888;
+  margin:0;
+  padding:0;
+}
+div.autocomplete ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+}
+div.autocomplete ul li.selected { background-color: #ffb;}
+div.autocomplete ul li {
+  background-image: none;
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:2px;
+  height:32px;
+  cursor:pointer;
+}

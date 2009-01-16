@@ -2,6 +2,9 @@
 echo js('tiny_mce/tiny_mce'); 
 // echo js('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
 ?>
+<?php // The following includes the Autocompleter class. ?>
+<script src="<?php echo web_path_to('javascripts/scriptaculous.js'); ?>?load=controls" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 
@@ -271,6 +274,15 @@ echo js('tiny_mce/tiny_mce');
 	}
 
     });
+    
+    // Tags autocomplete
+	Event.observe(window, 'load', function(){
+	    new Ajax.Autocompleter("tags-field", "tag-choices", 
+	    "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
+	        tokens: ',',
+	        paramName: 'tag_start'
+	    });
+	});
 //]]>	
 </script>
 

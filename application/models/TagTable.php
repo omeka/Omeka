@@ -179,4 +179,12 @@ class TagTable extends Omeka_Db_Table
                 
         return $select;
     }
+    
+    public function findTagNamesLike($partialName, $limit = 10)
+    {
+        $db = $this->getDb();
+        $sql = "SELECT t.name FROM $db->Tag t WHERE t.name LIKE ? LIMIT $limit";
+        $tags = $db->fetchCol($sql, array($partialName . '%'));
+        return $tags;
+    }
 }

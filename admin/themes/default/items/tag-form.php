@@ -19,7 +19,7 @@
 <div id="edit-your-tags">
 	<h3>Your Tags</h3>
 		<input type="text" name="tags" size="30" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
-		
+		<div id="tag-choices" class="autocomplete"></div>
 	<p class="explanation">Separate tags with commas (lorem, ipsum, dolor sit, amet).</p>
 	
 </div>

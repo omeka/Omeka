@@ -1,4 +1,8 @@
 <?php head(array('title' => 'Item # '.item('id'), 'bodyclass'=>'items show primary-secondary')); ?>
+
+<?php // The following includes the Autocompleter class. ?>
+<script src="<?php echo web_path_to('javascripts/scriptaculous.js'); ?>?load=controls" type="text/javascript" charset="utf-8"></script>
+
 <h1 id="item-title">#<?php echo item('id');?> 
 <?php echo strip_formatting(item('Dublin Core', 'Title')); ?></h1>
 
@@ -61,6 +65,16 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 	new Event.observe(window,'load',imageGallery);
 	
 	//End image gallery functions
+	
+	// Tags autocomplete
+	Event.observe(window, 'load', function(){
+	    new Ajax.Autocompleter("tags-field", "tag-choices", 
+	    "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
+	        tokens: ',',
+	        paramName: 'tag_start'
+	    });
+	});
+	
 </script>
 <div id="primary">
 <?php echo flash(); ?>
@@ -112,6 +126,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 		    <div class="input">
 		    <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id">
 			<input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
+			<div id="tag-choices" class="autocomplete"></div>
 			</div>
 			<input type="submit" class="submit submit-medium" name="modify_tags" value="Save Tags" id="tags-submit" />
 		</form>
