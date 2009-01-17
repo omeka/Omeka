@@ -282,7 +282,37 @@ function is_admin_theme()
  * @return Item
  * @throws Omeka_Validator_Exception
  * @throws Exception
- **/
+ * 
+ * $metadata = array(
+ *     'public'         => [true|false], 
+ *     'featured'       => [true|false], 
+ *     'collection_id'  => [int],
+ *     'item_type_id'   => [int],
+ *     'item_type_name' => [string]
+ * );
+ * $elementTexts = array(
+ *     [element set name] => array(
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         ), 
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         )
+ *     ), 
+ *     [element set name] => array(
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         ), 
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         )
+ *     )
+ * );
+ */
 function insert_item($metadata = array(), $elementTexts = array())
 {
     // Passing null means this will create a new item.
@@ -304,4 +334,92 @@ function update_item($item, $metadata = array(), $elementTexts = array())
     $helper = new InsertItemHelper($item, $metadata, $elementTexts);
     $helper->run();
     return $helper->getItem();
+}
+
+/**
+ * $metadata = array(
+ *     'name'       => [string], 
+ *     'description'=> [string], 
+ *     'public'     => [true|false], 
+ *     'featured'   => [true|false]
+ * );
+ */
+function insert_collection($metadata = array())
+{
+    $collection = new Collection;
+    
+    $settableMetadata = array('name', 'description', 'public', 'featured');
+    
+    foreach ($settableMetadata as $value) {
+        if (array_key_exists($value, $metadata)) {
+            $collection->$value = $metadata[$value];
+        }
+    }
+    $collection->save();
+    
+    return $collection;
+}
+
+/**
+ * Helper funtion for inserting an element set and its elements into the 
+ * database.
+ * 
+ * @param string|array $elementSet Element set information.
+ *     [(string) element set name]
+ *     -OR-
+ *     array(
+ *         'name'        => [(string) element set name, required, unique], 
+ *         'description' => [(string) element set description, optional]
+ *     );
+ * @param array $elements An array containing element data. There are three 
+ * ways to include elements. 1) An array containing element data; 2) A string 
+ * of the element name; 3) A new or existing Element record object.
+ *     array(
+ *         array(
+ *             'name'        => [(string) name, required], 
+ *             'description' => [(string) description, optional], 
+ *             'record_type' => [(string) record type name, optional], 
+ *             'data_type'   => [(string) data type name, optional], 
+ *             'order'       => [(int) order, optional]
+ *         ), 
+ *         [(string) element name], 
+ *         [(object) Element]
+ *     );
+ */
+function insert_element_set($elementSet, array $elements = array())
+{
+    // Process an element set array.
+    if (is_array($elementSet)) {
+        
+        // Trim whitespace from all array elements.
+        array_walk($elementSet, 'trim');
+        
+        // Set the element set name.
+        if (!isset($elementSet['name'])) {
+            throw new Exception('An element set name was not given.');
+        }
+        $elementSetName = $elementSet['name'];
+        
+        // Set the element set description.
+        $elementSetDescription = isset($elementSet['description']) 
+                                 ? $elementSet['description'] : null;
+        
+    // Process an element string.
+    } else if (is_string($elementSet)) {
+        $elementSetName = $elementSet;
+        $elementSetDescription = null;
+    }
+    
+    // Instantiate a new element set record.
+    $es = new ElementSet;
+    
+    // Set the element set name and description.
+    $es->name        = $elementSetName;
+    $es->description = $elementSetDescription;
+    
+    // Add elements to the element set.
+    $es->addElements($elements);
+    
+    // Save the element set.
+    $es->save();
 }
