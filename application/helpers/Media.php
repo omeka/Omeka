@@ -125,7 +125,11 @@ class Omeka_View_Helper_Media
      **/
     public function defaultDisplay($file, array $options=array())
     {
-        $html .= '<a href="'. file_download_uri($file). '" class="download-file">'. $file->original_filename. '</a>';   
+        $linkAttributes = array('href'=>file_download_uri($file), 
+                            'class'=>'download-file');
+        
+        $linkAttributes = array_merge($linkAttributes, (array)$options['linkAttributes']);
+        $html .= '<a ' . _tag_attributes($linkAttributes) . '>'. $file->original_filename. '</a>';   
         return $html;     
     }
     
@@ -145,7 +149,12 @@ class Omeka_View_Helper_Media
         $html = '';
         $item_title = item('Dublin Core', 'Title');
         if ($options['linkToFile']) {
-            $html .= '<a href="'.file_download_uri($file).'" class="download-file">';
+            $defaultLinkAttributes = array(
+                'class'=>'download-file', 
+                'href'=>file_download_uri($file));
+            $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
+            
+            $html .= '<a ' . _tag_attributes($linkAttributes) . '>';
         }
         /** 
          * Setting a variable for content for the alt attribute for images.
@@ -164,22 +173,32 @@ class Omeka_View_Helper_Media
             $alt = $item_title;
         }
         
-        $img = '';
-        switch ($options['imageSize']) {
-            case 'thumbnail':
-                $img = thumbnail($file, array('class'=>'thumb', 'alt' => $alt));
-                break;
-            case 'square_thumbnail':
-                $img = square_thumbnail($file, array('class'=>'thumb', 'alt' => $alt));
-                break;
-            case 'fullsize':
-                $img = fullsize($file, array('class'=>'full', 'alt' => $alt));
-                break;
-            default:
-                break;
-        }
+        $imgHtml = '';
+        
+        // Should we ever include more image sizes by default, this will be 
+        // easier to modify.        
+        $imgClasses = array(
+            'thumbnail'=>'thumb', 
+            'square_thumbnail'=>'thumb', 
+            'fullsize'=>'full');
+        
+        $imageSize = $options['imageSize'];
+        // If we can make an image from the given image size.
+        if (in_array($imageSize, array_keys($imgClasses))) {
+            // A class is given to all of the images by default to make it easier to style.
+            // This can be modified by passing it in as an option, but recommended
+            // against.  Can also modify alt text via an option.
+            $imgClass = $imgClasses[$imageSize];
+            
+            $imgAttributes = array_merge(array('class'=>$imgClass, 'alt'=>$alt),
+                                (array)$options['imgAttributes']);
+                        
+            // Luckily, helper function names correspond to the name of the 
+            // 'imageSize' option.
+            $imgHtml = $imageSize($file, $imgAttributes);
+        }    
 		
-		$html .= !empty($img) ? $img : htmlentities($file->original_filename);	
+		$html .= !empty($imgHtml) ? $imgHtml : htmlentities($file->original_filename);	
 		
 		if ($options['linkToFile']) {
 		  $html .= '</a>';
@@ -252,12 +271,13 @@ class Omeka_View_Helper_Media
     {
         $path = $file->getWebPath('archive');
         
+        $linkAttributes = array_merge(array('href'=>$path), (array)$options['linkAttributes']);
         $html = '<object type="'. $file->mime_browser . '" data="' . $path . 
         '" width="' . $options['width'] . '" height="' . $options['height'] . '">
           <param name="src" value="' . $path . '">
           <param name="autoplay" value="' . $options['autoplay'] . '">
           <param name="autoStart" value="' . $options['autoStart'] . '">
-          alt : <a href="' . $path . '">' . $file->original_filename . '</a>
+          alt : <a ' . _tag_attributes($linkAttributes) . '>' . $file->original_filename . '</a>
         </object>';
         
         return $html;
