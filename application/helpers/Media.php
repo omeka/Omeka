@@ -85,6 +85,14 @@ class Omeka_View_Helper_Media
 		    'autoStart' => 0,
 		    'width' => 200,
 		    'height' => 20
+		    ),
+		'icon'=>array(
+		    'showFilename' => true,
+		    'icons' => array(),
+		    'linkToFile' => true,
+		    'linkAttributes' => array(),
+		    'imgAttributes' => array(),
+		    'filenameAttributes' => array()
 		    ));
         
     protected $_wrapperClass = null;
@@ -283,6 +291,54 @@ class Omeka_View_Helper_Media
         return $html;
     }
     
+    /**
+     * Default display of an icon to represent a file.
+     * 
+     * Example usage:
+     * 
+     * echo display_files_for_item(array(
+     *            'showFilename'=>false,
+     *            'linkToFile'=>false,
+     *            'linkAttributes'=>array('rel'=>'lightbox'),
+     *            'filenameAttributes'=>array('class'=>'error'),
+     *            'imgAttributes'=>array('id'=>'foobar'),
+     *            'icons' => array('audio/mpeg'=>img('audio.gif'))));
+     * 
+     * @param File
+     * @param array $options Available options include: 
+     *      'showFilename' => boolean, 
+     *      'linkToFile' => boolean,
+     *      'linkAttributes' => array, 
+     *      'filenameAttributes' => array (for the filename div), 
+     *      'imgAttributes' => array, 
+     *      'icons' => array.
+     * @return string
+     **/
+    public function icon($file, array $options=array())
+    {
+        $mimeType = $this->getMimeFromFile($file);
+        $imgAttributes = (array)$options['imgAttributes'];
+        // The path to the icon is keyed to the MIME type of the file.
+        $imgAttributes['src'] = (string)$options['icons'][$mimeType];
+        
+        $html = '<img ' . _tag_attributes($imgAttributes) . ' />';
+        
+        if ($options['showFilename']) {
+            // Add a div with arbitrary attributes.
+            $html .= '<div ' . _tag_attributes((array)$options['filenameAttributes']) 
+                   . '>' . htmlspecialchars($file->original_filename) . '</div>';
+        }
+        
+        // Wrap with an <a href> if necessary.
+        if ($options['linkToFile']) {
+            $linkAttributes = array('href'=>file_download_uri($file));
+            $linkAttributes = array_merge($linkAttributes, (array)$options['linkAttributes']);
+            $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html
+                  . '</a>';
+        }
+        return $html;
+    }
+    
     // END DEFINED DISPLAY CALLBACKS
     
     public function setWrapperClass($class)
@@ -295,8 +351,14 @@ class Omeka_View_Helper_Media
         return $file->mime_browser;
     }
     
-    protected function getCallback($mimeType)
+    protected function getCallback($mimeType, $options)
     {
+        // Displaying icons overrides the default lookup mechanism.
+        if (array_key_exists('icons', $options) and
+                array_key_exists($mimeType, $options['icons'])) {
+            return 'icon';
+        }
+        
         $name = $this->_callbacks[$mimeType];
         if(!$name) {
             $name = 'defaultDisplay';
@@ -348,8 +410,11 @@ class Omeka_View_Helper_Media
     public function media($file, array $props=array())
     {		
         $mimeType = $this->getMimeFromFile($file);
-        $callback = $this->getCallback($mimeType);	 
-       
+        // There is a chance that $props passed in could modify the callback
+        // that is used.  Currently used to determine whether or not to display
+        // an icon.
+        $callback = $this->getCallback($mimeType, $props);	 
+        
         $options = array_merge($this->getDefaultOptions($callback), $props);
         
         $html  = $this->getHtml($file, $callback, $options);
