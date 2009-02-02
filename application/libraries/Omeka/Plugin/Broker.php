@@ -323,18 +323,10 @@ class Omeka_Plugin_Broker
      * 
      * @return void
      **/
-    public function addControllerDir()
-    {        
-        $current = $this->getCurrentPlugin();
-        
-        $contrDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $current . DIRECTORY_SEPARATOR . 'controllers';
-        // Module name needs to be lowercased (plugin directories are not, typically).
-        // Module name needs to go from camelCased to dashed (ElementSets --> element-sets).
-        $inflector = new Zend_Filter_Word_CamelCaseToDash();
-        $moduleName = strtolower($inflector->filter($current));
+    public function addControllerDir($pluginName, $moduleName)
+    {                
+        $contrDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $pluginName . DIRECTORY_SEPARATOR . 'controllers';
         Zend_Controller_Front::getInstance()->addControllerDirectory($contrDir, $moduleName);
-        
-        return $moduleName;
     }
     
     /**
@@ -373,26 +365,43 @@ class Omeka_Plugin_Broker
         if (file_exists($librariesDir)) {
             set_include_path(get_include_path() . PATH_SEPARATOR . $librariesDir);
         }
+        
+        $moduleName = $this->_getModuleName($pluginName);
 
         //If the controller directory exists, add that 
         if (file_exists($controllerDir)) {
-            $moduleName = $this->addControllerDir();
-            
-            //Add the views directories if the controller dir also exists.
-            // file_exists() may not be necessary if ZF already checks for that. 
-            
-            if (file_exists($sharedDir)) {
-                $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'shared', 'shared', $moduleName);
-            }
-            
-            if (file_exists($adminDir)) {
-                $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'admin', 'admin', $moduleName);
-            }
-
-            if (file_exists($publicDir)) {
-                $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'public', 'public', $moduleName);
-            }
+            $this->addControllerDir($pluginName, $moduleName);   
         }
+        
+        if (file_exists($sharedDir)) {
+            $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'shared', 'shared', $moduleName);
+        }
+        
+        if (file_exists($adminDir)) {
+            $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'admin', 'admin', $moduleName);
+        }
+
+        if (file_exists($publicDir)) {
+            $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'public', 'public', $moduleName);
+        }
+
+    }
+    
+    /**
+     * Retrieve the module name for the plugin (based on the directory name
+     * of the plugin).
+     * 
+     * @param string $pluginName
+     * @return string
+     **/
+    protected function _getModuleName($pluginName)
+    {
+        // Module name needs to be lowercased (plugin directories are not, 
+        // typically).  Module name needs to go from camelCased to dashed 
+        // (ElementSets --> element-sets).
+        $inflector = new Zend_Filter_Word_CamelCaseToDash();
+        $moduleName = strtolower($inflector->filter($pluginName));
+        return $moduleName;
     }
     
     /**
