@@ -94,9 +94,7 @@ class Omeka_View_Helper_Media
 		    'imgAttributes' => array(),
 		    'filenameAttributes' => array()
 		    ));
-        
-    protected $_wrapperClass = null;
-    
+            
     /**
      * Retrieve all the callbacks and default options from the plugins.  They
      * should be merged with the defaults such that plugins take precedence.
@@ -346,11 +344,6 @@ class Omeka_View_Helper_Media
     
     // END DEFINED DISPLAY CALLBACKS
     
-    public function setWrapperClass($class)
-    {
-        $this->_wrapperClass = $class;
-    }
-    
     protected function getMimeFromFile($file)
     {
         return $file->mime_browser;
@@ -412,7 +405,7 @@ class Omeka_View_Helper_Media
      * the display of any given callback.
      * @return string HTML
      **/
-    public function media($file, array $props=array())
+    public function media($file, array $props=array(), $wrapperAttributes = array())
     {		
         $mimeType = $this->getMimeFromFile($file);
         // There is a chance that $props passed in could modify the callback
@@ -423,9 +416,9 @@ class Omeka_View_Helper_Media
         $options = array_merge($this->getDefaultOptions($callback), $props);
         
         $html  = $this->getHtml($file, $callback, $options);
-
+        
         //Wrap the HTML in a div with a class (if class is not set to null)
-        $wrapper = $this->_wrapperClass ? '<div class="' . $this->_wrapperClass . '">' : ''; 
+        $wrapper = !empty($wrapperAttributes) ? '<div ' . _tag_attributes($wrapperAttributes) . '>' : ''; 
         
 		$html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
 		

@@ -545,13 +545,14 @@ function item_has_type($name = null)
 /**
  * @uses display_files()
  * @uses get_current_item()
- * @param array
+ * @param array $options 
+ * @param array $wrapperAttributes
  * @return string HTML
  **/
-function display_files_for_item($options = array())
+function display_files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'))
 {
     $item = get_current_item();
-    return display_files($item->Files, $options);
+    return display_files($item->Files, $options, $wrapperAttributes);
 }
 
 /**

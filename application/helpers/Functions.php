@@ -49,17 +49,22 @@ function auto_discovery_link_tag(){
  * @since 0.10 Adds a third argument, which is the class name to give the div that
  * wraps each file.  Passing null as this argument will ensure that none of the files
  * are wrapped in divs.
+ * @since 1.0 The third argument is now an array of attributes that can be passed
+ * as the wrapper for each file.
  * @see Omeka_View_Helper_Media
  * @param array $files An array of File records to display.
+ * @param array $props Properties to customize display for different file types.
+ * @param array $wrapperAttributes XHTML attributes for the div that wraps each
+ * displayed file.  If empty or null, this will not wrap the displayed file in a
+ * div.
  * @return string HTML
  **/
-function display_files($files, array $props = array(), $wrapperClass = 'item-file') {
+function display_files($files, array $props = array(), $wrapperAttributes = array('class'=>'item-file')) {
     require_once 'Media.php';
     $helper = new Omeka_View_Helper_Media;
-    $helper->setWrapperClass($wrapperClass);
     $output = '';
     foreach ($files as $file) {
-        $output .= $helper->media($file, $props);
+        $output .= $helper->media($file, $props, $wrapperAttributes);
     }
     return $output;
 }
@@ -71,12 +76,11 @@ function display_files($files, array $props = array(), $wrapperClass = 'item-fil
  * @param array $props
  * @return string HTML
  **/
-function display_file($file, array $props=array(), $wrapperClass = 'item-file')
+function display_file($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
 {
     require_once 'Media.php';
     $helper = new Omeka_View_Helper_Media;
-    $helper->setWrapperClass($wrapperClass);
-    return $helper->media($file, $props);
+    return $helper->media($file, $props, $wrapperAttributes);
 }
 
 //CSS Helpers
