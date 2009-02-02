@@ -417,6 +417,16 @@ class Omeka_View_Helper_Media
         
         $html  = $this->getHtml($file, $callback, $options);
         
+        // Append a class name that corresponds to the MIME type.
+        if ($wrapperAttributes) {
+            $mimeTypeClassName = str_ireplace('/', '-', $mimeType);
+            if (array_key_exists('class', $wrapperAttributes)) {
+                $wrapperAttributes['class'] .= ' ' . $mimeTypeClassName;
+            } else {
+                $wrapperAttributes['class']  = $mimeTypeClassName;
+            }
+        }
+        
         //Wrap the HTML in a div with a class (if class is not set to null)
         $wrapper = !empty($wrapperAttributes) ? '<div ' . _tag_attributes($wrapperAttributes) . '>' : ''; 
         
