@@ -155,7 +155,7 @@ class Omeka_View_Helper_Media
     public function image($file, array $options=array())
     {
         $html = '';
-        $item_title = item('Dublin Core', 'Title');
+        
         if ($options['linkToFile']) {
             $defaultLinkAttributes = array(
                 'class'=>'download-file', 
@@ -177,8 +177,13 @@ class Omeka_View_Helper_Media
         elseif (!empty($file->title)) {
             $alt = $file->title;
         }
-        elseif (!empty($item_title)) {
-            $alt = $item_title;
+        else {
+            try {
+                $alt = $item_title = item('Dublin Core', 'Title');
+                //  Suppress errors b/c get_current_item()
+                // throws an exception.  There should be a has_current_item() helper
+                // to avoid this sort of thing.    
+            } catch (Exception $e) {} 
         }
         
         $imgHtml = '';
