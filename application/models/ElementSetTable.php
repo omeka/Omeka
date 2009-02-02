@@ -40,4 +40,10 @@ class ElementSetTable extends Omeka_Db_Table
         // $select->where('es.name != "Item Type"');
         return $this->fetchObjects($select);
     }
+    
+    public function findByName($name)
+    {
+        $select = $this->getSelect()->where('name = ?', $name);
+        return $this->fetchObject($select);
+    }
 }
