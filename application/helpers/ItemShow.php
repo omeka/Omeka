@@ -43,6 +43,8 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      */
     private $_emptyElementString = '[no text]';
     
+    protected $_elementSetsToShow = array();
+    
     /**
      * Virtual constructor.
      * @param Item
@@ -51,6 +53,7 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      * 'show_empty_elements' => bool|string Whether to show elements that 
      *     do not contain text. A string will set self::$_showEmptyElements to 
      *     true and set self::$_emptyElementString to the provided string.
+     * 'show_element_sets' => array List of names of element sets to display.
      * @return void View helpers normally return a string here, but this helper 
      * outputs directly from a view partial.  
      * @todo This output should be buffered into a string that is then returned by this function.
@@ -81,6 +84,15 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
                 $this->_showEmptyElements = (bool) $options['show_empty_elements'];
             }
         }
+        
+        if (array_key_exists('show_element_sets', $options)) {
+            $namesOfElementSetsToShow = $options['show_element_sets'];
+            if (is_string($namesOfElementSetsToShow)) {
+                $this->_elementSetsToShow = array_map('trim', explode(',', $namesOfElementSetsToShow));
+            } else {
+                $this->_elementSetsToShow = $namesOfElementSetsToShow;
+            }
+        }
     }
     
     /**
@@ -93,16 +105,33 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     {
         $elementsBySet = $this->_item->getAllElementsBySet();
         
-         // Unset the existing 'Item Type' element set b/c it shows elements for all item types.
-         unset($elementsBySet[self::ELEMENT_SET_ITEM_TYPE]);
+        // Only show the element sets that are passed in as options.
+        if (!empty($this->_elementSetsToShow)) {
+            $elementsBySet = array_intersect_key($elementsBySet, array_flip($this->_elementSetsToShow));
+        }
         
         if ($this->_item->item_type_id) {
             // Overwrite elements assigned to the item type element set with only 
             // those that belong to this item's particular item type. This is 
             // necessary because, otherwise, all item type elements will be shown.
             $itemTypeElementSetName = item('Item Type Name') . ' ' . self::ELEMENT_SET_ITEM_TYPE;
-            $elementsBySet[$itemTypeElementSetName] = $this->_item->getItemTypeElements();
+            
+            // Check to see if either the generic or specific Item Type element
+            // set has been chosen, i.e. 'Item Type Metadata' or 'Document
+            // Item Type Metadata', etc.
+            if (!empty($this->_elementSetsToShow)) {
+                if (in_array($itemTypeElementSetName, $this->_elementSetsToShow) or 
+                in_array(self::ELEMENT_SET_ITEM_TYPE, $this->_elementSetsToShow)) {
+                    $elementsBySet[$itemTypeElementSetName] = $this->_item->getItemTypeElements();
+                }
+            }
+            else {
+                $elementsBySet[$itemTypeElementSetName] = $this->_item->getItemTypeElements();
+            }
         }
+        
+        // Unset the existing 'Item Type' element set b/c it shows elements for all item types.
+         unset($elementsBySet[self::ELEMENT_SET_ITEM_TYPE]);
         
         return $elementsBySet;
     }
