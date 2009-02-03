@@ -11,17 +11,21 @@ final class Omeka
 {
     static function autoload($classname)
     {
-        if (class_exists($classname)) {
+        if (class_exists($classname, false)) {
             return false;
         }
         
-        $path = dirname(__FILE__);
-        $class = $path . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR,$classname) . '.php';
+        $basePaths = explode(PATH_SEPARATOR, get_include_path());
+        $classPath = str_replace('_', DIRECTORY_SEPARATOR, $classname) . '.php';
         
-        if (file_exists($class)) {
-            require_once $class;
-            return;
+        foreach ($basePaths as $basePath) {
+            $filePath = $basePath . DIRECTORY_SEPARATOR . $classPath;
+            if (file_exists($filePath)) {
+                require_once $filePath;
+                return;
+            }
         }
+
         return false;
     }
     
