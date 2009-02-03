@@ -23,6 +23,9 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      */
     const ELEMENT_SET_ITEM_TYPE = ELEMENT_SET_ITEM_TYPE;
     
+    const RETURN_HTML = 'html';
+    const RETURN_ARRAY = 'array';
+    
     /**
      * The Item object.
      * @var object
@@ -45,6 +48,8 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
     
     protected $_elementSetsToShow = array();
     
+    protected $_returnType = self::RETURN_HTML;
+    
     /**
      * Virtual constructor.
      * @param Item
@@ -54,18 +59,15 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      *     do not contain text. A string will set self::$_showEmptyElements to 
      *     true and set self::$_emptyElementString to the provided string.
      * 'show_element_sets' => array List of names of element sets to display.
-     * @return void View helpers normally return a string here, but this helper 
-     * outputs directly from a view partial.  
-     * @todo This output should be buffered into a string that is then returned by this function.
+     * 'return_type' => string 'array', 'html'.  Defaults to 'html'.
+     * @since 1.0 Added 'show_element_sets' and 'return_type' options.
+     * @return string  
      */
     public function itemShow(Item $item, array $options = array())
     {
         $this->_item = $item;
         $this->_setOptions($options);
-        ob_start();
-        $this->_output();
-        $output = ob_get_contents();
-        ob_end_clean();
+        $output = $this->_getOutput();
         return $output;
     }
     
@@ -92,6 +94,10 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
             } else {
                 $this->_elementSetsToShow = $namesOfElementSetsToShow;
             }
+        }
+        
+        if (array_key_exists('return_type', $options)) {
+            $this->_returnType = (string)$options['return_type'];
         }
     }
     
@@ -172,7 +178,7 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      * Output the default format for displaying item metadata.
      * @return void 
      */
-    private function _output()
+    protected function _getOutputAsHtml()
     {
         // Prepare the metadata for display on the partial.  There should be no 
         // need for method calls by default in the view partial.
@@ -194,6 +200,42 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
             $varsToInject = array('elementSets'=>$elementSets, 'setName'=>$setName, 
             'elementsInSet'=>$elementsInSet, 'item'=>$this->_item);
             $this->_loadViewPartial($varsToInject);
+        }
+    }
+    
+    protected function _getOutputAsArray()
+    {
+        $elementSets = $this->_getElementsBySet();
+        $outputArray = array();
+        foreach ($elementSets as $setName => $elementsInSet) {
+            $outputArray[$setName] = array();
+            foreach ($elementsInSet as $key => $element) {
+                $elementName = $element->name;
+                $textArray = $this->view->item($this->_item, $element->set_name, $elementName, 'all');
+                if (!empty($textArray[0]) or $this->_showEmptyElements) {
+                    $outputArray[$setName][$elementName] = $textArray;
+                }
+            }
+        }
+        return $outputArray;
+    }
+    
+    protected function _getOutput()
+    {
+        switch ($this->_returnType) {
+            case self::RETURN_HTML:
+                ob_start();
+                $this->_getOutputAsHtml();
+                $output = ob_get_contents();
+                ob_end_clean();
+                return $output;
+                break;
+            case self::RETURN_ARRAY:
+                return $this->_getOutputAsArray();
+                break;
+            default:
+                throw new Exception('Invalid return type!');
+                break;
         }
     }
     
