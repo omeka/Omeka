@@ -140,4 +140,12 @@ class ElementTable extends Omeka_Db_Table
 
        return $elements;
     }
+    
+    public function findByElementSetNameAndElementName($elementSetName, $elementName)
+    {
+        $select = $this->getSelect()
+                       ->where('es.name = ?', $elementSetName)
+                       ->where('e.name = ?', $elementName);
+        return $this->fetchObject($select);
+    }
 }
