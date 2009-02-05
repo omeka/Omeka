@@ -12,6 +12,8 @@
 /**
  * Retrieve the values for a given field in the current item.
  * 
+ * @since 1.0 Adds a fourth argument, which can be used to inject the item to 
+ * display.
  * @see Omeka_View_Helper_Item::item()
  * @uses Omeka_View_Helper_Item
  * @param string $elementSetName
@@ -19,9 +21,12 @@
  * @param array $options
  * @return string|array|null
  **/
-function item($elementSetName, $elementName = null, $options = array())
+function item($elementSetName, $elementName = null, $options = array(), $item = null)
 {
-    return __v()->item(get_current_item(), $elementSetName, $elementName, $options);
+    if (!$item) {
+        $item = get_current_item();
+    }
+    return __v()->item($item, $elementSetName, $elementName, $options);
 }
 
 /**
