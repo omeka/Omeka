@@ -18,14 +18,16 @@
         <?php endif; ?>
         
         <?php // Retrieve the latest version of Omeka by pinging the Omeka server. ?>
-        <?php $latestVersion = get_latest_omeka_version();
-              if ($latestVersion and (OMEKA_VERSION != $latestVersion)): ?>
+        <?php if (has_permission('Upgrade', 'index')):
+              $latestVersion = get_latest_omeka_version();
+                  if ($latestVersion and version_compare(OMEKA_VERSION, $latestVersion, '<')): ?>
                     <div class="success">
                         There is a new version of Omeka available for download
                         (<?php echo $latestVersion; ?>).
-                        <a href="http://omeka.org">Upgrade</a>
+                        <a href="http://omeka.org/download/">Upgrade</a>
                     </div>
-        <?    endif; ?>
+        <?        endif; 
+              endif; ?>
             
 			<div id="getting-started">
 				<h2>Getting Started with Omeka</h2>
