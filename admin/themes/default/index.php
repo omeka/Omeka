@@ -16,6 +16,21 @@
                 <?php endif; ?>
             </div>
         <?php endif; ?>
+        
+        <?php // Retrieve the latest version of Omeka by pinging the Omeka server. ?>
+        <?php
+            $client = new Zend_Rest_Client('http://omeka.org/version');
+            $result = $client->get();
+            if ($result->isSuccess()):
+                $latestVersion = (string)$result;
+                if (OMEKA_VERSION != $latestVersion): ?>
+                    <div class="success">
+                        There is a new version of Omeka available for download
+                        (<?php echo $latestVersion; ?>).
+                        <a href="http://omeka.org">Upgrade</a>
+                    </div>
+            <?  endif;
+            endif; ?>
             
 			<div id="getting-started">
 				<h2>Getting Started with Omeka</h2>
