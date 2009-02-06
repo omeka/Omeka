@@ -52,7 +52,7 @@ class ElementSet extends Omeka_Record
         $defaultRecordType = $this->getDefaultRecordTypeId();
         $defaultDataType = $this->getDefaultDataTypeId();
         
-        $order = 1;
+        $order = $this->_getNextElementOrder();
         foreach ($elements as $options) {
             
             $obj = $this->_buildElementRecord($options);
@@ -68,6 +68,12 @@ class ElementSet extends Omeka_Record
             
             if (!$obj->order) {
                 $obj->order = $order;
+            // If an order was passed, assume it is relative to the other 
+            // elements that are being added, and not necessarily the actual 
+            // element order for the element set. This will set the order to the 
+            // highest order number plus one.
+            } else {
+                $obj->order = $obj->order + ($order - 1);
             }
             
             $this->_elementsToSave[] = $obj;
@@ -140,5 +146,20 @@ class ElementSet extends Omeka_Record
         foreach ($elements as $element) {
             $element->delete();
         }
+    }
+    
+    protected function _getNextElementOrder()
+    {
+        $db = $this->getDb();
+        $sql = "
+        SELECT MAX(`order`) + 1 
+        FROM $db->Element e 
+        WHERE e.`element_set_id` = ?";
+        $nextElementOrder = $db->fetchOne($sql, $this->id);
+        // In MySQL, NULL + 1 = NULL.
+        if (!$nextElementOrder) {
+            $nextElementOrder = 1;
+        }
+        return $nextElementOrder;
     }
 }
