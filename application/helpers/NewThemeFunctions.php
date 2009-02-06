@@ -1367,7 +1367,7 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
 function get_latest_omeka_version()
 {
     try {
-        $client = new Zend_Rest_Client('http://omeka.org/version');
+        $client = new Zend_Rest_Client('http://api.omeka.org/latest-version');
 	    $result = $client->get();
 	    if ($result->isSuccess()) {
 	        $latestVersion = (string)$result;
