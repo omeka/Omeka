@@ -1366,12 +1366,21 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
  **/
 function get_latest_omeka_version()
 {
+    // $omekaApiUri = 'http://api.omeka.org/latest-version';
+    $omekaApiUri = 'http://api.omeka.org/latest-version';
+    $omekaApiVersion = '0.1';
+    
     try {
-        $client = new Zend_Rest_Client('http://api.omeka.org/latest-version');
-	    $result = $client->get();
-	    if ($result->isSuccess()) {
-	        $latestVersion = (string)$result;
-	        return $latestVersion;
+        $client = new Zend_Http_Client($omekaApiUri);
+        $client->setParameterGet('version', $omekaApiVersion);
+        $client->setMethod('GET');
+        $result = $client->request();
+	    if ($result->getStatus() == '200') {
+	       return $result->getBody();
+	    } else {
+	       debug("Attempt to GET $omekaApiUri with version=$omekaApiVersion "
+	             . "returned with status=" . $result->getStatus() . " and "
+	             . "response body=" . $result->getBody());
 	    }
     } catch (Exception $e) {
         debug('Error in retrieving latest Omeka version: ' . $e->getMessage());
