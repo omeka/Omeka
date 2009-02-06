@@ -1357,3 +1357,24 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
     return $str;
 }
 
+/**
+ * Retrieve the latest available version of Omeka by accessing the appropriate
+ * URI on omeka.org.
+ * 
+ * @return string|false The latest available version of Omeka (or false if 
+ * A) Omeka is up to date or B) The API service can't be reached.
+ **/
+function get_latest_omeka_version()
+{
+    try {
+        $client = new Zend_Rest_Client('http://omeka.org/version');
+	    $result = $client->get();
+	    if ($result->isSuccess()) {
+	        $latestVersion = (string)$result;
+	        return $latestVersion;
+	    }
+    } catch (Exception $e) {
+        debug('Error in retrieving latest Omeka version: ' . $e->getMessage());
+    }
+    return false;
+}
