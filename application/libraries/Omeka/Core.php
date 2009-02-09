@@ -399,16 +399,8 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      * @return void
      **/
     public function initializeAuth()
-    {
-        $authPrefix = get_option('auth_prefix');
-        
-        // Set up the authentication mechanism with the specially generated 
-        // prefix
-        $auth = Zend_Auth::getInstance();
-        
-        require_once 'Zend/Auth/Storage/Session.php';
-        $auth->setStorage(new Zend_Auth_Storage_Session($authPrefix));
-        
+    {        
+        $auth = Zend_Auth::getInstance();        
         $this->setAuth($auth);
     }
     

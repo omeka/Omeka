@@ -279,7 +279,6 @@ class Installer
             name, 
             value
         ) VALUES (?, ?)";
-        $db->exec($optionSql, array('auth_prefix', md5(mt_rand())));
         $db->exec($optionSql, array('migration', OMEKA_MIGRATION));
         
         // Add the settings to the db
