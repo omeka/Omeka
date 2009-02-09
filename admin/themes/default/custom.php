@@ -21,19 +21,3 @@ function show_untitled_items($title)
     }
     return $title;
 }
-
-// A filter for displaying the <select> menu for Language on the Item form.
-add_filter(array('Form', 'Item', 'Dublin Core', 'Language'), 'display_language_form_input');
-
-function display_language_form_input($html, $inputNameStem, $language, $options, $item, $element)
-{
-    $languageChoices = array(
-		'eng'=>'English', 
-		'rus'=>'Russian',
-		'deu'=>'German',
-		'fra'=>'French',
-		'spa'=>'Spanish',
-		'san'=>'Sanskrit');
-    return __v()->formSelect($inputNameStem . '[text]', $language, null, $languageChoices);
-}
-
