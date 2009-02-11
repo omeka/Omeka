@@ -550,13 +550,12 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      * @return void
      **/    
     private function initResponseContexts()
-    {
+    {        
+        Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
-
+                
         $contexts->setContextParam('output');
-        
-        $contexts->setCallback('json', 'post', array($this, 'enableJsonp'));
-        
+                
         $contextArray = array(
              'dc' => array(
                  'suffix'    => 'dc',
@@ -573,22 +572,5 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         }
         
         $contexts->addContexts($contextArray); 
-    }   
-    
-    public function enableJsonp()
-    {
-        $switcher = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
-        // Piggyback off the default behavior for serializing JSON to the 
-        // response object.
-        $switcher->postJsonContext();
-        
-        if ($switcher->getAutoJsonSerialization() 
-            and $callbackParam = $switcher->getRequest()->get('callback')) {
-            $response = $switcher->getResponse();
-            $json = $response->getBody();
-            $response->setBody($callbackParam . '(' . $json . ')');
-        }
-    }
-    
-    
+    }       
 }
