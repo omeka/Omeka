@@ -29,6 +29,14 @@ class Omeka_Record implements ArrayAccess
     protected $_mixins = array();
     
     /**
+     * The database object should be protected so it doesn't show up
+     * when the object is serialized into JSON.
+     *
+     * @var Omeka_Db
+     **/
+    protected $_db;
+    
+    /**
      * Would be declared like thus:  
      *
      * array $_related = array('Sections'=>'loadSections'), where key is a 
