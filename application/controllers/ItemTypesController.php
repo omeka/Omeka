@@ -22,12 +22,6 @@ class ItemTypesController extends Omeka_Controller_Action
     public function init()
     {
         $this->_modelClass = 'ItemType';
-        
-        // $contextSwitcher = $this->_helper->getHelper('contextSwitch');
-        // $contextArray = array(
-        //             'browse' => array('xml', 'json', 'dc', 'rss2'),
-        //             'show'   => array('xml', 'json', 'dc'));
-        // $contextSwitcher->addActionContexts($contextArray);
     }
     
     /**

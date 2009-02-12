@@ -25,7 +25,7 @@ require_once 'User.php';
 class UsersController extends Omeka_Controller_Action
 {
     protected $_browseRecordsPerPage = 10;
-    
+        
     public function init() {
         $this->_modelClass = 'User';
         $this->_table = $this->getTable('User');

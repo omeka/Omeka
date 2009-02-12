@@ -25,13 +25,13 @@ class CollectionsController extends Omeka_Controller_Action
 {
     protected $_browseRecordsPerPage = 10;
     
+    public $contexts = array(
+        'remove-collector' => array('json')
+    );
+    
     public function init()
     {
-        $this->_modelClass = 'Collection';
-        
-        $contextSwitch = $this->_helper->getHelper('ContextSwitch');
-        $contextSwitch->addActionContext('remove-collector', 'json')
-                      ->initContext();
+        $this->_modelClass = 'Collection';        
     }
     
     /**
