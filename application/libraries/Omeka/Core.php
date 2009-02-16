@@ -400,7 +400,14 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      **/
     public function initializeAuth()
     {        
-        $auth = Zend_Auth::getInstance();        
+        $auth = Zend_Auth::getInstance();      
+        
+        // We need to prefix the authenticated sessions for each installation.
+        // It seems OK to use the base URL for each installation.
+        // $prefix = preg_replace('/[^\w]+/', '', WEB_ROOT);
+        $prefix = WEB_ROOT;
+        $auth->setStorage(new Zend_Auth_Storage_Session($prefix)); 
+         
         $this->setAuth($auth);
     }
     
