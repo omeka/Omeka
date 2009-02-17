@@ -3,7 +3,7 @@
 /**
 * 
 */
-abstract class Omeka_View_Helper_ListRecordMetadata extends Zend_View_Helper_Abstract
+abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
 {   
     const RETURN_HTML = 'html';
     const RETURN_ARRAY = 'array';

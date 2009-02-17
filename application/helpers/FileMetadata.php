@@ -3,7 +3,7 @@
 /**
 * 
 */
-class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_ElementText
+class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
 {
     public function fileMetadata(File $file, 
                          $elementSetName, 

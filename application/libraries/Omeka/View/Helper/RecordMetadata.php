@@ -16,7 +16,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  */
-abstract class Omeka_View_Helper_ElementText extends Zend_View_Helper_Abstract
+abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
 {
     protected $_record;
     protected $_elementSetName;

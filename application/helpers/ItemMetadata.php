@@ -16,9 +16,9 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  */
-class Omeka_View_Helper_Item extends Omeka_View_Helper_ElementText
+class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
 {    
-    public function item(Item $item, 
+    public function itemMetadata(Item $item, 
                          $elementSetName, 
                          $elementName = null, 
                          $options     = array())

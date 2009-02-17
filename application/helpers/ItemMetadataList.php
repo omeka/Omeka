@@ -15,7 +15,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Omeka_View_Helper_ItemShow extends Omeka_View_Helper_ListRecordMetadata
+class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadataList
 {
     /**
      * The name of the item type element set. Change this constant if the name 
@@ -36,7 +36,7 @@ class Omeka_View_Helper_ItemShow extends Omeka_View_Helper_ListRecordMetadata
      * @since 1.0 Added 'show_element_sets' and 'return_type' options.
      * @return string  
      */
-    public function itemShow(Item $item, array $options = array())
+    public function itemMetadataList(Item $item, array $options = array())
     {
         return $this->_getList($item, $options);
     }
@@ -92,6 +92,6 @@ class Omeka_View_Helper_ItemShow extends Omeka_View_Helper_ListRecordMetadata
     
     protected function _getFormattedElementText($record, $elementSetName, $elementName)
     {
-        return $this->view->item($record, $elementSetName, $elementName, 'all');
+        return $this->view->itemMetadata($record, $elementSetName, $elementName, 'all');
     }
 }

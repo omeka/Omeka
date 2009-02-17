@@ -3,7 +3,7 @@
 /**
 * 
 */
-class Omeka_View_Helper_ListFileMetadata extends Omeka_View_Helper_ListRecordMetadata
+class Omeka_View_Helper_FileMetadataList extends Omeka_View_Helper_RecordMetadataList
 {
     
     const MIME_TYPE_SET_NAME = 'MIME Type Metadata';
@@ -16,7 +16,7 @@ class Omeka_View_Helper_ListFileMetadata extends Omeka_View_Helper_ListRecordMet
      **/
     protected $_fileMimeTypeElementSets = array('Omeka Image File', 'Omeka Video File');
     
-    public function listFileMetadata(File $file, array $options = array())
+    public function fileMetadataList(File $file, array $options = array())
     {
         return $this->_getList($file, $options);
     }

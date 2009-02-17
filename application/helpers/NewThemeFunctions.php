@@ -26,7 +26,7 @@ function item($elementSetName, $elementName = null, $options = array(), $item = 
     if (!$item) {
         $item = get_current_item();
     }
-    return __v()->item($item, $elementSetName, $elementName, $options);
+    return __v()->itemMetadata($item, $elementSetName, $elementName, $options);
 }
 
 function item_file($elementSetName, $elementName = null, $options = array(), $file = null)
@@ -1356,7 +1356,7 @@ function pagination_links($options = array('scrolling_style' => null,
 function show_item_metadata(array $options = array())
 {
     $item = get_current_item();
-    return __v()->itemShow($item, $options);
+    return __v()->itemMetadataList($item, $options);
 }
 
 function show_file_metadata(array $options = array(), $file = null)
@@ -1364,7 +1364,7 @@ function show_file_metadata(array $options = array(), $file = null)
     if (!$file) {
         $file = get_current_file();
     }
-    return __v()->listFileMetadata($file, $options);
+    return __v()->fileMetadataList($file, $options);
 }
 
 function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
