@@ -1321,6 +1321,14 @@ function show_item_metadata(array $options = array())
     return __v()->itemShow($item, $options);
 }
 
+function show_file_metadata(array $options = array(), $file = null)
+{
+    if (!$file) {
+        $file = get_current_file();
+    }
+    return __v()->listFileMetadata($file, $options);
+}
+
 function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
 {
     $phraseArray = explode(' ', $phrase);

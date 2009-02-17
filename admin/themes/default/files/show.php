@@ -10,7 +10,7 @@
 
 <?php echo display_file($file); ?>
 
-<?php echo $this->listFileMetadata($file); ?>
+<?php echo show_file_metadata(); ?>
 
 <div id="format-metadata" class="section">
 <dl>
