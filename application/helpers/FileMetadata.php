@@ -50,4 +50,5 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_ElementText
                 throw new Exception("'$specialValue' is an invalid special value.");
                 break;
         }
+    }
 }

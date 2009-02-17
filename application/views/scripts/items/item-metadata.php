@@ -14,7 +14,7 @@
         // $setName contains the 'pretty' version of it that may be named differently
         // than the actual element set.
         ?>
-        <?php foreach (item($elementRecord->set_name, $elementName, 'all', $item) as $text): ?>
+        <?php foreach ($info['texts'] as $text): ?>
             <div class="element-text"><?php echo $text; ?></div>
         <?php endforeach; ?>
         <?php endif; ?>

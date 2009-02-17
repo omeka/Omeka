@@ -10,7 +10,7 @@
 
 <?php echo display_file($file); ?>
 
-<?php echo $this->itemShow($file); ?>
+<?php echo $this->listFileMetadata($file); ?>
 
 <?php
 
