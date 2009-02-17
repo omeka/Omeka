@@ -24,8 +24,8 @@
 <h2>Type Metadata</h2>
 <dl>
 <dt>Mime Type / Browser:</dt> <dd><?php echo item_file('MIME Type'); ?></dd>
-<dt>Mime Type / OS:</dt> <dd><?php if ($file->mime_os): ?><?php echo h($file->mime_os); ?><?php endif; ?></dd>
-<dt>File Type / OS:</dt> <dd><?php if ($file->type_os): ?><?php echo h($file->type_os); ?><?php endif; ?></dd>
+<dt>Mime Type / OS:</dt> <dd><?php echo item_file('MIME Type OS'); ?></dd>
+<dt>File Type / OS:</dt> <dd><?php echo item_file('File Type OS'); ?></dd>
 </dl>
 </div>
 	
@@ -34,7 +34,7 @@
 <dl>
 <dt>Date Added:</dt> <dd><?php echo item_file('Date Added'); ?></dd>
 <dt>Date Modified:</dt> <dd><?php echo item_file('Date Modified'); ?></dd>
-<dt>Authentication:</dt> <dd><?php if ($file->authentication): ?><?php echo h($file->authentication); ?><?php endif; ?></dd>
+<dt>Authentication:</dt> <dd><?php echo item_file('Authentication'); ?></dd>
 </dl>
 </div>
 

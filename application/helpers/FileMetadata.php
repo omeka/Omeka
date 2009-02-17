@@ -46,6 +46,16 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
             case 'date modified':
                 return $this->_record->modified;
                 break;
+            case 'authentication':
+                return $this->_record->authentication;
+                break;
+            // 'MIME Type OS' and 'File Type OS' to be deprecated?
+            case 'mime type os':
+                return $this->_record->mime_os;
+                break;
+            case 'file type os':
+                return $this->_record->type_os;
+                break;
             default:
                 throw new Exception("'$specialValue' is an invalid special value.");
                 break;
