@@ -65,7 +65,7 @@ class Omeka_View_Helper_Item
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
-    public function item(Item $item, 
+    public function item(Omeka_Record $item, 
                          $elementSetName, 
                          $elementName = null, 
                          $options     = array())

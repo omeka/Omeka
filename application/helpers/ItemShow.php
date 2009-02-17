@@ -63,7 +63,7 @@ class Omeka_View_Helper_ItemShow extends Zend_View_Helper_Abstract
      * @since 1.0 Added 'show_element_sets' and 'return_type' options.
      * @return string  
      */
-    public function itemShow(Item $item, array $options = array())
+    public function itemShow(Omeka_Record $item, array $options = array())
     {
         $this->_item = $item;
         $this->_setOptions($options);

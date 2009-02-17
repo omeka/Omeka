@@ -10,6 +10,8 @@
 
 <?php echo display_file($file); ?>
 
+<?php echo $this->itemShow($file); ?>
+
 <?php
 
 function display_definition_list_for_elements($file, $elements, $emptyText = '[Empty]')
