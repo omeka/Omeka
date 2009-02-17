@@ -306,7 +306,9 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
         $text = $this->_text;
         $extractedText = array();
         foreach ($text as $key => $record) {
-            $extractedText[$key] = $record->getText();
+            if ($textString = $record->getText()) {
+                $extractedText[$key] = $textString;
+            }
         }
         $this->_text = $extractedText;
     }

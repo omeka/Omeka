@@ -148,11 +148,11 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
                 $elementsInSet[$key] = array();
                 $elementsInSet[$key]['element'] = $element;
                 $elementsInSet[$key]['elementName'] = $element->name;
-                $elementTexts = $this->_getTextsByElement($element);
+                $elementTexts = $this->_getFormattedElementText($this->_record, $element->set_name, $element->name);
                 $elementsInSet[$key]['isShowable'] = $this->_elementIsShowable($element, $elementTexts);
                 $elementsInSet[$key]['isEmpty'] = empty($elementTexts);
                 $elementsInSet[$key]['emptyText'] = htmlentities($this->_emptyElementString);
-                $elementsInSet[$key]['texts'] = $this->_getFormattedElementText($this->_record, $element->set_name, $element->name);
+                $elementsInSet[$key]['texts'] = $elementTexts;
             }
             $elementSets[$setName] = $elementsInSet;
             
