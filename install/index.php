@@ -25,7 +25,7 @@ try {
     $installer = new Installer();
     if ($installer->getShowInstallForm()) {
         ?>
-            <h1>Welcome to Omeka!</h1>
+            <h1>Installation Complete!</h1>
             <?php if ($warningMessage = $installer->getWarningMessage()): ?>
             <div class="error">
             <?php echo $warningMessage; ?>

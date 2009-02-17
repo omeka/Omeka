@@ -78,6 +78,7 @@
 					</dd>
 			<?php endif; ?>
 			<?php fire_plugin_hook('admin_append_to_dashboard_primary'); ?>
+			</dl>
 			</div>
 		</div>
 		
