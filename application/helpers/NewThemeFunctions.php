@@ -29,6 +29,14 @@ function item($elementSetName, $elementName = null, $options = array(), $item = 
     return __v()->item($item, $elementSetName, $elementName, $options);
 }
 
+function item_file($elementSetName, $elementName = null, $options = array(), $file = null)
+{
+    if (!$file) {
+        $file = get_current_file();
+    }
+    return __v()->fileMetadata($file, $elementSetName, $elementName, $options);
+}
+
 /**
  * Retrieve the set of values for item type elements.
  * 
