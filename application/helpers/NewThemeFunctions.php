@@ -1281,6 +1281,36 @@ function link_to_browse_items($text, $browseParams = array(), $linkProperties = 
 }
 
 /**
+ * Retrieve the HTML for a link to the file metadata page for a particular file.
+ * 
+ * If no File object is specified, this will determine the file to use through
+ * context.
+ * 
+ * The text of the link defaults to the original filename of the file unless
+ * otherwise specified.
+ * 
+ * @uses get_current_file()
+ * @uses item_file()
+ * @param array
+ * @param string
+ * @param File
+ * @return string
+ **/
+function link_to_file_metadata($attributes = array(), $text = null, $file = null)
+{
+    if (!$file) {
+        $file = get_current_file();
+    }
+    
+    if (!$text) {
+        // By default we should just display the original filename of the file.
+        $text = item_file('Original Filename', null, array(), $file);
+    }
+    
+    return link_to($file, 'show', $text, $attributes);
+}
+
+/**
  * Return the pagination string.
  * 
  **/

@@ -144,10 +144,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
                 <?php else: ?>
         		<ul>
         	<?php while(loop_files_for_item()): ?>
-        	    <?php $file = get_current_file(); ?>
-        		<li><?php echo link_to($file, 'show', htmlentities($file->original_filename), array('class'=>'show','title'=>'View File Metadata')); ?></li>
-
-
+        		<li><?php echo link_to_file_metadata(array('class'=>'show', 'title'=>'View File Metadata')); ?></li>
         	<?php endwhile; ?>
 
         	</ul>
