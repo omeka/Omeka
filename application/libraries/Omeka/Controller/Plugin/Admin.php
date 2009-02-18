@@ -70,7 +70,8 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
                 if (!$auth->hasIdentity()) {
                     // capture the intended controller / action for the redirect
                     $session = new Zend_Session_Namespace;
-                    $session->redirect = $request->getPathInfo();
+                    $session->redirect = $request->getPathInfo() . 
+                    (!empty($_GET) ? '?' . http_build_query($_GET) : '');
                 
                     // finally, send to a login page
                     $this->getRedirector()->goto('login', 'users', 'default');
