@@ -63,7 +63,8 @@ class Omeka_View_Helper_Media
     protected $_callbackOptions = array(
         'image'=>array(
             'imageSize'=>'square_thumbnail',
-            'linkToFile'=>true
+            'linkToFile'=>true,
+            'linkToMetadata'=>false
             ),
         'wmv'=>array(
 			'width' => '320', 
@@ -154,14 +155,6 @@ class Omeka_View_Helper_Media
     {
         $html = '';
         
-        if ($options['linkToFile']) {
-            $defaultLinkAttributes = array(
-                'class'=>'download-file', 
-                'href'=>file_download_uri($file));
-            $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
-            
-            $html .= '<a ' . _tag_attributes($linkAttributes) . '>';
-        }
         /** 
          * Setting a variable for content for the alt attribute for images.
          * Problem with alternative text is that it shoudl describe what's going
@@ -211,8 +204,17 @@ class Omeka_View_Helper_Media
 		
 		$html .= !empty($imgHtml) ? $imgHtml : htmlentities($file->original_filename);	
 		
-		if ($options['linkToFile']) {
-		  $html .= '</a>';
+		if ($options['linkToMetadata']) {
+		  $html = link_to_file_metadata((array)$options['linkAttributes'], 
+		          $html, $file);
+		} else if ($options['linkToFile']) {
+            // Wrap in a link that will download the file directly.
+            $defaultLinkAttributes = array(
+                'class'=>'download-file', 
+                'href'=>file_download_uri($file));
+            $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
+
+            $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html . '</a>';
 		}
 		
 		return $html;        
