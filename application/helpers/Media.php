@@ -61,6 +61,10 @@ class Omeka_View_Helper_Media
      * @var array
      **/
     protected $_callbackOptions = array(
+        'defaultDisplay'=>array(
+            'linkToFile'=>true,
+            'linkToMetadata'=>false
+            ),
         'image'=>array(
             'imageSize'=>'square_thumbnail',
             'linkToFile'=>true,
@@ -91,6 +95,7 @@ class Omeka_View_Helper_Media
 		    'showFilename' => true,
 		    'icons' => array(),
 		    'linkToFile' => true,
+		    'linkToMetadata' => false,
 		    'linkAttributes' => array(),
 		    'imgAttributes' => array(),
 		    'filenameAttributes' => array()
@@ -132,12 +137,46 @@ class Omeka_View_Helper_Media
      **/
     public function defaultDisplay($file, array $options=array())
     {
-        $linkAttributes = array('href'=>file_download_uri($file), 
-                            'class'=>'download-file');
+        return $this->_linkToFile(null, $file, $options);   
+    }
+    
+    /**
+     * Add a link for the file based on the given set of options.
+     * 
+     * If the 'linkToMetadata' option is true, then link to the file metadata
+     * page (files/show).  Otherwise if 'linkToFile' is true, link to download
+     * the file.  Otherwise just return the $html without wrapping in a link.
+     * 
+     * The attributes for the link will be based off the 'linkAttributes' option,
+     * which should be an array.
+     * 
+     * If $html is null, it defaults to original filename of the file.
+     * 
+     * @param string
+     * @param File
+     * @param array
+     * @return string
+     **/
+    protected function _linkToFile($html = null, $file, $options)
+    {
+        if ($html === null) {
+            $html = item_file('Original Filename', null, array(), $file);
+        }
         
-        $linkAttributes = array_merge($linkAttributes, (array)$options['linkAttributes']);
-        $html .= '<a ' . _tag_attributes($linkAttributes) . '>'. $file->original_filename. '</a>';   
-        return $html;     
+        if ($options['linkToMetadata']) {
+		  $html = link_to_file_metadata((array)$options['linkAttributes'], 
+		          $html, $file);
+		} else if ($options['linkToFile']) {
+            // Wrap in a link that will download the file directly.
+            $defaultLinkAttributes = array(
+                'class'=>'download-file', 
+                'href'=>file_download_uri($file));
+            $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
+
+            $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html . '</a>';
+		}
+		
+		return $html;
     }
     
     /**
@@ -204,18 +243,7 @@ class Omeka_View_Helper_Media
 		
 		$html .= !empty($imgHtml) ? $imgHtml : htmlentities($file->original_filename);	
 		
-		if ($options['linkToMetadata']) {
-		  $html = link_to_file_metadata((array)$options['linkAttributes'], 
-		          $html, $file);
-		} else if ($options['linkToFile']) {
-            // Wrap in a link that will download the file directly.
-            $defaultLinkAttributes = array(
-                'class'=>'download-file', 
-                'href'=>file_download_uri($file));
-            $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
-
-            $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html . '</a>';
-		}
+		$html = $this->_linkToFile($html, $file, $options);
 		
 		return $html;        
     }
@@ -334,14 +362,7 @@ class Omeka_View_Helper_Media
                    . '>' . htmlspecialchars($file->original_filename) . '</div>';
         }
         
-        // Wrap with an <a href> if necessary.
-        if ($options['linkToFile']) {
-            $linkAttributes = array('href'=>file_download_uri($file));
-            $linkAttributes = array_merge($linkAttributes, (array)$options['linkAttributes']);
-            $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html
-                  . '</a>';
-        }
-        return $html;
+        return $this->_linkToFile($html, $file, $options);
     }
     
     // END DEFINED DISPLAY CALLBACKS
