@@ -292,6 +292,7 @@ class UsersController extends Omeka_Controller_Action
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $rememberMe = $_POST['remember'];
         $db = $this->getDb();
         $dbAdapter = $db->getAdapter();
         // Authenticate against the 'users' table in Omeka.
@@ -300,7 +301,18 @@ class UsersController extends Omeka_Controller_Action
                     ->setCredential($password);
         $result = $this->_auth->authenticate($adapter);
         if ($result->isValid()) {
-            $this->_auth->getStorage()->write($adapter->getResultRowObject(array('id', 'username', 'role', 'entity_id')));
+            $storage = $this->_auth->getStorage();
+            $storage->write($adapter->getResultRowObject(array('id', 'username', 'role', 'entity_id')));
+            $session = new Zend_Session_Namespace($storage->getNamespace());
+            if ($rememberMe) {
+                // Remember that a user is logged in for the default amount of 
+                // time (2 weeks).
+                Zend_Session::rememberMe();
+            } else {
+                // If a user doesn't want to be remembered, expire the cookie as
+                // soon as the browser is terminated.
+                Zend_Session::forgetMe();
+            }
         }
         return $result;
     }

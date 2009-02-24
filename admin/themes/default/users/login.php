@@ -22,6 +22,11 @@
 	<label for="password">Password</label> 
 	<input type="password" name="password" class="textinput" id="password" />
 	</div>
+	
+	<div class="field">
+    	<label for="remember">Remember Me?</label> 
+        <?php echo $this->formCheckbox('remember', null, array('class' => 'checkbox')); ?>
+	</div>
 	</fieldset>
 	<input type="submit" class="submit-small submit" value="Log In" />
 </form>

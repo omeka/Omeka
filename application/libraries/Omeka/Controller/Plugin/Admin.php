@@ -75,24 +75,6 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
                 
                     // finally, send to a login page
                     $this->getRedirector()->goto('login', 'users', 'default');
-                } else {
-                    // Access the authentication session and set it to expire 
-                    // after a certain amount of time if there are no requests.
-                    $auth_session = new Zend_Session_Namespace( $auth->getStorage()->getNamespace() );
-                    $config = Omeka_Context::getInstance()->getConfig('basic');
-                    
-                    // If we have configured the logins to expire, then set the expiration time
-                    if (isset($config->login->expire)) {
-                        
-                        $minutesUntilExpiration = (int) $config->login->expire;
-                        
-                        // Default value in case for whatever reason it's not available
-                        if (!$minutesUntilExpiration) {
-                            $minutesUntilExpiration = 15;
-                        }
-                        
-                        $auth_session->setExpirationSeconds($minutesUntilExpiration * 60);                    
-                    }
                 }
             }
         // }
