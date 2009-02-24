@@ -22,39 +22,39 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
      * @param string
      * @return mixed
      **/
-    protected function _getRecordMetadata($fieldName)
+    protected function _getRecordMetadata($record, $fieldName)
     {
         switch (strtolower($fieldName)) {
             case 'id':
-                return $this->_record->id;
+                return $record->id;
                 break;
             case 'archive filename':
-                return $this->_record->archive_filename;
+                return $record->archive_filename;
                 break;
             case 'original filename':
-                return $this->_record->original_filename;
+                return $record->original_filename;
                 break;
             case 'size':
-                return $this->_record->size;
+                return $record->size;
                 break;
             case 'mime type':
-                return $this->_record->getMimeType();
+                return $record->getMimeType();
                 break;
             case 'date added':
-                return $this->_record->added;
+                return $record->added;
                 break;
             case 'date modified':
-                return $this->_record->modified;
+                return $record->modified;
                 break;
             case 'authentication':
-                return $this->_record->authentication;
+                return $record->authentication;
                 break;
             // 'MIME Type OS' and 'File Type OS' to be deprecated?
             case 'mime type os':
-                return $this->_record->mime_os;
+                return $record->mime_os;
                 break;
             case 'file type os':
-                return $this->_record->type_os;
+                return $record->type_os;
                 break;
             default:
                 throw new Exception("'$specialValue' is an invalid special value.");
