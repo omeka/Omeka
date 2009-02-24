@@ -7,7 +7,7 @@
 
 <div id="primary">
     <?php echo flash(); ?>
-	<h2>Current Theme: <?php echo h($current->title); ?></h2>
+	<h2>Current Theme: &#8220;<?php echo h($current->title); ?>&#8221;</h2>
 
 <div id="current-theme">
 	<img src="<?php echo h($current->image); ?>" width="342px" />
@@ -36,7 +36,7 @@
 		</ul>
 		</div>
 		<div class="description">
-		<img src="<?php echo h($theme->image); ?>" width="190px"/>
+		<img src="<?php echo h($theme->image); ?>" width="296px"/>
 		</div>
 	</div>
 	<?php endforeach; ?>
