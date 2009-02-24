@@ -111,6 +111,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	.edit-button a {background-color: #F4F3EB; color: #c50;padding-top:10px; padding-bottom:10px;padding-right: 10px;}
 	.edit-button a:hover {background-color: #FAFAF7;color: #333;}
 	
+
 /* == Wrap == */
 #wrap {}
 
@@ -211,7 +212,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 			
 			label.use-html input {position:absolute; top:0; left:0; margin:0;float:none;padding:0;}
 
-			#item-form .explanation {margin-top:18px;}
+			#item-form .explanation, #editfile .explanation {margin-top:18px;}
 			
 			input.remove-element {background-color: transparent !important; color: #900;padding-left:18px;}
 			
@@ -236,6 +237,18 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 			#edit-your-tags .explanation {font-size:1.1em; color: #777;margin-top:0;}
 			#edit-your-tags input {border-color: #bbb; margin-bottom:4px;}
 	
+	/* Files Show Page */
+	
+	#mime-type-metadata-exif-array .element-text {overflow-x:scroll; border:1px solid #d7d6e5;padding:12px; white-spac}
+	
+	/* Files Edit Page */
+	
+	.edit-file #content h1.has-thumbnail {margin-left: 78px; margin-bottom: 40px;}
+	
+	#edit-file-image {position:absolute; top:20px; left:0; text-align:right;}
+		#edit-file-image img {width:60px; height: 60px; border:3px solid #d7d5c4;}
+	
+	#delete-file-link {float:left; position:absolute; bottom:20px; left: 18px;width: 200px;}
 	/* Advanced Search Form */
 	.search-entry {margin-bottom:6px; overflow:hidden;zoom:1;}
 	

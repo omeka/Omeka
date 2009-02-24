@@ -1,4 +1,4 @@
-<?php head(array('bodyclass'=>'files primary')); ?>
+<?php head(array('title' => 'Edit File # '.item_file('id'), 'bodyclass'=>'files edit-file primary')); ?>
 <script type="text/javascript" charset="utf-8">
     Event.observe(window, 'load', function(){
         // Get rid of the add/remove buttons and 'Use HTML' checkbox.
@@ -9,19 +9,19 @@
     });
 </script>
 
-<h1>Edit File #<?php echo htmlentities($file->id); ?></h1>
+<h1<?php if($file->hasThumbnail()) echo ' class="has-thumbnail"'; ?>
+>Edit File #<?php echo htmlentities($file->id); ?></h1>
 
+<?php if($file->hasThumbnail()): ?>
+<div id="edit-file-image"><?php echo square_thumbnail($file); ?></div>
+<?php endif; ?>
 <div id="primary">
 
 <?php echo flash(); ?>
 
-<?php if (has_permission('Files', 'delete')): ?>
-<p><?php echo link_to($file, 'delete', 'Delete', array('class'=>'delete')); ?></p>    
-<?php endif; ?>
 
-<?php if($file->hasThumbnail()): ?>
-<div id="image"><?php echo thumbnail($file); ?><p>Thumbnail of File #<?php echo htmlentities($file->id); ?></div>
-<?php endif; ?>
+
+
 	
 <form method="post" id="editfile" action="<?php echo uri('files/edit/'.$file->id); ?>" name="editFile">
 
@@ -43,6 +43,8 @@
 </fieldset>
 
 </form>
-
+<?php if (has_permission('Files', 'delete')): ?>
+<p id="delete-file-link"><?php echo link_to($file, 'delete', 'Delete this File', array('class'=>'delete')); ?></p>    
+<?php endif; ?>
 </div>
 <?php foot(); ?>

@@ -50,7 +50,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	
 	/* Replaces tooltips */
 	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999;}
-	#item-form .field .explanation {margin-left:216px; float:left; clear:right;}
+	#item-form .field .explanation, #editfile .field .explanation {margin-left:216px; float:left; clear:right;}
 	
 	/* Changes the width of inputs depending on the layout */
 		.vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
