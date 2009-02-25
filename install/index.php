@@ -43,8 +43,7 @@ try {
         ?>
         <div id="intro">
             <h1>Installation is Finished!</h1>
-            <p>Omeka is now installed. <a href="<?php echo dirname($_SERVER['REQUEST_URI']); ?>">Check out your site</a>, 
-                or go directly to the <a href="<?php echo dirname($_SERVER['REQUEST_URI']) . '/admin'; ?>">admin</a> panel.</p>
+            <p>Omeka is now installed. <a href="<?php echo dirname($_SERVER['REQUEST_URI']); ?>">Check out your site</a>!</p>
         </div>
         <?php
     }
