@@ -122,6 +122,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 .default,
 .add,
 .delete,
+.delete-element,
 .error,
 .success,
 .edit,
@@ -153,7 +154,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 .default {background-image:url("../images/user_gray.gif");}
 .add-file {background-image:url("../images/disk_multiple.gif");}
 .add {background-image:url("../images/page_add.gif");}
-.delete {background-image:url("../images/delete.gif");}
+.delete, .delete-element {background-image:url("../images/delete.gif");}
 .error {background-image:url("../images/error.gif");}
 .success {background-image:url("../images/tick.gif");}
 .browse {background-image:url("../images/book_open.gif");}

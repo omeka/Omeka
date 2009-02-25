@@ -19,7 +19,7 @@
 		        <td class="element-order"><?php echo __v()->formText("Elements[$key][order]", $key+1, array('size'=>2)); // Key starts at 0 ?></td>
                 
                 <?php if (has_permission('ItemTypes', 'delete-element')): ?>
-		        <td><a href="<?php echo uri(array('controller'=>'item-types', 'action'=>'delete-element', 'element-id'=>$element->id, 'item-type-id'=>$itemtype->id), 'default'); ?>" class="delete delete-element">Remove</a></td>
+		        <td><a href="<?php echo uri(array('controller'=>'item-types', 'action'=>'delete-element', 'element-id'=>$element->id, 'item-type-id'=>$itemtype->id), 'default'); ?>" class="delete-element">Remove</a></td>
                 <?php endif; ?>
 		        <?php echo __v()->formHidden("Elements[$key][element_id]", $element->id); ?>
 		    </tr>
