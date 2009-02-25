@@ -214,7 +214,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
 			#item-form .explanation, #editfile .explanation {margin-top:18px;}
 			
-			input.remove-element {background-color: transparent !important; color: #900;padding-left:18px;}
+			input.remove-element {background-color: transparent !important; color: #900;padding-left:18px; display:none;}
 			
 			input.add-element {background-color: transparent !important; color: #359; font-weight:bold; color:#76bb5f;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
 			
@@ -307,6 +307,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		#current-theme .type {font-weight:bold;}
 		
 		#current-theme .value {display:block; margin-bottom:18px;}
+
 /* == Footer == */
 #footer {clear:both; padding: 18px 0 1px;  overflow:hidden; zoom:1;margin:0 36px; width: 882px;background: #eae9db;}
 	#footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}

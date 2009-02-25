@@ -116,6 +116,7 @@ echo js('tiny_mce/tiny_mce');
         
         // Isolate the inputs on this part of the form.
         var inputs = fieldDiv.select('input', 'textarea', 'select');
+
         var postString = inputs.invoke('serialize').join('&');        
         params.element_id = elementId;
 
@@ -139,6 +140,7 @@ echo js('tiny_mce/tiny_mce');
         e.stop();
         var addButton = Event.element(e);
         var fieldDiv = addButton.up('div.field');
+
         Omeka.ItemForm.elementFormRequest(fieldDiv, {add:'1'});
     },
     
@@ -156,11 +158,30 @@ echo js('tiny_mce/tiny_mce');
         if(!confirm('Do you want to delete this?')) {
             return;
         }
-                
+             
         removeButton.up('div.input-block').remove();
+        
+        $$('div.field').each(function(i) {
+	        var removeCount = i.select('.remove-element').size();
+	        if(removeCount == 1) {
+	            i.select('.remove-element').each(function(j,index){
+	                j.style.display = "none"; 
+	            }); 
+	        }
+	    });
 	},
     
     makeElementControls: function() {
+        
+        $$('div.field').each(function(i) {
+	        var removeCount = i.select('.remove-element').size();
+	        if(removeCount > 1) {
+	            i.select('.remove-element').each(function(j,index){
+	                j.style.display = "block"; 
+	            }); 
+	        }
+	    });
+        
  	    // Class name is hard coded here b/c it is hard coded in the helper
 	    // function as well.
 	    $$('.add-element').invoke('observe', 'click', Omeka.ItemForm.addElementControl);
