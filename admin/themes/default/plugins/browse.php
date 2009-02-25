@@ -32,7 +32,7 @@
         if($plugin->installed): ?>
             <?php if (has_permission('Plugins', 'activate')): ?>
                 <form action="<?php echo uri('plugins/activate'); ?>" method="post" accept-charset="utf-8">
-                    <button name="" type="submit" class="submit-medium" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?>
+                    <button name="" type="submit" class="<?php echo ($plugin->active) ? 'deactivate' : 'activate'; ?> submit-medium" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?>
                     </button>
                     <input type="hidden" name="activate" value="<?php echo $plugin->directory; ?>" />
                 </form>                

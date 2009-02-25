@@ -45,7 +45,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	/* Submit buttons - different sizes, uses background images */
 	.submit-extrasmall {background:none; color:#fff;border:none;width: 46px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-extrasmall.gif") 0 -30px no-repeat !important;}
 	.submit-small {background:none; color:#fff;border:none;width: 70px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-small.gif") 0 -30px no-repeat !important;}
-	.submit-medium {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-medium.gif") 0 -30px no-repeat !important;}
+	.submit-medium {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/buttons-medium.gif") 0 -60px no-repeat !important;}
 	.submit-medium:hover, .submit-small:hover, .submit-extrasmall:hover {background-position:0 0 !important;cursor:pointer;}
 	
 	/* Replaces tooltips */
@@ -55,6 +55,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	/* Changes the width of inputs depending on the layout */
 		.vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
 		.vertical-nav #item-form .field .explanation {margin-left: 144px;}
+		
 		/* .input used to wrap input fields in items/add form */
 		.field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
 		.vertical-nav .field .inputs {width: 468px;}

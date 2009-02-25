@@ -287,6 +287,13 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	.users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 	#new-user-form .submit {float:right;}
 	
+	/* Plugins */
+	#plugin-info .uninstall {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#fff url("../images/buttons-medium.gif") 0 -120px no-repeat !important;}
+		#plugin-info .deactivate {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#fff url("../images/buttons-medium.gif") 0 -90px no-repeat !important;}
+		
+		#plugin-info .uninstall:hover, 
+		#plugin-info .deactivate:hover {background-position: 0 -30px !important;}
+		
 	/* Themes */
 	#themeswitch .themes {margin-right:-18px; overflow:hidden; zoom:1;margin-bottom:-18px;}
 	#themeswitch .theme {overflow:hidden; zoom:1; margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;float:left; width: 296px;}
