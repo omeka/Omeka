@@ -1,3 +1,4 @@
+<div class="field">
 <div id="tag-form">
 <?php if(has_tags($item) and has_permission('Items','untagOthers')): ?>
 		<div id="edit-all-tags">
@@ -23,7 +24,7 @@
 	<p class="explanation">Separate tags with commas (lorem, ipsum, dolor sit, amet).</p>
 	
 </div>
-
+</div>
 <?php fire_plugin_hook('append_to_item_form_tags', $item); // Deprecated in 0.10 ?>
 <?php fire_plugin_hook('admin_append_to_items_form_tags', $item); ?>
 </div>

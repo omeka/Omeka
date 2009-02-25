@@ -77,14 +77,15 @@
 		</div>
 	</div>
 </fieldset>
+<?php if($itemtype->exists()): ?>
+
 <fieldset id="type-elements">
 	<legend>Elements</legend>
 	
     <div id="element-list">
-    <?php if($itemtype->exists()): ?>
         <?php echo $this->action('element-list', 'item-types', null, array('item-type-id' => $itemtype->id)); ?>
-    <?php endif; ?>
     </div>
 </fieldset>
+<?php endif; ?>
 
 <?php fire_plugin_hook('admin_append_to_item_types_form', $itemtype); ?>
