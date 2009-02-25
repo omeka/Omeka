@@ -16,8 +16,9 @@ body#login {width: 414px; margin: 54px auto;}
 #login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1;}
 
 #login #content form {clear:both;}
-	#login .textinput {float:right; width: 280px;}
-	#login label {float:left; width: 72px; text-align:right;}
+	#login .textinput {float:right; width: 240px;}
+	#login #remember {margin-left: 12px; margin-top:0px;}
+	#login label {float:left; width: 118px; text-align:right;}
 	p.clear {clear:both;}
 
 
