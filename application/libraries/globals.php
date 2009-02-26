@@ -163,62 +163,6 @@ function get_plugin_broker()
 }
 
 /**
- * Define a metafield through the plugin interface.
- * 
- * @deprecated
- * @param string
- * @param string
- * @param string
- * @return void
- **/
-function define_metafield($name, $description, $type=null)
-{
-    trigger_error('Deprecated in 0.10!');
-}
-
-/**
- * @deprecated Please put your view scripts in the views/$theme directory in
- * your plugin, where $theme could be 'admin', 'public' or 'shared'.
- * @param string
- * @param string
- * @return void
- **/
-function add_theme_pages($dir, $theme='both')
-{
-    trigger_error('Deprecated in 0.10!');
-}
-
-/**
- * @deprecated
- * @param string
- * @return void
- **/
-function add_controllers($dir='controllers')
-{
-    get_plugin_broker()->addControllerDir($dir);
-}
-
-/**
- * @deprecated
- * @param string
- * @param array 
- * @return void
- **/
-function add_data_feed($format, $options=array())
-{
-    get_plugin_broker()->addFeed($format, $options);
-}
-
-/**
- * @deprecated Please use filters for adding navigation instead.
- * @return void
- **/
-function add_navigation($text, $link, $type='main', $permissions=null)
-{
-    trigger_error('add_navigation() has been deprecated.  To add navigation via plugins, please use filters instead.');
-}
-
-/**
  * 
  * @param string
  * @return void

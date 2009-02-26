@@ -90,31 +90,6 @@ function is_current_uri($link, $req = null) {
 }
 
 /**
- * @deprecated Use items_output_uri().  
- * @see items_output_uri()
- */
-function items_rss_uri($params=array())
-{
-	$params['output'] = 'rss2';
-	
-	//In case $_GET is passed from a search of items, don't include the submit form button
-	unset($params['submit_search']);
-	
-	$uri = uri('items/browse', $params);	
-	
-	return $uri;
-}
-
-/**
- * @deprecated Use abs_item_uri() instead.
- * @see abs_item_uri()
- */
-function item_permalink_url($item)
-{
-    return abs_item_uri($item);
-}
-
-/**
  * @see FilesController
  * @see routes.ini (display/download routes)
  *

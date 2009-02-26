@@ -137,57 +137,6 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
 }
 
 /**
- * @deprecated Please use link_to_item(item_thumbnail()) instead.
- * @return string|false
- **/
-function link_to_thumbnail($item, $props=array(), $action='show', $random=false)
-{
-    return _link_to_archive_image($item, $props, $action, $random, 'thumbnail');
-}
-
-/**
- * @deprecated Please use link_to_item(item_fullsize()) instead.
- * @return string|false
- **/
-function link_to_fullsize($item, $props=array(), $action='show', $random=false)
-{
-    return _link_to_archive_image($item, $props, $action, $random, 'fullsize');
-}
-
-/**
- * @deprecated Please use link_to_item(item_square_thumbnail()) instead.
- * @return string|false
- **/
-function link_to_square_thumbnail($item, $props=array(), $action='show', $random=false)
-{
-    return _link_to_archive_image($item, $props, $action, $random, 'square_thumbnail');
-}
-
-/**
- * Returns a link to an item, where the link has been populated by a specific image format for the item.
- * 
- * @deprecated Used internally by deprecated helpers, do not use this.
- * @access private
- * @return string|false
- **/
-function _link_to_archive_image($item, $props=array(), $action='show', $random=false, $imageType = 'thumbnail')
-{
-	if(!$item or !$item->exists()) return false;
-	
-	$path = 'items/'.$action.'/' . $item->id;
-	$output = '<a href="'. uri($path) . '" ' . _tag_attributes($props) . '>';
-	
-	if($random) {
-		$output .= archive_image($item, array(), null, null, $imageType);
-	}else {
-		$output .= archive_image($item->Files[0], array(), null, null, $imageType);
-	}
-	$output .= '</a>';	
-	
-	return $output;
-}
-
-/**
  * 
  * @since 0.10 All arguments to this function are optional.  If no text is given,
  * it will automatically use the text for the 'site_title' option.
