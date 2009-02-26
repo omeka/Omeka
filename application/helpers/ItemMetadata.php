@@ -55,6 +55,8 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
             case 'public':
                 return $item->public;
                 break;
+            case 'permalink':
+                return abs_item_uri($item);
             default:
                 throw new Exception("'$specialValue' is an invalid special value.");
                 break;
