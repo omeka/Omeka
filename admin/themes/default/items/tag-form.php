@@ -1,6 +1,6 @@
 <div class="field">
 <div id="tag-form">
-<?php if(has_tags($item) and has_permission('Items','untagOthers')): ?>
+<?php if(item_has_tags() and has_permission('Items','untagOthers')): ?>
 		<div id="edit-all-tags">
     	<ul id="tags-list">
 	
