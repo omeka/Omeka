@@ -23,33 +23,40 @@ class Omeka_File_Ingest
         
         $files = array();
         foreach ($fileInfo as $key => $info) {
-            $file = new File;
-            try {
-                $file->original_filename = $info['name'];
-                $file->item_id = $item->id;
-                
-                $file->setDefaults($upload->getFileName($key));
-                
-                // Create derivatives and extract metadata.
-                // TODO: Move these create images / extract metadata events to 
-                // the 'after_file_upload' hook whenever it becomes possible to 
-                // implement hooks within core Omeka.
-                //$file->createDerivatives();
-                //$file->extractMetadata();
-                
-                $file->forceSave();
-                
-                fire_plugin_hook('after_upload_file', $file, $item);
-                
-                $files[] = $file;
-                
-            } catch(Exception $e) {
-                if (!$file->exists()) {
-                    $file->unlinkFile();
-                }
-                throw $e;
-            }
+            $files[] = self::_createFile($item, $upload->getFileName($key), $info['name']);
         }
         return $files;
+    }
+    
+    protected static function _createFile($item, $newFilePath, $oldFilename)
+    {
+        $file = new File;
+        try {
+            $file->original_filename = $oldFilename;
+            $file->item_id = $item->id;
+            
+            $file->setDefaults($newFilePath);
+            
+            // Create derivatives and extract metadata.
+            // TODO: Move these create images / extract metadata events to 
+            // the 'after_file_upload' hook whenever it becomes possible to 
+            // implement hooks within core Omeka.
+            //$file->createDerivatives();
+            //$file->extractMetadata();
+            
+            $file->forceSave();
+            
+            fire_plugin_hook('after_upload_file', $file, $item);
+            
+            $files[] = $file;
+            
+        } catch(Exception $e) {
+            if (!$file->exists()) {
+                $file->unlinkFile();
+            }
+            throw $e;
+        }
+        
+        return $file;
     }
 }
