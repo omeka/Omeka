@@ -52,7 +52,7 @@ class Omeka_File_Derivative_Image
      * @param string
      * @return void
      **/
-    public function createDerivativeImages($path)
+    public static function createDerivativeImages($path)
     {
         //Function processes derivatives of every image uploaded - additional images may be created using createImage function.  Additionally, plugin hooks allow you to add your own additional image sizes [DL]
         
@@ -61,10 +61,14 @@ class Omeka_File_Derivative_Image
         $thumb_constraint = get_option('thumbnail_constraint');
         $square_thumbnail_constraint = get_option('square_thumbnail_constraint');
         
-        $this->createImage($path, FULLSIZE_DIR, $full_constraint);
-        $this->createImage($path, THUMBNAIL_DIR, $thumb_constraint);
-        $this->createImage($path, SQUARE_THUMBNAIL_DIR, $square_thumbnail_constraint, "square");
-        
+        // FIXME: all of these return the same value, or throw an exception if
+        // failing.  Also, the value that is returned should be the full path to
+        // the file (not just the filename).
+        self::createImage($path, FULLSIZE_DIR, $full_constraint);
+        self::createImage($path, THUMBNAIL_DIR, $thumb_constraint);
+        $imageName = self::createImage($path, SQUARE_THUMBNAIL_DIR, $square_thumbnail_constraint, "square");
+
+        return $imageName;
     }
     
     /**
@@ -93,18 +97,17 @@ class Omeka_File_Derivative_Image
      * of square thumbnails, though a plugin could also take advantage of it.
      * @return string The filename of the generated image file.
      **/
-    protected function createImage( $old_path, $new_dir, $constraint, $type=null) {
+    public static function createImage( $old_path, $new_dir, $constraint, $type=null) {
             
         $convertPath = get_option('path_to_convert');
-                        
+        
+        // FIXME: getimagesize() will only process BMP, GIF, JPG, PNG.  There are
+        // a ton of other files that can be converted by ImageMagick.                
         if (file_exists($old_path) && is_readable($old_path) && getimagesize($old_path)) {    
             
-            $filename = basename($old_path);
-            $new_name = explode('.', $filename);
-            //ensures that all generated files are jpeg
-            $new_name[1] = IMAGE_DERIVATIVE_EXT;
-            $imagename = implode('.', $new_name);
-            $new_path = rtrim($new_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imagename;
+            $imageName = self::_getFileName($old_path);
+            
+            $new_path = rtrim($new_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $imageName;
 
             $old_path = escapeshellarg( $old_path );
             $new_path = escapeshellarg( $new_path );
@@ -124,15 +127,25 @@ class Omeka_File_Derivative_Image
             exec($command, $result_array, $result_value);
 
             if ($result_value == 0) {
-                //Image was created, so set the derivative bitflag
-                if (!$this->has_derivative_image) {
-                    $this->has_derivative_image = 1;
-                }
-
-                return $imagename;    
+                return $imageName;    
             } else {
                 throw new Omeka_Upload_Exception('Something went wrong with image creation.  Please notify an administrator.');
             }
         }
     }    
+    
+    public static function createAll($originalFilePath)
+    {
+        self::checkOmekaCanMakeDerivativeImages();
+        return self::createDerivativeImages($originalFilePath);
+    }
+    
+    protected static function _getFileName($archiveFilename)
+    {
+        $filename = basename($archiveFilename);
+        $newName = explode('.', $filename);
+        //ensures that all generated files are jpeg
+        $newName[1] = IMAGE_DERIVATIVE_EXT;
+        return implode('.', $newName);
+    }
 }
