@@ -5,6 +5,25 @@
 class Omeka_File_Ingest
 {
     protected static $_archiveDirectory = FILES_DIR;
+
+    public static function url($item, $urls, $options = array())
+    {
+        foreach ($urls as $url) {            
+            // Trim the trailing slash so it doesn't think it's a directory.
+            // ALSO, slashes are not allowed.
+            $originalFilename = str_replace('/', '-', rtrim($url, '/ '));
+            $destination = self::$_archiveDirectory . DIRECTORY_SEPARATOR;
+            $fileDestArg = escapeshellarg($destination . $originalFilename);
+            $urlArg = escapeshellarg($url);
+            $command = "wget -O $fileDestArg $urlArg";
+            exec($command, $wgetOutput, $returnValue);
+        }
+    }
+        
+    public static function filesystem($item, $paths, $options)
+    {
+        
+    }
     
     public static function upload($item, $options)
     {
