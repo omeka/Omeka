@@ -13,10 +13,10 @@ echo js('tiny_mce/tiny_mce');
 		Omeka.ItemForm.makeFileWindow();
         
         // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.
-        $$('div.field textarea').each(function(el){
-            el.id = null;
-        });
-        
+        // $$('div.field textarea').each(function(el){
+        //     el.id = null;
+        // });
+
         // Must run the element form scripts AFTER reseting textarea ids.
         document.fire('omeka:elementformload');
         
@@ -239,10 +239,12 @@ echo js('tiny_mce/tiny_mce');
 	    
 	    // Add the 'html-editor' class to all textareas that are flagged as HTML.
 	    var textarea = getTextarea(checkbox);
+	    
 	    if (checkbox.checked && textarea) {
             textarea.addClassName('html-editor');
 	    };
-	            
+
+
         // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
         Event.observe(checkbox, 'click', function(e) {
             var textarea = getTextarea(checkbox);
@@ -250,9 +252,9 @@ echo js('tiny_mce/tiny_mce');
             if (textarea) {
                 // Toggle on when checked.
                 if(checkbox.checked) {
-                   tinyMCE.execCommand("mceAddControl", false, textarea.id);               
+                    tinyMCE.execCommand("mceAddControl", false, textarea.id);               
                 } else {
-                  tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
+                    tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
                 }                
             };
         });
@@ -264,34 +266,39 @@ echo js('tiny_mce/tiny_mce');
      * opposed to all fields for the element.
 	 */
 	enableWysiwyg: function() {
-	    
+	    	    
 	    $$('div.inputs').each(function(div){
             // Get all the WYSIWYG checkboxes
             var checkboxes = div.select('input[type="checkbox"]');
             checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
 	    });
     
-        // The configuration bombs out in IE6, so we have to avoid configuring TinyMCE
-        // in IE6/7.  
-        if (Prototype.Browser.IE) {return };
+        // The configuration bombs out in IE6, so we have to be limited in our configuration.  
+        if (Prototype.Browser.IE) {
+            tinyMCE.init({
+                mode: "specific_textareas",
+                editor_selector: "html-editor"
+            });
+        } else {
     
 	    //WYSIWYG Editor
-       tinyMCE.init({
-        mode: "specific_textareas",
-        editor_selector : "html-editor",    // Put the editor in for all textareas with an 'html-editor' class.
-       	theme: "advanced",
-		force_br_newlines : true,
-		forced_root_block : '', // Needed for 3.x
-		remove_linebreaks : true,
-		fix_content_duplication : false,
-		fix_list_elements : true,
-		valid_child_elements:"ul[li],ol[li]",
-       	theme_advanced_toolbar_location : "top",
-       	theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect,code",
-		theme_advanced_buttons2 : "",
-		theme_advanced_buttons3 : "",
-		theme_advanced_toolbar_align : "left"
+        tinyMCE.init({
+            mode: "specific_textareas",
+            editor_selector : "html-editor",    // Put the editor in for all textareas with an 'html-editor' class.
+           	theme: "advanced",
+    		force_br_newlines : true,
+    		forced_root_block : '', // Needed for 3.x
+    		remove_linebreaks : true,
+    		fix_content_duplication : false,
+    		fix_list_elements : true,
+    		valid_child_elements:"ul[li],ol[li]",
+           	theme_advanced_toolbar_location : "top",
+           	theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect,code",
+    		theme_advanced_buttons2 : "",
+    		theme_advanced_buttons3 : "",
+    		theme_advanced_toolbar_align : "left"
        });   
+        }
 	}
 
     });
