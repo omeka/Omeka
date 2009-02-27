@@ -6,141 +6,58 @@ class Omeka_File_Ingest
 {
     protected static $_archiveDirectory = FILES_DIR;
     
-    /**
-     * Process all of the internals related to uploading a file through Omeka.
-     * 
-     * The list of things that has to happen includes:
-     *  1) Move the file to its final location in the archive/files directory.
-     *  2) Set all of the default values to be stored in the 'files' table.
-     *  3) Create derivative images based on this file, if applicable.
-     *  4) Extract and store additional metadata depending on the MIME type of the file.
-     * 
-     * @internal There is a lot of duplication between this and the
-     * moveToFileDir() method, which I suspect is used exclusively by the
-     * Dropbox plugin. We should factor that out so that there is only method
-     * that can be called from anywhere within the Omeka environment. This should
-     * also be extensible by plugins so that plugins could potentially redefine
-     * information about how the files are stored (perhaps storing in a database,
-     * or uploading to Flickr, etc.).
-     * @return void
-     **/
-    public function upload($form_name, $index) {
-        
-        $tmp             = $_FILES[$form_name]['tmp_name'][$index];
-        $name            = $_FILES[$form_name]['name'][$index];
-        
-        $path = $this->moveFileToArchive($tmp, $name);
-        
-        $this->setDefaults($path);
-        
-        // 'mime_browser' is also set in the setDefaults() method, but this may override that value.
-        $this->mime_browser = $_FILES[$form_name]['type'][$index];
-        $this->original_filename = $name;
-        
-        $this->createDerivativeImages($path);
-        
-        $this->extractMimeMetadata($path);
-    }
-    
-    /**
-     * Move a file from wherever it is (typically in a temporary upload 
-     * directory, or if you're a plugin, anywhere else) to the archive/files 
-     * directory.
-     * 
-     * @throws Omeka_Upload_Exception
-     * @param string The path to the file's current location.
-     * @param string The name that the file should be given when stored in the
-     * archive/ directory. This will be sanitized and have nonsense appended to
-     * it to avoid naming collisions.
-     * @return string The full path to the location that file has been moved to.
-     **/
-    public function moveFileToArchive($oldFilePath, $newFilename, $isUpload = true)
+    public static function ingest(Item $item, $adapter, $files = null, $options = null)
     {
-        $newFilePath = FILES_DIR . DIRECTORY_SEPARATOR . $this->renameFileForArchive($newFilename);
-        
-        if (is_uploaded_file($oldFilePath)) {
-            // Moving uploaded files through PHP requires this special function.
-            if (!move_uploaded_file($oldFilePath, $newFilePath)) {
-                // The file could not be moved for some reason.
-                throw new Omeka_Upload_Exception("Uploaded file could not be saved to the filesystem.  Please notify an administrator.");
-            }
-        } else if ($isUpload) {
-            // If this is flagged as an upload, but PHP doesn't think it's a
-            // valid upload, throw an error.
-            throw new Omeka_Upload_Exception("Path to uploaded file is not valid.  This may indicate a possible upload attack.");
-        } else {
-            // Otherwise this is indicated as not an upload, so just move the file.
-            rename($oldFilePath, $newFilePath);
+        switch ($adapter) {
+            case 'http':
+            case 'upload':
+                $upload = new Zend_File_Transfer_Adapter_Http($options);
+                break;
+            case 'url':
+                $upload = new Omeka_File_Transfer_Adapter_Url($files, $options);
+                break;
+            case 'filesystem':
+                $upload = new Omeka_File_Transfer_Adapter_Filesystem($files, $options);
+                break;
+            default:
+                require_once 'Zend/File/Transfer/Exception.php';
+                throw new Zend_File_Transfer_Exception("The $adapter file transfer adapter does not exist.");
         }
         
-        return $newFilePath;
-    }
-    
-    /**
-     * This could be refactored to combine better with upload().  It goes through 
-     * the same flow as upload(), the only different being that the original 
-     * filename is set directly rather than being extracted from the $_FILES array.
-     * 
-     * This may be used exclusively by the Dropbox plugin, in which case it should
-     * be factored out in favor of a public interface that a plugin could use to
-     * simulate the same behavior.  At the very least, the code in this method 
-     * could be copied directly into the plugin so that it wouldn't be repeated 
-     * in the core codebase.
-     * 
-     * @param string
-     * @param string
-     * @return void
-     **/
-    public function moveToFileDir($oldpath, $name) {        
-        $path = $this->moveFileToArchive($oldpath, $name);
+        $upload->setDestination(self::$_archiveDirectory);
         
-        $this->setDefaults($path);
-        
-        $this->original_filename = $name;
-        
-        $this->createDerivativeImages($path);
-        
-        $this->extractMimeMetadata($path);
-    }
-    
-    
-    public static function uploadForItem(Item $item, $fileFieldName)
-    {        
-        $zfUpload = new Zend_File_Transfer_Adapter_Http;
-        $zfUpload->setDestination(self::$_archiveDirectory);
-        
-        // Add filters to rename the file to something archive-friendly.
-        $filenameFilter = new Omeka_Filter_Filename;
-        $zfUpload->addFilter($filenameFilter);
+        // Add a filter to rename the file to something archive-friendly.
+        $upload->addFilter(new Omeka_Filter_Filename);
         
         // Grab the info from $_FILES array (prior to receiving the files).
-        // Also validate the file uploads (will throw exception if failed).
-        $origFileInfo = $zfUpload->getFileInfo($fileFieldName) and $zfUpload->isValid();
+        $fileInfo = $upload->getFileInfo();
         
-        // Ingest the files into the archive directory.
-        if (!$zfUpload->receive()) {
-            throw new Omeka_Validator_Exception(join("\n\n", $zfUpload->getMessages()));
+        if (!$upload->receive()) {
+            throw new Omeka_Validator_Exception(join("\n\n", $upload->getMessages()));
         }
         
-        foreach ($origFileInfo as $fileKey => $info) {
+        $files = array();
+        foreach ($fileInfo as $key => $info) {
             $file = new File;
             try {
                 $file->original_filename = $info['name'];
                 $file->item_id = $item->id;
-                $filePath = $zfUpload->getFileName($fileKey);
-                $file->setDefaults($filePath);
                 
-                // TODO: Move these create images / extract metadata events
-                // to the 'after_file_upload' hook whenever it becomes possible
-                // to implement hooks within core Omeka.
+                $file->setDefaults($upload->getFileName($key));
                 
-                $file->createDerivatives();
-
-                // Extract extra metadata for the files.
-                $file->extractMetadata();
+                // Create derivatives and extract metadata.
+                // TODO: Move these create images / extract metadata events to 
+                // the 'after_file_upload' hook whenever it becomes possible to 
+                // implement hooks within core Omeka.
+                //$file->createDerivatives();
+                //$file->extractMetadata();
                 
                 $file->forceSave();
+                
                 fire_plugin_hook('after_upload_file', $file, $item);
+                
+                $files[] = $file;
+                
             } catch(Exception $e) {
                 if (!$file->exists()) {
                     $file->unlinkFile();
@@ -148,5 +65,6 @@ class Omeka_File_Ingest
                 throw $e;
             }
         }
+        return $files;
     }
 }
