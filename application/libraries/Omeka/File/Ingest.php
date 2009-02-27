@@ -62,7 +62,7 @@ class Omeka_File_Ingest
             // If the file is invalid AND ignore_invalid_files is false, throw 
             // an exception.
             if (!$valid && !$options['ignore_invalid_files']) {
-                throw new Exception("File is not valid or does not exist: {$file['source']}");
+                throw new Exception("File is not readable or does not exist: {$file['source']}");
             }
             
             // If the file is invalid, continue to the next file.
@@ -113,6 +113,7 @@ class Omeka_File_Ingest
                 exec($command, $output, $returnVar);
                 break;
             case 'filesystem':
+                copy($source, $destination);
                 break;
             default:
                 throw new Exception('No file transfer type given.');
