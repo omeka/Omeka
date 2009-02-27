@@ -5,10 +5,23 @@
 */
 class Omeka_File_Info
 {
+    /**
+     * The File record for which to extract metadata.
+     * 
+     * @var File
+     */
     protected $_file;
-        
+    
+    /**
+     * List of MIME types that could be considered ambiguous.
+     * 
+     * @see Omeka_File_Info::_mimeTypeIsAmbiguous()
+     * @var array
+     */    
     protected $_ambiguousMimeTypes = array(
-        "text/plain", "application/octet-stream", 'regular file');
+        'text/plain', 
+        'application/octet-stream', 
+        'regular file');
     
     public function __construct(File $file)
     {
@@ -25,7 +38,7 @@ class Omeka_File_Info
      * @param string Either 'FilesVideos' or 'FilesImages' depending.
      * @return void
      **/
-    protected function populateMimeTypeElements($elements, $id3Info, $extractionStrategy)
+    protected function _populateMimeTypeElements($elements, $id3Info, $extractionStrategy)
     {
         $helperClass = new $extractionStrategy;
         
@@ -56,11 +69,11 @@ class Omeka_File_Info
     }
     
     /**
-     * Process the extended set of metadata for a file (contingent on its MIME type).
-     *
-     * @return void
+     * Extract EXIF, IPTC, etc. metadata from the file.
+     * 
+     * @return boolean False on failure, true on success.
      **/
-    public function extractMimeMetadata()
+    public function extract()
     {
         $filePath = $this->_filePath;
         
@@ -70,7 +83,7 @@ class Omeka_File_Info
         }
         
         // Return if getid3 did not return a valid object.
-        if (!$id3 = $this->retrieveID3Info($filePath)) {
+        if (!$id3 = $this->_retrieveID3Info($filePath)) {
             debug('Cannot retrieve ID3 metadata from the following file: "' 
                 . $filePath . '"');
             return false;
@@ -79,7 +92,7 @@ class Omeka_File_Info
         // Try to use the MIME type that the file has by default.
         $mime_type = $this->_file->getMimeType();    
 
-        if ($this->mimeTypeIsAmbiguous($mime_type)) {
+        if ($this->_mimeTypeIsAmbiguous($mime_type)) {
             // If we can't determine MIME type via the browser, we will use the 
             // ID3 data, but be warned that this may cause a memory error on 
             // large files
@@ -120,7 +133,7 @@ class Omeka_File_Info
                 break;
         }
                 
-        $this->populateMimeTypeElements($elements, $id3->info, $extraction); 
+        $this->_populateMimeTypeElements($elements, $id3->info, $extraction); 
         
         return true;       
     }
@@ -131,7 +144,7 @@ class Omeka_File_Info
      * @param string
      * @return boolean
      **/
-    protected function mimeTypeIsAmbiguous($mime_type)
+    protected function _mimeTypeIsAmbiguous($mime_type)
     {
         return (empty($mime_type) || in_array($mime_type, $this->_ambiguousMimeTypes));
     }
@@ -141,7 +154,7 @@ class Omeka_File_Info
      *
      * @return getID3
      **/
-    private function retrieveID3Info($path)
+    protected function _retrieveID3Info($path)
     {
         // Do not extract metadata if the exif module is not loaded. This 
         // applies to all files, not just files with Exif data -- i.e. images.
@@ -159,15 +172,5 @@ class Omeka_File_Info
         } catch (Exception $e) {
             return false;
         }        
-    }
-    
-    /**
-     * Extract EXIF, IPTC, etc. metadata from the file.
-     * 
-     * @return boolean False on failure, true on success.
-     **/
-    public function extract()
-    {
-        return $this->extractMimeMetadata();
     }
 }
