@@ -96,7 +96,7 @@ class Omeka_File_Ingest
         
         $files = array();
         foreach ($fileInfo as $key => $info) {
-            $files[] = $this->_createFile($item, $upload->getFileName($key), $info['name']);
+            $files[] = $this->_createFile($upload->getFileName($key), $info['name']);
         }
         return $files;
     }
