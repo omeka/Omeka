@@ -38,7 +38,9 @@ class Omeka_File_Ingest
     
     public function filesystem()
     {
-        // Handle filesystem-specific options here.
+        if (!array_key_exists('type', $this->_options)) {
+            $this->_options['type'] = 'copy';
+        }
         $this->_type = 'filesystem';
         $this->_ingest();
     }
@@ -56,17 +58,8 @@ class Omeka_File_Ingest
             $file['filename']    = $this->_getFilename($file);
             $file['destination'] = $this->_getDestination($file);
             
-            // Check to see if the file is valid.
-            $valid = fopen($file['source'], 'r');
-            
-            // If the file is invalid AND ignore_invalid_files is false, throw 
-            // an exception.
-            if (!$valid && !$options['ignore_invalid_files']) {
-                throw new Exception("File is not readable or does not exist: {$file['source']}");
-            }
-            
-            // If the file is invalid, continue to the next file.
-            if (!$valid) {
+            // If the file is invalid, throw an error or continue to the next file.
+            if (!$this->_isValid($file)) {
                 continue;
             }
             
@@ -78,7 +71,45 @@ class Omeka_File_Ingest
         return $fileObjs;
     }
     
-    // TODO: pass the $_FILES['foobar'] name into $upload->getFileInfo() & $upload->receive()
+    // Check to see if the file is valid.
+    protected function _isValid($file)
+    {
+        $ignore = $this->_options['ignore_invalid_files'];
+        switch ($this->_type) {
+            case 'url':
+                $valid = fopen($file['source'], 'r');
+                if (!$valid && !$ignore) {
+                    throw new Exception("URL is not readable or does not exist: {$file['source']}");
+                }
+                break;
+            case 'filesystem':
+                switch ($this->_options['type']) {
+                    case 'move':
+                        $valid = is_writable(dirname($file['source']));
+                        if (!$valid && !$ignore) {
+                            throw new Exception("File's parent directory is not writable or does not exist: {$file['source']}");
+                        }
+                        $valid = is_writable($file['source']);
+                        if (!$valid && !$ignore) {
+                            throw new Exception("File is not writable or does not exist: {$file['source']}");
+                        }
+                        break;
+                    case 'copy':
+                    default:
+                        $valid = is_readable($file['source']);
+                        if (!$valid && !$ignore) {
+                            throw new Exception("File is not readable or does not exist: {$file['source']}");
+                        }
+                        break;
+                }
+                break;
+            default;
+                throw new Exception('Invalid file transfer type.');
+                break;
+        }
+        return $valid;
+    }
+    
     public function upload($fileFormName)
     {
         $upload = new Zend_File_Transfer_Adapter_Http;
@@ -113,7 +144,15 @@ class Omeka_File_Ingest
                 exec($command, $output, $returnVar);
                 break;
             case 'filesystem':
-                copy($source, $destination);
+                switch ($this->_options['type']) {
+                    case 'move':
+                        rename($source, $destination);
+                        break;
+                    case 'copy':
+                    default:
+                        copy($source, $destination);
+                        break;
+                }
                 break;
             default:
                 throw new Exception('No file transfer type given.');
