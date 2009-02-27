@@ -117,22 +117,21 @@ class Omeka_File_Ingest
         // Also validate the file uploads (will throw exception if failed).
         $origFileInfo = $zfUpload->getFileInfo('file') and $zfUpload->isValid();
         
-        $zfUpload->receive($fileKey);
-        
-        // After the files are received, they are auto-renamed so we'll need
-        // to retrieve the updated metadata.
-        $updatedFileInfo = $zfUpload->getFileInfo($fileKey);
+        // Ingest the files into the archive directory.
+        if (!$zfUpload->receive()) {
+            throw new Omeka_Validator_Exception(join("\n\n", $zfUpload->getMessages()));
+        }
         
         foreach ($origFileInfo as $fileKey => $info) {
             $file = new File;
             try {
                 $file->original_filename = $info['name'];
                 $file->item_id = $item->id;
-                $file->archive_filename = $updatedFileInfo[$fileKey]['name'];
-                $filePath = self::$_archiveDirectory . DIRECTORY_SEPARATOR . $file->archive_filename;
-                // TODO: Reorganize this section (setDefaults overrides 
-                // a couple of existing fields).
+                $filePath = $zfUpload->getFileName($fileKey);
                 $file->setDefaults($filePath);
+                // If there is an error in saving this file to the database,
+                // don't bother creating derivative images or extracting MIME
+                // type metadata for it.
                 $file->forceSave();
                 fire_plugin_hook('after_upload_file', $file, $item);
             } catch(Exception $e) {
