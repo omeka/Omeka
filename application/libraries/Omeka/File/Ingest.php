@@ -79,7 +79,7 @@ class Omeka_File_Ingest
     }
     
     // TODO: pass the $_FILES['foobar'] name into $upload->getFileInfo() & $upload->receive()
-    public function upload()
+    public function upload($fileFormName)
     {
         $upload = new Zend_File_Transfer_Adapter_Http;
         $upload->setDestination(self::$_archiveDirectory);
@@ -88,9 +88,9 @@ class Omeka_File_Ingest
         $upload->addFilter(new Omeka_Filter_Filename);
         
         // Grab the info from $_FILES array (prior to receiving the files).
-        $fileInfo = $upload->getFileInfo();
+        $fileInfo = $upload->getFileInfo($fileFormName);
         
-        if (!$upload->receive()) {
+        if (!$upload->receive($fileFormName)) {
             throw new Omeka_Validator_Exception(join("\n\n", $upload->getMessages()));
         }
         

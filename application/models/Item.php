@@ -288,7 +288,7 @@ class Item extends Omeka_Record
     {
         if (!empty($_FILES["file"]['name'][0])) {
             $ingest = new Omeka_File_Ingest($this);
-            $ingest->upload();
+            $ingest->upload('file');
         }
      }
     
