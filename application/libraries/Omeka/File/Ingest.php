@@ -115,7 +115,7 @@ class Omeka_File_Ingest
         
         // Grab the info from $_FILES array (prior to receiving the files).
         // Also validate the file uploads (will throw exception if failed).
-        $origFileInfo = $zfUpload->getFileInfo('file') and $zfUpload->isValid();
+        $origFileInfo = $zfUpload->getFileInfo($fileFieldName) and $zfUpload->isValid();
         
         // Ingest the files into the archive directory.
         if (!$zfUpload->receive()) {
