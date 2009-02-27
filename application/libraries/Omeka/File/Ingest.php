@@ -6,24 +6,9 @@ class Omeka_File_Ingest
 {
     protected static $_archiveDirectory = FILES_DIR;
     
-    public static function ingest(Item $item, $adapter, $files = null, $options = null)
+    public static function upload($item, $options)
     {
-        switch ($adapter) {
-            case 'http':
-            case 'upload':
-                $upload = new Zend_File_Transfer_Adapter_Http($options);
-                break;
-            case 'url':
-                $upload = new Omeka_File_Transfer_Adapter_Url($files, $options);
-                break;
-            case 'filesystem':
-                $upload = new Omeka_File_Transfer_Adapter_Filesystem($files, $options);
-                break;
-            default:
-                require_once 'Zend/File/Transfer/Exception.php';
-                throw new Zend_File_Transfer_Exception("The $adapter file transfer adapter does not exist.");
-        }
-        
+        $upload = new Zend_File_Transfer_Adapter_Http($options);
         $upload->setDestination(self::$_archiveDirectory);
         
         // Add a filter to rename the file to something archive-friendly.
