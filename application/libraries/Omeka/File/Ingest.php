@@ -129,9 +129,16 @@ class Omeka_File_Ingest
                 $file->item_id = $item->id;
                 $filePath = $zfUpload->getFileName($fileKey);
                 $file->setDefaults($filePath);
-                // If there is an error in saving this file to the database,
-                // don't bother creating derivative images or extracting MIME
-                // type metadata for it.
+                
+                // TODO: Move these create images / extract metadata events
+                // to the 'after_file_upload' hook whenever it becomes possible
+                // to implement hooks within core Omeka.
+                
+                $file->createDerivatives();
+
+                // Extract extra metadata for the files.
+                $file->extractMetadata();
+                
                 $file->forceSave();
                 fire_plugin_hook('after_upload_file', $file, $item);
             } catch(Exception $e) {

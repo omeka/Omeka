@@ -203,4 +203,23 @@ class File extends Omeka_Record {
         $this->unlinkFile();
         $this->deleteElementTexts();
     }
+    
+    public function createDerivatives()
+    {
+        $pathToOriginalFile = $this->getPath('archive');
+        
+        // Create derivative images if possible.
+        if ($imageName = Omeka_File_Derivative_Image::createAll($pathToOriginalFile)) {
+            $this->has_derivative_image = 1;
+        }
+    }
+    
+    public function extractMetadata()
+    {
+        $pathToFile = $this->getPath('archive');
+        
+        if ($mimeTypeMetadata = Omeka_File_Info::extract($pathToFile)) {
+            throw new Exception('Not implemented yet!');
+        }
+    }
 }       

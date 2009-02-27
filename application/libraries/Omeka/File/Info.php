@@ -133,4 +133,9 @@ class Omeka_File_Info
             return false;
         }        
     }
+    
+    public function extract($filePath)
+    {
+        throw new Exception('Not implemented yet!');
+    }
 }
