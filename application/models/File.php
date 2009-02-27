@@ -50,7 +50,16 @@ class File extends Omeka_Record {
     protected function beforeInsert()
     {
         $this->added = date("Y-m-d H:i:s");
-        $this->modified = date("Y-m-d H:i:s");        
+        $this->modified = date("Y-m-d H:i:s");   
+        
+        // Extract the metadata.  This will have one side effect (aside from
+        // adding the new metadata): it uses setMimeType() to reset the default
+        // mime type for the file if applicable.
+        $this->extractMetadata();
+
+        // Execute this before saving the record because it sets the 
+        // 'has_derivative_image' flag.
+        $this->createDerivatives();             
     }
     
     protected function beforeUpdate()
@@ -207,19 +216,22 @@ class File extends Omeka_Record {
     public function createDerivatives()
     {
         $pathToOriginalFile = $this->getPath('archive');
-        
+
         // Create derivative images if possible.
         if ($imageName = Omeka_File_Derivative_Image::createAll($pathToOriginalFile)) {
             $this->has_derivative_image = 1;
         }
     }
     
+    /**
+     * undocumented function
+     * 
+     * @param 
+     * @return boolean
+     **/
     public function extractMetadata()
     {
-        $pathToFile = $this->getPath('archive');
-        
-        if ($mimeTypeMetadata = Omeka_File_Info::extract($pathToFile)) {
-            throw new Exception('Not implemented yet!');
-        }
+        $extractor = new Omeka_File_Info($this);
+        return $extractor->extract();
     }
 }       
