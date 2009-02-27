@@ -286,25 +286,8 @@ class Item extends Omeka_Record
      **/
     private function _saveFiles()
     {
-        
         if (!empty($_FILES["file"]['name'][0])) {            
-            
-            File::handleUploadErrors('file');
-            //Handle the file uploads
-            foreach( $_FILES['file']['error'] as $key => $error ) { 
-                try {
-                    $file = new File();
-                    $file->upload('file', $key);
-                    $file->item_id = $this->id;
-                    $file->save();
-                    fire_plugin_hook('after_upload_file', $file, $this);
-                } catch(Exception $e) {
-                    if (!$file->exists()) {
-                        $file->unlinkFile();
-                    }
-                    throw $e;
-                }
-            }
+            Omeka_File_Ingest::uploadForItem($this, 'file');
         }
     }
     
