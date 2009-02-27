@@ -286,8 +286,9 @@ class Item extends Omeka_Record
      **/
     private function _saveFiles()
     {
-        if (!empty($_FILES["file"]['name'][0])) {            
-            Omeka_File_Ingest::upload($this);
+        if (!empty($_FILES["file"]['name'][0])) {
+            $ingest = new Omeka_File_Ingest($this);
+            $ingest->upload();
         }
      }
     

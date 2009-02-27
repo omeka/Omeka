@@ -1,116 +1,85 @@
-<?php 
-/**
-* A wrapper for file upload/transfer to the Omeka archive.
-*/
+<?php
 class Omeka_File_Ingest
 {
     protected static $_archiveDirectory = FILES_DIR;
     
-    /**
-     * Ingest files from URLs.
-     * 
-     * Uses Wget command line utility. Supports HTTP, HTTPS, and FTP protocols.
-     * 
-     * @param Item $item The item object to which the files belong
-     * @param array|string $urls The URL and/or filename list
-     * - 'http://example.com/image.png';
-     * - array('url'      => 'http://example.com', 
-     *         'filename' => 'example.html');
-     * - array(array('url'      => 'http://example.com/image.png', 
-     *               'filename' => 'image.png'), 
-     *         'http://exmaple.com/document.pdf');
-     * @param array $options List of options
-     * - ignore_invalid_urls: set to true to skip over invalid URLs; set to 
-     *   false to throw an exception when encountering an invalid URL (default 
-     *   is false) 
-     */
-    public static function url($item, $urls, array $options = array())
+    protected $_item;
+    protected $_files;
+    protected $_options;
+    protected $_type;
+    
+    public function __construct(Item $item, $files = array(), $options = array())
     {
-        // Build the $urls array.
-        if (is_string($urls)) {
-            $urls = array(array('url' => $urls));
+        $this->_item = $item;
+        $this->_files = $files;
+        $this->_options = $options;
+
+        // Build the $files array.
+        if (is_string($this->_files)) {
+            $this->_files = array(array('source' => $this->_files));
         }
-        if (array_key_exists('url', $urls)) {
-            $urls = array($urls);
+        if (array_key_exists('source', $this->_files)) {
+            $this->_files = array($this->_files);
         }
         
         // Set the default options.
-        if (!array_key_exists('ignore_invalid_urls', $options)) {
-            $options['ignore_invalid_urls'] = false;
+        if (!array_key_exists('ignore_invalid_files', $this->_options)) {
+            $this->_options['ignore_invalid_files'] = false;
         }
         
-        // Iterate the URLs.
-        $files = array();
-        foreach ($urls as $url) {
+     }
+    
+    public function url()
+    {
+        // Handle url-specific options here.
+        $this->_type = 'url';
+        $this->_ingest();
+    }
+    
+    public function filesystem()
+    {
+        // Handle filesystem-specific options here.
+        $this->_type = 'filesystem';
+        $this->_ingest();
+    }
+    
+    protected function _ingest()
+    {
+        // Iterate the files.
+        $fileObjs = array();
+        foreach ($this->_files as $file) {
             
-            // Build the $url array.
-            if (is_string($url)) {
-                $url = array('url' => $url);
+            // Build the $file array.
+            if (is_string($file)) {
+                $file = array('source' => $file);
             }
-            if (!array_key_exists('filename', $url)) {
-                $url['filename'] = $url['url'];
-            }
-            $url['file_path'] = self::getFilePath($url['filename']);
+            $file['filename']    = $this->_getFilename($file);
+            $file['destination'] = $this->_getDestination($file);
             
-            // Check to see if the URL is valid.
-            $valid = fopen($url['url'], 'r');
+            // Check to see if the file is valid.
+            $valid = fopen($file['source'], 'r');
             
-            // If the URL is invalid AND ignore_invalid_urls is false, throw an 
-            // exception.
-            if (!$valid && !$options['ignore_invalid_urls']) {
-                throw new Exception("URL is not valid or does not exist: {$url['url']}");
+            // If the file is invalid AND ignore_invalid_files is false, throw 
+            // an exception.
+            if (!$valid && !$options['ignore_invalid_files']) {
+                throw new Exception("File is not valid or does not exist: {$file['source']}");
             }
             
-            // If the URL is invalid, continue to the next URL.
+            // If the file is invalid, continue to the next file.
             if (!$valid) {
                 continue;
             }
             
-            // Only create the file if the URL is valid, otherwise the -O option 
-            // will create an empty file, which is not expected behavior.
-            $filePathArg = escapeshellarg($url['file_path']);
-            $urlArg      = escapeshellarg($url['url']);
-            $command     = "wget -O $filePathArg $urlArg";
-            exec($command, $output, $returnVar);
+            $this->_saveFile($file['source'], $file['destination']);
             
             // Create the file object.
-            $files[] = self::_createFile($item, $url['file_path'], $url['filename']);
+            $fileObjs[] = $this->_createFile($file['destination'], $file['filename']);
         }
-        return $files;
-    }
-        
-    // It would be smart to check if the file is able to be copied/moved prior 
-    // to copying/moving it. If not, then throw an error. Also, check if the 
-    // file exists!
-    public static function filesystem($item, $paths, $options = array())
-    {
-        $files = array();
-        foreach ($paths as $path) {
-
-            $filePath = self::getFilePath($path);
-            
-            if (!isset($options['type'])) {
-                $options['type'] = 'copy';
-            }
-            
-            switch ($options['type']) {
-                case 'move':
-                    rename($path, $filePath);
-                    break;
-                case 'copy':
-                default:
-                    if (!copy($path, $filePath)) {
-                        exit;
-                    }
-                    break;
-            }
-            
-            $files[] = self::_createFile($item, $filePath, basename($path));
-        }
-        return $files;
+        return $fileObjs;
     }
     
-    public static function upload($item)
+    // TODO: pass the $_FILES['foobar'] name into $upload->getFileInfo() & $upload->receive()
+    public function upload()
     {
         $upload = new Zend_File_Transfer_Adapter_Http;
         $upload->setDestination(self::$_archiveDirectory);
@@ -127,32 +96,42 @@ class Omeka_File_Ingest
         
         $files = array();
         foreach ($fileInfo as $key => $info) {
-            $files[] = self::_createFile($item, $upload->getFileName($key), $info['name']);
+            $files[] = $this->_createFile($item, $upload->getFileName($key), $info['name']);
         }
         return $files;
     }
     
-    protected static function _createFile($item, $newFilePath, $oldFilename)
+    protected function _saveFile($source, $destination)
+    {
+        switch ($this->_type) {
+            case 'url':
+                // Only create the file if the URL is valid, otherwise the -O option 
+                // will create an empty file, which is not expected behavior.
+                $sourceArg      = escapeshellarg($source);
+                $destinationArg = escapeshellarg($destination);
+                $command        = "wget -O $destinationArg $sourceArg";
+                exec($command, $output, $returnVar);
+                break;
+            case 'filesystem':
+                break;
+            default:
+                throw new Exception('No file transfer type given.');
+                break;
+        }
+    }
+    
+    protected function _createFile($newFilePath, $oldFilename)
     {
         $file = new File;
         try {
             $file->original_filename = $oldFilename;
-            $file->item_id = $item->id;
+            $file->item_id = $this->_item->id;
             
             $file->setDefaults($newFilePath);
             
-            // Create derivatives and extract metadata.
-            // TODO: Move these create images / extract metadata events to 
-            // the 'after_file_upload' hook whenever it becomes possible to 
-            // implement hooks within core Omeka.
-            //$file->createDerivatives();
-            //$file->extractMetadata();
-            
             $file->forceSave();
             
-            fire_plugin_hook('after_upload_file', $file, $item);
-            
-            $files[] = $file;
+            fire_plugin_hook('after_upload_file', $file, $this->_item);
             
         } catch(Exception $e) {
             if (!$file->exists()) {
@@ -160,14 +139,27 @@ class Omeka_File_Ingest
             }
             throw $e;
         }
-        
         return $file;
     }
     
-    protected static function getFilePath($file)
+    protected function _getFilename($file)
     {
-        $filenameFilter = new Omeka_Filter_Filename;
-        $fileName = $filenameFilter->renameFileForArchive($file);
-        return self::$_archiveDirectory . DIRECTORY_SEPARATOR . $fileName;
+        if (array_key_exists('filename', $file)) {
+            return $file['filename'];
+        }
+        switch ($this->_type) {
+            case 'url':
+                return $file['source'];
+            case 'filesystem':
+            default:
+                return basename($file['source']);
+        }
+    }
+    
+    protected function _getDestination($file)
+    {
+        $filter = new Omeka_Filter_Filename;
+        $filename = $filter->renameFileForArchive($file['filename']);
+        return self::$_archiveDirectory . DIRECTORY_SEPARATOR . $filename;
     }
 }
