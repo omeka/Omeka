@@ -79,7 +79,7 @@ class Omeka_File_Info
         
         if (!is_readable($filePath)) {
             debug('Could not read file at the following path: "' . $filePath . '"');
-            throw new Exception( 'File cannot be read!' );
+            throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $filePath . '"');
         }
         
         // Return if getid3 did not return a valid object.
