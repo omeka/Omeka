@@ -4,31 +4,44 @@ class Omeka_File_Ingest
     protected static $_archiveDirectory = FILES_DIR;
     
     protected $_item;
-    protected $_files;
-    protected $_options;
+    protected $_files = array();
+    protected $_options = array();
     protected $_type;
     
     public function __construct(Item $item, $files = array(), $options = array())
     {
         $this->_item = $item;
-        $this->_files = $files;
-        $this->_options = $options;
-
-        // Build the $files array.
-        if (is_string($this->_files)) {
-            $this->_files = array(array('source' => $this->_files));
-        }
-        if (array_key_exists('source', $this->_files)) {
-            $this->_files = array($this->_files);
-        }
-        
-        // Set the default options.
-        if (!array_key_exists('ignore_invalid_files', $this->_options)) {
-            $this->_options['ignore_invalid_files'] = false;
-        }
-        
+        $this->setFiles($files);
+        $this->setOptions($options);
      }
     
+    public function setFiles($files)
+    {
+        if (is_array($files)) {
+            foreach ($files as $key => $value) {
+                // Convert an array of strings, an array of arrays, or a 
+                // mix of the two, into an array of arrays.
+                $this->_files[$key] = !is_array($value) 
+                                      ? array('source'=>$value) 
+                                      : $value;
+            }
+        // If it's a string, make sure that represents the 'source' attribute.
+        } else if (is_string($files)) {
+            $this->_files = array(array('source' => $files));
+        // Sure hope you know what you're doing.
+        } else {
+            $this->_files = $files;
+        }
+    }
+    
+    public function setOptions($options)
+    {
+         // Set the default options.
+        if (!array_key_exists('ignore_invalid_files', $options)) {
+            $this->_options['ignore_invalid_files'] = false;
+        }
+    }
+            
     public function url()
     {
         // Handle url-specific options here.
