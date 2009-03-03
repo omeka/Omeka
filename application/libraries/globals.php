@@ -266,6 +266,19 @@ function insert_item($metadata = array(), $elementTexts = array())
 }
 
 /**
+ * Add files to an item.
+ * 
+ * @see InsertItemHelper::addFiles()
+ * @param 
+ * @return mixed
+ **/
+function insert_files_for_item($item, $transferStrategy, $files, $options = array())
+{
+    $helper = new InsertItemHelper($item);
+    return $helper->addFiles($transferStrategy, $files, $options);
+}
+
+/**
  * @see insert_item()
  * @uses InsertItemHelper
  * @param Item|int $item Either an Item object or the ID for the item.
