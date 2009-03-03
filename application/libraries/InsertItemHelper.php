@@ -117,23 +117,7 @@ class InsertItemHelper
     
     public function addElementTexts()
     {
-        $elementTexts = $this->_elementTexts;
-        
-        foreach ($elementTexts as $elementSetName => $elements) {
-            foreach ($elements as $elementName => $elementTexts) {
-                $element = $this->_item->getElementByNameAndSetName($elementName, $elementSetName);
-                foreach ($elementTexts as $elementText) {
-                    if (!array_key_exists('text', $elementText)) {
-                        throw new Exception('Element texts are formatted incorrectly for insert_item()!');
-                    }
-                    // Only add the element text if it's not empty.  There
-                    // should be no empty element texts in the DB.
-                    if (!empty($elementText['text'])) {
-                        $this->_item->addTextForElement($element, $elementText['text'], $elementText['html']);
-                    }
-                }
-            }
-        }
+        return $this->_item->addElementTextsByArray($this->_elementTexts);
     }    
         
     public function replaceElementTexts()
@@ -206,11 +190,8 @@ class InsertItemHelper
      * archival filename for the file.  If none is given, this defaults to using
      * the getOriginalFileName() method of the transfer adapter.
      *          'metadata' => This could contain any metadata that needs to be
-     * associated with the file.  By default this needs to be indexed in the
-     * following manner:
-     *              'Element Set Name' => 
-     *                  array('Element Name' => 
-     *                      array(array('text' => 'foo', 'html' => false)))
+     * associated with the file.  This should be indexed in the same fashion
+     * as for items.  See ActsAsElementText::addTextsByArray()
      *
      * @param array $options OPTIONAL May contain the following flags where
      * appropriate:

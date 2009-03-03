@@ -338,6 +338,36 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
+     * Adds element texts for a record based on a formatted array of values.
+     * The array must be formatted as follows:
+     * 
+     *              'Element Set Name' => 
+     *                  array('Element Name' => 
+     *                      array(array('text' => 'foo', 'html' => false)))
+     * 
+     * @param array $elementTexts
+     * @return void
+     **/
+    public function addElementTextsByArray(array $elementTexts)
+    {
+        foreach ($elementTexts as $elementSetName => $elements) {
+            foreach ($elements as $elementName => $elementTexts) {
+                $element = $this->getElementByNameAndSetName($elementName, $elementSetName);
+                foreach ($elementTexts as $elementText) {
+                    if (!array_key_exists('text', $elementText)) {
+                        throw new Exception('Element texts are not formatted correctly!');
+                    }
+                    // Only add the element text if it's not empty.  There
+                    // should be no empty element texts in the DB.
+                    if (!empty($elementText['text'])) {
+                        $this->addTextForElement($element, $elementText['text'], $elementText['html']);
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
      * The application flow is thus:
      *
      *  1) Build ElementText objects from the POST.
