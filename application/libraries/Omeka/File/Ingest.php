@@ -38,6 +38,8 @@ class Omeka_File_Ingest
     
     public function setOptions($options)
     {
+        $this->_options = $options;
+        
          // Set the default options.
         if (!array_key_exists('ignore_invalid_files', $options)) {
             $this->_options['ignore_invalid_files'] = false;
