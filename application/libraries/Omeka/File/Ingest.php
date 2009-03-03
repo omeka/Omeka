@@ -69,7 +69,7 @@ class Omeka_File_Ingest
             $this->_adapter->transferFile($file['source'], $fileDestinationPath);
             
             // Create the file object.
-            $fileObjs[] = $this->_createFile($fileDestinationPath, $file['filename']);
+            $fileObjs[] = $this->_createFile($fileDestinationPath, $file['filename'], $file['metadata']);
         }
         return $fileObjs;
     }
@@ -147,7 +147,7 @@ class Omeka_File_Ingest
         return $files;
     }
         
-    protected function _createFile($newFilePath, $oldFilename)
+    protected function _createFile($newFilePath, $oldFilename, $elementMetadata = array())
     {
         $file = new File;
         try {
@@ -155,6 +155,10 @@ class Omeka_File_Ingest
             $file->item_id = $this->_item->id;
             
             $file->setDefaults($newFilePath);
+            
+            if ($elementMetadata) {
+                $file->addElementTextsByArray($elementMetadata);
+            }
             
             $file->forceSave();
             
