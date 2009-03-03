@@ -10,7 +10,7 @@ class Omeka_File_Ingest
     
     protected $_adapter;
     
-    public function __construct(Item $item, $files = array(), $options = array())
+    public function __construct(Item $item, $files = array(), array $options = array())
     {
         $this->_item = $item;
         $this->setFiles($files);
