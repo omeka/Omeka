@@ -116,7 +116,13 @@ class Omeka_File_Ingest
      **/
     public function upload($fileFormName)
     {
-        $upload = new Zend_File_Transfer_Adapter_Http;
+        // Check if we are supposed to ignore it if there are no uploaded files.
+        $adapterOptions = array();
+        if ($this->_options['ignoreNoFile']) {
+            $adapterOptions['ignoreNoFile'] = true;
+        }
+
+        $upload = new Zend_File_Transfer_Adapter_Http($adapterOptions);
         $upload->setDestination(self::$_archiveDirectory);
         
         // Add a filter to rename the file to something archive-friendly.
@@ -131,7 +137,12 @@ class Omeka_File_Ingest
         
         $files = array();
         foreach ($fileInfo as $key => $info) {
-            $files[] = $this->_createFile($upload->getFileName($key), $info['name']);
+            $pathToArchivedFile = $upload->getFileName($key);
+            // Only add files to the database if the file was uploaded.  
+            // It would have thrown an exception before if 'ignoreNoFile' was false.
+            if ($pathToArchivedFile) {
+                $files[] = $this->_createFile($pathToArchivedFile, $info['name']);
+            }         
         }
         return $files;
     }

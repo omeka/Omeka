@@ -286,10 +286,10 @@ class Item extends Omeka_Record
      **/
     private function _saveFiles()
     {
-        if (!empty($_FILES["file"]['name'][0])) {
-            $ingest = new Omeka_File_Ingest($this);
-            $ingest->upload('file');
-        }
+        // Tell it to always try the upload, but ignore any errors if any of
+        // the files were not actually uploaded (left form fields empty).
+        $ingest = new Omeka_File_Ingest($this, array(), array('ignoreNoFile'=>true));
+        $ingest->upload('file');
      }
     
     /**
