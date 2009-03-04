@@ -136,6 +136,11 @@ class Omeka_File_Derivative_Image
     
     public static function createAll($originalFilePath)
     {
+        // Don't try to make derivative images if we don't give a path to 
+        // ImageMagick.
+        if (!get_option('path_to_convert')) {
+            return false;
+        }
         self::checkOmekaCanMakeDerivativeImages();
         return self::createDerivativeImages($originalFilePath);
     }
