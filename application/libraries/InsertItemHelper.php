@@ -37,7 +37,7 @@ class InsertItemHelper
      * @param array $elementTexts Array of element texts to assign to the item. 
      *  This takes the format: array('Element Set Name'=>array('Element Name'=>array(array('text'=>(string), 'html'=>(boolean))))).
      **/
-    public function __construct($item = null, $itemMetadata = array(), $elementTexts = array())
+    public function __construct($item = null, $itemMetadata = array(), $elementTexts = array(), $fileMetadata = array())
     {
         if (!$item) {
             $item = new Item;
@@ -52,6 +52,7 @@ class InsertItemHelper
         $this->_item = $item;
         $this->_metadata = (array)$itemMetadata;
         $this->_elementTexts = (array)$elementTexts;
+        $this->_fileMetadata = (array)$fileMetadata;
     }
     
     public function run()
@@ -74,15 +75,19 @@ class InsertItemHelper
         and !empty($this->_metadata['tags'])) {
             $this->addTags();
         }
-        
-        if (array_key_exists('files', $this->_metadata)) {
-            if (!array_key_exists('file_transfer_type', $this->_metadata)) {
+                
+        // Note to future self: Files need to be ingested at the end of the 
+        // process, because there is a possibility that the file ingest could
+        // fail with an exception, and this ensures that as much metadata is 
+        // retained as possible before that.
+        if (array_key_exists('files', $this->_fileMetadata)) {
+            if (!array_key_exists('file_transfer_type', $this->_fileMetadata)) {
                 throw new Exception("Must specify 'file_transfer_type' when attaching files to an item!");
             }
             $this->addFiles(
-                $this->_metadata['file_transfer_type'], 
-                $this->_metadata['files'], 
-                (array)$this->_metadata['ingest_options']);
+                $this->_fileMetadata['file_transfer_type'], 
+                $this->_fileMetadata['files'], 
+                (array)$this->_fileMetadata['file_ingest_options']);
         }
     }
     

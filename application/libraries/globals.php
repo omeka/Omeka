@@ -257,10 +257,10 @@ function is_admin_theme()
  *     )
  * );
  */
-function insert_item($metadata = array(), $elementTexts = array())
-{
+function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
+{    
     // Passing null means this will create a new item.
-    $helper = new InsertItemHelper(null, $metadata, $elementTexts);
+    $helper = new InsertItemHelper(null, $metadata, $elementTexts, $fileMetadata);
     $helper->run();
     return $helper->getItem();
 }
