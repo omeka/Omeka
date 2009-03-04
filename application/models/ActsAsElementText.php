@@ -83,6 +83,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $this->_record = $record;
     }
     
+    public function afterSave()
+    {
+        $this->saveElementTexts();
+    }
+    
     public function getDb()
     {
         return $this->_record->getDb();

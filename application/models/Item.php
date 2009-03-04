@@ -237,9 +237,7 @@ class Item extends Omeka_Record
     public function afterSaveForm($post)
     {
         $this->_saveFiles();
-        
-        $this->saveElementTexts();
-        
+                
         // Remove a single tag based on the form submission.
         $this->_removeTagByForm((int) $post['remove_tag']);
         

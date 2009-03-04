@@ -79,12 +79,7 @@ class File extends Omeka_Record {
         
         $this->beforeSaveElements($post);
     }
-    
-    protected function afterSave()
-    {
-        $this->saveElementTexts();
-    }
-    
+        
     public function getItem()
     {
         return $this->getTable('Item')->find($this->item_id);

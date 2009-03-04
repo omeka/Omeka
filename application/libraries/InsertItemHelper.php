@@ -84,9 +84,6 @@ class InsertItemHelper
                 $this->_metadata['files'], 
                 (array)$this->_metadata['ingest_options']);
         }
-        
-        // Save Element Texts (necessary)
-        $item->saveElementTexts();
     }
     
     public function getItem()
