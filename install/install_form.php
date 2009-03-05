@@ -48,7 +48,7 @@ function formValue($name, $defaultValue = '')
             <input type="text" name="per_page_public" class="textinput" id="per_page_public" value="<?php echo formValue('per_page_public', '10'); ?>" />
         </div>
         <div class="field">
-            <label for="path_to_convert">Imagemagick Binary Path</label>
+            <label for="path_to_convert">Imagemagick Directory Path</label>
             <input type="text" name="path_to_convert" class="textinput" id="path_to_convert" value="<?php echo formValue('path_to_convert', $installer->getPathToConvert()); ?>" />
         </div>
     </fieldset>

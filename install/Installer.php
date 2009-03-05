@@ -202,6 +202,11 @@ class Installer
         }
     }
     
+    /**
+     * @since 1.0 Retrieve only the directory containing the 'convert' command,
+     * not the full path to the executable.
+     * @return string
+     **/
     public function getPathToConvert()
     {
         // Use the "which" command to auto-detect the path to ImageMagick;
@@ -211,7 +216,8 @@ class Installer
         // http://us.php.net/manual/en/function.system.php#66795.
         $command = 'which convert 2>&0';
         $lastLineOutput = exec($command, $output, $returnVar);
-        return $returnVar == 0 ? trim($lastLineOutput) : '';
+        // Return only the directory component of the path returned.
+        return $returnVar == 0 ? dirname($lastLineOutput) : '';
     }
     
     private function validateInstallForm()
