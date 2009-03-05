@@ -284,11 +284,12 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  * @param Item|int $item Either an Item object or the ID for the item.
  * @param array $itemMetadata Set of options that can be passed to the item.
  * @param array $elementTexts
+ * @param array $fileMetadata
  * @return Item
  **/
-function update_item($item, $metadata = array(), $elementTexts = array())
+function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $helper = new InsertItemHelper($item, $metadata, $elementTexts);
+    $helper = new InsertItemHelper($item, $metadata, $elementTexts, $fileMetadata);
     $helper->run();
     return $helper->getItem();
 }

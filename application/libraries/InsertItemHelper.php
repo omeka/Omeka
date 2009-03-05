@@ -34,8 +34,23 @@ class InsertItemHelper
      *  element texts provided in $elementTexts, and it will update existing
      *  records where possible.  All texts that are not yet in the DB will be
      *  added in the usual manner.  False by default.
+     * 
      * @param array $elementTexts Array of element texts to assign to the item. 
      *  This takes the format: array('Element Set Name'=>array('Element Name'=>array(array('text'=>(string), 'html'=>(boolean))))).
+     *  See ActsAsElementText::addElementTextsByArray() for more info.
+     * 
+     * @param array $fileMetadata Set of metadata options that allow one or more
+     * files to be associated with the item.  Includes the following options:
+     *      'file_transfer_type' (string = 'Url|Filesystem|Upload' or 
+     * Omeka_File_Transfer_Adapter_Interface).  Corresponds to the 
+     * $transferStrategy argument for addFiles().
+     *      'file_ingest_options' OPTIONAL (array of possible options to pass
+     * modify the behavior of the ingest script).  Corresponds to the $options 
+     * argument for addFiles().
+     *      'files' (array or string) Represents information indicating the file
+     * to ingest.  Corresponds to the $files argument for addFiles().
+     * @see InsertItemHelper::addFiles()
+     * @see ActsAsElementTexxt::addElementTextsByArray()
      **/
     public function __construct($item = null, $itemMetadata = array(), $elementTexts = array(), $fileMetadata = array())
     {
@@ -197,8 +212,9 @@ class InsertItemHelper
      *
      * @param array $options OPTIONAL May contain the following flags where
      * appropriate:
-     *      'ignore_invalid_files' => Suppress exceptions resulting from invalid
-     * files (all except Upload).
+     *      'ignore_invalid_files' => Do not throw exceptions when
+     * attempting to ingest invalid files.  Instead, skip to the next file in
+     * the list and continue processing.  False by default. (all except Upload).
      *      'ignoreNoFile' => Ignore errors resulting from POSTs that do not 
      * contain uploaded files as expected (only for Upload).
      * @return mixed
