@@ -1,10 +1,12 @@
 <?php 
 class Omeka_File_Derivative_Image
 {
+    const IMAGEMAGICK_COMMAND = 'convert';
+    
     protected static function checkOmekaCanMakeDerivativeImages()
     {
         //Check to see if ImageMagick is installed
-        if (!self::checkForImageMagick(get_option('path_to_convert'))) {
+        if (!self::checkForImageMagick()) {
             throw new Omeka_Upload_Exception('ImageMagick is not properly configured.  Please check your settings and then try again.' );
         }        
         
@@ -24,6 +26,34 @@ class Omeka_File_Derivative_Image
     }
     
     /**
+     * Retrieve the directory path to the ImageMagick 'convert' executable.
+     * 
+     * Since input is not validated on the settings form, this needs to verify 
+     * that the stored setting is not an arbitrary executable, but is in fact 
+     * just the path to the directory containing the ImageMagick executables.
+     * 
+     * This only returns the path to the 'convert' executable, which Omeka uses
+     * for generating images.
+     * 
+     * @since 1.0 The 'path_to_convert' setting must be the directory containing
+     * the ImageMagick executable, not the path to the executable itself.
+     * @throws Exception When the path is not a valid directory.
+     * @return string Absolute path to the ImageMagick executable.
+     **/
+    protected static function _getPathToImageMagick()
+    {
+        $rawPath = get_option('path_to_convert');
+        // Assert that this is both a valid path and a directory (cannot be a 
+        // script).
+        if (($cleanPath = realpath($rawPath)) && is_dir($cleanPath)) {
+            $imPath = rtrim($cleanPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_COMMAND;
+            return $imPath;
+        } else {
+            throw new Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');
+        }
+    }
+    
+    /**
      * Determine whether or not ImageMagick has been correctly installed or configured for Omeka to use.  
      * 
      * This appears to work on most hosting environments, but there are some
@@ -32,11 +62,11 @@ class Omeka_File_Derivative_Image
      * error in configuring their servers or an error where Omeka should
      * examine/accept other return status codes.
      *
-     * @param string
      * @return boolean True if the command line return status is 0 when
      * attempting to run ImageMagick's convert utility, false otherwise.
      **/
-    protected static function checkForImageMagick($path) {
+    protected static function checkForImageMagick() {
+        $path = self::_getPathToImageMagick();
         exec($path, $convert_version, $convert_return);
         return($convert_return == 0);
     }
@@ -99,7 +129,7 @@ class Omeka_File_Derivative_Image
      **/
     public static function createImage( $old_path, $new_dir, $constraint, $type=null) {
             
-        $convertPath = get_option('path_to_convert');
+        $convertPath = self::_getPathToImageMagick();
         
         // FIXME: getimagesize() will only process BMP, GIF, JPG, PNG.  There are
         // a ton of other files that can be converted by ImageMagick.                
