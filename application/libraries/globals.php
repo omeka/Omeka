@@ -393,7 +393,9 @@ function insert_element_set($elementSet, array $elements = array())
  */
 function release_object(&$var) 
 {
-    if (is_object($var)) {
+    if (is_array($var)) {
+        array_walk($var, 'release_object');
+    } else if (is_object($var)) {
         $var->__destruct();
         unset($var);  
     }
