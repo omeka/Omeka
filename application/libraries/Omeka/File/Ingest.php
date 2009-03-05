@@ -55,21 +55,26 @@ class Omeka_File_Ingest
         foreach ($this->_files as $file) {            
             $this->_adapter->setFileInfo($file);
             
-            if (!array_key_exists('filename', $file)) {
-                $file['filename'] = $this->_adapter->getOriginalFileName();
-            }
+            // This optional field becomes the file's identifier 
+            // (stored in the 'original_filename' column and used to derive
+            // the archival filename).  This option is usually necessary 
+            // when the source filename or identifier might be considered 
+            // ambiguous or not sufficiently descriptive.
+            $originalFileName = array_key_exists('filename', $file)
+                              ? $file['filename']
+                              : $this->_adapter->getOriginalFileName();
             
-            $fileDestinationPath = $this->_getDestination($file);
+            $fileDestinationPath = $this->_getDestination($originalFileName);
 
             // If the file is invalid, throw an error or continue to the next file.
-            if (!$this->_isValid($file)) {
+            if (!$this->_isValid()) {
                 continue;
             }
             
             $this->_adapter->transferFile($fileDestinationPath);
             
             // Create the file object.
-            $fileObjs[] = $this->_createFile($fileDestinationPath, $file['filename'], $file['metadata']);
+            $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $file['metadata']);
         }
         return $fileObjs;
     }
@@ -77,11 +82,10 @@ class Omeka_File_Ingest
     /**
      * Check to see whether or not the file is valid.
      * 
-     * @param array $fileInfo
      * @return boolean Return false if we are ignoring invalid files and an 
      * exception was thrown from one of the adapter classes.  
      **/
-    protected function _isValid($file)
+    protected function _isValid()
     {
         $ignore = $this->_options['ignore_invalid_files'];
         
@@ -173,10 +177,10 @@ class Omeka_File_Ingest
         return $file;
     }
         
-    protected function _getDestination($file)
+    protected function _getDestination($fromFilename)
     {
         $filter = new Omeka_Filter_Filename;
-        $filename = $filter->renameFileForArchive($file['filename']);
+        $filename = $filter->renameFileForArchive($fromFilename);
         if (!is_writable(self::$_archiveDirectory)) {
             throw new Exception('Cannot write to the following directory: "'
                               . self::$_archiveDirectory . '"!');
