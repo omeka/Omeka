@@ -63,6 +63,19 @@ class Omeka_Record implements ArrayAccess
     
     protected function construct() {}
     
+    /**
+     * Destructor
+     * 
+     * IMPORTANT: Solves a memory leak when retrieving/saving records.
+     * Unsets mixins, which contain circular references.
+     * Required because PHP 5.2 does not do garbage collection on circular references.
+     *
+     **/
+    public function __destruct()
+    {
+         unset($this->_mixins);
+    }
+    
     // Delegate to the $_related callbacks for data retrieval (also have caching)
     public function __get($prop)
     {
