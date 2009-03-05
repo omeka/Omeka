@@ -24,8 +24,10 @@ class Omeka_File_Transfer_Adapter_Filesystem implements Omeka_File_Transfer_Adap
         return basename($this->_fileInfo['source']);
     }
     
-    public function transferFile($source, $destination)
+    public function transferFile($destination)
     {
+        $source = $this->_fileInfo['source'];
+        
         if ($this->_fileInfo['rename']) {
             rename($source, $destination);
         } else {

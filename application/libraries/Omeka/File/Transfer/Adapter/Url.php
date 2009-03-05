@@ -59,8 +59,10 @@ class Omeka_File_Transfer_Adapter_Url implements Omeka_File_Transfer_Adapter_Int
         return true;
     }
     
-    public function transferFile($source, $destination)
+    public function transferFile($destination)
     {
+        $source = $this->_fileInfo['source'];
+        
         $transferred = false;
         foreach ($this->_transferMethods as $method) {
             $classMethod = '_' . $method;

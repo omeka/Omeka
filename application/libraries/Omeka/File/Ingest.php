@@ -66,7 +66,7 @@ class Omeka_File_Ingest
                 continue;
             }
             
-            $this->_adapter->transferFile($file['source'], $fileDestinationPath);
+            $this->_adapter->transferFile($fileDestinationPath);
             
             // Create the file object.
             $fileObjs[] = $this->_createFile($fileDestinationPath, $file['filename'], $file['metadata']);
