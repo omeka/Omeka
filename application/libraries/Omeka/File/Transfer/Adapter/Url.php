@@ -2,17 +2,10 @@
 /**
 * 
 */
-class Omeka_File_Transfer_Adapter_Url implements Omeka_File_Transfer_Adapter_Interface
-{
-    protected $_fileInfo;
-    
+class Omeka_File_Transfer_Adapter_Url extends Omeka_File_Transfer_Adapter_Abstract
+{    
     protected $_transferMethods = array('wget', 'copy');
-    
-    public function setFileInfo(array $fileInfo)
-    {
-        $this->_fileInfo = $fileInfo;
-    }
-    
+        
     public function getOriginalFileName()
     {
         return $this->_fileInfo['source'];
@@ -61,8 +54,8 @@ class Omeka_File_Transfer_Adapter_Url implements Omeka_File_Transfer_Adapter_Int
     
     public function transferFile($destination)
     {
-        $source = $this->_fileInfo['source'];
-        
+        $source = $this->_getSource();
+
         $transferred = false;
         foreach ($this->_transferMethods as $method) {
             $classMethod = '_' . $method;
@@ -79,9 +72,9 @@ class Omeka_File_Transfer_Adapter_Url implements Omeka_File_Transfer_Adapter_Int
     
     public function isValid()
     {
-        $valid = fopen($this->_fileInfo['source'], 'r');
-        if (!$valid) {
-            throw new Exception("URL is not readable or does not exist: {$this->_fileInfo['source']}");
+        $source = $this->_getSource();
+        if (!fopen($source, 'r')) {
+            throw new Exception("URL is not readable or does not exist: $source");
         }
     }
 }
