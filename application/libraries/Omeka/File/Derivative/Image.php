@@ -148,10 +148,24 @@ class Omeka_File_Derivative_Image
 
             switch ($type) {
             case "square":
-                $command = ''.$convertPath.' '.$old_path.' -thumbnail x'.($constraint*2).' -resize "'.($constraint*2).'x<" -resize 50% -gravity center -crop '.$constraint.'x'.$constraint.'+0+0 +repage '.$new_path.'';
+                $command = join(' ', array(
+                    $convertPath,
+                    $old_path,
+                    '-thumbnail ' . escapeshellarg('x' . $constraint*2),
+                    '-resize ' . escapeshellarg($constraint*2 . 'x<'),
+                    '-resize 50%',
+                    '-gravity center',
+                    '-crop ' . escapeshellarg($constraint . 'x' . $constraint . '+0+0'),
+                    '+repage',
+                    $new_path));
                 break;
             default:
-                $command = ''.$convertPath.' '.$old_path.' -resize '.escapeshellarg($constraint.'x'.$constraint.'>').' '.$new_path.'';                        
+                $command = join(' ', array(
+                    $convertPath,
+                    $old_path,
+                    '-resize ' . escapeshellarg($constraint.'x'.$constraint.'>'),
+                    $new_path
+                ));
             }
 
             exec($command, $result_array, $result_value);
