@@ -380,6 +380,8 @@ function insert_element_set($elementSet, array $elements = array())
     
     // Save the element set.
     $es->save();
+    
+    return $es;
 }
 
 /**
