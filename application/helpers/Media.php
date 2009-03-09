@@ -39,6 +39,8 @@ class Omeka_View_Helper_Media
     protected $_callbacks = array(
         'image/tiff'=>'image', 
         'image/jpeg'=>'image',
+        'image/gif'=>'image',
+        'image/bmp'=>'image',
         'image/png'=>'image',
         'image/tiff'=>'image',
 	    'video/avi'=>'wmv',
