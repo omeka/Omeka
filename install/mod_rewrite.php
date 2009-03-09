@@ -1,0 +1,1 @@
+<?php echo (bool) $_GET['enabled'] ? "ENABLED" : "DISABLED";

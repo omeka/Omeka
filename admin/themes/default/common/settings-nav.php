@@ -1,8 +1,13 @@
-<ul id="secondary-nav" class="navigation">
-<?php echo admin_nav(array('General' => uri('settings'),
+<?php if (has_permission('Settings', 'edit')): ?>
+<ul id="section-nav" class="navigation vertical">
+<?php $navArray = array('General Settings' => uri('settings'),
+                    'Element Sets' => uri('element-sets'),
 					'Themes' => uri('themes'),
-					'Plugins'=>uri('plugins')
-					));
-	fire_plugin_hook('load_navigation', 'settings');					
-				?>
+					'Plugins'=>uri('plugins'));
+		
+    if(has_permission('Users','browse') ) {
+    	$navArray['Users'] = uri('users/browse');
+    }
+	echo nav(apply_filters('admin_navigation_settings', $navArray)); ?>
 </ul>
+<?php endif ?>

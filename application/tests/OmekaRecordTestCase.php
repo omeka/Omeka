@@ -2,17 +2,12 @@
 /**
 * 
 */
-class OmekaRecordTestCase extends OmekaTestCase
-{
-	public function setUp()
-	{
-		parent::setUp();
-		
-		$this->db->setTable('Item', false);
-	}
-	
+class OmekaRecordTestCase extends PHPUnit_Framework_TestCase
+{	
 	public function testSaveFormFiresAllCallbacks()
 	{
+		$this->setUpLiveDb();
+		
 		$broker = get_plugin_broker();
 		
 		$record = new Item;

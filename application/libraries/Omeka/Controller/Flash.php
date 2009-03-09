@@ -1,16 +1,31 @@
 <?php 
 /**
-* 
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * This is a replacement for Zend Framework's FlashMessenger
+ * that handles form validation errors and categorizes messages according
+ * to their status (currently SUCCESS, ERROR, ALERT). 
+ *
+ * @todo Refactor this so that it subclasses Zend's FlashMessenger action 
+ * helper (adding message status) and use Zend_Form's form validation
+ * instead of the form validation in this class.
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class Omeka_Controller_Flash
 {
-	const SUCCESS = 1;
+	const SUCCESS          = 1;
 	const VALIDATION_ERROR = 2;
-	const GENERAL_ERROR = 3;
-	const ALERT = 4;
-	
-	const DISPLAY_NOW = 5;
-	const DISPLAY_NEXT = 6;
+	const GENERAL_ERROR    = 3;
+	const ALERT            = 4;
+	const DISPLAY_NOW      = 5;
+	const DISPLAY_NEXT     = 6;
 	
 	/**
 	 * The session object that stores the flash values
@@ -36,7 +51,7 @@ class Omeka_Controller_Flash
 		
 	public function __construct()
 	{
-		if(!$this->_session) {
+		if (!$this->_session) {
 			$this->_session = new Zend_Session_Namespace('flash');
 		}		
 	}
@@ -81,7 +96,9 @@ class Omeka_Controller_Flash
 	 **/
 	protected function getFlash()
 	{
-		if(self::$_flash instanceof stdClass) return self::$_flash;
+		if (self::$_flash instanceof stdClass) {
+            return self::$_flash;
+        }
 		
 		return $this->_session;
 	}	
@@ -109,12 +126,8 @@ class Omeka_Controller_Flash
 		$msg = $this->getFlash()->msg;
 		
 		$this->resetFlash();
-		
-		if(is_array($msg)) {
-			return $this->formatErrorsIntoNiceMessage($msg);
-		}
-		
-		return $msg;
+				
+		return (string) $msg;
 	}
 	
 	/**
@@ -124,29 +137,13 @@ class Omeka_Controller_Flash
 	 **/
 	protected function resetFlash()
 	{
-		if( ($flash = $this->getFlash())) {
+		if (($flash = $this->getFlash())) {
 			if ($flash instanceof Zend_Session_Namespace) {
 				$this->setTempFlash($flash->status, $flash->msg);
 				unset($flash->msg);
 				unset($flash->status);
 			}
 		}
-	}
-	
-	/**
-	 * Take an array of error messages and convert it into human-readable format
-	 *
-	 * @return string
-	 **/
-	protected function formatErrorsIntoNiceMessage($errors)
-	{
-		$msgs = array();
-		foreach ($errors as $field => $error) {
-	 
-			$msgs[] = (!is_numeric($field) ? (Omeka::humanize($field). ": ") : '') . $error; 
-		}
-
-		return join("\n", $msgs);			
 	}
 	
 	/**
@@ -157,9 +154,8 @@ class Omeka_Controller_Flash
 	public function getError($field)
 	{
 		$msg = $this->getFlash()->msg;
-		
-		return (is_array($msg) and array_key_exists($field, $msg)) ? $msg[$field] : null;
+		if (is_array($msg)) {
+		  return @$msg[$field];
+		}
 	}
 }
- 
-?>

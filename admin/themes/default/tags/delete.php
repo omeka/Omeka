@@ -1,17 +1,21 @@
-<?php head(array('title'=>'Remove Tags', 'body_class'=>'tags')); ?>
+<?php head(array('title'=>'Remove Tags', 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
 <?php echo flash(); ?>
-<?php common('archive-nav'); ?>
 
+<h1>Delete Tags</h1>
+<?php common('tags-nav'); ?>
 <div id="primary">
-	<h1>Delete Tags</h1>
 <form method="post">
+	<div class="field">
+    <label for="delete_tag">Select a tag to delete:</label>
+<div class="inputs">
 <select name="delete_tag">
 	<?php foreach( $tags as $key => $tag ): ?>
 		<option value="<?php echo $tag['id']; ?>"><?php echo $tag['name'];?> (<?php echo $tag['tagCount']; ?>)</option>
 	<?php endforeach; ?>
 </select>
-
-<input type="submit" name="submit" value="Delete this tag" />
+</div>
+</div>
+<input type="submit" name="submit" class="submit submit-medium" value="Delete tag" />
 
 </form>
 </div>

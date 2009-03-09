@@ -1,29 +1,58 @@
-<?php head(array('body_class'=>'index', 'title'=>'Dashboard')); ?>
-
+<?php head(array('bodyclass'=>'index primary-secondary', 'title'=>'Dashboard')); ?>
+<h1>Dashboard</h1>
 	<div id="primary">
-		<div id="welcome">
+	    
+		<?php if (OMEKA_MIGRATION > (int) get_option('migration')): ?>
+            <div class="error">
+                Warning: Your Omeka database is not compatible with the
+                version of Omeka that you are running.  
 
+                <?php if (has_permission('Upgrade', 'migrate')): ?>
+                    Please backup your existing database and then click the
+                    following link to upgrade:
+                    <?php echo link_to('upgrade', null, 'Upgrade', array('class'=>'upgrade-link')); ?>                    
+                <?php else: ?>
+                    Please notify an administrator to upgrade the database.
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php // Retrieve the latest version of Omeka by pinging the Omeka server. ?>
+        <?php if (has_permission('Upgrade', 'index')):
+              $latestVersion = get_latest_omeka_version();
+                  if ($latestVersion and version_compare(OMEKA_VERSION, $latestVersion, '<')): ?>
+                    <div class="success">
+                        There is a new version of Omeka available for download
+                        (<?php echo $latestVersion; ?>).
+                        <a href="http://omeka.org/download/">Upgrade</a>
+                    </div>
+        <?        endif; 
+              endif; ?>
+            
 			<div id="getting-started">
-				<h1>Getting Started with Omeka</h1>
+				<h2>Getting Started with Omeka</h2>
 				<dl>
-					<dt class="archive"><a href="<?php echo uri('items'); ?>">Archive</a></dt>
-					<dd class="archive">
+					<dt class="items"><?php echo link_to('items', null, 'Items'); ?></dt>
+					<dd class="items">
 						<ul>
-							<li><a class="add" href="<?php echo uri('items/add'); ?>">Add an item to your archive</a></li>
-							<li><a class="add-collection" href="<?php echo uri('collections/add'); ?>">Add a collection to group items</a></li>
+							<li><a class="add" href="<?php echo uri('items/add'); ?>">Add a new item to your archive</a></li>
+							<li><a class="browse" href="<?php echo uri('items/browse'); ?>">Browse your items</a></li>
+						    
 						</ul>
-						<p>Manage items in your archive: add, edit, and delete items. Learn about item types and group items into collections.</p>
+						<p>Manage items in your archive: add, edit, and delete items.</p>
 					</dd>
-					
-				<?php if(has_permission('Exhibits','browse')): ?>
-					<dt class="exhibits"><a href="<?php echo uri('exhibits/browse'); ?>">Exhibits</a></dt>
-					<dd class="exhibits">
+				
+				<?php if(has_permission('Collections','browse')): ?>
+				    <dt class="collections"><?php echo link_to('collections', null, 'Collections'); ?></dt>
+					<dd class="collections">
 						<ul>
-							<li><a class="browse-exhibits" href="<?php echo uri('exhibits/browse'); ?>">Browse exhibits</a></li>
-							<li><a class="add-exhibit" href="<?php echo uri('exhibits/add'); ?>">Create an exhibit</a></li>
+						    <li><a class="add-collection" href="<?php echo uri('collections/add'); ?>">Add a collection to group items</a></li>
+						    <li><a class="browse" href="<?php echo uri('collections/browse'); ?>">Browse your collections</a></li>
+						    
 						</ul>
-						<p>Create and manage exhibits that display items from the archive.</p>
+						<p>Manage collections in your archive: add, edit, and delete collections.</p>
 					</dd>
+				
 				<?php endif; ?>
 				
 				<?php if(has_permission('Users','browse')): ?>
@@ -48,47 +77,44 @@
 						<p>Manage your general settings for the site, including title, description, and themes.</p>
 					</dd>
 			<?php endif; ?>
-			<?php if(has_permission('entities','add')): ?>
-					<dt class="names"><a href="<?php echo uri('entities/browse'); ?>">Names</a></dt>
-					<dd class="names">
-						<ul>
-							<li><a class="browse-names" href="<?php echo uri('entities/browse'); ?>">Browse Names</a></li>
-						</ul>
-						<p>Manage all names in your site, including people and institutions.</p>
-					</dd>
-					</dl>
-			<?php endif; ?>
-			<p class="help">Need help with Omeka? Visit our <a href="http://omeka.org/codex/">codex</a> for detailed instructions for using and customizing our application.</p>
+			<?php fire_plugin_hook('admin_append_to_dashboard_primary'); ?>
+			</dl>
 			</div>
-			
 		</div>
-		<div id="site-info">
-			<div id="site-meta">
+		
+		<div id="secondary">
+			<div id="site-meta" class="info-panel">
 				<h2>Site Overview</h2>
-				<p><em><?php echo settings('site_title'); ?></em> contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> collections, tagged with <?php echo total_tags(); ?> keywords. There are <?php echo total_users(); ?> users.</p>
+                <p><em><?php echo settings('site_title'); ?></em> 
+                contains <?php echo total_items(); ?> items, in <?php echo total_collections(); ?> 
+                collections, tagged with <?php echo total_tags(); ?> keywords. 
+                There are <?php echo total_users(); ?> users. This is
+                Omeka version <em><?php echo OMEKA_VERSION; ?></em>.</p>
 			</div>
-			<div id="recent-items">
+			<div id="recent-items" class="info-panel">
 				<h2>Recent Items</h2>
-				<?php $items = recent_items('5'); ?>
-				<?php if(count($items) == 0):?>
-					<div class="error">There are no items to display</div>	
+				<?php set_items_for_loop(recent_items('5')); ?>
+				<?php if(!has_items_for_loop()):?>
+					<p>There are no items to display.</p>	
 				<?php else: ?>
 				<ul>
-					<?php foreach( $items as $key => $item ): ?>
-						<li class="<?php if($key%2==1) echo 'even'; else echo 'odd'; ?>"><a href="<?php echo uri('items/show/'.$item->id); ?>"><span class="title"><?php  echo h($item->title); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime($item->added)); ?></span></a> </li>	
-					<?php endforeach; ?>
+				    <?php $key = 0; ?>
+					<?php while(loop_items()): ?>
+						<li class="<?php echo is_odd($key++) ? 'even' : 'odd'; ?>">
+							<?php echo link_to_item();?>
+						</li>	
+					<?php endwhile; ?>
 				</ul>
 				
 				<p id="view-all-items"><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>
 				<?php endif; ?>
 			</div>
 			
-			<div id="tag-cloud">
+			<div id="tag-cloud" class="info-panel">
 				<h2>Recent Tags</h2>
 				<?php echo tag_cloud(recent_tags(), uri('items/browse/')); ?>
 			</div>
+			
+			<?php fire_plugin_hook('admin_append_to_dashboard_secondary'); ?>
 		</div>
-		
-		
-	</div>
 <?php foot(); ?>

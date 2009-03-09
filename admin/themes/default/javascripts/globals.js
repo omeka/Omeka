@@ -1,6 +1,8 @@
 //Namespace for generic Omeka utility functions
-var Omeka = {
-	flash: function(msg, status) {
+if(typeof Omeka == 'undefined') {
+	Omeka = {};
+}
+Omeka.flash = function(msg, status) {
 		
 		if(typeof status == 'undefined') {
 			status = 'alert';
@@ -18,15 +20,14 @@ var Omeka = {
 		div.updateAppear(msg);
 		div.setStyle({display:'block'});
 //		new Effect.Highlight(div, {duration:'2.0',startcolor:'#ffff99', endcolor:'#ffffff'});
-	},
+};
 	
-	hideFlash: function() {
+Omeka.hideFlash = function() {
 		$('alert').hide();
-	}
 };
 
 //Highlight 'alert' boxes after the page has loaded (different from Omeka.flash)
-function alertBox() {
+Omeka.alertBox = function() {
 	var alerts = $$('div.alert');
 	
 	for(var i=0;i<alerts.length;i++) {
@@ -38,17 +39,6 @@ function alertBox() {
 	}
 }
 
-//Adds rounded corners to the admin theme
-function roundCorners() {
-	Nifty('#primary-nav a,#secondary-nav a','top transparent');
-	Nifty('#view-style a,#browse-meta','top transparent');
-	Nifty('#user-meta','bottom big');
-	Nifty('#login #content,#site-meta,#recent-items,#tag-cloud,#type-items,#getting-started ul');
-	Nifty('#view-all-items a','transparent');
-	Nifty('#search,#names-add','big');
-	Nifty('#add-item,#add-collection,#add-type,#add-user,#add-file,#add-exhibit,#new-user-form','transparent');
-}
-
 //This will add confirmation for deleting files and the item
 function confirmDelete() {
 	$$('.delete').each( function(el) {
@@ -56,79 +46,42 @@ function confirmDelete() {
 			return confirm('Are you sure you want to delete this?');
 		}
 	});
-	$$('.delete-exhibit').each(function(el) {
+}
+
+//This will add confirmation for deleting files and the item
+function confirmUninstall() {
+	$$('.uninstall').each( function(el) {
 		el.onclick = function() {
-			return confirm( 'Are you sure you want to delete this exhibit and all of its data from the archive?' );
+			return confirm('Uninstalling the plugin can delete data added by your plugin. Are you sure you want to uninstall this?');
 		}
 	});
 }
 
-	
-	const Person = "Person";
-	const Institution = "Institution";
-	
-	
-	
-	function switchForm(radio) {
-		if(!document.getElementById) return;
-		var personElements = ['first_name','middle_name', 'last_name'];
-		var institutionElements = ['institution'];
-		
-		if(radio.value == Institution) {
-			//Disable name elements on form
-			personElements.each(function(el) {
-				var element = $(el);
-				ancestors = element.ancestors();
-				ancestors[0].hide();
-				element.disable();
-				element.hide();
-			});
-			institutionElements.each(function(el) {
-				var element = $(el);
-				element.enable();
-				element.show();
-				ancestors = element.ancestors();
-				ancestors[0].show();
-			});
-		}else{
-			//Enable name elements
-			personElements.each(function(el) {
-				var element = $(el);
-				element.enable();
-				element.show();
-				ancestors = element.ancestors();
-				ancestors[0].show();
-			});
-			institutionElements.each(function(el) {
-				var element = $(el);
-				element.disable();
-				element.hide();
-				ancestors = element.ancestors();
-				ancestors[0].hide();
-			
-			});
-		}
-	}
-	
-function toggleNamesForm() {
-	if(!document.getElementById) return;
-	if(!$('name-inputs') || !$('entity-type')) return;
-	var radioButtons = $$("#entity-type input");
-	var allFields = $('name-inputs');
-	allFields.hide();
-	for (var i=0; i < radioButtons.length; i++) {
-		radioButtons[i].onclick = function() {
-			switchForm(this);
-			allFields.show();
-		};
-		if(radioButtons[i].checked) {
-			switchForm(radioButtons[i]);
-			allFields.show();
-		}
-	}
-}
+Omeka.Form = Object.extend({}, {
+    /* Loop through all the spans with class="tooltip" and make them visible 
+	as tooltips */
+    makeTooltips: function(tooltipElements) {        
+		tooltipElements.each(function(span){
+		   //The div that wraps the tooltip and the form element
+		   var div = span.up();
 
-Event.observe(window,'load',toggleNamesForm);
-Event.observe(window,'load',roundCorners);
-Event.observe(window,'load',alertBox);
+		   var image = span.previous('img');
+		   if (!image) {
+		       return;
+		   };
+		   image.style.cursor = "help";
+		   
+		   // Insert the informational image right after the label for the field
+		   div.select('label').first().insert({after:image});
+		   
+		   var tooltip = new Tooltip(image, span, 
+		       {default_css:true, zindex:100000});
+		   span.addClassName('info-window');
+		}.bind(this));        
+    }
+});
+
+Event.observe(window,'load',Omeka.alertBox);
 Event.observe(window,'load',confirmDelete);
+Event.observe(window,'load',confirmUninstall);
+

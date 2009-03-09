@@ -1,21 +1,24 @@
 <?php
-// Ladies and Gentlemen, start your timers
-define('APP_START', microtime(true));
-
+/**
+ * Bootstrap for public interface.
+ *
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+// Define the directory and web paths.
 require_once 'paths.php';
 
-define('ADMIN_THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'themes');
-define('THEME_DIR', BASE_DIR.DIRECTORY_SEPARATOR.'themes');
+// Define the public theme directory path.
+define('THEME_DIR', BASE_DIR . DIRECTORY_SEPARATOR . $site['public_theme']);
 
+// Initialize Omeka.
 require_once 'Omeka/Core.php';
-$core = new Omeka_Core;
-$core->initialize();
 
-// Call the dispatcher which echos the response object automatically
-$core->dispatch();
+require_once 'Zend/Controller/Front.php';
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Omeka_Core());
 
-if ((boolean) $config->debug->timer) {
-	echo microtime(true) - APP_START;
-}
-// We're done here.
-?>
+$front->dispatch();

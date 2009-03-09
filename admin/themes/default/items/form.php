@@ -1,389 +1,344 @@
-<?php echo js('tooltip'); ?>
+<?php echo js('tooltip'); 
+echo js('tiny_mce/tiny_mce'); 
+// echo js('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
+?>
+<?php // The following includes the Autocompleter class. ?>
+<script src="<?php echo web_path_to('javascripts/scriptaculous.js'); ?>?load=controls" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript" charset="utf-8">
+//<![CDATA[
+
 	Event.observe(window,'load', function() {
-		ajaxifyTagRemoval();
-		makeTooltips();
-		changeTypeMetadata();
-		filesAdding();
+        Omeka.ItemForm.enableTagRemoval();
+		Omeka.ItemForm.makeFileWindow();
+        
+        // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.
+        // $$('div.field textarea').each(function(el){
+        //     el.id = null;
+        // });
+
+        // Must run the element form scripts AFTER reseting textarea ids.
+        document.fire('omeka:elementformload');
+        
+		Omeka.ItemForm.enableAddFiles();
+        Omeka.ItemForm.changeItemType();
 	});
-	
-	//Update the type metadata every time a different Item Type is selected	
-	function changeTypeMetadata()
-	{
-		var typeSelect = $('type');
+    
+    document.observe('omeka:elementformload', function(e){
+        var elementFieldDiv = e.target;
+        Omeka.ItemForm.makeElementControls();
+        Omeka.ItemForm.enableWysiwyg();
+    });
+    
+    Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
+
+	makeFileWindow: function() {
+		$$('#file-list a.edit').each(function(link) {
+			link.onclick = function() {
+				window.open(link.getAttribute("href"));
+				return false;
+			}
+		});
+	},
+    changeItemType: function() {
 		$('change_type').hide();
-		typeSelect.onchange = function() {
-			
+		$('item-type').onchange = function() {
 			var typeSelectLabel = $$('#type-select label')[0];
-			var image = document.createElement('img');
+			var image = $(document.createElement('img'));
 			image.src = "<?php echo img('loader2.gif'); ?>";
 			var params = 'item_id=<?php echo $item->id; ?>&type_id='+this.getValue();
 						
-			new Ajax.Request('<?php echo uri("items/changeType") ?>', {
+			new Ajax.Request('<?php echo uri("items/change-type") ?>', {
 				parameters: params,
 				onCreate: function(t) {
 					typeSelectLabel.appendChild(image);
 				},
 				onFailure: function(t) {
 					alert(t.status);
-					image.remove();
 				},
 				onComplete: function(t) {
 					var form = $('type-metadata-form');
 					image.remove();
 					form.update(t.responseText);
+					form.fire('omeka:elementformload');
 					Effect.BlindDown(form);
 				}
 			});
+		}        
+    },
+	
+	/* Messing with the tag list should not submit the form.  Instead it runs 
+	an AJAX request to remove tags. */
+	enableTagRemoval: function() {		
+		if ( !(buttons = $$('#tags-list input')) ) {
+		    return;
 		}
-	}
-	
-	function makeTooltips()
-	{
-		//Now load the tooltip js
-			var tooltipIds = ['title', 'publisher', 'relation', 'language', 'spatial_coverage', 'rights', 'rights_holder', 'description', 'source', 'subject', 'creator', 'additional_creator', 'provenance', 'contributor', 'citation', 'temporal_coverage', 'date', 'format'];
-			
-		for (var i=0; i < tooltipIds.length; i++) {
-			var elId = tooltipIds[i];
-			$(elId).style.cursor = "help";
-			var image = document.createElement('img');
-			image.src = "<?php echo img('information.png'); ?>";
-			$(elId).appendChild(image);
-			$(elId).style.paddingLeft = "20px";
-			var tooltipId = elId + '_tooltip';
-			var tooltip = new Tooltip(image, tooltipId, {default_css:true, zindex:100000});
-			$(tooltipId).addClassName('info-window');
-		};
-	}
-	
-	//Messing with the tag list should not submit the form.  Instead it runs an AJAX request to remove tags
-	function ajaxifyTagRemoval()
-	{
-		if(!$('tags-list')) return;
-		var buttons = $('tags-list').getElementsByTagName('input');
-		
-		for (var i=0; i < buttons.length; i++) {
-			buttons[i].onsubmit = function() {
-				return false;
-			}
-			buttons[i].onclick = function() {
-				removeTag(this);
-				return false;
-			};
-		};		
-	}
-	
-	function removeTag(button)
-	{
-		var tagId = button.value;
-		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
 
-		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
-			parameters: 'remove_tag='+ tagId,
-			method: 'post',
-			onSuccess: function(t) {
-				//Fire the other ajax request to update the page
-				new Ajax.Request("<?php echo uri('items/_tags_remove/'); ?>", {
-					parameters: {
-						'id': "<?php echo $item->id; ?>"
-					},
-					onSuccess: function(t) {
-						$('tags-list').hide();
-						$('tags-list').update(t.responseText);
-						Effect.Appear('tags-list', {duration: 1.0});
-					},
-					onComplete: function() {
-						ajaxifyTagRemoval();
-					}
-				});
-			},
-			onFailure: function(t) {
-				alert(t.status);
-			}
-		});
+    	function removeTag(button) {
+    		var tagId = parseInt(button.value);
+    		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
+
+    		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
+    			parameters: 'remove_tag='+ tagId,
+    			method: 'post',
+    			onSuccess: function(t) {
+    				//Fire the other ajax request to update the page
+    				new Ajax.Updater('tag-form', "<?php echo uri('items/tag-form/'); ?>", {
+    					parameters: {
+    						'id': "<?php echo $item->id; ?>"
+    					},
+    					onComplete: function() {
+    					    Effect.Appear('tag-form', {duration: 1.0});
+    						Omeka.ItemForm.enableTagRemoval();
+    					}
+    				});
+    			},
+    			onFailure: function(t) {
+    				alert(t.status);
+    			}
+    		});
+
+    		return false;
+    	}
 		
-		return false;
+		buttons.invoke('observe', 'click', function(e) {
+		    e.stop();
+		    removeTag(this);
+		});
+	},
+	
+	/**
+	 * Send an AJAX request to update a <div class="field"> that contains all 
+	 * the form inputs for an element.
+	 */
+	elementFormRequest: function(fieldDiv, params) {
+        var elementId = fieldDiv.id.gsub(/element-/, '');
+        
+        // Isolate the inputs on this part of the form.
+        var inputs = fieldDiv.select('input', 'textarea', 'select');
+
+        var postString = inputs.invoke('serialize').join('&');        
+        params.element_id = elementId;
+
+        // note to yourself that this php is hard coded into the javascript
+        // you cannot move this javascript to another file even if you wanted to
+        var elementFormPartialUri = "<?php echo uri('items/element-form'); ?>";
+        params.item_id = "<?php echo item('id'); ?>";
+        
+        // Make sure that we put in that we want to add one input to the form
+        postString += '&' + $H(params).toQueryString();
+        
+        new Ajax.Updater(fieldDiv, elementFormPartialUri, {
+            parameters: postString,
+            onComplete: function(t) {
+                fieldDiv.fire('omeka:elementformload');
+            }
+        });
+	},
+	
+	addElementControl: function(e){
+        e.stop();
+        var addButton = Event.element(e);
+        var fieldDiv = addButton.up('div.field');
+
+        Omeka.ItemForm.elementFormRequest(fieldDiv, {add:'1'});
+    },
+    
+    deleteElementControl: function(e){
+        e.stop();
+        
+        var removeButton = Event.element(e);
+
+        //Check if there is only one input.
+        var inputCount = removeButton.up('div.field').select('div.input-block').size();
+        if (inputCount == 1) {
+            return;
+        };
+
+        if(!confirm('Do you want to delete this?')) {
+            return;
+        }
+             
+        removeButton.up('div.input-block').remove();
+        
+        $$('div.field').each(function(i) {
+	        var removeCount = i.select('.remove-element').size();
+	        if(removeCount == 1) {
+	            i.select('.remove-element').each(function(j,index){
+	                j.style.display = "none"; 
+	            }); 
+	        }
+	    });
+	},
+    
+    makeElementControls: function() {
+        
+        $$('div.field').each(function(i) {
+	        var removeCount = i.select('.remove-element').size();
+	        if(removeCount > 1) {
+	            i.select('.remove-element').each(function(j,index){
+	                j.style.display = "block"; 
+	            }); 
+	        }
+	    });
+        
+ 	    // Class name is hard coded here b/c it is hard coded in the helper
+	    // function as well.
+	    $$('.add-element').invoke('observe', 'click', Omeka.ItemForm.addElementControl);
+	    
+	    // When button is clicked, remove the last input that was added
+	    $$('.remove-element').invoke('observe', 'click', Omeka.ItemForm.deleteElementControl);
+	},
+	
+	/**
+	 * Adds an arbitrary number of file input elements to the items form so that
+     * more than one file can be uploaded at once.
+	 */
+    enableAddFiles: function() {
+        if(!$('add-more-files')) return;
+        if(!$('file-inputs')) return;
+        if(!$$('#file-inputs .files')) return;
+        var nonJsFormDiv = $('add-more-files');
+
+        //This is where we put the new file inputs
+        var filesDiv = $$('#file-inputs .files').first();
+
+        var filesDivWrap = $('file-inputs');
+        //Make a link that will add another file input to the page
+        var link = $(document.createElement('a')).writeAttribute(
+            {href:'#',id: 'add-file', className: 'add-file'}).update('Add Another File');
+
+        Event.observe(link, 'click', function(e){
+            e.stop();
+            var inputs = $A(filesDiv.getElementsByTagName('input'));
+            var inputCount = inputs.length;
+            var fileHtml = '<div id="fileinput'+inputCount+'" class="fileinput"><input name="file['+inputCount+']" id="file['+inputCount+']" type="file" class="fileinput" /></div>';
+            new Insertion.After(inputs.last(), fileHtml);
+            $('fileinput'+inputCount).hide();
+            new Effect.SlideDown('fileinput'+inputCount,{duration:0.2});
+            //new Effect.Highlight('file['+inputCount+']');
+        });
+
+        nonJsFormDiv.update();
+		
+        filesDivWrap.appendChild(link);
+    },
+	
+	enableWysiwygCheckbox: function(checkbox) {
+	    
+	    function getTextarea(checkbox) {
+	        var textarea = checkbox.up('.input-block').down('textarea', 0);
+            // We can't use the editor for any field that isn't a textarea
+            if (Object.isUndefined(textarea)) {
+                return;
+            };
+            
+            textarea.identify();
+            return textarea;
+	    }
+	    
+	    // Add the 'html-editor' class to all textareas that are flagged as HTML.
+	    var textarea = getTextarea(checkbox);
+	    
+	    if (checkbox.checked && textarea) {
+            textarea.addClassName('html-editor');
+	    };
+
+
+        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
+        Event.observe(checkbox, 'click', function(e) {
+            var textarea = getTextarea(checkbox);
+            
+            if (textarea) {
+                // Toggle on when checked.
+                if(checkbox.checked) {
+                    tinyMCE.execCommand("mceAddControl", false, textarea.id);               
+                } else {
+                    tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
+                }                
+            };
+        });
+	},
+	
+	/**
+	 * Make it so that checking a box will enable the WYSIWYG HTML editor for
+     * any given element field. This can be enabled on a per-textarea basis as
+     * opposed to all fields for the element.
+	 */
+	enableWysiwyg: function() {
+	    	    
+	    $$('div.inputs').each(function(div){
+            // Get all the WYSIWYG checkboxes
+            var checkboxes = div.select('input[type="checkbox"]');
+            checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
+	    });
+    
+        // The configuration bombs out in IE6, so we have to be limited in our configuration.  
+        if (Prototype.Browser.IE) {
+            tinyMCE.init({
+                mode: "specific_textareas",
+                editor_selector: "html-editor"
+            });
+        } else {
+    
+	    //WYSIWYG Editor
+        tinyMCE.init({
+            mode: "specific_textareas",
+            editor_selector : "html-editor",    // Put the editor in for all textareas with an 'html-editor' class.
+           	theme: "advanced",
+    		force_br_newlines : true,
+    		forced_root_block : '', // Needed for 3.x
+    		remove_linebreaks : true,
+    		fix_content_duplication : false,
+    		fix_list_elements : true,
+    		valid_child_elements:"ul[li],ol[li]",
+           	theme_advanced_toolbar_location : "top",
+           	theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect,code",
+    		theme_advanced_buttons2 : "",
+    		theme_advanced_buttons3 : "",
+    		theme_advanced_toolbar_align : "left"
+       });   
+        }
 	}
+
+    });
+    
+    // Tags autocomplete
+	Event.observe(window, 'load', function(){
+	    new Ajax.Autocompleter("tags-field", "tag-choices", 
+	    "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
+	        tokens: ',',
+	        paramName: 'tag_start'
+	    });
+	});
+//]]>	
 </script>
 
 <?php echo flash(); ?>
-<ul id="tertiary-nav" class="navigation">
-	<li id="stepbutton1"><a href="#step1">Step One</a></li>
-	<li id="stepbutton2"><a href="#step2">Step Two</a></li>
-	<li id="stepbutton3"><a href="#step3">Step Three</a></li>
-</ul>
-<div class="toggle" id="step1">
-	<fieldset>
-		<legend>Type Metadata</legend>
 
-			<div class="field" id="type-select">
-				<?php select(	array(	
-							'name'	=> 'type_id',
-							'id'	=> 'type' ),
-							types(),
-							$item->type_id,
-							'Item Type',
-							'id',
-							'name' ); ?>
-			<input type="submit" name="change_type" id="change_type" value="Pick this type" />	
-			</div>
-			<div id="type-metadata-form">
-			<?php common('_type', compact('item'), 'items'); ?>
-			</div>
-			</fieldset>
-			<fieldset>
-			<legend>Add Files</legend>
-			<div class="field" id="add-more-files">
-			<label for="add_num_files">Add Files</label>
-				<div class="files">
-				<?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
-				<?php 
-				text(array('name'=>'add_num_files','size'=>2),$numFiles);
-				submit('Add this many files', 'add_more_files'); 
-				?>
-				</div>
-			</div>
-			
-			<div class="field" id="file-inputs">
-			<!-- MAX_FILE_SIZE must precede the file input field -->
-				<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
-				<label for="file[<?php echo $i; ?>]">Find a File</label>
-					
-				<?php for($i=0;$i<$numFiles;$i++): ?>
-				<div class="files">
-					<input name="file[<?php echo $i; ?>]" id="file[<?php echo $i; ?>]" type="file" class="fileinput" />			
-				</div>
-				<?php endfor; ?>
-			</div>
-			
-			<?php fire_plugin_hook('append_to_item_form_upload', $item); ?>
-		
-		<?php if ( has_files($item) ): ?>
-			<div class="label">Edit File Metadata</div>
-			<div id="file-list">
-			<table>
-				<thead>
-					<tr>
-						<th>File Name</th>
-						<th>Delete?</th>
-				<tbody>
-			<?php foreach( $item->Files as $key => $file ): ?>
-				<tr>
-					<td class="file-link">
-						<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">
-			
-							
-								
-								<?php echo h($file->original_filename); ?>
-						</a>
-					</td>
-					<td class="delete-link">
-						<?php checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
-					</td>	
-				</li>
-		
-			<?php endforeach; ?>
-			</tbody>
-			</table>
-			</div>
-			<?php endif; ?>
-			</fieldset>
-	</div>
-	<div id="step2" class="toggle">
-<fieldset id="core-metadata">
-	<legend>Core Metadata</legend>
-		<div class="field">
-		<label for="title" id="title">Title</label>
-		<input type="text" class="textinput" name="title" value="<?php echo h($item->title);?>" />
-		<span class="tooltip" id="title_tooltip"><?php echo dublin_core('title'); ?></span>
-		</div>
-
-		<div class="field">
-		<label id="subject">Subject</label>
-		<input type="text" class="textinput" name="subject" value="<?php echo h($item->subject);?>" />
-		<span class="tooltip" id="subject_tooltip"><?php echo dublin_core('subject'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="description">Description</label>
-		<textarea class="textinput" name="description"  rows="15" cols="50"><?php echo h($item->description); ?></textarea>
-		<span class="tooltip" id="description_tooltip"><?php echo dublin_core('description'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="creator">Creator</label>
-		<input type="text" class="textinput" name="creator" value="<?php echo h($item->creator);?>" />
-		<span class="tooltip" id="creator_tooltip"><?php echo dublin_core('creator'); ?></span>
-		</div>
-
-		<div class="field">
-		<label id="additional_creator">Additional Creator</label>
-		<input type="text" class="textinput" name="additional_creator" value="<?php echo h($item->additional_creator);?>" />
-		<span class="tooltip" id="additional_creator_tooltip"><?php echo dublin_core('additional_creator'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="source">Source</label>
-		<input type="text" class="textinput" name="source" value="<?php echo h($item->source);?>" />
-		<span class="tooltip" id="source_tooltip"><?php echo dublin_core('source'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="publisher">Publisher</label>
-		<input type="text" class="textinput" name="publisher" value="<?php echo h($item->publisher);?>" />
-		<span class="tooltip" id="publisher_tooltip"><?php echo dublin_core('publisher'); ?></span>
-		</div>
-		
-		<div class="field">
-			<label for="date_year" id="date">Date <span class="notes">(YYYY-MM-DD)</span></label>
-			
-			<div class="dates">
-			<div class="dateinput">
-		<input type="text" class="textinput" name="date_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['date_year'], get_year($item->date)); ?>">
-		<input type="text" class="textinput" name="date_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['date_month'], get_month($item->date)); ?>" />
-		<input type="text" class="textinput" name="date_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['date_day'], get_day($item->date)); ?>">
-		
-			</div>
-			</div>
-			<span class="tooltip" id="date_tooltip"><?php echo dublin_core('date'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="contributor">Contributor</label>
-		<input type="text" class="textinput" name="contributor" value="<?php echo h($item->contributor);?>" />
-		<span class="tooltip" id="contributor_tooltip"><?php echo dublin_core('contributor'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="rights">Rights</label>
-		<input type="text" class="textinput" name="rights" value="<?php echo h($item->rights);?>" />
-		<span class="tooltip" id="rights_tooltip"><?php echo dublin_core('rights'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="rights_holder">Rights Holder</label>
-		<input type="text" class="textinput" name="rights_holder" value="<?php echo h($item->rights_holder);?>" />
-		<span class="tooltip" id="rights_holder_tooltip"><?php echo dublin_core('rights_holder'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="relation">Relation</label>
-		<input type="text" class="textinput" name="relation" value="<?php echo h($item->relation);?>" />
-		<span class="tooltip" id="relation_tooltip"><?php echo dublin_core('relation'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="format">Format</label>
-		<input type="text" class="textinput" name="format" value="<?php echo h($item->format);?>" />
-		<span class="tooltip" id="format_tooltip"><?php echo dublin_core('format'); ?></span>
-		</div>
-		
-		<div class="field">
-		<label id="spatial_coverage">Spatial Coverage</label>
-		<input type="text" class="textinput" name="spatial_coverage" value="<?php echo h($item->spatial_coverage);?>" />
-		<span class="tooltip" id="spatial_coverage_tooltip"><?php echo dublin_core('spatial_coverage'); ?></span>
-		</div>
-		
-		<div class="field">
-			<label id="temporal_coverage">Temporal Coverage <span class="notes">(YYYY-MM-DD)</span></label>
-			<div class="dates">
-				<span>From</span>
-				<span class="dateinput">
-					<input type="text" class="textinput" name="coverage_start_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_start_year'], get_year($item->temporal_coverage_start)); ?>"> 
-					<input type="text" class="textinput" name="coverage_start_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_start_month'], get_month($item->temporal_coverage_start)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_start_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_start_day'], get_day($item->temporal_coverage_start)); ?>">
-				</span>
-				<span>to</span>
-				<span class="dateinput">
-					<input type="text" class="textinput" name="coverage_end_year" id="date_year" size="4" value="<?php echo not_empty_or($_POST['coverage_end_year'], get_year($item->temporal_coverage_end)); ?>"> 
-					<input type="text" class="textinput" name="coverage_end_month" id="date_month" size="2" value="<?php echo not_empty_or($_POST['coverage_end_month'], get_month($item->temporal_coverage_end)); ?>" /> 
-					<input type="text" class="textinput" name="coverage_end_day" id="date_day" size="2" value="<?php echo not_empty_or($_POST['coverage_end_day'], get_day($item->temporal_coverage_end)); ?>">
-				</span>
-			</div>
-			<span class="tooltip" id="temporal_coverage_tooltip"><?php echo dublin_core('temporal_coverage'); ?></span>
-		</div>
-
-			<div class="field">
-			<label id="language">Language</label>
-			<?php 
-				select(
-					array('id'=>'language','name'=>'language'), 
-					array(
-						'eng'=>'English', 
-						'rus'=>'Russian',
-						'deu'=>'German',
-						'fra'=>'French',
-						'spa'=>'Spanish',
-						'san'=>'Sanskrit'),
-					!empty($item->language) ? $item->language : 'eng'); 
-			?>
-			<span class="tooltip" id="language_tooltip"><?php echo dublin_core('language'); ?></span>
-			</div>
-
-			<div class="field">
-			<label id="provenance">Provenance</label>
-			<input type="text" class="textinput" name="provenance" value="<?php echo h($item->provenance);?>" />
-			<span class="tooltip" id="provenance_tooltip"><?php echo dublin_core('provenance'); ?></span>
-			</div>
-
-			<div class="field">
-			<label id="citation">Bibliographic Citation</label>
-			<input type="text" class="textinput" name="citation" value="<?php echo h($item->citation);?>" />
-			<span class="tooltip" id="citation_tooltip"><?php echo dublin_core('bibliographic_citation'); ?></span>
-			</div>
-	</fieldset>
+<div id="public-featured">
+    <?php if ( has_permission('Items', 'makePublic') ): ?>
+    	<div class="checkbox">
+    		<label for="public">Public:</label> 
+    		<div class="checkbox"><?php echo checkbox(array('name'=>'public', 'id'=>'public'), $item->public); ?></div>
+    	</div>
+    <?php endif; ?>
+    <?php if ( has_permission('Items', 'makeFeatured') ): ?>
+    	<div class="checkbox">
+    		<label for="featured">Featured:</label> 
+    		<div class="checkbox"><?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?></div>
+    	</div>
+    <?php endif; ?>
 </div>
-<div id="step3" class="toggle">
-	<fieldset id="collection-metadata">
-		<legend>Collection Metadata</legend>
-		<div class="field">
-		<?php select('collection_id',
-					collections(),
-					$item->collection_id,
-					'Collection',
-					'id',
-					'name' ); ?>
-		</div>
-	</fieldset>
-
-	<fieldset id="miscellaneous">
-		<legend>Miscellaneous</legend>
-		
-		<?php if ( has_permission('Items', 'makePublic') ): ?>
-			<div class="field">
-				<div class="label">Item is public:</div> 
-				<div class="radio"><?php radio(array('name'=>'public', 'id'=>'public'), array('0'=>'No','1'=>'Yes'), $item->public); ?></div>
-			</div>
-		<?php endif; ?>
-		<?php if ( has_permission('Items', 'makeFeatured') ): ?>
-			<div class="field">
-				<div class="label">Item is featured:</div> 
-				<div class="radio"><?php radio(array('name'=>'featured', 'id'=>'featured'), array('0'=>'No','1'=>'Yes'), $item->featured); ?></div>
-			</div>
-		<?php endif; ?>
-	
-	</fieldset>
-	
-	<fieldset>
-		<legend>Tagging</legend>
-			<p>Separate tags with commas (lorem,ipsum,dolor sit,amet).</p>
-			<div class="field">
-			<label for="tags-field">Your Tags</label>
-			<input type="text" name="tags" id="tags-field" class="textinput" value="<?php echo not_empty_or($_POST['tags'], tag_string(current_user_tags($item))); ?>" />
-			</div>
-		
-			<?php fire_plugin_hook('append_to_item_form_tags', $item); ?>
-			
-			<?php if(has_tags($item) and has_permission('Items','untagOthers')): ?>
-			<div class="field">
-				<label for="all-tags">Remove Other Users' Tags</label>
-				<ul id="tags-list">
-					<?php common('_tags_remove', compact('item'), 'items'); ?>
-				</ul>
-			</div>
-			<?php endif; ?>
-			
-	</fieldset>
-	<fieldset id="additional-plugin-data">
-		<?php fire_plugin_hook('append_to_item_form', $item); ?>
-	</fieldset>
+<div id="item-metadata">
+<?php foreach ($tabs as $tabName => $tabContent): ?>
+	<?php if (!empty($tabContent)): ?>
+    	<div id="<?php echo text_to_id($tabName); ?>-metadata">
+        <fieldset class="set">
+            <legend><?php echo htmlentities($tabName); ?></legend>
+            <?php echo $tabContent; ?>        
+        </fieldset>
+        </div>	   
+	<?php endif; ?>
+<?php endforeach; ?>
+</div>

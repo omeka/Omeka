@@ -129,5 +129,5 @@ function toggleNav() {
 	}
 }
 
-Event.observe(window,'load',toggleBackNext);
-Event.observe(window,'load',toggleNav);
+/* Event.observe(window,'load',toggleBackNext);
+Event.observe(window,'load',toggleNav); */

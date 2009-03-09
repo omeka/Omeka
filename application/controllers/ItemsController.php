@@ -1,332 +1,295 @@
 <?php
-
-require_once 'Item.php';
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
+
+require_once 'Item.php';
+
+/**
+ * @see Omeka_Controller_Action
+ **/
 require_once 'Omeka/Controller/Action.php';
+
+/**
+ * @package Omeka
+ * @subpackage Controllers
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
 class ItemsController extends Omeka_Controller_Action
-{		
-	public function init() 
-	{
-		$this->_modelClass = 'Item';
-	}
-	
-	/**
-	 * This wraps the builtin method with permissions checks
-	 *
-	 **/
-	public function editAction()
-	{
-		if($user = Omeka::loggedIn()) {
-			
-			$item = $this->findById();
-		
-			//If the user cannot edit any given item
-			if($this->isAllowed('editAll') or 
-				//Check if they can edit this specific item
-				($this->isAllowed('editSelf') and $item->wasAddedBy($user))) {
-				
-				return parent::editAction();	
-			}
-		}
+{
+    public $contexts = array(
+            'browse' => array('json', 'dc', 'rss2'),
+            'show'   => array('json', 'dc')
+    );
+    
+    public function init() 
+    {
+        $this->_modelClass = 'Item';
+    }
+    
+    /**
+     * This shows the advanced search form for items by going to the correct URI.
+     * 
+     * This form can be loaded as a partial by calling items_search_form().
+     * 
+     * @return void
+     **/
+    public function advancedSearchAction()
+    {
+        // Only show this form as a partial if it's being pulled via XmlHttpRequest
+        $this->view->isPartial = $this->getRequest()->isXmlHttpRequest();
+        
+        // If this is set to null, use the default items/browse action.
+        $this->view->formActionUri = null;
+        
+        $this->view->formAttributes = array('id'=>'search');
+    }
+    
+    protected function _getItemElementSets()
+    {
+        return $this->getTable('ElementSet')->findForItems();
+    }
+    
+    /**
+     * Adds an additional permissions check to the built-in edit action.
+     * 
+     * Also 
+     *
+     **/
+    public function editAction()
+    {
+        // Get all the element sets that apply to the item.
+        $this->view->elementSets = $this->_getItemElementSets();
+        
+        if ($user = $this->getCurrentUser()) {
+            
+            $item = $this->findById();
+            
+            // If the user cannot edit any given item. Check if they can edit 
+            // this specific item
+            if ($this->isAllowed('editAll') 
+                || ($this->isAllowed('editSelf') && $item->wasAddedBy($user))) {
+                return parent::editAction();    
+            }
+        }
+        
+        $this->forbiddenAction();
+    }
+    
+    public function addAction()
+    {
+        // Get all the element sets that apply to the item.
+        $this->view->elementSets = $this->_getItemElementSets();
+        
+        return parent::addAction();
+    }
+    
+    /**
+     * Wrapping this crap with permissions checks
+     *
+     **/
+    public function deleteAction()
+    {
+        if ($user = $this->getCurrentUser()) {
+            $item = $this->findById();
+            
+            // Permission check
+            if ($this->isAllowed('deleteAll') 
+                || ($this->isAllowed('deleteSelf') && $item->wasAddedBy($user))) {
+                $item->delete();
+                $this->redirect->goto('browse');
+            }
+        }
+        
+        $this->_forward('forbidden');
+    }
+    
+    /**
+     * Finds all tags associated with items (used for tag cloud)
+     * 
+     * @return void
+     **/
+    public function tagsAction()
+    {
+        $params = array_merge($this->_getAllParams(), array('type'=>'Item'));
+        $tags = $this->getTable('Tag')->findBy($params);
+        $this->view->assign(compact('tags'));
+    }
+    
+    /**
+     * Browse the items.  Encompasses search, pagination, and filtering of
+     * request parameters.  Should perhaps be split into a separate
+     * mechanism.
+     * 
+     * @return void
+     **/
+    public function browseAction()
+    {   
+        $results = $this->_helper->searchItems();
+        
+        /** 
+         * Now process the pagination
+         * 
+         **/
+        $paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
 
-		return $this->forbiddenAction();
-	}
-	
-	/**
-	 * Wrapping this crap with permissions checks
-	 *
-	 **/
-	public function deleteAction()
-	{
-		if($user = Omeka::loggedIn()) {
-			$item = $this->findById();
-			
-			//Permission check
-			if($this->isAllowed('deleteAll') or ( $this->isAllowed('deleteSelf') and $item->wasAddedBy($user) )) {
-				$item->delete();
-				
-				$this->_redirect('delete', array('controller'=>'items'));
-			}
-		}
-		
-		return $this->forbiddenAction();
-	}
+        //Serve up the pagination
+        $pagination = array('menu'          => $menu, // This hasn't done anything since $menu was never instantiated in ItemsController::browseAction()
+                            'page'          => $results['page'], 
+                            'per_page'      => $results['per_page'], 
+                            'total_results' => $results['total_results'], 
+                            'link'          => $paginationUrl);
+        
+        Zend_Registry::set('pagination', $pagination);
+        
+        fire_plugin_hook('browse_items', $results['items']);
+        
+        $this->view->assign(array('items'=>$results['items'], 'total_items'=>$results['total_items']));
+    }
+    
+    public function elementFormAction()
+    {
+        // var_dump($_POST);exit;
+        $elementId = (int)$_POST['element_id'];
+        $itemId  = (int)$_POST['item_id'];
+        
+        // Re-index the element form posts so that they are displayed in the correct order
+        // when one is removed.
+        $_POST['Elements'][$elementId] = array_merge($_POST['Elements'][$elementId]);
 
-	public function tagsAction()
-	{
-		$this->_forward('browse', 'Tags', null, array('tagType' => 'Item', 'renderPage'=>'items/tags.php'));
-	}
+        $element = $this->getTable('Element')->find($elementId);
+        try {
+            $item = $this->findById($itemId);
+        } catch (Exception $e) {
+            $item = new Item;
+        }
+        
+        $this->view->assign(compact('element', 'item'));
+    }
+    
+    ///// AJAX ACTIONS /////
+    
+    /**
+     * Find or create an item for this mini-form
+     *
+     **/
+    public function changeTypeAction()
+    {
+        if ($id = $_POST['item_id']) {
+            $item = $this->findById($id);
+        } else {
+            $item = new Item;
+        }
+        
+        $item->item_type_id = (int) $_POST['type_id'];
+        $this->view->assign(compact('item'));
+    }
+    
+    /**
+     * Display the form for tags for a given item.
+     * 
+     * @return void
+     **/
+    public function tagFormAction()
+    {
+        $item = $this->findById();
+        $this->view->assign(compact('item'));
+    }
+    
+    /**
+     * Modify the tags for an item (add or remove).  If this is an AJAX request, it will
+     * render the 'tag-list' partial, otherwise it will redirect to the
+     * 'show' action.
+     * 
+     * @return void
+     **/
+    public function modifyTagsAction()
+    {
+        $item = $this->findById();
 
-	public function browseAction()
-	{			
-		$perms = array();
-		$filter = array();
-		$order = array();
-		
-		//Show only public items
-		if( $this->_getParam('public') ) {
-			$perms['public'] = true;
-		}
-		
-		//Here we add some filtering for the request	
-		try {
-			
-			//User-specific item browsing
-			if($userToView = $this->_getParam('user')) {
-						
-				//Must be logged in to view items specific to certain users
-				if(!$this->isAllowed('browse', 'Users')) {
-					throw new Exception( 'May not browse by specific users.' );
-				}
-			
-				if(is_numeric($userToView)) {
-					$filter['user'] = $userToView;
-				}
-			}
-			
-			//Entity-specific browsing
-			//@duplication
-			if($entityToView = $this->_getParam('entity')) {
-				if(!$this->isAllowed('browse', 'Entities')) {
-					throw new Exception( 'May not browse by specific entities' );
-				}
-				
-				if(is_numeric($entityToView)) {
-					$filter['entity'] = $entityToView;
-				}
-			}
-			
-			
-			if($this->_getParam('featured')) {
-				$filter['featured'] = true;
-			}
-			
-			if($collection = $this->_getParam('collection')) {
-				$filter['collection'] = $collection;
-			}
-			
-			if($type = $this->_getParam('type')) {
-				$filter['type'] = $type;
-			}
-			
-			if( ($tag = $this->_getParam('tag')) || ($tag = $this->_getParam('tags')) ) {
-				$filter['tags'] = $tag;
-			}
-			
-			if(($excludeTags = $this->_getParam('withoutTags'))) {
-				$filter['excludeTags'] = $excludeTags;
-			}
-			
-			$recent = $this->_getParam('recent');
-			if($recent !== 'false') {
-				$order['recent'] = true;
-			}
+        //Add the tags
+         
+        if (array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
+            if ($this->isAllowed('tag')) {
+                $tagsAdded = $item->saveForm($_POST);
+                $item = $this->findById();
+            } else {
+                $this->flash('User does not have permission to add tags.');
+            }
+        }
+        
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            $itemId = $this->_getParam('id');
+            return $this->redirect->gotoRoute(array('controller' => 'items', 
+                                                    'action'     => 'show', 
+                                                    'id'         => $itemId), 'id');
+        }
+        
+        $this->view->assign(compact('item'));
+        $this->render('tag-list');
+    }
+    
+    ///// END AJAX ACTIONS /////
+    
+    /**
+     * Change the 'public' or 'featured' status of items
+     * 
+     * @return void
+     **/
+    public function powerEditAction()
+    {
+        /*POST in this format:
+                     items[1][public],
+                     items[1][featured],
+                    items[1][id],
+                    items[2]...etc
+        */
+        if (empty($_POST)) {
+            $this->redirect->goto('browse');
+        }
+        
+        try {
+            if (!$this->isAllowed('makePublic')) {
+                throw new Exception( 'User is not allowed to modify visibility of items.' );
+            }
+            
+            if (!$this->isAllowed('makeFeatured')) {
+                throw new Exception( 'User is not allowed to modify featured status of items' );
+            }
 
-			if($search = $this->_getParam('search')) {
-				$filter['search'] = $search;
-				//Don't order by recent-ness if we're doing a search
-				unset($order['recent']);
-			}
-			
-			//The advanced or 'itunes' search
-			if($advanced = $this->_getParam('advanced')) {
+            if ($itemArray = $this->_getParam('items')) {
+                    
+                //Loop through the IDs given and toggle
+                foreach ($itemArray as $k => $fields) {
+                    
+                    if(!array_key_exists('id', $fields) or
+                    !array_key_exists('public', $fields) or
+                    !array_key_exists('featured', $fields)) { 
+                        throw new Exception( 'Power-edit request was mal-formed!' ); 
+                    }
+                    
+                    $item = $this->findById($fields['id']);
 
-				//We need to filter out the empty entries if any were provided
-				foreach ($advanced as $k => $entry) {					
-					if(empty($entry['field']) or empty($entry['type'])) {
-						unset($advanced[$k]);
-					}
-				}
-				$filter['advanced_search'] = $advanced;
-			};
-
-			if($range = $this->_getParam('range')) {
-				$filter['range'] = $range;
-			}
-			
-			
-		} catch (Exception $e) {
-			$this->flash($e->getMessage());
-		}
-		
-		//Permissions are checked automatically at the SQL level
-		$total_items = $this->getTable('Item')->count();
-		Zend_Registry::set('total_items', $total_items);
-		
-		$params = array_merge($perms, $filter, $order);
-
-		//Get the item count after other filtering has been applied, which is the total number of items found
-		$total_results = $this->getTable('Item')->findBy($params, true);
-		Zend_Registry::set('total_results', $total_results);
-				
-		/** 
-		 * Now process the pagination
-		 * 
-		 **/
-		$paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
-		$options = array(   'page'		=> 	1,
-							'pagination_url' => $paginationUrl);
-							
-		//check to see if these options were changed by request vars
-		$reqOptions = $this->_getAllParams();
-		
-		$options = array_merge($options, $reqOptions);
-				
-		$params['page'] = $options['page'];
-		
-		$params['per_page'] = $this->getItemsPerPage();
-		
-		//Retrieve the items themselves
-		$items = $this->getTable('Item')->findBy($params);
-
-		//Serve up the pagination
-		$pagination = array('menu'=>$menu, 'page'=>$options['page'], 'per_page'=>$params['per_page'], 'total_results'=>$total_results, 'link'=>$options['pagination_url']);
-		Zend_Registry::set('pagination', $pagination);
-		
-		fire_plugin_hook('browse_items', $items);
-		
-		$pass_to_template = compact('total_items', 'items');
-		$pass_to_template['recordset'] = $items;
-		$pass_to_template['record_type'] = 'Item';
-		
-		return $this->render('items/browse.php', $pass_to_template);
-	}
-		
-	/**
-	 * Retrieve the number of items to display on any given browse page.
-	 * This can be modified as a query parameter provided that a user is actually logged in.
-	 *
-	 * @return integer
-	 **/	
-	protected function getItemsPerPage()
-	{
-        //Retrieve the number from the config file
-		$config_ini = Zend_Registry::get('config_ini');
-		$per_page = $config_ini->pagination->per_page;
-                
-        if($this->isAllowed('modifyPerPage') and $this->_getParam('per_page')) {
-			$per_page = $this->_getParam('per_page');
-		}	 
-		
-		return $per_page;   
-	}
-		
-	public function showAction() 
-	{
-		$item = $this->findById();
-		$user = Omeka::loggedIn();
-		
-		//Add the tags
-		 
-		if(array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
-			
-		 	if($this->isAllowed('tag')) {
-				$tagsAdded = $item->saveForm($_POST);
-				$item = $this->findById();
-			}else {
-				$this->flash('User does not have permission to add tags.');
-			}
-		}
-
-		//@todo Does makeFavorite require a permissions check?
-		if($this->getRequest()->getParam('makeFavorite')) {
-			$item->toggleFavorite($user);
-			fire_plugin_hook('make_item_favorite',  $item, $user);
-		}
-
-		$item = $this->findById();
-		
-		Zend_Registry::set('item', $item);
-		
-		fire_plugin_hook('show_item', $item);
-		
-		$pass_to_template = compact("item", 'user');
-		$pass_to_template['record'] = $item;
-		
-		return $this->render('items/show.php', $pass_to_template);
-	}
-	
-	/**
-	 * Find or create an item for this mini-form
-	 *
-	 **/
-	public function changeTypeAction()
-	{
-		if($id = $_POST['item_id']) {
-			$item = $this->findById($id);
-		}else {
-			$item = new Item;
-		}
-		
-		$item->type_id = $_POST['type_id'];
-		
-		return $this->render('items/_type.php', compact('item'));
-	}
-	
-	/**
-	 * 
-	 * @since Supports public and featured changes on items
-	 * @return void
-	 **/
-	public function powerEditAction()
-	{
-		/*POST in this format:
-		 			items[1][public],
-		 			items[1][featured],
-					items[1][id],
-					items[2]...etc
-		*/
-		if(empty($_POST)) {
-			$this->_redirect('items/browse');
-		}
-		
-		
-		try {
-			if(!$this->isAllowed('makePublic')) {
-				throw new Exception( 'User is not allowed to modify visibility of items.' );
-			}
-
-			if(!$this->isAllowed('makeFeatured')) {
-				throw new Exception( 'User is not allowed to modify featured status of items' );
-			}
-			
-			if($item_a = $this->_getParam('items')) {
-										
-				//Loop through the IDs given and toggle
-				foreach ($item_a as $k => $fields) {
-
-					$item = $this->findById($fields['id']);
-		
-					//Process the public field
-					
-					//Existing status must be compared against new status for the sake of plugin hooks
-					$old = $item->public;
-					$new = array_key_exists('public', $fields);
-					
-					//If the item was made public, fire the plugin hook
-					if(!$old and $new) {
-						fire_plugin_hook('make_item_public', $item);
-					}
-									
-					//If public has been checked
-					$item->public = $new;
-					
-					$item->featured = array_key_exists('featured', $fields);
-									
-					$item->save();
-					
-				}		
-			}
-			$this->flashSuccess('Changes were successful');
-			
-		} catch (Exception $e) {
-			$this->flash($e->getMessage());
-		}
-		
-		$this->_redirect($_SERVER['HTTP_REFERER']);
-	}
-	
+                    //If public has been checked
+                    $item->setPublic($fields['public']);
+                    
+                    $item->setFeatured($fields['featured']);
+                    
+                    $item->save();
+                }
+            }
+            
+            $this->flashSuccess('Changes were successful');
+            
+        } catch (Exception $e) {
+            $this->flash($e->getMessage());
+        }
+        
+        $this->redirect->gotoUrl($_SERVER['HTTP_REFERER']);
+    }
+    
 }
-?>

@@ -1,13 +1,21 @@
 <?php 
 /**
-* Modelled after sfContext in Symfony framework
-*
-* Kind of a bootstrap class
-*
-* Stores all (essentially global) data that is needed by the application
-*
-* Examples of this include, but are not limited to: database connection, config file data, ACL, Auth, logger, etc.
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * Modelled after sfContext in Symfony framework
+ *
+ * Kind of a bootstrap class, this stores all (essentially global) data that
+ * is needed by the application.  Examples of this include, but are not 
+ * limited to: database connection, config file data, ACL, Auth, logger, etc.
+ * 
+ * @package Omeka
+ * @author CHNM
+ **/
 class Omeka_Context
 {
 	private static $_instance;
@@ -19,11 +27,12 @@ class Omeka_Context
         $_auth, 
         $_logger,
         $_front,
-        $_options,
+        $_options = array(),
         $_pluginBroker,
         $_request,
         $_response,
-        $_user;
+        $_user,
+        $_installed = true; // Omeka is thought to be installed until proven otherwise.
     
 	/**
 	 * Singleton instance
@@ -46,11 +55,26 @@ class Omeka_Context
         self::$_instance = new self();
     }
     
+    /**
+     * Verify that Omeka has been installed.  
+     *
+     * The criteria for Omeka being installed includes:
+     * - the existence of the database options, which would be missing if the
+     *  'options' table was either empty or non-existent.
+     * 
+     **/
+    public function omekaIsInstalled()
+    {        
+        return $this->_installed;
+    }
+    
+    public function setOmekaIsInstalled($flag)
+    {
+        $this->_installed = (boolean)$flag;
+    }
+    
 	public function setDb(Omeka_Db $db)
 	{
-        //@todo GET RID OF THIS WHEN possible to be entirely dependent on Omeka_Context
-        Zend_Registry::set('db', $db);  
-         
 	    $this->_db = $db;
 	}
 	
@@ -74,11 +98,8 @@ class Omeka_Context
 	    return $this->_config[$name];
 	}
 	
-	public function setAcl(Omeka_Acl $acl)
+	public function setAcl($acl)
 	{
-	    //@todo Remove when safe
-	    Zend_Registry::set('acl', $acl);
-	    
 	    $this->_acl = $acl;
 	}
 	
@@ -89,9 +110,6 @@ class Omeka_Context
 	
 	public function setAuth(Zend_Auth $auth)
 	{
-        //Register the Authentication mechanism to be able to share it
-        Zend_Registry::set('auth', $auth);
-        
         $this->_auth = $auth;	    
 	}
 	
@@ -100,7 +118,7 @@ class Omeka_Context
 	    return $this->_auth;
 	}
 	
-	public function setLogger(Omeka_Logger $logger)
+	public function setLogger(Zend_Log $logger)
 	{
 	    $this->_logger = $logger;
 	}
@@ -111,9 +129,7 @@ class Omeka_Context
 	}
 	
 	public function setOptions($options)
-	{
-	    Zend_Registry::set('options', $options);
-	    
+	{	    
 	    $this->_options = $options;
 	}
 	
@@ -144,12 +160,12 @@ class Omeka_Context
     
     public function setRequest($request)
     {
-        $this->_request = $request;
+        return Zend_Controller_Front::getInstance()->setRequest($request);
     }
     
     public function getRequest()
     {
-        return $this->_request;
+        return Zend_Controller_Front::getInstance()->getRequest();
     }
     
     public function setResponse($response)
@@ -161,6 +177,14 @@ class Omeka_Context
     {
         return $this->_response;
     }
+    
+    public function getPluginBroker()
+    {
+        return $this->_pluginBroker;
+    }
+    
+    public function setPluginBroker($broker)
+    {
+        $this->_pluginBroker = $broker;
+    }
 }
- 
-?>

@@ -1,6 +1,6 @@
 <?php 
 require_once MODEL_DIR.DIRECTORY_SEPARATOR.'File.php';	
-class FileTestCase extends OmekaTestCase
+class FileTestCase extends PHPUnit_Framework_TestCase
 {
 	function testSanitizeFilename()
 	{
@@ -34,7 +34,7 @@ class FileTestCase extends OmekaTestCase
 			
 			$sanitized = $file->sanitizeFilename($test);
 			
-			$this->assertEqual($sanitized,$desiredOutput);
+			$this->assertEquals($sanitized,$desiredOutput);
 		}
 	}
 }

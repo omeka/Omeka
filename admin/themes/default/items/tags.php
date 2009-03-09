@@ -1,8 +1,8 @@
 <?php head(); ?>
-<?php common('archive-nav'); ?>
+
 <div id="primary">
 <h2>Tags</h2>
-<?php if ( total_results() ): ?>
+<?php if ( count($tags) ): ?>
 	<?php
 	echo tag_cloud($tags, uri('items/browse/'));
 	?>

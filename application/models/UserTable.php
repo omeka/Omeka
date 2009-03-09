@@ -1,80 +1,107 @@
 <?php 
 /**
-* 
-*/
-class UserTable extends Omeka_Table
-{
-	
-	/**
-	 * Very similar in principle to the Item_Table::getItemSelectSQL()
-	 *
-	 * @see Item_Table::getItemSelectSQL()
-	 * @return Omeka_Select
-	 **/
-	private function getUserSelectSQL()
-	{
-		$select = new Omeka_Select;
-		
-		$db = get_db();
-		
-		$select->from("$db->User u", "
-					u.id,
-					u.username,
-					u.password,
-					u.active,
-					u.role,
-					u.entity_id, 
-					e.first_name, 
-					e.middle_name, 
-					e.last_name, 
-					e.institution, 
-					e.email, 
-					e.`type` as entity_type")
-				->innerJoin("$db->Entity e", "e.id = u.entity_id");
-
-		return $select;
-	}
-	
-	public function findAll()
-	{
-		$select = $this->getUserSelectSQL();
-		
-		return $this->fetchObjects($select);
-	}
-	
-	public function find($id)
-	{
-		$select = $this->getUserSelectSQL();
-		
-		$select->where("u.id = ?")
-				->limit(1);
-		$user = $this->fetchObjects($select, array((int) $id), true);
-
-		return $user;
-	}
-	
-	public function findByEntity($entity_id)
-	{
-		$select = $this->getUserSelectSQL();
-		
-		$db = get_db();
-		
-		$select->where("e.id = ?")
-				->limit(1);
-				
-		$user = $this->fetchObjects($select, array((int) $entity_id), true);
-		
-		return $user;
-	}
-	
-	public function findByEmail($email)
-	{
-		$select = $this->getUserSelectSQL();
-		
-		$select->where("e.email = ?");
-		
-		return $this->fetchObjects($select, array($email), true);
-	}
-}
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
  
-?>
+/**
+ * @package Omeka
+ * @subpackage Models
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
+class UserTable extends Omeka_Db_Table
+{
+    public function getSelect()
+    {
+        $select = new Omeka_Db_Select;
+        
+        $db = $this->getDb();
+        
+        $select->from(array('u'=>$db->User), 
+                      array( 'u.id',
+                             'u.username',
+                             'u.password',
+                             'u.active',
+                             'u.role',
+                             'u.entity_id', 
+                             'e.first_name', 
+                             'e.middle_name', 
+                             'e.last_name', 
+                             'e.email',
+                             'e.institution'))
+                      ->joinInner(array('e'=>$db->Entity), 
+                                  "e.id = u.entity_id", array());
+        return $select;
+    }
+    
+    protected function _getColumnPairs()
+    {
+        return array(
+            'u.id', 
+            'u.name' => new Zend_db_Expr( 
+                'CONCAT_WS(" ", e.first_name, e.middle_name, e.last_name)')
+            );
+    }
+    
+    public function findByEntity($entity_id)
+    {
+        $select = $this->getSelect();
+        $select->where("e.id = ?")->limit(1);
+                
+        return $this->fetchObject($select, array((int) $entity_id));        
+    }
+    
+    public function findByEmail($email)
+    {
+        $select = $this->getSelect();
+        $select->where("e.email = ?")->limit(1);
+        return $this->fetchObject($select, array($email));
+    }
+    
+    public function applySearchFilters($select, $params)
+    {
+        // Show only users with a specific role.
+        if (array_key_exists('role', $params) and !empty($params['role'])) {
+            $select->where('u.role = ?', $params['role']);
+        }
+        
+        // Show only users who are active
+        if (array_key_exists('active', $params) and $params['active'] !== '') {
+            $select->where('u.active = ?', (int)$params['active']);
+        }
+        
+        // Sort by role, institution name, first/last name, username.
+        // Order can be ASC or DESC
+        if (array_key_exists('sort', $params)) {
+            $sortOrder = (array_key_exists('sortOrder', $params) 
+                and strtolower($params['sortOrder']) == 'desc') ? 
+                'DESC' : 'ASC';
+            
+            switch ($params['sort']) {
+                case 'role':
+                    $orderClause = 'u.role ' . $sortOrder;
+                    break;
+                case 'institution':
+                    $orderClause = 'e.institution ' . $sortOrder;
+                    break;
+                case 'first_name':
+                    $orderClause = 'e.first_name ' . $sortOrder;
+                    break;
+                case 'last_name':
+                    $orderClause = 'e.last_name ' . $sortOrder;
+                    break;
+                case 'username':
+                    $orderClause = 'u.username ' . $sortOrder;
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            
+            $select->order($orderClause);
+        }
+    }
+}

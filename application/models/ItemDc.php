@@ -1,33 +1,36 @@
 <?php 
 /**
-* 
-*/
-class ItemDc extends Omeka_Record_Feed_Dc
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * @package Omeka
+ * @author CHNM
+ * @copyright Center for History and New Media, 2007-2008
+ **/
+class ItemDc
 {
-    // Set the Dublin Core Metadata Element Set (DCMES).
-    public $dcmes = array('contributor', 'coverage', 'creator', 'date', 
-                          'description', 'format', 'identifier', 'language', 
-                          'publisher', 'relation', 'rights', 'source', 
-                          'subject', 'title', 'type');
-
     public function recordToDc($item)
-    {
-        require_once HELPERS;
-        
-        $xml .= '
-    <rdf:Description rdf:about="' . item_permalink_url($item) . '">';
+    {      
+        $dcElements = $item->getElementsBySetName('Dublin Core');
+    
+        $xml = "\n" . '<rdf:Description rdf:about="' . abs_item_uri($item) . '">';
         // Iterate throught the DCMES.
-        foreach ($this->dcmes as $element) {
-            if (isset($item->$element) && strlen($item->$element)) {
-                $xml .= '
-        <dc:' . $element . '>' . htmlspecialchars($item->$element) . '</dc:' . $element . '>';
+        foreach ($dcElements as $element) {
+            $elementName = $element->name;
+            if ($text = item('Dublin Core', $elementName, 'all')) {
+                foreach ($text as $k => $v) {
+                    if (!empty($v)) {
+                        $xml .= "\n" . '<dc:' . strtolower($elementName) . '><![CDATA[' 
+                            . $v . ']]></dc:' . strtolower($elementName) . '>';
+                    }
+                }
             }
         }
-        $xml .= '
-    </rdf:Description>';
-        
+        $xml .= "\n" . '</rdf:Description>';
         return $xml;        
     }
 }
- 
-?>

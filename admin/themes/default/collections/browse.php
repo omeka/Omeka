@@ -1,45 +1,67 @@
-<?php head(array('title'=>'Browse Collections', 'body_class'=>'collections')); ?>
-<?php common('archive-nav'); ?>
+<?php head(array('title'=>'Browse Collections', 'bodyclass'=>'collections')); ?>
+<h1>Collections (<?php echo $total_records; ?> total)</h1>
+<?php if (has_permission('Collections', 'add')): ?>
+	<p id="add-collection" class="add-button"><a href="<?php echo uri('collections/add'); ?>" class="add add-collection">Add a Collection</a></p>
+<?php endif; ?>
+
 <div id="primary">
-	<h1 class="floater">Collections</h1>
-	<a href="<?php echo uri('collections/add'); ?>" id="add-collection" class="add-collection">Add a Collection</a>
+    
+	<?php if (has_collections()): ?>
+        <div class="pagination"><?php echo pagination_links(); ?></div>
+        
+		<table id="items" class="simple" cellspacing="0" cellpadding="0">
+        	<thead>
+        		<tr>
+        		<th scope="col">ID</th>
+        		<th scope="col">Name</th>
+        		<th scope="col">Collectors</th>
+        		<th scope="col">Date Added</th>
+        		<?php if (has_permission('Collections', 'edit')): ?>
+            		<th scope="col">Edit?</th>       		  
+        		<?php endif; ?>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	    <?php $key = 0;?>
+		<?php while (loop_collections()): ?>
 		
-		<?php foreach($collections as $collection): ?>
-		
-			<div class="collection">
-			<h2><a href="<?php echo uri('collections/show/'.$collection->id); ?>"><?php echo h($collection->name); ?></a></h2>
-
-			<div class="description">
-			<h3>Description</h3>
-			<p><?php echo nls2p($collection->description); ?><p>
-			</div>
-
-			<div class="meta">
-			<?php if($time = $collection->added):?>
-				<h3>Date Created</h3> 
-				<p><?php echo date('m.d.Y', strtotime($time)); ?></p>
-				<?php endif; ?>
-			</div>
+		    <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
+            	<td scope="row"><?php echo collection('id');?>
+                </td> 
+            	<td class="title"><?php echo link_to_collection(); ?></td>
+            	<td>
+            	<?php if (collection_has_collectors()): ?> 
+            	    <ul>
+            	        <li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
+    			    </ul>
+    			<?php else: ?>
+    			    <ul>
+    			        <li>No collectors</li>
+    			    </ul>
+    			<?php endif; ?>
+    			
+    			</td>	
+            	<td><?php if($time = collection('Date Added')):?>
+        		    <?php echo date('m.d.Y', strtotime($time)); ?>
+        		<?php endif; ?>
+				</td>
+				<?php if (has_permission('Collections', 'edit')): ?>
+				<td>
+				    <?php echo link_to_collection('Edit', array('class'=>'edit'), 'edit'); ?>
+				</td>
+			    <?php endif; ?>
+            </tr>
+        
 			
-			<div class="meta">	
-			<h3>Collectors</h3>
-			<ul>
-			<?php if(has_collectors($collection)): ?> 
-			<?php foreach( $collection->Collectors as $k => $collector ): ?>
-			<li><?php echo h($collector->name); ?></li>
-			<?php endforeach; ?>
-			<?php else: ?>
-			<li>No collectors</li>
-			<?php endif; ?>
-			</ul>
-			</div>
 
-			<div class="meta">	
-			<p class="viewitems"><a href="<?php echo uri('items/browse/?collection='.$collection->id); ?>">View Items in <?php echo $collection->name; ?></a></p>
-			</div>
-					
-			</div><!--end collection-->
-
-		<?php endforeach; ?>
+		<?php endwhile; ?>
+		</tbody>
+		</table>
+	<?php else: ?>
+	    <p>There are no collections in your archive. Why don't you <a href="<?php echo uri('collections/add'); ?>" >add one</a>?</p>
+    	
+	<?php endif; ?>
+	
+	<?php fire_plugin_hook('admin_append_to_collections_browse_primary', $collections); ?>
 </div>		
 <?php foot(); ?>
