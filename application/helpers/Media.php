@@ -41,6 +41,7 @@ class Omeka_View_Helper_Media
         'image/jpeg'=>'image',
         'image/gif'=>'image',
         'image/bmp'=>'image',
+        'image/x-ms-bmp'=>'image',
         'image/png'=>'image',
         'image/tiff'=>'image',
 	    'video/avi'=>'wmv',
