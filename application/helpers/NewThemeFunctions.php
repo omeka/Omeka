@@ -762,9 +762,9 @@ function item_fullsize($props = array(), $index = 0)
  * @param string Selected value
  * @return string HTML
  **/
-function select_item_type($props=array(), $value=null)
+function select_item_type($props=array(), $value=null, $label=null)
 {
-    return _select_from_table('ItemType', $props, $value);	
+    return _select_from_table('ItemType', $props, $value, $label);	
 }
 
 /**
@@ -777,7 +777,7 @@ function select_item_type($props=array(), $value=null)
  * @param string|integer Optional value of the selected option.
  * @return string HTML
  **/
-function select_item_type_elements($props = array(), $value = null)
+function select_item_type_elements($props = array(), $value = null, $label = null)
 {
     // We need a custom SQL statement for this particular select input, since we
     // are retrieving the elements in a specific set in a specific order.
@@ -790,7 +790,7 @@ function select_item_type_elements($props = array(), $value = null)
             ->order('e.name ASC'); // Sort alphabetically
     $pairs = $db->fetchPairs($sql);
     
-    return select($props, $pairs, $value);    
+    return select($props, $pairs, $value, $label);    
 }
 
 /**
@@ -799,10 +799,10 @@ function select_item_type_elements($props = array(), $value = null)
  * @param mixed
  * @return string HTML for a <select> input.
  **/
-function _select_from_table($tableClass, $props = array(), $value = null)
+function _select_from_table($tableClass, $props = array(), $value = null, $label = null)
 {
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm();
-    return select($props, $options, $value);
+    return select($props, $options, $value, $label);
 }
 
 /**
@@ -824,9 +824,9 @@ function select_item_type_for_item($props=array())
  * @param string
  * @return string
  **/
-function select_collection($props = array(), $value=null)
+function select_collection($props = array(), $value=null, $label=null)
 {
-    return _select_from_table('Collection', $props, $value);
+    return _select_from_table('Collection', $props, $value, $label);
 }
 
 /**
@@ -834,25 +834,25 @@ function select_collection($props = array(), $value=null)
  * @param mixed
  * @return string HTML
  **/
-function select_element($props = array(), $value = null)
+function select_element($props = array(), $value = null, $label=null)
 {
-    return _select_from_table('Element', $props, $value);
+    return _select_from_table('Element', $props, $value, $label);
 }
 
 /**
  * @uses _select_from_table()
  */
-function select_user($props = array(), $value=null)
+function select_user($props = array(), $value=null, $label=null)
 {
-    return _select_from_table('User', $props, $value);
+    return _select_from_table('User', $props, $value, $label);
 }
 
 /**
  * @uses _select_from_table()
  */
-function select_entity($props = array(), $value = null)
+function select_entity($props = array(), $value = null, $label=null)
 {
-    return _select_from_table('Entity', $props, $value);
+    return _select_from_table('Entity', $props, $value, $label);
 }
 
 /**
