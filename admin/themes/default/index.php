@@ -26,7 +26,7 @@
                         (<?php echo $latestVersion; ?>).
                         <a href="http://omeka.org/download/">Upgrade</a>
                     </div>
-        <?        endif; 
+        <?php       endif; 
               endif; ?>
             
 			<div id="getting-started">
