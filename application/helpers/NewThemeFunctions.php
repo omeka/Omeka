@@ -593,7 +593,7 @@ function display_random_featured_item($withImage=false)
 	   $itemDescription = item('Dublin Core', 'Description', array('snippet'=>150));
 	   $html .= '<p class="item-description">' . $itemDescription . '</p>';
 	} else {
-	   $html .= '<p>You have no featured items.</p>';
+	   $html .= '<p>No featured items are available.</p>';
 	}
     
     return $html;
@@ -617,7 +617,7 @@ function display_random_featured_collection()
         }
         
     } else {
-        $html .= '<p>You have no featured collections.</p>';
+        $html .= '<p>No featured collections are available.</p>';
     }
     return $html;
 }
