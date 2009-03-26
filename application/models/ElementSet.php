@@ -20,7 +20,7 @@ class ElementSet extends Omeka_Record
     public $name;
     public $description;
     
-    protected $_elementsToSave;
+    protected $_elementsToSave = array();
     
     const DEFAULT_RECORD_TYPE = 'Item';
     const DEFAULT_DATA_TYPE = 'Text';
