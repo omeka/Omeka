@@ -78,14 +78,13 @@ class TagTable extends Omeka_Db_Table
      * Adds an ORDER BY clause to the SELECT statment based on the given criteria
      * 
      * @param string|array
+     * @see applySearchFilters()
      * @return void
      **/
     public function sortBy($select, $sortCriteria)
     {           
         // make an array of sortCriteria
-        if (!is_array($sortCriteria)) {
-            $sortCriteria = array($sortCriteria);
-        }
+        $sortCriteria = (array) $sortCriteria;
         
         // convert sortCriteria into an array of order strings
         $orderStrings = array();
@@ -144,11 +143,11 @@ class TagTable extends Omeka_Db_Table
      * @param string
      * @return void
      **/
-    public function filterByTagNameLike($select, $partialTagName) {
+    public function filterByTagNameLike($select, $partialTagName) 
+    {
         $select->where("`t`.`name` LIKE CONCAT('%', ?, '%')", $partialTagName);
     }
-    
-        
+         
     /**
      * Retrieve a certain number of tags
      *

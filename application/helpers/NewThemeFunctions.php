@@ -456,7 +456,7 @@ function get_user_by_id($userId)
 }
 
 /**
- * @see get_items()
+ * @see TagTable::applySearchFilters() for params
  * @return array
  */
 function get_tags($params = array(), $limit = 10)
