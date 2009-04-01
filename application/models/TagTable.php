@@ -77,26 +77,42 @@ class TagTable extends Omeka_Db_Table
     /**
      * Adds an ORDER BY clause to the SELECT statment based on the given criteria
      * 
-     * @param string
+     * @param string|array
      * @return void
      **/
     public function sortBy($select, $sortCriteria)
-    {
-        switch ($sortCriteria) {
-            case 'recent':
-                $select->order('tg.time DESC');
-                break;
-            case 'alpha':
-                $select->order('t.name ASC');
-                break;
-            case 'most':
-                $select->order('tagCount DESC');
-                break;
-            case 'least':
-                $select->order('tagCount ASC');
-                break;
-            default:
-                break;
+    {           
+        // make an array of sortCriteria
+        if (!is_array($sortCriteria)) {
+            $sortCriteria = array($sortCriteria);
+        }
+        
+        // convert sortCriteria into an array of order strings
+        $orderStrings = array();
+        foreach($sortCriteria as $sortCrit) {
+            switch ($sortCrit) {
+                case 'recent':
+                    $orderStrings[] = 'tg.time DESC';
+                    break;
+                case 'alpha':
+                    $orderStrings[] = 't.name ASC';
+                    break;
+                case 'reverse_alpha':
+                    $orderStrings[] = 't.name DESC';
+                    break;
+                case 'most':
+                    $orderStrings[] = 'tagCount DESC';
+                    break;
+                case 'least':
+                    $orderStrings[] = 'tagCount ASC';
+                    break;
+                default:
+                    break;
+            }
+        }
+                
+        if (count($orderStrings) > 0) {
+            $select->order($orderStrings);
         }
     }
     
@@ -120,17 +136,31 @@ class TagTable extends Omeka_Db_Table
             $select->where("tg.type = ?", (string) $type);
         }
     }
+    
+    /**
+     * Filter SELECT statement based on whether the tag contains the partial tag name
+     * 
+     * @param Omeka_Db_Select
+     * @param string
+     * @return void
+     **/
+    public function filterByTagNameLike($select, $partialTagName) {
+        $select->where("`t`.`name` LIKE CONCAT('%', ?, '%')", $partialTagName);
+    }
+    
         
     /**
      * Retrieve a certain number of tags
      *
      * @param Omeka_Db_Select 
      * @param array $params
-     *         'sort' => 'recent', 'least', 'most', 'alpha'
+     *         'sort' => 'recent', 'least', 'most', 'alpha', 'reverse_alpha'
      *        'limit' => integer
      *         'record' => instanceof Omeka_Record
      *        'entity' => entity_id
      *        'user' => user_id
+     *        'like' => partial_tag_name
+     *        'type' => tag_type
      * @return void
      **/
     public function applySearchFilters($select, $params=array())
@@ -154,12 +184,17 @@ class TagTable extends Omeka_Db_Table
             $this->filterByUserOrEntity($select, (int) $filterId, !empty($params['user']));
         }
 
+        if (isset($params['like'])) {
+            $this->filterByTagNameLike($select, $params['like']);
+        }
+
         if ($params['sort']) {
-            $this->sortBy($select, (string) $params['sort']);
+            $this->sortBy($select, $params['sort']);
         }
                         
         $select->group("t.id");
     }
+    
         
     /**
      * @internal SELECT statements should always pull a count of how many times 
