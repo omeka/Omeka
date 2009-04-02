@@ -295,6 +295,66 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
 }
 
 /**
+ * Inserts a new item type
+ *
+ * @param array $metadata 
+ * @param array $elementTexts 
+ * @return ItemType
+ * $metadata = array(
+ *     'name'       => [string], 
+ *     'description'=> [string]
+ * );
+ * $elementInfos = array(
+ *      [element name] => array(
+ *             'description' => [string],
+ *             'data_type_name' => [string]
+ *         ), 
+ *      [element name] => array(
+ *             'description' => [string],
+ *             'data_type_name' => [string]
+ *         ), 
+ *      [element name] => array(
+ *             'description' => [string],
+ *             'data_type_name' => [string]
+ *         ), 
+ *         [element name] => array(
+ *             'description' => [string],
+ *             'data_type_name' => [string]
+ *        )
+ *    );
+ * @throws Exception
+ **/
+function insert_item_type($metadata = array(), $elementInfos = array()) {
+    
+    $settableMetadata = array('name', 'description');
+    
+    // make sure the item type does not already exist
+    $db = get_db();
+    $itemType = $db->getTable('ItemType')->findBySql('name = ?', array($metadata['name']), true) ;
+    
+    if (!empty($itemType)) {
+        throw new Exception('Cannot insert item type ' . $metadata['name'] . ' because it already exists.');
+    }
+    
+    $itemType = new ItemType;
+    foreach ($settableMetadata as $value) {
+        if (array_key_exists($value, $metadata)) {
+            $itemType->$value = $metadata[$value];
+        }
+    }
+    $itemType->forceSave();
+    
+    foreach($elementInfos as $elementName => $elementConfig) {        
+        $elementDescription = $elementConfig['description'];
+        $elementDataTypeName = $elementConfig['data_type_name'];
+        $itemType->addElementByName($elementName, $elementDescription, $elementDataTypeName);   
+    }
+    
+    return $itemType;    
+}
+
+
+/**
  * $metadata = array(
  *     'name'       => [string], 
  *     'description'=> [string], 
