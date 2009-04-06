@@ -42,12 +42,17 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
         $infoArray = array();
         
         if (is_array($files)) {
-            foreach ($files as $key => $value) {
-                // Convert an array of strings, an array of arrays, or a 
-                // mix of the two, into an array of arrays.
-                $infoArray[$key] = !is_array($value) 
-                                      ? array('source'=>$value) 
-                                      : $value;
+            // If we have an array representing a single source.
+            if (array_key_exists('source', $files)) {
+                $infoArray = array($files);
+            } else {
+                foreach ($files as $key => $value) {
+                    // Convert an array of strings, an array of arrays, or a 
+                    // mix of the two, into an array of arrays.
+                    $infoArray[$key] = !is_array($value) 
+                                          ? array('source'=>$value) 
+                                          : $value;
+                }
             }
         // If it's a string, make sure that represents the 'source' attribute.
         } else if (is_string($files)) {
