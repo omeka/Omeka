@@ -59,10 +59,8 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
         }        
     }
     
-    protected function _fileIsValid($info)
-    {
-        $source = $this->_getFileSource($info);
-        
+    protected function _validateSource($source, $info)
+    {        
         if ($info['rename']) {
             if (!is_writable(dirname($source))) {
                 throw new Omeka_File_Ingest_InvalidException("File's parent directory is not writable or does not exist: $source");

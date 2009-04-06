@@ -95,10 +95,14 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
     protected function _transferFile($info, $originalFilename)
     {        
         $fileSourcePath = $this->_getFileSource($info);
+        $this->_validateSource($fileSourcePath, $info);
+        
         $fileDestinationPath = $this->_getDestination($originalFileName);
         $this->_transfer($fileSourcePath, $fileDestinationPath);
         return $fileDestinationPath;
     }
     
     abstract protected function _transfer($source, $destination);
+    
+    abstract protected function _validateSource($source, $info);
 }

@@ -85,23 +85,20 @@ abstract class Omeka_File_Ingest_Abstract
     abstract protected function _getOriginalFilename($fileInfo);
     
     /**
-     * Transfer the file to the archive.
+     * Transfer the file to the archive.  
+     * 
+     * To indicate validation errors, Omeka_File_Ingest_InvalidException can be
+     * thrown at any time.  To indicate other types of non-recoverable errors 
+     * related to file ingest, throw Omeka_File_Ingest_Exception.
      * 
      * @param array $fileInfo
      * @param string $originalFilename
+     * @throws Omeka_File_Ingest_InvalidException
+     * @throws Omeka_File_Ingest_Exception
      * @return string Real path to the transferred file.
      **/
     abstract protected function _transferFile($fileInfo, $originalFilename);
-    
-    /**
-     * Determine whether or not the file is valid.
-     * 
-     * FIXME: Refactor.
-     * @param array $fileInfo
-     * @return boolean
-     **/
-    abstract protected function _fileIsValid($fileInfo);
-    
+        
     /**
      * Ingest classes receive arbitrary information.  This method needs to
      * parse that information into an iterable array so that multiple files
@@ -161,9 +158,7 @@ abstract class Omeka_File_Ingest_Abstract
         $fileObjs = array();
         foreach ($fileInfoArray as $file) {            
             
-            try {
-                $this->_fileIsValid($file);
-                
+            try {                
                 // This becomes the file's identifier (stored in the 
                 // 'original_filename' column and used to derive the archival filename).
                 $originalFileName = $this->_getOriginalFilename($file);

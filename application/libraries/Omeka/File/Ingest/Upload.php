@@ -84,32 +84,14 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
     protected function _transferFile($fileInfo, $originalFilename)
     {
         // Upload a single file at a time.
-        $this->_adapter->receive($fileInfo['form_index']);
-        
+        if (!$this->_adapter->receive($fileInfo['form_index'])) {
+            throw new Omeka_File_Ingest_InvalidException(join("\n\n", $this->_adapter->getMessages()));
+        }
+
         // Return the path to the file as it is listed in the archive.
         return $this->_adapter->getFileName($fileInfo['form_index']);
     }
-    
-    /**
-     * Use the adapter to determine whether or not any of the uploaded files
-     * are invalid.
-     * 
-     * @throws Omeka_Validator_Exception
-     * @param array
-     * @return void
-     **/
-    protected function _fileIsValid($fileInfo)
-    {
-        try {
-            if (!$this->_adapter->isValid($fileInfo['form_index'])) {
-                throw new Omeka_File_Ingest_InvalidException(join("\n\n", $this->_adapter->getMessages()));
-            }            
-        } catch (Zend_File_Transfer_Exception $e) {
-            // Rethrow under a different name.
-            throw new Omeka_File_Ingest_InvalidException('Upload: ' . $e->getMessage());
-        }
-    }
-    
+        
     /**
      * Use the adapter to extract the array of file information.
      * 
