@@ -6,7 +6,6 @@ class Omeka_File_Ingest
     protected $_item;
     protected $_files = array();
     protected $_options = array();
-    protected $_type;
     
     protected $_adapter;
     
