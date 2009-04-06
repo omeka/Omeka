@@ -65,14 +65,14 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
         
         if ($info['rename']) {
             if (!is_writable(dirname($source))) {
-                throw new Exception("File's parent directory is not writable or does not exist: $source");
+                throw new Omeka_File_Ingest_Exception("File's parent directory is not writable or does not exist: $source");
             }
             if (!is_writable($source)) {
-                throw new Exception("File is not writable or does not exist: $source");
+                throw new Omeka_File_Ingest_Exception("File is not writable or does not exist: $source");
             }
         } else {
             if (!is_readable($source)) {
-                throw new Exception("File is not readable or does not exist: $source");
+                throw new Omeka_File_Ingest_Exception("File is not readable or does not exist: $source");
             }
         }
     }

@@ -59,7 +59,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
     {
         // Only throw an exception here because this is our fallback.
         if (!ini_get('allow_url_fopen')) {
-            throw new Exception('fopen stream wrappers must be enabled in order to copy files from a URL!');
+            throw new Omeka_File_Ingest_Exception('fopen stream wrappers must be enabled in order to copy files from a URL!');
         }
         
         return true;
@@ -76,7 +76,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         }
         
         if (!$transferred) {
-            throw new Exception('Could not transfer the file from "' . $source 
+            throw new Omeka_File_Ingest_Exception('Could not transfer the file from "' . $source 
                               . '" to "' . $destination . '"!');
         }
     }
@@ -85,7 +85,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
     {
         $source = $this->_getFileSource($info);
         if (!fopen($source, 'r')) {
-            throw new Exception("URL is not readable or does not exist: $source");
+            throw new Omeka_File_Ingest_Exception("URL is not readable or does not exist: $source");
         }
     }    
 }

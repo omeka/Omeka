@@ -58,7 +58,7 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
         } else if (is_string($files)) {
             $infoArray = array(array('source' => $files));
         } else {
-            throw new Exception('File info is incorrectly formatted!');
+            throw new Omeka_File_Ingest_Exception('File info is incorrectly formatted!');
         }
         
         return $infoArray;

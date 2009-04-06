@@ -100,8 +100,13 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
      **/
     protected function _fileIsValid($fileInfo)
     {
-        if (!$this->_adapter->isValid($fileInfo['form_index'])) {
-            throw new Omeka_Validator_Exception(join("\n\n", $this->_adapter->getMessages()));
+        try {
+            if (!$this->_adapter->isValid($fileInfo['form_index'])) {
+                throw new Omeka_File_Ingest_Exception(join("\n\n", $this->_adapter->getMessages()));
+            }            
+        } catch (Zend_File_Transfer_Exception $e) {
+            // Rethrow under a different name.
+            throw new Omeka_File_Ingest_Exception('Upload: ' . $e->getMessage());
         }
     }
     

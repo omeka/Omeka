@@ -72,7 +72,7 @@ abstract class Omeka_File_Ingest_Abstract
             $instance->setOptions($options);
             return $instance;
         } else {
-            throw new Exception('Could not load ' . $className);
+            throw new Omeka_File_Ingest_Exception('Could not load ' . $className);
         }
     }
     
@@ -154,55 +154,69 @@ abstract class Omeka_File_Ingest_Abstract
      **/
     final public function ingest($fileInfo)
     {
+        // Don't catch or suppress parsing errors.
         $fileInfoArray = $this->_parseFileInfo($fileInfo);
         
         // Iterate the files.
         $fileObjs = array();
         foreach ($fileInfoArray as $file) {            
             
-            // If the file is invalid, throw an error or continue to the next file.
-            if (!$this->_isValid($file)) {
-                continue;
-            }
+            try {
+                $this->_fileIsValid($file);
+                
+                // This becomes the file's identifier (stored in the 
+                // 'original_filename' column and used to derive the archival filename).
+                $originalFileName = $this->_getOriginalFilename($file);
 
-            // This becomes the file's identifier (stored in the 
-            // 'original_filename' column and used to derive the archival filename).
-            $originalFileName = $this->_getOriginalFilename($file);
-                        
-            $fileDestinationPath = $this->_transferFile($file, $originalFileName);
-            
-            // Create the file object.
-            if ($fileDestinationPath) {
-                $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $file['metadata']);
+                $fileDestinationPath = $this->_transferFile($file, $originalFileName);
+
+                // Create the file object.
+                if ($fileDestinationPath) {
+                    $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $file['metadata']);
+                }
+                
+            } catch (Omeka_File_Ingest_Exception $e) {
+                if ($this->_ignoreIngestErrors()) {
+                    $this->_logException($e);
+                    continue;
+                } 
+                
+                // If not suppressed, rethrow it.
+                throw $e;
             }
         }
         return $fileObjs;
     }
     
     /**
-     * Check to see whether or not the file is valid.
+     * Determine whether or not to ignore file ingest errors.  Based on the 
+     * 'ignore_invalid_files', which is false by default.
      * 
-     * @return boolean Return false if we are ignoring invalid files and an 
-     * exception was thrown from one of the adapter classes.  
+     * @return boolean
      **/
-    private function _isValid($fileInfo)
+    private function _ignoreIngestErrors()
     {
-        $ignore = $this->_options['ignore_invalid_files'];
-        
-        // If we have set the ignore flag, suppress all exceptions that are 
-        // thrown from the adapter classes.
-        try {
-            $this->_fileIsValid($fileInfo);
-        } catch (Exception $e) {
-            if (!$ignore) {
-                throw $e;
-            }
-            return false;
-        }
-        
-        return true;
+        return (boolean)$this->_options['ignore_invalid_files'];
     }
     
+    /**
+     * Log any exceptions that are thrown as a result of attempting to ingest
+     * invalid files.
+     * 
+     * These are logged as warnings because they are being ignored by the script,
+     * so they don't actually kill the file ingest process.
+     * 
+     * @param Exception $e
+     * @return void
+     **/
+    private function _logException(Exception $e)
+    {
+        $logger = Omeka_Context::getInstance()->getLogger();
+        if ($logger) {
+            $logger->log($e->getMessage(), Zend_Log::WARN);
+        }
+    }
+        
     /**
      * Insert a File record corresponding to an ingested file and its metadata.
      * 
@@ -258,7 +272,7 @@ abstract class Omeka_File_Ingest_Abstract
         $filter = new Omeka_Filter_Filename;
         $filename = $filter->renameFileForArchive($fromFilename);
         if (!is_writable(self::$_archiveDirectory)) {
-            throw new Exception('Cannot write to the following directory: "'
+            throw new Omeka_File_Ingest_Exception('Cannot write to the following directory: "'
                               . self::$_archiveDirectory . '"!');
         }
         return self::$_archiveDirectory . DIRECTORY_SEPARATOR . $filename;
