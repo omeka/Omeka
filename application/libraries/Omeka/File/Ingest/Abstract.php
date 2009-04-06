@@ -174,8 +174,8 @@ abstract class Omeka_File_Ingest_Abstract
                 if ($fileDestinationPath) {
                     $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $file['metadata']);
                 }
-                
-            } catch (Omeka_File_Ingest_Exception $e) {
+            
+            } catch (Omeka_File_Ingest_InvalidException $e) {
                 if ($this->_ignoreIngestErrors()) {
                     $this->_logException($e);
                     continue;

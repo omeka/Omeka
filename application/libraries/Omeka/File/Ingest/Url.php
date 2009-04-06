@@ -85,7 +85,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
     {
         $source = $this->_getFileSource($info);
         if (!fopen($source, 'r')) {
-            throw new Omeka_File_Ingest_Exception("URL is not readable or does not exist: $source");
+            throw new Omeka_File_Ingest_InvalidException("URL is not readable or does not exist: $source");
         }
     }    
 }

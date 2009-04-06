@@ -102,11 +102,11 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
     {
         try {
             if (!$this->_adapter->isValid($fileInfo['form_index'])) {
-                throw new Omeka_File_Ingest_Exception(join("\n\n", $this->_adapter->getMessages()));
+                throw new Omeka_File_Ingest_InvalidException(join("\n\n", $this->_adapter->getMessages()));
             }            
         } catch (Zend_File_Transfer_Exception $e) {
             // Rethrow under a different name.
-            throw new Omeka_File_Ingest_Exception('Upload: ' . $e->getMessage());
+            throw new Omeka_File_Ingest_InvalidException('Upload: ' . $e->getMessage());
         }
     }
     
