@@ -57,8 +57,6 @@ class ItemsController extends Omeka_Controller_Action
     /**
      * Adds an additional permissions check to the built-in edit action.
      * 
-     * Also 
-     *
      **/
     public function editAction()
     {
