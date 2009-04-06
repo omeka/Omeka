@@ -103,13 +103,14 @@ class Taggable extends Omeka_Record_Mixin
     /**
      * Delete a tag from the record
      *
-     * @param int user_id The user to specifically delete the tag from
+     * @param string|array  The tag name or array of tag names to delete from the record
+     * @param int entity The entity to specifically delete the tag from
      * @param bool deleteAll Whether or not to delete all references to this tag for this record
      * @return bool|array Whether or not the tag was deleted (false if tag doesn't exist)
      **/
-    public function deleteTags($tag, $entity=null, $deleteAll=false)
+    public function deleteTags($tags, $entity=null, $deleteAll=false)
     {            
-        $findWith['tag'] = $tag;
+        $findWith['tag'] = $tags;
         $findWith['record'] = $this->record;
         
         //If we aren't deleting all the tags associated with a record, then find those specifically for the user
