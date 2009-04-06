@@ -1,14 +1,27 @@
-<?php 
+<?php
 /**
-* 
-*/
-class Omeka_File_Transfer_Adapter_Url extends Omeka_File_Transfer_Adapter_Abstract
-{    
+ * @version $Id$
+ * @copyright Center for History and New Media, 2009
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * Ingest URLs into the Omeka filesystem.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2009
+ **/
+class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Abstract
+{
     protected $_transferMethods = array('wget', 'copy');
         
-    public function getOriginalFileName()
+    protected function _getOriginalFilename($fileInfo)
     {
-        return $this->_fileInfo['source'];
+        if (!($original = parent::_getOriginalFilename($fileInfo))) {
+            $original = $fileInfo['source'];
+        }
+        return $original;
     }
         
     protected function _wget($source, $destination)
@@ -52,10 +65,8 @@ class Omeka_File_Transfer_Adapter_Url extends Omeka_File_Transfer_Adapter_Abstra
         return true;
     }
     
-    public function transferFile($destination)
+    protected function _transfer($source, $destination)
     {
-        $source = $this->_getSource();
-
         $transferred = false;
         foreach ($this->_transferMethods as $method) {
             $classMethod = '_' . $method;
@@ -70,11 +81,22 @@ class Omeka_File_Transfer_Adapter_Url extends Omeka_File_Transfer_Adapter_Abstra
         }
     }
     
-    public function isValid()
+    /**
+     * The 'source' key of the file info is parsed out by default.
+     * 
+     * @param array
+     * @return string
+     **/
+    protected function _getFileSource($fileInfo)
     {
-        $source = $this->_getSource();
+        return $fileInfo['source'];
+    }
+    
+    protected function _fileIsValid($info)
+    {
+        $source = $this->_getFileSource($info);
         if (!fopen($source, 'r')) {
             throw new Exception("URL is not readable or does not exist: $source");
         }
-    }
+    }    
 }

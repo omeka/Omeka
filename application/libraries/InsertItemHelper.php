@@ -225,28 +225,16 @@ class InsertItemHelper
             throw new Exception('Can only add files to an item that is persisted in the database!');
         }
         
-        $fileIngester = new Omeka_File_Ingest($this->_item, $files, $options);
-        
-        // There is probably a more elegant way to choose the adapter strategy.
-        if ($transferStrategy instanceof Omeka_File_Transfer_Adapter_Interface) {
-            return $fileIngester->ingest($transferStrategy);
+        if ($transferStrategy instanceof Omeka_File_Ingest_Abstract) {
+            $ingester = $transferStrategy;
+            $ingester->setItem($this->_item);
+            $ingester->setOptions($options);
         } else {
-            switch ($transferStrategy) {
-                case 'Upload':
-                    return $fileIngester->upload($files);
-                    break;
-                case 'Url':
-                    $adapter = new Omeka_File_Transfer_Adapter_Url;
-                    return $fileIngester->ingest($adapter);
-                    break;
-                case 'Filesystem':
-                    $adapter = new Omeka_File_Transfer_Adapter_Filesystem;
-                    return $fileIngester->ingest($adapter);
-                    break;
-                default:
-                    throw new Exception('Invalid transfer adapter!');
-                    break;
-            }
+            $ingester = Omeka_File_Ingest_Abstract::factory($transferStrategy,
+                                                            $this->_item,
+                                                            $options);
         }
+        
+        return $ingester->ingest($files);
     }
 }
