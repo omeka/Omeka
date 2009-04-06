@@ -33,18 +33,10 @@ abstract class Omeka_File_Ingest_Abstract
     /**
      * Retrieve the original filename of the file.
      * 
-     * By default, this is stored as the 'filename' attribute in the array.
-     * 
-     * TODO: Test this with all file ingest adapters.
      * @param array
      * @return string
      **/
-    protected function _getOriginalFilename($fileInfo)
-    {
-        if (array_key_exists('filename', $fileInfo)) {
-            return $fileInfo['filename'];
-        }
-    }
+    abstract protected function _getOriginalFilename($fileInfo);
     
     /**
      * Transfer the file to the archive.
@@ -67,28 +59,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @param mixed $fileInfo
      * @return array
      **/
-    protected function _parseFileInfo($files)
-    {
-        $infoArray = array();
-        
-        if (is_array($files)) {
-            foreach ($files as $key => $value) {
-                // Convert an array of strings, an array of arrays, or a 
-                // mix of the two, into an array of arrays.
-                $infoArray[$key] = !is_array($value) 
-                                      ? array('source'=>$value) 
-                                      : $value;
-            }
-        // If it's a string, make sure that represents the 'source' attribute.
-        } else if (is_string($files)) {
-            $infoArray = array(array('source' => $files));
-        // Sure hope you know what you're doing.
-        } else {
-            $infoArray = $files;
-        }
-        
-        return $infoArray;
-    }
+    abstract protected function _parseFileInfo($files);
             
     public function setOptions($options)
     {

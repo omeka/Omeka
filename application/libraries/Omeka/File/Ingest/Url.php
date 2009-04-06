@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Abstract
+class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
 {
     protected $_transferMethods = array('wget', 'copy');
         
@@ -80,18 +80,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Abstract
                               . '" to "' . $destination . '"!');
         }
     }
-    
-    /**
-     * The 'source' key of the file info is parsed out by default.
-     * 
-     * @param array
-     * @return string
-     **/
-    protected function _getFileSource($fileInfo)
-    {
-        return $fileInfo['source'];
-    }
-    
+        
     protected function _fileIsValid($info)
     {
         $source = $this->_getFileSource($info);

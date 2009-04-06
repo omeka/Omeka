@@ -12,21 +12,8 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Abstract
+class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
 {
-    
-    /**
-     * The 'source' key of the file info is parsed out by default.
-     * 
-     * FIXME: Duplicated from Omeka_File_Ingest_Url
-     * @param array
-     * @return string
-     **/
-    protected function _getFileSource($fileInfo)
-    {
-        return $fileInfo['source'];
-    }
-    
     /**
      * Set of info about the file to be transferred.
      * 
