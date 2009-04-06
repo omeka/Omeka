@@ -65,15 +65,17 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
     }
     
     /**
-     * By default, this is stored as the 'filename' attribute in the array.
+     * Retrieve the original filename.
+     * 
+     * By default, this is stored as the 'name' attribute in the array.
      * 
      * @param array
      * @return string
      **/
     protected function _getOriginalFilename($fileInfo)
     {
-        if (array_key_exists('filename', $fileInfo)) {
-            return $fileInfo['filename'];
+        if (array_key_exists('name', $fileInfo)) {
+            return $fileInfo['name'];
         }
     }
     

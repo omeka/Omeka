@@ -201,7 +201,7 @@ class InsertItemHelper
      *          'source' => Any identifier that is appropriate to the transfer
      * strategy in use.  For 'Url', this should be a valid URL.  For 'Filesystem',
      * it must be an absolute path to the source file to be transferred.
-     *          'filename' => OPTIONAL The filename to give to the transferred
+     *          'name' => OPTIONAL The filename to give to the transferred
      * file.  This can be any arbitrary filename and will be listed as the 
      * original filename of the file.  This will also be used to generate the 
      * archival filename for the file.  If none is given, this defaults to using

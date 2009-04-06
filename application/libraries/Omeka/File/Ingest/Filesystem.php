@@ -36,8 +36,8 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
     /**
      * Retrieve the original filename of the file to be transferred.
      * 
-     * Check for the 'filename' attribute first, then extract the basename() from
-     * the given file path.
+     * Check for the 'name' attribute first, otherwise extract the basename() 
+     * from the given file path.
      * 
      * @param array
      * @return string
