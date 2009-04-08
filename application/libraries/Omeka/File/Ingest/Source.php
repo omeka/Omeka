@@ -97,7 +97,7 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
         $fileSourcePath = $this->_getFileSource($info);
         $this->_validateSource($fileSourcePath, $info);
         
-        $fileDestinationPath = $this->_getDestination($originalFileName);
+        $fileDestinationPath = $this->_getDestination($originalFilename);
         $this->_transfer($fileSourcePath, $fileDestinationPath);
         return $fileDestinationPath;
     }
