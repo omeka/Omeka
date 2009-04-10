@@ -140,9 +140,11 @@ class Item extends Omeka_Record
     // ActiveRecord callbacks
     
     /**
-     * Stop the form submission if we are using the non-JS form to change the type or add files
+     * Stop the form submission if we are using the non-JS form to change the 
+     * Item Type or add files.
      *
-     * Also, do not allow people to change the public/featured status of an item unless they got permission
+     * Also, do not allow people to change the public/featured status of an item
+     * unless they have 'makePublic' or 'makeFeatured' permissions.
      *
      * @return void
      **/
@@ -186,8 +188,9 @@ class Item extends Omeka_Record
      * Remove a specific tag from any user.  This corresponds to a 'remove_tag'
      * form input that contains the ID of the tag to delete.
      *
-     * @since 6/10/08 'remove_item_tag' hook should pass the Item object, not
-     * the User object. 
+     * Fires the 'remove_item_tag' hook with the tag name and Item object as
+     * arguments.
+     * 
      * @param integer
      * @return void
      **/
@@ -212,8 +215,12 @@ class Item extends Omeka_Record
     }
     
     /**
-     * @uses Taggable::applyTagString()
+     * Modify the user's tags for this item based on form input.
      * 
+     * Checks the 'tags' field from the post and applies all the differences in
+     * the list of tags for the current user.
+     * 
+     * @uses Taggable::applyTagString()
      * @param ArrayObject
      * @return void
      **/
@@ -283,7 +290,6 @@ class Item extends Omeka_Record
      * 
      * @param string
      * @return void
-     * @throws Omeka_Upload_Exception
      **/
     private function _saveFiles()
     {
@@ -313,33 +319,7 @@ class Item extends Omeka_Record
             
         $filter = new Zend_Filter_Input($filters, null, $input, $options);
 
-        $clean = $filter->getUnescaped();
-        
-        //Now handle proper parsing of the date fields
-        
-        // I couldn't get this to jive with Zend's thing so screw them
-        $dateFilter = new Omeka_Filter_Date;
-        
-        if ($clean['date_year']) {
-            $clean['date'] = $dateFilter->filter($clean['date_year'], 
-                                                 $clean['date_month'], 
-                                                 $clean['date_day']);
-        }
-        
-        if ($clean['coverage_start_year']) {
-            $clean['temporal_coverage_start'] = $dateFilter->filter($clean['coverage_start_year'], 
-                                                                    $clean['coverage_start_month'], 
-                                                                    $clean['coverage_start_day']);
-        }
-        
-        if ($clean['coverage_end_year']) {
-            $clean['temporal_coverage_end'] = $dateFilter->filter($clean['coverage_end_year'], 
-                                                                  $clean['coverage_end_month'], 
-                                                                  $clean['coverage_end_day']);            
-        }
-                        
-        // Now, happy shiny user input
-        return $clean;        
+        return $filter->getUnescaped();
     }
     
     /**
@@ -359,8 +339,9 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Easy facade for the Item class so that it almost acts like an iterator.
+     * Retrieve the previous Item in the database.
      *
+     * @uses ItemTable::findPrevious()
      * @return Item|false
      **/
     public function previous()
@@ -369,19 +350,19 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Retrieve the Item that is next in the database after this Item.
+     * Retrieve the next Item in the database.
      * 
+     * @uses ItemTable::findNext()
      * @return Item|false
      **/
     public function next()
     {
         return $this->getDb()->getTable('Item')->findNext($this);
     }
-    
-    //Everything past this is elements of the old code that may be changed or deprecated
-        
+            
     /**
-     * Whether or not the Item has a File with derivative images (like thumbnails).
+     * Determine whether or not the Item has a File with a thumbnail image
+     * (or any derivative image).
      * 
      * @return boolean
      **/
