@@ -44,6 +44,12 @@ class Item extends Omeka_Record
                                 'ItemTypeElements'=>'getItemTypeElements',
                                 'ElementTexts'=>'getElementText');
     
+    /**
+     * @var array Set of non-persistent File objects to attach to the item.
+     * @see Item::addFile()  
+     */
+    private $_files = array();
+    
     protected function construct()
     {
         $this->_mixins[] = new Taggable($this);
@@ -246,7 +252,7 @@ class Item extends Omeka_Record
      **/
     protected function afterSaveForm($post)
     {
-        $this->_saveFiles();
+        $this->_uploadFiles();
                 
         // Remove a single tag based on the form submission.
         $this->_removeTagByForm((int) $post['remove_tag']);
@@ -256,6 +262,18 @@ class Item extends Omeka_Record
         $this->deleteFiles($post['delete_files']);
         
         $this->_modifyTagsByForm($post);
+    }
+    
+    /**
+     * Things to do in the afterSave() hook:
+     * 
+     * Save all files that had been associated with the item.
+     * 
+     * @return void
+     **/
+    protected function afterSave()
+    {
+        $this->saveFiles();
     }
         
     /**
@@ -291,12 +309,32 @@ class Item extends Omeka_Record
      * @param string
      * @return void
      **/
-    private function _saveFiles()
+    private function _uploadFiles()
     {
         // Tell it to always try the upload, but ignore any errors if any of
         // the files were not actually uploaded (left form fields empty).
         $files = insert_files_for_item($this, 'Upload', 'file', array('ignoreNoFile'=>true));
      }
+    
+    /**
+     * Save all the files that have been associated with this item.
+     * 
+     * @return boolean
+     **/
+    public function saveFiles()
+    {
+        if (!$this->exists()) {
+            throw new Exception("Files cannot be attached to an item that is "
+                                . "not persistent in the database!");
+        }
+        
+        foreach ($this->_files as $key => $file) {
+            $file->item_id = $this->id;
+            $file->forceSave();
+            // Make sure we can't save it twice by mistake.
+            unset($this->_files[$key]);
+        }        
+    }
     
     /**
      * Filter input from form submissions.  
@@ -379,5 +417,29 @@ class Item extends Omeka_Record
         $count = $db->fetchOne($sql, array((int) $this->id));
             
         return $count > 0;
+    }
+    
+    /**
+     * Associate an unsaved (new) File record with this Item.
+     * 
+     * These File records will not be persisted in the database until the item
+     * is saved or saveFiles() is invoked.
+     * 
+     * @see Item::saveFiles()
+     * @param File $file
+     * @return void
+     **/
+    public function addFile(File $file)
+    {
+        if ($file->exists()) {
+            throw new Exception("Cannot add an existing file to an item!");
+        }
+        
+        if (!$file->isValid()) {
+            throw new Exception("File must be valid before it can be associated"
+                                . " with an item!");
+        }
+        
+        $this->_files[] = $file;
     }
 }

@@ -81,20 +81,11 @@ class InsertItemHelper
         } else {
             $this->addElementTexts();
         }
-                
-        // Save Item and all of its metadata.  Throw exception if it fails.
-        $item->forceSave();
-        
-        // Must take place after save().
-        if (array_key_exists('tags', $this->_metadata) 
-        and !empty($this->_metadata['tags'])) {
-            $this->addTags();
-        }
-                
-        // Note to future self: Files need to be ingested at the end of the 
-        // process, because there is a possibility that the file ingest could
-        // fail with an exception, and this ensures that as much metadata is 
-        // retained as possible before that.
+                                   
+        // Files are ingested before the item is saved.  That way, ingest 
+        // exceptions that bubble up will prevent the item from being saved.  On
+        // the other hand, if 'ignore_invalid_files' is set to true, then the 
+        // item will be saved as normally.
         if (array_key_exists('files', $this->_fileMetadata)) {
             if (!array_key_exists('file_transfer_type', $this->_fileMetadata)) {
                 throw new Exception("Must specify 'file_transfer_type' when attaching files to an item!");
@@ -103,6 +94,15 @@ class InsertItemHelper
                 $this->_fileMetadata['file_transfer_type'], 
                 $this->_fileMetadata['files'], 
                 (array)$this->_fileMetadata['file_ingest_options']);
+        }
+
+        // Save Item and all of its metadata.  Throw exception if it fails.
+        $item->forceSave();
+
+        // Must take place after save().
+        if (array_key_exists('tags', $this->_metadata) 
+        and !empty($this->_metadata['tags'])) {
+            $this->addTags();
         }
     }
     
@@ -220,11 +220,7 @@ class InsertItemHelper
      * @return mixed
      **/
     public function addFiles($transferStrategy, $files, array $options = array())
-    {
-        if (!$this->_item->exists()) {
-            throw new Exception('Can only add files to an item that is persisted in the database!');
-        }
-        
+    {        
         if ($transferStrategy instanceof Omeka_File_Ingest_Abstract) {
             $ingester = $transferStrategy;
             $ingester->setItem($this->_item);
@@ -234,7 +230,14 @@ class InsertItemHelper
                                                             $this->_item,
                                                             $options);
         }
+                
+        $fileRecords = $ingester->ingest($files);
         
-        return $ingester->ingest($files);
+        // If we are attaching files to a pre-existing item, only save the files.
+        if ($this->_item->exists()) {
+            $this->_item->saveFiles();
+        }
+        
+        return $fileRecords;
     }
 }

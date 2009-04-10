@@ -228,7 +228,6 @@ abstract class Omeka_File_Ingest_Abstract
         $file = new File;
         try {
             $file->original_filename = $oldFilename;
-            $file->item_id = $this->_item->id;
             
             $file->setDefaults($newFilePath);
             
@@ -236,9 +235,9 @@ abstract class Omeka_File_Ingest_Abstract
                 $file->addElementTextsByArray($elementMetadata);
             }
             
-            $file->forceSave();
-            
             fire_plugin_hook('after_upload_file', $file, $this->_item);
+            
+            $this->_item->addFile($file);
             
         } catch(Exception $e) {
             if (!$file->exists()) {
