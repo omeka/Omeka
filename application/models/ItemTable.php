@@ -216,6 +216,13 @@ class ItemTable extends Omeka_Db_Table
                           'e.id = ie.entity_id', 
                           array());
         
+        // Only retrieve items that were added by a specific user/entity.
+        $select->joinLeft(array('ier' => $db->EntityRelationships), 
+                          'ier.id = ie.relationship_id',
+                          array());
+        $select->where('ier.name = "added"');
+        
+        
         if ($isUser) {
             $select->joinLeft(array('u' => "$db->User"), 
                               'u.entity_id = e.id', 
