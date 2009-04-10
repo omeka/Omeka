@@ -244,7 +244,7 @@ class Item extends Omeka_Record
      * 
      * @return void
      **/
-    public function afterSaveForm($post)
+    protected function afterSaveForm($post)
     {
         $this->_saveFiles();
                 
