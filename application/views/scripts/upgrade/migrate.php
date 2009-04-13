@@ -10,15 +10,15 @@
 	<?php endforeach; ?>
 
 <?php endif; ?>	
-
+<ul class="migrate">
 <?php foreach( $output as $num => $text ): ?>
-    <div class="success">
+    <li>
     <?php foreach( $text as $out ): ?>
         <p><?php echo htmlentities($out); ?></p>
     <?php endforeach; ?>
-    </div>
+    </li>
 <?php endforeach; ?>    
-
-<a href="<?php echo uri(''); ?>">Return to Dashboard</a>
+</ul>
+<p><?php echo link_to_admin_home_page('Return to Dashboard'); ?></p>
 </div>
 <?php foot(); ?>

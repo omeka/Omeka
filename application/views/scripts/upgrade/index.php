@@ -13,23 +13,20 @@
 </script>
 */ ?>
 <div id="primary">
-<h2>Upgrade Omeka</h2>
+<h1>Upgrade Omeka</h1>
 <?php if (OMEKA_MIGRATION > (int) get_option('migration')): ?>
-<p>Warning: Your Omeka database is not compatible with the 
-version of Omeka that you are running.</p>
 <?php if (has_permission('Upgrade', 'migrate')): ?>
-<p>Please backup your existing database and then click the
-following button to upgrade:</p>
+<p>Warning: Your Omeka database is not compatible with the version of Omeka that you are running. Please backup your Omeka database, then upgrade:</p>
 <form action="<?php echo uri('upgrade/migrate'); ?>" method="post">
 <fieldset>
-<input type="submit" id="submitUpgrade" value="upgrade omeka database" />
+<input type="submit" class="submit submit-medium" id="submitUpgrade" value="Upgrade Now" />
 </fieldset>
 </form>
 <?php else: ?>
-Please notify an administrator to upgrade the database.
+<p>Warning: Your Omeka database is not compatible with the version of Omeka that you are running. Please notify an administrator to upgrade the database.</p>
 <?php endif; ?>
 <?php else: ?>
-<p>Your Omeka database is up-to-date! <a href="<?php echo uri(''); ?>">Return to Dashboard</a></p>
+<p>Your Omeka database is up-to-date! <a href="<?php echo uri('admin'); ?>">Return to Dashboard</a></p>
 <?php endif; ?>
 </div>
 <?php foot();?>
