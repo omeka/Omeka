@@ -230,6 +230,8 @@ class InsertItemHelper
                                                             $this->_item,
                                                             $options);
         }
+
+        $this->_addIngestValidators($ingester);
                 
         $fileRecords = $ingester->ingest($files);
         
@@ -239,5 +241,51 @@ class InsertItemHelper
         }
         
         return $fileRecords;
+    }
+    
+    /**
+     * Add the default validators for ingested files.  
+     * 
+     * The default validators are blacklists for file extensions and MIME types,
+     * and those lists can be configured via the admin settings form.
+     * 
+     * Plugins can add/remove/modify validators via the 'file_ingest_validators'
+     * filter.
+     * 
+     * @param Omeka_File_Ingest_Abstract $ingester
+     * @return void
+     **/
+    protected function _addIngestValidators(Omeka_File_Ingest_Abstract $ingester)
+    {
+        // Default list of validators includes a blacklist for file extensions
+        // and MIME types.
+        
+        $extensionBlacklist = get_option('file_extension_blacklist');
+        $extensionValidator = new Zend_Validate_File_ExcludeExtension($extensionBlacklist);
+        // Tweak the vague default error message for these validators.  It 
+        // doesn't have a 'false' extension, it has a disallowed extension.  
+        // It is the responsibility of plugin writers to suppress or replace
+        // these messages if necessary for security reasons, e.g. if displaying
+        // it to the end user might expose the site to vulnerability probes.
+        $extensionValidator->setMessage(
+            "The file '%value%' cannot be ingested because it has a disallowed file extension (%extension%).", 
+            'fileExcludeExtensionFalse');
+        
+        $mimeTypeBlacklist = get_option('file_mime_type_blacklist');
+        $mimeTypeValidator = new Zend_Validate_File_ExcludeMimeType($mimeTypeBlacklist);
+        $mimeTypeValidator->setMessage(
+            "The file '%value%' cannot be ingested because it has a disallowed MIME type (%type%).", 
+            'fileExcludeMimeTypeFalse');
+        
+        $validators = array(
+            'extension blacklist'=> $extensionValidator,
+            'mime type blacklist'=> $mimeTypeValidator);
+        
+        $validators = apply_filters('file_ingest_validators', $validators);
+        
+        // Build the default validators.
+        foreach ($validators as $validator) {
+            $ingester->addValidator($validator);
+        }
     }
 }

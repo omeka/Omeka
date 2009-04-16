@@ -306,6 +306,9 @@ class Installer
         $db->exec($optionSql, array('admin_theme', 'default'));
         $db->exec($optionSql, array('public_theme', 'default'));
         
+        $db->exec($optionSql, array('file_extension_blacklist', FILE_EXTENSION_BLACKLIST));
+        $db->exec($optionSql, array('file_mime_type_blacklist', FILE_MIME_TYPE_BLACKLIST));
+        
         $this->showInstallForm = false;
     }
     

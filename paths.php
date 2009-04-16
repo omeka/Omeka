@@ -1,6 +1,6 @@
 <?php
 // Define the current migration.
-define('OMEKA_MIGRATION', 34);
+define('OMEKA_MIGRATION', 35);
 
 // Define the current version.
 define('OMEKA_VERSION', '1.0alpha');
@@ -10,6 +10,9 @@ define('OMEKA_VERSION', '1.0alpha');
 // @todo Localize this and other constants to avoid too many things in the 
 // global scope.
 define('ELEMENT_SET_ITEM_TYPE', 'Item Type Metadata');
+
+define('FILE_EXTENSION_BLACKLIST', 'php,html,js');
+define('FILE_MIME_TYPE_BLACKLIST', 'application/php');
 
 // Report all errors except E_NOTICE.
 error_reporting(E_ALL ^ E_NOTICE);

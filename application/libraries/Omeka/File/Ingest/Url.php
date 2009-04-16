@@ -83,8 +83,34 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         
     protected function _validateSource($source, $info)
     {
+        // FIXME: This will fail if fopen wrappers are not enabled, but it
+        // executes before fopen wrappers are checked.
         if (!fopen($source, 'r')) {
             throw new Omeka_File_Ingest_InvalidException("URL is not readable or does not exist: $source");
         }
-    }    
+    }   
+    
+    /**
+     * Retrieve the MIME type of a given URL.
+     * 
+     * Take this from the Content-type header of the request.
+     * 
+     * @internal If this fails or proves too fragile for some reason, a more 
+     * robust (read: complicated) solution could use Zend_Http_Client.
+     * In that case, it might be better to use that for the rest of the Url
+     * implementation (transfer, etc.).
+     * @param array
+     * @return string
+     **/
+    protected function _getFileMimeType($fileInfo)
+    {
+        $sourceUrl = $this->_getFileSource($fileInfo);
+        $fp = fopen($sourceUrl, 'r');
+        $meta = stream_get_meta_data($fp);
+        // The stream metadata contains a 'wrapper_data' key with all the 
+        // headers in it.  Extract the Content-type header from this.
+        $wrapperData = current(preg_grep('/Content\-type\: /', $meta['wrapper_data']));
+        $mimeType = str_replace('Content-type: ', '', $wrapperData);
+        return $mimeType;
+    }
 }

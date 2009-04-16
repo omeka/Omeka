@@ -106,7 +106,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
                         
         // Grab the info from $_FILES array (prior to receiving the files).
         $fileInfoArray = $this->_adapter->getFileInfo($fileInfo);
-        
+       
         // Include the index of the form so that we can use that if necessary.
         foreach ($fileInfoArray as $index => $info) {
             // We need the index of this as well b/c the file info is passed 
@@ -115,5 +115,22 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
             $fileInfoArray[$index] = $info;
         }
         return $fileInfoArray;
+    }
+    
+    /**
+     * Use the Zend Framework adapter to handle validation instead of the 
+     * built-in _validateFile() method.
+     * 
+     * @see Omeka_File_Ingest_Abstract::_validateFile()
+     * @param Zend_Validate_Interface
+     * @return $this
+     **/
+    public function addValidator(Zend_Validate_Interface $validator)
+    {
+        if (!$this->_adapter) {
+            $this->_buildAdapter();
+        }
+
+        $this->_adapter->addValidator($validator);
     }
 }

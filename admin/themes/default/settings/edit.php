@@ -19,7 +19,9 @@
 	    array('name'=>'fullsize_constraint', 'description' => 'The maximum size (in pixels) of the longest side for fullsize versions of uploaded images.'),
 	    array('name'=>'per_page_admin', 'description' => 'Limit the number of items displayed per page in the administrative interface.'),
 	    array('name'=>'per_page_public', 'description' => 'Limit the number of items displayed per page in the public interface.'),
-	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.  Include only the directory path, not the executable file.  For example, if it is located at &quot;/usr/bin/convert&quot;, put only &quot;/usr/bin&quot;.')); ?>    
+	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.  Include only the directory path, not the executable file.  For example, if it is located at &quot;/usr/bin/convert&quot;, put only &quot;/usr/bin&quot;.'),
+	    array('name'=>'file_extension_blacklist', 'description' => 'List of file extensions that are disallowed when uploading files.  Be aware that shortening this list may leave your site open to security vulnerabilities.'),
+	    array('name'=>'file_mime_type_blacklist', 'description' => 'List of disallowed MIME types for files.  As with file extensions, be aware that allowing these types of files may cause security problems.'),); ?>    
 
 <?php foreach ($siteSettings as $key => $setting): ?>
     <div class="field">

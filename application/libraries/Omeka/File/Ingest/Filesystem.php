@@ -74,4 +74,18 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
             }
         }
     }
+    
+    /**
+     * Retrieve the MIME type of a file located on the same server as Omeka.
+     * 
+     * Use mime_content_type() to check the file at its original location.
+     * 
+     * @param array
+     * @return string
+     **/
+    protected function _getFileMimeType($fileInfo)
+    {
+        $sourcePath = $this->_getFileSource($fileInfo);
+        return mime_content_type($sourcePath);
+    }
 }

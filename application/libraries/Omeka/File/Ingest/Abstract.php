@@ -47,6 +47,13 @@ abstract class Omeka_File_Ingest_Abstract
     protected $_options = array();
     
     /**
+     * @var array Set of validators implementing Zend_Validate_Interface.
+     * @see Omeka_File_Ingest_Abstract::addValidator()
+     */
+    private $_validators = array();
+            
+    
+    /**
      * Set the item to use as a target when ingesting files.
      * 
      * @param Item $item
@@ -270,5 +277,70 @@ abstract class Omeka_File_Ingest_Abstract
                               . self::$_archiveDirectory . '"!');
         }
         return self::$_archiveDirectory . DIRECTORY_SEPARATOR . $filename;
+    }
+    
+    /**
+     * Add Zend Framework file validators.
+     * 
+     * Emulates the way Zend Framework adds validators.
+     * 
+     * @param Zend_Validate_Interface
+     * @return $this
+     **/
+    public function addValidator(Zend_Validate_Interface $validator)
+    {        
+        $this->_validators[] = $validator;
+        
+        return $this;
+    }
+    
+    /**
+     * Validate a file that has been transferred to Omeka.
+     * 
+     * Implementations of Omeka_File_Ingest_Abstract should use this to validate 
+     * the uploaded file based on user-defined security criteria.
+     * 
+     * Important: $fileInfo may need to contain the following keys in order to work
+     * with particular Zend_Validate_File_* validation classes:
+     *      'name' => string filename (for Zend_Validate_File_Extension) If 
+     * ZF is unable to determine the file extension when validating, it will 
+     * check the 'name' attribute instead.  Current use cases involve saving the 
+     * file to a temporary location before transferring to the Omeka archive.  
+     * Most temporary files do not maintain the original file extension.
+     *      'type' => string MIME type (for Zend_Validate_File_MimeType) If ZF
+     * is unable to determine the mime type from the transferred file.  Unless 
+     * the server running Omeka has a mime_magic file or has installed the 
+     * FileInfo extension, this will be necessary.
+     *  
+     * @internal These required keys may be derived from existing data if 
+     * necessary, rather than forcing the end user to include them in the array 
+     * of file info that is passed to the ingest script.  See 
+     * Omeka_File_Ingest_Source::_addZendValidatorAttributes() for more info.
+     * 
+     * @throws Omeka_File_Ingest_InvalidException
+     * @param string $filePath Absolute path to the file.  The file should 
+     * be local and readable, which is required by most (if not all) of the
+     * Zend_Validate_File_* classes.
+     * @param array $fileInfo Set of file info that describes a given file being 
+     * ingested. 
+     * @return boolean True if valid, otherwise throws an exception.
+     **/
+    protected function _validateFile($filePath, $fileInfo)
+    {
+        // Valid until proven otherwise.
+        $isValid = true;
+        $validationErrors = array();
+        foreach ($this->_validators as $validator) {
+            $isValid = $validator->isValid($filePath, $fileInfo);
+            // Aggregate all the error messages.
+            if (!$isValid) {
+                $errorMessages = $validator->getMessages();
+                $validationErrors += $errorMessages;
+            }
+        }
+        if (!$isValid) {
+            throw new Omeka_File_Ingest_InvalidException(join(", ", array_values($validationErrors)));
+        }
+        return $isValid;
     }
 }
