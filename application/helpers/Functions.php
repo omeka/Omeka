@@ -332,7 +332,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9)
 			$html .= '<a href="' . $link . '?tags=' . urlencode($tag['name']) . '">';
 		}
 
-		$html .= htmlspecialchars($tag['name']);
+		$html .= html_escape($tag['name']);
 
 		if( $link )
 		{
@@ -529,7 +529,7 @@ function has_permission($role,$privilege=null) {
  **/
 function settings($name) {
 	$name = apply_filters("display_setting_$name", get_option($name));
-	$name = h($name);
+	$name = html_escape($name);
 	return $name;
 }
 	
@@ -565,3 +565,16 @@ function settings($name) {
 function items_search_form($props=array(), $formActionUri = null) {
     return __v()->partial('items/advanced-search.php', array('isPartial'=>true, 'formAttributes'=>$props, 'formActionUri'=>$formActionUri));
 }	
+
+/**
+ * Escape the value to display properly as HTML.
+ * 
+ * This uses the 'html_escape' filter for escaping.
+ * 
+ * @param string
+ * @return string
+ */
+function html_escape($value)
+{
+    return apply_filters('html_escape', $value);
+}

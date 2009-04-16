@@ -8,7 +8,7 @@
 	if (isset($errorMessage)):
 		?><div class="error">Error: <span>
 			
-		<?php echo htmlentities($errorMessage); ?>
+		<?php echo html_escape($errorMessage); ?>
 		</span></div>
 	<?php endif; ?>
 	

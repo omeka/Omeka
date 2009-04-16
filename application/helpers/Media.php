@@ -244,7 +244,7 @@ class Omeka_View_Helper_Media
             $imgHtml = $imageSize($file, $imgAttributes);
         }    
 		
-		$html .= !empty($imgHtml) ? $imgHtml : htmlentities($file->original_filename);	
+		$html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);	
 		
 		$html = $this->_linkToFile($html, $file, $options);
 		
@@ -362,7 +362,7 @@ class Omeka_View_Helper_Media
         if ($options['showFilename']) {
             // Add a div with arbitrary attributes.
             $html .= '<div ' . _tag_attributes((array)$options['filenameAttributes']) 
-                   . '>' . htmlspecialchars($file->original_filename) . '</div>';
+                   . '>' . html_escape($file->original_filename) . '</div>';
         }
         
         return $this->_linkToFile($html, $file, $options);

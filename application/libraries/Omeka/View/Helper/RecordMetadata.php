@@ -257,11 +257,11 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
         // The assumption here is that all string values (item type name, 
         // collection name, etc.) will need to be escaped.
         if (is_string($text)) {
-            $text = apply_filters('html_escape', $text);
+            $text = html_escape($text);
         } else if (is_array($text)) {
             foreach ($text as $record) {
                  if (!$record->isHtml()) {
-                     $record->setText(apply_filters('html_escape', $record->getText()));
+                     $record->setText(html_escape($record->getText()));
                  }
              }
         } 

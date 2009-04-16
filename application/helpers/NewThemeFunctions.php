@@ -123,7 +123,7 @@ function item_citation()
 {
     $creator    = strip_formatting(item('Dublin Core', 'Creator'));
     $title      = strip_formatting(item('Dublin Core', 'Title'));
-    $siteTitle  = strip_formatting(get_option('site_title'));
+    $siteTitle  = strip_formatting(settings('site_title'));
     $itemId     = item('id');
     $accessDate = date('F j, Y');
     $uri        = abs_uri();
@@ -1181,11 +1181,9 @@ function collection($fieldName, $options=array())
     
     // Escape it for display as HTML.
     if (!is_array($text)) {
-        $text = apply_filters('html_escape', $text);
+        $text = html_escape($text);
     } else {
-        foreach ($text as $key => $value) {
-            $text[$key] = apply_filters('html_escape', $value);
-        }
+        $text = array_map('html_escape', $text);
     }
     
     // Return the join'd text

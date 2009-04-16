@@ -10,7 +10,7 @@
 </script>
 
 <h1<?php if($file->hasThumbnail()) echo ' class="has-thumbnail"'; ?>
->Edit File #<?php echo htmlentities($file->id); ?></h1>
+>Edit File #<?php echo item_file('Id'); ?></h1>
 
 <?php if($file->hasThumbnail()): ?>
 <div id="edit-file-image"><?php echo square_thumbnail($file); ?></div>

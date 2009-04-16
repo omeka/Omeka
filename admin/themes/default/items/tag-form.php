@@ -7,8 +7,8 @@
     		<?php foreach( $item->Tags as $key => $tag ): ?>
 	
             	<li class="tag-delete">
-            		<input type="image" src="<?php echo img('delete.gif'); ?>" name="remove_tag" value="<?php echo h($tag->id); ?>" />
-            		<?php echo htmlentities($tag->name); ?>
+            		<input type="image" src="<?php echo img('delete.gif'); ?>" name="remove_tag" value="<?php echo html_escape($tag->id); ?>" />
+            		<?php echo html_escape($tag->name); ?>
             	</li>
 
             <?php endforeach; ?>

@@ -198,7 +198,7 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
     $formProperties['method'] = 'get';
     $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
     $html .= '<fieldset>' . "\n\n";
-    $html .= __v()->formText('search', htmlspecialchars($_REQUEST['search']), array('name'=>'textinput','class'=>'textinput'));
+    $html .= __v()->formText('search', html_escape($_REQUEST['search']), array('name'=>'textinput','class'=>'textinput'));
     $html .= __v()->formSubmit('submit_search', $buttonText);
     $html .= '</fieldset>' . "\n\n";
     $html .= '</form>';

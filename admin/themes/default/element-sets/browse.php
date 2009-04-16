@@ -18,10 +18,10 @@
             <?php $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File'); ?>
             
             <td width="30%">
-                <?php echo htmlentities($elementSet->name); ?>
+                <?php echo html_escape($elementSet->name); ?>
             </td>
             <td>
-                <?php echo htmlentities($elementSet->description); ?>
+                <?php echo html_escape($elementSet->description); ?>
             </td>
             <td>
                 <?php if (has_permission('ElementSets', 'delete') and !in_array($elementSet->name, $doNotDelete)): ?>

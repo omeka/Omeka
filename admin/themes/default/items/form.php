@@ -333,9 +333,9 @@ echo js('tiny_mce/tiny_mce');
 <div id="item-metadata">
 <?php foreach ($tabs as $tabName => $tabContent): ?>
 	<?php if (!empty($tabContent)): ?>
-    	<div id="<?php echo text_to_id($tabName); ?>-metadata">
+    	<div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
         <fieldset class="set">
-            <legend><?php echo htmlentities($tabName); ?></legend>
+            <legend><?php echo html_escape($tabName); ?></legend>
             <?php echo $tabContent; ?>        
         </fieldset>
         </div>	   

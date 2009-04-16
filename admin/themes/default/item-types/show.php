@@ -1,5 +1,5 @@
-<?php head(array('title'=>'Type: '.htmlentities($itemtype->name),'bodyclass'=>'item-types'));?>
-<h1>Type: <?php echo htmlentities($itemtype->name);?></h1>
+<?php head(array('title'=>'Type: '.html_escape($itemtype->name),'bodyclass'=>'item-types'));?>
+<h1>Type: <?php echo html_escape($itemtype->name);?></h1>
 <?php if ( has_permission('ItemTypes','edit') ): ?>
 <p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo record_uri($itemtype, 'edit', 'item-types'); ?>">Edit this Item Type</a></p>
 <?php endif; ?>
@@ -9,20 +9,20 @@
 
 
 		
-		<p><?php echo htmlentities($itemtype->description); ?></p>
+		<p><?php echo html_escape($itemtype->description); ?></p>
 		<h2>Type Metadata</h2>
 		<dl class="type-metadata">
 
 			<?php foreach($itemtype->Elements as $element): ?>
-			<dt><?php echo htmlentities($element->name); ?></dt>
-			<dd><?php echo htmlentities($element->description); ?></dd>
+			<dt><?php echo html_escape($element->name); ?></dt>
+			<dd><?php echo html_escape($element->description); ?></dd>
 			<?php endforeach; ?>
 		
 		</dl>
 	</div>
 
 	<div id="type-items">
-		<h2>Recent Items with Type <?php echo htmlentities($itemtype->name); ?></h2>
+		<h2>Recent Items with Type <?php echo html_escape($itemtype->name); ?></h2>
 		<?php if($itemtype->Items != null): ?>
 		<ul>
 	    <?php set_items_for_loop($itemtype->Items); ?>
@@ -32,7 +32,7 @@
 		</ul>
 	
 		<?php else: ?>
-		<p>There are no items with the type <?php echo htmlentities($itemtype->name); ?></p>
+		<p>There are no items with the type <?php echo html_escape($itemtype->name); ?></p>
 		<?php endif;?>
 		
 	</div>

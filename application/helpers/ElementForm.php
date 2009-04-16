@@ -31,7 +31,7 @@ class Omeka_View_Helper_ElementForm
         $record->loadElementsAndTexts();
         $this->_record = $record;
         
-        $html = $divWrap ? '<div class="field" id="element-' . $element->id . '">' : '';
+        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
         
         // Put out the label for the field
         $html .= $this->_displayFieldLabel();
@@ -55,12 +55,12 @@ class Omeka_View_Helper_ElementForm
     
     protected function _getFieldLabel()
     {
-        return htmlentities($this->_element['name']);
+        return html_escape($this->_element['name']);
     }
     
     protected function _getFieldDescription()
     {
-        return htmlentities($this->_element['description']);
+        return html_escape($this->_element['description']);
     }
     
     protected function _isPosted()

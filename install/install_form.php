@@ -1,4 +1,6 @@
 <?php
+// FIXME: Cannot use html_escape() because MVC (including view helpers) is not
+// loaded by Installer.
 function formValue($name, $defaultValue = '')
 {
     return isset($_POST[$name]) ? htmlentities($_POST[$name]): htmlentities($defaultValue);

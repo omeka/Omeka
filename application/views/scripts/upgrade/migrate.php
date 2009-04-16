@@ -6,7 +6,7 @@
     <p class="error">Omeka encountered an error when upgrading your installation:</p>
 	
 	<?php foreach( $errors as $num => $error ): ?>
-	   <p class="error_text"><?php echo htmlentities($error); ?></p>
+	   <p class="error_text"><?php echo html_escape($error); ?></p>
 	<?php endforeach; ?>
 
 <?php endif; ?>	
@@ -14,7 +14,7 @@
 <?php foreach( $output as $num => $text ): ?>
     <li>
     <?php foreach( $text as $out ): ?>
-        <p><?php echo htmlentities($out); ?></p>
+        <p><?php echo html_escape($out); ?></p>
     <?php endforeach; ?>
     </li>
 <?php endforeach; ?>    
