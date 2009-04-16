@@ -1,14 +1,4 @@
 <?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js('tooltip'); ?>
-
-<script type="text/javascript">
-//<![CDATA[
-
-Event.observe(window,'load', function() {
-	Omeka.Form.makeTooltips($$('.tooltip'));
-});
-//]]>
-</script>
 <h1>General Settings</h1>
 
 <?php common('settings-nav'); ?>
