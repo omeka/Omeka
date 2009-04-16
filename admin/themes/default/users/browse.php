@@ -1,7 +1,6 @@
 <?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 <h1>Users (<?php echo $total_records ?> total)</h1>
 <?php common('settings-nav'); ?>
-<?php print_r($current_user); ?>
 <div id="primary">
 <h2>Current Users</h2>
 
