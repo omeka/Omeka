@@ -19,9 +19,7 @@
 	    array('name'=>'fullsize_constraint', 'description' => 'The maximum size (in pixels) of the longest side for fullsize versions of uploaded images.'),
 	    array('name'=>'per_page_admin', 'description' => 'Limit the number of items displayed per page in the administrative interface.'),
 	    array('name'=>'per_page_public', 'description' => 'Limit the number of items displayed per page in the public interface.'),
-	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.  Include only the directory path, not the executable file.  For example, if it is located at &quot;/usr/bin/convert&quot;, put only &quot;/usr/bin&quot;.'),
-	    array('name'=>'file_extension_blacklist', 'description' => 'List of file extensions that are disallowed when uploading files.  Be aware that shortening this list may leave your site open to security vulnerabilities.'),
-	    array('name'=>'file_mime_type_blacklist', 'description' => 'List of disallowed MIME types for files.  As with file extensions, be aware that allowing these types of files may cause security problems.'),); ?>    
+	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.  Include only the directory path, not the executable file.  For example, if it is located at &quot;/usr/bin/convert&quot;, put only &quot;/usr/bin&quot;.')); ?>    
 
 <?php foreach ($siteSettings as $key => $setting): ?>
     <div class="field">
@@ -33,6 +31,45 @@
 </div>
     </div>
 <?php endforeach; ?>
+	</fieldset>
+	
+	<fieldset>
+	    <legend>Security Settings</legend>
+	    <div class="field">
+	        <label for="file_extension_whitelist">Allowed File Extensions</label>
+	        <div class="inputs">
+	        <?php echo $this->formTextarea('file_extension_whitelist', 
+	                get_option('file_extension_whitelist'), 
+	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+	        <p class="explanation">List of extensions that are allowed for files 
+	            in the Omeka archive.  This list may be adjusted as necessary, 
+	            but keep in mind that many types of files can represent a 
+	            security risk.</p> 
+	        </div>
+	    </div>
+	    
+	    <div class="field">
+	        <label for="file_mime_type_whitelist">Allowed File Types</label>
+	        <div class="inputs">
+	        <?php echo $this->formTextarea('file_mime_type_whitelist',
+	                get_option('file_mime_type_whitelist'),
+	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+	        <p class="explanation">List of types of files that are allowed in the
+	            Omeka archive.  This list may be adjusted as necessary, but keep
+	            in mind that many types of files can represent a security risk.</p>
+	        </div>
+	    </div>
+	    
+	    <div class="field">
+	        <label for="disable_default_file_validation">Disable the Default
+	            Validation for File Uploads</label>
+	        <?php echo $this->formCheckbox('disable_default_file_validation', 
+	            null, array('checked'=>get_option('disable_default_file_validation'))); ?>
+	        <p class="explanation warning">WARNING: This will allow any file to
+	            be uploaded to Omeka.  This is not recommended for production 
+	            sites or sites where file upload responsibilities are not tightly
+	            supervised.</p>
+	    </div>
 	</fieldset>
 	
 	<fieldset>

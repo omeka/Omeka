@@ -40,8 +40,9 @@ class SettingsController extends Omeka_Controller_Action
                               'per_page_admin', 
                               'per_page_public', 
                               'path_to_convert',
-                              'file_extension_blacklist',
-                              'file_mime_type_blacklist');
+                              'file_extension_whitelist',
+                              'file_mime_type_whitelist',
+                              'disable_default_file_validation');
         
         $options = Omeka_Context::getInstance()->getOptions();
         

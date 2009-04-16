@@ -11,9 +11,6 @@ define('OMEKA_VERSION', '1.0alpha');
 // global scope.
 define('ELEMENT_SET_ITEM_TYPE', 'Item Type Metadata');
 
-define('FILE_EXTENSION_BLACKLIST', 'php,html,js');
-define('FILE_MIME_TYPE_BLACKLIST', 'application/php');
-
 // Report all errors except E_NOTICE.
 error_reporting(E_ALL ^ E_NOTICE);
 
