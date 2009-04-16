@@ -46,7 +46,7 @@
 
 	<ul id="collectors-list">
 		<li>
-		<?php echo h($collector->getName()); ?>
+		<?php echo html_escape($collector->getName()); ?>
 		<a class="remove-collector" href="<?php echo uri(
 		    array(
 		    'controller'=>'collections', 

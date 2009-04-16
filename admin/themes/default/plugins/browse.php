@@ -22,9 +22,9 @@
     <tbody>
 <?php foreach( $plugins as $key => $plugin ): ?>
 	<tr>
-		<td><?php echo h($plugin->name); ?></td>
-		<td><?php echo h($plugin->description);?></td>
-		<td><?php echo h($plugin->author);?></td>
+		<td><?php echo html_escape($plugin->name); ?></td>
+		<td><?php echo html_escape($plugin->description);?></td>
+		<td><?php echo html_escape($plugin->author);?></td>
 		<td>
         <?php 
         //If the plugin has been installed, then there should be separate forms for activation/configuration

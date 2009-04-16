@@ -33,7 +33,7 @@
 		
 		$attr = array();
 		foreach ($toProcess as $key => $attribute) {
-			$attr[$key] = $key . '="' . h( $attribute ) . '"';
+			$attr[$key] = $key . '="' . html_escape( $attribute ) . '"';
 		}
 		return join(' ',$attr);
 	}
@@ -149,7 +149,7 @@ function radio( $attributes, array $values, $default = null, $label_class = 'rad
 		if(!empty($attributes)) {
 			$input .= ' '._tag_attributes($attributes);
 		}
-		$input .= ' value="'.h($value).'"';
+		$input .= ' value="'.html_escape($value).'"';
 		$input .= ' />' . "\n";
 		echo $input;
 	}

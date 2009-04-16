@@ -376,7 +376,7 @@ function flash($wrap=true)
 	}
 	
 	return $wrap ? 
-		'<div class="' . $wrapClass . '">'.nl2br(h($flash->getMsg())).'</div>' : 
+		'<div class="' . $wrapClass . '">'.nl2br(html_escape($flash->getMsg())).'</div>' : 
 		$flash->getMsg();
 }
 
@@ -417,8 +417,7 @@ function nav(array $links) {
 	$nav = '';
 	foreach( $links as $text => $link )
 	{		
-		//$nav .= "<li".(is_current_uri($link) ? ' class="current"':'')."><a href=\"$link\">".h($text)."</a></li>\n";
-		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
+		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . html_escape($text) . '</a></li>' . "\n";
 		
 	}
 	return $nav;
@@ -473,9 +472,9 @@ function tag_string($record, $link=null, $delimiter=', ')
 	if(!empty($tags)) {
 		foreach ($tags as $key=>$tag) {
 			if(!$link) {
-				$string[$key] = h($tag["name"]);
+				$string[$key] = html_escape($tag["name"]);
 			}else {
-				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'" rel="tag">'.h($tag["name"]).'</a>';
+				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'" rel="tag">'.html_escape($tag["name"]).'</a>';
 			}
 		}
 		$string = join($delimiter,$string);
