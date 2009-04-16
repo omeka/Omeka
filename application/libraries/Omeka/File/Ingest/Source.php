@@ -84,10 +84,6 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * 
      * TODO Intercept this file and put it in a temporary directory, run validation
      * on it, and then move to the archive and delete the temporary file.
-     * FIXME Multiple stages of validation may or may not be a design flaw.  It
-     * seems like the first stage of validation determines whether the source
-     * is valid, and the second set of validation determines whether the file
-     * itself adheres to security criteria (can be used to add a plugin hook).
      * @param array
      * @param string
      * @return string
@@ -102,7 +98,29 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
         return $fileDestinationPath;
     }
     
+    /**
+     * Transfer the file from the original location to its destination.
+     * 
+     * Examples would include transferring the file via wget, or making use of
+     * stream wrappers to copy the file.
+     * 
+     * @see _transferFile()
+     * @param string $source
+     * @param string $destination
+     * @return void
+     **/
     abstract protected function _transfer($source, $destination);
     
+    /**
+     * Determine whether or not the file source is valid.  
+     * 
+     * Examples of this would include determining whether a URL exists, or
+     * whether read access is available for a given file.
+     * 
+     * @param string $source
+     * @param array $info
+     * @throws Omeka_File_Ingest_InvalidException
+     * @return void
+     **/
     abstract protected function _validateSource($source, $info);
 }
