@@ -213,7 +213,9 @@ class ItemsController extends Omeka_Controller_Action
          
         if (array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
             if ($this->isAllowed('tag')) {
-                $tagsAdded = $item->saveForm($_POST);
+                $currentUser = Omeka_Context::getInstance()->getCurrentUser();
+                $tagsAdded = $item->applyTagString($_POST['tags'], $currentUser->Entity);
+                // Refresh the item.
                 $item = $this->findById();
             } else {
                 $this->flash('User does not have permission to add tags.');
