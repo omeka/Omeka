@@ -75,6 +75,9 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             }
         }
         
+        // Restore the user_agent after each file transfer.
+        ini_restore('user_agent');
+        
         if (!$transferred) {
             throw new Omeka_File_Ingest_Exception('Could not transfer the file from "' . $source 
                               . '" to "' . $destination . '"!');
@@ -83,9 +86,17 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         
     protected function _validateSource($source, $info)
     {
+        // Set an arbitrary user_agent before every file transfer to minimize 
+        // the chances of 403 forbidden responses.
+        ini_set('user_agent', 'Omeka/' . OMEKA_VERSION); 
+        
         // FIXME: This will fail if fopen wrappers are not enabled, but it
         // executes before fopen wrappers are checked.
         if (!fopen($source, 'r')) {
+            
+            // Restore the user_agent before throwing the exception.
+            ini_restore('user_agent');
+            
             throw new Omeka_File_Ingest_InvalidException("URL is not readable or does not exist: $source");
         }
     }   
