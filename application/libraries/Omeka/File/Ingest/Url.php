@@ -19,7 +19,9 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
     protected function _getOriginalFilename($fileInfo)
     {
         if (!($original = parent::_getOriginalFilename($fileInfo))) {
-            $original = $fileInfo['source'];
+            // Since the original file is from a URL, it is necessary to decode 
+            // the URL in case it has been encoded.
+            $original = urldecode($fileInfo['source']);
         }
         return $original;
     }
