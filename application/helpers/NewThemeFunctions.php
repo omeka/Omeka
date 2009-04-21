@@ -12,13 +12,13 @@
 /**
  * Retrieve the values for a given field in the current item.
  * 
- * @since 1.0 Adds a fourth argument, which can be used to inject the item to 
- * display.
+ * @since 0.10
  * @see Omeka_View_Helper_Item::item()
  * @uses Omeka_View_Helper_Item
  * @param string $elementSetName
  * @param string $elementName
  * @param array $options
+ * @param Item|null $item
  * @return string|array|null
  **/
 function item($elementSetName, $elementName = null, $options = array(), $item = null)
@@ -29,6 +29,16 @@ function item($elementSetName, $elementName = null, $options = array(), $item = 
     return __v()->itemMetadata($item, $elementSetName, $elementName, $options);
 }
 
+/**
+ * Retrieve metadata for a given field in the current file.
+ * 
+ * @since 1.0
+ * @param string $elementSetName
+ * @param string $elementName
+ * @param array $options
+ * @param File|null $file
+ * @return mixed
+ **/
 function item_file($elementSetName, $elementName = null, $options = array(), $file = null)
 {
     if (!$file) {
@@ -67,7 +77,10 @@ function item_type_elements()
  * All sets of form inputs for elements will be wrapped in a div with
  * class="field".
  *
- * @param Element|array
+ * @since 0.10
+ * @param Element|array $element
+ * @param Omeka_Record $record
+ * @param array $options Optional
  * @return string HTML
  **/
 function display_form_input_for_element($element, $record, $options = array())
@@ -88,12 +101,13 @@ function display_form_input_for_element($element, $record, $options = array())
 
 /**
  * Used within the admin theme (and potentially within plugins) to display a form
- * for an item for a given element set.  
+ * for a record for a given element set.  
  * 
+ * @since 0.10
  * @uses display_form_input_for_element()
  * @param Omeka_Record $record 
  * @param string $elementSetName The name of the element set.
- * @return void
+ * @return string
  **/
 function display_element_set_form($record, $elementSetName)
 {
@@ -113,10 +127,8 @@ function display_element_set_form($record, $elementSetName)
  *
  * Generally follows Chicago Manual of Style note format for webpages.  Does not 
  * account for multiple creators or titles. 
- * 
- * @internal Was previously located at Item::getCitation().  This made not a 
- * whole lot of sense though, given that it is very much an element of the View
- * and not directly related to the business logic of the app.
+ *
+ * @since  0.10
  * @return string
  **/
 function item_citation()
@@ -150,7 +162,10 @@ function item_citation()
  * the URI for that record.  Used primarily by other theme helpers and most likely
  * not useful for theme writers.
  * 
- * @param Omeka_Record
+ * @since 0.10
+ * @param Omeka_Record $record
+ * @param string $action
+ * @param string|null $controller Optional
  * @return string
  **/
 function record_uri(Omeka_Record $record, $action, $controller = null)
@@ -177,7 +192,8 @@ function record_uri(Omeka_Record $record, $action, $controller = null)
 /**
  * Retrieve a URL for the current item.
  * 
- * @param string Action to link to for this item.  Default is 'show'.
+ * @since 0.10
+ * @param string $action Action to link to for this item.  Default is 'show'.
  * @uses record_uri()
  * @return string URL
  **/
@@ -189,6 +205,7 @@ function item_uri($action = 'show')
 /**
  * This behaves as uri() except it always provides a url to the public theme.
  * 
+ * @since 0.10
  * @see uri()
  * @see admin_uri()
  * @param mixed
@@ -204,6 +221,7 @@ function public_uri()
 }
 
 /**
+ * @since 0.10
  * @see public_uri()
  * @param mixed
  * @return mixed
@@ -231,6 +249,7 @@ function admin_uri()
  * is what we need in this instance.  This function will be used sparingly 
  * anyway, since relative URIs are better in most instances.
  * 
+ * @since 0.10
  * @todo Code that generates the http://hostname part of the URI might be better
  * to have as a separate helper function, called by this one.
  * @uses uri()
@@ -249,6 +268,7 @@ function abs_uri()
 /**
  * Generate an absolute URI to an item.  Primarily useful for generating permalinks.
  * 
+ * @since 0.10
  * @param Item $item Optional Item record to use for URI generation.
  * @return void
  **/
@@ -272,7 +292,7 @@ function abs_item_uri($item = null)
  *  differentiate between the different navigation elements by passing the 2nd
  *  argument as 'main', so that it knew that this was the main navigation.
  *
- *
+ * @since 0.10
  * @see apply_filters()
  * @param array
  * @param string|null
@@ -293,8 +313,7 @@ function public_nav(array $navArray, $navType=null)
  *  that all plugins can count on having at least a 'main' navigation filter in
  *  the public themes.
  * 
- * @todo Should we hard code the navigation that is in all themes into this
- *  array?
+ * @since 0.10
  * @param array
  * @uses public_nav()
  * @return string
@@ -307,6 +326,7 @@ function public_nav_main(array $navArray)
 /**
  * Example: set_theme_base_uri('public');  uri('items');  --> example.com/items.
  * @access private
+ * @since 0.10
  * @param string
  * @return void
  **/
@@ -344,6 +364,7 @@ function set_theme_base_uri($theme = null)
  *      }  
  * }
  *
+ * @since 0.10
  * @access private
  * @return void
  **/
@@ -354,6 +375,7 @@ function admin_plugin_header()
 }
 
 /**
+ * @since 0.10
  * @access private
  * @see admin_plugin_footer()
  * @return void
@@ -368,6 +390,7 @@ function admin_plugin_footer()
  * Retrieve the HTML that is output by the 'public_append_to_items_browse_each'
  * hook.  This hook is fired on the public theme, inside the items/browse loop.
  * 
+ * @since 0.10
  * @return string
  **/
 function plugin_append_to_items_browse_each()
@@ -378,6 +401,7 @@ function plugin_append_to_items_browse_each()
 /**
  * Hook is fired at the end of the items/browse page, after the loop.
  * 
+ * @since 0.10
  * @see plugin_append_to_items_browse_each()
  */
 function plugin_append_to_items_browse()
@@ -388,6 +412,7 @@ function plugin_append_to_items_browse()
 /**
  * Hook is fired at the end of the items/show page.
  * 
+ * @since 0.10
  * @see plugin_append_to_items_browse_each()
  */
 function plugin_append_to_items_show()
@@ -396,6 +421,7 @@ function plugin_append_to_items_show()
 }
 
 /**
+ * @since 0.10
  * @see plugin_append_to_items_browse_each()
  */
 function plugin_append_to_collections_browse_each()
@@ -403,16 +429,34 @@ function plugin_append_to_collections_browse_each()
     return get_plugin_hook_output('public_append_to_collections_browse_each');
 }
 
+/**
+ * Hook is fired on the public collections/browse page.
+ * 
+ * @since 0.10
+ * @return string
+ **/
 function plugin_append_to_collections_browse()
 {
     return get_plugin_hook_output('public_append_to_collections_browse');
 }
 
+/**
+ * Hook is fired on the public collections/show page.
+ * 
+ * @since 0.10
+ * @return string
+ **/
 function plugin_append_to_collections_show()
 {
     return get_plugin_hook_output('public_append_to_collections_show');
 }
 
+/**
+ * Hook is fired on the public advanced search form.
+ * 
+ * @since 0.10
+ * @return string
+ **/
 function plugin_append_to_advanced_search()
 {
     return get_plugin_hook_output('public_append_to_advanced_search');
@@ -427,6 +471,7 @@ function plugin_append_to_advanced_search()
  * set_current_item($item); // necessary to use item() and other similar theme API calls.
  * echo item('Dublin Core', 'Title');
  * 
+ * @since 0.10
  * @param integer
  * @return Item|null
  **/
@@ -436,6 +481,7 @@ function get_item_by_id($itemId)
 }
 
 /**
+ * @since 0.10
  * @see get_item_by_id()
  * @param integer
  * @return Collection|null
@@ -446,6 +492,7 @@ function get_collection_by_id($collectionId)
 }
 
 /**
+ * @since 0.10
  * @see get_item_by_id()
  * @param integer
  * @return User|null
@@ -456,7 +503,10 @@ function get_user_by_id($userId)
 }
 
 /**
+ * @since 0.10
  * @see TagTable::applySearchFilters() for params
+ * @param array $params
+ * @param integer $limit
  * @return array
  */
 function get_tags($params = array(), $limit = 10)
@@ -472,6 +522,7 @@ function get_tags($params = array(), $limit = 10)
  * set_items_for_loop(get_items('tags'=>'foo, bar', 'recent'=>true), 10);
  * while (loop_items()): ....
  * 
+ * @since 0.10
  * @see ItemTable::applySearchFilters()
  * @param array $params
  * @param integer $limit The maximum number of items to return.
@@ -483,10 +534,11 @@ function get_items($params = array(), $limit = 10)
 }
 
 /**
+ * @since 0.10
  * @see get_items()
  * @see get_tags()
- * @param array
- * @param integer
+ * @param array $params
+ * @param integer $limit
  * @return array
  **/
 function get_users($params = array(), $limit = 10)
@@ -495,8 +547,9 @@ function get_users($params = array(), $limit = 10)
 }
 
 /**
- * @param array
- * @param integer
+ * @since 0.10
+ * @param array $params
+ * @param integer $limit
  * @return array
  **/
 function get_collections($params = array(), $limit = 10)
@@ -511,8 +564,9 @@ function get_collections($params = array(), $limit = 10)
  * of consistency with other data retrieval functions, though in this case
  * they don't have any effect on the number of results returned.
  * 
- * @param array
- * @param integer
+ * @since 0.10
+ * @param array $params
+ * @param integer $limit
  * @return array
  **/
 function get_item_types($params = array(), $limit = 10)
@@ -523,6 +577,7 @@ function get_item_types($params = array(), $limit = 10)
 /**
  * Determine whether or not the current item belongs to a collection.
  * 
+ * @since 0.10
  * @param string|null The name of the collection that the item would belong
  * to.  If null, then this will check to see whether the item belongs to
  * any collection.
@@ -546,6 +601,7 @@ function item_belongs_to_collection($name=null, $item=null)
  * (items do not have to have an item type).  If $name is given, then this will
  * determine if an item has a specific item type.
  * 
+ * @since 0.10
  * @param string|null
  * @return boolean
  **/
@@ -556,6 +612,7 @@ function item_has_type($name = null)
 }
 
 /**
+ * @since 0.10
  * @uses display_files()
  * @uses get_current_item()
  * @param array $options 
@@ -572,6 +629,7 @@ function display_files_for_item($options = array(), $wrapperAttributes = array('
  * Returns the HTML markup for displaying a random featured item.  Most commonly
  * used on the home page of public themes.
  * 
+ * @since 0.10
  * @param boolean Whether or not the featured item should have an image associated 
  * with it.  If set to true, this will either display a clickable square thumbnail 
  * for an item, or it will display "You have no featured items." if there are 
@@ -600,10 +658,10 @@ function display_random_featured_item($withImage=false)
 }
 
 /**
- * Returns the HTML markup for displaying a random featured collection.  This will display an 
+ * Returns the HTML markup for displaying a random featured collection.  
  * 
- * @param string
- * @return void
+ * @since 0.10
+ * @return string
  **/
 function display_random_featured_collection()
 {
@@ -623,6 +681,7 @@ function display_random_featured_collection()
 }
 
 /**
+ * @since 0.10
  * @uses current_user_tags()
  * @uses get_current_item()
  * @param string
@@ -637,6 +696,7 @@ function current_user_tags_for_item()
 /**
  * Determine whether or not the item has any files associated with it.
  * 
+ * @since 0.10
  * @see has_files()
  * @uses Item::hasFiles()
  * @return boolean
@@ -650,6 +710,7 @@ function item_has_files()
 /**
  * Determine whether or not the item has a thumbnail image that it can display.
  * 
+ * @since 0.10
  * @param string
  * @return void
  **/
@@ -659,7 +720,7 @@ function item_has_thumbnail()
 }
 
 /**
- * @todo Should item_has_tags() check for certain tags?
+ * @since 0.10
  * @return boolean
  **/
 function item_has_tags()
@@ -673,6 +734,7 @@ function item_has_tags()
  * test the first element text, though it is possible to test against a different
  * element text by modifying the $index parameter.
  * 
+ * @since 0.10
  * @param string
  * @param string
  * @param integer
@@ -696,6 +758,7 @@ function item_field_uses_html($elementSetName, $elementName, $index=0, $item = n
  * within themes.  Plugin writers creating new helpers may want to use this 
  * function to display a customized derivative image.
  * 
+ * @since 0.10
  * @param string
  * @return void
  **/
@@ -719,6 +782,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
  * HTML for a thumbnail image associated with an item.  Default parameters will
  * use the first image, but that can be changed by modifying $index.
  * 
+ * @since 0.10
  * @uses item_image()
  * @param array $props A set of attributes for the <img /> tag.
  * @param integer $index The position of the file to use (starting with 0 for 
@@ -732,7 +796,7 @@ function item_thumbnail($props = array(), $index = 0)
 
 /**
  * @see item_thumbnail()
- * 
+ * @since 0.10
  * @param array $props
  * @param integer $index
  * @return string HTML
@@ -744,7 +808,7 @@ function item_square_thumbnail($props = array(), $index = 0)
 
 /**
  * @see item_thumbnail()
- * 
+ * @since 0.10
  * @param array $props
  * @param integer $index
  * @return string HTML
@@ -755,8 +819,9 @@ function item_fullsize($props = array(), $index = 0)
 }
 
 /**
- * Use this to choose an item type from a <select>
+ * Use this to choose an item type from a <select>.
  * 
+ * @since 0.10
  * @uses ItemTypeTable::findAllForSelectForm()
  * @param array
  * @param string Selected value
@@ -773,8 +838,10 @@ function select_item_type($props=array(), $value=null, $label=null)
  * 
  * Not meant to used by theme writers, possibly useful for plugin writers.
  * 
+ * @since 0.10
  * @param array 
  * @param string|integer Optional value of the selected option.
+ * @param string|null Optional Label for the form input.
  * @return string HTML
  **/
 function select_item_type_elements($props = array(), $value = null, $label = null)
@@ -794,6 +861,7 @@ function select_item_type_elements($props = array(), $value = null, $label = nul
 }
 
 /**
+ * @since 0.10
  * @access private
  * @param array
  * @param mixed
@@ -806,10 +874,12 @@ function _select_from_table($tableClass, $props = array(), $value = null, $label
 }
 
 /**
- * Select the Item Type for the current Item.  This probably won't
- * be used by any theme writers because it only applies to the form
- * that the items are on.
+ * Select the Item Type for the current Item.  
  * 
+ * This probably won't be used by theme writers because it only applies to the 
+ * items form.
+ * 
+ * @since 0.10
  * @param array
  * @return string HTML for the form input.
  **/
@@ -820,6 +890,7 @@ function select_item_type_for_item($props=array())
 }
 
 /**
+ * @since 0.10
  * @param array
  * @param string
  * @return string
@@ -830,6 +901,7 @@ function select_collection($props = array(), $value=null, $label=null)
 }
 
 /**
+ * @since 0.10
  * @param array
  * @param mixed
  * @return string HTML
@@ -840,6 +912,7 @@ function select_element($props = array(), $value = null, $label=null)
 }
 
 /**
+ * @since 0.10
  * @uses _select_from_table()
  */
 function select_user($props = array(), $value=null, $label=null)
@@ -848,6 +921,7 @@ function select_user($props = array(), $value=null, $label=null)
 }
 
 /**
+ * @since 0.10
  * @uses _select_from_table()
  */
 function select_entity($props = array(), $value = null, $label=null)
@@ -858,11 +932,11 @@ function select_entity($props = array(), $value = null, $label=null)
 /**
  * Retrieve the Collection object for the current item.
  * 
- * @internal This is meant to be a simple facade for OO-based access to the Collection object.
- * Ideally theme writers won't have to interact with the actual collection object, so more helpers
- * should be built to provide syntactic sugar for this.
+ * @since 0.10
+ * @internal This is meant to be a simple facade for access to the Collection 
+ * record.  Ideally theme writers won't have to interact with the actual object.
  * @access private
- * @return void
+ * @return Collection
  **/
 function get_collection_for_item()
 {
@@ -875,8 +949,11 @@ function get_collection_for_item()
  * The default text displayed for this link will be the name of the collection,
  * but that can be changed by passing a string argument.
  * 
- * @param string
- * @return void
+ * @since 0.10
+ * @param string|null $text Optional Text for the link.
+ * @param array $props Optional XHTML attributes for the <a> tag.
+ * @param string $action Optional 'show' by default.
+ * @return string
  **/
 function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
 {
@@ -888,7 +965,7 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
  * 
  * @todo Should this take a set of parameters instead of $order?  That would be 
  * good for limiting the # of tags returned by the query.
- * 
+ * @since 0.10
  * @see item_tags_as_cloud()
  * @param string $delimiter String that separates each tag.  Default is a comma 
  * and space.
@@ -907,9 +984,13 @@ function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked =
 }
 
 /**
+ * Retrieve a tag cloud of all the tags for the current item.
+ * 
+ * @since 0.10
  * @see item_tags_as_string()
  * @param string
- * @param boolean
+ * @param boolean $tagsAreLinked Optional Whether or not to make each tag a link
+ * to browse all the items with that tag.  True by default.
  * @return string
  **/
 function item_tags_as_cloud($order = null, $tagsAreLinked = true)
@@ -923,7 +1004,7 @@ function item_tags_as_cloud($order = null, $tagsAreLinked = true)
  * Retrieve the next item in the database.  
  * 
  * @todo Should this look for the next item in the loop, or just via the database?
- * 
+ * @since 0.10
  * @return Item|null
  **/
 function get_next_item()
@@ -933,7 +1014,7 @@ function get_next_item()
 
 /**
  * @see get_previous_item()
- * 
+ * @since 0.10
  * @return Item|null
  **/
 function get_previous_item()
@@ -942,12 +1023,13 @@ function get_previous_item()
 }
 
 /**
- * Retrieve the current Item record
+ * Retrieve the current Item record.
  * 
+ * @since 0.10
  * @throws Exception
  * @access private
  * @param string
- * @return void
+ * @return Item
  **/
 function get_current_item()
 {
@@ -959,6 +1041,7 @@ function get_current_item()
 }
 
 /**
+ * @since 0.10
  * @access private
  * @see loop_items()
  * @param Item
@@ -972,7 +1055,8 @@ function set_current_item(Item $item)
 }
 
 /**
- * @access private
+ * @since 0.10
+ * @param array $items
  */
 function set_items_for_loop($items)
 {
@@ -980,12 +1064,19 @@ function set_items_for_loop($items)
     $view->items = $items;
 }
 
+/**
+ * Retrieve the set of items for the current loop.
+ * 
+ * @since 0.10
+ * @return array
+ **/
 function get_items_for_loop()
 {
     return __v()->items;
 }
 
 /**
+ * @since 0.10
  * @return boolean
  */
 function has_items_for_loop()
@@ -997,6 +1088,7 @@ function has_items_for_loop()
 /**
  * Determine whether or not there are any items in the database.
  * 
+ * @since 0.10
  * @return boolean
  **/
 function has_items()
@@ -1004,13 +1096,21 @@ function has_items()
     return (total_items() > 0);    
 }
 
+/**
+ * Determine whether or not there are any collections in the database.
+ * 
+ * @since 0.10
+ * @return boolean
+ **/
 function has_collections()
 {
     return (total_collections() > 0);
 }
 
 /**
- * Loops through items assigned to the current view.
+ * Loops through items assigned to the view.
+ * 
+ * @since 0.10
  * @return mixed The current item
  */
 function loop_items()
@@ -1020,7 +1120,9 @@ function loop_items()
 
 /**
  * Loops through files assigned to the current item.
- * @return mixed The current file for an item
+ * 
+ * @since 0.10
+ * @return mixed The current file within the loop.
  */
 function loop_files_for_item()
 {
@@ -1030,7 +1132,9 @@ function loop_files_for_item()
 
 /**
  * Loops through collections assigned to the current view.
- * @return mixed The current collection
+ * 
+ * @since 0.10
+ * @return mixed The current collection in the loop.
  */
 function loop_collections()
 {
@@ -1041,6 +1145,7 @@ function loop_collections()
  * Loops through a specific record set, setting the current record to a globally 
  * accessible scope and returning it.
  * 
+ * @since 0.10
  * @see loop_items()
  * @see loop_files_for_item()
  * @see loop_collections()
@@ -1091,7 +1196,7 @@ function loop_records($recordType, $records)
 }
 
 /**
- * @access private
+ * @since 0.10
  * @param Collection
  * @return void
  **/
@@ -1101,8 +1206,8 @@ function set_current_collection($collection)
 }
 
 /**
- * 
- * @param string
+ * @since 0.10
+ * @param array $collections Set of Collection records to loop.
  * @return void
  **/
 function set_collections_for_loop($collections)
@@ -1110,13 +1215,19 @@ function set_collections_for_loop($collections)
     __v()->collections = $collections;
 }
 
+/**
+ * Retrieve the set of collections that are being looped.
+ * 
+ * @since 0.10
+ * @return array
+ **/
 function get_collections_for_loop()
 {
     return __v()->collections;
 }
 
 /**
- * @access private
+ * @since 0.10
  * @return Collection|null
  **/
 function get_current_collection()
@@ -1131,6 +1242,7 @@ function get_current_collection()
  * mostly because collections do not (and may not ever) utilize the 'elements'
  * metadata schema.
  * 
+ * @since 0.10
  * @see item()
  * @param string
  * @param array $options
@@ -1194,10 +1306,12 @@ function collection($fieldName, $options=array())
 }
 
 /**
- * Retrieve a certain # of items in the collection
+ * Retrieve and loop through a subset of items in the collection.
  * 
- * @param string
- * @return void
+ * @since 0.10
+ * @param integer $num
+ * @param array $options Optional
+ * @return Item|null
  **/
 function loop_items_in_collection($num = 10, $options = array())
 {
@@ -1213,32 +1327,53 @@ function loop_items_in_collection($num = 10, $options = array())
     return loop_items();
 }
 
+/**
+ * Retrieve the total number of items in the current collection.
+ * 
+ * @since 0.10
+ * @return integer
+ **/
 function total_items_in_collection()
 {
     return get_current_collection()->totalItems();
 }
 
+/**
+ * Determine whether or not the collection has any collectors associated with it.
+ * 
+ * @since 0.10
+ * @return boolean
+ **/
 function collection_has_collectors()
 {
     return get_current_collection()->hasCollectors();
 }
 
+/**
+ * Determine whether or not the current collection is public.
+ * 
+ * @since 0.10
+ * @return boolean
+ **/
 function collection_is_public()
 {
     return get_current_collection()->public;
 }
 
+/**
+ * Determine whether or not the current collection is featured.
+ * 
+ * @since 0.10
+ * @return boolean
+ **/
 function collection_is_featured()
 {
     return get_current_collection()->featured;
 }
 
 /**
- * @internal Duplication between this and set_current_item().  Factor into
- * separate
- * 
- * @access private
- * @param string
+ * @since 0.10
+ * @param File
  * @return void
  **/
 function set_current_file(File $file)
@@ -1247,14 +1382,22 @@ function set_current_file(File $file)
 }
 
 /**
- * @access private
- * @return File
+ * @since 0.10
+ * @return File|null
  **/
 function get_current_file()
 {
     return __v()->file;
 }
 
+/**
+ * Retrieve HTML for a link to the advanced search form.
+ * 
+ * @since 0.10
+ * @param string $text Optional Text of the link. Default is 'Advanced Search'.
+ * @param array $props Optional XHTML attributes for the link.
+ * @return string
+ **/
 function link_to_advanced_search($text = 'Advanced Search', $props = array())
 {
     // Is appending the query string directly a security issue?  We should figure that out.
@@ -1266,9 +1409,11 @@ function link_to_advanced_search($text = 'Advanced Search', $props = array())
  * Get the proper HTML for a link to the browse page for items, with any appropriate
  * filtering parameters passed to the URL.
  * 
- * @param string Text to display in the link.
- * @param array Any parameters to use to build the browse page URL, e.g.
+ * @since 0.10
+ * @param string $text Text to display in the link.
+ * @param array $browseParams Optional Any parameters to use to build the browse page URL, e.g.
  * array('collection' => 1) would build items/browse?collection=1 as the URL.
+ * @param array $linkProperties Optional XHTML attributes for the link.
  * @return string HTML
  **/
 function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
@@ -1287,6 +1432,7 @@ function link_to_browse_items($text, $browseParams = array(), $linkProperties = 
  * The text of the link defaults to the original filename of the file unless
  * otherwise specified.
  * 
+ * @since 1.0
  * @uses get_current_file()
  * @uses item_file()
  * @param array
@@ -1309,8 +1455,25 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
 }
 
 /**
- * Return the pagination string.
+ * Retrieve HTML for the set of pagination links.
  * 
+ * @since 0.10
+ * @param array $options Optional Configurable parameters for the pagination 
+ * links.  The following options are available:
+ *      'scrolling_style' (string) See Zend_View_Helper_PaginationControl
+  * for more details.  Default 'Sliding'.  
+ *      'partial_file' (string) View script to use to render the pagination HTML.
+ * Default is 'common/pagination_control.php'.
+ *      'page_range' (integer) See Zend_Paginator::setPageRange() for details.
+ * Default is 5.
+ *      'total_results' (integer) Total results to paginate through.  Default is
+ * provided by the 'total_results' key of the 'pagination' array that is typically
+ * registered by the controller.
+ *      'page' (integer) Current page of the result set.  Default is the 'page'
+ * key of the 'pagination' array.
+ *      'per_page' (integer) Number of results to display per page.  Default is
+ * the 'per_page' key of the 'pagination' array.
+ * @return string HTML for the pagination links.
  **/
 function pagination_links($options = array('scrolling_style' => null, 
                                      'partial_file'    => null, 
@@ -1351,12 +1514,28 @@ function pagination_links($options = array('scrolling_style' => null,
                                     $partial);
 }
 
+/**
+ * Retrieve the set of all metadata for the current item.
+ * 
+ * @since 0.10
+ * @uses Omeka_View_Helper_ItemMetadata
+ * @param array $options Optional
+ * @return string|array
+ **/
 function show_item_metadata(array $options = array())
 {
     $item = get_current_item();
     return __v()->itemMetadataList($item, $options);
 }
 
+/**
+ * Retrieve the set of all metadata for the current file.
+ * 
+ * @since 1.0
+ * @param array $options Optional
+ * @param File|null $file Optional
+ * @return string|array
+ **/
 function show_file_metadata(array $options = array(), $file = null)
 {
     if (!$file) {
@@ -1365,6 +1544,15 @@ function show_file_metadata(array $options = array(), $file = null)
     return __v()->fileMetadataList($file, $options);
 }
 
+/**
+ * Retrieve a substring of the text by limiting the word count.
+ * 
+ * @since 0.10
+ * @param string $phrase
+ * @param integer $maxWords
+ * @param string $ellipsis Optional '...' by default.
+ * @return string
+ **/
 function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
 {
     $phraseArray = explode(' ', $phrase);
@@ -1381,6 +1569,7 @@ function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
  * added benefit of returning a fallback string in case the resulting stripped 
  * string is empty or contains only whitespace.
  * 
+ * @since 0.10
  * @uses strip_tags()
  * @param The string to be stripped of HTML formatting.
  * @param The string to be used as a fallback.
@@ -1405,6 +1594,7 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
  * Retrieve the latest available version of Omeka by accessing the appropriate
  * URI on omeka.org.
  * 
+ * @since 1.0
  * @return string|false The latest available version of Omeka, or false if the
  * request failed for some reason.
  **/
