@@ -1,8 +1,18 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2009
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 /**
-* 
-*/
+ * Abstract class that encapsulates default behavior for retrieving lists of 
+ * metadata for any record that uses ActsAsElementText.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2009
+ **/
 abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
 {   
     const RETURN_HTML = 'html';

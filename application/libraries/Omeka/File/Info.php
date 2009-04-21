@@ -1,8 +1,18 @@
 <?php 
 /**
-* A wrapper for the getID3 library that extracts metadata from files in the 
-* Omeka filesystem.
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2009
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * A wrapper for the getID3 library that extracts metadata from files in the 
+ * Omeka filesystem.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2009
+ **/
 class Omeka_File_Info
 {
     /**

@@ -1,8 +1,18 @@
 <?php 
-
 /**
-* 
-*/
+ * @version $Id$
+ * @copyright Center for History and New Media, 2009
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * Adds default behavior associated with the 'public' and 'featured' flags.
+ *
+ * @package Omeka
+ * @subpackage Mixins
+ * @copyright Center for History and New Media, 2009
+ **/
 class PublicFeatured extends Omeka_Record_Mixin
 {
     public function __construct($record)
