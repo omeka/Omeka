@@ -27,7 +27,7 @@ function current_user_tags($item)
 	if(!$item->exists()) {
 		return false;
 	}
-	return get_tags(array('user'=>$user->id, 'record'=>$item));
+	return get_tags(array('user'=>$user->id, 'record'=>$item, 'sort'=>array('alpha')));
 }
 
 /**
