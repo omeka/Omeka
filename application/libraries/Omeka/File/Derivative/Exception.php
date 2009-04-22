@@ -13,5 +13,5 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_File_Derivative_Image extends Exception
+class Omeka_File_Derivative_Exception extends Exception
 {}
