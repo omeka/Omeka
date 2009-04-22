@@ -14,7 +14,8 @@
  **/
 class TagTable extends Omeka_Db_Table
 {    
-    public function findOrNew($name) {
+    public function findOrNew($name) 
+    {
         $db = $this->getDb();
         $sql = "
         SELECT t.* 
@@ -56,22 +57,24 @@ class TagTable extends Omeka_Db_Table
     /**
      * Filter SELECT statement based on a user or entity ID
      * 
-     * @param Omeka_Db_Select
-     * @param integer
-     * @param boolean
+     * @param Omeka_Db_Select $select
+     * @param Entity|User|integer $userOrEntity The entity or user object, or the id of an entity or user object
+     * @param boolean $isUser
      * @return void
      **/
-    public function filterByUserOrEntity($select, $userId, $isUser=true) {
+    public function filterByUserOrEntity($select, $userOrEntity, $isUser) 
+    {
+        $userOrEntityId = (int) is_numeric($userOrEntity) ? $userOrEntity : $userOrEntity->id;
+        
         $db = $this->getDb();
         $select->joinInner( array('e'=>$db->Entity), "e.id = tg.entity_id", array());
         
         if ($isUser) {
             $select->joinInner( array('u'=>$db->User), "u.entity_id = e.id", array());
-            $select->where("u.id = ?", $userId);
+            $select->where("u.id = ?", $userOrEntityId);
         } else {
-            $select->where("e.id = ?", $userId );
+            $select->where("e.id = ?", $userOrEntityId);
         }
-        
     }
     
     /**
@@ -153,9 +156,9 @@ class TagTable extends Omeka_Db_Table
      *
      * @param Omeka_Db_Select 
      * @param array $params
-     *         'sort' => 'recent', 'least', 'most', 'alpha', 'reverse_alpha'
+     *        'sort' => 'recent', 'least', 'most', 'alpha', 'reverse_alpha'
      *        'limit' => integer
-     *         'record' => instanceof Omeka_Record
+     *        'record' => instanceof Omeka_Record
      *        'entity' => entity_id
      *        'user' => user_id
      *        'like' => partial_tag_name
@@ -179,8 +182,8 @@ class TagTable extends Omeka_Db_Table
             $this->filterByRecord($select, $record);
         }
                 
-        if(($filterId = $params['user']) || ($filterId = $params['entity'])) {
-            $this->filterByUserOrEntity($select, (int) $filterId, !empty($params['user']));
+        if(($userOrEntity = $params['user']) || ($userOrEntity = $params['entity'])) {
+            $this->filterByUserOrEntity($select, $userOrEntity, !empty($params['user']));
         }
 
         if (isset($params['like'])) {
