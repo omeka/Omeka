@@ -22,7 +22,11 @@
     <tbody>
 <?php foreach( $plugins as $key => $plugin ): ?>
 	<tr>
-		<td><?php echo html_escape($plugin->name); ?></td>
+		<td><?php 	if ($plugin->link):
+						echo '<a href="' . html_escape($plugin->link) . '">' . html_escape($plugin->name) . '</a>';
+					else:
+						echo html_escape($plugin->name);
+					endif; ?></td>
 		<td><?php echo html_escape($plugin->description);?></td>
 		<td><?php echo html_escape($plugin->author);?></td>
 		<td>
