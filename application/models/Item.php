@@ -173,24 +173,6 @@ class Item extends Omeka_Record
     }
     
     /**
-     * @deprecated
-     * @return void
-     **/
-    private function deleteFiles($ids = null) 
-    {
-        if (!is_array($ids)) {
-            return false;
-        }
-        
-        // Retrieve file objects so that we have the benefit of the plugin hooks
-        // Oops, this will allow for deleting files from other items (bug!)
-        foreach ($ids as $file_id) {
-            $file = $this->getTable('File')->find($file_id);
-            $file->delete();
-        }        
-    }
-    
-    /**
      * Modify the user's tags for this item based on form input.
      * 
      * Checks the 'tags' field from the post and applies all the differences in
@@ -227,7 +209,9 @@ class Item extends Omeka_Record
         
         // Delete files that have been designated by passing an array of IDs 
         // through the form.
-        $this->deleteFiles($post['delete_files']);
+        if ($post['delete_files']) {
+            $this->_deleteFiles($post['delete_files']);
+        }
         
         $this->_modifyTagsByForm($post);
     }
@@ -256,18 +240,23 @@ class Item extends Omeka_Record
     }
     
     /**
-     * @todo Combine this with Item::deleteFiles() in such a way that it can
-     * be used to delete files based on a form submission OR all files when
-     * the item itself is deleted.
-     * @see Item::deleteFiles()
-     * @param string
+     * Delete files associated with the item.
+     * 
+     * If the IDs of specific files are passed in, this will delete only those
+     * files (e.g. form submission).  Otherwise, it will delete all files 
+     * associated with the item.
+     * 
+     * @uses FileTable::findByItem()
+     * @param array $fileIds Optional
      * @return void
      **/
-    protected function _deleteFiles()
-    {        
-        foreach ($this->Files as $file) {
-            $file->delete();
-        }        
+    protected function _deleteFiles(array $fileIds = array())
+    {           
+        $filesToDelete = $this->getTable('File')->findByItem($this->id, $fileIds);
+        
+        foreach ($filesToDelete as $fileRecord) {
+            $fileRecord->delete();
+        }
     }
     
     /**

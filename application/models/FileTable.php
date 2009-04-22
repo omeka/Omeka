@@ -42,10 +42,21 @@ class FileTable extends Omeka_Db_Table
         return $this->fetchObject($sql, array($item_id));
     }
     
-    public function findByItem($item_id)
+    /**
+     * Retrieve files associated with an item. 
+     * 
+     * @param integer $itemId
+     * @param array $fileIds Optional If given, this will only retrieve files
+     * with these specific IDs.
+     * @return array
+     **/
+    public function findByItem($item_id, $fileIds = array())
     {
         $select = $this->getSelect();
         $select->where('f.item_id = ?');
+        if ($fileIds) {
+            $select->where('f.id IN (?)', $fileIds);
+        }
         return $this->fetchObjects($select, array($item_id));
     }
 }
