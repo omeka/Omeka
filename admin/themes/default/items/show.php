@@ -120,7 +120,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 		<?php if ( has_permission('Items','tag') ): ?>
         
 		<h3>My Tags</h3>
-		<div id="my-tags">
+		<div id="my-tags-show">
 		
 		<form id="tags-form" method="post" action="<?php echo uri('items/modify-tags/') ?>">
 		    <div class="input">

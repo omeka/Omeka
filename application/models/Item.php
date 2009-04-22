@@ -191,36 +191,6 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Remove a specific tag from any user.  This corresponds to a 'remove_tag'
-     * form input that contains the ID of the tag to delete.
-     *
-     * Fires the 'remove_item_tag' hook with the tag name and Item object as
-     * arguments.
-     * 
-     * @param integer
-     * @return void
-     **/
-    protected function _removeTagByForm($tagId)
-    {        
-        // Only proceed if the user has permission to untag other users
-        if ($this->userHasPermission('untagOthers')) {
-            
-            // Find the tag instance we want to delete
-            $tagToDelete = $this->getTable('Tag')->find($tagId);
-            $user = Omeka_Context::getInstance()->getCurrentUser();
-            
-            if ($tagToDelete) {
-                // The remove_item_tag hook is passed the name of the tag as 
-                // well as the Item record
-                fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $item);
-                
-                //Delete all instances of this tag for this Item
-                $this->deleteTags($tagToDelete, null, true);
-            }            
-        }
-    }
-    
-    /**
      * Modify the user's tags for this item based on form input.
      * 
      * Checks the 'tags' field from the post and applies all the differences in
@@ -233,11 +203,12 @@ class Item extends Omeka_Record
     protected function _modifyTagsByForm($post)
     {
         // Change the tags (remove some, add some)
-        if (array_key_exists('tags', $post)) {
+        if (array_key_exists('my-tags-to-add', $post)) {
             $user = Omeka_Context::getInstance()->getCurrentUser();
-            $entity = $user->Entity;
-            if ($entity) {
-                $this->applyTagString($post['tags'], $entity);
+            if ($user) {
+                $this->addTags($post['my-tags-to-add'], $user);
+                $this->deleteTags($post['my-tags-to-delete'], $user);                
+                $this->deleteTags($post['other-tags-to-delete'], $user, $this->userHasPermission('untagOthers'));
             }
         }        
     }
@@ -253,9 +224,6 @@ class Item extends Omeka_Record
     protected function afterSaveForm($post)
     {
         $this->_uploadFiles();
-                
-        // Remove a single tag based on the form submission.
-        $this->_removeTagByForm((int) $post['remove_tag']);
         
         // Delete files that have been designated by passing an array of IDs 
         // through the form.
