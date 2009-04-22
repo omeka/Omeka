@@ -693,6 +693,8 @@ function display_random_featured_collection()
 function current_user_tags_for_item()
 {
     $item = get_current_item();
+    
+    // eventually, we need to not use current_user_tags because it is deprecated
     return current_user_tags($item);
 }
 
