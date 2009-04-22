@@ -1,20 +1,23 @@
 <?php 
 /**
- * All theme API functions that are new to 0.10 .
+ * All theme API functions that are new to 0.10.
  * 
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage NewThemeHelpers
+ * @todo Separate functions into appropriate helper files.
  **/
 
 /**
  * Retrieve the values for a given field in the current item.
  * 
  * @since 0.10
- * @see Omeka_View_Helper_Item::item()
- * @uses Omeka_View_Helper_Item
+ * @uses Omeka_View_Helper_RecordMetadata::_get() Contains instructions and 
+ * examples.
+ * @uses Omeka_View_Helper_ItemMetadata::_getRecordMetadata() Contains a list of
+ * all fields that do not belong to element sets, e.g. 'id', 'date modified', etc.
  * @param string $elementSetName
  * @param string $elementName
  * @param array $options

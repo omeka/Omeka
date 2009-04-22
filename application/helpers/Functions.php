@@ -11,6 +11,7 @@
  * Retrieve the view object.  Should be used only to avoid function scope
  * issues within other theme helper functions.
  * 
+ * @since 0.10
  * @access private
  * @return Omeka_View
  **/
@@ -32,6 +33,7 @@ function is_odd($num)
 /**
  * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
  * 
+ * @since 0.9
  * @uses items_output_uri()
  * @return string HTML
  **/
@@ -45,13 +47,8 @@ function auto_discovery_link_tag(){
  * passed.  This is primarily used by other helper functions and will not be used
  * by theme writers in most cases.
  * 
- * @since 0.10 Now uses the Omeka_View_Helper_Media class to display the files.
- * @since 0.10 Adds a third argument, which is the class name to give the div that
- * wraps each file.  Passing null as this argument will ensure that none of the files
- * are wrapped in divs.
- * @since 1.0 The third argument is now an array of attributes that can be passed
- * as the wrapper for each file.
- * @see Omeka_View_Helper_Media
+ * @since 0.9
+ * @uses Omeka_View_Helper_Media
  * @param array $files An array of File records to display.
  * @param array $props Properties to customize display for different file types.
  * @param array $wrapperAttributes XHTML attributes for the div that wraps each
@@ -74,6 +71,8 @@ function display_files($files, array $props = array(), $wrapperAttributes = arra
  * @uses Omeka_View_Helper_Media
  * @param File $file One File record.
  * @param array $props
+ * @param array $wrapperAttributes Optional XHTML attributes for the div wrapper
+ * for the displayed file.  Defaults to array('class'=>'item-file').
  * @return string HTML
  **/
 function display_file($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
@@ -233,7 +232,7 @@ function js_scriptaculous($file, $dir = 'javascripts', $scriptaculousLibraries =
 
 
 /**
- * Echos the web path to a css file
+ * Retrieve the web path to a css file.
  *
  * @param string $file Should not include the .css extension
  * @param string $dir Defaults to 'css'
@@ -244,16 +243,20 @@ function css($file, $dir = 'css') {
 }
 
 /**
- * Echos the web path to an image file
- * $dir defaults to 'images'
- * $file SHOULD include an extension, many image exensions are possible
+ * Retrieve the web path to an image file.
+ * 
+ * @since 0.9
+ * @param string $file Filename, including the extension.
+ * @param string $dir Optional Directory within the theme to look for image 
+ * files.  Defaults to 'images'.
+ * @return string
  */
 function img($file, $dir = 'images') {
 	return src($file, $dir);
 }
 
 /**
- * Includes a file from the common/ directory, passing variables into that script
+ * Includes a file from the common/ directory, passing variables into that script.
  * 
  * @param string $file Filename
  * @param array $vars A keyed array of variables to be extracted into the script
@@ -407,6 +410,7 @@ function form_error($field)
  * generates 
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
  * 
+ * @uses is_current_uri()
  * @param array A keyed array, where Key = Text of Navigation and Value = Link
  * @return string HTML for the unordered list
  **/
@@ -429,10 +433,12 @@ function nav(array $links) {
 /**
  * Allows plugins to hook in to the header of public themes.
  *
- * @since 0.10 Uses the 'public_theme_header' hook instead of 'theme_header'.
- * @since 0.10 The 'public_theme_header' hook will receive the request object as
- *  its first argument. That allows the plugin writer to tailor the header output
- *  to a specific page or pages within the public theme.
+ * Uses the 'public_theme_header' hook to inject content into the theme.  This
+ * hook receives the request object as the first argument, which allows the 
+ * plugin writer to tailor the header output to a specific request (specific
+ * controller, action, etc.).
+ * 
+ * @since 0.9
  * @return void
  **/
 function plugin_header() {
@@ -441,7 +447,12 @@ function plugin_header() {
 }
 
 /**
- * @since 0.10 Uses 'public_theme_footer' hook instead of 'theme_footer'.
+ * Allow plugins to hook in to the footer of public themes.
+ * 
+ * Uses the 'public_theme_footer' hook, which receives the request object as
+ * the first argument.
+ * 
+ * @since 0.9
  * @see plugin_header()
  * @return void
  **/
@@ -520,10 +531,12 @@ function has_permission($role,$privilege=null) {
  * Retrieve the value of a particular site setting.  This can be used to display
  * any option that would be retrieved with get_option().
  *
- * @uses get_option()
- * @since 0.10 Content for any specific option can be filtered by implementing
- * a filter called 'display_setting_' + the name of the option, e.g. 
+ * Content for any specific option can be filtered by using a filter named
+ * 'display_setting_(option)' where (option) is the name of the option, e.g.
  * 'display_setting_site_title'.
+ * 
+ * @uses get_option()
+ * @since 0.9
  * @return string
  **/
 function settings($name) {
@@ -532,15 +545,25 @@ function settings($name) {
 	return $name;
 }
 	
-	//Adapted from PHP.net: http://us.php.net/manual/en/function.nl2br.php#73479
-	function nls2p($str)
-	{
-		
-	  return str_replace('<p></p>', '', '<p>'
-	        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)
-	        . '</p>');
+/**
+ * Replace new lines in a block of text with paragraph tags.
+ * 
+ * Looks for 2 consecutive line breaks resembling a paragraph break and wraps
+ * each of the paragraphs with a <p> tag.  If no paragraphs are found, then the
+ * original text will be wrapped with line breaks.
+ * 
+ * @link http://us.php.net/manual/en/function.nl2br.php#73479
+ * @param string $str
+ * @return string
+ **/
+function nls2p($str)
+{
 	
-	}
+  return str_replace('<p></p>', '', '<p>'
+        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)
+        . '</p>');
+
+}
 	
 	/**
 	 * Retrieve a substring of a given piece of text. 

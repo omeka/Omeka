@@ -39,6 +39,7 @@ function items_output_uri($output="rss2", $otherParams = array()) {
 /**
  * Return a valid URL when given a set of options.
  * 
+ * @uses Omeka_View_Helper_Url::url() See for details on usage.
  * @param string|array Either a string URL stub or a set of options for 
  * building a URL from scratch.
  * @param string The name of a route to use to generate the URL (optional)
@@ -51,9 +52,11 @@ function uri($options=array(), $route=null, $queryParams=array(), $reset = false
 }
 
 /**
- * Returns the current URL (optionally with query parameters appended)
+ * Returns the current URL (optionally with query parameters appended).
  *
- * @return void
+ * @since 0.9
+ * @param array $params Optional Set of query parameters to append.
+ * @return string
  **/
 function current_uri($params=array()) 
 {
@@ -72,6 +75,14 @@ function current_uri($params=array())
 	return $uri;
 }
 
+/**
+ * Determine whether or not a given URI matches the current request URI.
+ * 
+ * @since 0.9
+ * @param string $link URI.
+ * @param Zend_Controller_Request_Http|null $req
+ * @return boolean
+ **/
 function is_current_uri($link, $req = null) {
 		
 	if(!$req) {
