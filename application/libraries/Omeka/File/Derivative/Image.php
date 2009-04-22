@@ -20,7 +20,7 @@ class Omeka_File_Derivative_Image
     {
         //Check to see if ImageMagick is installed
         if (!self::checkForImageMagick()) {
-            throw new Omeka_Upload_Exception('ImageMagick is not properly configured.  Please check your settings and then try again.' );
+            throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured.  Please check your settings and then try again.' );
         }        
         
         //Check the constraints to make sure they are valid
@@ -32,7 +32,7 @@ class Omeka_File_Derivative_Image
             $constraint_size = get_option($constraint);
             
             if (!$constraint_size or !is_numeric($constraint_size)) {
-                throw new Omeka_Upload_Exception( 
+                throw new Omeka_File_Derivative_Exception( 
                     "The sizes for derivative images have not been configured properly." );
             }
         }
@@ -50,7 +50,7 @@ class Omeka_File_Derivative_Image
      * 
      * @since 1.0 The 'path_to_convert' setting must be the directory containing
      * the ImageMagick executable, not the path to the executable itself.
-     * @throws Exception When the path is not a valid directory.
+     * @throws Omeka_File_Derivative_Exception When the path is not a valid directory.
      * @return string Absolute path to the ImageMagick executable.
      **/
     protected static function _getPathToImageMagick()
@@ -62,7 +62,7 @@ class Omeka_File_Derivative_Image
             $imPath = rtrim($cleanPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_COMMAND;
             return $imPath;
         } else {
-            throw new Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');
+            throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');
         }
     }
     
@@ -130,7 +130,7 @@ class Omeka_File_Derivative_Image
      * file types can be found on PHP.net's doc page for getimagesize() or 
      * image_type_to_mime_type().
      * 
-     * @throws Omeka_Upload_Exception
+     * @throws Omeka_File_Derivative_Exception
      * @param string The full path to the archived file.
      * @param string The full path to the directory in which to create the derivative image.
      * @param integer The size constraint for the image (in pixels).
@@ -156,7 +156,7 @@ class Omeka_File_Derivative_Image
             $new_path = escapeshellarg( $new_path );
 
             if (!$constraint) {
-                throw new Omeka_Upload_Exception('Image creation failed - Image size constraint must be specified within application settings');
+                throw new Omeka_File_Derivative_Exception('Image creation failed - Image size constraint must be specified within application settings');
             }
 
             switch ($type) {
@@ -186,7 +186,7 @@ class Omeka_File_Derivative_Image
             if ($result_value == 0) {
                 return $imageName;    
             } else {
-                throw new Omeka_Upload_Exception('Something went wrong with image creation.  Please notify an administrator.');
+                throw new Omeka_File_Derivative_Exception('Something went wrong with image creation.  Please notify an administrator.');
             }
         }
     }    
