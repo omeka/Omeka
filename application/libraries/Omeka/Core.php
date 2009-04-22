@@ -580,8 +580,8 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $contexts->setContextParam('output');
                 
         $contextArray = array(
-             'dc' => array(
-                 'suffix'    => 'dc',
+             'dcmes-xml' => array(
+                 'suffix'    => 'dcmes-xml',
                  'headers'   => array('Content-Type' => 'text/xml')
              ),
              'rss2' => array(

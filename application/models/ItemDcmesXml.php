@@ -11,16 +11,19 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class ItemDc
+class ItemDcmesXml
 {
-    public function recordToDc($item)
-    {      
-        $dcElements = $item->getElementsBySetName('Dublin Core');
-    
+    private $_dcElements = array('Title', 'Subject', 'Description', 
+                                 'Creator', 'Source', 'Publisher', 
+                                 'Date', 'Contributor', 'Rights', 
+                                 'Relation', 'Format', 'Language', 
+                                 'Type', 'Identifier', 'Coverage');
+
+    public function recordToDcmesXml($item)
+    {
         $xml = "\n" . '<rdf:Description rdf:about="' . abs_item_uri($item) . '">';
         // Iterate throught the DCMES.
-        foreach ($dcElements as $element) {
-            $elementName = $element->name;
+        foreach ($this->_dcElements as $elementName) {
             if ($text = item('Dublin Core', $elementName, 'all')) {
                 foreach ($text as $k => $v) {
                     if (!empty($v)) {

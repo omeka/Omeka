@@ -4,10 +4,10 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 xmlns:dc="http://purl.org/dc/elements/1.1/">
 <?php 
-require_once 'ItemDc.php';
-$convert = new ItemDc; 
+require_once 'ItemDcmesXml.php';
+$convert = new ItemDcmesXml; 
 while ($item = loop_items()) {
-    echo $convert->recordToDc($item);
+    echo $convert->recordToDcmesXml($item);
 }
 ?>
 </rdf:RDF>
