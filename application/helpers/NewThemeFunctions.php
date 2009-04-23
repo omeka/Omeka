@@ -21,7 +21,7 @@
  * @param string $elementSetName
  * @param string $elementName
  * @param array $options
- * @param Item|null $item
+ * @param Item|null Check for this specific item record (current item if null).
  * @return string|array|null
  **/
 function item($elementSetName, $elementName = null, $options = array(), $item = null)
@@ -52,12 +52,14 @@ function item_file($elementSetName, $elementName = null, $options = array(), $fi
 
 /**
  * Retrieve the set of values for item type elements.
- * 
+ * @param Item|null Check for this specific item record (current item if null).
  * @return array
  **/
-function item_type_elements()
+function item_type_elements($item=null)
 {
-    $item = get_current_item();
+    if (!$item) {
+        $item = get_current_item();
+    }
     $elements = $item->getItemTypeElements();
     foreach ($elements as $element) {
         $elementText[$element->name] = item(ELEMENT_SET_ITEM_TYPE, $element->name);
@@ -198,11 +200,15 @@ function record_uri(Omeka_Record $record, $action, $controller = null)
  * @since 0.10
  * @param string $action Action to link to for this item.  Default is 'show'.
  * @uses record_uri()
+ * @param Item|null Check for this specific item record (current item if null).
  * @return string URL
  **/
-function item_uri($action = 'show')
+function item_uri($action = 'show', $item=null)
 {
-    return record_uri(get_current_item(), $action);
+    if (!$item) {
+        $item = get_current_item();
+    }
+    return record_uri($item, $action);
 }
 
 /**
@@ -272,7 +278,7 @@ function abs_uri()
  * Generate an absolute URI to an item.  Primarily useful for generating permalinks.
  * 
  * @since 0.10
- * @param Item $item Optional Item record to use for URI generation.
+ * @param Item|null Check for this specific item record (current item if null).
  * @return void
  **/
 function abs_item_uri($item = null)
@@ -605,11 +611,16 @@ function item_belongs_to_collection($name=null, $item=null)
  * determine if an item has a specific item type.
  * 
  * @since 0.10
- * @param string|null
+ * @param string|null $name
+ * @param Item|null Check for this specific item record (current item if null).
  * @return boolean
  **/
-function item_has_type($name = null)
+function item_has_type($name = null, $item = null)
 {
+    if(!$item) {
+        $item = get_current_item();
+    }
+    
     $itemTypeName = item('Item Type Name');
     return ($name and ($itemTypeName == $name)) or (!$name and !empty($itemTypeName));
 }
@@ -620,11 +631,15 @@ function item_has_type($name = null)
  * @uses get_current_item()
  * @param array $options 
  * @param array $wrapperAttributes
+ * @param Item|null Check for this specific item record (current item if null).
  * @return string HTML
  **/
-function display_files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'))
+function display_files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'), $item = null)
 {
-    $item = get_current_item();
+    if(!$item) {
+        $item = get_current_item();
+    }
+    
     return display_files($item->Files, $options, $wrapperAttributes);
 }
 
@@ -687,13 +702,15 @@ function display_random_featured_collection()
  * @since 0.10
  * @uses current_user_tags()
  * @uses get_current_item()
- * @param string
+ * @param Item|null Check for this specific item record (current item if null).
  * @return array
  **/
-function current_user_tags_for_item()
+function current_user_tags_for_item($item=null)
 {
-    $item = get_current_item();
-    
+    if(!$item) {
+        $item = get_current_item();
+    }
+        
     // eventually, we need to not use current_user_tags because it is deprecated
     return current_user_tags($item);
 }
@@ -704,11 +721,14 @@ function current_user_tags_for_item()
  * @since 0.10
  * @see has_files()
  * @uses Item::hasFiles()
+ * @param Item|null Check for this specific item record (current item if null).
  * @return boolean
  **/
-function item_has_files()
+function item_has_files($item=null)
 {
-    $item = get_current_item();
+    if(!$item) {
+        $item = get_current_item();
+    }
     return $item->hasFiles();
 }
 
@@ -716,21 +736,27 @@ function item_has_files()
  * Determine whether or not the item has a thumbnail image that it can display.
  * 
  * @since 0.10
- * @param string
+ * @param Item|null Check for this specific item record (current item if null).
  * @return void
  **/
-function item_has_thumbnail()
+function item_has_thumbnail($item=null)
 {
-    return get_current_item()->hasThumbnail();
+    if(!$item) {
+        $item = get_current_item();
+    }
+    return $item->hasThumbnail();
 }
 
 /**
  * @since 0.10
+ * @param Item|null Check for this specific item record (current item if null).
  * @return boolean
  **/
-function item_has_tags()
+function item_has_tags($item=null)
 {
-    $item = get_current_item();
+    if(!$item) {
+        $item = get_current_item();
+    }
     return (count($item->Tags) > 0);
 }
 
@@ -743,7 +769,7 @@ function item_has_tags()
  * @param string
  * @param string
  * @param integer
- * @param Item|null
+ * @param Item|null Check for this specific item record (current item if null).
  * @return boolean
  **/
 function item_field_uses_html($elementSetName, $elementName, $index=0, $item = null)
@@ -764,7 +790,10 @@ function item_field_uses_html($elementSetName, $elementName, $index=0, $item = n
  * function to display a customized derivative image.
  * 
  * @since 0.10
- * @param string
+ * @param string $imageType
+ * @param array $props
+ * @param integer $index
+ * @param Item|null Check for this specific item record (current item if null).
  * @return void
  **/
 function item_image($imageType, $props = array(), $index = 0, $item = null)
@@ -791,12 +820,26 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
  * @uses item_image()
  * @param array $props A set of attributes for the <img /> tag.
  * @param integer $index The position of the file to use (starting with 0 for 
- * the first file).  
+ * the first file).
+ * @param Item $item The item to which the image belongs  
  * @return string HTML
  **/
-function item_thumbnail($props = array(), $index = 0)
+function item_thumbnail($props = array(), $index = 0, $item = null)
 {
-    return item_image('thumbnail', $props, $index);
+    return item_image('thumbnail', $props, $index, $item);
+}
+
+/**
+ * @see item_thumbnail()
+ * @since 0.10
+ * @param array $props
+ * @param integer $index
+ * @param Item $item The item to which the image belongs
+ * @return string HTML
+ **/
+function item_square_thumbnail($props = array(), $index = 0, $item = null)
+{
+    return item_image('square_thumbnail', $props, $index, $item);
 }
 
 /**
@@ -806,21 +849,9 @@ function item_thumbnail($props = array(), $index = 0)
  * @param integer $index
  * @return string HTML
  **/
-function item_square_thumbnail($props = array(), $index = 0)
+function item_fullsize($props = array(), $index = 0, $item = null)
 {
-    return item_image('square_thumbnail', $props, $index);
-}
-
-/**
- * @see item_thumbnail()
- * @since 0.10
- * @param array $props
- * @param integer $index
- * @return string HTML
- **/
-function item_fullsize($props = array(), $index = 0)
-{
-    return item_image('fullsize', $props, $index);
+    return item_image('fullsize', $props, $index, $item);
 }
 
 /**
@@ -886,11 +917,14 @@ function _select_from_table($tableClass, $props = array(), $value = null, $label
  * 
  * @since 0.10
  * @param array
+ * @param Item|null Check for this specific item record (current item if null).
  * @return string HTML for the form input.
  **/
-function select_item_type_for_item($props=array())
+function select_item_type_for_item($props=array(), $item=null)
 {
-    $item = get_current_item();
+    if (!$item) {
+        $item = get_current_item();
+    }
     return select_item_type($props, $item->item_type_id);
 }
 
@@ -938,14 +972,18 @@ function select_entity($props = array(), $value = null, $label=null)
  * Retrieve the Collection object for the current item.
  * 
  * @since 0.10
+ * @param Item|null Check for this specific item record (current item if null).
  * @internal This is meant to be a simple facade for access to the Collection 
  * record.  Ideally theme writers won't have to interact with the actual object.
  * @access private
  * @return Collection
  **/
-function get_collection_for_item()
+function get_collection_for_item($item=null)
 {
-    return get_current_item()->Collection;
+    if (!$item) {
+        $item = get_current_item();
+    }
+    return $item->Collection;
 }
 
 /**
@@ -979,11 +1017,15 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
  * entered via the form.
  * @param boolean $tagsAreLinked If tags should be linked or just represented as
  * text.  Default is true.
+ * @param Item|null Check for this specific item record (current item if null).
  * @return string HTML
  **/
-function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked = true)
+function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked = true, $item=null)
 {
-    $tags = get_tags(array('sort'=>$order, 'record'=>get_current_item()));
+    if (!$item) {
+        $item = get_current_item();
+    }
+    $tags = get_tags(array('sort'=>$order, 'record'=>$item));
     $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_string($tags, $urlToLinkTo, $delimiter);
 }
@@ -996,11 +1038,15 @@ function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked =
  * @param string
  * @param boolean $tagsAreLinked Optional Whether or not to make each tag a link
  * to browse all the items with that tag.  True by default.
+ * @param Item|null Check for this specific item record (current item if null).
  * @return string
  **/
-function item_tags_as_cloud($order = null, $tagsAreLinked = true)
+function item_tags_as_cloud($order = null, $tagsAreLinked = true, $item=null)
 {
-    $tags = get_tags(array('sort'=>$order, 'record'=>get_current_item()));
+    if (!$item) {
+        $item = get_current_item();
+    }
+    $tags = get_tags(array('sort'=>$order, 'record'=>$item));
     $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_cloud($tags, $urlToLinkTo);
 }
@@ -1010,21 +1056,29 @@ function item_tags_as_cloud($order = null, $tagsAreLinked = true)
  * 
  * @todo Should this look for the next item in the loop, or just via the database?
  * @since 0.10
+ * @param Item|null Check for this specific item record (current item if null).
  * @return Item|null
  **/
-function get_next_item()
+function get_next_item($item=null)
 {
-    return get_current_item()->next();
+    if (!$item) {
+        $item = get_current_item();
+    }
+    return $item->next();
 }
 
 /**
  * @see get_previous_item()
  * @since 0.10
+ * @param Item|null Check for this specific item record (current item if null).
  * @return Item|null
  **/
-function get_previous_item()
+function get_previous_item($item=null)
 {
-    return get_current_item()->previous();
+    if (!$item) {
+        $item = get_current_item();
+    }
+    return $item->previous();
 }
 
 /**
@@ -1128,10 +1182,14 @@ function loop_items()
  * 
  * @since 0.10
  * @return mixed The current file within the loop.
+ * @param Item|null Check for this specific item record (current item if null).
  */
-function loop_files_for_item()
+function loop_files_for_item($item=null)
 {
-    $files = get_current_item()->Files;
+    if (!$item) {
+        $item = get_current_item();
+    }
+    $files = $item->Files;
     return loop_records('files_for_item', $files);
 }
 
@@ -1525,11 +1583,14 @@ function pagination_links($options = array('scrolling_style' => null,
  * @since 0.10
  * @uses Omeka_View_Helper_ItemMetadata
  * @param array $options Optional
+ * @param Item|null Check for this specific item record (current item if null).
  * @return string|array
  **/
-function show_item_metadata(array $options = array())
+function show_item_metadata(array $options = array(), $item=null)
 {
-    $item = get_current_item();
+    if (!$item) {
+        $item = get_current_item();
+    }
     return __v()->itemMetadataList($item, $options);
 }
 
