@@ -445,14 +445,29 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * @todo Hook into plugins.
      * @param array
      * @param Element
      * @return string
      **/
-    public static function getTextStringFromFormPost($postArray, $element)
+    public function getTextStringFromFormPost($postArray, $element)
     {
-        $elementDataType = $element->data_type_name;
+        // Attempt to override the defaults with plugin behavior.
+        $filterName = array(
+            'Flatten', 
+            $this->_getRecordType(), 
+            $element->set_name, 
+            $element->name);
+
+        // If no filters, this should return null.
+        $flatText = null;
+        $flatText = apply_filters($filterName, $flatText, $postArray, $element);
+        
+        // If we got something back, short-circuit the built-in processing.
+        if ($flatText) {
+            return $flatText;
+        }
+        
+        $elementDataType = $element->data_type_name;        
         switch ($elementDataType) {
             case 'Tiny Text':
             case 'Text':
@@ -493,6 +508,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
                 }
                 return "$date $time";
             default:
+                // Elements should always have a default data type in the 
+                // database, even if plugins override the default behavior.
                 throw new Exception("Cannot process form input for element with data type '$elementDataType'!");
                 break;
         }

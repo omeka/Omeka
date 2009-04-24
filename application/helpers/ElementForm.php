@@ -116,8 +116,9 @@ class Omeka_View_Helper_ElementForm
         $postArray = $this->_getPostArray();
         $postArray = $postArray[$index];
         
-        // Flatten this POST array into a string so as to be passed to the necessary helper functions.
-        return ActsAsElementText::getTextStringFromFormPost($postArray, $this->_element);
+        // Flatten this POST array into a string so as to be passed to the 
+        // necessary helper functions.
+        return $this->_record->getTextStringFromFormPost($postArray, $this->_element);
     }
     
     protected function _getHtmlFlagForField($index)
