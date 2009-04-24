@@ -65,7 +65,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * List of elements that were output on the form.  This can be used to 
      * determine the DELETE SQL to use to reset the elements when saving the form.
      *
-     * @see ActsAsElementText::getElementTextsToSaveFromPost()
+     * @see ActsAsElementText::_getElementTextsToSaveFromPost()
      * @var array
      **/
     protected $_elementsOnForm = array();
@@ -88,12 +88,12 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $this->saveElementTexts();
     }
     
-    public function getDb()
+    private function _getDb()
     {
         return $this->_record->getDb();
     }
     
-    protected function getRecordType()
+    private function _getRecordType()
     {
         return get_class($this->_record);
     }
@@ -105,7 +105,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      **/
     protected function getRecordTypeId()
     {
-        return (int) $this->getDb()->getTable('RecordType')->findIdFromName($this->getRecordType());
+        return (int) $this->_getDb()->getTable('RecordType')->findIdFromName($this->_getRecordType());
     }
     
     /**
@@ -125,13 +125,13 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $elementTextRecords = $this->getElementTextRecords();
         
         $this->_textsByNaturalOrder = $elementTextRecords;
-        $this->_textsByElementId = $this->indexTextsByElementId($elementTextRecords);
+        $this->_textsByElementId = $this->_indexTextsByElementId($elementTextRecords);
         
         $elements = $this->getElements();
         $this->_elementsByNaturalOrder = $elements;
-        $this->_elementsByNameAndSet = $this->indexElementsByNameAndSet($elements);
-        $this->_elementsBySet = $this->indexElementsBySet($elements);
-        $this->_elementsById = $this->indexElementsById($elements);
+        $this->_elementsByNameAndSet = $this->_indexElementsByNameAndSet($elements);
+        $this->_elementsBySet = $this->_indexElementsBySet($elements);
+        $this->_elementsById = $this->_indexElementsById($elements);
         
         $this->_recordsAreLoaded = true;
     }
@@ -153,7 +153,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      **/
     public function getElements()
     {
-        return $this->_record->getTable('Element')->findByRecordType($this->getRecordType());
+        return $this->_record->getTable('Element')->findByRecordType($this->_getRecordType());
     }
 
     /**
@@ -244,12 +244,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * @todo Duplicated in ElementTextTable.  Remove from there and put here instead.
-     * 
      * @param array
      * @return array
      **/
-    public function indexTextsByElementId($textRecords)
+    private function _indexTextsByElementId($textRecords)
     {
         $indexed = array();
         foreach ($textRecords as $textRecord) {
@@ -265,7 +263,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @param array
      * @return array
      **/
-    protected function indexElementsByNameAndSet(array $elementRecords)
+    private function _indexElementsByNameAndSet(array $elementRecords)
     {
         $indexed = array();
         foreach($elementRecords as $record) {
@@ -283,7 +281,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @param array
      * @return array
      **/
-    protected function indexElementsBySet(array $elementRecords)
+    private function _indexElementsBySet(array $elementRecords)
     {
         // Account for elements without an order by separating them from 
         // elements with an order.
@@ -309,7 +307,13 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return $indexed;
     }
     
-    protected function indexElementsById(array $elementRecords)
+    /**
+     * Indexes the elements returned by element ID.
+     * 
+     * @param array
+     * @return array
+     **/
+    private function _indexElementsById(array $elementRecords)
     {
         $indexed = array();
         foreach($elementRecords as $record) {
@@ -387,8 +391,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
      **/
     public function beforeSaveElements(&$post)
     {
-        $this->getElementTextsToSaveFromPost($post);
-        $this->validateElementTexts();        
+        $this->_getElementTextsToSaveFromPost($post);
+        $this->_validateElementTexts();        
     }
 
     /**
@@ -408,7 +412,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @param array
      * @return void
      **/
-    public function getElementTextsToSaveFromPost($post)
+    private function _getElementTextsToSaveFromPost($post)
     {
         
         if (!$elementPost = $post['Elements']) {
@@ -426,7 +430,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
                 $elementText = $this->getTextStringFromFormPost($textAttributes, $element);
                 
                 // Save element text filter.
-                $filterName = array('Save', $this->getRecordType(), $element->set_name, $element->name);
+                $filterName = array('Save', $this->_getRecordType(), $element->set_name, $element->name);
                 $elementText = apply_filters($filterName, $elementText, $this->_record, $element);
                 
                 // Ignore fields that are empty (no text)
@@ -502,10 +506,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @param array Set of Element records.
      * @return void
      **/
-    public function validateElementTexts()
+    private function _validateElementTexts()
     {
         foreach ($this->_textsToSave as $key => $textRecord) {
-            if (!$this->elementTextIsValid($textRecord)) {
+            if (!$this->_elementTextIsValid($textRecord)) {
                 $elementRecord = $this->getElementById($textRecord->element_id);
                 $errorMessage = "'$elementRecord->name' field has at least one invalid value!";
                 $this->_record->addError($elementRecord->name, $errorMessage); 
@@ -514,12 +518,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * @todo Testing.
-     * @todo Plugins must hook into this.
-     * @param string
-     * @return void
+     * @param ElementText $elementTextRecord
+     * @return boolean
      **/
-    public function elementTextIsValid($elementTextRecord)
+    private function _elementTextIsValid($elementTextRecord)
     {
         $elementRecord = $this->getElementById($elementTextRecord->element_id);
         $textValue = $elementTextRecord->text;
@@ -561,7 +563,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         //      }
         // }
         
-        $filterName = array('Validate', $this->getRecordType(), $elementRecord->set_name, $elementRecord->name);
+        $filterName = array('Validate', $this->_getRecordType(), $elementRecord->set_name, $elementRecord->name);
         // Order of the parameters that are passed to this:
         // $isValid = the current value indicating whether or not the element text has validated.
         // $textValue = the string value that needs to be validated
@@ -607,9 +609,9 @@ class ActsAsElementText extends Omeka_Record_Mixin
      **/
     public function deleteElementTextsByElementId(array $elementIdArray = array())
     {
-        $db = $this->getDb();
+        $db = $this->_getDb();
         $recordTableName = $this->_record->getTable()->getTableName();
-        $recordTypeName = $this->getRecordType();
+        $recordTypeName = $this->_getRecordType();
         // For some reason, this needs the parameters to be quoted directly into the
         // SQL statement in order for the DELETE to work. It may have something to
         // do with quoting the array of element IDs into a string.
@@ -629,9 +631,9 @@ class ActsAsElementText extends Omeka_Record_Mixin
      **/
     public function deleteElementTexts()
     {
-        $db = $this->getDb();
+        $db = $this->_getDb();
         $recordTableName = $this->_record->getTable()->getTableName();
-        $recordTypeName = $this->getRecordType();
+        $recordTypeName = $this->_getRecordType();
         $deleteSql =  "
         DELETE etx FROM $db->ElementText etx 
         INNER JOIN $recordTableName i ON i.id = etx.record_id 

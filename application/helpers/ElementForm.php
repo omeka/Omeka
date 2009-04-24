@@ -102,6 +102,7 @@ class Omeka_View_Helper_ElementForm
     }
     
     /**
+     * @uses ActsAsElementText::getTextStringFromFormPost()
      * @param integer
      * @return mixed
      **/
