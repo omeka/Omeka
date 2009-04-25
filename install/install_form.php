@@ -14,7 +14,7 @@ function formValue($name, $defaultValue = '')
             <input type="text" name="site_title" class="textinput" id="site_title" value="<?php echo formValue('site_title'); ?>" />
         </div>
         <div class="field">
-            <label for="admin_email">Administrator Email (required for form emails)</label>
+            <label for="admin_email">Administrator Email (required)</label>
             <input type="text" name="administrator_email" class="textinput" id="admin_email" value="<?php echo formValue('administrator_email'); ?>" />
         </div>
         <div class="field">
@@ -63,6 +63,7 @@ function formValue($name, $defaultValue = '')
         <div class="field">
             <label for="password">Password</label>
             <input class="textinput" type="password" name="password" value="<?php echo formValue('password'); ?>"/>
+<p class="explanation">Must be a least six characters</p>
         </div>
         <div class="field">
             <label for="super_email">Email</label>

@@ -78,7 +78,7 @@ body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9d
 		input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
 		
 		/* Replaces tooltips */
-		.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
+		.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 448px;}
 		
 		/* Changes the width of inputs depending on the layout */
 	
