@@ -163,6 +163,26 @@ function get_plugin_broker()
 }
 
 /**
+ * Retrieves specified descriptive info for a plugin from its ini file.
+ *
+ * @param string $plugin The name of the plugin
+ * @param string $key
+ * @return string The value of the specified plugin key
+ **/
+function get_plugin_ini($plugin, $key)
+{            
+    $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin . DIRECTORY_SEPARATOR . 'plugin.ini';
+    
+    if (file_exists($path)) {
+        try {
+            $config = new Zend_Config_Ini($path, 'info');
+        }    
+    }
+  
+    return $config->key;
+}
+
+/**
  * 
  * @param string
  * @return void
