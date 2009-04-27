@@ -48,8 +48,9 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                'initializeDb', 
                                'loadModelClasses', 
                                'initializeOptions', 
-                               'initializeSession',
                                'initializePluginBroker', 
+                               'initializeSession',
+                               'initializePlugins',
                                'initializeAcl', 
                                'initializeAuth', 
                                'initializeCurrentUser', 
@@ -371,10 +372,6 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     
     /**
      * Initialize a copy of the plugin broker and load all the active plugins.
-     *
-     * This will also fire the 'initialize' hook for all plugins.  Note that
-     * this hook fires before the front controller has been initialized or
-     * dispatched, so the router is unavailable in this hook.
      * 
      * @uses Omeka_Plugin_Broker
      * @return void
@@ -387,6 +384,17 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $this->setPluginBroker($broker);
         
         $broker->loadActive();        
+        
+    }
+    
+    /**
+     * Fire the 'initialize' hook for all plugins.  Note that
+     * this hook fires before the front controller has been initialized or
+     * dispatched.
+     **/
+    public function initializePlugins()
+    {
+        $broker = $this->getPluginBroker();
         
         // Fire all the 'initialize' hooks for the plugins
         $broker->initialize();
