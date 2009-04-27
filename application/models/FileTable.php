@@ -59,4 +59,12 @@ class FileTable extends Omeka_Db_Table
         }
         return $this->fetchObjects($select, array($item_id));
     }
+
+	public function findByArchiveFilename($fileName)
+	{
+		$select = $this->getSelect()
+					   ->where('f.archive_filename = ?');
+
+		return $this->fetchObject($select, array($fileName));
+	}
 }
