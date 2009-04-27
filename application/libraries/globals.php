@@ -167,19 +167,22 @@ function get_plugin_broker()
  *
  * @param string $plugin The name of the plugin
  * @param string $key
- * @return string The value of the specified plugin key
+ * @return string The value of the specified plugin key. If the key does not exist, it returns an empty string.
  **/
 function get_plugin_ini($plugin, $key)
 {            
     $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin . DIRECTORY_SEPARATOR . 'plugin.ini';
-    
     if (file_exists($path)) {
         try {
             $config = new Zend_Config_Ini($path, 'info');
-        }    
-    }
-  
-    return $config->key;
+        } catch(Exception $e) {
+			throw $e;
+		}   
+    } else {
+		throw new Exception("Path to plugin.ini for '$plugin' is not correct.");
+	}
+
+    return $config->$key;
 }
 
 /**
