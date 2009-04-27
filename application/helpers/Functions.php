@@ -184,40 +184,15 @@ function src($file, $dir=null, $ext = null) {
  * @param string $file The name of the file, without .js extension.  Specifying 'default' will load 
  * the default javascript files, such as prototype/scriptaculous
  * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
+ * @param array $scriptaculousLibraries An array of Scriptaculous libraries, by file name. Default is 'effects' and 'dragdrop'. Works only if 'default' is passed for the first parameter.
  */
-function js($file, $dir = 'javascripts') {
+function js($file, $dir = 'javascripts', $scriptaculousLibraries = array('effects', 'dragdrop')) {
     
     if($file == 'default') {
         $output  = js('prototype', $dir); //Prototype library loads by default
         $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
         
         //The following is a hack that loads only the 'effects' sub-library of Scriptaculous
-        $output .= '<script src="' . web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=effects,dragdrop" type="text/javascript" charset="utf-8"></script>' . "\n";
-        
-        $output .= js('search', $dir);
-        
-        //Do not try to load 'default.js'
-        return $output;
-    }
-    
-	return '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
-}
-
-/**
- * Like js() function, but it allows you to specify the scriptaculous libraries
- *
- * @see js() function
- * @param string $file The name of the file, without .js extension.  Specifying 'default' will load
- * the default javascript files, such as prototype/scriptaculous
- * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
- * @param array $scriptaculousLibraries An array of scriptaculous library names
- */
-function js_scriptaculous($file, $dir = 'javascripts', $scriptaculousLibraries = array('effects', 'dragdrop')) {
-    
-    if($file == 'default') {
-        $output  = js('prototype', $dir); //Prototype library loads by default
-        $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
-        
         //Load the sub-libraries of Scriptaculous
         $output .= '<script src="' . web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=' . implode(',', $scriptaculousLibraries) .'" type="text/javascript" charset="utf-8"></script>' . "\n";
         
@@ -226,10 +201,9 @@ function js_scriptaculous($file, $dir = 'javascripts', $scriptaculousLibraries =
         //Do not try to load 'default.js'
         return $output;
     }
-    
+
 	return '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
 }
-
 
 /**
  * Retrieve the web path to a css file.
