@@ -145,8 +145,6 @@ class Omeka_File_Derivative_Image
             
         $convertPath = self::_getPathToImageMagick();
 
-        if (file_exists($old_path) && is_readable($old_path) && self::isImageable($old_path)) {    
-
 			$newFileName = self::_getFileName($old_path);
 
             $new_path = rtrim($new_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $newFileName;
@@ -187,10 +185,31 @@ class Omeka_File_Derivative_Image
             } else {
                 throw new Omeka_File_Derivative_Exception('Something went wrong with image creation.  Please notify an administrator.');
             }
-        }
     }
-
-    public static function createAll($originalFilePath)
+    
+    /**
+     * Create all of the default derivative images for a specific file.
+     * 
+     * Whether or not to create the derivative images is based on the following
+     * criteria:
+     * 
+     * <ul>
+     *  <li>ImageMagick is configured and working properly</li>
+     *  <li>Image size constraints are all properly configured.</li>
+     *  <li>The original file exists and is readable</li>
+     *  <li>The original file can be read by getimagesize()</li>
+     *  <li>The original file's MIME type does not belong to a blacklist of MIME
+     * types that cannot be converted.</li>
+     * </ul>
+     * 
+     * @todo Should be able to create derivatives for all image types that 
+     * ImageMagick can handle, not just the ones that can be read by getimagesize().
+     * @param string $originalFilePath
+     * @param string $fileMimeType
+     * @return string|false If successful, return the filename of the derivative
+     * image, otherwise false.
+     **/
+    public static function createAll($originalFilePath, $fileMimeType)
     {
         // Don't try to make derivative images if we don't give a path to 
         // ImageMagick.	
@@ -199,7 +218,9 @@ class Omeka_File_Derivative_Image
         }
 
         self::checkOmekaCanMakeDerivativeImages();
-        return self::createDerivativeImages($originalFilePath);
+        return  self::isImageable($originalFilePath, $fileMimeType) 
+                ? self::createDerivativeImages($originalFilePath)
+                : false;
     }
     
     protected static function _getFileName($archiveFilename)
@@ -217,22 +238,19 @@ class Omeka_File_Derivative_Image
 	 * of file mime-types
 	 * 
 	 * @param string
+	 * @param string
 	 * @return boolean
 	 **/
-	public static function isImageable($old_path)
-	{
-		$fileName = basename($old_path);
-		
-		// First step is to grab the file object, & the file's mime-type
-		$file = get_db()->getTable('File')->findByArchiveFilename($fileName);
-		
-		$mimeType = $file->getMimeType();
-		
+	public static function isImageable($old_path, $mimeType)
+	{		
 		// List of mime-types which have known problems with ImageMagick
 		// and still return dimensions when called w/ getimagesize()
 		$blackListMimeTypes = array('application/x-shockwave-flash', 'image/jp2');
 
 		// Next we'll check that it has image dimensions, and isn't on a blacklist
-		return (getimagesize($old_path) && !(in_array($mimeType, $blackListMimeTypes)));
+		return (file_exists($old_path) 
+		        && is_readable($old_path) 
+		        && getimagesize($old_path) 
+		        && !(in_array($mimeType, $blackListMimeTypes)));
 	}
 }

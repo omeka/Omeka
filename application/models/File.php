@@ -214,9 +214,10 @@ class File extends Omeka_Record {
     public function createDerivatives()
     {
         $pathToOriginalFile = $this->getPath('archive');
-
+        
         // Create derivative images if possible.
-        if (Omeka_File_Derivative_Image::createAll($pathToOriginalFile)) {
+        if (Omeka_File_Derivative_Image::createAll($pathToOriginalFile, 
+                                                   $this->getMimeType())) {
             $this->has_derivative_image = 1;
 			$this->save();
         }
