@@ -16,6 +16,8 @@ class Omeka_File_Derivative_Image
 {
     const IMAGEMAGICK_COMMAND = 'convert';
     
+    const DERIVATIVE_EXT = 'jpg';
+    
     protected static function checkOmekaCanMakeDerivativeImages()
     {        
         //Check the constraints to make sure they are valid
@@ -99,8 +101,8 @@ class Omeka_File_Derivative_Image
      * so that the largest side is 500px. If the image is less than 500px on both 
      * sides, the image will not be resized.
      * 
-     * All derivative images will be JPEG, which is specified by the constant 
-     * IMAGE_DERIVATIVE_EXT.  
+     * All derivative images will be JPEG, which is specified by the class 
+     * constant DERIVATIVE_EXT.  
      * 
      * Derivative images will only be generated for files with mime types
 	 * that are not listed on the isDerivable static function's blacklist, and can
@@ -205,7 +207,7 @@ class Omeka_File_Derivative_Image
         $filename = basename($archiveFilename);
         $newName = explode('.', $filename);
         //ensures that all generated files are jpeg
-        $newName[1] = IMAGE_DERIVATIVE_EXT;
+        $newName[1] = self::DERIVATIVE_EXT;
         return implode('.', $newName);
     }
 

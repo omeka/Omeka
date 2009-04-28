@@ -12,7 +12,6 @@ if (!function_exists('mime_content_type')) {
    }
 }
 
-define('IMAGE_DERIVATIVE_EXT', 'jpg');
 
 require_once 'Item.php';
 require_once 'ActsAsElementText.php';
@@ -120,7 +119,7 @@ class File extends Omeka_Record {
     public function getDerivativeFilename()
     {
         list($base, $ext) = explode('.', $this->archive_filename);
-        $fn = $base.'.'.IMAGE_DERIVATIVE_EXT;
+        $fn = $base . '.' . Omeka_File_Derivative_Image::DERIVATIVE_EXT;
         return $fn;        
     }
     
