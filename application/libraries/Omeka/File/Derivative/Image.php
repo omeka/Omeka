@@ -126,7 +126,7 @@ class Omeka_File_Derivative_Image
      * IMAGE_DERIVATIVE_EXT.  
      * 
      * Derivative images will only be generated for files with mime types
-	 * that are not listed on the isImageable static function's blacklist, and can
+	 * that are not listed on the isDerivable static function's blacklist, and can
      * can be read by PHP's getimagesize() function.  Documentation for supported 
      * file types can be found on PHP.net's doc page for getimagesize() or 
      * image_type_to_mime_type().
@@ -218,7 +218,7 @@ class Omeka_File_Derivative_Image
         }
 
         self::checkOmekaCanMakeDerivativeImages();
-        return  self::isImageable($originalFilePath, $fileMimeType) 
+        return  self::isDerivable($originalFilePath, $fileMimeType) 
                 ? self::createDerivativeImages($originalFilePath)
                 : false;
     }
@@ -241,7 +241,7 @@ class Omeka_File_Derivative_Image
 	 * @param string
 	 * @return boolean
 	 **/
-	public static function isImageable($old_path, $mimeType)
+	public static function isDerivable($old_path, $mimeType)
 	{		
 		// List of mime-types which have known problems with ImageMagick
 		// and still return dimensions when called w/ getimagesize()
