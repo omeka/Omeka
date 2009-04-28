@@ -230,7 +230,7 @@ class Omeka_File_Derivative_Image
 		
 		// List of mime-types which have known problems with ImageMagick
 		// and still return dimensions when called w/ getimagesize()
-		$blackListMimeTypes = array('application/x-shockwave-flash');
+		$blackListMimeTypes = array('application/x-shockwave-flash', 'image/jp2');
 
 		// Next we'll check that it has image dimensions, and isn't on a blacklist
 		return (getimagesize($old_path) && !(in_array($mimeType, $blackListMimeTypes)));
