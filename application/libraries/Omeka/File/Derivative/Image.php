@@ -17,12 +17,7 @@ class Omeka_File_Derivative_Image
     const IMAGEMAGICK_COMMAND = 'convert';
     
     protected static function checkOmekaCanMakeDerivativeImages()
-    {
-        //Check to see if ImageMagick is installed
-        if (!self::checkForImageMagick()) {
-            throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured.  Please check your settings and then try again.' );
-        }        
-        
+    {        
         //Check the constraints to make sure they are valid
         $constraints = array('fullsize_constraint', 
                              'thumbnail_constraint', 
@@ -65,25 +60,7 @@ class Omeka_File_Derivative_Image
             throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');
         }
     }
-    
-    /**
-     * Determine whether or not ImageMagick has been correctly installed or configured for Omeka to use.  
-     * 
-     * This appears to work on most hosting environments, but there are some
-     * where ImageMagick may return codes other than 0 even though it appears to
-     * be loaded on the host machine. It remains to be seen whether this is an
-     * error in configuring their servers or an error where Omeka should
-     * examine/accept other return status codes.
-     *
-     * @return boolean True if the command line return status is 0 when
-     * attempting to run ImageMagick's convert utility, false otherwise.
-     **/
-    protected static function checkForImageMagick() {
-        $path = self::_getPathToImageMagick();
-        exec($path, $convert_version, $convert_return);
-        return($convert_return == 0);
-    }
-    
+        
     /**
      * Generate all the derivative images for this file.  
      * 

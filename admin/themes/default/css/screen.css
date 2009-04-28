@@ -283,7 +283,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	
 	/* Settings */
 	#settings-form .submit {float:right;}
-	
+	.im-success {color: green;font-style: italic;}
+    .im-failure {color: red;font-style: italic;}
+    
 	/* Users */
 	.users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 	#new-user-form .submit {float:right;}
