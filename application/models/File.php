@@ -47,13 +47,6 @@ class File extends Omeka_Record {
         $this->_mixins[] = new ActsAsElementText($this);
     }
 
-	protected function afterInsert()
-	{
-        // Execute this after inserting the record and update the 
-		// 'has_derivative_image' flag if derivatives are created.
-        $this->createDerivatives();
-	}
-
     protected function beforeInsert()
     {
         $this->added = date("Y-m-d H:i:s");
@@ -63,6 +56,8 @@ class File extends Omeka_Record {
         // adding the new metadata): it uses setMimeType() to reset the default
         // mime type for the file if applicable.
         $this->extractMetadata();         
+        
+        $this->createDerivatives();
     }
     
     protected function beforeUpdate()
@@ -219,7 +214,6 @@ class File extends Omeka_Record {
         if (Omeka_File_Derivative_Image::createAll($pathToOriginalFile, 
                                                    $this->getMimeType())) {
             $this->has_derivative_image = 1;
-			$this->save();
         }
     }
     
