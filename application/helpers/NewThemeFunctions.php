@@ -801,8 +801,9 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
     if (!$item) {
         $item = get_current_item();
     }
-    
-    $imageFile = $item->Files[$index];
+
+	$imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
+	
     $width = @$props['width'];
     $height = @$props['height'];
     

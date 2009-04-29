@@ -59,4 +59,23 @@ class FileTable extends Omeka_Db_Table
         }
         return $this->fetchObjects($select, array($item_id));
     }
+
+    /**
+     * Retrieve file that has derivative images.
+     * 
+     * @param integer $itemId
+     * @param integer $index Optional If given, this specifies the file to
+	 * retrieve for an item, based upon the ordering of its derivative files.
+	 *
+     * @return array
+     **/
+	public function findWithImages($item_id, $index=0)
+	{
+		$select = $this->getSelect()
+					   ->where('f.item_id = ? AND f.has_derivative_image = 1')
+					   ->order('f.item_id ASC')
+					   ->limitPage($index, 1);
+
+		return $this->fetchObject($select, array($item_id));
+	}
 }
