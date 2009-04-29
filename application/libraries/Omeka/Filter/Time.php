@@ -38,10 +38,10 @@ class Omeka_Filter_Time
     }
     
     /**
-     * Split a valid MySQL time 
+     * Split a valid MySQL time.
      * 
      * @param string
-     * @return void
+     * @return array Contains the following keys: 'hour', 'minute', 'second'.
      **/
     public function split($time)
     {

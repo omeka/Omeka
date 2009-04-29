@@ -36,8 +36,31 @@ class InsertItemHelper
      *  </ul> 
      * 
      * @param array $elementTexts Array of element texts to assign to the item. 
-     *  This takes the format: 
-     * <code>array('Element Set Name'=>array('Element Name'=>array(array('text'=>(string), 'html'=>(boolean)))))</code>.
+     *  This follows the format: 
+     * <code>
+     * array(
+      *     [element set name] => array(
+      *         [element name] => array(
+      *             array('text' => [string], 'html' => [false|true]), 
+      *             array('text' => [string], 'html' => [false|true])
+      *         ), 
+      *         [element name] => array(
+      *             array('text' => [string], 'html' => [false|true]), 
+      *             array('text' => [string], 'html' => [false|true])
+      *         )
+      *     ), 
+      *     [element set name] => array(
+      *         [element name] => array(
+      *             array('text' => [string], 'html' => [false|true]), 
+      *             array('text' => [string], 'html' => [false|true])
+      *         ), 
+      *         [element name] => array(
+      *             array('text' => [string], 'html' => [false|true]), 
+      *             array('text' => [string], 'html' => [false|true])
+      *         )
+      *     )
+      * );
+      * </code>
      *  See ActsAsElementText::addElementTextsByArray() for more info.
      * 
      * @param array $fileMetadata Set of metadata options that allow one or more
