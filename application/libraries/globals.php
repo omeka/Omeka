@@ -243,20 +243,6 @@ function is_admin_theme()
 /**
  * A prototype of the insert_item() helper, which will be in the core in 1.0.
  *
- * @uses InsertItemHelper
- * @param array $itemMetadata 
- * @param array $elementTexts 
- * @return Item
- * @throws Omeka_Validator_Exception
- * @throws Exception
- * 
- * $metadata = array(
- *     'public'         => [true|false], 
- *     'featured'       => [true|false], 
- *     'collection_id'  => [int],
- *     'item_type_id'   => [int],
- *     'item_type_name' => [string]
- * );
  * $elementTexts = array(
  *     [element set name] => array(
  *         [element name] => array(
@@ -279,6 +265,15 @@ function is_admin_theme()
  *         )
  *     )
  * );
+ * $fileMetadata = array(
+ *      
+ * )
+ * </code>
+ * @uses InsertItemHelper
+ * @param array $itemMetadata 
+ * @param array $elementTexts 
+ * @param array $fileMetadata
+ * @return Item
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {    
