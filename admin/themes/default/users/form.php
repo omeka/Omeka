@@ -18,7 +18,10 @@
 	<?php echo label('first_name','First Name'); ?>
 	
 	<div class="inputs">	
-		<?php echo text(array('name'=>'first_name', 'size'=>'30', 'class'=>'textinput', 'id'=>'first_name'),not_empty_or($user->first_name, $_POST['first_name'])); ?>
+		<?php 
+		    $firstNameValue = ((!empty($user->first_name)) ? $user->first_name : $_POST['first_name']);
+		    echo text(array('name'=>'first_name', 'size'=>'30', 'class'=>'textinput', 'id'=>'first_name'), $firstNameValue); 
+		?>
 	</div>
 	
 	<?php echo form_error('first_name'); ?>
@@ -28,7 +31,10 @@
 <div class="field">
 	<?php echo label('last_name','Last Name'); ?>
 	<div class="inputs">
-		<?php echo text(array('name'=>'last_name', 'size'=>'30', 'class'=>'textinput', 'id'=>'last_name'),not_empty_or($user->last_name, $_POST['last_name'])); ?>
+		<?php 
+		    $lastNameValue = ((!empty($user->last_name)) ? $user->last_name : $_POST['last_name']);
+		    echo text(array('name'=>'last_name', 'size'=>'30', 'class'=>'textinput', 'id'=>'last_name'), $lastNameValue); 
+		?>
 	</div>
 	<?php echo form_error('last_name'); ?>
 </div>
@@ -36,7 +42,10 @@
 <div class="field">
 	<?php echo label('email','Email'); ?>
 	<div class="inputs">
-	<?php echo text(array('name'=>'email', 'class'=>'textinput', 'size'=>'30', 'id'=>'email'), not_empty_or($user->email, $_POST['email'])); ?>
+	<?php 
+	    $emailValue = ((!empty($user->email)) ? $user->email : $_POST['email']);
+	    echo text(array('name'=>'email', 'class'=>'textinput', 'size'=>'30', 'id'=>'email'), $emailValue); 
+	?>
 	</div>
 	<?php echo form_error('email'); ?>
 </div>
@@ -52,7 +61,10 @@
 	<div class="field">
 		<?php echo label('role','Role'); ?>
 		<div class="inputs">
-	<?php echo select(array('name'=>'role','id'=>'role'),get_user_roles(), not_empty_or($user->role, $_POST['role'])); ?>
+	<?php 
+	    $roleValue = ((!empty($user->role)) ? $user->role : $_POST['role']);
+	    echo select(array('name'=>'role','id'=>'role'),get_user_roles(), $roleValue); 
+	?>
 	</div>
 	<?php echo form_error('role'); ?>
 	</div>
