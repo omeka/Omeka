@@ -8,56 +8,62 @@
  **/
  
 /**
- * Retrieve the total number of items
+ * Returns the total number of items
  *
  * @return integer
  **/
-function total_items() {	
+function total_items() 
+{	
 	return get_db()->getTable('Item')->count();
 }
 
 /**
+ * Returns the total number of collection
  * 
- *
  * @return integer
  **/
-function total_collections() {
+function total_collections() 
+{
 	return get_db()->getTable('Collection')->count();
 }
 
 /**
+ * Returns the total number of tags
  * 
- *
  * @return integer
  **/
-function total_tags() {
+function total_tags() 
+{
 	return get_db()->getTable('Tag')->count();
 }
 
 /**
+ * Returns the total number of users
  * 
- *
  * @return integer
  **/
-function total_users() {
+function total_users() 
+{
 	return get_db()->getTable('User')->count();
 }
 
 /**
- * 
+ * Returns the total number of types
  *
  * @return integer
  **/
-function total_types() {
+function total_types() 
+{
 	return get_db()->getTable('Type')->count();
 }
 
 /**
- * 
+ * Returns the total number of results
  *
  * @return integer
  **/
-function total_results() {
+function total_results() 
+{
 	if(Zend_Registry::isRegistered('total_results')) {
 		$count = Zend_Registry::get('total_results');
 
@@ -66,39 +72,68 @@ function total_results() {
 }
 
 /**
- * Retrieve the most recent tags.
- *
+ * Returns the most recent tags.
+ * 
+ * @param integer $num The maximum number of recent tags to return
  * @return array
  **/
-function recent_tags($num = 30) {
+function recent_tags($num = 30) 
+{
 	return get_tags(array('recent'=>true), $num);
 }
 
-function recent_collections($num = 10) {
+/**
+ * Returns the most recent collections
+ * 
+ * @param integer $num The maximum number of recent collections to return
+ * @return array
+ **/
+function recent_collections($num = 10) 
+{
 	return get_collections(array('recent'=>true), $num);
 }
 
-function recent_items($num = 10) {
+/**
+ * Returns the most recent items
+ * 
+ * @param integer $num The maximum number of recent items to return
+ * @return array
+ **/
+function recent_items($num = 10) 
+{
 	return get_db()->getTable('Item')->findBy(array('recent'=>true), $num);
 }
 
 /**
+ * Returns a randome featured item
+ * 
  * @since 7/3/08 This will retrieve featured items with or without images by
  *  default. The prior behavior was to retrieve only items with images by
  *  default.
- * @param string $hasImage 
+ * @param string $hasImage
  * @return Item
  */
-function random_featured_item($hasImage=false) {
+function random_featured_item($hasImage=false) 
+{
 	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
 }
 
+/**
+ * Returns a random featured collection.
+ * 
+ * @return Collection
+ **/
 function random_featured_collection()
 {
     return get_db()->getTable('Collection')->findRandomFeatured();
 }
 
-function get_user_roles(array $params = array())
+/**
+ * Returns an array of role names
+ * 
+ * @return array
+ **/
+function get_user_roles()
 {
 	$roles = Omeka_Context::getInstance()->getAcl()->getRoleNames();
 	foreach($roles as $key => $val) {
