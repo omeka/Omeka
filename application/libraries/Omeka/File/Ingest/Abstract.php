@@ -25,7 +25,7 @@
  * $ingest = Omeka_File_Ingest_Abstract::factory('Url', $item);
  * $fileRecords = $ingest->ingest('http://www.example.com');
  *      
- * @see InsertItemHelper::addFiles()
+ * @see ItemBuilder::addFiles()
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/

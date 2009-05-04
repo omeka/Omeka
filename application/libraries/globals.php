@@ -322,7 +322,7 @@ function is_admin_theme()
 /**
  * Insert a new item into the Omeka database.
  *
- * @uses InsertItemHelper For more information on arguments and usage.
+ * @uses ItemBuilder For more information on arguments and usage.
  * @param array $metadata Optional
  * @param array $elementTexts Optional
  * @param array $fileMetadata Optional
@@ -331,7 +331,7 @@ function is_admin_theme()
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {    
     // Passing null means this will create a new item.
-    $helper = new InsertItemHelper(null, $metadata, $elementTexts, $fileMetadata);
+    $helper = new ItemBuilder(null, $metadata, $elementTexts, $fileMetadata);
     $helper->run();
     return $helper->getItem();
 }
@@ -339,7 +339,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
 /**
  * Add files to an item.
  * 
- * @uses InsertItemHelper::addFiles() See for information on arguments and notes
+ * @uses ItemBuilder::addFiles() See for information on arguments and notes
  * on usage.
  * @param Item|integer $item
  * @param string|Omeka_File_Ingest_Abstract $transferStrategy
@@ -349,13 +349,13 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  **/
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
 {
-    $helper = new InsertItemHelper($item);
+    $helper = new ItemBuilder($item);
     return $helper->addFiles($transferStrategy, $files, $options);
 }
 
 /**
  * @see insert_item()
- * @uses InsertItemHelper
+ * @uses ItemBuilder
  * @param Item|int $item Either an Item object or the ID for the item.
  * @param array $metadata Set of options that can be passed to the item.
  * @param array $elementTexts
@@ -364,7 +364,7 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  **/
 function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $helper = new InsertItemHelper($item, $metadata, $elementTexts, $fileMetadata);
+    $helper = new ItemBuilder($item, $metadata, $elementTexts, $fileMetadata);
     $helper->run();
     return $helper->getItem();
 }

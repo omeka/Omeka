@@ -10,7 +10,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class InsertItemHelper
+class ItemBuilder
 {
     protected $_item;
     protected $_metadata = array();
@@ -75,7 +75,7 @@ class InsertItemHelper
      *      <li>'files' (array or string) Represents information indicating the file
      * to ingest.  Corresponds to the $files argument for addFiles().</li>
      * </ul>
-     * @see InsertItemHelper::addFiles()
+     * @see ItemBuilder::addFiles()
      * @see ActsAsElementText::addElementTextsByArray()
      **/
     public function __construct($item = null, $itemMetadata = array(), $elementTexts = array(), $fileMetadata = array())
