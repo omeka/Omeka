@@ -1146,6 +1146,19 @@ function has_items_for_loop()
 }
 
 /**
+ * Determine whether there are any collections to loop through.
+ * 
+ * @since 1.0
+ * @see has_items_for_loop()
+ * @return boolean
+ **/
+function has_collections_for_loop()
+{
+    $view = __v();
+    return $view->collections && count($view->collections);
+}
+
+/**
  * Determine whether or not there are any items in the database.
  * 
  * @since 0.10
