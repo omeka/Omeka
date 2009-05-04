@@ -38,6 +38,8 @@
 
 </fieldset>
 
+<?php fire_plugin_hook('admin_append_to_files_form', $file); ?>
+
 <fieldset>
 <input type="submit" name="submit" class="submit submit-medium" value="Save Changes" id="file_edit" />
 </fieldset>
