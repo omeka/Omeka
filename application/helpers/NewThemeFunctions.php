@@ -810,7 +810,9 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
     $defaultProps = array('alt'=>strip_formatting(item('Dublin Core', 'Title')));
     $props = array_merge($defaultProps, $props);
     
-    return archive_image( $imageFile, $props, $width, $height, $imageType ); 
+    require_once 'Media.php';
+    $media = new Omeka_View_Helper_Media;
+    return $media->archive_image($imageFile, $props, $width, $height, $imageType ); 
 }
 
 /**

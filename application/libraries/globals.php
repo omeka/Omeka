@@ -550,3 +550,15 @@ function release_object(&$var)
         unset($var);  
     }
 }
+
+/**
+ * Return either the value or, if it's empty, output the default.
+ * 
+ * @param mixed $value
+ * @param mixed $default
+ * @return mixed
+ */
+function not_empty_or($value, $default) 
+{
+    return !empty($value) ? $value : $default;
+}

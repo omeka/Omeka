@@ -241,7 +241,7 @@ class Omeka_View_Helper_Media
                         
             // Luckily, helper function names correspond to the name of the 
             // 'imageSize' option.
-            $imgHtml = $imageSize($file, $imgAttributes);
+            $imgHtml = $this->$imageSize($file, $imgAttributes);
         }    
 		
 		$html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);	
@@ -459,5 +459,72 @@ class Omeka_View_Helper_Media
 		$html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
 		
 		return $html;
+    }
+    /**
+     * Return a valid img tag for a thumbnail image.
+     */
+    public function thumbnail($record, $props=array(), $width=null, $height=null) 
+    {
+        return $this->archive_image($record, $props, $width, $height, 'thumbnail');
+    }
+
+    /**
+     * Return a valid img tag for a fullsize image.
+     */
+    public function fullsize($record, $props=array(), $width=null, $height=null)
+    {
+        return $this->archive_image($record, $props, $width, $height, 'fullsize');
+    }
+
+    /**
+     * Return a valid img tag for a square_thumbnail image.
+     */
+    public function square_thumbnail($record, $props=array(), $width=null, $height=null)
+    {
+        return $this->archive_image($record, $props, $width, $height, 'square_thumbnail');
+    }
+    /**
+     * Return a valid img tag for an image.
+     */
+    public function archive_image($record, $props, $width, $height, $format) 
+    {
+        if (!$record) {
+            return false;
+        }
+            
+        if ($record instanceof File) {
+            $filename = $record->getDerivativeFilename();
+            $file = $record;
+        } else if ($record instanceof Item) {
+            $file = get_db()->getTable('File')->getRandomFileWithImage($record->id);
+            if (!$file) {
+                return false;
+            }
+            $filename = $file->getDerivativeFilename();
+        }
+
+        $path = $file->getPath($format);
+        $uri = file_display_uri($file, $format);
+        
+        if (!file_exists($path)) {
+            return false;
+        }
+
+        list($oWidth, $oHeight) = getimagesize( $path );
+        if (!$width && !$height) {
+            $width = $oWidth;
+            $height = $oHeight;
+        } else if ($oWidth > $width && !$height) {
+            $ratio = $width / $oWidth;
+            $height = $oHeight * $ratio;
+        } else if (!$width && $oHeight > $height) {
+            $ratio = $height / $oHeight;
+            $width = $oWidth * $ratio;
+        }
+        $props['width'] = $width;
+        $props['height'] = $height;
+        
+        $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
+        return $html;
     }
 }
