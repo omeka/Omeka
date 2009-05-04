@@ -700,8 +700,8 @@ function display_random_featured_collection()
 
 /**
  * @since 0.10
+ * @uses current_user_tags()
  * @uses get_current_item()
- * @uses get_tags()
  * @param Item|null Check for this specific item record (current item if null).
  * @return array
  **/
@@ -710,12 +710,9 @@ function current_user_tags_for_item($item=null)
     if(!$item) {
         $item = get_current_item();
     }
-
-	$user = current_user();
-	if(!$item->exists()) {
-		return array();
-	}
-	return get_tags(array('user'=>$user->id, 'record'=>$item, 'sort'=>array('alpha')));        
+        
+    // eventually, we need to not use current_user_tags because it is deprecated
+    return current_user_tags($item);
 }
 
 /**
@@ -806,42 +803,14 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
     }
 
 	$imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
-	if (!$imageFile) {
-	    return '';
-	}
-	    
-    $defaultProps = array('alt'=>strip_formatting(item('Dublin Core', 'Title')));
-    $props = array_merge($defaultProps, $props);
-    
-		
-    $imageFilename = $imageFile->getDerivativeFilename();
-    $imageFilePath = $imageFile->getPath($imageType);
-	$imageURI = file_display_uri($imageFile, $imageType);
-		
-	if(!file_exists($imageFilePath)) {
-		return '';
-	}
-    
-    // get the height and weight from the property parameters if they exist
+	
     $width = @$props['width'];
     $height = @$props['height'];
     
-    // get the height and weight from the image and change adjust the sizes
-    list($oWidth, $oHeight) = getimagesize($imageFilePath);
-    if(!$width && !$height) {
-    	$width = $oWidth;
-    	$height = $oHeight;
-    } elseif($oWidth > $width && !$height) {
-        $ratio = $width / $oWidth;
-        $height = $oHeight * $ratio;
-    } elseif( !$width && $oHeight > $height) {
-        $ratio = $height / $oHeight;
-        $width = $oWidth * $ratio;
-    }
-    $props['width'] = $width;
-    $props['height'] = $height;
-
-	return '<img src="' . $imageURI . '" '._tag_attributes($props) . '/>' . "\n";    
+    $defaultProps = array('alt'=>strip_formatting(item('Dublin Core', 'Title')));
+    $props = array_merge($defaultProps, $props);
+    
+    return archive_image( $imageFile, $props, $width, $height, $imageType ); 
 }
 
 /**
