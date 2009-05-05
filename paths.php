@@ -12,7 +12,7 @@
 define('OMEKA_MIGRATION', 35);
 
 // Define the current version.
-define('OMEKA_VERSION', '1.0alpha');
+define('OMEKA_VERSION', '1.0beta');
 
 // The name of the Item Type Metadata element set. This is used wherever it is 
 // important to distinguish this particular element set from other element sets.
