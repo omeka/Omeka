@@ -25,7 +25,7 @@ try {
     $installer = new Installer();
     if ($installer->getShowInstallForm()) {
         ?>
-            <h1>Installation Complete!</h1>
+            <h1>Welcome to Omeka</h1>
             <?php if ($warningMessage = $installer->getWarningMessage()): ?>
             <div class="error">
             <?php echo $warningMessage; ?>
@@ -43,7 +43,7 @@ try {
         ?>
         <div id="intro">
             <h1>Installation is Finished!</h1>
-            <p>Omeka is now installed. <a href="<?php echo dirname($_SERVER['REQUEST_URI']); ?>">Check out your site</a>, or visit your <a href="../admin/">admin panel</a>!</p>
+            <p>Omeka is now installed. <a href="../">Check out your site</a>, or visit your <a href="../admin/">admin panel</a>!</p>
         </div>
         <?php
     }

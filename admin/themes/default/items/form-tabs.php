@@ -13,8 +13,8 @@ foreach ($elementSets as $key => $elementSet) {
         
         default:
             $tabContent  = '<span class="element-set-description" id="';
-            $tabContent .= text_to_id($elementSet->name) . '-description">'; 
-            $tabContent .= htmlentities($elementSet->description) . '</span>' . "\n\n";
+            $tabContent .= text_to_id(html_escape($elementSet->name)) . '-description">'; 
+            $tabContent .= html_escape($elementSet->description) . '</span>' . "\n\n";
             $tabContent .= display_element_set_form($item, $elementSet->name);
             $tabs[$tabName] = $tabContent;
             break;
@@ -48,7 +48,7 @@ $tabs = apply_filters('admin_items_form_tabs', $tabs, $item);
 <ul id="section-nav" class="navigation tabs">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
         <?php if (!empty($tabContent)): // Don't display tabs with no content. '?>
-            <li><a href="#<?php echo text_to_id($tabName);?>-metadata"><?php echo $tabName; ?></a></li>
+            <li><a href="#<?php echo text_to_id(html_escape($tabName));?>-metadata"><?php echo html_escape($tabName); ?></a></li>
         <?php endif; ?>
     <?php endforeach; ?>
 </ul>

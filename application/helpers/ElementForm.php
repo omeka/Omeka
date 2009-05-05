@@ -3,7 +3,7 @@
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package OmekaThemes
+ * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
  **/
 
@@ -31,7 +31,7 @@ class Omeka_View_Helper_ElementForm
         $record->loadElementsAndTexts();
         $this->_record = $record;
         
-        $html = $divWrap ? '<div class="field" id="element-' . $element->id . '">' : '';
+        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
         
         // Put out the label for the field
         $html .= $this->_displayFieldLabel();
@@ -55,12 +55,12 @@ class Omeka_View_Helper_ElementForm
     
     protected function _getFieldLabel()
     {
-        return htmlentities($this->_element['name']);
+        return html_escape($this->_element['name']);
     }
     
     protected function _getFieldDescription()
     {
-        return htmlentities($this->_element['description']);
+        return html_escape($this->_element['description']);
     }
     
     protected function _isPosted()
@@ -102,6 +102,7 @@ class Omeka_View_Helper_ElementForm
     }
     
     /**
+     * @uses ActsAsElementText::getTextStringFromFormPost()
      * @param integer
      * @return mixed
      **/
@@ -115,8 +116,9 @@ class Omeka_View_Helper_ElementForm
         $postArray = $this->_getPostArray();
         $postArray = $postArray[$index];
         
-        // Flatten this POST array into a string so as to be passed to the necessary helper functions.
-        return ActsAsElementText::getTextStringFromFormPost($postArray, $this->_element);
+        // Flatten this POST array into a string so as to be passed to the 
+        // necessary helper functions.
+        return $this->_record->getTextStringFromFormPost($postArray, $this->_element);
     }
     
     protected function _getHtmlFlagForField($index)

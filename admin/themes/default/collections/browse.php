@@ -5,10 +5,9 @@
 <?php endif; ?>
 
 <div id="primary">
-    
 	<?php if (has_collections()): ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
-        
+      <?php if (has_collections_for_loop()): ?>
 		<table id="items" class="simple" cellspacing="0" cellpadding="0">
         	<thead>
         		<tr>
@@ -57,6 +56,9 @@
 		<?php endwhile; ?>
 		</tbody>
 		</table>
+      <?php else: ?>
+        <p>There are no collections on this page.  <a href="<?php echo uri('collections'); ?>">View all collections</a></p>
+      <?php endif; ?> 
 	<?php else: ?>
 	    <p>There are no collections in your archive. Why don't you <a href="<?php echo uri('collections/add'); ?>" >add one</a>?</p>
     	

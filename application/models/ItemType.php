@@ -130,15 +130,65 @@ class ItemType extends Omeka_Record {
         }
     }
     
-    public function addElement($elementId)
+    
+    /**
+     * Adds a new element to the item type by the name of the element
+     * 
+     * @param string Name of the element
+     * @param string Description of the element
+     * @param string Data type name of the element
+     * @return void
+     *
+     **/
+    public function addElementByName($elementName, $elementDescription=null, $elementDataTypeName='Text')
+    {        
+        $db = $this->getDb();
+        $elementName = trim($elementName);
+        $elementSetName = self::getItemTypeElementSet()->name;
+        $elementDescription = trim($elementDescription);
+        $elementDataTypeName = trim($elementDataTypeName);
+
+        // make sure the element does not already exist
+        $element = $db->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
+        if (!empty($element)) {
+            throw new Exception('Element cannot be added to ItemType because it already exists: ' . $elementSetName . ', ' . $elementName);            
+        }            
+        
+        // create and configure a new element
+        $element = new Element;        
+        $element->name = $elementName;
+        if ($elementDescription !== null) {
+            $element->description = $elementDescription;            
+        }
+        $elementSet = self::getItemTypeElementSet();
+        $element->element_set_id = $elementSet->id;
+        $element->record_type_id = Item::getItemRecordTypeId();                
+        $element->data_type_id = $db->getTable('DataType')->findIdFromName($elementDataTypeName);                   
+        $element->forceSave();
+        
+        // join the element to the item type
+        $this->addElementById($element->id);
+    }
+    
+    
+    /**
+     * Adds a new element to the item type by the id of the element
+     * 
+     * @param string Id of the element
+     * @return void
+     *
+     **/
+    public function addElementById($elementId)
     {
-        // Once we have a persistent Element record, build the join record.
-        $iteJoin = new ItemTypesElements;
-        $iteJoin->element_id = $elementId;
-        $iteJoin->item_type_id = $this->id;
-        // 'order' should be last by default.
-        $iteJoin->order = $this->getChildCount() + 1;
-        $iteJoin->forceSave();
+        if (!$this->hasElement($elementId)) {
+            // Once we have a persistent Element record, build the join record.
+            $iteJoin = new ItemTypesElements;
+            $iteJoin->element_id = $elementId;
+            $iteJoin->item_type_id = $this->id;
+            // 'order' should be last by default.
+            $iteJoin->order = $this->getChildCount() + 1;
+            $iteJoin->forceSave();    
+        }
     }
     
     /**
@@ -165,4 +215,21 @@ class ItemType extends Omeka_Record {
         // Deleting one of the joins throws the whole thing out of whack, so we need to reset the ordering.
         $this->reorderChildren();
     }
+    
+    
+    public function hasElement($elementId) { 
+        $db = $this->getDb();
+        
+        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?',
+                                    array($elementId, $this->id),
+                                    true);
+        return (boolean) $iteJoin;
+    }
+    
+    static public function getItemTypeElementSet()
+    {
+        // Element should belong to the 'Item Type' element set.
+        return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ELEMENT_SET_ITEM_TYPE), true);
+    }
+    
 }

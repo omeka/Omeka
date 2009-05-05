@@ -1,20 +1,17 @@
 <?php 
 /**
- * Hacked version of Zend's Db_Select object for Omeka
- *
  * @version $Id$
- * @copyright CHNM, 18 May, 2007
+ * @copyright Center for History and New Media, 2009
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
 
 /**
  * Class for SQL SELECT generation and results.
  *
- * @package    Omeka
- * @subpackage Select
- * @copyright  Copyright (c) 2005-2007 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
+ * @package Omeka
+ * @copyright Center for History and New Media, 2009
+ **/
 class Omeka_Db_Select extends Zend_Db_Select
 {
     

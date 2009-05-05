@@ -10,7 +10,7 @@
 </script>
 
 <h1<?php if($file->hasThumbnail()) echo ' class="has-thumbnail"'; ?>
->Edit File #<?php echo htmlentities($file->id); ?></h1>
+>Edit File #<?php echo item_file('Id'); ?></h1>
 
 <?php if($file->hasThumbnail()): ?>
 <div id="edit-file-image"><?php echo square_thumbnail($file); ?></div>
@@ -37,6 +37,8 @@
 <?php echo display_element_set_form($file, 'Omeka Legacy File'); ?>
 
 </fieldset>
+
+<?php fire_plugin_hook('admin_append_to_files_form', $file); ?>
 
 <fieldset>
 <input type="submit" name="submit" class="submit submit-medium" value="Save Changes" id="file_edit" />

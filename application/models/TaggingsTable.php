@@ -61,7 +61,7 @@ class TaggingsTable extends Omeka_Db_Table
             } else if ($user = $options['user']) {
                 
                 $select->joinInner(array('u'=>$db->User), "u.entity_id = e.id", array());
-                
+
                 if (is_numeric($user)) {
                     $select->where("u.id = ?", $user);
                 } elseif($user instanceof User and !empty($user->id)) {
@@ -79,7 +79,7 @@ class TaggingsTable extends Omeka_Db_Table
         if ($for and !isset($options['record'])) {
             $select->where("tg.type = ?", $for );
         }
-                        
+                                
         if ($returnCount) {
             return $db->fetchOne($select);
         } else {

@@ -1,5 +1,5 @@
 <span class="element-set-description" id="<?php echo text_to_id(item('Item Type Name')) ?>-description">
-    <?php echo htmlentities(get_current_item()->Type->description); ?>
+    <?php echo html_escape(get_current_item()->Type->description); ?>
 </span>
 <?php 
 //Loop through all of the element records for the item's item type

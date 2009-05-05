@@ -228,14 +228,15 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		#delete_item_link {padding: 18px 8px 8px 0;}
 		#delete_item_link .delete {font-weight:bold;background-position:0 50%;padding-left:36px; color: #900;}
 	
-		#edit-all-tags {float:left; width: 288px;}
-			#tags-list {line-height: 2em;}
-			#edit-all-tags li {display:block; float:left; position:relative; border:1px solid #ccc;padding: 2px 8px 2px 24px; margin-bottom: 12px; margin-right: 4px;}
-			#edit-all-tags input {border-width: 0;padding:0 !important; position:absolute; top: 6px; left:4px;margin:0 !important;}
+		#my-tags {float:right; width: 288px;}
+		#other-tags {float:right; width: 288px; clear:both;}
+			#my-tags-list, #other-tags-list {line-height: 2em;}
+			#my-tags li, #other-tags li {display:block; float:left; position:relative; border:1px solid #ccc;padding: 2px 8px 2px 24px; margin-bottom: 12px; margin-right: 4px;}
+			#my-tags input, #other-tags input {border-width: 0;padding:0 !important; position:absolute; top: 6px; left:4px;margin:0 !important;}
 		
-		#edit-your-tags {float:right; width: 252px; padding:18px 18px 0; background: #F2F1E8;}
-			#edit-your-tags .explanation {font-size:1.1em; color: #777;margin-top:0;}
-			#edit-your-tags input {border-color: #bbb; margin-bottom:4px;}
+		#add-tags {float:left; width: 252px; padding:18px 18px 0; background: #F2F1E8;}
+		  #tags {border-color: #bbb; margin-bottom:5px;}
+		  #add-tags-explanation {font-size:1.1em; color: #777;margin-top:0; margin-left:0px;}
 	
 	/* Files Show Page */
 	
@@ -282,7 +283,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	
 	/* Settings */
 	#settings-form .submit {float:right;}
-	
+	.im-success {color: green;font-style: italic;}
+    .im-failure {color: red;font-style: italic;}
+    
 	/* Users */
 	.users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 	#new-user-form .submit {float:right;}

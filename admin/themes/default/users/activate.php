@@ -3,7 +3,7 @@
 
 <div id="primary">
 <?php echo flash(); ?>
-    <h2>Hello, <?php echo h($user->first_name . ' ' . $user->last_name); ?>. Your username is: <?php echo h($user->username); ?></h2>
+    <h2>Hello, <?php echo html_escape($user->first_name . ' ' . $user->last_name); ?>. Your username is: <?php echo html_escape($user->username); ?></h2>
 
 <form method="post">
 	<fieldset>

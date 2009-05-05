@@ -8,11 +8,10 @@
 
 /**
  * Table classes are instantiated by Omeka_Db.  
- * A new instance is created for each call to a table method, so keep these 
- * lightweight.  Classes that override Omeka_Db_Table must follow the naming 
- * convention: model name + Table (e.g, ExhibitTable).  Classes that override 
- * Omeka_Db_Table are not loaded automatically so they must be req_once'd within 
- * the model itself.
+ * 
+ * Subclasses attached to models must follow the naming convention: model name + 
+ * Table (e.g, ExhibitTable).  These subclasses are not loaded automatically so 
+ * they must be require'd before first being accessed.
  *
  * @package Omeka
  * @author CHNM
@@ -44,7 +43,10 @@ class Omeka_Db_Table
     protected $_alias;
     
     /**
-     * Instantiate
+     * Constructor.
+     * 
+     * @internal Do not instantiate this by itself, only access instances via
+     * Omeka_Db::getTable().
      * 
      * @param string Class name of the table's model
      * @param Omeka_Db Database object to use for queries
@@ -72,9 +74,10 @@ class Omeka_Db_Table
     }
     
     /**
+     * Retrieve the alias for this table.  
+     * 
      * @internal HACK But it will do for now.
      * 
-     * @param string Class name
      * @return string
      **/
     public function getTableAlias() {
@@ -92,7 +95,7 @@ class Omeka_Db_Table
     }
     
     /**
-     * Determine whether or not a model has a given column
+     * Determine whether or not a model has a given column.
      * 
      * @param string Field name
      * @return bool
@@ -105,10 +108,12 @@ class Omeka_Db_Table
     }
 
     /**
-     * Retrieve a list of all the columns for a given model
+     * Retrieve a list of all the columns for a given model.
      * 
-     * Note to self: This has to be here and not in the model itself because get_class_vars() returns private/protected
-     * when called inside its own class    
+     * @internal This should be here and not in the model class because 
+     * get_class_vars() returns private/protected properties when called from
+     * within the class.  Will only return public properties when called in this
+     * fashion.
      *
      * @return array
      **/
@@ -119,8 +124,9 @@ class Omeka_Db_Table
     
     /**
      * Retrieve the name of the table for the current table (used in SQL statements).
-     * If the table name has not been set, then it will automagically inflect a table name
+     * If the table name has not been set, then it will inflect the table name
      *
+     * @uses Omeka_Db_Table::setTableName().
      * @return string
      **/
     public function getTableName()
@@ -133,6 +139,16 @@ class Omeka_Db_Table
         return $this->getDb()->prefix . $this->_name;
     }
     
+    /**
+     * Set the name of the database table accessed by this class.
+     * 
+     * If no name is provided, it will inflect the table name from the name of
+     * the model defined in the constructor.  For example, Item --> items
+     * 
+     * @uses Inflector::tableize()
+     * @param string $name optional
+     * @return void
+     **/
     public function setTableName($name=null)
     {
         if ($name) {
@@ -143,10 +159,10 @@ class Omeka_Db_Table
     }
 
     /**
-     * Retrieve a single record given an ID
+     * Retrieve a single record given an ID.
      *
-     * @param int $id
-     * @return Omeka_Record | false
+     * @param integer $id
+     * @return Omeka_Record|false
      **/
     public function find($id)
     {        
@@ -157,8 +173,8 @@ class Omeka_Db_Table
     /**
      * Get a set of objects corresponding to all the rows in the table
      * 
-     * WARNING: This may be memory/time intensive and is not recommended for large data sets.
-     * So far this gets used for any model that does not paginate, i.e. all of them except Items.
+     * WARNING: This will be memory intensive and is thus not recommended for 
+     * large data sets.
      *
      * @return array
      **/
@@ -172,6 +188,7 @@ class Omeka_Db_Table
      * Retrieve an array of key=>value pairs that can be used as options in a 
      * <select> form input.  As it applies to the given table.
      * 
+     * @uses Omeka_Db_Table::_getColumnPairs()
      * @return array
      **/
     public function findPairsForSelectForm()
@@ -202,6 +219,7 @@ class Omeka_Db_Table
     /**
      * Retrieve a set of model objects based on a given number of parameters
      * 
+     * @uses Omeka_Db_Table::getSelectForFindBy()
      * @param array A set of parameters by which to filter the objects
      * that get returned from the DB.
      * @param integer $limit
@@ -219,9 +237,8 @@ class Omeka_Db_Table
     }
     
     /**
-     * Retrieve a Select object for this table
+     * Retrieve a Select object for this table.
      * 
-     * @param string
      * @return Omeka_Db_Select
      **/
     public function getSelect()
@@ -233,9 +250,10 @@ class Omeka_Db_Table
     }
     
     /**
-     * Retrieve a Select object that has had browsing filters applied to it
+     * Retrieve a Select object that has had search filters applied to it.
      * 
-     * @param array
+     * @uses Omeka_Db_Table::getSelectForFindBy()
+     * @param array $params optional Set of named search parameters.
      * @return Omeka_Db_Select
      **/
     public function getSelectForFindBy($params=array())
@@ -245,6 +263,13 @@ class Omeka_Db_Table
         return $select;
     }
     
+    /**
+     * Retrieve a Select object that is used for retrieving a single record from 
+     * the database.
+     * 
+     * @param integer $recordId
+     * @return Omeka_Db_Select
+     **/
     public function getSelectForFind($recordId)
     {
         //Cast to integer to prevent SQL injection
@@ -258,16 +283,20 @@ class Omeka_Db_Table
     }
     
     /**
-     * Apply a set of filters to a SELECT statement based on the parameters given
+     * Apply a set of filters to a Select object based on the parameters 
+     * given.
      * 
-     * @param Zend_Db_Select
+     * This template method must be implemented by subclasses in order to define
+     * search behaviors.
+     * 
+     * @param Omeka_Db_Select
      * @param array
      * @return void
      **/
     public function applySearchFilters($select, $params) {}
     
     /**
-     * Apply pagination to a SELECT statement via the LIMIT and OFFSET clauses.
+     * Apply pagination to a Select object via the LIMIT and OFFSET clauses.
      * 
      * @param Zend_Db_Select
      * @param integer
@@ -286,9 +315,14 @@ class Omeka_Db_Table
     }   
      
     /**
-     * Return a set of objects based on a SQL WHERE predicate (see RoR / other frameworks)
+     * Retrieve an object or set of objects based on an SQL WHERE predicate.
      *
-     * @return array|false
+     * @param string $sqlWhereClause
+     * @param array $params optional Set of parameters to bind to the WHERE
+     * clause.  Used to prevent security flaws.
+     * @param boolean $findOne optional Whether or not to retrieve a single
+     * record or the whole set (retrieve all by default).
+     * @return array|Omeka_Record|false
      **/
     public function findBySql($sqlWhereClause, array $params=array(), $findOne=false)
     {
@@ -300,6 +334,9 @@ class Omeka_Db_Table
     /**
      * Retrieve a count of all the rows in the table.
      *
+     * @uses Omeka_Db_Table::getSelectForCount()
+     * @param array $params optional Set of search filters upon which to base
+     * the count.
      * @return integer
      **/
     public function count($params=array())
@@ -309,9 +346,10 @@ class Omeka_Db_Table
     }
     
     /**
+     * Retrieve a Select object that is used to retrieve a count of all the rows
+     * in the table.
      * 
-     * 
-     * @param array
+     * @param array $params optional Set of search filters.
      * @return Omeka_Db_Select
      **/
     public function getSelectForCount($params=array())
@@ -329,11 +367,12 @@ class Omeka_Db_Table
     }
     
     /**
-     * Check whether or not a given row exists in the database
+     * Check whether or not a given row exists in the database.
      *
-     * Right now this is used mainly to verify that a row exists even though the current user does not have permissions to access it
+     * Currently used to verify that a row exists even though the current user 
+     * may not have permissions to access it.
      *
-     * @param int $id The ID of the row
+     * @param int $id The ID of the row.
      * @return bool
      **/
     public function checkExists($id)
@@ -346,12 +385,13 @@ class Omeka_Db_Table
     }
     
     /**
-     * Take a SQL SELECT statement and use the resulting data to populate record objects
+     * Retrieve a set of record objects based on an SQL SELECT statement.
      *
-     * @param string $sql
-     * @param array $params To bind to prepared SQL statement
-     * @param bool $onlyOne If true, then return only the first object from the result set
-     * @return mixed - array of Omeka_Record | Omeka_Record | null | empty array
+     * @param string $sql This could be either a string or any object that can
+     * be cast to a string (commonly Omeka_Db_Select).
+     * @param array $params Set of parameters to bind to the SQL statement.
+     * @return array|null Set of Omeka_Record instances, or null if none can be
+     * found.
      **/
     public function fetchObjects($sql, $params=array())
     {        
@@ -368,10 +408,10 @@ class Omeka_Db_Table
     }
     
     /**
-     * Populate and return one model object based on the SQL statement that
-     * is provided.
+     * Retrieve a single record from the database.
      * 
-     * @param string|Omeka_Db_Select
+     * @see Omeka_Db_Table::fetchObjects()
+     * @param string $sql
      * @return Omeka_Record
      **/
     public function fetchObject($sql, array $params=array())
@@ -381,7 +421,10 @@ class Omeka_Db_Table
     }
     
     /**
-     *
+     * Populate a record object with data retrieved from the database.
+     * 
+     * FIXME: Should follow Zend coding standards for protected methods.
+     * @param array $data A keyed array representing a row from the database.
      * @return Omeka_Record
      **/
     protected function recordFromData(array $data)

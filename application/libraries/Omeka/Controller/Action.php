@@ -418,6 +418,8 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     /**
      * Find a particular record given its unique ID # and (optionally) its class name.  
      * 
+     * @uses Omeka_Db_Table::find()
+     * @uses Omeka_Db_Table::checkExists()
      * @param int The ID of the record to find (optional)
      * @param string The model class corresponding to the table that should be checked (optional)
      * @throws Omeka_Controller_Exception_404

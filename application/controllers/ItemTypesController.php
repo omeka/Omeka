@@ -86,7 +86,7 @@ class ItemTypesController extends Omeka_Controller_Action
                 $element = new Element;
                 $element = $this->getElementFromPost($element);
                 
-                $itemType->addElement($element->id);
+                $itemType->addElementById($element->id);
                 
             } catch (Omeka_Validator_Exception $e) {
                 $errors = (string)$element->getErrors();
@@ -145,29 +145,19 @@ class ItemTypesController extends Omeka_Controller_Action
         if ($elementId = (int) $this->_getParam('element-id')) {
             $element = $this->findById($elementId, 'Element');
         } else {            
-            $elementSet = $this->getItemTypeElementSet();
+            $elementSet = ItemType::getItemTypeElementSet();
+            $element->element_set_id = $elementSet->id;
+
+            $element->record_type_id = Item::getItemRecordTypeId();
             
             $element->name = (string)$this->_getParam('element-name');
             $element->description = (string)$this->_getParam('element-description');
-            $element->record_type_id = (int)$this->getItemRecordTypeId();
-            $element->element_set_id = $elementSet->id;
+            
             $element->data_type_id = (int)$this->_getParam('element-data-type-id');
-            // var_dump($element);exit;
             
             $element->forceSave();
         }   
         
         return $element;     
-    }
-    
-    protected function getItemTypeElementSet()
-    {
-        // Element should belong to the 'Item Type' element set.
-        return $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array(ELEMENT_SET_ITEM_TYPE), true);
-    }
-    
-    protected function getItemRecordTypeId()
-    {
-        return $this->getDb()->getTable('RecordType')->findIdFromName('Item');
     }
 }

@@ -3,7 +3,7 @@
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package OmekaThemes
+ * @package Omeka_ThemeHelpers
  * @subpackage GeneralHelpers
  **/
 
@@ -11,6 +11,7 @@
  * Retrieve the view object.  Should be used only to avoid function scope
  * issues within other theme helper functions.
  * 
+ * @since 0.10
  * @access private
  * @return Omeka_View
  **/
@@ -32,6 +33,7 @@ function is_odd($num)
 /**
  * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
  * 
+ * @since 0.9
  * @uses items_output_uri()
  * @return string HTML
  **/
@@ -45,13 +47,8 @@ function auto_discovery_link_tag(){
  * passed.  This is primarily used by other helper functions and will not be used
  * by theme writers in most cases.
  * 
- * @since 0.10 Now uses the Omeka_View_Helper_Media class to display the files.
- * @since 0.10 Adds a third argument, which is the class name to give the div that
- * wraps each file.  Passing null as this argument will ensure that none of the files
- * are wrapped in divs.
- * @since 1.0 The third argument is now an array of attributes that can be passed
- * as the wrapper for each file.
- * @see Omeka_View_Helper_Media
+ * @since 0.9
+ * @uses Omeka_View_Helper_Media
  * @param array $files An array of File records to display.
  * @param array $props Properties to customize display for different file types.
  * @param array $wrapperAttributes XHTML attributes for the div that wraps each
@@ -74,6 +71,8 @@ function display_files($files, array $props = array(), $wrapperAttributes = arra
  * @uses Omeka_View_Helper_Media
  * @param File $file One File record.
  * @param array $props
+ * @param array $wrapperAttributes Optional XHTML attributes for the div wrapper
+ * for the displayed file.  Defaults to array('class'=>'item-file').
  * @return string HTML
  **/
 function display_file($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
@@ -185,27 +184,29 @@ function src($file, $dir=null, $ext = null) {
  * @param string $file The name of the file, without .js extension.  Specifying 'default' will load 
  * the default javascript files, such as prototype/scriptaculous
  * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
+ * @param array $scriptaculousLibraries An array of Scriptaculous libraries, by file name. Default is 'effects' and 'dragdrop'. Works only if 'default' is passed for the first parameter.
  */
-function js($file, $dir = 'javascripts') {
+function js($file, $dir = 'javascripts', $scriptaculousLibraries = array('effects', 'dragdrop')) {
     
     if($file == 'default') {
         $output  = js('prototype', $dir); //Prototype library loads by default
         $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
         
         //The following is a hack that loads only the 'effects' sub-library of Scriptaculous
-        $output .= '<script src="' . web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=effects,dragdrop" type="text/javascript" charset="utf-8"></script>' . "\n";
+        //Load the sub-libraries of Scriptaculous
+        $output .= '<script src="' . web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=' . implode(',', $scriptaculousLibraries) .'" type="text/javascript" charset="utf-8"></script>' . "\n";
         
         $output .= js('search', $dir);
         
         //Do not try to load 'default.js'
         return $output;
     }
-    
+
 	return '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
 }
 
 /**
- * Echos the web path to a css file
+ * Retrieve the web path to a css file.
  *
  * @param string $file Should not include the .css extension
  * @param string $dir Defaults to 'css'
@@ -216,16 +217,20 @@ function css($file, $dir = 'css') {
 }
 
 /**
- * Echos the web path to an image file
- * $dir defaults to 'images'
- * $file SHOULD include an extension, many image exensions are possible
+ * Retrieve the web path to an image file.
+ * 
+ * @since 0.9
+ * @param string $file Filename, including the extension.
+ * @param string $dir Optional Directory within the theme to look for image 
+ * files.  Defaults to 'images'.
+ * @return string
  */
 function img($file, $dir = 'images') {
 	return src($file, $dir);
 }
 
 /**
- * Includes a file from the common/ directory, passing variables into that script
+ * Includes a file from the common/ directory, passing variables into that script.
  * 
  * @param string $file Filename
  * @param array $vars A keyed array of variables to be extracted into the script
@@ -272,7 +277,7 @@ function foot($vars = array(), $file = 'footer') {
 function tag_cloud($tags, $link = null, $maxClasses = 9)
 {
 	if(!$tags){
-		$html = '<p>There are no tags to display</p>';
+		$html = '<p>No tags are available.</p>';
 		return $html;
 	} 
 	
@@ -304,7 +309,7 @@ function tag_cloud($tags, $link = null, $maxClasses = 9)
 			$html .= '<a href="' . $link . '?tags=' . urlencode($tag['name']) . '">';
 		}
 
-		$html .= htmlspecialchars($tag['name']);
+		$html .= html_escape($tag['name']);
 
 		if( $link )
 		{
@@ -348,7 +353,7 @@ function flash($wrap=true)
 	}
 	
 	return $wrap ? 
-		'<div class="' . $wrapClass . '">'.nl2br(h($flash->getMsg())).'</div>' : 
+		'<div class="' . $wrapClass . '">'.nl2br(html_escape($flash->getMsg())).'</div>' : 
 		$flash->getMsg();
 }
 
@@ -379,6 +384,7 @@ function form_error($field)
  * generates 
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
  * 
+ * @uses is_current_uri()
  * @param array A keyed array, where Key = Text of Navigation and Value = Link
  * @return string HTML for the unordered list
  **/
@@ -389,8 +395,7 @@ function nav(array $links) {
 	$nav = '';
 	foreach( $links as $text => $link )
 	{		
-		//$nav .= "<li".(is_current_uri($link) ? ' class="current"':'')."><a href=\"$link\">".h($text)."</a></li>\n";
-		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . h($text) . '</a></li>' . "\n";
+		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . html_escape($text) . '</a></li>' . "\n";
 		
 	}
 	return $nav;
@@ -402,10 +407,12 @@ function nav(array $links) {
 /**
  * Allows plugins to hook in to the header of public themes.
  *
- * @since 0.10 Uses the 'public_theme_header' hook instead of 'theme_header'.
- * @since 0.10 The 'public_theme_header' hook will receive the request object as
- *  its first argument. That allows the plugin writer to tailor the header output
- *  to a specific page or pages within the public theme.
+ * Uses the 'public_theme_header' hook to inject content into the theme.  This
+ * hook receives the request object as the first argument, which allows the 
+ * plugin writer to tailor the header output to a specific request (specific
+ * controller, action, etc.).
+ * 
+ * @since 0.9
  * @return void
  **/
 function plugin_header() {
@@ -414,7 +421,12 @@ function plugin_header() {
 }
 
 /**
- * @since 0.10 Uses 'public_theme_footer' hook instead of 'theme_footer'.
+ * Allow plugins to hook in to the footer of public themes.
+ * 
+ * Uses the 'public_theme_footer' hook, which receives the request object as
+ * the first argument.
+ * 
+ * @since 0.9
  * @see plugin_header()
  * @return void
  **/
@@ -445,9 +457,9 @@ function tag_string($record, $link=null, $delimiter=', ')
 	if(!empty($tags)) {
 		foreach ($tags as $key=>$tag) {
 			if(!$link) {
-				$string[$key] = h($tag["name"]);
+				$string[$key] = html_escape($tag["name"]);
 			}else {
-				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'" rel="tag">'.h($tag["name"]).'</a>';
+				$string[$key] = '<a href="'.$link.urlencode($tag["name"]).'" rel="tag">'.html_escape($tag["name"]).'</a>';
 			}
 		}
 		$string = join($delimiter,$string);
@@ -493,102 +505,39 @@ function has_permission($role,$privilege=null) {
  * Retrieve the value of a particular site setting.  This can be used to display
  * any option that would be retrieved with get_option().
  *
- * @uses get_option()
- * @since 0.10 Content for any specific option can be filtered by implementing
- * a filter called 'display_setting_' + the name of the option, e.g. 
+ * Content for any specific option can be filtered by using a filter named
+ * 'display_setting_(option)' where (option) is the name of the option, e.g.
  * 'display_setting_site_title'.
+ * 
+ * @uses get_option()
+ * @since 0.9
  * @return string
  **/
 function settings($name) {
 	$name = apply_filters("display_setting_$name", get_option($name));
-	$name = h($name);
+	$name = html_escape($name);
 	return $name;
 }
-
-/**
- * @deprecated
- **/
-function thumbnail($record, $props=array(), $width=null, $height=null) 
-{
-       return archive_image($record, $props, $width, $height, 'thumbnail');
-}
-
-/**
- * @deprecated
- **/
-function fullsize($record, $props=array(), $width=null, $height=null)
-{
-       return archive_image($record, $props, $width, $height, 'fullsize');
-}
-
-/**
- * @deprecated
- **/
-function square_thumbnail($record, $props=array(), $width=null, $height=null)
-{
-       return archive_image($record, $props, $width, $height, 'square_thumbnail');
-}
-
-/**
- * @deprecated Used internally by other theme helpers.  Implementation may change
- * in future versions, do not rely on this within themes.
- * @return string|false
- **/
-function archive_image( $record, $props, $width, $height, $format) 
-{
-	if(!$record) {
-		return false;
-	}
-		
-       if($record instanceof File) {
-               $filename = $record->getDerivativeFilename();
-			   $file = $record;
-       }elseif($record instanceof Item) {
-               $file = get_db()->getTable('File')->getRandomFileWithImage($record->id);
-               if(!$file) return false;
-               $filename = $file->getDerivativeFilename();
-       }
-
-		$path = $file->getPath($format);
-		$uri = file_display_uri($file, $format);
-		
-	   if(!file_exists($path)) {
-			return false;
-	   }
-
-       list($oWidth, $oHeight) = getimagesize( $path );
-       if(!$width && !$height) 
-       {
-			$width = $oWidth;
-			$height = $oHeight;
-       }
-       elseif( $oWidth > $width && !$height )
-       {
-               $ratio = $width / $oWidth;
-               $height = $oHeight * $ratio;
-       }
-       elseif( !$width && $oHeight > $height)
-       {
-               $ratio = $height / $oHeight;
-               $width = $oWidth * $ratio;
-       }
-	   $props['width'] = $width;
-	   $props['height'] = $height;
-
-	   $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
-	   return $html;
-}
-
 	
-	//Adapted from PHP.net: http://us.php.net/manual/en/function.nl2br.php#73479
-	function nls2p($str)
-	{
-		
-	  return str_replace('<p></p>', '', '<p>'
-	        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)
-	        . '</p>');
+/**
+ * Replace new lines in a block of text with paragraph tags.
+ * 
+ * Looks for 2 consecutive line breaks resembling a paragraph break and wraps
+ * each of the paragraphs with a <p> tag.  If no paragraphs are found, then the
+ * original text will be wrapped with line breaks.
+ * 
+ * @link http://us.php.net/manual/en/function.nl2br.php#73479
+ * @param string $str
+ * @return string
+ **/
+function nls2p($str)
+{
 	
-	}
+  return str_replace('<p></p>', '', '<p>'
+        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)
+        . '</p>');
+
+}
 	
 	/**
 	 * Retrieve a substring of a given piece of text. 
@@ -612,3 +561,16 @@ function archive_image( $record, $props, $width, $height, $format)
 function items_search_form($props=array(), $formActionUri = null) {
     return __v()->partial('items/advanced-search.php', array('isPartial'=>true, 'formAttributes'=>$props, 'formActionUri'=>$formActionUri));
 }	
+
+/**
+ * Escape the value to display properly as HTML.
+ * 
+ * This uses the 'html_escape' filter for escaping.
+ * 
+ * @param string
+ * @return string
+ */
+function html_escape($value)
+{
+    return apply_filters('html_escape', $value);
+}

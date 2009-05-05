@@ -3,7 +3,7 @@
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package OmekaThemes
+ * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
  */
 
@@ -11,7 +11,7 @@
  * Helper used to retrieve metadata for an item.
  *
  * @see item()
- * @package OmekaThemes
+ * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
@@ -31,6 +31,17 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
      * Element record. Examples include the database ID of the item, the
      * name of the item type, the name of the collection, etc.
      * 
+     * Available fields include:
+     *      <ul>
+     *          <li>id</li>
+     *          <li>item type name</li>
+     *          <li>date added</li>
+     *          <li>collection name</li>
+     *          <li>featured</li>
+     *          <li>public</li>
+     *          <li>permalink</li>
+     *      </ul>
+     * @param Item
      * @param string
      * @return mixed
      **/

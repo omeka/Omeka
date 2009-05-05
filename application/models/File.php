@@ -12,7 +12,6 @@ if (!function_exists('mime_content_type')) {
    }
 }
 
-define('IMAGE_DERIVATIVE_EXT', 'jpg');
 
 require_once 'Item.php';
 require_once 'ActsAsElementText.php';
@@ -46,7 +45,7 @@ class File extends Omeka_Record {
     {
         $this->_mixins[] = new ActsAsElementText($this);
     }
-        
+
     protected function beforeInsert()
     {
         $this->added = date("Y-m-d H:i:s");
@@ -55,11 +54,9 @@ class File extends Omeka_Record {
         // Extract the metadata.  This will have one side effect (aside from
         // adding the new metadata): it uses setMimeType() to reset the default
         // mime type for the file if applicable.
-        $this->extractMetadata();
-
-        // Execute this before saving the record because it sets the 
-        // 'has_derivative_image' flag.
-        $this->createDerivatives();             
+        $this->extractMetadata();         
+        
+        $this->createDerivatives();
     }
     
     protected function beforeUpdate()
@@ -122,7 +119,7 @@ class File extends Omeka_Record {
     public function getDerivativeFilename()
     {
         list($base, $ext) = explode('.', $this->archive_filename);
-        $fn = $base.'.'.IMAGE_DERIVATIVE_EXT;
+        $fn = $base . '.' . Omeka_File_Derivative_Image::DERIVATIVE_EXT;
         return $fn;        
     }
     
@@ -211,9 +208,10 @@ class File extends Omeka_Record {
     public function createDerivatives()
     {
         $pathToOriginalFile = $this->getPath('archive');
-
+        
         // Create derivative images if possible.
-        if ($imageName = Omeka_File_Derivative_Image::createAll($pathToOriginalFile)) {
+        if (Omeka_File_Derivative_Image::createAll($pathToOriginalFile, 
+                                                   $this->getMimeType())) {
             $this->has_derivative_image = 1;
         }
     }

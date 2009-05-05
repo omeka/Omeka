@@ -42,10 +42,40 @@ class FileTable extends Omeka_Db_Table
         return $this->fetchObject($sql, array($item_id));
     }
     
-    public function findByItem($item_id)
+    /**
+     * Retrieve files associated with an item. 
+     * 
+     * @param integer $itemId
+     * @param array $fileIds Optional If given, this will only retrieve files
+     * with these specific IDs.
+     * @return array
+     **/
+    public function findByItem($item_id, $fileIds = array())
     {
         $select = $this->getSelect();
         $select->where('f.item_id = ?');
+        if ($fileIds) {
+            $select->where('f.id IN (?)', $fileIds);
+        }
         return $this->fetchObjects($select, array($item_id));
     }
+
+    /**
+     * Retrieve file that has derivative images.
+     * 
+     * @param integer $itemId
+     * @param integer $index Optional If given, this specifies the file to
+	 * retrieve for an item, based upon the ordering of its derivative files.
+	 *
+     * @return array
+     **/
+	public function findWithImages($item_id, $index=0)
+	{
+		$select = $this->getSelect()
+					   ->where('f.item_id = ? AND f.has_derivative_image = 1')
+					   ->order('f.item_id ASC')
+					   ->limitPage($index, 1);
+
+		return $this->fetchObject($select, array($item_id));
+	}
 }

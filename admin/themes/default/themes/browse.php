@@ -7,16 +7,16 @@
 
 <div id="primary">
     <?php echo flash(); ?>
-	<h2>Current Theme: &#8220;<?php echo h($current->title); ?>&#8221;</h2>
+	<h2>Current Theme: &#8220;<?php echo html_escape($current->title); ?>&#8221;</h2>
 
 <div id="current-theme">
-	<img src="<?php echo h($current->image); ?>" width="342px" />
+	<img src="<?php echo html_escape($current->image); ?>" width="342px" />
 	
 	<ul>
-		<li><span class="type">Author:</span> <span class="value"><?php echo h($current->author); ?></span></li>
-		<li><span class="type">License:</span> <span class="value"><?php echo h($current->license); ?></span></li>
-		<li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo h($current->website); ?>"><?php echo h($current->website); ?></a></span></li>
-		<li><span class="type">Description:</span> <span class="value"><?php echo h($current->description); ?></span></li>
+		<li><span class="type">Author:</span> <span class="value"><?php echo html_escape($current->author); ?></span></li>
+		<li><span class="type">License:</span> <span class="value"><?php echo html_escape($current->license); ?></span></li>
+		<li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo html_escape($current->website); ?>"><?php echo html_escape($current->website); ?></a></span></li>
+		<li><span class="type">Description:</span> <span class="value"><?php echo html_escape($current->description); ?></span></li>
 		
 	</ul>
 </div>
@@ -27,16 +27,16 @@
 	<?php foreach($this->themes as $theme): ?>
 	<div class="theme<?php if($current == $theme) echo ' current-theme';?>">
 		<div class="meta">
-		<label><input type="radio" name="public_theme" value="<?php echo h($theme->directory); ?>" <?php if($current == $theme):  ?>checked="checked" <?php endif; ?>/>	
-		<?php echo h($theme->title); ?></label>
+		<label><input type="radio" name="public_theme" value="<?php echo html_escape($theme->directory); ?>" <?php if($current == $theme):  ?>checked="checked" <?php endif; ?>/>	
+		<?php echo html_escape($theme->title); ?></label>
 		<ul>
-			<li><span class="type">Author:</span> <span class="value"><?php echo h($theme->author); ?></span></li>
-			<li><span class="type">License:</span> <span class="value"><?php echo h($theme->license); ?></span></li>
-			<li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo h($theme->website); ?>"><?php echo h($theme->website); ?></a></span></li>
+			<li><span class="type">Author:</span> <span class="value"><?php echo html_escape($theme->author); ?></span></li>
+			<li><span class="type">License:</span> <span class="value"><?php echo html_escape($theme->license); ?></span></li>
+			<li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo html_escape($theme->website); ?>"><?php echo html_escape($theme->website); ?></a></span></li>
 		</ul>
 		</div>
 		<div class="description">
-		<img src="<?php echo h($theme->image); ?>" width="296px"/>
+		<img src="<?php echo html_escape($theme->image); ?>" width="296px"/>
 		</div>
 	</div>
 	<?php endforeach; ?>

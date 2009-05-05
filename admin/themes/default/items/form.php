@@ -67,44 +67,113 @@ echo js('tiny_mce/tiny_mce');
 		}        
     },
 	
-	/* Messing with the tag list should not submit the form.  Instead it runs 
-	an AJAX request to remove tags. */
+	/* Messing with the tag list should not submit the form. */
 	enableTagRemoval: function() {		
-		if ( !(buttons = $$('#tags-list input')) ) {
+		if ( !(removeTagButtons = $$('input.remove_tag')) || !(undoRemoveTagButtons = $$('input.undo_remove_tag'))) {
 		    return;
 		}
 
+        function addTags() {
+            var newTags = $('tags').value.split(',');
+            
+            // only add tags from the input box that are new
+            var oldTags = $$('#my-tags-list input.remove_tag').map(function(button){
+               return button.value.strip();
+            });
+            
+            newTags.each(function(tag){
+               var strippedTag = tag.strip();
+               if (!oldTags.include(strippedTag)) {
+                   addTag(strippedTag);
+               }
+            });
+            
+            $('tags').value = '';
+        }
+
+        function addTag(tag) {
+            var nRTButton = new Element('li', { 'class': 'tag-delete'});
+
+            var img1 = new Element('input', { 'type': 'image', 'src': '<?php echo img('add.png'); ?>', 'class': 'undo_remove_tag', 'value': tag});
+            nRTButton.appendChild(img1);
+            img1.observe('click', function(e) {
+                e.stop();
+                undoRemoveTag(this);
+            });
+            var img2 = new Element('input', { 'type': 'image', 'src': '<?php echo img('delete.gif'); ?>', 'class': 'remove_tag', 'value': tag});                    
+            img2.observe('click', function(e) {
+                e.stop();
+                removeTag(this);
+            });
+            nRTButton.appendChild(img2);
+            nRTButton.appendChild(document.createTextNode(tag));
+            $('my-tags-list').appendChild(nRTButton);
+            updateTagsField();
+            return false;
+        }
+
     	function removeTag(button) {
-    		var tagId = parseInt(button.value);
-    		var uri = "<?php echo uri('items/edit/'.$item->id); ?>";
-
-    		new Ajax.Request("<?php echo uri('items/edit/'.$item->id); ?>", {
-    			parameters: 'remove_tag='+ tagId,
-    			method: 'post',
-    			onSuccess: function(t) {
-    				//Fire the other ajax request to update the page
-    				new Ajax.Updater('tag-form', "<?php echo uri('items/tag-form/'); ?>", {
-    					parameters: {
-    						'id': "<?php echo $item->id; ?>"
-    					},
-    					onComplete: function() {
-    					    Effect.Appear('tag-form', {duration: 1.0});
-    						Omeka.ItemForm.enableTagRemoval();
-    					}
-    				});
-    			},
-    			onFailure: function(t) {
-    				alert(t.status);
-    			}
-    		});
-
+    	    button.hide();
+    	    button.parentNode.setOpacity(.3);
+    		updateTagsField();
     		return false;
     	}
+    	
+    	function undoRemoveTag(button) {
+    	    button.next('input.remove_tag').show();
+    	    button.parentNode.setOpacity(1);
+            updateTagsField();
+    		return false;
+    	}
+    	
+    	// update the tags field to only include the tags that have not been removed
+    	function updateTagsField() {
+    	    var myTagsToAdd = new Array();
+    	    var myTagsToDelete = new Array();
+    	    if (rTButtons = $$('#my-tags-list input.remove_tag')) {
+                rTButtons.each(function(button) {
+                    // decide whether the toggled tag needs to be included
+                    var s = button.value.strip();
+                    if (button.parentNode.getOpacity() == 1) {
+                        myTagsToAdd.push(s);
+                    } else {
+                        myTagsToDelete.push(s);
+                    }
+                });	        
+    	    }
+    	    
+    	    var otherTagsToDelete = new Array();
+    	    if (rTButtons = $$('#other-tags-list input.remove_tag')) {
+                rTButtons.each(function(button) {
+                    // decide whether a toggled tag needs to be added
+                    var s = button.value.strip();
+                    if (button.parentNode.getOpacity() != 1) {
+                        otherTagsToDelete.push(s);
+                    }
+                });  
+    	    }
+    	    
+    	    $('my-tags-to-add').value = myTagsToAdd.join(',');
+    	    $('my-tags-to-delete').value = myTagsToDelete.join(',');
+    	    $('other-tags-to-delete').value = otherTagsToDelete.join(',');    	    
+    	}
+    	
+    	$('add-tags-button').observe('click', function(e) {
+            e.stop();
+            addTags();
+        });  	
 		
-		buttons.invoke('observe', 'click', function(e) {
+		removeTagButtons.invoke('observe', 'click', function(e) {
 		    e.stop();
 		    removeTag(this);
 		});
+		
+		undoRemoveTagButtons.invoke('observe', 'click', function(e) {
+		    e.stop();
+		    undoRemoveTag(this);
+		});
+		
+		updateTagsField();
 	},
 	
 	/**
@@ -305,7 +374,7 @@ echo js('tiny_mce/tiny_mce');
     
     // Tags autocomplete
 	Event.observe(window, 'load', function(){
-	    new Ajax.Autocompleter("tags-field", "tag-choices", 
+	    new Ajax.Autocompleter("tags", "tag-choices", 
 	    "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
 	        tokens: ',',
 	        paramName: 'tag_start'
@@ -333,9 +402,9 @@ echo js('tiny_mce/tiny_mce');
 <div id="item-metadata">
 <?php foreach ($tabs as $tabName => $tabContent): ?>
 	<?php if (!empty($tabContent)): ?>
-    	<div id="<?php echo text_to_id($tabName); ?>-metadata">
+    	<div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
         <fieldset class="set">
-            <legend><?php echo htmlentities($tabName); ?></legend>
+            <legend><?php echo html_escape($tabName); ?></legend>
             <?php echo $tabContent; ?>        
         </fieldset>
         </div>	   

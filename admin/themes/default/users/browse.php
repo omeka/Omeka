@@ -1,7 +1,6 @@
 <?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 <h1>Users (<?php echo $total_records ?> total)</h1>
 <?php common('settings-nav'); ?>
-<?php print_r($current_user); ?>
 <div id="primary">
 <h2>Current Users</h2>
 
@@ -48,9 +47,9 @@
 	<tbody>
 <?php foreach( $users as $key => $user ): ?>
 	<tr class="<?php if(current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
-		<td><?php  echo h($user->username); ?></td>
-		<td><?php echo h($user->first_name); ?> <?php echo h($user->last_name); ?></td>
-		<td><span class="<?php echo h($user->role); ?>"><?php echo h($user->role); ?></span></td>
+		<td><?php  echo html_escape($user->username); ?></td>
+		<td><?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?></td>
+		<td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape($user->role); ?></span></td>
 		
 		<td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
 		

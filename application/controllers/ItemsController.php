@@ -22,8 +22,8 @@ require_once 'Omeka/Controller/Action.php';
 class ItemsController extends Omeka_Controller_Action
 {
     public $contexts = array(
-            'browse' => array('json', 'dc', 'rss2'),
-            'show'   => array('json', 'dc')
+            'browse' => array('json', 'dcmes-xml', 'rss2'),
+            'show'   => array('json', 'dcmes-xml')
     );
     
     public function init() 
@@ -57,8 +57,6 @@ class ItemsController extends Omeka_Controller_Action
     /**
      * Adds an additional permissions check to the built-in edit action.
      * 
-     * Also 
-     *
      **/
     public function editAction()
     {
@@ -215,7 +213,9 @@ class ItemsController extends Omeka_Controller_Action
          
         if (array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
             if ($this->isAllowed('tag')) {
-                $tagsAdded = $item->saveForm($_POST);
+                $currentUser = Omeka_Context::getInstance()->getCurrentUser();
+                $tagsAdded = $item->applyTagString($_POST['tags'], $currentUser->Entity);
+                // Refresh the item.
                 $item = $this->findById();
             } else {
                 $this->flash('User does not have permission to add tags.');

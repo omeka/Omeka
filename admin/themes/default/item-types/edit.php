@@ -1,5 +1,5 @@
-<?php head(array('title'=>'Edit Type: '.htmlentities($itemtype->name),'bodyclass'=>'item-types')); ?>
-<h1><?php echo htmlentities($itemtype->name); ?></h1>
+<?php head(array('title'=>'Edit Type: '.html_escape($itemtype->name),'bodyclass'=>'item-types')); ?>
+<h1><?php echo html_escape($itemtype->name); ?></h1>
 
 <div id="primary">
 <form method="post" action="">

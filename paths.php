@@ -1,9 +1,18 @@
 <?php
+/**
+ * Define constants for paths and other global metadata.
+ * 
+ * @version $Id$
+ * @copyright Center for History and New Media, 2009
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
 // Define the current migration.
-define('OMEKA_MIGRATION', 33);
+define('OMEKA_MIGRATION', 35);
 
 // Define the current version.
-define('OMEKA_VERSION', '0.10');
+define('OMEKA_VERSION', '1.0beta');
 
 // The name of the Item Type Metadata element set. This is used wherever it is 
 // important to distinguish this particular element set from other element sets.

@@ -84,7 +84,9 @@ class ItemTable extends Omeka_Db_Table
      * @return void
      **/
     public function filterByPublic($select, $isPublic)
-    {
+    {         
+        $isPublic = (bool) $isPublic; // this makes sure that empty strings and unset parameters are false
+
         //Force a preview of the public items
         if ($isPublic) {
             $select->where('i.public = 1');
@@ -93,6 +95,8 @@ class ItemTable extends Omeka_Db_Table
     
     public function filterByFeatured($select, $isFeatured)
     {
+        $isFeatured = (bool) $isFeatured; // this make sure that empty strings and unset parameters are false
+        
         //filter items based on featured (only value of 'true' will return featured items)
         if ($isFeatured) {
             $select->where('i.featured = 1');
@@ -212,6 +216,13 @@ class ItemTable extends Omeka_Db_Table
                           'e.id = ie.entity_id', 
                           array());
         
+        // Only retrieve items that were added by a specific user/entity.
+        $select->joinLeft(array('ier' => $db->EntityRelationships), 
+                          'ier.id = ie.relationship_id',
+                          array());
+        $select->where('ier.name = "added"');
+        
+        
         if ($isUser) {
             $select->joinLeft(array('u' => "$db->User"), 
                               'u.entity_id = e.id', 
@@ -275,8 +286,8 @@ class ItemTable extends Omeka_Db_Table
             $this->filterByUserOrEntity($select, $paramToFilter, $filterByUser);
         }
         
-        $this->filterByPublic($select, isset($params['public']));
-        $this->filterByFeatured($select, isset($params['featured']));
+        $this->filterByPublic($select, $params['public']);
+        $this->filterByFeatured($select, $params['featured']);
         
         if (isset($params['collection'])) {
             $this->filterByCollection($select, $params['collection']);

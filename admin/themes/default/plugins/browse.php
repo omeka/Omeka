@@ -22,9 +22,13 @@
     <tbody>
 <?php foreach( $plugins as $key => $plugin ): ?>
 	<tr>
-		<td><?php echo h($plugin->name); ?></td>
-		<td><?php echo h($plugin->description);?></td>
-		<td><?php echo h($plugin->author);?></td>
+		<td><?php 	if ($plugin->link):
+						echo '<a href="' . html_escape($plugin->link) . '">' . html_escape($plugin->name) . '</a>';
+					else:
+						echo html_escape($plugin->name);
+					endif; ?></td>
+		<td><?php echo html_escape($plugin->description);?></td>
+		<td><?php echo html_escape($plugin->author);?></td>
 		<td>
         <?php 
         //If the plugin has been installed, then there should be separate forms for activation/configuration

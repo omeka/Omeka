@@ -306,6 +306,10 @@ class Installer
         $db->exec($optionSql, array('admin_theme', 'default'));
         $db->exec($optionSql, array('public_theme', 'default'));
         
+        $db->exec($optionSql, array('file_extension_whitelist', Omeka_Validate_File_Extension::DEFAULT_WHITELIST));
+        $db->exec($optionSql, array('file_mime_type_whitelist', Omeka_Validate_File_MimeType::DEFAULT_WHITELIST));
+        $db->exec($optionSql, array('disable_default_file_validation', 0));
+        
         $this->showInstallForm = false;
     }
     

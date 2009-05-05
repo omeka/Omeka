@@ -25,7 +25,11 @@ class DataTypeTable extends Omeka_Db_Table
     {
         $table = $this->getTableName();
         $select = "SELECT d.id FROM $table d WHERE d.name = ?";
-        return $this->getDb()->fetchOne($select, array($dataTypeName));
+        $dataTypeId = $this->getDb()->fetchOne($select, array($dataTypeName));
+        if (empty($dataTypeId)) {
+            throw new Exception('Cannot find id from DataType name: ' . $dataTypeName);
+        }
+        return $dataTypeId;
     }
     
     protected function _getColumnPairs()

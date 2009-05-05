@@ -12,11 +12,9 @@
 		<tbody>
 	<?php foreach( $item->Files as $key => $file ): ?>
 		<tr>
-			<td><?php echo h($file->original_filename); ?></td>
+			<td><?php echo html_escape($file->original_filename); ?></td>
 			<td class="file-link">
-				<a class="edit" href="<?php echo uri('files/edit/'.$file->id); ?>">
-					Edit	
-				</a>
+				<?php echo link_to($file, 'edit', 'Edit', array('class'=>'edit')); ?>
 			</td>
 			<td class="delete-link">
 				<?php echo checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>

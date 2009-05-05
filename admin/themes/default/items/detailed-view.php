@@ -31,7 +31,7 @@
 	<?php if (!item_has_thumbnail()): ?>
 		<?php echo strip_formatting(item('Dublin Core', 'Description', array('snippet'=>300))); ?>
 		<?php else: ?>
-		<?php echo link_to_item(item_thumbnail(), array('class'=>'thumbnail')); ?>
+		<?php echo link_to_item(item_square_thumbnail(), array('class'=>'thumbnail')); ?>
 		<?php echo strip_formatting(item('Dublin Core', 'Description', array('snippet'=>300))); ?>
 	<?php endif; ?>
 	</div>

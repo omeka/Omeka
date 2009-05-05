@@ -1,14 +1,26 @@
 <?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js('tooltip'); ?>
-
-<script type="text/javascript">
-//<![CDATA[
-
-Event.observe(window,'load', function() {
-	Omeka.Form.makeTooltips($$('.tooltip'));
-});
-//]]>
+<script type="text/javascript" charset="utf-8">
+    Event.observe(window, 'load', function(){
+        var testButton = new Element('button', {'type': 'button'});
+        var loaderGif = new Element('img', {'src': '<?php echo img("loader.gif"); ?>'});
+        var resultDiv = new Element('div', {'id': 'im-result'});
+        var imageMagickInput = $('path_to_convert');
+        imageMagickInput.insert({'after':resultDiv});
+        imageMagickInput.insert({'after': testButton});
+        testButton.update('Test').observe('click', function(e){
+            testButton.insert({'after': loaderGif});
+            new Ajax.Request('<?php echo uri(array("controller"=>"settings","action"=>"check-imagemagick")); ?>', {
+                method: 'get',
+                parameters: 'path-to-convert=' + imageMagickInput.getValue(),
+                onComplete: function(t) {
+                    loaderGif.hide();
+                    resultDiv.update(t.responseText);
+                }
+            });
+        });
+    });
 </script>
+
 <h1>General Settings</h1>
 
 <?php common('settings-nav'); ?>
@@ -41,6 +53,45 @@ Event.observe(window,'load', function() {
 </div>
     </div>
 <?php endforeach; ?>
+	</fieldset>
+	
+	<fieldset>
+	    <legend>Security Settings</legend>
+	    <div class="field">
+	        <label for="file_extension_whitelist">Allowed File Extensions</label>
+	        <div class="inputs">
+	        <?php echo $this->formTextarea('file_extension_whitelist', 
+	                get_option('file_extension_whitelist'), 
+	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+	        <p class="explanation">List of extensions that are allowed for files 
+	            in the Omeka archive.  This list may be adjusted as necessary, 
+	            but keep in mind that many types of files can represent a 
+	            security risk.</p> 
+	        </div>
+	    </div>
+	    
+	    <div class="field">
+	        <label for="file_mime_type_whitelist">Allowed File Types</label>
+	        <div class="inputs">
+	        <?php echo $this->formTextarea('file_mime_type_whitelist',
+	                get_option('file_mime_type_whitelist'),
+	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+	        <p class="explanation">List of types of files that are allowed in the
+	            Omeka archive.  This list may be adjusted as necessary, but keep
+	            in mind that many types of files can represent a security risk.</p>
+	        </div>
+	    </div>
+	    
+	    <div class="field">
+	        <label for="disable_default_file_validation">Disable the Default
+	            Validation for File Uploads</label>
+	        <?php echo $this->formCheckbox('disable_default_file_validation', 
+	            null, array('checked'=>get_option('disable_default_file_validation'))); ?>
+	        <p class="explanation warning">WARNING: This will allow any file to
+	            be uploaded to Omeka.  This is not recommended for production 
+	            sites or sites where file upload responsibilities are not tightly
+	            supervised.</p>
+	    </div>
 	</fieldset>
 	
 	<fieldset>

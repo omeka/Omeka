@@ -49,7 +49,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	.submit-medium:hover, .submit-small:hover, .submit-extrasmall:hover {background-position:0 0 !important;cursor:pointer;}
 	
 	/* Replaces tooltips */
-	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999;}
+	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; clear:both;}
 	#item-form .field .explanation, #editfile .field .explanation {margin-left:216px; float:left; clear:right;}
 	
 	/* Changes the width of inputs depending on the layout */

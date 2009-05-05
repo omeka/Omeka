@@ -1,8 +1,17 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2009
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 /**
-* 
-*/
+ * Retrieve the list of all available metadata for a specific file.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2009
+ **/
 class Omeka_View_Helper_FileMetadataList extends Omeka_View_Helper_RecordMetadataList
 {
     

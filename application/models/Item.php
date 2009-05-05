@@ -44,6 +44,12 @@ class Item extends Omeka_Record
                                 'ItemTypeElements'=>'getItemTypeElements',
                                 'ElementTexts'=>'getElementText');
     
+    /**
+     * @var array Set of non-persistent File objects to attach to the item.
+     * @see Item::addFile()  
+     */
+    private $_files = array();
+    
     protected function construct()
     {
         $this->_mixins[] = new Taggable($this);
@@ -130,16 +136,21 @@ class Item extends Omeka_Record
         return $creator->User;
     }
     
-
+    static public function getItemRecordTypeId()
+    {
+        return get_db()->getTable('RecordType')->findIdFromName('Item');
+    }
     
     // End accessor methods
     
     // ActiveRecord callbacks
     
     /**
-     * Stop the form submission if we are using the non-JS form to change the type or add files
+     * Stop the form submission if we are using the non-JS form to change the 
+     * Item Type or add files.
      *
-     * Also, do not allow people to change the public/featured status of an item unless they got permission
+     * Also, do not allow people to change the public/featured status of an item
+     * unless they have 'makePublic' or 'makeFeatured' permissions.
      *
      * @return void
      **/
@@ -162,66 +173,24 @@ class Item extends Omeka_Record
     }
     
     /**
-     * @deprecated
-     * @return void
-     **/
-    private function deleteFiles($ids = null) 
-    {
-        if (!is_array($ids)) {
-            return false;
-        }
-        
-        // Retrieve file objects so that we have the benefit of the plugin hooks
-        // Oops, this will allow for deleting files from other items (bug!)
-        foreach ($ids as $file_id) {
-            $file = $this->getTable('File')->find($file_id);
-            $file->delete();
-        }        
-    }
-    
-    /**
-     * Remove a specific tag from any user.  This corresponds to a 'remove_tag'
-     * form input that contains the ID of the tag to delete.
-     *
-     * @since 6/10/08 'remove_item_tag' hook should pass the Item object, not
-     * the User object. 
-     * @param integer
-     * @return void
-     **/
-    protected function _removeTagByForm($tagId)
-    {        
-        // Only proceed if the user has permission to untag other users
-        if ($this->userHasPermission('untagOthers')) {
-            
-            // Find the tag instance we want to delete
-            $tagToDelete = $this->getTable('Tag')->find($tagId);
-            $user = Omeka_Context::getInstance()->getCurrentUser();
-            
-            if ($tagToDelete) {
-                // The remove_item_tag hook is passed the name of the tag as 
-                // well as the Item record
-                fire_plugin_hook('remove_item_tag',  $tagToDelete->name, $item);
-                
-                //Delete all instances of this tag for this Item
-                $this->deleteTags($tagToDelete, null, true);
-            }            
-        }
-    }
-    
-    /**
-     * @uses Taggable::applyTagString()
+     * Modify the user's tags for this item based on form input.
      * 
+     * Checks the 'tags' field from the post and applies all the differences in
+     * the list of tags for the current user.
+     * 
+     * @uses Taggable::applyTagString()
      * @param ArrayObject
      * @return void
      **/
     protected function _modifyTagsByForm($post)
     {
         // Change the tags (remove some, add some)
-        if (array_key_exists('tags', $post)) {
+        if (array_key_exists('my-tags-to-add', $post)) {
             $user = Omeka_Context::getInstance()->getCurrentUser();
-            $entity = $user->Entity;
-            if ($entity) {
-                $this->applyTagString($post['tags'], $entity);
+            if ($user) {
+                $this->addTags($post['my-tags-to-add'], $user);
+                $this->deleteTags($post['my-tags-to-delete'], $user);                
+                $this->deleteTags($post['other-tags-to-delete'], $user, $this->userHasPermission('untagOthers'));
             }
         }        
     }
@@ -234,18 +203,29 @@ class Item extends Omeka_Record
      * 
      * @return void
      **/
-    public function afterSaveForm($post)
+    protected function afterSaveForm($post)
     {
-        $this->_saveFiles();
-                
-        // Remove a single tag based on the form submission.
-        $this->_removeTagByForm((int) $post['remove_tag']);
+        $this->_uploadFiles();
         
         // Delete files that have been designated by passing an array of IDs 
         // through the form.
-        $this->deleteFiles($post['delete_files']);
+        if ($post['delete_files']) {
+            $this->_deleteFiles($post['delete_files']);
+        }
         
         $this->_modifyTagsByForm($post);
+    }
+    
+    /**
+     * Things to do in the afterSave() hook:
+     * 
+     * Save all files that had been associated with the item.
+     * 
+     * @return void
+     **/
+    protected function afterSave()
+    {
+        $this->saveFiles();
     }
         
     /**
@@ -260,18 +240,23 @@ class Item extends Omeka_Record
     }
     
     /**
-     * @todo Combine this with Item::deleteFiles() in such a way that it can
-     * be used to delete files based on a form submission OR all files when
-     * the item itself is deleted.
-     * @see Item::deleteFiles()
-     * @param string
+     * Delete files associated with the item.
+     * 
+     * If the IDs of specific files are passed in, this will delete only those
+     * files (e.g. form submission).  Otherwise, it will delete all files 
+     * associated with the item.
+     * 
+     * @uses FileTable::findByItem()
+     * @param array $fileIds Optional
      * @return void
      **/
-    protected function _deleteFiles()
-    {        
-        foreach ($this->Files as $file) {
-            $file->delete();
-        }        
+    protected function _deleteFiles(array $fileIds = array())
+    {           
+        $filesToDelete = $this->getTable('File')->findByItem($this->id, $fileIds);
+        
+        foreach ($filesToDelete as $fileRecord) {
+            $fileRecord->delete();
+        }
     }
     
     /**
@@ -280,15 +265,33 @@ class Item extends Omeka_Record
      * 
      * @param string
      * @return void
-     * @throws Omeka_Upload_Exception
      **/
-    private function _saveFiles()
+    private function _uploadFiles()
     {
         // Tell it to always try the upload, but ignore any errors if any of
         // the files were not actually uploaded (left form fields empty).
-        $ingest = new Omeka_File_Ingest($this, array(), array('ignoreNoFile'=>true));
-        $ingest->upload('file');
+        $files = insert_files_for_item($this, 'Upload', 'file', array('ignoreNoFile'=>true));
      }
+    
+    /**
+     * Save all the files that have been associated with this item.
+     * 
+     * @return boolean
+     **/
+    public function saveFiles()
+    {
+        if (!$this->exists()) {
+            throw new Exception("Files cannot be attached to an item that is "
+                                . "not persistent in the database!");
+        }
+        
+        foreach ($this->_files as $key => $file) {
+            $file->item_id = $this->id;
+            $file->forceSave();
+            // Make sure we can't save it twice by mistake.
+            unset($this->_files[$key]);
+        }        
+    }
     
     /**
      * Filter input from form submissions.  
@@ -311,33 +314,7 @@ class Item extends Omeka_Record
             
         $filter = new Zend_Filter_Input($filters, null, $input, $options);
 
-        $clean = $filter->getUnescaped();
-        
-        //Now handle proper parsing of the date fields
-        
-        // I couldn't get this to jive with Zend's thing so screw them
-        $dateFilter = new Omeka_Filter_Date;
-        
-        if ($clean['date_year']) {
-            $clean['date'] = $dateFilter->filter($clean['date_year'], 
-                                                 $clean['date_month'], 
-                                                 $clean['date_day']);
-        }
-        
-        if ($clean['coverage_start_year']) {
-            $clean['temporal_coverage_start'] = $dateFilter->filter($clean['coverage_start_year'], 
-                                                                    $clean['coverage_start_month'], 
-                                                                    $clean['coverage_start_day']);
-        }
-        
-        if ($clean['coverage_end_year']) {
-            $clean['temporal_coverage_end'] = $dateFilter->filter($clean['coverage_end_year'], 
-                                                                  $clean['coverage_end_month'], 
-                                                                  $clean['coverage_end_day']);            
-        }
-                        
-        // Now, happy shiny user input
-        return $clean;        
+        return $filter->getUnescaped();
     }
     
     /**
@@ -357,8 +334,9 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Easy facade for the Item class so that it almost acts like an iterator.
+     * Retrieve the previous Item in the database.
      *
+     * @uses ItemTable::findPrevious()
      * @return Item|false
      **/
     public function previous()
@@ -367,19 +345,19 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Retrieve the Item that is next in the database after this Item.
+     * Retrieve the next Item in the database.
      * 
+     * @uses ItemTable::findNext()
      * @return Item|false
      **/
     public function next()
     {
         return $this->getDb()->getTable('Item')->findNext($this);
     }
-    
-    //Everything past this is elements of the old code that may be changed or deprecated
-        
+            
     /**
-     * Whether or not the Item has a File with derivative images (like thumbnails).
+     * Determine whether or not the Item has a File with a thumbnail image
+     * (or any derivative image).
      * 
      * @return boolean
      **/
@@ -396,5 +374,29 @@ class Item extends Omeka_Record
         $count = $db->fetchOne($sql, array((int) $this->id));
             
         return $count > 0;
+    }
+    
+    /**
+     * Associate an unsaved (new) File record with this Item.
+     * 
+     * These File records will not be persisted in the database until the item
+     * is saved or saveFiles() is invoked.
+     * 
+     * @see Item::saveFiles()
+     * @param File $file
+     * @return void
+     **/
+    public function addFile(File $file)
+    {
+        if ($file->exists()) {
+            throw new Exception("Cannot add an existing file to an item!");
+        }
+        
+        if (!$file->isValid()) {
+            throw new Exception("File must be valid before it can be associated"
+                                . " with an item!");
+        }
+        
+        $this->_files[] = $file;
     }
 }
