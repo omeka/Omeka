@@ -122,8 +122,8 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         $meta = stream_get_meta_data($fp);
         // The stream metadata contains a 'wrapper_data' key with all the 
         // headers in it.  Extract the Content-type header from this.
-        $wrapperData = current(preg_grep('/Content\-type\: /', $meta['wrapper_data']));
-        $mimeType = str_replace('Content-type: ', '', $wrapperData);
+        $wrapperData = current(preg_grep('/Content\-(T|t)ype\: /', $meta['wrapper_data']));
+        $mimeType = preg_replace('/Content-(T|t)ype: /', '', $wrapperData);
         return $mimeType;
     }
 }
