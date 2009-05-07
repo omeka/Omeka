@@ -121,10 +121,10 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * @param string
      * @return string
      **/
-    protected function _transferFile($info, $originalFilename)
+    protected function _transferFile($fileInfo, $originalFilename)
     {        
-        $fileSourcePath = $this->_getFileSource($info);
-        $this->_validateSource($fileSourcePath, $info);
+        $fileSourcePath = $this->_getFileSource($fileInfo);
+        $this->_validateSource($fileSourcePath, $fileInfo);
                 
         // Create a temporary file in the default temporary directory and 
         // return the path to it.  This can be used to validate the file on the
@@ -139,11 +139,11 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
         
         // Adjust the file info array so that it works with the Zend Framework
         // validation.
-        $info = $this->_addZendValidatorAttributes($info);
+        $fileInfo = $this->_addZendValidatorAttributes($fileInfo);
 
         // If the transferred file is valid, put it in the Omeka archive.
         try {
-            if ($this->_validateFile($tempDestination, $info)) {
+            if ($this->_validateFile($tempDestination, $fileInfo)) {
 	            // Any reason why we wouldn't have copy permissions?
 	            if (copy($tempDestination, $fileDestinationPath)) {                
 	                // Delete the temporary file.
