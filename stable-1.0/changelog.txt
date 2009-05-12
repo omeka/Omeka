@@ -1,0 +1,2031 @@
+Changes in 1.0beta (updated Tue May  5 12:51:53 CDT 2009):
+------------------------------------------------------------------------
+r3956 | jsafley | 2009-05-04 16:03:04 -0400 (Mon, 04 May 2009) | 2 lines
+Changed paths:
+   M application/helpers/DataRetrievalFunctions.php
+   M application/helpers/DeprecatedFunctions.php
+   M application/helpers/Media.php
+   M application/helpers/NewThemeFunctions.php
+   M application/libraries/globals.php
+
+Fixes #723, Moves, removes, and leaves deprecated functions in DeprecatedFunctions.php.
+
+------------------------------------------------------------------------
+r3955 | kris | 2009-05-04 15:59:59 -0400 (Mon, 04 May 2009) | 2 lines
+Changed paths:
+   D application/libraries/InsertItemHelper.php
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+   M application/libraries/globals.php
+   A application/models/ItemBuilder.php
+
+Renames InsertItemHelper to ItemBuilder and moves to models/ directory, which fits better with both the pattern and usage of this class.
+
+------------------------------------------------------------------------
+r3954 | jboggs | 2009-05-04 15:55:35 -0400 (Mon, 04 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/error/403.php
+   M admin/themes/default/error/404.php
+   M admin/themes/default/items/detailed-view.php
+
+Updates markup in error pages for consistency, changes the detailed view for items/browse to use square_thumbnail by default.
+
+------------------------------------------------------------------------
+r3953 | jsafley | 2009-05-04 15:24:13 -0400 (Mon, 04 May 2009) | 2 lines
+Changed paths:
+   A application/views/scripts/javascripts/jquery.js
+
+Fixes #698, includes the jQuery library, but does not load it.
+
+------------------------------------------------------------------------
+r3952 | kris | 2009-05-04 15:12:02 -0400 (Mon, 04 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/collections/browse.php
+   M application/helpers/NewThemeFunctions.php
+
+Fixes #737, implements has_collections_for_loop() theme helper and adds code in admin theme to demonstrate usage.
+
+------------------------------------------------------------------------
+r3951 | kris | 2009-05-04 14:16:58 -0400 (Mon, 04 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/files/edit.php
+
+Fixes #735, adds 'admin_append_to_files_form' hook to file metadata form on the admin.
+
+------------------------------------------------------------------------
+r3950 | kris | 2009-05-04 13:47:46 -0400 (Mon, 04 May 2009) | 4 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Reverts "Removed use of deprecated functions current_user_tags and archive_image".  Copy/paste is anathema.
+
+This reverts commit 9a3e0e8e4db9d4072f302d347839228498c8f53b [3944].
+
+------------------------------------------------------------------------
+r3946 | jboggs | 2009-05-04 10:52:38 -0400 (Mon, 04 May 2009) | 2 lines
+Changed paths:
+   D admin/themes/default/403.php
+   A admin/themes/default/error/403.php
+   M admin/themes/default/theme.ini
+
+Updates admin theme ini with correct information, moves 403 error pages to error directory for consistency.
+
+------------------------------------------------------------------------
+r3945 | wriley | 2009-04-30 16:24:42 -0400 (Thu, 30 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/DeprecatedFunctions.php
+
+Cleaned up alignment of braces and indentation for deprecated functions.
+
+------------------------------------------------------------------------
+r3944 | wriley | 2009-04-30 16:22:50 -0400 (Thu, 30 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Removed use of deprecated functions current_user_tags and archive_image
+
+------------------------------------------------------------------------
+r3943 | wriley | 2009-04-30 16:15:44 -0400 (Thu, 30 Apr 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/users/form.php
+
+Removed use of not_empty_or function in users form.
+
+------------------------------------------------------------------------
+r3942 | wriley | 2009-04-30 16:03:30 -0400 (Thu, 30 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/DataRetrievalFunctions.php
+
+Added documentation to data retrieval functions.  Removed unused parameter from get_user_roles function.
+
+------------------------------------------------------------------------
+r3939 | kris | 2009-04-29 15:33:36 -0400 (Wed, 29 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/Omeka/Filter/Time.php
+   M application/libraries/globals.php
+
+Updates many doc tags for functions in globals.php.
+
+------------------------------------------------------------------------
+r3938 | kris | 2009-04-29 15:33:32 -0400 (Wed, 29 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/globals.php
+
+Fixes formatting of some doc tags for InsertItemHelper, privatizes some methods that were not meant to be exposed via the API.
+
+------------------------------------------------------------------------
+r3937 | davelester | 2009-04-29 15:13:17 -0400 (Wed, 29 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+   M application/models/FileTable.php
+
+Fixes #724, Only retrieves files with derivative images when using the item_image helper.
+
+------------------------------------------------------------------------
+r3935 | kris | 2009-04-28 17:41:01 -0400 (Tue, 28 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+   M application/models/File.php
+
+Moves IMAGE_DERIVATIVE_EXT global constant to Omeka_File_Derivative_Image class.
+
+------------------------------------------------------------------------
+r3934 | kris | 2009-04-28 17:38:57 -0400 (Tue, 28 Apr 2009) | 4 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/settings/edit.php
+   M application/controllers/SettingsController.php
+   M application/core/acl.php
+   M application/libraries/Omeka/File/Derivative/Image.php
+
+Fixes #713, removes Omeka_File_Derivative_Image::checkImageMagick() because its
+output is sometimes incorrect.  Replaces with equivalent code on the setting panel that checks the 'path_to_convert' setting to determine whether or not it
+is a valid path to ImageMagick.
+
+------------------------------------------------------------------------
+r3933 | kris | 2009-04-28 13:37:03 -0400 (Tue, 28 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/File.php
+
+Refs #703, moves File::createDerivatives() call to beforeInsert() so that files are not saved to the database if something goes wrong with image creation, i.e. when ImageMagick is improperly configured but not disabled.
+
+------------------------------------------------------------------------
+r3932 | kris | 2009-04-28 13:36:41 -0400 (Tue, 28 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+
+Refs #703, renames Omeka_File_Derivative_Image::isImageable() to isDerivable() to increase readability.
+
+------------------------------------------------------------------------
+r3931 | kris | 2009-04-28 13:36:22 -0400 (Tue, 28 Apr 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+   M application/models/File.php
+   M application/models/FileTable.php
+
+Refs #703, factors out FileTable::findByArchiveFilename() by passing the file MIME type directly to Omeka_File_Derivative_Image.
+
+Also moves file_exists() and is_readable() checks to isImageable().
+
+------------------------------------------------------------------------
+r3924 | davelester | 2009-04-28 06:46:54 -0400 (Tue, 28 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+   M application/libraries/Omeka/Validate/File/Extension.php
+   M application/libraries/Omeka/Validate/File/MimeType.php
+
+Add JPEG2000 support by adding it to appropriate whitelists.
+
+------------------------------------------------------------------------
+r3923 | kris | 2009-04-27 17:50:08 -0400 (Mon, 27 Apr 2009) | 6 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+
+Fixes #728, PluginBroker needs to be initialized before Session.
+
+Adds an 'initializePlugins' phase to Omeka_Core, changes phase loading order so that 'initializePluginBroker' fires before 'initializeSession', then 'initializePlugin'.
+
+Allows plugin classes to be properly serialized into and out of sessions.
+
+------------------------------------------------------------------------
+r3922 | jboggs | 2009-04-27 17:44:18 -0400 (Mon, 27 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+
+Fixes a bug in get_plugin_ini() helper, adds a catch clause when trying to get the path to the plugin.ini file.
+
+------------------------------------------------------------------------
+r3921 | davelester | 2009-04-27 16:53:22 -0400 (Mon, 27 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+
+Fixes #702, creates get_plugin_ini function to retrieve values from plugin INI files.  May need to add caching of the INI file in the future.
+
+------------------------------------------------------------------------
+r3920 | davelester | 2009-04-27 16:32:16 -0400 (Mon, 27 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+   M application/models/File.php
+   M application/models/FileTable.php
+
+Fixes #703, adds findByArchiveFilename method in FileTable, creates derivative images after inserting File record instead of before, and adds a blacklist of mimetypes for the generation of derivative images.  Users can now successfully upload SWF files as a result.
+
+------------------------------------------------------------------------
+r3918 | jboggs | 2009-04-27 14:49:50 -0400 (Mon, 27 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/Functions.php
+
+Fixes #710 cannot specify the Scriptaculous libraries in the js() helper. Adds a third parameter to the js() helper, to specify Scriptaculous libraries, removes the duplicate js_scriptaculous() helper.
+
+------------------------------------------------------------------------
+r3912 | jboggs | 2009-04-25 09:20:44 -0400 (Sat, 25 Apr 2009) | 2 lines
+Changed paths:
+   M install/components.css
+   M install/index.php
+   M install/install.css
+   M install/install_form.php
+
+Fixes #729 and #730. Adds indicator for password length requirement and updates styles for explanation sentence on install form.
+
+------------------------------------------------------------------------
+r3911 | kris | 2009-04-24 16:45:48 -0400 (Fri, 24 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/ElementForm.php
+   M application/models/ActsAsElementText.php
+
+Implements a 'Flatten' filter for collapsing element text form posts into flat text values in the database.
+
+------------------------------------------------------------------------
+r3910 | kris | 2009-04-24 16:45:44 -0400 (Fri, 24 Apr 2009) | 3 lines
+Changed paths:
+   M application/helpers/ElementForm.php
+   M application/models/ActsAsElementText.php
+
+Privatizes a number of methods in ActsAsElementText that were not meant to be
+exposed.
+
+------------------------------------------------------------------------
+r3909 | kris | 2009-04-24 14:57:28 -0400 (Fri, 24 Apr 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+
+Refs #676, #728 reverts [3907] that reintroduces the bug from #676.
+
+Revert "Fixed bug #728, so that plugin classes are loaded before the the session is started."
+
+------------------------------------------------------------------------
+r3908 | jboggs | 2009-04-24 11:31:12 -0400 (Fri, 24 Apr 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/components.css
+
+Fixes #674 Field description does not clear HTML elements floated above it.
+
+------------------------------------------------------------------------
+r3907 | wriley | 2009-04-24 10:41:23 -0400 (Fri, 24 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+
+Fixed bug #728, so that plugin classes are loaded before the the session is started.
+
+------------------------------------------------------------------------
+r3906 | wriley | 2009-04-23 16:07:18 -0400 (Thu, 23 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Added the item parameter to item helper functions.
+
+------------------------------------------------------------------------
+r3901 | davelester | 2009-04-22 17:27:01 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/plugins/browse.php
+
+Fixes #700, modifies admin theme to properly parse the link in plugin ini files.
+
+------------------------------------------------------------------------
+r3900 | kris | 2009-04-22 17:14:51 -0400 (Wed, 22 Apr 2009) | 4 lines
+Changed paths:
+   M application/models/FileTable.php
+   M application/models/Item.php
+
+Fixes #699, fatal error when re-POSTing a form submission that deletes files for an item.
+
+Adds another argument to FileTable::findByItem() to allow retrieval of specific files only.  Adds a similar argument to Item::_deleteFiles().  Removes Item::deleteFiles() entirely (unused).
+
+------------------------------------------------------------------------
+r3896 | kris | 2009-04-22 16:44:51 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Exception.php
+
+Fixes a horrible typo from [3887].
+
+------------------------------------------------------------------------
+r3895 | wriley | 2009-04-22 16:19:29 -0400 (Wed, 22 Apr 2009) | 4 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/items/form.php
+   M admin/themes/default/items/show.php
+   M admin/themes/default/items/tag-form.php
+   M application/models/Item.php
+
+* Fixed bug #711.  Changed the tags section of the admin edit item page so that tags are not added or removed until the Save Changes button is pressed.
+* Changed _modifyTagsByForm to add and delete new and removed taggings of user, and for admins, to delete taggings removed for all users.
+* Removed _removeTagByForm function and calls to it because tags are now only changed by _modifyTagsByForm function.
+
+------------------------------------------------------------------------
+r3894 | wriley | 2009-04-22 16:15:32 -0400 (Wed, 22 Apr 2009) | 9 lines
+Changed paths:
+   M application/models/Taggable.php
+
+* Added sort parameter to getTags and set it to alphabetical sort by default.
+* Added a sort parameter to it, and set it to alphabetical sort by default.
+* Added delimiter to parameter to deleteTags and changed the entity parameter to entityOrUser so users can be passed in as well.
+* Fixed deleteTags so it correctly returns true or false based on whether it deleted a tag or not.
+* Added a helper function _getTagsFromString that parses a delimited string and converts it into an array of tags.
+* Refactored code in diffTagString and addTag functions to use the _getTagsFromString function
+* Changed the entity parameter of addTags to entityOrUser, so users can be passed as well.
+* Fixed applyTagString function so it correctly adds taggings to entities who are also trying to delete all the taggings for a tag.
+
+------------------------------------------------------------------------
+r3893 | wriley | 2009-04-22 16:13:02 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Added documentation to remind us not to use current_user_tags because it's deprecated
+
+------------------------------------------------------------------------
+r3892 | wriley | 2009-04-22 16:11:56 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/DeprecatedFunctions.php
+
+Set the default sort of get_tags to alphabetical.
+
+------------------------------------------------------------------------
+r3891 | wriley | 2009-04-22 16:11:09 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/TagTable.php
+
+Changed userId parameter in filterByUserOrEntity to userOrEntity, so users and entities can be passed as well as their ids.
+
+------------------------------------------------------------------------
+r3890 | wriley | 2009-04-22 16:06:41 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/TaggingsTable.php
+
+Removed some empty lines.
+
+------------------------------------------------------------------------
+r3888 | jsafley | 2009-04-22 14:09:45 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M application/controllers/ItemsController.php
+   M application/libraries/Omeka/Core.php
+   D application/models/ItemDc.php
+   A application/models/ItemDcmesXml.php
+   D application/views/scripts/items/browse.dc.php
+   A application/views/scripts/items/browse.dcmes-xml.php
+   D application/views/scripts/items/show.dc.php
+   A application/views/scripts/items/show.dcmes-xml.php
+
+Refs #660, Changes the dc output to dcmes-xml and hard codes the Dublin Core core 15 elements into the output to prevent invalid markup.
+
+------------------------------------------------------------------------
+r3887 | kris | 2009-04-22 13:41:51 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   A application/libraries/Omeka/File/Derivative/Exception.php
+   M application/libraries/Omeka/File/Derivative/Image.php
+   D application/libraries/Omeka/Upload/Exception.php
+
+Fixes #695, implements Omeka_File_Derivative_Exception to throw in Omeka_File_Derivative_Image when the process fails.  Removes Omeka_Upload_Exception (unused).
+
+------------------------------------------------------------------------
+r3886 | kris | 2009-04-22 10:56:03 -0400 (Wed, 22 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/Functions.php
+   M application/helpers/ItemMetadata.php
+   M application/helpers/NewThemeFunctions.php
+   M application/helpers/Url.php
+   M application/helpers/UrlFunctions.php
+   M application/libraries/Omeka/View/Helper/RecordMetadata.php
+
+Updates a bunch of doc tags for commonly used theme helpers.
+
+------------------------------------------------------------------------
+r3885 | kris | 2009-04-21 16:26:31 -0400 (Tue, 21 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/FormFunctions.php
+
+Updates doc tags for helpers in FormFunctions.php, also fixes hidden() so that it returns a string instead of echoing it.
+
+------------------------------------------------------------------------
+r3884 | kris | 2009-04-21 14:49:14 -0400 (Tue, 21 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Adds @since doc tags to all helper functions in NewThemeFunctions.php, also cleans up some of the existing docs.
+
+------------------------------------------------------------------------
+r3883 | kris | 2009-04-21 12:03:50 -0400 (Tue, 21 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/DataRetrievalFunctions.php
+   M application/helpers/DeprecatedFunctions.php
+   M application/helpers/ElementForm.php
+   M application/helpers/FormFunctions.php
+   M application/helpers/Functions.php
+   M application/helpers/ItemMetadata.php
+   M application/helpers/ItemMetadataList.php
+   M application/helpers/LinkFunctions.php
+   M application/helpers/Media.php
+   M application/helpers/NewThemeFunctions.php
+   M application/helpers/Url.php
+   M application/helpers/UrlFunctions.php
+   M application/libraries/Omeka/View/Helper/RecordMetadata.php
+
+Changes OmekaThemes package name to Omeka_ThemeHelpers (more descriptive).
+
+------------------------------------------------------------------------
+r3882 | kris | 2009-04-21 11:43:00 -0400 (Tue, 21 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/FileMetadata.php
+   M application/helpers/FileMetadataList.php
+   M application/libraries/Omeka/Controller/Action/Helper/ContextSwitch.php
+   M application/libraries/Omeka/Db/Select.php
+   M application/libraries/Omeka/File/Derivative/Image.php
+   M application/libraries/Omeka/File/Info.php
+   M application/libraries/Omeka/Filter/Filename.php
+   M application/libraries/Omeka/Validate/DateTime.php
+   M application/libraries/Omeka/View/Helper/RecordMetadataList.php
+   M application/models/PublicFeatured.php
+   M paths.php
+
+Adds page-level doc headers for classes that were missing those.
+
+------------------------------------------------------------------------
+r3877 | jsafley | 2009-04-17 16:10:21 -0400 (Fri, 17 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Url.php
+
+Fixes #692, URL-decodes the source to prevent Not Found errors on encoded filenames.
+
+------------------------------------------------------------------------
+r3876 | jsafley | 2009-04-17 13:26:25 -0400 (Fri, 17 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Url.php
+
+Refs #692, Adds an arbitrary user_agent to minimize the chances of 403 forbidden responses.
+
+------------------------------------------------------------------------
+r3875 | kris | 2009-04-17 10:29:26 -0400 (Fri, 17 Apr 2009) | 2 lines
+Changed paths:
+   M application/controllers/ItemsController.php
+
+Fixes #707, error adding tags to pre-existing items.
+
+------------------------------------------------------------------------
+r3873 | kris | 2009-04-16 17:50:58 -0400 (Thu, 16 Apr 2009) | 8 lines
+Changed paths:
+   M admin/themes/default/collections/edit.php
+   M admin/themes/default/collections/form.php
+   M admin/themes/default/items/files-form.php
+   M admin/themes/default/items/tag-list.php
+   M admin/themes/default/plugins/browse.php
+   M admin/themes/default/themes/browse.php
+   M admin/themes/default/users/activate.php
+   M admin/themes/default/users/browse.php
+   M admin/themes/default/users/show.php
+   M application/helpers/FormFunctions.php
+   M application/helpers/Functions.php
+   M application/models/ItemRss2.php
+
+Fixes #586, removes all references to h() within the code base and replaces with calls to html_escape().
+
+Fixes an XSS vulnerability with tag names being displayed on the items/show page.
+
+Fixes a parsing error in ItemRss2 where 'site_title' and other options were not being escaped properly.
+
+Replaces some custom-built links on the admin with calls to link_to().
+
+------------------------------------------------------------------------
+r3872 | kris | 2009-04-16 17:50:46 -0400 (Thu, 16 Apr 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/users/browse.php
+
+Removes old print_r() debug from users/browse panel on admin.
+
+------------------------------------------------------------------------
+r3871 | kris | 2009-04-16 17:50:30 -0400 (Thu, 16 Apr 2009) | 4 lines
+Changed paths:
+   M admin/themes/default/element-sets/browse.php
+   M admin/themes/default/files/edit.php
+   M admin/themes/default/item-types/browse.php
+   M admin/themes/default/item-types/edit.php
+   M admin/themes/default/item-types/element-list.php
+   M admin/themes/default/item-types/show.php
+   M admin/themes/default/items/change-type.php
+   M admin/themes/default/items/form-tabs.php
+   M admin/themes/default/items/form.php
+   M admin/themes/default/items/tag-form.php
+   M admin/themes/default/users/login.php
+   M application/helpers/ElementForm.php
+   M application/helpers/FormFunctions.php
+   M application/helpers/Functions.php
+   M application/helpers/Media.php
+   M application/helpers/NewThemeFunctions.php
+   M application/libraries/Omeka/View/Helper/RecordMetadata.php
+   M application/libraries/Omeka/View/Helper/RecordMetadataList.php
+   M application/views/scripts/error/404.php
+   M application/views/scripts/items/item-metadata.php
+   M application/views/scripts/upgrade/migrate.php
+   M install/install_form.php
+
+Refs #586, implements html_escape() helper function and replaces all existing calls to htmlentities() and htmlspecialchars() with that helper function.
+
+Also fixes a few XSS vulnerabilities where element set name or element names were not properly escaped.
+
+------------------------------------------------------------------------
+r3870 | kris | 2009-04-16 17:50:05 -0400 (Thu, 16 Apr 2009) | 3 lines
+Changed paths:
+   M application/helpers/DeprecatedFunctions.php
+   M application/helpers/Functions.php
+
+Moves the following deprecated functions to DeprecatedFunctions.php:
+    thumbnail(), fullsize(), square_thumbnail(), archive_image().
+
+------------------------------------------------------------------------
+r3868 | kris | 2009-04-16 10:52:10 -0400 (Thu, 16 Apr 2009) | 10 lines
+Changed paths:
+   M admin/themes/default/settings/edit.php
+   M application/controllers/SettingsController.php
+   M application/libraries/InsertItemHelper.php
+   A application/libraries/Omeka/Validate/File/Extension.php
+   A application/libraries/Omeka/Validate/File/MimeType.php
+   D application/migrations/035_addFileBlacklistSetting.php
+   A application/migrations/035_addFileWhitelistSettings.php
+   M install/Installer.php
+   M paths.php
+
+Fixes #696, converts file extension/MIME type blacklists to whitelists.
+
+Removes all references to the blacklists ('file_extension_blacklist' option, etc.).
+
+Adds 'disable_default_file_validation' option to settings panel.
+
+Adds 'Security Settings' fieldset to settings panel.
+
+Implements Omeka_File_Validate_Extension, Omeka_File_Validate_MimeType, which encapsulate the default whitelists as well as retrieval of stored whitelist options and modifications to the default validation error messages.
+
+------------------------------------------------------------------------
+r3867 | kris | 2009-04-16 10:52:03 -0400 (Thu, 16 Apr 2009) | 18 lines
+Changed paths:
+   M admin/themes/default/settings/edit.php
+   M application/controllers/SettingsController.php
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+   M application/libraries/Omeka/File/Ingest/Filesystem.php
+   M application/libraries/Omeka/File/Ingest/Source.php
+   M application/libraries/Omeka/File/Ingest/Upload.php
+   M application/libraries/Omeka/File/Ingest/Url.php
+   A application/migrations/035_addFileBlacklistSetting.php
+   M install/Installer.php
+   M paths.php
+
+Fixes #696, adds validation of transferred files to the file ingest classes.  Prevents security vulnerabilities in the default configuration by blocking files with specific extensions and/or MIME types.
+
+Adds the following options (along with database migration # 35, install script change and settings form inputs):
+ * file_extension_blacklist
+ * file_mime_type_blacklist
+
+Adds the following plugin filter:
+ * file_ingest_validators
+
+Implements the following methods:
+ * Omeka_File_Ingest_Abstract::addValidator()
+ * Omeka_File_Ingest_Abstract::_validateFile()
+ * InsertItemHelper::_addIngestValidators()
+ * Omeka_File_Ingest_Source::_addZendValidatorAttributes()
+ * Omeka_File_Ingest_Source::_getFileMimeType()
+
+Refactors Omeka_File_Ingest_Source::_transferFile() to first transfer to a temporary directory, validate the transferred file, then copy that file to the Omeka archive.
+
+------------------------------------------------------------------------
+r3866 | kris | 2009-04-16 10:51:55 -0400 (Thu, 16 Apr 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/settings/edit.php
+
+Removes unused tooltip javascript from admin settings panel.
+
+------------------------------------------------------------------------
+r3865 | kris | 2009-04-16 10:51:48 -0400 (Thu, 16 Apr 2009) | 2 lines
+Changed paths:
+   D application/tests/.htaccess
+   D application/tests/AclTestCase.php
+   D application/tests/AdminThemeTest.php
+   D application/tests/AllTests.php
+   D application/tests/ControllerAclTestCase.php
+   D application/tests/CoreTestPlugin.php
+   D application/tests/FileTestCase.php
+   D application/tests/MiscellaneousTestCase.php
+   D application/tests/OmekaControllerTestCase.php
+   D application/tests/OmekaDbTestCase.php
+   D application/tests/OmekaRecordTestCase.php
+   D application/tests/UnicodeFunctionsTestCase.php
+   D application/tests/ViewHelpersTestCase.php
+   D application/tests/bootstrap.php
+   D application/tests/config.ini.changeme
+
+Removes tests/ directory (all tests broken or outdated).
+
+------------------------------------------------------------------------
+r3864 | kris | 2009-04-16 10:51:41 -0400 (Thu, 16 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Source.php
+
+Tweaks docs for Omeka_File_Ingest_Source.
+
+------------------------------------------------------------------------
+r3859 | jboggs | 2009-04-12 22:32:15 -0400 (Sun, 12 Apr 2009) | 2 lines
+Changed paths:
+   A application/views/scripts/css/components.css
+   A application/views/scripts/images/buttons-medium.gif
+   A application/views/scripts/images/buttons-small.gif
+   A application/views/scripts/images/login-button.gif
+   A application/views/scripts/images/submit-extrasmall.gif
+   A application/views/scripts/images/submit-medium.gif
+   A application/views/scripts/images/submit-small.gif
+   M application/views/scripts/upgrade/completed.php
+   M application/views/scripts/upgrade/index.php
+   M application/views/scripts/upgrade/migrate.php
+
+Fixes #679 Upgrade page lacks button styles, updates upgrade pages to use helpers that link to admin and public homepage.
+
+------------------------------------------------------------------------
+r3858 | kris | 2009-04-10 14:56:01 -0400 (Fri, 10 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+
+Fixes #676, session vars could not be accessed properly within the 'initialize' plugin hook.
+
+------------------------------------------------------------------------
+r3857 | kris | 2009-04-10 13:42:13 -0400 (Fri, 10 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/ItemTable.php
+
+Fixes #697, searching items by user returned incorrect results.  Correct behavior is to return only items that were added by that user (not modified items).
+
+------------------------------------------------------------------------
+r3856 | kris | 2009-04-10 10:34:42 -0400 (Fri, 10 Apr 2009) | 6 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+   M application/models/Item.php
+
+Fixes #693, file ingest exceptions thrown from insert_item() should prevent the item from being saved to the database.
+
+Implements: Item::saveFiles(), Item::addFile().  Refactors Omeka_File_Ingest_Abstract to use addFile() and InsertItemHelper to use saveFiles().
+
+Renames Item::_saveFiles() to Item::_uploadFiles() to prevent confusion with Item::saveFiles().
+
+------------------------------------------------------------------------
+r3855 | kris | 2009-04-10 10:34:37 -0400 (Fri, 10 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/Item.php
+
+Changes Item::afterSaveForm() from public to protected (typo).
+
+------------------------------------------------------------------------
+r3854 | kris | 2009-04-10 10:34:28 -0400 (Fri, 10 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/Item.php
+
+Removes some unused code and fixes some doc tags in Item model.
+
+------------------------------------------------------------------------
+r3851 | jsafley | 2009-04-08 14:37:55 -0400 (Wed, 08 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Source.php
+
+Fixes a bug that ignored the original filename when getting a destination path, resulting in filenames beginning with the unique suffix and not the original file name.
+
+------------------------------------------------------------------------
+r3839 | wriley | 2009-04-06 19:46:06 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/Taggable.php
+
+Fixed documentation and parameter name for deleteTags
+
+------------------------------------------------------------------------
+r3838 | wriley | 2009-04-06 19:45:19 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/controllers/ItemsController.php
+
+Fixed documentation for editAction
+
+------------------------------------------------------------------------
+r3837 | kris | 2009-04-06 13:42:14 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+   M application/libraries/Omeka/File/Ingest/Filesystem.php
+   M application/libraries/Omeka/File/Ingest/Source.php
+   M application/libraries/Omeka/File/Ingest/Upload.php
+   M application/libraries/Omeka/File/Ingest/Url.php
+
+Refactors Omeka_File_Ingest_Abstract to remove _fileIsValid().  Replaced by Omeka_File_Ingest_Source::_validateSource() in Omeka_File_Ingest_Filesystem and Omeka_File_Ingest_Url.
+
+------------------------------------------------------------------------
+r3836 | kris | 2009-04-06 13:42:11 -0400 (Mon, 06 Apr 2009) | 6 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/Omeka/File/Ingest/Filesystem.php
+   M application/libraries/Omeka/File/Ingest/Source.php
+
+Refs #696, changes the optional parameter for specifying an alternative filename for ingested files from 'filename' to 'name'.
+
+Affected methods: Omeka_File_Ingest_Source::_getOriginalFilename().
+
+Note: BC break from 1.0alpha.  This is done to ensure forward compatibility with Zend_Validate_File_* components, at least one of which requires the 'name' attribute in order to correctly validate the file.
+
+------------------------------------------------------------------------
+r3835 | kris | 2009-04-06 13:42:08 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+   M application/libraries/Omeka/File/Ingest/Filesystem.php
+   A application/libraries/Omeka/File/Ingest/InvalidException.php
+   M application/libraries/Omeka/File/Ingest/Upload.php
+   M application/libraries/Omeka/File/Ingest/Url.php
+
+Implements Omeka_File_Ingest_InvalidException as the exception to be thrown when a file to be ingested is invalid (as opposed to when the ingest fails for other reasons).
+
+------------------------------------------------------------------------
+r3834 | kris | 2009-04-06 13:42:05 -0400 (Mon, 06 Apr 2009) | 7 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+   A application/libraries/Omeka/File/Ingest/Exception.php
+   M application/libraries/Omeka/File/Ingest/Filesystem.php
+   M application/libraries/Omeka/File/Ingest/Source.php
+   M application/libraries/Omeka/File/Ingest/Upload.php
+   M application/libraries/Omeka/File/Ingest/Url.php
+
+Refs #696, refactors ingest validation so that all file ingest validation errors throw Omeka_File_Ingest_Exception.
+
+Refactors Omeka_File_Ingest_Abstract::ingest(): exceptions thrown anywhere during the ingest process can be suppressed and logged if 'ignore_invalid_files' is enabled.
+
+Adds to Omeka_File_Ingest_Abstract: _ignoreIngestErrors(), _logException().
+Removes: _isValid().
+
+------------------------------------------------------------------------
+r3833 | kris | 2009-04-06 13:42:02 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+
+Adds doc tags for Omeka_File_Ingest_Abstract and methods.
+
+------------------------------------------------------------------------
+r3832 | kris | 2009-04-06 13:42:00 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Source.php
+
+Fixes parsing of source arrays in Omeka_File_Ingest_Source.
+
+------------------------------------------------------------------------
+r3831 | kris | 2009-04-06 13:41:56 -0400 (Mon, 06 Apr 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Abstract.php
+   M application/libraries/Omeka/File/Ingest/Filesystem.php
+   A application/libraries/Omeka/File/Ingest/Source.php
+   M application/libraries/Omeka/File/Ingest/Url.php
+
+Implements Omeka_File_Ingest_Source as a base class for Omeka_File_Ingest_Url and Omeka_File_Ingest_Filesystem.
+
+Refactors _getFileSource(), _getOriginalFileName(), _parseFileInfo() implementations from Omeka_File_Ingest_Abstract into Omeka_File_Ingest_Source.
+
+------------------------------------------------------------------------
+r3830 | kris | 2009-04-06 13:41:52 -0400 (Mon, 06 Apr 2009) | 24 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   D application/libraries/Omeka/File/Ingest.php
+   A application/libraries/Omeka/File/Ingest/Abstract.php
+   A application/libraries/Omeka/File/Ingest/Filesystem.php
+   A application/libraries/Omeka/File/Ingest/Upload.php
+   A application/libraries/Omeka/File/Ingest/Url.php
+   D application/libraries/Omeka/File/Transfer/Adapter/Abstract.php
+   D application/libraries/Omeka/File/Transfer/Adapter/Filesystem.php
+   D application/libraries/Omeka/File/Transfer/Adapter/Interface.php
+   D application/libraries/Omeka/File/Transfer/Adapter/Url.php
+   M application/models/Item.php
+
+Refactors Omeka_File_Ingest into Omeka_File_Ingest_Abstract abstract class.
+
+Removed:
+ * Omeka_File_Transfer_Adapter_Abstract
+ * Omeka_File_Transfer_Adapter_Interface (replaced by Omeka_File_Ingest_Abstract implementations).
+
+Changes to Omeka_File_Ingest_Abstract:
+ * Replaces constructor with setItem() and setOptions().  This allows us to pass in arbitrary objects that implement Omeka_File_Ingest_Abstract to insert_files_for_item().
+ * Adds factory() method.
+ * Finalizes and privatizes some methods in Omeka_File_Ingest_Abstract.
+ * Adds _getOriginalFilename(), _transferFile(), _fileIsValid() and _parseFileInfo() to replace similar methods that were in Omeka_File_Transfer_Adapter_Interface, refactors ingest() to call those methods.
+ * Moves contents of setFiles() to _parseFileInfo().
+ * Removes upload() and replaces with implementation of Omeka_File_Ingest_Upload.
+ * Refactors _transferFile() to return the destination instead of receiving it as an argument.
+ * Removes some unused class variables.
+
+Changes to InsertItemHelper:
+ * Refactors InsertItemHelper to Omeka_File_Ingest_Abstract::factory().
+
+Changes to Item model:
+ * Refactors the Item model to use insert_files_for_item().
+
+Refactors Omeka_File_Transfer_Adapter_Url/Filesystem into Omeka_File_Ingest_Url/Filesystem.
+
+------------------------------------------------------------------------
+r3829 | kris | 2009-04-06 13:41:45 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Removed an unused $_type class variable from Omeka_File_Ingest.
+
+------------------------------------------------------------------------
+r3828 | wriley | 2009-04-06 13:28:58 -0400 (Mon, 06 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/ItemTable.php
+
+Fixed filterByFeatured code so that it accepts a parameter with the value equal to false
+
+------------------------------------------------------------------------
+r3822 | wriley | 2009-04-02 16:49:59 -0400 (Thu, 02 Apr 2009) | 2 lines
+Changed paths:
+   M application/controllers/ItemTypesController.php
+   M application/libraries/globals.php
+   M application/models/DataTypeTable.php
+   M application/models/Item.php
+   M application/models/ItemType.php
+
+Added insert_item_type helper. Fixed find datatype id by name so that it throws an exception.  Refactored adding elements to Items.
+
+------------------------------------------------------------------------
+r3819 | wriley | 2009-04-01 16:22:32 -0400 (Wed, 01 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+   M application/models/TagTable.php
+
+Improved documentation for get_tags and TagTable::sortBy
+
+------------------------------------------------------------------------
+r3817 | wriley | 2009-04-01 12:27:21 -0400 (Wed, 01 Apr 2009) | 2 lines
+Changed paths:
+   M application/helpers/Functions.php
+
+Added a function that allows the user to specify the scriptaculous sublibaries they want to load.
+
+------------------------------------------------------------------------
+r3816 | wriley | 2009-04-01 12:13:29 -0400 (Wed, 01 Apr 2009) | 2 lines
+Changed paths:
+   M application/models/TagTable.php
+
+Added partial name filter and the ability to have more than one sort.
+
+------------------------------------------------------------------------
+r3800 | kris | 2009-03-26 11:14:05 -0400 (Thu, 26 Mar 2009) | 2 lines
+Changed paths:
+   M application/models/ElementSet.php
+
+Fixes a bug in ElementSet that causes a warning when inserting an empty element set using insert_element_set().
+
+------------------------------------------------------------------------
+r3798 | kris | 2009-03-26 09:40:59 -0400 (Thu, 26 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Controller/Action.php
+   M application/libraries/Omeka/Db/Table.php
+
+Fixes doc tags for Omeka_Db_Table.
+
+------------------------------------------------------------------------
+r3785 | wriley | 2009-03-24 16:25:45 -0400 (Tue, 24 Mar 2009) | 2 lines
+Changed paths:
+   M application/helpers/Functions.php
+   M application/helpers/NewThemeFunctions.php
+
+Made text for empty items, collections, and tags more consistent
+
+------------------------------------------------------------------------
+r3771 | kris | 2009-03-20 14:58:13 -0400 (Fri, 20 Mar 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/index.php
+
+Fixes short tag on admin theme dashboard.
+
+------------------------------------------------------------------------
+Changes in Version 1.0alpha (March 10, 2009):
+------------------------------------------------------------------------
+r3726 | wriley | 2009-03-10 11:02:43 -0400 (Tue, 10 Mar 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Added label parameter to select_item_type, select_item_type_elements, _select_from_table, select_collection, select_user, and select_entity functions.
+
+------------------------------------------------------------------------
+r3724 | wriley | 2009-03-09 19:03:22 -0400 (Mon, 09 Mar 2009) | 2 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Added another bitmap MIME type to the display media helper.
+
+------------------------------------------------------------------------
+r3722 | wriley | 2009-03-09 14:46:30 -0400 (Mon, 09 Mar 2009) | 2 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Added GIF and BMP mime types, so they can be viewed in the show item view.
+
+------------------------------------------------------------------------
+r3718 | kris | 2009-03-06 15:40:58 -0500 (Fri, 06 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+
+Fixes a bug where insert_element_set() did not return the ElementSet record.
+
+------------------------------------------------------------------------
+r3717 | wriley | 2009-03-05 17:26:37 -0500 (Thu, 05 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+
+Added ability to release an array of objects as well as a single object.
+
+------------------------------------------------------------------------
+r3716 | kris | 2009-03-05 16:39:21 -0500 (Thu, 05 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/globals.php
+
+Refs #648, adds more information to doc tags for InsertItemHelper.  Also fixes bug by adding third $fileMetadata argument to the update_item() helper.
+
+------------------------------------------------------------------------
+r3714 | kris | 2009-03-05 14:00:07 -0500 (Thu, 05 Mar 2009) | 4 lines
+Changed paths:
+   A application/libraries/Omeka/File/Transfer/Adapter/Abstract.php
+   M application/libraries/Omeka/File/Transfer/Adapter/Filesystem.php
+   M application/libraries/Omeka/File/Transfer/Adapter/Url.php
+
+Refs #651, adds an abstract class to share code between the Url and Filesystem transfer adapters.
+
+Also refactors both of those transfer adapters to improve readability.
+
+------------------------------------------------------------------------
+r3713 | kris | 2009-03-05 14:00:03 -0500 (Thu, 05 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Refs #651, refactors Omeka_File_Ingest::ingest() to improve readability of some variable names and remove some unnecessary variable references.
+
+------------------------------------------------------------------------
+r3712 | kris | 2009-03-05 13:59:59 -0500 (Thu, 05 Mar 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   M application/libraries/Omeka/File/Transfer/Adapter/Filesystem.php
+   M application/libraries/Omeka/File/Transfer/Adapter/Interface.php
+   M application/libraries/Omeka/File/Transfer/Adapter/Url.php
+
+Refs #651, modifies Omeka_File_Transfer_Adapter_Interface so that the $source argument is no longer passed to the transferFile() method.
+
+This is because the $source argument is redundant when information about the file's source has already been passed to the transfer adapter via the setFileInfo() method.
+
+------------------------------------------------------------------------
+r3710 | wriley | 2009-03-05 11:57:17 -0500 (Thu, 05 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Record.php
+   M application/libraries/globals.php
+
+Fixed memory leak caused by circular references. We now need to use release_object function for objects that have circular references.
+
+------------------------------------------------------------------------
+r3708 | kris | 2009-03-05 10:45:43 -0500 (Thu, 05 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+
+Refactors the ImageMagick commands to improve readability and negate the remote possibility of command injection through arbitrary commands stored as image size constraints.
+
+------------------------------------------------------------------------
+r3707 | kris | 2009-03-05 10:45:41 -0500 (Thu, 05 Mar 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/settings/edit.php
+   M install/Installer.php
+   M install/install_form.php
+
+Fixes the installer and settings panel to indicate that only the directory containing ImageMagick should be provided as a setting (as opposed to the full path containing the executable).
+
+------------------------------------------------------------------------
+r3706 | kris | 2009-03-05 10:45:38 -0500 (Thu, 05 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+
+Fixes a security hole where the 'path_to_convert' setting could be replaced with an arbitrary command that would be executed the next time that derivative images were created.
+
+------------------------------------------------------------------------
+r3703 | kris | 2009-03-04 11:38:57 -0500 (Wed, 04 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+
+Refs #651, fixes a bug introduced by refactoring: if ImageMagick path is not provided in settings, do not try to create derivative images.
+
+------------------------------------------------------------------------
+r3702 | kris | 2009-03-04 11:38:54 -0500 (Wed, 04 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/globals.php
+
+Refs #648, adds a third argument to insert_item() for file metadata and related options, as per discussion with jsafley.
+
+------------------------------------------------------------------------
+r3701 | kris | 2009-03-04 11:38:48 -0500 (Wed, 04 Mar 2009) | 4 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/models/ActsAsElementText.php
+   M application/models/File.php
+   M application/models/Item.php
+
+Refs #648, refactors Item/File models so that element texts are saved automatically when the records are saved.
+
+This fixes a bug where Item element text metadata was not saving when also ingesting invalid files at the same time (because thrown exceptions mess up the sequence of events).
+
+------------------------------------------------------------------------
+r3695 | kris | 2009-03-02 23:41:39 -0500 (Mon, 02 Mar 2009) | 25 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Refs #648, can now specify element text metadata to include for ingested files.
+
+This is done by passing a 'metadata' parameter in the array of file info representing the file to be ingested.  This metadata parameter is an array that is formatted in the same way as the element text metadata for items.
+
+Here is an example:
+
+$item = insert_item(
+    array(
+        'public'=>true,
+        'file_transfer_type' => 'Url',
+        'files'=>array(
+            array(
+                'source' => 'http://www.example.com',
+                'filename' => 'foobar.html',
+                'metadata' => array(
+                        'Dublin Core' => array(
+                            'Title' => array(
+                                array('text'=>'A Helpful Title', 'html'=>false)
+                            )
+                        )
+                    )
+                )
+        ))
+);
+
+------------------------------------------------------------------------
+r3694 | kris | 2009-03-02 23:41:34 -0500 (Mon, 02 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Fixes a bug in Omeka_File_Ingest to enforce type checking of the options array that is passed in.
+
+------------------------------------------------------------------------
+r3693 | kris | 2009-03-02 23:41:30 -0500 (Mon, 02 Mar 2009) | 3 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/models/ActsAsElementText.php
+
+Refactors InsertItemHelper so that the code that adds element metadata based on
+an array is its own method (ActsAsElementText::addElementTextsByArray()).
+
+------------------------------------------------------------------------
+r3692 | kris | 2009-03-02 23:41:27 -0500 (Mon, 02 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/InsertItemHelper.php
+   M application/libraries/globals.php
+
+Refs #648, implements insert_files_for_item() and the corresponding shortcuts within insert_item().
+
+------------------------------------------------------------------------
+r3691 | kris | 2009-03-02 23:41:22 -0500 (Mon, 02 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   M application/models/Item.php
+
+Refs #651, fixes Omeka_File_Ingest::upload() that it responds properly to the 'ignoreNoFile' option.
+
+------------------------------------------------------------------------
+r3690 | kris | 2009-03-02 23:41:17 -0500 (Mon, 02 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Fixes Omeka_File_Ingest::setOptions(), which was broken since refactoring Omeka_File_Ingest into adapter classes.
+
+------------------------------------------------------------------------
+r3685 | kris | 2009-03-02 10:24:53 -0500 (Mon, 02 Mar 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Transfer/Adapter/Url.php
+
+Refs #651, refactors Url transfer adapter to use copy() if wget is not available.
+
+Note: this still requires testing to see if it works the other way on systems that DO have wget.
+
+------------------------------------------------------------------------
+r3684 | kris | 2009-03-02 10:24:48 -0500 (Mon, 02 Mar 2009) | 2 lines
+Changed paths:
+   A application/libraries/Omeka/File/Transfer/Adapter/Url.php
+
+Refs #651, refactors URL ingest code from Omeka_File_Ingest into an Omeka_File_Transfer_Adapter class.
+
+------------------------------------------------------------------------
+r3683 | kris | 2009-03-02 10:24:43 -0500 (Mon, 02 Mar 2009) | 5 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   A application/libraries/Omeka/File/Transfer/Adapter/Filesystem.php
+   A application/libraries/Omeka/File/Transfer/Adapter/Interface.php
+
+Refs #651, refactors Omeka_File_Ingest to operate with strategies to handle the transfer and validation of files that will adhere to the Omeka_File_Transfer_Adapter_Interface.
+
+Also adds a PHPDoc header to the upload() method explaining the reasoning
+behind the API inconsistency.
+
+------------------------------------------------------------------------
+r3682 | kris | 2009-03-02 10:24:39 -0500 (Mon, 02 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Info.php
+
+Adds a more detailed exception to Omeka_File_Info.
+
+------------------------------------------------------------------------
+r3681 | kris | 2009-03-02 10:24:33 -0500 (Mon, 02 Mar 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Refs #651, refactors options and files configuration into separate methods.
+
+------------------------------------------------------------------------
+r3670 | kris | 2009-02-27 16:44:37 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Info.php
+
+Refs #651, some minor reformatting and simplification of Omeka_File_Info.
+
+------------------------------------------------------------------------
+r3669 | kris | 2009-02-27 16:44:34 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Info.php
+   M application/models/File.php
+
+Refs #651, refactors Omeka_File_Info class so that it correctly extracts metadata from the file based on its MIME type.
+
+This also puts the createDerivatives() and extractMetadata() File model methods into the beforeInsert() callback so that images and metadata extraction take place every time a file is added to the database (regardless of the method of entry).
+
+------------------------------------------------------------------------
+r3668 | kris | 2009-02-27 16:44:32 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Refactors the ingest validation and adds a file move option.
+
+Patch by: jsafley
+
+------------------------------------------------------------------------
+r3667 | kris | 2009-02-27 16:44:28 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Makes the file ingest from filesystem work.
+
+Patch by: jsafley
+
+------------------------------------------------------------------------
+r3666 | kris | 2009-02-27 16:44:26 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   M application/models/Item.php
+
+Add back the $fileFormName to the ingest upload method.
+
+Patch by: jsafley
+
+------------------------------------------------------------------------
+r3665 | kris | 2009-02-27 16:44:24 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Fixes the createFile call in the upload method.
+
+Patch by: jsafley
+
+------------------------------------------------------------------------
+r3664 | kris | 2009-02-27 16:44:22 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   M application/models/Item.php
+
+Separates the ingest into separate methods.
+
+Patch by: jsafley
+
+------------------------------------------------------------------------
+r3663 | kris | 2009-02-27 16:44:21 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   M application/models/Item.php
+
+Adds a working Omeka_File_Ingest::url() method.
+
+Patch by: jsafley
+
+------------------------------------------------------------------------
+r3662 | kris | 2009-02-27 16:44:17 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Adds url() and unimplemented filesystem() methods to the Omeka_File_Ingest class.
+
+url() currently uses wget for file retrieval.
+
+------------------------------------------------------------------------
+r3661 | kris | 2009-02-27 16:44:15 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Refactors the file creation in Omeka_File_Ingest into a _createFile method.
+
+------------------------------------------------------------------------
+r3660 | kris | 2009-02-27 16:44:12 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   D application/libraries/Omeka/File/Transfer/Adapter/Url.php
+   M application/models/Item.php
+
+Reverts to simpler model where transfer methods map to class methods in Omeka_File_Ingest.
+
+------------------------------------------------------------------------
+r3659 | kris | 2009-02-27 16:44:06 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   A application/libraries/Omeka/File/Transfer/Adapter/Url.php
+   M application/models/Item.php
+
+Refactors the Omeka File library to run file transfer adapters, according to transfer method.
+
+Patch by: jsafley.
+
+------------------------------------------------------------------------
+r3658 | kris | 2009-02-27 16:44:04 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Info.php
+   M application/libraries/Omeka/File/Ingest.php
+   M application/models/File.php
+
+Adds calls to uploadForItem() to create derivative images and extract file metadata (not implemented yet).
+
+------------------------------------------------------------------------
+r3657 | kris | 2009-02-27 16:44:01 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Fixes uploadForItem() to use $_FILES form name that is passed in as an argument.
+
+------------------------------------------------------------------------
+r3656 | kris | 2009-02-27 16:43:57 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Derivative/Image.php
+
+Mostly fixes the Omeka_File_Derivative_Image class so that it behaves as before.
+
+------------------------------------------------------------------------
+r3655 | kris | 2009-02-27 16:43:54 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+
+Refs #651, fixes a couple more typos in Omeka_File_Ingest (needed to use ZF API correctly).
+
+------------------------------------------------------------------------
+r3654 | kris | 2009-02-27 16:43:51 -0500 (Fri, 27 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest.php
+   A application/libraries/Omeka/Filter/Filename.php
+   M application/models/Item.php
+
+Refs #651, continues refactoring File model into separate classes.
+
+Removes logic related to file uploads and replaces where applicable with the Zend_File_Transfer component.  Also creates a filter that automatically renames archived files according to pre-existing conventions in order to avoid naming collisions in the archive.
+
+------------------------------------------------------------------------
+r3653 | kris | 2009-02-27 16:43:48 -0500 (Fri, 27 Feb 2009) | 7 lines
+Changed paths:
+   A application/libraries/Omeka/File/Derivative/Image.php
+   A application/libraries/Omeka/File/Info.php
+   A application/libraries/Omeka/File/Ingest.php
+   M application/models/File.php
+
+Refs #651, moves some methods from File model into 3 new classes.
+
+The new classes are:
+ * Omeka_File_Derivative_Image
+ * Omeka_File_Info
+ * Omeka_File_Ingest
+
+------------------------------------------------------------------------
+r3650 | jboggs | 2009-02-27 13:09:46 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M install/index.php
+
+Fixes #661 Link to Omeka archive in installer broken on subdomains.
+
+------------------------------------------------------------------------
+r3649 | jboggs | 2009-02-27 13:01:48 -0500 (Fri, 27 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/items/form.php
+
+Fixes #665 Use HTML checkbox broken in IE7.
+
+------------------------------------------------------------------------
+r3646 | kris | 2009-02-26 18:39:25 -0500 (Thu, 26 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/items/tag-form.php
+
+Fixes a fatal error caused by using an outdated theme helper (has_tags()) on the admin theme.
+
+------------------------------------------------------------------------
+r3645 | kris | 2009-02-26 12:21:35 -0500 (Thu, 26 Feb 2009) | 44 lines
+Changed paths:
+   M application/helpers/DeprecatedFunctions.php
+   M application/helpers/LinkFunctions.php
+   M application/helpers/UrlFunctions.php
+   M application/libraries/globals.php
+
+Removes many helper functions that were deprecated since 0.10.
+
+The list of removed helper functions is as follows:
+
+    generate_url($options, $name)
+    dublin_core($type) {
+    metatext_form($item, $input="textarea",$metafields=null)
+    items_rss_header()
+    get_month($date)
+    get_day($date)
+    get_year($date)
+    item_metadata($item, $field, $escape=true)
+    type($id=null)
+    types(array $params = array())
+    tags(array $params = array())
+    items(array $params = array())
+    users(array $params = array())
+    institutions(array $params = array())
+    metafields(array $params = array())
+    people(array $params = array())
+    has_collection($item, $name=null) {
+    has_files($item) {
+    item_types()
+    collections(array $params = array())
+    entities(array $params = array())
+    has_collectors($collection) {
+    has_tags($item, array $tags=array()) {
+    has_thumbnail($item) {
+    has_type($item, $name=null) {
+    display_empty($val, $alternative="[Empty]") {
+    get_base_url($use_relative_uri=false)
+    is_current($link, $req = null) {
+    link_to_thumbnail($item, $props=array(), $action='show', $random=false)
+    link_to_fullsize($item, $props=array(), $action='show', $random=false)
+    link_to_square_thumbnail($item, $props=array(), $action='show', $random=false)
+    _link_to_archive_image($item, $props=array(), $action='show', $random=false, $imageType = 'thumbnail')
+    items_rss_uri($params=array())
+    item_permalink_url($item)
+    define_metafield($name, $description, $type=null)
+    add_theme_pages($dir, $theme='both')
+    add_controllers($dir='controllers')
+    add_data_feed($format, $options=array())
+    add_navigation($text, $link, $type='main', $permissions=null)
+
+------------------------------------------------------------------------
+r3644 | kris | 2009-02-26 09:55:33 -0500 (Thu, 26 Feb 2009) | 8 lines
+Changed paths:
+   M application/helpers/FileMetadata.php
+   M application/helpers/ItemMetadata.php
+
+Fixes #664, item() and item_file() helpers learn 'permalink' and 'uri' options.
+
+The full list of options learned is as follows:
+    item('Permalink'): Returns an absolute URI to the item metadata page.
+    item_file('Permalink'): Returns an absolute URI to the file metadata page.
+    item_file('Uri'): Returns an absolute URI to display the archival copy of the file.
+    item_file('Fullsize|Thumbnail|Square Thumbnail Uri'): Returns an absolute URI to display that particular derivative copy of the file.
+
+------------------------------------------------------------------------
+r3643 | davelester | 2009-02-25 17:59:34 -0500 (Wed, 25 Feb 2009) | 2 lines
+Changed paths:
+   M install/index.php
+
+Removes link to admin panel that sometimes doesn't function in the Omeka installer.
+
+------------------------------------------------------------------------
+r3642 | jboggs | 2009-02-25 16:59:07 -0500 (Wed, 25 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/login.css
+
+Fixes #154 Styles remember me label and checkbox on login.
+
+------------------------------------------------------------------------
+r3635 | jboggs | 2009-02-25 15:54:38 -0500 (Wed, 25 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/components.css
+   M admin/themes/default/item-types/element-list.php
+   M admin/themes/default/item-types/form.php
+
+Fixes #516 remove element button on item-types/edit doesn't prompt for confirm.
+
+------------------------------------------------------------------------
+r3633 | jboggs | 2009-02-25 15:37:25 -0500 (Wed, 25 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/items/form.php
+
+Fixes #653 Hide the 'remove' link from single dublin core fields on item/add form.
+
+------------------------------------------------------------------------
+r3632 | jboggs | 2009-02-25 13:38:43 -0500 (Wed, 25 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/item-types/form.php
+   M admin/themes/default/items/tag-form.php
+
+Adds border above Save Item/Delete item on items/edit form, hides the Elements header on item-type/add if there are no element associated with an item-type.
+
+------------------------------------------------------------------------
+r3631 | jboggs | 2009-02-25 13:36:01 -0500 (Wed, 25 Feb 2009) | 2 lines
+Changed paths:
+   M application/views/scripts/files/show.php
+
+Fixes #485 file metadata page for public themes.
+
+------------------------------------------------------------------------
+r3630 | jboggs | 2009-02-25 13:03:44 -0500 (Wed, 25 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/components.css
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/images/buttons-medium.gif
+   M admin/themes/default/plugins/browse.php
+
+Fixes #657 Make uninstall button on plugins list red.
+
+------------------------------------------------------------------------
+r3629 | kris | 2009-02-24 17:12:25 -0500 (Tue, 24 Feb 2009) | 4 lines
+Changed paths:
+   M application/config/config.ini.changeme
+
+Refs #154, removes the 'login.expire' setting from the config.ini file.
+
+Now uses the default session expiration time from Zend_Session (2 weeks).
+
+------------------------------------------------------------------------
+r3628 | kris | 2009-02-24 17:12:16 -0500 (Tue, 24 Feb 2009) | 4 lines
+Changed paths:
+   M admin/themes/default/users/login.php
+   M application/controllers/UsersController.php
+   M application/libraries/Omeka/Controller/Plugin/Admin.php
+
+Fixes #154, adds a 'Remember Me' option to the admin login form.
+
+This uses Zend_Session to handle cookie expiration.  If the 'remember' box is checked, then the session will last for 2 weeks from login (Zend Framework default).  If the box is not checked, the session will expire as soon as the browser is terminated.
+
+------------------------------------------------------------------------
+r3627 | kris | 2009-02-24 17:12:01 -0500 (Tue, 24 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+
+Refs #154, removes unique auth session namespace (obviated by the previous commit).
+
+------------------------------------------------------------------------
+r3626 | kris | 2009-02-24 17:11:41 -0500 (Tue, 24 Feb 2009) | 8 lines
+Changed paths:
+   M application/config/config.ini.changeme
+   M application/libraries/Omeka/Core.php
+
+Refs #154, adds an 'initializeSession' phase to Omeka_Core.
+
+This also adds a 'session.name' field to the config.ini file.  If this is value is given, it will be used for the name of the session.  Otherwise the session name will be automatically generated from the WEB_ROOT of the installation.
+
+The session name can be customized so that session data could potentially be shared across installations or with other applications (but not by default).
+
+The previous behavior was that the session name was not configured in Omeka, which led to overlap between auth session namespaces on the same domain.  This was solved by using an arbitrary auth namespace that was unique to each installation (at one point stored in the database, then just using the root web URL).
+
+------------------------------------------------------------------------
+r3625 | jboggs | 2009-02-24 15:12:50 -0500 (Tue, 24 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/components.css
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/files/edit.php
+   M admin/themes/default/files/show.php
+
+Fixes #629 updates styling for file metadata pages in admin.
+
+------------------------------------------------------------------------
+r3623 | jboggs | 2009-02-24 13:59:15 -0500 (Tue, 24 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/themes/browse.php
+
+Fixes #640 Themes admin panel layout busted with lots of themes in directory.
+
+------------------------------------------------------------------------
+r3622 | kris | 2009-02-24 13:26:15 -0500 (Tue, 24 Feb 2009) | 2 lines
+
+Upgrades Zend Framework to 1.7.5.
+
+------------------------------------------------------------------------
+r3621 | kris | 2009-02-24 11:33:34 -0500 (Tue, 24 Feb 2009) | 6 lines
+Changed paths:
+   M application/helpers/FileMetadata.php
+   M application/helpers/ItemMetadata.php
+   M application/libraries/Omeka/View/Helper/RecordMetadata.php
+
+Fixes #647, Item view helper needs to be able to be called inside filters.
+
+This refactors the RecordMetadata view helper base class so that it does not maintain any state between calls.
+
+What this means is that item() can be called inside a filter that normally runs inside of another call to item(), so essentially a plugin writer (or theme writer) can examine the value of an element while filtering another element.
+
+------------------------------------------------------------------------
+r3616 | kris | 2009-02-19 15:41:20 -0500 (Thu, 19 Feb 2009) | 4 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Refs #485, adds 'linkToMetadata' option to default and 'icon' callbacks for Media helper.
+
+This also consolidates the code that builds links to either the file or the file metadata page into a single method that is used by the other built in callbacks.
+
+------------------------------------------------------------------------
+r3615 | kris | 2009-02-19 15:41:16 -0500 (Thu, 19 Feb 2009) | 4 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Refs #485, Media view helper learned 'linkToMetadata' option for the 'image' callback.
+
+This overrides the 'linkToFile' option and defaults to false.
+
+------------------------------------------------------------------------
+r3612 | kris | 2009-02-18 12:09:41 -0500 (Wed, 18 Feb 2009) | 4 lines
+Changed paths:
+   A application/views/scripts/files/show.php
+
+Refs #485, copies files/show page from admin to shared directory so that it can be accessed within public themes.
+
+There are minor modifications to this file (removes 'Edit' button) and changes display_file() to show large images.
+
+------------------------------------------------------------------------
+r3611 | kris | 2009-02-18 11:48:29 -0500 (Wed, 18 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Controller/Plugin/Admin.php
+
+Fixes #613, query string vars not sent when redirecting users to the admin panel.
+
+------------------------------------------------------------------------
+r3610 | jboggs | 2009-02-17 16:05:00 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/index.php
+   A install/components.css
+   M install/index.php
+
+Fixes styling on install form, adds closing tag to dashboard.
+
+------------------------------------------------------------------------
+r3609 | kris | 2009-02-17 10:17:51 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/files/show.php
+   M application/helpers/FileMetadata.php
+
+Refs #485, implements display of remaining fields (authentication, MIME type os, file type os) within the item_file() helper.
+
+------------------------------------------------------------------------
+r3608 | kris | 2009-02-17 09:45:15 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/View/Helper/RecordMetadata.php
+
+Refs #485, fixes a bug in RecordMetadata helper where filters were not being properly invoked for arbitrary fields like 'Archive Filename' or 'Date Added'.
+
+------------------------------------------------------------------------
+r3607 | kris | 2009-02-17 09:45:09 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/View/Helper/RecordMetadata.php
+   M application/libraries/Omeka/View/Helper/RecordMetadataList.php
+
+Refs #485, fixes a bug where filtering the element text so that it is blank should show the '[no text]' value for the RecordMetadataList helper.
+
+------------------------------------------------------------------------
+r3606 | kris | 2009-02-17 09:45:04 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/View/Helper/RecordMetadata.php
+
+Refs #485, fixes a filter so that plugin writer can do array('Display', 'File', ...) to filter element text displayed for files.
+
+------------------------------------------------------------------------
+r3605 | kris | 2009-02-17 09:45:00 -0500 (Tue, 17 Feb 2009) | 4 lines
+Changed paths:
+   M application/helpers/FileMetadata.php
+   A application/helpers/FileMetadataList.php
+   D application/helpers/Item.php
+   A application/helpers/ItemMetadata.php
+   A application/helpers/ItemMetadataList.php
+   D application/helpers/ItemShow.php
+   D application/helpers/ListFileMetadata.php
+   M application/helpers/NewThemeFunctions.php
+   D application/libraries/Omeka/View/Helper/ElementText.php
+   D application/libraries/Omeka/View/Helper/ListRecordMetadata.php
+   A application/libraries/Omeka/View/Helper/RecordMetadata.php
+   A application/libraries/Omeka/View/Helper/RecordMetadataList.php
+
+Refs #485, renames some helper classes to be more descriptive and for consistency.
+
+What was once called the 'ItemShow' helper is now 'ItemMetadataList', and there is a corresponding 'FileMetadataList'.  Likewise, what was once the 'Item' helper class is now called 'ItemMetadata', and there is a similar helper for files called 'FileMetadata'.  Helper function names remain the same.
+
+------------------------------------------------------------------------
+r3604 | kris | 2009-02-17 09:44:56 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/items/show.php
+   M application/helpers/NewThemeFunctions.php
+
+Refs #485, implements a link_to_file_metadata() helper and modifies the admin theme to use it.
+
+------------------------------------------------------------------------
+r3603 | kris | 2009-02-17 09:44:52 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/files/show.php
+   M application/helpers/NewThemeFunctions.php
+
+Refs #485, implements an item_file() helper that behaves similarly to the item() helper.
+
+------------------------------------------------------------------------
+r3602 | kris | 2009-02-17 09:44:49 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/files/show.php
+   M application/helpers/NewThemeFunctions.php
+
+Refs #485, implements a show_file_metadata() theme helper and demonstrate its use on the admin/files/show page.
+
+------------------------------------------------------------------------
+r3601 | kris | 2009-02-17 09:44:44 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/files/show.php
+
+Refs #485, refactors admin/files/show page to use new FileMetadata view helper.
+
+------------------------------------------------------------------------
+r3600 | kris | 2009-02-17 09:44:41 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/files/show.php
+   A application/helpers/FileMetadata.php
+   M application/helpers/ItemShow.php
+   A application/helpers/ListFileMetadata.php
+   D application/libraries/Omeka/View/Helper/FileMetadata.php
+   A application/libraries/Omeka/View/Helper/ListRecordMetadata.php
+   M application/views/scripts/items/item-metadata.php
+
+Continues refactoring of items/files metadata display by splitting Omeka_View_Helper_ItemShow into a base class.
+
+------------------------------------------------------------------------
+r3599 | kris | 2009-02-17 09:44:36 -0500 (Tue, 17 Feb 2009) | 2 lines
+Changed paths:
+   M application/helpers/Item.php
+   A application/libraries/Omeka/View/Helper/ElementText.php
+   A application/libraries/Omeka/View/Helper/FileMetadata.php
+
+Begins refactoring of Omeka_View_Helper_Item into a base class that works with both files and items.
+
+------------------------------------------------------------------------
+r3598 | kris | 2009-02-17 09:44:31 -0500 (Tue, 17 Feb 2009) | 4 lines
+Changed paths:
+   M admin/themes/default/files/show.php
+   M application/helpers/Item.php
+   M application/helpers/ItemShow.php
+   M application/views/scripts/items/item-metadata.php
+
+Refs #485, modifies signatures of Omeka_View_Helper_Item and Omeka_View_Helper_ItemShow so that they work with files as well.
+
+This also calls itemShow() on the admin files/show page, which operates in the same manner as on the items/show page.
+
+------------------------------------------------------------------------
+r3596 | kris | 2009-02-16 13:25:36 -0500 (Mon, 16 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+
+Fixes a bug introduced in [3576] where the auth session was shared between different Omeka installations.
+
+------------------------------------------------------------------------
+r3587 | kris | 2009-02-12 09:45:52 -0500 (Thu, 12 Feb 2009) | 6 lines
+Changed paths:
+   M application/controllers/CollectionsController.php
+   M application/controllers/ItemTypesController.php
+   M application/controllers/ItemsController.php
+   M application/controllers/UsersController.php
+   M application/libraries/Omeka/Controller/Action.php
+
+Fixes a potential security hole involving default JSON outputs for controllers.
+
+This removes the default action contexts from Omeka_Controller_Action and adds them to each relevant controller.  The default action contexts were 'json', 'rss2' and 'dc' for 'browse' actions, and 'json' and 'dc' for 'show' actions.  This not make sense for most controllers, since RSS and Dublin Core are only for the ItemsController.  It also opened up a security hole where sensitive data could have been passed to an attacker through the automatically serialized JSONP output.
+
+Note that this breaks backwards compatibility for any plugin controllers that extend off Omeka_Controller_Action, but only if those controllers rely on the default existence of the 'json' output for 'browse' and 'show' actions.
+
+------------------------------------------------------------------------
+r3583 | kris | 2009-02-11 15:58:47 -0500 (Wed, 11 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/Controller/Action/Helper/ContextSwitch.php
+
+Refs #158, JSONP responses should all be given the 'text/javascript' MIME type.
+
+This is different from the regular JSON MIME type, which is 'application/json'.
+
+------------------------------------------------------------------------
+r3582 | kris | 2009-02-11 15:58:45 -0500 (Wed, 11 Feb 2009) | 2 lines
+Changed paths:
+   A application/libraries/Omeka/Controller/Action/Helper/ContextSwitch.php
+   M application/libraries/Omeka/Core.php
+
+Refs #158, refactors JSONP request processing to occur in a subclass of the ContextSwitch helper (where the original JSON serialization takes place).
+
+------------------------------------------------------------------------
+r3581 | kris | 2009-02-11 15:58:43 -0500 (Wed, 11 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+
+Fixes #158, enables JSONP for auto-serialized JSON requests.
+
+The javascript callback can be provided via the optional 'callback' parameter for any JSON request (output=json).
+
+------------------------------------------------------------------------
+r3580 | kris | 2009-02-11 15:58:38 -0500 (Wed, 11 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Record.php
+
+Fixes a bug where the database object was partially serialized into JSON for Omeka_Record objects.
+
+------------------------------------------------------------------------
+r3576 | kris | 2009-02-09 16:34:38 -0500 (Mon, 09 Feb 2009) | 4 lines
+Changed paths:
+   M application/libraries/Omeka/Core.php
+   M install/Installer.php
+
+Fixes #652, session namespace error with Zend Framework 1.7.4.
+
+This removes references to the 'auth_prefix' database option, which is an md5 hash that was being used for the authentication session namespace in Omeka.  This value is unnecessary since ZF uses a default session namespace automatically.
+
+------------------------------------------------------------------------
+r3573 | jsafley | 2009-02-09 14:00:18 -0500 (Mon, 09 Feb 2009) | 2 lines
+Changed paths:
+   M install/install.sql.php
+
+Fixes an oversight in changeset [3572] by setting Dublin Core Date to the Tiny Text data type in the install SQL.
+
+------------------------------------------------------------------------
+r3572 | jsafley | 2009-02-09 13:19:18 -0500 (Mon, 09 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/custom.php
+   A application/migrations/033_updateDublinCoreDataTypes.php
+   M paths.php
+
+Fixes #634, Dublin Core elements should be text areas, adds a migration.
+
+------------------------------------------------------------------------
+r3571 | kris | 2009-02-06 15:30:42 -0500 (Fri, 06 Feb 2009) | 4 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Refs #459, the version check from api.omeka.org is now cached as an option in each omeka installation.
+
+This is done so that all the various Omeka installations do not poll the server 100 times a day.  Instead, get_latest_omeka_version() will only check once a day, and only for super users who access the dashboard.
+
+------------------------------------------------------------------------
+r3570 | kris | 2009-02-06 15:30:38 -0500 (Fri, 06 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/index.php
+
+Refs #459, adds a permissions check for the upgrade notification on the dashboard.
+
+------------------------------------------------------------------------
+r3569 | kris | 2009-02-06 15:30:31 -0500 (Fri, 06 Feb 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Refs #459, modifies the get_omeka_latest_version() helper to respond to the latest changes in how that API call works.
+
+------------------------------------------------------------------------
+r3568 | kris | 2009-02-06 15:30:24 -0500 (Fri, 06 Feb 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Refs #459, changes the URL of the omeka.org version check to reflect our latest discussion about what the API URL should be.
+
+------------------------------------------------------------------------
+r3567 | kris | 2009-02-06 15:30:19 -0500 (Fri, 06 Feb 2009) | 4 lines
+Changed paths:
+   M admin/themes/default/index.php
+   M application/helpers/NewThemeFunctions.php
+
+Refs #459, moves version-checking code to a helper function (get_latest_omeka_version()).
+
+Note that this still gives an error message when the URI in question doesn't exist.  There is a weird bug in the REST client code that causes Omeka to throw exceptions where it would have thrown warnings before.
+
+------------------------------------------------------------------------
+r3566 | kris | 2009-02-06 15:30:10 -0500 (Fri, 06 Feb 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/index.php
+
+Fixes #459, adds an upgrade notification to the admin dashboard to tell users when a new version of Omeka is available.
+
+------------------------------------------------------------------------
+r3564 | jsafley | 2009-02-05 19:53:17 -0500 (Thu, 05 Feb 2009) | 2 lines
+Changed paths:
+   M application/models/ElementSet.php
+
+Fixes #650, ElementSet::addElements() overwrites existing elements. Now, the order is relative to the other elements being added, which prevents overwriting.
+
+------------------------------------------------------------------------
+r3562 | kris | 2009-02-05 14:31:11 -0500 (Thu, 05 Feb 2009) | 2 lines
+
+Upgrades Zend Framework to 1.7.4.
+
+------------------------------------------------------------------------
+r3561 | kris | 2009-02-05 11:03:40 -0500 (Thu, 05 Feb 2009) | 2 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+
+Adds a fourth argument to item() helper to be able to pass an arbitrary Item record to it.
+
+------------------------------------------------------------------------
+r3560 | jsafley | 2009-02-04 14:19:53 -0500 (Wed, 04 Feb 2009) | 2 lines
+Changed paths:
+   M application/models/ElementTable.php
+
+Adds a method in ElementTable that returns an element object when given an element set and element name.
+
+------------------------------------------------------------------------
+r3558 | kris | 2009-02-03 16:00:10 -0500 (Tue, 03 Feb 2009) | 4 lines
+Changed paths:
+   M application/helpers/ItemShow.php
+
+Fixes #641, adds a 'return_type' option to show_item_metadata() (via Omeka_View_Helper_ItemShow).
+
+This option can be either 'array' or 'html' (default is 'html').  It allows a theme writer to retrieve the output from show_item_metadata() as an array to more easily enable custom markup.  This is also useful for view scripts in Omeka, such as the JSON view script from #633.
+
+------------------------------------------------------------------------
+r3557 | kris | 2009-02-03 14:05:05 -0500 (Tue, 03 Feb 2009) | 4 lines
+Changed paths:
+   M application/helpers/ItemShow.php
+
+Refs #641, adds a 'show_element_sets' option to show_item_metadata() (via Omeka_View_Helper_ItemShow).
+
+This option allows a theme writer to choose to show specific element sets for an item.  The theme writer can also choose to show all item type metadata for the item by putting 'Item Type Metadata' in the list (or the more specific name for certain item types, like 'Document Item Type Metadata').
+
+------------------------------------------------------------------------
+r3556 | kris | 2009-02-03 11:49:35 -0500 (Tue, 03 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka.php
+   M application/libraries/Omeka/Core.php
+
+Fixes #630, class autoloader needs to check entire include path.
+
+------------------------------------------------------------------------
+r3554 | kris | 2009-02-02 15:51:45 -0500 (Mon, 02 Feb 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Plugin/Broker.php
+
+Fixes #632, plugins should be able to add view scripts without adding controllers or a controllers directory.
+
+------------------------------------------------------------------------
+r3553 | jsafley | 2009-02-02 15:48:28 -0500 (Mon, 02 Feb 2009) | 2 lines
+Changed paths:
+   M application/models/ElementSetTable.php
+
+Adds a way to find an element set by name in the table model.
+
+------------------------------------------------------------------------
+r3552 | kris | 2009-02-02 14:49:51 -0500 (Mon, 02 Feb 2009) | 2 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Fixes #479, output from Omeka_View_Helper_Media now wraps each file with a div corresponding to the MIME type of the file.
+
+------------------------------------------------------------------------
+r3551 | kris | 2009-02-02 14:49:49 -0500 (Mon, 02 Feb 2009) | 4 lines
+Changed paths:
+   M application/helpers/Functions.php
+   M application/helpers/Media.php
+   M application/helpers/NewThemeFunctions.php
+
+Refs #479, adds another enhancement to display_files() and modifies the helper signature.
+
+This modifies Omeka_View_Helper_Media and its corresponding theme helpers (display_files(), display_file(), display_files_for_item()) so that attributes for the wrapper div are passed as an array in the third argument.  This modifies the function signature and represents a minor BC break from 0.10.
+
+------------------------------------------------------------------------
+r3550 | kris | 2009-02-02 14:47:15 -0500 (Mon, 02 Feb 2009) | 2 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Refs #485, fixes a bug where files/show was broken for images that try to use the title of the current item for the alt tag (there is no current item set).
+
+------------------------------------------------------------------------
+r3547 | kris | 2009-01-29 13:29:13 -0500 (Thu, 29 Jan 2009) | 12 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Refs #479, adds support for displaying icons using display_files().
+
+To use this, pass the 'icons' option as a keyed array of MIME types and paths to the respective icons.  Here is a usage example from the code:
+
+echo display_files_for_item(array(
+    'showFilename'=>false,
+    'linkToFile'=>false,
+    'linkAttributes'=>array('rel'=>'lightbox'),
+    'filenameAttributes'=>array('class'=>'random-class'),
+    'imgAttributes'=>array('class'=>'icon-image'),
+    'icons' => array('audio/mpeg'=>img('audio.gif'))));
+
+------------------------------------------------------------------------
+r3546 | kris | 2009-01-29 13:29:05 -0500 (Thu, 29 Jan 2009) | 2 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Refs #479, adds 'linkAttributes' and 'imgAttributes' options to default display callbacks in Omeka_View_Helper_Media.  These options can be used to add or replace XHTML attributes in the respective tags that are generated.
+
+------------------------------------------------------------------------
+r3532 | jsafley | 2009-01-17 08:31:22 -0500 (Sat, 17 Jan 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+
+Refs #488, Adds a helper that inserts an element set and its elements.
+
+------------------------------------------------------------------------
+r3530 | kris | 2009-01-16 15:12:17 -0500 (Fri, 16 Jan 2009) | 4 lines
+Changed paths:
+   M admin/themes/default/users/browse.php
+   M application/models/UserTable.php
+
+Fixes #489, adds filtering/sorting criteria for users.
+
+Can sort by username, first/last name, institution name, role, status (active/inactive).  Can filter by role or status.
+
+------------------------------------------------------------------------
+r3529 | kris | 2009-01-16 13:43:07 -0500 (Fri, 16 Jan 2009) | 6 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/items/form.php
+   M admin/themes/default/items/show.php
+   M admin/themes/default/items/tag-form.php
+   M application/controllers/TagsController.php
+   M application/models/TagTable.php
+
+Fixes #65, implements autocomplete for adding tags via the admin interface.
+
+This uses the Scriptaculous Autocompleter library and adds a corresponding controller action and table method for data retrieval.  Autocomplete for tags now works on the items/show and items form pages.  Autocomplete will search through all existing tag names regardless of whether they are for Exhibits or Items, and it will just search alphabetically.
+
+The Scriptaculous implementation requires that an HTML unordered list be returned from the server for every request, so a special TagsController::autocompleteAction() is available for that purpose.  The 'tokens' attribute in the Javascript ensures that autocomplete will append new tags instead of replacing the existing tags in the list.
+
+------------------------------------------------------------------------
+r3528 | kris | 2009-01-16 11:07:54 -0500 (Fri, 16 Jan 2009) | 2 lines
+
+Refs #352, adds pagination capabilities to table classes and controllers.
+
+This works by way of a property that can be set in Omeka_Controller_Action to determine how many records to show on a given page.
+
+Also modifies Omeka_Db_Table to change findBy() signature so that page and per_page values can be passed as additional arguments instead of being part of the keyed array.
+
+Removes some outdated pagination code from the Collections, Items and Tags tables.
+
+Adds pagination controls on admin theme for collections and users.
+
+Tweaks the base browseAction() (as well as Users, Tags controllers) to make sure pagination metadata is passed correctly to the view.
+
+Updates the data retrieval theme helpers (get_items(), etc.) to use the modified syntax for findBy() calls that has pagination parameters as separate arguments.
+
+------------------------------------------------------------------------
+r3527 | jboggs | 2009-01-15 16:17:35 -0500 (Thu, 15 Jan 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/items/browse.php
+
+Readds the paramater for the simple view, modifies CSS to account for new selectors on items/browse view nav.
+
+------------------------------------------------------------------------
+r3526 | jboggs | 2009-01-15 13:29:55 -0500 (Thu, 15 Jan 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/components.css
+   M admin/themes/default/css/login.css
+   M admin/themes/default/css/screen.css
+   A admin/themes/default/images/submit-extrasmall.gif
+   A admin/themes/default/images/submit-small.gif
+   M admin/themes/default/users/forgot-password.php
+   M admin/themes/default/users/login.php
+
+Fixes #622 Alert on forgot password page breaks layout, adds images for submit-small and submit-extran small submit inputs.
+
+------------------------------------------------------------------------
+r3525 | jboggs | 2009-01-15 11:59:36 -0500 (Thu, 15 Jan 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/items/browse.php
+
+Fixes #623 Make list tab on admin/items/browse appear selected when first going to the page.
+
+------------------------------------------------------------------------
+r3511 | jboggs | 2009-01-10 19:57:18 -0500 (Sat, 10 Jan 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/collections/form.php
+   M admin/themes/default/css/screen.css
+
+Begins improving the collections edit form, changes button text for removing collectors.
+
+------------------------------------------------------------------------
+r3508 | kris | 2009-01-09 10:13:19 -0500 (Fri, 09 Jan 2009) | 4 lines
+Changed paths:
+   A application/libraries/InsertItemHelper.php
+   M application/libraries/globals.php
+
+Adds insert_item() and update_item() helpers, which are backed by the InsertItemHelper class.
+
+Removes the require_once unnecessary statements from insert_item() and update_item().
+
+------------------------------------------------------------------------
+r3507 | jboggs | 2009-01-08 16:59:11 -0500 (Thu, 08 Jan 2009) | 2 lines
+Changed paths:
+   M application/helpers/Media.php
+
+Fixes #626 Images for items show have alt attribute for the display_files function.
+
+------------------------------------------------------------------------

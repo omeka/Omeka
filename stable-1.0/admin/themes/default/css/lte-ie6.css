@@ -1,0 +1,20 @@
+body {font:62.5% Arial, Helvetica, sans-serif;}
+
+#site-title {margin-left: 18px;}
+tr td {border-bottom:1px solid #d7d5c4;}
+
+input.textinput,select,textarea {font-family:Arial, sans-serif;}
+
+input.submit {font-size:1.2em;}
+
+a.add {display:block; padding: 8px 8px 8px 36px;}
+
+.vertical-nav ul#section-nav li a {display:inline-block;}
+.vertical-nav ul#section-nav li a {display:block;}
+
+.info-panel {overflow:auto; width: 200px;}
+
+#simple-search-form {width: 226px;}
+#simple-search-form input {margin:0;}
+
+.field p.explanation {clear:both !important; display:block; margin-top: 0 !important; float:none !important;}

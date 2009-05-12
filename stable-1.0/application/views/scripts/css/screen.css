@@ -1,0 +1,90 @@
+/* 
+Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
+1 = 54px
+2 = 126px (6 columns)
+3 = 198px (4 columns)
+4 = 270px (3 columns)
+5 = 342px
+6 = 414px (2 columns)
+7 = 486px
+8 = 558px
+9 = 630px
+10 = 702px
+11 = 774px
+12 = 846px
+*/
+
+/* == Reset styles == */
+@import url("reset.css");
+
+/* == Component library == */
+@import url("components.css");
+
+/* == Global Styles == */
+body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9db;color: #333;min-width:882px;}
+	
+	/* Headings */
+	h1,#site-title {font-weight:normal; font-size:2.2em; margin-bottom:1em; line-height:1em;margin-right:12em;}
+	h2, legend {font-size:1.8em; font-weight:normal; line-height:1em; margin-bottom:1em;}
+	h3 {font-size:1.4em; line-height:1.2em; margin-bottom:1.2em;}
+	h4 {font-size:1.2em; line-height:1.5em; font-weight:bold;}
+	h5 {font-size:1.2em; line-height:1.5em; font-style:italic;}
+	
+	h1 {color:#a74c29;}
+	h2,form legend {color:#467;}
+	
+	h1,h2,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
+
+	/* Links */
+	a:link {color:#389;}
+	a:visited {color:#389;}
+	a:hover {color:#369;}
+	a:active {color:#555;}
+
+	h1 a, h2 a, h3 a {text-decoration:none;}
+	a img {border:none;}
+	
+	/* Misc elements */
+	p,ul,ol,dl,address {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
+	ul ul {font-size:1em; margin-left:1.5em;}
+	dd * {font-size:1em;}
+	ul {list-style:none;}
+
+	em,i {font-style:italic;}
+	strong,b {font-weight:bold;}
+	
+	/* Tables */
+	table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;}
+		thead { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
+		th,td {padding:0.5em 0.5em 0.4em;}
+		tbody tr.even {}
+		tbody tr {border-bottom:1px dotted #d7d5c4;}
+	
+	table * {font-size:1em;margin:0;}
+	
+	/* Forms */
+	form {display:block;}
+	fieldset {margin-bottom:18px;}
+	legend {margin-bottom:1em;}
+		div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
+		
+		label {font-size:1.2em; color:#444;font-weight:bold; margin-bottom:0.5em; text-align:right;display:block;width: 126px; float:left;}
+		
+		input, select {border:0; background-color:transparent !important;}
+		
+		input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; width: 694px;}
+	
+		input.textinput:focus,select:focus, textarea:focus {border-color: #8C8B82; background:#fff !important;}
+		input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
+		
+		/* Replaces tooltips */
+		.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
+		
+		/* Changes the width of inputs depending on the layout */
+	
+			label {float:left; margin:0; width: 198px;}
+
+			/* .input used to wrap input fields in items/add form */
+			input.textinput, textarea {float:right; width: 440px; overflow:hidden; zoom:1;}
+			
+	#primary {width: 666px; padding: 18px; background: #fff; margin: 36px auto;}
