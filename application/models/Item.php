@@ -170,6 +170,8 @@ class Item extends Omeka_Record
         if (!$this->userHasPermission('makeFeatured')) {
             unset($post['featured']);
         }
+        
+        $this->_uploadFiles();
     }
     
     /**
@@ -204,9 +206,7 @@ class Item extends Omeka_Record
      * @return void
      **/
     protected function afterSaveForm($post)
-    {
-        $this->_uploadFiles();
-        
+    {        
         // Delete files that have been designated by passing an array of IDs 
         // through the form.
         if ($post['delete_files']) {
