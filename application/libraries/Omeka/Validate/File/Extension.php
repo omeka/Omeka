@@ -26,9 +26,15 @@ class Omeka_Validate_File_Extension extends Zend_Validate_File_Extension
      * @var array Overrides default error message templates.
      */
     protected $_messageTemplates = array(
-        self::FALSE_EXTENSION => "The file '%value%' could not be ingested because it has a disallowed file extension (%extension%).",
+        self::FALSE_EXTENSION => "The file '%value%' could not be ingested because it has a disallowed file extension (%target_extension%).",
         self::NOT_FOUND       => "The file '%value%' is missing and could not be ingested."
     );
+    
+    /**
+     * The extension of the file being validated
+     * @var string
+     */
+    protected $_targetExtension;
     
     /**
      * Constructor retrieves the whitelist from the database if no arguments are
@@ -43,5 +49,35 @@ class Omeka_Validate_File_Extension extends Zend_Validate_File_Extension
             $options = get_option('file_extension_whitelist');
         }
         parent::__construct($options);
+        $this->_messageVariables['target_extension'] = '_targetExtension';
+    }
+    
+    
+    /**
+     * Returns true if and only if the fileextension of $value is included in the
+     * set extension list
+     *
+     * @param  string  $value Real file to check for extension
+     * @param  array   $file  File data from Zend_File_Transfer
+     * @return boolean
+     **/
+    public function isValid($value, $file = null)
+    {                
+        // Is file readable ?
+        require_once 'Zend/Loader.php';
+        if (!Zend_Loader::isReadable($value)) {
+            return $this->_throw($file, self::NOT_FOUND);
+        }
+
+        if ($file !== null) {
+            $info['extension'] = substr($file['name'], strrpos($file['name'], '.') + 1);
+        } else {
+            $info = pathinfo($value);
+        }
+        
+        //set the target extension
+        $this->_targetExtension = $info['extension'];
+        
+        return parent::isValid($value, $file);
     }
 }
