@@ -40,6 +40,7 @@ echo js('tiny_mce/tiny_mce');
 			}
 		});
 	},
+	
     changeItemType: function() {
 		$('change_type').hide();
 		$('item-type').onchange = function() {
@@ -67,113 +68,117 @@ echo js('tiny_mce/tiny_mce');
 		}        
     },
 	
+	addTags: function(tags) {
+        var newTags = tags.split(',');
+        
+        // only add tags from the input box that are new
+        var oldTags = $$('#my-tags-list input.remove_tag').map(function(button){
+           return button.value.strip();
+        });
+        
+        newTags.each(function(tag){
+           var strippedTag = tag.strip();
+           if (!oldTags.include(strippedTag)) {
+               Omeka.ItemForm.addTagElement(strippedTag);
+           }
+        });
+        
+        $('tags').value = '';
+    },
+
+    addTag: function(tag) {
+        Omeka.ItemForm.addTags(tag);
+    },
+    
+    addTagElement: function(tag) {
+        var nRTButton = new Element('li', { 'class': 'tag-delete'});
+
+        var img1 = new Element('input', { 'type': 'image', 'src': '<?php echo img('add.png'); ?>', 'class': 'undo_remove_tag', 'value': tag});
+        nRTButton.appendChild(img1);
+        img1.observe('click', function(e) {
+            e.stop();
+            Omeka.ItemForm.undoRemoveTag(this);
+        });
+        var img2 = new Element('input', { 'type': 'image', 'src': '<?php echo img('delete.gif'); ?>', 'class': 'remove_tag', 'value': tag});                    
+        img2.observe('click', function(e) {
+            e.stop();
+            Omeka.ItemForm.removeTag(this);
+        });
+        nRTButton.appendChild(img2);
+        nRTButton.appendChild(document.createTextNode(tag));
+        $('my-tags-list').appendChild(nRTButton);
+        Omeka.ItemForm.updateTagsField();
+        return false;
+    },
+
+	removeTag: function(button) {
+	    button.hide();
+	    button.parentNode.setOpacity(.3);
+		Omeka.ItemForm.updateTagsField();
+		return false;
+	},
+	
+	undoRemoveTag: function(button) {
+	    button.next('input.remove_tag').show();
+	    button.parentNode.setOpacity(1);
+        Omeka.ItemForm.updateTagsField();
+		return false;
+	},
+	
+	// update the tags field to only include the tags that have not been removed
+	updateTagsField: function() {
+	    var myTagsToAdd = new Array();
+	    var myTagsToDelete = new Array();
+	    if (rTButtons = $$('#my-tags-list input.remove_tag')) {
+            rTButtons.each(function(button) {
+                // decide whether the toggled tag needs to be included
+                var s = button.value.strip();
+                if (button.parentNode.getOpacity() == 1) {
+                    myTagsToAdd.push(s);
+                } else {
+                    myTagsToDelete.push(s);
+                }
+            });	        
+	    }
+	    
+	    var otherTagsToDelete = new Array();
+	    if (rTButtons = $$('#other-tags-list input.remove_tag')) {
+            rTButtons.each(function(button) {
+                // decide whether a toggled tag needs to be added
+                var s = button.value.strip();
+                if (button.parentNode.getOpacity() != 1) {
+                    otherTagsToDelete.push(s);
+                }
+            });  
+	    }
+	    
+	    $('my-tags-to-add').value = myTagsToAdd.join(',');
+	    $('my-tags-to-delete').value = myTagsToDelete.join(',');
+	    $('other-tags-to-delete').value = otherTagsToDelete.join(',');    	    
+	},
+	
 	/* Messing with the tag list should not submit the form. */
 	enableTagRemoval: function() {		
 		if ( !(removeTagButtons = $$('input.remove_tag')) || !(undoRemoveTagButtons = $$('input.undo_remove_tag'))) {
 		    return;
 		}
 
-        function addTags() {
-            var newTags = $('tags').value.split(',');
-            
-            // only add tags from the input box that are new
-            var oldTags = $$('#my-tags-list input.remove_tag').map(function(button){
-               return button.value.strip();
-            });
-            
-            newTags.each(function(tag){
-               var strippedTag = tag.strip();
-               if (!oldTags.include(strippedTag)) {
-                   addTag(strippedTag);
-               }
-            });
-            
-            $('tags').value = '';
-        }
-
-        function addTag(tag) {
-            var nRTButton = new Element('li', { 'class': 'tag-delete'});
-
-            var img1 = new Element('input', { 'type': 'image', 'src': '<?php echo img('add.png'); ?>', 'class': 'undo_remove_tag', 'value': tag});
-            nRTButton.appendChild(img1);
-            img1.observe('click', function(e) {
-                e.stop();
-                undoRemoveTag(this);
-            });
-            var img2 = new Element('input', { 'type': 'image', 'src': '<?php echo img('delete.gif'); ?>', 'class': 'remove_tag', 'value': tag});                    
-            img2.observe('click', function(e) {
-                e.stop();
-                removeTag(this);
-            });
-            nRTButton.appendChild(img2);
-            nRTButton.appendChild(document.createTextNode(tag));
-            $('my-tags-list').appendChild(nRTButton);
-            updateTagsField();
-            return false;
-        }
-
-    	function removeTag(button) {
-    	    button.hide();
-    	    button.parentNode.setOpacity(.3);
-    		updateTagsField();
-    		return false;
-    	}
-    	
-    	function undoRemoveTag(button) {
-    	    button.next('input.remove_tag').show();
-    	    button.parentNode.setOpacity(1);
-            updateTagsField();
-    		return false;
-    	}
-    	
-    	// update the tags field to only include the tags that have not been removed
-    	function updateTagsField() {
-    	    var myTagsToAdd = new Array();
-    	    var myTagsToDelete = new Array();
-    	    if (rTButtons = $$('#my-tags-list input.remove_tag')) {
-                rTButtons.each(function(button) {
-                    // decide whether the toggled tag needs to be included
-                    var s = button.value.strip();
-                    if (button.parentNode.getOpacity() == 1) {
-                        myTagsToAdd.push(s);
-                    } else {
-                        myTagsToDelete.push(s);
-                    }
-                });	        
-    	    }
-    	    
-    	    var otherTagsToDelete = new Array();
-    	    if (rTButtons = $$('#other-tags-list input.remove_tag')) {
-                rTButtons.each(function(button) {
-                    // decide whether a toggled tag needs to be added
-                    var s = button.value.strip();
-                    if (button.parentNode.getOpacity() != 1) {
-                        otherTagsToDelete.push(s);
-                    }
-                });  
-    	    }
-    	    
-    	    $('my-tags-to-add').value = myTagsToAdd.join(',');
-    	    $('my-tags-to-delete').value = myTagsToDelete.join(',');
-    	    $('other-tags-to-delete').value = otherTagsToDelete.join(',');    	    
-    	}
-    	
     	$('add-tags-button').observe('click', function(e) {
             e.stop();
-            addTags();
+            Omeka.ItemForm.addTags($('tags').value);
         });  	
 		
 		removeTagButtons.invoke('observe', 'click', function(e) {
 		    e.stop();
-		    removeTag(this);
+		    Omeka.ItemForm.removeTag(this);
 		});
 		
 		undoRemoveTagButtons.invoke('observe', 'click', function(e) {
 		    e.stop();
-		    undoRemoveTag(this);
+		    Omeka.ItemForm.undoRemoveTag(this);
 		});
 		
-		updateTagsField();
+		Omeka.ItemForm.updateTagsField();
 	},
 	
 	/**
