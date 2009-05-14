@@ -9,12 +9,10 @@
     });
 </script>
 
-<h1<?php if($file->hasThumbnail()) echo ' class="has-thumbnail"'; ?>
->Edit File #<?php echo item_file('Id'); ?></h1>
+<h1>Edit File #<?php echo item_file('Id'); ?></h1>
 
-<?php if($file->hasThumbnail()): ?>
-<div id="edit-file-image"><?php echo square_thumbnail($file); ?></div>
-<?php endif; ?>
+<div id="edit-file-preview"><?php echo display_file($file, array('imageSize'=>'square_thumbnail')); ?></div>
+
 <div id="primary">
 
 <?php echo flash(); ?>

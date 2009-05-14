@@ -5,7 +5,7 @@
     <p id="edit-file" class="edit-button"><?php echo link_to($file, 'edit', 'Edit', array('class'=>'edit')); ?></p>
 <?php endif; ?>
 <div id="primary">
-    <?php echo display_file($file); ?>
+    <?php echo display_file($file, array('imageSize'=>'fullsize')); ?>
     <?php echo show_file_metadata(); ?>
     <div id="file-history" class="section">
     <h2>File History</h2>

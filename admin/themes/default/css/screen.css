@@ -243,12 +243,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#mime-type-metadata-exif-array .element-text {overflow-x:scroll; border:1px solid #d7d6e5;padding:12px; white-spac}
 	
 	/* Files Edit Page */
-	
-	.edit-file #content h1.has-thumbnail {margin-left: 78px; margin-bottom: 40px;}
-	
-	#edit-file-image {position:absolute; top:20px; left:0; text-align:right;}
-		#edit-file-image img {width:60px; height: 60px; border:3px solid #d7d5c4;}
-	
+		
 	#delete-file-link {float:left; position:absolute; bottom:20px; left: 18px;width: 200px;}
 	/* Advanced Search Form */
 	.search-entry {margin-bottom:6px; overflow:hidden;zoom:1;}
