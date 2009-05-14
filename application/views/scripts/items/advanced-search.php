@@ -45,7 +45,9 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 					//etc
 					echo select_element(
 						array('name'=>"advanced[$i][element_id]"), 
-						@$rows['element_id']); ?>
+						@$rows['element_id'],
+						null,
+						array('record_types'=>array('Item', 'All'), 'sort'=>'alpha')); ?>
 					
 					<?php 
 						echo select(

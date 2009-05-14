@@ -885,30 +885,25 @@ function select_item_type($props=array(), $value=null, $label=null)
  **/
 function select_item_type_elements($props = array(), $value = null, $label = null)
 {
-    // We need a custom SQL statement for this particular select input, since we
-    // are retrieving the elements in a specific set in a specific order.
-    
-    // Retrieve element ID and name for all elements in the Item Type element set.
-    $db = get_db();
-    $sql = $db->getTable('Element')->getSelect()
-            ->where('es.name = ?', ELEMENT_SET_ITEM_TYPE)
-            ->reset('columns')->from(array(), array('e.id', 'e.name'))
-            ->order('e.name ASC'); // Sort alphabetically
-    $pairs = $db->fetchPairs($sql);
-    
-    return select($props, $pairs, $value, $label);    
+    $searchParams = array(
+        'element_set_name'=>ELEMENT_SET_ITEM_TYPE,
+        'sort'=>'alpha');
+    return _select_from_table('Element', $props, $value, $label, $searchParams);    
 }
 
 /**
  * @since 0.10
- * @access private
- * @param array
- * @param mixed
+ * @param string $tableClass Name of the table class to pull from.
+ * @param array $props Optional XHTML attributes for the select input.
+ * @param mixed $value Optional Value of the select input.
+ * @param string|null $label Optional Label for the select input.
+ * @param array $searchParams Optional Search parameters to filter the list of
+ * parameters that are displayed.
  * @return string HTML for a <select> input.
  **/
-function _select_from_table($tableClass, $props = array(), $value = null, $label = null)
+function _select_from_table($tableClass, $props = array(), $value = null, $label = null, $searchParams = array())
 {
-    $options = get_db()->getTable($tableClass)->findPairsForSelectForm();
+    $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
     return select($props, $options, $value, $label);
 }
 
@@ -933,42 +928,56 @@ function select_item_type_for_item($props=array(), $item=null)
 
 /**
  * @since 0.10
- * @param array
- * @param string
+ * @param array $props Optional
+ * @param string|null $value Optional
+ * @param string|null $label Optional
+ * @param array $search Optional
  * @return string
  **/
-function select_collection($props = array(), $value=null, $label=null)
+function select_collection($props = array(), $value=null, $label=null, $search = array())
 {
-    return _select_from_table('Collection', $props, $value, $label);
+    return _select_from_table('Collection', $props, $value, $label, $search);
 }
 
 /**
  * @since 0.10
- * @param array
- * @param mixed
+ * @param array $props Optional XHTML attributes for the select.
+ * @param mixed $value Optional Default value of the select.
+ * @param string|null $label Optional Label for the select.
+ * @param array $search Optional Search parameters for the data being displayed.
+ * @see ElementTable::applySearchFilters()
  * @return string HTML
  **/
-function select_element($props = array(), $value = null, $label=null)
+function select_element($props = array(), $value = null, $label=null, $search = array('record_types'=>array('All')))
 {
-    return _select_from_table('Element', $props, $value, $label);
+    return _select_from_table('Element', $props, $value, $label, $search);
 }
 
 /**
  * @since 0.10
+ * @param array $props Optional
+ * @param mixed $value Optional
+ * @param string|null $label Optional
+ * @param array $search Optional
  * @uses _select_from_table()
+ * @return string
  */
-function select_user($props = array(), $value=null, $label=null)
+function select_user($props = array(), $value=null, $label=null, $search = array())
 {
-    return _select_from_table('User', $props, $value, $label);
+    return _select_from_table('User', $props, $value, $label, $search);
 }
 
 /**
  * @since 0.10
+ * @param array $props Optional
+ * @param mixed $value Optional
+ * @param string|null $label Optional
+ * @param array $search Optional
  * @uses _select_from_table()
  */
-function select_entity($props = array(), $value = null, $label=null)
+function select_entity($props = array(), $value = null, $label=null, $search = array())
 {
-    return _select_from_table('Entity', $props, $value, $label);
+    return _select_from_table('Entity', $props, $value, $label, $search);
 }
 
 /**
