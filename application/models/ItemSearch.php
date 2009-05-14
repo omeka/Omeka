@@ -94,10 +94,12 @@ class ItemSearch
             // and it is easier to read without all the extra cruft.
             $subQuery = "SELECT i.id FROM $db->Item i 
                         LEFT JOIN $db->ElementText etx 
-                        ON etx.record_id = i.id AND etx.element_id = " . $db->quote($elementId) ."
+                        ON etx.record_id = i.id
                         LEFT JOIN $db->RecordType rty
-                        ON etx.record_type_id = rty.id AND rty.name = 'Item'
-                        WHERE etx.text $predicate";
+                        ON etx.record_type_id = rty.id
+                        WHERE etx.text $predicate 
+                        AND rty.name = 'Item' 
+                        AND etx.element_id = " . $db->quote($elementId);
             
             // Each advanced search mini-form represents another subquery
            $select->where('i.id IN ( ' . (string) $subQuery . ' )'); 
