@@ -79,19 +79,7 @@ class ElementTable extends Omeka_Db_Table
     {
         return array('e.id', 'e.name');
     }
-    
-    /**
-     * Overridden to natsort() the columns.
-     * 
-     * @return array
-     **/
-    public function findPairsForSelectForm()
-    {
-        $pairs = parent::findPairsForSelectForm();
-        natsort($pairs);
-        return $pairs;
-    }
-    
+        
     protected function orderElements($select)
     {
         // ORDER BY e.order ASC, es.name ASC
@@ -147,5 +135,43 @@ class ElementTable extends Omeka_Db_Table
                        ->where('es.name = ?', $elementSetName)
                        ->where('e.name = ?', $elementName);
         return $this->fetchObject($select);
+    }
+    
+    /**
+     * Manipulate a Select object based on a set of criteria.
+     * 
+     * @param Omeka_Db_Select $select
+     * @param array $params Possible parameters include:
+     * <ul>
+     *      <li>record_types - array - Usually one or more of the following:
+     * All, Item, File</li>
+     *      <li>sort - string - One of the following values: alpha</li>
+     *      <li>element_set_name - string - Name of the element set to which
+     * results should belong.</li>
+     * </ul>
+     **/
+    public function applySearchFilters($select, $params)
+    {
+        $db = $this->getDb();
+        
+        // Retrieve only elements matching a specific record type.
+        if (array_key_exists('record_types', $params)) {
+            $select->joinInner(array('rty'=> $db->RecordType),
+                                 'rty.id = e.record_type_id',
+                                 array('record_type_name'=>'rty.name'));
+            foreach ($params['record_types'] as $recordTypeName) {
+                $select->orWhere('rty.name = ?', $recordTypeName);
+            }
+        }
+        
+        if (array_key_exists('sort', $params)) {
+            if ($params['sort'] == 'alpha') {
+                $select->order('e.name ASC');
+            }
+        }
+        
+        if (array_key_exists('element_set_name', $params)) {
+            $select->where('es.name = ?', (string) $params['element_set_name']);
+        }
     }
 }

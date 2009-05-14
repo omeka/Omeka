@@ -189,11 +189,14 @@ class Omeka_Db_Table
      * <select> form input.  As it applies to the given table.
      * 
      * @uses Omeka_Db_Table::_getColumnPairs()
+     * @param array $options Optional Set of parameters for searching/filtering 
+     * results.
+     * @see Omeka_Db_Table::applySearchFilters()
      * @return array
      **/
-    public function findPairsForSelectForm()
+    public function findPairsForSelectForm(array $options = array())
     {
-        $select = $this->getSelect();
+        $select = $this->getSelectForFindBy($options);
         $select->reset('columns');
         $select->from(array(), $this->_getColumnPairs());
         $pairs = $this->getDb()->fetchPairs($select);
