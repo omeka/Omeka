@@ -55,10 +55,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	
 	/* Tables */
 	table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;}
-		th { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
+		thead th { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
+		tbody th { font-weight:bold;}
+		
 		th,td {padding:0.75em 0.5em 0.5em;}
 		tr.even {}
-		tr td {border-bottom:1px dotted #d7d5c4;}
+		tr {border-bottom:1px dotted #d7d5c4;}
 	
 	table * {font-size:1em;margin:0;}
 			
@@ -76,7 +78,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		#advanced-search-link a {text-decoration:none; font-weight:bold; color: #389;display:block; text-align:right;padding-top:5px; font-size:1.1em;}
 	
 	/* Pagination */
-	.pagination {float:left; width: 414px;}
+	.browse-items .pagination {float:left; width: 414px;}
 	.pagination li {display:inline;padding: 3px 6px;}
 	.pagination li.pagination_current {display:inline;background:#389; color:#fff;}
 	.pagination li.pagination_range, 
