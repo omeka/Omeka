@@ -322,18 +322,75 @@ function is_admin_theme()
 /**
  * Insert a new item into the Omeka database.
  *
+ * * @param array $itemMetadata Optional Set of metadata options for configuring the
+ *  item.  Array which can include the following properties:
+ *  <ul>
+ *      <li>'public' (boolean)</li>
+ *      <li>'featured' (boolean)</li>
+ *      <li>'collection_id' (integer)</li>
+ *      <li>'item_type_id' (integer)</li>
+ *      <li>'item_type_name' (string)</li>
+ *      <li>'tags' (string, comma-delimited)</li>
+ *      <li>'tag_entity' (Entity, optional and only checked if 'tags' is given)</li>
+ *      <li>'overwriteElementTexts' (boolean) -- determines whether or not to
+ *  overwrite existing element texts.  If true, this will loop through the
+ *  element texts provided in $elementTexts, and it will update existing
+ *  records where possible.  All texts that are not yet in the DB will be
+ *  added in the usual manner.  False by default.</li>
+ *  </ul> 
+ * 
+ * @param array $elementTexts Optional Array of element texts to assign to the item. 
+ *  This follows the format: 
+ * <code>
+ * array(
+  *     [element set name] => array(
+  *         [element name] => array(
+  *             array('text' => [string], 'html' => [false|true]), 
+  *             array('text' => [string], 'html' => [false|true])
+  *         ), 
+  *         [element name] => array(
+  *             array('text' => [string], 'html' => [false|true]), 
+  *             array('text' => [string], 'html' => [false|true])
+  *         )
+  *     ), 
+  *     [element set name] => array(
+  *         [element name] => array(
+  *             array('text' => [string], 'html' => [false|true]), 
+  *             array('text' => [string], 'html' => [false|true])
+  *         ), 
+  *         [element name] => array(
+  *             array('text' => [string], 'html' => [false|true]), 
+  *             array('text' => [string], 'html' => [false|true])
+  *         )
+  *     )
+  * );
+  * </code>
+ *  See ActsAsElementText::addElementTextsByArray() for more info.
+ * 
+ * @param array $fileMetadata Optional Set of metadata options that allow one or more
+ * files to be associated with the item.  Includes the following options:
+ *  <ul>    
+ *      <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or 
+ * Omeka_File_Transfer_Adapter_Interface).  Corresponds to the 
+ * $transferStrategy argument for addFiles().</li>
+ *      <li>'file_ingest_options' OPTIONAL (array of possible options to pass
+ * modify the behavior of the ingest script).  Corresponds to the $options 
+ * argument for addFiles().</li>
+ *      <li>'files' (array or string) Represents information indicating the file
+ * to ingest.  Corresponds to the $files argument for addFiles().</li>
+ * </ul>
  * @uses ItemBuilder For more information on arguments and usage.
- * @param array $metadata Optional
- * @param array $elementTexts Optional
- * @param array $fileMetadata Optional
+ * @see ActsAsElementText::addElementTextsByArray()
  * @return Item
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {    
+    $metadata['_element_texts'] = $elementTexts;
+    $metadata['_file_metadata'] = $fileMetadata;
+     
     // Passing null means this will create a new item.
-    $helper = new ItemBuilder(null, $metadata, $elementTexts, $fileMetadata);
-    $helper->run();
-    return $helper->getItem();
+    $builder = new ItemBuilder($metadata);
+    return $builder->build();
 }
 
 /**
@@ -349,7 +406,8 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  **/
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
 {
-    $helper = new ItemBuilder($item);
+    // TODO: Maybe this should be a separate helper class.
+    $helper = new ItemBuilder(array(), $item);
     return $helper->addFiles($transferStrategy, $files, $options);
 }
 
@@ -364,9 +422,10 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  **/
 function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $helper = new ItemBuilder($item, $metadata, $elementTexts, $fileMetadata);
-    $helper->run();
-    return $helper->getItem();
+    $metadata['_element_texts'] = $elementTexts;
+    $metadata['_file_metadata'] = $fileMetadata;
+    $builder = new ItemBuilder($metadata, $item);
+    return $builder->build();
 }
 
 /**
@@ -404,32 +463,9 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * @throws Exception
  **/
 function insert_item_type($metadata = array(), $elementInfos = array()) {
-    
-    $settableMetadata = array('name', 'description');
-    
-    // make sure the item type does not already exist
-    $db = get_db();
-    $itemType = $db->getTable('ItemType')->findBySql('name = ?', array($metadata['name']), true) ;
-    
-    if (!empty($itemType)) {
-        throw new Exception('Cannot insert item type ' . $metadata['name'] . ' because it already exists.');
-    }
-    
-    $itemType = new ItemType;
-    foreach ($settableMetadata as $value) {
-        if (array_key_exists($value, $metadata)) {
-            $itemType->$value = $metadata[$value];
-        }
-    }
-    $itemType->forceSave();
-    
-    foreach($elementInfos as $elementName => $elementConfig) {        
-        $elementDescription = $elementConfig['description'];
-        $elementDataTypeName = $elementConfig['data_type_name'];
-        $itemType->addElementByName($elementName, $elementDescription, $elementDataTypeName);   
-    }
-    
-    return $itemType;    
+    $metadata['_element_info'] = $elementInfos;
+    $builder = new ItemTypeBuilder($metadata);    
+    return $builder->build();
 }
 
 
@@ -488,30 +524,14 @@ function insert_item_type($metadata = array(), $elementInfos = array()) {
  **/
 function insert_collection($metadata = array())
 {
-    $collection = new Collection;
-    
-    $settableMetadata = array('name', 'description', 'public', 'featured');
-    foreach ($settableMetadata as $value) {
-        if (array_key_exists($value, $metadata)) {
-            $collection->$value = $metadata[$value];
-        }
-    }
-    
-    if (array_key_exists('collectors', $metadata)) {
-        foreach($metadata['collectors'] as $collector) {
-            $collection->addCollector($collector);
-        }
-    }
-     
-    $collection->save();
-       
-    return $collection;
+    $builder = new CollectionBuilder($metadata);
+    return $builder->build();
 }
 
 /**
  * Insert an element set and its elements into the database.
  * 
- * @param string|array $elementSet Element set information.
+ * @param string|array $elementSetMetadata Element set information.
  * <code>
  *     [(string) element set name]
  *     -OR-
@@ -542,44 +562,15 @@ function insert_collection($metadata = array())
  * </code>
  * @return ElementSet
  */
-function insert_element_set($elementSet, array $elements = array())
+function insert_element_set($elementSetMetadata = array(), array $elements = array())
 {
-    // Process an element set array.
-    if (is_array($elementSet)) {
-        
-        // Trim whitespace from all array elements.
-        array_walk($elementSet, 'trim');
-        
-        // Set the element set name.
-        if (!isset($elementSet['name'])) {
-            throw new Exception('An element set name was not given.');
-        }
-        $elementSetName = $elementSet['name'];
-        
-        // Set the element set description.
-        $elementSetDescription = isset($elementSet['description']) 
-                                 ? $elementSet['description'] : null;
-        
-    // Process an element string.
-    } else if (is_string($elementSet)) {
-        $elementSetName = $elementSet;
-        $elementSetDescription = null;
+    if (is_string($elementSetMetadata)) {
+        $elementSetMetadata = array('name' => $elementSetMetadata);
     }
     
-    // Instantiate a new element set record.
-    $es = new ElementSet;
-    
-    // Set the element set name and description.
-    $es->name        = $elementSetName;
-    $es->description = $elementSetDescription;
-    
-    // Add elements to the element set.
-    $es->addElements($elements);
-    
-    // Save the element set.
-    $es->save();
-    
-    return $es;
+    $elementSetMetadata['_elements'] = $elements;
+    $builder = new ElementSetBuilder($elementSetMetadata);
+    return $builder->build();
 }
 
 /**
