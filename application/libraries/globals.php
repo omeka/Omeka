@@ -434,27 +434,77 @@ function insert_item_type($metadata = array(), $elementInfos = array()) {
 
 
 /**
+ * Inserts a collection
+ * 
  * @param array $metadata Follows the format:
  * <code> array(
  *     'name'       => [string], 
  *     'description'=> [string], 
  *     'public'     => [true|false], 
  *     'featured'   => [true|false]
+ *     'collectors' => [array of entities, entity ids, or entity property arrays]
  * )</code>
- */
+ * 
+ * You can specify collectors in several ways.
+ *
+ * You can provide an array of entity properties:
+ * <code>
+ * insert_collection(array('collectors'=>array(
+ *   array('first_name' => $entityFirstName1,
+ *         'middle_name' => $entityMiddleName1, 
+ *         'last_name' => $entityLastName1,
+ *          ...
+ *         ),
+ *   array('first_name' => $entityFirstName2,
+ *         'middle_name' => $entityMiddleName2, 
+ *         'last_name' => $entityLastName2,
+ *         ...
+ *         ),
+ *   array(...),
+ *   ...
+ * ));
+ * </code>
+ *
+ * Alternatively, you can use an array of entity objects or entity ids.
+ *
+ *  insert_collection(array('collectors'=>array($entity1, $entity2, ...));
+ *  insert_collection(array('collectors'=>array($entityId1, $entityId2, ...));
+ *
+ * Also you can mix the parameters:
+ *
+ * <code>
+ * insert_collection(array('collectors'=>array(
+ *    array('first_name' => $entityFirstName1,
+ *         'middle_name' => $entityMiddleName1, 
+ *         'last_name' => $entityLastName1,
+ *          ...
+ *         ),
+ *   $entity2,
+ *   $entityId3,
+ *   ...
+ * ));
+ * </code> 
+ * 
+ **/
 function insert_collection($metadata = array())
 {
     $collection = new Collection;
     
     $settableMetadata = array('name', 'description', 'public', 'featured');
-    
     foreach ($settableMetadata as $value) {
         if (array_key_exists($value, $metadata)) {
             $collection->$value = $metadata[$value];
         }
     }
-    $collection->save();
     
+    if (array_key_exists('collectors', $metadata)) {
+        foreach($metadata['collectors'] as $collector) {
+            $collection->addCollector($collector);
+        }
+    }
+     
+    $collection->save();
+       
     return $collection;
 }
 

@@ -19,11 +19,14 @@ require_once 'PublicFeatured.php';
 class Collection extends Omeka_Record
 {        
     public $name;
-    public $description;
+    public $description = '';
     public $public = 0;
     public $featured = 0;
     
     protected $_related = array('Collectors' => 'getCollectors');
+    
+    private $_oldCollectorsToAdd = array(); 
+    private $_newCollectorsToAdd = array();
     
     public function construct()
     {
@@ -31,6 +34,11 @@ class Collection extends Omeka_Record
         $this->_mixins[] = new PublicFeatured($this);
     }
     
+    /**
+     * Returns whether or not the collection has collectors
+     * 
+     * @return boolean
+     **/
     public function hasCollectors()
     {
         $db = $this->getDb();
@@ -107,4 +115,151 @@ class Collection extends Omeka_Record
             }
         }
     }
+    
+    /**
+     * Adds a collector
+     * 
+     * @param Entity|integer|array of entity properties $collector
+     * 
+     * You can specify collectors in several ways.
+     *
+     * You can provide an array of entity properties:
+     * <code>
+     * insert_collection(array('collectors'=>array(
+     *   array('first_name' => $entityFirstName1,
+     *         'middle_name' => $entityMiddleName1, 
+     *         'last_name' => $entityLastName1,
+     *          ...
+     *         ),
+     *   array('first_name' => $entityFirstName2,
+     *         'middle_name' => $entityMiddleName2, 
+     *         'last_name' => $entityLastName2,
+     *         ...
+     *         ),
+     *   array(...),
+     *   ...
+     * ));
+     * </code>
+     *
+     * Alternatively, you can use an array of entity objects or entity ids.
+     *
+     *  insert_collection(array('collectors'=>array($entity1, $entity2, ...));
+     *  insert_collection(array('collectors'=>array($entityId1, $entityId2, ...));
+     *
+     * Also you can mix the parameters:
+     *
+     * <code>
+     * insert_collection(array('collectors'=>array(
+     *    array('first_name' => $entityFirstName1,
+     *         'middle_name' => $entityMiddleName1, 
+     *         'last_name' => $entityLastName1,
+     *          ...
+     *         ),
+     *   $entity2,
+     *   $entityId3,
+     *   ...
+     * ));
+     * </code> 
+     *
+     * @return void
+     **/
+    public function addCollector($collector)
+    {
+        if (is_int($collector)) {
+            $collector = $this->getTable('Entity')->find($collector);
+            $this->_oldCollectorsToAdd[] = $collector;
+        } else if (is_array($collector)) {
+            $collectorMetadata = $collector;
+            // get the collector if it is already in the database, else create a new one
+            if (!array_key_exists('id', $collectorMetadata)) {
+                if ($collector = $this->getDb()->getTable('Entity')->findUnique($collectorMetadata)) {
+                    $this->_oldCollectorsToAdd[] = $collector;
+                } else {
+                    $collector = new Entity;
+                    $collector->setArray($collectorMetadata);
+                    $this->_newCollectorsToAdd[] = $collector;
+                }
+            } else {
+                $collector = $this->getTable('Entity')->find($collectorMetadata['id']);
+                $this->_oldCollectorsToAdd[] = $collector;
+            }
+        } else if ($collector instanceof Entity){
+            $this->_oldCollectorsToAdd[] = $collector;
+        } else {
+            throw new Exception('Cannot add collector because invalid collector object.');
+        }
+    }
+    
+    /**
+     * Validates the added collectors, adding validation errors if required.
+     * 
+     * @return void
+     **/
+    protected function beforeValidate()
+    {
+        // Collectors should all be Entity records.
+        $collectorsToAdd = array_merge($this->_newCollectorsToAdd, $this->_oldCollectorsToAdd);
+        
+        foreach ($collectorsToAdd as $collector) {
+            if (!$collector->isValid()) {
+                $this->addError('Collector', $collector->getErrors());
+            }
+        }	    
+    }
+    
+    /**
+     * Saves collectors which are new to the database, but if there is an exception, 
+     * it removes the new collectors before throwing the exception.
+     * 
+     * @return void
+     **/
+    protected function beforeSave()
+    {
+        // Save all the new collectors before saving the collection.
+        try {
+            foreach ($this->_newCollectorsToAdd as $key => $collector) {
+	            $collector->forceSave();
+	        }
+        } catch (Exception $e) {
+            // If something went wrong, delete and forget all of the new collectors
+            $this->_deleteNewCollectorsToAdd();
+            throw $e;
+        }
+    }
+
+    /**
+     * Relates the new collectors to the collection, but if there is an exception, 
+     * it deletes all of the new collectors before throwing the exception.
+     * 
+     * @return void
+     **/
+    protected function afterSave()
+    {
+        // Add the collectors to the collection
+        $collectorsToAdd = array_merge($this->_newCollectorsToAdd, $this->_oldCollectorsToAdd);        
+        foreach ($collectorsToAdd as $key => $collector) {
+            try {
+                $this->addRelatedTo($collector, 'collector');
+            } catch (Exception $e) {                
+                $this->_deleteNewCollectorsToAdd();
+                throw $e;
+            }
+        }
+        
+        // Remove collectors to add if all collectors were successfully added
+        $this->_newCollectorsToAdd = array();
+        $this->_oldCollectorsToAdd = array();
+    }
+    
+    /**
+     * Deletes all of the new collectors to add
+     * 
+     * @return void
+     **/
+    private function _deleteNewCollectorsToAdd() 
+    {
+        foreach ($this->_newCollectorsToAdd as $newCollector) {
+            $newCollector->delete();
+        }
+    }    
 }

@@ -129,6 +129,9 @@ class Relatable extends Omeka_Record_Mixin
     }
     
     /**
+     * Adds an relation between the relatable and the entity
+     * @param Entity|int $entity
+     * @param string $relationship
      * @example $item->addRelatedTo($user, 'added')
      *
      * @return void
