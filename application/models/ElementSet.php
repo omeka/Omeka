@@ -162,4 +162,11 @@ class ElementSet extends Omeka_Record
         }
         return $nextElementOrder;
     }
+    
+    protected function _validate()
+    {
+        if (!$this->fieldIsUnique('name')) {
+            $this->addError('Name', 'Name of element set must be unique.');
+        }
+    }
 }
