@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>{#xhtmlxtras_dlg.title_del_element}</title>
-	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
-	<script type="text/javascript" src="../../utils/mctabs.js"></script>
-	<script type="text/javascript" src="../../utils/form_utils.js"></script>
-	<script type="text/javascript" src="../../utils/editable_selects.js"></script>
-	<script type="text/javascript" src="js/element_common.js"></script>
-	<script type="text/javascript" src="js/del.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/popup.css" />
-	<base target="_self" />
+	<script type="text/javascript" src="../../tiny_mce_popup.js?v={tinymce_version}"></script>
+	<script type="text/javascript" src="../../utils/mctabs.js?v={tinymce_version}"></script>
+	<script type="text/javascript" src="../../utils/form_utils.js?v={tinymce_version}"></script>
+	<script type="text/javascript" src="../../utils/editable_selects.js?v={tinymce_version}"></script>
+	<script type="text/javascript" src="js/element_common.js?v={tinymce_version}"></script>
+	<script type="text/javascript" src="js/del.js?v={tinymce_version}"></script>
+	<link rel="stylesheet" type="text/css" href="css/popup.css?v={tinymce_version}" />
 </head>
 <body id="xhtmlxtrasins" style="display: none">
 <form onsubmit="insertDel();return false;" action="#">
@@ -31,7 +30,7 @@
 							<table border="0" cellspacing="0" cellpadding="0">
 								<tr> 
 									<td><input id="datetime" name="datetime" type="text" value="" maxlength="19" class="field mceFocus" /></td> 
-									<td><a href="javascript:insertDateTime('datetime');" onmousedown="return false;" class="browse"><span class="datetime" alt="{#xhtmlxtras_dlg.insert_date}" title="{#xhtmlxtras_dlg.insert_date}"></span></a></td>
+									<td><a href="javascript:insertDateTime('datetime');" onmousedown="return false;" class="browse"><span class="datetime" title="{#xhtmlxtras_dlg.insert_date}"></span></a></td>
 								</tr>
 							</table>
 						</td>
