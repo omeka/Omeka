@@ -20,13 +20,13 @@
 
 <div id="primary">
 	<?php if ( total_results() ): ?>
+	<?php echo flash(); ?>
 	
 	<div id="browse-meta">
 		<div id="simple-search-form">
 			<?php echo simple_search(); ?>
 			<span id="advanced-search-link"><?php echo link_to_advanced_search(); ?></span>
 		</div>
-			<?php echo flash(); ?>
 
 
 		<div class="pagination"><?php echo pagination_links(); ?></div>
@@ -47,6 +47,7 @@
 		}
 	 ?>
 </fieldset>
+<div class="pagination"><?php echo pagination_links(); ?></div>
 
 <fieldset>
     <input type="submit" class="submit submit-medium" id="save-changes" name="submit" value="Save Changes" />

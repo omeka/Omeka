@@ -346,16 +346,7 @@ echo js('tiny_mce/tiny_mce');
             var checkboxes = div.select('input[type="checkbox"]');
             checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
 	    });
-    
-        // The configuration bombs out in IE6, so we have to be limited in our configuration.  
-        if (Prototype.Browser.IE) {
-            tinyMCE.init({
-                mode: "specific_textareas",
-                editor_selector: "html-editor"
-            });
-        } else {
-    
-	    //WYSIWYG Editor
+	
         tinyMCE.init({
             mode: "specific_textareas",
             editor_selector : "html-editor",    // Put the editor in for all textareas with an 'html-editor' class.
@@ -372,7 +363,6 @@ echo js('tiny_mce/tiny_mce');
     		theme_advanced_buttons3 : "",
     		theme_advanced_toolbar_align : "left"
        });   
-        }
 	}
 
     });

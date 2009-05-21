@@ -69,7 +69,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#add-item:hover, #save-changes:hover {background-position:0 0 !important;cursor:pointer;}
 	
 	/* Simple Search */
-	#simple-search-form {padding:0;width: 212px;float:right;margin-top:0;text-align:right;}
+	#simple-search-form {padding:0;width: 212px;float:right;margin-top:0;text-align:right;clear:right;}
 		#simple-search input.textinput {border:0; background:#fff url("../images/search-input-bg.gif") top left no-repeat !important;display:block; float:left; width:143px; height: 15px;padding:5px 0 5px 5px;}
 		#simple-search input#submit_search {background:none; color:#fff;border:none;width: 62px; height: 25px; _overflow:hidden; background:#333 url("../images/search-submit-bg.gif") 0 0 no-repeat !important;}
 		#simple-search input#submit_search:hover {background-position:0 -25px !important;cursor:pointer;}
@@ -174,7 +174,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	.browse-items .simple li.nav-list-view a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
 	
 	#items-browse {clear:both;}
-	#browse-meta {overflow:hidden; zoom:1;padding-bottom:18px;border-bottom:2px solid #d7d5c4;}
+	#browse-meta {overflow:hidden; zoom:1;padding-bottom:18px;border-bottom:2px solid #d7d5c4;clear:both;}
 	table#items {width:100%;} 
 		
 	.items #primary {clear:right;}
@@ -183,12 +183,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#detailed .item h2, #detailed .item .edit-item {display:inline;}
 	#detailed .item-description {float:left; width: 396px; font-size:1.2em; line-height:1.5em;margin-right:18px;margin-top:18px;}
 		#detailed .item-description img {float:left; margin-right:18px;}
-	#detailed .item-meta {float:left; width: 396px;margin-top:18px;}
+	#detailed .item-meta {float:right; clear:right;; width: 396px;}
 	#detailed .item-meta ul {font-size:1.1em;}
 	#detailed .item-meta li {padding: 9px 18px; background: #fafaf7; text-align:right; overflow:hidden; zoom:1;border-bottom:2px solid #fff;}
 	#detailed .item-meta li span {font-weight:bold;float:left; width: 10%;}
 	
-	#detailed .public-featured-checkboxes {position:absolute; top:0; right: 0;margin-bottom:18px;}
+	#detailed .public-featured-checkboxes {float:right; clear:right;margin-bottom:9px;}
 		#detailed .public-featured-checkboxes li {display:inline;}
 	
 	#detailed .append-to-item-detail {clear:both;}
