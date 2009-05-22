@@ -20,9 +20,8 @@ class ItemPermissions
      *
      * @return Omeka_Db_Select
      **/
-    public function __construct(Omeka_Db_Select $sql)
+    public function __construct(Omeka_Db_Select $sql, Omeka_Acl $acl)
     {
-        $acl = Omeka_Context::getInstance()->getAcl();
         $db = Omeka_Context::getInstance()->getDb();
         
         if (!$sql->hasJoin('i')) {
