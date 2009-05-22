@@ -16,7 +16,7 @@
  **/
 class CollectionPermissions
 {
-    public function __construct(Omeka_Db_Select $sql, $acl)
+    public function __construct(Omeka_Db_Select $sql, Omeka_Acl $acl)
     {
         $db = Omeka_Context::getInstance()->getDb();
         
