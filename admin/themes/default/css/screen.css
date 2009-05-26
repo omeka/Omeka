@@ -147,7 +147,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		.users .primary-nav li.nav-settings a {background:#eae9db; color: #333; font-weight:bold;}
 		
 /* == Content == */
-#content { z-index:1000; margin-top:-1px; position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;overflow:hidden; zoom:1;}
+#content { z-index:1000; margin-top:-1px; position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;float:left; clear:both;}
 	
 	#content h1 {margin:-18px 0 18px; padding:18px 0 0; margin-right:8em;}
 	
