@@ -13,7 +13,7 @@ body#login {width: 414px; margin: 54px auto;}
 
 	#login #login-links a {text-decoration:none; font-weight:bold; }
 
-#login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1;}
+#login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1; float:none;}
 
 #login #content form {clear:both;}
 	#login .textinput {float:right; width: 240px;}

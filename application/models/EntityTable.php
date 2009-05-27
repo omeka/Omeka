@@ -14,8 +14,13 @@
  **/
 class EntityTable extends Omeka_Db_Table
 {
-    public function findUniqueOrNew($values, $other = array())
-    {    
+    /**
+     * Returns an object that has the same values as those supplied in the parameters.
+     *
+     * @param array $values The properties of the entity with which to search and match
+     **/
+    public function findUnique($values)
+    {
         $select = new Omeka_Db_Select;
         $db = $this->getDb();
         
@@ -28,11 +33,6 @@ class EntityTable extends Omeka_Db_Table
         $select->limit(1);
         
         $unique = $this->fetchObject($select);
-        
-        if (!$unique) {
-            $unique = $this->recordFromData($values);
-        }
-        
         return $unique;
     }
     

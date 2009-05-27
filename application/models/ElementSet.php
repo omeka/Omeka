@@ -30,12 +30,12 @@ class ElementSet extends Omeka_Record
         return $this->getTable('Element')->findBySet($this->name);
     }
     
-    protected function getDefaultRecordTypeId()
+    private function _getDefaultRecordTypeId()
     {
         return $this->getTable('RecordType')->findIdFromName(self::DEFAULT_RECORD_TYPE);
     }
     
-    protected function getDefaultDataTypeId()
+    private function _getDefaultDataTypeId()
     {
         return $this->getTable('DataType')->findIdFromName(self::DEFAULT_DATA_TYPE);
     }
@@ -49,8 +49,8 @@ class ElementSet extends Omeka_Record
     public function addElements(array $elements)
     {
         // By default, new elements will work only for items and be Text fields.
-        $defaultRecordType = $this->getDefaultRecordTypeId();
-        $defaultDataType = $this->getDefaultDataTypeId();
+        $defaultRecordType = $this->_getDefaultRecordTypeId();
+        $defaultDataType = $this->_getDefaultDataTypeId();
         
         $order = $this->_getNextElementOrder();
         foreach ($elements as $options) {
@@ -82,7 +82,7 @@ class ElementSet extends Omeka_Record
         // var_dump($this->_elementsToSave);exit;
     }
     
-    protected function _buildElementRecord($options)
+    private function _buildElementRecord($options)
     {
         if (is_array($options)) {
             $obj = new Element;
@@ -115,18 +115,18 @@ class ElementSet extends Omeka_Record
      * 
      * @return void
      **/
-    public function beforeSave()
+    protected function beforeSave()
     {
         if (empty($this->record_type_id)) {
-            $this->record_type_id = $this->getDefaultRecordTypeId();
+            $this->record_type_id = $this->_getDefaultRecordTypeId();
         }
         
         if (empty($this->data_type_id)) {
-            $this->data_type_id = $this->getDefaultDataTypeId();
+            $this->data_type_id = $this->_getDefaultDataTypeId();
         }
     }
     
-    public function afterSave()
+    protected function afterSave()
     {
         foreach ($this->_elementsToSave as $obj) {
             $obj->element_set_id = $this->id;
@@ -148,7 +148,7 @@ class ElementSet extends Omeka_Record
         }
     }
     
-    protected function _getNextElementOrder()
+    private function _getNextElementOrder()
     {
         $db = $this->getDb();
         $sql = "
@@ -161,5 +161,12 @@ class ElementSet extends Omeka_Record
             $nextElementOrder = 1;
         }
         return $nextElementOrder;
+    }
+    
+    protected function _validate()
+    {
+        if (!$this->fieldIsUnique('name')) {
+            $this->addError('Name', 'Name of element set must be unique.');
+        }
     }
 }

@@ -116,7 +116,7 @@ function checkPrefix(n) {
 	if (n.value && Validator.isEmail(n) && !/^\s*mailto:/i.test(n.value) && confirm(tinyMCEPopup.getLang('advlink_dlg.is_email')))
 		n.value = 'mailto:' + n.value;
 
-	if (/^\s*www./i.test(n.value) && confirm(tinyMCEPopup.getLang('advlink_dlg.is_external')))
+	if (/^\s*www\./i.test(n.value) && confirm(tinyMCEPopup.getLang('advlink_dlg.is_external')))
 		n.value = 'http://' + n.value;
 }
 
@@ -402,46 +402,22 @@ function insertAction() {
 
 	// Create new anchor elements
 	if (elm == null) {
+		inst.getDoc().execCommand("unlink", false, null);
 		tinyMCEPopup.execCommand("CreateLink", false, "#mce_temp_url#", {skip_undo : 1});
 
 		elementArray = tinymce.grep(inst.dom.select("a"), function(n) {return inst.dom.getAttrib(n, 'href') == '#mce_temp_url#';});
-		for (i=0; i<elementArray.length; i++) {
-			elm = elementArray[i];
-
-			// Move cursor to end
-			try {
-				tinyMCEPopup.editor.selection.collapse(false);
-			} catch (ex) {
-				// Ignore
-			}
-
-			// Move cursor behind the new anchor
-			// Don't remember why this was needed so it's now removed
-			/*
-			if (tinyMCE.isGecko) {
-				var sp = inst.getDoc().createTextNode(" ");
-
-				if (elm.nextSibling)
-					elm.parentNode.insertBefore(sp, elm.nextSibling);
-				else
-					elm.parentNode.appendChild(sp);
-
-				// Set range after link
-				var rng = inst.getDoc().createRange();
-				rng.setStartAfter(elm);
-				rng.setEndAfter(elm);
-
-				// Update selection
-				var sel = inst.getSel();
-				sel.removeAllRanges();
-				sel.addRange(rng);
-			}
-			*/
-
-			setAllAttribs(elm);
-		}
+		for (i=0; i<elementArray.length; i++)
+			setAllAttribs(elm = elementArray[i]);
 	} else
 		setAllAttribs(elm);
+
+	// Don't move caret if selection was image
+	if (elm.childNodes.length != 1 || elm.firstChild.nodeName != 'IMG') {
+		inst.focus();
+		inst.selection.select(elm);
+		inst.selection.collapse(0);
+		tinyMCEPopup.storeSelection();
+	}
 
 	tinyMCEPopup.execCommand("mceEndUndoLevel");
 	tinyMCEPopup.close();
@@ -453,7 +429,6 @@ function setAllAttribs(elm) {
 	var target = getSelectValue(formObj, 'targetlist');
 
 	setAttrib(elm, 'href', href);
-	setAttrib(elm, 'mce_href', href);
 	setAttrib(elm, 'title');
 	setAttrib(elm, 'target', target == '_self' ? '' : target);
 	setAttrib(elm, 'id');
@@ -489,7 +464,7 @@ function setAllAttribs(elm) {
 function getSelectValue(form_obj, field_name) {
 	var elm = form_obj.elements[field_name];
 
-	if (elm == null || elm.options == null)
+	if (!elm || elm.options == null || elm.selectedIndex == -1)
 		return "";
 
 	return elm.options[elm.selectedIndex].value;

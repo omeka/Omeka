@@ -183,7 +183,7 @@ function insertMedia() {
 	tinyMCEPopup.restoreSelection();
 
 	if (!AutoValidator.validate(f)) {
-		alert(ed.getLang('invalid_data'));
+		tinyMCEPopup.alert(ed.getLang('invalid_data'));
 		return false;
 	}
 
@@ -218,7 +218,7 @@ function insertMedia() {
 				break;
 		}
 
-		if (fe.width != f.width.value || fe.height != f.height.height)
+		if (fe.width != f.width.value || fe.height != f.height.value)
 			ed.execCommand('mceRepaint');
 
 		fe.title = serializeParameters();
@@ -359,7 +359,9 @@ function changedType(t) {
 	d.getElementById('shockwave_options').style.display = 'none';
 	d.getElementById('wmp_options').style.display = 'none';
 	d.getElementById('rmp_options').style.display = 'none';
-	d.getElementById(t + '_options').style.display = 'block';
+
+	if (t)
+		d.getElementById(t + '_options').style.display = 'block';
 }
 
 function serializeParameters() {
@@ -467,7 +469,7 @@ function setBool(pl, p, n) {
 	if (typeof(pl[n]) == "undefined")
 		return;
 
-	document.forms[0].elements[p + "_" + n].checked = pl[n];
+	document.forms[0].elements[p + "_" + n].checked = pl[n] != 'false';
 }
 
 function setStr(pl, p, n) {
@@ -488,7 +490,7 @@ function getBool(p, n, d, tv, fv) {
 	tv = typeof(tv) == 'undefined' ? 'true' : "'" + jsEncode(tv) + "'";
 	fv = typeof(fv) == 'undefined' ? 'false' : "'" + jsEncode(fv) + "'";
 
-	return (v == d) ? '' : n + (v ? ':' + tv + ',' : ':' + fv + ',');
+	return (v == d) ? '' : n + (v ? ':' + tv + ',' : ":\'" + fv + "\',");
 }
 
 function getStr(p, n, d) {
@@ -598,14 +600,17 @@ function generatePreview(c) {
 	pl.name = !pl.name ? 'eobj' : pl.name;
 	pl.align = !pl.align ? '' : pl.align;
 
-	h += '<object classid="clsid:' + cls + '" codebase="' + codebase + '" width="' + pl.width + '" height="' + pl.height + '" id="' + pl.id + '" name="' + pl.name + '" align="' + pl.align + '">';
+	// Avoid annoying warning about insecure items
+	if (!tinymce.isIE || document.location.protocol != 'https:') {
+		h += '<object classid="' + cls + '" codebase="' + codebase + '" width="' + pl.width + '" height="' + pl.height + '" id="' + pl.id + '" name="' + pl.name + '" align="' + pl.align + '">';
 
-	for (n in pl) {
-		h += '<param name="' + n + '" value="' + pl[n] + '">';
+		for (n in pl) {
+			h += '<param name="' + n + '" value="' + pl[n] + '">';
 
-		// Add extra url parameter if it's an absolute URL
-		if (n == 'src' && pl[n].indexOf('://') != -1)
-			h += '<param name="url" value="' + pl[n] + '" />';
+			// Add extra url parameter if it's an absolute URL
+			if (n == 'src' && pl[n].indexOf('://') != -1)
+				h += '<param name="url" value="' + pl[n] + '" />';
+		}
 	}
 
 	h += '<embed type="' + type + '" ';
@@ -613,7 +618,11 @@ function generatePreview(c) {
 	for (n in pl)
 		h += n + '="' + pl[n] + '" ';
 
-	h += '></embed></object>';
+	h += '></embed>';
+
+	// Avoid annoying warning about insecure items
+	if (!tinymce.isIE || document.location.protocol != 'https:')
+		h += '</object>';
 
 	p.innerHTML = "<!-- x --->" + h;
 }

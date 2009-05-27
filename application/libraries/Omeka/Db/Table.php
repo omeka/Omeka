@@ -276,7 +276,7 @@ class Omeka_Db_Table
     public function getSelectForFind($recordId)
     {
         //Cast to integer to prevent SQL injection
-        $id = (int) $id;
+        $recordId = (int) $recordId;
 
         $select = $this->getSelect();
         $select->where( $this->getTableAlias().'.id = ?', $recordId);
