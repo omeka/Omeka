@@ -574,3 +574,103 @@ function html_escape($value)
 {
     return apply_filters('html_escape', $value);
 }
+
+/**
+ * Retrieve a substring of the text by limiting the word count.
+ * 
+ * @since 0.10
+ * @param string $phrase
+ * @param integer $maxWords
+ * @param string $ellipsis Optional '...' by default.
+ * @return string
+ **/
+function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
+{
+    $phraseArray = explode(' ', $phrase);
+    if (count($phraseArray) > $maxWords && $maxWords > 0) {
+        $phrase = implode(' ', array_slice($phraseArray, 0, $maxWords)) . $ellipsis;
+    }
+    return $phrase;
+}
+
+/**
+ * Strip HTML formatting (i.e. tags) from the provided string.
+ *
+ * This is essentially a wrapper around PHP's strip_tags() function, with the 
+ * added benefit of returning a fallback string in case the resulting stripped 
+ * string is empty or contains only whitespace.
+ * 
+ * @since 0.10
+ * @uses strip_tags()
+ * @param The string to be stripped of HTML formatting.
+ * @param The string to be used as a fallback.
+ * @param The string of tags to allow when stripping tags.
+ * @return The stripped string.
+ */
+function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
+{
+    // Strip the tags.
+    $str = strip_tags($str, $allowableTags);
+    // Remove non-breaking space html entities.
+    $str = str_replace('&nbsp;', '', $str);
+    // If only whitepace remains, return the fallback string.
+    if (preg_match('/^\s*$/', $str)) {
+        return $fallbackStr;
+    }
+    // Return the deformatted string.
+    return $str;
+}
+
+/**
+ * Loops through a specific record set, setting the current record to a globally 
+ * accessible scope and returning it.
+ * 
+ * @since 0.10
+ * @see loop_items()
+ * @see loop_files_for_item()
+ * @see loop_collections()
+ * @param string $recordType The type of record to loop through
+ * @param mixed $records The iterable set of records
+ * @return mixed The current record
+ */
+function loop_records($recordType, $records)
+{
+    // If this is the first call to loop_records(), set a static record loop and 
+    // set it to NULL.
+    static $recordLoop = null;
+    
+    // If the record type index does not exist, set it with the provided 
+    // records. We do this so multiple record types can coexist.
+    if (!isset($recordLoop[$recordType])) {
+        $recordLoop[$recordType] = $records;
+    }
+    
+    // If we haven't reached the end of the loop, set the current record in the 
+    // loop and return it. This advances the array cursor so the next loop 
+    // iteration will get the next record.
+    if (list($key, $record) = each($recordLoop[$recordType])) {
+        
+        // Set the current records, depending on the record type.
+        switch ($recordType) {
+            case 'items':
+                set_current_item($record);
+                break;
+            case 'files_for_item':
+                set_current_file($record);
+                break;
+            case 'collections':
+                set_current_collection($record);
+                break;
+            default:
+                throw new Exception('Error: Invalid record type was provided for the loop.');
+                break;
+        }
+        
+        return $record;
+    }
+    
+    // Reset the particular record loop if the loop has finished (so we can run 
+    // it again if necessary). Return false to indicate the end of the loop.
+    unset($recordLoop[$recordType]);
+    return false;
+}
