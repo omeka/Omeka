@@ -1,6 +1,6 @@
 <?php
 /**
- * All theme Plugin helper functions
+ * All Plugin helper functions
  * 
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
@@ -122,4 +122,37 @@ function plugin_append_to_collections_browse()
 function plugin_append_to_collections_show()
 {
     return get_plugin_hook_output('public_append_to_collections_show');
+}
+
+/**
+ * Allow plugins to hook in to the footer of public themes.
+ * 
+ * Uses the 'public_theme_footer' hook, which receives the request object as
+ * the first argument.
+ * 
+ * @since 0.9
+ * @see plugin_header()
+ * @return void
+ **/
+function plugin_footer() 
+{
+    $request = Omeka_Context::getInstance()->getRequest();
+	fire_plugin_hook('public_theme_footer', $request);
+}
+
+/**
+ * Allows plugins to hook in to the header of public themes.
+ *
+ * Uses the 'public_theme_header' hook to inject content into the theme.  This
+ * hook receives the request object as the first argument, which allows the 
+ * plugin writer to tailor the header output to a specific request (specific
+ * controller, action, etc.).
+ * 
+ * @since 0.9
+ * @return void
+ **/
+function plugin_header() 
+{
+    $request = Omeka_Context::getInstance()->getRequest();
+	fire_plugin_hook('public_theme_header', $request);
 }

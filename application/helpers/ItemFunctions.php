@@ -1,6 +1,6 @@
 <?php
 /**
- * All theme Item helper functions
+ * All Item helper functions
  * 
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
@@ -13,15 +13,14 @@
   * @since 0.10
   * @uses current_user_tags()
   * @uses get_current_item()
-  * @param Item|null Check for this specific item record (current item if null).
+  * @param Item|null $item Check for this specific item record (current item if null).
   * @return array
   **/
  function current_user_tags_for_item($item=null)
  {
-     if(!$item) {
+     if (!$item) {
          $item = get_current_item();
      }
-
      // eventually, we need to not use current_user_tags because it is deprecated
      return current_user_tags($item);
  }
@@ -32,7 +31,7 @@
   * @uses get_current_item()
   * @param array $options 
   * @param array $wrapperAttributes
-  * @param Item|null Check for this specific item record (current item if null).
+  * @param Item|null $item Check for this specific item record (current item if null).
   * @return string HTML
   **/
  function display_files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'), $item = null)
@@ -49,7 +48,7 @@
   * used on the home page of public themes.
   * 
   * @since 0.10
-  * @param boolean Whether or not the featured item should have an image associated 
+  * @param boolean $withImage Whether or not the featured item should have an image associated 
   * with it.  If set to true, this will either display a clickable square thumbnail 
   * for an item, or it will display "You have no featured items." if there are 
   * none with images.
@@ -81,8 +80,6 @@
   * 
   * @since 0.10
   * @throws Exception
-  * @access private
-  * @param string
   * @return Item
   **/
  function get_current_item()
@@ -104,7 +101,7 @@
   * echo item('Dublin Core', 'Title');
   * 
   * @since 0.10
-  * @param integer
+  * @param integer $itemId
   * @return Item|null
   **/
  function get_item_by_id($itemId)
@@ -267,7 +264,7 @@
      $cite .= "$uri ";
      $cite .= "(accessed $accessDate).";
 
- 	return $cite;
+     return $cite;
  }
  
  /**
@@ -402,6 +399,18 @@
      require_once 'Media.php';
      $media = new Omeka_View_Helper_Media;
      return $media->archive_image($imageFile, $props, $width, $height, $imageType ); 
+ }
+ 
+ /**
+  * Returns the HTML for an item search form
+  *
+  * @param array $props
+  * @param string $formActionUri
+  * @return string
+  **/	
+ function items_search_form($props=array(), $formActionUri = null) 
+ {
+     return __v()->partial('items/advanced-search.php', array('isPartial'=>true, 'formAttributes'=>$props, 'formActionUri'=>$formActionUri));
  }
  
  /**

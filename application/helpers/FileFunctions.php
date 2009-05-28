@@ -1,6 +1,6 @@
 <?php
 /**
- * All theme File helper functions
+ * All File helper functions
  * 
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
@@ -8,6 +8,108 @@
  * @package Omeka_ThemeHelpers
  * @subpackage FileHelpers
  **/
+ 
+ /**
+  * Retrieve the web path to a css file.
+  *
+  * @param string $file Should not include the .css extension
+  * @param string $dir Defaults to 'css'
+  * @return string
+  */
+ function css($file, $dir = 'css') 
+ {
+ 	return src($file, $dir, 'css');
+ }
+ 
+ /**
+  * @see display_files()
+  * @uses display_files()
+  * @param File $file One File record.
+  * @param array $props
+  * @param array $wrapperAttributes Optional XHTML attributes for the div wrapper
+  * for the displayed file.  Defaults to array('class'=>'item-file').
+  * @return string HTML
+  **/
+ function display_file($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
+ {
+     return display_files(array($file), $props, $wrapperAttributes);
+ }
+ 
+ /**
+  * Displays a set of files based on the file's MIME type and any options that are
+  * passed.  This is primarily used by other helper functions and will not be used
+  * by theme writers in most cases.
+  * 
+  * @since 0.9
+  * @uses Omeka_View_Helper_Media
+  * @param array $files An array of File records to display.
+  * @param array $props Properties to customize display for different file types.
+  * @param array $wrapperAttributes XHTML attributes for the div that wraps each
+  * displayed file.  If empty or null, this will not wrap the displayed file in a
+  * div.
+  * @return string HTML
+  **/
+ function display_files($files, array $props = array(), $wrapperAttributes = array('class'=>'item-file')) 
+ {
+     require_once 'Media.php';
+     $helper = new Omeka_View_Helper_Media;
+     $output = '';
+     foreach ($files as $file) {
+         $output .= $helper->media($file, $props, $wrapperAttributes);
+     }
+     return $output;
+ } 
+ 
+ /**
+  * Retrieve the web path to an image file.
+  * 
+  * @since 0.9
+  * @param string $file Filename, including the extension.
+  * @param string $dir Optional Directory within the theme to look for image 
+  * files.  Defaults to 'images'.
+  * @return string
+  */
+ function img($file, $dir = 'images') 
+ {
+ 	return src($file, $dir);
+ }
+ 
+ /**
+  * Echos the web path (that's what's important to the browser)
+  * to a javascript file.
+  * $dir defaults to 'javascripts'
+  * $file should not include the .js extension
+  *
+  * @param string $file The name of the file, without .js extension.  Specifying 'default' will load 
+  * the default javascript files, such as prototype/scriptaculous
+  * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
+  * @param array $scriptaculousLibraries An array of Scriptaculous libraries, by file name. Default is 'effects' and 'dragdrop'. Works only if 'default' is passed for the first parameter.
+  */
+ function js($file, $dir = 'javascripts', $scriptaculousLibraries = array('effects', 'dragdrop')) 
+ {
+     if ($file == 'default') {
+         $output  = js('prototype', $dir); //Prototype library loads by default
+         $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
+
+         //The following is a hack that loads only the 'effects' sub-library of Scriptaculous
+         //Load the sub-libraries of Scriptaculous
+         $output .= '<script src="' . web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=' . implode(',', $scriptaculousLibraries) .'" type="text/javascript" charset="utf-8"></script>' . "\n";
+         $output .= js('search', $dir);
+
+         //Do not try to load 'default.js'
+         return $output;
+     }
+ 	return '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
+ }
+  
+ /**
+  * @since 0.10
+  * @return File|null
+  **/
+ function get_current_file()
+ {
+     return __v()->file;
+ }
  
  /**
   * Retrieve metadata for a given field in the current file.
@@ -28,12 +130,24 @@
  }
  
  /**
-  * @since 0.10
-  * @return File|null
+  * Return the physical path for an asset/resource within the theme (or plugins, shared, etc.)
+  *
+  * @param string $file
+  * @throws Exception
+  * @return string
   **/
- function get_current_file()
+ function physical_path_to($file)
  {
-     return __v()->file;
+ 	$view = __v();
+ 	$paths = $view->getAssetPaths();
+
+ 	foreach ($paths as $path) {
+ 	    list($physical, $web) = $path;
+ 		if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
+ 			return $physical . DIRECTORY_SEPARATOR . $file;
+ 		}
+ 	}
+ 	throw new Exception( "Could not find file '$file'!" );
  }
  
  /**
@@ -61,3 +175,45 @@
      }
      return __v()->fileMetadataList($file, $options);
  }
+ 
+ /**
+  * Return a valid src attribute value for a given file.  Used primarily
+  * by other helper functions.
+  *
+  *
+  * @param string        Filename
+  * @param string|null   Directory that the file is contained in (optional) 
+  * @param string        File extension (optional)
+  * @return string
+  **/
+ function src($file, $dir=null, $ext = null) 
+ {
+ 	if ($ext !== null) {
+ 		$file .= '.'.$ext;
+ 	}
+ 	if ($dir !== null) {
+ 		$file = $dir.DIRECTORY_SEPARATOR.$file;
+ 	}
+ 	return web_path_to($file);
+ }
+ 
+ /**
+  * Return the web path for an asset/resource within the theme
+  *
+  * @param string $file
+  * @return string
+  **/
+ function web_path_to($file)
+ {
+ 	$view = __v();
+ 	$paths = $view->getAssetPaths();
+ 	foreach ($paths as $path) {
+ 	    list($physical, $web) = $path;
+ 		if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
+ 			return $web . '/' . $file;
+ 		}
+ 	}
+ 	throw new Exception( "Could not find file '$file'!" );
+ }
+ 
+ 

@@ -15,15 +15,16 @@
  * @param array|string $attributes Attributes for the tag.  If this is a 
  * string, it will assign both 'name' and 'id' attributes that value for
  * the tag.
- * @param string
+ * @param string $value
  * @return string
  **/
-function _tag_attributes($attributes,$value=null) {
+function _tag_attributes($attributes, $value=null) 
+{
 
-	if(is_string($attributes)) {
+	if (is_string($attributes)) {
 		$toProcess['name'] = $attributes;
 		$toProcess['id'] = $attributes;
-	}else {
+	} else {
 		//don't allow 'value' to be set specifically as an attribute (why = consistency)
 		unset($attributes['value']);
 		$toProcess = $attributes;
@@ -40,8 +41,8 @@ function _tag_attributes($attributes,$value=null) {
  * Make a label for a form element.
  *
  * @since 0.9
- * @param mixed an array of attributes, or just the string id to be used in the 'for' attribute
- * @param string text of the form label
+ * @param mixed $attributes An array of attributes, or just the string id to be used in the 'for' attribute
+ * @param string $text Text of the form label
  * @return string
  **/
 function label($attributes, $text) 
@@ -68,10 +69,9 @@ function label($attributes, $text)
  * @param string|null $label
  * @return string HTML for the form element
  **/	
-function text( $attributes, $default=null, $label = null )
+function text($attributes, $default=null, $label = null)
 {
     $html = '';
-    
 	if($label) {
 	    // This is a hack to only apply the 'class' attribute to the input
 	    // and not to the label 
@@ -94,16 +94,13 @@ function text( $attributes, $default=null, $label = null )
  * @param string|null $label Optional
  * @return string
  **/	
-function password( $attributes, $default=null, $label = null )
+function password($attributes, $default=null, $label = null)
 {
     $html = '';
-
-	if($label) {
+	if ($label) {
 	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
 	}
-	
     $html .= __v()->formPassword($attributes['name'], $default, $attributes);
-    
     return $html;
 }
 
@@ -121,21 +118,17 @@ function password( $attributes, $default=null, $label = null )
  * @param string|null $label Optional
  * @return string
  **/
-function select( $attributes, $values = null, $default = null, $label=null)
+function select($attributes, $values = null, $default = null, $label=null)
 {   
     $html = '';
-    
     //First option is always the "Select Below" empty entry
     $values = (array) $values;
     $values = array('' => 'Select Below ') + $values;
-        
     //Duplication
-	if($label) {
+	if ($label) {
 	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
 	}
-	
     $html .= __v()->formSelect($attributes['name'], $default, $attributes, $values);
-    
     return $html;
 }
 	
@@ -149,16 +142,13 @@ function select( $attributes, $values = null, $default = null, $label=null)
  * @param string|null $label Optional
  * @return string
  **/
-function textarea($attributes, $default = null, $label = null )
+function textarea($attributes, $default = null, $label = null)
 {		
 	$html = '';
-	
-	if($label) {
+	if ($label) {
 	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
 	}
-	
 	$html .= __v()->formTextarea($attributes['name'], $default, $attributes);
-	
 	return $html;
 }
 
@@ -174,7 +164,7 @@ function textarea($attributes, $default = null, $label = null )
  * @param string $label_class Optional Defaults to 'radiolabel'.
  * @return string HTML
  **/	
-function radio( $attributes, array $values, $default = null, $label_class = 'radiolabel' )
+function radio($attributes, array $values, $default = null, $label_class = 'radiolabel')
 {
     $attributes['label_class'] = $label_class;
 	return __v()->formRadio($attributes['name'], $default, $attributes, $values, null);
@@ -188,10 +178,10 @@ function radio( $attributes, array $values, $default = null, $label_class = 'rad
  * @param string $value
  * @return string
  **/	
-function hidden( $attributes, $value )
+function hidden($attributes, $value)
 {
 	$input = '<input type="hidden"';
-	if(!empty($attributes)) {
+	if (!empty($attributes)) {
 		$input .= ' '._tag_attributes($attributes);
 	}
 	$input .= ' value="'.html_escape($value).'"';
@@ -212,16 +202,13 @@ function hidden( $attributes, $value )
  **/	
 function checkbox($attributes, $checked = FALSE, $value=null, $label = null )
 {
-    if($checked !== null) {
+    if ($checked !== null) {
         $attributes['checked'] = $checked;
     }
-
     $html = __v()->formCheckbox($attributes['name'], $value, $attributes);
-
-	if($label) {
+	if ($label) {
 	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
 	}
-	
 	return $html;
 }
 
@@ -260,7 +247,6 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
     if (!$uri) {
         $uri = uri('items/browse');
     }
-    
     $formProperties['action'] = $uri;
     $formProperties['method'] = 'get';
     $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
@@ -269,7 +255,6 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
     $html .= __v()->formSubmit('submit_search', $buttonText);
     $html .= '</fieldset>' . "\n\n";
     $html .= '</form>';
-    
     return $html;
 }
 
@@ -297,7 +282,6 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
 function display_form_input_for_element($element, $record, $options = array())
 {
     $html = '';
-        
     // If we have an array of Elements, loop through the form to display them.
     if (is_array($element)) {
         foreach ($element as $key => $e) {
@@ -306,7 +290,6 @@ function display_form_input_for_element($element, $record, $options = array())
     } else {
         $html = __v()->elementForm($element, $record, $options);
     }
-	
 	return $html;
 }
 
@@ -328,6 +311,21 @@ function display_element_set_form($record, $elementSetName)
        $html .= display_form_input_for_element($element, $record);
     }
     return $html;
+}
+
+/**
+ * Retrieve validation errors for specific fields on the form.
+ * 
+ * @param string $field The name of the field to retrieve the error message for
+ * @return string The error message wrapped in a div with class="error"
+ **/
+function form_error($field)
+{
+	$flash = new Omeka_Controller_Flash;
+	if ($flash->getStatus() != Omeka_Controller_Flash::VALIDATION_ERROR) return;
+	if (($msg = $flash->getError($field))) {
+		return '<div class="error">'.$msg.'</div>';
+	}
 }
 
 /**

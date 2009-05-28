@@ -297,6 +297,28 @@ function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked =
 }
 
 /**
+ * Generate an unordered list of navigation links, with class "current" for any links corresponding to the current page
+ *
+ * For example:
+ * <code>nav(array('Themes' => uri('themes/browse')));</code>
+ * generates 
+ * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
+ * 
+ * @uses is_current_uri()
+ * @param array A keyed array, where Key = Text of Navigation and Value = Link
+ * @return string HTML for the unordered list
+ **/
+function nav(array $links) 
+{	
+	$current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+	$nav = '';
+	foreach( $links as $text => $link ) {		
+		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . html_escape($text) . '</a></li>' . "\n";
+	}
+	return $nav;
+}
+
+/**
  * Retrieve HTML for the set of pagination links.
  * 
  * @since 0.10
@@ -395,4 +417,82 @@ function public_nav(array $navArray, $navType=null)
 function public_nav_main(array $navArray)
 {
     return public_nav($navArray, 'main');
+}
+
+/**
+ * Create a tag cloud made of divs that follow the hTagcloud microformat
+ *
+ * @param array $tags Set of tags to display in the cloud
+ * @param string|null The URI to use in the link for each tag.  If none given,
+ *      tags in the cloud will not be given links.
+ * @return string HTML for the tag cloud
+ **/
+function tag_cloud($tags, $link = null, $maxClasses = 9)
+{
+	if (!$tags) {
+		$html = '<p>No tags are available.</p>';
+		return $html;
+	} 
+	
+	//Get the largest value in the tags array
+	$largest = 0;
+	foreach ($tags as $tag) {
+		if($tag["tagCount"] > $largest) {
+			$largest = $tag['tagCount'];
+		}
+	}
+	$html = '<div class="hTagcloud">';
+	$html .= '<ul class="popularity">';
+	
+	if ($largest < $maxClasses) {
+		$maxClasses = $largest;
+	}
+
+	foreach( $tags as $tag ) {
+		$size = (int)(($tag['tagCount'] * $maxClasses) / $largest - 1);
+		$class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
+		$html .= '<li class="' . $class . '">';
+		if ($link) {
+			$html .= '<a href="' . $link . '?tags=' . urlencode($tag['name']) . '">';
+		}
+		$html .= html_escape($tag['name']);
+		if ($link) {
+			$html .= '</a>';
+		}
+		$html .= '</li>' . "\n";
+	}
+ 	$html .= '</ul></div>';
+
+	return $html;
+}
+
+/**
+ * Output a tag string given an Item, Exhibit, or a set of tags.
+ *
+ * @internal Any record that has the Taggable module can be passed to this function
+ * @param Omeka_Record|array $record The record to retrieve tags from, or the actual array of tags
+ * @param string|null $link The URL to use for links to the tags (if null, tags aren't linked)
+ * @param string $delimiter ', ' (comma and whitespace) by default
+ * @return string HTML
+ **/
+function tag_string($record, $link=null, $delimiter=', ')
+{
+	$string = array();
+	if ($record instanceof Omeka_Record) {
+		$tags = $record->Tags;
+	} else {
+		$tags = $record;
+	}
+
+	if (!empty($tags)) {
+		foreach ($tags as $key=>$tag) {
+			if (!$link) {
+				$string[$key] = html_escape($tag['name']);
+			} else {
+				$string[$key] = '<a href="'.$link.urlencode($tag['name']).'" rel="tag">'.html_escape($tag['name']).'</a>';
+			}
+		}
+		$string = join($delimiter,$string);
+		return $string;
+	}
 }
