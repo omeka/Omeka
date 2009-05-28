@@ -1,4 +1,4 @@
-/* == Login Form */
+/* == Login Form == */
 
 body#login {width: 414px; margin: 54px auto;}
 
@@ -7,26 +7,29 @@ body#login {width: 414px; margin: 54px auto;}
 #login h1 {background:transparent; font-size:2em;margin:0 0 1em; padding:0; display:inline;float:left;}
 
 #login .error {clear:both; margin-bottom:0.5em;}
+
+/* Header */
 #login #header {width: 414px; padding:18px; margin:0 auto 0; }
 
-#login #login-links {display:block; float:right; width: 60%; text-align:right;color:#999; margin-top: 1em;margin-bottom:0; font-size:1.1em;}
-
-	#login #login-links a {text-decoration:none; font-weight:bold; }
-
+/* Content */
 #login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1; float:none;}
 
+#login #login-links {display:block; float:right; width: 70%; text-align:right;color:#999; margin-top: 1em;margin-bottom:0; font-size:1.1em;}
+	#login #login-links a {text-decoration:none; font-weight:bold; }
+
 #login #content form {clear:both;}
-	#login .textinput {float:right; width: 240px;}
-	#login #remember {margin-left: 12px; margin-top:0px;}
-	#login label {float:left; width: 118px; text-align:right;}
-	p.clear {clear:both;}
+#login .textinput {float:right; width: 240px;}
+#login #remember {margin-left: 12px; margin-top:0px;}
+#login label {float:left; width: 118px; text-align:right;}
+p.clear {clear:both;}
 
+#login div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
 
-		#login div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
+#login input.submit {float:right;margin-top:6px;margin-bottom:0;}
 
-		#login input.submit {float:right;margin-top:6px;margin-bottom:0;}
-		
-		#back-to-login {text-align:left; float:left; width: 280px;margin-bottom:0;}
+#back-to-login {text-align:left; float:left; width: 280px;margin-bottom:0;}
+
+/* Footer */
 #login #footer {padding:18px; margin:0 auto;width: 414px;}
 	#login #footer p {margin:0; width: auto; }
 

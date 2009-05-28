@@ -11,7 +11,11 @@
 
 	<h2>Collectors</h2>
 	<ul id="collector-list">
-		<li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
+    	<?php if (collection_has_collectors()): ?> 
+    	<li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
+		<?php else: ?>
+		<li>No collectors</li>
+		<?php endif; ?>	
 	</ul>
 
 </div>
