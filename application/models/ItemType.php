@@ -114,7 +114,7 @@ class ItemType extends Omeka_Record {
         $elementPostArray = $post['Elements'];
         
         if (!array_key_exists('order', current($elementPostArray))) {
-            throw new Exception('Form was submitted in an invalid format!');
+            throw new Omeka_Record_Exception('Form was submitted in an invalid format!');
         }
         
         // This is how we sort the multi-dimensional array based on the element_order.
@@ -151,7 +151,7 @@ class ItemType extends Omeka_Record {
         // make sure the element does not already exist
         $element = $db->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
         if (!empty($element)) {
-            throw new Exception('Element cannot be added to ItemType because it already exists: ' . $elementSetName . ', ' . $elementName);            
+            throw new Omeka_Record_Exception('Element cannot be added to ItemType because it already exists: ' . $elementSetName . ', ' . $elementName);            
         }            
         
         // create and configure a new element
@@ -200,14 +200,14 @@ class ItemType extends Omeka_Record {
     public function removeElement($elementId)
     {
         if (!$this->exists()) {
-            throw new Exception('Cannot remove elements from an item type that is not persistent in the database!');
+            throw new Omeka_Record_Exception('Cannot remove elements from an item type that is not persistent in the database!');
         }
         
         // Find the join record and delete it.
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?', array($elementId, $this->id), true);
     
         if (!$iteJoin) {
-            throw new Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
+            throw new Omeka_Record_Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
         }
         
         $iteJoin->delete();

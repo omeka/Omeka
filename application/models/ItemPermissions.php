@@ -25,7 +25,7 @@ class ItemPermissions
         $db = Omeka_Context::getInstance()->getDb();
         
         if (!$sql->hasJoin('i')) {
-            throw new Exception( "This SQL statement needs a FROM or JOIN clause equivalent to '$db->Item i' in order to have permissions checked!" );
+            throw new Omeka_Record_Exception( "This SQL statement needs a FROM or JOIN clause equivalent to '$db->Item i' in order to have permissions checked!" );
         }
         
         $has_permission = $acl->checkUserPermission('Items', 'showNotPublic');

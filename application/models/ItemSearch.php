@@ -84,7 +84,7 @@ class ItemSearch
                     $predicate = "IS NOT NULL";
                     break;
                 default:
-                    throw new Exception( 'Invalid search type given!' );
+                    throw new Omeka_Record_Exception( 'Invalid search type given!' );
                     break;
             }
             

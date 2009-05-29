@@ -35,7 +35,7 @@ class ElementSetBuilder extends Omeka_Record_Builder
     protected function _parseMetadataOptions(array $metadata)
     {
         if (!isset($metadata['name'])) {
-            throw new Exception('An element set name was not given.');
+            throw new Omeka_Record_Exception('An element set name was not given.');
         }
 
         // Trim whitespace from all array elements.

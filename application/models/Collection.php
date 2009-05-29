@@ -110,7 +110,7 @@ class Collection extends Omeka_Record
                 } else {
                     //@todo Add support for entering a string name (this is 
                     // thorny b/c of string splitting and unicode)
-                    throw new Exception( 'Cannot enter a collector by name.' );
+                    throw new Omeka_Record_Exception( 'Cannot enter a collector by name.' );
                 }
             }
         }
@@ -186,7 +186,7 @@ class Collection extends Omeka_Record
         } else if ($collector instanceof Entity){
             $this->_oldCollectorsToAdd[] = $collector;
         } else {
-            throw new Exception('Cannot add collector because invalid collector object.');
+            throw new Omeka_Record_Exception('Cannot add collector because invalid collector object.');
         }
     }
     

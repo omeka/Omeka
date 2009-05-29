@@ -186,7 +186,7 @@ class ItemBuilder extends Omeka_Record_Builder
         // item will be saved as normally.
         if (array_key_exists('files', $this->_metadataOptions['_file_metadata'])) {
             if (!array_key_exists('file_transfer_type', $this->_metadataOptions['_file_metadata'])) {
-                throw new Exception("Must specify 'file_transfer_type' when attaching files to an item!");
+                throw new Omeka_Record_Exception("Must specify 'file_transfer_type' when attaching files to an item!");
             }
             $this->addFiles(
                 $this->_metadataOptions['_file_metadata']['file_transfer_type'], 
