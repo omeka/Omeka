@@ -25,7 +25,7 @@ class ItemType extends Omeka_Record {
                                 'Items'=>'getItems',
                                 'ItemTypesElements'=>'loadOrderedChildren');
 
-    public function construct()
+    protected function construct()
     {
         // For future reference, these arguments mean: 
         // 1) the current object
@@ -37,7 +37,7 @@ class ItemType extends Omeka_Record {
         // always contain the 'Elements' key with a subkey called 'order', so that
         // the array looks something like this: $_POST['Elements'][0]['order'] = 1, etc.
         // NOTE: this has been changed to 'fooobar' in order to circumvent using
-        // Orderable::afterSaveForm() in favor of ItemType::reorderElementsFromPost().
+        // Orderable::afterSaveForm() in favor of ItemType::_reorderElementsFromPost().
         $this->_mixins[] = new Orderable($this, 'ItemTypesElements', 'item_type_id', 'fooobar');
     }
     
@@ -97,7 +97,7 @@ class ItemType extends Omeka_Record {
     protected function beforeSaveForm($post)
     {
         if ($this->exists()) {
-            $this->reorderElementsFromPost($post);
+            $this->_reorderElementsFromPost($post);
         }
     }
 
@@ -109,7 +109,7 @@ class ItemType extends Omeka_Record {
      * @param string
      * @return void
      **/
-    public function reorderElementsFromPost(&$post)
+    private function _reorderElementsFromPost(&$post)
     {
         $elementPostArray = $post['Elements'];
         
