@@ -84,7 +84,7 @@ class Entity extends Omeka_Record
      *
      * @return void
      **/
-    public function _delete()
+    protected function _delete()
     {        
         $id = (int) $this->id;
         
