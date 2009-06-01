@@ -24,7 +24,9 @@ class ItemType extends Omeka_Record {
     protected $_related = array('Elements' => 'getElements', 
                                 'Items'=>'getItems',
                                 'ItemTypesElements'=>'loadOrderedChildren');
-
+    
+    private $_elementsToSave = array();
+    
     protected function construct()
     {
         // For future reference, these arguments mean: 
@@ -100,7 +102,34 @@ class ItemType extends Omeka_Record {
             $this->_reorderElementsFromPost($post);
         }
     }
-
+    
+    /**
+     * Save Element records that are associated with this Item Type.
+     * 
+     * @internal Duplication with ElementSet::afterSave().  Could resolve in 
+     * future by refactoring into a mixin that handles record dependencies.
+     */
+    protected function afterSave()
+    {
+        foreach ($this->_elementsToSave as $key => $element) {
+            $element->forceSave();
+            $this->addElementById($element->id);
+            unset($this->_elementsToSave[$key]);
+        }
+    }
+    
+    /**
+     * Validate the elements to ensure saveability-ness.
+     */
+    protected function afterValidate()
+    {
+        foreach ($this->_elementsToSave as $key => $element) {
+            if (!$element->isValid()) {
+                $this->addError("Element #$key", $element->getErrors());
+            }
+        }
+    }
+    
     /**
      * This extracts the ordering for the elements from the form's POST, then uses 
      * the given ordering to resort the join records from item_types_elements into
@@ -130,34 +159,23 @@ class ItemType extends Omeka_Record {
         }
     }
     
-    
     /**
-     * Adds a new element to the item type by the name of the element
-     * 
-     * @param string Name of the element
-     * @param string Description of the element
-     * @param string Data type name of the element
-     **/
-    public function addElementByName($elementName, $elementDescription=null, $elementDataTypeName='Text')
+     * Add a set of elements to the Item Type.
+     * @param array $elementInfo Array of metadata where each entry corresponds
+     * to a new element to add to the item type.  
+     * @uses Element::setArray() For details on the format for passing metadata
+     * through $elementInfo.
+     */    
+    public function addElements($elementInfo = array())
     {
-        // make sure the element does not already exist
-        if ($this->_hasElementByName($elementName)) {
-            throw new Omeka_Record_Exception('Element cannot be added to ItemType because it already exists: ' . $elementName);            
-        }            
-        
-        // create and configure a new element
-        $element = new Element;        
-        $element->setName($elementName);
-        $element->setDescription($elementDescription);
-        $element->setElementSet(ELEMENT_SET_ITEM_TYPE);
-        $element->setRecordType('Item');
-        $element->setDataType($elementDataTypeName);
-        $element->forceSave();
-        
-        // join the element to the item type
-        $this->addElementById($element->id);
+        foreach ($elementInfo as $elementMetadata) {
+            $record = new Element;
+            $record->setArray($elementMetadata);
+            $record->setElementSet(ELEMENT_SET_ITEM_TYPE);
+            $record->setRecordType('Item');
+            $this->_elementsToSave[] = $record;
+        }
     }
-    
     
     /**
      * Adds a new element to the item type by the id of the element
@@ -218,13 +236,5 @@ class ItemType extends Omeka_Record {
     {
         // Element should belong to the 'Item Type' element set.
         return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ELEMENT_SET_ITEM_TYPE), true);
-    }
-    
-    /**
-     * @todo Should modify hasElement to check by name as well as element ID.
-     */
-    private function _hasElementByName($elementName)
-    {
-        return (boolean)$this->getDb()->getTable('Element')->findByElementSetNameAndElementName(ELEMENT_SET_ITEM_TYPE, $elementName);
-    }
+    }    
 }

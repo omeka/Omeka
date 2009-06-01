@@ -29,12 +29,8 @@ class ItemTypeBuilder extends Omeka_Record_Builder
     /**
      * Add elements to be associated with the Item Type.
      */
-    protected function _afterBuild()
+    protected function _beforeBuild()
     {        
-        foreach($this->_elements as $elementName => $elementConfig) {        
-            $elementDescription = $elementConfig['description'];
-            $elementDataTypeName = $elementConfig['data_type_name'];
-            $this->_record->addElementByName($elementName, $elementDescription, $elementDataTypeName);   
-        }
+        $this->_record->addElements($this->_elements);
     }
 }

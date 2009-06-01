@@ -121,6 +121,7 @@ class Element extends Omeka_Record
             $this->addError('record_type_id', 'Element must have a valid record type!');
         }
         
+        // Check if the element set / element name combination already exists.
         if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
             $this->addError('name', "'$this->name' already exists for element set #$this->element_set_id");
         }
