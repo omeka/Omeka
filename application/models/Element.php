@@ -120,6 +120,10 @@ class Element extends Omeka_Record
         if (empty($this->record_type_id)) {
             $this->addError('record_type_id', 'Element must have a valid record type!');
         }
+        
+        if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
+            $this->addError('name', "'$this->name' already exists for element set #$this->element_set_id");
+        }
     }
     
     protected function _delete()
@@ -166,6 +170,18 @@ class Element extends Omeka_Record
     {
         $elementSet = $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array($elementSetName), true);
         return $elementSet->id;
+    }
+    
+    private function _nameIsInSet($elementName, $elementSetId)
+    {
+        $db = $this->getDb();
+        $sql = "SELECT COUNT(e.id) FROM $db->Element e WHERE e.name = ? AND e.element_set_id = ?";
+        $params = array($elementName, $elementSetId);
+        if ($this->exists()) {
+            $sql .= " AND e.id != ?";
+            $params[] = $this->id;
+        }
+        return (boolean)$db->fetchOne($sql, $params);
     }
     
     private function _getNextElementOrder()
