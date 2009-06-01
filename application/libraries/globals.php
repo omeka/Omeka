@@ -451,7 +451,9 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  *             'description' => [(string) description, optional], 
  *             'record_type' => [(string) record type name, optional], 
  *             'data_type'   => [(string) data type name, optional], 
- *             'order'       => [(int) order, optional]
+ *             'order'       => [(int) order, optional],
+ *             'record_type_id' => [(int) record type id, optional],
+ *             'data_type_id'   => [(int) data type id, optional]
  *         ), 
  *         [(string) element name], 
  *     );
@@ -536,12 +538,11 @@ function insert_collection($metadata = array())
  *         'description' => [(string) element set description, optional]
  *     );
  * </code>
- * @param array $elements An array containing element data. There are three 
- * ways to include elements:
+ * @param array $elements An array containing element data. Follows one of more
+ * of the following formats:
  * <ol>
- * <li>An array containing element data</li>
+ * <li>An array containing element metadata</li>
  * <li>A string of the element name</li>
- * <li>A new or existing Element record object</li>
  * </ol>
  * <code> 
  *    array(
@@ -550,10 +551,11 @@ function insert_collection($metadata = array())
  *             'description' => [(string) description, optional], 
  *             'record_type' => [(string) record type name, optional], 
  *             'data_type'   => [(string) data type name, optional], 
- *             'order'       => [(int) order, optional]
+ *             'order'       => [(int) order, optional],
+ *             'record_type_id' => [(int) record type id, optional],
+ *             'data_type_id'   => [(int) data type id, optional]
  *         ), 
- *         [(string) element name], 
- *         [(object) Element]
+ *         [(string) element name]
  *     );
  * </code>
  * @return ElementSet

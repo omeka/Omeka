@@ -72,18 +72,8 @@ class ElementSet extends Omeka_Record
     
     private function _buildElementRecord($options)
     {
-        // Seems kind of weird that someone can clone an existing element.
-        if ($options instanceof Element) {
-            if ($options->exists()) {
-                $obj = clone $options;
-            } else {
-                $obj = $options;
-            }
-        } else {
-            $obj = new Element;
-            $obj->setArray($options);
-        }
-                
+        $obj = new Element;
+        $obj->setArray($options);
         return $obj;        
     }
     
