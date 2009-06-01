@@ -240,6 +240,9 @@ class Element extends Omeka_Record
     private function _getElementSetId($elementSetName)
     {
         $elementSet = $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array($elementSetName), true);
+        if (!$elementSet) {
+            throw new Omeka_Record_Exception("Cannot set element set ID: set named '$elementSetName' does not exist.");
+        }
         return $elementSet->id;
     }
     
