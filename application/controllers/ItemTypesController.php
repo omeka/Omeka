@@ -149,7 +149,7 @@ class ItemTypesController extends Omeka_Controller_Action
             $element->setRecordType('Item');
             $element->setName((string)$this->_getParam('element-name'));
             $element->setDescription((string)$this->_getParam('element-description'));
-            $element->setDataType((int)$this->_getParam('element-data-type-id'));            
+            $element->data_type_id = (int)$this->_getParam('element-data-type-id');            
             $element->forceSave();
         }   
         
