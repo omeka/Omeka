@@ -135,12 +135,7 @@ class Item extends Omeka_Record
         
         return $creator->User;
     }
-    
-    static public function getItemRecordTypeId()
-    {
-        return get_db()->getTable('RecordType')->findIdFromName('Item');
-    }
-    
+        
     // End accessor methods
     
     // ActiveRecord callbacks
