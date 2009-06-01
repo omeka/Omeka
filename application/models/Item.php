@@ -166,7 +166,11 @@ class Item extends Omeka_Record
             unset($post['featured']);
         }
         
-        $this->_uploadFiles();
+        try {
+            $this->_uploadFiles();
+        } catch (Omeka_File_Ingest_InvalidException $e) {
+            $this->addError('File Upload', $e->getMessage());
+        }
     }
     
     /**
