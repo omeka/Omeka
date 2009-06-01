@@ -438,26 +438,23 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
   *     'description'=> [string]
   * )
  * </code>
- * @param array $elementInfos Follows the format:
- * <code>
- * array(
- *      [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
+ * @param array $elementInfos An array containing element data. Each entry follows
+ * one or more of the following formats:
+ * <ol>
+ * <li>An array containing element metadata</li>
+ * <li>A string containing the element name</li>
+ * </ol>
+ * <code> 
+ *    array(
+ *         array(
+ *             'name'        => [(string) name, required], 
+ *             'description' => [(string) description, optional], 
+ *             'record_type' => [(string) record type name, optional], 
+ *             'data_type'   => [(string) data type name, optional], 
+ *             'order'       => [(int) order, optional]
  *         ), 
- *      [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
- *         ), 
- *      [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
- *         ), 
- *         [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
- *        )
- *    )
+ *         [(string) element name], 
+ *     );
  * </code>
  * @return ItemType
  * @throws Exception
