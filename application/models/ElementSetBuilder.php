@@ -17,15 +17,32 @@ class ElementSetBuilder extends Omeka_Record_Builder
     protected $_settableProperties = array('name', 'description');
     protected $_recordClass = 'ElementSet';
     
+    private $_elementInfo = array();
+    
+    /**
+     * Constructor.
+     * 
+     * @param array|string $metadata Metadata for the element set, or string
+     * name of the element set.
+     * @param array $elements
+     * @param Omeka_Record|null
+     **/
+    public function __construct($metadata = array(), $elements = array(), $record = null)
+    {
+        if (is_string($metadata)) {
+            $metadata = array('name'=>$metadata);
+        }
+        $this->_elementInfo = $elements;
+        parent::__construct($metadata, $record);
+    }
+    
     /**
      * Add elements to be associated with the element set.
      */
     protected function _beforeBuild()
-    {
-        $elements = $this->_metadataOptions['_elements'];
-        
+    {        
         // Add elements to the element set.
-        $this->_record->addElements($elements);
+        $this->_record->addElements($this->_elementInfo);
     }
     
     /**

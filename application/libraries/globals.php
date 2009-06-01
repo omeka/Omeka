@@ -463,8 +463,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * @throws Exception
  **/
 function insert_item_type($metadata = array(), $elementInfos = array()) {
-    $metadata['_element_info'] = $elementInfos;
-    $builder = new ItemTypeBuilder($metadata);    
+    $builder = new ItemTypeBuilder($metadata, $elementInfos);    
     return $builder->build();
 }
 
@@ -564,12 +563,7 @@ function insert_collection($metadata = array())
  */
 function insert_element_set($elementSetMetadata = array(), array $elements = array())
 {
-    if (is_string($elementSetMetadata)) {
-        $elementSetMetadata = array('name' => $elementSetMetadata);
-    }
-    
-    $elementSetMetadata['_elements'] = $elements;
-    $builder = new ElementSetBuilder($elementSetMetadata);
+    $builder = new ElementSetBuilder($elementSetMetadata, $elements);
     return $builder->build();
 }
 

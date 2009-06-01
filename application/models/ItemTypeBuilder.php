@@ -18,14 +18,20 @@ class ItemTypeBuilder extends Omeka_Record_Builder
     
     protected $_settableProperties = array('name', 'description');
     
+    private $_elements = array();
+    
+    public function __construct($metadata = array(), $elements = array(), $record = null)
+    {
+        $this->_elements = $elements;
+        parent::__construct($metadata, $record);
+    }
+    
     /**
      * Add elements to be associated with the Item Type.
      */
     protected function _afterBuild()
-    {
-        $elementInfos = $this->_metadataOptions['_element_info'];
-        
-        foreach($elementInfos as $elementName => $elementConfig) {        
+    {        
+        foreach($this->_elements as $elementName => $elementConfig) {        
             $elementDescription = $elementConfig['description'];
             $elementDataTypeName = $elementConfig['data_type_name'];
             $this->_record->addElementByName($elementName, $elementDescription, $elementDataTypeName);   
