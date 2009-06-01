@@ -137,33 +137,21 @@ class ItemType extends Omeka_Record {
      * @param string Name of the element
      * @param string Description of the element
      * @param string Data type name of the element
-     * @return void
-     *
      **/
     public function addElementByName($elementName, $elementDescription=null, $elementDataTypeName='Text')
-    {        
-        $db = $this->getDb();
-        $elementName = trim($elementName);
-        $elementSetName = self::getItemTypeElementSet()->name;
-        $elementDescription = trim($elementDescription);
-        $elementDataTypeName = trim($elementDataTypeName);
-
+    {
         // make sure the element does not already exist
-        $element = $db->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
-        if (!empty($element)) {
-            throw new Omeka_Record_Exception('Element cannot be added to ItemType because it already exists: ' . $elementSetName . ', ' . $elementName);            
+        if ($this->_hasElementByName($elementName)) {
+            throw new Omeka_Record_Exception('Element cannot be added to ItemType because it already exists: ' . $elementName);            
         }            
         
         // create and configure a new element
         $element = new Element;        
-        $element->name = $elementName;
-        if ($elementDescription !== null) {
-            $element->description = $elementDescription;            
-        }
-        $elementSet = self::getItemTypeElementSet();
-        $element->element_set_id = $elementSet->id;
-        $element->record_type_id = Item::getItemRecordTypeId();                
-        $element->data_type_id = $db->getTable('DataType')->findIdFromName($elementDataTypeName);                   
+        $element->setName($elementName);
+        $element->setDescription($elementDescription);
+        $element->setElementSet(ELEMENT_SET_ITEM_TYPE);
+        $element->setRecordType('Item');
+        $element->setDataType($elementDataTypeName);
         $element->forceSave();
         
         // join the element to the item type
@@ -232,4 +220,11 @@ class ItemType extends Omeka_Record {
         return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ELEMENT_SET_ITEM_TYPE), true);
     }
     
+    /**
+     * @todo Should modify hasElement to check by name as well as element ID.
+     */
+    private function _hasElementByName($elementName)
+    {
+        return (boolean)$this->getDb()->getTable('Element')->findByElementSetNameAndElementName(ELEMENT_SET_ITEM_TYPE, $elementName);
+    }
 }

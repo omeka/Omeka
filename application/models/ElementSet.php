@@ -47,36 +47,24 @@ class ElementSet extends Omeka_Record
      * @return void
      **/
     public function addElements(array $elements)
-    {
-        // By default, new elements will work only for items and be Text fields.
-        $defaultRecordType = $this->_getDefaultRecordTypeId();
-        $defaultDataType = $this->_getDefaultDataTypeId();
-        
+    {        
         $order = $this->_getNextElementOrder();
         foreach ($elements as $options) {
             
-            $obj = $this->_buildElementRecord($options);
+            $record = $this->_buildElementRecord($options);
             
-            // Set defaults for the record_type and data_type
-            if (!$obj->record_type_id) {
-                $obj->record_type_id = $defaultRecordType;
-            }
-            
-            if (!$obj->data_type_id) {
-                $obj->data_type_id = $defaultDataType;
-            }
-            
-            if (!$obj->order) {
-                $obj->order = $order;
+            if (!$record->order) {
+                $record->setOrder($order);
             // If an order was passed, assume it is relative to the other 
             // elements that are being added, and not necessarily the actual 
             // element order for the element set. This will set the order to the 
             // highest order number plus one.
             } else {
-                $obj->order = $obj->order + ($order - 1);
+                $record->setAutoOrder(true);
+                // $record->setOrder = $obj->order + ($order - 1);
             }
             
-            $this->_elementsToSave[] = $obj;
+            $this->_elementsToSave[] = $record;
             $order++;
         }
         // var_dump($this->_elementsToSave);exit;
@@ -84,29 +72,18 @@ class ElementSet extends Omeka_Record
     
     private function _buildElementRecord($options)
     {
-        if (is_array($options)) {
-            $obj = new Element;
-            $obj->setArray($options);
-            
-            if (isset($options['record_type'])) {
-                $obj->record_type_id = $this->getTable('RecordType')->findIdFromName($options['record_type']);
-            }
-            
-            if (isset($options['data_type'])) {
-                $obj->data_type_id = $this->getTable('DataType')->findIdFromName($options['data_type']);
-            }
-        } else if ($options instanceof Element) {
+        // Seems kind of weird that someone can clone an existing element.
+        if ($options instanceof Element) {
             if ($options->exists()) {
                 $obj = clone $options;
-                $obj->id = null;
             } else {
                 $obj = $options;
             }
         } else {
             $obj = new Element;
-            $obj->name = $options;
+            $obj->setArray($options);
         }
-        
+                
         return $obj;        
     }
     
