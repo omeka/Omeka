@@ -34,37 +34,66 @@ class Element extends Omeka_Record
 
     const DEFAULT_RECORD_TYPE = 'Item';
     const DEFAULT_DATA_TYPE = 'Text';
-
+    
+    /**
+     * Set the record type for the element (Item, File, All, etc.).
+     * @param string $recordTypeName
+     */
     public function setRecordType($recordTypeName)
     {
         $this->record_type_id = $this->_getRecordTypeId($recordTypeName);
     }
     
+    /**
+     * Set the data type for the element (Text, Tiny Text, etc.).
+     * @param string $dataTypeName
+     */
     public function setDataType($dataTypeName)
     {
         $this->data_type_id = $this->_getDataTypeId($dataTypeName);
     }
     
+    /**
+     * Set the element set for the element. 
+     * @param string $elementSetName
+     */
     public function setElementSet($elementSetName)
     {
         $this->element_set_id = $this->_getElementSetId($elementSetName);
     }
     
+    /**
+     * Set the order of the element within its element set.
+     * @param integer $order
+     */
     public function setOrder($order)
     {
         $this->order = (int)$order;
     }
     
+    /**
+     * Tell the Element record whether or not to determine its own order when
+     * being saved to the database.
+     * @param boolean $flag
+     */
     public function setAutoOrder($flag)
     {
         $this->_autoOrder = (boolean)$flag;
     }
     
+    /**
+     * Set the name of the element.
+     * @param string $name
+     */
     public function setName($name)
     {
         $this->name = trim($name);
     }
     
+    /**
+     * Set the description for the element.
+     * @param string $description
+     */
     public function setDescription($description)
     {
         $this->description = (string)trim($description);
@@ -72,7 +101,19 @@ class Element extends Omeka_Record
     
     /**
      * @param array|string $data If string, it's the name of the element.  
-     * Otherwise, array of metadata for the element.
+     * Otherwise, array of metadata for the element.  May contain the following
+     * keys in the array:
+     * <ul>
+     *  <li>name</li>
+     *  <li>description</li>
+     *  <li>order</li>
+     *  <li>record_type_id</li>
+     *  <li>data_type_id</li>
+     *  <li>element_set_id</li>
+     *  <li>record_type</li>
+     *  <li>data_type</li>
+     *  <li>element_set</li>
+     * </ul>
      */
     public function setArray($data)
     {
@@ -106,7 +147,18 @@ class Element extends Omeka_Record
             } 
         }
     }
-
+    
+    /**
+     * Validate the element prior to being saved.  
+     * 
+     * Checks the following criteria:
+     * <ul>
+     *  <li>Name is not empty.</li>
+     *  <li>Has a data type.</li>
+     *  <li>Has a record type.</li>
+     *  <li>Name does not already exist within the given element set.</li>
+     * </li>
+     */
     protected function _validate()
     {
         if (empty($this->name)) {
@@ -127,6 +179,10 @@ class Element extends Omeka_Record
         }
     }
     
+    /**
+     * When deleting this element, delete all ElementText records associated 
+     * with this element.
+     */
     protected function _delete()
     {
         // Cascade delete all element texts associated with an element when deleting the element.
@@ -150,6 +206,11 @@ class Element extends Omeka_Record
         }
     }
     
+    /**
+     * If the autoOrder flag has been set, automatically determine the order of 
+     * the element within its set. 
+     * FIXME: Implement this or remove it.
+     */
     protected function beforeInsert()
     {
         if ($this->_autoOrder) {
@@ -157,22 +218,34 @@ class Element extends Omeka_Record
         }
     }
     
+    /**
+     * Retrieve the record type ID from the name.
+     */
     private function _getRecordTypeId($recordTypeName)
     {
         return $this->getDb()->getTable('RecordType')->findIdFromName($recordTypeName);
     }
     
+    /**
+     * Retrieve the data type ID from the name.
+     */
     private function _getDataTypeId($dataTypeName)
     {
         return $this->getDb()->getTable('DataType')->findIdFromName($dataTypeName);
     }
     
+    /**
+     * Retrieve the element set ID from the name.
+     */
     private function _getElementSetId($elementSetName)
     {
         $elementSet = $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array($elementSetName), true);
         return $elementSet->id;
     }
     
+    /**
+     * Calculate whether the element's name already belongs to the current set.
+     */
     private function _nameIsInSet($elementName, $elementSetId)
     {
         $db = $this->getDb();
@@ -185,6 +258,9 @@ class Element extends Omeka_Record
         return (boolean)$db->fetchOne($sql, $params);
     }
     
+    /**
+     * Calculate the next element order from the database.
+     */
     private function _getNextElementOrder()
     {
         $db = $this->getDb();
