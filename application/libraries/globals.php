@@ -551,7 +551,6 @@ function insert_collection($metadata = array())
  *             'description' => [(string) description, optional], 
  *             'record_type' => [(string) record type name, optional], 
  *             'data_type'   => [(string) data type name, optional], 
- *             'order'       => [(int) order, optional],
  *             'record_type_id' => [(int) record type id, optional],
  *             'data_type_id'   => [(int) data type id, optional]
  *         ), 

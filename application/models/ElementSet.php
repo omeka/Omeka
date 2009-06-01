@@ -41,33 +41,16 @@ class ElementSet extends Omeka_Record
     }
     
     /**
-     * Three syntaxes for accessing this:
+     * Add elements to the element set.
      * 
-     * @param array
-     * @return void
+     * @param array $elements
      **/
     public function addElements(array $elements)
     {        
-        $order = $this->_getNextElementOrder();
-        foreach ($elements as $options) {
-            
+        foreach ($elements as $order => $options) {
             $record = $this->_buildElementRecord($options);
-            
-            if (!$record->order) {
-                $record->setOrder($order);
-            // If an order was passed, assume it is relative to the other 
-            // elements that are being added, and not necessarily the actual 
-            // element order for the element set. This will set the order to the 
-            // highest order number plus one.
-            } else {
-                $record->setAutoOrder(true);
-                // $record->setOrder = $obj->order + ($order - 1);
-            }
-            
             $this->_elementsToSave[] = $record;
-            $order++;
         }
-        // var_dump($this->_elementsToSave);exit;
     }
     
     private function _buildElementRecord($options)
@@ -95,9 +78,12 @@ class ElementSet extends Omeka_Record
     
     protected function afterSave()
     {
-        foreach ($this->_elementsToSave as $obj) {
+        $maxOrder = $this->_getNextElementOrder();
+        foreach ($this->_elementsToSave as $order => $obj) {
             $obj->element_set_id = $this->id;
+            $obj->setOrder($maxOrder + (int)$order);
             $obj->forceSave();
+            unset($this->_elementsToSave[$order]);
         }
     }
     

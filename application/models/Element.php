@@ -26,12 +26,6 @@ class Element extends Omeka_Record
     public $name = '';
     public $description = '';
 
-    /**
-     * Whether or not to attempt to order the element within its element set
-     * when inserting the element into the database.
-     */
-    private $_autoOrder = false;
-
     const DEFAULT_RECORD_TYPE = 'Item';
     const DEFAULT_DATA_TYPE = 'Text';
     
@@ -70,17 +64,7 @@ class Element extends Omeka_Record
     {
         $this->order = (int)$order;
     }
-    
-    /**
-     * Tell the Element record whether or not to determine its own order when
-     * being saved to the database.
-     * @param boolean $flag
-     */
-    public function setAutoOrder($flag)
-    {
-        $this->_autoOrder = (boolean)$flag;
-    }
-    
+        
     /**
      * Set the name of the element.
      * @param string $name
@@ -205,19 +189,7 @@ class Element extends Omeka_Record
             $this->record_type_id = $this->_getRecordTypeId(self::DEFAULT_RECORD_TYPE);
         }
     }
-    
-    /**
-     * If the autoOrder flag has been set, automatically determine the order of 
-     * the element within its set. 
-     * FIXME: Implement this or remove it.
-     */
-    protected function beforeInsert()
-    {
-        if ($this->_autoOrder) {
-             throw new Omeka_Record_Exception('Implement auto-order!');
-        }
-    }
-    
+        
     /**
      * Retrieve the record type ID from the name.
      */
@@ -259,23 +231,5 @@ class Element extends Omeka_Record
             $params[] = $this->id;
         }
         return (boolean)$db->fetchOne($sql, $params);
-    }
-    
-    /**
-     * Calculate the next element order from the database.
-     */
-    private function _getNextElementOrder()
-    {
-        $db = $this->getDb();
-        $sql = "
-        SELECT MAX(`order`) + 1 
-        FROM $db->Element e 
-        WHERE e.`element_set_id` = ?";
-        $nextElementOrder = $db->fetchOne($sql, $this->element_set_id);
-        // In MySQL, NULL + 1 = NULL.
-        if (!$nextElementOrder) {
-            $nextElementOrder = 1;
-        }
-        return $nextElementOrder;
     }
 }
