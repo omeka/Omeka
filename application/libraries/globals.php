@@ -404,7 +404,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
 {
     // TODO: Maybe this should be a separate helper class.
-    $helper = new ItemBuilder(array(), $item);
+    $helper = new ItemBuilder(array(), array(), array(), $item);
     return $helper->addFiles($transferStrategy, $files, $options);
 }
 
