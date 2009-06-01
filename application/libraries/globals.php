@@ -385,11 +385,8 @@ function is_admin_theme()
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {    
-    $metadata['_element_texts'] = $elementTexts;
-    $metadata['_file_metadata'] = $fileMetadata;
-     
     // Passing null means this will create a new item.
-    $builder = new ItemBuilder($metadata);
+    $builder = new ItemBuilder($metadata, $elementTexts, $fileMetadata);
     return $builder->build();
 }
 
@@ -422,9 +419,7 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  **/
 function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $metadata['_element_texts'] = $elementTexts;
-    $metadata['_file_metadata'] = $fileMetadata;
-    $builder = new ItemBuilder($metadata, $item);
+    $builder = new ItemBuilder($metadata, $elementTexts, $fileMetadata, $item);
     return $builder->build();
 }
 
