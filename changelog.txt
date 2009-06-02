@@ -1,3 +1,708 @@
+Changes in 1.0 (updated Tue Jun  2 10:24:48 CDT 2009):
+------------------------------------------------------------------------
+r4107 | jsafley | 2009-06-01 15:10:33 -0400 (Mon, 01 Jun 2009) | 2 lines
+Changed paths:
+   M install/install_form.php
+
+Marks as required the fields in the installation form that are required.
+
+------------------------------------------------------------------------
+r4106 | kris | 2009-06-01 14:40:37 -0400 (Mon, 01 Jun 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+
+Fixes missing file upload bug from [4094].
+
+------------------------------------------------------------------------
+r4105 | kris | 2009-06-01 14:40:34 -0400 (Mon, 01 Jun 2009) | 2 lines
+Changed paths:
+   M application/models/Item.php
+
+Fixes a bug on items form where validation exceptions thrown during file uploads were interrupting processing of the form, causing form submission data to not be displayed correctly.  Fixed by catching and storing the error message for the invalid file.
+
+------------------------------------------------------------------------
+r4104 | kris | 2009-06-01 14:40:31 -0400 (Mon, 01 Jun 2009) | 2 lines
+Changed paths:
+   M application/controllers/ItemTypesController.php
+
+Fixes data_type_id error on item-types form that occurs when adding a new element to an Item Type.
+
+------------------------------------------------------------------------
+r4094 | kris | 2009-06-01 11:27:34 -0400 (Mon, 01 Jun 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+   M application/models/ItemBuilder.php
+
+Refactors ItemBuilder constructor to mirror the arguments passed to insert_item().
+
+------------------------------------------------------------------------
+r4089 | kris | 2009-05-31 20:43:42 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+   M application/models/Element.php
+   M application/models/ElementSet.php
+
+Fixes #759, fixes automatic ordering of elements within element sets.  Elements within sets are now ordered based on the order in which elements are passed to insert_element_set().
+
+------------------------------------------------------------------------
+r4088 | kris | 2009-05-31 20:43:38 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+   M application/models/ElementSet.php
+
+Refs #759, removes option to add an element to an element set by passing an Element record to ElementSet::addElements().  Updates docs for insert_element_set() and insert_item_type().
+
+------------------------------------------------------------------------
+r4087 | kris | 2009-05-31 20:43:35 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/models/Item.php
+
+Removes Item::getItemRecordTypeId() method (unused).
+
+------------------------------------------------------------------------
+r4086 | kris | 2009-05-31 20:43:33 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/models/Element.php
+
+Refs #759, throw an exception if trying to assign the element to an invalid element set.
+
+------------------------------------------------------------------------
+r4085 | kris | 2009-05-31 20:43:30 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/models/Element.php
+
+Adds doc blocks for methods in Element that were missing those.
+
+------------------------------------------------------------------------
+r4084 | kris | 2009-05-31 20:43:27 -0400 (Sun, 31 May 2009) | 3 lines
+Changed paths:
+   M application/libraries/globals.php
+
+Refs #759, updates docs for insert_item_type() to include the different format
+for passing info about elements.
+
+------------------------------------------------------------------------
+r4083 | kris | 2009-05-31 20:43:25 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/models/Element.php
+   M application/models/ItemType.php
+   M application/models/ItemTypeBuilder.php
+
+Refs #759, refactors ItemType to use ItemType::addElements() instead of ItemType::addElementByName().
+
+------------------------------------------------------------------------
+r4082 | kris | 2009-05-31 20:43:19 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/models/ElementSet.php
+
+Fixes validation of ElementSet so that lacking a name gives a validation error and not a mysql database error.
+
+------------------------------------------------------------------------
+r4081 | kris | 2009-05-31 20:43:17 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/models/Element.php
+
+Adds validation to Element to determine uniqueness of element name / element set combination prior to saving.
+
+------------------------------------------------------------------------
+r4080 | kris | 2009-05-31 20:43:00 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/controllers/ItemTypesController.php
+   M application/models/Element.php
+   M application/models/ElementSet.php
+   M application/models/ItemType.php
+
+Adds setter methods to Element and refactors ItemType::addElementByName() and ElementSet::addElement() to use those setters.  Refs #759.
+
+------------------------------------------------------------------------
+r4079 | kris | 2009-05-31 20:42:51 -0400 (Sun, 31 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+   M application/models/ElementSetBuilder.php
+   M application/models/ItemTypeBuilder.php
+
+Refactors insert_element_set() to move logic into constructor of ElementSetBuilder.  Same for insert_item_type().
+
+------------------------------------------------------------------------
+r4077 | kris | 2009-05-29 14:30:27 -0400 (Fri, 29 May 2009) | 2 lines
+Changed paths:
+   M application/models/Collection.php
+   M application/models/EntitiesRelations.php
+   M application/models/Entity.php
+   M application/models/File.php
+   M application/models/ItemSearch.php
+
+Protects/privatizes more methods in models that were unnecessarily exposed.
+
+------------------------------------------------------------------------
+r4076 | kris | 2009-05-29 10:08:07 -0400 (Fri, 29 May 2009) | 2 lines
+Changed paths:
+   M application/models/ActsAsElementText.php
+   M application/models/Collection.php
+   M application/models/CollectionPermissions.php
+   M application/models/DataTypeTable.php
+   M application/models/ElementSetBuilder.php
+   M application/models/Entity.php
+   M application/models/Item.php
+   M application/models/ItemBuilder.php
+   M application/models/ItemPermissions.php
+   M application/models/ItemSearch.php
+   M application/models/ItemTable.php
+   M application/models/ItemType.php
+   M application/models/Orderable.php
+   M application/models/Relatable.php
+   M application/models/Taggable.php
+
+Changes all thrown instances of Exception to Omeka_Record_Exception within the models.
+
+------------------------------------------------------------------------
+r4075 | kris | 2009-05-29 10:07:43 -0400 (Fri, 29 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Record.php
+   A application/libraries/Omeka/Record/Exception.php
+
+Implements Omeka_Record_Exception class and modifies Omeka_Record to throw that instead of plain Exception.
+
+------------------------------------------------------------------------
+r4074 | kris | 2009-05-29 09:15:24 -0400 (Fri, 29 May 2009) | 2 lines
+Changed paths:
+   M application/models/ItemType.php
+
+Protects/privatizes a couple of methods in ItemType that were unnecessarily exposed.
+
+------------------------------------------------------------------------
+r4073 | wriley | 2009-05-28 18:09:16 -0400 (Thu, 28 May 2009) | 2 lines
+Changed paths:
+   M application/helpers/FileFunctions.php
+   M application/helpers/FormFunctions.php
+   M application/helpers/Functions.php
+   M application/helpers/ItemFunctions.php
+   M application/helpers/LinkFunctions.php
+   M application/helpers/PluginFunctions.php
+   A application/helpers/StringFunctions.php
+   M application/helpers/UserFunctions.php
+   M application/helpers/all.php
+
+Fixes ticket 775, moving helper functions into more relevant helper files.  Adds StringFunctions.php.
+
+------------------------------------------------------------------------
+r4069 | kris | 2009-05-28 15:27:13 -0400 (Thu, 28 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/collections/browse.php
+   M admin/themes/default/collections/show.php
+   M admin/themes/default/common/login-footer.php
+   M admin/themes/default/css/ie7.css
+   M admin/themes/default/css/login.css
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/users/login.php
+
+Styling and markup fixes for admin, particularly for IE7.
+
+------------------------------------------------------------------------
+r4065 | wriley | 2009-05-27 16:39:00 -0400 (Wed, 27 May 2009) | 2 lines
+Changed paths:
+   A application/helpers/CollectionFunctions.php
+   M application/helpers/DataRetrievalFunctions.php
+   A application/helpers/FileFunctions.php
+   M application/helpers/FormFunctions.php
+   M application/helpers/Functions.php
+   A application/helpers/ItemFunctions.php
+   M application/helpers/LinkFunctions.php
+   D application/helpers/NewThemeFunctions.php
+   A application/helpers/PluginFunctions.php
+   M application/helpers/UrlFunctions.php
+   A application/helpers/UserFunctions.php
+   M application/helpers/all.php
+
+Fixes ticket #722, moving helper functions from NewThemeFunctions.php to helper function files with more descriptive names.  Adds several new helper function files including,  PluginFunctions.php, ItemFunctions.php, CollectionFunctions.php, and UserFunctions.php. Removes NewThemeFunctions.php.
+
+------------------------------------------------------------------------
+r4063 | kris | 2009-05-27 15:45:45 -0400 (Wed, 27 May 2009) | 2 lines
+Changed paths:
+   M application/models/ElementSet.php
+
+Protects/privatizes some unnecessarily exposed methods in ElementSet.
+
+------------------------------------------------------------------------
+r4058 | jboggs | 2009-05-26 17:21:13 -0400 (Tue, 26 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/login.css
+
+Fixes a CSS issue on login form, introduced in [4057].
+
+------------------------------------------------------------------------
+r4057 | jboggs | 2009-05-26 16:55:07 -0400 (Tue, 26 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+
+Removes hidden overflow from content, which allows tables and other content to flow outside the content div without being cut off.
+
+------------------------------------------------------------------------
+r4050 | jflatnes | 2009-05-26 10:49:46 -0400 (Tue, 26 May 2009) | 2 lines
+Changed paths:
+   M application/models/TagTable.php
+
+Fixes tags bug from [4047]
+
+------------------------------------------------------------------------
+r4049 | jflatnes | 2009-05-22 17:15:05 -0400 (Fri, 22 May 2009) | 2 lines
+Changed paths:
+   M application/models/CollectionPermissions.php
+   M application/models/FileTable.php
+
+Fixes bug in [4074], applies same ACL convention to FileTable.
+
+------------------------------------------------------------------------
+r4047 | jflatnes | 2009-05-22 16:48:59 -0400 (Fri, 22 May 2009) | 2 lines
+Changed paths:
+   M application/models/CollectionPermissions.php
+   M application/models/CollectionTable.php
+   M application/models/ItemPermissions.php
+   M application/models/ItemTable.php
+
+Checks if the ACL exists before attempting to apply permissions.
+
+------------------------------------------------------------------------
+r4046 | jflatnes | 2009-05-22 16:06:53 -0400 (Fri, 22 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Db/Table.php
+
+Fixes parameter cast in Omeka_Db_Table->getSelectForFind.
+
+------------------------------------------------------------------------
+r4038 | kris | 2009-05-21 16:31:26 -0400 (Thu, 21 May 2009) | 2 lines
+
+Changes externals definitions of plugins and themes on stable-1.0 to point to trunk.
+
+------------------------------------------------------------------------
+r4035 | kris | 2009-05-21 16:21:56 -0400 (Thu, 21 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+
+Fixes #764 prevents tags from being obscured when hovering over tabs on admin/tags/browse in IE7.
+
+------------------------------------------------------------------------
+r4034 | jboggs | 2009-05-21 15:23:13 -0400 (Thu, 21 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/components.css
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/items/browse.php
+   M admin/themes/default/items/form.php
+
+Fixes #771 item title should not obscure checkboxes on admin, Fixes #762 flash message on admin/items/browse should not overlap with search or pagination, Fixes #763 adds pagination to bottom of admin/items/browse.
+
+------------------------------------------------------------------------
+r4018 | kris | 2009-05-19 15:45:46 -0400 (Tue, 19 May 2009) | 2 lines
+Changed paths:
+   A application/views/scripts/javascripts/tiny_mce/classes/AddOnManager.js
+   A application/views/scripts/javascripts/tiny_mce/classes/CommandManager.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ControlManager.js
+   A application/views/scripts/javascripts/tiny_mce/classes/Developer.js
+   A application/views/scripts/javascripts/tiny_mce/classes/Editor.js
+   A application/views/scripts/javascripts/tiny_mce/classes/EditorCommands.js
+   A application/views/scripts/javascripts/tiny_mce/classes/EditorManager.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ForceBlocks.js
+   A application/views/scripts/javascripts/tiny_mce/classes/Popup.js
+   A application/views/scripts/javascripts/tiny_mce/classes/UndoManager.js
+   A application/views/scripts/javascripts/tiny_mce/classes/WindowManager.js
+   A application/views/scripts/javascripts/tiny_mce/classes/adapter/jquery/adapter.js
+   A application/views/scripts/javascripts/tiny_mce/classes/adapter/prototype/adapter.js
+   A application/views/scripts/javascripts/tiny_mce/classes/commands/BlockQuote.js
+   A application/views/scripts/javascripts/tiny_mce/classes/commands/CutCopyPaste.js
+   A application/views/scripts/javascripts/tiny_mce/classes/commands/InsertHorizontalRule.js
+   A application/views/scripts/javascripts/tiny_mce/classes/commands/RemoveFormat.js
+   A application/views/scripts/javascripts/tiny_mce/classes/commands/UndoRedo.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/DOMUtils.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/Element.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/Event.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/Range.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/ScriptLoader.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/Selection.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/Serializer.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/Sizzle.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/StringWriter.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/TridentSelection.js
+   A application/views/scripts/javascripts/tiny_mce/classes/dom/XMLWriter.js
+   A application/views/scripts/javascripts/tiny_mce/classes/firebug/firebug-lite.js
+   A application/views/scripts/javascripts/tiny_mce/classes/tinymce.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/Button.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/ColorSplitButton.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/Container.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/Control.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/DropMenu.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/ListBox.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/Menu.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/MenuButton.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/MenuItem.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/NativeListBox.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/Separator.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/SplitButton.js
+   A application/views/scripts/javascripts/tiny_mce/classes/ui/Toolbar.js
+   A application/views/scripts/javascripts/tiny_mce/classes/util/Cookie.js
+   A application/views/scripts/javascripts/tiny_mce/classes/util/Dispatcher.js
+   A application/views/scripts/javascripts/tiny_mce/classes/util/JSON.js
+   A application/views/scripts/javascripts/tiny_mce/classes/util/JSONP.js
+   A application/views/scripts/javascripts/tiny_mce/classes/util/JSONRequest.js
+   A application/views/scripts/javascripts/tiny_mce/classes/util/URI.js
+   A application/views/scripts/javascripts/tiny_mce/classes/util/XHR.js
+   A application/views/scripts/javascripts/tiny_mce/classes/xml/Parser.js
+   M application/views/scripts/javascripts/tiny_mce/langs/en.js
+   M application/views/scripts/javascripts/tiny_mce/license.txt
+   M application/views/scripts/javascripts/tiny_mce/plugins/advhr/css/advhr.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/advhr/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advhr/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advhr/js/rule.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advhr/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advhr/rule.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/advimage/css/advimage.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/advimage/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advimage/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advimage/image.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/advimage/img/sample.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/advimage/js/image.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advimage/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advlink/css/advlink.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/advlink/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advlink/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advlink/js/advlink.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advlink/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/advlink/link.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/autosave/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/autosave/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/bbcode/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/bbcode/editor_plugin_src.js
+   D application/views/scripts/javascripts/tiny_mce/plugins/codeprotect/editor_plugin.js
+   D application/views/scripts/javascripts/tiny_mce/plugins/codeprotect/langs/en.js
+   D application/views/scripts/javascripts/tiny_mce/plugins/codeprotect/readme.txt
+   M application/views/scripts/javascripts/tiny_mce/plugins/compat2x/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/compat2x/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/contextmenu/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/contextmenu/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/directionality/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/directionality/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/emotions.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-cool.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-cry.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-embarassed.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-foot-in-mouth.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-frown.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-innocent.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-kiss.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-laughing.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-money-mouth.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-sealed.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-smile.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-surprised.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-tongue-out.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-undecided.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-wink.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/img/smiley-yell.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/js/emotions.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/emotions/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/example/dialog.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/example/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/example/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/example/img/example.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/example/js/dialog.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/example/langs/en.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/example/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullpage/css/fullpage.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullpage/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullpage/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullpage/fullpage.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullpage/js/fullpage.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullpage/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullscreen/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullscreen/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/fullscreen/fullscreen.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/iespell/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/iespell/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/buttons.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/inlinepopups/template.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/insertdatetime/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/insertdatetime/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/layer/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/layer/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/css/content.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/css/media.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/img/flash.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/img/flv_player.swf
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/img/quicktime.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/img/realmedia.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/img/shockwave.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/img/trans.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/img/windowsmedia.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/js/embed.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/js/media.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/media/media.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/nonbreaking/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/nonbreaking/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/noneditable/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/noneditable/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/pagebreak/css/content.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/pagebreak/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/pagebreak/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/pagebreak/img/pagebreak.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/pagebreak/img/trans.gif
+   D application/views/scripts/javascripts/tiny_mce/plugins/paste/blank.htm
+   D application/views/scripts/javascripts/tiny_mce/plugins/paste/css/blank.css
+   D application/views/scripts/javascripts/tiny_mce/plugins/paste/css/pasteword.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/paste/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/paste/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/paste/js/pastetext.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/paste/js/pasteword.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/paste/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/paste/pastetext.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/paste/pasteword.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/preview/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/preview/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/preview/example.html
+   M application/views/scripts/javascripts/tiny_mce/plugins/preview/jscripts/embed.js
+   A application/views/scripts/javascripts/tiny_mce/plugins/preview/preview.html
+   M application/views/scripts/javascripts/tiny_mce/plugins/print/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/print/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/safari/blank.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/safari/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/safari/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/save/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/save/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/searchreplace/css/searchreplace.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/searchreplace/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/searchreplace/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/searchreplace/js/searchreplace.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/searchreplace/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/searchreplace/searchreplace.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/spellchecker/css/content.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/spellchecker/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/spellchecker/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/spellchecker/img/wline.gif
+   M application/views/scripts/javascripts/tiny_mce/plugins/style/css/props.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/style/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/style/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/style/js/props.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/style/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/style/props.htm
+   A application/views/scripts/javascripts/tiny_mce/plugins/tabfocus/editor_plugin.js
+   A application/views/scripts/javascripts/tiny_mce/plugins/tabfocus/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/cell.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/css/cell.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/css/row.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/css/table.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/js/cell.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/js/merge_cells.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/js/row.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/js/table.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/merge_cells.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/row.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/table/table.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/template/blank.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/template/css/template.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/template/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/template/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/template/js/template.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/template/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/template/template.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/visualchars/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/visualchars/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/abbr.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/acronym.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/attributes.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/cite.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/css/attributes.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/css/popup.css
+   D application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/css/xhtmlxtras.css
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/del.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/editor_plugin.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/editor_plugin_src.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/ins.htm
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/js/abbr.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/js/acronym.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/js/attributes.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/js/cite.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/js/del.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/js/element_common.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/js/ins.js
+   M application/views/scripts/javascripts/tiny_mce/plugins/xhtmlxtras/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/about.htm
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/anchor.htm
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/charmap.htm
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/color_picker.htm
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/editor_template.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/editor_template_src.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/image.htm
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/img/colorpicker.jpg
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/img/icons.gif
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/js/about.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/js/anchor.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/js/charmap.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/js/color_picker.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/js/image.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/js/link.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/js/source_editor.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/langs/en.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/langs/en_dlg.js
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/link.htm
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/content.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/dialog.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/img/buttons.png
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/img/items.gif
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/img/menu_arrow.gif
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/img/menu_check.gif
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/img/progress.gif
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/img/tabs.gif
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/default/ui.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/content.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/dialog.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/img/button_bg.png
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_black.png
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_silver.png
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/ui.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/ui_black.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/skins/o2k7/ui_silver.css
+   M application/views/scripts/javascripts/tiny_mce/themes/advanced/source_editor.htm
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/editor_template.js
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/editor_template_src.js
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/img/icons.gif
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/langs/en.js
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/skins/default/content.css
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/skins/default/ui.css
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/skins/o2k7/content.css
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/skins/o2k7/img/button_bg.png
+   M application/views/scripts/javascripts/tiny_mce/themes/simple/skins/o2k7/ui.css
+   M application/views/scripts/javascripts/tiny_mce/tiny_mce.js
+   A application/views/scripts/javascripts/tiny_mce/tiny_mce_dev.js
+   A application/views/scripts/javascripts/tiny_mce/tiny_mce_jquery.js
+   A application/views/scripts/javascripts/tiny_mce/tiny_mce_jquery_src.js
+   M application/views/scripts/javascripts/tiny_mce/tiny_mce_popup.js
+   A application/views/scripts/javascripts/tiny_mce/tiny_mce_prototype.js
+   A application/views/scripts/javascripts/tiny_mce/tiny_mce_prototype_src.js
+   M application/views/scripts/javascripts/tiny_mce/tiny_mce_src.js
+   M application/views/scripts/javascripts/tiny_mce/utils/editable_selects.js
+   M application/views/scripts/javascripts/tiny_mce/utils/form_utils.js
+   M application/views/scripts/javascripts/tiny_mce/utils/mctabs.js
+   M application/views/scripts/javascripts/tiny_mce/utils/validate.js
+
+Refs #761, updates TinyMCE to v3.2.3.1 to help fix TinyMCE error in IE.
+
+------------------------------------------------------------------------
+r4013 | kris | 2009-05-18 14:12:14 -0400 (Mon, 18 May 2009) | 2 lines
+Changed paths:
+   M application/models/ElementSet.php
+
+Fixes #760, inserting element sets with a pre-existing name overwrote the element set instead of throwing validation error.
+
+------------------------------------------------------------------------
+r4012 | kris | 2009-05-18 14:05:50 -0400 (Mon, 18 May 2009) | 4 lines
+Changed paths:
+   A application/libraries/Omeka/Record/Builder.php
+   A application/libraries/Omeka/Record/Builder/Exception.php
+   M application/libraries/globals.php
+   A application/models/CollectionBuilder.php
+   A application/models/ElementSetBuilder.php
+   M application/models/ItemBuilder.php
+   A application/models/ItemTypeBuilder.php
+
+Fixes #758, inconsistencies in how insert helpers behave with respect to saving records.
+
+Implements the following classes: Omeka_Record_Builder, Omeka_Record_Builder_Exception, CollectionBuilder, ElementSetBuilder, ItemTypeBuilder.
+
+------------------------------------------------------------------------
+r4011 | wriley | 2009-05-18 12:53:29 -0400 (Mon, 18 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/globals.php
+   M application/models/Collection.php
+   M application/models/EntityTable.php
+   M application/models/Relatable.php
+
+* Adds collectors parameter to insert_collection function, so collectors can be added to a collection when it is created.
+
+------------------------------------------------------------------------
+r4009 | wriley | 2009-05-14 18:50:50 -0400 (Thu, 14 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/items/form.php
+
+Refactors functions that add and remove tags so that they can be accessed by plugins and other external code.
+
+------------------------------------------------------------------------
+r4008 | jboggs | 2009-05-14 16:58:53 -0400 (Thu, 14 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+
+Fixes display of tables with th tags inside a tbody tag, makes floating of the pagination occur only on the items/browse page, and not float by default.
+
+------------------------------------------------------------------------
+r4006 | kris | 2009-05-14 15:54:13 -0400 (Thu, 14 May 2009) | 2 lines
+Changed paths:
+   M admin/themes/default/css/screen.css
+   M admin/themes/default/files/edit.php
+   M admin/themes/default/files/show.php
+
+Fixes #750, fatal error on files/edit form on admin panel.
+
+------------------------------------------------------------------------
+r4004 | kris | 2009-05-14 10:25:05 -0400 (Thu, 14 May 2009) | 9 lines
+Changed paths:
+   M application/helpers/NewThemeFunctions.php
+   M application/libraries/Omeka/Db/Table.php
+   M application/models/ElementTable.php
+   M application/views/scripts/items/advanced-search.php
+
+Fixes #752, advanced search returned incorrect results.
+
+Fixes issue with advanced search form displaying file element fields that are not currently searchable.  Fixed by preventing those elements from being displayed on the form.
+
+ * Omeka_Db_Table::findPairsForSelectForm(): Added an $options argument to allow to hook into search/filtering built into table classes.
+ * _select_from_table(): Added an additional argument to allow use of table search via Omeka_Db_Table::findPairsForSelectForm().
+ * select_item_type_elements(), select_collection(), select_element(), select_user(), select_entity(): Modified to make use of changes to _select_from_table().
+ * Implemented ElementTable::applySearchFilters() with some criteria (record_types, sort, element_set_name) and modified call to select_element() on advanced search form to make use of this criteria to fix the bug.
+
+------------------------------------------------------------------------
+r4003 | kris | 2009-05-14 10:24:51 -0400 (Thu, 14 May 2009) | 2 lines
+Changed paths:
+   M application/models/ItemSearch.php
+
+Refs #752, fixes advanced search so that it correctly returns results for items (not incorrectly representing file metadata as item metadata in the search results).
+
+------------------------------------------------------------------------
+r4000 | wriley | 2009-05-13 10:56:11 -0400 (Wed, 13 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/Validate/File/Extension.php
+
+Merges [3997:3998] from trunk to stable-1.0.
+
+------------------------------------------------------------------------
+r3999 | kris | 2009-05-13 10:45:13 -0400 (Wed, 13 May 2009) | 2 lines
+Changed paths:
+   M application/models/Item.php
+
+Fixes #749, exceptions thrown when uploading files to a new item does not prevent creation of the new item.  Fixed by moving file uploads to the beforeSaveForm hook.
+
+------------------------------------------------------------------------
+r3985 | wriley | 2009-05-07 16:31:36 -0400 (Thu, 07 May 2009) | 2 lines
+Changed paths:
+   M application/libraries/Omeka/File/Ingest/Source.php
+   M application/libraries/Omeka/File/Ingest/Url.php
+
+Fixed bug #747.  Users can now file ingest jpeg files via url, so the CsvImport plugin can now ingest jpeg files via url.
+
+------------------------------------------------------------------------
 Changes in 1.0beta (updated Tue May  5 12:51:53 CDT 2009):
 ------------------------------------------------------------------------
 r3956 | jsafley | 2009-05-04 16:03:04 -0400 (Mon, 04 May 2009) | 2 lines
