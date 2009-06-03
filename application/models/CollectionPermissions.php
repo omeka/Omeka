@@ -26,7 +26,7 @@ class CollectionPermissions
             if ($sql->hasJoin('c')) {
                 $sql->where("c.public = 1");
             } else {
-                throw new Exception( "Invalid query provided to CollectionPermissions check" );
+                throw new Omeka_Record_Exception( "Invalid query provided to CollectionPermissions check" );
             }
         }
     }

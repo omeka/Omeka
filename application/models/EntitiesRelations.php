@@ -34,7 +34,7 @@ class EntitiesRelations extends Omeka_Record
     }
     
     //@todo Move this to CURRENT_TIMESTAMP() SQL
-    public function beforeInsert()
+    protected function beforeInsert()
     {
         $this->time = date('YmdHis');
     }

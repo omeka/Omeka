@@ -84,7 +84,7 @@ class Entity extends Omeka_Record
      *
      * @return void
      **/
-    public function _delete()
+    protected function _delete()
     {        
         $id = (int) $this->id;
         
@@ -121,7 +121,7 @@ class Entity extends Omeka_Record
     {
         try {
             if (!$this->exists() or !$entity->exists()) {
-                throw new Exception( 'Both of these Entities must be persistent in order to merge them.' );
+                throw new Omeka_Record_Exception( 'Both of these Entities must be persistent in order to merge them.' );
             }
             
             $db = $this->getDb();

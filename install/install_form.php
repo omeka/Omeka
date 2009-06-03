@@ -57,16 +57,16 @@ function formValue($name, $defaultValue = '')
     <fieldset>
         <legend>Default Super User Account</legend>
         <div class="field">
-            <label for="username">Username</label>
+            <label for="username">Username (required)</label>
             <input type="text" class="textinput" name="username" value="<?php echo formValue('username'); ?>" />
         </div>
         <div class="field">
-            <label for="password">Password</label>
+            <label for="password">Password (required)</label>
             <input class="textinput" type="password" name="password" value="<?php echo formValue('password'); ?>"/>
 <p class="explanation">Must be a least six characters</p>
         </div>
         <div class="field">
-            <label for="super_email">Email</label>
+            <label for="super_email">Email (required)</label>
             <input class="textinput" type="text" name="super_email" id="super_email" value="<?php echo formValue('super_email'); ?>">
         </div>
     </fieldset>

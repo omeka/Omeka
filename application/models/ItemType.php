@@ -24,8 +24,10 @@ class ItemType extends Omeka_Record {
     protected $_related = array('Elements' => 'getElements', 
                                 'Items'=>'getItems',
                                 'ItemTypesElements'=>'loadOrderedChildren');
-
-    public function construct()
+    
+    private $_elementsToSave = array();
+    
+    protected function construct()
     {
         // For future reference, these arguments mean: 
         // 1) the current object
@@ -37,7 +39,7 @@ class ItemType extends Omeka_Record {
         // always contain the 'Elements' key with a subkey called 'order', so that
         // the array looks something like this: $_POST['Elements'][0]['order'] = 1, etc.
         // NOTE: this has been changed to 'fooobar' in order to circumvent using
-        // Orderable::afterSaveForm() in favor of ItemType::reorderElementsFromPost().
+        // Orderable::afterSaveForm() in favor of ItemType::_reorderElementsFromPost().
         $this->_mixins[] = new Orderable($this, 'ItemTypesElements', 'item_type_id', 'fooobar');
     }
     
@@ -97,10 +99,37 @@ class ItemType extends Omeka_Record {
     protected function beforeSaveForm($post)
     {
         if ($this->exists()) {
-            $this->reorderElementsFromPost($post);
+            $this->_reorderElementsFromPost($post);
         }
     }
-
+    
+    /**
+     * Save Element records that are associated with this Item Type.
+     * 
+     * @internal Duplication with ElementSet::afterSave().  Could resolve in 
+     * future by refactoring into a mixin that handles record dependencies.
+     */
+    protected function afterSave()
+    {
+        foreach ($this->_elementsToSave as $key => $element) {
+            $element->forceSave();
+            $this->addElementById($element->id);
+            unset($this->_elementsToSave[$key]);
+        }
+    }
+    
+    /**
+     * Validate the elements to ensure saveability-ness.
+     */
+    protected function afterValidate()
+    {
+        foreach ($this->_elementsToSave as $key => $element) {
+            if (!$element->isValid()) {
+                $this->addError("Element #$key", $element->getErrors());
+            }
+        }
+    }
+    
     /**
      * This extracts the ordering for the elements from the form's POST, then uses 
      * the given ordering to resort the join records from item_types_elements into
@@ -109,12 +138,12 @@ class ItemType extends Omeka_Record {
      * @param string
      * @return void
      **/
-    public function reorderElementsFromPost(&$post)
+    private function _reorderElementsFromPost(&$post)
     {
         $elementPostArray = $post['Elements'];
         
         if (!array_key_exists('order', current($elementPostArray))) {
-            throw new Exception('Form was submitted in an invalid format!');
+            throw new Omeka_Record_Exception('Form was submitted in an invalid format!');
         }
         
         // This is how we sort the multi-dimensional array based on the element_order.
@@ -130,46 +159,23 @@ class ItemType extends Omeka_Record {
         }
     }
     
-    
     /**
-     * Adds a new element to the item type by the name of the element
-     * 
-     * @param string Name of the element
-     * @param string Description of the element
-     * @param string Data type name of the element
-     * @return void
-     *
-     **/
-    public function addElementByName($elementName, $elementDescription=null, $elementDataTypeName='Text')
-    {        
-        $db = $this->getDb();
-        $elementName = trim($elementName);
-        $elementSetName = self::getItemTypeElementSet()->name;
-        $elementDescription = trim($elementDescription);
-        $elementDataTypeName = trim($elementDataTypeName);
-
-        // make sure the element does not already exist
-        $element = $db->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
-        if (!empty($element)) {
-            throw new Exception('Element cannot be added to ItemType because it already exists: ' . $elementSetName . ', ' . $elementName);            
-        }            
-        
-        // create and configure a new element
-        $element = new Element;        
-        $element->name = $elementName;
-        if ($elementDescription !== null) {
-            $element->description = $elementDescription;            
+     * Add a set of elements to the Item Type.
+     * @param array $elementInfo Array of metadata where each entry corresponds
+     * to a new element to add to the item type.  
+     * @uses Element::setArray() For details on the format for passing metadata
+     * through $elementInfo.
+     */    
+    public function addElements($elementInfo = array())
+    {
+        foreach ($elementInfo as $elementMetadata) {
+            $record = new Element;
+            $record->setArray($elementMetadata);
+            $record->setElementSet(ELEMENT_SET_ITEM_TYPE);
+            $record->setRecordType('Item');
+            $this->_elementsToSave[] = $record;
         }
-        $elementSet = self::getItemTypeElementSet();
-        $element->element_set_id = $elementSet->id;
-        $element->record_type_id = Item::getItemRecordTypeId();                
-        $element->data_type_id = $db->getTable('DataType')->findIdFromName($elementDataTypeName);                   
-        $element->forceSave();
-        
-        // join the element to the item type
-        $this->addElementById($element->id);
     }
-    
     
     /**
      * Adds a new element to the item type by the id of the element
@@ -200,14 +206,14 @@ class ItemType extends Omeka_Record {
     public function removeElement($elementId)
     {
         if (!$this->exists()) {
-            throw new Exception('Cannot remove elements from an item type that is not persistent in the database!');
+            throw new Omeka_Record_Exception('Cannot remove elements from an item type that is not persistent in the database!');
         }
         
         // Find the join record and delete it.
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?', array($elementId, $this->id), true);
     
         if (!$iteJoin) {
-            throw new Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
+            throw new Omeka_Record_Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
         }
         
         $iteJoin->delete();
@@ -230,6 +236,5 @@ class ItemType extends Omeka_Record {
     {
         // Element should belong to the 'Item Type' element set.
         return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ELEMENT_SET_ITEM_TYPE), true);
-    }
-    
+    }    
 }

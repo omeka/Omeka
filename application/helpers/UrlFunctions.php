@@ -121,3 +121,154 @@ function file_display_uri($file, $format='fullsize')
 	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
 	return uri($options, 'display');
 }
+
+/**
+ * Given an Omeka_Record instance and the name of an action, this will generated
+ * the URI for that record.  Used primarily by other theme helpers and most likely
+ * not useful for theme writers.
+ * 
+ * @since 0.10
+ * @param Omeka_Record $record
+ * @param string $action
+ * @param string|null $controller Optional
+ * @return string
+ **/
+function record_uri(Omeka_Record $record, $action, $controller = null)
+{
+    $options = array();
+    // Inflect the name of the controller from the record class if no
+    // controller name is given.
+    if (!$controller) {
+        $recordClass = get_class($record);
+        $inflector = new Zend_Filter_Word_CamelCaseToDash();
+        // Convert the record class name from CamelCased to dashed-lowercase.
+        $controller = strtolower($inflector->filter($recordClass));
+        // Pluralize the record class name.
+        $controller = Inflector::pluralize($controller);
+    }
+    $options['controller'] = $controller;
+    $options['id'] = $record->id;
+    $options['action'] = $action;
+    
+    // Use the 'id' route for all urls pointing to records
+    return uri($options, 'id');
+}
+
+/**
+ * Retrieve a URL for the current item.
+ * 
+ * @since 0.10
+ * @param string $action Action to link to for this item.  Default is 'show'.
+ * @uses record_uri()
+ * @param Item|null Check for this specific item record (current item if null).
+ * @return string URL
+ **/
+function item_uri($action = 'show', $item=null)
+{
+    if (!$item) {
+        $item = get_current_item();
+    }
+    return record_uri($item, $action);
+}
+
+/**
+ * This behaves as uri() except it always provides a url to the public theme.
+ * 
+ * @since 0.10
+ * @see uri()
+ * @see admin_uri()
+ * @param mixed
+ * @return string
+ **/
+function public_uri()
+{
+    set_theme_base_uri('public');
+    $args = func_get_args();
+    $url = call_user_func_array('uri', $args);
+    set_theme_base_uri();
+    return $url;
+}
+
+/**
+ * @since 0.10
+ * @see public_uri()
+ * @param mixed
+ * @return mixed
+ **/
+function admin_uri()
+{
+    set_theme_base_uri('admin');
+    $args = func_get_args();
+    $url = call_user_func_array('uri', $args);
+    set_theme_base_uri();
+    return $url;
+}
+
+/**
+ * Generate an absolute URI.
+ * 
+ * Useful because Zend Framework's default URI helper generates relative URLs,
+ * though absolute URIs are required in some contexts.
+ * 
+ * @internal The code for generating the base URL is copied directly from paths.php.
+ * Not sure whether this would be better defined as a constant in paths.php, 
+ * though my feeling is that paths.php is too cluttered and that having too many
+ * constants makes the app harder to test.  Also the WEB_ROOT is already defined
+ * as the root path to Omeka, not just the http://domain part of the URL, which 
+ * is what we need in this instance.  This function will be used sparingly 
+ * anyway, since relative URIs are better in most instances.
+ * 
+ * @since 0.10
+ * @todo Code that generates the http://hostname part of the URI might be better
+ * to have as a separate helper function, called by this one.
+ * @uses uri()
+ * @param mixed
+ * @return string HTML
+ **/
+function abs_uri()
+{
+    // Create base URL
+    $base_root = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
+    $base_root .= '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);    
+    $args = func_get_args();
+    return $base_root . call_user_func_array('uri', $args);
+}
+
+/**
+ * Generate an absolute URI to an item.  Primarily useful for generating permalinks.
+ * 
+ * @since 0.10
+ * @param Item|null Check for this specific item record (current item if null).
+ * @return void
+ **/
+function abs_item_uri($item = null)
+{
+    if (!$item) {
+        $item = get_current_item();
+    }
+    
+    return abs_uri(array('controller'=>'items', 'action'=>'show', 'id'=>$item->id), 'id');
+}
+
+/**
+ * Example: set_theme_base_uri('public');  uri('items');  --> example.com/items.
+ * @access private
+ * @since 0.10
+ * @param string
+ * @return void
+ **/
+function set_theme_base_uri($theme = null)
+{
+    switch ($theme) {
+        case 'public':
+            $baseUrl = PUBLIC_BASE_URL;
+            break;
+        case 'admin':
+            $baseUrl = ADMIN_BASE_URL;
+            break;
+        default:
+            $baseUrl = CURRENT_BASE_URL;
+            break;
+    }
+    return Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
+}

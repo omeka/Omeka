@@ -27,12 +27,12 @@ class ItemSearch
         $this->_select = $select;
     }
     
-    public function getSelect()
+    private function _getSelect()
     {
         return $this->_select;
     }
     
-    public function getDb()
+    private function _getDb()
     {
         return Omeka_Context::getInstance()->getDb();
     }
@@ -46,9 +46,9 @@ class ItemSearch
      **/
     public function advanced($advanced)
     {
-        $db = $this->getDb();
+        $db = $this->_getDb();
 
-        $select = $this->getSelect();
+        $select = $this->_getSelect();
                         
         foreach ($advanced as $k => $v) {
             
@@ -84,7 +84,7 @@ class ItemSearch
                     $predicate = "IS NOT NULL";
                     break;
                 default:
-                    throw new Exception( 'Invalid search type given!' );
+                    throw new Omeka_Record_Exception( 'Invalid search type given!' );
                     break;
             }
             
@@ -121,8 +121,8 @@ class ItemSearch
      **/    
     public function simple($terms)
     {
-        $db = $this->getDb();
-        $select = $this->getSelect();
+        $db = $this->_getDb();
+        $select = $this->_getSelect();
         
         /*
         SELECT i.*, s.rank
@@ -153,7 +153,7 @@ class ItemSearch
     
     protected function _getElementsQuery($terms)
     {
-        $db = $this->getDb();
+        $db = $this->_getDb();
         $quotedTerms = $db->quote($terms);
                 
         // This doesn't really need to use a Select object because this query
@@ -170,7 +170,7 @@ class ItemSearch
     
     protected function _getTagsQuery($terms)
     {
-        $db = $this->getDb();
+        $db = $this->_getDb();
         
         $rank = 1;
 

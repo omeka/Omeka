@@ -385,11 +385,8 @@ function is_admin_theme()
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {    
-    $metadata['_element_texts'] = $elementTexts;
-    $metadata['_file_metadata'] = $fileMetadata;
-     
     // Passing null means this will create a new item.
-    $builder = new ItemBuilder($metadata);
+    $builder = new ItemBuilder($metadata, $elementTexts, $fileMetadata);
     return $builder->build();
 }
 
@@ -407,7 +404,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
 {
     // TODO: Maybe this should be a separate helper class.
-    $helper = new ItemBuilder(array(), $item);
+    $helper = new ItemBuilder(array(), array(), array(), $item);
     return $helper->addFiles($transferStrategy, $files, $options);
 }
 
@@ -422,9 +419,7 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  **/
 function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $metadata['_element_texts'] = $elementTexts;
-    $metadata['_file_metadata'] = $fileMetadata;
-    $builder = new ItemBuilder($metadata, $item);
+    $builder = new ItemBuilder($metadata, $elementTexts, $fileMetadata, $item);
     return $builder->build();
 }
 
@@ -438,33 +433,31 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
   *     'description'=> [string]
   * )
  * </code>
- * @param array $elementInfos Follows the format:
- * <code>
- * array(
- *      [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
+ * @param array $elementInfos An array containing element data. Each entry follows
+ * one or more of the following formats:
+ * <ol>
+ * <li>An array containing element metadata</li>
+ * <li>A string containing the element name</li>
+ * </ol>
+ * <code> 
+ *    array(
+ *         array(
+ *             'name'        => [(string) name, required], 
+ *             'description' => [(string) description, optional], 
+ *             'record_type' => [(string) record type name, optional], 
+ *             'data_type'   => [(string) data type name, optional], 
+ *             'order'       => [(int) order, optional],
+ *             'record_type_id' => [(int) record type id, optional],
+ *             'data_type_id'   => [(int) data type id, optional]
  *         ), 
- *      [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
- *         ), 
- *      [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
- *         ), 
- *         [element name] => array(
- *             'description' => [string],
- *             'data_type_name' => [string]
- *        )
- *    )
+ *         [(string) element name], 
+ *     );
  * </code>
  * @return ItemType
  * @throws Exception
  **/
 function insert_item_type($metadata = array(), $elementInfos = array()) {
-    $metadata['_element_info'] = $elementInfos;
-    $builder = new ItemTypeBuilder($metadata);    
+    $builder = new ItemTypeBuilder($metadata, $elementInfos);    
     return $builder->build();
 }
 
@@ -540,12 +533,11 @@ function insert_collection($metadata = array())
  *         'description' => [(string) element set description, optional]
  *     );
  * </code>
- * @param array $elements An array containing element data. There are three 
- * ways to include elements:
+ * @param array $elements An array containing element data. Follows one of more
+ * of the following formats:
  * <ol>
- * <li>An array containing element data</li>
+ * <li>An array containing element metadata</li>
  * <li>A string of the element name</li>
- * <li>A new or existing Element record object</li>
  * </ol>
  * <code> 
  *    array(
@@ -554,22 +546,17 @@ function insert_collection($metadata = array())
  *             'description' => [(string) description, optional], 
  *             'record_type' => [(string) record type name, optional], 
  *             'data_type'   => [(string) data type name, optional], 
- *             'order'       => [(int) order, optional]
+ *             'record_type_id' => [(int) record type id, optional],
+ *             'data_type_id'   => [(int) data type id, optional]
  *         ), 
- *         [(string) element name], 
- *         [(object) Element]
+ *         [(string) element name]
  *     );
  * </code>
  * @return ElementSet
  */
 function insert_element_set($elementSetMetadata = array(), array $elements = array())
 {
-    if (is_string($elementSetMetadata)) {
-        $elementSetMetadata = array('name' => $elementSetMetadata);
-    }
-    
-    $elementSetMetadata['_elements'] = $elements;
-    $builder = new ElementSetBuilder($elementSetMetadata);
+    $builder = new ElementSetBuilder($elementSetMetadata, $elements);
     return $builder->build();
 }
 

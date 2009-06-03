@@ -2,7 +2,7 @@
 
 <h1>Log In</h1>
 <p id="login-links">
-<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><a href="<?php echo uri('users/forgot-password'); ?>">Lost your password?</a></spans>
+<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><a href="<?php echo uri('users/forgot-password'); ?>">Lost your password?</a></span>
 </p>
 	<?php
 	if (isset($errorMessage)):
@@ -28,7 +28,7 @@
         <?php echo $this->formCheckbox('remember', null, array('class' => 'checkbox')); ?>
 	</div>
 	</fieldset>
-	<input type="submit" class="submit-small submit" value="Log In" />
+	<div><input type="submit" class="submit-small submit" value="Log In" /></div>
 </form>
 
 <?php foot(array(),'login-footer'); ?>

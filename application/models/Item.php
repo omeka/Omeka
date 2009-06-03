@@ -135,12 +135,7 @@ class Item extends Omeka_Record
         
         return $creator->User;
     }
-    
-    static public function getItemRecordTypeId()
-    {
-        return get_db()->getTable('RecordType')->findIdFromName('Item');
-    }
-    
+        
     // End accessor methods
     
     // ActiveRecord callbacks
@@ -171,7 +166,11 @@ class Item extends Omeka_Record
             unset($post['featured']);
         }
         
-        $this->_uploadFiles();
+        try {
+            $this->_uploadFiles();
+        } catch (Omeka_File_Ingest_InvalidException $e) {
+            $this->addError('File Upload', $e->getMessage());
+        }
     }
     
     /**
@@ -281,7 +280,7 @@ class Item extends Omeka_Record
     public function saveFiles()
     {
         if (!$this->exists()) {
-            throw new Exception("Files cannot be attached to an item that is "
+            throw new Omeka_Record_Exception("Files cannot be attached to an item that is "
                                 . "not persistent in the database!");
         }
         
@@ -389,11 +388,11 @@ class Item extends Omeka_Record
     public function addFile(File $file)
     {
         if ($file->exists()) {
-            throw new Exception("Cannot add an existing file to an item!");
+            throw new Omeka_Record_Exception("Cannot add an existing file to an item!");
         }
         
         if (!$file->isValid()) {
-            throw new Exception("File must be valid before it can be associated"
+            throw new Omeka_Record_Exception("File must be valid before it can be associated"
                                 . " with an item!");
         }
         

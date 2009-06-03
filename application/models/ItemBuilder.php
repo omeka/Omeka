@@ -15,12 +15,22 @@ class ItemBuilder extends Omeka_Record_Builder
     protected $_recordClass = 'Item';
     protected $_settableProperties = array('item_type_id', 'collection_id', 'public', 'featured');
     
+    private $_elementTexts = array();
+    private $_fileMetadata = array();
+    
+    public function __construct($metadata = array(), $elementTexts = array(), $fileMetadata = array(), $record = null)
+    {
+        $this->_elementTexts = $elementTexts;
+        $this->_fileMetadata = $fileMetadata;
+        parent::__construct($metadata, $record);
+    }
+    
     /**
      * Add element texts to a record.
      */            
     private function _addElementTexts()
     {
-        return $this->_record->addElementTextsByArray($this->_metadataOptions['_element_texts']);
+        return $this->_record->addElementTextsByArray($this->_elementTexts);
     }    
     
     /**
@@ -28,12 +38,11 @@ class ItemBuilder extends Omeka_Record_Builder
      */    
     private function _replaceElementTexts()
     {
-        $elementTexts = $this->_metadataOptions['_element_texts'];
         $item = $this->_record;
         // If this option is set, it will loop through the $elementTexts provided,
         // find each one and manually update it (provided it exists).
         // The rest of the element texts will get added as per usual.
-        foreach ($elementTexts as $elementSetName => $textArray) {
+        foreach ($this->_elementTexts as $elementSetName => $textArray) {
             foreach ($textArray as $elementName => $elementTextSet) {
                 $etRecordSet = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
                 foreach ($elementTextSet as $elementTextIndex => $textAttr) {
@@ -184,14 +193,14 @@ class ItemBuilder extends Omeka_Record_Builder
         // exceptions that bubble up will prevent the item from being saved.  On
         // the other hand, if 'ignore_invalid_files' is set to true, then the 
         // item will be saved as normally.
-        if (array_key_exists('files', $this->_metadataOptions['_file_metadata'])) {
-            if (!array_key_exists('file_transfer_type', $this->_metadataOptions['_file_metadata'])) {
-                throw new Exception("Must specify 'file_transfer_type' when attaching files to an item!");
+        if (array_key_exists('files', $this->_fileMetadata)) {
+            if (!array_key_exists('file_transfer_type', $this->_fileMetadata)) {
+                throw new Omeka_Record_Builder_Exception("Must specify 'file_transfer_type' when attaching files to an item!");
             }
             $this->addFiles(
-                $this->_metadataOptions['_file_metadata']['file_transfer_type'], 
-                $this->_metadataOptions['_file_metadata']['files'], 
-                (array)$this->_metadataOptions['_file_metadata']['file_ingest_options']);
+                $this->_fileMetadata['file_transfer_type'], 
+                $this->_fileMetadata['files'], 
+                (array)$this->_fileMetadata['file_ingest_options']);
         }
     }
     

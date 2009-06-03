@@ -35,7 +35,7 @@ class Taggable extends Omeka_Record_Mixin
             case 'joinTable':
                 return $this->getDb()->getTable('Taggings');
             default:
-                throw new Exception('No property exists!');
+                throw new Omeka_Record_Exception('No property exists!');
                 break;
         }
     }
@@ -179,11 +179,11 @@ class Taggable extends Omeka_Record_Mixin
      **/    
     public function addTags($tags, $entityOrUser, $delimiter=',') {
         if (!$this->record->id) {
-            throw new Exception( 'A valid record ID # must be provided when tagging.' );
+            throw new Omeka_Record_Exception( 'A valid record ID # must be provided when tagging.' );
         }
         
         if (!$entityOrUser) {
-            throw new Exception( 'A valid entity or user must be provided when tagging.' );
+            throw new Omeka_Record_Exception( 'A valid entity or user must be provided when tagging.' );
         }
         
         if (!is_array($tags)) {

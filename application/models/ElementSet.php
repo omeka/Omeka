@@ -41,72 +41,22 @@ class ElementSet extends Omeka_Record
     }
     
     /**
-     * Three syntaxes for accessing this:
+     * Add elements to the element set.
      * 
-     * @param array
-     * @return void
+     * @param array $elements
      **/
     public function addElements(array $elements)
-    {
-        // By default, new elements will work only for items and be Text fields.
-        $defaultRecordType = $this->_getDefaultRecordTypeId();
-        $defaultDataType = $this->_getDefaultDataTypeId();
-        
-        $order = $this->_getNextElementOrder();
-        foreach ($elements as $options) {
-            
-            $obj = $this->_buildElementRecord($options);
-            
-            // Set defaults for the record_type and data_type
-            if (!$obj->record_type_id) {
-                $obj->record_type_id = $defaultRecordType;
-            }
-            
-            if (!$obj->data_type_id) {
-                $obj->data_type_id = $defaultDataType;
-            }
-            
-            if (!$obj->order) {
-                $obj->order = $order;
-            // If an order was passed, assume it is relative to the other 
-            // elements that are being added, and not necessarily the actual 
-            // element order for the element set. This will set the order to the 
-            // highest order number plus one.
-            } else {
-                $obj->order = $obj->order + ($order - 1);
-            }
-            
-            $this->_elementsToSave[] = $obj;
-            $order++;
+    {        
+        foreach ($elements as $order => $options) {
+            $record = $this->_buildElementRecord($options);
+            $this->_elementsToSave[] = $record;
         }
-        // var_dump($this->_elementsToSave);exit;
     }
     
     private function _buildElementRecord($options)
     {
-        if (is_array($options)) {
-            $obj = new Element;
-            $obj->setArray($options);
-            
-            if (isset($options['record_type'])) {
-                $obj->record_type_id = $this->getTable('RecordType')->findIdFromName($options['record_type']);
-            }
-            
-            if (isset($options['data_type'])) {
-                $obj->data_type_id = $this->getTable('DataType')->findIdFromName($options['data_type']);
-            }
-        } else if ($options instanceof Element) {
-            if ($options->exists()) {
-                $obj = clone $options;
-                $obj->id = null;
-            } else {
-                $obj = $options;
-            }
-        } else {
-            $obj = new Element;
-            $obj->name = $options;
-        }
-        
+        $obj = new Element;
+        $obj->setArray($options);
         return $obj;        
     }
     
@@ -128,9 +78,12 @@ class ElementSet extends Omeka_Record
     
     protected function afterSave()
     {
-        foreach ($this->_elementsToSave as $obj) {
+        $maxOrder = $this->_getNextElementOrder();
+        foreach ($this->_elementsToSave as $order => $obj) {
             $obj->element_set_id = $this->id;
+            $obj->setOrder($maxOrder + (int)$order);
             $obj->forceSave();
+            unset($this->_elementsToSave[$order]);
         }
     }
     
@@ -167,6 +120,10 @@ class ElementSet extends Omeka_Record
     {
         if (!$this->fieldIsUnique('name')) {
             $this->addError('Name', 'Name of element set must be unique.');
+        }
+        
+        if (empty($this->name)) {
+            $this->addError('Name', 'Name of element set must not be empty.');
         }
     }
 }

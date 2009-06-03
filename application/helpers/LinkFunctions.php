@@ -44,6 +44,87 @@ function link_to($record, $action=null, $text='View', $props = array())
 }
 
 /**
+ * Retrieve HTML for a link to the advanced search form.
+ * 
+ * @since 0.10
+ * @param string $text Optional Text of the link. Default is 'Advanced Search'.
+ * @param array $props Optional XHTML attributes for the link.
+ * @return string
+ **/
+function link_to_advanced_search($text = 'Advanced Search', $props = array())
+{
+    // Is appending the query string directly a security issue?  We should figure that out.
+    $props['href'] = uri('items/advanced-search') . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+    return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
+}
+
+/**
+ * Get the proper HTML for a link to the browse page for items, with any appropriate
+ * filtering parameters passed to the URL.
+ * 
+ * @since 0.10
+ * @param string $text Text to display in the link.
+ * @param array $browseParams Optional Any parameters to use to build the browse page URL, e.g.
+ * array('collection' => 1) would build items/browse?collection=1 as the URL.
+ * @param array $linkProperties Optional XHTML attributes for the link.
+ * @return string HTML
+ **/
+function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
+{
+    // Set the link href to the items/browse page.
+    $linkProperties['href'] = uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
+    return "<a " . _tag_attributes($linkProperties) . ">$text</a>";
+}
+
+/**
+ * Link to the collection that the current item belongs to.
+ * 
+ * The default text displayed for this link will be the name of the collection,
+ * but that can be changed by passing a string argument.
+ * 
+ * @since 0.10
+ * @param string|null $text Optional Text for the link.
+ * @param array $props Optional XHTML attributes for the <a> tag.
+ * @param string $action Optional 'show' by default.
+ * @return string
+ **/
+function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
+{
+    return link_to_collection($text, $props, $action, get_collection_for_item());
+}
+
+/**
+ * Retrieve the HTML for a link to the file metadata page for a particular file.
+ * 
+ * If no File object is specified, this will determine the file to use through
+ * context.
+ * 
+ * The text of the link defaults to the original filename of the file unless
+ * otherwise specified.
+ * 
+ * @since 1.0
+ * @uses get_current_file()
+ * @uses item_file()
+ * @param array
+ * @param string
+ * @param File
+ * @return string
+ **/
+function link_to_file_metadata($attributes = array(), $text = null, $file = null)
+{
+    if (!$file) {
+        $file = get_current_file();
+    }
+    
+    if (!$text) {
+        // By default we should just display the original filename of the file.
+        $text = item_file('Original Filename', null, array(), $file);
+    }
+    
+    return link_to($file, 'show', $text, $attributes);
+}
+
+/**
  * @since 0.10 Function signature has changed so that the item to link to can be
  * determined by the context of the function call.  Also, text passed to the link
  * must be valid HTML (will not be automatically escaped because any HTML can be
@@ -165,4 +246,253 @@ function link_to_admin_home_page($text = null, $props = array())
         $text = settings('site_title');
     }
 	return '<a href="'.admin_uri('').'" '._tag_attributes($props).'>'. $text."</a>\n";
+}
+
+/**
+ * Retrieve a tag cloud of all the tags for the current item.
+ * 
+ * @since 0.10
+ * @see item_tags_as_string()
+ * @param string
+ * @param boolean $tagsAreLinked Optional Whether or not to make each tag a link
+ * to browse all the items with that tag.  True by default.
+ * @param Item|null Check for this specific item record (current item if null).
+ * @return string
+ **/
+function item_tags_as_cloud($order = null, $tagsAreLinked = true, $item=null)
+{
+    if (!$item) {
+        $item = get_current_item();
+    }
+    $tags = get_tags(array('sort'=>$order, 'record'=>$item));
+    $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
+    return tag_cloud($tags, $urlToLinkTo);
+}
+
+/**
+ * Output the tags for the current item as a string.
+ * 
+ * @todo Should this take a set of parameters instead of $order?  That would be 
+ * good for limiting the # of tags returned by the query.
+ * @since 0.10
+ * @see item_tags_as_cloud()
+ * @param string $delimiter String that separates each tag.  Default is a comma 
+ * and space.
+ * @param string|null $order Options include 'recent', 'most', 'least', 'alpha'.  
+ * Default is null, which means that tags will display in the order they were
+ * entered via the form.
+ * @param boolean $tagsAreLinked If tags should be linked or just represented as
+ * text.  Default is true.
+ * @param Item|null Check for this specific item record (current item if null).
+ * @return string HTML
+ **/
+function item_tags_as_string($delimiter = ', ', $order = null,  $tagsAreLinked = true, $item=null)
+{
+    if (!$item) {
+        $item = get_current_item();
+    }
+    $tags = get_tags(array('sort'=>$order, 'record'=>$item));
+    $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
+    return tag_string($tags, $urlToLinkTo, $delimiter);
+}
+
+/**
+ * Generate an unordered list of navigation links, with class "current" for any links corresponding to the current page
+ *
+ * For example:
+ * <code>nav(array('Themes' => uri('themes/browse')));</code>
+ * generates 
+ * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
+ * 
+ * @uses is_current_uri()
+ * @param array A keyed array, where Key = Text of Navigation and Value = Link
+ * @return string HTML for the unordered list
+ **/
+function nav(array $links) 
+{	
+	$current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+	$nav = '';
+	foreach( $links as $text => $link ) {		
+		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . html_escape($text) . '</a></li>' . "\n";
+	}
+	return $nav;
+}
+
+/**
+ * Retrieve HTML for the set of pagination links.
+ * 
+ * @since 0.10
+ * @param array $options Optional Configurable parameters for the pagination 
+ * links.  The following options are available:
+ *      'scrolling_style' (string) See Zend_View_Helper_PaginationControl
+  * for more details.  Default 'Sliding'.  
+ *      'partial_file' (string) View script to use to render the pagination HTML.
+ * Default is 'common/pagination_control.php'.
+ *      'page_range' (integer) See Zend_Paginator::setPageRange() for details.
+ * Default is 5.
+ *      'total_results' (integer) Total results to paginate through.  Default is
+ * provided by the 'total_results' key of the 'pagination' array that is typically
+ * registered by the controller.
+ *      'page' (integer) Current page of the result set.  Default is the 'page'
+ * key of the 'pagination' array.
+ *      'per_page' (integer) Number of results to display per page.  Default is
+ * the 'per_page' key of the 'pagination' array.
+ * @return string HTML for the pagination links.
+ **/
+function pagination_links($options = array('scrolling_style' => null, 
+                                     'partial_file'    => null, 
+                                     'page_range'      => null, 
+                                     'total_results'   => null, 
+                                     'page'            => null, 
+                                     'per_page'        => null))
+{
+    if (Zend_Registry::isRegistered('pagination')) {
+        // If the pagination variables are registered, set them for local use.
+        $p = Zend_Registry::get('pagination');
+	} else {
+        // If the pagination variables are not registered, set required defaults 
+        // arbitrarily to avoid errors.
+        $p = array('total_results'   => 1, 
+                   'page'            => 1, 
+                   'per_page'        => 1);
+    }
+    
+    // Set preferred settings.
+    $scrollingStyle   = $options['scrolling_style'] ? $options['scrolling_style']     : 'Sliding';
+    $partial          = $options['partial_file']    ? $options['partial_file']        : 'common' . DIRECTORY_SEPARATOR . 'pagination_control.php';
+    $pageRange        = $options['page_range']      ? (int) $options['page_range']    : 5;
+    $totalCount       = $options['total_results']   ? (int) $options['total_results'] : (int) $p['total_results'];
+    $pageNumber       = $options['page']            ? (int) $options['page']          : (int) $p['page'];
+    $itemCountPerPage = $options['per_page']        ? (int) $options['per_page']      : (int) $p['per_page'];
+    
+    // Create an instance of Zend_Paginator.
+    $paginator = Zend_Paginator::factory($totalCount);
+    
+    // Configure the instance.
+    $paginator->setCurrentPageNumber($pageNumber)
+              ->setItemCountPerPage($itemCountPerPage)
+              ->setPageRange($pageRange);
+    
+    return __v()->paginationControl($paginator, 
+                                    $scrollingStyle, 
+                                    $partial);
+}
+
+/**
+ * Helper function to be used in public themes to allow plugins to modify the navigation of those themes.
+ *
+ * Plugins can modify navigation by adding filters to specific subsets of the
+ *  navigation. For instance, most themes will have what might be called a 'main'
+ *  navigation set on the header of the site. This main navigation header would
+ *  be attached to a filter called 'public_navigation_main', which would always
+ *  act on that particular navigation. You would signal to the plugins to
+ *  differentiate between the different navigation elements by passing the 2nd
+ *  argument as 'main', so that it knew that this was the main navigation.
+ *
+ * @since 0.10
+ * @see apply_filters()
+ * @param array
+ * @param string|null
+ * @return string HTML
+ **/
+function public_nav(array $navArray, $navType=null)
+{
+    if ($navType) {
+        $filterName = 'public_navigation_' . $navType;
+        $navArray = apply_filters($filterName, $navArray);
+    }
+    return nav($navArray);
+}
+
+/**
+ * Alias for public_nav($array, 'main'). This is to avoid potential typos so
+ *  that all plugins can count on having at least a 'main' navigation filter in
+ *  the public themes.
+ * 
+ * @since 0.10
+ * @param array
+ * @uses public_nav()
+ * @return string
+ **/
+function public_nav_main(array $navArray)
+{
+    return public_nav($navArray, 'main');
+}
+
+/**
+ * Create a tag cloud made of divs that follow the hTagcloud microformat
+ *
+ * @param array $tags Set of tags to display in the cloud
+ * @param string|null The URI to use in the link for each tag.  If none given,
+ *      tags in the cloud will not be given links.
+ * @return string HTML for the tag cloud
+ **/
+function tag_cloud($tags, $link = null, $maxClasses = 9)
+{
+	if (!$tags) {
+		$html = '<p>No tags are available.</p>';
+		return $html;
+	} 
+	
+	//Get the largest value in the tags array
+	$largest = 0;
+	foreach ($tags as $tag) {
+		if($tag["tagCount"] > $largest) {
+			$largest = $tag['tagCount'];
+		}
+	}
+	$html = '<div class="hTagcloud">';
+	$html .= '<ul class="popularity">';
+	
+	if ($largest < $maxClasses) {
+		$maxClasses = $largest;
+	}
+
+	foreach( $tags as $tag ) {
+		$size = (int)(($tag['tagCount'] * $maxClasses) / $largest - 1);
+		$class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
+		$html .= '<li class="' . $class . '">';
+		if ($link) {
+			$html .= '<a href="' . $link . '?tags=' . urlencode($tag['name']) . '">';
+		}
+		$html .= html_escape($tag['name']);
+		if ($link) {
+			$html .= '</a>';
+		}
+		$html .= '</li>' . "\n";
+	}
+ 	$html .= '</ul></div>';
+
+	return $html;
+}
+
+/**
+ * Output a tag string given an Item, Exhibit, or a set of tags.
+ *
+ * @internal Any record that has the Taggable module can be passed to this function
+ * @param Omeka_Record|array $record The record to retrieve tags from, or the actual array of tags
+ * @param string|null $link The URL to use for links to the tags (if null, tags aren't linked)
+ * @param string $delimiter ', ' (comma and whitespace) by default
+ * @return string HTML
+ **/
+function tag_string($record, $link=null, $delimiter=', ')
+{
+	$string = array();
+	if ($record instanceof Omeka_Record) {
+		$tags = $record->Tags;
+	} else {
+		$tags = $record;
+	}
+
+	if (!empty($tags)) {
+		foreach ($tags as $key=>$tag) {
+			if (!$link) {
+				$string[$key] = html_escape($tag['name']);
+			} else {
+				$string[$key] = '<a href="'.$link.urlencode($tag['name']).'" rel="tag">'.html_escape($tag['name']).'</a>';
+			}
+		}
+		$string = join($delimiter,$string);
+		return $string;
+	}
 }

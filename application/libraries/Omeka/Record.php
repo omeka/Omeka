@@ -125,7 +125,7 @@ class Omeka_Record implements ArrayAccess
             }
         }
         if (count($this->_mixins) and !$called) {
-            throw new Exception( "Method named $method does not exist!"  );
+            throw new Omeka_Record_Exception( "Method named $method does not exist!"  );
         }
     }
     
@@ -322,7 +322,7 @@ class Omeka_Record implements ArrayAccess
     public function save()
     {    
         if ($this->_locked) {
-            throw new Exception('Cannot save a locked record!');
+            throw new Omeka_Record_Exception('Cannot save a locked record!');
         }
         
         if (!$this->isValid()) {
@@ -386,7 +386,7 @@ class Omeka_Record implements ArrayAccess
     public function delete()
     {
         if ($this->_locked) {
-            throw new Exception( 'Cannot delete a locked record!' );
+            throw new Omeka_Record_Exception( 'Cannot delete a locked record!' );
         }
         
         if (!$this->exists()) {

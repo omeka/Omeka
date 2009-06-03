@@ -41,7 +41,7 @@ class File extends Omeka_Record {
     public $modified;
 
     
-    public function construct()
+    protected function construct()
     {
         $this->_mixins[] = new ActsAsElementText($this);
     }

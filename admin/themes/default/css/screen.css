@@ -60,9 +60,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		
 		th,td {padding:0.75em 0.5em 0.5em;}
 		tr.even {}
-		tr {border-bottom:1px dotted #d7d5c4;}
-	
-	table * {font-size:1em;margin:0;}
+		tbody td {border-bottom:1px dotted #d7d5c4;}
+	table * {font-size:1em;margin:0 !important;}
 			
 	/* Form Buttons */
 	#add-item, #save-changes, #edit-item {float:right; text-decoration:none;}
@@ -118,12 +117,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 #wrap {}
 
 /* == Header == */
-#header {background:#251e16; padding-top: 0;clear:both;overflow:hidden; zoom:1;}
+#header {background:#251e16; padding-top: 0;clear:both;overflow:hidden; }
 
 	#site-title {margin:18px 0;margin-left:36px;float:left; width: 20em;}
 	#site-title a {text-decoration:none; color:#fff;}
 	
-	#site-info {float:right; text-align:right; padding-top:10px;margin-right: 3px;}
+	#site-info {float:right; text-align:right; padding:10px 0;margin-right: 3px;}
 	#site-info a {color:#fff; text-decoration:none;}
 	
 		#welcome {display:inline; padding: 8px 12px;color: #999; font-size:1.1em;}
@@ -135,7 +134,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		#public-link:hover {background: #389;}
 	
 	/* Primary Nav */
-	.primary-nav {overflow:hidden; zoom:1;border:1px solid #777;background:#382e22;clear:both; margin-bottom:0;padding-left:36px;border-width:1px 0 0; font-size:1.1em; font-weight:normal;}
+	.primary-nav {overflow:hidden; border:1px solid #777;background:#382e22;clear:both; margin-bottom:0;padding-left:36px;border-width:1px 0 0; font-size:1.1em; font-weight:normal;}
 		.primary-nav li {display:block; float:left; width: 125px;border-right:1px solid #d7d5c4;}
 		.primary-nav a {text-decoration:none;display:block; float:left; text-indent:12px;color:#fafafa;width: 125px;padding: 8px 0 16px;background:#2E261C;}
 		.primary-nav a:visited {color:#fafafa;}
@@ -153,7 +152,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	
 	/* Homepage */
 	
-		#getting-started dl {overflow:hidden;margin-bottom:18px;zoom:1; margin-left:0;display:block;}
+		#getting-started dl {overflow:hidden;margin-bottom:18px; margin-left:0;display:block;}
 		#getting-started dl * {font-size:1em;}
 			#getting-started a {text-decoration:none;}
 			#getting-started dt {clear: both; border-bottom:1px dotted #ccc; font-size:1.4em; display:block; padding-bottom:8px;margin-bottom:9px;}
@@ -166,26 +165,26 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		/* Info Panels - styles that enhance or override the component library styles */	
 		#tag-cloud li, #tag-cloud li a {padding:0; border:none;background-image:none; display:inline;}
 		#recent-items ul {margin-bottom:0;}
-		#recent-items ul a {overflow:hidden; zoom:1;}
-		#recent-items #view-all-items a {display:block; text-decoration:none; background:url("../images/bullet_go.gif") 100% 6px no-repeat; width: 7em;float:right;padding:6px 18px;}
+		#recent-items ul a {overflow:hidden; }
+		#recent-items #view-all-items a {display:block; text-decoration:none; background:url("../images/bullet_go.gif") 100% 6px no-repeat; width: 8em;float:right;padding:6px 18px; text-align:right;}
 	
 	/* Item Browse styles */
 	
 	.browse-items .simple li.nav-list-view a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
 	
 	#items-browse {clear:both;}
-	#browse-meta {overflow:hidden; zoom:1;padding-bottom:18px;border-bottom:2px solid #d7d5c4;clear:both;}
+	#browse-meta {overflow:hidden; padding-bottom:18px;border-bottom:2px solid #d7d5c4;clear:both;}
 	table#items {width:100%;} 
 		
 	.items #primary {clear:right;}
 	#detailed {padding-top:18px;}
-	#detailed .item {overflow:hidden; zoom:1; position:relative; border-bottom: 1px dotted #ccc;margin-bottom:18px;}
+	#detailed .item {overflow:hidden;  position:relative; border-bottom: 1px dotted #ccc;margin-bottom:18px;}
 	#detailed .item h2, #detailed .item .edit-item {display:inline;}
 	#detailed .item-description {float:left; width: 396px; font-size:1.2em; line-height:1.5em;margin-right:18px;margin-top:18px;}
 		#detailed .item-description img {float:left; margin-right:18px;}
 	#detailed .item-meta {float:right; clear:right;; width: 396px;}
 	#detailed .item-meta ul {font-size:1.1em;}
-	#detailed .item-meta li {padding: 9px 18px; background: #fafaf7; text-align:right; overflow:hidden; zoom:1;border-bottom:2px solid #fff;}
+	#detailed .item-meta li {padding: 9px 18px; background: #fafaf7; text-align:right; overflow:hidden; border-bottom:2px solid #fff;}
 	#detailed .item-meta li span {font-weight:bold;float:left; width: 10%;}
 	
 	#detailed .public-featured-checkboxes {float:right; clear:right;margin-bottom:9px;}
@@ -210,7 +209,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
 		 	label.use-html { position:relative;float:left;padding-left: 16px;width: 8em;text-align:left; font-size:1.1em;margin:0;}
 		
-			.input-block {clear:both;position:relative;overflow:hidden; zoom:1;padding-top:2em;}
+			.input-block {clear:both;position:relative;overflow:hidden; padding-top:2em;}
 			
 			label.use-html input {position:absolute; top:0; left:0; margin:0;float:none;padding:0;}
 
@@ -248,7 +247,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		
 	#delete-file-link {float:left; position:absolute; bottom:20px; left: 18px;width: 200px;}
 	/* Advanced Search Form */
-	.search-entry {margin-bottom:6px; overflow:hidden;zoom:1;}
+	.search-entry {margin-bottom:6px; overflow:hidden;}
 	
 	/* Tags Browse */
 	#tags-nav {font-size:1.1em;margin-bottom:3em;}
@@ -295,13 +294,13 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		#plugin-info .deactivate:hover {background-position: 0 -30px !important;}
 		
 	/* Themes */
-	#themeswitch .themes {margin-right:-18px; overflow:hidden; zoom:1;margin-bottom:-18px;}
-	#themeswitch .theme {overflow:hidden; zoom:1; margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;float:left; width: 296px;}
+	#themeswitch .themes {margin-right:-18px; overflow:hidden; margin-bottom:-18px;}
+	#themeswitch .theme {overflow:hidden;  margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;float:left; width: 296px;}
 		#themeswitch .theme img {}
 		#themeswitch .theme .description {height: 150px; border:1px solid #d7d5c4; overflow:hidden;}
 		#themeswitch label {float:none !important; text-align:left; font-size:1.2em;width: auto;}
 
-		#current-theme {background: #F2F1E8; overflow:hidden; zoom:1;padding: 18px;margin-bottom:18px;}
+		#current-theme {background: #F2F1E8; overflow:hidden; padding: 18px;margin-bottom:18px;}
 		#current-theme img {border:6px solid #fff; float:right; margin-left:18px;}
 		
 		#current-theme .type {font-weight:bold;}
@@ -309,11 +308,11 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		#current-theme .value {display:block; margin-bottom:18px;}
 
 /* == Footer == */
-#footer {clear:both; padding: 18px 0 1px;  overflow:hidden; zoom:1;margin:0 36px; width: 882px;background: #eae9db;}
+#footer {clear:both; padding: 18px 0 1px;  overflow:hidden; margin:0 36px; width: 882px;background: #eae9db;}
 	#footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}
 	#footer a {text-decoration:none; font-weight:bold; color: #c50;}
 	#footer .primary-nav {float:right; width: 50%; text-align:right;}
-	#footer p {float:left; width: 50%;}
+	#footer p {float:left;}
 	#footer .primary-nav li {display:inline;margin-left:1em;}
 	
 /* == Autocomplete (used for Scriptaculous Autocomplete) == */	
