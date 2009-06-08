@@ -3,7 +3,7 @@
 db.host = ""
 db.username = ""
 db.password = ""
-db.name = ""
+db.dbname = ""
 
 ; Root URL of the testing installation, for use in web-based unit tests
 app.url = ""

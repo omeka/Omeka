@@ -12,7 +12,7 @@ class Models_InsertItemTest extends Omeka_Model_TestCase
     {
         // Verify that there are no items in the test database.
         $sql = "SELECT COUNT(*) FROM $tableName";
-        $count = $this->_zendDbAdapter->fetchOne($sql);
+        $count = $this->_adapter->fetchOne($sql);
         $this->assertEquals($count, 0);
     }
     
@@ -26,11 +26,11 @@ class Models_InsertItemTest extends Omeka_Model_TestCase
             array('public'=>true), 
             array('Dublin Core'=>array('Title'=>array(array('text'=>'foobar', 'html'=>true)))));
         $sql = "SELECT id, public FROM omeka_items";
-        $row = $this->_zendDbAdapter->fetchRow($sql);
+        $row = $this->_adapter->fetchRow($sql);
         $this->assertEquals(array('id'=>1, 'public'=>1), $row);
         
         // Verify that element texts are inserted correctly into the database.
         $sql = "SELECT COUNT(id) FROM omeka_element_texts WHERE html = 1 AND text = 'foobar'";
-        $this->assertEquals(1, $this->_zendDbAdapter->fetchOne($sql));
+        $this->assertEquals(1, $this->_adapter->fetchOne($sql));
     }
 }
