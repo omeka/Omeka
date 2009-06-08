@@ -26,8 +26,7 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
         // This is a subclass of Omeka_Core, which has had its routeStartup()
         // hook redefined to load a custom sequence that is easier to test with.
         // This may point towards the need for further refactorings.
-        require_once 'CoreTestPlugin.php';
-        $core = new CoreTestPlugin;
+        $core = new Omeka_Controller_Plugin_CoreTest;
                 
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin($core);
