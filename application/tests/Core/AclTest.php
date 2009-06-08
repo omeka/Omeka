@@ -25,7 +25,7 @@ class AclTest extends PHPUnit_Framework_TestCase
         
         //Verify that contributor has proper permissions
         $this->assertTrue($acl->isAllowed('contributor', 'Items', 'add'));
-        $this->assertFalse($acl->isAllowed('contributor', 'Types', 'add'));
+        $this->assertFalse($acl->isAllowed('contributor', 'ItemTypes', 'add'));
         $this->assertFalse($acl->isAllowed('contributor', 'Plugins', 'add'));
     }
 }
