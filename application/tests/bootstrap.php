@@ -28,3 +28,7 @@ error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 // Append the testing class library.
 define('TEST_LIB_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'libraries');
 set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
+
+// Class loader (copied from Omeka_Core::initializeClassLoader()).
+require_once 'Omeka.php';
+spl_autoload_register(array('Omeka', 'autoload'));
