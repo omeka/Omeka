@@ -6,7 +6,7 @@
  * @package Omeka_Test
  **/
 
-class InsertItemTest extends Omeka_Model_TestCase
+class Models_InsertItemTest extends Omeka_Model_TestCase
 {
     protected function _assertTableIsEmpty($tableName)
     {

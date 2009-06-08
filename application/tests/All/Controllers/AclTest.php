@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class AclTest extends Omeka_Controller_TestCase
+class Controllers_AclTest extends Omeka_Controller_TestCase
 {    
     public function init()
     {

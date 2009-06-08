@@ -6,7 +6,7 @@
  * @package Omeka_Test
  **/
 
-class InsertItemTypeTest extends Omeka_Model_TestCase
+class Models_InsertItemTypeTest extends Omeka_Model_TestCase
 {
     public function testCanInsertCollection()
     {

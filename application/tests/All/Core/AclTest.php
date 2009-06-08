@@ -3,7 +3,7 @@
 /**
 * 
 */
-class AclTest extends PHPUnit_Framework_TestCase
+class Core_AclTest extends PHPUnit_Framework_TestCase
 {
     protected $_acl;
     
