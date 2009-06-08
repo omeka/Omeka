@@ -24,10 +24,12 @@ class UpgradeController extends Omeka_Controller_Action
      * since all of these exceptions would come from having an outdated database anyway
      *
      **/
-    public function __construct($req, $resp, $invoke=array())
+    public function __construct(Zend_Controller_Request_Abstract $request,
+                                Zend_Controller_Response_Abstract $response,
+                                array $invokeArgs = array())
     {
         try {
-            parent::__construct($req, $resp, $invoke);
+            parent::__construct($request, $response, $invokeArgs);
         } catch (Exception $e) {
         }
         
