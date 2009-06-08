@@ -24,3 +24,7 @@ require_once 'globals.php';
 // BE SUPPRESSED IN ORDER TO GET THE DISPATCHING OF 404s IN THE CONTROLLER TESTS TO
 // WORK.
 error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
+
+// Append the testing class library.
+define('TEST_LIB_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'libraries');
+set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
