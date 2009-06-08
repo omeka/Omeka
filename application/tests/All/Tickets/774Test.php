@@ -3,7 +3,7 @@
 /**
 * 
 */
-class Tickets_Ticket774Test extends Omeka_Model_TestCase
+class Tickets_774Test extends Omeka_Model_TestCase
 {
     public function testItemFindByCanRetrieveNonPublicItems()
     {

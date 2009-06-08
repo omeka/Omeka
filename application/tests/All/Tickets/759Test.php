@@ -1,5 +1,5 @@
 <?php 
-class Tickets_Ticket759Test extends Omeka_Model_TestCase
+class Tickets_759Test extends Omeka_Model_TestCase
 {
     public function testInsertItemTypeAndInsertElementSetHaveSimilarArguments()
     {
