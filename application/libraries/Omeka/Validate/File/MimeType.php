@@ -35,7 +35,7 @@ class Omeka_Validate_File_MimeType extends Zend_Validate_File_MimeType
     public function __construct($options = null)
     {
         if (!$options) {
-            $options = get_option('file_mime_type_whitelist');
+            $options = (string)get_option('file_mime_type_whitelist');
         }
         parent::__construct($options);
     }

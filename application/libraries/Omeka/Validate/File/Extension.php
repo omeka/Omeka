@@ -46,7 +46,7 @@ class Omeka_Validate_File_Extension extends Zend_Validate_File_Extension
     public function __construct($options = null)
     {
         if (!$options) {
-            $options = get_option('file_extension_whitelist');
+            $options = (string)get_option('file_extension_whitelist');
         }
         parent::__construct($options);
         $this->_messageVariables['target_extension'] = '_targetExtension';
