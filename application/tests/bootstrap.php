@@ -25,8 +25,10 @@ require_once 'globals.php';
 // WORK.
 error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 
+define('TEST_DIR', dirname(__FILE__));
+
 // Append the testing class library.
-define('TEST_LIB_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'libraries');
+define('TEST_LIB_DIR', TEST_DIR . DIRECTORY_SEPARATOR . 'libraries');
 set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
 
 // Class loader (copied from Omeka_Core::initializeClassLoader()).
