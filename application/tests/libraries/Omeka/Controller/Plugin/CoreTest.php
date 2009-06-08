@@ -16,7 +16,7 @@ require_once 'Omeka/Controller/Action/Helper/Acl.php';
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class CoreTestPlugin extends Omeka_Core
+class CoreTest extends Omeka_Core
 {
     protected $_envName = 'adminTheme';
     

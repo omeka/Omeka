@@ -2,7 +2,7 @@
 /**
 * 
 */
-class OmekaRecordTestCase extends PHPUnit_Framework_TestCase
+class OmekaRecordTest extends PHPUnit_Framework_TestCase
 {	
 	public function testSaveFormFiresAllCallbacks()
 	{

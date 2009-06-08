@@ -8,7 +8,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-abstract class OmekaControllerTestCase extends Zend_Test_PHPUnit_ControllerTestCase
+abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $core;
     
