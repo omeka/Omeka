@@ -103,7 +103,7 @@ class Relatable extends Omeka_Record_Mixin
         ORDER BY time DESC
         LIMIT 1";
         
-        $relation_id = $this->getRelationId();
+        $relation_id = $this->_getRelationId();
                 
         return $db->fetchOne($sql, array($relation_id, $rel, $this->type));
     }
@@ -123,7 +123,7 @@ class Relatable extends Omeka_Record_Mixin
         INNER JOIN {$db->EntityRelationships} er ON er.id = r.relationship_id
         WHERE r.relation_id = ? AND r.type = ? AND er.name = ? GROUP BY e.id";
         
-        $entities = $this->getTable('Entity')->fetchObjects($sql, array($this->getRelationId(), $this->type, $rel));
+        $entities = $this->getTable('Entity')->fetchObjects($sql, array($this->_getRelationId(), $this->type, $rel));
         
         return !$entities ? array() : $entities;
     }
@@ -148,7 +148,7 @@ class Relatable extends Omeka_Record_Mixin
             return false;
         }
         
-        $relation_id = $this->getRelationId();
+        $relation_id = $this->_getRelationId();
         
         $relationship_id = $this->getRelationshipId($relationship);
         
@@ -174,7 +174,7 @@ class Relatable extends Omeka_Record_Mixin
     {
         $entity_id = ($entity instanceof Omeka_Record) ? $entity->id : $entity;
         
-        $relation_id = $this->getRelationId();
+        $relation_id = $this->_getRelationId();
         
         $relationship_id = $this->getRelationshipId($rel);
         
@@ -207,7 +207,7 @@ class Relatable extends Omeka_Record_Mixin
         return $db->fetchOne($sql, array($rel));
     }
     
-    protected function getRelationId()
+    private function _getRelationId()
     {
         $id =  $this->record->id;
         
@@ -223,7 +223,7 @@ class Relatable extends Omeka_Record_Mixin
         $db = $this->getDb();
         $select = new Omeka_Db_Select;
         
-        $relation_id = $this->getRelationId();
+        $relation_id = $this->_getRelationId();
                 
         $db = $this->getDb();        
                 
