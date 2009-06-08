@@ -91,7 +91,7 @@ define('WEB_FULLSIZE',          WEB_ARCHIVE . '/' . $site['fullsize']);
 define('WEB_FILES',             WEB_ARCHIVE . '/' . $site['files']);
 
 // Set the include path for the models directory.
-set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR);
+set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR . PATH_SEPARATOR . get_include_path());
 
 /**
  * Most of this has been borrowed directly from Drupal 6.1's 
