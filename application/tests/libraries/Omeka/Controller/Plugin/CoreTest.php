@@ -27,18 +27,10 @@ class Omeka_Controller_Plugin_CoreTest extends Omeka_Core
         switch ($this->_envName) {
             case 'publicTheme':
                 $this->sanitizeMagicQuotes();
-                $this->initializeClassLoader(); 
                 $this->initializeConfigFiles(); 
-                // $this->initializeLogger(); 
-                // $this->initializeDb(); 
-                // $this->initializeOptions(); 
                 $this->setOptions(array('public_theme'=>'default'));
             
                 $this->initializeAcl(); 
-                // $this->initializePluginBroker(); 
-                // $this->initializeAuth(); 
-                            
-                // $this->initializeCurrentUser(); 
                 $this->initializeFrontController();
 
                 // Initialize the paths within the view scripts. We do this here instead
@@ -55,7 +47,6 @@ class Omeka_Controller_Plugin_CoreTest extends Omeka_Core
                 $this->setThemePath($view, 'themes' . DIRECTORY_SEPARATOR . $themeName);
             
                 $this->initializeRoutes();
-                // $this->initializeDebugging();                
             break;
             
             case 'adminTheme':
@@ -67,18 +58,8 @@ class Omeka_Controller_Plugin_CoreTest extends Omeka_Core
                 // Custom load sequence for testing the admin theme.
                 
                 $this->sanitizeMagicQuotes();
-                $this->initializeClassLoader(); 
                 $this->initializeConfigFiles(); 
-                // $this->initializeLogger(); 
-                // $this->initializeDb(); 
-                // $this->initializeOptions(); 
                 $this->setOptions(array('admin_theme'=>'default'));
-                
-                // $this->initializeAcl(); 
-                // $this->initializePluginBroker(); 
-                // $this->initializeAuth(); 
-                                
-                // $this->initializeCurrentUser(); 
                 $this->initializeFrontController();
 
         
@@ -96,7 +77,6 @@ class Omeka_Controller_Plugin_CoreTest extends Omeka_Core
                 $this->setThemePath($view, 'admin' . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeName);
                 
                 $this->initializeRoutes();
-                // $this->initializeDebugging();
                 break;
             default:
                 throw new Exception("Start-up environment called '{$this->_envName}' doesn't exist!");
@@ -125,9 +105,4 @@ class Omeka_Controller_Plugin_CoreTest extends Omeka_Core
     {
         $this->_envName = $envName;
     }
-    
-    // public function routeShutdown()
-    // {
-    //     Zend_Controller_Action_HelperBroker::resetHelpers();
-    // }
 }
