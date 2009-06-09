@@ -31,7 +31,6 @@ class Omeka_Controller_Plugin_CoreTest extends Omeka_Core
                 $this->initializeConfigFiles(); 
                 // $this->initializeLogger(); 
                 // $this->initializeDb(); 
-                $this->loadModelClasses(); 
                 // $this->initializeOptions(); 
                 $this->setOptions(array('public_theme'=>'default'));
             
@@ -72,7 +71,6 @@ class Omeka_Controller_Plugin_CoreTest extends Omeka_Core
                 $this->initializeConfigFiles(); 
                 // $this->initializeLogger(); 
                 // $this->initializeDb(); 
-                $this->loadModelClasses(); 
                 // $this->initializeOptions(); 
                 $this->setOptions(array('admin_theme'=>'default'));
                 

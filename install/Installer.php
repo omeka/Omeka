@@ -21,7 +21,7 @@ class Installer
         // Load the necessary core phases.
         require_once 'Omeka/Core.php';
         $core = new Omeka_Core;
-        $core->phasedLoading('loadModelClasses');
+        $core->phasedLoading('initializeDb');
         $this->core = $core;
         
         // Verify Omeka requirements.

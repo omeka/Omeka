@@ -46,7 +46,6 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                'initializeConfigFiles', 
                                'initializeLogger', 
                                'initializeDb', 
-                               'loadModelClasses', 
                                'initializeOptions', 
                                'initializePluginBroker', 
                                'initializeSession',
@@ -459,12 +458,6 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         } 
         
         $this->setCurrentUser($user);
-    }
-    
-    public function loadModelClasses()
-    {
-        require_once 'Item.php';
-        require_once 'Option.php';
     }
     
     /**
