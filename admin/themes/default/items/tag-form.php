@@ -43,6 +43,5 @@
             </div>
         <?php endif; ?>
     </div>
-<?php fire_plugin_hook('append_to_item_form_tags', $item); // Deprecated in 0.10 ?>
 <?php fire_plugin_hook('admin_append_to_items_form_tags', $item); ?>
 </div>

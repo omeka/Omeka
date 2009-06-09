@@ -87,10 +87,6 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 <?php echo show_item_metadata(); ?>
 </div>
 
-<div id="additional-metadata">
-	<?php fire_plugin_hook('append_to_item_show', $item); // Deprecated in 0.10 ?>
-</div>
-
 <?php fire_plugin_hook('admin_append_to_items_show_primary', $item); ?>
 
 </div>

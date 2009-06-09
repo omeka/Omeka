@@ -492,8 +492,6 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         
         fire_plugin_hook('define_routes', $router);
         
-        // Deprecated in 0.10 (use 'define_routes' instead).
-        fire_plugin_hook('add_routes', $router);
         $front->setRouter($router);
     }
     

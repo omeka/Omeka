@@ -68,8 +68,6 @@
 	<h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
 <?php endif; ?>
 
-<?php fire_plugin_hook('append_to_items_browse', $items); // Deprecated in 0.10 ?>
-
 <?php fire_plugin_hook('admin_append_to_items_browse_primary', $items); ?>
 
 </div>
