@@ -16,8 +16,11 @@ class Omeka_Core_Resource_Debug extends Zend_Application_Resource_ResourceAbstra
 {
     public function init()
     {
-        $front = $this->getBootstrap()->getResource('FrontController');
-        $config = $this->getBootstrap()->getResource('Config');
+        $bootstrap = $this->getBootstrap();
+        $bootstrap->bootstrap('Config');
+        $bootstrap->bootstrap('FrontController');
+        $front = $bootstrap->getResource('FrontController');
+        $config = $bootstrap->getResource('Config');
         
         // Uncaught exceptions should bubble up to the browser level since we
         // are essentially in debug/install mode. Otherwise, we should make use

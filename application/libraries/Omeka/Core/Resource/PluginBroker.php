@@ -7,9 +7,11 @@ class Omeka_Core_Resource_PluginBroker extends Zend_Application_Resource_Resourc
 {
     public function init()
     {
+        $bootstrap = $this->getBootstrap();
+        $bootstrap->bootstrap('Db');
         // Initialize the plugin broker with the database object and the 
         // plugins/ directory
-        $broker = new Omeka_Plugin_Broker($this->getBootstrap()->getResource('db'), PLUGIN_DIR);   
+        $broker = new Omeka_Plugin_Broker($bootstrap->getResource('Db'), PLUGIN_DIR);   
         // $broker->loadActive();
         return $broker;
     }

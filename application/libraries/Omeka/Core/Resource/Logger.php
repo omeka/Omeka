@@ -11,7 +11,9 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
 {
     public function init()
     {
-        $config = $this->getBootstrap()->getResource('config');
+        $bootstrap = $this->getBootstrap();
+        $bootstrap->bootstrap('Config');
+        $config = $bootstrap->getResource('Config');
 
         if (!$config->log->errors && !$config->log->sql) {
             return;

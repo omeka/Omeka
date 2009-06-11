@@ -14,7 +14,9 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbst
         // config.ini file.  If it can't find that value (or it is blank), it
         // will automatically generate the session name based on the root URL
         // of this particular installation.
-        $basicConfig = $this->getBootstrap()->getResource('config');
+        $bootstrap = $this->getBootstrap();
+        $bootstrap->bootstrap('Config');
+        $basicConfig = $bootstrap->getResource('Config');
         $sessionName = (isset($basicConfig->session) && !empty($basicConfig->session->name)) 
                        ? $basicConfig->session->name
                        : preg_replace('/[^\w]+/', '', WEB_ROOT);
