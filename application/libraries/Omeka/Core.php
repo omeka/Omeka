@@ -7,11 +7,6 @@
  **/
 
 /**
- * @see Omeka_Context
- */ 
-require_once 'Omeka/Context.php';
-
-/**
  * Core class used to bootstrap the Omeka environment.
  * 
  * Various duties include, but are not limited to, sanitizing magic_quotes,
@@ -68,16 +63,7 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
                                       'webBasePath'=>WEB_THEME),
                                   'Router' => array(),
                                   'Debug' => array());
-    
-    /**
-     * 'Context' is a term that describes a pattern for storing site-wide data
-     * in a singleton.  Stuff like the logger, acl, database objects, etc. is 
-     * accessible through this object 
-     *
-     * @var Omeka_Context
-     **/
-    protected $_context;
-    
+        
     /**
      * Initialize a context for this particular application request
      *
@@ -86,12 +72,11 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
     public function __construct($application)
     {
         require_once 'globals.php';
-        $this->_context = Omeka_Context::getInstance();
         if ($application instanceof Zend_Application) {
             parent::__construct($application);
         }
         
-        $this->setContainer($this->_context);
+        $this->setContainer(Omeka_Context::getInstance());
     }
     
     /**
@@ -106,14 +91,9 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
             $this->bootstrap($bootstrapResource);
         }
         
-        return call_user_func_array(array($this->_context, $m), $a);
+        return call_user_func_array(array($this->getContainer(), $m), $a);
     }
-    
-    public function getContext()
-    {
-        return $this->_context;
-    }
-    
+        
     /**
      * This makes Omeka_Core work as a Zend_Controller_Front plugin.
      * 
