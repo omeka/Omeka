@@ -88,13 +88,6 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
             parent::__construct($application);
         }
         
-        $this->setOptions(
-            array(
-                'pluginPaths' => array(
-                    'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
-                ),
-                'resources'=>$this->_resources));
-                
         $this->setContainer($this->_context);
     }
     
@@ -190,6 +183,14 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
      **/
     public function initialize()
     {
+        $this->setOptions(
+            array(
+                'pluginPaths' => array(
+                    'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
+                ),
+                'resources'=>$this->_resources));
+                
+        
         $this->sanitizeMagicQuotes();
         $this->bootstrap();
     }
