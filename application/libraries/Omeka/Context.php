@@ -20,19 +20,7 @@ class Omeka_Context
 {
 	private static $_instance;
         
-    protected 
-        $_db,
-        $_config = array(),
-        $_acl,
-        $_auth, 
-        $_logger,
-        $_front,
-        $_options = array(),
-        $_pluginBroker,
-        $_request,
-        $_response,
-        $_user,
-        $_installed = true; // Omeka is thought to be installed until proven otherwise.
+    protected $_installed = true; // Omeka is thought to be installed until proven otherwise.
     
 	/**
 	 * Singleton instance
