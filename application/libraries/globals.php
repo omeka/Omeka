@@ -216,7 +216,9 @@ function get_plugin_hook_output()
  **/
 function get_plugin_broker()
 {
-    return Omeka_Context::getInstance()->getPluginBroker();
+    if (Zend_Registry::isRegistered('pluginbroker')) {
+        return Zend_Registry::get('pluginbroker');
+    }
 }
 
 /**

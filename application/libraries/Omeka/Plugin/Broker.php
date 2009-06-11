@@ -134,7 +134,8 @@ class Omeka_Plugin_Broker
      * @return void
      **/
     public function loadActive()
-    {        
+    {   
+        Zend_Registry::set('pluginbroker', $this);     
         foreach ($this->_pluginPaths as $name => $path) {
             $this->setCurrentPlugin($name);
             $this->addApplicationDirs($name);
