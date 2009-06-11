@@ -36,21 +36,21 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
      * @access protected
      * @var array
      */
-    protected $_phases = array('sanitizeMagicQuotes', 
-                               'initializeClassLoader', 
-                               'initializeConfigFiles', 
-                               'initializeLogger', 
-                               'initializeDb', 
-                               'initializeOptions', 
-                               'initializePluginBroker', 
-                               'initializeSession',
-                               'initializePlugins',
-                               'initializeAcl', 
-                               'initializeAuth', 
-                               'initializeCurrentUser', 
-                               'initializeFrontController',
-                               'initializeRouter',
-                               'initializeDebugging');
+    protected $_phases = array('sanitizeMagicQuotes' => null, 
+                               'initializeClassLoader' => null, 
+                               'initializeConfigFiles' => 'Config', 
+                               'initializeLogger' => 'Logger', 
+                               'initializeDb' => 'Db', 
+                               'initializeOptions' => 'Options', 
+                               'initializePluginBroker' => 'PluginBroker', 
+                               'initializeSession' => 'Session',
+                               'initializePlugins' => 'Plugins',
+                               'initializeAcl' => 'Acl', 
+                               'initializeAuth' => 'Acl', 
+                               'initializeCurrentUser' => 'CurrentUser', 
+                               'initializeFrontController' => 'FrontController',
+                               'initializeRoutes' => 'Router',
+                               'initializeDebugging' => 'Debug');
     
     protected $_resources = array('Config' => array(),
                                   'Logger' => array(),
@@ -99,8 +99,8 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
     public function __call($m, $a)
     {
         if (substr($m, 0, 10) == 'initialize') {
-            $resourceName = substr($m, 10);
-            $this->bootstrap($resourceName);
+            $bootstrapResource = $this->_phases[$m];
+            $this->bootstrap($bootstrapResource);
         }
         
         return call_user_func_array(array($this->_context, $m), $a);
@@ -183,14 +183,7 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
      **/
     public function initialize()
     {
-        $this->setOptions(
-            array(
-                'pluginPaths' => array(
-                    'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
-                ),
-                'resources'=>$this->_resources));
-                
-        
+        $this->_setupDefaultResources();
         $this->sanitizeMagicQuotes();
         $this->bootstrap();
     }
@@ -204,20 +197,20 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
      **/
     public function phasedLoading($stopPhase)
     {
+        if (empty($this->_pluginResources)) {
+            $this->_setupDefaultResources();
+        }
+        
         // Throw an error if the stop phase doesn't exist.
-        if (!in_array($stopPhase, $this->_phases)) {
+        if (!array_key_exists($stopPhase, $this->_phases)) {
             exit("Error: The provided stop phase method \"$stopPhase\" does not exist.");
         }
         
         // Load initialization callbacks in the proper order.
-        foreach ($this->_phases as $phase) {
-            if (method_exists($this, $phase)) {
-                call_user_func(array($this, $phase));
-                if ($phase == $stopPhase) {
-                    break;
-                }
-            } else {
-                exit("Error: The core phase method \"$phase\" does not exist.");
+        foreach ($this->_phases as $phase => $bootstrap) {
+            $this->$phase();
+            if ($phase == $stopPhase) {
+                break;
             }
         }
     }
@@ -231,5 +224,14 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
     public function initializeClassLoader()
     {
         
-    }                                
+    }       
+    
+    private function _setupDefaultResources()
+    {
+        $this->setOptions(
+            array(
+                'pluginPaths' => array(
+                    'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/'),
+                'resources'=>$this->_resources));
+    }                         
 }
