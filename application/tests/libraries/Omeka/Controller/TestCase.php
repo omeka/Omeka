@@ -153,4 +153,24 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
        return $mockResourceObj;    
     }
     
+    /**
+     * Convenience method for configuring default access to the public theme.
+     * 
+     * @param Omeka_Core
+     * @return void
+     **/
+    protected function _configPublicThemeBootstrap($bootstrap)
+    {
+        $mockDbResource = $this->_getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
+        $bootstrap->registerPluginResource($mockDbResource);
+        $bootstrap->setOptions(array(
+            'resources'=> array(
+                'Config' => array(),
+                'FrontController' => array(),
+                'Acl' => array(),
+                'Options' => array('options'=> array('public_theme'=>'default')),
+                'Theme' => array('basePath'=>BASE_DIR . '/themes', 'webBasePath'=>WEB_ROOT . '/themes')
+            )
+        ));
+    }
 }

@@ -18,17 +18,7 @@ class Controllers_AclTest extends Omeka_Controller_TestCase
 {    
     public function _setUpBootstrap($bootstrap)
     {
-        $mockDbResource = $this->_getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
-        $bootstrap->registerPluginResource($mockDbResource);
-        $bootstrap->setOptions(array(
-            'resources'=> array(
-                'Config' => array(),
-                'FrontController' => array(),
-                'Acl' => array(),
-                'Options' => array('options'=> array('public_theme'=>'default')),
-                'Theme' => array('basePath'=>BASE_DIR . '/themes', 'webBasePath'=>WEB_ROOT . '/themes')
-            )
-        ));
+        $this->_configPublicThemeBootstrap($bootstrap);
     }
     
     public function testUserIsNotLoggedIn()
