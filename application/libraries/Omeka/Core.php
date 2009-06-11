@@ -346,27 +346,9 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      **/
     public function initializeAcl()
     {
-        $options = $this->getOptions();
-
-        $acl = $this->setupAcl();
-        
-        $this->setAcl($acl);
-        
-        fire_plugin_hook('define_acl', $acl);
-    }
-    
-    /**
-     * Load the ACL settings from a file and then save a serialized copy of 
-     * the object to the database.
-     * 
-     * @return void
-     **/
-    public function setupAcl()
-    {
-        // Setup the ACL
-        include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
-
-        return $acl;
+        $aclResource = new Omeka_Core_Resource_Acl;
+        $aclResource->setCore($this);
+        $this->setAcl($aclResource->init());
     }
     
     /**
@@ -506,4 +488,20 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
         $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
     }
     
+    /**
+     * @see Zend_Application_Bootstrap_BootstrapAbstract::hasResource()
+     * @param string
+     * @return boolean
+     **/
+    public function hasResource($resourceName)
+    {
+        $getterMethod = 'get' . $resourceName;
+        return (boolean)($resource = $this->$getterMethod());
+    }
+    
+    public function getResource($resourceName)
+    {
+        $getterMethod = 'get' . $resourceName;
+        return $this->$getterMethod();
+    }
 }
