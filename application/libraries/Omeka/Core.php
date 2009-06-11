@@ -63,6 +63,9 @@ class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
                                   'Auth' => array(),
                                   'CurrentUser' => array(),
                                   'FrontController' => array(),
+                                  'Theme' => array(
+                                      'basePath'=>THEME_DIR, 
+                                      'webBasePath'=>WEB_THEME),
                                   'Router' => array(),
                                   'Debug' => array());
     

@@ -27,6 +27,7 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
                     'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
                     'Omeka_Test_Resource' => TEST_LIB_DIR . '/Omeka/Test/Resource/'),
             'resources'=>array(
+                'Theme' => array('basePath'=>BASE_DIR . '/themes', 'webBasePath'=>WEB_ROOT . '/themes'),
                 'Acl' => array(),
                 'Config' => array(), 
                 'Options' => array(), 

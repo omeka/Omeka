@@ -19,9 +19,14 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     
     protected $_dbOptions = array();
     
+    protected $_baseThemePath;
+    protected $_webBaseThemePath;
+    
     public function __construct($options)
     {
-        $this->_dbOptions = $options;
+        $this->_dbOptions = $options['dbOptions'];
+        $this->_baseThemePath = $options['baseThemePath'];
+        $this->_webBaseThemePath = $options['webBaseThemePath'];
     }
 
     /**
@@ -177,9 +182,9 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         
         $view = $this->_getView();
         if ($themeName = $this->getThemeOption($theme)) {
-            $scriptPath = THEME_DIR.DIRECTORY_SEPARATOR . $themeName;
+            $scriptPath = $this->_baseThemePath . DIRECTORY_SEPARATOR . $themeName;
             $view->addScriptPath($scriptPath);
-            $view->addAssetPath($scriptPath, WEB_THEME.'/' . $themeName);            
+            $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName);            
         }
     }
     
