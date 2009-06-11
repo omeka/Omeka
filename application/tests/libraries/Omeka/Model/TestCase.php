@@ -11,8 +11,9 @@ abstract class Omeka_Model_TestCase extends PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $dbResource = new Omeka_Core_Resource_DbTest;
+        $dbResource = new Omeka_Test_Resource_Db;
         $this->_adapter = $dbResource->init();
+        Omeka_Context::getInstance()->setDb($this->_adapter);
     }
     
     public function tearDown()

@@ -5,9 +5,17 @@ class Tickets_780Test extends Omeka_Controller_TestCase
 {
     public function init()
     {
-        $this->core->setStartupEnvironment('publicTheme');
+        $this->core->setOptions(array(
+            'resources'=> array(
+                'Acl' => array(),
+                'Options' => array('options'=> array('public_theme'=>'default')),
+                'Theme' => array('basePath'=>BASE_DIR . '/themes', 'webBasePath'=>WEB_ROOT . '/themes')
+            )
+        ));
+        
         // This keeps the database from dying horribly.
         $this->core->setDb($this->_getMockDbWithMockTables());
+        $this->core->bootstrap();
     }
     
     public function testAutoDiscoveryLinkOnItemShowPageLinksToBrowsePageOutput()
