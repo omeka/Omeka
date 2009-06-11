@@ -37,23 +37,9 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
     {
         $this->initViewRenderer();
         $this->initResponseContexts();
-        $this->initAclHelper();
         $this->initSearchHelper();
     }
-    
-    private function initAclHelper()
-    {
-        // If the ACL has not been initialized, we should not enable this action helper.  
-        // The ACL will not be initialized under the following conditions:
-        // A) Installation.
-        // B) Error conditions that occur before the ACL phase could be loaded.
-        // C) Testing conditions which don't require use of the ACL.
-        if ($acl = $this->getBootstrap()->getResource('Acl')) {
-            $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl);
-            Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
-        }
-    }
-    
+        
     private function initSearchHelper()
     {
         $searchHelper = new Omeka_Controller_Action_Helper_SearchItems;

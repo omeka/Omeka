@@ -37,6 +37,10 @@ class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
             $broker = $this->getBootstrap()->getResource('PluginBroker');
             $broker->define_acl($acl);
         }
+        
+        // Set up the action helper for MVC.
+        $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl);
+        Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
                 
         return $acl;
     }
