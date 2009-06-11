@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Frontcontroller
+class Omeka_Core_Resource_Frontcontroller extends Omeka_Core_Resource_ResourceAbstract
 {
     public function init()
     {
@@ -27,27 +27,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         
         $front->registerPlugin(new Omeka_Controller_Plugin_ViewScripts);
     }
-    
-    public function setAcl($acl)
-    {
-        $this->_acl = $acl;
-    }
-    
-    public function getAcl()
-    {
-        return $this->_acl;
-    }
-    
-    public function setPluginBroker($broker)
-    {
-        $this->_broker = $broker;
-    }
-    
-    public function getPluginBroker()
-    {
-        return $this->_broker;
-    }
-    
+        
     private function initializeActionHelpers()
     {
         $this->initViewRenderer();
@@ -63,7 +43,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // A) Installation.
         // B) Error conditions that occur before the ACL phase could be loaded.
         // C) Testing conditions which don't require use of the ACL.
-        if ($acl = $this->getAcl()) {
+        if ($acl = $this->getBootstrap()->getResource('Acl')) {
             $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl);
             Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
         }
@@ -125,7 +105,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
              )
          );
 
-        if ($pluginBroker = $this->getPluginBroker()) {
+        if ($pluginBroker = $this->getBootstrap()->getResource('PluginBroker')) {
              $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
         }
         

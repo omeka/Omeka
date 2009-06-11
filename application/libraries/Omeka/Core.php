@@ -451,8 +451,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     public function initializeFrontController()
     {
         $frontResource = new Omeka_Core_Resource_Frontcontroller;
-        $frontResource->setAcl($this->getAcl());
-        $frontResource->setPluginBroker($this->getPluginBroker());
+        $frontResource->setCore($this);
         $frontResource->init();
     }
     
