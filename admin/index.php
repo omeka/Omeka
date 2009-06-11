@@ -24,14 +24,11 @@ define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . $site['admin_theme']);
 
 // Requires for the plugins loaded by default.
 require_once 'Omeka/Core.php';
-require_once 'Omeka/Controller/Plugin/Admin.php';
 
-require_once 'Zend/Controller/Front.php';
-$front = Zend_Controller_Front::getInstance();
-$front->registerPlugin(new Omeka_Core());
+$core = new Omeka_Core('foo');
+$core->initialize();
 
 // This plugin allows for all functionality that is specific to the 
 // admin theme.
-$front->registerPlugin(new Omeka_Controller_Plugin_Admin);
-
-$front->dispatch();
+$core->getFrontController()->registerPlugin(new Omeka_Controller_Plugin_Admin);
+$core->run();

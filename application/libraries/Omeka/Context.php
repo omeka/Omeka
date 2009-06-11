@@ -19,7 +19,7 @@
 class Omeka_Context
 {
 	private static $_instance;
-    
+        
     protected 
         $_db,
         $_config = array(),
@@ -72,17 +72,7 @@ class Omeka_Context
     {
         $this->_installed = (boolean)$flag;
     }
-    
-	public function setDb(Omeka_Db $db)
-	{
-	    $this->_db = $db;
-	}
-	
-	public function getDb()
-	{
-	    return $this->_db;
-	}
-	
+    	
 	/**
 	 * @param string The nickname for the config set
 	 * @param Zend_Config_Ini The config set
@@ -98,93 +88,26 @@ class Omeka_Context
 	    return $this->_config[$name];
 	}
 	
-	public function setAcl($acl)
-	{
-	    $this->_acl = $acl;
-	}
-	
-	public function getAcl()
-	{
-	    return $this->_acl;
-	}
-	
-	public function setAuth(Zend_Auth $auth)
-	{
-        $this->_auth = $auth;	    
-	}
-	
-	public function getAuth()
-	{
-	    return $this->_auth;
-	}
-	
-	public function setLogger(Zend_Log $logger)
-	{
-	    $this->_logger = $logger;
-	}
-	
-	public function getLogger()
-	{
-	    return $this->_logger;
-	}
-	
-	public function setOptions($options)
-	{	    
-	    $this->_options = $options;
-	}
-	
-	public function getOptions()
-	{
-	    return $this->_options;
-	}
-	
-    public function setFrontController(Zend_Controller_Front $front)
+    public function __call($m, $a)
     {
-        $this->_front = $front;
+        if (substr($m, 0, 3) == 'set') {
+            $field = strtolower(substr($m, 3));
+            $this->$field = $a[0];
+        } else if (substr($m, 0, 3) == 'get') {
+           $field = strtolower(substr($m, 3));
+           return $this->$field;
+        }
     }
     
-    public function getFrontController()
+    public function __set($name, $value)
     {
-        return $this->_front;
-    }
+        $field = strtolower($name);
+        $this->$field = $value;
+    }       
     
-    public function setCurrentUser($user)
+    public function __get($name)
     {
-        $this->_user = $user;
-    }
-    
-    public function getCurrentUser()
-    {
-        return $this->_user;
-    }
-    
-    public function setRequest($request)
-    {
-        return Zend_Controller_Front::getInstance()->setRequest($request);
-    }
-    
-    public function getRequest()
-    {
-        return Zend_Controller_Front::getInstance()->getRequest();
-    }
-    
-    public function setResponse($response)
-    {
-        $this->_response = $response;
-    }
-    
-    public function getResponse()
-    {
-        return $this->_response;
-    }
-    
-    public function getPluginBroker()
-    {
-        return $this->_pluginBroker;
-    }
-    
-    public function setPluginBroker($broker)
-    {
-        $this->_pluginBroker = $broker;
+        $field = strtolower($name);
+        return $this->$field;
     }
 }

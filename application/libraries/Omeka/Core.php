@@ -12,11 +12,6 @@
 require_once 'Omeka/Context.php';
 
 /**
- * @see Zend_Controller_Plugin_Abstract
- */
-require_once 'Zend/Controller/Plugin/Abstract.php';
-
-/**
  * Core class used to bootstrap the Omeka environment.
  * 
  * Various duties include, but are not limited to, sanitizing magic_quotes,
@@ -32,7 +27,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Omeka_Core extends Zend_Controller_Plugin_Abstract
+class Omeka_Core extends Zend_Application_Bootstrap_Bootstrap
 {
     /**
      * Array containing all core loading phase methods in sequential order. 
@@ -57,6 +52,20 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                'initializeRouter',
                                'initializeDebugging');
     
+    protected $_resources = array('Config' => array(),
+                                  'Logger' => array(),
+                                  'Db' => array(),
+                                  'Options' => array(),
+                                  'PluginBroker' => array(),
+                                  'Session' => array(),
+                                  'Plugins' => array(),
+                                  'Acl' => array(),
+                                  'Auth' => array(),
+                                  'CurrentUser' => array(),
+                                  'FrontController' => array(),
+                                  'Router' => array(),
+                                  'Debug' => array());
+    
     /**
      * 'Context' is a term that describes a pattern for storing site-wide data
      * in a singleton.  Stuff like the logger, acl, database objects, etc. is 
@@ -71,10 +80,22 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      *
      * @return void
      **/
-    public function __construct()
+    public function __construct($application)
     {
         require_once 'globals.php';
         $this->_context = Omeka_Context::getInstance();
+        if ($application instanceof Zend_Application) {
+            parent::__construct($application);
+        }
+        
+        $this->setOptions(
+            array(
+                'pluginPaths' => array(
+                    'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
+                ),
+                'resources'=>$this->_resources));
+                
+        $this->setContainer($this->_context);
     }
     
     /**
@@ -84,6 +105,11 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      **/
     public function __call($m, $a)
     {
+        if (substr($m, 0, 10) == 'initialize') {
+            $resourceName = substr($m, 10);
+            $this->bootstrap($resourceName);
+        }
+        
         return call_user_func_array(array($this->_context, $m), $a);
     }
     
@@ -164,13 +190,8 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      **/
     public function initialize()
     {
-        foreach ($this->_phases as $phase) {
-            if (method_exists($this, $phase)) {
-                $this->$phase();
-            } else {
-                exit("Error: The core initialize phase method \"$phase\" does not exist.");
-            }
-        }
+        $this->sanitizeMagicQuotes();
+        $this->bootstrap();
     }
     
     /**
@@ -209,293 +230,5 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
     public function initializeClassLoader()
     {
         
-    }
-    
-    /**
-     * Initialize the default database connection for all Omeka requests.
-     *
-     * @uses Omeka_Db
-     * @return void
-     **/
-    public function initializeDb()
-    {
-        require_once 'Omeka/Db.php';
-        $db = $this->getConfig('db');
-        
-        // Fail on improperly configured db.ini file
-        if (!isset($db->host) || ($db->host == 'XXXXXXX')) {
-            throw new Zend_Config_Exception('Your Omeka database configuration file has not been set up properly.  Please edit the configuration and reload this page.');
-        }
-        
-        $connectionParams = array('host'     => $db->host,
-                                                'username' => $db->username,
-                                                'password' => $db->password,
-                                                'dbname'   => $db->name);
-        
-        // 'port' parameter was introduced in 0.10, conditional check needed
-        // for backwards compatibility.
-        if (isset($db->port)) {
-            $connectionParams['port'] = $db->port;
-        }
-        
-        $dbh = Zend_Db::factory('Mysqli', $connectionParams);
-        
-        $db_obj = new Omeka_Db($dbh, $db->prefix);
-                
-        $this->setDb($db_obj);   
-    }
-    
-    /**
-     * Retrieve all the options from the database.  
-     *
-     * Options are essentially site-wide variables that are stored in the 
-     * database, for example the title of the site.
-     * 
-     * @return void
-     **/
-    public function initializeOptions()
-    {        
-        // Pull the options from the DB
-        $db = $this->getDb();
-        
-        // This will throw an exception if the options table does not exist
-        $options = $db->fetchPairs("SELECT name, value FROM $db->Option");
-        
-        $this->setOptions($options);
-    }
-    
-    /**
-     * Load the 3 required INI files for Omeka (config.ini, routes.ini and
-     * db.ini).
-     * 
-     * @return void
-     **/
-    public function initializeConfigFiles()
-    {
-        require_once 'Zend/Config/Ini.php';
-        
-        $db_file = BASE_DIR . DIRECTORY_SEPARATOR . 'db.ini';
-        
-        if (!file_exists($db_file)) {
-            throw new Zend_Config_Exception('Your Omeka database configuration file is missing.');
-        }
-        
-        if (!is_readable($db_file)) {
-            throw new Zend_Config_Exception('Your Omeka database configuration file cannot be read by the application.');
-        }
-        
-        $db = new Zend_Config_Ini($db_file, 'database');
-        
-        $this->setConfig('db', $db);
-        
-        $config = new Zend_Config_Ini(CONFIG_DIR . DIRECTORY_SEPARATOR . 'config.ini', 'site');
-        
-        $this->setConfig('basic', $config);
-        
-        $routes = new Zend_Config_Ini(CONFIG_DIR . DIRECTORY_SEPARATOR . 'routes.ini', null);
-        
-        $this->setConfig('routes', $routes);
-    }
-    
-    /**
-     * If logging has been enabled in the config file, then set up 
-     * Zend's logging mechanism.
-     * 
-     * @uses Zend_Log
-     * @return void
-     **/
-    public function initializeLogger()
-    {
-        $config = $this->getConfig('basic');
-        
-        if (!$config->log->errors && !$config->log->sql) {
-            return;
-        }
-        
-        $logFile = LOGS_DIR.DIRECTORY_SEPARATOR . 'errors.log';
-        
-        if (!is_writable($logFile)) {
-            throw new Exception('Error log file cannot be written to. Please give this file read/write permissions for the web server.');
-        }
-        
-        $writer = new Zend_Log_Writer_Stream($logFile);
-        $logger = new Zend_Log($writer);
-        
-        $this->setLogger($logger);
-    }
-    
-    /**
-     * Initializes Omeka's ACL
-     *
-     * Checks to see if there is a serialized copy of the ACL in the database, 
-     * then use that.  If not, then set up the ACL based on the hard-coded 
-     * settings.
-     * 
-     * @since 0.10 Plugins must use the 'define_acl' hook to modify ACL definitions.
-     * @uses Omeka_Acl
-     * @todo ACL settings should be stored in the database.  When ACL settings
-     * are properly stored in a normalized database configuration, then this
-     * method should populate a new Acl instance with those settings and store
-     * that Acl object in a session for quick access.
-     * @return void
-     **/
-    public function initializeAcl()
-    {
-        $aclResource = new Omeka_Core_Resource_Acl;
-        $aclResource->setCore($this);
-        $this->setAcl($aclResource->init());
-    }
-    
-    /**
-     * Initialize a copy of the plugin broker and load all the active plugins.
-     * 
-     * @uses Omeka_Plugin_Broker
-     * @return void
-     **/
-    public function initializePluginBroker()
-    {
-        // Initialize the plugin broker with the database object and the 
-        // plugins/ directory
-        $broker = new Omeka_Plugin_Broker($this->getDb(), PLUGIN_DIR);
-        $this->setPluginBroker($broker);
-        
-        $broker->loadActive();        
-        
-    }
-    
-    /**
-     * Fire the 'initialize' hook for all plugins.  Note that
-     * this hook fires before the front controller has been initialized or
-     * dispatched.
-     **/
-    public function initializePlugins()
-    {
-        $broker = $this->getPluginBroker();
-        
-        // Fire all the 'initialize' hooks for the plugins
-        $broker->initialize();
-    }
-    
-    /**
-     * Initialize the session and customize the session name to prevent session
-     * overlap between different applications that operate on the same server.
-     * 
-     * @return void
-     **/
-    public function initializeSession()
-    {   
-        // Look for the session name as the 'session.name' value in the 
-        // config.ini file.  If it can't find that value (or it is blank), it
-        // will automatically generate the session name based on the root URL
-        // of this particular installation.
-        $basicConfig = $this->getConfig('basic');
-        $sessionName = (isset($basicConfig->session) && !empty($basicConfig->session->name)) 
-                       ? $basicConfig->session->name
-                       : preg_replace('/[^\w]+/', '', WEB_ROOT);
-    
-        Zend_Session::start(array(
-            'name'=>$sessionName));
-    }
-    
-    /**
-     * Initialize the Auth object which handles authentication against the 
-     * Omeka database.
-     * 
-     * @uses Zend_Auth
-     * @return void
-     **/
-    public function initializeAuth()
-    {        
-        $auth = Zend_Auth::getInstance();      
-         
-        $this->setAuth($auth);
-    }
-    
-    /**
-     * Initialize the User object for the currently logged-in user.  If no user
-     * has been authenticated, this value will be equivalent to false.
-     * 
-     * @uses Zend_Auth
-     * @return void
-     **/
-    public function initializeCurrentUser()
-    {
-        $auth = $this->getAuth();
-        
-        $user = false;
-        
-        if ($auth->hasIdentity()) {
-            $user = $auth->getIdentity();
-            // This extra database call seems unnecessary at face value, but it
-            // actually retrieves the entity metadata about the user as well as the
-            // username/role info that is already stored in the auth identity.
-            require_once 'User.php';
-                        
-            $user = $this->getDb()->getTable('User')->find($user->id);
-        } 
-        
-        $this->setCurrentUser($user);
-    }
-    
-    /**
-     * @uses Zend_Controller_Front
-     * @uses Zend_Controller_Router_Rewrite
-     * @uses fire_plugin_broker()
-     * @return void
-     **/
-    public function initializeFrontController()
-    {
-        $frontResource = new Omeka_Core_Resource_Frontcontroller;
-        $frontResource->setCore($this);
-        $frontResource->init();
-    }
-    
-    /**
-     * @since 0.10 'add_routes' hook is deprecated in favor of 'define_routes'.
-     * @return void
-     **/
-    public function initializeRouter()
-    {
-        $front = Zend_Controller_Front::getInstance();
-        $router = $front->getRouter();
-        $router->addConfig($this->getConfig('routes'), 'routes');
-        
-        fire_plugin_hook('define_routes', $router);
-        
-        $front->setRouter($router);
-    }
-    
-    public function initializeDebugging()
-    {
-        $front = Zend_Controller_Front::getInstance();
-
-        // Uncaught exceptions should bubble up to the browser level since we
-        // are essentially in debug/install mode. Otherwise, we should make use
-        // of the ErrorController, which WILL NOT LOAD IF YOU ENABLE EXCEPTIONS
-        // (took me awhile to figure this out).
-        if (($config = $this->getConfig('basic')) and ((boolean)$config->debug->exceptions)) {
-            $front->throwExceptions(true);  
-        }
-        
-        // This plugin allows for debugging request objects without inserting 
-        // debugging code into the Zend Framework code files.        
-        $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
-    }
-    
-    /**
-     * @see Zend_Application_Bootstrap_BootstrapAbstract::hasResource()
-     * @param string
-     * @return boolean
-     **/
-    public function hasResource($resourceName)
-    {
-        $getterMethod = 'get' . $resourceName;
-        return (boolean)($resource = $this->$getterMethod());
-    }
-    
-    public function getResource($resourceName)
-    {
-        $getterMethod = 'get' . $resourceName;
-        return $this->$getterMethod();
-    }
+    }                                
 }

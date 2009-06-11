@@ -17,8 +17,6 @@ define('THEME_DIR', BASE_DIR . DIRECTORY_SEPARATOR . $site['public_theme']);
 // Initialize Omeka.
 require_once 'Omeka/Core.php';
 
-require_once 'Zend/Controller/Front.php';
-$front = Zend_Controller_Front::getInstance();
-$front->registerPlugin(new Omeka_Core());
-
-$front->dispatch();
+$core = new Omeka_Core('foo');
+$core->initialize();
+$core->run();

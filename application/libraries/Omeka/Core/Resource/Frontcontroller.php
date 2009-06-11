@@ -12,20 +12,20 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_Core_Resource_Frontcontroller extends Omeka_Core_Resource_ResourceAbstract
+class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Frontcontroller
 {
     public function init()
     {
         // Front controller
         $front = Zend_Controller_Front::getInstance();
         $front->addControllerDirectory(CONTROLLER_DIR, 'default');
-            
-        Omeka_Context::getInstance()->setFrontController($front);
-                                                
+                                                        
         // Action helpers
         $this->initializeActionHelpers();        
         
         $front->registerPlugin(new Omeka_Controller_Plugin_ViewScripts);
+        
+        return $front;
     }
         
     private function initializeActionHelpers()
