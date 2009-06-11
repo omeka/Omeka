@@ -14,35 +14,40 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
     
     public function setUp()
     {
-        $this->bootstrap = array($this, 'controllerBootstrap');
+        $this->bootstrap = array($this, '_runBootstrap');
         parent::setUp();
     }
-
-    public function controllerBootstrap()
+    
+    protected function _runBootstrap()
     {                
         $core = new Omeka_Core(null);
         $core->setOptions(array(
             'pluginpaths'=>
                 array(
                     'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
-                    'Omeka_Test_Resource' => TEST_LIB_DIR . '/Omeka/Test/Resource/'),
-            'resources'=>array(
-                'Config' => array(), 
-                'FrontController' => array())));
-                        
-        $this->core = $core;
+                    'Omeka_Test_Resource' => TEST_LIB_DIR . '/Omeka/Test/Resource/')));
         
-        $this->init();
+        $this->_setUpBootstrap($core);                
+        $this->core = $core;
+        $this->core->bootstrap();
     }
     
     public function tearDown()
     {
         Omeka_Context::resetInstance();
+        parent::tearDown();
     }
     
-    public function init()
-    {}
-    
+    /**
+     * Use this template method in test cases to set up resource usage.
+     * 
+     * Leave it empty if no resources need to be enabled for this test case.
+     * 
+     * @param Omeka_Core $bootstrap
+     * @return void
+     **/
+    protected function _setUpBootstrap($bootstrap)
+    {}    
     
     protected function _getMockPluginBroker()
     {

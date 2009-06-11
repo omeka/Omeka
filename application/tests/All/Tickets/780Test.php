@@ -3,19 +3,20 @@ require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php';
 
 class Tickets_780Test extends Omeka_Controller_TestCase
 {
-    public function init()
+    public function _setUpBootstrap($bootstrap)
     {
-        $this->core->setOptions(array(
+        $mockDbResource = $this->_getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
+        $bootstrap->registerPluginResource($mockDbResource);
+        
+        $bootstrap->setOptions(array(
             'resources'=> array(
+                'Config' => array(),
+                'FrontController' => array(),
                 'Acl' => array(),
                 'Options' => array('options'=> array('public_theme'=>'default')),
                 'Theme' => array('basePath'=>BASE_DIR . '/themes', 'webBasePath'=>WEB_ROOT . '/themes')
             )
         ));
-        
-        // This keeps the database from dying horribly.
-        $this->core->setDb($this->_getMockDbWithMockTables());
-        $this->core->bootstrap();
     }
     
     public function testAutoDiscoveryLinkOnItemShowPageLinksToBrowsePageOutput()
