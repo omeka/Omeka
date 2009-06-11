@@ -17,6 +17,13 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
 {
     protected $_view;
     
+    protected $_dbOptions = array();
+    
+    public function __construct($options)
+    {
+        $this->_dbOptions = $options;
+    }
+    
     /**
      * This handles adding the appropriate view scripts directories for a given
      * request.  This is pretty much the glue between the plugin broker and the
@@ -185,7 +192,6 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      **/
     protected function getThemeOption($type)
     {
-        $options = Omeka_Context::getInstance()->getOptions();
-        return @$options[$type . '_theme'];
+        return @$this->_dbOptions[$type . '_theme'];
     }
 }

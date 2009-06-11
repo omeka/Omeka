@@ -23,7 +23,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // Action helpers
         $this->initializeActionHelpers();        
         
-        $front->registerPlugin(new Omeka_Controller_Plugin_ViewScripts);
+        $front->registerPlugin(new Omeka_Controller_Plugin_ViewScripts(Omeka_Context::getInstance()->getOptions()));
         
         return $front;
     }
