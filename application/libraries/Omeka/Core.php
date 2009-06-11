@@ -54,7 +54,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
                                'initializeAuth', 
                                'initializeCurrentUser', 
                                'initializeFrontController',
-                               'initializeRoutes',
+                               'initializeRouter',
                                'initializeDebugging');
     
     /**
@@ -459,7 +459,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      * @since 0.10 'add_routes' hook is deprecated in favor of 'define_routes'.
      * @return void
      **/
-    public function initializeRoutes()
+    public function initializeRouter()
     {
         $front = Zend_Controller_Front::getInstance();
         $router = $front->getRouter();
