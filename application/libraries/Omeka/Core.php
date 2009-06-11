@@ -208,12 +208,7 @@ class Omeka_Core extends Zend_Controller_Plugin_Abstract
      **/
     public function initializeClassLoader()
     {
-        // Unfortunately we can't use the Zend_Loader instead, because it
-        // throws warnings when it can't find a file. On the other hand,
-        // Omeka::autoload() never tries to include the file if it doesn't
-        // exist.
-        require_once 'Omeka.php';
-        spl_autoload_register(array('Omeka', 'autoload'));
+        
     }
     
     /**
