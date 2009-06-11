@@ -19,21 +19,30 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
     }
 
     public function controllerBootstrap()
-    {        
-        require_once 'Omeka/Context.php';
-        Omeka_Context::resetInstance();
+    {                
+        $core = new Omeka_Core(null);
+        $core->setOptions(array(
+            'pluginpaths'=>
+                array(
+                    'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
+                    'Omeka_Test_Resource' => TEST_LIB_DIR . '/Omeka/Test/Resource/'),
+            'resources'=>array(
+                'Acl' => array(),
+                'Config' => array(), 
+                'Options' => array(), 
+                'FrontController' => array(),
+                'Db' => array())));
         
-        // This is a subclass of Omeka_Core, which has had its routeStartup()
-        // hook redefined to load a custom sequence that is easier to test with.
-        // This may point towards the need for further refactorings.
-        $core = new Omeka_Controller_Plugin_CoreTest;
-                
-        $front = Zend_Controller_Front::getInstance();
-        $front->registerPlugin($core);
+        $core->bootstrap();
                 
         $this->core = $core;
         
         $this->init();
+    }
+    
+    public function tearDown()
+    {
+        Omeka_Context::resetInstance();
     }
     
     public function init()

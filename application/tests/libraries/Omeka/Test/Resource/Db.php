@@ -6,7 +6,7 @@
  * @package Omeka_Test
  **/
 
-class Omeka_Core_Resource_DbTest extends Zend_Application_Resource_Db
+class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
     public function init()
     {        
@@ -14,8 +14,7 @@ class Omeka_Core_Resource_DbTest extends Zend_Application_Resource_Db
         $this->setAdapter('Mysqli');
         $this->setParams($config->db->toArray());
         $this->_buildDatabase();
-        $this->_buildOmekaDb();
-        return parent::init();
+        return $this->_buildOmekaDb();
     }
     
     protected function _loadSqlFile($sqlFilename)
@@ -55,7 +54,7 @@ class Omeka_Core_Resource_DbTest extends Zend_Application_Resource_Db
     private function _buildOmekaDb()
     {
         $omekaDb = new Omeka_Db($this->getDbAdapter(), 'omeka_');
-        Omeka_Context::getInstance()->setDb($omekaDb);
+        return $omekaDb;
     }
     
     private function _buildDatabase()
