@@ -18,6 +18,8 @@ class Controllers_AclTest extends Omeka_Controller_TestCase
 {    
     public function init()
     {
+        $mockDbResource = $this->_getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
+        $this->core->registerPluginResource($mockDbResource);
         $this->core->setOptions(array(
             'resources'=> array(
                 'Acl' => array(),
@@ -26,7 +28,6 @@ class Controllers_AclTest extends Omeka_Controller_TestCase
             )
         ));
 
-        $this->core->setDb($this->_getMockDbWithMockTables());
         $this->core->bootstrap();
     }
     
