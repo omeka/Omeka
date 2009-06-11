@@ -18,8 +18,16 @@ class Controllers_AclTest extends Omeka_Controller_TestCase
 {    
     public function init()
     {
-        $this->core->setStartupEnvironment('publicTheme');
+        $this->core->setOptions(array(
+            'resources'=> array(
+                'Acl' => array(),
+                'Options' => array('options'=> array('public_theme'=>'default')),
+                'Theme' => array('basePath'=>BASE_DIR . '/themes', 'webBasePath'=>WEB_ROOT . '/themes')
+            )
+        ));
+
         $this->core->setDb($this->_getMockDbWithMockTables());
+        $this->core->bootstrap();
     }
     
     public function testUserIsNotLoggedIn()
