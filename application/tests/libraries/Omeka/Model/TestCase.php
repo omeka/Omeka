@@ -5,19 +5,15 @@
  * @package Omeka_Testing
  * @copyright Center for History and New Media, 2009
  **/
-abstract class Omeka_Model_TestCase extends PHPUnit_Framework_TestCase
-{
-    protected $_adapter;
-    
-    public function setUp()
+abstract class Omeka_Model_TestCase extends Omeka_Controller_TestCase
+{            
+    public function getAdapter()
     {
-        $dbResource = new Omeka_Test_Resource_Db;
-        $this->_adapter = $dbResource->init();
-        Omeka_Context::getInstance()->setDb($this->_adapter);
+        return $this->core->getResource('Db');
     }
     
-    public function tearDown()
+    protected function _setUpBootstrap($bootstrap)
     {
-        Omeka_Context::resetInstance();
+        $bootstrap->registerPluginResource('Db');
     }
 } 
