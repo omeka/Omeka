@@ -14,9 +14,6 @@ require_once 'paths.php';
 // Define the public theme directory path.
 define('THEME_DIR', BASE_DIR . DIRECTORY_SEPARATOR . $site['public_theme']);
 
-// Initialize Omeka.
-require_once 'Omeka/Core.php';
-
 $core = new Omeka_Core('foo');
 $core->initialize();
 $core->run();

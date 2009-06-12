@@ -22,9 +22,6 @@ include '../paths.php';
 // Define the admin theme directory path.
 define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . $site['admin_theme']);
 
-// Requires for the plugins loaded by default.
-require_once 'Omeka/Core.php';
-
 $core = new Omeka_Core('foo');
 $core->initialize();
 
