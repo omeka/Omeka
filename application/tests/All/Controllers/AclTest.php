@@ -16,7 +16,7 @@
  **/
 class Controllers_AclTest extends Omeka_Controller_TestCase
 {    
-    public function _setUpBootstrap($bootstrap)
+    public function setUpBootstrap($bootstrap)
     {
         $this->_configPublicThemeBootstrap($bootstrap);
     }

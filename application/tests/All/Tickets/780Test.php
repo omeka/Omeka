@@ -3,7 +3,7 @@ require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php';
 
 class Tickets_780Test extends Omeka_Controller_TestCase
 {
-    public function _setUpBootstrap($bootstrap)
+    public function setUpBootstrap($bootstrap)
     {
         $this->_configPublicThemeBootstrap($bootstrap);
     }
