@@ -3,7 +3,7 @@
 /**
 * 
 */
-class Omeka_Core_Resource_PluginBroker extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Core_Resource_Pluginbroker extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
     {

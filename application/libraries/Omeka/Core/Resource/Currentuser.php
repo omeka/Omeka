@@ -6,7 +6,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_Core_Resource_CurrentUser extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
     {
