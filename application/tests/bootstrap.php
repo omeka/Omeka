@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_Testing
  **/
+define('APPLICATION_ENV', 'testing');
 
 ini_set('max_execution_time', 900);
 ini_set('memory_limit', '32M');
