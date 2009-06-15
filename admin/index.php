@@ -22,10 +22,10 @@ include '../paths.php';
 // Define the admin theme directory path.
 define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . $site['admin_theme']);
 
-$core = new Omeka_Core('foo');
-$core->initialize();
+$app = new Omeka_Core;
 
+$app->bootstrap();
 // This plugin allows for all functionality that is specific to the 
 // admin theme.
-$core->getFrontController()->registerPlugin(new Omeka_Controller_Plugin_Admin);
-$core->run();
+$app->getBootstrap()->getResource('FrontController')->registerPlugin(new Omeka_Controller_Plugin_Admin);
+$app->run();

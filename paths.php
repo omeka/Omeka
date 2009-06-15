@@ -164,3 +164,9 @@ function _define_web_root()
 // exist.
 require_once 'Omeka.php';
 spl_autoload_register(array('Omeka', 'autoload'));
+
+// Define application environment
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV',
+              (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
+                                         : 'production'));

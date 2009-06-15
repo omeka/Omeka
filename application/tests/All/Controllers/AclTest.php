@@ -23,7 +23,7 @@ class Controllers_AclTest extends Omeka_Controller_TestCase
     
     public function testUserIsNotLoggedIn()
     {
-        $this->assertNull($this->core->getCurrentUser());
+        $this->assertNull($this->core->getResource('CurrentUser'));
     }
     
     public function testCanBrowseItems()

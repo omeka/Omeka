@@ -35,21 +35,19 @@ class Omeka_Test_Bootstrapper
     
     public function bootstrap()
     {
-        $core = new Omeka_Core(null);
-        $core->setOptions(array(
-            'pluginpaths'=>
-                array(
-                    'Omeka_Core_Resource' => LIB_DIR . '/Omeka/Core/Resource/',
-                    'Omeka_Test_Resource' => TEST_LIB_DIR . '/Omeka/Test/Resource/')));
+        $core = new Omeka_Core('testing', array(
+            'config' => CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini'));
+        
+        $bootstrap = $core->getBootstrap();
         
         if (method_exists($this->_testCase, 'setUpBootstrap')) {
-            $this->_testCase->setUpBootstrap($core);  
+            $this->_testCase->setUpBootstrap($bootstrap);  
         }
         
         $core->bootstrap();
         
         // Sets a public property on the test case so that tests can access this property.
-        $this->_testCase->core = $core;
+        $this->_testCase->core = $bootstrap;
         return $core;
     }    
 }

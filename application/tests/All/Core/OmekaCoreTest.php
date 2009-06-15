@@ -19,6 +19,15 @@ class Core_OmekaCoreTest extends PHPUnit_Framework_TestCase
         $this->assertNull(Omeka_Context::getInstance()->getDb());
         
         $core = new Omeka_Core;
+        
+        // When testing, must fake the resources that are loaded by default
+        // in production environment.
+        $core->getBootstrap()->setOptions(array(
+            'resources'=>array(
+                'Config'=>array(), 
+                'Logger'=>array(), 
+                'Db'=>array())));
+                
         $core->phasedLoading('initializeDb');
         
         $db = Omeka_Context::getInstance()->getDb();
