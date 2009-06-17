@@ -37,7 +37,7 @@ class Omeka_Core_Resource_Db extends Zend_Application_Resource_Db
         
         $dbh = Zend_Db::factory('Mysqli', $connectionParams);
         
-        $db_obj = new Omeka_Db($dbh, $db->prefix);
+        $db_obj = new Omeka_Db($dbh, $dbIni->prefix);
         
         return $db_obj;
     }
