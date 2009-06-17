@@ -22,6 +22,8 @@ class Omeka_Context
         
     protected $_installed = true; // Omeka is thought to be installed until proven otherwise.
     
+    private $_config;
+    
 	/**
 	 * Singleton instance
 	 * 
@@ -71,9 +73,22 @@ class Omeka_Context
 	    $this->_config[$name] = $config;
 	}
 	
-	public function getConfig($name)
+	/**
+	 * Workaround to support old style of configuration setting/getting.
+	 * 'basic' maps to the application configuration, others map to other
+	 * set configurations from setConfig.
+	 *
+	 * @param $name string Nickname of configuration to get
+	 */
+ 	public function getConfig($name)
 	{
-	    return $this->_config[$name];
+	    if ($name == 'basic')
+	    {
+	        return $this->config;
+	    } else 
+	    {
+	        return $this->_config[$name];
+        }
 	}
 	
     public function __call($m, $a)
