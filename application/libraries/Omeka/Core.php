@@ -54,8 +54,6 @@ class Omeka_Core extends Zend_Application
      **/
     public function __construct($environment = null, $options = null)
     {
-        error_reporting(E_ALL);
-        ini_set('display_errors', '0');
         require_once 'globals.php';
         // For the sake of backwards compatibility with existing scripts that
         // instantiate Omeka_Core with no arguments.
