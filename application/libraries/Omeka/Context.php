@@ -98,4 +98,14 @@ class Omeka_Context
         $field = strtolower($name);
         return $this->$field;
     }
+    
+    public function setRequest($request)
+    {
+        return $this->frontcontroller->setRequest($request);
+    }
+    
+    public function getRequest()
+    {
+        return $this->frontcontroller->getRequest();
+    }
 }
