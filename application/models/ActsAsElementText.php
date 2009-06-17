@@ -78,6 +78,13 @@ class ActsAsElementText extends Omeka_Record_Mixin
      **/
     protected $_textsToSave = array();
     
+    /**
+     * Whether the elements and texts have been loaded yet.
+     *
+     * @var bool
+     */
+    protected $_recordsAreLoaded = false;
+    
     public function __construct($record)
     {
         $this->_record = $record;
