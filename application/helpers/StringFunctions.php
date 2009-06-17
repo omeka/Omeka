@@ -73,11 +73,15 @@ function snippet($text, $startPos, $endPos, $append = '…')
  * @param string $ellipsis Optional '...' by default.
  * @return string
  **/
-function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
+function snippet_by_word_count($phrase, $maxWords = 20, $ellipsis = '...')
 {
-    $phraseArray = explode(' ', $phrase);
-    if (count($phraseArray) > $maxWords && $maxWords > 0) {
-        $phrase = implode(' ', array_slice($phraseArray, 0, $maxWords)) . $ellipsis;
+    if ($maxWords > 0) {
+        $phraseArray = explode(' ', $phrase);
+        if (count($phraseArray) > $maxWords) {
+            $phrase = implode(' ', array_slice($phraseArray, 0, $maxWords)) . $ellipsis;            
+        }
+    } else {
+        return '';
     }
     return $phrase;
 }
