@@ -11,10 +11,7 @@ class Models_InsertCollectionTest extends Omeka_Model_TestCase
     public function testCanInsertCollection()
     {
         // Verify no collections exist.
-        
-        $sql = "SELECT COUNT(*) FROM omeka_collections";
-        $count = $this->getAdapter()->fetchOne($sql);
-        $this->assertEquals($count, 0);
+        $this->_assertTableIsEmpty('omeka_collections');
         
         // Insert a collection and verify with a second query.
         $collection = insert_collection(array('name'=>'Foo Bar', 'public'=>true, 'description'=>'foo'));

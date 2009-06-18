@@ -22,4 +22,17 @@ abstract class Omeka_Model_TestCase extends PHPUnit_Framework_TestCase
     {
         $bootstrap->registerPluginResource('Db');
     }
+    
+    /**
+     * Asserts that the given table is empty.
+     *
+     * @param $tableName string Table name
+     */
+    protected function _assertTableIsEmpty($tableName)
+    {
+        // Verify that there are no items in the test table.
+        $sql = "SELECT COUNT(*) FROM $tableName";
+        $count = $this->getAdapter()->fetchOne($sql);
+        $this->assertEquals(0, $count, "$tableName was not empty as expected.");
+    }
 } 

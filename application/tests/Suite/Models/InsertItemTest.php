@@ -7,15 +7,7 @@
  **/
 
 class Models_InsertItemTest extends Omeka_Model_TestCase
-{
-    protected function _assertTableIsEmpty($tableName)
-    {
-        // Verify that there are no items in the test database.
-        $sql = "SELECT COUNT(*) FROM $tableName";
-        $count = $this->getAdapter()->fetchOne($sql);
-        $this->assertEquals($count, 0);
-    }
-    
+{   
     public function testCanInsertItem()
     {
         $this->_assertTableIsEmpty('omeka_items');
