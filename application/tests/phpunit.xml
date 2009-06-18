@@ -2,6 +2,6 @@
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true">
     <testsuite name="All Tests">
-        <directory>All</directory>
+        <directory>Suite</directory>
     </testsuite>
 </phpunit>
