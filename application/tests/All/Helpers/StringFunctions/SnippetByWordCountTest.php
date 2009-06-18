@@ -1,11 +1,12 @@
 <?php 
 require_once HELPERS;
 
-class Helpers_SnippetByWordCountTest extends PHPUnit_Framework_TestCase
-{
-    // tests function snippet_by_word_count($phrase, $maxWords, $ellipsis = '...')
-    // in StringFunctions.php
-    
+/**
+ * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
+ * in helpers/StringFunctions.php
+ */
+class Helpers_StringFunctions_SnippetByWordCountTest extends PHPUnit_Framework_TestCase
+{   
     public function setUp()
     {
         $this->reporting = error_reporting();
