@@ -18,7 +18,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
     {
         // Plugin broker is required to set plugin-defined response contexts
         $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap('Pluginbroker');
+        $bootstrap->bootstrap('PluginBroker');
         
         // Front controller
         $front = Zend_Controller_Front::getInstance();
@@ -93,7 +93,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
              )
          );
 
-        if ($pluginBroker = $this->getBootstrap()->getResource('Pluginbroker')) {
+        if ($pluginBroker = $this->getBootstrap()->getResource('PluginBroker')) {
              $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
         }
         
