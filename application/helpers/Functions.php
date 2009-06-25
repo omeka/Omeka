@@ -135,8 +135,10 @@ function settings($name)
 }
 
 /**
- * Loops through a specific record set, setting the current record to a globally 
- * accessible scope and returning it.
+ * Loops through a specific record set, setting the current record to a 
+ * globally accessible scope and returning it.  Records are only valid for
+ * the current call to loop_records (i.e., the next call to loop_records()
+ * will release the previously-returned item).
  * 
  * @since 0.10
  * @see loop_items()
@@ -152,16 +154,29 @@ function loop_records($recordType, $records)
     // set it to NULL.
     static $recordLoop = null;
     
+    // If this is the first call, set an array holding the last-returned
+    // record from the loop, for each record type.  Initially set to null.
+    static $lastRecord = null;
+    
     // If the record type index does not exist, set it with the provided 
     // records. We do this so multiple record types can coexist.
     if (!isset($recordLoop[$recordType])) {
         $recordLoop[$recordType] = $records;
     }
     
+    // If there is a previously-returned record from this loop, release the
+    // object before returning the next record.
+    if ($lastRecord[$recordType]) {
+        release_object($lastRecord[$recordType]);
+        $lastRecord[$recordType] = null;
+    }
+    
     // If we haven't reached the end of the loop, set the current record in the 
     // loop and return it. This advances the array cursor so the next loop 
     // iteration will get the next record.
     if (list($key, $record) = each($recordLoop[$recordType])) {
+        
+        $lastRecord[$recordType] = $record;
         
         // Set the current records, depending on the record type.
         switch ($recordType) {
