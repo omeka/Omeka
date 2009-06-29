@@ -63,39 +63,51 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         // var_dump($this->_view);exit;
     }
 
-
     /**
-     *  If you're in a plugin, check in this order:
-     *    * plugin view scripts (only for that plugin <-- fixes a bug)
-     *    * plugin shared dir
-     *    * theme view scripts
-     *    * theme shared dir
+     * Sets up the asset paths for the plugin.
+     *  
+     * If you're in a plugin, check in this order:
+     *    1. plugin view scripts (only for that plugin)
+     *    2. plugin view scripts for other plugins
+     *    3. theme view scripts
      * 
      * This means that it needs to add the paths in the reverse order of what needs
      * to be checked first, so theme paths first and then plugin paths.
      * 
+     * @param string $pluginModuleName The module name for the plugin
+     * @param string $themeType The type of theme: 'admin' or 'public'
+     * @return void
      */
-    protected function _setupPathsForPlugin($moduleName, $themeType)
+    protected function _setupPathsForPlugin($pluginModuleName, $themeType)
     {
         $this->_addThemePaths($themeType);        
-        $this->_addPathsForModule($themeType, $moduleName);
+        $this->_addPluginPaths($themeType, $pluginModuleName);
     }
 
     /**
-     *  If you're in one of the themes, check in this order:
-     *    * theme view scripts
-     *    * theme shared dir
-     *    * all plugin view scripts
-     *    * all plugin shared dirs
+     *  Sets up the asset paths for the theme
      * 
+     *  If you're in one of the themes, check in this order:
+     *    1. theme view scripts
+     *    2. all plugin view scripts
+     * 
+     * @param string $themeType The type of theme: 'admin' or 'public'
+     * @return void
      */
     protected function _setupPathsForTheme($themeType)
     {
-        $this->_addPathsForModule($themeType);        
+        $this->_addPluginPaths($themeType);        
         $this->_addThemePaths($themeType);
     }
     
-    protected function _addPathsForModule($themeType, $moduleName = null)
+    /**
+     *  Adds asset paths for a plugin.
+     * 
+     * @param string $pluginModuleName The module name for the plugin
+     * @param string $themeType The type of theme: 'admin' or 'public'
+     * @return void
+     */
+    protected function _addPluginPaths($themeType, $pluginModuleName = null)
     {
         // This part of the controller plugin depends on Omeka's plugin broker.
         // If the plugin broker is not installed, can't do anything.
@@ -103,18 +115,35 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         if (!$pluginBroker) {
             return;
         }
-        
-        $scriptDirs = $pluginBroker->getModuleViewScriptDirs($moduleName);
-        
-        // IF we have chosen a specific module to add paths for.
-        if ($moduleName and $scriptDirs[$themeType]) {
-            foreach ($scriptDirs[$themeType] as $scriptPath) {
-                $this->_addPathToView($scriptPath);
+                
+        // If we have chosen a specific module to add paths for.
+        if ($pluginModuleName) {
+            
+            // We need to add the scripts in reverse order if how they will be found.
+             
+            // add the scripts from the other modules
+            $otherPluginScriptDirs = $pluginBroker->getModuleViewScriptDirs(null);
+            foreach ($otherPluginScriptDirs as $otherPluginModuleName => $scriptPathSet) {
+                if ($otherPluginModuleName != $pluginModuleName && $scriptPathSet[$themeType]) {
+                    foreach ($scriptPathSet[$themeType] as $scriptPath) {
+                        $this->_addPathToView($scriptPath);
+                    }
+                }
             }
+            
+            // add the scripts from the first module
+            $pluginScriptDirs = $pluginBroker->getModuleViewScriptDirs($pluginModuleName);
+            if ($pluginScriptDirs[$themeType]) {
+                foreach ($pluginScriptDirs[$themeType] as $scriptPath) {
+                    $this->_addPathToView($scriptPath);
+                }
+            }
+            
         } else {
             // We have not chosen a specific module to add paths for, so just add
             // them all (for the specific theme type, 'admin' or 'public').
-            foreach ($scriptDirs as $moduleName => $scriptPathSet) {
+            $pluginScriptDirs = $pluginBroker->getModuleViewScriptDirs(null);
+            foreach ($pluginScriptDirs as $moduleName => $scriptPathSet) {
                 if ($scriptPathSet[$themeType]) {
                     foreach ($scriptPathSet[$themeType] as $scriptPath) {
                         $this->_addPathToView($scriptPath);
