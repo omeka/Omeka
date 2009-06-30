@@ -33,7 +33,7 @@ function items_output_uri($output="rss2", $otherParams = array()) {
     $queryParams = array_merge($queryParams, $otherParams);
     
     $queryParams['output'] = $output;
-    return uri(array('controller'=>'items', 'action'=>'browse'), null, $queryParams);
+    return uri(array('controller'=>'items', 'action'=>'browse', 'id' => ''), null, $queryParams);
 }
 
 /**
