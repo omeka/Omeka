@@ -116,11 +116,15 @@ class Omeka_Context
     
     public function setRequest($request)
     {
-        return $this->frontcontroller->setRequest($request);
+        if ($this->frontcontroller) {
+            $this->frontcontroller->setRequest($request);
+        }
     }
     
     public function getRequest()
     {
-        return $this->frontcontroller->getRequest();
+        if ($this->frontcontroller) {
+            return $this->frontcontroller->getRequest();
+        }
     }
 }
