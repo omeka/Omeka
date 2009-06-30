@@ -125,6 +125,8 @@ class Omeka_Context
     {
         if ($this->frontcontroller) {
             return $this->frontcontroller->getRequest();
+        } else {
+            return null;
         }
     }
 }
