@@ -18,6 +18,7 @@ class ItemRss2
         $entries = array();
         foreach ($records as $record) {
             $entries[] = $this->itemToRss($record);
+            release_object($record);
         }
                 
         $headers = $this->buildRSSHeaders();
