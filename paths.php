@@ -45,6 +45,7 @@ $site['fullsize']          = 'fullsize';
 $site['thumbnails']        = 'thumbnails';
 $site['square_thumbnails'] = 'square_thumbnails';
 $site['files']             = 'files';
+$site['lucene_index']      = 'lucene_index';
 $site['public_theme']      = 'themes';
 $site['admin_theme']       = 'themes';
 $site['views']             = 'views';
@@ -74,6 +75,7 @@ define('THUMBNAIL_DIR',        ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['thumbn
 define('SQUARE_THUMBNAIL_DIR', ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['square_thumbnails']);
 define('FULLSIZE_DIR',         ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['fullsize']);
 define('FILES_DIR',            ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['files']);
+define('LUCENE_INDEX_DIR',     ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['lucene_index']);
 
 // Define the script that loads all the helpers:
 define('HELPERS', HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php');
