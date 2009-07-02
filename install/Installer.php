@@ -1,7 +1,7 @@
 <?php
 class Installer
 {
-    const OMEKA_PHP_VERSION = '5.2';
+    const OMEKA_PHP_VERSION = '5.2.4';
     const OMEKA_MYSQL_VERSION = '5.0';
     
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
