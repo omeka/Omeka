@@ -85,21 +85,40 @@ class ActsAsElementText extends Omeka_Record_Mixin
      */
     protected $_recordsAreLoaded = false;
     
+    /**
+     * Link to the underlying record
+     *
+     * @param Omeka_Record
+     */
     public function __construct($record)
     {
         $this->_record = $record;
     }
     
+    /**
+     * Omeka_Record callback for afterSave. Saves the ElementText records once
+     * the associated record is saved.
+     */
     public function afterSave()
     {
         $this->saveElementTexts();
     }
     
+    /**
+     * Get the database object from the associated record.
+     *
+     * @return Omeka_Db
+     */
     private function _getDb()
     {
         return $this->_record->getDb();
     }
     
+    /**
+     * Get the class name of the associated record (Item, File, etc.).
+     *
+     * @return string Type of record
+     */
     private function _getRecordType()
     {
         return get_class($this->_record);
@@ -109,20 +128,23 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * Retrieve the record_type_id for this record.
      * 
      * @return integer
-     **/
+     */
     protected function getRecordTypeId()
     {
         return (int) $this->_getDb()->getTable('RecordType')->findIdFromName($this->_getRecordType());
     }
     
     /**
-     * Load all the ElementText records for the given record (Item, File, etc.).  These will be indexed by [element_id].
+     * Load all the ElementText records for the given record (Item, File, etc.).
+     * These will be indexed by [element_id].
      * 
-     * Also load all the Element records and index those by their name and set name.
+     * Also load all the Element records and index those by their name and set 
+     * name.
      * 
-     * @param boolean $reload Whether or not reload all the data that was previously loaded.
+     * @param boolean $reload Whether or not reload all the data that was 
+     *                        previously loaded.
      * @return void
-     **/
+     */
     public function loadElementsAndTexts($reload=false)
     {
         if ($this->_recordsAreLoaded and !$reload) {
@@ -146,8 +168,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
     /**
      * Retrieve ALL of the ElementText records for the given record.
      * 
-     * @return array Set of ElementText records for this record.
-     **/
+     * @return array Set of ElementText records for the record.
+     */
     public function getElementTextRecords()
     {
         return $this->_record->getTable('ElementText')->findByRecord($this->_record);
@@ -156,17 +178,19 @@ class ActsAsElementText extends Omeka_Record_Mixin
     /**
      * Retrieve ALL of the Element records for the given record.
      * 
-     * @return array
-     **/
+     * @return array All Elements that apply to the record's type.
+     */
     public function getElements()
     {
         return $this->_record->getTable('Element')->findByRecordType($this->_getRecordType());
     }
 
     /**
-     * @param string
+     * Retrieve all of the record's ElementTexts for the given Element.
+     *
+     * @param Element $element
      * @return array Set of ElementText records.
-     **/
+     */
     public function getTextsByElement($element)
     {        
         // Load 'em if we need 'em.
@@ -178,12 +202,26 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return !empty($texts) ? $texts : array();
     }
     
+    /**
+     * Retrieve all of the record's ElementTexts for the given element name and
+     * element set name.
+     *
+     * @param string $elementName Element name
+     * @param string $elementSetName Element set name
+     * @return array Set of ElementText records.
+     */
     public function getElementTextsByElementNameAndSetName($elementName, $elementSetName = null)
     {
         $element = $this->getElementByNameAndSetName($elementName, $elementSetName);
         return $this->getTextsByElement($element);
     }
     
+    /**
+     * Retrieve the Element with the given ID.
+     *
+     * @param int $elementId
+     * @return Element
+     */
     public function getElementById($elementId)
     {
         if (!$this->_elementsById) {
@@ -197,6 +235,12 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return $this->_elementsById[$elementId];
     }
     
+    /**
+     * Retrieve the Element records for the given ElementSet.
+     *
+     * @param string Element set name
+     * @return array Set of Element records
+     */
     public function getElementsBySetName($elementSetName)
     {
         if (!$this->_elementsBySet) {
@@ -207,6 +251,12 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return !empty($elements) ? $elements : array();
     }
     
+    /**
+     * Retrieve ALL the Element records for the object, organized by ElementSet.
+     * For example, $elements['Dublin Core'] = array(Element instance, Element instance, ...)
+     * 
+     * @return array Set of Element records 
+     */
     public function getAllElementsBySet()
     {
         if (!$this->_elementsBySet) {
@@ -216,6 +266,14 @@ class ActsAsElementText extends Omeka_Record_Mixin
         return $this->_elementsBySet;
     }
     
+    /**
+     * Retrieve the Element record corresponding to the given element name and
+     * (optional) element set name.
+     *
+     * @param string $elementName
+     * @param string $elementSetName
+     * @return Element
+     */
     public function getElementByNameAndSetName($elementName, $elementSetName = null)
     {
         if (!$this->_elementsByNameAndSet) {
@@ -226,8 +284,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
             $element = @$this->_elementsByNameAndSet[$elementName];
             // We can safely assume that $element is an array, even if empty.
             if (count($element) > 1) {
-                // If we have more than one element set with an element of that name,
-                // return the first one.
+                // If we have more than one element set with an element of that 
+                // name, return the first one.
                 debug('Element name is ambiguous!  There is more than one element set containing an element named "' . $elementName . '"!');
                 return current($element);
             } else if(empty($element)) {
@@ -250,9 +308,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * @param array
-     * @return array
-     **/
+     * Index a set of ElementTexts based on element ID.
+     *
+     * @param array $textRecords Set of ElementText records
+     * @return array The provided ElementTexts, indexed by element ID.
+     */
     private function _indexTextsByElementId($textRecords)
     {
         $indexed = array();
@@ -264,11 +324,14 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * Index a set of Elements based on their name.
+     * Index a set of Elements based on their name. The result is a doubly
+     * associative array, with the first key being element name and the second
+     * being element set name.  
+     * i.e., $indexed['Creator']['Dublin Core'] = Element instance
      * 
-     * @param array
-     * @return array
-     **/
+     * @param array $elementRecords Set of Element records
+     * @return array The provided Elements, indexed as described
+     */
     private function _indexElementsByNameAndSet(array $elementRecords)
     {
         $indexed = array();
@@ -279,6 +342,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
+     * Index a set of Elements based on their set name.
+     *
      * @todo May need to apply ksort() to this to ensure that all sub-arrays are 
      *       in the correct order.
      * @todo May need to optimize this method so we avoid three foreach loops. 
@@ -286,7 +351,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * 
      * @param array
      * @return array
-     **/
+     */
     private function _indexElementsBySet(array $elementRecords)
     {
         // Account for elements without an order by separating them from 
@@ -318,7 +383,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * 
      * @param array
      * @return array
-     **/
+     */
     private function _indexElementsById(array $elementRecords)
     {
         $indexed = array();
@@ -331,15 +396,16 @@ class ActsAsElementText extends Omeka_Record_Mixin
     /**
      * Add a string of text for an element.
      * 
-     * Creates a new ElementText record, populates it with the specified text value 
-     * and assigns it to the element.
+     * Creates a new ElementText record, populates it with the specified text 
+     * value and assigns it to the element.
      * 
      * saveElementTexts() must be called after this in order to save the element
      * texts to the database.  
      * 
-     * @param string
-     * @return void
-     **/
+     * @param Element $element Element which text should be created for
+     * @param string $elementText Text to be added
+     * @param bool $isHtml Whether the text to add is HTML
+     */
     public function addTextForElement($element, $elementText, $isHtml = false)
     {
         $textRecord = new ElementText;
@@ -353,7 +419,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * Adds element texts for a record based on a formatted array of values.
+     * Add element texts for a record based on a formatted array of values.
      * The array must be formatted as follows:
      * 
      *              'Element Set Name' => 
@@ -361,8 +427,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      *                      array(array('text' => 'foo', 'html' => false)))
      * 
      * @param array $elementTexts
-     * @return void
-     **/
+     */
     public function addElementTextsByArray(array $elementTexts)
     {
         foreach ($elementTexts as $elementSetName => $elements) {
@@ -386,15 +451,16 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * The application flow is thus:
      *
      *  1) Build ElementText objects from the POST.
-     *  2) Validate the ElementText objects and assign error messages if necessary.
-     *  3) After the item saves correctly, delete all the ElementText records for the Item.
+     *  2) Validate the ElementText objects and assign error messages if 
+     *     necessary.
+     *  3) After the item saves correctly, delete all the ElementText records 
+     *     for the Item.
      *  4) Save the new ElementText objects to the database.
      *
      * @see Item::beforeSaveForm()
      * 
-     * @param array
-     * @return void
-     **/
+     * @param array POST data
+     */
     public function beforeSaveElements(&$post)
     {
         $this->_getElementTextsToSaveFromPost($post);
@@ -415,12 +481,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * 
      * @todo May want to throw an Exception if an element in the POST doesn't
      * actually exist.
-     * @param array
-     * @return void
-     **/
+     * @param array POST data
+     */
     private function _getElementTextsToSaveFromPost($post)
-    {
-        
+    {   
         if (!$elementPost = $post['Elements']) {
             return;
         }
@@ -451,10 +515,12 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * @param array
+     * Retrieve a text string for an element from POSTed form data.
+     *
+     * @param array POST data
      * @param Element
      * @return string
-     **/
+     */
     public function getTextStringFromFormPost($postArray, $element)
     {
         // Attempt to override the defaults with plugin behavior.
@@ -525,10 +591,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * Validate all the elements one by one.  This is potentially a lot slower
      * than batch processing the form, but it gives the added bonus of being 
      * able to encapsulate the logic for validation of Elements.
-     * 
-     * @param array Set of Element records.
-     * @return void
-     **/
+     */
     private function _validateElementTexts()
     {
         foreach ($this->_textsToSave as $key => $textRecord) {
@@ -541,9 +604,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
+     * Return whether the given ElementText record is valid.
+     *
      * @param ElementText $elementTextRecord
      * @return boolean
-     **/
+     */
     private function _elementTextIsValid($elementTextRecord)
     {
         $elementRecord = $this->getElementById($elementTextRecord->element_id);
@@ -601,16 +666,12 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * Save all ElementText records that were associated with a record.
      *
      * Typically called in the afterSave() hook for a record.
-     * 
-     * @return void
-     **/
+     */
     public function saveElementTexts()
     {        
         if (!$this->_record->exists()) {
             throw new Omeka_Record_Exception('Cannot save element text for records that are not yet persistent!');
         }
-        
-        // var_dump($this->_textsToSave);exit;
         
         // Delete all the elements that were displayed on the form before adding the new stuff.
         $elementIdsFromForm = array_keys($this->_elementsOnForm);
@@ -625,11 +686,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * Deletes all the element texts for element_id's that have been provided.
+     * Delete all the element texts for element_id's that have been provided.
      * 
      * @param array
      * @return boolean
-     **/
+     */
     public function deleteElementTextsByElementId(array $elementIdArray = array())
     {
         $db = $this->_getDb();
@@ -649,9 +710,10 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * Deletes all the element texts assigned to the current record ID.
+     * Delete all the element texts assigned to the current record ID.
+     *
      * @return boolean
-     **/
+     */
     public function deleteElementTexts()
     {
         $db = $this->_getDb();
