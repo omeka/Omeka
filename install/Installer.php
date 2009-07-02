@@ -116,7 +116,7 @@ class Installer
     private function checkMysqlVersion()
     {
         $db = $this->core->getDb();
-        $mysqlVersion = $db->getAdapter()->server_info;
+        $mysqlVersion = $db->getAdapter()->getServerVersion();
         if (version_compare($mysqlVersion, OMEKA_MYSQL_VERSION, '<')) {
             $header = "Incorrect version of MySQL";
             $msg = "Omeka requires MySQL " . OMEKA_MYSQL_VERSION . " or greater 
