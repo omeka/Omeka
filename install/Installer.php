@@ -119,7 +119,7 @@ class Installer
         $mysqlVersion = $db->getConnection()->getConnection()->server_info;
         if (version_compare($mysqlVersion, OMEKA_MYSQL_VERSION, '<')) {
             $header = "Incorrect version of MySQL";
-            $msg = "Omeka requires MySQL " . self::OMEKA_PHP_VERSION . " or greater 
+            $msg = "Omeka requires MySQL " . self::OMEKA_MYSQL_VERSION . " or greater 
             to be installed.  <a href=\"http://dev.mysql.com/doc/refman/5.0/en/upgrade.html\">Instructions</a> 
             for upgrading are on the MySQL website.</a>";
             $this->errors[] = compact('header', 'msg');
