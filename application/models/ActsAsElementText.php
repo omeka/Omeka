@@ -683,6 +683,9 @@ class ActsAsElementText extends Omeka_Record_Mixin
             $textRecord->record_id = $this->_record->id;
             $textRecord->forceSave();
         }
+        
+        // Cause texts to be re-loaded if accessed after save.
+        $this->_recordsAreLoaded = false;
     }
     
     /**
