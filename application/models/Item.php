@@ -259,9 +259,7 @@ class Item extends Omeka_Record
             $doc->addField(Zend_Search_Lucene_Field::Text(Omeka_Search::createLuceneFieldName('tag', $fieldValueNumber), $tag->name));    
             $fieldValueNumber++;
         }        
-        
-        //var_dump($doc);exit;
-        
+                
         return parent::createLuceneDocument($doc);
     }
         

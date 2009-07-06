@@ -339,7 +339,7 @@ class Omeka_Record implements ArrayAccess
         
         $this->runCallbacks('beforeSave');
         
-        // Only try to save columns in the $data that are actually defined 
+        // Only try to save columns in the $data that are actually defined
         // columns for the model
         $data_to_save = $this->toArray();
         
@@ -360,7 +360,9 @@ class Omeka_Record implements ArrayAccess
         $this->runCallbacks('afterSave');
         
         // update the lucene index with the record
-        Omeka_Context::getInstance()->getSearch()->updateLucene($this);
+        if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
+            $omekaSearch->updateRecordInLuceneIndex($this);   
+        }
         
         return true;
     }
@@ -416,7 +418,9 @@ class Omeka_Record implements ArrayAccess
         $this->runCallbacks('afterDelete');
         
         // delete the record from the lucene index
-        Omeka_Context::getInstance()->getSearch()->deleteLucene($this);
+        if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
+            $omekaSearch->deleteRecordFromLuceneIndex($this);
+        }
     }
     
     /**

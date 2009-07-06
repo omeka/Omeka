@@ -18,16 +18,18 @@ class Omeka_Search
     static private $_instance;
     
     private $_luceneIndex;
+    private $_luceneIndexDir;
     
     /**
      * Gets the single instance of Omeka_Search used by Omeka
      *
+     * @param $luceneIndexDir The directory path of the lucene index
      * @return Omeka_Search
      **/
-    public static function getInstance()
+    public static function getInstance($luceneIndexDir = LUCENE_INDEX_DIR)
     {
         if (!self::$_instance) {
-            self::$_instance = new self();
+            self::$_instance = new self($luceneIndexDir);
         }
         return self::$_instance;
     }
@@ -35,17 +37,31 @@ class Omeka_Search
     /**
      * Constructs an instance of Omeka_Search
      *
+     * @param $luceneIndexDir The directory path of the lucene index
      **/
-    public function __construct()
+    private function __construct($luceneIndexDir)
     {
-        // Open the Lucene index if one already exists, otherwise create a new one.
-        try {
-            $this->_luceneIndex = Zend_Search_Lucene::open(LUCENE_INDEX_DIR);
-        } catch (Exception $e) {
-            $this->_luceneIndex = Zend_Search_Lucene::create(LUCENE_INDEX_DIR);
-        }
+        // Save the directory name of the index
+        $this->_luceneIndexDir = $luceneIndexDir;
     }
     
+    /**
+     * Creates and loads the lucene index if it is not already loaded
+     *
+     * @return void
+     **/
+    private function _loadLuceneIndex()
+    {
+        if (!$this->_luceneIndex) {
+            // Open the Lucene index if one already exists, otherwise create a new one.
+            try {
+                $this->_luceneIndex = Zend_Search_Lucene::open($this->_luceneIndexDir);
+            } catch (Exception $e) {
+                $this->_luceneIndex = Zend_Search_Lucene::create($this->_luceneIndexDir);
+            }
+        }
+    }
+      
     /**
      * Gets the single Lucene index object used by Omeka.
      *
@@ -53,7 +69,52 @@ class Omeka_Search
      **/
     public function getLuceneIndex()
     {
+        // load the index if it isn't already loaded
+        $this->_loadLuceneIndex();
+        
         return $this->_luceneIndex;
+    }
+    
+    
+    /**
+     * Deletes the single Lucene index object used by Omeka.
+     *
+     * @return Zend_Search_Lucene_Document
+     **/
+    public function deleteLuceneIndex()
+    {
+        if ($this->_luceneIndex) {
+            unset($this->_luceneIndex);        
+            $this->unlinkDirectory($this->_luceneIndexDir);
+        }
+    }
+
+    /**
+     * Recursively deletes a directory
+     *
+     * @param string $dirname The name of the directory to delete recursively
+     * @return void
+     **/
+     private function unlinkDirectory($dirname) 
+     {         
+         if (!is_dir($dirname)) {
+             trigger_error('Given argument missing or not a directory. ' . $dirname, E_USER_ERROR);
+         } else {
+             $dir = opendir($dirname);
+             while(($filename = readdir($dir)) !== false) {
+                 $path = $dirname . DIRECTORY_SEPARATOR . $filename;
+                 if (is_dir($path)) {
+                     if ($filename == '.' || $filename == '..') {
+                         continue;        
+                     }
+                     $this->unlinkDirectory($path);
+                 } else {
+                     unlink($path);
+                 }
+             }
+         }
+         closedir($dir);         
+         rmdir($dirname);         
     }
     
     /**
@@ -64,15 +125,18 @@ class Omeka_Search
      * @param Omeka_Record $record The Omeka_Record to index.
      * @return void
      **/
-    public function updateLucene($record)
+    public function updateRecordInLuceneIndex($record)
     {
+        // load the index if it isn't already loaded
+        $this->_loadLuceneIndex();
+        
         // create a lucene document for the record
         $doc = $record->createLuceneDocument();
         
         if ($doc) {
             
             // delete the document from the index if it already exists
-            $this->deleteLucene($record);
+            $this->deleteRecordFromLuceneIndex($record);
             
             // add the document to the index
             $this->_luceneIndex->addDocument($doc);
@@ -86,8 +150,11 @@ class Omeka_Search
      * @param Omeka_Record $record The Omeka_Record to delete from the index.
      * @return void
      **/
-    public function deleteLucene($record)
+    public function deleteRecordFromLuceneIndex($record)
     {
+        // load the index if it isn't already loaded
+        $this->_loadLuceneIndex();
+        
         // delete the document from the index if it already exists
         if ($hit = $this->findByRecordLucene($record)) {
             $this->_luceneIndex->delete($hit->id);
@@ -103,6 +170,9 @@ class Omeka_Search
      */
     public function findByRecordLucene($record) 
     {
+        // load the index if it isn't already loaded
+        $this->_loadLuceneIndex();
+        
         // create a query to find the queryhit associated with the Omeka_Record
         $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
         $query->addTerm(new Zend_Search_Lucene_Index_Term(get_class($record), 'model_name', true));

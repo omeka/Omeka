@@ -35,4 +35,10 @@ abstract class Omeka_Model_TestCase extends PHPUnit_Framework_TestCase
         $count = $this->getAdapter()->fetchOne($sql);
         $this->assertEquals(0, $count, "$tableName was not empty as expected.");
     }
+    
+    public function tearDown()
+    {
+        Omeka_Context::resetInstance();
+        parent::tearDown();
+    }
 } 
