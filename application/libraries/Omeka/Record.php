@@ -154,8 +154,7 @@ class Omeka_Record implements ArrayAccess
         
         // Module callbacks
         $this->delegateToMixins($event, $args, true);
-        
-        
+             
         // Format the name of the plugin hook so it's in all lowercase with 
         // underscores. Taken from Doctrine::tableize()
         $plugin_hook = Inflector::underscore($event);
@@ -360,6 +359,9 @@ class Omeka_Record implements ArrayAccess
         
         $this->runCallbacks('afterSave');
         
+        // update the lucene index with the record
+        Omeka_Context::getInstance()->getSearch()->updateLucene($this);
+        
         return true;
     }
     
@@ -412,6 +414,9 @@ class Omeka_Record implements ArrayAccess
         
         $this->id = null;
         $this->runCallbacks('afterDelete');
+        
+        // delete the record from the lucene index
+        Omeka_Context::getInstance()->getSearch()->deleteLucene($this);
     }
     
     /**
@@ -441,6 +446,24 @@ class Omeka_Record implements ArrayAccess
     protected function beforeValidate() {}
     
     protected function afterValidate() {}
+    
+    /**
+     * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
+     *
+     * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
+     * @return Zend_Search_Lucene_Document
+     **/
+    public function createLuceneDocument($doc=null) 
+    {
+        if ($doc) {
+            $doc = new Zend_Search_Lucene_Document(); 
+            
+            // add the model_name and model_id to the Lucene document
+            $doc->addField(Zend_Search_Lucene_Field::Keyword(Omeka_Search::createLuceneFieldName('model_name'), get_class($this)));
+            $doc->addField(Zend_Search_Lucene_Field::Keyword(Omeka_Search::createLuceneFieldName('model_id'), $this->id));
+        }
+        return $doc;
+    }
     
     // Setter methods 
     public function setArray($data)

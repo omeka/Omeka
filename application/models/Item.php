@@ -226,6 +226,44 @@ class Item extends Omeka_Record
     {
         $this->saveFiles();
     }
+    
+    /**
+     * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
+     *
+     * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
+     * @return Zend_Search_Lucene_Document
+     **/
+    public function createLuceneDocument($doc=null) 
+    {
+        if (!$doc) {
+            $doc = new Zend_Search_Lucene_Document(); 
+        }
+        
+        // add the fields for the non-empty element texts, where each field is joint key of the set name and element name (in that order).        
+        foreach($this->getAllElementsBySet() as $set => $elements) {
+            foreach($elements as $element) {
+                $fieldValueNumber = 1;
+                foreach($this->getTextsByElement($element) as $elementText) {
+                    if (trim($elementText->text) != '') {
+                        $doc->addField(Zend_Search_Lucene_Field::UnStored(Omeka_Search::createLuceneFieldName(array($set, $element->name), $fieldValueNumber), $elementText->text));    
+                        $fieldValueNumber++;
+                    }
+                }
+            }
+        }
+        
+        //add the tags under the 'tag' field
+        $tags = $this->getTags();
+        $fieldValueNumber = 1;
+        foreach($tags as $tag) {
+            $doc->addField(Zend_Search_Lucene_Field::Text(Omeka_Search::createLuceneFieldName('tag', $fieldValueNumber), $tag->name));    
+            $fieldValueNumber++;
+        }        
+        
+        //var_dump($doc);exit;
+        
+        return parent::createLuceneDocument($doc);
+    }
         
     /**
      * All of the custom code for deleting an item.
@@ -301,7 +339,6 @@ class Item extends Omeka_Record
     protected function filterInput($input)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
-        
         $filters = array(                         
                          // Foreign keys
                          'type_id'       => 'ForeignKey',
@@ -309,10 +346,8 @@ class Item extends Omeka_Record
                          
                          // Booleans
                          'public'   =>'Boolean',
-                         'featured' =>'Boolean');
-            
+                         'featured' =>'Boolean');  
         $filter = new Zend_Filter_Input($filters, null, $input, $options);
-
         return $filter->getUnescaped();
     }
     

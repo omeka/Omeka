@@ -16,6 +16,10 @@ class Omeka_Core_Resource_Search extends Zend_Application_Resource_ResourceAbstr
 {
     public function init()
     {
-        return Omeka_Search::getInstance();
+        $instance = Omeka_Search::getInstance();
+        
+        // register the instance to listen to all of the model's afterSave hooks
+        
+        return $instance;
     }
 }
