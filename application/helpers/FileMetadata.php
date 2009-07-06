@@ -14,6 +14,18 @@
  **/
 class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
 {
+    /**
+     * Returns the metadata of a file.  
+     * You can use this function in the view by calling $this->fileMetadata(...)
+     * 
+     * @param File $file
+     * @param string $elementSetName The element set name for the item metadata. Example: 'Dublin Core'
+     * For internal file metadata,the $elementSetName is the same as the $fieldName in _getRecordMetadata. Example: 'archive filename'
+     * @param string $elementName The element name for the item metadata. Example: 'Title'
+     * For internal file metadata, you do not supply an $elementName 
+     * @param array $options
+     * @return mixed
+     **/
     public function fileMetadata(File $file, 
                          $elementSetName, 
                          $elementName = null, 
