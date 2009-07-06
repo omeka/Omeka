@@ -194,7 +194,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
     public function getTextsByElement($element)
     {        
         // Load 'em if we need 'em.
-        if (!$this->_textsByElementId) {
+        if (!$this->_recordsAreLoaded) {
             $this->loadElementsAndTexts();
         }
 
@@ -224,7 +224,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      */
     public function getElementById($elementId)
     {
-        if (!$this->_elementsById) {
+        if (!$this->_recordsAreLoaded) {
             $this->loadElementsAndTexts();
         }
         
@@ -243,7 +243,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      */
     public function getElementsBySetName($elementSetName)
     {
-        if (!$this->_elementsBySet) {
+        if (!$this->_recordsAreLoaded) {
             $this->loadElementsAndTexts();
         }
         
@@ -259,7 +259,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      */
     public function getAllElementsBySet()
     {
-        if (!$this->_elementsBySet) {
+        if (!$this->_recordsAreLoaded) {
             $this->loadElementsAndTexts();
         }
         
@@ -276,7 +276,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      */
     public function getElementByNameAndSetName($elementName, $elementSetName = null)
     {
-        if (!$this->_elementsByNameAndSet) {
+        if (!$this->_recordsAreLoaded) {
             $this->loadElementsAndTexts();
         }
         
