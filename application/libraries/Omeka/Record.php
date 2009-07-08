@@ -361,7 +361,7 @@ class Omeka_Record implements ArrayAccess
         
         // update the lucene index with the record
         if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
-            $omekaSearch->updateRecordInLuceneIndex($this);   
+            $omekaSearch->updateLuceneByRecord($this);   
         }
         
         return true;
@@ -419,7 +419,7 @@ class Omeka_Record implements ArrayAccess
         
         // delete the record from the lucene index
         if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
-            $omekaSearch->deleteRecordFromLuceneIndex($this);
+            $omekaSearch->deleteLuceneByRecord($this);
         }
     }
     
@@ -461,10 +461,9 @@ class Omeka_Record implements ArrayAccess
     {
         if ($doc) {
             $doc = new Zend_Search_Lucene_Document(); 
-            
             // add the model_name and model_id to the Lucene document
-            $doc->addField(Zend_Search_Lucene_Field::Keyword(Omeka_Search::createLuceneFieldName('model_name'), get_class($this)));
-            $doc->addField(Zend_Search_Lucene_Field::Keyword(Omeka_Search::createLuceneFieldName('model_id'), $this->id));
+            Omeka_Search::addLuceneField($doc, 'Keyword', 'model_name', get_class($this));
+            Omeka_Search::addLuceneField($doc, 'Keyword', 'model_id', $this->id);            
         }
         return $doc;
     }

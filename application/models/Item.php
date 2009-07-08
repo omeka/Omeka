@@ -242,23 +242,24 @@ class Item extends Omeka_Record
         // add the fields for the non-empty element texts, where each field is joint key of the set name and element name (in that order).        
         foreach($this->getAllElementsBySet() as $set => $elements) {
             foreach($elements as $element) {
-                $fieldValueNumber = 1;
+                $elementTextsToAdd = array();
                 foreach($this->getTextsByElement($element) as $elementText) {
                     if (trim($elementText->text) != '') {
-                        $doc->addField(Zend_Search_Lucene_Field::UnStored(Omeka_Search::createLuceneFieldName(array($set, $element->name), $fieldValueNumber), $elementText->text));    
-                        $fieldValueNumber++;
+                        $elementTextsToAdd[] = $elementText->text;    
                     }
                 }
+                Omeka_Search::addLuceneField($doc, 'UnStored', array($set, $element->name), $elementTextsToAdd);
             }
         }
         
         //add the tags under the 'tag' field
         $tags = $this->getTags();
-        $fieldValueNumber = 1;
+        $tagNames = array();
         foreach($tags as $tag) {
-            $doc->addField(Zend_Search_Lucene_Field::Text(Omeka_Search::createLuceneFieldName('tag', $fieldValueNumber), $tag->name));    
-            $fieldValueNumber++;
-        }        
+            $tagNames[] = $tag->name;
+        }
+        Omeka_Search::addLuceneField($doc, 'Text', 'tag', $tagNames);
+         
                 
         return parent::createLuceneDocument($doc);
     }

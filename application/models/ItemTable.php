@@ -407,4 +407,11 @@ class ItemTable extends Omeka_Db_Table
     
         return $item;
     }
+    
+    public function findByKeywordWithLucene($keyword) 
+    {
+        $search = Omeka_Search::getInstance();
+        $luceneIndex = $search->getLuceneIndex();
+        
+    }
 }
