@@ -63,7 +63,7 @@ function formValue($name, $defaultValue = '')
         <div class="field">
             <label for="password">Password (required)</label>
             <input class="textinput" type="password" name="password" value="<?php echo formValue('password'); ?>"/>
-<p class="explanation">Must be a least six characters</p>
+<p class="explanation">Must be at least six characters</p>
         </div>
         <div class="field">
             <label for="super_email">Email (required)</label>
