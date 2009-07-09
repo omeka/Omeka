@@ -282,3 +282,34 @@ function total_items_in_collection()
 {
     return get_current_collection()->totalItems();
 }
+
+/**
+ * Returns the most recent collections
+ * 
+ * @param integer $num The maximum number of recent collections to return
+ * @return array
+ **/
+function recent_collections($num = 10) 
+{
+	return get_collections(array('recent'=>true), $num);
+}
+
+/**
+ * Returns a random featured collection.
+ * 
+ * @return Collection
+ **/
+function random_featured_collection()
+{
+    return get_db()->getTable('Collection')->findRandomFeatured();
+}
+
+/**
+ * Returns the total number of collection
+ * 
+ * @return integer
+ **/
+function total_collections() 
+{
+	return get_db()->getTable('Collection')->count();
+}

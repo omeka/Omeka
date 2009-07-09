@@ -510,3 +510,38 @@
      }
      return __v()->itemMetadataList($item, $options);
  }
+ 
+ /**
+  * Returns the most recent items
+  * 
+  * @param integer $num The maximum number of recent items to return
+  * @return array
+  **/
+ function recent_items($num = 10) 
+ {
+ 	return get_db()->getTable('Item')->findBy(array('recent'=>true), $num);
+ }
+
+ /**
+  * Returns a randome featured item
+  * 
+  * @since 7/3/08 This will retrieve featured items with or without images by
+  *  default. The prior behavior was to retrieve only items with images by
+  *  default.
+  * @param string $hasImage
+  * @return Item
+  */
+ function random_featured_item($hasImage=false) 
+ {
+ 	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
+ }
+ 
+ /**
+  * Returns the total number of items
+  *
+  * @return integer
+  **/
+ function total_items() 
+ {	
+ 	return get_db()->getTable('Item')->count();
+ }

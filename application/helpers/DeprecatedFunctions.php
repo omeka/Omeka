@@ -31,3 +31,14 @@ function unescapeTags($matches)
 {
     return str_replace( array("&gt;", "&lt;", "&quot;", "&amp;"), array(">", "<", "\"", "&"), $matches[0]);
 }
+
+/**
+ * Returns the total number of types
+ * @access private
+ * @deprecated
+ * @return integer
+ **/
+function total_types() 
+{
+	return get_db()->getTable('Type')->count();
+}
