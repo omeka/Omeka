@@ -27,7 +27,8 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         $front->addControllerDirectory(CONTROLLER_DIR, 'default');
                                                         
         // Action helpers
-        $this->initializeActionHelpers();        
+        $this->initializeActionHelpers();
+        
                 
         return $front;
     }

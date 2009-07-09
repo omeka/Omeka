@@ -56,7 +56,7 @@ class Installer
     
     private function createTables()
     {
-        $db = $this->core->getDb();
+        $db = Omeka_Context::getInstance()->getDb();   
         
         // Build the Omeka database if necessary. Ensure that we don't confuse 
         // Omeka if there are already tables in the DB.
@@ -115,11 +115,11 @@ class Installer
     
     private function checkMysqlVersion()
     {
-        $db = $this->core->getDb();
+        $db = Omeka_Context::getInstance()->getDb();
         $mysqlVersion = $db->getAdapter()->getServerVersion();
-        if (version_compare($mysqlVersion, OMEKA_MYSQL_VERSION, '<')) {
+        if (version_compare($mysqlVersion, self::OMEKA_MYSQL_VERSION, '<')) {
             $header = "Incorrect version of MySQL";
-            $msg = "Omeka requires MySQL " . OMEKA_MYSQL_VERSION . " or greater 
+            $msg = "Omeka requires MySQL " . self::OMEKA_MYSQL_VERSION . " or greater 
             to be installed.  <a href=\"http://dev.mysql.com/doc/refman/5.0/en/upgrade.html\">Instructions</a> 
             for upgrading are on the MySQL website.</a>";
             $this->errors[] = compact('header', 'msg');
@@ -250,7 +250,7 @@ class Installer
     
     private function processInstallForm()
     {
-        $db = $this->core->getDb();
+        $db = Omeka_Context::getInstance()->getDb();
         
         // Create the default user
         require_once 'User.php';

@@ -61,7 +61,6 @@ class Omeka_Core extends Zend_Application
             $environment = APPLICATION_ENV;
             $options = CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini';
         }
-
         parent::__construct($environment, $options);
         
         $this->getBootstrap()->setContainer(Omeka_Context::getInstance());
@@ -79,54 +78,7 @@ class Omeka_Core extends Zend_Application
             return $this->getBootstrap()->bootstrap($bootstrapResource);
         }
         
-        return call_user_func_array(array($this->getContainer(), $m), $a);
-    }
-        
-    /**
-     * This makes Omeka_Core work as a Zend_Controller_Front plugin.
-     * 
-     **/
-    public function routeStartup(Zend_Controller_Request_Abstract $request)
-    {
-        try {
-            $this->initialize();
-        } catch (Zend_Db_Adapter_Exception $e) {
-            // Database adapter exceptions indicate that something has gone
-            // wrong on the adapter level. Usually this will occur as a result of a
-            // database not existing, or not being able to connect to the host.
-            // This should redirect to an error page. For now, just dump the error.
-            echo $e->getMessage();exit; 
-        } catch (Zend_Db_Statement_Exception $e) {
-            // Database statement exceptions indicate that something has gone
-            // wrong within the actual database.  During initialization, this
-            // will only occur when trying to access the 'options' table, so it
-            // directly indicates that Omeka has not been installed. Since we're
-            // going to continue dispatching in order to get to the install script,
-            // load the skeleton of the initialization script.
-            $this->setOmekaIsInstalled(false);
-            $this->initializeFrontController();
-        } catch (Zend_Config_Exception $e) {
-            // These exceptions will be thrown for config files, when they don't
-            // exist or are improperly structured. Should do something similar to
-            // the database exception errors.
-            echo "Error in Omeka's configuration file(s): " . $e->getMessage();exit; 
-        } catch (Exception $e) {
-            // No idea what this exception would be.  Just start crying.
-            echo $e->getMessage();exit;
-        }
-    }
-    
-    /**
-     * If Omeka has not been installed yet, make sure we dispatch to the
-     *  notification in the InstallerController.
-     * 
-     **/
-    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
-    {
-        if (!$this->omekaIsInstalled()) {
-            $request->setControllerName('installer');
-            $request->setActionName('notify');
-        }        
+        return call_user_func_array(array($this->getBootstrap()->getContainer(), $m), $a);
     }
     
     /**
@@ -154,8 +106,40 @@ class Omeka_Core extends Zend_Application
      **/
     public function initialize()
     {
-        $this->sanitizeMagicQuotes();
-        $this->bootstrap();
+        try {
+            $this->sanitizeMagicQuotes();
+            return $this->bootstrap();
+        } catch (Zend_Db_Adapter_Exception $e) {
+            // Database adapter exceptions indicate that something has gone
+            // wrong on the adapter level. Usually this will occur as a result 
+            // of a database not existing, or not being able to connect to the
+            // host. This should redirect to an error page. For now, just dump
+            // the error.
+            echo $e->getMessage(); exit; 
+        } catch (Zend_Db_Statement_Exception $e) {
+            // Database statement exceptions indicate that something has gone
+            // wrong within the actual database.  During initialization, this
+            // will only occur when trying to access the 'options' table, so it
+            // directly indicates that Omeka has not been installed. Since we're
+            // going to continue dispatching in order to get to the install 
+            // script, load the skeleton of the initialization script.
+            $this->setOmekaIsInstalled(false);
+            $bootstrap = $this->getBootstrap();
+            if (!$bootstrap->hasResource('FrontController')) {
+                $bootstrap->bootstrap('FrontController');
+            }
+            $frontController = $bootstrap->getResource('FrontController');
+            $frontController->registerPlugin(new Omeka_Controller_Plugin_Installer());
+            return $this;
+        } catch (Zend_Config_Exception $e) {
+            // These exceptions will be thrown for config files, when they don't
+            // exist or are improperly structured. Should do something similar
+            // to the database exception errors.
+            echo "Error in Omeka's configuration file(s): " . $e->getMessage(); exit; 
+        } catch (Exception $e) {
+            // No idea what this exception would be.  Just start crying.
+            echo $e->getMessage();exit;
+        }
     }
     
     /**
@@ -166,7 +150,7 @@ class Omeka_Core extends Zend_Application
      * @return void
      **/
     public function phasedLoading($stopPhase)
-    {        
+    {       
         // Throw an error if the stop phase doesn't exist.
         if (!array_key_exists($stopPhase, $this->_phases)) {
             exit("Error: The provided stop phase method \"$stopPhase\" does not exist.");
@@ -190,5 +174,5 @@ class Omeka_Core extends Zend_Application
     public function initializeClassLoader()
     {
         
-    }    
+    }
 }
