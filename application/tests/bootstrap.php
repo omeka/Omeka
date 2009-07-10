@@ -25,6 +25,8 @@ require_once 'globals.php';
 // BE SUPPRESSED IN ORDER TO GET THE DISPATCHING OF 404s IN THE CONTROLLER TESTS TO
 // WORK.
 error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
+//error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 define('TEST_DIR', dirname(__FILE__));
 
