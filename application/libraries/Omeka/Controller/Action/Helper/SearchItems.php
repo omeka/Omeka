@@ -41,82 +41,166 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         // Page should be passed as the 'page' parameter or it defaults to 1
         $resultPage = $request->get('page') or $resultPage = 1;
         
-        $perms  = array();
-        $filter = array();
-        $order  = array();
+        // $perms  = array();
+        // $filter = array();
+        // $order  = array();
         
-        //Show only public items
-        if ($request->get('public')) {
-            $perms['public'] = true;
-        }
+        // set default params
+        $params = array();
+        $params['recent'] = true;
         
-        //Here we add some filtering for the request    
-        try {
-            
-            // User-specific item browsing
-            if ($userToView = $request->get('user')) {
-                        
-                // Must be logged in to view items specific to certain users
-                if (!$controller->isAllowed('browse', 'Users')) {
-                    throw new Exception( 'May not browse by specific users.' );
+        
+        $requestParams = $request->getParams();
+        try {            
+            foreach($requestParams as $requestParamName => $requestParamValue) {
+                if (trim($requestParamValue) == '') {
+                    continue;
                 }
+                switch($requestParamName) {
+                    case 'user':
+                        //Must be logged in to view items specific to certain users
+                        if (!$controller->isAllowed('browse', 'Users')) {
+                            throw new Exception( 'May not browse by specific users.' );
+                        }
+                        if (is_numeric($requestParamValue)) {
+                            $params['user'] = $requestParamValue;
+                        }
+                    break;
                 
-                if (is_numeric($userToView)) {
-                    $filter['user'] = $userToView;
-                }
-            }
-
-            if ($request->get('featured')) {
-                $filter['featured'] = true;
-            }
-            
-            if ($collection = $request->get('collection')) {
-                $filter['collection'] = $collection;
-            }
-            
-            if ($type = $request->get('type')) {
-                $filter['type'] = $type;
-            }
-            
-            if (($tag = $request->get('tag')) || ($tag = $request->get('tags'))) {
-                $filter['tags'] = $tag;
-            }
-            
-            if (($excludeTags = $request->get('excludeTags'))) {
-                $filter['excludeTags'] = $excludeTags;
-            }
-            
-            $recent = $request->get('recent');
-            if ($recent !== 'false') {
-                $order['recent'] = true;
-            }
-            
-            if ($search = $request->get('search')) {
-                $filter['search'] = $search;
-                //Don't order by recent-ness if we're doing a search
-                unset($order['recent']);
-            }
-            
-            //The advanced or 'itunes' search
-            if ($advanced = $request->get('advanced')) {
+                    case 'public':
+                        $params['public'] = $this->_isTrue($requestParamValue);
+                    break;
                 
-                //We need to filter out the empty entries if any were provided
-                foreach ($advanced as $k => $entry) {                    
-                    if (empty($entry['element_id']) || empty($entry['type'])) {
-                        unset($advanced[$k]);
-                    }
+                    case 'featured':
+                        $params['featured'] = $this->_isTrue($requestParamValue);
+                    break;
+                
+                    case 'collection':
+                        $params['collection'] = $requestParamValue;
+                    break;
+                
+                    case 'type':
+                        $params['type'] = $requestParamValue;
+                    break;
+                
+                    case 'tag':
+                    case 'tags':
+                        $params['tags'] = $requestParamValue;
+                    break;
+                
+                    case 'excludeTags':
+                        $params['excludeTags'] = $requestParamValue;
+                    break;
+                
+                    case 'recent':
+                        if (!$this->_isTrue($requestParamValue)) {
+                            $params['recent'] = false;
+                        }
+                    break;
+                
+                    case 'search':
+                        $params['search'] = $requestParamValue;
+                        //Don't order by recent-ness if we're doing a search
+                        unset($params['recent']);
+                    break;
+                
+                    case 'advanced':                    
+                        //We need to filter out the empty entries if any were provided
+                        foreach ($requestParamValue as $k => $entry) {                    
+                            if (empty($entry['element_id']) || empty($entry['type'])) {
+                                unset($requestParamValue[$k]);
+                            }
+                        }
+                        if (count($requestParamValue) > 0) {
+                            $params['advanced_search'] = $requestParamValue;
+                        }
+                    break;
+                
+                    case 'range':
+                        $params['range'] = $requestParamValue;
+                    break;
                 }
-                $filter['advanced_search'] = $advanced;
-            };
-            
-            if ($range = $request->get('range')) {
-                $filter['range'] = $range;
             }
-            
         } catch (Exception $e) {
-            $controller->flash($e->getMessage());
+             $controller->flash($e->getMessage());
         }
-        $params = array_merge($perms, $filter, $order);
+        
+        //echo var_dump($params);exit;
+        
+                
+        // //Show only public items
+        //         if ($request->get('public')) {
+        //             $perms['public'] = true;
+        //         }
+        //         
+        //         //Here we add some filtering for the request    
+        //         try {
+        //             
+        //             // User-specific item browsing
+        //             if ($userToView = $request->get('user')) {
+        //                         
+        //                 // Must be logged in to view items specific to certain users
+        //                 if (!$controller->isAllowed('browse', 'Users')) {
+        //                     throw new Exception( 'May not browse by specific users.' );
+        //                 }
+        //                 
+        //                 if (is_numeric($userToView)) {
+        //                     $filter['user'] = $userToView;
+        //                 }
+        //             }
+        // 
+        //             if ($request->get('featured')) {
+        //                 $filter['featured'] = true;
+        //             }
+        //             
+        //             if ($collection = $request->get('collection')) {
+        //                 $filter['collection'] = $collection;
+        //             }
+        //             
+        //             if ($type = $request->get('type')) {
+        //                 $filter['type'] = $type;
+        //             }
+        //             
+        //             if ((($tag = $request->get('tag')) != '') || 
+        //                 (($tag = $request->get('tags')) != '')) {
+        //                 $filter['tags'] = $tag;
+        //             }
+        //             
+        //             if (($excludeTags = $request->get('excludeTags'))) {
+        //                 $filter['excludeTags'] = $excludeTags;
+        //             }
+        //             
+        //             $recent = $request->get('recent');
+        //             if ($recent !== 'false') {
+        //                 $order['recent'] = true;
+        //             }
+        //             
+        //             if ($search = $request->get('search')) {
+        //                 $filter['search'] = $search;
+        //                 //Don't order by recent-ness if we're doing a search
+        //                 unset($order['recent']);
+        //             }
+        //             
+        //             //The advanced or 'itunes' search
+        //             if ($advanced = $request->get('advanced')) {
+        //                 
+        //                 //We need to filter out the empty entries if any were provided
+        //                 foreach ($advanced as $k => $entry) {                    
+        //                     if (empty($entry['element_id']) || empty($entry['type'])) {
+        //                         unset($advanced[$k]);
+        //                     }
+        //                 }
+        //                 $filter['advanced_search'] = $advanced;
+        //             };
+        //             
+        //             if ($range = $request->get('range')) {
+        //                 $filter['range'] = $range;
+        //             }
+        //             
+        //         } catch (Exception $e) {
+        //             $controller->flash($e->getMessage());
+        //         }
+        // $params = array_merge($perms, $filter, $order);
         
         //Get the item count after other filtering has been applied, which is the total number of items found
         $totalResults = $itemTable->count($params);
@@ -138,6 +222,23 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
             'total_items' => $totalItems, 
             'page' => $resultPage, 
             'per_page' => $itemsPerPage);
+    }
+    
+    /**
+      * Returns whether the parameter value is true or not.  
+      * If the value is a string and its lowercased value is 'true' or '1', it returns true.
+      * If the value is an integer and equal to 1, then it returns true.
+      * Otherwise it returns false.
+      * @param string $paramValue
+      * @return boolean
+      **/
+    private function _isTrue($paramValue) 
+    {
+        if ($paramValue === null) {
+            return false;
+        }
+        $paramValue = strtolower(trim($paramValue));
+        return ($paramValue == '1' || $paramValue == 'true');
     }
     
     /**
