@@ -58,7 +58,7 @@ class Tag extends Omeka_Record {
     
     protected function _validate()
     {
-        if (empty($this->name)) {
+        if (trim($this->name) == '') {
             $this->addError('name', 'Tags must be given a name');
         }
         
