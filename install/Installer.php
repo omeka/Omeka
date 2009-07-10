@@ -27,9 +27,6 @@ class Installer
         // Verify Omeka requirements.
         $this->verifyRequirements();
         
-        // Create the database tables.
-        $this->createTables();
-        
         // Handle the install form.
         $this->handleInstallForm();
     }
@@ -252,6 +249,9 @@ class Installer
     {
         $db = Omeka_Context::getInstance()->getDb();
         
+        // Create the database tables.
+        $this->createTables();
+
         // Create the default user
         require_once 'User.php';
         
