@@ -41,10 +41,6 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         // Page should be passed as the 'page' parameter or it defaults to 1
         $resultPage = $request->get('page') or $resultPage = 1;
         
-        // $perms  = array();
-        // $filter = array();
-        // $order  = array();
-        
         // set default params
         $params = array();
         $params['recent'] = true;
@@ -124,84 +120,7 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         } catch (Exception $e) {
              $controller->flash($e->getMessage());
         }
-        
-        //echo var_dump($params);exit;
-        
-                
-        // //Show only public items
-        //         if ($request->get('public')) {
-        //             $perms['public'] = true;
-        //         }
-        //         
-        //         //Here we add some filtering for the request    
-        //         try {
-        //             
-        //             // User-specific item browsing
-        //             if ($userToView = $request->get('user')) {
-        //                         
-        //                 // Must be logged in to view items specific to certain users
-        //                 if (!$controller->isAllowed('browse', 'Users')) {
-        //                     throw new Exception( 'May not browse by specific users.' );
-        //                 }
-        //                 
-        //                 if (is_numeric($userToView)) {
-        //                     $filter['user'] = $userToView;
-        //                 }
-        //             }
-        // 
-        //             if ($request->get('featured')) {
-        //                 $filter['featured'] = true;
-        //             }
-        //             
-        //             if ($collection = $request->get('collection')) {
-        //                 $filter['collection'] = $collection;
-        //             }
-        //             
-        //             if ($type = $request->get('type')) {
-        //                 $filter['type'] = $type;
-        //             }
-        //             
-        //             if ((($tag = $request->get('tag')) != '') || 
-        //                 (($tag = $request->get('tags')) != '')) {
-        //                 $filter['tags'] = $tag;
-        //             }
-        //             
-        //             if (($excludeTags = $request->get('excludeTags'))) {
-        //                 $filter['excludeTags'] = $excludeTags;
-        //             }
-        //             
-        //             $recent = $request->get('recent');
-        //             if ($recent !== 'false') {
-        //                 $order['recent'] = true;
-        //             }
-        //             
-        //             if ($search = $request->get('search')) {
-        //                 $filter['search'] = $search;
-        //                 //Don't order by recent-ness if we're doing a search
-        //                 unset($order['recent']);
-        //             }
-        //             
-        //             //The advanced or 'itunes' search
-        //             if ($advanced = $request->get('advanced')) {
-        //                 
-        //                 //We need to filter out the empty entries if any were provided
-        //                 foreach ($advanced as $k => $entry) {                    
-        //                     if (empty($entry['element_id']) || empty($entry['type'])) {
-        //                         unset($advanced[$k]);
-        //                     }
-        //                 }
-        //                 $filter['advanced_search'] = $advanced;
-        //             };
-        //             
-        //             if ($range = $request->get('range')) {
-        //                 $filter['range'] = $range;
-        //             }
-        //             
-        //         } catch (Exception $e) {
-        //             $controller->flash($e->getMessage());
-        //         }
-        // $params = array_merge($perms, $filter, $order);
-        
+ 
         //Get the item count after other filtering has been applied, which is the total number of items found
         $totalResults = $itemTable->count($params);
         Zend_Registry::set('total_results', $totalResults);                
