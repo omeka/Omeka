@@ -27,7 +27,6 @@
 
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
-<?php echo flash(); ?>
 
 <table id="users">
 	<thead>
@@ -73,6 +72,7 @@
 </table>
 
 <div>
+    
     <?php if (has_permission('Users', 'add')): ?>
         <h2>Add a User</h2>
     	<form id="new-user-form" action="<?php echo uri('users/add'); ?>" method="post" accept-charset="utf-8">
