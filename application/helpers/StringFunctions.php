@@ -43,7 +43,8 @@ function nls2p($str)
 /**
  * Retrieve a substring of a given piece of text. 
  * 
- * Note that this will only split strings on the space character.
+ * Note: this will only split strings on the space character.
+ * this will also strip html tags from the text before getting a snippet 
  * 
  * @param string $text Text to take snippet of
  * @param int $startPos Starting position of snippet in string
@@ -53,6 +54,9 @@ function nls2p($str)
  */
 function snippet($text, $startPos, $endPos, $append = '…')
 {
+    // strip html tags from the text
+    $text = strip_formatting($text);
+    
     $textLength = strlen($text);
 
     // Calculate the start position. Set to zero if the start position is
@@ -87,24 +91,28 @@ function snippet($text, $startPos, $endPos, $append = '…')
 
 /**
  * Retrieve a substring of the text by limiting the word count.
+ * Note: it strips the HTML tags from the text before getting the snippet
  * 
  * @since 0.10
- * @param string $phrase
+ * @param string $text
  * @param integer $maxWords
  * @param string $ellipsis Optional '...' by default.
  * @return string
  **/
-function snippet_by_word_count($phrase, $maxWords = 20, $ellipsis = '...')
+function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
 {
+    // strip html tags from the text
+    $text = strip_formatting($text);
+    
     if ($maxWords > 0) {
-        $phraseArray = explode(' ', $phrase);
-        if (count($phraseArray) > $maxWords) {
-            $phrase = implode(' ', array_slice($phraseArray, 0, $maxWords)) . $ellipsis;            
+        $textArray = explode(' ', $text);
+        if (count($textArray) > $maxWords) {
+            $text = implode(' ', array_slice($textArray, 0, $maxWords)) . $ellipsis;            
         }
     } else {
         return '';
     }
-    return $phrase;
+    return $text;
 }
 
 /**

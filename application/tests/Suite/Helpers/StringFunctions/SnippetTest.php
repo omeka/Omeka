@@ -1,7 +1,7 @@
 <?php 
 require_once HELPERS;
 
-class Tickets_716Test extends PHPUnit_Framework_TestCase
+class SnippetTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -42,6 +42,16 @@ class Tickets_716Test extends PHPUnit_Framework_TestCase
     public function testSnippetWithNoAppend()
     {
         $this->assertEquals('this is', snippet('this is some text', 0, 10, ''));
+    }
+    
+    public function testSnippetWithHTMLInText()
+    {
+        $this->assertEquals('this is', snippet('<a href="url">this is some text</a>', 0, 10, ''));
+    }
+    
+    public function testSnippetWithNoHTMLCloseTagInText()
+    {
+        $this->assertEquals('this is', snippet('<a href="url">this is some text', 0, 10, ''));
     }
     
     public function tearDown()

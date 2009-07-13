@@ -98,6 +98,15 @@ class Helpers_StringFunctions_SnippetByWordCountTest extends PHPUnit_Framework_T
         $this->assertEquals($targetPhrase, snippet_by_word_count($phrase, $wordCount, $ellipsis));
     }
 
+    public function testSnippetWithWordCountWithHTMLInText()
+    {
+        $phrase = '<a href="url">All goats eat grass.</a>';
+        $wordCount = 2;
+        $ellipsis = '';
+        $targetPhrase = 'All goats';
+        $this->assertEquals($targetPhrase, snippet_by_word_count($phrase, $wordCount, $ellipsis));
+    }
+
     public function tearDown()
     {
         error_reporting($this->reporting);
