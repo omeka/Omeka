@@ -40,8 +40,6 @@
 </div>
 
 <div class="field" id="file-inputs">
-<!-- MAX_FILE_SIZE must precede the file input field -->
-	<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 	<label>Find a File</label>
 		
 	<?php for($i=0;$i<$numFiles;$i++): ?>
