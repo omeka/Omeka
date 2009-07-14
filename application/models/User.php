@@ -32,7 +32,7 @@ class User extends Omeka_Record {
     
     protected $_related = array('Entity'=>'getEntity');
     
-    protected function getEntity()
+    public function getEntity()
     {
         return $this->getTable('Entity')->find((int) $this->entity_id);
     }
