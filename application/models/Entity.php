@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 require_once 'EntitiesRelations.php';
 require_once 'User.php';
@@ -15,7 +15,7 @@ require_once 'EntityTable.php';
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
- **/
+ */
 class Entity extends Omeka_Record
 {
     public $first_name;
@@ -31,8 +31,7 @@ class Entity extends Omeka_Record
      * These are all the things that will cause saving an entity to fault
      *     1) blank first & last name & institution name
      *     2) invalid email address
-     * @return void
-     **/
+     */
     protected function _validate()
     {        
         if (!empty($this->email) && !Zend_Validate::is($this->email, 'EmailAddress')) {
@@ -48,7 +47,7 @@ class Entity extends Omeka_Record
      * Trim all the data that comes in via the form.
      *
      * @return array
-     **/
+     */
     protected function filterInput($input)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
@@ -65,11 +64,22 @@ class Entity extends Omeka_Record
 
         return $clean;
     }
-
+    
+    /**
+     * Combine the first, middle and last name fields to produce a full name
+     * string.
+     *
+     * @return string
+     */
     public function getName() {
         return implode(' ', array($this->first_name, $this->middle_name, $this->last_name));
     }
-
+    
+    /**
+     * Get the User record this entity is associated with.
+     *
+     * @return User
+     */
     public function getUser()
     {
         $id = (int) $this->id;
@@ -80,10 +90,11 @@ class Entity extends Omeka_Record
      * When deleting an entity, there is much else to be done.
      * 1) Delete any associated user account
      * 2) Delete all taggings associated with this entity
-     * 3) Update the entities_relations table so that every reference to this entity are NULLed
+     * 3) Update the entities_relations table so that every reference to this 
+     *    entity are NULLed
      *
      * @return void
-     **/
+     */
     protected function _delete()
     {        
         $id = (int) $this->id;
@@ -116,7 +127,7 @@ class Entity extends Omeka_Record
      * remains in the db (presumably as the actor it takes precedence)
      *
      * @return bool
-     **/
+     */
     public function merge($entity)
     {
         try {
