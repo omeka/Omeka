@@ -227,14 +227,24 @@ class UsersController extends Omeka_Controller_Action
         $ua->user_id = $user->id;
         $ua->save();
         
-        //send the user an email telling them about their great new user account
-        
+        // send the user an email telling them about their new user account
         $siteTitle  = get_option('site_title');
         $from       = get_option('administrator_email');
-        $body       = "Welcome!\n\nYour account for the $siteTitle archive has been created. Please click the following link to activate your account:\n\n" . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n (or use any other page on the site).\n\nBe aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n$siteTitle Administrator";
-        $title      = "Activate your account with the ".$siteTitle." Archive";
-        $header     = 'From: '.$from. "\n" . 'X-Mailer: PHP/' . phpversion();
-        return mail($user->email, $title, $body, $header);
+        $body       = "Welcome!\n\n"
+                    . "Your account for the $siteTitle archive has been created. Please click the following link to activate your account:\n\n"
+                    . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
+                    . "(or use any other page on the site).\n\n"
+                    . "Be aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n" 
+                    ."$siteTitle Administrator";
+        $subject    = "Activate your account with the ".$siteTitle." Archive";
+        
+        $mail = new Zend_Mail();
+        $mail->setBodyText($body);
+        $mail->setFrom($from, "$siteTitle Administrator");
+        $mail->addTo($user->email, $user->Entity->getName());
+        $mail->setSubject($subject);
+        $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
+        $mail->send();
     }
     
     
