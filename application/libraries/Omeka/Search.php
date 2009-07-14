@@ -137,13 +137,14 @@ class Omeka_Search
     {        
         // create a lucene document for the record
         $doc = $record->createLuceneDocument();
-        
+                        
         if ($doc) {
             // delete the document from the index if it already exists
             $this->deleteLuceneByRecord($record);
             
             // add the document to the index
             $this->_luceneIndex->addDocument($doc);
+            $this->_luceneIndex->commit();
         }
     }
     
@@ -173,11 +174,12 @@ class Omeka_Search
     {
         // create a query to find the queryhit associated with the Omeka_Record
         $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
-        $query->addTerm(new Zend_Search_Lucene_Index_Term(get_class($record), $this->getLuceneExpandedFieldName('model_name'), true));
-        $query->addTerm(new Zend_Search_Lucene_Index_Term($record->id, $this->getLuceneExpandedFieldName('model_id'), true));
-        
+        $query->addTerm(new Zend_Search_Lucene_Index_Term(get_class($record), $this->getLuceneExpandedFieldName('model_name')), true);
+        $query->addTerm(new Zend_Search_Lucene_Index_Term($record->id, $this->getLuceneExpandedFieldName('model_id')), true);
+                
         // return a single hit if one exists, otherwise return null
         $hits  = $this->_luceneIndex->find($query);        
+                
         if (!empty($hits)) {
             return $hits[0];
         }
@@ -231,18 +233,21 @@ class Omeka_Search
      * 
      * @param string fieldNameStrings The fieldName strings used to create an unexpanded field name.
      * @param string $fieldValue The required field value for the field.
-     * @return Zend_Search_Lucene_Search_Query_MultiTerm The subquery that includes a disjunction 
+     * @return Zend_Search_Lucene_Search_Query_Boolean The subquery that includes a disjunction 
      * for all of the variants of the field name.
      */
     static public function getLuceneQueryForFieldName($fieldNameStrings, $fieldValue) 
     {
         $search = self::getInstance();
-        $subquery = new Zend_Search_Lucene_Search_Query_MultiTerm();
+        $query = new Zend_Search_Lucene_Search_Query_Boolean();
         $expandedFieldNames = $search->getLuceneExpandedFieldNames($search->getLuceneUnexpandedFieldName($fieldNameStrings));
         foreach($expandedFieldNames as $expandedFieldName) {
-            $subquery->addTerm(new Zend_Search_Lucene_Index_Term($fieldValue, $expandedFieldName));
-        }
-        return $subquery;
+            //$subquery = new Zend_Search_Lucene_Search_Query_Term(new Zend_Search_Lucene_Index_Term($fieldValue, $expandedFieldName));
+            // hack
+            $subquery = new Zend_Search_Lucene_Search_Query_Preprocessing_Term($fieldValue, 'UTF-8', $expandedFieldName);
+            $query->addSubquery($subquery);
+        }    
+        return $query;
     }
     
     /**
@@ -327,17 +332,26 @@ class Omeka_Search
      * 
      * @param Zend_Search_Lucene_Document $luceneDoc The lucene doc with which to add the field
      * @param string $luceneFieldType The type of lucene field to add: 'Text', 'UnStored', 'Keyword', 'UnIndexed', 'Binary'
-     * @param string|array $fieldNameStrings The string or array of strings to concatenate to form the field name. 
+     * @param array|string $fieldNameStrings The string or array of strings to concatenate to form the field name. 
      * Note: The order of the strings matters.
+     * @param array|string $fieldValues The string values to add to the field.
      * @return void
      */
     static public function addLuceneField($luceneDoc, $luceneFieldType, $fieldNameStrings, $fieldValues) 
-    {
-        $search = Omeka_Search::getInstance();
-        
-        if (is_string($fieldValues)) {
+    {                
+        if (!is_array($fieldValues)) {
+            $fieldValues = (string)$fieldValues; // convert numbers to strings
+            if (trim($fieldValues) == '') {
+                return;
+            }
             $fieldValues = array($fieldValues);
         }
+
+        if (count($fieldValues) == 0) {
+            return ;
+        }
+        
+        $search = Omeka_Search::getInstance();
         
         $unexpandedFieldName = $search->getLuceneUnexpandedFieldName($fieldNameStrings);
         

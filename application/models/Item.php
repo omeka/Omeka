@@ -234,13 +234,13 @@ class Item extends Omeka_Record
      * @return Zend_Search_Lucene_Document
      **/
     public function createLuceneDocument($doc=null) 
-    {
+    {        
         if (!$doc) {
             $doc = new Zend_Search_Lucene_Document(); 
         }
         
         // add the fields for the non-empty element texts, where each field is joint key of the set name and element name (in that order).        
-        foreach($this->getAllElementsBySet() as $set => $elements) {
+        foreach($this->getAllElementsBySet() as $elementSet => $elements) {
             foreach($elements as $element) {
                 $elementTextsToAdd = array();
                 foreach($this->getTextsByElement($element) as $elementText) {
@@ -248,18 +248,21 @@ class Item extends Omeka_Record
                         $elementTextsToAdd[] = $elementText->text;    
                     }
                 }
-                Omeka_Search::addLuceneField($doc, 'UnStored', array($set, $element->name), $elementTextsToAdd);
+                if (count($elementTextsToAdd) > 0) {
+                    Omeka_Search::addLuceneField($doc, 'UnStored', array($elementSet, $element->name), $elementTextsToAdd);
+                }
             }
         }
-        
+
         //add the tags under the 'tag' field
         $tags = $this->getTags();
         $tagNames = array();
         foreach($tags as $tag) {
             $tagNames[] = $tag->name;
         }
-        Omeka_Search::addLuceneField($doc, 'Text', 'tag', $tagNames);
-         
+        if (count($tagNames) > 0) {
+            Omeka_Search::addLuceneField($doc, 'Text', 'tag', $tagNames);            
+        }
                 
         return parent::createLuceneDocument($doc);
     }
