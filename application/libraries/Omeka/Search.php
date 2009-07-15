@@ -19,6 +19,9 @@ class Omeka_Search
     
     const FIELD_NAME_STRING_DELIMITER = '.';
     const FIELD_NAME_VALUE_NUM_DELIMITER = '@';
+    const FIELD_NAME_MODEL_NAME = 'model_name';
+    const FIELD_NAME_MODEL_ID = 'model_id';
+    
     
     private $_luceneIndex;
     private $_luceneIndexDir;
@@ -379,4 +382,21 @@ class Omeka_Search
             $i++;
         }        
     }
+    
+    /**
+     * Gets the Record object associated with a lucene doc
+     * 
+     * @param Zend_Search_Lucene_Document $luceneDoc The lucene doc with which to add the field
+     * @return void
+     */
+    public function getRecordByLuceneDocument($luceneDoc) 
+    {
+        $modelName = $luceneDoc->getFieldValue($this->getLuceneExpandedFieldName(self::FIELD_NAME_MODEL_NAME));
+        $modelId = $luceneDoc->getFieldValue($this->getLuceneExpandedFieldName(self::FIELD_NAME_MODEL_ID));
+        
+        $db = Omeka_Context::getInstance()->getDb();
+        $record = $db->getTable($modelName)->find($modelId);
+        
+        return $record;
+    }    
 }

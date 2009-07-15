@@ -461,8 +461,8 @@ class Omeka_Record implements ArrayAccess
     {
         if ($doc) {
             // add the model_name and model_id to the Lucene document
-            Omeka_Search::addLuceneField($doc, 'Keyword', 'model_name', get_class($this));
-            Omeka_Search::addLuceneField($doc, 'Keyword', 'model_id', (string)$this->id);            
+            Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_NAME, get_class($this));
+            Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_ID, (string)$this->id);            
         }
         return $doc;
     }
@@ -582,5 +582,5 @@ class Omeka_Record implements ArrayAccess
         if ($acl = Omeka_Context::getInstance()->getAcl()) {
             return $acl->checkUserPermission($resource, $rule);
         }
-    }
+    }    
 }
