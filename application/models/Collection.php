@@ -261,5 +261,28 @@ class Collection extends Omeka_Record
         foreach ($this->_newCollectorsToAdd as $newCollector) {
             $newCollector->delete();
         }
-    }    
+    }
+    
+    /**
+     * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
+     *
+     * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
+     * @return Zend_Search_Lucene_Document
+     **/
+    public function createLuceneDocument($doc=null) 
+    {        
+        if (!$doc) {
+            $doc = new Zend_Search_Lucene_Document(); 
+        }
+ 
+        // adds the fields for public and private       
+        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public);            
+        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured);            
+
+        // adds the fields for the collection name and description
+        Omeka_Search::addLuceneField($doc, 'UnStored', array('Collection', 'name'), $this->name);            
+        Omeka_Search::addLuceneField($doc, 'UnStored', array('Collection', 'description'), $this->description);            
+                
+        return parent::createLuceneDocument($doc);
+    }
 }

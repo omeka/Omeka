@@ -239,6 +239,14 @@ class Item extends Omeka_Record
             $doc = new Zend_Search_Lucene_Document(); 
         }
         
+        // adds the fields for added or modified
+        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_DATE_ADDED, $this->added);            
+        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_DATE_MODIFIED, $this->modified);
+        
+        // adds the fields for public and private       
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public);            
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured);
+        
         // add the fields for the non-empty element texts, where each field is joint key of the set name and element name (in that order).        
         foreach($this->getAllElementsBySet() as $elementSet => $elements) {
             foreach($elements as $element) {
@@ -249,7 +257,7 @@ class Item extends Omeka_Record
                     }
                 }
                 if (count($elementTextsToAdd) > 0) {
-                    Omeka_Search::addLuceneField($doc, 'UnStored', array($elementSet, $element->name), $elementTextsToAdd);
+                    Omeka_Search::addLuceneField($doc, 'UnStored', array('Item', $elementSet, $element->name), $elementTextsToAdd);
                 }
             }
         }
@@ -261,7 +269,7 @@ class Item extends Omeka_Record
             $tagNames[] = $tag->name;
         }
         if (count($tagNames) > 0) {
-            Omeka_Search::addLuceneField($doc, 'Text', 'tag', $tagNames);            
+            Omeka_Search::addLuceneField($doc, 'UnStored', array('Item','tags'), $tagNames);            
         }
                 
         return parent::createLuceneDocument($doc);

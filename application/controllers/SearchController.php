@@ -66,10 +66,22 @@ class SearchController extends Omeka_Controller_Action
          $resultPage = $request->get('page') or $resultPage = 1;
           
          // Get the search hits
-         $searchIndex = Omeka_Context::getInstance()->getSearch()->getLuceneIndex();
+         $search = Omeka_Context::getInstance()->getSearch();
+         $searchIndex = $search->getLuceneIndex();
          
-         $searchQuery = $_GET['search'];
+         $rawUserQuery = $_GET['search'];
+
+         $searchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
          
+         $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($rawUserQuery);
+         $searchQuery->addSubquery($userQuery, true);
+         
+         if (!$this->isAllowed('makePublic', 'Items')) {
+             echo 'crap';
+             $requireIsPublicQuery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, '1');
+             $searchQuery->addSubquery($requireIsPublicQuery, true);
+         }
+
          try {
              $hits = $searchIndex->find($searchQuery);
          } catch (Zend_Search_Lucene_Exception $e) {
@@ -88,7 +100,7 @@ class SearchController extends Omeka_Controller_Action
          $paginator->setItemCountPerPage($hitsPerPage);
 
          return array(
-             'search_query' => $searchQuery,
+             'search_query' => $rawUserQuery,
              'hits' => $paginator,
              'total_results' => $hitCount, 
              'page' => $resultPage, 

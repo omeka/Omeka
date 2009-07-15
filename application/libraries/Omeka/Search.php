@@ -22,7 +22,11 @@ class Omeka_Search
     const FIELD_NAME_MODEL_NAME = 'model_name';
     const FIELD_NAME_MODEL_ID = 'model_id';
     
-    
+    const FIELD_NAME_IS_PUBLIC = 'is_public';
+    const FIELD_NAME_IS_FEATURED = 'is_featured';
+    const FIELD_NAME_DATE_ADDED = 'date_added';
+    const FIELD_NAME_DATE_MODIFIED = 'date_modified';
+
     private $_luceneIndex;
     private $_luceneIndexDir;
     private $_luceneFieldNameValueCounts;
@@ -232,14 +236,14 @@ class Omeka_Search
     }
     
     /**
-     * Returns an array of strings with expanded field names
+     * Returns an array of strings with expanded field names for a query that requires the fieldValue
      * 
      * @param string fieldNameStrings The fieldName strings used to create an unexpanded field name.
      * @param string $fieldValue The required field value for the field.
      * @return Zend_Search_Lucene_Search_Query_Boolean The subquery that includes a disjunction 
      * for all of the variants of the field name.
      */
-    static public function getLuceneQueryForFieldName($fieldNameStrings, $fieldValue) 
+    static public function getLuceneRequiredTermQueryForFieldName($fieldNameStrings, $fieldValue) 
     {
         $search = self::getInstance();
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
