@@ -257,7 +257,7 @@ class Item extends Omeka_Record
                     }
                 }
                 if (count($elementTextsToAdd) > 0) {
-                    Omeka_Search::addLuceneField($doc, 'UnStored', array('Item', $elementSet, $element->name), $elementTextsToAdd);
+                    Omeka_Search::addLuceneField($doc, 'UnStored', array($elementSet, $element->name), $elementTextsToAdd);
                 }
             }
         }

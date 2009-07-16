@@ -25,9 +25,9 @@ class Core_OmekaSearchTest extends Omeka_Model_TestCase
         Omeka_Search::addLuceneField($doc, 'UnStored', array('Dublin Core','Title'), 'Andy');
         $index->addDocument($doc);
         $index->commit();
-    
+            
         $query = new Zend_Search_Lucene_Search_Query_Boolean();        
-        $subquery = Omeka_Search::getLuceneQueryForFieldName(array('Dublin Core', 'Title'), 'Andy');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName(array('Dublin Core', 'Title'), 'Andy');                
         $query->addSubquery($subquery);                      
         $hits = $index->find($query);
         $this->assertEquals(1, count($hits));
@@ -51,7 +51,7 @@ class Core_OmekaSearchTest extends Omeka_Model_TestCase
         }
         
         $query = new Zend_Search_Lucene_Search_Query_Boolean();        
-        $subquery = Omeka_Search::getLuceneQueryForFieldName(array('Dublin Core', 'Title'), 'Andy');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName(array('Dublin Core', 'Title'), 'Andy');                
         $query->addSubquery($subquery);
         $hits = $index->find($query);
         $this->assertEquals(21, count($hits));
@@ -149,27 +149,27 @@ class Core_OmekaSearchTest extends Omeka_Model_TestCase
         $index->addDocument($doc);
                 
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $subquery = Omeka_Search::getLuceneQueryForFieldName($fieldName, 'Andy');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName($fieldName, 'Andy');                
         $query->addSubquery($subquery);                            
         $hits = $index->find($query);
         $this->assertEquals(1, count($hits));
         $this->assertEquals('Andy', $hits[0]->getDocument()->getFieldValue('title@1'));
         
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $subquery = Omeka_Search::getLuceneQueryForFieldName($fieldName, 'Bob');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName($fieldName, 'Bob');                
         $query->addSubquery($subquery);                            
         $hits = $index->find($query);
         $this->assertEquals(0, count($hits));
         
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $subquery = Omeka_Search::getLuceneQueryForFieldName($fieldName, 'Chris Smith');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName($fieldName, 'Chris Smith');                
         $query->addSubquery($subquery);                            
         $hits = $index->find($query);
         $this->assertEquals(1, count($hits));
         $this->assertEquals('Chris Smith', $hits[0]->getDocument()->getFieldValue('title@3'));
         
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $subquery = Omeka_Search::getLuceneQueryForFieldName($fieldName, 'John Doe');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName($fieldName, 'John Doe');                
         $query->addSubquery($subquery);                            
         $hits = $index->find($query);
         $this->assertEquals(0, count($hits));
@@ -188,7 +188,7 @@ class Core_OmekaSearchTest extends Omeka_Model_TestCase
         }
       
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $subquery = Omeka_Search::getLuceneQueryForFieldName($fieldName, 'Andy');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName($fieldName, 'Andy');                
         $query->addSubquery($subquery);                            
         $hits = $index->find($query);
         $this->assertEquals($maxDocs, count($hits));
@@ -197,13 +197,13 @@ class Core_OmekaSearchTest extends Omeka_Model_TestCase
         }
         
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $subquery = Omeka_Search::getLuceneQueryForFieldName($fieldName, 'Bob');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName($fieldName, 'Bob');                
         $query->addSubquery($subquery);                            
         $hits = $index->find($query);
         $this->assertEquals(0, count($hits));
         
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $subquery = Omeka_Search::getLuceneQueryForFieldName($fieldName, 'Chris Smith');                
+        $subquery = Omeka_Search::getLuceneRequiredTermQueryForFieldName($fieldName, 'Chris Smith');                
         $query->addSubquery($subquery);                            
         $hits = $index->find($query);
         $this->assertEquals($maxDocs, count($hits));
