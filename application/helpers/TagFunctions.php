@@ -183,16 +183,17 @@ function tag_string($recordOrTags = null, $link=null, $delimiter=', ')
 		$tags = $recordOrTags;
 	}
 
-	$string = array();
+	$tagString = '';
 	if (!empty($tags)) {
+		$tagStrings = array();
 		foreach ($tags as $key=>$tag) {
 			if (!$link) {
-				$string[$key] = html_escape($tag['name']);
+				$tagStrings[$key] = html_escape($tag['name']);
 			} else {
-				$string[$key] = '<a href="'.$link.urlencode($tag['name']).'" rel="tag">'.html_escape($tag['name']).'</a>';
+				$tagStrings[$key] = '<a href="'.$link.urlencode($tag['name']).'" rel="tag">'.html_escape($tag['name']).'</a>';
 			}
 		}
-		$string = join($delimiter,$string);
+	    $tagString = join($delimiter,$tagStrings);
 	}
-	return $string;
+	return $tagString;
 }
