@@ -243,13 +243,19 @@ function loop_items_in_collection($num = 10, $options = array())
     // Cache this so we don't end up calling the DB query over and over again
     // inside the loop.
     static $loopIsRun = false;
+    
     if (!$loopIsRun) {
         // Retrieve a limited # of items based on the collection given.
         $items = get_items(array('collection'=>get_current_collection()->id), $num);
         set_items_for_loop($items);
+        $loopIsRun = true;
     }
     
-    return loop_items();
+    $item = loop_items();
+    if (!$item) {
+        $loopIsRun = false;
+    }
+    return $item;
 }
 
 /**
