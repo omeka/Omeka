@@ -77,7 +77,6 @@ class SearchController extends Omeka_Controller_Action
          $searchQuery->addSubquery($userQuery, true);
          
          if (!$this->isAllowed('makePublic', 'Items')) {
-             echo 'crap';
              $requireIsPublicQuery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, '1');
              $searchQuery->addSubquery($requireIsPublicQuery, true);
          }
