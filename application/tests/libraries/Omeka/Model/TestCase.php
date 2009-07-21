@@ -21,6 +21,30 @@ abstract class Omeka_Model_TestCase extends PHPUnit_Framework_TestCase
     public function setUpBootstrap($bootstrap)
     {
         $bootstrap->registerPluginResource('Db');
+        
+        $mockPluginBrokerResource = Omeka_Test_Bootstrapper::getMockBootstrapResource('PluginBroker', $this->_getMockPluginBroker());
+        $bootstrap->registerPluginResource($mockPluginBrokerResource);
+    }
+    
+    protected function _getMockPluginBroker()
+    {        
+        $mockPluginBroker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);        
+        
+        $mockPluginBroker->expects($this->any())
+                         ->method('__call')
+                         ->will($this->returnCallback(array($this, 'mockApplyFiltersForMockPluginBroker')));
+                    
+        return $mockPluginBroker;
+    }
+    
+    public function mockApplyFiltersForMockPluginBroker($hook, $args)
+    {
+        // return the array to be filtered by apply filters
+        if ($hook == 'applyFilters') {
+            //$filterName = $args[0];
+            $filterArray = $args[1];
+            return $filterArray;
+        }
     }
     
     /**

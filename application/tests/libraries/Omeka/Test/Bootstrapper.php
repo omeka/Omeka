@@ -49,5 +49,49 @@ class Omeka_Test_Bootstrapper
         // Sets a public property on the test case so that tests can access this property.
         $this->_testCase->core = $bootstrap;
         return $core;
-    }    
+    }
+    
+    /**
+     * Example usage when configuring bootstrap:
+     * <code>
+     * $mockDbResource = $this->_getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
+     * $this->core->registerPluginResource($mockDbResource);
+     * </code>
+     * 
+     * @param string
+     * @param mixed
+     * @return mixed
+     **/
+    static function getMockBootstrapResource($resourceName, $returnVal)
+    {
+        // Create a mock resource object for each of the desired whatevers.
+       $mockClassName = 'TestMock_' . $resourceName;
+       $methods = array('init');
+       $className = 'Zend_Application_Resource_ResourceAbstract';
+       $callOriginalConstructor = false;
+       $callOriginalClone = false;
+       $callAutoload = true;
+       if (!class_exists($mockClassName)) {
+           $mockDefinition = PHPUnit_Framework_MockObject_Mock::generate(
+                $className,
+                $methods,
+                $mockClassName,
+                $callOriginalConstructor,
+                $callOriginalClone,
+                $callAutoload);
+       }
+   
+   
+       // Instantiate the mock resource and tell it to always return the value
+       // we have specified via the 'return' key of the original array.
+       $mockResourceObj = new $mockClassName;   
+       $mockResourceObj->expects(new PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount)
+                       ->method('init')
+                       ->will(new PHPUnit_Framework_MockObject_Stub_Return($returnVal));
+                   
+       // Make sure it also thinks it has the correct resource name.
+       $mockResourceObj->_explicitType = $resourceName;
+   
+       return $mockResourceObj;    
+    }
 }

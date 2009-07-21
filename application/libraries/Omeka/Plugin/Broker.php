@@ -102,9 +102,9 @@ class Omeka_Plugin_Broker
         //Get the list of currently installed plugins
         $installed = array();
         $active = array();
-        
+                
         $res = $this->_db->query("SELECT p.name, p.active FROM $db->Plugin p");
-        
+                
         foreach ($res->fetchAll() as $row) {
             $name = $row['name'];
             

@@ -34,11 +34,26 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
     abstract public function setUpBootstrap($bootstrap);
     
     protected function _getMockPluginBroker()
-    {
-        $mockPluginBroker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);
+    {        
+        $mockPluginBroker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);        
+        
+        $mockPluginBroker->expects($this->any())
+                         ->method('__call')
+                         ->will($this->returnCallback(array($this, 'mockApplyFiltersForMockPluginBroker')));
+                    
         return $mockPluginBroker;
     }
     
+    public function mockApplyFiltersForMockPluginBroker($hook, $args)
+    {
+        // return the array to be filtered by apply filters
+        if ($hook == 'applyFilters') {
+            //$filterName = $args[0];
+            $filterArray = $args[1];
+            return $filterArray;
+        }
+    }
+        
     protected function _getMockDbWithMockTables()
     {
         $mockDb = $this->_getMockDb();
@@ -93,50 +108,7 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
          $acl->expects($this->any())->method('checkUserPermission')->will($this->returnValue($allowAccess));
          $this->core->setAcl($acl);        
     }
-    
-    /**
-     * Example usage when configuring bootstrap:
-     * <code>
-     * $mockDbResource = $this->_getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
-     * $this->core->registerPluginResource($mockDbResource);
-     * </code>
-     * 
-     * @param string
-     * @param mixed
-     * @return mixed
-     **/
-    protected function _getMockBootstrapResource($resourceName, $returnVal)
-    {
-        // Create a mock resource object for each of the desired whatevers.
-       $mockClassName = 'TestMock_' . $resourceName;
-       $methods = array('init');
-       $className = 'Zend_Application_Resource_ResourceAbstract';
-       $callOriginalConstructor = false;
-       $callOriginalClone = false;
-       $callAutoload = true;
-       if (!class_exists($mockClassName)) {
-           $mockDefinition = PHPUnit_Framework_MockObject_Mock::generate(
-                $className,
-                $methods,
-                $mockClassName,
-                $callOriginalConstructor,
-                $callOriginalClone,
-                $callAutoload);
-       }
-       
-       
-       // Instantiate the mock resource and tell it to always return the value
-       // we have specified via the 'return' key of the original array.
-       $mockResourceObj = new $mockClassName;   
-       $mockResourceObj->expects(new PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount)
-                   ->method('init')
-                   ->will(new PHPUnit_Framework_MockObject_Stub_Return($returnVal));
-       // Make sure it also thinks it has the correct resource name.
-       $mockResourceObj->_explicitType = $resourceName;
-       
-       return $mockResourceObj;    
-    }
-    
+        
     /**
      * Convenience method for configuring default access to the public theme.
      * 
@@ -145,8 +117,12 @@ abstract class Omeka_Controller_TestCase extends Zend_Test_PHPUnit_ControllerTes
      **/
     protected function _configPublicThemeBootstrap($bootstrap)
     {
-        $mockDbResource = $this->_getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
+        $mockDbResource = Omeka_Test_Bootstrapper::getMockBootstrapResource('Db', $this->_getMockDbWithMockTables());
         $bootstrap->registerPluginResource($mockDbResource);
+        
+        $mockPluginBrokerResource = Omeka_Test_Bootstrapper::getMockBootstrapResource('PluginBroker', $this->_getMockPluginBroker());
+        $bootstrap->registerPluginResource($mockPluginBrokerResource);
+         
         $bootstrap->setOptions(array(
             'resources'=> array(
                 'Config' => array(),
