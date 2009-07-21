@@ -25,7 +25,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 // Set the zlib config values if the extension has been loaded.
 if (extension_loaded('zlib')) {
-    ini_set('zlib.output_compression', 'On');
+    ini_set('zlib.output_compression', true);
     ini_set('zlib.output_compression_level', '5');    
 }
 
