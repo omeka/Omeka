@@ -15,13 +15,13 @@
 class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Frontcontroller
 {
     public function init()
-    {
+    {           
         // Plugin broker is required to set plugin-defined response contexts
         $bootstrap = $this->getBootstrap();
-        if($bootstrap->hasResource('PluginBroker')) {
+        if (!$bootstrap->hasResource('PluginBroker')) {
             $bootstrap->bootstrap('PluginBroker');
         }
-        
+                
         // Front controller
         $front = Zend_Controller_Front::getInstance();
         $front->addControllerDirectory(CONTROLLER_DIR, 'default');
@@ -29,7 +29,6 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // Action helpers
         $this->initializeActionHelpers();
         
-                
         return $front;
     }
         
@@ -85,7 +84,24 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
                 
         $contexts->setContextParam('output');
                 
-        $contextArray = array(
+        $contextArray = self::getDefaultResponseContexts();
+
+        if ($pluginBroker = $this->getBootstrap()->getResource('PluginBroker')) {             
+            $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
+        }
+                        
+        $contexts->addContexts($contextArray);
+    }       
+    
+    
+    /**
+     * Returns the default response contexts for Omeka.
+     * 
+     * @return array
+     **/
+    static public function getDefaultResponseContexts()
+    {
+        return array(
              'dcmes-xml' => array(
                  'suffix'    => 'dcmes-xml',
                  'headers'   => array('Content-Type' => 'text/xml')
@@ -95,12 +111,5 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
                  'headers'   => array('Content-Type' => 'text/xml')
              )
          );
-
-        if ($pluginBroker = $this->getBootstrap()->getResource('PluginBroker')) {
-             $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
-        }
-        
-        $contexts->addContexts($contextArray); 
-    }       
-    
+    }
 }
