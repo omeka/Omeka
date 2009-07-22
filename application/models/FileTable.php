@@ -34,14 +34,20 @@ class FileTable extends Omeka_Db_Table
         return $select;
     }
     
-    public function getRandomFileWithImage($item_id)
+    /**
+     * Retrieve a random file with an image associated with an item. 
+     * 
+     * @param integer $itemId
+     * @return File
+     **/
+    public function getRandomFileWithImage($itemId)
     {        
         $select = $this->getSelect()
                        ->where('f.item_id = ? AND f.has_derivative_image = 1')
                        ->order('RAND()')
                        ->limit(1);
         
-        return $this->fetchObject($sql, array($item_id));
+        return $this->fetchObject($select, array($itemId));
     }
     
     /**
@@ -50,34 +56,71 @@ class FileTable extends Omeka_Db_Table
      * @param integer $itemId
      * @param array $fileIds Optional If given, this will only retrieve files
      * with these specific IDs.
+     * @param string $sort The manner in which to order the files by. For example: 'id' = file id, 'filename' = alphabetical by filename
      * @return array
      **/
-    public function findByItem($item_id, $fileIds = array())
+    public function findByItem($itemId, $fileIds = array(), $sort='id')
     {
         $select = $this->getSelect();
         $select->where('f.item_id = ?');
         if ($fileIds) {
             $select->where('f.id IN (?)', $fileIds);
         }
-        return $this->fetchObjects($select, array($item_id));
+        
+        $this->_orderFilesBy($select, $sort);
+        
+        return $this->fetchObjects($select, array($itemId));
     }
 
     /**
-     * Retrieve file that has derivative images.
+     * Retrieve files for an item that has derivative images.
      * 
      * @param integer $itemId
-     * @param integer $index Optional If given, this specifies the file to
+     * @param integer|null $index Optional If given, this specifies the file to
 	 * retrieve for an item, based upon the ordering of its derivative files.
-	 *
-     * @return array
+	 * @param string $sort The manner in which to order the files by. For example: 'id' = file id, 'filename' = alphabetical by filename
+	 * 
+     * @return File|array
      **/
-	public function findWithImages($item_id, $index=0)
+	public function findWithImages($itemId, $index=null, $sort='id')
 	{
-		$select = $this->getSelect()
-					   ->where('f.item_id = ? AND f.has_derivative_image = 1')
-					   ->order('f.item_id ASC')
-					   ->limitPage($index, 1);
+        $select = $this->getSelect()
+					   ->where('f.item_id = ? AND f.has_derivative_image = 1');
+		
+        $this->_orderFilesBy($select, $sort);
+                			   
+	    if ($index === null) {
+    		return $this->fetchObjects($select, array($itemId));
+	    } else {
+	        $select->limit(1, $index);
+    		return $this->fetchObject($select, array($itemId));
+	    }
 
-		return $this->fetchObject($select, array($item_id));
+	}
+	
+	/**
+     * Modifies the  files for an item that has derivative images.
+     *
+     * @param Omeka_Db_Select The select object for finding files
+	 * @param string $sort The manner in which to order the files by. 
+	 * For example: 
+	 * 'id' = file id
+	 * 'filename' = alphabetical by filename
+	 * 
+     * @return void
+     **/
+	private function _orderFilesBy($select, $sort) 
+	{
+	    // order the files
+		switch($sort) {  
+		    case 'filename':
+		       $select->order('f.original_filename ASC');
+		    break;
+		    
+		    case 'id':
+		    default:
+		           $select->order('f.id ASC');
+		    break;
+		}
 	}
 }
