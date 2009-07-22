@@ -125,13 +125,9 @@ class Omeka_Core extends Zend_Application
             // going to continue dispatching in order to get to the install 
             // script, load the skeleton of the initialization script.
             $this->setOmekaIsInstalled(false);
-            $bootstrap = $this->getBootstrap();
-            if (!$bootstrap->hasResource('FrontController')) {
-                $bootstrap->bootstrap('FrontController');
-            }
-            $frontController = $bootstrap->getResource('FrontController');
-            $frontController->registerPlugin(new Omeka_Controller_Plugin_Installer());
-            return $this;
+
+            header('Location: '.WEB_ROOT.'/install');
+            exit;
         } catch (Zend_Config_Exception $e) {
             // These exceptions will be thrown for config files, when they don't
             // exist or are improperly structured. Should do something similar
