@@ -217,8 +217,6 @@ class UsersController extends Omeka_Controller_Action
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
         }
-        
-        return $this->_forward('browse');
     }
     
     protected function sendActivationEmail($user)
