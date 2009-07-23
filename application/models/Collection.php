@@ -62,7 +62,7 @@ class Collection extends Omeka_Record
     {
         // This will query the ItemTable for a count of all items associated with 
         // the collection
-        return $this->getDb()->getTable('Item')->count(array('collection' => $this->name));
+        return $this->getDb()->getTable('Item')->count(array('collection' => $this->id));
     }
     
     protected function getCollectors()
