@@ -57,6 +57,9 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
             case 'date added':
                 return $item->added;
                 break;
+            case 'date modified':
+                return $item->modified;
+                break;
             case 'collection name':
                 return $item->Collection->name;
                 break;
