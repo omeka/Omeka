@@ -45,7 +45,6 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         $params = array();
         $params['recent'] = true;
         
-        
         $requestParams = $request->getParams();
         try {            
             foreach($requestParams as $requestParamName => $requestParamValue) {
@@ -64,11 +63,11 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                     break;
                 
                     case 'public':
-                        $params['public'] = $this->_isTrue($requestParamValue);
+                        $params['public'] = is_true($requestParamValue);
                     break;
                 
                     case 'featured':
-                        $params['featured'] = $this->_isTrue($requestParamValue);
+                        $params['featured'] = is_true($requestParamValue);
                     break;
                 
                     case 'collection':
@@ -89,7 +88,7 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                     break;
                 
                     case 'recent':
-                        if (!$this->_isTrue($requestParamValue)) {
+                        if (!is_true($requestParamValue)) {
                             $params['recent'] = false;
                         }
                     break;
@@ -141,23 +140,6 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
             'total_items' => $totalItems, 
             'page' => $resultPage, 
             'per_page' => $itemsPerPage);
-    }
-    
-    /**
-      * Returns whether the parameter value is true or not.  
-      * If the value is a string and its lowercased value is 'true' or '1', it returns true.
-      * If the value is an integer and equal to 1, then it returns true.
-      * Otherwise it returns false.
-      * @param string $paramValue
-      * @return boolean
-      **/
-    private function _isTrue($paramValue) 
-    {
-        if ($paramValue === null) {
-            return false;
-        }
-        $paramValue = strtolower(trim($paramValue));
-        return ($paramValue == '1' || $paramValue == 'true');
     }
     
     /**

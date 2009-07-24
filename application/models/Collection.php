@@ -276,8 +276,8 @@ class Collection extends Omeka_Record
         }
  
         // adds the fields for public and private       
-        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public);            
-        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured);            
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
 
         // adds the fields for the collection name and description
         Omeka_Search::addLuceneField($doc, 'UnStored', array('Collection', 'name'), $this->name);            

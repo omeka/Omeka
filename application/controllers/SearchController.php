@@ -59,6 +59,32 @@ class SearchController extends Omeka_Controller_Action
          $this->view->assign(array('searchQuery' => $results['search_query'], 'hits'=> $results['hits'], 'totalResults'=>$results['total_results']));
      }
      
+     /**
+      * This shows the advanced search form for all models by going to the correct URI.
+      * 
+      * This form can be loaded as a partial by calling advanced_search_form().
+      * 
+      * @return void
+      **/
+     public function advancedSearchAction()
+     {
+         // filter the models to search
+         $searchModels = array('Item', 'Collection');
+         
+         // Only show this form as a partial if it's being pulled via XmlHttpRequest
+         $this->view->isPartial = $this->getRequest()->isXmlHttpRequest();
+
+         // If this is set to null, use the default search/browse action.
+         $this->view->formActionUri = null;
+
+         $this->view->formAttributes = array('id'=>'search');
+     }
+     
+     /**
+      * Returns an array with the search results based on the parameters in the request
+      * 
+      * @return array
+      **/
      private function _getSearchResults()
      {
          $request = $this->getRequest();
@@ -69,15 +95,29 @@ class SearchController extends Omeka_Controller_Action
          $search = Omeka_Context::getInstance()->getSearch();
          $searchIndex = $search->getLuceneIndex();
          
-         $rawUserQuery = $_GET['search'];
-
+         // initialize the search query
          $searchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
-         
-         $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($rawUserQuery);
-         $searchQuery->addSubquery($userQuery, true);
-         
+                 
+         // if the model is specified, then it is an advanced search         
+         if (isset($_GET['model'])) {
+             //advanced search             
+             if (isset($_GET['search']) && trim($_GET['search']) != '') {
+                 $userQuery= Zend_Search_Lucene_Search_QueryParser::parse(trim($_GET['search']));
+                 $searchQuery->addSubquery($userQuery, true);
+             }
+             $rawUserQuery = '';
+             // add the advanced search based on the parameters in the request
+             $this->_addAdvancedSearchQuery($searchQuery, $request);
+         } else {
+             // simple search
+              $rawUserQuery = trim($_GET['search']);         
+              $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($rawUserQuery);
+              $searchQuery->addSubquery($userQuery, true);
+         }         
+    
+         // This permission check needs to change from Items to a per model basis
          if (!$this->isAllowed('makePublic', 'Items')) {
-             $requireIsPublicQuery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, '1');
+             $requireIsPublicQuery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, false);
              $searchQuery->addSubquery($requireIsPublicQuery, true);
          }
 
@@ -86,7 +126,7 @@ class SearchController extends Omeka_Controller_Action
          } catch (Zend_Search_Lucene_Exception $e) {
              $hits = array();
              // wildcard exception
-             $this->flashError('Invalid lucene search. For using wildcards, at least three characters must precede the wildcard character.');
+             $this->flashError('Invalid Lucene search. For using wildcards, at least three characters must precede the wildcard character.');
          }         
          $hitCount = count($hits);
                   
@@ -106,6 +146,42 @@ class SearchController extends Omeka_Controller_Action
              'per_page' => $hitsPerPage);
      }
      
+     /**
+      * Adds subqueries to the search query for the advanced search based on the parameters in the request object
+      * 
+      * @return void
+      **/
+     private function _addAdvancedSearchQuery($searchQuery, $request)
+     {
+         $requestParams = $this->_getNonEmptyParams($request->getParams());
+         $modelName = $requestParams['model'];
+         try {
+             if (!class_exists($modelName)) {
+                 throw new Exception('Invalid model type for advanced search.');
+             }
+             $this->getDb()->getTable($modelName)->addAdvancedSearchQueryForLucene($searchQuery, $requestParams);
+         } catch (Exception $e) {
+             $controller->flash($e->getMessage());
+         }
+     }
+    
+     /**
+      * Returns the request parameters that have non-empty values
+      * 
+      * @return array The request parameters that have non-empty values
+      **/
+     private function _getNonEmptyParams($requestParams) 
+     {
+         $params = array();
+         foreach($requestParams as $requestParamName => $requestParamValue) {
+            if (trim($requestParamValue) == '') {
+                continue;
+            }
+            $params[$requestParamName] = $requestParamValue;
+         }
+         return $params;
+     }
+          
      /**
       * Retrieve the number of hits to display on any given browse page.
       * This can be modified as a query parameter provided that a user is actually logged in.

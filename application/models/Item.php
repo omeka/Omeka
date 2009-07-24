@@ -240,12 +240,12 @@ class Item extends Omeka_Record
         }
         
         // adds the fields for added or modified
-        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_DATE_ADDED, $this->added);            
-        Omeka_Search::addLuceneField($doc, 'UnIndexed', Omeka_Search::FIELD_NAME_DATE_MODIFIED, $this->modified);
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_DATE_ADDED, $this->added, true);            
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_DATE_MODIFIED, $this->modified, true);
         
         // adds the fields for public and private       
-        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public);            
-        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured);
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);
         
         // add the fields for the non-empty element texts, where each field is joint key of the set name and element name (in that order).        
         foreach($this->getAllElementsBySet() as $elementSet => $elements) {
@@ -270,6 +270,16 @@ class Item extends Omeka_Record
         }
         if (count($tagNames) > 0) {
             Omeka_Search::addLuceneField($doc, 'UnStored', array('Item','tags'), $tagNames);            
+        }
+        
+        // add the collection id of the collection that contains the item
+        if ($this->collection_id) {
+            Omeka_Search::addLuceneField($doc, 'Keyword', array('Item','collection_id'), $this->collection_id, true);                        
+        }
+        
+        // add the item type id for the item
+        if ($this->item_type_id) {
+            Omeka_Search::addLuceneField($doc, 'Keyword', array('Item','item_type_id'), $this->item_type_id, true);                        
         }
                 
         return parent::createLuceneDocument($doc);

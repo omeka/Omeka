@@ -27,6 +27,11 @@ class Omeka_Search
     const FIELD_NAME_DATE_ADDED = 'date_added';
     const FIELD_NAME_DATE_MODIFIED = 'date_modified';
 
+    const FIELD_VALUE_TRUE = '1';
+    const FIELD_VALUE_FALSE = '0';
+
+    const FIELD_VALUE_EXCLUDED_PREFIX = 'excluded';
+
     private $_luceneIndex;
     private $_luceneIndexDir;
     private $_luceneFieldNameValueCounts;
@@ -240,21 +245,45 @@ class Omeka_Search
      * 
      * @param string fieldNameStrings The fieldName strings used to create an unexpanded field name.
      * @param string $fieldValue The required field value for the field.
+     * @param boolean $isExcludedField Whether the field is excluded from the default search
      * @return Zend_Search_Lucene_Search_Query_Boolean The subquery that includes a disjunction 
      * for all of the variants of the field name.
      */
-    static public function getLuceneRequiredTermQueryForFieldName($fieldNameStrings, $fieldValue) 
+    static public function getLuceneRequiredTermQueryForFieldName($fieldNameStrings, $fieldValue, $isExcludedField=false) 
     {
         $search = self::getInstance();
+        
+        if ($isExcludedField) {
+            $fieldValue = $search->getLuceneExcludedFieldValue($fieldValue);
+        }
+        
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
         $expandedFieldNames = $search->getLuceneExpandedFieldNames($search->getLuceneUnexpandedFieldName($fieldNameStrings));
         foreach($expandedFieldNames as $expandedFieldName) {
-            //$subquery = new Zend_Search_Lucene_Search_Query_Term(new Zend_Search_Lucene_Index_Term($fieldValue, $expandedFieldName));
-            // hack
             $subquery = new Zend_Search_Lucene_Search_Query_Preprocessing_Term($fieldValue, 'UTF-8', $expandedFieldName);
             $query->addSubquery($subquery);
         }    
         return $query;
+    }
+    
+    /**
+     * Gets an excluded value for the lucene field
+     * 
+     * @return boolean Whether the Lucene field value is an excluded value
+     */
+    public function getLuceneExcludedFieldValue($fieldValue) 
+    {
+        return self::FIELD_VALUE_EXCLUDED_PREFIX . $fieldValue;
+    }
+    
+    /**
+     * Returns whether the Lucene field value is an excluded value
+     * 
+     * @return boolean Whether the Lucene field value is an excluded value
+     */
+    public function getLuceneIsExcludedFieldValue($fieldValue) 
+    {
+        return (strncmp($fieldValue, self::FIELD_VALUE_EXCLUDED_PREFIX, strlen(self::FIELD_VALUE_EXCLUDED_PREFIX)) == 0);
     }
     
     /**
@@ -342,9 +371,10 @@ class Omeka_Search
      * @param array|string $fieldNameStrings The string or array of strings to concatenate to form the field name. 
      * Note: The order of the strings matters.
      * @param array|string $fieldValues The string values to add to the field.
+     * @param boolean $isExcludedField Whether the field is excluded from the default search
      * @return void
      */
-    static public function addLuceneField($luceneDoc, $luceneFieldType, $fieldNameStrings, $fieldValues) 
+    static public function addLuceneField($luceneDoc, $luceneFieldType, $fieldNameStrings, $fieldValues, $isExcludedField=false) 
     {                
         if (!is_array($fieldValues)) {
             $fieldValues = (string)$fieldValues; // convert numbers to strings
@@ -354,12 +384,22 @@ class Omeka_Search
             $fieldValues = array($fieldValues);
         }
 
+        // make sure there is at least 1 field value
         if (count($fieldValues) == 0) {
             return ;
         }
         
-        $search = Omeka_Search::getInstance();
+        // get the Omeka_Search object
+        $search = self::getInstance();
         
+        // if the field should be excluded from default search, change the field values to the excluded field values
+        if ($isExcludedField) {
+            foreach($fieldValues as &$fieldValue) {
+                $fieldValue = $search->getLuceneExcludedFieldValue($fieldValue);
+            }
+        }
+        
+        // get the unexpanded field name from the field name string array
         $unexpandedFieldName = $search->getLuceneUnexpandedFieldName($fieldNameStrings);
         
         // find the maximum fieldNameValueNumber for the document

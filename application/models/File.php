@@ -227,4 +227,49 @@ class File extends Omeka_Record {
         $extractor = new Omeka_File_Info($this);
         return $extractor->extract();
     }
+    
+    /**
+     * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
+     *
+     * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
+     * @return Zend_Search_Lucene_Document
+     **/
+    public function createLuceneDocument($doc=null) 
+    {        
+        if (!$doc) {
+            $doc = new Zend_Search_Lucene_Document(); 
+        }
+                
+        // adds the fields for added or modified
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_DATE_ADDED, $this->added, true);            
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_DATE_MODIFIED, $this->modified, true);
+        
+        // adds the fields for public and private based on whether the parent item is public or private       
+        $item = $this->getItem();
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $item->public, true);            
+        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $item->featured, true);
+        
+        // add the fields for the non-empty element texts, where each field is joint key of the set name and element name (in that order).        
+        foreach($this->getAllElementsBySet() as $elementSet => $elements) {
+            foreach($elements as $element) {
+                $elementTextsToAdd = array();
+                foreach($this->getTextsByElement($element) as $elementText) {
+                    if (trim($elementText->text) != '') {
+                        $elementTextsToAdd[] = $elementText->text;    
+                    }
+                }
+                if (count($elementTextsToAdd) > 0) {
+                    Omeka_Search::addLuceneField($doc, 'UnStored', array($elementSet, $element->name), $elementTextsToAdd);
+                }
+            }
+        }
+
+        // add the item id field
+        Omeka_Search::addLuceneField($doc, 'Keyword', array('File','item_id'), $this->item_id, true);            
+
+        //add the original filename field
+        Omeka_Search::addLuceneField($doc, 'UnStored', array('File','original_filename'), $this->original_filename);            
+                
+        return parent::createLuceneDocument($doc);
+    }
 }       

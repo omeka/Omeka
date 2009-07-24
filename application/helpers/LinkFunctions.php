@@ -49,12 +49,16 @@ function link_to($record, $action=null, $text='View', $props = array())
  * @since 0.10
  * @param string $text Optional Text of the link. Default is 'Advanced Search'.
  * @param array $props Optional XHTML attributes for the link.
+ * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
  **/
-function link_to_advanced_search($text = 'Advanced Search', $props = array())
-{
+function link_to_advanced_search($text = 'Advanced Search', $props = array(), $uri=null)
+{   
+    if (!$uri) {
+        $uri = uri('items/advanced-search');
+    }
     // Is appending the query string directly a security issue?  We should figure that out.
-    $props['href'] = uri('items/advanced-search') . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+    $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
     return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
 }
 

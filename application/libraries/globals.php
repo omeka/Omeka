@@ -592,3 +592,22 @@ function not_empty_or($value, $default)
 {
     return !empty($value) ? $value : $default;
 }
+
+
+
+/**
+  * Returns whether a value is true or not.  
+  * If the value is a string and its lowercased value is 'true' or '1', it returns true.
+  * If the value is an integer and equal to 1, then it returns true.
+  * Otherwise it returns false.
+  * @param string $value
+  * @return boolean
+  **/
+function is_true($value) 
+{
+    if ($value === null) {
+        return false;
+    }
+    $value = strtolower(trim($value));
+    return ($value == '1' || $value == 'true');
+}

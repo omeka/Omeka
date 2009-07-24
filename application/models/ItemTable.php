@@ -414,4 +414,89 @@ class ItemTable extends Omeka_Db_Table
         $luceneIndex = $search->getLuceneIndex();
         
     }
+    
+    public function addAdvancedSearchQueryForLucene($searchQuery, $requestParams) 
+    {
+        $search = Omeka_Search::getInstance();
+                
+        foreach($requestParams as $requestParamName => $requestParamValue) {
+            switch($requestParamName) {
+                // case 'user':
+                //     //Must be logged in to view items specific to certain users
+                //     if (!$controller->isAllowed('browse', 'Users')) {
+                //         throw new Exception( 'May not browse by specific users.' );
+                //     }
+                //     if (is_numeric($requestParamValue)) {
+                //         $params['user'] = $requestParamValue;
+                //     }
+                // break;
+
+                case 'public':
+                    if (is_true($requestParamValue)) {
+                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, true);
+                        $searchQuery->addSubquery($subquery, true);
+                    }
+                break;
+
+                case 'featured':
+                    if (is_true($requestParamValue)) {
+                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_FEATURED, Omeka_Search::FIELD_VALUE_TRUE, true);
+                        $searchQuery->addSubquery($subquery, true);
+                    }
+                break;
+
+                case 'collection':
+                    if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
+                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(array('Item', 'collection_id'), $requestParamValue, true);
+                        $searchQuery->addSubquery($subquery, true);
+                    }
+                break;
+                
+            
+                case 'type':
+                    if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
+                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(array('Item', 'item_type_id'), $requestParamValue, true);
+                        $searchQuery->addSubquery($subquery, true);
+                    }                
+                break;
+
+                //                case 'tag':
+                //                case 'tags':
+                //                    $params['tags'] = $requestParamValue;
+                //                break;
+                // 
+                //                case 'excludeTags':
+                //                    $params['excludeTags'] = $requestParamValue;
+                //                break;
+                // 
+                //                case 'recent':
+                //                    if (!$this->is_true($requestParamValue)) {
+                //                        $params['recent'] = false;
+                //                    }
+                //                break;
+                // 
+                //                case 'search':
+                //                    $params['search'] = $requestParamValue;
+                //                    //Don't order by recent-ness if we're doing a search
+                //                    unset($params['recent']);
+                //                break;
+                // 
+                //                case 'advanced':                    
+                //                    //We need to filter out the empty entries if any were provided
+                //                    foreach ($requestParamValue as $k => $entry) {                    
+                //                        if (empty($entry['element_id']) || empty($entry['type'])) {
+                //                            unset($requestParamValue[$k]);
+                //                        }
+                //                    }
+                //                    if (count($requestParamValue) > 0) {
+                //                        $params['advanced_search'] = $requestParamValue;
+                //                    }
+                //                break;
+                // 
+                //                case 'range':
+                //                    $params['range'] = $requestParamValue;
+                //                break;
+            }
+        }        
+    }
 }
