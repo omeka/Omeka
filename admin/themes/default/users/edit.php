@@ -3,7 +3,6 @@
 <?php common('settings-nav'); ?>
 
 <div id="primary">
-    <?php echo flash(); ?>
 	<h2>User Information</h2>
 <form method="post">
 <?php include('form.php'); ?>
