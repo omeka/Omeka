@@ -78,14 +78,14 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	
 	/* Pagination */
 	.browse-items .pagination {float:left; width: 414px;}
-	.pagination li {display:inline;padding: 3px 6px;}
+	.pagination li {display:inline;padding: 5px 8px;}
 	.pagination li.pagination_current {display:inline;background:#389; color:#fff;}
 	.pagination li.pagination_range, 
 	.pagination li.pagination_previous, 
 	.pagination li.pagination_first, 
 	.pagination li.pagination_next, 
 	.pagination li.pagination_last {padding:0;display:inline;}
-		.pagination a {text-decoration:none; color:#333;background: #eae9db; padding: 3px 6px;}
+		.pagination a {text-decoration:none; color:#333;background: #FAFAF7; padding: 5px 8px;}
 		.pagination a:hover {background: #c60; color: #fff;}
 	
 	/* Tagclouds */	
@@ -285,6 +285,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	/* Users */
 	.users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 	#new-user-form .submit {float:right;}
+	
+	#sort-users-form {padding:12px 18px 8px; display:block;margin:-18px -18px 18px; background: #FAFAF7;}
+	#sort-users-form fieldset, #sort-users-form fieldset p {display:inline; margin:0; padding: 0;}
+	#sort-users-form fieldset p {font-weight:bold; font-size: 13px; padding-right: 6px;}
+	#sort-users-form fieldset select {margin:0;display:inline; border:1px solid #d7d5c4;}
+	#sort-users-form .submit-form {display:inline;margin:0 0 0 6px; float:none;}
 	
 	/* Plugins */
 	#plugin-info .uninstall {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#fff url("../images/buttons-medium.gif") 0 -120px no-repeat !important;}

@@ -3,8 +3,9 @@
 <p id="add-user" class="add-button"><a class="add-user" href="<?php echo uri('users/add'); ?>">Add a User</a></p>
 <?php common('settings-nav'); ?>
 <div id="primary">
-<form action="<?php echo current_uri(); ?>" method="get" accept-charset="utf-8">
+<form action="<?php echo current_uri(); ?>" id="sort-users-form" method="get" accept-charset="utf-8">
     <fieldset>
+        <p>Sort Users:</p>
         <?php echo $this->formSelect('role', $_GET['role'], array(), 
             array(''=>'Select Role') + get_user_roles()); ?>
         <?php echo $this->formSelect('active', $_GET['active'], array(),
@@ -20,7 +21,8 @@
             array( ''=>'Sort Order',
                    'asc'=>'Ascending',
                    'desc'=>'Descending')); ?>
-        <input type="submit" class="submit submit-medium" name="submit" value="Submit" />
+                   <input type="submit" class="submit-form" name="submit" value="Submit" />
+                   
     </fieldset>
 </form>
 
