@@ -45,6 +45,8 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Model_TestCas
 	/**
      * Tests whether the get_collections helper returns data correctly from the test
      * database with a parameter for public set to 0.
+     *
+     * @internal Ticket #812 added for this test on 07/24/09.
      */
     public function testCanGetPrivateCollections() {
 		$this->_createNewCollections(5,5,5);
@@ -55,6 +57,8 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Model_TestCas
     /**
      * Tests whether the get_collections helper returns data correctly from the test
      * database with a parameter for public set to 1 and featured set to 1.
+     *
+     * @internal Ticket #813 added for this test on 07/24/09.
      */
     public function testCanGetPublicFeaturedCollections() {
 		$this->_createNewCollections(5,5,5);
