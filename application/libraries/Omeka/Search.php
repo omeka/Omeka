@@ -276,6 +276,11 @@ class Omeka_Search
         return self::FIELD_VALUE_EXCLUDED_PREFIX . $fieldValue;
     }
     
+    public function getLuceneValueFromExcludedValue($fieldValue)
+    {
+        return preg_replace('/^'.self::FIELD_VALUE_EXCLUDED_PREFIX.'/', '', $fieldValue, 1);
+    }
+    
     /**
      * Returns whether the Lucene field value is an excluded value
      * 
@@ -435,8 +440,8 @@ class Omeka_Search
      */
     public function getRecordByLuceneDocument($luceneDoc) 
     {
-        $modelName = $luceneDoc->getFieldValue($this->getLuceneExpandedFieldName(self::FIELD_NAME_MODEL_NAME));
-        $modelId = $luceneDoc->getFieldValue($this->getLuceneExpandedFieldName(self::FIELD_NAME_MODEL_ID));
+        $modelName = $this->getLuceneValueFromExcludedValue($luceneDoc->getFieldValue($this->getLuceneExpandedFieldName(self::FIELD_NAME_MODEL_NAME)));
+        $modelId = $this->getLuceneValueFromExcludedValue($luceneDoc->getFieldValue($this->getLuceneExpandedFieldName(self::FIELD_NAME_MODEL_ID)));
         
         $db = Omeka_Context::getInstance()->getDb();
         $record = $db->getTable($modelName)->find($modelId);
