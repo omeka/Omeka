@@ -459,7 +459,10 @@ class ItemTable extends Omeka_Db_Table
                         $searchQuery->addSubquery($subquery, true);
                     }                
                 break;
-
+                
+                case 'range':
+                    $this->filterByRangeLucene($searchQuery, $requestParamValue);
+                break;
                 //                case 'tag':
                 //                case 'tags':
                 //                    $params['tags'] = $requestParamValue;
@@ -497,6 +500,59 @@ class ItemTable extends Omeka_Db_Table
                 //                    $params['range'] = $requestParamValue;
                 //                break;
             }
-        }        
+        }
+        //die($searchQuery);
+    }
+    
+    /**
+     * Can specify a range of valid Item IDs or an individual ID
+     * 
+     * @param Omeka_Db_Select $select
+     * @param string $range Example: 1-4, 75, 89
+     * @return void
+     **/
+    public function filterByRangeLucene($searchQuery, $range)
+    {
+        $search = Omeka_Search::getInstance();
+        $idField = $search->getLuceneExpandedFieldName('model_id');
+        
+        // Comma-separated expressions should be treated individually
+        $exprs = explode(',', $range);
+        
+        // Create a boolean query with non-required subqueries
+        $query = new Zend_Search_Lucene_Search_Query_Boolean();
+        
+        foreach ($exprs as $expr) {
+            // If it has a '-' in it, it is a range of item IDs.  Otherwise it 
+            // is a single item ID
+            if (strpos($expr, '-') !== false) {
+                list($start, $finish) = explode('-', $expr);
+                
+                // Strip non-numeric input
+                $start  = (int) trim($start);
+                $finish = (int) trim($finish);
+                
+                $startTerm = new Zend_Search_Lucene_Index_Term(
+                    $search->getLuceneExcludedFieldValue($start), $idField);
+                $endTerm = new Zend_Search_Lucene_Index_Term(
+                    $search->getLuceneExcludedFieldValue($finish), $idField);
+                
+                // Make query from $start to $finish, inclusive
+                $subquery = new Zend_Search_Lucene_Search_Query_Range(
+                    $startTerm, $endTerm, false);
+            // It is a single item ID
+            } else {
+                $id = (int) trim($expr);
+                
+                $term = new Zend_Search_Lucene_Index_Term(
+                    $search->getLuceneExcludedFieldValue($id), $idField);
+                    //$id, $idField);
+                $subquery = new Zend_Search_Lucene_Search_Query_Term($term);
+                $wheres[] = "(i.id = $id)";
+            }
+            $query->addSubquery($subquery);
+        }
+        // Require the range query as a whole to have a hit
+        $searchQuery->addSubquery($query, true);
     }
 }
