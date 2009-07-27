@@ -83,15 +83,17 @@ class Installer
     {
         $db = Omeka_Context::getInstance()->getDb();
         
-        // Check if the options table is filled (if so, Omeka already set up so 
-        // exit this script)
-        require_once 'Option.php';
-        $options = $db->getTable('Option')->findAll();
-        if (count($options)) {
-            $errorMessage = "<h1>Omeka Already Installed</h1><p>It looks like Omeka has already 
-            been installed. You may remove the 'install' directory for security 
-            reasons.</p>";
-            throw new Exception($errorMessage);
+        $sql = "SHOW TABLES LIKE '{$db->prefix}options'";
+        $tables = $db->query($sql)->fetchAll();
+        if (!empty($tables)) {
+            require_once 'Option.php';
+            $options = $db->getTable('Option')->findAll();
+            if (count($options)) {
+                $errorMessage = "<h1>Omeka Already Installed</h1><p>It looks like Omeka has already 
+                been installed. You may remove the 'install' directory for security 
+                reasons.</p>";
+                throw new Exception($errorMessage);
+            }
         }
     }
     
