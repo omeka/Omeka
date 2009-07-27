@@ -24,6 +24,9 @@ class Installer
         $core->phasedLoading('initializeDb');
         $this->core = $core;
         
+        // Exit installation if Omeka is installed already.
+        $this->checkOmekaAlreadyInstalled();
+        
         // Verify Omeka requirements.
         $this->verifyRequirements();
         
@@ -63,6 +66,22 @@ class Installer
             include INSTALL_DIR . DIRECTORY_SEPARATOR . 'install.sql.php';
             $db->execBlock($install_sql);
         }
+    }
+    
+    private function handleInstallForm()
+    {
+        if (isset($_POST['install_submit'])) {
+            $this->validateInstallForm();
+            if (!$this->installFormValidationErrorExists) {
+                $this->processInstallForm();
+            }
+        }
+    }
+    
+    // Check whether Omeka has been installed already.
+    private function checkOmekaAlreadyInstalled()
+    {
+        $db = Omeka_Context::getInstance()->getDb();
         
         // Check if the options table is filled (if so, Omeka already set up so 
         // exit this script)
@@ -73,16 +92,6 @@ class Installer
             been installed. You may remove the 'install' directory for security 
             reasons.</p>";
             throw new Exception($errorMessage);
-        }
-    }
-    
-    private function handleInstallForm()
-    {
-        if (isset($_POST['install_submit'])) {
-            $this->validateInstallForm();
-            if (!$this->installFormValidationErrorExists) {
-                $this->processInstallForm();
-            }
         }
     }
     
