@@ -269,7 +269,7 @@ class Item extends Omeka_Record
             $tagNames[] = $tag->name;
         }
         if (count($tagNames) > 0) {
-            Omeka_Search::addLuceneField($doc, 'UnStored', array('Item','tags'), $tagNames);            
+            Omeka_Search::addLuceneField($doc, 'UnStored', 'tag', $tagNames);            
         }
         
         // add the collection id of the collection that contains the item
