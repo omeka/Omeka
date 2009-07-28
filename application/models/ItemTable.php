@@ -460,6 +460,10 @@ class ItemTable extends Omeka_Db_Table
                     }                
                 break;
                 
+                case 'tag':
+                case 'tags':
+                    $this->filterByTagsLucene($searchQuery, $requestParamValue);
+                    break;
                 case 'range':
                     $this->filterByRangeLucene($searchQuery, $requestParamValue);
                 
@@ -508,12 +512,33 @@ class ItemTable extends Omeka_Db_Table
     }
     
     /**
+     * Query must look like the following in order to correctly retrieve items     
+     * that have all the tags provided (in this example, all items that are
+     * tagged both 'foo' and 'bar'):
+     *
+     * @param Zend_Search_Lucene_Search_Query_Boolean $searchQuery
+     * @param string|array $tags A comma-delimited string or an array of tag 
+     *         names.
+     */
+    public function filterByTagsLucene($searchQuery, $tags)
+    {
+        $search = Omeka_Search::getInstance();
+        if (!is_array($tags)) {
+            $tags = explode(',', $tags);
+        }
+        
+        foreach ($tags as $tag) {
+            $subquery = $search->getLuceneTermQueryForFieldName('tag', trim($tag));
+            $searchQuery->addSubquery($subquery, true);
+        }
+    }
+    
+    /**
      * Can specify a range of valid Item IDs or an individual ID
      * 
-     * @param Omeka_Db_Select $select
+     * @param Zend_Search_Lucene_Search_Query_Boolean $searchQuery
      * @param string $range Example: 1-4, 75, 89
-     * @return void
-     **/
+     */
     public function filterByRangeLucene($searchQuery, $range)
     {
         $search = Omeka_Search::getInstance();
