@@ -59,6 +59,8 @@ class Omeka_Search
     {
         // load the lucene index
         $this->_loadLuceneIndex($luceneIndexDir);
+        // Set the default analyzer to UTF-8, allow numbers, case insensitive.
+        Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive);
     }
     
     /**
