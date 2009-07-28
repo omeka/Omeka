@@ -401,13 +401,18 @@ class Omeka_Record implements ArrayAccess
         
         $this->runCallbacks('beforeDelete');
         
+        // delete the record from the lucene index
+        if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
+            $omekaSearch->deleteLuceneByRecord($this);
+        }
+        
         // Delete has an extra template method that is separate from the 
         // callbacks. This is because the callbacks execute prior to actually 
         // deleting anything. So the state of the record must be maintained 
         // until all callbacks are done. Then _delete() template method takes 
         // over and all bets are off
         $this->_delete();
-        
+             
         // The main delete query
         $table = $this->getTable()->getTableName();
         
@@ -416,11 +421,6 @@ class Omeka_Record implements ArrayAccess
         
         $this->id = null;
         $this->runCallbacks('afterDelete');
-        
-        // delete the record from the lucene index
-        if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
-            $omekaSearch->deleteLuceneByRecord($this);
-        }
     }
     
     /**

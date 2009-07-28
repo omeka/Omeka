@@ -170,7 +170,7 @@ class Omeka_Search
      * @return void
      **/
     public function deleteLuceneByRecord($record)
-    {        
+    {   
         // delete the document from the index if it already exists
         if ($hit = $this->findLuceneByRecord($record)) {
             $this->_luceneIndex->delete($hit->id);
@@ -187,14 +187,15 @@ class Omeka_Search
     public function findLuceneByRecord($record) 
     {
         // create a query to find the queryhit associated with the Omeka_Record
-        $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
-        $query->addTerm(new Zend_Search_Lucene_Index_Term(get_class($record), $this->getLuceneExpandedFieldName('model_name')), true);
-        $query->addTerm(new Zend_Search_Lucene_Index_Term($record->id, $this->getLuceneExpandedFieldName('model_id')), true);
+        $query = new Zend_Search_Lucene_Search_Query_Boolean();
+        $query->addSubquery(self::getLuceneTermQueryForFieldName('model_name', get_class($record), true), true);
+        $query->addSubquery(self::getLuceneTermQueryForFieldName('model_id', $record->id, true), true);
                 
         // return a single hit if one exists, otherwise return null
         $hits  = $this->_luceneIndex->find($query);        
-                
+                        
         if (!empty($hits)) {
+            
             return $hits[0];
         }
         return null;
@@ -254,6 +255,9 @@ class Omeka_Search
     static public function getLuceneTermQueryForFieldName($fieldNameStrings, $fieldValue, $isExcludedField=false) 
     {
         $search = self::getInstance();
+        
+        // convert field value to string
+        $fieldValue = (string)$fieldValue;
         
         if ($isExcludedField) {
             $fieldValue = $search->getLuceneExcludedFieldValue($fieldValue);
