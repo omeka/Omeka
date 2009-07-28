@@ -57,6 +57,21 @@ class Element extends Omeka_Record
     }
     
     /**
+     * Return the ElementSet objection for this element.
+     * 
+     * @return ElementSet
+     */
+    public function getElementSet()
+    {
+        if(($setId = $this->element_set_id)) {
+            return $this->getDb()->getTable('ElementSet')->find($setId);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
      * Set the order of the element within its element set.
      * @param integer $order
      */
