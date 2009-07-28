@@ -19,9 +19,14 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbst
         $basicConfig = $bootstrap->getResource('Config');
         $sessionName = (isset($basicConfig->session) && !empty($basicConfig->session->name)) 
                        ? $basicConfig->session->name
-                       : preg_replace('/[^\w]+/', '', WEB_ROOT);
+                       : $this->_buildSessionName();
     
         Zend_Session::start(array(
             'name'=>$sessionName));
+    }
+    
+    private function _buildSessionName()
+    {
+        return md5(BASE_DIR);
     }
 }
