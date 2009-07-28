@@ -462,6 +462,9 @@ class ItemTable extends Omeka_Db_Table
                 
                 case 'range':
                     $this->filterByRangeLucene($searchQuery, $requestParamValue);
+                
+                case 'advanced':
+                    $this->filterByAdvancedLucene($searchQuery, $requestParamValue);
                 break;
                 //                case 'tag':
                 //                case 'tags':
@@ -554,5 +557,42 @@ class ItemTable extends Omeka_Db_Table
         }
         // Require the range query as a whole to have a hit
         $searchQuery->addSubquery($query, true);
+    }
+    
+    public function filterByAdvancedLucene($searchQuery, $advanced)
+    {
+        $search = Omeka_Search::getInstance();
+                        
+        foreach ($advanced as $component) {
+            $term = $component['terms'];
+            
+            if (!($elementId = (int) $component['element_id'])) {
+                continue;
+            }
+            
+            $element = $this->getDb()->getTable('Element')->find($elementId);
+            $elementSet = $element->getElementSet();
+            
+            $termNameStrings = array($elementSet->name, $element->name);
+            
+            $subquery = $search->getLuceneRequiredTermQueryForFieldName($termNameStrings, $term);
+
+            //Determine what the WHERE clause should look like
+            switch ($component['type']) {
+                case 'contains':
+                    $searchQuery->addSubquery($subquery, true);
+                    break;
+                case 'does not contain':
+                    $searchQuery->addSubquery($subquery, false);
+                    break;
+                case 'is empty':    
+                    break;
+                case 'is not empty':
+                    break;
+                default:
+                    throw new Omeka_Record_Exception( 'Invalid search type given!' );
+                    break;
+            }
+        }
     }
 }
