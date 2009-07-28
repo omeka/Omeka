@@ -249,7 +249,7 @@ class Omeka_Search
      * @return Zend_Search_Lucene_Search_Query_Boolean The subquery that includes a disjunction 
      * for all of the variants of the field name.
      */
-    static public function getLuceneRequiredTermQueryForFieldName($fieldNameStrings, $fieldValue, $isExcludedField=false) 
+    static public function getLuceneTermQueryForFieldName($fieldNameStrings, $fieldValue, $isExcludedField=false) 
     {
         $search = self::getInstance();
         

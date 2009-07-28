@@ -117,7 +117,7 @@ class SearchController extends Omeka_Controller_Action
     
          // This permission check needs to change from Items to a per model basis
          if (!$this->isAllowed('makePublic', 'Items')) {
-             $requireIsPublicQuery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, false);
+             $requireIsPublicQuery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, false);
              $searchQuery->addSubquery($requireIsPublicQuery, true);
          }
 

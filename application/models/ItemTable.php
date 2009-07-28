@@ -433,21 +433,21 @@ class ItemTable extends Omeka_Db_Table
 
                 case 'public':
                     if (is_true($requestParamValue)) {
-                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, true);
+                        $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, true);
                         $searchQuery->addSubquery($subquery, true);
                     }
                 break;
 
                 case 'featured':
                     if (is_true($requestParamValue)) {
-                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_FEATURED, Omeka_Search::FIELD_VALUE_TRUE, true);
+                        $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_FEATURED, Omeka_Search::FIELD_VALUE_TRUE, true);
                         $searchQuery->addSubquery($subquery, true);
                     }
                 break;
 
                 case 'collection':
                     if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
-                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(array('Item', 'collection_id'), $requestParamValue, true);
+                        $subquery = $search->getLuceneTermQueryForFieldName(array('Item', 'collection_id'), $requestParamValue, true);
                         $searchQuery->addSubquery($subquery, true);
                     }
                 break;
@@ -455,7 +455,7 @@ class ItemTable extends Omeka_Db_Table
             
                 case 'type':
                     if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
-                        $subquery = $search->getLuceneRequiredTermQueryForFieldName(array('Item', 'item_type_id'), $requestParamValue, true);
+                        $subquery = $search->getLuceneTermQueryForFieldName(array('Item', 'item_type_id'), $requestParamValue, true);
                         $searchQuery->addSubquery($subquery, true);
                     }                
                 break;
@@ -575,7 +575,7 @@ class ItemTable extends Omeka_Db_Table
             
             $termNameStrings = array($elementSet->name, $element->name);
             
-            $subquery = $search->getLuceneRequiredTermQueryForFieldName($termNameStrings, $term);
+            $subquery = $search->getLuceneTermQueryForFieldName($termNameStrings, $term);
 
             //Determine what the WHERE clause should look like
             switch ($component['type']) {
