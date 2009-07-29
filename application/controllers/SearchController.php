@@ -88,6 +88,7 @@ class SearchController extends Omeka_Controller_Action
      private function _getSearchResults()
      {
          $request = $this->getRequest();
+         $requestParams = $this->_getNonEmptyParams($request->getParams());
          
          $resultPage = $request->get('page') or $resultPage = 1;
           
@@ -107,12 +108,14 @@ class SearchController extends Omeka_Controller_Action
              }
              $rawUserQuery = '';
              // add the advanced search based on the parameters in the request
-             $this->_addAdvancedSearchQuery($searchQuery, $request);
+             $this->_addAdvancedSearchQuery($searchQuery, $requestParams);
          } else {
              // simple search
               $rawUserQuery = trim($_GET['search']);         
               $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($rawUserQuery);
               $searchQuery->addSubquery($userQuery, true);
+              // restrict the simple search to models added by the core and plugins
+              $this->_addSimpleSearchModelsQuery($searchQuery);
          }         
     
          // This permission check needs to change from Items to a per model basis
@@ -147,13 +150,38 @@ class SearchController extends Omeka_Controller_Action
      }
      
      /**
-      * Adds subqueries to the search query for the advanced search based on the parameters in the request object
+      * Adds subquery to the search query to restrict the models to core models and those added by plugins
       * 
+      * @param Zend_Search_Lucene_Search_Query_Boolean $searchQuery
+      * @param array $requestParams An associative array where the keys are the request param names and the values are their associated values
       * @return void
       **/
-     private function _addAdvancedSearchQuery($searchQuery, $request)
+     private function _addSimpleSearchModelsQuery($searchQuery)
+     {         
+         // core models to search
+         $coreModelsToSearch = array('Item', 'Collection', 'File');
+         
+         // add the models to search from the plugins
+         $modelsToSearch = apply_filters('default_search_models', $coreModelsToSearch);
+         
+         // build the query that restricts the search to the models to search
+         $modelsToSearchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
+         foreach($modelsToSearch as $modelName) {
+             $modelsToSearchQuery->addSubquery(Omeka_Search::getLuceneTermQueryForFieldName('model_name', $modelName, true));
+         }
+         
+         $searchQuery->addSubquery($modelsToSearchQuery, true);
+     }
+     
+     /**
+      * Adds subqueries to the search query for the advanced search based on the parameters in the request parameters
+      * 
+      * @param Zend_Search_Lucene_Search_Query_Boolean $searchQuery
+      * @param array $requestParams An associative array where the keys are the request param names and the values are their associated values
+      * @return void
+      **/
+     private function _addAdvancedSearchQuery($searchQuery, $requestParams)
      {
-         $requestParams = $this->_getNonEmptyParams($request->getParams());
          $modelName = $requestParams['model'];
          try {
              if (!class_exists($modelName)) {
@@ -168,6 +196,7 @@ class SearchController extends Omeka_Controller_Action
      /**
       * Returns the request parameters that have non-empty values
       * 
+      * @param array The request parameters
       * @return array The request parameters that have non-empty values
       **/
      private function _getNonEmptyParams($requestParams) 
