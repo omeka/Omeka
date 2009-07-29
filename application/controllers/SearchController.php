@@ -123,7 +123,7 @@ class SearchController extends Omeka_Controller_Action
              $requireIsPublicQuery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, false);
              $searchQuery->addSubquery($requireIsPublicQuery, true);
          }
-
+         //die($searchQuery);
          try {
              $hits = $searchIndex->find($searchQuery);
          } catch (Zend_Search_Lucene_Exception $e) {
@@ -158,16 +158,14 @@ class SearchController extends Omeka_Controller_Action
       **/
      private function _addSimpleSearchModelsQuery($searchQuery)
      {         
-         // core models to search
-         $coreModelsToSearch = array('Item', 'Collection', 'File');
+         $search = Omeka_Search::getInstance();
          
-         // add the models to search from the plugins
-         $modelsToSearch = apply_filters('default_search_models', $coreModelsToSearch);
+         $searchModels = $search->getSearchModels();
          
          // build the query that restricts the search to the models to search
          $modelsToSearchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
-         foreach($modelsToSearch as $modelName) {
-             $modelsToSearchQuery->addSubquery(Omeka_Search::getLuceneTermQueryForFieldName('model_name', $modelName, true));
+         foreach($searchModels as $modelName) {
+             $modelsToSearchQuery->addSubquery(Omeka_Search::getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName, true));
          }
          
          $searchQuery->addSubquery($modelsToSearchQuery, true);

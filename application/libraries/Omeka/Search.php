@@ -35,6 +35,7 @@ class Omeka_Search
     private $_luceneIndex;
     private $_luceneIndexDir;
     private $_luceneFieldNameValueCounts;
+    private $_searchModels = array();
     
     /**
      * Gets the single instance of Omeka_Search used by Omeka
@@ -61,6 +62,12 @@ class Omeka_Search
         $this->_loadLuceneIndex($luceneIndexDir);
         // Set the default analyzer to UTF-8, allow numbers, case insensitive.
         Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive);
+        
+        // core models to search
+        $coreSearchModels = array('Item', 'Collection', 'File');
+        
+        // add the models to search from the plugins
+        $this->_searchModels = apply_filters('search_models', $coreSearchModels);
     }
     
     /**
@@ -453,5 +460,15 @@ class Omeka_Search
         $record = $db->getTable($modelName)->find($modelId);
         
         return $record;
-    }    
+    }
+    
+    /**
+     * Gets the currently-indexed (indexable) models for the system. This
+     * property will potentially change depending on what plugins are loaded.
+     *
+     * @return array
+     */
+    public function getSearchModels() {
+        return $this->_searchModels;
+    }
 }
