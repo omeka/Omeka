@@ -51,7 +51,7 @@ class CollectionsController extends Omeka_Controller_Action
                 
         //If the request is not done through AJAX, redirect
         if (!$this->getRequest()->isXmlHttpRequest()) {
-            $this->redirect->goto('show', null, 
+            $this->redirect->goto('edit', null, 
                                   null, array('id' => $collection->id));
         }
     }
