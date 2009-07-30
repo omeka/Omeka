@@ -105,17 +105,16 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 	</div>
 	<?php if (has_permission('Items','showNotPublic')): ?>
 	<div class="field">
-		<?php echo label('public','Only Public Items'); ?>
+		<?php echo label('public','Public/Non-Public'); ?>
 		<div class="inputs">
-	<?php echo checkbox(array('name'=>'public', 'id'=>'public'), $_REQUEST['public'], null); ?>
-	</div>
+		    <?php echo select(array('name' => 'public', 'id' => 'public'), array('1' => 'Only Public Items', '0' => 'Only Non-Public Items')); ?>
+	    </div>
 	</div>
 	
 	<div class="field">
-		<?php echo label('featured','Only Featured Items'); ?>
+		<?php echo label('featured','Featured/Non-Featured'); ?>
 		<div class="inputs">
-	<?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null);
-	?>
+		    <?php echo select(array('name' => 'featured', 'id' => 'featured'), array('1' => 'Only Featured Items', '0' => 'Only Non-Featured Items')); ?>
 	</div>
 	</div>
 	<?php endif; ?>

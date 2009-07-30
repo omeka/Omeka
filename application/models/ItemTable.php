@@ -90,6 +90,8 @@ class ItemTable extends Omeka_Db_Table
         //Force a preview of the public items
         if ($isPublic) {
             $select->where('i.public = 1');
+        } else {
+            $select->where('i.public = 0');
         }
     }
     
@@ -100,7 +102,9 @@ class ItemTable extends Omeka_Db_Table
         //filter items based on featured (only value of 'true' will return featured items)
         if ($isFeatured) {
             $select->where('i.featured = 1');
-        }        
+        } else {
+            $select->where('i.featured = 0');
+        }     
     }
     
     /**
@@ -286,8 +290,12 @@ class ItemTable extends Omeka_Db_Table
             $this->filterByUserOrEntity($select, $paramToFilter, $filterByUser);
         }
         
-        $this->filterByPublic($select, $params['public']);
-        $this->filterByFeatured($select, $params['featured']);
+        if(isset($params['public'])) {
+            $this->filterByPublic($select, $params['public']);
+        }
+        if(isset($params['featured'])) {
+            $this->filterByFeatured($select, $params['featured']);
+        }
         
         if (isset($params['collection'])) {
             $this->filterByCollection($select, $params['collection']);
