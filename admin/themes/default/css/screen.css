@@ -292,12 +292,6 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#sort-users-form fieldset select {margin:0;display:inline; border:1px solid #d7d5c4;}
 	#sort-users-form .submit-form {display:inline;margin:0 0 0 6px; float:none;}
 	
-	/* Plugins */
-	#plugin-info .uninstall {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#fff url("../images/buttons-medium.gif") 0 -120px no-repeat !important;}
-		#plugin-info .deactivate {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#fff url("../images/buttons-medium.gif") 0 -90px no-repeat !important;}
-		
-		#plugin-info .uninstall:hover, 
-		#plugin-info .deactivate:hover {background-position: 0 -30px !important;}
 		
 	/* Themes */
 	#themeswitch .themes {margin-right:-18px; overflow:hidden; margin-bottom:-18px;}

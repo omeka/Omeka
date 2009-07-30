@@ -155,19 +155,38 @@ class PluginsController extends Omeka_Controller_Action
     {
         $plugin = (string) $this->_getParam('name');
         $broker = $this->_pluginBroker;
-        if ($broker && $broker->isInstalled($plugin)) {
+        
+        // Check to see if the plugin exists and is installed.
+        if (!$broker || !$broker->isInstalled($plugin)) {
+            $this->flashError("Plugin named '$plugin' could not be found!");
+            $this->redirect->goto('browse');
+        }
+        
+        // Confirm the uninstall.
+        if (!$this->_getParam('confirm')) {
+            
+            if ($this->_getParam('uninstall-confirm')) {
+                $this->flashError("You must confirm the uninstall before proceeding.");
+            }
+            
+            // Call the append to uninstall message hook for the specific 
+            // plugin, if it exists.
+            $message = get_specific_plugin_hook_output($plugin, 'admin_append_to_plugin_uninstall_message');
+            
+            $this->view->assign(compact('plugin', 'message'));
+            $this->render('confirm-uninstall');
+        
+        // Attempt to uninstall the plugin.
+        } else {
             try {
                 $broker->uninstall($plugin);
-                $this->flashSuccess("Plugin named '$plugin' was successfully uninstalled!");
+                $this->flashSuccess("Plugin named \"$plugin\" was successfully uninstalled!");
             } catch (Exception $e) {
                 $this->flashError("The following error occurred while uninstalling the '$plugin' plugin: " . $e->getMessage());
                 $this->redirect->goto('browse');
             }
-        } else {
-            $this->flash("Plugin named '$plugin' could not be found!");
+            $this->redirect->goto('browse');
         }
-        
-        $this->redirect->goto('browse');
     }
     
     public function deleteAction()

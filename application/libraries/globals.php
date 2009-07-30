@@ -211,6 +211,35 @@ function get_plugin_hook_output()
 }
 
 /**
+ * Retrieve the output of a specific plugin's hook as a string. 
+ * 
+ * This is like get_plugin_hook_output() but only calls the hook within the 
+ * provided plugin.
+ * 
+ * @param string $pluginName
+ * @param string $hookName
+ * @param [any number of further arguments]
+ * @return string
+ */
+function get_specific_plugin_hook_output()
+{
+    $args = func_get_args();
+    
+    $pluginName = array_shift($args);
+    $hookName = array_shift($args);
+    
+    $pluginBroker = get_plugin_broker();
+    $hookNameSpecific = $pluginBroker->getHook($pluginName, $hookName);
+    
+    ob_start();
+    @call_user_func_array($hookNameSpecific, $args);
+    $content = ob_get_contents();
+    ob_end_clean();
+    
+    return $content;
+}
+
+/**
  * @access private
  * @return Omeka_Plugin_Broker|null
  **/

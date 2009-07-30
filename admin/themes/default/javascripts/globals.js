@@ -48,15 +48,6 @@ function confirmDelete() {
 	});
 }
 
-//This will add confirmation for deleting files and the item
-function confirmUninstall() {
-	$$('.uninstall').each( function(el) {
-		el.onclick = function() {
-			return confirm('Uninstalling the plugin can delete data added by your plugin. Are you sure you want to uninstall this?');
-		}
-	});
-}
-
 Omeka.Form = Object.extend({}, {
     /* Loop through all the spans with class="tooltip" and make them visible 
 	as tooltips */
@@ -83,5 +74,4 @@ Omeka.Form = Object.extend({}, {
 
 Event.observe(window,'load',Omeka.alertBox);
 Event.observe(window,'load',confirmDelete);
-Event.observe(window,'load',confirmUninstall);
 
