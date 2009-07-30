@@ -174,6 +174,18 @@ class Item extends Omeka_Record
     }
     
     /**
+     * Things to do in the beforeSave() hook:
+     * 
+     * Explicitly set the modified timestamp.
+     * 
+     * @return void
+     **/
+    protected function beforeSave()
+    {
+        $this->modified = date('Y-m-d G:i:s');
+    }
+    
+    /**
      * Modify the user's tags for this item based on form input.
      * 
      * Checks the 'tags' field from the post and applies all the differences in
