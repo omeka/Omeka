@@ -35,7 +35,7 @@ class SearchController extends Omeka_Controller_Action
       * 
       * @return void
       **/
-     public function browseAction()
+     public function resultsAction()
      {
          $results = $this->_getSearchResults();
              
@@ -66,7 +66,7 @@ class SearchController extends Omeka_Controller_Action
       * 
       * @return void
       **/
-     public function advancedSearchAction()
+     public function indexAction()
      {
          // filter the models to search
          $searchModels = array('Item', 'Collection');
