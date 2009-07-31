@@ -27,7 +27,7 @@ class ItemType extends Omeka_Record {
     
     private $_elementsToSave = array();
     
-    protected function construct()
+    protected function _initializeMixins()
     {
         // For future reference, these arguments mean: 
         // 1) the current object

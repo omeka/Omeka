@@ -58,9 +58,16 @@ class Omeka_Record implements ArrayAccess
         $this->_db = $db;
         
         $this->_errors = new Omeka_Validator_Errors;
+        $this->_initializeMixins();
         $this->construct();
     }
     
+    /**
+     * Subclass constructor behavior
+     *
+     * Subclasses of Omeka_Record can override this function to add behavior to
+     * the constructor without overriding __construct.
+     */
     protected function construct() {}
     
     /**
@@ -111,12 +118,24 @@ class Omeka_Record implements ArrayAccess
     }
     
     /**
+     * Initializes the mixins for a record.  Any Omeka_Record subclass that uses
+     * mixins should initialize them here, and this is called on construction
+     * and when mixins need to be reinitialized.
+     */
+     protected function _initializeMixins() {}
+    
+    /**
      * Instances of Omeka_Record_Mixins (which are mostly plugins though they mix behavior)
      *
      * @return void
      **/
     protected function delegateToMixins($method, $args = array(), $all = false)
     {
+        if (!$this->_mixins) {
+            $this->_mixins = array();
+            $this->_initializeMixins();
+        }
+        
         foreach ($this->_mixins as $k => $mixin) {
             if (method_exists($mixin, $method)) {
                 $called = true;

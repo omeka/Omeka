@@ -28,7 +28,7 @@ class Collection extends Omeka_Record
     private $_oldCollectorsToAdd = array(); 
     private $_newCollectorsToAdd = array();
     
-    protected function construct()
+    protected function _initializeMixins()
     {
         $this->_mixins[] = new Relatable($this);
         $this->_mixins[] = new PublicFeatured($this);

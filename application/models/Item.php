@@ -50,7 +50,7 @@ class Item extends Omeka_Record
      */
     private $_files = array();
     
-    protected function construct()
+    protected function _initializeMixins()
     {
         $this->_mixins[] = new Taggable($this);
         $this->_mixins[] = new Relatable($this);
