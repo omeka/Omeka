@@ -64,7 +64,10 @@ class Omeka_Search
         Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive);
         
         // core models to search
-        $coreSearchModels = array('Item', 'Collection', 'File');
+        $coreSearchModels = array('Item'=>array('resourceName'=>'Items', 'showPrivatePermission'=>'showNotPublic'), 
+                                  'Collection'=>array('resourceName'=>'Collections', 'showPrivatePermission'=>'showNotPublic'), 
+                                  'File'=>array('resourceName'=>'Files')
+                                  );
         
         // add the models to search from the plugins
         $this->_searchModels = apply_filters('search_models', $coreSearchModels);

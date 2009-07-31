@@ -55,7 +55,7 @@
 
 </form>
 
-<?php elseif(!total_items(true)): ?>
+<?php elseif(!total_items()): ?>
 	<div id="no-items">
 	<p>There are no items in the archive yet.
 	
