@@ -232,6 +232,11 @@ class Installer
     {
         $usernameValidator = new Zend_Validate_StringLength(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH);
         $passwordValidator = new Zend_Validate_StringLength(User::PASSWORD_MIN_LENGTH, User::PASSWORD_MAX_LENGTH);
+        
+        // Prevent the password from being printed to the screen.
+        $passwordValidator->setMessage("Your password is less than %min% characters long", Zend_Validate_StringLength::TOO_SHORT);
+        $passwordValidator->setMessage("Your password is greater than %max% characters long", Zend_Validate_StringLength::TOO_LONG);
+        
         $validation = array('administrator_email'         => "EmailAddress",
                             'super_email'                 => "EmailAddress",
                             'thumbnail_constraint'        => "Digits",
