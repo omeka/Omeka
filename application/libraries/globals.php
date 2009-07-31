@@ -614,8 +614,8 @@ function release_object(&$var)
         array_walk($var, 'release_object');
     } else if (is_object($var)) {
         $var->__destruct();
-        unset($var);  
     }
+    $var = null;
 }
 
 /**
