@@ -423,6 +423,12 @@ class ItemTable extends Omeka_Db_Table
         
     }
     
+    /**
+     * Adds an lucene subquery to the search query for the advanced search
+     *
+     * @param Zend_Search_Lucene_Search_Query_Boolean $searchQuery
+     * @param string|array $requestParams An associative array of request parameters
+     */
     public function addAdvancedSearchQueryForLucene($searchQuery, $requestParams) 
     {
         $search = Omeka_Search::getInstance();
@@ -478,11 +484,6 @@ class ItemTable extends Omeka_Db_Table
                 case 'advanced':
                     $this->filterByAdvancedLucene($searchQuery, $requestParamValue);
                 break;
-                //                case 'tag':
-                //                case 'tags':
-                //                    $params['tags'] = $requestParamValue;
-                //                break;
-                // 
                 //                case 'excludeTags':
                 //                    $params['excludeTags'] = $requestParamValue;
                 //                break;
@@ -516,7 +517,6 @@ class ItemTable extends Omeka_Db_Table
                 //                break;
             }
         }
-        //die($searchQuery);
     }
     
     /**

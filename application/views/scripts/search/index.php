@@ -38,7 +38,7 @@ switch($formName) {
     break;
     
     default:
-        fire_plugin_hook('public_search_form', $formName);
+        fire_plugin_hook('public_search_form', $formName, $formAttributes);
     break;
 }
 ?>

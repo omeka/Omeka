@@ -1,7 +1,7 @@
 <?php head(array('title'=>'Browse Search Results')); ?>
 	<div id="primary" class="browse">
 	    <?php echo flash(); ?>
-		<h1>Search Results for <?php echo html_escape('"' . $searchQuery . '"'); ?> (<?php echo html_escape($totalResults); ?>)</h1>
+		<h1>Search Results <?php if (trim($searchQuery) != '') { echo html_escape('"' . $searchQuery . '"'); } ?> (<?php echo html_escape($totalResults); ?>)</h1>
 		<h2></h2>
 		<div class="pagination top"><?php echo pagination_links(); ?></div>
 		<?php
