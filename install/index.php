@@ -47,6 +47,11 @@ try {
         </div>
         <?php
     }
+} catch (Zend_Config_Exception $e) {
+?>
+<h1>Omeka Has Encountered an Error</h1>
+<p>Error in Omeka's configuration file: <?php echo $e->getMessage(); ?></p>
+<?php
 } catch (Exception $e) {
     echo $e->getMessage();
 }

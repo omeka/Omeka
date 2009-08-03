@@ -116,7 +116,7 @@ class Omeka_Core extends Zend_Application
             // of a database not existing, or not being able to connect to the
             // host. This should redirect to an error page. For now, just dump
             // the error.
-            echo $e->getMessage(); exit; 
+            $message = $e->getMessage();
         } catch (Zend_Db_Statement_Exception $e) {
             // Database statement exceptions indicate that something has gone
             // wrong within the actual database.  During initialization, this
@@ -132,11 +132,14 @@ class Omeka_Core extends Zend_Application
             // These exceptions will be thrown for config files, when they don't
             // exist or are improperly structured. Should do something similar
             // to the database exception errors.
-            echo "Error in Omeka's configuration file(s): " . $e->getMessage(); exit; 
+            $message = "Error in Omeka's configuration file(s): " . $e->getMessage();
+            
         } catch (Exception $e) {
             // No idea what this exception would be.  Just start crying.
-            echo $e->getMessage();exit;
+            $message = $e->getMessage();
         }
+        $this->_displayErrorPage($message);
+        exit;
     }
     
     /**
@@ -171,5 +174,36 @@ class Omeka_Core extends Zend_Application
     public function initializeClassLoader()
     {
         
+    }
+    
+    private function _displayErrorPage($message = '')
+    {
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Omeka Error</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9db;color: #333;min-width:882px;}
+h1 {font-weight:normal; font-size:2.2em; margin-bottom:1em; line-height:1em;margin-right:12em;}
+h1 {color:#a74c29;}
+h1 {font-family:Georgia, Times, "Times New Roman", serif;}
+#primary {width: 666px; padding: 18px; background: #fff; margin: 36px auto;}
+#primary { background:#fff; padding:18px;border:1px solid #d7d5c4; border-width: 3px 0;}
+p {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
+</style>
+</head>
+<body>
+<div id="wrap">
+    <div id="primary">
+        <h1>Omeka Has Encountered an Error</h1>
+        <p><?php echo $message; ?></p>
+    </div>
+</div>
+</body>
+</html>
+<?php
     }
 }
