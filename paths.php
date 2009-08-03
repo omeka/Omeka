@@ -9,7 +9,7 @@
  **/
 
 // Define the current migration.
-define('OMEKA_MIGRATION', 35);
+define('OMEKA_MIGRATION', 36);
 
 // Define the current version.
 define('OMEKA_VERSION', '1.0');

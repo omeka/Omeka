@@ -37,24 +37,55 @@ class Omeka_View_Helper_Media
      * @var array
      **/
     protected $_callbacks = array(
-        'image/tiff'=>'image', 
-        'image/jpeg'=>'image',
-        'image/gif'=>'image',
-        'image/bmp'=>'image',
-        'image/x-ms-bmp'=>'image',
-        'image/png'=>'image',
-        'image/tiff'=>'image',
-	    'video/avi'=>'wmv',
-	    'video/msvideo'=>'wmv',
-	    'video/x-msvideo'=>'wmv',
-	    'video/x-ms-wmv'=>'wmv',
-	    'video/quicktime'=>'mov',
-		'video/mp4'=>'mov',
-	    'video/mpeg'=>'mov',
-	    'audio/x-wav'=>'audio',
-	    'audio/mpeg'=>'audio',
-	    'application/ogg'=>'audio',
-	    'audio/x-midi'=>'audio'
+	    'application/ogg'   => 'audio',
+	    'audio/aac'         => 'audio',
+	    'audio/aiff'        => 'audio',
+	    'audio/midi'        => 'audio',
+	    'audio/mp3'         => 'audio',
+        'audio/mp4'         => 'audio',
+        'audio/mpeg'        => 'audio',
+        'audio/mpeg3'       => 'audio',
+        'auido/mpegaudio'   => 'audio',
+        'audio/mpg'         => 'audio',
+	    'audio/ogg'         => 'audio',
+	    'audio/wav'         => 'audio',
+	    'audio/x-mp3'       => 'audio',
+        'audio/x-mp4'       => 'audio',
+        'audio/x-mpeg'      => 'audio',
+        'audio/x-mpeg3'     => 'audio',
+	    'audio/x-midi'      => 'audio',
+	    'audio/x-mpegaudio' => 'audio',
+	    'audio/x-mpg'       => 'audio',
+	    'audio/x-ogg'       => 'audio',
+	    'audio/x-wav'       => 'audio',
+	    'audio/x-aac'       => 'audio',
+	    'audio/x-aiff'      => 'audio',
+	    'audio/x-midi'      => 'audio',
+	    'audio/x-mp3'       => 'audio',
+        'audio/x-mp4'       => 'audio',
+        'audio/x-mpeg'      => 'audio',
+        'audio/x-mpeg3'     => 'audio',
+        'auido/x-mpegaudio' => 'audio',
+        'audio/x-mpg'       => 'audio',	    
+	    'image/bmp'         => 'image',
+        'image/gif'         => 'image',
+        'image/jpeg'        => 'image',
+        'image/jpg'         => 'image',
+        'image/pjpeg'       => 'image',
+        'image/png'         => 'image',
+        'image/tif'         => 'image',
+        'image/tiff'        => 'image', 
+        'image/x-ms-bmp'    => 'image',
+		'video/mp4'         => 'mov',
+	    'video/mpeg'        => 'mov',
+	    'video/ogg'         => 'mov',
+	    'video/quicktime'   => 'mov',
+	    'audio/wma'         => 'wma',
+	    'audio/x-ms-wma'    => 'wma',
+	    'video/avi'         => 'wmv',
+	    'video/msvideo'     => 'wmv',
+	    'video/x-msvideo'   => 'wmv',
+	    'video/x-ms-wmv'    => 'wmv'	    
 	    );
 	    
     /**
@@ -76,6 +107,14 @@ class Omeka_View_Helper_Media
         'wmv'=>array(
 			'width' => '320', 
 			'height' => '240', 
+			'autostart' => 0, 
+			'ShowControls'=> 1, 
+			'ShowDisplay'=> 1,
+			'ShowStatusBar' => 1
+			),
+		'wma'=>array(
+			'width' => '320', 
+			'height' => '46', 
 			'autostart' => 0, 
 			'ShowControls'=> 1, 
 			'ShowDisplay'=> 1,
@@ -280,7 +319,37 @@ class Omeka_View_Helper_Media
 		
 		return $html;   
     } 
-     
+    
+    /**
+     * Retrieve valid XHTML for displaying a wma audio file or equivalent.  
+     * Currently this loads the video inside of an <object> tag, but that
+     * provides less flexibility than a flash wrapper, which seems to be a 
+     * standard Web2.0 practice for video sharing.  This limitation can be
+     * overcome by a plugin that used a flash wrapper for displaying video.
+     * 
+     * @param File
+     * @param array Options
+     * @return string
+     **/ 
+    public function wma($file, array $options=array())
+    {
+		$path = $file->getWebPath('archive');
+		$html 	.= 	'<object id="MediaPlayer" width="'.$options['width'].'" height="'.$options['height'].'"';
+		$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
+		$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
+		$html	.=	'<param name="FileName" value="'.$path.'" />'."\n";
+		$html	.=	'<param name="AutoPlay" value="'.($options['autostart'] ? 'true' : 'false').'" />'."\n";
+		$html	.=	'<param name="ShowControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'."\n";
+		$html	.=	'<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'."\n";
+		$html	.=	'<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'."\n";
+		$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
+		$html	.=	' width="'.$options['width'].'" height="'.$options['height'].'"'; 		
+		$html	.=	' ShowControls="'.$options['ShowControls'].'" ShowStatusBar="'.$options['ShowStatusBar'].'"'; 
+		$html	.=	' ShowDisplay="'.$options['ShowDisplay'].'" autoplay="'.$options['autostart'].'"></embed></object>';     
+		
+		return $html;   
+    }
+    
     /**
      * Retrieve valid XHTML for displaying Quicktime video files
      * 
