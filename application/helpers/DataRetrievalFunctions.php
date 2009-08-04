@@ -15,8 +15,12 @@
  **/
 function get_record_for_search_hit($hit) 
 {
-    $doc = $hit->getDocument();
-    return Omeka_Search::getInstance()->getRecordByLuceneDocument($doc);
+    $record = null;
+    if ($search = Omeka_Search::getInstance()) {
+        $doc = $hit->getDocument();
+        $record = $search->getRecordByLuceneDocument($doc);
+    }
+    return $record;
 }
 
 

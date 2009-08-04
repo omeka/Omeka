@@ -275,14 +275,16 @@ class Collection extends Omeka_Record
             $doc = new Zend_Search_Lucene_Document(); 
         }
  
-        // adds the fields for public and private       
-        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
-        Omeka_Search::addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
+        if ($search = Omeka_Search::getInstance()) {
+            // adds the fields for public and private       
+            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
+            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
 
-        // adds the fields for the collection name and description
-        Omeka_Search::addLuceneField($doc, 'UnStored', array('Collection', 'name'), $this->name);            
-        Omeka_Search::addLuceneField($doc, 'UnStored', array('Collection', 'description'), $this->description);            
-                
+            // adds the fields for the collection name and description
+            $search->addLuceneField($doc, 'UnStored', array('Collection', 'name'), $this->name);            
+            $search->addLuceneField($doc, 'UnStored', array('Collection', 'description'), $this->description);
+        }
+              
         return parent::createLuceneDocument($doc);
     }
 }

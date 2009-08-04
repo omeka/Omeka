@@ -89,49 +89,65 @@ class SearchController extends Omeka_Controller_Action
      {
          $request = $this->getRequest();
          $requestParams = $this->_getNonEmptyParams($request->getParams());
-         
          $resultPage = $request->get('page') or $resultPage = 1;
           
          // Get the search hits
          $search = Omeka_Context::getInstance()->getSearch();
-         $searchIndex = $search->getLuceneIndex();
+         if ($searchIndex = $search->getLuceneIndex()) {
          
-         // initialize the search query
-         $searchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
+             // initialize the search query
+             $searchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
                  
-         // if the model is specified, then it is an advanced search         
-         if (isset($_GET['model'])) {
-             //advanced search             
-             if (isset($_GET['search']) && trim($_GET['search']) != '') {
-                 $userQuery= Zend_Search_Lucene_Search_QueryParser::parse(trim($_GET['search']));
-                 $searchQuery->addSubquery($userQuery, true);
-             }      
-             $rawUserQuery = '';
-             // add the advanced search based on the parameters in the request
-             $this->_addAdvancedSearchQuery($searchQuery, $requestParams);
-             // make sure the user has permission to view the models in the search results
-             $this->_addPermissionsQuery($searchQuery);             
-         } else {
-             // simple search
-              $rawUserQuery = trim($_GET['search']);
-              if (isset($_GET['search']) && trim($_GET['search']) != '') {
-                  $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($rawUserQuery);
-                  $searchQuery->addSubquery($userQuery, true);
-                  $this->_addSimpleSearchQuery($searchQuery);
-                  // make sure the user has permission to view the models in the search results
-                  $this->_addPermissionsQuery($searchQuery);
-              }
-         }         
+             // if the model is specified, then it is an advanced search         
+             if (isset($_GET['model'])) {
+                 
+                 // create advanced search             
+                 if (isset($_GET['search']) && trim($_GET['search']) != '') {
+                     $userQuery= Zend_Search_Lucene_Search_QueryParser::parse(trim($_GET['search']));
+                     $searchQuery->addSubquery($userQuery, true);
+                 }
+                
+                 // set the display query to an empty string       
+                 $displayUserQuery = '';
+                 
+                 // add the advanced search based on the parameters in the request
+                 $this->_addAdvancedSearchQuery($searchQuery, $requestParams);
+                 
+                 // make sure the user has permission to view the models in the search results
+                 $this->_addPermissionsQuery($searchQuery);             
+             } else {
 
-         try {
-             $hits = $searchIndex->find($searchQuery);
-         } catch (Zend_Search_Lucene_Exception $e) {
+                 // get the dusplay query from the 'search' GET parameter
+                 $displayUserQuery = trim($_GET['search']);
+                 
+                 // create simple search
+                 if (isset($_GET['search']) && trim($_GET['search']) != '') {
+                      $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($displayUserQuery);
+                      $searchQuery->addSubquery($userQuery, true);
+                      $this->_addSimpleSearchQuery($searchQuery);
+                      
+                      // make sure the user has permission to view the models in the search results
+                      $this->_addPermissionsQuery($searchQuery);
+                  }
+             }         
+             
+             //echo $searchQuery;exit;
+             
+             try {
+                 $hits = $searchIndex->find($searchQuery);
+             } catch (Zend_Search_Lucene_Exception $e) {
+                 $hits = array();
+                 
+                 // wildcard exception
+                 $this->flashError('Invalid Lucene search. For using wildcards, at least three characters must precede the wildcard character.');
+             }
+         } else {
              $hits = array();
-             // wildcard exception
-             $this->flashError('Invalid Lucene search. For using wildcards, at least three characters must precede the wildcard character.');
          }         
+        
+         // Get the total number of hits
          $hitCount = count($hits);
-                  
+                   
          // Get the hits per page        
          $hitsPerPage = $this->_getHitsPerPage();
          
@@ -141,7 +157,7 @@ class SearchController extends Omeka_Controller_Action
          $paginator->setItemCountPerPage($hitsPerPage);
 
          return array(
-             'search_query' => $rawUserQuery,
+             'search_query' => $displayUserQuery,
              'hits' => $paginator,
              'total_results' => $hitCount, 
              'page' => $resultPage, 
@@ -150,35 +166,38 @@ class SearchController extends Omeka_Controller_Action
      
      private function _addPermissionsQuery($searchQuery)
      {
-         $acl = get_acl();
-         $search = Omeka_Search::getInstance();
-         
-         $searchModels = $search->getSearchModels();
-         
-         // build the query that restricts the search to the models to search
-         $permissionsForModelQuery = new Zend_Search_Lucene_Search_Query_Boolean();
-         foreach($searchModels as $modelName => $modelInfo) {
-             
-             // get the resource name for the model
-             $resourceName = trim($modelInfo['resourceName']);
-             $showPrivatePermission = trim($modelInfo['showPrivatePermission']);
-             
-             // if the model specifies a permission for viewing private instances of it
-             // and the user does not have permission to view private instances of it
-             // then restrict the lucene search so it does not include instances of that model
-             if ($resourceName != '' && 
-                 $showPrivatePermission != '' && 
-                 !$acl->checkUserPermission($resourceName, $showPrivatePermission)) {
-                 
-                 $permissionForModelQuery = new Zend_Search_Lucene_Search_Query_Boolean();
-                 $permissionForModelQuery->addSubquery(Omeka_Search::getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName, true), true);
-                 $permissionForModelQuery->addSubquery(Omeka_Search::getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, '1', true), true);
-                 
-                 $permissionsForModelQuery->addSubquery($permissionForModelQuery);
+         if ($search = Omeka_Search::getInstance()) {
+             $searchModels = $search->getSearchModels();
+
+             // build the query that restricts the search to the models to search
+             $acl = get_acl();
+             $addsPermission = false;
+             $permissionsForModelQuery = new Zend_Search_Lucene_Search_Query_Boolean();
+             foreach($searchModels as $modelName => $modelInfo) {
+
+                 // get the resource name for the model
+                 $resourceName = trim($modelInfo['resourceName']);
+                 $showPrivatePermission = trim($modelInfo['showPrivatePermission']);
+
+                 // if the model specifies a permission for viewing private instances of it
+                 // and the user does not have permission to view private instances of it
+                 // then restrict the lucene search so it does not include instances of that model
+                 if ($resourceName != '' && 
+                     $showPrivatePermission != '' && 
+                     !$acl->checkUserPermission($resourceName, $showPrivatePermission)) {
+                    
+                     $addsPermission = true;
+                     $permissionForModelQuery = new Zend_Search_Lucene_Search_Query_Boolean();
+                     $permissionForModelQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName, true), true);
+                     $permissionForModelQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, '1', true), true);
+
+                     $permissionsForModelQuery->addSubquery($permissionForModelQuery);
+                 }
+             }
+             if ($addsPermission) {
+                 $searchQuery->addSubquery($permissionsForModelQuery, true);
              }
          }
-                  
-         $searchQuery->addSubquery($permissionsForModelQuery, true);
      }
      
      /**
@@ -190,11 +209,11 @@ class SearchController extends Omeka_Controller_Action
       **/
      private function _addSimpleSearchQuery($searchQuery)
      {         
-         $search = Omeka_Search::getInstance();
-         
-         //restrict the models to the core models and those added by plugins
-         $searchModels = $search->getSearchModels();
-         $this->_addRestrictModelsQuery($searchQuery, array_keys($searchModels));
+         if ($search = Omeka_Search::getInstance()) {
+             //restrict the models to the core models and those added by plugins
+             $searchModels = $search->getSearchModels();
+             $this->_addRestrictModelsQuery($searchQuery, array_keys($searchModels));
+         }
      }
      
      /**
@@ -206,12 +225,14 @@ class SearchController extends Omeka_Controller_Action
       **/
      private function _addRestrictModelsQuery($searchQuery, $allowedModelNames)
      {
-         // build the query that restricts the search to the models to search
-         $modelsToSearchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
-         foreach($allowedModelNames as $modelName) {
-             $modelsToSearchQuery->addSubquery(Omeka_Search::getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName, true));
+         if ($search = Omeka_Search::getInstance()) {
+             // build the query that restricts the search to the models to search
+             $modelsToSearchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
+             foreach($allowedModelNames as $modelName) {
+                 $modelsToSearchQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName, true));
+             }
+             $searchQuery->addSubquery($modelsToSearchQuery, true);
          }
-         $searchQuery->addSubquery($modelsToSearchQuery, true);
      }
      
      /**
@@ -223,23 +244,27 @@ class SearchController extends Omeka_Controller_Action
       **/
      private function _addAdvancedSearchQuery($searchQuery, $requestParams)
      {
-         $modelNames = explode(',', $requestParams['model']);         
-         foreach($modelNames as $modelName) {             
-             try {
-                 if (!class_exists($modelName)) {
-                     throw new Exception('Invalid model type for advanced search.');
-                 }
-                 $this->getDb()->getTable($modelName)->addAdvancedSearchQueryForLucene($searchQuery, $requestParams);
-             } catch (Exception $e) {
-                 $this->flash($e->getMessage());
+         if ($search = Omeka_Search::getInstance()) {
+              // create an advanced search query for all of the models
+              $advancedSearchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
+              $modelNames = explode(',', $requestParams['model']);         
+              foreach($modelNames as $modelName) {             
+                  try {
+                      if (!class_exists($modelName)) {
+                          throw new Exception('Invalid model type for advanced search.');
+                      }
+                      $this->getDb()->getTable($modelName)->addAdvancedSearchQueryForLucene($advancedSearchQuery, $requestParams);
+                  } catch (Exception $e) {
+                      $this->flash($e->getMessage());
+                  }
              }
-        }
-        
-        //restrict the models to the models in the request params, and which are allowed by the core and the plugins
-        $search = Omeka_Search::getInstance();
-        $searchModels = $search->getSearchModels();
-        $allowedModelNames = array_intersect($modelNames, array_keys($searchModels));        
-        $this->_addRestrictModelsQuery($searchQuery, $allowedModelNames);        
+             $searchQuery->addSubquery($advancedSearchQuery, true);
+
+             //restrict the allowed models to the models in the request params, and which are allowed by the core and the plugins
+             $coreAndPluginModels = $search->getSearchModels();
+             $allowedModelNames = array_intersect($modelNames, array_keys($coreAndPluginModels));        
+             $this->_addRestrictModelsQuery($searchQuery, $allowedModelNames);
+         }       
      }
     
      /**

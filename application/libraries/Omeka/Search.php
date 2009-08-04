@@ -26,11 +26,12 @@ class Omeka_Search
     const FIELD_NAME_IS_FEATURED = 'is_featured';
     const FIELD_NAME_DATE_ADDED = 'date_added';
     const FIELD_NAME_DATE_MODIFIED = 'date_modified';
+    const FIELD_NAME_TAG = 'tag';
 
     const FIELD_VALUE_TRUE = '1';
     const FIELD_VALUE_FALSE = '0';
 
-    const FIELD_VALUE_EXCLUDED_PREFIX = 'excluded';
+    const FIELD_VALUE_EXCLUDED_PREFIX = '⏥';
 
     private $_luceneIndex;
     private $_luceneIndexDir;
@@ -46,7 +47,11 @@ class Omeka_Search
     public static function getInstance($luceneIndexDir = LUCENE_INDEX_DIR)
     {
         if (!self::$_instance) {
-            self::$_instance = new self($luceneIndexDir);
+            try {
+                self::$_instance = new self($luceneIndexDir);
+            } catch (Exception $e) {
+                return null;
+            }
         }
         return self::$_instance;
     }
@@ -262,19 +267,17 @@ class Omeka_Search
      * @return Zend_Search_Lucene_Search_Query_Boolean The subquery that includes a disjunction 
      * for all of the variants of the field name.
      */
-    static public function getLuceneTermQueryForFieldName($fieldNameStrings, $fieldValue, $isExcludedField=false) 
-    {
-        $search = self::getInstance();
-        
+    public function getLuceneTermQueryForFieldName($fieldNameStrings, $fieldValue, $isExcludedField=false) 
+    {        
         // convert field value to string
         $fieldValue = (string)$fieldValue;
         
         if ($isExcludedField) {
-            $fieldValue = $search->getLuceneExcludedFieldValue($fieldValue);
+            $fieldValue = $this->getLuceneExcludedFieldValue($fieldValue);
         }
         
         $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        $expandedFieldNames = $search->getLuceneExpandedFieldNames($search->getLuceneUnexpandedFieldName($fieldNameStrings));
+        $expandedFieldNames = $this->getLuceneExpandedFieldNames($this->getLuceneUnexpandedFieldName($fieldNameStrings));
         foreach($expandedFieldNames as $expandedFieldName) {
             $subquery = new Zend_Search_Lucene_Search_Query_Preprocessing_Term($fieldValue, 'UTF-8', $expandedFieldName);
             $query->addSubquery($subquery);
@@ -395,7 +398,7 @@ class Omeka_Search
      * @param boolean $isExcludedField Whether the field is excluded from the default search
      * @return void
      */
-    static public function addLuceneField($luceneDoc, $luceneFieldType, $fieldNameStrings, $fieldValues, $isExcludedField=false) 
+    public function addLuceneField($luceneDoc, $luceneFieldType, $fieldNameStrings, $fieldValues, $isExcludedField=false) 
     {                
         if (!is_array($fieldValues)) {
             $fieldValues = (string)$fieldValues; // convert numbers to strings
@@ -410,18 +413,15 @@ class Omeka_Search
             return ;
         }
         
-        // get the Omeka_Search object
-        $search = self::getInstance();
-        
         // if the field should be excluded from default search, change the field values to the excluded field values
         if ($isExcludedField) {
             foreach($fieldValues as &$fieldValue) {
-                $fieldValue = $search->getLuceneExcludedFieldValue($fieldValue);
+                $fieldValue = $this->getLuceneExcludedFieldValue($fieldValue);
             }
         }
         
         // get the unexpanded field name from the field name string array
-        $unexpandedFieldName = $search->getLuceneUnexpandedFieldName($fieldNameStrings);
+        $unexpandedFieldName = $this->getLuceneUnexpandedFieldName($fieldNameStrings);
         
         // find the maximum fieldNameValueNumber for the document
         $docFieldNames = $luceneDoc->getFieldNames();
@@ -441,7 +441,7 @@ class Omeka_Search
         $i = $maxFieldNameValueNumberForDoc + 1; 
         foreach($fieldValues as $fieldValue) {
             // update the number of values for the field name            
-            $search->updateLuceneFieldNameValueCount($unexpandedFieldName, $i);
+            $this->updateLuceneFieldNameValueCount($unexpandedFieldName, $i);
             $expandedFieldName = $unexpandedFieldName . self::FIELD_NAME_VALUE_NUM_DELIMITER . $i;
             $luceneDoc->addField(Zend_Search_Lucene_Field::$luceneFieldType($expandedFieldName, $fieldValue));
             $i++;
@@ -471,7 +471,8 @@ class Omeka_Search
      *
      * @return array
      */
-    public function getSearchModels() {
+    public function getSearchModels() 
+    {
         return $this->_searchModels;
     }
 }

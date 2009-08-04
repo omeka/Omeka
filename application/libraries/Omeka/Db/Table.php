@@ -198,7 +198,7 @@ class Omeka_Db_Table
     {
         $select = $this->getSelectForFindBy($options);
         $select->reset('columns');
-        $select->from(array(), $this->_getColumnPairs());
+        $select->from(array(), $this->_getColumnPairs());        
         $pairs = $this->getDb()->fetchPairs($select);
         return $pairs;
     }

@@ -416,107 +416,85 @@ class ItemTable extends Omeka_Db_Table
         return $item;
     }
     
-    public function findByKeywordWithLucene($keyword) 
-    {
-        $search = Omeka_Search::getInstance();
-        $luceneIndex = $search->getLuceneIndex();
-        
-    }
-    
     /**
      * Adds an lucene subquery to the search query for the advanced search
      *
-     * @param Zend_Search_Lucene_Search_Query_Boolean $searchQuery
+     * @param Zend_Search_Lucene_Search_Query_Boolean $advancedSearchQuery
      * @param string|array $requestParams An associative array of request parameters
      */
-    public function addAdvancedSearchQueryForLucene($searchQuery, $requestParams) 
+    public function addAdvancedSearchQueryForLucene($advancedSearchQuery, $requestParams) 
     {
-        $search = Omeka_Search::getInstance();
-                
-        foreach($requestParams as $requestParamName => $requestParamValue) {
-            switch($requestParamName) {
-                // case 'user':
-                //     //Must be logged in to view items specific to certain users
-                //     if (!$controller->isAllowed('browse', 'Users')) {
-                //         throw new Exception( 'May not browse by specific users.' );
-                //     }
-                //     if (is_numeric($requestParamValue)) {
-                //         $params['user'] = $requestParamValue;
-                //     }
-                // break;
-
-                case 'public':
-                    if (is_true($requestParamValue)) {
-                        $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, true);
-                        $searchQuery->addSubquery($subquery, true);
-                    }
-                break;
-
-                case 'featured':
-                    if (is_true($requestParamValue)) {
-                        $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_FEATURED, Omeka_Search::FIELD_VALUE_TRUE, true);
-                        $searchQuery->addSubquery($subquery, true);
-                    }
-                break;
-
-                case 'collection':
-                    if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
-                        $subquery = $search->getLuceneTermQueryForFieldName(array('Item', 'collection_id'), $requestParamValue, true);
-                        $searchQuery->addSubquery($subquery, true);
-                    }
-                break;
-                
+        if ($search = Omeka_Search::getInstance()) {
             
-                case 'type':
-                    if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
-                        $subquery = $search->getLuceneTermQueryForFieldName(array('Item', 'item_type_id'), $requestParamValue, true);
-                        $searchQuery->addSubquery($subquery, true);
-                    }                
-                break;
-                
-                case 'tag':
-                case 'tags':
-                    $this->filterByTagsLucene($searchQuery, $requestParamValue);
+            // Build an advanced search query for the item
+            $advancedSearchQueryForItem = new Zend_Search_Lucene_Search_Query_Boolean();
+            foreach($requestParams as $requestParamName => $requestParamValue) {
+                switch($requestParamName) {
+                    // case 'user':
+                    //     //Must be logged in to view items specific to certain users
+                    //     if (!$controller->isAllowed('browse', 'Users')) {
+                    //         throw new Exception( 'May not browse by specific users.' );
+                    //     }
+                    //     if (is_numeric($requestParamValue)) {
+                    //         $params['user'] = $requestParamValue;
+                    //     }
+                    // break;
+
+                    case 'public':
+                        if (is_true($requestParamValue)) {
+                            $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, true);
+                            $advancedSearchQueryForItem->addSubquery($subquery, true);
+                        }
                     break;
-                case 'range':
-                    $this->filterByRangeLucene($searchQuery, $requestParamValue);
-                
-                case 'advanced':
-                    $this->filterByAdvancedLucene($searchQuery, $requestParamValue);
-                break;
-                //                case 'excludeTags':
-                //                    $params['excludeTags'] = $requestParamValue;
-                //                break;
-                // 
-                //                case 'recent':
-                //                    if (!$this->is_true($requestParamValue)) {
-                //                        $params['recent'] = false;
-                //                    }
-                //                break;
-                // 
-                //                case 'search':
-                //                    $params['search'] = $requestParamValue;
-                //                    //Don't order by recent-ness if we're doing a search
-                //                    unset($params['recent']);
-                //                break;
-                // 
-                //                case 'advanced':                    
-                //                    //We need to filter out the empty entries if any were provided
-                //                    foreach ($requestParamValue as $k => $entry) {                    
-                //                        if (empty($entry['element_id']) || empty($entry['type'])) {
-                //                            unset($requestParamValue[$k]);
-                //                        }
-                //                    }
-                //                    if (count($requestParamValue) > 0) {
-                //                        $params['advanced_search'] = $requestParamValue;
-                //                    }
-                //                break;
-                // 
-                //                case 'range':
-                //                    $params['range'] = $requestParamValue;
-                //                break;
+
+                    case 'featured':
+                        if (is_true($requestParamValue)) {
+                            $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_FEATURED, Omeka_Search::FIELD_VALUE_TRUE, true);
+                            $advancedSearchQueryForItem->addSubquery($subquery, true);
+                        }
+                    break;
+
+                    case 'collection':
+                        if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
+                            $subquery = $search->getLuceneTermQueryForFieldName(array('Item', 'collection_id'), $requestParamValue, true);
+                            $advancedSearchQueryForItem->addSubquery($subquery, true);
+                        }
+                    break;
+
+
+                    case 'type':
+                        if (is_numeric($requestParamValue) && ((int)$requestParamValue > 0)) {
+                            $subquery = $search->getLuceneTermQueryForFieldName(array('Item', 'item_type_id'), $requestParamValue, true);
+                            $advancedSearchQueryForItem->addSubquery($subquery, true);
+                        }                
+                    break;
+
+                    case 'tag':
+                    case 'tags':
+                        $this->filterByTagsLucene($advancedSearchQueryForItem, $requestParamValue);
+                        break;
+                    case 'range':
+                        $this->filterByRangeLucene($advancedSearchQueryForItem, $requestParamValue);
+
+                    case 'advanced':
+                        $this->filterByAdvancedLucene($advancedSearchQueryForItem, $requestParamValue);
+                    break;
+                    //                case 'excludeTags':
+                    //                    $params['excludeTags'] = $requestParamValue;
+                    //                break;
+                    // 
+                    //                case 'recent':
+                    //                    if (!$this->is_true($requestParamValue)) {
+                    //                        $params['recent'] = false;
+                    //                    }
+                    //                break;
+                }
             }
-        }
+
+            // add the item advanced search query to the searchQuery as a disjunctive subquery 
+            // (i.e. there will be OR statements between each of models' the advanced search queries)
+            $advancedSearchQuery->addSubquery($advancedSearchQueryForItem);
+        }               
     }
     
     /**
@@ -530,14 +508,15 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByTagsLucene($searchQuery, $tags)
     {
-        $search = Omeka_Search::getInstance();
-        if (!is_array($tags)) {
-            $tags = explode(',', $tags);
-        }
-        
-        foreach ($tags as $tag) {
-            $subquery = $search->getLuceneTermQueryForFieldName('tag', trim($tag));
-            $searchQuery->addSubquery($subquery, true);
+        if ($search = Omeka_Search::getInstance()) {
+            if (!is_array($tags)) {
+                $tags = explode(',', $tags);
+            }
+
+            foreach ($tags as $tag) {
+                $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_TAG, trim($tag));
+                $searchQuery->addSubquery($subquery, true);
+            }
         }
     }
     
@@ -549,82 +528,78 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByRangeLucene($searchQuery, $range)
     {
-        $search = Omeka_Search::getInstance();
-        $idField = $search->getLuceneExpandedFieldName('model_id');
-        
-        // Comma-separated expressions should be treated individually
-        $exprs = explode(',', $range);
-        
-        // Create a boolean query with non-required subqueries
-        $query = new Zend_Search_Lucene_Search_Query_Boolean();
-        
-        foreach ($exprs as $expr) {
-            // If it has a '-' in it, it is a range of item IDs.  Otherwise it 
-            // is a single item ID
-            if (strpos($expr, '-') !== false) {
-                list($start, $finish) = explode('-', $expr);
-                
-                // Strip non-numeric input
-                $start  = (int) trim($start);
-                $finish = (int) trim($finish);
-                
-                $startTerm = new Zend_Search_Lucene_Index_Term(
-                    $search->getLuceneExcludedFieldValue($start), $idField);
-                $endTerm = new Zend_Search_Lucene_Index_Term(
-                    $search->getLuceneExcludedFieldValue($finish), $idField);
-                
-                // Make query from $start to $finish, inclusive
-                $subquery = new Zend_Search_Lucene_Search_Query_Range(
-                    $startTerm, $endTerm, false);
-            // It is a single item ID
-            } else {
-                $id = (int) trim($expr);
-                
-                $term = new Zend_Search_Lucene_Index_Term(
-                    $search->getLuceneExcludedFieldValue($id), $idField);
-                    //$id, $idField);
-                $subquery = new Zend_Search_Lucene_Search_Query_Term($term);
-                $wheres[] = "(i.id = $id)";
+        if ($search = Omeka_Search::getInstance()) {
+            
+            $idField = $search->getLuceneExpandedFieldName('model_id');
+
+            // Comma-separated expressions should be treated individually
+            $exprs = explode(',', $range);
+
+            // Create a boolean query with non-required subqueries
+            $query = new Zend_Search_Lucene_Search_Query_Boolean();
+
+            foreach ($exprs as $expr) {
+                // If it has a '-' in it, it is a range of item IDs.  Otherwise it 
+                // is a single item ID
+                if (strpos($expr, '-') !== false) {
+                    list($start, $finish) = explode('-', $expr);
+
+                    // Strip non-numeric input
+                    $start  = (int) trim($start);
+                    $finish = (int) trim($finish);
+
+                    $startTerm = new Zend_Search_Lucene_Index_Term($search->getLuceneExcludedFieldValue($start), $idField);
+                    $endTerm = new Zend_Search_Lucene_Index_Term($search->getLuceneExcludedFieldValue($finish), $idField);
+
+                    // Make query from $start to $finish, inclusive
+                    $subquery = new Zend_Search_Lucene_Search_Query_Range($startTerm, $endTerm, false);
+                // It is a single item ID
+                } else {
+                    $id = (int) trim($expr);
+                    $term = new Zend_Search_Lucene_Index_Term($search->getLuceneExcludedFieldValue($id), $idField);
+                    $subquery = new Zend_Search_Lucene_Search_Query_Term($term);
+                }
+                $query->addSubquery($subquery);
             }
-            $query->addSubquery($subquery);
+            // Require the range query as a whole to have a hit
+            $searchQuery->addSubquery($query, true);
         }
-        // Require the range query as a whole to have a hit
-        $searchQuery->addSubquery($query, true);
     }
     
     public function filterByAdvancedLucene($searchQuery, $advanced)
     {
-        $search = Omeka_Search::getInstance();
-                        
-        foreach ($advanced as $component) {
-            $term = $component['terms'];
+        if ($search = Omeka_Search::getInstance()) {
             
-            if (!($elementId = (int) $component['element_id'])) {
-                continue;
-            }
-            
-            $element = $this->getDb()->getTable('Element')->find($elementId);
-            $elementSet = $element->getElementSet();
-            
-            $termNameStrings = array($elementSet->name, $element->name);
-            
-            $subquery = $search->getLuceneTermQueryForFieldName($termNameStrings, $term);
+            foreach ($advanced as $component) {
+                $term = $component['terms'];
 
-            //Determine what the WHERE clause should look like
-            switch ($component['type']) {
-                case 'contains':
-                    $searchQuery->addSubquery($subquery, true);
-                    break;
-                case 'does not contain':
-                    $searchQuery->addSubquery($subquery, false);
-                    break;
-                case 'is empty':    
-                    break;
-                case 'is not empty':
-                    break;
-                default:
-                    throw new Omeka_Record_Exception( 'Invalid search type given!' );
-                    break;
+                if (!($elementId = (int) $component['element_id'])) {
+                    continue;
+                }
+
+                $element = $this->getDb()->getTable('Element')->find($elementId);
+                $elementSet = $element->getElementSet();
+
+                $termNameStrings = array($elementSet->name, $element->name);
+
+                $subquery = $search->getLuceneTermQueryForFieldName($termNameStrings, $term);
+
+                //Determine what the WHERE clause should look like
+                switch ($component['type']) {
+                    case 'contains':
+                        $searchQuery->addSubquery($subquery, true);
+                        break;
+                    case 'does not contain':
+                        $searchQuery->addSubquery($subquery, false);
+                        break;
+                    case 'is empty':    
+                        break;
+                    case 'is not empty':
+                        break;
+                    default:
+                        throw new Omeka_Record_Exception( 'Invalid search type given!' );
+                        break;
+                }
             }
         }
     }
