@@ -104,11 +104,11 @@
 		<?php echo label('featured','Only Featured Items'); ?>
 		<div class="inputs">
 	<?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $_REQUEST['featured'], null); ?>
-    <?php echo hidden(array('name'=>'model', 'id'=>'model'), 'Item'); ?>
 	</div>
 	</div>
 	<?php endif; ?>
-	
+	<?php echo hidden(array('name'=>'model', 'id'=>'model'), 'Item'); ?>
+    
 	<?php is_admin_theme() ? fire_plugin_hook('admin_append_to_advanced_search') : fire_plugin_hook('public_append_to_advanced_search'); ?>
 	    <input type="submit" class="submit submit-medium" name="submit_search" id="submit_search" value="Search" />
 </form>
