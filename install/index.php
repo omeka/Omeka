@@ -1,63 +1,61 @@
-<?php 
-// Define the web and directory paths.
-require_once '../paths.php'; ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+require_once 'Installer.php';
+$installer = new Installer();
+$installer->checkRequirements();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
 <head>
 <title>Omeka Installation</title>
-
-<!-- Meta -->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="robots" content="noindex, nofollow" />
-
-<!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="install.css" />
+<link rel="stylesheet" href="screen.css" />
 </head>
-
 <body>
-<div id="wrap">
-	<div id="primary">
-    
-<?php
-try {
-    require_once 'Installer.php';
-    $installer = new Installer();
-    if ($installer->getShowInstallForm()) {
-        ?>
-            <h1>Welcome to Omeka</h1>
-            <?php if ($warningMessage = $installer->getWarningMessage()): ?>
-            <div class="error">
-            <?php echo $warningMessage; ?>
-            </div>
-            <?php endif; ?>
-            <?php if ($installer->getInstallFormValidationErrorExists()): ?>
-            <div class="error">
-            <?php echo $installer->getInstallFormValidationErrorMessage(); ?>
-            </div>
-            <?php endif; ?>
-            <p>To complete the installation process, please fill out the form below:</p>
-        <?php
-        include 'install_form.php';
-    } else {
-        ?>
-        <div id="intro">
-            <h1>Installation is Finished!</h1>
-            <p>Omeka is now installed. <a href="../">Check out your site</a>, or visit your <a href="../admin/">admin panel</a>!</p>
-        </div>
-        <?php
-    }
-} catch (Zend_Config_Exception $e) {
-?>
-<h1>Omeka Has Encountered an Error</h1>
-<p>Error in Omeka's configuration file: <?php echo $e->getMessage(); ?></p>
-<?php
-} catch (Exception $e) {
-    echo $e->getMessage();
-}
-?>
-</div>
-
+<h1>Omeka Installation</h1>
+<div id="content">
+<?php if ($installer->hasError()): /* Display installation errors. */?>
+    <h2>Installation Error</h2>
+    <p>Before installation can continue, the following errors must be resolved:</p>
+    <ol>
+    <?php foreach($installer->getErrorMessages() as $errorMessage): ?>
+        <li>
+            <h3 class="error"><?php echo $errorMessage['header']; ?></h3>
+            <p><?php echo $errorMessage['message']; ?></p>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+<?php else: /* Display and validate form, install Omeka. */?>
+    <?php $installer->setForm(); ?>
+    <?php $form = $installer->getForm(); ?>
+    <?php if(isset($_POST['install_submit']) && $form->isValid($_POST)): /* Install the database if the form validates. */?>
+        <?php if ($installer->installDatabase()): ?>
+            <h2>Installation Successful!</h2>
+            <p>Omeka is now installed. <a href="../">Check out your site</a>, or visit your <a href="../admin/">admin panel</a>.</p>
+        <?php else: ?>
+            <h2>There was a problem. Omeka did not install properly.</h2>
+        <?php endif; ?>
+    <?php else: /* Display the form, including installation warnings and validation errors. */?>
+        <?php if ($installer->hasWarning()): /* Display warnings. */?>
+            <h2>Installation Warning</h2>
+            <p>The following issues will not affect installation, but they may 
+            negatively affect the behavior of Omeka:</p>
+            <ol>
+            <?php foreach($installer->getWarningMessages() as $warningMessage): ?>
+                <li>
+                    <h3 class="warning"><?php echo $warningMessage['header']; ?></h3>
+                    <p><?php echo $warningMessage['message']; ?></p>
+                </li>
+            <?php endforeach; ?>
+            </ol>
+        <?php endif; ?>
+        <h2>Configure Your Site <span id="required-note">* Required Fields</span></h2>
+        <?php if (isset($_POST['install_submit'])): /* Assume the form did not validate. */?>
+            <h3 class="validation-error">Form Validation Errors</h2>
+            <p>There were errors found in your form. Please edit and resubmit.</p>
+        <?php endif; ?>
+        <?php echo $form; /* Display the install form. */?>
+    <?php endif; ?>
+<?php endif; ?>
 </div>
 </body>
 </html>

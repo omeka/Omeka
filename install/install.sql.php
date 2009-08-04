@@ -1,5 +1,5 @@
 <?php 
-$install_sql = <<<SQL
+$installSql = <<<SQL
 CREATE TABLE IF NOT EXISTS `{$db->prefix}collections` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(255) collate utf8_unicode_ci NOT NULL,

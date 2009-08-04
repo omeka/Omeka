@@ -2,12 +2,12 @@
 Allow from all
 </Files>
 
-<Files mod_rewrite.php>
+<Files mod-rewrite.php>
 Allow from all
 </Files>
 
 # This allows us to verify that mod_rewrite is enabled
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule ^checkModRewrite([^/]*)\.html$ mod_rewrite.php?enabled=true [L]
+RewriteRule ^check-mod-rewrite([^/]*)\.html$ mod-rewrite.php?enabled=true [L]
 </IfModule>
