@@ -53,6 +53,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	em,i {font-style:italic;}
 	strong,b {font-weight:bold;}
 	
+	h1 span {color: #444;}
+	
 	/* Tables */
 	table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;}
 		thead th { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
@@ -112,7 +114,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	.edit-button a {background-color: #F4F3EB; color: #c50;padding-top:10px; padding-bottom:10px;padding-right: 10px;}
 	.edit-button a:hover {background-color: #FAFAF7;color: #333;}
 	
-
+	.view-public-page {font-size:11px; font-family:"Lucida Grande", Verdana, Arial, sans-serif;}
 /* == Wrap == */
 #wrap {}
 

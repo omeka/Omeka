@@ -4,7 +4,7 @@
 <script src="<?php echo web_path_to('javascripts/scriptaculous.js'); ?>?load=controls" type="text/javascript" charset="utf-8"></script>
 
 <h1 id="item-title">#<?php echo item('id');?> 
-<?php echo strip_formatting(item('Dublin Core', 'Title')); ?></h1>
+<?php echo strip_formatting(item('Dublin Core', 'Title')); ?> <span class="view-public-page">[ <a href="<?php echo public_uri('items/show/'.item('id')); ?>">View Public Page</a> ]</span></h1>
 
 <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
 <p id="edit-item" class="edit-button"><?php 
