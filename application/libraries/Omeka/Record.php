@@ -483,6 +483,9 @@ class Omeka_Record implements ArrayAccess
                 // add the model_name and model_id to the Lucene document
                 $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_NAME, get_class($this), true);
                 $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_ID, (string)$this->id, true);
+                
+                // let the plugins append fields to the doc
+                $doc = apply_filters('search_append_fields_to_lucene_doc', $doc, $this);
             }          
         }
         return $doc;
