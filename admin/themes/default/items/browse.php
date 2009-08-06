@@ -24,7 +24,7 @@
 	
 	<div id="browse-meta">
 		<div id="simple-search-form">
-			<?php echo simple_search(); ?>
+			<?php echo simple_search("Search", array('id'=>'simple-search'), uri('search/results?admin-items=1&order=id')); ?>
 			<span id="advanced-search-link"><?php echo link_to_advanced_search(); ?></span>
 		</div>
 
@@ -52,7 +52,6 @@
 <fieldset>
     <input type="submit" class="submit submit-medium" id="save-changes" name="submit" value="Save Changes" />
 </fieldset>
-
 </form>
 
 <?php elseif(!total_items()): ?>

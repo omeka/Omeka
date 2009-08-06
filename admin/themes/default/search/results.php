@@ -1,3 +1,9 @@
+<?php
+if (Omeka_Context::getInstance()->getRequest()->getParam('admin-items')) {
+    include 'item-results.php';
+    exit;
+}
+?>
 <?php head(array('title'=>'Browse Search Results')); ?>
 	<div id="primary" class="browse">
 	    <?php echo flash(); ?>
@@ -84,7 +90,8 @@
 		    } 
 		}
 		?>
-        	<div class="pagination top"><?php echo pagination_links(); ?></div>	
+        
+        <div class="pagination"><?php echo pagination_links(); ?></div>	
 
 	</div><!-- end primary -->
 <?php foot(); ?>

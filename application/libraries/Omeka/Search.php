@@ -192,6 +192,19 @@ class Omeka_Search
         }
     }
     
+    public function findLuceneByQueryWithSort($searchQuery, $fieldNameStrings = FIELD_NAME_MODEL_ID, $isExcluded=true, $sortType = SORT_STRING, $sortOrder = SORT_ASC)
+    {
+        $searchIndex = $this->getLuceneIndex();
+        
+        $expandedFieldNames = $this->getLuceneExpandedFieldNames($this->getLuceneUnexpandedFieldName($fieldNameStrings));
+        $sortFieldName = $expandedFieldNames[0];
+        
+        //echo $sortFieldName . ' ' . $sortType . ' ' . $sortOrder; exit;
+        
+        $hits = $searchIndex->find($searchQuery, $sortFieldName, $sortType, $sortOrder);
+        return $hits;
+    }
+    
     /**
      * Returns the Zend_Search_Lucene_Search_QueryHit object
      * associated for an Omeka_Record if one exists, otherwise returns null.
