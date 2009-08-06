@@ -430,15 +430,16 @@ class ItemTable extends Omeka_Db_Table
             $advancedSearchQueryForItem = new Zend_Search_Lucene_Search_Query_Boolean();
             foreach($requestParams as $requestParamName => $requestParamValue) {
                 switch($requestParamName) {
-                    // case 'user':
-                    //     //Must be logged in to view items specific to certain users
-                    //     if (!$controller->isAllowed('browse', 'Users')) {
-                    //         throw new Exception( 'May not browse by specific users.' );
-                    //     }
-                    //     if (is_numeric($requestParamValue)) {
-                    //         $params['user'] = $requestParamValue;
-                    //     }
-                    // break;
+                    case 'user':
+                        //Must be logged in to view items specific to certain users
+                        // if (!$controller->isAllowed('browse', 'Users')) {
+                        //     throw new Exception( 'May not browse by specific users.' );
+                        // }
+                        if (is_numeric($requestParamValue)) {
+                            $subquery = $search->getLuceneTermQueryForFieldName(array('Item', 'user_id'), $requestParamValue, true);
+                            $advancedSearchQueryForItem->addSubquery($subquery, true);
+                        }
+                    break;
 
                     case 'public':
                         if (is_true($requestParamValue)) {
@@ -494,7 +495,9 @@ class ItemTable extends Omeka_Db_Table
             // add the item advanced search query to the searchQuery as a disjunctive subquery 
             // (i.e. there will be OR statements between each of models' the advanced search queries)
             $advancedSearchQuery->addSubquery($advancedSearchQueryForItem);
-        }               
+        }
+        
+        echo $advancedSearchQueryForItem;
     }
     
     /**

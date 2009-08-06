@@ -295,6 +295,11 @@ class Item extends Omeka_Record
             if ($this->item_type_id) {
                 $search->addLuceneField($doc, 'Keyword', array('Item','item_type_id'), $this->item_type_id, true);                        
             }
+            
+            // add the user that created the item
+            if ($user = $this->getUserWhoCreated()) {
+                $search->addLuceneField($doc, 'Keyword', array('Item','user_id'), $user->id, true);                        
+            }
         }
                 
         return parent::createLuceneDocument($doc);
