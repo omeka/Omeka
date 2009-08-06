@@ -245,8 +245,9 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
 { 
     // Always post the 'items/browse' page by default (though can be overridden).
     if (!$uri) {
-        $uri = uri('items/browse');
+        $uri = uri('search/results');
     }
+        
     $formProperties['action'] = $uri;
     $formProperties['method'] = 'get';
     $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
@@ -254,6 +255,14 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
     $html .= __v()->formText('search', $_REQUEST['search'], array('name'=>'textinput','class'=>'textinput'));
     $html .= __v()->formSubmit('submit_search', $buttonText);
     $html .= '</fieldset>' . "\n\n";
+    
+    // add hidden fields for the get parameters passed in uri
+    $parsedUri = parse_url($uri);
+    parse_str($parsedUri['query'], $getParams);
+    foreach($getParams as $getParamName => $getParamValue) {    
+        $html .= __v()->formHidden($getParamName, $getParamValue); 
+    }
+    
     $html .= '</form>';
     return $html;
 }
