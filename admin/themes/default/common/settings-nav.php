@@ -8,6 +8,7 @@
     if(has_permission('Users','browse') ) {
     	$navArray['Users'] = uri('users/browse');
     }
+    $navArray['Security'] = uri('security');
 	echo nav(apply_filters('admin_navigation_settings', $navArray)); ?>
 </ul>
 <?php endif ?>

@@ -14,6 +14,7 @@ $resources = array(
     'Files'         =>  array('edit','delete'),
     'Plugins'       =>  array('browse','config', 'install', 'uninstall'),
     'Settings'      =>  array('edit', 'check-imagemagick'),
+    'Security'      =>  array('edit'),
     'Upgrade'       =>  array('migrate', 'index', 'completed'),
     'Tags'          =>  array('rename','remove', 'browse'),
     'Themes'        =>  array('browse','switch'),
@@ -54,6 +55,6 @@ $acl->addRole(new Zend_Acl_Role('contributor'));
 $acl->loadAllowList($allowList);
 
 //Deny a couple of specific privileges to admin users
-$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets', 'Users'));
+$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets', 'Users', 'Security'));
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

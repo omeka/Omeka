@@ -48,50 +48,11 @@
         <?php $settingName =  $setting['name']; ?>
         <label for="<?php echo $settingName; ?>"><?php echo ucwords(Inflector::humanize($settingName)); ?></label>
 <div class="inputs">
-        <?php echo $this->formText($settingName, $$settingName, array('class'=>'textinput', 'size'=>'30')); ?>
+        <?php echo $this->formText($settingName, $settingName, array('class'=>'textinput', 'size'=>'30')); ?>
         <p class="explanation"><?php echo $setting['description']; ?></p>
 </div>
     </div>
 <?php endforeach; ?>
-	</fieldset>
-	
-	<fieldset>
-	    <legend>Security Settings</legend>
-	    <div class="field">
-	        <label for="file_extension_whitelist">Allowed File Extensions</label>
-	        <div class="inputs">
-	        <?php echo $this->formTextarea('file_extension_whitelist', 
-	                get_option('file_extension_whitelist'), 
-	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
-	        <p class="explanation">List of extensions that are allowed for files 
-	            in the Omeka archive.  This list may be adjusted as necessary, 
-	            but keep in mind that many types of files can represent a 
-	            security risk.</p> 
-	        </div>
-	    </div>
-	    
-	    <div class="field">
-	        <label for="file_mime_type_whitelist">Allowed File Types</label>
-	        <div class="inputs">
-	        <?php echo $this->formTextarea('file_mime_type_whitelist',
-	                get_option('file_mime_type_whitelist'),
-	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
-	        <p class="explanation">List of types of files that are allowed in the
-	            Omeka archive.  This list may be adjusted as necessary, but keep
-	            in mind that many types of files can represent a security risk.</p>
-	        </div>
-	    </div>
-	    
-	    <div class="field">
-	        <label for="disable_default_file_validation">Disable the Default
-	            Validation for File Uploads</label>
-	        <?php echo $this->formCheckbox('disable_default_file_validation', 
-	            null, array('checked'=>get_option('disable_default_file_validation'))); ?>
-	        <p class="explanation warning">WARNING: This will allow any file to
-	            be uploaded to Omeka.  This is not recommended for production 
-	            sites or sites where file upload responsibilities are not tightly
-	            supervised.</p>
-	    </div>
 	</fieldset>
 	
 	<fieldset>
