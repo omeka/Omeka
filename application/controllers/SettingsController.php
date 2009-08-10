@@ -39,7 +39,8 @@ class SettingsController extends Omeka_Controller_Action
                               'fullsize_constraint', 
                               'per_page_admin', 
                               'per_page_public', 
-                              'path_to_convert');
+                              'path_to_convert',
+                              'path_to_php_cli');
         
         $options = Omeka_Context::getInstance()->getOptions();
         

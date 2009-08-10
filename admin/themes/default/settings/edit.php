@@ -41,7 +41,8 @@
 	    array('name'=>'fullsize_constraint', 'description' => 'The maximum size (in pixels) of the longest side for fullsize versions of uploaded images.'),
 	    array('name'=>'per_page_admin', 'description' => 'Limit the number of items displayed per page in the administrative interface.'),
 	    array('name'=>'per_page_public', 'description' => 'Limit the number of items displayed per page in the public interface.'),
-	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.  Include only the directory path, not the executable file.  For example, if it is located at &quot;/usr/bin/convert&quot;, put only &quot;/usr/bin&quot;.')); ?>    
+	    array('name'=>'path_to_convert', 'description' => 'The path to your ImageMagick library.  Include only the directory path, not the executable file.  For example, if it is located at &quot;/usr/bin/convert&quot;, put only &quot;/usr/bin&quot;.'),
+	    array('name'=>'path_to_php_cli', 'description' => 'The path to your PHP-CLI binary.  This is used to run processes in the background.  Include the entire path, including the name of the executable.')); ?>    
 
 <?php foreach ($siteSettings as $key => $setting): ?>
     <div class="field">

@@ -21,7 +21,7 @@ class Omeka_Process_Dispatcher
      */
     static public function startProcess($className, $user = null)
     {
-        $cliPath = get_option('php_cli_path');
+        $cliPath = get_option('path_to_php_cli');
         
         self::_checkCliPath($cliPath);
         
