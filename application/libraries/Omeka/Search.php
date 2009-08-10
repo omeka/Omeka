@@ -456,7 +456,7 @@ class Omeka_Search
             // update the number of values for the field name            
             $this->updateLuceneFieldNameValueCount($unexpandedFieldName, $i);
             $expandedFieldName = $unexpandedFieldName . self::FIELD_NAME_VALUE_NUM_DELIMITER . $i;
-            $luceneDoc->addField(Zend_Search_Lucene_Field::$luceneFieldType($expandedFieldName, $fieldValue));
+            $luceneDoc->addField(Zend_Search_Lucene_Field::$luceneFieldType($expandedFieldName, $fieldValue, 'UTF-8'));
             $i++;
         }        
     }

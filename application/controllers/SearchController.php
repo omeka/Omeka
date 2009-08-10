@@ -113,7 +113,7 @@ class SearchController extends Omeka_Controller_Action
                  
                  // create advanced search             
                  if (isset($_GET['search']) && trim($_GET['search']) != '') {
-                     $userQuery= Zend_Search_Lucene_Search_QueryParser::parse(trim($_GET['search']));
+                     $userQuery= Zend_Search_Lucene_Search_QueryParser::parse(trim($_GET['search']), 'UTF-8');
                      $searchQuery->addSubquery($userQuery, true);
                  }
                                  
