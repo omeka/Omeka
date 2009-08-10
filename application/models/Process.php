@@ -21,6 +21,7 @@ class Process extends Omeka_Record
     const STATUS_ERROR = 5;
     
     public $pid;
-    public $status;
     public $class;
+    public $user_id;
+    public $status;
 }

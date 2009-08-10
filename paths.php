@@ -77,6 +77,8 @@ define('FULLSIZE_DIR',         ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['fullsi
 define('FILES_DIR',            ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['files']);
 define('LUCENE_INDEX_DIR',     ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['lucene_index']);
 
+define('BACKGROUND_BOOTSTRAP_PATH', CORE_DIR . DIRECTORY_SEPARATOR . 'background.php');
+
 // Define the script that loads all the helpers:
 define('HELPERS', HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php');
 

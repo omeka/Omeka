@@ -12,25 +12,38 @@
  */
 class Omeka_Process_Dispatcher
 {
-    public function startProcess()
+    /**
+     * Create a table entry for a new background process and spawn it.
+     *
+     * @param string $className Omeka_Process_Abstract subclass name to spawn
+     * @param User $user User to run process as, defaults to current user
+     * @return Process The model object for the background process
+     */
+    static public function startProcess($className, $user = null)
     {
         $cliPath = get_option('php_cli_path');
         
-        $this->_checkCliPath($cliPath);
+        self::_checkCliPath($cliPath);
+        
+        if (!$user) {
+            $user = Omeka_Context::getInstance()->getCurrentUser();
+        }
         
         $process = new Process;
+        $process->class = $className;
+        $process->user_id = $user->id;
         $process->status = Process::STATUS_STARTING;
         $process->save();
         
         $command = escapeshellcmd($cliPath).' '
-                 . $this->_getBootstrapFilePath()
+                 . self::_getBootstrapFilePath()
                  . " -p $process->id";
-        $this->fork($command);
+        self::fork($command);
         
         return $process;
     }
     
-    public function stopProcess(Process $process)
+    static public function stopProcess(Process $process)
     {
         
     }
@@ -39,7 +52,7 @@ class Omeka_Process_Dispatcher
      * Checks if the configured PHP-CLI path points to a valid PHP binary.
      * Flash an appropriate error if the path is invalid.
      */
-    private function _checkCliPath($cliPath)
+    static private function _checkCliPath($cliPath)
     {
         /**
          * All of this could be moved, or also used, when actually setting the
@@ -50,7 +63,7 @@ class Omeka_Process_Dispatcher
         $output = array();
         exec($command, $output, $returnCode);
         
-        $error = 'The configured PHP path ('.get_option('reports_php_path').')';
+        $error = "The configured PHP path ($cliPath)";
         if ($returnCode != 0) {
             throw new Exception($error.' is invalid.');
         }
@@ -78,11 +91,9 @@ class Omeka_Process_Dispatcher
      *
      * @return string Path to bootstrap
      */
-    private function _getBootstrapFilePath()
+    static private function _getBootstrapFilePath()
     {
-        return REPORTS_PLUGIN_DIRECTORY
-             . DIRECTORY_SEPARATOR 
-             . 'bootstrap.php';
+        return BACKGROUND_BOOTSTRAP_PATH;
     }
     
     /**
@@ -90,7 +101,7 @@ class Omeka_Process_Dispatcher
      * 
      * @link http://www.php.net/manual/en/ref.exec.php#70135
      */
-    private function _fork($command) {
+    static private function _fork($command) {
         exec("$command > /dev/null 2>&1");
     }
 }

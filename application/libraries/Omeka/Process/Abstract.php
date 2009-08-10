@@ -14,13 +14,14 @@ abstract class Omeka_Process_Abstract
 {
     private $_process;
     
-    final public function __construct($process) {
+    final public function __construct(Process $process) {
         $this->_process = $process;
         $this->_process->pid = getmypid();
         $this->setStatus(Process::STATUS_IN_PROGRESS);
+        $this->_process->save();
     }
     
-    abstract public function start();
+    abstract public function run();
     
     public function setStatus() {
         
