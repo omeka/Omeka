@@ -37,6 +37,7 @@ class Installer
         
         // Set the database object;
         $this->_db = Omeka_Context::getInstance()->getDb();
+        //die($this->_db->prefix);
     }
     
     public function checkRequirements()
@@ -195,6 +196,12 @@ class Installer
             'decorators' => $elementDecorators
         ));
         
+        $form->addElement('text', 'path_to_php_cli', array(
+            'label' => 'PHP-CLI Binary Path',
+            'value' => $form->getValue('path_to_convert') ? $form->getValue('path_to_php_cli') : $this->_getPathToPhpCli(),
+            'decorators' => $elementDecorators
+        ));
+        
         $form->addElement('submit', 'install_submit', array(
             'label' => 'Install', 
             'decorators' => array('Tooltip', 'ViewHelper')
@@ -214,7 +221,8 @@ class Installer
             array('administrator_email', 'site_title', 'description', 
                   'copyright', 'author', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'path_to_convert'), 
+                  'per_page_admin', 'per_page_public', 'path_to_convert', 
+                  'path_to_php_cli'), 
             'site_settings', 
             array('legend' =>'Site Settings', 
                   'decorators' => $displayGroupDecorators)
@@ -237,6 +245,8 @@ class Installer
     
     public function installDatabase()
     {
+        $db = $this->_db;
+        
         // Create the database tables and insert default data.
         $sql = "SHOW TABLES LIKE '{$db->prefix}options'";
         $tables = $this->_db->query($sql)->fetchAll();
@@ -281,7 +291,8 @@ class Installer
                          'fullsize_constraint', 
                          'per_page_admin', 
                          'per_page_public', 
-                         'path_to_convert');
+                         'path_to_convert',
+                         'path_to_php_cli');
         foreach ($options as $option) {
             $this->_db->exec($optionSql, array($option, $this->_form->getValue($option)));
         }
@@ -463,5 +474,12 @@ class Installer
         $lastLineOutput = exec($command, $output, $returnVar);
         // Return only the directory component of the path returned.
         return $returnVar == 0 ? dirname($lastLineOutput) : '';
+    }
+    
+    private function _getPathToPhpCli()
+    {
+        $command = 'which php 2>&0';
+        $lastLineOutput = exec($command, $output, $returnVar);
+        return $returnVar == 0 ? $lastLineOutput : '';
     }
 }
