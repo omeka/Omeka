@@ -38,7 +38,7 @@ class Omeka_Process_Dispatcher
         $command = escapeshellcmd($cliPath).' '
                  . self::_getBootstrapFilePath()
                  . " -p $process->id";
-        self::fork($command);
+        self::_fork($command);
         
         return $process;
     }

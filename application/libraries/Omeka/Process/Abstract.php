@@ -17,7 +17,13 @@ abstract class Omeka_Process_Abstract
     final public function __construct(Process $process) {
         $this->_process = $process;
         $this->_process->pid = getmypid();
-        $this->setStatus(Process::STATUS_IN_PROGRESS);
+        $this->_process->status = Process::STATUS_IN_PROGRESS;
+        $this->_process->save();
+    }
+    
+    final public function __destruct() {
+        $this->_process->pid = null;
+        $this->_process->status = Process::STATUS_COMPLETED;
         $this->_process->save();
     }
     

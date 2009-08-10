@@ -9,8 +9,10 @@
  */
 
 // Require the necessary files.
-require "../../paths.php";
-require "../libraries/Omeka/Core.php";
+$baseDir = dirname(__FILE__);
+
+require "{$baseDir}/../../paths.php";
+require "{$baseDir}/../libraries/Omeka/Core.php";
 
 // Load only the required core phases.
 $core = new Omeka_Core;
