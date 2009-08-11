@@ -473,13 +473,16 @@ class ItemTable extends Omeka_Db_Table
                     case 'tag':
                     case 'tags':
                         $this->filterByTagsLucene($advancedSearchQueryForItem, $requestParamValue);
-                        break;
+                    break;
+                    
                     case 'range':
                         $this->filterByRangeLucene($advancedSearchQueryForItem, $requestParamValue);
+                    break;
 
                     case 'advanced':
                         $this->filterByAdvancedLucene($advancedSearchQueryForItem, $requestParamValue);
                     break;
+                    
                     //                case 'excludeTags':
                     //                    $params['excludeTags'] = $requestParamValue;
                     //                break;
@@ -495,9 +498,7 @@ class ItemTable extends Omeka_Db_Table
             // add the item advanced search query to the searchQuery as a disjunctive subquery 
             // (i.e. there will be OR statements between each of models' the advanced search queries)
             $advancedSearchQuery->addSubquery($advancedSearchQueryForItem);
-        }
-        
-        echo $advancedSearchQueryForItem;
+        }        
     }
     
     /**
