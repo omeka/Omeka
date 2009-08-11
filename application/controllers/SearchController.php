@@ -111,7 +111,7 @@ class SearchController extends Omeka_Controller_Action
                  $coreAndPluginModelNames = array_keys($search->getSearchModels());
                  $allowedModelNames = array_intersect($formModelNames, $coreAndPluginModelNames);
                  
-                 // create advanced search             
+                 // add the keyword search           
                  if (isset($_GET['search']) && trim($_GET['search']) != '') {
                      $userQuery= Zend_Search_Lucene_Search_QueryParser::parse(trim($_GET['search']), 'UTF-8');
                      $searchQuery->addSubquery($userQuery, true);
@@ -124,13 +124,13 @@ class SearchController extends Omeka_Controller_Action
                  $this->_addPermissionsQuery($searchQuery);             
              } else {
 
-                 // get the dusplay query from the 'search' GET parameter
+                 // get the display query from the 'search' GET parameter
                  $displayUserQuery = trim($_GET['search']);
                  
                  // create simple search
                  if (isset($_GET['search']) && trim($_GET['search']) != '') {
                       // parse the query supplied by the user
-                      $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($displayUserQuery);
+                      $userQuery= Zend_Search_Lucene_Search_QueryParser::parse($displayUserQuery, 'UTF-8');
                       $searchQuery->addSubquery($userQuery, true);
                       
                       //restrict the models to the core models and those added by plugins
@@ -142,10 +142,10 @@ class SearchController extends Omeka_Controller_Action
                       $this->_addPermissionsQuery($searchQuery);
                   }
              }         
-                          
+                                      
              try {
                  $order = trim($_GET['order']);
-                 if ($order == '') {
+                 if ($order == '') {                     
                      $hits = $searchIndex->find($searchQuery);
                  } else {
                      switch($order) {
@@ -161,7 +161,6 @@ class SearchController extends Omeka_Controller_Action
                  }                 
              } catch (Zend_Search_Lucene_Exception $e) {
                  $hits = array();
-                 
                  // wildcard exception
                  $this->flashError('Invalid Lucene search. For using wildcards, at least three characters must precede the wildcard character.');
              }
