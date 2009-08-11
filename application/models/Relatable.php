@@ -111,7 +111,7 @@ class Relatable extends Omeka_Record_Mixin
     /**
      * @example $item->getRelatedEntities('collector')
      *
-     * @return Doctrine_Collection|array
+     * @return array
      **/
     public function getRelatedEntities($rel)
     {
