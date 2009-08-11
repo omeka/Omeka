@@ -283,6 +283,14 @@ class Collection extends Omeka_Record
             // adds the fields for the collection name and description
             $search->addLuceneField($doc, 'UnStored', array('Collection', 'name'), $this->name);            
             $search->addLuceneField($doc, 'UnStored', array('Collection', 'description'), $this->description);
+            
+            // adds the fields for the collectors
+            $collectors = $this->getCollectors();
+            $collectorIds = array();
+            foreach($collectors as $collector) {
+                $collectorIds[] = $collector->id;
+            }                       
+            $search->addLuceneField($doc, 'Keyword', array('Collection', 'collector_id'), $collectorIds, true);
         }
               
         return parent::createLuceneDocument($doc);
