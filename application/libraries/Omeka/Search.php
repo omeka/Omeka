@@ -284,7 +284,7 @@ class Omeka_Search
     {        
         // convert field value to string
         $fieldValue = (string)$fieldValue;
-        
+
         if ($isExcludedField) {
             $fieldValue = $this->getLuceneExcludedFieldValue($fieldValue);
         }
@@ -310,7 +310,7 @@ class Omeka_Search
     
     public function getLuceneValueFromExcludedValue($fieldValue)
     {
-        return preg_replace('/^'.self::FIELD_VALUE_EXCLUDED_PREFIX.'/', '', $fieldValue, 1);
+        return preg_replace('/^'.self::FIELD_VALUE_EXCLUDED_PREFIX.'/u', '', $fieldValue, 1);
     }
     
     /**
@@ -320,7 +320,7 @@ class Omeka_Search
      */
     public function getLuceneIsExcludedFieldValue($fieldValue) 
     {
-        return (strncmp($fieldValue, self::FIELD_VALUE_EXCLUDED_PREFIX, strlen(self::FIELD_VALUE_EXCLUDED_PREFIX)) == 0);
+        return ($this->getLuceneExcludedFieldValue($fieldValue) != $fieldValue);
     }
     
     /**
@@ -329,12 +329,12 @@ class Omeka_Search
      * @return array An array of strings with expanded field names
      */
     public function getLuceneExpandedFieldNames($unexpandedFieldName) 
-    {
+    {        
         $expandedFieldNames = array();
-        $fieldValueCountForFieldName = $this->_luceneFieldNameValueCounts[$unexpandedFieldName];        
+        $fieldValueCountForFieldName = (int)$this->_luceneFieldNameValueCounts[$unexpandedFieldName];        
         for($i = 1; $i <= $fieldValueCountForFieldName; $i++) {
             $expandedFieldNames[] = $unexpandedFieldName . self::FIELD_NAME_VALUE_NUM_DELIMITER . $i;
-        }
+        }        
         return $expandedFieldNames;
     }
         
@@ -428,9 +428,11 @@ class Omeka_Search
         
         // if the field should be excluded from default search, change the field values to the excluded field values
         if ($isExcludedField) {
-            foreach($fieldValues as &$fieldValue) {
-                $fieldValue = $this->getLuceneExcludedFieldValue($fieldValue);
+            $excludedFieldValues = array();
+            foreach($fieldValues as $fieldValue) {
+                $excludedFieldValues[] = $this->getLuceneExcludedFieldValue($fieldValue);                
             }
+            $fieldValues = $excludedFieldValues;
         }
         
         // get the unexpanded field name from the field name string array
@@ -448,7 +450,7 @@ class Omeka_Search
                    $maxFieldNameValueNumberForDoc = $docFieldNameValueNumber;
                }
             }
-        }
+        }         
                 
         // add the new fields         
         $i = $maxFieldNameValueNumberForDoc + 1; 
