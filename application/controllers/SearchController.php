@@ -36,7 +36,7 @@ class SearchController extends Omeka_Controller_Action
       * @return void
       **/
      public function resultsAction()
-     {
+     {         
          $results = $this->_getSearchResults();
              
          /** 
@@ -154,7 +154,7 @@ class SearchController extends Omeka_Controller_Action
                             $sortFieldNameStrings = Omeka_Search::FIELD_NAME_MODEL_ID;
                             $sortFieldNameIsExcluded = true;
                             $sortType = SORT_STRING;
-                            $sortOrder = SORT_ASC;
+                            $sortOrder = SORT_DESC;
                          break;
                      }
                      $hits = $search->findLuceneByQueryWithSort($searchQuery, $sortFieldNameStrings, $sortFieldNameIsExcluded, $sortType, $sortOrder);
