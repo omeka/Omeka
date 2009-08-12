@@ -90,8 +90,7 @@ class Installer
         $form->addElement('text', 'username', array(
             'label' => 'Username', 
             'value' => $form->getValue('username'), 
-            'validators' => array('Alnum', 
-                                  array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH))), 
+            'validators' => array(array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH))), 
             'required' => true, 
             'decorators' => $elementDecorators
         ));
