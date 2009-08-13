@@ -152,12 +152,11 @@ class SearchController extends Omeka_Controller_Action
                          case 'id':
                          default:
                             $sortFieldNameStrings = Omeka_Search::FIELD_NAME_MODEL_ID;
-                            $sortFieldNameIsExcluded = true;
-                            $sortType = SORT_STRING;
+                            $sortType = SORT_NUMERIC;
                             $sortOrder = SORT_DESC;
                          break;
                      }
-                     $hits = $search->findLuceneByQueryWithSort($searchQuery, $sortFieldNameStrings, $sortFieldNameIsExcluded, $sortType, $sortOrder);
+                     $hits = $search->findLuceneByQueryWithSort($searchQuery, $sortFieldNameStrings, $sortType, $sortOrder);
                  }                 
              } catch (Zend_Search_Lucene_Exception $e) {
                  $hits = array();
@@ -212,8 +211,8 @@ class SearchController extends Omeka_Controller_Action
                     
                      $addsPermission = true;
                      $permissionForModelQuery = new Zend_Search_Lucene_Search_Query_Boolean();
-                     $permissionForModelQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName, true), true);
-                     $permissionForModelQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, '1', true), true);
+                     $permissionForModelQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName), true);
+                     $permissionForModelQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, '1'), true);
 
                      $permissionsForModelQuery->addSubquery($permissionForModelQuery);
                  }
@@ -251,7 +250,7 @@ class SearchController extends Omeka_Controller_Action
              // build the query that restricts the search to the models to search
              $modelsToSearchQuery = new Zend_Search_Lucene_Search_Query_Boolean();
              foreach($allowedModelNames as $modelName) {
-                 $modelsToSearchQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName, true));
+                 $modelsToSearchQuery->addSubquery($search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_MODEL_NAME, $modelName));
              }
              $searchQuery->addSubquery($modelsToSearchQuery, true);
          }

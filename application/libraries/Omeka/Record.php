@@ -474,15 +474,20 @@ class Omeka_Record implements ArrayAccess
      * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
      *
      * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
+     * @param string $contentFieldValue The value for the content field.
      * @return Zend_Search_Lucene_Document
      **/
-    public function createLuceneDocument($doc=null) 
+    public function createLuceneDocument($doc=null, $contentFieldValue='') 
     {
         if ($doc) {
             if ($search = Omeka_Search::getInstance()) {
                 // add the model_name and model_id to the Lucene document
                 $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_NAME, get_class($this), true);
                 $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_ID, (string)$this->id, true);
+                
+                if (trim($contentFieldValue) != '') {
+                    $search->addLuceneField($doc, 'UnStored', Omeka_Search::FIELD_NAME_CONTENT, $contentFieldValue);                
+                }
                 
                 // let the plugins append fields to the doc
                 $doc = apply_filters('search_append_fields_to_lucene_doc', $doc, $this);

@@ -73,14 +73,14 @@ class CollectionTable extends Omeka_Db_Table
                 switch($requestParamName) {
                     case 'public':
                         if (is_true($requestParamValue)) {
-                            $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE, true);
+                            $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_PUBLIC, Omeka_Search::FIELD_VALUE_TRUE);
                             $advancedSearchQueryForCollection->addSubquery($subquery, true);
                         }
                     break;
 
                     case 'featured':
                         if (is_true($requestParamValue)) {
-                            $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_FEATURED, Omeka_Search::FIELD_VALUE_TRUE, true);
+                            $subquery = $search->getLuceneTermQueryForFieldName(Omeka_Search::FIELD_NAME_IS_FEATURED, Omeka_Search::FIELD_VALUE_TRUE);
                             $advancedSearchQueryForCollection->addSubquery($subquery, true);
                         }
                     break;
@@ -94,7 +94,7 @@ class CollectionTable extends Omeka_Db_Table
                             foreach($collectorIds as $collectorId) {
                                 if (is_numeric($collectorId) && ((int)$collectorId > 0)) {
                                     $addedCollector = true;
-                                    $subquery = $search->getLuceneTermQueryForFieldName(array('Collection', 'collector_id'), $collectorId, true);
+                                    $subquery = $search->getLuceneTermQueryForFieldName(array('Collection', 'collector_id'), $collectorId);
                                     $collectorsSubquery->addSubquery($subquery);
                                 }
                             }

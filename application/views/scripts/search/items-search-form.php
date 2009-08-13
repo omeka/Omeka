@@ -108,6 +108,9 @@
 	</div>
 	<?php endif; ?>
 	<?php echo hidden(array('name'=>'model', 'id'=>'model'), 'Item'); ?>
+	<?php echo hidden(array('name'=>'admin-items', 'id'=>'admin-items'), '1'); ?>
+	<?php echo hidden(array('name'=>'order', 'id'=>'order'), 'id'); ?>
+
     
 	<?php is_admin_theme() ? fire_plugin_hook('admin_append_to_advanced_search') : fire_plugin_hook('public_append_to_advanced_search'); ?>
 	    <input type="submit" class="submit submit-medium" name="submit_search" id="submit_search" value="Search" />

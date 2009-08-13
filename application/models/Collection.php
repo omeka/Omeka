@@ -267,9 +267,10 @@ class Collection extends Omeka_Record
      * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
      *
      * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
+     * @param string $contentFieldValue The value for the content field.
      * @return Zend_Search_Lucene_Document
      **/
-    public function createLuceneDocument($doc=null) 
+    public function createLuceneDocument($doc=null, $contentFieldValue='') 
     {        
         if (!$doc) {
             $doc = new Zend_Search_Lucene_Document(); 
@@ -282,7 +283,10 @@ class Collection extends Omeka_Record
 
             // adds the fields for the collection name and description
             $search->addLuceneField($doc, 'UnStored', array('Collection', 'name'), $this->name);            
+            $contentFieldValue .= $this->name . "\n";
+            
             $search->addLuceneField($doc, 'UnStored', array('Collection', 'description'), $this->description);
+            $contentFieldValue .= $this->description . "\n";
             
             // adds the fields for the collectors
             $collectors = $this->getCollectors();
@@ -293,6 +297,6 @@ class Collection extends Omeka_Record
             $search->addLuceneField($doc, 'Keyword', array('Collection', 'collector_id'), $collectorIds, true);
         }
               
-        return parent::createLuceneDocument($doc);
+        return parent::createLuceneDocument($doc, $contentFieldValue);
     }
 }

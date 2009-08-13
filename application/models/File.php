@@ -232,9 +232,10 @@ class File extends Omeka_Record {
      * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
      *
      * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
+     * @param string $contentFieldValue The value for the content field.
      * @return Zend_Search_Lucene_Document
      **/
-    public function createLuceneDocument($doc=null) 
+    public function createLuceneDocument($doc=null, $contentFieldValue='') 
     {        
         if (!$doc) {
             $doc = new Zend_Search_Lucene_Document(); 
@@ -263,6 +264,7 @@ class File extends Omeka_Record {
                     }
                     if (count($elementTextsToAdd) > 0) {
                         $search->addLuceneField($doc, 'UnStored', array($elementSet, $element->name), $elementTextsToAdd);
+                        $contentFieldValue .= implode(' ', $elementTextsToAdd) . "\n";
                     }
                 }
             }
@@ -272,8 +274,9 @@ class File extends Omeka_Record {
 
             //add the original filename field
             $search->addLuceneField($doc, 'UnStored', array('File','original_filename'), $this->original_filename);
+            $contentFieldValue .= $this->original_filename . "\n";
         }                 
                 
-        return parent::createLuceneDocument($doc);
+        return parent::createLuceneDocument($doc, $contentFieldValue);
     }
 }       
