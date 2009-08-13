@@ -465,6 +465,21 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}plugins` (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `processes`
+-- 
+
+CREATE TABLE IF NOT EXISTS `{$db->prefix}processes` (
+  `id` int unsigned NOT NULL auto_increment,
+  `class` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `user_id` int unsigned NOT NULL,
+  `pid` int unsigned default NULL,
+  `status` enum('starting', 'in progress', 'completed', 'paused', 'error') collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for table `record_types`
 -- 
 
