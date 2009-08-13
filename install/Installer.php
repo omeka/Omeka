@@ -197,7 +197,7 @@ class Installer
         
         $form->addElement('text', 'path_to_php_cli', array(
             'label' => 'PHP-CLI Binary Path',
-            'value' => $form->getValue('path_to_convert') ? $form->getValue('path_to_php_cli') : $this->_getPathToPhpCli(),
+            'value' => $form->getValue('path_to_php_cli') ? $form->getValue('path_to_php_cli') : $this->_getPathToPhpCli(),
             'decorators' => $elementDecorators
         ));
         
