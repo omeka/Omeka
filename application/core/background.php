@@ -19,13 +19,20 @@ $core = new Omeka_Core;
 $core->phasedLoading('initializePluginBroker');
 
 // Set the command line arguments.
-$options = getopt('p:');
+$options = new Zend_Console_Getopt(array('process|p=i' => 'process to run'));
+
+try {
+    $options->parse();
+} catch (Zend_Console_Getopt_Exception $e) {
+    echo $e->getUsageMessage();
+    exit;
+}
 
 // Get the database object.
 $db = get_db();
 
 // Get the process to run
-$processId = $options['p'];
+$processId = $options->getOption('process');
 $process = $db->getTable('Process')->find($processId);
 
 // Get the name of the process class to run
