@@ -42,7 +42,7 @@ class Omeka_Core extends Zend_Application
                                'initializeSession' => 'Session',
                                'initializePlugins' => 'Plugins',
                                'initializeAcl' => 'Acl', 
-                               'initializeAuth' => 'Acl', 
+                               'initializeAuth' => 'Auth', 
                                'initializeCurrentUser' => 'CurrentUser', 
                                'initializeFrontController' => 'FrontController',
                                'initializeRoutes' => 'Router',
