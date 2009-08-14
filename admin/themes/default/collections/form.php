@@ -20,10 +20,10 @@
 </script>
 
 <fieldset id="editcollection">
-	<h2>Collection Details</h2>
+	<h2>Collection Details <span id="required-note">* Required Fields</span></h2>
 
 <div class="field">
-    <?php echo label(array('for' => 'name'),'Collection Name'); ?>
+    <?php echo label(array('for' => 'name', 'class' => 'required'),'Collection Name'); ?>
     <div class="inputs">
         <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name', 'size'=>'40'),$collection->name); ?>
     </div>

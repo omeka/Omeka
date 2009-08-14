@@ -33,6 +33,7 @@ form {overflow:hidden; zoom:1;}
 div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 	
 	label, div.label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
+	label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
 		
 	input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
@@ -42,6 +43,8 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	
 	.dateinput input {margin-right: 3px;}
 	
+	#required-note {font-size: 0.6em; color: #777; display: block;}
+    
 	/* Submit buttons - different sizes, uses background images */
 	.submit-extrasmall {background:none; color:#fff;border:none;width: 46px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-extrasmall.gif") 0 -30px no-repeat !important;}
 	.submit-small {background:none; color:#fff;border:none;width: 70px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-small.gif") 0 -30px no-repeat !important;}

@@ -65,9 +65,10 @@
 <?php echo flash(); ?>
 
 <fieldset id="type-information">
-	<legend>Item Type Information</legend>
+	<legend>Item Type Information <span id="required-note">* Required Fields</span></legend>
+	
 	<div class="field">
-		<?php echo label('name','Name'); ?>
+		<?php echo label(array('for' =>'name', 'class' => 'required'),'Name'); ?>
 		<div class="inputs">
 		<?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name); ?>
 		</div>
