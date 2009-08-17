@@ -45,7 +45,6 @@ $site['fullsize']          = 'fullsize';
 $site['thumbnails']        = 'thumbnails';
 $site['square_thumbnails'] = 'square_thumbnails';
 $site['files']             = 'files';
-$site['lucene_index']      = 'lucene_index';
 $site['public_theme']      = 'themes';
 $site['admin_theme']       = 'themes';
 $site['views']             = 'views';
