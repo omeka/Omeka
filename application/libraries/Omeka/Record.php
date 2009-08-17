@@ -176,15 +176,24 @@ class Omeka_Record implements ArrayAccess
              
         // Format the name of the plugin hook so it's in all lowercase with 
         // underscores. Taken from Doctrine::tableize()
-        $plugin_hook = Inflector::underscore($event);
-        $plugin_hook .= '_' . Inflector::underscore(get_class($this));
+        $plugin_hook_base = Inflector::underscore($event);
+        $plugin_hook_general = $plugin_hook_base . '_record'; 
+        $plugin_hook_specific = $plugin_hook_base . '_' . Inflector::underscore(get_class($this));
+        
         
         // Plugins called from within the record always receive that record 
         // instance as the first argument
         array_unshift($args, $this);
                 
         if ($broker = Omeka_Context::getInstance()->getPluginBroker()) {
-            call_user_func_array(array($broker, $plugin_hook), $args);
+            
+            // run a general hook (one which is not specific to the classs of the record)
+            // this is used by plugins which may need to process every record, and 
+            // cannot anticipate all of the class names of those records
+            call_user_func_array(array($broker, $plugin_hook_general), $args);
+
+            // run a hook specific to the class
+            call_user_func_array(array($broker, $plugin_hook_specific), $args);
         }
     }
     
@@ -377,11 +386,6 @@ class Omeka_Record implements ArrayAccess
         }
         
         $this->runCallbacks('afterSave');
-        
-        // update the lucene index with the record
-        if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
-            $omekaSearch->updateLuceneByRecord($this);   
-        }
                
         return true;
     }
@@ -419,12 +423,7 @@ class Omeka_Record implements ArrayAccess
         // Check to see if the subclass delete() method exists
         
         $this->runCallbacks('beforeDelete');
-        
-        // delete the record from the lucene index
-        if ($omekaSearch = Omeka_Context::getInstance()->getSearch()) {
-            $omekaSearch->deleteLuceneByRecord($this);
-        }
-        
+                
         // Delete has an extra template method that is separate from the 
         // callbacks. This is because the callbacks execute prior to actually 
         // deleting anything. So the state of the record must be maintained 
@@ -469,33 +468,7 @@ class Omeka_Record implements ArrayAccess
     protected function beforeValidate() {}
     
     protected function afterValidate() {}
-    
-    /**
-     * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
-     *
-     * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
-     * @param string $contentFieldValue The value for the content field.
-     * @return Zend_Search_Lucene_Document
-     **/
-    public function createLuceneDocument($doc=null, $contentFieldValue='') 
-    {
-        if ($doc) {
-            if ($search = Omeka_Search::getInstance()) {
-                // add the model_name and model_id to the Lucene document
-                $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_NAME, get_class($this), true);
-                $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_MODEL_ID, (string)$this->id, true);
-                
-                if (trim($contentFieldValue) != '') {
-                    $search->addLuceneField($doc, 'UnStored', Omeka_Search::FIELD_NAME_CONTENT, $contentFieldValue);                
-                }
-                
-                // let the plugins append fields to the doc
-                $doc = apply_filters('search_append_fields_to_lucene_doc', $doc, $this);
-            }          
-        }
-        return $doc;
-    }
-    
+        
     // Setter methods 
     public function setArray($data)
     {

@@ -55,7 +55,7 @@ function link_to($record, $action=null, $text='View', $props = array())
 function link_to_advanced_search($text = 'Advanced Search', $props = array(), $uri=null)
 {   
     if (!$uri) {
-        $uri = uri('search/');
+        $uri = apply_filters('advanced_search_link_default_uri', uri('items/advanced-search'));
     }
     // Is appending the query string directly a security issue?  We should figure that out.
     $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');

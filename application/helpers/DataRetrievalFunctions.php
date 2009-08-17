@@ -7,23 +7,6 @@
  * @subpackage DataRetrievalHelpers
  **/
 
-
-/**
- * Returns the record object for a lucene hit
- *
- * @return Record
- **/
-function get_record_for_search_hit($hit) 
-{
-    $record = null;
-    if ($search = Omeka_Search::getInstance()) {
-        $doc = $hit->getDocument();
-        $record = $search->getRecordByLuceneDocument($doc);
-    }
-    return $record;
-}
-
-
 /**
  * Returns the total number of results
  *

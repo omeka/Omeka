@@ -238,76 +238,7 @@ class Item extends Omeka_Record
     {
         $this->saveFiles();
     }
-    
-    /**
-     * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
-     *
-     * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
-     * @param string $contentFieldValue The value for the content field.
-     * @return Zend_Search_Lucene_Document
-     **/
-    public function createLuceneDocument($doc=null, $contentFieldValue='') 
-    {        
-        if (!$doc) {
-            $doc = new Zend_Search_Lucene_Document();
-        }
-                
-        if ($search = Omeka_Search::getInstance()) {
-                        
-            // adds the fields for added or modified
-            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_DATE_ADDED, $this->added);                        
-            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_DATE_MODIFIED, $this->modified);
-
-            // adds the fields for public and private       
-            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE);
-            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE);
             
-            // add the fields for the non-empty element texts, where each field is joint key of the set name and element name (in that order).        
-            foreach($this->getAllElementsBySet() as $elementSet => $elements) {
-                foreach($elements as $element) {
-                    $elementTextsToAdd = array();
-                    foreach($this->getTextsByElement($element) as $elementText) {
-                        if (trim($elementText->text) != '') {
-                            $elementTextsToAdd[] = $elementText->text;    
-                        }
-                    }
-                    if (count($elementTextsToAdd) > 0) {
-                        $search->addLuceneField($doc, 'UnStored', array($elementSet, $element->name), $elementTextsToAdd);
-                        $contentFieldValue .= implode(' ', $elementTextsToAdd) . "\n";
-                    }
-                }
-            }
-
-            //add the tags under the 'tag' field
-            $tags = $this->getTags();
-            $tagNames = array();
-            foreach($tags as $tag) {
-                $tagNames[] = $tag->name;
-            }
-            if (count($tagNames) > 0) {
-                $search->addLuceneField($doc, 'UnStored', Omeka_Search::FIELD_NAME_TAG, $tagNames);            
-                $contentFieldValue .= implode(' ', $tagNames) . "\n";
-            }
-
-            // add the collection id of the collection that contains the item
-            if ($this->collection_id) {
-                $search->addLuceneField($doc, 'Keyword', array('Item','collection_id'), $this->collection_id);                                    
-            }
-
-            // add the item type id for the item
-            if ($this->item_type_id) {
-                $search->addLuceneField($doc, 'Keyword', array('Item','item_type_id'), $this->item_type_id);                                        
-            }
-            
-            // add the user that created the item
-            if ($user = $this->getUserWhoCreated()) {
-                $search->addLuceneField($doc, 'Keyword', array('Item','user_id'), $user->id);                
-            }            
-        }
-                
-        return parent::createLuceneDocument($doc, $contentFieldValue);
-    }
-        
     /**
      * All of the custom code for deleting an item.
      *

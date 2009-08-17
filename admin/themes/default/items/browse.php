@@ -24,7 +24,7 @@
 	
 	<div id="browse-meta">
 		<div id="simple-search-form">
-			<?php echo simple_search("Search", array('id'=>'simple-search'), uri('search/results?admin-items=1&order=id')); ?>
+			<?php echo simple_search(); ?>
 			<span id="advanced-search-link"><?php echo link_to_advanced_search(); ?></span>
 		</div>
 

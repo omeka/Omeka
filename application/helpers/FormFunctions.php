@@ -245,7 +245,7 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
 { 
     // Always post the 'items/browse' page by default (though can be overridden).
     if (!$uri) {
-        $uri = uri('search/results');
+        $uri = apply_filters('simple_search_default_uri', uri('items/browse'));
     }
         
     $formProperties['action'] = $uri;

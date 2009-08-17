@@ -262,41 +262,4 @@ class Collection extends Omeka_Record
             $newCollector->delete();
         }
     }
-    
-    /**
-     * Creates and returns a Zend_Search_Lucene_Document for the Omeka_Record
-     *
-     * @param Zend_Search_Lucene_Document $doc The Zend_Search_Lucene_Document from the subclass of Omeka_Record.
-     * @param string $contentFieldValue The value for the content field.
-     * @return Zend_Search_Lucene_Document
-     **/
-    public function createLuceneDocument($doc=null, $contentFieldValue='') 
-    {        
-        if (!$doc) {
-            $doc = new Zend_Search_Lucene_Document(); 
-        }
- 
-        if ($search = Omeka_Search::getInstance()) {
-            // adds the fields for public and private       
-            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_PUBLIC, $this->public == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
-            $search->addLuceneField($doc, 'Keyword', Omeka_Search::FIELD_NAME_IS_FEATURED, $this->featured == '1' ? Omeka_Search::FIELD_VALUE_TRUE : Omeka_Search::FIELD_VALUE_FALSE, true);            
-
-            // adds the fields for the collection name and description
-            $search->addLuceneField($doc, 'UnStored', array('Collection', 'name'), $this->name);            
-            $contentFieldValue .= $this->name . "\n";
-            
-            $search->addLuceneField($doc, 'UnStored', array('Collection', 'description'), $this->description);
-            $contentFieldValue .= $this->description . "\n";
-            
-            // adds the fields for the collectors
-            $collectors = $this->getCollectors();
-            $collectorIds = array();
-            foreach($collectors as $collector) {
-                $collectorIds[] = $collector->id;
-            }                       
-            $search->addLuceneField($doc, 'Keyword', array('Collection', 'collector_id'), $collectorIds, true);
-        }
-              
-        return parent::createLuceneDocument($doc, $contentFieldValue);
-    }
 }

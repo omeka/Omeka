@@ -437,12 +437,4 @@ class Omeka_Db_Table
         $obj->setArray($data);
         return $obj;
     }
-    
-    /**
-     * Adds an lucene subquery to the search query for the advanced search
-     *
-     * @param Zend_Search_Lucene_Search_Query_Boolean $searchQuery
-     * @param string|array $requestParams An associative array of request parameters
-     */
-    public function addAdvancedSearchQueryForLucene($searchQuery, $requestParams) {}
 }
