@@ -65,7 +65,7 @@ class Collection extends Omeka_Record
         return $this->getDb()->getTable('Item')->count(array('collection' => $this->id));
     }
     
-    protected function getCollectors()
+    public function getCollectors()
     {
         return ($this->exists()) ? $this->getRelatedEntities('collector') : array();
     }
