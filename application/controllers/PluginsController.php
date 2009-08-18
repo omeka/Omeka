@@ -66,22 +66,22 @@ class PluginsController extends Omeka_Controller_Action
     
     public function installAction()
     {
-        $plugin = $this->_getParam('name');
+        $pluginName = $this->_getParam('name');
         
-        if (!$plugin) {
+        if (!$pluginName) {
             $this->errorAction();
         }
         
         $broker = $this->_pluginBroker;
         
-        if (!$broker->isInstalled($plugin)) {
+        if (!$broker->isInstalled($pluginName)) {
             
             try {
-                $broker->install($plugin);
-                $this->flashSuccess("Plugin named '$plugin' was successfully installed!");
-                $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin));
+                $broker->install($pluginName);
+                $this->flashSuccess("Plugin named '$pluginName' was successfully installed!");
+                $this->redirect->goto('config', 'plugins', 'default', array('name'=>$pluginName));
             } catch (Exception $e) {
-                $this->flashError("The following error occurred while installing the '$plugin' plugin: " . $e->getMessage());
+                $this->flashError("The following error occurred while installing the '$pluginName' plugin: " . $e->getMessage());
                 $this->redirect->goto('browse');
             }
         }
@@ -144,7 +144,7 @@ class PluginsController extends Omeka_Controller_Action
             
             $plugin->installed = $broker->isInstalled($name);
             $plugin->active = $broker->isActive($name);
-            
+            $plugin->directoryName = $name;
             $plugins[] = $plugin;
         }
         

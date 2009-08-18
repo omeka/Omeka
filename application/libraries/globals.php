@@ -261,13 +261,13 @@ function get_plugin_broker()
 /**
  * Retrieves specified descriptive info for a plugin from its ini file.
  *
- * @param string $plugin The name of the plugin
+ * @param string $pluginName The name of the plugin
  * @param string $key
  * @return string The value of the specified plugin key. If the key does not exist, it returns an empty string.
  **/
-function get_plugin_ini($plugin, $key)
-{            
-    $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin . DIRECTORY_SEPARATOR . 'plugin.ini';
+function get_plugin_ini($pluginName, $key)
+{     
+    $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $pluginName . DIRECTORY_SEPARATOR . 'plugin.ini';
     if (file_exists($path)) {
         try {
             $config = new Zend_Config_Ini($path, 'info');
@@ -275,10 +275,72 @@ function get_plugin_ini($plugin, $key)
 			throw $e;
 		}   
     } else {
-		throw new Exception("Path to plugin.ini for '$plugin' is not correct.");
+		throw new Exception("Path to plugin.ini for '$pluginName' is not correct.");
 	}
-
     return $config->$key;
+}
+
+/**
+ * Retrieves specified descriptive info for a plugin from its ini file.
+ *
+ * @param string $pluginName The name of the plugin
+ * @param string $key
+ * @return array An associative array where the key is the related plugin name, and 
+ * the value is another associative array with the following keys:
+ * - 'type': string Specifies whether a related plugin is 'required' or 'optional'
+ * - 'is_installed' boolean 
+ * - 'is_active' boolean
+ * - 'has_plugin_ini' boolean Checks if the related plugin has an ini file.
+ **/
+ 
+function get_related_plugin_info($pluginName)
+{    
+    $relatedPluginInfo = array();
+
+    // get the required plugin names
+    $rPluginNames = explode(',', trim(get_plugin_ini($pluginName, 'required_plugins')));
+    if(count($rPluginNames) == 1 && trim($rPluginNames[0]) == '') {
+        $rPluginNames = array();
+    }
+    foreach($rPluginNames as $rPluginName) {
+        $rPluginName = trim($rPluginName);
+        $relatedPluginInfo[$rPluginName] = array('type' => 'required');
+    }
+    
+    // get the optional plugin names
+    $oPluginNames = explode(',', trim(get_plugin_ini($pluginName, 'optional_plugins')));
+    if(count($oPluginNames) == 1 && trim($oPluginNames[0]) == '') {
+        $oPluginNames = array();
+    }
+    foreach($oPluginNames as $oPluginName) {
+        $oPluginName = trim($oPluginName);
+        $relatedPluginInfo[$oPluginName] = array('type' => 'optional');
+    }
+    
+    // get the info for the required and optional plugins
+    $roPluginNames = array_merge($rPluginNames, $oPluginNames);
+    $pluginTable = get_db()->getTable('Plugin');
+    foreach($roPluginNames as $roPluginName) {
+        
+        $roPluginName = trim($roPluginName);
+        $relatedPlugin = $pluginTable->findByName($roPluginName);
+        $isInstalled = false;
+        $isActive = false;
+        $hasIniFile = false;        
+        if ($relatedPlugin) {
+            $isInstalled = true;
+            $isActive = ($plugin->active == '1');
+        }
+        
+        $pluginIniPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $roPluginName . DIRECTORY_SEPARATOR . 'plugin.ini';
+        $hasIniFile = file_exists($pluginIniPath);
+        
+        $relatedPluginInfo[$roPluginName]['is_installed'] = $isInstalled;
+        $relatedPluginInfo[$roPluginName]['is_active'] = $isActive;
+        $relatedPluginInfo[$roPluginName]['has_ini_file'] = $hasIniFile;
+    }
+    
+    return $relatedPluginInfo;
 }
 
 /**

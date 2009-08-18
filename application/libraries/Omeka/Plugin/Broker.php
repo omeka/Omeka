@@ -243,29 +243,30 @@ class Omeka_Plugin_Broker
         }
     }
     
-    public function install($plugin) 
+    public function install($pluginName) 
     {
         
         //Make sure the plugin helpers like define_metafield() etc. that need to be aware of scope can operate on this plugin
-        $this->setCurrentPlugin($plugin);
+        $this->setCurrentPlugin($pluginName);
         
         //Include the plugin file manually because it was not included via the constructor
-        $file = $this->getPluginFilePath($plugin);
+        $file = $this->getPluginFilePath($pluginName);
         if (file_exists($file)) {
-            $this->addApplicationDirs($plugin);
+            $this->addApplicationDirs($pluginName);
             require_once $file;
         } else {
-            throw new Exception("Plugin named '$plugin' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$plugin' directory.");
+            throw new Exception("Plugin named '$pluginName' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$pluginName' directory.");
         }
 
         try {            
             $plugin_obj = new Plugin;
             $plugin_obj->active = 1;
-            $plugin_obj->name = $plugin;
+            $plugin_obj->name = $pluginName;
+            $plugin_obj->version = get_plugin_ini($pluginName, 'version');
             $plugin_obj->forceSave();
             $plugin_id = $plugin_obj->id;
             //Now run the installer for the plugin
-            $install_hook = $this->getHook($plugin, 'install');
+            $install_hook = $this->getHook($pluginName, 'install');
             call_user_func_array($install_hook, array($plugin_id));            
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
