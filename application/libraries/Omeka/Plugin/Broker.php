@@ -69,6 +69,22 @@ class Omeka_Plugin_Broker
     protected $_all = array();
     
     /**
+     * An associative array of all plugin directory names for plugins that are used optionally by another plugin.
+     * The key is a pluginDirName and the value is an array of the plugin directory names of its optional plugins
+     *
+     * @var array
+     **/
+    protected $_optional = array();
+    
+    /**
+      * An associative array of all plugin directory names for plugins that are required by another plugin.
+      * The key is a pluginDirName and the value is an array of the plugin directory names of its required plugins
+      *
+      * @var array
+      **/
+    protected $_required = array();
+    
+    /**
      * The directory name of the current plugin (used for calling hooks)
      *
      * @var string
@@ -670,6 +686,15 @@ class Omeka_Plugin_Broker
         }
     }
     
+    /**
+     * Returns a value in plugin.ini for a key
+     *
+     * Will return an empty string if no value can be found in the ini file for the key.
+     * 
+     * @param string $pluginDirName
+     * @param string $iniKeyName
+     * @return string
+     **/
     public function getPluginIniValue($pluginDirName, $iniKeyName)
     {
         $pluginIniPath = $this->getPluginIniFilePath($pluginDirName);
@@ -684,6 +709,46 @@ class Omeka_Plugin_Broker
     	}
         return $config->$iniKeyName;
     } 
+    
+    /**
+     * Returns an array of the plugin directory names for the plugins that the plugin requires
+     * 
+     * @param string $pluginDirName
+     * @return array
+     **/
+    public function getRequiredPluginDirNames($pluginDirName)
+    {
+        if ($this->_required[$pluginDirName] == null) {            
+            $this->_required[$pluginDirName] = array();
+            $rPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'required_plugins')));
+            if(count($rPluginDirNames) == 1 && trim($rPluginDirNames[0]) == '') {
+                $rPluginDirNames = array();
+            }
+            $this->_required[$pluginDirName] = $rPluginDirNames;
+        }
+
+        return $this->_required[$pluginDirName];
+    }
+    
+    /**
+     * Returns an array of the plugin directory names for the plugins that the plugin optionally uses
+     * 
+     * @param string $pluginDirName
+     * @return array
+     **/
+    public function getOptionalPluginDirNames($pluginDirName)
+    {
+        if ($this->_optional[$pluginDirName] == null) {
+            $this->_optional[$pluginDirName] = array();
+            $oPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'optional_plugins')));
+            if(count($oPluginDirNames) == 1 && trim($oPluginDirNames[0]) == '') {
+                $oPluginDirNames = array();
+            }
+            $this->_optional[$pluginDirName] = $oPluginDirNames;
+        }
+
+        return $this->_optional[$pluginDirName];
+    }
     
     /**
      * @see Omeka_Plugin_Broker::__call()

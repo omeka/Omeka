@@ -272,69 +272,6 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
 }
 
 /**
- * Retrieves specified descriptive info for a plugin from its ini file.
- *
- * @param string $pluginDirName The directory name of the plugin
- * @param string $key
- * @return array An associative array where the key is the related plugin name, and 
- * the value is another associative array with the following keys:
- * - 'type': string Specifies whether a related plugin is 'required' or 'optional'
- * - 'is_installed' boolean 
- * - 'is_active' boolean
- * - 'has_plugin_ini' boolean Checks if the related plugin has an ini file.
- **/
- 
-function get_related_plugin_info($pluginDirName)
-{    
-    $relatedPluginInfo = array();
-
-    // get the required plugin names
-    $rPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'required_plugins')));
-    if(count($rPluginDirNames) == 1 && trim($rPluginDirNames[0]) == '') {
-        $rPluginDirNames = array();
-    }
-    foreach($rPluginDirNames as $rPluginDirName) {
-        $rPluginDirName = trim($rPluginDirName);
-        $relatedPluginInfo[$rPluginDirName] = array('type' => 'required');
-    }
-    
-    // get the optional plugin names
-    $oPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'optional_plugins')));
-    if(count($oPluginDirNames) == 1 && trim($oPluginDirNames[0]) == '') {
-        $oPluginDirNames = array();
-    }
-    foreach($oPluginDirNames as $oPluginDirName) {
-        $oPluginDirName = trim($oPluginDirName);
-        $relatedPluginInfo[$oPluginDirName] = array('type' => 'optional');
-    }
-    
-    // get the info for the required and optional plugins
-    $roPluginDirNames = array_merge($rPluginDirNames, $oPluginDirNames);
-    $pluginTable = get_db()->getTable('Plugin');
-    foreach($roPluginDirNames as $roPluginDirName) {
-        
-        $roPluginDirName = trim($roPluginDirName);
-        $relatedPlugin = $pluginTable->findByDirectoryName($roPluginDirName);
-        $isInstalled = false;
-        $isActive = false;
-        $hasIniFile = false;        
-        if ($relatedPlugin) {
-            $isInstalled = true;
-            $isActive = ($plugin->active == '1');
-        }
-        
-        $pluginIniPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $roPluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
-        $hasIniFile = file_exists($pluginIniPath);
-        
-        $relatedPluginInfo[$roPluginDirName]['is_installed'] = $isInstalled;
-        $relatedPluginInfo[$roPluginDirName]['is_active'] = $isActive;
-        $relatedPluginInfo[$roPluginDirName]['has_ini_file'] = $hasIniFile;
-    }
-    
-    return $relatedPluginInfo;
-}
-
-/**
  * Declare a function that will be used to display files with a given MIME type.
  * 
  * @uses Omeka_Plugin_Broker::addMediaAdapter() See for info on arguments and

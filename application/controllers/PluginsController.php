@@ -183,7 +183,7 @@ class PluginsController extends Omeka_Controller_Action
         
         // if the plugin.ini doees not specify the plugin name, 
         // make the plugin name the same as the plugin directory name  
-        if (trim($pluginInfo->name) == '') {
+        if (!$pluginInfo || trim($pluginInfo->name) == '') {
             $pluginInfo->name = $pluginDirName;
         }
         
@@ -193,6 +193,8 @@ class PluginsController extends Omeka_Controller_Action
         $pluginInfo->active = $this->_pluginBroker->isActive($pluginDirName);
         $pluginInfo->hasPluginFiles = $this->_pluginBroker->hasPluginFiles($pluginDirName);
         $pluginInfo->canUpgrade = $this->_pluginBroker->canUpgrade($pluginDirName);
+        $pluginInfo->requiredPluginDirNames = $this->_pluginBroker->getRequiredPluginDirNames($pluginDirName);
+        $pluginInfo->optionalPluginDirNames = $this->_pluginBroker->getOptionalPluginDirNames($pluginDirName);
         
         return $pluginInfo;
     }

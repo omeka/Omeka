@@ -94,24 +94,33 @@
     <?php endif; ?>
     </td>
     </tr>
-    <?php if(count($relatedPluginInfo) > 0): ?>
+    <?php 
+        $requiredPluginDirNames = $pluginInfo->requiredPluginDirNames;
+        $optionalPluginDirNames =  $pluginInfo->optionalPluginDirNames;
+        if(count($requiredPluginDirNames) > 0): 
+    ?>
         <tr class="related-plugin-info">
           <td colspan="3">
                  <?php 
-                 $requiredPluginDirNames = array();
-                 $optionalPluginDirNames = array();
-                 $relatedPluginInfo = get_related_plugin_info($pluginDirName);
-                 foreach($relatedPluginInfo as $relatedPluginDirName => $relatedPluginInfo) {
-                     if ($relatedPluginInfo['type'] == 'required' && ($relatedPluginInfo['is_installed'] == false || $relatedPluginInfo['is_active'] == false || $pluginInfo['has_ini_file'] == false)) {
-                         $requiredPluginDirNames[] = $relatedPluginDirName;
-                     } else {
-                         $optionalPluginDirNames[] = $relatedPluginDirName;
-                     }
-                 } 
+                 $requiredPluginNames = array();
+                 foreach($requiredPluginDirNames as $requiredPluginDirName):
+                     $requiredPluginInfo = $pluginInfos[$requiredPluginDirName];
+                     if (!$requiredPluginInfo || !($requiredPluginInfo->installed) || !($requiredPluginInfo->active) || !($requiredPluginInfo->hasPluginFiles)):
+                         if (!$requiredPluginInfo) {
+                              $requiredPluginName = $requiredPluginDirName;
+                          } else {
+                              $requiredPluginName = $requiredPluginInfo->name;
+                          }
+                         $requiredPluginNames[] = "'" . $requiredPluginName . "'";
+                     endif;
+                 endforeach; 
                  ?>
-                 <?php if(count($requiredPluginDirNames) > 0): ?>
+                 <?php if(count($requiredPluginNames) > 0): ?>
                      <div class="required-plugins">
-                        <p>The following plugins are required: <?php echo implode_array_to_english($requiredPluginDirNames); ?></p>
+                        <p>To correctly use the '<?php echo html_escape($pluginInfo->name); ?>' plugin, 
+                        you must first install and activate 
+                        the <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
+                        plugin<?php if (count($requiredPluginNames) > 0) {echo 's';} ?>.</p>
                      </div>
                  <?php endif; ?>
              </td>
