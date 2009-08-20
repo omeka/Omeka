@@ -333,6 +333,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	    -moz-border-radius:4px;
 	    margin-bottom:12px;
 	    margin-left:8px;
+	    float:none;
 	}
 	.configure-button:hover {background-color: #369;border-color:#369;color:#fff;}
 	
