@@ -261,29 +261,20 @@ function get_plugin_broker()
 /**
  * Retrieves specified descriptive info for a plugin from its ini file.
  *
- * @param string $pluginName The name of the plugin
- * @param string $key
+ * @param string $pluginDirName The directory name of the plugin
+ * @param string $iniKeyName The name of the key in the ini file
  * @return string The value of the specified plugin key. If the key does not exist, it returns an empty string.
  **/
-function get_plugin_ini($pluginName, $key)
-{     
-    $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $pluginName . DIRECTORY_SEPARATOR . 'plugin.ini';
-    if (file_exists($path)) {
-        try {
-            $config = new Zend_Config_Ini($path, 'info');
-        } catch(Exception $e) {
-			throw $e;
-		}   
-    } else {
-		throw new Exception("Path to plugin.ini for '$pluginName' is not correct.");
-	}
-    return $config->$key;
+function get_plugin_ini($pluginDirName, $iniKeyName)
+{         
+    $pluginBroker = Omeka_Context::getInstance()->getPluginBroker();    
+    return $pluginBroker->getPluginIniValue($pluginDirName, $iniKeyName);
 }
 
 /**
  * Retrieves specified descriptive info for a plugin from its ini file.
  *
- * @param string $pluginName The name of the plugin
+ * @param string $pluginDirName The directory name of the plugin
  * @param string $key
  * @return array An associative array where the key is the related plugin name, and 
  * the value is another associative array with the following keys:
@@ -293,37 +284,37 @@ function get_plugin_ini($pluginName, $key)
  * - 'has_plugin_ini' boolean Checks if the related plugin has an ini file.
  **/
  
-function get_related_plugin_info($pluginName)
+function get_related_plugin_info($pluginDirName)
 {    
     $relatedPluginInfo = array();
 
     // get the required plugin names
-    $rPluginNames = explode(',', trim(get_plugin_ini($pluginName, 'required_plugins')));
-    if(count($rPluginNames) == 1 && trim($rPluginNames[0]) == '') {
-        $rPluginNames = array();
+    $rPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'required_plugins')));
+    if(count($rPluginDirNames) == 1 && trim($rPluginDirNames[0]) == '') {
+        $rPluginDirNames = array();
     }
-    foreach($rPluginNames as $rPluginName) {
-        $rPluginName = trim($rPluginName);
-        $relatedPluginInfo[$rPluginName] = array('type' => 'required');
+    foreach($rPluginDirNames as $rPluginDirName) {
+        $rPluginDirName = trim($rPluginDirName);
+        $relatedPluginInfo[$rPluginDirName] = array('type' => 'required');
     }
     
     // get the optional plugin names
-    $oPluginNames = explode(',', trim(get_plugin_ini($pluginName, 'optional_plugins')));
-    if(count($oPluginNames) == 1 && trim($oPluginNames[0]) == '') {
-        $oPluginNames = array();
+    $oPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'optional_plugins')));
+    if(count($oPluginDirNames) == 1 && trim($oPluginDirNames[0]) == '') {
+        $oPluginDirNames = array();
     }
-    foreach($oPluginNames as $oPluginName) {
-        $oPluginName = trim($oPluginName);
-        $relatedPluginInfo[$oPluginName] = array('type' => 'optional');
+    foreach($oPluginDirNames as $oPluginDirName) {
+        $oPluginDirName = trim($oPluginDirName);
+        $relatedPluginInfo[$oPluginDirName] = array('type' => 'optional');
     }
     
     // get the info for the required and optional plugins
-    $roPluginNames = array_merge($rPluginNames, $oPluginNames);
+    $roPluginDirNames = array_merge($rPluginDirNames, $oPluginDirNames);
     $pluginTable = get_db()->getTable('Plugin');
-    foreach($roPluginNames as $roPluginName) {
+    foreach($roPluginDirNames as $roPluginDirName) {
         
-        $roPluginName = trim($roPluginName);
-        $relatedPlugin = $pluginTable->findByName($roPluginName);
+        $roPluginDirName = trim($roPluginDirName);
+        $relatedPlugin = $pluginTable->findByDirectoryName($roPluginDirName);
         $isInstalled = false;
         $isActive = false;
         $hasIniFile = false;        
@@ -332,12 +323,12 @@ function get_related_plugin_info($pluginName)
             $isActive = ($plugin->active == '1');
         }
         
-        $pluginIniPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $roPluginName . DIRECTORY_SEPARATOR . 'plugin.ini';
+        $pluginIniPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $roPluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
         $hasIniFile = file_exists($pluginIniPath);
         
-        $relatedPluginInfo[$roPluginName]['is_installed'] = $isInstalled;
-        $relatedPluginInfo[$roPluginName]['is_active'] = $isActive;
-        $relatedPluginInfo[$roPluginName]['has_ini_file'] = $hasIniFile;
+        $relatedPluginInfo[$roPluginDirName]['is_installed'] = $isInstalled;
+        $relatedPluginInfo[$roPluginDirName]['is_active'] = $isActive;
+        $relatedPluginInfo[$roPluginDirName]['has_ini_file'] = $hasIniFile;
     }
     
     return $relatedPluginInfo;

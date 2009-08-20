@@ -78,7 +78,7 @@ class Omeka_Plugin_Filters
      **/
     protected function _getFilterNamespace()
     {
-        if($pluginName = $this->getCurrentPlugin()) {
+        if($pluginName = $this->getCurrentPluginDirName()) {
             return $pluginName;
         }
         

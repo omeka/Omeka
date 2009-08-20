@@ -24,10 +24,10 @@ class PluginTable extends Omeka_Db_Table
         return $pluginsWithIniFiles;
     }
     
-    public function findByName($pluginName)
+    public function findByDirectoryName($pluginDirName)
     {
         $select = $this->getSelect()->where("p.name = ?")->limit(1);        
-        return $this->fetchObject($select, array($pluginName));        
+        return $this->fetchObject($select, array($pluginDirName));        
     }
     
 }

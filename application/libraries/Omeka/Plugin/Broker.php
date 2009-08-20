@@ -4,6 +4,7 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @author CHNM
  **/
 
 /**
@@ -16,10 +17,6 @@
  * For example, $broker->add_action_contexts($controller) would call the 
  * 'add_action_contexts' on all plugins, and it would provide the controller
  * object as the first argument to all implementations of that hook. 
- *
- * @package Omeka
- * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
  **/
 class Omeka_Plugin_Broker 
 {
@@ -42,22 +39,29 @@ class Omeka_Plugin_Broker
     protected $_callbacks = array();
 
     /**
-     * A list of plugins that have been installed (but not necessarily
-     * activated).
+     * An array of plugin directory names for plugins that have been installed (but not necessarily
+     * activated and not necessarily have the plugin files).
      *
      * @var array
      **/
     protected $_installed = array();
     
     /**
-     * List of currently activated plugins
+     * An array of plugin directory names for currently activated plugins
      *
      * @var array
      **/
     protected $_active = array();
     
     /**
-     * List of all plugins (installed or not) that are currently located
+     * An array of plugin directory names for upgradable plugins
+     *
+     * @var array
+     **/
+    protected $_upgradeable = array();
+    
+    /**
+     * An array of all plugin directory names for plugins (installed or not) that are currently located
      * in the plugins/ directory
      *
      * @var array
@@ -65,7 +69,7 @@ class Omeka_Plugin_Broker
     protected $_all = array();
     
     /**
-     * The name of the current plugin (used for calling hooks)
+     * The directory name of the current plugin (used for calling hooks)
      *
      * @var string
      **/
@@ -82,7 +86,7 @@ class Omeka_Plugin_Broker
     protected $_pluginViewDirs = array();
             
     public function __construct($db, $pathToPlugins) 
-    {
+    {        
         // Should be able to delegate to the plugin filters
         $this->_delegates = array();
         $this->_delegates[] = new Omeka_Plugin_Filters($this);
@@ -90,42 +94,45 @@ class Omeka_Plugin_Broker
         $this->_basePath = $pathToPlugins;
         $this->_db = $db;
         
-        //Construct the current list of potential, installed & active plugins
+        // Construct the current list of potential, installed & active plugins
         require_once 'VersionedDirectoryIterator.php';
         
-        //Loop through all the plugins in the plugin directory
+        // Loop through all the plugins in the plugin directory, 
+        // and add each plugin directory name to the list of all plugin directory names
         $dir = new VersionedDirectoryIterator($this->_basePath);
-        $names = $dir->getValid();
+        $this->_all = $dir->getValid();
         
-        $this->_all = $names;
-
-        //Get the list of currently installed plugins
-        $installed = array();
-        $active = array();
-                
-        $res = $this->_db->query("SELECT p.name, p.active FROM $db->Plugin p");
-                
-        foreach ($res->fetchAll() as $row) {
-            $name = $row['name'];
+        // Get the list of currently installed plugin directory names and list of the active plugin directory names
+        $this->_active = array();
+        $this->_installed = array();
+        
+        // Loop through the installed plugins and add the plugin directory names to a list. 
+        // Deactive upgradable plugins, and add their names to a list.        
+        // Finally, add the active plugin directory names to a list.
+        $plugins = $this->_db->getTable('Plugin')->findAll();
+        foreach ($plugins as $plugin) {
             
-            $installed[$name] = $name;
+            // Get the plugin directory name
+            $pluginDirName = $plugin->name;
             
-            //Only active plugins should be required
-            if ($row['active']) {
-                $active[$name] = $name;
-                
-                
-                //Require the file that contains the plugin
-                $path = $this->getPluginFilePath($name);
-                
-                if (file_exists($path)) {
-                    $this->_pluginPaths[$name] = $path;
+            // Add the plugin directory name to the list of installed plugin directory names
+            $this->_installed[$pluginDirName] = $pluginDirName;
+            
+            // If the plugin is upgradable, then deactive it and store its directory name in a list
+            if (version_compare($this->getPluginIniValue($pluginDirName, 'version'), $plugin->version, '>')) {
+                if ($plugin->active) {
+                    $plugin->active = 0;
+                    $plugin->forceSave();
                 }
+                $this->_upgradeable[$pluginDirName] = $pluginDirName;
             }
-        }
-        
-        $this->_active = $active;
-        $this->_installed = $installed;
+            
+            // If a plugin is active, store its plugin directory name in a list
+            if ($plugin->active) {
+                // Add the plugin directory name to the list of active plugin directory names
+                $this->_active[$pluginDirName] = $pluginDirName;
+            }
+        }    
     }
     
     /**
@@ -136,88 +143,258 @@ class Omeka_Plugin_Broker
     public function loadActive()
     {   
         Zend_Registry::set('pluginbroker', $this);     
-        foreach ($this->_pluginPaths as $name => $path) {
-            $this->setCurrentPlugin($name);
-            $this->addApplicationDirs($name);
-           require_once $path;
-           $this->setCurrentPlugin(null);
+        foreach ($this->_active as $pluginDirName) {
+            $this->load($pluginDirName);
         } 
     }
     
-    protected function getPluginFilePath($name)
+    /**
+     * Loads a plugin (and make sure the plugin API is available)
+     * 
+     * Note: Loading a plugin, activates it for the remainder of the request, 
+     * but it does not change its active status in the database
+     * @return void
+     **/
+    public function load($pluginDirName)
     {
-        return $this->_basePath . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'plugin.php';
+        $pluginPath = $this->getPluginFilePath($pluginDirName);
+        if (file_exists($pluginPath)) {
+            
+            //activate the plugin for the remainder of the request
+            $this->_active[$pluginDirName] = $pluginDirName;
+                
+            $this->_pluginPaths[$pluginDirName] = $pluginPath;
+            
+            // set the current plugin
+            $this->setCurrentPluginDirName($pluginDirName);
+            
+            // add the plugin dir paths and require the plugin files
+            $this->addApplicationDirs($pluginDirName);
+            require_once $pluginPath;
+            
+            // set the current plugin back to null
+            $this->setCurrentPluginDirName(null);
+        }
+    }
+    
+    /**
+     * Returns the path to the plugin.php file
+     * 
+     * @param string $pluginDirName
+     * @return string
+     **/
+    public function getPluginFilePath($pluginDirName)
+    {
+        return $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.php';
+    }
+    
+    /**
+     * Returns the path to the plugin.ini file
+     * 
+     * @param string $pluginDirName
+     * @return string
+     **/
+    public function getPluginIniFilePath($pluginDirName)
+    {
+        return $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
     }
         
     /**
      * Check if the plugin is active, then enable the hook for it
      *
+     * @param string $hook
+     * @param string $callback
      * @return void
      **/
     public function addHook($hook, $callback)
     {    
-        $current = $this->getCurrentPlugin();
-                    
-        $this->_callbacks[$hook][$current] = $callback;
+        $currentPluginDirName = $this->getCurrentPluginDirName();          
+        $this->_callbacks[$hook][$currentPluginDirName] = $callback;
     }
     
-    public function getHook($plugin, $hook)
+    /**
+     * Gets the hook for a plugin
+     *
+     * @param string $pluginDirName
+     * @param string $callback
+     * @return void
+     **/
+    public function getHook($pluginDirName, $hook)
     {        
         if (is_array($this->_callbacks[$hook])) {
-            return $this->_callbacks[$hook][$plugin];
+            return $this->_callbacks[$hook][$pluginDirName];
         }
     }
     
     /**
      * The plugin helper functions do not have any way of determining what
-     *  plugin to is currently in focus.  These get/setCurrentPlugin methods
+     *  plugin to is currently in focus.  These get/setCurrentPluginDirName methods
      *  allow the broker to know how to delegate to specific plugins if necessary.
-     *
-     * @return string
+     * 
+     * @param string $pluginDirName
+     * @return void
      **/
-    protected function setCurrentPlugin($plugin)
+    protected function setCurrentPluginDirName($pluginDirName)
     {
-        $this->_current = $plugin;
+        $this->_current = $pluginDirName;
     }
     
-    public function getCurrentPlugin()
+    public function getCurrentPluginDirName()
     {
         return $this->_current;
     }
     
-    public function isActive($plugin)
+    /**
+     * Returns whether a plugin is active or not
+     * 
+     * @param string $pluginDirName
+     * @return boolean
+     **/
+    public function isActive($pluginDirName)
     {
-        return in_array($plugin, $this->_active);
+        return in_array($pluginDirName, $this->_active);
     }
     
-    public function isInstalled($plugin)
+    /**
+     * Returns whether a plugin is installed or not
+     * 
+     * @param string $pluginDirName
+     * @return boolean
+     **/
+    public function isInstalled($pluginDirName)
     {
-        return in_array($plugin, $this->_installed);
+        return in_array($pluginDirName, $this->_installed);
     }
     
+    /**
+     * Returns whether the plugin has both a plugin.php file and a plugin.ini file
+     * 
+     * @param string $pluginDirName
+     * @return boolean
+     **/    
+    public function hasPluginFiles($pluginDirName)
+    {
+        return (file_exists($this->getPluginFilePath($pluginDirName)) && file_exists($this->getPluginIniFilePath($pluginDirName)));
+    }
+    
+    /**
+     * Returns an array of all of the plugin directory names in the plugin directory
+     *
+     * @return array
+     **/
     public function getAll()
     {
         return $this->_all;
     }
     
     /**
-     * Return a list of plugins that have not been installed yet
+     * Return an array of plugin directory names for the plugins that have not been installed yet
      *
-     * @return void
+     * @return array
      **/
     public function getNew()
     {
-        $new = array_diff($this->_all, array_keys($this->_installed));
-        
-        return $new;
+       return array_diff($this->_all, array_keys($this->_installed));
     }
     
-    public function config($plugin)
+    /**
+     * Return whether a plugin can be upgraded.  A plugin can be upgrade only if it is installed 
+     * and the plugin version in the plugin.ini file is newer than the version in the database
+     *
+     * @param string $pluginDirName
+     * @return boolean
+     **/
+    public function canUpgrade($pluginDirName)
+    {
+        return in_array($pluginDirName, $this->_upgradeable);
+    }
+    
+    /**
+     * Upgrades the plugin
+     *
+     * @param string $pluginDirName
+     * @return void
+     **/
+    public function upgrade($pluginDirName)
+    {
+        //Make sure the plugin helpers that need to be aware of scope can operate on this plugin
+        $this->setCurrentPluginDirName($pluginDirName);
+        
+        if ($this->canUpgrade($pluginDirName)) {
+            
+            // load the plugin files
+            $plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName);            
+            $this->load($pluginDirName);
+            
+            // let the plugin do the upgrade
+            $oldPluginVersion = $plugin->version;
+            $newPluginVersion = $this->getPluginIniValue($pluginDirName, 'version');            
+            
+            // run the upgrade function in the plugin
+            $upgrade_hook = $this->getHook($pluginDirName, 'upgrade');
+            call_user_func_array($upgrade_hook, array($oldPluginVersion, $newPluginVersion));            
+            
+            // update version of the plugin and activate it
+            $plugin->version = $newPluginVersion;
+            $plugin->forceSave();
+            
+            // remove the plugin from the list of upgradable plugins
+            unset($_upgradeable[$pluginDirName]);
+            
+            // activate the plugin
+            $this->activate($pluginDirName);
+            
+        } else {
+            throw new Exception("Plugin named '$pluginDirName' must be installed and have newer files to upgrade it.");
+        }
+    }
+    
+    /**
+     * Activates the plugin
+     *
+     * @param string $pluginDirName
+     * @return void
+     **/
+    public function activate($pluginDirName)
+    {
+        if ($plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName)) {
+            $plugin->active = 1;
+            $plugin->forceSave();
+            $_active[$pluginDirName] = $pluginDirName;
+        } else {
+            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to activate.");
+        }
+    }
+    
+    /**
+     * Deactivates the plugin
+     *
+     * @param string $pluginDirName
+     * @return void
+     **/
+    public function deactivate($pluginDirName)
+    {
+        if ($plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName)) {
+            $plugin->active = 0;
+            $plugin->forceSave();
+            unset($_active[$pluginDirName]);
+        } else {
+            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to deactivate.");
+        }
+    }
+    
+    /**
+     * Configures the plugin
+     *
+     * @param string $pluginDirName
+     * @return void
+     **/
+    public function config($pluginDirName)
     {
         //Check if the POST is empty, then check for a configuration form    
         if (empty($_POST)) {
 
-            $config_form_hook = $this->getHook($plugin, 'config_form');
+            $config_form_hook = $this->getHook($pluginDirName, 'config_form');
     
             //If there is a configuration form available, load that and return the output for rendering later
             if ($config_form_hook) {
@@ -235,7 +412,7 @@ class Omeka_Plugin_Broker
         } else {
             
             //Run the 'config' hook, then run the rest of the installer
-            $config_hook = $this->getHook($plugin, 'config');
+            $config_hook = $this->getHook($pluginDirName, 'config');
             
             if ($config_hook) {
                 call_user_func_array($config_hook, array($_POST));
@@ -243,35 +420,41 @@ class Omeka_Plugin_Broker
         }
     }
     
-    public function install($pluginName) 
+    /**
+     * Installs the plugin
+     *
+     * @param string $pluginDirName
+     * @return void
+     **/
+    public function install($pluginDirName) 
     {
-        
-        //Make sure the plugin helpers like define_metafield() etc. that need to be aware of scope can operate on this plugin
-        $this->setCurrentPlugin($pluginName);
+        //Make sure the plugin helpers that need to be aware of scope can operate on this plugin
+        $this->setCurrentPluginDirName($pluginDirName);
         
         //Include the plugin file manually because it was not included via the constructor
-        $file = $this->getPluginFilePath($pluginName);
+        $file = $this->getPluginFilePath($pluginDirName);
         if (file_exists($file)) {
-            $this->addApplicationDirs($pluginName);
+            $this->addApplicationDirs($pluginDirName);
             require_once $file;
         } else {
-            throw new Exception("Plugin named '$pluginName' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$pluginName' directory.");
+            throw new Exception("Plugin named '$pluginDirName' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$pluginDirName' directory.");
         }
 
         try {            
-            $plugin_obj = new Plugin;
-            $plugin_obj->active = 1;
-            $plugin_obj->name = $pluginName;
-            $plugin_obj->version = get_plugin_ini($pluginName, 'version');
-            $plugin_obj->forceSave();
-            $plugin_id = $plugin_obj->id;
+            $plugin = new Plugin;
+            $plugin->active = 1;
+            $plugin->name = $pluginDirName;
+            $plugin->version = $this->getPluginIniValue($pluginDirName, 'version');
+            $plugin->forceSave();
+            
             //Now run the installer for the plugin
-            $install_hook = $this->getHook($pluginName, 'install');
-            call_user_func_array($install_hook, array($plugin_id));            
+            $install_hook = $this->getHook($pluginDirName, 'install');
+            call_user_func_array($install_hook, array($plugin->id));
+                       
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
-            if ($plugin_obj->exists()) {
-                $plugin_obj->delete();
+            if ($plugin->exists()) {
+                $plugin->delete();
             }
             throw new Exception($e->getMessage());
         }
@@ -280,9 +463,13 @@ class Omeka_Plugin_Broker
     /**
      * used by the add_theme_pages() helper to create a list of directories that can store static pages that integrate into the themes
      *
+     * @param string $pluginDirName
+     * @param string $path
+     * @param string $themeType
+     * @param string $moduleName
      * @return void
      **/
-    protected function addThemeDir($pluginName, $path, $themeType, $moduleName)
+    protected function addThemeDir($pluginDirName, $path, $themeType, $moduleName)
     {
         if (!in_array($themeType, array('public','admin','shared'))) {
             return false;
@@ -290,7 +477,7 @@ class Omeka_Plugin_Broker
         
         //Path must begin from within the plugin's directory
         
-        $path = $pluginName . DIRECTORY_SEPARATOR . $path;
+        $path = $pluginDirName . DIRECTORY_SEPARATOR . $path;
                 
         switch ($themeType) {
             case 'public':
@@ -306,7 +493,6 @@ class Omeka_Plugin_Broker
             default:
                 break;
         }
-        // var_dump($this->_pluginViewDirs);                    
     }
     
     public function getModuleViewScriptDirs($moduleName=null)
@@ -322,12 +508,14 @@ class Omeka_Plugin_Broker
      * 
      * This has to use addControllerDirectory() instead of addModuleDirectory() because module names
      * are case-sensitive and module directories need to be lowercased to conform to Zend's weird naming conventions.
-     * 
+     *
+     * @param string $pluginDirName
+     * @param string $moduleName 
      * @return void
      **/
-    public function addControllerDir($pluginName, $moduleName)
+    public function addControllerDir($pluginDirName, $moduleName)
     {                
-        $contrDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $pluginName . DIRECTORY_SEPARATOR . 'controllers';
+        $contrDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'controllers';
         Zend_Controller_Front::getInstance()->addControllerDirectory($contrDir, $moduleName);
     }
     
@@ -344,12 +532,12 @@ class Omeka_Plugin_Broker
      * 
      *  This also adds these folders to the correct include paths.
      *  
-     *
+     * @param string $pluginDirName
      * @return void
      **/
-    public function addApplicationDirs($pluginName)
+    public function addApplicationDirs($pluginDirName)
     {        
-        $baseDir = $this->_basePath . DIRECTORY_SEPARATOR . $pluginName;
+        $baseDir = $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName;
         
         $modelDir      = $baseDir . DIRECTORY_SEPARATOR  . 'models';
         $controllerDir = $baseDir . DIRECTORY_SEPARATOR  . 'controllers';
@@ -368,23 +556,23 @@ class Omeka_Plugin_Broker
             set_include_path(get_include_path() . PATH_SEPARATOR . $librariesDir);
         }
         
-        $moduleName = $this->_getModuleName($pluginName);
+        $moduleName = $this->_getModuleName($pluginDirName);
 
         //If the controller directory exists, add that 
         if (file_exists($controllerDir)) {
-            $this->addControllerDir($pluginName, $moduleName);   
+            $this->addControllerDir($pluginDirName, $moduleName);   
         }
         
         if (file_exists($sharedDir)) {
-            $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'shared', 'shared', $moduleName);
+            $this->addThemeDir($pluginDirName, 'views' . DIRECTORY_SEPARATOR . 'shared', 'shared', $moduleName);
         }
         
         if (file_exists($adminDir)) {
-            $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'admin', 'admin', $moduleName);
+            $this->addThemeDir($pluginDirName, 'views' . DIRECTORY_SEPARATOR . 'admin', 'admin', $moduleName);
         }
 
         if (file_exists($publicDir)) {
-            $this->addThemeDir($pluginName, 'views' . DIRECTORY_SEPARATOR . 'public', 'public', $moduleName);
+            $this->addThemeDir($pluginDirName, 'views' . DIRECTORY_SEPARATOR . 'public', 'public', $moduleName);
         }
 
     }
@@ -393,16 +581,16 @@ class Omeka_Plugin_Broker
      * Retrieve the module name for the plugin (based on the directory name
      * of the plugin).
      * 
-     * @param string $pluginName
+     * @param string $pluginDirName
      * @return string
      **/
-    protected function _getModuleName($pluginName)
+    protected function _getModuleName($pluginDirName)
     {
         // Module name needs to be lowercased (plugin directories are not, 
         // typically).  Module name needs to go from camelCased to dashed 
         // (ElementSets --> element-sets).
         $inflector = new Zend_Filter_Word_CamelCaseToDash();
-        $moduleName = strtolower($inflector->filter($pluginName));
+        $moduleName = strtolower($inflector->filter($pluginDirName));
         return $moduleName;
     }
     
@@ -465,22 +653,37 @@ class Omeka_Plugin_Broker
      * This will run the 'uninstall' hook for the given plugin, and then it
      * will remove the entry in the DB corresponding to the plugin.
      * 
-     * @param string Name of the plugin directory to uninstall
+     * @param string $pluginDirName Name of the plugin directory to uninstall
      * @return void
      **/
-    public function uninstall($plugin)
+    public function uninstall($pluginDirName)
     {
         try {
-            $uninstallHook = $this->getHook($plugin, 'uninstall');
+            $uninstallHook = $this->getHook($pluginDirName, 'uninstall');
             if ($uninstallHook) {
                 call_user_func($uninstallHook);
             }
             //Remove the entry from the database
-            $this->_db->query("DELETE FROM {$this->_db->Plugin} WHERE name = ? LIMIT 1", array($plugin));
+            $this->_db->query("DELETE FROM {$this->_db->Plugin} WHERE name = ? LIMIT 1", array($pluginDirName));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
+    
+    public function getPluginIniValue($pluginDirName, $iniKeyName)
+    {
+        $pluginIniPath = $this->getPluginIniFilePath($pluginDirName);
+        if (file_exists($pluginIniPath)) {
+            try {
+                $config = new Zend_Config_Ini($pluginIniPath, 'info');
+            } catch(Exception $e) {
+    			throw $e;
+    		}   
+        } else {
+    		throw new Exception("Path to plugin.ini for '$pluginDirName' is not correct.");
+    	}
+        return $config->$iniKeyName;
+    } 
     
     /**
      * @see Omeka_Plugin_Broker::__call()
@@ -495,18 +698,17 @@ class Omeka_Plugin_Broker
             return;
         }
         
-        $return_values = array();
-        
-        foreach ($this->_callbacks[$hook] as $plugin => $callback) {
-            if ($this->isActive($plugin)) {
+        $return_values = array();        
+        foreach ($this->_callbacks[$hook] as $pluginDirName => $callback) {
+            if ($this->isActive($pluginDirName)) {
                 //Make sure the callback executes within the scope of the current plugin
-                $this->setCurrentPlugin($plugin);
-                $return_values[$plugin] = call_user_func_array($callback, $args);
+                $this->setCurrentPluginDirName($pluginDirName);
+                $return_values[$pluginDirName] = call_user_func_array($callback, $args);
             }
         }
         
         // Reset the value for current plugin after this loop finishes
-        $this->setCurrentPlugin(null);
+        $this->setCurrentPluginDirName(null);
         
         return $return_values;        
     }
@@ -520,8 +722,8 @@ class Omeka_Plugin_Broker
      * @see Omeka_Plugin_Broker::__construct()
      * @return mixed
      **/
-    public function __call($hook, $args) {
-        
+    public function __call($hook, $args) 
+    {
         // Delegation
         foreach ($this->_delegates as $delegator) {
             if(method_exists($delegator, $hook)) {

@@ -3,11 +3,10 @@
 
 <?php common('settings-nav'); ?>
 
-
 <div id="primary">
     <?php echo flash(); ?>
     
-    <?php if ($plugins): ?>
+    <?php if ($pluginInfos && count($pluginInfos) > 0): ?>
 
 <table id="plugin-info">
     <thead>
@@ -18,30 +17,61 @@
     </thead>
     
     <tbody>
-<?php foreach( $plugins as $key => $plugin ): ?>
-    <tr>
-    <?php $relatedPluginInfo = get_related_plugin_info($plugin->directoryName); ?>
-    <td>
-        <p class="plugin-title"><strong><?php if(!empty($plugin->name)) { echo $plugin->name; } else { echo $plugin->directoryName; } ?></strong> <?php if ( has_permission('Plugins', 'config') and $plugin->has_config ): ?><a href="<?php echo uri('plugins/config', array('name'=>$plugin->directory)); ?>" class="configure-button button">Configure</a>
-                	<?php endif; ?></p>
-                	<p class="plugin-meta"><?php if(!empty($plugin->version)): ?>Version <?php echo $plugin->version; ?></em><?php endif; ?><?php if(!empty($plugin->author)): ?> | By <?php echo $plugin->author; ?><?php endif; ?><?php if(!empty($plugin->link)): ?> | <a href="<?php echo $plugin->link; ?>">Visit plugin website</a><?php endif; ?></p>
-                	<br />
-        <p class="plugin-description"><?php if(!empty($plugin->description)): ?><?php echo $plugin->description; endif; ?></p>
-        
-        
 
-
-        </td>
-        <td>
+<?php foreach($pluginInfos as $pluginDirName => $pluginInfo): ?>
+	<tr>
+		<td>
+	        <p class="plugin-title">
+    		<?php
+    		    if ($pluginInfo->link):
+    				echo '<a href="' . html_escape($pluginInfo->link) . '">' . html_escape($pluginInfo->name) . '</a>';
+    			else:
+    		        echo html_escape($pluginInfo->name);
+    			endif; 
+    		?>
+    		<?php if (has_permission('Plugins', 'config') && $pluginInfo->hasConfig ): ?>
+		        <a href="<?php echo uri('plugins/config', array('name'=>$pluginInfo->directoryName)); ?>" class="configure-button button">Configure</a>
+            <?php endif; ?>
+    		</p>           
             <?php 
-            //If the plugin has been installed, then there should be separate forms for activation/configuration
-            //I hate IE so much.  
-            if($plugin->installed): ?>
+                $pluginMetadata = array();
+                if (!empty($pluginInfo->version)):
+                    $pluginMetadata[] = 'Version ' . html_escape($pluginInfo->version);
+                endif;
+            
+                if (!empty($pluginInfo->author)):
+                    $pluginMetadata[] = 'By ' . html_escape($pluginInfo->author);
+                endif;
+            ?>
+            <?php if (!empty($pluginMetadata)): ?>
+                <p class="plugin-meta">    
+                    <?php echo implode(' | ', $pluginMetadata); ?>
+                </p>
+            <?php endif; ?>
+            
+            <?php if(!empty($pluginInfo->description)): ?>
+                <p class="plugin-description">
+                    <?php echo $pluginInfo->description; ?>
+                </p>
+		    <?php endif; ?>
+		</td>
+		
+		<td>
+        <?php if ($pluginInfo->installed): ?>
+            <?php if ($pluginInfo->canUpgrade): ?>
+                <?php if (has_permission('Plugins', 'upgrade')): ?>
+                    <form action="<?php echo uri('plugins/upgrade'); ?>" method="post" accept-charset="utf-8">     
+                            <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Upgrade</button>
+                            <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
+                    </form>
+                <?php endif; ?>
+            <?php else: ?>
+                <?php $activateOrDeactivate = ($pluginInfo->active) ? 'deactivate' : 'activate'; ?>
                 <?php if (has_permission('Plugins', 'activate')): ?>
-                    <form action="<?php echo uri('plugins/activate'); ?>" method="post" accept-charset="utf-8">
-                        <button name="" type="submit" class="<?php echo ($plugin->active) ? 'deactivate' : 'activate'; ?> submit submit-medium" value="<?php echo $plugin->directory; ?>"><?php echo ($plugin->active) ? 'De-activate' : 'Activate'; ?>
+                    <form action="<?php echo uri('plugins/' . $activateOrDeactivate); ?>" method="post" accept-charset="utf-8">
+                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?> submit-medium" value="<?php echo $pluginInfo->directoryName; ?>"><?php echo ($pluginInfo->active) ? 'Deactivate' : 'Activate'; ?>
                         </button>
-                        <input type="hidden" name="activate" value="<?php echo $plugin->directory; ?>" />
+                        <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
                     </form>                
                 <?php endif; ?>
                 <br />
@@ -49,46 +79,45 @@
                     <form action="<?php echo uri(array(
                         'controller'=>'plugins', 
                         'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
-                            <input type="submit" name="uninstall" class="uninstall submit submit-medium" value="Uninstall" />
-                            <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
+                            <button name="uninstall" type="submit" class="uninstall submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Uninstall</button>
+                            <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
                     </form>                
                 <?php endif; ?>
-            <?php else: ?>
-        	    <?php if (has_permission('Plugins', 'install')): ?>
-                            <form action="<?php echo uri('plugins/install'); ?>" method="post" accept-charset="utf-8">     
-                                    <button name="" type="submit" class="submit submit-medium" value="<?php echo $plugin->directory; ?>">Install</button>
-                                    <input type="hidden" name="name" value="<?php echo $plugin->directory; ?>" />
-                            </form> 
-                        <?php endif; ?>
-            <?php endif; ?></td>
+            <?php endif; ?>        
+    <?php else: //The plugin has not been installed yet ?>
+        <?php if (has_permission('Plugins', 'install')): ?>
+            <form action="<?php echo uri('plugins/install'); ?>" method="post" accept-charset="utf-8">     
+                    <button name="install" type="submit" class="submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Install</button>
+                    <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
+            </form> 
+        <?php endif; ?>
+    <?php endif; ?>
+    </td>
     </tr>
-    
-      <?php if(count($relatedPluginInfo) > 0): ?>
-            <tr class="related-plugin-info">
+    <?php if(count($relatedPluginInfo) > 0): ?>
+        <tr class="related-plugin-info">
           <td colspan="3">
                  <?php 
-                 $requiredPlugins = array();
-                 $optionalPlugins = array();
-
-                 foreach($relatedPluginInfo as $pluginName => $pluginInfo) {
-                     if($pluginInfo['type'] == 'required' && ($pluginInfo['is_installed'] == false || $pluginInfo['is_active'] == false || $pluginInfo['has_ini_file'] == false)) {
-                         $requiredPlugins[] = $pluginName;
+                 $requiredPluginDirNames = array();
+                 $optionalPluginDirNames = array();
+                 $relatedPluginInfo = get_related_plugin_info($pluginDirName);
+                 foreach($relatedPluginInfo as $relatedPluginDirName => $relatedPluginInfo) {
+                     if ($relatedPluginInfo['type'] == 'required' && ($relatedPluginInfo['is_installed'] == false || $relatedPluginInfo['is_active'] == false || $pluginInfo['has_ini_file'] == false)) {
+                         $requiredPluginDirNames[] = $relatedPluginDirName;
                      } else {
-                         $optionalPlugins[] = $pluginName;
+                         $optionalPluginDirNames[] = $relatedPluginDirName;
                      }
                  } 
                  ?>
-
-                 <?php if(count($requiredPlugins) > 0): ?>
+                 <?php if(count($requiredPluginDirNames) > 0): ?>
                      <div class="required-plugins">
-                     <p>The following plugins are required: <?php echo implode_array_to_english($requiredPlugins); ?>
-                     </p>
+                        <p>The following plugins are required: <?php echo implode_array_to_english($requiredPluginDirNames); ?></p>
                      </div>
                  <?php endif; ?>
              </td>
-               </tr>
+        </tr>
     <?php endif; ?>
-
+    
 <?php endforeach; ?>
 </tbody>
 </table>
