@@ -120,7 +120,7 @@
                         <p>To correctly use the '<?php echo html_escape($pluginInfo->name); ?>' plugin, 
                         you must first install and activate 
                         the <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
-                        plugin<?php if (count($requiredPluginNames) > 0) {echo 's';} ?>.</p>
+                        plugin<?php if (count($requiredPluginNames) > 1) {echo 's';} ?>.</p>
                      </div>
                  <?php endif; ?>
              </td>
