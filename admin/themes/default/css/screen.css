@@ -33,7 +33,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	h1 {color:#a74c29;}
 	h2,form legend {color:#467;}
 	
-	h1,h2,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
+	h1, #site-title, h2,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
 
 	/* Links */
 	a:link {color:#389;}
@@ -124,6 +124,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 /* == Wrap == */
 #wrap {}
 
+/* == Upgrade Database == */
+#upgrade-database {background: #378; color: #fff !important;overflow:auto; padding: 36px 36px 18px;}
+    #upgrade-database p {margin:0 0 18px; width: 396px; opacity:0.95;float:left;}
+    #upgrade-database h2 {color:#fff;float:left; margin-right: 36px;width: 270px;}
+    #upgrade-database-link {float:none; font-size:14px; padding: 6px 12px; display:block; clear:left; margin-left: 306px; margin-top: 36px;background-color: #58909E; border-color: #58909E;}
+    #upgrade-database-link:hover {background-color: #6B9CA8; border-color: #6B9CA8;}
 /* == Header == */
 #header {background:#251e16; padding-top: 0;clear:both;overflow:hidden; }
 

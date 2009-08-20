@@ -37,7 +37,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 		
 	input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
-    .submit, button {
+    .submit, button, .button {
         text-align:center;
         text-decoration:none;
         color:#fff !important;
