@@ -15,7 +15,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	font-size: 100%;
 	font-family: inherit;
 	text-align: left;
-	vertical-align: baseline;
+	vertical-align: top;
 }
 a img, :link img, :visited img {
 	border: 0;

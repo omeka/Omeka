@@ -32,12 +32,28 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 form {overflow:hidden; zoom:1;}
 div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 	
-	label, div.label {font-size:1.2em; color:#467;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
+	label, div.label {font-size:1.2em; color:#444;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
 	label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
 		
 	input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
-	input.submit {clear:both; font-size:1.1em;margin:18px 0;background-color:#389 !important; float:right; color:#fff;}
+    .submit, button {
+        text-align:center;
+        text-decoration:none;
+        color:#fff !important;
+	    clear:both; 
+	    margin:9px 0;
+	    background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
+	    float:right; 
+	    color:#fff;
+	    padding: 3px;
+	    width: 100px; 
+	    border:none; 
+	    border:1px solid #6d8e1d;
+	    border-radius:6px;
+	    -webkit-border-radius:6px;
+	    -moz-border-radius:6px;
+	}
 	
 	input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
 	
@@ -46,20 +62,19 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	#required-note {font-size: 0.6em; color: #777; display: block;}
     
 	/* Submit buttons - different sizes, uses background images */
-	.submit-extrasmall {background:none; color:#fff;border:none;width: 46px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-extrasmall.gif") 0 -30px no-repeat !important;}
-	.submit-small {background:none; color:#fff;border:none;width: 70px; height: 30px; _overflow:hidden; background:#333 url("../images/submit-small.gif") 0 -30px no-repeat !important;}
-	.submit-medium {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("../images/buttons-medium.gif") 0 -60px no-repeat !important;}
-	.submit-medium:hover, .submit-small:hover, .submit-extrasmall:hover {background-position:0 0 !important;cursor:pointer;}
+	.submit-extrasmall {width: 46px;}
+	.submit-small {width: 70px;}
+	.submit-medium {width: 100px;}
 
 	/* Plugins */
-	.uninstall {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#fff url("../images/buttons-medium.gif") 0 -120px no-repeat !important;}
-		.deactivate {background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#fff url("../images/buttons-medium.gif") 0 -90px no-repeat !important;}
+	.uninstall {background-color: #800 !important; border-color: #800 !important;}
+	.deactivate {background-color:#c60 !important; border-color: #c60 !important;}
 		
-		.uninstall:hover, 
-		.deactivate:hover {background-position: 0 -30px !important;}
+	.uninstall:hover, 
+	.deactivate:hover {}
 
 	/* Replaces tooltips */
-	.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; clear:both;}
+	.field .explanation {font-size:11px; margin-bottom:0;color: #999; clear:both;}
 	#item-form .field .explanation, #editfile .field .explanation {margin-left:216px; float:left; clear:right;}
 	
 	/* Changes the width of inputs depending on the layout */
@@ -150,6 +165,8 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 .add-element,
 .remove-element
 {background-position: 12px 50%; background-repeat:no-repeat; padding-left: 32px; text-decoration:none;}
+
+table .edit, table .delete, table .researcher, table .super, table .admin, table .contributor {background-position:0px 50%; padding-left:18px;}
 
 .go,
 .next a
