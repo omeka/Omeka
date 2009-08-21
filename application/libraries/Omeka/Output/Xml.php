@@ -223,25 +223,29 @@ abstract class Omeka_Output_Xml
         $itemTypeElement = $this->_createElement('itemType', null, $itemType->id);
         $nameElement = $this->_createElement('name', $itemType->name, null, $itemTypeElement);
         $descriptionElement = $this->_createElement('description', $itemType->description, null, $itemTypeElement);
-        // elementContainer
-        $elementContainerElement = $this->_createElement('elementContainer');
-        foreach ($itemType->elements as $elementId => $element) {
-            // element
-            $elementElement = $this->_createElement('element', null, $elementId);
-            $nameElement = $this->_createElement('name', $element->name, null, $elementElement);
-            $descriptionElement = $this->_createElement('description', $element->description, null, $elementElement);
-            // elementTextContainer
-            $elementTextContainerElement = $this->_createElement('elementTextContainer');
-            foreach ($element->elementTexts as $elementTextId => $elementText) {
-                // elementText
-                $elementTextElement = $this->_createElement('elementText', null, $elementTextId);
-                $textElement = $this->_createElement('text', $elementText->text, null, $elementTextElement);
-                $elementTextContainerElement->appendChild($elementTextElement);
+        
+        // Do not append elements if no element texts exist for this item type.
+        if (count($itemType->elements)) {
+            // elementContainer
+            $elementContainerElement = $this->_createElement('elementContainer');
+            foreach ($itemType->elements as $elementId => $element) {
+                // element
+                $elementElement = $this->_createElement('element', null, $elementId);
+                $nameElement = $this->_createElement('name', $element->name, null, $elementElement);
+                $descriptionElement = $this->_createElement('description', $element->description, null, $elementElement);
+                // elementTextContainer
+                $elementTextContainerElement = $this->_createElement('elementTextContainer');
+                foreach ($element->elementTexts as $elementTextId => $elementText) {
+                    // elementText
+                    $elementTextElement = $this->_createElement('elementText', null, $elementTextId);
+                    $textElement = $this->_createElement('text', $elementText->text, null, $elementTextElement);
+                    $elementTextContainerElement->appendChild($elementTextElement);
+                }
+                $elementElement->appendChild($elementTextContainerElement);
+                $elementContainerElement->appendChild($elementElement);
             }
-            $elementElement->appendChild($elementTextContainerElement);
-            $elementContainerElement->appendChild($elementElement);
+            $itemTypeElement->appendChild($elementContainerElement);
         }
-        $itemTypeElement->appendChild($elementContainerElement);
         $parentElement->appendChild($itemTypeElement);
     }
     
