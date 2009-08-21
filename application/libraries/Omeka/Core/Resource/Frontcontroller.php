@@ -102,6 +102,10 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
     static public function getDefaultResponseContexts()
     {
         return array(
+             'omeka-xml' => array(
+                'suffix'  => 'omeka-xml', 
+                'headers' => array('Content-Type' => 'text/xml')
+             ), 
              'dcmes-xml' => array(
                  'suffix'    => 'dcmes-xml',
                  'headers'   => array('Content-Type' => 'text/xml')

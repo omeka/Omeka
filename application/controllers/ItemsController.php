@@ -23,7 +23,7 @@ class ItemsController extends Omeka_Controller_Action
 {
     public $contexts = array(
             'browse' => array('json', 'dcmes-xml', 'rss2'),
-            'show'   => array('json', 'dcmes-xml')
+            'show'   => array('json', 'dcmes-xml', 'omeka-xml')
     );
     
     public function init() 
