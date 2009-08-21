@@ -19,9 +19,7 @@
  * object as the first argument to all implementations of that hook. 
  **/
 class Omeka_Plugin_Broker 
-{
-    protected $_pluginPaths = array();
-    
+{    
     protected $_basePath = array();
     
     /**
@@ -54,6 +52,13 @@ class Omeka_Plugin_Broker
     protected $_active = array();
     
     /**
+      * An array of all plugin directory names for plugins that have been loaded
+      *
+      * @var array
+      **/
+    protected $_loaded = array();
+    
+    /**
      * An array of plugin directory names for upgradable plugins
      *
      * @var array
@@ -83,7 +88,7 @@ class Omeka_Plugin_Broker
       * @var array
       **/
     protected $_required = array();
-    
+        
     /**
      * The directory name of the current plugin (used for calling hooks)
      *
@@ -98,7 +103,7 @@ class Omeka_Plugin_Broker
      **/
     protected $_media = array('callbacks'=>array(), 'options'=>array());    
         
-    //View script directories that have been added by plugins
+    // View script directories that have been added by plugins
     protected $_pluginViewDirs = array();
             
     public function __construct($db, $pathToPlugins) 
@@ -161,35 +166,51 @@ class Omeka_Plugin_Broker
         Zend_Registry::set('pluginbroker', $this);     
         foreach ($this->_active as $pluginDirName) {
             $this->load($pluginDirName);
-        } 
+        }
     }
-    
+        
     /**
      * Loads a plugin (and make sure the plugin API is available)
      * 
-     * Note: Loading a plugin, activates it for the remainder of the request, 
-     * but it does not change its active status in the database
+     * To be loaded, the plugin must be installed and active.
+     * If loaded, the plugin will attempt to first load all plugins, both required and optional, that the plugin uses.  
+     * However, it will not load a plugin that it uses, if that plugin is not installed and activated
+     * 
+     * @param string $pluginDirName The directory name of the plugin to load
+     * @param array $pluginDirNamesWaitingToBeLoaded The array of the directory names of dependent plugins waiting to be loaded
      * @return void
      **/
-    public function load($pluginDirName)
+    public function load($pluginDirName, $pluginDirNamesWaitingToBeLoaded = array())
     {
-        $pluginPath = $this->getPluginFilePath($pluginDirName);
-        if (file_exists($pluginPath)) {
+        if ($this->isInstalled($pluginDirName) && 
+            !$this->isLoaded($pluginDirName) && 
+            !in_array($pluginDirName, $pluginDirNamesWaitingToBeLoaded)) {
             
-            //activate the plugin for the remainder of the request
-            $this->_active[$pluginDirName] = $pluginDirName;
+            $pluginPath = $this->getPluginFilePath($pluginDirName);
+            if (file_exists($pluginPath)) {
+
+                // first, load the plugins that this plugin uses
+                $usedPluginDirNames = array_merge($this->getRequiredPluginDirNames($pluginDirName), $this->getOptionalPluginDirNames($pluginDirName));
+                if (count($usedPluginDirNames) > 0) {
+                    $pluginDirNamesWaitingToBeLoaded[] = $pluginDirName;
+                    foreach($usedPluginDirNames as $usedPluginDirName) {
+                        $this->load($usedPluginDirName, $pluginDirNamesWaitingToBeLoaded);
+                    }
+                }
+
+                // set the current plugin
+                $this->setCurrentPluginDirName($pluginDirName);
+
+                // add the plugin dir paths and require the plugin files
+                $this->addApplicationDirs($pluginDirName);
+                require_once $pluginPath;
+
+                // set the current plugin back to null
+                $this->setCurrentPluginDirName(null);
                 
-            $this->_pluginPaths[$pluginDirName] = $pluginPath;
-            
-            // set the current plugin
-            $this->setCurrentPluginDirName($pluginDirName);
-            
-            // add the plugin dir paths and require the plugin files
-            $this->addApplicationDirs($pluginDirName);
-            require_once $pluginPath;
-            
-            // set the current plugin back to null
-            $this->setCurrentPluginDirName(null);
+                // remember that the plugin is loaded
+                $this->_loaded[$pluginDirName] = $pluginDirName;
+            }
         }
     }
     
@@ -283,6 +304,17 @@ class Omeka_Plugin_Broker
     }
     
     /**
+     * Returns whether a plugin is loaded or not
+     * 
+     * @param string $pluginDirName
+     * @return boolean
+     **/
+    public function isLoaded($pluginDirName)
+    {
+        return in_array($pluginDirName, $this->_loaded);
+    }
+    
+    /**
      * Returns whether the plugin has both a plugin.php file and a plugin.ini file
      * 
      * @param string $pluginDirName
@@ -338,8 +370,13 @@ class Omeka_Plugin_Broker
         
         if ($this->canUpgrade($pluginDirName)) {
             
-            // load the plugin files
+            // get the plugin object
             $plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName);            
+            
+            // activate the plugin for the remainder of the request, so that it can be loaded
+            $this->_active[$pluginDirName] = $pluginDirName;
+            
+            // load the plugin files
             $this->load($pluginDirName);
             
             // let the plugin do the upgrade
@@ -720,9 +757,14 @@ class Omeka_Plugin_Broker
     {
         if ($this->_required[$pluginDirName] == null) {            
             $this->_required[$pluginDirName] = array();
-            $rPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'required_plugins')));
-            if(count($rPluginDirNames) == 1 && trim($rPluginDirNames[0]) == '') {
+            $rrPluginDirNames = explode(',', trim($this->getPluginIniValue($pluginDirName, 'required_plugins')));
+            if(count($rrPluginDirNames) == 1 && trim($rrPluginDirNames[0]) == '') {
                 $rPluginDirNames = array();
+            } else {
+                $rPluginDirNames = array();
+                foreach($rrPluginDirNames as $rrPluginDirName) {
+                    $rPluginDirNames[] = trim($rrPluginDirName);
+                }
             }
             $this->_required[$pluginDirName] = $rPluginDirNames;
         }
@@ -740,9 +782,14 @@ class Omeka_Plugin_Broker
     {
         if ($this->_optional[$pluginDirName] == null) {
             $this->_optional[$pluginDirName] = array();
-            $oPluginDirNames = explode(',', trim(get_plugin_ini($pluginDirName, 'optional_plugins')));
-            if(count($oPluginDirNames) == 1 && trim($oPluginDirNames[0]) == '') {
+            $ooPluginDirNames = explode(',', trim($this->getPluginIniValue($pluginDirName, 'optional_plugins')));
+            if(count($ooPluginDirNames) == 1 && trim($ooPluginDirNames[0]) == '') {
                 $oPluginDirNames = array();
+            } else {
+                $oPluginDirNames = array();
+                foreach($ooPluginDirNames as $ooPluginDirName) {
+                    $oPluginDirNames[] = trim($ooPluginDirName);
+                }
             }
             $this->_optional[$pluginDirName] = $oPluginDirNames;
         }
