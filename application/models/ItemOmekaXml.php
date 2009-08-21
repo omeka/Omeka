@@ -1,13 +1,15 @@
 <?php
 class ItemOmekaXml extends Omeka_Output_Xml
 {
-    protected function _buildDoc()
+    protected function _buildNode()
     {
         // item
-        $itemElement = $this->_createRootElement('item');
+        $itemElement = $this->_createElement('item', null, $this->_record->id);
         
-        // fileContainer
-        $this->_buildFileContainerForItem($this->_record, $itemElement);
+        if ('item' == $this->_context) {
+            // fileContainer
+            $this->_buildFileContainerForItem($this->_record, $itemElement);
+        }
         
         // collection
         $this->_buildCollectionForItem($this->_record, $itemElement);
@@ -21,6 +23,6 @@ class ItemOmekaXml extends Omeka_Output_Xml
         // tagContainer
         $this->_buildTagContainerForItem($this->_record, $itemElement);
         
-        $this->_doc->appendChild($itemElement);
+        $this->_node = $itemElement;
     }
 }

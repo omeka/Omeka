@@ -23,6 +23,10 @@ require_once 'Omeka/Controller/Action.php';
  **/
 class FilesController extends Omeka_Controller_Action
 {
+    public $contexts = array(
+        'show' => array('omeka-xml')
+    );
+    
     public function init()
     {
         $this->_modelClass = 'File';

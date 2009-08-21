@@ -1,39 +1,89 @@
 <?php
-// think about wrapping everything in an rdf, like output=dcmes-xml
-// think about some way to include the URL
 abstract class Omeka_Output_Xml
 {
-    const XMLNS_XSI = 'http://www.w3.org/2001/XMLSchema-instance';
-    const XMLNS = 'http://www.omeka.org/schema/omeka-xml';
+    const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
+    const XMLNS                = 'http://www.omeka.org/schema/omeka-xml';
     const XMLNS_SCHEMALOCATION = 'http://www.omeka.org/schema/omeka-xml/2009-08-18/omeka-xml.xsd';
     
+    /**
+     * This class' contextual record.
+     * @var Omeka_Record
+     */
     protected $_record;
+
+    /**
+     * The context of this DOMDocument. Determines how buildNode() builds the 
+     * elements. Valid contexts include: item, file.
+     * 
+     * @var string
+     */
+    protected $_context;
+    
+    /**
+     * The final document object.
+     * @var DOMDocument
+     */
     protected $_doc;
     
-    abstract protected function _buildDoc();
+    /**
+     * The node built and set in child::_buildNode()
+     * @var DOMNode
+     */
+    protected $_node;
     
-    public function __construct($record)
+    /**
+     * Abstract method. child::_buildNode() should set self::$_node.
+     */
+    abstract protected function _buildNode();
+    
+    /**
+     * @param Omeka_Record $record
+     * @param string $context The context of this DOM document.
+     * @return void
+     */
+    public function __construct(Omeka_Record $record, $context)
     {
         $this->_record = $record;
+        $this->_context = $context;
         $this->_doc = new DOMDocument('1.0', 'UTF-8');
         $this->_doc->formatOutput = true;
-        $this->_buildDoc();
+        $this->_buildNode();
     }
     
+    /**
+     * Get the document object.
+     * 
+     * @return DOMDocument
+     */
     public function getDoc()
     {
+        $this->_doc->appendChild($this->_setRootElement($this->_node));
         return $this->_doc;
     }
     
-    protected function _createRootElement($name)
+    /**
+     * Set an element as root.
+     * 
+     * @param DOMElement $rootElement
+     * @return DOMElement The root element, including required attributes.
+     */
+    protected function _setRootElement($rootElement)
     {
-        $rootElement = $this->_doc->createElementNS(self::XMLNS, $name);
+        $rootElement->setAttribute('xmlns', self::XMLNS);
         $rootElement->setAttribute('xmlns:xsi', self::XMLNS_XSI);
         $rootElement->setAttribute('xsi:schemaLocation', self::XMLNS_SCHEMALOCATION);
-        $rootElement->setAttribute("{$name}Id", $this->_record->id);
         return $rootElement;
     }
     
+    /**
+     * Create a DOM element.
+     * 
+     * @param string $name The name of the element.
+     * @param null|string The value of the element.
+     * @param null|int The id attribute of the element.
+     * @param null|DOMElement The parent element.
+     * @return DOMElement
+     */
     protected function _createElement($name, $value = null, $id = null, $parentElement = null)
     {
         $element = $this->_doc->createElement($name);
@@ -106,11 +156,11 @@ abstract class Omeka_Output_Xml
     }
     
     /**
-     * Build an elementSetContainer element, in a record (Item or File) context.
+     * Build an elementSetContainer element in a record (item or file) context.
      * 
      * @param Omeka_Record $record The record from which to build element sets.
-     * @param DOMElement|null $parentElement The element set container will 
-     *        append to this parent element.
+     * @param DOMElement $parentElement The element set container will append to 
+     * this element.
      * @return void|null
      */
     protected function _buildElementSetContainerForRecord(Omeka_Record $record, DOMElement $parentElement)
@@ -122,10 +172,10 @@ abstract class Omeka_Output_Xml
             return null;
         }
         
+        // elementSetContainer
+        $elementSetContainerElement = $this->_createElement('elementSetContainer');
         foreach ($elementSets->elementSets as $elementSetId => $elementSet) {
-            // elementSetContainer
-            $elementSetContainerElement = $this->_createElement('elementSetContainer');
-            // elementSet
+             // elementSet
             $elementSetElement = $this->_createElement('elementSet', null, $elementSetId);
             $nameElement = $this->_createElement('name', $elementSet->name, null, $elementSetElement);
             $descriptionElement = $this->_createElement('description', $elementSet->description, null, $elementSetElement);
@@ -149,16 +199,15 @@ abstract class Omeka_Output_Xml
             }
             $elementSetElement->appendChild($elementContainerElement);
             $elementSetContainerElement->appendChild($elementSetElement);
-            $parentElement->appendChild($elementSetContainerElement);
         }
+        $parentElement->appendChild($elementSetContainerElement);
     }
     
     /**
-     * Build an itemType element, in an Item context.
+     * Build an itemType element in an item context.
      * 
      * @param Item $item The item from which to build the item type.
-     * @param DOMElement|null $parentElement The item type will append to this 
-     *        parent element.
+     * @param DOMElement $parentElement The item type will append to this element.
      * @return void|null
      */
     protected function _buildItemTypeForItem(Item $item, DOMElement $parentElement)
@@ -196,6 +245,14 @@ abstract class Omeka_Output_Xml
         $parentElement->appendChild($itemTypeElement);
     }
     
+    /**
+     * Build a fileContainer element in an item context.
+     * 
+     * @param Item $item The item from which to build the file container.
+     * @param DOMElement $parentElement The file container will append to this 
+     * element.
+     * @return void|null
+     */
     protected function _buildFileContainerForItem(Item $item, DOMElement $parentElement)
     {
         // Return if the item has no files.
@@ -206,16 +263,21 @@ abstract class Omeka_Output_Xml
         // fileContainer
         $fileContainerElement = $this->_createElement('fileContainer');
         foreach ($item->Files as $file) {
-            // file
-            $fileElement = $this->_createElement('file', null, $file->id);
-            $srcElement = $this->_createElement('src', WEB_ARCHIVE . "/{$file->archive_filename}", null, $fileElement);
-            $authenticationElement = $this->_createElement('authentication', $file->authentication, null, $fileElement);
-            $this->_buildElementSetContainerForRecord($file, $fileElement);
+            $fileOmekaXml = new FileOmekaXml($file, $this->_context);
+            $fileElement = $this->_doc->importNode($fileOmekaXml->_node, true);
             $fileContainerElement->appendChild($fileElement);
         }
         $parentElement->appendChild($fileContainerElement);
     }
     
+    /**
+     * Build a collection element in an item context.
+     * 
+     * @param Item $item The item from which to build the collection.
+     * @param DOMElement $parentElement The collection will append to this 
+     * element.
+     * @return void|null
+     */
     protected function _buildCollectionForItem(Item $item, DOMElement $parentElement)
     {
         // Return if the item has no collection.
@@ -230,6 +292,14 @@ abstract class Omeka_Output_Xml
         $parentElement->appendChild($collectionElement);
     }
     
+    /**
+     * Build a tagContainer element in an item context.
+     * 
+     * @param Item $item The item from which to build the tag container.
+     * @param DOMElement $parentElement The tag container will append to this 
+     * element.
+     * @return void|null
+     */
     protected function _buildTagContainerForItem(Item $item, DOMElement $parentElement)
     {
         // Return if the item has no tags.
