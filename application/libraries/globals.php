@@ -267,8 +267,11 @@ function get_plugin_broker()
  **/
 function get_plugin_ini($pluginDirName, $iniKeyName)
 {         
-    $pluginBroker = Omeka_Context::getInstance()->getPluginBroker();    
-    return $pluginBroker->getPluginIniValue($pluginDirName, $iniKeyName);
+    if ($pluginBroker = Omeka_Context::getInstance()->getPluginBroker()) {
+        return $pluginBroker->getPluginIniValue($pluginDirName, $iniKeyName);
+    } else {
+        return '';
+    }
 }
 
 /**
