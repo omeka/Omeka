@@ -182,19 +182,39 @@ class Omeka_Plugin_Broker
      **/
     public function load($pluginDirName, $pluginDirNamesWaitingToBeLoaded = array())
     {
+        //echo 'trying to load plugin ' . $pluginDirName . '<br/>';                
+        
         if ($this->isInstalled($pluginDirName) && 
-            !$this->isLoaded($pluginDirName) && 
+            $this->isActive($pluginDirName) && 
+            !($this->isLoaded($pluginDirName)) &&
             !in_array($pluginDirName, $pluginDirNamesWaitingToBeLoaded)) {
-            
+                        
             $pluginPath = $this->getPluginFilePath($pluginDirName);
             if (file_exists($pluginPath)) {
 
-                // first, load the plugins that this plugin uses
-                $usedPluginDirNames = array_merge($this->getRequiredPluginDirNames($pluginDirName), $this->getOptionalPluginDirNames($pluginDirName));
-                if (count($usedPluginDirNames) > 0) {
-                    $pluginDirNamesWaitingToBeLoaded[] = $pluginDirName;
-                    foreach($usedPluginDirNames as $usedPluginDirName) {
-                        $this->load($usedPluginDirName, $pluginDirNamesWaitingToBeLoaded);
+                // add the current plugin to directory names waiting to be loaded
+                $pluginDirNamesWaitingToBeLoaded[] = $pluginDirName;
+                
+                // load the required plugins for the plugin
+                $requiredPluginDirNames = $this->getRequiredPluginDirNames($pluginDirName);
+                if (count($requiredPluginDirNames) > 0) {
+                    foreach($requiredPluginDirNames as $requiredPluginDirName) {
+                        $this->load($requiredPluginDirName, $pluginDirNamesWaitingToBeLoaded);
+                        
+                        // make sure the required plugin is loaded.
+                        // if a required plugin of the plugin cannot be loaded, 
+                        // then do not load the plugin
+                        if (!($this->isLoaded($requiredPluginDirName))) {
+                            return;
+                        }
+                    }
+                }
+
+                // load the optional plugins for the plugin
+                $optionalPluginDirNames = $this->getOptionalPluginDirNames($pluginDirName);
+                if (count($optionalPluginDirNames) > 0) {
+                    foreach($optionalPluginDirNames as $optionalPluginDirName) {
+                        $this->load($optionalPluginDirName, $pluginDirNamesWaitingToBeLoaded);
                     }
                 }
 
@@ -210,6 +230,8 @@ class Omeka_Plugin_Broker
                 
                 // remember that the plugin is loaded
                 $this->_loaded[$pluginDirName] = $pluginDirName;
+                
+                //echo 'plugin loaded ' . $pluginDirName . '<br/>';                
             }
         }
     }
@@ -392,7 +414,7 @@ class Omeka_Plugin_Broker
             $plugin->forceSave();
             
             // remove the plugin from the list of upgradable plugins
-            unset($_upgradeable[$pluginDirName]);
+            unset($this->_upgradeable[$pluginDirName]);
             
             // activate the plugin
             $this->activate($pluginDirName);
@@ -413,7 +435,7 @@ class Omeka_Plugin_Broker
         if ($plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName)) {
             $plugin->active = 1;
             $plugin->forceSave();
-            $_active[$pluginDirName] = $pluginDirName;
+            $this->_active[$pluginDirName] = $pluginDirName;
         } else {
             throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to activate.");
         }
@@ -430,7 +452,7 @@ class Omeka_Plugin_Broker
         if ($plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName)) {
             $plugin->active = 0;
             $plugin->forceSave();
-            unset($_active[$pluginDirName]);
+            unset($this->_active[$pluginDirName]);
         } else {
             throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to deactivate.");
         }

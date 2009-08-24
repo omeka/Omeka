@@ -105,7 +105,10 @@
                  $requiredPluginNames = array();
                  foreach($requiredPluginDirNames as $requiredPluginDirName):
                      $requiredPluginInfo = $pluginInfos[$requiredPluginDirName];
-                     if (!$requiredPluginInfo || !($requiredPluginInfo->installed) || !($requiredPluginInfo->active) || !($requiredPluginInfo->hasPluginFiles)):
+                     if (!$requiredPluginInfo || 
+                         !($requiredPluginInfo->installed) || 
+                         !($requiredPluginInfo->active) || 
+                         !($requiredPluginInfo->hasPluginFiles)):
                          if (!$requiredPluginInfo) {
                               $requiredPluginName = $requiredPluginDirName;
                           } else {
@@ -117,10 +120,19 @@
                  ?>
                  <?php if(count($requiredPluginNames) > 0): ?>
                      <div class="required-plugins">
-                        <p>To correctly use the '<?php echo html_escape($pluginInfo->name); ?>' plugin, 
-                        you must first install and activate 
-                        the <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
-                        plugin<?php if (count($requiredPluginNames) > 1) {echo 's';} ?>.</p>
+                        <?php if ($pluginInfo->active): ?>
+                            <p>The '<?php echo html_escape($pluginInfo->name); ?>' plugin was not loaded because 
+                            the following plugins need to be 
+                            installed, activated, and loaded: 
+                            <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
+                            plugin<?php if (count($requiredPluginNames) > 1) { echo 's';} ?>.</p>
+                        <?php else: ?>
+                            <p>The '<?php echo html_escape($pluginInfo->name); ?>' plugin requires 
+                              the following plugins to be 
+                              installed, activated, and loaded: 
+                              <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
+                              plugin<?php if (count($requiredPluginNames) > 1) { echo 's';} ?>.</p>
+                        <?php endif; ?>
                      </div>
                  <?php endif; ?>
              </td>

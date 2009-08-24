@@ -95,6 +95,8 @@ class PluginsController extends Omeka_Controller_Action
      **/
     public function activateAction()
     {
+        $broker = $this->_pluginBroker;
+        
         $pluginDirName = (string) $this->_getParam('name');
         if (!$pluginDirName) {
             $this->errorAction();
@@ -105,8 +107,15 @@ class PluginsController extends Omeka_Controller_Action
         
         // Activate the plugin
         try {
-           $this->_pluginBroker->activate($pluginDirName);
-           $this->flashSuccess("Plugin named '" . $pluginInfo->name . "' was activated!");
+           $broker->activate($pluginDirName);
+           
+           // check to make sure the plugin can be loaded
+           $broker->load($pluginDirName);
+           if ($broker->isLoaded($pluginDirName)) {
+               $this->flashSuccess("Plugin named '" . $pluginInfo->name . "' was activated!");
+           } else {
+               $this->flashError("Plugin named '" . $pluginInfo->name . "' was activated, but could not be loaded.  See the plugin below for details.");
+           }
         } catch (Exception $e) {
             $this->flashError("The following error occurred while activating the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
         }
