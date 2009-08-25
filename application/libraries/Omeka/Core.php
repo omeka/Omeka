@@ -37,7 +37,6 @@ class Omeka_Core extends Zend_Application
                                'initializeLogger' => 'Logger', 
                                'initializeDb' => 'Db', 
                                'initializeOptions' => 'Options',
-                               'initializeSearch' => 'Search', 
                                'initializePluginBroker' => 'PluginBroker', 
                                'initializeSession' => 'Session',
                                'initializePlugins' => 'Plugins',
