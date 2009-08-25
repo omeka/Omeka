@@ -126,12 +126,12 @@ class Omeka_Plugin_Broker
         // Get the list of currently installed plugin directory names and list of the active plugin directory names
         $this->_active = array();
         $this->_installed = array();
-        
+                
         // Loop through the installed plugins and add the plugin directory names to a list. 
         // Deactive upgradable plugins, and add their names to a list.        
         // Finally, add the active plugin directory names to a list.
-        $plugins = $this->_db->getTable('Plugin')->findAll();
-        foreach ($plugins as $plugin) {
+        $plugins = $this->_db->getTable('Plugin')->findAll();        
+        foreach ($plugins as $plugin) {            
             
             // Get the plugin directory name
             $pluginDirName = $plugin->name;
@@ -139,16 +139,13 @@ class Omeka_Plugin_Broker
             // Add the plugin directory name to the list of installed plugin directory names
             $this->_installed[$pluginDirName] = $pluginDirName;
             
-            // If the plugin is upgradable, then deactive it and store its directory name in a list
-            if (version_compare($this->getPluginIniValue($pluginDirName, 'version'), $plugin->version, '>')) {
-                if ($plugin->active) {
-                    $plugin->active = 0;
-                    $plugin->forceSave();
-                }
+            // If the plugin is upgradable, then store its directory name in a list
+            if (version_compare($this->getPluginIniValue($pluginDirName, 'version'), $plugin->version, '>')) {                
                 $this->_upgradeable[$pluginDirName] = $pluginDirName;
-            }
+            } 
             
-            // If a plugin is active, store its plugin directory name in a list
+            // If a plugin is active and not upgradable, 
+            // then store its plugin directory name in a list
             if ($plugin->active) {
                 // Add the plugin directory name to the list of active plugin directory names
                 $this->_active[$pluginDirName] = $pluginDirName;
@@ -172,7 +169,7 @@ class Omeka_Plugin_Broker
     /**
      * Loads a plugin (and make sure the plugin API is available)
      * 
-     * To be loaded, the plugin must be installed and active.
+     * To be loaded, the plugin must be installed, active, and not upgradeable.
      * If loaded, the plugin will attempt to first load all plugins, both required and optional, that the plugin uses.  
      * However, it will not load a plugin that it uses, if that plugin is not installed and activated
      * 
@@ -187,6 +184,7 @@ class Omeka_Plugin_Broker
         if ($this->isInstalled($pluginDirName) && 
             $this->isActive($pluginDirName) && 
             !($this->isLoaded($pluginDirName)) &&
+            !($this->canUpgrade($pluginDirName)) &&
             !in_array($pluginDirName, $pluginDirNamesWaitingToBeLoaded)) {
                         
             $pluginPath = $this->getPluginFilePath($pluginDirName);
