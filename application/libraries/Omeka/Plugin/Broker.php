@@ -144,10 +144,8 @@ class Omeka_Plugin_Broker
                 $this->_upgradeable[$pluginDirName] = $pluginDirName;
             } 
             
-            // If a plugin is active and not upgradable, 
-            // then store its plugin directory name in a list
+            // If a plugin is active then store its plugin directory name in a list
             if ($plugin->active) {
-                // Add the plugin directory name to the list of active plugin directory names
                 $this->_active[$pluginDirName] = $pluginDirName;
             }
         }    
