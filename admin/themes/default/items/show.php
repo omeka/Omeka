@@ -147,6 +147,17 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
         	<?php endif;?>
         	</div>
 	</div>
+
+    <div class="info-panel">
+        <h2>Output Formats</h2>
+        <div>
+            <ul>
+            <?php foreach (current_action_contexts() as $actionContext): ?>
+                <li><a href="<?php echo uri() . "?output=$actionContext" ?>"><?php echo $actionContext; ?></a></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
 	
 	<?php fire_plugin_hook('admin_append_to_items_show_secondary', $item); ?>
 </div>

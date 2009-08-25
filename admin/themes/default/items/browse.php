@@ -67,6 +67,11 @@
 	<h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
 <?php endif; ?>
 
+<div>
+    <h2>Output Formats</h2>
+    <?php echo output_format_list(false); ?>
+</div>
+
 <?php fire_plugin_hook('admin_append_to_items_browse_primary', $items); ?>
 
 </div>

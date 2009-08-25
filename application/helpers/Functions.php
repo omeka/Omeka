@@ -202,3 +202,55 @@ function loop_records($recordType, $records)
     unset($recordLoop[$recordType]);
     return false;
 }
+
+/**
+ * Get all output formats available in the current action.
+ * 
+ * @return array A sorted list of contexts.
+ */
+function current_action_contexts()
+{
+    $actionName = Omeka_Context::getInstance()->getRequest()->getActionName();
+    $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch')->getActionContexts($actionName);
+    sort($contexts);
+    return $contexts;
+}
+
+/**
+ * Builds an HTML list containing all available output format contexts for the 
+ * current action.
+ * 
+ * @param bool True = unordered list; False = use delimiter
+ * @param string If the first argument is false, use this as a delimiter.
+ * @return string HTML
+ */
+function output_format_list($list = true, $delimiter = ' | ')
+{
+    $actionContexts = current_action_contexts();
+    
+    // Do not display the list if there are no output formats available in the 
+    // current action.
+    if (empty($actionContexts)) {
+        return;
+    }
+    
+    // Unordered list format.
+    if ($list) {
+        $html .= '<ul id="output-format-list">';
+        foreach ($actionContexts as $key => $actionContext) {
+            $html .= '<li><a href="' . uri() . '?output=' . $actionContext . '">' . $actionContext . '</a></li>';
+        }
+        $html .= '</ul>';
+    
+    // Delimited format.
+    } else {
+        $html .= '<p id="output-format-list">';
+        foreach ($actionContexts as $key => $actionContext) {
+            $html .= '<a href="' . uri() . '?output=' . $actionContext . '">' . $actionContext . '</a>';
+            $html .= (count($actionContexts) - 1) == $key ? '' : $delimiter;
+        }
+        $html .= '</p>';
+    }
+    
+    return $html;
+}
