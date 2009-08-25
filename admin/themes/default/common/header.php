@@ -39,7 +39,7 @@
 
             <?php if (has_permission('Upgrade', 'migrate')): ?>
                 Please backup your existing database and then upgrade:</p>
-                <?php echo link_to('upgrade', null, 'Upgrade', array('id' => 'upgrade-database-link', 'class'=>'button')); ?>                    
+                <?php echo link_to('upgrade', 'migrate', 'Upgrade', array('id' => 'upgrade-database-link', 'class'=>'button')); ?>                    
                 
             <?php else: ?>
                 Please notify an administrator to upgrade the database.</p>
