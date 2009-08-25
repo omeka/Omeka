@@ -31,8 +31,8 @@ class Omeka_Core_Resource_Db extends Zend_Application_Resource_Db
         
         // 'port' parameter was introduced in 0.10, conditional check needed
         // for backwards compatibility.
-        if (isset($db->port)) {
-            $connectionParams['port'] = $db->port;
+        if (isset($dbIni->port)) {
+            $connectionParams['port'] = $dbIni->port;
         }
         
         $dbh = Zend_Db::factory('Mysqli', $connectionParams);
