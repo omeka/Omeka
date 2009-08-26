@@ -1,5 +1,5 @@
 <?php
-abstract class Omeka_Output_Xml
+abstract class Omeka_Output_Xml_Abstract
 {
     const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
     const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v1';
@@ -267,7 +267,7 @@ abstract class Omeka_Output_Xml
         // fileContainer
         $fileContainerElement = $this->_createElement('fileContainer');
         foreach ($item->Files as $file) {
-            $fileOmekaXml = new FileOmekaXml($file, $this->_context);
+            $fileOmekaXml = new Omeka_Output_Xml_File($file, $this->_context);
             $fileElement = $this->_doc->importNode($fileOmekaXml->_node, true);
             $fileContainerElement->appendChild($fileElement);
         }

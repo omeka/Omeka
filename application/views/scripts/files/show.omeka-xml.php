@@ -1,3 +1,3 @@
 <?php
-$omekaXml = new FileOmekaXml($file, 'file');
+$omekaXml = new Omeka_Output_Xml_File($file, 'file');
 echo $omekaXml->getDoc()->saveXML();

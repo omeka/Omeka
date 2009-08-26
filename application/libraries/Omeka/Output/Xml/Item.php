@@ -1,5 +1,5 @@
 <?php
-class ItemOmekaXml extends Omeka_Output_Xml
+class Omeka_Output_Xml_Item extends Omeka_Output_Xml_Abstract
 {
     protected function _buildNode()
     {
