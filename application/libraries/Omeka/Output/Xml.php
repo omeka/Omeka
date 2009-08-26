@@ -2,8 +2,8 @@
 abstract class Omeka_Output_Xml
 {
     const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
-    const XMLNS                = 'http://www.omeka.org/schemas/omeka-xml/v1';
-    const XMLNS_SCHEMALOCATION = 'http://www.omeka.org/schemas/omeka-xml/v1/omeka-xml-1-0.xsd';
+    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v1';
+    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v1/omeka-xml-1-1.xsd';
     
     /**
      * This class' contextual record.
