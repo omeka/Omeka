@@ -539,7 +539,11 @@ class Omeka_Plugin_Broker
             $plugin = new Plugin;
             $plugin->active = 1;
             $plugin->name = $pluginDirName;
-            $plugin->version = $this->getPluginIniValue($pluginDirName, 'version');
+            if ($this->hasPluginIniFile($pluginDirName)) {
+                $plugin->version = $this->getPluginIniValue($pluginDirName, 'version');
+            } else {
+                $plugin->version = '';
+            }
             $plugin->forceSave();
             
             //Now run the installer for the plugin
@@ -799,7 +803,7 @@ class Omeka_Plugin_Broker
     {
         if ($this->_required[$pluginDirName] == null) {            
             $this->_required[$pluginDirName] = array();
-            if (file_exists($this->getPluginIniFilePath($pluginDirName))) {            
+            if ($this->hasPluginIniFile($pluginDirName)) {            
                 $rrPluginDirNames = explode(',', trim($this->getPluginIniValue($pluginDirName, 'required_plugins')));
                 if(count($rrPluginDirNames) == 1 && trim($rrPluginDirNames[0]) == '') {
                     $rPluginDirNames = array();
@@ -826,7 +830,7 @@ class Omeka_Plugin_Broker
     {
         if ($this->_optional[$pluginDirName] == null) {
             $this->_optional[$pluginDirName] = array();
-            if (file_exists($this->getPluginIniFilePath($pluginDirName))) {
+            if ($this->hasPluginIniFilePath($pluginDirName)) {
                 $ooPluginDirNames = explode(',', trim($this->getPluginIniValue($pluginDirName, 'optional_plugins')));
                 if(count($ooPluginDirNames) == 1 && trim($ooPluginDirNames[0]) == '') {
                     $oPluginDirNames = array();
