@@ -177,7 +177,7 @@ class PluginsController extends Omeka_Controller_Action
      * @return stdClass
      **/
     private function _getPluginInfo($pluginDirName)
-    {        
+    {
         $pluginInfo = new stdClass;
         
         $pluginIniPath = $this->_pluginBroker->getPluginIniFilePath($pluginDirName);      
@@ -189,22 +189,26 @@ class PluginsController extends Omeka_Controller_Action
 	            }
             } catch (Zend_Config_Exception $e) {}        
         }
-        
+
         // if the plugin.ini doees not specify the plugin name, 
         // make the plugin name the same as the plugin directory name  
         if (!$pluginInfo || trim($pluginInfo->name) == '') {
             $pluginInfo->name = $pluginDirName;
         }
         
+
+        
         $pluginInfo->directoryName = $pluginDirName;            
         $pluginInfo->hasConfig = (bool) $this->_pluginBroker->getHook($pluginDirName, 'config');
         $pluginInfo->installed = $this->_pluginBroker->isInstalled($pluginDirName);
         $pluginInfo->active = $this->_pluginBroker->isActive($pluginDirName);
-        $pluginInfo->hasPluginFiles = $this->_pluginBroker->hasPluginFiles($pluginDirName);
-        $pluginInfo->canUpgrade = $this->_pluginBroker->canUpgrade($pluginDirName);
+        $pluginInfo->hasPluginFiles = ($this->_pluginBroker->hasPluginFile($pluginDirName) && $this->_pluginBroker->hasPluginIniFile($pluginDirName));
+        $pluginInfo->canUpgrade = $this->_pluginBroker->canUpgrade($pluginDirName);        
         $pluginInfo->requiredPluginDirNames = $this->_pluginBroker->getRequiredPluginDirNames($pluginDirName);
         $pluginInfo->optionalPluginDirNames = $this->_pluginBroker->getOptionalPluginDirNames($pluginDirName);
-        
+
+
+
         return $pluginInfo;
     }
     
