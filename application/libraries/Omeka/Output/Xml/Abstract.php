@@ -6,8 +6,8 @@ abstract class Omeka_Output_Xml_Abstract
     const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v1/omeka-xml-1-1.xsd';
     
     /**
-     * This class' contextual record.
-     * @var Omeka_Record
+     * This class' contextual record(s).
+     * @var array|Omeka_Record
      */
     protected $_record;
 
@@ -37,11 +37,11 @@ abstract class Omeka_Output_Xml_Abstract
     abstract protected function _buildNode();
     
     /**
-     * @param Omeka_Record $record
+     * @param Omeka_Record|array $record
      * @param string $context The context of this DOM document.
      * @return void
      */
-    public function __construct(Omeka_Record $record, $context)
+    public function __construct($record, $context)
     {
         $this->_record = $record;
         $this->_context = $context;
