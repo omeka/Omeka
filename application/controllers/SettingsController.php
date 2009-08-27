@@ -19,6 +19,14 @@ require_once 'Omeka/Controller/Action.php';
  **/
 class SettingsController extends Omeka_Controller_Action
 {    
+    const DEFAULT_FULLSIZE_CONSTRAINT = 800;
+    const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
+    const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
+    const DEFAULT_PER_PAGE_ADMIN = 10;
+    const DEFAULT_PER_PAGE_PUBLIC = 10;
+    
+    private $_form;
+    
     public function indexAction() {
         $this->_forward('edit');
     }
@@ -28,47 +36,17 @@ class SettingsController extends Omeka_Controller_Action
     }
     
     public function editAction() {
-        //Any changes to this list should be reflected in the install script (and possibly the view functions)        
-        $settingsList = array('site_title', 
-                              'copyright',
-                              'administrator_email',
-                              'author', 
-                              'description', 
-                              'thumbnail_constraint', 
-                              'square_thumbnail_constraint',
-                              'fullsize_constraint', 
-                              'per_page_admin', 
-                              'per_page_public', 
-                              'path_to_convert',
-                              'path_to_php_cli');
+        $this->_setForm();
+        $this->view->form = $this->_form;
         
-        $options = Omeka_Context::getInstance()->getOptions();
-        
-        foreach ($options as $k => $v) {
-            if (in_array($k, $settingsList)) {
-                $settings[$k] = $v;
+        if (isset($_POST['settings_submit'])) {
+            if ($this->_form->isValid($_POST)) {
+                $this->_setOptions();
+                $this->flashSuccess('The settings have been updated.');
+            } else {
+                $this->flashError('There were errors found in your form. Please edit and resubmit.');
             }
         }
-        
-        $optionTable = $this->getTable('Option')->getTableName();
-        $conn = $this->getDb();
-        
-        //process the form
-        if (!empty($_POST)) {
-            $sql = "UPDATE $optionTable SET value = ? WHERE name = ?";
-            foreach ( $_POST as $key => $value ) {
-                if (array_key_exists($key,$settings)) {
-                    $conn->exec($sql, array($value, $key));
-                    $settings[$key] = $value;
-                    $options[$key] = $value;
-                }
-            }
-            Omeka_Context::getInstance()->setOptions($options);
-            
-            $this->flash("Settings have been changed.");
-        }
-        
-        $this->view->assign($settings);
     }
     
     /**
@@ -117,5 +95,157 @@ class SettingsController extends Omeka_Controller_Action
         
         // A return value of 0 indicates the binary is working correctly.
         return !(int)$returnCode;
+    }
+    
+    private function _setForm()
+    {
+        // http://framework.zend.com/manual/en/zend.form.quickstart.html
+        // http://devzone.zend.com/article/3450
+        $form = new Zend_Form;
+        $form->setMethod('post');
+        $form->removeDecorator('HtmlTag');
+        
+        // Add form elements.
+        $elementDecorators = array('ViewHelper', 
+                                   'Errors', 
+                                   'Description',
+                                   'Label', 
+                                   array('HtmlTag', array('tag' => 'div')));
+        
+        $form->addElement('text', 'site_title', array(
+            'label' => 'Site Title', 
+            'value' => get_option('site_title'), 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('textarea', 'description', array(
+            'label' => 'Site Description', 
+            'value' => get_option('description'), 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'administrator_email', array(
+            'label' => 'Administrator Email', 
+            'value' => get_option('administrator_email'), 
+            'validators' => array('EmailAddress'), 
+            'required' => true, 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'copyright', array(
+            'label' => 'Site Copyright Information', 
+            'value' => get_option('copyright'), 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'author', array(
+            'label' => 'Site Author Information', 
+            'value' => get_option('author'), 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'fullsize_constraint', array(
+            'label' => 'Fullsize Image Size', 
+            'description' => 'Maximum fullsize image size constraint (in pixels).', 
+            'value' => get_option('fullsize_constraint'), 
+            'validators' => array('Digits'), 
+            'required' => true, 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'thumbnail_constraint', array(
+            'label' => 'Thumbnail Size', 
+            'description' => 'Maximum thumbnail size constraint (in pixels).', 
+            'value' => get_option('thumbnail_constraint'), 
+            'validators' => array('Digits'), 
+            'required' => true, 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'square_thumbnail_constraint', array(
+            'label' => 'Square Thumbnail Size', 
+            'description' => 'Maximum square thumbnail size constraint (in pixels).', 
+            'value' => get_option('square_thumbnail_constraint'), 
+            'validators' => array('Digits'), 
+            'required' => true, 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'per_page_admin', array(
+            'label' => 'Items Per Page (admin)', 
+            'description' => 'Limit the number of items displayed per page in the administrative interface.', 
+            'value' => get_option('per_page_admin'), 
+            'validators' => array('Digits'), 
+            'required' => true, 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'per_page_public', array(
+            'label' => 'Items Per Page (public)', 
+            'description' => 'Limit the number of items displayed per page in the public interface.', 
+            'value' => get_option('per_page_public'), 
+            'validators' => array('Digits'), 
+            'required' => true, 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'path_to_convert', array(
+            'label' => 'Imagemagick Directory Path', 
+            'value' => get_option('path_to_convert'), 
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('text', 'path_to_php_cli', array(
+            'label' => 'PHP-CLI Binary Path',
+            'value' => get_option('path_to_php_cli'),
+            'decorators' => $elementDecorators
+        ));
+        
+        $form->addElement('submit', 'settings_submit', array(
+            'label' => 'Submit', 
+            'decorators' => array('Tooltip', 'ViewHelper')
+        ));
+
+        // Add fieldsets.
+        $displayGroupDecorators = array('FormElements', 'Fieldset');
+        
+        $form->addDisplayGroup(
+            array('administrator_email', 'site_title', 'description', 
+                  'copyright', 'author', 'fullsize_constraint', 
+                  'thumbnail_constraint', 'square_thumbnail_constraint', 
+                  'per_page_admin', 'per_page_public', 'path_to_convert', 
+                  'path_to_php_cli'), 
+            'site_settings', 
+            array('legend' =>'Site Settings', 
+                  'decorators' => $displayGroupDecorators)
+        );
+        
+        $form->addDisplayGroup(
+            array('settings_submit'), 
+            'submit', 
+            array('decorators' => $displayGroupDecorators)
+        );
+        
+        $this->_form = $form;
+    }
+    
+    private function _setOptions()
+    {
+        // Insert the form options to the options table.
+        $options = array('administrator_email', 
+                         'copyright', 
+                         'site_title', 
+                         'author', 
+                         'description', 
+                         'thumbnail_constraint', 
+                         'square_thumbnail_constraint', 
+                         'fullsize_constraint', 
+                         'per_page_admin', 
+                         'per_page_public', 
+                         'path_to_convert',
+                         'path_to_php_cli');
+        foreach ($options as $option) {
+            set_option($option, $this->_form->getValue($option));
+        }
     }
 }
