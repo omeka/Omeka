@@ -73,12 +73,12 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	.deactivate:hover {}
 
 	/* Replaces tooltips */
-	.field .explanation {font-size:11px; margin-bottom:0;color: #999; clear:both;}
-	#item-form .field .explanation, #editfile .field .explanation {margin-left:216px; float:left; clear:right;}
+	.field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
+	#item-form .field .explanation, #editfile .field .explanation, .hint {margin-left:216px; float:left; clear:right;}
 	
 	/* Changes the width of inputs depending on the layout */
 		.vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
-		.vertical-nav #item-form .field .explanation {margin-left: 144px;}
+		.vertical-nav #item-form .field .explanation, .vertical-nav .field .hint {margin-left: 144px;}
 		
 		/* .input used to wrap input fields in items/add form */
 		.field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}

@@ -103,6 +103,7 @@ class SettingsController extends Omeka_Controller_Action
         // http://devzone.zend.com/article/3450
         $form = new Zend_Form;
         $form->setMethod('post');
+        $form->setAttrib('id', 'settings-form');
         $form->removeDecorator('HtmlTag');
         
         // Add form elements.
@@ -110,22 +111,26 @@ class SettingsController extends Omeka_Controller_Action
                                    'Errors', 
                                    'Description',
                                    'Label', 
-                                   array('HtmlTag', array('tag' => 'div')));
+                                   array(array('data' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field')));
         
         $form->addElement('text', 'site_title', array(
             'label' => 'Site Title', 
+            'class' => 'textinput',
             'value' => get_option('site_title'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('textarea', 'description', array(
             'label' => 'Site Description', 
+            'class' => 'textinput',
             'value' => get_option('description'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('text', 'administrator_email', array(
-            'label' => 'Administrator Email', 
+            'label' => 'Administrator Email',
+            'class' => 'textinput',
+            
             'value' => get_option('administrator_email'), 
             'validators' => array('EmailAddress'), 
             'required' => true, 
@@ -133,19 +138,22 @@ class SettingsController extends Omeka_Controller_Action
         ));
         
         $form->addElement('text', 'copyright', array(
-            'label' => 'Site Copyright Information', 
+            'label' => 'Site Copyright Information',
+            'class' => 'textinput',
             'value' => get_option('copyright'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('text', 'author', array(
-            'label' => 'Site Author Information', 
+            'label' => 'Site Author Information',
+            'class' => 'textinput', 
             'value' => get_option('author'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('text', 'fullsize_constraint', array(
-            'label' => 'Fullsize Image Size', 
+            'label' => 'Fullsize Image Size',
+            'class' => 'textinput',
             'description' => 'Maximum fullsize image size constraint (in pixels).', 
             'value' => get_option('fullsize_constraint'), 
             'validators' => array('Digits'), 
@@ -154,7 +162,8 @@ class SettingsController extends Omeka_Controller_Action
         ));
         
         $form->addElement('text', 'thumbnail_constraint', array(
-            'label' => 'Thumbnail Size', 
+            'label' => 'Thumbnail Size',
+            'class' => 'textinput',
             'description' => 'Maximum thumbnail size constraint (in pixels).', 
             'value' => get_option('thumbnail_constraint'), 
             'validators' => array('Digits'), 
@@ -164,6 +173,7 @@ class SettingsController extends Omeka_Controller_Action
         
         $form->addElement('text', 'square_thumbnail_constraint', array(
             'label' => 'Square Thumbnail Size', 
+            'class' => 'textinput',
             'description' => 'Maximum square thumbnail size constraint (in pixels).', 
             'value' => get_option('square_thumbnail_constraint'), 
             'validators' => array('Digits'), 
@@ -173,6 +183,7 @@ class SettingsController extends Omeka_Controller_Action
         
         $form->addElement('text', 'per_page_admin', array(
             'label' => 'Items Per Page (admin)', 
+            'class' => 'textinput',
             'description' => 'Limit the number of items displayed per page in the administrative interface.', 
             'value' => get_option('per_page_admin'), 
             'validators' => array('Digits'), 
@@ -182,6 +193,7 @@ class SettingsController extends Omeka_Controller_Action
         
         $form->addElement('text', 'per_page_public', array(
             'label' => 'Items Per Page (public)', 
+            'class' => 'textinput',
             'description' => 'Limit the number of items displayed per page in the public interface.', 
             'value' => get_option('per_page_public'), 
             'validators' => array('Digits'), 
@@ -191,18 +203,21 @@ class SettingsController extends Omeka_Controller_Action
         
         $form->addElement('text', 'path_to_convert', array(
             'label' => 'Imagemagick Directory Path', 
+            'class' => 'textinput',
             'value' => get_option('path_to_convert'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('text', 'path_to_php_cli', array(
             'label' => 'PHP-CLI Binary Path',
+            'class' => 'textinput',
             'value' => get_option('path_to_php_cli'),
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('submit', 'settings_submit', array(
-            'label' => 'Submit', 
+            'label' => 'Save Settings', 
+            'class' => 'submit',
             'decorators' => array('Tooltip', 'ViewHelper')
         ));
 

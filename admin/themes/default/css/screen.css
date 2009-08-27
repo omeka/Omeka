@@ -300,8 +300,16 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	
 	/* Settings */
 	#settings-form .submit {float:right;}
+	#im-result {margin-left:200px; font-size:11px;}
 	.im-success {color: green;font-style: italic;}
-    .im-failure {color: red;font-style: italic;}
+    .im-failure {color: red;font-style: italic; }
+    
+    #test-button {display:inline; float:none; margin-left: 4px; margin-top:0;background-color: #389; border:1px solid #389;}
+    
+    #settings-form label {width: 200px;}
+    #settings-form .textinput {display:inline; width: 400px;}
+    #settings-form #path_to_convert {width: 350px;}
+    #settings-form .hint {margin: 4px 0 0 200px;}
     
 	/* Users */
 	.users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}

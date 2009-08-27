@@ -1,7 +1,7 @@
 <?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <script type="text/javascript" charset="utf-8">
     Event.observe(window, 'load', function(){
-        var testButton = new Element('button', {'type': 'button'});
+        var testButton = new Element('button', {'type': 'button', 'id': 'test-button'});
         var loaderGif = new Element('img', {'src': '<?php echo img("loader.gif"); ?>'});
         var resultDiv = new Element('div', {'id': 'im-result'});
         var imageMagickInput = $('path_to_convert');
