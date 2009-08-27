@@ -12,7 +12,7 @@
 		<tbody>
 	<?php foreach( $item->Files as $key => $file ): ?>
 		<tr>
-			<td><?php echo html_escape($file->original_filename); ?></td>
+			<td><?php echo link_to($file, 'show', html_escape($file->original_filename), array()); ?></td>
 			<td class="file-link">
 				<?php echo link_to($file, 'edit', 'Edit', array('class'=>'edit')); ?>
 			</td>

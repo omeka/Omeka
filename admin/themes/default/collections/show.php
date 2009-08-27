@@ -1,5 +1,14 @@
-<?php head(array('title'=>'Collection # '.collection('Id'), 'bodyclass'=>'collections show')); ?>
-<h1>Collection: <?php echo strip_formatting(collection('Name'));?><span class="view-public-page">[ <a href="<?php echo public_uri('collections/show/'.collection('id')); ?>">View Public Page</a> ]</span> </h1>
+<?php
+    $collectionTitle = strip_formatting(collection('Name'));
+    if ($collectionTitle != '') {
+        $collectionTitle = ': &quot;' . html_escape($collectionTitle) . '&quot; ';
+    } else {
+        $collectionTitle = '';
+    }
+    $collectionTitle = 'Collection #' . collection('id') . $collectionTitle;
+?>
+<?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
+<h1><?php echo $collectionTitle; ?> <span class="view-public-page">[ <a href="<?php echo public_uri('collections/show/'.collection('id')); ?>">View Public Page</a> ]</span> </h1>
 <?php if (has_permission('Collections', 'edit')): ?>    
 <p id="edit-collection" class="edit-button"><?php echo link_to_collection('Edit this Collection', array('class'=>'edit'), 'edit'); ?></p>
 <?php endif; ?>

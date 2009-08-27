@@ -1,4 +1,13 @@
-<?php head(array('title' => 'Edit File # '.item_file('id'), 'bodyclass'=>'files edit-file primary')); ?>
+<?php
+    $fileTitle = strip_formatting(item_file('original filename'));
+    if ($fileTitle != '') {
+        $fileTitle = ': &quot;' . html_escape($fileTitle) . '&quot; ';
+    } else {
+        $fileTitle = '';
+    }
+    $fileTitle = 'Edit File #' . item_file('id') . $fileTitle;
+?>
+<?php head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
 <script type="text/javascript" charset="utf-8">
     Event.observe(window, 'load', function(){
         // Get rid of the add/remove buttons and 'Use HTML' checkbox.
@@ -9,23 +18,20 @@
     });
 </script>
 
-<h1>Edit File #<?php echo item_file('Id'); ?></h1>
-
-<div id="edit-file-preview"><?php echo display_file($file, array('imageSize'=>'square_thumbnail')); ?></div>
+<h1><?php echo $fileTitle; ?></h1>
 
 <div id="primary">
 
 <?php echo flash(); ?>
 
-
-
+<div id="edit-file-preview"><?php echo display_file($file, array('imageSize'=>'square_thumbnail')); ?></div>
 
 	
 <form method="post" id="editfile" action="<?php echo uri('files/edit/'.$file->id); ?>" name="editFile">
 
 <fieldset>
 
-<legend>Core Metadata</legend>	
+<legend>Dublin Core</legend>	
 
 <?php echo display_element_set_form($file, 'Dublin Core'); ?>
 

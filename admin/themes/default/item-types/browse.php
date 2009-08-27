@@ -1,5 +1,5 @@
-<?php head(array('title'=>'Browse Types','bodyclass'=>'item-types')); ?>
-<h1>Item Types</h1>
+<?php head(array('title'=>'Browse Item Types','bodyclass'=>'item-types')); ?>
+<h1>Browse Item Types (<?php echo $total_records; ?> total)</h1>
 <?php if (has_permission('ItemTypes', 'add')): ?>
 <p id="add-item-type" class="add-button"><a class="add" href="<?php echo uri('item-types/add'); ?>">Add an Item Type</a></p>
 <?php endif ?>

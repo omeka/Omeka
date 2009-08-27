@@ -1,5 +1,14 @@
-<?php head(array('title'=>'Edit Item', 'bodyclass'=>'items primary','content_class' => 'vertical-nav'));?>
-<h1>Edit &#8220;<?php echo strip_formatting(item('Dublin Core', 'Title')); ?>&#8221;</h1>
+<?php
+    $itemTitle = strip_formatting(item('Dublin Core', 'Title'));
+    if ($itemTitle != '' && $itemTitle != '[Untitled]') {
+        $itemTitle = ': &quot;' . html_escape($itemTitle) . '&quot; ';
+    } else {
+        $itemTitle = '';
+    }
+    $itemTitle = 'Edit Item #' . item('id') . $itemTitle;
+?>
+<?php head(array('title'=> $itemTitle, 'bodyclass'=>'items primary','content_class' => 'vertical-nav'));?>
+<h1><?php echo $itemTitle; ?></h1>
 <script type="text/javascript">
 
 Event.observe(window,'load',function(){

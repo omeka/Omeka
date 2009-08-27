@@ -1,5 +1,5 @@
-<?php head(array('title'=>'Edit Type: '.html_escape($itemtype->name),'bodyclass'=>'item-types')); ?>
-<h1><?php echo html_escape($itemtype->name); ?></h1>
+<?php head(array('title'=>'Edit &quot;'.html_escape($itemtype->name) . '&quot; Item Type','bodyclass'=>'item-types')); ?>
+<h1>Edit &quot;<?php echo html_escape($itemtype->name); ?>&quot; Item Type</h1>
 
 <div id="primary">
 <form method="post" action="">

@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Browse Tags', 'content_class' => 'horizontal-nav','bodyclass'=>'tags primary')); ?>
-<h1>Tags</h1>
+<h1>Browse Tags (<?php echo count($tags); ?> total)</h1>
 
 <?php common('tags-nav'); ?>
 

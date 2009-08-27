@@ -1,5 +1,15 @@
-<?php head(array('title'=>'Edit Collection #'.html_escape($collection->id), 'bodyclass'=>'collections')); ?>
-<h1>Edit <?php echo html_escape($collection->name); ?></h1>
+<?php
+    $collectionTitle = strip_formatting(collection('Name'));
+    if ($collectionTitle != '') {
+        $collectionTitle = ': &quot;' . html_escape($collectionTitle) . '&quot; ';
+    } else {
+        $collectionTitle = '';
+    }
+    $collectionTitle = 'Edit Collection #' . collection('id') . $collectionTitle;
+?>
+
+<?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections')); ?>
+<h1><?php echo $collectionTitle; ?></h1>
 
 <div id="primary">
 	

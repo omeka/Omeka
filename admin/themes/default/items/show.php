@@ -1,10 +1,18 @@
-<?php head(array('title' => 'Item # '.item('id'), 'bodyclass'=>'items show primary-secondary')); ?>
+<?php    
+    $itemTitle = strip_formatting(item('Dublin Core', 'Title'));
+    if ($itemTitle != '' && $itemTitle != '[Untitled]') {
+        $itemTitle = ': &quot;' . html_escape($itemTitle) . '&quot; ';
+    } else {
+        $itemTitle = '';
+    }
+    $itemTitle = 'Item #' . item('id') . $itemTitle;
+?>
+<?php head(array('title' => $itemTitle, 'bodyclass'=>'items show primary-secondary')); ?>
 
 <?php // The following includes the Autocompleter class. ?>
 <script src="<?php echo web_path_to('javascripts/scriptaculous.js'); ?>?load=controls" type="text/javascript" charset="utf-8"></script>
 
-<h1 id="item-title">#<?php echo item('id');?> 
-<?php echo strip_formatting(item('Dublin Core', 'Title')); ?> <span class="view-public-page">[ <a href="<?php echo public_uri('items/show/'.item('id')); ?>">View Public Page</a> ]</span></h1>
+<h1 id="item-title"><?php echo $itemTitle; ?> <span class="view-public-page">[ <a href="<?php echo public_uri('items/show/'.item('id')); ?>">View Public Page</a> ]</span></h1>
 
 <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
 <p id="edit-item" class="edit-button"><?php 

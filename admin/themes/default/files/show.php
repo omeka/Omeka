@@ -1,6 +1,15 @@
-<?php head(array('title' => 'File # '.item_file('id'), 'bodyclass'=>'files show primary-secondary')); ?>
+<?php
+    $fileTitle = strip_formatting(item_file('original filename'));
+    if ($fileTitle != '') {
+        $fileTitle = ': &quot;' . html_escape($fileTitle) . '&quot; ';
+    } else {
+        $fileTitle = '';
+    }
+    $fileTitle = 'File #' . item_file('id') . $fileTitle;
+?>
+<?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
-<h1>File #<?php echo item_file('id'); ?></h1>
+<h1><?php echo $fileTitle; ?></h1>
 <?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>
     <p id="edit-file" class="edit-button"><?php echo link_to($file, 'edit', 'Edit', array('class'=>'edit')); ?></p>
 <?php endif; ?>

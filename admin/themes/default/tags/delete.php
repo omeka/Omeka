@@ -1,7 +1,7 @@
-<?php head(array('title'=>'Remove Tags', 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
+<?php head(array('title'=>'Delete Tag', 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
 <?php echo flash(); ?>
 
-<h1>Delete Tags</h1>
+<h1>Delete Tag</h1>
 <?php common('tags-nav'); ?>
 <div id="primary">
 <form method="post">
@@ -15,7 +15,7 @@
 </select>
 </div>
 </div>
-<input type="submit" name="submit" class="submit submit-medium" value="Delete tag" />
+<input type="submit" name="submit" class="submit submit-medium" value="Delete Tag" />
 
 </form>
 </div>

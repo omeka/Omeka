@@ -1,5 +1,14 @@
-<?php head(array('title'=>'Type: '.html_escape($itemtype->name),'bodyclass'=>'item-types'));?>
-<h1>Type: <?php echo html_escape($itemtype->name);?></h1>
+<?php
+    $itemTypeTitle = strip_formatting($itemtype->name);
+    if ($itemTypeTitle != '') {
+        $itemTypeTitle = ': &quot;' . html_escape($itemTypeTitle) . '&quot; ';
+    } else {
+        $itemTypeTitle = '';
+    }
+    $itemTypeTitle = 'Item Type #' . $itemtype->id . $itemTypeTitle;
+?>
+<?php head(array('title'=> $itemTypeTitle,'bodyclass'=>'item-types'));?>
+<h1><?php echo $itemTypeTitle; ?></h1>
 <?php if ( has_permission('ItemTypes','edit') ): ?>
 <p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo record_uri($itemtype, 'edit', 'item-types'); ?>">Edit this Item Type</a></p>
 <?php endif; ?>

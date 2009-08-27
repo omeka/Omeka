@@ -33,7 +33,7 @@ echo js('tiny_mce/tiny_mce');
     Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
 
 	makeFileWindow: function() {
-		$$('#file-list a.edit').each(function(link) {
+		$$('#file-list a').each(function(link) {
 			link.onclick = function() {
 				window.open(link.getAttribute("href"));
 				return false;
