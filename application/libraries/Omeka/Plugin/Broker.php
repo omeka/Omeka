@@ -194,7 +194,8 @@ class Omeka_Plugin_Broker
         
         if ($this->hasPluginFile($pluginDirName) &&
             $this->isInstalled($pluginDirName) && 
-            $this->isActive($pluginDirName) && 
+            $this->isActive($pluginDirName) &&
+            $this->meetsOmekaMinimumVersion($pluginDirName) &&
             !($this->isLoaded($pluginDirName)) &&
             !($this->canUpgrade($pluginDirName)) &&
             !in_array($pluginDirName, $pluginDirNamesWaitingToBeLoaded)) {
@@ -830,7 +831,7 @@ class Omeka_Plugin_Broker
     {
         if ($this->_optional[$pluginDirName] == null) {
             $this->_optional[$pluginDirName] = array();
-            if ($this->hasPluginIniFilePath($pluginDirName)) {
+            if ($this->hasPluginIniFile($pluginDirName)) {
                 $ooPluginDirNames = explode(',', trim($this->getPluginIniValue($pluginDirName, 'optional_plugins')));
                 if(count($ooPluginDirNames) == 1 && trim($ooPluginDirNames[0]) == '') {
                     $oPluginDirNames = array();
@@ -845,6 +846,48 @@ class Omeka_Plugin_Broker
         }
 
         return $this->_optional[$pluginDirName];
+    }
+    
+    /**
+     * Returns whether the current version of Omeka is greater than or equal to the 
+     * minimum version required by the plugin.
+     * 
+     * @param string $pluginDirName
+     * @return bool
+     **/
+    public function meetsOmekaMinimumVersion($pluginDirName)
+    {
+        $meetsOmekaMinimumVersion = true;
+        
+        if ($this->hasPluginIniFile($pluginDirName)) {
+            $omekaMinimumVersion = $this->getPluginIniValue($pluginDirName, 'omeka_minimum_version');
+            if (version_compare($omekaMinimumVersion, OMEKA_VERSION, '>')) {        
+                $meetsOmekaMinimumVersion = false;            
+            }
+        }
+        
+        return $meetsOmekaMinimumVersion;
+    }
+    
+    /**
+     * Returns whether the current version of Omeka is greater than or equal to the 
+     * minimum version required by the plugin.
+     * 
+     * @param string $pluginDirName
+     * @return bool
+     **/
+    public function meetsOmekaTestedUpTo($pluginDirName)
+    {
+        $meetsOmekaTestedUpTo = true;
+        
+        if ($this->hasPluginIniFile($pluginDirName)) {
+            $omekaTestedUpTo = $this->getPluginIniValue($pluginDirName, 'omeka_tested_up_to');
+            if (version_compare($omekaTestedUpTo, OMEKA_VERSION, '<')) {        
+                $meetsOmekaTestedUpTo = false;            
+            }
+        }
+        
+        return $meetsOmekaTestedUpTo;
     }
     
     /**

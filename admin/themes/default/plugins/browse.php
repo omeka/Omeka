@@ -92,6 +92,7 @@
             </form> 
         <?php endif; ?>
     <?php endif; ?>
+    
     </td>
     </tr>
     <?php 
@@ -100,7 +101,13 @@
         if(count($requiredPluginDirNames) > 0): 
     ?>
         <tr class="related-plugin-info">
-          <td colspan="3">
+          <td colspan="2">
+            <?php if($pluginInfo->meetsOmekaMinimumVersion == false): ?>
+                <div class="error">Your version of Omeka is less than the required version for this plugin.</div>
+            <?php endif; ?>
+            <?php if($pluginInfo->meetsOmekaTestedUpTo == false): ?>
+                <div class="error">This plugin has not been tested for your current version of Omeka.</div>
+            <?php endif; ?>
                  <?php 
                  $requiredPluginNames = array();
                  foreach($requiredPluginDirNames as $requiredPluginDirName):
