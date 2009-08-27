@@ -46,8 +46,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	    background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
 	    float:right; 
 	    color:#fff;
-	    padding: 3px;
-	    width: 100px; 
+	    padding: 3px 6px;
 	    border:none; 
 	    border:1px solid #6d8e1d;
 	    border-radius:6px;
