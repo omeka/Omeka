@@ -27,6 +27,7 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 .success {background-color: #B9D5B9; color:#245525; font-size:1.2em;padding:1.5em;margin-bottom:1.5em;}
 .alert {background:#fff09e; font-size:1.2em; padding: 1.5em;margin-bottom:0.5em;}
 .tooltip {font-size:1.2em; line-height:1.5em;}
+.errors {color:#933;}
 
 /* == Form Components == */
 form {overflow:hidden; zoom:1;}
