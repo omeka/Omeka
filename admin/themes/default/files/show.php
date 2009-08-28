@@ -46,6 +46,16 @@
     </dl>
     </div>
 
+    <div class="info-panel">
+        <h2>Output Formats</h2>
+        <div>
+            <ul>
+            <?php foreach (current_action_contexts() as $actionContext): ?>
+                <li><a href="<?php echo uri() . "?output=$actionContext" ?>"><?php echo $actionContext; ?></a></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
     
 </div>
 <?php foot();?>
