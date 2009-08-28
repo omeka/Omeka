@@ -204,6 +204,8 @@ class PluginsController extends Omeka_Controller_Action
         $pluginInfo->hasConfig = (bool) $this->_pluginBroker->getHook($pluginDirName, 'config');
         $pluginInfo->installed = $this->_pluginBroker->isInstalled($pluginDirName);
         $pluginInfo->active = $this->_pluginBroker->isActive($pluginDirName);
+        $pluginInfo->loaded = $this->_pluginBroker->isLoaded($pluginDirName);
+        
         $pluginInfo->hasPluginFiles = ($this->_pluginBroker->hasPluginFile($pluginDirName) && $this->_pluginBroker->hasPluginIniFile($pluginDirName));
         $pluginInfo->canUpgrade = $this->_pluginBroker->canUpgrade($pluginDirName);        
         $pluginInfo->requiredPluginDirNames = $this->_pluginBroker->getRequiredPluginDirNames($pluginDirName);
