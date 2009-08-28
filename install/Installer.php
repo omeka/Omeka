@@ -98,8 +98,7 @@ class Installer
         $form->addElement('password', 'password', array(
             'label' => 'Password', 
             'value' => $form->getValue('password'), 
-            'validators' => array('Alnum', 
-                                  array('StringLength', false, array(User::PASSWORD_MIN_LENGTH, User::PASSWORD_MAX_LENGTH))), 
+            'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH, User::PASSWORD_MAX_LENGTH))), 
             'required' => true, 
             'decorators' => $elementDecorators
         ));
