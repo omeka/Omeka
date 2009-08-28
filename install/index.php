@@ -50,7 +50,7 @@ $installer->checkRequirements();
         <?php endif; ?>
         <h2>Configure Your Site <span id="required-note">* Required Fields</span></h2>
         <?php if (isset($_POST['install_submit'])): /* Assume the form did not validate. */?>
-            <h3 class="validation-error">Form Validation Errors</h2>
+            <h3 class="validation-error">Form Validation Errors</h3>
             <p>There were errors found in your form. Please edit and resubmit.</p>
         <?php endif; ?>
         <?php echo $form; /* Display the install form. */?>
