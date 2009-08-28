@@ -1,4 +1,5 @@
 <?php
+require_once '../paths.php';
 require_once 'Installer.php';
 $installer = new Installer();
 $installer->checkRequirements();
@@ -25,7 +26,6 @@ $installer->checkRequirements();
     <?php endforeach; ?>
     </ol>
 <?php else: /* Display and validate form, install Omeka. */?>
-    <?php $installer->setForm(); ?>
     <?php $form = $installer->getForm(); ?>
     <?php if(isset($_POST['install_submit']) && $form->isValid($_POST)): /* Install the database if the form validates. */?>
         <?php if ($installer->installDatabase()): ?>

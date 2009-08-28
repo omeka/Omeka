@@ -33,11 +33,11 @@ class Installer
         if ($this->_omekaIsInstalled()) {
             include 'already-installed.php';
             exit;
-        }
-        
+        }        
         // Set the database object;
         $this->_db = Omeka_Context::getInstance()->getDb();
         //die($this->_db->prefix);
+        $this->setForm();
     }
     
     public function checkRequirements()
@@ -308,7 +308,6 @@ class Installer
     
     private function _loadOmeka()
     {
-        require_once '../paths.php';
         require_once 'Omeka/Core.php';
         $core = new Omeka_Core;
         $core->phasedLoading(self::CORE_STOP_PHASE);
