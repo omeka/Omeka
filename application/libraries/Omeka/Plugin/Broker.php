@@ -59,13 +59,6 @@ class Omeka_Plugin_Broker
     protected $_loaded = array();
     
     /**
-     * An array of plugin directory names for upgradable plugins
-     *
-     * @var array
-     **/
-    protected $_upgradeable = array();
-    
-    /**
      * An array of all plugin directory names for plugins (installed or not) that are currently located
      * in the plugins/ directory
      *
@@ -88,6 +81,13 @@ class Omeka_Plugin_Broker
       * @var array
       **/
     protected $_required = array();
+    
+    /**
+      * A list of plugin directory names that have a new version of the plugin according to the plugin.ini file
+      *
+      * @var array
+      **/
+    protected $_has_new_version = array();
         
     /**
      * The directory name of the current plugin (used for calling hooks)
@@ -153,13 +153,13 @@ class Omeka_Plugin_Broker
                 if ($plugin->active) {
                     $this->_active[$pluginDirName] = $pluginDirName;
                 }
-
+                
                 // If the plugin is upgradable, then store its directory name in a list
                 if ($this->hasPluginIniFile($pluginDirName)) {
                     if (version_compare($this->getPluginIniValue($pluginDirName, 'version'), $plugin->version, '>')) {                
-                        $this->_upgradeable[$pluginDirName] = $pluginDirName;
+                        $this->_has_new_version[$pluginDirName] = $pluginDirName;
                     }
-                }
+                }          
             }             
         }    
     }
@@ -180,7 +180,7 @@ class Omeka_Plugin_Broker
     /**
      * Loads a plugin (and make sure the plugin API is available)
      * 
-     * To be loaded, the plugin must be installed, active, and not upgradeable.
+     * To be loaded, the plugin must be installed, active, and does not have a newer version.
      * If loaded, the plugin will attempt to first load all plugins, both required and optional, that the plugin uses.  
      * However, it will not load a plugin that it uses, if that plugin is not installed and activated
      * 
@@ -197,7 +197,7 @@ class Omeka_Plugin_Broker
             $this->isActive($pluginDirName) &&
             $this->meetsOmekaMinimumVersion($pluginDirName) &&
             !($this->isLoaded($pluginDirName)) &&
-            !($this->canUpgrade($pluginDirName)) &&
+            !($this->hasNewVersion($pluginDirName)) &&
             !in_array($pluginDirName, $pluginDirNamesWaitingToBeLoaded)) {
                         
             // add the current plugin to directory names waiting to be loaded
@@ -389,15 +389,14 @@ class Omeka_Plugin_Broker
     }
     
     /**
-     * Return whether a plugin can be upgraded.  A plugin can be upgrade only if it is installed 
-     * and the plugin version in the plugin.ini file is newer than the version in the database
+     * Return whether a plugin has a newer version in the plugin.ini file than the version in the database.  
      *
      * @param string $pluginDirName
      * @return boolean
      **/
-    public function canUpgrade($pluginDirName)
+    public function hasNewVersion($pluginDirName)
     {
-        return in_array($pluginDirName, $this->_upgradeable);
+        return in_array($pluginDirName, $this->_has_new_version);        
     }
     
     /**
@@ -407,41 +406,47 @@ class Omeka_Plugin_Broker
      * @return void
      **/
     public function upgrade($pluginDirName)
-    {
-        //Make sure the plugin helpers that need to be aware of scope can operate on this plugin
-        $this->setCurrentPluginDirName($pluginDirName);
-        
-        if ($this->canUpgrade($pluginDirName)) {
+    {   
+        if ($this->hasNewVersion($pluginDirName)) {
             
             // get the plugin object
             $plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName);            
             
-            // activate the plugin for the remainder of the request, so that it can be loaded
+            // activate the plugin for the remainder of the request, 
+            // so that it can be loaded
             $this->_active[$pluginDirName] = $pluginDirName;
+            
+            // remove the plugin name from the plugins that have new version for the remainder of the request
+            // so that it can load the new plugin
+            unset($this->_has_new_version[$pluginDirName]);
             
             // load the plugin files
             $this->load($pluginDirName);
             
-            // let the plugin do the upgrade
-            $oldPluginVersion = $plugin->version;
-            $newPluginVersion = $this->getPluginIniValue($pluginDirName, 'version');            
-            
-            // run the upgrade function in the plugin
-            $upgrade_hook = $this->getHook($pluginDirName, 'upgrade');
-            call_user_func_array($upgrade_hook, array($oldPluginVersion, $newPluginVersion));            
-            
-            // update version of the plugin and activate it
-            $plugin->version = $newPluginVersion;
-            $plugin->forceSave();
-            
-            // remove the plugin from the list of upgradable plugins
-            unset($this->_upgradeable[$pluginDirName]);
-            
-            // activate the plugin
-            $this->activate($pluginDirName);
-            
+            // see if the plugin could load.  
+            // A plugin will not be able to load, and hence not be able to upgrade, if it cannot load its required plugins
+            if ($this->isLoaded($pluginDirName)) {
+                
+                // let the plugin do the upgrade
+                $oldPluginVersion = $plugin->version;
+                $newPluginVersion = $this->getPluginIniValue($pluginDirName, 'version');            
+
+                // run the upgrade function in the plugin
+                $upgrade_hook = $this->getHook($pluginDirName, 'upgrade');
+                call_user_func_array($upgrade_hook, array($oldPluginVersion, $newPluginVersion));            
+
+                // update version of the plugin and activate it
+                $plugin->version = $newPluginVersion;
+                $plugin->forceSave();
+
+                // activate the plugin
+                $this->activate($pluginDirName);
+                                
+            } else {
+                throw new Exception("The '$pluginDirName' plugin cannot be upgraded because it needs all of its required plugins installed, activated, and loaded.");
+            }
         } else {
-            throw new Exception("Plugin named '$pluginDirName' must be installed and have newer files to upgrade it.");
+            throw new Exception("The '$pluginDirName' plugin must be installed and have newer files to upgrade it.");
         }
     }
     

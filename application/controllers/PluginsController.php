@@ -206,8 +206,9 @@ class PluginsController extends Omeka_Controller_Action
         $pluginInfo->active = $this->_pluginBroker->isActive($pluginDirName);
         $pluginInfo->loaded = $this->_pluginBroker->isLoaded($pluginDirName);
         
-        $pluginInfo->hasPluginFiles = ($this->_pluginBroker->hasPluginFile($pluginDirName) && $this->_pluginBroker->hasPluginIniFile($pluginDirName));
-        $pluginInfo->canUpgrade = $this->_pluginBroker->canUpgrade($pluginDirName);        
+        $pluginInfo->hasPluginFile = $this->_pluginBroker->hasPluginFile($pluginDirName);
+        $pluginInfo->hasPluginIniFile = $this->_pluginBroker->hasPluginIniFile($pluginDirName);
+        $pluginInfo->hasNewVersion = $this->_pluginBroker->hasNewVersion($pluginDirName);        
         $pluginInfo->requiredPluginDirNames = $this->_pluginBroker->getRequiredPluginDirNames($pluginDirName);
         $pluginInfo->optionalPluginDirNames = $this->_pluginBroker->getOptionalPluginDirNames($pluginDirName);
         $pluginInfo->meetsOmekaMinimumVersion = $this->_pluginBroker->meetsOmekaMinimumVersion($pluginDirName);

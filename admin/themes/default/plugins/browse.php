@@ -21,59 +21,62 @@
 <?php foreach($pluginInfos as $pluginDirName => $pluginInfo): ?>
     <?php
     $requiredPluginDirNames = $pluginInfo->requiredPluginDirNames;
+    $requiredPluginNames = array();
+    if (count($requiredPluginDirNames) > 0) {
+        foreach($requiredPluginDirNames as $requiredPluginDirName) {
+            $requiredPluginInfo = $pluginInfos[$requiredPluginDirName];
+            if (!$requiredPluginInfo || 
+                !($requiredPluginInfo->installed) || 
+                !($requiredPluginInfo->active) || 
+                !($requiredPluginInfo->hasPluginFile)) {
+                
+                if (!$requiredPluginInfo) {
+                     $requiredPluginName = $requiredPluginDirName;
+                } else {
+                     $requiredPluginName = $requiredPluginInfo->name;
+                }
+                $requiredPluginNames[] = "'" . $requiredPluginName . "'";
+            }
+        }
+    }
     ?>
-	<tr<?php if(($pluginInfo->meetsOmekaMinimumVersion == false || count($requiredPluginDirNames) > 0) && !$pluginInfo->loaded) { echo ' class="not-loaded"';} elseif ($pluginInfo->canUpgrade) { echo ' class="upgrade-plugin"'; } ?>>
+	<tr <?php if (($pluginInfo->meetsOmekaMinimumVersion == false || count($requiredPluginNames) > 0) && 
+	             !$pluginInfo->loaded) { 
+	             echo 'class="plugin-load-error"'; 
+	          } elseif ($pluginInfo->hasNewVersion) { 
+	             echo 'class="upgrade-plugin"'; 
+	          } ?>>
 		<td>
 	        <?php
-		    if($pluginInfo->meetsOmekaMinimumVersion == false || $pluginInfo->meetsOmekaTestedUpTo == false || count($requiredPluginDirNames) > 0):
+		        if ($pluginInfo->meetsOmekaMinimumVersion == false || 
+		            count($requiredPluginNames) > 0):
 		    ?>
     		        <div class="warnings">
-    		            <strong>Warning!<?php if(($pluginInfo->installed || $pluginInfo->active) && $pluginInfo->loaded): ?> The <?php echo $pluginInfo->name; ?> plugin could not be loaded for the following reasons:<?php endif; ?></strong>
+    		            <strong>Warning!<?php if (($pluginInfo->installed || $pluginInfo->active) && $pluginInfo->loaded): ?> The <?php echo $pluginInfo->name; ?> plugin could not be loaded for the following reasons:<?php endif; ?></strong>
     		            <ul>
-                    <?php if($pluginInfo->meetsOmekaMinimumVersion == false): ?>
-                    <li class="omeka-minimum-version">The '<?php echo html_escape($pluginInfo->name); ?>' plugin requires at least Omeka <?php echo get_plugin_ini($pluginInfo->directoryName, 'omeka_minimum_version'); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</li>
-                    <?php endif; ?>
-
-    		    <?php 
-                    if(count($requiredPluginDirNames) > 0): 
-                ?>
-                     <?php 
-                     $requiredPluginNames = array();
-                     foreach($requiredPluginDirNames as $requiredPluginDirName):
-                         $requiredPluginInfo = $pluginInfos[$requiredPluginDirName];
-                         if (!$requiredPluginInfo || 
-                             !($requiredPluginInfo->installed) || 
-                             !($requiredPluginInfo->active) || 
-                             !($requiredPluginInfo->hasPluginFiles)):
-                             if (!$requiredPluginInfo) {
-                                  $requiredPluginName = $requiredPluginDirName;
-                              } else {
-                                  $requiredPluginName = $requiredPluginInfo->name;
-                              }
-                             $requiredPluginNames[] = "'" . $requiredPluginName . "'";
-                         endif;
-                     endforeach; 
-                     ?>
-                     <?php if(count($requiredPluginNames) > 0): ?>
-                         <li class="required-plugins">
-                            <?php if ($pluginInfo->active): ?>
-                                The '<?php echo html_escape($pluginInfo->name); ?>' plugin was not loaded because 
-                                the following plugins need to be 
-                                installed, activated, and loaded: 
-                                <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
-                                plugin<?php if (count($requiredPluginNames) > 1) { echo 's';} ?>.
-                            <?php else: ?>
-                                The '<?php echo html_escape($pluginInfo->name); ?>' plugin requires 
-                                  the following plugins to be 
-                                  installed, activated, and loaded: 
-                                  <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
-                                  plugin<?php if (count($requiredPluginNames) > 1) { echo 's';} ?>.
+                            <?php if ($pluginInfo->meetsOmekaMinimumVersion == false): ?>
+                                <li class="omeka-minimum-version">The '<?php echo html_escape($pluginInfo->name); ?>' plugin requires at least Omeka <?php echo get_plugin_ini($pluginInfo->directoryName, 'omeka_minimum_version'); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</li>
                             <?php endif; ?>
-                         </li>
-                     <?php endif; ?>
-                <?php endif; ?>
-                </ul>
-                </div>
+
+                            <?php if (count($requiredPluginNames) > 0): ?>
+                                <li class="required-plugins">
+                                <?php if ($pluginInfo->active): ?>
+                                    The '<?php echo html_escape($pluginInfo->name); ?>' plugin was not loaded because 
+                                    the following plugins need to be 
+                                    installed, activated, and loaded: 
+                                    <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
+                                    plugin<?php if (count($requiredPluginNames) > 1) { echo 's';} ?>.
+                                <?php else: ?>
+                                    The '<?php echo html_escape($pluginInfo->name); ?>' plugin requires 
+                                      the following plugins to be 
+                                      installed, activated, and loaded: 
+                                      <?php echo html_escape(implode_array_to_english($requiredPluginNames)); ?> 
+                                      plugin<?php if (count($requiredPluginNames) > 1) { echo 's';} ?>.
+                                <?php endif; ?>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
             <?php endif; ?>
 		    <div class="plugin-info">
 	        <p class="plugin-title"><?php
@@ -104,7 +107,7 @@
             <p class="plugin-description"><?php echo $pluginInfo->description; ?></p>
 		    <?php endif; ?>
 		    
-		    <?php if ($pluginInfo->canUpgrade): ?>    
+		    <?php if ($pluginInfo->hasNewVersion): ?>    
 		        <p class="notice plugin-upgrade"><strong>Notice:</strong> You have a new version of <?php echo $pluginInfo->name; ?>. Please upgrade!</p>
 		    <?php endif; ?>
 		    <?php if($pluginInfo->meetsOmekaTestedUpTo == false): ?>
@@ -115,7 +118,7 @@
 		
 		<td>
         <?php if ($pluginInfo->installed): ?>
-            <?php if ($pluginInfo->canUpgrade): ?>
+            <?php if ($pluginInfo->hasNewVersion): ?>
                 <?php if (has_permission('Plugins', 'upgrade')): ?>
                     <form action="<?php echo uri('plugins/upgrade'); ?>" method="post" accept-charset="utf-8">     
                             <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Upgrade</button>

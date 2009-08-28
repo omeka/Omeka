@@ -323,7 +323,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	/* Plugins */
 	#plugin-info {border-bottom:1px solid #d7d7c4;}
 	.plugin-info .plugin-meta {font-size:11px; color: #999; font-style:normal;display:block;margin-bottom:0px;}
-	.not-loaded .plugin-meta {color: #900 !important;}
+	.plugin-load-error .plugin-meta {color: #900 !important;}
 	.plugin-info p, .plugin-info .plugin-meta {margin-bottom:12px;}
     .plugin-info .plugin-title {margin-bottom:0px; font-size:14px; margin-top:0;font-weight:bold;}
 	
@@ -356,9 +356,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#uninstall-confirm .submit {margin:-3px 0 0 !important; float:none !important;}
     
     .plugin-upgrade {color: #369; font-weight:bold; margin-top: 18px; font-size: 1.2em;}
-    .not-loaded {background:#f1c8ba; background: rgba(153, 0, 0, 0.25); color: #900; border-color:#fff !important;}
-    .not-loaded a {color:#900;}
-    .not-loaded .plugin-info {
+    .plugin-load-error {background:#f1c8ba; background: rgba(153, 0, 0, 0.25); color: #900; border-color:#fff !important;}
+    .plugin-load-error a {color:#900;}
+    .plugin-load-error .plugin-info {
         filter:alpha(opacity=50);
     	-moz-opacity:0.5;
     	-khtml-opacity: 0.5;
