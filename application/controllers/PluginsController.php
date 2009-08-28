@@ -60,7 +60,9 @@ class PluginsController extends Omeka_Controller_Action
         if ($config !== null) {
             $this->view->assign(compact('config', 'pluginInfo'));
         } else {
-            $this->flashSuccess('Plugin configuration successfully changed!');
+            if(!empty($_POST)) {
+                $this->flashSuccess('Plugin configuration successfully changed!');
+            }
             $this->redirect->goto('browse');    
         }
     }
