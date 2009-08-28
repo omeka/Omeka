@@ -18,19 +18,21 @@ Event.observe(window, 'load', function(){
             }
         });
         // "undo" file extension whitelist button
-        var undoFileExtensionWhitelistButton = new Element('button', {'type': 'button'});
-        defaultFileExtensionWhitelistButton.insert({'after': undoFileExtensionWhitelistButton});
-        undoFileExtensionWhitelistButton.update('undo').observe('click', function(e){
-            undoFileExtensionWhitelistButton.insert({'after': loaderGif});
-            new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-extension-whitelist')); ?>', {
-                method: 'get',
-                onComplete: function(t) {
-                    loaderGif.hide();
-                    fileExtensionWhitelistInput.update(t.responseText);
-                }
+        if (!defaultFileExtensionWhitelistButton.next('button')) {
+            var undoFileExtensionWhitelistButton = new Element('button', {'type': 'button'});
+            defaultFileExtensionWhitelistButton.insert({'after': undoFileExtensionWhitelistButton});
+            undoFileExtensionWhitelistButton.update('undo').observe('click', function(e){
+                undoFileExtensionWhitelistButton.insert({'after': loaderGif});
+                new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-extension-whitelist')); ?>', {
+                    method: 'get',
+                    onComplete: function(t) {
+                        loaderGif.hide();
+                        fileExtensionWhitelistInput.update(t.responseText);
+                    }
+                });
+                undoFileExtensionWhitelistButton.remove();
             });
-            undoFileExtensionWhitelistButton.remove();
-        });
+        }
     });
     
     // "default" file mime type whitelist button
@@ -48,19 +50,21 @@ Event.observe(window, 'load', function(){
             }
         });
         // "undo" file extension whitelist button
-        var undoFileMimeTypeWhitelistButton = new Element('button', {'type': 'button'});
-        defaultFileMimeTypeWhitelistButton.insert({'after': undoFileMimeTypeWhitelistButton});
-        undoFileMimeTypeWhitelistButton.update('undo').observe('click', function(e){
-            undoFileMimeTypeWhitelistButton.insert({'after': loaderGif});
-            new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-mime-type-whitelist')); ?>', {
-                method: 'get',
-                onComplete: function(t) {
-                    loaderGif.hide();
-                    fileMimeTypeWhitelistInput.update(t.responseText);
-                }
+        if (!defaultFileMimeTypeWhitelistButton.next('button')) {
+            var undoFileMimeTypeWhitelistButton = new Element('button', {'type': 'button'});
+            defaultFileMimeTypeWhitelistButton.insert({'after': undoFileMimeTypeWhitelistButton});
+            undoFileMimeTypeWhitelistButton.update('undo').observe('click', function(e){
+                undoFileMimeTypeWhitelistButton.insert({'after': loaderGif});
+                new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-mime-type-whitelist')); ?>', {
+                    method: 'get',
+                    onComplete: function(t) {
+                        loaderGif.hide();
+                        fileMimeTypeWhitelistInput.update(t.responseText);
+                    }
+                });
+                undoFileMimeTypeWhitelistButton.remove();
             });
-            undoFileMimeTypeWhitelistButton.remove();
-        });
+        }
     });
 });
 </script>
