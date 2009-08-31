@@ -370,7 +370,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         .warnings li {margin-bottom:0em; line-height:1.3em;}
     /* -- Upgradable Plugins -- */
     tr.upgrade-plugin {background: #fff09e;background: rgba(255,240,150, 0.25);}
-	.upgrade-plugin .upgrade {background-color: #369; border-color: #369;}
+	.upgrade-plugin .upgrade, .plugin-load-error .upgrade {background-color: #369; border-color: #369;}
 	
 	/* Themes */
 	#themeswitch .themes {margin-right:-18px; overflow:hidden; margin-bottom:-18px;}
