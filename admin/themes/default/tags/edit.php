@@ -3,7 +3,7 @@
 <h1>Edit Tag</h1>
 <?php common('tags-nav'); ?>
 <div id="primary">
-   
+<?php if (count($tags)): ?>
 <?php echo flash(); ?>
     
 <form method="post">
@@ -26,5 +26,8 @@
 <input type="submit" name="submit" class="submit submit-medium" value="Save Changes" />
 
 </form>
+<?php else: ?>
+	<p>There are no tags to edit.  You must first tag some items.</p>
+<?php endif; ?>
 </div>
 <?php foot(); ?>

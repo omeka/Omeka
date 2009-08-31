@@ -4,6 +4,7 @@
 <h1>Delete Tag</h1>
 <?php common('tags-nav'); ?>
 <div id="primary">
+<?php if (count($tags)): ?>
 <form method="post">
 	<div class="field">
     <label for="delete_tag">Select a tag to delete:</label>
@@ -18,5 +19,8 @@
 <input type="submit" name="submit" class="submit submit-medium" value="Delete Tag" />
 
 </form>
+<?php else: ?>
+	<p>There are no tags to delete.  You must first tag some items.</p>
+<?php endif; ?>
 </div>
 <?php foot(); ?>
