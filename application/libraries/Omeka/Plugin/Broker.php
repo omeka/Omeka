@@ -424,7 +424,8 @@ class Omeka_Plugin_Broker
             $this->load($pluginDirName);
             
             // see if the plugin could load.  
-            // A plugin will not be able to load, and hence not be able to upgrade, if it cannot load its required plugins
+            // A plugin will not be able to load, and hence not be able to upgrade, 
+            // if it cannot load its required plugins
             if ($this->isLoaded($pluginDirName)) {
                 
                 // let the plugin do the upgrade
@@ -529,40 +530,60 @@ class Omeka_Plugin_Broker
      **/
     public function install($pluginDirName) 
     {
-        //Make sure the plugin helpers that need to be aware of scope can operate on this plugin
-        $this->setCurrentPluginDirName($pluginDirName);
+        // Make sure the plugin does not have a newer version
+        if (!$this->hasNewVersion($pluginDirName)) {
         
-        //Include the plugin file manually because it was not included via the constructor
-        $file = $this->getPluginFilePath($pluginDirName);
-        if (file_exists($file)) {
-            $this->addApplicationDirs($pluginDirName);
-            require_once $file;
-        } else {
-            throw new Exception("Plugin named '$pluginDirName' requires at minimum a file named 'plugin.php' to exist.  Please add this file or remove the '$pluginDirName' directory.");
-        }
-
-        try {            
-            $plugin = new Plugin;
-            $plugin->active = 1;
-            $plugin->name = $pluginDirName;
-            if ($this->hasPluginIniFile($pluginDirName)) {
-                $plugin->version = $this->getPluginIniValue($pluginDirName, 'version');
+            //Include the plugin file manually because it was not included via the constructor
+            $file = $this->getPluginFilePath($pluginDirName);
+            if (file_exists($file)) {
+                
+                // install and activate the plugin for the remainder of the request, 
+                // so that it can be loaded
+                $this->_installed[$pluginDirName] = $pluginDirName;
+                $this->_active[$pluginDirName] = $pluginDirName;
+                
+                // load the plugin
+                $this->load($pluginDirName);
+                
             } else {
-                $plugin->version = '';
+                throw new Exception("Plugin named '$pluginDirName' requires 'plugin.php' to install.  Please add this file or remove the '$pluginDirName' directory.");
             }
-            $plugin->forceSave();
+
+            if ($this->isLoaded($pluginDirName)) {
+                try {            
+                    $plugin = new Plugin;
+                    $plugin->active = 1;
+                    $plugin->name = $pluginDirName;
+                    if ($this->hasPluginIniFile($pluginDirName)) {
+                        $plugin->version = $this->getPluginIniValue($pluginDirName, 'version');
+                    } else {
+                        $plugin->version = '';
+                    }
+                    $plugin->forceSave();
             
-            //Now run the installer for the plugin
-            $install_hook = $this->getHook($pluginDirName, 'install');
-            call_user_func_array($install_hook, array($plugin->id));
+                    //Now run the installer for the plugin
+                    $install_hook = $this->getHook($pluginDirName, 'install');
+                    call_user_func_array($install_hook, array($plugin->id));
                        
-        } catch (Exception $e) {
-            //If there was an error, remove the plugin from the DB so that we can retry the install
-            if ($plugin->exists()) {
-                $plugin->delete();
+                } catch (Exception $e) {
+                    //If there was an error, remove the plugin from the DB so that we can retry the install
+                    if ($plugin->exists()) {
+                        $plugin->delete();
+                    }
+                    throw new Exception($e->getMessage());
+                }
+            } else {
+                if (!$this->meetsOmekaMinimumVersion($pluginDirName)) {
+                    throw new Exception("The '$pluginDirName' plugin cannot be installed because it requires a newer version of Omeka. See the plugin below for details.");
+                } else {
+                    throw new Exception("The '$pluginDirName' plugin cannot be installed because it requires other plugins to be installed, activated, and loaded. See below for details.");
+                }
             }
-            throw new Exception($e->getMessage());
+            
+        } else {
+            throw new Exception("The '$pluginDirName' plugin cannot be installed because it has a newer version.");
         }
+        
     }
         
     /**

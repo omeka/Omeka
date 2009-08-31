@@ -61,7 +61,7 @@ class PluginsController extends Omeka_Controller_Action
             $this->view->assign(compact('config', 'pluginInfo'));
         } else {
             if(!empty($_POST)) {
-                $this->flashSuccess('Plugin configuration successfully changed!');
+                $this->flashSuccess("The '$pluginDirName' plugin was successfully configured!");
             }
             $this->redirect->goto('browse');    
         }
@@ -81,7 +81,7 @@ class PluginsController extends Omeka_Controller_Action
         if (!$broker->isInstalled($pluginDirName)) {
             try {
                 $broker->install($pluginDirName);
-                $this->flashSuccess("Plugin named '" . $pluginInfo->name . "' was successfully installed!");
+                $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully installed!");
                 $this->redirect->goto('config', 'plugins', 'default', array('name'=>$pluginDirName));
             } catch (Exception $e) {
                 $this->flashError("The following error occurred while installing the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
@@ -114,9 +114,9 @@ class PluginsController extends Omeka_Controller_Action
            // check to make sure the plugin can be loaded
            $broker->load($pluginDirName);
            if ($broker->isLoaded($pluginDirName)) {
-               $this->flashSuccess("Plugin named '" . $pluginInfo->name . "' was activated!");
+               $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully activated!");
            } else {
-               $this->flashError("Plugin named '" . $pluginInfo->name . "' was activated, but could not be loaded.  See the plugin below for details.");
+               $this->flashError("The '" . $pluginInfo->name . "' plugin was activated, but could not be loaded.  See the plugin below for details.");
            }
         } catch (Exception $e) {
             $this->flashError("The following error occurred while activating the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
@@ -143,7 +143,7 @@ class PluginsController extends Omeka_Controller_Action
         // Deactivate the plugin
         try {
            $this->_pluginBroker->deactivate($pluginDirName);
-           $this->flashSuccess("Plugin named '" . $pluginInfo->name . "' was deactivated!");
+           $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully deactivated!");
         } catch (Exception $e) {
             $this->flashError("The following error occurred while deactivating the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
         }
@@ -162,7 +162,7 @@ class PluginsController extends Omeka_Controller_Action
         if ($broker->isInstalled($pluginDirName)) {   
             try {
                 $broker->upgrade($pluginDirName);
-                $this->flashSuccess("Plugin named '$pluginDirName' was successfully upgraded!");
+                $this->flashSuccess("The '$pluginDirName' plugin was successfully upgraded!");
                 $this->redirect->goto('config', 'plugins', 'default', array('name'=>$pluginDirName));
             } catch (Exception $e) {
                 $this->flashError("The following error occurred while upgrading the '$pluginDirName' plugin: " . $e->getMessage());
@@ -251,7 +251,7 @@ class PluginsController extends Omeka_Controller_Action
         
         // Check to see if the plugin exists and is installed.
         if (!$broker || !$broker->isInstalled($pluginDirName)) {
-            $this->flashError("Plugin could not be found in the '$pluginDirName' directory!");
+            $this->flashError("The plugin could not be found in the '$pluginDirName' directory!");
             $this->redirect->goto('browse');
         }
 
@@ -277,7 +277,7 @@ class PluginsController extends Omeka_Controller_Action
             // Attempt to uninstall the plugin.
             try {
                 $broker->uninstall($pluginDirName);
-                $this->flashSuccess("Plugin named '" . $pluginInfo->name . "' was successfully uninstalled!");
+                $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully uninstalled!");
             } catch (Exception $e) {
                 $this->flashError("The following error occurred while uninstalling the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
                 $this->redirect->goto('browse');
