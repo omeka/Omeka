@@ -188,6 +188,13 @@ class Installer
             'decorators' => $elementDecorators
         ));
         
+        $form->addElement('checkbox', 'show_empty_elements', array(
+            'label' => 'Show Empty Elements',
+            'description' => 'Whether metadata elements with no text will be displayed.',
+            'value' => $form->getValue('show_empty_elements'),
+            'decorators' => $elementDecorators
+        ));
+        
         $form->addElement('text', 'path_to_convert', array(
             'label' => 'Imagemagick Directory Path', 
             'value' => $form->getValue('path_to_convert') ? $form->getValue('path_to_convert') : $this->_getPathToConvert(), 
@@ -219,8 +226,8 @@ class Installer
             array('administrator_email', 'site_title', 'description', 
                   'copyright', 'author', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'path_to_convert', 
-                  'path_to_php_cli'), 
+                  'per_page_admin', 'per_page_public', 'show_empty_elements', 
+                  'path_to_convert', 'path_to_php_cli'), 
             'site_settings', 
             array('legend' =>'Site Settings', 
                   'decorators' => $displayGroupDecorators)
@@ -289,6 +296,7 @@ class Installer
                          'fullsize_constraint', 
                          'per_page_admin', 
                          'per_page_public', 
+                         'show_empty_elements',
                          'path_to_convert',
                          'path_to_php_cli');
         foreach ($options as $option) {

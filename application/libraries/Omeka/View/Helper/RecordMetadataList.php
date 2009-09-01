@@ -70,6 +70,9 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
      */
     protected function _setOptions(array $options)
     {
+        // Set a default for show_empty_elements based on site setting
+        $this->_showEmptyElements = (bool) get_option('show_empty_elements');
+        
         // Handle show_empty_elements option
         if (array_key_exists('show_empty_elements', $options)) {
             if (is_string($options['show_empty_elements'])) {

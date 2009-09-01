@@ -201,6 +201,13 @@ class SettingsController extends Omeka_Controller_Action
             'decorators' => $elementDecorators
         ));
         
+        $form->addElement('checkbox', 'show_empty_elements', array(
+            'label' => 'Show Empty Elements',
+            'class' => 'checkbox',
+            'value' => get_option('show_empty_elements'),
+            'decorators' => $elementDecorators
+        ));
+
         $form->addElement('text', 'path_to_convert', array(
             'label' => 'Imagemagick Directory Path', 
             'class' => 'textinput',
@@ -228,7 +235,7 @@ class SettingsController extends Omeka_Controller_Action
             array('administrator_email', 'site_title', 'description', 
                   'copyright', 'author', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'path_to_convert', 
+                  'per_page_admin', 'per_page_public', 'show_empty_elements', 'path_to_convert', 
                   'path_to_php_cli'), 
             'site_settings', 
             array('legend' =>'Site Settings', 
@@ -256,7 +263,8 @@ class SettingsController extends Omeka_Controller_Action
                          'square_thumbnail_constraint', 
                          'fullsize_constraint', 
                          'per_page_admin', 
-                         'per_page_public', 
+                         'per_page_public',
+                         'show_empty_elements',
                          'path_to_convert',
                          'path_to_php_cli');
         foreach ($options as $option) {
