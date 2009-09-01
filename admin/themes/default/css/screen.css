@@ -271,6 +271,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	.search-entry {margin-bottom:6px; overflow:hidden;}
 	
 	/* Tags Browse */
+	.browse-tags #section-nav .nav-browse-tags a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
 	#tags-nav {font-size:1.1em;margin-bottom:3em;}
 	#tags-nav a {display:inline;color:#fff; text-decoration:none; text-align:right; padding: 6px 9px; background: #c60;}
 	#tags-nav a:hover {background: #a74c29;}

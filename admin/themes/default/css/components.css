@@ -121,7 +121,6 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 	.horizontal-nav ul#section-nav a:hover {color: #467; background:#E1DFD0;}
 	.horizontal-nav ul#section-nav li.current a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
 
-
 /* Side info panels */
 .info-panel {background:#fff;overflow:hidden;zoom:1; z-index:100;border:1px solid #d7d5c4;display:block;margin-bottom:18px; padding:18px 18px 1px; border-width: 0 0 3px;}
 	.info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif;font-size:1.2em;padding: 9px 18px; color: #fff; background: #467;}
