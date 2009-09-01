@@ -19,11 +19,12 @@ legend {font-size:1.2em; font-weight: bold; margin-bottom: -0.2em;, background: 
 label,input,textarea {display: block;}
 label {float: left; clear: left; width: 126px; font-size: 1.1em; text-align: right;}
 label.required:before {content: "* ";}
-input,textarea {float: right; clear: right; width: 404px; border: 1px solid #dddad3; padding: 4px;}
-form div {overflow: auto; margin-bottom: 8px;}
+input.textinput,textarea {float: right; clear: right; width: 404px; border: 1px solid #dddad3; padding: 4px;}
+input.checkbox {float:left; margin-left: 18px;}
+form div {overflow: hidden; margin-bottom: 8px;}
 form div p {clear: both; margin-left: 144px; margin-bottom: 0; font-size: 1.1em; color: #777;}
 form div ul.errors{list-style: none; clear: both; margin-left: 144px; margin-bottom: 0; font-size: 1.1em; color: #900;}
 #required-note {font-size: 0.6em; color: #777; display: block;}
-#install_submit {font-size: 1.3em; float: none; margin-left: 144px; background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("buttons-medium.gif") 0 -60px no-repeat !important;}
+#install_submit {font-size: 1.3em; float: right; margin-left: 144px; background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("buttons-medium.gif") 0 -60px no-repeat !important;}
 #install_submit:hover {background-position:0 0 !important;cursor:pointer;}
 textarea {height: 100px;}

@@ -133,8 +133,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 #upgrade-database {background: #378; color: #fff !important;overflow:auto; padding: 36px 36px 18px;}
     #upgrade-database p {margin:0 0 18px; width: 396px; opacity:0.95;float:left;}
     #upgrade-database h2 {color:#fff;float:left; margin-right: 36px;width: 270px;}
-    #upgrade-database-link {float:none; font-size:14px; padding: 6px 12px; display:block; clear:left; margin-left: 306px; margin-top: 36px;background-color: #58909E; border-color: #58909E;}
+    #upgrade-database-link {float:none; font-size:14px; padding: 6px 12px; display:block; clear:left; margin-left: 306px; width: 8em;margin-top: 36px;background-color: #58909E; border-color: #58909E;}
     #upgrade-database-link:hover {background-color: #6B9CA8; border-color: #6B9CA8;}
+
 /* == Header == */
 #header {background:#251e16; padding-top: 0;clear:both;overflow:hidden; }
 
@@ -309,6 +310,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #settings-form .textinput {display:inline; width: 400px;}
     #settings-form #path_to_convert {width: 350px;}
     #settings-form .hint {margin: 4px 0 0 200px;}
+    
+    /* Security */
+    #security-form .inputs button {float:none;background-color: #389; margin-right: 6px; border-color: #389;}
     
 	/* Users */
 	.users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
