@@ -1,13 +1,11 @@
-<?php head(array('title'=>'Themes', 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
-<h1>Themes</h1>
+<?php head(array('title'=>'Browse Themes', 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
+<h1>Browse Themes (<?php echo count($themes); ?> total)</h1>
 
 <?php common('settings-nav'); ?>
 
-
-
 <div id="primary">
     <?php echo flash(); ?>
-	<h2>Current Theme: &#8220;<?php echo html_escape($current->title); ?>&#8221;</h2>
+	<h2>Current Theme: &quot;<?php echo html_escape($current->title); ?>&quot;</h2>
 
 <div id="current-theme">
 	<img src="<?php echo html_escape($current->image); ?>" width="342px" />
@@ -24,7 +22,7 @@
 <h2>Change Theme</h2>
 <form method="post" id="themeswitch">
 	<div class="themes">
-	<?php foreach($this->themes as $theme): ?>
+	<?php foreach($themes as $theme): ?>
 	<div class="theme<?php if($current == $theme) echo ' current-theme';?>">
 		<div class="meta">
 		<label><input type="radio" name="public_theme" value="<?php echo html_escape($theme->directory); ?>" <?php if($current == $theme):  ?>checked="checked" <?php endif; ?>/>	

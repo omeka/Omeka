@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+<?php head(array('title'=>'Edit Security Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <script type="text/javascript" charset="utf-8">
 Event.observe(window, 'load', function(){
     var loaderGif = new Element('img', {'src': '<?php echo img("loader.gif"); ?>'});
@@ -7,7 +7,7 @@ Event.observe(window, 'load', function(){
     var defaultFileExtensionWhitelistButton = new Element('button', {'type': 'button'});
     var fileExtensionWhitelistInput = $('file_extension_whitelist');
     fileExtensionWhitelistInput.insert({'after': defaultFileExtensionWhitelistButton});
-    defaultFileExtensionWhitelistButton.update('default file extensions').observe('click', function(e){
+    defaultFileExtensionWhitelistButton.update('Restore Default File Extensions').observe('click', function(e){
         defaultFileExtensionWhitelistButton.insert({'after': loaderGif});
         new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-extension-whitelist')); ?>', {
             method: 'get',
@@ -21,7 +21,7 @@ Event.observe(window, 'load', function(){
         if (!defaultFileExtensionWhitelistButton.next('button')) {
             var undoFileExtensionWhitelistButton = new Element('button', {'type': 'button'});
             defaultFileExtensionWhitelistButton.insert({'after': undoFileExtensionWhitelistButton});
-            undoFileExtensionWhitelistButton.update('undo').observe('click', function(e){
+            undoFileExtensionWhitelistButton.update('Undo').observe('click', function(e){
                 undoFileExtensionWhitelistButton.insert({'after': loaderGif});
                 new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-extension-whitelist')); ?>', {
                     method: 'get',
@@ -39,7 +39,7 @@ Event.observe(window, 'load', function(){
     var defaultFileMimeTypeWhitelistButton = new Element('button', {'type': 'button'});
     var fileMimeTypeWhitelistInput = $('file_mime_type_whitelist');
     fileMimeTypeWhitelistInput.insert({'after': defaultFileMimeTypeWhitelistButton});
-    defaultFileMimeTypeWhitelistButton.update('default file mime types').observe('click', function(e){
+    defaultFileMimeTypeWhitelistButton.update('Restore Default File Mime Types').observe('click', function(e){
         defaultFileMimeTypeWhitelistButton.insert({'after': loaderGif});
         new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-mime-type-whitelist')); ?>', {
             method: 'get',
@@ -53,7 +53,7 @@ Event.observe(window, 'load', function(){
         if (!defaultFileMimeTypeWhitelistButton.next('button')) {
             var undoFileMimeTypeWhitelistButton = new Element('button', {'type': 'button'});
             defaultFileMimeTypeWhitelistButton.insert({'after': undoFileMimeTypeWhitelistButton});
-            undoFileMimeTypeWhitelistButton.update('undo').observe('click', function(e){
+            undoFileMimeTypeWhitelistButton.update('Undo').observe('click', function(e){
                 undoFileMimeTypeWhitelistButton.insert({'after': loaderGif});
                 new Ajax.Request('<?php echo uri(array('controller'=>'security','action'=>'get-file-mime-type-whitelist')); ?>', {
                     method: 'get',
@@ -68,7 +68,7 @@ Event.observe(window, 'load', function(){
     });
 });
 </script>
-<h1>Security Settings</h1>
+<h1>Edit Security Settings</h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">

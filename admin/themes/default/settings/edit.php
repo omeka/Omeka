@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Edit Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+<?php head(array('title'=>'Edit General Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <script type="text/javascript" charset="utf-8">
     Event.observe(window, 'load', function(){
         var testButton = new Element('button', {'type': 'button', 'id': 'test-button'});
@@ -21,7 +21,7 @@
     });
 </script>
 
-<h1>General Settings</h1>
+<h1>Edit General Settings</h1>
 
 <?php common('settings-nav'); ?>
 

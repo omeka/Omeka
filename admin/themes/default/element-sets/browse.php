@@ -1,5 +1,5 @@
-<?php head(array('title'=>'Element Sets', 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
-<h1>Element Sets</h1>
+<?php head(array('title'=>'Browse Element Sets', 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
+<h1>Browse Element Sets (<?php echo count($elementsets) ?> total)</h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">

@@ -238,8 +238,7 @@ class SettingsController extends Omeka_Controller_Action
                   'per_page_admin', 'per_page_public', 'show_empty_elements', 'path_to_convert', 
                   'path_to_php_cli'), 
             'site_settings', 
-            array('legend' =>'Site Settings', 
-                  'decorators' => $displayGroupDecorators)
+            array('decorators' => $displayGroupDecorators)
         );
         
         $form->addDisplayGroup(

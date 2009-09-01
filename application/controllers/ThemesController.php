@@ -93,7 +93,7 @@ class ThemesController extends Omeka_Controller_Action
         
         if (!empty($_POST) && $this->isAllowed('switch')) {
             set_option('public_theme', strip_tags($_POST['public_theme']));
-            $this->flashSuccess("Theme has been changed successfully.");
+            $this->flashSuccess("The theme has been successfully changed.");
         }
         
         $public = get_option('public_theme');

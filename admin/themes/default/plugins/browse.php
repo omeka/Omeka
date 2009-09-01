@@ -1,6 +1,5 @@
-<?php head(array('title'=>'Plugins', 'content_class' => 'vertical-nav', 'bodyclass'=>'plugins primary')); ?>
-<h1>Plugins</h1>
-
+<?php head(array('title'=>'Browse Plugins', 'content_class' => 'vertical-nav', 'bodyclass'=>'plugins primary')); ?>
+<h1>Browse Plugins (<?php echo count($pluginInfos) ?> total)</h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">
