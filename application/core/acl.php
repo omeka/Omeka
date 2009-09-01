@@ -43,14 +43,15 @@ $acl = new Omeka_Acl;
 
 $acl->loadResourceList($resources);
 
-$acl->addRole(new Zend_Acl_Role('researcher'));
-
 $acl->addRole(new Zend_Acl_Role('super'));
+
 // Admins inherit privileges from super users.
 $acl->addRole(new Zend_Acl_Role('admin'), 'super');
 
-//Contributors do not inherit from the other roles.
+//Contributors and researchers do not inherit from the other roles.
 $acl->addRole(new Zend_Acl_Role('contributor'));
+$acl->addRole(new Zend_Acl_Role('researcher'));
+
 
 $acl->loadAllowList($allowList);
 
