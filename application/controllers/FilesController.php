@@ -24,7 +24,7 @@ require_once 'Omeka/Controller/Action.php';
 class FilesController extends Omeka_Controller_Action
 {
     public $contexts = array(
-        'show' => array('omeka-xml')
+        'show' => array('omeka-xml', 'omeka-json')
     );
     
     public function init()

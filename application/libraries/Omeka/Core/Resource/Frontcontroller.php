@@ -29,6 +29,9 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // Action helpers
         $this->initializeActionHelpers();
         
+        // Register the JSOND controller plugin
+        $front->registerPlugin(new Omeka_Controller_Plugin_Jsonp);
+        
         return $front;
     }
         
@@ -105,6 +108,10 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
              'omeka-xml' => array(
                 'suffix'  => 'omeka-xml', 
                 'headers' => array('Content-Type' => 'text/xml')
+             ), 
+             'omeka-json' => array(
+                'suffix' => 'omeka-json', 
+                'headers' => array('Content-Type' => 'application/json')
              ), 
              'dcmes-xml' => array(
                  'suffix'    => 'dcmes-xml',

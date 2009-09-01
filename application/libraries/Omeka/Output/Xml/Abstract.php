@@ -1,5 +1,5 @@
 <?php
-abstract class Omeka_Output_Xml_Abstract
+abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
 {
     const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
     const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v1';

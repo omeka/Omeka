@@ -22,8 +22,8 @@ require_once 'Omeka/Controller/Action.php';
 class ItemsController extends Omeka_Controller_Action
 {
     public $contexts = array(
-            'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml'),
-            'show'   => array('json', 'dcmes-xml', 'omeka-xml')
+            'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'omeka-json'),
+            'show'   => array('json', 'dcmes-xml', 'omeka-xml', 'omeka-json')
     );
     
     public function init() 

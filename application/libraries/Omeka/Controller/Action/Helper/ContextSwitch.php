@@ -26,7 +26,7 @@ class Omeka_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Actio
         parent::postJsonContext();
 
         if ($this->getAutoJsonSerialization() 
-            and $callbackParam = $this->getRequest()->get('callback')) {
+            and $callbackParam = $this->getRequest()->get(Omeka_Controller_Plugin_Jsonp::CALLBACK_KEY)) {
             $response = $this->getResponse();
             $json = $response->getBody();
             $response->setBody($callbackParam . '(' . $json . ')');
