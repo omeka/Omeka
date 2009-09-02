@@ -28,12 +28,16 @@
         </div>
     </div>
     
+    <?php if (has_permission('super')): ?>
+    <input type="hidden" name="old_password" id="old_password" />
+    <?php else: ?>
     <div class="field">
         <?php echo label('old_password','Current Password'); ?>
         <div class="inputs">
-        <input type="password" name="old_password" id="old_password" <?php if(has_permission('super')): ?>disabled="disabled" class="textinput disabled"<?php else: ?>class="textinput"<?php endif; ?>/>
+        <input type="password" name="old_password" id="old_password" class="textinput"/>
         </div>
     </div>
+    <?php endif; ?>
 </fieldset>
 
     <input type="submit" class="submit submit-medium" name="submit" value="Save Password"  class="button" />

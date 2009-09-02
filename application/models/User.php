@@ -229,7 +229,7 @@ class User extends Omeka_Record {
         $current = Omeka_Context::getInstance()->getCurrentUser();
         if ($current->role == 'super') {
             if ($new1 != $new2) {
-                throw new Omeka_Validator_Exception('New password must be typed correctly twice.');
+                throw new Omeka_Validator_Exception('The new password must be correctly typed twice.');
             }
             
             $this->password = $new1;
