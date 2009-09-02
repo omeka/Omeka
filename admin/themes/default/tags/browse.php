@@ -5,26 +5,26 @@
 
 <div id="primary">
 <?php if ( total_results() ): ?>
-	
-	<p id="tags-nav">Sort by:	
-		
-		<a href="<?php echo current_uri(array('sort'=>'most')); ?>"<?php if($_GET['sort'] == 'most') echo ' class="current"'; ?>>Most</a>
-			<a href="<?php echo current_uri(array('sort'=>'least')); ?>"<?php if($_GET['sort'] == 'least') echo ' class="current"'; ?>>Least</a> 
+    
+    <p id="tags-nav">Sort by:   
+        
+        <a href="<?php echo current_uri(array('sort'=>'most')); ?>"<?php if($_GET['sort'] == 'most') echo ' class="current"'; ?>>Most</a>
+            <a href="<?php echo current_uri(array('sort'=>'least')); ?>"<?php if($_GET['sort'] == 'least') echo ' class="current"'; ?>>Least</a> 
 
-			<a href="<?php echo current_uri(array('sort'=>'alpha')); ?>"<?php if($_GET['sort'] == 'alpha') echo ' class="current"'; ?>>Alphabetical</a>
+            <a href="<?php echo current_uri(array('sort'=>'alpha')); ?>"<?php if($_GET['sort'] == 'alpha') echo ' class="current"'; ?>>Alphabetical</a>
 
-			<a href="<?php echo current_uri(array('sort'=>'recent')); ?>"<?php if($_GET['sort'] == 'recent') echo ' class="current"'; ?>>Recent</a>
+            <a href="<?php echo current_uri(array('sort'=>'recent')); ?>"<?php if($_GET['sort'] == 'recent') echo ' class="current"'; ?>>Recent</a>
 
-	</p>
+    </p>
 
-	
-	
-	
-	<?php
-	echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/'));
-	?>
+    
+    
+    
+    <?php
+    echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/'));
+    ?>
 <?php else: ?>
-	<p>There are no tags to display.  You must first tag some items.</p>
+    <p>There are no tags to display.  You must first tag some items.</p>
 <?php endif; ?>
 </div>
 <?php foot(); ?>

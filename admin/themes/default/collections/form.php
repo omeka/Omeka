@@ -20,7 +20,7 @@
 </script>
 
 <fieldset id="editcollection">
-	<h2>Collection Details <span id="required-note">* Required Fields</span></h2>
+    <h2>Collection Details <span id="required-note">* Required Fields</span></h2>
 
 <div class="field">
     <?php echo label(array('for' => 'name', 'class' => 'required'),'Collection Name'); ?>
@@ -31,7 +31,7 @@
 </div>
 
 <div class="field">
-	<?php echo label(array('for' => 'description'),'Collection Description'); ?>
+    <?php echo label(array('for' => 'description'),'Collection Description'); ?>
     
 <?php echo form_error('description'); ?>
 <div class="inputs">
@@ -42,22 +42,22 @@
 <h2>Collectors</h2>
 
 <?php if (collection_has_collectors()): ?>
-	<?php foreach( $collection->Collectors as $k => $collector ): ?>
+    <?php foreach( $collection->Collectors as $k => $collector ): ?>
 
-	<ul id="collectors-list">
-		<li>
-		<?php echo html_escape($collector->getName()); ?>
-		<a class="remove-collector" href="<?php echo uri(
-		    array(
-		    'controller'=>'collections', 
-		    'action'=>'remove-collector', 
-		    'collector_id'=>$collector->id, 
-		    'collection_id'=>$collection->id), 'default'); ?>">Remove</a>
-		</li>
-	</ul>
-	<?php endforeach; ?>
+    <ul id="collectors-list">
+        <li>
+        <?php echo html_escape($collector->getName()); ?>
+        <a class="remove-collector" href="<?php echo uri(
+            array(
+            'controller'=>'collections', 
+            'action'=>'remove-collector', 
+            'collector_id'=>$collector->id, 
+            'collection_id'=>$collection->id), 'default'); ?>">Remove</a>
+        </li>
+    </ul>
+    <?php endforeach; ?>
 <?php else: ?>
-	<p>This collection has no collectors.</p>
+    <p>This collection has no collectors.</p>
 <?php endif; ?>
 
 <div class="field">
@@ -65,25 +65,25 @@
     echo label(array('for'=>'collectors'), 'Add a Collector (optional)'); ?>
     <div class="inputs">
         <div class="input">
-	<?php echo select_entity(array('name'=>'collectors[]', 'id'=>'collector')); 
+    <?php echo select_entity(array('name'=>'collectors[]', 'id'=>'collector')); 
 ?>
 </div></div>
 </div>
 
 <h2>Status: </h2>
 <div class="field">
-	<label for="public">Public</label>	
+    <label for="public">Public</label>  
 <?php 
-	echo radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->isPublic());
+    echo radio(array('name'=>'public'),array('0'=>'Not Public','1'=>'Public'), $collection->isPublic());
 ?>
 </div>
 
 <div class="field">
-	<label for="featured">Featured</label>	
+    <label for="featured">Featured</label>  
 <?php 
-	echo radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->isFeatured()); 
+    echo radio(array('name'=>'featured'),array('0'=>'Not Featured','1'=>'Featured'), $collection->isFeatured()); 
 ?>
-</div>	
+</div>  
 
 </fieldset>
 

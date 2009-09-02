@@ -8,9 +8,9 @@ echo js('tiny_mce/tiny_mce');
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 
-	Event.observe(window,'load', function() {
+    Event.observe(window,'load', function() {
         Omeka.ItemForm.enableTagRemoval();
-		Omeka.ItemForm.makeFileWindow();
+        Omeka.ItemForm.makeFileWindow();
         
         // Reset the IDs of the textareas so as to not confuse the WYSIWYG enabler buttons.
         // $$('div.field textarea').each(function(el){
@@ -20,9 +20,9 @@ echo js('tiny_mce/tiny_mce');
         // Must run the element form scripts AFTER reseting textarea ids.
         document.fire('omeka:elementformload');
         
-		Omeka.ItemForm.enableAddFiles();
+        Omeka.ItemForm.enableAddFiles();
         Omeka.ItemForm.changeItemType();
-	});
+    });
     
     document.observe('omeka:elementformload', function(e){
         var elementFieldDiv = e.target;
@@ -32,43 +32,43 @@ echo js('tiny_mce/tiny_mce');
     
     Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
 
-	makeFileWindow: function() {
-		$$('#file-list a').each(function(link) {
-			link.onclick = function() {
-				window.open(link.getAttribute("href"));
-				return false;
-			}
-		});
-	},
-	
-    changeItemType: function() {
-		$('change_type').hide();
-		$('item-type').onchange = function() {
-			var typeSelectLabel = $$('#type-select label')[0];
-			var image = $(document.createElement('img'));
-			image.src = "<?php echo img('loader2.gif'); ?>";
-			var params = 'item_id=<?php echo $item->id; ?>&type_id='+this.getValue();
-						
-			new Ajax.Request('<?php echo uri("items/change-type") ?>', {
-				parameters: params,
-				onCreate: function(t) {
-					typeSelectLabel.appendChild(image);
-				},
-				onFailure: function(t) {
-					alert(t.status);
-				},
-				onComplete: function(t) {
-					var form = $('type-metadata-form');
-					image.remove();
-					form.update(t.responseText);
-					form.fire('omeka:elementformload');
-					Effect.BlindDown(form);
-				}
-			});
-		}        
+    makeFileWindow: function() {
+        $$('#file-list a').each(function(link) {
+            link.onclick = function() {
+                window.open(link.getAttribute("href"));
+                return false;
+            }
+        });
     },
-	
-	addTags: function(tags) {
+    
+    changeItemType: function() {
+        $('change_type').hide();
+        $('item-type').onchange = function() {
+            var typeSelectLabel = $$('#type-select label')[0];
+            var image = $(document.createElement('img'));
+            image.src = "<?php echo img('loader2.gif'); ?>";
+            var params = 'item_id=<?php echo $item->id; ?>&type_id='+this.getValue();
+                        
+            new Ajax.Request('<?php echo uri("items/change-type") ?>', {
+                parameters: params,
+                onCreate: function(t) {
+                    typeSelectLabel.appendChild(image);
+                },
+                onFailure: function(t) {
+                    alert(t.status);
+                },
+                onComplete: function(t) {
+                    var form = $('type-metadata-form');
+                    image.remove();
+                    form.update(t.responseText);
+                    form.fire('omeka:elementformload');
+                    Effect.BlindDown(form);
+                }
+            });
+        }        
+    },
+    
+    addTags: function(tags) {
         var newTags = tags.split(',');
         
         // only add tags from the input box that are new
@@ -111,25 +111,25 @@ echo js('tiny_mce/tiny_mce');
         return false;
     },
 
-	removeTag: function(button) {
-	    button.hide();
-	    button.parentNode.setOpacity(.3);
-		Omeka.ItemForm.updateTagsField();
-		return false;
-	},
-	
-	undoRemoveTag: function(button) {
-	    button.next('input.remove_tag').show();
-	    button.parentNode.setOpacity(1);
+    removeTag: function(button) {
+        button.hide();
+        button.parentNode.setOpacity(.3);
         Omeka.ItemForm.updateTagsField();
-		return false;
-	},
-	
-	// update the tags field to only include the tags that have not been removed
-	updateTagsField: function() {
-	    var myTagsToAdd = new Array();
-	    var myTagsToDelete = new Array();
-	    if (rTButtons = $$('#my-tags-list input.remove_tag')) {
+        return false;
+    },
+    
+    undoRemoveTag: function(button) {
+        button.next('input.remove_tag').show();
+        button.parentNode.setOpacity(1);
+        Omeka.ItemForm.updateTagsField();
+        return false;
+    },
+    
+    // update the tags field to only include the tags that have not been removed
+    updateTagsField: function() {
+        var myTagsToAdd = new Array();
+        var myTagsToDelete = new Array();
+        if (rTButtons = $$('#my-tags-list input.remove_tag')) {
             rTButtons.each(function(button) {
                 // decide whether the toggled tag needs to be included
                 var s = button.value.strip();
@@ -138,11 +138,11 @@ echo js('tiny_mce/tiny_mce');
                 } else {
                     myTagsToDelete.push(s);
                 }
-            });	        
-	    }
-	    
-	    var otherTagsToDelete = new Array();
-	    if (rTButtons = $$('#other-tags-list input.remove_tag')) {
+            });         
+        }
+        
+        var otherTagsToDelete = new Array();
+        if (rTButtons = $$('#other-tags-list input.remove_tag')) {
             rTButtons.each(function(button) {
                 // decide whether a toggled tag needs to be added
                 var s = button.value.strip();
@@ -150,42 +150,42 @@ echo js('tiny_mce/tiny_mce');
                     otherTagsToDelete.push(s);
                 }
             });  
-	    }
-	    
-	    $('my-tags-to-add').value = myTagsToAdd.join(',');
-	    $('my-tags-to-delete').value = myTagsToDelete.join(',');
-	    $('other-tags-to-delete').value = otherTagsToDelete.join(',');    	    
-	},
-	
-	/* Messing with the tag list should not submit the form. */
-	enableTagRemoval: function() {		
-		if ( !(removeTagButtons = $$('input.remove_tag')) || !(undoRemoveTagButtons = $$('input.undo_remove_tag'))) {
-		    return;
-		}
+        }
+        
+        $('my-tags-to-add').value = myTagsToAdd.join(',');
+        $('my-tags-to-delete').value = myTagsToDelete.join(',');
+        $('other-tags-to-delete').value = otherTagsToDelete.join(',');          
+    },
+    
+    /* Messing with the tag list should not submit the form. */
+    enableTagRemoval: function() {      
+        if ( !(removeTagButtons = $$('input.remove_tag')) || !(undoRemoveTagButtons = $$('input.undo_remove_tag'))) {
+            return;
+        }
 
-    	$('add-tags-button').observe('click', function(e) {
+        $('add-tags-button').observe('click', function(e) {
             e.stop();
             Omeka.ItemForm.addTags($('tags').value);
-        });  	
-		
-		removeTagButtons.invoke('observe', 'click', function(e) {
-		    e.stop();
-		    Omeka.ItemForm.removeTag(this);
-		});
-		
-		undoRemoveTagButtons.invoke('observe', 'click', function(e) {
-		    e.stop();
-		    Omeka.ItemForm.undoRemoveTag(this);
-		});
-		
-		Omeka.ItemForm.updateTagsField();
-	},
-	
-	/**
-	 * Send an AJAX request to update a <div class="field"> that contains all 
-	 * the form inputs for an element.
-	 */
-	elementFormRequest: function(fieldDiv, params) {
+        });     
+        
+        removeTagButtons.invoke('observe', 'click', function(e) {
+            e.stop();
+            Omeka.ItemForm.removeTag(this);
+        });
+        
+        undoRemoveTagButtons.invoke('observe', 'click', function(e) {
+            e.stop();
+            Omeka.ItemForm.undoRemoveTag(this);
+        });
+        
+        Omeka.ItemForm.updateTagsField();
+    },
+    
+    /**
+     * Send an AJAX request to update a <div class="field"> that contains all 
+     * the form inputs for an element.
+     */
+    elementFormRequest: function(fieldDiv, params) {
         var elementId = fieldDiv.id.gsub(/element-/, '');
         
         // Isolate the inputs on this part of the form.
@@ -208,9 +208,9 @@ echo js('tiny_mce/tiny_mce');
                 fieldDiv.fire('omeka:elementformload');
             }
         });
-	},
-	
-	addElementControl: function(e){
+    },
+    
+    addElementControl: function(e){
         e.stop();
         var addButton = Event.element(e);
         var fieldDiv = addButton.up('div.field');
@@ -236,38 +236,38 @@ echo js('tiny_mce/tiny_mce');
         removeButton.up('div.input-block').remove();
         
         $$('div.field').each(function(i) {
-	        var removeCount = i.select('.remove-element').size();
-	        if(removeCount == 1) {
-	            i.select('.remove-element').each(function(j,index){
-	                j.style.display = "none"; 
-	            }); 
-	        }
-	    });
-	},
+            var removeCount = i.select('.remove-element').size();
+            if(removeCount == 1) {
+                i.select('.remove-element').each(function(j,index){
+                    j.style.display = "none"; 
+                }); 
+            }
+        });
+    },
     
     makeElementControls: function() {
         
         $$('div.field').each(function(i) {
-	        var removeCount = i.select('.remove-element').size();
-	        if(removeCount > 1) {
-	            i.select('.remove-element').each(function(j,index){
-	                j.style.display = "block"; 
-	            }); 
-	        }
-	    });
+            var removeCount = i.select('.remove-element').size();
+            if(removeCount > 1) {
+                i.select('.remove-element').each(function(j,index){
+                    j.style.display = "block"; 
+                }); 
+            }
+        });
         
- 	    // Class name is hard coded here b/c it is hard coded in the helper
-	    // function as well.
-	    $$('.add-element').invoke('observe', 'click', Omeka.ItemForm.addElementControl);
-	    
-	    // When button is clicked, remove the last input that was added
-	    $$('.remove-element').invoke('observe', 'click', Omeka.ItemForm.deleteElementControl);
-	},
-	
-	/**
-	 * Adds an arbitrary number of file input elements to the items form so that
+        // Class name is hard coded here b/c it is hard coded in the helper
+        // function as well.
+        $$('.add-element').invoke('observe', 'click', Omeka.ItemForm.addElementControl);
+        
+        // When button is clicked, remove the last input that was added
+        $$('.remove-element').invoke('observe', 'click', Omeka.ItemForm.deleteElementControl);
+    },
+    
+    /**
+     * Adds an arbitrary number of file input elements to the items form so that
      * more than one file can be uploaded at once.
-	 */
+     */
     enableAddFiles: function() {
         if(!$('add-more-files')) return;
         if(!$('file-inputs')) return;
@@ -294,14 +294,14 @@ echo js('tiny_mce/tiny_mce');
         });
 
         nonJsFormDiv.update();
-		
+        
         filesDivWrap.appendChild(link);
     },
-	
-	enableWysiwygCheckbox: function(checkbox) {
-	    
-	    function getTextarea(checkbox) {
-	        var textarea = checkbox.up('.input-block').down('textarea', 0);
+    
+    enableWysiwygCheckbox: function(checkbox) {
+        
+        function getTextarea(checkbox) {
+            var textarea = checkbox.up('.input-block').down('textarea', 0);
             // We can't use the editor for any field that isn't a textarea
             if (Object.isUndefined(textarea)) {
                 return;
@@ -309,14 +309,14 @@ echo js('tiny_mce/tiny_mce');
             
             textarea.identify();
             return textarea;
-	    }
-	    
-	    // Add the 'html-editor' class to all textareas that are flagged as HTML.
-	    var textarea = getTextarea(checkbox);
-	    
-	    if (checkbox.checked && textarea) {
+        }
+        
+        // Add the 'html-editor' class to all textareas that are flagged as HTML.
+        var textarea = getTextarea(checkbox);
+        
+        if (checkbox.checked && textarea) {
             textarea.addClassName('html-editor');
-	    };
+        };
 
 
         // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
@@ -332,77 +332,77 @@ echo js('tiny_mce/tiny_mce');
                 }                
             };
         });
-	},
-	
-	/**
-	 * Make it so that checking a box will enable the WYSIWYG HTML editor for
+    },
+    
+    /**
+     * Make it so that checking a box will enable the WYSIWYG HTML editor for
      * any given element field. This can be enabled on a per-textarea basis as
      * opposed to all fields for the element.
-	 */
-	enableWysiwyg: function() {
-	    	    
-	    $$('div.inputs').each(function(div){
+     */
+    enableWysiwyg: function() {
+                
+        $$('div.inputs').each(function(div){
             // Get all the WYSIWYG checkboxes
             var checkboxes = div.select('input[type="checkbox"]');
             checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
-	    });
-	
+        });
+    
         tinyMCE.init({
             mode: "specific_textareas",
             editor_selector : "html-editor",    // Put the editor in for all textareas with an 'html-editor' class.
-           	theme: "advanced",
-    		force_br_newlines : true,
-    		forced_root_block : '', // Needed for 3.x
-    		remove_linebreaks : true,
-    		fix_content_duplication : false,
-    		fix_list_elements : true,
-    		valid_child_elements:"ul[li],ol[li]",
-           	theme_advanced_toolbar_location : "top",
-           	theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect,code",
-    		theme_advanced_buttons2 : "",
-    		theme_advanced_buttons3 : "",
-    		theme_advanced_toolbar_align : "left"
+            theme: "advanced",
+            force_br_newlines : true,
+            forced_root_block : '', // Needed for 3.x
+            remove_linebreaks : true,
+            fix_content_duplication : false,
+            fix_list_elements : true,
+            valid_child_elements:"ul[li],ol[li]",
+            theme_advanced_toolbar_location : "top",
+            theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect,code",
+            theme_advanced_buttons2 : "",
+            theme_advanced_buttons3 : "",
+            theme_advanced_toolbar_align : "left"
        });   
-	}
+    }
 
     });
     
     // Tags autocomplete
-	Event.observe(window, 'load', function(){
-	    new Ajax.Autocompleter("tags", "tag-choices", 
-	    "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
-	        tokens: ',',
-	        paramName: 'tag_start'
-	    });
-	});
-//]]>	
+    Event.observe(window, 'load', function(){
+        new Ajax.Autocompleter("tags", "tag-choices", 
+        "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
+            tokens: ',',
+            paramName: 'tag_start'
+        });
+    });
+//]]>   
 </script>
 
 <?php echo flash(); ?>
 
 <div id="public-featured">
     <?php if ( has_permission('Items', 'makePublic') ): ?>
-    	<div class="checkbox">
-    		<label for="public">Public:</label> 
-    		<div class="checkbox"><?php echo checkbox(array('name'=>'public', 'id'=>'public'), $item->public); ?></div>
-    	</div>
+        <div class="checkbox">
+            <label for="public">Public:</label> 
+            <div class="checkbox"><?php echo checkbox(array('name'=>'public', 'id'=>'public'), $item->public); ?></div>
+        </div>
     <?php endif; ?>
     <?php if ( has_permission('Items', 'makeFeatured') ): ?>
-    	<div class="checkbox">
-    		<label for="featured">Featured:</label> 
-    		<div class="checkbox"><?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?></div>
-    	</div>
+        <div class="checkbox">
+            <label for="featured">Featured:</label> 
+            <div class="checkbox"><?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?></div>
+        </div>
     <?php endif; ?>
 </div>
 <div id="item-metadata">
 <?php foreach ($tabs as $tabName => $tabContent): ?>
-	<?php if (!empty($tabContent)): ?>
-    	<div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
+    <?php if (!empty($tabContent)): ?>
+        <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
         <fieldset class="set">
             <legend><?php echo html_escape($tabName); ?></legend>
             <?php echo $tabContent; ?>        
         </fieldset>
-        </div>	   
-	<?php endif; ?>
+        </div>     
+    <?php endif; ?>
 <?php endforeach; ?>
 </div>

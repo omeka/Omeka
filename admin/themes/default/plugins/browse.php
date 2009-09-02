@@ -39,20 +39,20 @@
         }
     }
     ?>
-	<tr <?php if (($pluginInfo->meetsOmekaMinimumVersion == false || count($requiredPluginNames) > 0) && 
-	             !$pluginInfo->loaded) { 
-	             echo 'class="plugin-load-error"'; 
-	          } elseif ($pluginInfo->hasNewVersion) { 
-	             echo 'class="upgrade-plugin"'; 
-	          } ?>>
-		<td>
-	        <?php
-		        if ($pluginInfo->meetsOmekaMinimumVersion == false || 
-		            count($requiredPluginNames) > 0):
-		    ?>
-    		        <div class="warnings">
-    		            <strong>Warning!<?php if (($pluginInfo->installed || $pluginInfo->active) && $pluginInfo->loaded): ?> The <?php echo $pluginInfo->name; ?> plugin could not be loaded for the following reasons:<?php endif; ?></strong>
-    		            <ul>
+    <tr <?php if (($pluginInfo->meetsOmekaMinimumVersion == false || count($requiredPluginNames) > 0) && 
+                 !$pluginInfo->loaded) { 
+                 echo 'class="plugin-load-error"'; 
+              } elseif ($pluginInfo->hasNewVersion) { 
+                 echo 'class="upgrade-plugin"'; 
+              } ?>>
+        <td>
+            <?php
+                if ($pluginInfo->meetsOmekaMinimumVersion == false || 
+                    count($requiredPluginNames) > 0):
+            ?>
+                    <div class="warnings">
+                        <strong>Warning!<?php if (($pluginInfo->installed || $pluginInfo->active) && $pluginInfo->loaded): ?> The <?php echo $pluginInfo->name; ?> plugin could not be loaded for the following reasons:<?php endif; ?></strong>
+                        <ul>
                             <?php if ($pluginInfo->meetsOmekaMinimumVersion == false): ?>
                                 <li class="omeka-minimum-version">The '<?php echo html_escape($pluginInfo->name); ?>' plugin requires at least Omeka <?php echo get_plugin_ini($pluginInfo->directoryName, 'omeka_minimum_version'); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</li>
                             <?php endif; ?>
@@ -77,15 +77,15 @@
                         </ul>
                     </div>
             <?php endif; ?>
-		    <div class="plugin-info">
-	        <p class="plugin-title"><?php
-    		    if ($pluginInfo->link):
-    				echo '<a href="' . html_escape($pluginInfo->link) . '">' . html_escape($pluginInfo->name) . '</a>';
-    			else:
-    		        echo html_escape($pluginInfo->name);
-    			endif; 
-    		?>
-    		<?php if (has_permission('Plugins', 'config') && $pluginInfo->hasConfig ): ?><a href="<?php echo uri('plugins/config', array('name'=>$pluginInfo->directoryName)); ?>" class="configure-button button">Configure</a><?php endif; ?></p>           
+            <div class="plugin-info">
+            <p class="plugin-title"><?php
+                if ($pluginInfo->link):
+                    echo '<a href="' . html_escape($pluginInfo->link) . '">' . html_escape($pluginInfo->name) . '</a>';
+                else:
+                    echo html_escape($pluginInfo->name);
+                endif; 
+            ?>
+            <?php if (has_permission('Plugins', 'config') && $pluginInfo->hasConfig ): ?><a href="<?php echo uri('plugins/config', array('name'=>$pluginInfo->directoryName)); ?>" class="configure-button button">Configure</a><?php endif; ?></p>           
             
             <?php 
                 $pluginMetadata = array();
@@ -104,18 +104,18 @@
             
             <?php if(!empty($pluginInfo->description)): ?>
             <p class="plugin-description"><?php echo $pluginInfo->description; ?></p>
-		    <?php endif; ?>
-		    
-		    <?php if ($pluginInfo->hasNewVersion): ?>    
-		        <p class="notice plugin-upgrade"><strong>Notice:</strong> You have a new version of <?php echo $pluginInfo->name; ?>. Please upgrade!</p>
-		    <?php endif; ?>
-		    <?php if($pluginInfo->meetsOmekaTestedUpTo == false): ?>
+            <?php endif; ?>
+            
+            <?php if ($pluginInfo->hasNewVersion): ?>    
+                <p class="notice plugin-upgrade"><strong>Notice:</strong> You have a new version of <?php echo $pluginInfo->name; ?>. Please upgrade!</p>
+            <?php endif; ?>
+            <?php if($pluginInfo->meetsOmekaTestedUpTo == false): ?>
             <p class="notice omeka-tested-up-to"><strong>Notice:</strong> This version of the '<?php echo html_escape($pluginInfo->name); ?>' plugin has only been tested up to Omeka <?php echo get_plugin_ini($pluginInfo->directoryName, 'omeka_tested_up_to'); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</p>
             <?php endif; ?>
             </div>
-		</td>
-		
-		<td>
+        </td>
+        
+        <td>
         <?php if ($pluginInfo->installed): ?>
             <?php if ($pluginInfo->hasNewVersion): ?>
                 <?php if (has_permission('Plugins', 'upgrade')): ?>

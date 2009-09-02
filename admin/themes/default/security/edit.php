@@ -75,40 +75,40 @@ Event.observe(window, 'load', function(){
 <?php echo flash(); ?>
 
 <form method="post" action="" id="security-form">
-	<fieldset>
-	    <div class="field">
-	        <label for="disable_default_file_validation">Disable File Upload Validation</label>
-	            <div class="inputs">
-	        <?php echo $this->formCheckbox('disable_default_file_validation', 
-	            null, array('checked'=>get_option('disable_default_file_validation'))); ?>
-	        <p class="explanation">Check this field if you would like to allow any file to be uploaded to Omeka.</p>
-	        </div>
-	    </div>
-	    <div class="field">
-	        <label for="file_extension_whitelist">Allowed File Extensions</label>
-	        <div class="inputs">
-	        <?php echo $this->formTextarea('file_extension_whitelist', 
-	                get_option('file_extension_whitelist'), 
-	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
-	        <p class="explanation">List of allowed extensions for file uploads.</p> 
-	        </div>
-	    </div>
-	    
-	    <div class="field">
-	        <label for="file_mime_type_whitelist">Allowed File Types</label>
-	        <div class="inputs">
-	        <?php echo $this->formTextarea('file_mime_type_whitelist',
-	                get_option('file_mime_type_whitelist'),
-	                array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
-	        <p class="explanation">List of allowed MIME types for file uploads.</p>
-	        </div>
-	    </div>
-	    
-	</fieldset>
-	
-	<fieldset>
-	    <input type="submit" id="security-submit" name="submit" class="submit submit-medium" value="Save Changes" />
-	</fieldset>
+    <fieldset>
+        <div class="field">
+            <label for="disable_default_file_validation">Disable File Upload Validation</label>
+                <div class="inputs">
+            <?php echo $this->formCheckbox('disable_default_file_validation', 
+                null, array('checked'=>get_option('disable_default_file_validation'))); ?>
+            <p class="explanation">Check this field if you would like to allow any file to be uploaded to Omeka.</p>
+            </div>
+        </div>
+        <div class="field">
+            <label for="file_extension_whitelist">Allowed File Extensions</label>
+            <div class="inputs">
+            <?php echo $this->formTextarea('file_extension_whitelist', 
+                    get_option('file_extension_whitelist'), 
+                    array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+            <p class="explanation">List of allowed extensions for file uploads.</p> 
+            </div>
+        </div>
+        
+        <div class="field">
+            <label for="file_mime_type_whitelist">Allowed File Types</label>
+            <div class="inputs">
+            <?php echo $this->formTextarea('file_mime_type_whitelist',
+                    get_option('file_mime_type_whitelist'),
+                    array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+            <p class="explanation">List of allowed MIME types for file uploads.</p>
+            </div>
+        </div>
+        
+    </fieldset>
+    
+    <fieldset>
+        <input type="submit" id="security-submit" name="submit" class="submit submit-medium" value="Save Changes" />
+    </fieldset>
 </form>
 </div>
 <?php foot(); ?>

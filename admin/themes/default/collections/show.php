@@ -18,26 +18,26 @@
 <h2>Description</h2> 
 <p><?php echo collection('Description'); ?></p>
 
-	<h2>Collectors</h2>
-	<ul id="collector-list">
-    	<?php if (collection_has_collectors()): ?> 
-    	<li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
-		<?php else: ?>
-		<li>No collectors</li>
-		<?php endif; ?>	
-	</ul>
+    <h2>Collectors</h2>
+    <ul id="collector-list">
+        <?php if (collection_has_collectors()): ?> 
+        <li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
+        <?php else: ?>
+        <li>No collectors</li>
+        <?php endif; ?> 
+    </ul>
 
 </div>
 <div id="collection-items">
-	<h2>Recently Added to <?php echo collection('Name'); ?></h2>
-	
-	<ul>
-	<?php while (loop_items_in_collection(10)): ?>
-		<li><span class="title"><?php echo link_to_item(); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span></li>
-	<?php endwhile;?>
-	</ul>
-	<h4>Total Number of Items in Collection: <?php echo total_items_in_collection();?></h4>
-	
+    <h2>Recently Added to <?php echo collection('Name'); ?></h2>
+    
+    <ul>
+    <?php while (loop_items_in_collection(10)): ?>
+        <li><span class="title"><?php echo link_to_item(); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span></li>
+    <?php endwhile;?>
+    </ul>
+    <h4>Total Number of Items in Collection: <?php echo total_items_in_collection();?></h4>
+    
 </div>
 
 <?php fire_plugin_hook('admin_append_to_collections_show_primary', $collection); ?>

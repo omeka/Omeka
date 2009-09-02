@@ -5,25 +5,25 @@
 <?php endif ?>
 
 <div id="primary">
-	<table>
-		<thead>
-			<tr>
-				<th>Type Name</th>
-				<th>Description</th>
-				<?php if (has_permission('ItemTypes', 'edit')): ?>
-				<th>Action</th>
-				<?php endif; ?>
-			</tr>
-		</thead>
-		<tbody>
+    <table>
+        <thead>
+            <tr>
+                <th>Type Name</th>
+                <th>Description</th>
+                <?php if (has_permission('ItemTypes', 'edit')): ?>
+                <th>Action</th>
+                <?php endif; ?>
+            </tr>
+        </thead>
+        <tbody>
 <?php foreach( $itemtypes as $itemtype ): ?>
 <tr class="itemtype">
-	 <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo html_escape($itemtype->name); ?></a></td>
-	<td width="70%"><?php echo html_escape($itemtype->description); ?></td>
-	<?php if (has_permission('ItemTypes', 'edit')): ?><td>
-	    <a class="edit" href="<?php echo uri('item-types/edit/'.$itemtype->id); ?>">Edit</a>
-	</td><?php endif; ?>
-	
+     <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo html_escape($itemtype->name); ?></a></td>
+    <td width="70%"><?php echo html_escape($itemtype->description); ?></td>
+    <?php if (has_permission('ItemTypes', 'edit')): ?><td>
+        <a class="edit" href="<?php echo uri('item-types/edit/'.$itemtype->id); ?>">Edit</a>
+    </td><?php endif; ?>
+    
 </tr>
 <?php endforeach; ?>
 </tbody>

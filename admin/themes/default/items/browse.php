@@ -6,46 +6,46 @@
 
 <ul id="section-nav" class="navigation<?php if(@$_GET['view'] == 'detailed') echo ' detailed'; if (empty($_GET['view']) || @$_GET['view'] == 'simple') echo ' simple'; ?>">
 <?php
-	$section_nav = array(
-	    'List View' => current_uri(array('view'=>'simple')), 
-	    'Detailed View' => current_uri(array('view'=>'detailed'))
-	    );
-	
-	$section_nav = apply_filters('admin_navigation_items_browse', $section_nav, $items);
-				
-	echo nav($section_nav);
+    $section_nav = array(
+        'List View' => current_uri(array('view'=>'simple')), 
+        'Detailed View' => current_uri(array('view'=>'detailed'))
+        );
+    
+    $section_nav = apply_filters('admin_navigation_items_browse', $section_nav, $items);
+                
+    echo nav($section_nav);
 ?>
 </ul>
 <?php endif; ?>
 
 <div id="primary">
-	<?php if ( total_results() ): ?>
-	<?php echo flash(); ?>
-	
-	<div id="browse-meta">
-		<div id="simple-search-form">
-			<?php echo simple_search(); ?>
-			<span id="advanced-search-link"><?php echo link_to_advanced_search(); ?></span>
-		</div>
+    <?php if ( total_results() ): ?>
+    <?php echo flash(); ?>
+    
+    <div id="browse-meta">
+        <div id="simple-search-form">
+            <?php echo simple_search(); ?>
+            <span id="advanced-search-link"><?php echo link_to_advanced_search(); ?></span>
+        </div>
 
 
-		<div class="pagination"><?php echo pagination_links(); ?></div>
-	</div>
-	
+        <div class="pagination"><?php echo pagination_links(); ?></div>
+    </div>
+    
 <form id="items-browse" action="<?php echo uri('items/power-edit'); ?>" method="post" accept-charset="utf-8">
 
 <fieldset id="view-choice">
-	<?php 
-		switch ($_GET['view']) {
-			case 'detailed':
-			    common('detailed-view', compact('items'), 'items');
-			    break;
-			case 'simple':
-			default:
-				common('simple-view', compact('items'), 'items');
-				break;
-		}
-	 ?>
+    <?php 
+        switch ($_GET['view']) {
+            case 'detailed':
+                common('detailed-view', compact('items'), 'items');
+                break;
+            case 'simple':
+            default:
+                common('simple-view', compact('items'), 'items');
+                break;
+        }
+     ?>
 </fieldset>
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
@@ -55,16 +55,16 @@
 </form>
 
 <?php elseif(!total_items()): ?>
-	<div id="no-items">
-	<p>There are no items in the archive yet.
-	
-	<?php if(has_permission('Items','add')): ?>
-		  Why don&#8217;t you <a href="<?php echo uri('items/add'); ?>">add one</a>?</p>
-	<?php endif; ?>
+    <div id="no-items">
+    <p>There are no items in the archive yet.
+    
+    <?php if(has_permission('Items','add')): ?>
+          Why don&#8217;t you <a href="<?php echo uri('items/add'); ?>">add one</a>?</p>
+    <?php endif; ?>
 </div>
-	
+    
 <?php else: ?>
-	<h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
+    <h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
 <?php endif; ?>
 
 <div>

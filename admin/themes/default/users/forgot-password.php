@@ -8,10 +8,10 @@
 <?php echo flash(); ?>
 <form method="post" accept-charset="utf-8">
     <div class="field">        
-    	<label for="email">Email</label>
-    	<input type="text" name="email" id="email" class="textinput" value="<?php echo @$_POST['email']; ?>" />
-	</div>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" class="textinput" value="<?php echo @$_POST['email']; ?>" />
+    </div>
 
-	<input type="submit" class="submit submit-small" value="Submit" />
+    <input type="submit" class="submit submit-small" value="Submit" />
 </form>
 <?php foot(array(), 'login-footer'); ?>

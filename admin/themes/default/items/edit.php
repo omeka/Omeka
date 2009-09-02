@@ -23,14 +23,14 @@ $$('.tabs').each(function(tab_group){
 
 <div id="primary">
 
-	<form method="post" enctype="multipart/form-data" id="item-form" action="">
-		<?php include 'form.php'; ?>
-		    <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit submit-medium'), 'Save Changes'); ?>
-		<p id="delete_item_link">
-		    <?php echo link_to_item('Delete This Item', 
-		        array('class'=>'delete'), 'delete'); ?>
-		</p>
-	</form>
+    <form method="post" enctype="multipart/form-data" id="item-form" action="">
+        <?php include 'form.php'; ?>
+            <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit submit-medium'), 'Save Changes'); ?>
+        <p id="delete_item_link">
+            <?php echo link_to_item('Delete This Item', 
+                array('class'=>'delete'), 'delete'); ?>
+        </p>
+    </form>
 
 
 

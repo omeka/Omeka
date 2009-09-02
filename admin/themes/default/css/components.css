@@ -32,59 +32,59 @@ Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
 /* == Form Components == */
 form {overflow:hidden; zoom:1;}
 div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
-	
-	label, div.label {font-size:1.2em; color:#444;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
-	label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
-		
-	input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
+    
+    label, div.label {font-size:1.2em; color:#444;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
+    label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
+        
+    input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
     .submit, button, .button {
         text-align:center;
         text-decoration:none;
         color:#fff !important;
-	    clear:both; 
-	    margin:9px 0;
-	    background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
-	    float:right; 
-	    color:#fff;
-	    padding: 3px 6px;
-	    border:none; 
-	    border:1px solid #6d8e1d;
-	    border-radius:6px;
-	    -webkit-border-radius:6px;
-	    -moz-border-radius:6px;
-	}
-	
-	input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
-	
-	.dateinput input {margin-right: 3px;}
-	
-	#required-note {font-size: 0.6em; color: #777; display: block;}
+        clear:both; 
+        margin:9px 0;
+        background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
+        float:right; 
+        color:#fff;
+        padding: 3px 6px;
+        border:none; 
+        border:1px solid #6d8e1d;
+        border-radius:6px;
+        -webkit-border-radius:6px;
+        -moz-border-radius:6px;
+    }
     
-	/* Submit buttons - different sizes, uses background images */
-	.submit-extrasmall {width: 46px;}
-	.submit-small {width: 70px;}
-	.submit-medium {width: 100px;}
+    input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
+    
+    .dateinput input {margin-right: 3px;}
+    
+    #required-note {font-size: 0.6em; color: #777; display: block;}
+    
+    /* Submit buttons - different sizes, uses background images */
+    .submit-extrasmall {width: 46px;}
+    .submit-small {width: 70px;}
+    .submit-medium {width: 100px;}
 
-	/* Plugins */
-	.uninstall {background-color: #800 !important; border-color: #800 !important;}
-	.deactivate {background-color:#c60 !important; border-color: #c60 !important;}
-		
-	.uninstall:hover, 
-	.deactivate:hover {}
+    /* Plugins */
+    .uninstall {background-color: #800 !important; border-color: #800 !important;}
+    .deactivate {background-color:#c60 !important; border-color: #c60 !important;}
+        
+    .uninstall:hover, 
+    .deactivate:hover {}
 
-	/* Replaces tooltips */
-	.field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
-	#item-form .field .explanation, #editfile .field .explanation, .hint {margin-left:216px; float:left; clear:right;}
-	
-	/* Changes the width of inputs depending on the layout */
-		.vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
-		.vertical-nav #item-form .field .explanation, .vertical-nav .field .hint {margin-left: 144px;}
-		
-		/* .input used to wrap input fields in items/add form */
-		.field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
-		.vertical-nav .field .inputs {width: 468px;}
-				
+    /* Replaces tooltips */
+    .field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
+    #item-form .field .explanation, #editfile .field .explanation, .hint {margin-left:216px; float:left; clear:right;}
+    
+    /* Changes the width of inputs depending on the layout */
+        .vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
+        .vertical-nav #item-form .field .explanation, .vertical-nav .field .hint {margin-left: 144px;}
+        
+        /* .input used to wrap input fields in items/add form */
+        .field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
+        .vertical-nav .field .inputs {width: 468px;}
+                
 /* == Layout == */
 
 #primary { background:#fff; padding:18px;border:1px solid #d7d5c4; border-width: 3px 0;}
@@ -111,30 +111,30 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 
 /* vertical-nav */
 .vertical-nav ul#section-nav {margin:0; padding:0;float:left; width: 198px;font-size:1.1em;margin-top:18px;background:transparent url("../images/list-border-tan.gif") bottom left repeat-x;}
-	.vertical-nav ul#section-nav a {text-decoration:none; display:block;padding:9px 9px 6px; color: #467;background:transparent url("../images/list-border-tan.gif") top left repeat-x;}
-	.vertical-nav ul#section-nav a:hover {background-color:#f6f5e9;}
-	.vertical-nav ul#section-nav li.current a, .vertical-nav ul#section-nav li a.active {background:#fff !important; font-weight:bold;color: #c60;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
+    .vertical-nav ul#section-nav a {text-decoration:none; display:block;padding:9px 9px 6px; color: #467;background:transparent url("../images/list-border-tan.gif") top left repeat-x;}
+    .vertical-nav ul#section-nav a:hover {background-color:#f6f5e9;}
+    .vertical-nav ul#section-nav li.current a, .vertical-nav ul#section-nav li a.active {background:#fff !important; font-weight:bold;color: #c60;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 
 .horizontal-nav ul#section-nav {margin:0; padding:0;font-size:1.1em; padding:9px 0 12px;}
-	.horizontal-nav ul#section-nav li {display:inline;}
-	.horizontal-nav ul#section-nav a {text-decoration:none; padding:9px 12px 12px; width: 126px;  color: #467; }
-	.horizontal-nav ul#section-nav a:hover {color: #467; background:#E1DFD0;}
-	.horizontal-nav ul#section-nav li.current a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
+    .horizontal-nav ul#section-nav li {display:inline;}
+    .horizontal-nav ul#section-nav a {text-decoration:none; padding:9px 12px 12px; width: 126px;  color: #467; }
+    .horizontal-nav ul#section-nav a:hover {color: #467; background:#E1DFD0;}
+    .horizontal-nav ul#section-nav li.current a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
 
 /* Side info panels */
 .info-panel {background:#fff;overflow:hidden;zoom:1; z-index:100;border:1px solid #d7d5c4;display:block;margin-bottom:18px; padding:18px 18px 1px; border-width: 0 0 3px;}
-	.info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif;font-size:1.2em;padding: 9px 18px; color: #fff; background: #467;}
-	.info-panel h3 {font-size:1.2em; font-weight:bold; margin-bottom:0.5em;}
-	.info-panel li {background:url("../images/bullet_blue.gif") 0 6px no-repeat; padding-left:20px;padding:7px 0 7px 20px;border-bottom:1px dotted #ddd;}
-	.info-panel li a {text-decoration:none; display:block; color: #c60; }
-	.info-panel li a:hover {color:#389;}
-	.info-panel p, .info-panel ul, .info-panel ol {font-size:1.1em;}
+    .info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif;font-size:1.2em;padding: 9px 18px; color: #fff; background: #467;}
+    .info-panel h3 {font-size:1.2em; font-weight:bold; margin-bottom:0.5em;}
+    .info-panel li {background:url("../images/bullet_blue.gif") 0 6px no-repeat; padding-left:20px;padding:7px 0 7px 20px;border-bottom:1px dotted #ddd;}
+    .info-panel li a {text-decoration:none; display:block; color: #c60; }
+    .info-panel li a:hover {color:#389;}
+    .info-panel p, .info-panel ul, .info-panel ol {font-size:1.1em;}
 
-	.info-panel input.textinput, .info-panel textarea {width: 180px !important;}
+    .info-panel input.textinput, .info-panel textarea {width: 180px !important;}
 
 /* Previous/Next navigation */
 .previous, .next {float:left; display:block; width: 48%;}
-	.next {float:right; text-align:right;}
+    .next {float:right; text-align:right;}
 
 /* Icons */
 

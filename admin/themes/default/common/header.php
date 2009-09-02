@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Omeka Admin: <?php echo settings('site_title'); ?> | <?php echo $title; ?></title>
@@ -46,27 +46,27 @@
             <?php endif; ?>
         </div>
     <?php endif; ?>
-	<div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
-	<div id="wrap">
-		
-		<div id="header">
-			<div id="site-title"><a href="<?php echo uri(''); ?>"><?php echo settings('site_title'); ?></a></div>
-			
-			<div id="site-info">
-			    <p id="welcome">Welcome, <a href="<?php echo uri('users/edit/'.current_user()->id); ?>"><?php echo current_user()->first_name; ?></a> | <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
-				<?php if (has_permission('Settings', 'edit')) 
-				{
-				    echo '<a href="'.uri('settings').'" id="settings-link">Settings</a>';
+    <div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
+    <div id="wrap">
+        
+        <div id="header">
+            <div id="site-title"><a href="<?php echo uri(''); ?>"><?php echo settings('site_title'); ?></a></div>
+            
+            <div id="site-info">
+                <p id="welcome">Welcome, <a href="<?php echo uri('users/edit/'.current_user()->id); ?>"><?php echo current_user()->first_name; ?></a> | <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
+                <?php if (has_permission('Settings', 'edit')) 
+                {
+                    echo '<a href="'.uri('settings').'" id="settings-link">Settings</a>';
 
-				} ?>
-				<?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?>
-			</div>
-			
+                } ?>
+                <?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?>
+            </div>
+            
 
-									
+                                    
             <?php echo common('primary-nav'); ?>
-		</div>
-		
-		
-		
-		<div id="content" <?php if(!empty($content_class)) echo ' class="'. $content_class .'"'; ?>>
+        </div>
+        
+        
+        
+        <div id="content" <?php if(!empty($content_class)) echo ' class="'. $content_class .'"'; ?>>

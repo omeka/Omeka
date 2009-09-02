@@ -38,95 +38,95 @@ function toggleTab(num,numelems,opennum,animate) {
         c.style.marginTop = '2px';
         if (animate || typeof animate == 'undefined') {
             Effect.toggle('step'+num,'appear',{duration:.7, queue:{scope:'menus', position:'end', limit: 3}});
- 		}		
-		else {
+        }       
+        else {
             toggleDisp('step'+num);
         }
     }
 }
 
 function toggleBackNext() {
-	var toggles = $$("div.toggle");
-	var togglesLength = toggles.length;
-	var links = $$("#tertiary-nav a");
-	if(!('tertiary-nav')) return false;
-	if(!toggles) return false;
-	removeClasses(links);
-	for (var i=0;i<toggles.length; i++) {
-			
-		var newNav = document.createElement("div");
-		newNav.setAttribute('class','theme-paginate');
-		
-		var next = document.createElement("a");
-		next.setAttribute('href','#step'+(i+2));
-		next.setAttribute('class','next');
-		next.innerHTML = "Next &#187;";
-		
-		next.onclick = function(event) {
-			var section = this.getAttribute("href").split("#step")[1];
-			toggleTab(section,toggles.length);
-			sectionButton = $("stepbutton"+section).getElementsByTagName('a')[0];
-			removeClasses(links);
-			sectionButton.toggleClassName('current','off');
-			return false;
-		}
-		
-		var back = document.createElement("a");
-		back.setAttribute('href','#step'+i);
-		back.setAttribute('class','back');
-		back.innerHTML = "&#171; Back";
-		
-		back.onclick = function() {
-			var section = this.getAttribute("href").split("#step")[1];
-			toggleTab(section,toggles.length);
-			removeClasses(links);
-			sectionButton = $("stepbutton"+section).getElementsByTagName('a')[0];
-			removeClasses(links);
-			sectionButton.toggleClassName('current','off');
-			return false;
-		}
-		
-		if(i!=0) {	
-			newNav.appendChild(back);
-		} 
-		
-		if(i!=(toggles.length-1)) {
-			newNav.appendChild(next);
-			
-		}
-		
-		toggles[i].appendChild(newNav);				
-	}
+    var toggles = $$("div.toggle");
+    var togglesLength = toggles.length;
+    var links = $$("#tertiary-nav a");
+    if(!('tertiary-nav')) return false;
+    if(!toggles) return false;
+    removeClasses(links);
+    for (var i=0;i<toggles.length; i++) {
+            
+        var newNav = document.createElement("div");
+        newNav.setAttribute('class','theme-paginate');
+        
+        var next = document.createElement("a");
+        next.setAttribute('href','#step'+(i+2));
+        next.setAttribute('class','next');
+        next.innerHTML = "Next &#187;";
+        
+        next.onclick = function(event) {
+            var section = this.getAttribute("href").split("#step")[1];
+            toggleTab(section,toggles.length);
+            sectionButton = $("stepbutton"+section).getElementsByTagName('a')[0];
+            removeClasses(links);
+            sectionButton.toggleClassName('current','off');
+            return false;
+        }
+        
+        var back = document.createElement("a");
+        back.setAttribute('href','#step'+i);
+        back.setAttribute('class','back');
+        back.innerHTML = "&#171; Back";
+        
+        back.onclick = function() {
+            var section = this.getAttribute("href").split("#step")[1];
+            toggleTab(section,toggles.length);
+            removeClasses(links);
+            sectionButton = $("stepbutton"+section).getElementsByTagName('a')[0];
+            removeClasses(links);
+            sectionButton.toggleClassName('current','off');
+            return false;
+        }
+        
+        if(i!=0) {  
+            newNav.appendChild(back);
+        } 
+        
+        if(i!=(toggles.length-1)) {
+            newNav.appendChild(next);
+            
+        }
+        
+        toggles[i].appendChild(newNav);             
+    }
 }
 
 function removeClasses(theArray) {
-	for(var i=0;i<theArray.length;i++){
-	theArray[i].removeClassName('current');
-	}
+    for(var i=0;i<theArray.length;i++){
+    theArray[i].removeClassName('current');
+    }
 }
 function toggleNav() {
-	var toggles = $$("div.toggle");
-	
-	for (var i=0;i<toggles.length; i++) {
-		toggles[i].style.display = "none";
-		toggles[0].style.display = "block";
-	}
+    var toggles = $$("div.toggle");
+    
+    for (var i=0;i<toggles.length; i++) {
+        toggles[i].style.display = "none";
+        toggles[0].style.display = "block";
+    }
 
-	if(!$$("#tertiary-nav a")) return;
-	var links = $$("#tertiary-nav a");
-	if(!links[0]) return;
-	links[0].addClassName('current');
-	for (var i=0;i<links.length; i++) {
-		var link = links[i];
-		link.onclick = function() {
-			var section = this.getAttribute("href").split("#step")[1];
-			removeClasses(links);
-			this.toggleClassName('current','off');
-			
-			toggleTab(section,links.length);
-			return false;
-		}
-	}
+    if(!$$("#tertiary-nav a")) return;
+    var links = $$("#tertiary-nav a");
+    if(!links[0]) return;
+    links[0].addClassName('current');
+    for (var i=0;i<links.length; i++) {
+        var link = links[i];
+        link.onclick = function() {
+            var section = this.getAttribute("href").split("#step")[1];
+            removeClasses(links);
+            this.toggleClassName('current','off');
+            
+            toggleTab(section,links.length);
+            return false;
+        }
+    }
 }
 
 /* Event.observe(window,'load',toggleBackNext);

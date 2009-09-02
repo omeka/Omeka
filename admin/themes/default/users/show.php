@@ -5,13 +5,13 @@
 
 <div id="primary">
 
-	<h2>Username</h2>
-	<p><?php echo html_escape($user->username); ?></p>
-	<h2>Real Name</h2>
-	<p><?php echo html_escape($user->first_name . ' ' . $user->last_name); ?></p>
-	<h2>Email</h2>
-	<p><?php echo html_escape($user->email); ?></p>
-	<h2>Institution</h2>
-	<p><?php echo html_escape($user->institution); ?></p>
+    <h2>Username</h2>
+    <p><?php echo html_escape($user->username); ?></p>
+    <h2>Real Name</h2>
+    <p><?php echo html_escape($user->first_name . ' ' . $user->last_name); ?></p>
+    <h2>Email</h2>
+    <p><?php echo html_escape($user->email); ?></p>
+    <h2>Institution</h2>
+    <p><?php echo html_escape($user->institution); ?></p>
 </div>
 <?php foot();?>

@@ -7,28 +7,28 @@ small, strike, strong, sub, sup, tt, var,
 dd, dl, dt, li, ol, ul,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-weight: inherit;
-	font-style: inherit;
-	font-size: 100%;
-	font-family: inherit;
-	text-align: left;
-	vertical-align: top;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    text-align: left;
+    vertical-align: top;
 }
 a img, :link img, :visited img {
-	border: 0;
+    border: 0;
 }
 a,:active {outline:0;}
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 q:before, q:after,
 blockquote:before, blockquote:after {
-	content: "";
+    content: "";
 }
