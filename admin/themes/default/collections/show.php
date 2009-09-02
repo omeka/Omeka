@@ -1,7 +1,7 @@
 <?php
     $collectionTitle = strip_formatting(collection('Name'));
     if ($collectionTitle != '') {
-        $collectionTitle = ': &quot;' . html_escape($collectionTitle) . '&quot; ';
+        $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
     } else {
         $collectionTitle = '';
     }

@@ -1,12 +1,21 @@
-<?php head(array('title'=>'Edit &quot;'.html_escape($itemtype->name) . '&quot; Item Type','bodyclass'=>'item-types')); ?>
-<h1>Edit &quot;<?php echo html_escape($itemtype->name); ?>&quot; Item Type</h1>
+<?php
+    $itemTypeTitle = strip_formatting($itemtype->name);
+    if ($itemTypeTitle != '') {
+        $itemTypeTitle = ': &quot;' . html_escape($itemTypeTitle) . '&quot; ';
+    } else {
+        $itemTypeTitle = '';
+    }
+    $itemTypeTitle = 'Edit Item Type #' . $itemtype->id . $itemTypeTitle;
+?>
+<?php head(array('title'=> $itemTypeTitle,'bodyclass'=>'item-types')); ?>
+<h1><?php echo $itemTypeTitle; ?></h1>
 
 <div id="primary">
 <form method="post" action="">
     <?php include 'form.php';?>
 <input type="submit" name="submit" value="Save Changes" class="submit submit-medium" /></p>
     <?php if (has_permission('ItemTypes', 'delete')): ?>
-        <p id="delete_link"><a class="delete" href="<?php echo record_uri($itemtype, 'delete', 'item-types'); ?>">Delete This Type</a></p>     
+        <p id="delete_link"><a class="delete" href="<?php echo record_uri($itemtype, 'delete', 'item-types'); ?>">Delete This Item Type</a></p>     
     <?php endif; ?>
 </form>
 

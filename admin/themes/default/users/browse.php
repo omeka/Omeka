@@ -5,7 +5,7 @@
 <div id="primary">
 <form action="<?php echo current_uri(); ?>" id="sort-users-form" method="get" accept-charset="utf-8">
     <fieldset>
-        <p>Filter Users:</p>
+        <p>Search Users:</p>
         <?php echo $this->formSelect('role', $_GET['role'], array(), 
             array(''=>'Select Role') + get_user_roles()); ?>
         <?php echo $this->formSelect('active', $_GET['active'], array(),
@@ -21,7 +21,7 @@
             array( ''=>'Sort Order',
                    'asc'=>'Ascending',
                    'desc'=>'Descending')); ?>
-                   <input type="submit" class="submit-form" name="submit" value="Filter" />
+                   <input type="submit" class="submit-form" name="submit" value="Search" />
                    
     </fieldset>
 </form>
@@ -45,7 +45,7 @@
     <tbody>
     <?php foreach( $users as $key => $user ): ?>
         <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
-            <td><?php  echo html_escape($user->username); ?></td>
+            <td><?php echo html_escape($user->username);?></td>
             <td><?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?></td>
             <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape($user->role); ?></span></td>
             <td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>

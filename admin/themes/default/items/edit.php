@@ -1,7 +1,7 @@
 <?php
     $itemTitle = strip_formatting(item('Dublin Core', 'Title'));
     if ($itemTitle != '' && $itemTitle != '[Untitled]') {
-        $itemTitle = ': &quot;' . html_escape($itemTitle) . '&quot; ';
+        $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
     } else {
         $itemTitle = '';
     }

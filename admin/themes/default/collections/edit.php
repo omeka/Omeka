@@ -1,7 +1,7 @@
 <?php
     $collectionTitle = strip_formatting(collection('Name'));
     if ($collectionTitle != '') {
-        $collectionTitle = ': &quot;' . html_escape($collectionTitle) . '&quot; ';
+        $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
     } else {
         $collectionTitle = '';
     }
@@ -13,7 +13,6 @@
 
 <div id="primary">
 	
-
 <form method="post">
 <?php include 'form.php';?>	
 <input type="submit" name="submit" class="submit submit-medium" id="save-changes" value="Save Changes" />

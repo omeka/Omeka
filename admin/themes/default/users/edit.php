@@ -1,9 +1,17 @@
-<?php head(array('title'=>'Edit User '.$user->username, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
-<h1>Edit User: <?php echo $user->username; ?></h1>
+<?php
+    $userTitle = strip_formatting($user->username);
+    if ($userTitle != '') {
+        $userTitle = ': &quot;' . html_escape($userTitle) . '&quot; ';
+    } else {
+        $userTitle = '';
+    }
+    $userTitle = 'Edit User #' . $user->id . $userTitle;
+?>
+<?php head(array('title'=> $userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
+<h1><?php echo $userTitle; ?></h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">
-    <h2>User Information</h2>
 <form method="post">
 <?php include('form.php'); ?>
 <input type="submit" name="submit" value="Save Changes" class="submit submit-medium" />

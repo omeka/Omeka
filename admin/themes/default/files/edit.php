@@ -1,7 +1,7 @@
 <?php
     $fileTitle = strip_formatting(item_file('original filename'));
     if ($fileTitle != '') {
-        $fileTitle = ': &quot;' . html_escape($fileTitle) . '&quot; ';
+        $fileTitle = ': &quot;' . $fileTitle . '&quot; ';
     } else {
         $fileTitle = '';
     }

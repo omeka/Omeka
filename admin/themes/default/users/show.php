@@ -1,5 +1,19 @@
-<?php head(array('title'=>'Users: '.$user->username, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
-<h1>User: <?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?> <a class="edit" href="<?php echo uri('users/edit/'.$user->id); ?>">(Edit)</a></h1>
+<?php
+    $userTitle = strip_formatting($user->username);
+    if ($userTitle != '') {
+        $userTitle = ': &quot;' . html_escape($userTitle) . '&quot; ';
+    } else {
+        $userTitle = '';
+    }
+    $userTitle = 'User #' . $user->id . $userTitle;
+?>
+<?php head(array('title'=>$userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
+<h1><?php echo $userTitle; ?></h1>
+
+<?php if (has_permission('Users', 'edit')): ?>
+<p id="edit-item" class="edit-button"><?php 
+echo link_to($user, 'edit', 'Edit this User', array('class'=>'edit')); ?></p>   
+<?php endif; ?>
 
 <?php common('settings-nav'); ?>
 
