@@ -187,7 +187,22 @@ class PluginsController extends Omeka_Controller_Action
             try {
                 $config = new Zend_Config_Ini($pluginIniPath, 'info');
 	            foreach ($config as $key => $value) {
-	                $pluginInfo->$key = $value;
+	                switch($pluginInfo->$key) {
+	                    case 'name':
+	                    case 'author':
+	                    case 'description':
+	                    case 'omeka_minimum_version':
+	                    case 'omeka_tested_up_to':
+	                    case 'version':
+	                    case 'required_plugins':
+	                    case 'optional_plugins':
+	                    case 'tags':
+	                        $pluginInfo->$key = (string) $value;
+	                        break;
+	                    default:
+	                        $pluginInfo->$key = $value;
+	                        break;
+	                }
 	            }
             } catch (Zend_Config_Exception $e) {}        
         }
@@ -213,7 +228,6 @@ class PluginsController extends Omeka_Controller_Action
         $pluginInfo->optionalPluginDirNames = $this->_pluginBroker->getOptionalPluginDirNames($pluginDirName);
         $pluginInfo->meetsOmekaMinimumVersion = $this->_pluginBroker->meetsOmekaMinimumVersion($pluginDirName);
         $pluginInfo->meetsOmekaTestedUpTo = $this->_pluginBroker->meetsOmekaTestedUpTo($pluginDirName);
-
 
         return $pluginInfo;
     }

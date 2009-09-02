@@ -263,7 +263,7 @@ function get_plugin_broker()
  *
  * @param string $pluginDirName The directory name of the plugin
  * @param string $iniKeyName The name of the key in the ini file
- * @return string The value of the specified plugin key. If the key does not exist, it returns an empty string.
+ * @return null | string The value of the specified plugin key. If the key does not exist, it returns null
  **/
 function get_plugin_ini($pluginDirName, $iniKeyName)
 {         

@@ -156,7 +156,8 @@ class Omeka_Plugin_Broker
                 
                 // If the plugin is upgradable, then store its directory name in a list
                 if ($this->hasPluginIniFile($pluginDirName)) {
-                    if (version_compare($this->getPluginIniValue($pluginDirName, 'version'), $plugin->version, '>')) {                
+                    $pluginVersion = (string)$this->getPluginIniValue($pluginDirName, 'version');
+                    if (trim($pluginVersion) != '' && version_compare($pluginVersion, $plugin->version, '>')) {                
                         $this->_has_new_version[$pluginDirName] = $pluginDirName;
                     }
                 }          
@@ -430,7 +431,7 @@ class Omeka_Plugin_Broker
                 
                 // let the plugin do the upgrade
                 $oldPluginVersion = $plugin->version;
-                $newPluginVersion = $this->getPluginIniValue($pluginDirName, 'version');            
+                $newPluginVersion = (string)$this->getPluginIniValue($pluginDirName, 'version');            
 
                 // run the upgrade function in the plugin
                 $upgrade_hook = $this->getHook($pluginDirName, 'upgrade');
@@ -555,7 +556,7 @@ class Omeka_Plugin_Broker
                     $plugin->active = 1;
                     $plugin->name = $pluginDirName;
                     if ($this->hasPluginIniFile($pluginDirName)) {
-                        $plugin->version = $this->getPluginIniValue($pluginDirName, 'version');
+                        $plugin->version = (string)$this->getPluginIniValue($pluginDirName, 'version');
                     } else {
                         $plugin->version = '';
                     }
@@ -799,11 +800,11 @@ class Omeka_Plugin_Broker
     /**
      * Returns a value in plugin.ini for a key
      *
-     * Will return an empty string if no value can be found in the ini file for the key.
+     * Will return a null value if no value can be found in the ini file for the key.
      * 
      * @param string $pluginDirName
      * @param string $iniKeyName
-     * @return string
+     * @return null | string
      **/
     public function getPluginIniValue($pluginDirName, $iniKeyName)
     {
@@ -817,7 +818,7 @@ class Omeka_Plugin_Broker
         } else {
     		throw new Exception("Path to plugin.ini for '$pluginDirName' is not correct.");
     	}
-        return $config->$iniKeyName;
+    	return $config->$iniKeyName;
     } 
     
     /**
@@ -831,7 +832,7 @@ class Omeka_Plugin_Broker
         if ($this->_required[$pluginDirName] == null) {            
             $this->_required[$pluginDirName] = array();
             if ($this->hasPluginIniFile($pluginDirName)) {            
-                $rrPluginDirNames = explode(',', trim($this->getPluginIniValue($pluginDirName, 'required_plugins')));
+                $rrPluginDirNames = explode(',', trim((string)$this->getPluginIniValue($pluginDirName, 'required_plugins')));
                 if(count($rrPluginDirNames) == 1 && trim($rrPluginDirNames[0]) == '') {
                     $rPluginDirNames = array();
                 } else {
@@ -858,7 +859,7 @@ class Omeka_Plugin_Broker
         if ($this->_optional[$pluginDirName] == null) {
             $this->_optional[$pluginDirName] = array();
             if ($this->hasPluginIniFile($pluginDirName)) {
-                $ooPluginDirNames = explode(',', trim($this->getPluginIniValue($pluginDirName, 'optional_plugins')));
+                $ooPluginDirNames = explode(',', trim((string)$this->getPluginIniValue($pluginDirName, 'optional_plugins')));
                 if(count($ooPluginDirNames) == 1 && trim($ooPluginDirNames[0]) == '') {
                     $oPluginDirNames = array();
                 } else {
@@ -886,8 +887,8 @@ class Omeka_Plugin_Broker
         $meetsOmekaMinimumVersion = true;
         
         if ($this->hasPluginIniFile($pluginDirName)) {
-            $omekaMinimumVersion = $this->getPluginIniValue($pluginDirName, 'omeka_minimum_version');
-            if (version_compare($omekaMinimumVersion, OMEKA_VERSION, '>')) {        
+            $omekaMinimumVersion = (string)$this->getPluginIniValue($pluginDirName, 'omeka_minimum_version');
+            if (trim($omekaMinimumVersion) != '' && version_compare($omekaMinimumVersion, OMEKA_VERSION, '>')) {        
                 $meetsOmekaMinimumVersion = false;            
             }
         }
@@ -907,8 +908,8 @@ class Omeka_Plugin_Broker
         $meetsOmekaTestedUpTo = true;
         
         if ($this->hasPluginIniFile($pluginDirName)) {
-            $omekaTestedUpTo = $this->getPluginIniValue($pluginDirName, 'omeka_tested_up_to');
-            if (version_compare($omekaTestedUpTo, OMEKA_VERSION, '<')) {        
+            $omekaTestedUpTo = (string)$this->getPluginIniValue($pluginDirName, 'omeka_tested_up_to');
+            if (trim($omekaTestedUpTo) != '' && version_compare($omekaTestedUpTo, OMEKA_VERSION, '<')) {        
                 $meetsOmekaTestedUpTo = false;            
             }
         }
