@@ -77,12 +77,37 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	    width:2em;
 	}
 	/* Simple Search */
-	#simple-search-form {padding:0;width: 212px;float:right;margin-top:0;text-align:right;clear:right;}
+	#simple-search-form {
+	    padding:0;
+	    width: 232px;
+	    float:right;
+	    margin-top:0;
+	    text-align:right;
+	    clear:right;
+	}
         #simple-search-form #search {
             border-radius:6px; 
             -webkit-border-radius:6px; 
-            -moz-border-radius:6px;            
+            -moz-border-radius:6px; 
+            margin:0 4px 0 0;
+            display:inline;           
         }
+        #simple-search-form #submit_search {
+            text-align:center;
+            text-decoration:none;
+            color:#fff !important;
+    	    clear:both; 
+    	    margin:0;
+    	    background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
+    	    color:#fff;
+    	    padding: 3px 6px;
+    	    border:none; 
+    	    border:1px solid #6d8e1d;
+    	    border-radius:6px;
+    	    -webkit-border-radius:6px;
+    	    -moz-border-radius:6px;
+    	    display:inline;
+    	}
 		#advanced-search-link a {text-decoration:none; font-weight:bold; color: #389;display:block; text-align:right;padding-top:5px; font-size:1.1em;}
 	
 	/* Pagination */
@@ -167,11 +192,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		
 /* == Content == */
 #content { z-index:1000; margin-top:-1px; position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;float:left; clear:both;}
-	
 	#content h1 {margin:-18px 0 18px; padding:18px 0 0; margin-right:8em;}
 	
 	/* Homepage */
-	
 		#getting-started dl {overflow:hidden;margin-bottom:18px; margin-left:0;display:block;}
 		#getting-started dl * {font-size:1em;}
 			#getting-started a {text-decoration:none;}
