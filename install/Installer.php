@@ -98,6 +98,7 @@ class Installer
         
         $form->addElement('password', 'password', array(
             'label' => 'Password',
+            'description' => 'Password for your super user, 6–40 characters.', 
             'class' => 'textinput', 
             'value' => $form->getValue('password'), 
             'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH, User::PASSWORD_MAX_LENGTH))), 
