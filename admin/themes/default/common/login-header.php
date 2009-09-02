@@ -10,12 +10,18 @@
 <!-- Stylesheets -->
 <link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
 <link rel="stylesheet" media="screen" href="<?php echo css('login'); ?>" />
-<link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
 
 <!--[if lte IE 6]>
 <link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />
 <![endif]-->
 
+<!-- JavaScripts -->
+<?php echo js('prototype'); ?>
+<script type="text/javascript" charset="utf-8">
+    Event.observe(window,'load',function() {
+        $('username').focus();
+    }); 
+</script>
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
 
