@@ -2,8 +2,8 @@
 abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
 {
     const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
-    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v1';
-    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v1/omeka-xml-1-1.xsd';
+    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v2';
+    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v2/omeka-xml-2-0.xsd';
     
     /**
      * This class' contextual record(s).
@@ -72,6 +72,7 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $rootElement->setAttribute('xmlns', self::XMLNS);
         $rootElement->setAttribute('xmlns:xsi', self::XMLNS_XSI);
         $rootElement->setAttribute('xsi:schemaLocation', self::XMLNS_SCHEMALOCATION);
+        $rootElement->setAttribute('uri', $this->_buildTagUri());
         return $rootElement;
     }
     
@@ -320,5 +321,12 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
             $tagContainerElement->appendChild($tagElement);
         }
         $parentElement->appendChild($tagContainerElement);
+   }
+   
+   protected function _buildTagUri()
+   {
+       $uri = Zend_Uri::factory(abs_uri());
+       $tagUri = 'tag:' . $uri->getHost() . ',' . date('Y-m-d') . ':' . $uri->getPath();
+       return $tagUri;
    }
 }
