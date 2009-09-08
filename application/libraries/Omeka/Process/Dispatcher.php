@@ -21,7 +21,13 @@ class Omeka_Process_Dispatcher
      */
     static public function startProcess($className, $user = null)
     {
-        $cliPath = get_option('path_to_php_cli');
+        // Use the user-specified path, or attempt autodetection if no path
+        // specified.
+        $cliPath = Omeka_Context::getInstance()->getConfig('basic')->background->php->path;
+        
+        if ($cliPath == "") {
+            $cliPath = self::_autodetectCliPath();
+        }
         
         self::_checkCliPath($cliPath);
         
@@ -85,6 +91,12 @@ class Omeka_Process_Dispatcher
         return true;
     }
     
+    static private function _autodetectCliPath()
+    {
+        $command = 'which php 2>&0';
+        $lastLineOutput = exec($command, $output, $returnVar);
+        return $returnVar == 0 ? $lastLineOutput : '';
+    }
     
     /**
      * Returns the path to the background bootstrap script.

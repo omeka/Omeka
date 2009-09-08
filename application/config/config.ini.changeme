@@ -24,3 +24,6 @@ log.sql = false
 log.errors = false
 
 session.name = ""
+
+; Path to PHP-CLI for running background processes.  Set this to a path to override the autodetected PHP path.
+background.php.path = ""

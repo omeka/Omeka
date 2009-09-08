@@ -218,13 +218,6 @@ class Installer
             'decorators' => $elementDecorators
         ));
         
-        $form->addElement('text', 'path_to_php_cli', array(
-            'label' => 'PHP-CLI Binary Path',
-            'class' => 'textinput',
-            'value' => $form->getValue('path_to_php_cli') ? $form->getValue('path_to_php_cli') : $this->_getPathToPhpCli(),
-            'decorators' => $elementDecorators
-        ));
-        
         $form->addElement('submit', 'install_submit', array(
             'label' => 'Install',
             'class' => 'textinput', 
@@ -246,7 +239,7 @@ class Installer
                   'copyright', 'author', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
                   'per_page_admin', 'per_page_public', 'show_empty_elements', 
-                  'path_to_convert', 'path_to_php_cli'), 
+                  'path_to_convert'), 
             'site_settings', 
             array('legend' =>'Site Settings', 
                   'decorators' => $displayGroupDecorators)
@@ -316,8 +309,7 @@ class Installer
                          'per_page_admin', 
                          'per_page_public', 
                          'show_empty_elements',
-                         'path_to_convert',
-                         'path_to_php_cli');
+                         'path_to_convert');
         foreach ($options as $option) {
             $this->_db->exec($optionSql, array($option, $this->_form->getValue($option)));
         }
@@ -498,12 +490,5 @@ class Installer
         $lastLineOutput = exec($command, $output, $returnVar);
         // Return only the directory component of the path returned.
         return $returnVar == 0 ? dirname($lastLineOutput) : '';
-    }
-    
-    private function _getPathToPhpCli()
-    {
-        $command = 'which php 2>&0';
-        $lastLineOutput = exec($command, $output, $returnVar);
-        return $returnVar == 0 ? $lastLineOutput : '';
     }
 }

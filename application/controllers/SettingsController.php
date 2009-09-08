@@ -215,13 +215,6 @@ class SettingsController extends Omeka_Controller_Action
             'decorators' => $elementDecorators
         ));
         
-        $form->addElement('text', 'path_to_php_cli', array(
-            'label' => 'PHP-CLI Binary Path',
-            'class' => 'textinput',
-            'value' => get_option('path_to_php_cli'),
-            'decorators' => $elementDecorators
-        ));
-        
         $form->addElement('submit', 'settings_submit', array(
             'label' => 'Save Settings', 
             'class' => 'submit',
@@ -235,8 +228,7 @@ class SettingsController extends Omeka_Controller_Action
             array('administrator_email', 'site_title', 'description', 
                   'copyright', 'author', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'show_empty_elements', 'path_to_convert', 
-                  'path_to_php_cli'), 
+                  'per_page_admin', 'per_page_public', 'show_empty_elements', 'path_to_convert'), 
             'site_settings', 
             array('decorators' => $displayGroupDecorators)
         );
@@ -264,8 +256,7 @@ class SettingsController extends Omeka_Controller_Action
                          'per_page_admin', 
                          'per_page_public',
                          'show_empty_elements',
-                         'path_to_convert',
-                         'path_to_php_cli');
+                         'path_to_convert');
         foreach ($options as $option) {
             set_option($option, $this->_form->getValue($option));
         }
