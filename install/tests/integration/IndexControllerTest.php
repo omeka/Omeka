@@ -42,10 +42,11 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $db->prefix = 'omeka_';
         
         $db->expects($this->once())->method('query');
-        Omeka_Context::getInstance()->setDb($db);
         Zend_Controller_Front::getInstance()->setParam('bootstrap', $this->app->getBootstrap());
         
         $this->dispatch('');
+        $this->assertController('index');
+        $this->assertAction('already-installed');
     }
     
     // public function testFatalError
