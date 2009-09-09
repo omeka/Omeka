@@ -24,6 +24,9 @@ class IndexController extends Zend_Controller_Action
             // Try to load the database connection, otherwise redirect to 'fatal-error'.
             try {
                 $bootstrap->bootstrap('Db');
+                if (!$bootstrap->hasResource('db')) {
+                    throw new Exception("Could not load database resource!");
+                }
             } catch (Zend_Config_Exception $e) {
                 // A Zend_Config_Exception means it couldn't read the db.ini file.
                 $this->getRequest()->setParam('exception', $e);
@@ -32,9 +35,9 @@ class IndexController extends Zend_Controller_Action
             
             // Don't attempt to forward exceptions to the ErrorController.
             Zend_Controller_Front::getInstance()->setParam('noErrorHandler', true);
-
+            
             // If Omeka is not already installed, forward to the action that displays that error.
-            if ($this->getRequest()->getActionName() !== 'already-installed' && Installer::isInstalled($bootstrap->getResource('db'))) {
+            if (Installer::isInstalled($bootstrap->getResource('db')) && ($this->getRequest()->getActionName() !== 'already-installed')) {
                 return $this->getRequest()->setActionName('already-installed')->setDispatched(false);
             }
         }
