@@ -9,6 +9,9 @@ defined('APPLICATION_PATH')
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
+// Needs to check the 'install/models' directory.
+set_include_path(APPLICATION_PATH . '/models' . PATH_SEPARATOR . get_include_path());
+
 /** Zend_Application */
 require_once 'Zend/Application.php';  
 
