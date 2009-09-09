@@ -66,7 +66,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         // var_dump($this->request);exit;
         // echo $this->response->getBody();exit;
         $this->assertController('index');
-        $this->assertAction('already-installed');
+        $this->assertAction('installed');
     }
     
     public function testOmekaInstallerHasErrors()
@@ -130,7 +130,11 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         ));
         
         $this->dispatch('');
-        $this->assertRedirectTo('/index/success');
+        $this->assertRedirectTo('/index/installed');
+        $this->dispatch('/index/installed');
+        // var_dump($this->request);exit;
+        $this->assertController('index');
+        $this->assertAction('installed');
     }
     
     // COPIED DIRECTLY FROM Omeka_Test_Bootstrapper.

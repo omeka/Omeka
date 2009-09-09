@@ -37,8 +37,8 @@ class IndexController extends Zend_Controller_Action
             Zend_Controller_Front::getInstance()->setParam('noErrorHandler', true);
             
             // If Omeka is not already installed, forward to the action that displays that error.
-            if (Installer::isInstalled($bootstrap->getResource('db')) && ($this->getRequest()->getActionName() !== 'already-installed')) {
-                return $this->getRequest()->setActionName('already-installed')->setDispatched(false);
+            if (Installer::isInstalled($bootstrap->getResource('db')) && ($this->getRequest()->getActionName() !== 'installed')) {
+                return $this->getRequest()->setActionName('installed')->setDispatched(false);
             }
         }
     }
@@ -55,13 +55,13 @@ class IndexController extends Zend_Controller_Action
             return $this->_forward('errors', null, null, array('installer'=>$installer));
         } else if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
             if ($installer->install($form->getValues())) {
-                return $this->_helper->redirector->goto('success');
+                return $this->_helper->redirector->goto('installed');
             }
         } 
         $this->view->installer = $installer;
     }
         
-    public function successAction()
+    public function installedAction()
     {
         
     }
@@ -70,10 +70,7 @@ class IndexController extends Zend_Controller_Action
     {
         $this->view->installer = $this->_getParam('installer');
     }
-    
-    public function alreadyInstalledAction()
-    {}
-    
+        
     public function fatalErrorAction()
     {
         $this->view->e = $this->getRequest()->getParam('exception');
