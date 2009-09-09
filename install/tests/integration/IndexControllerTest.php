@@ -91,8 +91,44 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertAction('errors');
     }
     
-    // public function testFatalError
-    // 
+    public function testFormRequiredFields()
+    {
+        
+    }
+    
+    public function testSuccessfulInstall()
+    {   
+        // Clear out the database prior to running this particular test.
+        $this->_dropTables();
+        
+        // Point us at an empty database.
+        $dbResource = new Omeka_Core_Resource_Db;
+        $dbResource->setinipath(APPLICATION_PATH . '/tests/db.ini');
+        $this->app->getBootstrap()->registerPluginResource($dbResource);
+        
+        $this->request->setMethod('post');
+        $this->request->setPost(array(
+        'username'                      => 'foobar',
+        'password'                      => 'foobar',
+        'super_email'                   => 'testemail@omeka.org',
+        'administrator_email'           => 'testemail@omeka.org',
+        'site_title'                    => 'Omeka Test Whatever',
+        'description'                   => 'Omeka Site Description',
+        'copyright'                     => 'Omeka Copyright Info',
+        'author'                        => 'Omeka Author Info',
+        'fullsize_constraint'           => '800',
+        'thumbnail_constraint'          => '200',
+        'square_thumbnail_constraint'   => '200',
+        'per_page_admin'                => '10',
+        'per_page_public'               => '10',
+        'show_empty_elements'           => '0',
+        'path_to_convert'               => '/foo/bar',
+        'install_submit'                => 'Install'
+        ));
+        
+        $this->dispatch('');
+        $this->assertRedirectTo('/index/success');
+    }
     
     // COPIED DIRECTLY FROM Omeka_Test_Bootstrapper.
     public static function getMockBootstrapResource($resourceName, $returnVal)
@@ -126,5 +162,39 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
        $mockResourceObj->_explicitType = $resourceName;
    
        return $mockResourceObj;    
+    }
+    
+    /**
+     * Drop the database tables.  Should only be used for the testing environment
+     * db.ini file.
+     */
+    private function _dropTables()
+    {
+        $dbResource = new Omeka_Core_Resource_Db;
+        $dbResource->setinipath(APPLICATION_PATH . '/tests/db.ini');
+        $db = $dbResource->init();        
+        $dropSql = "DROP TABLE IF EXISTS
+            `{$db->prefix}collections`, 
+            `{$db->prefix}data_types`, 
+            `{$db->prefix}elements`, 
+            `{$db->prefix}element_sets`, 
+            `{$db->prefix}element_texts`, 
+            `{$db->prefix}entities`, 
+            `{$db->prefix}entities_relations`, 
+            `{$db->prefix}entity_relationships`, 
+            `{$db->prefix}files`, 
+            `{$db->prefix}items`, 
+            `{$db->prefix}item_types`, 
+            `{$db->prefix}item_types_elements`, 
+            `{$db->prefix}mime_element_set_lookup`, 
+            `{$db->prefix}options`, 
+            `{$db->prefix}plugins`, 
+            `{$db->prefix}processes`, 
+            `{$db->prefix}record_types`, 
+            `{$db->prefix}taggings`, 
+            `{$db->prefix}tags`, 
+            `{$db->prefix}users`, 
+            `{$db->prefix}users_activations`";
+        $db->query($dropSql);
     }
 }

@@ -12,6 +12,7 @@ $application = new Zend_Application(
 
 if (APPLICATION_ENV !== 'testing') {
     $dbResource = new Omeka_Core_Resource_Db;
+    $dbResource->setinipath(BASE_DIR . DIRECTORY_SEPARATOR . 'db.ini');
     $application->getBootstrap()->registerPluginResource($dbResource);   
 }
 

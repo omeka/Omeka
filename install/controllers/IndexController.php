@@ -55,7 +55,7 @@ class IndexController extends Zend_Controller_Action
             return $this->_forward('errors', null, null, array('installer'=>$installer));
         } else if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
             if ($installer->install($form->getValues())) {
-                return $this->_forward('success');
+                return $this->_helper->redirector->goto('success');
             }
         } 
         $this->view->installer = $installer;

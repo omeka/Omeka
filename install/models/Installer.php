@@ -237,7 +237,11 @@ class Installer
         return $this->_form;
     }
     
-    public function installDatabase()
+    /**
+     * @param array $values Set of values required by the installer.  Usually
+     * passed in via the form.
+     */
+    public function install(array $values)
     {
         $db = $this->_db;
         
@@ -255,7 +259,7 @@ class Installer
             first_name, 
             last_name
         ) VALUES (?, ?, ?)";
-        $this->_db->exec($entitySql, array($this->_form->getValue('super_email'), 'Super', 'User'));
+        $this->_db->exec($entitySql, array($values['super_email'], 'Super', 'User'));
         
         $userSql = "
         INSERT INTO {$this->_db->User} (
@@ -265,7 +269,7 @@ class Installer
             role, 
             entity_id
         ) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
-        $this->_db->exec($userSql, array($this->_form->getValue('username'), $this->_form->getValue('password')));
+        $this->_db->exec($userSql, array($values['username'], $values['password']));
         
         // Insert options.
         $optionSql = "
@@ -288,7 +292,7 @@ class Installer
                          'show_empty_elements',
                          'path_to_convert');
         foreach ($options as $option) {
-            $this->_db->exec($optionSql, array($option, $this->_form->getValue($option)));
+            $this->_db->exec($optionSql, array($option, $values[$option]));
         }
         
         // Insert default options to the options table. 
