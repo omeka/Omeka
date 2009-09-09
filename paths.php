@@ -81,7 +81,7 @@ define('BACKGROUND_BOOTSTRAP_PATH', CORE_DIR . DIRECTORY_SEPARATOR . 'background
 define('HELPERS', HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php');
 
 // Define the web address constants:
-_define_web_root();
+defined('WEB_ROOT') || _define_web_root();
 define('WEB_THEME', WEB_DIR . '/themes');
 define('WEB_PLUGIN',       WEB_ROOT . '/' . $site['plugins']);
 define('WEB_ARCHIVE',      WEB_ROOT . '/' . $site['archive']);
