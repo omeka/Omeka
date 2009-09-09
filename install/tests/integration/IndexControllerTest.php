@@ -54,19 +54,14 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     
     public function testOmekaIsAlreadyInstalled()
     {
-        // REMEMBER: Omeka_Db does not have fetchAll() or fetchOne() methods, so
-        // you have to declare these here.
-        $db = $this->getMock('Omeka_Db', array('fetchAll', 'fetchOne'), array(), '', false);
+        $db = $this->_setupMockDbResource();
         $db->prefix = 'omeka_';
         
         // Quick way of faking that the options table has 10 options in it.
         // This should probably be replaced with a dataset fixture.
         $db->expects($this->any())->method('fetchAll')->will($this->returnValue(array('options')));
         $db->expects($this->any())->method('fetchOne')->will($this->returnValue(10));
-        
-        $mockDbResource = $this->getMockBootstrapResource('Db', $db);
-        $this->app->getBootstrap()->registerPluginResource($mockDbResource);
-        
+                
         $this->dispatch('');
         // var_dump($this->request);exit;
         // echo $this->response->getBody();exit;
@@ -78,22 +73,32 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         // Since we can only mock the database resource (at this point), the 
         // only error we can/need to test is having an inadequate MySQL version.
-        $db = $this->getMock('Omeka_Db', array('fetchAll', 'fetchOne', 'getAdapter'), array(), '', false);
-        $dbAdapter = $this->getMock('Zend_Db_Adapter_Mysqli', array(), array(), '', false);
-        
-        $db->expects($this->any())->method('getAdapter')->will($this->returnValue($dbAdapter));
-        $dbAdapter->expects($this->any())->method('getServerVersion')->will($this->returnValue('4.0'));
-        
-        $this->app->getBootstrap()->registerPluginResource($this->getMockBootstrapResource('Db', $db));
-        
+        $db = $this->_setupMockDbResource(true);
+        $db->getAdapter()->expects($this->any())->method('getServerVersion')->will($this->returnValue('4.0'));
+                
         $this->dispatch('');        
         $this->assertController('index');
         $this->assertAction('errors');
     }
     
+    public function testFormDisplays()
+    {
+        $this->_dropTables();
+        $this->_setupRealDbResource();
+        $this->dispatch('');
+        $this->assertController('index');
+        $this->assertAction('index');
+        $this->assertQuery('form');
+    }
+    
     public function testFormRequiredFields()
     {
-        
+        $this->_dropTables();
+        $this->_setupRealDbResource();
+        $this->request->setMethod('post')->setPost(array('foo'=>'bar'));
+        $this->dispatch('');
+        // There should be 9 required fields that show validation errors from this.
+        $this->assertXPathCount("//fieldset/div/ul[@class='errors']", 9, "There should be 9 required fields on this form.");
     }
     
     public function testSuccessfulInstall()
@@ -102,9 +107,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->_dropTables();
         
         // Point us at an empty database.
-        $dbResource = new Omeka_Core_Resource_Db;
-        $dbResource->setinipath(APPLICATION_PATH . '/tests/db.ini');
-        $this->app->getBootstrap()->registerPluginResource($dbResource);
+        $this->_setupRealDbResource();
         
         $this->request->setMethod('post');
         $this->request->setPost(array(
@@ -162,6 +165,26 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
        $mockResourceObj->_explicitType = $resourceName;
    
        return $mockResourceObj;    
+    }
+    
+    private function _setupRealDbResource()
+    {
+        $dbResource = new Omeka_Core_Resource_Db;
+        $dbResource->setinipath(APPLICATION_PATH . '/tests/db.ini');
+        $this->app->getBootstrap()->registerPluginResource($dbResource);
+    }
+    
+    private function _setupMockDbResource($mockAdapter = false)
+    {
+        // REMEMBER: Omeka_Db does not have fetchAll() or fetchOne() methods, so
+        // you have to declare these here.
+        $db = $this->getMock('Omeka_Db', array('fetchAll', 'fetchOne', 'getAdapter'), array(), '', false);
+        if ($mockAdapter) {
+            $dbAdapter = $this->getMock('Zend_Db_Adapter_Mysqli', array(), array(), '', false);
+            $db->expects($this->any())->method('getAdapter')->will($this->returnValue($dbAdapter));            
+        }
+        $this->app->getBootstrap()->registerPluginResource($this->getMockBootstrapResource('Db', $db));
+        return $db;
     }
     
     /**
