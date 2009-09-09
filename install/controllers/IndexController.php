@@ -42,7 +42,9 @@ class IndexController extends Zend_Controller_Action
     
     public function indexAction()
     {
-        $installer = new Installer();
+        $requirements = new Installer_Requirements;
+        $requirements->setDbAdapter($this->getInvokeArg('bootstrap')->getResource('db')->getAdapter());
+        $installer = new Installer($requirements);
         $installer->checkRequirements();
         $form = $installer->getForm();
         if ($installer->hasError()) {
