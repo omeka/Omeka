@@ -4,24 +4,26 @@
  * @copyright Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Models
  */
  
 /**
  * Base class background processes descend from.
- * @package Omeka
  */
-abstract class Omeka_Process_Abstract
+abstract class ProcessAbstract
 {
     private $_process;
     
-    final public function __construct(Process $process) {
+    final public function __construct(Process $process) 
+    {
         $this->_process = $process;
         $this->_process->pid = getmypid();
         $this->_process->status = Process::STATUS_IN_PROGRESS;
         $this->_process->save();
     }
     
-    final public function __destruct() {
+    final public function __destruct() 
+    {
         $this->_process->pid = null;
         $this->_process->status = Process::STATUS_COMPLETED;
         $this->_process->save();
@@ -29,7 +31,8 @@ abstract class Omeka_Process_Abstract
     
     abstract public function run();
     
-    public function setStatus() {
+    public function setStatus() 
+    {
         
     }
 }

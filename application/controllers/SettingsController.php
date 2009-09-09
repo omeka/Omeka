@@ -27,15 +27,18 @@ class SettingsController extends Omeka_Controller_Action
     
     private $_form;
     
-    public function indexAction() {
+    public function indexAction() 
+    {
         $this->_forward('edit');
     }
     
-    public function browseAction() {
+    public function browseAction() 
+    {
         $this->_forward('edit');
     }
     
-    public function editAction() {
+    public function editAction() 
+    {
         $this->_setForm();
         $this->view->form = $this->_form;
         

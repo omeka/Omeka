@@ -9,8 +9,6 @@
  
 /**
  * Base class background processes descend from.
- * @package Omeka
- * @subpackage Models
  */
 class Process extends Omeka_Record
 {

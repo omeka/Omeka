@@ -4,18 +4,18 @@
  * @copyright Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Models
  */
  
 /**
  * Spawns and manages background processes.
- * @package Omeka
  */
-class Omeka_Process_Dispatcher
+class ProcessDispatcher
 {
     /**
      * Create a table entry for a new background process and spawn it.
      *
-     * @param string $className Omeka_Process_Abstract subclass name to spawn
+     * @param string $className ProcessAbstract subclass name to spawn
      * @param User $user User to run process as, defaults to current user
      * @return Process The model object for the background process
      */
@@ -41,7 +41,7 @@ class Omeka_Process_Dispatcher
         $process->status = Process::STATUS_STARTING;
         $process->save();
         
-        $command = escapeshellcmd($cliPath).' '
+        $command = escapeshellcmd($cliPath) . ' '
                  . self::_getBootstrapFilePath()
                  . " -p $process->id";
         self::_fork($command);
@@ -113,7 +113,8 @@ class Omeka_Process_Dispatcher
      * 
      * @link http://www.php.net/manual/en/ref.exec.php#70135
      */
-    static private function _fork($command) {
+    static private function _fork($command) 
+    {
         exec("$command > /dev/null 2>&1");
     }
 }
