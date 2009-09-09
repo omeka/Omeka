@@ -74,6 +74,23 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertAction('already-installed');
     }
     
+    public function testOmekaInstallerHasErrors()
+    {
+        // Since we can only mock the database resource (at this point), the 
+        // only error we can/need to test is having an inadequate MySQL version.
+        $db = $this->getMock('Omeka_Db', array('fetchAll', 'fetchOne', 'getAdapter'), array(), '', false);
+        $dbAdapter = $this->getMock('Zend_Db_Adapter_Mysqli', array(), array(), '', false);
+        
+        $db->expects($this->any())->method('getAdapter')->will($this->returnValue($dbAdapter));
+        $dbAdapter->expects($this->any())->method('getServerVersion')->will($this->returnValue('4.0'));
+        
+        $this->app->getBootstrap()->registerPluginResource($this->getMockBootstrapResource('Db', $db));
+        
+        $this->dispatch('');        
+        $this->assertController('index');
+        $this->assertAction('errors');
+    }
+    
     // public function testFatalError
     // 
     
