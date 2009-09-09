@@ -54,12 +54,12 @@ class Installer
     
     public function hasError()
     {
-        return count($this->_errorMessages) ? true : false;
+        return (boolean)count($this->_errorMessages);
     }
     
     public function hasWarning()
     {
-        return count($this->_warningMessages) ? true : false;
+        return (boolean)count($this->_warningMessages);
     }
     
     public function getErrorMessages()
