@@ -40,15 +40,33 @@ class IndexController extends Zend_Controller_Action
         }
     }
     
-    public function installAction()
+    public function indexAction()
+    {
+        $installer = new Installer();
+        $installer->checkRequirements();
+        $form = $installer->getForm();
+        if ($installer->hasError()) {
+            return $this->_forward('errors', null, null, array('installer'=>$installer));
+        } else if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
+            if ($installer->install($form->getValues())) {
+                return $this->_forward('success');
+            }
+        } 
+        $this->view->installer = $installer;
+    }
+        
+    public function successAction()
     {
         
     }
     
-    public function alreadyInstalledAction()
+    public function errorsAction()
     {
-        
+        $this->view->installer = $this->_getParam('installer');
     }
+    
+    public function alreadyInstalledAction()
+    {}
     
     public function fatalErrorAction()
     {

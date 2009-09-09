@@ -1,0 +1,19 @@
+<?php if ($this->installer->hasWarning()): ?>
+    <h2>Installation Warning</h2>
+    <p>The following issues will not affect installation, but they may 
+    negatively affect the behavior of Omeka:</p>
+    <ol>
+    <?php foreach($this->installer->getWarningMessages() as $warningMessage): ?>
+        <li>
+            <h3 class="warning"><?php echo $warningMessage['header']; ?></h3>
+            <p><?php echo $warningMessage['message']; ?></p>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+<?php endif; ?>
+<h2>Configure Your Site <span id="required-note">* Required Fields</span></h2>
+<?php if ($this->installer->getForm()->isErrors()): ?>
+    <h3 class="validation-error">Form Validation Errors</h3>
+    <p>There were errors found in your form. Please edit and resubmit.</p>
+<?php endif; ?>
+<?php echo $this->installer->getForm(); /* Display the install form. */?>

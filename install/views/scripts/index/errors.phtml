@@ -1,0 +1,10 @@
+<h2>Installation Error</h2>
+<p>Before installation can continue, the following errors must be resolved:</p>
+<ol>
+<?php foreach($this->installer->getErrorMessages() as $errorMessage): ?>
+    <li>
+        <h3 class="error"><?php echo $errorMessage['header']; ?></h3>
+        <p><?php echo $errorMessage['message']; ?></p>
+    </li>
+<?php endforeach; ?>
+</ol>
