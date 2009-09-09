@@ -90,7 +90,6 @@ class Installer
         $form->addElement('text', 'username', array(
             'label' => 'Username',
             'class' => 'textinput', 
-            'value' => $form->getValue('username'), 
             'validators' => array(array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH))), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -100,7 +99,6 @@ class Installer
             'label' => 'Password',
             'description' => 'Password for your super user, 6–40 characters.', 
             'class' => 'textinput', 
-            'value' => $form->getValue('password'), 
             'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH, User::PASSWORD_MAX_LENGTH))), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -109,7 +107,6 @@ class Installer
         $form->addElement('text', 'super_email', array(
             'label' => 'Email',
             'class' => 'textinput', 
-            'value' => $form->getValue('super_email'), 
             'validators' => array('EmailAddress'), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -119,21 +116,18 @@ class Installer
             'label' => 'Site Title',
             'class' => 'textinput',
             'class' => 'textinput', 
-            'value' => $form->getValue('site_title'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('textarea', 'description', array(
             'label' => 'Site Description',
             'class' => 'textinput', 
-            'value' => $form->getValue('description'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('text', 'administrator_email', array(
             'label' => 'Administrator Email',
             'class' => 'textinput', 
-            'value' => $form->getValue('administrator_email'), 
             'validators' => array('EmailAddress'), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -142,14 +136,12 @@ class Installer
         $form->addElement('text', 'copyright', array(
             'label' => 'Site Copyright Information',
             'class' => 'textinput', 
-            'value' => $form->getValue('copyright'), 
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('text', 'author', array(
             'label' => 'Site Author Information',
             'class' => 'textinput', 
-            'value' => $form->getValue('author'), 
             'decorators' => $elementDecorators
         ));
         
@@ -157,7 +149,7 @@ class Installer
             'label' => 'Fullsize Image Size',
             'class' => 'textinput', 
             'description' => 'Maximum fullsize image size constraint (in pixels).', 
-            'value' => $form->getValue('fullsize_constraint') ? $form->getValue('fullsize_constraint') : self::DEFAULT_FULLSIZE_CONSTRAINT, 
+            'value' => self::DEFAULT_FULLSIZE_CONSTRAINT, 
             'validators' => array('Digits'), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -167,7 +159,7 @@ class Installer
             'label' => 'Thumbnail Size',
             'class' => 'textinput', 
             'description' => 'Maximum thumbnail size constraint (in pixels).', 
-            'value' => $form->getValue('thumbnail_constraint') ? $form->getValue('thumbnail_constraint') : self::DEFAULT_THUMBNAIL_CONSTRAINT, 
+            'value' => self::DEFAULT_THUMBNAIL_CONSTRAINT, 
             'validators' => array('Digits'), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -177,7 +169,7 @@ class Installer
             'label' => 'Square Thumbnail Size',
             'class' => 'textinput', 
             'description' => 'Maximum square thumbnail size constraint (in pixels).', 
-            'value' => $form->getValue('square_thumbnail_constraint') ? $form->getValue('square_thumbnail_constraint') : self::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT, 
+            'value' => self::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT, 
             'validators' => array('Digits'), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -187,7 +179,7 @@ class Installer
             'label' => 'Items Per Page (admin)', 
             'class' => 'textinput',
             'description' => 'Limit the number of items displayed per page in the administrative interface.', 
-            'value' => $form->getValue('per_page_admin') ? $form->getValue('per_page_admin') : self::DEFAULT_PER_PAGE_ADMIN, 
+            'value' => self::DEFAULT_PER_PAGE_ADMIN, 
             'validators' => array('Digits'), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -197,7 +189,7 @@ class Installer
             'label' => 'Items Per Page (public)', 
             'class' => 'textinput',
             'description' => 'Limit the number of items displayed per page in the public interface.', 
-            'value' => $form->getValue('per_page_public') ? $form->getValue('per_page_public') : self::DEFAULT_PER_PAGE_PUBLIC, 
+            'value' => self::DEFAULT_PER_PAGE_PUBLIC, 
             'validators' => array('Digits'), 
             'required' => true, 
             'decorators' => $elementDecorators
@@ -207,14 +199,13 @@ class Installer
             'label' => 'Show Empty Elements',
             'class' => 'checkbox',
             'description' => 'Whether metadata elements with no text will be displayed.',
-            'value' => $form->getValue('show_empty_elements'),
             'decorators' => $elementDecorators
         ));
         
         $form->addElement('text', 'path_to_convert', array(
             'label' => 'Imagemagick Directory Path',
             'class' => 'textinput', 
-            'value' => $form->getValue('path_to_convert') ? $form->getValue('path_to_convert') : $this->_getPathToConvert(), 
+            'value' => $this->_getPathToConvert(), 
             'decorators' => $elementDecorators
         ));
         
