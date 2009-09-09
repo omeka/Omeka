@@ -5,7 +5,6 @@
 */
 class Installer
 {
-    const CORE_STOP_PHASE = 'initializeDb';
     const OMEKA_PHP_VERSION = '5.2.4';
     const OMEKA_MYSQL_VERSION = '5.0';
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
@@ -21,13 +20,6 @@ class Installer
     
     public function __construct()
     {   
-        // Load Omeka. Catch any exceptions that occur.
-        try {
-            $this->_loadOmeka();
-        } catch (Exception $e) {
-            include 'fatal-error.php';
-            exit;
-        }
         // Set the database object;
         $this->_db = Omeka_Context::getInstance()->getDb();
         //die($this->_db->prefix);
@@ -309,14 +301,7 @@ class Installer
         
         return true;
     }
-    
-    private function _loadOmeka()
-    {
-        require_once 'Omeka/Core.php';
-        $core = new Omeka_Core;
-        $core->phasedLoading(self::CORE_STOP_PHASE);
-    }
-    
+
     public static function isInstalled()
     {
         $db = Omeka_Context::getInstance()->getDb();
