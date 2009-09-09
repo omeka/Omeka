@@ -34,7 +34,7 @@ class IndexController extends Zend_Controller_Action
             Zend_Controller_Front::getInstance()->setParam('noErrorHandler', true);
 
             // If Omeka is not already installed, forward to the action that displays that error.
-            if ($this->getRequest()->getActionName() !== 'already-installed' && Installer::isInstalled()) {
+            if ($this->getRequest()->getActionName() !== 'already-installed' && Installer::isInstalled($bootstrap->getResource('db'))) {
                 return $this->getRequest()->setActionName('already-installed')->setDispatched(false);
             }
         }
@@ -42,9 +42,10 @@ class IndexController extends Zend_Controller_Action
     
     public function indexAction()
     {
+        $db = $this->getInvokeArg('bootstrap')->getResource('db');
         $requirements = new Installer_Requirements;
-        $requirements->setDbAdapter($this->getInvokeArg('bootstrap')->getResource('db')->getAdapter());
-        $installer = new Installer($requirements);
+        $requirements->setDbAdapter($db->getAdapter());
+        $installer = new Installer($db, $requirements);
         $installer->checkRequirements();
         $form = $installer->getForm();
         if ($installer->hasError()) {

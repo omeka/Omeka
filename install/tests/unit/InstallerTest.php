@@ -20,8 +20,36 @@ class InstallerTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->requirements = $this->getMock('Installer_Requirements');
-        $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
-        $this->installer = new Installer($this->requirements);
+        $this->db = $this->getMock('Omeka_Db', array('fetchAll', 'fetchOne', 'query'), array(), '', false);
+        $this->installer = new Installer($this->db, $this->requirements);
+    }
+    
+    public function testIsNotInstalledWithoutOptionsTable()
+    {
+        // Don't return any results for any query.  This should tell us that 
+        // Omeka is not installed.
+        $this->db->expects($this->any())->method('fetchAll')->will($this->returnValue(array()));        
+        $this->assertFalse(Installer::isInstalled($this->db));
+    }
+    
+    public function testIsNotInstalledWithEmptyOptionsTable()
+    {
+        // Convince the installer that there is an options table with nothing
+        // in it.  Result = not installed.
+        $this->db->expects($this->any())->method('fetchAll')->will($this->returnValue(array('options')));
+        $this->db->expects($this->any())->method('fetchOne')->will($this->returnValue(0));
+        
+        $this->assertFalse(Installer::isInstalled($this->db));
+    }
+    
+    public function testIsInstalledWithPopulatedOptionsTable()
+    {
+        // Convince the installer that there is an options table with stuff 
+        // in it.  Result = installed.
+        $this->db->expects($this->any())->method('fetchAll')->will($this->returnValue(array('options')));
+        $this->db->expects($this->any())->method('fetchOne')->will($this->returnValue(10));
+        
+        $this->assertTrue(Installer::isInstalled($this->db), "Should be shown as installed when there is an 'options' table with data in it.");
     }
     
     public function testCheckRequirements()

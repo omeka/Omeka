@@ -23,12 +23,12 @@ class Installer
     private $_db;
     private $_form;
     
-    public function __construct(Installer_Requirements $requirements)
+    public function __construct(Omeka_Db $db, Installer_Requirements $requirements)
     {   
         $this->_requirements = $requirements;
         
         // Set the database object;
-        $this->_db = Omeka_Context::getInstance()->getDb();
+        $this->_db = $db;
         //die($this->_db->prefix);
         $this->setForm();
     }
@@ -302,21 +302,19 @@ class Installer
         return true;
     }
 
-    public static function isInstalled()
-    {
-        $db = Omeka_Context::getInstance()->getDb();
-        
+    public static function isInstalled(Omeka_Db $db)
+    {        
         // Assume Omeka is not installed if the `options` table does not exist.
         $sql = "SHOW TABLES LIKE '{$db->prefix}options'";
-        $tables = $db->query($sql)->fetchAll();
+        $tables = $db->fetchAll($sql);
         if (empty($tables)) {
             return false;
         }
         
         // Assume Omeka is not installed if the `options` table contains no rows.
         require_once 'Option.php';
-        $options = $db->getTable('Option')->findAll();
-        if (empty($options)) {
+        $optionCount = (int)$db->fetchOne("SELECT COUNT(id) FROM `{$db->prefix}options`");
+        if (!$optionCount) {
             return false;
         }
         
