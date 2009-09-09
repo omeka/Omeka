@@ -1,20 +1,33 @@
 <?php
 require_once '../paths.php';
+
+// This mini app is in the install/ directory.
+defined('APPLICATION_PATH')
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
+
+// Define application environment
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+
+/** Zend_Application */
+require_once 'Zend/Application.php';  
+
 require_once 'Installer.php';
+
+// Create application, bootstrap, and run
+$application = new Zend_Application(
+    APPLICATION_ENV, 
+    APPLICATION_PATH . '/application.ini'
+);
+
+
+$application->getBootstrap()->bootstrap('FrontController')->run();
+
+exit;
 $installer = new Installer();
 $installer->checkRequirements();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
-<head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<title>Omeka Installation</title>
-<link rel="stylesheet" href="screen.css" />
-</head>
-<body>
-<h1>Omeka Installation</h1>
-<div id="content">
+
 <?php if ($installer->hasError()): /* Display installation errors. */?>
     <h2>Installation Error</h2>
     <p>Before installation can continue, the following errors must be resolved:</p>
@@ -57,6 +70,3 @@ $installer->checkRequirements();
         <?php echo $form; /* Display the install form. */?>
     <?php endif; ?>
 <?php endif; ?>
-</div>
-</body>
-</html>

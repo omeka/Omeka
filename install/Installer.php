@@ -28,12 +28,6 @@ class Installer
             include 'fatal-error.php';
             exit;
         }
-        
-        // Exit installation if Omeka is already installed.
-        if ($this->_omekaIsInstalled()) {
-            include 'already-installed.php';
-            exit;
-        }        
         // Set the database object;
         $this->_db = Omeka_Context::getInstance()->getDb();
         //die($this->_db->prefix);
@@ -323,7 +317,7 @@ class Installer
         $core->phasedLoading(self::CORE_STOP_PHASE);
     }
     
-    private function _omekaIsInstalled()
+    public static function isInstalled()
     {
         $db = Omeka_Context::getInstance()->getDb();
         
