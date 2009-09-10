@@ -231,14 +231,14 @@ function output_format_list($list = true, $delimiter = ' | ')
     // Do not display the list if there are no output formats available in the 
     // current action.
     if (empty($actionContexts)) {
-        return;
+        return false;
     }
     
     // Unordered list format.
     if ($list) {
         $html .= '<ul id="output-format-list">';
         foreach ($actionContexts as $key => $actionContext) {
-            $html .= '<li><a href="' . uri() . '?output=' . $actionContext . '">' . $actionContext . '</a></li>';
+            $html .= '<li><a href="' . uri() . '?output=' . $actionContext . '&' . http_build_query($_GET) . '">' . $actionContext . '</a></li>';
         }
         $html .= '</ul>';
     
@@ -246,7 +246,7 @@ function output_format_list($list = true, $delimiter = ' | ')
     } else {
         $html .= '<p id="output-format-list">';
         foreach ($actionContexts as $key => $actionContext) {
-            $html .= '<a href="' . uri() . '?output=' . $actionContext . '">' . $actionContext . '</a>';
+            $html .= '<a href="' . uri() . '?output=' . $actionContext . '&' . http_build_query($_GET) . '">' . $actionContext . '</a>';
             $html .= (count($actionContexts) - 1) == $key ? '' : $delimiter;
         }
         $html .= '</p>';
