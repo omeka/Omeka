@@ -476,7 +476,9 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}processes` (
   `pid` int unsigned default NULL,
   `status` enum('starting', 'in progress', 'completed', 'paused', 'error') collate utf8_unicode_ci NOT NULL,
   `args` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `pid` (`pid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
