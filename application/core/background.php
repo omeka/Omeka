@@ -14,12 +14,8 @@ $baseDir = dirname(__FILE__);
 require "{$baseDir}/../../paths.php";
 require "{$baseDir}/../libraries/Omeka/Core.php";
 
-// Load only the required core phases.
-$core = new Omeka_Core;
-$core->phasedLoading('initializePluginBroker');
-
 // Set the command line arguments.
-$options = new Zend_Console_Getopt(array('process|p=i' => 'process to run'));
+$options = new Zend_Console_Getopt(array('process|p=i' => 'process to run', 'lastphase|l=s' => 'last phase to load'));
 
 try {
     $options->parse();
@@ -28,6 +24,11 @@ try {
     exit;
 }
 
+// Load only the phases needed.
+$core = new Omeka_Core;
+$lastPhase = $options->getOption('lastphase');
+$core->phasedLoading($lastPhase);
+
 // Get the database object.
 $db = get_db();
 
@@ -35,8 +36,19 @@ $db = get_db();
 $processId = $options->getOption('process');
 $process = $db->getTable('Process')->find($processId);
 
+// Get the user to run the process under
+$processUserId = $process->user_id;
+$processUser = $db->getTable('User')->find($processUserId);
+Omeka_Context::getInstance()->setCurrentUser($processUser);
+
 // Get the name of the process class to run
 $processClass = $process->class;
 
+// Unserialize the process arguments
+$processArgs = unserialize($process->args);
+
+// Create a custom process object
 $processObject = new $processClass($process);
-$processObject->run();
+
+// Run the custom process and pass in the arguments
+$processObject->run($processArgs);

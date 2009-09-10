@@ -17,9 +17,11 @@ class ProcessDispatcher
      *
      * @param string $className ProcessAbstract subclass name to spawn
      * @param User $user User to run process as, defaults to current user
+     * @param Array|null $args Arguments specific to the child class process
+     * @param string $lastPhase The last phase to load during the phased loading process (see Omeka_Core) 
      * @return Process The model object for the background process
      */
-    static public function startProcess($className, $user = null)
+    static public function startProcess($className, $user = null, $args = null, $lastPhase = 'initializeRoutes')
     {
         // Use the user-specified path, or attempt autodetection if no path
         // specified.
@@ -39,11 +41,13 @@ class ProcessDispatcher
         $process->class = $className;
         $process->user_id = $user->id;
         $process->status = Process::STATUS_STARTING;
+        $process->args = $args;
         $process->save();
         
         $command = escapeshellcmd($cliPath) . ' '
                  . self::_getBootstrapFilePath()
-                 . " -p $process->id";
+                 . " -p $process->id"
+                 . " -l $lastPhase";
         self::_fork($command);
         
         return $process;
@@ -115,6 +119,7 @@ class ProcessDispatcher
      */
     static private function _fork($command) 
     {
-        exec("$command > /dev/null 2>&1");
+        exec("$command > /dev/null 2>&1 &");
+        //echo("$command"); exit;
     }
 }

@@ -1,15 +1,14 @@
 <?php 
 /**
+ * The model class that holds generic process data
+ *
  * @version $Id$
  * @copyright Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
  */
- 
-/**
- * Base class background processes descend from.
- */
+
 class Process extends Omeka_Record
 {
     const STATUS_STARTING = 1;
@@ -22,4 +21,17 @@ class Process extends Omeka_Record
     public $class;
     public $user_id;
     public $status;
+    public $args;
+    
+    protected function beforeSave()
+    {
+        if (!$this->_isSerialized($this->args)) {
+            $this->args = serialize($this->args);            
+        }
+    }
+    
+    private function _isSerialized($s)
+    {
+        return (($s === 'b:0;') || (@unserialize($s) !== false));
+    }
 }
