@@ -44,8 +44,8 @@ Omeka_Context::getInstance()->setCurrentUser($processUser);
 // Get the name of the process class to run
 $processClass = $process->class;
 
-// Unserialize the process arguments
-$processArgs = unserialize($process->args);
+// Get the process arguments
+$processArgs = $process->getArguments();
 
 // Create a custom process object
 $processObject = new $processClass($process);

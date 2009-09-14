@@ -30,6 +30,19 @@ class Process extends Omeka_Record
         }
     }
     
+    public function getArguments()
+    {     
+        if ($this->_isSerialized($this->args)) {
+            $this->args = unserialize($this->args);
+        }        
+        return $this->args;
+    }
+    
+    public function setArguments($args)
+    {
+        $this->args = $args;
+    }
+    
     private function _isSerialized($s)
     {
         return (($s === 'b:0;') || (@unserialize($s) !== false));

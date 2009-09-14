@@ -41,7 +41,7 @@ class ProcessDispatcher
         $process->class = $className;
         $process->user_id = $user->id;
         $process->status = Process::STATUS_STARTING;
-        $process->args = $args;
+        $process->setArguments($args);
         $process->save();
         
         $command = escapeshellcmd($cliPath) . ' '
