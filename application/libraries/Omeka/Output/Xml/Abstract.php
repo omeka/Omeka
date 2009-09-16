@@ -3,7 +3,7 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
 {
     const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
     const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v2';
-    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v2/omeka-xml-2-0.xsd';
+    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v2/omeka-xml-2-1.xsd';
     
     /**
      * This class' contextual record(s).
@@ -106,6 +106,25 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         }
         
         return $element;
+    }
+    
+    /**
+     * Set the pagination node for container elements
+     *
+     * @param DOMElement The parent container element.
+     * @return void
+     */
+    protected function _setContainerPagination(DOMElement $parentElement)
+    {
+        // Return if the pagination data is not registered.
+        if (!Zend_Registry::isRegistered('pagination')) {
+            return;
+        }
+        $pagination = Zend_Registry::get('pagination');
+        $paginationElement = $this->_createElement('pagination', null, null, $parentElement);
+        $this->_createElement('pageNumber',   $pagination['page'],          null, $paginationElement);
+        $this->_createElement('perPage',      $pagination['per_page'],      null, $paginationElement);
+        $this->_createElement('totalResults', $pagination['total_results'], null, $paginationElement);
     }
     
     /**
