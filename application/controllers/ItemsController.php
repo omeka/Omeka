@@ -276,7 +276,7 @@ class ItemsController extends Omeka_Controller_Action
                 }
             }
             
-            $this->flashSuccess('Changes were successful');
+            $this->flashSuccess('The items were successfully changed!');
             
         } catch (Exception $e) {
             $this->flash($e->getMessage());
