@@ -4,21 +4,14 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Controllers
+ * @author CHNM
+ * @see Omeka_Controller_Action
  **/
 
 require_once 'Item.php';
-
-/**
- * @see Omeka_Controller_Action
- **/
 require_once 'Omeka/Controller/Action.php';
 
-/**
- * @package Omeka
- * @subpackage Controllers
- * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
- **/
 class ItemsController extends Omeka_Controller_Action
 {
     public $contexts = array(
@@ -254,11 +247,11 @@ class ItemsController extends Omeka_Controller_Action
         
         try {
             if (!$this->isAllowed('makePublic')) {
-                throw new Exception( 'User is not allowed to modify visibility of items.' );
+                throw new Exception('User is not allowed to modify visibility of items.');
             }
             
             if (!$this->isAllowed('makeFeatured')) {
-                throw new Exception( 'User is not allowed to modify featured status of items' );
+                throw new Exception('User is not allowed to modify featured status of items.');
             }
 
             if ($itemArray = $this->_getParam('items')) {
@@ -291,5 +284,4 @@ class ItemsController extends Omeka_Controller_Action
         
         $this->redirect->gotoUrl($_SERVER['HTTP_REFERER']);
     }
-    
 }

@@ -206,7 +206,7 @@ class UsersController extends Omeka_Controller_Action
         try {
             if($user->saveForm($_POST)) {
                 
-                $user->email = $_POST['email'];
+                //$user->email = $_POST['email'];
                 $this->sendActivationEmail($user);
                 
                 $this->flashSuccess('User was added successfully!');
@@ -236,10 +236,12 @@ class UsersController extends Omeka_Controller_Action
                     ."$siteTitle Administrator";
         $subject    = "Activate your account with the ".$siteTitle." Archive";
         
+        $entity = $user->Entity;
+        
         $mail = new Zend_Mail();
         $mail->setBodyText($body);
         $mail->setFrom($from, "$siteTitle Administrator");
-        $mail->addTo($user->email, $user->Entity->getName());
+        $mail->addTo($entity->email, $entity->getName());
         $mail->setSubject($subject);
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();

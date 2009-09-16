@@ -4,6 +4,8 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Models
+ * @author CHNM
  **/
 
 require_once 'UsersActivations.php';
@@ -11,12 +13,6 @@ require_once 'UserTable.php';
 require_once 'Entity.php';
 require_once 'Item.php';
 
-/**
- * @package Omeka
- * @subpackage Models
- * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
- **/
 class User extends Omeka_Record {
 
     public $username;
@@ -57,7 +53,7 @@ class User extends Omeka_Record {
         }
     }
     
-    protected function beforeSaveForm(&$post)
+    protected function beforeSaveForm($post)
     {
         if (!$this->processEntity($post)) {
             return false;
@@ -72,15 +68,7 @@ class User extends Omeka_Record {
                 throw new Omeka_Validator_Exception('User may not change roles.');
             }
         } 
-        
-        if ($post['active']) {
-            $post['active'] = 1;
-        }
-        // potential security hole
-        if (isset($post['password'])) {
-            unset($post['password']);
-        }
-        
+                
         // If the User is not persistent we need to create a placeholder password
         if (!$this->exists()) {
             $this->password = $this->generatePassword(8);
@@ -94,7 +82,7 @@ class User extends Omeka_Record {
      *
      * @return void
      **/
-    protected function filterInput($input)
+    protected function filterInput($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
         
@@ -106,11 +94,24 @@ class User extends Omeka_Record {
                          'username' => $username_filter,
                          'active'   => 'Boolean');
             
-        $filter = new Zend_Filter_Input($filters, null, $input, $options);
+        $filter = new Zend_Filter_Input($filters, null, $post, $options);
         
-        $clean = $filter->getUnescaped();
+        $post = $filter->getUnescaped();
         
-        return $clean;
+        if ($post['active']) {
+            $post['active'] = 1;
+        }
+        
+        return $post;
+    }
+    
+    public function setFromPost($post)
+    {
+        // potential security hole
+        if (isset($post['password'])) {
+             unset($post['password']);
+        }
+        return parent::setFromPost($post);
     }
     
     protected function _validate()

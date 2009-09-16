@@ -1,18 +1,14 @@
 <?php 
 /**
+ * An implementation of ActiveRecord
+ * 
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @author CHNM
  **/
 
-/**
- * An implementation of ActiveRecord
- *
- * @package Omeka
- * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
- **/
 class Omeka_Record implements ArrayAccess
 {
     // Every table has a unique ID field
@@ -163,14 +159,15 @@ class Omeka_Record implements ArrayAccess
      **/
     protected function runCallbacks($event)
     {
+        
         // All arguments beyond the first are optional, and are sent to the 
         // various callbacks
         $args = func_get_args();
-        array_shift($args);    
-        
+        array_shift($args);
+
         // Callback from within the record
         call_user_func_array(array($this, $event), $args);
-        
+         
         // Module callbacks
         $this->delegateToMixins($event, $args, true);
              
@@ -179,7 +176,6 @@ class Omeka_Record implements ArrayAccess
         $plugin_hook_base = Inflector::underscore($event);
         $plugin_hook_general = $plugin_hook_base . '_record'; 
         $plugin_hook_specific = $plugin_hook_base . '_' . Inflector::underscore(get_class($this));
-        
         
         // Plugins called from within the record always receive that record 
         // instance as the first argument
@@ -200,7 +196,6 @@ class Omeka_Record implements ArrayAccess
     protected function firePlugin($event)
     {
         $hook = $event . '_' . strtolower(get_class($this));
-        
         fire_plugin_hook($hook, $this);
     }
     
@@ -227,7 +222,8 @@ class Omeka_Record implements ArrayAccess
      *
      * @return void
      **/
-    protected function validate() {
+    protected function validate() 
+    {
         $this->runCallbacks('beforeValidate');
         
         $validator = $this->_validate();
@@ -476,48 +472,46 @@ class Omeka_Record implements ArrayAccess
             $this->$key = $value;
         }
     }
-    
+        
     // Implementation of ArrayAccess
     
-    public function offsetExists($name) {
+    public function offsetExists($name) 
+    {
         return isset($this->$name);
     }
     
-    public function offsetUnset($name) {
+    public function offsetUnset($name) 
+    {
         unset($this->$name);
     }
     
-    public function offsetGet($name) {
+    public function offsetGet($name) 
+    {
         return $this->$name;
     }
     
-    public function offsetSet($name, $value) {
+    public function offsetSet($name, $value) 
+    {
         $this->$name = $value;
     }
     
     // Input-related
-    
     
     /**
      * Processes and saves the form to the given record
      *
      * @return boolean True on success, false otherwise
      **/
-    public function saveForm(&$post)
+    public function saveForm($post)
     {
         // $this->getDb()->beginTransaction();
         
         if(!empty($post))
         {                    
             $clean = $this->filterInput($post);
-            
             $clean = new ArrayObject($clean);
-            
             $this->runCallbacks('beforeSaveForm', $clean);
-            
-            unset($clean['id']);
-            
-            $this->setArray($clean);
+            $clean = $this->setFromPost($clean);
             
             //Save will return TRUE if there are no validation errors
             if ($this->save()) {
@@ -534,9 +528,34 @@ class Omeka_Record implements ArrayAccess
     }
     
     // Form callbacks
-    protected function filterInput($post) {return $post;}
-    protected function beforeSaveForm(&$post) {return true;}
-    protected function afterSaveForm(&$post) {}
+    protected function filterInput($post) 
+    {
+        return $post;
+    }
+    
+    protected function beforeSaveForm($post) 
+    {
+        return true;
+    }
+    
+    /**
+     * Sets the record from a from a form post
+     * Subclasses can unset post variables before the record set.
+     * @param array $post
+     * 
+     * @return array $post
+     **/
+    protected function setFromPost($post) 
+    {
+        unset($post['id']);
+        $this->setArray($post);
+        return $post;
+    }
+    
+    protected function afterSaveForm($post) 
+    {
+        return true;
+    }
     
     /**
      * Adapted from Doctrine_Validator_Unique
@@ -579,7 +598,8 @@ class Omeka_Record implements ArrayAccess
      *
      * @return boolean
      **/
-    protected function userHasPermission($rule) {
+    protected function userHasPermission($rule) 
+    {
         $resource = Inflector::pluralize(get_class($this));        
         if ($acl = Omeka_Context::getInstance()->getAcl()) {
             return $acl->checkUserPermission($resource, $rule);

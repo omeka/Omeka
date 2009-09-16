@@ -12,7 +12,6 @@ if (!function_exists('mime_content_type')) {
    }
 }
 
-
 require_once 'Item.php';
 require_once 'ActsAsElementText.php';
 require_once 'FileTable.php';
@@ -26,7 +25,8 @@ require_once 'MimeElementSetLookup.php';
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class File extends Omeka_Record { 
+class File extends Omeka_Record 
+{ 
 
     public $item_id;
     public $archive_filename;
@@ -64,7 +64,7 @@ class File extends Omeka_Record {
         $this->modified = date("Y-m-d H:i:s");
     }
     
-    protected function beforeSaveForm(&$post)
+    protected function filterInput($post)
     {
         $immutable = array('id', 'modified', 'added', 
                            'authentication', 'archive_filename', 
@@ -73,7 +73,11 @@ class File extends Omeka_Record {
         foreach ($immutable as $value) {
             unset($post[$value]);
         }
-        
+        return $post;
+    }
+    
+    protected function beforeSaveForm($post)
+    {        
         $this->beforeSaveElements($post);
     }
         

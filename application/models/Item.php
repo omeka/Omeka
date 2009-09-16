@@ -4,6 +4,8 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Models
+ * @author CHNM
  **/
 
 require_once 'Collection.php';
@@ -19,12 +21,7 @@ require_once 'ItemTable.php';
 require_once 'ItemPermissions.php';    
 require_once 'ElementText.php';
 require_once 'PublicFeatured.php';
-/**
- * @package Omeka
- * @subpackage Models
- * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
- **/
+
 class Item extends Omeka_Record
 {        
     public $item_type_id;
@@ -149,8 +146,8 @@ class Item extends Omeka_Record
      *
      * @return void
      **/
-    protected function beforeSaveForm(&$post)
-    {
+    protected function beforeSaveForm($post)
+    {        
         $this->beforeSaveElements($post);
         
         if (!empty($post['change_type'])) {
@@ -158,12 +155,6 @@ class Item extends Omeka_Record
         }
         if (!empty($post['add_more_files'])) {
             return false;
-        }
-        if (!$this->userHasPermission('makePublic')) {
-            unset($post['public']);
-        }
-        if (!$this->userHasPermission('makeFeatured')) {
-            unset($post['featured']);
         }
         
         try {
@@ -305,12 +296,12 @@ class Item extends Omeka_Record
     }
     
     /**
-     * Filter input from form submissions.  
+     * Filter post data from form submissions.  
      * 
-     * @param array Dirty array.
-     * @return array Clean array.
+     * @param array Dirty post data
+     * @return array Clean post data
      **/
-    protected function filterInput($input)
+    protected function filterInput($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
         $filters = array(                         
@@ -321,8 +312,18 @@ class Item extends Omeka_Record
                          // Booleans
                          'public'   =>'Boolean',
                          'featured' =>'Boolean');  
-        $filter = new Zend_Filter_Input($filters, null, $input, $options);
-        return $filter->getUnescaped();
+        $filter = new Zend_Filter_Input($filters, null, $post, $options);
+        $post = $filter->getUnescaped();
+        
+        // check permissions to make public and make featured
+        if (!$this->userHasPermission('makePublic')) {
+            unset($post['public']);
+        }
+        if (!$this->userHasPermission('makeFeatured')) {
+            unset($post['featured']);
+        }
+        
+        return $post;
     }
     
     /**
