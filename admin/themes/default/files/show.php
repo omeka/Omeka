@@ -11,7 +11,7 @@
 
 <h1><?php echo $fileTitle; ?></h1>
 <?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>
-    <p id="edit-file" class="edit-button"><?php echo link_to($file, 'edit', 'Edit', array('class'=>'edit')); ?></p>
+    <p id="edit-file" class="edit-button"><?php echo link_to($file, 'edit', 'Edit this File', array('class'=>'edit')); ?></p>
 <?php endif; ?>
 <div id="primary">
     <?php echo display_file($file, array('imageSize'=>'fullsize')); ?>
