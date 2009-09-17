@@ -1,9 +1,11 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Models
+ * @author CHNM
  **/
 
 if (!function_exists('mime_content_type')) {
@@ -19,12 +21,6 @@ require_once 'FilesImages.php';
 require_once 'FilesVideos.php';
 require_once 'MimeElementSetLookup.php';
 
-/**
- * @package Omeka
- * @subpackage Models
- * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
- **/
 class File extends Omeka_Record 
 { 
 
@@ -40,7 +36,6 @@ class File extends Omeka_Record
     public $added;
     public $modified;
 
-    
     protected function _initializeMixins()
     {
         $this->_mixins[] = new ActsAsElementText($this);
@@ -151,13 +146,14 @@ class File extends Omeka_Record
         $this->size = filesize($filepath);
         $this->authentication = md5_file( $filepath );
         
-        $this->mime_browser = mime_content_type($filepath);
+        $this->mime_browser = $this->_filterMimeType(mime_content_type($filepath));
+        
         $this->mime_os      = trim(exec('file -ib ' . trim(escapeshellarg($filepath))));
         $this->type_os      = trim(exec('file -b ' . trim(escapeshellarg($filepath))));
         
         $this->archive_filename = basename($filepath);
     }
-    
+        
     public function getMimeTypeElements($mimeType = null)
     {
         if (!$mimeType) {
@@ -188,10 +184,23 @@ class File extends Omeka_Record
      **/
     public function setMimeType($mimeType)
     {
-        $this->mime_browser = $mimeType;
+        $this->mime_browser = $this->_filterMimeType($mimeType);
     }
     
-    public function unlinkFile() {
+    /**
+     * Filters the mime type.  In particular, it removes the charset information.
+     * 
+     * @param string $mimeType The raw mime type
+     * @return string Filtered mime type.
+     **/
+    protected function _filterMimeType($mimeType)
+    {
+        $mimeTypeParts = explode(';', $mimeType);
+        return trim($mimeTypeParts[0]);
+    }
+    
+    public function unlinkFile() 
+    {
         $files = array($this->getPath('fullsize'), 
                        $this->getPath('thumbnail'), 
                        $this->getPath('archive'),
@@ -204,7 +213,8 @@ class File extends Omeka_Record
         }
     }
     
-    protected function _delete() {
+    protected function _delete() 
+    {
         $this->unlinkFile();
         $this->deleteElementTexts();
     }
