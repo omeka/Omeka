@@ -1,11 +1,4 @@
-<?php 
-/**
- * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- **/
-
+<?php
 /**
  * Core class used to bootstrap the Omeka environment.
  * 
@@ -17,11 +10,14 @@
  * that get initialized by this class.  Methods can be called on this class
  * as though it were an instance of Omeka_Context.
  *
+ * @version $Id$
  * @uses Omeka_Context
  * @package Omeka
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @copyright Center for History and New Media, 2007-2009
  **/
+
 class Omeka_Core extends Zend_Application
 {
     /**
@@ -32,7 +28,6 @@ class Omeka_Core extends Zend_Application
      * @var array
      */
     protected $_phases = array('sanitizeMagicQuotes' => null, 
-                               'initializeClassLoader' => null, 
                                'initializeConfigFiles' => 'Config', 
                                'initializeLogger' => 'Logger', 
                                'initializeDb' => 'Db', 
@@ -162,17 +157,6 @@ class Omeka_Core extends Zend_Application
                 break;
             }
         }
-    }
-    
-    /**
-     * Register the autoloader that will load classes based on Zend Framework
-     * naming conventions.
-     * 
-     * @return void
-     **/
-    public function initializeClassLoader()
-    {
-        
     }
     
     private function _displayErrorPage($message = '')
