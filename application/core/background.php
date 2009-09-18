@@ -11,8 +11,8 @@
 // Require the necessary files.
 $baseDir = dirname(__FILE__);
 
-require "{$baseDir}/../../paths.php";
-require "{$baseDir}/../libraries/Omeka/Core.php";
+require_once("{$baseDir}/../../paths.php");
+require_once("{$baseDir}/../libraries/Omeka/Core.php");
 
 // Set the command line arguments.
 $options = new Zend_Console_Getopt(array('process|p=i' => 'process to run', 'lastphase|l=s' => 'last phase to load'));
@@ -44,8 +44,20 @@ Omeka_Context::getInstance()->setCurrentUser($processUser);
 // Get the name of the process class to run
 $processClass = $process->class;
 
+//echo $processClass . "\n";
+
 // Get the process arguments
 $processArgs = $process->getArguments();
+
+//print_r($processArgs);
+//echo "\n";
+
+// if (class_exists($processClass)) {
+//     echo 'class exists';
+// } else {
+//     echo 'no class';
+// }
+// echo "\n";
 
 // Create a custom process object
 $processObject = new $processClass($process);

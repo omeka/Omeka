@@ -29,9 +29,4 @@ abstract class ProcessAbstract
     }
     
     abstract public function run($args);
-    
-    public function setStatus() 
-    {
-        
-    }
 }
