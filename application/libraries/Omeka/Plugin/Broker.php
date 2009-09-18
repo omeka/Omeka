@@ -785,15 +785,32 @@ class Omeka_Plugin_Broker
      **/
     public function uninstall($pluginDirName)
     {
-        try {
-            $uninstallHook = $this->getHook($pluginDirName, 'uninstall');
-            if ($uninstallHook) {
-                call_user_func($uninstallHook);
+        // get the plugin object
+        $plugin = $this->_db->getTable('Plugin')->findByDirectoryName($pluginDirName);            
+        
+        // activate the plugin for the remainder of the request, 
+        // so that it can be loaded
+        $this->_active[$pluginDirName] = $pluginDirName;
+        
+        // load the plugin files
+        $this->load($pluginDirName);
+        
+        // see if the plugin could load.  
+        // A plugin will not be able to load, and hence not be able to uninstall, 
+        // if it cannot load its required plugins
+        if ($this->isLoaded($pluginDirName)) {
+            try {
+                $uninstallHook = $this->getHook($pluginDirName, 'uninstall');
+                if ($uninstallHook) {
+                    call_user_func($uninstallHook);
+                }
+                //Remove the entry from the database
+                $this->_db->query("DELETE FROM {$this->_db->Plugin} WHERE name = ? LIMIT 1", array($pluginDirName));
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
             }
-            //Remove the entry from the database
-            $this->_db->query("DELETE FROM {$this->_db->Plugin} WHERE name = ? LIMIT 1", array($pluginDirName));
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+        } else {
+            throw new Exception("The '$pluginDirName' plugin cannot be uninstalled because it needs all of its required plugins installed, activated, and loaded.");
         }
     }
     
