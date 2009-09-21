@@ -159,7 +159,7 @@
  {
      __v()->file = $file;
  }
- 
+
  /**
   * Retrieve the set of all metadata for the current file.
   * 
@@ -217,3 +217,77 @@
  }
  
  
+  /**
+  * Returns the most recent files
+  * 
+  * @since 1.1
+  * @param integer $num The maximum number of recent files to return
+  * @return array
+  **/
+ function recent_files($num = 10) 
+ {
+     return get_files(array('recent'=>true), $num);
+ }
+
+ /**
+  * @since 1.1
+  * @param array $files Set of File records to loop.
+  */
+ function set_files_for_loop($files)
+ {
+    __v()->files = $files;
+ }
+
+ /**
+ * @since 1.1
+ * @param array $params
+ * @param integer $limit
+ * @return array
+ **/
+ function get_files($params = array(), $limit = 10)
+ {
+    return get_db()->getTable('File')->findBy($params, $limit);
+ }
+
+ /**
+ * Retrieve the set of files for the current loop.
+ * 
+ * @since 1.1
+ * @return array
+ **/
+ function get_files_for_loop()
+ {
+    return __v()->files;
+ }
+
+ /**
+ * Loops through files assigned to the view.
+ * 
+ * @since 1.1
+ * @return mixed The current file in the loop.
+ */
+ function loop_files()
+ {
+    return loop_records('files', get_files_for_loop());
+ }
+
+ /**
+ * Determine whether or not there are any files in the database.
+ * 
+ * @since 1.1
+ * @return boolean
+ **/
+ function has_files()
+ {
+    return (total_files() > 0);    
+ }
+
+ /**
+ * @since 1.1
+ * @return boolean
+ */
+ function has_files_for_loop()
+ {
+    $view = __v();
+    return ($view->files and count($view->files));
+ }

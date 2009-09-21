@@ -183,6 +183,9 @@ function loop_records($recordType, $records)
             case 'items':
                 set_current_item($record);
                 break;
+			case 'files':
+				set_current_file($record);
+				break;
             case 'files_for_item':
                 set_current_file($record);
                 break;
