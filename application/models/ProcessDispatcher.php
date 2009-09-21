@@ -23,16 +23,8 @@ class ProcessDispatcher
      */
     static public function startProcess($className, $user = null, $args = null, $lastPhase = 'initializeRoutes')
     {
-        // Use the user-specified path, or attempt autodetection if no path
-        // specified.
-        $cliPath = Omeka_Context::getInstance()->getConfig('basic')->background->php->path;
-        
-        if ($cliPath == "") {
-            $cliPath = self::_autodetectCliPath();
-        }
-        
-        self::_checkCliPath($cliPath);
-        
+        $cliPath = self::getPHPCliPath();
+                
         if (!$user) {
             $user = Omeka_Context::getInstance()->getCurrentUser();
         }
@@ -56,6 +48,21 @@ class ProcessDispatcher
     static public function stopProcess(Process $process)
     {
         
+    }
+    
+    static public function getPHPCliPath()
+    {
+        // Use the user-specified path, or attempt autodetection if no path
+        // specified.
+        $cliPath = Omeka_Context::getInstance()->getConfig('basic')->background->php->path;
+        
+        if ($cliPath == "") {
+            $cliPath = self::_autodetectCliPath();
+        }
+        
+        self::_checkCliPath($cliPath);
+        
+        return $cliPath;
     }
     
     /**
