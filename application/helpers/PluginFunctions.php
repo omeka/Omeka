@@ -156,3 +156,12 @@ function plugin_header()
     $request = Omeka_Context::getInstance()->getRequest();
 	fire_plugin_hook('public_theme_header', $request);
 }
+
+/**
+ * @since 1.1
+ * @see plugin_append_to_admin_site_info()
+ **/
+function plugin_append_to_admin_site_info()
+{
+    return get_plugin_hook_output('plugin_append_to_admin_site_info');
+}

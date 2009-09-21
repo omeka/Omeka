@@ -60,6 +60,7 @@
 
                 } ?>
                 <?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?>
+                <?php echo plugin_append_to_admin_site_info(); ?>
             </div>
             
 
