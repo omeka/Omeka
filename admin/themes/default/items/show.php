@@ -92,7 +92,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 </div>
 
 <div id="core-metadata" class="showitem">
-<?php echo show_item_metadata(); ?>
+<?php echo show_item_metadata(array('show_empty_elements' => true)); ?>
 </div>
 
 <?php fire_plugin_hook('admin_append_to_items_show_primary', $item); ?>
