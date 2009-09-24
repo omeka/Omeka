@@ -192,6 +192,9 @@ function loop_records($recordType, $records)
             case 'collections':
                 set_current_collection($record);
                 break;
+            case 'item_types':
+                set_current_item_type($record);
+                break;
             default:
                 throw new Exception('Error: Invalid record type was provided for the loop.');
                 break;

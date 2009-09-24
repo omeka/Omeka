@@ -10,22 +10,25 @@
             <tr>
                 <th>Type Name</th>
                 <th>Description</th>
+                <th>Total Number of Items</th>
                 <?php if (has_permission('ItemTypes', 'edit')): ?>
                 <th>Action</th>
                 <?php endif; ?>
             </tr>
         </thead>
         <tbody>
-<?php foreach( $itemtypes as $itemtype ): ?>
+        
+<?php while (loop_item_types()): ?>
+<?php $itemtype = get_current_item_type();?>
 <tr class="itemtype">
-     <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo html_escape($itemtype->name); ?></a></td>
-    <td width="70%"><?php echo html_escape($itemtype->description); ?></td>
+    <td width="20%"><a href="<?php echo record_uri($itemtype, 'show', 'item-types'); ?>"><?php echo html_escape($itemtype->name); ?></a></td>
+    <td width="60%"><?php echo html_escape($itemtype->description); ?></td>
+    <td><?php echo link_to_items_with_item_type(); ?></td>
     <?php if (has_permission('ItemTypes', 'edit')): ?><td>
         <a class="edit" href="<?php echo uri('item-types/edit/'.$itemtype->id); ?>">Edit</a>
     </td><?php endif; ?>
-    
 </tr>
-<?php endforeach; ?>
+<?php endwhile; ?>
 </tbody>
 </table>
 <?php fire_plugin_hook('admin_append_to_item_types_browse_primary', $itemtypes); ?>

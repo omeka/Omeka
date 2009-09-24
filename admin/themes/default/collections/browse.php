@@ -15,6 +15,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Collectors</th>
                 <th scope="col">Date Added</th>
+                <th scope="col">Total Number of Items</th>
                 <?php if (has_permission('Collections', 'edit')): ?>
                     <th scope="col">Edit?</th>                
                 <?php endif; ?>
@@ -44,6 +45,8 @@
                     <?php echo date('m.d.Y', strtotime($time)); ?>
                 <?php endif; ?>
                 </td>
+                <td><?php echo link_to_items_in_collection(); ?></td>
+                
                 <?php if (has_permission('Collections', 'edit')): ?>
                 <td>
                     <?php echo link_to_collection('Edit', array('class'=>'edit'), 'edit'); ?>

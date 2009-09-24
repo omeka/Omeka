@@ -15,35 +15,32 @@
 
 <div id="primary">
     <div id="type-info">
-
-
-        
+        <h2>Description</h2>
         <p><?php echo html_escape($itemtype->description); ?></p>
         <h2>Type Metadata</h2>
         <dl class="type-metadata">
-
             <?php foreach($itemtype->Elements as $element): ?>
             <dt><?php echo html_escape($element->name); ?></dt>
             <dd><?php echo html_escape($element->description); ?></dd>
             <?php endforeach; ?>
-        
         </dl>
     </div>
 
     <div id="type-items">
-        <h2>Recent Items with Type <?php echo html_escape($itemtype->name); ?></h2>
+        <h2>Recently Added Items</h2>
         <?php if($itemtype->Items != null): ?>
         <ul>
         <?php set_items_for_loop($itemtype->Items); ?>
         <?php while(loop_items()): ?>
-        <li><a href="<?php echo item_uri(); ?>"><span class="title"><?php echo item('Dublin Core', 'Title'); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span></a></li>
+        <li><span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span> <a href="<?php echo item_uri(); ?>"><span class="title"><?php echo item('Dublin Core', 'Title'); ?></span></a></li>
         <?php endwhile;?>
         </ul>
-    
         <?php else: ?>
-        <p>There are no items with the type <?php echo html_escape($itemtype->name); ?></p>
+        <p>There are no recently added items.</p>
         <?php endif;?>
         
+        <h2>Total Number of Items</h2>
+        <p><?php echo link_to_items_with_item_type(); ?></p>
     </div>
     
     <?php fire_plugin_hook('admin_append_to_item_types_show_primary', $itemtype); ?>

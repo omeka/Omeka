@@ -21,9 +21,10 @@
  * @param string $action The action to use for the link (optional)
  * @param string $text The text to put in the link.  Default is 'View'.
  * @param array $props Attributes for the <a> tag
+ * @param array $queryParams the parameters in the uri query
  * @return string HTML
  **/
-function link_to($record, $action=null, $text='View', $props = array())
+function link_to($record, $action=null, $text='View', $props = array(), $queryParams=array())
 {
     // If we're linking directly to a record, use the URI for that record.
     if($record instanceof Omeka_Record) {
@@ -36,10 +37,12 @@ function link_to($record, $action=null, $text='View', $props = array())
         $route = 'default';
         $urlOptions['controller'] = (string) $record;
         if($action) $urlOptions['action'] = (string) $action;
-        $url = uri($urlOptions, $route);
+        $url = uri($urlOptions, $route, $queryParams);
     }
 
+    
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
+    
 	return '<a href="'. $url . '"' . $attr . '>' . $text . '</a>';
 }
 
@@ -95,6 +98,38 @@ function link_to_browse_items($text, $browseParams = array(), $linkProperties = 
 function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
 {
     return link_to_collection($text, $props, $action, get_collection_for_item());
+}
+
+function link_to_items_in_collection($text = null, $props = array(), $action = 'browse', $collectionObj = null)
+{
+    if (!$collectionObj) {
+        $collectionObj = get_current_collection();
+    }
+
+    $queryParams = array();
+    $queryParams['collection'] = $collectionObj->id;
+    
+    if ($text === null) {
+        $text = $collectionObj->totalItems();
+    }
+
+    return link_to('items', $action, $text, $props, $queryParams);
+}
+
+function link_to_items_with_item_type($text = null, $props = array(), $action = 'browse', $itemTypeObj = null)
+{
+    if (!$itemTypeObj) {
+        $itemTypeObj = get_current_item_type();
+    }
+
+    $queryParams = array();
+    $queryParams['type'] = $itemTypeObj->id;
+    
+    if ($text === null) {
+        $text = $itemTypeObj->totalItems();
+    }
+
+    return link_to('items', $action, $text, $props, $queryParams);
 }
 
 /**

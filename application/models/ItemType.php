@@ -222,7 +222,6 @@ class ItemType extends Omeka_Record {
         $this->reorderChildren();
     }
     
-    
     public function hasElement($elementId) { 
         $db = $this->getDb();
         
@@ -230,6 +229,13 @@ class ItemType extends Omeka_Record {
                                     array($elementId, $this->id),
                                     true);
         return (boolean) $iteJoin;
+    }
+    
+    public function totalItems()
+    {
+        // This will query the ItemTable for a count of all items associated with 
+        // the item type
+        return $this->getDb()->getTable('Item')->count(array('type' => $this->id));
     }
     
     static public function getItemTypeElementSet()

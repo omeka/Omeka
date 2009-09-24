@@ -23,21 +23,20 @@
         <?php if (collection_has_collectors()): ?> 
         <li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
         <?php else: ?>
-        <li>No collectors</li>
+        <li>No collectors.</li>
         <?php endif; ?> 
     </ul>
 
 </div>
 <div id="collection-items">
-    <h2>Recently Added to <?php echo collection('Name'); ?></h2>
-    
+    <h2>Recently Added Items</h2>
     <ul>
     <?php while (loop_items_in_collection(10)): ?>
-        <li><span class="title"><?php echo link_to_item(); ?></span> <span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span></li>
+        <li><span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span><span class="title"> <?php echo link_to_item(); ?></span></li>
     <?php endwhile;?>
     </ul>
-    <h4>Total Number of Items in Collection: <?php echo total_items_in_collection();?></h4>
-    
+    <h2>Total Number of Items</h2>
+    <p><?php echo link_to_items_in_collection(); ?></p>
 </div>
 
 <?php fire_plugin_hook('admin_append_to_collections_show_primary', $collection); ?>
