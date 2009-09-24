@@ -12,7 +12,7 @@
                 <th>Description</th>
                 <th>Total Number of Items</th>
                 <?php if (has_permission('ItemTypes', 'edit')): ?>
-                <th>Action</th>
+                <th>Edit?</th>
                 <?php endif; ?>
             </tr>
         </thead>
