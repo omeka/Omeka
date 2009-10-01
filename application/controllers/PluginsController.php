@@ -28,6 +28,10 @@ class PluginsController extends Omeka_Controller_Action
     {
         $this->_modelClass   = 'Plugin';
         $this->_pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
+        $this->_pluginLoader = Zend_Registry::get('pluginloader');
+        $this->_pluginInstaller = new Omeka_Plugin_Installer($this->_pluginBroker, 
+                                    $this->_pluginLoader, 
+                                    new Omeka_Plugin_Ini(PLUGIN_DIR));
     }
     
     /**
@@ -77,16 +81,23 @@ class PluginsController extends Omeka_Controller_Action
         // get the plugin info for the plugin to install
         $pluginInfo = $this->_getPluginInfo($pluginDirName);
         
-        $broker = $this->_pluginBroker;       
-        if (!$broker->isInstalled($pluginDirName)) {
-            try {
-                $broker->install($pluginDirName);
-                $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully installed!");
-                $this->redirect->goto('config', 'plugins', 'default', array('name'=>$pluginDirName));
-            } catch (Exception $e) {
-                $this->flashError("The following error occurred while installing the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
-                $this->redirect->goto('browse');
-            }
+        $pluginRecord = new Plugin;
+        $pluginRecord->name = $pluginDirName;
+        
+        if ($this->_pluginLoader->isInstalled($pluginDirName)) {
+            throw new Exception("'$pluginDirName' plugin has already been installed.");
+        }
+             
+        try {
+            $this->_pluginInstaller->install($pluginRecord);
+            $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully installed!");
+            $this->redirect->goto('config', 'plugins', 'default', array('name'=>$pluginDirName));
+        } catch (Exception $e) {
+            // Taken from Plugin_Installer::install().  
+            // "The '$pluginDirName' plugin cannot be installed because it requires other plugins to be installed, activated, and loaded. See below for details."
+            
+            $this->flashError("The following error occurred while installing the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
+            $this->redirect->goto('browse');
         }
     }
     
@@ -107,6 +118,10 @@ class PluginsController extends Omeka_Controller_Action
         // Get the plugin info for the plugin to activate
         $pluginInfo = $this->_getPluginInfo($pluginDirName);
         
+        $pluginRecord = $this->getTable()->findByDirectoryName($pluginDirName);
+        if (!$pluginRecord) {
+            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to activate.");
+        }
         // Activate the plugin
         try {
            $broker->activate($pluginDirName);
@@ -139,6 +154,11 @@ class PluginsController extends Omeka_Controller_Action
                 
         // Get the plugin info for the plugin to deactivate
         $pluginInfo = $this->_getPluginInfo($pluginDirName);
+        
+        $pluginRecord = $this->getTable()->findByDirectoryName($pluginDirName);
+        if (!$pluginRecord) {
+            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to deactivate.");
+        }
         
         // Deactivate the plugin
         try {
@@ -222,7 +242,6 @@ class PluginsController extends Omeka_Controller_Action
         $pluginInfo->loaded = $this->_pluginBroker->isLoaded($pluginDirName);
         
         $pluginInfo->hasPluginFile = $this->_pluginBroker->hasPluginFile($pluginDirName);
-        $pluginInfo->hasPluginIniFile = $this->_pluginBroker->hasPluginIniFile($pluginDirName);
         $pluginInfo->hasNewVersion = $this->_pluginBroker->hasNewVersion($pluginDirName);        
         $pluginInfo->requiredPluginDirNames = $this->_pluginBroker->getRequiredPluginDirNames($pluginDirName);
         $pluginInfo->optionalPluginDirNames = $this->_pluginBroker->getOptionalPluginDirNames($pluginDirName);
@@ -241,7 +260,7 @@ class PluginsController extends Omeka_Controller_Action
     public function browseAction() 
     {
         //Get a list of all the plugins        
-        $allPluginNames = $this->_pluginBroker->getAll();
+        $allPluginNames = $this->_pluginLoader->getAll();
 		natsort($allPluginNames);
 		
         $pluginInfos = array();

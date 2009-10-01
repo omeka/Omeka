@@ -267,8 +267,10 @@ function get_plugin_broker()
  **/
 function get_plugin_ini($pluginDirName, $iniKeyName)
 {         
-   $pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
-   return $pluginBroker->getPluginIniValue($pluginDirName, $iniKeyName);
+   $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
+   if ($pluginIniReader->hasPluginIniFile($pluginDirName)) {
+       return $pluginIniReader->getPluginIniValue($pluginDirName, $iniKeyName);
+   }
 }
 
 /**
