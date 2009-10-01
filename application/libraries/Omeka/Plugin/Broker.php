@@ -123,28 +123,32 @@ class Omeka_Plugin_Broker
      * @see Omeka_Plugin_Broker::__call()
      * @param string Name of the hook.
      * @param array Arguments that are passed to each hook implementation.
-     * @return array Keyed to the names of plugins, this will contain an array of 
-     * all the return values of the hook implementations.
+     * @param Plugin|string Optional name of the plugin for which to invoke the hook.
+     * @return void
      **/
-    public function callHook($hook, $args)
+    public function callHook($hook, $args, $plugin = null)
     {
         if (empty($this->_callbacks[$hook])) {
             return;
         }
         
-        $return_values = array();        
-        foreach ($this->_callbacks[$hook] as $pluginDirName => $callback) {
-            if ($this->isActive($pluginDirName)) {
-                //Make sure the callback executes within the scope of the current plugin
-                $this->setCurrentPluginDirName($pluginDirName);
-                $return_values[$pluginDirName] = call_user_func_array($callback, $args);
+        // If we are calling the hook for a single function, do that and return.
+        if ($plugin) {
+            if ($callback = $this->getHook($plugin, $hook)) {
+                call_user_func_array($callback, $args);
             }
+            return;
+        }
+        
+        // Otherwise iterate through all the hooks and call each in turn.
+        foreach ($this->_callbacks[$hook] as $pluginDirName => $callback) {
+            //Make sure the callback executes within the scope of the current plugin
+            $this->setCurrentPluginDirName($pluginDirName);
+            call_user_func_array($callback, $args);
         }
         
         // Reset the value for current plugin after this loop finishes
-        $this->setCurrentPluginDirName(null);
-        
-        return $return_values;        
+        $this->setCurrentPluginDirName(null);       
     }
     
     /**
