@@ -173,6 +173,6 @@ class Omeka_Plugin_Ini
      **/
     public function getPluginIniFilePath($pluginDirName)
     {
-        return $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
+        return $this->_pluginsRootDir . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
     }
 }

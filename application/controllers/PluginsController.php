@@ -29,9 +29,11 @@ class PluginsController extends Omeka_Controller_Action
         $this->_modelClass   = 'Plugin';
         $this->_pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
         $this->_pluginLoader = Zend_Registry::get('pluginloader');
-        $this->_pluginInstaller = new Omeka_Plugin_Installer($this->_pluginBroker, 
+        $this->_pluginIniReader = Zend_Registry::get('plugin_ini_reader');
+        $this->_pluginInstaller = new Omeka_Plugin_Installer(
+                                    $this->_pluginBroker, 
                                     $this->_pluginLoader, 
-                                    new Omeka_Plugin_Ini(PLUGIN_DIR));
+                                    $this->_pluginIniReader);
     }
     
     /**
@@ -202,7 +204,7 @@ class PluginsController extends Omeka_Controller_Action
     {
         $pluginInfo = new stdClass;
         
-        $pluginIniPath = $this->_pluginBroker->getPluginIniFilePath($pluginDirName);      
+        $pluginIniPath = $this->_pluginIniReader->getPluginIniFilePath($pluginDirName);
         if (file_exists($pluginIniPath)) {
             try {
                 $config = new Zend_Config_Ini($pluginIniPath, 'info');
@@ -237,16 +239,16 @@ class PluginsController extends Omeka_Controller_Action
         
         $pluginInfo->directoryName = $pluginDirName;            
         $pluginInfo->hasConfig = (bool) $this->_pluginBroker->getHook($pluginDirName, 'config');
-        $pluginInfo->installed = $this->_pluginBroker->isInstalled($pluginDirName);
-        $pluginInfo->active = $this->_pluginBroker->isActive($pluginDirName);
-        $pluginInfo->loaded = $this->_pluginBroker->isLoaded($pluginDirName);
+        $pluginInfo->installed = $this->_pluginLoader->isInstalled($pluginDirName);
+        $pluginInfo->active = $this->_pluginLoader->isActive($pluginDirName);
+        $pluginInfo->loaded = $this->_pluginLoader->isLoaded($pluginDirName);
         
-        $pluginInfo->hasPluginFile = $this->_pluginBroker->hasPluginFile($pluginDirName);
-        $pluginInfo->hasNewVersion = $this->_pluginBroker->hasNewVersion($pluginDirName);        
-        $pluginInfo->requiredPluginDirNames = $this->_pluginBroker->getRequiredPluginDirNames($pluginDirName);
-        $pluginInfo->optionalPluginDirNames = $this->_pluginBroker->getOptionalPluginDirNames($pluginDirName);
-        $pluginInfo->meetsOmekaMinimumVersion = $this->_pluginBroker->meetsOmekaMinimumVersion($pluginDirName);
-        $pluginInfo->meetsOmekaTestedUpTo = $this->_pluginBroker->meetsOmekaTestedUpTo($pluginDirName);
+        $pluginInfo->hasPluginFile = $this->_pluginLoader->hasPluginFile($pluginDirName);
+        $pluginInfo->hasNewVersion = $this->_pluginLoader->hasNewVersion($pluginDirName);        
+        $pluginInfo->requiredPluginDirNames = $this->_pluginIniReader->getRequiredPluginDirNames($pluginDirName);
+        $pluginInfo->optionalPluginDirNames = $this->_pluginIniReader->getOptionalPluginDirNames($pluginDirName);
+        $pluginInfo->meetsOmekaMinimumVersion = $this->_pluginIniReader->meetsOmekaMinimumVersion($pluginDirName);
+        $pluginInfo->meetsOmekaTestedUpTo = $this->_pluginIniReader->meetsOmekaTestedUpTo($pluginDirName);
 
         return $pluginInfo;
     }
