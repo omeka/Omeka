@@ -20,6 +20,7 @@ class Omeka_Plugin_Loader
     protected $_broker;
     protected $_pluginsDbTable;
     protected $_iniReader;
+    protected $_mvc;
     protected $_basePath;
     
     /**
@@ -62,11 +63,13 @@ class Omeka_Plugin_Loader
     public function __construct(Omeka_Plugin_Broker $broker, 
                                 Omeka_Db_Table $pluginsDbTable, 
                                 Omeka_Plugin_Ini $iniReader,
+                                Omeka_Plugin_Mvc $mvc,
                                 $pluginsBaseDir)
     {
         $this->_broker = $broker;
         $this->_pluginsDbTable = $pluginsDbTable;
         $this->_iniReader = $iniReader;
+        $this->_mvc = $mvc;
         $this->_basePath = $pluginsBaseDir;
     }
     
@@ -188,7 +191,7 @@ class Omeka_Plugin_Loader
         $this->_broker->setCurrentPluginDirName($pluginDirName);
 
         // add the plugin dir paths and require the plugin files
-        $this->_broker->addApplicationDirs($pluginDirName);
+        $this->_mvc->addApplicationDirs($pluginDirName);
         $pluginFilePath = $this->getPluginFilePath($pluginDirName);
         require_once $pluginFilePath;
 

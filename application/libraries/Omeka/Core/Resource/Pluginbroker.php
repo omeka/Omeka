@@ -15,12 +15,14 @@ class Omeka_Core_Resource_Pluginbroker extends Zend_Application_Resource_Resourc
         // Initialize the plugin broker with the database object and the 
         // plugins/ directory
         $db = $bootstrap->getResource('Db');
-        $broker = new Omeka_Plugin_Broker(PLUGIN_DIR);   
+        $broker = new Omeka_Plugin_Broker;   
         
         $pluginIniReader = new Omeka_Plugin_Ini(PLUGIN_DIR);
+        $pluginMvc = new Omeka_Plugin_Mvc(PLUGIN_DIR);
         $pluginLoader = new Omeka_Plugin_Loader($broker, 
                                                 $db->getTable('Plugin'), 
                                                 $pluginIniReader,
+                                                $pluginMvc,
                                                 PLUGIN_DIR);
         
         // Set the plugin broker before loading any plugins.  
@@ -30,6 +32,7 @@ class Omeka_Core_Resource_Pluginbroker extends Zend_Application_Resource_Resourc
         
         Zend_Registry::set('pluginloader', $pluginLoader);
         Zend_Registry::set('plugin_ini_reader', $pluginIniReader);
+        Zend_Registry::set('plugin_mvc', $pluginMvc);
         
         $pluginLoader->registerPluginBroker();
         $pluginLoader->loadLists();

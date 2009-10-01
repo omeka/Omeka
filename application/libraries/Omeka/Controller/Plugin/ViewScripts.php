@@ -22,11 +22,17 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     protected $_baseThemePath;
     protected $_webBaseThemePath;
     
-    public function __construct($options)
+    /**
+     * @var Omeka_Plugin_Mvc
+     */
+    protected $_pluginMvc;
+    
+    public function __construct($options, Omeka_Plugin_Mvc $pluginMvc)
     {
         $this->_dbOptions = $options['dbOptions'];
         $this->_baseThemePath = $options['baseThemePath'];
         $this->_webBaseThemePath = $options['webBaseThemePath'];
+        $this->_pluginMvc = $pluginMvc;
     }
 
     /**
@@ -108,21 +114,14 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      * @return void
      */
     protected function _addPluginPaths($themeType, $pluginModuleName = null)
-    {
-        // This part of the controller plugin depends on Omeka's plugin broker.
-        // If the plugin broker is not installed, can't do anything.
-        $pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
-        if (!$pluginBroker) {
-            return;
-        }
-                
+    {                
         // If we have chosen a specific module to add paths for.
         if ($pluginModuleName) {
             
             // We need to add the scripts in reverse order if how they will be found.
              
             // add the scripts from the other modules
-            $otherPluginScriptDirs = $pluginBroker->getModuleViewScriptDirs(null);
+            $otherPluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs(null);
             foreach ($otherPluginScriptDirs as $otherPluginModuleName => $scriptPathSet) {
                 if ($otherPluginModuleName != $pluginModuleName && $scriptPathSet[$themeType]) {
                     foreach ($scriptPathSet[$themeType] as $scriptPath) {
@@ -132,7 +131,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
             }
             
             // add the scripts from the first module
-            $pluginScriptDirs = $pluginBroker->getModuleViewScriptDirs($pluginModuleName);
+            $pluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs($pluginModuleName);
             if ($pluginScriptDirs[$themeType]) {
                 foreach ($pluginScriptDirs[$themeType] as $scriptPath) {
                     $this->_addPathToView($scriptPath);
@@ -142,7 +141,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         } else {
             // We have not chosen a specific module to add paths for, so just add
             // them all (for the specific theme type, 'admin' or 'public').
-            $pluginScriptDirs = $pluginBroker->getModuleViewScriptDirs(null);
+            $pluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs(null);
             foreach ($pluginScriptDirs as $moduleName => $scriptPathSet) {
                 if ($scriptPathSet[$themeType]) {
                     foreach ($scriptPathSet[$themeType] as $scriptPath) {

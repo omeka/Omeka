@@ -20,9 +20,11 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
         $this->dbTable = $this->getMock('PluginTable', array(), array(), '', false);
         $this->basePath = TEST_DIR . '/_files/unit/plugin-loader';
         $this->iniReader = $this->getMock('Omeka_Plugin_Ini', array(), array(), '', false);
+        $this->mvc = $this->getMock('Omeka_Plugin_Mvc', array(), array(), '', false);
         $this->loader = new Omeka_Plugin_Loader($this->broker, 
                                                 $this->dbTable,
                                                 $this->iniReader,
+                                                $this->mvc,
                                                 $this->basePath);
     }
     
@@ -49,6 +51,10 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
                  ->method('meetsOmekaMinimumVersion')
                  ->with('foobar')
                  ->will($this->returnValue(true));
+        
+        $this->mvc->expects($this->once())
+                 ->method('addApplicationDirs')
+                 ->with('foobar');
         
         $this->loader->registerPluginBroker();
         
