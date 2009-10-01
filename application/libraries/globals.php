@@ -282,7 +282,8 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  **/
 function add_mime_display_type($mimeTypes, $callback, array $options=array())
 {
-    get_plugin_broker()->addMediaAdapter($mimeTypes, $callback, $options);
+    require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Media.php';
+    Omeka_View_Helper_Media::addMimeTypes($mimeTypes, $callback, $options);
 }
 
 /**

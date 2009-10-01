@@ -36,7 +36,7 @@ class Omeka_View_Helper_Media
      *
      * @var array
      **/
-    protected $_callbacks = array(
+    static protected $_callbacks = array(
 	    'application/ogg'   => 'audio',
 	    'audio/aac'         => 'audio',
 	    'audio/aiff'        => 'audio',
@@ -94,7 +94,7 @@ class Omeka_View_Helper_Media
      *
      * @var array
      **/
-    protected $_callbackOptions = array(
+    static protected $_callbackOptions = array(
         'defaultDisplay'=>array(
             'linkToFile'=>true,
             'linkToMetadata'=>false
@@ -142,29 +142,46 @@ class Omeka_View_Helper_Media
 		    'imgAttributes' => array(),
 		    'filenameAttributes' => array()
 		    ));
-            
+                
     /**
-     * Retrieve all the callbacks and default options from the plugins.  They
-     * should be merged with the defaults such that plugins take precedence.
+     * Add MIME types and associated callbacks to the list.
      * 
-     * @uses Omeka_Context
-     * @uses Omeka_Plugin_Broker::getMediaAdapters()
+     * This allows plugins to override/define ways of displaying specific
+     * files.  The most obvious example of where this would come in handy is
+     * to define ways of displaying uncommon files, such as QTVR, or novel ways
+     * of displaying more common files, such as using iPaper to display PDFs.
+     *
+     * @see add_mime_display_type()
+     * @internal This method (and the properties upon which it operates) are 
+     * static because it gets called prior to instantiation of the view, i.e.
+     * in the plugin loading phase.  Since there is no way to inject view
+     * helpers into the view object, this helper object cannot be instantiated
+     * and registered for use by the add_mime_display_type() function.
+     * 
+     * @param array|string $mimeTypes Set of MIME types that this specific
+     * callback will respond to.
+     * @param callback Any valid callback.  This function should return a
+     * string containing valid XHTML, which will be used to display the file.
      * @return void
      **/
-    public function __construct()
+    public static function addMimeTypes($mimeTypes, $callback, array $defaultOptions = array())
     {
-       $pluginBroker = Omeka_Context::getInstance()->getPluginBroker();
-       
-       if($pluginBroker) {
-           $info = $pluginBroker->getMediaAdapters();
-           
-           //Merge all the plugin callbacks with the ones in this object
-           
-           $this->_callbacks = array_merge($this->_callbacks, $info['callbacks']);
-           $this->_callbackOptions = array_merge($this->_callbackOptions, $info['options']);           
-       }
-    }
-    
+        //Create the keyed list of mimeType=>callback format, and merge it
+        //with the current list.
+        $mimeTypes = (array) $mimeTypes;
+        $fillArray = array_fill(0, count($mimeTypes), $callback);    
+        $callbackList = array_combine($mimeTypes, $fillArray);
+        
+        self::$_callbacks = array_merge(self::$_callbacks, $callbackList);
+
+        //Create the keyed list of callback=>options format, and add it 
+        //to the current list
+        
+        //The key for the array might be the serialized callback (if necessary)
+        $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
+        self::$_callbackOptions[$callbackKey] = $defaultOptions;      
+    }  
+      
     /**
      * Default display for MIME types that do not have a valid rendering
      * callback.  
@@ -441,7 +458,7 @@ class Omeka_View_Helper_Media
     
     protected function getMimeFromFile($file)
     {
-        return $file->mime_browser;
+        return $file->getMimeType();
     }
     
     protected function getCallback($mimeType, $options)
@@ -452,7 +469,7 @@ class Omeka_View_Helper_Media
             return 'icon';
         }
         
-        $name = $this->_callbacks[$mimeType];
+        $name = self::$_callbacks[$mimeType];
         if(!$name) {
             $name = 'defaultDisplay';
         }
@@ -467,7 +484,7 @@ class Omeka_View_Helper_Media
     protected function getDefaultOptions($callback)
     {
         $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
-        return (array) $this->_callbackOptions[$callbackKey];
+        return (array) self::$_callbackOptions[$callbackKey];
     }
     
     /**
