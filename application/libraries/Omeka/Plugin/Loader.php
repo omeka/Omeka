@@ -85,25 +85,26 @@ class Omeka_Plugin_Loader
      * @param Plugin $plugin
      * @param boolean $force If true, throws exceptions if a plugin can't be 
      * loaded.
-     * @param array $pluginDirNamesWaitingToBeLoaded The array of the directory names of dependent plugins waiting to be loaded
+     * @param array $pluginsWaitingToLoad Plugins waiting to be loaded
      * @return void
      **/
-    public function load(Plugin $plugin, $force = false, $pluginDirNamesWaitingToBeLoaded = array())
+    public function load(Plugin $plugin, $force = false, $pluginsWaitingToLoad = array())
     {           
         $pluginDirName = $plugin->getDirectoryName();
 
         if (!$this->_canLoad($plugin, $force)) {
             return;
         }
-        
-        if (in_array($pluginDirName, $pluginDirNamesWaitingToBeLoaded)) {
+
+        // If the current plugin is already on the waiting list, don't load it.
+        if (array_key_exists(spl_object_hash($plugin), $pluginsWaitingToLoad)) {
             return;
+        } else {
+            // Otherwise add the current plugin to the waiting list.
+            $pluginsWaitingToLoad[spl_object_hash($plugin)] = $plugin;
         }
-                                     
-        // add the current plugin to directory names waiting to be loaded
-        $pluginDirNamesWaitingToBeLoaded[] = $pluginDirName;
         
-        // load the required plugins for the plugin
+        // Load all of a plugin's dependencies.
         $requiredPluginDirNames = $plugin->getRequiredPlugins();
 
         foreach($requiredPluginDirNames as $requiredPluginDirName) {
@@ -116,7 +117,7 @@ class Omeka_Plugin_Loader
                     return;
                 }
             }
-            $this->load($requiredPlugin, $force, $pluginDirNamesWaitingToBeLoaded);
+            $this->load($requiredPlugin, $force, $pluginsWaitingToLoad);
             
             // make sure the required plugin is loaded.
             // if a required plugin of the plugin cannot be loaded, 
@@ -134,7 +135,7 @@ class Omeka_Plugin_Loader
                 // Should an optional plugin ever be forced to load?  Debugging
                 // situations may require this, but most will not.  Will this 
                 // fail during installation ?
-                $this->load($optionalPlugin, $force, $pluginDirNamesWaitingToBeLoaded);
+                $this->load($optionalPlugin, $force, $pluginsWaitingToLoad);
             }
         }
 
