@@ -32,6 +32,10 @@ class Omeka_Plugin_Ini
       **/
     protected $_required = array();
     
+    /**
+     * @var array Set of Zend_Config_Ini objects corresponding to each plugin.
+     */
+    protected $_configs = array();
     
     public function __construct($pluginsRootDir)
     {
@@ -51,7 +55,13 @@ class Omeka_Plugin_Ini
     {
         $pluginIniPath = $this->getPluginIniFilePath($pluginDirName);
         if (file_exists($pluginIniPath)) {
-            $config = new Zend_Config_Ini($pluginIniPath, 'info');
+            if (array_key_exists($pluginDirName, $this->_configs)) {
+                $config = $this->_configs[$pluginDirName];
+            } else {
+                $config = new Zend_Config_Ini($pluginIniPath, 'info');
+                $this->_configs[$pluginDirName] = $config;
+            }
+            
         } else {
     		throw new Exception("Path to plugin.ini for '$pluginDirName' is not correct.");
     	}
