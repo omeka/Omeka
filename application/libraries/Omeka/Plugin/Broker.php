@@ -64,7 +64,11 @@ class Omeka_Plugin_Broker
      * @return void
      **/
     public function getHook($pluginDirName, $hook)
-    {        
+    {   
+        if ($pluginDirName instanceof Plugin) {
+            $pluginDirName = $pluginDirName->getDirectoryName();
+        }
+             
         if (is_array($this->_callbacks[$hook])) {
             return $this->_callbacks[$hook][$pluginDirName];
         }

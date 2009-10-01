@@ -16,18 +16,15 @@ class Omeka_Plugin_Installer
 {
     protected $_broker;
     protected $_loader;
-    protected $_iniReader;
     
     /**
      * @todo Refactor all methods to accept an instance of Plugin record.
      */
     public function __construct(Omeka_Plugin_Broker $broker, 
-                                Omeka_Plugin_Loader $loader, 
-                                Omeka_Plugin_Ini $iniReader)
+                                Omeka_Plugin_Loader $loader)
     {
         $this->_broker = $broker;
         $this->_loader = $loader;
-        $this->_iniReader = $iniReader;
     }
             
     /**
@@ -40,8 +37,6 @@ class Omeka_Plugin_Installer
     {
         $plugin->active = 1;
         $plugin->forceSave();
-        // Why is this line necessary?  Commented until whenever that becomes clear.
-        // $this->_active[$pluginDirName] = $pluginDirName;
     }
     
     /**
@@ -54,8 +49,6 @@ class Omeka_Plugin_Installer
     {
         $plugin->active = 0;
         $plugin->forceSave();
-        // See same comment in activate().
-        // unset($this->_active[$pluginDirName]);
     }
     
     /**
@@ -65,42 +58,23 @@ class Omeka_Plugin_Installer
      * @return void
      **/
     public function upgrade(Plugin $plugin)
-    {   
-        $pluginDirName = $plugin->name;
-        
-        if (!$this->_loader->hasNewVersion($pluginDirName)) {
-            throw new Exception("The '$pluginDirName' plugin must be installed and have newer files to upgrade it.");
+    {           
+        if (!$plugin->hasNewVersion()) {
+            throw new Exception("The '" . $plugin->getDisplayName() . "' plugin must be installed and have newer files to upgrade it.");
         }
         
-        // activate the plugin for the remainder of the request, 
-        // so that it can be loaded
-        $this->_active[$pluginDirName] = $pluginDirName;
-        
-        // remove the plugin name from the plugins that have new version for the remainder of the request
-        // so that it can load the new plugin
-        unset($this->_has_new_version[$pluginDirName]);
-        
-        // load the plugin files
-        $this->_loader->load($pluginDirName);
-        
-        if (!$this->_loader->isLoaded($pluginDirName)) {
-            throw new Exception("The '$pluginDirName' plugin cannot be upgraded because it needs all of its required plugins installed, activated, and loaded.");
-        }
+        // activate the plugin so that it can be loaded.
+        $plugin->setActive(true);
+                
+        // load the plugin files.
+        $this->_loader->load($plugin, true);
 
-        // let the plugin do the upgrade
-        $oldPluginVersion = $plugin->version;
-        $newPluginVersion = (string)$this->_iniReader->getPluginIniValue($pluginDirName, 'version');            
+        // run the upgrade hook for the plugin.
+        $this->_broker->callHook('upgrade', array($plugin->getDbVersion(), $plugin->getIniVersion()), $plugin);
 
-        // run the upgrade function in the plugin
-        $upgrade_hook = $this->_broker->getHook($pluginDirName, 'upgrade');
-        call_user_func_array($upgrade_hook, array($oldPluginVersion, $newPluginVersion));            
-
-        // update version of the plugin and activate it
-        $plugin->version = $newPluginVersion;
+        // update version of the plugin stored in the database.
+        $plugin->setDbVersion($plugin->getIniVersion());
         $plugin->forceSave();
-
-        // activate the plugin
-        $this->activate($plugin);
     }
     
     /**
@@ -111,33 +85,23 @@ class Omeka_Plugin_Installer
      **/
     public function install(Plugin $plugin) 
     {
-        if (!$plugin->name) {
+        if (!$plugin->getDirectoryName()) {
             throw new Exception("Plugin must have a valid directory name before it can be installed.");
         }
-        
-        $pluginDirName = $plugin->name;
-        
-        // install and activate the plugin for the remainder of the request, 
-        // so that it can be loaded
-        $this->_loader->setInstalled($pluginDirName);
-        $this->_loader->setActive($pluginDirName);
+                
+        // Flag the plugin as installed and active for the remainder of the request.
+        $plugin->setInstalled(true);
+        $plugin->setActive(true);
         
         // Force the plugin to load.  Will throw exception if plugin cannot be loaded for some reason.
-        $this->_loader->load($pluginDirName, true);
+        $this->_loader->load($plugin, true);
 
         try {            
-            $plugin->active = 1;
-            if ($this->_iniReader->hasPluginIniFile($pluginDirName)) {
-                $plugin->version = (string)$this->_iniReader->getPluginIniValue($pluginDirName, 'version');
-            } else {
-                $plugin->version = '';
-            }
+            $plugin->setDbVersion($plugin->getIniVersion());
             $plugin->forceSave();
     
             //Now run the installer for the plugin
-            $install_hook = $this->_broker->getHook($pluginDirName, 'install');
-            call_user_func_array($install_hook, array($plugin->id));
-               
+            $this->_broker->callHook('install', array($plugin->id), $plugin);               
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
             $plugin->delete();
@@ -156,23 +120,12 @@ class Omeka_Plugin_Installer
      **/
     public function uninstall(Plugin $plugin)
     {
-        $pluginDirName = $plugin->name;
-                
-        // activate the plugin for the remainder of the request, 
-        // so that it can be loaded
-        $this->_active[$pluginDirName] = $pluginDirName;
+        // Flag the plugin as active so we can load the 'uninstall' hook.
+        $plugin->setActive(true);
         
-        // load the plugin files
-        $this->_loader->load($pluginDirName);
-        
-        if (!$this->_loader->isLoaded($pluginDirName)) {
-            throw new Exception("The '$pluginDirName' plugin cannot be uninstalled because it needs all of its required plugins installed, activated, and loaded.");
-        }
-        
-        $uninstallHook = $this->_broker->getHook($pluginDirName, 'uninstall');
-        if ($uninstallHook) {
-            call_user_func($uninstallHook);
-        }
+        // Load the plugin files, die if can't be loaded.
+        $this->_loader->load($plugin, true);
+        $this->_broker->callHook('uninstall', array(), $plugin);
         
         $plugin->delete();
     }

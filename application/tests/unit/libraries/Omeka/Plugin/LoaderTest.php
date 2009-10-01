@@ -28,49 +28,41 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
     
     public function assertPreConditions()
     {
-        $this->assertFalse($this->loader->isLoaded('foobar'), "'foobar' plugin must not be loaded.");
-        $this->assertFalse($this->loader->isActive('foobar'), "'foobar' plugin must not be active.");
-        $this->assertTrue($this->loader->hasPluginFile('foobar'), "'plugin.php' file must exist at the following path: '$this->basePath/foobar/plugin.php'");
+        // $this->assertFalse($this->loader->isLoaded('foobar'), "'foobar' plugin must not be loaded.");
+        // $this->assertFalse($this->loader->isActive('foobar'), "'foobar' plugin must not be active.");
+        // $this->assertTrue($this->loader->hasPluginFile('foobar'), "'plugin.php' file must exist at the following path: '$this->basePath/foobar/plugin.php'");
     }
     
     public function testLoadAllPlugins()
     {
-        $pluginFoobar = $this->getMock('Plugin', array(), array(), '', false);
-        $pluginFoobar->name = 'foobar';
-        $pluginFoobar->active = 1;
-        $pluginBar = $this->getMock('Plugin', array(), array(), '', false);
-        $pluginBar->name = 'Bar';
-        $pluginBar->active = 0;
-        
-        // Have to convince the Ini reader that these plugins meet the requirements.
-        $this->iniReader->expects($this->any())
-                 ->method('meetsOmekaMinimumVersion')
-                 ->will($this->returnValue(true));
+        $pluginFoobar = new Plugin;
+        $pluginFoobar->setDirectoryName('foobar');
+        $pluginFoobar->setActive(true);
+        $pluginBar = new Plugin;
+        $pluginBar->setDirectoryName('Bar');
+        $pluginBar->setActive(false);
                 
         $this->loader->loadPlugins(array($pluginFoobar, $pluginBar));
         
-        $this->assertTrue($this->loader->isLoaded('foobar'), "'foobar' plugin should be loaded.");
-        $this->assertFalse($this->loader->isLoaded('Bar'), "'Bar' plugin should not be loaded.");
+        $this->assertTrue($pluginFoobar->isLoaded(), "'foobar' plugin should be loaded.");
+        $this->assertFalse($pluginBar->isLoaded(), "'Bar' plugin should not be loaded.");
     }
     
     public function testLoadSpecificPlugin()
     {   
-        $this->assertFalse($this->loader->hasNewVersion('foobar'));
-        
-        $this->loader->setActive('foobar');     
-        $this->loader->setInstalled('foobar');
-    
-        $this->iniReader->expects($this->any())
-                 ->method('meetsOmekaMinimumVersion')
-                 ->with('foobar')
-                 ->will($this->returnValue(true));
+        $plugin = new Plugin;
+        $plugin->setDirectoryName('foobar');
+        $plugin->setActive(true);
+        $plugin->setInstalled(true);
+        $this->assertFalse($plugin->hasNewVersion());
+        // It meets the Omeka minimum version if it hasn't set one.
+        $plugin->setMinimumOmekaVersion(null);
         
         $this->mvc->expects($this->once())
                  ->method('addApplicationDirs')
                  ->with('foobar');
                 
-        $this->assertTrue($this->loader->canLoad('foobar'), "Loader is unable to load the 'foobar' plugin.");
-        $this->loader->load('foobar');
+        $this->loader->load($plugin, true);
     }
     
     public function tearDown()

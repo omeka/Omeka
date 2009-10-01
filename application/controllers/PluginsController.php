@@ -32,8 +32,7 @@ class PluginsController extends Omeka_Controller_Action
         $this->_pluginIniReader = Zend_Registry::get('plugin_ini_reader');
         $this->_pluginInstaller = new Omeka_Plugin_Installer(
                                     $this->_pluginBroker, 
-                                    $this->_pluginLoader, 
-                                    $this->_pluginIniReader);
+                                    $this->_pluginLoader);
     }
     
     /**
@@ -45,29 +44,22 @@ class PluginsController extends Omeka_Controller_Action
      **/
     public function configAction()
     {
-        $pluginDirName = (string) $this->_getParam('name');      
-        if (!$pluginDirName) {
-            $this->errorAction();
-        }
+        $plugin = $this->_getPluginByName();
         
-        // get the plugin info for the plugin to configure
-        $pluginInfo = $this->_getPluginInfo($pluginDirName);
-        
-        $broker = $this->_pluginBroker;
         try {
-            $config = $broker->config($pluginDirName);
+            $config = $this->_pluginBroker->config($plugin);
         } catch (Exception $e) {
             $this->flashError($e->getMessage());
-            $this->redirect->goto('config', null, null, array('name' => $pluginDirName));    
+            $this->redirect->goto('config', null, null, array('name' => $plugin->getDisplayName()));    
         }
         
         // If the configuration function returns output, then we need to render 
         // that because it is a form
         if ($config !== null) {
-            $this->view->assign(compact('config', 'pluginInfo'));
+            $this->view->assign(compact('config', 'plugin'));
         } else {
             if(!empty($_POST)) {
-                $this->flashSuccess("The '$pluginDirName' plugin was successfully configured!");
+                $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully configured!");
             }
             $this->redirect->goto('browse');    
         }
@@ -75,30 +67,22 @@ class PluginsController extends Omeka_Controller_Action
     
     public function installAction()
     {
-        $pluginDirName = (string) $this->_getParam('name');
-        if (!$pluginDirName) {
-            $this->errorAction();
-        }
-        
-        // get the plugin info for the plugin to install
-        $pluginInfo = $this->_getPluginInfo($pluginDirName);
-        
-        $pluginRecord = new Plugin;
-        $pluginRecord->name = $pluginDirName;
-        
-        if ($this->_pluginLoader->isInstalled($pluginDirName)) {
-            throw new Exception("'$pluginDirName' plugin has already been installed.");
+        // Create a new plugin with the name given by the POST 'name' param.
+        $plugin = $this->_getPluginByName(true);
+    
+        if ($plugin->isInstalled()) {
+            throw new Exception("'" . $plugin->getDisplayName() . "' plugin has already been installed.");
         }
              
         try {
-            $this->_pluginInstaller->install($pluginRecord);
-            $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully installed!");
-            $this->redirect->goto('config', 'plugins', 'default', array('name'=>$pluginDirName));
+            $this->_pluginInstaller->install($plugin);
+            $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully installed!");
+            $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
         } catch (Exception $e) {
             // Taken from Plugin_Installer::install().  
             // "The '$pluginDirName' plugin cannot be installed because it requires other plugins to be installed, activated, and loaded. See below for details."
             
-            $this->flashError("The following error occurred while installing the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
+            $this->flashError("The following error occurred while installing the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
             $this->redirect->goto('browse');
         }
     }
@@ -109,34 +93,22 @@ class PluginsController extends Omeka_Controller_Action
      * @return void
      **/
     public function activateAction()
-    {
-        $broker = $this->_pluginBroker;
+    {        
+        $plugin = $this->_getPluginByName();
         
-        $pluginDirName = (string) $this->_getParam('name');
-        if (!$pluginDirName) {
-            $this->errorAction();
-        }
-        
-        // Get the plugin info for the plugin to activate
-        $pluginInfo = $this->_getPluginInfo($pluginDirName);
-        
-        $pluginRecord = $this->getTable()->findByDirectoryName($pluginDirName);
-        if (!$pluginRecord) {
-            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to activate.");
-        }
         // Activate the plugin
         try {
-           $broker->activate($pluginDirName);
+           $this->_pluginInstaller->activate($plugin);
            
-           // check to make sure the plugin can be loaded
-           $broker->load($pluginDirName);
-           if ($broker->isLoaded($pluginDirName)) {
-               $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully activated!");
-           } else {
-               $this->flashError("The '" . $pluginInfo->name . "' plugin was activated, but could not be loaded.  See the plugin below for details.");
+           // check to make sure the plugin can be loaded.
+           try {
+               $this->_pluginLoader->load($plugin, true);
+               $this->flashSuccess("The '" . $plugin->getDirectoryName() . "' plugin was successfully activated!");
+           } catch (Exception $e) {
+               $this->flashError("The '" . $plugin->getDirectoryName() . "' plugin was activated, but could not be loaded: " . $e->getMessage());
            }
         } catch (Exception $e) {
-            $this->flashError("The following error occurred while activating the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
+            $this->flashError("The following error occurred while activating the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
         }
             
         $this->redirect->goto('browse');
@@ -149,25 +121,14 @@ class PluginsController extends Omeka_Controller_Action
      **/
     public function deactivateAction()
     {
-        $pluginDirName = (string) $this->_getParam('name');
-        if (!$pluginDirName) {
-            $this->errorAction();
-        }
-                
-        // Get the plugin info for the plugin to deactivate
-        $pluginInfo = $this->_getPluginInfo($pluginDirName);
-        
-        $pluginRecord = $this->getTable()->findByDirectoryName($pluginDirName);
-        if (!$pluginRecord) {
-            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed to deactivate.");
-        }
+        $plugin = $this->_getPluginByName();
         
         // Deactivate the plugin
         try {
-           $this->_pluginBroker->deactivate($pluginDirName);
-           $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully deactivated!");
+           $this->_pluginInstaller->deactivate($plugin);
+           $this->flashSuccess("The '" . $plugin->getDirectoryName() . "' plugin was successfully deactivated!");
         } catch (Exception $e) {
-            $this->flashError("The following error occurred while deactivating the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
+            $this->flashError("The following error occurred while deactivating the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
         }
             
         $this->redirect->goto('browse');
@@ -175,85 +136,21 @@ class PluginsController extends Omeka_Controller_Action
     
     public function upgradeAction()
     {
-        $pluginDirName = (string) $this->_getParam('name');
-        if (!$pluginDirName) {
-            $this->errorAction();
-        }
-        
-        $broker = $this->_pluginBroker;       
-        if ($broker->isInstalled($pluginDirName)) {   
+        $plugin = $this->_getPluginByName();
+             
+        if ($plugin->isInstalled()) {   
             try {
-                $broker->upgrade($pluginDirName);
-                $this->flashSuccess("The '$pluginDirName' plugin was successfully upgraded!");
-                $this->redirect->goto('config', 'plugins', 'default', array('name'=>$pluginDirName));
+                $this->_pluginInstaller->upgrade($plugin);
+                $pluginDisplayName = $plugin->getDisplayName();
+                $this->flashSuccess("The '$pluginDisplayName' plugin was successfully upgraded!");
+                $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
             } catch (Exception $e) {
-                $this->flashError("The following error occurred while upgrading the '$pluginDirName' plugin: " . $e->getMessage());
+                $this->flashError("The following error occurred while upgrading the '$pluginDisplayName' plugin: " . $e->getMessage());
                 $this->redirect->goto('browse');
             }
         }
     }
-    
-    /**
-     * Retrieve the descriptive information for a plugin from its plugin.ini file, 
-     * the database, and the plugin broker
-     *
-     * @param string $pluginDirName
-     * @return stdClass
-     **/
-    private function _getPluginInfo($pluginDirName)
-    {
-        $pluginInfo = new stdClass;
         
-        $pluginIniPath = $this->_pluginIniReader->getPluginIniFilePath($pluginDirName);
-        if (file_exists($pluginIniPath)) {
-            try {
-                $config = new Zend_Config_Ini($pluginIniPath, 'info');
-	            foreach ($config as $key => $value) {
-	                switch($pluginInfo->$key) {
-	                    case 'name':
-	                    case 'author':
-	                    case 'description':
-	                    case 'omeka_minimum_version':
-	                    case 'omeka_tested_up_to':
-	                    case 'version':
-	                    case 'required_plugins':
-	                    case 'optional_plugins':
-	                    case 'tags':
-	                        $pluginInfo->$key = (string) $value;
-	                        break;
-	                    default:
-	                        $pluginInfo->$key = $value;
-	                        break;
-	                }
-	            }
-            } catch (Zend_Config_Exception $e) {}        
-        }
-
-        // if the plugin.ini doees not specify the plugin name, 
-        // make the plugin name the same as the plugin directory name  
-        if (!$pluginInfo || trim($pluginInfo->name) == '') {
-            $pluginInfo->name = $pluginDirName;
-        }
-        
-
-        
-        $pluginInfo->directoryName = $pluginDirName;            
-        $pluginInfo->hasConfig = (bool) $this->_pluginBroker->getHook($pluginDirName, 'config');
-        $pluginInfo->installed = $this->_pluginLoader->isInstalled($pluginDirName);
-        $pluginInfo->active = $this->_pluginLoader->isActive($pluginDirName);
-        $pluginInfo->loaded = $this->_pluginLoader->isLoaded($pluginDirName);
-        
-        $pluginInfo->hasPluginFile = $this->_pluginLoader->hasPluginFile($pluginDirName);
-        $pluginInfo->hasNewVersion = $this->_pluginLoader->hasNewVersion($pluginDirName);        
-        $pluginInfo->requiredPluginDirNames = $this->_pluginIniReader->getRequiredPluginDirNames($pluginDirName);
-        $pluginInfo->optionalPluginDirNames = $this->_pluginIniReader->getOptionalPluginDirNames($pluginDirName);
-        $pluginInfo->meetsOmekaMinimumVersion = $this->_pluginIniReader->meetsOmekaMinimumVersion($pluginDirName);
-        $pluginInfo->meetsOmekaTestedUpTo = $this->_pluginIniReader->meetsOmekaTestedUpTo($pluginDirName);
-
-        return $pluginInfo;
-    }
-    
-    
     /**
      * Action to browse plugins
      *
@@ -261,16 +158,12 @@ class PluginsController extends Omeka_Controller_Action
      **/
     public function browseAction() 
     {
-        //Get a list of all the plugins        
-        $allPluginNames = $this->_pluginLoader->getAll();
-		natsort($allPluginNames);
-		
-        $pluginInfos = array();
-        foreach ($allPluginNames as $pluginDirName) {
-            $pluginInfos[$pluginDirName] = $this->_getPluginInfo($pluginDirName);;
-        }
-        
-        $this->view->assign(compact('pluginInfos'));
+        // Get a list of all plugins currently processed by the system.      
+        $plugins = $this->_pluginLoader->getPlugins();
+        // Plugins are keyed to the directory name, so natural sort based on that.
+        uksort($plugins, "strnatcmp");
+
+        $this->view->assign(array('plugins'=>$plugins, 'loader'=>$this->_pluginLoader));
     }
     
     /**
@@ -280,18 +173,13 @@ class PluginsController extends Omeka_Controller_Action
      **/
     public function uninstallAction()
     {
-        $pluginDirName = (string) $this->_getParam('name');
-        
-        $broker = $this->_pluginBroker;
+        $plugin = $this->_getPluginByName();
         
         // Check to see if the plugin exists and is installed.
-        if (!$broker || !$broker->isInstalled($pluginDirName)) {
-            $this->flashError("The plugin could not be found in the '$pluginDirName' directory!");
+        if (!$plugin->isInstalled()) {
+            $this->flashError("The plugin could not be found in the '" . $plugin->getDirectoryName() . "' directory!");
             $this->redirect->goto('browse');
         }
-
-        // get the plugin info for the plugin to uninstall
-        $pluginInfo = $this->_getPluginInfo($pluginDirName);
         
         // Confirm the uninstall.
         if (!$this->_getParam('confirm')) {
@@ -302,19 +190,19 @@ class PluginsController extends Omeka_Controller_Action
             
             // Call the append to uninstall message hook for the specific 
             // plugin, if it exists.
-            $message = get_specific_plugin_hook_output($pluginDirName, 'admin_append_to_plugin_uninstall_message');
+            $message = get_specific_plugin_hook_output($plugin, 'admin_append_to_plugin_uninstall_message');
             
-            $this->view->assign(compact('pluginInfo', 'message'));
+            $this->view->assign(compact('plugin', 'message'));
             $this->render('confirm-uninstall');
         
         } else {
             
             // Attempt to uninstall the plugin.
             try {
-                $broker->uninstall($pluginDirName);
-                $this->flashSuccess("The '" . $pluginInfo->name . "' plugin was successfully uninstalled!");
+                $this->_pluginInstaller->uninstall($plugin);
+                $this->flashSuccess("The '" . $plugin->getDirectoryName() . "' plugin was successfully uninstalled!");
             } catch (Exception $e) {
-                $this->flashError("The following error occurred while uninstalling the '" . $pluginInfo->name . "' plugin: " . $e->getMessage());
+                $this->flashError("The following error occurred while uninstalling the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
                 $this->redirect->goto('browse');
             }
             $this->redirect->goto('browse');
@@ -329,5 +217,32 @@ class PluginsController extends Omeka_Controller_Action
     public function addAction()
     {
         $this->redirect->goto('browse');
+    }
+    
+    protected function _getPluginByName($create = false)
+    {
+        $pluginDirName = (string) $this->_getParam('name');
+        if (!$pluginDirName) {
+            $this->errorAction();
+        }
+        
+        // Look for the plugin in the list of loaded plugins.
+        if (!($plugin = $this->_pluginLoader->getPlugin($pluginDirName))) {
+            if ($create) {
+                $plugin = new Plugin;
+                $plugin->name = $pluginDirName;
+            } else {
+                // As a failsafe, retrieve the plugin record from the database.
+                // This code may be unnecessary / never used, not sure.
+                $plugin = $this->getTable()->findByDirectoryName($pluginDirName);
+            }
+        }
+                    
+        if (!$plugin) {
+            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed.");
+        }
+        $this->_pluginIniReader->load($plugin);
+        
+        return $plugin;
     }
 }

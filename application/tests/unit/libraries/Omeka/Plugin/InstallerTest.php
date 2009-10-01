@@ -25,7 +25,12 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
         // Plugin record with a mocked out database connection.                                              
         $this->plugin = $this->getMock('Plugin', array(), array(), '', false);      
         $this->plugin->id = 1;
-        $this->plugin->name = 'foobar';                                              
+        $this->plugin->expects($this->any())
+                 ->method('getDirectoryName')
+                 ->will($this->returnValue('foobar'));
+        $this->plugin->expects($this->any())
+                 ->method('getDisplayName')
+                 ->will($this->returnValue('Foobar Display Name'));                                             
     }
     
     public function testActivate()
@@ -49,85 +54,63 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
     public function testUpgrade()
     {
         // Convince us that there is something that can be upgraded.
-        $this->loader->expects($this->once())
+        $this->plugin->expects($this->once())
                  ->method('hasNewVersion')
                  ->will($this->returnValue(true));
         
         // Oh and it must have loaded successfully, somehow.
         $this->loader->expects($this->once())
-                 ->method('isLoaded')
-                 ->with('foobar')
-                 ->will($this->returnValue(true));
+                 ->method('load')
+                 ->with($this->isInstanceOf('Plugin'), true);
+        
+        $this->plugin->expects($this->any())
+                 ->method('getDbVersion')
+                 ->will($this->returnValue('1.0'));
+        $this->plugin->expects($this->any())
+                 ->method('getIniVersion')
+                 ->will($this->returnValue('1.1'));
         
         // Give it a fake hook (method on this test class) so we can assert 
         // whether it actually calls the 'upgrade' hook.
         $this->broker->expects($this->once())
-                 ->method('getHook')
-                 ->with('foobar', 'upgrade')
-                 ->will($this->returnValue(array($this, 'upgradeHook')));
+                 ->method('callHook')
+                 ->with('upgrade', array('1.0', '1.1'), $this->isInstanceOf('Plugin'));
              
         $this->installer->upgrade($this->plugin);
-        $this->assertTrue($this->upgradeHookFired);
     }
     
     public function testInstall()
     {        
+        $this->plugin->expects($this->once())
+                 ->method('forceSave');
+
         // Also, we loaded this thing successfully.
         $this->loader->expects($this->once())
                  ->method('load')
-                 ->with('foobar', true);
-        
-        // Also convince us that the plugin meets the minimum version of Omeka.
-        // $this->iniReader->expects($this->once())
-        //          ->method('meetsOmekaMinimumVersion')
-        //          ->with('foobar')
-        //          ->will($this->returnValue(true));
-        
+                 ->with($this->isInstanceOf('Plugin'), true);
+                
         $this->broker->expects($this->once())
-                 ->method('getHook')
-                 ->with('foobar', 'install')
-                 ->will($this->returnValue(array($this, 'installHook')));
-        
-        $this->plugin->expects($this->once())
-                 ->method('forceSave');
+                 ->method('callHook')
+                 ->with('install', array(1), $this->isInstanceOf('Plugin'));
         
         $this->installer->install($this->plugin);
-        $this->assertTrue($this->installHookFired);
     }
     
     public function testUninstall()
     {
         // Trick us into thinking the plugin loaded successfully.
         $this->loader->expects($this->once())
-                 ->method('isLoaded')
-                 ->with('foobar')
-                 ->will($this->returnValue(true));
+                 ->method('load')
+                 ->with($this->isInstanceOf('Plugin'));
         
         $this->broker->expects($this->once())
-                 ->method('getHook')
-                 ->with('foobar', 'uninstall')
-                 ->will($this->returnValue(array($this, 'uninstallHook')));
+              ->method('callHook')
+              ->with('uninstall', array(), $this->isInstanceOf('Plugin'));
         
         // The plugin record should be deleted at the end of the process.
         $this->plugin->expects($this->once())
                  ->method('delete');
         
         $this->installer->uninstall($this->plugin);
-        $this->assertTrue($this->uninstallHookFired);
-    }
-    
-    public function upgradeHook($oldVersion, $newVersion)
-    {
-        $this->upgradeHookFired = true;
-    }
-    
-    public function installHook()
-    {
-        $this->installHookFired = true;
-    }
-    
-    public function uninstallHook()
-    {
-        $this->uninstallHookFired = true;
-    }
+    }        
 }
