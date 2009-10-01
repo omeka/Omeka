@@ -132,6 +132,11 @@ class Omeka_Record implements ArrayAccess
             $this->_initializeMixins();
         }
         
+        // If there are no mixins, don't do anything.
+        if (!count($this->_mixins)) {
+            return;
+        }
+        
         foreach ($this->_mixins as $k => $mixin) {
             if (method_exists($mixin, $method)) {
                 $called = true;
@@ -139,8 +144,8 @@ class Omeka_Record implements ArrayAccess
                 if (!$all) return $res;
             }
         }
-        if (count($this->_mixins) and !$called) {
-            throw new Omeka_Record_Exception( "Method named $method does not exist!"  );
+        if (!$called) {
+            throw new BadMethodCallException( "Method named $method() does not exist."  );
         }
     }
     
