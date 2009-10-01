@@ -324,13 +324,4 @@ class Omeka_Plugin_Loader
     {
         $this->_installed[$pluginDirName] = $pluginDirName;
     }
-    
-    /**
-     * Register the plugin broker so that plugin writers can use global functions
-     * like add_plugin_hook() to interact with the plugin API.
-     */
-    public function registerPluginBroker()
-    {
-        Zend_Registry::set('pluginbroker', $this->_broker);
-    }
 }

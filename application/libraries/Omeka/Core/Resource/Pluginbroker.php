@@ -33,7 +33,7 @@ class Omeka_Core_Resource_Pluginbroker extends Zend_Application_Resource_Resourc
         Zend_Registry::set('plugin_ini_reader', $pluginIniReader);
         Zend_Registry::set('plugin_mvc', $pluginMvc);
         
-        $pluginLoader->registerPluginBroker();
+        $broker->register();
         $pluginLoader->loadPlugins($db->getTable('Plugin')->findAll());
         return $broker;
     }

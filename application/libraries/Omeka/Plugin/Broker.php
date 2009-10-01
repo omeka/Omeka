@@ -42,11 +42,17 @@ class Omeka_Plugin_Broker
      *
      * @param string $hook
      * @param string $callback
+     * @param string|null $currentPlugin Optional name of the plugin for
+     * which to add the hook.
      * @return void
      **/
-    public function addHook($hook, $callback)
+    public function addHook($hook, $callback, $plugin = null)
     {    
-        $currentPluginDirName = $this->getCurrentPluginDirName();          
+        if ($plugin) {
+            $currentPluginDirName = $plugin;
+        } else {
+            $currentPluginDirName = $this->getCurrentPluginDirName(); 
+        }
         $this->_callbacks[$hook][$currentPluginDirName] = $callback;
     }
     
@@ -171,5 +177,14 @@ class Omeka_Plugin_Broker
         
         // Call the hook for the plugins
         return $this->callHook($hook, $args);
+    }
+    
+    /**
+     * Register the plugin broker so that plugin writers can use global functions
+     * like add_plugin_hook() to interact with the plugin API.
+     */
+    public function register()
+    { 
+        Zend_Registry::set('pluginbroker', $this);
     }
 }

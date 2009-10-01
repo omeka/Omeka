@@ -46,11 +46,7 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
         $this->iniReader->expects($this->any())
                  ->method('meetsOmekaMinimumVersion')
                  ->will($this->returnValue(true));
-        
-        // Since we are loading actual test plugins, we'll need to register the
-        // plugin broker to prevent fiery death.
-        $this->loader->registerPluginBroker();
-        
+                
         $this->loader->loadPlugins(array($pluginFoobar, $pluginBar));
         
         $this->assertTrue($this->loader->isLoaded('foobar'), "'foobar' plugin should be loaded.");
@@ -72,9 +68,7 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
         $this->mvc->expects($this->once())
                  ->method('addApplicationDirs')
                  ->with('foobar');
-        
-        $this->loader->registerPluginBroker();
-        
+                
         $this->assertTrue($this->loader->canLoad('foobar'), "Loader is unable to load the 'foobar' plugin.");
         $this->loader->load('foobar');
     }

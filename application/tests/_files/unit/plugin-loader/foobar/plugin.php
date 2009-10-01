@@ -1,2 +1,2 @@
 <?php
-add_plugin_hook('initialize', 'foobarNonExistentHookFunction');
+// add_plugin_hook('initialize', 'foobarNonExistentHookFunction');
