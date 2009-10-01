@@ -394,7 +394,7 @@ class Plugin extends Omeka_Record
      */
     public function hasNewVersion()
     {
-        return $this->getIniVersion() && version_compare($this->getIniVersion(), $this->getDbVersion(), '>');   
+        return $this->isInstalled() && $this->getIniVersion() && version_compare($this->getIniVersion(), $this->getDbVersion(), '>');   
     }
     
     /**
