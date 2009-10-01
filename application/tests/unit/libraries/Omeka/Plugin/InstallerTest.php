@@ -96,8 +96,12 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
         $this->installer->install($this->plugin);
     }
     
-    public function testUninstall()
-    {
+    public function testUninstallingPluginThatIsNotLoaded()
+    {        
+        $this->plugin->expects($this->once())
+                 ->method('isLoaded')
+                 ->will($this->returnValue(false));
+        
         // Trick us into thinking the plugin loaded successfully.
         $this->loader->expects($this->once())
                  ->method('load')
@@ -112,5 +116,22 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
                  ->method('delete');
         
         $this->installer->uninstall($this->plugin);
+    }
+    
+    public function testUninstallingPluginThatIsLoadedAndActivated()
+    {
+        $this->plugin->expects($this->any())
+                 ->method('isLoaded')
+                 ->will($this->returnValue(true));
+        
+        // This will skip loading the plugin.
+        $this->loader->expects($this->never())
+                 ->method('load');
+        
+        $this->broker->expects($this->once())
+                ->method('callHook')
+                ->with('uninstall', array(), $this->isInstanceOf('Plugin'));
+        
+        $this->installer->uninstall($this->plugin);                  
     }        
 }

@@ -117,13 +117,14 @@ class Omeka_Plugin_Installer
      **/
     public function uninstall(Plugin $plugin)
     {
-        // Flag the plugin as active so we can load the 'uninstall' hook.
-        $plugin->setActive(true);
+        if (!$plugin->isLoaded()) {
+            // Flag the plugin as active so we can load the 'uninstall' hook.
+            $plugin->setActive(true);
+            // Load the plugin files, die if can't be loaded.
+            $this->_loader->load($plugin, true);
+        }
         
-        // Load the plugin files, die if can't be loaded.
-        $this->_loader->load($plugin, true);
         $this->_broker->callHook('uninstall', array(), $plugin);
-        
         $plugin->delete();
     }
 }
