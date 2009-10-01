@@ -82,11 +82,6 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
             $this->assertContains("'NotActivatedPlugin' has not been activated.", $e->getMessage());
         }
     }
-    
-    public function testLoadPluginThatDependsOnAlreadyLoadedPlugin()
-    {
-        // $this->pluginFoobar->setRequiredPlugins(array(''))
-    }
         
     public function testLoadPluginsWithCircularDependencies()
     {
@@ -101,5 +96,18 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
         $this->loader->loadPlugins(array($this->pluginFoobar, $this->circularDependencyPlugin), true);
         $this->assertFalse($this->pluginFoobar->isLoaded(), "'foobar' plugin should not have been loaded.");
         $this->assertFalse($this->circularDependencyPlugin->isLoaded(), "'CircularDependencyPlugin' should not have been loaded.");
+    }
+    
+    public function testLoadPluginThatDependsOnAlreadyLoadedPlugin()
+    {
+        $this->pluginFoobar->setRequiredPlugins(array('AllPurposePlugin'));
+        
+        $this->alreadyLoadedPlugin = new Plugin;
+        $this->alreadyLoadedPlugin->id = 4;
+        $this->alreadyLoadedPlugin->setDirectoryName('AllPurposePlugin');
+        $this->alreadyLoadedPlugin->setActive(true);
+        
+        $this->loader->load($this->alreadyLoadedPlugin, true);
+        $this->loader->load($this->pluginFoobar, true);
     }
 }

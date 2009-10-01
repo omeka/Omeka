@@ -53,7 +53,9 @@ class Omeka_Plugin_Loader
         // Index the entire list of plugins prior to loading them.  The advantage
         // to this is that all plugin dependencies will (hopefully) be available
         // to the loader.
-        $this->_indexPlugins($plugins);
+        foreach ($plugins as $plugin) {
+            $this->_indexPlugin($plugin);
+        }
 
         foreach ($plugins as $plugin) {
             $this->_iniReader->load($plugin);                     
@@ -62,17 +64,22 @@ class Omeka_Plugin_Loader
     }
     
     /**
-     * Index a set of plugins for easy access by the load() method.
+     * Index a plugin so that it can be accessed by other plugins (if necessary)
+     * during the load process.  
+     * 
+     * There should only be a single instance of a plugin per directory name.  
+     * Indexing a plugin more than once, i.e. loading a plugin again after the
+     * first time failed, will not cause a problem as long as the same instance
+     * is being indexed.
      */
-    protected function _indexPlugins(array $plugins)
+    protected function _indexPlugin(Plugin $plugin)
     {
-        foreach ($plugins as $plugin) {
-            $dirName = $plugin->getDirectoryName();
-            if (array_key_exists($dirName, $this->_plugins)) {
-                throw new Omeka_Plugin_Loader_Exception("Plugin named '$dirName' has already been loaded/indexed.");
-            }
-            $this->_plugins[$dirName] = $plugin;
+        $dirName = $plugin->getDirectoryName();
+        if (array_key_exists($dirName, $this->_plugins) 
+            && $this->_plugins[$dirName] !== $plugin) {
+            throw new Omeka_Plugin_Loader_Exception("Plugin named '$dirName' has already been loaded/indexed.");
         }
+        $this->_plugins[$dirName] = $plugin;
     }
                 
     /**
@@ -90,6 +97,8 @@ class Omeka_Plugin_Loader
      **/
     public function load(Plugin $plugin, $force = false, $pluginsWaitingToLoad = array())
     {           
+        $this->_indexPlugin($plugin);
+        
         $pluginDirName = $plugin->getDirectoryName();
 
         if (!$this->_canLoad($plugin, $force)) {
@@ -116,6 +125,12 @@ class Omeka_Plugin_Loader
                 } else {
                     return;
                 }
+            }
+            
+            // If the required plugin is already loaded, do not attempt to load
+            // it a second time.
+            if ($requiredPlugin->isLoaded()) {
+                continue;
             }
             $this->load($requiredPlugin, $force, $pluginsWaitingToLoad);
             
