@@ -20,7 +20,6 @@ class Omeka_Core_Resource_Pluginbroker extends Zend_Application_Resource_Resourc
         $pluginIniReader = new Omeka_Plugin_Ini(PLUGIN_DIR);
         $pluginMvc = new Omeka_Plugin_Mvc(PLUGIN_DIR);
         $pluginLoader = new Omeka_Plugin_Loader($broker, 
-                                                $db->getTable('Plugin'), 
                                                 $pluginIniReader,
                                                 $pluginMvc,
                                                 PLUGIN_DIR);
@@ -35,8 +34,7 @@ class Omeka_Core_Resource_Pluginbroker extends Zend_Application_Resource_Resourc
         Zend_Registry::set('plugin_mvc', $pluginMvc);
         
         $pluginLoader->registerPluginBroker();
-        $pluginLoader->loadLists();
-        $pluginLoader->loadActive();
+        $pluginLoader->loadPlugins($db->getTable('Plugin')->findAll());
         return $broker;
     }
 }

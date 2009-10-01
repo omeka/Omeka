@@ -18,7 +18,6 @@
 class Omeka_Plugin_Loader
 {
     protected $_broker;
-    protected $_pluginsDbTable;
     protected $_iniReader;
     protected $_mvc;
     protected $_basePath;
@@ -61,35 +60,31 @@ class Omeka_Plugin_Loader
     protected $_has_new_version = array();
     
     public function __construct(Omeka_Plugin_Broker $broker, 
-                                Omeka_Db_Table $pluginsDbTable, 
                                 Omeka_Plugin_Ini $iniReader,
                                 Omeka_Plugin_Mvc $mvc,
                                 $pluginsBaseDir)
     {
         $this->_broker = $broker;
-        $this->_pluginsDbTable = $pluginsDbTable;
         $this->_iniReader = $iniReader;
         $this->_mvc = $mvc;
         $this->_basePath = $pluginsBaseDir;
     }
     
     /**
-     * This was in the constructor before, need to figure out what to do with 
-     * this code.
+     * Load a list of plugins from the database.  Only loads the plugins that 
+     * are both installed and active.  The others are indexed accordingly.
      */
-    public function loadLists()
+    public function loadPlugins(array $plugins)
     {
         $this->_all = $this->_getDirectoryList();
         
         // Loop through the installed plugins and add the plugin directory names to a list. 
         // Add the directory names of upgradable plugins to a list.        
         // Finally, add the directory names of active plugin to a list.
-        $plugins = $this->_pluginsDbTable->findAll(); 
         foreach ($plugins as $plugin) {            
 
             // Get the plugin directory name
             $pluginDirName = $plugin->name;
-
             if (in_array($pluginDirName, $this->_all)) {
 
                 // Add the plugin directory name to the list of installed plugin directory names
@@ -99,30 +94,22 @@ class Omeka_Plugin_Loader
                 if ($plugin->active) {
                     $this->setActive($pluginDirName);
                 }
-                
+
                 // If the plugin is upgradable, then store its directory name in a list
                 if ($this->_iniReader->hasPluginIniFile($pluginDirName)) {
                     $pluginVersion = trim((string)$this->_iniReader->getPluginIniValue($pluginDirName, 'version'));
                     if ($pluginVersion && version_compare($pluginVersion, $plugin->version, '>')) {                
                         $this->_has_new_version[$pluginDirName] = $pluginDirName;
                     }
-                }          
+                }
             }             
-        }        
-    }
+        }
         
-    /**
-     * Load all active plugins.
-     * 
-     * @return void
-     **/
-    public function loadActive()
-    {   
         foreach ($this->_active as $pluginDirName) {
             $this->load($pluginDirName);
-        }
+        }        
     }
-        
+                
     /**
      * Loads a plugin (and make sure the plugin API is available)
      * 
