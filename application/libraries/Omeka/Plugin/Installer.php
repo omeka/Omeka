@@ -63,17 +63,20 @@ class Omeka_Plugin_Installer
             throw new Exception("The '" . $plugin->getDisplayName() . "' plugin must be installed and have newer files to upgrade it.");
         }
         
+        $oldVersion = $plugin->getDbVersion();
+        
         // activate the plugin so that it can be loaded.
         $plugin->setActive(true);
+        // update version of the plugin stored in the database.
+        // NOTE: This is required for the loader to work.
+        $plugin->setDbVersion($plugin->getIniVersion());
                 
         // load the plugin files.
         $this->_loader->load($plugin, true);
 
         // run the upgrade hook for the plugin.
-        $this->_broker->callHook('upgrade', array($plugin->getDbVersion(), $plugin->getIniVersion()), $plugin);
+        $this->_broker->callHook('upgrade', array($oldVersion, $plugin->getIniVersion()), $plugin);
 
-        // update version of the plugin stored in the database.
-        $plugin->setDbVersion($plugin->getIniVersion());
         $plugin->forceSave();
     }
     

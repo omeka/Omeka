@@ -110,4 +110,17 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
         $this->loader->load($this->alreadyLoadedPlugin, true);
         $this->loader->load($this->pluginFoobar, true);
     }
+    
+    public function testLoadPluginThatHasAnUpgradeAvailable()
+    {
+        $this->pluginFoobar->setIniVersion('1.0');
+        $this->pluginFoobar->setDbVersion('0.1');
+        
+        try {
+            $this->loader->load($this->pluginFoobar, true);
+            $this->fail("Should have thrown an exception when attempting to load a plugin that has an available upgrade.");
+        } catch (Omeka_Plugin_Loader_Exception $e) {
+            $this->assertContains("'foobar' must be upgraded to the new version before it can be loaded.", $e->getMessage());
+        }
+    }
 }
