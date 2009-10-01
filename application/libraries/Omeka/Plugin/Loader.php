@@ -127,18 +127,6 @@ class Omeka_Plugin_Loader
             }
         }
 
-        // load the optional plugins for the plugin
-        $optionalPluginDirNames = $plugin->getOptionalPlugins();
-        foreach($optionalPluginDirNames as $optionalPluginDirName) {
-            $optionalPlugin = $this->getPlugin($optionalPluginDirName);
-            if ($optionalPlugin) {
-                // Should an optional plugin ever be forced to load?  Debugging
-                // situations may require this, but most will not.  Will this 
-                // fail during installation ?
-                $this->load($optionalPlugin, $force, $pluginsWaitingToLoad);
-            }
-        }
-
         // add the plugin dir paths and require the plugin files
         $this->_mvc->addApplicationDirs($pluginDirName);
 
