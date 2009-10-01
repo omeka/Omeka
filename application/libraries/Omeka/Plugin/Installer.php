@@ -88,18 +88,15 @@ class Omeka_Plugin_Installer
         if (!$plugin->getDirectoryName()) {
             throw new Exception("Plugin must have a valid directory name before it can be installed.");
         }
-                
-        // Flag the plugin as installed and active for the remainder of the request.
-        $plugin->setInstalled(true);
-        $plugin->setActive(true);
-        
-        // Force the plugin to load.  Will throw exception if plugin cannot be loaded for some reason.
-        $this->_loader->load($plugin, true);
 
-        try {            
+        try {
+            $plugin->setActive(true);            
             $plugin->setDbVersion($plugin->getIniVersion());
             $plugin->forceSave();
-    
+            
+            // Force the plugin to load.  Will throw exception if plugin cannot be loaded for some reason.
+            $this->_loader->load($plugin, true);
+            
             //Now run the installer for the plugin
             $this->_broker->callHook('install', array($plugin->id), $plugin);               
         } catch (Exception $e) {

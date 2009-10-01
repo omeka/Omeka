@@ -42,52 +42,23 @@ class Omeka_Plugin_Loader
     }
     
     /**
-     * Load a list of plugins from the database.  Only loads the plugins that 
-     * are both installed and active.  The others are indexed accordingly.
+     * Load a list of plugins.
      * 
-     * @todo Refactor the code that gets new plugins into a separate class, one
-     * that is called only in the PluginsController (init() method).
-     * @param array
+     * @param array $plugins List of Plugin records to load.  
      * @param boolean $force If true, throws exceptions for plugins that cannot
      * be loaded for some reason.
      */
     public function loadPlugins(array $plugins, $force = false)
     {
-        // @todo The full list of plugins should also include all of the 
-        // plugins that are required
-        $this->_plugins = $this->_indexPlugins(array_merge($this->getNewPlugins($plugins), $plugins));
-                
-        // First off, we're not trying to run through and load every damn plugin.
-        // Just the ones that were passed via this method call.
+        // Index the entire list of plugins prior to loading them.  The advantage
+        // to this is that all plugin dependencies will (hopefully) be available
+        // to the loader.
+        $this->_indexPlugins($plugins);
+
         foreach ($plugins as $plugin) {
-            $this->_iniReader->load($plugin);
-            
-            $plugin->setInstalled(true);
-                        
+            $this->_iniReader->load($plugin);                     
             $this->load($plugin, $force);
         }
-    }
-    
-    /**
-     * @todo This should really be in a class by itself (along with the PluginTable
-     * data retrieval), for setting up the list of plugins to be loaded into Omeka.
-     */
-    public function getNewPlugins(array $existingPlugins)
-    {
-        $dirListing = $this->_getDirectoryList();
-        $existingPluginNames = array();
-        foreach ($existingPlugins as $plugin) {
-            $existingPluginNames[] = $plugin->getDirectoryName();
-        }
-        $newPluginDirNames = array_diff($dirListing, $existingPluginNames);
-        
-        $newPlugins = array();
-        foreach ($newPluginDirNames as $pluginDirName) {
-            $newPlugin = new Plugin;
-            $newPlugin->setDirectoryName($pluginDirName);
-            $newPlugins[] = $newPlugin;
-        }
-        return $newPlugins;
     }
     
     /**
@@ -95,11 +66,13 @@ class Omeka_Plugin_Loader
      */
     protected function _indexPlugins(array $plugins)
     {
-        $indexedPlugins = array();
         foreach ($plugins as $plugin) {
-            $indexedPlugins[$plugin->getDirectoryName()] = $plugin;
+            $dirName = $plugin->getDirectoryName();
+            if (array_key_exists($dirName, $this->_plugins)) {
+                throw new Omeka_Plugin_Loader_Exception("Plugin named '$dirName' has already been loaded/indexed.");
+            }
+            $this->_plugins[$dirName] = $plugin;
         }
-        return $indexedPlugins;
     }
                 
     /**
@@ -119,45 +92,8 @@ class Omeka_Plugin_Loader
     {           
         $pluginDirName = $plugin->getDirectoryName();
 
-        /**
-         * Determine whether or not a plugin can be loaded.  To be loaded, it must
-         * meet the following criteria:
-         *  - Has a plugin.php file.
-         *  - Is installed.
-         *  - Is active.
-         *  - Meets the minimum required version of Omeka (in plugin.ini)
-         *  - Is not already loaded (Why?)
-         *  - Does not have a new version available (Why?)
-         */     
-        $loadCriteria = array(
-            array(
-                'check' => !$this->hasPluginFile($pluginDirName),
-                'exception' => "'$pluginDirName' plugin directory does not contain a 'plugin.php' file."),
-            array(
-                'check' => !$plugin->isInstalled(),
-                'exception' => "'$pluginDirName' has not been installed."),
-            array(
-                'check' => !$plugin->isActive(),
-                'exception' => "'$pluginDirName' has not been activated."),
-            array(
-                'check' => !$plugin->meetsOmekaMinimumVersion(),
-                'exception' => "'$pluginDirName' requires a newer version of Omeka."),
-            array(
-                'check' => $plugin->hasNewVersion(),
-                'exception' => "'$pluginDirName' must be upgraded to the new version before it can be loaded."),
-            array(
-                'check' => $plugin->isLoaded(),
-                'exception' => "'$pluginDirName' cannot be loaded twice.")
-        );
-        
-        foreach ($loadCriteria as $criteria) {
-            if ($criteria['check']) {
-                if ($force) {
-                    throw new Exception($criteria['exception']);
-                } else {
-                    return;
-                }
-            }
+        if (!$this->_canLoad($plugin, $force)) {
+            return;
         }
         
         if (in_array($pluginDirName, $pluginDirNamesWaitingToBeLoaded)) {
@@ -171,7 +107,15 @@ class Omeka_Plugin_Loader
         $requiredPluginDirNames = $plugin->getRequiredPlugins();
 
         foreach($requiredPluginDirNames as $requiredPluginDirName) {
-            $requiredPlugin = $this->getPlugin($requiredPluginDirName);
+            if (!($requiredPlugin = $this->getPlugin($requiredPluginDirName))) {
+                // If we can't find one of the required plugins, loading should
+                // fail.
+                if ($force) {
+                    throw new Omeka_Plugin_Loader_Exception("'$requiredPluginDirName' required plugin could not be found.");
+                } else {
+                    return;
+                }
+            }
             $this->load($requiredPlugin, $force, $pluginDirNamesWaitingToBeLoaded);
             
             // make sure the required plugin is loaded.
@@ -186,7 +130,12 @@ class Omeka_Plugin_Loader
         $optionalPluginDirNames = $plugin->getOptionalPlugins();
         foreach($optionalPluginDirNames as $optionalPluginDirName) {
             $optionalPlugin = $this->getPlugin($optionalPluginDirName);
-            $this->load($optionalPlugin, $force, $pluginDirNamesWaitingToBeLoaded);
+            if ($optionalPlugin) {
+                // Should an optional plugin ever be forced to load?  Debugging
+                // situations may require this, but most will not.  Will this 
+                // fail during installation ?
+                $this->load($optionalPlugin, $force, $pluginDirNamesWaitingToBeLoaded);
+            }
         }
 
         // add the plugin dir paths and require the plugin files
@@ -201,42 +150,73 @@ class Omeka_Plugin_Loader
         $plugin->setLoaded(true);
     }
     
-    protected function _getDirectoryList()
+    /**
+     * Determine whether or not a plugin can be loaded.  To be loaded, it must
+     * meet the following criteria:
+     *  - Has a plugin.php file.
+     *  - Is installed.
+     *  - Is active.
+     *  - Meets the minimum required version of Omeka (in plugin.ini)
+     *  - Is not already loaded (Why?)
+     *  - Does not have a new version available (Why?)
+     */
+    protected function _canLoad($plugin, $force)
     {
-        // Construct the current list of potential, installed & active plugins
-        require_once 'VersionedDirectoryIterator.php';
+        $pluginDirName = $plugin->getDirectoryName(); 
+        $loadCriteria = array(
+            array(
+                'check' => !$this->hasPluginBootstrap($plugin),
+                'exception' => "'$pluginDirName' plugin directory does not contain a 'plugin.php' file."),
+            array(
+                'check' => !$plugin->isInstalled(),
+                'exception' => "'$pluginDirName' has not been installed."),
+            array(
+                'check' => !$plugin->isActive(),
+                'exception' => "'$pluginDirName' has not been activated."),
+            array(
+                'check' => !$plugin->meetsOmekaMinimumVersion(),
+                'exception' => "'$pluginDirName' requires a newer version of Omeka."),
+            // Cannot upgrade a plugin if we do this check when trying to force
+            // the plugin to load.
+            array(
+                'check' => $plugin->hasNewVersion(),
+                'exception' => "'$pluginDirName' must be upgraded to the new version before it can be loaded."),
+            array(
+                'check' => $plugin->isLoaded(),
+                'exception' => "'$pluginDirName' cannot be loaded twice.")
+        );
         
-        // Loop through all the plugins in the plugin directory, 
-        // and add each plugin directory name that has a plugin.php file 
-        // to the list of all plugin directory names
-        $dir = new VersionedDirectoryIterator($this->_basePath);
-        $pluginDirNames = $dir->getValid();
-        
-        $fullPluginList = array();
-        foreach($pluginDirNames as $pluginDirName) {
-            if ($this->hasPluginFile($pluginDirName)) {
-                $fullPluginList[] = $pluginDirName;
+        foreach ($loadCriteria as $criteria) {
+            if ($criteria['check']) {
+                if ($force) {
+                    throw new Omeka_Plugin_Loader_Exception($criteria['exception']);
+                } else {
+                    return false;
+                }
             }
         }
-        return $fullPluginList;
+        
+        return true;
     }
-                    
+                        
     /**
      * Returns whether a plugin has a plugin.php file
      * 
-     * @todo Factor into Plugin class (with setPluginPath() ?)
-     * @param string $pluginDirName
+     * @param string|Plugin $pluginDirName
      * @return boolean
      **/
-    public function hasPluginFile($pluginDirName)
+    public function hasPluginBootstrap($pluginDirName)
     {
+        if ($pluginDirName instanceof Plugin) {
+            $pluginDirName = $pluginDirName->getDirectoryName();
+        }
+        
         return file_exists($this->getPluginFilePath($pluginDirName));
     }
         
     /**
      * Returns the path to the plugin.php file
      * 
-     * @todo Factor into Plugin record class?
      * @param string $pluginDirName
      * @return string
      **/

@@ -31,12 +31,7 @@ class Plugin extends Omeka_Record
      * @var string URL for documentation / further information about the plugin.
      */
     protected $_link;
-    
-    /**
-     * @var boolean Whether or not the plugin has been installed.
-     */
-    protected $_installed = false;
-    
+        
     /**
      * @var boolean Whether or not the plugin has been loaded.
      */
@@ -292,22 +287,13 @@ class Plugin extends Omeka_Record
     }
         
     /**
-     * @return boolean
+     * Whether or not the Plugin has been installed.
+     * 
+     * @return boolean 
      **/
     public function isInstalled()
     {
-        return $this->_installed;
-    }
-
-    /**
-     * Set whether or not the plugin has been installed.
-     * 
-     * @param 
-     **/
-    public function setInstalled($flag)
-    {
-        $this->_installed = $flag;
-        return $this;
+        return $this->exists();
     }
     
     /**

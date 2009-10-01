@@ -159,11 +159,15 @@ class PluginsController extends Omeka_Controller_Action
     public function browseAction() 
     {
         // Get a list of all plugins currently processed by the system.      
-        $plugins = $this->_pluginLoader->getPlugins();
+        $installedPlugins = $this->_pluginLoader->getPlugins();
+        $pluginFactory = new Omeka_Plugin_Factory(PLUGIN_DIR);
+        $newPlugins = $pluginFactory->getNewPlugins($installedPlugins);
+        $this->_pluginLoader->loadPlugins($newPlugins);
+        $allPlugins = $this->_pluginLoader->getPlugins();
         // Plugins are keyed to the directory name, so natural sort based on that.
-        uksort($plugins, "strnatcmp");
+        uksort($allPlugins, "strnatcmp");
 
-        $this->view->assign(array('plugins'=>$plugins, 'loader'=>$this->_pluginLoader));
+        $this->view->assign(array('plugins'=>$allPlugins, 'loader'=>$this->_pluginLoader));
     }
     
     /**
