@@ -56,18 +56,18 @@
   **/
  function display_random_featured_item($withImage=false)
  {
-     $featuredItem = random_featured_item($withImage);
-
+    $featuredItem = random_featured_item($withImage);
+    $itemTitle = item('Dublin Core', 'Title', array(), $featuredItem);
  	$html = '<h2>Featured Item</h2>';
  	if ($featuredItem) {
-         set_current_item($featuredItem); // Needed for transparent access of item metadata.
- 	   $html .= '<h3>' . link_to_item() . '</h3>';
- 	   if (item_has_thumbnail()) {
- 	       $html .= link_to_item(item_square_thumbnail(), array('class'=>'image'));
+ 	   $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $featuredItem) . '</h3>';
+ 	   if (item_has_thumbnail($featuredItem)) {
+ 	       $html .= link_to_item(item_square_thumbnail(array(), 0, $featuredItem), array('class'=>'image'), 'show', $featuredItem);
  	   }
  	   // Grab the 1st Dublin Core description field (first 150 characters)
- 	   $itemDescription = item('Dublin Core', 'Description', array('snippet'=>150));
- 	   $html .= '<p class="item-description">' . $itemDescription . '</p>';
+ 	   if ($itemDescription = item('Dublin Core', 'Description', array('snippet'=>150), $featuredItem)) {
+ 	       $html .= '<p class="item-description">' . $itemDescription . '</p>';
+       }
  	} else {
  	   $html .= '<p>No featured items are available.</p>';
  	}
@@ -387,15 +387,14 @@
      if (!$item) {
          $item = get_current_item();
      }
-
- 	$imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
-
+     
+     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
+     
      $width = @$props['width'];
      $height = @$props['height'];
 
-     $defaultProps = array('alt'=>strip_formatting(item('Dublin Core', 'Title')));
+     $defaultProps = array('alt'=>html_escape(item('Dublin Core', 'Title', array(), $item)));
      $props = array_merge($defaultProps, $props);
-
      require_once 'Media.php';
      $media = new Omeka_View_Helper_Media;
      return $media->archive_image($imageFile, $props, $width, $height, $imageType ); 

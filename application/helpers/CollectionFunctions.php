@@ -20,11 +20,14 @@
  * @see item()
  * @param string
  * @param array $options
+ * @param Collection|null $collection Check for this specific collection record (current collection if null).
  * @return string|array
  **/
-function collection($fieldName, $options=array())
+function collection($fieldName, $options=array(), $collection=null)
 {
-    $collection = get_current_collection();
+    if (!$collection) {
+        $collection = get_current_collection();
+    }
     
     // Retrieve the data to display.  
     switch (strtolower($fieldName)) {
@@ -121,12 +124,11 @@ function collection_is_public()
 function display_random_featured_collection()
 {
     $featuredCollection = random_featured_collection();
-    set_current_collection($featuredCollection);
     $html = '<h2>Featured Collection</h2>';
-    if ( $featuredCollection ) {
-        $html .= '<h3>' . link_to_collection() . '</h3>';
-        if ($featuredCollection->description) {
-            $html .= '<p class="collection-description">' . collection('Description', array('snippet'=>150)) . '</p>';
+    if ($featuredCollection) {
+        $html .= '<h3>' . link_to_collection($collectionTitle, array(), 'show', $featuredCollection) . '</h3>';
+        if ($collectionDescription = collection('Description', array('snippet'=>150), $featuredCollection)) {
+            $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
         }
         
     } else {
