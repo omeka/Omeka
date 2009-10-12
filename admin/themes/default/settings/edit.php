@@ -28,6 +28,5 @@
 <div id="primary">
 <?php echo flash(); ?>
 <?php echo $this->form; ?>
-</form>
 </div>
 <?php foot(); ?>
