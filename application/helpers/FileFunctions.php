@@ -93,13 +93,13 @@
 
          //The following is a hack that loads only the 'effects' sub-library of Scriptaculous
          //Load the sub-libraries of Scriptaculous
-         $output .= '<script src="' . web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=' . implode(',', $scriptaculousLibraries) .'" type="text/javascript" charset="utf-8"></script>' . "\n";
+         $output .= '<script src="' . html_escape(web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=' . implode(',', $scriptaculousLibraries)) .'" type="text/javascript" charset="utf-8"></script>' . "\n";
          $output .= js('search', $dir);
 
          //Do not try to load 'default.js'
          return $output;
      }
- 	return '<script type="text/javascript" src="'.src($file, $dir, 'js').'" charset="utf-8"></script>'."\n";
+ 	return '<script type="text/javascript" src="'.html_escape(src($file, $dir, 'js')).'" charset="utf-8"></script>'."\n";
  }
   
  /**

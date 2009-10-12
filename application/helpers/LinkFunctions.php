@@ -43,7 +43,7 @@ function link_to($record, $action=null, $text='View', $props = array(), $queryPa
     
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
     
-	return '<a href="'. $url . '"' . $attr . '>' . $text . '</a>';
+	return '<a href="'. html_escape($url) . '"' . $attr . '>' . $text . '</a>';
 }
 
 /**
@@ -270,7 +270,7 @@ function link_to_home_page($text = null, $props = array())
         $text = settings('site_title');
     }
 	$uri = WEB_ROOT;
-	return '<a href="'.$uri.'" '._tag_attributes($props).'>' . $text . "</a>\n";
+	return '<a href="' . html_escape($uri) . '" '._tag_attributes($props).'>' . $text . "</a>\n";
 }
 
 /**
@@ -284,7 +284,8 @@ function link_to_admin_home_page($text = null, $props = array())
     if (!$text) {
         $text = settings('site_title');
     }
-	return '<a href="'.admin_uri('').'" '._tag_attributes($props).'>'. $text."</a>\n";
+	return '<a href="' . html_escape(admin_uri('')) . '" ' . _tag_attributes($props) 
+	     . '>' . $text . "</a>\n";
 }
 
 /**
@@ -304,7 +305,7 @@ function nav(array $links)
 	$current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
 	$nav = '';
 	foreach( $links as $text => $link ) {		
-		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . html_escape($text) . '</a></li>' . "\n";
+		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . html_escape($link) . '">' . html_escape($text) . '</a></li>' . "\n";
 	}
 	return $nav;
 }

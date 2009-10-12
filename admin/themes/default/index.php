@@ -20,8 +20,8 @@
                     <dt class="items"><?php echo link_to('items', null, 'Items'); ?></dt>
                     <dd class="items">
                         <ul>
-                            <li><a class="add" href="<?php echo uri('items/add'); ?>">Add a new item to your archive</a></li>
-                            <li><a class="browse" href="<?php echo uri('items/browse'); ?>">Browse your items</a></li>
+                            <li><a class="add" href="<?php echo html_escape(uri('items/add')); ?>">Add a new item to your archive</a></li>
+                            <li><a class="browse" href="<?php echo html_escape(uri('items/browse')); ?>">Browse your items</a></li>
                             
                         </ul>
                         <p>Manage items in your archive: add, edit, and delete items.</p>
@@ -31,8 +31,8 @@
                     <dt class="collections"><?php echo link_to('collections', null, 'Collections'); ?></dt>
                     <dd class="collections">
                         <ul>
-                            <li><a class="add-collection" href="<?php echo uri('collections/add'); ?>">Add a collection to group items</a></li>
-                            <li><a class="browse" href="<?php echo uri('collections/browse'); ?>">Browse your collections</a></li>
+                            <li><a class="add-collection" href="<?php echo html_escape(uri('collections/add')); ?>">Add a collection to group items</a></li>
+                            <li><a class="browse" href="<?php echo html_escape(uri('collections/browse')); ?>">Browse your collections</a></li>
                             
                         </ul>
                         <p>Manage collections in your archive: add, edit, and delete collections.</p>
@@ -41,23 +41,23 @@
                 <?php endif; ?>
                 
                 <?php if(has_permission('Users','browse')): ?>
-                    <dt class="users"><a href="<?php echo uri('users/browse'); ?>">Users</a></dt>
+                    <dt class="users"><a href="<?php echo html_escape(uri('users/browse')); ?>">Users</a></dt>
                     <dd class="users">
                         <ul>
-                            <li><a class="browse-users" href="<?php echo uri('users/browse'); ?>">Browse Users</a></li>
-                            <li><a class="add-user" href="<?php echo uri('users/add'); ?>">Add a User</a></li>
+                            <li><a class="browse-users" href="<?php echo html_escape(uri('users/browse')); ?>">Browse Users</a></li>
+                            <li><a class="add-user" href="<?php echo html_escape(uri('users/add')); ?>">Add a User</a></li>
                         </ul>
                         <p>Add and manage users of various levels: from researcher to super.</p>
                     </dd>
                 <?php endif; ?>
                 
                 <?php if(has_permission('super')): ?>
-                    <dt class="site-settings"><a href="<?php echo uri('settings'); ?>">Settings</a></dt>
+                    <dt class="site-settings"><a href="<?php echo html_escape(uri('settings')); ?>">Settings</a></dt>
                     <dd class="site-settings">
                         <ul>
-                            <li><a class="editsettings" href="<?php echo uri('settings'); ?>">Edit General Settings</a></li>
-                            <li><a class="managethemes" href="<?php echo uri('themes'); ?>">Manage Themes</a></li>
-                            <li><a class="manageplugins" href="<?php echo uri('plugins'); ?>">Manage Plugins</a></li>
+                            <li><a class="editsettings" href="<?php echo html_escape(uri('settings')); ?>">Edit General Settings</a></li>
+                            <li><a class="managethemes" href="<?php echo html_escape(uri('themes')); ?>">Manage Themes</a></li>
+                            <li><a class="manageplugins" href="<?php echo html_escape(uri('plugins')); ?>">Manage Plugins</a></li>
                         </ul>
                         <p>Manage your general settings for the site, including title, description, and themes.</p>
                     </dd>
@@ -91,7 +91,7 @@
                     <?php endwhile; ?>
                 </ul>
                 
-                <p id="view-all-items"><a href="<?php echo uri('items/browse'); ?>">View All Items</a></p>
+                <p id="view-all-items"><a href="<?php echo html_escape(uri('items/browse')); ?>">View All Items</a></p>
                 <?php endif; ?>
             </div>
             
