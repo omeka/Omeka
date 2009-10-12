@@ -14,28 +14,8 @@ require_once HELPERS;
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_Helper_AutoDiscoveryLinkTagTest extends Zend_Test_PHPUnit_ControllerTestCase
-{   
-    public function setUp()
-    {
-        $this->bootstrap = array($this, 'appBootstrap');
-        parent::setUp();
-    }
-
-    public function appBootstrap()
-    {
-        $this->core = new Omeka_Core('testing', array(
-            'config' => CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini'));
-        
-        $this->setUpBootstrap($this->core->getBootstrap());
-        $this->core->bootstrap();
-    }
-    
-    public function setUpBootstrap($bootstrap)
-    {
-        $this->frontController->getRouter()->addDefaultRoutes();
-    }
-    
+class Omeka_Helper_AutoDiscoveryLinkTagTest extends Omeka_Test_AppTestCase
+{           
     public function testLinkTagEscapesUrl()
     {
         $this->dispatch('/');
@@ -50,11 +30,4 @@ class Omeka_Helper_AutoDiscoveryLinkTagTest extends Zend_Test_PHPUnit_Controller
         $this->assertEquals('<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="/items/browse/&quot;&gt;&lt;script&gt;alert(11639)&lt;/script%3E?output=rss2" />', 
                             auto_discovery_link_tag());
     } 
-    
-    public function tearDown()
-    {
-        Zend_Registry::_unsetInstance();
-        Omeka_Context::resetInstance();
-        parent::tearDown();
-    }
 }
