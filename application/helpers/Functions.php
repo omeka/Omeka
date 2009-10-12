@@ -244,7 +244,7 @@ function output_format_list($list = true, $delimiter = ' | ')
     if ($list) {
         $html .= '<ul id="output-format-list">';
         foreach ($actionContexts as $key => $actionContext) {
-            $html .= '<li><a href="' . uri() . '?output=' . $actionContext . '&' . http_build_query($_GET) . '">' . $actionContext . '</a></li>';
+            $html .= '<li><a href="' . html_escape(uri() . '?output=' . $actionContext . '&' . http_build_query($_GET)) . '">' . $actionContext . '</a></li>';
         }
         $html .= '</ul>';
     
@@ -252,7 +252,7 @@ function output_format_list($list = true, $delimiter = ' | ')
     } else {
         $html .= '<p id="output-format-list">';
         foreach ($actionContexts as $key => $actionContext) {
-            $html .= '<a href="' . uri() . '?output=' . $actionContext . '&' . http_build_query($_GET) . '">' . $actionContext . '</a>';
+            $html .= '<a href="' . html_escape(uri() . '?output=' . $actionContext . '&' . http_build_query($_GET)) . '">' . $actionContext . '</a>';
             $html .= (count($actionContexts) - 1) == $key ? '' : $delimiter;
         }
         $html .= '</p>';
