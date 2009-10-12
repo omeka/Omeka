@@ -26,7 +26,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      * @var Omeka_Plugin_Mvc
      */
     protected $_pluginMvc;
-    
+        
     public function __construct($options, Omeka_Plugin_Mvc $pluginMvc)
     {
         $this->_dbOptions = $options['dbOptions'];
@@ -63,10 +63,6 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
             // Make it so that plugin view/assets load after the theme (and for all possibly plugins).
             $this->_setupPathsForTheme($themeType);
         }
-        
-        $this->_loadCustomThemeScripts();
-        
-        // var_dump($this->_view);exit;
     }
 
     /**
@@ -181,21 +177,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         $view->addAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
     }
         
-    /**
-     * Look for a 'custom.php' script in all script paths and run the file if it exists.
-     * 
-     * @return void
-     **/
-    protected function _loadCustomThemeScripts()
-    {
-        $view = $this->_getView();
-        foreach ($view->getScriptPaths() as $path) {
-            $customScriptPath = $path . 'custom.php';
-            if (file_exists($customScriptPath)) {
-                include_once $customScriptPath;
-            }
-        }
-    }
+    
 
     
     /**

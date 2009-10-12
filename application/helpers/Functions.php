@@ -38,7 +38,7 @@ function is_odd($num)
  * @return string HTML
  **/
 function auto_discovery_link_tag(){
-	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. items_output_uri() .'" />';
+	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. html_escape(items_output_uri()) .'" />';
 	return $html;
 }
 
