@@ -47,12 +47,12 @@
     <ul id="collectors-list">
         <li>
         <?php echo html_escape($collector->getName()); ?>
-        <a class="remove-collector" href="<?php echo uri(
+        <a class="remove-collector" href="<?php echo html_escape(uri(
             array(
             'controller'=>'collections', 
             'action'=>'remove-collector', 
             'collector_id'=>$collector->id, 
-            'collection_id'=>$collection->id), 'default'); ?>">Remove</a>
+            'collection_id'=>$collection->id), 'default')); ?>">Remove</a>
         </li>
     </ul>
     <?php endforeach; ?>

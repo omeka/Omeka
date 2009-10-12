@@ -15,7 +15,7 @@
     <?php include 'form.php';?>
 <input type="submit" name="submit" value="Save Changes" class="submit submit-medium" /></p>
     <?php if (has_permission('ItemTypes', 'delete')): ?>
-        <p id="delete_link"><a class="delete" href="<?php echo record_uri($itemtype, 'delete', 'item-types'); ?>">Delete This Item Type</a></p>     
+        <p id="delete_link"><a class="delete" href="<?php echo html_escape(record_uri($itemtype, 'delete', 'item-types')); ?>">Delete This Item Type</a></p>     
     <?php endif; ?>
 </form>
 

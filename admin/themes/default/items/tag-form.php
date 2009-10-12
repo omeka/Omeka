@@ -19,9 +19,17 @@
             <ul id="my-tags-list">
                 <?php foreach( $myTags as $myTag ): ?>
                 <li class="tag-delete">
-                    <input type="image" src="<?php echo img('add.png'); ?>"  class="undo_remove_tag" value="<?php echo html_escape($myTag->name); ?>" />
-                    <input type="image" src="<?php echo img('delete.gif'); ?>"  class="remove_tag" value="<?php echo html_escape($myTag->name); ?>" />
-                    <?php echo html_escape($myTag->name); ?>
+                    <?php echo __v()->formImage('undo-remove-tag-' . $myTag->id, 
+                                                $myTag->name,
+                                                array(
+                                                    'src'   => img('add.png'),
+                                                    'class' => 'undo_remove_tag')); 
+                          echo __v()->formImage('remove-tag-' . $myTag->id,
+                                                $myTag->name,
+                                                array(
+                                                    'src'   => img('delete.gif'),
+                                                    'class' => 'remove_tag')); 
+                          echo html_escape($myTag->name); ?>
                 </li>
                 <?php endforeach; ?>
             </ul>
@@ -33,8 +41,16 @@
                     <?php foreach( $otherTags as $otherTag ): ?>
                         <li>
                             <?php if (has_permission('Items','untagOthers')): ?>
-                                <input type="image" src="<?php echo img('add.png'); ?>"  class="undo_remove_tag" value="<?php echo html_escape($otherTag->name); ?>" />
-                                <input type="image" src="<?php echo img('delete.gif'); ?>"  class="remove_tag" value="<?php echo html_escape($otherTag->name); ?>" />
+                                <?php echo __v()->formImage('undo-remove-tag-' . $otherTag->id, 
+                                                            $otherTag->name,
+                                                            array(
+                                                                'src'   => img('add.png'),
+                                                                'class' => 'undo_remove_tag')); 
+                                      echo __v()->formImage('remove-tag-' . $otherTag->id,
+                                                            $otherTag->name,
+                                                            array(
+                                                                'src'   => img('delete.gif'),
+                                                                'class' => 'remove_tag')); ?>
                             <?php endif; ?>
                             <?php echo html_escape($otherTag->name); ?>
                         </li>

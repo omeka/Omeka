@@ -8,20 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo css('login'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('screen')); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('login')); ?>" />
 
 <!--[if lte IE 6]>
-<link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('lte-ie6')); ?>" />
 <![endif]-->
 
 <!-- JavaScripts -->
 <?php echo js('prototype'); ?>
-<script type="text/javascript" charset="utf-8">
-    Event.observe(window,'load',function() {
-        $('username').focus();
-    }); 
-</script>
+
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
 
@@ -29,6 +25,6 @@
 <body id="login">
     <div id="wrap">
         <div id="header">
-            <div id="site-title"><a href="<?php echo uri(''); ?>"><?php echo settings('site_title'); ?></a></div>
+            <div id="site-title"><?php echo link_to_admin_home_page(); ?></div>
         </div>
         <div id="content">

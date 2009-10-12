@@ -3,7 +3,7 @@ echo js('tiny_mce/tiny_mce');
 // echo js('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
 ?>
 <?php // The following includes the Autocompleter class. ?>
-<script src="<?php echo web_path_to('javascripts/scriptaculous.js'); ?>?load=controls" type="text/javascript" charset="utf-8"></script>
+<?php echo js('scriptaculous', 'javascripts', array('controls'));  ?>
 
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
@@ -49,7 +49,7 @@ echo js('tiny_mce/tiny_mce');
             image.src = <?php echo js_escape(img('loader2.gif')); ?>;
             var params = 'item_id=<?php echo $item->id; ?>&type_id='+this.getValue();
                         
-            new Ajax.Request('<?php echo uri("items/change-type") ?>', {
+            new Ajax.Request(<?php echo js_escape(uri("items/change-type")) ?>, {
                 parameters: params,
                 onCreate: function(t) {
                     typeSelectLabel.appendChild(image);
@@ -93,13 +93,13 @@ echo js('tiny_mce/tiny_mce');
     addTagElement: function(tag) {
         var nRTButton = new Element('li', { 'class': 'tag-delete'});
 
-        var img1 = new Element('input', { 'type': 'image', 'src': '<?php echo img('add.png'); ?>', 'class': 'undo_remove_tag', 'value': tag});
+        var img1 = new Element('input', { 'type': 'image', 'src': <?php echo js_escape(img('add.png')); ?>, 'class': 'undo_remove_tag', 'value': tag});
         nRTButton.appendChild(img1);
         img1.observe('click', function(e) {
             e.stop();
             Omeka.ItemForm.undoRemoveTag(this);
         });
-        var img2 = new Element('input', { 'type': 'image', 'src': '<?php echo img('delete.gif'); ?>', 'class': 'remove_tag', 'value': tag});                    
+        var img2 = new Element('input', { 'type': 'image', 'src': <?php echo js_escape(img('delete.gif')); ?>, 'class': 'remove_tag', 'value': tag});                    
         img2.observe('click', function(e) {
             e.stop();
             Omeka.ItemForm.removeTag(this);
@@ -370,7 +370,7 @@ echo js('tiny_mce/tiny_mce');
     // Tags autocomplete
     Event.observe(window, 'load', function(){
         new Ajax.Autocompleter("tags", "tag-choices", 
-        "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
+        <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>, {
             tokens: ',',
             paramName: 'tag_start'
         });

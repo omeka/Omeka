@@ -10,7 +10,7 @@
 <?php head(array('title'=> $itemTypeTitle,'bodyclass'=>'item-types'));?>
 <h1><?php echo $itemTypeTitle; ?></h1>
 <?php if ( has_permission('ItemTypes','edit') ): ?>
-<p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo record_uri($itemtype, 'edit', 'item-types'); ?>">Edit this Item Type</a></p>
+<p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo html_escape(record_uri($itemtype, 'edit', 'item-types')); ?>">Edit this Item Type</a></p>
 <?php endif; ?>
 
 <div id="primary">

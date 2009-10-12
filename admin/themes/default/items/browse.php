@@ -1,6 +1,6 @@
 <?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 <h1>Browse Items (<?php echo total_results();?> total)</h1>
-<p id="add-item" class="add-button"><a class="add" href="<?php echo uri('items/add'); ?>">Add an Item</a></p>
+<p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>">Add an Item</a></p>
 
 <?php if ( total_results() ): ?>
 
@@ -32,7 +32,7 @@
         <div class="pagination"><?php echo pagination_links(); ?></div>
     </div>
     
-<form id="items-browse" action="<?php echo uri('items/power-edit'); ?>" method="post" accept-charset="utf-8">
+<form id="items-browse" action="<?php echo html_escape(uri('items/power-edit')); ?>" method="post" accept-charset="utf-8">
 
 <fieldset id="view-choice">
     <?php 

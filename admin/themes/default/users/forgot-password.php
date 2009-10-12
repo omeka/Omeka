@@ -1,7 +1,7 @@
 <?php head(array('bodyclass'=>'login'), 'login-header'); ?>
 <h1>Forgot Password</h1>
 <p id="login-links">
-<span id="backtologin"><a href="<?php echo uri('users/login'); ?>">Back to Log In</a></spans>
+<span id="backtologin"><?php echo link_to('users', 'login', 'Back to Log In'); ?></span>
 </p>
 
 <p class="clear">Enter your email address to retrieve your password.</p>
@@ -9,7 +9,7 @@
 <form method="post" accept-charset="utf-8">
     <div class="field">        
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" class="textinput" value="<?php echo @$_POST['email']; ?>" />
+        <?php echo $this->formText('email', @$_POST['email'], array('class'=>'textinput')); ?>
     </div>
 
     <input type="submit" class="submit submit-small" value="Submit" />

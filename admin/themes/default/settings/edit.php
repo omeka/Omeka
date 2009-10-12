@@ -1,5 +1,6 @@
 <?php head(array('title'=>'Edit General Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <script type="text/javascript" charset="utf-8">
+//<![CDATA[
     Event.observe(window, 'load', function(){
         var testButton = new Element('button', {'type': 'button', 'id': 'test-button'});
         var loaderGif = new Element('img', {'src': '<?php echo img("loader.gif"); ?>'});
@@ -9,7 +10,7 @@
         imageMagickInput.insert({'after': testButton});
         testButton.update('Test').observe('click', function(e){
             testButton.insert({'after': loaderGif});
-            new Ajax.Request('<?php echo uri(array("controller"=>"settings","action"=>"check-imagemagick")); ?>', {
+            new Ajax.Request(<?php echo js_escape(uri(array("controller"=>"settings","action"=>"check-imagemagick"))); ?>, {
                 method: 'get',
                 parameters: 'path-to-convert=' + imageMagickInput.getValue(),
                 onComplete: function(t) {
@@ -19,6 +20,7 @@
             });
         });
     });
+//]]>    
 </script>
 
 <h1>Edit General Settings</h1>

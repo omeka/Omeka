@@ -27,7 +27,7 @@
 <div id="edit-file-preview"><?php echo display_file($file, array('imageSize'=>'square_thumbnail')); ?></div>
 
     
-<form method="post" id="editfile" action="<?php echo uri('files/edit/'.$file->id); ?>" name="editFile">
+<form method="post" id="editfile" action="<?php echo html_escape(uri('files/edit/'.$file->id)); ?>" name="editFile">
 
 <fieldset>
 
