@@ -90,16 +90,20 @@
      if ($file == 'default') {
          $output  = js('prototype', $dir); //Prototype library loads by default
          $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
-
-         //The following is a hack that loads only the 'effects' sub-library of Scriptaculous
-         //Load the sub-libraries of Scriptaculous
-         $output .= '<script src="' . html_escape(web_path_to($dir . DIRECTORY_SEPARATOR . 'scriptaculous.js') . '?load=' . implode(',', $scriptaculousLibraries)) .'" type="text/javascript" charset="utf-8"></script>' . "\n";
+         $output .= js('scriptaculous', $dir, $scriptaculousLibraries);
          $output .= js('search', $dir);
 
          //Do not try to load 'default.js'
          return $output;
      }
- 	return '<script type="text/javascript" src="'.html_escape(src($file, $dir, 'js')).'" charset="utf-8"></script>'."\n";
+    
+    if ('scriptaculous' == $file) {
+        $href = src($file, $dir, 'js') . ($scriptaculousLibraries ? '?load=' . implode(',', $scriptaculousLibraries) : '');
+    } else {
+        $href = src($file, $dir, 'js');
+    }
+     
+ 	return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>'."\n";
  }
   
  /**
