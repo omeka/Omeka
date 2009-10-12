@@ -34,7 +34,7 @@
 <legend>Dublin Core</legend>    
 
 <?php echo display_element_set_form($file, 'Dublin Core'); ?>
-
+</fieldset>
 <fieldset>
 <legend>Format (Legacy) Metadata</legend>   
 
