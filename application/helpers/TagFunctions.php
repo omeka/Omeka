@@ -190,7 +190,7 @@ function tag_string($recordOrTags = null, $link=null, $delimiter=', ')
 			if (!$link) {
 				$tagStrings[$key] = html_escape($tag['name']);
 			} else {
-				$tagStrings[$key] = '<a href="'.$link.urlencode($tag['name']).'" rel="tag">'.html_escape($tag['name']).'</a>';
+				$tagStrings[$key] = '<a href="' . html_escape($link.urlencode($tag['name'])) . '" rel="tag">'.html_escape($tag['name']).'</a>';
 			}
 		}
 	    $tagString = join($delimiter,$tagStrings);
