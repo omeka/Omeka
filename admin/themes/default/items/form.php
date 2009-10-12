@@ -46,7 +46,7 @@ echo js('tiny_mce/tiny_mce');
         $('item-type').onchange = function() {
             var typeSelectLabel = $$('#type-select label')[0];
             var image = $(document.createElement('img'));
-            image.src = "<?php echo img('loader2.gif'); ?>";
+            image.src = <?php echo js_escape(img('loader2.gif')); ?>;
             var params = 'item_id=<?php echo $item->id; ?>&type_id='+this.getValue();
                         
             new Ajax.Request('<?php echo uri("items/change-type") ?>', {
