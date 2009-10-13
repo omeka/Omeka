@@ -13,7 +13,7 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
     <?php $formActionUri = uri(array('controller'=>'items', 'action'=>'browse')); ?>
 <?php endif; ?>
 	
-<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo $formActionUri; ?>" method="get">
+<form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo html_escape($formActionUri); ?>" method="get">
 	<div id="search-keywords" class="field">    
 		<?php echo label('search','Search for Keywords'); ?>
 		<div class="inputs">
