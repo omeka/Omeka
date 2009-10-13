@@ -35,6 +35,8 @@ class Omeka_View extends Zend_View_Abstract
      **/
     protected $_asset_paths = array();
     
+    private $_customScriptsLoaded = false;
+    
     public function __construct($config = array())
     {
         parent::__construct($config);         
@@ -80,6 +82,8 @@ class Omeka_View extends Zend_View_Abstract
      * 
      */
     public function _run() {
+        $this->_loadCustomThemeScripts();
+        
         $vars = $this->getVars();
                 
         require_once HELPERS;
@@ -100,6 +104,49 @@ class Omeka_View extends Zend_View_Abstract
                     echo nl2br( $e->getTraceAsString() );
                 }                
             }
+        }
+    }
+    
+    /**
+     * Look for a 'custom.php' script in all script paths and include the file if it exists.
+     * 
+     * @internal This must 'include' (as opposed to 'require') the script because
+     * it typically contains executable code that modifies global state.  These
+     * scripts need to be loaded only once per request, but multiple times in
+     * the test environment.  Hence the flag for making sure that it runs only
+     * once per View instance.
+     * @return void
+     **/
+    private function _loadCustomThemeScripts()
+    {
+        if ($this->_customScriptsLoaded) {
+            return;
+        }
+        
+        foreach ($this->getScriptPaths() as $path) {
+            $customScriptPath = $path . 'custom.php';
+            if (file_exists($customScriptPath)) {
+                include $customScriptPath;
+            }
+        }
+        $this->_customScriptsLoaded = true;
+    }
+    
+    /**
+     * Adds a script path to the view.
+     * 
+     * @internal Overrides Zend_View_Abstract to ensure that duplicate paths
+     * are not added to the stack.  Fixes a bug where include'ing the same 
+     * script twice causes fatal errors.
+     */
+    public function addScriptPath($path)
+    {
+        // For some unknown reason, Zend_View adds a trailing slash to paths.
+        // Need to add that for the purposes of comparison.
+        $path = rtrim($path, '/') . '/';
+        
+        if (!in_array($path, $this->getScriptPaths())) {
+            return parent::addScriptPath($path);
         }
     }
 }

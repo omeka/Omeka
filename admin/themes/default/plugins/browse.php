@@ -85,8 +85,7 @@
                     echo html_escape($pluginInfo->name);
                 endif; 
             ?>
-            <?php if (has_permission('Plugins', 'config') && $pluginInfo->hasConfig ): ?><a href="<?php echo uri('plugins/config', array('name'=>$pluginInfo->directoryName)); ?>" class="configure-button button">Configure</a><?php endif; ?></p>           
-            
+            <?php if (has_permission('Plugins', 'config') && $pluginInfo->hasConfig ): ?><a href="<?php echo html_escape(uri('plugins/config', array('name'=>$pluginInfo->directoryName))); ?>" class="configure-button button">Configure</a><?php endif; ?></p>           
             <?php 
                 $pluginMetadata = array();
                 if (trim($pluginInfo->version) != ''):
@@ -119,7 +118,7 @@
         <?php if ($pluginInfo->installed): ?>
             <?php if ($pluginInfo->hasNewVersion): ?>
                 <?php if (has_permission('Plugins', 'upgrade')): ?>
-                    <form action="<?php echo uri('plugins/upgrade'); ?>" method="post" accept-charset="utf-8">     
+                    <form action="<?php echo html_escape(uri('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
                             <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Upgrade</button>
                             <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
                     </form>
@@ -127,7 +126,7 @@
             <?php else: ?>
                 <?php $activateOrDeactivate = ($pluginInfo->active) ? 'deactivate' : 'activate'; ?>
                 <?php if (has_permission('Plugins', 'activate')): ?>
-                    <form action="<?php echo uri('plugins/' . $activateOrDeactivate); ?>" method="post" accept-charset="utf-8">
+                    <form action="<?php echo html_escape(uri('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
                         <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?> submit-medium" value="<?php echo $pluginInfo->directoryName; ?>"><?php echo ($pluginInfo->active) ? 'Deactivate' : 'Activate'; ?>
                         </button>
                         <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
@@ -135,16 +134,16 @@
                 <?php endif; ?>
             <?php endif; ?>   
             <?php if (has_permission('Plugins', 'uninstall')): ?>
-                <form action="<?php echo uri(array(
+                <form action="<?php echo html_escape(uri(array(
                     'controller'=>'plugins', 
-                    'action'=>'uninstall'), 'default'); ?>" method="post" accept-charset="utf-8">
+                    'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
                         <button name="uninstall" type="submit" class="uninstall submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Uninstall</button>
                         <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
                 </form>                
             <?php endif; ?>     
     <?php else: //The plugin has not been installed yet ?>
         <?php if (has_permission('Plugins', 'install')): ?>
-            <form action="<?php echo uri('plugins/install'); ?>" method="post" accept-charset="utf-8">     
+            <form action="<?php echo html_escape(uri('plugins/install')); ?>" method="post" accept-charset="utf-8">     
                     <button name="install" type="submit" class="submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Install</button>
                     <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
             </form> 

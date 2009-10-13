@@ -1,6 +1,6 @@
 <?php echo flash(); ?>
 
-<form action="<?php echo uri('item-types/add-element'); ?>" method="post" accept-charset="utf-8" id="add-element-form">
+<form action="<?php echo html_escape(uri('item-types/add-element')); ?>" method="post" accept-charset="utf-8" id="add-element-form">
 
 <h3>Add an Element to this Item Type</h3>
 

@@ -8,12 +8,12 @@
     
     <p id="tags-nav">Sort by:   
         
-        <a href="<?php echo current_uri(array('sort'=>'most')); ?>"<?php if($_GET['sort'] == 'most') echo ' class="current"'; ?>>Most</a>
-            <a href="<?php echo current_uri(array('sort'=>'least')); ?>"<?php if($_GET['sort'] == 'least') echo ' class="current"'; ?>>Least</a> 
+        <a href="<?php echo html_escape(current_uri(array('sort'=>'most'))); ?>"<?php if($_GET['sort'] == 'most') echo ' class="current"'; ?>>Most</a>
+            <a href="<?php echo html_escape(current_uri(array('sort'=>'least'))); ?>"<?php if($_GET['sort'] == 'least') echo ' class="current"'; ?>>Least</a> 
 
-            <a href="<?php echo current_uri(array('sort'=>'alpha')); ?>"<?php if($_GET['sort'] == 'alpha') echo ' class="current"'; ?>>Alphabetical</a>
+            <a href="<?php echo html_escape(current_uri(array('sort'=>'alpha'))); ?>"<?php if($_GET['sort'] == 'alpha') echo ' class="current"'; ?>>Alphabetical</a>
 
-            <a href="<?php echo current_uri(array('sort'=>'recent')); ?>"<?php if($_GET['sort'] == 'recent') echo ' class="current"'; ?>>Recent</a>
+            <a href="<?php echo html_escape(current_uri(array('sort'=>'recent'))); ?>"<?php if($_GET['sort'] == 'recent') echo ' class="current"'; ?>>Recent</a>
 
     </p>
 

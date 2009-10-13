@@ -8,15 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="<?php echo css('screen'); ?>" />
-<link rel="stylesheet" media="print" href="<?php echo css('print'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('screen')); ?>" />
+<link rel="stylesheet" media="print" href="<?php echo html_escape(css('print')); ?>" />
 
 <!--[if IE 7]>
-<link rel="stylesheet" media="screen" href="<?php echo css('ie7'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('ie7')); ?>" />
 <![endif]-->
 
 <!--[if lte IE 6]>
-<link rel="stylesheet" media="screen" href="<?php echo css('lte-ie6'); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('lte-ie6')); ?>" />
 <![endif]-->
 
 <!-- JavaScripts -->
@@ -50,15 +50,14 @@
     <div id="wrap">
         
         <div id="header">
-            <div id="site-title"><a href="<?php echo uri(''); ?>"><?php echo settings('site_title'); ?></a></div>
+            <div id="site-title"><?php echo link_to_admin_home_page(settings('site_title')); ?></div>
             
             <div id="site-info">
-                <p id="welcome">Welcome, <a href="<?php echo uri('users/edit/'.current_user()->id); ?>"><?php echo current_user()->first_name; ?></a> | <a href="<?php echo uri('users/logout');?>" id="logout">Logout</a></p>
-                <?php if (has_permission('Settings', 'edit')) 
-                {
-                    echo '<a href="'.uri('settings').'" id="settings-link">Settings</a>';
+                <p id="welcome">Welcome, <a href="<?php echo html_escape(uri('users/edit/'.current_user()->id)); ?>"><?php echo current_user()->first_name; ?></a> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout">Logout</a></p>
+                <?php if (has_permission('Settings', 'edit')): ?>
+                    <a href="<?php echo html_escape(uri('settings')); ?>" id="settings-link">Settings</a>';
 
-                } ?>
+                <?php endif; ?>
                 <?php echo link_to_home_page('View Public Site', array('id'=>'public-link')); ?>
                 <?php echo plugin_append_to_admin_site_info(); ?>
             </div>

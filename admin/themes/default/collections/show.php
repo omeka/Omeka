@@ -8,7 +8,7 @@
     $collectionTitle = 'Collection #' . collection('id') . $collectionTitle;
 ?>
 <?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
-<h1><?php echo $collectionTitle; ?> <span class="view-public-page">[ <a href="<?php echo public_uri('collections/show/'.collection('id')); ?>">View Public Page</a> ]</span> </h1>
+<h1><?php echo $collectionTitle; ?> <span class="view-public-page">[ <a href="<?php echo html_escape(public_uri('collections/show/'.collection('id'))); ?>">View Public Page</a> ]</span> </h1>
 <?php if (has_permission('Collections', 'edit')): ?>    
 <p id="edit-collection" class="edit-button"><?php echo link_to_collection('Edit this Collection', array('class'=>'edit'), 'edit'); ?></p>
 <?php endif; ?>

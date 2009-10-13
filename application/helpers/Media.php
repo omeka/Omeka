@@ -45,7 +45,7 @@ class Omeka_View_Helper_Media
         'audio/mp4'         => 'audio',
         'audio/mpeg'        => 'audio',
         'audio/mpeg3'       => 'audio',
-        'auido/mpegaudio'   => 'audio',
+        'audio/mpegaudio'   => 'audio',
         'audio/mpg'         => 'audio',
 	    'audio/ogg'         => 'audio',
 	    'audio/wav'         => 'audio',
@@ -65,7 +65,7 @@ class Omeka_View_Helper_Media
         'audio/x-mp4'       => 'audio',
         'audio/x-mpeg'      => 'audio',
         'audio/x-mpeg3'     => 'audio',
-        'auido/x-mpegaudio' => 'audio',
+        'audio/x-mpegaudio' => 'audio',
         'audio/x-mpg'       => 'audio',	    
 	    'image/bmp'         => 'image',
         'image/gif'         => 'image',
@@ -212,7 +212,8 @@ class Omeka_View_Helper_Media
             // Wrap in a link that will download the file directly.
             $defaultLinkAttributes = array(
                 'class'=>'download-file', 
-                'href'=>file_download_uri($file));
+                'href'=>html_escape(file_download_uri($file))
+                );
             $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
 
             $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html . '</a>';
@@ -303,7 +304,7 @@ class Omeka_View_Helper_Media
      **/ 
     public function wmv($file, array $options=array())
     {
-		$path = $file->getWebPath('archive');
+        $path = html_escape($file->getWebPath('archive'));
 		$html 	.= 	'<object id="MediaPlayer" width="'.$options['width'].'" height="'.$options['height'].'"';
 		$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
 		$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
@@ -333,7 +334,7 @@ class Omeka_View_Helper_Media
      **/ 
     public function wma($file, array $options=array())
     {
-		$path = $file->getWebPath('archive');
+        $path = html_escape($file->getWebPath('archive'));
 		$html 	.= 	'<object id="MediaPlayer" width="'.$options['width'].'" height="'.$options['height'].'"';
 		$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
 		$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
@@ -358,7 +359,7 @@ class Omeka_View_Helper_Media
      **/ 
     public function mov($file, array $options=array())
     {
-		$path = $file->getWebPath('archive');
+        $path = html_escape($file->getWebPath('archive'));
 
 		$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">
 			<param name="src" value="'.$path.'" />
@@ -382,7 +383,7 @@ class Omeka_View_Helper_Media
      **/
     public function audio($file, array $options=array())
     {
-        $path = $file->getWebPath('archive');
+        $path = html_escape($file->getWebPath('archive'));
         
         $linkAttributes = array_merge(array('href'=>$path), (array)$options['linkAttributes']);
         $html = '<object type="'. $file->mime_browser . '" data="' . $path . 
@@ -573,7 +574,7 @@ class Omeka_View_Helper_Media
         }
 
         $path = $file->getPath($format);
-        $uri = file_display_uri($file, $format);
+        $uri = html_escape(file_display_uri($file, $format));
         
         if (!file_exists($path)) {
             return false;

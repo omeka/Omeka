@@ -42,12 +42,7 @@ class UpgradeController extends Omeka_Controller_Action
     {
         return (int) get_option('migration');
     }
-    
-    public function indexAction()
-    {
         
-    }
-    
     /**
      * Run the migration script, obtain any success/error output and display it in a pretty way
      *

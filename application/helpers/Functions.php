@@ -38,7 +38,7 @@ function is_odd($num)
  * @return string HTML
  **/
 function auto_discovery_link_tag(){
-	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. items_output_uri() .'" />';
+	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. html_escape(items_output_uri()) .'" />';
 	return $html;
 }
 
@@ -244,7 +244,9 @@ function output_format_list($list = true, $delimiter = ' | ')
     if ($list) {
         $html .= '<ul id="output-format-list">';
         foreach ($actionContexts as $key => $actionContext) {
-            $html .= '<li><a href="' . uri() . '?output=' . $actionContext . '&' . http_build_query($_GET) . '">' . $actionContext . '</a></li>';
+            $query = $_GET;
+            $query['output'] = $actionContext;
+            $html .= '<li><a href="' . html_escape(uri() . '?' . http_build_query($query)) . '">' . $actionContext . '</a></li>';
         }
         $html .= '</ul>';
     
@@ -252,7 +254,9 @@ function output_format_list($list = true, $delimiter = ' | ')
     } else {
         $html .= '<p id="output-format-list">';
         foreach ($actionContexts as $key => $actionContext) {
-            $html .= '<a href="' . uri() . '?output=' . $actionContext . '&' . http_build_query($_GET) . '">' . $actionContext . '</a>';
+            $query = $_GET;
+            $query['output'] = $actionContext;
+            $html .= '<a href="' . html_escape(uri() . '?' . http_build_query($query)) . '">' . $actionContext . '</a>';
             $html .= (count($actionContexts) - 1) == $key ? '' : $delimiter;
         }
         $html .= '</p>';

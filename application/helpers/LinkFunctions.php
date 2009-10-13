@@ -43,7 +43,7 @@ function link_to($record, $action=null, $text='View', $props = array(), $queryPa
     
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
     
-	return '<a href="'. $url . '"' . $attr . '>' . $text . '</a>';
+	return '<a href="'. html_escape($url) . '"' . $attr . '>' . $text . '</a>';
 }
 
 /**
@@ -61,7 +61,7 @@ function link_to_advanced_search($text = 'Advanced Search', $props = array(), $u
         $uri = apply_filters('advanced_search_link_default_uri', uri('items/advanced-search'));
     }
     // Is appending the query string directly a security issue?  We should figure that out.
-    $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+    $props['href'] = html_escape($uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : ''));
     return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
 }
 
@@ -79,7 +79,7 @@ function link_to_advanced_search($text = 'Advanced Search', $props = array(), $u
 function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
 {
     // Set the link href to the items/browse page.
-    $linkProperties['href'] = uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
+    $linkProperties['href'] = html_escape(uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams));
     return "<a " . _tag_attributes($linkProperties) . ">$text</a>";
 }
 
@@ -200,7 +200,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
  */
 function link_to_items_rss($text = 'RSS', $params=array())
 {	
-	return '<a href="' . items_output_uri('rss2', $params) . '" class="rss">' . $text . '</a>';
+	return '<a href="' . html_escape(items_output_uri('rss2', $params)) . '" class="rss">' . $text . '</a>';
 }
 
 /**
@@ -270,7 +270,7 @@ function link_to_home_page($text = null, $props = array())
         $text = settings('site_title');
     }
 	$uri = WEB_ROOT;
-	return '<a href="'.$uri.'" '._tag_attributes($props).'>' . $text . "</a>\n";
+	return '<a href="' . html_escape($uri) . '" '._tag_attributes($props).'>' . $text . "</a>\n";
 }
 
 /**
@@ -284,7 +284,8 @@ function link_to_admin_home_page($text = null, $props = array())
     if (!$text) {
         $text = settings('site_title');
     }
-	return '<a href="'.admin_uri('').'" '._tag_attributes($props).'>'. $text."</a>\n";
+	return '<a href="' . html_escape(admin_uri('')) . '" ' . _tag_attributes($props) 
+	     . '>' . $text . "</a>\n";
 }
 
 /**
@@ -304,7 +305,7 @@ function nav(array $links)
 	$current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
 	$nav = '';
 	foreach( $links as $text => $link ) {		
-		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . $link . '">' . html_escape($text) . '</a></li>' . "\n";
+		$nav .= '<li class="' . text_to_id($text, 'nav') . (is_current_uri($link) ? ' current':''). '"><a href="' . html_escape($link) . '">' . html_escape($text) . '</a></li>' . "\n";
 	}
 	return $nav;
 }

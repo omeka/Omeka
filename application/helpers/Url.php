@@ -83,7 +83,7 @@ class Omeka_View_Helper_Url extends Zend_View_Helper_Url
         }
         
         if($queryParams) {
-            $url .= '?' . http_build_query($queryParams, '', '&amp;');
+            $url .= '?' . http_build_query($queryParams);
         }
 
         return $url;        

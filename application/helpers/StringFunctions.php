@@ -23,6 +23,20 @@ function html_escape($value)
 }
 
 /**
+ * Escape the value for use in javascript.
+ * 
+ * This is a convenience function for encoding a value using JSON notation.  
+ * Must be used when interpolating PHP output in javascript.
+ * 
+ * Note on usage: do not wrap the resulting output of this function in quotes,
+ * as proper JSON encoding will take care of that.
+ */
+function js_escape($value)
+{
+    return Zend_Json::encode($value);
+}
+
+/**
  * Replace new lines in a block of text with paragraph tags.
  * 
  * Looks for 2 consecutive line breaks resembling a paragraph break and wraps

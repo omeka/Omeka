@@ -1,8 +1,14 @@
 <?php head(array('bodyclass'=>'login'), 'login-header'); ?>
 
+<script type="text/javascript" charset="utf-8">
+    Event.observe(window,'load',function() {
+        $('username').focus();
+    }); 
+</script>
+
 <h1>Log In</h1>
 <p id="login-links">
-<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><a href="<?php echo uri('users/forgot-password'); ?>">Lost your password?</a></span>
+<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', 'Lost your password?'); ?></span>
 </p>
     <?php
     if (isset($errorMessage)):
@@ -12,7 +18,7 @@
         </span></div>
     <?php endif; ?>
     
-<form id="login-form" action="<?php echo uri('users/login');?>" method="post" accept-charset="utf-8">
+<form id="login-form" action="<?php echo html_escape(uri('users/login'));?>" method="post" accept-charset="utf-8">
     <fieldset>
         <div class="field">
     <label for="username">Username</label> 

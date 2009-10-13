@@ -7,10 +7,10 @@
     <?php if ($message): ?>
     <?php echo $message; ?>
     <?php endif; ?>
-    <form action="<?php echo uri('plugins/uninstall'); ?>" method="post">
+    <form action="<?php echo html_escape(uri('plugins/uninstall')); ?>" method="post">
         <p><input type="checkbox" name="confirm" /> Yes, I want to uninstall this plugin.</p>
         <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
-        <p id="uninstall-confirm"><input type="submit" class="uninstall submit" name="uninstall-confirm" class="foo" value="Uninstall" /> <span>or <a href="<?php echo uri('plugins') ?>">Cancel</a></span></p>
+        <p id="uninstall-confirm"><input type="submit" class="uninstall submit" name="uninstall-confirm" class="foo" value="Uninstall" /> <span>or <?php echo link_to('plugins', 'browse', 'Cancel'); ?></span></p>
     </form>
 </div>
 

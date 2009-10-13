@@ -10,7 +10,7 @@
 <?php head(array('title'=> $itemTypeTitle,'bodyclass'=>'item-types'));?>
 <h1><?php echo $itemTypeTitle; ?></h1>
 <?php if ( has_permission('ItemTypes','edit') ): ?>
-<p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo record_uri($itemtype, 'edit', 'item-types'); ?>">Edit this Item Type</a></p>
+<p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo html_escape(record_uri($itemtype, 'edit', 'item-types')); ?>">Edit this Item Type</a></p>
 <?php endif; ?>
 
 <div id="primary">
@@ -32,7 +32,7 @@
         <ul>
         <?php set_items_for_loop($itemtype->Items); ?>
         <?php while(loop_items()): ?>
-        <li><span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span> <a href="<?php echo item_uri(); ?>"><span class="title"><?php echo item('Dublin Core', 'Title'); ?></span></a></li>
+        <li><span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span> <?php echo link_to_item('<span class="title">' . item('Dublin Core', 'Title') . '</span>') ?></li>
         <?php endwhile;?>
         </ul>
         <?php else: ?>

@@ -248,7 +248,7 @@
      $siteTitle  = strip_formatting(settings('site_title'));
      $itemId     = item('id');
      $accessDate = date('F j, Y');
-     $uri        = abs_uri();
+     $uri        = html_escape(abs_uri());
 
      $cite = '';
      if ($creator) {

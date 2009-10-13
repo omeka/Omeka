@@ -149,7 +149,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
 		$class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
 		$html .= '<li class="' . $class . '">';
 		if ($link) {
-			$html .= '<a href="' . $link . '?tags=' . urlencode($tag['name']) . '">';
+			$html .= '<a href="' . html_escape($link . '?tags=' . urlencode($tag['name'])) . '">';
 		}
 		$html .= html_escape($tag['name']);
 		if ($link) {
@@ -190,7 +190,7 @@ function tag_string($recordOrTags = null, $link=null, $delimiter=', ')
 			if (!$link) {
 				$tagStrings[$key] = html_escape($tag['name']);
 			} else {
-				$tagStrings[$key] = '<a href="'.$link.urlencode($tag['name']).'" rel="tag">'.html_escape($tag['name']).'</a>';
+				$tagStrings[$key] = '<a href="' . html_escape($link.urlencode($tag['name'])) . '" rel="tag">'.html_escape($tag['name']).'</a>';
 			}
 		}
 	    $tagString = join($delimiter,$tagStrings);
