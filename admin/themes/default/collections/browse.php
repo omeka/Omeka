@@ -60,10 +60,10 @@
         </tbody>
         </table>
       <?php else: ?>
-        <p>There are no collections on this page.  <a href="<?php echo uri('collections'); ?>">View all collections</a></p>
+        <p>There are no collections on this page.  <?php echo link_to('collections', null, 'View All Collections'); ?></p>
       <?php endif; ?> 
     <?php else: ?>
-        <p>There are no collections in your archive. Why don't you <a href="<?php echo uri('collections/add'); ?>" >add one</a>?</p>
+        <p>There are no collections in your archive. Why don't you <?php echo link_to('collections', 'add', 'add one'); ?>?</p>
         
     <?php endif; ?>
     

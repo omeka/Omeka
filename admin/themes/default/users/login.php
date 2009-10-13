@@ -8,7 +8,7 @@
 
 <h1>Log In</h1>
 <p id="login-links">
-<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><a href="<?php echo html_escape(uri('users/forgot-password')); ?>">Lost your password?</a></span>
+<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', 'Lost your password?'); ?></span>
 </p>
     <?php
     if (isset($errorMessage)):

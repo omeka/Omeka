@@ -9,10 +9,9 @@
 ?>
 <?php head(array('title' => $itemTitle, 'bodyclass'=>'items show primary-secondary')); ?>
 
-<?php // The following includes the Autocompleter class. ?>
-<script src="<?php echo web_path_to('javascripts/scriptaculous.js'); ?>?load=controls" type="text/javascript" charset="utf-8"></script>
+<?php echo js('scriptaculous', 'javascripts', array('controls')); ?>
 
-<h1 id="item-title"><?php echo $itemTitle; ?> <span class="view-public-page">[ <a href="<?php echo public_uri('items/show/'.item('id')); ?>">View Public Page</a> ]</span></h1>
+<h1 id="item-title"><?php echo $itemTitle; ?> <span class="view-public-page">[ <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>">View Public Page</a> ]</span></h1>
 
 <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
 <p id="edit-item" class="edit-button"><?php 
@@ -28,6 +27,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 </li>
 </ul>
 <script type="text/javascript" charset="utf-8">
+//<![CDATA[
     
     //Handles tagging of items via AJAX
     function modifyTags() {
@@ -77,12 +77,13 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
     // Tags autocomplete
     Event.observe(window, 'load', function(){
         new Ajax.Autocompleter("tags-field", "tag-choices", 
-        "<?php echo uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default'); ?>", {
+        <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default')); ?>, {
             tokens: ',',
             paramName: 'tag_start'
         });
     });
-    
+
+//]]>     
 </script>
 <div id="primary">
 <?php echo flash(); ?>
@@ -126,7 +127,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
         <h3>My Tags</h3>
         <div id="my-tags-show">
         
-        <form id="tags-form" method="post" action="<?php echo uri('items/modify-tags/') ?>">
+        <form id="tags-form" method="post" action="<?php echo html_escape(uri('items/modify-tags/')) ?>">
             <div class="input">
             <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id">
             <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
@@ -158,13 +159,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 
     <div class="info-panel">
         <h2>Output Formats</h2>
-        <div>
-            <ul>
-            <?php foreach (current_action_contexts() as $actionContext): ?>
-                <li><a href="<?php echo uri() . "?output=$actionContext" ?>"><?php echo $actionContext; ?></a></li>
-            <?php endforeach; ?>
-            </ul>
-        </div>
+        <div><?php echo output_format_list(); ?></div>
     </div>
     
     <?php fire_plugin_hook('admin_append_to_items_show_secondary', $item); ?>

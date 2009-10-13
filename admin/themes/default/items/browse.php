@@ -59,7 +59,7 @@
     <p>There are no items in the archive yet.
     
     <?php if(has_permission('Items','add')): ?>
-          Why don&#8217;t you <a href="<?php echo uri('items/add'); ?>">add one</a>?</p>
+          Why don&#8217;t you <?php echo link_to('items', 'add', 'add one'); ?>?</p>
     <?php endif; ?>
 </div>
     

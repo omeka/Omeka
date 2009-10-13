@@ -26,7 +26,7 @@
 <p>Warning: Your Omeka database is not compatible with the version of Omeka that you are running. Please notify an administrator to upgrade the database.</p>
 <?php endif; ?>
 <?php else: ?>
-<p>Your Omeka database is up-to-date! <a href="<?php echo uri('admin'); ?>">Return to Dashboard</a></p>
+<p>Your Omeka database is up-to-date! <?php echo link_to_admin_home_page('Return to Dashboard'); ?></p>
 <?php endif; ?>
 </div>
 <?php foot();?>
