@@ -57,9 +57,10 @@
  function display_random_featured_item($withImage=false)
  {
     $featuredItem = random_featured_item($withImage);
-    $itemTitle = item('Dublin Core', 'Title', array(), $featuredItem);
  	$html = '<h2>Featured Item</h2>';
  	if ($featuredItem) {
+ 	    $itemTitle = item('Dublin Core', 'Title', array(), $featuredItem);
+        
  	   $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $featuredItem) . '</h3>';
  	   if (item_has_thumbnail($featuredItem)) {
  	       $html .= link_to_item(item_square_thumbnail(array(), 0, $featuredItem), array('class'=>'image'), 'show', $featuredItem);
