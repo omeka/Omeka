@@ -37,6 +37,18 @@ function js_escape($value)
 }
 
 /**
+ * Escape the value for use in XML.
+ * 
+ * @param string $value
+ * @return string
+ */
+function xml_escape($value)
+{
+    return htmlspecialchars(preg_replace('#[\x00-\x08\x0B\x0C\x0E-\x1F]+#', '', 
+        $value), ENT_QUOTES);
+} 
+
+/**
  * Replace new lines in a block of text with paragraph tags.
  * 
  * Looks for 2 consecutive line breaks resembling a paragraph break and wraps
