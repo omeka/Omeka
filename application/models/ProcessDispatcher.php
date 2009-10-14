@@ -44,10 +44,30 @@ class ProcessDispatcher
         
         return $process;
     }
-    
+
+    /**
+     * Stops a background process in progress.
+     *
+     * @param Process $process The process to stop.
+     * @return bool True if the process was stopped, false if not.
+     */
     static public function stopProcess(Process $process)
     {
-        
+        if ($process->status == Process::STATUS_STARTING ||
+            $process->status == Process::STATUS_IN_PROGRESS) {
+            $pid = $process->pid;
+            if($pid) {
+                $command = "kill "
+                         . escapeshellarg($pid);
+                exec($command);
+            }
+            // Consider a "STOPPED" status instead.
+            $process->status = Process::STATUS_ERROR;
+            $process->save();
+            return true;
+        } else {
+            return false;
+        }
     }
     
     static public function getPHPCliPath()
@@ -127,6 +147,5 @@ class ProcessDispatcher
     static private function _fork($command) 
     {
         exec("$command > /dev/null 2>&1 &");
-        //echo("$command"); exit;
     }
 }
