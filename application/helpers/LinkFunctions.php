@@ -61,7 +61,7 @@ function link_to_advanced_search($text = 'Advanced Search', $props = array(), $u
         $uri = apply_filters('advanced_search_link_default_uri', uri('items/advanced-search'));
     }
     // Is appending the query string directly a security issue?  We should figure that out.
-    $props['href'] = html_escape($uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : ''));
+    $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
     return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
 }
 
@@ -79,7 +79,7 @@ function link_to_advanced_search($text = 'Advanced Search', $props = array(), $u
 function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
 {
     // Set the link href to the items/browse page.
-    $linkProperties['href'] = html_escape(uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams));
+    $linkProperties['href'] = uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
     return "<a " . _tag_attributes($linkProperties) . ">$text</a>";
 }
 
