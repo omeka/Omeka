@@ -3,7 +3,7 @@
 //<![CDATA[
     Event.observe(window, 'load', function(){
         var testButton = new Element('button', {'type': 'button', 'id': 'test-button'});
-        var loaderGif = new Element('img', {'src': '<?php echo img("loader.gif"); ?>'});
+        var loaderGif = new Element('img', {'src': <?php echo js_escape(img("loader.gif")); ?>});
         var resultDiv = new Element('div', {'id': 'im-result'});
         var imageMagickInput = $('path_to_convert');
         imageMagickInput.insert({'after':resultDiv});

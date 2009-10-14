@@ -53,7 +53,7 @@
             <div id="site-title"><?php echo link_to_admin_home_page(settings('site_title')); ?></div>
             
             <div id="site-info">
-                <p id="welcome">Welcome, <a href="<?php echo html_escape(uri('users/edit/'.current_user()->id)); ?>"><?php echo current_user()->first_name; ?></a> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout">Logout</a></p>
+                <p id="welcome">Welcome, <a href="<?php echo html_escape(uri('users/edit/'.current_user()->id)); ?>"><?php echo html_escape(current_user()->first_name); ?></a> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout">Logout</a></p>
                 <?php if (has_permission('Settings', 'edit')): ?>
                     <a href="<?php echo html_escape(uri('settings')); ?>" id="settings-link">Settings</a>';
 

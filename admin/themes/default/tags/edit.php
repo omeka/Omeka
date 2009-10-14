@@ -12,7 +12,7 @@
     <div class="inputs">
 <select name="old_tag">
     <?php foreach( $tags as $key => $tag ): ?>
-        <option value="<?php echo $tag['id']; ?>"><?php echo $tag['name'];?> (<?php echo $tag['tagCount']; ?>)</option>
+        <option value="<?php echo $tag['id']; ?>"><?php echo html_escape($tag['name']); ?> (<?php echo $tag['tagCount']; ?>)</option>
     <?php endforeach; ?>
 </select>
 </div>

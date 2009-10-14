@@ -102,14 +102,14 @@
             <?php endif; ?>
             
             <?php if(!empty($pluginInfo->description)): ?>
-            <p class="plugin-description"><?php echo $pluginInfo->description; ?></p>
+            <p class="plugin-description"><?php echo html_escape($pluginInfo->description); ?></p>
 		    <?php endif; ?>
 		    
 		    <?php if ($pluginInfo->hasNewVersion): ?>    
-		        <p class="notice plugin-upgrade"><strong>Notice:</strong> You have a new version of <?php echo $pluginInfo->name; ?>. Please upgrade!</p>
+		        <p class="notice plugin-upgrade"><strong>Notice:</strong> You have a new version of <?php echo html_escape($pluginInfo->name); ?>. Please upgrade!</p>
 		    <?php endif; ?>
 		    <?php if ($pluginInfo->meetsOmekaTestedUpTo == false): ?>
-                <p class="notice omeka-tested-up-to"><strong>Notice:</strong> This version of the '<?php echo html_escape($pluginInfo->name); ?>' plugin has only been tested up to Omeka <?php echo (string)get_plugin_ini($pluginInfo->directoryName, 'omeka_tested_up_to'); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</p>
+                <p class="notice omeka-tested-up-to"><strong>Notice:</strong> This version of the '<?php echo html_escape($pluginInfo->name); ?>' plugin has only been tested up to Omeka <?php echo html_escape((string)get_plugin_ini($pluginInfo->directoryName, 'omeka_tested_up_to')); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</p>
             <?php endif; ?>
             </div>
         </td>
@@ -119,17 +119,17 @@
             <?php if ($pluginInfo->hasNewVersion): ?>
                 <?php if (has_permission('Plugins', 'upgrade')): ?>
                     <form action="<?php echo html_escape(uri('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
-                            <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Upgrade</button>
-                            <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
+                            <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo html_escape($pluginInfo->directoryName); ?>">Upgrade</button>
+                            <input type="hidden" name="name" value="<?php echo html_escape($pluginInfo->directoryName); ?>" />
                     </form>
                 <?php endif; ?>
             <?php else: ?>
                 <?php $activateOrDeactivate = ($pluginInfo->active) ? 'deactivate' : 'activate'; ?>
                 <?php if (has_permission('Plugins', 'activate')): ?>
                     <form action="<?php echo html_escape(uri('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
-                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?> submit-medium" value="<?php echo $pluginInfo->directoryName; ?>"><?php echo ($pluginInfo->active) ? 'Deactivate' : 'Activate'; ?>
+                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?> submit-medium" value="<?php echo html_escape($pluginInfo->directoryName); ?>"><?php echo ($pluginInfo->active) ? 'Deactivate' : 'Activate'; ?>
                         </button>
-                        <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
+                        <input type="hidden" name="name" value="<?php echo html_escape($pluginInfo->directoryName); ?>" />
                     </form>                
                 <?php endif; ?>
             <?php endif; ?>   
@@ -137,15 +137,15 @@
                 <form action="<?php echo html_escape(uri(array(
                     'controller'=>'plugins', 
                     'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
-                        <button name="uninstall" type="submit" class="uninstall submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Uninstall</button>
-                        <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
+                        <button name="uninstall" type="submit" class="uninstall submit-medium" value="<?php echo html_escape($pluginInfo->directoryName); ?>">Uninstall</button>
+                        <input type="hidden" name="name" value="<?php echo html_escape($pluginInfo->directoryName); ?>" />
                 </form>                
             <?php endif; ?>     
     <?php else: //The plugin has not been installed yet ?>
         <?php if (has_permission('Plugins', 'install')): ?>
-            <form action="<?php echo html_escape(uri('plugins/install')); ?>" method="post" accept-charset="utf-8">     
-                    <button name="install" type="submit" class="submit-medium" value="<?php echo $pluginInfo->directoryName; ?>">Install</button>
-                    <input type="hidden" name="name" value="<?php echo $pluginInfo->directoryName; ?>" />
+            <form action="<?php echo html_escape(uri('plugins/install')); ?>" method="post" accept-charset="utf-8">
+                    <button name="install" type="submit" class="submit-medium" value="<?php echo html_escape($pluginInfo->directoryName); ?>">Install</button>
+                    <input type="hidden" name="name" value="<?php echo html_escape( $pluginInfo->directoryName); ?>" />
             </form> 
         <?php endif; ?>
     <?php endif; ?>

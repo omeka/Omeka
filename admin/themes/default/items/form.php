@@ -196,7 +196,7 @@ echo js('tiny_mce/tiny_mce');
 
         // note to yourself that this php is hard coded into the javascript
         // you cannot move this javascript to another file even if you wanted to
-        var elementFormPartialUri = "<?php echo uri('items/element-form'); ?>";
+        var elementFormPartialUri = <?php echo js_escape(uri('items/element-form')); ?>;
         params.item_id = "<?php echo item('id'); ?>";
         
         // Make sure that we put in that we want to add one input to the form
