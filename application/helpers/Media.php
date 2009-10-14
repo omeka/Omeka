@@ -212,7 +212,7 @@ class Omeka_View_Helper_Media
             // Wrap in a link that will download the file directly.
             $defaultLinkAttributes = array(
                 'class'=>'download-file', 
-                'href'=>html_escape(file_download_uri($file))
+                'href'=>file_download_uri($file)
                 );
             $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
 
@@ -383,12 +383,12 @@ class Omeka_View_Helper_Media
      **/
     public function audio($file, array $options=array())
     {
-        $path = html_escape($file->getWebPath('archive'));
+        $path = $file->getWebPath('archive');
         
         $linkAttributes = array_merge(array('href'=>$path), (array)$options['linkAttributes']);
         $html = '<object type="'. $file->mime_browser . '" data="' . $path . 
         '" width="' . $options['width'] . '" height="' . $options['height'] . '">
-          <param name="src" value="' . $path . '">
+          <param name="src" value="' . html_escape($path) . '">
           <param name="autoplay" value="' . $options['autoplay'] . '">
           <param name="autoStart" value="' . $options['autoStart'] . '">
           alt : <a ' . _tag_attributes($linkAttributes) . '>' . $file->original_filename . '</a>
