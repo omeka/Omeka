@@ -39,7 +39,7 @@ class ItemsController extends Omeka_Controller_Action
         // If this is set to null, use the default items/browse action.
         $this->view->formActionUri = null;
         
-        $this->view->formAttributes = array('id'=>'search');
+        $this->view->formAttributes = array('id'=>'advanced-search-form');
     }
     
     protected function _getItemElementSets()

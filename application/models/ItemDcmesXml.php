@@ -21,14 +21,14 @@ class ItemDcmesXml
 
     public function recordToDcmesXml($item)
     {
-        $xml = "\n" . '<rdf:Description rdf:about="' . abs_item_uri($item) . '">';
+        $xml = "\n" . '<rdf:Description rdf:about="' . xml_escape(abs_item_uri($item)) . '">';
         // Iterate throught the DCMES.
         foreach ($this->_dcElements as $elementName) {
-            if ($text = item('Dublin Core', $elementName, 'all')) {
+            if ($text = item('Dublin Core', $elementName, array('all'=>true, 'no_escape'=>true))) {
                 foreach ($text as $k => $v) {
                     if (!empty($v)) {
-                        $xml .= "\n" . '<dc:' . strtolower($elementName) . '><![CDATA[' 
-                            . $v . ']]></dc:' . strtolower($elementName) . '>';
+                        $xml .= "\n" . '<dc:' . strtolower($elementName) . '>' 
+                            . xml_escape($v) . '</dc:' . strtolower($elementName) . '>';
                     }
                 }
             }

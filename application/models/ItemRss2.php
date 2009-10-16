@@ -34,7 +34,7 @@ class ItemRss2
         // How do we determine what title to give the RSS feed?        
         $headers['title'] = settings('site_title');
         
-        $headers['link'] = html_escape('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        $headers['link'] = xml_escape('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
         $headers['lastUpdate'] = time();
         $headers['charset'] = "UTF-8";    
         
@@ -67,11 +67,12 @@ class ItemRss2
     {        
         $entry = array();
         set_current_item($item);
-        $entry['title'] = strip_tags(item('Dublin Core', 'Title'));
+        
+        // Title is a CDATA section, so no need for extra escaping.
+        $entry['title'] = strip_formatting(item('Dublin Core', 'Title', array('no_escape'=>true)));
         $entry['description'] = $this->buildDescription($item);
         
-        //Permalink (this is kind of duplicated elsewhere)
-        $entry['link'] = html_escape(abs_item_uri($item));
+        $entry['link'] = xml_escape(abs_item_uri($item));
                 
         $entry['lastUpdate'] = strtotime($item->added);
                 

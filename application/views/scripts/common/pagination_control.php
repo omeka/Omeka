@@ -5,6 +5,7 @@
     <!-- First page link --> 
     <li class="pagination_first">
     <a href="<?php echo html_escape($this->url(array('page' => $this->first), null, $_GET)); ?>">First</a>
+    </li>
     <?php endif; ?>
     
     <?php if (isset($this->previous)): ?>

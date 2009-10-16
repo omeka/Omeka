@@ -64,7 +64,7 @@
 </div>
     
 <?php else: ?>
-    <h1>The query searched <?php total_items(); ?> items and returned no results.</h1>
+    <h1>The query searched <?php echo total_items(); ?> items and returned no results.</h1>
 <?php endif; ?>
 
 <div>

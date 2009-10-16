@@ -15,9 +15,9 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 	
 <form <?php echo _tag_attributes($formAttributes); ?> action="<?php echo html_escape($formActionUri); ?>" method="get">
 	<div id="search-keywords" class="field">    
-		<?php echo label('search','Search for Keywords'); ?>
+		<?php echo label('keyword-search','Search for Keywords'); ?>
 		<div class="inputs">
-		<?php echo text(array('name'=>'search','size' => '40','id'=>'search','class'=>'textinput'),$_REQUEST['search']); ?>
+		<?php echo text(array('name'=>'search','size' => '40','id'=>'keyword-search','class'=>'textinput'),$_REQUEST['search']); ?>
 		</div>
 	</div>
 	<div id="search-narrow-by-fields" class="field">
@@ -99,7 +99,7 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 	</div>
 	<?php endif; ?>
 	<div class="field">
-	<?php echo label('tags', 'Search By Tags'); ?>
+	<?php echo label('tag-search', 'Search By Tags'); ?>
 	<div class="inputs"><?php echo text(array('name'=>'tags','size' => '40','id'=>'tag-search','class'=>'textinput'),$_REQUEST['tags']); ?></div>
 	</div>
 	</div>
@@ -120,7 +120,9 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 	<?php endif; ?>
 	
 	<?php is_admin_theme() ? fire_plugin_hook('admin_append_to_advanced_search') : fire_plugin_hook('public_append_to_advanced_search'); ?>
-	    <input type="submit" class="submit submit-medium" name="submit_search" id="submit_search" value="Search" />
+	<div>
+	    <input type="submit" class="submit submit-medium" name="submit_search" id="submit_search_advanced" value="Search" />
+    </div>
 </form>
 
 <?php if (!$isPartial): ?>

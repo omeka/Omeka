@@ -51,6 +51,8 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      *       length.</li>
      *   <li>'all' => If set to true, this will retrieve an array containing all 
      *       values for a single element rather than a specific value.</li>
+     *   <li>'no_escape' => If true, do not escape the resulting values for HTML
+     * entities.</li>
      * </ul></li>
      * <li>Default string option:
      *     Passing the string 'all' will retrieve an array containing all values 
@@ -81,7 +83,8 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
         }
         
         // Escape the non-HTML text if necessary.
-        $escapedText = $this->_escapeTextHtml($text);
+        $escapedText = (array_key_exists('no_escape', $options) && $options['no_escape'])
+                     ? $text : $this->_escapeTextHtml($text);
         
         // Apply plugin filters.
         $filteredText = !array_key_exists('no_filter', $options) 
