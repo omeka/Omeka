@@ -400,7 +400,7 @@ class Omeka_View_Helper_Media
      **/
     public function audio($file, array $options=array())
     {
-        $path = html_escape($file->getWebPath('archive'));
+        $path = $file->getWebPath('archive');
         
         $linkAttributes = array_merge(array('href'=>$path), (array)$options['linkAttributes']);
         $html = '<object type="'. $file->mime_browser . '" data="' . $path . 
