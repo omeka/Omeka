@@ -251,8 +251,10 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
         $collectionObj = get_current_collection();
     }
     
-	$text = (!empty($text) ? $text : (!empty($collectionObj->name) ? $collectionObj->name : '[Untitled]'));
-	
+    $collectionName = collection('name', array(), $collectionObj);
+    
+	$text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : '[Untitled]'));
+		
 	return link_to($collectionObj, $action, $text, $props);
 }
 
