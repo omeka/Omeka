@@ -37,9 +37,9 @@ class ProcessDispatcher
         $process->save();
         
         $command = escapeshellcmd($cliPath) . ' '
-                 . self::_getBootstrapFilePath()
-                 . " -p $process->id"
-                 . " -l $lastPhase";
+                 . escapeshellarg(self::_getBootstrapFilePath())
+                 . " -p " . escapeshellarg($process->id)
+                 . " -l " . escapeshellarg($lastPhase);
         self::_fork($command);
         
         return $process;
