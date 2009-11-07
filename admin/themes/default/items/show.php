@@ -104,16 +104,15 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
     <div class="info-panel">
         <h2>Bibliographic Citation</h2>
         <div>
-        <p><?php echo item_citation();?></p>
+            <p><?php echo item_citation();?></p>
         </div>
     </div>
     
         <div id="collection" class="info-panel">
         <h2>Collection</h2>
-        <div>
-           <p><?php if ( item_belongs_to_collection() ) echo item('Collection Name'); else echo 'No Collection'; ?></p>
-
-        </div>
+            <div>
+               <p><?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></p>
+            </div>
         </div>
     
     <div id="tags" class="info-panel">
@@ -125,16 +124,17 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
         <?php if ( has_permission('Items','tag') ): ?>
         
         <h3>My Tags</h3>
-        <div id="my-tags-show">
-        
-        <form id="tags-form" method="post" action="<?php echo html_escape(uri('items/modify-tags/')) ?>">
-            <div class="input">
-            <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id">
-            <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
-            <div id="tag-choices" class="autocomplete"></div>
-            </div>
-            <input type="submit" class="submit submit-medium" name="modify_tags" value="Save Tags" id="tags-submit" />
-        </form>
+        <div id="my-tags-show">        
+            <form id="tags-form" method="post" action="<?php echo html_escape(uri('items/modify-tags/')) ?>">
+                <div class="input">
+                    <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id" />
+                    <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
+                    <div id="tag-choices" class="autocomplete"></div>
+                </div>
+                <div>
+                    <input type="submit" class="submit submit-medium" name="modify_tags" value="Save Tags" id="tags-submit" />
+                </div>
+            </form>
         </div>
         
         <?php endif; ?>
@@ -145,15 +145,14 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
         <h2>View File Metadata</h2>
             <div id="file-list">
                 <?php if(!item_has_files()):?>
-                    <p>There are no files for this item. <?php echo link_to_item('Add some', array(), 'edit'); ?>.</p>
+                    <p>There are no files for this item yet. <?php echo link_to_item('Add a File', array(), 'edit'); ?>.</p>
                 <?php else: ?>
-                <ul>
-            <?php while(loop_files_for_item()): ?>
-                <li><?php echo link_to_file_metadata(array('class'=>'show', 'title'=>'View File Metadata')); ?></li>
-            <?php endwhile; ?>
-
-            </ul>
-            <?php endif;?>
+                    <ul>
+                        <?php while(loop_files_for_item()): ?>
+                            <li><?php echo link_to_file_metadata(array('class'=>'show', 'title'=>'View File Metadata')); ?></li>
+                        <?php endwhile; ?>
+                    </ul>
+                <?php endif;?>
             </div>
     </div>
 

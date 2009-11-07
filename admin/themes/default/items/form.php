@@ -72,9 +72,12 @@ echo js('tiny_mce/tiny_mce');
         var newTags = tags.split(',');
         
         // only add tags from the input box that are new
-        var oldTags = $$('#my-tags-list input.remove_tag').map(function(button){
-           return button.value.strip();
-        });
+        var oldTags = new Array();
+        if ($('my-tags-list')) {
+            oldTags = $$('#my-tags-list input.remove_tag').map(function(button){
+               return button.value.strip();
+            });
+        }
         
         newTags.each(function(tag){
            var strippedTag = tag.strip();
@@ -106,9 +109,21 @@ echo js('tiny_mce/tiny_mce');
         });
         nRTButton.appendChild(img2);
         nRTButton.appendChild(document.createTextNode(tag));
+        
+        Omeka.ItemForm.createMyTagsHeaderAndList();
         $('my-tags-list').appendChild(nRTButton);
         Omeka.ItemForm.updateTagsField();
         return false;
+    },
+
+    createMyTagsHeaderAndList: function() {
+        if (!$('my-tags-list')) {
+            var myTagsHeader = new Element('h3');
+            myTagsHeader.appendChild(document.createTextNode('My Tags'));
+            $('my-tags').appendChild(myTagsHeader);
+            var myTagsUL = new Element('ul', {'id':'my-tags-list'})
+            $('my-tags').appendChild(myTagsUL);
+        }
     },
 
     removeTag: function(button) {
@@ -127,6 +142,7 @@ echo js('tiny_mce/tiny_mce');
     
     // update the tags field to only include the tags that have not been removed
     updateTagsField: function() {
+                
         var myTagsToAdd = new Array();
         var myTagsToDelete = new Array();
         if (rTButtons = $$('#my-tags-list input.remove_tag')) {

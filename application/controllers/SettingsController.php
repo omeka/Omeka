@@ -45,7 +45,7 @@ class SettingsController extends Omeka_Controller_Action
         if (isset($_POST['settings_submit'])) {
             if ($this->_form->isValid($_POST)) {
                 $this->_setOptions();
-                $this->flashSuccess('The settings have been updated.');
+                $this->flashSuccess('The general settings have been updated.');
             } else {
                 $this->flashError('There were errors found in your form. Please edit and resubmit.');
             }

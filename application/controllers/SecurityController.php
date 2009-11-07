@@ -56,7 +56,7 @@ class SecurityController extends Omeka_Controller_Action
             }
             Omeka_Context::getInstance()->setOptions($options);
             
-            $this->flash("Settings have been changed.");
+            $this->flashSuccess("The security settings have been updated.");
         }
         
         $this->view->assign($settings);

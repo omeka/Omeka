@@ -8,7 +8,7 @@
     <h2>Current Theme: &quot;<?php echo html_escape($current->title); ?>&quot;</h2>
 
 <div id="current-theme">
-    <img src="<?php echo html_escape($current->image); ?>" width="342px" />
+    <img src="<?php echo html_escape($current->image); ?>" width="342px" alt="Screenshot for <?php echo html_escape($current->title); ?> Theme" />
     
     <ul>
         <li><span class="type">Author:</span> <span class="value"><?php echo html_escape($current->author); ?></span></li>
@@ -20,7 +20,7 @@
 </div>
 
 <h2>Change Theme</h2>
-<form method="post" id="themeswitch">
+<form method="post" id="themeswitch" action="">
     <div class="themes">
     <?php foreach($themes as $theme): ?>
     <div class="theme<?php if($current == $theme) echo ' current-theme';?>">
@@ -34,12 +34,14 @@
         </ul>
         </div>
         <div class="description">
-        <img src="<?php echo html_escape($theme->image); ?>" width="296px"/>
+        <img src="<?php echo html_escape($theme->image); ?>" width="296px" alt="Screenshot for <?php echo html_escape($theme->title); ?> Theme" />
         </div>
     </div>
     <?php endforeach; ?>
     </div>
-    <input type="submit" name="submit" class="submit submit-medium" id="submit" value="Switch Theme" />
+    <div>
+        <input type="submit" name="submit" class="submit submit-medium" id="submit" value="Switch Theme" />
+    </div>
 </form>
 
 <p class="managethemes">Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices">design your own</a>!</p>

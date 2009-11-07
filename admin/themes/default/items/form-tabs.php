@@ -2,6 +2,7 @@
 $tabs = array();
 foreach ($elementSets as $key => $elementSet) {
     $tabName = $elementSet->name;
+        
     switch ($tabName) {
         case ELEMENT_SET_ITEM_TYPE:
             // Output buffer this form instead of displaying it right away.
@@ -13,13 +14,14 @@ foreach ($elementSets as $key => $elementSet) {
         
         default:
             $tabContent  = '<span class="element-set-description" id="';
-            $tabContent .= text_to_id(html_escape($elementSet->name)) . '-description">'; 
+            $tabContent .= html_escape(text_to_id($elementSet->name) . '-description') . '">';            
             $tabContent .= html_escape($elementSet->description) . '</span>' . "\n\n";
             $tabContent .= display_element_set_form($item, $elementSet->name);
             $tabs[$tabName] = $tabContent;
             break;
     }
 }
+
 foreach (array('Collection', 'Files', 'Tags', 'Miscellaneous') as $tabName) {
     ob_start();
     switch ($tabName) {
@@ -48,7 +50,7 @@ $tabs = apply_filters('admin_items_form_tabs', $tabs, $item);
 <ul id="section-nav" class="navigation tabs">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
         <?php if (!empty($tabContent)): // Don't display tabs with no content. '?>
-            <li><a href="#<?php echo text_to_id(html_escape($tabName));?>-metadata"><?php echo html_escape($tabName); ?></a></li>
+            <li><a href="#<?php echo html_escape(text_to_id($tabName) . '-metadata'); ?>"><?php echo html_escape($tabName); ?></a></li>
         <?php endif; ?>
     <?php endforeach; ?>
 </ul>

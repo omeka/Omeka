@@ -15,26 +15,30 @@
             <p id="add-tags-explanation">Separate tags with commas.</p>
         </div>
         <div id="my-tags">
-            <h3>My Tags</h3>
-            <ul id="my-tags-list">
-                <?php foreach( $myTags as $myTag ): ?>
-                <li class="tag-delete">
-                    <?php echo __v()->formImage('undo-remove-tag-' . $myTag->id, 
-                                                $myTag->name,
-                                                array(
-                                                    'src'   => img('add.png'),
-                                                    'class' => 'undo_remove_tag')); 
-                          echo __v()->formImage('remove-tag-' . $myTag->id,
-                                                $myTag->name,
-                                                array(
-                                                    'src'   => img('delete.gif'),
-                                                    'class' => 'remove_tag')); 
-                          echo html_escape($myTag->name); ?>
-                </li>
-                <?php endforeach; ?>
-            </ul>
+            <?php if ($myTags): ?>
+                <h3>My Tags</h3>
+                <ul id="my-tags-list">
+                    <?php foreach( $myTags as $myTag ): ?>
+                    <li class="tag-delete">
+                        <?php echo __v()->formImage('undo-remove-tag-' . $myTag->id, 
+                                                    $myTag->name,
+                                                    array(
+                                                        'id'    => 'my-undo-remove-tag-' . $myTag->id, 
+                                                        'src'   => img('add.png'),
+                                                        'class' => 'undo_remove_tag')); 
+                              echo __v()->formImage('remove-tag-' . $myTag->id,
+                                                    $myTag->name,
+                                                    array(
+                                                        'id'    => 'my-remove-tag-' . $myTag->id, 
+                                                        'src'   => img('delete.gif'),
+                                                        'class' => 'remove_tag')); 
+                              echo html_escape($myTag->name); ?>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
         </div>
-        <?php if (!empty($otherTags)): ?>
+        <?php if ($otherTags): ?>
             <div id="other-tags">
                 <h3>All Tags</h3>
                 <ul id="other-tags-list">

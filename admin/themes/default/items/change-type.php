@@ -1,4 +1,4 @@
-<span class="element-set-description" id="<?php echo text_to_id(item('Item Type Name')) ?>-description">
+<span class="element-set-description">
     <?php echo html_escape(get_current_item()->Type->description); ?>
 </span>
 <?php 

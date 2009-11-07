@@ -21,8 +21,8 @@
 <?php while (loop_item_types()): ?>
 <?php $itemtype = get_current_item_type();?>
 <tr class="itemtype">
-    <td width="20%"><a href="<?php echo html_escape(record_uri($itemtype, 'show', 'item-types')); ?>"><?php echo html_escape($itemtype->name); ?></a></td>
-    <td width="60%"><?php echo html_escape($itemtype->description); ?></td>
+    <td class="itemtype-name"><a href="<?php echo html_escape(record_uri($itemtype, 'show', 'item-types')); ?>"><?php echo html_escape($itemtype->name); ?></a></td>
+    <td class="itemtype-description"><?php echo html_escape($itemtype->description); ?></td>
     <td><?php echo link_to_items_with_item_type(); ?></td>
     <?php if (has_permission('ItemTypes', 'edit')): ?><td>
         <a class="edit" href="<?php echo html_escape(uri('item-types/edit/'.$itemtype->id)); ?>">Edit</a>

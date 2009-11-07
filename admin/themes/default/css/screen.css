@@ -282,6 +282,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         #add-tags {float:left; width: 252px; padding:18px 18px 0; background: #F2F1E8;}
           #tags {border-color: #bbb; margin-bottom:5px;}
           #add-tags-explanation {font-size:1.1em; color: #777;margin-top:0; margin-left:0px;}
+          
+        #api, #resources { display:none; }
     
     /* Files Show Page */
     
@@ -321,6 +323,10 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         #element-choice a.active {background: #389;border-bottom-color: #389;}
         
         #add-element-form input, #add-element-form textarea, #add-element-form select {border-color: #99C4CC;}
+
+    td.itemtype-name { width: 20%;}
+    td.itemtype-description { width: 60%;}
+
     
     /* Settings */
     #settings-form .submit {float:right;}
@@ -334,6 +340,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #settings-form .textinput {display:inline; width: 400px;}
     #settings-form #path_to_convert {width: 350px;}
     #settings-form .hint {margin: 4px 0 0 200px;}
+    
+    /* Element Sets */
+    td.element-set-name {width: 30%; }
     
     /* Security */
     #security-form .inputs button {float:none;background-color: #389; margin-right: 6px; border-color: #389;}

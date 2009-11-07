@@ -17,7 +17,7 @@
         <tr>
             <?php $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File'); ?>
             
-            <td width="30%">
+            <td class="element-set-name">
                 <?php echo html_escape($elementSet->name); ?>
             </td>
             <td>

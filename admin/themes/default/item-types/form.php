@@ -68,7 +68,7 @@
     <legend>Item Type Information <span id="required-note">* Required Fields</span></legend>
     
     <div class="field">
-        <?php echo label(array('for' =>'name', 'class' => 'required'),'Name'); ?>
+        <?php echo label(array('name'=>'name', 'class' => 'required'),'Name'); ?>
         <div class="inputs">
         <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name); ?>
         </div>
@@ -80,7 +80,7 @@
         </div>
     </div>
 </fieldset>
-<?php if($itemtype->exists()): ?>
+<?php if ($itemtype->exists()): ?>
 
 <fieldset id="type-elements">
     <legend>Elements</legend>

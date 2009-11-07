@@ -25,7 +25,9 @@ $$('.tabs').each(function(tab_group){
 
     <form method="post" enctype="multipart/form-data" id="item-form" action="">
         <?php include 'form.php'; ?>
+        <div>
             <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit submit-medium'), 'Save Changes'); ?>
+        </div>
         <p id="delete_item_link">
             <?php echo link_to_item('Delete This Item', 
                 array('class'=>'delete'), 'delete'); ?>
