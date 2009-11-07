@@ -256,20 +256,24 @@ class Omeka_View_Helper_Media
         
         /** 
          * Setting a variable for content for the alt attribute for images.
-         * Problem with alternative text is that it shoudl describe what's going
-         * on in the image, so should use the file description first. Item title 
-         * usually doesn't describe what's in the image specifically, but is provided 
-         * as a last resort.
+         * Problem with alternative text is that it should describe what's going
+         * on in the image, so should use the following in this order:
+         * 1. alt option 
+         * 2. file description
+         * 3. file title 
+         * 4. item title
          **/
-        if (!empty($file->description)) {
-            $alt = $file->description;
-        }
-        elseif (!empty($file->title)) {
-            $alt = $file->title;
-        }
-        else {
+                        
+        if (isset($options['alt'])) {
+            $alt = $options['alt'];
+            unset($options['alt']);
+        } elseif ($fileDescription = item_file('Dublin Core', 'Description', array(), $file)) {
+            $alt = $fileDescription;
+        } elseif ($fileTitle = item_file('Dublin Core', 'Title', array(), $file)) {
+            $alt = $fileTitle;
+        } else {
             try {
-                $alt = $item_title = item('Dublin Core', 'Title');
+                $alt = item('Dublin Core', 'Title');
                 //  Suppress errors b/c get_current_item()
                 // throws an exception.  There should be a has_current_item() helper
                 // to avoid this sort of thing.    
