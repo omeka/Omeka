@@ -216,7 +216,7 @@ class Plugin extends Omeka_Record
     public function setRequiredPlugins($plugins)
     {
         if (is_string($plugins)) {
-            $plugins = array_map('trim', explode(',', $plugins));
+            $plugins = array_filter(array_map('trim', explode(',', $plugins)));
         }
         $this->_requiredPlugins = (array)$plugins;
         return $this;
@@ -239,7 +239,7 @@ class Plugin extends Omeka_Record
     public function setOptionalPlugins($plugins)
     {
         if (is_string($plugins)) {
-            $plugins = array_map('trim', explode(',', $plugins));
+            $plugins = array_filter(array_map('trim', explode(',', $plugins)));
         }
         $this->_optionalPlugins = (array)$plugins;
         return $this;
@@ -261,7 +261,7 @@ class Plugin extends Omeka_Record
     public function setIniTags($tags)
     {
         if (is_string($tags)) {
-            $tags = array_map('trim', explode(',', $tags));
+            $tags = array_filter(array_map('trim', explode(',', $tags)));
         }
         $this->_iniTags = (array)$tags;
         return $this;
