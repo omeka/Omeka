@@ -121,7 +121,7 @@ class Omeka_Plugin_Loader
                 // If we can't find one of the required plugins, loading should
                 // fail.
                 if ($force) {
-                    throw new Omeka_Plugin_Loader_Exception("'$requiredPluginDirName' required plugin could not be found.");
+                    throw new Omeka_Plugin_Loader_Exception("The required plugin '$requiredPluginDirName' could not be found.");
                 } else {
                     return;
                 }
