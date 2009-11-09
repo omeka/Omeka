@@ -67,7 +67,7 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
             $this->loader->load($this->pluginFoobar, true);
             $this->fail("Should have thrown an exception when could not load 'NonExistentPlugin'.");
         } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->assertContains("'NonExistentPlugin' required plugin could not be found.", $e->getMessage());
+            $this->assertContains("The required plugin 'NonExistentPlugin' could not be found.", $e->getMessage());
         }
     }
     
