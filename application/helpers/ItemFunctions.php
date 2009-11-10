@@ -394,11 +394,9 @@
      $width = @$props['width'];
      $height = @$props['height'];
 
-     $defaultProps = array('alt'=>html_escape(item('Dublin Core', 'Title', array(), $item)));
-     $props = array_merge($defaultProps, $props);
      require_once 'Media.php';
      $media = new Omeka_View_Helper_Media;
-     return $media->archive_image($imageFile, $props, $width, $height, $imageType ); 
+     return $media->archive_image($imageFile, $props, $width, $height, $imageType); 
  }
  
  /**

@@ -248,38 +248,9 @@ class Omeka_View_Helper_Media
      * options include: 'imageSize'
      * @return string HTML for display
      **/
-
-    
     public function image($file, array $options=array())
     {
         $html = '';
-        
-        /** 
-         * Setting a variable for content for the alt attribute for images.
-         * Problem with alternative text is that it should describe what's going
-         * on in the image, so should use the following in this order:
-         * 1. alt option 
-         * 2. file description
-         * 3. file title 
-         * 4. item title
-         **/
-                        
-        if (isset($options['alt'])) {
-            $alt = $options['alt'];
-            unset($options['alt']);
-        } elseif ($fileDescription = item_file('Dublin Core', 'Description', array(), $file)) {
-            $alt = $fileDescription;
-        } elseif ($fileTitle = item_file('Dublin Core', 'Title', array(), $file)) {
-            $alt = $fileTitle;
-        } else {
-            try {
-                $alt = item('Dublin Core', 'Title');
-                //  Suppress errors b/c get_current_item()
-                // throws an exception.  There should be a has_current_item() helper
-                // to avoid this sort of thing.    
-            } catch (Exception $e) {} 
-        }
-        
         $imgHtml = '';
         
         // Should we ever include more image sizes by default, this will be 
@@ -304,7 +275,7 @@ class Omeka_View_Helper_Media
             // 'imageSize' option.
             $imgHtml = $this->$imageSize($file, $imgAttributes);
         }    
-		
+				
 		$html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);	
 		
 		$html = $this->_linkToFile($html, $file, $options);
@@ -586,12 +557,17 @@ class Omeka_View_Helper_Media
         if ($record instanceof File) {
             $filename = $record->getDerivativeFilename();
             $file = $record;
+            $item = $file->getItem();
         } else if ($record instanceof Item) {
-            $file = get_db()->getTable('File')->getRandomFileWithImage($record->id);
+            $item = $record;
+            $file = get_db()->getTable('File')->getRandomFileWithImage($item->id);
             if (!$file) {
                 return false;
             }
             $filename = $file->getDerivativeFilename();
+        } else {
+            // throw some exception?
+            return '';
         }
 
         $path = $file->getPath($format);
@@ -615,7 +591,34 @@ class Omeka_View_Helper_Media
         $props['width'] = $width;
         $props['height'] = $height;
         
+        /** 
+         * Determine alt attribute for images
+         * Should use the following in this order:
+         * 1. alt option 
+         * 2. file description
+         * 3. file title 
+         * 4. item title
+         **/
+        $alt = '';            
+        if (isset($props['alt'])) {
+            $alt = $props['alt'];
+        } elseif ($fileDescription = item_file('Dublin Core', 'Description', array(), $file)) {
+            $alt = $fileDescription;            
+        } elseif ($fileTitle = item_file('Dublin Core', 'Title', array(), $file)) {
+            $alt = $fileTitle;            
+        } else {
+            try {
+                $alt = item('Dublin Core', 'Title', array(), $item);           
+                //  Suppress errors b/c get_current_item()
+                // throws an exception.  There should be a has_current_item() helper
+                // to avoid this sort of thing.    
+           } catch (Exception $e) {} 
+        }
+        $props['alt'] = $alt;
+        
+        // Build the img tag
         $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
+        
         return $html;
     }
 }
