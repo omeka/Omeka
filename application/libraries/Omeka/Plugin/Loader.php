@@ -50,36 +50,49 @@ class Omeka_Plugin_Loader
      */
     public function loadPlugins(array $plugins, $force = false)
     {
-        // Index the entire list of plugins prior to loading them.  The advantage
+        // Register the entire list of plugins prior to loading them.  The advantage
         // to this is that all plugin dependencies will (hopefully) be available
         // to the loader.
         foreach ($plugins as $plugin) {
-            $this->_indexPlugin($plugin);
+            $this->registerPlugin($plugin);
         }
 
         foreach ($plugins as $plugin) {
-            $this->_iniReader->load($plugin);                     
             $this->load($plugin, $force);
         }
     }
     
     /**
-     * Index a plugin so that it can be accessed by other plugins (if necessary)
+     * Register a plugin so that it can be accessed by other plugins (if necessary)
      * during the load process.  
      * 
      * There should only be a single instance of a plugin per directory name.  
-     * Indexing a plugin more than once, i.e. loading a plugin again after the
+     * Registering a plugin more than once, i.e. loading a plugin again after the
      * first time failed, will not cause a problem as long as the same instance
-     * is being indexed.
+     * was registered.
+     *
+     * @param Plugin $plugin
+     * @return void
      */
-    protected function _indexPlugin(Plugin $plugin)
+    public function registerPlugin(Plugin $plugin)
     {
         $dirName = $plugin->getDirectoryName();
-        if (array_key_exists($dirName, $this->_plugins) 
-            && $this->_plugins[$dirName] !== $plugin) {
-            throw new Omeka_Plugin_Loader_Exception("Plugin named '$dirName' has already been loaded/indexed.");
+        if (array_key_exists($dirName, $this->_plugins) && $this->_plugins[$dirName] !== $plugin) {
+            throw new Omeka_Plugin_Loader_Exception("Plugin named '$dirName' has already been loaded/registered.");
         }
         $this->_plugins[$dirName] = $plugin;
+    }
+    
+    /**
+     * Return whether a plugin is registered or not
+     * 
+     * @param Plugin $plugin
+     * @return boolean Whether the plugin is registered or not.
+     */
+    public function isRegistered(Plugin $plugin)
+    {
+        $dirName = $plugin->getDirectoryName();
+        return array_key_exists($dirName, $this->_plugins) && $this->_plugins[$dirName] === $plugin;
     }
                 
     /**
@@ -97,10 +110,11 @@ class Omeka_Plugin_Loader
      **/
     public function load(Plugin $plugin, $force = false, $pluginsWaitingToLoad = array())
     {           
-        $this->_indexPlugin($plugin);
+        $this->registerPlugin($plugin);
+        
+        $this->_iniReader->load($plugin);
         
         $pluginDirName = $plugin->getDirectoryName();
-
         if (!$this->_canLoad($plugin, $force)) {
             return;
         }
@@ -112,10 +126,9 @@ class Omeka_Plugin_Loader
             // Otherwise add the current plugin to the waiting list.
             $pluginsWaitingToLoad[spl_object_hash($plugin)] = $plugin;
         }
-        
-        // Load all of a plugin's dependencies.
+                
+        // Load the required plugins
         $requiredPluginDirNames = $plugin->getRequiredPlugins();
-
         foreach($requiredPluginDirNames as $requiredPluginDirName) {
             if (!($requiredPlugin = $this->getPlugin($requiredPluginDirName))) {
                 // If we can't find one of the required plugins, loading should
@@ -140,6 +153,25 @@ class Omeka_Plugin_Loader
             if (!$requiredPlugin->isLoaded()) {
                 return;
             }
+        }
+        
+        // Load the optional plugins
+        $optionalPluginDirNames = $plugin->getOptionalPlugins();
+        foreach($optionalPluginDirNames as $optionalPluginDirName) {
+
+            if (!($optionalPlugin = $this->getPlugin($optionalPluginDirName))) {
+                // If we can't find one of the optional plugins, it should skip it and try to load the next one.                
+                continue;
+            }
+                        
+            // If the optional plugin is already loaded, do not attempt to load
+            // it a second time.
+            if ($optionalPlugin->isLoaded()) {
+                continue;
+            }            
+            
+            // If the optional plugin cannot load, then fail silently
+            $this->load($optionalPlugin, false, $pluginsWaitingToLoad);
         }
 
         // add the plugin dir paths and require the plugin files
