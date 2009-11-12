@@ -5,7 +5,7 @@
 
 <div id="primary">
     <?php echo flash(); ?>
-    <h2>Current Theme: &quot;<?php echo html_escape($current->title); ?>&quot;</h2>
+    <h2 id="current-theme-title">Current Theme: &quot;<?php echo html_escape($current->title); ?>&quot; <?php if($current->hasConfig): ?><a href="<?php echo html_escape(uri('themes/config?name='.$current->directory)); ?>" class="configure-button button">Configure</a><?php endif; ?></h2>            
 
 <div id="current-theme">
     <img src="<?php echo html_escape($current->image); ?>" width="342px" alt="Screenshot for <?php echo html_escape($current->title); ?> Theme" />
@@ -15,7 +15,6 @@
         <li><span class="type">License:</span> <span class="value"><?php echo html_escape($current->license); ?></span></li>
         <li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo html_escape($current->website); ?>"><?php echo html_escape($current->website); ?></a></span></li>
         <li><span class="type">Description:</span> <span class="value"><?php echo html_escape($current->description); ?></span></li>
-        
     </ul>
 </div>
 

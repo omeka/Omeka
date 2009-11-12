@@ -82,6 +82,13 @@ class ThemesController extends Omeka_Controller_Action
             } else {
                 // Display some sort of warning that the theme doesn't have an ini file
             }
+            
+            // Get the theme's config file
+            $themeConfig = $theme->path.DIRECTORY_SEPARATOR.'config.ini';
+            
+            // If the theme has a config file, set hasConfig to true.
+            $theme->hasConfig = (file_exists($themeConfig) && is_readable($themeConfig));
+            
             return $theme;
         }
         return $themes;
@@ -93,6 +100,16 @@ class ThemesController extends Omeka_Controller_Action
         
         if (!empty($_POST) && $this->isAllowed('switch')) {
             set_option('public_theme', strip_tags($_POST['public_theme']));
+            
+            if(!$this->_getThemeOption($_POST['public_theme'])) {
+                $configForm = $this->_getForm($_POST['public_theme']);
+                if($configForm) {
+                    $formValues = $configForm->getValues();
+                    unset($formValues['submit']);
+                    $this->_setThemeOption($_POST['public_theme'], $formValues);
+                }
+            }
+            
             $this->flashSuccess("The theme has been successfully changed.");
         }
         
@@ -101,5 +118,93 @@ class ThemesController extends Omeka_Controller_Action
         $current = $this->getAvailable($public);
         
         $this->view->assign(compact('current', 'themes'));
+    }
+    
+    /**
+     * Load the configuration form for a specific theme.  
+     * That configuration form will be POSTed back to this URL.
+     *
+     * @return void
+     **/
+    public function configAction()
+    {
+        $themeName = $this->_getParam('name');
+        $configForm = $this->_getForm($themeName);
+        $theme = $this->getAvailable($themeName);
+        
+        if ($this->getRequest()->isPost() && $configForm->isValid($_POST)) {
+            $formValues = $configForm->getValues();
+            unset($formValues['submit']);
+            $this->_setThemeOption($themeName, $formValues);
+        }
+        $this->view->assign(compact('theme','configForm'));
+    }
+    
+    private function _getForm($themeName)
+    {
+        $themeOptionName = 'theme_'.trim(strtolower($themeName)).'_options';
+        $theme = $this->getAvailable($themeName);
+        $themeConfigIni = $theme->path.DIRECTORY_SEPARATOR.'config.ini';
+        
+        if(file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
+        
+            $formElementsIni = new Zend_Config_Ini($themeConfigIni, 'config');
+            $configIni = new Zend_Config(array('elements' => $formElementsIni));
+        
+            $configForm   = new Zend_Form($configIni);
+            $configForm->removeDecorator('HtmlTag');
+        
+            $configForm->setElementDecorators(array(
+                            'ViewHelper', 
+                            array('Description', array('tag' => 'p', 'class' => 'explanation')), 
+                            'Errors', 
+                            array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')), 
+                            'Label', 
+                            array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
+                        )
+                                        );
+                                    
+
+                                    
+            $configForm->addElement(
+                'submit', 
+                'submit', 
+                array(
+                    'label' => 'Submit',
+                    'class' => 'submit submit-medium',
+                    'decorators' => array('ViewHelper')
+                )
+            );
+        
+            $themeConfigValues = $this->_getThemeOption($themeName);
+        
+            foreach($themeConfigValues as $key => $value) {
+                if($configForm->getElement($key)) {
+                    $configForm->$key->setValue($value);
+                }
+            }
+        
+            return $configForm;
+        }
+        return null;
+    }
+    
+    private function _setThemeOption($themeName, $formValues)
+    {
+        $themeOptionName = 'theme_'.trim(strtolower($themeName)).'_options';
+        set_option($themeOptionName, serialize($formValues));
+    }
+    
+    private function _getThemeOption($themeName)
+    {
+        $themeOptionName = 'theme_'.trim(strtolower($themeName)).'_options';
+        $themeConfigValues = get_option($themeOptionName);
+        if ($themeConfigValues) {
+            $themeConfigValues = unserialize($themeConfigValues);
+        } else {
+            $themeConfigValues = array();
+        }
+        
+        return $themeConfigValues;
     }
 }

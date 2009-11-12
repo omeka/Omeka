@@ -61,10 +61,34 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     
     #required-note {font-size: 0.6em; color: #777; display: block;}
     
-    /* Submit buttons - different sizes, uses background images */
+    /* Buttons - different sizes, uses background images */
+    /* Submit buttons */
     .submit-extrasmall {width: 46px;}
     .submit-small {width: 70px;}
     .submit-medium {width: 100px;}
+
+    /* Configure button */
+    .configure-button {
+        text-align:center;
+        text-decoration:none;
+        color:#eee !important;
+        font-size:11px;
+        font-family:"Lucida Grande", Verdana, sans-serif;
+        font-weight:bold;
+        margin:9px 0;
+        background: #38c url("../images/glass-btn.png") repeat-x 0 50%; 
+        padding: 4px 8px;
+        width: 80px; 
+        border:none; 
+        border:1px solid #38c;
+        border-radius:4px;
+        -webkit-border-radius:4px;
+        -moz-border-radius:4px;
+        margin-bottom:12px;
+        margin-left:8px;
+        float:none;
+    }
+    .configure-button:hover {background-color: #369;border-color:#369;color:#fff;}
 
     /* Plugins */
     .uninstall {background-color: #800 !important; border-color: #800 !important;}
