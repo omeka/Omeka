@@ -211,11 +211,12 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
             $this->loader->registerPlugin($this->pluginWithSameDir);
         } catch(Omeka_Plugin_Loader_Exception $e) {
             $hasException = true;
+            $this->assertContains("Plugin named 'foobar' has already been loaded/registered.", $e->getMessage());
         }
         $this->assertTrue($hasException, "Should have thrown an exception when it tried to register another plugin object with the same directory.");
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should still be registered after attempting to register another plugin object with same directory.");
     }
-    
+        
     private function _printException($e) 
     {
         echo $e->getMessage() . "\n\n";
