@@ -191,6 +191,10 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 
 table .edit, table .delete, table .researcher, table .super, table .admin, table .contributor {background-position:0px 50%; padding-left:18px;}
 
+
+&#829;
+&amp;#829;
+
 .go,
 .next a
 {background-position:center right; text-align:right;background-repeat:no-repeat; padding:2px 18px 2px 0; text-decoration:none;background-image:url("../images/bullet_go.gif");}
@@ -220,3 +224,8 @@ table .edit, table .delete, table .researcher, table .super, table .admin, table
 .browse-names {background-image:url("../images/group.gif");}
 .add-element {background-image:url("../images/add.png");}
 .remove-element {background-image:url("../images/delete.gif");}
+
+#primary .item-file img,
+#primary .item-file object {
+    max-width: 100%;
+}

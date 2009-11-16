@@ -89,7 +89,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 <?php echo flash(); ?>
 
 <div id="item-images">
-<?php echo display_files_for_item(); ?> 
+<?php echo display_files_for_item(array('imageSize' => 'fullsize')); ?> 
 </div>
 
 <div id="core-metadata" class="showitem">
