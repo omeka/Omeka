@@ -16,6 +16,17 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
 {
     public function init()
     {           
+        $front = Zend_Controller_Front::getInstance();
+        // Because of resource naming conflicts, i.e. both Zend and Omeka 
+        // resource plugins called 'Frontcontroller', there is no easy way to
+        // use the default Zend resource instead of Omeka's.  Situations where
+        // this would be useful include installation of Omeka, or in any future
+        // modules that want to bypass the dependency graph of Omeka in favor
+        // of using the (relatively) simpler Zend Framework defaults.
+        if ($front->getParam('skipOmekaMvc')) {
+            return parent::init();
+        }
+        
         // Plugin broker is required to set plugin-defined response contexts
         $bootstrap = $this->getBootstrap();
         if ($bootstrap->hasPluginResource('PluginBroker')) {
@@ -23,7 +34,6 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         }
                 
         // Front controller
-        $front = Zend_Controller_Front::getInstance();
         $front->addControllerDirectory(CONTROLLER_DIR, 'default');
                                                         
         // Action helpers
