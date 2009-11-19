@@ -36,6 +36,12 @@ class Omeka_Db
     protected $_tables = array();
     
     /**
+     * @var Zend_Log|null The logger to use for logging SQL queries.  If not set,
+     * no logging will be done.
+     */
+    private $_logger;
+    
+    /**
      * @param Zend_Db_Adapter $conn A connection object courtesy of Zend Framework
      * @param string $prefix The prefix for the database (if applicable)
      * @return void
@@ -44,8 +50,6 @@ class Omeka_Db
     {   
         $this->_conn = $conn;        
         $this->prefix = (string) $prefix;        
-        
-        $this->_log = $this->loggingEnabled();        
     }
     
     /**
@@ -69,11 +73,10 @@ class Omeka_Db
                 
         return call_user_func_array(array($this->_conn, $m), $a);
     }
-        
-    private function loggingEnabled()
+    
+    public function setLogger($logger)
     {
-        $config = Omeka_Context::getInstance()->getConfig('basic');
-        return (bool) $config->log->sql;
+        $this->_logger = $logger;
     }
     
     /**
@@ -219,8 +222,8 @@ class Omeka_Db
     
     protected function log($sql)
     {
-        if ($this->_log && $logger = Omeka_Context::getInstance()->getLogger()) {
-            $logger->debug((string) $sql);
+        if ($this->_logger) {
+            $this->_logger->debug((string) $sql);
         }
     }
     
