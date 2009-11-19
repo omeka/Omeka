@@ -104,143 +104,102 @@ class SettingsController extends Omeka_Controller_Action
     {
         // http://framework.zend.com/manual/en/zend.form.quickstart.html
         // http://devzone.zend.com/article/3450
-        $form = new Zend_Form;
+        $form = new Omeka_Form;
         $form->setMethod('post');
         $form->setAttrib('id', 'settings-form');
-        $form->removeDecorator('HtmlTag');
-        
-        // Add form elements.
-        $elementDecorators = array('ViewHelper', 
-                                   'Errors', 
-                                   'Description',
-                                   'Label', 
-                                   array(array('data' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field')));
         
         $form->addElement('text', 'site_title', array(
             'label' => 'Site Title', 
-            'class' => 'textinput',
-            'value' => get_option('site_title'), 
-            'decorators' => $elementDecorators
+            'value' => get_option('site_title')
         ));
         
         $form->addElement('textarea', 'description', array(
             'label' => 'Site Description', 
-            'class' => 'textinput',
-            'value' => get_option('description'), 
-            'decorators' => $elementDecorators
+            'value' => get_option('description')
         ));
         
         $form->addElement('text', 'administrator_email', array(
             'label' => 'Administrator Email',
-            'class' => 'textinput',
-            
             'value' => get_option('administrator_email'), 
             'validators' => array('EmailAddress'), 
-            'required' => true, 
-            'decorators' => $elementDecorators
+            'required' => true
         ));
         
         $form->addElement('text', 'copyright', array(
             'label' => 'Site Copyright Information',
-            'class' => 'textinput',
-            'value' => get_option('copyright'), 
-            'decorators' => $elementDecorators
+            'value' => get_option('copyright')
         ));
         
         $form->addElement('text', 'author', array(
             'label' => 'Site Author Information',
-            'class' => 'textinput', 
-            'value' => get_option('author'), 
-            'decorators' => $elementDecorators
+            'value' => get_option('author')
         ));
         
         $form->addElement('text', 'fullsize_constraint', array(
             'label' => 'Fullsize Image Size',
-            'class' => 'textinput',
             'description' => 'Maximum fullsize image size constraint (in pixels).', 
             'value' => get_option('fullsize_constraint'), 
             'validators' => array('Digits'), 
-            'required' => true, 
-            'decorators' => $elementDecorators
+            'required' => true
         ));
         
         $form->addElement('text', 'thumbnail_constraint', array(
             'label' => 'Thumbnail Size',
-            'class' => 'textinput',
             'description' => 'Maximum thumbnail size constraint (in pixels).', 
             'value' => get_option('thumbnail_constraint'), 
             'validators' => array('Digits'), 
-            'required' => true, 
-            'decorators' => $elementDecorators
+            'required' => true
         ));
         
         $form->addElement('text', 'square_thumbnail_constraint', array(
             'label' => 'Square Thumbnail Size', 
-            'class' => 'textinput',
             'description' => 'Maximum square thumbnail size constraint (in pixels).', 
             'value' => get_option('square_thumbnail_constraint'), 
             'validators' => array('Digits'), 
-            'required' => true, 
-            'decorators' => $elementDecorators
+            'required' => true
         ));
         
         $form->addElement('text', 'per_page_admin', array(
             'label' => 'Items Per Page (admin)', 
-            'class' => 'textinput',
             'description' => 'Limit the number of items displayed per page in the administrative interface.', 
             'value' => get_option('per_page_admin'), 
             'validators' => array('Digits'), 
-            'required' => true, 
-            'decorators' => $elementDecorators
+            'required' => true
         ));
         
         $form->addElement('text', 'per_page_public', array(
             'label' => 'Items Per Page (public)', 
-            'class' => 'textinput',
             'description' => 'Limit the number of items displayed per page in the public interface.', 
             'value' => get_option('per_page_public'), 
             'validators' => array('Digits'), 
-            'required' => true, 
-            'decorators' => $elementDecorators
+            'required' => true
         ));
         
         $form->addElement('checkbox', 'show_empty_elements', array(
             'label' => 'Show Empty Elements',
             'class' => 'checkbox',
-            'value' => get_option('show_empty_elements'),
-            'decorators' => $elementDecorators
+            'value' => get_option('show_empty_elements')
         ));
 
         $form->addElement('text', 'path_to_convert', array(
             'label' => 'Imagemagick Directory Path', 
-            'class' => 'textinput',
-            'value' => get_option('path_to_convert'), 
-            'decorators' => $elementDecorators
+            'value' => get_option('path_to_convert') 
         ));
         
         $form->addElement('submit', 'settings_submit', array(
-            'label' => 'Save Settings', 
-            'class' => 'submit',
-            'decorators' => array('Tooltip', 'ViewHelper')
+            'label' => 'Save Settings'
         ));
-
-        // Add fieldsets.
-        $displayGroupDecorators = array('FormElements', 'Fieldset');
         
         $form->addDisplayGroup(
             array('administrator_email', 'site_title', 'description', 
                   'copyright', 'author', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
                   'per_page_admin', 'per_page_public', 'show_empty_elements', 'path_to_convert'), 
-            'site_settings', 
-            array('decorators' => $displayGroupDecorators)
-        );
+            'site_settings');
         
         $form->addDisplayGroup(
             array('settings_submit'), 
-            'submit', 
-            array('decorators' => $displayGroupDecorators)
-        );
+            'submit');
         
         $this->_form = $form;
     }

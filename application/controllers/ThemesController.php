@@ -151,28 +151,13 @@ class ThemesController extends Omeka_Controller_Action
             $formElementsIni = new Zend_Config_Ini($themeConfigIni, 'config');
             $configIni = new Zend_Config(array('elements' => $formElementsIni));
         
-            $configForm   = new Zend_Form($configIni);
-            $configForm->removeDecorator('HtmlTag');
-        
-            $configForm->setElementDecorators(array(
-                            'ViewHelper', 
-                            array('Description', array('tag' => 'p', 'class' => 'explanation')), 
-                            'Errors', 
-                            array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')), 
-                            'Label', 
-                            array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
-                        )
-                                        );
-                                    
-
+            $configForm   = new Omeka_Form($configIni);
                                     
             $configForm->addElement(
                 'submit', 
                 'submit', 
                 array(
-                    'label' => 'Submit',
-                    'class' => 'submit submit-medium',
-                    'decorators' => array('ViewHelper')
+                    'label' => 'Submit'
                 )
             );
         
