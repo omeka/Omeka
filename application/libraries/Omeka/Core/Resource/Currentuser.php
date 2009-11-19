@@ -26,6 +26,12 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
             $bootstrap->bootstrap('Db');
             $db = $bootstrap->getResource('Db');
             $user = $db->getTable('User')->find($user->id);
+            if (!$user) {
+                // If we can't retrieve the User from the database, it likely
+                // means that this user has been deleted.  In this case, do not
+                // allow the user to stay logged in.
+                $auth->clearIdentity();
+            }
         } 
 
         return $user;
