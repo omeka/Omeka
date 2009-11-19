@@ -135,9 +135,14 @@ class Omeka_Db
             $table = new Omeka_Db_Table($class, $this);
         }
         
-        $this->_tables[$class] = $table;
+        $this->setTable($class, $table);
         
         return $table;
+    }
+    
+    public function setTable($alias, Omeka_Db_Table $table)
+    {
+        $this->_tables[$alias] = $table;
     }
     
     /**
