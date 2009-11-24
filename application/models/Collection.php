@@ -83,9 +83,10 @@ class Collection extends Omeka_Record
         $options = array('inputNamespace'=>'Omeka_Filter');
         
         // User form input does not allow HTML tags or superfluous whitespace
-        $filters = array('*'        => array('StripTags','StringTrim'),
-                         'public'   => 'Boolean',
-                         'featured'   => 'Boolean');
+        $filters = array('name'         => array('StripTags','StringTrim'),
+                         'description'  => array('StringTrim'),
+                         'public'       => 'Boolean',
+                         'featured'     => 'Boolean');
             
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         
