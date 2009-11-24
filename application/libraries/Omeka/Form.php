@@ -27,6 +27,8 @@ class Omeka_Form extends Zend_Form
     
     public function init()
     {
+        $this->addElementPrefixPath('Omeka_', 'Omeka/');
+        
         // <div class="field">
         //     <label for="whatever">Label Name</label>
         // 
