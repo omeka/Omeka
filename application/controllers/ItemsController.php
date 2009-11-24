@@ -71,6 +71,18 @@ class ItemsController extends Omeka_Controller_Action
         $this->forbiddenAction();
     }
     
+    protected function _getAddSuccessMessage($record)
+    {
+        $item = $record;
+        return 'The item was successfully added!';        
+    }
+    
+    protected function _getEditSuccessMessage($record)
+    {
+        $item = $record;
+        return 'The item was successfully changed!';
+    }
+    
     public function addAction()
     {
         // Get all the element sets that apply to the item.
@@ -92,6 +104,7 @@ class ItemsController extends Omeka_Controller_Action
             if ($this->isAllowed('deleteAll') 
                 || ($this->isAllowed('deleteSelf') && $item->wasAddedBy($user))) {
                 $item->delete();
+                $this->flashSuccess('The item was successfully deleted!');
                 $this->redirect->goto('browse');
             }
         }
@@ -211,7 +224,7 @@ class ItemsController extends Omeka_Controller_Action
                 // Refresh the item.
                 $item = $this->findById();
             } else {
-                $this->flash('User does not have permission to add tags.');
+                $this->flashError('User does not have permission to add tags.');
             }
         }
         
@@ -279,7 +292,7 @@ class ItemsController extends Omeka_Controller_Action
             $this->flashSuccess('The items were successfully changed!');
             
         } catch (Exception $e) {
-            $this->flash($e->getMessage());
+            $this->flashError($e->getMessage());
         }
         
         $this->redirect->gotoUrl($_SERVER['HTTP_REFERER']);
