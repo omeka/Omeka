@@ -81,7 +81,7 @@ echo js('tiny_mce/tiny_mce');
         
         newTags.each(function(tag){
            var strippedTag = tag.strip();
-           if (!oldTags.include(strippedTag)) {
+           if (strippedTag != "" && !oldTags.include(strippedTag)) {
                Omeka.ItemForm.addTagElement(strippedTag);
            }
         });
@@ -128,14 +128,14 @@ echo js('tiny_mce/tiny_mce');
 
     removeTag: function(button) {
         button.hide();
-        button.parentNode.setOpacity(.3);
+        button.up().setOpacity(.3);
         Omeka.ItemForm.updateTagsField();
         return false;
     },
     
     undoRemoveTag: function(button) {
         button.next('input.remove_tag').show();
-        button.parentNode.setOpacity(1);
+        button.up().setOpacity(1);
         Omeka.ItemForm.updateTagsField();
         return false;
     },
@@ -149,7 +149,7 @@ echo js('tiny_mce/tiny_mce');
             rTButtons.each(function(button) {
                 // decide whether the toggled tag needs to be included
                 var s = button.value.strip();
-                if (button.parentNode.getOpacity() == 1) {
+                if (button.up().getOpacity() == 1) {
                     myTagsToAdd.push(s);
                 } else {
                     myTagsToDelete.push(s);
@@ -162,7 +162,7 @@ echo js('tiny_mce/tiny_mce');
             rTButtons.each(function(button) {
                 // decide whether a toggled tag needs to be added
                 var s = button.value.strip();
-                if (button.parentNode.getOpacity() != 1) {
+                if (button.up().getOpacity() != 1) {
                     otherTagsToDelete.push(s);
                 }
             });  
