@@ -18,6 +18,9 @@ require_once 'PublicFeatured.php';
  **/
 class Collection extends Omeka_Record
 {        
+    const COLLECTION_NAME_MIN_CHARACTERS = 1;
+    const COLLECTION_NAME_MAX_CHARACTERS = 255;
+    
     public $name;
     public $description = '';
     public $public = 0;
@@ -70,14 +73,39 @@ class Collection extends Omeka_Record
         return ($this->exists()) ? $this->getRelatedEntities('collector') : array();
     }
 
-    protected function _validate()
+    /**
+     * @duplication Mostly duplicated in Item::filterInput()
+     *
+     * @return void
+     **/
+    protected function filterInput($post)
     {
-        if (empty($this->name)) {
-            $this->addError('name', 'Collection must be given a valid name.');
+        $options = array('inputNamespace'=>'Omeka_Filter');
+        
+        // User form input does not allow HTML tags or superfluous whitespace
+        $filters = array('*'        => array('StripTags','StringTrim'),
+                         'public'   => 'Boolean',
+                         'featured'   => 'Boolean');
+            
+        $filter = new Zend_Filter_Input($filters, null, $post, $options);
+        
+        $post = $filter->getUnescaped();
+        
+        if ($post['public']) {
+            $post['public'] = 1;
         }
         
-        if (strlen($this->name) > 255) {
-            $this->addError('name', 'Collection name must be less than 255 characters.');
+        if ($post['featured']) {
+            $post['featured'] = 1;
+        }
+        
+        return $post;
+    }
+
+    protected function _validate()
+    {        
+        if (strlen($this->name) < self::COLLECTION_NAME_MIN_CHARACTERS || strlen($this->name) > self::COLLECTION_NAME_MAX_CHARACTERS) {
+            $this->addError('name', 'The collection name must have between ' . self::COLLECTION_NAME_MIN_CHARACTERS .  ' and ' . self::COLLECTION_NAME_MAX_CHARACTERS .  ' characters.');
         }
     }
     

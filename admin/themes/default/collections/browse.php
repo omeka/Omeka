@@ -5,6 +5,7 @@
 <?php endif; ?>
 
 <div id="primary">
+    <?php echo flash(); ?>
     <?php if (has_collections()): ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
       <?php if (has_collections_for_loop()): ?>

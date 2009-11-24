@@ -14,6 +14,7 @@
 <?php endif; ?>
 
 <div id="primary">
+<?php echo flash(); ?>
 <div id="collection-info">
 <h2>Description</h2> 
 <p><?php echo collection('Description'); ?></p>

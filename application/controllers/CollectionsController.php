@@ -34,6 +34,24 @@ class CollectionsController extends Omeka_Controller_Action
         $this->_modelClass = 'Collection';        
     }
     
+    protected function _getAddSuccessMessage($record)
+    {
+        $collection = $record;
+        return 'The collection "' . $collection->name . '" was successfully added!';        
+    }
+    
+    protected function _getEditSuccessMessage($record)
+    {
+        $collection = $record;
+        return 'The collection "' . $collection->name . '" was successfully changed!';        
+    }
+    
+    protected function _getDeleteSuccessMessage($record)
+    {
+        $collection = $record;
+        return 'The collection "' . $collection->name . '" was successfully deleted!';        
+    }
+    
     /**
      * Ajax Action for removing collectors that are listed under collections.
      * 
