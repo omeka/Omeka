@@ -3,6 +3,7 @@
 <p id="add-user" class="add-button"><?php echo link_to('users', 'add', 'Add a User', array('class'=>'add-user')); ?></p>
 <?php common('settings-nav'); ?>
 <div id="primary">
+<?php echo flash(); ?>
 <form action="<?php echo html_escape(current_uri()); ?>" id="sort-users-form" method="get" accept-charset="utf-8">
     <fieldset>
         <p>Search Users:</p>

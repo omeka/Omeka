@@ -129,13 +129,12 @@ class UsersController extends Omeka_Controller_Action
             $email = $_POST['email'];
             
             if (!Zend_Validate::is($email, 'EmailAddress')) {
-                return $this->flash('The email address you provided is invalid.  Please enter a valid email address.');
+                return $this->flashError('The email address you provided is invalid.  Please enter a valid email address.');
             }
             
             $ua = new UsersActivations;
             
             $user = $this->_table->findByEmail($email);
-            
             
             if ($user) {
                 //Create the activation url
@@ -156,14 +155,14 @@ class UsersController extends Omeka_Controller_Action
                     $header      = 'From: '.$admin_email. "\n" . 'X-Mailer: PHP/' . phpversion();
                     
                     mail($email,$title, $body, $header);
-                    $this->flash('Your password has been emailed');
+                    $this->flashSuccess('Your password has been emailed.');
                 } catch (Exception $e) {
-                      $this->flash('your password has already been sent to your email address');
+                      $this->flashError('Your password has already been sent to your email address.');
                 }
             
             } else {
                 //If that email address doesn't exist
-                $this->flash('The email address you provided does not correspond to an Omeka user.');
+                $this->flashError('The email address you provided does not correspond to an Omeka user.');
             }
         }
     }
@@ -202,21 +201,50 @@ class UsersController extends Omeka_Controller_Action
     public function addAction()
     {
         $user = new User();
-        
         try {
-            if($user->saveForm($_POST)) {
-                
-                //$user->email = $_POST['email'];
+            if ($user->saveForm($_POST)) {                
                 $this->sendActivationEmail($user);
-                
-                $this->flashSuccess('User was added successfully!');
+                $this->flashSuccess('The user "' . $user->username . '" was successfully added!');
                                 
                 //Redirect to the main user browse page
                 $this->redirect->goto('browse');
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
+        } catch (Exception $e) {
+            $this->flashError($e);
         }
+    }
+
+    /**
+     * Similar to 'add' action, except this requires a pre-existing record.
+     * 
+     * The ID For this record must be passed via the 'id' parameter.
+     *
+     * @return void
+     **/
+    public function editAction()
+    {        
+        $user = $this->findById();
+        
+        try {
+            if ($user->saveForm($_POST)) {
+                $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
+                $this->redirect->goto('browse');
+            }
+        } catch (Omeka_Validator_Exception $e) {
+            $this->flashValidationErrors($e);
+        } catch (Exception $e) {
+            $this->flashError($e->getMessage());
+        }
+        
+        $this->view->assign(array('user'=>$user));        
+    }
+    
+    protected function _getDeleteSuccessMessage($record)
+    {
+        $user = $record;
+        return 'The user "' . $user->username . '" was successfully deleted!';
     }
     
     protected function sendActivationEmail($user)

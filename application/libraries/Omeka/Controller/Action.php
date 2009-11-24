@@ -330,16 +330,44 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         
         try {
             if ($record->saveForm($_POST)) {
+                $successMessage = $this->_getAddSuccessMessage($record);
+                if ($successMessage != '') {
+                    $this->flashSuccess($successMessage);
+                }
                 $this->redirect->goto('browse');
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
         } catch (Exception $e) {
-            $this->flash($e->getMessage());
+            $this->flashError($e->getMessage());
         }
 
         $this->view->assign(array($varName=>$record));            
     }
+    
+    /**
+     * Returns the success message for adding a record.  Default is empty string. Subclasses should override it.
+     *
+     * @param $record Omeka_Record
+     * @return string
+     **/
+    protected function _getAddSuccessMessage($record) {return '';}
+    
+    /**
+     * Returns the success message for editing a record.  Default is empty string. Subclasses should override it.
+     *
+     * @param $record Omeka_Record
+     * @return string
+     **/
+    protected function _getEditSuccessMessage($record) {return '';}
+    
+    /**
+     * Returns the success message for deleting a record.  Default is empty string. Subclasses should override it.
+     *
+     * @param $record Omeka_Record
+     * @return string
+     **/
+    protected function _getDeleteSuccessMessage($record) {return '';}     
     
     /**
      * Similar to 'add' action, except this requires a pre-existing record.
@@ -355,13 +383,17 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $record = $this->findById();
         
         try {
-            if ($record->saveForm($_POST)) {    
+            if ($record->saveForm($_POST)) {
+                $successMessage = $this->_getEditSuccessMessage($record);
+                if ($successMessage != '') {
+                    $this->flashSuccess($successMessage);
+                }
                 $this->redirect->goto('show', null, null, array('id'=>$record->id));
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
         } catch (Exception $e) {
-            $this->flash($e->getMessage());
+            $this->flashError($e->getMessage());
         }
         
         $this->view->assign(array($varName=>$record));        
@@ -374,8 +406,13 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      **/
     public function deleteAction()
     {        
-        $record = $this->findById();            
+        $record = $this->findById();         
         $record->delete();
+        
+        $successMessage = $this->_getDeleteSuccessMessage($record);
+        if ($successMessage != '') {
+            $this->flashSuccess($successMessage);
+        }
         $this->redirect->goto('browse');
     }
     

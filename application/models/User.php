@@ -121,58 +121,52 @@ class User extends Omeka_Record {
         // validation.
         if ($entity = $this->Entity) {
             
-            if (empty($entity->institution) and empty($entity->first_name) and empty($entity->last_name)) {
-                $this->addError('institution', 'Name of the institution is required if not providing first/last name.' );
-            }
             // Either need first and last name (or institution name) to validate.
-            else if (empty($entity->institution)) {
-                if (empty($entity->first_name) and empty($this->last_name)) {
-                    $this->addError('name', 'Either first and last name or the name of the institution is required.');
-                }
-                else {
-                    if (empty($entity->first_name)) {
-                        $this->addError('first_name', 'First name is required for user accounts.' );
+            if (trim($entity->institution) == '') {
+                if (trim($entity->first_name) == '' && trim($entity->last_name) == '') {
+                    $this->addError('institution', 'If a first name and last name are not provided, then an institution name is required.');
+                } else {
+                    if (trim($entity->first_name) == '') {
+                        $this->addError('first_name', 'A first name is required.' );
                     }
-                    if (empty($entity->last_name)) {
-                        $this->addError('last_name', 'Last name is required for user accounts.'); 
+                    if (trim($entity->last_name) == '') {
+                        $this->addError('last_name', 'A last name is required.'); 
                     }
                 }
             }
             
             if (!Zend_Validate::is($entity->email, 'EmailAddress')) {
-                $this->addError('email', 'A valid email address is required for users.');
+                $this->addError('email', 'A valid email address is required.');
             }
             
             if (!$this->emailIsUnique($entity->email)) {
                 $this->addError('email', 'That email address has already been claimed by a different user.  Please notify an administrator if you feel this has been done in error.');            
-            }                        
+            }                 
         }    
         
         //Validate the role
-        if (empty($this->role)) {
-            $this->addError('role', 'User must be assigned a valid role.');
+        if (trim($this->role) == '') {
+            $this->addError('role', 'The user must be assigned a role.');
         }
         
         // Validate the username
-        if (strlen($this->username) < self::USERNAME_MIN_LENGTH or strlen($this->username) > self::USERNAME_MAX_LENGTH) {
-            $this->addError('username', "Username must be no more than 30 characters long");
+        if (strlen($this->username) < self::USERNAME_MIN_LENGTH || strlen($this->username) > self::USERNAME_MAX_LENGTH) {
+            $this->addError('username', "The username " . $this->username . " must be between " . self::USERNAME_MIN_LENGTH .  " and " . self::USERNAME_MAX_LENGTH . " characters.");
         }
         
         if (!Zend_Validate::is($this->username, 'Alnum')) {
-            $this->addError('username', "Username must be alphanumeric.");
+            $this->addError('username', "The username must be alphanumeric.");
         }
         
         if (!$this->usernameIsUnique($this->username)) {
-            $this->addError('username', "'{$this->username}' is already in use.  Please choose another.");
+            $this->addError('username', "'{$this->username}' is already in use.  Please choose another username.");
         }
         
         // Validate the password
         $pass = $this->password;
         
-        if (empty($pass)) {
-            $this->addError('password', "Password must not be empty");
-        } else if (strlen($pass) < self::PASSWORD_MIN_LENGTH or strlen($pass) > self::PASSWORD_MAX_LENGTH) {
-            $this->addError('password', "Password must be between " . self::PASSWORD_MIN_LENGTH . " and " . self::PASSWORD_MAX_LENGTH . " characters"); 
+        if (strlen($pass) < self::PASSWORD_MIN_LENGTH || strlen($pass) > self::PASSWORD_MAX_LENGTH) {
+            $this->addError('password', "Password must be between " . self::PASSWORD_MIN_LENGTH . " and " . self::PASSWORD_MAX_LENGTH . " characters."); 
         }
     }
     

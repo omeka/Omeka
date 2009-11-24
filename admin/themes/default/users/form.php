@@ -7,7 +7,7 @@
 <?php echo flash(); ?>
 <fieldset>
 <div class="field">
-    <?php echo label('username','User Name'); ?>
+    <?php echo label('username','Username'); ?>
     <div class="inputs">
     <?php echo text(array('name'=>'username', 'class'=>'textinput', 'size'=>'30','id'=>'username'),$user->username); ?>
     </div>
