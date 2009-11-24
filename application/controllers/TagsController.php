@@ -100,13 +100,18 @@ class TagsController extends Omeka_Controller_Action
         $oldName = $oldTag->name;
         $newNames = $_POST['new_tag'];
         
-        if ($this->isAllowed('edit')) {
-            $oldTag->rename($newTags);
-        } else {
-            $oldTag->rename($newTags, $user->id);
+        try {
+            if ($this->isAllowed('edit')) {
+                $oldTag->rename($newTags);
+            } else {
+                $oldTag->rename($newTags, $user->id);
+            }
+            $this->flashSuccess("Tag named '$oldName' was successfully renamed to '$newNames'.");
+        } catch (Omeka_Validator_Exception $e) {
+            $this->flashValidationErrors($e);
+        } catch(Exception $e) {
+            $this->flashError($e->getMessage());
         }
-        
-        $this->flash("Tag named '$oldName' was successfully renamed to '$newNames'.");
     }
     
     /**

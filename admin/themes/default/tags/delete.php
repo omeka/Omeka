@@ -1,9 +1,8 @@
 <?php head(array('title'=>'Delete Tag', 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
-<?php echo flash(); ?>
-
 <h1>Delete Tag</h1>
 <?php common('tags-nav'); ?>
 <div id="primary">
+<?php echo flash(); ?>
 <?php if (count($tags)): ?>
 <form method="post" action="">
     <div class="field">

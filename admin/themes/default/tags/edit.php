@@ -3,9 +3,8 @@
 <h1>Edit Tag</h1>
 <?php common('tags-nav'); ?>
 <div id="primary">
-<?php if (count($tags)): ?>
 <?php echo flash(); ?>
-    
+<?php if (count($tags)): ?>    
 <form method="post" action="">
     <div class="field">
     <?php echo label('old_tag','Choose a tag to rename'); ?>
