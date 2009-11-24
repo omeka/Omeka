@@ -16,7 +16,10 @@ require_once 'ItemTypesElements.php';
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class ItemType extends Omeka_Record { 
+class ItemType extends Omeka_Record 
+{ 
+    const ITEM_TYPE_NAME_MIN_CHARACTERS = 1;
+    const ITEM_TYPE_NAME_MAX_CHARACTERS = 255;
     
     public $name;
     public $description = '';
@@ -67,14 +70,35 @@ class ItemType extends Omeka_Record {
      **/
     protected function _validate()
     {
-        if (empty($this->name)) {
-            $this->addError('name', 'Item type name must not be blank.');
+        
+        if (strlen($this->name) < self::ITEM_TYPE_NAME_MIN_CHARACTERS || strlen($this->name) > self::ITEM_TYPE_NAME_MAX_CHARACTERS) {
+            $this->addError('name', 'The item type name must have between ' . self::ITEM_TYPE_NAME_MIN_CHARACTERS .  ' and ' . self::ITEM_TYPE_NAME_MAX_CHARACTERS .  ' characters.');
         }
         
         if (!$this->fieldIsUnique('name')) {
-            $this->addError('name', 'That name has already been used for a different Type.');
+            $this->addError('name', 'The item type name must be unique.');
         }
     }
+    
+    /**
+     * @duplication Mostly duplicated in Item::filterInput()
+     *
+     * @return void
+     **/
+     protected function filterInput($post)
+     {
+         $options = array('inputNamespace'=>'Omeka_Filter');
+                 
+         // User form input does not allow superfluous whitespace
+         $filters = array('name' => array('StripTags', 'StringTrim'),
+                          'description' => array('StringTrim'));
+             
+         $filter = new Zend_Filter_Input($filters, null, $post, $options);
+         
+         $post = $filter->getUnescaped();
+         
+         return $post;
+     }
     
     /**
      * Delete all the ItemTypesElements joins
@@ -141,21 +165,23 @@ class ItemType extends Omeka_Record {
     private function _reorderElementsFromPost(&$post)
     {
         $elementPostArray = $post['Elements'];
-        
-        if (!array_key_exists('order', current($elementPostArray))) {
-            throw new Omeka_Record_Exception('Form was submitted in an invalid format!');
-        }
-        
-        // This is how we sort the multi-dimensional array based on the element_order.
-        $ordering = pluck('order', $elementPostArray);
-        $joinRecordArray = $this->ItemTypesElements;        
-        // This is essentially voodoo magic.
-        array_multisort($ordering, SORT_ASC, SORT_NUMERIC, $joinRecordArray);
-        
-        $i = 0;
-        foreach ($joinRecordArray as $key => $joinRecord) {
-            $joinRecord->order = ++$i;
-            $joinRecord->forceSave();
+
+        if ($elementPostArray) {
+            if (!array_key_exists('order', current($elementPostArray))) {
+                throw new Omeka_Record_Exception('Form was submitted in an invalid format!');
+            }
+
+            // This is how we sort the multi-dimensional array based on the element_order.
+            $ordering = pluck('order', $elementPostArray);
+            $joinRecordArray = $this->ItemTypesElements;        
+            // This is essentially voodoo magic.
+            array_multisort($ordering, SORT_ASC, SORT_NUMERIC, $joinRecordArray);
+
+            $i = 0;
+            foreach ($joinRecordArray as $key => $joinRecord) {
+                $joinRecord->order = ++$i;
+                $joinRecord->forceSave();
+            }
         }
     }
     

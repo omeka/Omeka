@@ -38,13 +38,13 @@ class ItemTypesController extends Omeka_Controller_Action
         $itemType = new ItemType();
         try {
             if ($itemType->saveForm($_POST)) {
-                $this->flash('You may now add elements to your new item type.');
+                $this->flashSuccess('The item type "' . $itemType->name . '" was successfully added!  You may now add elements to your new item type.');
                 $this->_redirect("item-types/edit/{$itemType->id}");
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
         } catch (Exception $e) {
-            $this->flash($e->getMessage());
+            $this->flashError($e->getMessage());
         }
         $this->view->assign(array('itemtype' => $itemType));            
     }
