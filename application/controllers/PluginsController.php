@@ -45,12 +45,12 @@ class PluginsController extends Omeka_Controller_Action
     public function configAction()
     {
         $plugin = $this->_getPluginByName();
-        
+
         try {
             $config = $this->_pluginBroker->config($plugin);
         } catch (Exception $e) {
             $this->flashError($e->getMessage());
-            $this->redirect->goto('config', null, null, array('name' => $plugin->getDisplayName()));    
+            $this->redirect->goto('config', null, null, array('name' => $plugin->getDirectoryName()));    
         }
         
         // If the configuration function returns output, then we need to render 
@@ -230,8 +230,8 @@ class PluginsController extends Omeka_Controller_Action
             $this->errorAction();
         }
         
-        // Look for the plugin in the list of loaded plugins.
-        if (!($plugin = $this->_pluginLoader->getPlugin($pluginDirName))) {
+        // Look for the plugin in the list of loaded plugins.        
+        if (!($plugin = $this->_pluginLoader->getPlugin($pluginDirName))) {            
             if ($create) {
                 $plugin = new Plugin;
                 $plugin->name = $pluginDirName;
