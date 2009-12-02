@@ -85,9 +85,19 @@ class TagTable extends Omeka_Db_Table
      * @return void
      **/
     public function sortBy($select, $sortCriteria)
-    {           
+    {
+        
         // make an array of sortCriteria
         $sortCriteria = (array) $sortCriteria;
+        
+        // if the tags are only sorted by most or least, they need a secondary alphabetical sort
+        if (count($sortCriteria) == 1) {
+            if ($sortCriteria[0] == 'most') {
+                $sortCriteria = array('most', 'alpha');
+            } else if ($sortCriteria[0] == 'least') {
+                $sortCriteria = array('least', 'alpha');
+            } 
+        }
         
         // convert sortCriteria into an array of order strings
         $orderStrings = array();
@@ -112,10 +122,13 @@ class TagTable extends Omeka_Db_Table
                     break;
             }
         }
-                
-        if (count($orderStrings) > 0) {
-            $select->order($orderStrings);
+
+        // if no sort criteria is provided, sort tags alphabetically                
+        if (!count($orderStrings)) {
+            $orderStrings[] = 't.name ASC';
         }
+        
+        $select->order($orderStrings);
     }
     
     /**
@@ -192,9 +205,7 @@ class TagTable extends Omeka_Db_Table
             $this->filterByTagNameLike($select, $params['like']);
         }
 
-        if ($params['sort']) {
-            $this->sortBy($select, $params['sort']);
-        }
+        $this->sortBy($select, $params['sort']);
                         
         $select->group("t.id");
     }
