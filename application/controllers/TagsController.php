@@ -37,7 +37,7 @@ class TagsController extends Omeka_Controller_Action
                 $this->editTags($user);
             }
             
-            $tags = $this->getTagsforAdministration();
+            $tags = $this->getTagsForAdministration();
             
             $this->view->assign(compact('tags'));
         }
@@ -72,7 +72,7 @@ class TagsController extends Omeka_Controller_Action
             throw new Exception( 'You have to be logged in to edit tags!' );
         }
         
-        $criteria = array('sort' => 'most');
+        $criteria = array('sort' => 'alpha');
         
         //Having 'rename' permissions really means that user can rename everyone's tags
         if(!$this->isAllowed('rename')) {
