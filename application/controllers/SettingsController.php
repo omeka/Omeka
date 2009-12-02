@@ -109,36 +109,30 @@ class SettingsController extends Omeka_Controller_Action
         $form->setAttrib('id', 'settings-form');
         
         $form->addElement('text', 'site_title', array(
-            'label' => 'Site Title', 
-            'value' => get_option('site_title')
+            'label' => 'Site Title'
         ));
         
         $form->addElement('textarea', 'description', array(
-            'label' => 'Site Description', 
-            'value' => get_option('description')
+            'label' => 'Site Description',
         ));
         
         $form->addElement('text', 'administrator_email', array(
             'label' => 'Administrator Email',
-            'value' => get_option('administrator_email'), 
             'validators' => array('EmailAddress'), 
             'required' => true
         ));
         
         $form->addElement('text', 'copyright', array(
-            'label' => 'Site Copyright Information',
-            'value' => get_option('copyright')
+            'label' => 'Site Copyright Information'
         ));
         
         $form->addElement('text', 'author', array(
-            'label' => 'Site Author Information',
-            'value' => get_option('author')
+            'label' => 'Site Author Information'
         ));
         
         $form->addElement('text', 'fullsize_constraint', array(
             'label' => 'Fullsize Image Size',
             'description' => 'Maximum fullsize image size constraint (in pixels).', 
-            'value' => get_option('fullsize_constraint'), 
             'validators' => array('Digits'), 
             'required' => true
         ));
@@ -146,7 +140,6 @@ class SettingsController extends Omeka_Controller_Action
         $form->addElement('text', 'thumbnail_constraint', array(
             'label' => 'Thumbnail Size',
             'description' => 'Maximum thumbnail size constraint (in pixels).', 
-            'value' => get_option('thumbnail_constraint'), 
             'validators' => array('Digits'), 
             'required' => true
         ));
@@ -154,7 +147,6 @@ class SettingsController extends Omeka_Controller_Action
         $form->addElement('text', 'square_thumbnail_constraint', array(
             'label' => 'Square Thumbnail Size', 
             'description' => 'Maximum square thumbnail size constraint (in pixels).', 
-            'value' => get_option('square_thumbnail_constraint'), 
             'validators' => array('Digits'), 
             'required' => true
         ));
@@ -162,7 +154,6 @@ class SettingsController extends Omeka_Controller_Action
         $form->addElement('text', 'per_page_admin', array(
             'label' => 'Items Per Page (admin)', 
             'description' => 'Limit the number of items displayed per page in the administrative interface.', 
-            'value' => get_option('per_page_admin'), 
             'validators' => array('Digits'), 
             'required' => true
         ));
@@ -170,20 +161,17 @@ class SettingsController extends Omeka_Controller_Action
         $form->addElement('text', 'per_page_public', array(
             'label' => 'Items Per Page (public)', 
             'description' => 'Limit the number of items displayed per page in the public interface.', 
-            'value' => get_option('per_page_public'), 
             'validators' => array('Digits'), 
             'required' => true
         ));
         
         $form->addElement('checkbox', 'show_empty_elements', array(
             'label' => 'Show Empty Elements',
-            'class' => 'checkbox',
-            'value' => get_option('show_empty_elements')
+            'class' => 'checkbox'
         ));
 
         $form->addElement('text', 'path_to_convert', array(
-            'label' => 'Imagemagick Directory Path', 
-            'value' => get_option('path_to_convert') 
+            'label' => 'Imagemagick Directory Path'
         ));
         
         $form->addElement('submit', 'settings_submit', array(
@@ -200,6 +188,8 @@ class SettingsController extends Omeka_Controller_Action
         $form->addDisplayGroup(
             array('settings_submit'), 
             'submit');
+        
+        $form->setDefaults(Omeka_Context::getInstance()->getOptions());
         
         $this->_form = $form;
     }
