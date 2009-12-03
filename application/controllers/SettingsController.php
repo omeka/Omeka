@@ -88,14 +88,21 @@ class SettingsController extends Omeka_Controller_Action
         }
         if (!is_dir($dirToIm)) {
             return false;
-        }
+        }        
         // Append the binary to the given path.
-        $fullPath = rtrim($dirToIm, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR 
+        $filePath = rtrim($dirToIm, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR 
                   . Omeka_File_Derivative_Image::IMAGEMAGICK_COMMAND;
         
-        // Attempt to run the ImageMagick binary (no arguments).
-        exec($fullPath, $output, $returnCode);
-        
+        //Make sure the file is executable
+        if (!is_executable($filePath)) {
+            return false;
+        }
+                        
+        // Attempt to run the ImageMagick binary with the version argument
+        // If you try to run it without any arguments, it returns an error code
+        $fullPath = $filePath . ' -version';
+        exec($fullPath, $output, $returnCode);        
+                
         // A return value of 0 indicates the binary is working correctly.
         return !(int)$returnCode;
     }
