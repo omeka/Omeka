@@ -88,6 +88,16 @@ class Omeka_Form extends Zend_Form
                 $this->_addClassNameToElement($element, 'textinput');
             } else if ($element instanceof Zend_Form_Element_Password) {
                 $this->_addClassNameToElement($element, 'textinput');
+            } else if ($element instanceof Zend_Form_Element_File) {       
+                $this->_addClassNameToElement($element, 'fileinput');
+                $element->setDecorators(array(
+                    'File', 
+                    'Errors', 
+                    array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')), 
+                    array('Description', array('tag' => 'p', 'class' => 'explanation')), 
+                    'Label', 
+                    array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
+                ));
             }
         }
     }
@@ -115,7 +125,7 @@ class Omeka_Form extends Zend_Form
     private function _addClassNameToElement(Zend_Form_Element $element, $className)
     {
         $existingClassName = $element->getAttrib('class');
-        $newClassName = (strpos($existingClassName, 'textinput') !== false) ? $existingClassName : "$existingClassName $className";
+        $newClassName = (strpos($existingClassName, $className) !== false) ? $existingClassName : "$existingClassName $className";
         $element->setAttrib('class', $newClassName);
     }
 }
