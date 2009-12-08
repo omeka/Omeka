@@ -240,8 +240,10 @@ class Installer
     /**
      * @param array $values Set of values required by the installer.  Usually
      * passed in via the form.
+     * @param boolean $createUser Whether or not to create a new user along with
+     * this installation.  Defaults to true.
      */
-    public function install(array $values)
+    public function install(array $values, $createUser = true)
     {
         $db = $this->_db;
         
@@ -253,23 +255,26 @@ class Installer
             $this->_db->execBlock($installSql);
         }
         
-        $entitySql = "
-        INSERT INTO {$this->_db->Entity} (
-            email, 
-            first_name, 
-            last_name
-        ) VALUES (?, ?, ?)";
-        $this->_db->exec($entitySql, array($values['super_email'], 'Super', 'User'));
+        if ($createUser) {
+            $entitySql = "
+            INSERT INTO {$this->_db->Entity} (
+                email, 
+                first_name, 
+                last_name
+            ) VALUES (?, ?, ?)";
+            $this->_db->exec($entitySql, array($values['super_email'], 'Super', 'User'));
+
+            $userSql = "
+            INSERT INTO {$this->_db->User} (
+                username, 
+                password, 
+                active, 
+                role, 
+                entity_id
+            ) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
+            $this->_db->exec($userSql, array($values['username'], $values['password']));
+        }
         
-        $userSql = "
-        INSERT INTO {$this->_db->User} (
-            username, 
-            password, 
-            active, 
-            role, 
-            entity_id
-        ) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
-        $this->_db->exec($userSql, array($values['username'], $values['password']));
         
         // Insert options.
         $optionSql = "
