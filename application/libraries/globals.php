@@ -643,6 +643,33 @@ function is_true($value)
 }
 
 /**
+ * Gets the theme option from the Options table.
+ * 
+ * @param string $optionName. The name of the option to get
+ * @param string $theme The name of the theme
+ * @return string HTML
+ */
+function get_theme_option($optionName, $theme = null)
+{
+    if (!$theme) {
+        $theme = get_option('public_theme');
+    }
+    
+    $optionName = Inflector::underscore($optionName);
+    
+    $themeOptionName = 'theme_'.trim(strtolower($theme)).'_options';
+    
+    if ($themeOptions = get_option($themeOptionName)) {
+        $themeOptions = unserialize($themeOptions);
+    }
+    
+    if (array_key_exists($optionName, $themeOptions)) {        
+        return $themeOptions[$optionName];
+    }
+    
+    return null;
+}
+/**
  * Returns an array of role names
  * 
  * @return array

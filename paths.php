@@ -9,7 +9,7 @@
  **/
 
 // Define the current migration.
-define('OMEKA_MIGRATION', 42);
+define('OMEKA_MIGRATION', 43);
 
 // Define the current version.
 define('OMEKA_VERSION', '1.1');
@@ -51,6 +51,7 @@ $site['views']             = 'views';
 $site['scripts']           = 'scripts';
 $site['migrations']        = 'migrations';
 $site['install']           = 'install';
+$site['theme_uploads']     = 'theme_uploads';
 
 // Define directory path constants:
 define('BASE_DIR',         dirname(__FILE__));
@@ -74,6 +75,8 @@ define('THUMBNAIL_DIR',        ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['thumbn
 define('SQUARE_THUMBNAIL_DIR', ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['square_thumbnails']);
 define('FULLSIZE_DIR',         ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['fullsize']);
 define('FILES_DIR',            ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['files']);
+define('THEME_UPLOADS_DIR',    ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['theme_uploads']);
+
 
 define('BACKGROUND_BOOTSTRAP_PATH', CORE_DIR . DIRECTORY_SEPARATOR . 'background.php');
 
@@ -91,6 +94,7 @@ define('WEB_THUMBNAILS',        WEB_ARCHIVE . '/' . $site['thumbnails']);
 define('WEB_SQUARE_THUMBNAILS', WEB_ARCHIVE . '/' . $site['square_thumbnails']);
 define('WEB_FULLSIZE',          WEB_ARCHIVE . '/' . $site['fullsize']);
 define('WEB_FILES',             WEB_ARCHIVE . '/' . $site['files']);
+define('WEB_THEME_UPLOADS',     WEB_ARCHIVE . '/' . $site['theme_uploads']);
 
 // Set the include path for the models directory.
 set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR . PATH_SEPARATOR . get_include_path());

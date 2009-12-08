@@ -264,31 +264,3 @@ function output_format_list($list = true, $delimiter = ' | ')
     
     return $html;
 }
-
-/**
- * Gets the theme option from the Options table.
- * 
- * @param string optionName. The name of the option to get
- * @param string If the first argument is false, use this as a delimiter.
- * @return string HTML
- */
-function get_theme_option($optionName, $theme = null)
-{
-    if (!$theme) {
-        $theme = get_option('public_theme');
-    }
-    
-    $optionName = Inflector::underscore($optionName);
-    
-    $themeOptionName = 'theme_'.trim(strtolower($theme)).'_options';
-    
-    if ($themeOptions = get_option($themeOptionName)) {
-        $themeOptions = unserialize($themeOptions);
-    }
-    
-    if (array_key_exists($optionName, $themeOptions)) {        
-        return $themeOptions[$optionName];
-    }
-    
-    return null;
-}
