@@ -641,3 +641,18 @@ function is_true($value)
     $value = strtolower(trim($value));
     return ($value == '1' || $value == 'true');
 }
+
+/**
+ * Returns an array of role names
+ * 
+ * @return array
+ **/
+function get_user_roles()
+{
+	$roles = Omeka_Context::getInstance()->getAcl()->getRoleNames();
+	foreach($roles as $key => $val) {
+		$roles[$val] = Inflector::humanize($val);
+		unset($roles[$key]);
+	}
+	return $roles;
+}
