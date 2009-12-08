@@ -1,6 +1,8 @@
 <?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 <h1>Browse Users (<?php echo $total_records; ?> total)</h1>
-<p id="add-user" class="add-button"><?php echo link_to('users', 'add', 'Add a User', array('class'=>'add-user')); ?></p>
+<?php if (has_permission('Users', 'add')): ?>
+    <p id="add-user" class="add-button"><?php echo link_to('users', 'add', 'Add a User', array('class'=>'add-user')); ?></p>    
+<?php endif; ?>
 <?php common('settings-nav'); ?>
 <div id="primary">
 <?php echo flash(); ?>
