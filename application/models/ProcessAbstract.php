@@ -11,7 +11,7 @@
  
 abstract class ProcessAbstract
 {
-    private $_process;
+    protected $_process;
     
     final public function __construct(Process $process) 
     {        
