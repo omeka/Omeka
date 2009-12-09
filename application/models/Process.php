@@ -11,11 +11,11 @@
 
 class Process extends Omeka_Record
 {
-    const STATUS_STARTING = 1;
-    const STATUS_IN_PROGRESS = 2;
-    const STATUS_COMPLETED = 3;
-    const STATUS_PAUSED = 4;
-    const STATUS_ERROR = 5;
+    const STATUS_STARTING = 'starting';
+    const STATUS_IN_PROGRESS = 'in progress';
+    const STATUS_COMPLETED = 'completed';
+    const STATUS_PAUSED = 'paused';
+    const STATUS_ERROR = 'error';
     
     public $pid;
     public $class;
