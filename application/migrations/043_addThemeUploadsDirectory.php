@@ -10,7 +10,11 @@ class addThemeUploadsDirectory extends Omeka_Db_Migration
     public function up()
     {   
         if (!is_dir(THEME_UPLOADS_DIR)) {
-            mkdir(THEME_UPLOADS_DIR);
+            if (is_writable(ARCHIVE_DIR)) {
+                mkdir(THEME_UPLOADS_DIR);
+            } else {
+                throw new Exception('Unable to create ' . THEME_UPLOADS_DIR . ' because ' . ARCHIVE_DIR . ' must be writable.');
+            }
         }        
     }
 }
