@@ -34,6 +34,8 @@ class ProcessDispatcher
         $process->user_id = $user->id;
         $process->status = Process::STATUS_STARTING;
         $process->setArguments($args);
+        $process->started = date('Y-m-d G:i:s');
+        $process->log = '';
         $process->save();
         
         $command = escapeshellcmd($cliPath) . ' '
@@ -56,7 +58,8 @@ class ProcessDispatcher
         if ($process->status == Process::STATUS_STARTING ||
             $process->status == Process::STATUS_IN_PROGRESS) {
             $pid = $process->pid;
-            if($pid) {
+            $process->stopped = date('Y-m-d G:i:s');
+            if ($pid) {
                 $command = "kill "
                          . escapeshellarg($pid);
                 exec($command);

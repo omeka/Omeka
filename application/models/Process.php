@@ -22,6 +22,9 @@ class Process extends Omeka_Record
     public $user_id;
     public $status;
     public $args;
+    public $started;
+    public $stopped;
+    public $log;
     
     protected function beforeSave()
     {
