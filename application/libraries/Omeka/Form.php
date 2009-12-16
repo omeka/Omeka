@@ -29,6 +29,20 @@ class Omeka_Form extends Zend_Form
     {
         $this->addElementPrefixPath('Omeka_', 'Omeka/');
         
+        // set the default element decorators
+        $this->setElementDecorators($this->getDefaultElementDecorators());
+    }
+    
+    public function loadDefaultDecorators()
+    {
+        $this->setDecorators(array(
+            'FormElements',
+            'Form'
+        ));    
+    }
+    
+    public function getDefaultElementDecorators()
+    {
         // <div class="field">
         //     <label for="whatever">Label Name</label>
         // 
@@ -46,22 +60,14 @@ class Omeka_Form extends Zend_Form
         // <input type="submit" />
         // </div>
             
-        $this->setElementDecorators(array(
+        return array(
                         'ViewHelper', 
                         'Errors', 
                         array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')), 
                         array('Description', array('tag' => 'p', 'class' => 'explanation')), 
                         'Label', 
                         array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
-                    ));     
-    }
-    
-    public function loadDefaultDecorators()
-    {
-        $this->setDecorators(array(
-            'FormElements',
-            'Form'
-        ));    
+                    );
     }
     
     /**
@@ -112,7 +118,7 @@ class Omeka_Form extends Zend_Form
     }
     
     public function render(Zend_View_Interface $view = null)
-    {
+    {        
         if ($this->_autoApplyOmekaStyles) {
             $this->applyOmekaStyles();
         }
