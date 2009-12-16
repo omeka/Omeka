@@ -16,6 +16,7 @@ class Process extends Omeka_Record
     const STATUS_COMPLETED = 'completed';
     const STATUS_PAUSED = 'paused';
     const STATUS_ERROR = 'error';
+    const STATUS_STOPPED = 'stopped';
     
     public $pid;
     public $class;

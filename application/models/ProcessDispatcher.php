@@ -66,7 +66,7 @@ class ProcessDispatcher
                 exec($command);
             }
             // Consider a "STOPPED" status instead.
-            $process->status = Process::STATUS_ERROR;
+            $process->status = Process::STATUS_STOPPED;
             $process->pid = null;
             $process->save();
             return true;
