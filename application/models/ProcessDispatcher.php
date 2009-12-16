@@ -35,6 +35,7 @@ class ProcessDispatcher
         $process->status = Process::STATUS_STARTING;
         $process->setArguments($args);
         $process->started = date('Y-m-d G:i:s');
+        $process->stopped = '0000-00-00 00:00:00';
         $process->log = '';
         $process->save();
         
