@@ -25,6 +25,7 @@ abstract class ProcessAbstract
     {
         $this->_process->pid = null;
         $this->_process->status = Process::STATUS_COMPLETED;
+        $this->_process->stopped = date('Y-m-d G:i:s');
         $this->_process->save();
     }
     
