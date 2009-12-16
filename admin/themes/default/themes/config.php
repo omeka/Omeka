@@ -19,19 +19,8 @@
                fileNameDiv.attr('id', 'x_hidden_file_' + fileInputName);
                fileNameDiv.text(hiddenFileName);
                
-               var button = jQuery(document.createElement('a'));
-               button.text('Change');
-               button.attr('class', 'submit');
-               
-               button.click(function () {
-                     hiddenFile = jQuery("#hidden_file_" + fileInputName);
-                     hiddenFile.attr("value", "");                     
-                     fileInput.show();
-                     fileNameDiv.hide(); 
-                     jQuery(this).hide();
-               });
-               
-               fileNameDiv.append(button);
+               var changeFileButton = createChangeFileButton(fileInputName);
+               fileNameDiv.append(changeFileButton);
                
                fileInput.after(fileNameDiv);
                fileInput.hide();
@@ -39,7 +28,25 @@
         });
     });
     
-    
+    function createChangeFileButton(fileInputName)
+    {
+        var button = jQuery(document.createElement('a'));
+        button.text('Change');
+        button.attr('class', 'submit');
+        button.click(function () {
+              hiddenFile = jQuery("#hidden_file_" + fileInputName);
+              hiddenFile.attr("value", "");                     
+              
+              fileInput = jQuery("#" + fileInputName);
+              fileInput.show();
+              
+              fileNameDiv = jQuery("#x_hidden_file_" + fileInputName);
+              fileNameDiv.hide(); 
+              
+              jQuery(this).hide();
+        });
+        return button;
+    }
 
 </script>
 
