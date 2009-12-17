@@ -37,7 +37,10 @@
     </div>
     <div class="item-meta">
         <ul>
-            <li><span class="fieldname">Creator:</span> <?php echo strip_formatting(item('Dublin Core', 'Creator', array('delimiter'=>', ', 'all'=>true))); ?></li>
+            <li><span class="fieldname">Creator:</span> <?php echo strip_formatting(item('Dublin Core', 'Creator', array('delimiter'=>', '))); ?></li>
+            <li><span class="fieldname">Type:</span> <?php echo item('Item Type Name') 
+                                                              ? item('Item Type Name') 
+                                                              : '<em>' . strip_formatting(item('Dublin Core', 'Type')) . '</em>'; ?></li>
             <li><span class="fieldname">Added:</span> <?php echo item('Date Added'); ?></li>
             <li><span class="fieldname">Collection:</span> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
         </ul>
