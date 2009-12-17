@@ -11,7 +11,7 @@ class addStoppedStatusToProcesses extends Omeka_Db_Migration
     {
         // This adds the started, stopped, and log fields to the processes table, along with indices.
         $db = get_db();
-        $sql = "ALTER TABLE `processes` CHANGE `status` `status` enum('starting','in progress','completed','paused','error','stopped') COLLATE utf8_unicode_ci NOT NULL";
+        $sql = "ALTER TABLE `{$db->prefix}processes` CHANGE `status` `status` enum('starting','in progress','completed','paused','error','stopped') COLLATE utf8_unicode_ci NOT NULL";
         $db->query($sql);
     }
 }
