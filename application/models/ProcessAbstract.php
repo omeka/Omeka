@@ -24,7 +24,9 @@ abstract class ProcessAbstract
     final public function __destruct() 
     {
         $this->_process->pid = null;
-        $this->_process->status = Process::STATUS_COMPLETED;
+        if (Process::STATUS_ERROR != $this->_process->status) {
+            $this->_process->status = Process::STATUS_COMPLETED;
+        }
         $this->_process->stopped = date('Y-m-d G:i:s');
         $this->_process->save();
     }
