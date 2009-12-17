@@ -478,7 +478,6 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}processes` (
   `args` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `started` timestamp NOT NULL default '0000-00-00 00:00:00',
   `stopped` timestamp NOT NULL default '0000-00-00 00:00:00',
-  `log` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`),
   KEY `pid` (`pid`),
