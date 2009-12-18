@@ -44,23 +44,30 @@ Omeka_Context::getInstance()->setCurrentUser($processUser);
 // Get the name of the process class to run
 $processClass = $process->class;
 
-//echo $processClass . "\n";
-
 // Get the process arguments
 $processArgs = $process->getArguments();
 
-//print_r($processArgs);
-//echo "\n";
-
-// if (class_exists($processClass)) {
-//     echo 'class exists';
-// } else {
-//     echo 'no class';
-// }
-// echo "\n";
+// Enable process logging.
+$logFile = LOGS_DIR . DIRECTORY_SEPARATOR . 'processes.log';
+$logger = null;
+if ($core->getBootstrap()->getResource('Config')->log->processes && is_writable($logFile)) {
+    // Set the writer.
+    $writer = new Zend_Log_Writer_Stream($logFile);
+    $format = '%processClass% (%processId%) %timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
+    $formatter = new Zend_Log_Formatter_Simple($format);
+    $writer->setFormatter($formatter);
+    // Set the logger.
+    $logger = new Zend_Log($writer);
+    $logger->setEventItem('processClass', $processClass);
+    $logger->setEventItem('processId', $processId);
+}
 
 // Create a custom process object
-$processObject = new $processClass($process);
+$processObject = new $processClass($process, $logger);
 
 // Run the custom process and pass in the arguments
-$processObject->run($processArgs);
+try {
+    $processObject->run($processArgs);
+} catch (Exception $e) {
+    $logger->log($e, Zend_Log::ERR);
+}
