@@ -19,9 +19,8 @@
 <?php endif; ?>
 
 <div id="primary">
-    <?php if ( total_results() ): ?>
     <?php echo flash(); ?>
-    
+    <?php if ( total_results() ): ?>    
     <div id="browse-meta">
         <div id="simple-search-form">
             <?php echo simple_search(); ?>
