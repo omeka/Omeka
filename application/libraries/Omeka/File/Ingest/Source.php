@@ -187,4 +187,20 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * @return void
      **/
     abstract protected function _validateSource($source, $info);
+    
+    
+    
+    /**
+     * Removes the charset information from a mimetpe string if any exists
+     * ex.  "image/jpeg; charset=binary"   ->    "image/jpeg"
+     * @param string $mimetype
+     * @return string
+     **/
+    protected function _stripCharsetFromMimeType($mimeType) 
+    {
+        // remove the character set information
+        $mimeParts = explode(';', $mimeType);
+        return trim($mimeParts[0]);
+    }
+
 }

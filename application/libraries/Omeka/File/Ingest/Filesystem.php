@@ -86,6 +86,7 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
     protected function _getFileMimeType($fileInfo)
     {
         $sourcePath = $this->_getFileSource($fileInfo);
-        return mime_content_type($sourcePath);
+        $mimeType = $this->_stripCharsetFromMimeType(mime_content_type($sourcePath));
+        return $mimeType;
     }
 }
