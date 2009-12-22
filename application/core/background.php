@@ -69,9 +69,8 @@ $processObject = new $processClass($process, $logger);
 try {
     $processObject->run($processArgs);
 } catch (Exception $e) {
+    $process->status = Process::STATUS_ERROR;
     if ($logger instanceof Zend_Log) {
         $logger->log($e, Zend_Log::ERR);
-    } else {
-        exit($e);
     }
 }
