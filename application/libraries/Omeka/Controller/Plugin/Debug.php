@@ -29,18 +29,47 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         
         if ($debugRequests) {
             $router = $context->getFrontController()->getRouter();
-            // var_dump($router->getRoutes());exit;
-            $route = $router->getCurrentRoute();
-            
-            if (extension_loaded('xdebug')) {
-                var_dump($request);
-                var_dump($route);
-            } else {
-                Zend_Debug::dump($request);
-                Zend_Debug::dump($route);
-            }
-            exit;
+            echo $this->_getMarkup($request, $router);exit;
         }
     }
+    
+    private function _getMarkup($request, $router)
+    {
+        $requestUri = $request->getRequestUri();
+        
+        $html = "<h2>Request Data</h2>\n\n<div>Request URI: <em>$requestUri</em>"
+              . "</div>\n<div>Params:";
+              
+        $html .= '<pre>' . print_r($request->getParams(), true) . '</pre>';
+        
+        $html .= "</div>";
+        
+        if ($request->isPost()) {
+            $html .= "<h2>Post Data</h2>";
+            $html .= '<pre>' . print_r($_POST, true) . '</pre>';
+        }
+        
+        $html .= "<h2>Session Data</h2>";
+        $html .= '<pre>' . print_r($_SESSION, true) . '</pre>';
+        
+        $currentRoute = $router->getCurrentRouteName();
+        $routes = $router->getRoutes();
+        
+        $html .= "<h2>Routing Data</h2>";
+        $html .= "<div>Current Route: <strong>$currentRoute</strong></div>";
+        $html .= "<div>Defined routes:<ul>";
+        
+        foreach ($routes as $routeName => $route) {
+            $html .= "<li>" . $routeName . "</li>";
+        }
+                
+        $html .= "</ul>";
+        
+        $html .= "<h2>Cookie Data</h2>";
+        $html .= '<pre>' . print_r($_COOKIE, true) . '</pre>';
+        
+        
+        return $html;
+    }        
 }
 
