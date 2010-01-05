@@ -91,44 +91,7 @@ class Omeka_Plugin_Broker
     {
         return $this->_current;
     }
-    
-    /**
-     * Configures the plugin
-     *
-     * @param string $pluginDirName
-     * @return void
-     **/
-    public function config($pluginDirName)
-    {
-        //Check if the POST is empty, then check for a configuration form    
-        if (empty($_POST)) {
-
-            $config_form_hook = $this->getHook($pluginDirName, 'config_form');
-    
-            //If there is a configuration form available, load that and return the output for rendering later
-            if ($config_form_hook) {
-                
-                require_once HELPERS;
-                
-                ob_start();
-                call_user_func_array($config_form_hook, array($_POST)); 
-                $config = ob_get_clean();    
-                
-                return $config;
-            }
-        
-        //Data has been POSTed to the configuration mechanism
-        } else {
             
-            //Run the 'config' hook, then run the rest of the installer
-            $config_hook = $this->getHook($pluginDirName, 'config');
-            
-            if ($config_hook) {
-                call_user_func_array($config_hook, array($_POST));
-            }
-        }
-    }
-        
     /**
      * @see Omeka_Plugin_Broker::__call()
      * @param string Name of the hook.

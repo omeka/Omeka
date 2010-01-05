@@ -45,23 +45,27 @@ class PluginsController extends Omeka_Controller_Action
     public function configAction()
     {
         $plugin = $this->_getPluginByName();
-
-        try {
-            $config = $this->_pluginBroker->config($plugin);
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
-            $this->redirect->goto('config', null, null, array('name' => $plugin->getDirectoryName()));    
+        
+        $this->view->pluginBroker = $this->_pluginBroker;
+        
+        // If we have no config form hook, forget it.
+        if (!$this->_pluginBroker->getHook($plugin, 'config_form') 
+         || !$this->_pluginBroker->getHook($plugin, 'config')) {
+            throw new RuntimeException("Error in configuring plugin named '" . $plugin->getDisplayName() . "': Missing config and/or config_form hook(s).");
         }
         
-        // If the configuration function returns output, then we need to render 
-        // that because it is a form
-        if ($config !== null) {
-            $this->view->assign(compact('config', 'plugin'));
-        } else {
-            if(!empty($_POST)) {
-                $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully configured!");
+        if ($this->getRequest()->isPost()) {
+            try {
+                $this->_pluginBroker->callHook('config', array($_POST), $plugin);
+            } catch (Exception $e) {
+                $this->flashError($e->getMessage());
+                $this->redirect->goto('config', null, null, array('name' => $plugin->getDirectoryName()));    
             }
-            $this->redirect->goto('browse');    
+            
+            $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully configured!");
+            $this->redirect->goto('browse');   
+        } else {
+            $this->view->plugin = $plugin;
         }
     }
     
