@@ -81,14 +81,19 @@ class PluginsController extends Omeka_Controller_Action
         try {
             $this->_pluginInstaller->install($plugin);
             $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully installed!");
-            $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
+            
+            // Only redirect to the config form if there is a config hook for this plugin.
+            if ($this->_pluginBroker->getHook($plugin, 'config')) {
+                return $this->_helper->redirector->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
+            }
         } catch (Exception $e) {
             // Taken from Plugin_Installer::install().  
             // "The '$pluginDirName' plugin cannot be installed because it requires other plugins to be installed, activated, and loaded. See below for details."
             
             $this->flashError("The following error occurred while installing the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
-            $this->redirect->goto('browse');
         }
+        
+        $this->_helper->redirector->goto('browse');
     }
     
     /**
@@ -147,11 +152,14 @@ class PluginsController extends Omeka_Controller_Action
                 $this->_pluginInstaller->upgrade($plugin);
                 $pluginDisplayName = $plugin->getDisplayName();
                 $this->flashSuccess("The '$pluginDisplayName' plugin was successfully upgraded!");
-                $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
+                if ($this->_pluginBroker->getHook($plugin, 'config')) {
+                    return $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
+                }
             } catch (Exception $e) {
                 $this->flashError("The following error occurred while upgrading the '$pluginDisplayName' plugin: " . $e->getMessage());
-                $this->redirect->goto('browse');
             }
+            
+            $this->redirect->goto('browse');
         }
     }
         
