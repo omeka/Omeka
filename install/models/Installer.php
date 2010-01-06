@@ -85,7 +85,7 @@ class Installer
             'label' => 'Password',
             'description' => 'Password for your super user, 6–40 characters.', 
             'class' => 'textinput', 
-            'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH, User::PASSWORD_MAX_LENGTH))), 
+            'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH))), 
             'required' => true, 
             'decorators' => $elementDecorators
         ));

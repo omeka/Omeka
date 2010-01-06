@@ -24,7 +24,6 @@ class User extends Omeka_Record {
     const USERNAME_MIN_LENGTH = 1;
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
-    const PASSWORD_MAX_LENGTH = 40;
     
     protected $_related = array('Entity'=>'getEntity');
     
@@ -165,8 +164,8 @@ class User extends Omeka_Record {
         // Validate the password
         $pass = $this->password;
         
-        if (strlen($pass) < self::PASSWORD_MIN_LENGTH || strlen($pass) > self::PASSWORD_MAX_LENGTH) {
-            $this->addError('password', "Password must be between " . self::PASSWORD_MIN_LENGTH . " and " . self::PASSWORD_MAX_LENGTH . " characters."); 
+        if (strlen($pass) < self::PASSWORD_MIN_LENGTH) {
+            $this->addError('password', "Password must be longer than " . self::PASSWORD_MIN_LENGTH . " characters."); 
         }
     }
     
