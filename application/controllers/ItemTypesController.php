@@ -21,7 +21,7 @@ class ItemTypesController extends Omeka_Controller_Action
 {
     public function init()
     {
-        $this->_modelClass = 'ItemType';
+        $this->_helper->db->setDefaultModelName('ItemType');     
     }
     
     /**

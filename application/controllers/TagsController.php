@@ -26,7 +26,7 @@ class TagsController extends Omeka_Controller_Action
 {
     public function init()
     {
-        $this->_modelClass = 'Tag';
+        $this->_helper->db->setDefaultModelName('Tag');
     }
     
     public function editAction()
@@ -49,7 +49,7 @@ class TagsController extends Omeka_Controller_Action
             if (!empty($_POST)) {
                 
                 $tag_id = $_POST['delete_tag'];
-                $tag = $this->_table->find($tag_id);
+                $tag = $this->_helper->db->find($tag_id);
                 
                 if ($this->isAllowed('remove')) {
                     $tag->delete();
@@ -79,7 +79,7 @@ class TagsController extends Omeka_Controller_Action
             $criteria['user'] = $user->id;
         }
         
-        $tags = $this->_table->findBy($criteria);
+        $tags = $this->_helper->db->findBy($criteria);
         
         return $tags;    
     }
@@ -95,7 +95,7 @@ class TagsController extends Omeka_Controller_Action
         }
         $newTags = array_diff($newTags, array(''));
         
-        $oldTag = $this->_table->find($oldTagId);
+        $oldTag = $this->_helper->db->find($oldTagId);
         
         $oldName = $oldTag->name;
         $newNames = $_POST['new_tag'];
@@ -144,9 +144,9 @@ class TagsController extends Omeka_Controller_Action
         $count_params = array_merge($perms, array('recent' => false, 
                                                   'type' => $for));
         
-        $total_tags = $this->_table->count($count_params);
+        $total_tags = $this->_helper->db->count($count_params);
         
-        $tags = $this->_table->findBy(array_merge($params, $perms, array('type' => $for)), $params['limit']);
+        $tags = $this->_helper->db->findBy(array_merge($params, $perms, array('type' => $for)), $params['limit']);
         $total_results = count($tags);
         
         Zend_Registry::set('total_tags', $total_tags);

@@ -31,7 +31,7 @@ class CollectionsController extends Omeka_Controller_Action
     
     public function init()
     {
-        $this->_modelClass = 'Collection';        
+        $this->_helper->db->setDefaultModelName('Collection');     
     }
     
     protected function _getAddSuccessMessage($record)
