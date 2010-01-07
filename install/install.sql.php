@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}collections` (
   `description` text collate utf8_unicode_ci NOT NULL,
   `public` tinyint(1) NOT NULL,
   `featured` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `public` (`public`),
+  KEY `featured` (`featured`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -279,7 +281,9 @@ CREATE TABLE IF NOT EXISTS `{$db->prefix}items` (
   `added` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`),
   KEY `item_type_id` (`item_type_id`),
-  KEY `collection_id` (`collection_id`)
+  KEY `collection_id` (`collection_id`),
+  KEY `public` (`public`),
+  KEY `featured` (`featured`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
