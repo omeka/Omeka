@@ -50,7 +50,8 @@ class IndexController extends Zend_Controller_Action
         $requirements->setDbAdapter($db->getAdapter());
         $installer = new Installer($db, $requirements);
         $installer->checkRequirements();
-        $form = $installer->getForm();
+        $form = new Omeka_Form_Install;
+        $form->setDefault('path_to_convert',$installer->getPathToConvert());
         if ($installer->hasError()) {
             return $this->_forward('errors', null, null, array('installer'=>$installer));
         } else if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
@@ -59,6 +60,7 @@ class IndexController extends Zend_Controller_Action
             }
         } 
         $this->view->installer = $installer;
+        $this->view->form = $form;
     }
         
     public function installedAction()
