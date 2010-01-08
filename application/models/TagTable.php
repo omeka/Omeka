@@ -122,11 +122,6 @@ class TagTable extends Omeka_Db_Table
                     break;
             }
         }
-
-        // if no sort criteria is provided, sort tags alphabetically                
-        if (!count($orderStrings)) {
-            $orderStrings[] = 't.name ASC';
-        }
         
         $select->order($orderStrings);
     }

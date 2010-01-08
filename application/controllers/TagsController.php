@@ -145,8 +145,13 @@ class TagsController extends Omeka_Controller_Action
                                                   'type' => $for));
         
         $total_tags = $this->_table->count($count_params);
-        
-        $tags = $this->_table->findBy(array_merge($params, $perms, array('type' => $for)), $params['limit']);
+           
+        $findByParams = array_merge(array('sort' => 'alpha'), 
+                                    $params, 
+                                    $perms, 
+                                    array('type' => $for));
+                
+        $tags = $this->_table->findBy($findByParams, $params['limit']);
         $total_results = count($tags);
         
         Zend_Registry::set('total_tags', $total_tags);
