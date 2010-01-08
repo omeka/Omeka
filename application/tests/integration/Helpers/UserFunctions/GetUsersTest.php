@@ -5,7 +5,7 @@ require_once HELPERS;
  * Tests get_users($params, $limit)
  * in helpers/UserFunctions.php
  */
-class Helpers_UserFunctions_GetUsersTest extends Omeka_Model_TestCase
+class Helpers_UserFunctions_GetUsersTest extends Omeka_Test_AppTestCase
 {   
     /**
      * Tests whether the get_users helper returns data correctly from the test

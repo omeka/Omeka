@@ -14,11 +14,16 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
-class Controllers_AclTest extends Omeka_Controller_TestCase
-{    
-    public function setUpBootstrap($bootstrap)
+class Controllers_AclTest extends Omeka_Test_AppTestCase
+{        
+    public function setUp()
     {
-        $this->_configPublicThemeBootstrap($bootstrap);
+        // Do all the bootstrapping and such.
+        parent::setUp();
+        
+        // Tack on the admin theme for use in view scripts.
+        $this->view = Zend_Registry::get('view');
+        $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
     }
     
     public function testUserIsNotLoggedIn()
@@ -28,7 +33,7 @@ class Controllers_AclTest extends Omeka_Controller_TestCase
     
     public function testCanBrowseItems()
     {
-        $this->dispatch('items');
+        $this->dispatch('items', true);
         $this->assertController('items');
         $this->assertAction('browse');
     }
@@ -41,49 +46,49 @@ class Controllers_AclTest extends Omeka_Controller_TestCase
     
     public function testCannotBrowseElementSets()
     {
-        $this->dispatch('element-sets');
+        $this->dispatch('element-sets', true);
         $this->assertAccessForbidden();
     }
     
     public function testCannotAccessSettingsPage()
     {
-        $this->dispatch('settings');
+        $this->dispatch('settings', true);
         $this->assertAccessForbidden();
     }
     
     public function testCannotAddItems()
     {     
-        $this->dispatch('items/add');
+        $this->dispatch('items/add', true);
         $this->assertAccessForbidden();     
     }
     
     public function testCannotAddCollections()
     {
-        $this->dispatch('collections/add');
+        $this->dispatch('collections/add', true);
         $this->assertAccessForbidden();        
     }
     
     public function testCannotAddItemTypes()
     {
-        $this->dispatch('item-types/add');
+        $this->dispatch('item-types/add', true);
         $this->assertAccessForbidden();        
     }
     
     public function testCannotRemoveCollectorFromCollection()
     {
-        $this->dispatch('collections/remove-collector');
+        $this->dispatch('collections/remove-collector', true);
         $this->assertAccessForbidden();                
     }
     
     public function testCannotUpgradeOmeka()
     {
-        $this->dispatch('upgrade');
+        $this->dispatch('upgrade/migrate', true);
         $this->assertAccessForbidden();
     }
     
     public function testCannotSeeUpgradedNotice()
     {
-        $this->dispatch('upgrade/completed');
+        $this->dispatch('upgrade/completed', true);
         $this->assertAccessForbidden();
     }
 }

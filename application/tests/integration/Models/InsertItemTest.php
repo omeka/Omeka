@@ -6,23 +6,31 @@
  * @package Omeka_Test
  **/
 
-class Models_InsertItemTest extends Omeka_Model_TestCase
+class Models_InsertItemTest extends Omeka_Test_AppTestCase
 {   
+    private $_dbHelper;
+
+    public function setUp()
+    {
+       parent::setUp();
+       $this->_dbHelper = Omeka_Test_DbHelper::factory($this->core);
+    }
+    
     public function testCanInsertItem()
     {
-        $this->_assertTableIsEmpty('omeka_items');
-        $this->_assertTableIsEmpty('omeka_element_texts');
+        $this->assertEquals(0, $this->_dbHelper->getRowCount('omeka_items'));
+        $this->assertEquals(0, $this->_dbHelper->getRowCount('omeka_element_texts'));
         
         // Insert an item and verify with a second query.
         $item = insert_item(
             array('public'=>true), 
             array('Dublin Core'=>array('Title'=>array(array('text'=>'foobar', 'html'=>true)))));
         $sql = "SELECT id, public FROM omeka_items";
-        $row = $this->getAdapter()->fetchRow($sql);
+        $row = $this->_dbHelper->fetchRow($sql);
         $this->assertEquals(array('id'=>1, 'public'=>1), $row);
         
         // Verify that element texts are inserted correctly into the database.
         $sql = "SELECT COUNT(id) FROM omeka_element_texts WHERE html = 1 AND text = 'foobar'";
-        $this->assertEquals(1, $this->getAdapter()->fetchOne($sql));
+        $this->assertEquals(1, $this->_dbHelper->fetchOne($sql));
     }
 }

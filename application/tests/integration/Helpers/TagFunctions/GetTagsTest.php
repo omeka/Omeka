@@ -5,7 +5,7 @@ require_once HELPERS;
  * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
  * in helpers/StringFunctions.php
  */
-class Helpers_TagFunctions_GetTagsTest extends Omeka_Model_TestCase
+class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
 {   
     private $_defaultTagLimit;
     private $_itemToTag;

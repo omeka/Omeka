@@ -6,17 +6,25 @@
  * @package Omeka_Test
  **/
 
-class Models_InsertCollectionTest extends Omeka_Model_TestCase
+class Models_InsertCollectionTest extends Omeka_Test_AppTestCase
 {
+    private $_dbHelper;
+    
+    public function setUp()
+    {
+        parent::setUp();
+        $this->_dbHelper = Omeka_Test_DbHelper::factory($this->core);
+    }
+    
     public function testCanInsertCollection()
     {
         // Verify no collections exist.
-        $this->_assertTableIsEmpty('omeka_collections');
+        $this->assertEquals(0, $this->_dbHelper->getRowCount('omeka_collections'));
         
         // Insert a collection and verify with a second query.
         $collection = insert_collection(array('name'=>'Foo Bar', 'public'=>true, 'description'=>'foo'));
         $sql = "SELECT id, public FROM omeka_collections";
-        $row = $this->getAdapter()->fetchRow($sql);
+        $row = $this->_dbHelper->fetchRow($sql);
         $this->assertEquals(array('id'=>1, 'public'=>1), $row);
     }
 }

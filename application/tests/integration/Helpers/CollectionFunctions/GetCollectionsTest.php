@@ -5,7 +5,7 @@ require_once HELPERS;
  * Tests get_collections($params, $limit)
  * in helpers/CollectionFunctions.php
  */
-class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Model_TestCase
+class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Test_AppTestCase
 {   
 
 	protected function _createNewCollection($isPublic, $isFeatured, $name, $description)
@@ -49,7 +49,7 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Model_TestCas
      * @internal Ticket #812 added for this test on 07/24/09.
      */
     public function testCanGetPrivateCollections() {
-		$this->_createNewCollections(5,5,5);
+        $this->_createNewCollections(5,5,5);
         $collections = get_collections(array('public' => 0));
         $this->assertEquals(5, count($collections));
     }
@@ -61,7 +61,7 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Model_TestCas
      * @internal Ticket #813 added for this test on 07/24/09.
      */
     public function testCanGetPublicFeaturedCollections() {
-		$this->_createNewCollections(5,5,5);
+        $this->_createNewCollections(5,5,5);
         $collections = get_collections(array('public' => 1, 'featured' => 1));
         $this->assertEquals(5, count($collections));
     }
