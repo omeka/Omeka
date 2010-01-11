@@ -33,7 +33,8 @@ function items_output_uri($output="rss2", $otherParams = array()) {
     $queryParams = array_merge($queryParams, $otherParams);
     
     $queryParams['output'] = $output;
-    return uri(array('controller'=>'items', 'action'=>'browse'), null, $queryParams);
+    // Use the 'default' route as opposed to the current route.
+    return uri(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
 }
 
 /**
