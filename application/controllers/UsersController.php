@@ -27,8 +27,7 @@ class UsersController extends Omeka_Controller_Action
     protected $_browseRecordsPerPage = 10;
         
     public function init() {
-        $this->_modelClass = 'User';
-        $this->_table = $this->getTable('User');
+        $this->_helper->db->setDefaultModelName('User');
         $this->checkPermissions();  //Cannot execute as a beforeFilter b/c ACL permissions are checked before that.
         $this->_auth = Omeka_Context::getInstance()->getAuth();
     }
@@ -134,7 +133,7 @@ class UsersController extends Omeka_Controller_Action
             
             $ua = new UsersActivations;
             
-            $user = $this->_table->findByEmail($email);
+            $user = $this->_helper->db->findByEmail($email);
             
             if ($user) {
                 //Create the activation url
