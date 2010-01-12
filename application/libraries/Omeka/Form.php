@@ -109,6 +109,28 @@ class Omeka_Form extends Zend_Form
     }
     
     /**
+     * Retrieve all of the form error messages as a nicely formatted string.  
+     * 
+     * Useful for displaying all form errors at the top of a form, or for flashing
+     * form errors after redirects.
+     * 
+     * @since 1.2
+     * @param string $messageDelimiter The string to display between different
+     * error messages for an element.
+     * @param string $elementDelimiter The string to display between different
+     * elements.
+     * @return string
+     */
+    public function getMessagesAsString($messageDelimiter = '  ', $elementDelimiter = ', ')
+    {
+        $errors = array();
+        foreach ($this->getMessages() as $elementName => $errorArray) {
+            $errors[] = Inflector::humanize($elementName) . ': ' . join($messageDelimiter, $errorArray);
+        }
+        return join($elementDelimiter, $errors);
+    }
+    
+    /**
      * Specify whether or not to automatically apply Omeka-specific decorators
      * and styles prior to rendering the form.
      */

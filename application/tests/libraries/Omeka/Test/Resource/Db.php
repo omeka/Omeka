@@ -8,38 +8,22 @@
 
 class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
+    const SUPER_USERNAME = 'foobar123';
+    const SUPER_PASSWORD = 'foobar123';
+    const SUPER_EMAIL = 'foobar@example.com';
+    
     public function init()
     {        
         $config = $this->_loadConfig();
         $this->setAdapter('Mysqli');
         $this->setParams($config->db->toArray());
-        $this->_buildDatabase();
-        return $this->_buildOmekaDb();
+        $omekaDb = $this->_getOmekaDb();
+        $this->_dropTables($this->getDbAdapter());
+        // $this->_buildDatabase(realpath(BASE_DIR . '/install/install.sql.php'), $omekdaDb);
+        $this->_installDb($omekaDb);
+        return $omekaDb;
     }
     
-    protected function _loadSqlFile($sqlFilename)
-    {
-        $sqlDir = realpath(TEST_DIR . DIRECTORY_SEPARATOR . 'Sql');
-        
-        $sqlPath = $sqlDir . DIRECTORY_SEPARATOR . $sqlFilename . '.sql';
-        $sql = file_get_contents($sqlPath);
-        // Split it on ; (better way to do this?)
-        $this->_execSqlBlock($sql);
-    }
-    
-    /**
-     * Copied from Omeka_Db::execBlock()
-     */
-    private function _execSqlBlock($sqlBlock)
-    {
-        $queries = explode(';', $sqlBlock);
-        foreach ($queries as $query) {
-            if (strlen(trim($query))) {
-                $this->getDbAdapter()->query($query);
-            }
-        }
-    }
-
     private function _loadConfig()
     {   
         if (!Zend_Registry::isRegistered('test_config')) {
@@ -51,15 +35,45 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         return Zend_Registry::get('test_config');
     }
     
-    private function _buildOmekaDb()
+    private function _getOmekaDb()
     {
         $omekaDb = new Omeka_Db($this->getDbAdapter(), 'omeka_');
         return $omekaDb;
     }
-    
-    private function _buildDatabase()
+        
+    /**
+     * Drop all the tables in the test database.
+     */
+    private function _dropTables(Zend_Db_Adapter_Abstract $dbAdapter)
     {
-        $this->_loadSqlFile('refresh');
+        $dbHelper = new Omeka_Test_DbHelper($dbAdapter);
+        $dbHelper->dropTables();
     }
     
+    /**
+     * Install the Omeka database as part of the test bootstrap process.
+     */
+    private function _installDb(Omeka_Db $db)
+    {
+        $installInfo = array(
+            'administrator_email'           => self::SUPER_EMAIL, 
+            'copyright'                     => '2010', 
+            'site_title'                    => 'Automated Test Installation', 
+            'author'                        => 'CHNM', 
+            'description'                   => 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES', 
+            'thumbnail_constraint'          => '200', 
+            'square_thumbnail_constraint'   => '200', 
+            'fullsize_constraint'           => '800', 
+            'per_page_admin'                => '10', 
+            'per_page_public'               => '10', 
+            'show_empty_elements'           => '1',
+            'path_to_convert'               => '',
+            'super_email'                   => self::SUPER_EMAIL,
+            'username'                      => self::SUPER_USERNAME,
+            'password'                      => self::SUPER_PASSWORD
+        );
+        require_once INSTALL_DIR . '/models/Installer.php';
+        $installer = new Installer($db, new Installer_Requirements);
+        $installer->install($installInfo);
+    }
 }

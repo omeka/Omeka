@@ -5,7 +5,7 @@ require_once HELPERS;
  * Tests get_users($params, $limit)
  * in helpers/UserFunctions.php
  */
-class Helpers_UserFunctions_GetUsersTest extends Omeka_Model_TestCase
+class Helpers_UserFunctions_GetUsersTest extends Omeka_Test_AppTestCase
 {   
     /**
      * Tests whether the get_users helper returns data correctly from the test
@@ -14,7 +14,7 @@ class Helpers_UserFunctions_GetUsersTest extends Omeka_Model_TestCase
     public function testCanReturnInitialData() {
         $users = get_users();
         $this->assertEquals(1, count($users));
-        $this->assertEquals($users[0]->username, 'super');
+        $this->assertEquals($users[0]->username, Omeka_Test_Resource_Db::SUPER_USERNAME);
     }
     
     /**
@@ -23,7 +23,7 @@ class Helpers_UserFunctions_GetUsersTest extends Omeka_Model_TestCase
     public function testCanFilterByRole() {
         $users = get_users(array('role' => 'super'));
         $this->assertEquals(1, count($users));
-        $this->assertEquals($users[0]->username, 'super');
+        $this->assertEquals($users[0]->username, Omeka_Test_Resource_Db::SUPER_USERNAME);
         
         $users = get_users(array('role' => 'invalid'));
         $this->assertEquals(0, count($users));
