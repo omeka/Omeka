@@ -25,6 +25,8 @@ p.clear {clear:both;}
 
 #login div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
 
+#login .field .inputs {float: none; width: 300px; }
+
 #login input.submit {float:right;margin-top:6px;margin-bottom:0;}
 
 #back-to-login {text-align:left; float:left; width: 280px;margin-bottom:0;}

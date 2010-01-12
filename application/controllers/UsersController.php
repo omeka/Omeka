@@ -303,58 +303,41 @@ class UsersController extends Omeka_Controller_Action
             $this->redirect->goto('index', 'index');
         }
         
+        $defaultLogin = new Omeka_Login_Db($this->getDb());
+        $omekaLogin = apply_filters('login', $defaultLogin);
+        
+        if (!($omekaLogin instanceof Omeka_Login_Interface)) {
+            throw new UnexpectedValueException("'login' filter did not return an instance of 'Omeka_Login_Interface'!");
+        }
+        
+        $this->view->loginForm = $omekaLogin->getForm();
+        
+        if (!($this->view->loginForm instanceof Zend_Form)) {
+            throw new UnexpectedValueException(get_class($this->view->loginForm) . "::getForm() did not return an instance of Zend_Form!");
+        }
+        
         if (!empty($_POST)) {
             
             require_once 'Zend/Session.php';
             
             $session = new Zend_Session_Namespace;
-            $result = $this->authenticate();
+             
+            $result = $omekaLogin->authenticate($this->_auth, $_POST);
+            
+            if (!($result instanceof Zend_Auth_Result)) {
+                throw new UnexpectedValueException(get_class($omekaLogin) . "::authenticate() did not return an instance of Zend_Auth_Result!");
+            }
+            
             
             if ($result->isValid()) {
                 $this->redirect->gotoUrl($session->redirect);
-            }
-            $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($result)));
-        }
-    }
-    
-    /**
-     * This encapsulates authentication through Omeka's login mechanism. This
-     *  could be abstracted into a helper class or function or something, maybe.
-     *  It'd probably be easier just to add a filter somewhere that would allow a
-     *  plugin writer to switch out the Auth adapter with something else.
-     * 
-     * @param string
-     * @return void
-     **/
-    public function authenticate()
-    {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $rememberMe = $_POST['remember'];
-        $db = $this->getDb();
-        $dbAdapter = $db->getAdapter();
-        // Authenticate against the 'users' table in Omeka.
-        $adapter = new Zend_Auth_Adapter_DbTable($dbAdapter, $db->User, 'username', 'password', 'SHA1(?) AND active = 1');
-        $adapter->setIdentity($username)
-                    ->setCredential($password);
-        $result = $this->_auth->authenticate($adapter);
-        if ($result->isValid()) {
-            $storage = $this->_auth->getStorage();
-            $storage->write($adapter->getResultRowObject(array('id', 'username', 'role', 'entity_id')));
-            $session = new Zend_Session_Namespace($storage->getNamespace());
-            if ($rememberMe) {
-                // Remember that a user is logged in for the default amount of 
-                // time (2 weeks).
-                Zend_Session::rememberMe();
             } else {
-                // If a user doesn't want to be remembered, expire the cookie as
-                // soon as the browser is terminated.
-                Zend_Session::forgetMe();
+                $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($result)));
             }
+            
         }
-        return $result;
     }
-    
+        
     /**
      * This exists to customize the messages that people see when their attempt
      * to login fails. ZF has some built-in default messages, but it seems like

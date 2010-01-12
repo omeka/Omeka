@@ -18,23 +18,5 @@
         </span></div>
     <?php endif; ?>
     
-<form id="login-form" action="<?php echo html_escape(uri('users/login'));?>" method="post" accept-charset="utf-8">
-    <fieldset>
-        <div class="field">
-    <label for="username">Username</label> 
-    <input type="text" name="username" class="textinput" id="username" />
-    </div>
-    <div class="field">
-    <label for="password">Password</label> 
-    <input type="password" name="password" class="textinput" id="password" />
-    </div>
-    
-    <div class="field">
-        <label for="remember">Remember Me?</label> 
-        <?php echo $this->formCheckbox('remember', null, array('class' => 'checkbox')); ?>
-    </div>
-    </fieldset>
-    <div><input type="submit" class="submit-small submit" value="Log In" /></div>
-</form>
-
+<?php echo $loginForm->setMethod('post')->setAction($this->url('users/login')); ?>
 <?php foot(array(),'login-footer'); ?>

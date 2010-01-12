@@ -17,15 +17,17 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
         $user = false;
 
         if ($auth->hasIdentity()) {
-            $user = $auth->getIdentity();
-            // This ext
-            // ra database call seems unnecessary at face value, but it
-            // actually retrieves the entity metadata about the user as well as the
-            // username/role info that is already stored in the auth identity.
+            $userIdentity = $auth->getIdentity();
+
             require_once 'User.php';
             $bootstrap->bootstrap('Db');
             $db = $bootstrap->getResource('Db');
-            $user = $db->getTable('User')->find($user->id);
+            
+            // The auth mechanism stores the user integer ID as the identity.  
+            // This is done to avoid any confusion with legacy installations that 
+            // may have usernames consisting entirely of digits.
+            $user = $db->getTable('User')->find($userIdentity);
+            
             if (!$user) {
                 // If we can't retrieve the User from the database, it likely
                 // means that this user has been deleted.  In this case, do not
