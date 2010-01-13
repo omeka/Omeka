@@ -51,25 +51,14 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     
     public function preDispatch()
     {
-        try {
-            $this->checkActionPermission($this->getRequest()->getActionName());
-        } catch (Omeka_Controller_Exception_403 $e) {
-            $this->getRequest()->setControllerName('error')->setActionName('forbidden')->setModuleName('default')->setDispatched(false);
+        if (!$this->isAllowed($this->getRequest()->getActionName())) {
+            $this->getRequest()->setControllerName('error')
+                               ->setActionName('forbidden')
+                               ->setModuleName('default')
+                               ->setDispatched(false);
         }
     }
-    
-	protected function checkActionPermission($action)
-	{   
-		//Here is the permissions check for each action
-		try {
-			if(!$this->isAllowed($action)) {		
-                throw new Omeka_Controller_Exception_403();
-			}
-		} 
-		//Silence exceptions that occur when an action has no equivalent privilege in the ACL
-		catch (Zend_Acl_Exception $e) {}		
-	}
-	
+    	
 	/**
 	 * Notifies whether the logged-in user has permission for a given resource/
 	 * privilege combination.
@@ -104,7 +93,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
 
 		// If the resource has not been defined in the ACL, allow access to the
 		// controller.
-		if (!$this->_acl->get($resource)) {
+		if (!$this->_acl->has($resource)) {
 		    return true;
 		}
 		
