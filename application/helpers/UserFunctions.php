@@ -47,7 +47,7 @@ function get_user_by_id($userId)
  * actually circumvents the ACL entirely, so it should be avoided except in certain
  * situations where data must be displayed specifically to a certain role and no one else.
  *
- * @param string 
+ * @param string|Zend_Acl_Resource_Interface
  * @param string|null
  * @return boolean
  **/
@@ -57,14 +57,18 @@ function has_permission($role, $privilege=null)
 	$user = current_user();
 	if (!$user) return false;
 	
-	$userRole = $user->role;
+	// User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
+	$userRole = $user;
 	if (!$privilege) {
 		return ($userRole == $role);
 	}
 
 	//This is checking for the correct combo of 'role','resource' and 'privilege'
 	$resource = $role;
-	return $acl->isAllowed($userRole,ucwords($resource),$privilege);
+	if (is_string($resource)) {
+	   $resource = ucwords($resource);
+	}
+	return $acl->isAllowed($userRole, $resource, $privilege);
 }
 
 /**

@@ -14,7 +14,9 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
         $bootstrap->bootstrap('Auth');
         $auth = $bootstrap->getResource('Auth');
         
-        $user = false;
+        // User should default to null because the ACL interprets null differently
+        // from other equivalents (false, empty string, etc.).
+        $user = null;
 
         if ($auth->hasIdentity()) {
             $userIdentity = $auth->getIdentity();

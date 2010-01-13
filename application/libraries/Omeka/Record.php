@@ -595,19 +595,5 @@ class Omeka_Record implements ArrayAccess
         $res = $this->getDb()->query($sql, $values);
 
         return (!is_array($res->fetch()));
-    }
-    
-    // Legacy methods (deprecate and remove these)
-    
-    /**
-     *
-     * @return boolean
-     **/
-    protected function userHasPermission($rule) 
-    {
-        $resource = Inflector::pluralize(get_class($this));        
-        if ($acl = Omeka_Context::getInstance()->getAcl()) {
-            return $acl->checkUserPermission($resource, $rule);
-        }
     }    
 }

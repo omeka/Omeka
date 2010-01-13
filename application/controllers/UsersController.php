@@ -67,55 +67,10 @@ class UsersController extends Omeka_Controller_Action
             return;
         }
         
-        try {
-            switch ($action) {
-               
-                // If we are deleting users
-               case 'delete':                   
-                   // Can't delete yourself
-                   if ($user->id == $record->id) {
-                       throw new Exception('You are not allowed to delete yourself!');
-                   }
-                   break;
-                   
-               //If changing passwords 
-               case 'changePassword':
-                   
-                    // Only super users and the actual user can change this 
-                    // user's password
-                    if(!$user || (($user->role != 'super') && ($record->id != $user->id))) {
-                        throw new Exception( 'May not change another user\'s password!' );
-                    }
-                    break;
-                    
-                case 'edit':
-                    // Allow access to the 'edit' action if a user is editing their 
-                    // own account info.
-                    if ($user->id == $record->id) {
-                        $this->_helper->acl->setAllowed('edit');
-                    }
-                     
-                    //Non-super users cannot edit super user data
-                    //Note that super users can edit other super users' data
-                    if ($user->id != $record->id 
-                        && $record->role == 'super' 
-                        && $user->role != 'super') {
-                        throw new Exception( 'You may not edit the data for super users!' );
-                    }
-                    break;
-                case 'show':
-                    // Allow access to the 'show' action if a user is viewing their 
-                    // own account info.
-                    if ($user->id == $record->id) {
-                        $this->_helper->acl->setAllowed('show');
-                    }
-                    break;    
-               default:
-                   break;
-            }                
-        } catch (Exception $e) {
-            $this->flash($e->getMessage(), Omeka_Controller_Flash::GENERAL_ERROR);
-            $this->_helper->redirector->goto('browse');
+        if (!$this->isAllowed($action, $record)) {
+            $this->_helper->redirector->goto('browse');            
+        } else {
+            $this->_helper->acl->setAllowed($action);
         }
     }
     
@@ -374,28 +329,5 @@ class UsersController extends Omeka_Controller_Action
         //http://framework.zend.com/manual/en/zend.auth.html
         $auth->clearIdentity();
         $this->redirect->gotoUrl('');
-    }
-    
-    /**
-     * This hook allows specific user actions to be allowed if and only if an authenticated user 
-     * is accessing their own user data.
-     *
-     **/
-    public function preDispatch()
-    {
-        $userActions = array('show','edit');
-        
-        if ($current = $this->getCurrentUser()) {
-            try {
-                $user = $this->findById();
-                if ($current->id == $user->id) {
-                    foreach ($userActions as $action) {
-                        $this->setAllowed($action);
-                    }
-                }
-            } catch (Exception $e) {
-            }
-        }
-        return parent::preDispatch();
     }
 }

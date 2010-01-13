@@ -20,7 +20,8 @@ class CollectionPermissions
     {
         $db = Omeka_Context::getInstance()->getDb();
         
-        $has_permission = $acl->checkUserPermission('Collections', 'showNotPublic');
+        $currentUser = Omeka_Context::getInstance()->getCurrentUser();        
+        $has_permission = $acl->isAllowed($currentUser, 'Collections', 'showNotPublic');
         
         if (!$has_permission) {
             if ($sql->hasJoin('c')) {
