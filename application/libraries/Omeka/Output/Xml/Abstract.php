@@ -71,7 +71,7 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
     {
         $rootElement->setAttribute('xmlns', self::XMLNS);
         $rootElement->setAttribute('xmlns:xsi', self::XMLNS_XSI);
-        $rootElement->setAttribute('xsi:schemaLocation', self::XMLNS_SCHEMALOCATION);
+        $rootElement->setAttribute('xsi:schemaLocation', self::XMLNS . ' ' . self::XMLNS_SCHEMALOCATION);
         $rootElement->setAttribute('uri', $this->_buildUrl());
         $rootElement->setAttribute('accessDate', date('c'));
         return $rootElement;
