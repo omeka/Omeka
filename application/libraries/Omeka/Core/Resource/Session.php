@@ -17,12 +17,28 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbst
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Config');
         $basicConfig = $bootstrap->getResource('Config');
-        $sessionName = (isset($basicConfig->session) && !empty($basicConfig->session->name)) 
-                       ? $basicConfig->session->name
-                       : $this->_buildSessionName();
+        Zend_Session::start($this->_getSessionConfig($basicConfig));
+    }
     
-        Zend_Session::start(array(
-            'name'=>$sessionName));
+    /**
+     * Retrieve global session configuration options.
+     * 
+     * @link http://framework.zend.com/manual/en/zend.session.global_session_management.html#zend.session.global_session_management.configuration_options
+     * @return array An array containing all the global configuration options 
+     * for sessions.  This array contains at least one key, 'name', corresponding
+     * to the name of the session, which is generated automatically if not 
+     * provided.
+     */
+    private function _getSessionConfig(Zend_Config $config)
+    {
+        $sessionConfig = isset($config->session) 
+                       ? $config->session->toArray()
+                       : array();
+        
+        if (!array_key_exists('name', $sessionConfig)) {
+            $sessionConfig['name'] = $this->_buildSessionName();
+        }
+        return $sessionConfig;
     }
     
     private function _buildSessionName()
