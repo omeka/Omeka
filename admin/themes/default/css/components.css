@@ -38,7 +38,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
         
     input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
 
-    .submit, button, .button {
+    .submit, button, input[type="submit"], .button {
         text-align:center;
         text-decoration:none;
         color:#fff !important;
@@ -190,10 +190,6 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
 {background-position: 12px 50%; background-repeat:no-repeat; padding-left: 32px; text-decoration:none;}
 
 table .edit, table .delete, table .researcher, table .super, table .admin, table .contributor {background-position:0px 50%; padding-left:18px;}
-
-
-&#829;
-&amp;#829;
 
 .go,
 .next a
