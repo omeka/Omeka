@@ -37,11 +37,14 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
         
     input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
-
-    .submit, button, input[type="submit"], .button {
+    
+    button, 
+    .submit, 
+    input[type="submit"],
+    .button {
         text-align:center;
         text-decoration:none;
-        color:#fff !important;
+        color:#fff;
         clear:both; 
         margin:9px 0;
         background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
@@ -55,14 +58,25 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
         -moz-border-radius:6px;
     }
     
-    input.add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
+    input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
+    
+    input.add-element,
+    input.remove-element {
+        border:none;
+        border-radius:0;
+        -webkit-border-radius:0;
+        -moz-border-radius:0;
+        background-repeat:no-repeat;
+    }
+    
+    input.add-element {background-image:url("../images/add.png");}
+    input.remove-element {background-image:url("../images/delete.gif");}
     
     .dateinput input {margin-right: 3px;}
     
     #required-note {font-size: 0.6em; color: #777; display: block;}
     
     /* Buttons - different sizes, uses background images */
-    /* Submit buttons */
     .submit-extrasmall {width: 46px;}
     .submit-small {width: 70px;}
     .submit-medium {width: 100px;}
@@ -102,12 +116,15 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     #item-form .field .explanation, #editfile .field .explanation, .hint {margin-left:216px; float:left; clear:right;}
     
     /* Changes the width of inputs depending on the layout */
-        .vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 126px;}
-        .vertical-nav #item-form .field .explanation, .vertical-nav .field .hint {margin-left: 144px;}
+        .vertical-nav .inputs {}
+        .vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 116px;}
+        .vertical-nav #item-form .field .explanation, 
+        .vertical-nav .field .hint,
+        .vertical-nav .field .explanation {margin-left: 172px;}
         
         /* .input used to wrap input fields in items/add form */
         .field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
-        .vertical-nav .field .inputs {width: 468px;}
+        .vertical-nav .field .inputs {width: 440px;}
                 
 /* == Layout == */
 
@@ -218,8 +235,6 @@ table .edit, table .delete, table .researcher, table .super, table .admin, table
 .edit-user {background-image:url("../images/pencil_go.gif");}
 .edit {background-image:url("../images/pencil_go.gif");}
 .browse-names {background-image:url("../images/group.gif");}
-.add-element {background-image:url("../images/add.png");}
-.remove-element {background-image:url("../images/delete.gif");}
 
 #primary .item-file img,
 #primary .item-file object {
