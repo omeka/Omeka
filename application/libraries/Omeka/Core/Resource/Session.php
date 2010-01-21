@@ -35,7 +35,7 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbst
                        ? $config->session->toArray()
                        : array();
         
-        if (!array_key_exists('name', $sessionConfig)) {
+        if (!array_key_exists('name', $sessionConfig) || empty($sessionConfig['name'])) {
             $sessionConfig['name'] = $this->_buildSessionName();
         }
         return $sessionConfig;

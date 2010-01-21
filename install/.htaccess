@@ -9,5 +9,10 @@ Allow from all
 # This allows us to verify that mod_rewrite is enabled
 <IfModule mod_rewrite.c>
 RewriteEngine On
+
+# If know that mod_rewrite is enabled, but you are still getting mod_rewrite errors,
+# uncomment the line below and replace "/install/" with your install directory.
+# RewriteBase /install/
+
 RewriteRule ^check-mod-rewrite([^/]*)\.html$ mod-rewrite.php?enabled=true [L]
 </IfModule>

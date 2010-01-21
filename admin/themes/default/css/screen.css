@@ -253,15 +253,14 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
             label.use-html { position:relative;float:left;padding-left: 16px;width: 8em;text-align:left; font-size:1.1em;margin:0;}
         
-            .input-block {clear:both;position:relative;overflow:hidden; padding-top:2em;}
+            .input-block {clear:both;position:relative;overflow:hidden;}
             
             label.use-html input {position:absolute; top:0; left:0; margin:0;float:none;padding:0;}
 
-            #item-form .explanation, #editfile .explanation {margin-top:18px;}
             
             input.remove-element {background-color: transparent !important; color: #900;padding-left:18px; display:none;}
             
-            input.add-element {background-color: transparent !important; color: #359; font-weight:bold; color:#76bb5f;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
+            input.add-element {color: #359; font-weight:bold; color:#76bb5f;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
             
             input.add-element, input.remove-element {cursor:pointer;font-size:1.1em;padding-top:0; background-position: 0 50%;padding-bottom:0px;}
         
@@ -336,10 +335,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     
     #test-button {display:inline; float:none; margin-left: 4px; margin-top:0;background-color: #389; border:1px solid #389;}
     
-    #settings-form label {width: 200px;}
     #settings-form .textinput {display:inline; width: 400px;}
     #settings-form #path_to_convert {width: 350px;}
-    #settings-form .hint {margin: 4px 0 0 200px;}
     
     /* Element Sets */
     td.element-set-name {width: 30%; }
