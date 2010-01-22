@@ -41,6 +41,7 @@ function _tag_attributes($attributes, $value=null)
  * Make a label for a form element.
  *
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param mixed $attributes An array of attributes, or just the string id to be used in the 'for' attribute
  * @param string $text Text of the form label
  * @return string
@@ -64,6 +65,7 @@ function label($attributes, $text)
  * @internal Facade for Zend_View_Helper_FormText.  This maintains the
  * signature from prior versions for backward compatibility.
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param string|null $default
  * @param string|null $label
@@ -89,6 +91,7 @@ function text($attributes, $default=null, $label = null, $labelAttributes = arra
  * 
  * @internal Facade for Zend_View_Helper_FormPassword.
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes XHTML attributes for the password input.
  * @param string|null $default Optional
  * @param string|null $label Optional
@@ -114,6 +117,7 @@ function password($attributes, $default=null, $label = null, $labelAttributes = 
  * 
  * @internal Facade for Zend_View_Helper_FormSelect.
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param array|null $values Optional
  * @param string|null $default Optional
@@ -141,6 +145,7 @@ function select($attributes, $values = null, $default = null, $label=null, $labe
  * 
  * @internal Facade for Zend_View_Helper_FormTextarea.
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param string|null $default Optional
  * @param string|null $label Optional
@@ -163,6 +168,7 @@ function textarea($attributes, $default = null, $label = null, $labelAttributes 
  * 
  * @internal Facade for Zend_View_Helper_FormRadio.  
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes Set of XHTML attributes for the inputs.
  * @param array $values Key => value of the radio button, Value => label for the 
  * radio button.
@@ -180,6 +186,7 @@ function radio($attributes, array $values, $default = null, $label_class = 'radi
  * Make a hidden form input.
  * 
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param string $value
  * @return string
@@ -200,6 +207,7 @@ function hidden($attributes, $value)
  * 
  * @internal Facade for Zend_View_Helper_FormCheckbox.
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes XHTML attributes for the input.
  * @param boolean|null $checked Whether or not it should be checked by default.
  * @param string|null $value Optional Defaults to 1.
@@ -224,6 +232,7 @@ function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $la
  * Make a submit form input.
  * 
  * @since 0.9
+ * @deprecated deprecated since 1.2
  * @param array $attributes XHTML attributes.
  * @param string $value Optional Defaults to 'Submit'.
  * @return string
@@ -333,6 +342,7 @@ function display_element_set_form($record, $elementSetName)
 /**
  * Retrieve validation errors for specific fields on the form.
  * 
+ * @deprecated deprecated since 1.2
  * @param string $field The name of the field to retrieve the error message for
  * @return string The error message wrapped in a div with class="error"
  **/
@@ -454,6 +464,8 @@ function select_item_type_elements($props = array(), $value = null, $label = nul
 
 /**
  * @since 0.10
+ * @internal Since select() is deprecated as of version 1.2, we will need to update
+ * this function to use Zend Form.
  * @param string $tableClass Name of the table class to pull from.
  * @param array $props Optional XHTML attributes for the select input.
  * @param mixed $value Optional Value of the select input.
