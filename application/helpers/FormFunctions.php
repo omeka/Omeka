@@ -67,17 +67,17 @@ function label($attributes, $text)
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param string|null $default
  * @param string|null $label
+ * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string HTML for the form element
  **/	
-function text($attributes, $default=null, $label = null)
+function text($attributes, $default=null, $label = null, $labelAttributes = array())
 {
     $html = '';
 	if($label) {
 	    // This is a hack to only apply the 'class' attribute to the input
 	    // and not to the label 
-	    $labelAttribs = $attributes;
-	    unset($labelAttribs['class']);
-	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttribs);
+	    $labelAttributes['for'] = $attributes['name'];
+	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
 	}
 	
 	$html .= __v()->formText($attributes['name'], $default, $attributes);
@@ -89,15 +89,17 @@ function text($attributes, $default=null, $label = null)
  * 
  * @internal Facade for Zend_View_Helper_FormPassword.
  * @since 0.9
- * @param array $attributes XHTML attributes.
+ * @param array $attributes XHTML attributes for the password input.
  * @param string|null $default Optional
  * @param string|null $label Optional
+ * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label
  * @return string
  **/	
-function password($attributes, $default=null, $label = null)
+function password($attributes, $default=null, $label = null, $labelAttributes = array())
 {
     $html = '';
 	if ($label) {
+	    $labelAttributes['for'] = $attributes['name'];
 	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
 	}
     $html .= __v()->formPassword($attributes['name'], $default, $attributes);
@@ -116,9 +118,10 @@ function password($attributes, $default=null, $label = null)
  * @param array|null $values Optional
  * @param string|null $default Optional
  * @param string|null $label Optional
+ * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label
  * @return string
  **/
-function select($attributes, $values = null, $default = null, $label=null)
+function select($attributes, $values = null, $default = null, $label=null, $labelAttributes = array())
 {   
     $html = '';
     //First option is always the "Select Below" empty entry
@@ -126,7 +129,8 @@ function select($attributes, $values = null, $default = null, $label=null)
     $values = array('' => 'Select Below ') + $values;
     //Duplication
 	if ($label) {
-	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
+	    $labelAttributes['for'] = $attributes['name'];
+	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
 	}
     $html .= __v()->formSelect($attributes['name'], $default, $attributes, $values);
     return $html;
@@ -140,13 +144,15 @@ function select($attributes, $values = null, $default = null, $label=null)
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param string|null $default Optional
  * @param string|null $label Optional
+ * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string
  **/
-function textarea($attributes, $default = null, $label = null)
+function textarea($attributes, $default = null, $label = null, $labelAttributes = array())
 {		
 	$html = '';
 	if ($label) {
-	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
+	    $labelAttributes['for'] = $attributes['name'];
+	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
 	}
 	$html .= __v()->formTextarea($attributes['name'], $default, $attributes);
 	return $html;
@@ -194,20 +200,22 @@ function hidden($attributes, $value)
  * 
  * @internal Facade for Zend_View_Helper_FormCheckbox.
  * @since 0.9
- * @param array $attributes XHTML attributes.
+ * @param array $attributes XHTML attributes for the input.
  * @param boolean|null $checked Whether or not it should be checked by default.
  * @param string|null $value Optional Defaults to 1.
  * @param string|null $label Optional
+ * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string
  **/	
-function checkbox($attributes, $checked = FALSE, $value=null, $label = null )
+function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $labelAttributes = array())
 {
     if ($checked !== null) {
         $attributes['checked'] = $checked;
     }
     $html = __v()->formCheckbox($attributes['name'], $value, $attributes);
 	if ($label) {
-	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
+	    $labelAttributes['for'] = $attributes['name'];
+	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
 	}
 	return $html;
 }
