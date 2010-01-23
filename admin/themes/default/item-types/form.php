@@ -41,7 +41,7 @@
             // Turn all the links into AJAX requests that will actually delete the element and reload the list.
             $$('a.delete-element').invoke('observe', 'click', function(e){
                 e.stop();
-                if(!confirm('Are you sure you want to delete this element?')) {
+                if(!confirm('Are you sure you want to delete this element? This will remove the element from this particular item type. Items that are assigned to this item type will lose metadata that is specific to this element.')) {
                     return;
                 }
                 new Ajax.Request(this.href, {

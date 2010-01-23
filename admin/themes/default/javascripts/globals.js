@@ -46,6 +46,36 @@ function confirmDelete() {
             return confirm('Are you sure you want to delete this?');
         }
     });
+    
+    $$('.delete-element-set').each( function(el) {
+        el.onclick = function() {
+            return confirm('Are you sure you want to delete this element set? This will delete the element set and all elements assigned to the element set. Items will lose all metadata that is specific to this element set.');
+        }
+    });
+    
+    $$('.delete-item').each( function(el) {
+        el.onclick = function() {
+            return confirm('Are you sure you want to delete this item? This will delete the item and its associated metadata. It will also delete all files and file metadata associated with this item.');
+        }
+    });
+    
+    $$('.delete-item-type').each( function(el) {
+        el.onclick = function() {
+            return confirm('Are you sure you want to delete this item type? This will delete the item type but will not delete the elements assigned to the item type. Items that are assigned to this item type will lose all metadata that is specific to the item type.');
+        }
+    });
+    
+    $$('.delete-collection').each( function(el) {
+        el.onclick = function() {
+            return confirm('Are you sure you want to delete this collection? This will delete the collection and its associated metadata. This will not delete any items in this collection, but will delete the referece to this collection in each item.');
+        }
+    });
+    
+    $$('.delete-user').each( function(el) {
+        el.onclick = function() {
+            return confirm('Are you sure you want to delete this user? This will delete the user from the system, and will prevent the user from logging in unless a new account is created. Items, collections, and tags created by this user will remain in the archive, but will no longer be associated with this user.');
+        }
+    });
 }
 
 Omeka.Form = Object.extend({}, {

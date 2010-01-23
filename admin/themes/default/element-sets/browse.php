@@ -25,7 +25,7 @@
             </td>
             <td>
                 <?php if (has_permission('ElementSets', 'delete') and !in_array($elementSet->name, $doNotDelete)): ?>
-                    <?php echo link_to($elementSet, 'delete', 'Delete', array('class'=>'delete')); ?>
+                    <?php echo link_to($elementSet, 'delete', 'Delete', array('class'=>'delete-element-set delete')); ?>
                 <?php endif; ?>
             </td>
         </tr>
