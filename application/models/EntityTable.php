@@ -54,7 +54,7 @@ class EntityTable extends Omeka_Db_Table
     {    
         // If we are not allowed to display email addresses, don't pull it from the DB
         if (!$params['get_email']) {
-            $select->reset('columns');
+            $select->reset(Zend_Db_Select::COLUMNS);
             $select->from(array(), array('e.id', 
                                          'e.first_name', 
                                          'e.middle_name', 
