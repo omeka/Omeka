@@ -235,7 +235,7 @@ class Omeka_Db_Table
     public function findPairsForSelectForm(array $options = array())
     {
         $select = $this->getSelectForFindBy($options);
-        $select->reset('columns');
+        $select->reset(Zend_Db_Select::COLUMNS);
         $select->from(array(), $this->_getColumnPairs());        
         $pairs = $this->getDb()->fetchPairs($select);
         return $pairs;
