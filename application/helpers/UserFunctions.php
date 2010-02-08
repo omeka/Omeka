@@ -53,7 +53,7 @@ function get_user_by_id($userId)
  **/
 function has_permission($role, $privilege=null) 
 {
-	$acl = Omeka_Context::getInstance()->getAcl();
+	$acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->acl;
 	$user = current_user();
 	if (!$user) return false;
 	

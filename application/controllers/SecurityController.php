@@ -33,7 +33,7 @@ class SecurityController extends Omeka_Controller_Action
                               'file_mime_type_whitelist',
                               'disable_default_file_validation');
         
-        $options = Omeka_Context::getInstance()->getOptions();
+        $options = $this->getInvokeArg('bootstrap')->getResource('Options');
         
         foreach ($options as $k => $v) {
             if (in_array($k, $settingsList)) {
@@ -54,7 +54,7 @@ class SecurityController extends Omeka_Controller_Action
                     $options[$key] = $value;
                 }
             }
-            Omeka_Context::getInstance()->setOptions($options);
+            $this->getInvokeArg('bootstrap')->options = $options;
             
             $this->flashSuccess("The security settings have been updated.");
         }

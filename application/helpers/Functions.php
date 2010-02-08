@@ -216,7 +216,7 @@ function loop_records($recordType, $records)
  */
 function current_action_contexts()
 {
-    $actionName = Omeka_Context::getInstance()->getRequest()->getActionName();
+    $actionName = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
     $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch')->getActionContexts($actionName);
     sort($contexts);
     return $contexts;

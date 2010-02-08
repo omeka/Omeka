@@ -90,7 +90,7 @@ class ErrorController extends Omeka_Controller_Action
     
     private function logException($e, $priority)
     {
-        $logger = Omeka_Context::getInstance()->getLogger();
+        $logger = $this->getInvokeArg('bootstrap')->getResource('Logger');
         if ($logger) {
             $logger->log($e->getMessage(), $priority);
         }
@@ -127,7 +127,7 @@ class ErrorController extends Omeka_Controller_Action
     
     protected function isInDebugMode()
     {
-        $config = Omeka_Context::getInstance()->getConfig('basic');
+        $config = $this->getInvokeArg('bootstrap')->getResource('Config');
         return (bool) $config->debug->exceptions;
     }
 }

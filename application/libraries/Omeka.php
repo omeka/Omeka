@@ -28,13 +28,4 @@ final class Omeka
 
         return false;
     }
-    
-    /**
-     * Convenience method returns the logged in user
-     * or false depending on whether the user is 
-     * logged in or not.
-     */
-    static function loggedIn() {
-        trigger_error('Omeka::loggedIn() has been deprecated!  Please use Omeka_Context::getInstance()->getCurrentUser() instead!');
-    }
 }

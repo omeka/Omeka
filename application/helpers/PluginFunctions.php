@@ -17,7 +17,7 @@
  **/
 function admin_plugin_footer()
 {
-    $request = Omeka_Context::getInstance()->getRequest();
+    $request = Zend_Controller_Front::getInstance()->getRequest();
     fire_plugin_hook('admin_theme_footer', $request);
 }
  
@@ -44,7 +44,7 @@ function admin_plugin_footer()
  **/
 function admin_plugin_header()
 {
-    $request = Omeka_Context::getInstance()->getRequest();
+    $request = Zend_Controller_Front::getInstance()->getRequest();
     fire_plugin_hook('admin_theme_header', $request);
 }
 
@@ -136,7 +136,7 @@ function plugin_append_to_collections_show()
  **/
 function plugin_footer() 
 {
-    $request = Omeka_Context::getInstance()->getRequest();
+    $request = Zend_Controller_Front::getInstance()->getRequest();
 	fire_plugin_hook('public_theme_footer', $request);
 }
 
@@ -153,7 +153,7 @@ function plugin_footer()
  **/
 function plugin_header() 
 {
-    $request = Omeka_Context::getInstance()->getRequest();
+    $request = Zend_Controller_Front::getInstance()->getRequest();
 	fire_plugin_hook('public_theme_header', $request);
 }
 
