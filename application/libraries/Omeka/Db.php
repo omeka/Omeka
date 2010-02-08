@@ -78,18 +78,7 @@ class Omeka_Db
     {
         $this->_logger = $logger;
     }
-    
-    /**
-     * @deprecated
-     * 
-     * @param string
-     * @return void
-     **/
-    public function getConnection()
-    {
-        return $this->getAdapter();
-    }
-    
+        
     public function getAdapter()
     {
         return $this->_conn;
