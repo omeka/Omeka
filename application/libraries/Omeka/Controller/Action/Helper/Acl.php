@@ -49,13 +49,26 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         $this->_currentUser = $currentUser;
     }
     
+    /**
+     * Determine whether or not access is granted to a specific controller/action.
+     * 
+     * If the user has been authenticated, display the Access Forbidden error page.
+     * Otherwise, give the user an opportunity to login before trying again.
+     */
     public function preDispatch()
     {
         if (!$this->isAllowed($this->getRequest()->getActionName())) {
-            $this->getRequest()->setControllerName('error')
-                               ->setActionName('forbidden')
-                               ->setModuleName('default')
-                               ->setDispatched(false);
+            if ($this->_currentUser) {
+                $this->getRequest()->setControllerName('error')
+                                   ->setActionName('forbidden')
+                                   ->setModuleName('default')
+                                   ->setDispatched(false);
+            } else {
+                $this->getRequest()->setControllerName('users')
+                                   ->setActionName('login')
+                                   ->setModuleName('default')
+                                   ->setDispatched(false);
+            }    
         }
     }
     	
