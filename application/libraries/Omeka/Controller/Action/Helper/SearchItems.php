@@ -37,7 +37,8 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
     {   
         $request = $this->getRequest();
         $controller = $this->getActionController();
-        $itemTable = Omeka_Context::getInstance()->getDb()->getTable('Item');
+        $itemTable = $this->getFrontController()->getParam('bootstrap')
+                          ->getResource('Db')->getTable('Item');
         // Page should be passed as the 'page' parameter or it defaults to 1
         $resultPage = $request->get('page') or $resultPage = 1;
         
@@ -151,7 +152,8 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
     public function getItemsPerPage()
     {
         //Retrieve the number from the options table
-        $options = Omeka_Context::getInstance()->getOptions();
+        $options = $this->getFrontController()->getParam('bootstrap')
+                          ->getResource('Options');
         
         if (is_admin_theme()) {
             $perPage = (int) $options['per_page_admin'];

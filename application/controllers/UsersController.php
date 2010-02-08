@@ -29,14 +29,9 @@ class UsersController extends Omeka_Controller_Action
     public function init() {
         $this->_helper->db->setDefaultModelName('User');
         $this->checkPermissions();  //Cannot execute as a beforeFilter b/c ACL permissions are checked before that.
-        $this->_auth = Omeka_Context::getInstance()->getAuth();
+        $this->_auth = $this->getInvokeArg('bootstrap')->getResource('Auth');
     }
-    
-    public function getAcl()
-    {
-        return Omeka_Context::getInstance()->getAcl();
-    }
-    
+        
     /**
      * Check some permissions that depend on what specific information is being 
      * accessed
@@ -253,7 +248,7 @@ class UsersController extends Omeka_Controller_Action
     public function loginAction()
     {
         // If a user is already logged in, they should always get redirected back to the dashboard.
-        if ($loggedInUser = Omeka_Context::getInstance()->getCurrentUser()) {
+        if ($loggedInUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser')) {
             $this->redirect->goto('index', 'index');
         }
         

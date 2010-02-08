@@ -81,7 +81,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     
     /**
      * @link http://framework.zend.com/manual/en/zend.controller.actionhelpers.html#zend.controller.actionhelpers.contextswitch
-     * @uses Omeka_Context::getPluginBroker()
      * @return void
      **/
     protected function setActionContexts()
@@ -91,7 +90,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $contextArray = !empty($this->contexts) ? $this->contexts : array();
         
         // Plugins can hook in to add contexts to actions
-        if ($broker = Omeka_Context::getInstance()->getPluginBroker()) {
+        if ($broker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker')) {
             // The 'define_action_contexts' filter receives the controller
             // object as the 2st argument and the context switcher object as the
             // 3nd (in case custom modification is required).
@@ -160,7 +159,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     
     public function getCurrentUser()
     {
-        return Omeka_Context::getInstance()->getCurrentUser();
+        return $this->getInvokeArg('bootstrap')->getResource('Currentuser');
     }
     
     /**

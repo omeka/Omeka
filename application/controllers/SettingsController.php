@@ -196,7 +196,7 @@ class SettingsController extends Omeka_Controller_Action
             array('settings_submit'), 
             'submit');
         
-        $form->setDefaults(Omeka_Context::getInstance()->getOptions());
+        $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
         
         $this->_form = $form;
     }
