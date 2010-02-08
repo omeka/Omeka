@@ -45,8 +45,10 @@ class ErrorController extends Omeka_Controller_Action
     
     protected function _getException()
     {
-        $handler = $this->_getParam('error_handler');        
-        return $handler->exception;
+        $handler = $this->_getParam('error_handler');    
+        if ($handler) {
+            return $handler->exception;
+        }
     }
     
     /**
@@ -60,14 +62,30 @@ class ErrorController extends Omeka_Controller_Action
         $this->getResponse()->setHttpResponseCode(404);
         $this->view->assign(array('badUri' => $this->getRequest()->getRequestUri(), 
                                   'e' => $this->_getException()));
-        $this->render('404');
+        
+        // Render the error script that displays debugging info.
+        if ($this->isInDebugMode()) {
+            $this->render('debug');
+        } else {
+            $this->render('404');
+        }
     }
     
     public function forbiddenAction()
     {
         $this->getResponse()->setHttpResponseCode(403);
-        $this->view->assign(array('e' => $this->_getException()));
-        $this->render('403');
+        // Fake an exception if there isn't one in the request.
+        if (!($e = $this->_getException())) {
+            $e = new Omeka_Controller_Exception_403("Access denied.");
+        }
+        $this->view->assign(array('e' => $e));
+        
+        // Render the error script that displays debugging info.
+        if ($this->isInDebugMode()) {
+            $this->render('debug');
+        } else {
+            $this->render('403');
+        }
     }
     
     private function logException($e, $priority)

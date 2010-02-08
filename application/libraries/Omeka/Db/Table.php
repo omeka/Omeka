@@ -235,7 +235,7 @@ class Omeka_Db_Table
     public function findPairsForSelectForm(array $options = array())
     {
         $select = $this->getSelectForFindBy($options);
-        $select->reset('columns');
+        $select->reset(Zend_Db_Select::COLUMNS);
         $select->from(array(), $this->_getColumnPairs());        
         $pairs = $this->getDb()->fetchPairs($select);
         return $pairs;
@@ -398,12 +398,16 @@ class Omeka_Db_Table
         $select = $params ? $this->getSelectForFindBy($params) : $this->getSelect();
         
         //Make sure the SELECT only pulls down the COUNT() column
-        $select->reset('columns');        
+        $select->reset(Zend_Db_Select::COLUMNS);        
         $alias = $this->getTableAlias();
         $select->from(array(), "COUNT(DISTINCT($alias.id))");
         
         //Reset the GROUP and ORDER BY clauses if necessary
-        $select->reset('order')->reset('group');
+        $select->reset(Zend_Db_Select::ORDER)->reset(Zend_Db_Select::GROUP);
+        
+        //Reset the LIMIT and OFFSET clauses if necessary
+        $select->reset(Zend_Db_Select::LIMIT_COUNT)->reset(Zend_Db_Select::LIMIT_OFFSET);
+
         return $select;        
     }
     

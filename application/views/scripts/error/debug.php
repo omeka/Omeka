@@ -6,12 +6,12 @@
     }
 </style>
     
-<h1>Error Debugging - Use for Development Purposes Only</h1>
+<h1>Omeka Has Encountered an Error</h1>
 
 <h3><?php echo get_class($e) . ": ". nls2p($e->getMessage()); ?></h3>
 
-
-<h4>Backtrace:<br /> <?php echo nl2br($e->getTraceAsString()); ?></h4>
+<h4>Backtrace:</h4>
+<pre><?php echo $e->getTraceAsString(); ?></pre>
 
     
 <?php foot(); ?>

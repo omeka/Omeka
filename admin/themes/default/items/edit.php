@@ -30,7 +30,7 @@ $$('.tabs').each(function(tab_group){
         </div>
         <p id="delete_item_link">
             <?php echo link_to_item('Delete This Item', 
-                array('class'=>'delete'), 'delete'); ?>
+                array('class'=>'delete delete-item'), 'delete'); ?>
         </p>
     </form>
 
