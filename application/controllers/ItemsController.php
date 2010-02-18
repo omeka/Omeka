@@ -157,7 +157,6 @@ class ItemsController extends Omeka_Controller_Action
     
     public function elementFormAction()
     {
-        // var_dump($_POST);exit;
         $elementId = (int)$_POST['element_id'];
         $itemId  = (int)$_POST['item_id'];
         

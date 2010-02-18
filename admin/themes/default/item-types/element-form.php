@@ -14,7 +14,6 @@
     <label>Or Create a new Element</label>
     <div class="inputs">
     <?php   
-       /// echo __v()->formLabel('element-name', 'Name');
         echo __v()->formText('element-name', null, array('class'=>'textinput')); 
     ?>   
     </div>

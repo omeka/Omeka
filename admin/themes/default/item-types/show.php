@@ -12,8 +12,8 @@
 <?php if ( has_permission('ItemTypes','edit') ): ?>
 <p id="edit-itemtype" class="edit-button"><a class="edit" href="<?php echo html_escape(record_uri($itemtype, 'edit', 'item-types')); ?>">Edit this Item Type</a></p>
 <?php endif; ?>
-
 <div id="primary">
+    <?php echo flash(); ?>
     <div id="type-info">
         <h2>Description</h2>
         <p><?php echo html_escape($itemtype->description); ?></p>

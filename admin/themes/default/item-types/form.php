@@ -1,64 +1,81 @@
 <script type="text/javascript" charset="utf-8">
     
-    Event.observe(window, 'load', function(){     
-        
-        var activateElementForm = function() {
-            // When we submit the form to add an element to an item type, AJAX 
-            // request it instead and branch on the results.
-            // This AJAX request will either return the form partial on failure,
-            // or the form's list of elements on success.  
-            $('add-element-form').observe('submit', function(e){
-                e.stop();
-                this.request({
-                    // Update the element-form partial when this fails (validation errors, etc.)
-                    onFailure: function(t) {
-                        var partial = $('element-form');
-                        partial.update(t.responseText);
-                        new Effect.Highlight(partial);
-                        
-                        activateElementForm();
-                    },
-                    // Update the element-list partial when this succeeds.
-                    onSuccess: function(t) {
-                        // Clear the element ID selector so that we can pick/make
-                        // a new element. 
-                        $('element-id').clear();
-                        var list = $('element-list');
-                        list.update(t.responseText);
-                        // Scroll to the list's header so you can see everything.
-                        $('type-elements').scrollTo();
-                        new Effect.Highlight(list);
+    Event.observe(window, 'load', function() {
 
-                        activateDeleteElementLinks();
-                    }
-                });
-            });
+        $('add-element').observe('click', function(e) {
+            e.stop();
+            var elementCount = $$('#element-list-tbody tr').length;
+            var typeValue = Form.getInputs('edit-item-type-form','radio','add-element-type').find(function(radio) { return radio.checked; }).value;
+            var addNewRequestUrl = '<?php echo admin_uri('item-types/add-new-element'); ?>';
+       
+            var addExistingRequestUrl = '<?php echo admin_uri('item-types/add-existing-element'); ?>' + '?elementCount=' + elementCount;
+            if (typeValue=='new') {
+                requestUrl = addNewRequestUrl;
+            } else {
+                requestUrl = addExistingRequestUrl; 
+            }
+            new Ajax.Request(requestUrl, {
+    	        method:'get',
+    	        parameters: {elementCount: elementCount},
+    	        onSuccess: function(transport){
+    	          var response = transport.responseText || "no response text";
+                  var list = $('element-list-tbody');
+                  list.insert({bottom:response});
+                  activateRemoveElementLinks();
+                  activateSelectElementDropdowns();
+            	},
+    	        onFailure: function(){ alert('Unable to get a new element.') }
+    	      });
+        });     
+
+        var activateSelectElementDropdowns = function() {
+        	 $$('select.existing-element-drop-down').invoke('observe', 'change', function(e){
+                 e.stop();
+                 var dropDown = this;
+                 var elementId = this.getValue();
+                 var addExistingElementIdPrefix = 'add-existing-element-id-';
+                 var addExistingElementId = this.getAttribute('id');
+                 if (addExistingElementId) {
+                     var elementTempId = addExistingElementId.substring(addExistingElementIdPrefix.length);
+                	 var requestUrl = '<?php echo admin_uri('item-types/change-existing-element'); ?>';
+                     new Ajax.Request(requestUrl, {
+                         method:'get',
+                         parameters: {elementId: elementId, elementTempId: elementTempId},
+                         onSuccess: function(transport){
+                           var responseJSON = transport.responseJSON;
+                           var elementDescriptionCol = dropDown.up().next();
+                           elementDescriptionCol.update(responseJSON.elementDescription);
+                           var elementDataTypeNameCol = dropDown.up().next(1);
+                           elementDataTypeNameCol.update(responseJSON.elementDataTypeName);
+                         },
+                         onFailure: function(){ alert('Unable to get selected element data.') }
+                       });
+                 }
+        	 });
         };
         
-        activateElementForm();
-        
-        var activateDeleteElementLinks = function() {
+        var activateRemoveElementLinks = function() {
             // Turn all the links into AJAX requests that will actually delete the element and reload the list.
             $$('a.delete-element').invoke('observe', 'click', function(e){
                 e.stop();
-                if(!confirm('Are you sure you want to delete this element? This will remove the element from this particular item type. Items that are assigned to this item type will lose metadata that is specific to this element.')) {
-                    return;
+                var elementsToRemove = $('elements-to-remove');
+
+                var removeElementLinkPrefix = 'remove-element-link-';
+                var removeElementLinkId = this.getAttribute('id');
+                if (removeElementLinkId) {    
+	                var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
+	                if (elementId) {
+	                    if(!confirm('Are you sure you want to delete this element? This will remove the element from this particular item type. Items that are assigned to this item type will lose metadata that is specific to this element.')) {
+	                        return;
+	                    }
+	                    elementsToRemove.setAttribute('value', elementsToRemove.getAttribute('value') + elementId + ',');
+	                }
                 }
-                new Ajax.Request(this.href, {
-                    // Update the text and make sure this responds to ajax requests.
-                    onSuccess: function(t) {
-                        $('element-list').update(t.responseText);
-                        activateDeleteElementLinks();
-                    },
-                    // What to do in this case?  Freak out.
-                    onFailure: function(t) {
-                        alert(t.status);
-                    }
-                });
-            });         
+                var row = this.up().up();
+                row.remove();   
+            });
         };
-        
-        activateDeleteElementLinks();
+        activateRemoveElementLinks();
     });
 </script>
 
@@ -76,7 +93,7 @@
     <div class="field">
     <?php echo label('description', 'Description'); ?>
         <div class="inputs">
-        <?php echo $this->formTextarea('description' ,$itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
+        <?php echo $this->formTextarea('description', $itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
         </div>
     </div>
 </fieldset>
@@ -84,7 +101,6 @@
 
 <fieldset id="type-elements">
     <legend>Elements</legend>
-    
     <div id="element-list">
         <?php echo $this->action('element-list', 'item-types', null, array('item-type-id' => $itemtype->id)); ?>
     </div>

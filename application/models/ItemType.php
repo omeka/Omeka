@@ -29,6 +29,7 @@ class ItemType extends Omeka_Record
                                 'ItemTypesElements'=>'loadOrderedChildren');
     
     private $_elementsToSave = array();
+    private $_elementsToRemove = array();
     
     protected function _initializeMixins()
     {
@@ -108,22 +109,8 @@ class ItemType extends Omeka_Record
     protected function _delete()
     {
         $tm_objs = $this->getDb()->getTable('ItemTypesElements')->findBySql('item_type_id = ?', array( (int) $this->id));
-        
         foreach ($tm_objs as $tm) {
             $tm->delete();
-        }
-    }
-    
-    /**
-     * Whenever we save the item-type form, reorder the elements based on the keys given in the post.
-     * 
-     * @param string
-     * @return void
-     **/
-    protected function beforeSaveForm($post)
-    {
-        if ($this->exists()) {
-            $this->_reorderElementsFromPost($post);
         }
     }
     
@@ -134,12 +121,19 @@ class ItemType extends Omeka_Record
      * future by refactoring into a mixin that handles record dependencies.
      */
     protected function afterSave()
-    {
+    {	    	
+    	// remove the elements that need to be removed
+    	foreach ($this->_elementsToRemove as $key => $element) {
+    		$this->_removeElement($element);
+    		unset($this->_elementsToRemove[$key]);
+    	}
+    	    	
+    	// add the elements that need to be added
         foreach ($this->_elementsToSave as $key => $element) {
-            $element->forceSave();
+        	$element->forceSave();
             $this->addElementById($element->id);
             unset($this->_elementsToSave[$key]);
-        }
+        }    
     }
     
     /**
@@ -159,48 +153,73 @@ class ItemType extends Omeka_Record
      * the given ordering to resort the join records from item_types_elements into
      * a new ordering, which is then saved.
      * 
-     * @param string
+     * @param Array $elementOrderingArray An array of numbers representing
      * @return void
      **/
-    private function _reorderElementsFromPost(&$post)
-    {
-        $elementPostArray = $post['Elements'];
-
-        if ($elementPostArray) {
-            if (!array_key_exists('order', current($elementPostArray))) {
-                throw new Omeka_Record_Exception('Form was submitted in an invalid format!');
-            }
-
-            // This is how we sort the multi-dimensional array based on the element_order.
-            $ordering = pluck('order', $elementPostArray);
-            $joinRecordArray = $this->ItemTypesElements;        
-            // This is essentially voodoo magic.
-            array_multisort($ordering, SORT_ASC, SORT_NUMERIC, $joinRecordArray);
-
-            $i = 0;
-            foreach ($joinRecordArray as $key => $joinRecord) {
-                $joinRecord->order = ++$i;
-                $joinRecord->forceSave();
-            }
+    public function reorderElements($elementOrderingArray)
+    {    	
+        $joinRecordArray = $this->loadOrderedChildren();
+        
+        if (count($elementOrderingArray) > count($joinRecordArray)) {
+            throw new Omeka_Record_Exception('There are too many values in the element ordering array.');
+        } else if (count($elementOrderingArray) < count($joinRecordArray)) {
+            throw new Omeka_Record_Exception('There are too few values in the element ordering array.');
         }
+            
+        // This is essentially voodoo magic.
+        array_multisort($elementOrderingArray, SORT_ASC, SORT_NUMERIC, $joinRecordArray);
+            
+        $i = 0;
+        foreach ($joinRecordArray as $key => $joinRecord) {
+            $joinRecord->order = ++$i;
+            $joinRecord->forceSave();
+        }     
     }
     
     /**
      * Add a set of elements to the Item Type.
-     * @param array $elementInfo Array of metadata where each entry corresponds
-     * to a new element to add to the item type.  
+     * @param array $elements Either an array of elements 
+     * or an array of metadata, where each entry corresponds
+     * to a new element to add to the item type.  If an element exists with the same id, 
+     * it will replace the old element with the new element.
      * @uses Element::setArray() For details on the format for passing metadata
      * through $elementInfo.
      */    
-    public function addElements($elementInfo = array())
-    {
-        foreach ($elementInfo as $elementMetadata) {
-            $record = new Element;
-            $record->setArray($elementMetadata);
-            $record->setElementSet(ELEMENT_SET_ITEM_TYPE);
-            $record->setRecordType('Item');
-            $this->_elementsToSave[] = $record;
+    public function addElements($elements = array())
+    {    	
+        $elementsToSave = array();
+    	$elementsToSaveIds = array();
+        foreach ($elements as $element) {        	
+        	$elementToSave = null;
+        	if (is_array($element)) {        		
+            	// the element is an array of element metadata
+                $elementToSave = new Element;
+                $elementToSave->setArray($element);
+                $elementToSave->setElementSet(ELEMENT_SET_ITEM_TYPE);
+                $elementToSave->setRecordType('Item');            	
+            } else if ($element instanceof Element) {
+            	$elementToSave = $element;
+            	if ($element->id) {
+                    $elementsToSaveIds[] = $element->id;
+            	}
+            } else {
+            	throw new Omeka_Record_Exception('Invalid element data. To add elements, you must either pass an element objects or an array of element metadata.');
+            }
+            if ($elementToSave) {
+                $elementsToSave[] = $elementToSave;
+            }
         }
+        
+        // check to see if the element already exists in the $this->_elementToSave,
+        // and if it does, then replace the old element with the new element
+        foreach($this->_elementsToSave as $oldElementToSave) {
+            if (!$oldElementToSave->id || !in_array($oldElementToSave->id, $elementsToSaveIds)) {
+            	$elementsToSave[] = $oldElementToSave;
+            }
+        }
+        
+        // reset the $_elementsToSave
+        $this->_elementsToSave = $elementsToSave;
     }
     
     /**
@@ -223,34 +242,100 @@ class ItemType extends Omeka_Record
         }
     }
     
-    /**
-     * Remove a single Element from this item type.
+    /*
+     * Removes an array of Elements from this item type
+     * The element will not be removed until the object is saved.
      * 
-     * @param string
+     * @param Array $elements An array of Element objects or element id strings
+     * @return void
+     */
+    public function removeElements($elements) 
+    {
+        foreach($elements as $element) {
+        	$this->removeElement($element);
+        }
+    }
+    
+    /**
+     * Remove a single Element from this item type.  
+     * The element will not be removed until the object is saved.
+     * 
+     * @param Element|string $element
      * @return void
      **/
-    public function removeElement($elementId)
+    public function removeElement($element)
     {
-        if (!$this->exists()) {
+    	if (!$this->exists()) {
             throw new Omeka_Record_Exception('Cannot remove elements from an item type that is not persistent in the database!');
         }
         
-        // Find the join record and delete it.
+        if ($element instanceof Element) {
+        	$elementId = $element->id;
+        } else if (is_string($element)) {
+        	$elementId = $element;
+            $element = $this->getTable('Element')->find($elementId);
+            if (!$element) {
+            	throw Omeka_Record_Exception('Cannot find element for id ' . $elementId);
+            }
+        }
+        
+        // Remove the element from the elements to save
+        $elementsToSave = array();
+        foreach($this->_elementsToSave as $elementToSave) {
+        	if ($elementToSave->id != $elementId) {
+        		$elementsToSave[] = $elementToSave;
+        	}
+        }
+        $this->_elementsToSave = $elementsToSave;
+        
+        // Reset the elements to remove
+        $elementsToRemove = array();
+        $hasElement = false;
+        foreach($this->_elementsToRemove as $elementToRemove) {
+        	if ($elementToRemove->id == $elementId) {
+        	   $hasElement = true;
+        	   break;
+        	}
+        }
+        if (!$hasElement) {
+            if ($element) {
+                $this->_elementsToRemove[] = $element;
+            }
+        }
+    }
+    
+     /**
+     * Removes a single Element from this item type.  It removes it immediately.
+     * 
+     * @param Element|string $element
+     * @return void
+     **/
+    private function _removeElement($element) 
+    {
+    	$elementId = $element->id;
+    	
+    	// Find the join record and delete it.
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?', array($elementId, $this->id), true);
     
         if (!$iteJoin) {
             throw new Omeka_Record_Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
         }
-        
         $iteJoin->delete();
-        
+               
         // Deleting one of the joins throws the whole thing out of whack, so we need to reset the ordering.
         $this->reorderChildren();
-    }
+     }
     
-    public function hasElement($elementId) { 
+     /**
+     * Determines whether a saved version of the item type has an element.  
+     * It does not correctly determine the presence of elements that were added or removed without saving the item type object.
+     * 
+     * @param Element|string $element
+     * @return void
+     **/
+    public function hasElement($elementId) 
+    { 
         $db = $this->getDb();
-        
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?',
                                     array($elementId, $this->id),
                                     true);
