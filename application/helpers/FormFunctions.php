@@ -462,6 +462,16 @@ function select_item_type_elements($props = array(), $value = null, $label = nul
     return _select_from_table('Element', $props, $value, $label, $searchParams);    
 }
 
+/*
+ * Used primarily in edit item type form to build a select form input containing
+ * the names and IDs of all the data types
+ */
+function select_data_types($props = array(), $value = null, $label = null)
+{
+	$searchParams = array();
+    return _select_from_table('DataType', $props, $value, $label, $searchParams); 
+}
+
 /**
  * @since 0.10
  * @internal Since select() is deprecated as of version 1.2, we will need to update

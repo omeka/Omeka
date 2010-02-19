@@ -32,6 +32,7 @@ class Element extends Omeka_Record
     /**
      * Set the record type for the element (Item, File, All, etc.).
      * @param string $recordTypeName
+     * @return void
      */
     public function setRecordType($recordTypeName)
     {
@@ -40,16 +41,32 @@ class Element extends Omeka_Record
     
     /**
      * Set the data type for the element (Text, Tiny Text, etc.).
-     * @param string $dataTypeName
+     * @param DataType|string $dataType
+     * @return void
      */
-    public function setDataType($dataTypeName)
+    public function setDataType($dataType)
     {
-        $this->data_type_id = $this->_getDataTypeId($dataTypeName);
+    	if ($dataType instanceof DataType) {
+    		$this->data_type_id = $dataType->id;
+    	} else if (is_string($dataType)) {
+			$dataTypeName = $dataType;
+        	$this->data_type_id = $this->_getDataTypeId($dataTypeName);
+    	}
+    }
+    
+    /**
+     * Get the data type object of the element
+     * @return DataType
+     */
+    public function getDataType()
+    {
+    	return $this->getDb()->getTable('DataType')->find($this->data_type_id);
     }
     
     /**
      * Set the element set for the element. 
      * @param string $elementSetName
+     * @return void
      */
     public function setElementSet($elementSetName)
     {
@@ -74,6 +91,7 @@ class Element extends Omeka_Record
     /**
      * Set the order of the element within its element set.
      * @param integer $order
+     * @return void
      */
     public function setOrder($order)
     {
@@ -83,6 +101,7 @@ class Element extends Omeka_Record
     /**
      * Set the name of the element.
      * @param string $name
+     * @return void
      */
     public function setName($name)
     {
@@ -92,6 +111,7 @@ class Element extends Omeka_Record
     /**
      * Set the description for the element.
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {
@@ -113,6 +133,7 @@ class Element extends Omeka_Record
      *  <li>data_type</li>
      *  <li>element_set</li>
      * </ul>
+     * @return void
      */
     public function setArray($data)
     {
@@ -157,6 +178,7 @@ class Element extends Omeka_Record
      *  <li>Has a record type.</li>
      *  <li>Name does not already exist within the given element set.</li>
      * </li>
+     * @return void
      */
     protected function _validate()
     {
@@ -181,6 +203,7 @@ class Element extends Omeka_Record
     /**
      * When deleting this element, delete all ElementText records associated 
      * with this element.
+     * @return void
      */
     protected function _delete()
     {
@@ -193,6 +216,7 @@ class Element extends Omeka_Record
     
     /**
      * Set the default record & data type for the element (if necessary).
+     * @return void
      */
     protected function beforeValidate()
     {
@@ -207,6 +231,7 @@ class Element extends Omeka_Record
         
     /**
      * Retrieve the record type ID from the name.
+     * @return RecordType
      */
     private function _getRecordTypeId($recordTypeName)
     {
@@ -215,6 +240,7 @@ class Element extends Omeka_Record
     
     /**
      * Retrieve the data type ID from the name.
+     * @return int
      */
     private function _getDataTypeId($dataTypeName)
     {
@@ -223,6 +249,7 @@ class Element extends Omeka_Record
     
     /**
      * Retrieve the element set ID from the name.
+     * @return int
      */
     private function _getElementSetId($elementSetName)
     {
@@ -235,6 +262,7 @@ class Element extends Omeka_Record
     
     /**
      * Calculate whether the element's name already belongs to the current set.
+     * @return boolean
      */
     private function _nameIsInSet($elementName, $elementSetId)
     {

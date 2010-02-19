@@ -188,7 +188,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $flash->setFlash($flash_code, $msg, $priority);
     }
     
-    public function flashValidationErrors($e, $priority = null)
+    public function flashValidationErrors(Omeka_Validator_Exception $e, $priority = null)
     {
         if (!$priority) {
             $priority = Omeka_Controller_Flash::DISPLAY_NOW;
