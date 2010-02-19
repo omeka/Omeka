@@ -19,7 +19,7 @@ class Omeka_Helper_PaginationLinksTest extends Omeka_Test_AppTestCase
     public function testPaginationLinksAvoidXssAttack()
     {
         $attackUrl = '/items/browse/%22%3e%3cscript%3ealert(11639)%3c/script%3e';
-        $escapedUrl = '/items/browse/&quot;&gt;&lt;script&gt;alert(11639)&lt;/script%3E/page/5';
+        $escapedUrl = '/items/browse/%22%3E%3Cscript%3Ealert%2811639%29%3C/script%3E/page/5';
         
         // Have to dispatch a request in order for view script directories to 
         // be added to the View instance.
@@ -33,7 +33,6 @@ class Omeka_Helper_PaginationLinksTest extends Omeka_Test_AppTestCase
           "link"            => ""));
       
         $html = pagination_links();
-        $this->response->setBody($html);        
         $this->assertContains("<a href=\"$escapedUrl\">", 
                               $html, 
                               'Should have escaped the pagination URLs to avoid XSS attack.');                
