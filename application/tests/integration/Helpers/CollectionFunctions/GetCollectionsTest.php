@@ -49,6 +49,10 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Test_AppTestC
      * @internal Ticket #812 added for this test on 07/24/09.
      */
     public function testCanGetPrivateCollections() {
+        // Give access to non-public collections so we can retrieve this data.
+        $acl = $this->core->getBootstrap()->getResource('Acl');
+        $acl->allow(null, 'Collections', 'showNotPublic');
+        
         $this->_createNewCollections(5,5,5);
         $collections = get_collections(array('public' => 0));
         $this->assertEquals(5, count($collections));
