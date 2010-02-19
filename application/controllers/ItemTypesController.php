@@ -74,9 +74,8 @@ class ItemTypesController extends Omeka_Controller_Action
     	
     	// set the default item type element order
     	$elementsOrder = array();
-    	$elementCount = count($itemType->Elements);
-    	for($i = 0; $i < $elementCount; $i++) {
-    		$elementsOrder[] = $i + 1;
+    	if ($elementCount = count($itemType->Elements)) {
+    	   $elementsOrder = range(1, $elementCount);
     	}
     	
         try {
