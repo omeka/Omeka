@@ -28,6 +28,8 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         // No idea why we actually need to add the default routes.
         $this->frontController->getRouter()->addDefaultRoutes();
         
+        $this->frontController->setParam('bootstrap', $this->core->getBootstrap());
+        
         $this->setUpBootstrap($this->core->getBootstrap());
         $this->core->bootstrap();
     }
@@ -55,4 +57,31 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
             }
         }        
     }
+    
+    /**
+     * Increment assertion count
+     *
+     * @todo COPIED FROM ZEND FRAMEWORK 1.10, REMOVE AFTER UPGRADING TO THAT
+     * VERSION.
+     * @return void
+     */
+    protected function _incrementAssertionCount()
+    {
+        $stack = debug_backtrace();
+        foreach (debug_backtrace() as $step) {
+            if (isset($step['object'])
+                && $step['object'] instanceof PHPUnit_Framework_TestCase
+            ) {
+                if (version_compare(PHPUnit_Runner_Version::id(), '3.3.0', 'lt')) {
+                    break;
+                } elseif (version_compare(PHPUnit_Runner_Version::id(), '3.3.3', 'lt')) {
+                    $step['object']->incrementAssertionCounter();
+                } else {
+                    $step['object']->addToAssertionCount(1);
+                }
+                break;
+            }
+        }
+    }
+    
 }
