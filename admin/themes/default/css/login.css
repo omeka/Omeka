@@ -24,7 +24,7 @@ body#login {width: 414px; margin: 54px auto;}
 p.clear {clear:both;}
 
 #login div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
-#login .inputs {width: inherit;}
+#login .inputs {width: 259px;}
 
 #login input.submit {float:right;margin-top:6px;margin-bottom:0;}
 
