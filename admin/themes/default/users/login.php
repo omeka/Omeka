@@ -2,7 +2,9 @@
 
 <script type="text/javascript" charset="utf-8">
     Event.observe(window,'load',function() {
-        $('username').focus();
+        if ($('username')) {
+            $('username').focus();
+        }
     }); 
 </script>
 
@@ -17,6 +19,6 @@
         <?php echo html_escape($errorMessage); ?>
         </span></div>
     <?php endif; ?>
-    
-<?php echo $loginForm->setMethod('post')->setAction($this->url('users/login')); ?>
+
+<?php echo $this->form->setAction($this->url('users/login')); ?>
 <?php foot(array(),'login-footer'); ?>

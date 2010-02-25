@@ -6,6 +6,9 @@ class Omeka_Output_Xml_Item extends Omeka_Output_Xml_Abstract
         // item
         $itemElement = $this->_createElement('item', null, $this->_record->id);
         
+        $itemElement->setAttribute('public', $this->_record->public);
+        $itemElement->setAttribute('featured', $this->_record->featured);
+        
         if (in_array($this->_context, array('item', 'itemContainer'))) {
             // fileContainer
             $this->_buildFileContainerForItem($this->_record, $itemElement);

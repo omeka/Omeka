@@ -252,38 +252,52 @@ class UsersController extends Omeka_Controller_Action
             $this->redirect->goto('index', 'index');
         }
         
-        $defaultLogin = new Omeka_Login_Db($this->getDb());
-        $omekaLogin = apply_filters('login', $defaultLogin);
+        // require_once is necessary because lacking form autoloading.
+        require_once APP_DIR .DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR .'Login.php';
+        $loginForm = new Omeka_Form_Login;
+        $loginForm = apply_filters('login_form', $loginForm);
         
-        if (!($omekaLogin instanceof Omeka_Login_Interface)) {
-            throw new UnexpectedValueException("'login' filter did not return an instance of 'Omeka_Login_Interface'!");
+        $this->view->form = $loginForm;
+        
+        if (!$this->getRequest()->isPost()) {
+            return;            
+        }    
+
+        if (($loginForm instanceof Zend_Form) && !$loginForm->isValid($_POST)) {
+            return;
         }
         
-        $this->view->loginForm = $omekaLogin->getForm();
-        
-        if (!($this->view->loginForm instanceof Zend_Form)) {
-            throw new UnexpectedValueException(get_class($this->view->loginForm) . "::getForm() did not return an instance of Zend_Form!");
+        $authAdapter = new Omeka_Auth_Adapter_UserTable($this->getDb());
+        $pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');
+        // If there are no plugins filtering the login adapter, set the 
+        // credentials for the default adapter.
+        if (!$pluginBroker->getFilters('login_adapter')) {
+            $authAdapter->setIdentity($loginForm->getValue('username'))
+                        ->setCredential($loginForm->getValue('password'));
+        } else {
+            $authAdapter = apply_filters('login_adapter', $authAdapter, $loginForm);   
+        }
+        $authResult = $this->_auth->authenticate($authAdapter);
+        if (!$authResult->isValid()) {
+            $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($authResult)));
+            return;   
         }
         
-        if (!empty($_POST)) {
-            
-            require_once 'Zend/Session.php';
-            
-            $session = new Zend_Session_Namespace;
-             
-            $result = $omekaLogin->authenticate($this->_auth, $_POST);
-            
-            if (!($result instanceof Zend_Auth_Result)) {
-                throw new UnexpectedValueException(get_class($omekaLogin) . "::authenticate() did not return an instance of Zend_Auth_Result!");
-            }
-            
-            
-            if ($result->isValid()) {
-                $this->redirect->gotoUrl($session->redirect);
-            } else {
-                $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($result)));
-            }
-            
+        if ($loginForm && $loginForm->getValue('remember')) {
+            // Remember that a user is logged in for the default amount of 
+            // time (2 weeks).
+            Zend_Session::rememberMe();
+        } else {
+            // If a user doesn't want to be remembered, expire the cookie as
+            // soon as the browser is terminated.
+            Zend_Session::forgetMe();
+        }
+        
+        $session = new Zend_Session_Namespace;
+        if ($session->redirect) {
+            $this->redirect->gotoUrl($session->redirect);
+        } else {
+            $this->redirect->gotoUrl('/');
         }
     }
         

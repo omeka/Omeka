@@ -464,7 +464,13 @@ function select_item_type_elements($props = array(), $value = null, $label = nul
 
 /*
  * Used primarily in edit item type form to build a select form input containing
- * the names and IDs of all the data types
+ * the names and IDs of all the data types.
+ * 
+ * @since 1.2
+ * @param array $props Optional
+ * @param string $value Optional
+ * @param string $label Optional
+ * @return string HTML for selecting a data type.
  */
 function select_data_types($props = array(), $value = null, $label = null)
 {

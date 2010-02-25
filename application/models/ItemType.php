@@ -47,11 +47,23 @@ class ItemType extends Omeka_Record
         $this->_mixins[] = new Orderable($this, 'ItemTypesElements', 'item_type_id', 'fooobar');
     }
     
+    /**
+     * Returns an array of element objects associated with this item type.
+     * 
+     * @return array The array of element objects associated with this item type.
+     */
     protected function getElements()
     {
         return $this->getTable('Element')->findByItemType($this->id);
     }
     
+    /**
+     * Returns an array of item objects that have this item type.
+     * 
+     * @param int $count The maximum number of items to return.
+     * @param boolean $recent  Whether or not the items are recent.
+     * @return array The items associated with the item type.
+     */
     protected function getItems($count = 10, $recent=true)
     {
         $params = array('type'=>$this->id);
@@ -119,6 +131,8 @@ class ItemType extends Omeka_Record
      * 
      * @internal Duplication with ElementSet::afterSave().  Could resolve in 
      * future by refactoring into a mixin that handles record dependencies.
+     * 
+     * @return void
      */
     protected function afterSave()
     {	    	
@@ -138,6 +152,8 @@ class ItemType extends Omeka_Record
     
     /**
      * Validate the elements to ensure saveability-ness.
+     * 
+     * @return void
      */
     protected function afterValidate()
     {
@@ -178,12 +194,16 @@ class ItemType extends Omeka_Record
     
     /**
      * Add a set of elements to the Item Type.
+     * 
      * @param array $elements Either an array of elements 
      * or an array of metadata, where each entry corresponds
      * to a new element to add to the item type.  If an element exists with the same id, 
      * it will replace the old element with the new element.
+     * 
      * @uses Element::setArray() For details on the format for passing metadata
      * through $elementInfo.
+     * 
+     * @return void
      */    
     public function addElements($elements = array())
     {    	
@@ -242,13 +262,14 @@ class ItemType extends Omeka_Record
         }
     }
     
-    /*
+    /**
      * Removes an array of Elements from this item type
      * The element will not be removed until the object is saved.
      * 
+     * @since 1.2
      * @param Array $elements An array of Element objects or element id strings
      * @return void
-     */
+     **/
     public function removeElements($elements) 
     {
         foreach($elements as $element) {
@@ -260,7 +281,7 @@ class ItemType extends Omeka_Record
      * Remove a single Element from this item type.  
      * The element will not be removed until the object is saved.
      * 
-     * @param Element|string $element
+     * @param Element|string $element The element object or the element id.
      * @return void
      **/
     public function removeElement($element)
@@ -328,20 +349,35 @@ class ItemType extends Omeka_Record
     
      /**
      * Determines whether a saved version of the item type has an element.  
-     * It does not correctly determine the presence of elements that were added or removed without saving the item type object.
+     * It does not correctly determine the presence of elements that were added or 
+     * removed without saving the item type object.
      * 
-     * @param Element|string $element
-     * @return void
+     * @param Element|string $element  The element object or the element id.
+     * @return boolean
      **/
-    public function hasElement($elementId) 
+    public function hasElement($element) 
     { 
-        $db = $this->getDb();
+        if ($element instanceof Element) {
+        	$elementId = $element->id;
+        } else if (is_string($element) || is_integer($element)) {
+        	$elementId = (string) $element;
+        } else {
+        	var_dump($element);
+        	
+        	throw new Omeka_Record_Exception('Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element.');
+        }
+    	$db = $this->getDb();
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?',
                                     array($elementId, $this->id),
                                     true);
         return (boolean) $iteJoin;
     }
     
+    /**
+     * Determines the total number of items that have this item type.
+     * 
+     * @return int The total number of items that have this item type.
+     */
     public function totalItems()
     {
         // This will query the ItemTable for a count of all items associated with 
@@ -349,6 +385,12 @@ class ItemType extends Omeka_Record
         return $this->getDb()->getTable('Item')->count(array('type' => $this->id));
     }
     
+    
+    /**
+     * Returns the 'Item Type' element set.
+     * 
+     * @return ElementSet
+     */
     static public function getItemTypeElementSet()
     {
         // Element should belong to the 'Item Type' element set.

@@ -20,7 +20,6 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
 
         if ($auth->hasIdentity()) {
             $userIdentity = $auth->getIdentity();
-
             require_once 'User.php';
             $bootstrap->bootstrap('Db');
             $db = $bootstrap->getResource('Db');
