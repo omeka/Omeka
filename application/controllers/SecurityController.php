@@ -29,37 +29,19 @@ class SecurityController extends Omeka_Controller_Action
     
     public function editAction() {
         //Any changes to this list should be reflected in the install script (and possibly the view functions)        
-        $settingsList = array('file_extension_whitelist',
-                              'file_mime_type_whitelist',
-                              'disable_default_file_validation');
-        
-        $options = $this->getInvokeArg('bootstrap')->getResource('Options');
-        
-        foreach ($options as $k => $v) {
-            if (in_array($k, $settingsList)) {
-                $settings[$k] = $v;
-            }
-        }
-        
-        $optionTable = $this->getTable('Option')->getTableName();
-        $conn = $this->getDb();
+        $options = array('file_extension_whitelist',
+                         'file_mime_type_whitelist',
+                         'disable_default_file_validation');
         
         //process the form
         if (!empty($_POST)) {
-            $sql = "UPDATE $optionTable SET value = ? WHERE name = ?";
-            foreach ( $_POST as $key => $value ) {
-                if (array_key_exists($key,$settings)) {
-                    $conn->exec($sql, array($value, $key));
-                    $settings[$key] = $value;
-                    $options[$key] = $value;
+            foreach ($_POST as $key => $value) {
+                if (in_array($key, $options)) {
+                    set_option($key, $value);
                 }
-            }
-            $this->getInvokeArg('bootstrap')->options = $options;
-            
+            }          
             $this->flashSuccess("The security settings have been updated.");
-        }
-        
-        $this->view->assign($settings);
+        }        
     }
     
     public function getFileExtensionWhitelistAction()
