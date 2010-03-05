@@ -1,5 +1,5 @@
 <?php head(array('title'=>'Theme Configuration', 'bodyclass'=>'plugins')); ?>
-<?php echo js('jQuery'); ?>
+<?php echo js('jquery'); ?>
 <script type="text/javascript">
     jQuery.noConflict();
     
