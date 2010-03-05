@@ -260,7 +260,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
             
             input.remove-element {background-color: transparent !important; color: #900;padding-left:18px; display:none;}
             
-            input.add-element {color: #359; font-weight:bold; color:#76bb5f;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
+            input.add-element {color: #359; font-weight:bold; color:#76bb5f !important;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
             
             input.add-element, input.remove-element {cursor:pointer;font-size:1.1em;padding-top:0; background-position: 0 50%;padding-bottom:0px;}
         
