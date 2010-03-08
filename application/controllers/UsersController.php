@@ -271,7 +271,7 @@ class UsersController extends Omeka_Controller_Action
         $pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');
         // If there are no plugins filtering the login adapter, set the 
         // credentials for the default adapter.
-        if (!$pluginBroker->getFilters('login_adapter')) {
+        if (!$pluginBroker || !$pluginBroker->getFilters('login_adapter')) {
             $authAdapter->setIdentity($loginForm->getValue('username'))
                         ->setCredential($loginForm->getValue('password'));
         } else {
