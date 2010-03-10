@@ -17,6 +17,9 @@ debug.exceptions = false
 
 debug.request = false
 
+; Anything that would be logged will also be emailed to this address.
+debug.email = ""
+
 ; Log SQL statements
 log.sql = false
 
