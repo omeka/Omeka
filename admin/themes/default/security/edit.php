@@ -65,6 +65,7 @@ Event.observe(window, 'load', function(){
             <p class="explanation">Check this field if you would like to allow any file to be uploaded to Omeka.</p>
             </div>
         </div>
+                
         <div class="field">
             <label for="file_extension_whitelist">Allowed File Extensions</label>
             <div class="inputs">
@@ -82,6 +83,15 @@ Event.observe(window, 'load', function(){
                     get_option('file_mime_type_whitelist'),
                     array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
             <p class="explanation">List of allowed MIME types for file uploads.</p>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label for="enable_header_check_for_file_types">Enable Header Check For File Types</label>
+                <div class="inputs">
+            <?php echo $this->formCheckbox('enable_header_check_for_file_mime_types', 
+                null, array('checked'=>get_option('enable_header_check_for_file_mime_types'))); ?>
+            <p class="explanation">Check this field if you would like to allow file types to be inferred from a file header check.</p>
             </div>
         </div>
         

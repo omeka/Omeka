@@ -28,6 +28,20 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
         $writer = new Zend_Log_Writer_Stream($logFile);
         $logger = new Zend_Log($writer);
         
+        if (!empty($config->debug->email)) {            
+            $this->_addMailWriter($logger, (string)$config->debug->email);
+        }
+        
         return $logger;
+    }
+    
+    private function _addMailWriter(Zend_Log $log, $toEmail)
+    {
+        $mailer = new Zend_Mail;
+        $mailer->addTo($toEmail);
+        $mailer->setFrom(get_option('administrator_email'));
+        $logWriter = new Zend_Log_Writer_Mail($mailer);
+        $logWriter->setSubjectPrependText('[' . get_option('site_title') . ']');
+        $log->addWriter($logWriter);
     }
 }

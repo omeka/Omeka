@@ -44,12 +44,11 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     .button {
         text-align:center;
         text-decoration:none;
-        color:#fff;
         clear:both; 
         margin:9px 0;
         background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
         float:right; 
-        color:#fff;
+        color:#fff !important;
         padding: 3px 6px;
         border:none; 
         border:1px solid #6d8e1d;

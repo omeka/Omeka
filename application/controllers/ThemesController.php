@@ -147,8 +147,10 @@ class ThemesController extends Omeka_Controller_Action
                     // add filters to rename all of the uploaded theme files                                               
                     if ($element->isUploaded()) {
                         
-                        $element->addValidator(new Omeka_Validate_File_Extension());
-                        $element->addValidator(new Omeka_Validate_File_MimeType());
+                        if (get_option('disable_default_file_validation') == '0') {
+                            $element->addValidator(new Omeka_Validate_File_Extension());
+                            $element->addValidator(new Omeka_Validate_File_MimeType());
+                        }
                         
                         $fileName = $element->getFileName();
                         $uploadedFileName = trim(strtolower($themeName)) . '_' . $element->getName() . '_' . basename($fileName);                        

@@ -37,6 +37,10 @@ class Omeka_Validate_File_MimeType extends Zend_Validate_File_MimeType
         if (!$options) {
             $options = (string)get_option('file_mime_type_whitelist');
         }
+                
         parent::__construct($options);
+        if (get_option('enable_header_check_for_file_mime_types') == '1') {
+            $this->enableHeaderCheck();
+        }
     }
 }

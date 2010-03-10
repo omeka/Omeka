@@ -44,10 +44,10 @@ class Omeka_Core_Resource_Db extends Zend_Application_Resource_Db
         // Enable SQL logging (potentially).
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Config');
-        $bootstrap->bootstrap('Logger');
         $loggingEnabled = ($config = $this->getBootstrap()->getResource('Config'))
                         && ($config->log->sql);
         if ($loggingEnabled) {
+            $bootstrap->bootstrap('Logger');
             $db_obj->setLogger($bootstrap->getResource('Logger'));
         }
         return $db_obj;
