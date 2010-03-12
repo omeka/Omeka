@@ -33,3 +33,19 @@ session.name = ""
 
 ; Path to PHP-CLI for running background processes.  Set this to a path to override the autodetected PHP path.
 background.php.path = ""
+
+; Default mail using PHP's built-in mail() function.
+mail.transport.type = "Sendmail"
+
+; Uncomment some of the following lines (and comment the above line) to switch 
+; to SMTP for sending mail through Omeka. Your configuration may not require all
+; of the options listed.  For more info, see Zend Framework 
+; documentation on Zend_Mail: http://framework.zend.com/manual/en/zend.mail.html 
+; mail.transport.type = "Smtp"
+; mail.transport.host = ""
+; mail.transport.options.port = ###     ; Port number, if applicable. 
+; mail.transport.options.name = ""      ; Local client hostname, e.g. "localhost"
+; mail.transport.options.auth = "login" ; For authentication, if required.
+; mail.transport.options.username = ""
+; mail.transport.options.password = ""
+; mail.transport.options.ssl = ""       ; For SSL support, set to "ssl" or "tls"
