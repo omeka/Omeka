@@ -220,14 +220,33 @@ class File extends Omeka_Record
     }
     
     public function createDerivatives()
-    {
-        $pathToOriginalFile = $this->getPath('archive');
+    {        
+        if (!($convertDir = get_option('path_to_convert'))) {
+            return;
+        }
         
-        // Create derivative images if possible.
-        if (Omeka_File_Derivative_Image::createAll($pathToOriginalFile, 
-                                                   $this->getMimeType())) {
+        $creator = new Omeka_File_Derivative_Image($convertDir);
+        
+        $creator->addDerivative(FULLSIZE_DIR, get_option('fullsize_constraint'));
+        $creator->addDerivative(THUMBNAIL_DIR, get_option('thumbnail_constraint'));
+        $this->_makeSquareThumbnails($creator);
+        
+        if ($creator->create($this->getPath('archive'))) {
             $this->has_derivative_image = 1;
         }
+    }
+    
+    private function _makeSquareThumbnails($creator)
+    {
+        $constraint = get_option('square_thumbnail_constraint');
+        $args = join(' ', array(
+                    '-thumbnail ' . escapeshellarg('x' . $constraint*2),
+                    '-resize ' . escapeshellarg($constraint*2 . 'x<'),
+                    '-resize 50%',
+                    '-gravity center',
+                    '-crop ' . escapeshellarg($constraint . 'x' . $constraint . '+0+0'),
+                    '+repage'));
+        $creator->addDerivative(SQUARE_THUMBNAIL_DIR, $args);
     }
     
     /**
