@@ -115,51 +115,56 @@ class UsersController extends Omeka_Controller_Action
         }
     }
     
+    /**
+     * Send an email providing a link that allows the user to reset their password.
+     */
     public function forgotPasswordAction()
     {
-        
-        //If the user's email address has been submitted, then make a new temp activation url and email it
-        if (!empty($_POST)) {
-            
-            $email = $_POST['email'];
-            
-            if (!Zend_Validate::is($email, 'EmailAddress')) {
-                return $this->flashError('The email address you provided is invalid.  Please enter a valid email address.');
-            }
-            
-            $ua = new UsersActivations;
-            
-            $user = $this->_table->findByEmail($email);
-            
-            if ($user) {
-                //Create the activation url
-                try {
-                    $ua->user_id = $user->id;
-                    $ua->save();
-                    
-                    $siteTitle = get_option('site_title');
-                    
-                    //Send the email with the activation url
-                    $url   = "http://".$_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$ua->url;
-                    $body  = "Please follow this link to reset your password:\n\n";
-                    $body .= $url."\n\n";
-                    $body .= "$siteTitle Administrator";
-                    
-                    $admin_email = get_option('administrator_email');
-                    $title       = "[$siteTitle] Reset Your Password";
-                    $header      = 'From: '.$admin_email. "\n" . 'X-Mailer: PHP/' . phpversion();
-                    
-                    mail($email,$title, $body, $header);
-                    $this->flashSuccess('Your password has been emailed.');
-                } catch (Exception $e) {
-                      $this->flashError('Your password has already been sent to your email address.');
-                }
-            
-            } else {
-                //If that email address doesn't exist
-                $this->flashError('The email address you provided does not correspond to an Omeka user.');
-            }
+        if (empty($_POST)) {
+            return;
         }
+        
+        $email = $_POST['email'];
+        
+        if (!Zend_Validate::is($email, 'EmailAddress')) {
+            return $this->flashError('The email address you provided is invalid.  Please enter a valid email address.');
+        }
+        
+        $user = $this->_table->findByEmail($email);
+        
+        if (!$user) {
+            $this->flashError('The email address provided cannot be found.');
+            return;
+        }
+        
+        //Create the activation url
+        $ua = new UsersActivations;
+        $ua->user_id = $user->id;
+        $ua->save();
+        
+        $this->_sendResetPasswordEmail($email, $ua->url);
+    }
+    
+    private function _sendResetPasswordEmail($toEmail, $activationCode)
+    {
+        $siteTitle = get_option('site_title');
+        
+        $mail = new Zend_Mail();
+        $mail->addTo($toEmail);                
+        $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
+        
+        //Send the email with the activation url
+        $url   = "http://".$_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$activationCode;
+        $body  = "Please follow this link to reset your password:\n\n";
+        $body .= $url."\n\n";
+        $body .= "$siteTitle Administrator";
+
+        $mail->setBodyText($body);
+        $mail->setFrom(get_option('administrator_email'), "$siteTitle Administrator");
+        $mail->setSubject("[$siteTitle] Reset Your Password");
+
+        $mail->send();
+        $this->flashSuccess('Please check your email for a link to reset your password.');
     }
     
     public function activateAction()
@@ -206,8 +211,6 @@ class UsersController extends Omeka_Controller_Action
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
-        } catch (Exception $e) {
-            $this->flashError($e);
         }
     }
 
@@ -268,6 +271,8 @@ class UsersController extends Omeka_Controller_Action
         $mail->setSubject($subject);
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
+        $this->getInvokeArg('bootstrap')->getResource('Logger')
+                                        ->info("Activation email sent to '{$entity->email}' on " . Zend_Date::now());
     }
     
     
