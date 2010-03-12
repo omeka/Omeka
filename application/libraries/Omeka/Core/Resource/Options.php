@@ -17,8 +17,13 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
         $bootstrap->bootstrap('Db');
         $db = $bootstrap->getResource('Db');
         
-        // This will throw an exception if the options table does not exist
-        $options = $db->fetchPairs("SELECT name, value FROM $db->Option");
+        try {
+            // This will throw an exception if the options table does not exist
+	        $options = $db->fetchPairs("SELECT name, value FROM $db->Option");
+        } catch (Zend_Db_Statement_Exception $e) {
+            // Redirect to the install script.
+            header('Location: '.WEB_ROOT.'/install');
+        }
         
         return $options;
     }

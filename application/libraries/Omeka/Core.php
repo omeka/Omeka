@@ -104,35 +104,16 @@ class Omeka_Core extends Zend_Application
         try {
             $this->sanitizeMagicQuotes();
             return $this->bootstrap();
-        } catch (Zend_Db_Adapter_Exception $e) {
-            // Database adapter exceptions indicate that something has gone
-            // wrong on the adapter level. Usually this will occur as a result 
-            // of a database not existing, or not being able to connect to the
-            // host. This should redirect to an error page. For now, just dump
-            // the error.
-            $message = $e->getMessage();
-        } catch (Zend_Db_Statement_Exception $e) {
-            // Database statement exceptions indicate that something has gone
-            // wrong within the actual database.  During initialization, this
-            // will only occur when trying to access the 'options' table, so it
-            // directly indicates that Omeka has not been installed. Since we're
-            // going to continue dispatching in order to get to the install 
-            // script, load the skeleton of the initialization script.
-            $this->setOmekaIsInstalled(false);
-
-            header('Location: '.WEB_ROOT.'/install');
-            exit;
         } catch (Zend_Config_Exception $e) {
             // These exceptions will be thrown for config files, when they don't
             // exist or are improperly structured. Should do something similar
             // to the database exception errors.
             $message = "Error in Omeka's configuration file(s): " . $e->getMessage();
-            
         } catch (Exception $e) {
             // No idea what this exception would be.  Just start crying.
             $message = $e->getMessage();
         }
-        $this->_displayErrorPage($message);
+        $this->_displayErrorPage($message, $e);
         exit;
     }
     
@@ -159,7 +140,7 @@ class Omeka_Core extends Zend_Application
         }
     }
     
-    private function _displayErrorPage($message = '')
+    private function _displayErrorPage($message = '', Exception $e)
     {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -182,7 +163,10 @@ p {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
 <div id="wrap">
     <div id="primary">
         <h1>Omeka Has Encountered an Error</h1>
-        <p><?php echo $message; ?></p>
+        <?php if (ini_get('display_errors')): ?>
+            <p><?php echo $message; ?></p>
+            <pre><?php echo $e->getTraceAsString(); ?></pre>
+        <?php endif; ?>
     </div>
 </div>
 </body>
