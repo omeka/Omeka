@@ -52,9 +52,7 @@ function auto_discovery_link_tag(){
  **/
 function common($file, $vars = array(), $dir = 'common') 
 {
-	$path = physical_path_to($dir . DIRECTORY_SEPARATOR . $file . '.php');
-	extract($vars);
-	include $path;
+    echo __v()->partial($dir . DIRECTORY_SEPARATOR . $file . '.php', $vars);
 }
 
 /**
