@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_File_Derivative_Image
+class Omeka_File_Derivative_Image_Creator
 {
     const IMAGEMAGICK_COMMAND = 'convert';
     

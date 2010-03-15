@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  **/
-class Omeka_File_Derivative_ImageTest extends PHPUnit_Framework_TestCase
+class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -28,14 +28,14 @@ class Omeka_File_Derivative_ImageTest extends PHPUnit_Framework_TestCase
     
     public function testConstructor()
     {
-        $creator = new Omeka_File_Derivative_Image($this->convertDir);
+        $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         $this->assertEquals("{$this->convertDir}/convert", $creator->getConvertPath());
     }
 
     public function testCreateWithInvalidConvertPath()
     {
         try {
-            $creator = new Omeka_File_Derivative_Image('/foo/bar');
+            $creator = new Omeka_File_Derivative_Image_Creator('/foo/bar');
         } catch (Omeka_File_Derivative_Exception $e) {
             $this->assertContains("invalid directory", $e->getMessage());
             return;
@@ -45,14 +45,14 @@ class Omeka_File_Derivative_ImageTest extends PHPUnit_Framework_TestCase
     
     public function testCreate()
     {
-        $creator = new Omeka_File_Derivative_Image($this->convertDir);
+        $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         // Should do nothing.
         $creator->create($this->validFilePath);
     }
     
     public function testCreateWithInvalidOriginalFile()
     {
-        $creator = new Omeka_File_Derivative_Image($this->convertDir);
+        $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         try {
             $creator->create($this->invalidFile);
         } catch (Exception $e) {
@@ -64,7 +64,7 @@ class Omeka_File_Derivative_ImageTest extends PHPUnit_Framework_TestCase
     
     public function testAddDerivativeWithInvalidDestPath()
     {
-        $creator = new Omeka_File_Derivative_Image($this->convertDir);
+        $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         try {
             $creator->addDerivative("/foo/bar/baz", 20);
         } catch (Exception $e) {
@@ -76,7 +76,7 @@ class Omeka_File_Derivative_ImageTest extends PHPUnit_Framework_TestCase
 
     public function testCreateWithDerivativeImgSize()
     {
-        $creator = new Omeka_File_Derivative_Image($this->convertDir);
+        $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         $creator->addDerivative($this->fullsizeImgPath, 10);
         $creator->create($this->validFilePath);
         $newFilePath = $this->fullsizeImgPath . '/' . basename($this->validFilePath);
@@ -86,6 +86,6 @@ class Omeka_File_Derivative_ImageTest extends PHPUnit_Framework_TestCase
         
     public function testCreateWithDerivativeCommandArgs()
     {
-        $creator = new Omeka_File_Derivative_Image($this->convertDir);
+        $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
     }   
 }

@@ -118,7 +118,7 @@ class File extends Omeka_Record
     public function getDerivativeFilename()
     {
         list($base, $ext) = explode('.', $this->archive_filename);
-        $fn = $base . '.' . Omeka_File_Derivative_Image::DERIVATIVE_EXT;
+        $fn = $base . '.' . Omeka_File_Derivative_Image_Creator::DERIVATIVE_EXT;
         return $fn;        
     }
     
@@ -225,7 +225,7 @@ class File extends Omeka_Record
             return;
         }
         
-        $creator = new Omeka_File_Derivative_Image($convertDir);
+        $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
         
         $creator->addDerivative(FULLSIZE_DIR, get_option('fullsize_constraint'));
         $creator->addDerivative(THUMBNAIL_DIR, get_option('thumbnail_constraint'));
