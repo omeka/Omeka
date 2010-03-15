@@ -57,8 +57,9 @@ class Omeka_File_Derivative_Image_Creator
     /**
      * @since 2.0
      * @param string $fromFilePath
+     * @return boolean
      */
-    public function create($fromFilePath)
+    public function create($fromFilePath, $derivFilename)
     {
         if (!file_exists($fromFilePath)) {
             throw new RuntimeException("File at '$fromFilePath' does not exist.");
@@ -76,16 +77,14 @@ class Omeka_File_Derivative_Image_Creator
         if (empty($this->_derivatives)) {
             return false;
         }
-        
-        $derivFilename = $this->_getDerivativeFilename($fromFilePath);
-        
+                
         foreach ($this->_derivatives as $storageDir => $cmdArgs) {
             $newFilePath = rtrim($storageDir, DIRECTORY_SEPARATOR ) 
                          . DIRECTORY_SEPARATOR . $derivFilename;
             $this->_createImage($fromFilePath, $newFilePath, $cmdArgs);
         }
         
-        return $derivFilename;
+        return true;
     }
     
     /**
@@ -161,19 +160,7 @@ class Omeka_File_Derivative_Image_Creator
             throw new Omeka_File_Derivative_Exception("ImageMagick error: Return Code: {$returnVar}.");
         }
 	}
-	
-	private function _getDerivativeFilename($origFile)
-	{
-        $filename = basename($origFile);
-        $parts = explode('.', $filename);
-        // One or more . in the filename, pop the last section to be replaced.
-        if (count($parts) > 1) {
-            $ext = array_pop($parts);
-        }
-        array_push($parts, self::DERIVATIVE_EXT);
-        return join('.', $parts);
-	}
-	
+		
 	private function _getDefaultResizeCmdArgs($constraint)
 	{
 	    return '-resize ' . escapeshellarg($constraint.'x'.$constraint.'>');

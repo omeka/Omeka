@@ -117,9 +117,14 @@ class File extends Omeka_Record
     
     public function getDerivativeFilename()
     {
-        list($base, $ext) = explode('.', $this->archive_filename);
-        $fn = $base . '.' . Omeka_File_Derivative_Image_Creator::DERIVATIVE_EXT;
-        return $fn;        
+        $filename = basename($this->archive_filename);
+        $parts = explode('.', $filename);
+        // One or more . in the filename, pop the last section to be replaced.
+        if (count($parts) > 1) {
+            $ext = array_pop($parts);
+        }
+        array_push($parts, Omeka_File_Derivative_Image_Creator::DERIVATIVE_EXT);
+        return join('.', $parts);        
     }
     
     public function hasThumbnail()
@@ -224,14 +229,13 @@ class File extends Omeka_Record
         if (!($convertDir = get_option('path_to_convert'))) {
             return;
         }
-        
         $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
         
         $creator->addDerivative(FULLSIZE_DIR, get_option('fullsize_constraint'));
         $creator->addDerivative(THUMBNAIL_DIR, get_option('thumbnail_constraint'));
         $this->_makeSquareThumbnails($creator);
         
-        if ($creator->create($this->getPath('archive'))) {
+        if ($creator->create($this->getPath('archive'), $this->getDerivativeFilename())) {
             $this->has_derivative_image = 1;
         }
     }
