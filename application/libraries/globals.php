@@ -663,7 +663,7 @@ function get_theme_option($optionName, $theme = null)
         $themeOptions = unserialize($themeOptions);
     }
     
-    if (array_key_exists($optionName, $themeOptions)) {        
+    if ($themeOptions && array_key_exists($optionName, $themeOptions)) {        
         return $themeOptions[$optionName];
     }
     
