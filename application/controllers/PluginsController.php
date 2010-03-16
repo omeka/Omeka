@@ -178,7 +178,7 @@ class PluginsController extends Omeka_Controller_Action
         $allPlugins = $this->_pluginLoader->getPlugins();
         // Plugins are keyed to the directory name, so natural sort based on that.
         uksort($allPlugins, "strnatcasecmp");
-
+        $allPlugins = apply_filters('browse_plugins', $allPlugins);
         $this->view->assign(array('plugins'=>$allPlugins, 'loader'=>$this->_pluginLoader));
     }
     
