@@ -243,6 +243,7 @@ abstract class Omeka_File_Ingest_Abstract
             }
             
             fire_plugin_hook('after_upload_file', $file, $this->_item);
+            fire_plugin_hook('after_ingest_file', $file, $this->_item);
             
             $this->_item->addFile($file);
             

@@ -24,9 +24,7 @@ class SettingsController extends Omeka_Controller_Action
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
-    
-    private $_form;
-    
+        
     public function indexAction() 
     {
         $this->_forward('edit');
@@ -39,12 +37,12 @@ class SettingsController extends Omeka_Controller_Action
     
     public function editAction() 
     {
-        $this->_setForm();
-        $this->view->form = $this->_form;
+        $form = $this->_getForm();
+        $this->view->form = $form;
         
         if (isset($_POST['settings_submit'])) {
-            if ($this->_form->isValid($_POST)) {
-                $this->_setOptions();
+            if ($form->isValid($_POST)) {
+                $this->_setOptions($form);
                 $this->flashSuccess('The general settings have been updated.');
             } else {
                 $this->flashError('There were errors found in your form. Please edit and resubmit.');
@@ -107,117 +105,23 @@ class SettingsController extends Omeka_Controller_Action
         return !(int)$returnCode;
     }
     
-    private function _setForm()
+    private function _getForm()
     {
-        // http://framework.zend.com/manual/en/zend.form.quickstart.html
-        // http://devzone.zend.com/article/3450
-        $form = new Omeka_Form;
-        $form->setMethod('post');
-        $form->setAttrib('id', 'settings-form');
-        
-        $form->addElement('text', 'site_title', array(
-            'label' => 'Site Title'
-        ));
-        
-        $form->addElement('textarea', 'description', array(
-            'label' => 'Site Description',
-        ));
-        
-        $form->addElement('text', 'administrator_email', array(
-            'label' => 'Administrator Email',
-            'validators' => array('EmailAddress'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'copyright', array(
-            'label' => 'Site Copyright Information'
-        ));
-        
-        $form->addElement('text', 'author', array(
-            'label' => 'Site Author Information'
-        ));
-        
-        $form->addElement('text', 'fullsize_constraint', array(
-            'label' => 'Fullsize Image Size',
-            'description' => 'Maximum fullsize image size constraint (in pixels).', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'thumbnail_constraint', array(
-            'label' => 'Thumbnail Size',
-            'description' => 'Maximum thumbnail size constraint (in pixels).', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'square_thumbnail_constraint', array(
-            'label' => 'Square Thumbnail Size', 
-            'description' => 'Maximum square thumbnail size constraint (in pixels).', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'per_page_admin', array(
-            'label' => 'Items Per Page (admin)', 
-            'description' => 'Limit the number of items displayed per page in the administrative interface.', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'per_page_public', array(
-            'label' => 'Items Per Page (public)', 
-            'description' => 'Limit the number of items displayed per page in the public interface.', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('checkbox', 'show_empty_elements', array(
-            'label' => 'Show Empty Elements',
-            'class' => 'checkbox'
-        ));
-
-        $form->addElement('text', 'path_to_convert', array(
-            'label' => 'Imagemagick Directory Path'
-        ));
-        
-        $form->addElement('submit', 'settings_submit', array(
-            'label' => 'Save Settings'
-        ));
-        
-        $form->addDisplayGroup(
-            array('administrator_email', 'site_title', 'description', 
-                  'copyright', 'author', 'fullsize_constraint', 
-                  'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'show_empty_elements', 'path_to_convert'), 
-            'site_settings');
-        
-        $form->addDisplayGroup(
-            array('settings_submit'), 
-            'submit');
-        
+        require_once APP_DIR . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'GeneralSettings.php';
+        $form = new Omeka_Form_GeneralSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
-        
-        $this->_form = $form;
+        fire_plugin_hook('general_settings_form', $form);
+        return $form;
     }
     
-    private function _setOptions()
-    {
-        // Insert the form options to the options table.
-        $options = array('administrator_email', 
-                         'copyright', 
-                         'site_title', 
-                         'author', 
-                         'description', 
-                         'thumbnail_constraint', 
-                         'square_thumbnail_constraint', 
-                         'fullsize_constraint', 
-                         'per_page_admin', 
-                         'per_page_public',
-                         'show_empty_elements',
-                         'path_to_convert');
-        foreach ($options as $option) {
-            set_option($option, $this->_form->getValue($option));
+    private function _setOptions(Zend_Form $form)
+    {        
+        $options = $form->getValues();
+        // Everything except the submit button should correspond to a valid 
+        // option in the database.
+        unset($options['settings_submit']);
+        foreach ($options as $key => $value) {
+            set_option($key, $value);
         }
     }
 }
