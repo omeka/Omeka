@@ -270,6 +270,7 @@ class Item extends Omeka_Record
      **/
     private function _uploadFiles()
     {
+        fire_plugin_hook('before_upload_files', $this);
         // Tell it to always try the upload, but ignore any errors if any of
         // the files were not actually uploaded (left form fields empty).
         $files = insert_files_for_item($this, 'Upload', 'file', array('ignoreNoFile'=>true));
