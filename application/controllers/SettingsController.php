@@ -109,95 +109,9 @@ class SettingsController extends Omeka_Controller_Action
     
     private function _setForm()
     {
-        // http://framework.zend.com/manual/en/zend.form.quickstart.html
-        // http://devzone.zend.com/article/3450
-        $form = new Omeka_Form;
-        $form->setMethod('post');
-        $form->setAttrib('id', 'settings-form');
-        
-        $form->addElement('text', 'site_title', array(
-            'label' => 'Site Title'
-        ));
-        
-        $form->addElement('textarea', 'description', array(
-            'label' => 'Site Description',
-        ));
-        
-        $form->addElement('text', 'administrator_email', array(
-            'label' => 'Administrator Email',
-            'validators' => array('EmailAddress'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'copyright', array(
-            'label' => 'Site Copyright Information'
-        ));
-        
-        $form->addElement('text', 'author', array(
-            'label' => 'Site Author Information'
-        ));
-        
-        $form->addElement('text', 'fullsize_constraint', array(
-            'label' => 'Fullsize Image Size',
-            'description' => 'Maximum fullsize image size constraint (in pixels).', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'thumbnail_constraint', array(
-            'label' => 'Thumbnail Size',
-            'description' => 'Maximum thumbnail size constraint (in pixels).', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'square_thumbnail_constraint', array(
-            'label' => 'Square Thumbnail Size', 
-            'description' => 'Maximum square thumbnail size constraint (in pixels).', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'per_page_admin', array(
-            'label' => 'Items Per Page (admin)', 
-            'description' => 'Limit the number of items displayed per page in the administrative interface.', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('text', 'per_page_public', array(
-            'label' => 'Items Per Page (public)', 
-            'description' => 'Limit the number of items displayed per page in the public interface.', 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $form->addElement('checkbox', 'show_empty_elements', array(
-            'label' => 'Show Empty Elements',
-            'class' => 'checkbox'
-        ));
-
-        $form->addElement('text', 'path_to_convert', array(
-            'label' => 'Imagemagick Directory Path'
-        ));
-        
-        $form->addElement('submit', 'settings_submit', array(
-            'label' => 'Save Settings'
-        ));
-        
-        $form->addDisplayGroup(
-            array('administrator_email', 'site_title', 'description', 
-                  'copyright', 'author', 'fullsize_constraint', 
-                  'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'show_empty_elements', 'path_to_convert'), 
-            'site_settings');
-        
-        $form->addDisplayGroup(
-            array('settings_submit'), 
-            'submit');
-        
+        require_once APP_DIR . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'GeneralSettings.php';
+        $form = new Omeka_Form_GeneralSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
-        
         $this->_form = $form;
     }
     
