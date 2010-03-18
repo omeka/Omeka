@@ -13,7 +13,7 @@
                     </div>
         <?php       endif; 
               endif; ?>
-            
+        <?php echo flash(); ?>    
             <div id="getting-started">
                 <h2>Getting Started with Omeka</h2>
                 <dl>

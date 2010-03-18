@@ -27,11 +27,7 @@ class ThemesController extends Omeka_Controller_Action
      const THEME_FILE_HIDDEN_FIELD_NAME_PREFIX = 'hidden_file_';
      
     /**
-     * Simple recursive function that scrapes the theme info for either a single 
-     * theme or all of them, given a directory
-     * @todo make it switch between public and admin
-     *
-     * @return void
+     * Retrieve information about a given theme (or all themes).
      **/
     protected function getAvailable($dir=null) 
     {
@@ -39,87 +35,58 @@ class ThemesController extends Omeka_Controller_Action
          * Create an array of themes, with the directory paths
          * theme.ini files and images paths if they are present
          */
-        $themes = array();
+        $themes = array();        
         if (!$dir) {
-            
-            // Iterate over the directory to get the file structure
-            $themesDir = new DirectoryIterator(PUBLIC_THEME_DIR);
-            foreach($themesDir as $dir) {
-                $fname = $dir->getFilename();
-                if (!$dir->isDot() 
-                    && $fname[0] != '.' 
-                    && $dir->isReadable() 
-                    && $dir->isDir()) {
-                    $theme = $this->getAvailable($fname);
-                    
-                    // Finally set the array to the global array
-                    $themes[$fname] = $theme;
-                }
+            $iterator = new VersionedDirectoryIterator(PUBLIC_THEME_DIR);
+            $themeDirs = $iterator->getValid();
+            foreach ($themeDirs as $themeName) {
+                $themes[$themeName] = $this->getAvailable($themeName);
             }
-            
+            return $themes;
         } else {
-            // Find that theme and return its info
-            
-            $theme = new Theme();
-            
-            // Define a hard theme path for the theme
-            $theme->path = PUBLIC_THEME_DIR.DIRECTORY_SEPARATOR.$dir;
-            $theme->directory = $dir;
-            
-            // Test to see if an image is available to present the user
-            // when switching themes
-            $imageFile = $theme->path.DIRECTORY_SEPARATOR.'theme.jpg';
-            if (file_exists($imageFile) && is_readable($imageFile)) {
-                $img = WEB_PUBLIC_THEME.'/'.$dir.'/theme.jpg';
-                $theme->image = $img;
-            }
-            
-            // Finally get the theme's config file
-            $themeIni = $theme->path.DIRECTORY_SEPARATOR.'theme.ini';
-            if (file_exists($themeIni) && is_readable($themeIni)) {
-                $ini = new Zend_Config_Ini($themeIni, 'theme');
-                foreach ($ini as $key => $value) {
-                    $theme->$key = $value;
-                }
-            } else {
-                // Display some sort of warning that the theme doesn't have an ini file
-            }
-            
-            // Get the theme's config file
-            $themeConfig = $theme->path.DIRECTORY_SEPARATOR.'config.ini';
-            
-            // If the theme has a config file, set hasConfig to true.
-            $theme->hasConfig = (file_exists($themeConfig) && is_readable($themeConfig));
-            
+            $theme = new Theme();            
+            $theme->setDirectoryName($dir);
+            $theme->setImage('theme.jpg');
+            $theme->setIni('theme.ini');
+            $theme->setConfig('config.ini');
             return $theme;
         }
-        return $themes;
     }
     
     public function browseAction()
     {
-        $themes = $this->getAvailable();
-        
-        if (!empty($_POST) && $this->isAllowed('switch')) {
-            set_option('public_theme', strip_tags($_POST['public_theme']));
-            
-            if(!$this->_getThemeOptions($_POST['public_theme'])) {
-                $configForm = $this->_getForm($_POST['public_theme']);
-                if($configForm) {
-                    $formValues = $configForm->getValues();
-                    unset($formValues['submit']);
-                    $this->_setThemeOptions($_POST['public_theme'], $formValues);
-                }
-            }
-            
-            $this->flashSuccess("The theme has been successfully changed.");
+        $themes = apply_filters('browse_themes', $this->getAvailable());
+        $public = get_option('public_theme');
+        $this->view->themes = $themes;
+        $this->view->current = $themes[$public];
+    }
+    
+    public function switchAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->flashError("Invalid form submission.");
+            $this->_helper->redirector->goto('browse');
+            return;
         }
         
-        $public = get_option('public_theme');
+        $themeName = $this->_getParam('public_theme');
+        // Theme names should be alphanumeric (prevent security flaws).
+        $filter = new Zend_Filter_Alnum();
+        $themeName = $filter->filter($themeName);
         
-        $current = $this->getAvailable($public);
+        // Set the public theme option according to the form post.
+        set_option('public_theme', $themeName);
         
-        $this->view->assign(compact('current', 'themes'));
+        if (!$this->_getThemeOptions($themeName) 
+            && ($configForm = $this->_getForm($themeName))
+        ) {
+            $formValues = $configForm->getValues();
+            unset($formValues['submit']);
+            $this->_setThemeOptions($themeName, $formValues);
+        }
+        
+        $this->flashSuccess("The theme has been successfully changed.");
+        $this->_helper->redirector->goto('browse');
     }
     
     /**
