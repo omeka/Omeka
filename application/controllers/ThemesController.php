@@ -55,7 +55,7 @@ class ThemesController extends Omeka_Controller_Action
     
     public function browseAction()
     {
-        $themes = $this->getAvailable();
+        $themes = apply_filters('browse_themes', $this->getAvailable());
         $public = get_option('public_theme');
         $this->view->themes = $themes;
         $this->view->current = $themes[$public];
