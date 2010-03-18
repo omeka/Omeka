@@ -100,26 +100,29 @@ class ThemesController extends Omeka_Controller_Action
     {
         $themes = $this->getAvailable();
         
-        if (!empty($_POST) && $this->isAllowed('switch')) {
-            set_option('public_theme', strip_tags($_POST['public_theme']));
-            
-            if(!$this->_getThemeOptions($_POST['public_theme'])) {
-                $configForm = $this->_getForm($_POST['public_theme']);
-                if($configForm) {
-                    $formValues = $configForm->getValues();
-                    unset($formValues['submit']);
-                    $this->_setThemeOptions($_POST['public_theme'], $formValues);
-                }
-            }
-            
-            $this->flashSuccess("The theme has been successfully changed.");
+        $public = get_option('public_theme');
+        $this->view->themes = $themes;
+        
+        if (!($this->getRequest()->isPost() && $this->isAllowed('switch'))) {
+            $this->view->current = $themes[$public];
+            return;
         }
         
-        $public = get_option('public_theme');
+        // Set the public theme option according to the form post.
+        $filter = new Zend_Filter_Alnum();
+        $public = $filter->filter($_POST['public_theme']);
+        set_option('public_theme', $public);
         
-        $current = $this->getAvailable($public);
+        if (!$this->_getThemeOptions($public) 
+            && ($configForm = $this->_getForm($public))
+        ) {
+            $formValues = $configForm->getValues();
+            unset($formValues['submit']);
+            $this->_setThemeOptions($public, $formValues);
+        }
         
-        $this->view->assign(compact('current', 'themes'));
+        $this->flashSuccess("The theme has been successfully changed.");
+        $this->view->current = $themes[$public];
     }
     
     /**
