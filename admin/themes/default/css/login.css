@@ -5,6 +5,7 @@ body#login {width: 414px; margin: 54px auto;}
 #login #site-title {margin-left:0; margin-bottom:0; margin-top:0;}
 
 #login h1 {background:transparent; font-size:2em;margin:0 0 1em; padding:0; display:inline;float:left;}
+#login h2 {clear: both;}
 
 #login .error {clear:both; margin-bottom:0.5em;}
 
