@@ -1,4 +1,4 @@
-<?php head(array('bodyclass'=>'login'), 'login-header'); ?>
+<?php head(array('bodyclass'=>'login')); ?>
 
 <script type="text/javascript" charset="utf-8">
     Event.observe(window,'load',function() {
@@ -10,8 +10,8 @@
 
 <h1>Log In</h1>
 <p id="login-links">
-<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', 'Lost your password?'); ?></span>
+<span id="forgotpassword"><?php echo link_to('users', 'forgot-password', 'Lost your password?'); ?></span>
 </p>
 <?php echo flash(); ?>
 <?php echo $this->form->setAction($this->url('users/login')); ?>
-<?php foot(array(),'login-footer'); ?>
+<?php foot(); ?>

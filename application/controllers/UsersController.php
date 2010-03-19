@@ -127,7 +127,7 @@ class UsersController extends Omeka_Controller_Action
         $ua = $this->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
             
         if (!$ua) {
-            return $this->_forward('error');
+            die('Invalid activation code given.');
         }
         
         if (!empty($_POST)) {
@@ -139,6 +139,7 @@ class UsersController extends Omeka_Controller_Action
                 $ua->User->active = 1;
                 $ua->User->forceSave();
                 $ua->delete();
+                $this->flashSuccess("Your password has been changed.  Please log in with your new password.");
                 $this->redirect->goto('login');
             } catch (Exception $e) {
                 $this->flashError($e->getMessage());
@@ -285,6 +286,7 @@ class UsersController extends Omeka_Controller_Action
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {
             $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($authResult)));
+            $this->flashError($this->view->errorMessage);
             return;   
         }
         

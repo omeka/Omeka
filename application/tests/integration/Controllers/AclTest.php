@@ -22,6 +22,7 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
         parent::setUp();
         
         // Tack on the admin theme for use in view scripts.
+        // The public theme scripts die with a 'function redeclared in custom.php' error.
         $this->view = Zend_Registry::get('view');
         $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
     }
@@ -38,10 +39,13 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
         $this->assertAction('browse');
     }
     
+    /**
+     * "Access forbidden" is equivalent to being redirected to the login form.
+     */
     protected function assertAccessForbidden()
     {
-        $this->assertController('error');
-        $this->assertAction('forbidden');        
+        $this->assertController('users');
+        $this->assertAction('login');        
     }
     
     public function testCannotBrowseElementSets()
