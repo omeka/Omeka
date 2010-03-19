@@ -55,7 +55,7 @@ $acl->loadAllowList($allowList);
 
 $acl->allow(null, 'Users', array('edit', 'show', 'change-password', 'delete'), new Omeka_Acl_Assertion_UserAccount);
 // Always allow users to login, logout and send forgot-password notifications.
-$acl->allow(null, 'Users', array('login', 'logout', 'forgot-password'));
+$acl->allow(null, 'Users', array('login', 'logout', 'forgot-password', 'activate'));
 
 //Deny a couple of specific privileges to admin users
 $acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets', 'Security'));
