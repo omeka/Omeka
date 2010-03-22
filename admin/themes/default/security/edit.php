@@ -90,7 +90,7 @@ Event.observe(window, 'load', function(){
             <label for="enable_header_check_for_file_types">Enable Header Check For File Types</label>
                 <div class="inputs">
             <?php echo $this->formCheckbox('enable_header_check_for_file_mime_types', 
-                null, array('checked'=>get_option('enable_header_check_for_file_mime_types'))); ?>
+                null, array('checked'=>(boolean)get_option('enable_header_check_for_file_mime_types'))); ?>
             <p class="explanation">Check this field if you would like to allow file types to be inferred from a file header check.</p>
             </div>
         </div>
