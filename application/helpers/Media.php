@@ -557,7 +557,6 @@ class Omeka_View_Helper_Media
         if ($record instanceof File) {
             $filename = $record->getDerivativeFilename();
             $file = $record;
-            $item = $file->getItem();
         } else if ($record instanceof Item) {
             $item = $record;
             $file = get_db()->getTable('File')->getRandomFileWithImage($item->id);
@@ -617,13 +616,8 @@ class Omeka_View_Helper_Media
             $alt = $fileDescription;            
         } elseif ($fileTitle = item_file('Dublin Core', 'Title', array(), $file)) {
             $alt = $fileTitle;            
-        } else {
-            try {
-                $alt = item('Dublin Core', 'Title', array(), $item);           
-                //  Suppress errors b/c get_current_item()
-                // throws an exception.  There should be a has_current_item() helper
-                // to avoid this sort of thing.    
-           } catch (Exception $e) {} 
+        } else if ($item) {
+            $alt = item('Dublin Core', 'Title', array(), $item);           
         }
         $props['alt'] = $alt;
         
