@@ -102,25 +102,20 @@ function is_current_uri($link, $req = null) {
 }
 
 /**
- * @see FilesController
- * @see routes.ini (display/download routes)
- *
+ * @deprecated Since 1.3
  * @return string
  **/
-function file_download_uri($file, $format='fullsize')
+function file_download_uri(File $file, $format='archive')
 {
-	if(!$file or !$file->exists()) return false;
-	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
-	$uri = uri($options, 'download');
-	
-	return $uri;
+	return file_display_uri($file, $format);
 }
 
-function file_display_uri($file, $format='fullsize')
+function file_display_uri(File $file, $format='fullsize')
 {
-	if(!$file->exists()) return false;
-	$options = array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>$format);
-	return uri($options, 'display');
+	if (!$file->exists()) {
+	    return false;
+	}
+	return $file->getWebPath($format);
 }
 
 /**
