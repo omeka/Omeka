@@ -158,7 +158,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         
         $this->_textsByNaturalOrder = $elementTextRecords;
         $this->_textsByElementId = $this->_indexTextsByElementId($elementTextRecords);        
-        $this->_loadElements();
+        $this->_loadElements($reload);
         $this->_recordsAreLoaded = true;
     }
     
@@ -166,7 +166,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
     {
         $recordType = $this->_getRecordType();
         assert('is_string($recordType)');
-        if (!array_key_exists($recordType, self::$_elementsByRecordType)) {
+        if (!array_key_exists($recordType, self::$_elementsByRecordType) || $reload) {
             $elements = $this->getElements();
             self::$_elementsByRecordType[$recordType] = $elements;
         } else {
