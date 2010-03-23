@@ -82,6 +82,13 @@ class ActsAsElementText extends Omeka_Record_Mixin
     protected $_recordsAreLoaded = false;
     
     /**
+     * Sets of Element records indexed by record type.
+     * 
+     * @var array 
+     */
+    private static $_elementsByRecordType = array();
+    
+    /**
      * Link to the underlying record
      *
      * @param Omeka_Record
@@ -150,15 +157,27 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $elementTextRecords = $this->getElementTextRecords();
         
         $this->_textsByNaturalOrder = $elementTextRecords;
-        $this->_textsByElementId = $this->_indexTextsByElementId($elementTextRecords);
+        $this->_textsByElementId = $this->_indexTextsByElementId($elementTextRecords);        
+        $this->_loadElements();
+        $this->_recordsAreLoaded = true;
+    }
+    
+    private function _loadElements($reload = false)
+    {
+        $recordType = $this->_getRecordType();
+        assert('is_string($recordType)');
+        if (!array_key_exists($recordType, self::$_elementsByRecordType)) {
+            $elements = $this->getElements();
+            self::$_elementsByRecordType[$recordType] = $elements;
+        } else {
+            $elements = self::$_elementsByRecordType[$recordType];
+            assert('is_array($elements) && !empty($elements)');
+        }
         
-        $elements = $this->getElements();
         $this->_elementsByNaturalOrder = $elements;
         $this->_elementsByNameAndSet = $this->_indexElementsByNameAndSet($elements);
         $this->_elementsBySet = $this->_indexElementsBySet($elements);
         $this->_elementsById = $this->_indexElementsById($elements);
-        
-        $this->_recordsAreLoaded = true;
     }
     
     /**
@@ -177,7 +196,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @return array All Elements that apply to the record's type.
      */
     public function getElements()
-    {
+    {        
         return $this->_record->getTable('Element')->findByRecordType($this->_getRecordType());
     }
 
