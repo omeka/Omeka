@@ -258,7 +258,6 @@ class UsersController extends Omeka_Controller_Action
                     . "Your account for the $siteTitle archive has been created. Please click the following link to activate your account:\n\n"
                     . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
                     . "(or use any other page on the site).\n\n"
-                    . "Be aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n" 
                     ."$siteTitle Administrator";
         $subject    = "Activate your account with the ".$siteTitle." Archive";
         
