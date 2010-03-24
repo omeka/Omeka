@@ -270,8 +270,6 @@ class UsersController extends Omeka_Controller_Action
         $mail->setSubject($subject);
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
-        $this->getInvokeArg('bootstrap')->getResource('Logger')
-                                        ->info("Activation email sent to '{$entity->email}' on " . Zend_Date::now());
     }
     
     
