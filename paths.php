@@ -179,5 +179,4 @@ if (APPLICATION_ENV == 'production') {
     assert_options(ASSERT_ACTIVE, 0);
 } else {
     assert_options(ASSERT_ACTIVE, 1);
-    assert_options(ASSERT_BAIL, 1);
 }     
