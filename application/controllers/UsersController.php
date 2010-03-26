@@ -181,7 +181,7 @@ class UsersController extends Omeka_Controller_Action
                 if ($_POST['new_password1'] != $_POST['new_password2']) {
                     throw new Exception('Password: The passwords do not match.');
                 }
-                $ua->User->password = $_POST['new_password1'];
+                $ua->User->setPassword($_POST['new_password1']);
                 $ua->User->active = 1;
                 $ua->User->forceSave();
                 $ua->delete();

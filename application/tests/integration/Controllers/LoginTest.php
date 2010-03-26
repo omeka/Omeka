@@ -18,6 +18,23 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     {
         $this->assertNotNull(get_option('migration'), "'migration' database option cannot be found.");
     }
+
+    public function testUpgradingHashedPasswordForUser()
+    {
+        $omekaDb = $this->core->getBootstrap()->getResource('Db');
+        assert('$omekaDb instanceof Omeka_Db');
+        $dbAdapter = $omekaDb->getAdapter();        
+        // Reset the username/pass to the old style (SHA1 w/ no salt).
+        $dbAdapter->update('omeka_users', array('password'  => sha1('foobar'),
+                                                'salt'      => null),
+                                          'id = 1');
+        
+        // Now attempt to login, and verify that the database was upgraded, and
+        // that the user account was upgraded to use a salt.
+        $this->_login('foobar123', 'foobar');
+        $this->assertRedirectTo('/', $this->getResponse()->getBody());
+        $this->assertNotNull($dbAdapter->fetchOne("SELECT salt FROM omeka_users WHERE id = 1"));
+    }
     
     public function testValidLogin()
     {
@@ -30,26 +47,6 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $this->_login('foo', 'bar');
         $this->assertNotRedirect();
         $this->assertContains("Username could not be found.", $this->getResponse()->sendResponse());
-    }
-    
-    public function testUpgradingHashedPasswordForUser()
-    {
-        // Replace the existing 'users' table with the older table schema for
-        // purposes of testing the upgrade.
-        $omekaDb = $this->core->getBootstrap()->getResource('Db');
-        assert('$omekaDb instanceof Omeka_Db');
-        $dbAdapter = $omekaDb->getAdapter();
-        assert('$dbAdapter instanceof Zend_Db_Adapter_Mysqli');
-        $dbHelper = new Omeka_Test_DbHelper($dbAdapter);
-        $dbHelper->dropTables(array('omeka_users'));
-        $oldTableFixture = dirname(__FILE__) . '/_files/pre-salt-upgrade.sql';
-        $this->assertFileExists($oldTableFixture);
-        $dbHelper->loadDbSchema($oldTableFixture);
-        
-        // Now attempt to login, and verify that the database was upgraded, and
-        // that the user account was upgraded to use the salt.
-        $this->_login('foobar', 'foobar');
-        $this->assertEquals(get_option('migration'), User::PASSWORD_SALT_MIGRATION);
     }
     
     private function _login($username, $password)

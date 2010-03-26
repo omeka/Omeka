@@ -256,23 +256,19 @@ class Installer
         }
         
         if ($createUser) {
-            $entitySql = "
-            INSERT INTO {$this->_db->Entity} (
-                email, 
-                first_name, 
-                last_name
-            ) VALUES (?, ?, ?)";
-            $this->_db->exec($entitySql, array($values['super_email'], 'Super', 'User'));
-
-            $userSql = "
-            INSERT INTO {$this->_db->User} (
-                username, 
-                password, 
-                active, 
-                role, 
-                entity_id
-            ) VALUES (?, SHA1(?), 1, 'super', LAST_INSERT_ID())";
-            $this->_db->exec($userSql, array($values['username'], $values['password']));
+            // Hack, prevents barfing when saving.
+            Omeka_Context::getInstance()->setDb($db);
+            
+            $user = new User;
+            $user->Entity = new Entity;
+            $user->Entity->email = $values['super_email'];
+            $user->Entity->first_name = 'Super';
+            $user->Entity->last_name = 'User';
+            $user->username = $values['username'];
+            $user->setPassword($values['password']);
+            $user->active = 1;
+            $user->role = 'super';
+            $user->forceSave();
         }
         
         
