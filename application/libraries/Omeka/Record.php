@@ -46,6 +46,24 @@ class Omeka_Record implements ArrayAccess
     
     private $_locked = false;
     
+    /**
+     * @var array List of built in callbacks.  These will be called 
+     */
+    private $_eventCallbacks = array(
+        'beforeValidate',
+        'afterValidate',
+        'beforeInsert',
+        'beforeUpdate',
+        'beforeSave',
+        'afterInsert',
+        'afterUpdate',
+        'afterSave',
+        'beforeDelete',
+        'afterDelete',
+        'beforeSaveForm',
+        'afterSaveForm'
+    );
+    
     public function __construct($db = null)
     {
         //Dependency injection, for testing
@@ -132,19 +150,24 @@ class Omeka_Record implements ArrayAccess
             $this->_initializeMixins();
         }
         
-        // If there are no mixins, don't do anything.
         if (!count($this->_mixins)) {
-            return;
+            // The event callbacks, e.g. beforeValidate() are common to all
+            // mixins.  If attempting to trigger one of these callbacks on an
+            // empty mixin list, we 'found' the method.
+            $methodFound = in_array($method, $this->_eventCallbacks);
         }
         
         foreach ($this->_mixins as $k => $mixin) {
+            assert('$mixin instanceof Omeka_Record_Mixin');            
             if (method_exists($mixin, $method)) {
-                $called = true;
+                $methodFound = true;
                 $res = call_user_func_array(array($mixin, $method), $args);
-                if (!$all) return $res;
+                if (!$all) {
+                    return $res;
+                }
             }
         }
-        if (!$called) {
+        if (!$methodFound) {
             throw new BadMethodCallException( "Method named $method() does not exist."  );
         }
     }
