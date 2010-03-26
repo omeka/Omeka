@@ -14,6 +14,8 @@
  **/
 abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCase
 {   
+    protected $_isAdminTest = false;
+    
     public function setUp()
     {
         $this->bootstrap = array($this, 'appBootstrap');
@@ -22,6 +24,11 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
 
     public function appBootstrap()
     {
+        // Must happen before all other bootstrapping.
+        if ($this->_isAdminTest) {
+            $this->_setupAdminTest();
+        }
+        
         $this->core = new Omeka_Core('testing', array(
             'config' => CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini'));
         
@@ -83,4 +90,12 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }
     }
     
+    /**
+     * @internal Necessary because admin and public have 2 separate bootstraps.
+     */
+    private function _setupAdminTest()
+    {
+        define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . 'themes');
+        $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
+    }
 }
