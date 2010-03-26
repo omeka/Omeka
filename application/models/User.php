@@ -25,6 +25,8 @@ class User extends Omeka_Record {
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
     
+    const PASSWORD_SALT_MIGRATION = 48;
+    
     protected $_related = array('Entity'=>'getEntity');
     
     public function getEntity()
@@ -243,6 +245,41 @@ class User extends Omeka_Record {
             
             $this->password = $new1;
         }
+    }
+    
+    /**
+     * Upgrade the hashed password.  Does nothing if the user/password is 
+     * incorrect, or if same has been upgraded already.
+     * 
+     * @since 1.3
+     * @param string $username
+     * @param string $password
+     * @return boolean False if incorrect username/password given, otherwise true
+     * when password can be or has been upgraded.
+     */
+    public static function upgradeHashedPassword($username, $password)
+    {
+        // GET RID OF THIS PART.
+        assert('get_option("migration") != null');
+        // Automatically migrate the users table if necessary.
+        if (get_option('migration') < self::PASSWORD_SALT_MIGRATION) {
+            $dbUpgrader = new Omeka_Upgrader(get_option('migration'), self::PASSWORD_SALT_MIGRATION);
+            $dbUpgrader->run();
+            if ($errors = $dbUpgrader->getErrors()) {
+                throw new RuntimeException(join("\n", $errors));
+            }
+        }
+        
+        $userTable = get_db()->getTable('User');
+        $user = $userTable->findBySql("username = ? AND salt IS NULL AND password = SHA1(?)", 
+                                             array($username, $password), true);
+        if (!$user) {
+            return false;
+        }
+        $user->generateSalt();
+        $user->setPassword($password);
+        $user->forceSave();
+        return true;
     }
     
     protected function processEntity(&$post)

@@ -315,6 +315,9 @@ class UsersController extends Omeka_Controller_Action
             return;
         }
         
+        User::upgradeHashedPassword($loginForm->getValue('username'), 
+                                    $loginForm->getValue('password'));
+        
         $authAdapter = new Omeka_Auth_Adapter_UserTable($this->getDb());
         $pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');
         // If there are no plugins filtering the login adapter, set the 

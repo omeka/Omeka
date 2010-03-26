@@ -59,13 +59,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $mailText = file_get_contents("$this->fakemail/{$mail[0]}");
         $this->assertThat($mailText, $this->stringContains("Activate your account"));
     }
-    
-    public function testForgotPasswordSendsEmail()
-    {
-        $this->getRequest()->setMethod('post');
-        $this->getRequest()->setPost(array('email'=> $this->email));
-    }    
-    
+            
     private function _getFakemailFilenames()
     {
         $iter = new VersionedDirectoryIterator($this->fakemail, false);
