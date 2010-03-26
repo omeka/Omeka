@@ -13,20 +13,7 @@
  * @copyright Center for History and New Media, 2007-2010
  **/
 class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
-{
-    
-    public function setUp()
-    {
-        parent::setUp();
-        
-        // Need to use admin view scripts for login b/c shared login view not
-        // available until 2.0.
-        $this->view = Zend_Registry::get('view');
-        $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
-        // And this stupid bullshit is needed so the CSS files load correctly.
-        // $this->view->addAssetPath
-    }
-    
+{    
     public function assertPreConditions()
     {
         $this->assertNotNull(get_option('migration'), "'migration' database option cannot be found.");

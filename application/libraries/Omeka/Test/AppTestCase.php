@@ -16,6 +16,12 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
 {   
     protected $_isAdminTest = false;
     
+    /**
+     * @var boolean Whether the view should attempt to load admin scripts for 
+     * testing purposes.  Defaults to true.
+     */
+    protected $_useAdminViews = true;
+    
     public function setUp()
     {
         $this->bootstrap = array($this, 'appBootstrap');
@@ -38,6 +44,9 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $this->getRequest()->setBaseUrl('');
         $this->setUpBootstrap($this->core->getBootstrap());
         $this->core->bootstrap();
+        if ($this->_useAdminViews) {
+            $this->_useAdminViews();
+        }
     }
     
     public function setUpBootstrap($bootstrap)
@@ -90,12 +99,18 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }
     }
     
+    protected function _useAdminViews()
+    {
+        $this->view = Zend_Registry::get('view');
+        $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
+    }
+    
     /**
      * @internal Necessary because admin and public have 2 separate bootstraps.
      */
     private function _setupAdminTest()
     {
-        define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . 'themes');
+        // define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . 'themes');
         $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
     }
 }

@@ -15,17 +15,7 @@
  * @copyright Center for History and New Media, 2007-2008
  **/
 class Controllers_AclTest extends Omeka_Test_AppTestCase
-{        
-    public function setUp()
-    {
-        // Do all the bootstrapping and such.
-        parent::setUp();
-        
-        // Tack on the admin theme for use in view scripts.
-        $this->view = Zend_Registry::get('view');
-        $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
-    }
-    
+{            
     public function testUserIsNotLoggedIn()
     {
         $this->assertNull($this->core->getResource('CurrentUser'));

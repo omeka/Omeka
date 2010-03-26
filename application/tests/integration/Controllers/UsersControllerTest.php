@@ -18,11 +18,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        
-        // Tack on the admin theme for use in view scripts.
-        $this->view = Zend_Registry::get('view');
-        $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
-        
+                
         // Set the ACL to allow access to users.
         $acl = $this->core->getBootstrap()->getResource('Acl');
         $acl->allow(null, 'Users');
