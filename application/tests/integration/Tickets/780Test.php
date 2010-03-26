@@ -17,7 +17,7 @@ require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php';
  * @copyright Center for History and New Media, 2010
  **/
 class Tickets_780Test extends Omeka_Test_AppTestCase
-{    
+{        
     public function testAutoDiscoveryLinkTagOnItemsShow()
     {
         $this->_dispatchAndAssert('items/show/1');

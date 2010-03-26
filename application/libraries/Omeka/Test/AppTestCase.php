@@ -27,9 +27,8 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         
         // No idea why we actually need to add the default routes.
         $this->frontController->getRouter()->addDefaultRoutes();
-        
         $this->frontController->setParam('bootstrap', $this->core->getBootstrap());
-        
+        $this->getRequest()->setBaseUrl('');
         $this->setUpBootstrap($this->core->getBootstrap());
         $this->core->bootstrap();
     }
