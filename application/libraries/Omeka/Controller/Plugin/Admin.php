@@ -20,6 +20,13 @@
  **/
 class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
 {
+    
+    public function __construct()
+    {
+        // This parameter is used by is_admin_theme().
+        Zend_Controller_Front::getInstance()->setParam('admin', true);
+    }
+    
     /**
      * Controller/Action list for admin actions that do not require being logged-in
      *
