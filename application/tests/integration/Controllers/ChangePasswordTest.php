@@ -49,48 +49,40 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     
     public function testChangingPassword()
     {
-        $this->getRequest()->setPost(array(
-            'old_password'  => self::CURRENT_PASSWORD,
-            'new_password1' => 'foobar6789',
-            'new_password2' => 'foobar6789'
+        $this->_dispatchChangePassword(array(
+            'current_password'  => self::CURRENT_PASSWORD,
+            'new_password' => 'foobar6789',
+            'new_password_confirm' => 'foobar6789'
         ));
-        $this->getRequest()->setMethod('post');
-        $this->dispatch('/users/change-password/1', true);
         $this->_assertPasswordIs('foobar6789');
     }
     
     public function testSuperUserCanChangePasswordWithoutKnowingOriginal()
     {
         $this->user->role = 'super';
-        $this->getRequest()->setPost(array(
-            'new_password1' => 'foobar6789',
-            'new_password2' => 'foobar6789'
+        $this->_dispatchChangePassword(array(
+            'new_password' => 'foobar6789',
+            'new_password_confirm' => 'foobar6789'
         ));
-        $this->getRequest()->setMethod('post');
-        $this->dispatch('/users/change-password/1', true);
         $this->_assertPasswordIs('foobar6789');
     }
     
     public function testChangingPasswordFailsWithInvalidPassword()
     {
-        $this->getRequest()->setPost(array(
-            'old_password'  => 'wrongpassword',
-            'new_password1' => 'foo',
-            'new_password2' => 'foo'
+        $this->_dispatchChangePassword(array(
+            'current_password'  => 'wrongpassword',
+            'new_password' => 'foo',
+            'new_password_confirm' => 'foo'
         ));
-        $this->getRequest()->setMethod('post');
-        $this->dispatch('/users/change-password/1', true);
         $this->_assertPasswordNotChanged();
     }
     
     public function testChangePasswordFailsIfPasswordNotConfirmed()
     {
-        $this->getRequest()->setPost(array(
-            'old_password'  => 'foobar123',
-            'new_password1' => 'foo'
+        $this->_dispatchChangePassword(array(
+            'current_password'  => 'foobar123',
+            'new_password' => 'foo'
         ));
-        $this->getRequest()->setMethod('post');
-        $this->dispatch('/users/change-password/1', true);
         $this->_assertPasswordNotChanged();
     }
     
@@ -113,4 +105,11 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
                                                 $this->salt,
                                                 "Salt should not have changed.");
     }    
+    
+    private function _dispatchChangePassword(array $form)
+    {
+        $this->getRequest()->setPost($form);
+        $this->getRequest()->setMethod('post');
+        $this->dispatch('/users/edit/1', true);
+    }
 }

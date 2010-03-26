@@ -210,34 +210,7 @@ class User extends Omeka_Record {
         
         return true;
     }
-    
-    public function changePassword($new1, $new2, $old, User $currentUser)
-    {    
-        //super users can change the password without knowing the old one
-        if ($currentUser->role == 'super') {
-            if ($new1 != $new2) {
-                throw new Omeka_Validator_Exception('The new password must be correctly typed twice.');
-            }
-            
-            $this->setPassword($new1);
-        } else {
-            if (empty($new1) || empty($new2) || empty($old)) {
-                throw new Omeka_Validator_Exception('User must fill out all password fields in order to change password');
-            }
-            
-            //If the old passwords don't match up
-            if ($this->hashPassword($old) !== $this->password) {
-                throw new Omeka_Validator_Exception('Old password has been entered incorrectly.');
-            }
-            
-            if($new1 !== $new2) {
-                throw new Omeka_Validator_Exception('New password must be typed correctly twice.');
-            }
-            
-            $this->setPassword($new1);
-        }
-    }
-    
+        
     /**
      * Upgrade the hashed password.  Does nothing if the user/password is 
      * incorrect, or if same has been upgraded already.

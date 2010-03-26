@@ -225,6 +225,24 @@ class UsersController extends Omeka_Controller_Action
     {        
         $user = $this->findById();
         
+        require_once APP_DIR . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'ChangePassword.php';
+        $changePasswordForm = new Omeka_Form_ChangePassword;
+        $changePasswordForm->setUser($user);
+        
+        $this->view->passwordForm = $changePasswordForm;
+        
+        if ($_POST['new_password']) {
+            if ($changePasswordForm->isValid($_POST)) {
+                $values = $changePasswordForm->getValues();
+                $user->setPassword($values['new_password']);
+                $user->forceSave();
+                $this->flashSuccess("Password changed!");
+                $this->_helper->redirector->gotoUrl('/');
+            } else {
+                return;
+            }
+        }
+        
         try {
             if ($user->saveForm($_POST)) {
                 $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
@@ -271,31 +289,7 @@ class UsersController extends Omeka_Controller_Action
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
     }
-    
-    
-    public function changePasswordAction()
-    {
-        $user = $this->findById();
-
-        try {
-            //somebody is trying to change the password
-            if (!empty($_POST['new_password1']) or !empty($_POST['new_password2'])) {
-                $user->changePassword($_POST['new_password1'], 
-                                      $_POST['new_password2'], 
-                                      $_POST['old_password'],
-                                      $this->getInvokeArg('bootstrap')->currentUser);
-                $user->forceSave();
-                $this->flashSuccess('Password was changed successfully.');
-            } else {
-                $this->flashError('Password field must be properly filled out.');
-            }
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
-        }
         
-        $this->redirect->goto('edit', null, null, array('id'=>$user->id));
-    }
-    
     public function loginAction()
     {
         // If a user is already logged in, they should always get redirected back to the dashboard.
