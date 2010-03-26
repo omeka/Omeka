@@ -31,21 +31,6 @@
 
 </head>
 <body class="<?php echo $bodyclass; ?>">
-    <?php if (OMEKA_MIGRATION > (int) get_option('migration')): ?>
-        <div id="upgrade-database">
-            <h2>Upgrade Your Omeka Database</h2> 
-            <p>Your Omeka database is not compatible with your current
-            version of Omeka.  
-
-            <?php if (has_permission('Upgrade', 'migrate')): ?>
-                Please backup your existing database and then upgrade:</p>
-                <?php echo link_to('upgrade', 'migrate', 'Upgrade', array('id' => 'upgrade-database-link', 'class'=>'button')); ?>                    
-                
-            <?php else: ?>
-                Please notify an administrator to upgrade the database.</p>
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
     <div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
     <div id="wrap">
         

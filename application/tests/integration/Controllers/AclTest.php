@@ -68,17 +68,5 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     {
         $this->dispatch('collections/remove-collector', true);
         $this->assertAccessForbidden();                
-    }
-    
-    public function testCannotUpgradeOmeka()
-    {
-        $this->dispatch('upgrade/migrate', true);
-        $this->assertAccessForbidden();
-    }
-    
-    public function testCannotSeeUpgradedNotice()
-    {
-        $this->dispatch('upgrade/completed', true);
-        $this->assertAccessForbidden();
-    }
+    }    
 }
