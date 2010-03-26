@@ -18,7 +18,13 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
 {
 
     public $username;
+    
+    /**
+     * @var string This field should never contain the plain-text password.  Always
+     * use setPassword() to change the user password.
+     */
     public $password;
+    public $salt;
     public $active = '0';
     public $role;
     public $entity_id;
@@ -26,7 +32,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     const USERNAME_MIN_LENGTH = 1;
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
-    
+        
     protected $_related = array('Entity'=>'getEntity');
     
     public function getEntity()
@@ -38,20 +44,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     {
         $this->Entity->save();
         $this->entity_id = $this->Entity->id;
-        
-        // This part checks the password to see if it has been changed, then 
-        // encrypts it accordingly
-        $db = $this->getDb();
-                
-        if ($this->exists()) {
-            $sql = "SELECT password FROM $db->User WHERE id = ?";
-            $oldPassword = $db->fetchOne($sql, array((int) $this->id));            
-            if ($this->password !== $oldPassword) {
-                $this->password = sha1($this->password);
-            }
-        } else {
-            $this->password = sha1($this->password);
-        }
     }
     
     protected function beforeSaveForm($post)
@@ -74,7 +66,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
                 
         // If the User is not persistent we need to create a placeholder password
         if (!$this->exists()) {
-            $this->password = $this->generatePassword(8);
+            $this->setPassword($this->generatePassword(8));
         }        
         
         return true;
@@ -165,6 +157,8 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
             $this->addError('username', "'{$this->username}' is already in use.  Please choose another username.");
         }
         
+        // FIXME: This must be broken because 'password' property should never
+        // be plaintext.
         // Validate the password
         $pass = $this->password;
         
@@ -220,33 +214,28 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         
         return true;
     }
-    
-    public function changePassword($new1, $new2, $old)
-    {    
-        //super users can change the password without knowing the old one
-        $current = Omeka_Context::getInstance()->getCurrentUser();
-        if ($current->role == 'super') {
-            if ($new1 != $new2) {
-                throw new Omeka_Validator_Exception('The new password must be correctly typed twice.');
-            }
-            
-            $this->password = $new1;
-        } else {
-            if (empty($new1) || empty($new2) || empty($old)) {
-                throw new Omeka_Validator_Exception('User must fill out all password fields in order to change password');
-            }
-            
-            //If the old passwords don't match up
-            if (sha1($old) !== $this->password) {
-                throw new Omeka_Validator_Exception('Old password has been entered incorrectly.');
-            }
-            
-            if($new1 !== $new2) {
-                throw new Omeka_Validator_Exception('New password must be typed correctly twice.');
-            }
-            
-            $this->password = $new1;
+        
+    /**
+     * Upgrade the hashed password.  Does nothing if the user/password is 
+     * incorrect, or if same has been upgraded already.
+     * 
+     * @since 1.3
+     * @param string $username
+     * @param string $password
+     * @return boolean False if incorrect username/password given, otherwise true
+     * when password can be or has been upgraded.
+     */
+    public static function upgradeHashedPassword($username, $password)
+    {        
+        $userTable = get_db()->getTable('User');
+        $user = $userTable->findBySql("username = ? AND salt IS NULL AND password = SHA1(?)", 
+                                             array($username, $password), true);
+        if (!$user) {
+            return false;
         }
+        $user->setPassword($password);
+        $user->forceSave();
+        return true;
     }
     
     protected function processEntity(&$post)
@@ -298,7 +287,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         while (strlen($password) < $length){
             $password .= $cons[mt_rand(0, $num_cons - 1)] . $vowels[mt_rand(0, $num_vowels - 1)];
         }
-        $this->password = $password;
+        $this->setPassword($password);
         return $password;
     }      
     
@@ -313,5 +302,27 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     public function getResourceId()
     {
         return 'Users';
+    }     
+    
+    /**
+     * Generate a simple 16 character salt for the user.
+     */
+    public function generateSalt()
+    {
+        $this->salt = substr(md5(mt_rand()), 0, 16);
+    }   
+    
+    public function setPassword($password)
+    {
+        if ($this->salt === null) {
+            $this->generateSalt();
+        }
+        $this->password = $this->hashPassword($password);
+    }
+    
+    public function hashPassword($password)
+    {
+        assert('$this->salt !== null');
+        return sha1($this->salt . $password);
     }
 }

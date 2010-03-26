@@ -181,7 +181,7 @@ function public_uri()
     set_theme_base_uri('public');
     $args = func_get_args();
     $url = call_user_func_array('uri', $args);
-    set_theme_base_uri();
+    revert_theme_base_uri();
     return $url;
 }
 
@@ -196,7 +196,7 @@ function admin_uri()
     set_theme_base_uri('admin');
     $args = func_get_args();
     $url = call_user_func_array('uri', $args);
-    set_theme_base_uri();
+    revert_theme_base_uri();
     return $url;
 }
 
@@ -266,5 +266,19 @@ function set_theme_base_uri($theme = null)
             $baseUrl = CURRENT_BASE_URL;
             break;
     }
-    return Zend_Controller_Front::getInstance()->setBaseUrl($baseUrl);
+    $front = Zend_Controller_Front::getInstance();
+    $front->setParam('previousBaseUrl', $front->getBaseUrl());
+    return $front->setBaseUrl($baseUrl);
+}
+
+/**
+ * @since 1.3
+ */
+function revert_theme_base_uri()
+{
+    $front = Zend_Controller_Front::getInstance();
+    if (($previous = $front->getParam('previousBaseUrl')) !== null) {
+        $front->setBaseUrl($previous);
+        $front->clearParams('previousBaseUrl');
+    }
 }

@@ -9,7 +9,7 @@
  **/
 
 // Define the current migration.
-define('OMEKA_MIGRATION', 47);
+define('OMEKA_MIGRATION', 48);
 
 // Define the current version.
 define('OMEKA_VERSION', '1.1');
@@ -179,5 +179,4 @@ if (APPLICATION_ENV == 'production') {
     assert_options(ASSERT_ACTIVE, 0);
 } else {
     assert_options(ASSERT_ACTIVE, 1);
-    assert_options(ASSERT_BAIL, 1);
 }     

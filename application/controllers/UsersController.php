@@ -135,7 +135,7 @@ class UsersController extends Omeka_Controller_Action
                 if ($_POST['new_password1'] != $_POST['new_password2']) {
                     throw new Exception('Password: The passwords do not match.');
                 }
-                $ua->User->password = $_POST['new_password1'];
+                $ua->User->setPassword($_POST['new_password1']);
                 $ua->User->active = 1;
                 $ua->User->forceSave();
                 $ua->delete();
@@ -180,6 +180,24 @@ class UsersController extends Omeka_Controller_Action
     {        
         $user = $this->findById();
         
+        require_once APP_DIR . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'ChangePassword.php';
+        $changePasswordForm = new Omeka_Form_ChangePassword;
+        $changePasswordForm->setUser($user);
+        
+        $this->view->passwordForm = $changePasswordForm;
+        
+        if ($_POST['new_password']) {
+            if ($changePasswordForm->isValid($_POST)) {
+                $values = $changePasswordForm->getValues();
+                $user->setPassword($values['new_password']);
+                $user->forceSave();
+                $this->flashSuccess("Password changed!");
+                $this->_helper->redirector->gotoUrl('/');
+            } else {
+                return;
+            }
+        }
+        
         try {
             if ($user->saveForm($_POST)) {
                 $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
@@ -213,7 +231,6 @@ class UsersController extends Omeka_Controller_Action
                     . "Your account for the $siteTitle archive has been created. Please click the following link to activate your account:\n\n"
                     . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
                     . "(or use any other page on the site).\n\n"
-                    . "Be aware that we log you out after 15 minutes of inactivity to help protect people using shared computers (at libraries, for instance).\n\n" 
                     ."$siteTitle Administrator";
         $subject    = "Activate your account with the ".$siteTitle." Archive";
         
@@ -226,31 +243,8 @@ class UsersController extends Omeka_Controller_Action
         $mail->setSubject($subject);
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
-        $this->getInvokeArg('bootstrap')->getResource('Logger')
-                                        ->info("Activation email sent to '{$entity->email}' on " . Zend_Date::now());
     }
-    
-    
-    public function changePasswordAction()
-    {
-        $user = $this->findById();
-
-        try {
-            //somebody is trying to change the password
-            if (!empty($_POST['new_password1']) or !empty($_POST['new_password2'])) {
-                $user->changePassword($_POST['new_password1'], $_POST['new_password2'], $_POST['old_password']);
-                $user->forceSave();
-                $this->flashSuccess('Password was changed successfully.');
-            } else {
-                $this->flashError('Password field must be properly filled out.');
-            }
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
-        }
         
-        $this->redirect->goto('edit', null, null, array('id'=>$user->id));
-    }
-    
     public function loginAction()
     {
         // If a user is already logged in, they should always get redirected back to the dashboard.
@@ -272,6 +266,9 @@ class UsersController extends Omeka_Controller_Action
         if (($loginForm instanceof Zend_Form) && !$loginForm->isValid($_POST)) {
             return;
         }
+        
+        User::upgradeHashedPassword($loginForm->getValue('username'), 
+                                    $loginForm->getValue('password'));
         
         $authAdapter = new Omeka_Auth_Adapter_UserTable($this->getDb());
         $pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');

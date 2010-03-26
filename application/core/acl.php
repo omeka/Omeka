@@ -30,7 +30,9 @@ $allowList = array(
     //Researchers can view items and collections that are not yet public
     array('researcher',array('Items', 'Collections'),array('showNotPublic')),
     //Contributors can add and tag items, edit or delete their own items, and see their items that are not public
-    array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic'))
+    array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
+    //Non-authenticated users can access the upgrade script (for logistical reasons).
+    array(null, 'Upgrade')
 ); 
 
 /* $acl = new Omeka_Acl($roles, $resources, $allowList);  */
@@ -58,7 +60,7 @@ $acl->allow(null, 'Users', array('edit', 'show', 'change-password', 'delete'), n
 $acl->allow(null, 'Users', array('login', 'logout', 'forgot-password', 'activate'));
 
 //Deny a couple of specific privileges to admin users
-$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Upgrade', 'ElementSets', 'Security'));
+$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Users', 'ElementSets', 'Security'));
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 $acl->deny('admin', 'Users', array('add', 'browse'));
 ?>

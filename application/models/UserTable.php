@@ -24,6 +24,7 @@ class UserTable extends Omeka_Db_Table
                       array( 'u.id',
                              'u.username',
                              'u.password',
+                             'u.salt',
                              'u.active',
                              'u.role',
                              'u.entity_id', 

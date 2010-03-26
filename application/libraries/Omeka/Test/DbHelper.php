@@ -88,13 +88,17 @@ class Omeka_Test_DbHelper
     
     public function dropTables($prefix = null)
     {
-        $tableNames = $this->getTableNames($prefix);
+        if (is_array($prefix)) {
+            $tableNames = $prefix;
+        } else {
+            $tableNames = $this->getTableNames($prefix);
+        }
         if ($tableNames) {
             $dropSql = "DROP TABLE `" . join($tableNames, '`,`') . '`';
             $this->_dbAdapter->query($dropSql);
         }
     }
-    
+        
     public function getTableNames($prefix)
     {
         $sql = "SHOW TABLES " . ($prefix ? "LIKE '$prefix%'" : '');

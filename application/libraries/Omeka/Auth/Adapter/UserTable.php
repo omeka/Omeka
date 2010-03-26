@@ -21,7 +21,7 @@ class Omeka_Auth_Adapter_UserTable extends Zend_Auth_Adapter_DbTable
                             $db->User, 
                             'username', 
                             'password', 
-                            'SHA1(?) AND active = 1');
+                            'SHA1(CONCAT(salt, ?)) AND active = 1');
     }
     
     protected function _authenticateValidateResult($resultIdentity)

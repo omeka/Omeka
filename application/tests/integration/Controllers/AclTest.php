@@ -15,18 +15,7 @@
  * @copyright Center for History and New Media, 2007-2008
  **/
 class Controllers_AclTest extends Omeka_Test_AppTestCase
-{        
-    public function setUp()
-    {
-        // Do all the bootstrapping and such.
-        parent::setUp();
-        
-        // Tack on the admin theme for use in view scripts.
-        // The public theme scripts die with a 'function redeclared in custom.php' error.
-        $this->view = Zend_Registry::get('view');
-        $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
-    }
-    
+{
     public function testUserIsNotLoggedIn()
     {
         $this->assertNull($this->core->getResource('CurrentUser'));
@@ -82,17 +71,5 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     {
         $this->dispatch('collections/remove-collector', true);
         $this->assertAccessForbidden();                
-    }
-    
-    public function testCannotUpgradeOmeka()
-    {
-        $this->dispatch('upgrade/migrate', true);
-        $this->assertAccessForbidden();
-    }
-    
-    public function testCannotSeeUpgradedNotice()
-    {
-        $this->dispatch('upgrade/completed', true);
-        $this->assertAccessForbidden();
-    }
+    }    
 }
