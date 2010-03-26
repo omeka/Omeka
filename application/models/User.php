@@ -211,11 +211,10 @@ class User extends Omeka_Record {
         return true;
     }
     
-    public function changePassword($new1, $new2, $old)
+    public function changePassword($new1, $new2, $old, User $currentUser)
     {    
         //super users can change the password without knowing the old one
-        $current = Omeka_Context::getInstance()->getCurrentUser();
-        if ($current->role == 'super') {
+        if ($currentUser->role == 'super') {
             if ($new1 != $new2) {
                 throw new Omeka_Validator_Exception('The new password must be correctly typed twice.');
             }

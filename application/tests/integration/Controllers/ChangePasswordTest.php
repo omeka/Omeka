@@ -21,12 +21,17 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         parent::setUp();
                 
         // Set the ACL to allow access to users.
-        $acl = $this->core->getBootstrap()->getResource('Acl');
+        $acl = $this->core->getBootstrap()->acl;
         $acl->allow(null, 'Users');
-        
+                
         $this->db = $this->core->getBootstrap()->db;
         $this->user = $this->db->getTable('User')->find(1);
         $this->salt = $this->user->salt;
+        
+        // The user is attempting to change their own password.
+        // Pretend that this user is not a super user.
+        $this->user->role = 'admin';
+        $this->core->getBootstrap()->currentUser = $this->user;
     }
 
     public function assertPreConditions()
@@ -35,6 +40,11 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         $this->assertTrue($this->user->exists());
         $this->assertNotNull($this->salt, "Salt not being set properly by installer.");
         $this->_assertPasswordNotChanged();
+    }
+    
+    public function assertPostConditions()
+    {
+        $this->_assertSaltNotChanged();
     }
     
     public function testChangingPassword()
@@ -46,7 +56,18 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         ));
         $this->getRequest()->setMethod('post');
         $this->dispatch('/users/change-password/1', true);
-        $this->_assertSaltNotChanged();
+        $this->_assertPasswordIs('foobar6789');
+    }
+    
+    public function testSuperUserCanChangePasswordWithoutKnowingOriginal()
+    {
+        $this->user->role = 'super';
+        $this->getRequest()->setPost(array(
+            'new_password1' => 'foobar6789',
+            'new_password2' => 'foobar6789'
+        ));
+        $this->getRequest()->setMethod('post');
+        $this->dispatch('/users/change-password/1', true);
         $this->_assertPasswordIs('foobar6789');
     }
     
