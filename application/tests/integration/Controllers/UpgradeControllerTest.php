@@ -31,7 +31,7 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
         // The database is currently up to date.
         $this->assertEquals(get_option('migration'), OMEKA_MIGRATION);
         // No one is logged in.
-        $this->assertFalse($this->core->getBootstrap()->currentUser);
+        $this->assertNull($this->core->getBootstrap()->currentUser);
     }
     
     public function testAutomaticRedirectToUpgrade()
