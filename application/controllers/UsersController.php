@@ -192,7 +192,7 @@ class UsersController extends Omeka_Controller_Action
                 $user->setPassword($values['new_password']);
                 $user->forceSave();
                 $this->flashSuccess("Password changed!");
-                $this->_helper->redirector->gotoUrl('/');
+                return $this->_helper->redirector->gotoUrl('/');
             } else {
                 return;
             }
