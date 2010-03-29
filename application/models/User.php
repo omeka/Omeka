@@ -56,10 +56,10 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         if (!empty($post['role'])) {
             $acl = Omeka_Context::getInstance()->getAcl();
             $currentUser = Omeka_Context::getInstance()->getCurrentUser();
-            if ($post['role'] == 'super' && !$this->userHasPermission('makeSuperUser')) {
+            if ($post['role'] == 'super' && !$acl->isAllowed($currentUser, 'Users', 'makeSuperUser')) {
                 throw new Omeka_Validator_Exception( 'User may not change permissions to super-user' );
             }
-            if (!$this->userHasPermission('changeRole')) {
+            if (!$acl->isAllowed($currentUser, 'Users', 'changeRole')) {
                 throw new Omeka_Validator_Exception('User may not change roles.');
             }
         } 
