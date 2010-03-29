@@ -30,8 +30,8 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         
         // The user is attempting to change their own password.
         // Pretend that this user is not a super user.
+        $this->_authenticateUser($this->user);
         $this->user->role = 'admin';
-        $this->core->getBootstrap()->currentUser = $this->user;
     }
 
     public function assertPreConditions()
