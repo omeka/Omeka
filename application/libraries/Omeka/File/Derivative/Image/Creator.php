@@ -61,6 +61,10 @@ class Omeka_File_Derivative_Image_Creator
      */
     public function create($fromFilePath, $derivFilename)
     {
+        if (!is_string($derivFilename) || $derivFilename == null) {
+            throw new InvalidArgumentException("Invalid derivative filename given.");
+        }
+        
         if (!file_exists($fromFilePath)) {
             throw new RuntimeException("File at '$fromFilePath' does not exist.");
         }
