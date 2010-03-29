@@ -99,6 +99,19 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }
     }
     
+    /**
+     * Trick the environment into thinking that a user has been authenticated.
+     */
+    protected function _authenticateUser(User $user)
+    {
+        if (!$user->exists()) {
+            throw new InvalidArgumentException("User is not persistent in db.");
+        }
+        $bs = $this->core->getBootstrap();
+        $bs->auth->getStorage()->write($user->id);
+        $bs->currentUser = $user;
+    }
+    
     protected function _useAdminViews()
     {
         $this->view = Zend_Registry::get('view');
