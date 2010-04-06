@@ -72,18 +72,10 @@ class Omeka_Test_DbHelper
         }
     }
         
-    public function loadDbSchema($pathToSchemaFile)
+    public function loadDbSchema($pathToSchemaFile, $tablePrefix = 'omeka_')
     {
-        if (!is_readable($pathToSchemaFile)) {
-            die("Schema file at: '$pathToSchemaFile' must be readable by the test case.");
-        }
-        $loadSql = file_get_contents($pathToSchemaFile);
-        $sqlQueries = explode(";\n", $loadSql);
-        foreach ($sqlQueries as $query) {
-            if (!empty($query)) {
-                $this->_dbAdapter->query($query);
-            }
-        }
+        $omekaDb = new Omeka_Db($this->_dbAdapter, $tablePrefix);
+        $omekaDb->loadSqlFile($pathToSchemaFile);
     }
     
     public function dropTables($prefix = null)
