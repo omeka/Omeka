@@ -239,18 +239,42 @@ class Omeka_Db
     }
 
     /**
-     * Convenience function for when server setup disallows executing more than 
-     * one SQL query at a time
+     * Execute more than one SQL query at once.  
      *
+     * @param string $sql String containing SQL queries.
+     * @param string $delimiter Character that delimits each SQL query.  Defaults
+     * to semicolon ';'.
      * @return void
      **/
-    public function execBlock($sql)
+    public function execBlock($sql, $delimiter = ';')
     {
-        $queries = explode(';', $sql);
+        $queries = explode($delimiter, $sql);
         foreach ($queries as $query) {
             if (strlen(trim($query))) {
                 $this->exec($query);
             }
         }
     }
+
+    /**
+     * Read the contents of an SQL file and execute all the queries therein.
+     * 
+     * In addition to reading the file, this will make substitutions based on 
+     * specific naming conventions.  Currently makes the following substitutions:
+     *      %PREFIX% will be replaced by the table prefix
+     * 
+     * @since 1.3
+     * @param string $filePath Path to the SQL file to load
+     * @return void
+     */
+    public function loadSqlFile($filePath)
+    {
+        if (!is_readable($filePath)) {
+            throw new InvalidArgumentException("Cannot read SQL file at '$filePath'.");
+        }
+        $loadSql = file_get_contents($filePath);
+        $subbedSql = str_replace('%PREFIX%', $this->prefix, $loadSql);
+        $this->execBlock($subbedSql, ";\n");
+    }
+   
 }
