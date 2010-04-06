@@ -18,12 +18,14 @@ class Models_InsertCollectionTest extends Omeka_Test_AppTestCase
     
     public function testCanInsertCollection()
     {
+        $collectionsTable = $this->core->getBootstrap()->db->Collection;
+        
         // Verify no collections exist.
-        $this->assertEquals(0, $this->_dbHelper->getRowCount('omeka_collections'));
+        $this->assertEquals(0, $this->_dbHelper->getRowCount($collectionsTable));
         
         // Insert a collection and verify with a second query.
         $collection = insert_collection(array('name'=>'Foo Bar', 'public'=>true, 'description'=>'foo'));
-        $sql = "SELECT id, public FROM omeka_collections";
+        $sql = "SELECT id, public FROM $collectionsTable";
         $row = $this->_dbHelper->fetchRow($sql);
         $this->assertEquals(array('id'=>1, 'public'=>1), $row);
     }
