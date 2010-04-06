@@ -1,1 +1,1 @@
-The changelog for Omeka 1.1 can be found at https://omeka.org/trac/wiki/Omeka1.1ChangeLog
+The changelog for this version of Omeka can be found at https://omeka.org/trac/wiki/Changelogs
