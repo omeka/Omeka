@@ -40,7 +40,7 @@ class Tickets_780Test extends Omeka_Test_AppTestCase
     
     private function _dispatchAndAssert($url)
     {
-        $this->dispatch($url);
+        $this->dispatch($url, false);
         $output = auto_discovery_link_tag();
         $this->assertEquals('<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="/items/browse?output=rss2" />', $output);
     }
