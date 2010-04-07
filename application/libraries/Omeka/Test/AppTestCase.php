@@ -71,7 +71,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      * @internal Overrides the parent behavior to enable automatic throwing of
      * exceptions from dispatching.
      */
-    public function dispatch($url = null, $throwExceptions = false)
+    public function dispatch($url = null, $throwExceptions = true)
     {
         parent::dispatch($url);
         if ($throwExceptions) {
