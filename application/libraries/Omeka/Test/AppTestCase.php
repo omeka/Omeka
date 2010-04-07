@@ -27,7 +27,15 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $this->bootstrap = array($this, 'appBootstrap');
         parent::setUp();
     }
-
+    
+    public function __get($property)
+    {
+        if ($retVal = parent::__get($property)) {
+            return $retVal;
+        }
+        return $this->core->getBootstrap()->getContainer()->{$property};
+    }
+    
     public function appBootstrap()
     {
         // Must happen before all other bootstrapping.
