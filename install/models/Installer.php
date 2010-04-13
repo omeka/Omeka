@@ -14,6 +14,8 @@ require_once 'Installer/Requirements.php';
 */
 class Installer
 {
+    const SUPER_FIRST_NAME = 'Super';
+    const SUPER_LAST_NAME = 'User';
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
     const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
@@ -262,8 +264,8 @@ class Installer
             $user = new User;
             $user->Entity = new Entity;
             $user->Entity->email = $values['super_email'];
-            $user->Entity->first_name = 'Super';
-            $user->Entity->last_name = 'User';
+            $user->Entity->first_name = self::SUPER_FIRST_NAME;
+            $user->Entity->last_name = self::SUPER_LAST_NAME;
             $user->username = $values['username'];
             $user->setPassword($values['password']);
             $user->active = 1;
