@@ -32,6 +32,9 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     const USERNAME_MIN_LENGTH = 1;
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
+    
+    const INVALID_EMAIL_ERROR_MSG = 'A valid email address is required.';
+    const CLAIMED_EMAIL_ERROR_MSG = 'That email address has already been claimed by a different user.  Please notify an administrator if you feel this has been done in error.';
         
     protected $_related = array('Entity'=>'getEntity');
     
@@ -131,11 +134,11 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
             }
             
             if (!Zend_Validate::is($entity->email, 'EmailAddress')) {
-                $this->addError('email', 'A valid email address is required.');
+                $this->addError('email', self::INVALID_EMAIL_ERROR_MSG);
             }
             
             if (!$this->emailIsUnique($entity->email)) {
-                $this->addError('email', 'That email address has already been claimed by a different user.  Please notify an administrator if you feel this has been done in error.');            
+                $this->addError('email', self::CLAIMED_EMAIL_ERROR_MSG);            
             }                 
         }    
         

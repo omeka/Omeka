@@ -126,6 +126,11 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
     }
     
+    protected function _getDefaultUser()
+    {
+        return $this->db->getTable('User')->find(Omeka_Test_Resource_Db::DEFAULT_USER_ID);
+    }
+    
     /**
      * @internal Necessary because admin and public have 2 separate bootstraps.
      */

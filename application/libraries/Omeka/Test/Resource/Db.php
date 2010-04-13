@@ -10,8 +10,10 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
     const SUPER_USERNAME = 'foobar123';
     const SUPER_PASSWORD = 'foobar123';
-    const SUPER_EMAIL = 'foobar@example.com';
-
+    const SUPER_EMAIL    = 'foobar@example.com';
+    
+    const DEFAULT_USER_ID  = 1;
+    
     public function init()
     {        
         $config = $this->_loadConfig();
