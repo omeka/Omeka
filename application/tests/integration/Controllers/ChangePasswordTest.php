@@ -13,9 +13,7 @@
  * @copyright Center for History and New Media, 2007-2010
  **/
 class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
-{
-    const CURRENT_PASSWORD = 'foobar123';
-    
+{    
     public function setUp()
     {
         parent::setUp();
@@ -50,7 +48,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     public function testChangingPassword()
     {
         $this->_dispatchChangePassword(array(
-            'current_password'  => self::CURRENT_PASSWORD,
+            'current_password'  => Omeka_Test_Resource_Db::SUPER_PASSWORD,
             'new_password' => 'foobar6789',
             'new_password_confirm' => 'foobar6789'
         ));
@@ -88,7 +86,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     
     private function _assertPasswordNotChanged()
     {
-        $this->_assertPasswordIs(self::CURRENT_PASSWORD,
+        $this->_assertPasswordIs(Omeka_Test_Resource_Db::SUPER_PASSWORD,
                                  "Hashed password should not have changed.");
     }
     
