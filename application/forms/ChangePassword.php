@@ -16,16 +16,22 @@ class Omeka_Form_ChangePassword extends Omeka_Form
 {
     private $_user;
     
+    const ERROR_CURRENT_PASSWORD_INVALID = "Invalid current password.";
+    const ERROR_NEW_PASSWORD_REQUIRED = "New password must be entered.";
+    const ERROR_NEW_PASSWORD_CONFIRM_REQUIRED = 'New password must be typed correctly twice.';
+    const ERROR_NEW_PASSWORD_TOO_SHORT = "New password must be at least %min% characters long.";
+    
     public function init()
     {
         parent::init();
-                        
+        
+        $this->setAttrib('id', 'change-password');
         $this->addElement('text', 'current_password', 
             array(
                 'label'         => 'Current Password',
                 'required'      => true,
                 'class'         => 'textinput',
-                'errorMessages' => array('Invalid current password'),
+                'errorMessages' => array(self::ERROR_CURRENT_PASSWORD_INVALID),
             )
         );
         
@@ -35,8 +41,31 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                 'required'      => true,
                 'class'         => 'textinput',
                 'validators'    => array(
-                    array('Confirmation', null, array('new_password_confirm')),
-                    array('StringLength', null, array(User::PASSWORD_MIN_LENGTH))
+                    array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => 
+                        array(
+                            'messages' => array(
+                                'isEmpty' => self::ERROR_NEW_PASSWORD_REQUIRED
+                            )
+                        )
+                    ),
+                    array(
+                        'validator' => 'Confirmation', 
+                        'options'   => array(
+                            'field'     => 'new_password_confirm',
+                            'messages'  => array(
+                                Omeka_Validate_Confirmation::NOT_MATCH => self::ERROR_NEW_PASSWORD_CONFIRM_REQUIRED
+                            )
+                         )
+                    ),
+                    array(
+                        'validator' => 'StringLength',
+                        'options'   => array(
+                            'min' => User::PASSWORD_MIN_LENGTH,
+                            'messages' => array(
+                                Zend_Validate_StringLength::TOO_SHORT => self::ERROR_NEW_PASSWORD_TOO_SHORT
+                            )
+                        )
+                    )
                 )
             )
         );
@@ -45,7 +74,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                 'label'         => 'Repeat New Password',
                 'required'      => true,
                 'class'         => 'textinput',
-                'errorMessages' => array('New password must be typed correctly twice.')
+                'errorMessages' => array(self::ERROR_NEW_PASSWORD_CONFIRM_REQUIRED)
             )
         );
         $this->addElement('submit', 'submit',
