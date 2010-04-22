@@ -38,6 +38,10 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
         
     input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
     
+    .inputs textarea {
+        max-width:98%;
+    }
+    
     button, 
     .submit, 
     input[type="submit"],
@@ -111,8 +115,11 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     .deactivate:hover {}
 
     /* Replaces tooltips */
+    .field {
+        overflow:hidden; zoom:1;
+    }
     .field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
-    #item-form .field .explanation, #editfile .field .explanation, .hint {margin-left:216px; float:left; clear:right;}
+    #item-form .field .explanation, #editfile .field .explanation, .hint, .theme-configuration .field .explanation {margin-left:216px; clear:right;}
     
     /* Changes the width of inputs depending on the layout */
         .vertical-nav .inputs {}
