@@ -22,6 +22,19 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     {
         $this->_purifier = $purifier;
     }
+     
+    public function getHtmlPurifier()
+    {
+        return $this->_purifier;
+    }
+    
+    /**
+     * @param HTMLPurifier $purifier
+     **/
+    public function setHtmlPurifier($purifier)
+    {
+        $this->_purifier = $purifier;
+    }
         
     /**
      * Determine whether or not to filter form submissions for various controllers.
@@ -31,10 +44,20 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      **/
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $controllerName = $request->getControllerName();
+        // Don't purify if the request is not a post
+        if (!$request->isPost()) {
+            return;
+        }
+        
+        // Don't purify if the post is empty
+        $post = $request->getPost();
+        if (empty($post)) {
+            return;
+        }
         
         // To process the items form, implement a 'filterItemsForm' method
         if ($this->isFormSubmission($request)) {
+            $controllerName = $request->getControllerName();
             $filterMethodName = 'filter' . ucwords($controllerName) . 'Form';
             if (method_exists($this, $filterMethodName)) {                
                 $this->$filterMethodName($request);
@@ -42,9 +65,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         }
         
         // Let plugins hook into this to process form submissions in their own way.
-        if ($request->isPost()) {
-            fire_plugin_hook('html_purifier_form_submission', $request, $this->_purifier);
-        }
+        fire_plugin_hook('html_purifier_form_submission', $request, $this->_purifier);
         
         // No processing for users form, since it's already properly filtered by User::filterInput()
         // No processing for tags form, none of the tags should be HTML.
@@ -96,11 +117,12 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         $post = $request->getPost();
                 
         foreach ($post['Elements'] as $elementId => $texts) {
+            
             foreach ($texts as $index => $values) {
                 if (!array_key_exists('text', $values)) {
                     break;
                 }
-                
+
                 if (!array_key_exists('html', $values)) {
                     throw new Exception('What are you talking about?  You need the "html" field if you want HtmlPurifier to work correctly.');
                 }
@@ -112,7 +134,6 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         }
         
         // Also strip HTML out of the tags field.
-        // $post['tags'] = $this->_purifier->purify($post['tags']);
         $post['tags'] = strip_tags($post['tags']);        
         
         $request->setPost($post);

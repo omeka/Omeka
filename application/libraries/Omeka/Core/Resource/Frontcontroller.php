@@ -44,7 +44,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         
         // Register the Upgrade controller plugin
         $front->registerPlugin(new Omeka_Controller_Plugin_Upgrade);
-        
+                
         // Register the HtmlPurifier controller plugin
         $bootstrap->bootstrap('Htmlpurifier');
         if ($htmlPurifier = $bootstrap->getResource('Htmlpurifier')) {

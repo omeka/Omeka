@@ -22,7 +22,7 @@ class Omeka_Core_Resource_Htmlpurifier extends Zend_Application_Resource_Resourc
         // Get the config resource
         $bootstrap->bootstrap('Config');
         $config = $bootstrap->getResource('Config');
-                
+                        
         // Get the HtmlPurifier controller plugin        
         $htmlPurifier = $this->_getHtmlPurifier($config);
                         
@@ -31,8 +31,7 @@ class Omeka_Core_Resource_Htmlpurifier extends Zend_Application_Resource_Resourc
     
     protected function _getHtmlPurifier($config)
     {   
-        // Do not purify if the POST is empty.
-        if (empty($_POST) || !$config->htmlpurifier->enabled) {
+        if (!$config->htmlpurifier->enabled) {
             return;
         }
 
