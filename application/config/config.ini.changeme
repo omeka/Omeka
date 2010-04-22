@@ -52,4 +52,5 @@ mail.transport.type = "Sendmail"
 
 ; HtmlPurify Settings
 htmlpurifier.enabled = true
-htmlpurifier.allowedhtmltags = "p,br,strong,em,span[style|class],div[style|class],ul,ol,li,a,h1,h2,h3,h4,h5,h6,address,pre,table,tr,td,blockquote,thead,tfoot,tbody,th"
+htmlpurifier.allowedhtmlelements = "p,br,strong,em,span,div,ul,ol,li,a,h1,h2,h3,h4,h5,h6,address,pre,table,tr,td,blockquote,thead,tfoot,tbody,th,dl,dt,dd,q,small,strike,sup,sub,b,i,big,small,tt"
+htmlpurifier.allowedhtmlattributes = "*.style,*.class,a.href,a.title,a.target"

@@ -82,7 +82,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      **/
     public function isFormSubmission($request)
     {
-        return in_array($request->getActionName(), array('add', 'edit')) and $request->isPost();
+        return in_array($request->getActionName(), array('add', 'edit', 'config')) and $request->isPost();
     }
             
     /**
@@ -97,6 +97,30 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         $request->setPost($post);
     }
     
+    /**
+    * Purify all of the data in the theme settings
+    **/
+    public function filterThemesForm($request)
+    {
+        $post = $request->getPost();
+        $post = $this->_purifyArray($post);
+        $request->setPost($post);
+    }
+    
+    /**
+    * Recurisvely purify an array
+    **/
+    protected function _purifyArray($dataArray)
+    {
+        foreach($dataArray as $k => $v) {
+            if (is_array($v)) {
+                $dataArray[$k] = $this->_purifyArray($v);
+            } else if (is_string($v)) {
+                $dataArray[$k] = $this->_purifier->purify($v);
+            }
+        }
+        return $dataArray;
+    }
     
     /**
      * Filter the 'Elements' array of the POST.

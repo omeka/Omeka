@@ -35,20 +35,27 @@ class Omeka_Core_Resource_Htmlpurifier extends Zend_Application_Resource_Resourc
             return;
         }
 
-        // Get the allowed HTML tags from the configuration file
-        $allowedHtmlTags = $config->htmlpurifier->allowedhtmltags;
-        if ($allowedHtmlTags === null) {
+        // Get the allowed HTML elements from the configuration file
+        $allowedHtmlElements = $config->htmlpurifier->allowedhtmlelements;
+        if ($allowedHtmlElements === null) {
             return;
         }
+        
+        // Get the allowed HTML attributes from the configuration file
+        $allowedHtmlAttributes = $config->htmlpurifier->allowedhtmlattributes;
 
         // Require the HTML Purfier autoloader.
         require_once 'htmlpurifier-3.1.1-lite/library/HTMLPurifier.auto.php';        
         $htmlPurifierConfig = HTMLPurifier_Config::createDefault();
+        
+        // Set the encoding to UTF-8
+        $htmlPurifierConfig->set('Core', 'Encoding', 'UTF-8');
 
         // Allow HTML tags. Setting this as NULL allows a subest of TinyMCE's 
         // valid_elements whitelist. Setting this as an empty string disallows 
         // all HTML elements.
-        $htmlPurifierConfig->set('HTML', 'Allowed', $allowedHtmlTags);
+        $htmlPurifierConfig->set('HTML', 'AllowedElements', $allowedHtmlElements);
+        $htmlPurifierConfig->set('HTML', 'AllowedAttributes', $allowedHtmlAttributes);
 
         // Disable caching.
         $htmlPurifierConfig->set('Cache', 'DefinitionImpl', null);

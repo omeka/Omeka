@@ -213,6 +213,47 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends PHPUnit_Framework_TestCas
         $this->assertEquals($cleanHtml, $post['Elements'][1][1]['text']);
     }
     
+    public function testFilterThemesFormForAllowedAndUnAllowedTags()
+    {
+        $dirtyHtml = '<p><strong>Bob</strong> is <em>dead</em>.</p><br />';
+        $cleanHtml = '<p>Bob is dead.</p><br />';
+        
+        // Create a request with dirty html for the collection description post variable
+        $request = new Zend_Controller_Request_HttpTestCase();
+        
+        // post can be any nested array of strings
+        $post = array(
+            'whatever' => $dirtyHtml,
+            'NestedArray'=> array(
+                0 => array(
+                        array('text' => $dirtyHtml),
+                        array('text' => $dirtyHtml)
+                 ),
+                1 => array(
+                        array('text' => $dirtyHtml),
+                        array('text' => $dirtyHtml)
+                 )
+            ),
+            'whatever2' => $dirtyHtml
+        );
+                            
+        $request->setPost($post);
+        
+        // Html purify the request
+        $htmlPurifierPlugin = $this->_getHtmlPurifierPlugin('p,br');
+        $htmlPurifierPlugin->filterThemesForm($request);
+        
+        // Make sure the description post variable is clean
+        $post = $request->getPost();
+        $this->assertEquals($cleanHtml, $post['whatever']);
+        $this->assertEquals($cleanHtml, $post['NestedArray'][0][0]['text']);
+        $this->assertEquals($cleanHtml, $post['NestedArray'][0][1]['text']);
+        $this->assertEquals($cleanHtml, $post['NestedArray'][1][0]['text']);
+        $this->assertEquals($cleanHtml, $post['NestedArray'][1][1]['text']);
+        $this->assertEquals($cleanHtml, $post['whatever2']);
+        
+    }
+    
     protected function _getHtmlPurifierPlugin($allowedHtmlTags='')
     {
         $htmlPurifier =  $this->_getHtmlPurifier($allowedHtmlTags);
