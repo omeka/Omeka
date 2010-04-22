@@ -49,3 +49,7 @@ mail.transport.type = "Sendmail"
 ; mail.transport.options.username = ""
 ; mail.transport.options.password = ""
 ; mail.transport.options.ssl = ""       ; For SSL support, set to "ssl" or "tls"
+
+; HtmlPurify Settings
+htmlpurifier.enabled = true
+htmlpurifier.allowedhtmltags = "p,br,strong,em,span[style|class],div[style|class],ul,ol,li,a,h1,h2,h3,h4,h5,h6,address,pre,table,tr,td,blockquote,thead,tfoot,tbody,th"

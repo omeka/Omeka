@@ -32,7 +32,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         if ($bootstrap->hasPluginResource('PluginBroker')) {
             $bootstrap->bootstrap('PluginBroker');
         }
-                
+        
         // Front controller
         $front->addControllerDirectory(CONTROLLER_DIR, 'default');
                                                         
@@ -42,8 +42,15 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // Register the JSOND controller plugin
         $front->registerPlugin(new Omeka_Controller_Plugin_Jsonp);
         
+        // Register the Upgrade controller plugin
         $front->registerPlugin(new Omeka_Controller_Plugin_Upgrade);
         
+        // Register the HtmlPurifier controller plugin
+        $bootstrap->bootstrap('Htmlpurifier');
+        if ($htmlPurifier = $bootstrap->getResource('Htmlpurifier')) {
+            $front->registerPlugin(new Omeka_Controller_Plugin_HtmlPurifier($htmlPurifier));
+        }
+        
         return $front;
-    }        
+    }     
 }
