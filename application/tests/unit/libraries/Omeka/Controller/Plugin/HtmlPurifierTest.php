@@ -21,54 +21,9 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
     
     protected function _getHtmlPurifier($allowedHtmlElements='', $allowedHtmlAttributes='')
     {                   
-        $htmlPurifier = Omeka_Controller_Plugin_HtmlPurifier::createHtmlPurifier($allowedHtmlElements, $allowedHtmlAttributes);
-        Omeka_Controller_Plugin_HtmlPurifier::setHtmlPurifier($htmlPurifier);
+        $htmlPurifier = Omeka_Filter_HtmlPurifier::createHtmlPurifier($allowedHtmlElements, $allowedHtmlAttributes);
+        Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         return $htmlPurifier;
-    }
-    
-    public function testConstructor()
-    {        
-        $htmlPurifier = $this->_getHtmlPurifier();
-        $htmlPurifierPlugin = new Omeka_Controller_Plugin_HtmlPurifier($htmlPurifier);
-        $this->assertEquals($htmlPurifier, $htmlPurifierPlugin->getHtmlPurifier());
-    }
-    
-    public function testGetHtmlPurifier()
-    {
-        $htmlPurifier = $this->_getHtmlPurifier();
-        $htmlPurifierPlugin = new Omeka_Controller_Plugin_HtmlPurifier();
-        $this->assertEquals($htmlPurifier, $htmlPurifierPlugin->getHtmlPurifier());
-        
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong');
-        $htmlPurifierPlugin = new Omeka_Controller_Plugin_HtmlPurifier();
-        $this->assertEquals($htmlPurifier, $htmlPurifierPlugin->getHtmlPurifier());
-        
-        $htmlPurifier = $this->_getHtmlPurifier(null,'*.class');
-        $htmlPurifierPlugin = new Omeka_Controller_Plugin_HtmlPurifier();
-        $this->assertEquals($htmlPurifier, $htmlPurifierPlugin->getHtmlPurifier());
-        
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong','*.class');
-        $htmlPurifierPlugin = new Omeka_Controller_Plugin_HtmlPurifier();
-        $this->assertEquals($htmlPurifier, $htmlPurifierPlugin->getHtmlPurifier());
-    }
-    
-    public function testSetHtmlPurifier()
-    {
-        $htmlPurifier = $this->_getHtmlPurifier();
-        Omeka_Controller_Plugin_HtmlPurifier::setHtmlPurifier($htmlPurifier);
-        $this->assertEquals($htmlPurifier, Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier());
-        
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong');
-        Omeka_Controller_Plugin_HtmlPurifier::setHtmlPurifier($htmlPurifier);
-        $this->assertEquals($htmlPurifier, Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier());
-        
-        $htmlPurifier = $this->_getHtmlPurifier(null,'*.class');
-        Omeka_Controller_Plugin_HtmlPurifier::setHtmlPurifier($htmlPurifier);
-        $this->assertEquals($htmlPurifier, Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier());
-        
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong','*.class');
-        Omeka_Controller_Plugin_HtmlPurifier::setHtmlPurifier($htmlPurifier);
-        $this->assertEquals($htmlPurifier, Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier());
     }
     
     public function testIsFormSubmission()

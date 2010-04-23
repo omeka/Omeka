@@ -11,67 +11,7 @@
  * @copyright Center for History and New Media, 2007-2010
  **/
 class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstract
-{
-
-    protected static $_purifier = null;
-         
-    public static function getHtmlPurifier()
-    {
-        if (!self::$_purifier) {
-            self::$_purifier = self::createHtmlPurifier();
-        }
-        return self::$_purifier;
-    }
-    
-    /**
-     * @param HTMLPurifier $purifier
-     **/
-    public static function setHtmlPurifier($purifier)
-    {
-        self::$_purifier = $purifier;
-    }
-    
-    public static function createHtmlPurifier($allowedHtmlElements=null, $allowedHtmlAttributes=null)
-    {
-        if ($allowedHtmlElements === null || $allowedHtmlAttributes === null) {
-            $config = Omeka_Context::getInstance()->getConfig();
-
-            // Get the allowed HTML elements from the configuration file
-            if ($allowedHtmlElements === null) {
-                $allowedHtmlElements = $config->htmlpurifier->allowedhtmlelements;
-            }
-
-            // Get the allowed HTML attributes from the configuration file
-            if ($allowedHtmlAttributes === null) {
-                $allowedHtmlAttributes = $config->htmlpurifier->allowedhtmlattributes;
-            }
-        }
-
-        // Require the HTML Purfier autoloader.
-        require_once 'htmlpurifier-3.1.1-lite/library/HTMLPurifier.auto.php';        
-        $htmlPurifierConfig = HTMLPurifier_Config::createDefault();
-        
-        // Set the encoding to UTF-8
-        $htmlPurifierConfig->set('Core', 'Encoding', 'UTF-8');
-
-        // Allow HTML tags. Setting this as NULL allows a subest of TinyMCE's 
-        // valid_elements whitelist. Setting this as an empty string disallows 
-        // all HTML elements.
-        $htmlPurifierConfig->set('HTML', 'AllowedElements', $allowedHtmlElements);
-        $htmlPurifierConfig->set('HTML', 'AllowedAttributes', $allowedHtmlAttributes);
-
-        // Disable caching.
-        $htmlPurifierConfig->set('Cache', 'DefinitionImpl', null);
-
-        // Get the purifier as a singleton.
-        $htmlPurifier = HTMLPurifier::instance($htmlPurifierConfig);
-
-        // Set this in the registry so that other plugins can get to it.
-        Zend_Registry::set('html_purifier', $htmlPurifier);
-                
-        return $htmlPurifier;
-    }
-        
+{        
     /**
      * Determine whether or not to filter form submissions for various controllers.
      * 
@@ -79,7 +19,9 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      * @return void
      **/
     public function routeStartup(Zend_Controller_Request_Abstract $request)
-    {   
+    {
+        $this->_setupHtmlPurifierOptions();
+           
         // Don't purify if the request is not a post
         if (!$request->isPost()) {
             return;
@@ -92,13 +34,13 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         }
 
         // Don't purify if the purifier is not enabled
-        $config = Omeka_Context::getInstance()->getConfig();
-        if (!$config->htmlpurifier->enabled) {
+        
+        if (get_option('html_purifier_is_enabled') != '1') {
             return;
         }
         
         // Don't purify if there is no purifier
-        $purifier = self::getHtmlPurifier();
+        $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         if (!$purifier) {
             return;
         }
@@ -123,7 +65,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     
     /**
      * Determine whether or not the request contains a form submission to either
-     * the 'add' or 'edit' actions.
+     * the 'add', 'edit', or 'config' actions.
      * 
      * @param Zend_Controller_Request_Abstract $request
      * @return boolean
@@ -141,7 +83,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     public function filterCollectionsForm($request, $purifier=null)
     {
         if ($purifier === null) {
-            $purifier = Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier();
+            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         }        
         $post = $request->getPost();
         $post['description'] = $purifier->purify($post['description']);
@@ -154,7 +96,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     public function filterThemesForm($request, $purifier=null)
     {
         if ($purifier === null) {
-            $purifier = Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier();
+            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         }
         
         $post = $request->getPost();
@@ -168,7 +110,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     protected function _purifyArray($dataArray, $purifier=null)
     {
         if ($purifier === null) {
-            $purifier = Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier();
+            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         }
         
         foreach($dataArray as $k => $v) {
@@ -190,7 +132,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     public function filterItemsForm($request, $purifier=null)
     {
         if ($purifier === null) {
-            $purifier = Omeka_Controller_Plugin_HtmlPurifier::getHtmlPurifier();
+            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         }
         
         // Post looks like Elements[element_id][index] = array([text], [html])
@@ -224,5 +166,20 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         $post['tags'] = strip_tags($post['tags']);        
         
         $request->setPost($post);
-    }   
+    }
+    
+    protected function _setupHtmlPurifierOptions()
+    {
+        if (get_option('html_purifier_is_enabled') === null) {
+            set_option('html_purifier_is_enabled', '1');
+        }
+        
+        if (get_option('html_purifier_allowed_html_elements') === null) {
+            set_option('html_purifier_allowed_html_elements', implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        }
+        
+        if (get_option('html_purifier_allowed_html_attributes') === null) {
+            set_option('html_purifier_allowed_html_attributes', implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
+        }
+    } 
 }

@@ -46,6 +46,14 @@ Event.observe(window, 'load', function(){
     buildRestoreButton($('file_mime_type_whitelist'), 
                       <?php echo js_escape(uri(array('controller'=>'security','action'=>'get-file-mime-type-whitelist'))); ?>,
                       'Restore Default File Mime Types');
+                      
+    buildRestoreButton($('html_purifier_allowed_html_elements'), 
+                    <?php echo js_escape(uri(array('controller'=>'security','action'=>'get-html-purifier-allowed-html-elements'))); ?>,
+                    'Restore Default Allowed Html Elements');
+
+    buildRestoreButton($('html_purifier_allowed_html_attributes'), 
+                    <?php echo js_escape(uri(array('controller'=>'security','action'=>'get-html-purifier-allowed-html-attributes'))); ?>,
+                    'Restore Default Allowed Html Attributes');
 });
 //]]>
 </script>
@@ -92,6 +100,35 @@ Event.observe(window, 'load', function(){
             <?php echo $this->formCheckbox('enable_header_check_for_file_mime_types', 
                 null, array('checked'=>(boolean)get_option('enable_header_check_for_file_mime_types'))); ?>
             <p class="explanation">Check this field if you would like to allow file types to be inferred from a file header check.</p>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label for="html_purifier_is_enabled">Enable HTML Filtering</label>
+                <div class="inputs">
+            <?php echo $this->formCheckbox('html_purifier_is_enabled', 
+                null, array('checked'=>(boolean)get_option('html_purifier_is_enabled'))); ?>
+            <p class="explanation">Check this field if you would like to filter HTML elements or attributes from form input.</p>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label for="html_purifier_allowed_html_elements">Allowed HTML Elements</label>
+            <div class="inputs">
+            <?php echo $this->formTextarea('html_purifier_allowed_html_elements', 
+                    get_option('html_purifier_allowed_html_elements'), 
+                    array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+            <p class="explanation">List of allowed HTML elements in form input.</p> 
+            </div>
+        </div>
+        
+        <div class="field">
+            <label for="html_purifier_allowed_html_attributes">Allowed HTML Attributes</label>
+            <div class="inputs">
+            <?php echo $this->formTextarea('html_purifier_allowed_html_attributes', 
+                    get_option('html_purifier_allowed_html_attributes'), 
+                    array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
+            <p class="explanation">List of allowed HTML attributes in form input.</p> 
             </div>
         </div>
         

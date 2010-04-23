@@ -127,6 +127,10 @@ class Installer
         $this->_db->exec($optionSql, array('file_mime_type_whitelist', Omeka_Validate_File_MimeType::DEFAULT_WHITELIST));
         $this->_db->exec($optionSql, array('disable_default_file_validation', 0));
         
+        $this->_db->exec($optionSql, array('html_purifier_is_enabled', 1));
+        $this->_db->exec($optionSql, array('html_purifier_allowed_html_elements', implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements())));
+        $this->_db->exec($optionSql, array('html_purifier_allowed_html_attributes', implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes())));
+        
         return true;
     }
 
