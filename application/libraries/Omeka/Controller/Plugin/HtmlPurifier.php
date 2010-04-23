@@ -13,7 +13,7 @@
 class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstract
 {        
     /**
-     * Determine whether or not to filter form submissions for various controllers.
+     * Add the HtmlPurifier options if needed.
      * 
      * @param Zend_Controller_Request_Abstract $request
      * @return void
@@ -21,7 +21,16 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
         $this->_setupHtmlPurifierOptions();
-           
+    }
+    
+    /**
+     * Determine whether or not to filter form submissions for various controllers.
+     * 
+     * @param Zend_Controller_Request_Abstract $request
+     * @return void
+     **/
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
         // Don't purify if the request is not a post
         if (!$request->isPost()) {
             return;
@@ -43,7 +52,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         if (!$purifier) {
             return;
-        }
+        }        
         
         // To process the items form, implement a 'filterItemsForm' method
         if ($this->isFormSubmission($request)) {
@@ -81,7 +90,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      * 
      **/
     public function filterCollectionsForm($request, $purifier=null)
-    {
+    {        
         if ($purifier === null) {
             $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         }        

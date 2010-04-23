@@ -42,11 +42,37 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
     {
         $this->assertTrue($this->collection->exists());
         $this->assertTrue($this->acl->isAllowed($this->user, 'Users', 'edit'));
+        
+        $this->assertEquals(get_option('html_purifier_is_enabled'), '1');
+        $this->assertEquals(get_option('html_purifier_allowed_html_elements'), implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertEquals(get_option('html_purifier_allowed_html_attributes'), implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
     }
     
-    public function testHtmlPurifyCollectionFormWithAllowedTagInDescription()
-    {   
-        $dirtyHtml = '<p>Bob</p>';
+    public function testHtmlPurifyCollectionFormWithAllowedElementAndAllowedAttributeInDescription()
+    {
+        $this->assertTrue(in_array('p', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertTrue(in_array('*.class', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
+           
+        $dirtyHtml = '<p class="person">Bob</p>';
+        $cleanHtml = '<p class="person">Bob</p>';
+        
+        $post = $this->collection->toArray();
+        $post['description'] = $dirtyHtml;
+        
+        $this->getRequest()->setMethod('POST');
+        $this->getRequest()->setPost($post);
+        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+                
+        $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
+        $this->assertEquals($cleanHtml, $collectionAfter->description);
+    }
+    
+    public function testHtmlPurifyCollectionFormWithAllowedElementAndUnallowedAttributeInDescription()
+    {
+        $this->assertTrue(in_array('p', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertFalse(in_array('*.id', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
+           
+        $dirtyHtml = '<p id="person">Bob</p>';
         $cleanHtml = '<p>Bob</p>';
         
         $post = $this->collection->toArray();
@@ -60,10 +86,54 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         $this->assertEquals($cleanHtml, $collectionAfter->description);
     }
     
-    public function testHtmlPurifyCollectionFormWithUnallowedTagInDescription()
+    public function testHtmlPurifyCollectionFormWithUnallowedElementAndAllowedAttributeInDescription()
     {
-        $dirtyHtml = '<j>Bob</j>';
-        $cleanHtml = 'Bob';
+        $this->assertFalse(in_array('j', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertTrue(in_array('*.class', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
+        
+        $dirtyHtml = 'Bob is <j class="trait">bad</j>.';
+        $cleanHtml = 'Bob is bad.';
+        
+        $post = $this->collection->toArray();
+        $post['description'] = $dirtyHtml;
+        
+        $this->getRequest()->setMethod('POST');
+        $this->getRequest()->setPost($post);
+        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+                
+        $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
+        $this->assertEquals($cleanHtml, $collectionAfter->description);
+    }
+    
+    public function testHtmlPurifyCollectionFormWithUnallowedElementAndUnallowedAttributeInDescription()
+    {
+        $this->assertFalse(in_array('j', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertFalse(in_array('*.id', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
+        
+        $dirtyHtml = '<j id="person">Bob</j> is bad.';
+        $cleanHtml = 'Bob is bad.';
+        
+        $post = $this->collection->toArray();
+        $post['description'] = $dirtyHtml;
+        
+        $this->getRequest()->setMethod('POST');
+        $this->getRequest()->setPost($post);
+        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+                
+        $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
+        $this->assertEquals($cleanHtml, $collectionAfter->description);
+    }
+    
+    public function testHtmlPurifyCollectionFormWithAllowedAndUnallowedElementsAndAttributesInDescription()
+    {
+        $this->assertTrue(in_array('strong', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertTrue(in_array('p', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertFalse(in_array('j', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
+        $this->assertTrue(in_array('*.class', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
+        $this->assertFalse(in_array('*.id', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
+        
+        $dirtyHtml = '<p class="person id="person">Bob is bad <j>and mean<j> and <strong id="trait">fun</strong>.</p>';
+        $cleanHtml = '<p class="person">Bob is bad and mean and <strong>fun</strong>.</p>';
         
         $post = $this->collection->toArray();
         $post['description'] = $dirtyHtml;
