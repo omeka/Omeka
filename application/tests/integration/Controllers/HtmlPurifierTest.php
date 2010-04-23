@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  **/
-class Omeka_Core_OmekaCoreResourceHtmlpuriferTest extends Omeka_Test_AppTestCase
+class HtmlPuriferTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
     
@@ -28,6 +28,7 @@ class Omeka_Core_OmekaCoreResourceHtmlpuriferTest extends Omeka_Test_AppTestCase
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
         
+        // Create a collection
         $collection = new Collection();
         $collection->name = 'a';
         $collection->description = 'a';
