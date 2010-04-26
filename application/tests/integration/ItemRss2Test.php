@@ -44,4 +44,12 @@ class Item_Rss2Test extends Omeka_Test_AppTestCase
             $this->fail("Feed does not have an item");
         }
     }
+    
+    public function tearDown()
+    {
+        // Delete the physical files that were ingested in setUp().
+        $testFile = $this->db->getTable('File')->find(1);
+        $testFile->delete();
+        parent::tearDown();
+    }
 }
