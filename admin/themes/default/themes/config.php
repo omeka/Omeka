@@ -1,4 +1,4 @@
-<?php head(array('title'=>'Theme Configuration', 'bodyclass'=>'plugins')); ?>
+<?php head(array('title'=>'Theme Configuration', 'bodyclass'=>'themes theme-configuration')); ?>
 <?php echo js('jquery'); ?>
 <script type="text/javascript">
     jQuery.noConflict();

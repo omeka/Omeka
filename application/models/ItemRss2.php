@@ -79,7 +79,7 @@ class ItemRss2
         //List the first file as an enclosure (only one per RSS feed)
         if($item->Files && ($file = current($item->Files))) {
             $entry['enclosure']   = array();
-            $fileDownloadUrl = abs_uri(array('controller'=>'files', 'action'=>'get', 'id'=>$file->id, 'format'=>'fullsize'), 'download');
+            $fileDownloadUrl = file_display_uri($file);
             $enc['url']           = $fileDownloadUrl;
             $enc['type']          = $file->mime_browser;
             $enc['length']        = (int) $file->size;
