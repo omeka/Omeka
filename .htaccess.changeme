@@ -16,14 +16,19 @@ RewriteCond %{REQUEST_FILENAME} !-d [OR]
 RewriteCond %{REQUEST_URI}  .+\/archive\/
 RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
 
-<FilesMatch "\.(php|ini)$">
- Order Allow,Deny
- Deny from all
-</FilesMatch>
+<Files "*.*">
+    Order Allow,Deny
+    Deny from all
+</Files>
 
 <Files index.php>
 Allow from all
 </Files>
+
+<FilesMatch "\.(js|css|png|jpg|jpeg|ico|tiff|tif|gif)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
 
 # Uncomment the lines below in order to enable caching of some files via Apache (after a finished site has gone live)
 <IfModule mod_expires.c>
