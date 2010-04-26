@@ -40,7 +40,7 @@ class Omeka_Context
 
 	private function __construct() {}
     
-    public function resetInstance()
+    public static function resetInstance()
     {
         self::$_instance = new self();
     }
