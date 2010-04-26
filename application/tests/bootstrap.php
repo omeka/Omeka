@@ -10,7 +10,7 @@
 define('APPLICATION_ENV', 'testing');
 
 ini_set('max_execution_time', 900);
-ini_set('memory_limit', '32M');
+ini_set('memory_limit', '128M');
 
 // Load this while the include path contains the path to PEAR (which has
 // conflicts because of naming clashes).
