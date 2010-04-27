@@ -30,7 +30,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      * @return void
      **/
     public function preDispatch(Zend_Controller_Request_Abstract $request)
-    {
+    {        
         // Don't purify if the request is not a post
         if (!$request->isPost()) {
             return;
@@ -48,18 +48,19 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
             return;
         }
         
-        // Don't purify if there is no purifier
+        // Don't purify if there is no purifier        
+        $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
         $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
         if (!$purifier) {
             return;
         }        
-        
+                
         // To process the items form, implement a 'filterItemsForm' method
         if ($this->isFormSubmission($request)) {
             $controllerName = $request->getControllerName();
             $filterMethodName = 'filter' . ucwords($controllerName) . 'Form';
             if (method_exists($this, $filterMethodName)) {                
-                $this->$filterMethodName($request, $purifier);
+                $this->$filterMethodName($request, $htmlPurifierFilter);
             }            
         }
         
@@ -88,45 +89,55 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      * Title = Plain text.
      * Description = HTML.
      * 
+     * @param Zend_Controller_Request_Abstract $request
+     * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
+     * @return void
      **/
-    public function filterCollectionsForm($request, $purifier=null)
-    {        
-        if ($purifier === null) {
-            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
+    public function filterCollectionsForm($request, $htmlPurifierFilter=null)
+    {   
+        if ($htmlPurifierFilter === null) {
+            $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
         }        
         $post = $request->getPost();
-        $post['description'] = $purifier->purify($post['description']);
+        $post['description'] = $htmlPurifierFilter->filter($post['description']);
         $request->setPost($post);
     }
     
     /**
     * Purify all of the data in the theme settings
+    * @param Zend_Controller_Request_Abstract $request
+    * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
+    * @return void    
     **/
-    public function filterThemesForm($request, $purifier=null)
+    public function filterThemesForm($request, $htmlPurifierFilter=null)
     {
-        if ($purifier === null) {
-            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
+        if ($htmlPurifierFilter === null) {
+            $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
         }
         
         $post = $request->getPost();
-        $post = $this->_purifyArray($post, $purifier);
+        $post = $this->_purifyArray($post, $htmlPurifierFilter);
         $request->setPost($post);
     }
     
     /**
     * Recurisvely purify an array
+    *
+    * @param array An unpurified array of string or array values
+    * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
+    * @return array A purified array of string or array values
     **/
-    protected function _purifyArray($dataArray, $purifier=null)
+    protected function _purifyArray($dataArray = array(), $htmlPurifierFilter=null)
     {
-        if ($purifier === null) {
-            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
+        if ($htmlPurifierFilter === null) {
+            $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
         }
         
         foreach($dataArray as $k => $v) {
             if (is_array($v)) {
                 $dataArray[$k] = $this->_purifyArray($v, $purifier);
             } else if (is_string($v)) {
-                $dataArray[$k] = $purifier->purify($v);
+                $dataArray[$k] = $htmlPurifierFilter->filter($v);
             }
         }
         return $dataArray;
@@ -136,12 +147,13 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
      * Filter the 'Elements' array of the POST.
      * 
      * @param Zend_Controller_Request_Abstract $request
+     * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
      * @return void
      **/    
-    public function filterItemsForm($request, $purifier=null)
+    public function filterItemsForm($request, $htmlPurifierFilter=null)
     {
-        if ($purifier === null) {
-            $purifier = Omeka_Filter_HtmlPurifier::getHtmlPurifier();
+        if ($htmlPurifierFilter === null) {
+            $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
         }
         
         // Post looks like Elements[element_id][index] = array([text], [html])
@@ -166,7 +178,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
                 }
                 
                 if ((boolean)$values['html']) {
-                    $post['Elements'][$elementId][$index]['text'] = $purifier->purify($values['text']);
+                    $post['Elements'][$elementId][$index]['text'] = $htmlPurifierFilter->filter($values['text']);
                 }
             }
         }

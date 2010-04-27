@@ -16,7 +16,51 @@
 class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
 {
     protected static $_purifier = null;
+    private static $_defaultAllowedHtmlElements = array('p',
+                                                        'br',
+                                                        'strong',
+                                                        'em',
+                                                        'span',
+                                                        'div',
+                                                        'ul',
+                                                        'ol',
+                                                        'li',
+                                                        'a',
+                                                        'h1',
+                                                        'h2',
+                                                        'h3',
+                                                        'h4',
+                                                        'h5',
+                                                        'h6',
+                                                        'address',
+                                                        'pre',
+                                                        'table',
+                                                        'tr',
+                                                        'td',
+                                                        'blockquote',
+                                                        'thead',
+                                                        'tfoot',
+                                                        'tbody',
+                                                        'th',
+                                                        'dl',
+                                                        'dt',
+                                                        'dd',
+                                                        'q',
+                                                       'small',
+                                                       'strike',
+                                                       'sup',
+                                                       'sub',
+                                                       'b',
+                                                       'i',
+                                                       'big',
+                                                       'small',
+                                                       'tt');
     
+    private static $_defaultAllowedHtmlAttributes = array('*.style',
+                                                          '*.class',
+                                                          'a.href',
+                                                          'a.title',
+                                                          'a.target');
     /**
      * Filter the value
      * 
@@ -26,63 +70,35 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
     public function filter($value)
     {
         $purifier = self::getHtmlPurifier();
-        return $purifier->purify($value);
+        $cleanValue = $purifier->purify($value);
+        return $cleanValue;
     }
-    
+        
+    /**
+    * Get the default allowed html elements.
+    *
+    * @return array An array of strings corresponding to the allowed html elements
+    **/
     public static function getDefaultAllowedHtmlElements()
     {
-         $defaultAllowedHtmlElements = array('p',
-                                            'br',
-                                            'strong',
-                                            'em',
-                                            'span',
-                                            'div',
-                                            'ul',
-                                            'ol',
-                                            'li',
-                                            'a',
-                                            'h1',
-                                            'h2',
-                                            'h3',
-                                            'h4',
-                                            'h5',
-                                            'h6',
-                                            'address',
-                                            'pre',
-                                            'table',
-                                            'tr',
-                                            'td',
-                                            'blockquote',
-                                            'thead',
-                                            'tfoot',
-                                            'tbody',
-                                            'th',
-                                            'dl',
-                                            'dt',
-                                            'dd',
-                                            'q',
-                                           'small',
-                                           'strike',
-                                           'sup',
-                                           'sub',
-                                           'b',
-                                           'i',
-                                           'big',
-                                           'small',
-                                           'tt');
-       return $defaultAllowedHtmlElements; 
+       return self::$_defaultAllowedHtmlElements; 
     }
     
+    /**
+    * Get the default allowed html attributes.
+    *
+    * @return array An array of strings corresponding to the allowed html attributes
+    **/
     public static function getDefaultAllowedHtmlAttributes()
     {
-        $defaultAllowedHtmlAttributes = array('*.style',
-                                              '*.class',
-                                              'a.href',
-                                              'a.title',
-                                              'a.target');
-        return $defaultAllowedHtmlAttributes;
+        return self::$_defaultAllowedHtmlAttributes;
     }
-             
+    
+    /**
+     * Gets the html purifier singleton
+     *
+     * @return HTMLPurifier $purifier
+     **/         
     public static function getHtmlPurifier()
     {
         if (!self::$_purifier) {
@@ -92,30 +108,44 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
     }
     
     /**
+     * Sets the html purifier singleton
+     *
      * @param HTMLPurifier $purifier
+     * @return void
      **/
     public static function setHtmlPurifier($purifier)
     {
         self::$_purifier = $purifier;
         
         // Set this in the registry so that other plugins can get to it.
-        Zend_Registry::set('html_purifier', $htmlPurifier);
+        Zend_Registry::set('html_purifier', $purifier);
     }
     
-    public static function createHtmlPurifier($allowedHtmlElements=null, $allowedHtmlAttributes=null)
+    /**
+     * @param array $allowedHtmlElements An array of strings representing allowed HTML elements
+     * @param array $allowedHtmlAttributes An array of strings representing allowed HTML attributes
+     * @param string $tidyLevel Either 'none', 'light', 'medium', or 'heavy' See http://htmlpurifier.org/docs/enduser-tidy.html
+     * @return HTMLPurifier 
+     **/
+    public static function createHtmlPurifier($allowedHtmlElements=null, $allowedHtmlAttributes=null, $tidyLevel = 'none')
     {
         if ($allowedHtmlElements === null || $allowedHtmlAttributes === null) {
 
             // Get the allowed HTML elements from the configuration file
             if ($allowedHtmlElements === null) {
-                $allowedHtmlElements = get_option('html_purifier_allowed_html_elements');
+                $allowedHtmlElements = explode(',', get_option('html_purifier_allowed_html_elements'));
             }
 
             // Get the allowed HTML attributes from the configuration file
             if ($allowedHtmlAttributes === null) {
-                $allowedHtmlAttributes = get_option('html_purifier_allowed_html_attributes');
+                $allowedHtmlAttributes = explode(',', get_option('html_purifier_allowed_html_attributes'));
             }
         }
+
+        // Filter the allowed html attributes of any attributes that are missing elements.
+        // For example, if there is no 'a' element then filter out the attribute 'a.href' 
+        // and any other attribute associated with the 'a' element
+        $allowedHtmlAttributes = self::filterAttributesWithMissingElements($allowedHtmlAttributes, $allowedHtmlElements);
 
         // Require the HTML Purfier autoloader.
         require_once 'htmlpurifier-3.1.1-lite/library/HTMLPurifier.auto.php';        
@@ -123,12 +153,15 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         
         // Set the encoding to UTF-8
         $purifierConfig->set('Core', 'Encoding', 'UTF-8');
+        
+        // Set the Tidy settings
+        $purifierConfig->set('HTML', 'TidyLevel', $tidyLevel);
 
         // Allow HTML tags. Setting this as NULL allows a subest of TinyMCE's 
         // valid_elements whitelist. Setting this as an empty string disallows 
         // all HTML elements.
-        $purifierConfig->set('HTML', 'AllowedElements', $allowedHtmlElements);
-        $purifierConfig->set('HTML', 'AllowedAttributes', $allowedHtmlAttributes);
+        $purifierConfig->set('HTML', 'AllowedElements', implode(',', $allowedHtmlElements));
+        $purifierConfig->set('HTML', 'AllowedAttributes', implode(',', $allowedHtmlAttributes));
 
         // Disable caching.
         $purifierConfig->set('Cache', 'DefinitionImpl', null);
@@ -137,5 +170,21 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         $purifier = HTMLPurifier::instance($purifierConfig);
                 
         return $purifier;
+    }
+    
+    public static function filterAttributesWithMissingElements($htmlAttributes=array(), $htmlElements=array())
+    {
+        $cleanHtmlAttributes = array();
+        if (count($htmlElements)) {
+            foreach($htmlAttributes as $attr) {
+                $attr = trim($attr);
+                $attrParts = explode('.', $attr);
+                if (count($attrParts) == 2 && 
+                   ($attrParts[0] == '*' || in_array($attrParts[0], $htmlElements))) {
+                    $cleanHtmlAttributes[] = $attr; 
+                }
+            }
+        }
+        return $cleanHtmlAttributes;
     }
 }

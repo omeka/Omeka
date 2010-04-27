@@ -19,57 +19,72 @@ class Omeka_Filter_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->assertEquals(get_option('html_purifier_allowed_html_attributes'), implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
     }
     
-    protected function _getHtmlPurifierPlugin($allowedHtmlElements='', $allowedHtmlAttributes='')
+    protected function _getHtmlPurifierPlugin($allowedHtmlElements=null, $allowedHtmlAttributes=null)
     {
         $htmlPurifier =  $this->_getHtmlPurifier($allowedHtmlElements, $allowedHtmlAttributes);
         $htmlPurifierPlugin = new Omeka_Controller_Plugin_HtmlPurifier();
         return $htmlPurifierPlugin;
     }
     
-    protected function _getHtmlPurifier($allowedHtmlElements='', $allowedHtmlAttributes='')
+    protected function _getHtmlPurifier($allowedHtmlElements=null, $allowedHtmlAttributes=null)
     {                   
         $htmlPurifier = Omeka_Filter_HtmlPurifier::createHtmlPurifier($allowedHtmlElements, $allowedHtmlAttributes);
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         return $htmlPurifier;
     }
 
-    public function testConstructor()
+    public function testEmptyConstructorWithValidSettings()
     {        
         $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
     }
 
+    public function testEmptyConstructorWithInvalidSettingsAllowedHtmlAttributesThatLackAssociatedAllowedHtmlElements()
+    {
+        $dirtyHtml = 'whatever';
+        $cleanHtml = 'whatever';
+        
+        set_option('html_purifier_allowed_html_elements','');
+        set_option('html_purifier_allowed_html_attributes', 'a.href');        
+        $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
+        $this->assertEquals($cleanHtml, $htmlPurifierFilter->filter($dirtyHtml));
+    }
+    
     public function testGetHtmlPurifier()
     {
         $htmlPurifier = $this->_getHtmlPurifier();
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
     
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong');
+        $htmlPurifier = $this->_getHtmlPurifier(array('p','strong'));
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
     
-        $htmlPurifier = $this->_getHtmlPurifier(null,'*.class');
+        $htmlPurifier = $this->_getHtmlPurifier(null,array('*.class'));
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
     
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong','*.class');
+        $htmlPurifier = $this->_getHtmlPurifier(array('p','strong'),array('*.class'));
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
     }
-
+    
     public function testSetHtmlPurifier()
     {
         $htmlPurifier = $this->_getHtmlPurifier();
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
+        $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
     
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong');
+        $htmlPurifier = $this->_getHtmlPurifier(array('p','strong'));
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
+        $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
     
-        $htmlPurifier = $this->_getHtmlPurifier(null,'*.class');
+        $htmlPurifier = $this->_getHtmlPurifier(null,array('*.class'));
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
         $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
+        $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
     
-        $htmlPurifier = $this->_getHtmlPurifier('p,strong','*.class');
+        $htmlPurifier = $this->_getHtmlPurifier(array('p','strong'),array('*.class'));
         Omeka_Filter_HtmlPurifier::setHtmlPurifier($htmlPurifier);
-        $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());
+        $this->assertEquals($htmlPurifier, Omeka_Filter_HtmlPurifier::getHtmlPurifier());        
+        $this->assertEquals($htmlPurifier, Zend_Registry::get('html_purifier'));
     }
     
     public function testFilterAllowedAndUnallowedElements()
@@ -111,5 +126,23 @@ class Omeka_Filter_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
         $filteredHtml = $htmlPurifierFilter->filter($dirtyHtml);
         $this->assertEquals($cleanHtml, $filteredHtml);
+    }
+    
+    public function testFilterAttributesWithMissingElements()
+    {
+        $htmlElements=array();
+        $dirtyHtmlAttributes = array('strong.id', 'div.class', '*.class','p.id', 'a.href');
+        $cleanHtmlAttributes = array();
+        $this->assertEquals($cleanHtmlAttributes, Omeka_Filter_HtmlPurifier::filterAttributesWithMissingElements($dirtyHtmlAttributes, $htmlElements));        
+    
+        $htmlElements=array('h1');
+        $dirtyHtmlAttributes = array('strong.id', 'div.class', '*.class','p.id', 'a.href');
+        $cleanHtmlAttributes = array('*.class');
+        $this->assertEquals($cleanHtmlAttributes, Omeka_Filter_HtmlPurifier::filterAttributesWithMissingElements($dirtyHtmlAttributes, $htmlElements));
+    
+        $htmlElements= array('p','strong');
+        $dirtyHtmlAttributes = array('strong.id', 'div.class', '*.class','p.id', 'a.href');
+        $cleanHtmlAttributes = array('strong.id', '*.class', 'p.id');
+        $this->assertEquals($cleanHtmlAttributes, Omeka_Filter_HtmlPurifier::filterAttributesWithMissingElements($dirtyHtmlAttributes, $htmlElements));
     }
 }
