@@ -41,7 +41,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
     public function assertPreConditions()
     {
         $this->assertTrue($this->collection->exists());
-        $this->assertTrue($this->acl->isAllowed($this->user, 'Users', 'edit'));
+        $this->assertTrue($this->acl->isAllowed($this->user, 'Collections', 'edit'));
         
         $this->assertEquals(get_option('html_purifier_is_enabled'), '1');
         $this->assertEquals(get_option('html_purifier_allowed_html_elements'), implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));
