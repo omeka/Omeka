@@ -64,7 +64,6 @@ class Omeka_File_Info
             $helperFunction = 'get' . preg_replace('/\s*/', '', $element->name);
             
             if (!method_exists($helperClass, $helperFunction)) {
-                debug('There is no metadata extraction helper named "' . $helperFunction . '" for the element named "' . $element->name . '" ');
                 throw new Exception("Cannot retrieve metadata for the element called '$element->name'!");
             }
             $elementText = $helperClass->$helperFunction();
@@ -72,8 +71,6 @@ class Omeka_File_Info
             // Don't bother saving element texts with null values.
             if ($elementText) {
                 $this->_file->addTextForElement($element, $elementText);
-            } else {
-                debug('Could not retrieve element text for the element named "' . $element->name . '"');
             }
         }        
     }
@@ -88,14 +85,11 @@ class Omeka_File_Info
         $filePath = $this->_filePath;
         
         if (!is_readable($filePath)) {
-            debug('Could not read file at the following path: "' . $filePath . '"');
             throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $filePath . '"');
         }
         
         // Return if getid3 did not return a valid object.
         if (!$id3 = $this->_retrieveID3Info($filePath)) {
-            debug('Cannot retrieve ID3 metadata from the following file: "' 
-                . $filePath . '"');
             return false;
         }
                 
@@ -110,8 +104,6 @@ class Omeka_File_Info
         }
         
         if (!$mime_type) {
-            debug('Cannot detect MIME type for the following file: "' 
-                . $filePath . '"');
             return false;
         } else {
             // Overwrite the mime type that was retrieved from the upload script.
@@ -121,7 +113,6 @@ class Omeka_File_Info
         $elements = $this->_file->getMimeTypeElements($mime_type);
 
         if (empty($elements)) {
-            debug('Could not retrieve any MIME type elements from the database.');
             return false;
         }
                 
@@ -137,9 +128,7 @@ class Omeka_File_Info
                 $extraction = 'FilesImages';
                 break;
             default:
-                debug('Element set named "' . $elementSetToExtract . '" cannot '
-                    . 'be used to extract metadata from files.');
-                throw new Exception('Cannot extract metadata for these elements!');
+                throw new Exception('Cannot extract metadata for element set: ' . $elementSetToExtract . '.');
                 break;
         }
                 
