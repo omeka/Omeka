@@ -22,6 +22,15 @@ class Omeka_File_Derivative_Image_Creator
     
     private $_derivatives = array();
     
+    /**
+     * @var array List of mime-types which have known problems with ImageMagick
+     * and still return dimensions when called w/ getimagesize().
+     */
+    private $_mimeTypeBlacklist = array(
+        'application/x-shockwave-flash', 
+        'image/jp2'
+    );
+    
     public function __construct($convertDir)
     {
         $this->setConvertPath($convertDir);
@@ -57,9 +66,11 @@ class Omeka_File_Derivative_Image_Creator
     /**
      * @since 2.0
      * @param string $fromFilePath
+     * @param string $derivFilename
+     * @param string $mimeType
      * @return boolean
      */
-    public function create($fromFilePath, $derivFilename)
+    public function create($fromFilePath, $derivFilename, $mimeType)
     {
         if (!is_string($derivFilename) || $derivFilename == null) {
             throw new InvalidArgumentException("Invalid derivative filename given.");
@@ -73,7 +84,7 @@ class Omeka_File_Derivative_Image_Creator
             throw new RuntimeException("File at '$fromFilePath' is not readable.");
         }
         
-        if (!$this->_isDerivable($fromFilePath)) {
+        if (!$this->_isDerivable($fromFilePath, $mimeType)) {
             return false;
         }
         
@@ -181,14 +192,11 @@ class Omeka_File_Derivative_Image_Creator
      **/
     private function _isDerivable($old_path, $mimeType)
     {		
-    // List of mime-types which have known problems with ImageMagick
-    // and still return dimensions when called w/ getimagesize()
-    $blackListMimeTypes = array('application/x-shockwave-flash', 'image/jp2');
 
     // Next we'll check that it has image dimensions, and isn't on a blacklist
     return (file_exists($old_path) 
             && is_readable($old_path) 
             && getimagesize($old_path) 
-            && !(in_array($mimeType, $blackListMimeTypes)));
+            && !(in_array($mimeType, $this->_mimeTypeBlacklist)));
     }
 }

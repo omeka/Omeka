@@ -235,7 +235,9 @@ class File extends Omeka_Record
         $creator->addDerivative(THUMBNAIL_DIR, get_option('thumbnail_constraint'));
         $this->_makeSquareThumbnails($creator);
         
-        if ($creator->create($this->getPath('archive'), $this->getDerivativeFilename())) {
+        if ($creator->create($this->getPath('archive'), 
+                             $this->getDerivativeFilename(),
+                             $this->getMimeType())) {
             $this->has_derivative_image = 1;
         }
     }
