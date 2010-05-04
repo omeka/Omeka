@@ -17,7 +17,8 @@
  * @param string $name
  * @return string
  **/ 
-function get_option($name) {
+function get_option($name) 
+{
     $options = Omeka_Context::getInstance()->getOptions();
     return $options[$name];
 }
@@ -488,11 +489,11 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * @return ItemType
  * @throws Exception
  **/
-function insert_item_type($metadata = array(), $elementInfos = array()) {
+function insert_item_type($metadata = array(), $elementInfos = array()) 
+{
     $builder = new ItemTypeBuilder($metadata, $elementInfos);    
     return $builder->build();
 }
-
 
 /**
  * Inserts a collection
@@ -623,8 +624,6 @@ function not_empty_or($value, $default)
     return !empty($value) ? $value : $default;
 }
 
-
-
 /**
   * Returns whether a value is true or not.  
   * If the value is a string and its lowercased value is 'true' or '1', it returns true.
@@ -643,32 +642,36 @@ function is_true($value)
 }
 
 /**
- * Gets the theme option from the Options table.
+ * Gets a theme option
  * 
- * @param string $optionName. The name of the option to get
- * @param string $theme The name of the theme
- * @return string HTML
+ * @param string $optionName The name of the option to get
+ * @param string $themeName The name of the theme.  If null, it will use the current public theme.
+ * @return string The value of the theme option
  */
-function get_theme_option($optionName, $theme = null)
+function get_theme_option($optionName, $themeName = null)
 {
-    if (!$theme) {
-        $theme = get_option('public_theme');
+    if (!$themeName) {
+        $themeName = get_option('public_theme');
     }
-    
-    $optionName = Inflector::underscore($optionName);
-    
-    $themeOptionName = 'theme_'.trim(strtolower($theme)).'_options';
-    
-    if ($themeOptions = get_option($themeOptionName)) {
-        $themeOptions = unserialize($themeOptions);
-    }
-    
-    if ($themeOptions && array_key_exists($optionName, $themeOptions)) {        
-        return $themeOptions[$optionName];
-    }
-    
-    return null;
+    return Theme::getOption($themeName, $optionName);
 }
+
+/**
+ * Sets a theme option
+ * 
+ * @param string $optionName The name of the option to set.
+ * @param string $optionValue The value of the option.
+ * @param string $themeName The name of the theme.  If null, it will use the current public theme.
+ * @return void
+ */
+function set_theme_option($optionName, $optionValue, $themeName = null)
+{
+    if (!$themeName) {
+        $themeName = get_option('public_theme');
+    }
+    return Theme::setOption($themeName, $optionName, $optionValue);
+}
+
 /**
  * Returns an array of role names
  * 
