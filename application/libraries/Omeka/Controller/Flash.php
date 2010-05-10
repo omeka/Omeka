@@ -131,6 +131,18 @@ class Omeka_Controller_Flash
 	}
 	
 	/**
+	 * Clear all static data.  Used primarily by test cases.
+	 */
+	public static function reset()
+	{
+	    if (self::$_session instanceof Zend_Session_Namespace) {
+    	    self::$_session->unsetAll();
+	    }
+	    self::$_priority = null;
+	    self::$_flash = null;
+	}
+	
+	/**
 	 * Move the flash info from the session to the more temporary class vars (may need it for the rest of the request)
 	 *
 	 * @return void

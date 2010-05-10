@@ -24,38 +24,11 @@ require_once 'Theme.php';
  **/
 class ThemesController extends Omeka_Controller_Action
 {   
-     const THEME_FILE_HIDDEN_FIELD_NAME_PREFIX = 'hidden_file_';
-     
-    /**
-     * Retrieve information about a given theme (or all themes).
-     **/
-    protected function getAvailable($dir=null) 
-    {
-        /**
-         * Create an array of themes, with the directory paths
-         * theme.ini files and images paths if they are present
-         */
-        $themes = array();        
-        if (!$dir) {
-            $iterator = new VersionedDirectoryIterator(PUBLIC_THEME_DIR);
-            $themeDirs = $iterator->getValid();
-            foreach ($themeDirs as $themeName) {
-                $themes[$themeName] = $this->getAvailable($themeName);
-            }
-            return $themes;
-        } else {
-            $theme = new Theme();            
-            $theme->setDirectoryName($dir);
-            $theme->setImage('theme.jpg');
-            $theme->setIni('theme.ini');
-            $theme->setConfig('config.ini');
-            return $theme;
-        }
-    }
-    
+    const THEME_FILE_HIDDEN_FIELD_NAME_PREFIX = 'hidden_file_';
+         
     public function browseAction()
     {
-        $themes = apply_filters('browse_themes', $this->getAvailable());
+        $themes = apply_filters('browse_themes', Theme::getAvailable());
         $public = get_option('public_theme');
         $this->view->themes = $themes;
         $this->view->current = $themes[$public];
@@ -77,12 +50,12 @@ class ThemesController extends Omeka_Controller_Action
         // Set the public theme option according to the form post.
         set_option('public_theme', $themeName);
         
-        if (!$this->_getThemeOptions($themeName) 
-            && ($configForm = $this->_getForm($themeName))
+        if (!Theme::getOptions($themeName) 
+            && ($configForm = $this->_getThemeConfigurationForm($themeName))
         ) {
             $formValues = $configForm->getValues();
             unset($formValues['submit']);
-            $this->_setThemeOptions($themeName, $formValues);
+            Theme::setOptions($themeName, $formValues);
         }
         
         $this->flashSuccess("The theme has been successfully changed.");
@@ -96,39 +69,41 @@ class ThemesController extends Omeka_Controller_Action
      * @return void
      **/
     public function configAction()
-    {
+    {                      
         // get the theme name and theme object
         $themeName = $this->_getParam('name');
-        $theme = $this->getAvailable($themeName);
+        $theme = Theme::getAvailable($themeName);
         
         // get the configuration form        
-        $configForm = $this->_getForm($themeName);
-        
+        $configForm = $this->_getThemeConfigurationForm($themeName);
+                
         // process the form if posted
-        if ($this->getRequest()->isPost()) {                
+        if ($this->getRequest()->isPost()) {            
             $uploadedFileNames = array();
             $elements = $configForm->getElements();
             foreach($elements as $element) {
                 if ($element instanceof Zend_Form_Element_File) {
+                    $elementName = $element->getName();
                     
                     // add filters to rename all of the uploaded theme files                                               
+                    
+                    // Make sure the file was uploaded before adding the Rename filter to the element
                     if ($element->isUploaded()) {
-                        
                         if (get_option('disable_default_file_validation') == '0') {
                             $element->addValidator(new Omeka_Validate_File_Extension());
                             $element->addValidator(new Omeka_Validate_File_MimeType());
                         }
                         
-                        $fileName = $element->getFileName();
-                        $uploadedFileName = trim(strtolower($themeName)) . '_' . $element->getName() . '_' . basename($fileName);                        
-                        $uploadedFileNames[$element->getName()] = $uploadedFileName;
+                        $fileName = basename($element->getFileName());
+                        $uploadedFileName = Theme::getUploadedFileName($themeName, $elementName, $fileName);                      
+                        $uploadedFileNames[$elementName] = $uploadedFileName;
                         $uploadedFilePath = $element->getDestination() . DIRECTORY_SEPARATOR . $uploadedFileName;
                         $element->addFilter('Rename', array('target'=>$uploadedFilePath, 'overwrite'=>true));
                     }
 
                     // If file input's related  hidden input has a non-empty value, 
                     // then the user has NOT changed the file, so do NOT upload the file.
-                    if ($hiddenFileElement = $configForm->getElement(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $element->getName())) { 
+                    if ($hiddenFileElement = $configForm->getElement(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName)) { 
                         $hiddenFileElementValue = trim($_POST[$hiddenFileElement->getName()]); 
                         if ($hiddenFileElementValue != "") {                              
                             // Ignore the file input element
@@ -137,23 +112,20 @@ class ThemesController extends Omeka_Controller_Action
                     }
                 }
             }
-            
+
             // validate the form (note: this will populate the form with the post values)
-            if ($configForm->isValid($_POST)) {
-                                
+            if ($configForm->isValid($_POST)) {                                
                 $formValues = $configForm->getValues();
-                $currentThemeOptions = $this->_getThemeOptions($themeName);
+                $currentThemeOptions = Theme::getOptions($themeName);
                 
                 foreach($elements as $element) {
                     if ($element instanceof Zend_Form_Element_File) {                                                
-                        
-                        // set the theme option for the uploaded file to the file name
                         $elementName = $element->getName();
+                        // set the theme option for the uploaded file to the file name
                         if ($element->getIgnore()) {
                             // set the form value to the old theme option
                             $formValues[$elementName] = $currentThemeOptions[$elementName];
-                        } else {
-                                                        
+                        } else {                          
                             // set the new file
                             $newFileName = $uploadedFileNames[$elementName];
                             $formValues[$elementName] = $newFileName;
@@ -162,18 +134,16 @@ class ThemesController extends Omeka_Controller_Action
                             $oldFileName = $currentThemeOptions[$elementName];
                             if ($oldFileName != $newFileName) {
                                 $oldFilePath = THEME_UPLOADS_DIR . DIRECTORY_SEPARATOR . $oldFileName;
-                                if (is_writable($oldFilePath)) {
+                                if (is_writable($oldFilePath) && is_file($oldFilePath)) {
                                     unlink($oldFilePath);
                                 }
                             }
-
-                        }
-                                    
+                        }       
                     } else if ($element instanceof Zend_Form_Element_Hidden) {
-                        
+                        $elementName = $element->getName();
                         // unset the values for the hidden fields associated with the file inputs
-                        if (strpos($element->getName(), self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX) == 0) { 
-                            unset($formValues[$element->getName()]);
+                        if (strpos($elementName, self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX) == 0) { 
+                            unset($formValues[$elementName]);
                         }
                    }
                 }
@@ -182,7 +152,7 @@ class ThemesController extends Omeka_Controller_Action
                 unset($formValues['submit']);
                                 
                 // set the theme options
-                $this->_setThemeOptions($themeName, $formValues);
+                Theme::setOptions($themeName, $formValues);
                 
                 $this->flashSuccess('The theme settings were successfully saved!');
                 $this->redirect->goto('browse');
@@ -192,11 +162,11 @@ class ThemesController extends Omeka_Controller_Action
         $this->view->assign(compact('theme','configForm'));
     }
     
-    private function _getForm($themeName)
+    private function _getThemeConfigurationForm($themeName)
     {
-        $theme = $this->getAvailable($themeName);
-        $themeConfigIni = $theme->path.DIRECTORY_SEPARATOR.'config.ini';
-        $themeOptionName = 'theme_'.trim(strtolower($themeName)).'_options';
+        $theme = Theme::getAvailable($themeName);
+        $themeConfigIni = $theme->path . DIRECTORY_SEPARATOR . 'config.ini';
+        $themeOptionName = Theme::getOptionName($themeName);
         
         if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
         
@@ -240,7 +210,7 @@ class ThemesController extends Omeka_Controller_Action
             $configForm->setElements($newElements);            
 
             // set all of the form element values
-            $themeConfigValues = $this->_getThemeOptions($themeName);
+            $themeConfigValues = Theme::getOptions($themeName);
             foreach($themeConfigValues as $key => $value) {
                 if ($configForm->getElement($key)) {
                     $configForm->$key->setValue($value);
@@ -250,24 +220,5 @@ class ThemesController extends Omeka_Controller_Action
             return $configForm;
         }
         return null;
-    }
-    
-    private function _setThemeOptions($themeName, $formValues)
-    {
-        $themeOptionName = 'theme_'.trim(strtolower($themeName)).'_options';
-        set_option($themeOptionName, serialize($formValues));
-    }
-    
-    private function _getThemeOptions($themeName)
-    {
-        $themeOptionName = 'theme_'.trim(strtolower($themeName)).'_options';
-        $themeConfigValues = get_option($themeOptionName);
-        if ($themeConfigValues) {
-            $themeConfigValues = unserialize($themeConfigValues);
-        } else {
-            $themeConfigValues = array();
-        }
-        
-        return $themeConfigValues;
     }
 }

@@ -19,10 +19,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         parent::setUp();
                 
         // Set the ACL to allow access to users.
-        $acl = $this->core->getBootstrap()->acl;
-        $acl->allow(null, 'Users');
-                
-        $this->db = $this->core->getBootstrap()->db;
+        $this->acl->allow(null, 'Users');                
         $this->user = $this->db->getTable('User')->find(1);
         $this->salt = $this->user->salt;
         

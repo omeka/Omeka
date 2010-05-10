@@ -16,16 +16,6 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
     
-    // public function setUp()
-    // {
-    //     parent::setUp();
-    // }
-    // 
-    // public function setUpBootstrap($bootstrap)
-    // {
-    //     var_dump($bootstrap->frontcontroller);exit;
-    // }
-    
     public function assertPreConditions()
     {
         // The database is currently up to date.

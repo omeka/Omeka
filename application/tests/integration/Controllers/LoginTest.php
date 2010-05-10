@@ -21,13 +21,13 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
 
     public function testUpgradingHashedPasswordForUser()
     {
-        $omekaDb = $this->core->getBootstrap()->getResource('Db');
-        assert('$omekaDb instanceof Omeka_Db');
-        $dbAdapter = $omekaDb->getAdapter();        
+        $this->assertTrue($this->db instanceof Omeka_Db);
+        $dbAdapter = $this->db->getAdapter();        
         // Reset the username/pass to the old style (SHA1 w/ no salt).
-        $dbAdapter->update('omeka_users', array('password'  => sha1('foobar'),
-                                                'salt'      => null),
-                                          'id = 1');
+        $dbAdapter->update('omeka_users', 
+                            array('password'  => sha1('foobar'),
+                                  'salt'      => null),
+                           'id = 1');
         
         // Now attempt to login, and verify that the database was upgraded, and
         // that the user account was upgraded to use a salt.

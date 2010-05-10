@@ -64,6 +64,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     {
         Zend_Registry::_unsetInstance();
         Omeka_Context::resetInstance();
+        Omeka_Controller_Flash::reset();
         parent::tearDown();
     }
     
@@ -138,5 +139,29 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     {
         // define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . 'themes');
         $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
+    }
+    
+    /**
+     * Install a plugin
+     * Note: Can be used in the setUp() function of subclasses.
+     * @param string $pluginName The name of the plugin to install.
+     * @return Plugin
+     */
+    public function _installPlugin($pluginName)
+    {        
+        $pluginLoader = Zend_Registry::get('pluginloader');
+        
+        if (!($plugin = $pluginLoader->getPlugin($pluginName))) {            
+            $plugin = new Plugin;
+            $plugin->name = $pluginName;
+        }
+                        
+        $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
+        $pluginIniReader->load($plugin);
+                
+        $pluginInstaller = new Omeka_Plugin_Installer($this->pluginbroker, $pluginLoader);
+        $pluginInstaller->install($plugin);
+                
+        return $plugin;
     }
 }
