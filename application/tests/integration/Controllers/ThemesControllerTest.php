@@ -14,20 +14,20 @@
  **/
 class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
 {   
+    const SEASONS_THEME = 'seasons';
+    
     public function setUp()
     {
-        parent::setUp();        
+        if (!is_dir(PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . self::SEASONS_THEME)) {
+            $this->markTestSkipped("Cannot test ThemesController without the 'seasons' theme.");
+        }
+        parent::setUp();   
         set_option('enable_header_check_for_file_mime_types', '1');
     }
-    
-    public function assertPreConditions()
-    {
-        $this->assertEquals('1', get_option('enable_header_check_for_file_mime_types'));        
-    }
-    
+        
     public function testConfigureSeasonsThemeWithNoLogoFileAndNoPreviousLogoFile()
     {
-        $themeName = 'seasons';
+        $themeName = self::SEASONS_THEME;
         $this->assertEquals('', (string)get_theme_option('logo', $themeName));
         
         // specify the files array for the post
@@ -82,7 +82,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
     
     public function testConfigureSeasonsThemeWithWithNewLogoFileAndNoPreviousLogoFile()
     {  
-        $themeName = 'seasons';
+        $themeName = self::SEASONS_THEME;
         $this->assertEquals('', (string)get_theme_option('logo', $themeName));
         
         // specify the files array for the post
