@@ -18,7 +18,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/Framework/Constraint.php';
 
 // Set the include path and all the constants.
-require_once '../../paths.php';
+require_once (dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'paths.php');
 require_once 'globals.php';
 
 // THIS TOOK AN UNFORTUNATE AMOUNT OF TIME TO FIGURE OUT, BUT WARNINGS NEED TO
