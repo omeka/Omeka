@@ -157,10 +157,8 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
                         
         $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
         $pluginIniReader->load($plugin);
-        
-        $pluginBroker = $this->core->getBootstrap()->getResource('Pluginbroker');
-        
-        $pluginInstaller = new Omeka_Plugin_Installer($pluginBroker, $pluginLoader);
+                
+        $pluginInstaller = new Omeka_Plugin_Installer($this->pluginbroker, $pluginLoader);
         $pluginInstaller->install($plugin);
                 
         return $plugin;

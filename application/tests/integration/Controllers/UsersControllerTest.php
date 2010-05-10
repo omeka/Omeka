@@ -20,8 +20,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         parent::setUp();
                 
         // Set the ACL to allow access to users.
-        $acl = $this->core->getBootstrap()->getResource('Acl');
-        $acl->allow(null, 'Users');
+        $this->acl->allow(null, 'Users');
         
         $testConfig = Zend_Registry::get('test_config');
         $this->email = $testConfig->email->to;
