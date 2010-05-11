@@ -82,9 +82,11 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('users/forgot-password');
         $mail = $this->_getSentMailText();
         $this->assertThat($mail, $this->stringContains("Subject: [Automated Test Installation] Reset Your Password"));
-        
-        // FIXME: fails because flash is not reset between tests.
         $this->assertQueryContentContains("div.success", "Please check your email");
+        
+        $activationCode = $this->db->fetchOne("SELECT url FROM omeka_users_activations LIMIT 1");
+        $this->assertThat($mail, $this->stringContains($activationCode), 
+            "Email should contain the activation code send to the user.");
     }
             
     private function _getFakemailFilenames()
