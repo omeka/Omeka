@@ -14,19 +14,20 @@
  **/
 class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
 {    
+    const FORM_URL = '/users/edit/1';
+    
     public function setUp()
     {
         parent::setUp();
-                
-        // Set the ACL to allow access to users.
-        $this->acl->allow(null, 'Users');                
-        $this->user = $this->db->getTable('User')->find(1);
+
+        $this->user = $this->_getDefaultUser();
         $this->salt = $this->user->salt;
         
         // The user is attempting to change their own password.
         // Pretend that this user is not a super user.
         $this->_authenticateUser($this->user);
         $this->user->role = 'admin';
+        $this->user->save();
     }
 
     public function assertPreConditions()
@@ -42,6 +43,46 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         $this->_assertSaltNotChanged();
     }
     
+    public function testChangePasswordFormAsAdminUser()
+    {
+        $this->dispatch(self::FORM_URL);
+        $this->assertController('users');
+        $this->assertAction('edit');
+        $this->assertNotRedirect();
+        $this->assertQuery('form#change-password input#current_password');
+        $this->assertQuery('form#change-password input#new_password');
+        $this->assertQuery('form#change-password input#new_password_confirm');
+    }
+    
+    public function testChangePasswordFormAsSuperUser()
+    {
+        $this->user->role = 'super';
+        $this->user->forceSave();
+        $this->dispatch(self::FORM_URL);
+        $this->assertNotRedirect();
+        $this->assertNotQuery('form#change-password input#current_password');
+        $this->assertQuery('form#change-password input#new_password');
+        $this->assertQuery('form#change-password input#new_password_confirm');        
+    }
+    
+    public function testAdminUserCannotChangePasswordForAnotherUser()
+    {
+        $newUser = $this->_addNewUserWithRole('contributor');
+        $this->dispatch('/users/edit/' . $newUser->id);
+        $this->assertNotController('users');
+        $this->assertNotAction('edit');
+    }
+    
+    public function testSuperUserCanChangePasswordForAnotherUser()
+    {
+        $this->user->role = 'super';
+        $this->user->forceSave();
+        $newUser = $this->_addNewUserWithRole('admin');
+        $this->dispatch('/users/edit/' . $newUser->id);
+        $this->assertController('users');
+        $this->assertAction('edit');
+    }
+    
     public function testChangingPassword()
     {
         $this->_dispatchChangePassword(array(
@@ -52,14 +93,16 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         $this->_assertPasswordIs('foobar6789');
     }
     
-    public function testSuperUserCanChangePasswordWithoutKnowingOriginal()
+    public function testSuperUserCanChangeOwnPasswordWithoutKnowingOriginal()
     {
         $this->user->role = 'super';
+        $this->user->save();
         $this->_dispatchChangePassword(array(
             'new_password' => 'foobar6789',
             'new_password_confirm' => 'foobar6789'
         ));
-        $this->_assertPasswordIs('foobar6789');
+        $this->_assertPasswordIs('foobar6789', 
+            "Super user was not able to change the password without knowing the original.");
     }
     
     public function testChangingPasswordFailsWithInvalidPassword()
@@ -105,6 +148,22 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     {
         $this->getRequest()->setPost($form);
         $this->getRequest()->setMethod('post');
-        $this->dispatch('/users/edit/1', true);
+        $this->dispatch(self::FORM_URL);
+    }
+    
+    private function _addNewUserWithRole($role)
+    {
+        $newUser = new User;
+        $newUser->username = 'newadminuser';
+        $newUser->setPassword('foobar');
+        $newUser->role = 'admin';
+        $newUser->active = 1;
+        $newUser->Entity = new Entity;
+        $newUser->Entity->first_name = 'New';
+        $newUser->Entity->last_name = 'Admin User';
+        $newUser->Entity->email = 'bananabananabanana@example.com';
+        $newUser->forceSave();
+        $this->assertTrue($newUser->exists());
+        return $newUser;
     }
 }

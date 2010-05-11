@@ -55,64 +55,67 @@ class UsersController extends Omeka_Controller_Action
     private function checkUserSpecificPerms($action)
     {
         $user = $this->getCurrentUser();
-
-        try {
-           $record = $this->findById();
-        // Silence exceptions, because it's easy
-        } catch (Exception $e) {
+        $controlledActions = array(
+            'delete',
+            'changePassword',
+            'edit',
+            'show'
+        );
+        
+        if (!in_array($action, $controlledActions)) {
             return;
         }
         
-        try {
-            switch ($action) {
+        $record = $this->findById();        
+        switch ($action) {
+           
+            // If we are deleting users
+           case 'delete':                   
+               // Can't delete yourself
+               if ($user->id == $record->id) {
+                   $redirectWith = 'You are not allowed to delete yourself!';
+               }
+               break;
                
-                // If we are deleting users
-               case 'delete':                   
-                   // Can't delete yourself
-                   if ($user->id == $record->id) {
-                       throw new Exception('You are not allowed to delete yourself!');
-                   }
-                   break;
-                   
-               //If changing passwords 
-               case 'changePassword':
-                   
-                    // Only super users and the actual user can change this 
-                    // user's password
-                    if(!$user || (($user->role != 'super') && ($record->id != $user->id))) {
-                        throw new Exception( 'May not change another user\'s password!' );
-                    }
-                    break;
-                    
-                case 'edit':
-                    // Allow access to the 'edit' action if a user is editing their 
-                    // own account info.
-                    if ($user->id == $record->id) {
-                        $this->_helper->acl->setAllowed('edit');
-                    }
-                     
-                    //Non-super users cannot edit super user data
-                    //Note that super users can edit other super users' data
-                    if ($user->id != $record->id 
-                        && $record->role == 'super' 
-                        && $user->role != 'super') {
-                        throw new Exception( 'You may not edit the data for super users!' );
-                    }
-                    break;
-                case 'show':
-                    // Allow access to the 'show' action if a user is viewing their 
-                    // own account info.
-                    if ($user->id == $record->id) {
-                        $this->_helper->acl->setAllowed('show');
-                    }
-                    break;    
-               default:
-                   break;
-            }                
-        } catch (Exception $e) {
-            $this->flash($e->getMessage(), Omeka_Controller_Flash::GENERAL_ERROR);
-            $this->_helper->redirector->goto('browse');
+           //If changing passwords 
+           case 'changePassword':
+               
+                // Only super users and the actual user can change this 
+                // user's password
+                if(!$user || (($user->role != 'super') && ($record->id != $user->id))) {
+                    $redirectWith = 'May not change another user\'s password!';
+                }
+                break;
+                
+            case 'edit':
+                // Allow access to the 'edit' action if a user is editing their 
+                // own account info.
+                if ($user->id == $record->id) {
+                    $this->_helper->acl->setAllowed('edit');
+                }
+                 
+                //Non-super users cannot edit super user data
+                //Note that super users can edit other super users' data
+                if ($user->id != $record->id 
+                    && $record->role == 'super' 
+                    && $user->role != 'super') {
+                    $redirectWith = 'You may not edit the data for super users!';
+                }
+                break;
+            case 'show':
+                // Allow access to the 'show' action if a user is viewing their 
+                // own account info.
+                if ($user->id == $record->id) {
+                    $this->_helper->acl->setAllowed('show');
+                }
+                break;    
+           default:
+               break;
         }
+        if ($redirectWith) {
+            $this->flash($redirectWith, Omeka_Controller_Flash::GENERAL_ERROR);
+            $this->_helper->redirector->goto('browse');
+        }    
     }
     
     /**

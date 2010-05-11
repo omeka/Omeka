@@ -119,6 +119,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $bs = $this->core->getBootstrap();
         $bs->auth->getStorage()->write($user->id);
         $bs->currentUser = $user;
+        $bs->getContainer()->currentuser = $user;
     }
     
     protected function _useAdminViews()
