@@ -21,21 +21,9 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
                 
         // Set the ACL to allow access to users.
         $this->acl->allow(null, 'Users');
-        
-        $testConfig = Zend_Registry::get('test_config');
-        $this->email = $testConfig->email->to;
-        
-        // Verify and clear the fakemail directory prior to running the tests.
-        $this->fakemail = $testConfig->paths->fakemaildir;
-        if (!(is_dir($this->fakemail) && is_readable($this->fakemail))) {
-            die("paths.fakemaildir must be properly configured in config.ini");
-        }
-        
-        $iter = new VersionedDirectoryIterator($this->fakemail, false);
-        foreach ($iter as $file) {
-            assert(file_exists("$this->fakemail/$file"));
-            unlink("$this->fakemail/$file");
-        }        
+        $this->mailHelper = Omeka_Test_Helper_Mail::factory();        
+        $this->email = Zend_Registry::get('test_config')->email->to;        
+        $this->mailHelper->reset();
     }
     
     public function testAddingNewUserSendsActivationEmail()
@@ -49,8 +37,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->getRequest()->setPost($post);
         $this->getRequest()->setMethod('post');
         $this->dispatch('users/add', true);
-        $mailText = $this->_getSentMailText();
-        $this->assertThat($mailText, $this->stringContains("Activate your account"));
+        $this->assertThat($this->mailHelper->getMailText(), $this->stringContains("Activate your account"));
     }
     
     public function testShowForgotPasswordPage()
@@ -80,23 +67,12 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         ));
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
-        $mail = $this->_getSentMailText();
+        $mail = $this->mailHelper->getMailText();
         $this->assertThat($mail, $this->stringContains("Subject: [Automated Test Installation] Reset Your Password"));
-        
-        // FIXME: fails because flash is not reset between tests.
         $this->assertQueryContentContains("div.success", "Please check your email");
-    }
-            
-    private function _getFakemailFilenames()
-    {
-        $iter = new VersionedDirectoryIterator($this->fakemail, false);
-        return $iter->getValid();
-    }
-    
-    private function _getSentMailText()
-    {
-        $mail = $this->_getFakemailFilenames();
-        $this->assertEquals(count($mail), 1);
-        return file_get_contents("$this->fakemail/{$mail[0]}");
+        
+        $activationCode = $this->db->fetchOne("SELECT url FROM omeka_users_activations LIMIT 1");
+        $this->assertThat($mail, $this->stringContains($activationCode), 
+            "Email should contain the activation code send to the user.");
     }
 }

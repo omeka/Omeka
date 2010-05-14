@@ -119,6 +119,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $bs = $this->core->getBootstrap();
         $bs->auth->getStorage()->write($user->id);
         $bs->currentUser = $user;
+        $bs->getContainer()->currentuser = $user;
     }
     
     protected function _useAdminViews()
@@ -143,25 +144,58 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     
     /**
      * Install a plugin
-     * Note: Can be used in the setUp() function of subclasses.
+     * Note: Normally used in the setUp() function of subclasses that test plugins.
      * @param string $pluginName The name of the plugin to install.
      * @return Plugin
      */
-    public function _installPlugin($pluginName)
-    {        
+    protected function _installPlugin($pluginName)
+    {
         $pluginLoader = Zend_Registry::get('pluginloader');
-        
+    
         if (!($plugin = $pluginLoader->getPlugin($pluginName))) {            
             $plugin = new Plugin;
             $plugin->name = $pluginName;
         }
-                        
+                    
         $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
         $pluginIniReader->load($plugin);
-                
+            
         $pluginInstaller = new Omeka_Plugin_Installer($this->pluginbroker, $pluginLoader);
         $pluginInstaller->install($plugin);
-                
+
         return $plugin;
+    }
+    
+    /**
+    * Initializes the plugin hooks and filters fired in the core resources for a plugin
+    * Note: Normally used in the setUp() function of the subclasses that test plugins.
+    * @param Omeka_Plugin_Broker $pluginBroker
+    * @param string $pluginName
+    * @return void
+    **/
+    protected function _initializeCoreResourcePluginHooksAndFilters($pluginBroker, $pluginName)
+    {
+        $this->_initializeDefineResponseContextsFilter($pluginBroker);
+        
+        $pluginBroker->callHook('initialize', array(), $pluginName);
+        $pluginBroker->callHook('define_acl', array($this->acl), $pluginName);
+        $pluginBroker->callHook('define_routes', array($this->router), $pluginName);
+    }
+    
+    /**
+    * Initializes the define_response_context filter
+    * @param Omeka_Plugin_Broker $pluginBroker
+    * @return void
+    **/
+    protected function _initializeDefineResponseContextsFilter($pluginBroker)
+    {        
+        $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');                
+        $contexts->clearContexts();
+        $contexts->setContextParam('output');
+        $contextArray = Omeka_Core_Resource_Frontcontroller::getDefaultResponseContexts();
+        if ($pluginBroker) {             
+            $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
+        }
+        $contexts->addContexts($contextArray);
     }
 }

@@ -21,6 +21,16 @@ class UsersActivations extends Omeka_Record
     public $added;
     
     protected $_related = array('User' => 'getUser');
+     
+    public static function factory(User $user)
+    {
+        $ua = new self;
+        if (!$user->exists()) {
+            throw new RuntimeException("Cannot create a user activation for non-existent user.");
+        }
+        $ua->user_id = $user->id;
+        return $ua;
+    } 
         
     protected function beforeSave()
     {

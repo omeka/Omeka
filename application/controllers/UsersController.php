@@ -54,11 +54,14 @@ class UsersController extends Omeka_Controller_Action
     private function checkUserSpecificPerms($action)
     {
         $user = $this->getCurrentUser();
-
-        try {
-           $record = $this->findById();
-        // Silence exceptions, because it's easy
-        } catch (Exception $e) {
+        $controlledActions = array(
+            'delete',
+            'changePassword',
+            'edit',
+            'show'
+        );
+        
+        if (!in_array($action, $controlledActions)) {
             return;
         }
         
@@ -66,7 +69,7 @@ class UsersController extends Omeka_Controller_Action
             $this->_helper->redirector->goto('browse');            
         } else {
             $this->_helper->acl->setAllowed($action);
-        }
+        }    
     }
     
     /**
