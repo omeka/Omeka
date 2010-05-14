@@ -1,0 +1,50 @@
+<?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * Form for allowing a user to reset his/her password.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
+class Omeka_Form_ResetPassword extends Omeka_Form
+{
+    public function init()
+    {
+        parent::init();
+        
+        $this->setAttrib('id', 'reset-password');
+        
+        $this->addElement('password', 'new_password', array(
+            'label' => 'Create a Password',
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'options' => array(
+                    'messages' => array(
+                        'isEmpty' => 'Password is required.'
+                    )
+                )),
+                array('validator' => 'Confirmation', 'options' => array(
+                    'field' => 'new_password_confirm',
+                    'messages' => array(
+                        'notMatch' => "Typed passwords do not match.")
+                )),
+                array('validator' => 'StringLength', 'options' => array(
+                    'min' => User::PASSWORD_MIN_LENGTH,
+                    'messages' => array(
+                        'stringLengthTooShort' => "Password must be at least %min% characters in length.")
+                ))
+            )
+        ));
+        
+        $this->addElement('password', 'new_password_confirm', array(
+            'label' => 'Re-type the Password'
+        ));
+        
+        $this->addElement('submit', 'Submit');
+    }
+}
