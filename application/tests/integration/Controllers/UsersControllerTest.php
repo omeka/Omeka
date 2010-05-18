@@ -18,12 +18,12 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-                
-        // Set the ACL to allow access to users.
-        $this->acl->allow(null, 'Users');
+
         $this->mailHelper = Omeka_Test_Helper_Mail::factory();        
         $this->email = Zend_Registry::get('test_config')->email->to;        
         $this->mailHelper->reset();
+        
+        $this->_authenticateUser($this->_getDefaultUser());
     }
     
     public function testAddingNewUserSendsActivationEmail()

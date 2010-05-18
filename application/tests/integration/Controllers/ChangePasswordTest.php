@@ -27,13 +27,11 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         // Pretend that this user is not a super user.
         $this->_authenticateUser($this->user);
         $this->user->role = 'admin';
-        $this->user->save();
+        $this->user->forceSave();
     }
 
     public function assertPreConditions()
     {
-        $this->assertTrue($this->user instanceof User);
-        $this->assertTrue($this->user->exists());
         $this->assertNotNull($this->salt, "Salt not being set properly by installer.");
         $this->_assertPasswordNotChanged();
     }
