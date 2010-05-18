@@ -204,7 +204,12 @@ class UsersController extends Omeka_Controller_Action
         try {
             if ($user->saveForm($_POST)) {
                 $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
-                $this->redirect->goto('browse');
+                
+                if ($user->id == $this->getCurrentUser()->id) {
+                    $this->_helper->redirector->gotoUrl('/');
+                } else {
+                    $this->_helper->redirector->goto('browse');
+                }
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
