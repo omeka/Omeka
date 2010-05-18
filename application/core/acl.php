@@ -57,12 +57,12 @@ $acl->addRole(new Zend_Acl_Role('researcher'));
 
 $acl->loadAllowList($allowList);
 
-$acl->allow(null, 'Users', array('edit', 'show', 'change-password', 'delete'), new Omeka_Acl_Assertion_UserAccount);
-// Always allow users to login, logout and send forgot-password notifications.
-$acl->allow(null, 'Users', array('login', 'logout', 'forgot-password', 'activate'));
-
 //Deny a couple of specific privileges to admin users
 $acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'Users', 'ElementSets', 'Security'));
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
-$acl->deny('admin', 'Users', array('add', 'browse'));
+
+// Because Users resource was denied to admins, it must be explicitly allowed here.
+$acl->allow(array(null, 'admin'), 'Users', array('edit', 'show', 'change-password', 'delete'), new Omeka_Acl_Assertion_UserAccount);
+// Always allow users to login, logout and send forgot-password notifications.
+$acl->allow(array(null, 'admin'), 'Users', array('login', 'logout', 'forgot-password', 'activate'));
 ?>
