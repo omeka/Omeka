@@ -36,7 +36,7 @@
   */
  function loop_item_types()
  {
-     return loop_records('item_types', get_item_types_for_loop());
+     return loop_records('item_types', get_item_types_for_loop(), 'set_current_item_type');
  }
  
  /**

@@ -229,7 +229,7 @@ function has_collections_for_loop()
  */
 function loop_collections()
 {
-    return loop_records('collections', get_collections_for_loop());
+    return loop_records('collections', get_collections_for_loop(), 'set_current_collection');
 }
 
 /**
