@@ -46,7 +46,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     public function __construct($acl, $currentUser)
     {
         $this->_acl = $acl;
-        $this->_currentUser = $currentUser;
+        $this->setCurrentUser($currentUser);
     }
     
     /**
@@ -151,5 +151,13 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
 	public function setAllowed($rule,$isAllowed=true) 
 	{
 		$this->_allowed[$rule] = $isAllowed;
+	}
+	
+	/**
+	 * @param User|null $currentUser
+	 */
+	public function setCurrentUser($currentUser)
+	{
+	    $this->_currentUser = $currentUser;
 	}    
 }

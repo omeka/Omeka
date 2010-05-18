@@ -65,6 +65,7 @@ class UsersController extends Omeka_Controller_Action
             return;
         }
         
+        $record = $this->_helper->db->findById();
         if (!$this->isAllowed($action, $record)) {
             $this->_helper->redirector->goto('browse');            
         } else {
