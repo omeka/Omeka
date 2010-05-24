@@ -394,6 +394,8 @@ class UsersController extends Omeka_Controller_Action
         $auth = $this->_auth;
         //http://framework.zend.com/manual/en/zend.auth.html
         $auth->clearIdentity();
+        $_SESSION = array();
+        Zend_Session::destroy();
         $this->redirect->gotoUrl('');
     }
     
