@@ -144,9 +144,10 @@ function settings($name)
  * @see loop_collections()
  * @param string $recordType The type of record to loop through
  * @param mixed $records The iterable set of records
+ * @param mixed $setCurrentRecordCallback The callback to set the current record
  * @return mixed The current record
  */
-function loop_records($recordType, $records)
+function loop_records($recordType, $records, $setCurrentRecordCallback=null)
 {
     // If this is the first call to loop_records(), set a static record loop and 
     // set it to NULL.
@@ -176,26 +177,10 @@ function loop_records($recordType, $records)
         
         $lastRecord[$recordType] = $record;
         
-        // Set the current records, depending on the record type.
-        switch ($recordType) {
-            case 'items':
-                set_current_item($record);
-                break;
-			case 'files':
-				set_current_file($record);
-				break;
-            case 'files_for_item':
-                set_current_file($record);
-                break;
-            case 'collections':
-                set_current_collection($record);
-                break;
-            case 'item_types':
-                set_current_item_type($record);
-                break;
-            default:
-                throw new Exception('Error: Invalid record type was provided for the loop.');
-                break;
+        if (is_callable($setCurrentRecordCallback)) {
+            call_user_func($setCurrentRecordCallback, $record);
+        } else {
+            throw new Exception('Error: Invalid callback was provided for the loop.');
         }
         
         return $record;

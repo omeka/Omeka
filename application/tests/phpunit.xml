@@ -1,6 +1,7 @@
 <phpunit bootstrap="bootstrap.php"
          convertErrorsToExceptions="true"
-         convertWarningsToExceptions="true">
+         convertWarningsToExceptions="true"
+         convertNoticesToExceptions="true">
     <testsuite name="Integration Tests">
         <directory>integration</directory>
     </testsuite>

@@ -272,7 +272,7 @@
  */
  function loop_files()
  {
-    return loop_records('files', get_files_for_loop());
+    return loop_records('files', get_files_for_loop(), 'set_current_file');
  }
 
  /**

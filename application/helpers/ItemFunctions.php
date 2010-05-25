@@ -449,7 +449,7 @@
   */
  function loop_items()
  {
-     return loop_records('items', get_items_for_loop());
+     return loop_records('items', get_items_for_loop(), 'set_current_item');
  }
  
  /**
@@ -465,7 +465,7 @@
          $item = get_current_item();
      }
      $files = $item->Files;
-     return loop_records('files_for_item', $files);
+     return loop_records('files_for_item', $files, 'set_current_file');
  }
  
  /**
