@@ -29,11 +29,6 @@ class UpgradeController extends Zend_Controller_Action
         $this->view->setScriptPath(VIEW_SCRIPTS_DIR);
         $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
     }
-
-    protected function getStartMigration()
-    {
-        return (int) get_option('migration');
-    }
     
     public function indexAction()
     {
@@ -47,19 +42,19 @@ class UpgradeController extends Zend_Controller_Action
      **/
     public function migrateAction()
     {        
-        require_once 'Omeka/Upgrader.php';
-        
-        $from = $this->getStartMigration();        
-        $to = OMEKA_MIGRATION;
-        if ($from == $to) {
+        $manager = Omeka_Db_Migration_Manager::factory();
+        if (!$manager->canUpgrade()) {
             return $this->_forward('completed');
-        }                    
-        $upgrader = new Omeka_Upgrader($from, $to);
-        $upgrader->run();
-        $output = $upgrader->getOutput();
-        $errors = $upgrader->getErrors();
-        $success = (bool) !count($errors);
-        $this->view->assign(compact('output', 'errors', 'success'));
+        }
+        
+        try {
+            $manager->migrate();
+            $this->view->success = true;            
+        } catch (Omeka_Db_Migration_Exception $e) {
+            $this->view->error = $e->getMessage();
+        } catch (Zend_Db_Exception $e) {
+            $this->view->error = "SQL error in migration: " . $e->getMessage();
+        }
     }
     
     public function completedAction()

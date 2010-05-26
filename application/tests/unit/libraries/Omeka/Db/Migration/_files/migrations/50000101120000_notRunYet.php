@@ -1,0 +1,22 @@
+<?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * A test migration that has not yet been run.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
+class notRunYet extends Omeka_Db_Migration
+{
+    
+    public function up()
+    {
+        throw new Exception("This migration should not be run.");
+    }
+}
