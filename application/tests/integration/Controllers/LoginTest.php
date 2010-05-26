@@ -14,11 +14,6 @@
  **/
 class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
 {    
-    public function assertPreConditions()
-    {
-        $this->assertNotNull(get_option('migration'), "'migration' database option cannot be found.");
-    }
-
     public function testUpgradingHashedPasswordForUser()
     {
         $this->assertTrue($this->db instanceof Omeka_Db);

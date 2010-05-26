@@ -4,25 +4,14 @@
 
 <?php if(!$success): ?>
     <p class="error">Omeka encountered an error when upgrading your installation:</p>
-	
-	<?php foreach( $errors as $num => $error ): ?>
-	   <p class="error_text"><?php echo html_escape($error); ?></p>
-	<?php endforeach; ?>
+	<p class="error_text"><?php echo html_escape($error); ?></p>
     
     <h2 class="instruction">Please restore from your database backup and try again.
         If you continue to experience errors, you can notify us on the Omeka 
         <a href="http://omeka.org/forums/">Forums</a>.</h2>
 <?php else: ?>
+    <p>Omeka has upgraded successfully.</p>
     <p><?php echo link_to_admin_home_page('Return to Dashboard'); ?></p>    
 <?php endif; ?>	
-<ul class="migrate">
-<?php foreach( $output as $num => $text ): ?>
-    <li>
-    <?php foreach( $text as $out ): ?>
-        <p><?php echo html_escape($out); ?></p>
-    <?php endforeach; ?>
-    </li>
-<?php endforeach; ?>    
-</ul>
 </div>
 <?php foot(); ?>

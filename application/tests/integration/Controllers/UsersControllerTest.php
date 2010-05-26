@@ -108,7 +108,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $admin->id);
-        $this->assertEquals($this->_getDefaultUser()->username, "newusername");
+        $this->assertEquals($this->db->getTable('User')->find($admin->id)->username, "newusername");
         $this->assertRedirectTo('/users/browse');
     }
     

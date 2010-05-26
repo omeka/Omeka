@@ -25,6 +25,17 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
             header('Location: '.WEB_ROOT.'/install');
         }
         
+        $this->_convertMigrationSchema($options);
+        
         return $options;
+    }
+    
+    private function _convertMigrationSchema(array $options)
+    {
+        if (!$options[Omeka_Db_Migration_Manager::ORIG_MIGRATION_OPTION_NAME]) {
+            return;
+        }
+        
+        Omeka_Db_Migration_Manager::createMigrationsTable($this->getBootstrap()->db);        
     }
 }

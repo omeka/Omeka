@@ -27,7 +27,7 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
         // Block access to the upgrade controller.
-        if (!$this->_needsUpgrade 
+        if (!$this->_canUpgrade 
             && ($request->getControllerName() == 'upgrade')
             && ($request->getModuleName() == 'default')) {
             $request->setControllerName('index')
@@ -49,7 +49,9 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
         
     private function _setNeedsUpgrade()
     {
-        $this->_needsUpgrade = (get_option('migration') < OMEKA_MIGRATION);
+        $migrationManager = Omeka_Db_Migration_Manager::factory();
+        $this->_needsUpgrade = $migrationManager->dbNeedsUpgrade();
+        $this->_canUpgrade = $migrationManager->canUpgrade();
     }
     
     private function _upgrade($request)

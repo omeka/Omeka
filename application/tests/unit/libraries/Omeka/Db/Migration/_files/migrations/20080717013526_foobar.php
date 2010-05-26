@@ -7,17 +7,15 @@
  **/
 
 /**
- * Adds a salt for all the user passwords in Omeka.
+ * A fake migration file to test Omeka_Db_Migration_Manager.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  **/
-class addPasswordSalt extends Omeka_Db_Migration
+class foobar extends Omeka_Db_Migration
 {
-    
     public function up()
     {
-        $this->db->query("ALTER TABLE `{$this->db->User}` ADD `salt` VARCHAR( 16 ) 
-            CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL AFTER `password` ;");
+        throw new Exception("This migration should have been run previously (should not run again).");
     }
 }

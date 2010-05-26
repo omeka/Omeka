@@ -6,6 +6,10 @@ Allow from all
 Allow from all
 </Files>
 
+<Files check-mod-rewrite.html>
+Allow from all
+</Files>
+
 # This allows us to verify that mod_rewrite is enabled
 <IfModule mod_rewrite.c>
 RewriteEngine On

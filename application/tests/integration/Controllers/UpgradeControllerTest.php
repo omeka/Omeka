@@ -18,15 +18,13 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
     
     public function assertPreConditions()
     {
-        // The database is currently up to date.
-        $this->assertEquals(get_option('migration'), OMEKA_MIGRATION);
         // No one is logged in.
         $this->assertNull($this->core->getBootstrap()->currentUser);
     }
     
     public function testAutomaticRedirectToUpgrade()
     {
-        set_option('migration', (int)get_option('migration') - 1);
+        set_option('omeka_version', '1.0');
         
         $this->dispatch('/', true);
         $this->assertRedirectTo('/upgrade');
@@ -34,7 +32,7 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
     
     public function testCanReachUpgradePageWithoutBeingLoggedIn()
     {
-        set_option('migration', (int)get_option('migration') - 1);
+        set_option('omeka_version', '1.0');
         
         $this->dispatch('/upgrade', true);
         $this->assertNotRedirectTo('/users/login');
