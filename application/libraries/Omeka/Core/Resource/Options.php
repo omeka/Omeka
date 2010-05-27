@@ -31,6 +31,7 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
             return;
         }
         
-        Omeka_Db_Migration_Manager::createMigrationsTable($this->getBootstrap()->db);        
+        $migrationManager = Omeka_Db_Migration_Manager::getDefault($this->getBootstrap()->db);
+        $migrationManager->setupTimestampMigrations();
     }
 }

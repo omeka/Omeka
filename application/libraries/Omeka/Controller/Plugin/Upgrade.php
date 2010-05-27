@@ -49,7 +49,7 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
         
     private function _setNeedsUpgrade()
     {
-        $migrationManager = Omeka_Db_Migration_Manager::factory();
+        $migrationManager = Omeka_Db_Migration_Manager::getDefault();
         $this->_needsUpgrade = $migrationManager->dbNeedsUpgrade();
         $this->_canUpgrade = $migrationManager->canUpgrade();
     }

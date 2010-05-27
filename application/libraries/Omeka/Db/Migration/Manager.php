@@ -24,26 +24,45 @@ class Omeka_Db_Migration_Manager
      */
     private $_migrationsDir;
     
+    /**
+     * Name of the migrations table.
+     */
     const MIGRATION_TABLE_NAME = 'schema_migrations';
     
     /**
-     * @var string Formatting string to convert dates into YYYYMMDDHHMMSS pattern.
+     * Formatting string to convert dates into YYYYMMDDHHMMSS pattern.
      */
-    // const MIGRATION_DATE_FORMAT = '%Y%m%d%H%M%S';
     const MIGRATION_DATE_FORMAT = "YmdHis";
     
+    /**
+     * Name of the original database option storing the integer migration number.
+     */
     const ORIG_MIGRATION_OPTION_NAME = 'migration';
     
+    /**
+     * Name of the new database option storing the core software version number.
+     */
     const VERSION_OPTION_NAME = 'omeka_version';
     
+    /**
+     * @param Omeka_Db $db
+     * @param string $migrationsDir
+     */
     public function __construct(Omeka_Db $db, $migrationsDir)
     {
         $this->_db = $db;
         $this->_migrationsDir = $migrationsDir;
     }
-
-    public static function createMigrationsTable(Omeka_Db $db)
+    
+    /**
+     * Set up Omeka to use timestamped database migrations.
+     * 
+     * This creates the 'schema_migrations' table, drops the 'migration' option
+     * and adds the 'omeka_version' option to the database.
+     */    
+    public function setupTimestampMigrations()
     {
+        $db = $this->_db;
         $tableSql = "CREATE TABLE IF NOT EXISTS `$db->prefix" . self::MIGRATION_TABLE_NAME 
                 . "` (`version` varchar(16) NOT NULL, UNIQUE KEY `unique_schema_migrations` (`version`))
                     ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
@@ -51,6 +70,18 @@ class Omeka_Db_Migration_Manager
         $db->query($optionSql);
         $db->query($tableSql);
         $db->insert('Option', array('name' => self::VERSION_OPTION_NAME, 'value' => OMEKA_VERSION));
+    }
+    
+    /**
+     * Mark all of the migrations as having been run.  Used by the installer as
+     * a way of indicating that the database is entirely up to date.
+     */
+    public function markAllAsMigrated()
+    {
+        $pending = $this->_getPendingMigrations(new DateTime);
+        foreach ($pending as $time => $migration) {
+            $this->_recordMigration($time);
+        }
     }
     
     /**
@@ -74,12 +105,24 @@ class Omeka_Db_Migration_Manager
         }
     }
     
+    /**
+     * Determine whether or not it is possible to migrate the Omeka database up.
+     * 
+     * This is based entirely on whether there exist any migrations that have 
+     * not yet been applied.
+     */
     public function canUpgrade()
     {
        $pendingMigrations = $this->_getPendingMigrations(new DateTime());
        return !empty($pendingMigrations);
     }
     
+    /**
+     * Determine whether the database must be upgraded.  
+     * 
+     * In order to return true, this requires that canUprade() == true, and also
+     * that Omeka's code has recently been upgraded. 
+     */
     public function dbNeedsUpgrade()
     {
         return get_option(self::VERSION_OPTION_NAME) 
@@ -87,7 +130,13 @@ class Omeka_Db_Migration_Manager
             && $this->canUpgrade();
     }
     
-    public static function factory($db = null)
+    /**
+     * Return the default configuration of the database migration manager.
+     * 
+     * @param Omeka_Db|null $db
+     * @return Omeka_Db_Migration_Manager
+     */
+    public static function getDefault($db = null)
     {
         if (!$db) {
             $db = Omeka_Context::getInstance()->getDb();
@@ -107,11 +156,19 @@ class Omeka_Db_Migration_Manager
         return $col;
     }
     
+    /**
+     * Return the name of the table associated with schema migrations.
+     */
     private function _getMigrationTableName()
     {
         return $this->_db->prefix . self::MIGRATION_TABLE_NAME;
     }
     
+    /**
+     * Return a list of migration files in the migration directory.
+     * @return array An associative array where key = timestamp of migration, 
+     * value = full filename of the migration.
+     */
     private function _getMigrationFileList()
     {
         // In Ruby, you can do this:
@@ -124,7 +181,10 @@ class Omeka_Db_Migration_Manager
         }        
         return $fileList;
     }
-            
+    
+    /**
+     * Migrate upwards to a specific timestamp.
+     */        
     private function _migrateUp($stopAt)
     {        
         $pending = $this->_getPendingMigrations($stopAt);
@@ -157,7 +217,7 @@ class Omeka_Db_Migration_Manager
      * Retrieve a list of all migrations that have not been run yet, ending at
      * the latest time given by $untilTimestamp.
      */
-    private function _getPendingMigrations($until)
+    private function _getPendingMigrations(DateTime $until)
     {
         $stopAt = $until->format(self::MIGRATION_DATE_FORMAT);
         $files = $this->_getMigrationFileList();
@@ -174,6 +234,9 @@ class Omeka_Db_Migration_Manager
         return $pending;
     }
     
+    /**
+     * Record the migration timestamp in the schema_migrations table.
+     */
     private function _recordMigration($time)
     {
         $this->_db->getAdapter()->insert($this->_getMigrationTableName(), array('version' => $time));
