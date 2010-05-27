@@ -42,7 +42,7 @@ class UpgradeController extends Zend_Controller_Action
      **/
     public function migrateAction()
     {        
-        $manager = Omeka_Db_Migration_Manager::factory();
+        $manager = Omeka_Db_Migration_Manager::getDefault();
         if (!$manager->canUpgrade()) {
             return $this->_forward('completed');
         }

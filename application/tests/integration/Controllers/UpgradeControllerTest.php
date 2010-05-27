@@ -25,6 +25,7 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
     public function testAutomaticRedirectToUpgrade()
     {
         set_option('omeka_version', '1.0');
+        $this->db->query("TRUNCATE omeka_schema_migrations");
         
         $this->dispatch('/', true);
         $this->assertRedirectTo('/upgrade');
@@ -33,6 +34,7 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
     public function testCanReachUpgradePageWithoutBeingLoggedIn()
     {
         set_option('omeka_version', '1.0');
+        $this->db->query("TRUNCATE omeka_schema_migrations");
         
         $this->dispatch('/upgrade', true);
         $this->assertNotRedirectTo('/users/login');

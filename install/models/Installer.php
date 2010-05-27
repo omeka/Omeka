@@ -94,6 +94,9 @@ class Installer
             $user->forceSave();
         }
         
+        $migrations = Omeka_Db_Migration_Manager::getDefault($this->_db);
+        $migrations->setupTimestampMigrations();
+        $migrations->markAllAsMigrated();
         
         // Insert options.
         $optionSql = "
@@ -120,8 +123,6 @@ class Installer
         }
         
         // Insert default options to the options table. 
-        Omeka_Db_Migration_Manager::createMigrationsTable($this->_db);
-        
         $this->_db->exec($optionSql, array('admin_theme', 'default'));
         $this->_db->exec($optionSql, array('public_theme', 'default'));
         $this->_db->exec($optionSql, array('file_extension_whitelist', Omeka_Validate_File_Extension::DEFAULT_WHITELIST));
