@@ -182,9 +182,7 @@ class UsersController extends Omeka_Controller_Action
      **/
     public function editAction()
     {        
-        $user = $this->findById();
-        
-        require_once APP_DIR . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'ChangePassword.php';
+        $user = $this->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
         
