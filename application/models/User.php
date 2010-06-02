@@ -105,6 +105,7 @@ class User extends Omeka_Record {
         if (isset($post['password'])) {
              unset($post['password']);
         }
+        unset($post['salt']);
         return parent::setFromPost($post);
     }
     
