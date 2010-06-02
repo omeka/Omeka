@@ -33,7 +33,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
     
-    const INVALID_EMAIL_ERROR_MSG = 'A valid email address is required.';
+    const INVALID_EMAIL_ERROR_MSG = 'That email address is not valid.  A valid email address is required.';
     const CLAIMED_EMAIL_ERROR_MSG = 'That email address has already been claimed by a different user.  Please notify an administrator if you feel this has been done in error.';
         
     protected $_related = array('Entity'=>'getEntity');
@@ -109,6 +109,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         if (isset($post['password'])) {
              unset($post['password']);
         }
+        unset($post['salt']);
         return parent::setFromPost($post);
     }
     
