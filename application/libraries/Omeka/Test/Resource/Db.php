@@ -15,10 +15,10 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     const DEFAULT_USER_ID  = 1;
     
     public function init()
-    {        
-        $config = $this->_loadConfig();
+    {   
+        $this->getBootstrap()->bootstrap('Config');
         $this->setAdapter('Mysqli');
-        $this->setParams($config->db->toArray());
+        $this->setParams(Zend_Registry::get('test_config')->db->toArray());
         $omekaDb = $this->_getOmekaDb();
         $this->_dropTables($this->getDbAdapter());
         $this->install($omekaDb);
@@ -51,18 +51,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         $installer = new Installer($db, new Installer_Requirements);
         $installer->install($installInfo);        
     }
-    
-    private function _loadConfig()
-    {   
-        if (!Zend_Registry::isRegistered('test_config')) {
-            //Config dependency
-            $config = new Zend_Config_Ini(APP_DIR . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR.'config.ini', 'testing');
-            Zend_Registry::set('test_config', $config);
-        }
         
-        return Zend_Registry::get('test_config');
-    }
-    
     private function _getOmekaDb()
     {
         $omekaDb = new Omeka_Db($this->getDbAdapter(), 'omeka_');
