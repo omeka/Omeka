@@ -174,11 +174,11 @@ class Omeka_Db_Migration_Manager
         // In Ruby, you can do this:
         // files = Dir["#{@migrations_path}/[0-9]*_*.rb"]
         $dirIter = new VersionedDirectoryIterator($this->_migrationsDir, false);
-        $regexIter = new RegexIterator($dirIter, '/([0-9]*)_.*\.php/', RegexIterator::ALL_MATCHES);        
+        $regexIter = new RegexIterator($dirIter, '/^(\d*)_.*\.php$/', RegexIterator::ALL_MATCHES);        
         $fileList = array();
         foreach ($regexIter as $key => $match) {
             $fileList[$match[1][0]] = $match[0][0];
-        }        
+        }
         return $fileList;
     }
     
@@ -201,11 +201,11 @@ class Omeka_Db_Migration_Manager
      */
     private function _loadMigration($filename)
     {
-        $filePath = $this->_migrationsDir . DIRECTORY_SEPARATOR . $filename;
-        require_once $filePath;
 	    if (!preg_match('/^\d{14}_(\w+)\.php$/', $filename, $match)) {
 	        throw new Omeka_Db_Migration_Exception("Migration file '$filename' does not follow proper naming conventions.");
 	    }
+        $filePath = $this->_migrationsDir . DIRECTORY_SEPARATOR . $filename;
+        require_once $filePath;
 	    $class = $match[1];
 	    if (!class_exists($class)) {
 	        throw new Omeka_Db_Migration_Exception("Migration file '$filename' does not contain class '$class'.");
