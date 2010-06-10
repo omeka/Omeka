@@ -85,7 +85,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $this->_themeName = $themeName;
     }
     
-    public function getThemeName($themeName)
+    public function getThemeName()
     {
         return $this->_themeName;
     }
