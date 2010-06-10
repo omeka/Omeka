@@ -140,7 +140,7 @@ class ThemesController extends Omeka_Controller_Action
                     } else if ($element instanceof Zend_Form_Element_Hidden) {
                         $elementName = $element->getName();
                         // unset the values for the hidden fields associated with the file inputs
-                        if (strpos($elementName, self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX) == 0) { 
+                        if (strpos($elementName, Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX) == 0) { 
                             unset($formValues[$elementName]);
                         }
                    }
