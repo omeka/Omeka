@@ -141,13 +141,15 @@ class Theme
      */
     static public function getOption($themeName, $themeOptionName)
     {
+        $themeOptionValue = null;
         $themeName = trim($themeName);
         $themeOptionName = Inflector::underscore($themeOptionName);
         $themeConfigOptions = self::getOptions($themeName);
         if ($themeConfigOptions && array_key_exists($themeOptionName, $themeConfigOptions)) {        
-            return $themeConfigOptions[$themeOptionName];
+            $themeOptionValue = $themeConfigOptions[$themeOptionName];
         }
-        return null;
+        $themeOptionValue = apply_filters('theme_option', $themeOptionValue, $themeName, $themeOptionName);
+        return $themeOptionValue;
     }
     
     /** 
