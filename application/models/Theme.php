@@ -124,6 +124,7 @@ class Theme
     {
         $themeOptionName = self::getOptionName($themeName);
         $themeConfigOptions = get_option($themeOptionName);
+        $themeConfigOptions = apply_filters('theme_options', $themeConfigOptions, $themeName);
         if ($themeConfigOptions) {
             $themeConfigOptions = unserialize($themeConfigOptions);
         } else {
@@ -148,7 +149,6 @@ class Theme
         if ($themeConfigOptions && array_key_exists($themeOptionName, $themeConfigOptions)) {        
             $themeOptionValue = $themeConfigOptions[$themeOptionName];
         }
-        $themeOptionValue = apply_filters('theme_option', $themeOptionValue, $themeName, $themeOptionName);
         return $themeOptionValue;
     }
     

@@ -23,9 +23,7 @@ require_once 'Theme.php';
  * @copyright Center for History and New Media, 2007-2008
  **/
 class ThemesController extends Omeka_Controller_Action
-{   
-    const THEME_FILE_HIDDEN_FIELD_NAME_PREFIX = 'hidden_file_';
-         
+{        
     public function browseAction()
     {
         $themes = apply_filters('browse_themes', Theme::getAvailable());
@@ -75,7 +73,7 @@ class ThemesController extends Omeka_Controller_Action
         $theme = Theme::getAvailable($themeName);
         
         // get the configuration form        
-        $configForm = $this->_getThemeConfigurationForm($themeName);
+        $configForm = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName));
                 
         // process the form if posted
         if ($this->getRequest()->isPost()) {            
@@ -103,7 +101,7 @@ class ThemesController extends Omeka_Controller_Action
 
                     // If file input's related  hidden input has a non-empty value, 
                     // then the user has NOT changed the file, so do NOT upload the file.
-                    if ($hiddenFileElement = $configForm->getElement(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName)) { 
+                    if ($hiddenFileElement = $configForm->getElement(Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName)) { 
                         $hiddenFileElementValue = trim($_POST[$hiddenFileElement->getName()]); 
                         if ($hiddenFileElementValue != "") {                              
                             // Ignore the file input element
@@ -160,65 +158,5 @@ class ThemesController extends Omeka_Controller_Action
         }
         
         $this->view->assign(compact('theme','configForm'));
-    }
-    
-    private function _getThemeConfigurationForm($themeName)
-    {
-        $theme = Theme::getAvailable($themeName);
-        $themeConfigIni = $theme->path . DIRECTORY_SEPARATOR . 'config.ini';
-        $themeOptionName = Theme::getOptionName($themeName);
-        
-        if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
-        
-            // get the theme configuration form specification
-            $formElementsIni = new Zend_Config_Ini($themeConfigIni, 'config');
-            $configIni = new Zend_Config(array('elements' => $formElementsIni));
-        
-            // create an omeka form from the configuration file
-            $configForm = new Omeka_Form($configIni);
-            $configForm->setAction("");
-            $configForm->setAttrib('enctype', 'multipart/form-data');
-            
-            // add the 'Save Changes' submit button                      
-            $configForm->addElement(
-                'submit', 
-                'submit', 
-                array(
-                    'label' => 'Save Changes'
-                )
-            );
-            
-            // configure all of the form elements
-            $elements = $configForm->getElements();
-            $newElements = array();
-            foreach($elements as $element) {
-                if ($element instanceof Zend_Form_Element_File) {
-                    
-                    // set all the file elements destination directories
-                    $element->setDestination(THEME_UPLOADS_DIR);
-                    $fileName = get_theme_option($element->getName());                    
-                    
-                    // add a hidden field to store whether already exists
-                    $hiddenElement = new Zend_Form_Element_Hidden(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $element->getName());
-                    $hiddenElement->setValue($fileName);
-                    $hiddenElement->setDecorators(array('ViewHelper', 'Errors'));
-                    $newElements[] = $hiddenElement;
-                        
-                }
-                $newElements[] = $element;
-            }
-            $configForm->setElements($newElements);            
-
-            // set all of the form element values
-            $themeConfigValues = Theme::getOptions($themeName);
-            foreach($themeConfigValues as $key => $value) {
-                if ($configForm->getElement($key)) {
-                    $configForm->$key->setValue($value);
-                }
-            }
-            
-            return $configForm;
-        }
-        return null;
     }
 }
