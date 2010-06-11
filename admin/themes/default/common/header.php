@@ -17,15 +17,19 @@
 ?>
 
 <!-- JavaScripts -->
-<?php echo js('default'); ?>
-<?php echo js('globals'); ?>
-<?php echo js('archive'); ?>
-<?php echo js('livepipe'); ?>
-<?php echo js('tabs'); ?>
+<?php $this->headScript()->appendFile(web_path_to("javascripts/prototype.js"))
+                         ->appendFile(web_path_to("javascripts/prototype-extensions.js"))
+                         ->appendFile(web_path_to("javascripts/scriptaculous.js") . '?load=effects,dragdrop,controls')
+                         ->appendFile(web_path_to("javascripts/globals.js"))
+                         ->appendFile(web_path_to("javascripts/archive.js"))
+                         ->appendFile(web_path_to("javascripts/livepipe.js"))
+                         ->appendFile(web_path_to("javascripts/tabs.js"));
+?>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
 <?php echo $this->headLink(); ?>
+<?php echo $this->headScript(); ?>
 </head>
 <body class="<?php echo $bodyclass; ?>">
     <div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
