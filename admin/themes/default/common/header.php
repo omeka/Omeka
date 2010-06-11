@@ -8,16 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('screen')); ?>" />
-<link rel="stylesheet" media="print" href="<?php echo html_escape(css('print')); ?>" />
-
-<!--[if IE 7]>
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('ie7')); ?>" />
-<![endif]-->
-
-<!--[if lte IE 6]>
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('lte-ie6')); ?>" />
-<![endif]-->
+<?php $this->headLink()->appendStylesheet(css('reset'), 'screen', false)
+                       ->appendStylesheet(css('components'), 'screen', false)
+                       ->appendStylesheet(css('screen'), 'screen', false)
+                       ->appendStylesheet(css('print'), 'print', false)
+                       ->appendStylesheet(css('ie7'), 'screen', 'IE 7')
+                       ->appendStylesheet(css('lte-ie6'), 'screen', 'lte IE 6'); 
+?>
 
 <!-- JavaScripts -->
 <?php echo js('default'); ?>
@@ -28,7 +25,7 @@
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
-
+<?php echo $this->headLink(); ?>
 </head>
 <body class="<?php echo $bodyclass; ?>">
     <div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
