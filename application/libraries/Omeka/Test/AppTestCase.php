@@ -191,13 +191,18 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     **/
     protected function _initializeDefineResponseContextsFilter($pluginBroker)
     {        
-        $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');                
-        $contexts->clearContexts();
+        Zend_Controller_Action_HelperBroker::removeHelper('contextSwitch');
+                Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
+        $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
+                
         $contexts->setContextParam('output');
+                
         $contextArray = Omeka_Core_Resource_Helpers::getDefaultResponseContexts();
+
         if ($pluginBroker) {             
             $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
         }
+                        
         $contexts->addContexts($contextArray);
     }
 }
