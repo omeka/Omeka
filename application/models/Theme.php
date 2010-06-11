@@ -124,6 +124,7 @@ class Theme
     {
         $themeOptionName = self::getOptionName($themeName);
         $themeConfigOptions = get_option($themeOptionName);
+        $themeConfigOptions = apply_filters('theme_options', $themeConfigOptions, $themeName);
         if ($themeConfigOptions) {
             $themeConfigOptions = unserialize($themeConfigOptions);
         } else {
@@ -141,13 +142,14 @@ class Theme
      */
     static public function getOption($themeName, $themeOptionName)
     {
+        $themeOptionValue = null;
         $themeName = trim($themeName);
         $themeOptionName = Inflector::underscore($themeOptionName);
         $themeConfigOptions = self::getOptions($themeName);
         if ($themeConfigOptions && array_key_exists($themeOptionName, $themeConfigOptions)) {        
-            return $themeConfigOptions[$themeOptionName];
+            $themeOptionValue = $themeConfigOptions[$themeOptionName];
         }
-        return null;
+        return $themeOptionValue;
     }
     
     /** 
