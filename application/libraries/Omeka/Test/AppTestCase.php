@@ -196,7 +196,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
                 
         $contexts->setContextParam('output');
-                
         $contextArray = Omeka_Core_Resource_Helpers::getDefaultResponseContexts();
 
         if ($pluginBroker) {             
