@@ -7,7 +7,7 @@
  **/
 
 /**
- * 
+ * Base test case class for tests which need Omeka to be bootstrapped.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2009
@@ -192,7 +192,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     protected function _initializeDefineResponseContextsFilter($pluginBroker)
     {        
         Zend_Controller_Action_HelperBroker::removeHelper('contextSwitch');
-                Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
+        Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
                 
         $contexts->setContextParam('output');
