@@ -57,7 +57,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
 
                     // set all the file elements destination directories
                     $element->setDestination(THEME_UPLOADS_DIR);
-                    $fileName = get_theme_option($element->getName());                    
+                    $fileName = get_theme_option($element->getName(), $themeName);                    
 
                     // add a hidden field to store whether already exists
                     $hiddenElement = new Zend_Form_Element_Hidden(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $element->getName());
