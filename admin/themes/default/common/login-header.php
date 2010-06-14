@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('reset')); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('components')); ?>" />
 <link rel="stylesheet" media="screen" href="<?php echo html_escape(css('screen')); ?>" />
 <link rel="stylesheet" media="screen" href="<?php echo html_escape(css('login')); ?>" />
 
