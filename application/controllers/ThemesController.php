@@ -49,7 +49,7 @@ class ThemesController extends Omeka_Controller_Action
         set_option('public_theme', $themeName);
         
         if (!Theme::getOptions($themeName) 
-            && ($configForm = $this->_getThemeConfigurationForm($themeName))
+            && ($configForm = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName)))
         ) {
             $formValues = $configForm->getValues();
             unset($formValues['submit']);
