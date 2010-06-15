@@ -1,6 +1,9 @@
-<?php $this->headScript(web_path_to('javascripts/tooltip.js'));
-$this->headScript(web_path_to('javascripts/tiny_mce/tiny_mce.js'));
+<?php echo js('tooltip'); 
+echo js('tiny_mce/tiny_mce'); 
+// echo js('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
 ?>
+<?php // The following includes the Autocompleter class. ?>
+<?php echo js('scriptaculous', 'javascripts', array('controls'));  ?>
 
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
