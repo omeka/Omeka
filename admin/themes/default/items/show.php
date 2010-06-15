@@ -9,8 +9,6 @@
 ?>
 <?php head(array('title' => $itemTitle, 'bodyclass'=>'items show primary-secondary')); ?>
 
-<?php echo js('scriptaculous', 'javascripts', array('controls')); ?>
-
 <h1 id="item-title"><?php echo $itemTitle; ?> <span class="view-public-page">[ <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>">View Public Page</a> ]</span></h1>
 
 <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
