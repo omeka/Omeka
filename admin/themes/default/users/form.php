@@ -70,7 +70,7 @@
     </div>
 <?php endif; ?>
 
-<?php if ( has_permission('super') ): ?>
+<?php if ( has_permission('Users', 'changeActive') ): ?>
     <div class="field">
         <div class="label">Activity</div>
 <div class="inputs radio">
