@@ -2,6 +2,9 @@
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
     Event.observe(window, 'load', function(){
+        if (!$('path_to_convert')) {
+            return;
+        }
         var testButton = new Element('button', {'type': 'button', 'id': 'test-button'});
         var loaderGif = new Element('img', {'src': <?php echo js_escape(img("loader.gif")); ?>});
         var resultDiv = new Element('div', {'id': 'im-result'});
