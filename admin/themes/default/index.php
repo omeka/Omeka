@@ -51,7 +51,7 @@
                     </dd>
                 <?php endif; ?>
                 
-                <?php if(has_permission('super')): ?>
+                <?php if(has_permission('Settings', 'edit')): ?>
                     <dt class="site-settings"><a href="<?php echo html_escape(uri('settings')); ?>">Settings</a></dt>
                     <dd class="site-settings">
                         <ul>
