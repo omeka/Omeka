@@ -6,6 +6,8 @@
  * @package Omeka_Test
  **/
 
+require_once INSTALL_DIR . '/models/Installer.php';
+
 class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
     const SUPER_USERNAME = 'foobar123';
@@ -13,6 +15,11 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     const SUPER_EMAIL    = 'foobar@example.com';
     
     const DEFAULT_USER_ID  = 1;
+    
+    const DEFAULT_SITE_TITLE    = 'Automated Test Installation';
+    const DEFAULT_AUTHOR        = 'CHNM';
+    const DEFAULT_COPYRIGHT     = '2010';
+    const DEFAULT_DESCRIPTION   = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
     
     public function init()
     {   
@@ -32,22 +39,21 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     {
         $installInfo = array(
             'administrator_email'           => self::SUPER_EMAIL, 
-            'copyright'                     => '2010', 
-            'site_title'                    => 'Automated Test Installation', 
-            'author'                        => 'CHNM', 
-            'description'                   => 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES', 
-            'thumbnail_constraint'          => '200', 
-            'square_thumbnail_constraint'   => '200', 
-            'fullsize_constraint'           => '800', 
-            'per_page_admin'                => '10', 
-            'per_page_public'               => '10', 
-            'show_empty_elements'           => '1',
+            'copyright'                     => self::DEFAULT_COPYRIGHT, 
+            'site_title'                    => self::DEFAULT_SITE_TITLE, 
+            'author'                        => self::DEFAULT_AUTHOR, 
+            'description'                   => self::DEFAULT_DESCRIPTION, 
+            'thumbnail_constraint'          => Installer::DEFAULT_THUMBNAIL_CONSTRAINT, 
+            'square_thumbnail_constraint'   => Installer::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT, 
+            'fullsize_constraint'           => Installer::DEFAULT_FULLSIZE_CONSTRAINT, 
+            'per_page_admin'                => Installer::DEFAULT_PER_PAGE_ADMIN, 
+            'per_page_public'               => Installer::DEFAULT_PER_PAGE_PUBLIC, 
+            'show_empty_elements'           => Installer::DEFAULT_SHOW_EMPTY_ELEMENTS,
             'path_to_convert'               => '',
             'super_email'                   => self::SUPER_EMAIL,
             'username'                      => self::SUPER_USERNAME,
             'password'                      => self::SUPER_PASSWORD
         );
-        require_once INSTALL_DIR . '/models/Installer.php';
         $installer = new Installer($db, new Installer_Requirements);
         $installer->install($installInfo);        
     }

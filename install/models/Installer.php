@@ -21,6 +21,8 @@ class Installer
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
+    const DEFAULT_SHOW_EMPTY_ELEMENTS = '1';
+    
     
     private $_db;
     private $_form;
@@ -187,7 +189,8 @@ class Installer
             'label' => 'Show Empty Elements',
             'class' => 'checkbox',
             'description' => 'Whether metadata elements with no text will be displayed.',
-            'decorators' => $elementDecorators
+            'decorators' => $elementDecorators,
+            'value' => self::DEFAULT_SHOW_EMPTY_ELEMENTS
         ));
         
         $form->addElement('text', 'path_to_convert', array(
