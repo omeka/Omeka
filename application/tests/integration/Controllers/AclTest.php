@@ -91,4 +91,22 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
         $this->dispatch('upgrade/completed', true);
         $this->assertAccessForbidden();
     }
+    
+    public function testCannotConfigureTheme()
+    {
+        $this->dispatch('themes/config');
+        $this->assertAccessForbidden();
+    }
+    
+    public function testCannotBrowseThemes()
+    {
+        $this->dispatch('themes/browse');
+        $this->assertAccessForbidden();
+    }
+    
+    public function testCannotSwitchThemes()
+    {
+        $this->dispatch('themes/switch');
+        $this->assertAccessForbidden();
+    }
 }
