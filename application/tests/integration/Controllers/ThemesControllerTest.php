@@ -70,7 +70,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         $this->getRequest()->setMethod('POST');
         
         // dispatch the controller action
-        $this->dispatch('themes/config', true);
+        $this->dispatch('themes/config');
         
         foreach($themeOptions as $themeOptionName => $themeOptionValue) {
             $this->assertEquals($themeOptionValue, get_theme_option($themeOptionName, $themeName));
@@ -129,7 +129,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         $this->getRequest()->setMethod('POST');
         
         // dispatch the controller action
-        $this->dispatch('themes/config', true);
+        $this->dispatch('themes/config');
         
         foreach($themeOptions as $themeOptionName => $themeOptionValue) {
             $this->assertEquals($themeOptionValue, get_theme_option($themeOptionName, $themeName));

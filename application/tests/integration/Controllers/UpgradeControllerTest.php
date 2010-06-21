@@ -27,7 +27,7 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
         set_option('omeka_version', '1.0');
         $this->db->query("TRUNCATE omeka_schema_migrations");
         
-        $this->dispatch('/', true);
+        $this->dispatch('/');
         $this->assertRedirectTo('/upgrade');
     }
     
@@ -36,12 +36,12 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
         set_option('omeka_version', '1.0');
         $this->db->query("TRUNCATE omeka_schema_migrations");
         
-        $this->dispatch('/upgrade', true);
+        $this->dispatch('/upgrade');
         $this->assertNotRedirectTo('/users/login');
     }
     
     public function testCannotUpgradeWhenDatabaseIsUpToDate()
     {
-        $this->dispatch('/upgrade', true);
+        $this->dispatch('/upgrade');
     }
 }

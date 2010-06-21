@@ -51,6 +51,6 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
                           'password' => $password))
           ->setMethod('post');
          
-        $this->dispatch('users/login', true);
+        $this->dispatch('users/login');
     }
 }
