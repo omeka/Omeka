@@ -23,7 +23,7 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     
     public function testCanBrowseItems()
     {
-        $this->dispatch('items', true);
+        $this->dispatch('items');
         $this->assertController('items');
         $this->assertAction('browse');
     }
@@ -39,37 +39,37 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     
     public function testCannotBrowseElementSets()
     {
-        $this->dispatch('element-sets', true);
+        $this->dispatch('element-sets');
         $this->assertAccessForbidden();
     }
     
     public function testCannotAccessSettingsPage()
     {
-        $this->dispatch('settings', true);
+        $this->dispatch('settings');
         $this->assertAccessForbidden();
     }
     
     public function testCannotAddItems()
     {     
-        $this->dispatch('items/add', true);
+        $this->dispatch('items/add');
         $this->assertAccessForbidden();     
     }
     
     public function testCannotAddCollections()
     {
-        $this->dispatch('collections/add', true);
+        $this->dispatch('collections/add');
         $this->assertAccessForbidden();        
     }
     
     public function testCannotAddItemTypes()
     {
-        $this->dispatch('item-types/add', true);
+        $this->dispatch('item-types/add');
         $this->assertAccessForbidden();        
     }
     
     public function testCannotRemoveCollectorFromCollection()
     {
-        $this->dispatch('collections/remove-collector', true);
+        $this->dispatch('collections/remove-collector');
         $this->assertAccessForbidden();                
     }    
 }

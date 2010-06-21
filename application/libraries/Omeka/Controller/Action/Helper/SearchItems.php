@@ -49,7 +49,7 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         $requestParams = $request->getParams();
         try {            
             foreach($requestParams as $requestParamName => $requestParamValue) {
-                if (trim($requestParamValue) == '') {
+                if (is_string($requestParamValue) && trim($requestParamValue) == '') {
                     continue;
                 }
                 switch($requestParamName) {

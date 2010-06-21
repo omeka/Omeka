@@ -23,6 +23,8 @@ class Installer
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
+    const DEFAULT_SHOW_EMPTY_ELEMENTS = '1';
+    
     
     private $_db;
     private $_form;
