@@ -38,7 +38,7 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
     {
         add_plugin_hook('admin_append_to_users_form', array($this, 'appendExtraFormInput'));
 
-        $this->dispatch('/users/edit/1', true);
+        $this->dispatch('/users/edit/1');
         $this->assertNotRedirect();
         $this->assertContains("TEST HOOK CONTENT", $this->getResponse()->sendResponse());
         // var_dump($this->getResponse());exit;        

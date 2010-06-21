@@ -61,7 +61,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
-        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+        $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
         $this->assertEquals($cleanHtml, $collectionAfter->description);
@@ -80,7 +80,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
-        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+        $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
         $this->assertEquals($cleanHtml, $collectionAfter->description);
@@ -99,7 +99,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
-        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+        $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
         $this->assertEquals($cleanHtml, $collectionAfter->description);
@@ -118,7 +118,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
-        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+        $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
         $this->assertEquals($cleanHtml, $collectionAfter->description);
@@ -140,7 +140,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
-        $this->dispatch('/collections/edit/' . $this->collection->id, true);
+        $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
         $this->assertEquals($cleanHtml, $collectionAfter->description);
