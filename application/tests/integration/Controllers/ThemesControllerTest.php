@@ -23,6 +23,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         }
         parent::setUp();   
         set_option('enable_header_check_for_file_mime_types', '1');
+        $this->_authenticateUser($this->_getDefaultUser());
     }
         
     public function testConfigureSeasonsThemeWithNoLogoFileAndNoPreviousLogoFile()
