@@ -160,6 +160,15 @@ class UsersController extends Omeka_Controller_Action
     public function addAction()
     {
         $user = new User();
+        
+        $form = $this->_getUserForm();
+        $form->setSubmitButtonText('Add User');
+        $this->view->form = $form;
+        
+        if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
+            return;
+        }
+        
         try {
             if ($user->saveForm($_POST)) {                
                 $this->sendActivationEmail($user);
@@ -200,6 +209,25 @@ class UsersController extends Omeka_Controller_Action
             }
         }
         
+        $form = $this->_getUserForm($user);
+        $form->setSubmitButtonText('Save Changes');
+        $form->setDefaults(array(
+            'username' => $user->username,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'institution' => $user->institution,
+            'role' => $user->role,
+            'active' => $user->active
+        ));
+        
+        $this->view->form = $form;
+
+        $this->view->assign(array('user'=>$user));        
+        
+        if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
+            return;
+        }        
         try {
             if ($user->saveForm($_POST)) {
                 $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
@@ -215,8 +243,6 @@ class UsersController extends Omeka_Controller_Action
         } catch (Exception $e) {
             $this->flashError($e->getMessage());
         }
-        
-        $this->view->assign(array('user'=>$user));        
     }
     
     protected function _getDeleteSuccessMessage($record)
@@ -351,5 +377,16 @@ class UsersController extends Omeka_Controller_Action
         $_SESSION = array();
         Zend_Session::destroy();
         $this->redirect->gotoUrl('');
+    }
+    
+    private function _getUserForm(User $user)
+    {
+        $form = new Omeka_Form_User(array(
+            'hasRoleElement'    => $this->_helper->acl->isAllowed('changeRole'),
+            'hasActiveElement'  => $this->_helper->acl->isAllowed('changeStatus'),
+            'user'              => $user
+        ));
+        fire_plugin_hook('admin_append_to_users_form', $form, $user);
+        return $form;
     }
 }

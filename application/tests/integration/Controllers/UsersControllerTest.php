@@ -33,7 +33,8 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
                       'last_name'   => 'foobar',
                       'institution' => 'foobar',
                       'email'       => $this->email,
-                      'role'        => 'admin');
+                      'role'        => 'admin',
+                      'active'      => '1');
         $this->getRequest()->setPost($post);
         $this->getRequest()->setMethod('post');
         $this->dispatch('users/add');

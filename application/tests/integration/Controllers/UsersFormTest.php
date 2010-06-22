@@ -100,8 +100,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
         $this->assertNotRedirect("This should not have redirected since the form submission was invalid.");
-        // This error will be in a div in 1.x, 2.0 uses Zend_Form so it will be ul.errors.
-        $this->assertQueryContentContains('div.error', "email address is not valid",
+        $this->assertQueryContentContains('ul.errors', "email address is not valid",
             "Form should contain an error message indicating that the email address provided was invalid.");
     }
 
