@@ -19,6 +19,7 @@ class Omeka_Form_User extends Omeka_Form
     const ERROR_USERNAME_ALNUM = "Username must consist only of letters and numbers (alphanumeric).";
     const ERROR_USERNAME_TOO_SHORT = "Username must be more than %min% characters long.";
     const ERROR_USERNAME_TOO_LONG = "Username must be shorter than %max% characters.";
+    const ERROR_EMAIL_REQUIRED = "Email is required.";
     const ERROR_EMAIL_TAKEN = "This email address is already in use.  Please choose another.";
     const ERROR_EMAIL_NOT_MATCH = "Emails do not match.";
     const ERROR_EMAIL_INVALID = "This email address is not valid.  Please provide a valid email address.";
@@ -94,13 +95,29 @@ class Omeka_Form_User extends Omeka_Form
         $this->addElement('text', 'first_name', array(
             'label' => 'First Name',
             'size' => '30',
-            'required' => true
+            'required' => true,
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
+                    'messages' => array(
+                        Zend_Validate_NotEmpty::IS_EMPTY => self::ERROR_FIRST_NAME_REQUIRED,
+                        Zend_Validate_NotEmpty::INVALID => self::ERROR_FIRST_NAME_REQUIRED
+                    )
+                ))
+            )
         ));
         
         $this->addElement('text', 'last_name', array(
             'label' => 'Last Name',
             'size'  => '30',
-            'required' => true
+            'required' => true,
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
+                    'messages' => array(
+                        Zend_Validate_NotEmpty::IS_EMPTY => self::ERROR_LAST_NAME_REQUIRED,
+                        Zend_Validate_NotEmpty::INVALID => self::ERROR_LAST_NAME_REQUIRED
+                    )
+                ))
+            )
         ));
         
         $this->addElement('text', 'email', array(
@@ -108,6 +125,12 @@ class Omeka_Form_User extends Omeka_Form
             'size' => '30',
             'required' => true,
             'validators' => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
+                    'messages' => array(
+                        Zend_Validate_NotEmpty::IS_EMPTY => self::ERROR_EMAIL_REQUIRED,
+                        Zend_Validate_NotEmpty::INVALID => self::ERROR_EMAIL_REQUIRED
+                    )
+                )),
                 array('validator' => 'EmailAddress', 'options' => array(
                     'messages' => array(
                         Zend_Validate_EmailAddress::INVALID  => self::ERROR_EMAIL_INVALID,
