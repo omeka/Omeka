@@ -120,7 +120,7 @@ class Omeka_Form_User extends Omeka_Form
                     'field'     =>  'email',
                     'exclude'   =>  array(
                         'field' => 'email',
-                        'value' => $this->_user->email
+                        'value' => (string)$this->_user->email
                     ),
                     'adapter'   =>  $this->_user->getDb()->getAdapter(), 
                     'messages'  =>  array(

@@ -161,7 +161,7 @@ class UsersController extends Omeka_Controller_Action
     {
         $user = new User();
         
-        $form = $this->_getUserForm();
+        $form = $this->_getUserForm($user);
         $form->setSubmitButtonText('Add User');
         $this->view->form = $form;
         
