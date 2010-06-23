@@ -153,7 +153,7 @@ class User extends Omeka_Record {
             $this->addError('username', "The username must be alphanumeric.");
         }
         
-        if (!$this->usernameIsUnique($this->username)) {
+        if (!$this->fieldIsUnique('username')) {
             $this->addError('username', "'{$this->username}' is already in use.  Please choose another username.");
         }
         
@@ -189,32 +189,7 @@ class User extends Omeka_Record {
         // and it belongs to this one
         return (!count($id) or ((count($id) == 1) && ($id[0]['id'] == $this->id)));
     }
-    
-    private function usernameIsUnique($username)
-    {
-        $db = $this->getDb();
-        
-        $sql = "
-        SELECT u.id 
-        FROM $db->User u 
-        WHERE u.username = ? 
-        LIMIT 1";
-        
-        $id = $db->fetchOne($sql, array($username));
-        
-        if ($id) {
-            // There is an ID and it can't belong to this record
-            if (!$this->exists()) {
-                return false;
-            // There is an ID but it doesn't belong to this record
-            } else if ($this->exists() && ($this->id != $id)) {
-                return false;
-            }
-        }
-        
-        return true;
-    }
-        
+            
     /**
      * Upgrade the hashed password.  Does nothing if the user/password is 
      * incorrect, or if same has been upgraded already.
