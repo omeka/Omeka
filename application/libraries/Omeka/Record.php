@@ -593,17 +593,18 @@ class Omeka_Record implements ArrayAccess
      * @param mixed $value Optional If null, this will check the value of the
      * record's $field.  Otherwise check the uniqueness of this value for the
      * given field.
-     * @param mixed $exclude Optional See Zend_Validate_Db_NoRecordExists for
-     * an explanation of this argument.
      * @return bool
      **/
-    protected function fieldIsUnique($field, $value = null, $exclude = null)
+    protected function fieldIsUnique($field, $value = null)
     {
         return Zend_Validate::is($value ? $value : $this->$field,
             'Db_NoRecordExists',
              array('table'      => $this->getTable()->getTableName(),
                    'field'      => $field,
-                   'exclude'    => $exclude,
+                   'exclude'    => array(
+                       'field'  => $field,
+                       'value'  => $this->$field
+                   ),
                    'adapter'    => $this->getDb()->getAdapter()
         ));
     }
