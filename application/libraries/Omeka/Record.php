@@ -586,38 +586,26 @@ class Omeka_Record implements ArrayAccess
     }
     
     /**
-     * Adapted from Doctrine_Validator_Unique
-     *
-     * Check to see whether a value for a specific field is allowed
-     *
+     * Check uniqueness of one of the record's fields.
+     * 
+     * @uses Zend_Validate_Db_NoRecordExists
+     * @param string $field
+     * @param mixed $value Optional If null, this will check the value of the
+     * record's $field.  Otherwise check the uniqueness of this value for the
+     * given field.
+     * @param mixed $exclude Optional See Zend_Validate_Db_NoRecordExists for
+     * an explanation of this argument.
      * @return bool
      **/
-    protected function fieldIsUnique($field, $value = null)
+    protected function fieldIsUnique($field, $value = null, $exclude = null)
     {
-        $table = $this->getTable()->getTableName();
-        $pk = 'id';
-        
-        $sql = "SELECT $pk FROM $table WHERE $field = ?";
-        
-        $values = array();
-        
-        if (!$value) {
-            $value = $this->$field;
-        }
-        
-        $values[] = $value;
-        
-        // If the record is not new we need to add primary key checks because 
-        // its ok if the unique value already exists in the database IF the 
-        // record in the database is the same as the one that is validated here.
-        if ($this->exists()) {
-           $sql .= " AND {$pk} != ?";
-           $values[] = $this->$pk;
-        }
-        
-        $res = $this->getDb()->query($sql, $values);
-
-        return (!is_array($res->fetch()));
+        return Zend_Validate::is($value ? $value : $this->$field,
+            'Db_NoRecordExists',
+             array('table'      => $this->getTable()->getTableName(),
+                   'field'      => $field,
+                   'exclude'    => $exclude,
+                   'adapter'    => $this->getDb()->getAdapter()
+        ));
     }
     
     // Legacy methods (deprecate and remove these)
