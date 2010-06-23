@@ -105,8 +105,13 @@ class Collection extends Omeka_Record
 
     protected function _validate()
     {        
-        if (strlen($this->name) < self::COLLECTION_NAME_MIN_CHARACTERS || strlen($this->name) > self::COLLECTION_NAME_MAX_CHARACTERS) {
-            $this->addError('name', 'The collection name must have between ' . self::COLLECTION_NAME_MIN_CHARACTERS .  ' and ' . self::COLLECTION_NAME_MAX_CHARACTERS .  ' characters.');
+        if (!Zend_Validate::is($this->name, 'StringLength', array(
+                'min' => self::COLLECTION_NAME_MIN_CHARACTERS,
+                'max' => self::COLLECTION_NAME_MAX_CHARACTERS))
+        ) {
+            $this->addError('name', 'The collection name must have between ' 
+             . self::COLLECTION_NAME_MIN_CHARACTERS .  ' and ' 
+             . self::COLLECTION_NAME_MAX_CHARACTERS .  ' characters.');
         }
     }
     
