@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
@@ -14,16 +14,31 @@ require_once 'PublicFeatured.php';
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  **/
 class Collection extends Omeka_Record
 {        
     const COLLECTION_NAME_MIN_CHARACTERS = 1;
     const COLLECTION_NAME_MAX_CHARACTERS = 255;
     
+    /**
+     * @var string Name of the collection.
+     */
     public $name;
+    
+    /**
+     * @var string Description for the collection.
+     */
     public $description = '';
+    
+    /**
+     * @var boolean Whether or not the collection is publicly accessible.
+     */
     public $public = 0;
+    
+    /**
+     * @var boolean Whether or not the collection is featured.
+     */
     public $featured = 0;
     
     protected $_related = array('Collectors' => 'getCollectors');
@@ -31,6 +46,9 @@ class Collection extends Omeka_Record
     private $_oldCollectorsToAdd = array(); 
     private $_newCollectorsToAdd = array();
     
+    /**
+     * Declare the 'mixins' for Collection.
+     */
     protected function _initializeMixins()
     {
         $this->_mixins[] = new Relatable($this);
@@ -38,7 +56,7 @@ class Collection extends Omeka_Record
     }
     
     /**
-     * Returns whether or not the collection has collectors
+     * Determine whether or not the collection has collectors associated with it.
      * 
      * @return boolean
      **/
@@ -61,22 +79,34 @@ class Collection extends Omeka_Record
         return $count > 0;    
     }
     
+    /**
+     * Determine the total number of items associated with this collection.
+     * 
+     * @return integer
+     */
     public function totalItems()
     {
-        // This will query the ItemTable for a count of all items associated with 
-        // the collection
         return $this->getDb()->getTable('Item')->count(array('collection' => $this->id));
     }
     
+    /**
+     * Retrieve a list of all the collectors associated with this collection.
+     * 
+     * @return array List of Entity records.
+     */
     public function getCollectors()
     {
         return ($this->exists()) ? $this->getRelatedEntities('collector') : array();
     }
 
     /**
-     * @duplication Mostly duplicated in Item::filterInput()
+     * Filter the POST data from the form.
      *
-     * @return void
+     * Trims the 'name' and 'description' strings, strips tags from the 
+     * collection name, and converts public/featured flags to booleans.
+     * 
+     * @param array $post
+     * @return array
      **/
     protected function filterInput($post)
     {
@@ -102,7 +132,12 @@ class Collection extends Omeka_Record
         
         return $post;
     }
-
+    
+    /**
+     * Validate the record.
+     * 
+     * Checks the collection name to ensure that it is below 255 characters.
+     */
     protected function _validate()
     {        
         if (!Zend_Validate::is($this->name, 'StringLength', array(
@@ -116,10 +151,11 @@ class Collection extends Omeka_Record
     }
     
     /**
-     * Remove a collector's name from being associated with the collection.
+     * Remove the association between a given collector Entity and the 
+     * collection.
      * 
      * @param Entity|integer
-     * @return boolean Was successful or not.
+     * @return boolean Whether or not it was removed.
      **/
     public function removeCollector($collector)
     {
@@ -127,6 +163,9 @@ class Collection extends Omeka_Record
         return $result->rowCount() == 1;
     }
     
+    /**
+     * Use form POST data to associate a set of collectors with a collection.
+     */
     protected function afterSaveForm($post)
     {
         // Process the collectors that have been provided on the form
@@ -151,7 +190,7 @@ class Collection extends Omeka_Record
     }
     
     /**
-     * Adds a collector
+     * Add a collector Entity to the collection.
      * 
      * @param Entity|integer|array of entity properties $collector
      * 
@@ -225,7 +264,7 @@ class Collection extends Omeka_Record
     }
     
     /**
-     * Validates the added collectors, adding validation errors if required.
+     * Validate collector Entity records that are associated with the collection.
      * 
      * @return void
      **/
@@ -286,7 +325,8 @@ class Collection extends Omeka_Record
     }
     
     /**
-     * Deletes all of the new collectors to add
+     * Delete all of the collectors that have not yet been associated with this 
+     * collection.
      * 
      * @return void
      **/
