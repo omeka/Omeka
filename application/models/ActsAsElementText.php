@@ -13,6 +13,7 @@
  * corresponding behaviors to a record.
  *
  * @package Omeka
+ * @subpackage Mixins
  * @copyright Center for History and New Media, 2007-2010
  **/
 class ActsAsElementText extends Omeka_Record_Mixin

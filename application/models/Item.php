@@ -29,6 +29,7 @@ require_once 'PublicFeatured.php';
  * Represents an item and its metadata.
  *
  * @package Omeka
+ * @subpackage Models
  * @copyright Center for History and New Media, 2007-2010
  **/
 class Item extends Omeka_Record

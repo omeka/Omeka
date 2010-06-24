@@ -4,6 +4,7 @@
  * @copyright Center for History and New Media, 2007-2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Models
  **/
 
 /**
@@ -11,6 +12,7 @@
  * collections that are not public yet then modify the SQL query accordingly
  *
  * @package Omeka
+ * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2008
  **/
