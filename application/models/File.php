@@ -18,13 +18,6 @@ if (!function_exists('mime_content_type')) {
    }
 }
 
-require_once 'Item.php';
-require_once 'ActsAsElementText.php';
-require_once 'FileTable.php';
-require_once 'FilesImages.php';
-require_once 'FilesVideos.php';
-require_once 'MimeElementSetLookup.php';
-
 /**
  * Represents a file and its metadata.
  *

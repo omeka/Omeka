@@ -6,8 +6,6 @@
  * @package Omeka
  **/
 
-require_once 'RecordTypeTable.php';
-
 /**
  * RecordType
  *

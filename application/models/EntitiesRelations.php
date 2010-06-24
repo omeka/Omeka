@@ -7,11 +7,6 @@
  **/
 
 /**
- * Dependencies for EntitiesRelations.
- */
-require_once 'EntityRelationships.php';
-
-/**
  * @package Omeka
  * @subpackage Models
  * @author CHNM

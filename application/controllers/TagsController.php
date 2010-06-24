@@ -7,16 +7,6 @@
  **/
 
 /**
- * @see Tag.php
- */
-require_once 'Tag.php';
-
-/**
- * @see Omeka_Controller_Action
- **/
-require_once 'Omeka/Controller/Action.php';
-
-/**
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM

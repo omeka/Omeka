@@ -7,13 +7,6 @@
  */
 
 /**
- * Dependencies for Entity.
- */
-require_once 'EntitiesRelations.php';
-require_once 'User.php';
-require_once 'EntityTable.php';
-
-/**
  * @package Omeka
  * @subpackage Models
  * @author CHNM

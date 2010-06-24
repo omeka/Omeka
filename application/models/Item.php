@@ -9,23 +9,6 @@
  **/
 
 /**
- * Dependencies for Item.
- */
-require_once 'Collection.php';
-require_once 'ItemType.php';
-require_once 'User.php';
-require_once 'File.php';
-require_once 'Tag.php';
-require_once 'Taggable.php';
-require_once 'Taggings.php';
-require_once 'Element.php';
-require_once 'Relatable.php';
-require_once 'ItemTable.php';
-require_once 'ItemPermissions.php';    
-require_once 'ElementText.php';
-require_once 'PublicFeatured.php';
-
-/**
  * Represents an item and its metadata.
  *
  * @package Omeka

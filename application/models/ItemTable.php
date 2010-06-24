@@ -7,11 +7,6 @@
  **/
 
 /**
- * Dependencies.
- */
-require_once 'ItemSearch.php';
-
-/**
  * @package Omeka
  * @subpackage Models
  * @author CHNM

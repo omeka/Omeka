@@ -7,11 +7,6 @@
  **/
 
 /**
- * @see Omeka_Controller_Action
- **/
-require_once 'Omeka/Controller/Action.php';
-
-/**
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM

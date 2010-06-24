@@ -8,11 +8,6 @@
  **/
 
 /**
- * Dependencies for Collection model.
- */
-require_once 'CollectionTable.php';
-
-/**
  * @package Omeka
  * @subpackage Models
  * @author CHNM

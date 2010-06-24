@@ -7,11 +7,6 @@
  **/
 
 /**
- * @see Zend_Controller_Action
- */
-require_once 'Zend/Controller/Action.php';
-
-/**
  * Base class for Omeka CRUD Controllers.
  * 
  * @abstract

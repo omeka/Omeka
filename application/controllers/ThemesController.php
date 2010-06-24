@@ -9,12 +9,12 @@
 /**
  * @package Omeka_Controller_Action
  **/
-require_once 'Omeka/Controller/Action.php';
+
 
 /**
  * @see Theme.php
  */
-require_once 'Theme.php';
+
 
 /**
  * @package Omeka

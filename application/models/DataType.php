@@ -8,11 +8,6 @@
  **/
 
 /**
- * Dependencies for DataType.
- */
-require_once 'DataTypeTable.php';
-
-/**
  * DataType
  *
  * @subpackage Models

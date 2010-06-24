@@ -7,11 +7,6 @@
  **/
 
 /**
- * @see Omeka_Controller_Action
- **/
-require_once 'Omeka/Controller/Action.php';
-
-/**
  * The only thing this controller does is load the home page of the theme
  * at index.php within any given theme.
  *

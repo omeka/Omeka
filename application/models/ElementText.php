@@ -7,11 +7,6 @@
  **/
 
 /**
- * Dependencies for ElementText.
- */
-require_once 'ElementTextTable.php';
-
-/**
  * ElementText
  *
  * @package Omeka

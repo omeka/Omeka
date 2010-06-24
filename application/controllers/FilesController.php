@@ -7,13 +7,6 @@
  **/
 
 /**
- * @see File.php
- **/
-require_once 'File.php';
-
-require_once 'Omeka/Controller/Action.php';
-
-/**
  * All URLs for files are routed through this controller.
  *
  * @package Omeka

@@ -5,14 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
-
-/**
- * Dependencies for Element.
- */
-require_once 'ElementTable.php';
-require_once 'RecordType.php';
-require_once 'DataType.php';
-require_once 'ElementSet.php';
  
 /**
  * @package Omeka

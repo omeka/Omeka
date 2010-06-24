@@ -8,11 +8,11 @@
  * @author CHNM
  **/
 
-require_once 'UsersActivations.php';
-require_once 'UserTable.php';
-require_once 'Entity.php';
-require_once 'Item.php';
-
+/**
+ * @package Omeka
+ * @subpackage Models
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class User extends Omeka_Record {
 
     public $username;

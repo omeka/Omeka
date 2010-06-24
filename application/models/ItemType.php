@@ -6,10 +6,6 @@
  * @package Omeka
  **/
 
-require_once 'ItemTypeTable.php';
-require_once 'Orderable.php';
-require_once 'ItemTypesElements.php';
-
 /**
  * @package Omeka
  * @subpackage Models

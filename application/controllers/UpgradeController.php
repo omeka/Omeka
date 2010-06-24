@@ -5,11 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
-
-/**
- * @see Omeka_Controller_Action
- */
-require_once 'Omeka/Controller/Action.php';
  
 /**
  * @package Omeka

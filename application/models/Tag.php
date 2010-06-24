@@ -6,9 +6,6 @@
  * @package Omeka
  **/
 
-require_once 'Item.php';
-require_once 'TagTable.php';
-
 /**
  * @package Omeka
  * @subpackage Models

@@ -5,11 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
- 
-/**
- * @see Zend_View_Abstract
- */
-require_once 'Zend/View/Abstract.php';
 
 /**
  * Customized subclass of Zend Framework's View class.

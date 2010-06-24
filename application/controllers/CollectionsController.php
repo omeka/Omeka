@@ -7,13 +7,6 @@
  **/
 
 /**
- * @see Collection.php
- */ 
-require_once 'Collection.php';
-
-require_once 'Omeka/Controller/Action.php';
-
-/**
  * CRUD controller for Collections
  *
  * @package Omeka
