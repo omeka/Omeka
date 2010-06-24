@@ -1,3 +1,8 @@
+<?php 
+$pathToConvert = get_option('path_to_convert');
+if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
+    <div class="error">The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.</div>
+<?php endif; ?>
 <?php if ( item_has_files() ): ?>
     <h3>Current Files</h3>
     <div id="file-list">
