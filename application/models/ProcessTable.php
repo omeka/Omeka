@@ -6,6 +6,11 @@
  * @subpackage Models
  * @author CHNM
  **/
+ 
+/**
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class ProcessTable extends Omeka_Db_Table
 {
     protected $_target = 'Process';

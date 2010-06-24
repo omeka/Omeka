@@ -6,8 +6,18 @@
  * @package Omeka_Test
  **/
 
+/**
+ * Depends on the Installer model.
+ */
 require_once INSTALL_DIR . '/models/Installer.php';
 
+/**
+ * Set up the database test environment by wiping and resetting the database to
+ * a recently-installed state.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
     const SUPER_USERNAME = 'foobar123';

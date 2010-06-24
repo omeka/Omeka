@@ -1,5 +1,12 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
  * Core class used to bootstrap the Omeka environment.
  * 
  * Various duties include, but are not limited to, sanitizing magic_quotes,
@@ -15,9 +22,8 @@
  * @package Omeka
  * @author CHNM
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @copyright Center for History and New Media, 2007-2009
+ * @copyright Center for History and New Media, 2007-2010
  **/
-
 class Omeka_Core extends Zend_Application
 {
     /**

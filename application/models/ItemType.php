@@ -94,8 +94,8 @@ class ItemType extends Omeka_Record
     }
     
     /**
-     * @duplication Mostly duplicated in Item::filterInput()
-     *
+     * Filter incoming POST data from ItemType form.
+     * 
      * @return void
      **/
      protected function filterInput($post)

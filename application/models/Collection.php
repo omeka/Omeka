@@ -6,9 +6,10 @@
  * @package Omeka
  **/
 
-require_once 'CollectionPermissions.php';
+/**
+ * Dependencies for Collection model.
+ */
 require_once 'CollectionTable.php';
-require_once 'PublicFeatured.php';
 
 /**
  * @package Omeka

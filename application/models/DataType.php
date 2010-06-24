@@ -6,6 +6,9 @@
  * @package Omeka
  **/
 
+/**
+ * Dependencies for DataType.
+ */
 require_once 'DataTypeTable.php';
 
 /**

@@ -11,6 +11,9 @@
 // Require the necessary files.
 $baseDir = dirname(__FILE__);
 
+/**
+ * Paths.php is required at minimum in order to define all path constants.
+ */
 require_once("{$baseDir}/../../paths.php");
 require_once("{$baseDir}/../libraries/Omeka/Core.php");
 

@@ -8,7 +8,9 @@
  * @package Omeka
  **/
 
-// Define the current version.
+/**
+ * Define the current version of Omeka.
+ */ 
 define('OMEKA_VERSION', '1.2');
 
 // The name of the Item Type Metadata element set. This is used wherever it is 

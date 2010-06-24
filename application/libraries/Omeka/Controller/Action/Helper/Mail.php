@@ -77,7 +77,7 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
     /**
      * Send the email.
      * 
-     * @interal Delegates to Zend_Mail::send().  Is only necessary for additional
+     * @internal Delegates to Zend_Mail::send().  Is only necessary for additional
      * processing of the subject line prior to sending.
      * @param Zend_Mail_Transport_Abstract $transport Optional defaults to null.
      * @see Zend_Mail::send()

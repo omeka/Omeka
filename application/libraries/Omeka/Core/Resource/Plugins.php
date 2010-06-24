@@ -1,4 +1,10 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 /**
  * Fire the 'initialize' hook for all plugins.  Note that
@@ -16,6 +22,5 @@ class Omeka_Core_Resource_Plugins extends Zend_Application_Resource_ResourceAbst
         $broker = $bootstrap->getResource('PluginBroker');
         // Fire all the 'initialize' hooks for the plugins
         $broker->initialize();
-        
     }
 }

@@ -6,6 +6,9 @@
  * @package Omeka
  **/
 
+/**
+ * Dependencies for ElementSet.
+ */
 require_once 'ElementSetTable.php';
  
 /**

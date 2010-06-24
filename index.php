@@ -8,7 +8,9 @@
  * @package Omeka
  **/
  
-// Define the directory and web paths.
+/**
+ * Define the directory and web paths.
+ */ 
 require_once 'paths.php';
 
 // Define the public theme directory path.

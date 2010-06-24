@@ -6,6 +6,9 @@
  * @package Omeka
  **/
 
+/**
+ * Dependencies for Element.
+ */
 require_once 'ElementTable.php';
 require_once 'RecordType.php';
 require_once 'DataType.php';
@@ -177,7 +180,7 @@ class Element extends Omeka_Record
      *  <li>Has a data type.</li>
      *  <li>Has a record type.</li>
      *  <li>Name does not already exist within the given element set.</li>
-     * </li>
+     * </ul>
      * @return void
      */
     protected function _validate()

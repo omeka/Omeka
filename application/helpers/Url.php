@@ -7,6 +7,10 @@
  * @subpackage Omeka_View_Helper
  **/
 
+/**
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class Omeka_View_Helper_Url extends Zend_View_Helper_Url
 {
     /**

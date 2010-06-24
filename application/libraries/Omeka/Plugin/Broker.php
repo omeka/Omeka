@@ -13,6 +13,9 @@
  * For example, $broker->add_action_contexts($controller) would call the 
  * 'add_action_contexts' on all plugins, and it would provide the controller
  * object as the first argument to all implementations of that hook. 
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
  **/
 class Omeka_Plugin_Broker 
 {        

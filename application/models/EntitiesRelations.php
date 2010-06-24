@@ -6,6 +6,9 @@
  * @package Omeka
  **/
 
+/**
+ * Dependencies for EntitiesRelations.
+ */
 require_once 'EntityRelationships.php';
 
 /**

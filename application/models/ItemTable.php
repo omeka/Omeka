@@ -6,6 +6,9 @@
  * @package Omeka
  **/
 
+/**
+ * Dependencies.
+ */
 require_once 'ItemSearch.php';
 
 /**

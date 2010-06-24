@@ -8,6 +8,9 @@
  * @author CHNM
  **/
 
+/**
+ * Dependencies for Item.
+ */
 require_once 'Collection.php';
 require_once 'ItemType.php';
 require_once 'User.php';
@@ -22,6 +25,12 @@ require_once 'ItemPermissions.php';
 require_once 'ElementText.php';
 require_once 'PublicFeatured.php';
 
+/**
+ * Represents an item and its metadata.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class Item extends Omeka_Record
 {        
     public $item_type_id;
