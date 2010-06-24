@@ -10,7 +10,7 @@
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  **/
 class ElementSetsController extends Omeka_Controller_Action
 {
