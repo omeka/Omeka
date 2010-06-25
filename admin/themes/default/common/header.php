@@ -24,7 +24,6 @@
 <!-- JavaScripts -->
 <?php echo js('default'); ?>
 <?php echo js('globals'); ?>
-<?php echo js('archive'); ?>
 <?php echo js('livepipe'); ?>
 <?php echo js('tabs'); ?>
 

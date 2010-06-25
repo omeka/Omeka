@@ -78,6 +78,13 @@ function confirmDelete() {
     });
 }
 
+function cancelChanges() {
+    if(!$('cancel_changes')) return;
+    $('cancel_changes').onclick = function() {
+        return confirm( 'Are you sure you want to cancel your changes? Anything you added will not be saved!' );
+    };
+}
+
 Omeka.Form = Object.extend({}, {
     /* Loop through all the spans with class="tooltip" and make them visible 
     as tooltips */
@@ -104,4 +111,4 @@ Omeka.Form = Object.extend({}, {
 
 Event.observe(window,'load',Omeka.alertBox);
 Event.observe(window,'load',confirmDelete);
-
+Event.observe(window,'load',cancelChanges);

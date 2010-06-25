@@ -1,23 +1,5 @@
 <?php echo flash(); ?>
-<script type="text/javascript" charset="utf-8">
-    /**
-     * Clicking the [X] next to a collector's name removes it with AJAX
-     **/
-    Event.observe(window, 'load', function(){
-         $$('a.remove-collector').invoke('observe', 'click', function(e){
-            e.stop();
-            var removeLink = this;
-            new Ajax.Request(removeLink.href, {
-               parameters: "output=json",
-               onComplete: function(t) {
-                   if(t.responseJSON['result'] == true) {
-                       removeLink.up().destroy();
-                   }
-               } 
-            });
-        }); 
-    });
-</script>
+<?php echo js('collections'); ?>
 
 <fieldset id="editcollection">
     <h2>Collection Details <span id="required-note">* Required Fields</span></h2>

@@ -8,15 +8,7 @@
     $fileTitle = 'Edit File #' . item_file('id') . $fileTitle;
 ?>
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
-<script type="text/javascript" charset="utf-8">
-    Event.observe(window, 'load', function(){
-        // Get rid of the add/remove buttons and 'Use HTML' checkbox.
-        // This may be added back in future releases.
-        
-        var buttons = $$('input.add-element, input.remove-element, label.use-html');
-        buttons.invoke('remove');
-    });
-</script>
+<?php echo js('files'); ?>
 
 <h1><?php echo $fileTitle; ?></h1>
 
