@@ -355,7 +355,7 @@ function is_admin_theme()
 /**
  * Insert a new item into the Omeka database.
  *
- * * @param array $itemMetadata Optional Set of metadata options for configuring the
+ * @param array $metadata Optional Set of metadata options for configuring the
  *  item.  Array which can include the following properties:
  *  <ul>
  *      <li>'public' (boolean)</li>
@@ -376,28 +376,28 @@ function is_admin_theme()
  *  This follows the format: 
  * <code>
  * array(
-  *     [element set name] => array(
-  *         [element name] => array(
-  *             array('text' => [string], 'html' => [false|true]), 
-  *             array('text' => [string], 'html' => [false|true])
-  *         ), 
-  *         [element name] => array(
-  *             array('text' => [string], 'html' => [false|true]), 
-  *             array('text' => [string], 'html' => [false|true])
-  *         )
-  *     ), 
-  *     [element set name] => array(
-  *         [element name] => array(
-  *             array('text' => [string], 'html' => [false|true]), 
-  *             array('text' => [string], 'html' => [false|true])
-  *         ), 
-  *         [element name] => array(
-  *             array('text' => [string], 'html' => [false|true]), 
-  *             array('text' => [string], 'html' => [false|true])
-  *         )
-  *     )
-  * );
-  * </code>
+ *     [element set name] => array(
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         ), 
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         )
+ *     ), 
+ *     [element set name] => array(
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         ), 
+ *         [element name] => array(
+ *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true])
+ *         )
+ *     )
+ * );
+ * </code>
  *  See ActsAsElementText::addElementTextsByArray() for more info.
  * 
  * @param array $fileMetadata Optional Set of metadata options that allow one or more

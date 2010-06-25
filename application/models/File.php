@@ -1,26 +1,29 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2009
+ * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  **/
 
+/**
+ * Defines mime_content_type() if it is not available in the current 
+ * installation environment.
+ */
 if (!function_exists('mime_content_type')) {
    function mime_content_type($f) {
        return trim(exec('file -bi ' . escapeshellarg ($f))) ;
    }
 }
 
-require_once 'Item.php';
-require_once 'ActsAsElementText.php';
-require_once 'FileTable.php';
-require_once 'FilesImages.php';
-require_once 'FilesVideos.php';
-require_once 'MimeElementSetLookup.php';
-
+/**
+ * Represents a file and its metadata.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class File extends Omeka_Record 
 { 
 
@@ -256,9 +259,8 @@ class File extends Omeka_Record
     }
     
     /**
-     * undocumented function
+     * Extract metadata associated with the file.
      * 
-     * @param 
      * @return boolean
      **/
     public function extractMetadata()

@@ -1,26 +1,16 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
- 
-/**
- * @see Omeka_Controller_Action
- **/
-require_once 'Omeka/Controller/Action.php';
-
-/**
- * @see User.php
- */ 
-require_once 'User.php';
 
 /**
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  **/
 class UsersController extends Omeka_Controller_Action
 {

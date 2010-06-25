@@ -1,4 +1,17 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+ 
+/**
+ * Sets the Content-Type header for all JSON-P requests.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class Omeka_Controller_Plugin_Jsonp extends Zend_Controller_Plugin_Abstract
 {
     const CALLBACK_KEY = 'callback';

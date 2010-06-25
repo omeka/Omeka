@@ -1,17 +1,10 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
-
-/**
- * @see Collection.php
- */ 
-require_once 'Collection.php';
-
-require_once 'Omeka/Controller/Action.php';
 
 /**
  * CRUD controller for Collections
@@ -19,7 +12,7 @@ require_once 'Omeka/Controller/Action.php';
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  **/
 class CollectionsController extends Omeka_Controller_Action
 {

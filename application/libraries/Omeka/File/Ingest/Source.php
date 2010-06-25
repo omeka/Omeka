@@ -1,5 +1,12 @@
 <?php
 /**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
  * This abstract class encapsulates all the behavior that facilitates file 
  * ingest based on the assumption that each file can be retrieved via a
  * string containing both the name and location of that file.  

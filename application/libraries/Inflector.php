@@ -1,4 +1,12 @@
 <?php
+/**
+ * @author Bermi Ferrer Martinez <bermi akelos com>
+ * @copyright Copyright (c) 2002-2006, Akelos Media, S.L. http://www.akelos.org
+ * @license GNU Lesser General Public License <http://www.gnu.org/copyleft/lesser.html>
+ * @since 0.1
+ * @version $Revision 0.1 $
+ * @package Akelos
+ **/
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 

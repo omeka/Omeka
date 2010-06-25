@@ -1,27 +1,20 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  **/
 
-require_once 'Collection.php';
-require_once 'ItemType.php';
-require_once 'User.php';
-require_once 'File.php';
-require_once 'Tag.php';
-require_once 'Taggable.php';
-require_once 'Taggings.php';
-require_once 'Element.php';
-require_once 'Relatable.php';
-require_once 'ItemTable.php';
-require_once 'ItemPermissions.php';    
-require_once 'ElementText.php';
-require_once 'PublicFeatured.php';
-
+/**
+ * Represents an item and its metadata.
+ *
+ * @package Omeka
+ * @subpackage Models
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class Item extends Omeka_Record
 {        
     public $item_type_id;

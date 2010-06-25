@@ -1,4 +1,17 @@
 <?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
+
+/**
+ * Abstract base class for creating omeka-xml output formats.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
 {
     const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';

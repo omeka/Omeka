@@ -4,6 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @subpackage Forms
  **/
 
 /**
@@ -12,6 +13,7 @@
  * Contains only an 'email' input and a submit button.
  *
  * @package Omeka
+ * @subpackage Forms
  * @copyright Center for History and New Media, 2007-2010
  **/
 class Omeka_Form_RecoverPassword extends Omeka_Form

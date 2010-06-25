@@ -1,8 +1,17 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 /**
-* 
-*/
+ * Set up the default database connection for Omeka.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/
 class Omeka_Core_Resource_Db extends Zend_Application_Resource_Db
 {
     private $_iniPath;

@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
@@ -10,7 +10,7 @@
  * @package Omeka
  * @subpackage Mixins
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
+ * @copyright Center for History and New Media, 2007-2010
  **/
 class Relatable extends Omeka_Record_Mixin
 {
@@ -85,8 +85,11 @@ class Relatable extends Omeka_Record_Mixin
     
     /**
      * Get the last date the item was modified, etc.
-     * @example getLastRelationship('modified') returns the date of the last modification
-     * @return void
+     * 
+     * For instance, <code>$record->getLastRelationship('modified');</code>
+     * would return the date of the last modification.
+     * 
+     * @return string|null
      **/
     public function timeOfLastRelationship($rel)
     {
@@ -109,7 +112,12 @@ class Relatable extends Omeka_Record_Mixin
     }
     
     /**
-     * @example $item->getRelatedEntities('collector')
+     * Retrieve Entity records that have the given relationship with the 
+     * current Entity.
+     * 
+     * For example, <code>$item->getRelatedEntities('modified');</code>
+     * would return an array of Entity records corresponding to entities that
+     * had modified the item.
      *
      * @return array
      **/
@@ -129,12 +137,13 @@ class Relatable extends Omeka_Record_Mixin
     }
     
     /**
-     * Adds an relation between the relatable and the entity
+     * Adds an relation between the relatable and the entity.
+     * 
+     * For example, <code>$item->addRelatedTo($user, 'added');</code>.
+     * 
      * @param Entity|int $entity
      * @param string $relationship
-     * @example $item->addRelatedTo($user, 'added')
-     *
-     * @return void
+     * @return boolean
      **/
     public function addRelatedTo($entity, $relationship )
     {        
