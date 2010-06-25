@@ -37,3 +37,10 @@ set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
 // Class loader (copied from Omeka_Core::initializeClassLoader()).
 require_once 'Omeka.php';
 spl_autoload_register(array('Omeka', 'autoload'));
+
+// THEME_DIR is the only constant defined by the bootstrap(s).
+// Redefine it here in order to prevent test errors that stem from not defining
+// this constant.
+// Warning: tests for code that uses THEME_DIR will only use the admin theme dir,
+// not the public one.  This could potentially cause subtle breakage in tests.
+define('THEME_DIR', join(DIRECTORY_SEPARATOR, array(BASE_DIR, 'admin', 'themes')));
