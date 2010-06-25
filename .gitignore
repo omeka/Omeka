@@ -1,0 +1,29 @@
+# Root .htaccess should not be tracked.  Other htaccess files should be though.
+/.htaccess
+
+# Config files
+/db.ini
+/application/config/config.ini
+/application/tests/config.ini
+
+# Log files
+/application/logs/errors.log
+/application/logs/processes.log
+
+# IMPORTANT: Ignore Zend/ when git cloning from SVN.  After full transition to 
+Git, Zend/ will be included in source so REMOVE THIS LINE.
+/application/libraries/Zend/
+
+# Plugins and themes
+/plugins/
+/themes/
+
+# Archive
+/archive/files/*
+/archive/fullsize/*
+/archive/square_thumbnails/*
+/archive/theme_uploads/*
+/archive/thumbnails/*
+
+# For macs
+.DS_Store
