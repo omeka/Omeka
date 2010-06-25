@@ -11,6 +11,7 @@
  * @subpackage Mixins
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
+ * @deprecated
  **/
 class Relatable extends Omeka_Record_Mixin
 {

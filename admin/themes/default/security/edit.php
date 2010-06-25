@@ -1,43 +1,9 @@
 <?php head(array('title'=>'Edit Security Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+<?php echo js('security'); ?>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 Event.observe(window, 'load', function(){
-    var loaderGif = new Element('img', {'src': <?php echo js_escape(img("loader.gif")); ?>});
-     
-    var buildRestoreButton = function(whitelistInput, ajaxUri, buttonText) {
-        // Insert a button after any given element.
-        var buttonAfter = function(element, text) {
-            button = new Element('button', {'type': 'button'});
-            button.update(text);
-            element.insert({'after': button});
-            return button;
-        }
-        
-        // Make an AJAX request to restore the form input value.                
-        var restore = function(clickedButton, useDefault) {
-            clickedButton.insert({'after': loaderGif});
-            new Ajax.Request(ajaxUri, {
-                method: 'get',
-                parameters: (useDefault ? 'default=true' : ''),
-                onComplete: function(t) {
-                    loaderGif.hide();
-                    whitelistInput.update(t.responseText);
-                }
-            });
-        }
-        var restoreButton = buttonAfter(whitelistInput, buttonText);
-        restoreButton.observe('click', function(e){
-            restore(restoreButton, true);
-            // "undo" file extension whitelist button
-            if (!restoreButton.next('button')) {
-                var undoButton = buttonAfter(restoreButton, 'Undo');
-                undoButton.observe('click', function(e){
-                    restore(undoButton, false);
-                    undoButton.remove();
-                });
-            }
-        });
-    }
+    // var loaderGif = new Element('img', {'src': <?php echo js_escape(img("loader.gif")); ?>});
     
     buildRestoreButton($('file_extension_whitelist'), 
                          <?php echo js_escape(uri(array('controller'=>'security','action'=>'get-file-extension-whitelist'))); ?>,

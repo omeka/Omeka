@@ -1,13 +1,5 @@
 <?php head(array('bodyclass'=>'login'), 'login-header'); ?>
-
-<script type="text/javascript" charset="utf-8">
-    Event.observe(window,'load',function() {
-        if ($('username')) {
-            $('username').focus();
-        }
-    }); 
-</script>
-
+<?php echo js('login'); ?>
 <h1>Log In</h1>
 <p id="login-links">
 <span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', 'Lost your password?'); ?></span>

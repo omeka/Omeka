@@ -21,7 +21,6 @@
                          ->appendFile(web_path_to("javascripts/prototype-extensions.js"))
                          ->appendFile(web_path_to("javascripts/scriptaculous.js") . '?load=effects,dragdrop,controls')
                          ->appendFile(web_path_to("javascripts/globals.js"))
-                         ->appendFile(web_path_to("javascripts/archive.js"))
                          ->appendFile(web_path_to("javascripts/livepipe.js"))
                          ->appendFile(web_path_to("javascripts/tabs.js"))
                          ->appendFile(web_path_to("javascripts/search.js"));

@@ -1,10 +1,5 @@
 <?php head(array('title'=>'Add Item','content_class' => 'vertical-nav', 'bodyclass'=>'items primary'));?>
-
-<script type="text/javascript" charset="utf-8">
-    document.observe('dom:loaded',function() {
-         new Control.Tabs('section-nav');  
-    });
-</script>
+<?php echo js('items'); ?>
 
 <h1>Add an Item</h1>
 <?php include('form-tabs.php'); ?>
