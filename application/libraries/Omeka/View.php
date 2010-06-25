@@ -83,23 +83,8 @@ class Omeka_View extends Zend_View_Abstract
                 
         require_once HELPERS;
         
-        try {
-            extract($vars);    
-            include func_get_arg(0);
-        } catch (Exception $e) {
-            
-            // Exceptions should not be uncaught at this stage of execution. 
-            // This is b/c the only PHP executed beyond this point are theme 
-            // functions.
-            echo 'Error:' . $e->getMessage();
-            
-            if ($config = Omeka_Context::getInstance()->getConfig('basic')) {
-                //Display a lot of info if exceptions are turned on
-                if ($config->debug->exceptions) {    
-                    echo nl2br( $e->getTraceAsString() );
-                }                
-            }
-        }
+        extract($vars);    
+        include func_get_arg(0);
     }
     
     /**
