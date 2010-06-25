@@ -16,7 +16,7 @@
  * @package Omeka
  * @author CHNM
  **/
-class Omeka_Record implements ArrayAccess
+abstract class Omeka_Record implements ArrayAccess
 {
     /**
      * @var integer Unique ID for the record.  All implementations of Omeka_Record
