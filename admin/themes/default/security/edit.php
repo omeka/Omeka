@@ -36,7 +36,7 @@ Event.observe(window, 'load', function(){
             <label for="file_extension_whitelist">Allowed File Extensions</label>
             <div class="inputs">
             <?php echo $this->formTextarea('file_extension_whitelist', 
-                    get_option('file_extension_whitelist'), 
+                    get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION), 
                     array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
             <p class="explanation">List of allowed extensions for file uploads.</p> 
             </div>

@@ -24,7 +24,7 @@ class SecurityController extends Omeka_Controller_Action
     
     public function editAction() {
         //Any changes to this list should be reflected in the install script (and possibly the view functions)        
-        $options = array('file_extension_whitelist',
+        $options = array(Omeka_Validate_File_Extension::WHITELIST_OPTION,
                          'file_mime_type_whitelist',
                          'disable_default_file_validation',
                          'enable_header_check_for_file_mime_types');
@@ -46,7 +46,7 @@ class SecurityController extends Omeka_Controller_Action
         if ($this->_getParam('default')) {
             $body = Omeka_Validate_File_Extension::DEFAULT_WHITELIST;
         } else {
-            $body = get_option('file_extension_whitelist');
+            $body = get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION);
         }
         $this->getResponse()->setBody($body);
     }

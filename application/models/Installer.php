@@ -142,7 +142,7 @@ class Installer
         $otherOptions = array(
             Theme::ADMIN_THEME_OPTION => self::DEFAULT_ADMIN_THEME,
             Theme::PUBLIC_THEME_OPTION => self::DEFAULT_PUBLIC_THEME,
-            'file_extension_whitelist' => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
+            Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
             'file_mime_type_whitelist' => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
             'disable_default_file_validation' => 0,
             'enable_header_check_for_file_mime_types' => (string)!extension_loaded('fileinfo')
