@@ -232,4 +232,26 @@ class Omeka_File_Derivative_Image
 		        && getimagesize($old_path) 
 		        && !(in_array($mimeType, $blackListMimeTypes)));
 	}
+	
+	/**
+	 * Retrieve the path to the directory containing ImageMagick's convert utility.
+	 * 
+	 * Uses the 'which' command-line utility to detect the path to 'convert'. 
+	 * Note that this will only work if the convert utility is in PHP's PATH and
+	 * thus can be located by 'which'.
+	 * 
+	 * @return string The path to the directo
+	 */
+	public static function getDefaultConvertDir()
+    {
+        // Use the "which" command to auto-detect the path to ImageMagick;
+        // redirect std error to where std input goes, which is nowhere. See: 
+        // http://www.unix.org.ua/orelly/unix/upt/ch45_21.htm. If $returnVar is "0" 
+        // there was no error, so assign the output of the "which" command. See: 
+        // http://us.php.net/manual/en/function.system.php#66795.
+        $command = 'which convert 2>&0';
+        $lastLineOutput = exec($command, $output, $returnVar);
+        // Return only the directory component of the path returned.
+        return $returnVar == 0 ? dirname($lastLineOutput) : '';
+    }
 }
