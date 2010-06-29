@@ -20,6 +20,9 @@ class Theme
     const THEME_INI_FILE_NAME = 'theme.ini';
     const THEME_CONFIG_FILE_NAME = 'config.ini';
     
+    const PUBLIC_THEME_OPTION = 'public_theme';
+    const ADMIN_THEME_OPTION = 'admin_theme';
+    
     public $path;
     public $directory;
     public $image;

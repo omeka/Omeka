@@ -140,8 +140,8 @@ class Installer
         $this->_addOptionList($formOptions);
                      
         $otherOptions = array(
-            'admin_theme' => self::DEFAULT_ADMIN_THEME,
-            'public_theme' => self::DEFAULT_PUBLIC_THEME,
+            Theme::ADMIN_THEME_OPTION => self::DEFAULT_ADMIN_THEME,
+            Theme::PUBLIC_THEME_OPTION => self::DEFAULT_PUBLIC_THEME,
             'file_extension_whitelist' => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
             'file_mime_type_whitelist' => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
             'disable_default_file_validation' => 0,
