@@ -14,6 +14,13 @@
  **/
 class Installer
 {    
+    
+    const DEFAULT_USER_ACTIVE = true;
+    const DEFAULT_USER_ROLE = 'super';
+    
+    const DEFAULT_PUBLIC_THEME = 'default';
+    const DEFAULT_ADMIN_THEME = 'default';
+    
     /**
      * @var Omeka_Db
      */
@@ -83,8 +90,8 @@ class Installer
         }
         
         // Insert default options to the options table. 
-        $this->_db->exec($optionSql, array('admin_theme', 'default'));
-        $this->_db->exec($optionSql, array('public_theme', 'default'));
+        $this->_db->exec($optionSql, array('admin_theme', self::DEFAULT_ADMIN_THEME));
+        $this->_db->exec($optionSql, array('public_theme', self::DEFAULT_PUBLIC_THEME));
         $this->_db->exec($optionSql, array('file_extension_whitelist', Omeka_Validate_File_Extension::DEFAULT_WHITELIST));
         $this->_db->exec($optionSql, array('file_mime_type_whitelist', Omeka_Validate_File_MimeType::DEFAULT_WHITELIST));
         $this->_db->exec($optionSql, array('disable_default_file_validation', 0));
@@ -137,8 +144,8 @@ class Installer
         $user->Entity->last_name = Omeka_Form_Install::DEFAULT_USER_LAST_NAME;
         $user->username = $username;
         $user->setPassword($password);
-        $user->active = 1;
-        $user->role = 'super';
+        $user->active = self::DEFAULT_USER_ACTIVE;
+        $user->role = self::DEFAULT_USER_ROLE;
         $user->forceSave();
     }
     
