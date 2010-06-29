@@ -48,7 +48,7 @@ class IndexController extends Zend_Controller_Action
         $db = $this->getInvokeArg('bootstrap')->getResource('db');
         $requirements = new Installer_Requirements;
         $requirements->setDbAdapter($db->getAdapter());
-        $installer = new Installer($db, $requirements);
+        $installer = new Installer($db);
         $requirements->check();
         require_once APP_DIR . '/forms/Install.php';
         $form = new Omeka_Form_Install;
