@@ -76,29 +76,7 @@ class Installer
         }
         
         $this->_createMigrationTable();
-        
-        // Insert options.
-        $optionSql = "
-        INSERT INTO {$this->_db->Option} (
-            name, 
-            value
-        ) VALUES (?, ?)";
-        
-        // Insert the form options to the options table.
-        foreach ($this->_formOptions as $option) {
-            $this->_db->exec($optionSql, array($option, $values[$option]));
-        }
-        
-        // Insert default options to the options table. 
-        $this->_db->exec($optionSql, array('admin_theme', self::DEFAULT_ADMIN_THEME));
-        $this->_db->exec($optionSql, array('public_theme', self::DEFAULT_PUBLIC_THEME));
-        $this->_db->exec($optionSql, array('file_extension_whitelist', Omeka_Validate_File_Extension::DEFAULT_WHITELIST));
-        $this->_db->exec($optionSql, array('file_mime_type_whitelist', Omeka_Validate_File_MimeType::DEFAULT_WHITELIST));
-        $this->_db->exec($optionSql, array('disable_default_file_validation', 0));
-                
-        // If the fileinfo extension is not installed.
-        $this->_db->exec($optionSql, array('enable_header_check_for_file_mime_types', (string)!extension_loaded('fileinfo')));
-                
+        $this->_addOptions($values);
         return true;
     }
     
@@ -156,8 +134,28 @@ class Installer
         $migrations->markAllAsMigrated();
     }
     
-    private function _setupOptions()
+    private function _addOptions(array $values)
     {
+        // Insert options.
+        $optionSql = "
+        INSERT INTO {$this->_db->Option} (
+            name, 
+            value
+        ) VALUES (?, ?)";
         
+        // Insert the form options to the options table.
+        foreach ($this->_formOptions as $option) {
+            $this->_db->exec($optionSql, array($option, $values[$option]));
+        }
+        
+        // Insert default options to the options table. 
+        $this->_db->exec($optionSql, array('admin_theme', self::DEFAULT_ADMIN_THEME));
+        $this->_db->exec($optionSql, array('public_theme', self::DEFAULT_PUBLIC_THEME));
+        $this->_db->exec($optionSql, array('file_extension_whitelist', Omeka_Validate_File_Extension::DEFAULT_WHITELIST));
+        $this->_db->exec($optionSql, array('file_mime_type_whitelist', Omeka_Validate_File_MimeType::DEFAULT_WHITELIST));
+        $this->_db->exec($optionSql, array('disable_default_file_validation', 0));
+                
+        // If the fileinfo extension is not installed.
+        $this->_db->exec($optionSql, array('enable_header_check_for_file_mime_types', (string)!extension_loaded('fileinfo')));
     }
 }
