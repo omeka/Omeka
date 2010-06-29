@@ -135,27 +135,25 @@ class Installer
     }
     
     private function _addOptions(array $values)
+    {   
+        $formOptions = array_intersect_key($values, array_flip($this->_formOptions));
+        $this->_addOptionList($formOptions);
+                     
+        $otherOptions = array(
+            'admin_theme' => self::DEFAULT_ADMIN_THEME,
+            'public_theme' => self::DEFAULT_PUBLIC_THEME,
+            'file_extension_whitelist' => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
+            'file_mime_type_whitelist' => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
+            'disable_default_file_validation' => 0,
+            'enable_header_check_for_file_mime_types' => (string)!extension_loaded('fileinfo')
+        );
+        $this->_addOptionList($otherOptions);        
+    }
+    
+    private function _addOptionList(array $options)
     {
-        // Insert options.
-        $optionSql = "
-        INSERT INTO {$this->_db->Option} (
-            name, 
-            value
-        ) VALUES (?, ?)";
-        
-        // Insert the form options to the options table.
-        foreach ($this->_formOptions as $option) {
-            $this->_db->exec($optionSql, array($option, $values[$option]));
+        foreach ($options as $name => $value) {
+            $this->_db->insert('Option', array('name' => $name, 'value' => $value));
         }
-        
-        // Insert default options to the options table. 
-        $this->_db->exec($optionSql, array('admin_theme', self::DEFAULT_ADMIN_THEME));
-        $this->_db->exec($optionSql, array('public_theme', self::DEFAULT_PUBLIC_THEME));
-        $this->_db->exec($optionSql, array('file_extension_whitelist', Omeka_Validate_File_Extension::DEFAULT_WHITELIST));
-        $this->_db->exec($optionSql, array('file_mime_type_whitelist', Omeka_Validate_File_MimeType::DEFAULT_WHITELIST));
-        $this->_db->exec($optionSql, array('disable_default_file_validation', 0));
-                
-        // If the fileinfo extension is not installed.
-        $this->_db->exec($optionSql, array('enable_header_check_for_file_mime_types', (string)!extension_loaded('fileinfo')));
     }
 }
