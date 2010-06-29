@@ -28,6 +28,21 @@ class Installer
      */
     private $_db;
     
+    private $_formOptions = array(
+        'administrator_email', 
+        'copyright', 
+        'site_title', 
+        'author', 
+        'description', 
+        'thumbnail_constraint', 
+        'square_thumbnail_constraint', 
+        'fullsize_constraint', 
+        'per_page_admin', 
+        'per_page_public', 
+        'show_empty_elements',
+        'path_to_convert'
+    );
+    
     /**
      * Constructor.
      * 
@@ -72,19 +87,7 @@ class Installer
         ) VALUES (?, ?)";
         
         // Insert the form options to the options table.
-        $options = array('administrator_email', 
-                         'copyright', 
-                         'site_title', 
-                         'author', 
-                         'description', 
-                         'thumbnail_constraint', 
-                         'square_thumbnail_constraint', 
-                         'fullsize_constraint', 
-                         'per_page_admin', 
-                         'per_page_public', 
-                         'show_empty_elements',
-                         'path_to_convert');
-        foreach ($options as $option) {
+        foreach ($this->_formOptions as $option) {
             $this->_db->exec($optionSql, array($option, $values[$option]));
         }
         
