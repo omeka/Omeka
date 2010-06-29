@@ -26,7 +26,7 @@ class SecurityController extends Omeka_Controller_Action
         //Any changes to this list should be reflected in the install script (and possibly the view functions)        
         $options = array(Omeka_Validate_File_Extension::WHITELIST_OPTION,
                          Omeka_Validate_File_MimeType::WHITELIST_OPTION,
-                         'disable_default_file_validation',
+                         File::DISABLE_DEFAULT_VALIDATION_OPTION,
                          Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION);
         
         //process the form

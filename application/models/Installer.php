@@ -20,7 +20,7 @@ class Installer
     
     const DEFAULT_PUBLIC_THEME = 'default';
     const DEFAULT_ADMIN_THEME = 'default';
-    
+    const DEFAULT_FILE_VALIDATION_DISABLED = false;
     /**
      * @var Omeka_Db
      */
@@ -144,7 +144,7 @@ class Installer
             Theme::PUBLIC_THEME_OPTION => self::DEFAULT_PUBLIC_THEME,
             Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
             Omeka_Validate_File_MimeType::WHITELIST_OPTION => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
-            'disable_default_file_validation' => 0,
+            File::DISABLE_DEFAULT_VALIDATION_OPTION => self::DEFAULT_FILE_VALIDATION_DISABLED,
             Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION => (string)!extension_loaded('fileinfo')
         );
         $this->_addOptionList($otherOptions);        

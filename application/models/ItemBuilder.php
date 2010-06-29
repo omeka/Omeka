@@ -166,7 +166,7 @@ class ItemBuilder extends Omeka_Record_Builder
      **/
     protected function _addIngestValidators(Omeka_File_Ingest_Abstract $ingester)
     {    
-        $validators = get_option('disable_default_file_validation') 
+        $validators = get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) 
                     ? array()
                     : array(
                         'extension whitelist'=> new Omeka_Validate_File_Extension,

@@ -5,7 +5,7 @@ class Item_Rss2Test extends Omeka_Test_AppTestCase
     {
         parent::setUp();
         
-        set_option('disable_default_file_validation', 1);
+        set_option(File::DISABLE_DEFAULT_VALIDATION_OPTION, 1);
         
         $item = insert_item(
             array('public'=>true), 

@@ -26,8 +26,8 @@ Event.observe(window, 'load', function(){
         <div class="field">
             <label for="disable_default_file_validation">Disable File Upload Validation</label>
                 <div class="inputs">
-            <?php echo $this->formCheckbox('disable_default_file_validation', 
-                null, array('checked'=>get_option('disable_default_file_validation'))); ?>
+            <?php echo $this->formCheckbox(File::DISABLE_DEFAULT_VALIDATION_OPTION, 
+                null, array('checked'=>get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION))); ?>
             <p class="explanation">Check this field if you would like to allow any file to be uploaded to Omeka.</p>
             </div>
         </div>
