@@ -6,8 +6,6 @@
  * @package Omeka
  **/
 
-require_once 'Installer/Requirements.php';
-
 /*
 -- Checkbox next to "Administrator Email": "Use Superuser Email"
 -- Runtime JavaScript validation
@@ -26,38 +24,12 @@ class Installer
     
     private $_db;
     
-    public function __construct(Omeka_Db $db, Installer_Requirements $requirements)
-    {   
-        $this->_requirements = $requirements;
-        
+    public function __construct(Omeka_Db $db)
+    {           
         // Set the database object;
         $this->_db = $db;
     }
     
-    public function checkRequirements()
-    {
-        $this->_requirements->check();
-    }
-    
-    public function hasError()
-    {
-        return (boolean)count($this->getErrorMessages());
-    }
-    
-    public function hasWarning()
-    {
-        return (boolean)count($this->getWarningMessages());
-    }
-    
-    public function getErrorMessages()
-    {
-        return $this->_requirements->getErrorMessages();
-    }
-    
-    public function getWarningMessages()
-    {
-        return $this->_requirements->getWarningMessages();
-    }
         
     /**
      * @param array $values Set of values required by the installer.  Usually

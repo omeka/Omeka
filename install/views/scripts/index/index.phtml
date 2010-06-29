@@ -1,9 +1,9 @@
-<?php if ($this->installer->hasWarning()): ?>
+<?php if ($this->requirements->hasWarning()): ?>
     <h2>Installation Warning</h2>
     <p>The following issues will not affect installation, but they may 
     negatively affect the behavior of Omeka:</p>
     <ol>
-    <?php foreach($this->installer->getWarningMessages() as $warningMessage): ?>
+    <?php foreach($this->requirements->getWarningMessages() as $warningMessage): ?>
         <li>
             <h3 class="warning"><?php echo $warningMessage['header']; ?></h3>
             <p><?php echo $warningMessage['message']; ?></p>

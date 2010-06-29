@@ -49,17 +49,18 @@ class IndexController extends Zend_Controller_Action
         $requirements = new Installer_Requirements;
         $requirements->setDbAdapter($db->getAdapter());
         $installer = new Installer($db, $requirements);
-        $installer->checkRequirements();
+        $requirements->check();
         require_once APP_DIR . '/forms/Install.php';
         $form = new Omeka_Form_Install;
         $form->setDefault('path_to_convert',$installer->getPathToConvert());
-        if ($installer->hasError()) {
+        if ($requirements->hasError()) {
             return $this->_forward('errors', null, null, array('installer'=>$installer));
         } else if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
             if ($installer->install($form->getValues())) {
                 return $this->_helper->redirector->goto('installed');
             }
         } 
+        $this->view->requirements = $requirements;
         $this->view->installer = $installer;
         $this->view->form = $form;
     }

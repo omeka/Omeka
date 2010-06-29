@@ -59,7 +59,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
             'username'                      => self::SUPER_USERNAME,
             'password'                      => self::SUPER_PASSWORD
         );
-        $installer = new Installer($db, new Installer_Requirements);
+        $installer = new Installer($db);
         $installer->install($installInfo);        
     }
         

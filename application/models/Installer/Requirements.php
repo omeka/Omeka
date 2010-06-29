@@ -44,6 +44,16 @@ class Installer_Requirements
         return $this->_warningMessages;
     }
     
+    public function hasError()
+    {
+        return (boolean)count($this->getErrorMessages());
+    }
+
+    public function hasWarning()
+    {
+        return (boolean)count($this->getWarningMessages());
+    }
+    
     public function setDbAdapter(Zend_Db_Adapter_Abstract $db)
     {
         $this->_dbAdapter = $db;
