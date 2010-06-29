@@ -117,11 +117,11 @@ class Installer
     
     /**
      * Determine whether Omeka has been installed.
-     * 
-     * @param Omeka_Db $db
      */
-    public static function isInstalled(Omeka_Db $db)
+    public function isInstalled()
     {        
+        $db = $this->_db;
+        
         // Assume Omeka is not installed if the `options` table does not exist.
         $sql = "SHOW TABLES LIKE '{$db->prefix}options'";
         $tables = $db->fetchAll($sql);
