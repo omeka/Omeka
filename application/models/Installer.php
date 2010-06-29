@@ -48,35 +48,21 @@ class Installer
      */
     public function install(array $values, $createUser = true)
     {
+        if ($this->isInstalled()) {
+            throw new RuntimeException("Omeka has already been installed.");
+        }
+        
         $db = $this->_db;
         
-        // Create the database tables and insert default data.
-        $sql = "SHOW TABLES LIKE '{$db->prefix}options'";
-        $tables = $this->_db->query($sql)->fetchAll();
-        if (empty($tables)) {
-            include INSTALL_DIR . DIRECTORY_SEPARATOR . 'install.sql.php';
-            $this->_db->execBlock($installSql);
+        $this->_createSchema();
+        
+        if ($createUser) {            
+            $this->_createDefaultUser($values['username'], 
+                                      $values['password'],
+                                      $values['super_email']);
         }
         
-        if ($createUser) {
-            // Hack, prevents barfing when saving.
-            Omeka_Context::getInstance()->setDb($db);
-            
-            $user = new User;
-            $user->Entity = new Entity;
-            $user->Entity->email = $values['super_email'];
-            $user->Entity->first_name = self::SUPER_FIRST_NAME;
-            $user->Entity->last_name = self::SUPER_LAST_NAME;
-            $user->username = $values['username'];
-            $user->setPassword($values['password']);
-            $user->active = 1;
-            $user->role = 'super';
-            $user->forceSave();
-        }
-        
-        $migrations = Omeka_Db_Migration_Manager::getDefault($this->_db);
-        $migrations->setupTimestampMigrations();
-        $migrations->markAllAsMigrated();
+        $this->_createMigrationTable();
         
         // Insert options.
         $optionSql = "
@@ -137,5 +123,40 @@ class Installer
         
         // Otherwise, assume Omeka is already installed.
         return true;
+    }
+    
+    private function _createSchema()
+    {
+        $db = $this->_db;
+        include INSTALL_DIR . DIRECTORY_SEPARATOR . 'install.sql.php';
+        $this->_db->execBlock($installSql);
+    }
+    
+    private function _createDefaultUser($username, $password, $email)
+    {
+        // Hack, prevents barfing when saving.
+        Omeka_Context::getInstance()->setDb($this->_db);
+        $user = new User;
+        $user->Entity = new Entity;
+        $user->Entity->email = $email;
+        $user->Entity->first_name = self::SUPER_FIRST_NAME;
+        $user->Entity->last_name = self::SUPER_LAST_NAME;
+        $user->username = $username;
+        $user->setPassword($password);
+        $user->active = 1;
+        $user->role = 'super';
+        $user->forceSave();
+    }
+    
+    private function _createMigrationTable()
+    {
+        $migrations = Omeka_Db_Migration_Manager::getDefault($this->_db);
+        $migrations->setupTimestampMigrations();
+        $migrations->markAllAsMigrated();
+    }
+    
+    private function _setupOptions()
+    {
+        
     }
 }
