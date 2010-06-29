@@ -194,3 +194,15 @@ function text_to_id($text, $prepend=null, $delimiter='-')
 	$prepend = (string) $prepend;
 	return !empty($prepend) ? join($delimiter, array($prepend, $id)) : $id;
 }
+
+/**
+ * Converts any URLs in a given string to links.
+ *
+ * @param string $str The string to be searched for URLs to convert to links.
+ * @return string
+ **/
+function url_to_link($str)
+{
+    $str = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]","<a href=\"\\0\">\\0</a>", $str); 
+    return $str;
+}
