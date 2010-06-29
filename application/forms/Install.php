@@ -20,6 +20,8 @@ class Omeka_Form_Install extends Omeka_Form
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
     const DEFAULT_SHOW_EMPTY_ELEMENTS = true;
+    const DEFAULT_USER_FIRST_NAME = 'Super';
+    const DEFAULT_USER_LAST_NAME = 'User';
         
     public function init()
     {

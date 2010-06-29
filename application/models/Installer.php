@@ -13,10 +13,7 @@
  * @copyright Center for History and New Media, 2009-2010
  **/
 class Installer
-{
-    const SUPER_FIRST_NAME = 'Super';
-    const SUPER_LAST_NAME = 'User';
-    
+{    
     /**
      * @var Omeka_Db
      */
@@ -136,8 +133,8 @@ class Installer
         $user = new User;
         $user->Entity = new Entity;
         $user->Entity->email = $email;
-        $user->Entity->first_name = self::SUPER_FIRST_NAME;
-        $user->Entity->last_name = self::SUPER_LAST_NAME;
+        $user->Entity->first_name = Omeka_Form_Install::DEFAULT_USER_FIRST_NAME;
+        $user->Entity->last_name = Omeka_Form_Install::DEFAULT_USER_LAST_NAME;
         $user->username = $username;
         $user->setPassword($password);
         $user->active = 1;

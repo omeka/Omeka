@@ -23,9 +23,9 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->assertAction('edit', "Super users should be able to reach the 'edit' action for their user account.");
         $this->assertXpath('//input[@id="username"][@value="' . Omeka_Test_Resource_Db::SUPER_USERNAME . '"]',
             "There should be a 'username' element on this form with a default value.");            
-        $this->assertXpath('//input[@id="first_name"][@value="' . Installer::SUPER_FIRST_NAME . '"]',
+        $this->assertXpath('//input[@id="first_name"][@value="' . Omeka_Form_Install::DEFAULT_USER_FIRST_NAME . '"]',
             "There should be a 'first_name' element on this form with a default value.");
-        $this->assertXpath('//input[@id="last_name"][@value="' . Installer::SUPER_LAST_NAME . '"]',
+        $this->assertXpath('//input[@id="last_name"][@value="' . Omeka_Form_Install::DEFAULT_USER_LAST_NAME . '"]',
             "There should be a 'last_name' element on this form with a default value.");
         $this->assertXpath('//input[@id="email"][@value="' . Omeka_Test_Resource_Db::SUPER_EMAIL . '"]',
             "There should be a 'email' element on this form with a default value.");
