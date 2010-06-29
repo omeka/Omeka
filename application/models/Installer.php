@@ -1,15 +1,17 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
 
-/*
--- Checkbox next to "Administrator Email": "Use Superuser Email"
--- Runtime JavaScript validation
-*/
+/**
+ * Creates and populates the Omeka database schema.
+ *
+ * @package Omeka
+ * @copyright Center for History and New Media, 2009-2010
+ **/
 class Installer
 {
     const SUPER_FIRST_NAME = 'Super';
@@ -21,17 +23,24 @@ class Installer
     const DEFAULT_PER_PAGE_PUBLIC = 10;
     const DEFAULT_SHOW_EMPTY_ELEMENTS = '1';
     
-    
+    /**
+     * @var Omeka_Db
+     */
     private $_db;
     
+    /**
+     * Constructor.
+     * 
+     * @param Omeka_Db $db
+     */
     public function __construct(Omeka_Db $db)
     {           
-        // Set the database object;
         $this->_db = $db;
     }
-    
         
     /**
+     * Install Omeka.
+     * 
      * @param array $values Set of values required by the installer.  Usually
      * passed in via the form.
      * @param boolean $createUser Whether or not to create a new user along with
@@ -105,7 +114,12 @@ class Installer
                 
         return true;
     }
-
+    
+    /**
+     * Determine whether Omeka has been installed.
+     * 
+     * @param Omeka_Db $db
+     */
     public static function isInstalled(Omeka_Db $db)
     {        
         // Assume Omeka is not installed if the `options` table does not exist.
