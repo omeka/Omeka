@@ -12,8 +12,8 @@
     </ol>
 <?php endif; ?>
 <h2>Configure Your Site <span id="required-note">* Required Fields</span></h2>
-<?php if ($this->installer->getForm()->isErrors()): ?>
+<?php if ($this->form->isErrors()): ?>
     <h3 class="validation-error">Form Validation Errors</h3>
     <p>There were errors found in your form. Please edit and resubmit.</p>
 <?php endif; ?>
-<?php echo $this->installer->getForm(); /* Display the install form. */?>
+<?php echo $this->form; /* Display the install form. */?>
