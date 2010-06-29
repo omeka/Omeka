@@ -16,12 +16,6 @@ class Installer
 {
     const SUPER_FIRST_NAME = 'Super';
     const SUPER_LAST_NAME = 'User';
-    const DEFAULT_FULLSIZE_CONSTRAINT = 800;
-    const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
-    const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
-    const DEFAULT_PER_PAGE_ADMIN = 10;
-    const DEFAULT_PER_PAGE_PUBLIC = 10;
-    const DEFAULT_SHOW_EMPTY_ELEMENTS = '1';
     
     /**
      * @var Omeka_Db
