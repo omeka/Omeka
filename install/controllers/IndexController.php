@@ -55,7 +55,7 @@ class IndexController extends Zend_Controller_Action
         $form = new Omeka_Form_Install;
         $form->setDefault('path_to_convert',Omeka_File_Derivative_Image::getDefaultConvertDir());
         if ($requirements->hasError()) {
-            return $this->_forward('errors', null, null, array('installer'=>$this->installer));
+            return $this->_forward('errors', null, null, array('installer'=>$requirements));
         } else if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
             if ($this->installer->install($form->getValues())) {
                 return $this->_forward('installed');
