@@ -35,7 +35,7 @@ Event.observe(window, 'load', function(){
         <div class="field">
             <label for="file_extension_whitelist">Allowed File Extensions</label>
             <div class="inputs">
-            <?php echo $this->formTextarea('file_extension_whitelist', 
+            <?php echo $this->formTextarea(Omeka_Validate_File_Extension::WHITELIST_OPTION, 
                     get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION), 
                     array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
             <p class="explanation">List of allowed extensions for file uploads.</p> 
@@ -45,8 +45,8 @@ Event.observe(window, 'load', function(){
         <div class="field">
             <label for="file_mime_type_whitelist">Allowed File Types</label>
             <div class="inputs">
-            <?php echo $this->formTextarea('file_mime_type_whitelist',
-                    get_option('file_mime_type_whitelist'),
+            <?php echo $this->formTextarea(Omeka_Validate_File_MimeType::WHITELIST_OPTION,
+                    get_option(Omeka_Validate_File_MimeType::WHITELIST_OPTION),
                     array('class'=>'textinput', 'cols'=>50, 'rows'=>5)); ?>
             <p class="explanation">List of allowed MIME types for file uploads.</p>
             </div>
@@ -55,8 +55,8 @@ Event.observe(window, 'load', function(){
         <div class="field">
             <label for="enable_header_check_for_file_types">Enable Header Check For File Types</label>
                 <div class="inputs">
-            <?php echo $this->formCheckbox('enable_header_check_for_file_mime_types', 
-                null, array('checked'=>(boolean)get_option('enable_header_check_for_file_mime_types'))); ?>
+            <?php echo $this->formCheckbox(Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION, 
+                null, array('checked'=>(boolean)get_option(Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION))); ?>
             <p class="explanation">Check this field if you would like to allow file types to be inferred from a file header check.</p>
             </div>
         </div>
