@@ -9,7 +9,6 @@
 ?>
 <?php head(array('title'=> $itemTitle, 'bodyclass'=>'items primary','content_class' => 'vertical-nav'));?>
 <h1><?php echo $itemTitle; ?></h1>
-<?php echo js('items'); ?>
 
 <?php include 'form-tabs.php'; // Definitions for all the tabs for the form. ?>
 

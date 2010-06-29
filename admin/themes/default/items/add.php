@@ -1,5 +1,4 @@
 <?php head(array('title'=>'Add Item','content_class' => 'vertical-nav', 'bodyclass'=>'items primary'));?>
-<?php echo js('items'); ?>
 
 <h1>Add an Item</h1>
 <?php include('form-tabs.php'); ?>
