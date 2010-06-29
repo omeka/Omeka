@@ -7,11 +7,6 @@
  **/
 
 /**
- * Depends on the Installer model.
- */
-require_once INSTALL_DIR . '/models/Installer.php';
-
-/**
  * Set up the database test environment by wiping and resetting the database to
  * a recently-installed state.
  *
