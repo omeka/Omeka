@@ -38,12 +38,7 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
      * convert all spaces to dashes.  This is applied to every file that is uploaded
      * to Omeka so that there will be no problems with funky characters in filenames.  
      * 
-     * @todo It may be easier just to generate a long string of random numbers 
-     * and characters for each new file, rather than actually trying to maintain 
-     * the old filename, which is still stored in the database.  This would only 
-     * be an issue if the archives directory needs to be human-readable, and there 
-     * is no guarantee that it does.
-     * 
+     * @deprecated Filenames are now MD5 hashes, this method should not be used.
      * @param string
      * @return string
      **/
@@ -95,14 +90,10 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
      * @param string
      * @return string
      **/
-    public function renameFileForArchive($name) {
-        
-        $name = $this->sanitizeFilename($name);
-        
-        $new_name     = explode('.', $name);
-        $new_name[0] .= '_' . substr(md5(mt_rand() + microtime(true)), 0, 10);
-        $new_name_string = implode('.', $new_name);
-        
-        return $new_name_string;
+    public function renameFileForArchive($name) 
+    {
+        $extension = strrchr($name, '.');
+        $basename = md5(mt_rand() + microtime(true));        
+        return $basename . $extension;
     }
 }
