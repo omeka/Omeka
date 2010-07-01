@@ -23,6 +23,9 @@ class SecurityController extends Omeka_Controller_Action
     }
     
     public function editAction() {
+        $this->view->form = new Omeka_Form_SecuritySettings;
+        
+        
         //Any changes to this list should be reflected in the install script (and possibly the view functions)        
         $options = array(Omeka_Validate_File_Extension::WHITELIST_OPTION,
                          Omeka_Validate_File_MimeType::WHITELIST_OPTION,
@@ -30,8 +33,8 @@ class SecurityController extends Omeka_Controller_Action
                          Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION);
         
         //process the form
-        if (!empty($_POST)) {
-            foreach ($_POST as $key => $value) {
+        if ($this->getRequest()->isPost() && $this->view->form->isValid($_POST)) {
+            foreach ($this->view->form->getValues() as $key => $value) {
                 if (in_array($key, $options)) {
                     set_option($key, $value);
                 }
