@@ -23,18 +23,21 @@ class SecurityController extends Omeka_Controller_Action
     }
     
     public function editAction() {
+        $this->view->form = new Omeka_Form_SecuritySettings;
+        
+        
         //Any changes to this list should be reflected in the install script (and possibly the view functions)        
-        $options = array('file_extension_whitelist',
-                         'file_mime_type_whitelist',
-                         'disable_default_file_validation',
-                         'enable_header_check_for_file_mime_types',
+        $options = array(Omeka_Validate_File_Extension::WHITELIST_OPTION,
+                         Omeka_Validate_File_MimeType::WHITELIST_OPTION,
+                         File::DISABLE_DEFAULT_VALIDATION_OPTION,
+                         Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION,
                          'html_purifier_is_enabled',
                          'html_purifier_allowed_html_elements',
                          'html_purifier_allowed_html_attributes');
         
         //process the form
-        if (!empty($_POST)) {
-            foreach ($_POST as $key => $value) {
+        if ($this->getRequest()->isPost() && $this->view->form->isValid($_POST)) {
+            foreach ($this->view->form->getValues() as $key => $value) {
                 if (in_array($key, $options)) {
                     set_option($key, $value);
                 }
@@ -49,7 +52,7 @@ class SecurityController extends Omeka_Controller_Action
         if ($this->_getParam('default')) {
             $body = Omeka_Validate_File_Extension::DEFAULT_WHITELIST;
         } else {
-            $body = get_option('file_extension_whitelist');
+            $body = get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION);
         }
         $this->getResponse()->setBody($body);
     }
@@ -60,7 +63,7 @@ class SecurityController extends Omeka_Controller_Action
         if ($this->_getParam('default')) {
             $body = Omeka_Validate_File_MimeType::DEFAULT_WHITELIST;
         } else {
-            $body = get_option('file_mime_type_whitelist');
+            $body = get_option(Omeka_Validate_File_MimeType::WHITELIST_OPTION);
         }
         $this->getResponse()->setBody($body);
     }

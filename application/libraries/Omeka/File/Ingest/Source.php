@@ -136,7 +136,7 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
         // Create a temporary file in the default temporary directory and 
         // return the path to it.  This can be used to validate the file on the
         // local machine before putting it in the Omeka filesystem.
-        $tempDestination = tempnam(null, 'Omeka');
+        $tempDestination = tempnam(sys_get_temp_dir(), 'Omeka');
         
         // The final destination of the file (Omeka archive).
         $fileDestinationPath = $this->_getDestination($originalFilename);

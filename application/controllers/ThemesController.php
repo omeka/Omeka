@@ -27,7 +27,7 @@ class ThemesController extends Omeka_Controller_Action
     public function browseAction()
     {
         $themes = apply_filters('browse_themes', Theme::getAvailable());
-        $public = get_option('public_theme');
+        $public = get_option(Theme::PUBLIC_THEME_OPTION);
         $this->view->themes = $themes;
         $this->view->current = $themes[$public];
     }
@@ -40,13 +40,13 @@ class ThemesController extends Omeka_Controller_Action
             return;
         }
         
-        $themeName = $this->_getParam('public_theme');
+        $themeName = $this->_getParam(Theme::PUBLIC_THEME_OPTION);
         // Theme names should be alphanumeric (prevent security flaws).
         $filter = new Zend_Filter_Alnum();
         $themeName = $filter->filter($themeName);
         
         // Set the public theme option according to the form post.
-        set_option('public_theme', $themeName);
+        set_option(Theme::PUBLIC_THEME_OPTION, $themeName);
         
         if (!Theme::getOptions($themeName) 
             && ($configForm = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName)))
@@ -87,7 +87,7 @@ class ThemesController extends Omeka_Controller_Action
                     
                     // Make sure the file was uploaded before adding the Rename filter to the element
                     if ($element->isUploaded()) {
-                        if (get_option('disable_default_file_validation') == '0') {
+                        if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) == '0') {
                             $element->addValidator(new Omeka_Validate_File_Extension());
                             $element->addValidator(new Omeka_Validate_File_MimeType());
                         }

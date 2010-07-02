@@ -6,10 +6,7 @@
  * @package Omeka
  **/
 
-/**
- * Depends on the Installer model.
- */
-require_once INSTALL_DIR . '/models/Installer.php';
+require_once APP_DIR . '/forms/Install.php';
 
 /**
  * Set up the database test environment by wiping and resetting the database to
@@ -53,18 +50,18 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
             'site_title'                    => self::DEFAULT_SITE_TITLE, 
             'author'                        => self::DEFAULT_AUTHOR, 
             'description'                   => self::DEFAULT_DESCRIPTION, 
-            'thumbnail_constraint'          => Installer::DEFAULT_THUMBNAIL_CONSTRAINT, 
-            'square_thumbnail_constraint'   => Installer::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT, 
-            'fullsize_constraint'           => Installer::DEFAULT_FULLSIZE_CONSTRAINT, 
-            'per_page_admin'                => Installer::DEFAULT_PER_PAGE_ADMIN, 
-            'per_page_public'               => Installer::DEFAULT_PER_PAGE_PUBLIC, 
-            'show_empty_elements'           => Installer::DEFAULT_SHOW_EMPTY_ELEMENTS,
+            'thumbnail_constraint'          => Omeka_Form_Install::DEFAULT_THUMBNAIL_CONSTRAINT, 
+            'square_thumbnail_constraint'   => Omeka_Form_Install::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT, 
+            'fullsize_constraint'           => Omeka_Form_Install::DEFAULT_FULLSIZE_CONSTRAINT, 
+            'per_page_admin'                => Omeka_Form_Install::DEFAULT_PER_PAGE_ADMIN, 
+            'per_page_public'               => Omeka_Form_Install::DEFAULT_PER_PAGE_PUBLIC, 
+            'show_empty_elements'           => Omeka_Form_Install::DEFAULT_SHOW_EMPTY_ELEMENTS,
             'path_to_convert'               => '',
             'super_email'                   => self::SUPER_EMAIL,
             'username'                      => self::SUPER_USERNAME,
             'password'                      => self::SUPER_PASSWORD
         );
-        $installer = new Installer($db, new Installer_Requirements);
+        $installer = new Installer($db);
         $installer->install($installInfo);        
     }
         

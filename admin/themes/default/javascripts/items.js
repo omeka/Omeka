@@ -348,13 +348,3 @@ Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
     }
 
 });
-
-document.observe('dom:loaded',function() {
-     new Control.Tabs('section-nav');  
-});
-
-Event.observe(window,'load', function() {
-    Omeka.ItemForm.makeFileWindow();
-    Omeka.ItemForm.enableAddFiles();
-    document.fire('omeka:elementformload');    
-});

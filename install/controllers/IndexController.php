@@ -36,8 +36,10 @@ class IndexController extends Zend_Controller_Action
             // Don't attempt to forward exceptions to the ErrorController.
             Zend_Controller_Front::getInstance()->setParam('noErrorHandler', true);
             
+            $this->installer = new Installer($bootstrap->getResource('db'));
+            
             // If Omeka is not already installed, forward to the action that displays that error.
-            if (Installer::isInstalled($bootstrap->getResource('db')) && ($this->getRequest()->getActionName() !== 'installed')) {
+            if ($this->installer->isInstalled() && ($this->getRequest()->getActionName() !== 'installed')) {
                 return $this->getRequest()->setActionName('installed')->setDispatched(false);
             }
         }
@@ -48,18 +50,20 @@ class IndexController extends Zend_Controller_Action
         $db = $this->getInvokeArg('bootstrap')->getResource('db');
         $requirements = new Installer_Requirements;
         $requirements->setDbAdapter($db->getAdapter());
-        $installer = new Installer($db, $requirements);
-        $installer->checkRequirements();
+        $requirements->check();
+        require_once APP_DIR . '/forms/Install.php';
         $form = new Omeka_Form_Install;
-        $form->setDefault('path_to_convert',$installer->getPathToConvert());
-        if ($installer->hasError()) {
-            return $this->_forward('errors', null, null, array('installer'=>$installer));
+        $form->setDefault('path_to_convert',Omeka_File_Derivative_Image_Creator::getDefaultConvertDir());
+        if ($requirements->hasError()) {
+            return $this->_forward('errors', null, null, array('installer'=>$requirements));
         } else if ($this->getRequest()->isPost() && $form->isValid($_POST)) {
-            if ($installer->install($form->getValues())) {
-                return $this->_helper->redirector->goto('installed');
+            if ($this->installer->install($form->getValues())) {
+                return $this->_forward('installed');
             }
         } 
-        $this->view->installer = $installer;
+        $this->view->requirements = $requirements;
+        $this->view->installer = $this->installer;
+        $this->view->form = $form;
         $this->view->form = $form;
     }
         

@@ -338,6 +338,7 @@ class Omeka_View_Helper_ElementForm
         $html .= $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
         $html .= '</label>';
         
+        $html = apply_filters('element_form_display_html_flag', $html, $this->_element);
         return $html;
     }
     
