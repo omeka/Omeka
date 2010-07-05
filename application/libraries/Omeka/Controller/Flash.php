@@ -51,8 +51,8 @@ class Omeka_Controller_Flash
 		
 	public function __construct()
 	{
-		if (!$this->_session) {
-			$this->_session = new Zend_Session_Namespace('flash');
+		if (!self::$_session) {
+			self::$_session = new Zend_Session_Namespace('flash');
 		}		
 	}
 	
@@ -71,8 +71,8 @@ class Omeka_Controller_Flash
 				$this->setTempFlash($status_code, $msg);
 				break;
 			default:
-				$this->_session->msg = $msg;
-				$this->_session->status = $status_code;
+				self::$_session->msg = $msg;
+				self::$_session->status = $status_code;
 				break;
 		}			
 	}
@@ -100,7 +100,7 @@ class Omeka_Controller_Flash
             return self::$_flash;
         }
 		
-		return $this->_session;
+		return self::$_session;
 	}	
 	
 	/**
