@@ -102,7 +102,7 @@ class UsersController extends Omeka_Controller_Action
            default:
                break;
         }
-        if ($redirectWith) {
+        if (isset($redirectWith)) {
             $this->flash($redirectWith, Omeka_Controller_Flash::GENERAL_ERROR);
             $this->_helper->redirector->goto('browse');
         }    
@@ -222,7 +222,7 @@ class UsersController extends Omeka_Controller_Action
         
         $this->view->passwordForm = $changePasswordForm;
         
-        if ($_POST['new_password']) {
+        if (isset($_POST['new_password'])) {
             if ($changePasswordForm->isValid($_POST)) {
                 $values = $changePasswordForm->getValues();
                 $user->setPassword($values['new_password']);
