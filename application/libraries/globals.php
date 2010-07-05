@@ -20,7 +20,9 @@
 function get_option($name) 
 {
     $options = Omeka_Context::getInstance()->getOptions();
-    return $options[$name];
+    if (isset($options[$name])) {
+        return $options[$name];
+    }
 }
 
 /**
