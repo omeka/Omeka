@@ -53,7 +53,7 @@
 <div class="field">
     <?php echo label('institution','Institution'); ?>
     <div class="inputs">
-<?php echo text(array('name'=>'institution', 'size'=>'30','class'=>'textinput', 'id'=>'institution'),not_empty_or($user->institution, $_POST['institution'])); ?>
+<?php echo text(array('name'=>'institution', 'size'=>'30','class'=>'textinput', 'id'=>'institution'),not_empty_or($user->institution, @$_POST['institution'])); ?>
     </div>
 </div>
 
