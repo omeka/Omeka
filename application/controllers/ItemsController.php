@@ -143,7 +143,7 @@ class ItemsController extends Omeka_Controller_Action
         $paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
 
         //Serve up the pagination
-        $pagination = array('menu'          => $menu, // This hasn't done anything since $menu was never instantiated in ItemsController::browseAction()
+        $pagination = array('menu'          => null, // This hasn't done anything since $menu was never instantiated in ItemsController::browseAction()
                             'page'          => $results['page'], 
                             'per_page'      => $results['per_page'], 
                             'total_results' => $results['total_results'], 
