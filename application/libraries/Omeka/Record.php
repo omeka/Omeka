@@ -296,7 +296,9 @@ abstract class Omeka_Record implements ArrayAccess
      */
     protected function getCached($name)
     {
-        return $this->_cache[$name];
+        if (isset($this->_cache[$name])) {
+            return $this->_cache[$name];
+        }
     }
     
     /**
