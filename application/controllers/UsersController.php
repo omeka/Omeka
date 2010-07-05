@@ -221,6 +221,7 @@ class UsersController extends Omeka_Controller_Action
         $changePasswordForm->setUser($user);
         
         $this->view->passwordForm = $changePasswordForm;
+        $this->view->user = $user;        
         
         if (isset($_POST['new_password'])) {
             if ($changePasswordForm->isValid($_POST)) {
@@ -248,9 +249,7 @@ class UsersController extends Omeka_Controller_Action
             $this->flashValidationErrors($e);
         } catch (Exception $e) {
             $this->flashError($e->getMessage());
-        }
-        
-        $this->view->assign(array('user'=>$user));        
+        }        
     }
     
     protected function _getDeleteSuccessMessage($record)
