@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title' => 'Upgrade Database')); ?>
 <div id="primary">
 <h2 class="instruction">Upgrade Your Omeka Database</h2> 
 <p>Your Omeka database is not compatible with your current
