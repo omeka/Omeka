@@ -190,10 +190,10 @@ class ElementTable extends Omeka_Db_Table
         $db = $this->getDb();
         $sql = "
 SELECT e.id AS element_id, e.name AS element_name, es.name AS element_set_name 
-FROM elements AS e 
-JOIN element_sets AS es 
+FROM {$db->Element} AS e 
+JOIN {$db->ElementSet} AS es 
 ON e.element_set_id = es.id 
-JOIN record_types AS rt 
+JOIN {$db->RecordType} AS rt 
 ON es.record_type_id = rt.id 
 WHERE rt.name = 'Item' 
 OR rt.name = 'All' 
