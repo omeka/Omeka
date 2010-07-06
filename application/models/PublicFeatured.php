@@ -15,6 +15,9 @@
  **/
 class PublicFeatured extends Omeka_Record_Mixin
 {
+    private $_wasPublic;
+    private $_wasFeatured;
+    
     public function __construct($record)
     {
         $this->record = $record;
