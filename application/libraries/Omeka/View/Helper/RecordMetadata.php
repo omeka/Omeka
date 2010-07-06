@@ -18,6 +18,13 @@
  */
 abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
 {    
+    const SNIPPET = 'snippet';
+    const INDEX = 'index';
+    const ALL = 'all';
+    const NO_ESCAPE = 'no_escape';
+    const NO_FILTER = 'no_filter';
+    const DELIMITER = 'delimiter';
+    
     /**
      * Retrieve a specific piece of an item's metadata.
      * 
@@ -78,16 +85,16 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
         
         // Apply the snippet option before escaping text HTML. If applied after
         // escaping the HTML, this may result in invalid markup.
-        if ($snippetLength = (int)$options['snippet']) {
+        if ($snippetLength = (int)$options[self::SNIPPET]) {
             $text = $this->_snippetText($text, $snippetLength);
         }
         
         // Escape the non-HTML text if necessary.
-        $escapedText = (array_key_exists('no_escape', $options) && $options['no_escape'])
+        $escapedText = (array_key_exists(self::NO_ESCAPE, $options) && $options[self::NO_ESCAPE])
                      ? $text : $this->_escapeTextHtml($text);
         
         // Apply plugin filters.
-        $filteredText = !array_key_exists('no_filter', $options) 
+        $filteredText = !array_key_exists(self::NO_FILTER, $options) 
                         ? $this->_filterText($escapedText, $elementSetName, $elementName, $record) 
                         : $escapedText;
         
@@ -102,21 +109,21 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
         // 'delimiter' and 'index'.
         
         // Return the join'd text
-        if (isset($options['delimiter'])) {
-            return join((string) $options['delimiter'], $extractedText);
+        if (isset($options[self::DELIMITER])) {
+            return join((string) $options[self::DELIMITER], $extractedText);
         }
         
         // Return the text at that index.
-        if (is_array($extractedText) && isset($options['index'])) {
+        if (is_array($extractedText) && isset($options[self::INDEX])) {
             // Return null if the index doesn't exist for the record.
-            if (!isset($text[$options['index']])) {
+            if (!isset($text[$options[self::INDEX]])) {
                 return null;
             }
-            return $extractedText[$options['index']];
+            return $extractedText[$options[self::INDEX]];
         }
         
         // If the all option is set, return the entire array of escaped data
-        if (is_array($extractedText) && isset($options['all'])) {
+        if (is_array($extractedText) && isset($options[self::ALL])) {
             return $extractedText;
         }
         
@@ -137,9 +144,9 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
     {
         $converted = array();
         if (is_integer($options)) {
-            $converted = array('index' => $options);
-        } else if ('all' == $options) {
-            $converted = array('all' => true);
+            $converted = array(self::INDEX => $options);
+        } else if (self::ALL == $options) {
+            $converted = array(self::ALL => true);
         } else {
             $converted = (array) $options;
         }
