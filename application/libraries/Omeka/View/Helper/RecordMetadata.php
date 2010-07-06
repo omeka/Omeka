@@ -85,8 +85,8 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
         
         // Apply the snippet option before escaping text HTML. If applied after
         // escaping the HTML, this may result in invalid markup.
-        if ($snippetLength = (int)$options[self::SNIPPET]) {
-            $text = $this->_snippetText($text, $snippetLength);
+        if (array_key_exists(self::SNIPPET, $options)) {
+            $text = $this->_snippetText($text, (int)$options[self::SNIPPET]);
         }
         
         // Escape the non-HTML text if necessary.
@@ -251,7 +251,7 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
                 $elementTextRecord->setText(apply_filters($filterName, $elementTextRecord->getText(), $record, $elementTextRecord));
             }
         } else {
-            $text = apply_filters($filterName, $text, $record, $elementTextRecord);
+            $text = apply_filters($filterName, $text, $record);
         }     
         
         return $text;
