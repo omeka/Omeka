@@ -175,4 +175,34 @@ class ElementTable extends Omeka_Db_Table
             $select->where('es.name = ?', (string) $params['element_set_name']);
         }
     }
+    
+    /**
+     * Override parent class method to retrieve a multidimensional array of 
+     * elements, organized by element set, to be used in Zend's FormSelect view 
+     * helper.
+     * 
+     * @param array $options Set of parameters for searching/filtering results.
+     * @see Omeka_Db_Table::findPairsForSelectForm()
+     * @return array
+     */
+    public function findPairsForSelectForm(array $options = array())
+    {
+        $db = $this->getDb();
+        $sql = "
+SELECT e.id AS element_id, e.name AS element_name, es.name AS element_set_name 
+FROM elements AS e 
+JOIN element_sets AS es 
+ON e.element_set_id = es.id 
+JOIN record_types AS rt 
+ON es.record_type_id = rt.id 
+WHERE rt.name = 'Item' 
+OR rt.name = 'All' 
+ORDER BY element_set_name ASC, element_name ASC";
+        $elements = $this->fetchAll($sql);
+        $options = array();
+        foreach ($elements as $element) {
+            $options[$element['element_set_name']][$element['element_id']] = $element['element_name']; 
+        }
+        return $options;
+    }
 }
