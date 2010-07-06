@@ -142,7 +142,7 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
         $fileDestinationPath = $this->_getDestination($originalFilename);
         
         // Transfer to the temp directory.
-        $this->_transfer($fileSourcePath, $tempDestination);
+        $this->_transfer($fileSourcePath, $tempDestination, $fileInfo);
         
         // Adjust the file info array so that it works with the Zend Framework
         // validation.
@@ -180,7 +180,7 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * @param string $destination
      * @return void
      **/
-    abstract protected function _transfer($source, $destination);
+    abstract protected function _transfer($source, $destination, array $fileInfo);
     
     /**
      * Determine whether or not the file source is valid.  
