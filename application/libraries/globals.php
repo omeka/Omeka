@@ -4,9 +4,12 @@
  * these should be used as little as possible in the application code
  * to reduce coupling.
  *
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
- 
+ */
+
 /**
  * Retrieve an option from the Omeka database.
  * 
@@ -16,7 +19,7 @@
  * 
  * @param string $name
  * @return string
- **/ 
+ */ 
 function get_option($name) 
 {
     $options = Omeka_Context::getInstance()->getOptions();
@@ -34,7 +37,7 @@ function get_option($name)
  * @param string $name
  * @param string $value
  * @return void
- **/
+ */
 function set_option($name, $value)
 {
     $db = get_db();
@@ -52,7 +55,7 @@ function set_option($name, $value)
  * 
  * @param string $name
  * @return void
- **/
+ */
 function delete_option($name)
 {
     $db = get_db();
@@ -77,7 +80,7 @@ function delete_option($name)
  * 
  * @param string $text
  * @return string
- **/
+ */
 function generate_slug($text)
 {
     $slug = trim($text);
@@ -93,9 +96,9 @@ function generate_slug($text)
  * Retrieve one column of a multidimensional array as an array.
  * 
  * @param string|integer $col
- * @param array
+ * @param array $array
  * @return array
- **/
+ */
 function pluck($col, $array)
 {
     $res = array();
@@ -109,7 +112,7 @@ function pluck($col, $array)
  * Retrieve the User record associated with the currently logged in user.
  * 
  * @return User|null Null if no user is logged in.
- **/
+ */
 function current_user()
 {
     return Omeka_Context::getInstance()->getCurrentUser();
@@ -119,7 +122,7 @@ function current_user()
  * Retrieve the database object.
  * 
  * @return Omeka_Db
- **/
+ */
 function get_db()
 {
     return Omeka_Context::getInstance()->getDb();
@@ -131,9 +134,9 @@ function get_db()
  * This will do nothing if logging is not enabled via config.ini's log.errors
  * setting.
  * 
- * @param string
+ * @param string $msg
  * @return void
- **/
+ */
 function debug($msg)
 {
     $context = Omeka_Context::getInstance();
@@ -150,8 +153,9 @@ function debug($msg)
  * Does not need to be called elsewhere in the application.
  * 
  * @access private
+ * @param mixed $value
  * @return mixed
- **/
+ */
 function stripslashes_deep($value)
 {
      $value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
@@ -162,10 +166,10 @@ function stripslashes_deep($value)
 /**
  * Declare a plugin hook implementation within a plugin.
  * 
- * @param string
+ * @param string $hook Name of hook being implemented.
  * @param mixed $callback Any valid PHP callback.
  * @return void
- **/
+ */
 function add_plugin_hook($hook, $callback)
 {
     get_plugin_broker()->addHook($hook, $callback);
@@ -179,13 +183,16 @@ function add_plugin_hook($hook, $callback)
  * The first argument corresponds to the string name of the hook.  Subsequent
  * arguments will be passed to the plugin hook implementations.
  * 
- * <code>fire_plugin_hook('after_save_item', $item, $arg2);  //would call the plugin hook 
- * 'after_save_item' with those 2 arguments.</code>
+ * <code>
+ * // Calls the hook 'after_save_item' with the arguments '$item' and '$arg2'
+ * fire_plugin_hook('after_save_item', $item, $arg2);
+ * </code>
  *
- * @access private
  * @param string $hookName
- * @return array
- **/
+ * @param mixed $args,... (optional) Any arguments to be passed to hook 
+ * implementations.
+ * @return mixed
+ */
 function fire_plugin_hook()
 {
     if ($pluginBroker = get_plugin_broker()) {
@@ -201,8 +208,11 @@ function fire_plugin_hook()
  * This is invoked in the same way as fire_plugin_hook().
  * 
  * @uses fire_plugin_hook()
+ * @param string $hookName
+ * @param mixed $args,... (optional) Any arguments to be passed to hook 
+ * implementations.
  * @return string
- **/
+ */
 function get_plugin_hook_output() 
 {
     $args = func_get_args();
@@ -219,9 +229,11 @@ function get_plugin_hook_output()
  * This is like get_plugin_hook_output() but only calls the hook within the 
  * provided plugin.
  * 
+ * @see get_plugin_hook_output()
  * @param string $pluginName
  * @param string $hookName
- * @param [any number of further arguments]
+ * @param mixed $args,... (optional) Any arguments to be passed to the hook 
+ * implementation.
  * @return string
  */
 function get_specific_plugin_hook_output()
@@ -251,9 +263,11 @@ function get_specific_plugin_hook_output()
 }
 
 /**
+ * Retrieve the broker object for Omeka plugins.
+ *
  * @access private
  * @return Omeka_Plugin_Broker|null
- **/
+ */
 function get_plugin_broker()
 {
     if (Zend_Registry::isRegistered('pluginbroker')) {
@@ -262,12 +276,13 @@ function get_plugin_broker()
 }
 
 /**
- * Retrieves specified descriptive info for a plugin from its ini file.
+ * Retrieve specified descriptive info for a plugin from its ini file.
  *
- * @param string $pluginDirName The directory name of the plugin
- * @param string $iniKeyName The name of the key in the ini file
- * @return null | string The value of the specified plugin key. If the key does not exist, it returns null
- **/
+ * @param string $pluginDirName The directory name of the plugin.
+ * @param string $iniKeyName The name of the key in the ini file.
+ * @return string|null The value of the specified plugin key. If the key does 
+ * not exist, it returns null.
+ */
 function get_plugin_ini($pluginDirName, $iniKeyName)
 {         
    $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
@@ -279,10 +294,14 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
 /**
  * Declare a function that will be used to display files with a given MIME type.
  * 
- * @uses Omeka_Plugin_Broker::addMediaAdapter() See for info on arguments and
+ * @uses Omeka_View_Helper_Media::addMimeTypes() See for info on arguments and
  * usage.
+ * @param array|string $mimeTypes Set of MIME types that this specific
+ * callback will respond to.
+ * @param callback $callback Any valid callback.
+ * @param array $options
  * @return void
- **/
+ */
 function add_mime_display_type($mimeTypes, $callback, array $options=array())
 {
     require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Media.php';
@@ -300,8 +319,10 @@ function add_mime_display_type($mimeTypes, $callback, array $options=array())
  * @uses Omeka_Plugin_Filters::applyFilters()
  * @param string|array $filterName
  * @param mixed $valueToFilter
- * @return mixed
- **/
+ * @param mixed $args,... (optional) Any additional arguments to pass to filter
+ * implementations.
+ * @return mixed Result of applying filters to $valueToFilter.
+ */
 function apply_filters($filterName, $valueToFilter)
 {
     if ($pluginBroker = get_plugin_broker()) {
@@ -319,9 +340,9 @@ function apply_filters($filterName, $valueToFilter)
  * @since 0.10
  * @param string|array $filterName
  * @param callback $callback
- * @param integer $priority Optional Defaults to 10.
+ * @param integer $priority Optional, Defaults to 10.
  * @return void
- **/
+ */
 function add_filter($filterName, $callback, $priority = 10)
 {
     if ($pluginBroker = get_plugin_broker()) {
@@ -333,7 +354,7 @@ function add_filter($filterName, $callback, $priority = 10)
  * Retrieve the ACL object.
  * 
  * @return Omeka_Acl
- **/
+ */
 function get_acl()
 {
     return Omeka_Context::getInstance()->getAcl();
@@ -348,7 +369,7 @@ function get_acl()
  * controlling access to scripts.
  * 
  * @return boolean
- **/
+ */
 function is_admin_theme()
 {
     return Zend_Controller_Front::getInstance()->getParam('admin');
@@ -374,7 +395,7 @@ function is_admin_theme()
  *  added in the usual manner.  False by default.</li>
  *  </ul> 
  * 
- * @param array $elementTexts Optional Array of element texts to assign to the item. 
+ * @param array $elementTexts Optional, Array of element texts to assign to the item. 
  *  This follows the format: 
  * <code>
  * array(
@@ -402,7 +423,7 @@ function is_admin_theme()
  * </code>
  *  See ActsAsElementText::addElementTextsByArray() for more info.
  * 
- * @param array $fileMetadata Optional Set of metadata options that allow one or more
+ * @param array $fileMetadata Optional, Set of metadata options that allow one or more
  * files to be associated with the item.  Includes the following options:
  *  <ul>    
  *      <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or 
@@ -435,7 +456,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  * @param array $files
  * @param array $options Optional
  * @return array
- **/
+ */
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
 {
     // TODO: Maybe this should be a separate helper class.
@@ -444,6 +465,8 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
 }
 
 /**
+ * Update an existing item.
+ *
  * @see insert_item()
  * @uses ItemBuilder
  * @param Item|int $item Either an Item object or the ID for the item.
@@ -451,7 +474,7 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  * @param array $elementTexts
  * @param array $fileMetadata
  * @return Item
- **/
+ */
 function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
     $builder = new ItemBuilder($metadata, $elementTexts, $fileMetadata, $item);
@@ -464,9 +487,9 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * @param array $metadata Follows the format:
  * <code>
  * array(
-  *     'name'       => [string], 
-  *     'description'=> [string]
-  * )
+ *     'name'        => [string], 
+ *     'description' => [string]
+ * );
  * </code>
  * @param array $elementInfos An array containing element data. Each entry follows
  * one or more of the following formats:
@@ -477,11 +500,11 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * <code> 
  *    array(
  *         array(
- *             'name'        => [(string) name, required], 
- *             'description' => [(string) description, optional], 
- *             'record_type' => [(string) record type name, optional], 
- *             'data_type'   => [(string) data type name, optional], 
- *             'order'       => [(int) order, optional],
+ *             'name'           => [(string) name, required], 
+ *             'description'    => [(string) description, optional], 
+ *             'record_type'    => [(string) record type name, optional], 
+ *             'data_type'      => [(string) data type name, optional], 
+ *             'order'          => [(int) order, optional],
  *             'record_type_id' => [(int) record type id, optional],
  *             'data_type_id'   => [(int) data type id, optional]
  *         ), 
@@ -490,7 +513,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * </code>
  * @return ItemType
  * @throws Exception
- **/
+ */
 function insert_item_type($metadata = array(), $elementInfos = array()) 
 {
     $builder = new ItemTypeBuilder($metadata, $elementInfos);    
@@ -498,30 +521,30 @@ function insert_item_type($metadata = array(), $elementInfos = array())
 }
 
 /**
- * Inserts a collection
+ * Insert a collection
  * 
  * @param array $metadata Follows the format:
  * <code> array(
- *     'name'       => [string], 
- *     'description'=> [string], 
- *     'public'     => [true|false], 
- *     'featured'   => [true|false]
- *     'collectors' => [array of entities, entity ids, or entity property arrays]
+ *     'name'        => [string], 
+ *     'description' => [string], 
+ *     'public'      => [true|false], 
+ *     'featured'    => [true|false]
+ *     'collectors'  => [array of entities, entity ids, or entity property arrays]
  * )</code>
  * 
  * You can specify collectors in several ways.
  *
  * You can provide an array of entity properties:
  * <code>
- * insert_collection(array('collectors'=>array(
- *   array('first_name' => $entityFirstName1,
+ * insert_collection(array('collectors' => array(
+ *   array('first_name'  => $entityFirstName1,
  *         'middle_name' => $entityMiddleName1, 
- *         'last_name' => $entityLastName1,
- *          ...
+ *         'last_name'   => $entityLastName1,
+ *         ...
  *         ),
- *   array('first_name' => $entityFirstName2,
+ *   array('first_name'  => $entityFirstName2,
  *         'middle_name' => $entityMiddleName2, 
- *         'last_name' => $entityLastName2,
+ *         'last_name'   => $entityLastName2,
  *         ...
  *         ),
  *   array(...),
@@ -530,26 +553,26 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  * </code>
  *
  * Alternatively, you can use an array of entity objects or entity ids.
- *
- *  insert_collection(array('collectors'=>array($entity1, $entity2, ...));
- *  insert_collection(array('collectors'=>array($entityId1, $entityId2, ...));
+ * <code>
+ *  insert_collection(array('collectors' => array($entity1, $entity2, ...));
+ *  insert_collection(array('collectors' => array($entityId1, $entityId2, ...));
+ * </code>
  *
  * Also you can mix the parameters:
- *
  * <code>
- * insert_collection(array('collectors'=>array(
- *    array('first_name' => $entityFirstName1,
- *         'middle_name' => $entityMiddleName1, 
- *         'last_name' => $entityLastName1,
+ * insert_collection(array('collectors' => array(
+ *    array('first_name'  => $entityFirstName1,
+ *          'middle_name' => $entityMiddleName1, 
+ *          'last_name'   => $entityLastName1,
  *          ...
- *         ),
+ *          ),
  *   $entity2,
  *   $entityId3,
  *   ...
  * ));
  * </code> 
- * 
- **/
+ * @return Collection
+ */
 function insert_collection($metadata = array())
 {
     $builder = new CollectionBuilder($metadata);
@@ -577,10 +600,10 @@ function insert_collection($metadata = array())
  * <code> 
  *    array(
  *         array(
- *             'name'        => [(string) name, required], 
- *             'description' => [(string) description, optional], 
- *             'record_type' => [(string) record type name, optional], 
- *             'data_type'   => [(string) data type name, optional], 
+ *             'name'           => [(string) name, required], 
+ *             'description'    => [(string) description, optional], 
+ *             'record_type'    => [(string) record type name, optional], 
+ *             'data_type'      => [(string) data type name, optional], 
  *             'record_type_id' => [(int) record type id, optional],
  *             'data_type_id'   => [(int) data type id, optional]
  *         ), 
@@ -596,13 +619,14 @@ function insert_element_set($elementSetMetadata = array(), array $elements = arr
 }
 
 /**
- * Releases an object from memory.
+ * Release an object from memory.
  * 
  * Use this fuction after you are done using an Omeka model object to prevent 
  * memory leaks.  Required because PHP 5.2 does not do garbage collection on 
  * circular references.
  *
- * @param mixed 
+ * @param mixed &$var The object to be released, or an array of such objects.
+ * @return void
  */
 function release_object(&$var) 
 {
@@ -615,7 +639,7 @@ function release_object(&$var)
 }
 
 /**
- * Return either the value or, if it's empty, output the default.
+ * Return either the value passed or, if it's empty, return a default value.
  * 
  * @param mixed $value
  * @param mixed $default
@@ -627,13 +651,13 @@ function not_empty_or($value, $default)
 }
 
 /**
-  * Returns whether a value is true or not.  
-  * If the value is a string and its lowercased value is 'true' or '1', it returns true.
-  * If the value is an integer and equal to 1, then it returns true.
-  * Otherwise it returns false.
-  * @param string $value
-  * @return boolean
-  **/
+ * Returns whether a value is true or not.  
+ * If the value is a string and its lowercased value is 'true' or '1', it returns true.
+ * If the value is an integer and equal to 1, then it returns true.
+ * Otherwise it returns false.
+ * @param string $value
+ * @return boolean
+ */
 function is_true($value) 
 {
     if ($value === null) {
@@ -646,9 +670,10 @@ function is_true($value)
 /**
  * Gets a theme option
  * 
- * @param string $optionName The name of the option to get
- * @param string $themeName The name of the theme.  If null, it will use the current public theme.
- * @return string The value of the theme option
+ * @param string $optionName The name of the option to get.
+ * @param string $themeName The name of the theme.  If null, it will use the 
+ * current public theme.
+ * @return string The value of the theme option.
  */
 function get_theme_option($optionName, $themeName = null)
 {
@@ -663,7 +688,8 @@ function get_theme_option($optionName, $themeName = null)
  * 
  * @param string $optionName The name of the option to set.
  * @param string $optionValue The value of the option.
- * @param string $themeName The name of the theme.  If null, it will use the current public theme.
+ * @param string $themeName The name of the theme.  If null, it will use the 
+ * current public theme.
  * @return void
  */
 function set_theme_option($optionName, $optionValue, $themeName = null)
@@ -675,10 +701,10 @@ function set_theme_option($optionName, $optionValue, $themeName = null)
 }
 
 /**
- * Returns an array of role names
+ * Returns an array of all user role names.
  * 
  * @return array
- **/
+ */
 function get_user_roles()
 {
 	$roles = Omeka_Context::getInstance()->getAcl()->getRoleNames();
