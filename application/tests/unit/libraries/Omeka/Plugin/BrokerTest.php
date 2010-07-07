@@ -18,13 +18,13 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
     {
         $this->broker = new Omeka_Plugin_Broker;
         $this->testHooksFired = array();
-        $this->broker->addHook('initialize', array($this, 'testHook1'), 'foobar');
-        $this->broker->addHook('initialize', array($this, 'testHook2'), 'bazfoo');
+        $this->broker->addHook('initialize', array($this, 'hookImpl1'), 'foobar');
+        $this->broker->addHook('initialize', array($this, 'hookImpl2'), 'bazfoo');
     }
     
     public function testHookStorage()
     {
-        $this->assertEquals(array($this, 'testHook1'), $this->broker->getHook('foobar', 'initialize'));
+        $this->assertEquals(array($this, 'hookImpl1'), $this->broker->getHook('foobar', 'initialize'));
     }
         
     public function testHookStorageViaAddPluginHookFunction()
@@ -59,12 +59,12 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('2nd argument', $this->testHooksFired['hook2']);
     }
     
-    public function testHook1($arg1, $arg2)
+    public function hookImpl1($arg1, $arg2)
     {
         $this->testHooksFired['hook1'] = $arg1;
     }
     
-    public function testHook2($arg1, $arg2)
+    public function hookImpl2($arg1, $arg2)
     {
         $this->testHooksFired['hook2'] = $arg2;
     }

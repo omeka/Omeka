@@ -276,7 +276,9 @@ class Omeka_Plugin_Loader
      */
     public function getPlugin($directoryName)
     {
-        return $this->_plugins[(string)$directoryName];
+        if (array_key_exists($directoryName, $this->_plugins)) {
+            return $this->_plugins[(string)$directoryName];
+        }
     }
     
     protected function _loadPluginBootstrap(Plugin $plugin)

@@ -135,7 +135,7 @@ class Omeka_Controller_Flash
 	 */
 	public static function reset()
 	{
-	    if (self::$_session instanceof Zend_Session_Namespace) {
+	    if (self::$_session instanceof Zend_Session_Namespace && isset($_SESSION)) {
     	    self::$_session->unsetAll();
 	    }
 	    self::$_priority = null;

@@ -18,11 +18,11 @@ class CollectionTable extends Omeka_Db_Table
     public function applySearchFilters($select, $params)
     {
         
-        if(isset($params['public'])) {
+        if(array_key_exists('public', $params)) {
             $this->filterByPublic($select, $params['public']);
         }
         
-        if(isset($params['featured'])) {
+        if(array_key_exists('featured', $params)) {
             $this->filterByFeatured($select, $params['featured']);
         }
         
@@ -32,8 +32,7 @@ class CollectionTable extends Omeka_Db_Table
          * ORDER BY id DESC works because MyISAM tables always increment IDs for new rows,
          * would not work with InnoDB because it assigns IDs of deleted records
          ****************************/
-         
-         if ($params['recent'] === true) {             
+         if (array_key_exists('recent', $params) && $params['recent'] === true) {             
              $select->order('c.id DESC');
          }        
     }

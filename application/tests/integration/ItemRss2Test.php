@@ -13,7 +13,8 @@ class Item_Rss2Test extends Omeka_Test_AppTestCase
         
         $fileUrl = TEST_DIR . '/_files/test.txt';
         $files = insert_files_for_item($item, 'Filesystem', array($fileUrl));
-
+        
+        $_SERVER['HTTP_HOST'] = 'localhost';
     }
     
     public function testCanGetValidItemRss2Output()

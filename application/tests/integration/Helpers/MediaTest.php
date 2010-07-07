@@ -42,4 +42,9 @@ class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
     {
         $this->mimeTypeCallbackFired = true;
     }
+    
+    public function __sleep()
+    {
+        return array('helper');
+    }
 }

@@ -772,7 +772,9 @@ abstract class Omeka_Record implements ArrayAccess
      **/
     protected function setFromPost($post) 
     {
-        unset($post['id']);
+        if (array_key_exists('id', $post)) {
+            unset($post['id']);
+        }
         $this->setArray($post);
         return $post;
     }

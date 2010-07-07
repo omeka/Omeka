@@ -91,11 +91,7 @@ class User extends Omeka_Record {
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         
         $post = $filter->getUnescaped();
-        
-        if ($post['active']) {
-            $post['active'] = 1;
-        }
-        
+                
         return $post;
     }
     
@@ -105,7 +101,9 @@ class User extends Omeka_Record {
         if (isset($post['password'])) {
              unset($post['password']);
         }
-        unset($post['salt']);
+        if (array_key_exists('salt', $post)) {
+            unset($post['salt']);
+        }
         return parent::setFromPost($post);
     }
     
