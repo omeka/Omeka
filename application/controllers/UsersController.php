@@ -147,7 +147,11 @@ class UsersController extends Omeka_Controller_Action
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         
         //Send the email with the activation url
-        $url   = "http://".$_SERVER['HTTP_HOST'].$this->getRequest()->getBaseUrl().'/users/activate?u='.$activationCode;
+        $url = $this->view->serverUrl() . $this->view->url(array(
+            'controller' => 'users',
+            'action' => 'activate',
+            'u' => $activationCode
+        ), 'default');
         $body  = "Please follow this link to reset your password:\n\n";
         $body .= $url."\n\n";
         $body .= "$siteTitle Administrator";
