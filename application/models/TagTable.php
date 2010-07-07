@@ -179,28 +179,33 @@ class TagTable extends Omeka_Db_Table
     {        
         $db = $this->getDb();
         
-        if ($tagType = $params['type']) {
-            $this->filterByTagType($select, $tagType);
+        if (array_key_exists('type', $params)) {
+            $this->filterByTagType($select, $params['type']);
+            
+            //If we only want tags for public items, use one of the ItemTable's filters
+            if ($params['type'] == 'Item' && isset($params['public'])) {
+                $db->getTable('Item')->filterByPublic($select, isset($params['public']));
+            }
         }
         
-        //If we only want tags for public items, use one of the ItemTable's filters
-        if (isset($params['public']) && $tagType == 'Item') {
-            $db->getTable('Item')->filterByPublic($select, isset($params['public']));
+        if (array_key_exists('record', $params) && $params['record'] instanceof Omeka_Record) {
+            $this->filterByRecord($select, $params['record']);
         }
         
-        if (($record = $params['record']) && ($record instanceof Omeka_Record)) {
-            $this->filterByRecord($select, $record);
-        }
-                
-        if(($userOrEntity = $params['user']) || ($userOrEntity = $params['entity'])) {
-            $this->filterByUserOrEntity($select, $userOrEntity, !empty($params['user']));
+        $userOrEntity = array_key_exists('user', $params) ? $params['user']
+                      : (array_key_exists('entity', $params) ? $params['entity']
+                      : false); 
+        if($userOrEntity) {
+            $this->filterByUserOrEntity($select, $userOrEntity, array_key_exists('user', $params));
         }
 
-        if (isset($params['like'])) {
+        if (array_key_exists('like', $params)) {
             $this->filterByTagNameLike($select, $params['like']);
         }
-
-        $this->sortBy($select, $params['sort']);
+        
+        if (array_key_exists('sort', $params)) {
+            $this->sortBy($select, $params['sort']);
+        }
                         
         $select->group("t.id");
     }
