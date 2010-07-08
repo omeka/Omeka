@@ -19,6 +19,7 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
         $this->convertDir = '/opt/local/bin';
         $this->invalidFile = '/foo/bar/baz.html';
         $this->validFilePath = dirname(__FILE__) . '/_files/valid-image.jpg';
+        $this->validMimeType = 'image/jpeg';
         $this->fullsizeImgPath = dirname(__FILE__) . '/_files/fullsize';
         $this->derivativeFilename = 'valid-image_deriv.jpg';
         // If we set up a test log, then log the ImageMagick commands instead
@@ -37,7 +38,7 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
     {
         try {
             $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
-            $creator->create($this->validFilePath);
+            $creator->create($this->validFilePath, '', $this->validMimeType);
         } catch (InvalidArgumentException $e) {
             $this->assertContains("Invalid derivative filename", $e->getMessage());
             return;
@@ -60,14 +61,14 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
     {
         $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         // Should do nothing.
-        $creator->create($this->validFilePath, $this->derivativeFilename);
+        $creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);
     }
     
     public function testCreateWithInvalidOriginalFile()
     {
         $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         try {
-            $creator->create($this->invalidFile, $this->derivativeFilename);
+            $creator->create($this->invalidFile, $this->derivativeFilename, $this->validMimeType);
         } catch (Exception $e) {
             $this->assertContains("does not exist", $e->getMessage());
             return;
@@ -91,7 +92,7 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
     {
         $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         $creator->addDerivative($this->fullsizeImgPath, 10);
-        $creator->create($this->validFilePath, $this->derivativeFilename);
+        $creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);
         $newFilePath = $this->fullsizeImgPath . '/' . $this->derivativeFilename;
         $this->assertTrue(file_exists($newFilePath));
         unlink($newFilePath);
