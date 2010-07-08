@@ -296,7 +296,9 @@ abstract class Omeka_Record implements ArrayAccess
      */
     protected function getCached($name)
     {
-        return $this->_cache[$name];
+        if (isset($this->_cache[$name])) {
+            return $this->_cache[$name];
+        }
     }
     
     /**
@@ -770,7 +772,9 @@ abstract class Omeka_Record implements ArrayAccess
      **/
     protected function setFromPost($post) 
     {
-        unset($post['id']);
+        if (array_key_exists('id', $post)) {
+            unset($post['id']);
+        }
         $this->setArray($post);
         return $post;
     }

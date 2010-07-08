@@ -15,6 +15,9 @@
  **/
 class PublicFeatured extends Omeka_Record_Mixin
 {
+    private $_wasPublic;
+    private $_wasFeatured;
+    
     public function __construct($record)
     {
         $this->record = $record;
@@ -91,7 +94,7 @@ class PublicFeatured extends Omeka_Record_Mixin
             $hookName = $this->getHookName('featured', false);
         }
 
-        if ($hookName) {
+        if (isset($hookName)) {
             fire_plugin_hook($hookName, $this->record);
         }
     }

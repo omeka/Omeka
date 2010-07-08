@@ -34,7 +34,7 @@ class ItemRss2
         // How do we determine what title to give the RSS feed?        
         $headers['title'] = settings('site_title');
         
-        $headers['link'] = xml_escape('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        $headers['link'] = xml_escape(__v()->serverUrl(isset($_SERVER['REQUEST_URI'])));
         $headers['lastUpdate'] = time();
         $headers['charset'] = "UTF-8";    
         
@@ -77,7 +77,7 @@ class ItemRss2
         $entry['lastUpdate'] = strtotime($item->added);
                 
         //List the first file as an enclosure (only one per RSS feed)
-        if($item->Files && ($file = current($item->Files))) {
+        if(($files = $item->Files) && ($file = current($files))) {
             $entry['enclosure']   = array();
             $fileDownloadUrl = file_display_uri($file);
             $enc['url']           = $fileDownloadUrl;

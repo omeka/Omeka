@@ -108,8 +108,13 @@ class Omeka_Plugin_Filters
      * @return array
      **/
     public function getFilters($hookName)
-    {        
-        $filters = (array) $this->_filters[$this->_getFilterKey($hookName)];
+    {   
+        $filterKey = $this->_getFilterKey($hookName);
+        if (!isset($this->_filters[$filterKey])) {
+            return array();
+        }
+          
+        $filters = (array) $this->_filters[$filterKey];
         
         ksort($filters);
         

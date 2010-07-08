@@ -39,11 +39,13 @@
             <div id="site-title"><?php echo link_to_admin_home_page(settings('site_title')); ?></div>
             
             <div id="site-info">
+            <?php if (current_user()): ?>
                 <p id="welcome">Welcome, <?php if (has_permission(current_user(), 'edit')): ?>
                     <a href="<?php echo html_escape(uri('users/edit/'.current_user()->id)); ?>"><?php echo html_escape(current_user()->first_name); ?></a>
                 <?php else: ?>
                     <?php echo html_escape(current_user()->first_name); ?>
                 <?php endif; ?> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout">Logout</a></p>
+            <?php endif; ?>
                 <?php if (has_permission('Settings', 'edit')): ?>
                     <a href="<?php echo html_escape(uri('settings')); ?>" id="settings-link">Settings</a>';
 

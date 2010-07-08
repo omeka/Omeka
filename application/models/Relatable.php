@@ -42,9 +42,10 @@ class Relatable extends Omeka_Record_Mixin
      **/
     public function afterInsert()
     {
-        if ($entity = Omeka_Context::getInstance()->getCurrentUser()->Entity) {
-            $this->setAddedBy($entity);
-        }        
+        $user = Omeka_Context::getInstance()->getCurrentUser();
+        if ($user && isset($user->Entity)) {
+            $this->setAddedBy($user->Entity);
+        }
     }
     
     public function beforeDelete()

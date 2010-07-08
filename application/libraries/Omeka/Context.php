@@ -24,6 +24,8 @@ class Omeka_Context
     
     private $_config;
     
+    private $_data = array();
+    
 	/**
 	 * Singleton instance
 	 * 
@@ -105,13 +107,21 @@ class Omeka_Context
     public function __set($name, $value)
     {
         $field = strtolower($name);
-        $this->$field = $value;
+        $this->_data[$field] = $value;
     }       
     
     public function __get($name)
     {
         $field = strtolower($name);
-        return $this->$field;
+        if (isset($this->_data[$field])) {
+            return $this->_data[$field];
+        }
+    }
+    
+    public function __isset($name)
+    {
+        $field = strtolower($name);
+        return isset($this->_data[$field]);
     }
     
     public function setRequest($request)

@@ -67,7 +67,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         return true;
     }
     
-    protected function _transfer($source, $destination)
+    protected function _transfer($source, $destination, array $fileInfo)
     {
         $transferred = false;
         foreach ($this->_transferMethods as $method) {

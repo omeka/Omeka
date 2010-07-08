@@ -216,6 +216,7 @@ function current_action_contexts()
 function output_format_list($list = true, $delimiter = ' | ')
 {
     $actionContexts = current_action_contexts();
+    $html = '';
     
     // Do not display the list if there are no output formats available in the 
     // current action.

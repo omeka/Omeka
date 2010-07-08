@@ -50,7 +50,7 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
         return $original;
     }
     
-    protected function _transfer($source, $destination)
+    protected function _transfer($source, $destination, array $info)
     {        
         if ($info['rename']) {
             rename($source, $destination);

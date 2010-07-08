@@ -38,7 +38,7 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
     
     private function _convertMigrationSchema(array $options)
     {
-        if (!$options[Omeka_Db_Migration_Manager::ORIG_MIGRATION_OPTION_NAME]) {
+        if (!isset($options[Omeka_Db_Migration_Manager::ORIG_MIGRATION_OPTION_NAME])) {
             return;
         }
         

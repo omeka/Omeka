@@ -93,7 +93,7 @@ function is_current_uri($link, $req = null) {
 	$base = $req->getBaseUrl();
 
 	//Strip out the protocol, host, base URI, rightmost slash before comparing the link to the current one
-	$strip_out = array(WEB_DIR, $_SERVER['HTTP_HOST'], $base);
+	$strip_out = array(WEB_DIR, @$_SERVER['HTTP_HOST'], $base);
 	$current = rtrim( str_replace($strip_out, '', $current), '/');
 	$link = rtrim( str_replace($strip_out, '', $link), '/');
 	

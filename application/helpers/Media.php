@@ -231,7 +231,9 @@ class Omeka_View_Helper_Media
                 'class'=>'download-file', 
                 'href'=>file_download_uri($file)
                 );
-            $linkAttributes = array_merge($defaultLinkAttributes, (array)$options['linkAttributes']);
+            $linkAttributes = array_key_exists('linkAttributes', $options)
+                            ? $options['linkAttributes'] : array();
+            $linkAttributes = array_merge($defaultLinkAttributes, $linkAttributes);
 
             $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html . '</a>';
 		}
@@ -445,8 +447,9 @@ class Omeka_View_Helper_Media
             return 'icon';
         }
         
-        $name = self::$_callbacks[$mimeType];
-        if(!$name) {
+        if (array_key_exists($mimeType, self::$_callbacks)) {
+            $name = self::$_callbacks[$mimeType];
+        } else {
             $name = 'defaultDisplay';
         }
         return $name;
@@ -460,7 +463,11 @@ class Omeka_View_Helper_Media
     protected function getDefaultOptions($callback)
     {
         $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
-        return (array) self::$_callbackOptions[$callbackKey];
+        if (array_key_exists($callbackKey, self::$_callbackOptions)) {
+            return (array) self::$_callbackOptions[$callbackKey];
+        } else {
+            return array();
+        }
     }
     
     /**

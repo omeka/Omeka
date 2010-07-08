@@ -29,7 +29,9 @@ class Omeka_Validator_Errors extends ArrayObject
     
     public function offsetGet($key)
     {
-        return $this->_errors[$key];
+        if (array_key_exists($key, $this->_errors)) {
+            return $this->_errors[$key];
+        }
     }
     
     public function offsetSet($key, $val)
