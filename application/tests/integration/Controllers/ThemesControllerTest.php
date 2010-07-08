@@ -25,6 +25,17 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         set_option(Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION, '1');
         $this->_authenticateUser($this->_getDefaultUser());
     }
+    
+    public function testDisplayConfigForm()
+    {
+        set_option(Theme::PUBLIC_THEME_OPTION, self::SEASONS_THEME);
+        $this->request->setParam('name', self::SEASONS_THEME);
+        $this->dispatch('themes/config');
+        $this->assertController('themes');
+        $this->assertAction('config');
+        $this->assertQueryContentContains('h2', 'Please Configure The "Seasons" Theme');
+        $this->assertQuery('select#style_sheet');
+    }
         
     public function testConfigureSeasonsThemeWithNoLogoFileAndNoPreviousLogoFile()
     {
