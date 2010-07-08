@@ -143,16 +143,19 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $request = new Zend_Controller_Request_HttpTestCase();
     
         // post looks like Elements[element_id][index] = array([text], [html])
-        $post = array('Elements'=> array(
-            0 => array(
-                        array('text' => $dirtyHtml, 'html' => true),
-                        array('text' => $dirtyHtml, 'html' => false)
-                 ),
-            1 => array(
-                        array('text' => $dirtyHtml, 'html' => false),
-                        array('text' => $dirtyHtml, 'html' => true)
-                 )
-        ));
+        $post = array(
+            'Elements'=> array(
+                array(
+                    array('text' => $dirtyHtml, 'html' => true),
+                    array('text' => $dirtyHtml, 'html' => false)
+                ),
+                array(
+                    array('text' => $dirtyHtml, 'html' => false),
+                    array('text' => $dirtyHtml, 'html' => true)
+                )
+            ),
+            'tags' => 'foo, bar'
+        );
     
         $request->setPost($post);
     
@@ -177,17 +180,19 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         // Create a request with dirty html for the collection description post variable
         $request = new Zend_Controller_Request_HttpTestCase();
     
-        // post looks like Elements[element_id][index] = array([text], [html])
-        $post = array('Elements'=> array(
-            0 => array(
-                        array('text' => $dirtyHtml, 'html' => true),
-                        array('text' => $dirtyHtml, 'html' => false)
-                 ),
-            1 => array(
-                        array('text' => $dirtyHtml, 'html' => false),
-                        array('text' => $dirtyHtml, 'html' => true)
-                 )
-        ));
+        $post = array(
+            'Elements'=> array(
+                array(
+                    array('text' => $dirtyHtml, 'html' => true),
+                    array('text' => $dirtyHtml, 'html' => false)
+                ),
+                array(
+                    array('text' => $dirtyHtml, 'html' => false),
+                    array('text' => $dirtyHtml, 'html' => true)
+                )
+            ),
+            'tags' => ''
+        );
     
         $request->setPost($post);
     
@@ -211,17 +216,19 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         // Create a request with dirty html for the collection description post variable
         $request = new Zend_Controller_Request_HttpTestCase();
     
-        // post looks like Elements[element_id][index] = array([text], [html])
-        $post = array('Elements'=> array(
-            0 => array(
-                        array('text' => $dirtyHtml, 'html' => true),
-                        array('text' => $dirtyHtml, 'html' => false)
-                 ),
-            1 => array(
-                        array('text' => $dirtyHtml, 'html' => false),
-                        array('text' => $dirtyHtml, 'html' => true)
-                 )
-        ));
+        $post = array(
+            'Elements'=> array(
+                array(
+                    array('text' => $dirtyHtml, 'html' => true),
+                    array('text' => $dirtyHtml, 'html' => false)
+                ),
+                array(
+                    array('text' => $dirtyHtml, 'html' => false),
+                    array('text' => $dirtyHtml, 'html' => true)
+                )
+            ),
+            'tags' => ''
+        );
     
         $request->setPost($post);
     
@@ -249,14 +256,14 @@ class Omeka_Controller_Plugin_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $post = array(
             'whatever' => $dirtyHtml,
             'NestedArray'=> array(
-                0 => array(
-                        array('text' => $dirtyHtml),
-                        array('text' => $dirtyHtml)
-                 ),
-                1 => array(
-                        array('text' => $dirtyHtml),
-                        array('text' => $dirtyHtml)
-                 )
+                array(
+                    array('text' => $dirtyHtml),
+                    array('text' => $dirtyHtml)
+                ),
+                array(
+                    array('text' => $dirtyHtml),
+                    array('text' => $dirtyHtml)
+                )
             ),
             'whatever2' => $dirtyHtml
         );
