@@ -135,7 +135,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         
         foreach($dataArray as $k => $v) {
             if (is_array($v)) {
-                $dataArray[$k] = $this->_purifyArray($v, $purifier);
+                $dataArray[$k] = $this->_purifyArray($v, $htmlPurifierFilter);
             } else if (is_string($v)) {
                 $dataArray[$k] = $htmlPurifierFilter->filter($v);
             }
