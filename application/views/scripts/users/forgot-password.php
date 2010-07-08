@@ -1,4 +1,4 @@
-<?php head(array('bodyclass'=>'login')); ?>
+<?php head(array('bodyclass'=>'login', 'title' => 'Forgot Password')); ?>
 <h1>Forgot Password</h1>
 <p id="login-links">
 <span id="backtologin"><?php echo link_to('users', 'login', 'Back to Log In'); ?></span>

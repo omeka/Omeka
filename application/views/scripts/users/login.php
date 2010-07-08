@@ -1,4 +1,4 @@
-<?php head(array('bodyclass'=>'login')); ?>
+<?php head(array('bodyclass'=>'login', 'title' => 'Login')); ?>
 
 <script type="text/javascript" charset="utf-8">
     Event.observe(window,'load',function() {
