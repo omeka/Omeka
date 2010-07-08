@@ -54,7 +54,7 @@ class EntityTable extends Omeka_Db_Table
     public function applySearchFilters($select, $params = array())
     {    
         // If we are not allowed to display email addresses, don't pull it from the DB
-        if (!$params['get_email']) {
+        if (!array_key_exists('get_email', $params) || !$params['get_email']) {
             $select->reset(Zend_Db_Select::COLUMNS);
             $select->from(array(), array('e.id', 
                                          'e.first_name', 
