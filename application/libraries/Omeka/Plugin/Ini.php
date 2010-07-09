@@ -1,40 +1,51 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Responsible for parsing the plugin.ini file for any given plugin.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Plugin_Ini
 {
+    /**
+     * Plugins directory.
+     * 
+     * @var string
+     */
     protected $_pluginsRootDir;
         
     /**
-     * @var array Set of Zend_Config_Ini objects corresponding to each plugin.
+     * Set of Zend_Config_Ini objects corresponding to each plugin.
+     *
+     * @var array
      */
     protected $_configs = array();
     
+    /**
+     * @param string $pluginsRootDir Plugins directory.
+     */
     public function __construct($pluginsRootDir)
     {
         $this->_pluginsRootDir = $pluginsRootDir;
     }
     
     /**
-     * Returns a value in plugin.ini for a key
+     * Retrieve a value in plugin.ini for a given key.
      *
-     * Will return a null value if no value can be found in the ini file for the key.
+     * Will return a null value if no value can be found in the ini file for the
+     * key.
      * 
-     * @param string $pluginDirName
-     * @param string $iniKeyName
-     * @return null | string
-     **/
+     * @param string $pluginDirName Plugin name.
+     * @param string $iniKeyName INI key to retrieve.
+     * @return string|null Retrieved INI value (null if not found).
+     */
     public function getPluginIniValue($pluginDirName, $iniKeyName)
     {
         // Extract the directory name from the plugin.
@@ -58,22 +69,22 @@ class Omeka_Plugin_Ini
     } 
                 
     /**
-     * Returns whether a plugin has a plugin.ini file
+     * Return whether a plugin has a plugin.ini file
      * 
-     * @param string $pluginDirName
+     * @param string $pluginDirName Plugin name.
      * @return boolean
-     **/
+     */
     public function hasPluginIniFile($pluginDirName)
     {
         return file_exists($this->getPluginIniFilePath($pluginDirName));        
     }
     
     /**
-     * Returns the path to the plugin.ini file
+     * Return the path to the plugin.ini file
      * 
-     * @param string $pluginDirName
+     * @param string $pluginDirName Plugin name.
      * @return string
-     **/
+     */
     public function getPluginIniFilePath($pluginDirName)
     {
         if ($pluginDirName instanceof Plugin) {
@@ -82,6 +93,12 @@ class Omeka_Plugin_Ini
         return $this->_pluginsRootDir . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
     }
     
+    /**
+     * Initialize a Plugin model object with the values from the INI file.
+     *
+     * @param Plugin $plugin The plugin model to initialize.
+     * @return void
+     */
     public function load(Plugin $plugin)
     {
         // Can't really do anything if there is no plugin.ini file for this plugin.
