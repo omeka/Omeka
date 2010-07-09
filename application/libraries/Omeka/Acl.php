@@ -111,7 +111,7 @@ class Omeka_Acl extends Zend_Acl
      * 
      * @see Zend_Acl::addRole()
      **/
-    public function addRole(Zend_Acl_Role_Interface $role, $parents = null)
+    public function addRole($role, $parents = null)
     {
         $this->_roles[] = $role->getRoleId();
         
