@@ -72,9 +72,13 @@ class Omeka_Plugin_Broker
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
              
-        if (is_array($this->_callbacks[$hook])) {
+        if (array_key_exists($hook, $this->_callbacks) 
+            && is_array($this->_callbacks[$hook]) 
+            && array_key_exists($pluginDirName, $this->_callbacks[$hook])
+        ) {
             return $this->_callbacks[$hook][$pluginDirName];
         }
+        return null;
     }
     
     /**
