@@ -1,18 +1,20 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ * @subpackage Omeka_View_Helper
+ */
 
 /**
  * Abstract class that encapsulates default behavior for retrieving lists of 
  * metadata for any record that uses ActsAsElementText.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @subpackage Omeka_View_Helper
+ * @copyright Center for History and New Media, 2009-2010
+ */
 abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
 {   
     const RETURN_HTML = 'html';
@@ -27,33 +29,44 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
     /**
      * Flag to indicate whether to show elements that do not have text.
      * @see self::$_emptyElementString
-     * @var bool
+     * @var boolean
      */
     protected $_showEmptyElements = true;
     
     /**
-     * The string to display if elements without text are shown.
+     * String to display if elements without text are shown.
      * @see self::$_showEmptyElements
      * @var string
      */
     protected $_emptyElementString = '[no text]';
     
+    /**
+     * Element sets to list.
+     *
+     * @var array
+     */
     protected $_elementSetsToShow = array();
     
+    /**
+     * Type of data to return.
+     *
+     * @var string
+     */
     protected $_returnType = self::RETURN_HTML;
     
     /**
-     * Virtual constructor.
-     * @param Item
+     * Get the record metadata list.
+     * 
+     * @param Omeka_Record $record Record to retrieve metadata from.
      * @param array $options
-     * Available options:
-     * 'show_empty_elements' => bool|string Whether to show elements that 
-     *     do not contain text. A string will set self::$_showEmptyElements to 
-     *     true and set self::$_emptyElementString to the provided string.
-     * 'show_element_sets' => array List of names of element sets to display.
-     * 'return_type' => string 'array', 'html'.  Defaults to 'html'.
+     *  Available options:
+     *  - show_empty_elements' => bool|string Whether to show elements that 
+     *    do not contain text. A string will set self::$_showEmptyElements to 
+     *    true and set self::$_emptyElementString to the provided string.
+     *  - 'show_element_sets' => array List of names of element sets to display.
+     *  - 'return_type' => string 'array', 'html'.  Defaults to 'html'.
      * @since 1.0 Added 'show_element_sets' and 'return_type' options.
-     * @return string  
+     * @return string|array 
      */
     protected function _getList(Omeka_Record $record, array $options = array())
     {
@@ -65,6 +78,7 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
     
     /**
      * Set the options.
+     *
      * @param array $options
      * @return void
      */
@@ -98,6 +112,7 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
     
     /**
      * Get an array of all element sets containing their respective elements.
+     * 
      * @uses Item::getAllElementsBySet()
      * @uses Item::getItemTypeElements()
      * @return array
@@ -117,7 +132,7 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
     /**
      * Get an array of all texts belonging to the provided element.
      * @uses Item::getTextsByElement()
-     * @param Element
+     * @param Element $element
      * @return array
      */
     protected function _getTextsByElement(Element $element)
@@ -132,8 +147,9 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
      * @todo Maybe separate caching here so it's not hiding in a seemingly 
      * unassociated method. Though, doing so would require an extra step in the 
      * output methods (i.e. <?php $this->_cache($element); ?>).
-     * @param Element
-     * @return bool
+     * @param Element $element
+     * @param array $texts
+     * @return boolean
      */
     protected function _elementIsShowable(Element $element, $texts)
     {        
@@ -176,8 +192,21 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
         }
     }
     
+    /**
+     * Return a formatted version of the requested element.
+     *
+     * @param Omeka_Record $record
+     * @param string $elementSetName
+     * @param string $elementName
+     * @return string
+     */
     abstract protected function _getFormattedElementText($record, $elementSetName, $elementName);
     
+    /**
+     * Get the metadata list as a PHP array.
+     *
+     * @return array
+     */
     protected function _getOutputAsArray()
     {
         $elementSets = $this->_getElementsBySet();
@@ -195,6 +224,11 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
         return $outputArray;
     }
     
+    /**
+     * Get the metadata list.
+     *
+     * @return string|array
+     */
     protected function _getOutput()
     {
         switch ($this->_returnType) {
@@ -215,12 +249,14 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
     }
     
     /**
-     * @todo Could pass the name of the partial in as an argument rather than hard
-     * coding it.  That would allow us to use arbitrary partials for purposes such as 
-     * repackaging the data for RSS/XML or other data formats.
+     * Load a view partial to display the data.
+     *
+     * @todo Could pass the name of the partial in as an argument rather than 
+     * hardcoding it.  That would allow us to use arbitrary partials for 
+     * purposes such as repackaging the data for RSS/XML or other data formats.
      * 
-     * @param array
+     * @param array $vars
      * @return void
-     **/
+     */
     abstract protected function _loadViewPartial($vars = array());
 }

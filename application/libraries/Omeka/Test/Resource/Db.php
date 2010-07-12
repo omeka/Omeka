@@ -1,11 +1,14 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
+/**
+ * Get the install form to get current default values.
+ */
 require_once APP_DIR . '/forms/Install.php';
 
 /**
@@ -14,7 +17,7 @@ require_once APP_DIR . '/forms/Install.php';
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
     const SUPER_USERNAME = 'foobar123';
@@ -28,6 +31,11 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     const DEFAULT_COPYRIGHT     = '2010';
     const DEFAULT_DESCRIPTION   = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
     
+    /**
+     * Load and initialize the database.
+     *
+     * @return Omeka_Db
+     */
     public function init()
     {   
         $this->getBootstrap()->bootstrap('Config');
@@ -41,6 +49,9 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     
     /**
      * Install the Omeka database as part of the test bootstrap process.
+     *
+     * @param Omeka_Db $db
+     * @return void
      */
     public function install(Omeka_Db $db)
     {
@@ -64,7 +75,12 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         $installer = new Installer($db);
         $installer->install($installInfo);        
     }
-        
+    
+    /**
+     * Create a DB instance with the omeka_ prefix.
+     *
+     * @return Omeka_Db
+     */
     private function _getOmekaDb()
     {
         $omekaDb = new Omeka_Db($this->getDbAdapter(), 'omeka_');
@@ -73,6 +89,9 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         
     /**
      * Drop all the tables in the test database.
+     *
+     * @param Zend_Db_Adapter_Abstract $dbAdapter
+     * @return void
      */
     private function _dropTables(Zend_Db_Adapter_Abstract $dbAdapter)
     {

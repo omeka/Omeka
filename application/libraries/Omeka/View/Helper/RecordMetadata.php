@@ -8,12 +8,12 @@
  */
 
 /**
- * Helper used to retrieve metadata for a record that makes use of element texts.
+ * Helper used to retrieve metadata for a record that makes use of element 
+ * texts.
  * Currently limited to items and files.
  *
  * @package Omeka
  * @subpackage Omeka_View_Helper
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
  */
 abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
@@ -36,38 +36,34 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      * item([Item Record], 'id'). There are a number of options that can be 
      * passed via an array as the fourth argument.
      * 
-     * @param Omeka_Record Database record representing the item from which to retrieve 
-     * field data.
-     * @param string The element set name of a specified element OR another
-     * arbitrary field name for the record.
-     * @param string The element belonging to the specified element set. If this 
-     * parameter is not set, or if it is null, the code assumes the previous 
-     * parameter is a special value.
-     * @param array|string|integer Options for formatting the metadata for 
-     * display.
-     * <ul>
-     * <li>Default array options:
-     * <ul>
-     *   <li>'delimiter' => Return the entire set of metadata as a string, where 
-     *       each entry is separated by the string delimiter.</li>
-     *   <li>'index' => Return the metadata entry at the specific integer index, 
-     *       starting at 0.</li>
-     *   <li>'no_filter' => If set to true, return the set of metadata without 
-     *       running any of the filters.</li>
-     *   <li>'snippet' => Trim the length of each piece of text to the given integer 
-     *       length.</li>
-     *   <li>'all' => If set to true, this will retrieve an array containing all 
-     *       values for a single element rather than a specific value.</li>
-     *   <li>'no_escape' => If true, do not escape the resulting values for HTML
-     * entities.</li>
-     * </ul></li>
-     * <li>Default string option:
-     *     Passing the string 'all' will retrieve an array containing all values 
-     *     for a single element rather than a specific value.</li>
-     * <li>Default integer option:
-     *     Passing an integer will return the metadata entry at the specific 
-     *     integer index, starting at 0.</li>
-     * </ul>
+     * @param Omeka_Record $record Database record representing the item from 
+     * which to retrieve field data.
+     * @param string $elementSetName The element set name of a specified element
+     * OR another arbitrary field name for the record.
+     * @param string $elementName The element belonging to the specified element 
+     * set. If this parameter is not set, or if it is null, the code assumes the 
+     * previous parameter is a special value.
+     * @param array|string|integer $options Options for formatting the metadata 
+     * for display.
+     * - Default array options:
+     *   - 'delimiter' => Return the entire set of metadata as a string, where 
+     *     each entry is separated by the string delimiter.
+     *   - 'index' => Return the metadata entry at the specific integer index, 
+     *     starting at 0.
+     *   - 'no_filter' => If set to true, return the set of metadata without 
+     *     running any of the filters.
+     *   - 'snippet' => Trim the length of each piece of text to the given 
+     *     integer length.
+     *   - 'all' => If set to true, this will retrieve an array containing all 
+     *     values for a single element rather than a specific value.
+     *   - 'no_escape' => If true, do not escape the resulting values for HTML
+     *     entities.
+     * - Default string option:
+     *   Passing the string 'all' will retrieve an array containing all values 
+     *   for a single element rather than a specific value.
+     * - Default integer option:
+     *   Passing an integer will return the metadata entry at the specific 
+     *   integer index, starting at 0.
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
@@ -137,9 +133,9 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      * which functions as a handy shortcut for theme writers.  This converts
      * the short form of the options into its proper array form.
      * 
-     * @param string|integer|array
+     * @param string|integer|array $options
      * @return array
-     **/
+     */
     protected function _getOptions($options)
     {
         $converted = array();
@@ -160,7 +156,7 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      * @param string $elementSetName
      * @param string|null $elementName
      * @return string|array Either an array of ElementText records or a string.
-     **/
+     */
     protected function _getText($record, $elementSetName, $elementName)
     {        
         // If $elementName is null we assume that $elementSetName is actually a 
@@ -185,7 +181,7 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      * @param Omeka_Record $record
      * @param string $specialValue Field name.
      * @return mixed
-     **/
+     */
     abstract protected function _getRecordMetadata($record, $specialValue);
     
     /**
@@ -196,7 +192,7 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      * @param string $elementSetName
      * @param string $elementName
      * @return array Set of ElementText records.
-     **/
+     */
     protected function _getElementText($record, $elementSetName, $elementName)
     {        
         $elementTexts = $record->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
@@ -214,10 +210,14 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
     }
     
     /**
-     * Apply filters a set of element text.
+     * Apply filters to a set of element text.
      * 
+     * @param array|string $text
+     * @param string $elementSetName
+     * @param string $elementName
+     * @param Omeka_Record $record
      * @return array|string
-     **/
+     */
     protected function _filterText($text, $elementSetName, $elementName, $record)
     {
         // Build the name of the filter to use. This will end up looking like: 
@@ -260,12 +260,13 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
     /**
      * Retrieve a snippet (or set of snippets) for the text values to return.
      * 
-     * @param string $text
+     * @param string|array $text
      * @param integer $length
      * @return string|array
-     **/
+     */
     protected function _snippetText($text, $length)
-    {        // Integers get no formatting
+    {
+        // Integers get no formatting
         if (is_int($text)) {
 
         } else if (is_string($text)) {
@@ -282,14 +283,14 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
     }
     
     /**
-     *  This applies all filters defined for the 'html_escape' filter. This will
-     *  only be applied to string values or element text records that are not
-     *  marked as HTML. If they are marked as HTML, then there should be no
-     *  escaping because the values are already stored in the database as fully
-     *  valid HTML markup. Any errors resulting from displaying that HTML is the
-     *  responsibility of the administrator to fix.
+     * This applies all filters defined for the 'html_escape' filter. 
+     * This will only be applied to string values or element text records that 
+     * are not marked as HTML. If they are marked as HTML, then there should be     
+     * no escaping because the values are already stored in the database as 
+     * fully valid HTML markup. Any errors resulting from displaying that HTML 
+     * is the responsibility of the administrator to fix.
      * 
-     * @param string|array
+     * @param string|array $text
      * @return string|array
      */
     protected function _escapeTextHtml($text)
@@ -310,9 +311,11 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
     }
     
     /**
-     * @param array
+     * Extract texts from an array.
+     *
+     * @param array $text
      * @return array
-     **/
+     */
     protected function _extractText($text)
     {
         $extractedText = array();

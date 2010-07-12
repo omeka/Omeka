@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Load the default config for the application, but *also* load the test config
@@ -16,19 +16,27 @@
  * 
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstract
 {
     /**
-     * @var Omeka_Core_Resource_Autoloader
+     * @var Omeka_Core_Resource_Config
      */
     private $_coreResource;
     
+    /**
+     * @param array $options Options for resource.
+     */
     public function __construct($options = null)
     {
         $this->_coreResource = new Omeka_Core_Resource_Config($options);
     }
     
+    /**
+     * Load both config files.
+     *
+     * @return Zend_Config
+     */
     public function init()
     {
         $mainConfig = $this->_coreResource->init();
