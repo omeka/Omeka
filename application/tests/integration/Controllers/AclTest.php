@@ -7,84 +7,58 @@
  **/
 
 /**
- * Set of functional tests for checking to see if ACL access for a set of actions if 
- * a user is not logged in.
+ * Test ACL integration with controllers.  
+ * 
+ * Verify that the ACL controller helper is registered and operating properly.
+ * Verify the set of basic ACL permissions.
  *
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
  **/
 class Controllers_AclTest extends Omeka_Test_AppTestCase
-{            
-    public function testUserIsNotLoggedIn()
+{   
+    public function setUp()
     {
-        $this->assertNull($this->core->getResource('CurrentUser'));
+        parent::setUp();
+        $this->aclHelper = Zend_Controller_Action_HelperBroker::getHelper('acl');
     }
-    
-    public function testCanBrowseItems()
+             
+    public function assertPreConditions()
     {
+        $this->assertFalse($this->core->getBootstrap()->getResource('Currentuser'));
+        $this->assertEquals('Omeka_Controller_Action_Helper_Acl', get_class($this->aclHelper));
+    }
+        
+    public function testAclHelperAllowsAccessForDefinedResource()
+    {
+        $this->assertTrue($this->acl->has('Items'));
         $this->dispatch('items');
         $this->assertController('items');
         $this->assertAction('browse');
+        $this->assertTrue($this->aclHelper->isAllowed('browse', 'Items'));
     }
     
-    protected function assertAccessForbidden()
+    public function testAclHelperAllowsAccessForUndefinedResource()
+    {
+        $this->assertFalse($this->acl->has('Index'));
+        $this->dispatch('');
+        $this->assertController('index');
+        $this->assertAction('index');
+        $this->assertTrue($this->aclHelper->isAllowed('index', 'Index'));
+    }
+    
+    public function testAclHelperBlocksAccess()
+    {
+        $this->assertTrue($this->acl->has('ElementSets'));
+        $this->dispatch('element-sets');
+        $this->_assertAccessForbidden();
+        $this->assertFalse($this->aclHelper->isAllowed('browse', 'ElementSets'));
+    }
+    
+    private function _assertAccessForbidden()
     {
         $this->assertController('error');
         $this->assertAction('forbidden');        
-    }
-    
-    public function testCannotBrowseElementSets()
-    {
-        $this->dispatch('element-sets');
-        $this->assertAccessForbidden();
-    }
-    
-    public function testCannotAccessSettingsPage()
-    {
-        $this->dispatch('settings');
-        $this->assertAccessForbidden();
-    }
-    
-    public function testCannotAddItems()
-    {     
-        $this->dispatch('items/add');
-        $this->assertAccessForbidden();     
-    }
-    
-    public function testCannotAddCollections()
-    {
-        $this->dispatch('collections/add');
-        $this->assertAccessForbidden();        
-    }
-    
-    public function testCannotAddItemTypes()
-    {
-        $this->dispatch('item-types/add');
-        $this->assertAccessForbidden();        
-    }
-    
-    public function testCannotRemoveCollectorFromCollection()
-    {
-        $this->dispatch('collections/remove-collector');
-        $this->assertAccessForbidden();                
-    }    
-    
-    public function testCannotConfigureTheme()
-    {
-        $this->dispatch('themes/config');
-        $this->assertAccessForbidden();
-    }
-    
-    public function testCannotBrowseThemes()
-    {
-        $this->dispatch('themes/browse');
-        $this->assertAccessForbidden();
-    }
-    
-    public function testCannotSwitchThemes()
-    {
-        $this->dispatch('themes/switch');
-        $this->assertAccessForbidden();
     }
 }

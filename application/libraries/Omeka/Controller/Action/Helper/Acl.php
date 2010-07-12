@@ -98,8 +98,14 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
             $resource = $this->getResourceName();
         }
 
+        // If the resource has not been defined in the ACL, allow access to the
+        // controller.
+        if (!$this->_acl->has($resource)) {
+            return true;
+        }        
+
         // If the resource exists (Controller) but the tested privilege (action)
-        // has not been defined in the ACL, then allow access.
+        // has not been defined in the ACL, then allow access.        
         if(($resource = $this->_acl->get($resource)) && (!$resource->has($privilege))) {
             return true;
         }
