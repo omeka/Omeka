@@ -4,16 +4,21 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * Generates the omeka-xml output for Item records.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Output_Xml_Item extends Omeka_Output_Xml_Abstract
 {
+    /**
+     * Create a node representing an Item record.
+     *
+     * @return void
+     */
     protected function _buildNode()
     {
         // item

@@ -4,18 +4,29 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Abstract base class for creating omeka-xml output formats.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
 {
+    /**
+     * XML Schema instance namespace URI.
+     */
     const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
+    
+    /**
+     * Omeka-XML namespace URI.
+     */
     const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v3';
+    
+    /**
+     * Omeka-XML XML Schema URI.
+     */
     const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v3/omeka-xml-3-0.xsd';
     
     /**
@@ -52,7 +63,6 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
     /**
      * @param Omeka_Record|array $record
      * @param string $context The context of this DOM document.
-     * @return void
      */
     public function __construct($record, $context)
     {
@@ -357,6 +367,11 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $parentElement->appendChild($tagContainerElement);
    }
    
+   /**
+    * Create a Tag URI to uniquely identify this Omeka XML instance.
+    *
+    * @return string
+    */
    protected function _buildTagUri()
    {
        $uri = Zend_Uri::factory(abs_uri());
@@ -364,6 +379,11 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
        return $tagUri;
    }
    
+   /**
+    * Create a absolute URI containing the current query string.
+    *
+    * @return string
+    */
    protected function _buildUrl()
    {
        $uri = Zend_Uri::factory(abs_uri());
