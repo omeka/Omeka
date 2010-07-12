@@ -1,18 +1,18 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * A wrapper for the getID3 library that extracts metadata from files in the 
  * Omeka filesystem.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_File_Info
 {
     /**
@@ -33,6 +33,9 @@ class Omeka_File_Info
         'application/octet-stream', 
         'regular file');
     
+    /**
+     * @param File $file File to get info for.
+     */
     public function __construct(File $file)
     {
         $this->_file = $file;
@@ -43,11 +46,11 @@ class Omeka_File_Info
      * Take a set of Element records and populate them with element text that is 
      * auto-generated based on the getID3 metadata extraction library.
      * 
-     * @param array Set of Element records.
-     * @param array Info extracted from the file by the getID3 library.
-     * @param string Either 'FilesVideos' or 'FilesImages' depending.
+     * @param array $elements Set of Element records.
+     * @param array $id3Info Info extracted from the file by the getID3 library.
+     * @param string $extractionStrategy Either 'FilesVideos' or 'FilesImages'.
      * @return void
-     **/
+     */
     protected function _populateMimeTypeElements($elements, $id3Info, $extractionStrategy)
     {
         $helperClass = new $extractionStrategy;
@@ -79,7 +82,7 @@ class Omeka_File_Info
      * Extract EXIF, IPTC, etc. metadata from the file.
      * 
      * @return boolean False on failure, true on success.
-     **/
+     */
     public function extract()
     {
         $filePath = $this->_filePath;
@@ -140,9 +143,9 @@ class Omeka_File_Info
     /**
      * References a list of ambiguous mime types from "http://msdn2.microsoft.com/en-us/library/ms775147.aspx".
      * 
-     * @param string
+     * @param string $mime_Type
      * @return boolean
-     **/
+     */
     protected function _mimeTypeIsAmbiguous($mime_type)
     {
         return (empty($mime_type) || in_array($mime_type, $this->_ambiguousMimeTypes));
@@ -151,8 +154,9 @@ class Omeka_File_Info
     /**
      * Pull down the file's extra metadata via getID3 library.
      *
+     * @param string $path Path to file.
      * @return getID3
-     **/
+     */
     protected function _retrieveID3Info($path)
     {
         // Do not extract metadata if the exif module is not loaded. This 

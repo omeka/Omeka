@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
-/** 
+/**
+ * Converts input into values suitable for use as Omeka 'id' key values.
  * @see Zend_Filter_Input
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Filter_ForeignKey implements Zend_Filter_Interface
 {
     /**
@@ -21,9 +21,9 @@ class Omeka_Filter_ForeignKey implements Zend_Filter_Interface
      * This will return null for any value that falls outside the range
      * of an unsigned integer (string, negative numbers, etc.)
      * 
-     * @param mixed
+     * @param mixed $value Input value.
      * @return integer
-     **/
+     */
     public function filter($value)
     {
         if (empty($value) || ((int) $value <= 0)) {

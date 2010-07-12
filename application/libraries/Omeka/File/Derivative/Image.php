@@ -1,23 +1,40 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
- * Create derivative images for a file in Omeka.
+ * Creates derivative images for a file in Omeka.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_File_Derivative_Image
 {
+    /**
+     * Command to call to create derivatives.
+     */
     const IMAGEMAGICK_COMMAND = 'convert';
     
+    /**
+     * File extension of created derivatives.
+     */
     const DERIVATIVE_EXT = 'jpg';
     
+    /**
+     * Check that Omeka is set up to make derivatives.
+     *
+     * Currently checks for the existence and validity of these options:
+     * - 'fullsize_constraint'
+     * - 'thumbnail_constraint'
+     * - 'square_thumbnail_constraint'
+     *
+     * @throws Omeka_File_Derivative_Exception If Omeka can't make derivatives.
+     * @return void
+     */
     protected static function checkOmekaCanMakeDerivativeImages()
     {        
         //Check the constraints to make sure they are valid
@@ -49,7 +66,7 @@ class Omeka_File_Derivative_Image
      * the ImageMagick executable, not the path to the executable itself.
      * @throws Omeka_File_Derivative_Exception When the path is not a valid directory.
      * @return string Absolute path to the ImageMagick executable.
-     **/
+     */
     protected static function _getPathToImageMagick()
     {
         $rawPath = get_option('path_to_convert');
@@ -66,17 +83,23 @@ class Omeka_File_Derivative_Image
     /**
      * Generate all the derivative images for this file.  
      * 
-     * Currently, derivative images include 'fullsize', 'thumbnail' and 
-     * 'square_thumbnail' sizes. New sizes could be added if a plugin were to 
+     * Currently, derivative images include:
+     * - 'fullsize'
+     * - 'thumbnail'
+     * - 'square_thumbnail'
+     * New sizes could be added if a plugin were to 
      * hook into the 'after_file_upload' hook, so this method does not need to 
      * be extensible.
      * 
-     * @param string
-     * @return void
-     **/
+     * @param string $path File to create derivatives of.
+     * @return string Derived image name.
+     */
     public static function createDerivativeImages($path)
     {
-        //Function processes derivatives of every image uploaded - additional images may be created using createImage function.  Additionally, plugin hooks allow you to add your own additional image sizes [DL]
+        // Function processes derivatives of every image uploaded.
+        // Additional images may be created using createImage function.
+        // Additionally, plugin hooks allow you to add your own additional 
+        // image sizes [DL]
         
         //Retrieve the image sizes from the database
         $full_constraint = get_option('fullsize_constraint');
@@ -111,15 +134,16 @@ class Omeka_File_Derivative_Image
      * image_type_to_mime_type().
      * 
      * @throws Omeka_File_Derivative_Exception
-     * @param string The full path to the archived file.
-     * @param string The full path to the directory in which to create the derivative image.
-     * @param integer The size constraint for the image (in pixels).
-     * @param string The type of the image to generate (optional).  If the type 
+     * @param string $old_path The full path to the archived file.
+     * @param string $new_dir The full path to the directory in which to create
+     * the derivative image.
+     * @param integer $constraint The size constraint for the image (in pixels).
+     * @param string  $type The type of the image to generate (optional).  If the type 
      * specified is "square", Omeka will generated a derivative image that is 
      * centered and cropped to a square.  This is primarily used for generation 
      * of square thumbnails, though a plugin could also take advantage of it.
      * @return string The filename of the generated image file.
-     **/
+     */
     public static function createImage( $old_path, $new_dir, $constraint, $type=null) {
             
         $convertPath = self::_getPathToImageMagick();
@@ -171,15 +195,12 @@ class Omeka_File_Derivative_Image
      * 
      * Whether or not to create the derivative images is based on the following
      * criteria:
-     * 
-     * <ul>
-     *  <li>ImageMagick is configured and working properly</li>
-     *  <li>Image size constraints are all properly configured.</li>
-     *  <li>The original file exists and is readable</li>
-     *  <li>The original file can be read by getimagesize()</li>
-     *  <li>The original file's MIME type does not belong to a blacklist of MIME
-     * types that cannot be converted.</li>
-     * </ul>
+     * - ImageMagick is configured and working properly.
+     * - Image size constraints are all properly configured.
+     * - The original file exists and is readable.
+     * - The original file can be read by {@link getimagesize()}.
+     * - The original file's MIME type does not belong to a blacklist of MIME
+     *   types that cannot be converted.
      * 
      * @todo Should be able to create derivatives for all image types that 
      * ImageMagick can handle, not just the ones that can be read by getimagesize().
@@ -187,7 +208,7 @@ class Omeka_File_Derivative_Image
      * @param string $fileMimeType
      * @return string|false If successful, return the filename of the derivative
      * image, otherwise false.
-     **/
+     */
     public static function createAll($originalFilePath, $fileMimeType)
     {
         // Don't try to make derivative images if we don't give a path to 
@@ -202,6 +223,12 @@ class Omeka_File_Derivative_Image
                 : false;
     }
     
+    /**
+     * Return the derivative file name for a file.
+     *
+     * @param string $archiveFilename Original filename.
+     * @return string
+     */
     protected static function _getFileName($archiveFilename)
     {
         $filename = basename($archiveFilename);
@@ -214,12 +241,12 @@ class Omeka_File_Derivative_Image
 	/**
 	 * Checks if Imagemagick is able to make derivative images of that file, based
 	 * upon whether or not it has image dimensions, and if it's not on a blacklist
-	 * of file mime-types
+	 * of file mime-types.
 	 * 
-	 * @param string
-	 * @param string
+	 * @param string $old_path
+	 * @param string $mimeType
 	 * @return boolean
-	 **/
+	 */
 	public static function isDerivable($old_path, $mimeType)
 	{		
 		// List of mime-types which have known problems with ImageMagick
@@ -240,7 +267,7 @@ class Omeka_File_Derivative_Image
 	 * Note that this will only work if the convert utility is in PHP's PATH and
 	 * thus can be located by 'which'.
 	 * 
-	 * @return string The path to the directo
+	 * @return string The path to the directory.
 	 */
 	public static function getDefaultConvertDir()
     {

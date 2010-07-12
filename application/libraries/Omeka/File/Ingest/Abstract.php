@@ -1,38 +1,42 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * An abstract class that handles ingesting files into the Omeka archive and
  * database.  
  * 
  * Specific responsibilities handled by this class:
- *      * Parsing/validating arbitrary inputs that somehow identify the files to 
- * be ingested.
- *      * Iterating through the parsed file information, validating, and 
- * transferring each file to the Omeka archive.
- *      * Inserting a new record into the files table that corresponds to the
- * transferred file's metadata.
- *      * Returning a collection of the records associated with the ingested
- * files.
+ * - Parsing/validating arbitrary inputs that somehow identify the files to 
+ *   be ingested.
+ * - Iterating through the parsed file information, validating, and 
+ *   transferring each file to the Omeka archive.
+ * - Inserting a new record into the files table that corresponds to the
+ *   transferred file's metadata.
+ * - Returning a collection of the records associated with the ingested
+ *   files.
  *
  * Typical usage is via the factory() method:
  * 
+ * <code>
  * $ingest = Omeka_File_Ingest_Abstract::factory('Url', $item);
  * $fileRecords = $ingest->ingest('http://www.example.com');
- *      
+ * </code>
+ *
  * @see ItemBuilder::addFiles()
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 abstract class Omeka_File_Ingest_Abstract
 {
     /**
-     * @var string Corresponds to the archive/ subdirectory where files are stored.  
+     * Corresponds to the archive/ subdirectory where files are stored.
+     *
+     * @var string  
      */
     protected static $_archiveDirectory = FILES_DIR;
     
@@ -42,12 +46,16 @@ abstract class Omeka_File_Ingest_Abstract
     protected $_item;
     
     /**
-     * @var array Set of arbitrary options to use when ingesting files.
+     * Set of arbitrary options to use when ingesting files.
+     *
+     * @var array
      */
     protected $_options = array();
     
     /**
-     * @var array Set of validators implementing Zend_Validate_Interface.
+     * Set of validators implementing Zend_Validate_Interface.
+     * 
+     * @var array
      * @see Omeka_File_Ingest_Abstract::addValidator()
      */
     private $_validators = array();
@@ -58,7 +66,7 @@ abstract class Omeka_File_Ingest_Abstract
      * 
      * @param Item $item
      * @return void
-     **/        
+     */        
     public function setItem(Item $item)
     {
         $this->_item = $item;
@@ -67,9 +75,11 @@ abstract class Omeka_File_Ingest_Abstract
     /**
      * Factory to retrieve Omeka_File_Ingest_* instances.
      * 
-     * @param string
+     * @param string $adapterName Ingest adapter.
+     * @param Item $item
+     * @param array $options
      * @return Omeka_File_Ingest_Abstract
-     **/
+     */
     final public function factory($adapterName, $item, $options = array())
     {
         $className = 'Omeka_File_Ingest_' . $adapterName;
@@ -86,9 +96,9 @@ abstract class Omeka_File_Ingest_Abstract
     /**
      * Retrieve the original filename of the file.
      * 
-     * @param array
+     * @param array $fileInfo
      * @return string
-     **/
+     */
     abstract protected function _getOriginalFilename($fileInfo);
     
     /**
@@ -103,7 +113,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @throws Omeka_File_Ingest_InvalidException
      * @throws Omeka_File_Ingest_Exception
      * @return string Real path to the transferred file.
-     **/
+     */
     abstract protected function _transferFile($fileInfo, $originalFilename);
         
     /**
@@ -114,27 +124,26 @@ abstract class Omeka_File_Ingest_Abstract
      * Example use case is Omeka_File_Ingest_Upload.
      * 
      * @internal Formerly known as setFiles()
-     * @param mixed $fileInfo
+     * @param mixed $files
      * @return array
-     **/
+     */
     abstract protected function _parseFileInfo($files);
     
     /**
      * Set options for ingesting files.
      * 
      * @param array $options Available options include:  
-     *      'ignore_invalid_files' => boolean False by default.  Determine 
-     * whether or not to throw exceptions when a file is not valid.  This can 
-     * be based on a number of factors:  whether or not the original identifier
-     * is valid (i.e. a valid URL), whether or not the file itself is valid
-     * (i.e. invalid file extension), or whether the basic algorithm for 
-     * ingesting the file fails (i.e., files cannot be transferred because the
-     * archive/ directory is not writeable).  
-     * 
-     * This option is primarily useful for skipping known invalid files when 
-     * ingesting large data sets.
+     * - 'ignore_invalid_files': boolean false by default.  Determine 
+     *   whether or not to throw exceptions when a file is not valid.  This can 
+     *   be based on a number of factors:  whether or not the original identifier
+     *   is valid (i.e. a valid URL), whether or not the file itself is valid
+     *   (i.e. invalid file extension), or whether the basic algorithm for 
+     *   ingesting the file fails (i.e., files cannot be transferred because the
+     *   archive/ directory is not writeable).  
+     *   This option is primarily useful for skipping known invalid files when 
+     *   ingesting large data sets.
      * @return void
-     **/        
+     */        
     public function setOptions($options)
     {
         $this->_options = $options;
@@ -155,7 +164,7 @@ abstract class Omeka_File_Ingest_Abstract
      * representing element text metadata to assign to the file.  See 
      * ActsAsElementText::addElementTextsByArray() for more details.
      * @return array Ingested file records.
-     **/
+     */
     final public function ingest($fileInfo)
     {
         // Don't catch or suppress parsing errors.
@@ -193,11 +202,11 @@ abstract class Omeka_File_Ingest_Abstract
     }
     
     /**
-     * Determine whether or not to ignore file ingest errors.  Based on the 
+     * Determine whether or not to ignore file ingest errors.  Based on 
      * 'ignore_invalid_files', which is false by default.
      * 
      * @return boolean
-     **/
+     */
     private function _ignoreIngestErrors()
     {
         return (boolean)$this->_options['ignore_invalid_files'];
@@ -212,7 +221,7 @@ abstract class Omeka_File_Ingest_Abstract
      * 
      * @param Exception $e
      * @return void
-     **/
+     */
     private function _logException(Exception $e)
     {
         $logger = Omeka_Context::getInstance()->getLogger();
@@ -227,11 +236,11 @@ abstract class Omeka_File_Ingest_Abstract
      * @param string $newFilePath Path to the file within Omeka's archive.
      * @param string $oldFilename The original filename for the file.  This will
      * usually be displayed to the end user.
-     * @param array|null $elementMetadata See ActsAsElementText::addElementTextsByArray()
+     * @param array $elementMetadata See ActsAsElementText::addElementTextsByArray()
      * for more information about the format of this array.
      * @uses ActsAsElementText::addElementTextsByArray()
      * @return File
-     **/        
+     */        
     private function _createFile($newFilePath, $oldFilename, $elementMetadata = array())
     {
         $file = new File;
@@ -270,7 +279,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @param string $fromFilename The filename from which to derive the 
      * archival filename. 
      * @return string
-     **/    
+     */    
     protected function _getDestination($fromFilename)
     {
         $filter = new Omeka_Filter_Filename;
@@ -287,9 +296,9 @@ abstract class Omeka_File_Ingest_Abstract
      * 
      * Emulates the way Zend Framework adds validators.
      * 
-     * @param Zend_Validate_Interface
-     * @return $this
-     **/
+     * @param Zend_Validate_Interface $validator
+     * @return Omeka_File_Ingest_Abstract
+     */
     public function addValidator(Zend_Validate_Interface $validator)
     {        
         $this->_validators[] = $validator;
@@ -305,15 +314,15 @@ abstract class Omeka_File_Ingest_Abstract
      * 
      * Important: $fileInfo may need to contain the following keys in order to work
      * with particular Zend_Validate_File_* validation classes:
-     *      'name' => string filename (for Zend_Validate_File_Extension) If 
-     * ZF is unable to determine the file extension when validating, it will 
-     * check the 'name' attribute instead.  Current use cases involve saving the 
-     * file to a temporary location before transferring to the Omeka archive.  
-     * Most temporary files do not maintain the original file extension.
-     *      'type' => string MIME type (for Zend_Validate_File_MimeType) If ZF
-     * is unable to determine the mime type from the transferred file.  Unless 
-     * the server running Omeka has a mime_magic file or has installed the 
-     * FileInfo extension, this will be necessary.
+     * - 'name': string filename (for Zend_Validate_File_Extension) If 
+     *   ZF is unable to determine the file extension when validating, it will 
+     *   check the 'name' attribute instead.  Current use cases involve saving the 
+     *   file to a temporary location before transferring to the Omeka archive.  
+     *   Most temporary files do not maintain the original file extension.
+     * - 'type': string MIME type (for Zend_Validate_File_MimeType) If ZF
+     *   is unable to determine the mime type from the transferred file.  Unless 
+     *   the server running Omeka has a mime_magic file or has installed the 
+     *   FileInfo extension, this will be necessary.
      *  
      * @internal These required keys may be derived from existing data if 
      * necessary, rather than forcing the end user to include them in the array 
@@ -327,7 +336,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @param array $fileInfo Set of file info that describes a given file being 
      * ingested. 
      * @return boolean True if valid, otherwise throws an exception.
-     **/
+     */
     protected function _validateFile($filePath, $fileInfo)
     {
         // Valid until proven otherwise.

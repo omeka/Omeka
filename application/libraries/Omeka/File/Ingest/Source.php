@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * This abstract class encapsulates all the behavior that facilitates file 
@@ -19,31 +19,33 @@
  * provided via the 'filename' attribute.
  * 
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
 {
     /**
      * The 'source' key of the file info is parsed out by default.
      * 
-     * @param array
+     * @param array File info array.
      * @return string
-     **/
+     */
     protected function _getFileSource($fileInfo)
     {
         return $fileInfo['source'];
     }
     
     /**
-     *  Files can be represented as one of the following: 
-     *      A) a string, representing the source identifier for a single file, 
-     *      B) an array containing a 'source' key, 
-     *      C) an array of strings, or 
-     *      D) an array of arrays that each contain a 'source' key.
+     * Normalize a file info array.
+     *
+     * Files can be represented as one of the following: 
+     * - a string, representing the source identifier for a single file. 
+     * - an array containing a 'source' key.
+     * - an array of strings.
+     * - an array of arrays that each contain a 'source' key.
      * 
-     * @param mixed
-     * @return array
-     **/
+     * @param string|array $files
+     * @return array Formatted info array.
+     */
     protected function _parseFileInfo($files)
     {
         $infoArray = array();
@@ -75,9 +77,9 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * Modify the set of info about each file to ensure that it is compatible
      * with the Zend_Validate_File_* validators.
      *
-     * @param array
-     * @return array
-     **/
+     * @param array $fileInfo
+     * @return array 
+     */
     private function _addZendValidatorAttributes(array $fileInfo)
     {
         // Need to populate the 'name' field with either the filename provided
@@ -99,9 +101,9 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * 
      * @internal Must be implemented by subclasses because retrieving the MIME
      * type is different for URLs than for files located on the same server. 
-     * @param array
+     * @param array $fileInfo
      * @return string
-     **/
+     */
     abstract protected function _getFileMimeType($fileInfo);
     
     /**
@@ -109,11 +111,11 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * 
      * By default, this is stored as the 'name' attribute in the array.
      * 
-     * TODO: May be able to factor this out entirely to use the 'name' attribute
+     * @todo May be able to factor this out entirely to use the 'name' attribute
      * of the file info array.
-     * @param array
+     * @param array $fileInfo
      * @return string
-     **/
+     */
     protected function _getOriginalFilename($fileInfo)
     {
         if (array_key_exists('name', $fileInfo)) {
@@ -124,10 +126,10 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
     /**
      * Transfer the file to the Omeka archive.
      * 
-     * @param array
-     * @param string
-     * @return string
-     **/
+     * @param array $fileInfo
+     * @param string $originalFilename
+     * @return string Path to file in archive.
+     */
     protected function _transferFile($fileInfo, $originalFilename)
     {        
         $fileSourcePath = $this->_getFileSource($fileInfo);
@@ -178,8 +180,9 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * @see _transferFile()
      * @param string $source
      * @param string $destination
+     * @param array $fileInfo
      * @return void
-     **/
+     */
     abstract protected function _transfer($source, $destination, array $fileInfo);
     
     /**
@@ -192,17 +195,16 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * @param array $info
      * @throws Omeka_File_Ingest_InvalidException
      * @return void
-     **/
+     */
     abstract protected function _validateSource($source, $info);
-    
     
     
     /**
      * Removes the charset information from a mimetpe string if any exists
-     * ex.  "image/jpeg; charset=binary"   ->    "image/jpeg"
-     * @param string $mimetype
+     * i.e.: "image/jpeg; charset=binary" -> "image/jpeg"
+     * @param string $mimeType
      * @return string
-     **/
+     */
     protected function _stripCharsetFromMimeType($mimeType) 
     {
         // remove the character set information

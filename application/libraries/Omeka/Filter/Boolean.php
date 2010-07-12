@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * A Zend_Filter implementation that converts any boolean form value passed to 
@@ -15,9 +15,8 @@
  * inserts booleans) and whether or not it can be tricked into returning the
  * wrong value under certain circumstances.
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Filter_Boolean implements Zend_Filter_Interface
 {
     /**
@@ -25,7 +24,7 @@ class Omeka_Filter_Boolean implements Zend_Filter_Interface
      * 
      * @param mixed
      * @return string "1" or "0"
-     **/
+     */
     public function filter($value)
     {
         return in_array($value, 
