@@ -1,20 +1,23 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * If logging has been enabled in the config file, then set up 
  * Zend's logging mechanism.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * @return Zend_Log
+     */
     public function init()
     {
         $bootstrap = $this->getBootstrap();
@@ -41,6 +44,12 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
         return $logger;
     }
     
+    /**
+     * Set up debugging emails.
+     *
+     * @param Zend_Log $log
+     * @param string $toEmail Email address of debug message recipient.
+     */
     private function _addMailWriter(Zend_Log $log, $toEmail)
     {
         $mailer = new Zend_Mail;

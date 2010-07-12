@@ -1,19 +1,22 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Initializes Omeka's functionality for sending email.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Mail extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * @return Zend_Mail
+     */
     public function init()
     {
         $config = $this->getBootstrap()->bootstrap('Config')->getResource('Config');
@@ -42,6 +45,9 @@ class Omeka_Core_Resource_Mail extends Zend_Application_Resource_ResourceAbstrac
     /**
      * Instantiate the Zend_Mail SMTP transport object using settings from 
      * config.ini.
+     * 
+     * @param Zend_Config $config Mail config options.
+     * @return void
      */
     private function _configureSmtp(Zend_Config $config)
     {

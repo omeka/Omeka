@@ -1,19 +1,22 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Initialize the User object for the currently logged-in user.  If no user
  * has been authenticated, this value will be equivalent to false.
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * @return User|boolean False if there is no authenticated user.
+     */
     public function init()
     {
         $bootstrap = $this->getBootstrap();
@@ -24,8 +27,7 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
 
         if ($auth->hasIdentity()) {
             $userId = $auth->getIdentity();
-            // This ext
-            // ra database call seems unnecessary at face value, but it
+            // This extra database call seems unnecessary at face value, but it
             // actually retrieves the entity metadata about the user as well as the
             // username/role info that is already stored in the auth identity.
             require_once 'User.php';

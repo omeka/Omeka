@@ -1,22 +1,28 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Front controller resource.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Frontcontroller
 {
+    /**
+     * @return Zend_Controller_Front
+     */
     public function init()
     {           
         $front = Zend_Controller_Front::getInstance();
+        
+        // If 'skipOmekaMvc' is set on the front controller, skip the
+        // Omeka custom behavior here, and stick with vanilla Zend.
         // Because of resource naming conflicts, i.e. both Zend and Omeka 
         // resource plugins called 'Frontcontroller', there is no easy way to
         // use the default Zend resource instead of Omeka's.  Situations where
@@ -46,20 +52,35 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         
         return $front;
     }
-        
+    
+    /**
+     * Set up Omeka custom action helpers.
+     *
+     * @return void
+     */
     private function initializeActionHelpers()
     {
         $this->initViewRenderer();
         $this->initResponseContexts();
         $this->initSearchHelper();
     }
-        
+    
+    /**
+     * Add item search helper.
+     *
+     * @return void
+     */
     private function initSearchHelper()
     {
         $searchHelper = new Omeka_Controller_Action_Helper_SearchItems;
         Zend_Controller_Action_HelperBroker::addHelper($searchHelper);
     }
     
+    /**
+     * Set up Zend view renderer to use Omeka classes and conventions.
+     *
+     * @return void
+     */
     private function initViewRenderer()
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
@@ -81,6 +102,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
      * 
      * Example of a definition of a response context through the ZF API:
      * 
+     * <code> 
      * $contexts->addContext('dc', array(
      *    'suffix'    => 'dc',
      *    'headers'   => array('Content-Type' => 'text/xml'),
@@ -89,9 +111,10 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
      *        'post' => 'afterwardsDoThis'
      *    ) 
      *  ));
+     * </code>
      * 
      * @return void
-     **/    
+     */    
     private function initResponseContexts()
     {        
         Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
@@ -110,10 +133,10 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
     
     
     /**
-     * Returns the default response contexts for Omeka.
+     * Return the default response contexts for Omeka.
      * 
      * @return array
-     **/
+     */
     static public function getDefaultResponseContexts()
     {
         return array(
