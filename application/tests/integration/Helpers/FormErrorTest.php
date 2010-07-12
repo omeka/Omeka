@@ -14,12 +14,12 @@ require_once HELPERS;
  * @package Omeka
  * @copyright Center for History and New Media, 2010
  **/
-class Omeka_Helper_FormErrorTest extends Omeka_Test_AppTestCase
+class Omeka_Helper_FormErrorTest extends PHPUnit_Framework_TestCase
 {
     
     public function setUp()
     {
-        parent::setUp();
+        Zend_Session::$_unitTestEnabled = true;
         $this->flash = new Omeka_Controller_Flash;
     }
     
