@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * This controller plugin allows for debugging Request objects
@@ -15,11 +15,18 @@
  * in the config.ini file.
  * 
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
 {
+    /**
+     * Print request debugging info for every request.
+     *
+     * Has no effect if request debugging is not enabled in config.ini.
+     *
+     * @param Zend_Controller_Request_Abstract $request Request object.
+     * @return void
+     */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $context = Omeka_Context::getInstance();
@@ -33,6 +40,13 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         }
     }
     
+    /**
+     * Create HTML markup for request debugging.
+     * 
+     * @param Zend_Controller_Request_Abstract $request Request object.
+     * @param Zend_Controller_Router_Interface $router Router object.
+     * @return string HTML markup.
+     */
     private function _getMarkup($request, $router)
     {
         $requestUri = $request->getRequestUri();

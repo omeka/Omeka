@@ -7,32 +7,41 @@
  **/
 
 /**
- * 
+ * Action helper for item searching.
+ * Glue between the search form and the model's search functions.
  *
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_Helper_Abstract
-{    
+{   
+    /**
+     * Call the search() method when this helper is called directly.
+     *
+     * @param array Set of options (passed to search()}.
+     * @return array
+     */ 
     public function direct($options = array())
     {
         return $this->search($options);
     }
     
     /**
+     * Search the items.
+     *
      * @todo Does this actually need any options, and if so, what are they?
      * An example of one option would be automatically generating the pagination,
      * or automatically assigning to the items to the view object.
      * 
-     * @param array Set of options (currently empty)
-     * @return array Keyed array containing the following: 'items' = all the Item
-     * objects returned by the search, 'page' = the page # of the results, 
-     * 'per_page' = the number of items displayed for the given results,
-     * 'total_results' = the total # of results returned by the search query,
-     * 'total_items' = the total # of items in the database (equivalent to # of
-     * items that would be returned by a blank search query).
-     **/
+     * @param array Set of options (currently empty).
+     * @return array Keyed array containing the following: 
+     *  - 'items': All the Item objects returned by the search.
+     *  - 'page': Page # of the results.
+     *  - 'per_page': Number of items displayed for the given results.
+     *  - 'total_results': Total number of results returned by the search.
+     *  - 'total_items': Total number of items in the database (equivalent to # of
+     *    items that would be returned by a blank search query).
+     */
     public function search($options = array())
     {   
         $request = $this->getRequest();
@@ -145,10 +154,11 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
     
     /**
      * Retrieve the number of items to display on any given browse page.
-     * This can be modified as a query parameter provided that a user is actually logged in.
+     * This can be modified as a query parameter provided that a user is 
+     * actually logged in.
      *
      * @return integer
-     **/
+     */
     public function getItemsPerPage()
     {
         //Retrieve the number from the options table

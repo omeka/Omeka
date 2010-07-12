@@ -4,29 +4,55 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Sets up view script search paths on a per-request basis.
  *
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstract
 {
+    /**
+     * Registered view object.
+     *
+     * @var Zend_View
+     */
     protected $_view;
     
+    /**
+     * List of options from the database.
+     *
+     * @var array
+     */
     protected $_dbOptions = array();
     
+    /**
+     * Base path to themes directory.
+     *
+     * @var string
+     */
     protected $_baseThemePath;
+    
+    /**
+     * Base web-accesible path to themes.
+     *
+     * @var string
+     */
     protected $_webBaseThemePath;
     
     /**
+     * MVC plugin behaviors class.
+     * 
      * @var Omeka_Plugin_Mvc
      */
     protected $_pluginMvc;
-        
+    
+    /**
+     * @param array $options List of options.
+     * @param Omeka_Plugin_Mvc $pluginMvc Plugin MVC class.
+     */
     public function __construct($options, Omeka_Plugin_Mvc $pluginMvc)
     {
         $this->_dbOptions = $options['dbOptions'];
@@ -36,17 +62,16 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     }
 
     /**
-     * This handles adding the appropriate view scripts directories for a given
-     * request.  This is pretty much the glue between the plugin broker and the
+     * Add the appropriate view scripts directories for a given request.
+     * This is pretty much the glue between the plugin broker and the
      * View object, since it uses data from the plugin broker to determine what
      * script paths will be available to the view.  
      * 
-     * @param string
+     * @param Zend_Controller_Request_Abstract $request Request object.
      * @return void
-     **/
+     */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        
         // Getting the module name from the request object is pretty much the main
         // reason why this needs to be in a controller plugin and can't be localized
         // to the view script.
@@ -66,7 +91,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     }
 
     /**
-     * Sets up the asset paths for the plugin.
+     * Set up the asset paths for a plugin.
      *  
      * If you're in a plugin, check in this order:
      *    1. plugin view scripts (only for that plugin)
@@ -76,8 +101,8 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      * This means that it needs to add the paths in the reverse order of what needs
      * to be checked first, so theme paths first and then plugin paths.
      * 
-     * @param string $pluginModuleName The module name for the plugin
-     * @param string $themeType The type of theme: 'admin' or 'public'
+     * @param string $pluginModuleName The module name for the plugin.
+     * @param string $themeType The type of theme: 'admin' or 'public'.
      * @return void
      */
     protected function _setupPathsForPlugin($pluginModuleName, $themeType)
@@ -87,13 +112,13 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     }
 
     /**
-     *  Sets up the asset paths for the theme
+     * Set up the asset paths for the theme.
      * 
-     *  If you're in one of the themes, check in this order:
+     * If you're in one of the themes, check in this order:
      *    1. theme view scripts
      *    2. all plugin view scripts
      * 
-     * @param string $themeType The type of theme: 'admin' or 'public'
+     * @param string $themeType The type of theme: 'admin' or 'public'.
      * @return void
      */
     protected function _setupPathsForTheme($themeType)
@@ -103,10 +128,10 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     }
     
     /**
-     *  Adds asset paths for a plugin.
+     * Add asset paths for a plugin.
      * 
-     * @param string $pluginModuleName The module name for the plugin
-     * @param string $themeType The type of theme: 'admin' or 'public'
+     * @param string $pluginModuleName The module name for the plugin.
+     * @param string $themeType The type of theme: 'admin' or 'public'.
      * @return void
      */
     protected function _addPluginPaths($themeType, $pluginModuleName = null)
@@ -148,6 +173,12 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         }
     }
     
+    /**
+     * Add a new script path for a plugin to the view.
+     *
+     * @param string $scriptPath Path from plugins dir to script dir.
+     * @return void
+     */
     protected function _addPathToView($scriptPath)
     {
         $view = $this->_getView();
@@ -157,6 +188,13 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         $view->addScriptPath($physicalPath);
     }
     
+    /**
+     * Gets the view from the registry.
+     *
+     * The initial call to the registry caches the view in this class.
+     *
+     * @return Zend_View
+     */
     protected function _getView()
     {
         if (!$this->_view) {
@@ -166,6 +204,11 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         return $this->_view;
     }
     
+    /**
+     * Add the global views from the view scripts directory to the view.
+     *
+     * @return void
+     */
     protected function _addSharedViewsDir()
     {
         $view = $this->_getView();
@@ -176,16 +219,13 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         //View scripts and shared directory get checked for assets 
         $view->addAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
     }
-        
-    
-
     
     /**
-     * Theme can be either 'public' or 'admin'.
+     * Add script and asset paths for a theme to the view.
      * 
-     * @param string
+     * @param string $theme Theme type; either 'public' or 'admin'.
      * @return void
-     **/
+     */
     protected function _addThemePaths($theme)
     {
         $this->_addSharedViewsDir();
@@ -202,9 +242,9 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      * Retrieve the option from the database that contains the directory of
      * the theme to render. 
      * 
-     * @param string $type Currently either 'admin' or 'public'
+     * @param string $type Currently either 'admin' or 'public'.
      * @return string
-     **/
+     */
     protected function getThemeOption($type)
     {
         return @$this->_dbOptions[$type . '_theme'];
