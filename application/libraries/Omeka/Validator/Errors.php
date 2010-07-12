@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * This is an object wrapper for validation errors.  The primary advantage
@@ -13,13 +13,20 @@
  *
  * @see Omeka_Record
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Validator_Errors extends ArrayObject
 {
+    /**
+     * List of validation errors.
+     *
+     * @var array
+     */
     protected $_errors = array();
     
+    /**
+     * @param array|null $errors Initial errors to set.
+     */
     public function __construct($errors=null)
     {
         if ($errors) {
@@ -27,6 +34,12 @@ class Omeka_Validator_Errors extends ArrayObject
         }
     }
     
+    /**
+     * Get an error from the list.
+     * Required by ArrayObject.
+     *
+     * @param mixed $key Key into array.
+     */
     public function offsetGet($key)
     {
         if (array_key_exists($key, $this->_errors)) {
@@ -34,26 +47,44 @@ class Omeka_Validator_Errors extends ArrayObject
         }
     }
     
+    /**
+     * Set an error into the list.
+     * Required by ArrayObject.
+     *
+     * @param mixed $key Key into array.
+     * @param mixed $val Value to store.
+     */
     public function offsetSet($key, $val)
     {
         $this->_errors[$key] = $val;
     }
     
     /**
-     * Shouldn't there be an analog for this in ArrayObject?  Seems retarded.
+     * Get the array of errors.
+     *
      * @see Omeka_Record::addErrorsFrom()
      * @return array
-     **/
+     */
     public function get()
     {
         return $this->_errors;
     }
     
+    /**
+     * Get the number of errors.
+     *
+     * @return integer
+     */
     public function count()
     {
         return count($this->_errors);
     }
     
+    /**
+     * Get a string representation of all the stored errors.
+     *
+     * @return string
+     */
     public function __toString()
     {
         $msgs = array();

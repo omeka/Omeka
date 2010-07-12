@@ -70,17 +70,17 @@ class Tag extends Omeka_Record {
      *
      * @return bool
      **/
-    protected function fieldIsUnique($field)
+    protected function fieldIsUnique($field, $value = null)
     {
         if ($field != 'name') {
-            return parent::fieldIsUnique($field);
+            return parent::fieldIsUnique($field, $value);
         } else {
             $db = $this->getDb();
             $sql = "
             SELECT id 
             FROM $db->Tag 
             WHERE name COLLATE utf8_bin LIKE ?";
-            $res = $db->query($sql, array($this->name));
+            $res = $db->query($sql, array($value ? $value : $this->name));
             return (!is_array($id = $res->fetch())) || ($this->exists() and $id['id'] == $this->id);
         }
     }

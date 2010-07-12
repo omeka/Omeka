@@ -1,30 +1,39 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * A Zend_Form subclass that sets up forms to be properly displayed in Omeka.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Form extends Zend_Form
 {
     /**
-     * @var string Class name of Omeka DisplayGroup subclass.
+     * Class name of Omeka DisplayGroup subclass.
+     *
+     * @var string
      */
     protected $_defaultDisplayGroupClass = 'Omeka_Form_DisplayGroup';
     
     /**
-     * @var boolean Whether or not to automatically apply Omeka-specific decorators
+     * Whether or not to automatically apply Omeka-specific decorators
      * and styling information to form elements prior to rendering.
+     *
+     * @var boolean
      */
     protected $_autoApplyOmekaStyles = true;
     
+    /**
+     * Set up Omeka-specific form elements and decorators.
+     *
+     * @return void
+     */
     public function init()
     {
         $this->addElementPrefixPath('Omeka_', 'Omeka/');
@@ -33,6 +42,11 @@ class Omeka_Form extends Zend_Form
         $this->setElementDecorators($this->getDefaultElementDecorators());
     }
     
+    /**
+     * Set up base form decorators.
+     *
+     * @return void
+     */
     public function loadDefaultDecorators()
     {
         $this->setDecorators(array(
@@ -41,6 +55,13 @@ class Omeka_Form extends Zend_Form
         ));    
     }
     
+    /**
+     * Return default decorators for form elements.
+     *
+     * Makes form output conform to Omeka conventions.
+     *
+     * @return array
+     */
     public function getDefaultElementDecorators()
     {
         // <div class="field">
@@ -75,6 +96,8 @@ class Omeka_Form extends Zend_Form
      * 
      * This may be called after elements to the form, as the decorator 
      * configuration in init() runs before elements can be added.
+     *
+     * @return void
      */
     public function applyOmekaStyles()
     {
@@ -137,12 +160,21 @@ class Omeka_Form extends Zend_Form
     /**
      * Specify whether or not to automatically apply Omeka-specific decorators
      * and styles prior to rendering the form.
+     *
+     * @param mixed $flag A boolean or boolean-equivalent.
+     * @return void
      */
     public function setAutoApplyOmekaStyles($flag)
     {
         $this->_autoApplyOmekaStyles = (boolean)$flag;
     }
     
+    /**
+     * Apply Omeka default styles (if requested) just before rendering.
+     *
+     * @param Zend_View_Interface $view
+     * @return string
+     */
     public function render(Zend_View_Interface $view = null)
     {        
         if ($this->_autoApplyOmekaStyles) {
@@ -153,6 +185,10 @@ class Omeka_Form extends Zend_Form
     
     /**
      * Add a specific class name to an element.
+     *
+     * @param Zend_Form_Element $element
+     * @param string $className
+     * @return void
      */
     private function _addClassNameToElement(Zend_Form_Element $element, $className)
     {

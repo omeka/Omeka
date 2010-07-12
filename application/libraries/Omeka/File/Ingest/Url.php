@@ -1,21 +1,35 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
- * Ingest URLs into the Omeka filesystem.
+ * Ingest URLs into the Omeka archive.
  *
+ * @todo Alternative method that uses cURL/Zend_HTTP_Client.
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
 {
+    /**
+     * Possible transfer methods.
+     *
+     * These correspond with methods to call on this class.
+     *
+     * @var array
+     */
     protected $_transferMethods = array('wget', 'copy');
-        
+    
+    /**
+     * Return the original name of the file to be ingested.
+     *
+     * @param array $fileInfo
+     * @return string
+     */ 
     protected function _getOriginalFilename($fileInfo)
     {
         if (!($original = parent::_getOriginalFilename($fileInfo))) {
@@ -25,7 +39,14 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         }
         return $original;
     }
-        
+    
+    /**
+     * Fetch a file from a URL with the wget binary.
+     * 
+     * @param string $source Source URL.
+     * @param string $destination Desination file path.
+     * @return boolean True if fetch was successful, false otherwise.
+     */
     protected function _wget($source, $destination)
     {
         if (!$this->_isWgetAvailable()) {
@@ -42,6 +63,13 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         return ($returnVar === 0);
     }
     
+    /**
+     * Fetch a file from a URL using PHP fopen() wrappers.
+     * 
+     * @param string $source Source URL.
+     * @param string $destination Destination file path.
+     * @return boolean True if fetch was successful, false otherwise.
+     */
     protected function _copy($source, $destination)
     {
         if (!$this->_canCopyFromUrl($source)) {
@@ -51,12 +79,23 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         return copy($source, $destination);
     }
 
+    /**
+     * Determine if the wget binary is available on the server.
+     *
+     * @return boolean
+     */
     protected function _isWgetAvailable()
     {
         exec('which wget', $output, $returnVar);
         return !empty($output);      
     }
-        
+    
+    /**
+     * Determine if the server allows URL fopen() calls.
+     *
+     * @param string $source Source URL.
+     * @return boolean
+     */
     protected function _canCopyFromUrl($source)
     {
         // Only throw an exception here because this is our fallback.
@@ -67,6 +106,17 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         return true;
     }
     
+    /**
+     * Fetch a file from a URL.
+     *
+     * Delegates to individual transfer methods.
+     *
+     * @throws Omeka_File_Ingest_Exception
+     * @param string $source Source URL.
+     * @param string $destination Destination file path.
+     * @param array $fileInfo
+     * @return void
+     */
     protected function _transfer($source, $destination, array $fileInfo)
     {
         $transferred = false;
@@ -85,7 +135,15 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
                               . '" to "' . $destination . '"!');
         }
     }
-        
+    
+    /**
+     * Ensure the source URL exists and can be read from.
+     *
+     * @throws Omeka_File_Ingest_InvalidException
+     * @param string $source Source URL.
+     * @param array $info File info array (unused).
+     * @return void
+     */
     protected function _validateSource($source, $info)
     {
         // Set an arbitrary user_agent before every file transfer to minimize 
@@ -112,9 +170,9 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
      * robust (read: complicated) solution could use Zend_Http_Client.
      * In that case, it might be better to use that for the rest of the Url
      * implementation (transfer, etc.).
-     * @param array
+     * @param array $fileInfo
      * @return string
-     **/
+     */
     protected function _getFileMimeType($fileInfo)
     {
         $sourceUrl = $this->_getFileSource($fileInfo);

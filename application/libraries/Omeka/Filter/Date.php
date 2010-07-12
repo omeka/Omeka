@@ -4,17 +4,18 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
+ * Converts to and from MySQL date representations.
+ *
  * @todo This should be removed and replaced with a better date processing
  * algorithm, especially since we no longer rely on MySQL date fields for
  * storing dates in the Omeka database.
  * @deprecated
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Filter_Date
 {
     /**
@@ -22,11 +23,11 @@ class Omeka_Filter_Date
      *
      * If the resulting date would be 0000-00-00, return null instead.
      *  
-     * @param string
-     * @param string
-     * @param string
+     * @param string $year Numeric year value.
+     * @param string $month Numeric month value.
+     * @param string $day Numeric day value.
      * @return string|null
-     **/
+     */
     public function filter($year, $month, $day)
     {
         $date = array();
@@ -59,9 +60,9 @@ class Omeka_Filter_Date
     /**
      * Split a valid MySQL date 
      * 
-     * @param string
-     * @return void
-     **/
+     * @param string $date
+     * @return array Array of year, month and day values.
+     */
     public function split($date)
     {
         $date_array = explode('-', $date);

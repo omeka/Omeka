@@ -1,4 +1,4 @@
-<?php head(); ?>
+<?php head(array('title'=>'Omeka Upgrading')); ?>
 <div id="primary">
 <h2 class="instruction">Omeka is now upgrading itself.  Please refresh your screen once this page finishes loading.</h2>
 

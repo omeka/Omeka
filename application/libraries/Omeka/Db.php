@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Database manager object for Omeka
@@ -14,38 +14,43 @@
  *
  * @uses Zend_Db_Adapter_Mysqli
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Db
 {
+    /**
+     * Database adapter.
+     *
+     * @var Zend_Db_Adapter
+     */
     protected $_conn;
     
     /**
      * The prefix that every table in the omeka database will use.  If null this is ignored
      *
      * @var string
-     **/
+     */
     public $prefix = null;
     
     /**
      * All the tables that are currently managed by this database object
      *
      * @var array
-     **/
+     */
     protected $_tables = array();
     
     /**
-     * @var Zend_Log|null The logger to use for logging SQL queries.  If not set,
+     * The logger to use for logging SQL queries.  If not set,
      * no logging will be done.
+     *
+     * @var Zend_Log|null
      */
     private $_logger;
     
     /**
-     * @param Zend_Db_Adapter $conn A connection object courtesy of Zend Framework
-     * @param string $prefix The prefix for the database (if applicable)
-     * @return void
-     **/
+     * @param Zend_Db_Adapter $conn A connection object courtesy of Zend Framework.
+     * @param string $prefix The prefix for the database (if applicable).
+     */
     public function __construct($conn, $prefix=null)
     {   
         $this->_conn = $conn;        
@@ -53,15 +58,15 @@ class Omeka_Db
     }
     
     /**
-     * Delegate to the Zend_Db_Adapter instance.  Log queries if necessary
+     * Delegate to the Zend_Db_Adapter instance.  Log queries if necessary.
      * 
      * @todo Come up with a better solution for logging bad queries.  
      *  Zend_Db_Profiler won't help with logging broken queries, so we need to 
      *  keep this for the sake of logging those.
-     * @param string
-     * @param array
+     * @param string $m Method name.
+     * @param array $a Method arguments.
      * @return mixed
-     **/
+     */
     public function __call($m, $a)
     {
         // Log SQL for certain adapter calls
@@ -74,30 +79,41 @@ class Omeka_Db
         return call_user_func_array(array($this->_conn, $m), $a);
     }
     
+    /**
+     * Set logger for SQL queries.
+     *
+     * @param Zend_Log $logger
+     * @return void
+     */
     public function setLogger($logger)
     {
         $this->_logger = $logger;
     }
-        
+    
+    /**
+     * Retrieve the database adapter.
+     *
+     * @return Zend_Db_Adapter
+     */ 
     public function getAdapter()
     {
         return $this->_conn;
     }
     
     /**
-     * Retrieve the name of the table (including the prefix)
+     * Retrieve the name of the table (including the prefix).
      *
      * @return string
-     **/
+     */
     public function getTableName($class) {
         return $this->getTable($class)->getTableName();
     }
         
     /**
-     * A shortcut for checking to see whether the database tables have a prefix
+     * Check whether the database tables have a prefix.
      *
-     * @return bool
-     **/
+     * @return boolean
+     */
     public function hasPrefix() {
         return !empty($this->prefix);
     }
@@ -111,9 +127,10 @@ class Omeka_Db
      * 
      * @internal This will cache every table object so that tables
      * are not instantiated multiple times for complicated web requests.
-     * @param string Model class name
+     * @uses Omeka_Db::setTable()
+     * @param string $class Model class name.
      * @return Omeka_Db_Table
-     **/
+     */
     public function getTable($class) {
         $tableClass = $class . 'Table';
         
@@ -132,6 +149,15 @@ class Omeka_Db
         return $table;
     }
     
+    /**
+     * Cache a table object.
+     *
+     * Prevents the creation of unnecessary instances.
+     *
+     * @param string $alias
+     * @param Omeka_Db_Table $table
+     * @return void
+     */
     public function setTable($alias, Omeka_Db_Table $table)
     {
         $this->_tables[$alias] = $table;
@@ -140,8 +166,12 @@ class Omeka_Db
     /**
      * Magic getter is a synonym for Omeka_Db::getTableName()
      *
+     * Example: $db->Item is equivalent to $db->getTableName('Item').
+     *
+     * @see Omeka_Db::getTableName()
+     * @param string $name Property name; table model class name in this case.
      * @return string|null
-     **/
+     */
     public function __get($name)
     {
         return $this->getTableName($name);
@@ -157,10 +187,12 @@ class Omeka_Db
      * Basically it combines what would be insert() and update() methods in other 
      * ORMs into a single method
      * 
-     * @return int The ID for the row that got inserted (or updated)
-     **/
-    public function insert($table, array $values = array()) {
-        
+     * @param string $table Table model class name.
+     * @param array $values Rows to insert (or update).
+     * @return integer The ID for the row that got inserted (or updated).
+     */
+    public function insert($table, array $values = array())
+    {
         $table = $this->getTableName($table);
         
         if (empty($values)) {
@@ -207,8 +239,15 @@ class Omeka_Db
         $this->exec($query, $params);
         
         return (int) $this->_conn->lastInsertId();
-   }
+    }
     
+    /**
+     * Log SQL query if logging is configured.
+     * Note: this logs the query before variable substitution from bind params.
+     *
+     * @param string|Zend_Db_Select $sql
+     * @return void
+     */
     protected function log($sql)
     {
         if ($this->_logger) {
@@ -217,11 +256,14 @@ class Omeka_Db
     }
     
     /**
+     * Compatibility alias for query().
+     *
+     * @see Zend_Db_Adapter::query()
      * @deprecated Since 4/30/08
-     * @param string
-     * @param array
+     * @param string|Zend_Db_Select $sql SQL query.
+     * @param array Parameters to bind to query.
      * @return Zend_Db_Statement
-     **/
+     */
     public function exec($sql, $params=array())
     {    
         return $this->query($sql, $params);
@@ -234,7 +276,7 @@ class Omeka_Db
      * @param string $delimiter Character that delimits each SQL query.  Defaults
      * to semicolon ';'.
      * @return void
-     **/
+     */
     public function execBlock($sql, $delimiter = ';')
     {
         $queries = explode($delimiter, $sql);

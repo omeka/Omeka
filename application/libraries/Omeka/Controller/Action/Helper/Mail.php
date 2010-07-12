@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Action helper for sending email.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_Abstract
 {
     /**
@@ -20,12 +20,20 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
     private $_view;
     
     /**
-     * @var string Subject of the email.
+     * Subject of the email.
+     * @var string
      */
     private $_subject;
     
+    /**
+     * Prefix (prepended to the subject).
+     * @var string
+     */
     private $_subjectPrefix;
-            
+    
+    /**
+     * @param Zend_View $view View to render as the message body.
+     */
     public function __construct(Zend_View $view)
     {
         $this->_view = $view;
@@ -35,6 +43,9 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
     
     /**
      * Delegate to the Zend_Mail instance.
+     *
+     * @param string $method Method called.
+     * @param array $args Arguments to method.
      */
     public function __call($method, $args)
     {
@@ -46,6 +57,8 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
     
     /**
      * Set the prefix for the subject header.  Typically takes the form "[Site Name] ".
+     *
+     * @param string $prefix Subject prefix.
      */
     public function setSubjectPrefix($prefix)
     {
@@ -54,6 +67,8 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
     
     /**
      * Set the subject of the email.
+     *
+     * @param string $subject Email subject.
      */
     public function setSubject($subject)
     {

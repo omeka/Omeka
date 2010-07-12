@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * This controller plugin allows for all functionality that is specific to the Admin theme.
@@ -15,12 +15,23 @@
  * This controller plugin should be loaded only in the admin bootstrap.  
  *
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
 {
+    /**
+     * Controller/Action list for admin actions that do not require being logged-in
+     *
+     * @var string
+     */
+    protected $_adminWhitelist = array(array('controller' => 'users', 'action' => 'activate'), 
+                                       array('controller' => 'users', 'action' => 'login'),
+                                       array('controller' => 'users', 'action' => 'forgot-password'),
+                                       array('controller' => 'installer', 'action' => 'notify'));
     
+    /**
+     * Indicate that the admin theme is the current theme.
+     */
     public function __construct()
     {
         // This parameter is used by is_admin_theme().
@@ -28,26 +39,27 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
     }
     
     /**
-     * Controller/Action list for admin actions that do not require being logged-in
+     * Direct requests to the admin interface.
+     * Called upon router startup, before the request is routed.
      *
-     * @var string
-     **/
-    protected $_adminWhitelist = array(array('controller' => 'users', 'action' => 'activate'), 
-                                       array('controller' => 'users', 'action' => 'login'),
-                                       array('controller' => 'users', 'action' => 'forgot-password'),
-                                       array('controller' => 'installer', 'action' => 'notify'));
-    
-    /**
-    *
-    * @param Zend_Controller_Request_Abstract $request
-    * @return void
-    */
+     * @param Zend_Controller_Request_Abstract $request
+     * @return void
+     */
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
         // Let the request know that we want to go through the admin interface.
         $request->setParam('admin', true);
     }
     
+    /**
+     * Require login when attempting to access the admin interface.
+     * Whitelisted controller/action combinations are exempt from this
+     * requirement.
+     * Called before dispatching.
+     *
+     * @param Zend_Controller_Request_Abstract $request
+     * @return void
+     */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $action = $request->getActionName();
@@ -84,13 +96,25 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
         }
     }
     
+    /**
+     * Return the redirector action helper.
+     *
+     * @return Zend_Controller_Action_Helper_Redirector
+     */
     public function getRedirector()
     {
         return Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
     }
     
+    /**
+     * Return the auth object.
+     *
+     * @uses Omeka_Context
+     * @return Zend_Auth
+     */
     public function getAuth()
     {
         return Omeka_Context::getInstance()->getAuth();
     }
 }
+

@@ -4,8 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- * @author CHNM
- **/
+ */
 
 /**
  * Plugin Broker for Omeka.
@@ -16,39 +15,48 @@
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Plugin_Broker 
 {        
     /**
      * Array of hooks that have been implemented for plugins.
      *
      * @var array
-     **/
+     */
     protected $_callbacks = array();
-        
+    
+    /**
+     * Array of classes to delegate plugin API calls to.
+     * 
+     * @var array
+     */
+    protected $_delegates = array();
+    
     /**
      * The directory name of the current plugin (used for calling hooks)
      *
      * @var string
-     **/
+     */
     protected $_current;
-            
+    
+    /**
+     * Delegation to other plugin API classes is set up here.
+     */
     public function __construct() 
     {        
         // Should be able to delegate to the plugin filters
-        $this->_delegates = array();
         $this->_delegates[] = new Omeka_Plugin_Filters($this);        
     }
         
     /**
-     * Check if the plugin is active, then enable the hook for it
+     * Add a hook implementation for a plugin.
      *
-     * @param string $hook
-     * @param string $callback
-     * @param string|null $currentPlugin Optional name of the plugin for
-     * which to add the hook.
+     * @param string $hook Name of the hook being implemented.
+     * @param string $callback PHP callback for the hook implementation.
+     * @param string|null $plugin Optional name of the plugin for
+     * which to add the hook. If omitted, the current plugin is used.
      * @return void
-     **/
+     */
     public function addHook($hook, $callback, $plugin = null)
     {    
         if ($plugin) {
@@ -60,48 +68,66 @@ class Omeka_Plugin_Broker
     }
     
     /**
-     * Gets the hook for a plugin
+     * Get the hook implementation for a plugin.
      *
-     * @param string $pluginDirName
-     * @param string $callback
-     * @return void
-     **/
+     * @param string $pluginDirName Name of the plugin to get the implementation
+     * from.
+     * @param string $hook Name of the hook to get the implementation for.
+     * @return callback|null
+     */
     public function getHook($pluginDirName, $hook)
     {   
         if ($pluginDirName instanceof Plugin) {
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
              
-        if (is_array($this->_callbacks[$hook])) {
+        if (array_key_exists($hook, $this->_callbacks) 
+            && is_array($this->_callbacks[$hook]) 
+            && array_key_exists($pluginDirName, $this->_callbacks[$hook])
+        ) {
             return $this->_callbacks[$hook][$pluginDirName];
         }
+        return null;
     }
     
     /**
+     * Set the currently-focused plugin by directory name.
+     *
      * The plugin helper functions do not have any way of determining what
-     *  plugin to is currently in focus.  These get/setCurrentPluginDirName methods
-     *  allow the broker to know how to delegate to specific plugins if necessary.
+     * plugin to is currently in focus.  These get/setCurrentPluginDirName 
+     * methods allow the broker to know how to delegate to specific plugins if 
+     * necessary.
      * 
-     * @param string $pluginDirName
+     * @param string $pluginDirName Plugin to set as current.
      * @return void
-     **/
+     */
     public function setCurrentPluginDirName($pluginDirName)
     {
         $this->_current = $pluginDirName;
     }
     
+    /**
+     * Get the directory name of the currently-focused plugin.
+     *
+     * @see Omeka_Plugin_Broker::setCurrentPluginDirName()
+     * @return string
+     */
     public function getCurrentPluginDirName()
     {
         return $this->_current;
     }
             
     /**
+     * Call a hook by name.
+     * Hooks can either be called globally or for a specific plugin only.
+     *
      * @see Omeka_Plugin_Broker::__call()
-     * @param string Name of the hook.
-     * @param array Arguments that are passed to each hook implementation.
-     * @param Plugin|string Optional name of the plugin for which to invoke the hook.
+     * @param string $hook Name of the hook.
+     * @param array $args Arguments that are passed to each hook implementation.
+     * @param Plugin|string $plugin Optional name of the plugin for which to 
+     * invoke the hook.
      * @return void
-     **/
+     */
     public function callHook($hook, $args, $plugin = null)
     {
         if (empty($this->_callbacks[$hook])) {
@@ -128,14 +154,14 @@ class Omeka_Plugin_Broker
     }
     
     /**
-     * This handles dispatching all plugin hooks.
+     * Handle dispatching for all plugin calls.
      *
      * Check for delegating to other classes that handle plugin API stuff first,
      * i.e. Omeka_Plugin_Filters etc.
      *
      * @see Omeka_Plugin_Broker::__construct()
      * @return mixed
-     **/
+     */
     public function __call($hook, $args) 
     {
         // Delegation
@@ -152,6 +178,8 @@ class Omeka_Plugin_Broker
     /**
      * Register the plugin broker so that plugin writers can use global functions
      * like add_plugin_hook() to interact with the plugin API.
+     *
+     * @return void
      */
     public function register()
     { 

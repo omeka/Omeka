@@ -4,43 +4,52 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * A base class for domain objects, inspired by, though not strictly adherent to,
  * the ActiveRecord pattern.
  * 
- * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- * @author CHNM
- **/
+ * @copyright Center for History and New Media, 2007-2010
+ */
 abstract class Omeka_Record implements ArrayAccess
 {
     /**
-     * @var integer Unique ID for the record.  All implementations of Omeka_Record
-     * must have a table containing an 'id' column, preferably as the primary key.
-     **/
+     * Unique ID for the record.
+     *
+     * All implementations of Omeka_Record must have a table containing an 'id'
+     * column, preferably as the primary key.
+     * @var integer
+     */
     public $id;
     
     /**
+     * Any errors raised during the validation process.
+     *
      * @var Omeka_Validator_Errors 
      */
     protected $_errors = array();
         
     /**
-     * @var array An in-memory cache for related objects that have been retrieved
+     * An in-memory cache for related objects that have been retrieved
      * via the magic __get() syntax.
+     *
+     * @var array
      * @see Omeka_Record::__get()
      * @see Omeka_Record::addToCache()
      */
     protected $_cache = array();
     
     /**
-     * @var array Set of Omeka_Record_Mixin objects that are designed to extend
-     * the behavior of Omeka_Record implementations.  Examples include Taggable,
-     * Relatable, ActsAsElementText, etc. 
+     * Set of Omeka_Record_Mixin objects that are designed to extend
+     * the behavior of Omeka_Record implementations.
+     *
+     * Examples include {@link Taggable}, {@link Relatable},
+     * {@link ActsAsElementText}, etc.
+     *
+     * @see Omeka_Record_Mixin
+     * @var array
      */
     protected $_mixins = array();
     
@@ -48,30 +57,43 @@ abstract class Omeka_Record implements ArrayAccess
      * @internal The database object should be protected so it doesn't show up
      * when the object is serialized into JSON.
      * @var Omeka_Db
-     **/
+     */
     protected $_db;
     
     /**
-     * @var array Key/value pairs indicating aliases for methods that retrieved
-     * related data objects.  For example, a subclass might define the following:
-     * <code>protected $_related = array('Sections'=>'loadSections');</code>
-     * This would allow the client to write code like the following:
-     * <code>$sections = $subclassInstance->Sections;</code> which would be
-     * equivalent to the following, <code>$sections = $subclassInstance->loadSections();</code>
-     * with the difference being that the former is cached so as to avoid multiple
+     * Key/value pairs indicating aliases for methods that retrieve
+     * related data objects.
+     * For example, a subclass might define the following:
+     * <code>
+     *     protected $_related = array('Sections'=>'loadSections');
+     * </code>
+     * This would allow the client to write code like:
+     * <code>
+     *     $sections = $subclassInstance->Sections;
+     * </code> 
+     * Which would be equivalent to:
+     * <code>
+     *     $sections = $subclassInstance->loadSections();
+     * </code>
+     * The difference being, the former is cached so as to avoid multiple
      * trips to the database.
+     * @var array
      * @see Omeka_Record::__get()
-     **/
+     */
     protected $_related = array();
     
     /**
-     * @var boolean Whether or not the record is locked.  Locked records cannot
-     * be saved.
+     * Whether or not the record is locked.
+     * Locked records cannot be saved.
+     *
+     * @var boolean
      */
     private $_locked = false;
     
     /**
-     * @var array List of built in callback methods.
+     * List of built in callback methods.
+     *
+     * @var array
      */
     private $_eventCallbacks = array(
         'beforeValidate',
@@ -89,9 +111,7 @@ abstract class Omeka_Record implements ArrayAccess
     );
     
     /**
-     * Constructor.
-     * 
-     * @var Omeka_Db|null Optional Defaults to the Omeka_Db instance from 
+     * @param Omeka_Db|null $db (optional) Defaults to the Omeka_Db instance from 
      * Omeka_Context.
      */
     public function __construct($db = null)
@@ -107,21 +127,23 @@ abstract class Omeka_Record implements ArrayAccess
     }
     
     /**
-     * Subclass constructor behavior
+     * Subclass constructor behavior.
      *
      * Subclasses of Omeka_Record can override this function to add behavior to
      * the constructor without overriding __construct.
+     *
+     * @todo Should __construct() be declared final if this the preferred method?
+     * @return void
      */
     protected function construct() {}
     
     /**
-     * Destructor
+     * Unsets mixins, which contain circular references, upon record destruction
      * 
      * IMPORTANT: Solves a memory leak when retrieving/saving records.
-     * Unsets mixins, which contain circular references.
+     * 
      * Required because PHP 5.2 does not do garbage collection on circular references.
-     *
-     **/
+     */
     public function __destruct()
     {
          unset($this->_mixins);
@@ -133,6 +155,8 @@ abstract class Omeka_Record implements ArrayAccess
      * @see Omeka_Record::$_related
      * @uses Omeka_Record::addToCache()
      * @uses Omeka_Record::getCached()
+     * @param string $prop Related data to retrieve.
+     * @return mixed
      */
     public function __get($prop)
     {
@@ -165,6 +189,9 @@ abstract class Omeka_Record implements ArrayAccess
      * Delegate unknown method calls to Omeka_Record_Mixin instances.
      * 
      * @see Omeka_Record::delegateToMixins()
+     * @param string $m Method name.
+     * @param array $a Method arguments.
+     * @return mixed
      */
     public function __call($m, $a)
     {
@@ -172,22 +199,24 @@ abstract class Omeka_Record implements ArrayAccess
     }
     
     /**
-     * Initializes the mixins for a record.  Any Omeka_Record subclass that uses
-     * mixins should initialize them here, and this is called on construction
-     * and when mixins need to be reinitialized.
+     * Initialize the mixins for a record. 
+     * 
+     * Any Omeka_Record subclass that uses mixins should initialize them here, 
+     * since this is called on construction and when mixins need to be 
+     * reinitialized.
      */
-     protected function _initializeMixins() {}
+    protected function _initializeMixins() {}
     
     /**
      * Delegate to the given method in one or more mixin instances.
      * 
      * @param string $method
      * @param array $args
-     * @param boolean $all Optional Whether or not to call the same method on
+     * @param boolean $all (optional) Whether or not to call the same method on
      * every mixin instance that has that method.  Defaults to false.
      * @return mixed If $all is false, the return value from the invoked method.  
      * Otherwise there is no return value.
-     **/
+     */
     protected function delegateToMixins($method, $args = array(), $all = false)
     {
         if (!$this->_mixins) {
@@ -221,14 +250,14 @@ abstract class Omeka_Record implements ArrayAccess
      * Invoke all callbacks associated with a specific record event.
      * 
      * Callbacks execute in the following order:
-     *        Omeka_Record hooks like Omeka_Record::afterDelete()
-     *        Record mixin hooks like Taggable::afterSave()
-     *        Generic record plugin hooks like 'before_delete_record'
-     *        Specific record plugin hooks like 'before_delete_item'
+     *  - Omeka_Record hooks like Omeka_Record::afterDelete()
+     *  - Record mixin hooks like Taggable::afterSave()
+     *  - Generic record plugin hooks like 'before_delete_record'
+     *  - Specific record plugin hooks like 'before_delete_item'
      * 
      * @param $event string camelCased name for the event i.e. beforeDelete
      * @return void
-     **/
+     */
     protected function runCallbacks($event)
     {
         
@@ -269,6 +298,9 @@ abstract class Omeka_Record implements ArrayAccess
      * Fire a plugin hook associated with the given event.
      * 
      * @deprecated
+     * @see Omeka_Record::runCallbacks()
+     * @param string $event Underscore-separated event name.
+     * @return void
      */
     protected function firePlugin($event)
     {
@@ -282,8 +314,11 @@ abstract class Omeka_Record implements ArrayAccess
      * Despite being 'protected', this should not be used by subclasses as it 
      * is part of the internal implementation of Omeka_Record.
      * 
+     * @internal If the warning above is correct, shouldn't this be declared
+     * private?
      * @param mixed $value
      * @param string $key
+     * @return void
      */
     protected function addToCache($value, $key)
     {
@@ -291,8 +326,12 @@ abstract class Omeka_Record implements ArrayAccess
     }
     
     /**
+     * Get a value from the record-specific cache.
+     *
      * @see Omeka_Record::addToCache() for a warning about usage that
      * also applies to this method.
+     * @param string $name
+     * @return mixed 
      */
     protected function getCached($name)
     {
@@ -306,6 +345,8 @@ abstract class Omeka_Record implements ArrayAccess
      * 
      * For simplicity, non-persistent records are indicated by the lack of a
      * value for the 'id' column.
+     *
+     * @return boolean
      */
     public function exists()
     {
@@ -319,7 +360,7 @@ abstract class Omeka_Record implements ArrayAccess
      * 
      * @uses Omeka_Record::_validate()
      * @return void
-     **/
+     */
     protected function validate() 
     {
         $this->runCallbacks('beforeValidate');
@@ -378,6 +419,7 @@ abstract class Omeka_Record implements ArrayAccess
      * @param string|null $field Name of the field.  This can be null to indicate
      * a general error not associated with a specific field.
      * @param string $msg The error message.
+     * @return void
      */
     public function addError($field, $msg)
     {
@@ -399,7 +441,7 @@ abstract class Omeka_Record implements ArrayAccess
      * @see Item::_validateElements()
      * @param Omeka_Record $record
      * @return void
-     **/
+     */
     public function addErrorsFrom(Omeka_Record $record)
     {
         $errors = $record->getErrors();
@@ -414,7 +456,9 @@ abstract class Omeka_Record implements ArrayAccess
      * Can be used to prevent accidentally saving/deleting a record if its state may 
      * change but saving would be undesirable, such as modifying a record for
      * display purposes.
-     **/
+     *
+     * @return void
+     */
     final public function lock()
     {
         $this->_locked = true;
@@ -452,7 +496,7 @@ abstract class Omeka_Record implements ArrayAccess
      * 
      * @uses Omeka_Db_Table::getColumns()
      * @return array
-     **/
+     */
     public function toArray()
     {
         $columns = $this->getTable()->getColumns();
@@ -474,7 +518,7 @@ abstract class Omeka_Record implements ArrayAccess
      * the existing database row(s) will be updated.
      * 
      * @return boolean Whether or not the save was successful.
-     **/
+     */
     public function save()
     {    
         if ($this->_locked) {
@@ -522,7 +566,10 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Force the record to save.
      * 
-     * @throws Omeka_Validator_Exception If the record cannot be saved for some reason.
+     * @throws Omeka_Validator_Exception If the record cannot be saved for some 
+     * reason.
+     * @return boolean True if the save was successful, an exception is thrown
+     * otherwise.
      */
     public function forceSave()
     {
@@ -547,7 +594,7 @@ abstract class Omeka_Record implements ArrayAccess
      * Delete the record.
      * 
      * @return void
-     **/
+     */
     public function delete()
     {
         if ($this->_locked) {
@@ -589,63 +636,72 @@ abstract class Omeka_Record implements ArrayAccess
      * database rows.
      * 
      * @return void
-     **/
+     */
     protected function _delete() {}
     
+    /**#@+
+     * Template callback.
+     * 
+     * @return void
+     */
+    
     /**
-     * Template callback that executes before the record is inserted.
+     * Executes before the record is inserted.
      */
     protected function beforeInsert() {}
     
     /**
-     * Template callback that executes after the record is inserted.
+     * Executes after the record is inserted.
      */
     protected function afterInsert() {}
     
     /**
-     * Template callback that executes before the record is saved.
+     * Executes before the record is saved.
      */
     protected function beforeSave() {}
     
     /**
-     * Template callback that executes after the record is inserted.
+     * Executes after the record is inserted.
      */
     protected function afterSave() {}
     
     /**
-     * Template callback that executes before the record is updated.
+     * Executes before the record is updated.
      */
     protected function beforeUpdate() {}
     
     /**
-     * Template callback that executes after the record is updated.
+     * Executes after the record is updated.
      */
     protected function afterUpdate() {}
     
     /**
-     * Template callback that executes before the record is deleted.
+     * Executes before the record is deleted.
      */
     protected function beforeDelete() {}
     
     /**
-     * Template callback that executes after the record is deleted.
+     * Executes after the record is deleted.
      */
     protected function afterDelete() {}
     
     /**
-     * Template callback that executes before the record is validated.
+     * Executes before the record is validated.
      */
     protected function beforeValidate() {}
     
     /**
-     * Template callback that executes after the record is validated.
+     * Executes after the record is validated.
      */
     protected function afterValidate() {}
-        
+    
+    /**#@-*/
+    
     /**
      * Set values for the record using an associative array or iterator.
      * 
-     * @param array|Traversable
+     * @param array|Traversable $data
+     * @return void
      */
     public function setArray($data)
     {
@@ -700,6 +756,7 @@ abstract class Omeka_Record implements ArrayAccess
      * 
      * @param string $name
      * @param mixed $value
+     * @return void
      */
     public function offsetSet($name, $value) 
     {
@@ -715,7 +772,7 @@ abstract class Omeka_Record implements ArrayAccess
      * @param array $post An associative array, typically a copy of $_POST.
      * @return boolean True if the form saved successfully, false if there was
      * no post data.  Throws an exception if form does not validate.
-     **/
+     */
     public function saveForm($post)
     {        
         if(!empty($post))
@@ -752,13 +809,15 @@ abstract class Omeka_Record implements ArrayAccess
     }
     
     /**
-     * Template callback that executes before the form data is saved to the record.
+     * Template callback that executes before the form data is saved to the 
+     * record.
      * 
      * @internal This receives an ArrayObject instance to make it easier for
      * plugins to modify these values without having to pass arrays by
      * reference.
      * @param ArrayObject $post Subclasses may override this method in order to
      * modify the contents of $post before it is saved to the record.
+     * @return void
      */
     protected function beforeSaveForm($post) 
     {
@@ -768,8 +827,9 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Set the record values from POST data.
      *
-     * @return array $post POST data that has been filtered yet again.
-     **/
+     * @param array $post
+     * @return array POST data that has been filtered yet again.
+     */
     protected function setFromPost($post) 
     {
         if (array_key_exists('id', $post)) {
@@ -785,6 +845,7 @@ abstract class Omeka_Record implements ArrayAccess
      * 
      * @see Omeka_Record::beforeSaveForm()
      * @param ArrayObject $post
+     * @return void
      */
     protected function afterSaveForm($post) 
     {
@@ -799,8 +860,8 @@ abstract class Omeka_Record implements ArrayAccess
      * @param mixed $value Optional If null, this will check the value of the
      * record's $field.  Otherwise check the uniqueness of this value for the
      * given field.
-     * @return bool
-     **/
+     * @return boolean
+     */
     protected function fieldIsUnique($field, $value = null)
     {
         return Zend_Validate::is($value ? $value : $this->$field,

@@ -1,19 +1,23 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Initialize the session and customize the session name to prevent session
  * overlap between different applications that operate on the same server.
+ * 
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * @return void
+     */
     public function init()
     {
         // Look for the session name as the 'session.name' value in the 
@@ -30,6 +34,7 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbst
      * Retrieve global session configuration options.
      * 
      * @link http://framework.zend.com/manual/en/zend.session.global_session_management.html#zend.session.global_session_management.configuration_options
+     * @param Zend_Config $config Application config.
      * @return array An array containing all the global configuration options 
      * for sessions.  This array contains at least one key, 'name', corresponding
      * to the name of the session, which is generated automatically if not 
@@ -47,6 +52,14 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbst
         return $sessionConfig;
     }
     
+    /**
+     * Create a unique session name.
+     *
+     * Hashes the base directory, this ensures that session names differ between
+     * Omeka instances on the same server.
+     *
+     * @return string
+     */
     private function _buildSessionName()
     {
         return md5(BASE_DIR);

@@ -165,7 +165,7 @@ function loop_records($recordType, $records, $setCurrentRecordCallback=null)
     
     // If there is a previously-returned record from this loop, release the
     // object before returning the next record.
-    if ($lastRecord[$recordType]) {
+    if ($lastRecord && array_key_exists($recordType, $lastRecord) && $lastRecord[$recordType]) {
         release_object($lastRecord[$recordType]);
         $lastRecord[$recordType] = null;
     }

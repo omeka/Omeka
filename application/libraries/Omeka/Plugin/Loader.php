@@ -1,35 +1,64 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Loads plugins for any given request.  
  * 
  * This will iterate through the plugins root directory and load all plugin.php 
- * files by require'ing them.
+ * files by require()'ing them.
  * 
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Plugin_Loader
 {
+    /**
+     * Plugin broker object.
+     *
+     * @var Omeka_Plugin_Broker
+     */
     protected $_broker;
+    
+    /**
+     * Plugin INI reader object.
+     *
+     * @var Omeka_Plugin_Ini
+     */
     protected $_iniReader;
+    
+    /**
+     * Plugin MVC object.
+     *
+     * @var Omeka_Plugin_Mvc
+     */
     protected $_mvc;
+    
+    /**
+     * Plugins directory.
+     *
+     * @var string
+     */
     protected $_basePath;
     
     /**
      * An array of all plugins (installed or not) that are currently located
-     * in the plugins/ directory
+     * in the plugins/ directory.
      *
      * @var array List of Plugin objects.
-     **/
+     */
     protected $_plugins = array();
-                
+    
+    /**
+     * @param Omeka_Plugin_Broker $broker Plugin broker.
+     * @param Omeka_Plugin_Ini $iniReader plugin.ini reader.
+     * @param Omeka_Plugin_Mvc $mvc Plugin MVC object.
+     * @param string $pluginsBaseDir Plugins directory.
+     */
     public function __construct(Omeka_Plugin_Broker $broker, 
                                 Omeka_Plugin_Ini $iniReader,
                                 Omeka_Plugin_Mvc $mvc,
@@ -47,6 +76,7 @@ class Omeka_Plugin_Loader
      * @param array $plugins List of Plugin records to load.  
      * @param boolean $force If true, throws exceptions for plugins that cannot
      * be loaded for some reason.
+     * @return void
      */
     public function loadPlugins(array $plugins, $force = false)
     {
@@ -71,7 +101,7 @@ class Omeka_Plugin_Loader
      * first time failed, will not cause a problem as long as the same instance
      * was registered.
      *
-     * @param Plugin $plugin
+     * @param Plugin $plugin Record of plugin to register.
      * @return void
      */
     public function registerPlugin(Plugin $plugin)
@@ -84,7 +114,7 @@ class Omeka_Plugin_Loader
     }
     
     /**
-     * Return whether a plugin is registered or not
+     * Return whether a plugin is registered or not.
      * 
      * @param Plugin $plugin
      * @return boolean Whether the plugin is registered or not.
@@ -96,18 +126,19 @@ class Omeka_Plugin_Loader
     }
                 
     /**
-     * Loads a plugin (and make sure the plugin API is available)
+     * Load a plugin (and make sure the plugin API is available).
      * 
-     * To be loaded, the plugin must be installed, active, and does not have a newer version.
-     * If loaded, the plugin will attempt to first load all plugins, both required and optional, that the plugin uses.  
-     * However, it will not load a plugin that it uses, if that plugin is not installed and activated
+     * To be loaded, the plugin must be installed, active, and not have a newer 
+     * version. If loaded, the plugin will attempt to first load all plugins, 
+     * both required and optional, that the plugin uses.  However, it will not 
+     * load a plugin that it uses if that plugin is not installed and activated.
      * 
      * @param Plugin $plugin
      * @param boolean $force If true, throws exceptions if a plugin can't be 
      * loaded.
      * @param array $pluginsWaitingToLoad Plugins waiting to be loaded
      * @return void
-     **/
+     */
     public function load(Plugin $plugin, $force = false, $pluginsWaitingToLoad = array())
     {           
         $this->registerPlugin($plugin);
@@ -192,9 +223,14 @@ class Omeka_Plugin_Loader
      *  - Has a plugin.php file.
      *  - Is installed.
      *  - Is active.
-     *  - Meets the minimum required version of Omeka (in plugin.ini)
-     *  - Is not already loaded (Why?)
-     *  - Does not have a new version available (Why?)
+     *  - Meets the minimum required version of Omeka (in plugin.ini).
+     *  - Is not already loaded.
+     *  - Does not have a new version available.
+     *
+     * @param Plugin $plugin Plugin to test.
+     * @param boolean $force If true, throw an exception if the plugin can't
+     * be loaded.
+     * @return boolean
      */
     protected function _canLoad($plugin, $force)
     {
@@ -236,11 +272,11 @@ class Omeka_Plugin_Loader
     }
                         
     /**
-     * Returns whether a plugin has a plugin.php file
+     * Return whether a plugin has a plugin.php file.
      * 
-     * @param string|Plugin $pluginDirName
+     * @param string|Plugin $pluginDirName Plugin object or directory name.
      * @return boolean
-     **/
+     */
     public function hasPluginBootstrap($pluginDirName)
     {
         if ($pluginDirName instanceof Plugin) {
@@ -253,9 +289,9 @@ class Omeka_Plugin_Loader
     /**
      * Returns the path to the plugin.php file
      * 
-     * @param string $pluginDirName
+     * @param string $pluginDirName Plugin directory name.
      * @return string
-     **/
+     */
     public function getPluginFilePath($pluginDirName)
     {
         return $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.php';
@@ -264,6 +300,8 @@ class Omeka_Plugin_Loader
     /**
      * Return a list of all the plugins that have been loaded (or attempted to
      * be loaded) thus far.
+     *
+     * @return array List of Plugin objects.
      */
     public function getPlugins()
     {
@@ -271,7 +309,9 @@ class Omeka_Plugin_Loader
     }
     
     /**
-     * @param string $directoryName
+     * Get a plugin object by name (plugin subdirectory name).
+     *
+     * @param string $directoryName Plugin name.
      * @return Plugin|null 
      */
     public function getPlugin($directoryName)
@@ -279,8 +319,15 @@ class Omeka_Plugin_Loader
         if (array_key_exists($directoryName, $this->_plugins)) {
             return $this->_plugins[(string)$directoryName];
         }
+        return null;
     }
     
+    /**
+     * Loads the plugin bootstrap (plugin.php) file for a plugin.
+     *
+     * @param Plugin $plugin Plugin to bootstrap.
+     * @return void
+     */
     protected function _loadPluginBootstrap(Plugin $plugin)
     {
         $pluginDirName = $plugin->getDirectoryName();

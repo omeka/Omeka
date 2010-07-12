@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Core class used to bootstrap the Omeka environment.
@@ -17,20 +17,16 @@
  * that get initialized by this class.  Methods can be called on this class
  * as though it were an instance of Omeka_Context.
  *
- * @version $Id$
  * @uses Omeka_Context
  * @package Omeka
- * @author CHNM
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Core extends Zend_Application
 {
     /**
      * Array containing all core loading phase methods in sequential order. 
      * Modify this array if any phase is added or deleted.
      *
-     * @access protected
      * @var array
      */
     protected $_phases = array('sanitizeMagicQuotes' => null, 
@@ -51,8 +47,9 @@ class Omeka_Core extends Zend_Application
     /**
      * Initialize the application.
      *
-     * @return void
-     **/
+     * @param string $environment Environment name.
+     * @param string|array|Zend_Config $options Application configuration.
+     */
     public function __construct($environment = null, $options = null)
     {
         require_once 'globals.php';
@@ -68,10 +65,12 @@ class Omeka_Core extends Zend_Application
     }
     
     /**
-     * Delegate to the context object
+     * Delegate to the context object.
      *
+     * @param string $m Method called.
+     * @param array $a Arguments to method.
      * @return mixed
-     **/
+     */
     public function __call($m, $a)
     {
         if (substr($m, 0, 10) == 'initialize') {
@@ -87,7 +86,7 @@ class Omeka_Core extends Zend_Application
      * $_POST and $_REQUEST superglobals.
      * 
      * @return void
-     **/
+     */
     public function sanitizeMagicQuotes()
     {
         //Strip out those bastard slashes
@@ -104,7 +103,7 @@ class Omeka_Core extends Zend_Application
      * This will initialize all the elements of the application.
      * 
      * @return void
-     **/
+     */
     public function initialize()
     {
         try {
@@ -129,7 +128,7 @@ class Omeka_Core extends Zend_Application
      *
      * @param string $stopPhase The phase where the user wants loading to stop. 
      * @return void
-     **/
+     */
     public function phasedLoading($stopPhase)
     {       
         // Throw an error if the stop phase doesn't exist.
@@ -146,6 +145,12 @@ class Omeka_Core extends Zend_Application
         }
     }
     
+    /**
+     * Print an HTML page to display errors when starting the application.
+     *
+     * @param string $message Error message to display.
+     * @return void
+     */
     private function _displayErrorPage($message = '', Exception $e)
     {
 ?>

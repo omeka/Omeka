@@ -1,24 +1,36 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Changes the state of any given plugin (installed/uninstalled/activated/deactivated)
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Plugin_Installer
 {
+    /**
+     * Plugin broker object.
+     *
+     * @var Omeka_Plugin_Broker
+     */
     protected $_broker;
+    
+    /**
+     * Plugin loader object.
+     *
+     * @var Omeka_Plugin_Loader
+     */
     protected $_loader;
     
     /**
-     * @todo Refactor all methods to accept an instance of Plugin record.
+     * @param Omeka_Plugin_Broker $broker Plugin broker object.
+     * @param Omeka_Plugin_Loader $loader Plugin loader object.
      */
     public function __construct(Omeka_Plugin_Broker $broker, 
                                 Omeka_Plugin_Loader $loader)
@@ -28,11 +40,11 @@ class Omeka_Plugin_Installer
     }
             
     /**
-     * Activates the plugin
+     * Activate a plugin.
      *
-     * @param string $pluginDirName
+     * @param Plugin $plugin Plugin to activate.
      * @return void
-     **/
+     */
     public function activate(Plugin $plugin)
     {
         $plugin->active = 1;
@@ -40,11 +52,11 @@ class Omeka_Plugin_Installer
     }
     
     /**
-     * Deactivates the plugin
+     * Deactivate a plugin.
      *
-     * @param string $pluginDirName
+     * @param Plugin $plugin Plugin to deactivate.
      * @return void
-     **/
+     */
     public function deactivate(Plugin $plugin)
     {
         $plugin->active = 0;
@@ -52,11 +64,13 @@ class Omeka_Plugin_Installer
     }
     
     /**
-     * Upgrades the plugin
+     * Upgrade a plugin.
      *
-     * @param string $pluginDirName
+     * This will activate the plugin, then run the 'upgrade' hook.
+     *
+     * @param Plugin $plugin Plugin to upgrade.
      * @return void
-     **/
+     */
     public function upgrade(Plugin $plugin)
     {           
         if (!$plugin->hasNewVersion()) {
@@ -81,11 +95,13 @@ class Omeka_Plugin_Installer
     }
     
     /**
-     * Installs the plugin
+     * Install a plugin.
      *
-     * @param string $pluginDirName
+     * This will activate the plugin, then run the 'install' hook.
+     *
+     * @param Plugin $plugin Plugin to install.
      * @return void
-     **/
+     */
     public function install(Plugin $plugin) 
     {
         if (!$plugin->getDirectoryName()) {
@@ -110,14 +126,14 @@ class Omeka_Plugin_Installer
     }
     
     /**
-     * Uninstall hook for plugins.  
+     * Uninstall a plugin.  
      *
      * This will run the 'uninstall' hook for the given plugin, and then it
      * will remove the entry in the DB corresponding to the plugin.
      * 
-     * @param string $pluginDirName Name of the plugin directory to uninstall
+     * @param Plugin $plugin Plugin to uninstall.
      * @return void
-     **/
+     */
     public function uninstall(Plugin $plugin)
     {
         if (!$plugin->isLoaded()) {

@@ -1,33 +1,52 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * Base test case class for tests which need Omeka to be bootstrapped.
+ * Abstract test case class that bootstraps the entire application.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCase
 {   
+    /**
+     * Flag that should be set by subclasses that test the admin theme.
+     *
+     * @var boolean
+     */
     protected $_isAdminTest = false;
     
     /**
-     * @var boolean Whether the view should attempt to load admin scripts for 
+     * Whether the view should attempt to load admin scripts for 
      * testing purposes.  Defaults to true.
+     *
+     * @var boolean
      */
     protected $_useAdminViews = true;
     
+    /**
+     * Bootstrap the application on each test run.
+     *
+     * @return void
+     */
     public function setUp()
     {
         $this->bootstrap = array($this, 'appBootstrap');
         parent::setUp();
     }
     
+    /**
+     * Proxy gets to properties to allow access to bootstrap container
+     * properties.
+     *
+     * @param string $property
+     * @return mixed
+     */
     public function __get($property)
     {
         if ($retVal = parent::__get($property)) {
@@ -36,6 +55,11 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         return $this->core->getBootstrap()->getContainer()->{$property};
     }
     
+    /**
+     * Bootstrap the application.
+     *
+     * @return void
+     */
     public function appBootstrap()
     {
         // Must happen before all other bootstrapping.
@@ -57,9 +81,21 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }
     }
     
+    /**
+     * Subclasses can override this to perform specialized setup on the Omeka
+     * core.
+     *
+     * @param Zend_Application_Bootstrap $bootstrap
+     * @return void
+     */
     public function setUpBootstrap($bootstrap)
     {}
-
+    
+    /**
+     * Reset objects that carry global state between test runs.
+     *
+     * @return void
+     */
     public function tearDown()
     {
         Zend_Registry::_unsetInstance();
@@ -71,6 +107,9 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     /**
      * @internal Overrides the parent behavior to enable automatic throwing of
      * exceptions from dispatching.
+     * @param string $url
+     * @param boolean $throwExceptions
+     * @return void
      */
     public function dispatch($url = null, $throwExceptions = true)
     {
@@ -110,6 +149,9 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     
     /**
      * Trick the environment into thinking that a user has been authenticated.
+     *
+     * @param User $user
+     * @return void
      */
     protected function _authenticateUser(User $user)
     {
@@ -124,19 +166,32 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $aclHelper->setCurrentUser($user);
     }
     
+    /**
+     * Add admin view scripts to search path.
+     *
+     * @return void
+     */
     protected function _useAdminViews()
     {
         $this->view = Zend_Registry::get('view');
         $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
     }
     
+    /**
+     * Get the user that is installed by default.
+     *
+     * @return User
+     */
     protected function _getDefaultUser()
     {
         return $this->db->getTable('User')->find(Omeka_Test_Resource_Db::DEFAULT_USER_ID);
     }
     
     /**
+     * Set up for testing the admin interface.
+     *
      * @internal Necessary because admin and public have 2 separate bootstraps.
+     * @return void
      */
     private function _setupAdminTest()
     {
@@ -169,12 +224,12 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     }
     
     /**
-    * Initializes the plugin hooks and filters fired in the core resources for a plugin
-    * Note: Normally used in the setUp() function of the subclasses that test plugins.
-    * @param Omeka_Plugin_Broker $pluginBroker
-    * @param string $pluginName
-    * @return void
-    **/
+     * Initializes the plugin hooks and filters fired in the core resources for a plugin
+     * Note: Normally used in the setUp() function of the subclasses that test plugins.
+     * @param Omeka_Plugin_Broker $pluginBroker
+     * @param string $pluginName
+     * @return void
+     */
     protected function _initializeCoreResourcePluginHooksAndFilters($pluginBroker, $pluginName)
     {
         $this->_initializeDefineResponseContextsFilter($pluginBroker);
@@ -185,10 +240,10 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     }
     
     /**
-    * Initializes the define_response_context filter
-    * @param Omeka_Plugin_Broker $pluginBroker
-    * @return void
-    **/
+     * Initializes the define_response_context filter
+     * @param Omeka_Plugin_Broker $pluginBroker
+     * @return void
+     */
     protected function _initializeDefineResponseContextsFilter($pluginBroker)
     {        
         Zend_Controller_Action_HelperBroker::removeHelper('contextSwitch');

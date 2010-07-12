@@ -1,17 +1,13 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Initializes Omeka's ACL
- *
- * Checks to see if there is a serialized copy of the ACL in the database, 
- * then use that.  If not, then set up the ACL based on the hard-coded 
- * settings.
  * 
  * @since 0.10 Plugins must use the 'define_acl' hook to modify ACL definitions.
  * @uses Omeka_Acl
@@ -20,12 +16,22 @@
  * method should populate a new Acl instance with those settings and store
  * that Acl object in a session for quick access.
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * Access control list object.
+     *
+     * @var Omeka_Acl
+     */
     protected $_acl;
     
+    /**
+     * Load the hardcoded ACL definitions, then apply definitions from plugins.
+     *
+     * @return Omeka_Acl
+     */
     public function init()
     {
         // Setup the ACL

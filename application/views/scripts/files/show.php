@@ -1,6 +1,16 @@
-<?php head(); ?>
+<?php
+    $fileTitle = item_file('Dublin Core', 'Title') ? item_file('Dublin Core', 'Title') : strip_formatting(item_file('original filename'));
 
-<h1>File #<?php echo item_file('Id'); ?></h1>
+    if ($fileTitle != '') {
+        $fileTitle = ': &quot;' . $fileTitle . '&quot; ';
+    } else {
+        $fileTitle = '';
+    }
+    $fileTitle = 'File #' . item_file('id') . $fileTitle;
+?>
+<?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
+
+<h1><?php echo $fileTitle; ?></h1>
 
 <div id="primary">
 

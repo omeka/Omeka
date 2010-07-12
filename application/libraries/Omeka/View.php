@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Customized subclass of Zend Framework's View class.
@@ -18,20 +18,28 @@
  * $this->item, for example.
  *
  * @package Omeka
- * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_View extends Zend_View_Abstract
 {    
     /**
-     * Maintains a key => value pairing corresponding to hard path => web path for possible assets for Omeka views
+     * Maintains a key => value pairing corresponding to hard path => web path 
+     * for possible assets for Omeka views.
      *
      * @var array
-     **/
+     */
     protected $_asset_paths = array();
     
+    /**
+     * Flag indicated whether theme custom scripts have been loaded.
+     *
+     * @var boolean
+     */
     private $_customScriptsLoaded = false;
     
+    /**
+     * @param array $config View configuration.
+     */
     public function __construct($config = array())
     {
         parent::__construct($config);         
@@ -43,18 +51,34 @@ class Omeka_View extends Zend_View_Abstract
     }
     
     /**
+     * Get the currently-configured asset paths.
+     *
      * @return array
-     **/
+     */
     public function getAssetPaths()
     {
         return $this->_asset_paths;
     }
-
+    
+    /**
+     * Add an asset path to the view.
+     *
+     * @param string $physical Local filesystem path.
+     * @param string $web URL path.
+     * @return void
+     */
     public function addAssetPath($physical, $web)
     {
         array_unshift($this->_asset_paths, array($physical, $web));
     }
     
+    /**
+     * Remove the existing asset paths and set a single new one.
+     * 
+     * @param string $physical Local filesystem path.
+     * @param string $web URL path.
+     * @return void 
+     */
     public function setAssetPath($physical, $web)
     {
         $this->_asset_paths = array();
@@ -62,19 +86,20 @@ class Omeka_View extends Zend_View_Abstract
     }
         
     /**
-     * This allows for variables set to the view object
+     * Allow for variables set to the view object
      * to be referenced in the view script by their actual name.
+     *
+     * Also allows access to theme helpers.
      * 
      * For example, in a controller you might do something like:
      * $view->assign('themes', $themes);
      * Normally in the view you would then reference $themes through:
      * $this->themes;
      * 
-     * 
      * Now you can reference it simply by using:
      * $themes;
-     * 
-     * 
+     *
+     * @return void
      */
     public function _run() {
         $this->_loadCustomThemeScripts();
@@ -90,13 +115,13 @@ class Omeka_View extends Zend_View_Abstract
     /**
      * Look for a 'custom.php' script in all script paths and include the file if it exists.
      * 
-     * @internal This must 'include' (as opposed to 'require') the script because
+     * @internal This must 'include' (as opposed to 'require_once') the script because
      * it typically contains executable code that modifies global state.  These
      * scripts need to be loaded only once per request, but multiple times in
      * the test environment.  Hence the flag for making sure that it runs only
      * once per View instance.
      * @return void
-     **/
+     */
     private function _loadCustomThemeScripts()
     {
         if ($this->_customScriptsLoaded) {
@@ -113,11 +138,12 @@ class Omeka_View extends Zend_View_Abstract
     }
     
     /**
-     * Adds a script path to the view.
+     * Add a script path to the view.
      * 
      * @internal Overrides Zend_View_Abstract to ensure that duplicate paths
      * are not added to the stack.  Fixes a bug where include'ing the same 
      * script twice causes fatal errors.
+     * @param string $path Local filesystem path.
      */
     public function addScriptPath($path)
     {

@@ -1,19 +1,22 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Sets up debugging output for web requests (if enabled).
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Debug extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * @return void
+     */
     public function init()
     {
         $bootstrap = $this->getBootstrap();

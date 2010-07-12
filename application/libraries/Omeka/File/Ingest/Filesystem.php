@@ -1,17 +1,17 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Implements ingesting files from the local filesystem.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
 {
     /**
@@ -20,7 +20,8 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
      * @param array $fileInfo In addition to the defaults, this may contain a 
      * 'rename' = (boolean) flag, which indicates defaults to false and indicates
      * whether or not to attempt to move the file instead of copying it.
-     **/
+     * @return array Iterable info array.
+     */
     protected function _parseFileInfo($fileInfo)
     {
         $infoArray = parent::_parseFileInfo($fileInfo);
@@ -39,9 +40,9 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
      * Check for the 'name' attribute first, otherwise extract the basename() 
      * from the given file path.
      * 
-     * @param array
+     * @param array $info File info array.
      * @return string
-     **/
+     */
     protected function _getOriginalFilename($info)
     {
         if (!($original = parent::_getOriginalFilename($info))) {
@@ -50,6 +51,15 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
         return $original;
     }
     
+    /**
+     * Transfer a file.
+     *
+     * @param string $source Source path.
+     * @param string $destination Destination path.
+     * @param array $info File info array.  If 'rename' is specified as true,
+     * move the file instead of copying.
+     * @return void
+     */
     protected function _transfer($source, $destination, array $info)
     {        
         if ($info['rename']) {
@@ -59,6 +69,13 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
         }        
     }
     
+    /**
+     * Validate file transfer.
+     *
+     * @param string $source Source path.
+     * @param array $info File info array.
+     * @param void
+     */
     protected function _validateSource($source, $info)
     {        
         if ($info['rename']) {
@@ -80,9 +97,9 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
      * 
      * Use mime_content_type() to check the file at its original location.
      * 
-     * @param array
+     * @param array $fileInfo
      * @return string
-     **/
+     */
     protected function _getFileMimeType($fileInfo)
     {
         $sourcePath = $this->_getFileSource($fileInfo);

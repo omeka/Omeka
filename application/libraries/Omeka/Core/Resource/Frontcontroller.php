@@ -1,22 +1,28 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Front controller resource.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ * @copyright Center for History and New Media, 2009-2010
+ */
 class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Frontcontroller
 {
+    /**
+     * @return Zend_Controller_Front
+     */
     public function init()
     {           
         $front = Zend_Controller_Front::getInstance();
+        
+        // If 'skipOmekaMvc' is set on the front controller, skip the
+        // Omeka custom behavior here, and stick with vanilla Zend.
         // Because of resource naming conflicts, i.e. both Zend and Omeka 
         // resource plugins called 'Frontcontroller', there is no easy way to
         // use the default Zend resource instead of Omeka's.  Situations where

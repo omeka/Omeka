@@ -4,16 +4,19 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Set up the plugin broker.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Core_Resource_Pluginbroker extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * @return Omeka_Plugin_Broker
+     */
     public function init()
     {
         $bootstrap = $this->getBootstrap();
