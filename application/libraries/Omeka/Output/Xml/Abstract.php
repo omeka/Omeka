@@ -213,7 +213,7 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $elementSets = $this->_getElemetSetsByElementTexts($record);
         
         // Return if there are no element sets.
-        if (!count($elementSets->elementSets)) {
+        if (!isset($elementSets->elementSets) || !count($elementSets->elementSets)) {
             return null;
         }
         
