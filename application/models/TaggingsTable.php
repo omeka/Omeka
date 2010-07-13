@@ -53,9 +53,8 @@ class TaggingsTable extends Omeka_Db_Table
             
             $select->joinInner(array('e'=>$db->Entity), "e.id = tg.entity_id", array());
             
-            if ($entity = $options['entity']) {
-                
-                $entity_id = (int) is_numeric($entity) ? $entity : $entity->id;
+            if (array_key_exists('entity', $options)) {
+                $entity_id = (int) is_numeric($options['entity']) ? $options['entity'] : $options['entity']->id;
                 $select->where("e.id = ?", $entity_id);
                 
             } else if ($user = $options['user']) {
