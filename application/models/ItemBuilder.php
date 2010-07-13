@@ -12,8 +12,31 @@
  **/
 class ItemBuilder extends Omeka_Record_Builder
 {
+    const TAGS = 'tags';
+    const TAG_ENTITY = 'tag_entity';
+    const FILES = 'files';
+    const FILE_TRANSFER_TYPE = 'file_transfer_type';
+    const FILE_INGEST_OPTIONS = 'file_ingest_options';
+    const FILE_INGEST_VALIDATORS_FILTER = 'file_ingest_validators';
+    const ITEM_TYPE_NAME = 'item_type_name';
+    const ITEM_TYPE_ID = 'item_type_id';
+    const COLLECTION_ID = 'collection_id';
+    const OVERWRITE_ELEMENT_TEXTS = 'overwriteElementTexts';
+    
+    /**
+     * @internal Constant could not be called 'PUBLIC' because it is a reserved
+     * keyword.
+     */
+    const IS_PUBLIC = 'public';
+    const IS_FEATURED = 'featured';
+    
     protected $_recordClass = 'Item';
-    protected $_settableProperties = array('item_type_id', 'collection_id', 'public', 'featured');
+    protected $_settableProperties = array(
+        self::ITEM_TYPE_ID, 
+        self::COLLECTION_ID, 
+        self::IS_PUBLIC, 
+        self::IS_FEATURED
+    );
     
     private $_elementTexts = array();
     private $_fileMetadata = array();
@@ -71,9 +94,9 @@ class ItemBuilder extends Omeka_Record_Builder
     {
         // As of 0.10 we still need to tag for a specific entity.
         // This may change in future versions.
-        $entityToTag = array_key_exists('tag_entity', $this->_metadataOptions) ?
-            $this->_metadataOptions['tag_entity'] : current_user()->Entity;
-        $this->_record->addTags($this->_metadataOptions['tags'], $entityToTag);
+        $entityToTag = array_key_exists(self::TAG_ENTITY, $this->_metadataOptions) ?
+            $this->_metadataOptions[self::TAG_ENTITY] : current_user()->Entity;
+        $this->_record->addTags($this->_metadataOptions[self::TAGS], $entityToTag);
     }
     
     /**
@@ -172,7 +195,7 @@ class ItemBuilder extends Omeka_Record_Builder
                         'extension whitelist'=> new Omeka_Validate_File_Extension,
                         'MIME type whitelist'=> new Omeka_Validate_File_MimeType);
         
-        $validators = apply_filters('file_ingest_validators', $validators);
+        $validators = apply_filters(self::FILE_INGEST_VALIDATORS_FILTER, $validators);
         
         // Build the default validators.
         foreach ($validators as $validator) {
@@ -183,7 +206,7 @@ class ItemBuilder extends Omeka_Record_Builder
     protected function _beforeBuild()
     {
         if ($this->_record->exists() 
-        and array_key_exists('overwriteElementTexts', $this->_metadataOptions)) {
+        and array_key_exists(self::OVERWRITE_ELEMENT_TEXTS, $this->_metadataOptions)) {
             $this->_replaceElementTexts();
         } else {
             $this->_addElementTexts();
@@ -193,14 +216,14 @@ class ItemBuilder extends Omeka_Record_Builder
         // exceptions that bubble up will prevent the item from being saved.  On
         // the other hand, if 'ignore_invalid_files' is set to true, then the 
         // item will be saved as normally.
-        if (array_key_exists('files', $this->_fileMetadata)) {
-            if (!array_key_exists('file_transfer_type', $this->_fileMetadata)) {
-                throw new Omeka_Record_Builder_Exception("Must specify 'file_transfer_type' when attaching files to an item!");
+        if (array_key_exists(self::FILES, $this->_fileMetadata)) {
+            if (!array_key_exists(self::FILE_TRANSFER_TYPE, $this->_fileMetadata)) {
+                throw new Omeka_Record_Builder_Exception("Must specify a file transfer type when attaching files to an item!");
             }
             $this->addFiles(
-                $this->_fileMetadata['file_transfer_type'], 
-                $this->_fileMetadata['files'], 
-                (array)$this->_fileMetadata['file_ingest_options']);
+                $this->_fileMetadata[self::FILE_TRANSFER_TYPE], 
+                $this->_fileMetadata[self::FILES], 
+                (array)$this->_fileMetadata[self::FILE_INGEST_OPTIONS]);
         }
     }
     
@@ -210,8 +233,8 @@ class ItemBuilder extends Omeka_Record_Builder
     protected function _afterBuild()
     {
         // Must take place after save().
-        if (array_key_exists('tags', $this->_metadataOptions) 
-        and !empty($this->_metadataOptions['tags'])) {
+        if (array_key_exists(self::TAGS, $this->_metadataOptions) 
+        and !empty($this->_metadataOptions[self::TAGS])) {
             $this->_addTags();
         }
     }
@@ -222,14 +245,14 @@ class ItemBuilder extends Omeka_Record_Builder
     protected function _parseMetadataOptions(array $itemMetadata)
     {
         // Determine the Item Type ID from the name.
-        if (array_key_exists('item_type_name', $itemMetadata)) {
-            $itemType = get_db()->getTable('ItemType')->findBySql('name = ?', array($itemMetadata['item_type_name']), true);
+        if (array_key_exists(self::ITEM_TYPE_NAME, $itemMetadata)) {
+            $itemType = get_db()->getTable('ItemType')->findBySql('name = ?', array($itemMetadata[self::ITEM_TYPE_NAME]), true);
 
             if(!$itemType) {
-                throw new Omeka_Record_Builder_Exception( "Invalid type named {$itemMetadata['item_type_name']} provided!");
+                throw new Omeka_Record_Builder_Exception( "Invalid type named {$itemMetadata[self::ITEM_TYPE_NAME]} provided!");
             }
             
-            $itemMetadata['item_type_id'] = $itemType->id;
+            $itemMetadata[self::ITEM_TYPE_ID] = $itemType->id;
         }
         return $itemMetadata;
     }
