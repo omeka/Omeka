@@ -6,7 +6,7 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- **/
+ */
 
 /**
  * Defines mime_content_type() if it is not available in the current 
@@ -23,7 +23,7 @@ if (!function_exists('mime_content_type')) {
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class File extends Omeka_Record 
 { 
     const DISABLE_DEFAULT_VALIDATION_OPTION = 'disable_default_file_validation';
@@ -89,7 +89,7 @@ class File extends Omeka_Record
      * Retrieve the path for the file
      *
      * @return string
-     **/
+     */
     public function getPath($type='fullsize')
     {
         $fn = $this->getDerivativeFilename();
@@ -106,7 +106,7 @@ class File extends Omeka_Record
      * Retrieve the web path for the file
      *
      * @return void
-     **/
+     */
     public function getWebPath($type='fullsize')
     {
         $fn = $this->getDerivativeFilename();
@@ -144,7 +144,7 @@ class File extends Omeka_Record
      * 
      * @param string
      * @return void
-     **/
+     */
     public function setDefaults($filepath, array $options = array())
     {
         $this->size = filesize($filepath);
@@ -172,7 +172,7 @@ class File extends Omeka_Record
      * 
      * @param string
      * @return string
-     **/
+     */
     public function getMimeType()
     {
         return $this->mime_browser;
@@ -185,7 +185,7 @@ class File extends Omeka_Record
      * 
      * @param string
      * @return void
-     **/
+     */
     public function setMimeType($mimeType)
     {
         $this->mime_browser = $this->_filterMimeType($mimeType);
@@ -196,7 +196,7 @@ class File extends Omeka_Record
      * 
      * @param string $mimeType The raw mime type
      * @return string Filtered mime type.
-     **/
+     */
     protected function _filterMimeType($mimeType)
     {
         $mimeTypeParts = explode(';', $mimeType);
@@ -238,7 +238,7 @@ class File extends Omeka_Record
      * Extract metadata associated with the file.
      * 
      * @return boolean
-     **/
+     */
     public function extractMetadata()
     {
         $extractor = new Omeka_File_Info($this);

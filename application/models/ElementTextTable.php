@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ElementTextTable extends Omeka_Db_Table
 {
     
@@ -21,7 +21,7 @@ class ElementTextTable extends Omeka_Db_Table
      * @param integer
      * @param string
      * @return Omeka_Db_Select
-     **/
+     */
     public function getSelectForRecord($recordId, $recordType)
     {
         $select = $this->getSelect();
@@ -46,7 +46,7 @@ class ElementTextTable extends Omeka_Db_Table
      * 
      * @param Omeka_Record
      * @return array
-     **/
+     */
     public function findByRecord(Omeka_Record $record)
     {
         $select = $this->getSelectForRecord($record->id, get_class($record));
@@ -63,7 +63,7 @@ class ElementTextTable extends Omeka_Db_Table
      * 
      * @param string
      * @return void
-     **/
+     */
     protected function getRecordTypeId($recordTypeName)
     {
         // Cache the record type ID so we don't have to retrieve it every time.

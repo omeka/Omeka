@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * This encapsulates the permissions check for an item.
@@ -12,14 +12,14 @@
  * @package Omeka
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ItemPermissions
 {
     /**
      * Right now SQL must be an instance of Omeka_Db_Select b/c that is the only way to add conditional SQL
      *
      * @return Omeka_Db_Select
-     **/
+     */
     public function __construct(Omeka_Db_Select $sql, Omeka_Acl $acl)
     {
         $db = Omeka_Context::getInstance()->getDb();

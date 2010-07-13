@@ -4,12 +4,12 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @copyright Center for History and New Media, 2009
- **/
+ */
 class ItemBuilder extends Omeka_Record_Builder
 {
     const TAGS = 'tags';
@@ -147,7 +147,7 @@ class ItemBuilder extends Omeka_Record_Builder
      * </ul>
      * @return array Set of File records ingested.  May be empty if no files 
      * were ingested.
-     **/
+     */
     public function addFiles($transferStrategy, $files, array $options = array())
     {        
         if ($transferStrategy instanceof Omeka_File_Ingest_Abstract) {
@@ -186,7 +186,7 @@ class ItemBuilder extends Omeka_Record_Builder
      * 
      * @param Omeka_File_Ingest_Abstract $ingester
      * @return void
-     **/
+     */
     protected function _addIngestValidators(Omeka_File_Ingest_Abstract $ingester)
     {    
         $validators = get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) 

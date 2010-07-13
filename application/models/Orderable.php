@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Mixins
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Orderable extends Omeka_Record_Mixin
 {
     public function __construct($record, $childClass, $childFk, $childPluralized)
@@ -73,7 +73,7 @@ class Orderable extends Omeka_Record_Mixin
      *
      * @param int
      * @return void
-     **/
+     */
     public function reorderChildren()
     {        
         //Retrieve all section IDs in ascending order, then update 

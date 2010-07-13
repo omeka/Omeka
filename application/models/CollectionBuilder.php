@@ -5,7 +5,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
- **/
+ */
  
 /**
  * Build a collection.
@@ -13,7 +13,7 @@
  * @package Omeka
  * @subpackage Models
  * @copyright Center for History and New Media, 2009
- **/
+ */
 class CollectionBuilder extends Omeka_Record_Builder
 {
     protected $_settableProperties = array('name', 'description', 'public', 'featured');

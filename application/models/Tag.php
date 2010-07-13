@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Tag extends Omeka_Record { 
     
     public $name;
@@ -24,7 +24,7 @@ class Tag extends Omeka_Record {
      * Must also delete the taggings associated with this tag
      *
      * @return void
-     **/
+     */
     protected function _delete()
     {
         $taggings = $this->getDb()
@@ -40,7 +40,7 @@ class Tag extends Omeka_Record {
      * Delete only the taggings entries for this specific tag/entity combination
      *
      * @return void
-     **/
+     */
     protected function deleteForEntity(Entity $entity)
     {
         $taggings = $this->getDb()
@@ -69,7 +69,7 @@ class Tag extends Omeka_Record {
      * which is accomplished via COLLATE utf8_bin sql
      *
      * @return bool
-     **/
+     */
     protected function fieldIsUnique($field, $value = null)
     {
         if ($field != 'name') {
@@ -91,7 +91,7 @@ class Tag extends Omeka_Record {
      * 2) Ignore the original tag if included in the list of new tags
      * 3) Loop through the new tags, loop through the joins and create a new one for each new tag
      * @return void
-     **/
+     */
     public function rename($new_names, $user_id = null, $delimiter = ",") 
     {
         $joins = array();

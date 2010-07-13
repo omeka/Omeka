@@ -5,14 +5,14 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
- **/    
+ */    
  
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ElementTable extends Omeka_Db_Table
 {   
     /**
@@ -22,7 +22,7 @@ class ElementTable extends Omeka_Db_Table
      * 
      * @param string
      * @return array
-     **/
+     */
     public function findByRecordType($recordTypeName)
     {
         $select = $this->getSelect();
@@ -54,7 +54,7 @@ class ElementTable extends Omeka_Db_Table
      * for retrieved elements.
      * 
      * @return Omeka_Db_Select
-     **/
+     */
     public function getSelect()
     {
         $select = parent::getSelect();
@@ -75,7 +75,7 @@ class ElementTable extends Omeka_Db_Table
      * @see Omeka_Db_Table::findPairsForSelectForm()
      * @param string
      * @return void
-     **/
+     */
     protected function _getColumnPairs()
     {
         return array('e.id', 'e.name');
@@ -96,7 +96,7 @@ class ElementTable extends Omeka_Db_Table
      * @see display_element_set_form()
      * @param string The name of the set to which elements belong.
      * @return Element
-     **/
+     */
     public function findBySet($elementSet)
     {
         // Select all the elements for a given set
@@ -116,7 +116,7 @@ class ElementTable extends Omeka_Db_Table
      * @see Item::getItemTypeElements()
      * @param integer
      * @return array Set of element records.
-     **/
+     */
     public function findByItemType($itemTypeId)
     {
         $select = $this->getSelect();
@@ -150,7 +150,7 @@ class ElementTable extends Omeka_Db_Table
      *      <li>element_set_name - string - Name of the element set to which
      * results should belong.</li>
      * </ul>
-     **/
+     */
     public function applySearchFilters($select, $params)
     {
         $db = $this->getDb();

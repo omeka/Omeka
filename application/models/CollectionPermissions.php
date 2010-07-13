@@ -5,7 +5,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
- **/
+ */
 
 /**
  * This will check the ACL To determine whether a user has permission to view 
@@ -15,7 +15,7 @@
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class CollectionPermissions
 {
     public function __construct(Omeka_Db_Select $sql, Omeka_Acl $acl)

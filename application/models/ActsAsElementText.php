@@ -6,7 +6,7 @@
  * @package Omeka
  * @subpackage Mixins
  * @author CHNM
- **/
+ */
 
 /**
  * Record mixin class for associating elements, element texts and their
@@ -15,7 +15,7 @@
  * @package Omeka
  * @subpackage Mixins
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ActsAsElementText extends Omeka_Record_Mixin
 {
     
@@ -23,21 +23,21 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * ElementText records stored in the order they were retrieved from the database.
      *
      * @var array
-     **/
+     */
     protected $_textsByNaturalOrder = array();
     
     /**
      * ElementText records indexed by the element_id.
      * 
      * @var array
-     **/
+     */
     protected $_textsByElementId = array();
     
     /**
      * Element records in the order they were retrieved from the database.
      *
      * @var array
-     **/
+     */
     protected $_elementsByNaturalOrder = array();
     
     /**
@@ -46,7 +46,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * $elements['Title']['Dublin Core'] = Element instance;
      *
      * @var array
-     **/
+     */
     protected $_elementsByNameAndSet = array();
     
     /**
@@ -55,14 +55,14 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * $elements['Dublin Core'] = array(Element instance, Element instance, ...).
      *
      * @var array
-     **/
+     */
     protected $_elementsBySet = array();
     
     /**
      * Element records indexed by ID.
      *
      * @var array
-     **/
+     */
     protected $_elementsById = array();
     
     /**
@@ -71,7 +71,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      *
      * @see ActsAsElementText::_getElementTextsToSaveFromPost()
      * @var array
-     **/
+     */
     protected $_elementsOnForm = array();
     
     /**
@@ -79,7 +79,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * only be saved to the database if they successfully validate.
      *
      * @var array
-     **/
+     */
     protected $_textsToSave = array();
     
     /**

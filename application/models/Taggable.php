@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Taggable
@@ -14,7 +14,7 @@
  * @subpackage Mixins
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Taggable extends Omeka_Record_Mixin
 {    
     public function __construct(Omeka_Record $record) {
@@ -45,7 +45,7 @@ class Taggable extends Omeka_Record_Mixin
      * This will actually delete all the references to a specific tag for a specific record
      *
      * @return void
-     **/    
+     */    
     public function beforeDelete()
     {
         $this->deleteTaggings();
@@ -79,7 +79,7 @@ class Taggable extends Omeka_Record_Mixin
      * Called by whatever record has enabled this module
      *
      * @return array of Taggings
-     **/
+     */
     public function getTaggings()
     {
         return $this->joinTable->findBy(array('record'=>$this->record));
@@ -90,7 +90,7 @@ class Taggable extends Omeka_Record_Mixin
      * @param $order The ordering of the tags. By default, it sorts the tags alphabetically.
      * @see TagTable::applySearchFilters
      * @return array of Tag
-     **/
+     */
     public function getTags($order=array('alpha'))
     {
         return $this->tagTable->findBy(array('record'=>$this->record, 'for'=>$this->type, 'sort'=>$order));
@@ -102,7 +102,7 @@ class Taggable extends Omeka_Record_Mixin
      * @param $order The ordering of the tags.
      * @see TagTable::applySearchFilters
      * @return array of Tag
-     **/
+     */
     public function entityTags($entity, $order=array('alpha'))
     {
         return $this->tagTable->findBy(array('entity'=>$entity, 'record'=>$this->record, 'for'=>$this->type, 'sort'=>$order));
@@ -118,7 +118,7 @@ class Taggable extends Omeka_Record_Mixin
      * @return bool Returns whether a tag in $tags was deleted. 
      *              Returns false if $tags is empty. 
      *              Returns true if at least one tag in $tags is deleted.
-     **/
+     */
     public function deleteTags($tags, $entityOrUser=null, $deleteAll=false, $delimiter=',')
     {
         if (!is_array($tags)) {
@@ -153,7 +153,7 @@ class Taggable extends Omeka_Record_Mixin
      * in_array(array_keys($this->Tags))
      *
      * @return boolean
-     **/
+     */
     public function hasTag($tag, $entity=null) {
         $count = $this->joinTable->findBy(array('tag'=>$tag, 'entity'=>$entity, 'record'=>$this->record), null, true);  
         return $count > 0;
@@ -164,7 +164,7 @@ class Taggable extends Omeka_Record_Mixin
      *
      * @param string $string A delimited string of tags
      * @return array An array of tag strings
-     **/
+     */
     protected function _getTagsFromString($string, $delimiter=',')
     {
         return array_diff(array_map('trim', explode($delimiter, $string)), array(''));
@@ -176,7 +176,7 @@ class Taggable extends Omeka_Record_Mixin
      * @param array|string $tags Either an array of tags or a delimited string
      * @param Entity|User $entityOrUser The entity or user (in record form, for which a set of tags should be added)
      * @return void
-     **/    
+     */    
     public function addTags($tags, $entityOrUser, $delimiter=',') {
         if (!$this->record->id) {
             throw new Omeka_Record_Exception( 'A valid record ID # must be provided when tagging.' );
@@ -216,7 +216,7 @@ class Taggable extends Omeka_Record_Mixin
     /**
      * Calculate the difference between a tag string and a set of tags
      * @return array Keys('removed','added')
-     **/
+     */
     public function diffTagString($string, $tags=null, $delimiter=',')
     {
         if (!$tags) {
@@ -252,7 +252,7 @@ class Taggable extends Omeka_Record_Mixin
      * @param Entity $entity The entity that all the tags will be associated with
      * @param bool $deleteTags When a tag is designated for removal, this specifies whether to remove all instances of the tag or just for the current Entity
      * @return void
-     **/
+     */
     public function applyTagString($string, $entity, $deleteTags = false, $delimiter=',')
     {
         // add and remove taggings by entity for the record

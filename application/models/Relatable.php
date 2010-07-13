@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
@@ -12,7 +12,7 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
  * @deprecated
- **/
+ */
 class Relatable extends Omeka_Record_Mixin
 {
     protected $record;
@@ -27,7 +27,7 @@ class Relatable extends Omeka_Record_Mixin
      * After updating records, add a stamp that the logged-in entity has modified it
      *
      * @return void
-     **/
+     */
     public function afterUpdate()
     {
         $user = Omeka_Context::getInstance()->getCurrentUser();
@@ -40,7 +40,7 @@ class Relatable extends Omeka_Record_Mixin
      * After inserting records, add a stamp that the logged-in entity has added it
      *
      * @return void
-     **/
+     */
     public function afterInsert()
     {
         $user = Omeka_Context::getInstance()->getCurrentUser();
@@ -93,7 +93,7 @@ class Relatable extends Omeka_Record_Mixin
      * would return the date of the last modification.
      * 
      * @return string|null
-     **/
+     */
     public function timeOfLastRelationship($rel)
     {
         $db = $this->getDb();
@@ -123,7 +123,7 @@ class Relatable extends Omeka_Record_Mixin
      * had modified the item.
      *
      * @return array
-     **/
+     */
     public function getRelatedEntities($rel)
     {
         $db = $this->getDb();
@@ -147,7 +147,7 @@ class Relatable extends Omeka_Record_Mixin
      * @param Entity|int $entity
      * @param string $relationship
      * @return boolean
-     **/
+     */
     public function addRelatedTo($entity, $relationship )
     {        
         $entity_id = (int) ($entity instanceof Omeka_Record) ? $entity->id : $entity;        

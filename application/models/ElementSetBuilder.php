@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Build an element set.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2009
- **/
+ */
 class ElementSetBuilder extends Omeka_Record_Builder
 {
     protected $_settableProperties = array('name', 'description');
@@ -26,7 +26,7 @@ class ElementSetBuilder extends Omeka_Record_Builder
      * name of the element set.
      * @param array $elements
      * @param Omeka_Record|null
-     **/
+     */
     public function __construct($metadata = array(), $elements = array(), $record = null)
     {
         if (is_string($metadata)) {

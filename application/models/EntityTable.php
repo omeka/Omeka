@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
@@ -12,14 +12,14 @@
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
  * @deprecated
- **/
+ */
 class EntityTable extends Omeka_Db_Table
 {
     /**
      * Returns an object that has the same values as those supplied in the parameters.
      *
      * @param array $values The properties of the entity with which to search and match
-     **/
+     */
     public function findUnique($values)
     {
         $select = new Omeka_Db_Select;
@@ -50,7 +50,7 @@ class EntityTable extends Omeka_Db_Table
      *
      * @param Omeka_Db_Select
      * @param array
-     **/
+     */
     public function applySearchFilters($select, $params = array())
     {    
         // If we are not allowed to display email addresses, don't pull it from the DB

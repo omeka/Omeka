@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ItemSearch
 {
     protected $_select;
@@ -21,7 +21,7 @@ class ItemSearch
      * 
      * @param Zend_Db_Select
      * @return void
-     **/
+     */
     public function __construct($select)
     {   
         $this->_select = $select;
@@ -43,7 +43,7 @@ class ItemSearch
      * --> ItemTable::findBy() --> here
      *
      * @return void
-     **/
+     */
     public function advanced($advanced)
     {
         $db = $this->_getDb();
@@ -118,7 +118,7 @@ class ItemSearch
      * results list for a given search.
      *
      * @return void
-     **/    
+     */    
     public function simple($terms)
     {
         $db = $this->_getDb();

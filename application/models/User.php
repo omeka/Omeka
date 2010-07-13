@@ -6,13 +6,13 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class User extends Omeka_Record {
 
     public $username;
@@ -75,7 +75,7 @@ class User extends Omeka_Record {
      * @duplication Mostly duplicated in Item::filterInput()
      *
      * @return void
-     **/
+     */
     protected function filterInput($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
@@ -170,7 +170,7 @@ class User extends Omeka_Record {
      * If it is greater than 1, or if the 
      *
      * @return bool
-     **/
+     */
     private function emailIsUnique($email)
     {
         $db = $this->getDb();
