@@ -129,8 +129,8 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         // controller.
         if (!$this->_acl->has($resource)) {
             return true;
-        }
-        		
+        }        
+
 	    return $this->_acl->isAllowed($this->_currentUser, $resource, $privilege);
     }
     

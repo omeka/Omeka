@@ -14,13 +14,13 @@ require_once HELPERS;
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_Helper_JsTest extends Omeka_Test_AppTestCase
+class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
 {
-    
     public function setUp()
     {
-        parent::setUp();
-        $this->view = __v();
+        $this->view = new Omeka_View;
+        Zend_Registry::set('view', $this->view);
+        
         // Trick it into loading existing shared javascripts.
         $this->view->addAssetPath(VIEW_SCRIPTS_DIR, 'http://fake.local/path/to/omeka');
     }
@@ -50,5 +50,10 @@ class Omeka_Helper_JsTest extends Omeka_Test_AppTestCase
     {
         $this->assertContains('<script type="text/javascript" src="http://fake.local/path/to/omeka/javascripts/scriptaculous.js?load=foo,bar" charset="utf-8"></script>',
                               js('scriptaculous', 'javascripts', array('foo', 'bar')));
+    }
+    
+    public function tearDown()
+    {
+        Zend_Registry::_unsetInstance();
     }
 }

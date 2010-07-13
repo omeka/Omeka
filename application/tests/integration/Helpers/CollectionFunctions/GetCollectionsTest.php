@@ -1,72 +1,49 @@
-<?php  
-require_once HELPERS;
+<?php
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ **/
 
 /**
- * Tests get_collections($params, $limit)
- * in helpers/CollectionFunctions.php
- */
-class Helpers_CollectionFunctions_GetCollectionsTest extends Omeka_Test_AppTestCase
+ * Need access to view helper functions.
+ */  
+require_once HELPERS;
+ 
+/**
+ * Tests get_collections() in helpers/CollectionFunctions.php
+ *
+ * Should just test that it delegates properly to CollectionsTable::findBy(),
+ * which should be tested separately.
+ * 
+ * @package Omeka
+ * @copyright Center for History and New Media, 2007-2010
+ **/ 
+class Helpers_CollectionFunctions_GetCollectionsTest extends PHPUnit_Framework_TestCase
 {   
-
-	protected function _createNewCollection($isPublic, $isFeatured, $name, $description)
-	{
-		$collection = new Collection;
-		$collection->name = 'Test Collection '.$name;
-		$collection->description = $description;
-		$collection->public = $isPublic ? 1 : 0;
-		$collection->featured = $isFeatured ? 1 : 0;
-		$collection->save();
-	}
-	
-	protected function _createNewCollections($numberPublic = 5, $numberPrivate = 5, $numberFeatured = 5) 
-	{
-		for($i=0; $i < $numberPublic; $i++) {
-			$this->_createNewCollection(1, 0, 'Test Public Collection '.$i, 'Description for '.$i);
-		}
-		for($i=0; $i < $numberPrivate; $i++) {
-			$this->_createNewCollection(0, 0, 'Test Private Collection '.$i, 'Description for '.$i);
-		}
-		for($i=0; $i < $numberFeatured; $i++) {
-			$this->_createNewCollection(1, 1, 'Test Featured Collection '.$i, 'Description for '.$i);
-		}
-	}
-	
-    /**
-     * Tests whether the get_collections helper returns data correctly from the test
-     * database with no parameters.
-     */
-
-    public function testCanGetCollections() {
-		$this->_createNewCollections(5,5,5);
-        $collections = get_collections();
-        $this->assertEquals(10, count($collections));
-    }
-
-	/**
-     * Tests whether the get_collections helper returns data correctly from the test
-     * database with a parameter for public set to 0.
-     *
-     * @internal Ticket #812 added for this test on 07/24/09.
-     */
-    public function testCanGetPrivateCollections() {
-        // Give access to non-public collections so we can retrieve this data.
-        $acl = $this->core->getBootstrap()->getResource('Acl');
-        $acl->allow(null, 'Collections', 'showNotPublic');
-        
-        $this->_createNewCollections(5,5,5);
-        $collections = get_collections(array('public' => 0));
-        $this->assertEquals(5, count($collections));
+    public function setUp()
+    {
+        // Link a mock collections table to a mock database.
+        $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
+        $this->collectionTable = $this->getMock('CollectionTable', array(), array(), '', false);
+        $this->db->expects($this->any())
+                 ->method('getTable')
+                 ->with('Collection')
+                 ->will($this->returnValue($this->collectionTable));         
+                 
+        Omeka_Context::getInstance()->setDb($this->db);         
     }
     
-    /**
-     * Tests whether the get_collections helper returns data correctly from the test
-     * database with a parameter for public set to 1 and featured set to 1.
-     *
-     * @internal Ticket #813 added for this test on 07/24/09.
-     */
-    public function testCanGetPublicFeaturedCollections() {
-        $this->_createNewCollections(5,5,5);
-        $collections = get_collections(array('public' => 1, 'featured' => 1));
-        $this->assertEquals(5, count($collections));
+    public function testDelegatesToCollectionTable()
+    {
+        $params = array('foobar' => true);
+        $limit = 5;
+        $collection = new Collection;
+        $this->collectionTable->expects($this->once())
+                 ->method('findBy')
+                 ->with($params, $limit)
+                 ->will($this->returnValue(array($collection)));
+        $this->assertEquals(array($collection), get_collections($params, $limit));             
     }
 }
