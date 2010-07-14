@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ElementSet extends Omeka_Record
 {
     public $record_type_id;
@@ -42,7 +42,7 @@ class ElementSet extends Omeka_Record
      * Add elements to the element set.
      * 
      * @param array $elements
-     **/
+     */
     public function addElements(array $elements)
     {        
         foreach ($elements as $order => $options) {
@@ -62,7 +62,7 @@ class ElementSet extends Omeka_Record
      * Set some default options when saving element sets (if not given).
      * 
      * @return void
-     **/
+     */
     protected function beforeSave()
     {
         if (empty($this->record_type_id)) {
@@ -89,7 +89,7 @@ class ElementSet extends Omeka_Record
      * Deletes all the elements associated with an element set.
      * 
      * @return void
-     **/
+     */
     protected function _delete()
     {
         // Delete all elements that belong to this element set.

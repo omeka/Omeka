@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class FileTable extends Omeka_Db_Table
 {
     protected $_target = 'File';
@@ -21,7 +21,7 @@ class FileTable extends Omeka_Db_Table
      * table.  
      * 
      * @return Omeka_Db_Select
-     **/
+     */
     public function getSelect()
     {
         $select = parent::getSelect();
@@ -39,7 +39,7 @@ class FileTable extends Omeka_Db_Table
      * 
      * @param integer $itemId
      * @return File
-     **/
+     */
     public function getRandomFileWithImage($itemId)
     {        
         $select = $this->getSelect()
@@ -58,7 +58,7 @@ class FileTable extends Omeka_Db_Table
      * with these specific IDs.
      * @param string $sort The manner in which to order the files by. For example: 'id' = file id, 'filename' = alphabetical by filename
      * @return array
-     **/
+     */
     public function findByItem($itemId, $fileIds = array(), $sort='id')
     {
         $select = $this->getSelect();
@@ -81,7 +81,7 @@ class FileTable extends Omeka_Db_Table
 	 * @param string $sort The manner in which to order the files by. For example: 'id' = file id, 'filename' = alphabetical by filename
 	 * 
      * @return File|array
-     **/
+     */
 	public function findWithImages($itemId, $index=null, $sort='id')
 	{
         $select = $this->getSelect()
@@ -108,7 +108,7 @@ class FileTable extends Omeka_Db_Table
 	 * 'filename' = alphabetical by filename
 	 * 
      * @return void
-     **/
+     */
 	private function _orderFilesBy($select, $sort) 
 	{
 	    // order the files

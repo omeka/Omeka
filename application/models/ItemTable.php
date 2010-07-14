@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ItemTable extends Omeka_Db_Table
 {    
     /**
@@ -20,7 +20,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Omeka_Db_Select $select
      * @param string $range Example: 1-4, 75, 89
      * @return void
-     **/
+     */
     public function filterByRange($select, $range)
     {
         // Comma-separated expressions should be treated individually
@@ -59,7 +59,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Zend_Db_Select
      * @param array
      * @return void
-     **/
+     */
     public function filterBySearch($select, $params)
     {
         //Apply the simple or advanced search
@@ -80,7 +80,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Zend_Db_Select
      * @param boolean Whether or not to retrieve only public items
      * @return void
-     **/
+     */
     public function filterByPublic($select, $isPublic)
     {         
         $isPublic = (bool) $isPublic; // this makes sure that empty strings and unset parameters are false
@@ -111,7 +111,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Zend_Db_Select
      * @param Collection|integer|string Either a Collection object, the collection ID, or the name of the collection
      * @return void
-     **/
+     */
     public function filterByCollection($select, $collection)
     {
         $select->joinInner(array('c' => $this->getDb()->Collection), 
@@ -133,7 +133,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Zend_Db_Select
      * @param Type|integer|string Type object, Type ID or Type name
      * @return void
-     **/
+     */
     public function filterByItemType($select, $type)
     {        
         $select->joinInner(array('ty' => $this->getDb()->ItemType), 
@@ -175,7 +175,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Omeka_Db_Select
      * @param string|array A comma-delimited string or an array of tag names.
      * @return void
-     **/
+     */
     public function filterByTags($select, $tags)
     {   
         // Split the tags into an array if they aren't already     
@@ -206,7 +206,7 @@ class ItemTable extends Omeka_Db_Table
      * @param integer $entityId  ID of the User or Entity to filter by
      * @param boolean $isUser Whether or not the ID From the previous argument is for a user or entity
      * @return void
-     **/
+     */
     public function filterByUserOrEntity($select, $entityId, $isUser=true)
     {
         $db = $this->getDb();
@@ -242,7 +242,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Zend_Db_Select 
      * @param array|string Set of tag names (either array or comma-delimited string)
      * @return void
-     **/
+     */
     public function filterByExcludedTags($select, $tags)
     {
         $db = $this->getDb();
@@ -278,7 +278,7 @@ class ItemTable extends Omeka_Db_Table
      * @param Omeka_Db_Select
      * @param array
      * @return void
-     **/
+     */
     public function applySearchFilters($select, $params)
     {
         // Show items associated somehow with a specific user or entity
@@ -339,7 +339,7 @@ class ItemTable extends Omeka_Db_Table
      * of SQL statements when retrieving items
      *
      * @return Omeka_Db_Select
-     **/
+     */
     public function getSelect()
     {
         // @duplication self::findBy()

@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @version $Id$
@@ -13,7 +13,7 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- **/
+ */
 class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
 {
     public $name;
@@ -90,7 +90,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the name of the directory containing the plugin.
-     **/
+     */
     public function getDirectoryName()
     {
         return $this->name;
@@ -100,7 +100,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the name of the directory containing the plugin.
      * 
      * @param string $name
-     **/
+     */
     public function setDirectoryName($name)
     {
         $this->name = $name;
@@ -112,7 +112,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * 
      * If there is no human-readable name available, returns the directory name
      * instead.
-     **/
+     */
     public function getDisplayName()
     {
         if (empty($this->_displayName)) {
@@ -125,7 +125,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the human-readable name of the plugin.
      * 
      * @param string $name
-     **/
+     */
     public function setDisplayName($name)
     {
         $this->_displayName = trim($name);
@@ -134,7 +134,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the author's name.
-     **/
+     */
     public function getAuthor()
     {
         return $this->_author;
@@ -144,7 +144,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the author's name.
      * 
      * @param string $author
-     **/
+     */
     public function setAuthor($author)
     {
         $this->_author = trim($author);
@@ -153,7 +153,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the description of the plugin.
-     **/
+     */
     public function getDescription()
     {
         return $this->_description;
@@ -163,7 +163,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the description of the plugin.
      * 
      * @param string $description 
-     **/
+     */
     public function setDescription($description)
     {
         $this->_description = trim($description);
@@ -172,7 +172,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the minimum version of Omeka that this plugin requires to work.
-     **/
+     */
     public function getMinimumOmekaVersion()
     {
         return $this->_minimumOmekaVersion;
@@ -182,7 +182,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the minimum required version of Omeka.
      * 
      * @param string $version
-     **/
+     */
     public function setMinimumOmekaVersion($version)
     {
         $this->_minimumOmekaVersion = $version;
@@ -191,7 +191,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the version of Omeka that this plugin is tested up to.
-     **/
+     */
     public function getTestedUpToOmekaVersion()
     {
         return $this->_testedUpToVersion;
@@ -201,7 +201,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the version of Omeka that this plugin is tested up to.
      * 
      * @param string $version
-     **/
+     */
     public function setTestedUpToOmekaVersion($version)
     {
         $this->_testedUpToVersion = $version;
@@ -210,7 +210,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the list of plugins that are required for this plugin to work.
-     **/
+     */
     public function getRequiredPlugins()
     {
         return $this->_requiredPlugins;
@@ -220,7 +220,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the list of plugins that are required for this plugin to work.
      * 
      * @param array|string
-     **/
+     */
     public function setRequiredPlugins($plugins)
     {
         if (is_string($plugins)) {
@@ -233,7 +233,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     /**
      * Get the list of plugins that can be used, but are not required by, this
      * plugin.  
-     **/
+     */
     public function getOptionalPlugins()
     {
         return $this->_optionalPlugins;
@@ -243,7 +243,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the list of optional plugins.
      * 
      * @param array|string
-     **/
+     */
     public function setOptionalPlugins($plugins)
     {
         if (is_string($plugins)) {
@@ -255,7 +255,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the list of tags for this plugin (from the ini file).
-     **/
+     */
     public function getIniTags()
     {
         return $this->_iniTags;
@@ -265,7 +265,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the list of tags for this plugin.
      * 
      * @param array|string
-     **/
+     */
     public function setIniTags($tags)
     {
         if (is_string($tags)) {
@@ -277,7 +277,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the URL link from the plugin.ini.
-     **/
+     */
     public function getLinkUrl()
     {
         return $this->_link;
@@ -287,7 +287,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the link from the plugin.ini.
      * 
      * @param string $link 
-     **/
+     */
     public function setLinkUrl($link)
     {
         $this->_link = $link;
@@ -298,7 +298,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Whether or not the Plugin has been installed.
      * 
      * @return boolean 
-     **/
+     */
     public function isInstalled()
     {
         return $this->exists();
@@ -306,7 +306,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * @return boolean
-     **/
+     */
     public function isLoaded()
     {
         return $this->_loaded;
@@ -314,7 +314,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
 
     /**
      * @param boolean $flag
-     **/
+     */
     public function setLoaded($flag)
     {
         $this->_loaded = $flag;
@@ -323,7 +323,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Whether or not the plugin has been activated through the UI.
-     **/
+     */
     public function isActive()
     {
         return $this->active;
@@ -333,7 +333,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set whether or not the plugin has been activated.
      * 
      * @param boolean
-     **/
+     */
     public function setActive($flag)
     {
         $this->active = $flag;
@@ -342,7 +342,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
             
     /**
      * Whether or not the plugin has a custom configuration hook.
-     **/
+     */
     public function hasConfig()
     {
         return $this->_hasConfig;
@@ -352,7 +352,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set whether or not the plugin has a custom configuration hook.
      * 
      * @param boolean $flag
-     **/
+     */
     public function setHasConfig($flag)
     {
         $this->_hasConfig = $flag;
@@ -361,7 +361,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the version of the plugin stored in the ini file.
-     **/
+     */
     public function getIniVersion()
     {
         return $this->_iniVersion;
@@ -371,7 +371,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the version of the plugin that is indicated by the ini file.
      * 
      * @param string $version
-     **/
+     */
     public function setIniVersion($version)
     {
         $this->_iniVersion = trim($version);
@@ -380,7 +380,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     /**
      * Get the version of the plugin that is stored in the database.
-     **/
+     */
     public function getDbVersion()
     {
         return $this->version;
@@ -390,7 +390,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Set the version of the plugin that is stored in the database.
      * 
      * @param string $version
-     **/
+     */
     public function setDbVersion($version)
     {
         $this->version = trim($version);

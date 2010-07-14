@@ -6,7 +6,7 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- **/
+ */
 
 /**
  * Represents an item and its metadata.
@@ -14,7 +14,7 @@
  * @package Omeka
  * @subpackage Models
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Item extends Omeka_Record
 {        
     public $item_type_id;
@@ -52,7 +52,7 @@ class Item extends Omeka_Record
         
     /**
      * @return null|Collection
-     **/
+     */
     public function getCollection()
     {
         $lk_id = (int) $this->collection_id;
@@ -63,7 +63,7 @@ class Item extends Omeka_Record
      * Retrieve the ItemType record associated with this Item.
      * 
      * @return ItemType|null
-     **/
+     */
     public function getItemType()
     {
         if ($this->item_type_id) {
@@ -76,7 +76,7 @@ class Item extends Omeka_Record
      * Retrieve the set of File records associated with this Item.
      * 
      * @return array
-     **/
+     */
     public function getFiles()
     {
         return $this->getTable('File')->findByItem($this->id);
@@ -84,7 +84,7 @@ class Item extends Omeka_Record
     
     /**
      * @return array Set of ElementText records.
-     **/
+     */
     public function getElementText()
     {
         return $this->getElementTextRecords();
@@ -100,7 +100,7 @@ class Item extends Omeka_Record
      * @return array Element records that are associated with the item type of
      * the item.  This array will be empty if the item does not have an 
      * associated type.
-     **/    
+     */    
     public function getItemTypeElements()
     {    
         /* My hope is that this will retrieve a set of elements, where each
@@ -114,7 +114,7 @@ class Item extends Omeka_Record
      * Retrieve the User record that represents the creator of this Item.
      * 
      * @return User
-     **/
+     */
     public function getUserWhoCreated()
     {
         $creator = $this->getRelatedEntities('added');
@@ -138,7 +138,7 @@ class Item extends Omeka_Record
      * unless they have 'makePublic' or 'makeFeatured' permissions.
      *
      * @return void
-     **/
+     */
     protected function beforeSaveForm($post)
     {        
         $this->beforeSaveElements($post);
@@ -163,7 +163,7 @@ class Item extends Omeka_Record
      * Explicitly set the modified timestamp.
      * 
      * @return void
-     **/
+     */
     protected function beforeSave()
     {
         $this->modified = date('Y-m-d G:i:s');
@@ -178,7 +178,7 @@ class Item extends Omeka_Record
      * @uses Taggable::applyTagString()
      * @param ArrayObject
      * @return void
-     **/
+     */
     protected function _modifyTagsByForm($post)
     {
         // Change the tags (remove some, add some)
@@ -200,7 +200,7 @@ class Item extends Omeka_Record
      * require that the Item is already persistent in the database.
      * 
      * @return void
-     **/
+     */
     protected function afterSaveForm($post)
     {        
         // Delete files that have been designated by passing an array of IDs 
@@ -218,7 +218,7 @@ class Item extends Omeka_Record
      * Save all files that had been associated with the item.
      * 
      * @return void
-     **/
+     */
     protected function afterSave()
     {
         $this->saveFiles();
@@ -228,7 +228,7 @@ class Item extends Omeka_Record
      * All of the custom code for deleting an item.
      *
      * @return void
-     **/
+     */
     protected function _delete()
     {    
         $this->_deleteFiles();
@@ -245,7 +245,7 @@ class Item extends Omeka_Record
      * @uses FileTable::findByItem()
      * @param array $fileIds Optional
      * @return void
-     **/
+     */
     protected function _deleteFiles(array $fileIds = array())
     {           
         $filesToDelete = $this->getTable('File')->findByItem($this->id, $fileIds);
@@ -261,7 +261,7 @@ class Item extends Omeka_Record
      * 
      * @param string
      * @return void
-     **/
+     */
     private function _uploadFiles()
     {
         fire_plugin_hook('before_upload_files', $this);
@@ -274,7 +274,7 @@ class Item extends Omeka_Record
      * Save all the files that have been associated with this item.
      * 
      * @return boolean
-     **/
+     */
     public function saveFiles()
     {
         if (!$this->exists()) {
@@ -295,7 +295,7 @@ class Item extends Omeka_Record
      * 
      * @param array Dirty post data
      * @return array Clean post data
-     **/
+     */
     protected function filterInput($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
@@ -327,7 +327,7 @@ class Item extends Omeka_Record
      * Whether or not the Item has files associated with it.
      * 
      * @return boolean
-     **/
+     */
     public function hasFiles()
     {
         $db = $this->getDb();
@@ -344,7 +344,7 @@ class Item extends Omeka_Record
      *
      * @uses ItemTable::findPrevious()
      * @return Item|false
-     **/
+     */
     public function previous()
     {
         return $this->getDb()->getTable('Item')->findPrevious($this);
@@ -355,7 +355,7 @@ class Item extends Omeka_Record
      * 
      * @uses ItemTable::findNext()
      * @return Item|false
-     **/
+     */
     public function next()
     {
         return $this->getDb()->getTable('Item')->findNext($this);
@@ -366,7 +366,7 @@ class Item extends Omeka_Record
      * (or any derivative image).
      * 
      * @return boolean
-     **/
+     */
     public function hasThumbnail()
     {
         $db = $this->getDb();
@@ -391,7 +391,7 @@ class Item extends Omeka_Record
      * @see Item::saveFiles()
      * @param File $file
      * @return void
-     **/
+     */
     public function addFile(File $file)
     {
         if ($file->exists()) {

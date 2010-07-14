@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ElementSetTable extends Omeka_Db_Table
 {
     protected $_alias = 'es';
@@ -24,7 +24,7 @@ class ElementSetTable extends Omeka_Db_Table
      * @param string
      * @param boolean
      * @return array
-     **/
+     */
     public function findByRecordType($recordTypeName, $includeAll = true)
     {
         $select = $this->getSelect();

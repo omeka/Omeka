@@ -31,6 +31,8 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     const DEFAULT_COPYRIGHT     = '2010';
     const DEFAULT_DESCRIPTION   = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
     
+    private $_runInstaller = true;
+    
     /**
      * Load and initialize the database.
      *
@@ -42,8 +44,10 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         $this->setAdapter('Mysqli');
         $this->setParams(Zend_Registry::get('test_config')->db->toArray());
         $omekaDb = $this->_getOmekaDb();
-        $this->_dropTables($this->getDbAdapter());
-        $this->install($omekaDb);
+        if ($this->_runInstaller) {
+            $this->_dropTables($this->getDbAdapter());
+            $this->install($omekaDb);
+        }
         return $omekaDb;
     }
     
@@ -74,6 +78,17 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         );
         $installer = new Installer($db);
         $installer->install($installInfo);        
+    }
+    
+    /**
+     * Set the flag that indicates whether or not to run the installer during 
+     * init().
+     * 
+     * @param boolean $flag
+     */
+    public function setInstall($flag)
+    {
+        $this->_runInstaller = (boolean)$flag;
     }
     
     /**

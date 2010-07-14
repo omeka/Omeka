@@ -24,15 +24,15 @@ class Globals_SetThemeOptionTest extends PHPUnit_Framework_TestCase
     );
     
     public function setUp()
-    {
+    {        
         Omeka_Context::getInstance()->setOptions(array(
             Theme::PUBLIC_THEME_OPTION => self::THEME,
             self::THEME_OPTIONS_OPTION => serialize($this->_themeOptions)
         ));
         
-        $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
-        $this->db->Option = 'omeka_options';
-        
+        $this->dbAdapter = new Zend_Test_DbAdapter();
+        $this->db = new Omeka_Db($this->dbAdapter, 'omeka_');
+
         Omeka_Context::getInstance()->setDb($this->db);
     }
     
@@ -40,11 +40,14 @@ class Globals_SetThemeOptionTest extends PHPUnit_Framework_TestCase
     {
         $expectedThemeOptions = $this->_themeOptions;
         $expectedThemeOptions['logo'] = 'bazdoo.png';
-        $this->db->expects($this->once())
-                 ->method('exec')
-                 ->with('REPLACE INTO omeka_options (name, value) VALUES (?, ?)',
-                        array(self::THEME_OPTIONS_OPTION, serialize($expectedThemeOptions)));
-        set_theme_option('logo', 'bazdoo.png');        
+        set_theme_option('logo', 'bazdoo.png');      
+        $profile = $this->dbAdapter->getProfiler()->getLastQueryProfile();
+        $this->assertEquals("REPLACE INTO omeka_options (name, value) VALUES (?, ?)",
+                            $profile->getQuery());
+        $this->assertEquals(array(1 => self::THEME_OPTIONS_OPTION, 
+                                  2 => serialize($expectedThemeOptions)
+                            ),
+                            $profile->getQueryParams());
     }
     
     public function testWithoutThemeName()

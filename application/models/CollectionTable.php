@@ -5,14 +5,14 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
- **/
+ */
  
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class CollectionTable extends Omeka_Db_Table
 {    
     public function applySearchFilters($select, $params)
@@ -47,7 +47,7 @@ class CollectionTable extends Omeka_Db_Table
      * 
      * @param string
      * @return void
-     **/
+     */
     public function getSelect()
     {
         $select = parent::getSelect();
@@ -71,7 +71,7 @@ class CollectionTable extends Omeka_Db_Table
      * @param Zend_Db_Select
      * @param boolean Whether or not to retrieve only public collections
      * @return void
-     **/
+     */
     public function filterByPublic($select, $isPublic)
     {         
         $isPublic = (bool) $isPublic; // this makes sure that empty strings and unset parameters are false
@@ -90,7 +90,7 @@ class CollectionTable extends Omeka_Db_Table
      * @param Zend_Db_Select
      * @param boolean Whether or not to retrieve only public collections
      * @return void
-     **/
+     */
     public function filterByFeatured($select, $isFeatured)
     {
         $isFeatured = (bool) $isFeatured; // this make sure that empty strings and unset parameters are false

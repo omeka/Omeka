@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class TagTable extends Omeka_Db_Table
 {    
     public function findOrNew($name) 
@@ -38,7 +38,7 @@ class TagTable extends Omeka_Db_Table
      * @param Omeka_Db_Select
      * @param Omeka_Record
      * @return void
-     **/
+     */
     public function filterByRecord($select, $record)
     {
         if ($record->exists()) {
@@ -61,7 +61,7 @@ class TagTable extends Omeka_Db_Table
      * @param Entity|User|integer $userOrEntity The entity or user object, or the id of an entity or user object
      * @param boolean $isUser
      * @return void
-     **/
+     */
     public function filterByUserOrEntity($select, $userOrEntity, $isUser) 
     {
         $userOrEntityId = (int) is_numeric($userOrEntity) ? $userOrEntity : $userOrEntity->id;
@@ -83,7 +83,7 @@ class TagTable extends Omeka_Db_Table
      * @param string|array
      * @see applySearchFilters()
      * @return void
-     **/
+     */
     public function sortBy($select, $sortCriteria)
     {
         
@@ -132,7 +132,7 @@ class TagTable extends Omeka_Db_Table
      * @param Omeka_Db_Select
      * @param string
      * @return void
-     **/
+     */
     public function filterByTagType($select, $type)
     {
         $db = $this->getDb();
@@ -155,7 +155,7 @@ class TagTable extends Omeka_Db_Table
      * @param Omeka_Db_Select
      * @param string
      * @return void
-     **/
+     */
     public function filterByTagNameLike($select, $partialTagName) 
     {
         $select->where("`t`.`name` LIKE CONCAT('%', ?, '%')", $partialTagName);
@@ -174,7 +174,7 @@ class TagTable extends Omeka_Db_Table
      *        'like' => partial_tag_name
      *        'type' => tag_type
      * @return void
-     **/
+     */
     public function applySearchFilters($select, $params=array())
     {        
         $db = $this->getDb();
@@ -216,7 +216,7 @@ class TagTable extends Omeka_Db_Table
      * the tag occurs as a tagCount field in the Tag object.
      * 
      * @return Omeka_Db_Select
-     **/    
+     */    
     public function getSelect()
     {
         $select = new Omeka_Db_Select;

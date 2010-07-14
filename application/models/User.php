@@ -6,13 +6,13 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class User extends Omeka_Record implements Zend_Acl_Resource_Interface, 
                                            Zend_Acl_Role_Interface
 {
@@ -79,7 +79,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
      * @duplication Mostly duplicated in Item::filterInput()
      *
      * @return void
-     **/
+     */
     protected function filterInput($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
@@ -174,7 +174,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
      * If it is greater than 1, or if the 
      *
      * @return bool
-     **/
+     */
     private function emailIsUnique($email)
     {
         $db = $this->getDb();

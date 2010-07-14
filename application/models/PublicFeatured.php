@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * Adds default behavior associated with the 'public' and 'featured' flags.
@@ -12,7 +12,7 @@
  * @package Omeka
  * @subpackage Mixins
  * @copyright Center for History and New Media, 2009
- **/
+ */
 class PublicFeatured extends Omeka_Record_Mixin
 {
     private $_wasPublic;
@@ -25,7 +25,7 @@ class PublicFeatured extends Omeka_Record_Mixin
     
     /**
      * @return boolean
-     **/
+     */
     public function isPublic()
     {
         return (boolean)$this->record->public;
@@ -35,7 +35,7 @@ class PublicFeatured extends Omeka_Record_Mixin
      * @see Item::afterSave()
      * @param boolean
      * @return void
-     **/
+     */
     public function setPublic($flag)
     {
         $this->_wasPublic = $this->isPublic();
@@ -59,7 +59,7 @@ class PublicFeatured extends Omeka_Record_Mixin
      * @param string Currently, 'public' or 'featured'
      * @param boolean
      * @return string
-     **/
+     */
     protected function getHookName($state, $flag)
     {
         // e.g., 'item'

@@ -5,14 +5,14 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Collection extends Omeka_Record
 {        
     const COLLECTION_NAME_MIN_CHARACTERS = 1;
@@ -56,7 +56,7 @@ class Collection extends Omeka_Record
      * Determine whether or not the collection has collectors associated with it.
      * 
      * @return boolean
-     **/
+     */
     public function hasCollectors()
     {
         $db = $this->getDb();
@@ -104,7 +104,7 @@ class Collection extends Omeka_Record
      * 
      * @param array $post
      * @return array
-     **/
+     */
     protected function filterInput($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
@@ -118,15 +118,7 @@ class Collection extends Omeka_Record
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         
         $post = $filter->getUnescaped();
-        
-        if ($post['public']) {
-            $post['public'] = 1;
-        }
-        
-        if ($post['featured']) {
-            $post['featured'] = 1;
-        }
-        
+                
         return $post;
     }
     
@@ -153,7 +145,7 @@ class Collection extends Omeka_Record
      * 
      * @param Entity|integer
      * @return boolean Whether or not it was removed.
-     **/
+     */
     public function removeCollector($collector)
     {
         $result = $this->removeRelatedTo($collector, 'collector', 1);
@@ -232,7 +224,7 @@ class Collection extends Omeka_Record
      * </code> 
      *
      * @return void
-     **/
+     */
     public function addCollector($collector)
     {
         if (is_int($collector)) {
@@ -264,7 +256,7 @@ class Collection extends Omeka_Record
      * Validate collector Entity records that are associated with the collection.
      * 
      * @return void
-     **/
+     */
     protected function beforeValidate()
     {
         // Collectors should all be Entity records.
@@ -282,7 +274,7 @@ class Collection extends Omeka_Record
      * it removes the new collectors before throwing the exception.
      * 
      * @return void
-     **/
+     */
     protected function beforeSave()
     {
         // Save all the new collectors before saving the collection.
@@ -302,7 +294,7 @@ class Collection extends Omeka_Record
      * it deletes all of the new collectors before throwing the exception.
      * 
      * @return void
-     **/
+     */
     protected function afterSave()
     {
         // Add the collectors to the collection
@@ -326,7 +318,7 @@ class Collection extends Omeka_Record
      * collection.
      * 
      * @return void
-     **/
+     */
     private function _deleteNewCollectorsToAdd() 
     {
         foreach ($this->_newCollectorsToAdd as $newCollector) {

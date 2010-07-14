@@ -4,7 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Dummy model to simulate the other ActiveRecord models
@@ -13,7 +13,7 @@
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/ 
+ */ 
 class Theme 
 {
     const THEME_IMAGE_FILE_NAME = 'theme.jpg';
@@ -75,7 +75,7 @@ class Theme
      *
      * @param string|null $themeName  The name of the theme.  If null, it returns all available themes.
      * @return Theme|array A theme object or array of theme objects
-     **/
+     */
     static public function getAvailable($themeName=null) 
     {
         /**
@@ -108,7 +108,7 @@ class Theme
      *                                  where each key is a configuration form input name and 
      *                                  each value is a string value of that configuration form input
      * @return void 
-     **/    
+     */    
     static public function setOptions($themeName, $themeConfigOptions)
     {
         $themeOptionName = self::getOptionName($themeName);
@@ -122,7 +122,7 @@ class Theme
      * @return array An associative array of configuration options, 
      *               where each key is a configuration form input name and 
      *               each value is a string value of that configuration form input
-     **/
+     */
     static public function getOptions($themeName)
     {
         $themeOptionName = self::getOptionName($themeName);
@@ -178,7 +178,7 @@ class Theme
      * 
      * @param string $themeName  The name of the theme
      * @return string The name of a specific theme's option.
-     **/
+     */
     static public function getOptionName($themeName)
     {
         $themeOptionName = 'theme_' . trim(strtolower($themeName)) . '_options';
@@ -193,7 +193,7 @@ class Theme
      * @param string $optionName The name of the theme option associated with the uploaded file
      * @param string $fileName The name of the uploaded file
      * @return string The name of an uploaded file for the theme.
-     **/
+     */
     static public function getUploadedFileName($themeName, $optionName, $fileName)
     {
         return trim(strtolower($themeName)) . '_' . trim($optionName) . '_' . trim($fileName);

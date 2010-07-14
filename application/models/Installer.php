@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Creates and populates the Omeka database schema.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
- **/
+ */
 class Installer
 {    
     

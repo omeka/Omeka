@@ -9,18 +9,18 @@
 <form action="<?php echo html_escape(current_uri()); ?>" id="sort-users-form" method="get" accept-charset="utf-8">
     <fieldset>
         <p>Search Users:</p>
-        <?php echo $this->formSelect('role', $_GET['role'], array(), 
+        <?php echo $this->formSelect('role', @$_GET['role'], array(), 
             array(''=>'Select Role') + get_user_roles()); ?>
-        <?php echo $this->formSelect('active', $_GET['active'], array(),
+        <?php echo $this->formSelect('active', @$_GET['active'], array(),
             array(''=>'Select Status',  '1'=>'Active', '0'=>'Inactive')); ?>
-        <?php echo $this->formSelect('sort', $_GET['sort'], array(),
+        <?php echo $this->formSelect('sort', @$_GET['sort'], array(),
             array(  ''=>'Sort By', 
                     'first_name'=>'First Name',
                     'last_name'=>'Last Name',
                     'institution'=>'Institution Name',
                     'role'=>'Role',
                     'username'=>'Username')); ?>
-        <?php echo $this->formSelect('sortOrder', $_GET['sortOrder'], array(),
+        <?php echo $this->formSelect('sortOrder', @$_GET['sortOrder'], array(),
             array( ''=>'Sort Order',
                    'asc'=>'Ascending',
                    'desc'=>'Descending')); ?>

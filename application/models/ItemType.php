@@ -4,14 +4,14 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * @package Omeka
  * @subpackage Models
  * @author CHNM
  * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class ItemType extends Omeka_Record 
 { 
     const ITEM_TYPE_NAME_MIN_CHARACTERS = 1;
@@ -76,7 +76,7 @@ class ItemType extends Omeka_Record
      * 2) 'Name' field must be unique
      *
      * @return void
-     **/
+     */
     protected function _validate()
     {
         
@@ -93,7 +93,7 @@ class ItemType extends Omeka_Record
      * Filter incoming POST data from ItemType form.
      * 
      * @return void
-     **/
+     */
      protected function filterInput($post)
      {
          $options = array('inputNamespace'=>'Omeka_Filter');
@@ -113,7 +113,7 @@ class ItemType extends Omeka_Record
      * Delete all the ItemTypesElements joins
      *
      * @return void
-     **/
+     */
     protected function _delete()
     {
         $tm_objs = $this->getDb()->getTable('ItemTypesElements')->findBySql('item_type_id = ?', array( (int) $this->id));
@@ -167,7 +167,7 @@ class ItemType extends Omeka_Record
      * 
      * @param Array $elementOrderingArray An array of numbers representing
      * @return void
-     **/
+     */
     public function reorderElements($elementOrderingArray)
     {    	
         $joinRecordArray = $this->loadOrderedChildren();
@@ -244,7 +244,7 @@ class ItemType extends Omeka_Record
      * @param string Id of the element
      * @return void
      *
-     **/
+     */
     public function addElementById($elementId)
     {
         if (!$this->hasElement($elementId)) {
@@ -265,7 +265,7 @@ class ItemType extends Omeka_Record
      * @since 1.2
      * @param Array $elements An array of Element objects or element id strings
      * @return void
-     **/
+     */
     public function removeElements($elements) 
     {
         foreach($elements as $element) {
@@ -279,7 +279,7 @@ class ItemType extends Omeka_Record
      * 
      * @param Element|string $element The element object or the element id.
      * @return void
-     **/
+     */
     public function removeElement($element)
     {
     	if (!$this->exists()) {
@@ -326,7 +326,7 @@ class ItemType extends Omeka_Record
      * 
      * @param Element|string $element
      * @return void
-     **/
+     */
     private function _removeElement($element) 
     {
     	$elementId = $element->id;
@@ -350,7 +350,7 @@ class ItemType extends Omeka_Record
      * 
      * @param Element|string $element  The element object or the element id.
      * @return boolean
-     **/
+     */
     public function hasElement($element) 
     { 
         if ($element instanceof Element) {
