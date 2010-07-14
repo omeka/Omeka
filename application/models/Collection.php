@@ -118,15 +118,7 @@ class Collection extends Omeka_Record
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         
         $post = $filter->getUnescaped();
-        
-        if ($post['public']) {
-            $post['public'] = 1;
-        }
-        
-        if ($post['featured']) {
-            $post['featured'] = 1;
-        }
-        
+                
         return $post;
     }
     
