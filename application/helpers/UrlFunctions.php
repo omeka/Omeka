@@ -62,7 +62,8 @@ function uri($options=array(), $route=null, $queryParams=array(), $reset = false
 function current_uri($params=array()) 
 {
 	//Grab everything before the ? of the query
-	$uri = array_shift(explode('?', $_SERVER['REQUEST_URI']));
+	$request = Zend_Controller_Front::getInstance()->getRequest();
+	$uri = array_shift(explode('?', $request->getRequestUri()));
 	
 	if(!empty($params)) {
 		
