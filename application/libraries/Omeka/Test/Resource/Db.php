@@ -41,8 +41,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     public function init()
     {   
         $this->getBootstrap()->bootstrap('Config');
-        $this->setAdapter('Mysqli');
-        $this->setParams(Zend_Registry::get('test_config')->db->toArray());
+        $this->useTestConfig();
         $omekaDb = $this->_getOmekaDb();
         if ($this->_runInstaller) {
             $this->_dropTables($this->getDbAdapter());
@@ -51,6 +50,12 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         return $omekaDb;
     }
     
+    public function useTestConfig()
+    {
+        $this->setAdapter('Mysqli');
+        $this->setParams(Zend_Registry::get('test_config')->db->toArray());
+    }
+        
     /**
      * Install the Omeka database as part of the test bootstrap process.
      *
