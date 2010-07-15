@@ -24,15 +24,15 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
                                                 $this->iniReader,
                                                 $this->mvc,
                                                 $this->basePath);
-        
-        $this->pluginFoobar = new Plugin;
+        $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
+        $this->pluginFoobar = new Plugin($this->db);
         // Trick the record into thinking that it is installed by setting the ID.
         $this->pluginFoobar->id = 1;
         $this->pluginFoobar->setDirectoryName('foobar');
         $this->pluginFoobar->setActive(true);    
         
         // The NotActivatedPlugin
-        $this->notActivatedPlugin = new Plugin;
+        $this->notActivatedPlugin = new Plugin($this->db);
         $this->notActivatedPlugin->id = 2;
         $this->notActivatedPlugin->setDirectoryName('NotActivatedPlugin');
         $this->notActivatedPlugin->setActive(false);                        
@@ -87,7 +87,7 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
         
     public function testLoadPluginsWithCircularDependencies()
     {
-        $this->circularDependencyPlugin = new Plugin;
+        $this->circularDependencyPlugin = new Plugin($this->db);
         $this->circularDependencyPlugin->id = 3;
         $this->circularDependencyPlugin->setDirectoryName('CircularDependencyPlugin');
         $this->circularDependencyPlugin->setActive(true);
@@ -104,7 +104,7 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
     {
         $this->pluginFoobar->setRequiredPlugins(array('AllPurposePlugin'));
         
-        $this->alreadyLoadedPlugin = new Plugin;
+        $this->alreadyLoadedPlugin = new Plugin($this->db);
         $this->alreadyLoadedPlugin->id = 4;
         $this->alreadyLoadedPlugin->setDirectoryName('AllPurposePlugin');
         $this->alreadyLoadedPlugin->setActive(true);
@@ -194,7 +194,7 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
     
     public function testRegisterTwoDifferentPluginObjectsWithSamePluginDirectories()
     {   
-        $this->pluginWithSameDir = new Plugin;
+        $this->pluginWithSameDir = new Plugin($this->db);
         $this->pluginWithSameDir->id = 5;
         $this->pluginWithSameDir->setDirectoryName('foobar');
         $this->pluginWithSameDir->setActive(true);

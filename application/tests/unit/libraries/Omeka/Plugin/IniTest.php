@@ -17,7 +17,8 @@ class Omeka_Plugin_IniTest extends PHPUnit_Framework_TestCase
     {
         $this->basePath = TEST_DIR . '/_files/unit/plugin-loader';
         $this->iniReader = new Omeka_Plugin_Ini($this->basePath);
-        $this->plugin = new Plugin;
+        $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
+        $this->plugin = new Plugin($this->db);
         $this->plugin->setDirectoryName('foobar');
     }
     
