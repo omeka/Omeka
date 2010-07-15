@@ -34,6 +34,7 @@ $site['core']              = 'core';
 $site['libraries']         = 'libraries';
 $site['helpers']           = 'helpers';
 $site['controllers']       = 'controllers';
+$site['forms']             = 'forms';
 $site['models']            = 'models';
 $site['config']            = 'config';
 $site['admin']             = 'admin';
@@ -63,6 +64,7 @@ define('PUBLIC_THEME_DIR', BASE_DIR . DIRECTORY_SEPARATOR . $site['public_theme'
 define('INSTALL_DIR',      BASE_DIR . DIRECTORY_SEPARATOR . $site['install']);
 define('CORE_DIR',         APP_DIR . DIRECTORY_SEPARATOR . $site['core']);
 define('MODEL_DIR',        APP_DIR . DIRECTORY_SEPARATOR . $site['models']);
+define('FORM_DIR',         APP_DIR . DIRECTORY_SEPARATOR . $site['forms']);
 define('CONTROLLER_DIR',   APP_DIR . DIRECTORY_SEPARATOR . $site['controllers']);
 define('LIB_DIR',          APP_DIR . DIRECTORY_SEPARATOR . $site['libraries']);
 define('HELPER_DIR',       APP_DIR . DIRECTORY_SEPARATOR . $site['helpers']);

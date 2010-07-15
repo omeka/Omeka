@@ -117,7 +117,12 @@ abstract class Omeka_Record implements ArrayAccess
     public function __construct($db = null)
     {
         //Dependency injection, for testing
-        if (!$db) $db = Omeka_Context::getInstance()->getDb();
+        if (!$db) {
+            $db = Omeka_Context::getInstance()->getDb();
+            if (!$db) {
+                throw new RuntimeException("Unable to retrieve database instance from Omeka_Context.");
+            }
+        }
         
         $this->_db = $db;
         
