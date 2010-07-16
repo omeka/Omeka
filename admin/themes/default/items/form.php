@@ -7,8 +7,12 @@
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[    
     Event.observe(window,'load', function() {
-        new Control.Tabs('section-nav');  
-        
+        new Control.Tabs('section-nav', {  
+            afterChange: function(new_container) {  
+                document.fire('omeka:edititemtabafterchanged');
+            }  
+        }); 
+
         var addImage = <?php echo js_escape(img('add.png')); ?>;
         var deleteImage = <?php echo js_escape(img('delete.gif')); ?>;
         Omeka.ItemForm.enableTagRemoval(addImage, deleteImage);
