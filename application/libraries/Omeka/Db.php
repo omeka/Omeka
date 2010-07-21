@@ -75,7 +75,10 @@ class Omeka_Db
         if (in_array($m, $logFor)) {
             $this->log($a[0]);
         }
-                
+        
+        if (!method_exists($this->_conn, $m)) {
+            throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
+        }        
         return call_user_func_array(array($this->_conn, $m), $a);
     }
     

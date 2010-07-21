@@ -45,6 +45,9 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     
     protected function beforeSave()
     {
+        if (!$this->Entity) {
+            throw new Omeka_Record_Exception("No Entity record is available when saving this User.");
+        }
         $this->Entity->save();
         $this->entity_id = $this->Entity->id;
     }

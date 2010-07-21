@@ -49,6 +49,11 @@ class Omeka_Db_Table
     protected $_tablePrefix;
     
     /**
+     * @var Omeka_Db
+     */
+    protected $_db;
+    
+    /**
      * @internal Do not instantiate this by itself, only access instances via
      * Omeka_Db::getTable().
      * 
@@ -73,6 +78,9 @@ class Omeka_Db_Table
      */
     public function __call($m, $a)
     {
+        if (!method_exists($this->_db, $m) && !method_exists($this->_db->getAdapter(), $m)) {
+            throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
+        }
         return call_user_func_array(array($this->_db, $m), $a);
     }
     
@@ -284,7 +292,7 @@ class Omeka_Db_Table
      */
     public function getSelect()
     {
-        $select = new Omeka_Db_Select;
+        $select = new Omeka_Db_Select($this->getDb()->getAdapter());
         $alias = $this->getTableAlias();
         $select->from(array($alias=>$this->getTableName()), "$alias.*");    
         return $select;    
