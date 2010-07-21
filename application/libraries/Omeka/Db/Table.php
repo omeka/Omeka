@@ -49,6 +49,11 @@ class Omeka_Db_Table
     protected $_tablePrefix;
     
     /**
+     * @var Omeka_Db
+     */
+    protected $_db;
+    
+    /**
      * @internal Do not instantiate this by itself, only access instances via
      * Omeka_Db::getTable().
      * 
@@ -284,7 +289,7 @@ class Omeka_Db_Table
      */
     public function getSelect()
     {
-        $select = new Omeka_Db_Select;
+        $select = new Omeka_Db_Select($this->getDb()->getAdapter());
         $alias = $this->getTableAlias();
         $select->from(array($alias=>$this->getTableName()), "$alias.*");    
         return $select;    
