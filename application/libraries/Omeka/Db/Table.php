@@ -78,6 +78,9 @@ class Omeka_Db_Table
      */
     public function __call($m, $a)
     {
+        if (!method_exists($this->_db, $m) && !method_exists($this->_db->getAdapter(), $m)) {
+            throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
+        }
         return call_user_func_array(array($this->_db, $m), $a);
     }
     
