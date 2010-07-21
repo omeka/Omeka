@@ -37,7 +37,7 @@ abstract class Omeka_Record implements ArrayAccess
      *
      * @var array
      * @see Omeka_Record::__get()
-     * @see Omeka_Record::addToCache()
+     * @see Omeka_Record::_addToCache()
      */
     protected $_cache = array();
     
@@ -110,6 +110,8 @@ abstract class Omeka_Record implements ArrayAccess
         'afterSaveForm'
     );
     
+    private $_pluginBroker;
+    
     /**
      * @param Omeka_Db|null $db (optional) Defaults to the Omeka_Db instance from 
      * Omeka_Context.
@@ -120,7 +122,7 @@ abstract class Omeka_Record implements ArrayAccess
         if (!$db) {
             $db = Omeka_Context::getInstance()->getDb();
             if (!$db) {
-                throw new RuntimeException("Unable to retrieve database instance from Omeka_Context.");
+                throw new Omeka_Record_Exception("Unable to retrieve database instance from Omeka_Context.");
             }
         }
         
@@ -158,8 +160,8 @@ abstract class Omeka_Record implements ArrayAccess
      * Retrieve database records that are associated with the current one.
      *
      * @see Omeka_Record::$_related
-     * @uses Omeka_Record::addToCache()
-     * @uses Omeka_Record::getCached()
+     * @uses Omeka_Record::_addToCache()
+     * @uses Omeka_Record::_getCached()
      * @param string $prop Related data to retrieve.
      * @return mixed
      */
@@ -169,7 +171,7 @@ abstract class Omeka_Record implements ArrayAccess
         $args = array();
         
         // Check the cache for data that has already been pulled
-        if (!($data = $this->getCached($prop))) {
+        if (!($data = $this->_getCached($prop))) {
             
             // Check for a method that can pull the data
             if (array_key_exists($prop, $this->_related)) {
@@ -183,7 +185,7 @@ abstract class Omeka_Record implements ArrayAccess
                 }
                 $data = call_user_func_array(array($this, $method), $args);
                 
-                $this->addToCache($data, $prop);
+                $this->_addToCache($data, $prop);
             }
         }
         
@@ -224,6 +226,8 @@ abstract class Omeka_Record implements ArrayAccess
      */
     protected function delegateToMixins($method, $args = array(), $all = false)
     {
+        $methodFound = false;
+        
         if (!$this->_mixins) {
             $this->_mixins = array();
             $this->_initializeMixins();
@@ -286,9 +290,8 @@ abstract class Omeka_Record implements ArrayAccess
         // Plugins called from within the record always receive that record 
         // instance as the first argument
         array_unshift($args, $this);
-                
-        if ($broker = Omeka_Context::getInstance()->getPluginBroker()) {
-            
+                    
+        if ($broker = $this->getPluginBroker()) {
             // run a general hook (one which is not specific to the classs of the record)
             // this is used by plugins which may need to process every record, and 
             // cannot anticipate all of the class names of those records
@@ -316,16 +319,11 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Add a value to the record-specific cache.
      * 
-     * Despite being 'protected', this should not be used by subclasses as it 
-     * is part of the internal implementation of Omeka_Record.
-     * 
-     * @internal If the warning above is correct, shouldn't this be declared
-     * private?
      * @param mixed $value
      * @param string $key
      * @return void
      */
-    protected function addToCache($value, $key)
+    private function _addToCache($value, $key)
     {
         $this->_cache[$key] = $value;
     }
@@ -333,12 +331,10 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Get a value from the record-specific cache.
      *
-     * @see Omeka_Record::addToCache() for a warning about usage that
-     * also applies to this method.
      * @param string $name
      * @return mixed 
      */
-    protected function getCached($name)
+    private function _getCached($name)
     {
         if (isset($this->_cache[$name])) {
             return $this->_cache[$name];
@@ -355,7 +351,7 @@ abstract class Omeka_Record implements ArrayAccess
      */
     public function exists()
     {
-        return (bool) !empty($this->id);
+        return is_numeric($this->id) && !empty($this->id);
     }
     
     /**
@@ -410,7 +406,7 @@ abstract class Omeka_Record implements ArrayAccess
      * 
      * @return boolean
      */
-    protected function hasErrors()
+    public function hasErrors()
     {
         return (bool) count($this->getErrors());
     }
@@ -623,7 +619,7 @@ abstract class Omeka_Record implements ArrayAccess
         $table = $this->getTable()->getTableName();
         
         $query = "DELETE FROM $table WHERE {$table}.id = ? LIMIT 1";
-        $this->getDb()->exec($query, array((int) $this->id));
+        $this->getDb()->delete($table, 'id = '  . (int) $this->id);
         
         $this->id = null;
         $this->runCallbacks('afterDelete');
@@ -713,6 +709,22 @@ abstract class Omeka_Record implements ArrayAccess
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
+    }
+    
+    public function getPluginBroker()
+    {
+        if (!$this->_pluginBroker) {
+            $this->setPluginBroker();
+        }
+        return $this->_pluginBroker;
+    }
+    
+    public function setPluginBroker($broker = null)
+    {
+        if (!$broker) {
+            $broker = Omeka_Context::getInstance()->getPluginBroker();
+        }
+        $this->_pluginBroker = $broker;
     }
     
     /**

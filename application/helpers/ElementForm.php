@@ -276,7 +276,7 @@ class Omeka_View_Helper_ElementForm
         list($year, $month, $day) = explode('-', $date);
         list($hour, $minute, $second) = explode(':', $time);
         
-        $html .= '<div class="dateinput">';
+        $html = '<div class="dateinput">';
     	
     	$html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4')) . '/';
     	$html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2')) . '/';
@@ -295,7 +295,7 @@ class Omeka_View_Helper_ElementForm
     {
         list($year, $month, $day) = explode('-', $value);
 
-        $html .= '<div class="dateinput">';
+        $html = '<div class="dateinput">';
     	
     	$html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4'));
     	$html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2'));
@@ -334,7 +334,7 @@ class Omeka_View_Helper_ElementForm
         $isHtml = $this->_getHtmlFlagForField($index);
         
         // Add a checkbox for the 'html' flag (always for any field)
-        $html .= '<label class="use-html">Use HTML ';
+        $html = '<label class="use-html">Use HTML ';
         $html .= $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
         $html .= '</label>';
         
@@ -350,7 +350,7 @@ class Omeka_View_Helper_ElementForm
     protected function _displayTooltip()
     {
         // Tooltips should be in a <span class="tooltip">
-    	$html .= '<p class="explanation">';
+        $html = '<p class="explanation">';
     	$html .= $this->_getFieldDescription() .'</p>';
     	
     	return $html;
@@ -369,7 +369,7 @@ class Omeka_View_Helper_ElementForm
     protected function _displayFormControls()
     {
         // Used by Javascript.
-    	$html .= '<div class="controls">';
+        $html = '<div class="controls">';
 
     	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], 'Remove', 
     	    array('class'=>'remove-element'));
