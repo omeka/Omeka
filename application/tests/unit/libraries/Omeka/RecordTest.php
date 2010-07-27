@@ -16,6 +16,8 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
 {   
     const VALIDATION_ERROR = "Do Not Set: Do Not Set property will automatically invalidate the record.";
      
+    const DUMMY_RECORD_ID = 1; 
+     
     private static $_eventStack = array();
 
     public function setUp()
@@ -203,6 +205,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     
     public function testSaveFiresCallbacksInCorrectOrder()
     {
+        $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $record = new DummyRecord($this->db);
         $record->save();
         $this->assertEquals(array(
@@ -280,6 +283,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     
     public function testSetFromPostBlocksIdField()
     {
+        $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $record = new DummyRecord($this->db);
         $post = array(
             'id' => 2,
@@ -290,6 +294,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         
     public function testSaveFormCallbacks()
     {
+        $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $record = new DummyRecord($this->db);
         $post = array(
             'other_field' => true
