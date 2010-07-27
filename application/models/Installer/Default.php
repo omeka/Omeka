@@ -110,9 +110,6 @@ class Installer_Default implements InstallerInterface
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => Installer_Default::DEFAULT_FILE_VALIDATION_DISABLED,
             Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION => (string)!extension_loaded('fileinfo'),
-            'html_purifier_is_enabled' => 1,
-            'html_purifier_allowed_html_elements' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()),
-            'html_purifier_allowed_html_attributes' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes())     
         ));
         $task->install($this->_db);
     }

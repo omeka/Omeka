@@ -33,9 +33,6 @@ class Installer_Task_Options implements Installer_TaskInterface
         Omeka_Validate_File_MimeType::WHITELIST_OPTION,
         File::DISABLE_DEFAULT_VALIDATION_OPTION,
         Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION,
-        'html_purifier_is_enabled',
-        'html_purifier_allowed_html_elements',
-        'html_purifier_allowed_html_attributes'    
     );
     
     private $_options = array();
