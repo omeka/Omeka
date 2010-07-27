@@ -32,7 +32,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     const DEFAULT_DESCRIPTION   = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
     
     private $_runInstaller = true;
-    
+        
     /**
      * Load and initialize the database.
      *
@@ -40,51 +40,31 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
      */
     public function init()
     {   
-        $this->getBootstrap()->bootstrap('Config');
-        $this->useTestConfig();
-        $omekaDb = $this->_getOmekaDb();
+        $omekaDb = $this->getDb();
         if ($this->_runInstaller) {
             $this->_dropTables($this->getDbAdapter());
-            $this->install($omekaDb);
+            $installer = new Installer_Test($omekaDb);
+            $installer->install();
         }
         return $omekaDb;
     }
     
+    /**
+     * @return Omeka_Db
+     */
+    public function getDb()
+    {
+        $this->getBootstrap()->bootstrap('Config');
+        $this->useTestConfig();
+        return $this->_getOmekaDb();
+    }
+        
     public function useTestConfig()
     {
         $this->setAdapter('Mysqli');
         $this->setParams(Zend_Registry::get('test_config')->db->toArray());
     }
         
-    /**
-     * Install the Omeka database as part of the test bootstrap process.
-     *
-     * @param Omeka_Db $db
-     * @return void
-     */
-    public function install(Omeka_Db $db)
-    {
-        $installInfo = array(
-            'administrator_email'           => self::SUPER_EMAIL, 
-            'copyright'                     => self::DEFAULT_COPYRIGHT, 
-            'site_title'                    => self::DEFAULT_SITE_TITLE, 
-            'author'                        => self::DEFAULT_AUTHOR, 
-            'description'                   => self::DEFAULT_DESCRIPTION, 
-            'thumbnail_constraint'          => Omeka_Form_Install::DEFAULT_THUMBNAIL_CONSTRAINT, 
-            'square_thumbnail_constraint'   => Omeka_Form_Install::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT, 
-            'fullsize_constraint'           => Omeka_Form_Install::DEFAULT_FULLSIZE_CONSTRAINT, 
-            'per_page_admin'                => Omeka_Form_Install::DEFAULT_PER_PAGE_ADMIN, 
-            'per_page_public'               => Omeka_Form_Install::DEFAULT_PER_PAGE_PUBLIC, 
-            'show_empty_elements'           => Omeka_Form_Install::DEFAULT_SHOW_EMPTY_ELEMENTS,
-            'path_to_convert'               => '',
-            'super_email'                   => self::SUPER_EMAIL,
-            'username'                      => self::SUPER_USERNAME,
-            'password'                      => self::SUPER_PASSWORD
-        );
-        $installer = new Installer($db);
-        $installer->install($installInfo);        
-    }
-    
     /**
      * Set the flag that indicates whether or not to run the installer during 
      * init().
