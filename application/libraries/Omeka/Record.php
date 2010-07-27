@@ -547,9 +547,10 @@ abstract class Omeka_Record implements ArrayAccess
         
         $insert_id = $this->getDb()->insert(get_class($this), $data_to_save);
         
-        if (is_numeric($insert_id)) {
-            $this->id = $insert_id;
+        if ($was_inserted && (empty($insert_id) || !is_numeric($insert_id))) {
+            throw new Omeka_Record_Exception("LAST_INSERT_ID() did not return a numeric ID when saving the record.");
         }
+        $this->id = $insert_id;
         
         if ($was_inserted) {
             // Run the local afterInsert hook, the modules afterInsert hook, then
@@ -881,15 +882,13 @@ abstract class Omeka_Record implements ArrayAccess
      */
     protected function fieldIsUnique($field, $value = null)
     {
-        return Zend_Validate::is($value ? $value : $this->$field,
-            'Db_NoRecordExists',
-             array('table'      => $this->getTable()->getTableName(),
-                   'field'      => $field,
-                   'exclude'    => array(
-                       'field'  => $field,
-                       'value'  => $this->$field
-                   ),
-                   'adapter'    => $this->getDb()->getAdapter()
-        ));
+        $value = $value ? $value : $this->$field;
+        if ($value === null) {
+            throw new Omeka_Record_Exception("Cannot check uniqueness of NULL value.");
+        }
+        $validator = new Zend_Validate_Db_NoRecordExists($this->getTable()->getTableName(),
+            $field, array('field' => $field, 'value' => $this->$field), 
+            $this->getDb()->getAdapter());
+        return $validator->isValid($value ? $value : $this->$field);    
     }
 }

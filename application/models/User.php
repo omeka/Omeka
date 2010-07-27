@@ -151,14 +151,10 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         
         // Validate the username
         if (strlen($this->username) < self::USERNAME_MIN_LENGTH || strlen($this->username) > self::USERNAME_MAX_LENGTH) {
-            $this->addError('username', "The username " . $this->username . " must be between " . self::USERNAME_MIN_LENGTH .  " and " . self::USERNAME_MAX_LENGTH . " characters.");
-        }
-        
-        if (!Zend_Validate::is($this->username, 'Alnum')) {
+            $this->addError('username', "The username '" . $this->username . "' must be between " . self::USERNAME_MIN_LENGTH .  " and " . self::USERNAME_MAX_LENGTH . " characters.");
+        } else if (!Zend_Validate::is($this->username, 'Alnum')) {
             $this->addError('username', "The username must be alphanumeric.");
-        }
-        
-        if (!$this->fieldIsUnique('username')) {
+        } else if (!$this->fieldIsUnique('username')) {
             $this->addError('username', "'{$this->username}' is already in use.  Please choose another username.");
         }
         

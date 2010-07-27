@@ -484,7 +484,7 @@ class Omeka_Db_Table
     protected function recordFromData(array $data)
     {
         $class = $this->_target;
-        $obj = new $class;
+        $obj = new $class($this->_db);
         $obj->setArray($data);
         return $obj;
     }
