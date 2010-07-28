@@ -165,6 +165,19 @@ class Omeka_Core extends Zend_Application
     }
     
     /**
+     * Display the generic error page for all otherwise-uncaught exceptions.
+     */
+    public function run()
+    {
+        try {
+            return parent::run();
+        } catch (Exception $e) {
+            $this->_displayErrorPage($e->getMessage(), $e);
+            exit;
+        }
+    }
+    
+    /**
      * Print an HTML page to display errors when starting the application.
      *
      * @param string $message Error message to display.
@@ -172,6 +185,7 @@ class Omeka_Core extends Zend_Application
      */
     private function _displayErrorPage($message = '')
     {
+        header("HTTP/1.0 500 Internal Server Error");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
