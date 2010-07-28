@@ -65,7 +65,7 @@ class Installer_Default implements InstallerInterface
     private function _createSchema()
     {
         $schemaTask = new Installer_Task_Schema();
-        $schemaTask->setSchemaFile(CORE_DIR . DIRECTORY_SEPARATOR . 'schema.sql');
+        $schemaTask->useDefaultTables();
         $schemaTask->install($this->_db);
     }
     
