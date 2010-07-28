@@ -15,28 +15,110 @@
  * @copyright Center for History and New Media, 2007-2010
  */
 class Installer_Task_Schema implements Installer_TaskInterface
-{    
-    private $_schemaFilePath;
+{   
+    private $_defaultTables = array(
+        'collections',
+        'element_texts',
+        'entities_relations',
+        'item_types',
+        'mime_element_set_lookup',
+        'processes',
+        'tags',
+        'data_types',
+        'elements',
+        'entity_relationships',
+        'item_types_elements',
+        'options',
+        'record_types',
+        'users',
+        'element_sets',
+        'entities',
+        'files',
+        'items',
+        'plugins',
+        'taggings',
+        'users_activations'
+    );
     
-    public function setSchemaFile($path)
+    private $_tables = array();
+    
+    /**
+     * Add an SQL table to the list of tables to create.
+     * 
+     * @param string $tableName
+     * @param string $sqlFilePath
+     */
+    public function addTable($tableName, $sqlFilePath)
     {
-        $this->_schemaFilePath = $path;
+        if (!(file_exists($sqlFilePath) && is_readable($sqlFilePath))) {
+            throw new Installer_Task_Exception("Invalid SQL file given: $sqlFilePath.");
+        }
+        $this->_tables[$tableName] = $sqlFilePath;
     }
     
+    /**
+     * Add a set of SQL tables to the list.
+     * 
+     * @param array $tables
+     */
+    public function addTables(array $tables)
+    {
+        foreach ($tables as $tableName => $sqlFilePath) {
+            $this->addTable($tableName, $sqlFilePath);
+        }
+    }
+    
+    /**
+     * Set the list of SQL tables.
+     * 
+     * @param array $tables
+     */
+    public function setTables(array $tables)
+    {
+        $this->_tables = array();
+        $this->addTables($tables);
+    }
+    
+    /**
+     * Remove an SQL table from the list.
+     * 
+     * @param string $tableName
+     */
+    public function removeTable($tableName)
+    {
+        if (!array_key_exists($tableName, $this->_tables)) {
+            throw new Installer_Task_Exception("Table named '$tableName' cannot be removed from the list (not found).");
+        }
+        unset($this->_tables[$tableName]);
+    }
+    
+    /**
+     * Retrieve list of tables being installed.
+     */
+    public function getTables()
+    {
+        return $this->_tables;
+    }
+    
+    /**
+     * Add all tables corresponding to the default Omeka installation.
+     */        
+    public function useDefaultTables()
+    {
+        foreach ($this->_defaultTables as $tableName) {
+            $this->_tables[$tableName] = CORE_DIR . DIRECTORY_SEPARATOR 
+                . 'schema' . DIRECTORY_SEPARATOR . $tableName . '.sql';
+        }
+    }
+            
     public function install(Omeka_Db $db)
     {
-        if (!$this->_schemaFilePath) {
-            throw new Installer_Task_Exception("Schema file was not given.");
+        if (empty($this->_tables)) {
+            throw new Installer_Task_Exception("No SQL files were given to create the schema.");
         }
         
-        if (!file_exists($this->_schemaFilePath)) {
-            throw new Installer_Task_Exception("Schema file does not exist.");
+        foreach ($this->_tables as $tableName => $sqlFilePath) {
+            $db->loadSqlFile($sqlFilePath);
         }
-        
-        if (!is_readable($this->_schemaFilePath)) {
-            throw new Installer_Task_Exception("Schema file is not readable.");
-        }
-        
-        $db->loadSqlFile($this->_schemaFilePath);
     }
 }
