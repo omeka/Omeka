@@ -29,6 +29,8 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     public $role;
     public $entity_id;
     
+    private $_entity;
+    
     const USERNAME_MIN_LENGTH = 1;
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
@@ -40,7 +42,32 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     
     public function getEntity()
     {
-        return $this->getTable('Entity')->find((int) $this->entity_id);
+        if (!$this->_entity) {
+            if (!$this->exists() || empty($this->entity_id)) {
+                $entity =  new Entity($this->getDb());
+            } else {
+                $entity = $this->getTable('Entity')->find((int) $this->entity_id);
+            } 
+            $this->_entity = $entity;
+        }
+        return $this->_entity;
+    }
+    
+    /**
+     * Overrides parent::__get() to transparently get properties from the Entity
+     * associated with this user.
+     */
+    public function __get($property)
+    {
+        $entity = $this->getEntity();
+        if (!($entity instanceof Entity)) {
+            throw new Omeka_Record_Exception("No Entity record available.");
+        }
+        if (isset($entity->$property)) {
+            return $entity->$property;
+        } else {
+            return parent::__get($property);
+        }
     }
     
     protected function beforeSave()
