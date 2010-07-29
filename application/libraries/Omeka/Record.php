@@ -29,7 +29,7 @@ abstract class Omeka_Record implements ArrayAccess
      *
      * @var Omeka_Validator_Errors 
      */
-    protected $_errors = array();
+    private $_errors = array();
         
     /**
      * An in-memory cache for related objects that have been retrieved
