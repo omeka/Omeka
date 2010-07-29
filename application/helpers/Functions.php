@@ -149,6 +149,10 @@ function settings($name)
  */
 function loop_records($recordType, $records, $setCurrentRecordCallback=null)
 {
+    if (!$records) {
+        return false;
+    }
+    
     // If this is the first call to loop_records(), set a static record loop and 
     // set it to NULL.
     static $recordLoop = null;
