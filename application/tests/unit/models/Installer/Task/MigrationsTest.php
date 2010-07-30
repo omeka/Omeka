@@ -43,7 +43,7 @@ class Installer_Task_MigrationsTest extends PHPUnit_Framework_TestCase
         $ranOptionInsert = false;
         $ranVersionInsert = false;
         foreach ($queryProfiles as $profile) {
-            if (strstr($profile->getQuery(), "CREATE TABLE `test_schema_migrations`")) {
+            if (strstr($profile->getQuery(), "CREATE TABLE IF NOT EXISTS `test_schema_migrations`")) {
                 $ranCreate = true;
             } else if (strstr($profile->getQuery(), "INSERT INTO `test_options`")) {
                 $ranOptionInsert = true;

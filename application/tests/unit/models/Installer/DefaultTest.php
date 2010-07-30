@@ -75,7 +75,7 @@ class Installer_DefaultTest extends PHPUnit_Framework_TestCase
         $installer->install();
         $this->profilerHelper->assertDbQuery("CREATE TABLE IF NOT EXISTS `omeka_collections`",
             "Installer should have created the default Omeka schema.");
-        $this->profilerHelper->assertDbQuery("CREATE TABLE `omeka_schema_migrations`",
+        $this->profilerHelper->assertDbQuery("CREATE TABLE IF NOT EXISTS `omeka_schema_migrations`",
             "Installer should have created the timestamp migrations table.");
         $this->profilerHelper->assertDbQuery("INSERT INTO `omeka_users`",
             "Installer should have created a new user.");
