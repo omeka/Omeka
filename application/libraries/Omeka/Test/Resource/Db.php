@@ -42,7 +42,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     {   
         $omekaDb = $this->getDb();
         if ($this->_runInstaller) {
-            $this->_dropTables($omekaDb);
+            $this->_truncateTables($omekaDb);
             $installer = new Installer_Test($omekaDb);
             $installer->install();
         }
@@ -88,14 +88,14 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     }
         
     /**
-     * Drop all the tables in the test database.
+     * Truncate all the tables in the test database.
      *
-     * @param Zend_Db_Adapter_Abstract $dbAdapter
+     * @param Omeka_Db $db
      * @return void
      */
-    private function _dropTables(Omeka_Db $db)
+    private function _truncateTables(Omeka_Db $db)
     {
         $dbHelper = new Omeka_Test_DbHelper($db->getAdapter());
-        $dbHelper->dropTables($db->prefix);
+        $dbHelper->truncateTables($db->prefix);
     }    
 }
