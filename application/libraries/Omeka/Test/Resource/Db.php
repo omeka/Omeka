@@ -42,7 +42,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     {   
         $omekaDb = $this->getDb();
         if ($this->_runInstaller) {
-            $this->_dropTables($this->getDbAdapter());
+            $this->_dropTables($omekaDb);
             $installer = new Installer_Test($omekaDb);
             $installer->install();
         }
@@ -93,9 +93,9 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
      * @param Zend_Db_Adapter_Abstract $dbAdapter
      * @return void
      */
-    private function _dropTables(Zend_Db_Adapter_Abstract $dbAdapter)
+    private function _dropTables(Omeka_Db $db)
     {
-        $dbHelper = new Omeka_Test_DbHelper($dbAdapter);
-        $dbHelper->dropTables();
+        $dbHelper = new Omeka_Test_DbHelper($db->getAdapter());
+        $dbHelper->dropTables($db->prefix);
     }    
 }
