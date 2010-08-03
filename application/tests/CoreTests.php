@@ -12,13 +12,13 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  */
-class AllTests extends PHPUnit_Framework_TestSuite
+class CoreTests extends PHPUnit_Framework_TestSuite
 {
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite();
-        $suite->addTest(CoreTests::suite());
-        $suite->addTest(PluginTests::suite());
+        $suite->addTest(Integration_AllTests::suite());
+        $suite->addTest(Unit_AllTests::suite());
         return $suite;
     }    
 }
