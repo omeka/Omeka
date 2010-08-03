@@ -52,7 +52,11 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
                 return $item->id;
                 break;
             case 'item type name':
-                return $item->Type->name;
+                if ($type = $item->Type) {
+                    return $type->name;
+                } else {
+                    return null;
+                }
                 break;
             case 'date added':
                 return $item->added;
@@ -61,7 +65,11 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
                 return $item->modified;
                 break;
             case 'collection name':
-                return $item->Collection->name;
+                if ($collection = $item->Collection) {
+                    return $collection->name;   
+                } else {
+                    return null;
+                }
                 break;
             case 'featured':
                 return $item->featured;
