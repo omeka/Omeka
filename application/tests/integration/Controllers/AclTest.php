@@ -38,23 +38,7 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
         $this->assertAction('browse');
         $this->assertTrue($this->aclHelper->isAllowed('browse', 'Items'));
     }
-    
-    /**
-     * This test case will be invalidated in 2.0.  Note that this should be 
-     * removed or skipped in future versions of the software.
-     * 
-     * Should be removed because privileges are no longer defined in Omeka_Acl
-     * in Omeka 2.0.
-     */
-    public function testAclHelperAllowsAccessForDefinedResourceWithUndefinedPrivilege()
-    {
-        $this->markTestSkipped("Privileges are no longer declared explicitly in Omeka 2.0.  
-        Omeka_Acl_Resource is deprecated, this test relies on Omeka_Acl_Resource::has().");
-        $this->assertTrue($this->acl->has('Items'));
-        $this->assertFalse($this->acl->get('Items')->has('foobar'));
-        $this->assertTrue($this->aclHelper->isAllowed('foobar', 'Items'));
-    }
-    
+        
     public function testAclHelperAllowsAccessForUndefinedResource()
     {
         $this->assertFalse($this->acl->has('Index'));
