@@ -69,7 +69,7 @@ class Omeka_Db_Migration_Manager
     public function setupTimestampMigrations()
     {
         $db = $this->_db;
-        $tableSql = "CREATE TABLE `$db->prefix" . self::MIGRATION_TABLE_NAME 
+        $tableSql = "CREATE TABLE IF NOT EXISTS `$db->prefix" . self::MIGRATION_TABLE_NAME 
                 . "` (`version` varchar(16) NOT NULL, UNIQUE KEY `unique_schema_migrations` (`version`))
                     ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
         $optionSql = "DELETE FROM $db->Option WHERE name = '" . self::ORIG_MIGRATION_OPTION_NAME . "' LIMIT 1";

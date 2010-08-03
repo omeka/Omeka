@@ -2,7 +2,7 @@
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true"
          convertNoticesToExceptions="true">
-    <testsuite name="Integration Tests">
-        <directory>integration</directory>
-    </testsuite>
+    <testsuite name="AllTests">
+        <file>AllTests.php</file>
+    </testsuite>    
 </phpunit>

@@ -54,19 +54,18 @@ class Omeka_Test_Resource_DbTest extends PHPUnit_Framework_TestCase
                             "No tables should have been created.");
     }
     
-    public function testWipesExistingDatabase()
+    public function testTruncatesTablesWithPrefix()
     {
         $this->bootstrap->bootstrap('Config');
         $this->dbResource->useTestConfig();
-        $this->dbAdapter = $this->dbResource->getDbAdapter();
-        $this->dbAdapter->query("CREATE TABLE `test_foobar` (`id` int(11))");
-        $this->assertNotEquals(array(),
-                               $this->dbAdapter->fetchAll("SHOW TABLES LIKE 'test_foobar'"),
-                               "There should be a 'test_foobar' table in the database.");
+        $this->db = $this->dbResource->getDb();
+        $this->db->query("CREATE TABLE `{$this->db->prefix}foobar` (`id` int(11))");
+        $this->db->getAdapter()->insert("{$this->db->prefix}foobar", array('id' => 1234));
+        $this->assertEquals(array(array('id' => '1234')),
+                               $this->db->fetchAll("SELECT * FROM `{$this->db->prefix}foobar`"));
         $this->db = $this->dbResource->init();
         $this->assertEquals(array(),
-                            $this->dbAdapter->fetchAll("SHOW TABLES LIKE 'test_foobar'"),
-                            "The 'test_foobar' table should have been wiped during resource initialization.");
+                            $this->db->fetchAll("SELECT * FROM `{$this->db->prefix}foobar`"));
     }
     
     public function testInstallsOmekaDatabase()

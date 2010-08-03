@@ -68,7 +68,7 @@ class PublicFeatured extends Omeka_Record_Mixin
         return join('_', array('make', $modelNameForHook, $action));
     }
     
-    public function beforeSaveForm(&$post)
+    public function beforeSaveForm($post)
     {
         if (isset($post['public'])) {
             $this->setPublic($post['public']);

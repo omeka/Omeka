@@ -89,12 +89,12 @@ class Omeka_Test_DbHelper
      *
      * @return void
      */
-    public function truncateDbTables()
+    public function truncateTables($prefix = null)
     {
-        $tables = $this->_dbAdapter->fetchCol("SHOW TABLES");
-        if ($tables) {
-            $dropSql = "TRUNCATE `" . join($tables, '`,`') . '`';
-            $this->_dbAdapter->query($dropSql);
+        if ($tables = $this->getTableNames($prefix)) {
+            foreach ($tables as $tableName) {
+                $this->_dbAdapter->query("TRUNCATE TABLE `$tableName`");
+            }
         }
     }
     

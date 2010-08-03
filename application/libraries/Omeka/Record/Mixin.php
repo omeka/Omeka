@@ -65,15 +65,15 @@ abstract class Omeka_Record_Mixin
 	public function afterSave() {}
 	public function afterUpdate() {}
 	/**
-	 * @param array &$post POST array. Passed by reference; changes to this
+	 * @param ArrayObject $post POST array. Passed by reference; changes to this
 	 * array will affect the caller's $post array.
 	 */
-	public function afterSaveForm(&$post) {}
+	public function afterSaveForm($post) {}
     /**
-	 * @param array &$post POST array. Passed by reference; changes to this
+	 * @param ArrayObject $post POST array. Passed by reference; changes to this
 	 * array will affect the caller's $post array.
 	 */
-	public function beforeSaveForm(&$post) {}
+	public function beforeSaveForm($post) {}
 	public function beforeDelete() {}
 	public function afterDelete() {}
 	public function beforeValidate() {}

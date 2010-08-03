@@ -133,11 +133,11 @@ class Omeka_Plugin_Mvc
         $sharedDir     = $viewsDir . DIRECTORY_SEPARATOR . 'shared';
         
         //Add 'models' and 'libraries' directories to the include path
-        if (file_exists($modelDir)) {
+        if (file_exists($modelDir) && !$this->_hasIncludePath($modelDir)) {
             set_include_path(get_include_path() . PATH_SEPARATOR . $modelDir );
         }
         
-        if (file_exists($librariesDir)) {
+        if (file_exists($librariesDir) && !$this->_hasIncludePath($librariesDir)) {
             set_include_path(get_include_path() . PATH_SEPARATOR . $librariesDir);
         }
         
@@ -176,5 +176,17 @@ class Omeka_Plugin_Mvc
         $inflector = new Zend_Filter_Word_CamelCaseToDash();
         $moduleName = strtolower($inflector->filter($pluginDirName));
         return $moduleName;
+    }
+    
+    /**
+     * Check include path to see if it already contains a specific path.
+     * 
+     * @param string $path
+     * @return boolean
+     */
+    private function _hasIncludePath($path)
+    {
+        $paths = explode(PATH_SEPARATOR, get_include_path());
+        return in_array($path, $paths, true);
     }
 }
