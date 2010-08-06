@@ -6,6 +6,9 @@
  * @package Omeka
  */
 
+require_once dirname(__FILE__) . '/integration/AllTests.php';
+require_once dirname(__FILE__) . '/unit/AllTests.php';
+
 /**
  * 
  *
