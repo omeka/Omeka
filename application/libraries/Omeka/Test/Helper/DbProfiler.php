@@ -24,7 +24,13 @@ class Omeka_Test_Helper_DbProfiler
      */
     private $_test;
     
-    public function __construct(Zend_Db_Profiler $profiler, PHPUnit_Framework_TestCase $test)
+    /**
+     * Constructor.
+     * 
+     * @param Zend_Db_Profiler $profiler
+     * @param PHPUnit_Framework_Assert $test
+     */
+    public function __construct(Zend_Db_Profiler $profiler, PHPUnit_Framework_Assert $test)
     {
         $this->_profiler = $profiler;
         $this->_test = $test;
@@ -55,5 +61,19 @@ class Omeka_Test_Helper_DbProfiler
         }
         $this->_test->assertTrue($ranQuery, $message . PHP_EOL . "Should have run SQL query containing '$query'." 
             . (isset($params) ? PHP_EOL . "Should have been passed parameters: " . print_r($params, true) : ''));
+    }
+    
+    /**
+     * Assert that the given number of SQL queries were made.
+     * 
+     * @param integer $queryCount
+     */
+    public function assertTotalNumQueries($queryCount, $msg = null)
+    {
+        if (!$msg) {
+            $msg = "Failed asserting that " . (integer)$queryCount . " SQL queries were made.";
+        }
+        $this->_test->assertEquals($queryCount, $this->_profiler->getTotalNumQueries(),
+            $msg);
     }
 }
