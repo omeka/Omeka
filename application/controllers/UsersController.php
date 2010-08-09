@@ -235,8 +235,6 @@ class UsersController extends Omeka_Controller_Action
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
         }
     }
     
