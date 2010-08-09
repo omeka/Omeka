@@ -42,13 +42,17 @@ class UpgradeController extends Zend_Controller_Action
             return $this->_forward('completed');
         }
         
+        $debugMode = (boolean)$this->getInvokeArg('bootstrap')->config->debug->exceptions;
+        $this->view->debugMode = $debugMode;
         try {
             $manager->migrate();
             $this->view->success = true;            
         } catch (Omeka_Db_Migration_Exception $e) {
             $this->view->error = $e->getMessage();
+            $this->view->trace = $e->getTraceAsString();
         } catch (Zend_Db_Exception $e) {
             $this->view->error = "SQL error in migration: " . $e->getMessage();
+            $this->view->trace = $e->getTraceAsString();
         }
     }
     

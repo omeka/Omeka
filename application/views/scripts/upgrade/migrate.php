@@ -5,7 +5,9 @@
 <?php if(!$success): ?>
     <p class="error">Omeka encountered an error when upgrading your installation:</p>
 	<p class="error_text"><?php echo html_escape($error); ?></p>
-    
+    <?php if ($debugMode): ?>
+        <pre><?php echo html_escape($trace); ?></pre>
+    <?php endif; ?>
     <h2 class="instruction">Please restore from your database backup and try again.
         If you continue to experience errors, you can notify us on the Omeka 
         <a href="http://omeka.org/forums/">Forums</a>.</h2>
