@@ -149,7 +149,7 @@ class Collection extends Omeka_Record
     public function removeCollector($collector)
     {
         $result = $this->removeRelatedTo($collector, 'collector', 1);
-        return $result->rowCount() == 1;
+        return (boolean)$result->rowCount();
     }
     
     /**
