@@ -6,6 +6,9 @@
  * @package Omeka
  */
 
+require_once 'CoreTests.php';
+require_once 'PluginTests.php';
+
 /**
  * 
  *

@@ -343,9 +343,8 @@ class ItemTable extends Omeka_Db_Table
     public function getSelect()
     {
         // @duplication self::findBy()
-        $select = new Omeka_Db_Select;
-        
         $db = $this->getDb();
+        $select = new Omeka_Db_Select($db->getAdapter());
         
         $select->from(array('i'=>$db->Item), array('i.*'));
         if($acl = Omeka_Context::getInstance()->getAcl()) {
