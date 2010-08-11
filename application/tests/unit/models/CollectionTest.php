@@ -73,12 +73,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($entities));
         $this->assertThat($entities[0], $this->isInstanceOf('Entity'));
     }
-    
-    public function testGetCollectorStrings()
-    {
-        $this->markTestIncomplete();
-    }
-        
+            
     public function testDefaultCollectionNameNotValid()
     {
         $this->assertFalse($this->collection->isValid());
@@ -119,11 +114,6 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->profilerHelper->assertTotalNumQueries(2);
         $this->profilerHelper->assertDbQuery("DELETE FROM entities_relations");
         $this->assertTrue($retVal);
-    }
-    
-    public function testRemoveCollectorByString()
-    {   
-        $this->markTestIncomplete();
     }
     
     public function testRemoveCollectorWhenHasNoCollectors()
@@ -167,10 +157,5 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         // work, currently.
         $this->profilerHelper->assertDbQuery("INSERT INTO `entities_relations`",
             "Collection should have a collector added to it.");
-    }
-                
-    public function testAddCollectorByString()
-    {
-        $this->markTestIncomplete();
     }
 }
