@@ -58,6 +58,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $post = $this->collection->toArray();
         $post['description'] = $dirtyHtml;
+        $post['collectors'] = array();
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
@@ -77,6 +78,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $post = $this->collection->toArray();
         $post['description'] = $dirtyHtml;
+        $post['collectors'] = array();
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
@@ -96,6 +98,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $post = $this->collection->toArray();
         $post['description'] = $dirtyHtml;
+        $post['collectors'] = array();
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
@@ -115,6 +118,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $post = $this->collection->toArray();
         $post['description'] = $dirtyHtml;
+        $post['collectors'] = array();
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
@@ -137,6 +141,7 @@ class HtmlPuriferTest extends Omeka_Test_AppTestCase
         
         $post = $this->collection->toArray();
         $post['description'] = $dirtyHtml;
+        $post['collectors'] = array();
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
