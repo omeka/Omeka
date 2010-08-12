@@ -27,6 +27,10 @@ class Collection extends Omeka_Record
      * @var string Description for the collection.
      */
     public $description = '';
+    
+    /**
+     * @var array Strings containing the names of this collection's collectors.
+     */
     public $collectors = array();
     
     /**
@@ -38,8 +42,20 @@ class Collection extends Omeka_Record
      * @var boolean Whether or not the collection is featured.
      */
     public $featured = 0;
+    
+    /**
+     * @var string
+     */
     public $added;
+    
+    /**
+     * @var string
+     */
     public $modified;
+    
+    /**
+     * @var integer
+     */
     public $owner_id;
     
     protected $_related = array('Collectors' => 'getCollectors');
