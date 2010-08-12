@@ -92,7 +92,19 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('John Smith', 'Super Hans'),
             $this->collection->getCollectors());
     }
-                
+    
+    public function testEmptyCollectorsStringMeansNoCollectors()
+    {
+        $this->collection->collectors = '';
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+    
+    public function testWhitespaceCollectorsStringMeansNoCollectors()
+    {
+        $this->collection->collectors = '        ';
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+                    
     public function testDefaultCollectionNameNotValid()
     {
         $this->assertFalse($this->collection->isValid());

@@ -95,10 +95,15 @@ class Collection extends Omeka_Record
     public function getCollectors()
     {
         if (is_string($this->collectors)) {
-            return explode(self::COLLECTOR_DELIMITER, $this->collectors);
-        } else if (is_array($this->collectors)) {
-            return $this->collectors;
+            if (trim($this->collectors) == '') {
+                $this->collectors = array();
+            } else {
+                $this->collectors = explode(self::COLLECTOR_DELIMITER, $this->collectors);
+            }
+        } else if (!is_array($this->collectors)) {
+            throw new RuntimeException("Collectors must be either a string or an array.");
         }
+        return $this->collectors;
     }
 
     /**
