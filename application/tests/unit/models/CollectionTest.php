@@ -39,6 +39,28 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('John Smith'), $this->collection->collectors);
     }
     
+    public function testAddNonStringCollectorThrowsException()
+    {
+        try {
+            $this->collection->addCollector(new Zend_Acl_Resource('whatever'));
+            $this->fail("Should have thrown an exception when adding collector.");
+        } catch (Exception $e) {
+            $this->assertThat($e, $this->isInstanceOf('InvalidArgumentException'));
+        }
+    }
+    
+    public function testAddEmptyCollector()
+    {   
+        $this->collection->addCollector('');
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+
+    public function testAddWhitespaceCollector()
+    {
+        $this->collection->addCollector('           ');
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+    
     public function testHasSomeCollectors()
     {
         $this->collection->addCollector('John Smith');
