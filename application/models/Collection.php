@@ -18,6 +18,8 @@ class Collection extends Omeka_Record
     const COLLECTION_NAME_MIN_CHARACTERS = 1;
     const COLLECTION_NAME_MAX_CHARACTERS = 255;
     
+    const COLLECTOR_DELIMITER = "\n";
+    
     /**
      * @var string Name of the collection.
      */
@@ -93,7 +95,7 @@ class Collection extends Omeka_Record
     public function getCollectors()
     {
         if (is_string($this->collectors)) {
-            return unserialize($this->collectors);
+            return explode(self::COLLECTOR_DELIMITER, $this->collectors);
         } else if (is_array($this->collectors)) {
             return $this->collectors;
         }
@@ -208,7 +210,7 @@ class Collection extends Omeka_Record
     private function _serializeCollectors()
     {
         if (is_array($this->collectors)) {
-            $this->collectors = serialize($this->collectors);
+            $this->collectors = join(self::COLLECTOR_DELIMITER, $this->collectors);
         }
     }            
 }

@@ -78,7 +78,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->collection->addCollector('John Smith');
         $this->collection->addCollector('Super Hans');
         $this->collection->save();
-        $this->assertEquals(serialize(array('John Smith', 'Super Hans')),
+        $this->assertEquals("John Smith\nSuper Hans",
             $this->collection->collectors);
     }
     
