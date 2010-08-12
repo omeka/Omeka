@@ -61,12 +61,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      * @return void
      */
     public function appBootstrap()
-    {
-        // Must happen before all other bootstrapping.
-        if ($this->_isAdminTest) {
-            $this->_setupAdminTest();
-        }
-        
+    {        
         $this->core = new Omeka_Core('testing', array(
             'config' => CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini'));
         
@@ -74,11 +69,17 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $this->frontController->getRouter()->addDefaultRoutes();
         $this->frontController->setParam('bootstrap', $this->core->getBootstrap());
         $this->getRequest()->setBaseUrl('');
-        $this->setUpBootstrap($this->core->getBootstrap());
-        $this->core->bootstrap();
-        if ($this->_useAdminViews) {
-            $this->_useAdminViews();
+        // These two properties have equivalent semantic meaning, therefore should
+        // be combined at some future point.
+        if ($this->_useAdminViews || $this->_isAdminTest) {
+            $this->_setUpThemeBootstrap('admin');
+        } else {
+            $this->_setUpThemeBootstrap('public');
         }
+        
+        $this->setUpBootstrap($this->core->getBootstrap());
+// var_dump($this->core->getBootstrap()->getPluginResourceNames());exit;
+        $this->core->bootstrap();
     }
     
     /**
@@ -194,6 +195,39 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     private function _setupAdminTest()
     {
         // define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . 'themes');
-        $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
+    }
+    
+    /**
+     * Set up the bootstrap differently depending on whether the test is meant
+     * for the public or admin themes.
+     */
+    private function _setUpThemeBootstrap($themeType)
+    {
+        switch ($themeType) {
+            case 'admin':
+                $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
+                $this->core->getBootstrap()->setOptions(array(
+                    'resources' => array(
+                        'theme' => array(
+                            'basePath' => ADMIN_THEME_DIR,
+                            'webBasePath' => '/admin/themes/'
+                        )
+                    )
+                ));
+                break;
+            case 'public':
+                $this->core->getBootstrap()->setOptions(array(
+                    'resources' => array(
+                        'theme' => array(
+                            'basePath' => PUBLIC_THEME_DIR,
+                            'webBasePath' => '/themes/'
+                        )
+                    )
+                ));
+                break;
+            default:
+                throw new InvalidArgumentException("Invalid theme type given.");
+                break;
+        }
     }
 }

@@ -17,4 +17,13 @@ require_once 'paths.php';
 define('THEME_DIR', BASE_DIR . DIRECTORY_SEPARATOR . $site['public_theme']);
 
 $app = new Omeka_Core;
+$app->getBootstrap()->setOptions(array(
+    'resources' => array(
+        'theme' => array(
+            'basePath' => THEME_DIR,
+            'webBasePath' => WEB_THEME
+        )
+    )
+));
+// var_dump($app->getBootstrap());exit;
 $app->initialize()->run();
