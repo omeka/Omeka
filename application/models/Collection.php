@@ -99,6 +99,7 @@ class Collection extends Omeka_Record
                 $this->collectors = array();
             } else {
                 $this->collectors = explode(self::COLLECTOR_DELIMITER, $this->collectors);
+                $this->collectors = array_map('trim', $this->collectors);
             }
         } else if (!is_array($this->collectors)) {
             throw new RuntimeException("Collectors must be either a string or an array.");
@@ -170,14 +171,8 @@ class Collection extends Omeka_Record
     protected function beforeSaveForm($post)
     {
         // Process the collectors that have been provided on the form
-        $collectorsPost = $post['collectors'];
-        
-        $collectors = $this->getCollectors();
-        foreach ($collectorsPost as $k => $collectorName) {
-            if (!empty($collectorName)) {
-                $collectors[] = $collectorName;
-            }
-        }
+        $collectorPost = (string)$post['collectors'];
+        $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
         $this->setCollectors($collectors);
     }
     
@@ -199,15 +194,16 @@ class Collection extends Omeka_Record
         }
         $collectorName = trim($collectorName);
         if ($collectorName != '') {
-            $collectors = $this->getCollectors();
-            $collectors[] = $collectorName;
-            $this->setCollectors($collectors);
+            $this->collectors[] = $collectorName;
         }
     }
     
     public function setCollectors(array $collectorList)
     {
-        $this->collectors = $collectorList;
+        $this->collectors = array();
+        foreach ($collectorList as $key => $collector) {
+            $this->addCollector($collector);
+        }
     }
     
     protected function beforeSave()
