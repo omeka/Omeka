@@ -21,6 +21,7 @@ class Omeka_Helpers_IsAdminThemeTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_frontController = Zend_Controller_Front::getInstance();
+        $this->_frontController->resetInstance();
     }
     
     public function assertPreConditions()
