@@ -9,7 +9,7 @@
 //Define our resources/privileges in a flat list here
 $resources = array(
     'Items'         =>  array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
-    'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse', 'remove-collector'),
+    'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
     'ElementSets'   =>  array('browse', 'delete'),
     'Files'         =>  array('edit','delete'),
     'Plugins'       =>  array('browse','config', 'install', 'uninstall', 'upgrade', 'activate'),

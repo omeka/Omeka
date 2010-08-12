@@ -1,5 +1,4 @@
 <?php echo flash(); ?>
-<?php echo js('collections'); ?>
 
 <fieldset id="editcollection">
     <h2>Collection Details <span id="required-note">* Required Fields</span></h2>

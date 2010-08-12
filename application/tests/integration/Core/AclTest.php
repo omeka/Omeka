@@ -32,7 +32,6 @@ class Core_AclTest extends PHPUnit_Framework_TestCase
        $this->assertFalse($this->_acl->isAllowed(null, 'Items', 'add'));
        $this->assertFalse($this->_acl->isAllowed(null, 'Collections', 'add'));
        $this->assertFalse($this->_acl->isAllowed(null, 'ItemTypes', 'add')); 
-       $this->assertFalse($this->_acl->isAllowed(null, 'Collections', 'remove-collector')); 
        $this->assertFalse($this->_acl->isAllowed(null, 'Themes', 'config')); 
        $this->assertFalse($this->_acl->isAllowed(null, 'Themes', 'browse'));
        $this->assertFalse($this->_acl->isAllowed(null, 'Themes', 'switch'));
