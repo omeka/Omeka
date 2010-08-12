@@ -28,13 +28,14 @@
 
     <ul id="collectors-list">
         <li>
-        <?php echo html_escape($collector->getName()); ?>
+        <?php echo html_escape($collector); ?>
         <a class="remove-collector" href="<?php echo html_escape(uri(
             array(
             'controller'=>'collections', 
             'action'=>'remove-collector', 
-            'collector_id'=>$collector->id, 
+            'collector_name'=>$collector, 
             'collection_id'=>$collection->id), 'default')); ?>">Remove</a>
+        <?php echo $this->formHidden('collectors[]', $collector); ?>    
         </li>
     </ul>
     <?php endforeach; ?>
@@ -46,7 +47,7 @@
     <?php echo $this->formLabel('collectors', 'Add a Collector (optional)'); ?>
     <div class="inputs">
         <div class="input">
-    <?php echo select_entity(array('name'=>'collectors[]', 'id'=>'collector')); 
+    <?php echo $this->formText('collectors[]'); 
 ?>
 </div></div>
 </div>

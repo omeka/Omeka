@@ -33,9 +33,15 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->collection->hasCollectors());
     }
     
+    public function testAddCollectorByString()
+    {
+        $this->collection->addCollector('John Smith');
+        $this->assertEquals(array('John Smith'), $this->collection->collectors);
+    }
+    
     public function testHasSomeCollectors()
     {
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(array(array(1))));        
+        $this->collection->addCollector('John Smith');
         $this->assertTrue($this->collection->hasCollectors());
     }
     
@@ -54,6 +60,37 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     public function testGetCollectorsEmpty()
     {
         $this->assertEquals(array(), $this->collection->getCollectors());
+    }
+    
+    public function testGetCollectorsAsStringsWithoutSaving()
+    {
+        $this->collection->addCollector('John Smith');
+        $this->collection->addCollector('Jerry Garcia');
+        $this->collection->addCollector('Donald Duck');
+        $this->assertEquals(array('John Smith', 'Jerry Garcia', 'Donald Duck'),
+            $this->collection->getCollectors());
+    }
+    
+    public function testSavingSerializesCollectorNames()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);        
+        $this->collection->name = 'foobar';
+        $this->collection->addCollector('John Smith');
+        $this->collection->addCollector('Super Hans');
+        $this->collection->save();
+        $this->assertEquals(serialize(array('John Smith', 'Super Hans')),
+            $this->collection->collectors);
+    }
+    
+    public function testGetCollectorsAsStringsAfterSaving()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->name = 'foobar';
+        $this->collection->addCollector('John Smith');
+        $this->collection->addCollector('Super Hans');
+        $this->collection->forceSave();   
+        $this->assertEquals(array('John Smith', 'Super Hans'),
+            $this->collection->getCollectors());
     }
     
     public function testGetCollectorEntities()
