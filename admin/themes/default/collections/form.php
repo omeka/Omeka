@@ -22,32 +22,11 @@
 </div>
 
 <h2>Collectors</h2>
-
-<?php if (collection_has_collectors()): ?>
-    <?php foreach( $collection->Collectors as $k => $collector ): ?>
-
-    <ul id="collectors-list">
-        <li>
-        <?php echo html_escape($collector); ?>
-        <a class="remove-collector" href="<?php echo html_escape(uri(
-            array(
-            'controller'=>'collections', 
-            'action'=>'remove-collector', 
-            'collector_name'=>$collector, 
-            'collection_id'=>$collection->id), 'default')); ?>">Remove</a>
-        <?php echo $this->formHidden('collectors[]', $collector); ?>    
-        </li>
-    </ul>
-    <?php endforeach; ?>
-<?php else: ?>
-    <p>This collection has no collectors.</p>
-<?php endif; ?>
-
 <div class="field">
-    <?php echo $this->formLabel('collectors', 'Add a Collector (optional)'); ?>
+    <?php echo $this->formLabel('collectors', 'List collectors for this collection (optional - enter one name per line)'); ?>
     <div class="inputs">
         <div class="input">
-    <?php echo $this->formText('collectors[]'); 
+    <?php echo $this->formTextarea('collectors', $collection->collectors, array('class' => 'texinput', 'rows' => '10', 'cols' => '60')); 
 ?>
 </div></div>
 </div>

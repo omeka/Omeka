@@ -53,10 +53,7 @@ function collection($fieldName, $options=array(), $collection=null)
             $text = $collection->modified;
             break;
         case 'collectors': // The names of collectors
-            $text = array();
-            foreach ($collection->Collectors as $key => $collector) {
-                $text[$key] = $collector;
-            }
+            $text = $collection->getCollectors();
             break;
         default:
             throw new Exception('"' . $fieldName . '" does not exist for collections!');
