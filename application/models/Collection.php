@@ -56,7 +56,7 @@ class Collection extends Omeka_Record
     /**
      * @var integer
      */
-    public $owner_id;
+    public $owner_id = 0;
     
     protected $_related = array('Collectors' => 'getCollectors');
         
