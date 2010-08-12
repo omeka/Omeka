@@ -197,7 +197,8 @@ class Collection extends Omeka_Record
         } else {
             throw new InvalidArgumentException("Argument passed to addCollector() must be a string or an instance of Entity.");
         }
-        if (trim($collectorName) != '') {
+        $collectorName = trim($collectorName);
+        if ($collectorName != '') {
             $collectors = $this->getCollectors();
             $collectors[] = $collectorName;
             $this->setCollectors($collectors);
