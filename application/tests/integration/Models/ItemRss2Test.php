@@ -14,6 +14,8 @@
  */
 class Omeka_Model_ItemRss2Test extends Omeka_Test_AppTestCase
 {
+    protected $_useAdminViews = false;
+    
     public function setUp()
     {
         parent::setUp();
