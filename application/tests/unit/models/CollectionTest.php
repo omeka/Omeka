@@ -92,25 +92,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('John Smith', 'Super Hans'),
             $this->collection->getCollectors());
     }
-    
-    public function testGetCollectorEntities()
-    {
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(
-                array(
-                    'first_name' => 'Foobar',
-                    'last_name' => 'Foobar',
-                    'institution' => 'Whatever, Inc.',
-                    'email' => 'foobar@example.com',
-                )
-            )
-        ));                
-        $this->collection->id = self::COLLECTION_ID;
-        $entities = $this->collection->getCollectors();
-        $this->assertEquals(1, count($entities));
-        $this->assertThat($entities[0], $this->isInstanceOf('Entity'));
-    }
-            
+                
     public function testDefaultCollectionNameNotValid()
     {
         $this->assertFalse($this->collection->isValid());
@@ -131,28 +113,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->collection->name = str_repeat('b', 150);
         $this->assertTrue($this->collection->isValid());
     }
-        
-    public function testRemoveCollectorByEntity()
-    {   
-        $this->collection->id = self::COLLECTION_ID;
-        $entity = new Entity($this->db);
-        $entity->first_name = 'Foobar';
-        $entity->last_name = 'LastName';
-        $entity->id = self::ENTITY_ID;
-        // It queries the entity_relationships ID before running the DELETE query
-        // on entities_relations.
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createDeleteStatement(2));
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(
-                array(self::RELATIONSHIP_ID)
-            )
-        ));
-        $retVal = $this->collection->removeCollector($entity);
-        $this->profilerHelper->assertTotalNumQueries(2);
-        $this->profilerHelper->assertDbQuery("DELETE FROM entities_relations");
-        $this->assertTrue($retVal);
-    }
-    
+            
     public function testRemoveCollectorWhenHasNoCollectors()
     {
         $this->collection->id = self::COLLECTION_ID;
@@ -167,32 +128,5 @@ class CollectionTest extends PHPUnit_Framework_TestCase
             )
         ));
         $this->assertFalse($this->collection->removeCollector($entity));
-    }
-    
-    public function testAddCollectorByEntity()
-    {
-        $entity = new Entity($this->db);
-        $entity->first_name = 'Foobar';
-        $entity->last_name = 'LastName';
-        $entity->id = self::ENTITY_ID;
-        // Fake the results of 3 SQL statements, only one of which (the middle one)
-        // involves saving the entity relation.
-        // Note that this will probably break when collections are decoupled from
-        // entities.
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createInsertStatement(1));
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(array(self::ENTITY_RELATION_ID))
-        ));
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(array(self::RELATIONSHIP_ID))
-        ));
-        $this->collection->name = 'foobar';
-        $this->collection->addCollector($entity);
-        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
-        $this->collection->save();
-        // This should actually be a call to hasCollectors(), but that doesn't
-        // work, currently.
-        $this->profilerHelper->assertDbQuery("INSERT INTO `entities_relations`",
-            "Collection should have a collector added to it.");
-    }
+    }    
 }
