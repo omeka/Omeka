@@ -36,7 +36,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     public function testAddCollectorByString()
     {
         $this->collection->addCollector('John Smith');
-        $this->assertEquals(array('John Smith'), $this->collection->collectors);
+        $this->assertEquals(array('John Smith'), $this->collection->getCollectors());
     }
     
     public function testAddCollectorTrimsNameWhitespace()

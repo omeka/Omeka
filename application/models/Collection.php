@@ -33,7 +33,7 @@ class Collection extends Omeka_Record
     /**
      * @var array Strings containing the names of this collection's collectors.
      */
-    public $collectors = array();
+    public $collectors = '';
     
     /**
      * @var boolean Whether or not the collection is publicly accessible.
@@ -61,7 +61,7 @@ class Collection extends Omeka_Record
     public $owner_id = 0;
     
     protected $_related = array('Collectors' => 'getCollectors');
-        
+            
     protected function _initializeMixins()
     {
         $this->_mixins[] = new PublicFeatured($this);
@@ -90,21 +90,23 @@ class Collection extends Omeka_Record
     /**
      * Retrieve a list of all the collectors associated with this collection.
      * 
-     * @return array List of Entity records.
+     * @return array List of strings.
      */
     public function getCollectors()
     {
         if (is_string($this->collectors)) {
             if (trim($this->collectors) == '') {
-                $this->collectors = array();
+                return array();
             } else {
-                $this->collectors = explode(self::COLLECTOR_DELIMITER, $this->collectors);
-                $this->collectors = array_map('trim', $this->collectors);
+                $collectors = explode(self::COLLECTOR_DELIMITER, $this->collectors);
+                $collectors = array_map('trim', $collectors);
+                $collectors = array_diff($collectors, array(''));
+                $collectors = array_values($collectors);
+                return $collectors;
             }
         } else if (!is_array($this->collectors)) {
             throw new RuntimeException("Collectors must be either a string or an array.");
         }
-        return $this->collectors;
     }
 
     /**
@@ -151,8 +153,7 @@ class Collection extends Omeka_Record
     }
     
     /**
-     * Remove the association between a given collector Entity and the 
-     * collection.
+     * Disassociate a collector with this collection.
      * 
      * @param string
      * @return boolean Was successful or not.
@@ -194,27 +195,16 @@ class Collection extends Omeka_Record
         }
         $collectorName = trim($collectorName);
         if ($collectorName != '') {
-            $this->collectors[] = $collectorName;
+            $this->collectors .= ($this->collectors ? self::COLLECTOR_DELIMITER 
+                : ''). $collectorName;
         }
     }
     
     public function setCollectors(array $collectorList)
     {
-        $this->collectors = array();
+        $this->collectors = '';
         foreach ($collectorList as $key => $collector) {
             $this->addCollector($collector);
         }
-    }
-    
-    protected function beforeSave()
-    {
-        $this->_serializeCollectors();
-    }
-    
-    private function _serializeCollectors()
-    {
-        if (is_array($this->collectors)) {
-            $this->collectors = join(self::COLLECTOR_DELIMITER, $this->collectors);
-        }
-    }            
+    }    
 }
