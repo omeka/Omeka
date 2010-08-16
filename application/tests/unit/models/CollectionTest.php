@@ -168,5 +168,36 @@ class CollectionTest extends PHPUnit_Framework_TestCase
             )
         ));
         $this->assertFalse($this->collection->removeCollector($entity));
+    }
+    
+    public function testInsertSetsAddedDate()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->name = 'foobar';
+        $this->collection->save();
+        $this->assertNotNull($this->collection->added);
+        $this->assertThat(new Zend_Date($this->collection->added), $this->isInstanceOf('Zend_Date'),
+            "'added' column should contain a valid date (signified by validity as constructor for Zend_Date)");
+    }
+    
+    public function testInsertSetsModifiedDate()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->name = 'foobar';
+        $this->collection->save();
+        $this->assertNotNull($this->collection->modified);
+        $this->assertThat(new Zend_Date($this->collection->modified), $this->isInstanceOf('Zend_Date'),
+            "'modified' column should contain a valid date (signified by validity as constructor for Zend_Date)");        
+    }
+    
+    public function testUpdateSetsModifiedDate()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->id = self::COLLECTION_ID;
+        $this->collection->name = 'foobar';
+        $this->collection->save();
+        $this->assertNotNull($this->collection->modified);
+        $this->assertThat(new Zend_Date($this->collection->modified), $this->isInstanceOf('Zend_Date'),
+            "'modified' column should contain a valid date (signified by validity as constructor for Zend_Date)");
     }    
 }

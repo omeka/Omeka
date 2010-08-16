@@ -204,5 +204,16 @@ class Collection extends Omeka_Record
         foreach ($collectorList as $key => $collector) {
             $this->addCollector($collector);
         }
-    }    
+    } 
+    
+    protected function beforeInsert()
+    {
+        $this->added = Zend_Date::now()->toString(Zend_Date::ISO_8601);
+        $this->modified = Zend_Date::now()->toString(Zend_Date::ISO_8601);
+    }
+    
+    protected function beforeUpdate()
+    {
+        $this->modified = Zend_Date::now()->toString(Zend_Date::ISO_8601);
+    }   
 }
