@@ -176,10 +176,14 @@ class Collection extends Omeka_Record
     }
     
     /**
-     * Add a collector Entity to the collection.
+     * Add a collector to the collection.
+     *
+     * Note that prior versions of Omeka allowed for entering collector metadata
+     * as Entity records.  This behavior has been deprecated and removed in 
+     * Omeka >= 1.3.  Please use the new syntax, which is simply the string name
+     * for the collector.
      * 
      * @param string|Entity $collector
-     * 
      * @return void
      */
     public function addCollector($collector)
@@ -198,6 +202,11 @@ class Collection extends Omeka_Record
         }
     }
     
+    /**
+     * Set the list of collectors for this collection.
+     * 
+     * @param array List of string names of collectors.
+     */
     public function setCollectors(array $collectorList)
     {
         $this->collectors = '';
@@ -206,12 +215,18 @@ class Collection extends Omeka_Record
         }
     } 
     
+    /**
+     * Set added and modified timestamps for the collection.
+     */
     protected function beforeInsert()
     {
         $this->added = Zend_Date::now()->toString(Zend_Date::ISO_8601);
         $this->modified = Zend_Date::now()->toString(Zend_Date::ISO_8601);
     }
     
+    /**
+     * Set modified timestamp for the collection.
+     */
     protected function beforeUpdate()
     {
         $this->modified = Zend_Date::now()->toString(Zend_Date::ISO_8601);
