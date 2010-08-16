@@ -529,48 +529,9 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  *     'description' => [string], 
  *     'public'      => [true|false], 
  *     'featured'    => [true|false]
- *     'collectors'  => [array of entities, entity ids, or entity property arrays]
+ *     'collectors'  => [array of string names]
  * )</code>
  * 
- * You can specify collectors in several ways.
- *
- * You can provide an array of entity properties:
- * <code>
- * insert_collection(array('collectors' => array(
- *   array('first_name'  => $entityFirstName1,
- *         'middle_name' => $entityMiddleName1, 
- *         'last_name'   => $entityLastName1,
- *         ...
- *         ),
- *   array('first_name'  => $entityFirstName2,
- *         'middle_name' => $entityMiddleName2, 
- *         'last_name'   => $entityLastName2,
- *         ...
- *         ),
- *   array(...),
- *   ...
- * ));
- * </code>
- *
- * Alternatively, you can use an array of entity objects or entity ids.
- * <code>
- *  insert_collection(array('collectors' => array($entity1, $entity2, ...));
- *  insert_collection(array('collectors' => array($entityId1, $entityId2, ...));
- * </code>
- *
- * Also you can mix the parameters:
- * <code>
- * insert_collection(array('collectors' => array(
- *    array('first_name'  => $entityFirstName1,
- *          'middle_name' => $entityMiddleName1, 
- *          'last_name'   => $entityLastName1,
- *          ...
- *          ),
- *   $entity2,
- *   $entityId3,
- *   ...
- * ));
- * </code> 
  * @return Collection
  */
 function insert_collection($metadata = array())
