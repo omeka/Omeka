@@ -28,7 +28,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         parent::init();
         
         $this->setAttrib('id', 'change-password');
-        $this->addElement('text', 'current_password', 
+        $this->addElement('password', 'current_password',
             array(
                 'label'         => 'Current Password',
                 'required'      => true,
@@ -37,7 +37,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
             )
         );
         
-        $this->addElement('text', 'new_password',
+        $this->addElement('password', 'new_password',
             array(
                 'label'         => 'New Password',
                 'required'      => true,
@@ -71,7 +71,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                 )
             )
         );
-        $this->addElement('text', 'new_password_confirm',
+        $this->addElement('password', 'new_password_confirm',
             array(
                 'label'         => 'Repeat New Password',
                 'required'      => true,
