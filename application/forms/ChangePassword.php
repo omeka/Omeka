@@ -97,12 +97,6 @@ class Omeka_Form_ChangePassword extends Omeka_Form
     public function setUser(User $user)
     {
         $this->_user = $user;
-        
-        // Super users don't need to know the original password.
-        if ($this->_user->role == 'super') {
-            $this->removeElement('current_password');
-        } else {
-            $this->current_password->addValidator(new Omeka_Validate_UserPassword($this->_user));
-        }
+        $this->current_password->addValidator(new Omeka_Validate_UserPassword($this->_user));
     }
 }

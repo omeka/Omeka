@@ -223,6 +223,13 @@ class UsersController extends Omeka_Controller_Action
         $user = $this->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
+
+        $currentUser = $this->getCurrentUser();
+
+        // Super users don't need to know the current password.
+        if ($currentUser && $currentUser->role == 'super') {
+            $changePasswordForm->removeElement('current_password');
+        }
         
         $this->view->passwordForm = $changePasswordForm;
         $this->view->user = $user;        
@@ -243,7 +250,7 @@ class UsersController extends Omeka_Controller_Action
             if ($user->saveForm($_POST)) {
                 $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
                 
-                if ($user->id == $this->getCurrentUser()->id) {
+                if ($user->id == $currentUser->id) {
                     $this->_helper->redirector->gotoUrl('/');
                 } else {
                     $this->_helper->redirector->goto('browse');
