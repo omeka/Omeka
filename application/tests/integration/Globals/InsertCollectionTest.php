@@ -6,7 +6,7 @@
  * @package Omeka_Test
  **/
 
-class Models_InsertCollectionTest extends Omeka_Test_AppTestCase
+class Globals_InsertCollectionTest extends Omeka_Test_AppTestCase
 {
     private $_dbHelper;
     
