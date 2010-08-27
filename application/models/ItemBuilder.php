@@ -62,6 +62,29 @@ class ItemBuilder extends Omeka_Record_Builder
     }
     
     /**
+     * Overrides setRecordMetadata() to allow setting the item type by name
+     * instead of ID.
+     * 
+     * @param array $metadata
+     * @return void
+     */
+    public function setRecordMetadata(array $metadata)
+    {
+        // Determine the Item Type ID from the name.
+        if (array_key_exists(self::ITEM_TYPE_NAME, $metadata)) {
+            $itemType = $this->_db->getTable('ItemType')
+                                  ->findBySql('name = ?', 
+                                              array($metadata[self::ITEM_TYPE_NAME]), 
+                                              true);
+            if(!$itemType) {
+                throw new Omeka_Record_Builder_Exception( "Invalid type named {$metadata[self::ITEM_TYPE_NAME]} provided!");
+            }            
+            $metadata[self::ITEM_TYPE_ID] = $itemType->id;
+        }
+        return parent::setRecordMetadata($metadata);
+    }
+    
+    /**
      * Add element texts to a record.
      */            
     private function _addElementTexts()
@@ -251,23 +274,5 @@ class ItemBuilder extends Omeka_Record_Builder
         and !empty($metadata[self::TAGS])) {
             $this->_addTags();
         }
-    }
-    
-    /**
-     * Determine the item_type_id value from 'item_type_name', if given.
-     */
-    protected function _parseMetadataOptions(array $itemMetadata)
-    {
-        // Determine the Item Type ID from the name.
-        if (array_key_exists(self::ITEM_TYPE_NAME, $itemMetadata)) {
-            $itemType = get_db()->getTable('ItemType')->findBySql('name = ?', array($itemMetadata[self::ITEM_TYPE_NAME]), true);
-
-            if(!$itemType) {
-                throw new Omeka_Record_Builder_Exception( "Invalid type named {$itemMetadata[self::ITEM_TYPE_NAME]} provided!");
-            }
-            
-            $itemMetadata[self::ITEM_TYPE_ID] = $itemType->id;
-        }
-        return $itemMetadata;
-    }
+    }    
 }
