@@ -216,6 +216,21 @@ class Collection extends Omeka_Record
     } 
     
     /**
+     * Set the user who added the collection.
+     * 
+     * Note that this is not to be confused with the collection's "collectors".
+     * 
+     * @param User $user
+     */
+    public function setAddedBy(User $user)
+    {
+        if (!$user->exists()) {
+            throw new RuntimeException("Cannot associate the collection with an unsaved user.");
+        }
+        $this->owner_id = $user->id;
+    }
+    
+    /**
      * Set added and modified timestamps for the collection.
      */
     protected function beforeInsert()

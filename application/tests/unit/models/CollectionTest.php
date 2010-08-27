@@ -18,6 +18,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     const ENTITY_ID = 2;
     const RELATIONSHIP_ID = 3;
     const ENTITY_RELATION_ID = 4;
+    const USER_ID = 5;
     
     public function setUp()
     {
@@ -199,5 +200,24 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($this->collection->modified);
         $this->assertThat(new Zend_Date($this->collection->modified), $this->isInstanceOf('Zend_Date'),
             "'modified' column should contain a valid date (signified by validity as constructor for Zend_Date)");
+    }
+    
+    public function testSetAddedByFailsWithNonpersistedUser()
+    {
+        try {
+            $this->collection->setAddedBy(new User($this->db));
+            $this->fail("Should have thrown an exception when associating the collection with a user that does not exist.");
+        } catch (Exception $e) {
+            $this->assertThat($e, $this->isInstanceOf('RuntimeException'), $e->getMessage());
+            $this->assertContains("unsaved user", $e->getMessage());
+        }
+    }
+    
+    public function testSetAddedByUser()
+    {
+        $user = new User($this->db);
+        $user->id = self::USER_ID;
+        $this->collection->setAddedBy($user);
+        $this->assertEquals(self::USER_ID, $this->collection->owner_id);
     }    
 }
