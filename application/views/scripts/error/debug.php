@@ -1,4 +1,4 @@
-<?php head(array('title' => 'Debug', 'bodyclass' => 'debug')); ?>
+<?php head(array('title' => 'Debug', 'bodyclass' => 'debug', 'bodyid' => 'debug')); ?>
 
 <style type="text/css" media="screen">
     #wrap {
