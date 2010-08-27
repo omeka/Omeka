@@ -63,7 +63,7 @@ abstract class Omeka_Record_Builder
     public function build()
     {
         $record = $this->getRecord();
-        $record->setArray($this->getRecordMetadata());
+        $this->_setRecordProperties($record);
         $this->_beforeBuild($record);
         $record->forceSave();
         $this->_afterBuild($record);
@@ -81,7 +81,7 @@ abstract class Omeka_Record_Builder
      */
     public function setRecordMetadata(array $metadata)
     {
-        $this->_metadataOptions = array_intersect_key($metadata, array_flip($this->_settableProperties));
+        $this->_metadataOptions = $metadata;
     }
     
     /**
@@ -172,4 +172,17 @@ abstract class Omeka_Record_Builder
     {
         return $metadata;
     }    
+    
+    /**
+     * Set the properties for the record, taking care to filter based on the 
+     * $_settableProperties array.
+     * 
+     * @param Omeka_Record $record
+     * @return void
+     */
+    private function _setRecordProperties($record)
+    {
+        $properties = array_intersect_key($this->getRecordMetadata(), array_flip($this->_settableProperties));
+        $record->setArray($properties);
+    }
 }
