@@ -16,7 +16,14 @@
  */
 class CollectionBuilder extends Omeka_Record_Builder
 {
-    protected $_settableProperties = array('name', 'description', 'public', 'featured');
+    protected $_settableProperties = array(
+        'name', 
+        'description', 
+        'public', 
+        'featured',
+        'owner_id'
+    );
+    
     protected $_recordClass = 'Collection';
     
     /**
