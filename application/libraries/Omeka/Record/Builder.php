@@ -161,19 +161,6 @@ abstract class Omeka_Record_Builder
     {}
         
     /**
-     * May be overridden by subclasses to clean up the input instructions.
-     * 
-     * Throw exceptions here to indicate invalid arguments provided.
-     *
-     * @param array $metadata
-     * @return array
-     */
-    protected function _parseMetadataOptions(array $metadata)
-    {
-        return $metadata;
-    }    
-    
-    /**
      * Set the properties for the record, taking care to filter based on the 
      * $_settableProperties array.
      * 
