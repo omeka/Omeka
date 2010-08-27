@@ -22,4 +22,22 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->assertAction('add');
         $this->assertQuery("input#name");
     }
+    
+    public function testOwnerIdSetForNewCollections()
+    {
+        $user = $this->_getDefaultUser();
+        $this->_authenticateUser($user);
+        $this->request->setPost(array(
+            'name' => 'foobar',
+            'description' => 'baz'
+        ));
+        $this->request->setMethod('post');
+        $this->dispatch('collections/add');
+        $this->assertRedirect();
+        $collections = $this->db->getTable('Collection')->findAll();
+        $this->assertEquals(1, count($collections));
+        $this->assertThat($collections[0], $this->isInstanceOf('Collection'));
+        $this->assertNotEquals(0, $collections[0]->owner_id,
+            "The collection's owner_id should have been set when saving the form.");
+    }
 }

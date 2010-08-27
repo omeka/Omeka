@@ -175,6 +175,10 @@ class Collection extends Omeka_Record
             $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
             $this->setCollectors($collectors);
         }
+        
+        if ($user = Omeka_Context::getInstance()->getCurrentUser()) {
+            $this->setAddedBy($user);
+        }
     }
     
     /**
