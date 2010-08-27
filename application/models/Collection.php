@@ -174,11 +174,7 @@ class Collection extends Omeka_Record
             $collectorPost = (string)$post['collectors'];
             $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
             $this->setCollectors($collectors);
-        }
-        
-        if ($user = Omeka_Context::getInstance()->getCurrentUser()) {
-            $this->setAddedBy($user);
-        }
+        }        
     }
     
     /**
@@ -243,6 +239,9 @@ class Collection extends Omeka_Record
     {
         $this->added = Zend_Date::now()->toString(Zend_Date::ISO_8601);
         $this->modified = Zend_Date::now()->toString(Zend_Date::ISO_8601);
+        if (!$this->owner_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
+            $this->setAddedBy($user);
+        }
     }
     
     /**
