@@ -41,11 +41,24 @@ class ItemBuilder extends Omeka_Record_Builder
     private $_elementTexts = array();
     private $_fileMetadata = array();
     
-    public function __construct($metadata = array(), $elementTexts = array(), $fileMetadata = array(), $record = null)
+    /**
+     * Set the element texts for the item.
+     * 
+     * @param array $elementTexts
+     */    
+    public function setElementTexts(array $elementTexts)
     {
         $this->_elementTexts = $elementTexts;
+    }
+    
+    /**
+     * Set the file metadata for the item.
+     * 
+     * @param array $fileMetadata
+     */
+    public function setFileMetadata(array $fileMetadata)
+    {
         $this->_fileMetadata = $fileMetadata;
-        parent::__construct($metadata, $record);
     }
     
     /**
@@ -206,7 +219,7 @@ class ItemBuilder extends Omeka_Record_Builder
     protected function _beforeBuild()
     {
         if ($this->_record->exists() 
-        and array_key_exists(self::OVERWRITE_ELEMENT_TEXTS, $this->_metadataOptions)) {
+        and array_key_exists(self::OVERWRITE_ELEMENT_TEXTS, $this->getRecordMetadata())) {
             $this->_replaceElementTexts();
         } else {
             $this->_addElementTexts();
@@ -232,9 +245,10 @@ class ItemBuilder extends Omeka_Record_Builder
      */
     protected function _afterBuild()
     {
+        $metadata = $this->getRecordMetadata();
         // Must take place after save().
-        if (array_key_exists(self::TAGS, $this->_metadataOptions) 
-        and !empty($this->_metadataOptions[self::TAGS])) {
+        if (array_key_exists(self::TAGS, $metadata) 
+        and !empty($metadata[self::TAGS])) {
             $this->_addTags();
         }
     }

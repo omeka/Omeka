@@ -18,22 +18,29 @@ class ElementSetBuilder extends Omeka_Record_Builder
     protected $_recordClass = 'ElementSet';
     
     private $_elementInfo = array();
+        
+    /**
+     * Set the elements to add to the element set.
+     * 
+     * @param array $elements
+     */
+    public function setElements(array $elements)
+    {
+        $this->_elementInfo = $elements;
+    }
     
     /**
-     * Constructor.
+     * Overrides setRecordMetadata() to allow giving the name of the element as
+     * a string.
      * 
-     * @param array|string $metadata Metadata for the element set, or string
-     * name of the element set.
-     * @param array $elements
-     * @param Omeka_Record|null
+     * @param string|array $metadata
      */
-    public function __construct($metadata = array(), $elements = array(), $record = null)
+    public function setRecordMetadata($metadata)
     {
         if (is_string($metadata)) {
             $metadata = array('name'=>$metadata);
         }
-        $this->_elementInfo = $elements;
-        parent::__construct($metadata, $record);
+        return parent::setRecordMetadata($metadata);
     }
     
     /**
@@ -43,22 +50,5 @@ class ElementSetBuilder extends Omeka_Record_Builder
     {        
         // Add elements to the element set.
         $this->_record->addElements($this->_elementInfo);
-    }
-    
-    /**
-     * Ensure that the element set name has been provided, trim whitespace from
-     * name and description fields.
-     */
-    protected function _parseMetadataOptions(array $metadata)
-    {
-        if (!isset($metadata['name'])) {
-            throw new Omeka_Record_Exception('An element set name was not given.');
-        }
-
-        // Trim whitespace from all array elements.
-        $metadata['name'] = trim($metadata['name']);
-        $metadata['description'] = trim($metadata['description']);
-        
-        return $metadata;
-    }
+    }    
 }
