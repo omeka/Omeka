@@ -37,13 +37,18 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('description'=>'foobar'), $builder->getRecordMetadata());
     }
     
-    public function testSetRecordMetadataIgnoresUnsettableColumns()
+    public function testBuildIgnoresUnsettableRecordColumns()
     {
+        $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $builder = new DummyRecordBuilder($this->db);
+        $builder->setTest($this);
         $builder->setRecordMetadata(array(
-            'id' => 1
+            'id' => 3,
+            'shazbot' => true
         ));
-        $this->assertEquals(array(), $builder->getRecordMetadata());
+        $record = $builder->build();
+        $this->assertFalse(isset($record->shazbot));
+        $this->assertNotEquals(3, $record->id);
     }
     
     public function testGetRecordReturnsUnsavedRecord()
