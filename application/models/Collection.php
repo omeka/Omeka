@@ -170,9 +170,11 @@ class Collection extends Omeka_Record
     protected function beforeSaveForm($post)
     {
         // Process the collectors that have been provided on the form
-        $collectorPost = (string)$post['collectors'];
-        $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
-        $this->setCollectors($collectors);
+        if (isset($post['collectors'])) {
+            $collectorPost = (string)$post['collectors'];
+            $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
+            $this->setCollectors($collectors);
+        }
     }
     
     /**
