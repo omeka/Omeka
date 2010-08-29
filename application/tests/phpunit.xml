@@ -1,7 +1,8 @@
 <phpunit bootstrap="bootstrap.php"
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true"
-         convertNoticesToExceptions="true">
+         convertNoticesToExceptions="true"
+         backupGlobals="true">
     <testsuite name="AllTests">
         <file>AllTests.php</file>
     </testsuite>    
