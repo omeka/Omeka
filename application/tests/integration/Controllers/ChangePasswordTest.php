@@ -67,7 +67,6 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     {
         $newUser = $this->_addNewUserWithRole('contributor');
         $this->dispatch('/users/edit/' . $newUser->id);
-exit;        
         $this->assertNotController('users');
         $this->assertNotAction('edit');
     }
