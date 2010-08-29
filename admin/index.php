@@ -23,6 +23,16 @@ include '../paths.php';
 define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . $site['admin_theme']);
 
 $app = new Omeka_Core;
+// Configure the Theme bootstrap resource with the correct paths/URLs.
+$app->getBootstrap()->setOptions(array(
+    'resources' => array(
+        'theme' => array(
+            'basePath' => THEME_DIR,
+            'webBasePath' => WEB_THEME
+        )
+    )
+));
+
 $app->initialize();
 
 // This plugin allows for all functionality that is specific to the 

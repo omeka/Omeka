@@ -35,7 +35,7 @@ abstract class Omeka_Record_Builder
      *
      * @var array
      */
-    protected $_metadataOptions = array();
+    private $_metadataOptions = array();
     
     /**
      * Record being built or updated.
@@ -45,14 +45,13 @@ abstract class Omeka_Record_Builder
     protected $_record;    
     
     /**
-     * @param array $metadata Metadata options for the builder subclass.
-     * @param integer|Omeka_Record|null $record (optional) An Omeka_Record
-     * instance (or id) to update, rather than creating a new one.
+     * @var Omeka_Db
      */
-    public function __construct($metadata = array(), $record = null)
+    protected $_db;
+    
+    public function __construct(Omeka_Db $db)
     {
-        $this->_record = $this->_findOrBuildRecord($record);
-        $this->_metadataOptions = $this->_parseMetadataOptions($metadata);
+        $this->_db = $db;
     }
     
     /**
@@ -63,21 +62,91 @@ abstract class Omeka_Record_Builder
      */    
     public function build()
     {
-        $this->_setRecordProperties();
-        $this->_beforeBuild();
-        $this->_record->forceSave();
-        $this->_afterBuild();        
+        $record = $this->getRecord();
+        $this->_setRecordProperties($record);
+        $this->_beforeBuild($record);
+        $record->forceSave();
+        $this->_afterBuild($record);
+        return $record;        
+    }
+    
+    /**
+     * Set basic metadata for the record. 
+     * 
+     * Note that the columns to be set must be specified in the $_settableProperties
+     * property of subclassed Builders.
+     * 
+     * @param array $metadata
+     * @return void
+     */
+    public function setRecordMetadata(array $metadata)
+    {
+        $this->_metadataOptions = $metadata;
+    }
+    
+    /**
+     * Get the metadata that will be saved to the record.
+     * 
+     * @return array
+     */
+    public function getRecordMetadata()
+    {
+        return $this->_metadataOptions;
+    }
+
+    /**
+     * Get the record that is being acted upon by the builder.
+     * 
+     * When an Omeka_Record instance has been provided via setRecord(), that will
+     * be returned.  If a record ID has been provided, then the appropriate 
+     * record will be returned.
+     * 
+     * Otherwise, a new instance of Omeka_Record will be returned.
+     * 
+     * @return Omeka_Record
+     */
+    public function getRecord()
+    {        
+        if (!($this->_record instanceof Omeka_Record)) {
+            $this->setRecord($this->_record);
+        }
         return $this->_record;
     }
     
     /**
-     * All necessary tasks to take place before the record has been inserted.
+     * Set the record upon which this builder will act.
+     * 
+     * @see Omeka_Record_Builder::getRecord()
+     * @param Omeka_Record|integer|null $record
+     * @return void
+     */
+    public function setRecord($record = null)
+    {
+        if ($record === null) {
+            $this->_record = new $this->_recordClass($this->_db);        
+        } else if ($record instanceof Omeka_Record) {
+            if (!($record instanceof $this->_recordClass)) {
+                throw new Omeka_Record_Builder_Exception("Incorrect record instance given.  Must be instance of '$this->_recordClass'.");
+            }
+            $this->_record = $record;
+        } else if (is_int($record)) {
+            $this->_record = $this->_db->getTable($this->_recordClass)->find($record);
+            if (!$this->_record) {
+                throw new Omeka_Record_Builder_Exception("Could not find record with ID = " . $record);
+            }
+        } else {
+            throw new InvalidArgumentException("Argument passed to setRecord() must be Omeka_Record, integer, or null.");
+        }
+    }
+    
+    /**
+     * All necessary tasks to take place before the record is inserted.
      * 
      * Exceptions may be thrown, validation errors may be added.
      *
      * @return void
      */
-    protected function _beforeBuild()
+    protected function _beforeBuild(Omeka_Record $record)
     {}
     
     /**
@@ -88,60 +157,19 @@ abstract class Omeka_Record_Builder
      *
      * @return void
      */
-    protected function _afterBuild()
+    protected function _afterBuild(Omeka_Record $record)
     {}
-    
+        
     /**
-     * All metadata properties for the record should be in the top level of the
-     * array.
-     *
+     * Set the properties for the record, taking care to filter based on the 
+     * $_settableProperties array.
+     * 
+     * @param Omeka_Record $record
      * @return void
      */
-    private function _setRecordProperties()
+    private function _setRecordProperties($record)
     {
-        foreach ($this->_settableProperties as $propName) {
-            if (array_key_exists($propName, $this->_metadataOptions)) {
-                $this->_record->$propName = $this->_metadataOptions[$propName];
-            }
-        }
-    }
-    
-    /**
-     * May be overridden by subclasses to clean up the input instructions.
-     * 
-     * Throw exceptions here to indicate invalid arguments provided.
-     *
-     * @param array $metadata
-     * @return array
-     */
-    protected function _parseMetadataOptions(array $metadata)
-    {
-        return $metadata;
-    }
-    
-    /**
-     * Create a new record instance or retrieve an existing instance from the 
-     * database.
-     *
-     * @param integer|Omeka_Record|null $record
-     * @return Omeka_Record The source of the returned record varies depending
-     * on the type of the $record argument passed:
-     * - Omeka_Record: Return the passed $record directly.
-     * - integer: Look up the record with the specified ID in the database.
-     * - null or invalid: Create a new record.
-     */
-    private function _findOrBuildRecord($record)
-    {
-        if ($record instanceof Omeka_Record) {
-            return $record;
-        } else if (is_int($record)){
-            $recordObj = get_db()->getTable($this->_recordClass)->find($record);
-            if (!$recordObj) {
-                throw new Omeka_Record_Builder_Exception("Could not find record with ID=" . $record);
-            }
-            return $recordObj;
-        } else {
-            return new $this->_recordClass;
-        }
+        $properties = array_intersect_key($this->getRecordMetadata(), array_flip($this->_settableProperties));
+        $record->setArray($properties);
     }
 }

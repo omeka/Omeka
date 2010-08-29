@@ -264,20 +264,23 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
     if (!$uri) {
         $uri = apply_filters('simple_search_default_uri', uri('items/browse'));
     }
-        
+    
+    $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';    
     $formProperties['action'] = $uri;
     $formProperties['method'] = 'get';
     $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
     $html .= '<fieldset>' . "\n\n";
-    $html .= __v()->formText('search', $_REQUEST['search'], array('name'=>'textinput','class'=>'textinput'));
+    $html .= __v()->formText('search', $searchQuery, array('name'=>'textinput','class'=>'textinput'));
     $html .= __v()->formSubmit('submit_search', $buttonText);
     $html .= '</fieldset>' . "\n\n";
     
     // add hidden fields for the get parameters passed in uri
     $parsedUri = parse_url($uri);
-    parse_str($parsedUri['query'], $getParams);
-    foreach($getParams as $getParamName => $getParamValue) {    
-        $html .= __v()->formHidden($getParamName, $getParamValue); 
+    if (array_key_exists('query', $parsedUri)) {
+        parse_str($parsedUri['query'], $getParams);
+        foreach($getParams as $getParamName => $getParamValue) {    
+            $html .= __v()->formHidden($getParamName, $getParamValue); 
+        }
     }
     
     $html .= '</form>';

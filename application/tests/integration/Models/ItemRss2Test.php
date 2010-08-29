@@ -14,6 +14,8 @@
  */
 class Omeka_Model_ItemRss2Test extends Omeka_Test_AppTestCase
 {
+    protected $_useAdminViews = false;
+    
     public function setUp()
     {
         parent::setUp();
@@ -28,6 +30,14 @@ class Omeka_Model_ItemRss2Test extends Omeka_Test_AppTestCase
         $files = insert_files_for_item($item, 'Filesystem', array($fileUrl));
         
         $_SERVER['HTTP_HOST'] = 'localhost';
+    }
+    
+    public function assertPreConditions()
+    {
+        $this->assertEquals(1, $this->db->getTable('Item')->count(),
+            "There should be one item in the database.");
+        $this->assertEquals(1, $this->db->getTable('File')->count(),
+            "There should be one file in the database.");
     }
     
     public function testCanGetValidItemRss2Output()
@@ -63,7 +73,9 @@ class Omeka_Model_ItemRss2Test extends Omeka_Test_AppTestCase
     {
         // Delete the physical files that were ingested in setUp().
         $testFile = $this->db->getTable('File')->find(1);
-        $testFile->delete();
+        if ($testFile instanceof File) {
+            $testFile->delete();
+        }
         parent::tearDown();
     }
 }

@@ -224,11 +224,8 @@ function admin_uri()
  **/
 function abs_uri()
 {
-    // Create base URL
-    $base_root = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
-    $base_root .= '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);    
     $args = func_get_args();
-    return $base_root . call_user_func_array('uri', $args);
+    return __v()->serverUrl() . call_user_func_array('uri', $args);
 }
 
 /**

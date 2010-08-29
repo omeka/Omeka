@@ -16,7 +16,14 @@
  */
 class CollectionBuilder extends Omeka_Record_Builder
 {
-    protected $_settableProperties = array('name', 'description', 'public', 'featured');
+    protected $_settableProperties = array(
+        'name', 
+        'description', 
+        'public', 
+        'featured',
+        'owner_id'
+    );
+    
     protected $_recordClass = 'Collection';
     
     /**
@@ -24,9 +31,11 @@ class CollectionBuilder extends Omeka_Record_Builder
      */
     protected function _beforeBuild()
     {
-        if (array_key_exists('collectors', $this->_metadataOptions)) {
-            foreach($this->_metadataOptions['collectors'] as $collector) {
-                $this->_record->addCollector($collector);
+        $metadata = $this->getRecordMetadata();
+        if (array_key_exists('collectors', $metadata)) {
+            $record = $this->getRecord();
+            foreach($metadata['collectors'] as $collector) {
+                $record->addCollector($collector);
             }
         }
     }

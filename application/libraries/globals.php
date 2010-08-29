@@ -441,8 +441,10 @@ function is_admin_theme()
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {    
-    // Passing null means this will create a new item.
-    $builder = new ItemBuilder($metadata, $elementTexts, $fileMetadata);
+    $builder = new ItemBuilder(get_db());
+    $builder->setRecordMetadata($metadata);
+    $builder->setElementTexts($elementTexts);
+    $builder->setFileMetadata($fileMetadata);
     return $builder->build();
 }
 
@@ -459,9 +461,9 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  */
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
 {
-    // TODO: Maybe this should be a separate helper class.
-    $helper = new ItemBuilder(array(), array(), array(), $item);
-    return $helper->addFiles($transferStrategy, $files, $options);
+    $builder = new ItemBuilder(get_db());
+    $builder->setRecord($item);
+    return $builder->addFiles($transferStrategy, $files, $options);
 }
 
 /**
@@ -477,7 +479,11 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  */
 function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $builder = new ItemBuilder($metadata, $elementTexts, $fileMetadata, $item);
+    $builder = new ItemBuilder(get_db());
+    $builder->setRecord($item);
+    $builder->setRecordMetadata($metadata);
+    $builder->setElementTexts($elementTexts);
+    $builder->setFileMetadata($fileMetadata);
     return $builder->build();
 }
 
@@ -516,7 +522,9 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  */
 function insert_item_type($metadata = array(), $elementInfos = array()) 
 {
-    $builder = new ItemTypeBuilder($metadata, $elementInfos);    
+    $builder = new ItemTypeBuilder(get_db());
+    $builder->setRecordMetadata($metadata);
+    $builder->setElements($elementInfos);    
     return $builder->build();
 }
 
@@ -529,53 +537,15 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  *     'description' => [string], 
  *     'public'      => [true|false], 
  *     'featured'    => [true|false]
- *     'collectors'  => [array of entities, entity ids, or entity property arrays]
+ *     'collectors'  => [array of string names]
  * )</code>
  * 
- * You can specify collectors in several ways.
- *
- * You can provide an array of entity properties:
- * <code>
- * insert_collection(array('collectors' => array(
- *   array('first_name'  => $entityFirstName1,
- *         'middle_name' => $entityMiddleName1, 
- *         'last_name'   => $entityLastName1,
- *         ...
- *         ),
- *   array('first_name'  => $entityFirstName2,
- *         'middle_name' => $entityMiddleName2, 
- *         'last_name'   => $entityLastName2,
- *         ...
- *         ),
- *   array(...),
- *   ...
- * ));
- * </code>
- *
- * Alternatively, you can use an array of entity objects or entity ids.
- * <code>
- *  insert_collection(array('collectors' => array($entity1, $entity2, ...));
- *  insert_collection(array('collectors' => array($entityId1, $entityId2, ...));
- * </code>
- *
- * Also you can mix the parameters:
- * <code>
- * insert_collection(array('collectors' => array(
- *    array('first_name'  => $entityFirstName1,
- *          'middle_name' => $entityMiddleName1, 
- *          'last_name'   => $entityLastName1,
- *          ...
- *          ),
- *   $entity2,
- *   $entityId3,
- *   ...
- * ));
- * </code> 
  * @return Collection
  */
 function insert_collection($metadata = array())
 {
-    $builder = new CollectionBuilder($metadata);
+    $builder = new CollectionBuilder(get_db());
+    $builder->setRecordMetadata($metadata);
     return $builder->build();
 }
 
@@ -614,7 +584,9 @@ function insert_collection($metadata = array())
  */
 function insert_element_set($elementSetMetadata = array(), array $elements = array())
 {
-    $builder = new ElementSetBuilder($elementSetMetadata, $elements);
+    $builder = new ElementSetBuilder(get_db());
+    $builder->setRecordMetadata($elementSetMetadata);
+    $builder->setElements($elements);
     return $builder->build();
 }
 

@@ -18,6 +18,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     const ENTITY_ID = 2;
     const RELATIONSHIP_ID = 3;
     const ENTITY_RELATION_ID = 4;
+    const USER_ID = 5;
     
     public function setUp()
     {
@@ -33,9 +34,43 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->collection->hasCollectors());
     }
     
+    public function testAddCollectorByString()
+    {
+        $this->collection->addCollector('John Smith');
+        $this->assertEquals(array('John Smith'), $this->collection->getCollectors());
+    }
+    
+    public function testAddCollectorTrimsNameWhitespace()
+    {
+        $this->collection->addCollector('     John Smith        ');
+        $this->assertEquals(array('John Smith'), $this->collection->getCollectors());
+    }   
+    
+    public function testAddNonStringCollectorThrowsException()
+    {
+        try {
+            $this->collection->addCollector(new Zend_Acl_Resource('whatever'));
+            $this->fail("Should have thrown an exception when adding collector.");
+        } catch (Exception $e) {
+            $this->assertThat($e, $this->isInstanceOf('InvalidArgumentException'));
+        }
+    }
+    
+    public function testAddEmptyCollector()
+    {   
+        $this->collection->addCollector('');
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+
+    public function testAddWhitespaceCollector()
+    {
+        $this->collection->addCollector('           ');
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+    
     public function testHasSomeCollectors()
     {
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(array(array(1))));        
+        $this->collection->addCollector('John Smith');
         $this->assertTrue($this->collection->hasCollectors());
     }
     
@@ -56,24 +91,49 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $this->collection->getCollectors());
     }
     
-    public function testGetCollectorEntities()
+    public function testGetCollectorsAsStringsWithoutSaving()
     {
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(
-                array(
-                    'first_name' => 'Foobar',
-                    'last_name' => 'Foobar',
-                    'institution' => 'Whatever, Inc.',
-                    'email' => 'foobar@example.com',
-                )
-            )
-        ));                
-        $this->collection->id = self::COLLECTION_ID;
-        $entities = $this->collection->getCollectors();
-        $this->assertEquals(1, count($entities));
-        $this->assertThat($entities[0], $this->isInstanceOf('Entity'));
+        $this->collection->addCollector('John Smith');
+        $this->collection->addCollector('Jerry Garcia');
+        $this->collection->addCollector('Donald Duck');
+        $this->assertEquals(array('John Smith', 'Jerry Garcia', 'Donald Duck'),
+            $this->collection->getCollectors());
     }
-            
+    
+    public function testSavingSerializesCollectorNames()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);        
+        $this->collection->name = 'foobar';
+        $this->collection->addCollector('John Smith');
+        $this->collection->addCollector('Super Hans');
+        $this->collection->save();
+        $this->assertEquals("John Smith\nSuper Hans",
+            $this->collection->collectors);
+    }
+    
+    public function testGetCollectorsAsStringsAfterSaving()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->name = 'foobar';
+        $this->collection->addCollector('John Smith');
+        $this->collection->addCollector('Super Hans');
+        $this->collection->forceSave();   
+        $this->assertEquals(array('John Smith', 'Super Hans'),
+            $this->collection->getCollectors());
+    }
+    
+    public function testEmptyCollectorsStringMeansNoCollectors()
+    {
+        $this->collection->collectors = '';
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+    
+    public function testWhitespaceCollectorsStringMeansNoCollectors()
+    {
+        $this->collection->collectors = '        ';
+        $this->assertFalse($this->collection->hasCollectors());
+    }
+                    
     public function testDefaultCollectionNameNotValid()
     {
         $this->assertFalse($this->collection->isValid());
@@ -94,28 +154,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->collection->name = str_repeat('b', 150);
         $this->assertTrue($this->collection->isValid());
     }
-        
-    public function testRemoveCollectorByEntity()
-    {   
-        $this->collection->id = self::COLLECTION_ID;
-        $entity = new Entity($this->db);
-        $entity->first_name = 'Foobar';
-        $entity->last_name = 'LastName';
-        $entity->id = self::ENTITY_ID;
-        // It queries the entity_relationships ID before running the DELETE query
-        // on entities_relations.
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createDeleteStatement(2));
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(
-                array(self::RELATIONSHIP_ID)
-            )
-        ));
-        $retVal = $this->collection->removeCollector($entity);
-        $this->profilerHelper->assertTotalNumQueries(2);
-        $this->profilerHelper->assertDbQuery("DELETE FROM entities_relations");
-        $this->assertTrue($retVal);
-    }
-    
+            
     public function testRemoveCollectorWhenHasNoCollectors()
     {
         $this->collection->id = self::COLLECTION_ID;
@@ -132,30 +171,53 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->collection->removeCollector($entity));
     }
     
-    public function testAddCollectorByEntity()
+    public function testInsertSetsAddedDate()
     {
-        $entity = new Entity($this->db);
-        $entity->first_name = 'Foobar';
-        $entity->last_name = 'LastName';
-        $entity->id = self::ENTITY_ID;
-        // Fake the results of 3 SQL statements, only one of which (the middle one)
-        // involves saving the entity relation.
-        // Note that this will probably break when collections are decoupled from
-        // entities.
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createInsertStatement(1));
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(array(self::ENTITY_RELATION_ID))
-        ));
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(array(self::RELATIONSHIP_ID))
-        ));
-        $this->collection->name = 'foobar';
-        $this->collection->addCollector($entity);
         $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->name = 'foobar';
         $this->collection->save();
-        // This should actually be a call to hasCollectors(), but that doesn't
-        // work, currently.
-        $this->profilerHelper->assertDbQuery("INSERT INTO `entities_relations`",
-            "Collection should have a collector added to it.");
+        $this->assertNotNull($this->collection->added);
+        $this->assertThat(new Zend_Date($this->collection->added), $this->isInstanceOf('Zend_Date'),
+            "'added' column should contain a valid date (signified by validity as constructor for Zend_Date)");
     }
+    
+    public function testInsertSetsModifiedDate()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->name = 'foobar';
+        $this->collection->save();
+        $this->assertNotNull($this->collection->modified);
+        $this->assertThat(new Zend_Date($this->collection->modified), $this->isInstanceOf('Zend_Date'),
+            "'modified' column should contain a valid date (signified by validity as constructor for Zend_Date)");        
+    }
+    
+    public function testUpdateSetsModifiedDate()
+    {
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
+        $this->collection->id = self::COLLECTION_ID;
+        $this->collection->name = 'foobar';
+        $this->collection->save();
+        $this->assertNotNull($this->collection->modified);
+        $this->assertThat(new Zend_Date($this->collection->modified), $this->isInstanceOf('Zend_Date'),
+            "'modified' column should contain a valid date (signified by validity as constructor for Zend_Date)");
+    }
+    
+    public function testSetAddedByFailsWithNonpersistedUser()
+    {
+        try {
+            $this->collection->setAddedBy(new User($this->db));
+            $this->fail("Should have thrown an exception when associating the collection with a user that does not exist.");
+        } catch (Exception $e) {
+            $this->assertThat($e, $this->isInstanceOf('RuntimeException'), $e->getMessage());
+            $this->assertContains("unsaved user", $e->getMessage());
+        }
+    }
+    
+    public function testSetAddedByUser()
+    {
+        $user = new User($this->db);
+        $user->id = self::USER_ID;
+        $this->collection->setAddedBy($user);
+        $this->assertEquals(self::USER_ID, $this->collection->owner_id);
+    }    
 }

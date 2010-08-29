@@ -19,11 +19,16 @@ class ItemTypeBuilder extends Omeka_Record_Builder
     protected $_settableProperties = array('name', 'description');
     
     private $_elements = array();
-    
-    public function __construct($metadata = array(), $elements = array(), $record = null)
+        
+    /**
+     * Set the elements that will be attached to the built ItemType record.
+     * 
+     * @param array $elementMetadata
+     * @return void
+     */
+    public function setElements(array $elementMetadata)
     {
-        $this->_elements = $elements;
-        parent::__construct($metadata, $record);
+        $this->_elements = $elementMetadata;
     }
     
     /**
