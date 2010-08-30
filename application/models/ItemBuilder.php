@@ -130,9 +130,15 @@ class ItemBuilder extends Omeka_Record_Builder
     {
         // As of 0.10 we still need to tag for a specific entity.
         // This may change in future versions.
-        $entityToTag = array_key_exists(self::TAG_ENTITY, $this->_metadataOptions) ?
-            $this->_metadataOptions[self::TAG_ENTITY] : current_user()->Entity;
-        $this->_record->addTags($this->_metadataOptions[self::TAGS], $entityToTag);
+        $metadata = $this->getRecordMetadata();
+        if (array_key_exists(self::TAG_ENTITY, $metadata)) {
+            $entity = $metadata[self::TAG_ENTITY];
+        } else if ($currentUser = Omeka_Context::getInstance()->getCurrentUser()){
+            $entity = $currentUser->Entity;
+        } else {
+            throw new Omeka_Record_Builder_Exception("Cannot add tags to an item if no Entity is available to tag.");
+        }
+        $this->_record->addTags($metadata[self::TAGS], $entity);
     }
     
     /**
