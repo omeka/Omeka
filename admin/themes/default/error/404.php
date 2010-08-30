@@ -1,7 +1,3 @@
-<?php 
-    header ("HTTP/1.0 404 Not Found"); 
-?>
-
 <?php head(array('bodyclass'=>'error404 primary', 'title'=>'Page Not Found')); ?>
 <h1>404: Page Not Found</h1>
 

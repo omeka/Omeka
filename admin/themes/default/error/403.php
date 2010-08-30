@@ -1,7 +1,4 @@
-<?php
-header ("HTTP/1.0 403 Forbidden"); 
-head(array('bodyclass'=>'error403 primary', 'title'=>'Forbidden')); 
-?>
+<?php head(array('bodyclass'=>'error403 primary', 'title'=>'Forbidden')); ?>
 <h1>403: Forbidden</h1>
 
 <div id="primary" class="file-forbidden">
