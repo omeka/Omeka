@@ -37,7 +37,7 @@ class Integration_AllTests extends PHPUnit_Framework_TestSuite
     {
         $suite = new Integration_AllTests('Integration Tests');
         $testCollector = new PHPUnit_Runner_IncludePathTestCollector(
-          array('integration')
+          array(dirname(__FILE__))
         );
         $suite->addTestFiles($testCollector->collectTests());
         return $suite;

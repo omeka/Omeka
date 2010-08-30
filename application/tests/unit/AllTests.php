@@ -18,7 +18,7 @@ class Unit_AllTests extends PHPUnit_Framework_TestSuite
     {
         $suite = new Unit_AllTests('Unit Tests');
         $testCollector = new PHPUnit_Runner_IncludePathTestCollector(
-          array('unit')
+          array(dirname(__FILE__))
         );
         $suite->addTestFiles($testCollector->collectTests());
         return $suite;

@@ -16,6 +16,8 @@ require_once HELPERS;
  **/
 class Omeka_Helper_AutoDiscoveryLinkTagTest extends Omeka_Test_AppTestCase
 {           
+    protected $_useAdminViews = false;
+    
     public function testLinkTagEscapesUrl()
     {
         $this->dispatch('/');
