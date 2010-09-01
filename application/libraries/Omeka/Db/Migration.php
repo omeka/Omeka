@@ -8,14 +8,8 @@
  */
 
 /**
- * All database migration classes inherit from this one.
+ * Database migration classes may inherit from this one.
  *
- * While not required, a down() method must be declared within a concrete
- * subclass in order to allow for reversal of database migrations.
- * 
- * @internal This is a pseudo-port of Ruby on Rails' migrations. This implements
- * Omeka internals and is not part of the public API.
- * @access private
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  */
