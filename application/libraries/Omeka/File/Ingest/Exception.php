@@ -10,6 +10,7 @@
  * An exception to be thrown when something goes wrong during the file ingest
  * process.
  *
+ * 
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
  */

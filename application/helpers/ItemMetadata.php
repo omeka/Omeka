@@ -5,11 +5,14 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
+ * @access private
  */
 
 /**
  * Helper used to retrieve metadata for an item.
  *
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private 
  * @see item()
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper

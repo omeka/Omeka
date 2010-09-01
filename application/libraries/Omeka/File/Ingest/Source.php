@@ -18,6 +18,8 @@
  * identifier (incorrect file extension, etc.), a more accurate filename can be
  * provided via the 'filename' attribute.
  * 
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
  */

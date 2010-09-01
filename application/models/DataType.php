@@ -5,11 +5,14 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
+ * @access private
  */
 
 /**
  * DataType
  *
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @subpackage Models
  * @package Omeka
  * @author CHNM

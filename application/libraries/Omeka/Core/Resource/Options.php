@@ -4,6 +4,7 @@
  * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @access private
  */
 
 /**
@@ -15,6 +16,8 @@
  * Failure to load this resource currently indicates that Omeka needs to be
  * installed.
  * 
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
  */

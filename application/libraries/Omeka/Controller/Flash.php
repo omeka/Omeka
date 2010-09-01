@@ -4,6 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @access private
  */
  
 /**
@@ -11,6 +12,8 @@
  * that handles form validation errors and categorizes messages according
  * to their status (currently SUCCESS, ERROR, ALERT). 
  *
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @todo Refactor this so that it subclasses Zend's FlashMessenger action 
  * helper (adding message status) and use Zend_Form's form validation
  * instead of the form validation in this class.

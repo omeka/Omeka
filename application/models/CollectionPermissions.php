@@ -5,12 +5,15 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
+ * @access private
  */
 
 /**
  * This will check the ACL To determine whether a user has permission to view 
  * collections that are not public yet then modify the SQL query accordingly
  *
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @package Omeka
  * @subpackage Models
  * @author CHNM

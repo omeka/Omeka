@@ -4,6 +4,7 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @access private
  */
  
 /**
@@ -12,7 +13,8 @@
  * via delegation.  This is more of an organizational thing because the plugin
  * broker class seems to be getting pretty cluttered.
  *
- * @since 6/16/08
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  */
