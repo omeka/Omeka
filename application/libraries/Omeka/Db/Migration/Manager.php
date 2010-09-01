@@ -236,7 +236,9 @@ class Omeka_Db_Migration_Manager
 	    if (!class_exists($class)) {
 	        throw new Omeka_Db_Migration_Exception("Migration file '$filename' does not contain class '$class'.");
 	    }
-	    return new $class($this->_db);	    
+	    $inst = new $class;
+	    $inst->setDb($this->_db);
+	    return $inst;	    
     }
     
     /**

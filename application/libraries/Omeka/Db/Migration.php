@@ -13,12 +13,17 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Db_Migration
+abstract class Omeka_Db_Migration implements Omeka_Db_MigrationInterface
 {
+    protected $db;
+        
     /**
+     * Set the database to migrate.
+     * 
      * @param Omeka_Db $db
+     * @return void
      */
-    public function __construct($db)
+    public function setDb(Omeka_Db $db)
     {
         $this->db = $db;
     }
@@ -43,12 +48,7 @@ abstract class Omeka_Db_Migration
     {
         return call_user_func_array(array($this->getDb(), $m), $a);
     }
-    
-    /**
-     * Migrate up (the normal migration).
-     */
-    abstract public function up();
-    
+        
     /**
      * If the migration requires a form submission, here's where to handle display of it
      * 
