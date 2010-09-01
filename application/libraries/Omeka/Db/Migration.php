@@ -37,6 +37,16 @@ abstract class Omeka_Db_Migration implements Omeka_Db_MigrationInterface
     } 
     
     /**
+     * Template method for reversing the migration.
+     * 
+     * This is defined as a template method instead of leaving it abstract because
+     * pre-existing implementations of Omeka_Db_Migration were not required to
+     * implement the down() method.  This ensures backwards compatibility for 
+     * those migrations. 
+     */
+    public function down() {}
+    
+    /**
      * Proxy calls to Omeka_Db.
      *
      * Allows migration writers to call db methods directly on $this.
