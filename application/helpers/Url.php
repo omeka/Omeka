@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  **/
-class Omeka_View_Helper_Url extends Zend_View_Helper_Url
+class Omeka_View_Helper_Url extends Zend_View_Helper_Abstract
 {
     /**
      * Generate a URL for use in one of Omeka's view templates.
@@ -76,7 +76,8 @@ class Omeka_View_Helper_Url extends Zend_View_Helper_Url
         }
         //If it's an array, assemble the URL with Zend_View_Helper_Url
         elseif(is_array($options)) {
-            $url = parent::url($options, $name, $reset, $encode);
+            $urlHelper = new Zend_View_Helper_Url;
+            $url = $urlHelper->url($options, $name, $reset, $encode);
         }
         
         //If the first argument is a string, then the second is a set of parameters
