@@ -4,11 +4,14 @@
  * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @access private
  */
 
 /**
  * Initializes Omeka's ACL
  * 
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @since 0.10 Plugins must use the 'define_acl' hook to modify ACL definitions.
  * @uses Omeka_Acl
  * @todo ACL settings should be stored in the database.  When ACL settings

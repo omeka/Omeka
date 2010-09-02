@@ -4,24 +4,26 @@
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @access private
  */
 
 /**
- * All database migration classes inherit from this one.
+ * Database migration classes may inherit from this one.
  *
- * While not required, a down() method must be declared within a concrete
- * subclass in order to allow for reversal of database migrations.
- * 
- * @internal This is a pseudo-port of Ruby on Rails' migrations.
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Db_Migration
+abstract class Omeka_Db_Migration implements Omeka_Db_MigrationInterface
 {
+    protected $db;
+        
     /**
+     * Set the database to migrate.
+     * 
      * @param Omeka_Db $db
+     * @return void
      */
-    public function __construct($db)
+    public function setDb(Omeka_Db $db)
     {
         $this->db = $db;
     }
@@ -35,6 +37,16 @@ abstract class Omeka_Db_Migration
     } 
     
     /**
+     * Template method for reversing the migration.
+     * 
+     * This is defined as a template method instead of leaving it abstract because
+     * pre-existing implementations of Omeka_Db_Migration were not required to
+     * implement the down() method.  This ensures backwards compatibility for 
+     * those migrations. 
+     */
+    public function down() {}
+    
+    /**
      * Proxy calls to Omeka_Db.
      *
      * Allows migration writers to call db methods directly on $this.
@@ -46,12 +58,7 @@ abstract class Omeka_Db_Migration
     {
         return call_user_func_array(array($this->getDb(), $m), $a);
     }
-    
-    /**
-     * Migrate up (the normal migration).
-     */
-    abstract public function up();
-    
+        
     /**
      * If the migration requires a form submission, here's where to handle display of it
      * 

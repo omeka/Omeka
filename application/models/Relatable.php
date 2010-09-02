@@ -7,6 +7,8 @@
  */
 
 /**
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @package Omeka
  * @subpackage Mixins
  * @author CHNM

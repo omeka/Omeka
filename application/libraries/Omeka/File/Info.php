@@ -4,12 +4,15 @@
  * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @access private
  */
 
 /**
  * A wrapper for the getID3 library that extracts metadata from files in the 
  * Omeka filesystem.
  *
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
  */

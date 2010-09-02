@@ -4,12 +4,15 @@
  * @copyright Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
+ * @access private
  */
 
 /**
  * Initialize the session and customize the session name to prevent session
  * overlap between different applications that operate on the same server.
  * 
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
  */
