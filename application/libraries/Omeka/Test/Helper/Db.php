@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
  */
-class Omeka_Test_DbHelper
+class Omeka_Test_Helper_Db
 {
     /**
      * Database adapter object.

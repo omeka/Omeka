@@ -29,7 +29,7 @@ class Integration_AllTests extends PHPUnit_Framework_TestSuite
         $config = new Omeka_Test_Resource_Config;
         $config->init();
         $dbIni = Zend_Registry::get('test_config')->db;
-        $helper = Omeka_Test_DbHelper::factory($dbIni);
+        $helper = Omeka_Test_Helper_Db::factory($dbIni);
         $helper->dropTables($dbIni->prefix);
     }
 
