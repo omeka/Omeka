@@ -13,14 +13,8 @@
  */
 class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
     {
-        parent::setUp();
 
-        // A dispatch is currently necessary because show_item_metadata
-        // calls out to a view script, and the paths are only set at
-        // preDispatch.
-        $this->dispatch();
     }
 
     /**
@@ -32,7 +26,7 @@ class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
         $item = new Item;
         $item->item_type_id = 1;
 
-        $metadataOutput = show_item_metadata(array(), $item);
+        $metadataOutput = show_item_metadata(array('return_type' => 'array'), $item);
 
         __v()->item = $item;
 
