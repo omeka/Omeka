@@ -53,10 +53,10 @@ class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
 
         $metadataOutput = show_item_metadata(array('return_type' => 'array'), $item);
 
-        __v()->item = $item;
+        set_current_item($item);
 
         // Compare runs with and without item set on view, they should be
         // the same.
-        $this->assertEquals($metadataOutput, show_item_metadata());
+        $this->assertEquals($metadataOutput, show_item_metadata(array('return_type' => 'array')));
     }
 }
