@@ -352,7 +352,7 @@
          $item = get_current_item();
      }
 
-     $itemTypeName = $item->Type->name;
+     $itemTypeName = item('Item Type Name', null, array(), $item);
      return ($name and ($itemTypeName == $name)) or (!$name and !empty($itemTypeName));
  }
  
