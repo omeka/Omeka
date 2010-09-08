@@ -218,7 +218,7 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
             $outputArray[$setName] = array();
             foreach ($elementsInSet as $key => $element) {
                 $elementName = $element->name;
-                $textArray = $this->_getFormattedElementText($record, $element->set_name, $elementName);
+                $textArray = $this->_getFormattedElementText($this->_record, $element->set_name, $elementName);
                 if (!empty($textArray[0]) or $this->_showEmptyElements) {
                     $outputArray[$setName][$elementName] = $textArray;
                 }
