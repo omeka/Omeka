@@ -40,7 +40,8 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
         $writer = new Zend_Log_Writer_Stream($logFile);
         $logger = new Zend_Log($writer);
         
-        if (!empty($config->debug->email)) {            
+        if (!empty($config->debug->email)) {
+            $bootstrap->bootstrap('Mail');            
             $this->_addMailWriter($logger, (string)$config->debug->email);
         }
         

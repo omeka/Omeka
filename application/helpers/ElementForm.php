@@ -77,7 +77,11 @@ class Omeka_View_Helper_ElementForm
     
     protected function _getPostArray()
     {
-        return $_POST['Elements'][$this->_element['id']];
+        if (array_key_exists('Elements', $_POST)) {
+            return $_POST['Elements'][$this->_element['id']];
+        } else {
+            return array();
+        }    
     }
     
     /**
@@ -129,10 +133,15 @@ class Omeka_View_Helper_ElementForm
     
     protected function _getHtmlFlagForField($index)
     {
+        $isHtml = false;
         if ($this->_isPosted()) {
             $isHtml = (boolean) $_POST['Elements'][$this->_element['id']][$index]['html'];
         } else {
-            $isHtml = (boolean) $this->getElementTexts($index)->html;
+            $elementText = $this->getElementTexts($index);
+            
+            if (isset($elementText)) {
+                $isHtml = (boolean) $elementText->html;
+            }
         }
 
         return $isHtml;
@@ -149,7 +158,13 @@ class Omeka_View_Helper_ElementForm
         if ($this->_isPosted()) {
             return $this->_getPostValueForField($index);
         } else {
-            return $this->getElementTexts($index)->text;
+            $elementText = $this->getElementTexts($index);
+            
+            if (isset($elementText)) {
+                return $elementText->text;
+            } else {
+                return null;
+            }
         }
     }
     
@@ -163,7 +178,11 @@ class Omeka_View_Helper_ElementForm
     {
         $texts = $this->_record->getTextsByElement($this->_element);
         if ($index !== null) {
-            return $texts[$index];
+            if (array_key_exists($index, $texts)) {
+                return $texts[$index];
+            } else {
+                return null;
+            }
         }
         return $texts;
     }
