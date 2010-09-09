@@ -16,7 +16,7 @@ class UserTable extends Omeka_Db_Table
 {
     public function getSelect()
     {
-        $select = new Omeka_Db_Select;
+        $select = new Omeka_Db_Select($this->_db->getAdapter());
         
         $db = $this->getDb();
         

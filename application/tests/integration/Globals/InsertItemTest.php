@@ -13,7 +13,7 @@ class Globals_InsertItemTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
        parent::setUp();
-       $this->_dbHelper = Omeka_Test_DbHelper::factory($this->core);
+       $this->_dbHelper = Omeka_Test_Helper_Db::factory($this->core);
     }
     
     public function testCanInsertItem()

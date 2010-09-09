@@ -10,7 +10,7 @@ class Tickets_774Test extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->_dbHelper = Omeka_Test_DbHelper::factory($this->core);
+        $this->_dbHelper = Omeka_Test_Helper_Db::factory($this->core);
         
         $acl = $this->core->getBootstrap()->getResource('Acl');
         $acl->allow(null, 'Items', 'showNotPublic');

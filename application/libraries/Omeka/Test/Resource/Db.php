@@ -98,7 +98,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
      */
     private function _truncateTables(Omeka_Db $db)
     {
-        $dbHelper = new Omeka_Test_DbHelper($db->getAdapter());
+        $dbHelper = new Omeka_Test_Helper_Db($db->getAdapter());
         $dbHelper->truncateTables($db->prefix);
     }    
 }

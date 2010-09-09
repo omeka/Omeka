@@ -93,6 +93,11 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
     {
         $extension = strrchr($name, '.');
         $basename = md5(mt_rand() + microtime(true));        
+        // Assume that extensions that do not exclusively contain alphanumeric, 
+        // hyphen, and underscore characters are invalid, and remove them.
+        if (preg_match('/[^a-z0-9_\-]/i', substr($extension, 1))) {
+            return $basename;
+        }
         return $basename . $extension;
     }
 }

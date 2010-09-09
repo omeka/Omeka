@@ -106,9 +106,9 @@ class Omeka_Test_Resource_DbTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         if (isset($this->db)) {
-            $dbHelper = new Omeka_Test_DbHelper($this->db->getAdapter());
+            $dbHelper = new Omeka_Test_Helper_Db($this->db->getAdapter());
         } else if (isset($this->dbAdapter)) {
-            $dbHelper = new Omeka_Test_DbHelper($this->dbAdapter);
+            $dbHelper = new Omeka_Test_Helper_Db($this->dbAdapter);
         }
         if (isset($dbHelper)) {
             $dbHelper->dropTables();
