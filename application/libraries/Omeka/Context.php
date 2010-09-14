@@ -121,9 +121,12 @@ class Omeka_Context
      * @param Zend_Config_Ini Config set.
      * @return void
      */
-    public function setConfig($name, Zend_Config_Ini $config)
+    public function setConfig($name, Zend_Config $config)
     {
         $this->_config[$name] = $config;
+        if ($name == 'basic') {
+            $this->config = $config;
+        }
     }
     
     /**
