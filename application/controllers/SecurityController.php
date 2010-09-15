@@ -33,7 +33,10 @@ class SecurityController extends Omeka_Controller_Action
         $options = array(Omeka_Validate_File_Extension::WHITELIST_OPTION,
                          Omeka_Validate_File_MimeType::WHITELIST_OPTION,
                          File::DISABLE_DEFAULT_VALIDATION_OPTION,
-                         Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION);
+                         Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION,
+                         Omeka_Captcha::PUBLIC_KEY_OPTION,
+                         Omeka_Captcha::PRIVATE_KEY_OPTION
+        );
         
         //process the form
         if ($this->getRequest()->isPost() && $this->view->form->isValid($_POST)) {
