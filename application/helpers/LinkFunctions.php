@@ -183,7 +183,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
         $item = get_current_item();
     }
 
-	$text = (!empty($text) ? $text : strip_formatting(item('Dublin Core', 'Title')));
+	$text = (!empty($text) ? $text : strip_formatting(item('Dublin Core', 'Title', array(), $item)));
 	
 	return link_to($item, $action, $text, $props);
 }
