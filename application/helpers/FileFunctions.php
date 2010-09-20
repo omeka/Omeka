@@ -92,6 +92,9 @@
          $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
          $output .= js('scriptaculous', $dir, $scriptaculousLibraries);
          $output .= js('search', $dir);
+         $output .= js('jquery', $dir);
+         $output .= js('jquery-noconflict', $dir);
+         $output .= js('jquery-ui', $dir);
 
          //Do not try to load 'default.js'
          return $output;
