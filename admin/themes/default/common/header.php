@@ -11,16 +11,19 @@
 <?php $this->headLink()->appendStylesheet(css('reset'), 'screen', false)
                        ->appendStylesheet(css('components'), 'screen', false)
                        ->appendStylesheet(css('screen'), 'screen', false)
+                       ->appendStylesheet(css('jquery-ui'), 'screen', false)
                        ->appendStylesheet(css('print'), 'print', false)
                        ->appendStylesheet(css('ie7'), 'screen', 'IE 7')
                        ->appendStylesheet(css('lte-ie6'), 'screen', 'lte IE 6'); 
 ?>
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('jquery-ui')); ?>" />
 
 <!-- JavaScripts -->
 <?php $this->headScript()->appendFile(web_path_to("javascripts/prototype.js"))
                          ->appendFile(web_path_to("javascripts/prototype-extensions.js"))
                          ->appendFile(web_path_to("javascripts/scriptaculous.js") . '?load=effects,dragdrop,controls')
+                         ->appendFile(web_path_to('javascripts/jquery.js'))
+                         ->appendFile(web_path_to('javascripts/jquery-noconflict.js'))
+                         ->appendFile(web_path_to('javascripts/jquery-ui.js'))
                          ->appendFile(web_path_to("javascripts/globals.js"))
                          ->appendFile(web_path_to("javascripts/livepipe.js"))
                          ->appendFile(web_path_to("javascripts/tabs.js"))
