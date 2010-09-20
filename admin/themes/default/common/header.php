@@ -12,6 +12,7 @@
 <link rel="stylesheet" media="screen" href="<?php echo html_escape(css('components')); ?>" />
 <link rel="stylesheet" media="screen" href="<?php echo html_escape(css('screen')); ?>" />
 <link rel="stylesheet" media="print" href="<?php echo html_escape(css('print')); ?>" />
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('jquery-ui')); ?>" />
 
 <!--[if IE 7]>
 <link rel="stylesheet" media="screen" href="<?php echo html_escape(css('ie7')); ?>" />
