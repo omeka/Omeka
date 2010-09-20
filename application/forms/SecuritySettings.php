@@ -21,6 +21,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
     public function init()
     {
         parent::init();
+        $this->setAttrib('id', 'settings-form');
         
         $this->addElement('checkbox', File::DISABLE_DEFAULT_VALIDATION_OPTION,
             array(
@@ -56,6 +57,22 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
                 'description' => 'Check this field if you would like to allow file types to be inferred from a file header check.',
                 'checked' => (boolean)get_option(Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION),
                 
+            )
+        );
+
+        $this->addElement('text', Omeka_Captcha::PUBLIC_KEY_OPTION,
+            array(
+                'label' => 'ReCaptcha Public Key',
+                'description' => 'Public key from recaptcha.net. Both this and the private key must be filled in to secure public forms.',
+                'value' => get_option(Omeka_Captcha::PUBLIC_KEY_OPTION)
+            )
+        );
+
+        $this->addElement('text', Omeka_Captcha::PRIVATE_KEY_OPTION,
+            array(
+                'label' => 'ReCaptcha Private Key',
+                'description' => 'Private key from recaptcha.net. Both this and the public key must be filled in to secure public forms.',
+                'value' => get_option(Omeka_Captcha::PRIVATE_KEY_OPTION)
             )
         );
         

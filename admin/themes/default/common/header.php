@@ -15,6 +15,7 @@
                        ->appendStylesheet(css('ie7'), 'screen', 'IE 7')
                        ->appendStylesheet(css('lte-ie6'), 'screen', 'lte IE 6'); 
 ?>
+<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('jquery-ui')); ?>" />
 
 <!-- JavaScripts -->
 <?php $this->headScript()->appendFile(web_path_to("javascripts/prototype.js"))

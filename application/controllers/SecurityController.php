@@ -36,7 +36,10 @@ class SecurityController extends Omeka_Controller_Action
                          Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION,
                          'html_purifier_is_enabled',
                          'html_purifier_allowed_html_elements',
-                         'html_purifier_allowed_html_attributes');
+                         'html_purifier_allowed_html_attributes',
+                         Omeka_Captcha::PUBLIC_KEY_OPTION,
+                         Omeka_Captcha::PRIVATE_KEY_OPTION
+        );
         
         //process the form
         if ($this->getRequest()->isPost() && $this->view->form->isValid($_POST)) {
