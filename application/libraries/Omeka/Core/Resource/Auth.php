@@ -23,6 +23,10 @@ class Omeka_Core_Resource_Auth extends Zend_Application_Resource_ResourceAbstrac
      */
     public function init()
     {
+        // Make sure the session has been configured properly beforehand in order
+        // to avoid bypassing Zend_Session::start()'s configuration mechanism.
+        $this->getBootstrap()->bootstrap('Session');
+        
         return Zend_Auth::getInstance();
     }
 }
