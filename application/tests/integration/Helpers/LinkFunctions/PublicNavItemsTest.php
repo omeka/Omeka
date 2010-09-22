@@ -12,7 +12,7 @@
 require_once HELPERS;
  
 /**
- * Tests nav($links)
+ * Tests public_nav_items()
  * in helpers/LinkFunctions.php
  *
  * @package Omeka
