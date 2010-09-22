@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Omeka Admin: <?php echo settings('site_title'); ?> | <?php echo $title; ?></title>
+<title>Omeka Admin: <?php echo settings('site_title'); echo isset($title) ? ' | ' . $title : ''; ?></title>
 
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -32,7 +32,7 @@
 <?php admin_plugin_header(); ?>
 
 </head>
-<body class="<?php echo $bodyclass; ?>">
+<body<?php echo isset($bodyclass) ? ' class="'.$bodyclass.'"' : ''; ?>>
     <div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
     <div id="wrap">
         
@@ -58,4 +58,4 @@
         
         
         
-        <div id="content" <?php if(!empty($content_class)) echo ' class="'. $content_class .'"'; ?>>
+        <div id="content"<?php echo isset($content_class) ? ' class="'.$content_class.'"' : ''; ?>>
