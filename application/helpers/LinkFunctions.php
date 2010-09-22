@@ -482,3 +482,18 @@ function public_nav_main(array $navArray, $maxDepth = 0)
 {
     return public_nav($navArray, 'main', $maxDepth);
 }
+
+/**
+ * Alias for public_nav($array, 'items'). Provides a navigation and filter for 
+ * the items/browse page.
+ * 
+ * @since 1.3
+ * @param array $navArray
+ * @param integer|null $maxDepth
+ * @uses public_nav()
+ * @return string
+ **/
+function public_nav_items(array $navArray, $maxDepth = 0)
+{
+    return public_nav($navArray, 'items', $maxDepth);
+}
