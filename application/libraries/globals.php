@@ -686,3 +686,16 @@ function get_user_roles()
 	}
 	return $roles;
 }
+
+/**
+ * Determines whether an Element Set contains a specific Element
+ *
+ * @since 1.3
+ * @param string $elementSetName The name of the element set.
+ * @param string $elementName The name of the element.
+ * @return bool
+ **/
+function element_exists($elementSetName, $elementName) {
+    $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
+    return (bool)$element;
+} 
