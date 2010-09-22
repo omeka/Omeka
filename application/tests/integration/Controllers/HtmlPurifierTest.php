@@ -132,7 +132,7 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->assertTrue(in_array('*.class', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
         $this->assertFalse(in_array('*.id', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()));
         
-        $dirtyHtml = '<p class="person id="person">Bob is bad <j>and mean<j> and <strong id="trait">fun</strong>.</p>';
+        $dirtyHtml = '<p class="person" id="person">Bob is bad <j>and mean<j> and <strong id="trait">fun</strong>.</p>';
         $cleanHtml = '<p class="person">Bob is bad and mean and <strong>fun</strong>.</p>';
         
         $post = $this->collection->toArray();

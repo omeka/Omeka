@@ -129,6 +129,9 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
      **/
     public static function createHtmlPurifier($allowedHtmlElements=null, $allowedHtmlAttributes=null, $tidyLevel = 'none')
     {
+        // Require the HTML Purfier autoloader.
+        require_once 'htmlpurifier/HTMLPurifier.auto.php';        
+
         if ($allowedHtmlElements === null || $allowedHtmlAttributes === null) {
 
             // Get the allowed HTML elements from the configuration file
@@ -147,24 +150,22 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         // and any other attribute associated with the 'a' element
         $allowedHtmlAttributes = self::filterAttributesWithMissingElements($allowedHtmlAttributes, $allowedHtmlElements);
 
-        // Require the HTML Purfier autoloader.
-        require_once 'htmlpurifier-3.1.1-lite/library/HTMLPurifier.auto.php';        
         $purifierConfig = HTMLPurifier_Config::createDefault();
         
         // Set the encoding to UTF-8
-        $purifierConfig->set('Core', 'Encoding', 'UTF-8');
+        $purifierConfig->set('Core.Encoding', 'UTF-8');
         
         // Set the Tidy settings
-        $purifierConfig->set('HTML', 'TidyLevel', $tidyLevel);
+        $purifierConfig->set('HTML.TidyLevel', $tidyLevel);
 
         // Allow HTML tags. Setting this as NULL allows a subest of TinyMCE's 
         // valid_elements whitelist. Setting this as an empty string disallows 
         // all HTML elements.
-        $purifierConfig->set('HTML', 'AllowedElements', implode(',', $allowedHtmlElements));
-        $purifierConfig->set('HTML', 'AllowedAttributes', implode(',', $allowedHtmlAttributes));
+        $purifierConfig->set('HTML.AllowedElements', implode(',', $allowedHtmlElements));
+        $purifierConfig->set('HTML.AllowedAttributes', implode(',', $allowedHtmlAttributes));
 
         // Disable caching.
-        $purifierConfig->set('Cache', 'DefinitionImpl', null);
+        $purifierConfig->set('Cache.DefinitionImpl', null);
 
         // Get the purifier as a singleton.
         $purifier = HTMLPurifier::instance($purifierConfig);
