@@ -87,7 +87,19 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     private function _getOmekaDb()
     {
         $omekaDb = new Omeka_Db($this->getDbAdapter(), 'omeka_');
+        $this->_enableSqlLogging($omekaDb);
         return $omekaDb;
+    }
+    
+    private function _enableSqlLogging(Omeka_Db $db)
+    {
+        $bs = $this->getBootstrap();
+        $loggingEnabled = ($config = $bs->getResource('Config'))
+                        && ($config->log->sql);
+        if ($loggingEnabled) {
+            $bs->bootstrap('Logger');
+            $db->setLogger($bs->getResource('Logger'));
+        }
     }
         
     /**
