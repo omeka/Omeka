@@ -292,7 +292,7 @@ class ItemType extends Omeka_Record
         	$elementId = $element;
             $element = $this->getTable('Element')->find($elementId);
             if (!$element) {
-            	throw Omeka_Record_Exception('Cannot find element for id ' . $elementId);
+            	throw new Omeka_Record_Exception('Cannot find element for id ' . $elementId);
             }
         }
         

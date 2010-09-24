@@ -18,6 +18,7 @@ class InsertFilesForItemTest extends Omeka_Test_AppTestCase
     {
         parent::setUp();
         $this->item = insert_item(array('public' => true));
+        set_option('disable_default_file_validation', 1);
     }
     
     public function assertPreConditions()
