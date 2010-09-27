@@ -498,3 +498,64 @@ function _select_from_table($tableClass, $props = array(), $value = null, $label
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
     return select($props, $options, $value, $label);
 }
+
+/**
+ * Creates a form containing a single button.
+ *
+ * Do not use this helper if you are already in a form context, use ZF's
+ * formSubmit helper instead.
+ *
+ * @since 1.3
+ *
+ * @param string $action Form action URI.
+ * @param string $name Name/id attribute for button.
+ * @param string $value Button value.
+ * @param array $attribs Other HTML attributes for button.
+ * @param string $formName Name/id attribute for button.
+ * @param array $formAttribs Other HTML attributes for button.
+ * @return string HTML form.
+ */
+function button($action, $name = 'button', $value = 'Submit', $attribs = array(), $formName = 'button-form', $formAttribs = array())
+{
+    $view = __v();
+    if (!array_key_exists('action', $formAttribs)) {
+        $formAttribs['action'] = $action;
+    }
+    if (!array_key_exists('method', $formAttribs)) {
+        $formAttribs['method'] = 'post';
+    }
+
+    return $view->form($formName, $formAttribs,
+            $view->formSubmit($name, $value, $attribs));
+}
+
+/**
+ * Creates a form containing a single delete button.
+ *
+ * Sets a class and default URI for a delete button.
+ *
+ * Do not use this helper if you are already in a form context, use ZF's
+ * formSubmit helper instead.
+ *
+ * @since 1.3
+ *
+ * @param string $action Form action URI.
+ * @param string $name Name/id attribute for button.
+ * @param string $value Button value.
+ * @param array $attribs Other HTML attributes for button.
+ * @param string $formName Name/id attribute for button.
+ * @param array $formAttribs Other HTML attributes for button.
+ * @return string HTML form.
+ */
+function delete_button($action = null, $name = 'delete', $value = 'Delete', $attribs = array(), $formName = 'delete-form', $formAttribs = array())
+{
+    if (!isset($action)) {
+        $action = uri(array('action' => 'delete'));
+    }
+
+    if (!array_key_exists('class', $attribs)) {
+        $attribs['class'] = 'delete-button';
+    }
+
+    return button($action, $name, $value, $attribs, $formName, $formAttribs);
+}
