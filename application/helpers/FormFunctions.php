@@ -515,7 +515,7 @@ function _select_from_table($tableClass, $props = array(), $value = null, $label
  * @param array $formAttribs Other HTML attributes for button.
  * @return string HTML form.
  */
-function button($action, $name = 'button', $value = 'Submit', $attribs = array(), $formName = 'button-form', $formAttribs = array())
+function button_to($action, $name = 'button', $value = 'Submit', $attribs = array(), $formName = 'button-form', $formAttribs = array())
 {
     $view = __v();
     if (!array_key_exists('action', $formAttribs)) {
@@ -557,5 +557,5 @@ function delete_button($action = null, $name = 'delete', $value = 'Delete', $att
         $attribs['class'] = 'delete-button';
     }
 
-    return button($action, $name, $value, $attribs, $formName, $formAttribs);
+    return button_to($action, $name, $value, $attribs, $formName, $formAttribs);
 }
