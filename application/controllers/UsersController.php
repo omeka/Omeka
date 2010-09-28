@@ -376,7 +376,7 @@ class UsersController extends Omeka_Controller_Action
             // information about valid usernames/passwords.
             case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
             case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-                return 'Login information incorrect.  Please try again.';
+                return 'Login information incorrect. Please try again.';
                 break;
             case Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS:
                 // There can never be ambiguous identities b/c the 'username'
