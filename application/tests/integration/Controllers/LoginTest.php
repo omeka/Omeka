@@ -33,7 +33,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     
     public function testValidLogin()
     {
-        $this->_login('foobar123', 'foobar123');
+        $this->_login(Omeka_Test_Resource_Db::SUPER_USERNAME, Omeka_Test_Resource_Db::SUPER_PASSWORD);
         $this->assertRedirectTo('/');
     }
     
@@ -41,7 +41,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     {
         $this->_login('foo', 'bar');
         $this->assertNotRedirect();
-        $this->assertContains('Login information incorrect. Please try again.', $this->getResponse()->sendResponse());
+        $this->assertContains('Login information incorrect.  Please try again.', $this->getResponse()->sendResponse());
     }
     
     private function _login($username, $password)
