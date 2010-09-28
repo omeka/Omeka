@@ -539,7 +539,8 @@ function button_to($action, $name = 'button', $value = 'Submit', $attribs = arra
  *
  * @since 1.3
  *
- * @param string $action Form action URI.
+ * @param string|Omeka_Record $action Form action URI. If an Omeka_Record is
+ *  passed, uses record_uri to form a link to the delete action for that record.
  * @param string $name Name/id attribute for button.
  * @param string $value Button value.
  * @param array $attribs Other HTML attributes for button.
@@ -550,7 +551,11 @@ function button_to($action, $name = 'button', $value = 'Submit', $attribs = arra
 function delete_button($action = null, $name = 'delete', $value = 'Delete', $attribs = array(), $formName = 'delete-form', $formAttribs = array())
 {
     if (!isset($action)) {
+        // If nothing is set at all, use the current route's delete action.
         $action = uri(array('action' => 'delete'));
+    } else if ($action instanceof Omeka_Record) {
+        // If a record is given, use record_uri to get the action.
+        $action = record_uri($action, 'delete');
     }
 
     if (!array_key_exists('class', $attribs)) {

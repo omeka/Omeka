@@ -57,7 +57,7 @@
             <?php endif; ?>     
             <?php if (has_permission('Users', 'delete')): ?>
             <?php $id = $user->id; ?>
-            <td><?php if((current_user()->id != $user->id)): echo delete_button(uri(array('action' => 'delete', 'id' => $id)), "delete-user-$id", 'Delete'); endif; ?></td>
+            <td><?php if((current_user()->id != $id)): echo delete_button($user, "delete-user-$id", 'Delete'); endif; ?></td>
             <?php endif; ?>
         </tr>
     <?php endforeach; ?>

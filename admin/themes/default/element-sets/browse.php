@@ -26,7 +26,7 @@
             <td>
                 <?php if (has_permission('ElementSets', 'delete') and !in_array($elementSet->name, $doNotDelete)): ?>
                     <?php $id = $elementSet->id; ?>
-                    <?php echo delete_button(uri(array('action' => 'delete', 'id' => $id)), "delete-element-set-$id", 'Delete'); ?>
+                    <?php echo delete_button($elementSet, "delete-element-set-$id", 'Delete'); ?>
                 <?php endif; ?>
             </td>
         </tr>
