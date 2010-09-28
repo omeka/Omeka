@@ -55,8 +55,9 @@
             <?php if (has_permission('Users', 'edit')): ?>
             <td><?php echo link_to($user, 'edit', 'Edit', array('class'=>'edit')); ?></td>
             <?php endif; ?>     
-            <?php if (has_permission('Users', 'delete')): ?>  
-            <td><?php if((current_user()->id != $user->id)): echo link_to($user, 'delete', 'Delete', array('class'=>'delete-user delete')); endif; ?></td>
+            <?php if (has_permission('Users', 'delete')): ?>
+            <?php $id = $user->id; ?>
+            <td><?php if((current_user()->id != $user->id)): echo delete_button(uri(array('action' => 'delete', 'id' => $id)), "delete-user-$id", 'Delete'); endif; ?></td>
             <?php endif; ?>
         </tr>
     <?php endforeach; ?>

@@ -77,14 +77,17 @@ class ItemsController extends Omeka_Controller_Action
     
     protected function _getAddSuccessMessage($record)
     {
-        $item = $record;
         return 'The item was successfully added!';        
     }
     
     protected function _getEditSuccessMessage($record)
     {
-        $item = $record;
         return 'The item was successfully changed!';
+    }
+
+    protected function  _getDeleteSuccessMessage($record)
+    {
+        return 'The item was successfully deleted!';
     }
     
     public function addAction()
@@ -96,20 +99,24 @@ class ItemsController extends Omeka_Controller_Action
     }
     
     /**
-     * Wrapping this crap with permissions checks
+     * Delete an item.
      *
-     **/
+     * Wraps the standard deleteAction in permission checks.
+     */
     public function deleteAction()
     {
-        if ($user = $this->getCurrentUser()) {
+        if (!$this->getRequest()->isPost()) {
+            $this->_forward('error');
+            return;
+        }
+        
+        if (($user = $this->getCurrentUser())) {
             $item = $this->findById();
             
             // Permission check
             if ($this->isAllowed('deleteAll') 
                 || ($this->isAllowed('deleteSelf') && $item->wasAddedBy($user))) {
-                $item->delete();
-                $this->flashSuccess('The item was successfully deleted!');
-                $this->redirect->goto('browse');
+                parent::deleteAction();
             }
         }
         
