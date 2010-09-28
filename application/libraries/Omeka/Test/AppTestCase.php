@@ -99,6 +99,14 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      */
     public function tearDown()
     {
+        // This fixes a "too many open files" error caused by hanging references
+        // to the logger object somewhere in the code (could be anywhere).  
+        // Since log files are only closed in log writer shutdown (only in 
+        // destructor), this hanging reference keeps another file open with each 
+        // test run.
+        if ($this->logger instanceof Zend_Log) {
+            $this->logger->__destruct();
+        }    
         Zend_Registry::_unsetInstance();
         Omeka_Context::resetInstance();
         Omeka_Controller_Flash::reset();

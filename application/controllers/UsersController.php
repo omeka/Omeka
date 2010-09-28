@@ -354,11 +354,11 @@ class UsersController extends Omeka_Controller_Action
     {
         $code = $result->getCode();
         switch ($code) {
+            // Return the same output for these two cases to avoid revealing
+            // information about valid usernames/passwords.
             case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
-                return "Username could not be found.";
-                break;
             case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-                return "Invalid password.";
+                return 'Login information incorrect.  Please try again.';
                 break;
             case Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS:
                 // There can never be ambiguous identities b/c the 'username'

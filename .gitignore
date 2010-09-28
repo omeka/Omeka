@@ -27,3 +27,6 @@ Git, Zend/ will be included in source so REMOVE THIS LINE.
 
 # For macs
 .DS_Store
+
+# For VIM
+*.swp
