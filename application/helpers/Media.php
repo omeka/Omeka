@@ -105,43 +105,46 @@ class Omeka_View_Helper_Media
             'linkToMetadata'=>false
             ),
         'wmv'=>array(
-			'width' => '320', 
-			'height' => '240', 
-			'autostart' => 0, 
-			'ShowControls'=> 1, 
-			'ShowDisplay'=> 1,
-			'ShowStatusBar' => 1
-			),
-		'wma'=>array(
-			'width' => '320', 
-			'height' => '46', 
-			'autostart' => 0, 
-			'ShowControls'=> 1, 
-			'ShowDisplay'=> 1,
-			'ShowStatusBar' => 1
-			),
-		'mov'=>array(
-			'width' => '320', 
-			'height' => '240', 
-			'autoplay' => 0, 
-			'controller'=> 1, 
-			'loop'=> 0
-			),
-		'audio'=>array(
-		    'autoplay' => 'false',
-		    'autoStart' => 0,
-		    'width' => 200,
-		    'height' => 20
-		    ),
-		'icon'=>array(
-		    'showFilename' => true,
-		    'icons' => array(),
-		    'linkToFile' => true,
-		    'linkToMetadata' => false,
-		    'linkAttributes' => array(),
-		    'imgAttributes' => array(),
-		    'filenameAttributes' => array()
-		    ));
+            'width' => '320',
+            'height' => '240', 
+            'autostart' => 0,
+            'ShowControls'=> 1,
+            'ShowDisplay'=> 1,
+            'ShowStatusBar' => 1
+            ),
+        'wma'=>array(
+            'width' => '320',
+            'height' => '46',
+            'autostart' => 0,
+            'ShowControls'=> 1,
+            'ShowDisplay'=> 1,
+            'ShowStatusBar' => 1
+            ),
+        'mov'=>array(
+            'width' => '320',
+            'height' => '240',
+            'autoplay' => false,
+            'controller'=> true,
+            'loop'=> false,
+            'scale' => 'aspect'
+            ),
+        'audio'=>array(
+            'width' => '200',
+            'height' => '20',
+            'autoplay' => false,
+            'controller' => true,
+            'loop' => false
+            ),
+        'icon'=>array(
+            'showFilename' => true,
+            'icons' => array(),
+            'linkToFile' => true,
+            'linkToMetadata' => false,
+            'linkAttributes' => array(),
+            'imgAttributes' => array(),
+            'filenameAttributes' => array()
+            )
+        );
                 
     /**
      * Add MIME types and associated callbacks to the list.
@@ -348,46 +351,53 @@ class Omeka_View_Helper_Media
     /**
      * Retrieve valid XHTML for displaying Quicktime video files
      * 
-     * @param string
-     * @return void
-     **/ 
+     * @param File $file
+     * @param array $options The set of default options for this includes:
+     *  width, height, autoplay, controller, loop
+     * @return string
+     */ 
     public function mov($file, array $options=array())
     {
         $path = html_escape($file->getWebPath('archive'));
 
-		$html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">
-			<param name="src" value="'.$path.'" />
-			<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />
-			<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />
-			<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />
+        $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
+              . '<param name="src" value="'.$path.'" />'
+              . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
+              . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
+              . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
+              . '<param name="scale" value="' . $options['scale'] . '" />'
+              . '<embed src="'.$path.'" scale="' . $options['scale'] . '" width="'.$options['width'].'" height="'.$options['height'].'" controller="'.($options['controller'] ? 'true' : 'false').'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>'
+              . '</object>';
 
-			<embed src="'.$path.'" scale="tofit" width="'.$options['width'].'" height="'.$options['height'].'" controller="'.($options['controller'] ? 'true' : 'false').'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>
-			</object>';
-			
-		return $html;        
+        return $html;
     } 
     
     /**
      * Default display of audio files via <object> tags.
      * 
-     * @param File
+     * @param File $file
      * @param array $options The set of default options for this includes:
-     * 'autoplay', 'autoStart', 'width', 'height'
+     *  width, height, autoplay, controller, loop
      * @return string
-     **/
+     */
     public function audio($file, array $options=array())
     {
-        $path = $file->getWebPath('archive');
-        
-        $linkAttributes = array_merge(array('href'=>$path), (array)$options['linkAttributes']);
-        $html = '<object type="'. $file->mime_browser . '" data="' . $path . 
-        '" width="' . $options['width'] . '" height="' . $options['height'] . '">
-          <param name="src" value="' . html_escape($path) . '">
-          <param name="autoplay" value="' . $options['autoplay'] . '">
-          <param name="autoStart" value="' . $options['autoStart'] . '">
-          alt : <a ' . _tag_attributes($linkAttributes) . '>' . $file->original_filename . '</a>
-        </object>';
-        
+        $path = html_escape($file->getWebPath('archive'));
+
+        $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
+              . '<param name="src" value="'.$path.'" />'
+              . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
+              . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
+              . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
+              . '<object type="' . $file->mime_browser . '" data="' . $path . '" width="'.$options['width'].'" height="'.$options['height'].'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'">'
+              . '<param name="src" value="'.$path.'" />'
+              . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
+              . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
+              . '<param name="autostart" value="'.($options['autoplay'] ? '1' : '0').'" />'
+              . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
+              . '</object>'
+              . '</object>';
+
         return $html;
     }
     
