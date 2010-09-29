@@ -161,6 +161,9 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
                     $this->_addPathToView($scriptPath);
                 }
             }
+
+            // Adds plugin-specific scripts for themes (these take precedence over everything)
+            $this->_addOverridePathForPlugin($themeType, $pluginModuleName);
             
         } else {
             // We have not chosen a specific module to add paths for, so just add
@@ -238,6 +241,22 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
             $scriptPath = $this->_baseThemePath . DIRECTORY_SEPARATOR . $themeName;
             $view->addScriptPath($scriptPath);
             $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName);            
+        }
+    }
+
+    /**
+     * Add theme view path for override views for a given plugin.
+     *
+     * @param string $theme Theme type; 'public' or 'admin'
+     * @param string $pluginModuleName
+     */
+    protected function _addOverridePathForPlugin($theme, $pluginModuleName)
+    {
+        if (($themeName = $this->getThemeOption($theme))) {
+            $view = $this->_getView();
+            $scriptPath = $this->_baseThemePath . DIRECTORY_SEPARATOR . $themeName . DIRECTORY_SEPARATOR . $pluginModuleName;
+            $view->addScriptPath($scriptPath);
+            $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName . '/' . $pluginModuleName);
         }
     }
     
