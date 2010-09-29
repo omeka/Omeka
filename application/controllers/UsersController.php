@@ -17,6 +17,8 @@
  **/
 class UsersController extends Omeka_Controller_Action
 {
+    const INVALID_LOGIN_MESSAGE = 'Login information incorrect. Please try again.';
+
     protected $_browseRecordsPerPage = 10;
         
     public function init() {
@@ -376,7 +378,7 @@ class UsersController extends Omeka_Controller_Action
             // information about valid usernames/passwords.
             case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
             case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-                return 'Login information incorrect. Please try again.';
+                return self::INVALID_LOGIN_MESSAGE;
                 break;
             case Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS:
                 // There can never be ambiguous identities b/c the 'username'

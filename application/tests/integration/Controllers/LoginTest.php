@@ -41,7 +41,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     {
         $this->_login('foo', 'bar');
         $this->assertNotRedirect();
-        $this->assertContains('Login information incorrect.  Please try again.', $this->getResponse()->sendResponse());
+        $this->assertContains(UsersController::INVALID_LOGIN_MESSAGE, $this->getResponse()->sendResponse());
     }
     
     private function _login($username, $password)
