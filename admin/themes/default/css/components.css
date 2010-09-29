@@ -60,6 +60,9 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
         -webkit-border-radius:6px;
         -moz-border-radius:6px;
     }
+
+    .delete-button {background-color: #800 !important; border-color: #800 !important;}
+    td .delete-button {margin: 0; padding: 1px 6px; float: none;}
     
     input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
     

@@ -107,6 +107,9 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         if ($this->logger instanceof Zend_Log) {
             $this->logger->__destruct();
         }    
+        if ($this->db instanceof Omeka_Db) {
+            $this->db->closeConnection();
+        }
         Zend_Registry::_unsetInstance();
         Omeka_Context::resetInstance();
         Omeka_Controller_Flash::reset();

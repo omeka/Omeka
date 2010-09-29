@@ -22,7 +22,6 @@
 <form method="post" id="editfile" action="<?php echo html_escape(uri('files/edit/'.$file->id)); ?>" name="editFile">
 
 <fieldset>
-
 <legend>Dublin Core</legend>    
 
 <?php echo display_element_set_form($file, 'Dublin Core'); ?>
@@ -42,7 +41,7 @@
 
 </form>
 <?php if (has_permission('Files', 'delete')): ?>
-<p id="delete-file-link"><?php echo link_to($file, 'delete', 'Delete this File', array('class'=>'delete')); ?></p>    
+<?php echo delete_button(null, 'delete-file', 'Delete this File'); ?>
 <?php endif; ?>
 </div>
 <?php foot(); ?>

@@ -19,11 +19,8 @@
         <div>
             <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit submit-medium'), 'Save Changes'); ?>
         </div>
-        <p id="delete_item_link">
-            <?php echo link_to_item('Delete This Item', 
-                array('class'=>'delete delete-item'), 'delete'); ?>
-        </p>
     </form>
+    <?php echo delete_button(null, 'delete-item', 'Delete this Item'); ?>
 
 
 

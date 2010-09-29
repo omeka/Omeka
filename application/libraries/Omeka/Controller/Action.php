@@ -484,7 +484,12 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * @return void
      */
     public function deleteAction()
-    {        
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_forward('error');
+            return;
+        }
+
         $record = $this->findById();         
         $record->delete();
         
