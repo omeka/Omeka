@@ -41,6 +41,48 @@ class Theme
         $this->path = PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . $dir;
         $this->directory = $dir;
     }
+
+    /**
+     * Get the physical path to the theme's scripts.
+     *
+     * @return string Physical path.
+     */
+    public function getScriptPath()
+    {
+        return PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . $this->directory;
+    }
+
+    /**
+     * Get the web path to the theme's assets.
+     *
+     * @return string Web path.
+     */
+    public function getAssetPath()
+    {
+        return WEB_PUBLIC_THEME . '/' . $this->directory;
+    }
+
+    /**
+     * Get the physical path to the theme's override scripts for the given plugin.
+     *
+     * @param string $pluginModuleName (i.e., 'exhibit-builder')
+     * @return string Physical path.
+     */
+    public function getScriptPathForPlugin($pluginModuleName)
+    {
+        return $this->getScriptPath() . DIRECTORY_SEPARATOR . $pluginModuleName;
+    }
+
+    /**
+     * Get the web path to the theme's override assets for the given plugin.
+     *
+     * @param string $pluginModuleName (i.e., 'exhibit-builder')
+     * @return string Web path.
+     */
+    public function getAssetPathForPlugin($pluginModuleName)
+    {
+        return $this->getAssetPath() . '/' . $pluginModuleName;
+    }
     
     public function setImage($fileName)
     {
