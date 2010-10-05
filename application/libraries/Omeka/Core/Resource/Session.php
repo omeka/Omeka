@@ -16,35 +16,31 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009-2010
  */
-class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Core_Resource_Session extends Zend_Application_Resource_Session
 {
     /**
      * @return void
      */
     public function init()
     {
-        // Look for the session name as the 'session.name' value in the 
-        // config.ini file.  If it can't find that value (or it is blank), it
-        // will automatically generate the session name based on the root URL
-        // of this particular installation.
-        $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap('Config');
-        $basicConfig = $bootstrap->getResource('Config');
-        Zend_Session::start($this->_getSessionConfig($basicConfig));
+        $this->_setOptionsFromConfig();
+        return parent::init();
     }
     
     /**
      * Retrieve global session configuration options.
      * 
      * @link http://framework.zend.com/manual/en/zend.session.global_session_management.html#zend.session.global_session_management.configuration_options
-     * @param Zend_Config $config Application config.
      * @return array An array containing all the global configuration options 
      * for sessions.  This array contains at least one key, 'name', corresponding
      * to the name of the session, which is generated automatically if not 
      * provided.
      */
-    private function _getSessionConfig(Zend_Config $config)
+    private function _getSessionConfig()
     {
+        $bootstrap = $this->getBootstrap();
+        $bootstrap->bootstrap('Config');
+        $config = $bootstrap->getResource('Config');
         $sessionConfig = isset($config->session) 
                        ? $config->session->toArray()
                        : array();
@@ -66,5 +62,10 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_ResourceAbst
     private function _buildSessionName()
     {
         return md5(BASE_DIR);
+    }
+
+    private function _setOptionsFromConfig()
+    {
+        $this->setOptions($this->_getSessionConfig());
     }
 }
