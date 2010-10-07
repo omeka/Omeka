@@ -47,6 +47,13 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
         }
         
         $this->_convertMigrationSchema($options);
+
+        // Merge in options from config.ini, options specified in config.ini
+        // override options from the DB.
+        $config = $this->getBootstrap()->bootstrap('Config')->getResource('Config');
+        if (isset($config->options)) {
+            $options = array_merge($options, $config->options->toArray());
+        }
         
         return $options;
     }
