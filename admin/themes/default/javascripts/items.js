@@ -68,7 +68,7 @@ Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
             e.stop();
             Omeka.ItemForm.undoRemoveTag(this);
         });
-        var img2 = new Element('input', { 'type': 'image', 'src': deleteImage, 'class': 'remove_tag', 'value': tag});                    
+        var img2 = new Element('input', { 'type': 'image', 'src': deleteImage, 'class': 'remove_tag', 'value': tag});
         img2.observe('click', function(e) {
             e.stop();
             Omeka.ItemForm.removeTag(this);
@@ -329,22 +329,11 @@ Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
             checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
         });
 
-        tinyMCE.init({
-            mode: "specific_textareas",
-            editor_selector : "html-editor",    // Put the editor in for all textareas with an 'html-editor' class.
-            theme: "advanced",
-            force_br_newlines : true,
-            forced_root_block : '', // Needed for 3.x
-            remove_linebreaks : true,
-            fix_content_duplication : false,
-            fix_list_elements : true,
-            valid_child_elements:"ul[li],ol[li]",
-            theme_advanced_toolbar_location : "top",
-            theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect,code",
-            theme_advanced_buttons2 : "",
-            theme_advanced_buttons3 : "",
-            theme_advanced_toolbar_align : "left"
-       });   
+       Omeka.wysiwyg({
+           mode: "specific_textareas",
+           editor_selector: "html-editor",
+           forced_root_block: ""
+       });
     }
 
 });
