@@ -1,5 +1,3 @@
-Event.observe(window,'load',function() {
-    if ($('username')) {
-        $('username').focus();
-    }
+jQuery(document).ready(function () {
+    jQuery('#username').focus();
 });
