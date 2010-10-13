@@ -160,17 +160,11 @@ class TagsController extends Omeka_Controller_Action
     
     public function autocompleteAction()
     {
-        $tagText = $this->_getParam('tag_start');
+        $tagText = $this->_getParam('term');
         if (empty($tagText)) {
-            echo '<ul></ul>';exit;
+            exit;
         }
         $tagNames = $this->getTable()->findTagNamesLike($tagText);
-        echo '<ul>';
-        foreach ($tagNames as $tag) {
-            echo '<li>' . $tag . '</li>';
-        }
-        echo '</ul>';
-        // Skip all the post-processing, we need this to be fast.
-        exit;
+        $this->_helper->json($tagNames);
     }
 }

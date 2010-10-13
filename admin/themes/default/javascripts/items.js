@@ -1,339 +1,427 @@
-Omeka.ItemForm = Object.extend(Omeka.ItemForm || {}, {
+if (typeof Omeka === 'undefined') {
+    Omeka = {};
+}
 
-    makeFileWindow: function() {
-        $$('#file-list a').each(function(link) {
-            link.onclick = function() {
-                window.open(link.getAttribute("href"));
-                return false;
+Omeka.Items = {};
+
+/**
+ * Set up JS hide/show tabs for the edit page/
+ */
+Omeka.Items.initializeTabs = function () {
+    var tabLinks = jQuery('#section-nav > li > a');
+    var tabIds = tabLinks.map(function () {
+        // Rely on the fact that the links have pound signs.
+        // Workaround IE7's creation of absolute URLs.
+        return '#' + this.getAttribute('href').split('#')[1];
+    }).toArray().join(',');
+    var tabs = jQuery(tabIds);
+
+    function selectTab(tabLink) {
+        tabLinks.removeClass('active');
+        tabs.hide();
+
+        tabLink.addClass('active');
+        jQuery(tabLink.attr('href')).show();
+        tabLink.trigger('omeka:tabselected');
+    }
+
+    tabLinks.click(function (event) {
+        event.preventDefault();
+        selectTab(jQuery(this));
+    });
+
+    // Select the tab given in the anchor, if any, or the first tab.
+    var selectedTab;
+    var url = document.location.toString();
+    if (url.match('#')) {
+        var anchor = '#' + url.split('#')[1];
+        selectedTab = tabLinks.filter('[href=' + anchor + ']');
+    }
+    if (!selectedTab || !selectedTab.length) {
+        selectedTab = tabLinks.first();
+    }
+
+    selectTab(selectedTab);
+};
+
+/**
+ * Make links to files open in a new window.
+ */
+Omeka.Items.makeFileWindow = function () {
+    jQuery('#file-list a').click(function () {
+        window.open(this.getAttribute('href'));
+        return false;
+    });
+};
+
+/**
+ * Make the item type selector AJAX in the right item type form.
+ *
+ * @param {string} changeItemTypeUrl URL for getting form.
+ * @param {string} itemId Item ID.
+ */
+Omeka.Items.changeItemType = function (changeItemTypeUrl, itemId) {
+    jQuery('#change_type').hide();
+    jQuery('#item-type').change(function () {
+        var params = {
+            type_id: jQuery(this).val()
+        };
+        if (itemId) {
+            params.item_id = itemId;
+        }
+        jQuery.ajax({
+            url: changeItemTypeUrl,
+            type: 'POST',
+            dataType: 'html',
+            data: params,
+            success: function (response) {
+                var form = jQuery('#type-metadata-form');
+                form.hide();
+                form.html(response);
+                form.trigger('omeka:elementformload');
+                form.slideDown(1000, function () {
+                    // Explicit show() call fixes IE7
+                    jQuery(this).show();
+                });
             }
         });
-    },
+    });
+};
 
-    changeItemType: function(changeItemTypeUrl, itemId) {
-        $('change_type').hide();
-        $('item-type').onchange = function() {
-            var typeSelectLabel = $$('#type-select label')[0];
-            var params = 'type_id='+this.getValue();
-            if (itemId) {
-                params += '&item_id='+itemId;
-            }
-            new Ajax.Request(changeItemTypeUrl, {
-                parameters: params,
-                onCreate: function(t) {
-                },
-                onFailure: function(t) {
-                    alert(t.status);
-                },
-                onComplete: function(t) {
-                    var form = $('type-metadata-form');
-                    form.update(t.responseText);
-                    form.fire('omeka:elementformload');
-                    Effect.BlindDown(form);
-                }
+/**
+ * Add container for tag remove buttons.
+ */
+Omeka.Items.createMyTagsHeaderAndList = function () {
+    if (!jQuery('#my-tags-list').length) {
+        var myTags = jQuery('#my-tags');
+        myTags.append('<h3>My Tags</h3>');
+        myTags.append('<ul id="my-tags-list"/>');
+    }
+};
+
+/**
+ * Add remove/undo buttons for removing a tag.
+ *
+ * @param {string} tag Tag to add buttons for.
+ * @param {string} addImage URL for add button image.
+ * @param {string} deleteImage URL for delete button image.
+ */
+Omeka.Items.addTagElement = function (tag, addImage, deleteImage) {
+    Omeka.Items.createMyTagsHeaderAndList();
+    var tagLi = jQuery('<li class="tag-delete"/>');
+
+    var undoButton = jQuery('<input type="image" class="undo_remove_tag" />').appendTo(tagLi);
+    undoButton.attr('src', addImage).val(tag);
+    undoButton.click(function (event) {
+        event.preventDefault();
+        Omeka.Items.undoRemoveTag(this);
+    });
+
+    var deleteButton = jQuery('<input type="image" class="remove_tag" />').appendTo(tagLi);
+    deleteButton.attr('src', deleteImage).val(tag);
+    deleteButton.click(function (event) {
+        event.preventDefault();
+        Omeka.Items.removeTag(this);
+    });
+
+    tagLi.append(tag);
+
+    jQuery('#my-tags-list').append(tagLi);
+
+    Omeka.Items.updateTagsField();
+    return false;
+};
+
+/**
+ * Add tag elements for new tags from the input box.
+ *
+ * @param {string} tags Comma-separated tags to be added.
+ * @param {string} addImage URL for add button image.
+ * @param {string} deleteImage URL for delete button image.
+ */
+Omeka.Items.addTags = function (tags, addImage, deleteImage) {
+    var newTags = tags.split(',');
+
+    // only add tags from the input box that are new
+    var oldTags = jQuery('#my-tags-list input.remove_tag').map(function () {
+        return jQuery.trim(this.value);
+    });
+
+    jQuery.each(newTags, function () {
+        var tag = jQuery.trim(this);
+        if (tag && jQuery.inArray(tag, oldTags) === -1) {
+            Omeka.Items.addTagElement(tag, addImage, deleteImage);
+        }
+    });
+
+    jQuery('#tags').val('');
+};
+
+/**
+ * Callback for tag remove buttons.
+ *
+ * @param {Element} button Clicked button.
+ */
+Omeka.Items.removeTag = function (button) {
+    jQuery(button).hide().parent().css('opacity', '.3');
+    Omeka.Items.updateTagsField();
+};
+
+/**
+ * Callback for tag undo buttons.
+ *
+ * @param {Element} button Clicked button.
+ */
+Omeka.Items.undoRemoveTag = function (button) {
+    jQuery(button).next('input.remove_tag').show().parent().css('opacity', '1');
+    Omeka.Items.updateTagsField();
+};
+
+/**
+ * Update the hidden tags fields to only include the tags that have not been removed.
+ */
+Omeka.Items.updateTagsField = function () {
+    var myTagsToAdd = [];
+    var myTagsToDelete = [];
+    var otherTagsToDelete = [];
+
+    jQuery('#my-tags-list input.remove_tag').each(function () {
+        var button = jQuery(this);
+        var tag = jQuery.trim(button.val());
+        if (button.parent().css('opacity') == 1) {
+            myTagsToAdd.push(tag);
+        } else {
+            myTagsToDelete.push(tag);
+        }
+    });
+    jQuery('#other-tags-list input.remove_tag').each(function () {
+        var button = jQuery(this);
+        var tag = jQuery.trim(button.val());
+        if (button.parent().css('opacity') != 1) {
+            otherTagsToDelete.push(tag);
+        }
+    });
+
+    jQuery('#my-tags-to-add').val(myTagsToAdd.join(','));
+    jQuery('#my-tags-to-delete').val(myTagsToDelete.join(','));
+    jQuery('#other-tags-to-delete').val(otherTagsToDelete.join(','));
+};
+
+/**
+ * Set up tag remove/undo buttons and adding from tags field.
+ *
+ * @param {string} addImage URL for add button image.
+ * @param {string} deleteImage URL for delete button image.
+ */
+Omeka.Items.enableTagRemoval = function (addImage, deleteImage) {
+    jQuery('#add-tags-button').click(function (event) {
+        event.preventDefault();
+        Omeka.Items.addTags(jQuery('#tags').val(), addImage, deleteImage);
+    });
+
+    jQuery('input.remove_tag').click(function (event) {
+        event.preventDefault();
+        Omeka.Items.removeTag(this);
+    });
+
+    jQuery('input.undo_remove_tag').click(function (event) {
+        event.preventDefault();
+        Omeka.Items.undoRemoveTag(this);
+    });
+
+    Omeka.Items.updateTagsField();
+};
+
+/**
+ * Set up autocomplete for tags field.
+ *
+ * @param {string} tagChoicesUrl Autocomplete JSON URL.
+ */
+Omeka.Items.tagChoices = function (tagChoicesUrl) {
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+    // Tokenized input based on
+    // http://jqueryui.com/demos/autocomplete/multiple.html
+    jQuery('#tags').autocomplete({
+        source: function (request, response) {
+            jQuery.getJSON(tagChoicesUrl, {
+                term: extractLast(request.term)
+            }, function (data) {
+                response(data);
             });
-        }        
-    },
-
-    addTags: function(tags, addImage, deleteImage) {
-        var newTags = tags.split(',');
-    
-        // only add tags from the input box that are new
-        var oldTags = new Array();
-        if ($('my-tags-list')) {
-            oldTags = $$('#my-tags-list input.remove_tag').map(function(button){
-               return button.value.strip();
-            });
+        },
+        focus: function () {
+            return false;
+        },
+        select: function (event, ui) {
+            var terms = split(this.value);
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push(ui.item.value);
+            // add placeholder to get the comma-and-space at the end
+            terms.push('');
+            this.value = terms.join(', ');
+            return false;
         }
+    });
+};
+
+/**
+ * Send an AJAX request to update a <div class="field"> that contains all
+ * the form inputs for an element.
+ *
+ * @param {jQuery} fieldDiv
+ * @param {Object} params Parameters to pass to AJAX URL.
+ * @param {string} elementFormPartialUri AJAX URL.
+ * @param {string} itemId Current Item ID.
+ */
+Omeka.Items.elementFormRequest = function (fieldDiv, params, elementFormPartialUri, itemId) {
+    var elementId = fieldDiv.attr('id').replace(/element-/, '');
     
-        newTags.each(function(tag){
-           var strippedTag = tag.strip();
-           if (strippedTag != "" && !oldTags.include(strippedTag)) {
-               Omeka.ItemForm.addTagElement(strippedTag, addImage, deleteImage);
-           }
-        });
-    
-        $('tags').value = '';
-    },
-
-    addTag: function(tag, addImage, deleteImage) {
-        Omeka.ItemForm.addTags(tag, addImage, deleteImage);
-    },
-
-    addTagElement: function(tag, addImage, deleteImage) {
-        var nRTButton = new Element('li', { 'class': 'tag-delete'});
-
-        var img1 = new Element('input', { 'type': 'image', 'src': addImage, 'class': 'undo_remove_tag', 'value': tag});
-        nRTButton.appendChild(img1);
-        img1.observe('click', function(e) {
-            e.stop();
-            Omeka.ItemForm.undoRemoveTag(this);
-        });
-        var img2 = new Element('input', { 'type': 'image', 'src': deleteImage, 'class': 'remove_tag', 'value': tag});
-        img2.observe('click', function(e) {
-            e.stop();
-            Omeka.ItemForm.removeTag(this);
-        });
-        nRTButton.appendChild(img2);
-        nRTButton.appendChild(document.createTextNode(tag));
-    
-        Omeka.ItemForm.createMyTagsHeaderAndList();
-        $('my-tags-list').appendChild(nRTButton);
-        Omeka.ItemForm.updateTagsField();
-        return false;
-    },
-
-    createMyTagsHeaderAndList: function() {
-        if (!$('my-tags-list')) {
-            var myTagsHeader = new Element('h3');
-            myTagsHeader.appendChild(document.createTextNode('My Tags'));
-            $('my-tags').appendChild(myTagsHeader);
-            var myTagsUL = new Element('ul', {'id':'my-tags-list'})
-            $('my-tags').appendChild(myTagsUL);
+    fieldDiv.find('input, textarea, select').each(function () {
+        var element = jQuery(this);
+        // Workaround for annoying jQuery treatment of checkboxes.
+        if (element.is('[type=checkbox]')) {
+            params[this.name] = element.is(':checked') ? '1' : '0';
+        } else {
+            params[this.name] = element.val();
         }
-    },
-
-    removeTag: function(button) {
-        button.hide();
-        button.up().setOpacity(.3);
-        Omeka.ItemForm.updateTagsField();
-        return false;
-    },
-
-    undoRemoveTag: function(button) {
-        button.next('input.remove_tag').show();
-        button.up().setOpacity(1);
-        Omeka.ItemForm.updateTagsField();
-        return false;
-    },
-
-    // update the tags field to only include the tags that have not been removed
-    updateTagsField: function() {
-            
-        var myTagsToAdd = new Array();
-        var myTagsToDelete = new Array();
-        if (rTButtons = $$('#my-tags-list input.remove_tag')) {
-            rTButtons.each(function(button) {
-                // decide whether the toggled tag needs to be included
-                var s = button.value.strip();
-                if (button.up().getOpacity() == 1) {
-                    myTagsToAdd.push(s);
-                } else {
-                    myTagsToDelete.push(s);
-                }
-            });         
-        }
+    });
     
-        var otherTagsToDelete = new Array();
-        if (rTButtons = $$('#other-tags-list input.remove_tag')) {
-            rTButtons.each(function(button) {
-                // decide whether a toggled tag needs to be added
-                var s = button.value.strip();
-                if (button.up().getOpacity() != 1) {
-                    otherTagsToDelete.push(s);
-                }
-            });  
-        }
-    
-        $('my-tags-to-add').value = myTagsToAdd.join(',');
-        $('my-tags-to-delete').value = myTagsToDelete.join(',');
-        $('other-tags-to-delete').value = otherTagsToDelete.join(',');          
-    },
+    params.element_id = elementId;
+    params.item_id = itemId;
 
-    /* Messing with the tag list should not submit the form. */
-    enableTagRemoval: function(addImage, deleteImage) {      
-        if ( !(removeTagButtons = $$('input.remove_tag')) || !(undoRemoveTagButtons = $$('input.undo_remove_tag'))) {
+    jQuery.ajax({
+        url: elementFormPartialUri,
+        type: 'POST',
+        dataType: 'html',
+        data: params,
+        success: function (response) {
+            fieldDiv.html(response);
+            fieldDiv.trigger('omeka:elementformload');
+        }
+    });
+};
+
+/**
+ * Set up add/remove element buttons for ElementText inputs.
+ *
+ * @param {string} elementFormPartialUrl AJAX URL for form inputs.
+ * @param {string} itemId Current Item ID.
+ */
+Omeka.Items.makeElementControls = function (elementFormPartialUrl, itemId) {
+    var addSelector = '.add-element';
+    var removeSelector = '.remove-element';
+    var fieldSelector = 'div.field';
+    var inputBlockSelector = 'div.input-block';
+
+    // Show remove buttons for fields with 2 or more inputs.
+    jQuery('div.field').each(function () {
+        var removeButtons = jQuery(this).find(removeSelector);
+        if (removeButtons.length > 1) {
+            removeButtons.show();
+        }
+    });
+
+    // When an add button is clicked, make an AJAX request to add another input.
+    jQuery(addSelector).click(function (event) {
+        event.preventDefault();
+        var fieldDiv = jQuery(this).parents(fieldSelector);
+
+        Omeka.Items.elementFormRequest(fieldDiv, {add: '1'}, elementFormPartialUrl, itemId);
+    });
+
+    // When a remove button is clicked, remove that input from the form.
+    jQuery(removeSelector).click(function (event) {
+        event.preventDefault();
+        var removeButton = jQuery(this);
+
+        // Don't delete the last input block for an element.
+        if (removeButton.parents(fieldSelector).find(inputBlockSelector).length === 1) {
             return;
         }
 
-        $('add-tags-button').observe('click', function(e) {
-            e.stop();
-            Omeka.ItemForm.addTags($('tags').value, addImage, deleteImage);
-        });     
-    
-        removeTagButtons.invoke('observe', 'click', function(e) {
-            e.stop();
-            Omeka.ItemForm.removeTag(this);
-        });
-    
-        undoRemoveTagButtons.invoke('observe', 'click', function(e) {
-            e.stop();
-            Omeka.ItemForm.undoRemoveTag(this);
-        });
-    
-        Omeka.ItemForm.updateTagsField();
-    },
-    
-    tagChoices: function(tagChoicesUrl) {
-        new Ajax.Autocompleter("tags", "tag-choices", 
-        tagChoicesUrl, {
-            tokens: ',',
-            paramName: 'tag_start'
-        });  
-    },
-
-    /**
-     * Send an AJAX request to update a <div class="field"> that contains all 
-     * the form inputs for an element.
-     */
-    elementFormRequest: function(fieldDiv, params, elementFormPartialUri, itemId) {
-        var elementId = fieldDiv.id.gsub(/element-/, '');
-    
-        // Isolate the inputs on this part of the form.
-        var inputs = fieldDiv.select('input', 'textarea', 'select');
-
-        var postString = inputs.invoke('serialize').join('&');        
-        params.element_id = elementId;
-        params.item_id = itemId;
-        
-        // Make sure that we put in that we want to add one input to the form
-        postString += '&' + $H(params).toQueryString();
-    
-        new Ajax.Updater(fieldDiv, elementFormPartialUri, {
-            parameters: postString,
-            onComplete: function(t) {
-                fieldDiv.fire('omeka:elementformload');
-            }
-        });
-    },
-
-    makeElementControls: function(elementFormPartialUrl, itemId) {
-    
-        $$('div.field').each(function(i) {
-            var removeCount = i.select('.remove-element').size();
-            if(removeCount > 1) {
-                i.select('.remove-element').each(function(j,index){
-                    j.style.display = "block"; 
-                }); 
-            }
-        });
-    
-        // Class name is hard coded here b/c it is hard coded in the helper
-        // function as well.
-        $$('.add-element').invoke('observe', 'click', function(e) {
-            e.stop();
-            var addButton = Event.element(e);
-            var fieldDiv = addButton.up('div.field');
-
-            Omeka.ItemForm.elementFormRequest(fieldDiv, {add:'1'}, elementFormPartialUrl, itemId);
-        });
-    
-        // When button is clicked, remove the last input that was added
-        $$('.remove-element').invoke('observe', 'click', function(e) {
-            e.stop();
-
-            var removeButton = Event.element(e);
-
-            //Check if there is only one input.
-            var inputCount = removeButton.up('div.field').select('div.input-block').size();
-            if (inputCount == 1) {
-                return;
-            };
-
-            if(!confirm('Do you want to delete this?')) {
-                return;
-            }
-
-            removeButton.up('div.input-block').remove();
-
-            $$('div.field').each(function(i) {
-                var removeCount = i.select('.remove-element').size();
-                if(removeCount == 1) {
-                    i.select('.remove-element').each(function(j,index){
-                        j.style.display = "none"; 
-                    }); 
-                }
-            });
-        });
-    },
-
-    /**
-     * Adds an arbitrary number of file input elements to the items form so that
-     * more than one file can be uploaded at once.
-     */
-    enableAddFiles: function() {
-        if(!$('add-more-files')) return;
-        if(!$('file-inputs')) return;
-        if(!$$('#file-inputs .files')) return;
-        var nonJsFormDiv = $('add-more-files');
-
-        //This is where we put the new file inputs
-        var filesDiv = $$('#file-inputs .files').first();
-
-        var filesDivWrap = $('file-inputs');
-        //Make a link that will add another file input to the page
-        var link = $(document.createElement('a')).writeAttribute(
-            {href:'#',id: 'add-file', className: 'add-file'}).update('Add Another File');
-
-        Event.observe(link, 'click', function(e){
-            e.stop();
-            var inputs = $A(filesDiv.getElementsByTagName('input'));
-            var inputCount = inputs.length;
-            var fileHtml = '<div id="fileinput'+inputCount+'" class="fileinput"><input name="file['+inputCount+']" id="file['+inputCount+']" type="file" class="fileinput" /></div>';
-            new Insertion.After(inputs.last(), fileHtml);
-            $('fileinput'+inputCount).hide();
-            new Effect.SlideDown('fileinput'+inputCount,{duration:0.2});
-            //new Effect.Highlight('file['+inputCount+']');
-        });
-
-        nonJsFormDiv.update();
-    
-        filesDivWrap.appendChild(link);
-    },
-
-    enableWysiwygCheckbox: function(checkbox) {
-    
-        function getTextarea(checkbox) {
-            var textarea = checkbox.up('.input-block').down('textarea', 0);
-            // We can't use the editor for any field that isn't a textarea
-            if (Object.isUndefined(textarea)) {
-                return;
-            };
-        
-            textarea.identify();
-            return textarea;
+        if (!confirm('Do you want to delete this input?')) {
+            return;
         }
-    
-        // Add the 'html-editor' class to all textareas that are flagged as HTML.
-        var textarea = getTextarea(checkbox);
-    
-        if (checkbox.checked && textarea) {
-            textarea.addClassName('html-editor');
-        };
 
+        removeButton.parents(inputBlockSelector).remove();
 
+        // Hide remove buttons for fields with one input.
+        jQuery(fieldSelector).each(function () {
+            var removeButtons = jQuery(this).find(removeSelector);
+            if (removeButtons.length === 1) {
+                removeButtons.hide();
+            }
+        });
+    });
+};
+
+/**
+ * Allow adding an arbitrary number of file input elements to the items form so that
+ * more than one file can be uploaded at once.
+ */
+Omeka.Items.enableAddFiles = function () {
+    var filesDiv = jQuery('#file-inputs .files').first();
+    var filesDivWrap = jQuery('#file-inputs');
+
+    var link = jQuery('<a href="#" id="add-file" class="add-file">Add Another File</a>');
+    link.click(function (event) {
+        event.preventDefault();
+        var inputs = filesDiv.find('input');
+        var inputCount = inputs.length;
+        var fileHtml = '<div id="fileinput' + inputCount + '" class="fileinput"><input name="file[' + inputCount + ']" id="file[' + inputCount + ']" type="file" class="fileinput" /></div>';
+        jQuery(fileHtml).insertAfter(inputs.last()).hide().slideDown(200, function () {
+            // Extra show fixes IE bug.
+            jQuery(this).show();
+        });
+    });
+
+    jQuery('#add-more-files').html('');
+    filesDivWrap.append(link);
+};
+
+/**
+ * Set up a "Uses HTML" checkbox to enable the WYSIWYG editor.
+ *
+ * @param {Element} checkbox
+ */
+Omeka.Items.enableWysiwygCheckbox = function (checkbox) {
+    var textarea = jQuery(checkbox).parents('.input-block').find('textarea');
+    if (textarea.length) {
+        var textareaId = textarea.attr('id');
+        if (checkbox.checked) {
+            textarea.addClass('html-editor');
+        }
         // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
-        Event.observe(checkbox, 'click', function(e) {
-            var textarea = getTextarea(checkbox);
-        
-            if (textarea) {
-                // Toggle on when checked.
-                if(checkbox.checked) {
-                    tinyMCE.execCommand("mceAddControl", false, textarea.id);               
-                } else {
-                    tinyMCE.execCommand("mceRemoveControl", false, textarea.id);
-                }                
-            };
+        jQuery(checkbox).click(function () {
+            if (checkbox.checked) {
+                tinyMCE.execCommand("mceAddControl", false, textareaId);
+            } else {
+                tinyMCE.execCommand("mceRemoveControl", false, textareaId);
+            }
         });
-    },
-
-    /**
-     * Make it so that checking a box will enable the WYSIWYG HTML editor for
-     * any given element field. This can be enabled on a per-textarea basis as
-     * opposed to all fields for the element.
-     */
-    enableWysiwyg: function() {
-            
-        $$('div.inputs').each(function(div){
-            // Get all the WYSIWYG checkboxes
-            var checkboxes = div.select('input[type="checkbox"]');
-            checkboxes.each(Omeka.ItemForm.enableWysiwygCheckbox);
-        });
-
-       Omeka.wysiwyg({
-           mode: "specific_textareas",
-           editor_selector: "html-editor",
-           forced_root_block: ""
-       });
     }
+};
 
-});
+/**
+ * Enable the WYSIWYG editor for "html-editor" fields on the form, and allow
+ * checkboxes to create editors for more fields.
+ */
+Omeka.Items.enableWysiwyg = function () {
+    jQuery('div.inputs input[type="checkbox"]').each(function () {
+        Omeka.Items.enableWysiwygCheckbox(this);
+    });
+
+    Omeka.wysiwyg({
+        mode: "specific_textareas",
+        editor_selector: "html-editor",
+        forced_root_block: ""
+    });
+};

@@ -5,27 +5,28 @@
 <?php echo js('scriptaculous', 'javascripts', array('controls'));  ?>
 <?php echo js('items'); ?>
 <script type="text/javascript" charset="utf-8">
-//<![CDATA[    
-    Event.observe(window,'load', function() {
-        new Control.Tabs('section-nav');  
-        
-        var addImage = <?php echo js_escape(img('add.png')); ?>;
-        var deleteImage = <?php echo js_escape(img('delete.gif')); ?>;
-        Omeka.ItemForm.enableTagRemoval(addImage, deleteImage);
-        Omeka.ItemForm.makeFileWindow();
-        Omeka.ItemForm.tagChoices(<?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
+//<![CDATA[
+// TinyMCE hates document.ready.
+jQuery(window).load(function () {
+    Omeka.Items.initializeTabs();
 
-        // Must run the element form scripts AFTER reseting textarea ids.
-        document.fire('omeka:elementformload');
-        
-        Omeka.ItemForm.enableAddFiles();
-        Omeka.ItemForm.changeItemType(<?php echo js_escape(uri("items/change-type")) ?><?php if ($id = item('id')) echo ', '.$id; ?>);
-    });
-    
-    document.observe('omeka:elementformload', function(e){
-        Omeka.ItemForm.makeElementControls(<?php echo js_escape(uri('items/element-form')); ?><?php if ($id = item('id')) echo ', '.$id; ?>); 
-        Omeka.ItemForm.enableWysiwyg();
-    });
+    var addImage = <?php echo js_escape(img('add.png')); ?>;
+    var deleteImage = <?php echo js_escape(img('delete.gif')); ?>;
+    Omeka.Items.enableTagRemoval(addImage, deleteImage);
+    Omeka.Items.makeFileWindow();
+    Omeka.Items.tagChoices(<?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
+
+    // Must run the element form scripts AFTER reseting textarea ids.
+    jQuery(document).trigger('omeka:elementformload');
+
+    Omeka.Items.enableAddFiles();
+    Omeka.Items.changeItemType(<?php echo js_escape(uri("items/change-type")) ?><?php if ($id = item('id')) echo ', '.$id; ?>);
+});
+
+jQuery(document).bind('omeka:elementformload', function () {
+    Omeka.Items.makeElementControls(<?php echo js_escape(uri('items/element-form')); ?><?php if ($id = item('id')) echo ', '.$id; ?>);
+    Omeka.Items.enableWysiwyg();
+});
 //]]>   
 </script>
 

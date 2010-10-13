@@ -10,7 +10,6 @@
         <div id="add-tags">
             <h3>Add Tags</h3>           
             <input type="text" name="tags" size="20" id="tags" class="textinput" value="" />
-            <div id="tag-choices" class="autocomplete"></div>
             <input type="button" name="add-tags-button" id="add-tags-button" value="Add Tags" />
             <p id="add-tags-explanation">Separate tags with commas.</p>
         </div>
