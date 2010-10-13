@@ -25,8 +25,6 @@
 <!-- JavaScripts -->
 <?php echo js('default'); ?>
 <?php echo js('globals'); ?>
-<?php echo js('livepipe'); ?>
-<?php echo js('tabs'); ?>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
