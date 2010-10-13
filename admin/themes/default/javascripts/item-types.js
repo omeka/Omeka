@@ -1,74 +1,96 @@
-function manageItemTypes(addNewRequestUrl, addExistingRequestUrl, changeExistingElementUrl) {
+if (typeof Omeka === 'undefined') {
+    Omeka = {};
+}
 
-    $('add-element').observe('click', function(e) {
-        e.stop();
-        var elementCount = $$('#element-list-tbody tr').length;
-        var typeValue = Form.getInputs('edit-item-type-form','radio','add-element-type').find(function(radio) { return radio.checked; }).value;
-        if (typeValue=='new') {
-            requestUrl = addNewRequestUrl;
-        } else {
-            requestUrl = addExistingRequestUrl + '?elementCount=' + elementCount; 
-        }
-        new Ajax.Request(requestUrl, {
-	        method:'get',
-	        parameters: {elementCount: elementCount},
-	        onSuccess: function(transport){
-	          var response = transport.responseText || "no response text";
-              var list = $('element-list-tbody');
-              list.insert({bottom:response});
-              activateRemoveElementLinks();
-              activateSelectElementDropdowns();
-        	},
-	        onFailure: function(){ alert('Unable to get a new element.') }
-	      });
-    });     
+Omeka.ItemTypes = {};
 
-    var activateSelectElementDropdowns = function() {
-    	 $$('select.existing-element-drop-down').invoke('observe', 'change', function(e){
-             e.stop();
-             var dropDown = this;
-             var elementId = this.getValue();
-             var addExistingElementIdPrefix = 'add-existing-element-id-';
-             var addExistingElementId = this.getAttribute('id');
-             if (addExistingElementId) {
-                 var elementTempId = addExistingElementId.substring(addExistingElementIdPrefix.length);
-            	 var requestUrl = changeExistingElementUrl;
-                 new Ajax.Request(requestUrl, {
-                     method:'get',
-                     parameters: {elementId: elementId, elementTempId: elementTempId},
-                     onSuccess: function(transport){
-                       var responseJSON = transport.responseJSON;
-                       var elementDescriptionCol = dropDown.up().next();
-                       elementDescriptionCol.update(responseJSON.elementDescription);
-                       var elementDataTypeNameCol = dropDown.up().next(1);
-                       elementDataTypeNameCol.update(responseJSON.elementDataTypeName);
-                     },
-                     onFailure: function(){ alert('Unable to get selected element data.') }
-                   });
-             }
-    	 });
-    };
+/**
+ * Add AJAX-enabled buttons to item type form for adding and removing elements.
+ *
+ * @param {string} addNewRequestUrl
+ * @param {string} addExistingRequestUrl
+ * @param {string} changeExistingElementUrl
+ */
+Omeka.ItemTypes.manageItemTypes = function (addNewRequestUrl, addExistingRequestUrl, changeExistingElementUrl) {
+    /**
+     * Activate dropdown for selecting from existing elements.
+     */
+    function activateSelectElementDropdowns() {
+        jQuery('select.existing-element-drop-down').change(function () {
+            var dropDown = jQuery(this);
+            var elementId = dropDown.val();
+            var addExistingElementIdPrefix = 'add-existing-element-id-';
+            var addExistingElementId = this.getAttribute('id');
+            if (addExistingElementId) {
+                var elementTempId = addExistingElementId.substring(addExistingElementIdPrefix.length);
+                jQuery.ajax({
+                    url: changeExistingElementUrl,
+                    dataType: 'json',
+                    data: {elementId: elementId, elementTempId: elementTempId},
+                    success: function (response) {
+                        var elementDescriptionCol = dropDown.parent().next();
+                        elementDescriptionCol.html(response.elementDescription);
+                        var elementDataTypeNameCol = elementDescriptionCol.next();
+                        elementDataTypeNameCol.html(response.elementDataTypeName);
+                    },
+                    error: function () {
+                        alert('Unable to get selected element data.');
+                    }
+                });
+            }
+        });
+    }
     
-    var activateRemoveElementLinks = function() {
-        // Turn all the links into AJAX requests that will actually delete the element and reload the list.
-        $$('a.delete-element').invoke('observe', 'click', function(e){
-            e.stop();
-            var elementsToRemove = $('elements-to-remove');
+    /**
+     * Turn all the links into AJAX requests that will mark the element for deletion and update the list.
+     */
+    function activateRemoveElementLinks() {
+        jQuery('a.delete-element').click(function (event) {
+            event.preventDefault();
+            var elementsToRemove = jQuery('#elements-to-remove');
 
             var removeElementLinkPrefix = 'remove-element-link-';
             var removeElementLinkId = this.getAttribute('id');
-            if (removeElementLinkId) {    
+            if (removeElementLinkId) {
                 var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                 if (elementId) {
-                    if(!confirm('Are you sure you want to delete this element? This will remove the element from this particular item type. Items that are assigned to this item type will lose metadata that is specific to this element.')) {
+                    if (!confirm('Are you sure you want to delete this element? This will remove the element from this particular item type. Items that are assigned to this item type will lose metadata that is specific to this element.')) {
                         return;
                     }
-                    elementsToRemove.setAttribute('value', elementsToRemove.getAttribute('value') + elementId + ',');
+                    elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                 }
             }
-            var row = this.up().up();
-            row.remove();   
+            var row = jQuery(this).parent().parent();
+            row.remove();
         });
-    };
+    }
+
+    jQuery('#add-element').click(function (event) {
+        event.preventDefault();
+        var elementCount = jQuery('#element-list-tbody tr').length;
+        var typeValue = jQuery('input[name=add-element-type]:checked').val();
+        var requestUrl;
+        if (typeValue === 'new') {
+            requestUrl = addNewRequestUrl;
+        } else {
+            requestUrl = addExistingRequestUrl;
+        }
+        jQuery.ajax({
+            url: requestUrl,
+            dataType: 'text',
+            data: {elementCount: elementCount},
+            success: function (responseText) {
+                var response = responseText || 'no response text';
+                var list = jQuery('#element-list-tbody');
+                list.append(response);
+                activateRemoveElementLinks();
+                activateSelectElementDropdowns();
+            },
+            error: function () {
+                alert('Unable to get a new element.');
+            }
+        });
+    });
+
     activateRemoveElementLinks();
-}
+};

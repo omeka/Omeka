@@ -1,12 +1,12 @@
 <?php echo js('item-types'); ?>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
-Event.observe(window, 'load', function() {
+jQuery(document).ready(function () {
     var addNewRequestUrl = '<?php echo admin_uri('item-types/add-new-element'); ?>';
     var addExistingRequestUrl = '<?php echo admin_uri('item-types/add-existing-element'); ?>';
     var changeExistingElementUrl = '<?php echo admin_uri('item-types/change-existing-element'); ?>';
-	
-	manageItemTypes(addNewRequestUrl, addExistingRequestUrl, changeExistingElementUrl);
+
+    Omeka.ItemTypes.manageItemTypes(addNewRequestUrl, addExistingRequestUrl, changeExistingElementUrl);
 });
 //]]>
 </script>
