@@ -162,7 +162,7 @@ class TagsController extends Omeka_Controller_Action
     {
         $tagText = $this->_getParam('term');
         if (empty($tagText)) {
-            exit;
+            $this->_helper->json(array());
         }
         $tagNames = $this->getTable()->findTagNamesLike($tagText);
         $this->_helper->json($tagNames);
