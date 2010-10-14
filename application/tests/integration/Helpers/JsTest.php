@@ -35,15 +35,34 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
     public function testDefaultLoadsListOfJavascripts()
     {
         $expectedHrefs = array(
-            "http://fake.local/path/to/omeka/javascripts/prototype.js",
-            "http://fake.local/path/to/omeka/javascripts/prototype-extensions.js",
-            "http://fake.local/path/to/omeka/javascripts/scriptaculous.js?load=effects,dragdrop",
+            "http://fake.local/path/to/omeka/javascripts/jquery.js",
+            "http://fake.local/path/to/omeka/javascripts/jquery-noconflict.js",
+            "http://fake.local/path/to/omeka/javascripts/jquery-ui.js",
             "http://fake.local/path/to/omeka/javascripts/search.js");
         
         $html = js('default');
         foreach ($expectedHrefs as $href) {
             $this->assertContains('<script type="text/javascript" src="' . $href . '" charset="utf-8"></script>', $html);
         }        
+    }
+
+    public function testDefaultLoadsListOfJavascriptsWithPrototype()
+    {
+        Omeka_Context::getInstance()->setOptions(array('enable_prototype' => '1'));
+        $expectedHrefs = array(
+            "http://fake.local/path/to/omeka/javascripts/prototype.js",
+            "http://fake.local/path/to/omeka/javascripts/prototype-extensions.js",
+            "http://fake.local/path/to/omeka/javascripts/scriptaculous.js?load=effects,dragdrop",
+            "http://fake.local/path/to/omeka/javascripts/jquery.js",
+            "http://fake.local/path/to/omeka/javascripts/jquery-noconflict.js",
+            "http://fake.local/path/to/omeka/javascripts/jquery-ui.js",
+            "http://fake.local/path/to/omeka/javascripts/search.js");
+
+        $html = js('default');
+        foreach ($expectedHrefs as $href) {
+            $this->assertContains('<script type="text/javascript" src="' . $href . '" charset="utf-8"></script>', $html);
+        }
+        Omeka_Context::resetInstance();
     }
     
     public function testLoadingSpecificScriptaculousLibraries()

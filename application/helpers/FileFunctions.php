@@ -91,7 +91,7 @@
          $output = '';
          // For backwards compatibility: include Prototype and friends only
          // when specifically requested in the admin interface.
-         if (get_option(enable_prototype) == '1') {
+         if (get_option('enable_prototype') == '1') {
              $output .= js('prototype', $dir);
              $output .= js('prototype-extensions', $dir);
              $output .= js('scriptaculous', $dir, $scriptaculousLibraries);
