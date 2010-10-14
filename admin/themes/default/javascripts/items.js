@@ -235,9 +235,10 @@ Omeka.Items.enableTagRemoval = function (addImage, deleteImage) {
 /**
  * Set up autocomplete for tags field.
  *
+ * @param {string} inputSelector Selector for input to autocomplete on.
  * @param {string} tagChoicesUrl Autocomplete JSON URL.
  */
-Omeka.Items.tagChoices = function (tagChoicesUrl) {
+Omeka.Items.tagChoices = function (inputSelector, tagChoicesUrl) {
     function split(val) {
         return val.split(/,\s*/);
     }
@@ -247,7 +248,7 @@ Omeka.Items.tagChoices = function (tagChoicesUrl) {
 
     // Tokenized input based on
     // http://jqueryui.com/demos/autocomplete/multiple.html
-    jQuery('#tags').autocomplete({
+    jQuery(inputSelector).autocomplete({
         source: function (request, response) {
             jQuery.getJSON(tagChoicesUrl, {
                 term: extractLast(request.term)
@@ -269,6 +270,20 @@ Omeka.Items.tagChoices = function (tagChoicesUrl) {
             this.value = terms.join(', ');
             return false;
         }
+    });
+};
+
+/**
+ * Submit tag changes on items/show with AJAX.
+ */
+Omeka.Items.modifyTagsShow = function () {
+    //Add the tags with this request
+    jQuery('#tags-form').submit(function (event) {
+        event.preventDefault();
+        var form = jQuery(this);
+        jQuery.post(form.attr('action'), form.serialize(), function (response) {
+            jQuery('#tag-cloud').hide().html(response).fadeIn(1000);
+        }, 'html');
     });
 };
 

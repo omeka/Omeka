@@ -12,7 +12,7 @@ jQuery(window).load(function () {
     var deleteImage = <?php echo js_escape(img('delete.gif')); ?>;
     Omeka.Items.enableTagRemoval(addImage, deleteImage);
     Omeka.Items.makeFileWindow();
-    Omeka.Items.tagChoices(<?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
+    Omeka.Items.tagChoices('#tags', <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
 
     // Must run the element form scripts AFTER reseting textarea ids.
     jQuery(document).trigger('omeka:elementformload');
