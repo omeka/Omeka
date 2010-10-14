@@ -10,12 +10,13 @@ Omeka.Settings = {};
  * @param {string} url Url to the checkImageMagick action.
  */
 Omeka.Settings.checkImageMagick = function (url) {
-    if (!$('path_to_convert')) {
+    var imageMagickInput = jQuery('#path_to_convert');
+    if (!imageMagickInput.length) {
         return;
     }
     var testButton = '<button type="button" id="test-button">Test</button>';
     var resultDiv = '<div id="im-result" />';
-    var imageMagickInput = jQuery('#path_to_convert');
+    
     imageMagickInput.after(resultDiv);
     imageMagickInput.after(testButton);
     jQuery('#test-button').click(function () {
