@@ -125,8 +125,8 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                         $params['range'] = $requestParamValue;
                     break;
 
-                    case 'sort':
-                        $params['sort'] = $requestParamValue;
+                    case 'sort_field':
+                        $params['sort_field'] = $requestParamValue;
                     break;
 
                     case 'sort_dir':

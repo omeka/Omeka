@@ -17,7 +17,7 @@
  */
 class Omeka_Db_Table
 {
-    const SORT_PARAM = 'sort';
+    const SORT_PARAM = 'sort_field';
     const SORT_DIR_PARAM = 'sort_dir';
 
     /**
