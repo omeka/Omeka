@@ -281,6 +281,8 @@ class ItemTable extends Omeka_Db_Table
      */
     public function applySearchFilters($select, $params)
     {
+        parent::applySearchFilters($select, $params);
+        
         // Show items associated somehow with a specific user or entity
         if (isset($params['user']) || isset($params['entity'])) {
             $filterByUser = isset($params['user']);
@@ -332,6 +334,31 @@ class ItemTable extends Omeka_Db_Table
         //If we returning the data itself, we need to group by the item ID
         $select->group("i.id");
                 
+    }
+    
+    /**
+     * Enables sorting based on ElementSet,Element field strings.
+     *
+     * @param Omeka_Db_Select $select
+     * @param string $field Field to sort on
+     * @param string $dir Sorting direction (ASC or DESC)
+     */
+    public function applyCustomSorting($select, $field, $dir) 
+    {
+        $db = $this->getDb();
+        $fieldData = explode(',', $field);
+        if (count($fieldData) == 2) {
+            $element = $db->getTable('Element')->findByElementSetNameAndElementName($fieldData[0], $fieldData[1]);
+            if ($element) {
+                $recordTypeId = $db->getTable('RecordType')->findIdFromName('Item');
+                $select->joinLeft(array('et_sort' => $db->ElementText),
+                                  "et_sort.record_id = i.id AND et_sort.record_type_id = {$recordTypeId} AND et_sort.element_id = {$element->id}",
+                                  array())
+                       ->group('i.id')
+                       ->order(array("IF(ISNULL(et_sort.text), 1, 0) $dir",
+                                     "et_sort.text $dir"));
+            }
+        }
     }
     
     /**
