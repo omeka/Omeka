@@ -80,22 +80,34 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                         $params['featured'] = is_true($requestParamValue);
                     break;
                 
+                    case 'collection':
+                        $params['collection'] = $requestParamValue;
+                    break;
+                
+                    case 'type':
+                        $params['type'] = $requestParamValue;
+                    break;
+                
                     case 'tag':
                     case 'tags':
                         $params['tags'] = $requestParamValue;
+                    break;
+                
+                    case 'excludeTags':
+                        $params['excludeTags'] = $requestParamValue;
                     break;
                 
                     case 'recent':
                         if (!is_true($requestParamValue)) {
                             $params['recent'] = false;
                         }
-                        break;
+                    break;
                 
                     case 'search':
                         $params['search'] = $requestParamValue;
                         //Don't order by recent-ness if we're doing a search
                         unset($params['recent']);
-                        break;
+                    break;
                 
                     case 'advanced':                    
                         //We need to filter out the empty entries if any were provided
@@ -107,9 +119,19 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                         if (count($requestParamValue) > 0) {
                             $params['advanced_search'] = $requestParamValue;
                         }
-                        break;
-                    default:
-                        $params[$requestParamName] = $requestParamValue;
+                    break;
+                
+                    case 'range':
+                        $params['range'] = $requestParamValue;
+                    break;
+
+                    case 'sort':
+                        $params['sort'] = $requestParamValue;
+                    break;
+
+                    case 'sort_dir':
+                        $params['sort_dir'] = $requestParamValue;
+                    break;
                 }
             }
         } catch (Exception $e) {
