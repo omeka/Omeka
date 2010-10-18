@@ -18,7 +18,7 @@
 <![endif]-->
 
 <!-- JavaScripts -->
-<?php echo js('prototype'); ?>
+<?php echo js('jquery'); ?>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>

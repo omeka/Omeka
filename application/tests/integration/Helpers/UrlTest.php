@@ -40,6 +40,18 @@ class Omeka_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("/items/browse?param1=foo&param2=bar", $url);                              
     }
     
+    public function testStringUrlWithSingleStartingSlash()
+    {
+        $url = $this->helper->url('/items/browse');
+        $this->assertEquals("/items/browse", $url);
+    }
+    
+    public function testStringUrlWithMultipleStartingSlashes()
+    {
+        $url = $this->helper->url('/////items/browse');
+        $this->assertEquals("/items/browse", $url);
+    }
+    
     public function tearDown()
     {
         $this->front->resetInstance();

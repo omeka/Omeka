@@ -56,8 +56,7 @@
             <td><?php echo link_to($user, 'edit', 'Edit', array('class'=>'edit')); ?></td>
             <?php endif; ?>     
             <?php if (has_permission('Users', 'delete')): ?>
-            <?php $id = $user->id; ?>
-            <td><?php if((current_user()->id != $id)): echo delete_button($user, "delete-user-$id", 'Delete'); endif; ?></td>
+            <td><?php if((current_user()->id != $user->id)): echo delete_button($user); endif; ?></td>
             <?php endif; ?>
         </tr>
     <?php endforeach; ?>

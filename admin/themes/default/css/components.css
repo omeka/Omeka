@@ -249,3 +249,16 @@ table .edit, table .delete, table .researcher, table .super, table .admin, table
 #primary .item-file object {
     max-width: 100%;
 }
+
+th.sorting {
+    background-position: center left;
+    background-repeat: no-repeat;
+    padding-left: 15px;
+}
+
+th.desc {
+    background-image:url("../images/bullet_arrow_down.png");
+}
+th.asc {
+    background-image:url("../images/bullet_arrow_up.png");
+}

@@ -515,7 +515,7 @@ function _select_from_table($tableClass, $props = array(), $value = null, $label
  * @param array $formAttribs Other HTML attributes for button.
  * @return string HTML form.
  */
-function button_to($action, $name = 'button', $value = 'Submit', $attribs = array(), $formName = 'button-form', $formAttribs = array())
+function button_to($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array())
 {
     $view = __v();
     if (!array_key_exists('action', $formAttribs)) {
@@ -524,9 +524,13 @@ function button_to($action, $name = 'button', $value = 'Submit', $attribs = arra
     if (!array_key_exists('method', $formAttribs)) {
         $formAttribs['method'] = 'post';
     }
+    if (!array_key_exists('class', $formAttribs)) {
+        $formAttribs['class'] = 'button-form';
+    }
 
+    // Fieldset tags fix validation errors.
     return $view->form($formName, $formAttribs,
-            $view->formSubmit($name, $value, $attribs));
+        '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>');
 }
 
 /**
@@ -548,7 +552,7 @@ function button_to($action, $name = 'button', $value = 'Submit', $attribs = arra
  * @param array $formAttribs Other HTML attributes for button.
  * @return string HTML form.
  */
-function delete_button($action = null, $name = 'delete', $value = 'Delete', $attribs = array(), $formName = 'delete-form', $formAttribs = array())
+function delete_button($action = null, $name = null, $value = 'Delete', $attribs = array(), $formName = null, $formAttribs = array())
 {
     if (!isset($action)) {
         // If nothing is set at all, use the current route's delete action.

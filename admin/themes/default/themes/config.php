@@ -1,5 +1,4 @@
 <?php head(array('title'=>'Theme Configuration', 'bodyclass'=>'themes theme-configuration')); ?>
-<?php echo js('jquery'); ?>
 <?php echo js('themes'); ?>
 
 <div id="primary">

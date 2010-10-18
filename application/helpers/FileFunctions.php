@@ -88,13 +88,18 @@
  function js($file, $dir = 'javascripts', $scriptaculousLibraries = array('effects', 'dragdrop')) 
  {
      if ($file == 'default') {
-         $output  = js('prototype', $dir); //Prototype library loads by default
-         $output .= js('prototype-extensions', $dir); //A few custom extensions to the Prototype library
-         $output .= js('scriptaculous', $dir, $scriptaculousLibraries);
-         $output .= js('search', $dir);
+         $output = '';
+         // For backwards compatibility: include Prototype and friends only
+         // when specifically requested in the admin interface.
+         if (get_option('enable_prototype') == '1') {
+             $output .= js('prototype', $dir);
+             $output .= js('prototype-extensions', $dir);
+             $output .= js('scriptaculous', $dir, $scriptaculousLibraries);
+         }
          $output .= js('jquery', $dir);
          $output .= js('jquery-noconflict', $dir);
          $output .= js('jquery-ui', $dir);
+         $output .= js('search', $dir);
 
          //Do not try to load 'default.js'
          return $output;

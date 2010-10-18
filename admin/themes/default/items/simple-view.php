@@ -1,14 +1,15 @@
 <table id="items" class="simple" cellspacing="0" cellpadding="0">
     <thead>
         <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Title</th>
-        <th scope="col">Type</th>
-        <th scope="col">Creator</th>
-        <th scope="col">Date Added</th>
-        <th scope="col">Public</th>
-        <th scope="col">Featured</th>
-        <th scope="col">Edit?</th>
+        <?php echo browse_headings(array(
+            'ID' => 'id',
+            'Title' => 'Dublin Core,Title',
+            'Type' => null,
+            'Creator' => 'Dublin Core,Creator',
+            'Date Added' => 'added',
+            'Public' => 'public',
+            'Featured' => 'featured',
+            'Edit?' => null)); ?>
         </tr>
     </thead>
     <tbody>

@@ -252,3 +252,32 @@ function output_format_list($list = true, $delimiter = ' | ')
     
     return $html;
 }
+
+function browse_headings($headings) {
+    $sortParam = Omeka_Db_Table::SORT_PARAM;
+    $sortDirParam = Omeka_Db_Table::SORT_DIR_PARAM;
+    $req = Zend_Controller_Front::getInstance()->getRequest();
+    $currentSort = trim($req->getParam($sortParam));
+    $currentDir = trim($req->getParam($sortDirParam));
+
+    foreach ($headings as $label => $column) {
+        if($column) {
+            $urlParams = $_GET;
+            $urlParams[$sortParam] = $column;
+            $class = '';
+            if ($currentSort && $currentSort == $column) {
+                if ($currentDir && $currentDir == 'd') {
+                    $class = 'class="sorting desc"';
+                    $urlParams[$sortDirParam] = 'a';
+                } else {
+                    $class = 'class="sorting asc"';
+                    $urlParams[$sortDirParam] = 'd';
+                }
+            }
+            $url = uri(array(), null, $urlParams);
+            echo "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
+        } else {
+            echo "<th scope=\"col\">$label</th>";
+        }
+    }
+}

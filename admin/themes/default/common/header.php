@@ -18,15 +18,11 @@
 ?>
 
 <!-- JavaScripts -->
-<?php $this->headScript()->appendFile(web_path_to("javascripts/prototype.js"))
-                         ->appendFile(web_path_to("javascripts/prototype-extensions.js"))
-                         ->appendFile(web_path_to("javascripts/scriptaculous.js") . '?load=effects,dragdrop,controls')
-                         ->appendFile(web_path_to('javascripts/jquery.js'))
+<<<<<<< .working
+<?php $this->headScript()->appendFile(web_path_to('javascripts/jquery.js'))
                          ->appendFile(web_path_to('javascripts/jquery-noconflict.js'))
                          ->appendFile(web_path_to('javascripts/jquery-ui.js'))
                          ->appendFile(web_path_to("javascripts/globals.js"))
-                         ->appendFile(web_path_to("javascripts/livepipe.js"))
-                         ->appendFile(web_path_to("javascripts/tabs.js"))
                          ->appendFile(web_path_to("javascripts/search.js"));
 ?>
 

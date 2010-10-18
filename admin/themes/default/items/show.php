@@ -9,7 +9,7 @@
 ?>
 <?php head(array('title' => $itemTitle, 'bodyclass'=>'items show primary-secondary')); ?>
 
-<?php echo js('scriptaculous', 'javascripts', array('controls')); ?>
+<?php echo js('items'); ?>
 
 <h1 id="item-title"><?php echo $itemTitle; ?> <span class="view-public-page">[ <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>">View Public Page</a> ]</span></h1>
 
@@ -28,61 +28,10 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 </ul>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
-    
-    //Handles tagging of items via AJAX
-    function modifyTags() {
-        //Add the tags with this request
-        $('tags-form').request({
-            onComplete: function(t) {
-                $('tag-cloud').hide();
-                $('tag-cloud').update(t.responseText);
-                Effect.Appear('tag-cloud', {duration: 1.0});
-            }           
-        });     
-    }
-    
-    Event.observe(window, 'load', function() {
-        $('tags-submit').observe('click', function(e){
-            Event.stop(e);
-            modifyTags();
-        });
-    });
-    
-    //End tagging functions
-    
-    //Image gallery functions
-    function swapImage(which,where) {
-      var source = which.getAttribute("href");
-      where.setAttribute("src",source);
-      return false;
-    }
-
-    function imageGallery() {
-        if(!document.getElementById || !document.getElementsByTagName) return;
-        var mainfile = $$('#main-image img')[0];
-        if(!mainfile) return;
-        mainfile.setAttribute('width',null);
-        mainfile.setAttribute('height',null);
-        $$('#files a').each(function(el){
-            el.onclick = function() {
-                return swapImage(this,mainfile);
-            }
-        });
-    }
-
-    new Event.observe(window,'load',imageGallery);
-    
-    //End image gallery functions
-    
-    // Tags autocomplete
-    Event.observe(window, 'load', function(){
-        new Ajax.Autocompleter("tags-field", "tag-choices", 
-        <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default')); ?>, {
-            tokens: ',',
-            paramName: 'tag_start'
-        });
-    });
-
+jQuery(document).ready(function () {
+    Omeka.Items.modifyTagsShow();
+    Omeka.Items.tagChoices('#tags-field', <?php echo js_escape(uri(array('controller' => 'tags', 'action' => 'autocomplete'), 'default')); ?>);
+});
 //]]>     
 </script>
 <div id="primary">
@@ -129,7 +78,6 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
                 <div class="input">
                     <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id" />
                     <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
-                    <div id="tag-choices" class="autocomplete"></div>
                 </div>
                 <div>
                     <input type="submit" class="submit submit-medium" name="modify_tags" value="Save Tags" id="tags-submit" />

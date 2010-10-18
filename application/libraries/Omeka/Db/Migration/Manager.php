@@ -197,7 +197,9 @@ class Omeka_Db_Migration_Manager
         $regexIter = new RegexIterator($dirIter, '/^(\d*)_.*\.php$/', RegexIterator::ALL_MATCHES);        
         $fileList = array();
         foreach ($regexIter as $key => $match) {
-            $fileList[$match[1][0]] = $match[0][0];
+			if (isset($match[1][0]) && isset($match[0][0])) {
+				$fileList[$match[1][0]] = $match[0][0];
+			}
         }
         return $fileList;
     }
@@ -259,7 +261,11 @@ class Omeka_Db_Migration_Manager
             // Too big to use int.
             if ((double)$time > (double)$stopAt) {
                 unset($pending[$time]);
-            }
+			}
+			// Not exactly sure why, but sometimes empty migrations get into this list.
+			if (empty($time)) {
+				unset($pending[$time]);
+			}
         }
         ksort($pending, SORT_NUMERIC);
         return $pending;

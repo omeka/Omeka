@@ -17,6 +17,9 @@
  */
 class Omeka_Db_Table
 {
+    const SORT_PARAM = 'sort_field';
+    const SORT_DIR_PARAM = 'sort_dir';
+
     /**
      * The name of the model that this table will retrieve objects for.
      *
@@ -308,6 +311,12 @@ class Omeka_Db_Table
     public function getSelectForFindBy($params=array())
     {
         $select = $this->getSelect();
+
+        $sortParams = $this->_getSortParams($params);
+        if ($sortParams) {
+            list($sortField, $sortDir) = $sortParams;
+            $this->applySorting($select, $sortField, $sortDir);
+        }
         $this->applySearchFilters($select, $params);
         return $select;
     }
@@ -343,6 +352,24 @@ class Omeka_Db_Table
      * @return void
      */
     public function applySearchFilters($select, $params) {}
+
+    /**
+     * Applies default column-based sorting for a table.
+     *
+     * @param Omeka_Db_Select $select
+     * @param string $sortField Field to sort on.
+     * @param string $sortDir Direction to sort.
+     */
+    public function applySorting($select, $sortField, $sortDir)
+    {
+        if (empty($sortField) || empty($sortDir)) {
+            return;
+        }
+        if (in_array($sortField, $this->getColumns())) {
+            $alias = $this->getTableAlias();
+            $select->order("$alias.$sortField $sortDir");
+        }
+    }
     
     /**
      * Apply pagination to a SELECT object via the LIMIT and OFFSET clauses.
@@ -487,5 +514,34 @@ class Omeka_Db_Table
         $obj = new $class($this->_db);
         $obj->setArray($data);
         return $obj;
+    }
+
+    /**
+     * Get and parse sorting parameters to pass to applySorting.
+     *
+     * A sorting direction of 'ASC' will be used if no direction parameter
+     * is passed.
+     *
+     * @param array $params
+     * @return array|null Array of sort field, sort dir if params exist,
+     * null otherwise.
+     */
+    private function _getSortParams($params)
+    {
+        if (array_key_exists(self::SORT_PARAM, $params)) {
+            $sortField = trim($params[self::SORT_PARAM]);
+            $dir = 'ASC';
+            // Default to ascending sort with no dir param.
+            if (array_key_exists(self::SORT_DIR_PARAM, $params)) {
+                $sortDir = trim($params[self::SORT_DIR_PARAM]);
+                if ($sortDir === 'a') {
+                    $dir = 'ASC';
+                } else if ($sortDir === 'd') {
+                    $dir = 'DESC';
+                }
+            }
+            return array($sortField, $dir);
+        }
+        return null;
     }
 }
