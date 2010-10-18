@@ -18,7 +18,6 @@
 ?>
 
 <!-- JavaScripts -->
-<<<<<<< .working
 <?php $this->headScript()->appendFile(web_path_to('javascripts/jquery.js'))
                          ->appendFile(web_path_to('javascripts/jquery-noconflict.js'))
                          ->appendFile(web_path_to('javascripts/jquery-ui.js'))
