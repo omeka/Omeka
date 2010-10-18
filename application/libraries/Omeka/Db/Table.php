@@ -308,6 +308,7 @@ class Omeka_Db_Table
     public function getSelectForFindBy($params=array())
     {
         $select = $this->getSelect();
+        $this->applySorting($select, $params);
         $this->applySearchFilters($select, $params);
         return $select;
     }
@@ -342,10 +343,7 @@ class Omeka_Db_Table
      * @param array $params
      * @return void
      */
-    public function applySearchFilters($select, $params) 
-    {
-        $this->applySorting($select, $params);
-    }
+    public function applySearchFilters($select, $params) {}
 
     /**
      * Applies default column-based sorting for a table.

@@ -280,9 +280,7 @@ class ItemTable extends Omeka_Db_Table
      * @return void
      */
     public function applySearchFilters($select, $params)
-    {
-        parent::applySearchFilters($select, $params);
-        
+    {   
         // Show items associated somehow with a specific user or entity
         if (isset($params['user']) || isset($params['entity'])) {
             $filterByUser = isset($params['user']);
