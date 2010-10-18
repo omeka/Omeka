@@ -12,11 +12,13 @@
         <table id="collections" class="simple" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Collectors</th>
-                <th scope="col">Date Added</th>
-                <th scope="col">Total Number of Items</th>
+                <?php browse_headings(array(
+                    'ID' => 'id',
+                    'Name' => 'name',
+                    'Collectors' => null,
+                    'Date Added' => 'added',
+                    'Total Number of Items' => null
+                )); ?>
                 <?php if (has_permission('Collections', 'edit')): ?>
                     <th scope="col">Edit?</th>                
                 <?php endif; ?>

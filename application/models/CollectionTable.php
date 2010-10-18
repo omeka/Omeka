@@ -17,7 +17,7 @@ class CollectionTable extends Omeka_Db_Table
 {    
     public function applySearchFilters($select, $params)
     {
-        
+        parent::applySearchFilters($select, $params);
         if(array_key_exists('public', $params)) {
             $this->filterByPublic($select, $params['public']);
         }
