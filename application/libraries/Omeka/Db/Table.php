@@ -342,7 +342,47 @@ class Omeka_Db_Table
      * @param array $params
      * @return void
      */
-    public function applySearchFilters($select, $params) {}
+    public function applySearchFilters($select, $params) 
+    {
+        $this->applySorting($select, $params);
+    }
+
+    /**
+     * Applies default column-based sorting for a table.
+     *
+     * @param Omeka_Db_Select $select
+     * @param array $params
+     */
+    public function applySorting($select, $params)
+    {
+        if (array_key_exists('sort', $params)) {
+            $sortField = trim($params['sort']);
+            $dir = 'ASC';
+            if (array_key_exists('sort_dir', $params)) {
+                $sortDir = trim($params['sort_dir']);
+                if ($sortDir === 'a') {
+                    $dir = 'ASC';
+                } else if ($sortDir === 'd') {
+                    $dir = 'DESC';
+                }
+            }
+            if (!in_array($sortField, $this->getColumns())) {
+                $this->applyCustomSorting($select, $sortField, $dir);
+                return;
+            }
+            $select->order("$sortField $dir");
+        }
+    }
+    
+    /**
+     * Called by applySorting on non-column sorting strings.
+     *
+     * Subclasses should override this to provide customized sorting.
+     * @param Omeka_Db_Select $select
+     * @param string $field Field to sort on
+     * @param string $dir Sorting direction (ASC or DESC)
+     */
+    public function applyCustomSorting($select, $field, $dir) {}
     
     /**
      * Apply pagination to a SELECT object via the LIMIT and OFFSET clauses.

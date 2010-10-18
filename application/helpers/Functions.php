@@ -252,3 +252,30 @@ function output_format_list($list = true, $delimiter = ' | ')
     
     return $html;
 }
+
+function browse_headings($headings) {
+    $req = Zend_Controller_Front::getInstance()->getRequest();
+    $currentSort = trim($req->getParam('sort'));
+    $currentDir = trim($req->getParam('sort_dir'));
+
+    foreach ($headings as $label => $column) {
+        if($column) {
+            $urlParams = $_GET;
+            $urlParams['sort'] = $column;
+            $class = '';
+            if ($currentSort && $currentSort == $column) {
+                if ($currentDir && $currentDir == 'd') {
+                    $class = 'class="sorting desc"';
+                    $urlParams['sort_dir'] = 'a';
+                } else {
+                    $class = 'class="sorting asc"';
+                    $urlParams['sort_dir'] = 'd';
+                }
+            }
+            $url = uri(array(), null, $urlParams);
+            echo "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
+        } else {
+            echo "<th scope=\"col\">$label</th>";
+        }
+    }
+}
