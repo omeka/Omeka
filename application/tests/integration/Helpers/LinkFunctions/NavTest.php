@@ -22,7 +22,6 @@ class Omeka_Helper_LinkFunctions_NavTest extends Omeka_Test_AppTestCase
 {
     public function testEmptyLinkArray()
     {
-        $this->dispatch('/');
         $this->assertEquals('', nav(array()));
     }
     
@@ -33,7 +32,6 @@ class Omeka_Helper_LinkFunctions_NavTest extends Omeka_Test_AppTestCase
         $navHtml .= '<li class="nav-browse-items"><a href="/items">Browse Items</a></li>' . "\n";
         $navHtml .= '<li class="nav-browse-collections"><a href="/collections">Browse Collections</a></li>' . "\n";
         $navHtml .= '<li class="nav-home current"><a href="/">Home</a></li>' . "\n";
-        $this->dispatch('/');
         $this->assertEquals($navHtml, nav($links));
     }
     
@@ -44,7 +42,6 @@ class Omeka_Helper_LinkFunctions_NavTest extends Omeka_Test_AppTestCase
         $navHtml .= '<li class="nav-browse-items"><a href="/items">Browse Items</a></li>' . "\n";
         $navHtml .= '<li class="nav-browse-collections">Browse Collections</li>' . "\n";
         $navHtml .= '<li class="nav-home current"><a href="/">Home</a></li>' . "\n";
-        $this->dispatch('/');
         $this->assertEquals($navHtml, nav($links));
     }
     
@@ -68,7 +65,6 @@ class Omeka_Helper_LinkFunctions_NavTest extends Omeka_Test_AppTestCase
         $navHtml .= '<li class="nav-browse-collections"><a href="/collections">Browse Collections</a>'; 
         $navHtml .= '</li>' . "\n";
         $navHtml .= '<li class="nav-home current"><a href="/">Home</a></li>' . "\n";
-        $this->dispatch('/');
         $this->assertEquals($navHtml, nav($links, 0));
     }
 
@@ -97,7 +93,6 @@ class Omeka_Helper_LinkFunctions_NavTest extends Omeka_Test_AppTestCase
         $navHtml .= '</ul>' . "\n";
         $navHtml .= '</li>' . "\n";
         $navHtml .= '<li class="nav-home current"><a href="/">Home</a></li>' . "\n";
-        $this->dispatch('/');
         $this->assertEquals($navHtml, nav($links, null));
     }
 
@@ -139,7 +134,6 @@ class Omeka_Helper_LinkFunctions_NavTest extends Omeka_Test_AppTestCase
         $navHtml .= '</ul>' . "\n";
         $navHtml .= '</li>' . "\n";
         $navHtml .= '<li class="nav-home current"><a href="/">Home</a></li>' . "\n";
-        $this->dispatch('/');
         $this->assertEquals($navHtml, nav($links, null));
     }
 }
