@@ -48,6 +48,10 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_Session
         if (!array_key_exists('name', $sessionConfig) || empty($sessionConfig['name'])) {
             $sessionConfig['name'] = $this->_buildSessionName();
         }
+        // Prevents session hijacking by successful XSS attacks (prevents Javascript access to document.cookie).
+        if (!array_key_exists('cookie_httponly', $sessionConfig)) {
+            $sessionConfig['cookie_httponly'] = true;
+        }
         return $sessionConfig;
     }
     
