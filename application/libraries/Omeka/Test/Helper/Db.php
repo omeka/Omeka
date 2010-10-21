@@ -153,4 +153,9 @@ class Omeka_Test_Helper_Db
         $sql = "SELECT COUNT(*) FROM $tableName";
         return $this->_dbAdapter->fetchOne($sql);
     }
+
+    public function getAdapter()
+    {
+        return $this->_dbAdapter;
+    }
 }
