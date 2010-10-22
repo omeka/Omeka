@@ -19,7 +19,10 @@
 <tr class="item<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
     <td scope="row"><?php echo item('id');?>
     </td> 
-    <td class="title"><?php echo link_to_item(); ?></td>
+    <td class="title">
+        <?php echo link_to_item(); ?>
+        <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
+    </td>
     <td><?php echo item('Item Type Name') 
                  ? item('Item Type Name') 
                  : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
