@@ -31,6 +31,7 @@ class Integration_AllTests extends PHPUnit_Framework_TestSuite
         $dbIni = Zend_Registry::get('test_config')->db;
         $helper = Omeka_Test_Helper_Db::factory($dbIni);
         $helper->dropTables($dbIni->prefix);
+        $helper->getAdapter()->closeConnection();
     }
 
     public static function suite()

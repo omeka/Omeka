@@ -110,7 +110,28 @@ class Omeka_Test_Helper_Db
         $omekaDb = new Omeka_Db($this->_dbAdapter, $tablePrefix);
         $omekaDb->loadSqlFile($pathToSchemaFile);
     }
-    
+
+    /**
+     * Set up one or more database tables according to the given XML file,
+     * which follows the structure of PHPUnit's XmlDataSet (or FlatXmlDataSet).
+     *
+     * @see PHPUnit_Extensions_Database_DataSet_XmlDataSet
+     * @param string $xmlFile Path to XML file.
+     * @param string $schemaName Name of database schema for which to load the XML file.
+     * @param boolean $flat Whether or not the file is in PHPUnit's Flat XML format.
+     */
+    public function loadXmlSchema($xmlFile, $schemaName, $flat = false)
+    {
+        $conn = new Zend_Test_PHPUnit_Db_Connection($this->_dbAdapter, $schemaName); 
+        $tester = new Zend_Test_PHPUnit_Db_SimpleTester($conn);
+        if ($flat) {
+            $dataSet = new PHPUnit_Extensions_Database_DataSet_FlatXmlDataSet($xmlFile);
+        } else {
+            $dataSet = new PHPUnit_Extensions_Database_DataSet_XmlDataSet($xmlFile);
+        }
+        $tester->setUpDatabase($dataSet);
+    }
+
     /**
      * Drop the tables from the database.
      *
@@ -152,5 +173,10 @@ class Omeka_Test_Helper_Db
     {
         $sql = "SELECT COUNT(*) FROM $tableName";
         return $this->_dbAdapter->fetchOne($sql);
+    }
+
+    public function getAdapter()
+    {
+        return $this->_dbAdapter;
     }
 }

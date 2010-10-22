@@ -75,7 +75,7 @@
 	    <?php if ($plugin->hasNewVersion()): ?>    
 	        <p class="notice plugin-upgrade"><strong>Notice:</strong> You have a new version of <?php echo html_escape($plugin->getDisplayName()); ?>. Please upgrade!</p>
 	    <?php endif; ?>
-	    <?php if (!$plugin->meetsOmekaTestedUpToVersion()): ?>
+	    <?php if ($versionCheck && !$plugin->meetsOmekaTestedUpToVersion()): ?>
             <p class="notice omeka-tested-up-to"><strong>Notice:</strong> This version of the '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin has only been tested up to Omeka <?php echo html_escape($plugin->getTestedUpToOmekaVersion()); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</p>
         <?php endif; ?>
         </div>

@@ -16,7 +16,7 @@
             </thead>
             <tbody>
             <?php foreach($plugins as $pluginDirName => $plugin): ?>
-                <?php echo $this->partial('plugins/plugin-info.php', array('pluginDirName' => $pluginDirName, 'plugin' => $plugin, 'loader'=>$loader)); ?>                
+                <?php echo $this->partial('plugins/plugin-info.php', array('pluginDirName' => $pluginDirName, 'plugin' => $plugin, 'loader'=>$loader, 'versionCheck'=>$versionCheck)); ?>
             <?php endforeach; ?>
             </tbody>
         </table>
