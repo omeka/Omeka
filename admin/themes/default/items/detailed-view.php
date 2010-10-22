@@ -1,5 +1,6 @@
 <div id="detailed">
 <?php while($item = loop_items()):?>
+<?php $id = item('id'); ?>
 <div class="item">
     <h2><?php echo link_to_item(); ?></h2>
     
@@ -12,19 +13,19 @@
     <ul class="public-featured-checkboxes">
     <li><span class="fieldname">Public</span> 
     <?php 
-    $publicCheckboxProps = array('name'=>"items[" . item('id') . "][public]",'class'=>"make-public");
+    $publicCheckboxProps = array('name'=>"items[$id][public]",'class'=>"make-public");
     if (!has_permission('Items', 'makePublic')) {
        $publicCheckboxProps['disabled'] = 'disabled';
     }
     echo checkbox($publicCheckboxProps, item('Public')); ?></li>
     <li><span class="fieldname">Featured</span> 
     <?php 
-    $featuredCheckboxProps = array('name'=>"items[" . item('id') . "][featured]",'class'=>"make-featured");
+    $featuredCheckboxProps = array('name'=>"items[$id][featured]",'class'=>"make-featured");
     if (!has_permission('Items', 'makeFeatured')) {
        $featuredCheckboxProps['disabled'] = 'disabled';
     }
     echo checkbox($featuredCheckboxProps, item('Featured')); ?>
-    <?php echo hidden(array('name'=>"items[" . item('id') . "][id]"), item('id')); ?>   
+    <?php echo hidden(array('name'=>"items[$id][id]"), $id); ?>
     </li>
     </ul>
     <div class="item-description">
@@ -38,8 +39,8 @@
     <div class="item-meta">
         <ul>
             <li><span class="fieldname">Creator:</span> <?php echo strip_formatting(item('Dublin Core', 'Creator', array('delimiter'=>', '))); ?></li>
-            <li><span class="fieldname">Type:</span> <?php echo item('Item Type Name') 
-                                                              ? item('Item Type Name') 
+            <li><span class="fieldname">Type:</span> <?php echo ($typeName = item('Item Type Name'))
+                                                              ? $typeName
                                                               : '<em>' . strip_formatting(item('Dublin Core', 'Type')) . '</em>'; ?></li>
             <li><span class="fieldname">Added:</span> <?php echo item('Date Added'); ?></li>
             <li><span class="fieldname">Collection:</span> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
