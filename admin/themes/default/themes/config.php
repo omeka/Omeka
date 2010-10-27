@@ -1,4 +1,5 @@
 <?php head(array('title'=>'Theme Configuration', 'bodyclass'=>'themes theme-configuration')); ?>
+<?php echo js('tiny_mce/tiny_mce'); ?>
 <?php echo js('themes'); ?>
 
 <div id="primary">
