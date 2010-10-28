@@ -75,21 +75,18 @@ function delete_option($name)
 /**
  * Generate a URL slug from a piece of text.
  * 
- * Trims whitespace, replaces some prohibited characters with hyphens, and 
- * converts the resulting string to lowercase.
+ * Trims whitespace, replaces disallowed characters with hyphens,
+ * converts the resulting string to lowercase, and trims at 30 characters.
  * 
  * @param string $text
  * @return string
  */
 function generate_slug($text)
 {
-    $slug = trim($text);
-    
-    //Replace prohibited characters in the title with - 's
-    $prohibited = array(':', '/', ' ', '.', '#');
-    $replace = array_fill(0, count($prohibited), '-');
-    $slug = str_replace($prohibited, $replace, strtolower($slug) );
-    return $slug;
+    // Remove characters other than alphanumeric, hyphen, underscore.
+    $slug = preg_replace('/[^a-z0-9\-_]/', '-', strtolower(trim($text)));
+    // Trim down to 30 characters.
+    return substr($slug, 0, 30);
 }
 
 /**

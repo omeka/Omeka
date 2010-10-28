@@ -109,16 +109,17 @@ class Omeka_View_Helper_Media
             'height' => '240', 
             'autostart' => 0,
             'ShowControls'=> 1,
-            'ShowDisplay'=> 1,
-            'ShowStatusBar' => 1
+            'ShowDisplay'=> 0,
+            'ShowStatusBar' => 0,
+            'scale' => 'aspect'
             ),
         'wma'=>array(
             'width' => '320',
             'height' => '46',
             'autostart' => 0,
             'ShowControls'=> 1,
-            'ShowDisplay'=> 1,
-            'ShowStatusBar' => 1
+            'ShowDisplay'=> 0,
+            'ShowStatusBar' => 0
             ),
         'mov'=>array(
             'width' => '320',
@@ -302,21 +303,18 @@ class Omeka_View_Helper_Media
     public function wmv($file, array $options=array())
     {
         $path = html_escape($file->getWebPath('archive'));
-		$html 	.= 	'<object id="MediaPlayer" width="'.$options['width'].'" height="'.$options['height'].'"';
-		$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
-		$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
-		$html	.=	'<param name="FileName" value="'.$path.'" />'."\n";
-		$html	.=	'<param name="AutoPlay" value="'.($options['autostart'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<param name="ShowControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
-		$html	.=	' width="'.$options['width'].'" height="'.$options['height'].'"'; 		
-		$html	.=	' ShowControls="'.$options['ShowControls'].'" ShowStatusBar="'.$options['ShowStatusBar'].'"'; 
-		$html	.=	' ShowDisplay="'.$options['ShowDisplay'].'" autoplay="'.$options['autostart'].'"></embed></object>';     
-		
-		return $html;   
-    } 
+        $html = '<object type="application/x-mplayer2" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
+              . '<param name="FileName" value="'.$path.'" />'
+              . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
+              . '<param name="ShowAudioControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'
+              . '<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'
+              . '<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'
+              // This param is for QuickTime clients
+              . '<param name="scale" value="' . $options['scale'] . '" />'
+              . '</object>';
+
+        return $html;
+    }
     
     /**
      * Retrieve valid XHTML for displaying a wma audio file or equivalent.  
@@ -332,20 +330,15 @@ class Omeka_View_Helper_Media
     public function wma($file, array $options=array())
     {
         $path = html_escape($file->getWebPath('archive'));
-		$html 	.= 	'<object id="MediaPlayer" width="'.$options['width'].'" height="'.$options['height'].'"';
-		$html 	.= 	' classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95"';
-		$html 	.=	' standby="Loading Windows Media Player components..." type="application/x-oleobject">'."\n";
-		$html	.=	'<param name="FileName" value="'.$path.'" />'."\n";
-		$html	.=	'<param name="AutoPlay" value="'.($options['autostart'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<param name="ShowControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'."\n";
-		$html	.=	'<embed type="application/x-mplayer2" src="'.$path.'" name="MediaPlayer"';
-		$html	.=	' width="'.$options['width'].'" height="'.$options['height'].'"'; 		
-		$html	.=	' ShowControls="'.$options['ShowControls'].'" ShowStatusBar="'.$options['ShowStatusBar'].'"'; 
-		$html	.=	' ShowDisplay="'.$options['ShowDisplay'].'" autoplay="'.$options['autostart'].'"></embed></object>';     
-		
-		return $html;   
+        $html = '<object type="'.$file->mime_browser.'" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
+              . '<param name="FileName" value="'.$path.'" />'
+              . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
+              . '<param name="ShowControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'
+              . '<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'
+              . '<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'
+              . '</object>';
+
+        return $html;
     }
     
     /**
