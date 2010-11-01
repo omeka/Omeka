@@ -139,7 +139,7 @@ class ThemesController extends Omeka_Controller_Action
     
     private function _configUploadElement(Zend_Form_Element_File $element)
     {
-        if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) == '0') {
+        if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) != '1') {
             $element->addValidator(new Omeka_Validate_File_Extension());
             $element->addValidator(new Omeka_Validate_File_MimeType());
         }
