@@ -132,9 +132,7 @@ class ElementTable extends Omeka_Db_Table
     
     public function findByElementSetNameAndElementName($elementSetName, $elementName)
     {
-        $select = $this->getSelect()
-                       ->where('es.name = ?', $elementSetName)
-                       ->where('e.name = ?', $elementName);
+        $select = $this->getSelectForFindBy(array('element_set_name' => $elementSetName, 'element_name' => $elementName));
         return $this->fetchObject($select);
     }
     
@@ -172,7 +170,11 @@ class ElementTable extends Omeka_Db_Table
         }
         
         if (array_key_exists('element_set_name', $params)) {
-            $select->where('es.name = ?', (string) $params['element_set_name']);
+            $select->where('es.name = binary ?', (string) $params['element_set_name']);
+        }
+
+        if (array_key_exists('element_name', $params)) {
+            $select->where('e.name = binary ?', (string) $params['element_name']); 
         }
     }
     
