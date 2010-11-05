@@ -14,77 +14,109 @@
  **/
 class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Action_Helper_FlashMessenger
 {    
+    const MESSAGE_KEY = 'message';
+    const STATUS_KEY = 'status';
+
     /**
      * addMessage() - Add a message to flash message
      *
-     * @param  string $message The message to add
-     * @param  string $namespace The namespace to which the message is added
+     * @param  string|array $message The message to add
+     * @param  string|null $status The message status
      * @return Mu_Controller_Action_Helper_FlashMessenger Provides a fluent interface
      */
-    public function addMessage($message, $namespace = 'default') 
+    public function addMessage($message, $status = null) 
     {
-        return $this->_runInNamespace($namespace, 'addMessage', array($message));
+        return parent::addMessage(array(self::MESSAGE_KEY => $message,
+            self::STATUS_KEY => $status));
     }
     
     
     /**
-     * getMessages() - Get messages from a specific namespace
+     * getMessages() - Get messages from a specific status
      *
-     * @param $namespace The namespace from which to get messages.
+     * @param string|null $status The status from which to get messages.
      * @return array
      */
-    public function getMessages($namespace = 'default')
+    public function getMessages($status = null)
     {
-        return $this->_runInNamespace($namespace, 'getMessages');
+        return $this->_getMessages(parent::getMessages(), $status);
     }
-    
+
     /**
-     * Clear all messages from the previous request & specified namespace
+     * Iterate through messages and extract based on status.
+     */
+    private function _getMessages($iter, $status)
+    {
+        $filtered = array();
+        if ($status) {
+            foreach ($iter as $message) {
+                if ($status == $message[self::STATUS_KEY]) {
+                    $filtered[] = $message[self::MESSAGE_KEY];
+                }
+            }
+        } else {
+            foreach ($iter as $message) {
+                $filtered[$message[self::STATUS_KEY]][] = 
+                    $message[self::MESSAGE_KEY];
+            }
+        }
+        return $filtered;
+    }
+
+    /**
+     * Clear all messages from the previous request & specified status
      *
-     * @param string $namespace The namespace to clear
+     * @param string $status The namespace to clear
      * @return boolean True if messages were cleared, false if none existed
      */
-    public function clearMessages($namespace = 'default')
+    public function clearMessages($status = null)
     {
-        return $this->_runInNamespace($namespace, 'clearMessages');
-    }
-    
-    public function hasMessages($namespace = 'default')
-    {
-        return $this->_runInNamespace($namespace, 'hasMessages');
-    }
-    
-    public function hasCurrentMessages($namespace = 'default')
-    {
-        return $this->_runInNamespace($namespace, 'hasCurrentMessages');
-    }
-    
-    /**
-     * @internal Copied from parent::getCurrentMessages().  Did not work otherwise.
-     */
-    public function getCurrentMessages($namespace = 'default')
-    {
-        if ($this->hasCurrentMessages($namespace)) {
-            return self::$_session->{$namespace};
+        if (!$status) {
+            return parent::clearMessages();
         }
+        $existed = false;
+        foreach (self::$_messages[$this->_namespace] as $key => $message) {
+            if ($message[self::STATUS_KEY] == $status) {
+                unset(self::$_messages[$this->_namespace][$key]);
+                $existed = true;
+            }
+        }
+        return $existed;
+    }
 
-        return array();
+    /**
+     * Whether has messages with a specific status (or any messages, if null).
+     */
+    public function hasMessages($status = null)
+    {
+        if (!$status) {
+            return parent::hasMessages();
+        }
+        return $this->_hasMessages(self::$_messages[$this->_namespace], $status);
     }
     
-    private function _runInNamespace($namespace, $methodName, $methodArgs = array())
+    public function hasCurrentMessages($status = null)
     {
-        // store the current namespace
-        $cNamespace = $this->getNamespace();
-        
-        // add the message to $namespace
-        $this->setNamespace($namespace);
-        $result = call_user_func_array(array($this, "parent::$methodName"), $methodArgs);
-        
-        // restore the current namespace
-        $this->setNamespace($cNamespace);
-        
-        // return the result (true or false)
-        return $result;
+        if (!$status) {
+            return parent::hasCurrentMessages();
+        }
+        return $this->_hasMessages(self::$_session->{$this->_namespace}, $status);
+    }
+    
+    private function _hasMessages($iter, $status)
+    {
+        $existed = false;
+        foreach ($iter as $key => $message) {
+            if ($message[self::STATUS_KEY] == $status) {
+                $existed = true;
+            }
+        }
+        return $existed;
+    }
+
+    public function getCurrentMessages($status = null)
+    {
+        return $this->_getMessages(parent::getCurrentMessages(), $status);
     }
     
     public function loadFromSession()
@@ -111,9 +143,9 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
      * @param  string $message
      * @return void
      */
-    public function direct($message, $namespace = 'default')
+    public function direct($message, $status)
     {
-        return $this->addMessage($message, $namespace);
+        return $this->addMessage($message, $status);
     }
     
     public function getNamespace() 

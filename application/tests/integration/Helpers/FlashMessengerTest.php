@@ -23,7 +23,7 @@ class Omeka_Controller_Action_Helper_FlashMessengerTest extends Omeka_Test_AppTe
     
     public function testRetrieveFromNamespace()
     {
-        $this->messenger->addMessage("First message to default namespace");
+        $this->messenger->addMessage("First message to default namespace", 'default');
         $this->messenger->addMessage("Second message to error namespace", 'error');
         $this->messenger->addMessage("Third message to success namespace", 'success');
         
