@@ -121,7 +121,6 @@ class ErrorController extends Omeka_Controller_Action
     {
         $this->view->assign(compact('e'));
         if ($this->isInDebugMode()) {
-            ini_set('memory_limit', '64M');
             $this->render('debug');
         } else {
             $this->render('index');
