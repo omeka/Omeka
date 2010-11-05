@@ -75,7 +75,7 @@ class ThemesController extends Omeka_Controller_Action
         $this->_form = new Omeka_Form_ThemeConfiguration(array('themeName' => $this->_themeName));
                 
         // process the form if posted
-        if ($this->getRequest()->isPost()) {            
+        if ($this->getRequest()->isPost()) {
             $elements = $this->_form->getElements();
             foreach($elements as $element) {
                 if ($element instanceof Zend_Form_Element_File) {
@@ -84,7 +84,7 @@ class ThemesController extends Omeka_Controller_Action
             }
 
             // validate the form (note: this will populate the form with the post values)
-            if ($this->_form->isValid($_POST)) {                                
+            if ($this->_form->isValid($_POST)) {
                 $this->_formValues = $this->_form->getValues();
                 $this->_themeOptions = Theme::getOptions($this->_themeName);
                 
@@ -130,9 +130,14 @@ class ThemesController extends Omeka_Controller_Action
         if ($element->getIgnore()) {
             // set the form value to the old theme option
             $this->_formValues[$elementName] = $this->_themeOptions[$elementName];
-        } else {                          
-            $this->_formValues[$elementName] = $element->getFileName(null, false);
-            $this->_unlinkOldFile($element);            
+        } else {
+            $newFile = $element->getFileName(null, false);
+            if (empty($newFile)) {
+                // Make sure null-like values are actually null when saved.
+                $newFile = null;
+            }
+            $this->_formValues[$elementName] = $newFile;
+            $this->_unlinkOldFile($element);
         }
     }
 

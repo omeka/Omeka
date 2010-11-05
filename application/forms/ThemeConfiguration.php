@@ -107,7 +107,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
     {
         // set all the file elements destination directories
         $element->setDestination(THEME_UPLOADS_DIR);
-        $fileName = get_theme_option($element->getName(), $themeName);
+        $fileName = get_theme_option($element->getName(), $this->getThemeName());
 
         // Add extension/mimetype filtering.
         if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) != '1') {
@@ -138,7 +138,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
     {
         $elementName = $element->getName();
         $fileName = $element->getFileName(null, false);
-        $uploadedFileName = Theme::getUploadedFileName($this->_themeName, $elementName, $fileName);
+        $uploadedFileName = Theme::getUploadedFileName($this->getThemeName(), $elementName, $fileName);
         $uploadedFilePath = $element->getDestination() . DIRECTORY_SEPARATOR . $uploadedFileName;
         $element->addFilter('Rename', array('target' => $uploadedFilePath, 'overwrite' => true));
     }
