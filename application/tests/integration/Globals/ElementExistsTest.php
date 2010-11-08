@@ -22,4 +22,9 @@ class Globals_ElementExistsTest extends Omeka_Test_AppTestCase
     {
         $this->assertFalse(element_exists('Non Existing Element Set', 'Title'));
     }
+    
+    public function testLowerCaseElementName()
+    {
+        $this->assertFalse(element_exists('Dublin Core', 'title'));
+    }
 }

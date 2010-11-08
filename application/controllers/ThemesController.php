@@ -20,7 +20,6 @@ class ThemesController extends Omeka_Controller_Action
     
     private $_themeOptions = array();
     private $_formValues = array();
-    private $_uploadedFilenames = array();
     private $_themeName;
     private $_form;     
          
@@ -53,9 +52,7 @@ class ThemesController extends Omeka_Controller_Action
         if (!Theme::getOptions($themeName) 
             && ($configForm = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName)))
         ) {
-            $formValues = $configForm->getValues();
-            unset($formValues['submit']);
-            Theme::setOptions($themeName, $formValues);
+            Theme::setOptions($themeName, $configForm->getValues());
         }
         
         $this->flashSuccess("The theme has been successfully changed.");
@@ -78,7 +75,7 @@ class ThemesController extends Omeka_Controller_Action
         $this->_form = new Omeka_Form_ThemeConfiguration(array('themeName' => $this->_themeName));
                 
         // process the form if posted
-        if ($this->getRequest()->isPost()) {            
+        if ($this->getRequest()->isPost()) {
             $elements = $this->_form->getElements();
             foreach($elements as $element) {
                 if ($element instanceof Zend_Form_Element_File) {
@@ -87,20 +84,15 @@ class ThemesController extends Omeka_Controller_Action
             }
 
             // validate the form (note: this will populate the form with the post values)
-            if ($this->_form->isValid($_POST)) {                                
+            if ($this->_form->isValid($_POST)) {
                 $this->_formValues = $this->_form->getValues();
                 $this->_themeOptions = Theme::getOptions($this->_themeName);
                 
                 foreach($elements as $element) {
                     if ($element instanceof Zend_Form_Element_File) {                                                
                         $this->_processFileElement($element);
-                    } else if ($element instanceof Zend_Form_Element_Hidden) {
-                        $this->_processHiddenElement($element);
                     }
                 }
-                
-                // unset the submit input
-                unset($this->_formValues['submit']);
                                 
                 // set the theme options
                 Theme::setOptions($this->_themeName, $this->_formValues);
@@ -119,36 +111,15 @@ class ThemesController extends Omeka_Controller_Action
     {
         $elementName = $element->getName();
         
-        // add filters to rename all of the uploaded theme files                                               
-        
-        // Make sure the file was uploaded before adding the Rename filter to the element
-        if ($element->isUploaded()) {
-            $this->_configUploadElement($element);
-        }
-
         // If file input's related  hidden input has a non-empty value, 
         // then the user has NOT changed the file, so do NOT upload the file.
-        if ($hiddenFileElement = $this->_form->getElement(Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName)) { 
+        if (($hiddenFileElement = $this->_form->getElement(Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName))) {
             $hiddenFileElementValue = trim($_POST[$hiddenFileElement->getName()]); 
             if ($hiddenFileElementValue != "") {                              
                 // Ignore the file input element
                 $element->setIgnore(true);
             }
         }
-    }
-    
-    private function _configUploadElement(Zend_Form_Element_File $element)
-    {
-        if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) != '1') {
-            $element->addValidator(new Omeka_Validate_File_Extension());
-            $element->addValidator(new Omeka_Validate_File_MimeType());
-        }
-        
-        $fileName = basename($element->getFileName());
-        $uploadedFileName = Theme::getUploadedFileName($this->_themeName, $element->getName(), $fileName);                      
-        $this->_uploadedFilenames[$element->getName()] = $uploadedFileName;
-        $uploadedFilePath = $element->getDestination() . DIRECTORY_SEPARATOR . $uploadedFileName;
-        $element->addFilter('Rename', array('target'=>$uploadedFilePath, 'overwrite'=>true));
     }
     
     private function _processFileElement(Zend_Form_Element_File $element)
@@ -159,30 +130,17 @@ class ThemesController extends Omeka_Controller_Action
         if ($element->getIgnore()) {
             // set the form value to the old theme option
             $this->_formValues[$elementName] = $this->_themeOptions[$elementName];
-        } else {                          
-            $this->_setNewFileOnForm($element);
-            $this->_unlinkOldFile($element);            
+        } else {
+            $newFile = $element->getFileName(null, false);
+            if (empty($newFile)) {
+                // Make sure null-like values are actually null when saved.
+                $newFile = null;
+            }
+            $this->_formValues[$elementName] = $newFile;
+            $this->_unlinkOldFile($element);
         }
     }
-    
-    private function _processHiddenElement(Zend_Form_Element_Hidden $element)
-    {
-        $elementName = $element->getName();
-        // unset the values for the hidden fields associated with the file inputs
-        if (strpos($elementName, Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX) == 0) { 
-            unset($this->_formValues[$elementName]);
-        }
-    }
-    
-    private function _setNewFileOnForm(Zend_Form_Element_File $element)
-    {
-        if (!isset($this->_uploadedFilenames[$element->getName()])) {
-            return;
-        }
-        $newFileName = $this->_uploadedFilenames[$element->getName()];
-        $this->_formValues[$element->getName()] = $newFileName;
-    }
-    
+
     private function _unlinkOldFile(Zend_Form_Element_File $element)
     {
         // delete old file if it is not the same as the new file name
