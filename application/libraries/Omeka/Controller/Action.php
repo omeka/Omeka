@@ -309,8 +309,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      *
      * The model class must be set to use this action.
      *
-     * @todo Incorporate pagination into this CRUD method so that all CRUD 
-     * controllers paginate by default
      * @return void
      */
     public function browseAction()
