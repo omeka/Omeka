@@ -10,18 +10,6 @@
  **/
  
  /**
-  * Retrieve the web path to a css file.
-  *
-  * @param string $file Should not include the .css extension
-  * @param string $dir Defaults to 'css'
-  * @return string
-  */
- function css($file, $dir = 'css') 
- {
- 	return src($file, $dir, 'css');
- }
- 
- /**
   * @see display_files()
   * @uses display_files()
   * @param File $file One File record.
@@ -58,60 +46,6 @@
          $output .= $helper->media($file, $props, $wrapperAttributes);
      }
      return $output;
- } 
- 
- /**
-  * Retrieve the web path to an image file.
-  * 
-  * @since 0.9
-  * @param string $file Filename, including the extension.
-  * @param string $dir Optional Directory within the theme to look for image 
-  * files.  Defaults to 'images'.
-  * @return string
-  */
- function img($file, $dir = 'images') 
- {
- 	return src($file, $dir);
- }
- 
- /**
-  * Echos the web path (that's what's important to the browser)
-  * to a javascript file.
-  * $dir defaults to 'javascripts'
-  * $file should not include the .js extension
-  *
-  * @param string $file The name of the file, without .js extension.  Specifying 'default' will load 
-  * the default javascript files, such as prototype/scriptaculous
-  * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
-  * @param array $scriptaculousLibraries An array of Scriptaculous libraries, by file name. Default is 'effects' and 'dragdrop'. Works only if 'default' is passed for the first parameter.
-  */
- function js($file, $dir = 'javascripts', $scriptaculousLibraries = array('effects', 'dragdrop')) 
- {
-     if ($file == 'default') {
-         $output = '';
-         // For backwards compatibility: include Prototype and friends only
-         // when specifically requested in the admin interface.
-         if (get_option('enable_prototype') == '1') {
-             $output .= js('prototype', $dir);
-             $output .= js('prototype-extensions', $dir);
-             $output .= js('scriptaculous', $dir, $scriptaculousLibraries);
-         }
-         $output .= js('jquery', $dir);
-         $output .= js('jquery-noconflict', $dir);
-         $output .= js('jquery-ui', $dir);
-         $output .= js('search', $dir);
-
-         //Do not try to load 'default.js'
-         return $output;
-     }
-    
-    if ('scriptaculous' == $file) {
-        $href = src($file, $dir, 'js') . ($scriptaculousLibraries ? '?load=' . implode(',', $scriptaculousLibraries) : '');
-    } else {
-        $href = src($file, $dir, 'js');
-    }
-     
- 	return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>'."\n";
  }
   
  /**
@@ -142,27 +76,6 @@
  }
  
  /**
-  * Return the physical path for an asset/resource within the theme (or plugins, shared, etc.)
-  *
-  * @param string $file
-  * @throws Exception
-  * @return string
-  **/
- function physical_path_to($file)
- {
- 	$view = __v();
- 	$paths = $view->getAssetPaths();
-
- 	foreach ($paths as $path) {
- 	    list($physical, $web) = $path;
- 		if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
- 			return $physical . DIRECTORY_SEPARATOR . $file;
- 		}
- 	}
- 	throw new Exception( "Could not find file '$file'!" );
- }
- 
- /**
   * @since 0.10
   * @param File
   * @return void
@@ -187,47 +100,6 @@
      }
      return __v()->fileMetadataList($file, $options);
  }
- 
- /**
-  * Return a valid src attribute value for a given file.  Used primarily
-  * by other helper functions.
-  *
-  *
-  * @param string        Filename
-  * @param string|null   Directory that the file is contained in (optional) 
-  * @param string        File extension (optional)
-  * @return string
-  **/
- function src($file, $dir=null, $ext = null) 
- {
- 	if ($ext !== null) {
- 		$file .= '.'.$ext;
- 	}
- 	if ($dir !== null) {
- 		$file = $dir.DIRECTORY_SEPARATOR.$file;
- 	}
- 	return web_path_to($file);
- }
- 
- /**
-  * Return the web path for an asset/resource within the theme
-  *
-  * @param string $file
-  * @return string
-  **/
- function web_path_to($file)
- {
- 	$view = __v();
- 	$paths = $view->getAssetPaths();
- 	foreach ($paths as $path) {
- 	    list($physical, $web) = $path;
- 		if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
- 			return $web . '/' . $file;
- 		}
- 	}
- 	throw new Exception( "Could not find file '$file'!" );
- }
- 
  
   /**
   * Returns the most recent files
