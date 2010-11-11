@@ -1,16 +1,13 @@
 <?php 
 if (!$isPartial): // If we are using the partial view of this search form.
-head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid' => 'advanced-search-page')); ?>
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        Omeka.Search.activateSearchButtons();
-    });
-</script>
+
+head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid' => 'advanced-search-page'));
+?>
+
 <h1>Advanced Search</h1>
 
 <div id="primary">    
 <?php endif; ?>
-
 <?php if (!$formActionUri): ?>
     <?php $formActionUri = uri(array('controller'=>'items', 'action'=>'browse')); ?>
 <?php endif; ?>
@@ -127,6 +124,12 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
     </div>
 </form>
 
+<?php echo js('search'); ?>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        Omeka.Search.activateSearchButtons();
+    });
+</script>
 <?php if (!$isPartial): ?>
     </div> <!-- Close 'primary' div. -->
     <?php foot(); ?>

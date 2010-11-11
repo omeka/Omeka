@@ -7,27 +7,23 @@
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('reset')); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('components')); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('screen')); ?>" />
-<link rel="stylesheet" media="print" href="<?php echo html_escape(css('print')); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('jquery-ui')); ?>" />
+<?php
+    queue_css(array('reset', 'components', 'screen', 'jquery-ui'), 'screen');
+    queue_css('print', 'print');
+    queue_css('ie7', 'screen', 'IE 7');
+    queue_css('lte-ie6', 'screen', 'lte IE 6');
 
-<!--[if IE 7]>
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('ie7')); ?>" />
-<![endif]-->
-
-<!--[if lte IE 6]>
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('lte-ie6')); ?>" />
-<![endif]-->
-
-<!-- JavaScripts -->
-<?php echo js('default'); ?>
-<?php echo js('globals'); ?>
+    queue_js('globals');
+?>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
+
+<!-- Stylesheets -->
+<?php display_css(); ?>
+
+<!-- JavaScripts -->
+<?php display_js(); ?>
 
 </head>
 <body<?php echo isset($bodyclass) ? ' class="'.$bodyclass.'"' : ''; ?>>
