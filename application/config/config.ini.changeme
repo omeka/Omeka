@@ -31,6 +31,9 @@ log.processes = false
 
 session.name = ""
 
+; Use internal JavaScripts. Uncomment the next line if this Omeka installation does not have web access.
+; theme.useInternalJavascripts = true
+
 ; Path to PHP-CLI for running background processes.  Set this to a path to override the autodetected PHP path.
 background.php.path = ""
 

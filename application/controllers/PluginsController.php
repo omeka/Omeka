@@ -38,6 +38,9 @@ class PluginsController extends Omeka_Controller_Action
     public function configAction()
     {
         $plugin = $this->_getPluginByName();
+        if (!$plugin) {
+            return $this->_helper->redirector->goto('browse');
+        }
         
         $this->view->pluginBroker = $this->_pluginBroker;
         
@@ -97,7 +100,10 @@ class PluginsController extends Omeka_Controller_Action
     public function activateAction()
     {        
         $plugin = $this->_getPluginByName();
-        
+        if (!$plugin) {
+            return $this->_helper->redirector->goto('browse');
+        }
+
         // Activate the plugin
         try {
            $this->_pluginInstaller->activate($plugin);
@@ -124,6 +130,9 @@ class PluginsController extends Omeka_Controller_Action
     public function deactivateAction()
     {
         $plugin = $this->_getPluginByName();
+        if (!$plugin) {
+            return $this->_helper->redirector->goto('browse');
+        }
         
         // Deactivate the plugin
         try {
@@ -139,6 +148,9 @@ class PluginsController extends Omeka_Controller_Action
     public function upgradeAction()
     {
         $plugin = $this->_getPluginByName();
+        if (!$plugin) {
+            return $this->_helper->redirector->goto('browse');
+        }
              
         if ($plugin->isInstalled()) {   
             try {
@@ -190,6 +202,9 @@ class PluginsController extends Omeka_Controller_Action
     public function uninstallAction()
     {
         $plugin = $this->_getPluginByName();
+        if (!$plugin) {
+            return $this->_helper->redirector->goto('browse');
+        }
         
         // Check to see if the plugin exists and is installed.
         if (!$plugin->isInstalled()) {
@@ -235,11 +250,18 @@ class PluginsController extends Omeka_Controller_Action
         $this->redirect->goto('browse');
     }
     
+    /**
+     * Retrieve the Plugin record based on the name passed via the request.
+     *
+     * @param boolean $create Whether or not the plugin object should be 
+     * created if it has not already been loaded.  
+     */
     protected function _getPluginByName($create = false)
     {
         $pluginDirName = (string) $this->_getParam('name');
         if (!$pluginDirName) {
-            $this->errorAction();
+            $this->flashError("No plugin name given.");
+            return false;
         }
         
         // Look for the plugin in the list of loaded plugins.        
@@ -247,15 +269,12 @@ class PluginsController extends Omeka_Controller_Action
             if ($create) {
                 $plugin = new Plugin;
                 $plugin->name = $pluginDirName;
-            } else {
-                // As a failsafe, retrieve the plugin record from the database.
-                // This code may be unnecessary / never used, not sure.
-                $plugin = $this->getTable()->findByDirectoryName($pluginDirName);
-            }
+            } 
         }
                     
         if (!$plugin) {
-            throw new Exception("The plugin in the directory '" . $pluginDirName . "' must be installed.");
+            $this->flashError("The plugin '" . $pluginDirName . "' must be installed.");
+            return false;
         }
         $this->_pluginIniReader->load($plugin);
         

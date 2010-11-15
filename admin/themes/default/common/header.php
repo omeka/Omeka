@@ -7,28 +7,25 @@
 <!-- Meta -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<!-- Stylesheets -->
-<?php $this->headLink()->appendStylesheet(css('reset'), 'screen', false)
-                       ->appendStylesheet(css('components'), 'screen', false)
-                       ->appendStylesheet(css('screen'), 'screen', false)
-                       ->appendStylesheet(css('jquery-ui'), 'screen', false)
-                       ->appendStylesheet(css('print'), 'print', false)
-                       ->appendStylesheet(css('ie7'), 'screen', 'IE 7')
-                       ->appendStylesheet(css('lte-ie6'), 'screen', 'lte IE 6'); 
-?>
+<?php
+    queue_css(array('reset', 'components', 'screen', 'jquery-ui'), 'screen');
+    queue_css('print', 'print');
+    queue_css('ie7', 'screen', 'IE 7');
+    queue_css('lte-ie6', 'screen', 'lte IE 6');
 
-<!-- JavaScripts -->
-<?php $this->headScript()->appendFile(web_path_to('javascripts/jquery.js'))
-                         ->appendFile(web_path_to('javascripts/jquery-noconflict.js'))
-                         ->appendFile(web_path_to('javascripts/jquery-ui.js'))
-                         ->appendFile(web_path_to("javascripts/globals.js"))
-                         ->appendFile(web_path_to("javascripts/search.js"));
+    queue_js('globals');
 ?>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
 <?php echo $this->headLink(); ?>
 <?php echo $this->headScript(); ?>
+<!-- Stylesheets -->
+<?php display_css(); ?>
+
+<!-- JavaScripts -->
+<?php display_js(); ?>
+
 </head>
 <body<?php echo isset($bodyclass) ? ' class="'.$bodyclass.'"' : ''; ?>>
     <div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>

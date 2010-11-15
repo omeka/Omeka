@@ -38,7 +38,7 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
             "http://fake.local/path/to/omeka/javascripts/jquery.js",
             "http://fake.local/path/to/omeka/javascripts/jquery-noconflict.js",
             "http://fake.local/path/to/omeka/javascripts/jquery-ui.js",
-            "http://fake.local/path/to/omeka/javascripts/search.js");
+        );
         
         $html = js('default');
         foreach ($expectedHrefs as $href) {
@@ -56,7 +56,7 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
             "http://fake.local/path/to/omeka/javascripts/jquery.js",
             "http://fake.local/path/to/omeka/javascripts/jquery-noconflict.js",
             "http://fake.local/path/to/omeka/javascripts/jquery-ui.js",
-            "http://fake.local/path/to/omeka/javascripts/search.js");
+        );
 
         $html = js('default');
         foreach ($expectedHrefs as $href) {
