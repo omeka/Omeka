@@ -13,6 +13,8 @@ Omeka.Search.activateSearchButtons = function () {
 
     var removeButtons = jQuery('.remove_search');
 
+    handleRemoveButtons();
+
     /**
      * Callback for adding a new row of advanced search options.
      */
@@ -48,13 +50,12 @@ Omeka.Search.activateSearchButtons = function () {
             return this.name.replace(/\d+/, newIndex);
         });
 
-        //Add the event listeners.
-        div.find('button.add_search').click(function () {
-            addAdvancedSearch();
-        });
+        //Add the event listener.
         div.find('button.remove_search').click(function () {
             removeAdvancedSearch(this);
         });
+
+        handleRemoveButtons();
     }
 
     /**
@@ -64,6 +65,20 @@ Omeka.Search.activateSearchButtons = function () {
      */
     function removeAdvancedSearch(button) {
         jQuery(button).parent().remove();
+        handleRemoveButtons();
+    }
+
+    /**
+     * Check the number of advanced search elements on the page and only enable
+     * the remove buttons if there is more than one.
+     */
+    function handleRemoveButtons() {
+        var removeButtons = jQuery('.remove_search');
+        if (removeButtons.length <= 1) {
+            removeButtons.attr('disabled', 'disabled').hide();
+        } else {
+            removeButtons.removeAttr('disabled').show();
+        }
     }
 
     //Make each button respond to clicks
