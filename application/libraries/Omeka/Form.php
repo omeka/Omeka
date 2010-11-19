@@ -131,6 +131,9 @@ class Omeka_Form extends Zend_Form
                 // Radio buttons must have a 'radio' class on the div wrapper.
                 $element->getDecorator('InputsTag')->setOption('class', 'inputs radio');
                 $element->setSeparator('');
+            } else if ($element instanceof Zend_Form_Element_Hidden 
+                    || $element instanceof Zend_Form_Element_Hash) {
+                $element->setDecorators(array('ViewHelper'));
             }
         }
     }
