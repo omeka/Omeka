@@ -64,11 +64,14 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #add-item, #save-changes, #edit-item {float:right; text-decoration:none;}
     #add-item:hover, #save-changes:hover {background-position:0 0 !important;cursor:pointer;}
     
-    button.add_search,
     button.remove_search {
         float:none;
         display:inline;
         width:2em;
+    }
+    button.add_search {
+        margin-left:220px;
+        float:none;
     }
     /* Simple Search */
     #simple-search-form {
@@ -286,7 +289,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         
     #delete-file-link {float:left; position:absolute; bottom:20px; left: 18px;width: 200px;}
     /* Advanced Search Form */
-    .search-entry {margin-bottom:6px; overflow:hidden;}
+    .search-entry {margin-bottom:0px !important; overflow:hidden;}
     
     /* Tags Browse */
     .browse-tags #section-nav .nav-browse-tags a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
