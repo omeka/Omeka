@@ -8,17 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Stylesheets -->
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('reset')); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('components')); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('screen')); ?>" />
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('login')); ?>" />
-
-<!--[if lte IE 6]>
-<link rel="stylesheet" media="screen" href="<?php echo html_escape(css('lte-ie6')); ?>" />
-<![endif]-->
+<link rel="stylesheet" media="all" href="<?php echo html_escape(css('default')); ?>" />
 
 <!-- JavaScripts -->
-<?php echo js('jquery'); ?>
+<?php queue_js('login'); ?>
+<?php display_js(); ?>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
