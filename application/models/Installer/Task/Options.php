@@ -36,6 +36,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         Omeka_Validate_File_MimeType::WHITELIST_OPTION,
         File::DISABLE_DEFAULT_VALIDATION_OPTION,
         Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION,
+        Omeka_Db_Migration_Manager::VERSION_OPTION_NAME,
     );
     
     private $_options = array();

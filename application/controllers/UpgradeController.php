@@ -49,6 +49,7 @@ class UpgradeController extends Zend_Controller_Action
         $this->view->debugMode = $debugMode;
         try {
             $manager->migrate();
+            $manager->finalizeDbUpgrade();
             $this->view->success = true;            
         } catch (Omeka_Db_Migration_Exception $e) {
             $this->view->error = $e->getMessage();

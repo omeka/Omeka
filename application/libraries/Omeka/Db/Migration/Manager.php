@@ -78,7 +78,9 @@ class Omeka_Db_Migration_Manager
         $optionSql = "DELETE FROM $db->Option WHERE name = '" . self::ORIG_MIGRATION_OPTION_NAME . "' LIMIT 1";
         $db->query($optionSql);
         $db->query($tableSql);
-        $db->insert('Option', array('name' => self::VERSION_OPTION_NAME, 'value' => OMEKA_VERSION));
+        // Setting an empty value ensures that the database is flagged as 
+        // needing an upgrade.
+        $db->insert('Option', array('name' => self::VERSION_OPTION_NAME, 'value' => ''));
     }
     
     /**
@@ -140,11 +142,21 @@ class Omeka_Db_Migration_Manager
      */
     public function dbNeedsUpgrade()
     {
-        return get_option(self::VERSION_OPTION_NAME) 
-            && version_compare(get_option(self::VERSION_OPTION_NAME), OMEKA_VERSION, '<')
-            && $this->canUpgrade();
+        $omekaVersion = get_option(self::VERSION_OPTION_NAME);
+        return !$omekaVersion || 
+            (version_compare($omekaVersion, OMEKA_VERSION, '<')  
+            && $this->canUpgrade());
     }
-    
+
+    /**
+     * Finalize the database upgrade by setting the most up-to-date version
+     * of Omeka.
+     */
+    public function finalizeDbUpgrade()
+    {
+        set_option(self::VERSION_OPTION_NAME, OMEKA_VERSION);
+    }
+
     /**
      * Return the default configuration of the database migration manager.
      * 

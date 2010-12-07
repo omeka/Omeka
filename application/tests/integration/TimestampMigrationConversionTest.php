@@ -41,9 +41,12 @@ class TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
         $this->core->getBootstrap()->bootstrap('Options');
         $this->assertFalse($this->db->fetchOne("SELECT value FROM omeka_options WHERE name = 'migration'"),
                              "There should not be a 'migration' option in the database.");
-        $this->assertEquals($this->db->fetchOne("SELECT value FROM omeka_options WHERE name = 'omeka_version'"),
-                            OMEKA_VERSION,
-                             "There should be an 'omeka_version' option in the database.");
+        $this->assertEquals($this->db->fetchOne(
+            "SELECT value FROM omeka_options WHERE name = 'omeka_version'"
+        ), 
+        '',
+        "There should be an empty string for 'omeka_version' that signals the " .
+        "need to continue upgrading the database.");
         $this->assertEquals($this->db->fetchCol("SHOW TABLES LIKE 'omeka_schema_migrations'"), array('omeka_schema_migrations'),
                             "There should be an 'omeka_schema_migrations' table.");    
     }

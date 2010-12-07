@@ -113,6 +113,7 @@ class Installer_Default implements InstallerInterface
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => Installer_Default::DEFAULT_FILE_VALIDATION_DISABLED,
             Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION => (string)!extension_loaded('fileinfo'),
+            Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
         ));
         $task->install($this->_db);
     }
