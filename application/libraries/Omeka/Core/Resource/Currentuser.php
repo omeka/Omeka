@@ -37,7 +37,18 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
             require_once 'User.php';
             $bootstrap->bootstrap('Db');
             $db = $bootstrap->getResource('Db');
-            $user = $db->getTable('User')->find($userId);
+            try {
+                $user = $db->getTable('User')->find($userId);
+            } catch (Zend_Db_Statement_Exception $e) {
+                // Exceptions may be thrown because the database is out of sync
+                // with the code.  Suppress errors and skip authentication, but
+                // only until the database is properly upgraded.
+                if (Omeka_Db_Migration_Manager::getDefault()->dbNeedsUpgrade()) {
+                    $user = false;
+                } else {
+                    throw $e;
+                }
+            }
             if (!$user) {
                 // If we can't retrieve the User from the database, it likely
                 // means that this user has been deleted.  In this case, do not
