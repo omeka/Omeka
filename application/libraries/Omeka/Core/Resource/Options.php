@@ -23,6 +23,8 @@
  */
 class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbstract
 {
+    private $_installerRedirect = true;
+
     /**
      * @return array
      */
@@ -32,8 +34,17 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
         $bootstrap->bootstrap('Db');
         $db = $bootstrap->getResource('Db');
         
-        // This will throw an exception if the options table does not exist
-        $options = $db->fetchPairs("SELECT name, value FROM $db->Option");
+        try {
+            // This will throw an exception if the options table does not exist
+	        $options = $db->fetchPairs("SELECT name, value FROM $db->Option");
+        } catch (Zend_Db_Statement_Exception $e) {
+            if ($this->_installerRedirect) {
+                // Redirect to the install script.
+                header('Location: '.WEB_ROOT.'/install');
+            } else {
+                throw $e;
+            }
+        }
         
         $this->_convertMigrationSchema($options);
 
@@ -47,6 +58,17 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
         return $options;
     }
     
+    /*
+     * Indicate whether or not this bootstrap resource should redirect to the 
+     * installer if database exceptions are thrown, i.e. if the options table
+     * does not exist.
+     *
+     * @param boolean $flag
+     */
+    public function setInstallerRedirect($flag) {
+        $this->_installerRedirect = (boolean)$flag;
+    }
+
     /**
      * If necessary, convert from the old sequentially-numbered migration scheme
      * to the new timestamped migrations.
