@@ -21,7 +21,7 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 	</div>
 	<div id="search-narrow-by-fields" class="field">
 	
-		<div class="label">Narrow by Specific fields</div>
+		<div class="label">Narrow by Specific Fields</div>
 		
 			<div class="inputs">
 				<?php 
@@ -61,13 +61,11 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 							array('name'=>"advanced[$i][terms]", 'size'=>20),
 							@$rows['terms']); 
 					?>
-					
-					<button type="button" class="add_search">+</button>
-					<button type="button" class="remove_search">-</button>					
+					<button type="button" class="remove_search" disabled="disabled" style="display: none;">-</button>
 					</div>
-				<?php endforeach; ?>	
-				</div>
-			
+				<?php endforeach; ?>
+			</div>
+			<button type="button" class="add_search">Add a Field</button>
 		</div>
 		
 		<div id="search-by-range" class="field">

@@ -8,10 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <?php
-    queue_css(array('reset', 'components', 'screen', 'jquery-ui'), 'screen');
-    queue_css('print', 'print');
-    queue_css('ie7', 'screen', 'IE 7');
-    queue_css('lte-ie6', 'screen', 'lte IE 6');
+    queue_css('default', 'all');
+    queue_css('jquery-ui', 'screen');
 
     queue_js('globals');
 ?>

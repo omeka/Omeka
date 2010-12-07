@@ -18,19 +18,6 @@
 class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
 {
     /**
-     * Set upgrade-related flags upon routing system startup.
-     *
-     * @uses Omeka_Controller_Plugin_Upgrade::_setNeedsUpgrade()
-     * @param Zend_Controller_Request_Abstract $request Request object
-     * (not used).
-     * @return void
-     */
-    public function routeStartup(Zend_Controller_Request_Abstract $request)
-    {
-        $this->_setNeedsUpgrade();
-    }
-    
-    /**
      * Set up routing for the upgrade controller.
      *
      * Only allows authorized users to upgrade, and blocks the public site when
@@ -46,14 +33,15 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
         // Block access to the upgrade controller.
-        if (!$this->_canUpgrade 
-            && ($request->getControllerName() == 'upgrade')
-            && ($request->getModuleName() == 'default')) {
+        if ($request->getControllerName() == 'upgrade'
+         && $request->getModuleName() == 'default'
+         && !$this->_dbCanUpgrade() 
+        ) {
             $request->setControllerName('index')
                     ->setActionName('index')
                     ->setDispatched(false);
         }        
-        if ($this->_needsUpgrade) {
+        if ($this->_dbNeedsUpgrade()) {
             if (!is_admin_theme()) {
                 die("Public site is unavailable until the upgrade completes.");
             }
@@ -66,18 +54,18 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
         }
     }
     
-    /**
-     * Set flags indicating whether the DB needs to and can be upgraded.
-     *
-     * @return void
-     */
-    private function _setNeedsUpgrade()
+    private function _dbNeedsUpgrade()
     {
         $migrationManager = Omeka_Db_Migration_Manager::getDefault();
-        $this->_needsUpgrade = $migrationManager->dbNeedsUpgrade();
-        $this->_canUpgrade = $migrationManager->canUpgrade();
+        return $migrationManager->dbNeedsUpgrade();
     }
     
+    private function _dbCanUpgrade()
+    {
+        $migrationManager = Omeka_Db_Migration_Manager::getDefault();
+        return $migrationManager->canUpgrade();
+    }
+
     /**
      * Redirect to the upgrade controller.
      *

@@ -165,6 +165,7 @@ class Omeka_Core extends Zend_Application
      * Print an HTML page to display errors when starting the application.
      *
      * @param string $message Error message to display.
+     * @param Exception $e
      * @return void
      */
     private function _displayErrorPage($message = '', Exception $e)
