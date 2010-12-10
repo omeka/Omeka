@@ -49,6 +49,8 @@ class File extends Omeka_Record
     {
         $this->added = date("Y-m-d H:i:s");
         $this->modified = date("Y-m-d H:i:s");   
+        $fileInfo = new Omeka_File_Info($this);
+        $fileInfo->setMimeTypeIfAmbiguous();
     }
 
     protected function afterInsert()
