@@ -1,139 +1,79 @@
-/* 
-Grid: 846px wide, 12 columns at 54px each, 11 gutters at 18px each.
-1 = 54px
-2 = 126px (6 columns)
-3 = 198px (4 columns)
-4 = 270px (3 columns)
-5 = 342px
-6 = 414px (2 columns)
-7 = 486px
-8 = 558px
-9 = 630px
-10 = 702px
-11 = 774px
-12 = 846px
-*/
+* {margin: 0; padding: 0;}
+body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; background:#eae9db;color: #333;width:80%;margin:36px auto; min-width: 500px;}
+h1 {font-weight:normal; font-size:2.4em; margin-bottom:1em; line-height:1.5em;color:#a74c29;}
+h2, legend {font-size:1.8em; font-weight:normal; line-height:1.2em; margin-bottom:1.2em;color:#333;}
+h3 {font-size:1.4em; line-height:1.2em; margin-bottom:0.4em;}
+#content {background:#fff;padding: 20px;}
+p {font-size:1.2em; line-height: 1.5em; margin-bottom:1.5em;}
+a:link {color:#389;}
+a:visited {color:#389;}
+a:hover {color:#369;}
+a:active {color:#555;}
+h3.error,h3.validation-error {color:#900;}
+h3.warning {color:#c70;}
+ol {font-size:1.4em; margin-left:18px;}
+ol li h3 {font-size:1.0em;}
+ol li p {font-size:0.9em;}
+fieldset {border:0; border-top: 1px dotted #dddad3; padding: 1.8em 0;}
+legend {font-size:1.2em; font-weight: bold; margin-bottom: -0.2em;, background: #fff; padding-right: 12px;}
+label,input,textarea {display: block;}
+label {float: left; clear: left; width: 126px; font-size: 1.1em; text-align: right;}
+label.required:before {content: "* ";}
+input.textinput,textarea {float: right; clear: right; width: 404px; border: 1px solid #dddad3; padding: 4px;}
+input.checkbox {float:left; margin-left: 18px;}
+form div {overflow: hidden; margin-bottom: 8px;}
+form div p {clear: both; margin-left: 144px; margin-bottom: 0; font-size: 1.1em; color: #777;}
+form div ul.errors{list-style: none; clear: both; margin-left: 144px; margin-bottom: 0; font-size: 1.1em; color: #900;}
+#required-note {font-size: 0.6em; color: #777; display: block;}
+#install_submit {font-size: 1.3em; float: right; margin-left: 144px; background:none; color:#fff;border:none;width: 100px; height: 30px; _overflow:hidden; background:#333 url("buttons-medium.gif") 0 -60px no-repeat !important;}
+#install_submit:hover {background-position:0 0 !important;cursor:pointer;}
+textarea {height: 100px;}
 
-/* == Reset styles == */
-/* http://meyerweb.com/eric/tools/css/reset/ */
-/* v1.0 | 20080212 */
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
-}
-body {
-    line-height: 1;
-}
-ol, ul {
-    list-style: none;
-}
-blockquote, q {
-    quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
+a.button {
+    text-align:center;
+    text-decoration:none; 
+    margin:9px 0;
+    font-size:1.2em;
+    font-weight:bold;
+    background-color: #6D8E1D; 
+    color:#fff;
+    text-shadow: 0 1px 1px rgba(0,0,0, 0.25);
+    padding: 8px 14px;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#88A346), to(#50610F));
+    background-image: -moz-linear-gradient(0 100% 90deg, #88A346, #50610F);
+    border:1px solid #6D8E1D;
+    -webkit-border-radius:18px;
+    -moz-border-radius:18px;
+    -o-border-radius:18px;
+    border-radius:18px;
 }
 
-/* remember to define focus styles! */
-:focus {
-    outline: 0;
+a.button:hover {
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6D8E1D), to(#50610F));
+    background-image: -moz-linear-gradient(0 100% 90deg, #6D8E1D, #50610F);
 }
 
-/* remember to highlight inserts somehow! */
-ins {
-    text-decoration: none;
-}
-del {
-    text-decoration: line-through;
+pre {
+    font-size: 1.5em;
+    font-family: monospace;
 }
 
-/* tables still need 'cellspacing="0"' in the markup */
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+pre#backtrace {
+    border:1px solid #dddad3;
+    padding: 20px;
+    overflow-x:scroll;
 }
 
-/* == Global Styles == */
-body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9db;color: #333;min-width:882px;}
-	
-	/* Headings */
-	h1,#site-title {font-weight:normal; font-size:2.2em; margin-bottom:1em; line-height:1em;margin-right:12em;}
-	h2, legend {font-size:1.8em; font-weight:normal; line-height:1em; margin-bottom:1em;}
-	h3 {font-size:1.4em; line-height:1.2em; margin-bottom:1.2em;}
-	h4 {font-size:1.2em; line-height:1.5em; font-weight:bold;}
-	h5 {font-size:1.2em; line-height:1.5em; font-style:italic;}
-	
-	h1 {color:#a74c29;}
-	h2,form legend {color:#467;}
-	
-	h1,h2,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
+#error-message dt {
+    font-size:1.2em;
+    line-height: 1.6667em;
+    font-weight:bold;
+}
 
-	/* Links */
-	a:link {color:#389;}
-	a:visited {color:#389;}
-	a:hover {color:#369;}
-	a:active {color:#555;}
+#error-message dd {
+    margin-left: 1.6667em;
+}
 
-	h1 a, h2 a, h3 a {text-decoration:none;}
-	a img {border:none;}
-	
-	/* Misc elements */
-	p,ul,ol,dl,address {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
-	ul ul {font-size:1em; margin-left:1.5em;}
-	dd * {font-size:1em;}
-	ul {list-style:none;}
-
-	em,i {font-style:italic;}
-	strong,b {font-weight:bold;}
-	
-	/* Tables */
-	table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;}
-		thead { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
-		th,td {padding:0.5em 0.5em 0.4em;}
-		tbody tr.even {}
-		tbody tr {border-bottom:1px dotted #d7d5c4;}
-	
-	table * {font-size:1em;margin:0;}
-	
-	/* Forms */
-	form {display:block;}
-	fieldset {margin-bottom:18px;}
-	legend {margin-bottom:1em;}
-		div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
-		
-		label {font-size:1.2em; color:#444;font-weight:bold; margin-bottom:0.5em; text-align:right;display:block;width: 126px; float:left;}
-		
-		input, select {border:0; background-color:transparent !important;}
-		
-		input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background:#fff !important; width: 694px;}
-	
-		input.textinput:focus,select:focus, textarea:focus {border-color: #8C8B82; background:#fff !important;}
-		input.submit {clear:both; margin:18px 0;background-color:#389 !important; color:#fff;}
-		
-		/* Replaces tooltips */
-		.field .explanation {font-size:1.1em; margin-bottom:0;color: #999; float:right; clear:right; text-align:left; width: 468px;}
-		
-		/* Changes the width of inputs depending on the layout */
-	
-			label {float:left; margin:0; width: 198px;}
-
-			/* .input used to wrap input fields in items/add form */
-			input.textinput, textarea {float:right; width: 440px; overflow:hidden; zoom:1;}
-			
-	#primary {width: 666px; padding: 18px; background: #fff; margin: 36px auto;}
+#error-message dd p:before {
+    content: " - ";
+}
