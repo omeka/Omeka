@@ -125,13 +125,13 @@ class UsersController extends Omeka_Controller_Action
         $email = $_POST['email'];
         
         if (!Zend_Validate::is($email, 'EmailAddress')) {
-            return $this->flashError('Unable to reset password. Please verify that information is correct and contact an administrator if necessary.');
+            return $this->flashError('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.');
         }
         
         $user = $this->_table->findByEmail($email);
         
         if (!$user || $user->active != 1) {
-            $this->flashError('Unable to reset password. Please verify that information is correct and contact an administrator if necessary.');
+            $this->flashError('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.');
             return;
         }
 
