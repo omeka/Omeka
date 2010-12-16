@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -194,9 +194,11 @@ class getid3_apetag extends getid3_handler
                     break;
 
                 default:
-                    foreach ($info_ape_items_current['data'] as $comment) {
-                        $info_ape['comments'][strtolower($item_key)][] = $comment;
-                    }
+                	if (is_array($info_ape_items_current['data'])) {
+	                    foreach ($info_ape_items_current['data'] as $comment) {
+	                        $info_ape['comments'][strtolower($item_key)][] = $comment;
+	                    }
+	                }
                     break;
             }
 

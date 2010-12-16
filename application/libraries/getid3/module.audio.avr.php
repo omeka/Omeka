@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -21,15 +21,15 @@
 //
 // $Id: module.audio.avr.php,v 1.2 2006/11/02 10:48:01 ah Exp $
 
-        
-        
+
+
 class getid3_avr extends getid3_handler
 {
 
     public function Analyze() {
 
         $getid3 = $this->getid3;
-        
+
         // http://cui.unige.ch/OSG/info/AudioFormats/ap11.html
         // http://www.btinternet.com/~AnthonyJ/Atari/programming/avr_format.html
         // offset    type    length    name        comments
@@ -75,7 +75,7 @@ class getid3_avr extends getid3_handler
 
         $getid3->info['avr'] = array ();
         $info_avr = &$getid3->info['avr'];
-        
+
         $getid3->info['fileformat'] = 'avr';
         $info_avr['raw']['magic']   = '2BIT';
 
@@ -85,7 +85,7 @@ class getid3_avr extends getid3_handler
         $getid3->info['avdataoffset'] += 128;
 
         $info_avr['sample_name']        = rtrim(substr($avr_header,  4,  8));
-        
+
         $info_avr['raw']['mono']        = getid3_lib::BigEndian2Int(substr($avr_header, 12,  2));
         $info_avr['bits_per_sample']    = getid3_lib::BigEndian2Int(substr($avr_header, 14,  2));
         $info_avr['raw']['signed']      = getid3_lib::BigEndian2Int(substr($avr_header, 16,  2));

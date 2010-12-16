@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -33,7 +33,7 @@
 *       require_once 'getid3/getid3.php';
 *       $getid3 = new getid3;
 *       $getid3->encoding = 'UTF-8';
-*       try { 
+*       try {
 *           $info1 = $getid3->Analyse('file1.flac');
 *           $info2 = $getid3->Analyse('file2.wv');
 *           ....
@@ -177,7 +177,7 @@ class getid3_cached_dbm extends getid3
         // Insert getID3 version number
         dba_insert(getid3::VERSION, getid3::VERSION, $this->dba);
 
-        // Reregister shutdown function
+        // Re-register shutdown function
         register_shutdown_function(array($this, '__destruct'));
     }
 

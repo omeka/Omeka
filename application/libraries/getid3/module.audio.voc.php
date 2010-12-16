@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -21,17 +21,17 @@
 //
 // $Id: module.audio.voc.php,v 1.3 2006/11/02 10:48:02 ah Exp $
 
-        
-        
+
+
 class getid3_voc extends getid3_handler
 {
 
     public function Analyze() {
 
         $getid3 = $this->getid3;
-        
+
         $original_av_data_offset = $getid3->info['avdataoffset'];
-        
+
         fseek($getid3->fp, $getid3->info['avdataoffset'], SEEK_SET);
         $voc_header= fread($getid3->fp, 26);
 
@@ -58,9 +58,9 @@ class getid3_voc extends getid3_handler
 
         getid3_lib::ReadSequence('LittleEndian2Int', $info_voc['header'], $voc_header, 20,
             array (
-                'datablock_offset' => 2, 
-                'minor_version'    => 1, 
-                'major_version'    => 1  
+                'datablock_offset' => 2,
+                'minor_version'    => 1,
+                'major_version'    => 1
             )
         );
 
@@ -72,9 +72,9 @@ class getid3_voc extends getid3_handler
             $this_block   = array ();
 
             @$info_voc['blocktypes'][$block_type]++;
-            
+
             switch ($block_type) {
-                
+
                 case 0:  // Terminator
                     // do nothing, we'll break out of the loop down below
                     break;
@@ -122,13 +122,13 @@ class getid3_voc extends getid3_handler
                     // Stereo: 65536 - (256000000 / (sample_rate * 2))
                     getid3_lib::ReadSequence('LittleEndian2Int', $this_block, $block_data, 4,
                         array (
-                            'time_constant' => 2, 
-                            'pack_method'   => 1, 
-                            'stereo'        => 1        
+                            'time_constant' => 2,
+                            'pack_method'   => 1,
+                            'stereo'        => 1
                         )
                     );
                     $this_block['stereo']      = (bool)$this_block['stereo'];
-                    
+
                     $info_audio['channels']    = ($this_block['stereo'] ? 2 : 1);
                     $info_audio['sample_rate'] = (int)floor((256000000 / (65536 - $this_block['time_constant'])) / $info_audio['channels']);
                     break;
@@ -144,11 +144,11 @@ class getid3_voc extends getid3_handler
                         array (
                             'sample_rate'     => 4,
                             'bits_per_sample' => 1,
-                            'channels'        => 1, 
-                            'wFormat'         => 2 
+                            'channels'        => 1,
+                            'wFormat'         => 2
                         )
                     );
-                    
+
                     $this_block['compression_name'] = getid3_voc::VOCwFormatLookup($this_block['wFormat']);
                     if (getid3_voc::VOCwFormatActualBitsPerSampleLookup($this_block['wFormat'])) {
                         $info_voc['compressed_bits_per_sample'] = getid3_voc::VOCwFormatActualBitsPerSampleLookup($this_block['wFormat']);
@@ -190,7 +190,7 @@ class getid3_voc extends getid3_handler
 
 
     public static function VOCcompressionTypeLookup($index) {
-        
+
         static $lookup = array (
             0 => '8-bit',
             1 => '4-bit',
@@ -203,7 +203,7 @@ class getid3_voc extends getid3_handler
 
 
     public static function VOCwFormatLookup($index) {
-        
+
         static $lookup = array (
             0x0000 => '8-bit unsigned PCM',
             0x0001 => 'Creative 8-bit to 4-bit ADPCM',
@@ -220,7 +220,7 @@ class getid3_voc extends getid3_handler
 
 
     public static function VOCwFormatActualBitsPerSampleLookup($index) {
-        
+
         static $lookup = array (
             0x0000 => 8,
             0x0001 => 4,

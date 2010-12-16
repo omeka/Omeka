@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -21,13 +21,13 @@
 //
 // $Id: module.graphic.jpeg.php,v 1.4 2006/11/02 10:48:02 ah Exp $
 
-        
-        
+
+
 class getid3_jpeg extends getid3_handler
 {
 
     public function Analyze() {
-        
+
         $getid3 = $this->getid3;
 
         $getid3->info['fileformat']                  = 'jpg';
@@ -39,7 +39,7 @@ class getid3_jpeg extends getid3_handler
         fseek($getid3->fp, $getid3->info['avdataoffset'], SEEK_SET);
 
         list($getid3->info['video']['resolution_x'], $getid3->info['video']['resolution_y'], $type) = getimagesize($getid3->filename);
-        
+
         if ($type != 2) {
             throw new getid3_exception('File detected as JPEG, but is currupt.');
         }
