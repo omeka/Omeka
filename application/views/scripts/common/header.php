@@ -10,14 +10,17 @@
     
     <?php echo auto_discovery_link_tag(); ?>
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" media="all" href="<?php echo html_escape(css('style')); ?>">
-
-    <!-- JavaScripts -->
-    <?php echo js('default'); ?>
-
     <!-- Plugin Stuff -->
-    <?php echo plugin_header(); ?>
+    <?php plugin_header(); ?>
+    
+    <!-- Stylesheets -->
+    <?php 
+    queue_css('style');
+    display_css(); 
+    ?>
+    
+    <!-- JavaScripts -->
+    <?php display_js(); ?>
 
 </head>
 <body<?php echo isset($bodyid) ? ' id="'.$bodyid.'"' : ''; ?><?php echo isset($bodyclass) ? ' class="'.$bodyclass.'"' : ''; ?>>
