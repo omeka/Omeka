@@ -696,3 +696,23 @@ function element_exists($elementSetName, $elementName) {
     $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
     return (bool)$element;
 } 
+
+/**
+ * Checks whether a specified plugin is active
+ *
+ * @since 1.4
+ * @param string $pluginDirectoryName The name of the plugin.
+ * @return bool
+ */
+function plugin_is_active($pluginDirectoryName) {
+    if (!$pluginDirectoryName) {
+        return;
+    }
+    
+    $plugin = get_db()->getTable('Plugin')->findByDirectoryName($pluginDirectoryName);
+    
+    if ($plugin) {
+        return $plugin->active == '1';
+    }
+    return false;
+}
