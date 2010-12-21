@@ -36,6 +36,8 @@ class Omeka_File_Info
         'application/octet-stream', 
         'regular file');
     
+    private $_id3;
+
     /**
      * @param File $file File to get info for.
      */
@@ -44,7 +46,39 @@ class Omeka_File_Info
         $this->_file = $file;
         $this->_filePath = $file->getPath('archive');
     }
-    
+
+    /**
+     * References a list of ambiguous mime types from "http://msdn2.microsoft.com/en-us/library/ms775147.aspx".
+     * 
+     * @param string $mimeType
+     * @return boolean
+     */
+    public function isAmbiguousMimeType($mimeType)
+    {
+        return (empty($mimeType) || in_array($mimeType, $this->_ambiguousMimeTypes));
+    }
+
+    /**
+     * Sets the MIME type for the file to the one detected by getID3, but only
+     * if the existing MIME type is 'ambiguous' and getID3 can detect a better
+     * one.
+     *
+     * @uses Omeka_File_Info::isAmbiguousMimeType() 
+     */
+    public function setMimeTypeIfAmbiguous()
+    {
+        $mimeType = $this->_file->getMimeType();    
+        if ($this->isAmbiguousMimeType($mimeType)) {
+            // WARNING: this may cause a memory error on large files.
+            if ($id3 = $this->_getId3()) {
+                $mimeType = $id3->info['mime_type'];
+            }
+            if ($mimeType) {
+                $this->_file->setMimeType($mimeType);
+            }
+        }
+    }
+
     /**
      * Take a set of Element records and populate them with element text that is 
      * auto-generated based on the getID3 metadata extraction library.
@@ -88,36 +122,16 @@ class Omeka_File_Info
      */
     public function extract()
     {
-        $filePath = $this->_filePath;
-        
-        if (!is_readable($filePath)) {
-            throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $filePath . '"');
+        if (!is_readable($this->_filePath)) {
+            throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $this->_filePath . '"');
         }
         
-        // Return if getid3 did not return a valid object.
-        if (!$id3 = $this->_retrieveID3Info($filePath)) {
+        // Skip if getid3 did not return a valid object.
+        if (!$id3 = $this->_getId3()) {
             return false;
         }
-                
-        // Try to use the MIME type that the file has by default.
-        $mime_type = $this->_file->getMimeType();    
-
-        if ($this->_mimeTypeIsAmbiguous($mime_type)) {
-            // If we can't determine MIME type via the browser, we will use the 
-            // ID3 data, but be warned that this may cause a memory error on 
-            // large files
-            $mime_type = $id3->info['mime_type'];
-        }
         
-        if (!$mime_type) {
-            return false;
-        } else {
-            // Overwrite the mime type that was retrieved from the upload script.
-            $this->_file->setMimeType($mime_type);
-        }
-        
-        $elements = $this->_file->getMimeTypeElements($mime_type);
-
+        $elements = $this->_file->getMimeTypeElements($this->_file->getMimeType());
         if (empty($elements)) {
             return false;
         }
@@ -144,23 +158,12 @@ class Omeka_File_Info
     }
     
     /**
-     * References a list of ambiguous mime types from "http://msdn2.microsoft.com/en-us/library/ms775147.aspx".
-     * 
-     * @param string $mime_Type
-     * @return boolean
-     */
-    protected function _mimeTypeIsAmbiguous($mime_type)
-    {
-        return (empty($mime_type) || in_array($mime_type, $this->_ambiguousMimeTypes));
-    }
-    
-    /**
      * Pull down the file's extra metadata via getID3 library.
      *
      * @param string $path Path to file.
      * @return getID3
      */
-    protected function _retrieveID3Info($path)
+    private function _getId3()
     {
         // Do not extract metadata if the exif module is not loaded. This 
         // applies to all files, not just files with Exif data -- i.e. images.
@@ -168,15 +171,22 @@ class Omeka_File_Info
             return false;
         }
         
-        require_once 'getid3/getid3.php';
-        $id3 = new getID3;
-        $id3->encoding = 'UTF-8';
-        
-        try {
-            $id3->Analyze($path);
-            return $id3;
-        } catch (Exception $e) {
-            return false;
-        }        
+        if (!$this->_id3) {
+            require_once 'getid3/getid3.php';
+            $id3 = new getID3;
+            $id3->encoding = 'UTF-8';
+            
+            try {
+                $id3->Analyze($this->_filePath);
+                $this->_id3 = $id3;
+            } catch (getid3_exception $e) {
+                // Ignore errors where the file format could not be determined.
+                if (strstr($e->getMessage(), 'Unable to determine file format')) {
+                    return false;
+                }
+                throw $e;
+            }        
+        }
+        return $this->_id3;
     }
 }

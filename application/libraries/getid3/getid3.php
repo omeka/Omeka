@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -61,7 +61,7 @@ class getid3
     protected $iconv_present;
 
     // Class constants
-    const VERSION           = '2.0.0b4';
+    const VERSION           = '2.0.0b6-20101125';
     const FREAD_BUFFER_SIZE = 16384;                      // Read buffer size in bytes.
     const ICONV_TEST_STRING = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œŸ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ';
 
@@ -109,9 +109,12 @@ class getid3
 
         // Check memory limit.
         $memory_limit = ini_get('memory_limit');
-        if (preg_match('/([0-9]+)M/i', $memory_limit, $matches)) {
+        if (preg_match('#([0-9]+)M#i', $memory_limit, $matches)) {
             // could be stored as "16M" rather than 16777216 for example
             $memory_limit = $matches[1] * 1048576;
+		} elseif (preg_match('#([0-9]+)G#i', $memory_limit, $matches)) {  // The 'G' modifier is available since PHP 5.1.0
+			// could be stored as "2G" rather than 2147483648 for example
+			$memory_limit = $matches[1] * 1073741824;
         }
         if ($memory_limit <= 0) {
             // Should not happen.
@@ -123,9 +126,20 @@ class getid3
 
 
         // Check safe_mode off
-        if ((bool)ini_get('safe_mode')) {
+        if (preg_match('#(1|ON)#i', ini_get('safe_mode'))) {
             $this->warning('Safe mode is on, shorten support disabled, md5data/sha1data for ogg vorbis disabled, ogg vorbis/flac tag writing disabled.');
         }
+
+		if (intval(ini_get('mbstring.func_overload')) > 0) {
+		    $this->warning('WARNING: php.ini contains "mbstring.func_overload = '.ini_get('mbstring.func_overload').'", this may break things.');
+		}
+
+		// this is needed to prevent E_STRICT warnings with any time/date functions
+		if (function_exists('date_default_timezone_set')) {
+			date_default_timezone_set('America/New_York');
+		} else {
+			ini_set('date.timezone', 'America/New_York');
+		}
 
         $initialized = true;
     }
@@ -219,7 +233,7 @@ class getid3
         // Identify file format - loop through $format_info and detect with reg expr
         foreach ($file_format_array as $name => $info) {
 
-            if (preg_match('/'.$info['pattern'].'/s', $filedata)) {                         // The /s switch on preg_match() forces preg_match() NOT to treat newline (0x0A) characters as special chars but do a binary match
+            if (@$info['pattern'] && preg_match('/'.$info['pattern'].'/s', $filedata)) {                         // The /s switch on preg_match() forces preg_match() NOT to treat newline (0x0A) characters as special chars but do a binary match
 
                 // Format detected but not supported
                 if (!@$info['module'] || !@$info['group']) {
@@ -239,15 +253,24 @@ class getid3
         // Unable to determine file format
         if (!@$determined_format) {
 
-            // Too many mp3 encoders on the market put gabage in front of mpeg files
-            // use assume format on these if format detection failed
             if (preg_match('/\.mp[123a]$/i', $filename)) {
-                $determined_format = $file_format_array['mp3'];
-            }
 
-            else {
+	            // Too many mp3 encoders on the market put gabage in front of mpeg files
+	            // use assume format on these if format detection failed
+                $determined_format = $file_format_array['mp3'];
+
+			} elseif (preg_match('/\.cue$/i', $filename) && preg_match('#FILE "[^"]+" (BINARY|MOTOROLA|AIFF|WAVE|MP3)#', $filedata)) {
+
+				// there's not really a useful consistent "magic" at the beginning of .cue files to identify them
+				// so until I think of something better, just go by filename if all other format checks fail
+				// and verify there's at least one instance of "TRACK xx AUDIO" in the file
+                $determined_format = $file_format_array['cue'];
+
+            } else {
+
                 fclose($this->fp);
                 throw new getid3_exception('Unable to determine file format');
+
             }
         }
 
@@ -286,7 +309,7 @@ class getid3
         // Supported format signature pattern detected, but module deleted.
         if (!file_exists($this->include_path.$determined_format['include'])) {
             fclose($this->fp);
-            throw new getid3_exception('Format not supported, module, '.$determined_format['include'].', was removed.');
+            throw new getid3_exception('Format not supported, module "'.$determined_format['include'].'" was removed.');
         }
 
         // Include module
@@ -295,7 +318,7 @@ class getid3
         // Instantiate module class and analyze
         $class_name = 'getid3_'.$determined_format['module'];
         if (!class_exists($class_name)) {
-            throw new getid3_exception('Format not supported, module, '.$determined_format['include'].', is corrupt.');
+            throw new getid3_exception('Format not supported, module "'.$determined_format['include'].'" is corrupt.');
         }
         $class = new $class_name($this);
 
@@ -320,95 +343,11 @@ class getid3
 
         //// Optional - perform more calculations
         if ($this->option_extra_info) {
-
-            // Set channelmode on audio
-            if (@$this->info['audio']['channels'] == '1') {
-                $this->info['audio']['channelmode'] = 'mono';
-            } elseif (@$this->info['audio']['channels'] == '2') {
-                $this->info['audio']['channelmode'] = 'stereo';
-            }
-
-            // Calculate combined bitrate - audio + video
-            $combined_bitrate  = 0;
-            $combined_bitrate += (isset($this->info['audio']['bitrate']) ? $this->info['audio']['bitrate'] : 0);
-            $combined_bitrate += (isset($this->info['video']['bitrate']) ? $this->info['video']['bitrate'] : 0);
-            if (($combined_bitrate > 0) && empty($this->info['bitrate'])) {
-                $this->info['bitrate'] = $combined_bitrate;
-            }
-            if (!isset($this->info['playtime_seconds']) && !empty($this->info['bitrate'])) {
-                $this->info['playtime_seconds'] = (($this->info['avdataend'] - $this->info['avdataoffset']) * 8) / $this->info['bitrate'];
-            }
-
-            // Set playtime string
-            if (!empty($this->info['playtime_seconds']) && empty($this->info['playtime_string'])) {
-                $this->info['playtime_string'] =  floor(round($this->info['playtime_seconds']) / 60) . ':' . str_pad(floor(round($this->info['playtime_seconds']) % 60), 2, 0, STR_PAD_LEFT);;
-            }
-
-
-            // CalculateCompressionRatioVideo() {
-            if (@$this->info['video'] && @$this->info['video']['resolution_x'] && @$this->info['video']['resolution_y'] && @$this->info['video']['bits_per_sample']) {
-
-                // From static image formats
-                if (in_array($this->info['video']['dataformat'], array ('bmp', 'gif', 'jpeg', 'jpg', 'png', 'tiff'))) {
-                    $frame_rate         = 1;
-                    $bitrate_compressed = $this->info['filesize'] * 8;
-                }
-
-                // From video formats
-                else {
-                    $frame_rate         = @$this->info['video']['frame_rate'];
-                    $bitrate_compressed = @$this->info['video']['bitrate'];
-                }
-
-                if ($frame_rate && $bitrate_compressed) {
-                    $this->info['video']['compression_ratio'] = $bitrate_compressed / ($this->info['video']['resolution_x'] * $this->info['video']['resolution_y'] * $this->info['video']['bits_per_sample'] * $frame_rate);
-                }
-            }
-
-
-            // CalculateCompressionRatioAudio() {
-            if (@$this->info['audio']['bitrate'] && @$this->info['audio']['channels'] && @$this->info['audio']['sample_rate']) {
-                $this->info['audio']['compression_ratio'] = $this->info['audio']['bitrate'] / ($this->info['audio']['channels'] * $this->info['audio']['sample_rate'] * (@$this->info['audio']['bits_per_sample'] ? $this->info['audio']['bits_per_sample'] : 16));
-            }
-
-            if (@$this->info['audio']['streams']) {
-                foreach ($this->info['audio']['streams'] as $stream_number => $stream_data) {
-                    if (@$stream_data['bitrate'] && @$stream_data['channels'] && @$stream_data['sample_rate']) {
-                        $this->info['audio']['streams'][$stream_number]['compression_ratio'] = $stream_data['bitrate'] / ($stream_data['channels'] * $stream_data['sample_rate'] * (@$stream_data['bits_per_sample'] ? $stream_data['bits_per_sample'] : 16));
-                    }
-                }
-            }
-
-
-            // CalculateReplayGain() {
-            if (@$this->info['replay_gain']) {
-                if (!@$this->info['replay_gain']['reference_volume']) {
-                     $this->info['replay_gain']['reference_volume'] = 89;
-                }
-                if (isset($this->info['replay_gain']['track']['adjustment'])) {
-                    $this->info['replay_gain']['track']['volume'] = $this->info['replay_gain']['reference_volume'] - $this->info['replay_gain']['track']['adjustment'];
-                }
-                if (isset($this->info['replay_gain']['album']['adjustment'])) {
-                    $this->info['replay_gain']['album']['volume'] = $this->info['replay_gain']['reference_volume'] - $this->info['replay_gain']['album']['adjustment'];
-                }
-
-                if (isset($this->info['replay_gain']['track']['peak'])) {
-                    $this->info['replay_gain']['track']['max_noclip_gain'] = 0 - 20 * log10($this->info['replay_gain']['track']['peak']);
-                }
-                if (isset($this->info['replay_gain']['album']['peak'])) {
-                    $this->info['replay_gain']['album']['max_noclip_gain'] = 0 - 20 * log10($this->info['replay_gain']['album']['peak']);
-                }
-            }
-
-
-            // ProcessAudioStreams() {
-            if (@!$this->info['audio']['streams'] && (@$this->info['audio']['bitrate'] || @$this->info['audio']['channels'] || @$this->info['audio']['sample_rate'])) {
-                  foreach ($this->info['audio'] as $key => $value) {
-                    if ($key != 'streams') {
-                        $this->info['audio']['streams'][0][$key] = $value;
-                    }
-                }
-            }
+			$this->ChannelsBitratePlaytimeCalculations();
+			$this->CalculateCompressionRatioVideo();
+			$this->CalculateCompressionRatioAudio();
+			$this->CalculateReplayGain();
+			$this->ProcessAudioStreams();
         }
 
 
@@ -546,6 +485,14 @@ class getid3
                             'mime_type' => 'audio/ac3',
                           ),
 
+                // AA   - audio       - Audible Audiobook
+                'aa'   => array (
+                            'pattern'   => '^.{4}\x57\x90\x75\x36',
+                            'group'     => 'audio',
+                            'module'    => 'aa',
+                            'mime_type' => 'audio/audible',
+                          ),
+
                 // AAC  - audio       - Advanced Audio Coding (AAC) - ADIF format
                 'adif' => array (
                             'pattern'   => '^ADIF',
@@ -589,6 +536,14 @@ class getid3
                             'module'    => 'bonk',
                             'mime_type' => 'audio/xmms-bonk',
                           ),
+
+				// DSS  - audio       - Digital Speech Standard
+				'dss'  => array(
+							'pattern'   => '^[\x02]dss',
+							'group'     => 'audio',
+							'module'    => 'dss',
+							'mime_type' => 'application/octet-stream',
+						),
 
                 // DTS  - audio       - Dolby Theatre System
 				'dts'  => array(
@@ -662,11 +617,19 @@ class getid3
                             'mime_type' => 'audio/s3m',
                           ),
 
-                // MPC  - audio       - Musepack / MPEGplus SV7+
-                'mpc'  => array (
+                // MPC  - audio       - Musepack SV7
+                'mpc8' => array (
+                            'pattern'   => '^(MPCK)',
+                            'group'     => 'audio',
+                            'module'    => 'mpc8',
+                            'mime_type' => 'audio/x-musepack',
+                          ),
+
+                // MPC  - audio       - Musepack SV7
+                'mpc7' => array (
                             'pattern'   => '^(MP\+)',
                             'group'     => 'audio',
-                            'module'    => 'mpc',
+                            'module'    => 'mpc7',
                             'mime_type' => 'audio/x-musepack',
                           ),
 
@@ -681,7 +644,7 @@ class getid3
 
                 // MP3  - audio       - MPEG-audio Layer 3 (very similar to AAC-ADTS)
                 'mp3'  => array (
-                            'pattern'   => '^\xFF[\xE2-\xE7\xF2-\xF7\xFA-\xFF][\x00-\xEB]',
+                            'pattern'   => '^\xFF[\xE2-\xE7\xF2-\xF7\xFA-\xFF][\x00-\x0B\x10-\x1B\x20-\x2B\x30-\x3B\x40-\x4B\x50-\x5B\x60-\x6B\x70-\x7B\x80-\x8B\x90-\x9B\xA0-\xAB\xB0-\xBB\xC0-\xCB\xD0-\xDB\xE0-\xEB\xF0-\xFB]',
                             'group'     => 'audio',
                             'module'    => 'mp3',
                             'mime_type' => 'audio/mpeg',
@@ -1003,6 +966,15 @@ class getid3
                             'fail_id3'  => 'ERROR',
                             'fail_ape'  => 'ERROR',
                           ),
+
+                 // CUE  - data       - CUEsheet (index to single-file disc images)
+                 'cue' => array(
+                            'pattern'   => '', // empty pattern means cannot be automatically detected, will fall through all other formats and match based on filename and very basic file contents
+                            'group'     => 'misc',
+                            'module'    => 'cue',
+                            'mime_type' => 'application/octet-stream',
+                           ),
+
             );
 
         return $format_info;
@@ -1035,6 +1007,173 @@ class getid3
 
 
 
+	protected function ChannelsBitratePlaytimeCalculations() {
+
+		// set channelmode on audio
+		if (@$this->info['audio']['channels'] == '1') {
+			$this->info['audio']['channelmode'] = 'mono';
+		} elseif (@$this->info['audio']['channels'] == '2') {
+			$this->info['audio']['channelmode'] = 'stereo';
+		}
+
+		// Calculate combined bitrate - audio + video
+		$CombinedBitrate  = 0;
+		$CombinedBitrate += (isset($this->info['audio']['bitrate']) ? $this->info['audio']['bitrate'] : 0);
+		$CombinedBitrate += (isset($this->info['video']['bitrate']) ? $this->info['video']['bitrate'] : 0);
+		if (($CombinedBitrate > 0) && empty($this->info['bitrate'])) {
+			$this->info['bitrate'] = $CombinedBitrate;
+		}
+		//if ((isset($this->info['video']) && !isset($this->info['video']['bitrate'])) || (isset($this->info['audio']) && !isset($this->info['audio']['bitrate']))) {
+		//	// for example, VBR MPEG video files cannot determine video bitrate:
+		//	// should not set overall bitrate and playtime from audio bitrate only
+		//	unset($this->info['bitrate']);
+		//}
+
+		// video bitrate undetermined, but calculable
+		if (isset($this->info['video']['dataformat']) && $this->info['video']['dataformat'] && (!isset($this->info['video']['bitrate']) || ($this->info['video']['bitrate'] == 0))) {
+			// if video bitrate not set
+			if (isset($this->info['audio']['bitrate']) && ($this->info['audio']['bitrate'] > 0) && ($this->info['audio']['bitrate'] == $this->info['bitrate'])) {
+				// AND if audio bitrate is set to same as overall bitrate
+				if (isset($this->info['playtime_seconds']) && ($this->info['playtime_seconds'] > 0)) {
+					// AND if playtime is set
+					if (isset($this->info['avdataend']) && isset($this->info['avdataoffset'])) {
+						// AND if AV data offset start/end is known
+						// THEN we can calculate the video bitrate
+						$this->info['bitrate'] = round((($this->info['avdataend'] - $this->info['avdataoffset']) * 8) / $this->info['playtime_seconds']);
+						$this->info['video']['bitrate'] = $this->info['bitrate'] - $this->info['audio']['bitrate'];
+					}
+				}
+			}
+		}
+
+		if ((!isset($this->info['playtime_seconds']) || ($this->info['playtime_seconds'] <= 0)) && !empty($this->info['bitrate'])) {
+			$this->info['playtime_seconds'] = (($this->info['avdataend'] - $this->info['avdataoffset']) * 8) / $this->info['bitrate'];
+		}
+
+		if (!isset($this->info['bitrate']) && !empty($this->info['playtime_seconds'])) {
+			$this->info['bitrate'] = (($this->info['avdataend'] - $this->info['avdataoffset']) * 8) / $this->info['playtime_seconds'];
+		}
+//echo '<pre>';
+//var_dump($this->info['bitrate']);
+//var_dump($this->info['audio']['bitrate']);
+//var_dump($this->info['video']['bitrate']);
+//echo '</pre>';
+		if (isset($this->info['bitrate']) && empty($this->info['audio']['bitrate']) && empty($this->info['video']['bitrate'])) {
+			if (isset($this->info['audio']['dataformat']) && empty($this->info['video']['resolution_x'])) {
+				// audio only
+				$this->info['audio']['bitrate'] = $this->info['bitrate'];
+			} elseif (isset($this->info['video']['resolution_x']) && empty($this->info['audio']['dataformat'])) {
+				// video only
+				$this->info['video']['bitrate'] = $this->info['bitrate'];
+			}
+		}
+
+		// Set playtime string
+		if (!empty($this->info['playtime_seconds']) && empty($this->info['playtime_string'])) {
+			$this->info['playtime_string'] = getid3_lib::PlaytimeString($this->info['playtime_seconds']);
+		}
+	}
+
+
+	protected function CalculateCompressionRatioVideo() {
+		if (empty($this->info['video'])) {
+			return false;
+		}
+		if (empty($this->info['video']['resolution_x']) || empty($this->info['video']['resolution_y'])) {
+			return false;
+		}
+		if (empty($this->info['video']['bits_per_sample'])) {
+			return false;
+		}
+
+		switch ($this->info['video']['dataformat']) {
+			case 'bmp':
+			case 'gif':
+			case 'jpeg':
+			case 'jpg':
+			case 'png':
+			case 'tiff':
+				$FrameRate = 1;
+				$PlaytimeSeconds = 1;
+				$BitrateCompressed = $this->info['filesize'] * 8;
+				break;
+
+			default:
+				if (!empty($this->info['video']['frame_rate'])) {
+					$FrameRate = $this->info['video']['frame_rate'];
+				} else {
+					return false;
+				}
+				if (!empty($this->info['playtime_seconds'])) {
+					$PlaytimeSeconds = $this->info['playtime_seconds'];
+				} else {
+					return false;
+				}
+				if (!empty($this->info['video']['bitrate'])) {
+					$BitrateCompressed = $this->info['video']['bitrate'];
+				} else {
+					return false;
+				}
+				break;
+		}
+		$BitrateUncompressed = $this->info['video']['resolution_x'] * $this->info['video']['resolution_y'] * $this->info['video']['bits_per_sample'] * $FrameRate;
+
+		$this->info['video']['compression_ratio'] = $BitrateCompressed / $BitrateUncompressed;
+		return true;
+	}
+
+
+	protected function CalculateCompressionRatioAudio() {
+		if (empty($this->info['audio']['bitrate']) || empty($this->info['audio']['channels']) || empty($this->info['audio']['sample_rate'])) {
+			return false;
+		}
+		$this->info['audio']['compression_ratio'] = $this->info['audio']['bitrate'] / ($this->info['audio']['channels'] * $this->info['audio']['sample_rate'] * (!empty($this->info['audio']['bits_per_sample']) ? $this->info['audio']['bits_per_sample'] : 16));
+
+		if (!empty($this->info['audio']['streams'])) {
+			foreach ($this->info['audio']['streams'] as $streamnumber => $streamdata) {
+				if (!empty($streamdata['bitrate']) && !empty($streamdata['channels']) && !empty($streamdata['sample_rate'])) {
+					$this->info['audio']['streams'][$streamnumber]['compression_ratio'] = $streamdata['bitrate'] / ($streamdata['channels'] * $streamdata['sample_rate'] * (!empty($streamdata['bits_per_sample']) ? $streamdata['bits_per_sample'] : 16));
+				}
+			}
+		}
+		return true;
+	}
+
+
+	protected function CalculateReplayGain() {
+		if (isset($this->info['replay_gain'])) {
+			$this->info['replay_gain']['reference_volume'] = 89;
+			if (isset($this->info['replay_gain']['track']['adjustment'])) {
+				$this->info['replay_gain']['track']['volume'] = $this->info['replay_gain']['reference_volume'] - $this->info['replay_gain']['track']['adjustment'];
+			}
+			if (isset($this->info['replay_gain']['album']['adjustment'])) {
+				$this->info['replay_gain']['album']['volume'] = $this->info['replay_gain']['reference_volume'] - $this->info['replay_gain']['album']['adjustment'];
+			}
+
+			if (isset($this->info['replay_gain']['track']['peak'])) {
+				$this->info['replay_gain']['track']['max_noclip_gain'] = 0 - getid3_lib::RGADamplitude2dB($this->info['replay_gain']['track']['peak']);
+			}
+			if (isset($this->info['replay_gain']['album']['peak'])) {
+				$this->info['replay_gain']['album']['max_noclip_gain'] = 0 - getid3_lib::RGADamplitude2dB($this->info['replay_gain']['album']['peak']);
+			}
+		}
+		return true;
+	}
+
+	protected function ProcessAudioStreams() {
+		if (!empty($this->info['audio']['bitrate']) || !empty($this->info['audio']['channels']) || !empty($this->info['audio']['sample_rate'])) {
+			if (!isset($this->info['audio']['streams'])) {
+				foreach ($this->info['audio'] as $key => $value) {
+					if ($key != 'streams') {
+						$this->info['audio']['streams'][0][$key] = $value;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+
     // Convert and copy tags
     protected function HandleAllTags() {
 
@@ -1046,7 +1185,7 @@ class getid3
             'ogg'       => array ('vorbiscomment', 'UTF-8'),
             'png'       => array ('png',           'UTF-8'),
             'tiff'      => array ('tiff',          'ISO-8859-1'),
-            'quicktime' => array ('quicktime',     'ISO-8859-1'),
+            'quicktime' => array ('quicktime',     'UTF-8'),
             'real'      => array ('real',          'ISO-8859-1'),
             'vqf'       => array ('vqf',           'ISO-8859-1'),
             'zip'       => array ('zip',           'ISO-8859-1'),
@@ -1054,7 +1193,8 @@ class getid3
             'lyrics3'   => array ('lyrics3',       'ISO-8859-1'),
             'id3v1'     => array ('id3v1',         ''),            // change below - cannot assign variable to static array
             'id3v2'     => array ('id3v2',         'UTF-8'),       // module converts all frames to UTF-8
-            'ape'       => array ('ape',           'UTF-8')
+            'ape'       => array ('ape',           'UTF-8'),
+            'cue'       => array ('cue',           'ISO-8859-1'),
         );
         $tags['id3v1'][1] = $this->encoding_id3v1;
 
@@ -1275,18 +1415,18 @@ abstract class getid3_handler_write
 
         ignore_user_abort($this->user_abort);
     }
-    
-    
+
+
     protected function save_permissions() {
-        
+
         $this->owner = fileowner($this->filename);
         $this->group = filegroup($this->filename);
         $this->perms = fileperms($this->filename);
     }
-    
-    
+
+
     protected function restore_permissions() {
-        
+
         @chown($this->filename, $this->owner);
         @chgrp($this->filename, $this->group);
         @chmod($this->filename, $this->perms);
@@ -1346,12 +1486,16 @@ class getid3_lib
 
         $int_value = 0;
         $byte_wordlen = strlen($byte_word);
+		if ($byte_wordlen == 0) {
+			return false;
+		}
 
         for ($i = 0; $i < $byte_wordlen; $i++) {
             $int_value += ord($byte_word{$i}) * pow(256, ($byte_wordlen - 1 - $i));
         }
 
         if ($signed) {
+        	// this could be incorrect if more than 4 bytes is passed to BigEndian2Int
             $sign_mask_bit = 0x80 << (8 * ($byte_wordlen - 1));
             if ($int_value & $sign_mask_bit) {
                 $int_value = 0 - ($int_value & ($sign_mask_bit - 1));
@@ -1485,14 +1629,19 @@ class getid3_lib
 	}
 
 
+	public static function RGADamplitude2dB($amplitude) {
+		return 20 * log10($amplitude);
+	}
+
+
 	public static function PrintHexBytes($string, $hex=true, $spaces=true, $html_safe=true) {
 
         $return_string = '';
         for ($i = 0; $i < strlen($string); $i++) {
             if ($hex) {
-                $return_string .= str_pad(dechex(ord($string[$i])), 2, '0', STR_PAD_LEFT);
+                $return_string .= str_pad(dechex(ord($string{$i})), 2, '0', STR_PAD_LEFT);
             } else {
-                $return_string .= ' '.(preg_match("/[\x20-\x7E]/", $string[$i]) ? $string[$i] : '¤');
+                $return_string .= ' '.(preg_match("#[\x20-\x7E]#", $string{$i}) ? $string{$i} : '¤');
             }
             if ($spaces) {
                 $return_string .= ' ';
@@ -1504,6 +1653,18 @@ class getid3_lib
         return $return_string;
     }
 
+
+	public static function PlaytimeString($playtimeseconds) {
+		$sign = (($playtimeseconds < 0) ? '-' : '');
+		$playtimeseconds = abs($playtimeseconds);
+		$contentseconds = round((($playtimeseconds / 60) - floor($playtimeseconds / 60)) * 60);
+		$contentminutes = floor($playtimeseconds / 60);
+		if ($contentseconds >= 60) {
+			$contentseconds -= 60;
+			$contentminutes++;
+		}
+		return $sign.intval($contentminutes).':'.str_pad($contentseconds, 2, 0, STR_PAD_LEFT);
+	}
 
 
     // Process header data string - read several values with algorithm and add to target

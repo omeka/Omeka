@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -21,8 +21,8 @@
 //
 // $Id: module.audio-video.nsv.php,v 1.3 2006/11/02 10:48:00 ah Exp $
 
-        
-        
+
+
 class getid3_nsv extends getid3_handler
 {
 
@@ -40,7 +40,7 @@ class getid3_nsv extends getid3_handler
         $nsv_header = fread($getid3->fp, 4);
 
         switch ($nsv_header) {
-            
+
             case 'NSVs':
                 $this->getNSVsHeader();
                 break;
@@ -66,9 +66,9 @@ class getid3_nsv extends getid3_handler
 
 
     private function getNSVsHeader($file_offset = 0) {
-        
+
         $getid3 = $this->getid3;
-        
+
         fseek($getid3->fp, $file_offset, SEEK_SET);
         $nsvs_header = fread($getid3->fp, 28);
         
@@ -79,9 +79,9 @@ class getid3_nsv extends getid3_handler
         if ($info_nsv_NSVs['identifier'] != 'NSVs') {
             throw new getid3_exception('expected "NSVs" at offset ('.$file_offset.'), found "'.$info_nsv_NSVs['identifier'].'" instead');
         }
-        
+
         $info_nsv_NSVs['offset'] = $file_offset;
-        
+
         getid3_lib::ReadSequence('LittleEndian2Int', $info_nsv_NSVs, $nsvs_header, 4,
             array (
                 'video_codec'     => -4,    // string
@@ -93,7 +93,7 @@ class getid3_nsv extends getid3_handler
         );
 
         if ($info_nsv_NSVs['audio_codec'] == 'PCM ') {
-        
+
             getid3_lib::ReadSequence('LittleEndian2Int', $info_nsv_NSVs, $nsvs_header, 24,
                 array (
                     'bits_channel' => 1,
@@ -102,7 +102,7 @@ class getid3_nsv extends getid3_handler
                 )
             );
             $getid3->info['audio']['sample_rate'] = $info_nsv_NSVs['sample_rate'];
-            
+
         }
 
         $getid3->info['video']['resolution_x']       = $info_nsv_NSVs['resolution_x'];
@@ -118,15 +118,15 @@ class getid3_nsv extends getid3_handler
 
 
     private function getNSVfHeader($file_offset = 0, $get_toc_offsets=false) {
-        
+
         $getid3 = $this->getid3;
-        
+
         fseek($getid3->fp, $file_offset, SEEK_SET);
         $nsvf_header = fread($getid3->fp, 28);
-        
+
         $getid3->info['nsv']['NSVf'] = array ();
         $info_nsv_NSVf = &$getid3->info['nsv']['NSVf'];
-        
+
         $info_nsv_NSVf['identifier'] = substr($nsvf_header, 0, 4);
         if ($info_nsv_NSVf['identifier'] != 'NSVf') {
             throw new getid3_exception('expected "NSVf" at offset ('.$file_offset.'), found "'.$info_nsv_NSVf['identifier'].'" instead');
@@ -144,11 +144,11 @@ class getid3_nsv extends getid3_handler
                 'TOC_entries_2' => 4
             )
         );
-                
+
         if ($info_nsv_NSVf['playtime_ms'] == 0) {
             throw new getid3_exception('Corrupt NSV file: NSVf.playtime_ms == zero');
         }
-        
+
         if ($info_nsv_NSVf['file_size'] > $getid3->info['avdataend']) {
             $getid3->warning('truncated file - NSVf header indicates '.$info_nsv_NSVf['file_size'].' bytes, file actually '.$getid3->info['avdataend'].' bytes');
         }
@@ -189,7 +189,7 @@ class getid3_nsv extends getid3_handler
 
 
     public static function NSVframerateLookup($frame_rate_index) {
-        
+
         if ($frame_rate_index <= 127) {
             return (float)$frame_rate_index;
         }

@@ -80,16 +80,16 @@ class UsersController extends Omeka_Controller_Action
         $email = $_POST['email'];
         
         if (!Zend_Validate::is($email, 'EmailAddress')) {
-            return $this->flashError('The email address you provided is invalid.  Please enter a valid email address.');
+            return $this->flashError('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.');
         }
         
         $user = $this->_helper->db->findByEmail($email);
         
-        if (!$user) {
-            $this->flashError('The email address provided cannot be found.');
+        if (!$user || $user->active != 1) {
+            $this->flashError('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.');
             return;
         }
-        
+
         //Create the activation url
         $ua = new UsersActivations;
         $ua->user_id = $user->id;

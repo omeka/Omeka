@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -21,20 +21,20 @@
 //
 // $Id: module.audio.la.php,v 1.2 2006/11/02 10:48:01 ah Exp $
 
-        
-        
+
+
 class getid3_la extends getid3_handler
 {
 
     public function Analyze() {
-        
+
         $getid3 = $this->getid3;
-        
+
         $getid3->include_module('audio-video.riff');
-        
+
         fseek($getid3->fp, $getid3->info['avdataoffset'], SEEK_SET);
         $raw_data = fread($getid3->fp, getid3::FREAD_BUFFER_SIZE);
-    
+
         $getid3->info['fileformat']          = 'la';
         $getid3->info['audio']['dataformat'] = 'la';
         $getid3->info['audio']['lossless']   = true;
@@ -44,12 +44,12 @@ class getid3_la extends getid3_handler
         $getid3->info['la']['version']       = (float)$getid3->info['la']['version_major'] + ($getid3->info['la']['version_minor'] / 10);
 
         $getid3->info['la']['uncompressed_size'] = getid3_lib::LittleEndian2Int(substr($raw_data, 4, 4));
-        
+
         $wave_chunk = substr($raw_data, 8, 4);
         if ($wave_chunk !== 'WAVE') {
             throw new getid3_exception('Expected "WAVE" ('.getid3_lib::PrintHexBytes('WAVE').') at offset 8, found "'.$wave_chunk.'" ('.getid3_lib::PrintHexBytes($wave_chunk).') instead.');
         }
-        
+
         $offset = 12;
 
         $getid3->info['la']['fmt_size'] = 24;
@@ -70,13 +70,13 @@ class getid3_la extends getid3_handler
             throw new getid3_exception('Expected "fmt " ('.getid3_lib::PrintHexBytes('fmt ').') at offset '.$offset.', found "'.$fmt_chunk.'" ('.getid3_lib::PrintHexBytes($fmt_chunk).') instead.');
         }
         $offset += 4;
-        
+
         $fmt_size = getid3_lib::LittleEndian2Int(substr($raw_data, $offset, 4));
         $offset += 4;
 
         $getid3->info['la']['raw']['format'] = getid3_lib::LittleEndian2Int(substr($raw_data, $offset, 2));
         $offset += 2;
-        
+
         getid3_lib::ReadSequence('LittleEndian2Int', $getid3->info['la'], $raw_data, $offset,
             array (
                 'channels'         => 2,
@@ -88,9 +88,9 @@ class getid3_la extends getid3_handler
             )
         );
         $offset += 18;
-        
+
         $getid3->info['la']['raw']['flags'] = getid3_lib::LittleEndian2Int($raw_data{$offset++});
-        
+
         $getid3->info['la']['flags']['seekable']             = (bool)($getid3->info['la']['raw']['flags'] & 0x01);
         if ($getid3->info['la']['version'] >= 0.4) {
             $getid3->info['la']['flags']['high_compression'] = (bool)($getid3->info['la']['raw']['flags'] & 0x02);
@@ -105,7 +105,7 @@ class getid3_la extends getid3_handler
         // samples, so 4 * int(totalSamples / (blockSize * seekEvery)) should
         // give the number of bytes used for the seekpoints. Of course, if seeking
         // is disabled, there are no seekpoints stored.
-        
+
         if ($getid3->info['la']['version'] >= 0.4) {
             $getid3->info['la']['blocksize'] = 61440;
             $getid3->info['la']['seekevery'] = 19;
@@ -129,7 +129,7 @@ class getid3_la extends getid3_handler
             // Following the main header information, the program outputs all of the
             // seekpoints. Following these is what I called the 'footer start',
             // i.e. the position immediately after the La audio data is finished.
-        
+
             $getid3->info['la']['footerstart'] = getid3_lib::LittleEndian2Int(substr($raw_data, $offset, 4));
             $offset += 4;
 
@@ -146,7 +146,7 @@ class getid3_la extends getid3_handler
         }
 
         if ($getid3->info['la']['footerstart'] < $getid3->info['avdataend']) {
-        
+
             // Create riff header
             $riff_data = 'WAVE';
             if ($getid3->info['la']['version'] == 0.2) {
@@ -159,14 +159,14 @@ class getid3_la extends getid3_handler
                 $riff_data .= fread($getid3->fp, $getid3->info['avdataend'] - $getid3->info['la']['footerstart']);
             }
             $riff_data = 'RIFF'.getid3_lib::LittleEndian2String(strlen($riff_data), 4, false).$riff_data;
-            
+
             // Clone getid3 - messing with offsets - better safe than sorry
             $clone = clone $getid3;
-            
+
             // Analyze clone by string
             $riff = new getid3_riff($clone);
             $riff->AnalyzeString($riff_data);
-            
+
             // Import from clone and destroy
             $getid3->info['riff']   = $clone->info['riff'];
             $getid3->warnings($clone->warnings());

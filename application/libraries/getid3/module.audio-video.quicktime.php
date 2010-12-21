@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -22,19 +22,19 @@
 //
 // $Id: module.audio-video.quicktime.php,v 1.7 2006/11/02 16:03:28 ah Exp $
 
-        
-        
+
+
 class getid3_quicktime extends getid3_handler
 {
 
     public function Analyze() {
-        
+
         $getid3 = $this->getid3;
 
         $info   = &$getid3->info;
-        
+
         $getid3->include_module('audio.mp3');
-        
+
         $info['quicktime'] = array ();
         $info_quicktime = &$info['quicktime'];
 
@@ -52,7 +52,7 @@ class getid3_quicktime extends getid3_handler
 
             $atom_size = getid3_lib::BigEndian2Int(substr($atom_header, 0, 4));
             $atom_name =               substr($atom_header, 4, 4);
-            
+
             $info_quicktime[$atom_name]['name']   = $atom_name;
             $info_quicktime[$atom_name]['size']   = $atom_size;
             $info_quicktime[$atom_name]['offset'] = $offset;
@@ -67,9 +67,9 @@ class getid3_quicktime extends getid3_handler
                 // to read user data atoms, you should allow for the terminating 0.
                 break;
             }
-            
+
             switch ($atom_name) {
-            
+
                 case 'mdat': // Media DATa atom
                     // 'mdat' contains the actual data for the audio/video
                     if (($atom_size > 8) && (!isset($info['avdataend_tmp']) || ($info_quicktime[$atom_name]['size'] > ($info['avdataend_tmp'] - $info['avdataoffset'])))) {
@@ -78,28 +78,28 @@ class getid3_quicktime extends getid3_handler
                         $old_av_data_end      = $info['avdataend'];
                         $info['avdataend']    = $info_quicktime[$atom_name]['offset'] + $info_quicktime[$atom_name]['size'];
 
-                        
+
                         //// MP3
-                        
+
                         if (!$getid3->include_module_optional('audio.mp3')) {
                            $getid3->warning('MP3 skipped because mpeg module is missing.');
                         }
-                                                                    
+
                         else {
-                            
+
                             // Clone getid3 - messing with offsets - better safe than sorry
                             $clone = clone $getid3;
-                            
+
                             if (getid3_mp3::MPEGaudioHeaderValid(getid3_mp3::MPEGaudioHeaderDecode(fread($clone->fp, 4)))) {
-                            
+
                                 $mp3 = new getid3_mp3($clone);
                                 $mp3->AnalyzeMPEGaudioInfo();
-                                
+
                                 // Import from clone and destroy
                                 if (isset($clone->info['mpeg']['audio'])) {
-                                
+
                                     $info['mpeg']['audio'] = $clone->info['mpeg']['audio'];
-                                
+
                                     $info['audio']['dataformat']   = 'mp3';
                                     $info['audio']['codec']        = (!empty($info['mpeg']['audio']['encoder']) ? $info['mpeg']['audio']['encoder'] : (!empty($info['mpeg']['audio']['codec']) ? $info['mpeg']['audio']['codec'] : (!empty($info['mpeg']['audio']['LAME']) ? 'LAME' :'mp3')));
                                     $info['audio']['sample_rate']  = $info['mpeg']['audio']['sample_rate'];
@@ -107,19 +107,19 @@ class getid3_quicktime extends getid3_handler
                                     $info['audio']['bitrate']      = $info['mpeg']['audio']['bitrate'];
                                     $info['audio']['bitrate_mode'] = strtolower($info['mpeg']['audio']['bitrate_mode']);
                                     $info['bitrate']               = $info['audio']['bitrate'];
-                                    
+
                                     $getid3->warning($clone->warnings());
                                     unset($clone);
                                 }
                             }
                         }
-                        
+
                         $info['avdataend'] = $old_av_data_end;
                         unset($old_av_data_end);
 
                     }
                     break;
-                    
+
 
                 case 'free': // FREE space atom
                 case 'skip': // SKIP atom
@@ -148,10 +148,22 @@ class getid3_quicktime extends getid3_handler
         if (!isset($info['bitrate']) && isset($info['playtime_seconds'])) {
             $info['bitrate'] = (($info['avdataend'] - $info['avdataoffset']) * 8) / $info['playtime_seconds'];
         }
-        
+
         if (isset($info['bitrate']) && !isset($info['audio']['bitrate']) && !isset($info_quicktime['video'])) {
             $info['audio']['bitrate'] = $info['bitrate'];
         }
+
+		if (@$info['playtime_seconds'] && !isset($info['video']['frame_rate']) && !empty($info['quicktime']['stts_framecount'])) {
+			foreach ($info['quicktime']['stts_framecount'] as $key => $samples_count) {
+				$samples_per_second = $samples_count / $info['playtime_seconds'];
+				if ($samples_per_second > 240) {
+					// has to be audio samples
+				} else {
+					$info['video']['frame_rate'] = $samples_per_second;
+					break;
+				}
+			}
+		}
 
         if ((@$info['audio']['dataformat'] == 'mp4') && empty($info['video']['resolution_x'])) {
             $info['fileformat'] = 'mp4';
@@ -166,7 +178,7 @@ class getid3_quicktime extends getid3_handler
         if (empty($info['audio']['dataformat']) && !empty($info_quicktime['audio'])) {
             $info['audio']['dataformat'] = 'quicktime';
         }
-        
+
         if (empty($info['video']['dataformat']) && !empty($info_quicktime['video'])) {
             $info['video']['dataformat'] = 'quicktime';
         }
@@ -177,11 +189,11 @@ class getid3_quicktime extends getid3_handler
 
 
     private function QuicktimeParseAtom($atom_name, $atom_size, $atom_data, $base_offset, &$atom_hierarchy) {
-        
+
         // http://developer.apple.com/techpubs/quicktime/qtdevdocs/APIREF/INDEX/atomalphaindex.htm
-        
+
         $getid3 = $this->getid3;
-        
+
         $info           = &$getid3->info;
         $info_quicktime = &$info['quicktime'];
 
@@ -211,42 +223,66 @@ class getid3_quicktime extends getid3_handler
                 break;
 
 
-            case '©cpy':
-            case '©day':
-            case '©dir':
-            case '©ed1':
-            case '©ed2':
-            case '©ed3':
-            case '©ed4':
-            case '©ed5':
-            case '©ed6':
-            case '©ed7':
-            case '©ed8':
-            case '©ed9':
-            case '©fmt':
-            case '©inf':
-            case '©prd':
-            case '©prf':
-            case '©req':
-            case '©src':
-            case '©wrt':
-            case '©nam':
-            case '©cmt':
-            case '©wrn':
-            case '©hst':
-            case '©mak':
-            case '©mod':
-            case '©PRD':
-            case '©swr':
-            case '©aut':
-            case '©ART':
-            case '©trk':
-            case '©alb':
-            case '©com':
-            case '©gen':
-            case '©ope':
-            case '©url':
-            case '©enc':
+			case 'aART':
+			case 'catg':
+			case 'covr':
+			case 'cpil':
+			case 'cprt':
+			case 'desc':
+			case 'disk':
+			case 'egid':
+			case 'gnre':
+			case 'keyw':
+			case 'pcst':
+			case 'pgap':
+			case 'purd':
+			case 'purl':
+			case 'rtng':
+			case 'stik':
+			case 'tmpo':
+			case 'trkn':
+			case 'tves':
+			case 'tvnn':
+			case 'tvsh':
+			case 'tvsn':
+			case '©alb':
+			case '©ART':
+			case '©aut':
+			case '©cmt':
+			case '©com':
+			case '©cpy':
+			case '©day':
+			case '©dir':
+			case '©ed1':
+			case '©ed2':
+			case '©ed3':
+			case '©ed4':
+			case '©ed5':
+			case '©ed6':
+			case '©ed7':
+			case '©ed8':
+			case '©ed9':
+			case '©enc':
+			case '©fmt':
+			case '©gen':
+			case '©grp':
+			case '©hst':
+			case '©inf':
+			case '©lyr':
+			case '©mak':
+			case '©mod':
+			case '©nam':
+			case '©ope':
+			case '©PRD':
+			case '©prf':
+			case '©req':
+			case '©src':
+			case '©swr':
+			case '©too':
+			case '©trk':
+			case '©url':
+			case '©wrn':
+			case '©wrt':
                 $atom_structure['data_length'] = getid3_lib::BigEndian2Int(substr($atom_data,  0, 2));
 				$atom_structure['language_id'] = getid3_lib::BigEndian2Int(substr($atom_data,  2, 2));
 				$atom_structure['data']        =                           substr($atom_data,  4);
@@ -311,17 +347,17 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'rdrf': // Reference movie Data ReFerence atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
-                        'version'             => 1, 
-                        'flags_raw'           => 3, 
+                        'version'             => 1,
+                        'flags_raw'           => 3,
                         'reference_type_name' => -4,
-                        'reference_length'    => 4, 
+                        'reference_length'    => 4,
                     )
                 );
-                
+
                 $atom_structure['flags']['internal_data'] = (bool)($atom_structure['flags_raw'] & 0x000001);
-                
+
                 switch ($atom_structure['reference_type_name']) {
                     case 'url ':
                         $atom_structure['url']            = $this->NoNullString(substr($atom_data, 12));
@@ -348,7 +384,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'rmcs': // Reference Movie Cpu Speed atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'          => 1,
                         'flags_raw'        => 3, // hardcoded: 0x0000
@@ -359,7 +395,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'rmvc': // Reference Movie Version Check atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'            => 1,
                         'flags_raw'          => 3, // hardcoded: 0x0000
@@ -373,7 +409,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'rmcd': // Reference Movie Component check atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'                => 1,
                         'flags_raw'              => 3, // hardcoded: 0x0000
@@ -389,7 +425,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'rmdr': // Reference Movie Data Rate atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'   => 1,
                         'flags_raw' => 3, // hardcoded: 0x0000
@@ -402,7 +438,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'rmla': // Reference Movie Language Atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'     => 1,
                         'flags_raw'   => 3, // hardcoded: 0x0000
@@ -418,7 +454,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'rmla': // Reference Movie Language Atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'   => 1,
                         'flags_raw' => 3, // hardcoded: 0x0000
@@ -430,7 +466,7 @@ class getid3_quicktime extends getid3_handler
 
             case 'ptv ': // Print To Video - defines a movie's full screen mode
                 // http://developer.apple.com/documentation/QuickTime/APIREF/SOURCESIV/at_ptv-_pg.htm
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'display_size_raw'  => 2,
                         'reserved_1'        => 2, // hardcoded: 0x0000
@@ -457,7 +493,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'stsd': // Sample Table Sample Description atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'        => 1,
                         'flags_raw'      => 3, // hardcoded: 0x0000
@@ -466,8 +502,8 @@ class getid3_quicktime extends getid3_handler
                 );
                 $stsd_entries_data_offset = 8;
                 for ($i = 0; $i < $atom_structure['number_entries']; $i++) {
-                    
-                    getid3_lib::ReadSequence('BigEndian2Int', $atom_structure['sample_description_table'][$i], $atom_data, $stsd_entries_data_offset, 
+
+                    getid3_lib::ReadSequence('BigEndian2Int', $atom_structure['sample_description_table'][$i], $atom_data, $stsd_entries_data_offset,
                         array (
                             'size'            => 4,
                             'data_format'     => -4,
@@ -499,7 +535,7 @@ class getid3_quicktime extends getid3_handler
                                     'audio_packet_size'    => 2
                                 )
                             );
-                            
+
                             $atom_structure['sample_description_table'][$i]['audio_sample_rate'] = getid3_quicktime::FixedPoint16_16(substr($atom_structure['sample_description_table'][$i]['data'], 16, 4));
 
                             switch ($atom_structure['sample_description_table'][$i]['data_format']) {
@@ -554,7 +590,7 @@ class getid3_quicktime extends getid3_handler
                                     $atom_structure['sample_description_table'][$i]['video_resolution_x']      = getid3_quicktime::FixedPoint16_16(substr($atom_structure['sample_description_table'][$i]['data'], 20,  4));
                                     $atom_structure['sample_description_table'][$i]['video_resolution_y']      = getid3_quicktime::FixedPoint16_16(substr($atom_structure['sample_description_table'][$i]['data'], 24,  4));
                                     getid3_lib::ReadSequence('BigEndian2Int', $atom_structure['sample_description_table'][$i], $atom_structure['sample_description_table'][$i]['data'], 28,
-                                        array (                                        
+                                        array (
                                             'video_data_size'        => 4,
                                             'video_frame_count'      => 2,
                                             'video_encoder_name_len' => 1
@@ -622,53 +658,38 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'stts': // Sample Table Time-to-Sample atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'        => 1,
                         'flags_raw'      => 3, // hardcoded: 0x0000
                         'number_entries' => 4
                     )
                 );
-                
+
                 $stts_entries_data_offset = 8;
-                $frame_rate_calculator_array = array ();
+                //$frame_rate_calculator_array = array ();
+				$frames_count = 0;
                 for ($i = 0; $i < $atom_structure['number_entries']; $i++) {
-                    
+
                     $atom_structure['time_to_sample_table'][$i]['sample_count']    = getid3_lib::BigEndian2Int(substr($atom_data, $stts_entries_data_offset, 4));
                     $stts_entries_data_offset += 4;
-                    
+
                     $atom_structure['time_to_sample_table'][$i]['sample_duration'] = getid3_lib::BigEndian2Int(substr($atom_data, $stts_entries_data_offset, 4));
                     $stts_entries_data_offset += 4;
 
-                    if (!empty($info_quicktime['time_scale']) && (@$atoms_structure['time_to_sample_table'][$i]['sample_duration'] > 0)) {                        
+                    $frames_count += $atom_structure['time_to_sample_table'][$i]['sample_count'];
 
-                        $stts_new_framerate = $info_quicktime['time_scale'] / $atom_structure['time_to_sample_table'][$i]['sample_duration'];
-                        if ($stts_new_framerate <= 60) {
-                            // some atoms have durations of "1" giving a very large framerate, which probably is not right
-                            $info['video']['frame_rate'] = max(@$info['video']['frame_rate'], $stts_new_framerate);
-                        }
-                    }
+                    //if (!empty($info_quicktime['time_scale']) && (@$atoms_structure['time_to_sample_table'][$i]['sample_duration'] > 0)) {
+                    //
+                    //    $stts_new_framerate = $info_quicktime['time_scale'] / $atom_structure['time_to_sample_table'][$i]['sample_duration'];
+                    //    if ($stts_new_framerate <= 60) {
+                    //        // some atoms have durations of "1" giving a very large framerate, which probably is not right
+                    //        $info['video']['frame_rate'] = max(@$info['video']['frame_rate'], $stts_new_framerate);
+                    //    }
+                    //}
                     //@$frame_rate_calculator_array[($info_quicktime['time_scale'] / $atom_structure['time_to_sample_table'][$i]['sample_duration'])] += $atom_structure['time_to_sample_table'][$i]['sample_count'];
                 }
-                /*
-                $stts_frames_total  = 0;
-                $stts_seconds_total = 0;
-                foreach ($frame_rate_calculator_array as $frames_per_second => $frame_count) {
-                    if (($frames_per_second > 60) || ($frames_per_second < 1)) {
-                        // not video FPS information, probably audio information
-                        $stts_frames_total  = 0;
-                        $stts_seconds_total = 0;
-                        break;
-                    }
-                    $stts_frames_total  += $frame_count;
-                    $stts_seconds_total += $frame_count / $frames_per_second;
-                }
-                if (($stts_frames_total > 0) && ($stts_seconds_total > 0)) {
-                    if (($stts_frames_total / $stts_seconds_total) > @$info['video']['frame_rate']) {
-                        $info['video']['frame_rate'] = $stts_frames_total / $stts_seconds_total;
-                    }
-                }
-                */
+                $info['quicktime']['stts_framecount'][] = $frames_count;
                 break;
 
 
@@ -736,18 +757,18 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'dref': // Data REFerence atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'        => 1,
                         'flags_raw'      => 3, // hardcoded: 0x0000
                         'number_entries' => 4
                     )
                 );
-                
+
                 $dref_data_offset = 8;
                 for ($i = 0; $i < $atom_structure['number_entries']; $i++) {
-                  
-                    getid3_lib::ReadSequence('BigEndian2Int', $atom_structure['data_references'][$i], $atom_data, $dref_data_offset, 
+
+                    getid3_lib::ReadSequence('BigEndian2Int', $atom_structure['data_references'][$i], $atom_data, $dref_data_offset,
                         array (
                             'size'      => 4,
                             'type'      => -4,
@@ -756,7 +777,7 @@ class getid3_quicktime extends getid3_handler
                         )
                     );
                     $dref_data_offset += 12;
-                  
+
                     $atom_structure['data_references'][$i]['data'] = substr($atom_data, $dref_data_offset, ($atom_structure['data_references'][$i]['size'] - 4 - 4 - 1 - 3));
                     $dref_data_offset += ($atom_structure['data_references'][$i]['size'] - 4 - 4 - 1 - 3);
 
@@ -766,7 +787,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'gmin': // base Media INformation atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'       => 1,
                         'flags_raw'     => 3, // hardcoded: 0x0000
@@ -782,7 +803,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'smhd': // Sound Media information HeaDer atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'   => 1,
                         'flags_raw' => 3, // hardcoded: 0x0000
@@ -794,7 +815,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'vmhd': // Video Media information HeaDer atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'       => 1,
                         'flags_raw'     => 3,
@@ -809,7 +830,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'hdlr': // HanDLeR reference atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'                => 1,
                         'flags_raw'              => 3, // hardcoded: 0x0000
@@ -830,7 +851,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'mdhd': // MeDia HeaDer atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'       => 1,
                         'flags_raw'     => 3, // hardcoded: 0x0000
@@ -847,7 +868,7 @@ class getid3_quicktime extends getid3_handler
                     throw new getid3_exception('Corrupt Quicktime file: mdhd.time_scale == zero');
                 }
                 $info_quicktime['time_scale'] = max(@$info['quicktime']['time_scale'], $atom_structure['time_scale']);
-                
+
                 $atom_structure['creation_time_unix'] = (int)($atom_structure['creation_time'] - 2082844800); // DateMac2Unix()
                 $atom_structure['modify_time_unix']   = (int)($atom_structure['modify_time']   - 2082844800); // DateMac2Unix()
                 $atom_structure['playtime_seconds']   = $atom_structure['duration'] / $atom_structure['time_scale'];
@@ -859,7 +880,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'pnot': // Preview atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'modification_date' => 4,   // "standard Macintosh format"
                         'version_number'    => 2,   // hardcoded: 0x00
@@ -879,7 +900,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'load': // track LOAD settings atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'preload_start_time' => 4,
                         'preload_duration'   => 4,
@@ -905,14 +926,14 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'elst': // Edit LiST atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'        => 1,
                         'flags_raw'      => 3, // hardcoded: 0x0000
                         'number_entries' => 4
                     )
-                );    
-                        
+                );
+
                 for ($i = 0; $i < $atom_structure['number_entries']; $i++ ) {
                     $atom_structure['edit_list'][$i]['track_duration'] = getid3_lib::BigEndian2Int(substr($atom_data, 8 + ($i * 12) + 0, 4));
                     $atom_structure['edit_list'][$i]['media_time']     = getid3_lib::BigEndian2Int(substr($atom_data, 8 + ($i * 12) + 4, 4));
@@ -942,7 +963,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'mvhd': // MoVie HeaDer atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'       => 1,
                         'flags_raw'     => 3,
@@ -965,8 +986,8 @@ class getid3_quicktime extends getid3_handler
                 $atom_structure['matrix_x']           = getid3_quicktime::FixedPoint16_16(substr($atom_data, 60, 4));
                 $atom_structure['matrix_y']           = getid3_quicktime::FixedPoint16_16(substr($atom_data, 64, 4));
                 $atom_structure['matrix_w']           =  getid3_quicktime::FixedPoint2_30(substr($atom_data, 68, 4));
-                
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 72, 
+
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 72,
                     array (
                         'preview_time'       => 4,
                         'preview_duration'   => 4,
@@ -981,7 +1002,7 @@ class getid3_quicktime extends getid3_handler
                 if ($atom_structure['time_scale'] == 0) {
                     throw new getid3_exception('Corrupt Quicktime file: mvhd.time_scale == zero');
                 }
-                
+
                 $atom_structure['creation_time_unix']        = (int)($atom_structure['creation_time'] - 2082844800); // DateMac2Unix()
                 $atom_structure['modify_time_unix']          = (int)($atom_structure['modify_time']   - 2082844800); // DateMac2Unix()
                 $info_quicktime['time_scale'] = max(@$info['quicktime']['time_scale'], $atom_structure['time_scale']);
@@ -991,7 +1012,7 @@ class getid3_quicktime extends getid3_handler
 
 
             case 'tkhd': // TracK HeaDer atom
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'version'         => 1,
                         'flags_raw'       => 3,
@@ -1005,7 +1026,7 @@ class getid3_quicktime extends getid3_handler
                         'alternate_group' => 2
                     )
                 );
-                
+
                 $atom_structure['volume']              =   getid3_quicktime::FixedPoint8_8(substr($atom_data, 36, 2));
                 $atom_structure['reserved3']           =         getid3_lib::BigEndian2Int(substr($atom_data, 38, 2));
                 $atom_structure['matrix_a']            = getid3_quicktime::FixedPoint16_16(substr($atom_data, 40, 4));
@@ -1031,12 +1052,12 @@ class getid3_quicktime extends getid3_handler
                     $info['video']['resolution_x'] = $atom_structure['width'];
                     $info['video']['resolution_y'] = $atom_structure['height'];
                 }
-                
+
                 if ($atom_structure['flags']['enabled'] == 1) {
                     $info['video']['resolution_x'] = max($info['video']['resolution_x'], $atom_structure['width']);
                     $info['video']['resolution_y'] = max($info['video']['resolution_y'], $atom_structure['height']);
                 }
-                
+
                 if (!empty($info['video']['resolution_x']) && !empty($info['video']['resolution_y'])) {
                     $info_quicktime['video']['resolution_x'] = $info['video']['resolution_x'];
                     $info_quicktime['video']['resolution_y'] = $info['video']['resolution_y'];
@@ -1066,7 +1087,7 @@ class getid3_quicktime extends getid3_handler
                 break;
 
             case 'ftyp': // FileTYPe (?) atom (for MP4 it seems)
-                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0, 
+                getid3_lib::ReadSequence('BigEndian2Int', $atom_structure, $atom_data, 0,
                     array (
                         'signature' => -4,
                         'unknown_1' => 4,
@@ -1113,7 +1134,7 @@ class getid3_quicktime extends getid3_handler
             case 'pano': // PANOrama track (seen on QTVR)
                 $atom_structure['pano'] = getid3_lib::BigEndian2Int(substr($atom_data,  0, 4));
                 break;
-                
+
              case 'hint': // HINT track
              case 'hinf': //
              case 'hinv': //
@@ -1127,12 +1148,20 @@ class getid3_quicktime extends getid3_handler
                 }
                 break;
 
-            case 'FXTC': // Something to do with Adobe After Effects (?)
-            case 'PrmA':
-            case 'code':
-            case 'FIEL': // this is NOT "fiel" (Field Ordering) as describe here: http://developer.apple.com/documentation/QuickTime/QTFF/QTFFChap3/chapter_4_section_2.html
-                // Observed-but-not-handled atom types are just listed here
-                // to prevent warnings being generated
+
+			// Observed-but-not-handled atom types are just listed here to prevent warnings being generated
+			case 'FXTC': // Something to do with Adobe After Effects (?)
+			case 'PrmA':
+			case 'code':
+			case 'FIEL': // this is NOT "fiel" (Field Ordering) as describe here: http://developer.apple.com/documentation/QuickTime/QTFF/QTFFChap3/chapter_4_section_2.html
+			case 'tapt': // TrackApertureModeDimensionsAID - http://developer.apple.com/documentation/QuickTime/Reference/QT7-1_Update_Reference/Constants/Constants.html
+						// tapt seems to be used to compute the video size [http://www.getid3.org/phpBB3/viewtopic.php?f=4&t=838]
+						// * http://lists.apple.com/archives/quicktime-api/2006/Aug/msg00014.html
+						// * http://handbrake.fr/irclogs/handbrake-dev/handbrake-dev20080128_pg2.html
+			case 'ctts'://  STCompositionOffsetAID             - http://developer.apple.com/documentation/QuickTime/Reference/QTRef_Constants/Reference/reference.html
+			case 'cslg'://  STCompositionShiftLeastGreatestAID - http://developer.apple.com/documentation/QuickTime/Reference/QTRef_Constants/Reference/reference.html
+			case 'sdtp'://  STSampleDependencyAID              - http://developer.apple.com/documentation/QuickTime/Reference/QTRef_Constants/Reference/reference.html
+			case 'stps'://  STPartialSyncSampleAID             - http://developer.apple.com/documentation/QuickTime/Reference/QTRef_Constants/Reference/reference.html
                 $atom_structure['data'] = $atom_data;
                 break;
 
@@ -1148,20 +1177,20 @@ class getid3_quicktime extends getid3_handler
 
 
     private function QuicktimeParseContainerAtom($atom_data, $base_offset, &$atom_hierarchy) {
-        
+
         if ((strlen($atom_data) == 4) && (getid3_lib::BigEndian2Int($atom_data) == 0x00000000)) {
             return false;
         }
-        
+
         $atom_structure = false;
         $subatom_offset = 0;
-        
+
         while ($subatom_offset < strlen($atom_data)) {
-         
+
             $subatom_size = getid3_lib::BigEndian2Int(substr($atom_data, $subatom_offset + 0, 4));
             $subatom_name =                           substr($atom_data, $subatom_offset + 4, 4);
             $subatom_data =                           substr($atom_data, $subatom_offset + 8, $subatom_size - 8);
-            
+
             if ($subatom_size == 0) {
                 // Furthermore, for historical reasons the list of atoms is optionally
                 // terminated by a 32-bit integer set to 0. If you are writing a program
@@ -1175,14 +1204,44 @@ class getid3_quicktime extends getid3_handler
         }
         return $atom_structure;
     }
-    
-    
-    
+
+
+
     private function CopyToAppropriateCommentsSection($key_name, $data) {
-
         // http://www.geocities.com/xhelmboyx/quicktime/formats/qtm-layout.txt
-
+        // http://atomicparsley.sourceforge.net/mpeg-4files.html
         static $translator = array (
+			'aART' => 'album_artist',
+			'catg' => 'category',
+			'covr' => 'artwork',
+			'cpil' => 'compilation',
+			'cprt' => 'copyright',
+			'desc' => 'description',
+			'disk' => 'disc_number',
+			'egid' => 'episode_guid',
+			'gnre' => 'genre',
+			'keyw' => 'keyword',
+			'pcst' => 'podcast',
+			'pgap' => 'gapless_playback',
+			'purd' => 'purchase_date',
+			'purl' => 'podcast_url',
+			'rtng' => 'rating',
+			'stik' => 'stik',
+			'tmpo' => 'bpm',
+			'trkn' => 'track_number',
+			'tves' => 'tv_episode',
+			'tvnn' => 'tv_network_name',
+			'tvsh' => 'tv_show_name',
+			'tvsn' => 'tv_season',
+			'©art' => 'artist',
+			'©grp' => 'grouping',
+			'©lyr' => 'lyrics',
+			'©too' => 'encoder',
+            '©alb' => 'album',
+            '©ART' => 'artist',
+            '©aut' => 'author',
+            '©cmt' => 'comment',
+            '©com' => 'comment',
             '©cpy' => 'copyright',
             '©day' => 'creation_date',
             '©dir' => 'director',
@@ -1195,43 +1254,34 @@ class getid3_quicktime extends getid3_handler
             '©ed7' => 'edit7',
             '©ed8' => 'edit8',
             '©ed9' => 'edit9',
+            '©enc' => 'encoder',
             '©fmt' => 'format',
+            '©gen' => 'genre',
+            '©hst' => 'host_computer',
             '©inf' => 'information',
+            '©mak' => 'make',
+            '©mod' => 'model',
+            '©nam' => 'title',
+            '©ope' => 'composer',
             '©prd' => 'producer',
+            '©PRD' => 'product',
             '©prf' => 'performers',
             '©req' => 'system_requirements',
             '©src' => 'source_credit',
-            '©wrt' => 'writer',
-            '©nam' => 'title',
-            '©cmt' => 'comment',
-            '©wrn' => 'warning',
-            '©hst' => 'host_computer',
-            '©mak' => 'make',
-            '©mod' => 'model',
-            '©PRD' => 'product',
             '©swr' => 'software',
-            '©aut' => 'author',
-            '©ART' => 'artist',
             '©trk' => 'track',
-            '©alb' => 'album',
-            '©com' => 'comment',
-            '©gen' => 'genre',
-            '©ope' => 'composer',
             '©url' => 'url',
-            '©enc' => 'encoder'
+            '©wrn' => 'warning',
+            '©wrt' => 'composer',
         );
-
         if (isset($translator[$key_name])) {
             $this->getid3->info['quicktime']['comments'][$translator[$key_name]][] = $data;
         }
-
         return true;
     }
 
 
-
     public static function QuicktimeLanguageLookup($language_id) {
-
         static $lookup = array (
             0   => 'English',
             1   => 'French',
@@ -1344,14 +1394,12 @@ class getid3_quicktime extends getid3_handler
             137 => 'Dzongkha',
             138 => 'JavaneseRom'
         );
-        
         return (isset($lookup[$language_id]) ? $lookup[$language_id] : 'invalid');
     }
 
 
 
     public static function QuicktimeVideoCodecLookup($codec_id) {
-
         static $lookup = array (
             '3IVX' => '3ivx MPEG-4',
             '3IV1' => '3ivx MPEG-4 v1',
@@ -1405,7 +1453,6 @@ class getid3_quicktime extends getid3_handler
             'WRAW' => 'Windows RAW',
             'y420' => 'YUV420'
         );
-        
         return (isset($lookup[$codec_id]) ? $lookup[$codec_id] : '');
     }
 
@@ -1453,7 +1500,7 @@ class getid3_quicktime extends getid3_handler
             'twos'          => 'signed/two\'s complement (Big Endian)',
             'ulaw'          => 'mu-law 2:1',
         );
-        
+
         return (isset($lookup[$codec_id]) ? $lookup[$codec_id] : '');
     }
 
@@ -1472,7 +1519,7 @@ class getid3_quicktime extends getid3_handler
 
 
     public static function QuicktimeColorNameLookup($color_depth_id) {
-  
+
         static $lookup = array (
             1  => '2-color (monochrome)',
             2  => '4-color',
@@ -1486,7 +1533,7 @@ class getid3_quicktime extends getid3_handler
             36 => '16-gray',
             40 => '256-gray',
         );
-        
+
         return (isset($lookup[$color_depth_id]) ? $lookup[$color_depth_id] : 'invalid');
     }
 
@@ -1498,12 +1545,12 @@ class getid3_quicktime extends getid3_handler
         if (substr($null_terminated_string, strlen($null_terminated_string) - 1, 1) === "\x00") {
             return substr($null_terminated_string, 0, strlen($null_terminated_string) - 1);
         }
-        
+
         return $null_terminated_string;
     }
-    
-    
-    
+
+
+
     public static function FixedPoint8_8($raw_data) {
 
         return getid3_lib::BigEndian2Int($raw_data{0}) + (float)(getid3_lib::BigEndian2Int($raw_data{1}) / 256);
@@ -1512,14 +1559,14 @@ class getid3_quicktime extends getid3_handler
 
 
     public static function FixedPoint16_16($raw_data) {
-        
+
         return getid3_lib::BigEndian2Int(substr($raw_data, 0, 2)) + (float)(getid3_lib::BigEndian2Int(substr($raw_data, 2, 2)) / 65536);
     }
 
 
 
     public static function FixedPoint2_30($raw_data) {
-        
+
         $binary_string = getid3_lib::BigEndian2Bin($raw_data);
         return bindec(substr($binary_string, 0, 2)) + (float)(bindec(substr($binary_string, 2, 30)) / 1073741824);
     }

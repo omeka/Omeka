@@ -81,8 +81,40 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
         if (!isset($options[Omeka_Db_Migration_Manager::ORIG_MIGRATION_OPTION_NAME])) {
             return;
         }
-        
+
+        // 47 is the migration of the completely-updated 1.2.x database.
+        // Due to the changed migrations starting with 1.3, we must disallow
+        // upgrades from pre-1.2.x versions to post-1.2 versions.
+        if ($options[Omeka_Db_Migration_Manager::ORIG_MIGRATION_OPTION_NAME] != '47') {
+            $this->_displayOutdatedError();
+        }
+
         $migrationManager = Omeka_Db_Migration_Manager::getDefault($this->getBootstrap()->db);
         $migrationManager->setupTimestampMigrations();
+    }
+
+    /**
+     * Display a message telling users they need to upgrade to Omeka 1.2.
+     */
+    private function _displayOutdatedError()
+    {
+?>
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>Cannot Upgrade</title>
+    <link rel="stylesheet" media="all" href="<?php echo WEB_VIEW_SCRIPTS . '/css/style.css'; ?>">
+</head>
+<body>
+    <div id="content">
+        <h1>Cannot Upgrade: Need to Upgrade to Omeka 1.2.1</h1>
+        <p>Before you can upgrade to version 1.3 of Omeka, you must first upgrade to version 1.2.1.</p>
+        <p>Please consult the <a href="http://omeka.org/codex/Upgrading">Upgrading</a> page on the Omeka codex, and <a href="http://omeka.org/files/omeka-1.2.1.zip">Downlodad Omeka 1.2.1</a></p>
+    </div>
+</body>
+</html>
+<?php
+        exit;
     }
 }

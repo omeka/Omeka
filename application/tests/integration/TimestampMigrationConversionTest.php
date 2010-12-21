@@ -22,7 +22,7 @@ class TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
         $this->db = $this->core->getBootstrap()->bootstrap('Db')->db;
         
         $this->db->query("DELETE FROM omeka_options WHERE name = 'omeka_version' LIMIT 1");
-        $this->db->query("INSERT INTO omeka_options (name, value) VALUES ('migration', '48')");
+        $this->db->query("INSERT INTO omeka_options (name, value) VALUES ('migration', '47')");
         $this->db->query("DROP TABLE omeka_schema_migrations");    
     }
     

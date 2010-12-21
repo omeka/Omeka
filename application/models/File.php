@@ -49,7 +49,12 @@ class File extends Omeka_Record
     {
         $this->added = date("Y-m-d H:i:s");
         $this->modified = date("Y-m-d H:i:s");   
-        
+        $fileInfo = new Omeka_File_Info($this);
+        $fileInfo->setMimeTypeIfAmbiguous();
+    }
+
+    protected function afterInsert()
+    {
         // Extract the metadata.  This will have one side effect (aside from
         // adding the new metadata): it uses setMimeType() to reset the default
         // mime type for the file if applicable.
@@ -243,6 +248,7 @@ class File extends Omeka_Record
                              $this->getDerivativeFilename(),
                              $this->getMimeType())) {
             $this->has_derivative_image = 1;
+            $this->save();
         }
     }
     

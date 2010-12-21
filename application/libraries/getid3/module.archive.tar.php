@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2006 James Heinrich, Allan Hansen                 |
+// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2 of the GPL license,         |
 // | that is bundled with this package in the file license.txt and is     |
@@ -23,8 +23,8 @@
 //
 // $Id: module.archive.tar.php,v 1.2 2006/11/02 10:48:00 ah Exp $
 
-        
-        
+
+
 class getid3_tar extends getid3_handler
 {
 
@@ -35,9 +35,9 @@ class getid3_tar extends getid3_handler
         $info['fileformat'] = 'tar';
 
         $fp = $this->getid3->fp;
-        
+
         fseek($fp, 0);
-        
+
         $unpack_header = 'a100fname/a8mode/a8uid/a8gid/a12size/a12mtime/a8chksum/a1typflag/a100lnkname/a6magic/a2ver/a32uname/a32gname/a8devmaj/a8devmin/a155/prefix';
 
         $null_512k = str_repeat("\0", 512); // end-of-file marker
@@ -45,9 +45,9 @@ class getid3_tar extends getid3_handler
         $already_warned = false;
 
         while (!feof($fp)) {
-            
+
             $buffer = fread($fp, 512);
-            
+
             // check the block
             $checksum = 0;
             for ($i = 0; $i < 148; $i++) {
@@ -92,24 +92,24 @@ class getid3_tar extends getid3_handler
                     }
                 }
             }
-            
+
             if ($prefix) {
                 $name = $prefix.'/'.$name;
             }
             if ((preg_match('#/$#', $name)) && !$name) {
                 $typeflag = 5;
             }
-            
+
             // If it's the end of the tar-file...
             if ($buffer == $null_512k) {
                 break;
             }
-            
+
             // Protect against tar-files with garbage at the end
             if ($name == '') {
                 break;
             }
-            
+
             $info['tar']['file_details'][$name] = array (
                 'name'     => $name,
                 'mode_raw' => $mode,
@@ -128,7 +128,7 @@ class getid3_tar extends getid3_handler
                 'devmajor' => $devmaj,
                 'devminor' => $devmin
             );
-            
+
             // Skip the next chunk
             fseek($fp, $size, SEEK_CUR);
 
@@ -136,7 +136,7 @@ class getid3_tar extends getid3_handler
             if ($size % 512) {
                 fseek($fp, 512 - $diff, SEEK_CUR);
             }
-            
+
         }
         return true;
     }
@@ -225,7 +225,7 @@ class getid3_tar extends getid3_handler
 
         return @$flag_types[$typflag];
     }
-    
+
 }
 
 ?>
