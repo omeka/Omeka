@@ -1,7 +1,7 @@
 # Remember to enable display_errors on development environments only.
 <IfModule mod_php5.c>
-	php_value display_errors 0
-	php_flag register_globals off
+    php_value display_errors 0
+    php_flag register_globals off
 </IfModule>
 
 RewriteEngine on
@@ -9,6 +9,9 @@ RewriteEngine on
 # If know that mod_rewrite is enabled, but you are still getting mod_rewrite errors,
 # uncomment the line below and replace "/" with your base directory.
 # RewriteBase /
+
+RewriteRule ^admin/ - [C]
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ admin/index.php [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d [OR]

@@ -1,7 +1,0 @@
-RewriteEngine on
-
-# If know that mod_rewrite is enabled, but you are still getting mod_rewrite errors,
-# uncomment the line below and replace "/admin/" with your install directory.
-# RewriteBase /admin/
-
-RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
