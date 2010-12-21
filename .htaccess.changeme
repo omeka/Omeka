@@ -30,7 +30,7 @@ Allow from all
 
 # Uncomment the lines below in order to enable caching of some files via Apache (after a finished site has gone live)
 <IfModule mod_expires.c>
-#  <FilesMatch "\.(js|css|gif|png)$">
+#  <FilesMatch "\.(js|ico|gif|jpg|png|css)$">
 #       ExpiresActive on
 #       ExpiresDefault "access plus 10 day"
 #   </FilesMatch>
