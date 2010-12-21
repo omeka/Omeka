@@ -10,14 +10,12 @@ RewriteEngine on
 # uncomment the line below and replace "/" with your base directory.
 # RewriteBase /
 
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^admin/ - [C]
-RewriteRule !\.(js|ico|gif|jpg|png|css)$ admin/index.php [L]
+RewriteRule .* admin/index.php [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d [OR]
-# This ensures that Apache will not mistake the URL mysite.com/archive/ for a request for the physical directory that stores files
-RewriteCond %{REQUEST_URI}  .+\/archive\/
-RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+RewriteRule .* index.php
 
 <FilesMatch "\.(php|ini)$">
  Order Allow,Deny
