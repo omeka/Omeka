@@ -697,22 +697,50 @@ function element_exists($elementSetName, $elementName) {
     return (bool)$element;
 } 
 
+
 /**
- * Checks whether a specified plugin is active
+ * Determine whether or not a plugin is installed and active.  
  *
- * @since 1.4
- * @param string $pluginDirectoryName The name of the plugin.
- * @return bool
+ * May be used by theme/plugin writers to customize behavior based on the
+ * existence of certain plugins.
+ *
+ * Some examples of how to use this function:
+ *
+ * Check if ExhibitBuilder is installed and activated.
+ * <code>
+ * if (plugin_active('ExhibitBuilder')):
+ * </code>
+ *
+ * Check if installed version of ExhibitBuilder is at least version 1.0 or 
+ * higher.
+ * <code> 
+ * if (plugin_active('ExhibitBuilder', '1.0')): 
+ * </code>
+ *
+ * Check if installed version of ExhibitBuilder is anything less than 2.0.
+ * <code>
+ * if (plugin_active('ExhibitBuilder', '2.0', '<')): 
+ * </code>
+ *
+ * @param string $name Directory name of the plugin.
+ * @param string $version Optional Version of the plugin to check.  
+ * @param string $compOperator Optional Comparison operator to use when 
+ * checking the installed version of ExhibitBuilder.  Defaults to '>=' (to 
+ * check verify installed version).
+ * @return boolean
  */
-function plugin_is_active($pluginDirectoryName) {
-    if (!$pluginDirectoryName) {
-        return;
+function plugin_is_active($name, $version = null, $compOperator = '>=')
+{
+    $plugin = get_db()->getTable('Plugin')->findByDirectoryName($name);
+    if (!$plugin) {
+        return false;
     }
-    
-    $plugin = get_db()->getTable('Plugin')->findByDirectoryName($pluginDirectoryName);
-    
-    if ($plugin) {
-        return $plugin->active == '1';
+    if (!$plugin->isActive()) {
+        return false;
     }
-    return false;
+    if ($version) {
+        return version_compare($plugin->getDbVersion(), $version, $compOperator);
+    } else {
+        return true;
+    } 
 }
