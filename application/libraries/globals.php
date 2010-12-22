@@ -708,18 +708,18 @@ function element_exists($elementSetName, $elementName) {
  *
  * Check if ExhibitBuilder is installed and activated.
  * <code>
- * if (plugin_active('ExhibitBuilder')):
+ * if (plugin_is_active('ExhibitBuilder')):
  * </code>
  *
  * Check if installed version of ExhibitBuilder is at least version 1.0 or 
  * higher.
  * <code> 
- * if (plugin_active('ExhibitBuilder', '1.0')): 
+ * if (plugin_is_active('ExhibitBuilder', '1.0')): 
  * </code>
  *
  * Check if installed version of ExhibitBuilder is anything less than 2.0.
  * <code>
- * if (plugin_active('ExhibitBuilder', '2.0', '<')): 
+ * if (plugin_is_active('ExhibitBuilder', '2.0', '<')): 
  * </code>
  *
  * @param string $name Directory name of the plugin.
