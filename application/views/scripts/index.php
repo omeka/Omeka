@@ -20,7 +20,9 @@
     	</div><!-- end featured collection -->
 		<?php endif; ?>	
 		
-		<?php if ((get_theme_option('Display Featured Exhibit') !== '0') && function_exists('exhibit_builder_display_random_featured_exhibit')): ?>
+        <?php if ((get_theme_option('Display Featured Exhibit') !== '0') 
+               && plugin_is_active('ExhibitBuilder') 
+               && function_exists('exhibit_builder_display_random_featured_exhibit')): ?>
     	<!-- Featured Exhibit -->
     	<?php echo exhibit_builder_display_random_featured_exhibit(); ?>
 		<?php endif; ?>
