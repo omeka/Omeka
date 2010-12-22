@@ -9,13 +9,10 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
-// Require the necessary files.
-$baseDir = dirname(__FILE__);
-
 /**
  * Paths.php is required at minimum in order to define all path constants.
  */
-require_once "paths.php";
+require_once dirname(__FILE__) . "/../../paths.php";
 require_once "Omeka/Core.php";
 
 // Set the command line arguments.
