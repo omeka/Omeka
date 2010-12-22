@@ -32,6 +32,7 @@ try {
 $core = new Omeka_Core;
 $lastPhase = $options->getOption('lastphase');
 $core->phasedLoading($lastPhase);
+$core->bootstrap('Jobs');
 
 // Get the database object.
 $db = get_db();

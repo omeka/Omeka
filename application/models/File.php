@@ -55,12 +55,10 @@ class File extends Omeka_Record
 
     protected function afterInsert()
     {
-        // Extract the metadata.  This will have one side effect (aside from
-        // adding the new metadata): it uses setMimeType() to reset the default
-        // mime type for the file if applicable.
-        $this->extractMetadata();         
-        
-        $this->createDerivatives();
+        $dispatcher = Zend_Registry::get('job_dispatcher');
+        $dispatcher->setQueueName('uploads');
+        $dispatcher->send('File_ProcessUploadJob', 
+                          array('fileId' => $this->id));
     }
     
     protected function beforeUpdate()
