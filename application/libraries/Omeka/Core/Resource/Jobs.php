@@ -14,7 +14,7 @@
  */
 class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstract
 {
-    const DEFAULT_DISPATCHER = "Omeka_Job_Dispatcher_Synchronous";
+    const DEFAULT_DISPATCHER = "Omeka_Job_Dispatcher_Adapter_Synchronous";
 
     public function init()
     {
