@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2010
  */
-class Omeka_Job_Mock extends Omeka_Job
+class Omeka_Job_Mock extends Omeka_JobAbstract
 {
     public $options;
     public $performed;

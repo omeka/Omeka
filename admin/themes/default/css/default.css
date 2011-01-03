@@ -702,7 +702,7 @@ div.autocomplete ul li {
 
 body#login {width: 414px; margin: 54px auto;}
 
-body#login #site-title {margin-left:0; margin-bottom:0; margin-top:0;}
+body#login #site-title {margin-left:0; margin-bottom:0; margin-top:0; width:auto;}
 
 body#login h1 {background:transparent; font-size:2em;margin:0 0 1em; padding:0; display:inline;float:left;}
 body#login h2 {clear: both;}

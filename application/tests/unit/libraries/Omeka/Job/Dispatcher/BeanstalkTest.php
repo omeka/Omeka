@@ -1,14 +1,14 @@
 <?php
 
-class Omeka_Job_Dispatcher_BeanstalkTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Dispatcher_Adapter_BeanstalkTest extends PHPUnit_Framework_TestCase
 {
     public function testPheanstalkRequiresHostOption()
     {
-        $this->adapter = new Omeka_Job_Dispatcher_Beanstalk;
+        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk;
         try {
             $this->adapter->setQueueName('foobar');
             $this->fail("No exception was thrown.");
-        } catch (Omeka_Job_Dispatcher_RequiredOptionException $e) {
+        } catch (Omeka_Job_Dispatcher_Adapter_RequiredOptionException $e) {
             $this->assertContains("host", $e->getMessage());
             return;
         }
@@ -20,7 +20,7 @@ class Omeka_Job_Dispatcher_BeanstalkTest extends PHPUnit_Framework_TestCase
      */
     public function testSetQueueName()
     {
-        $this->adapter = new Omeka_Job_Dispatcher_Beanstalk(array('host' => 'example.test'));
+        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(array('host' => 'example.test'));
         try {
             $this->adapter->setQueueName('foobar');
             $this->fail("No exception was thrown.");
@@ -30,7 +30,7 @@ class Omeka_Job_Dispatcher_BeanstalkTest extends PHPUnit_Framework_TestCase
 
     public function testSend()
     {
-        $this->adapter = new Omeka_Job_Dispatcher_Beanstalk(array('host' => 'example.test'));
+        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(array('host' => 'example.test'));
         try {
             $this->adapter->send('foobar', array());
             $this->fail("No exception was thrown.");

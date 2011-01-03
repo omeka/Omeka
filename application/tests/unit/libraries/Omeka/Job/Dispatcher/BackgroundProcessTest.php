@@ -1,5 +1,5 @@
 <?php
-class Omeka_Job_Dispatcher_BackgroundProcessTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends PHPUnit_Framework_TestCase
 {
     public $jobMetadata = array(
         'createdAt' => 'now',
@@ -14,7 +14,7 @@ class Omeka_Job_Dispatcher_BackgroundProcessTest extends PHPUnit_Framework_TestC
         // a mock instead.
         $this->processDispatcher = new MockProcessDispatcher;
         MockProcessDispatcher::_reset();
-        $this->adapter = new Omeka_Job_Dispatcher_BackgroundProcess;
+        $this->adapter = new Omeka_Job_Dispatcher_Adapter_BackgroundProcess;
     }
 
     public function testDefaultUsesProcessDispatcher()

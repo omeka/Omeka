@@ -2,14 +2,14 @@
 /**
  * 
  **/
-class Omeka_Job_Dispatcher_SynchronousTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Dispatcher_Adapter_SynchronousTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         Zend_Registry::_unsetInstance();
         $this->factory = new Omeka_Job_FactoryMock;
         Zend_Registry::set('job_factory', $this->factory);
-        $this->adapter = new Omeka_Job_Dispatcher_Synchronous;
+        $this->adapter = new Omeka_Job_Dispatcher_Adapter_Synchronous;
     }
 
     public function testSend()

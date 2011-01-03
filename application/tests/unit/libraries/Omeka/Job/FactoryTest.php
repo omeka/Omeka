@@ -81,4 +81,18 @@ class Omeka_Job_FactoryTest extends PHPUnit_Framework_TestCase
         ));
         $job = $factory->from($json);
     }
+
+    public function testBuildShortcutCreatesInstance()
+    {
+        $factory = new Omeka_Job_Factory(array('foo' => true));
+        $job = $factory->build('Omeka_Job_Mock', array('bar' => false));
+        $this->assertType('Omeka_Job_Mock', $job);
+    }
+
+    public function testBuildShortcutPassesOptions()
+    {
+        $factory = new Omeka_Job_Factory(array('foo' => true));
+        $job = $factory->build('Omeka_Job_Mock', array('bar' => false));
+        $this->assertEquals(array('foo' => true, 'bar' => false), $job->getMiscOptions());
+    }
 }

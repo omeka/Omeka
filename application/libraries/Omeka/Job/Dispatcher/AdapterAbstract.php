@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2010
  */
-abstract class Omeka_Job_Dispatcher_AbstractAdapter implements Omeka_Job_Dispatcher_Adapter
+abstract class Omeka_Job_Dispatcher_AdapterAbstract implements Omeka_Job_Dispatcher_Adapter
 {
     private $_options = array();
 
@@ -40,7 +40,7 @@ abstract class Omeka_Job_Dispatcher_AbstractAdapter implements Omeka_Job_Dispatc
     public function getOption($name)
     {
         if (!array_key_exists($name, $this->_options)) {
-            throw new Omeka_Job_Dispatcher_RequiredOptionException($name);
+            throw new Omeka_Job_Dispatcher_Adapter_RequiredOptionException($name);
         }
         return $this->_options[$name];
     }

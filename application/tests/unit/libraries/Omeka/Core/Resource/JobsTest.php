@@ -47,7 +47,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
         // The fact that this doesn't die when there are no config settings 
         // means that it set up a valid dispatcher adapter.
         $dispatcher = $resource->init();
-        $this->assertEquals('Omeka_Job_Dispatcher', get_class($dispatcher));
+        $this->assertEquals('Omeka_Job_Dispatcher_Default', get_class($dispatcher));
     }
 
     /**

@@ -104,13 +104,6 @@ class Installer_Requirements
             file has been uploaded correctly and try again.";
             $this->_errorMessages[] = compact('header', 'message');
         }
-        
-        if (!file_exists(ADMIN_DIR . DIRECTORY_SEPARATOR . '.htaccess')) {
-            $header = 'Missing admin/.htaccess File';
-            $message = "Omeka's admin/.htaccess file is missing. Please make 
-            sure this file has been uploaded correctly and try again.";
-            $this->_errorMessages[] = compact('header', 'message');
-        }
     }
     
     private function _checkRegisterGlobalsIsOff()
