@@ -1,11 +1,11 @@
 <?php
-class Omeka_Job_DispatcherTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Dispatcher_DefaultTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         $this->user = $this->getMock('User', array(), array(), '', false);
         $this->adapter = new Omeka_Job_Dispatcher_Mock;
-        $this->dispatcher = new Omeka_Job_Dispatcher($this->adapter, $this->user);
+        $this->dispatcher = new Omeka_Job_Dispatcher_Default($this->adapter, $this->user);
     }
 
     public function testSetQueueName()

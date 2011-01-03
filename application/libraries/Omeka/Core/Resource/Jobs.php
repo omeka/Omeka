@@ -14,7 +14,7 @@
  */
 class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstract
 {
-    const DEFAULT_DISPATCHER = "Omeka_Job_Dispatcher_Adapter_Synchronous";
+    const DEFAULT_ADAPTER = "Omeka_Job_Dispatcher_Adapter_Synchronous";
 
     public function init()
     {
@@ -22,7 +22,7 @@ class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstrac
         $this->getBootstrap()->bootstrap('Db');
         $this->getBootstrap()->bootstrap('Currentuser');
         $config = $this->getBootstrap()->config->jobs;
-        $adapterClass = self::DEFAULT_DISPATCHER;
+        $adapterClass = self::DEFAULT_ADAPTER;
         $adapterOptions = array();
         if ($config) {
             if (isset($config->dispatcher)) {
@@ -39,7 +39,7 @@ class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstrac
         if (!($adapter instanceof Omeka_Job_Dispatcher_Adapter)) {
             throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Adapter named '$adapterClass' does not implement the required Omeka_Job_Dispatcher_Adapter interface.");
         }
-        $dispatcher = new Omeka_Job_Dispatcher($adapter, $this->getBootstrap()->currentuser);
+        $dispatcher = new Omeka_Job_Dispatcher_Default($adapter, $this->getBootstrap()->currentuser);
         $factory = new Omeka_Job_Factory(array(
             'db'            => $this->getBootstrap()->db,
             'jobDispatcher' => $dispatcher,
