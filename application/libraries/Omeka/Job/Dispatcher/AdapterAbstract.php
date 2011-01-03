@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2010
  */
-abstract class Omeka_Job_Dispatcher_AbstractAdapter implements Omeka_Job_Dispatcher_Adapter
+abstract class Omeka_Job_Dispatcher_AdapterAbstract implements Omeka_Job_Dispatcher_Adapter
 {
     private $_options = array();
 

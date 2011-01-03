@@ -28,7 +28,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2010
  */
-class Omeka_Job_Dispatcher_Adapter_ZendQueue extends Omeka_Job_Dispatcher_AbstractAdapter
+class Omeka_Job_Dispatcher_Adapter_ZendQueue extends Omeka_Job_Dispatcher_AdapterAbstract
 {
     private $_queue;
 
