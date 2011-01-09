@@ -53,4 +53,4 @@ mail.transport.type = "Sendmail"
 ; mail.transport.options.password = ""
 ; mail.transport.options.ssl = ""       ; For SSL support, set to "ssl" or "tls"
 
-; jobs.dispatcher = "Omeka_Job_Dispatcher_Synchronous"
+; jobs.dispatcher = "Omeka_Job_Dispatcher_Adapter_Synchronous"
