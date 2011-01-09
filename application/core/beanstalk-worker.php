@@ -27,21 +27,15 @@ try {
 
 // Load only the phases needed.
 $core = new Omeka_Core;
-$core->bootstrap(array('Config', 'Db', 'Options', 'Jobs'));
-$host = isset($options->host) ? $options->host : '127.0.0.1';
-$pheanstalk = new Pheanstalk($host);
-if (isset($options->queue) && $options->queue != 'default') {
-    $pheanstalk->watch($options->queue)
-               ->ignore('default');
-}
-$job = $pheanstalk->reserve();
-$task = Zend_Registry::get('job_factory')->from($job->getData());
-if ($task === false) {
-    echo "Task failed.  Faulty input:\n" . $job->getData();
-    $pheanstalk->bury($job);
+
+function handle_exception($e)
+{
+    echo "Beanstalk worker error (" . get_class($e) . "): " . $e->getMessage() . 
+         PHP_EOL . $e->getTraceAsString() . PHP_EOL;
     exit(1);
-} else {
-    $task->perform();
-    $pheanstalk->delete($job);
-    exit(0);
 }
+set_exception_handler('handle_exception');
+
+$core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Jobs'));
+$worker = new Omeka_Job_Worker_Beanstalk($options, Zend_Registry::get('job_factory'));
+$worker->work();
