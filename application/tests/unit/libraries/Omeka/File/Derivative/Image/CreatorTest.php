@@ -21,6 +21,9 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
         $this->validFilePath = dirname(__FILE__) . '/_files/valid-image.jpg';
         $this->validMimeType = 'image/jpeg';
         $this->fullsizeImgPath = dirname(__FILE__) . '/_files/fullsize';
+        if (!is_dir($this->fullsizeImgPath)) {
+            mkdir($this->fullsizeImgPath);
+        }
         $this->derivativeFilename = 'valid-image_deriv.jpg';
         // If we set up a test log, then log the ImageMagick commands instead
         // of executing via the commandline.
