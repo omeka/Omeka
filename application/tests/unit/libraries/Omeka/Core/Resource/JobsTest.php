@@ -12,7 +12,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
         $this->bootstrap = new Omeka_Core_Bootstrap_Mock($this->application);
         $this->config = new Zend_Config(array(
             'jobs' => array(
-                'dispatcher'        => 'Omeka_Job_Dispatcher_Mock',
+                'dispatcher'        => 'Omeka_Job_Dispatcher_Adapter_Array',
                 'adapterOptions'    => array(),
             )
         ), true);
