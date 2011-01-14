@@ -103,7 +103,6 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
     
     protected function _getUri($file, $sizeFormat)
     {
-        $options = array('id'=>$file->id, 'format'=>$sizeFormat);
-        return abs_uri($options, 'display');
+        return $file->getWebPath($sizeFormat);
     }
 }

@@ -99,7 +99,7 @@ OWNERS
     private function _setCollectionCollectors($db)
     {
         $collectors = $db->fetchAll(<<<COLLECTORS
-SELECT IF(TRIM(ASCII(e.institution)), e.institution, CONCAT_WS( " ", e.first_name, e.middle_name, e.last_name )) as `name`, er.relation_id as collection_id
+SELECT CONCAT_WS(' ', e.first_name, e.middle_name, e.last_name) AS name, e.institution AS institution, er.relation_id as collection_id
 FROM $db->EntitiesRelations er 
 INNER JOIN $db->EntityRelationships err ON err.id = er.relationship_id AND err.name = "collector" 
 INNER JOIN $db->Entity e ON e.id = er.entity_id
@@ -108,13 +108,32 @@ COLLECTORS
 );
         $indexedCollectors = array();
         foreach ($collectors as $collector) {
-            $indexedCollectors[(int)$collector['collection_id']][] = $collector['name'];
+            $name = trim($collector['name']);
+            $institution = trim($collector['institution']);
+
+            // If we have a name and institution, include both, with
+            // institution in parens. If only one or the other exists, include
+            // only that one.  If neither is there, discard the collector.
+            if (!empty($name)) {
+                $newCollector = $name;
+                if (!empty($institution)) {
+                    $newCollector .= " ($institution)";
+                }
+            } else {
+                if (!empty($institution)) {
+                    $newCollector = $institution;
+                } else {
+                    $newCollector = null;
+                }
+            }
+
+            if ($newCollector) {
+                $indexedCollectors[(int)$collector['collection_id']][] = $newCollector;
+            }
         }
 
         foreach ($indexedCollectors as $collectionId => $collectorArray) {
-            $db->update("$db->Collection", array('collectors' => serialize($collectorArray)), 'id = ' . (int)$collectionId);
+            $db->update("$db->Collection", array('collectors' => implode(Collection::COLLECTOR_DELIMITER, $collectorArray)), 'id = ' . (int)$collectionId);
         }    
     }
-
-    
 }

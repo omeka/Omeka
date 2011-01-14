@@ -22,6 +22,11 @@ define('ELEMENT_SET_ITEM_TYPE', 'Item Type Metadata');
 // Report all errors except E_NOTICE.
 error_reporting(E_ALL ^ E_NOTICE);
 
+// Workaround for PHP 5.3 behavior for timezones.
+// If date.timezone is not set, this will query the OS for the timezone
+// and set that as the default.
+date_default_timezone_set(@date_default_timezone_get());
+
 // Set the zlib config values if the extension has been loaded.
 if (extension_loaded('zlib')) {
     ini_set('zlib.output_compression', true);

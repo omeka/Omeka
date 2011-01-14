@@ -33,14 +33,15 @@ class Omeka_Form_Install extends Omeka_Form
             
         $this->addElement('text', 'username', array(
             'label' => 'Username',
-            'class' => 'textinput', 
-            'validators' => array(array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH))), 
+            'class' => 'textinput',
+            'description' => 'Only alphanumeric characters are allowed.', 
+            'validators' => array(array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH)), 'Alnum'), 
             'required' => true
         ));
         
         $this->addElement('password', 'password', array(
             'label' => 'Password',
-            'description' => 'Password for your super user, 6–40 characters.', 
+            'description' => 'Must be at least 6 characters.', 
             'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH))), 
             'required' => true
         ));
