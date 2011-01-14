@@ -421,6 +421,9 @@ class Plugin extends Omeka_Record
     
     public function meetsOmekaTestedUpToVersion()
     {
-        return !$this->getTestedUpToOmekaVersion() || version_compare($this->getTestedUpToOmekaVersion(), OMEKA_VERSION, '>=');
+        // Add 'p' to the declared tested version from the plugin.
+        // This means that the check will succeed for all sub-versions
+        // of the declared version in plugin.ini.
+        return !$this->getTestedUpToOmekaVersion() || version_compare($this->getTestedUpToOmekaVersion() . 'p', OMEKA_VERSION, '>=');
     }
 }
