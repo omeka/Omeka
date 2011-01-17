@@ -15,8 +15,9 @@
 class Omeka_Job_Worker_Beanstalk
 {
     public function __construct(Zend_Console_GetOpt $options,
-                                Omeka_Job_Factory $jobFactory)
-    {
+                                Omeka_Job_Factory $jobFactory,
+                                Omeka_Db $db
+    ) {
         $host = isset($options->host) ? $options->host : '127.0.0.1';
         $pheanstalk = new Pheanstalk($host);
         if (isset($options->queue) && $options->queue != 'default') {
@@ -25,6 +26,7 @@ class Omeka_Job_Worker_Beanstalk
         }
         $this->_pheanstalk = $pheanstalk;
         $this->_jobFactory = $jobFactory;
+        $this->_db = $db;
     }
 
     public function work()
@@ -33,9 +35,19 @@ class Omeka_Job_Worker_Beanstalk
         try {
             $omekaJob = $this->_jobFactory->from($pheanJob->getData());
             $omekaJob->perform();
+        } catch (Omeka_Job_Worker_InterruptException $e) {
+            $this->_interrupt($omekaJob);
+            throw $e;
         } catch (Exception $e) {
             $this->_pheanstalk->bury($pheanJob);
             throw $e;
         }
+    }
+
+    private function _interrupt($job = null)
+    {
+        // Just in case there was a transaction.
+        $this->_db->rollback();
+        $this->_db->closeConnection();
     }
 }
