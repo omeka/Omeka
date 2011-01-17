@@ -190,11 +190,30 @@ class Omeka_File_Derivative_Image_Creator
 	        $convertArgs,
 	        escapeshellarg($newPath)
 	    ));
-	    	    
-	    exec($cmd, $output, $returnVar);
-        
-        if ($returnVar) {
-            throw new Omeka_File_Derivative_Exception("ImageMagick error: Return Code: {$returnVar}.");
+        // Using proc_open() instead of exec() solves a problem where exec('convert') 
+        // fails with a "Permission Denied" error because the current working 
+        // directory cannot be set properly via exec().  Note that exec() works 
+        // fine when executing in the web environment but fails in CLI.
+        $descriptorspec = array(
+            0 => array("pipe", "r"), //STDIN
+            1 => array("pipe", "w"), //STDOUT
+            2 => array("pipe", "a"), //STDERR
+        );
+        $pipes = array();
+        if ($proc = proc_open($cmd, $descriptorspec, $pipes, getcwd())) {
+            $errors = stream_get_contents($pipes[2]);
+            if (!empty($errors)) {
+                throw new Omeka_File_Derivative_Exception("Error in ImageMagick conversion: $errors.");
+            }
+            foreach ($pipes as $pipe) {
+                fclose($pipe);
+            }
+            $status = proc_close($proc);
+            if ($status) {
+                throw new Omeka_File_Derivative_Exception("ImageMagick exited with status code: $status.");
+            }
+        } else {
+            throw new Omeka_File_Derivative_Exception("Failed to execute command: $cmd.");
         }
 	}
 		
