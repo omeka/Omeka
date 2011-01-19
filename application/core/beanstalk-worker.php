@@ -15,6 +15,8 @@
 require_once dirname(__FILE__) . "/../../paths.php";
 require_once "Omeka/Core.php";
 
+declare(ticks = 1);
+
 // Set the command line arguments.
 $options = new Zend_Console_Getopt(array('queue|q=s' => 'Name of queue (tube) to use', 'host|h=s' => 'Beanstalk host IP'));
 
@@ -36,6 +38,19 @@ function handle_exception($e)
 }
 set_exception_handler('handle_exception');
 
+function handle_signal($signal)
+{
+    switch ($signal) {
+        case SIGINT:
+            throw new Omeka_Job_Worker_InterruptException("Caught SIGINT, shutting down."); 
+            break;
+        default:
+            break;
+    }    
+}
+pcntl_signal(SIGINT, "handle_signal");
+
+
 $core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Jobs'));
-$worker = new Omeka_Job_Worker_Beanstalk($options, Zend_Registry::get('job_factory'));
+$worker = new Omeka_Job_Worker_Beanstalk($options, Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
 $worker->work();
