@@ -161,7 +161,7 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
              ),
 	         'atom' => array(
 	             'suffix'    => 'atom',
-	             'headers'   => array('Content-Type' => 'text/xml')
+	             'headers'   => array('Content-Type' => 'application/atom+xml; charset=utf-8')
 	         )
          );
     }

@@ -19,13 +19,13 @@ class Omeka_Model_ItemAtomTest extends Omeka_Test_AppTestCase
     public function testNoContext()
     {
         $this->dispatch('items/browse');
-        $this->assertNotHeaderContains('Content-Type', 'text/xml');
+        $this->assertNotHeaderContains('Content-Type', 'application/atom+xml; charset=utf-8');
     }
 
     public function testAtomContext()
     {
         $this->dispatch('items/browse?output=atom');
-        $this->assertHeaderContains('Content-Type', 'text/xml');
+        $this->assertHeaderContains('Content-Type', 'application/atom+xml; charset=utf-8');
     }
     public function testGetFeedOnEmptyItem()
     {
