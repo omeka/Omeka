@@ -8,7 +8,7 @@
     
     <title><?php echo settings('site_title'); echo isset($title) ? ' | ' . $title : ''; ?></title>
     
-    <?php echo auto_discovery_link_tag(); ?>
+    <?php echo auto_discovery_link_tags(); ?>
 
     <!-- Plugin Stuff -->
     <?php plugin_header(); ?>
