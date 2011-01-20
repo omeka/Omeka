@@ -497,3 +497,19 @@ function public_nav_items(array $navArray, $maxDepth = 0)
 {
     return public_nav($navArray, 'items', $maxDepth);
 }
+
+/**
+ * Creates a link to the Items Atom view.
+ * 
+ * @param string $text The text of the link.
+ * @param array $params A set of query string parameters to merge in to the href
+ * of the link.  E.g., if this link was clicked on the items/browse?collection=1
+ * page, and array('foo'=>'bar') was passed as this argument, the new URI would be
+ * items/browse?collection=1&foo=bar.
+ * @param array $tagAttributes An array of tag attributes for the link.
+ */
+function link_to_items_atom($text = 'Atom', $params=array(), $tagAttributes=array('class' => 'atom'))
+{	
+	$tagAttributes['href'] = html_escape(items_output_uri('atom', $params));
+	return '<a ' . _tag_attributes($tagAttributes) . '>' . $text . '</a>';
+}
