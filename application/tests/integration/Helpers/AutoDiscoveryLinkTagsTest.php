@@ -18,6 +18,34 @@ class Omeka_Helper_AutoDiscoveryLinkTagsTest extends Omeka_Test_AppTestCase
 {           
     protected $_useAdminViews = false;
     
+	public function testLinkTagOnHome()
+	{
+		$this->dispatch('/');
+        $html = $this->_defaultOutput();
+		$this->assertContains($html, auto_discovery_link_tags());
+	}
+
+    public function testLinkTagOnItemsShow()
+    {
+        $this->dispatch('items/show/1', false);
+        $html = $this->_defaultOutput();
+		$this->assertContains($html, auto_discovery_link_tags());
+    }
+    
+    public function testLinkTagOnItemsBrowse()
+    {
+        $this->dispatch('items/browse');
+        $html = $this->_defaultOutput();
+		$this->assertContains($html, auto_discovery_link_tags());
+    }
+    
+    public function testLinkTagOnCollectionsShow()
+    {
+        $this->dispatch('collections/show/1', false);
+        $html = $this->_defaultOutput();
+		$this->assertContains($html, auto_discovery_link_tags());
+    }
+    
     public function testLinkTagEscapesUrl()
     {
         $this->dispatch('/');
@@ -34,5 +62,12 @@ class Omeka_Helper_AutoDiscoveryLinkTagsTest extends Omeka_Test_AppTestCase
 		$html .= '<link rel="alternate" type="application/atom+xml" title="Omeka Atom Feed" href="/items/browse/%22%3E%3Cscript%3Ealert%2811639%29%3C/script%3E?output=atom" />';
         $this->assertContains($html, 
                             auto_discovery_link_tags());
-    } 
+    }
+
+    private function _defaultOutput()
+    {
+        $output = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="/items/browse?output=rss2" />';
+		$output .= '<link rel="alternate" type="application/atom+xml" title="Omeka Atom Feed" href="/items/browse?output=atom" />';
+		return $output;
+    }
 }
