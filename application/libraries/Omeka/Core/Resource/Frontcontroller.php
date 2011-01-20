@@ -158,7 +158,11 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
              'rss2' => array(
                  'suffix'    => 'rss2',
                  'headers'   => array('Content-Type' => 'text/xml')
-             )
+             ),
+	         'atom' => array(
+	             'suffix'    => 'atom',
+	             'headers'   => array('Content-Type' => 'text/xml')
+	         )
          );
     }
 }
