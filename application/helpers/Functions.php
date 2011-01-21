@@ -31,14 +31,27 @@ function is_odd($num)
 }
 
 /**
- * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
+ * Wrapper for the auto_discovery_link_tags() helper.
  * 
  * @since 0.9
+ * @uses auto_discovery_link_tags()
+ * @return string HTML
+ * @deprecated since 1.4
+ **/
+function auto_discovery_link_tag(){
+	return auto_discovery_link_tags();
+}
+
+/**
+ * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
+ * 
+ * @since 1.4
  * @uses items_output_uri()
  * @return string HTML
  **/
-function auto_discovery_link_tag(){
+function auto_discovery_link_tags() {
 	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. html_escape(items_output_uri()) .'" />';
+	$html .= '<link rel="alternate" type="application/atom+xml" title="Omeka Atom Feed" href="'. html_escape(items_output_uri('atom')) .'" />';
 	return $html;
 }
 

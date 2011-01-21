@@ -58,5 +58,5 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         $front->registerPlugin(new Omeka_Controller_Plugin_HtmlPurifier());
         
         return $front;
-    }     
+    }
 }

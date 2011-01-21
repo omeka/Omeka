@@ -114,7 +114,11 @@ class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbst
              'rss2' => array(
                  'suffix'    => 'rss2',
                  'headers'   => array('Content-Type' => 'text/xml')
-             )
+             ),
+	         'atom' => array(
+	             'suffix'    => 'atom',
+	             'headers'   => array('Content-Type' => 'application/atom+xml; charset=utf-8')
+	         ),
          );
     }
     
