@@ -35,6 +35,7 @@ class Omeka_Job_Worker_Beanstalk
         try {
             $omekaJob = $this->_jobFactory->from($pheanJob->getData());
             $omekaJob->perform();
+	    $this->_pheanstalk->delete($pheanJob);
         } catch (Omeka_Job_Worker_InterruptException $e) {
             $this->_interrupt($omekaJob);
             throw $e;
