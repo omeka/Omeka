@@ -153,11 +153,11 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
              ), 
              'dcmes-xml' => array(
                  'suffix'    => 'dcmes-xml',
-                 'headers'   => array('Content-Type' => 'text/xml')
+                 'headers'   => array('Content-Type' => 'application/rdf+xml; charset=utf-8')
              ),
              'rss2' => array(
                  'suffix'    => 'rss2',
-                 'headers'   => array('Content-Type' => 'text/xml')
+                 'headers'   => array('Content-Type' => 'application/rss+xml; charset=utf-8')
              ),
 	         'atom' => array(
 	             'suffix'    => 'atom',
