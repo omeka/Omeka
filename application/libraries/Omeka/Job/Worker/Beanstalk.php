@@ -14,6 +14,12 @@
  */
 class Omeka_Job_Worker_Beanstalk
 {
+    /**
+     * The maximum time (in seconds) that the MySQL connection can be kept
+     * valid for this beanstalk worker instance.
+     */
+    const MYSQL_TIMEOUT = 2147483;
+
     public function __construct(Zend_Console_GetOpt $options,
                                 Omeka_Job_Factory $jobFactory,
                                 Omeka_Db $db
@@ -31,6 +37,9 @@ class Omeka_Job_Worker_Beanstalk
 
     public function work()
     {
+        // Setting wait_timeout to its maximum should prevent the majority
+        // of "MySQL server has gone away" timeout errors.
+        $this->_db->query("SET SESSION wait_timeout=" . self::MYSQL_TIMEOUT);
         $pheanJob = $this->_pheanstalk->reserve();
         try {
             $omekaJob = $this->_jobFactory->from($pheanJob->getData());
