@@ -52,5 +52,12 @@ pcntl_signal(SIGINT, "handle_signal");
 
 
 $core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Jobs'));
-$worker = new Omeka_Job_Worker_Beanstalk($options, Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
+$host = isset($options->host) ? $options->host : '127.0.0.1';
+$pheanstalk = new Pheanstalk($host);
+if (isset($options->queue) && $options->queue != 'default') {
+    $pheanstalk->watch($options->queue)
+               ->ignore('default');
+}
+$worker = new Omeka_Job_Worker_Beanstalk($pheanstalk, 
+    Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
 $worker->work();
