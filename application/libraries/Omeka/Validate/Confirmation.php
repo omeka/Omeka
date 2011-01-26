@@ -45,12 +45,27 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
     );
     
     /**
-     * @param string $field
+     * Sets validator options
+     *
+     * @param  mixed|Zend_Config $field
      */
     public function __construct($field)
     {
+        if ($field instanceof Zend_Config) {
+            $field = $field->toArray();
+        }
+
+        if (is_array($field)) {
+            if (array_key_exists('field', $field)) {
+                $field = $field['field'];
+            } else {
+                throw new Zend_Validate_Exception("Missing option 'field'");
+            }
+        }
+
         $this->setField($field);
     }
+
     
     /**
      * Check that the value is valid.
