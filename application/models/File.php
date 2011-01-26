@@ -47,8 +47,9 @@ class File extends Omeka_Record
 
     protected function beforeInsert()
     {
-        $this->added = date("Y-m-d H:i:s");
-        $this->modified = date("Y-m-d H:i:s");   
+        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
+        $this->added = $now;
+        $this->modified = $now;
         $fileInfo = new Omeka_File_Info($this);
         $fileInfo->setMimeTypeIfAmbiguous();
     }
@@ -63,7 +64,7 @@ class File extends Omeka_Record
     
     protected function beforeUpdate()
     {
-        $this->modified = date("Y-m-d H:i:s");
+        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
     }
     
     protected function filterInput($post)

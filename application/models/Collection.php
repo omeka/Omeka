@@ -237,8 +237,9 @@ class Collection extends Omeka_Record
      */
     protected function beforeInsert()
     {
-        $this->added = Zend_Date::now()->toString(Zend_Date::ISO_8601);
-        $this->modified = Zend_Date::now()->toString(Zend_Date::ISO_8601);
+        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
+        $this->added = $now;
+        $this->modified = $now;
         if (!$this->owner_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
             $this->setAddedBy($user);
         }
@@ -249,6 +250,6 @@ class Collection extends Omeka_Record
      */
     protected function beforeUpdate()
     {
-        $this->modified = Zend_Date::now()->toString(Zend_Date::ISO_8601);
-    }   
+        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
+    }
 }
