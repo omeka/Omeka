@@ -15,27 +15,24 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
 
     public function testWorkerReservesAndDecodesJob()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
-        $this->worker->work();
+        $this->worker->work($this->pheanJob);
     }
 
     public function testWorkerPerformsJob()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
         $this->_expectPerform();
-        $this->worker->work();
+        $this->worker->work($this->pheanJob);
     }
 
     public function testFinishedJobsGetDeleted()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
         $this->pheanstalk->expects($this->once())
             ->method('delete')
             ->with($this->pheanJob);
-        $this->worker->work();
+        $this->worker->work($this->pheanJob);
     }
 
     /**
@@ -43,7 +40,6 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
      */
     public function testUnhandledExceptionBuriesJob()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
@@ -51,7 +47,7 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
         $this->pheanstalk->expects($this->once())
             ->method('bury')
             ->with($this->pheanJob);
-        $this->worker->work();
+        $this->worker->work($this->pheanJob);
     }
 
     /**
@@ -59,14 +55,13 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
      */
     public function testInterruptDoesNotBury()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
             ->will($this->throwException(new Omeka_Job_Worker_InterruptException()));
         $this->pheanstalk->expects($this->never())
             ->method('bury');
-        $this->worker->work();
+        $this->worker->work($this->pheanJob);
     }
 
     /**
@@ -74,14 +69,13 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
      */
     public function testRollbackOnInterrupt()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
             ->will($this->throwException(new Omeka_Job_Worker_InterruptException()));
         $this->dbAdapter->expects($this->once())
             ->method('rollback');
-        $this->worker->work();
+        $this->worker->work($this->pheanJob);
     }
 
     /**
@@ -89,14 +83,13 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
      */
     public function testInterruptClosesDbConnection()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
             ->will($this->throwException(new Omeka_Job_Worker_InterruptException()));
         $this->dbAdapter->expects($this->once())
             ->method('closeConnection');
-        $this->worker->work();
+        $this->worker->work($this->pheanJob);
     }
 
     /**
@@ -104,21 +97,13 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
      */
     public function testServerGoneAwayDoesNotBury()
     {
-        $this->_expectReserve();
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
             ->will($this->throwException(new Zend_Db_Statement_Mysqli_Exception("Mysqli prepare error: MySQL server has gone away")));
         $this->pheanstalk->expects($this->never())
             ->method('bury');
-        $this->worker->work();
-    }
-
-    private function _expectReserve()
-    {
-        $this->pheanstalk->expects($this->once())
-            ->method('reserve')
-            ->will($this->returnValue($this->pheanJob));
+        $this->worker->work($this->pheanJob);
     }
 
     private function _expectDecode($input = 'foo', $output = null)
