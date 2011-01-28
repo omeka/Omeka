@@ -7,8 +7,6 @@ if (!function_exists('utf8_htmlentities')) {
     }
 }
 
-add_filter(array('Display', 'Item', 'Dublin Core', 'Title'), 'show_untitled_items');
-
 if (!function_exists('show_untitled_items')) {
     function show_untitled_items($title)
     {
