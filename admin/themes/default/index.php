@@ -45,9 +45,11 @@
                     <dd class="users">
                         <ul>
                             <li><a class="browse-users" href="<?php echo html_escape(uri('users/browse')); ?>">Browse Users</a></li>
+                            <?php if (has_permission('Users', 'add')): ?>
                             <li><a class="add-user" href="<?php echo html_escape(uri('users/add')); ?>">Add a User</a></li>
+                            <?php endif; ?>
                         </ul>
-                        <p>Add and manage users of various levels: from researcher to super.</p>
+                        <p>Manage users of various levels: from researcher to super.</p>
                     </dd>
                 <?php endif; ?>
                 

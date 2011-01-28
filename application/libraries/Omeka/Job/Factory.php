@@ -16,7 +16,7 @@ class Omeka_Job_Factory
 {
     private $_options = array();
 
-    public function __construct($options)
+    public function __construct(array $options = array())
     {
         $this->_options = $options;
     }

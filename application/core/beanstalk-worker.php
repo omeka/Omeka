@@ -51,6 +51,24 @@ function handle_signal($signal)
 pcntl_signal(SIGINT, "handle_signal");
 
 
-$core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Jobs'));
-$worker = new Omeka_Job_Worker_Beanstalk($options, Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
-$worker->work();
+$core->bootstrap(array('Autoloader'));
+$host = isset($options->host) ? $options->host : '127.0.0.1';
+$pheanstalk = new Pheanstalk($host);
+if (isset($options->queue) && $options->queue != 'default') {
+    $pheanstalk->watch($options->queue)
+               ->ignore('default');
+}
+// Reserving a job BEFORE bootstrapping the database will ensure that there are 
+// never any MySQL timeout issues and help prevent any number of other database 
+// usage-related problems.
+$pheanJob = $pheanstalk->reserve();
+if (!$pheanJob) {
+    // Timeouts can occur when reserving a job, so this must be taken 
+    // into account.  No cause for alarm.
+    echo "Beanstalk worker timed out when reserving a job.";
+    exit(0);
+}
+$core->bootstrap(array('Config', 'Db', 'Options', 'Jobs'));
+$worker = new Omeka_Job_Worker_Beanstalk($pheanstalk, 
+    Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
+$worker->work($pheanJob);

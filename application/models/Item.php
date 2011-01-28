@@ -166,7 +166,7 @@ class Item extends Omeka_Record
      */
     protected function beforeSave()
     {
-        $this->modified = date('Y-m-d G:i:s');
+        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
     }
     
     /**

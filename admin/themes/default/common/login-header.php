@@ -1,22 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en-us">
 <head>
-<title><?php echo settings('site_title'); ?></title>
+    <meta charset="utf-8">
+    <title><?php echo settings('site_title'); ?></title>
+    
+    <!-- Stylesheets -->
+    <?php queue_css('default'); ?>
+    <?php display_css(); ?>
 
-<!-- Meta -->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- JavaScripts -->
+    <?php queue_js('login'); ?>
+    <?php display_js(); ?>
 
-<!-- Stylesheets -->
-<link rel="stylesheet" media="all" href="<?php echo html_escape(css('default')); ?>" />
-
-<!-- JavaScripts -->
-<?php queue_js('login'); ?>
-<?php display_js(); ?>
-
-<!-- Plugin Stuff -->
-<?php admin_plugin_header(); ?>
-
+    <!-- Plugin Stuff -->
+    <?php admin_plugin_header(); ?>
 </head>
 <body id="login">
     <div id="wrap">

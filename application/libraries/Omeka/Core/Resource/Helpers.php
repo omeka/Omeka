@@ -109,16 +109,16 @@ class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbst
              ), 
              'dcmes-xml' => array(
                  'suffix'    => 'dcmes-xml',
-                 'headers'   => array('Content-Type' => 'text/xml')
+                 'headers'   => array('Content-Type' => 'application/rdf+xml; charset=utf-8')
              ),
              'rss2' => array(
                  'suffix'    => 'rss2',
-                 'headers'   => array('Content-Type' => 'text/xml')
+                 'headers'   => array('Content-Type' => 'application/rss+xml; charset=utf-8')
              ),
 	         'atom' => array(
 	             'suffix'    => 'atom',
 	             'headers'   => array('Content-Type' => 'application/atom+xml; charset=utf-8')
-	         ),
+	         )
          );
     }
     

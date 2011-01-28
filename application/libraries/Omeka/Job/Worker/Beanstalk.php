@@ -14,33 +14,38 @@
  */
 class Omeka_Job_Worker_Beanstalk
 {
-    public function __construct(Zend_Console_GetOpt $options,
+    public function __construct(Pheanstalk $pheanstalk,
                                 Omeka_Job_Factory $jobFactory,
                                 Omeka_Db $db
     ) {
-        $host = isset($options->host) ? $options->host : '127.0.0.1';
-        $pheanstalk = new Pheanstalk($host);
-        if (isset($options->queue) && $options->queue != 'default') {
-            $pheanstalk->watch($options->queue)
-                       ->ignore('default');
-        }
         $this->_pheanstalk = $pheanstalk;
         $this->_jobFactory = $jobFactory;
         $this->_db = $db;
     }
 
-    public function work()
+    public function work(Pheanstalk_Job $pJob)
     {
-        $pheanJob = $this->_pheanstalk->reserve();
         try {
-            $omekaJob = $this->_jobFactory->from($pheanJob->getData());
+            $omekaJob = $this->_jobFactory->from($pJob->getData());
+            if (!$omekaJob) {
+                throw new UnexpectedValueException(
+                    "Job factory returned null (should never happen)."
+                );
+            }
             $omekaJob->perform();
-	    $this->_pheanstalk->delete($pheanJob);
+	        $this->_pheanstalk->delete($pJob);
+        } catch (Zend_Db_Exception $e) {
+            // Bury any jobs with database problems aside from stale 
+            // connections, which should indicate to try the job a second time.
+            if (strpos($e->getMessage(), 'MySQL server has gone away') === false) {
+                $this->_pheanstalk->bury($pJob);
+            }
+            throw $e;
         } catch (Omeka_Job_Worker_InterruptException $e) {
             $this->_interrupt($omekaJob);
             throw $e;
         } catch (Exception $e) {
-            $this->_pheanstalk->bury($pheanJob);
+            $this->_pheanstalk->bury($pJob);
             throw $e;
         }
     }
