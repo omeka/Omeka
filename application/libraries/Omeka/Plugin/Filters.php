@@ -125,6 +125,22 @@ class Omeka_Plugin_Filters
         
         return $filters;
     }
+
+    /**
+     * Clear all implementations for a filter (or all filters).
+     *
+     * @param string|null $name The name of the filter to clear.  If
+     *  null or omitted, all filters will be cleared.
+     * @return void
+     */
+    public function clearFilters($name = null)
+    {
+        if ($name) {
+            unset($this->_filters[$this->_getFilterKey($name)]);
+        } else {
+            $this->_filters = array();
+        }
+    }
     
     /**
      * Run an arbitrary value through a set of filters.
