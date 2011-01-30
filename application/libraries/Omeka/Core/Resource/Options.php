@@ -40,7 +40,8 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
         } catch (Zend_Db_Statement_Exception $e) {
             if ($this->_installerRedirect) {
                 // Redirect to the install script.
-                header('Location: '.WEB_ROOT.'/install');
+                header('Location: '.WEB_ROOT.'/install/');
+                exit;
             } else {
                 throw $e;
             }
