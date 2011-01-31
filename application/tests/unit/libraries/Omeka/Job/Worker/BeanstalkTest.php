@@ -92,6 +92,41 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
         $this->worker->work($this->pheanJob);
     }
 
+    public static function exceptionReleases()
+    {
+        return array(
+            array('Omeka_Job_Worker_InterruptException', true),
+            array('LogicException', false),
+            array('Zend_Db_Exception', false),
+        );
+    }
+
+    /**
+     * @dataProvider exceptionReleases
+     */
+    public function testJobReleasedIfNotDeletedOrBuried($exceptionClass, $isReleased)
+    {
+        $this->_expectDecode();
+        $this->omekaJob->expects($this->once())
+            ->method('perform')
+            ->will($this->throwException(new $exceptionClass()));
+        $expectMethod = $isReleased ? 'once' : 'never';
+        if ($isReleased) {
+            $this->pheanstalk->expects($this->once())
+                ->method('release')
+                ->with($this->pheanJob);
+        } else {
+            $this->pheanstalk->expects($this->never())
+                ->method('release');
+        }
+        try {
+            $this->worker->work($this->pheanJob);
+            $this->fail("Worker should have thrown an exception.");
+        } catch (Exception $e) {
+            $this->assertType($exceptionClass, $e);
+        }
+    }
+
     /**
      * @expectedException Zend_Db_Statement_Mysqli_Exception
      */

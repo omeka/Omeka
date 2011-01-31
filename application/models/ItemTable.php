@@ -265,6 +265,25 @@ class ItemTable extends Omeka_Db_Table
 
         $select->where('i.id NOT IN ('.$subSelect->__toString().')');        
     }
+
+    /**
+     * Filter SELECT statement based on whether items have a derivative image
+     * file.
+     *
+     * @param Zend_Db_Select
+     * @param boolean $hasDerivativeImage Whether items should have a derivative
+     * image file.
+     * @return void
+     */
+    public function filterByHasDerivativeImage($select, $hasDerivativeImage = 1)
+    {
+        $hasDerivativeImage = (bool) $hasDerivativeImage;
+
+        $db = $this->getDb();
+
+        $select->joinLeft(array('f'=>"$db->File"), 'f.item_id = i.id', array());
+        $select->where('f.has_derivative_image = ?', $hasDerivativeImage);
+    }
     
     public function orderSelectByRecent($select)
     {
@@ -272,8 +291,20 @@ class ItemTable extends Omeka_Db_Table
     }
     
     /**
+     * Order SELECT results randomly.
+     *
+     * @param Zend_Db_Select
+     * @return void
+     */
+    public function orderSelectByRandom($select)
+    {
+        $select->order('RAND()');
+    }
+
+    /**
      * Possible options: 'public','user','featured','collection','type','tag',
-     * 'excludeTags', 'search', 'recent', 'range', 'advanced'
+     * 'excludeTags', 'search', 'recent', 'range', 'advanced', 'hasImage',
+     * 'random'
      * 
      * @param Omeka_Db_Select
      * @param array
@@ -313,6 +344,11 @@ class ItemTable extends Omeka_Db_Table
         if (isset($params['excludeTags'])) {
             $this->filterByExcludedTags($select, $params['excludeTags']);
         }
+
+        // include only Items with derivative images.
+        if (isset($params['hasImage'])) {
+            $this->filterByHasDerivativeImage($select, $params['hasImage']);
+        }
         
         $this->filterBySearch($select, $params);
                 
@@ -327,6 +363,10 @@ class ItemTable extends Omeka_Db_Table
         // COUNT() query b/c it slows down
         if (isset($params['recent'])) {
             $this->orderSelectByRecent($select);
+        }
+
+        if (isset($params['random'])) {
+            $this->orderSelectByRandom($select);
         }
         
         //If we returning the data itself, we need to group by the item ID
@@ -421,19 +461,15 @@ class ItemTable extends Omeka_Db_Table
     {        
         $select = $this->getSelect();
         
-        $db = $this->getDb();
-        
-        $select->from(array(), 'RAND() as rand');
-        
-        $select->joinLeft(array('f'=>"$db->File"), 'f.item_id = i.id', array());
-        $select->where('i.featured = 1');
-                
-        $select->order('rand DESC');
         $select->limit(1);
         
+        $params = array('featured' => 1, 'random' => 1);
+
         if ($withImage) {
-            $select->where('f.has_derivative_image = 1');
+            $params['hasImage'] = 1;
         }
+
+        $this->applySearchFilters($select, $params);
 
         $item = $this->fetchObject($select);
     

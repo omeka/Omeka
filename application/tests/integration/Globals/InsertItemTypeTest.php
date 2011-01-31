@@ -22,5 +22,8 @@ class Globals_InsertItemTypeTest extends Omeka_Test_AppTestCase
         );
         $this->assertThat($itemType, $this->isInstanceOf('ItemType'));
         $this->assertTrue($itemType->exists());
+        
+        $newElement = $itemType->Elements[0];
+        $this->assertEquals($newElement->name, 'new element');
     }
 }

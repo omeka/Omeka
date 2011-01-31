@@ -348,6 +348,21 @@ function add_filter($filterName, $callback, $priority = 10)
 }
 
 /**
+ * Clear all implementations for a filter (or all filters).
+ *
+ * @uses Omeka_Plugin_Filters::clearFilters()
+ * @param string|null $name The name of the filter to clear.  If
+ *  null or omitted, all filters will be cleared.
+ * @return void
+ */
+function clear_filters($filterName = null)
+{
+    if ($pluginBroker = get_plugin_broker()) {
+        $pluginBroker->clearFilters($filterName);
+    }
+}
+
+/**
  * Retrieve the ACL object.
  * 
  * @return Omeka_Acl
