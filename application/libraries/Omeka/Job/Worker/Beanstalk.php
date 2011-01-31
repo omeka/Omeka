@@ -39,10 +39,13 @@ class Omeka_Job_Worker_Beanstalk
             // connections, which should indicate to try the job a second time.
             if (strpos($e->getMessage(), 'MySQL server has gone away') === false) {
                 $this->_pheanstalk->bury($pJob);
+            } else {
+                $this->_pheanstalk->release($pJob);
             }
             throw $e;
         } catch (Omeka_Job_Worker_InterruptException $e) {
             $this->_interrupt($omekaJob);
+            $this->_pheanstalk->release($pJob);
             throw $e;
         } catch (Exception $e) {
             $this->_pheanstalk->bury($pJob);
