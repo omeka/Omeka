@@ -99,7 +99,7 @@ class FileTable extends Omeka_Db_Table
 	}
 	
 	/**
-     * Modifies the  files for an item that has derivative images.
+     * Orders select results for files.
      *
      * @param Omeka_Db_Select The select object for finding files
 	 * @param string $sort The manner in which to order the files by. 
