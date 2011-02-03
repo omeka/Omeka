@@ -27,14 +27,16 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $this->pluginBroker = new Omeka_Plugin_Broker;
     }
     
+    /**
+     * @expectedException Omeka_Record_Exception
+     */
     public function testConstructorThrowsExceptionIfNoDatabasePresent()
     {
         try {
             $record = new DummyRecord;
-            $this->fail("Should have thrown an exception.");
         } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Omeka_Record_Exception'));
             $this->assertContains("Unable to retrieve database instance", $e->getMessage());
+            throw $e;
         }
     }
     
@@ -134,25 +136,34 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($record->exists());
     }
     
-    public function testLock()
+    /**
+     * @expectedException Omeka_Record_Exception
+     */
+    public function testSaveLockedRecord()
     {
         $record = new DummyRecord($this->db);
         $record->lock();
         try {
             $record->save();
-            $this->fail("Should have thrown an exception when saving a locked record.");
         } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Omeka_Record_Exception'));
             $this->assertContains("Cannot save a locked record", $e->getMessage());
+            throw $e;
         }
+    }
+
+    /**
+     * @expectedException Omeka_Record_Exception
+     */
+    public function testDeleteLockedRecord()
+    {
+        $record = new DummyRecord($this->db);
+        $record->lock();
         try {
             $record->delete();
-            $this->fail("Should have thrown an exception.");
         } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Omeka_Record_Exception'));
             $this->assertContains("Cannot delete a locked record", $e->getMessage());
+            throw $e;
         }
-        
     }
         
     public function testGetTable()
@@ -218,6 +229,9 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         ), $this->_simpleStack());
     }
     
+    /**
+     * @expectedException Omeka_Validator_Exception
+     */
     public function testForceSaveThrowsExceptionForUnsaveableRecord()
     {
         $record = new DummyRecord($this->db);
@@ -225,8 +239,8 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         try {
             $record->forceSave();
         } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Omeka_Validator_Exception'));
             $this->assertContains(self::VALIDATION_ERROR, $e->getMessage());
+            throw $e;
         }        
     }
     
@@ -266,6 +280,9 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('whatever', $record->do_not_set);
     }
         
+    /**
+     * @expectedException Omeka_Validator_Exception
+     */
     public function testSaveFormThrowsExceptionForInvalidPost()
     {
         $record = new DummyRecord($this->db);
@@ -274,10 +291,9 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         );
         try {
             $record->saveForm($post);
-            $this->fail("Should have thrown an exception.");
         } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Omeka_Validator_Exception'));
             $this->assertContains(self::VALIDATION_ERROR, $e->getMessage());
+            throw $e;
         }
     }
     

@@ -34,14 +34,16 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         ),$this->schemaTask->getTables());
     }
     
+    /**
+     * @expectedException Installer_Task_Exception
+     */
     public function testAddNonExistentTable()
     {
         try {
             $this->schemaTask->addTable('foobar', '/fake/path/to/no/file.sql');
-            $this->fail("Should have thrown an exception when an invalid file was given.");
-        } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Installer_Task_Exception'));
+        } catch (Installer_Task_Exception $e) {
             $this->assertContains("Invalid SQL file", $e->getMessage());
+            throw $e;
         }
     }
             

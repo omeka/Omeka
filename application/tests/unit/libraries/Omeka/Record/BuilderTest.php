@@ -59,15 +59,13 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($record->exists());
     }
 
+    /**
+     * @expectedException Omeka_Record_Builder_Exception
+     */
     public function testSetRecordRequiresCorrectRecordClass()
     {
         $builder = new DummyRecordBuilder($this->db);
-        try {
-            $builder->setRecord(new Item($this->db));
-            $this->fail("Should have thrown an exception when given incorrect record instance.");
-        } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Omeka_Record_Builder_Exception'));
-        }
+        $builder->setRecord(new Item($this->db));
     }
     
     public function testSetRecordUsingRecordInstance()
