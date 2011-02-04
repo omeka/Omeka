@@ -513,7 +513,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * one or more of the following formats:
  * <ol>
  * <li>An array containing element metadata</li>
- * <li>A string containing the element name</li>
+ * <li>An Element object</li>
  * </ol>
  * <code> 
  *    array(
@@ -526,7 +526,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  *             'record_type_id' => [(int) record type id, optional],
  *             'data_type_id'   => [(int) data type id, optional]
  *         ), 
- *         [(string) element name], 
+ *         [(Element)], 
  *     );
  * </code>
  * @return ItemType

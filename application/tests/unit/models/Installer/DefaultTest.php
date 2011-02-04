@@ -36,15 +36,17 @@ class Installer_DefaultTest extends PHPUnit_Framework_TestCase
         $installer = new Installer_Default($this->db);
     }
     
+    /**
+     * @expectedException Installer_Exception
+     */
     public function testThrowsExceptionIfNoFormSet()
     {
         $installer = new Installer_Default($this->db);
         try {
             $installer->install();
-            $this->fail("Should have thrown an exception when trying to install without providing a Zend_Form instance.");            
         } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Installer_Exception'));
             $this->assertContains("Form was not set via setForm().", $e->getMessage());
+            throw $e;
         }
     }
     

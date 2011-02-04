@@ -123,7 +123,7 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
             $this->worker->work($this->pheanJob);
             $this->fail("Worker should have thrown an exception.");
         } catch (Exception $e) {
-            $this->assertType($exceptionClass, $e);
+            $this->assertInstanceOf($exceptionClass, $e);
         }
     }
 

@@ -34,7 +34,7 @@ class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
 
         $metadataOutput = show_item_metadata(array('return_type' => 'array'), $item);
 
-        $this->assertType('array', $metadataOutput);
+        $this->assertInternalType('array', $metadataOutput);
         $this->assertArrayHasKey('Dublin Core', $metadataOutput);
 
         $this->assertEquals($title, $metadataOutput['Dublin Core']['Title'][0]);

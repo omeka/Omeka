@@ -16,14 +16,21 @@ class Globals_InsertItemTypeTest extends Omeka_Test_AppTestCase
 {
     public function testCanInsertItemType()
     {
+        $urlElement = get_db()->getTable('Element')->findByElementSetNameAndElementName('Item Type Metadata', 'URL');
         $itemType = insert_item_type(
             array('name' => 'foobar', 'description' => 'also foobar'),
-            array(array('name' => 'new element'))
+            array(
+                array('name' => 'new element'),
+                $urlElement
+                )
         );
         $this->assertThat($itemType, $this->isInstanceOf('ItemType'));
         $this->assertTrue($itemType->exists());
         
-        $newElement = $itemType->Elements[0];
-        $this->assertEquals($newElement->name, 'new element');
+        $newFirstElement = $itemType->Elements[0];
+        $this->assertEquals($newFirstElement->name, 'new element');
+        
+        $newSecondElement = $itemType->Elements[1];
+        $this->assertEquals($newSecondElement->name, 'URL'); 
     }
 }

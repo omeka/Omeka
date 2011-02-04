@@ -26,7 +26,7 @@ class Omeka_Job_Dispatcher_DefaultTest extends PHPUnit_Framework_TestCase
     {
         $this->dispatcher->send('Omeka_Job_Mock');
         $job = $this->adapter->getJob();
-        $this->assertType('array', Zend_Json::decode($job['encoded']));
+        $this->assertInternalType('array', Zend_Json::decode($job['encoded']));
     }
 
     public static function metadataKeys()

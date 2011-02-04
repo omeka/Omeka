@@ -47,6 +47,6 @@ class Omeka_CaptchaTest extends PHPUnit_Framework_TestCase
 
         $captcha = Omeka_Captcha::getCaptcha();
         $this->assertNotNull($captcha);
-        $this->assertType('Zend_Captcha_Adapter', $captcha);
+        $this->assertInstanceOf('Zend_Captcha_Adapter', $captcha);
     }
 }

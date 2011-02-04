@@ -46,14 +46,12 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('John Smith'), $this->collection->getCollectors());
     }   
     
+    /**
+     * @expectedException InvalidArgumentException
+     */
     public function testAddNonStringCollectorThrowsException()
     {
-        try {
-            $this->collection->addCollector(new Zend_Acl_Resource('whatever'));
-            $this->fail("Should have thrown an exception when adding collector.");
-        } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('InvalidArgumentException'));
-        }
+        $this->collection->addCollector(new Zend_Acl_Resource('whatever'));
     }
     
     public function testAddEmptyCollector()
@@ -202,14 +200,16 @@ class CollectionTest extends PHPUnit_Framework_TestCase
             "'modified' column should contain a valid date (signified by validity as constructor for Zend_Date)");
     }
     
+    /**
+     * @expectedException RuntimeException
+     */
     public function testSetAddedByFailsWithNonpersistedUser()
     {
         try {
             $this->collection->setAddedBy(new User($this->db));
-            $this->fail("Should have thrown an exception when associating the collection with a user that does not exist.");
         } catch (Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('RuntimeException'), $e->getMessage());
             $this->assertContains("unsaved user", $e->getMessage());
+            throw $e;
         }
     }
     

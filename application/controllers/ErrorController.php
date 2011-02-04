@@ -95,7 +95,7 @@ class ErrorController extends Omeka_Controller_Action
     {
         $logger = $this->getInvokeArg('bootstrap')->getResource('Logger');
         if ($logger) {
-            $logger->log($e->getMessage() . PHP_EOL . $e->getTraceAsString(), $priority);
+            $logger->log($e, $priority);
         }
     }
     

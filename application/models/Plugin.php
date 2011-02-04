@@ -293,6 +293,9 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      */
     public function setLinkUrl($link)
     {
+        if ( !parse_url($link, PHP_URL_SCHEME) ) {
+            $link = 'http://'.$link;
+        }
         $this->_link = $link;
         return $this;
     }

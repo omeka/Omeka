@@ -101,6 +101,9 @@ class Theme
         if (file_exists($themeIni) && is_readable($themeIni)) {
             $ini = new Zend_Config_Ini($themeIni, 'theme');
             foreach ($ini as $key => $value) {
+                if ($key == 'website') {
+                    $value = $this->_parseWebsite($value);
+                }
                 $this->$key = $value;
             }
         }
@@ -242,5 +245,19 @@ class Theme
     static public function getUploadedFileName($themeName, $optionName, $fileName)
     {
         return trim(strtolower($themeName)) . '_' . trim($optionName) . '_' . trim($fileName);
+    }
+    
+    /**
+     * Parses the website string to confirm whether it has a scheme.
+     *
+     * @param string $website The website given in the theme's INI file.
+     * @return string The website URL with a prepended scheme.
+     */
+    static protected function _parseWebsite($website)
+    {
+        if ( !parse_url($website, PHP_URL_SCHEME) ) {
+            return 'http://'.$website;
+        }
+        return $website;
     }
 }
