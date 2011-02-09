@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
     <meta charset="utf-8">
-    <title>Omeka Admin: <?php echo settings('site_title'); echo isset($title) ? ' | ' . $title : ''; ?></title>
+    <title>Omeka Admin: <?php echo settings('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
 
 <?php
     queue_css('default', 'all');
