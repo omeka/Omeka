@@ -121,7 +121,13 @@ class Installer_Task_Schema implements Installer_TaskInterface
         }
         
         foreach ($this->_tables as $tableName => $sqlFilePath) {
-            $db->loadSqlFile($sqlFilePath);
+            try {
+                $db->loadSqlFile($sqlFilePath);
+            } catch (Zend_Db_Exception $e) {
+                throw new Installer_Task_Exception("Schema task failed"
+                    . " on table '" . $db->prefix . $tableName . "' with " 
+                    . get_class($e) . ": " . $e->getMessage());
+            }
         }
     }
 }
