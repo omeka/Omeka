@@ -29,7 +29,11 @@ class Omeka_Job_Factory
      */
     public function from($json)
     {
-        $data = Zend_Json::decode($json);
+        try {
+            $data = Zend_Json::decode($json);
+        } catch (Zend_Json_Exception $e) {
+            throw new Omeka_Job_Factory_MalformedJobException("Zend_Json_Exception: " . $e->getMessage() . " ($json)");
+        }
         if (!$data) {
             throw new Omeka_Job_Factory_MalformedJobException("The following malformed job was given: $json");
         }

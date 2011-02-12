@@ -15,21 +15,26 @@
 class Omeka_Test_Helper_Mail
 {   
     /**
-     * Path to the fakemail directory.
+     * Path to the mail storage directory.
      *
      * @var string
      */
-    private $_fakemailDir;
+    private $_path;
     
     /**
-     * @param string $fakemailDir Real path to the fakemail storage directory.
+     * @param string $path Real path to the mail storage directory.
      */
-    public function __construct($fakemailDir)
+    public function __construct($path)
     {
-        if (!is_dir($fakemailDir) || !is_writable($fakemailDir)) {
-            throw new RuntimeException("Fakemail must be set up in test config.ini.");
+        if (!is_dir($path)) {
+            throw new RuntimeException('The mail path must be set.');
         }
-        $this->_fakemailDir = $fakemailDir;
+        
+        if (!is_writable($path)) {
+            throw new RuntimeException('The mail path must be writable by this user.');
+        }
+        
+        $this->_path = $path;
     }
     
     /**
@@ -40,8 +45,8 @@ class Omeka_Test_Helper_Mail
     public static function factory()
     {
         $testConfig = Zend_Registry::get('test_config');
-        $fakemailDir = $testConfig->paths->fakemaildir;
-        $helper = new self($fakemailDir);
+        $path = $testConfig->paths->maildir;
+        $helper = new self($path);
         return $helper;
     }
     
@@ -66,7 +71,7 @@ class Omeka_Test_Helper_Mail
      */
     private function _getIterator()
     {
-        return new DirectoryIterator($this->_fakemailDir);
+        return new DirectoryIterator($this->_path);
     }
     
     /**
@@ -97,6 +102,9 @@ class Omeka_Test_Helper_Mail
                 $mails[] = $file->getRealPath();
             }
         }
+
+        sort($mails);
+        
         if (!isset($mails[$index])) {
             throw new InvalidArgumentException("No mail exists at index: $index.");
         }

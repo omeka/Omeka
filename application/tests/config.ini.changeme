@@ -15,4 +15,4 @@ app.url = ""
 debug.exceptions = true
 
 paths.imagemagick = ""
-paths.fakemaildir = ""
+paths.maildir = ""

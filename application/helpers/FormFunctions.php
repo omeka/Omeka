@@ -32,7 +32,10 @@ function _tag_attributes($attributes, $value=null)
 	
 	$attr = array();
 	foreach ($toProcess as $key => $attribute) {
-		$attr[$key] = $key . '="' . html_escape( $attribute ) . '"';
+	    // Only include the attribute if its value is a string.
+	    if (is_string($attribute)) {
+	        $attr[$key] = $key . '="' . html_escape( $attribute ) . '"';
+	    }
 	}
 	return join(' ',$attr);
 }
