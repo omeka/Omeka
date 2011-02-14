@@ -33,22 +33,48 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
             'label' => 'Email',
             'required' => true,
             'validators' => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
-                    'messages' => array(
-                        'isEmpty' => 'Email address is required.'
+                array(
+                    'validator' => 'NotEmpty', 
+                    'breakChainOnFailure' => true, 
+                    'options' => array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => 
+                                'Email address is required.'
+                        )
                     )
-                )),
-                array('validator' => 'EmailAddress', 'breakChainOnFailure' => true),
-                array('validator' => 'Db_RecordExists', 'options' => array(
-                    'table' => $this->_db->Entity,
-                    'field' => 'email',
-                    // Exclude the email addresses that don't correspond with user accounts.
-                    'exclude' => $this->_getExcludeClause(),
-                    'adapter' => $this->_db->getAdapter(),
-                    'messages' => array(
-                        'noRecordFound' => "Invalid email address"
+                ),
+                array(
+                    'validator' => 'EmailAddress', 
+                    'breakChainOnFailure' => true,
+                    'options' => array(
+                        'messages' => array(
+                            Zend_Validate_EmailAddress::INVALID =>
+                                'Invalid email address given.',
+                            Zend_Validate_EmailAddress::INVALID_FORMAT => 
+                                'Invalid format given for email address.',
+                            Zend_Validate_EmailAddress::INVALID_HOSTNAME   => 
+                                'Invalid hostname given for email address.',
+                            //Zend_Validate_EmailAddress::INVALID_SEGMENT => '',
+                            //Zend_Validate_EmailAddress::DOT_ATOM => '',
+                            //Zend_Validate_EmailAddress::QUOTED_STRING => '', 
+                            //Zend_Validate_EmailAddress::INVALID_LOCAL_PART => '', 
+                            //Zend_Validate_EmailAddress::LENGTH_EXCEEDED => '',
+                        )
                     )
-                ))    
+                ),
+                array(
+                    'validator' => 'Db_RecordExists', 
+                    'options' => array(
+                        'table' => $this->_db->Entity,
+                        'field' => 'email',
+                        // Exclude the email addresses that don't correspond with user accounts.
+                        'exclude' => $this->_getExcludeClause(),
+                        'adapter' => $this->_db->getAdapter(),
+                        'messages' => array(
+                            'noRecordFound' => "Invalid email address"
+                        )
+                    )
+                )    
             )
         ));
         
