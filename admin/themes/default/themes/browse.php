@@ -13,7 +13,7 @@
     <ul>
         <li><span class="type">Author:</span> <span class="value"><?php echo html_escape($current->author); ?></span></li>
         <li><span class="type">License:</span> <span class="value"><?php echo html_escape($current->license); ?></span></li>
-        <li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo html_escape($current->website); ?>"><?php echo html_escape($current->website); ?></a></span></li>
+        <li><span class="type">Website:</span> <span class="value"><a href="<?php echo html_escape($current->website); ?>"><?php echo html_escape($current->website); ?></a></span></li>
         <li><span class="type">Description:</span> <span class="value"><?php echo html_escape($current->description); ?></span></li>
     </ul>
 </div>
@@ -29,7 +29,7 @@
         <ul>
             <li><span class="type">Author:</span> <span class="value"><?php echo html_escape($theme->author); ?></span></li>
             <li><span class="type">License:</span> <span class="value"><?php echo html_escape($theme->license); ?></span></li>
-            <li><span class="type">Website:</span> <span class="value"><a href="http://<?php echo html_escape($theme->website); ?>"><?php echo html_escape($theme->website); ?></a></span></li>
+            <li><span class="type">Website:</span> <span class="value"><a href="<?php echo html_escape($theme->website); ?>"><?php echo html_escape($theme->website); ?></a></span></li>
         </ul>
         </div>
         <div class="description">

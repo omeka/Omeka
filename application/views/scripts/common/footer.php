@@ -14,6 +14,9 @@
         <?php endif; ?>
         <p>Proudly powered by <a href="http://omeka.org">Omeka</a>.</p>
     </div>
+
+	<?php plugin_footer(); ?>
+	
 </div><!-- end footer -->
 </div><!-- end wrap -->
 </body>

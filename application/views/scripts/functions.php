@@ -59,13 +59,14 @@ if (!function_exists('custom_show_item_metadata')) {
     	    foreach ($dcFields as $field) {
     	        $field = trim($field);
     	        if (element_exists('Dublin Core', $field)) {
-        	        if ($fieldValue = item('Dublin Core', $field)) {
+        	        if ($fieldValues = item('Dublin Core', $field, 'all')) {
         	            $html .= '<h3>'.$field.'</h3>';
-        	            if (!item_field_uses_html('Dublin Core', $field)) {
-        	                $fieldValue = nls2p($fieldValue);
+        	            foreach ($fieldValues as $key => $fieldValue) {
+        	                if (!item_field_uses_html('Dublin Core', $field, $key)) {
+        	                    $fieldValue = nls2p($fieldValue);
+        	                }
+        	                $html .= $fieldValue;
         	            }
-        	            $html .= $fieldValue;
-    	            
         	        }
         	    }
     	    }
