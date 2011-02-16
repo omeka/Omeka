@@ -33,15 +33,6 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
                                        array('controller' => 'installer', 'action' => 'notify'));
     
     /**
-     * Indicate that the admin theme is the current theme.
-     */
-    public function __construct()
-    {
-        // This parameter is used by is_admin_theme().
-        Zend_Controller_Front::getInstance()->setParam('admin', true);
-    }
-    
-    /**
      * Direct requests to the admin interface.
      * Called upon router startup, before the request is routed.
      *

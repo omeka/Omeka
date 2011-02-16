@@ -30,9 +30,17 @@ $app->getBootstrap()->setOptions(array(
         'theme' => array(
             'basePath' => THEME_DIR,
             'webBasePath' => WEB_THEME
+        ),
+        'frontcontroller' => array(
+            'params' => array(
+                'admin' => true
+            )
         )
     )
 ));
+
+// This is used by the global is_admin_theme to detect that this is the admin.
+Zend_Controller_Front::getInstance()->setParam('admin', true);
 
 $app->initialize();
 
