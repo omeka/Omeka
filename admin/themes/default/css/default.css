@@ -347,15 +347,18 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         width: 232px;
         float:right;
         margin-top:0;
-        text-align:right;
         clear:right;
     }
+
+	#simple-search-form fieldset {
+		text-align:right !important;
+	}
         #simple-search-form #search {
             border-radius:6px; 
             -webkit-border-radius:6px; 
             -moz-border-radius:6px; 
             margin:0 4px 0 0;
-            display:inline;           
+            display:inline !important;  
         }
         #simple-search-form #submit_search {
             text-align:center;
@@ -371,7 +374,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
             border-radius:6px;
             -webkit-border-radius:6px;
             -moz-border-radius:6px;
-            display:inline;
+            display:inline !important;
+			float:none;
         }
         #advanced-search-link a {text-decoration:none; font-weight:bold; color: #389;display:block; text-align:right;padding-top:5px; font-size:1.1em;}
     
