@@ -218,6 +218,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     {
         switch ($themeType) {
             case 'admin':
+                $this->frontController->setParam('admin', true);
                 $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
                 $this->core->getBootstrap()->setOptions(array(
                     'resources' => array(

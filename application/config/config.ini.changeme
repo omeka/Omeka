@@ -46,11 +46,11 @@ mail.transport.type = "Sendmail"
 ; documentation on Zend_Mail: http://framework.zend.com/manual/en/zend.mail.html 
 ; mail.transport.type = "Smtp"
 ; mail.transport.host = ""
-; mail.transport.options.port = ###     ; Port number, if applicable. 
-; mail.transport.options.name = ""      ; Local client hostname, e.g. "localhost"
-; mail.transport.options.auth = "login" ; For authentication, if required.
-; mail.transport.options.username = ""
-; mail.transport.options.password = ""
-; mail.transport.options.ssl = ""       ; For SSL support, set to "ssl" or "tls"
+; mail.transport.port = ###     ; Port number, if applicable. 
+; mail.transport.name = ""      ; Local client hostname, e.g. "localhost"
+; mail.transport.auth = "login" ; For authentication, if required.
+; mail.transport.username = ""
+; mail.transport.password = ""
+; mail.transport.ssl = ""       ; For SSL support, set to "ssl" or "tls"
 
 ; jobs.dispatcher = "Omeka_Job_Dispatcher_Adapter_Synchronous"

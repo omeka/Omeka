@@ -37,37 +37,37 @@ class Omeka_View_Helper_Media
      * @var array
      **/
     static protected $_callbacks = array(
-	    'application/ogg'   => 'audio',
-	    'audio/aac'         => 'audio',
-	    'audio/aiff'        => 'audio',
-	    'audio/midi'        => 'audio',
-	    'audio/mp3'         => 'audio',
+        'application/ogg'   => 'audio',
+        'audio/aac'         => 'audio',
+        'audio/aiff'        => 'audio',
+        'audio/midi'        => 'audio',
+        'audio/mp3'         => 'audio',
         'audio/mp4'         => 'audio',
         'audio/mpeg'        => 'audio',
         'audio/mpeg3'       => 'audio',
         'audio/mpegaudio'   => 'audio',
         'audio/mpg'         => 'audio',
-	    'audio/ogg'         => 'audio',
-	    'audio/wav'         => 'audio',
-	    'audio/x-mp3'       => 'audio',
+        'audio/ogg'         => 'audio',
+        'audio/wav'         => 'audio',
+        'audio/x-mp3'       => 'audio',
         'audio/x-mp4'       => 'audio',
         'audio/x-mpeg'      => 'audio',
         'audio/x-mpeg3'     => 'audio',
-	    'audio/x-midi'      => 'audio',
-	    'audio/x-mpegaudio' => 'audio',
-	    'audio/x-mpg'       => 'audio',
-	    'audio/x-ogg'       => 'audio',
-	    'audio/x-wav'       => 'audio',
-	    'audio/x-aac'       => 'audio',
-	    'audio/x-aiff'      => 'audio',
-	    'audio/x-midi'      => 'audio',
-	    'audio/x-mp3'       => 'audio',
+        'audio/x-midi'      => 'audio',
+        'audio/x-mpegaudio' => 'audio',
+        'audio/x-mpg'       => 'audio',
+        'audio/x-ogg'       => 'audio',
+        'audio/x-wav'       => 'audio',
+        'audio/x-aac'       => 'audio',
+        'audio/x-aiff'      => 'audio',
+        'audio/x-midi'      => 'audio',
+        'audio/x-mp3'       => 'audio',
         'audio/x-mp4'       => 'audio',
         'audio/x-mpeg'      => 'audio',
         'audio/x-mpeg3'     => 'audio',
         'audio/x-mpegaudio' => 'audio',
-        'audio/x-mpg'       => 'audio',	    
-	    'image/bmp'         => 'image',
+        'audio/x-mpg'       => 'audio',
+        'image/bmp'         => 'image',
         'image/gif'         => 'image',
         'image/jpeg'        => 'image',
         'image/jpg'         => 'image',
@@ -76,18 +76,18 @@ class Omeka_View_Helper_Media
         'image/tif'         => 'image',
         'image/tiff'        => 'image', 
         'image/x-ms-bmp'    => 'image',
-		'video/mp4'         => 'mov',
-	    'video/mpeg'        => 'mov',
-	    'video/ogg'         => 'mov',
-	    'video/quicktime'   => 'mov',
-	    'audio/wma'         => 'wma',
-	    'audio/x-ms-wma'    => 'wma',
-	    'video/avi'         => 'wmv',
-	    'video/msvideo'     => 'wmv',
-	    'video/x-msvideo'   => 'wmv',
-	    'video/x-ms-wmv'    => 'wmv'	    
-	    );
-	    
+        'video/mp4'         => 'mov',
+        'video/mpeg'        => 'mov',
+        'video/ogg'         => 'mov',
+        'video/quicktime'   => 'mov',
+        'audio/wma'         => 'wma',
+        'audio/x-ms-wma'    => 'wma',
+        'video/avi'         => 'wmv',
+        'video/msvideo'     => 'wmv',
+        'video/x-msvideo'   => 'wmv',
+        'video/x-ms-wmv'    => 'wmv'
+        );
+
     /**
      * The array consists of the default options
      * which are passed to the callback.
@@ -146,7 +146,7 @@ class Omeka_View_Helper_Media
             'filenameAttributes' => array()
             )
         );
-                
+      
     /**
      * Add MIME types and associated callbacks to the list.
      * 
@@ -185,7 +185,7 @@ class Omeka_View_Helper_Media
         $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
         self::$_callbackOptions[$callbackKey] = $defaultOptions;      
     }  
-      
+
     /**
      * Default display for MIME types that do not have a valid rendering
      * callback.  
@@ -202,7 +202,7 @@ class Omeka_View_Helper_Media
     {
         return $this->_linkToFile(null, $file, $options);   
     }
-    
+
     /**
      * Add a link for the file based on the given set of options.
      * 
@@ -227,9 +227,9 @@ class Omeka_View_Helper_Media
         }
         
         if ($options['linkToMetadata']) {
-		  $html = link_to_file_metadata((array)$options['linkAttributes'], 
-		          $html, $file);
-		} else if ($options['linkToFile']) {
+          $html = link_to_file_metadata((array)$options['linkAttributes'], 
+                  $html, $file);
+        } else if ($options['linkToFile']) {
             // Wrap in a link that will download the file directly.
             $defaultLinkAttributes = array(
                 'class'=>'download-file', 
@@ -240,11 +240,11 @@ class Omeka_View_Helper_Media
             $linkAttributes = array_merge($defaultLinkAttributes, $linkAttributes);
 
             $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html . '</a>';
-		}
-		
-		return $html;
+        }
+        
+        return $html;
     }
-    
+
     /**
      * Returns valid XHTML markup for displaying an image that has been
      * archived through Omeka.  
@@ -281,14 +281,14 @@ class Omeka_View_Helper_Media
             // 'imageSize' option.
             $imgHtml = $this->$imageSize($file, $imgAttributes);
         }    
-				
-		$html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);	
-		
-		$html = $this->_linkToFile($html, $file, $options);
-		
-		return $html;        
+                
+        $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);   
+        
+        $html = $this->_linkToFile($html, $file, $options);
+        
+        return $html;        
     }
-    
+
     /**
      * Retrieve valid XHTML for displaying a wmv video file or equivalent.  
      * Currently this loads the video inside of an <object> tag, but that
@@ -315,7 +315,7 @@ class Omeka_View_Helper_Media
 
         return $html;
     }
-    
+
     /**
      * Retrieve valid XHTML for displaying a wma audio file or equivalent.  
      * Currently this loads the video inside of an <object> tag, but that
@@ -340,7 +340,7 @@ class Omeka_View_Helper_Media
 
         return $html;
     }
-    
+
     /**
      * Retrieve valid XHTML for displaying Quicktime video files
      * 
@@ -363,8 +363,8 @@ class Omeka_View_Helper_Media
               . '</object>';
 
         return $html;
-    } 
-    
+    }
+
     /**
      * Default display of audio files via <object> tags.
      * 
@@ -393,7 +393,7 @@ class Omeka_View_Helper_Media
 
         return $html;
     }
-    
+
     /**
      * Default display of an icon to represent a file.
      * 
@@ -434,14 +434,14 @@ class Omeka_View_Helper_Media
         
         return $this->_linkToFile($html, $file, $options);
     }
-    
+
     // END DEFINED DISPLAY CALLBACKS
-    
+
     protected function getMimeFromFile($file)
     {
         return $file->getMimeType();
     }
-    
+
     protected function getCallback($mimeType, $options)
     {
         // Displaying icons overrides the default lookup mechanism.
@@ -457,7 +457,7 @@ class Omeka_View_Helper_Media
         }
         return $name;
     }
-    
+
     /**
      * @see Omeka_Plugin_Broker::addMediaAdapter()
      * @param mixed
@@ -472,7 +472,7 @@ class Omeka_View_Helper_Media
             return array();
         }
     }
-    
+
     /**
      * Retrieve the HTML for a given file from the callback.   
      * 
@@ -492,7 +492,7 @@ class Omeka_View_Helper_Media
         
         return call_user_func_array($renderer, array($file, $options));
     }
-    
+
     /**
      * Bootstrap for the helper class.  This will retrieve the HTML for
      * displaying the file and by default wrap it in a <div class="item-file">.
@@ -504,12 +504,12 @@ class Omeka_View_Helper_Media
      * @return string HTML
      **/
     public function media($file, array $props=array(), $wrapperAttributes = array())
-    {		
+    {       
         $mimeType = $this->getMimeFromFile($file);
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
         // an icon.
-        $callback = $this->getCallback($mimeType, $props);	 
+        $callback = $this->getCallback($mimeType, $props);   
         
         $options = array_merge($this->getDefaultOptions($callback), $props);
         
@@ -528,9 +528,9 @@ class Omeka_View_Helper_Media
         //Wrap the HTML in a div with a class (if class is not set to null)
         $wrapper = !empty($wrapperAttributes) ? '<div ' . _tag_attributes($wrapperAttributes) . '>' : ''; 
         
-		$html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
-		
-		return $html;
+        $html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
+        
+        return $html;
     }
     /**
      * Return a valid img tag for a thumbnail image.
