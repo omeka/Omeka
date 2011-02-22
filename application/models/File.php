@@ -152,9 +152,9 @@ class File extends Omeka_Record
     public function setDefaults($filepath, array $options = array())
     {
         $this->size = filesize($filepath);
-        $this->authentication = md5_file( $filepath );
+        $this->authentication = md5_file($filepath);
         
-        $this->mime_browser = $this->_filterMimeType(mime_content_type($filepath));
+        $this->setMimeType(mime_content_type($filepath));
         
         $this->mime_os      = trim(exec('file -ib ' . trim(escapeshellarg($filepath))));
         $this->type_os      = trim(exec('file -b ' . trim(escapeshellarg($filepath))));
