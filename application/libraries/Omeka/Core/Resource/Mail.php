@@ -8,7 +8,12 @@
  */
 
 /**
- * Initializes Omeka's functionality for sending email.
+ * Set up the mail transport that Omeka uses to send mail.
+ *
+ * This makes use of Zend_Application_Resource_Mail for configuring the mail 
+ * resource.  config.ini can be set up using either the Zend Framework way or 
+ * using the older Omeka configuration style (for backwards-compatibility), 
+ * though the newer style is recommended.
  *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
@@ -17,57 +22,37 @@
  */
 class Omeka_Core_Resource_Mail extends Zend_Application_Resource_ResourceAbstract
 {
+    private $_zendResource;
+
+    public function __construct($options = null)
+    {
+        $this->_zendResource = new Zend_Application_Resource_Mail($options);
+        parent::__construct($options);
+    }
+
     /**
      * @return Zend_Mail
      */
     public function init()
     {
-        $config = $this->getBootstrap()->bootstrap('Config')->getResource('Config');
-        // Skip configuration if we don't have any of the mail settings properly setup.
+        $config = $this->getBootstrap()->bootstrap('Config')->config;
+        // Skip configuration if we don't have any of the mail settings 
+        // properly setup.
         if (!isset($config->mail)) {
             return;
         }
-        
-        $transportMethod = (string)$config->mail->transport->type;
-        
-        switch ($transportMethod) {
-            // Don't do anything, just use the default transport.
-            case 'Sendmail':
-                break;
-            case 'Smtp':
-                $this->_configureSmtp($config);
-                break;
-            default:
-                throw new InvalidArgumentException("Mail client must be configured with a valid protocol (mail.transport.type in config.ini).");
-                break;
+        // Old-style mail transport configuration.  Merging the 'options' array 
+        // with its parent makes this equivalent to the Zend Framework 
+        // configuration.
+        $options = $config->mail->toArray();
+        if (isset($options['transport']['options'])) {
+            $options['transport'] = array_merge($options['transport'], 
+                $options['transport']['options']);
+            unset($options['transport']['options']);
         }
-        
+
+        $this->_zendResource->setOptions($options);
+        $transport = $this->_zendResource->init();
         return new Zend_Mail;        
-    }
-    
-    /**
-     * Instantiate the Zend_Mail SMTP transport object using settings from 
-     * config.ini.
-     * 
-     * @param Zend_Config $config Mail config options.
-     * @return void
-     */
-    private function _configureSmtp(Zend_Config $config)
-    {
-        if (empty($config->mail->transport->host)) {
-            throw new InvalidArgumentException("SMTP hostname must be properly configured (mail.transport.host in config.ini).");
-        }
-        
-        if (!isset($config->mail->transport->options)) {
-            $smtpOptions = array();
-            // throw new InvalidArgumentException("SMTP options must be properly configured (mail.transport.options in config.ini).");
-        } else {
-            $smtpOptions = $config->mail->transport->options->toArray();
-        }
-        
-        $transport = new Zend_Mail_Transport_Smtp($config->mail->transport->host, 
-                                                  $smtpOptions);
-        
-        Zend_Mail::setDefaultTransport($transport);
     }
 }
