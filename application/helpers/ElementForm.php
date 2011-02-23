@@ -124,6 +124,9 @@ class Omeka_View_Helper_ElementForm
         }
         
         $postArray = $this->_getPostArray();
+        if (!array_key_exists($index, $postArray)) {
+            return '';
+        }
         $postArray = $postArray[$index];
         
         // Flatten this POST array into a string so as to be passed to the 
@@ -135,7 +138,7 @@ class Omeka_View_Helper_ElementForm
     {
         $isHtml = false;
         if ($this->_isPosted()) {
-            $isHtml = (boolean) $_POST['Elements'][$this->_element['id']][$index]['html'];
+            $isHtml = (boolean) @$_POST['Elements'][$this->_element['id']][$index]['html'];
         } else {
             $elementText = $this->getElementTexts($index);
             
