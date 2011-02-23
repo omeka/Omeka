@@ -16,7 +16,7 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 	<div id="search-keywords" class="field">    
 		<?php echo label('keyword-search','Search for Keywords'); ?>
 		<div class="inputs">
-		<?php echo text(array('name'=>'search','size' => '40','id'=>'keyword-search','class'=>'textinput'),$_REQUEST['search']); ?>
+		<?php echo text(array('name'=>'search','size' => '40','id'=>'keyword-search','class'=>'textinput'), @$_REQUEST['search']); ?>
 		</div>
 	</div>
 	<div id="search-narrow-by-fields" class="field">
@@ -80,24 +80,24 @@ head(array('title'=>'Advanced Search', 'bodyclass' => 'advanced-search', 'bodyid
 		<div id="search-selects">
 	<div class="field">
 	<?php echo label('collection-search', 'Search By Collection'); ?>
-	<div class="inputs"><?php echo select_collection(array('name'=>'collection', 'id'=>'collection-search'), $_REQUEST['collection']); ?></div>
+	<div class="inputs"><?php echo select_collection(array('name'=>'collection', 'id'=>'collection-search'), @$_REQUEST['collection']); ?></div>
 	</div>
 	<div class="field">
 	<?php echo label('item-type-search', 'Search By Type'); ?>
-	<div class="inputs"><?php echo select_item_type(array('name'=>'type', 'id'=>'item-type-search'), $_REQUEST['type']); ?></div>
+	<div class="inputs"><?php echo select_item_type(array('name'=>'type', 'id'=>'item-type-search'), @$_REQUEST['type']); ?></div>
 	</div>
 	
 	<?php if(has_permission('Users', 'browse')): ?>
 	<div class="field">
 	<?php 			
 	    echo label('user-search', 'Search By User');?>
-	<div class="inputs"><?php echo select_user(array('name'=>'user', 'id'=>'user-search'), $_REQUEST['user']);
+	<div class="inputs"><?php echo select_user(array('name'=>'user', 'id'=>'user-search'), @$_REQUEST['user']);
 	?></div>
 	</div>
 	<?php endif; ?>
 	<div class="field">
 	<?php echo label('tag-search', 'Search By Tags'); ?>
-	<div class="inputs"><?php echo text(array('name'=>'tags','size' => '40','id'=>'tag-search','class'=>'textinput'),$_REQUEST['tags']); ?></div>
+	<div class="inputs"><?php echo text(array('name'=>'tags','size' => '40','id'=>'tag-search','class'=>'textinput'), @$_REQUEST['tags']); ?></div>
 	</div>
 	</div>
 	<?php if (has_permission('Items','showNotPublic')): ?>

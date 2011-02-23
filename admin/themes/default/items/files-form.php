@@ -36,7 +36,7 @@ if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
 <div id="add-more-files">
 <label for="add_num_files">Find a File</label>
     <div class="files">
-    <?php $numFiles = $_REQUEST['add_num_files'] or $numFiles = 1; ?>
+    <?php $numFiles = (int)@$_REQUEST['add_num_files'] or $numFiles = 1; ?>
     <?php 
     echo text(array('name'=>'add_num_files','size'=>2),$numFiles);
     echo submit('add_more_files', 'Add this many files'); 
