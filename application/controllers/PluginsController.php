@@ -71,7 +71,8 @@ class PluginsController extends Omeka_Controller_Action
         $plugin = $this->_getPluginByName(true);
     
         if ($plugin->isInstalled()) {
-            throw new Exception("'" . $plugin->getDisplayName() . "' plugin has already been installed.");
+            $this->flashError("'" . $plugin->getDisplayName() . "' plugin has already been installed.");
+            $this->_helper->redirector->goto('browse');
         }
              
         try {
