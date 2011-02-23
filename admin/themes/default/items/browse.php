@@ -35,7 +35,7 @@
 
 <fieldset id="view-choice">
     <?php 
-        switch ($_GET['view']) {
+        switch (@$_GET['view']) {
             case 'detailed':
                 common('detailed-view', compact('items'), 'items');
                 break;
