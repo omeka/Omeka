@@ -63,8 +63,11 @@ class ErrorController extends Omeka_Controller_Action
     public function notFoundAction()
     {
         $this->getResponse()->setHttpResponseCode(404);
+        if (!($e = $this->_getException())) {
+            $e = new Exception("Page not found.");
+        }
         $this->view->assign(array('badUri' => $this->getRequest()->getRequestUri(), 
-                                  'e' => $this->_getException()));
+                                  'e' => $e));
         
         // Render the error script that displays debugging info.
         if ($this->isInDebugMode()) {
