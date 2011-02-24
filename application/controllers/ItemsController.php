@@ -288,42 +288,41 @@ class ItemsController extends Omeka_Controller_Action
                     items[1][id],
                     items[2]...etc
         */
-        try {
-            if (!$this->isAllowed('makePublic')) {
-                throw new Exception('User is not allowed to modify visibility of items.');
-            }
-            
-            if (!$this->isAllowed('makeFeatured')) {
-                throw new Exception('User is not allowed to modify featured status of items.');
-            }
-
-            if ($itemArray = $this->_getParam('items')) {
-                    
-                //Loop through the IDs given and toggle
-                foreach ($itemArray as $k => $fields) {
-                    
-                    if(!array_key_exists('id', $fields) or
-                    !array_key_exists('public', $fields) or
-                    !array_key_exists('featured', $fields)) { 
-                        throw new Exception( 'Power-edit request was mal-formed!' ); 
-                    }
-                    
-                    $item = $this->findById($fields['id']);
-
-                    //If public has been checked
-                    $item->setPublic($fields['public']);
-                    
-                    $item->setFeatured($fields['featured']);
-                    
-                    $item->save();
-                }
-            }
-            
-            $this->flashSuccess('The items were successfully changed!');
-            
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
+        $errorMessage = null;
+        if (!$this->isAllowed('makePublic')) {
+            $errorMessage = 
+                'User is not allowed to modify visibility of items.';
         }
+            
+        if (!$this->isAllowed('makeFeatured')) {
+            $errorMessage = 
+                'User is not allowed to modify featured status of items.';
+        }
+        if ($errorMessage) {
+            $this->flashError($errorMessage);
+            return $this->_helper->redirector->goto('browse', 'items');
+        }
+
+        if ($itemArray = $this->_getParam('items')) {
+                
+            foreach ($itemArray as $fields) {
+                
+                if (!array_key_exists('id', $fields) ||
+                    !array_key_exists('public', $fields) ||
+                    !array_key_exists('featured', $fields)
+                ) { 
+                    $this->flashError('Power-edit request was mal-formed!');
+                    return $this->_helper->redirector->goto('browse', 'items');
+                }
+                
+                $item = $this->findById($fields['id']);
+                $item->setPublic($fields['public']);
+                $item->setFeatured($fields['featured']);
+                $item->forceSave();
+            }
+        }
+            
+        $this->flashSuccess('The items were successfully changed!');
         
         if (isset($_SERVER['HTTP_REFERER'])) {
             $this->_helper->redirector->gotoUrl($_SERVER['HTTP_REFERER']);
