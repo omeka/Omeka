@@ -15,19 +15,12 @@
 abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCase
 {   
     /**
-     * Flag that should be set by subclasses that test the admin theme.
+     * Flag that determines whether the test should run against admin or public.  
+     * Defaults to true (for admin). 
      *
      * @var boolean
      */
-    protected $_isAdminTest = false;
-    
-    /**
-     * Whether the view should attempt to load admin scripts for 
-     * testing purposes.  Defaults to true.
-     *
-     * @var boolean
-     */
-    protected $_useAdminViews = true;
+    protected $_isAdminTest = true;
     
     /**
      * Bootstrap the application on each test run.
@@ -54,6 +47,23 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }
         return $this->core->getBootstrap()->getContainer()->{$property};
     }
+
+    public function __set($property, $value)
+    {
+        if ($property == '_useAdminViews') {
+            $this->_useAdminViewsWarning();
+        }
+        return parent::__set($property, $value);
+    }
+    
+    private function _useAdminViewsWarning()
+    {
+        trigger_error("Omeka_Test_AppTestCase::\$_useAdminViews is " 
+            . "deprecated, please set Omeka_Test_AppTestCase::"
+            . "\$_isAdminTest = false to indicate that a given test should "
+            . "run against the public theme (\$_isAdminTest is " 
+            . "true by default).", E_USER_WARNING);
+    }
     
     /**
      * Bootstrap the application.
@@ -71,7 +81,10 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $this->getRequest()->setBaseUrl('');
         // These two properties have equivalent semantic meaning, therefore should
         // be combined at some future point.
-        if ($this->_useAdminViews || $this->_isAdminTest) {
+        if (isset($this->_useAdminViews)) {
+            $this->_useAdminViewsWarning();
+        }
+        if ($this->_isAdminTest) {
             $this->_setUpThemeBootstrap('admin');
         } else {
             $this->_setUpThemeBootstrap('public');

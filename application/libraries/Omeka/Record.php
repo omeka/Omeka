@@ -18,7 +18,7 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Zend_Date format for saving to the database.
      */
-    const DATE_FORMAT = 'YYYY-MM-dd HH:mm:ss';
+    const DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
     
     /**
      * Unique ID for the record.

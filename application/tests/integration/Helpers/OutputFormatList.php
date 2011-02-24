@@ -16,7 +16,7 @@ require_once HELPERS;
  **/
 class Omeka_Helper_OutputFormatListTest extends Omeka_Test_AppTestCase
 {
-	protected $_useAdminViews = false;
+	protected $_isAdminTest = false;
     
     public function testOutputFormatListDefault()
     {

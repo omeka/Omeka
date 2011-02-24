@@ -9,9 +9,6 @@
 
 [site]
 
-; Display a runtime timer for page generation
-debug.timer = false
-
 ; Throw exceptions; this should only be used in development mode
 debug.exceptions = false
 

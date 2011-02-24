@@ -22,10 +22,40 @@ class ItemsController extends Omeka_Controller_Action
             'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'omeka-json', 'atom'),
             'show'   => array('json', 'dcmes-xml', 'omeka-xml', 'omeka-json', 'atom')
     );
-    
+
+    private $_ajaxRequiredActions = array(
+        'element-form',
+        'tag-form',
+        'change-type',
+    );
+
+    private $_methodRequired = array(
+        'element-form' => array('POST'),
+        'modify-tags' => array('POST'),
+        'power-edit' => array('POST'),
+        'delete' => array('POST'),
+        'change-type' => array('POST'),
+    );
+
     public function init() 
     {
         $this->_helper->db->setDefaultModelName('Item');
+    }
+
+    public function preDispatch()
+    {
+        $action = $this->getRequest()->getActionName();
+        if (in_array($action, $this->_ajaxRequiredActions)) {
+            if (!$this->getRequest()->isXmlHttpRequest()) {
+                return $this->_forward('not-found', 'error');
+            }
+        }
+        if (array_key_exists($action, $this->_methodRequired)) {
+            if (!in_array($this->getRequest()->getMethod(),
+                          $this->_methodRequired[$action])) {
+                return $this->_forward('method-not-allowed', 'error');
+            }
+        }
     }
     
     /**
@@ -105,18 +135,13 @@ class ItemsController extends Omeka_Controller_Action
      */
     public function deleteAction()
     {
-        if (!$this->getRequest()->isPost()) {
-            $this->_forward('error');
-            return;
-        }
-        
         if (($user = $this->getCurrentUser())) {
             $item = $this->findById();
             
             // Permission check
             if ($this->isAllowed('deleteAll') 
                 || ($this->isAllowed('deleteSelf') && $item->wasAddedBy($user))) {
-                parent::deleteAction();
+                return parent::deleteAction();
             }
         }
         
@@ -264,47 +289,46 @@ class ItemsController extends Omeka_Controller_Action
                     items[1][id],
                     items[2]...etc
         */
-        if (empty($_POST)) {
-            $this->redirect->goto('browse');
+        $errorMessage = null;
+        if (!$this->isAllowed('makePublic')) {
+            $errorMessage = 
+                'User is not allowed to modify visibility of items.';
         }
-        
-        try {
-            if (!$this->isAllowed('makePublic')) {
-                throw new Exception('User is not allowed to modify visibility of items.');
-            }
             
-            if (!$this->isAllowed('makeFeatured')) {
-                throw new Exception('User is not allowed to modify featured status of items.');
-            }
+        if (!$this->isAllowed('makeFeatured')) {
+            $errorMessage = 
+                'User is not allowed to modify featured status of items.';
+        }
+        if ($errorMessage) {
+            $this->flashError($errorMessage);
+            return $this->_helper->redirector->goto('browse', 'items');
+        }
 
-            if ($itemArray = $this->_getParam('items')) {
-                    
-                //Loop through the IDs given and toggle
-                foreach ($itemArray as $k => $fields) {
-                    
-                    if(!array_key_exists('id', $fields) or
-                    !array_key_exists('public', $fields) or
-                    !array_key_exists('featured', $fields)) { 
-                        throw new Exception( 'Power-edit request was mal-formed!' ); 
-                    }
-                    
-                    $item = $this->findById($fields['id']);
-
-                    //If public has been checked
-                    $item->setPublic($fields['public']);
-                    
-                    $item->setFeatured($fields['featured']);
-                    
-                    $item->save();
+        if ($itemArray = $this->_getParam('items')) {
+                
+            foreach ($itemArray as $fields) {
+                
+                if (!array_key_exists('id', $fields) ||
+                    !array_key_exists('public', $fields) ||
+                    !array_key_exists('featured', $fields)
+                ) { 
+                    $this->flashError('Power-edit request was mal-formed!');
+                    return $this->_helper->redirector->goto('browse', 'items');
                 }
+                
+                $item = $this->findById($fields['id']);
+                $item->setPublic($fields['public']);
+                $item->setFeatured($fields['featured']);
+                $item->forceSave();
             }
-            
-            $this->flashSuccess('The items were successfully changed!');
-            
-        } catch (Omeka_Validator_Exception $e) {
-            $this->flashError($e->getMessage());
         }
+            
+        $this->flashSuccess('The items were successfully changed!');
         
-        $this->redirect->gotoUrl($_SERVER['HTTP_REFERER']);
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $this->_helper->redirector->gotoUrl($_SERVER['HTTP_REFERER']);
+        } else {
+            $this->_helper->redirector->goto('browse', 'items');
+        }
     }
 }

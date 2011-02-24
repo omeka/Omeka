@@ -243,6 +243,7 @@ function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $la
 function submit($attributes, $value="Submit")
 {
     // This is a hack that makes this work.
+    $otherAttribs = array();
     if (is_array($attributes)) {
         $otherAttribs = $attributes;
     }

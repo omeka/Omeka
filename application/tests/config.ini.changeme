@@ -8,11 +8,18 @@ db.dbname = ""
 email.to = ""
 email.administrator = ""
 
-; Root URL of the testing installation, for use in web-based unit tests
-app.url = ""
-
-; mimics the entry with the same name in the main config.ini file.  best to leave this on for testing
-debug.exceptions = true
-
 paths.imagemagick = ""
 paths.maildir = ""
+
+; The [site] section below will be merged with the main config.ini such that it
+; overrides settings in that file.  These config settings do not need to change
+; in most cases.
+[site]
+; Disable debug mode in tests since it is mostly useless here.
+debug.exceptions = 0
+debug.request = 0
+; Disable logging by default in tests as it tends to slow the tests
+; considerably.
+log.sql = 0
+log.errors = 0
+log.processes = 0
