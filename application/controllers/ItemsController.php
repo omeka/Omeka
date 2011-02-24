@@ -325,6 +325,10 @@ class ItemsController extends Omeka_Controller_Action
             $this->flashError($e->getMessage());
         }
         
-        $this->redirect->gotoUrl($_SERVER['HTTP_REFERER']);
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $this->_helper->redirector->gotoUrl($_SERVER['HTTP_REFERER']);
+        } else {
+            $this->_helper->redirector->goto('browse', 'items');
+        }
     }
 }
