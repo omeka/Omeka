@@ -42,8 +42,17 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
             array('/items/add', 'items', 'add'),
             array('/items/edit/1', 'items', 'edit', '_addOneItem'),
             array('/items/advanced-search', 'items', 'advanced-search'),
-            array('/items/modify-tags/1', 'items', 'modify-tags', array('_addOneItem', '_makePost')),
+            array('/items/modify-tags/1', 
+                  'items', 
+                  'modify-tags', 
+                  array('_addOneItem', '_makePost')
+            ),
             array('/items/tags', 'items', 'tags'),
+            array('/items/tag-form?id=1', 
+                  'items', 
+                  'tag-form', 
+                  array('_addOneItem', '_makeXmlHttpRequest')
+            )
         );
     }
 
@@ -101,10 +110,11 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public static function postRequired()
     {
         return array(
-            array('/items/element-form', array('_makeXmlHttpRequest')),
+            array('/items/element-form', '_makeXmlHttpRequest'),
             array('/items/modify-tags'),
             array('/items/power-edit'),
             array('/items/delete/1'),
+            array('/items/change-type', '_makeXmlHttpRequest'),
         );
     }
 
@@ -242,6 +252,57 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->assertFalse($item->$checkMethod());
     }
 
+    public function testElementFormXmlHttpRequest()
+    {
+        $this->_addOneItem();
+        $this->_makeXmlHttpRequest();
+        $this->_makePost(array(
+            'element_id' => 1,
+            'item_id' => 1,
+            'Elements' => array(
+                1 => array(
+                    array(
+                        'text' => 'foo',
+                        'html' => '1',
+                    )
+                )
+            )
+        ));
+        $this->dispatch('/items/element-form');
+        $this->assertQueryContentContains("textarea#Elements-1-0-text", "foo");
+    }
+
+    public function testDelete()
+    {
+        $this->_addOneItem();
+        $this->_makePost(array(
+            'id' => 1
+        ));
+        $this->dispatch('/items/delete');
+        $this->assertEquals(0, $this->db->getTable('Item')->count());
+        $this->assertRedirectTo('/items/browse');
+    }
+
+    public function testChangeTypeXmlHttpRequest()
+    {
+        $this->_addOneItem();
+        $this->_makeXmlHttpRequest();
+        $this->_makePost(array(
+            'item_id' => 1,
+            'type_id' => 1,
+        ));
+        $this->dispatch('/items/change-type');
+        $this->assertNotRedirect();
+    }
+
+    public function testTagFormXmlHttpRequest()
+    {
+        $this->_addOneItem();
+        $this->_makeXmlHttpRequest();
+        $this->dispatch('/items/tag-form?id=1');
+        $this->assertNotRedirect();
+    }
+
     protected function _addOneItem()
     {
         $item = insert_item();
@@ -254,9 +315,12 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->assertTrue($this->request->isXmlHttpRequest());
     }
 
-    protected function _makePost()
+    protected function _makePost($post = null)
     {
         $this->request->setMethod('POST');
+        if ($post) {
+            $this->request->setPost($post);
+        }
     }
 
 }

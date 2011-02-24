@@ -34,6 +34,7 @@ class ItemsController extends Omeka_Controller_Action
         'modify-tags' => array('POST'),
         'power-edit' => array('POST'),
         'delete' => array('POST'),
+        'change-type' => array('POST'),
     );
 
     public function init() 
@@ -140,7 +141,7 @@ class ItemsController extends Omeka_Controller_Action
             // Permission check
             if ($this->isAllowed('deleteAll') 
                 || ($this->isAllowed('deleteSelf') && $item->wasAddedBy($user))) {
-                parent::deleteAction();
+                return parent::deleteAction();
             }
         }
         
