@@ -93,6 +93,13 @@ class ErrorController extends Omeka_Controller_Action
             $this->render('403');
         }
     }
+
+    public function methodNotAllowedAction()
+    {
+        $this->getResponse()->setHttpResponseCode(405);
+        $this->view->method = $this->getRequest()->getMethod();
+        $this->render('405');
+    }
     
     private function logException($e, $priority)
     {
