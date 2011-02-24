@@ -8,12 +8,6 @@ db.dbname = ""
 email.to = ""
 email.administrator = ""
 
-; Root URL of the testing installation, for use in web-based unit tests
-app.url = ""
-
-; mimics the entry with the same name in the main config.ini file.  best to leave this on for testing
-debug.exceptions = true
-
 paths.imagemagick = ""
 paths.maildir = ""
 
