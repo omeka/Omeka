@@ -43,10 +43,25 @@ class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstr
     public function init()
     {
         $mainConfig = $this->_coreResource->init();
+        $testConfigPath = APP_DIR . '/tests/config.ini';
         if (!Zend_Registry::isRegistered('test_config')) {
             //Config dependency
-            $config = new Zend_Config_Ini(APP_DIR . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR.'config.ini', 'testing');
+            $config = new Zend_Config_Ini($testConfigPath, 'testing');
             Zend_Registry::set('test_config', $config);
+        }
+        // Merging the configs allows us to override settings only for tests.
+        try {
+            $mainCopy = new Zend_Config($mainConfig->toArray(), true); 
+            $testSiteConfig = new Zend_Config_Ini($testConfigPath, 'site');
+            $mainCopy->merge($testSiteConfig);
+            $mainCopy->setReadOnly(true);
+            $mainConfig = $mainCopy;
+        } catch (Zend_Config_Exception $e) {
+            // Legacy installations will fail for lack of a [site] section.
+            // Remove this catch clause in 2.0.
+            if (strpos($e->getMessage(), "Section 'site' cannot be found") === false) {
+                throw $e;
+            }
         }
         return $mainConfig;
     }
