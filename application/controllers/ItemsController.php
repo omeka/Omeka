@@ -22,10 +22,39 @@ class ItemsController extends Omeka_Controller_Action
             'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'omeka-json', 'atom'),
             'show'   => array('json', 'dcmes-xml', 'omeka-xml', 'omeka-json', 'atom')
     );
-    
+
+    private $_ajaxRequiredActions = array(
+        'element-form',
+        'tag-form',
+        'change-type',
+    );
+
+    private $_methodRequired = array(
+        'element-form' => array('POST'),
+        'modify-tags' => array('POST'),
+        'power-edit' => array('POST'),
+        'delete' => array('POST'),
+    );
+
     public function init() 
     {
         $this->_modelClass = 'Item';
+    }
+
+    public function preDispatch()
+    {
+        $action = $this->getRequest()->getActionName();
+        if (in_array($action, $this->_ajaxRequiredActions)) {
+            if (!$this->getRequest()->isXmlHttpRequest()) {
+                return $this->_forward('not-found', 'error');
+            }
+        }
+        if (array_key_exists($action, $this->_methodRequired)) {
+            if (!in_array($this->getRequest()->getMethod(),
+                          $this->_methodRequired[$action])) {
+                return $this->_forward('method-not-allowed', 'error');
+            }
+        }
     }
     
     /**
@@ -105,11 +134,6 @@ class ItemsController extends Omeka_Controller_Action
      */
     public function deleteAction()
     {
-        if (!$this->getRequest()->isPost()) {
-            $this->_forward('error');
-            return;
-        }
-        
         if (($user = $this->getCurrentUser())) {
             $item = $this->findById();
             
@@ -264,10 +288,6 @@ class ItemsController extends Omeka_Controller_Action
                     items[1][id],
                     items[2]...etc
         */
-        if (empty($_POST)) {
-            $this->redirect->goto('browse');
-        }
-        
         try {
             if (!$this->isAllowed('makePublic')) {
                 throw new Exception('User is not allowed to modify visibility of items.');
