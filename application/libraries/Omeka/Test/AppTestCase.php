@@ -59,7 +59,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     private function _useAdminViewsWarning()
     {
         trigger_error("Omeka_Test_AppTestCase::\$_useAdminViews is " 
-            . "deprecated, please set Omeka_Test_AppTestCase::"
+            . "deprecated since v1.4, please set Omeka_Test_AppTestCase::"
             . "\$_isAdminTest = false to indicate that a given test should "
             . "run against the public theme (\$_isAdminTest is " 
             . "true by default).", E_USER_WARNING);
@@ -91,7 +91,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }
         
         $this->setUpBootstrap($this->core->getBootstrap());
-// var_dump($this->core->getBootstrap()->getPluginResourceNames());exit;
         $this->core->bootstrap();
     }
     
@@ -147,32 +146,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     }
     
     /**
-     * Increment assertion count
-     *
-     * @todo COPIED FROM ZEND FRAMEWORK 1.10, REMOVE AFTER UPGRADING TO THAT
-     * VERSION.
-     * @return void
-     */
-    protected function _incrementAssertionCount()
-    {
-        $stack = debug_backtrace();
-        foreach (debug_backtrace() as $step) {
-            if (isset($step['object'])
-                && $step['object'] instanceof PHPUnit_Framework_TestCase
-            ) {
-                if (version_compare(PHPUnit_Runner_Version::id(), '3.3.0', 'lt')) {
-                    break;
-                } elseif (version_compare(PHPUnit_Runner_Version::id(), '3.3.3', 'lt')) {
-                    $step['object']->incrementAssertionCounter();
-                } else {
-                    $step['object']->addToAssertionCount(1);
-                }
-                break;
-            }
-        }
-    }
-    
-    /**
      * Trick the environment into thinking that a user has been authenticated.
      *
      * @param User $user
@@ -190,17 +163,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     }
     
     /**
-     * Add admin view scripts to search path.
-     *
-     * @return void
-     */
-    protected function _useAdminViews()
-    {
-        $this->view = Zend_Registry::get('view');
-        $this->view->addScriptPath(ADMIN_THEME_DIR . DIRECTORY_SEPARATOR . 'default');
-    }
-    
-    /**
      * Get the user that is installed by default.
      *
      * @return User
@@ -208,17 +170,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     protected function _getDefaultUser()
     {
         return $this->db->getTable('User')->find(Omeka_Test_Resource_Db::DEFAULT_USER_ID);
-    }
-    
-    /**
-     * Set up for testing the admin interface.
-     *
-     * @internal Necessary because admin and public have 2 separate bootstraps.
-     * @return void
-     */
-    private function _setupAdminTest()
-    {
-        // define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . 'themes');
     }
     
     /**
