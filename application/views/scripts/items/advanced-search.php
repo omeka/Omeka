@@ -5,9 +5,9 @@ if (!$isPartial):
                'bodyid' => 'advanced-search-page'));
 ?>
 
-<h1>Advanced Search</h1>
-
-<div id="primary">    
+<div id="primary">   
+    <h1>Advanced Search</h1>
+     
 <?php endif; ?>
 <?php 
 if ($formActionUri):
