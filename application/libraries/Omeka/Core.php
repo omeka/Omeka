@@ -116,12 +116,20 @@ class Omeka_Core extends Zend_Application
             // These exceptions will be thrown for config files, when they don't
             // exist or are improperly structured. Should do something similar
             // to the database exception errors.
-            $message = "Error in Omeka's configuration file(s): " . $e->getMessage();
+            $this->_displayErrorPage($e->getMessage(), 'Omeka Configuration Error');
+        } catch (Zend_Db_Adapter_Mysqli_Exception $e) {
+            $message = $e->getMessage() .'.'."\n\n";
+            $message .= 'Confirm that the information in your db.ini file is correct.';
+            $this->_displayErrorPage($message, 'Omeka Database Error'); 
+        } catch (Omeka_Db_Migration_Exception $e) {
+            $title = 'Cannot Upgrade: Need to Upgrade to Omeka 1.2.1';
+            $message = 'You must upgrade to version 1.2.1 before continuing.'."\n\n";
+            $message .= 'Please consult the <a href="http://omeka.org/codex/Upgrading">Upgrading</a> page on the Omeka codex, and <a href="http://omeka.org/files/omeka-1.2.1.zip">Downlodad Omeka 1.2.1</a>';
+            $this->_displayErrorPage($message, $title);
         } catch (Exception $e) {
             // No idea what this exception would be.  Just start crying.
-            $message = $e->getMessage();
+            $this->_displayErrorPage($e);
         }
-        $this->_displayErrorPage($message, $e);
         exit;
     }
     
@@ -156,7 +164,7 @@ class Omeka_Core extends Zend_Application
         try {
             return parent::run();
         } catch (Exception $e) {
-            $this->_displayErrorPage($e->getMessage(), $e);
+            $this->_displayErrorPage($e);
             exit;
         }
     }
@@ -168,36 +176,32 @@ class Omeka_Core extends Zend_Application
      * @param Exception $e
      * @return void
      */
-    private function _displayErrorPage($message = '', Exception $e)
+    private function _displayErrorPage($e, $title = null)
     {
         header("HTTP/1.0 500 Internal Server Error");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en-us">
 <head>
-<title>Omeka Error</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-body {font:62.5% "Lucida Grande",Helvetica, Arial, sans-serif; background:#eae9db;color: #333;min-width:882px;}
-h1 {font-weight:normal; font-size:2.2em; margin-bottom:1em; line-height:1em;margin-right:12em;}
-h1 {color:#a74c29;}
-h1 {font-family:Georgia, Times, "Times New Roman", serif;}
-#primary {width: 666px; padding: 18px; background: #fff; margin: 36px auto;}
-#primary { background:#fff; padding:18px;border:1px solid #d7d5c4; border-width: 3px 0;}
-p {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
-</style>
+    <meta charset="utf-8">
+    <title>Omeka Has Encountered an Error</title>
+    <link rel="stylesheet" media="all" href="<?php echo WEB_VIEW_SCRIPTS . '/css/style.css'; ?>">
 </head>
 <body>
-<div id="wrap">
-    <div id="primary">
-        <h1>Omeka Has Encountered an Error</h1>
-        <?php if (ini_get('display_errors')): ?>
-            <p><?php echo $message; ?></p>
-            <pre><?php echo $e->getTraceAsString(); ?></pre>
+    <div id="content">
+        <h1><?php echo isset($title) ? $title : 'Omeka Has Encountered an Error'; ?></h1>
+        <?php if (is_string($e)): ?>
+            <p><?php echo nl2br($e); ?></p>
+        <?php else: ?>
+            <dl id="error-message">
+                <dt><?php echo get_class($e); ?></dt>   
+                <dd>
+                    <p><?php echo nl2br($e->getMessage()); ?></p>
+                </dd>
+            </dl>
+            <pre id="backtrace"><?php echo $e->getTraceAsString(); ?></pre>
         <?php endif; ?>
     </div>
-</div>
 </body>
 </html>
 <?php

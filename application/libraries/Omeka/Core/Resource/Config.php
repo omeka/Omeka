@@ -22,6 +22,12 @@ class Omeka_Core_Resource_Config extends Zend_Application_Resource_ResourceAbstr
      */
     public function init()
     {        
-        return new Zend_Config_Ini(CONFIG_DIR . DIRECTORY_SEPARATOR . 'config.ini', 'site');     
+        $configFile = CONFIG_DIR . '/config.ini';
+        
+        if (!file_exists($configFile)) {
+            throw new Zend_Config_Exception('Your Omeka configuration file is missing.');
+        }
+        
+        return new Zend_Config_Ini($configFile, 'site');     
     }
 }
