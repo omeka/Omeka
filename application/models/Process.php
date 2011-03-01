@@ -55,6 +55,9 @@ class Process extends Omeka_Record
     
     private function _isSerialized($s)
     {
+        if (!is_string($s)) {
+            return false;
+        }
         return (($s === 'b:0;') || (@unserialize($s) !== false));
     }
 }
