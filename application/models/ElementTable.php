@@ -179,10 +179,12 @@ class ElementTable extends Omeka_Db_Table
             $select->where('e.name = binary ?', (string) $params['element_name']); 
         }
 
+        // Retrive results including, but not limited to, a specific item type.
         if (array_key_exists('item_type_id', $params)) {
-            $select->joinInner(array('ite' => $db->ItemTypeElements),
+            $select->joinLeft(array('ite' => $db->ItemTypesElements),
                 "ite.element_id = e.id", array());
-            $select->where('ite.item_type_id = ?', (int)$params['item_type_id']);
+            $select->where('ite.item_type_id = ? OR ite.item_type_id IS NULL', 
+                (int)$params['item_type_id']);
         } else if (array_key_exists('exclude_item_type', $params)) {
             $select->where('es.name != ?', ELEMENT_SET_ITEM_TYPE);
         }
@@ -209,7 +211,7 @@ class ElementTable extends Omeka_Db_Table
         $select->from(array(), array(
             'id' => 'e.id', 
             'name' => 'e.name',
-            'set_name' => 'es.name'
+            'set_name' => 'es.name',
         ));
         $elements = $this->fetchAll($select);
         $options = array();
