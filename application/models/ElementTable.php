@@ -158,9 +158,11 @@ class ElementTable extends Omeka_Db_Table
             $select->joinInner(array('rty'=> $db->RecordType),
                                  'rty.id = e.record_type_id',
                                  array('record_type_name'=>'rty.name'));
+            $where = array();
             foreach ($params['record_types'] as $recordTypeName) {
-                $select->orWhere('rty.name = ?', $recordTypeName);
+                $where[] = 'rty.name = ' . $db->quote($recordTypeName);
             }
+            $select->where('(' . join(' OR ', $where) . ')');
         }
         
         if (array_key_exists('sort', $params)) {
