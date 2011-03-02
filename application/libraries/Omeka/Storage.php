@@ -15,16 +15,59 @@ class Omeka_Storage
     const OPTION_ADAPTER = 'adapter';
     const OPTION_ADAPTER_OPTIONS = 'adapterOptions';
     const OPTION_TEMP_DIR = 'tempDir';
-    
+
+    const MSG_NOT_INITIALIZED = 'The storage adapter is not initialized.';
+    const MSG_NO_SUCH_METHOD = 'The storage adapter has no method "%s"';
+    const MSG_INVALID_ADAPTER = 'Storage adapters must implement the Omeka_Storage_Adapter interface.';
+        
     /**
      * @var Omeka_Storage_Adapter
      */
-    static private $_adapter;
+    private $_adapter;
 
     /**
      * @var string
      */
-    static private $_tempDir;
+    private $_tempDir;
+
+    /**
+     * Allows storage options to be set immediately at construction.
+     *
+     * @param array $options If set, this array will be passed to
+     *  setOptions.
+     */
+    public function __construct(array $options = null)
+    {
+        if (isset($options)) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
+     * Delegates calls directly to Omeka_Storage to the currently-set
+     * storage adapter.
+     *
+     * All of the methods of the Adapter interface are accessible in
+     * this way, as well as any other methods declared by the adapter.
+     *
+     * @param string $name Method name.
+     * @param string $arguments Method arguments.
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        if (!$this->_adapter) {
+            throw new Omeka_Storage_Exception(self::MSG_NOT_INITIALIZED);
+        }
+
+        $callback = array($this->_adapter, $name);
+
+        if (is_callable($callback)) {
+            return call_user_func_array($callback, $arguments);
+        } else {
+            throw new Omeka_Storage_Exception(sprintf(self::MSG_NO_SUCH_METHOD, $name));
+        }
+    }
 
     /**
      * Set global options for the storage system, as well as any
@@ -38,7 +81,8 @@ class Omeka_Storage
      *  * 'temp_dir': (string) Local temporary directory where files
      *    stored before they are handled by the adapter.
      */
-    static public function setOptions(array $options) {
+    public function setOptions(array $options)
+    {
         foreach ($options as $key => $value) {
             switch ($key) {
             case self::OPTION_ADAPTER:
@@ -46,11 +90,11 @@ class Omeka_Storage
                 if (isset($options[self::OPTION_ADAPTER_OPTIONS])) {
                     $adapterOptions = $options[self::OPTION_ADAPTER_OPTIONS];
                 }
-                self::setAdapter($value, $adapterOptions);
+                $this->setAdapter($value, $adapterOptions);
                 break;
 
             case self::OPTION_TEMP_DIR:
-                self::setTempDir($value);
+                $this->setTempDir($value);
                 break;
             }
         }
@@ -71,15 +115,16 @@ class Omeka_Storage
      * @param array|null $options If a string is passed to $adapter,
      *  this array of options is passed to the class' constructor.
      */
-    static public function setAdapter($adapter, array $options = array()) {
+    public function setAdapter($adapter, array $options = array())
+    {
         if (is_string($adapter)) {
             $adapter = new $adapter($options);
         }
         
         if ($adapter instanceof Omeka_Storage_Adapter) {
-            self::$_adapter = $adapter;
+            $this->_adapter = $adapter;
         } else {
-            throw new Omeka_Storage_Exception('Storage adapters must implement the Omeka_Storage_Adapter interface.');
+            throw new Omeka_Storage_Exception(self::MSG_INVALID_ADAPTER);
         }
     }
 
@@ -92,8 +137,9 @@ class Omeka_Storage
      * @see Omeka_Storage::setAdapter()
      * @return Omeka_Storage_Adapter
      */
-    static public function getAdapter() {
-        return self::$_adapter;
+    public function getAdapter()
+    {
+        return $this->_adapter;
     }
 
     /**
@@ -102,8 +148,9 @@ class Omeka_Storage
      * @see Omeka_Storage::getTempDir()
      * @param string $dir Local path to directory.
      */
-    static public function setTempDir($dir) {
-        self::$_tempDir = $dir;
+    public function setTempDir($dir)
+    {
+        $this->_tempDir = $dir;
     }
 
     /**
@@ -115,11 +162,12 @@ class Omeka_Storage
      * @see Omeka_Storage::setTempDir()
      * @return string Local path to directory.
      */
-    static public function getTempDir() {
-        if (!self::$_tempDir) {
-            self::setTempDir(sys_get_temp_dir());
+    public function getTempDir()
+    {
+        if (!$this->_tempDir) {
+            $this->_tempDir = sys_get_temp_dir();
         }
         
-        return self::$_tempDir;
+        return $this->_tempDir;
     }
 }

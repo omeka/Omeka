@@ -110,7 +110,7 @@ class File extends Omeka_Record
             throw new Exception('Cannot get the local path for a stored file.');
         }
 
-        $dir = Omeka_Storage::getTempDir();
+        $dir = $this->getStorage()->getTempDir();
         
         if ($type == 'archive') {
             return $dir . '/' . $this->archive_filename;
@@ -126,7 +126,7 @@ class File extends Omeka_Record
      */
     public function getWebPath($type='fullsize')
     {
-        return Omeka_Storage::getAdapter()->getUri($this->getStoragePath($type));
+        return $this->getStorage()->getUri($this->getStoragePath($type));
     }
     
     public function getDerivativeFilename()
@@ -215,7 +215,7 @@ class File extends Omeka_Record
     
     public function unlinkFile() 
     {
-        $adapter = Omeka_Storage::getAdapter();
+        $storage = $this->getStorage();
 
         $files = array($this->getStoragePath('archive'));
 
@@ -229,7 +229,7 @@ class File extends Omeka_Record
         }
         
         foreach($files as $file) {
-            $adapter->delete($file);
+            $storage->delete($file);
         }
     }
     
@@ -264,19 +264,19 @@ class File extends Omeka_Record
 
     public function storeFiles()
     {
-        $adapter = Omeka_Storage::getAdapter();
+        $storage = $this->getStorage();
 
         $archiveFilename = $this->archive_filename;
         $derivativeFilename = $this->getDerivativeFilename();
         
-        $adapter->store($this->getPath('archive'), $this->getStoragePath('archive'));
+        $storage->store($this->getPath('archive'), $this->getStoragePath('archive'));
                 
         if ($this->has_derivative_image) {
             $types = array_keys(self::$_pathsByType);
 
             foreach ($types as $type) {
                 if ($type != 'archive') {
-                    $adapter->store($this->getPath($type), $this->getStoragePath($type));
+                    $storage->store($this->getPath($type), $this->getStoragePath($type));
                 }
             }
         }
@@ -293,5 +293,19 @@ class File extends Omeka_Record
         }
 
         return self::$_pathsByType[$type] . "/$fn";
+    }
+
+    public function setStorage($storage)
+    {
+        $this->_storage = $storage;
+    }
+
+    public function getStorage()
+    {
+        if (!$this->_storage) {
+            $this->_storage = Zend_Registry::get('storage');
+        }
+
+        return $this->_storage;
     }
 }

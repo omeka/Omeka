@@ -26,6 +26,7 @@ class Omeka_Core_Resource_Storage extends Zend_Application_Resource_ResourceAbst
             $storageOptions = array(Omeka_Storage::OPTION_ADAPTER => self::DEFAULT_ADAPTER);
         }
 
-        Omeka_Storage::setOptions($storageOptions);
+        $storage = new Omeka_Storage($storageOptions);
+        Zend_Registry::set('storage', $storage);
     }
 }

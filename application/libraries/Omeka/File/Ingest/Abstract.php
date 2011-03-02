@@ -288,7 +288,8 @@ abstract class Omeka_File_Ingest_Abstract
         $filter = new Omeka_Filter_Filename;
         $filename = $filter->renameFileForArchive($fromFilename);
 
-        $dir = Omeka_Storage::getTempDir();
+        $storage = Zend_Registry::get('storage');
+        $dir = $storage->getTempDir();
         
         if (!is_writable($dir)) {
             throw new Omeka_File_Ingest_Exception('Cannot write to the following directory: "'
