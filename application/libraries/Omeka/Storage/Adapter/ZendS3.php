@@ -10,8 +10,7 @@
  *
  * Caveat: Zend's storage adapter currently does not function correctly
  * with buckets that are validly-named, but use characters that cannot
- * appear in domain names. Additionally, all items must be stored with
- * public read access.
+ * appear in domain names.
  *
  * @package Omeka
  */
@@ -21,12 +20,12 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
     const AWS_SECRET_KEY_OPTION = 'secretAccessKey';
     const REGION_OPTION = 'region';
     const BUCKET_OPTION = 'bucket';
-    
+
     /**
      * @var Zend_Service_Amazon_S3
      */
     private $_s3;
-    
+
     /**
      * @var array
      */
@@ -64,7 +63,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         $bucket = $this->_getBucketName();
         return $this->_s3->isBucketAvailable($bucket);
     }
-    
+
     /**
      * Move a local file to S3 storage.
      *
@@ -78,7 +77,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         // Currently, we need to set the objects to have public read
         // access; Zend cannot generate URLs to give temporary access
         // to private objects.
-        $meta = array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ);
+        $meta = array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PRIVATE);
             
         $status = $this->_s3->putFileStream($source, $objectName, $meta);
 
@@ -126,14 +125,35 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
     /**
      * Get a URI for a "stored" file.
      *
+     * @see http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?RESTAuthentication.html#RESTAuthenticationQueryStringAuth
      * @param string $path
      * @return string URI
      */
     public function getUri($path)
     {
+        $date = new Zend_Date();
+        $date->add('10', Zend_Date::MINUTE);
+
         $object = $this->_getObjectName($path);
+
+        $accessKeyId = $this->_options[self::AWS_KEY_OPTION];
+        $secretKey = $this->_options[self::AWS_SECRET_KEY_OPTION];
+
+        $expires = $date->getTimestamp();
+        $stringToSign = "GET\n\n\n$expires\n/$object";
+
+        $signature = base64_encode(
+            Zend_Crypt_Hmac::compute($secretKey, 'sha1',
+                utf8_encode($stringToSign), Zend_Crypt_Hmac::BINARY));
+
+        $query['AWSAccessKeyId'] = $accessKeyId;
+        $query['Expires'] = $expires;
+        $query['Signature'] = $signature;
+
+        $queryString = http_build_query($query);
+
         $endpoint = $this->_s3->getEndpoint();
-        return "$endpoint/$object";
+        return "$endpoint/$object?$queryString";
     }
 
     /**
