@@ -85,6 +85,8 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         if(!$status) {
             throw new Omeka_Storage_Exception('Unable to store file.');
         }
+
+        unlink($source);
     }
 
     /**
