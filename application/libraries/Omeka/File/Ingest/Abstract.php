@@ -287,11 +287,14 @@ abstract class Omeka_File_Ingest_Abstract
     {
         $filter = new Omeka_Filter_Filename;
         $filename = $filter->renameFileForArchive($fromFilename);
-        if (!is_writable(self::$_archiveDirectory)) {
+
+        $dir = Omeka_Storage::getTempDir();
+        
+        if (!is_writable($dir)) {
             throw new Omeka_File_Ingest_Exception('Cannot write to the following directory: "'
-                              . self::$_archiveDirectory . '"!');
+                              . $dir . '"!');
         }
-        return self::$_archiveDirectory . DIRECTORY_SEPARATOR . $filename;
+        return $dir . DIRECTORY_SEPARATOR . $filename;
     }
     
     /**

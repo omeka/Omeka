@@ -504,7 +504,13 @@ class Omeka_View_Helper_Media
      * @return string HTML
      **/
     public function media($file, array $props=array(), $wrapperAttributes = array())
-    {       
+    {
+        // Stop immediately if the file's not stored, we won't be able
+        // to get URIs, etc.
+        if (!$file->stored) {
+            return;
+        }
+
         $mimeType = $this->getMimeFromFile($file);
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
@@ -579,13 +585,7 @@ class Omeka_View_Helper_Media
             return '';
         }
 
-        $path = $file->getPath($format);
         $uri = html_escape(file_display_uri($file, $format));
-        
-        if (!file_exists($path)) {
-            return false;
-        }
-        
         
         if (isset($props['height']) && !isset($props['width'])) {
             $height = $props['height'];

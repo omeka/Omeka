@@ -22,6 +22,7 @@ class File_ProcessUploadJob extends Omeka_JobAbstract
         // mime type for the file if applicable.
         $file->extractMetadata();         
         $file->createDerivatives();
+        $file->storeFiles();
     }
 
     private function _getFile()

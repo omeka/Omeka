@@ -36,7 +36,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
     protected function _buildAdapter()
     {
         $this->_adapter = new Zend_File_Transfer_Adapter_Http($this->_adapterOptions);
-        $this->_adapter->setDestination(self::$_archiveDirectory);
+        $this->_adapter->setDestination(Omeka_Storage::getTempDir());
         
         // Add a filter to rename the file to something archive-friendly.
         $this->_adapter->addFilter(new Omeka_Filter_Filename);

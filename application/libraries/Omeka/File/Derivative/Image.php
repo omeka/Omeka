@@ -112,9 +112,9 @@ class Omeka_File_Derivative_Image
         // FIXME: all of these return the same value, or throw an exception if
         // failing.  Also, the value that is returned should be the full path to
         // the file (not just the filename).
-        self::createImage($path, FULLSIZE_DIR, $full_constraint);
-        self::createImage($path, THUMBNAIL_DIR, $thumb_constraint);
-        $imageName = self::createImage($path, SQUARE_THUMBNAIL_DIR, $square_thumbnail_constraint, "square");
+        self::createImage($path, $full_constraint, 'fullsize');
+        self::createImage($path, $thumb_constraint, 'thumbnail');
+        $imageName = self::createImage($path, $square_thumbnail_constraint, 'square_thumbnail');
 
         return $imageName;
     }
@@ -147,13 +147,13 @@ class Omeka_File_Derivative_Image
      * of square thumbnails, though a plugin could also take advantage of it.
      * @return string The filename of the generated image file.
      */
-    public static function createImage( $old_path, $new_dir, $constraint, $type=null) {
+    public static function createImage( $old_path, $constraint, $type=null) {
             
         $convertPath = self::_getPathToImageMagick();
 
 			$newFileName = self::_getFileName($old_path);
 
-            $new_path = rtrim($new_dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . $newFileName;
+            $new_path = dirname($old_path) . DIRECTORY_SEPARATOR . $type . '_' . $newFileName;
 
             $old_path = escapeshellarg( $old_path );
             $new_path = escapeshellarg( $new_path );
@@ -163,7 +163,7 @@ class Omeka_File_Derivative_Image
             }
 
             switch ($type) {
-            case "square":
+            case "square_thumbnail":
                 $command = join(' ', array(
                     $convertPath,
                     $old_path,

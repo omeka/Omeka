@@ -39,6 +39,14 @@ class File extends Omeka_Record
     public $has_derivative_image = '0';
     public $added;
     public $modified;
+    public $stored = '0';
+
+    static private $_pathsByType = array(
+        'archive' => 'files',
+        'fullsize' => 'fullsize',
+        'thumbnail' => 'thumbnails',
+        'square_thumbnail' => 'square_thumbnails'
+    );
 
     protected function _initializeMixins()
     {
@@ -97,13 +105,18 @@ class File extends Omeka_Record
     public function getPath($type='fullsize')
     {
         $fn = $this->getDerivativeFilename();
-        
-        $path = array('fullsize'         => FULLSIZE_DIR.DIRECTORY_SEPARATOR . $fn,
-                      'thumbnail'        => THUMBNAIL_DIR.DIRECTORY_SEPARATOR . $fn,
-                      'square_thumbnail' => SQUARE_THUMBNAIL_DIR.DIRECTORY_SEPARATOR . $fn,
-                      'archive'          => FILES_DIR.DIRECTORY_SEPARATOR . $this->archive_filename);
 
-        return $path[$type];
+        if ($this->stored) {
+            throw new Exception('Cannot get the local path for a stored file.');
+        }
+
+        $dir = Omeka_Storage::getTempDir();
+        
+        if ($type == 'archive') {
+            return $dir . '/' . $this->archive_filename;
+        } else {
+            return $dir . "/{$type}_{$fn}";
+        }
     }
     
     /**
@@ -113,14 +126,7 @@ class File extends Omeka_Record
      */
     public function getWebPath($type='fullsize')
     {
-        $fn = $this->getDerivativeFilename();
-        
-        $path = array('fullsize'         => WEB_FULLSIZE.'/' . $fn,
-                      'thumbnail'        => WEB_THUMBNAILS.'/' . $fn,
-                      'square_thumbnail' => WEB_SQUARE_THUMBNAILS.'/' . $fn,
-                      'archive'          => WEB_FILES.'/' . $this->archive_filename);
-
-        return $path[$type];
+        return Omeka_Storage::getAdapter()->getUri($this->getStoragePath($type));
     }
     
     public function getDerivativeFilename()
@@ -132,12 +138,12 @@ class File extends Omeka_Record
     
     public function hasThumbnail()
     {        
-        return file_exists($this->getPath('thumbnail'));
+        return $this->has_derivative_image;
     }
     
     public function hasFullsize()
     {
-        return file_exists($this->getPath('fullsize'));
+        return $this->has_derivative_image;
     }
     
     /**
@@ -209,15 +215,21 @@ class File extends Omeka_Record
     
     public function unlinkFile() 
     {
-        $files = array($this->getPath('fullsize'), 
-                       $this->getPath('thumbnail'), 
-                       $this->getPath('archive'),
-                       $this->getPath('square_thumbnail'));
+        $adapter = Omeka_Storage::getAdapter();
+
+        $files = array($this->getStoragePath('archive'));
+
+        if ($this->has_derivative_image) {
+            $types = self::$_pathsByType;
+            unset($types['archive']);
+
+            foreach($types as $type => $path) {
+                $files[] = $this->getStoragePath($type);
+            }
+        }
         
         foreach($files as $file) {
-            if (file_exists($file) && !is_dir($file)) {
-                unlink($file);
-            }
+            $adapter->delete($file);
         }
     }
     
@@ -249,4 +261,37 @@ class File extends Omeka_Record
         $extractor = new Omeka_File_Info($this);
         return $extractor->extract();
     }
-}       
+
+    public function storeFiles()
+    {
+        $adapter = Omeka_Storage::getAdapter();
+
+        $archiveFilename = $this->archive_filename;
+        $derivativeFilename = $this->getDerivativeFilename();
+        
+        $adapter->store($this->getPath('archive'), $this->getStoragePath('archive'));
+                
+        if ($this->has_derivative_image) {
+            $types = array_keys(self::$_pathsByType);
+
+            foreach ($types as $type) {
+                if ($type != 'archive') {
+                    $adapter->store($this->getPath($type), $this->getStoragePath($type));
+                }
+            }
+        }
+        $this->stored = '1';
+        $this->save();
+    }
+
+    public function getStoragePath($type = 'fullsize')
+    {
+        if ($type == 'archive') {
+            $fn = $this->archive_filename;
+        } else {
+            $fn = $this->getDerivativeFilename();
+        }
+
+        return self::$_pathsByType[$type] . "/$fn";
+    }
+}
