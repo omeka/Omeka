@@ -62,8 +62,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             Theme::PUBLIC_THEME_OPTION      => Installer_Default::DEFAULT_PUBLIC_THEME,
             Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
-            File::DISABLE_DEFAULT_VALIDATION_OPTION         => Installer_Default::DEFAULT_FILE_VALIDATION_DISABLED,
-            Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION => (string)!extension_loaded('fileinfo'),
+            File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
         ));
         try {
@@ -96,18 +95,17 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             Theme::PUBLIC_THEME_OPTION      => Installer_Default::DEFAULT_PUBLIC_THEME,
             Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
-            File::DISABLE_DEFAULT_VALIDATION_OPTION         => Installer_Default::DEFAULT_FILE_VALIDATION_DISABLED,
-            Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION => (string)!extension_loaded('fileinfo'),
+            File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(
             "INSERT INTO `test_options`",
             array(
-                1 => Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION, 
+                1 => File::DISABLE_DEFAULT_VALIDATION_OPTION,
                 2 => (string)!extension_loaded('fileinfo'),
-                3 => Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION,
-                4 => (string)!extension_loaded('fileinfo')        
+                3 => File::DISABLE_DEFAULT_VALIDATION_OPTION,
+                4 => (string)!extension_loaded('fileinfo')
             )
         ), "Should have inserted options into the database.");
     }
