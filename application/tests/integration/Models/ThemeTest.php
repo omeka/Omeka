@@ -53,8 +53,7 @@ class Models_ThemeTest extends Omeka_Test_AppTestCase
         $themeName = 'seasons';
         $optionName = 'logo';
         $fileName = 'bob.jpg';
-        $themeGetUploadedFileName = 'seasons_logo_bob.jpg';
-        $this->assertEquals($themeGetUploadedFileName, Theme::getUploadedFileName($themeName, $optionName, $fileName));
+        $this->assertRegExp('/[a-f0-9]{32}\.jpg/', Theme::getUploadedFileName($themeName, $optionName, $fileName));
     }
     
     public function testGetOptions()
