@@ -1,6 +1,6 @@
 <?php
 
-class Omeka_Storage_StorageTest extends PHPUnit_Framework_TestCase
+class Omeka_StorageTest extends PHPUnit_Framework_TestCase
 {
     public function testNoOptions()
     {
@@ -50,5 +50,30 @@ class Omeka_Storage_StorageTest extends PHPUnit_Framework_TestCase
     {
         $class = new stdClass;
         new Omeka_Storage(array('adapter' => $class));
+    }
+
+    /**
+     * Test using the magic calling for adapter methods with no adapter.
+     *
+     * @expectedException Omeka_Storage_Exception
+     */
+    public function testStoreWithNoAdapter()
+    {
+        $storage = new Omeka_Storage;
+        $storage->store('path', 'destination');
+    }
+
+    public function testTempDirDefault()
+    {
+        $storage = new Omeka_Storage;
+        $this->assertEquals(sys_get_temp_dir(), $storage->getTempDir());
+    }
+
+    public function testTempDirCustom()
+    {
+        $storage = new Omeka_Storage;
+        $customDir = '/';
+        $storage->setTempDir($customDir);
+        $this->assertEquals($customDir, $storage->getTempDir());
     }
 }
