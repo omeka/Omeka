@@ -117,10 +117,10 @@ class Omeka_Storage
      */
     public function setAdapter($adapter, array $options = array())
     {
-        if (is_string($adapter)) {
+        if (is_string($adapter) && class_exists($adapter)) {
             $adapter = new $adapter($options);
         }
-        
+
         if ($adapter instanceof Omeka_Storage_Adapter) {
             $this->_adapter = $adapter;
         } else {
