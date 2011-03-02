@@ -286,13 +286,15 @@ class File extends Omeka_Record
 
     public function getStoragePath($type = 'fullsize')
     {
+        $storage = $this->getStorage();
+        
         if ($type == 'archive') {
             $fn = $this->archive_filename;
         } else {
             $fn = $this->getDerivativeFilename();
         }
 
-        return self::$_pathsByType[$type] . "/$fn";
+        return $storage->getPathByType($fn, self::$_pathsByType[$type]);
     }
 
     public function setStorage($storage)

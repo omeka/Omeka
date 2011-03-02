@@ -170,4 +170,9 @@ class Omeka_Storage
         
         return $this->_tempDir;
     }
+
+    public function getPathByType($filename, $type = 'files')
+    {
+        return apply_filters('storage_path', $type . "/$filename", $filename, $type);
+    }
 }

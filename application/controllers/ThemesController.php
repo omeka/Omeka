@@ -16,12 +16,13 @@
  * @copyright Center for History and New Media, 2007-2010
  **/
 class ThemesController extends Omeka_Controller_Action
-{   
-    
+{
+    const THEME_UPLOAD_TYPE = 'theme_uploads';
+
     private $_themeOptions = array();
     private $_formValues = array();
     private $_themeName;
-    private $_form;     
+    private $_form;
          
     public function browseAction()
     {
@@ -131,11 +132,17 @@ class ThemesController extends Omeka_Controller_Action
             // set the form value to the old theme option
             $this->_formValues[$elementName] = $this->_themeOptions[$elementName];
         } else {
-            $newFile = $element->getFileName(null, false);
-            if (empty($newFile)) {
+            $path = $element->getFileName();
+            if (empty($path)) {
                 // Make sure null-like values are actually null when saved.
                 $newFile = null;
+            } else {
+                $storage = Zend_Registry::get('storage');             
+                $newFile = basename($path);
+                $storagePath = $storage->getPathByType($newFile, self::THEME_UPLOAD_TYPE);
+                $storage->store($path, $storagePath);
             }
+
             $this->_formValues[$elementName] = $newFile;
             $this->_unlinkOldFile($element);
         }
@@ -149,10 +156,9 @@ class ThemesController extends Omeka_Controller_Action
         }
         $oldFileName = $this->_themeOptions[$element->getName()];
         if ($oldFileName != $newFileName) {
-            $oldFilePath = THEME_UPLOADS_DIR . DIRECTORY_SEPARATOR . $oldFileName;
-            if (is_writable($oldFilePath) && is_file($oldFilePath)) {
-                unlink($oldFilePath);
-            }
+            $storage = Zend_Registry::get('storage');
+            $storagePath = $storage->getPathByType($oldFileName, self::THEME_UPLOAD_TYPE);
+            $storage->delete($storagePath);
         }
     }
 }
