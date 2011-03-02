@@ -16,6 +16,8 @@ require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Media.php';
  **/
 class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
 {
+    private $mimeTypeCallbackFired = false;
+
     public function setUp()
     {
         $this->view = $this->getMock('Omeka_View', array(), array(), '', false);
@@ -33,7 +35,8 @@ class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
         $this->file->expects($this->once())
                  ->method('getMimeType')
                  ->will($this->returnValue('image/jpeg'));
-        
+        $this->file->stored = '1';
+
         $this->helper->media($this->file);  
         $this->assertTrue($this->mimeTypeCallbackFired, "MIME type callback should have been fired.");                                                   
     }
