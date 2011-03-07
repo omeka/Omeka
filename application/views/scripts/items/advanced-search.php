@@ -61,7 +61,8 @@ $formAttributes['method'] = 'GET';
                 echo select(
                     array('name' => "advanced[$i][type]"),
                     array('contains' => 'contains', 
-                          'does not contain' => 'does not contain', 
+                          'does not contain' => 'does not contain',
+                          'is exactly' => 'is exactly',
                           'is empty' => 'is empty', 
                           'is not empty' => 'is not empty'),
                     @$rows['type']
