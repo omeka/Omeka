@@ -22,7 +22,6 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
             $this->markTestSkipped("Cannot test ThemesController without the 'seasons' theme.");
         }
         parent::setUp();   
-        set_option(Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION, '1');
         $this->_authenticateUser($this->_getDefaultUser());
     }
     
