@@ -4,7 +4,12 @@
 
 <?php if ( total_results() ): ?>
 
-<ul id="section-nav" class="navigation<?php if(@$_GET['view'] == 'detailed') echo ' detailed'; if (empty($_GET['view']) || @$_GET['view'] == 'simple') echo ' simple'; ?>">
+<?php 
+$browseView = 'simple';
+if (isset($_GET['view']) && $_GET['view'] == 'detailed'):
+    $browseView = 'detailed';
+endif; ?>
+<ul id="section-nav" class="navigation <?php echo $browseView; ?>">
 <?php
     $section_nav = array(
         'List View' => current_uri(array('view'=>'simple')), 
@@ -34,17 +39,7 @@
 <form id="items-browse" action="<?php echo html_escape(uri('items/power-edit')); ?>" method="post" accept-charset="utf-8">
 
 <fieldset id="view-choice">
-    <?php 
-        switch (@$_GET['view']) {
-            case 'detailed':
-                common('detailed-view', compact('items'), 'items');
-                break;
-            case 'simple':
-            default:
-                common('simple-view', compact('items'), 'items');
-                break;
-        }
-     ?>
+    <?php common("$browseView-view", compact('items'), 'items'); ?>
 </fieldset>
 <div class="pagination"><?php echo pagination_links(); ?></div>
 

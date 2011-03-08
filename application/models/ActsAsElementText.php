@@ -221,8 +221,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
             $this->loadElementsAndTexts();
         }
 
-        $texts = @$this->_textsByElementId[$element->id];
-        return !empty($texts) ? $texts : array();
+        if (array_key_exists($element->id, $this->_textsByElementId)) {
+            return $this->_textsByElementId[$element->id];
+        } else {
+            return array();
+        }
     }
     
     /**
