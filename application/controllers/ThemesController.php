@@ -114,9 +114,9 @@ class ThemesController extends Omeka_Controller_Action
         
         // If file input's related  hidden input has a non-empty value, 
         // then the user has NOT changed the file, so do NOT upload the file.
-        if (($hiddenFileElement = $this->_form->getElement(Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName))) {
-            $hiddenFileElementValue = trim($_POST[$hiddenFileElement->getName()]); 
-            if ($hiddenFileElementValue != "") {                              
+        if (($hiddenElement = $this->_form->getElement(Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName))) {
+            $hiddenName = $hiddenElement->getName();
+            if (!empty($_POST[$hiddenName])) {
                 // Ignore the file input element
                 $element->setIgnore(true);
             }
