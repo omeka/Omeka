@@ -83,7 +83,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @param array $options
      * @return Omeka_File_Ingest_Abstract
      */
-    final public function factory($adapterName, $item, $options = array())
+    final static public function factory($adapterName, $item, $options = array())
     {
         $className = 'Omeka_File_Ingest_' . $adapterName;
         if (class_exists($className, true)) {
