@@ -94,12 +94,15 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         
         // dispatch the controller action
         $this->dispatch('themes/config');
-        
-        foreach($themeOptions as $themeOptionName => $themeOptionValue) {
-            $this->assertEquals($themeOptionValue, get_theme_option($themeOptionName, $themeName));
+
+        $actualOptions = Theme::getOptions(self::THEME);
+        foreach($actualOptions as $name => $value) {
+            if (isset($themeOptions[$name])) {
+                $this->assertEquals($themeOptions[$name], $value, "Option '$name' was not correctly set.");
+            }
         }
         
         // verify that logo is empty
-        $this->assertEquals('', get_theme_option('logo', $themeName));
+        $this->assertEmpty(get_theme_option('logo', $themeName));
     }
 }
