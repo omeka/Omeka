@@ -93,26 +93,7 @@ class Omeka_File_Derivative_Image_Creator
             return false;
         }
                 
-        foreach ($this->_derivatives as $storageDir => $cmdArgs) {
-            $newFilePath = rtrim($storageDir, DIRECTORY_SEPARATOR ) 
-                         . DIRECTORY_SEPARATOR . $derivFilename;
-            $this->_createImage($fromFilePath, $newFilePath, $cmdArgs);
-        }
-        
-        return true;
-    }
-    
-    /**
-	 * @since 2.0
-	 * @param string $storageDir
-	 * @param integer|string $size If an integer, it is the size constraint for
-	 * the image, meaning it will have that maximum width or height, depending
-	 * on whether the image is landscape or portrait.  Otherwise, it is a string
-	 * of arguments to be passed to the ImageMagick convert utility.  MUST BE 
-	 * PROPERLY ESCAPED AS SHELL ARGUMENTS.
-	 */
-	public function addDerivative($storageDir, $size)
-	{
+        $storageDir = dirname($fromFilePath);
         if (!is_string($storageDir) || empty($storageDir)) {
             throw new InvalidArgumentException("Invalid derivative storage path given.");
         }
@@ -124,15 +105,34 @@ class Omeka_File_Derivative_Image_Creator
         if (!is_writable($storageDir)) {
             throw new RuntimeException("Derivative storage directory is not writable");
         }
+        foreach ($this->_derivatives as $storageType => $cmdArgs) {
+            $newFilePath = rtrim($storageDir, DIRECTORY_SEPARATOR ) 
+                         . DIRECTORY_SEPARATOR . $storageType . '_' . $derivFilename;
+            $this->_createImage($fromFilePath, $newFilePath, $cmdArgs);
+        }
         
+        return true;
+    }
+    
+    /**
+	 * @since 2.0
+	 * @param string $storageType
+	 * @param integer|string $size If an integer, it is the size constraint for
+	 * the image, meaning it will have that maximum width or height, depending
+	 * on whether the image is landscape or portrait.  Otherwise, it is a string
+	 * of arguments to be passed to the ImageMagick convert utility.  MUST BE 
+	 * PROPERLY ESCAPED AS SHELL ARGUMENTS.
+	 */
+	public function addDerivative($storageType, $size)
+	{
         if (empty($size)) {
             throw new InvalidArgumentException("Invalid derivative storage size given.");
         }
 
         if (is_numeric($size)) {
-            $this->_derivatives[$storageDir] = $this->_getDefaultResizeCmdArgs($size);
+            $this->_derivatives[$storageType] = $this->_getDefaultResizeCmdArgs($size);
         } else if (is_string($size)) {
-            $this->_derivatives[$storageDir] = $size;
+            $this->_derivatives[$storageType] = $size;
         } else {
             throw new InvalidArgumentException("Invalid derivative storage size given.");
         }

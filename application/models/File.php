@@ -251,8 +251,8 @@ class File extends Omeka_Record
         }
         $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
         
-        $creator->addDerivative(FULLSIZE_DIR, get_option('fullsize_constraint'));
-        $creator->addDerivative(THUMBNAIL_DIR, get_option('thumbnail_constraint'));
+        $creator->addDerivative('fullsize', get_option('fullsize_constraint'));
+        $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
         $this->_makeSquareThumbnails($creator);
         
         if ($creator->create($this->getPath('archive'), 
@@ -273,7 +273,7 @@ class File extends Omeka_Record
                     '-gravity center',
                     '-crop ' . escapeshellarg($constraint . 'x' . $constraint . '+0+0'),
                     '+repage'));
-        $creator->addDerivative(SQUARE_THUMBNAIL_DIR, $args);
+        $creator->addDerivative('square_thumbnail', $args);
     }
     
     /**
