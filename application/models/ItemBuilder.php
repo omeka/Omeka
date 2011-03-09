@@ -248,7 +248,7 @@ class ItemBuilder extends Omeka_Record_Builder
         }
     }
     
-    protected function _beforeBuild()
+    protected function _beforeBuild(Omeka_Record $record)
     {
         if ($this->_record->exists() 
         and array_key_exists(self::OVERWRITE_ELEMENT_TEXTS, $this->getRecordMetadata())) {
@@ -275,7 +275,7 @@ class ItemBuilder extends Omeka_Record_Builder
     /**
      * Add tags to the item.
      */
-    protected function _afterBuild()
+    protected function _afterBuild(Omeka_Record $record)
     {
         $metadata = $this->getRecordMetadata();
         // Must take place after save().

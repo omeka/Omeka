@@ -170,7 +170,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
             // them all (for the specific theme type, 'admin' or 'public').
             $pluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs(null);
             foreach ($pluginScriptDirs as $moduleName => $scriptPathSet) {
-                if ($scriptPathSet[$themeType]) {
+                if (array_key_exists($themeType, $scriptPathSet)) {
                     foreach ($scriptPathSet[$themeType] as $scriptPath) {
                         $this->_addPathToView($scriptPath);
                     }

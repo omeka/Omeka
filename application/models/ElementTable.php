@@ -158,9 +158,11 @@ class ElementTable extends Omeka_Db_Table
             $select->joinInner(array('rty'=> $db->RecordType),
                                  'rty.id = e.record_type_id',
                                  array('record_type_name'=>'rty.name'));
+            $where = array();
             foreach ($params['record_types'] as $recordTypeName) {
-                $select->orWhere('rty.name = ?', $recordTypeName);
+                $where[] = 'rty.name = ' . $db->quote($recordTypeName);
             }
+            $select->where('(' . join(' OR ', $where) . ')');
         }
         
         if (array_key_exists('sort', $params)) {
@@ -176,6 +178,16 @@ class ElementTable extends Omeka_Db_Table
         if (array_key_exists('element_name', $params)) {
             $select->where('e.name = binary ?', (string) $params['element_name']); 
         }
+
+        // Retrive results including, but not limited to, a specific item type.
+        if (array_key_exists('item_type_id', $params)) {
+            $select->joinLeft(array('ite' => $db->ItemTypesElements),
+                "ite.element_id = e.id", array());
+            $select->where('ite.item_type_id = ? OR ite.item_type_id IS NULL', 
+                (int)$params['item_type_id']);
+        } else if (array_key_exists('exclude_item_type', $params)) {
+            $select->where('es.name != ?', ELEMENT_SET_ITEM_TYPE);
+        }
     }
     
     /**
@@ -190,20 +202,21 @@ class ElementTable extends Omeka_Db_Table
     public function findPairsForSelectForm(array $options = array())
     {
         $db = $this->getDb();
-        $sql = "
-SELECT e.id AS element_id, e.name AS element_name, es.name AS element_set_name 
-FROM {$db->Element} AS e 
-JOIN {$db->ElementSet} AS es 
-ON e.element_set_id = es.id 
-JOIN {$db->RecordType} AS rt 
-ON es.record_type_id = rt.id 
-WHERE rt.name = 'Item' 
-OR rt.name = 'All' 
-ORDER BY element_set_name ASC, element_name ASC";
-        $elements = $this->fetchAll($sql);
+        // For backwards-compatibility.
+        if (!array_key_exists('record_types', $options)) {
+            $options['record_types'] = array('Item', 'All');
+        }
+        $select = $this->getSelectForFindBy($options);
+        $select->reset(Zend_Db_Select::COLUMNS);
+        $select->from(array(), array(
+            'id' => 'e.id', 
+            'name' => 'e.name',
+            'set_name' => 'es.name',
+        ));
+        $elements = $this->fetchAll($select);
         $options = array();
         foreach ($elements as $element) {
-            $options[$element['element_set_name']][$element['element_id']] = $element['element_name']; 
+            $options[$element['set_name']][$element['id']] = $element['name']; 
         }
         return $options;
     }

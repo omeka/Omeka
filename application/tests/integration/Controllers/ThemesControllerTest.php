@@ -14,32 +14,35 @@
  **/
 class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
 {   
-    const SEASONS_THEME = 'seasons';
+    const THEME = 'default';
     
     public function setUp()
     {
-        if (!is_dir(PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . self::SEASONS_THEME)) {
-            $this->markTestSkipped("Cannot test ThemesController without the 'seasons' theme.");
+        if (!is_dir(PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . self::THEME)) {
+            $this->markTestSkipped("Cannot test ThemesController without the '" . self::THEME . "' theme.");
         }
         parent::setUp();   
-        set_option(Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION, '1');
         $this->_authenticateUser($this->_getDefaultUser());
     }
     
     public function testDisplayConfigForm()
     {
-        set_option(Theme::PUBLIC_THEME_OPTION, self::SEASONS_THEME);
-        $this->request->setParam('name', self::SEASONS_THEME);
+        set_option(Theme::PUBLIC_THEME_OPTION, self::THEME);
+
+        $theme = Theme::getAvailable(self::THEME);
+        $name = $theme->title;
+
+        $this->request->setParam('name', self::THEME);
         $this->dispatch('themes/config');
         $this->assertController('themes');
         $this->assertAction('config');
-        $this->assertQueryContentContains('h2', 'Please Configure The "Seasons" Theme');
-        $this->assertQuery('select#style_sheet');
+        $this->assertQueryContentContains('h2', "Please Configure The \"$name\" Theme");
+        $this->assertQuery('input#logo');
     }
         
-    public function testConfigureSeasonsThemeWithNoLogoFileAndNoPreviousLogoFile()
+    public function testConfigureThemeWithNoLogoFileAndNoPreviousLogoFile()
     {
-        $themeName = self::SEASONS_THEME;
+        $themeName = self::THEME;
         $this->assertEquals('', (string)get_theme_option('logo', $themeName));
         
         // specify the files array for the post
@@ -51,12 +54,19 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
                   'tmp_name' => '',
                   'error' => 4,
                   'size' => 0
-                )
+              ),
+            'header_background' =>
+                array(
+                  'name' => '',
+                  'type' => '',
+                  'tmp_name' => '',
+                  'error' => 4,
+                  'size' => 0
+              )
         );
         
         // specify the theme options for the post
         $themeOptions = array(
-          'style_sheet' => 'winter',
           'custom_header_navigation' => '',
           'display_featured_item' => '1',
           'display_featured_collection' => '1',
@@ -71,6 +81,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         // specify other post data
         $otherPostData = array(
           'hidden_file_logo' => '',
+          'hidden_file_header_background' => '',  
           'MAX_FILE_SIZE' => '33554432',
           'submit' => 'Save Changes'
         );
@@ -83,12 +94,15 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         
         // dispatch the controller action
         $this->dispatch('themes/config');
-        
-        foreach($themeOptions as $themeOptionName => $themeOptionValue) {
-            $this->assertEquals($themeOptionValue, get_theme_option($themeOptionName, $themeName));
+
+        $actualOptions = Theme::getOptions(self::THEME);
+        foreach($actualOptions as $name => $value) {
+            if (isset($themeOptions[$name])) {
+                $this->assertEquals($themeOptions[$name], $value, "Option '$name' was not correctly set.");
+            }
         }
         
         // verify that logo is empty
-        $this->assertEquals('', get_theme_option('logo', $themeName));
+        $this->assertEmpty(get_theme_option('logo', $themeName));
     }
 }

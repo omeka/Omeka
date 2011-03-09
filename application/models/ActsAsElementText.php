@@ -221,8 +221,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
             $this->loadElementsAndTexts();
         }
 
-        $texts = @$this->_textsByElementId[$element->id];
-        return !empty($texts) ? $texts : array();
+        if (array_key_exists($element->id, $this->_textsByElementId)) {
+            return $this->_textsByElementId[$element->id];
+        } else {
+            return array();
+        }
     }
     
     /**
@@ -445,13 +448,34 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * Add element texts for a record based on a formatted array of values.
      * The array must be formatted as follows:
      * 
+     * <code>
      *              'Element Set Name' => 
      *                  array('Element Name' => 
      *                      array(array('text' => 'foo', 'html' => false)))
+     * </code>
+     *
+     * Since 1.4, the array can also be formatted thusly:
+     *
+     * <code>
+     *      array(
+     *          array('element_id' => 1,
+     *                'text' => 'foo',
+     *                'html' => false)
+     *      )
+     * </code>
      * 
      * @param array $elementTexts
      */
     public function addElementTextsByArray(array $elementTexts)
+    {
+        if (isset($elementTexts[0]['element_id'])) {
+            $this->_addTextsByElementId($elementTexts);
+        } else {
+            $this->_addTextsByElementName($elementTexts);
+        }
+    }
+
+    private function _addTextsByElementName(array $elementTexts)
     {
         foreach ($elementTexts as $elementSetName => $elements) {
             foreach ($elements as $elementName => $elementTexts) {
@@ -469,7 +493,23 @@ class ActsAsElementText extends Omeka_Record_Mixin
             }
         }
     }
-    
+
+    private function _addTextsByElementId(array $texts)
+    {
+        foreach ($texts as $key => $info) {
+            if (empty($info['text'])) {
+                continue;
+            }
+            $text = new ElementText;
+            $text->record_type_id = $this->getRecordTypeId();
+            $text->element_id = $info['element_id'];
+            $text->record_id = $this->_record->id;
+            $text->text = $info['text'];
+            $text->html = $info['html'];
+            $this->_textsToSave[] = $text;
+        }
+    }
+
     /**
      * The application flow is thus:
      *

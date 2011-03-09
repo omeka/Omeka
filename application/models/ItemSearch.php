@@ -80,6 +80,9 @@ class ItemSearch
                 case 'does not contain':
                     $predicate = "NOT LIKE " . $db->quote('%'.$value .'%');
                     break;
+                case 'is exactly':
+                    $predicate = ' = ' . $db->quote($value);
+                    break;
                 case 'is empty':    
                     $predicate = "IS NULL";
                     break;

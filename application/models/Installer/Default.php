@@ -23,7 +23,6 @@ class Installer_Default implements InstallerInterface
     
     const DEFAULT_PUBLIC_THEME = 'default';
     const DEFAULT_ADMIN_THEME = 'default';
-    const DEFAULT_FILE_VALIDATION_DISABLED = false;
     
     private $_db;
     private $_form;
@@ -111,8 +110,7 @@ class Installer_Default implements InstallerInterface
             Theme::PUBLIC_THEME_OPTION      => Installer_Default::DEFAULT_PUBLIC_THEME,
             Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
-            File::DISABLE_DEFAULT_VALIDATION_OPTION         => Installer_Default::DEFAULT_FILE_VALIDATION_DISABLED,
-            Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION => (string)!extension_loaded('fileinfo'),
+            File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
             'html_purifier_is_enabled' => 1,
             'html_purifier_allowed_html_elements' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()),

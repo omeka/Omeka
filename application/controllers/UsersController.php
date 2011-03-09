@@ -320,6 +320,9 @@ class UsersController extends Omeka_Controller_Action
         }
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {
+            if ($log = $this->_getLog()) {
+                $log->info("Failed login attempt from '{$_SERVER['REMOTE_ADDR']}'.");
+            }
             $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($authResult)));
             $this->flashError($this->view->errorMessage);
             return;   
@@ -393,5 +396,10 @@ class UsersController extends Omeka_Controller_Action
         ));
         fire_plugin_hook('admin_append_to_users_form', $form, $user);
         return $form;
+    }
+
+    private function _getLog()
+    {
+        return $this->getInvokeArg('bootstrap')->logger;
     }
 }

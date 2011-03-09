@@ -51,3 +51,9 @@ mail.transport.type = "Sendmail"
 ; mail.transport.ssl = ""       ; For SSL support, set to "ssl" or "tls"
 
 ; jobs.dispatcher = "Omeka_Job_Dispatcher_Adapter_Synchronous"
+
+; Sample S3 storage configuration
+; storage.adapter = "Omeka_Storage_Adapter_ZendS3"
+; storage.adapterOptions.accessKeyId =
+; storage.adapterOptions.secretAccessKey =
+; storage.adapterOptions.bucket =

@@ -244,7 +244,8 @@ class Theme
      */
     static public function getUploadedFileName($themeName, $optionName, $fileName)
     {
-        return trim(strtolower($themeName)) . '_' . trim($optionName) . '_' . trim($fileName);
+        $filter = new Omeka_Filter_Filename;
+        return $filter->renameFileForArchive($fileName);
     }
     
     /**

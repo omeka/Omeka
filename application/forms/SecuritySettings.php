@@ -51,15 +51,6 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
             )
         );
         
-        $this->addElement('checkbox', Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION,
-            array(
-                'label' => 'Enable Header Check For File Types',
-                'description' => 'Check this field if you would like to allow file types to be inferred from a file header check.',
-                'checked' => (boolean)get_option(Omeka_Validate_File_MimeType::HEADER_CHECK_OPTION),
-                
-            )
-        );
-
         $this->addElement('text', Omeka_Captcha::PUBLIC_KEY_OPTION,
             array(
                 'label' => 'ReCaptcha Public Key',

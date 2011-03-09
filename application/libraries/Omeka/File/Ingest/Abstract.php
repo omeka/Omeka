@@ -83,7 +83,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @param array $options
      * @return Omeka_File_Ingest_Abstract
      */
-    final public function factory($adapterName, $item, $options = array())
+    final static public function factory($adapterName, $item, $options = array())
     {
         $className = 'Omeka_File_Ingest_' . $adapterName;
         if (class_exists($className, true)) {
@@ -287,11 +287,15 @@ abstract class Omeka_File_Ingest_Abstract
     {
         $filter = new Omeka_Filter_Filename;
         $filename = $filter->renameFileForArchive($fromFilename);
-        if (!is_writable(self::$_archiveDirectory)) {
+
+        $storage = Zend_Registry::get('storage');
+        $dir = $storage->getTempDir();
+        
+        if (!is_writable($dir)) {
             throw new Omeka_File_Ingest_Exception('Cannot write to the following directory: "'
-                              . self::$_archiveDirectory . '"!');
+                              . $dir . '"!');
         }
-        return self::$_archiveDirectory . DIRECTORY_SEPARATOR . $filename;
+        return $dir . DIRECTORY_SEPARATOR . $filename;
     }
     
     /**

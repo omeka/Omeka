@@ -95,9 +95,9 @@ class Omeka_Controller_Flash
 	 */
 	public function setFlash($status_code, $msg, $priority=null)
 	{
-		$this->_priority = (!$priority) ? self::DISPLAY_NEXT : $priority;
+        self::$_priority = (!$priority) ? self::DISPLAY_NEXT : $priority;
 		
-		switch ($this->_priority) {
+		switch (self::$_priority) {
 			case self::DISPLAY_NOW:
 				$this->setTempFlash($status_code, $msg);
 				break;

@@ -32,14 +32,13 @@ if (!function_exists('custom_display_logo')) {
         if(function_exists('get_theme_option')) {
         
             $logo = get_theme_option('Logo');
-        
-            $logoPath = WEB_THEME_UPLOADS.DIRECTORY_SEPARATOR.$logo;
-        
-    	    $siteTitle = $logo ? '<img src="'.$logoPath.'" title="'.settings('site_title').'" />' : null;
-	
-    	    return $siteTitle;
+
+            if ($logo) {
+                $storage = Zend_Registry::get('storage');
+                $uri = $storage->getUri($storage->getPathByType($logo, 'theme_uploads'));
+                return '<img src="'.$uri.'" title="'.settings('site_title').'" />';
+            }
         }
-    
         return null;
     }
 }
@@ -110,7 +109,8 @@ if (!function_exists('custom_header_image')) {
     function custom_header_image()
     {
         if(function_exists('get_theme_option') && $headerBg = get_theme_option('Header Image')) {
-            $headerBg = WEB_THEME_UPLOADS.DIRECTORY_SEPARATOR.$headerBg;
+            $storage = Zend_Registry::get('storage');
+            $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
             $html = '<div id="header-image"><img src="'.$headerBg.'" /></div>';
             return $html;	
         }
