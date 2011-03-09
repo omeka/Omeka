@@ -12,8 +12,6 @@
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
-<?php echo $this->headLink(); ?>
-<?php echo $this->headScript(); ?>
 <!-- Stylesheets -->
 <?php display_css(); ?>
 
