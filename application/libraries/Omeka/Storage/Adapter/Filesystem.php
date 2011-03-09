@@ -20,14 +20,14 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
      * 
      * @var string
      */
-    private $_localDir = ARCHIVE_DIR;
+    private $_localDir;
 
     /**
      * Web-accesible path that corresponds to $_localDir.
      *
      * @var string
      */
-    private $_webDir = WEB_ARCHIVE;
+    private $_webDir;
 
     /**
      * Set options for the storage adapter.
@@ -46,6 +46,12 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
                 $this->_webDir = $value;
                 break;
             }
+        }
+        if (!$this->_localDir && defined('ARCHIVE_DIR')) {
+            $this->_localDir = ARCHIVE_DIR;
+        }
+        if (!$this->_webDir && defined('WEB_ARCHIVE')) {
+            $this->_localDir = WEB_ARCHIVE;
         }
     }
 
