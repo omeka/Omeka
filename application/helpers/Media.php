@@ -620,7 +620,7 @@ class Omeka_View_Helper_Media
             $alt = $fileDescription;            
         } elseif ($fileTitle = item_file('Dublin Core', 'Title', array(), $file)) {
             $alt = $fileTitle;            
-        } else if ($item) {
+        } else if (isset($item)) {
             $alt = item('Dublin Core', 'Title', array(), $item);           
         }
         $props['alt'] = $alt;
