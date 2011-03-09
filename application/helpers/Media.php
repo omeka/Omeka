@@ -505,12 +505,6 @@ class Omeka_View_Helper_Media
      **/
     public function media($file, array $props=array(), $wrapperAttributes = array())
     {
-        // Stop immediately if the file's not stored, we won't be able
-        // to get URIs, etc.
-        if (!$file->stored) {
-            return;
-        }
-
         $mimeType = $this->getMimeFromFile($file);
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
