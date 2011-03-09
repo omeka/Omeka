@@ -125,6 +125,11 @@ class Omeka_File_Derivative_Image_Creator
 	 */
 	public function addDerivative($storageType, $size)
 	{
+        $alnumValidator = new Zend_Validate_Alnum();
+        if (!$alnumValidator->isValid($storageType)) {
+            throw new InvalidArgumentException("Invalid derivative type given: "
+                . "must be alphanumeric string.");
+        }
         if (empty($size)) {
             throw new InvalidArgumentException("Invalid derivative storage size given.");
         }

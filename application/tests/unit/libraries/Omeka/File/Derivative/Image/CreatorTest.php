@@ -20,10 +20,7 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
         $this->invalidFile = '/foo/bar/baz.html';
         $this->validFilePath = dirname(__FILE__) . '/_files/valid-image.jpg';
         $this->validMimeType = 'image/jpeg';
-        $this->fullsizeImgPath = dirname(__FILE__) . '/_files/fullsize';
-        if (!is_dir($this->fullsizeImgPath)) {
-            mkdir($this->fullsizeImgPath);
-        }
+        $this->fullsizeImgType = 'fullsize';
         $this->derivativeFilename = 'valid-image_deriv.jpg';
         // If we set up a test log, then log the ImageMagick commands instead
         // of executing via the commandline.
@@ -79,24 +76,25 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
         $this->fail("Failed to throw an exception when given an invalid original file.");
     }
     
-    public function testAddDerivativeWithInvalidDestPath()
+    public function testAddDerivativeWithInvalidDerivativeType()
     {
         $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
         try {
             $creator->addDerivative("/foo/bar/baz", 20);
         } catch (Exception $e) {
-            $this->assertContains("directory does not exist", $e->getMessage());
+            $this->assertContains("Invalid derivative type", $e->getMessage());
             return;
         }
-        $this->fail("Failed to throw exception when given invalid storage directory for image derivatives.");
+        $this->fail("Failed to throw exception when given invalid type name for image derivatives.");
     }
 
     public function testCreateWithDerivativeImgSize()
     {
         $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
-        $creator->addDerivative($this->fullsizeImgPath, 10);
+        $creator->addDerivative($this->fullsizeImgType, 10);
         $creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);
-        $newFilePath = $this->fullsizeImgPath . '/' . $this->derivativeFilename;
+        $newFilePath = dirname($this->validFilePath) . '/' 
+            . $this->fullsizeImgType . '_' . $this->derivativeFilename;
         $this->assertTrue(file_exists($newFilePath));
         unlink($newFilePath);
     }
