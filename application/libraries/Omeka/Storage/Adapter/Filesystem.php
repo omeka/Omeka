@@ -66,7 +66,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
      */
     public function canStore()
     {
-        return is_writable($this->$_localDir);
+        return is_writable($this->_localDir);
     }
 
     /**
