@@ -72,20 +72,26 @@ class ItemSearch
             // 
             //     )
 
+            $type = $v['type'];
+
+            // If this is set we join this subquery with NOT IN
+            // instead of IN. Predicates that set $negate to true should
+            // also fall through to their non-negated counterpart in
+            // the switch statement.
+            $negate = false;
+
             //Determine what the WHERE clause should look like
-            switch ($v['type']) {
+            switch ($type) {
+                case 'does not contain':
+                    $negate = true;
                 case 'contains':
                     $predicate = "LIKE " . $db->quote('%'.$value .'%');
-                    break;
-                case 'does not contain':
-                    $predicate = "NOT LIKE " . $db->quote('%'.$value .'%');
                     break;
                 case 'is exactly':
                     $predicate = ' = ' . $db->quote($value);
                     break;
-                case 'is empty':    
-                    $predicate = "IS NULL";
-                    break;
+                case 'is empty':
+                    $negate = true;
                 case 'is not empty':
                     $predicate = "IS NOT NULL";
                     break;
@@ -108,7 +114,11 @@ class ItemSearch
                         AND etx.element_id = " . $db->quote($elementId);
             
             // Each advanced search mini-form represents another subquery
-           $select->where('i.id IN ( ' . (string) $subQuery . ' )'); 
+            if ($negate) {
+                $select->where('i.id NOT IN ( ' . (string) $subQuery . ' )');
+            } else {
+                $select->where('i.id IN ( ' . (string) $subQuery . ' )');
+            }
 
         }
 
