@@ -38,11 +38,11 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
     {
         foreach ($options as $key => $value) {
             switch ($key) {
-                case 'local_dir':
+                case 'localDir':
                 $this->_localDir = $value;
                 break;
 
-                case 'web_dir':
+                case 'webDir':
                 $this->_webDir = $value;
                 break;
             }
