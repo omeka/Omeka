@@ -105,9 +105,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
      */
     private function _processFileElement($element)
     {
-        // set all the file elements destination directories
-        $storage = Zend_Registry::get('storage')->getTempDir();
-        $element->setDestination(THEME_UPLOADS_DIR);
+        $element->setDestination(Zend_Registry::get('storage')->getTempDir());
         $fileName = get_theme_option($element->getName(), $this->getThemeName());
 
         // Add extension/mimetype filtering.
