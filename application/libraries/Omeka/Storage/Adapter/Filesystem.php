@@ -39,19 +39,23 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
         foreach ($options as $key => $value) {
             switch ($key) {
                 case 'localDir':
-                $this->_localDir = $value;
-                break;
+                    $this->_localDir = $value;
+                    break;
 
                 case 'webDir':
-                $this->_webDir = $value;
-                break;
+                    $this->_webDir = $value;
+                    break;
+
+                default:
+                    throw new Omeka_Storage_Exception("Invalid option: '$key'");
+                    break;
             }
         }
         if (!$this->_localDir && defined('ARCHIVE_DIR')) {
             $this->_localDir = ARCHIVE_DIR;
         }
         if (!$this->_webDir && defined('WEB_ARCHIVE')) {
-            $this->_localDir = WEB_ARCHIVE;
+            $this->_webDir = WEB_ARCHIVE;
         }
     }
 
@@ -77,7 +81,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
      */
     public function store($source, $dest)
     {
-        $status = rename($source, $this->_getAbsPath($dest));
+        $status = $this->_rename($source, $this->_getAbsPath($dest));
 
         if(!$status) {
             throw new Omeka_Storage_Exception('Unable to store file.');
@@ -92,7 +96,8 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
      */
     public function move($source, $dest)
     {
-        $status = rename($this->_getAbsPath($source), $this->_getAbsPath($dest));
+        $status = $this->_rename($this->_getAbsPath($source), 
+            $this->_getAbsPath($dest));
 
         if(!$status) {
             throw new Omeka_Storage_Exception('Unable to move file.');
@@ -106,6 +111,11 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
      */
     public function delete($path)
     {
+        $absPath = $this->_getAbsPath($path);
+        if (!is_writable($absPath)) {
+            throw new Omeka_Storage_Exception('Unable to delete file (does not '
+                . 'exist or is not writable).');
+        }
         $status = unlink($this->_getAbsPath($path));
 
         if(!$status) {
@@ -125,6 +135,17 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
     }
 
     /**
+     * Return the options set by the adapter.  Used primarily for testing.
+     */
+    public function getOptions()
+    {
+        return array(
+            'localDir' => $this->_localDir,
+            'webDir' => $this->_webDir,
+        );
+    }
+
+    /**
      * Convert a "storage" path to an absolute filesystem path.
      *
      * @param string $path Storage path.
@@ -133,5 +154,19 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
     private function _getAbsPath($path)
     {
         return $this->_localDir . '/' . $path;
+    }
+
+    /**
+     * @throws Omeka_Storage_Exception
+     * @return boolean
+     */
+    private function _rename($source, $dest)
+    {
+        $destDir = dirname($dest);
+        if (!is_writable($destDir)) {
+            throw new Omeka_Storage_Exception("Destination directory is not "
+                . "writable: '$destDir'.");
+        }
+        return rename($source, $dest);
     }
 }
