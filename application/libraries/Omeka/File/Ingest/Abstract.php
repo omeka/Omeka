@@ -41,7 +41,7 @@ abstract class Omeka_File_Ingest_Abstract
      *
      * @var string  
      */
-    protected static $_archiveDirectory = FILES_DIR;
+    protected static $_archiveDirectory;
     
     /**
      * @var Item
@@ -63,6 +63,13 @@ abstract class Omeka_File_Ingest_Abstract
      */
     private $_validators = array();
             
+    public function __construct()
+    {
+        if (defined('FILES_DIR')) {
+            $this->_archiveDirectory = FILES_DIR;
+        }
+    }
+
     
     /**
      * Set the item to use as a target when ingesting files.
