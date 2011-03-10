@@ -39,6 +39,7 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
      *          <li>id</li>
      *          <li>item type name</li>
      *          <li>date added</li>
+     *          <li>date modified</li>
      *          <li>collection name</li>
      *          <li>featured</li>
      *          <li>public</li>

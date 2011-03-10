@@ -240,32 +240,36 @@
   * account for multiple creators or titles. 
   *
   * @since  0.10
+  * @param Item|null Check for this specific item record (current item if null).
   * @return string
   **/
- function item_citation()
+ function item_citation($item = null)
  {
-     $creator    = strip_formatting(item('Dublin Core', 'Creator'));
-     $title      = strip_formatting(item('Dublin Core', 'Title'));
+     if(!$item) {
+         $item = get_current_item();
+     }
+     
+     $creator    = strip_formatting(item('Dublin Core', 'Creator', array(), $item));
+     $title      = strip_formatting(item('Dublin Core', 'Title', array(), $item));
      $siteTitle  = strip_formatting(settings('site_title'));
-     $itemId     = item('id');
+     $itemId     = item('id', null, array(), $item);
      $accessDate = date('F j, Y');
-     $uri        = html_escape(abs_uri());
+     $uri        = html_escape(abs_item_uri($item));
 
      $cite = '';
      if ($creator) {
          $cite .= "$creator, ";
      }
      if ($title) {
-         $cite .= "\"$title,\" ";
+         $cite .= "&#8220;$title,&#8221; ";
      }
      if ($siteTitle) {
-         $cite .= "in $siteTitle, ";
+         $cite .= "<em>$siteTitle</em>, ";
      }
-     $cite .= "Item #$itemId, ";
-     $cite .= "$uri ";
-     $cite .= "(accessed $accessDate).";
+     $cite .= "accessed $accessDate, ";
+     $cite .= "$uri.";
 
-     return $cite;
+     return apply_filters('item_citation', $cite);
  }
  
  /**
