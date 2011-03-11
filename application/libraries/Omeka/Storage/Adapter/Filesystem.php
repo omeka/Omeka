@@ -59,6 +59,25 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
         }
     }
 
+    public function setUp()
+    {
+        foreach (array('thumbnails', 
+                       'square_thumbnails', 
+                       'fullsize', 
+                       'files',
+                       'theme_uploads') as $archiveDirName) {
+            $dirToCreate = $this->_localDir . '/' . $archiveDirName;
+            if (is_dir($dirToCreate)) {
+                continue;
+            }
+            $made = mkdir($dirToCreate, 0770, true);
+            if (!$made || !is_readable($dirToCreate)) {
+                throw new Omeka_Storage_Exception("Cannot create directory: "
+                    . "'$dirToCreate'");
+            }
+        }
+    }
+
     /**
      * Check whether the adapter is set up correctly to be able to store
      * files.
@@ -143,6 +162,11 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
             'localDir' => $this->_localDir,
             'webDir' => $this->_webDir,
         );
+    }
+
+    public function setLocalDir($dir)
+    {
+        $this->_localDir = $dir;
     }
 
     /**

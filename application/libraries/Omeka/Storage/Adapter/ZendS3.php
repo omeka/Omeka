@@ -58,6 +58,11 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         
     }
 
+    public function setUp()
+    {
+        // Required by interface but does nothing, for the time being.
+    }
+
     public function canStore()
     {
         $bucket = $this->_getBucketName();
