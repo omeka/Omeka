@@ -23,6 +23,17 @@ interface Omeka_Storage_Adapter
     function __construct(array $options = null);
 
     /**
+     * Follow any necessary steps to set up storage prior to use.
+     *
+     * E.g. for the filesystem adapter, this would include creating any 
+     * directories that did not already exist.  For S3, it might involve 
+     * creating a new bucket if it did not exist.
+     *
+     * @throws Omeka_Storage_Exception
+     */
+    function setUp();
+
+    /**
      * Check whether the adapter is set up correctly to be able to store
      * files.
      *
