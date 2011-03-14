@@ -35,6 +35,8 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
         Omeka_Context::getInstance()->setAcl($acl);
         
         $this->assertContains("WHERE (c.public = 1)", (string)$this->table->getSelect());
+
+        Omeka_Context::resetInstance();
     }
     
     public function testSearchFilters()
