@@ -50,7 +50,7 @@ $tabs = apply_filters('admin_items_form_tabs', $tabs, $item);
 <ul id="section-nav" class="navigation tabs">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
         <?php if (!empty($tabContent)): // Don't display tabs with no content. '?>
-            <li><a href="#<?php echo html_escape(text_to_id($tabName) . '-metadata'); ?>"><?php echo html_escape($tabName); ?></a></li>
+            <li><a href="#<?php echo html_escape(text_to_id($tabName) . '-metadata'); ?>"><?php echo html_escape(__($tabName)); ?></a></li>
         <?php endif; ?>
     <?php endforeach; ?>
 </ul>

@@ -41,9 +41,9 @@ class SettingsController extends Omeka_Controller_Action
         if (isset($_POST['settings_submit'])) {
             if ($form->isValid($_POST)) {
                 $this->_setOptions($form);
-                $this->flashSuccess('The general settings have been updated.');
+                $this->flashSuccess(__('The general settings have been updated.'));
             } else {
-                $this->flashError('There were errors found in your form. Please edit and resubmit.');
+                $this->flashError(__('There were errors found in your form. Please edit and resubmit.'));
             }
         }
     }
@@ -67,8 +67,8 @@ class SettingsController extends Omeka_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         $isValid = $this->_isValidImageMagickPath($imPath);
         $this->getResponse()->setBody($isValid 
-                                    ? '<div class="im-success">Works</div>' 
-                                    : '<div class="im-failure">Fails</div>');
+                                    ? '<div class="im-success">' . __('Works') . '</div>' 
+                                    : '<div class="im-failure">' . __('Fails') . '</div>');
     }
     
     /**

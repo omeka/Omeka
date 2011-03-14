@@ -107,7 +107,7 @@ class File extends Omeka_Record
         $fn = $this->getDerivativeFilename();
 
         if ($this->stored) {
-            throw new Exception('Cannot get the local path for a stored file.');
+            throw new Exception(__('Cannot get the local path for a stored file.'));
         }
 
         $dir = $this->getStorage()->getTempDir();

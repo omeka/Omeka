@@ -2,14 +2,14 @@
     <thead>
         <tr>
         <?php echo browse_headings(array(
-            'ID' => 'id',
-            'Title' => 'Dublin Core,Title',
-            'Type' => null,
-            'Creator' => 'Dublin Core,Creator',
-            'Date Added' => 'added',
-            'Public' => 'public',
-            'Featured' => 'featured',
-            'Edit?' => null)); ?>
+            __('ID') => 'id',
+            __('Title') => 'Dublin Core,Title',
+            __('Type') => null,
+            __('Creator') => 'Dublin Core,Creator',
+            __('Date Added') => 'added',
+            __('Public') => 'public',
+            __('Featured') => 'featured',
+            __('Edit') => null)); ?>
         </tr>
     </thead>
     <tbody>
@@ -45,7 +45,7 @@
     </td>
     <td>
     <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
-    <?php echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?>
+    <?php echo link_to_item(__('Edit'), array('class'=>'edit'), 'edit'); ?>
     <?php endif; ?>
     </td>
 </tr>

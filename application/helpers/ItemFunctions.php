@@ -57,7 +57,7 @@
  function display_random_featured_item($withImage=false)
  {
     $featuredItem = random_featured_item($withImage);
- 	$html = '<h2>Featured Item</h2>';
+ 	$html = '<h2>' . __('Featured Item') . '</h2>';
  	if ($featuredItem) {
  	    $itemTitle = item('Dublin Core', 'Title', array(), $featuredItem);
         
@@ -70,7 +70,7 @@
  	       $html .= '<p class="item-description">' . $itemDescription . '</p>';
        }
  	} else {
- 	   $html .= '<p>No featured items are available.</p>';
+ 	   $html .= '<p>' . __('No featured items are available.') . '</p>';
  	}
 
      return $html;
@@ -86,7 +86,7 @@
  function get_current_item()
  {
      if (!($item = __v()->item)) {
-         throw new Exception('An item has not been set to be displayed on this theme page!  Please see Omeka documentation for details.');
+         throw new Exception(__('An item has not been set to be displayed on this theme page! Please see Omeka documentation for details.'));
      }
 
      return $item;

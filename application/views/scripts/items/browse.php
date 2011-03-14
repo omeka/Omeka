@@ -1,8 +1,10 @@
-<?php head(array('title'=>'Browse Items','bodyid'=>'items','bodyclass' => 'browse')); ?>
+<?php
+$pageTitle = __('Browse Items');
+head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse')); ?>
 
 	<div id="primary">
 		
-		<h1>Browse Items (<?php echo total_results(); ?> total)</h1>
+		<h1><?php echo $pageTitle;?> <?php echo __('(%s total)', total_results()); ?></h1>
 
 		<ul class="items-nav navigation" id="secondary-nav">
             <?php echo custom_nav_items(); ?>
@@ -33,7 +35,7 @@
 				<?php endif; ?>
 
 				<?php if (item_has_tags()): ?>
-    				<div class="tags"><p><strong>Tags:</strong>
+    				<div class="tags"><p><strong><?php echo __('Tags'); ?>:</strong>
     				<?php echo item_tags_as_string(); ?></p>
     				</div>
 				<?php endif; ?>

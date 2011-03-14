@@ -1,4 +1,5 @@
 <?php
+
     $requiredPluginDirNames = $plugin->getRequiredPlugins();
     $missingPluginNames = array();
     foreach($requiredPluginDirNames as $requiredPluginDirName):
@@ -23,20 +24,17 @@
     <td>
         <?php if ($plugin->isInstalled() && $plugin->isActive() && !$plugin->isLoaded()): ?>
                 <div class="warnings">
-                    <strong>Warning! The <?php echo $plugin->getDisplayName(); ?> plugin could not be loaded for the following reasons:</strong>
+                    <strong><?php echo __('Warning! The %s plugin could not be loaded for the following reasons:', $plugin->getDisplayName()); ?></strong>
                     <?php if (!$plugin->meetsOmekaMinimumVersion() || $missingPluginNames): ?>
                         <ul>
                             <?php if (!$plugin->meetsOmekaMinimumVersion()): ?>
-                                <li class="omeka-minimum-version">The '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin requires at least Omeka <?php echo $plugin->getMinimumOmekaVersion(); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</li>
+                                <li class="omeka-minimum-version"><?php echo __('This version of %1$s requires at least Omeka %2$s. You are using Omeka version %3$s.', html_escape($plugin->getDisplayName()), html_escape($plugin->getMinimumOmekaVersion()), OMEKA_VERSION); ?></li>
                             <?php endif; ?>
 
                             <?php if ($missingPluginNames): ?>
                                 <li class="required-plugins">
-                                    The '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin requires 
-                                      the following plugins to be 
-                                      installed, activated, and loaded: 
-                                      <?php echo html_escape(implode_array_to_english($missingPluginNames)); ?> 
-                                      plugin<?php if (count($missingPluginNames) > 1) { echo 's';} ?>.
+                                    <?php echo __('The %s plugin requires the following plugins to be installed, activated, and loaded:', html_escape($plugin->getDisplayName())); ?> 
+                                      <?php echo html_escape(implode (', ', $missingPluginNames)); ?>.
                                 </li>
                             <?php endif; ?>
                         </ul>
@@ -51,18 +49,18 @@
                 echo html_escape($plugin->getDisplayName());
             endif; 
             if (has_permission('Plugins', 'config') && $plugin->hasConfig() ): ?>
-                <a href="<?php echo html_escape(uri('plugins/config', array('name'=>$plugin->getDirectoryName()))); ?>" class="configure-button button">Configure</a>
+                <a href="<?php echo html_escape(uri('plugins/config', array('name'=>$plugin->getDirectoryName()))); ?>" class="configure-button button"><?php echo __('Configure'); ?></a>
             <?php endif; ?>
         </p>           
         
         <?php 
             $pluginMetadata = array();
             if ($plugin->getIniVersion()):
-                $pluginMetadata[] = 'Version ' . html_escape(trim($plugin->getIniVersion()));
+                $pluginMetadata[] = __('Version') . ' ' . html_escape(trim($plugin->getIniVersion()));
             endif;
         
             if ($plugin->getAuthor()):
-                $pluginMetadata[] = 'By ' . html_escape(trim($plugin->getAuthor()));
+                $pluginMetadata[] = __('By') . ' ' . html_escape(trim($plugin->getAuthor()));
             endif;
             if (!empty($pluginMetadata)): ?>
                 <p class="plugin-meta"><?php echo implode(' | ', $pluginMetadata); ?></p>
@@ -73,10 +71,10 @@
 	    <?php endif; ?>
 	    
 	    <?php if ($plugin->hasNewVersion()): ?>    
-	        <p class="notice plugin-upgrade"><strong>Notice:</strong> You have a new version of <?php echo html_escape($plugin->getDisplayName()); ?>. Please upgrade!</p>
+	        <p class="notice plugin-upgrade"><strong><?php echo __('Notice:'); ?></strong> <?php echo __('You have a new version of %s. Please upgrade!', html_escape($plugin->getDisplayName())); ?></p>
 	    <?php endif; ?>
 	    <?php if ($versionCheck && !$plugin->meetsOmekaTestedUpToVersion()): ?>
-            <p class="notice omeka-tested-up-to"><strong>Notice:</strong> This version of the '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin has only been tested up to Omeka <?php echo html_escape($plugin->getTestedUpToOmekaVersion()); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</p>
+            <p class="notice omeka-tested-up-to"><strong><?php echo __('Notice:'); ?></strong> <?php echo __('This version of %1$s has only been tested up to Omeka %2$s. You are using Omeka version %3$s', html_escape($plugin->getDisplayName()), html_escape($plugin->getTestedUpToOmekaVersion()), OMEKA_VERSION); ?>.</p>
         <?php endif; ?>
         </div>
     </td>
@@ -87,7 +85,7 @@
             <?php if (has_permission('Plugins', 'upgrade')): ?>
                 <form action="<?php echo html_escape(uri('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
                     <div>
-                        <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Upgrade</button>
+                        <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>"><?php echo __('Upgrade'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
                     </div>
                 </form>
@@ -97,7 +95,7 @@
             <?php if (has_permission('Plugins', 'activate')): ?>
                 <form action="<?php echo html_escape(uri('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
                     <div>
-                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?> submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>"><?php echo ($plugin->isActive()) ? 'Deactivate' : 'Activate'; ?></button>
+                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?> submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>"><?php echo ($plugin->isActive()) ? __('Deactivate') : __('Activate'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
                     </div>
                 </form>                
@@ -108,7 +106,7 @@
                 'controller'=>'plugins', 
                 'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
                 <div>
-                    <button name="uninstall" type="submit" class="uninstall submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Uninstall</button>
+                    <button name="uninstall" type="submit" class="uninstall submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>"><?php echo __('Uninstall'); ?></button>
                     <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
                 </div>
             </form>                
@@ -117,7 +115,7 @@
     <?php if (has_permission('Plugins', 'install')): ?>
         <form action="<?php echo html_escape(uri('plugins/install')); ?>" method="post" accept-charset="utf-8">
                 <div>
-                    <button name="install" type="submit" class="submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Install</button>
+                    <button name="install" type="submit" class="submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>"><?php echo __('Install'); ?></button>
                     <input type="hidden" name="name" value="<?php echo html_escape( $plugin->getDirectoryName()); ?>" />
                 </div>
         </form> 

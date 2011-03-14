@@ -14,7 +14,7 @@ if (!function_exists('show_untitled_items')) {
         // is empty.
         $prepTitle = trim(strip_formatting($title));
         if (empty($prepTitle)) {
-            return '[Untitled]';
+            return __('[Untitled]');
         }
         return $title;
     }
@@ -57,7 +57,7 @@ if (!function_exists('custom_show_item_metadata')) {
     	        $field = trim($field);
     	        if (element_exists('Dublin Core', $field)) {
         	        if ($fieldValues = item('Dublin Core', $field, 'all')) {
-        	            $html .= '<h3>'.$field.'</h3>';
+        	            $html .= '<h3>'.__($field).'</h3>';
         	            foreach ($fieldValues as $key => $fieldValue) {
         	                if (!item_field_uses_html('Dublin Core', $field, $key)) {
         	                    $fieldValue = nls2p($fieldValue);
@@ -99,7 +99,7 @@ if (!function_exists('custom_public_nav_header')) {
             }
             return nav($navArray);
         } else {
-            $navArray = array('Browse Items' => uri('items'), 'Browse Collections'=>uri('collections'));
+            $navArray = array(__('Browse Items') => uri('items'), __('Browse Collections') =>uri('collections'));
             return public_nav_main($navArray);
         }
     }
@@ -123,7 +123,7 @@ if (!function_exists('custom_nav_items')) {
     function custom_nav_items($navArray = array())
     {
         if (!$navArray) {
-            $navArray = array('Browse All' => uri('items'), 'Browse by Tag' => uri('items/tags'));
+            $navArray = array(__('Browse All') => uri('items'), __('Browse by Tag') => uri('items/tags'));
         }
     
         // Check to see if the function public_nav_items, introduced in Omeka 1.3, exists.

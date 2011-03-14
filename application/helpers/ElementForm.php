@@ -48,7 +48,7 @@ class Omeka_View_Helper_ElementForm
         $html .= $this->_displayFormFields($extraFieldCount);
         $html .= '</div>'; // Close 'inputs' div
     	
-        $html .= $this->view->formSubmit('add_element_' . $this->_element['id'], 'Add Input', 
+        $html .= $this->view->formSubmit('add_element_' . $this->_element['id'], __('Add Input'), 
     	    array('class'=>'add-element'));
         
         $html .= $this->_displayTooltip();
@@ -284,8 +284,7 @@ class Omeka_View_Helper_ElementForm
                     $value,
                     array());
             default:
-                throw new Exception('Cannot display a form input for "' . 
-                $element['name'] . '" if element type name is not given!');
+                throw new Exception(__('Cannot display a form input for "%s" if element type name is not given!', $element['name']));
                 break;
         }
         
@@ -340,10 +339,10 @@ class Omeka_View_Helper_ElementForm
         $startStem = $inputNameStem . '[start]';
         $endStem = $inputNameStem . '[end]';
         
-        $html .= '<span>From</span>';
+        $html .= '<span>'. __('From') . '</span>';
         $html .= $this->_dateField($startStem, $startDate, $options);
         
-        $html .= '<span>To</span>';
+        $html .= '<span>' . __('To') . '</span>';
         $html .= $this->_dateField($endStem, $endDate, $options);
         
         $html .= '</div>';
@@ -356,7 +355,7 @@ class Omeka_View_Helper_ElementForm
         $isHtml = $this->_getHtmlFlagForField($index);
         
         // Add a checkbox for the 'html' flag (always for any field)
-        $html = '<label class="use-html">Use HTML ';
+        $html = '<label class="use-html">' . __('Use HTML');
         $html .= $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
         $html .= '</label>';
         
@@ -373,14 +372,14 @@ class Omeka_View_Helper_ElementForm
     {
         // Tooltips should be in a <span class="tooltip">
         $html = '<p class="explanation">';
-    	$html .= $this->_getFieldDescription() .'</p>';
+    	$html .= __($this->_getFieldDescription()) .'</p>';
     	
     	return $html;
     }
     
     protected function _displayFieldLabel()
     {
-        return '<label>' . $this->_getFieldLabel() . '</label>';
+        return '<label>' . __($this->_getFieldLabel()) . '</label>';
     }
     
     /**
@@ -393,7 +392,7 @@ class Omeka_View_Helper_ElementForm
         // Used by Javascript.
         $html = '<div class="controls">';
 
-    	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], 'Remove', 
+    	$html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], __('Remove'), 
     	    array('class'=>'remove-element'));
 
     	$html .= '</div>'; // Close 'controls' div

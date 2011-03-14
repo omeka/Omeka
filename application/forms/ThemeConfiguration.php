@@ -64,7 +64,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 'submit', 
                 'submit', 
                 array(
-                    'label' => 'Save Changes',
+                    'label' => __('Save Changes'),
                     'ignore' => true
                 )
             );

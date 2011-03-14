@@ -28,6 +28,9 @@ log.processes = false
 
 session.name = ""
 
+; Localization.
+; translate.locale = ""
+
 ; Use internal JavaScripts. Uncomment the next line if this Omeka installation does not have web access.
 ; theme.useInternalJavascripts = true
 

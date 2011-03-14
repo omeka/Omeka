@@ -1,12 +1,12 @@
 <?php head(array('bodyclass'=>'login'), 'login-header'); ?>
 <?php echo js('login'); ?>
-<h1>Log In</h1>
+<h1><?php echo __('Log In'); ?></h1>
 <p id="login-links">
-<span id="backtosite"><?php echo link_to_home_page('View Public Site'); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', 'Lost your password?'); ?></span>
+<span id="backtosite"><?php echo link_to_home_page(__('View Public Site')); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', __('Lost your password?')); ?></span>
 </p>
     <?php
     if (isset($errorMessage)):
-        ?><div class="error">Error: <span>
+        ?><div class="error"><?php echo __('Error'); ?>: <span>
             
         <?php echo html_escape($errorMessage); ?>
         </span></div>

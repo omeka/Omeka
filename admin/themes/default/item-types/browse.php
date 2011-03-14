@@ -1,18 +1,20 @@
-<?php head(array('title'=>'Browse Item Types','bodyclass'=>'item-types')); ?>
-<h1>Browse Item Types (<?php echo $total_records; ?> total)</h1>
+<?php 
+$pageTitle = __('Browse Item Types');
+head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s  total)', $total_records); ?></h1>
 <?php if (has_permission('ItemTypes', 'add')): ?>
-<p id="add-item-type" class="add-button"><?php echo link_to('item-types', 'add', 'Add an Item Type', array('class'=>'add')); ?></p>
+<p id="add-item-type" class="add-button"><?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add')); ?></p>
 <?php endif ?>
 
 <div id="primary">
     <table>
         <thead>
             <tr>
-                <th>Type Name</th>
-                <th>Description</th>
-                <th>Total Number of Items</th>
+                <th><?php echo __('Type Name'); ?></th>
+                <th><?php echo __('Description'); ?></th>
+                <th><?php echo __('Total Number of Items'); ?></th>
                 <?php if (has_permission('ItemTypes', 'edit')): ?>
-                <th>Edit?</th>
+                <th><?php echo __('Edit?'); ?></th>
                 <?php endif; ?>
             </tr>
         </thead>

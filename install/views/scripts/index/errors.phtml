@@ -1,5 +1,5 @@
-<h2>Installation Error</h2>
-<p>Before installation can continue, the following errors must be resolved:</p>
+<h2><?php echo __('Installation Error'); ?></h2>
+<p><?php echo __('Before installation can continue, the following errors must be resolved:'); ?></p>
 <ol>
 <?php foreach($this->installer->getErrorMessages() as $errorMessage): ?>
     <li>

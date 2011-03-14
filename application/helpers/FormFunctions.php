@@ -133,7 +133,7 @@ function select($attributes, $values = null, $default = null, $label=null, $labe
     $html = '';
     //First option is always the "Select Below" empty entry
     $values = (array) $values;
-    $values = array('' => 'Select Below ') + $values;
+    $values = array('' => __('Select Below ')) + $values;
     //Duplication
 	if ($label) {
 	    $labelAttributes['for'] = $attributes['name'];

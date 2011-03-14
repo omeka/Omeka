@@ -68,7 +68,7 @@ class UsersController extends Omeka_Controller_Action
            case 'delete':                   
                // Can't delete yourself
                if ($user->id == $record->id) {
-                   $redirectWith = 'You are not allowed to delete yourself!';
+                   $redirectWith = __('You are not allowed to delete yourself!');
                }
                break;
                
@@ -78,7 +78,7 @@ class UsersController extends Omeka_Controller_Action
                 // Only super users and the actual user can change this 
                 // user's password
                 if(!$user || (($user->role != 'super') && ($record->id != $user->id))) {
-                    $redirectWith = 'May not change another user\'s password!';
+                    $redirectWith = __('May not change another user&#8217;s password!');
                 }
                 break;
                 
@@ -94,7 +94,7 @@ class UsersController extends Omeka_Controller_Action
                 if ($user->id != $record->id 
                     && $record->role == 'super' 
                     && $user->role != 'super') {
-                    $redirectWith = 'You may not edit the data for super users!';
+                    $redirectWith = __('You may not edit the data for super users!');
                 }
                 break;
             case 'show':
@@ -125,13 +125,13 @@ class UsersController extends Omeka_Controller_Action
         $email = $_POST['email'];
         
         if (!Zend_Validate::is($email, 'EmailAddress')) {
-            return $this->flashError('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.');
+            return $this->flashError(__('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.'));
         }
         
         $user = $this->_table->findByEmail($email);
         
         if (!$user || $user->active != 1) {
-            $this->flashError('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.');
+            $this->flashError(__('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.'));
             return;
         }
 
@@ -157,16 +157,16 @@ class UsersController extends Omeka_Controller_Action
             'action' => 'activate',
             'u' => $activationCode
         ), 'default');
-        $body  = "Please follow this link to reset your password:\n\n";
+        $body  = __("Please follow this link to reset your password:") . "\n\n";
         $body .= $url."\n\n";
-        $body .= "$siteTitle Administrator";
+        $body .= __("%s Administrator", $siteTitle);
 
         $mail->setBodyText($body);
-        $mail->setFrom(get_option('administrator_email'), "$siteTitle Administrator");
-        $mail->setSubject("[$siteTitle] Reset Your Password");
+        $mail->setFrom(get_option('administrator_email'), __("%s Administrator", $siteTitle));
+        $mail->setSubject(__("[%s] Reset Your Password", $siteTitle));
 
         $mail->send();
-        $this->flashSuccess('Please check your email for a link to reset your password.');
+        $this->flashSuccess(__('Please check your email for a link to reset your password.'));
     }
     
     public function activateAction()
@@ -181,7 +181,7 @@ class UsersController extends Omeka_Controller_Action
         if (!empty($_POST)) {
             try {
                 if ($_POST['new_password1'] != $_POST['new_password2']) {
-                    throw new Exception('Password: The passwords do not match.');
+                    throw new Exception(__('Password: The passwords do not match.'));
                 }
                 $ua->User->setPassword($_POST['new_password1']);
                 $ua->User->active = 1;
@@ -206,7 +206,7 @@ class UsersController extends Omeka_Controller_Action
         try {
             if ($user->saveForm($_POST)) {                
                 $this->sendActivationEmail($user);
-                $this->flashSuccess('The user "' . $user->username . '" was successfully added!');
+                $this->flashSuccess(__('The user "%s" was successfully added!',$user->username));
                                 
                 //Redirect to the main user browse page
                 $this->redirect->goto('browse');
@@ -244,7 +244,7 @@ class UsersController extends Omeka_Controller_Action
                 $values = $changePasswordForm->getValues();
                 $user->setPassword($values['new_password']);
                 $user->forceSave();
-                $this->flashSuccess("Password changed!");
+                $this->flashSuccess(__("Password changed!"));
                 return $this->_helper->redirector->gotoUrl('/');
             } else {
                 return;
@@ -253,7 +253,7 @@ class UsersController extends Omeka_Controller_Action
         
         try {
             if ($user->saveForm($_POST)) {
-                $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
+                $this->flashSuccess(__('The user "%s" was successfully changed!', $user->username));
                 
                 if ($user->id == $currentUser->id) {
                     $this->_helper->redirector->gotoUrl('/');
@@ -271,7 +271,7 @@ class UsersController extends Omeka_Controller_Action
     protected function _getDeleteSuccessMessage($record)
     {
         $user = $record;
-        return 'The user "' . $user->username . '" was successfully deleted!';
+        return __('The user "%s" was successfully deleted!', $user->username);
     }
     
     protected function sendActivationEmail($user)
@@ -284,11 +284,11 @@ class UsersController extends Omeka_Controller_Action
         $siteTitle  = get_option('site_title');
         $from       = get_option('administrator_email');
         $body       = "Welcome!\n\n"
-                    . "Your account for the $siteTitle archive has been created. Please click the following link to activate your account:\n\n"
+                    . __("Your account for the %s archive has been created. Please click the following link to activate your account:",$siteTitle)."\n\n"
                     . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
-                    . "(or use any other page on the site).\n\n"
-                    ."$siteTitle Administrator";
-        $subject    = "Activate your account with the ".$siteTitle." Archive";
+                    . __("(or use any other page on the site).")."\n\n"
+                    .__("%s Administrator", $siteTitle);
+        $subject    = __("Activate your account with the %s Archive", $siteTitle);
         
         $entity = $user->Entity;
         
@@ -381,7 +381,7 @@ class UsersController extends Omeka_Controller_Action
             // information about valid usernames/passwords.
             case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
             case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-                return self::INVALID_LOGIN_MESSAGE;
+                return __(self::INVALID_LOGIN_MESSAGE);
                 break;
             case Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS:
                 // There can never be ambiguous identities b/c the 'username'

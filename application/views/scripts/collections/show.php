@@ -4,13 +4,13 @@
     <h1><?php echo collection('Name'); ?></h1>
 
     <div id="description" class="element">
-        <h2>Description</h2>
+        <h2><?php echo __('Description'); ?></h2>
         <div class="element-text"><?php echo nls2p(collection('Description')); ?></div>
     </div><!-- end description -->
     
     <?php if (collection_has_collectors()): ?>
     <div id="collectors" class="element">
-        <h2>Collector(s)</h2> 
+        <h2><?php echo __('Collector(s)'); ?></h2> 
         <div class="element-text">
             <ul>
                 <li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
@@ -19,10 +19,10 @@
     </div><!-- end collectors -->
     <?php endif; ?>
     
-    <p class="view-items-link"><?php echo link_to_browse_items('View the items in ' . collection('Name'), array('collection' => collection('id'))); ?></p>
+    <p class="view-items-link"><?php echo link_to_browse_items(__('View the items in %s', collection('Name')), array('collection' => collection('id'))); ?></p>
     
     <div id="collection-items">
-        <h2>Items in the <?php echo collection('Name'); ?> Collection</h2>
+        <h2><?php echo __('Items in the %s Collection', collection('Name')); ?></h2>
             
         <?php while (loop_items_in_collection(5)): ?>
 			<div class="item hentry"> 

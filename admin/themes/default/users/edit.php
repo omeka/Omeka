@@ -5,7 +5,7 @@
     } else {
         $userTitle = '';
     }
-    $userTitle = 'Edit User #' . $user->id . $userTitle;
+    $userTitle = __('Edit User #%s', $user->id) . $userTitle;
 ?>
 <?php head(array('title'=> $userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 <h1><?php echo $userTitle; ?></h1>
@@ -14,7 +14,7 @@
 <div id="primary">
 <form method="post">
 <?php include('form.php'); ?>
-<input type="submit" name="submit" value="Save Changes" class="submit submit-medium" />
+<input type="submit" name="submit" value="<?php echo __('Save Changes'); ?>" class="submit submit-medium" />
 </form>
 
 <?php echo $this->passwordForm; ?>

@@ -1,6 +1,8 @@
-<?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
-<h1>Browse Items (<?php echo total_results();?> total)</h1>
-<p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>">Add an Item</a></p>
+<?php 
+$pageTitle = __('Browse Items');
+head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', total_results()); ?></h1>
+<p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>"><?php echo __('Add an Item'); ?></a></p>
 
 <?php if ( total_results() ): ?>
 
@@ -12,8 +14,8 @@ endif; ?>
 <ul id="section-nav" class="navigation <?php echo $browseView; ?>">
 <?php
     $section_nav = array(
-        'List View' => current_uri(array('view'=>'simple')), 
-        'Detailed View' => current_uri(array('view'=>'detailed'))
+        __('List View') => current_uri(array('view'=>'simple')), 
+        __('Detailed View') => current_uri(array('view'=>'detailed'))
         );
     
     $section_nav = apply_filters('admin_navigation_items_browse', $section_nav, $items);
@@ -44,25 +46,25 @@ endif; ?>
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
 <fieldset>
-    <input type="submit" class="submit submit-medium" id="save-changes" name="submit" value="Save Changes" />
+    <input type="submit" class="submit submit-medium" id="save-changes" name="submit" value="<?php echo __('Save Changes'); ?>" />
 </fieldset>
 </form>
 
 <?php elseif(!total_items()): ?>
     <div id="no-items">
-    <p>There are no items in the archive yet.
+    <p><?php echo __('There are no items in the archive yet.'); ?>
     
     <?php if(has_permission('Items','add')): ?>
-          Why don&#8217;t you <?php echo link_to('items', 'add', 'add one'); ?>?</p>
+          <?php echo link_to('items', 'add', __('Add an Item.')); ?></p>
     <?php endif; ?>
 </div>
     
 <?php else: ?>
-    <h1>The query searched <?php echo total_items(); ?> items and returned no results.</h1>
+    <h1><?php echo __('The query searched %s items and returned no results.', total_items()); ?></h1>
 <?php endif; ?>
 
 <div>
-    <h2>Output Formats</h2>
+    <h2><?php echo __('Output Formats'); ?></h2>
     <?php echo output_format_list(false); ?>
 </div>
 

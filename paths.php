@@ -57,6 +57,7 @@ $site['scripts']           = 'scripts';
 $site['migrations']        = 'migrations';
 $site['install']           = 'install';
 $site['theme_uploads']     = 'theme_uploads';
+$site['languages']         = 'languages';
 
 // Define directory path constants:
 define('BASE_DIR',         dirname(__FILE__));
@@ -77,6 +78,7 @@ define('CONFIG_DIR',       APP_DIR . DIRECTORY_SEPARATOR . $site['config']);
 define('LOGS_DIR',         APP_DIR . DIRECTORY_SEPARATOR . $site['logs']);
 define('VIEW_SCRIPTS_DIR', APP_DIR . DIRECTORY_SEPARATOR . $site['views'] . DIRECTORY_SEPARATOR . $site['scripts']);
 define('UPGRADE_DIR',      APP_DIR . DIRECTORY_SEPARATOR . $site['migrations']);
+define('LANGUAGES_DIR',    APP_DIR . DIRECTORY_SEPARATOR . $site['languages']);
 define('THUMBNAIL_DIR',        ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['thumbnails']);
 define('SQUARE_THUMBNAIL_DIR', ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['square_thumbnails']);
 define('FULLSIZE_DIR',         ARCHIVE_DIR . DIRECTORY_SEPARATOR . $site['fullsize']);

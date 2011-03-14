@@ -1,5 +1,7 @@
-<?php head(array('title'=>'Browse Element Sets', 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
-<h1>Browse Element Sets (<?php echo count($elementsets) ?> total)</h1>
+<?php 
+$pageTitle = __('Browse Element Sets');
+head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s  total)', $elementsets); ?></h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">
@@ -7,9 +9,9 @@
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Delete</th>
+            <th><?php echo __('Name'); ?></th>
+            <th><?php echo __('Description'); ?></th>
+            <th><?php echo __('Delete'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -18,14 +20,14 @@
             <?php $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File'); ?>
             
             <td class="element-set-name">
-                <?php echo html_escape($elementSet->name); ?>
+                <?php echo html_escape(__($elementSet->name)); ?>
             </td>
             <td>
-                <?php echo html_escape($elementSet->description); ?>
+                <?php echo html_escape(__($elementSet->description)); ?>
             </td>
             <td>
                 <?php if (has_permission('ElementSets', 'delete') and !in_array($elementSet->name, $doNotDelete)): ?>
-                    <?php echo delete_button($elementSet, null, 'Delete', array('class' => 'delete-button delete-element-set')); ?>
+                    <?php echo delete_button($elementSet, null, __('Delete'), array('class' => 'delete-button delete-element-set')); ?>
                 <?php endif; ?>
             </td>
         </tr>

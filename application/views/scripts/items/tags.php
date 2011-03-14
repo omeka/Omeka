@@ -1,8 +1,10 @@
-<?php head(array('title'=>'Browse Items','bodyid'=>'items','bodyclass'=>'tags')); ?>
+<?php
+$pageTitle = __('Browse Items');
+head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass'=>'tags')); ?>
 
 <div id="primary">
 	
-	<h1>Browse Items</h1>
+	<h1><?php echo $pageTitle; ?></h1>
 	
 	<ul class="navigation item-tags" id="secondary-nav">
 	<?php echo custom_nav_items(); ?>

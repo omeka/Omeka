@@ -107,17 +107,17 @@ class ItemsController extends Omeka_Controller_Action
     
     protected function _getAddSuccessMessage($record)
     {
-        return 'The item was successfully added!';        
+        return __('The item was successfully added!');        
     }
     
     protected function _getEditSuccessMessage($record)
     {
-        return 'The item was successfully changed!';
+        return __('The item was successfully changed!');
     }
 
     protected function  _getDeleteSuccessMessage($record)
     {
-        return 'The item was successfully deleted!';
+        return __('The item was successfully deleted!');
     }
     
     public function addAction()
@@ -259,7 +259,7 @@ class ItemsController extends Omeka_Controller_Action
                 // Refresh the item.
                 $item = $this->findById();
             } else {
-                $this->flashError('User does not have permission to add tags.');
+                $this->flashError(__('User does not have permission to add tags.'));
             }
         }
         
@@ -292,12 +292,12 @@ class ItemsController extends Omeka_Controller_Action
         $errorMessage = null;
         if (!$this->isAllowed('makePublic')) {
             $errorMessage = 
-                'User is not allowed to modify visibility of items.';
+                __('User is not allowed to modify visibility of items.');
         }
             
         if (!$this->isAllowed('makeFeatured')) {
             $errorMessage = 
-                'User is not allowed to modify featured status of items.';
+                __('User is not allowed to modify featured status of items.');
         }
         if ($errorMessage) {
             $this->flashError($errorMessage);
@@ -312,7 +312,7 @@ class ItemsController extends Omeka_Controller_Action
                     !array_key_exists('public', $fields) ||
                     !array_key_exists('featured', $fields)
                 ) { 
-                    $this->flashError('Power-edit request was mal-formed!');
+                    $this->flashError(__('Power-edit request was mal-formed!'));
                     return $this->_helper->redirector->goto('browse', 'items');
                 }
                 
@@ -323,7 +323,7 @@ class ItemsController extends Omeka_Controller_Action
             }
         }
             
-        $this->flashSuccess('The items were successfully changed!');
+        $this->flashSuccess(__('The items were successfully changed!'));
         
         if (isset($_SERVER['HTTP_REFERER'])) {
             $this->_helper->redirector->gotoUrl($_SERVER['HTTP_REFERER']);

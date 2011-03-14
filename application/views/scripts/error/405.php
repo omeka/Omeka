@@ -1,6 +1,6 @@
-<?php head(array('title'=>'405 Method Not Allowed')); ?>
-    <h1>Omeka 404</h1>
-    
-   <p>The method used to access this URL (<?php echo html_escape($this->method); ?>) is not valid.</p>
-    
+<?php
+$pageTitle = __('405 Method Not Allowed');
+head(array('title'=>$pageTitle)); ?>
+<h1><?php echo $pageTitle; ?></h1>
+<p><?php echo __('The method used to access this URL (%s) is not valid.', html_escape($this->method)); ?></p>    
 <?php foot(); ?>

@@ -7,7 +7,7 @@
 <?php echo flash(); ?>
 <fieldset>
 <div class="field">
-    <?php echo label('username','Username'); ?>
+    <?php echo label('username', __('Username')); ?>
     <div class="inputs">
     <?php echo text(array('name'=>'username', 'class'=>'textinput', 'size'=>'30','id'=>'username'),$user->username); ?>
     </div>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="field">
-    <?php echo label('first_name','First Name'); ?>
+    <?php echo label('first_name', __('First Name')); ?>
     
     <div class="inputs">    
         <?php 
@@ -29,7 +29,7 @@
 </div>
 
 <div class="field">
-    <?php echo label('last_name','Last Name'); ?>
+    <?php echo label('last_name', __('Last Name')); ?>
     <div class="inputs">
         <?php 
             $lastNameValue = ((!empty($user->last_name)) ? $user->last_name : $_POST['last_name']);
@@ -40,7 +40,7 @@
 </div>
 
 <div class="field">
-    <?php echo label('email','Email'); ?>
+    <?php echo label('email', __('Email')); ?>
     <div class="inputs">
     <?php 
         $emailValue = ((!empty($user->email)) ? $user->email : $_POST['email']);
@@ -51,7 +51,7 @@
 </div>
 
 <div class="field">
-    <?php echo label('institution','Institution'); ?>
+    <?php echo label('institution', __('Institution')); ?>
     <div class="inputs">
 <?php echo text(array('name'=>'institution', 'size'=>'30','class'=>'textinput', 'id'=>'institution'),not_empty_or($user->institution, @$_POST['institution'])); ?>
     </div>
@@ -59,7 +59,7 @@
 
 <?php if ( has_permission('Users','changeRole') ): ?>
     <div class="field">
-        <?php echo label('role','Role'); ?>
+        <?php echo label('role', __('Role')); ?>
         <div class="inputs">
     <?php 
         $roleValue = ((!empty($user->role)) ? $user->role : $_POST['role']);
@@ -72,9 +72,9 @@
 
 <?php if ( has_permission('super') ): ?>
     <div class="field">
-        <div class="label">Activity</div>
+        <div class="label"><?php echo __('Activity'); ?></div>
 <div class="inputs radio">
-<?php echo radio(array('name'=>'active', 'id'=>'active'), array('0'=>'Inactive','1'=>'Active'), $user->active); ?>
+<?php echo radio(array('name'=>'active', 'id'=>'active'), array('0'=>__('Inactive'),'1'=>__('Active')), $user->active); ?>
 </div>
 </div>
 <?php endif; ?>

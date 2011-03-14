@@ -35,7 +35,7 @@ class ThemesController extends Omeka_Controller_Action
     public function switchAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->flashError("Invalid form submission.");
+            $this->flashError(__("Invalid form submission."));
             $this->_helper->redirector->goto('browse');
             return;
         }
@@ -43,7 +43,7 @@ class ThemesController extends Omeka_Controller_Action
         $themeName = $this->_getParam(Theme::PUBLIC_THEME_OPTION);
         // Theme names should be alphanumeric(-ish) (prevent security flaws).
         if (preg_match('/[^a-z0-9\-_]/i', $themeName)) {
-            $this->flashError('You have chosen an illegal theme name. Please select another theme.');
+            $this->flashError(__('You have chosen an illegal theme name. Please select another theme.'));
             return;
         }
         
@@ -56,7 +56,7 @@ class ThemesController extends Omeka_Controller_Action
             Theme::setOptions($themeName, $configForm->getValues());
         }
         
-        $this->flashSuccess("The theme has been successfully changed.");
+        $this->flashSuccess(__("The theme has been successfully changed."));
         $this->_helper->redirector->goto('browse');
     }
     
@@ -98,7 +98,7 @@ class ThemesController extends Omeka_Controller_Action
                 // set the theme options
                 Theme::setOptions($this->_themeName, $this->_formValues);
                 
-                $this->flashSuccess('The theme settings were successfully saved!');
+                $this->flashSuccess(__('The theme settings were successfully saved!'));
                 $this->redirect->goto('browse');
             }
         }

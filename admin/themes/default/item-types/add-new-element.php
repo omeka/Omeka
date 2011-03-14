@@ -4,6 +4,6 @@
 	<td><?php echo select_data_types(array('name'=> $addNewElementDataTypeIdPrefix . $elementTempId), $elementDataTypeId); ?></td>
     <td class="element-order"><?php echo $this->formText( $addNewElementOrderPrefix . $elementTempId, $elementOrder, array('size'=>2)); ?></td>
 	<?php if (has_permission('ItemTypes', 'delete-element')): ?>
-    	<td><a href="" class="delete-element">Remove</a></td>
+    	<td><a href="" class="delete-element"><?php echo __('Remove'); ?></a></td>
     <?php endif; ?>
 </tr>

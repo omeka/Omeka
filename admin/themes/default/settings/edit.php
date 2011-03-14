@@ -1,4 +1,6 @@
-<?php head(array('title'=>'Edit General Settings', 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+<?php
+$pageTitle = __('Edit General Settings');
+head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <?php echo js('settings'); ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -8,7 +10,7 @@
 //]]>    
 </script>
 
-<h1>Edit General Settings</h1>
+<h1><?php echo $pageTitle; ?></h1>
 
 <?php common('settings-nav'); ?>
 

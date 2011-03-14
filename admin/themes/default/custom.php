@@ -18,7 +18,7 @@ if (!function_exists('show_untitled_items')) {
         // is empty.
         $prepTitle = trim(strip_formatting($title));
         if (empty($prepTitle)) {
-            return '[Untitled]';
+            return __('[Untitled]');
         }
         return $title;
     }

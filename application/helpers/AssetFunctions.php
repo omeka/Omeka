@@ -224,7 +224,7 @@ function physical_path_to($file)
             return $physical . DIRECTORY_SEPARATOR . $file;
         }
     }
-    throw new Exception( "Could not find file '$file'!" );
+    throw new Exception( __("Could not find file %s!",$file) );
 }
 
 /**
@@ -243,5 +243,5 @@ function web_path_to($file)
             return $web . '/' . $file;
         }
     }
-    throw new Exception( "Could not find file '$file'!" );
+    throw new Exception( __("Could not find file %s!",$file) );
 }

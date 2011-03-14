@@ -1,7 +1,9 @@
-<?php head(array('title' => '403 Page Forbidden')); ?>
+<?php
+$pageTitle = __('403 Page Forbidden');
+head(array('title' => $pageTitle)); ?>
 <div id="primary">
-<h1>403 Page Forbidden</h1>
+<h1><?php echo $pageTitle; ?></h1>
 <?php echo flash(); ?>
-<p>You do not have permission to access this page.</p>
+<p><?php echo __('You do not have permission to access this page.'); ?></p>
 </div>
 <?php foot(); ?>
