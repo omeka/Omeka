@@ -47,9 +47,11 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     {
         $cantStore = new Omeka_Storage_Adapter_Filesystem($this->_options);
         $this->assertFalse($cantStore->canStore());
+        $tempDir = sys_get_temp_dir();
         $canStore = new Omeka_Storage_Adapter_Filesystem(array(
-            'localDir' => sys_get_temp_dir(),
+            'localDir' => $tempDir,
         ));
+        $canStore->setUp();
         $this->assertTrue($canStore->canStore());
     }
 

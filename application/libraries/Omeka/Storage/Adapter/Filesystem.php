@@ -22,6 +22,14 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
      */
     private $_localDir;
 
+    private $_subDirs = array(
+        'thumbnails', 
+        'square_thumbnails', 
+        'fullsize', 
+        'files',
+        'theme_uploads'
+    );
+
     /**
      * Web-accesible path that corresponds to $_localDir.
      *
@@ -61,18 +69,17 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
 
     public function setUp()
     {
-        foreach (array('thumbnails', 
-                       'square_thumbnails', 
-                       'fullsize', 
-                       'files',
-                       'theme_uploads') as $archiveDirName) {
-            $dirToCreate = $this->_localDir . '/' . $archiveDirName;
-            if (is_dir($dirToCreate)) {
-                continue;
+        foreach ($this->_subDirs as $archiveDirName) {
+            $dirToCreate = $this->_getAbsPath($archiveDirName);
+            if (!is_dir($dirToCreate)) {
+                $made = @mkdir($dirToCreate, 0770, true);
+                if (!$made || !is_readable($dirToCreate)) {
+                    throw new Omeka_Storage_Exception("Error making directory: "
+                        . "'$dirToCreate'");
+                }
             }
-            $made = mkdir($dirToCreate, 0770, true);
-            if (!$made || !is_readable($dirToCreate)) {
-                throw new Omeka_Storage_Exception("Cannot create directory: "
+            if (!is_writable($dirToCreate)) {
+                throw new Omeka_Storage_Exception("Directory not writable: "
                     . "'$dirToCreate'");
             }
         }
@@ -89,7 +96,12 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
      */
     public function canStore()
     {
-        return is_writable($this->_localDir);
+        foreach ($this->_subDirs as $dir) {
+            if (!is_writable($this->_getAbsPath($dir))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
