@@ -1,15 +1,16 @@
-# Omeka PO Template
-# Copyright (C) 2011 Center for History and New Media
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
-"Report-Msgid-Bugs-To: developers@omeka.org\n"
-"POT-Creation-Date: 2011-03-13 00:03-0500\n"
-"PO-Revision-Date: 2011-03-14 11:06-0500\n"
-"Last-Translator: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-15 23:38-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,6 +116,7 @@ msgstr ""
 #: admin/themes/default/users/edit.php:17
 #: application/forms/SecuritySettings.php:72
 #: application/forms/ThemeConfiguration.php:67
+#: admin/themes/default/plugins/config.php:9
 msgid "Save Changes"
 msgstr ""
 
@@ -129,6 +131,7 @@ msgstr ""
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
 #: install/views/scripts/index/index.phtml:14
+#: install/views/scripts/index/index.phtml:14
 msgid "Required Fields"
 msgstr ""
 
@@ -141,7 +144,8 @@ msgid "Collection Description"
 msgstr ""
 
 #: admin/themes/default/collections/form.php:25
-msgid "List collectors for this collection (optional - enter one name per line)"
+msgid ""
+"List collectors for this collection (optional - enter one name per line)"
 msgstr ""
 
 #: admin/themes/default/collections/form.php:35
@@ -236,8 +240,7 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: admin/themes/default/common/header.php:41
-#: admin/themes/default/index.php:56
+#: admin/themes/default/common/header.php:41 admin/themes/default/index.php:56
 msgid "Settings"
 msgstr ""
 
@@ -308,8 +311,7 @@ msgstr ""
 msgid "Delete Tag"
 msgstr ""
 
-#: admin/themes/default/custom.php:21
-#: admin/themes/default/items/edit.php:3
+#: admin/themes/default/custom.php:21 admin/themes/default/items/edit.php:3
 #: admin/themes/default/items/show.php:3
 #: application/helpers/LinkFunctions.php:274
 #: application/views/scripts/functions.php:17
@@ -336,8 +338,7 @@ msgstr ""
 msgid "Sorry, you do not have permission to access this page."
 msgstr ""
 
-#: admin/themes/default/error/403.php:10
-#: admin/themes/default/error/404.php:12
+#: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:12
 msgid "site administrator"
 msgstr ""
 
@@ -351,7 +352,10 @@ msgid "404: Page Not Found"
 msgstr ""
 
 #: admin/themes/default/error/404.php:9
-msgid "You&#8217;ve tried to access a page that does not seem to exist. Sometimes this happens. Below is a quick break-down of the items, collections, and exhibits on this site."
+msgid ""
+"You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
+"this happens. Below is a quick break-down of the items, collections, and "
+"exhibits on this site."
 msgstr ""
 
 #: admin/themes/default/error/404.php:13
@@ -359,8 +363,7 @@ msgstr ""
 msgid "If this does not help, try contacting the %s."
 msgstr ""
 
-#: admin/themes/default/error/404.php:15
-#: admin/themes/default/index.php:86
+#: admin/themes/default/error/404.php:15 admin/themes/default/index.php:86
 msgid "Recent Items"
 msgstr ""
 
@@ -456,8 +459,7 @@ msgstr ""
 msgid "Output Formats"
 msgstr ""
 
-#: admin/themes/default/index.php:1
-#: admin/themes/default/index.php:2
+#: admin/themes/default/index.php:1 admin/themes/default/index.php:2
 msgid "Dashboard"
 msgstr ""
 
@@ -498,13 +500,11 @@ msgstr ""
 msgid "Manage collections in your archive: add, edit, and delete collections."
 msgstr ""
 
-#: admin/themes/default/index.php:46
-#: admin/themes/default/users/browse.php:2
+#: admin/themes/default/index.php:46 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
 msgstr ""
 
-#: admin/themes/default/index.php:48
-#: admin/themes/default/users/browse.php:6
+#: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:6
 msgid "Add a User"
 msgstr ""
 
@@ -512,8 +512,7 @@ msgstr ""
 msgid "Manage users of various levels: from researcher to super."
 msgstr ""
 
-#: admin/themes/default/index.php:59
-#: admin/themes/default/settings/edit.php:2
+#: admin/themes/default/index.php:59 admin/themes/default/settings/edit.php:2
 msgid "Edit General Settings"
 msgstr ""
 
@@ -526,7 +525,9 @@ msgid "Manage Plugins"
 msgstr ""
 
 #: admin/themes/default/index.php:63
-msgid "Manage your general settings for the site, including title, description, and themes."
+msgid ""
+"Manage your general settings for the site, including title, description, and "
+"themes."
 msgstr ""
 
 #: admin/themes/default/index.php:73
@@ -535,15 +536,16 @@ msgstr ""
 
 #: admin/themes/default/index.php:83
 #, php-format
-msgid "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s keywords. There are %5$s users."
+msgid ""
+"<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
+"keywords. There are %5$s users."
 msgstr ""
 
 #: admin/themes/default/index.php:89
 msgid "There are no items to display."
 msgstr ""
 
-#: admin/themes/default/index.php:100
-#: application/views/scripts/index.php:70
+#: admin/themes/default/index.php:100 application/views/scripts/index.php:70
 msgid "View All Items"
 msgstr ""
 
@@ -732,7 +734,10 @@ msgid "Delete this Item"
 msgstr ""
 
 #: admin/themes/default/items/files-form.php:4
-msgid "The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form."
+msgid ""
+"The path to Image Magick has not been set. No derivative images will be "
+"created. If you would like Omeka to create derivative images, please add the "
+"path to your settings form."
 msgstr ""
 
 #: admin/themes/default/items/files-form.php:7
@@ -849,11 +854,16 @@ msgid "Action"
 msgstr ""
 
 #: admin/themes/default/plugins/browse.php:27
-msgid "You do not have any plugins installed. Add them to the plugins directory to see them listed here."
+msgid ""
+"You do not have any plugins installed. Add them to the plugins directory to "
+"see them listed here."
 msgstr ""
 
 #: admin/themes/default/plugins/browse.php:30
-msgid "Add new plugins by downloading them from the <a href=\"http://omeka.org/add-ons/plugins/\">Omeka Plugins Directory</a>, or <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your own</a>!"
+msgid ""
+"Add new plugins by downloading them from the <a href=\"http://omeka.org/add-"
+"ons/plugins/\">Omeka Plugins Directory</a>, or <a href=\"http://omeka.org/"
+"codex/Plugin_Writing_Best_Practices\">write your own</a>!"
 msgstr ""
 
 #: admin/themes/default/plugins/config.php:1
@@ -898,12 +908,16 @@ msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:31
 #, php-format
-msgid "This version of %1$s requires at least Omeka %2$s. You are using Omeka version %3$s."
+msgid ""
+"This version of %1$s requires at least Omeka %2$s. You are using Omeka "
+"version %3$s."
 msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:36
 #, php-format
-msgid "The %s plugin requires the following plugins to be installed, activated, and loaded:"
+msgid ""
+"The %s plugin requires the following plugins to be installed, activated, and "
+"loaded:"
 msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:52
@@ -930,7 +944,9 @@ msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:77
 #, php-format
-msgid "This version of %1$s has only been tested up to Omeka %2$s. You are using Omeka version %3$s"
+msgid ""
+"This version of %1$s has only been tested up to Omeka %2$s. You are using "
+"Omeka version %3$s"
 msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:88
@@ -1037,7 +1053,10 @@ msgid "Switch Theme"
 msgstr ""
 
 #: admin/themes/default/themes/browse.php:48
-msgid "Add new themes by downloading them from the <a href=\"http://omeka.org/add-ons/themes/\">Omeka Theme Directory</a>, or <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your own</a>!"
+msgid ""
+"Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
+"ons/themes/\">Omeka Theme Directory</a>, or <a href=\"http://omeka.org/codex/"
+"Theme_Writing_Best_Practices\">design your own</a>!"
 msgstr ""
 
 #: admin/themes/default/themes/config.php:1
@@ -1050,6 +1069,7 @@ msgid "Please Configure The %s Theme"
 msgstr ""
 
 #: admin/themes/default/themes/config.php:8
+#: admin/themes/default/themes/config.php:9
 msgid "Configurations apply to this theme only."
 msgstr ""
 
@@ -1129,8 +1149,7 @@ msgstr ""
 #: admin/themes/default/users/browse.php:24
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/form.php:10
-#: admin/themes/default/users/show.php:22
-#: application/forms/Install.php:35
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:35
 #: application/forms/Login.php:26
 msgid "Username"
 msgstr ""
@@ -1184,8 +1203,7 @@ msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:11
 #: admin/themes/default/users/form.php:43
-#: admin/themes/default/users/show.php:26
-#: application/forms/Install.php:50
+#: admin/themes/default/users/show.php:26 application/forms/Install.php:50
 #: application/forms/RecoverPassword.php:33
 msgid "Email"
 msgstr ""
@@ -1203,8 +1221,7 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
-#: admin/themes/default/users/login.php:3
-#: application/forms/Login.php:45
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:45
 msgid "Log In"
 msgstr ""
 
@@ -1282,7 +1299,9 @@ msgstr ""
 
 #: application/controllers/ItemTypesController.php:51
 #, php-format
-msgid "The item type \"%s\" was successfully added!  You may now add elements to your new item type."
+msgid ""
+"The item type \"%s\" was successfully added!  You may now add elements to "
+"your new item type."
 msgstr ""
 
 #: application/controllers/ItemTypesController.php:89
@@ -1298,7 +1317,9 @@ msgstr ""
 
 #: application/controllers/PluginsController.php:50
 #, php-format
-msgid "Error in configuring plugin named \"%s\". Missing config and/or config_form hook(s)."
+msgid ""
+"Error in configuring plugin named \"%s\". Missing config and/or config_form "
+"hook(s)."
 msgstr ""
 
 #: application/controllers/PluginsController.php:61
@@ -1385,6 +1406,7 @@ msgstr ""
 
 #: application/controllers/SettingsController.php:46
 #: install/views/scripts/index/index.phtml:17
+#: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr ""
 
@@ -1448,7 +1470,9 @@ msgstr ""
 
 #: application/controllers/UsersController.php:128
 #: application/controllers/UsersController.php:134
-msgid "Unable to reset password. Please verify that the information is correct and contact an administrator if necessary."
+msgid ""
+"Unable to reset password. Please verify that the information is correct and "
+"contact an administrator if necessary."
 msgstr ""
 
 #: application/controllers/UsersController.php:160
@@ -1496,7 +1520,9 @@ msgstr ""
 
 #: application/controllers/UsersController.php:287
 #, php-format
-msgid "Your account for the %s archive has been created. Please click the following link to activate your account:"
+msgid ""
+"Your account for the %s archive has been created. Please click the following "
+"link to activate your account:"
 msgstr ""
 
 #: application/controllers/UsersController.php:289
@@ -1528,83 +1554,68 @@ msgstr ""
 msgid "Change Password"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:29
-#: application/forms/Install.php:56
+#: application/forms/GeneralSettings.php:29 application/forms/Install.php:56
 msgid "Site Title"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:33
-#: application/forms/Install.php:61
+#: application/forms/GeneralSettings.php:33 application/forms/Install.php:61
 msgid "Site Description"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:37
-#: application/forms/Install.php:65
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:65
 msgid "Administrator Email"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:43
-#: application/forms/Install.php:71
+#: application/forms/GeneralSettings.php:43 application/forms/Install.php:71
 msgid "Site Copyright Information"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:47
-#: application/forms/Install.php:75
+#: application/forms/GeneralSettings.php:47 application/forms/Install.php:75
 msgid "Site Author Information"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:51
-#: application/forms/Install.php:79
+#: application/forms/GeneralSettings.php:51 application/forms/Install.php:79
 msgid "Fullsize Image Size"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:52
-#: application/forms/Install.php:80
+#: application/forms/GeneralSettings.php:52 application/forms/Install.php:80
 msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr ""
 
-#: application/forms/GeneralSettings.php:58
-#: application/forms/Install.php:87
+#: application/forms/GeneralSettings.php:58 application/forms/Install.php:87
 msgid "Thumbnail Size"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:59
-#: application/forms/Install.php:88
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:88
 msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr ""
 
-#: application/forms/GeneralSettings.php:65
-#: application/forms/Install.php:95
+#: application/forms/GeneralSettings.php:65 application/forms/Install.php:95
 msgid "Square Thumbnail Size"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:66
-#: application/forms/Install.php:96
+#: application/forms/GeneralSettings.php:66 application/forms/Install.php:96
 msgid "Maximum square thumbnail size constraint (in pixels)."
 msgstr ""
 
-#: application/forms/GeneralSettings.php:72
-#: application/forms/Install.php:103
+#: application/forms/GeneralSettings.php:72 application/forms/Install.php:103
 msgid "Items Per Page (admin)"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:73
-#: application/forms/Install.php:104
-msgid "Limit the number of items displayed per page in the administrative interface."
+#: application/forms/GeneralSettings.php:73 application/forms/Install.php:104
+msgid ""
+"Limit the number of items displayed per page in the administrative interface."
 msgstr ""
 
-#: application/forms/GeneralSettings.php:79
-#: application/forms/Install.php:111
+#: application/forms/GeneralSettings.php:79 application/forms/Install.php:111
 msgid "Items Per Page (public)"
 msgstr ""
 
-#: application/forms/GeneralSettings.php:80
-#: application/forms/Install.php:112
+#: application/forms/GeneralSettings.php:80 application/forms/Install.php:112
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr ""
 
-#: application/forms/GeneralSettings.php:86
-#: application/forms/Install.php:119
+#: application/forms/GeneralSettings.php:86 application/forms/Install.php:119
 msgid "Show Empty Elements"
 msgstr ""
 
@@ -1613,11 +1624,12 @@ msgid "Enable Prototype"
 msgstr ""
 
 #: application/forms/GeneralSettings.php:93
-msgid "Enable the Prototype JavaScript library. This may be required for some older plugins."
+msgid ""
+"Enable the Prototype JavaScript library. This may be required for some older "
+"plugins."
 msgstr ""
 
-#: application/forms/GeneralSettings.php:97
-#: application/forms/Install.php:125
+#: application/forms/GeneralSettings.php:97 application/forms/Install.php:125
 msgid "Imagemagick Directory Path"
 msgstr ""
 
@@ -1629,8 +1641,7 @@ msgstr ""
 msgid "Only alphanumeric characters are allowed."
 msgstr ""
 
-#: application/forms/Install.php:43
-#: application/forms/Login.php:35
+#: application/forms/Install.php:43 application/forms/Login.php:35
 msgid "Password"
 msgstr ""
 
@@ -1699,7 +1710,8 @@ msgid "Disable File Upload Validation"
 msgstr ""
 
 #: application/forms/SecuritySettings.php:30
-msgid "Check this field if you would like to allow any file to be uploaded to Omeka."
+msgid ""
+"Check this field if you would like to allow any file to be uploaded to Omeka."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:36
@@ -1723,7 +1735,9 @@ msgid "ReCaptcha Public Key"
 msgstr ""
 
 #: application/forms/SecuritySettings.php:57
-msgid "Public key from recaptcha.net. Both this and the private key must be filled in to secure public forms."
+msgid ""
+"Public key from recaptcha.net. Both this and the private key must be filled "
+"in to secure public forms."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:64
@@ -1731,7 +1745,9 @@ msgid "ReCaptcha Private Key"
 msgstr ""
 
 #: application/forms/SecuritySettings.php:65
-msgid "Private key from recaptcha.net. Both this and the public key must be filled in to secure public forms."
+msgid ""
+"Private key from recaptcha.net. Both this and the public key must be filled "
+"in to secure public forms."
 msgstr ""
 
 #: application/helpers/AssetFunctions.php:227
@@ -1759,7 +1775,8 @@ msgstr ""
 
 #: application/helpers/ElementForm.php:287
 #, php-format
-msgid "Cannot display a form input for \"%s\" if element type name is not given!"
+msgid ""
+"Cannot display a form input for \"%s\" if element type name is not given!"
 msgstr ""
 
 #: application/helpers/ElementForm.php:342
@@ -1804,7 +1821,9 @@ msgid "No featured items are available."
 msgstr ""
 
 #: application/helpers/ItemFunctions.php:89
-msgid "An item has not been set to be displayed on this theme page! Please see Omeka documentation for details."
+msgid ""
+"An item has not been set to be displayed on this theme page! Please see "
+"Omeka documentation for details."
 msgstr ""
 
 #: application/helpers/ItemMetadata.php:87
@@ -1844,7 +1863,9 @@ msgstr ""
 
 #: application/models/ActsAsElementText.php:315
 #, php-format
-msgid "Element name is ambiguous! There is more than one element set containing an element named \"%s\"!"
+msgid ""
+"Element name is ambiguous! There is more than one element set containing an "
+"element named \"%s\"!"
 msgstr ""
 
 #: application/models/ActsAsElementText.php:318
@@ -1886,7 +1907,8 @@ msgid "The collection name must have between %1$s and %2$s characters."
 msgstr ""
 
 #: application/models/Collection.php:197
-msgid "Argument passed to addCollector() must be a string or an instance of Entity."
+msgid ""
+"Argument passed to addCollector() must be a string or an instance of Entity."
 msgstr ""
 
 #: application/models/Collection.php:229
@@ -1957,7 +1979,8 @@ msgid "Cannot get the local path for a stored file."
 msgstr ""
 
 #: application/models/Item.php:280
-msgid "Files cannot be attached to an item that is not persistent in the database!"
+msgid ""
+"Files cannot be attached to an item that is not persistent in the database!"
 msgstr ""
 
 #: application/models/Item.php:394
@@ -1978,7 +2001,9 @@ msgstr ""
 
 #: application/models/ItemPermissions.php:31
 #, php-format
-msgid "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order to have permissions checked!"
+msgid ""
+"This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order "
+"to have permissions checked!"
 msgstr ""
 
 #: application/models/ItemSearch.php:99
@@ -2003,11 +2028,15 @@ msgid "There are too few values in the element ordering array."
 msgstr ""
 
 #: application/models/ItemType.php:222
-msgid "Invalid element data. To add elements, you must either pass an element objects or an array of element metadata."
+msgid ""
+"Invalid element data. To add elements, you must either pass an element "
+"objects or an array of element metadata."
 msgstr ""
 
 #: application/models/ItemType.php:286
-msgid "Cannot remove elements from an item type that is not persistent in the database!"
+msgid ""
+"Cannot remove elements from an item type that is not persistent in the "
+"database!"
 msgstr ""
 
 #: application/models/ItemType.php:295
@@ -2021,11 +2050,12 @@ msgid "Item type does not contain an element with the ID %s!"
 msgstr ""
 
 #: application/models/ItemType.php:363
-msgid "Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element."
+msgid ""
+"Invalid parameter. The hasElement function requires either an element object "
+"or an element id to determine if an item type has an element."
 msgstr ""
 
-#: application/models/Option.php:29
-#: application/models/Option.php:33
+#: application/models/Option.php:29 application/models/Option.php:33
 msgid "Each option must have a unique name."
 msgstr ""
 
@@ -2088,7 +2118,9 @@ msgid "User may not change roles."
 msgstr ""
 
 #: application/models/User.php:150
-msgid "If a first name and last name are not provided, then an institution name is required."
+msgid ""
+"If a first name and last name are not provided, then an institution name is "
+"required."
 msgstr ""
 
 #: application/models/User.php:153
@@ -2202,7 +2234,10 @@ msgid "Backtrace"
 msgstr ""
 
 #: application/views/scripts/error/index.php:11
-msgid "To track the contents of this error, please enable error logging. Consult the Omeka codex for <a href=\"http://omeka.org/codex/Retrieving_error_messages\">information on retrieving error messages</a>."
+msgid ""
+"To track the contents of this error, please enable error logging. Consult "
+"the Omeka codex for <a href=\"http://omeka.org/codex/"
+"Retrieving_error_messages\">information on retrieving error messages</a>."
 msgstr ""
 
 #: application/views/scripts/functions.php:126
@@ -2330,7 +2365,10 @@ msgstr ""
 
 #: application/views/scripts/upgrade/completed.php:13
 #: application/views/scripts/upgrade/migrate.php:18
-msgid "If you have any questions please refer to <a href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
+msgid ""
+"If you have any questions please refer to <a href=\"http://omeka.org/codex"
+"\">Omeka documentation</a> or post a message on the <a href=\"http://omeka."
+"org/forums\">Omeka forums</a>."
 msgstr ""
 
 #: application/views/scripts/upgrade/index.php:10
@@ -2344,7 +2382,8 @@ msgid ""
 msgstr ""
 
 #: application/views/scripts/upgrade/index.php:12
-msgid "Please backup your existing database and then click the button to upgrade."
+msgid ""
+"Please backup your existing database and then click the button to upgrade."
 msgstr ""
 
 #: application/views/scripts/upgrade/index.php:13
@@ -2368,21 +2407,27 @@ msgid "Return to Dashboard"
 msgstr ""
 
 #: install/views/scripts/index/errors.phtml:1
+#: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
 msgstr ""
 
 #: install/views/scripts/index/errors.phtml:2
-msgid "Before installation can continue, the following errors must be resolved:"
+#: install/views/scripts/index/errors.phtml:2
+msgid ""
+"Before installation can continue, the following errors must be resolved:"
 msgstr ""
 
+#: install/views/scripts/index/fatal-error.phtml:1
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
 msgstr ""
 
 #: install/views/scripts/index/index.phtml:2
+#: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
 msgstr ""
 
+#: install/views/scripts/index/index.phtml:3
 #: install/views/scripts/index/index.phtml:3
 msgid ""
 "The following issues will not affect installation, but they may \n"
@@ -2390,27 +2435,48 @@ msgid ""
 msgstr ""
 
 #: install/views/scripts/index/index.phtml:14
+#: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
 msgstr ""
 
+#: install/views/scripts/index/index.phtml:16
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
 msgstr ""
 
 #: install/views/scripts/index/installed.phtml:2
-msgid "Omeka is installed. You may remove the \"install\" directory for security reasons."
+#: install/views/scripts/index/installed.phtml:2
+msgid ""
+"Omeka is installed. You may remove the \"install\" directory for security "
+"reasons."
 msgstr ""
 
+#: install/views/scripts/index/installed.phtml:3
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
 msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
+#: install/views/scripts/index/installed.phtml:3
 msgid "Admin Panel"
 msgstr ""
 
-#: install/views/scripts/layout.phtml:6
-#: install/views/scripts/layout.phtml:10
+#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:10
+#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:10
 msgid "Omeka Installation"
 msgstr ""
 
+#: admin/themes/default/plugins/config.php:2
+#, php-format
+msgid "Configure the &#8220;%s&#8221; Plugin"
+msgstr ""
+
+#: admin/themes/default/themes/config.php:2
+#, php-format
+msgid "Configure the &#8220;%s&#8221; Theme"
+msgstr ""
+
+#: application/models/ActsAsElementText.php:329
+#, php-format
+msgid "There is no element named \"%1$s\" in the set named \"%2$s\"!"
+msgstr ""
