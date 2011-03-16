@@ -326,7 +326,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
             }
             $element = @$elements[$elementSetName];
             if (!$element) {
-                throw new Omeka_Record_Exception('There is no element named "%1$s" in the set named "%2$s"!',$elementName, $elementSetName);
+                throw new Omeka_Record_Exception(__('There is no element named "%1$s" in the set named "%2$s"!',$elementName, $elementSetName));
             }
         }
 
