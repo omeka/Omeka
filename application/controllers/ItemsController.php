@@ -33,7 +33,6 @@ class ItemsController extends Omeka_Controller_Action
         'element-form' => array('POST'),
         'modify-tags' => array('POST'),
         'power-edit' => array('POST'),
-        'delete' => array('POST'),
         'change-type' => array('POST'),
     );
 

@@ -503,7 +503,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     public function deleteAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_forward('error');
+            $this->_forward('method-not-allowed', 'error', 'default');
             return;
         }
 
