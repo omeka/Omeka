@@ -123,6 +123,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
      */
     public function testActionsRequiringPost($url, $callback = null)
     {
+        $this->_addOneItem();
         $this->dispatch($url, $callback);
         $this->assertController('error');
         $this->assertAction('method-not-allowed');
