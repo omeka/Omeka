@@ -34,6 +34,9 @@ q:before, q:after,
 blockquote:before, blockquote:after {
     content: "";
 }
+:focus {
+	outline:0;
+}
 
 /* == Components == */
 
