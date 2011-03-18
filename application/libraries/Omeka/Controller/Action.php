@@ -461,6 +461,14 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     protected function _getDeleteSuccessMessage($record) {return '';}     
     
     /**
+     * Returns the delete confirm message for deleting a record.
+     *
+     * @param Omeka_Record $record
+     * @return string
+     */
+    protected function _getDeleteConfirmMessage($record) {return '';}
+    
+    /**
      * Similar to 'add' action, except this requires a pre-existing record.
      * 
      * Every request to this action must pass a record ID in the 'id' parameter.
@@ -506,9 +514,17 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             $this->_forward('method-not-allowed', 'error', 'default');
             return;
         }
-
-        $record = $this->findById();         
-        $record->delete();
+        
+        $record = $this->findById();
+        
+        $form = $this->_getDeleteForm();
+        
+        if ($form->isValid($_POST)) { 
+            $record->delete();
+        } else {
+            $this->_forward('error');
+            return;
+        }
         
         $successMessage = $this->_getDeleteSuccessMessage($record);
         if ($successMessage != '') {
@@ -594,5 +610,27 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         }
         
         return $record;
+    }
+    /**
+     *
+     */
+    public function deleteConfirmAction() {
+        $isPartial = $this->getRequest()->isXmlHttpRequest();
+        $record = $this->findById();
+        $form = $this->_getDeleteForm();
+        $confirmMessage = $this->_getDeleteConfirmMessage($record);
+        $this->view->assign(compact('confirmMessage','record', 'isPartial', 'form'));
+        $this->render('common/delete-confirm', null, true);
+    }
+
+    protected function _getDeleteForm()
+    {
+        $form = new Zend_Form();
+        $form->setElementDecorators(array('ViewHelper'));
+        $form->removeDecorator('HtmlTag');
+        $form->addElement('hash', 'confirm_delete_hash');
+        $form->addElement('submit', 'Delete', array('class' => 'delete-confirm'));
+        $form->setAction($this->view->url(array('action' => 'delete')));
+        return $form;
     }
 }

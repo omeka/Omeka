@@ -119,6 +119,13 @@ class ItemsController extends Omeka_Controller_Action
         return 'The item was successfully deleted!';
     }
     
+    protected function _getDeleteConfirmMessage($record)
+    {
+        return 'This will delete the item and its associated metadata. It will '
+             . 'also delete all files and file metadata associated with this '
+             . 'item.';
+    }
+    
     public function addAction()
     {
         // Get all the element sets that apply to the item.

@@ -274,6 +274,14 @@ class UsersController extends Omeka_Controller_Action
         return 'The user "' . $user->username . '" was successfully deleted!';
     }
     
+    protected function _getDeleteConfirmMessage($record)
+    {
+        $user = $record;
+        return "$user->username will be deleted from the system. Items, "
+             . 'collections, and tags created by this user will remain in the '
+             . 'archive, but will no longer be associated with this user.';
+    }
+    
     protected function sendActivationEmail($user)
     {
         $ua = new UsersActivations;

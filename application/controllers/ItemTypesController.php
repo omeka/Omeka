@@ -34,6 +34,14 @@ class ItemTypesController extends Omeka_Controller_Action
         $this->_modelClass = 'ItemType';
     }
     
+    protected function _getDeleteConfirmMessage($record)
+    {
+        return 'This will delete the item type but will not delete the '
+             . 'elements assigned to the item type. Items that are assigned to '
+             . 'this item type will lose all metadata that is specific to the '
+             . 'item type.';
+    }
+    
     /**
      * Add the item type and redirect to the item type edit page so the user can 
      * assign new and existing elements.

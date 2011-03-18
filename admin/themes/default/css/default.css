@@ -79,9 +79,9 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
         -moz-border-radius:6px;
     }
 
-    .delete-button {background-color: #800 !important; border-color: #800 !important;}
-    td .delete-button {margin: 0; padding: 1px 6px; float: none;}
-    
+    .delete-button, .delete-confirm {background-color: #800 !important; border-color: #800 !important;float: none !important;}
+    td .delete-confirm {margin: 0; padding: 1px 6px;}
+
     input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
     
     input.add-element,
