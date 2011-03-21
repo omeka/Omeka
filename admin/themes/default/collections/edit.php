@@ -18,7 +18,7 @@
 <input type="submit" name="submit" class="submit submit-medium" id="save-changes" value="Save Changes" />
 </form>
 
-<?php echo delete_button(null, 'delete-collection', 'Delete this Collection', array('class' => 'delete-button delete-collection')); ?>
+<?php echo delete_button(null, 'delete-collection', 'Delete this Collection'); ?>
 
 </div>
 <?php foot(); ?>

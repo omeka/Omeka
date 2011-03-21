@@ -136,7 +136,7 @@ class UsersController extends Omeka_Controller_Action
         if (!empty($_POST)) {
             try {
                 if ($_POST['new_password1'] != $_POST['new_password2']) {
-                    throw new Exception('Password: The passwords do not match.');
+                    throw new Omeka_Validator_Exception('Password: The passwords do not match.');
                 }
                 $ua->User->setPassword($_POST['new_password1']);
                 $ua->User->active = 1;
@@ -144,8 +144,8 @@ class UsersController extends Omeka_Controller_Action
                 $ua->delete();
                 $this->flashSuccess("Your password has been changed.  Please log in with your new password.");
                 $this->redirect->goto('login');
-            } catch (Exception $e) {
-                $this->flashError($e->getMessage());
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
             }
         }
         $user = $ua->User;
@@ -247,13 +247,21 @@ class UsersController extends Omeka_Controller_Action
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
-        }
+        } 
     }
     
     protected function _getDeleteSuccessMessage($record)
     {
         $user = $record;
         return 'The user "' . $user->username . '" was successfully deleted!';
+    }
+    
+    protected function _getDeleteConfirmMessage($record)
+    {
+        $user = $record;
+        return "$user->username will be deleted from the system. Items, "
+             . 'collections, and tags created by this user will remain in the '
+             . 'archive, but will no longer be associated with this user.';
     }
     
     protected function sendActivationEmail($user)

@@ -53,8 +53,8 @@ class PluginsController extends Omeka_Controller_Action
         if ($this->getRequest()->isPost()) {
             try {
                 $this->_pluginBroker->callHook('config', array($_POST), $plugin);
-            } catch (Exception $e) {
-                $this->flashError($e->getMessage());
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
                 $this->redirect->goto('config', null, null, array('name' => $plugin->getDirectoryName()));    
             }
             

@@ -123,6 +123,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
      */
     public function testActionsRequiringPost($url, $callback = null)
     {
+        $this->_addOneItem();
         $this->dispatch($url, $callback);
         $this->assertController('error');
         $this->assertAction('method-not-allowed');
@@ -275,12 +276,24 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public function testDelete()
     {
         $this->_addOneItem();
+        $hash = new Zend_Form_Element_Hash('confirm_delete_hash');
+        $hash->initCsrfToken();
         $this->_makePost(array(
-            'id' => 1
+            'confirm_delete_hash' => $hash->getHash()
         ));
-        $this->dispatch('/items/delete');
+        $this->dispatch('/items/delete/1');
         $this->assertEquals(0, $this->db->getTable('Item')->count());
         $this->assertRedirectTo('/items/browse');
+    }
+
+    /**
+     * @expectedException Omeka_Controller_Exception_404
+     */
+    public function testDeleteWithoutHash()
+    {
+        $this->_addOneItem();
+        $this->request->setMethod('POST');
+        $this->dispatch('/items/delete/1');
     }
 
     public function testChangeTypeXmlHttpRequest()

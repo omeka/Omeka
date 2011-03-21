@@ -42,5 +42,12 @@ class CollectionsController extends Omeka_Controller_Action
     {
         $collection = $record;
         return 'The collection "' . $collection->name . '" was successfully deleted!';        
-    }    
+    }
+
+    protected function _getDeleteConfirmMessage($record)
+    {
+        return 'This will delete the collection and its associated metadata. '
+             . 'This will not delete any items in this collection, but will '
+             . 'delete the reference to this collection in each item.';
+    }
 }
