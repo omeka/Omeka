@@ -48,18 +48,13 @@ class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstr
         if (!Zend_Registry::isRegistered('test_config')) {
             Zend_Registry::set('test_config', $config->testing);
         }
+
         // Merging the configs allows us to override settings only for tests.
-        try {
-            $mainCopy = new Zend_Config($mainConfig->toArray(), true); 
+        if ($config->site instanceof Zend_Config) {
+            $mainCopy = new Zend_Config($mainConfig->toArray(), true);
             $mainCopy->merge($config->site);
             $mainCopy->setReadOnly(true);
             $mainConfig = $mainCopy;
-        } catch (Zend_Config_Exception $e) {
-            // Legacy installations will fail for lack of a [site] section.
-            // Remove this catch clause in 2.0.
-            if (strpos($e->getMessage(), "Section 'site' cannot be found") === false) {
-                throw $e;
-            }
         }
         return $mainConfig;
     }
