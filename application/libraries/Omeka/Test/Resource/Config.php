@@ -44,16 +44,14 @@ class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstr
     {
         $mainConfig = $this->_coreResource->init();
         $testConfigPath = APP_DIR . '/tests/config.ini';
+        $config = new Zend_Config_Ini($testConfigPath);
         if (!Zend_Registry::isRegistered('test_config')) {
-            //Config dependency
-            $config = new Zend_Config_Ini($testConfigPath, 'testing');
-            Zend_Registry::set('test_config', $config);
+            Zend_Registry::set('test_config', $config->testing);
         }
         // Merging the configs allows us to override settings only for tests.
         try {
             $mainCopy = new Zend_Config($mainConfig->toArray(), true); 
-            $testSiteConfig = new Zend_Config_Ini($testConfigPath, 'site');
-            $mainCopy->merge($testSiteConfig);
+            $mainCopy->merge($config->site);
             $mainCopy->setReadOnly(true);
             $mainConfig = $mainCopy;
         } catch (Zend_Config_Exception $e) {
