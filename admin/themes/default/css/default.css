@@ -398,20 +398,20 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         -moz-border-radius:6px;padding: 3px 6px;}
         .pagination a:hover {background: #c60; color: #fff;}
     
-    /* Tagclouds */ 
-    .hTagcloud ul {list-style:none; margin-left:0; padding-left:0; line-height: 3em;}
+    /* Tagclouds */
+    .hTagcloud ul {list-style:none; margin-left:0; padding-left:0; line-height: 1.3;}
         .hTagcloud li {display:inline;}
-        .hTagcloud a {text-decoration:none;}
+        .hTagcloud a {text-decoration:none;vertical-align:middle;}
 
         .popular,.-popular {font-size:100%;}
-        .v-popular {font-size:150%;}
-        .vv-popular {font-size:200%;}
-        .vvv-popular {font-size:250%;}
-        .vvvv-popular {font-size:300%;}
-        .vvvvv-popular {font-size:350%;}
-        .vvvvvv-popular {font-size:400%;}
-        .vvvvvvv-popular {font-size:450%;}
-        .vvvvvvvv-popular {font-size:500%;}
+        .v-popular {font-size:140%;}
+        .vv-popular {font-size:180%;}
+        .vvv-popular {font-size:220%;}
+        .vvvv-popular {font-size:260%;}
+        .vvvvv-popular {font-size:300%;}
+        .vvvvvv-popular {font-size:320%;}
+        .vvvvvvv-popular {font-size:340%;}
+        .vvvvvvvv-popular {font-size:360%;}
         
     /* Misc Classes */
     .add-button {position:absolute; top:20px; right:0; text-align:right;}
