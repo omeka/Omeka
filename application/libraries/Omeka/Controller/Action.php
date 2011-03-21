@@ -426,10 +426,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
-        }
-
+        } 
         $this->view->assign(array($varName=>$record));            
     }
     
@@ -492,10 +489,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
-        }
-        
+        } 
         $this->view->assign(array($varName=>$record));        
     }
     

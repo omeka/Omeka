@@ -61,8 +61,6 @@ class ItemTypesController extends Omeka_Controller_Action
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
         }
         $this->view->assign(array('itemtype' => $itemType));            
     }
@@ -99,10 +97,7 @@ class ItemTypesController extends Omeka_Controller_Action
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);            
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
-        }
-                
+        }      
         $this->view->assign(array('itemtype' => $itemType, 
                                   'elementsToAdd' => $elementsToAdd, 
                                   'elementsToAddTempIds' => $elementsToAddTempIds, 
