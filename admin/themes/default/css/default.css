@@ -451,12 +451,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         #public-link:hover {background: #389;}
     
     /* Primary Nav */
-    .primary-nav {overflow:hidden; border:1px solid #777;background:#382e22;clear:both; margin-bottom:0;padding-left:36px;border-width:1px 0 0; font-size:1.1em; font-weight:normal;}
+    #primary-nav-container {background:#382e22;padding-left:36px;clear:both;border-top:1px solid #777;}
+    .primary-nav {overflow:hidden;border-left:1px solid #d7d5c4;margin-bottom:0;font-size:1.1em;font-weight:normal;}
         .primary-nav li {display:block; float:left; width: 125px;border-right:1px solid #d7d5c4;}
         .primary-nav a {text-decoration:none;display:block; float:left; text-indent:12px;color:#fafafa;width: 125px;padding: 8px 0 16px;background:#2E261C;}
         .primary-nav a:visited {color:#fafafa;}
         .primary-nav a:hover {background:#382E22; color: #fafafa;}
-        .primary-nav li.nav-items {border-left:1px solid #d7d5c4;}
         .primary-nav li.current a, .primary-nav li.current a:visited,
         .themes .primary-nav li.nav-settings a, 
         .plugins .primary-nav li.nav-settings a,
