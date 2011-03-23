@@ -187,6 +187,7 @@ class UsersController extends Omeka_Controller_Action
                 $ua->User->active = 1;
                 $ua->User->forceSave();
                 $ua->delete();
+                $this->flashSuccess('You may now log in to Omeka.');
                 $this->redirect->goto('login');
             } catch (Omeka_Validator_Exception $e) {
                 $this->flashValidationErrors($e);

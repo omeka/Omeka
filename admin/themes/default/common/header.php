@@ -28,7 +28,7 @@
             
             <div id="site-info">
                 <?php if (current_user()): ?>
-                    <p id="welcome">Welcome, <a href="<?php echo html_escape(uri('users/edit/'.current_user()->id)); ?>"><?php echo html_escape(current_user()->first_name); ?></a> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout">Logout</a></p>
+                    <p id="welcome">Welcome, <a href="<?php echo html_escape(uri('users/edit/'.current_user()->id)); ?>"><?php echo html_escape(current_user()->first_name); ?></a> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout">Log Out</a></p>
                 <?php endif; ?>
                 <?php if (has_permission('Settings', 'edit')): ?>
                     <a href="<?php echo html_escape(uri('settings')); ?>" id="settings-link">Settings</a>
