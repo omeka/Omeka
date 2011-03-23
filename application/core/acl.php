@@ -19,6 +19,7 @@ $resources = array(
     'Upgrade'       =>  array('migrate', 'completed'),
     'Tags'          =>  array('rename','remove', 'browse'),
     'Themes'        =>  array('browse','switch', 'config'),
+    'SystemInfo'    =>  array('index'),
     // 'delete-element' and 'add-element' are actions that allow AJAX requests to manipulate the elements for an item type.
     'ItemTypes'     =>  array('add','edit','delete', 'browse', 'delete-element', 'add-element'),
     // 'makeSuperUser' should be deprecated, since it can only be called if non-super users can choose the roles for user accounts.
