@@ -57,7 +57,7 @@ $formAttributes['method'] = 'GET';
                     @$rows['element_id'],
                     null,
                     array('record_types' => array('Item', 'All'), 
-                          'sort' => 'alpha'));
+                          'sort' => 'alphaBySet'));
                 echo select(
                     array('name' => "advanced[$i][type]"),
                     array('contains' => 'contains', 
