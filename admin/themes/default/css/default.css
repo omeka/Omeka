@@ -674,7 +674,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         body.themes .configure-button {padding: 4px 8px;}
         
     /* System Information */
-    .system-info pre#info-field {border: solid 1px gray; padding: 5px; font-family: monospace; width: 100%; font-size: 1.6em; word-wrap: break-word; white-space: pre-wrap;}
+    .system-info pre#info-field {border: solid 1px gray; padding: 5px; font-family: monospace; font-size: 1.6em; word-wrap: break-word; white-space: pre-wrap;}
 /* == Footer == */
 #footer {clear:both; padding: 18px 0 1px;  overflow:hidden; margin:0 36px; width: 846px;background: #eae9db;}
     #footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}
