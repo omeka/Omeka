@@ -58,15 +58,20 @@ class Omeka_Core_Resource_Db extends Zend_Application_Resource_Db
             $connectionParams['port'] = $dbIni->port;
         }
         
+        $bootstrap = $this->getBootstrap();
+        $bootstrap->bootstrap('Config');
+        $config = $this->getBootstrap()->getResource('Config');
+        $loggingEnabled = $config->log->sql;
+        $profilingEnabled = $config->debug->profileDb;
+
+        if ($profilingEnabled) {
+            $connectionParams['profiler'] = true;
+        }
         $dbh = Zend_Db::factory('Mysqli', $connectionParams);
         
         $db_obj = new Omeka_Db($dbh, $dbIni->prefix);
         
         // Enable SQL logging (potentially).
-        $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap('Config');
-        $loggingEnabled = ($config = $this->getBootstrap()->getResource('Config'))
-                        && ($config->log->sql);
         if ($loggingEnabled) {
             $bootstrap->bootstrap('Logger');
             $db_obj->setLogger($bootstrap->getResource('Logger'));

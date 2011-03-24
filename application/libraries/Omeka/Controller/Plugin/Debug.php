@@ -22,6 +22,8 @@
  */
 class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
 {
+    private $_requestMarkup;
+
     /**
      * Print request debugging info for every request.
      *
@@ -32,15 +34,82 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $context = Omeka_Context::getInstance();
-        $config = $context->getConfig('basic');
+        $config = Omeka_Context::getInstance()->config;
         
         $debugRequests = $config->debug->request;
         
         if ($debugRequests) {
-            $router = $context->getFrontController()->getRouter();
-            echo $this->_getMarkup($request, $router);exit;
+            $router = Omeka_Context::getInstance()->getFrontController()
+                                                  ->getRouter();
+            $markup = $this->_getRequestMarkup($request, $router);
+            $this->_requestMarkup = $markup;
         }
+    }
+
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        if ($this->_requestMarkup) {
+            $this->getResponse()->setBody($this->_requestMarkup);
+        }
+    }
+
+    /**
+     * Print database profiling info.
+     *
+     * Enabled conditionally when debug.profileDb = true in config.ini.
+     *
+     * @param Zend_Controller_Request_Abstract $request Request object.
+     * @return void
+     */
+    public function dispatchLoopShutdown()
+    {
+        $enableProfiler = Omeka_Context::getInstance()->config->debug->profileDb;
+        if (!$enableProfiler) {
+            return;
+        }
+        $profiler = Omeka_Context::getInstance()->db->getProfiler();
+        if ($profiler) {
+            $markup = $this->_getProfilerMarkup($profiler);
+            $this->getResponse()->setBody($markup);
+        }
+    }
+
+    private function _getProfilerMarkup(Zend_Db_Profiler $profiler)
+    {
+        $totalTime    = $profiler->getTotalElapsedSecs();
+        $queryCount   = $profiler->getTotalNumQueries();
+        $longestTime  = 0;
+        $longestQuery = null;
+        $lines = array();
+        $html = "<h2>Db Profiler</h2>\n";
+
+        $lines[] = "The following queries were executed during the request:";
+        $profiles = $profiler->getQueryProfiles();
+        if (!$profiles) {
+            return $html;
+        }
+        foreach ($profiles as $query) {
+            $sql = $query->getQuery();
+            $elapsedSecs = $query->getElapsedSecs();
+            if ($elapsedSecs > $longestTime) {
+              $longestTime  = $query->getElapsedSecs();
+              $longestQuery = $sql;
+            }
+            $lines[] = "[$elapsedSecs] $sql";
+        }
+
+        $lines[] = 'Executed ' . $queryCount . ' queries in ' . $totalTime .
+             ' seconds';
+        $lines[] = 'Average query length: ' . $totalTime / $queryCount .
+             ' seconds';
+        $lines[] = 'Queries per second: ' . $queryCount / $totalTime;
+        $lines[] = 'Longest query length: ' . $longestTime;
+        $lines[] = "Longest query: \n" . $longestQuery;
+
+        foreach ($lines as $line) {
+            $html .= '<p>' . $line . '</p>' . "\n";
+        }
+        return $html;
     }
     
     /**
@@ -50,7 +119,7 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
      * @param Zend_Controller_Router_Interface $router Router object.
      * @return string HTML markup.
      */
-    private function _getMarkup($request, $router)
+    private function _getRequestMarkup($request, $router)
     {
         $requestUri = $request->getRequestUri();
         
