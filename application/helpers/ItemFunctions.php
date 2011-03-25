@@ -54,25 +54,10 @@
   * none with images.
   * @return string HTML
   **/
- function display_random_featured_item($withImage=false)
+ function display_random_featured_item($withImage = null)
  {
-    $featuredItem = random_featured_item($withImage);
- 	$html = '<h2>Featured Item</h2>';
- 	if ($featuredItem) {
- 	    $itemTitle = item('Dublin Core', 'Title', array(), $featuredItem);
-        
- 	   $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $featuredItem) . '</h3>';
- 	   if (item_has_thumbnail($featuredItem)) {
- 	       $html .= link_to_item(item_square_thumbnail(array(), 0, $featuredItem), array('class'=>'image'), 'show', $featuredItem);
- 	   }
- 	   // Grab the 1st Dublin Core description field (first 150 characters)
- 	   if ($itemDescription = item('Dublin Core', 'Description', array('snippet'=>150), $featuredItem)) {
- 	       $html .= '<p class="item-description">' . $itemDescription . '</p>';
-       }
- 	} else {
- 	   $html .= '<p>No featured items are available.</p>';
- 	}
-
+     $html = '<h2>Featured Item</h2>';
+     $html .= display_random_featured_items('1', $withImage);
      return $html;
  }
  
@@ -525,19 +510,20 @@
  }
 
  /**
-  * Returns a randome featured item
+  * Returns a random featured item
   * 
   * @since 7/3/08 This will retrieve featured items with or without images by
   *  default. The prior behavior was to retrieve only items with images by
   *  default.
-  * @param string $hasImage
+  * @param boolean|null $hasImage
   * @return Item
   */
- function random_featured_item($hasImage=false) 
+ function random_featured_item($hasImage=null) 
  {
- 	return get_db()->getTable('Item')->findRandomFeatured($hasImage);
+	$item = random_featured_items('1', $hasImage);
+	return $item[0];
  }
- 
+
  /**
   * Returns the total number of items
   *
@@ -546,4 +532,42 @@
  function total_items() 
  {	
  	return get_db()->getTable('Item')->count();
+ }
+
+ /**
+  * Returns multiple random featured item
+  *
+  * @since 1.4
+  * @param integer $num The maximum number of recent items to return
+  * @param boolean|null $hasImage
+  * @return array $items
+  */
+ function random_featured_items($num = 5, $hasImage = null)
+ {
+	return get_items(array('featured'=>1, 'random' => 1, 'hasImage' => $hasImage), $num);
+ }
+ 
+ function display_random_featured_items($num = 5, $hasImage = null)
+ {
+  	$html = '';
+     
+     if ($randomFeaturedItems = random_featured_items($num, $hasImage)) {
+        foreach ($randomFeaturedItems as $randomItem) {
+            $itemTitle = item('Dublin Core', 'Title', array(), $randomItem);
+
+            $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
+            
+            if (item_has_thumbnail($randomItem)) {
+                $html .= link_to_item(item_square_thumbnail(array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
+            }
+
+            if ($itemDescription = item('Dublin Core', 'Description', array('snippet'=>150), $randomItem)) {
+                $html .= '<p class="item-description">' . $itemDescription . '</p>';
+            }
+        }
+    } else {
+        $html .= '<p>No featured items are available.</p>';
+    }
+    
+    return $html;
  }
