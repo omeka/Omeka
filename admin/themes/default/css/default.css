@@ -381,7 +381,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 			float:none;
         }
         #advanced-search-link a {text-decoration:none; font-weight:bold; color: #389;display:block; text-align:right;padding-top:5px; font-size:1.1em;}
-    
+             
     /* Pagination */
     .browse-items .pagination {float:left; width: 414px; padding-top:5px;}
     .pagination li {display:inline;padding: 3px 6px; }

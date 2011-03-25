@@ -48,6 +48,11 @@ endif; ?>
 </fieldset>
 </form>
 
+<div>
+    <h2>Output Formats</h2>
+    <?php echo output_format_list(false); ?>
+</div>
+
 <?php elseif(!total_items()): ?>
     <div id="no-items">
     <p>There are no items in the archive yet.
@@ -58,13 +63,11 @@ endif; ?>
 </div>
     
 <?php else: ?>
-    <h1>The query searched <?php echo total_items(); ?> items and returned no results.</h1>
+    <p>The query searched <?php echo total_items(); ?> items and returned no results. Would you like to <?php echo link_to_advanced_search('refine your search'); ?>?</p>
+    
 <?php endif; ?>
 
-<div>
-    <h2>Output Formats</h2>
-    <?php echo output_format_list(false); ?>
-</div>
+
 
 <?php fire_plugin_hook('admin_append_to_items_browse_primary', $items); ?>
 
