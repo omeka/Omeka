@@ -254,7 +254,7 @@
      $cite .= "accessed $accessDate, ";
      $cite .= "$uri.";
 
-     return apply_filters('item_citation', $cite);
+     return apply_filters('item_citation', $cite, $item);
  }
  
  /**
