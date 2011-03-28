@@ -8,8 +8,10 @@
  */
 
 /**
- * Initialize the User object for the currently logged-in user.  If no user
- * has been authenticated, this value will be equivalent to false.
+ * Retrive the User record corresponding to the authenticated user.
+ *
+ * If the user record is not retrievable (invalid ID), then the authentication 
+ * ID will be cleared.
  * 
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
@@ -19,15 +21,23 @@
 class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
 {
     /**
-     * @return User|boolean False if there is no authenticated user.
+     * Retrieve the User record associated with the authenticated user.
+     *
+     * Note that this returns null when no User is authenticated.  Prior 
+     * to 1.4, this returned boolean false.  For forward-compatibility, this 
+     * has been changed to null in 1.4.  This is because in future versions, 
+     * User will implement Zend_Role_Interface.  Zend_Acl accepts null as 
+     * a valid role, but it throws exceptions for boolean false (tries to 
+     * convert it to the empty string).
+     *
+     * @return User|null
      */
     public function init()
     {
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Auth');
         $auth = $bootstrap->getResource('Auth');
-        
-        $user = false;
+        $user = null;
 
         if ($auth->hasIdentity()) {
             $userId = $auth->getIdentity();
@@ -44,7 +54,7 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
                 // with the code.  Suppress errors and skip authentication, but
                 // only until the database is properly upgraded.
                 if (Omeka_Db_Migration_Manager::getDefault()->dbNeedsUpgrade()) {
-                    $user = false;
+                    $user = null;
                 } else {
                     throw $e;
                 }
@@ -56,7 +66,6 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
                 $auth->clearIdentity();
             }
         } 
-
         return $user;
     }
 }

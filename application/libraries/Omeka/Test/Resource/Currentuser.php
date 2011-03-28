@@ -17,9 +17,5 @@
  */
 class Omeka_Test_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
 {
-    public function init()
-    {
-        // Unauthenticated user === false instead of null for some reason.
-        return false;
-    }
+    public function init() {}
 }
