@@ -17,7 +17,13 @@ require_once HELPERS;
 class Omeka_Helper_AutoDiscoveryLinkTagsTest extends Omeka_Test_AppTestCase
 {           
     protected $_isAdminTest = false;
-    
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+ 
 	public function testLinkTagOnHome()
 	{
 		$this->dispatch('/');

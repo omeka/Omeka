@@ -19,6 +19,12 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         parent::setUp();
         $this->adminUser = $this->_addNewUserWithRole('admin');
         $this->superUser = $this->_addNewUserWithRole('super');
+        self::dbChanged(false);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        self::dbChanged(true);
     }
 
     public function testSuperCanAccessForm()
@@ -88,19 +94,21 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     
     public function testChangeOtherUsersAccountInfoAsSuperUser()
     {
+        $expectedUsername = 'newuser' . mt_rand();
         $this->_authenticateUser($this->superUser);
         $this->request->setPost(array(
-            'username' => 'newusername',
+            'username' => $expectedUsername,
             'first_name' => 'foobar',
             'last_name' => 'foobar',
-            'email' => $this->adminUser->email,
+            'email' => 'admin' . mt_rand() . '@example.com',
             'institution' => 'School of Hard Knocks',
             'role' => 'admin',
             'active' => '1'
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
-        $this->assertEquals($this->db->getTable('User')->find($this->adminUser->id)->username, "newusername");
+        $newUsername = $this->db->getTable('User')->find($this->adminUser->id)->username;
+        $this->assertEquals($expectedUsername, $newUsername);
         $this->assertRedirectTo('/users/browse');
     }
     
@@ -112,7 +120,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'username' => 'newusername',
             'first_name' => 'foobar',
             'last_name' => 'foobar',
-            'email' => $this->superUser->email,
+            'email' => 'foobar' . mt_rand() . '@example.com',
             'institution' => 'School of Hard Knocks'
         ));
         $this->request->setMethod('post');
@@ -194,6 +202,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $existingUser = $this->_getUser($username);
         if ($existingUser) {
             $existingUser->delete();
+            release_object($existingUser);
         }
         $newUser = new User;
         $newUser->username = $username;

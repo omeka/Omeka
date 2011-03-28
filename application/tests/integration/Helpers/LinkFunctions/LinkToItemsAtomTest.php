@@ -19,6 +19,12 @@
  */ 
 class Omeka_Helper_LinkFunctions_LinkToItemsAtomTest extends Omeka_Test_AppTestCase
 {
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     public function testLinkToItemsAtomDefault()
     {
         $linkHtml = '<a class="atom" href="/items/browse?output=atom">Atom</a>';

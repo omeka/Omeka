@@ -46,6 +46,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
         $this->assertQuery('form #email');
+        self::dbChanged(false);
     }
     
     public function testForgotPasswordForInvalidEmail()
@@ -59,6 +60,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->assertNotRedirect();
         $this->assertQueryContentContains("div.error", "Unable to reset password.", 
             "The form should have responded with an error message indicating there was a problem.");
+        self::dbChanged(false);
     }
     
     public function testSendingEmailForForgottenPassword()
@@ -75,6 +77,8 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $activationCode = $this->db->fetchOne("SELECT url FROM omeka_users_activations LIMIT 1");
         $this->assertThat($mail, $this->stringContains($activationCode), 
             "Email should contain the activation code send to the user.");
+        $this->db->query("TRUNCATE {$this->db->UsersActivations}");
+        self::dbChanged(false);
     }
     
     public function testForgotPasswordForInactiveUser()

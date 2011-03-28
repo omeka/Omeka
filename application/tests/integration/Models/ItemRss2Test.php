@@ -16,6 +16,12 @@ class Omeka_Model_ItemRss2Test extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = false;
     
+    public function setUp()
+    {
+        parent::setUp();
+        self::dbChanged(false);
+    }
+    
     public function assertPreConditions()
     {
         $this->assertEquals(1, $this->db->getTable('Item')->count(),

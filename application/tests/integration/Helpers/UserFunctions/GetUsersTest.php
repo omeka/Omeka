@@ -7,6 +7,12 @@ require_once HELPERS;
  */
 class Helpers_UserFunctions_GetUsersTest extends Omeka_Test_AppTestCase
 {   
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     /**
      * Tests whether the get_users helper returns data correctly from the test
      * database with no changes.

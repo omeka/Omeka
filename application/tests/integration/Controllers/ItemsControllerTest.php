@@ -20,6 +20,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     {
         parent::setUp();
         $this->_authenticateUser($this->_getDefaultUser());
+        self::dbChanged(false);
     }
 
     public function dispatch($url, $callback = null)
@@ -269,6 +270,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public function testDelete()
     {
+        self::dbChanged(true);
         $hash = new Zend_Form_Element_Hash('confirm_delete_hash');
         $hash->initCsrfToken();
         $this->_makePost(array(
@@ -284,7 +286,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
      */
     public function testDeleteWithoutHash()
     {
-        $this->_addOneItem();
+        self::dbChanged(true);
         $this->request->setMethod('POST');
         $this->dispatch('/items/delete/1');
     }
@@ -309,6 +311,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     protected function _addOneItem()
     {
+        self::dbChanged(true);
         $item = insert_item();
         $this->assertTrue($item->exists());
         return $item;
