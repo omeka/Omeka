@@ -17,7 +17,7 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     {   
         $this->_createFeaturedItems();
         $html = display_random_featured_items();
-        $this->assertContains('<h3><a href="/items/show/1">Title 1</a></h3>', $html);
+        $this->assertContains('<h3><a href="/items/show/2">Title 1</a></h3>', $html);
         $this->assertContains('<p class="item-description">Description for item 1.</p>', $html);
     }
     
@@ -35,7 +35,6 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     {
         $db = $this->db;
         
-        // Create five items.
         for ($i=1; $i < 6; $i++) {
             $title = "Title $i";
             $description = "Description for item $i.";
