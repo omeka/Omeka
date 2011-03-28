@@ -45,6 +45,9 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         if ($retVal = parent::__get($property)) {
             return $retVal;
         }
+        if (!isset($this->core)) {
+            return;
+        }
         return $this->core->getBootstrap()->getContainer()->{$property};
     }
 
