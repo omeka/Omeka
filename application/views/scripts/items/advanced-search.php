@@ -4,9 +4,13 @@ if (!$isPartial):
                'bodyclass' => 'advanced-search', 
                'bodyid' => 'advanced-search-page'));
 ?>
-
-<div id="primary">   
-    <h1>Advanced Search</h1>
+<?php if(!is_admin_theme()): ?>
+<div id="primary">
+<?php endif; ?>
+<h1>Advanced Search</h1>
+<?php if(is_admin_theme()): ?>
+<div id="primary">
+<?php endif; ?>
      
 <?php endif; ?>
 <?php 
