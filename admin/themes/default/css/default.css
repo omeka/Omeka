@@ -488,8 +488,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     .browse-items .simple li.nav-list-view a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
     
     #items-browse {clear:both;}
-    #browse-meta {overflow:hidden; padding-bottom:18px;border-bottom:2px solid #d7d5c4;clear:both;}
-    table#items {width:100%;} 
+    #browse-meta {overflow:hidden; padding-bottom:18px;clear:both;}
+    table#items {width:100%; border-top:2px solid #d7d5c4;} 
     .items #primary {clear:right;}
     
     #detailed {padding-top:18px;}
