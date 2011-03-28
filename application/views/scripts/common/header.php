@@ -23,7 +23,8 @@
     <?php display_js(); ?>
 
 </head>
-<body<?php echo isset($bodyid) ? ' id="'.$bodyid.'"' : ''; ?><?php echo isset($bodyclass) ? ' class="'.$bodyclass.'"' : ''; ?>>
+
+<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
 	<div id="wrap">
 
 		<div id="header">
