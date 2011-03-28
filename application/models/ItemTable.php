@@ -275,9 +275,9 @@ class ItemTable extends Omeka_Db_Table
      * image file.
      * @return void
      */
-    public function filterByHasDerivativeImage($select, $hasDerivativeImage = 1)
+    public function filterByHasDerivativeImage($select, $hasDerivativeImage = true)
     {
-        $hasDerivativeImage = (bool) $hasDerivativeImage;
+        $hasDerivativeImage = $hasDerivativeImage ? '1' : '0';
 
         $db = $this->getDb();
 
@@ -457,6 +457,16 @@ class ItemTable extends Omeka_Db_Table
         return $this->fetchObject($select);
     }
     
+    /**
+     * Finds a random featured item.
+     *
+     * @deprecated Since 1.4.
+     * @see findBy There are parameters for returning items randomly and with
+     * derivative images as of version 1.4.
+     *
+     * @param bool $withImage Whether to find an item with a derivative image.
+     * @return Item
+     */
     public function findRandomFeatured($withImage=true)
     {        
         $select = $this->getSelect();

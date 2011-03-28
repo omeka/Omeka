@@ -18,8 +18,9 @@ $resources = array(
     'Upgrade', 
     'Tags', 
     'Themes', 
+    'SystemInfo',
     'ItemTypes', 
-    'Users'
+    'Users',
 );
 
 //Each entry in this array is the set of the values passed to $acl->allow()

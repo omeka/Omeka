@@ -251,17 +251,16 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         }
         
         //The new email address is fully legit, so set the entity to the new info                
-        $entity->first_name  = $post['first_name'];
-        $entity->last_name   = $post['last_name'];
-        $entity->institution = $post['institution'];
-        $entity->email       = $post['email'];
+        $entityKeys = array('first_name', 'last_name', 'institution', 'email');
+
+        foreach ($entityKeys as $key) {
+            if (array_key_exists($key, $post)) {
+                $entity[$key] = $post[$key];
+                unset($post[$key]);
+            }
+        }
         
         $this->Entity = $entity;
-        
-        unset($post['email']);
-        unset($post['first_name']);
-        unset($post['last_name']);
-        unset($post['institution']);
                         
         return true;
     }

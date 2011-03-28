@@ -19,40 +19,26 @@
  */ 
 class Omeka_Helper_LinkFunctions_LinkToItemTest extends Omeka_Test_AppTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $this->item = $this->db->getTable('Item')->find(1);
+    }
+
     public function testLinkToItemWithCurrentItem()
     {
-        $title = 'title';
-        
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => $title, 'html' => false))
-        ));
-        
-        $item = new Item;
-        $item->addElementTextsByArray($elementTexts);
-        $item->save();
-        
-        set_current_item($item);
-        
-        $linkToItemHtml = '<a href="/items/show/1">title</a>';
+        set_current_item($this->item);
+        $linkToItemHtml = '<a href="/items/show/1">' . Installer_Test::TEST_ITEM_TITLE 
+            . '</a>';
         $this->assertEquals($linkToItemHtml, link_to_item());
         
     }
     
     public function testLinkToItemWithNullLinkText()
     {
-        $title = 'title';
-        
-        $elementTexts = array('Dublin Core' => array(
-            'Title' => array(array('text' => $title, 'html' => false))
-        ));
-        
-        $item = new Item;
-        $item->addElementTextsByArray($elementTexts);
-        $item->save();
-        
-        $linkToItemHtml = '<a href="/items/show/1">title</a>';
-        $this->assertEquals($linkToItemHtml, link_to_item(null, array(), 'show', $item));
-        
+        $linkToItemHtml = '<a href="/items/show/1">' . Installer_Test::TEST_ITEM_TITLE 
+            . '</a>';
+        $this->assertEquals($linkToItemHtml, link_to_item(null, array(), 'show', $this->item));
     }
     
 }

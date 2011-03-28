@@ -19,11 +19,17 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->plugin = new Plugin;
-        $this->plugin->setDirectoryName(self::PLUGIN_NAME);
-        $this->plugin->setActive(true);
-        $this->plugin->setDbVersion('1.0');
-        $this->plugin->forceSave();
+        $plugin = $this->db->getTable('Plugin')->find(1);
+        if ($plugin) {
+            $plugin->delete();
+        }
+        $plugin = new Plugin;
+        $plugin->setDirectoryName(self::PLUGIN_NAME);
+        $plugin->setActive(true);
+        $plugin->setDbVersion('1.0');
+        $plugin->forceSave();
+        $this->plugin = $plugin;
+        self::dbChanged(false);
     }
 
     public function testActive()
@@ -35,12 +41,6 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
     {
         $this->plugin->setActive(false);
         $this->plugin->forceSave();
-        $this->assertFalse(plugin_is_active(self::PLUGIN_NAME));
-    }
-
-    public function testNotInstalled()
-    {
-        $this->plugin->delete();
         $this->assertFalse(plugin_is_active(self::PLUGIN_NAME));
     }
 
@@ -68,5 +68,16 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
         } else {
             $this->$method(plugin_is_active(self::PLUGIN_NAME, $version));
         }
+    }
+
+    public function testNotInstalled()
+    {
+        $this->plugin->delete();
+        $this->assertFalse(plugin_is_active(self::PLUGIN_NAME));
+    }
+
+    public static function tearDownAfterClass()
+    {
+        self::dbChanged(true);
     }
 }

@@ -8,31 +8,22 @@
 
 class Globals_InsertItemTest extends Omeka_Test_AppTestCase
 {   
-    private $_dbHelper;
-
-    public function setUp()
-    {
-       parent::setUp();
-       $this->_dbHelper = Omeka_Test_Helper_Db::factory($this->core);
-    }
-    
     public function testCanInsertItem()
     {
-        $db = $this->core->getBootstrap()->db;
-        
-        $this->assertEquals(0, $this->_dbHelper->getRowCount($db->Item));
-        $this->assertEquals(0, $this->_dbHelper->getRowCount($db->ElementText));
+        $db = $this->db;
         
         // Insert an item and verify with a second query.
         $item = insert_item(
             array('public'=>true), 
             array('Dublin Core'=>array('Title'=>array(array('text'=>'foobar', 'html'=>true)))));
-        $sql = "SELECT id, public FROM $db->Item";
-        $row = $this->_dbHelper->fetchRow($sql);
-        $this->assertEquals(array('id'=>1, 'public'=>1), $row);
+        $sql = "SELECT public FROM $db->Item WHERE id = {$item->id}";
+        $row = $db->fetchRow($sql);
+        $this->assertEquals(array('public' => 1), $row);
         
         // Verify that element texts are inserted correctly into the database.
-        $sql = "SELECT COUNT(id) FROM $db->ElementText WHERE html = 1 AND text = 'foobar'";
-        $this->assertEquals(1, $this->_dbHelper->fetchOne($sql));
+        $sql = "SELECT COUNT(id) FROM $db->ElementText WHERE html = 1 AND "
+            . "text = 'foobar' AND record_id = {$item->id}";
+        $this->assertEquals(1, $db->fetchOne($sql));
+        release_object($item);
     }
 }

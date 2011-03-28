@@ -8,6 +8,12 @@
 
 class Globals_ElementExistsTest extends Omeka_Test_AppTestCase
 {   
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     public function testExistingElementOnExistingElementSet()
     {
         $this->assertTrue(element_exists('Dublin Core', 'Title'));

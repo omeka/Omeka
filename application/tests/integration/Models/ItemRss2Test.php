@@ -19,25 +19,13 @@ class Omeka_Model_ItemRss2Test extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        
-        set_option(File::DISABLE_DEFAULT_VALIDATION_OPTION, 1);
-        
-        $item = insert_item(
-            array('public'=>true), 
-            array('Dublin Core'=>array('Title'=>array(array('text'=>'Item Title', 'html'=>true)))));
-        
-        $fileUrl = TEST_DIR . '/_files/test.txt';
-        $files = insert_files_for_item($item, 'Filesystem', array($fileUrl));
-        
-        $_SERVER['HTTP_HOST'] = 'localhost';
+        self::dbChanged(false);
     }
     
     public function assertPreConditions()
     {
         $this->assertEquals(1, $this->db->getTable('Item')->count(),
             "There should be one item in the database.");
-        $this->assertEquals(1, $this->db->getTable('File')->count(),
-            "There should be one file in the database.");
     }
     
     public function testCanGetValidItemRss2Output()
@@ -67,15 +55,5 @@ class Omeka_Model_ItemRss2Test extends Omeka_Test_AppTestCase
         if(!$item) {
             $this->fail("Feed does not have an item");
         }
-    }
-    
-    public function tearDown()
-    {
-        // Delete the physical files that were ingested in setUp().
-        $testFile = $this->db->getTable('File')->find(1);
-        if ($testFile instanceof File) {
-            $testFile->delete();
-        }
-        parent::tearDown();
     }
 }

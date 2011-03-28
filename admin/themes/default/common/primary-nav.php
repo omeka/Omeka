@@ -1,3 +1,4 @@
+<div id="primary-nav-container">
 <ul class="primary-nav navigation">
 <?php
     $primaryNav = array(
@@ -9,3 +10,4 @@
     echo nav(apply_filters('admin_navigation_main', $primaryNav));
 ?>
 </ul>
+</div>

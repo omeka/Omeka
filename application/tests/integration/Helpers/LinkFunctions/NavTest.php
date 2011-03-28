@@ -20,6 +20,12 @@ require_once HELPERS;
  */ 
 class Omeka_Helper_LinkFunctions_NavTest extends Omeka_Test_AppTestCase
 {
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     public function testEmptyLinkArray()
     {
         $this->assertEquals('', nav(array()));

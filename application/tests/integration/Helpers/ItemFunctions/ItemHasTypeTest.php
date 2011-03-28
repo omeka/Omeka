@@ -13,6 +13,12 @@
  */
 class Omeka_Helper_ItemHasTypeTest extends Omeka_Test_AppTestCase
 {
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     /**
      * Tests that item_has_type behaves the same when an item is
      * set on the view and when it is directly passed.

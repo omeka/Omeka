@@ -23,6 +23,7 @@ Omeka.alertBox = function () {
 Omeka.wysiwyg = function (params) {
     // Default parameters
     initParams = {
+        plugins: "paste,inlinepopups",
         convert_urls: false,
         mode: "textareas", // All textareas
         theme: "advanced",

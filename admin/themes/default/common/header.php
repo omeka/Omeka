@@ -19,7 +19,7 @@
 <?php display_js(); ?>
 
 </head>
-<body<?php echo isset($bodyclass) ? ' class="'.$bodyclass.'"' : ''; ?>>
+<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
     <div class="hide"><a href="#content">Skip Navigation/Skip to Content</a></div>
     <div id="wrap">
         <div id="header">

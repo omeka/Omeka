@@ -14,80 +14,126 @@
  **/
 class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 {    
-    public function testAccessUserAccountInfo()
+    public function setUp()
     {
-        $this->_authenticateUser($this->_getDefaultUser());        
-        // Super user.
+        parent::setUp();
+        $this->adminUser = $this->_addNewUserWithRole('admin');
+        $this->superUser = $this->_addNewUserWithRole('super');
+        self::dbChanged(false);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        self::dbChanged(true);
+    }
+
+    public function testSuperCanAccessForm()
+    {
+        $this->_authenticateUser($this->superUser);        
         $this->dispatch('/users/edit/' . $this->currentuser->id);
         $this->assertController('users');
         $this->assertAction('edit', "Super users should be able to reach the 'edit' action for their user account.");
-        $this->assertXpath('//input[@id="username"][@value="' . Omeka_Test_Resource_Db::SUPER_USERNAME . '"]',
-            "There should be a 'username' element on this form with a default value.");            
-        $this->assertXpath('//input[@id="first_name"][@value="' . Omeka_Form_Install::DEFAULT_USER_FIRST_NAME . '"]',
-            "There should be a 'first_name' element on this form with a default value.");
-        $this->assertXpath('//input[@id="last_name"][@value="' . Omeka_Form_Install::DEFAULT_USER_LAST_NAME . '"]',
-            "There should be a 'last_name' element on this form with a default value.");
-        $this->assertXpath('//input[@id="email"][@value="' . Omeka_Test_Resource_Db::SUPER_EMAIL . '"]',
-            "There should be a 'email' element on this form with a default value.");
-        $this->assertXpath('//input[@id="institution"][@value=""]',
-            "There should be an 'institution' element on this form with no default value.");        
-        $this->assertQuery("form select#role", "There should be a 'role' select on this form.");
-        $this->assertQuery('form input[name="active"]', "There should be an 'active' element on this form.");
-        
-        $this->assertQuery('form input[type="submit"]', "There should be a submit button on this form.");
-        
-        // Admin user.
-        $admin = $this->_addNewUserWithRole('admin');
-        $this->_authenticateUser($admin);
-        $this->dispatch('/users/edit/' . $admin->id);
-        $this->assertController('users');
-        $this->assertAction('edit', "Admin users should be able to reach the 'edit' action for their user account.");
-        $this->assertQuery("form input#username", 
-            "There should be a form with a 'username' element on it.");        
+    }
+
+    public static function formXPaths()
+    {
+        return array(
+            array('//input[@id="username"][@value="superuser"]', 
+                "There should be a 'username' element on this form with a default "
+                . "value."),
+            array(
+                '//input[@id="first_name"][@value="Super"]',
+                "There should be a 'first_name' element on this form with a default "
+                . "value."),
+            array(
+                '//input[@id="last_name"][@value="User"]',
+                "There should be a 'last_name' element on this form with a default value."),
+            array(
+                '//input[@id="email"][@value="super@example.com"]',
+                "There should be a 'email' element on this form with a default value."),
+            array(
+                '//input[@id="institution"][@value=""]',
+                "There should be an 'institution' element on this form with no "
+                . "default value."),
+        );
+    }
+
+    public static function formQueries()
+    {
+        return array(
+            array("form select#role", "There should be a 'role' select on this "
+            . "form."),
+            array('form input[name="active"]', "There should be an 'active' "
+            . "element on this form."),
+            array('form input[type="submit"]', "There should be a submit button on "
+            . "this form."),
+        );
+    }
+
+    /**
+     * @dataProvider formXPaths
+     */
+    public function testFormXPath($xPath, $failMsg)
+    {
+        $user = $this->superUser;
+        $this->_authenticateUser($user);        
+        $this->dispatch('/users/edit/' . $this->currentuser->id);
+        $this->assertXpath($xPath, $failMsg);
     }   
+
+    /**
+     * @dataProvider formQueries
+     */
+    public function testFormQuery($query, $failMsg)
+    {
+        $user = $this->superUser;
+        $this->_authenticateUser($user);        
+        $this->dispatch('/users/edit/' . $this->currentuser->id);
+        $this->assertQuery($query, $failMsg);
+    }
     
     public function testChangeOtherUsersAccountInfoAsSuperUser()
     {
-        $this->_authenticateUser($this->_getDefaultUser());
-
-        $admin = $this->_addNewUserWithRole('admin');
+        $expectedUsername = 'newuser' . mt_rand();
+        $this->_authenticateUser($this->superUser);
         $this->request->setPost(array(
-            'username' => 'newusername',
+            'username' => $expectedUsername,
             'first_name' => 'foobar',
             'last_name' => 'foobar',
-            'email' => 'foobar2@example.com',
+            'email' => 'admin' . mt_rand() . '@example.com',
             'institution' => 'School of Hard Knocks',
             'role' => 'admin',
             'active' => '1'
         ));
         $this->request->setMethod('post');
-        $this->dispatch('/users/edit/' . $admin->id);
-        $this->assertEquals($this->db->getTable('User')->find($admin->id)->username, "newusername");
+        $this->dispatch('/users/edit/' . $this->adminUser->id);
+        $newUsername = $this->db->getTable('User')->find($this->adminUser->id)->username;
+        $this->assertEquals($expectedUsername, $newUsername);
         $this->assertRedirectTo('/users/browse');
     }
     
     public function testChangeOwnUserAccountInfo()
     {
-        $this->_authenticateUser($this->_getDefaultUser());
-        
-        $this->currentuser->role = 'admin';
-        $this->currentuser->forceSave();
+        $user = $this->superUser;
+        $this->_authenticateUser($user);
         $this->request->setPost(array(
             'username' => 'newusername',
             'first_name' => 'foobar',
             'last_name' => 'foobar',
-            'email' => 'foobar@example.com',
-            'institution' => 'School of Hard Knocks'
+            'email' => 'foobar' . mt_rand() . '@example.com',
+            'institution' => 'School of Hard Knocks',
+            'active' => '1',
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
-        $this->assertEquals($this->_getDefaultUser()->username, "newusername");
+        $changedUser = $this->db->getTable('User')->find($user->id);
+        $this->assertEquals("newusername", $changedUser->username);
         $this->assertRedirectTo('/');
     }
 
     public function testGivingInvalidEmailCausesValidationError()
     {
-        $this->_authenticateUser($this->_getDefaultUser());
+        $this->_authenticateUser($this->superUser);
         $this->request->setPost(array(
             'username' => 'newusername',
             'first_name' => 'foobar',
@@ -106,8 +152,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 
     public function testCannotSetActiveFlagOrRoleFieldWithoutAdequatePermissions()
     {
-        $adminUser = $this->_addNewUserWithRole('admin');
-        $this->_authenticateUser($adminUser);        
+        $this->_authenticateUser($this->adminUser);        
         $this->request->setPost(array(
             'username' => 'newusername',
             'first_name' => 'foobar',
@@ -118,17 +163,16 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'active' => '0'
         ));
         $this->request->setMethod('post');
-        $this->dispatch('/users/edit/' . $adminUser->id);
-        $newAdminUser = $this->db->getTable('User')->find($adminUser->id);
+        $this->dispatch('/users/edit/' . $this->adminUser->id);
+        $newAdminUser = $this->db->getTable('User')->find($this->adminUser->id);
         $this->assertEquals($newAdminUser->role, 'admin', "User role should not have been changed from admin to super.");
         $this->assertEquals($newAdminUser->active, 1, "User status should not have been changed from active to inactive.");
     }
         
     public function testCannotEverChangeSaltPasswordOrEntityIdFields()
     {
-        $this->_authenticateUser($this->_getDefaultUser());
-        $oldSalt = $this->currentuser->salt;
-        $oldHashedPassword = $this->currentuser->password;
+        $user = $this->adminUser;
+        $this->_authenticateUser($user);
         $this->request->setPost(array(
             'username' => 'newusername',
             'first_name' => 'foobar',
@@ -143,25 +187,38 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
-        $changedUser = $this->_getDefaultUser();
-        $this->assertEquals($changedUser->entity_id, 1, "Entity ID should not have changed.");
-        $this->assertEquals($changedUser->salt, $oldSalt, "Salt should not have changed.");
-        $this->assertEquals($changedUser->password, $oldHashedPassword, "Hashed password should not have changed.");
+        $changedUser = $this->db->getTable('User')->find($user->id);
+        $this->assertEquals($user->entity_id, $changedUser->entity_id, 
+            "Entity ID should not have changed.");
+        $this->assertEquals($user->salt, $changedUser->salt, 
+            "Salt should not have changed.");
+        $this->assertEquals($user->password, $changedUser->password, 
+            "Hashed password should not have changed.");
     }
         
     private function _addNewUserWithRole($role)
     {
+        $username = $role . 'user';
+        $existingUser = $this->_getUser($username);
+        if ($existingUser) {
+            $existingUser->delete();
+            release_object($existingUser);
+        }
         $newUser = new User;
-        $newUser->username = 'newadminuser';
+        $newUser->username = $username;
         $newUser->setPassword('foobar');
-        $newUser->role = 'admin';
+        $newUser->role = $role;
         $newUser->active = 1;
         $newUser->Entity = new Entity;
-        $newUser->Entity->first_name = 'New';
-        $newUser->Entity->last_name = 'Admin User';
-        $newUser->Entity->email = 'bananabananabanana@example.com';
+        $newUser->Entity->first_name = ucwords($role);
+        $newUser->Entity->last_name = 'User';
+        $newUser->Entity->email = $role . '@example.com';
         $newUser->forceSave();
-        $this->assertTrue($newUser->exists());
         return $newUser;
+    }
+
+    private function _getUser($username)
+    {
+        return $this->db->getTable('User')->findBySql("username = ?", array($username), true);
     }
 }

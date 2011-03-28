@@ -44,6 +44,10 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     public function init()
     {   
         $omekaDb = $this->getDb();
+        if (!Omeka_Test_AppTestCase::dbChanged()) {
+            $this->setInstall(false);
+            Omeka_Test_AppTestCase::dbChanged(true);
+        }
         if ($this->_runInstaller) {
             $this->_truncateTables($omekaDb);
             $installer = new Installer_Test($omekaDb);

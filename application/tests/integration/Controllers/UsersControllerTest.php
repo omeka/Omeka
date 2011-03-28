@@ -47,6 +47,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
         $this->assertQuery('form #email');
+        self::dbChanged(false);
     }
     
     public function testForgotPasswordForInvalidEmail()
@@ -60,6 +61,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->assertNotRedirect();
         $this->assertQueryContentContains("div.error", "Unable to reset password.", 
             "The form should have responded with an error message indicating there was a problem.");
+        self::dbChanged(false);
     }
     
     public function testSendingEmailForForgottenPassword()
@@ -76,6 +78,8 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $activationCode = $this->db->fetchOne("SELECT url FROM omeka_users_activations LIMIT 1");
         $this->assertThat($mail, $this->stringContains($activationCode), 
             "Email should contain the activation code send to the user.");
+        $this->db->query("TRUNCATE {$this->db->UsersActivations}");
+        self::dbChanged(false);
     }
     
     public function testForgotPasswordForInactiveUser()
@@ -94,4 +98,42 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
             "The form should have responded with an error message indicating there was a problem.");
     }
 
+    public function testEditOtherRedirect()
+    {
+        $userInfo = array(
+            'first_name' => 'New',
+            'last_name' => 'User',
+            'email' => $this->email,
+            'role' => 'super',
+            'username' => 'newuser'
+        );
+
+        $user = new User;
+        $user->saveForm($userInfo);
+
+        $id = $user->id;
+
+        $request = $this->getRequest();
+        $request->setPost(array(
+            'new_password' => 'password',
+            'new_password_confirm' => 'password'
+        ));
+        $request->setMethod('post');
+        $this->dispatch("users/edit/$id");
+        $this->assertRedirectTo('/users/browse');
+    }
+
+    public function testEditSelfRedirect()
+    {
+        $id = $this->_getDefaultUser()->id;
+
+        $request = $this->getRequest();
+        $request->setPost(array(
+            'new_password' => 'password',
+            'new_password_confirm' => 'password'
+        ));
+        $request->setMethod('post');
+        $this->dispatch("users/edit/$id");
+        $this->assertRedirectTo('/');
+    }
 }

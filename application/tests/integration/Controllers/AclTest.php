@@ -25,6 +25,12 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
         parent::setUp();
         $this->aclHelper = Zend_Controller_Action_HelperBroker::getHelper('acl');
     }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
              
     public function assertPreConditions()
     {

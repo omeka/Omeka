@@ -14,6 +14,12 @@
  */
 class Omeka_Helper_AbsUriTest extends Omeka_Test_AppTestCase
 {
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     public function testAbsUriDoesNotGiveNoticeIfMissingHttpHost()
     {
         try {

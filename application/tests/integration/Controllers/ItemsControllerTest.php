@@ -20,6 +20,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     {
         parent::setUp();
         $this->_authenticateUser($this->_getDefaultUser());
+        self::dbChanged(false);
     }
 
     public function dispatch($url, $callback = null)
@@ -40,18 +41,18 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     {
         return array(
             array('/items/add', 'items', 'add'),
-            array('/items/edit/1', 'items', 'edit', '_addOneItem'),
+            array('/items/edit/1', 'items', 'edit'),
             array('/items/advanced-search', 'items', 'advanced-search'),
             array('/items/modify-tags/1', 
                   'items', 
                   'modify-tags', 
-                  array('_addOneItem', '_makePost')
+                  array('_makePost')
             ),
             array('/items/tags', 'items', 'tags'),
             array('/items/tag-form?id=1', 
                   'items', 
                   'tag-form', 
-                  array('_addOneItem', '_makeXmlHttpRequest')
+                  array('_makeXmlHttpRequest')
             )
         );
     }
@@ -69,11 +70,11 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public static function formPresence()
     {
         return array(
-            array('/items/browse', 'simple-search', '_addOneItem'),
+            array('/items/browse', 'simple-search'),
             array('/items/add', 'item-form'),
-            array('/items/edit/1', 'item-form', '_addOneItem'),
+            array('/items/edit/1', 'item-form'),
             array('/items/advanced-search', 'advanced-search-form'),
-            array('/items/browse', 'items-browse', '_addOneItem'),
+            array('/items/browse', 'items-browse'),
         );
     }
 
@@ -123,7 +124,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
      */
     public function testActionsRequiringPost($url, $callback = null)
     {
-        $this->_addOneItem();
         $this->dispatch($url, $callback);
         $this->assertController('error');
         $this->assertAction('method-not-allowed');
@@ -180,21 +180,18 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public function testSimpleBrowse()
     {
-        $this->_addOneItem();
         $this->dispatch('/items/browse');
-        $this->assertQueryContentContains("table td.title", "Untitled");
+        $this->assertQueryContentContains("table td.title", Installer_Test::TEST_ITEM_TITLE);
     }
 
     public function testDetailedBrowse()
     {
-        $this->_addOneItem();
         $this->dispatch('/items/browse?view=detailed');
-        $this->assertQueryContentContains("div.item", "Untitled");
+        $this->assertQueryContentContains("div.item", Installer_Test::TEST_ITEM_TITLE);
     }
 
     public function testModifyTags()
     {
-        $this->_addOneItem();
         $this->request->setPost(array('tags' => 'foobar',
                                       'id' => 1));
         $this->request->setMethod('POST');
@@ -205,7 +202,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public function testPowerEditNormalRequest()
     {
-        $this->_addOneItem();
         $this->request->setPost(array(
             'items' => array(
                 array(
@@ -236,12 +232,12 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
      */
     public function testPowerEditPermissions($privilege, $checkMethod)
     {
-        $this->_addOneItem();
+        $item = $this->_addOneItem();
         $this->acl->deny('super', 'Items', $privilege);
         $this->request->setPost(array(
             'items' => array(
                 array(
-                    'id' => 1,
+                    'id' => $item->id,
                     'public' => 1,
                     'featured' => 1,
                 )
@@ -249,13 +245,12 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         ));
         $this->request->setMethod('POST');
         $this->dispatch('/items/power-edit');
-        $item = $this->db->getTable('Item')->find(1);
+        $item = $this->db->getTable('Item')->find($item->id);
         $this->assertFalse($item->$checkMethod());
     }
 
     public function testElementFormXmlHttpRequest()
     {
-        $this->_addOneItem();
         $this->_makeXmlHttpRequest();
         $this->_makePost(array(
             'element_id' => 1,
@@ -275,7 +270,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public function testDelete()
     {
-        $this->_addOneItem();
+        self::dbChanged(true);
         $hash = new Zend_Form_Element_Hash('confirm_delete_hash');
         $hash->initCsrfToken();
         $this->_makePost(array(
@@ -291,14 +286,13 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
      */
     public function testDeleteWithoutHash()
     {
-        $this->_addOneItem();
+        self::dbChanged(true);
         $this->request->setMethod('POST');
         $this->dispatch('/items/delete/1');
     }
 
     public function testChangeTypeXmlHttpRequest()
     {
-        $this->_addOneItem();
         $this->_makeXmlHttpRequest();
         $this->_makePost(array(
             'item_id' => 1,
@@ -310,7 +304,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public function testTagFormXmlHttpRequest()
     {
-        $this->_addOneItem();
         $this->_makeXmlHttpRequest();
         $this->dispatch('/items/tag-form?id=1');
         $this->assertNotRedirect();
@@ -318,8 +311,10 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     protected function _addOneItem()
     {
+        self::dbChanged(true);
         $item = insert_item();
         $this->assertTrue($item->exists());
+        return $item;
     }
 
     protected function _makeXmlHttpRequest()

@@ -14,6 +14,9 @@ debug.exceptions = false
 
 debug.request = false
 
+; Enable the query profiler.  This will show metadata about the queries that were executed during a given request.
+debug.profileDb = false
+
 ; Anything that would be logged will also be emailed to this address.
 debug.email = ""
 

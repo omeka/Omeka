@@ -142,7 +142,7 @@ class UsersController extends Omeka_Controller_Action
                 $ua->User->active = 1;
                 $ua->User->forceSave();
                 $ua->delete();
-                $this->flashSuccess("Your password has been changed.  Please log in with your new password.");
+                $this->flashSuccess('You may now log in to Omeka.');
                 $this->redirect->goto('login');
             } catch (Omeka_Validator_Exception $e) {
                 $this->flashValidationErrors($e);
@@ -189,7 +189,8 @@ class UsersController extends Omeka_Controller_Action
      * @return void
      **/
     public function editAction()
-    {        
+    {
+        $success = false;
         $user = $this->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
@@ -203,19 +204,7 @@ class UsersController extends Omeka_Controller_Action
         
         $this->view->passwordForm = $changePasswordForm;
         $this->view->user = $user;        
-        
-        if (isset($_POST['new_password'])) {
-            if ($changePasswordForm->isValid($_POST)) {
-                $values = $changePasswordForm->getValues();
-                $user->setPassword($values['new_password']);
-                $user->forceSave();
-                $this->flashSuccess("Password changed!");
-                return $this->_helper->redirector->gotoUrl('/');
-            } else {
-                return;
-            }
-        }
-        
+
         $form = $this->_getUserForm($user);
         $form->setSubmitButtonText('Save Changes');
         $form->setDefaults(array(
@@ -227,27 +216,41 @@ class UsersController extends Omeka_Controller_Action
             'role' => $user->role,
             'active' => $user->active
         ));
-        
         $this->view->form = $form;
-
-        $this->view->assign(array('user'=>$user));        
         
-        if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
+        if (!$this->getRequest()->isPost()) {
             return;
-        }        
-        try {
-            if ($user->saveForm($_POST)) {
-                $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
-                
-                if ($user->id == $currentUser->id) {
-                    $this->_helper->redirector->gotoUrl('/');
-                } else {
-                    $this->_helper->redirector->goto('browse');
-                }
+        }
+
+        if (isset($_POST['new_password'])) {
+            if ($changePasswordForm->isValid($_POST)) {
+                $values = $changePasswordForm->getValues();
+                $user->setPassword($values['new_password']);
+                $user->forceSave();
+                $this->flashSuccess("Password changed!");
+                $success = true;
             }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
-        } 
+        } else {
+            if (!$form->isValid($_POST)) {
+                return;
+            }        
+            try {
+                if ($user->saveForm($form->getValues())) {
+                    $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
+                    $success = true;
+                }
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
+            }
+        }
+
+        if ($success) {
+            if ($user->id == $currentUser->id) {
+                $this->_helper->redirector->gotoUrl('/');
+            } else {
+                $this->_helper->redirector->goto('browse');
+            }
+        }
     }
     
     protected function _getDeleteSuccessMessage($record)
@@ -329,7 +332,8 @@ class UsersController extends Omeka_Controller_Action
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {
             if ($log = $this->_getLog()) {
-                $log->info("Failed login attempt from '{$_SERVER['REMOTE_ADDR']}'.");
+                $ip = @$_SERVER['REMOTE_ADDR'];
+                $log->info("Failed login attempt from '$ip'.");
             }
             $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($authResult)));
             $this->flashError($this->view->errorMessage);
@@ -398,8 +402,8 @@ class UsersController extends Omeka_Controller_Action
     private function _getUserForm(User $user)
     {
         $form = new Omeka_Form_User(array(
-            'hasRoleElement'    => $this->_helper->acl->isAllowed('changeRole'),
-            'hasActiveElement'  => $this->_helper->acl->isAllowed('changeStatus'),
+            'hasRoleElement'    => $this->_helper->acl->isAllowed('change-role', $user),
+            'hasActiveElement'  => $this->_helper->acl->isAllowed('change-status', $user),
             'user'              => $user
         ));
         fire_plugin_hook('admin_append_to_users_form', $form, $user);

@@ -38,7 +38,7 @@ class Omeka_Acl_Assertion_UserAccount implements Zend_Acl_Assert_Interface
         // Alias for readability.
         $userAccount = $resource;
         $currentUser = $role;
-        
+        $isSameUser = ($currentUser->id == $userAccount->id);
         switch ($privilege) {
             case 'show':
             case 'edit':
@@ -46,16 +46,25 @@ class Omeka_Acl_Assertion_UserAccount implements Zend_Acl_Assert_Interface
                 // You are always allowed to view your own account info.
                 // You are always allowed to edit your own user account.
                 // Same with changing your own password.
-                if ($currentUser->id == $userAccount->id) {
+                if ($isSameUser) {
                     return true;
                 }
                 break;
             case 'delete':
                 // No deleting your own user account.
-               if ($currentUser->id == $userAccount->id) {
+               if ($isSameUser) {
                    return false;
                }                
                break;
+            case 'change-role':
+                if ($isSameUser) {
+                    return false;
+                } 
+                break;
+            case 'change-status':
+                if ($isSameUser) {
+                    return false;
+                }
             default:
                 # code...
                 break;
