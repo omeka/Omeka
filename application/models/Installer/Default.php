@@ -47,6 +47,11 @@ class Installer_Default implements InstallerInterface
         $this->_form = $form;
     }
     
+    public function getDb()
+    {
+        return $this->_db;
+    }
+
     public function install()
     {
         $this->_createSchema();

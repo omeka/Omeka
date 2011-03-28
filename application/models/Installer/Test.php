@@ -17,6 +17,8 @@
  */
 class Installer_Test extends Installer_Default
 {    
+    const TEST_ITEM_TITLE = 'Foobar';
+
     private $_testDefaults = array(
         'administrator_email'           => Omeka_Test_Resource_Db::SUPER_EMAIL, 
         'copyright'                     => Omeka_Test_Resource_Db::DEFAULT_COPYRIGHT, 
@@ -44,5 +46,34 @@ class Installer_Test extends Installer_Default
             throw new Installer_Exception("Cannot find field named '$fieldName'.");
         }
         return $this->_testDefaults[$fieldName];
+    }
+
+    public function install()
+    {
+        parent::install();
+        self::addItem($this->getDb());
+    }
+
+    public static function addItem(Omeka_Db $db)
+    {
+        // Keep the record objects from dying.
+        Omeka_Context::getInstance()->db = $db;
+        $itemBuilder = new ItemBuilder($db);
+        // Item should be public to avoid weird issues with ACL integration 
+        // (test must authenticate a user in order to retrieve non-public 
+        // items).
+        $itemBuilder->setRecordMetadata(array(
+            'public' => 1,
+        ));
+        $itemBuilder->setElementTexts(array(
+            'Dublin Core' => array(
+                'Title' => array(
+                    array('text' => self::TEST_ITEM_TITLE,
+                          'html' => 0),
+                ),
+            ),
+        ));
+        $item = $itemBuilder->build();
+        release_object($item);
     }
 }
