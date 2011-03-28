@@ -225,7 +225,8 @@ class UsersController extends Omeka_Controller_Action
      * @return void
      **/
     public function editAction()
-    {        
+    {
+        $success = false;
         $user = $this->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
@@ -246,25 +247,26 @@ class UsersController extends Omeka_Controller_Action
                 $user->setPassword($values['new_password']);
                 $user->forceSave();
                 $this->flashSuccess("Password changed!");
-                return $this->_helper->redirector->gotoUrl('/');
-            } else {
-                return;
+                $success = true;
+            }
+        } else {
+            try {
+                if ($user->saveForm($_POST)) {
+                    $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
+                    $success = true;
+                }
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
             }
         }
-        
-        try {
-            if ($user->saveForm($_POST)) {
-                $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
-                
-                if ($user->id == $currentUser->id) {
-                    $this->_helper->redirector->gotoUrl('/');
-                } else {
-                    $this->_helper->redirector->goto('browse');
-                }
+
+        if ($success) {
+            if ($user->id == $currentUser->id) {
+                $this->_helper->redirector->gotoUrl('/');
+            } else {
+                $this->_helper->redirector->goto('browse');
             }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
-        } 
+        }
     }
     
     protected function _getDeleteSuccessMessage($record)
