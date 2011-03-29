@@ -25,9 +25,11 @@
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+    <?php plugin_body(); ?>
 	<div id="wrap">
-
+        
 		<div id="header">
+		    <?php plugin_page_header(); ?>
 		    <div id="search-container">
     			<?php echo simple_search(); ?>
     			<?php echo link_to_advanced_search(); ?>
@@ -46,3 +48,4 @@
 		</div><!-- end primary-nav -->
 		    <?php echo custom_header_image(); ?>
 		<div id="content">
+            <?php plugin_page_content(); ?>
