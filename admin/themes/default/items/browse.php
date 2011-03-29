@@ -26,15 +26,24 @@ endif; ?>
 <div id="primary">
     <?php echo flash(); ?>
     <?php if ( total_results() ): ?>    
-    <div id="browse-meta">
-        <div id="simple-search-form">
-            <?php echo simple_search(); ?>
-            <span id="advanced-search-link"><?php echo link_to_advanced_search(); ?></span>
-        </div>
-
+    <div id="browse-meta" class="group">
+    	<div id="simple-search-form">
+    	    <ul id="items-sort" class="navigation">
+            <?php
+                echo nav(array(
+                    'All' => uri('items'), 
+                    'Public' => uri('items/browse?public=1'),
+                    'Private' => uri('items/browse?public=0'),
+                    'Featured' => uri('items/browse?featured=1')
+                    ));
+            ?>
+            </ul>
+    		<?php echo simple_search(); ?>
+    		<?php echo link_to_advanced_search('Advanced Search', array('id' => 'advanced-search-link')); ?>
+    	</div>
 
         <div class="pagination"><?php echo pagination_links(); ?></div>
-    </div>
+	</div>
     
 <form id="items-browse" action="<?php echo html_escape(uri('items/power-edit')); ?>" method="post" accept-charset="utf-8">
 

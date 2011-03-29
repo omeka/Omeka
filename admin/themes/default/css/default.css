@@ -488,8 +488,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     .browse-items .simple li.nav-list-view a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
     
     #items-browse {clear:both;}
-    #browse-meta {overflow:hidden; padding-bottom:18px;border-bottom:2px solid #d7d5c4;clear:both;}
-    table#items {width:100%;} 
+    #browse-meta {overflow:hidden; padding-bottom:18px;clear:both;}
+    table#items {width:100%; border-top:2px solid #d7d5c4;} 
     .items #primary {clear:right;}
     
     #detailed {padding-top:18px;}
@@ -508,6 +508,55 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     
     #detailed .append-to-item-detail {clear:both;}
     
+    #simple-search-form {
+		text-align:right !important;
+		float:right;
+		width: 48%;
+		margin-bottom: 2em;
+		padding:0;
+	}
+	
+	#simple-search-form * {
+		display:inline;
+		margin:0;
+		vertical-align:middle;
+	}
+    #items-sort,
+	#advanced-search-link {
+		font-size:1.1em;
+		margin:0;
+		padding:0;
+		line-height:1;
+	}
+	
+	#items-sort {
+		line-height:2;
+	}
+	
+	#items-sort a,
+	#advanced-search-link {
+		text-decoration:none;
+		font-weight:bold;
+	}
+	
+	#advanced-search-link {
+		display:block;
+		text-align:right;
+		margin-top:1em;
+	}
+		
+	#items-sort .navigation a {
+		text-decoration:none;	
+	}
+	
+	#items-sort li {
+	    display:inline;
+	}
+	#items-sort li:after {
+		content: " : ";
+		color: #ccc;
+		padding:0 2px;
+	}
     /* Item show styles */
     
     .element-text, .element-text-empty {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
