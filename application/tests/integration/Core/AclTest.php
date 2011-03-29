@@ -26,42 +26,46 @@ class Core_AclTest extends PHPUnit_Framework_TestCase
         include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
         $this->_acl = $acl;
     }
-        
-    public function testRestrictionsForNonAuthenticatedUsers()
+
+    public function tearDown()
     {
-       $this->assertFalse($this->_acl->isAllowed(null, 'Items', 'add'));
-       $this->assertFalse($this->_acl->isAllowed(null, 'Collections', 'add'));
-       $this->assertFalse($this->_acl->isAllowed(null, 'ItemTypes', 'add')); 
-       $this->assertFalse($this->_acl->isAllowed(null, 'Themes', 'config')); 
-       $this->assertFalse($this->_acl->isAllowed(null, 'Themes', 'browse'));
-       $this->assertFalse($this->_acl->isAllowed(null, 'Themes', 'switch'));
-       $this->assertFalse($this->_acl->isAllowed(null, 'Settings', 'edit'));
+        unset($this->_acl);
     }
-    
-    public function testRestrictionsForContributors()
+
+    public static function acl()
     {
-        $this->assertTrue($this->_acl->isAllowed('contributor', 'Items', 'add'));
-        $this->assertFalse($this->_acl->isAllowed('contributor', 'ItemTypes', 'add'));
-        $this->assertFalse($this->_acl->isAllowed('contributor', 'Plugins', 'add'));
+        return array(
+            // $isAllowed, $role, $resource, $privilege
+            array(false, null, 'Items', 'add'),
+            array(false, null, 'Collections', 'add'),
+            array(false, null, 'ItemTypes', 'add'),
+            array(false, null, 'Themes', 'config'), 
+            array(false, null, 'Themes', 'browse'),
+            array(false, null, 'Themes', 'switch'),
+            array(false, null, 'Settings', 'edit'),
+            array(false, null, 'Items', 'add'),
+            array(true, 'contributor', 'Items', 'add'),
+            array(false, 'contributor', 'ItemTypes', 'add'),
+            array(false, 'contributor', 'Plugins', 'add'),
+            array(false, 'admin', 'Settings', 'edit'),
+            array(false, 'admin', 'Security', 'edit'),
+            array(false, 'admin', 'Themes'),
+            array(false, 'admin', 'Plugins'),
+            array(false, 'admin', 'ElementSets'),
+            array(false, 'admin', 'Users'),
+            array(true, 'admin', 'Items', 'editAll'),
+            array(true, 'admin', 'Items', 'deleteAll'),
+            array(true, 'researcher', 'Items', 'showNotPublic'),
+            array(false, 'researcher', 'Items', 'editAll'),
+        );
     }
-    
-    public function testRestrictionsForAdmins()
+
+    /**
+     * @dataProvider acl
+     */
+    public function testAcl($isAllowed, $role, $resource, $privilege = null)
     {
-        $this->assertFalse($this->_acl->isAllowed('admin', 'Settings', 'edit'));
-        $this->assertFalse($this->_acl->isAllowed('admin', 'Security', 'edit'));
-        $this->assertFalse($this->_acl->isAllowed('admin', 'Themes'));
-        $this->assertFalse($this->_acl->isAllowed('admin', 'Plugins'));
-        $this->assertFalse($this->_acl->isAllowed('admin', 'ElementSets'));
-        $this->assertFalse($this->_acl->isAllowed('admin', 'Users'));
-        
-        $this->assertTrue($this->_acl->isAllowed('admin', 'Items', 'editAll'));
-        $this->assertTrue($this->_acl->isAllowed('admin', 'Items', 'deleteAll'));
-    }
-    
-    public function testRestrictionsForResearchers()
-    {
-        $this->assertTrue($this->_acl->isAllowed('researcher', 'Items', 'showNotPublic'));
-        $this->assertFalse($this->_acl->isAllowed('researcher', 'Items', 'editAll'));
-        
+        $this->assertEquals($isAllowed, 
+            $this->_acl->isAllowed($role, $resource, $privilege));
     }
 }
