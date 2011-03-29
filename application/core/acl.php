@@ -60,6 +60,14 @@ $acl->addRole(new Zend_Acl_Role('researcher'));
 $acl->loadAllowList($allowList);
 
 //Deny a couple of specific privileges to admin users
-$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'ElementSets', 'Users', 'Security'));
+$acl->deny('admin', array(
+    'Settings', 
+    'Plugins', 
+    'Themes', 
+    'ElementSets', 
+    'Users', 
+    'Security', 
+    'SystemInfo'
+));
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

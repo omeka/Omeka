@@ -1,12 +1,38 @@
 <?php 
+/**
+ * @version $Id$
+ * @copyright Center for History and New Media, 2011
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ * @access private
+ **/
 
+/**
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private 
+ * @package Omeka
+ * @subpackage Controllers
+ * @author CHNM
+ * @copyright Center for History and New Media, 2011
+ */
 class SystemInfoController extends Omeka_Controller_Action
 {
-    private $_db;
-    
+    public function preDispatch()
+    {
+        if (!get_option('display_system_info')) {
+            // Requires forward in addition to redirect because of ZF bug: 
+            // http://framework.zend.com/issues/browse/ZF-7496
+            $request = $this->getRequest();
+            $request->setActionName('index');
+            $request->setControllerName('index');
+            $request->setDispatched(false);
+            return $this->_helper->redirector->gotoUrl('/');
+        }
+    }
+
 	public function indexAction()
     {
-        $this->_db = get_db();
+        $this->_db = $this->getDb();
         $this->view->info = $this->_getInfoArray();
     }
 
@@ -54,6 +80,7 @@ class SystemInfoController extends Omeka_Controller_Action
     {
         $pluginTable = $this->_db->getTable('Plugin');
         $plugins = $pluginTable->findAll();
+        $info['Plugins'] = array();
 
         foreach ($plugins as $plugin) {
             $inactive = $plugin->active == '0';
@@ -72,6 +99,7 @@ class SystemInfoController extends Omeka_Controller_Action
     {
         $themes = Theme::getAvailable();
         $currentTheme = get_option('public_theme');
+        $info['Themes'] = array();
 
         foreach ($themes as $name => $theme) {
             $themeInfo = $theme->version;
