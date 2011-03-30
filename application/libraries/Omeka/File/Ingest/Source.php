@@ -90,23 +90,8 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
             $fileInfo['name'] = $this->_getOriginalFilename($fileInfo);
         }
         
-        // Need to populate the 'type' field with the MIME type for the file.
-        if (!array_key_exists('type', $fileInfo)) {
-            $fileInfo['type'] = $this->_getFileMimeType($fileInfo);
-        }
-        
         return $fileInfo;
     }
-    
-    /**
-     * Determine the MIME type of the file to be ingested.
-     * 
-     * @internal Must be implemented by subclasses because retrieving the MIME
-     * type is different for URLs than for files located on the same server. 
-     * @param array $fileInfo
-     * @return string
-     */
-    abstract protected function _getFileMimeType($fileInfo);
     
     /**
      * Retrieve the original filename.
@@ -199,19 +184,4 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
      * @return void
      */
     abstract protected function _validateSource($source, $info);
-    
-    
-    /**
-     * Removes the charset information from a mimetpe string if any exists
-     * i.e.: "image/jpeg; charset=binary" -> "image/jpeg"
-     * @param string $mimeType
-     * @return string
-     */
-    protected function _stripCharsetFromMimeType($mimeType) 
-    {
-        // remove the character set information
-        $mimeParts = explode(';', $mimeType);
-        return trim($mimeParts[0]);
-    }
-
 }

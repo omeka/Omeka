@@ -16,15 +16,6 @@
 class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
 {
     /**
-     * Mimetype of the file at the source URL.
-     *
-     * @param string
-     * @see _validateSource()
-     * @see _getFileMimeType()
-     */
-    protected $_mimeType;
-    
-    /**
      * Return the original filename.
      *
      * @param array $fileInfo
@@ -94,19 +85,5 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         if ($response->isError()) {
             $code = $response->getStatus();
             throw new Omeka_File_Ingest_InvalidException("$source cannot be read. The server returned code $code.");
-        } else {
-            $this->_mimeType = $response->getHeader('Content-Type');
         }
     }
-
-    /**
-     * Return the file's mimetype.
-     *
-     * @param array $fileInfo File info array. (unused)
-     * @return string Mimetype.
-     */
-    protected function _getFileMimeType($fileInfo)
-    {
-        return $this->_mimeType;
-    }
-}
