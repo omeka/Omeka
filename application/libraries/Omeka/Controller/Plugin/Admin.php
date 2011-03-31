@@ -59,6 +59,8 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
     {
         $action = $request->getActionName();
         $controller = $request->getControllerName();
+
+        $this->_adminWhitelist = apply_filters('admin_whitelist', $this->_adminWhitelist);
         
         $overrideLogin = false;
         foreach ($this->_adminWhitelist as $entry) {

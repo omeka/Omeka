@@ -69,6 +69,14 @@ $acl->deny('admin', array(
     'Security', 
     'SystemInfo'
 ));
+$acl->allow('admin', 'Users', array(
+    'change-status',
+    'change-role',
+    'change-password',
+    'edit',
+    'show',
+    'delete',
+), new Omeka_Acl_Assertion_UserAccount());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 
 // Because Users resource was denied to admins, it must be explicitly allowed here.

@@ -128,19 +128,32 @@ function get_db()
 /**
  * Log a message with 'DEBUG' priority.
  * 
- * This will do nothing if logging is not enabled via config.ini's log.errors
- * setting.
- * 
+ * @uses _log() 
  * @param string $msg
  * @return void
  */
 function debug($msg)
 {
-    $context = Omeka_Context::getInstance();
-    $logger = $context->getLogger();
-    if ($logger) {
-        $logger->debug($msg);
+    _log($msg, Zend_Log::DEBUG);
+}
+
+/**
+ * Log a message.
+ *
+ * Enabled via config.ini: log.errors.
+ *
+ * @param mixed $msg
+ * @param integer $priority Optional Defaults to Zend_Log::INFO.  See Zend_Log 
+ * for a list of available priorities.
+ * @return void
+ */
+function _log($msg, $priority = Zend_Log::INFO)
+{
+    $log = Omeka_Context::getInstance()->logger;
+    if (!$log) {
+        return;
     }
+    $log->log($msg, $priority);
 }
 
 /**

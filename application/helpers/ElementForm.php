@@ -308,6 +308,9 @@ class Omeka_View_Helper_ElementForm
     	$html .= $this->view->formText($inputNameStem . '[minute]', $minute, array('class'=>'textinput', 'size'=>'2')) . ':';
     	$html .= $this->view->formText($inputNameStem . '[second]', $second, array('class'=>'textinput', 'size'=>'2'));
     	
+    	$html .= '<p class="hint">yyyy/mm/dd:hour:minute</p>';
+    	
+    	
     	$html .= '</div>';
     	
     	return $html;
@@ -323,7 +326,9 @@ class Omeka_View_Helper_ElementForm
     	$html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2'));
     	$html .= $this->view->formText($inputNameStem . '[day]', $day, array('class'=>'textinput', 'size'=>'2'));
     	
-    	$html .= '</div>';
+    	$html .= '<p class="hint">yyyy-mm-dd</p>';
+    	
+    	$html .= '</div>';    	
     	
     	return $html;
     }
@@ -353,6 +358,13 @@ class Omeka_View_Helper_ElementForm
     
     protected function _displayHtmlFlag($inputNameStem, $index)
     {
+        $fieldDataType = $this->_getElementDataType();
+        $noFlagTypes = array('Date', 'Date Range', 'Date Time', 'Integer');
+        
+        if (in_array($fieldDataType, $noFlagTypes)) {
+            return '';
+        }
+        
         $isHtml = $this->_getHtmlFlagForField($index);
         
         // Add a checkbox for the 'html' flag (always for any field)

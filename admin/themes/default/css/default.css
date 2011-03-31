@@ -151,6 +151,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
         .vertical-nav #item-form .field .explanation, 
         .vertical-nav .field .hint,
         .vertical-nav .field .explanation {margin-left: 172px;}
+            .vertical-nav .field .dateinput .hint {margin:0;}
         
         /* .input used to wrap input fields in items/add form */
         .field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
