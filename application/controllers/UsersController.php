@@ -19,6 +19,13 @@ class UsersController extends Omeka_Controller_Action
 {
     const INVALID_LOGIN_MESSAGE = 'Login information incorrect. Please try again.';
 
+    /**
+     * Actions that need a different header/footer for the admin side.
+     *
+     * @var array
+     */
+    protected $_alternateCommonActions = array('login', 'activate', 'forgot-password');
+
     protected $_browseRecordsPerPage = 10;
         
     public function init() {
@@ -26,8 +33,31 @@ class UsersController extends Omeka_Controller_Action
         $this->_table = $this->getTable('User');
         $this->checkPermissions();  //Cannot execute as a beforeFilter b/c ACL permissions are checked before that.
         $this->_auth = $this->getInvokeArg('bootstrap')->getResource('Auth');
+
+        $this->_setCommonScripts();
     }
-        
+
+    /**
+     * Set a view script variable for what header and footer views to use.
+     *
+     * These variables are set for actions in $_alternateCommonActions, so
+     * the scripts for those actions should use these variables.
+     */
+    protected function _setCommonScripts() {
+        $action = $this->_request->getActionName();
+        if (in_array($action, $this->_alternateCommonActions)) {
+            if (is_admin_theme()) {
+                $header = 'login-header';
+                $footer = 'login-footer';
+            } else {
+                $header = 'header';
+                $footer = 'footer';
+            }
+            $this->view->header = $header;
+            $this->view->footer = $footer;
+        }
+    }
+
     /**
      * Check some permissions that depend on what specific information is being 
      * accessed
@@ -351,7 +381,7 @@ class UsersController extends Omeka_Controller_Action
                 $ip = @$_SERVER['REMOTE_ADDR'];
                 $log->info("Failed login attempt from '$ip'.");
             }
-            $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($authResult)));
+            $this->flashError($this->getLoginErrorMessages($authResult));
             return;   
         }
         
