@@ -13,7 +13,9 @@
  * @subpackage Models
  * @copyright Center for History and New Media, 2007-2010
  */
-class User extends Omeka_Record {
+class User extends Omeka_Record implements Zend_Acl_Resource_Interface, 
+                                           Zend_Acl_Role_Interface
+{
 
     public $username;
     
@@ -85,10 +87,12 @@ class User extends Omeka_Record {
         
         // Permissions check to see if whoever is trying to change role to a super-user
         if (!empty($post['role'])) {
-            if ($post['role'] == 'super' && !$this->userHasPermission('makeSuperUser')) {
+            $acl = Omeka_Context::getInstance()->getAcl();
+            $currentUser = Omeka_Context::getInstance()->getCurrentUser();
+            if ($post['role'] == 'super' && !$acl->isAllowed($currentUser, 'Users', 'makeSuperUser')) {
                 throw new Omeka_Validator_Exception( 'User may not change permissions to super-user' );
             }
-            if (!$this->userHasPermission('changeRole')) {
+            if (!$acl->isAllowed($currentUser, 'Users', 'changeRole')) {
                 throw new Omeka_Validator_Exception('User may not change roles.');
             }
         } 
@@ -287,6 +291,19 @@ class User extends Omeka_Record {
         }
         $this->setPassword($password);
         return $password;
+    }      
+    
+    public function getRoleId()
+    {
+        if (!$this->role) {
+            die("Should not be using a non-existent user role.");
+        }
+        return $this->role;
+    }  
+    
+    public function getResourceId()
+    {
+        return 'Users';
     }     
     
     /**
