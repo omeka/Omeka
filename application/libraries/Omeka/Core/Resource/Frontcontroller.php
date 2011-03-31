@@ -22,8 +22,6 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
      */
     public function init()
     {           
-        $front = Zend_Controller_Front::getInstance();
-        
         // If 'skipOmekaMvc' is set on the front controller, skip the
         // Omeka custom behavior here, and stick with vanilla Zend.
         // Because of resource naming conflicts, i.e. both Zend and Omeka 
@@ -32,8 +30,10 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // this would be useful include installation of Omeka, or in any future
         // modules that want to bypass the dependency graph of Omeka in favor
         // of using the (relatively) simpler Zend Framework defaults.
+        $front = parent::init();
+
         if ($front->getParam('skipOmekaMvc')) {
-            return parent::init();
+            return $front;
         }
         
         // Plugin broker is required to set plugin-defined response contexts
@@ -41,22 +41,18 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         if ($bootstrap->hasPluginResource('PluginBroker')) {
             $bootstrap->bootstrap('PluginBroker');
         }
-        
-        // Front controller
-        $front->addControllerDirectory(CONTROLLER_DIR, 'default');
                                                         
         // Action helpers
         $this->getBootstrap()->bootstrap('Helpers');
 
-        // Register the JSOND controller plugin
-        $front->registerPlugin(new Omeka_Controller_Plugin_Jsonp);
-        
-        // Register the Upgrade controller plugin
-        $front->registerPlugin(new Omeka_Controller_Plugin_Upgrade);
-                
-        // Register the HtmlPurifier controller plugin
-        $front->registerPlugin(new Omeka_Controller_Plugin_HtmlPurifier());
-        
         return $front;
+    }
+
+    /**
+     * Convenience method for backwards-compatibility with Omeka 1.x.
+     */
+    public static function getDefaultResponseContexts()
+    {
+        return Omeka_Core_Resource_Helpers::getDefaultResponseContexts();
     }
 }
