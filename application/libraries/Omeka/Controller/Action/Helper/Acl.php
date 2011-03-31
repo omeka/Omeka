@@ -59,19 +59,20 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      */
     public function preDispatch()
     {
-        if (!$this->isAllowed($this->getRequest()->getActionName())) {
-            if ($this->_currentUser) {
-                $this->getRequest()->setControllerName('error')
-                                   ->setActionName('forbidden')
-                                   ->setModuleName('default')
-                                   ->setDispatched(false);
-            } else {
-                $this->getRequest()->setControllerName('users')
-                                   ->setActionName('login')
-                                   ->setModuleName('default')
-                                   ->setDispatched(false);
-            }    
+        if ($this->isAllowed($this->getRequest()->getActionName())) {
+            return;
         }
+        if ($this->_currentUser) {
+            $this->getRequest()->setControllerName('error')
+                               ->setActionName('forbidden')
+                               ->setModuleName('default')
+                               ->setDispatched(false);
+        } else if (!$this->_isLoginRequest()) {
+            $this->getRequest()->setControllerName('users')
+                               ->setActionName('login')
+                               ->setModuleName('default')
+                               ->setDispatched(false);
+        }    
     }
     	
     /**
@@ -120,18 +121,35 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         if(isset($allowed[$privilege])) {
             return $allowed[$privilege];
         }
-        
-        if(!$resource) {
-            $resource = $this->getResourceName();
+
+        if ($resource instanceof Zend_Acl_Resource_Interface) {
+            $resourceObj = $resource;
+            $resourceName = $resourceObj->getResourceId();
+        } else if (is_string($resource)) {
+            $resourceName = $resource;
+        } else if (!$resource) {
+            $resourceName = $this->getResourceName();
         }
 
-        // If the resource has not been defined in the ACL, allow access to the
-        // controller.
-        if (!$this->_acl->has($resource)) {
+        // Plugin writers do not need to define an ACL in order for their 
+        // controllers to work.
+        if (!$this->_acl->has($resourceName)) {
             return true;
-        }        
+        }
 
-	    return $this->_acl->isAllowed($this->_currentUser, $resource, $privilege);
+        if (!isset($resourceObj)) {
+            $resourceObj = $this->_acl->get($resourceName);
+        }
+
+        // To be removed in 2.0.
+        // If the tested privilege (action) has not been defined in the ACL, 
+        // then allow access.        
+        if(!$resourceObj->has($privilege)) {
+            return true;
+        }
+
+
+	    return $this->_acl->isAllowed($this->_currentUser, $resourceObj, $privilege);
     }
     
     /**
@@ -184,4 +202,11 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     {
         $this->_allowed[$rule] = $isAllowed;
     }    
+
+    private function _isLoginRequest()
+    {
+        $request = $this->getRequest();
+        return $request->getActionName() == 'login' 
+            && $request->getControllerName() == 'users';
+    }
 }
