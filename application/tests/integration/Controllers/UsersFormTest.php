@@ -38,18 +38,18 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     public static function formXPaths()
     {
         return array(
-            array('//input[@id="username"][@value="superuser"]', 
+            array('//input[@id="username"][@value="adminuser"]', 
                 "There should be a 'username' element on this form with a default "
                 . "value."),
             array(
-                '//input[@id="first_name"][@value="Super"]',
+                '//input[@id="first_name"][@value="Admin"]',
                 "There should be a 'first_name' element on this form with a default "
                 . "value."),
             array(
                 '//input[@id="last_name"][@value="User"]',
                 "There should be a 'last_name' element on this form with a default value."),
             array(
-                '//input[@id="email"][@value="super@example.com"]',
+                '//input[@id="email"][@value="admin@example.com"]',
                 "There should be a 'email' element on this form with a default value."),
             array(
                 '//input[@id="institution"][@value=""]',
@@ -75,9 +75,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
      */
     public function testFormXPath($xPath, $failMsg)
     {
-        $user = $this->superUser;
-        $this->_authenticateUser($user);        
-        $this->dispatch('/users/edit/' . $this->currentuser->id);
+        $this->_authenticateUser($this->superUser);        
+        $this->dispatch('/users/edit/' . $this->adminUser->id);
         $this->assertXpath($xPath, $failMsg);
     }   
 
@@ -86,9 +85,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
      */
     public function testFormQuery($query, $failMsg)
     {
-        $user = $this->superUser;
-        $this->_authenticateUser($user);        
-        $this->dispatch('/users/edit/' . $this->currentuser->id);
+        $this->_authenticateUser($this->superUser);        
+        $this->dispatch('/users/edit/' . $this->adminUser->id);
         $this->assertQuery($query, $failMsg);
     }
     
@@ -143,7 +141,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'active' => '1'
         ));
         $this->request->setMethod('post');
-        $this->dispatch('/users/edit/' . $this->currentuser->id);
+        $this->dispatch('/users/edit/' . $this->adminUser->id);
         $this->assertNotRedirect("This should not have redirected since the form submission was invalid.");
         // This error will be in a div in 1.x, 2.0 uses Zend_Form so it will be ul.errors.
         $this->assertQueryContentContains('div.error', "email address is not valid",
