@@ -7,47 +7,53 @@ class User_AclAssertionTest extends Omeka_Test_AppTestCase
         parent::setUp();
         self::dbChanged(false);
         
-        $this->superUser = new User();
-        $this->superUser->role = 'super';
-        $this->superUser->id = 1;
-        $this->adminUser = new User();
-        $this->adminUser->role = 'admin';
-        $this->adminUser->id = 2;
+        $this->super = new User();
+        $this->super->role = 'super';
+        $this->super->id = 1;
+        $this->admin = new User();
+        $this->admin->role = 'admin';
+        $this->admin->id = 2;
+    }
+
+    public function tearDown()
+    {
+        release_object($this->super);
+        release_object($this->admin);
     }
 
     public static function aclProvider()
     {
         return array(
             // $isAllowed, $roleUser, $resourceUser, $privilege
-            array(false, 'adminUser', 'adminUser', 'change-status'),
-            array(false, 'superUser', 'superUser', 'change-status'),
-            array(true, 'superUser', 'adminUser', 'change-status'),
-            array(false, 'adminUser', 'superUser', 'change-status'),
+            array(false, 'admin', 'admin', 'change-status'),
+            array(false, 'super', 'super', 'change-status'),
+            array(true, 'super', 'admin', 'change-status'),
+            array(false, 'admin', 'super', 'change-status'),
 
-            array(false, 'adminUser', 'adminUser', 'change-role'),
-            array(false, 'superUser', 'superUser', 'change-role'),
-            array(true, 'superUser', 'adminUser', 'change-role'),
-            array(false, 'adminUser', 'superUser', 'change-role'),
+            array(false, 'admin', 'admin', 'change-role'),
+            array(false, 'super', 'super', 'change-role'),
+            array(true, 'super', 'admin', 'change-role'),
+            array(false, 'admin', 'super', 'change-role'),
 
-            array(true, 'adminUser', 'adminUser', 'change-password'),
-            array(true, 'superUser', 'adminUser', 'change-password'),
-            array(true, 'superUser', 'superUser', 'change-password'),
-            array(false, 'adminUser', 'superUser', 'change-password'),
+            array(true, 'admin', 'admin', 'change-password'),
+            array(true, 'super', 'admin', 'change-password'),
+            array(true, 'super', 'super', 'change-password'),
+            array(false, 'admin', 'super', 'change-password'),
 
-            array(true, 'adminUser', 'adminUser', 'edit'),
-            array(true, 'superUser', 'adminUser', 'edit'),
-            array(true, 'superUser', 'superUser', 'edit'),
-            array(false, 'adminUser', 'superUser', 'edit'),
+            array(true, 'admin', 'admin', 'edit'),
+            array(true, 'super', 'admin', 'edit'),
+            array(true, 'super', 'super', 'edit'),
+            array(false, 'admin', 'super', 'edit'),
 
-            array(true, 'adminUser', 'adminUser', 'show'),
-            array(true, 'superUser', 'adminUser', 'show'),
-            array(true, 'superUser', 'superUser', 'show'),
-            array(false, 'adminUser', 'superUser', 'show'),
+            array(true, 'admin', 'admin', 'show'),
+            array(true, 'super', 'admin', 'show'),
+            array(true, 'super', 'super', 'show'),
+            array(false, 'admin', 'super', 'show'),
 
-            array(false, 'adminUser', 'adminUser', 'delete'),
-            array(false, 'superUser', 'superUser', 'delete'),
-            array(true, 'superUser', 'adminUser', 'delete'),
-            array(false, 'adminUser', 'superUser', 'delete'),
+            array(false, 'admin', 'admin', 'delete'),
+            array(false, 'super', 'super', 'delete'),
+            array(true, 'super', 'admin', 'delete'),
+            array(false, 'admin', 'super', 'delete'),
         );
     }
 

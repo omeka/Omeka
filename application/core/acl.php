@@ -65,17 +65,14 @@ $acl->deny('admin', array(
     'Plugins', 
     'Themes', 
     'ElementSets', 
-    'Users', 
     'Security', 
     'SystemInfo'
 ));
-$acl->allow('admin', 'Users', array(
-    'change-status',
-    'change-role',
-    'change-password',
-    'edit',
-    'show',
-    'delete',
-), new User_AclAssertion());
+$acl->deny(array(null, 'researcher', 'contributor', 'admin', 'super'), 'Users');
+// For some unknown reason, this assertion must be associated with named roles 
+// (i.e., not null) in order to work correctly.  Allowing the null role causes 
+// it to fail.
+$acl->allow(array('contributor', 'researcher', 'admin', 'super'), 'Users', null,
+    new User_AclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

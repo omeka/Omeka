@@ -33,13 +33,13 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
                            $privilege = null)
     {   
         // Non-authenticated users can never be allowed to do anything.
-        if (!$role instanceof User) {
+        if (!($role instanceof User)) {
             return false;
         }
         
         $roleId = $role->getRoleId();
 
-        if (!$resource instanceof User) {
+        if (!($resource instanceof User)) {
             return false;
         }
         
@@ -57,7 +57,7 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
         }
         
         // Otherwise, we give all these privileges to super users.
-        if ($currentUser->getRoleId() == 'super') {
+        if ('super' == $roleId) {
             return true;
         }
         
