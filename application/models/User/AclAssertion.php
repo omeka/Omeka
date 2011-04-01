@@ -8,7 +8,7 @@
 
 /**
  * Assert whether or not a specific user is allowed access to that person's 
- * user account data (editing profile, removing )
+ * user account data.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2009
@@ -27,14 +27,26 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
         'change-status',
     );
 
-    private $_onlySuper = array(
-        'browse',
-        'add',
-        'edit',
-        'delete',
-        'makeSuperUser',
-    );
-
+    /**
+     * Assert whether or not the ACL should allow access.
+     *
+     * Assertions follow this logic:
+     *
+     * Non-authenticated users (null role) have no access.
+     * 
+     * There exists a set of privileges (A) that are always allowed, provided that the 
+     * user role and user resource are the same (editing own info, changing own 
+     * password, etc.).
+     *
+     * There also exists a set of privileges (B) that are always denied when 
+     * performed on one's own user account (deleting own account, changing own 
+     * role, etc.)
+     *
+     * The super user can do anything that isn't on (B), e.g. the 
+     * super user account cannot modify its own role.
+     *
+     * All other users are limited to (A).
+     */
     public function assert(Zend_Acl $acl,
                            Zend_Acl_Role_Interface $role = null,
                            Zend_Acl_Resource_Interface $resource = null,
@@ -44,37 +56,43 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
         if (!($role instanceof User)) {
             return false;
         }
-        
-        $roleId = $role->getRoleId();
 
-        if (!($resource instanceof User)) {
-            if ('super' == $roleId 
-             && in_array($privilege, $this->_onlySuper)
-            ) {
-                return true;
+        $allowed = false;
+        // $resource will either be an instance of Omeka_Acl_Resource, 
+        // Zend_Acl_Resource, or User. If the latter, verify whether or not the 
+        // resource and role represent the same user and branch accordingly.
+        if ($resource instanceof User) {
+            if ($this->_isSuperUser($role)) {
+                $allowed = !($this->_isSelf($role, $resource) 
+                        && $this->_isDeniedSelf($privilege));
+            } else if ($this->_isSelf($role, $resource)) {
+                $allowed = $this->_isAllowedSelf($privilege);
             }
-            return false;
+        } else {
+            $allowed = $this->_isSuperUser($role);
         }
-        
-        // Alias for readability.
+        return $allowed;
+    }
+
+    private function _isAllowedSelf($privilege)
+    {
+        return in_array($privilege, $this->_allowSelf);
+    }
+    private function _isDeniedSelf($privilege)
+    {
+        return in_array($privilege, $this->_denySelf);
+    }
+
+    private function _isSelf($role, $resource)
+    {
         $userAccount = $resource;
         $currentUser = $role;
-        $isSameUser = ($currentUser->id == $userAccount->id);
-        if ($isSameUser) {
-            if (in_array($privilege, $this->_allowSelf)) {
-                return true;
-            } 
-            if (in_array($privilege, $this->_denySelf)) {
-                return false;
-            }
-        }
-        
-        // Otherwise, we give all these privileges to super users.
-        if ('super' == $roleId) {
-            return true;
-        }
-        
-        // Everyone is automatically denied access by default.    
-        return false;
+        return ($currentUser->id == $userAccount->id);
+    }
+
+    private function _isSuperUser($user)
+    {
+        $roleId = $user->getRoleId();        
+        return ('super' == $roleId);
     }
 }
