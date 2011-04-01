@@ -19,53 +19,58 @@ class UsersController extends Omeka_Controller_Action
 {
     const INVALID_LOGIN_MESSAGE = 'Login information incorrect. Please try again.';
 
+    /**
+     * Actions that need a different header/footer for the admin side.
+     *
+     * @var array
+     */
+    protected $_alternateCommonActions = array('login', 'activate', 'forgot-password');
+
     protected $_browseRecordsPerPage = 10;
         
     public function init() {
         $this->_helper->db->setDefaultModelName('User');
-        $this->checkPermissions();  //Cannot execute as a beforeFilter b/c ACL permissions are checked before that.
+        $this->_getUserAcl();
         $this->_auth = $this->getInvokeArg('bootstrap')->getResource('Auth');
+
+        $this->_setCommonScripts();
     }
-        
+
     /**
-     * Check some permissions that depend on what specific information is being 
-     * accessed
+     * Set a view script variable for what header and footer views to use.
      *
-     * @return void
-     **/
-    protected function checkPermissions()
-    {
+     * These variables are set for actions in $_alternateCommonActions, so
+     * the scripts for those actions should use these variables.
+     */
+    protected function _setCommonScripts() {
         $action = $this->_request->getActionName();
-        $this->checkUserSpecificPerms($action);
+        if (in_array($action, $this->_alternateCommonActions)) {
+            if (is_admin_theme()) {
+                $header = 'login-header';
+                $footer = 'login-footer';
+            } else {
+                $header = 'header';
+                $footer = 'footer';
+            }
+            $this->view->header = $header;
+            $this->view->footer = $footer;
+        }
     }
-    
-    /**
-     * Check on permissions that require interaction between the logged-in user 
-     * and the user record being manipulated. Ideally, permissions checks that 
-     * require complicated logic should go here
-     *
-     * @return void
-     **/
-    private function checkUserSpecificPerms($action)
+
+    /** 
+     * Retrieve the record associated with the user so that it can be checked directly
+     * by the Acl action helper.
+     */
+    private function _getUserAcl()
     {
-        $user = $this->getCurrentUser();
-        $controlledActions = array(
-            'delete',
-            'changePassword',
-            'edit',
-            'show'
-        );
-        
-        if (!in_array($action, $controlledActions)) {
+        try {
+            $user = $this->_helper->db->findById();
+        } catch (Omeka_Controller_Exception_404 $e) {
             return;
         }
-        
-        $record = $this->_helper->db->findById();
-        if (!$this->isAllowed($action, $record)) {
-            $this->_helper->redirector->goto('browse');            
-        } else {
-            $this->_helper->acl->setAllowed($action);
-        }    
+
+        $this->aclResource = $user;
+        $this->aclRequest = clone $this->getRequest();
     }
     
     /**
@@ -335,7 +340,7 @@ class UsersController extends Omeka_Controller_Action
                 $ip = @$_SERVER['REMOTE_ADDR'];
                 $log->info("Failed login attempt from '$ip'.");
             }
-            $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($authResult)));
+            $this->flashError($this->getLoginErrorMessages($authResult));
             $this->flashError($this->view->errorMessage);
             return;   
         }
@@ -410,7 +415,7 @@ class UsersController extends Omeka_Controller_Action
         return $form;
     }
 
-    private function _getLog()
+private function _getLog()
     {
         return $this->getInvokeArg('bootstrap')->logger;
     }

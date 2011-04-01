@@ -65,7 +65,7 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     }
     
     /**
-     * Note in 2.0, the ACL action helper dispatches to users/login when there
+     * The ACL action helper dispatches to users/login when there
      * is no authenticated user.  Previous behavior was to always dispatch to
      * error/forbidden.
      */
@@ -74,7 +74,7 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
         $this->assertController('users');
         $this->assertAction('login');
     } 
-     
+   
     private function _assertAccessForbidden()
     {
         $this->assertController('error');

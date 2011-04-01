@@ -42,33 +42,34 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
         // from other equivalents (false, empty string, etc.).
         $user = null;
 
-        if ($auth->hasIdentity()) {
-            $userIdentity = $auth->getIdentity();
-            require_once 'User.php';
-            $bootstrap->bootstrap('Db');
-            $db = $bootstrap->getResource('Db');
-            try {
-                // The auth mechanism stores the user integer ID as the identity.  
-                // This is done to avoid any confusion with legacy installations that 
-                // may have usernames consisting entirely of digits.
-                $user = $db->getTable('User')->find($userIdentity);
-            } catch (Zend_Db_Statement_Exception $e) {
-                // Exceptions may be thrown because the database is out of sync
-                // with the code.  Suppress errors and skip authentication, but
-                // only until the database is properly upgraded.
-                if (Omeka_Db_Migration_Manager::getDefault()->dbNeedsUpgrade()) {
-                    $user = null;
-                } else {
-                    throw $e;
-                }
+        if (!$auth->hasIdentity()) {
+            return null;
+        }
+
+        $userIdentity = $auth->getIdentity();
+        $bootstrap->bootstrap('Db');
+        $db = $bootstrap->getResource('Db');
+        try {
+            // The auth mechanism stores the user integer ID as the identity.  
+            // This is done to avoid any confusion with legacy installations that 
+            // may have usernames consisting entirely of digits.
+            $user = $db->getTable('User')->find($userIdentity);
+        } catch (Zend_Db_Statement_Exception $e) {
+            // Exceptions may be thrown because the database is out of sync
+            // with the code.  Suppress errors and skip authentication, but
+            // only until the database is properly upgraded.
+            if (Omeka_Db_Migration_Manager::getDefault()->dbNeedsUpgrade()) {
+                $user = null;
+            } else {
+                throw $e;
             }
-            if (!$user) {
-                // If we can't retrieve the User from the database, it likely
-                // means that this user has been deleted.  In this case, do not
-                // allow the user to stay logged in.
-                $auth->clearIdentity();
-            }
-        } 
+        }
+        if (!$user) {
+            // If we can't retrieve the User from the database, it likely
+            // means that this user has been deleted.  In this case, do not
+            // allow the user to stay logged in.
+            $auth->clearIdentity();
+        }
         return $user;
     }
 }

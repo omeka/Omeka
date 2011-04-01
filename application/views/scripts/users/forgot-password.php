@@ -1,4 +1,4 @@
-<?php head(array('bodyclass'=>'login', 'title' => 'Forgot Password')); ?>
+<?php head(array('title' => 'Forgot Password', 'bodyclass' => 'login'), $header); ?>
 <h1>Forgot Password</h1>
 <p id="login-links">
 <span id="backtologin"><?php echo link_to('users', 'login', 'Back to Log In'); ?></span>
@@ -14,4 +14,4 @@
 
     <input type="submit" class="submit submit-small" value="Submit" />
 </form>
-<?php foot(); ?>
+<?php foot(array(), $footer); ?>

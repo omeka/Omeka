@@ -9,7 +9,6 @@
     <?php display_css(); ?>
 
     <!-- JavaScripts -->
-    <?php queue_js('login'); ?>
     <?php display_js(); ?>
 
     <!-- Plugin Stuff -->

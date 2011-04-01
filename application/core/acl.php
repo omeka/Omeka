@@ -65,22 +65,19 @@ $acl->deny('admin', array(
     'Plugins', 
     'Themes', 
     'ElementSets', 
-    'Users', 
     'Security', 
     'SystemInfo'
 ));
-$acl->allow('admin', 'Users', array(
-    'change-status',
-    'change-role',
-    'change-password',
-    'edit',
-    'show',
-    'delete',
-), new Omeka_Acl_Assertion_UserAccount());
+$acl->deny(array(null, 'researcher', 'contributor', 'admin', 'super'), 'Users');
+// For some unknown reason, this assertion must be associated with named roles 
+// (i.e., not null) in order to work correctly.  Allowing the null role causes 
+// it to fail.
+$acl->allow(array('contributor', 'researcher', 'admin', 'super'), 'Users', null,
+    new User_AclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 
 // Because Users resource was denied to admins, it must be explicitly allowed here.
-$acl->allow(array(null, 'admin'), 'Users', array('edit', 'show', 'change-password', 'delete'), new Omeka_Acl_Assertion_UserAccount);
+$acl->allow(array(null, 'admin'), 'Users', array('edit', 'show', 'change-password', 'delete'), new User_AclAssertion());
 // Always allow users to login, logout and send forgot-password notifications.
 $acl->allow(array(null, 'admin'), 'Users', array('login', 'logout', 'forgot-password', 'activate'));
 ?>
