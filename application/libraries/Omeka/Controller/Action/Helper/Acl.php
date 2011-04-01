@@ -59,7 +59,14 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      */
     public function preDispatch()
     {
-        if ($this->isAllowed($this->getRequest()->getActionName())) {
+        $resource = null;
+        if ($controller = $this->getActionController()) {
+            if (isset($controller->aclResource)) {
+                $resource = $controller->aclResource;
+            }
+        }
+
+        if ($this->isAllowed($this->getRequest()->getActionName(), $resource)) {
             return;
         }
         if ($this->_currentUser) {
@@ -144,7 +151,9 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         // To be removed in 2.0.
         // If the tested privilege (action) has not been defined in the ACL, 
         // then allow access.        
-        if(!$resourceObj->has($privilege)) {
+        if ($resourceObj instanceof Omeka_Acl_Resource
+            && !$resourceObj->has($privilege)
+        ) {
             return true;
         }
 

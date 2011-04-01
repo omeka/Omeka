@@ -27,6 +27,14 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
         'change-status',
     );
 
+    private $_onlySuper = array(
+        'browse',
+        'add',
+        'edit',
+        'delete',
+        'makeSuperUser',
+    );
+
     public function assert(Zend_Acl $acl,
                            Zend_Acl_Role_Interface $role = null,
                            Zend_Acl_Resource_Interface $resource = null,
@@ -40,6 +48,11 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
         $roleId = $role->getRoleId();
 
         if (!($resource instanceof User)) {
+            if ('super' == $roleId 
+             && in_array($privilege, $this->_onlySuper)
+            ) {
+                return true;
+            }
             return false;
         }
         
