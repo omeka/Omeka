@@ -341,7 +341,6 @@ class UsersController extends Omeka_Controller_Action
                 $log->info("Failed login attempt from '$ip'.");
             }
             $this->flashError($this->getLoginErrorMessages($authResult));
-            $this->flashError($this->view->errorMessage);
             return;   
         }
         
