@@ -76,6 +76,6 @@ $acl->allow('admin', 'Users', array(
     'edit',
     'show',
     'delete',
-), new Omeka_Acl_Assertion_UserAccount());
+), new User_AclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

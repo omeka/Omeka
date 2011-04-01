@@ -13,7 +13,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2009
  **/
-class Omeka_Acl_Assertion_UserAccount implements Zend_Acl_Assert_Interface
+class User_AclAssertion implements Zend_Acl_Assert_Interface
 {    
     private $_allowSelf = array(
         'show',
