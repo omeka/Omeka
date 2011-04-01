@@ -123,9 +123,9 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
+        $this->assertRedirectTo('/');
         $changedUser = $this->db->getTable('User')->find($user->id);
         $this->assertEquals("newusername", $changedUser->username);
-        $this->assertRedirectTo('/');
     }
 
     public function testGivingInvalidEmailCausesValidationError()
