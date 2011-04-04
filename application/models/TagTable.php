@@ -184,7 +184,7 @@ class TagTable extends Omeka_Db_Table
             
             //If we only want tags for public items, use one of the ItemTable's filters
             if ($params['type'] == 'Item' && isset($params['public'])) {
-                $db->getTable('Item')->filterByPublic($select, isset($params['public']));
+                $db->getTable('Item')->filterByPublic($select, (bool) $params['public']);
             }
         }
         
