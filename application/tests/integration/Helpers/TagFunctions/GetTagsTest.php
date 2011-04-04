@@ -1,9 +1,16 @@
 <?php 
+/**
+ * @copyright Center for History and New Media, 2011
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ */
+
 require_once HELPERS;
 
 /**
- * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
- * in helpers/StringFunctions.php
+ * Tests get_tags() in helpers/TagFunctions.php.
+ *
+ * @package Omeka
  */
 class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
 {   
