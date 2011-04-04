@@ -71,14 +71,14 @@ class Omeka_Controllers_SystemInfoControllerTest extends Omeka_Test_AppTestCase
     {
         set_option('display_system_info', true);
         $this->dispatch('/');
-        $this->assertQuery("a#system-info");
+        $this->assertQuery("p#system-info a");
     }
 
     public function testDisabledFooterLink()
     {
         set_option('display_system_info', false);
         $this->dispatch('/');
-        $this->assertNotQuery("a#system-info");
+        $this->assertNotQuery("p#system-info a");
     }
 
     public function testLinkPermissions()
@@ -86,7 +86,7 @@ class Omeka_Controllers_SystemInfoControllerTest extends Omeka_Test_AppTestCase
         set_option('display_system_info', true);
         $this->currentuser->role = 'admin';
         $this->dispatch('/');
-        $this->assertNotQuery("a#system-info");
+        $this->assertNotQuery("p#system-info a");
     }
 
     public function testAccessPermissions()
