@@ -20,11 +20,11 @@ class UsersController extends Omeka_Controller_Action
     const INVALID_LOGIN_MESSAGE = 'Login information incorrect. Please try again.';
 
     /**
-     * Actions that need a different header/footer for the admin side.
+     * Actions that are accessible by anonymous users.
      *
      * @var array
      */
-    protected $_alternateCommonActions = array('login', 'activate', 'forgot-password');
+    protected $_publicActions = array('login', 'activate', 'forgot-password');
 
     protected $_browseRecordsPerPage = 10;
         
@@ -33,28 +33,38 @@ class UsersController extends Omeka_Controller_Action
         $this->_getUserAcl();
         $this->_auth = $this->getInvokeArg('bootstrap')->getResource('Auth');
 
-        $this->_setCommonScripts();
+        $this->_handlePublicActions();
     }
 
     /**
-     * Set a view script variable for what header and footer views to use.
+     * Peform common processing for the publicly accessible actions.
+     * 
+     * Set a view script variable for header and footer view scripts and
+     * don't allow logged-in users access.
      *
-     * These variables are set for actions in $_alternateCommonActions, so
+     * The script variables are set for actions in $_publicActions, so
      * the scripts for those actions should use these variables.
      */
-    protected function _setCommonScripts() {
+    protected function _handlePublicActions() {
         $action = $this->_request->getActionName();
-        if (in_array($action, $this->_alternateCommonActions)) {
-            if (is_admin_theme()) {
-                $header = 'login-header';
-                $footer = 'login-footer';
-            } else {
-                $header = 'header';
-                $footer = 'footer';
-            }
-            $this->view->header = $header;
-            $this->view->footer = $footer;
+        if (!in_array($action, $this->_publicActions)) {
+            return;
         }
+
+        // If a user is already logged in, they should always get redirected back to the dashboard.
+        if ($loggedInUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser')) {
+            $this->_helper->redirector->goto('index', 'index');
+        }
+
+        if (is_admin_theme()) {
+            $header = 'login-header';
+            $footer = 'login-footer';
+        } else {
+            $header = 'header';
+            $footer = 'footer';
+        }
+        $this->view->header = $header;
+        $this->view->footer = $footer;
     }
 
     /** 
@@ -135,7 +145,8 @@ class UsersController extends Omeka_Controller_Action
         $ua = $this->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
             
         if (!$ua) {
-            die('Invalid activation code given.');
+            $this->flashError('Invalid activation code given.');
+            return $this->_helper->redirector->goto('forgot-password', 'users');
         }
         
         if (!empty($_POST)) {
@@ -301,11 +312,6 @@ class UsersController extends Omeka_Controller_Action
         
     public function loginAction()
     {
-        // If a user is already logged in, they should always get redirected back to the dashboard.
-        if ($loggedInUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser')) {
-            $this->redirect->goto('index', 'index');
-        }
-        
         // require_once is necessary because lacking form autoloading.
         require_once APP_DIR .DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR .'Login.php';
         $loginForm = new Omeka_Form_Login;

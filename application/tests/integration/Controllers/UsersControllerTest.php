@@ -22,12 +22,11 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->mailHelper = Omeka_Test_Helper_Mail::factory();        
         $this->email = Zend_Registry::get('test_config')->email->to;        
         $this->mailHelper->reset();
-        
-        $this->_authenticateUser($this->_getDefaultUser());
     }
     
     public function testAddingNewUserSendsActivationEmail()
     {
+        $this->_authenticateUser($this->_getDefaultUser());
         $post = array('username'    => 'foobar',
                       'first_name'  => 'foobar',
                       'last_name'   => 'foobar',
@@ -100,6 +99,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 
     public function testEditOtherRedirect()
     {
+        $this->_authenticateUser($this->_getDefaultUser());
         $userInfo = array(
             'first_name' => 'New',
             'last_name' => 'User',
@@ -125,7 +125,9 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 
     public function testEditSelfRedirect()
     {
-        $id = $this->_getDefaultUser()->id;
+        $user = $this->_getDefaultUser();
+        $this->_authenticateUser($user);
+        $id = $user->id;
 
         $request = $this->getRequest();
         $request->setPost(array(
