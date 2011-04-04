@@ -6,7 +6,7 @@
      Version <?php echo OMEKA_VERSION; ?> 
     <?php if (get_option('display_system_info') 
            && has_permission('SystemInfo', 'index')): ?>
-        | <a id="system-info" href="<?php echo html_escape(uri('system-info')); ?>">More information about your system</a> 
+        | <a href="<?php echo html_escape(uri('system-info')); ?>">More information about your system</a>
     <?php endif; ?>
     </p>
 </div>
