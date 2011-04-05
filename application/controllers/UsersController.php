@@ -314,7 +314,7 @@ class UsersController extends Omeka_Controller_Action
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {
             if ($log = $this->_getLog()) {
-                $ip = @$_SERVER['REMOTE_ADDR'];
+                $ip = $this->getRequest()->getClientIp();
                 $log->info("Failed login attempt from '$ip'.");
             }
             $this->flashError($this->getLoginErrorMessages($authResult));
