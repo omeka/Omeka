@@ -22,25 +22,6 @@ if (!function_exists('show_untitled_items')) {
         }
         return $title;
     }
-
-    function implode_array_to_english($array) {
-        // sanity check
-        if (!$array || !count ($array))
-            return '';
-
-        // get last element   
-        $last = array_pop ($array);
-
-        // if it was the only element - return it
-        if (!count ($array))
-            return $last; 
-
-        // If there were only two elements in the array
-        if(count($array) == 1) 
-            return implode('', $array).' and '.$last;  
-
-        return implode (', ', $array).' and '.$last;
-    }
 }
 
 

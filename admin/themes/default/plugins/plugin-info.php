@@ -30,15 +30,7 @@
                                 <li class="omeka-minimum-version">The '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin requires at least Omeka <?php echo $plugin->getMinimumOmekaVersion(); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</li>
                             <?php endif; ?>
 
-                            <?php if ($missingPluginNames): ?>
-                                <li class="required-plugins">
-                                    The '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin requires 
-                                      the following plugins to be 
-                                      installed, activated, and loaded: 
-                                      <?php echo html_escape(implode_array_to_english($missingPluginNames)); ?> 
-                                      plugin<?php if (count($missingPluginNames) > 1) { echo 's';} ?>.
-                                </li>
-                            <?php endif; ?>
+
                         </ul>
                     <?php endif; ?>
                 </div>
@@ -77,6 +69,15 @@
 	    <?php endif; ?>
 	    <?php if ($versionCheck && !$plugin->meetsOmekaTestedUpToVersion()): ?>
             <p class="notice omeka-tested-up-to"><strong>Notice:</strong> This version of the '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin has only been tested up to Omeka <?php echo html_escape($plugin->getTestedUpToOmekaVersion()); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</p>
+        <?php endif; ?>
+        
+        <?php if ($missingPluginNames): ?>
+            <p class="required-plugins">
+                The '<?php echo html_escape($plugin->getDisplayName()); ?>' plugin requires 
+                  the following plugins to be 
+                  installed, activated, and loaded: 
+                  <?php echo html_escape(implode(', ', $missingPluginNames)); ?>                 
+            </p>
         <?php endif; ?>
         </div>
     </td>
