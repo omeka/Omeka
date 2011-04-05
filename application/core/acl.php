@@ -19,6 +19,7 @@ $resources = array(
     'Upgrade'       =>  array('migrate', 'completed'),
     'Tags'          =>  array('rename','remove', 'browse'),
     'Themes'        =>  array('browse','switch', 'config'),
+    'SystemInfo'    =>  array('index'),
     // 'delete-element' and 'add-element' are actions that allow AJAX requests to manipulate the elements for an item type.
     'ItemTypes'     =>  array('add','edit','delete', 'browse', 'delete-element', 'add-element'),
     // 'makeSuperUser' should be deprecated, since it can only be called if non-super users can choose the roles for user accounts.
@@ -59,6 +60,19 @@ $acl->addRole(new Zend_Acl_Role('researcher'));
 $acl->loadAllowList($allowList);
 
 //Deny a couple of specific privileges to admin users
-$acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'ElementSets', 'Users', 'Security'));
+$acl->deny('admin', array(
+    'Settings', 
+    'Plugins', 
+    'Themes', 
+    'ElementSets', 
+    'Security', 
+    'SystemInfo'
+));
+$acl->deny(array(null, 'researcher', 'contributor', 'admin', 'super'), 'Users');
+// For some unknown reason, this assertion must be associated with named roles 
+// (i.e., not null) in order to work correctly.  Allowing the null role causes 
+// it to fail.
+$acl->allow(array('contributor', 'researcher', 'admin', 'super'), 'Users', null,
+    new User_AclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

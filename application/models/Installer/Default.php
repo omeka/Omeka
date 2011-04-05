@@ -47,6 +47,11 @@ class Installer_Default implements InstallerInterface
         $this->_form = $form;
     }
     
+    public function getDb()
+    {
+        return $this->_db;
+    }
+
     public function install()
     {
         $this->_createSchema();
@@ -112,6 +117,7 @@ class Installer_Default implements InstallerInterface
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
+            'display_system_info'           => true, 
         ));
         $task->install($this->_db);
     }

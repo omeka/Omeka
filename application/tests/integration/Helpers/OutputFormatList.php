@@ -18,6 +18,12 @@ class Omeka_Helper_OutputFormatListTest extends Omeka_Test_AppTestCase
 {
 	protected $_isAdminTest = false;
     
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     public function testOutputFormatListDefault()
     {
         $this->dispatch('/items/browse');

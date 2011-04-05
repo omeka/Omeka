@@ -19,98 +19,68 @@ class UsersController extends Omeka_Controller_Action
 {
     const INVALID_LOGIN_MESSAGE = 'Login information incorrect. Please try again.';
 
+    /**
+     * Actions that are accessible by anonymous users.
+     *
+     * @var array
+     */
+    protected $_publicActions = array('login', 'activate', 'forgot-password');
+
     protected $_browseRecordsPerPage = 10;
         
     public function init() {
         $this->_modelClass = 'User';
         $this->_table = $this->getTable('User');
-        $this->checkPermissions();  //Cannot execute as a beforeFilter b/c ACL permissions are checked before that.
+        $this->_getUserAcl();
         $this->_auth = $this->getInvokeArg('bootstrap')->getResource('Auth');
+
+        $this->_handlePublicActions();
     }
-        
+
     /**
-     * Check some permissions that depend on what specific information is being 
-     * accessed
+     * Peform common processing for the publicly accessible actions.
+     * 
+     * Set a view script variable for header and footer view scripts and
+     * don't allow logged-in users access.
      *
-     * @return void
-     **/
-    protected function checkPermissions()
-    {
+     * The script variables are set for actions in $_publicActions, so
+     * the scripts for those actions should use these variables.
+     */
+    protected function _handlePublicActions() {
         $action = $this->_request->getActionName();
-        $this->checkUserSpecificPerms($action);
-    }
-    
-    /**
-     * Check on permissions that require interaction between the logged-in user 
-     * and the user record being manipulated. Ideally, permissions checks that 
-     * require complicated logic should go here
-     *
-     * @return void
-     **/
-    private function checkUserSpecificPerms($action)
-    {
-        $user = $this->getCurrentUser();
-        $controlledActions = array(
-            'delete',
-            'changePassword',
-            'edit',
-            'show'
-        );
-        
-        if (!in_array($action, $controlledActions)) {
+        if (!in_array($action, $this->_publicActions)) {
             return;
         }
-        
-        $record = $this->findById();        
-        switch ($action) {
-           
-            // If we are deleting users
-           case 'delete':                   
-               // Can't delete yourself
-               if ($user->id == $record->id) {
-                   $redirectWith = __('You are not allowed to delete yourself!');
-               }
-               break;
-               
-           //If changing passwords 
-           case 'changePassword':
-               
-                // Only super users and the actual user can change this 
-                // user's password
-                if(!$user || (($user->role != 'super') && ($record->id != $user->id))) {
-                    $redirectWith = __('May not change another user&#8217;s password!');
-                }
-                break;
-                
-            case 'edit':
-                // Allow access to the 'edit' action if a user is editing their 
-                // own account info.
-                if ($user->id == $record->id) {
-                    $this->_helper->acl->setAllowed('edit');
-                }
-                 
-                //Non-super users cannot edit super user data
-                //Note that super users can edit other super users' data
-                if ($user->id != $record->id 
-                    && $record->role == 'super' 
-                    && $user->role != 'super') {
-                    $redirectWith = __('You may not edit the data for super users!');
-                }
-                break;
-            case 'show':
-                // Allow access to the 'show' action if a user is viewing their 
-                // own account info.
-                if ($user->id == $record->id) {
-                    $this->_helper->acl->setAllowed('show');
-                }
-                break;    
-           default:
-               break;
+
+        // If a user is already logged in, they should always get redirected back to the dashboard.
+        if ($loggedInUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser')) {
+            $this->_helper->redirector->goto('index', 'index');
         }
-        if (isset($redirectWith)) {
-            $this->flash($redirectWith, Omeka_Controller_Flash::GENERAL_ERROR);
-            $this->_helper->redirector->goto('browse');
-        }    
+
+        if (is_admin_theme()) {
+            $header = 'login-header';
+            $footer = 'login-footer';
+        } else {
+            $header = 'header';
+            $footer = 'footer';
+        }
+        $this->view->header = $header;
+        $this->view->footer = $footer;
+    }
+
+    /** 
+     * Retrieve the record associated with the user so that it can be checked directly
+     * by the Acl action helper.
+     */
+    private function _getUserAcl()
+    {
+        try {
+            $user = $this->findById();
+        } catch (Omeka_Controller_Exception_404 $e) {
+            return;
+        }
+        $this->aclResource = $user;
+        $this->aclRequest = clone $this->getRequest();
     }
     
     /**
@@ -175,21 +145,23 @@ class UsersController extends Omeka_Controller_Action
         $ua = $this->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
             
         if (!$ua) {
-            return $this->_forward('error');
+            $this->flashError('Invalid activation code given.');
+            return $this->_helper->redirector->goto('forgot-password', 'users');
         }
         
         if (!empty($_POST)) {
             try {
                 if ($_POST['new_password1'] != $_POST['new_password2']) {
-                    throw new Exception(__('Password: The passwords do not match.'));
+                    throw new Omeka_Validator_Exception(__('Password: The passwords do not match.'));
                 }
                 $ua->User->setPassword($_POST['new_password1']);
                 $ua->User->active = 1;
                 $ua->User->forceSave();
                 $ua->delete();
+                $this->flashSuccess(__('You may now log in to Omeka.'));
                 $this->redirect->goto('login');
-            } catch (Exception $e) {
-                $this->flashError($e->getMessage());
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
             }
         }
         $user = $ua->User;
@@ -224,7 +196,8 @@ class UsersController extends Omeka_Controller_Action
      * @return void
      **/
     public function editAction()
-    {        
+    {
+        $success = false;
         $user = $this->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
@@ -245,33 +218,40 @@ class UsersController extends Omeka_Controller_Action
                 $user->setPassword($values['new_password']);
                 $user->forceSave();
                 $this->flashSuccess(__("Password changed!"));
-                return $this->_helper->redirector->gotoUrl('/');
-            } else {
-                return;
+                $success = true;
+            }
+        } else {
+            try {
+                if ($user->saveForm($_POST)) {
+                    $this->flashSuccess(__('The user %s was successfully changed!', $user->username));
+                    $success = true;
+                }
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
             }
         }
-        
-        try {
-            if ($user->saveForm($_POST)) {
-                $this->flashSuccess(__('The user "%s" was successfully changed!', $user->username));
-                
-                if ($user->id == $currentUser->id) {
-                    $this->_helper->redirector->gotoUrl('/');
-                } else {
-                    $this->_helper->redirector->goto('browse');
-                }
+
+        if ($success) {
+            if ($user->id == $currentUser->id) {
+                $this->_helper->redirector->gotoUrl('/');
+            } else {
+                $this->_helper->redirector->goto('browse');
             }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
-        } catch (Exception $e) {
-            $this->flashError($e->getMessage());
-        }        
+        }
     }
     
     protected function _getDeleteSuccessMessage($record)
     {
         $user = $record;
         return __('The user "%s" was successfully deleted!', $user->username);
+    }
+    
+    protected function _getDeleteConfirmMessage($record)
+    {
+        $user = $record;
+        return __("%s will be deleted from the system. Items, "
+             . 'collections, and tags created by this user will remain in the '
+             . 'archive, but will no longer be associated with this user.', $user->username);
     }
     
     protected function sendActivationEmail($user)
@@ -283,11 +263,12 @@ class UsersController extends Omeka_Controller_Action
         // send the user an email telling them about their new user account
         $siteTitle  = get_option('site_title');
         $from       = get_option('administrator_email');
-        $body       = "Welcome!\n\n"
+        $body       = __("Welcome!") 
+                    ."\n\n"
                     . __("Your account for the %s archive has been created. Please click the following link to activate your account:",$siteTitle)."\n\n"
                     . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
                     . __("(or use any other page on the site).")."\n\n"
-                    .__("%s Administrator", $siteTitle);
+                    . __("%s Administrator", $siteTitle);
         $subject    = __("Activate your account with the %s Archive", $siteTitle);
         
         $entity = $user->Entity;
@@ -303,11 +284,6 @@ class UsersController extends Omeka_Controller_Action
         
     public function loginAction()
     {
-        // If a user is already logged in, they should always get redirected back to the dashboard.
-        if ($loggedInUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser')) {
-            $this->redirect->goto('index', 'index');
-        }
-        
         // require_once is necessary because lacking form autoloading.
         require_once APP_DIR .DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR .'Login.php';
         $loginForm = new Omeka_Form_Login;
@@ -339,9 +315,10 @@ class UsersController extends Omeka_Controller_Action
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {
             if ($log = $this->_getLog()) {
-                $log->info("Failed login attempt from '{$_SERVER['REMOTE_ADDR']}'.");
+                $ip = @$_SERVER['REMOTE_ADDR'];
+                $log->info("Failed login attempt from '$ip'.");
             }
-            $this->view->assign(array('errorMessage' => $this->getLoginErrorMessages($authResult)));
+            $this->flashError($this->getLoginErrorMessages($authResult));
             return;   
         }
         
@@ -405,29 +382,6 @@ class UsersController extends Omeka_Controller_Action
         $this->redirect->gotoUrl('');
     }
     
-    /**
-     * This hook allows specific user actions to be allowed if and only if an authenticated user 
-     * is accessing their own user data.
-     *
-     **/
-    public function preDispatch()
-    {
-        $userActions = array('show','edit');
-        
-        if ($current = $this->getCurrentUser()) {
-            try {
-                $user = $this->findById();
-                if ($current->id == $user->id) {
-                    foreach ($userActions as $action) {
-                        $this->setAllowed($action);
-                    }
-                }
-            } catch (Exception $e) {
-            }
-        }
-        return parent::preDispatch();
-    }
-
     private function _getLog()
     {
         return $this->getInvokeArg('bootstrap')->logger;

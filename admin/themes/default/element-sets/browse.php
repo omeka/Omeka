@@ -27,7 +27,7 @@ head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=
             </td>
             <td>
                 <?php if (has_permission('ElementSets', 'delete') and !in_array($elementSet->name, $doNotDelete)): ?>
-                    <?php echo delete_button($elementSet, null, __('Delete'), array('class' => 'delete-button delete-element-set')); ?>
+                    <?php echo delete_button($elementSet); ?>
                 <?php endif; ?>
             </td>
         </tr>

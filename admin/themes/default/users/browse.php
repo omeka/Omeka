@@ -54,11 +54,11 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
             <td><?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?></td>
             <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape($user->role); ?></span></td>
             <td><?php if($user->active):?><?php echo __('Active'); ?><?php else: ?><?php echo __('Not active'); ?><?php endif;?></td>
-            <?php if (has_permission('Users', 'edit')): ?>
+            <?php if (has_permission($user, 'edit')): ?>
             <td><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></td>
             <?php endif; ?>     
-            <?php if (has_permission('Users', 'delete')): ?>
-            <td><?php if((current_user()->id != $user->id)): echo delete_button($user, null, __('Delete'), array('class' => 'delete-button delete-user')); endif; ?></td>
+            <?php if (has_permission($user, 'delete')): ?>
+            <td><?php echo delete_button($user); ?></td>
             <?php endif; ?>
         </tr>
     <?php endforeach; ?>

@@ -20,7 +20,7 @@
             <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit submit-medium'), __('Save Changes')); ?>
         </div>
     </form>
-    <?php echo delete_button(null, 'delete-item', __('Delete this Item'), array('class' => 'delete-button delete-item')); ?>
+    <?php echo delete_button(null, 'delete-item', __('Delete this Item')); ?>
 
 
 </div>

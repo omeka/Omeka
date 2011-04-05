@@ -53,8 +53,8 @@ class PluginsController extends Omeka_Controller_Action
         if ($this->getRequest()->isPost()) {
             try {
                 $this->_pluginBroker->callHook('config', array($_POST), $plugin);
-            } catch (Exception $e) {
-                $this->flashError($e->getMessage());
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
                 $this->redirect->goto('config', null, null, array('name' => $plugin->getDirectoryName()));    
             }
             
@@ -217,7 +217,7 @@ class PluginsController extends Omeka_Controller_Action
         if (!$this->_getParam('confirm')) {
             
             if ($this->_getParam('uninstall-confirm')) {
-                $this->flashError("You must confirm the uninstall before proceeding.");
+                $this->flashError(__("You must confirm the uninstall before proceeding."));
             }
             
             // Call the append to uninstall message hook for the specific 

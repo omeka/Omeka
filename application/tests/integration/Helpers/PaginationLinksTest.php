@@ -16,6 +16,12 @@ require_once HELPERS;
  **/
 class Omeka_Helper_PaginationLinksTest extends Omeka_Test_AppTestCase
 {
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     public function testPaginationLinksAvoidXssAttack()
     {
         $attackUrl = '/items/browse/%22%3e%3cscript%3ealert(11639)%3c/script%3e';

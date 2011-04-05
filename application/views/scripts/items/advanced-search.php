@@ -5,9 +5,13 @@ if (!$isPartial):
                'bodyclass' => 'advanced-search', 
                'bodyid' => 'advanced-search-page'));
 ?>
-
-<div id="primary">   
-    <h1><?php echo $pageTitle; ?></h1>
+<?php if(!is_admin_theme()): ?>
+<div id="primary">
+<?php endif; ?>
+<h1><?php echo $pageTitle; ?></h1>
+<?php if(is_admin_theme()): ?>
+<div id="primary">
+<?php endif; ?>
      
 <?php endif; ?>
 <?php 
@@ -58,7 +62,7 @@ $formAttributes['method'] = 'GET';
                     @$rows['element_id'],
                     null,
                     array('record_types' => array('Item', 'All'), 
-                          'sort' => 'alpha'));
+                          'sort' => 'alphaBySet'));
                 echo select(
                     array('name' => "advanced[$i][type]"),
                     array('contains' => __('contains'), 

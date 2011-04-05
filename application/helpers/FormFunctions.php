@@ -560,14 +560,14 @@ function delete_button($action = null, $name = null, $value = 'Delete', $attribs
 {
     if (!isset($action)) {
         // If nothing is set at all, use the current route's delete action.
-        $action = uri(array('action' => 'delete'));
+        $action = uri(array('action' => 'delete-confirm'));
     } else if ($action instanceof Omeka_Record) {
         // If a record is given, use record_uri to get the action.
-        $action = record_uri($action, 'delete');
+        $action = record_uri($action, 'delete-confirm');
     }
 
     if (!array_key_exists('class', $attribs)) {
-        $attribs['class'] = 'delete-button';
+        $attribs['class'] = 'delete-confirm';
     }
 
     return button_to($action, $name, $value, $attribs, $formName, $formAttribs);

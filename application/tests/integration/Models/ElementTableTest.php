@@ -20,6 +20,12 @@ class Omeka_Models_ElementTableTest extends Omeka_Test_AppTestCase
         $this->table = $this->db->getTable('Element');
     }
 
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
+
     public function testFindByElementSetNameAndElementName()
     {
         $this->assertNull($this->table->findByElementSetNameAndElementName('Foo', 'Bar'));

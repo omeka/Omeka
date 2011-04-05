@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<?php if ( has_permission('Users','changeRole') ): ?>
+<?php if (has_permission($user, 'change-role')): ?>
     <div class="field">
         <?php echo label('role', __('Role')); ?>
         <div class="inputs">
@@ -70,7 +70,7 @@
     </div>
 <?php endif; ?>
 
-<?php if ( has_permission('super') ): ?>
+<?php if (has_permission($user, 'change-status')): ?>
     <div class="field">
         <div class="label"><?php echo __('Activity'); ?></div>
 <div class="inputs radio">

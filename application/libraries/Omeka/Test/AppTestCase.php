@@ -21,6 +21,12 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      * @var boolean
      */
     protected $_isAdminTest = true;
+
+    /**
+     * Optimize tests by indicating whether the database was modified during 
+     * the test run.  If not, the next test run can skip the Installer.
+     */
+    private static $_dbChanged = true;
     
     /**
      * Bootstrap the application on each test run.
@@ -44,6 +50,9 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     {
         if ($retVal = parent::__get($property)) {
             return $retVal;
+        }
+        if (!isset($this->core)) {
+            return;
         }
         return $this->core->getBootstrap()->getContainer()->{$property};
     }
@@ -145,6 +154,15 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }        
     }
     
+
+    public static function dbChanged($flag = null)
+    {
+        if ($flag !== null) {
+            self::$_dbChanged = (boolean)$flag;
+        }
+        return self::$_dbChanged;
+    }
+
     /**
      * Trick the environment into thinking that a user has been authenticated.
      *
@@ -160,6 +178,9 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $bs->auth->getStorage()->write($user->id);
         $bs->currentUser = $user;
         $bs->getContainer()->currentuser = $user;
+        $aclHelper = Zend_Controller_Action_HelperBroker::getHelper('Acl'); 
+        $aclHelper->setCurrentUser($user); 
+        
     }
     
     /**

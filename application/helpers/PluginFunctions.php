@@ -141,7 +141,7 @@ function plugin_footer()
 }
 
 /**
- * Allows plugins to hook in to the header of public themes.
+ * Allows plugins to hook in to the <head> of public themes.
  *
  * Uses the 'public_theme_header' hook to inject content into the theme.  This
  * hook receives the request object as the first argument, which allows the 
@@ -155,6 +155,57 @@ function plugin_header()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
 	fire_plugin_hook('public_theme_header', $request);
+}
+
+/**
+ * Allows plugins to hook in to the top of the <body> of public themes.
+ *
+ * Uses the 'public_theme_header' hook to inject content into the theme.  This
+ * hook receives the request object as the first argument, which allows the 
+ * plugin writer to tailor the header output to a specific request (specific
+ * controller, action, etc.).
+ * 
+ * @since 1.4
+ * @return void
+ **/
+function plugin_body() 
+{
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+	fire_plugin_hook('public_theme_body', $request);
+}
+
+/**
+ * Allows plugins to hook in to the top of the page's header of public themes.
+ *
+ * Uses the 'public_theme_header' hook to inject content into the theme.  This
+ * hook receives the request object as the first argument, which allows the 
+ * plugin writer to tailor the header output to a specific request (specific
+ * controller, action, etc.).
+ * 
+ * @since 1.4
+ * @return void
+ **/
+function plugin_page_header() 
+{
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+	fire_plugin_hook('public_theme_page_header', $request);
+}
+
+/**
+ * Allows plugins to hook in to the top of the page's content of public themes.
+ *
+ * Uses the 'public_theme_header' hook to inject content into the theme.  This
+ * hook receives the request object as the first argument, which allows the 
+ * plugin writer to tailor the header output to a specific request (specific
+ * controller, action, etc.).
+ * 
+ * @since 1.4
+ * @return void
+ **/
+function plugin_page_content() 
+{
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+	fire_plugin_hook('public_theme_page_content', $request);
 }
 
 /**

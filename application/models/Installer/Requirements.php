@@ -19,6 +19,7 @@ class Installer_Requirements
     const OMEKA_MYSQL_VERSION = '5.0';
     
     private $_dbAdapter;
+    private $_storage;
     
     private $_errorMessages = array();
     private $_warningMessages = array();
@@ -32,7 +33,7 @@ class Installer_Requirements
         $this->_checkRegisterGlobalsIsOff();
         $this->_checkExifModuleIsLoaded();
         $this->_checkModRewriteIsEnabled();
-        $this->_checkArchiveDirectoriesAreWritable();
+        $this->_checkArchiveStorageSetup();
     }
     
     public function getErrorMessages()
@@ -58,6 +59,11 @@ class Installer_Requirements
     public function setDbAdapter(Zend_Db_Adapter_Abstract $db)
     {
         $this->_dbAdapter = $db;
+    }
+
+    public function setStorage(Omeka_Storage $storage)
+    {
+        $this->_storage = $storage;
     }
     
     private function _checkPhpVersionIsValid()
@@ -164,15 +170,18 @@ class Installer_Requirements
         }
     }
     
-    private function _checkArchiveDirectoriesAreWritable()
+    private function _checkArchiveStorageSetup()
     {
-        $archiveDirectories = array(ARCHIVE_DIR, FILES_DIR, FULLSIZE_DIR, 
-                                    THUMBNAIL_DIR, SQUARE_THUMBNAIL_DIR);
-        foreach ($archiveDirectories as $archiveDirectory) {
-            if (!is_writable($archiveDirectory)) {
-                $header = 'Archive directory not writable';
-                $message = "The following directory must be writable by your web 
-                server before installing Omeka: $archiveDirectory";
+        if (!$this->_storage->canStore()) {
+            try {
+                $this->_storage->setUp();
+            } catch (Omeka_Storage_Exception $e) {
+                $header = 'Archive storage not set up properly.';
+                $exMessage = $e->getMessage();
+                $message = "The following error occurred when attempting to "
+                    . "set up storage for your Omeka site: $exMessage  "
+                    . "Please ensure that all storage directories exist and "
+                    . "are writable by your web server.";
                 $this->_errorMessages[] = compact('header', 'message');
             }
         }

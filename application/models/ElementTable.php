@@ -168,6 +168,8 @@ class ElementTable extends Omeka_Db_Table
         if (array_key_exists('sort', $params)) {
             if ($params['sort'] == 'alpha') {
                 $select->order('e.name ASC');
+            } else if ($params['sort'] == 'alphaBySet') {
+                $select->order('es.name ASC')->order('e.name ASC');
             }
         }
         
@@ -213,6 +215,7 @@ class ElementTable extends Omeka_Db_Table
             'name' => 'e.name',
             'set_name' => 'es.name',
         ));
+
         $elements = $this->fetchAll($select);
         $options = array();
         foreach ($elements as $element) {

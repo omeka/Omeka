@@ -25,10 +25,16 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
         parent::setUp();
         $this->aclHelper = Zend_Controller_Action_HelperBroker::getHelper('acl');
     }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        self::dbChanged(false);
+    }
              
     public function assertPreConditions()
     {
-        $this->assertFalse($this->core->getBootstrap()->getResource('Currentuser'));
+        $this->assertNull($this->core->getBootstrap()->getResource('Currentuser'));
         $this->assertEquals('Omeka_Controller_Action_Helper_Acl', get_class($this->aclHelper));
     }
         
@@ -68,10 +74,21 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     {
         $this->assertTrue($this->acl->has('ElementSets'));
         $this->dispatch('element-sets');
-        $this->_assertAccessForbidden();
+        $this->_assertLoginRequired();
         $this->assertFalse($this->aclHelper->isAllowed('browse', 'ElementSets'));
     }
     
+    /**
+     * The ACL action helper dispatches to users/login when there
+     * is no authenticated user.  Previous behavior was to always dispatch to
+     * error/forbidden.
+     */
+    private function _assertLoginRequired()
+    {
+        $this->assertController('users');
+        $this->assertAction('login');
+    } 
+   
     private function _assertAccessForbidden()
     {
         $this->assertController('error');

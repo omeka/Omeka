@@ -13,7 +13,9 @@
  * @subpackage Models
  * @copyright Center for History and New Media, 2007-2010
  */
-class User extends Omeka_Record {
+class User extends Omeka_Record implements Zend_Acl_Resource_Interface, 
+                                           Zend_Acl_Role_Interface
+{
 
     public $username;
     
@@ -33,8 +35,8 @@ class User extends Omeka_Record {
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
     
-    const INVALID_EMAIL_ERROR_MSG = 'That email address is not valid.  A valid email address is required.';
-    const CLAIMED_EMAIL_ERROR_MSG = 'That email address has already been claimed by a different user.  Please notify an administrator if you feel this has been done in error.';
+    const INVALID_EMAIL_ERROR_MSG = "That email address is not valid.  A valid email address is required.";
+    const CLAIMED_EMAIL_ERROR_MSG = "That email address has already been claimed by a different user. Please notify an administrator if you feel this has been done in error.";
         
     protected $_related = array('Entity'=>'getEntity');
     
@@ -85,10 +87,12 @@ class User extends Omeka_Record {
         
         // Permissions check to see if whoever is trying to change role to a super-user
         if (!empty($post['role'])) {
-            if ($post['role'] == 'super' && !$this->userHasPermission('makeSuperUser')) {
+            $acl = Omeka_Context::getInstance()->getAcl();
+            $currentUser = Omeka_Context::getInstance()->getCurrentUser();
+            if ($post['role'] == 'super' && !$acl->isAllowed($currentUser, 'Users', 'makeSuperUser')) {
                 throw new Omeka_Validator_Exception( __('User may not change permissions to super-user') );
             }
-            if (!$this->userHasPermission('changeRole')) {
+            if (!$acl->isAllowed($currentUser, $this, 'change-role')) {
                 throw new Omeka_Validator_Exception(__('User may not change roles.'));
             }
         } 
@@ -247,17 +251,16 @@ class User extends Omeka_Record {
         }
         
         //The new email address is fully legit, so set the entity to the new info                
-        $entity->first_name  = $post['first_name'];
-        $entity->last_name   = $post['last_name'];
-        $entity->institution = $post['institution'];
-        $entity->email       = $post['email'];
+        $entityKeys = array('first_name', 'last_name', 'institution', 'email');
+
+        foreach ($entityKeys as $key) {
+            if (array_key_exists($key, $post)) {
+                $entity[$key] = $post[$key];
+                unset($post[$key]);
+            }
+        }
         
         $this->Entity = $entity;
-        
-        unset($post['email']);
-        unset($post['first_name']);
-        unset($post['last_name']);
-        unset($post['institution']);
                         
         return true;
     }
@@ -288,6 +291,19 @@ class User extends Omeka_Record {
         }
         $this->setPassword($password);
         return $password;
+    }      
+    
+    public function getRoleId()
+    {
+        if (!$this->role) {
+            die("Should not be using a non-existent user role.");
+        }
+        return $this->role;
+    }  
+    
+    public function getResourceId()
+    {
+        return 'Users';
     }     
     
     /**

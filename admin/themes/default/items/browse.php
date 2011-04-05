@@ -28,15 +28,24 @@ endif; ?>
 <div id="primary">
     <?php echo flash(); ?>
     <?php if ( total_results() ): ?>    
-    <div id="browse-meta">
-        <div id="simple-search-form">
-            <?php echo simple_search(); ?>
-            <span id="advanced-search-link"><?php echo link_to_advanced_search(); ?></span>
-        </div>
-
+    <div id="browse-meta" class="group">
+    	<div id="simple-search-form">
+    	    <ul id="items-sort" class="navigation">
+            <?php
+                echo nav(array(
+                    __('All') => uri('items'), 
+                    __('Public') => uri('items/browse?public=1'),
+                    __('Private') => uri('items/browse?public=0'),
+                    __('Featured') => uri('items/browse?featured=1')
+                    ));
+            ?>
+            </ul>
+    		<?php echo simple_search(); ?>
+    		<?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
+    	</div>
 
         <div class="pagination"><?php echo pagination_links(); ?></div>
-    </div>
+	</div>
     
 <form id="items-browse" action="<?php echo html_escape(uri('items/power-edit')); ?>" method="post" accept-charset="utf-8">
 
@@ -50,6 +59,11 @@ endif; ?>
 </fieldset>
 </form>
 
+<div>
+    <h2><?php echo __('Output Formats'); ?></h2>
+    <?php echo output_format_list(false); ?>
+</div>
+
 <?php elseif(!total_items()): ?>
     <div id="no-items">
     <p><?php echo __('There are no items in the archive yet.'); ?>
@@ -60,13 +74,11 @@ endif; ?>
 </div>
     
 <?php else: ?>
-    <h1><?php echo __('The query searched %s items and returned no results.', total_items()); ?></h1>
+    <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
+    
 <?php endif; ?>
 
-<div>
-    <h2><?php echo __('Output Formats'); ?></h2>
-    <?php echo output_format_list(false); ?>
-</div>
+
 
 <?php fire_plugin_hook('admin_append_to_items_browse_primary', $items); ?>
 

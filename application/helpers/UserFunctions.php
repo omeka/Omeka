@@ -36,35 +36,27 @@ function get_user_by_id($userId)
 /**
  * Check the ACL to determine whether the current user has proper permissions.
  * 
- * This can be called with different syntax:
  * <code>has_permission('Items', 'showNotPublic')</code>
  * Will check if the user has permission to view Items that are not public.
  *
- * The alternate syntax checks to see whether the current user has a specific role:
- * <code>has_permission('admin')</code>
- * This latter syntax is discouraged, only because this will not cascade properly 
- * to other roles that may be given the same permissions as the admin role.  It 
- * actually circumvents the ACL entirely, so it should be avoided except in certain
- * situations where data must be displayed specifically to a certain role and no one else.
- *
- * @param string 
+ * @param string|Zend_Acl_Resource_Interface
  * @param string|null
  * @return boolean
  **/
-function has_permission($role, $privilege=null) 
+function has_permission($resource, $privilege) 
 {
 	$acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->acl;
 	$user = current_user();
-	if (!$user) return false;
-	
-	$userRole = $user->role;
-	if (!$privilege) {
-		return ($userRole == $role);
+	if (!$user) {
+	    return false;
 	}
+	
+	// User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
 
-	//This is checking for the correct combo of 'role','resource' and 'privilege'
-	$resource = $role;
-	return $acl->isAllowed($userRole,ucwords($resource),$privilege);
+	if (is_string($resource)) {
+	   $resource = ucwords($resource);
+	}
+	return $acl->isAllowed($user, $resource, $privilege);
 }
 
 /**

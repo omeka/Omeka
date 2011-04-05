@@ -22,6 +22,13 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      * @var Omeka_Acl
      */
     protected $_acl;
+    
+    /**
+     * User record corresponding to the logged-in user, otherwise null.
+     * 
+     * @var User|null
+     */
+    protected $_currentUser;
 
     /**
      * Temporarily allowed permissions.
@@ -36,28 +43,45 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      * 
      * @param Omeka_Acl $acl
      */
-    public function __construct($acl)
+    public function __construct($acl, $currentUser)
     {
         $this->_acl = $acl;
+        $this->setCurrentUser($currentUser);
     }
     
     /**
-     * Called just before dispatching.
-     * Redirects to a 403 error page when an action is forbidden to the user.
-     *
+     * Determine whether or not access is granted to a specific controller/action.
+     * 
+     * If the user has been authenticated, display the Access Forbidden error page.
+     * Otherwise, give the user an opportunity to login before trying again.
+     * 
      * @return void
      */
     public function preDispatch()
     {
-        try {
-            $this->checkActionPermission($this->getRequest()->getActionName());
-        } catch (Omeka_Controller_Exception_403 $e) {
-            $this->getRequest()->setControllerName('error')->setActionName('forbidden')->setModuleName('default')->setDispatched(false);
-            // Here's a (kind of) hack that lets this happen.
-            $this->_allowed['forbidden'] = true;
+        $resource = null;
+        if ($controller = $this->getActionController()) {
+            if (isset($controller->aclResource)) {
+                $resource = $controller->aclResource;
+            }
         }
+
+        if ($this->isAllowed($this->getRequest()->getActionName(), $resource)) {
+            return;
+        }
+        if ($this->_currentUser) {
+            $this->getRequest()->setControllerName('error')
+                               ->setActionName('forbidden')
+                               ->setModuleName('default')
+                               ->setDispatched(false);
+        } else if (!$this->_isLoginRequest()) {
+            $this->getRequest()->setControllerName('users')
+                               ->setActionName('login')
+                               ->setModuleName('default')
+                               ->setDispatched(false);
+        }    
     }
-    
+    	
     /**
      * Check whether an action is allowed.
      * Throws an exception when not allowed.
@@ -78,13 +102,24 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     }
     
     /**
-     * Notify whether the logged-in user has permission for the given privilege.
-     * i.e., if the $privilege is 'edit', then this will return TRUE if the user
-     * has permission to 'edit' for the current controller.
+     * Notifies whether the logged-in user has permission for a given resource/
+     * privilege combination.
      *
-     * @param string $privilege Privilege to check.
-     * @param string $resource (optional) Resource name.  The resource for the
-     * current controller will be used if this is omitted.
+     * If an ACL resource being checked has not been defined, access to that 
+     * resource should not be controlled.  This allows plugin writers to 
+     * implement controllers without also requiring them to be aware of the ACL. 
+     * 
+     * Conversely, in the event that an ACL resource has been defined, all access
+     * permissions for that controller must be properly defined.
+     * 
+     * The names of resources should correspond to the name of the controller 
+     * class minus 'Controller', e.g. 
+     * Geolocation_IndexController -> 'Geolocation_Index'
+     * CollectionsController -> 'Collections'
+     * 
+     * @param string $privilege
+     * @param Zend_Acl_Resource|string|null (Optional) Resource to check. 
+     * @see getResourceName()
      * @return boolean
      */
     public function isAllowed($privilege, $resource = null) 
@@ -93,24 +128,37 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         if(isset($allowed[$privilege])) {
             return $allowed[$privilege];
         }
-        
-        if(!$resource) {
-            $resource = $this->getResourceName();
+
+        if ($resource instanceof Zend_Acl_Resource_Interface) {
+            $resourceObj = $resource;
+            $resourceName = $resourceObj->getResourceId();
+        } else if (is_string($resource)) {
+            $resourceName = $resource;
+        } else if (!$resource) {
+            $resourceName = $this->getResourceName();
         }
 
-        // If the resource has not been defined in the ACL, allow access to the
-        // controller.
-        if (!$this->_acl->has($resource)) {
-            return true;
-        }        
-
-        // If the resource exists (Controller) but the tested privilege (action)
-        // has not been defined in the ACL, then allow access.        
-        if(($resource = $this->_acl->get($resource)) && (!$resource->has($privilege))) {
+        // Plugin writers do not need to define an ACL in order for their 
+        // controllers to work.
+        if (!$this->_acl->has($resourceName)) {
             return true;
         }
-        
-        return $this->_acl->checkUserPermission($resource, $privilege);
+
+        if (!isset($resourceObj)) {
+            $resourceObj = $this->_acl->get($resourceName);
+        }
+
+        // To be removed in 2.0.
+        // If the tested privilege (action) has not been defined in the ACL, 
+        // then allow access.        
+        if ($resourceObj instanceof Omeka_Acl_Resource
+            && !$resourceObj->has($privilege)
+        ) {
+            return true;
+        }
+
+
+	    return $this->_acl->isAllowed($this->_currentUser, $resourceObj, $privilege);
     }
     
     /**
@@ -144,6 +192,15 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         return $resourceName;
     }
     
+	
+    /**
+     * @param User|null $currentUser
+     */
+    public function setCurrentUser($currentUser)
+    {
+        $this->_currentUser = $currentUser;
+    }    
+
     /**
      * Temporarily override the ACL's permissions for this controller
      *
@@ -154,4 +211,11 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     {
         $this->_allowed[$rule] = $isAllowed;
     }    
+
+    private function _isLoginRequest()
+    {
+        $request = $this->getRequest();
+        return $request->getActionName() == 'login' 
+            && $request->getControllerName() == 'users';
+    }
 }

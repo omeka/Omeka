@@ -8,8 +8,10 @@
  */
 
 /**
- * Initialize the User object for the currently logged-in user.  If no user
- * has been authenticated, this value will be equivalent to false.
+ * Retrive the User record corresponding to the authenticated user.
+ *
+ * If the user record is not retrievable (invalid ID), then the authentication 
+ * ID will be cleared.
  * 
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
@@ -19,7 +21,16 @@
 class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
 {
     /**
-     * @return User|boolean False if there is no authenticated user.
+     * Retrieve the User record associated with the authenticated user.
+     *
+     * Note that this returns null when no User is authenticated.  Prior 
+     * to 1.4, this returned boolean false.  For forward-compatibility, this 
+     * has been changed to null in 1.4.  This is because in future versions, 
+     * User will implement Zend_Role_Interface.  Zend_Acl accepts null as 
+     * a valid role, but it throws exceptions for boolean false (tries to 
+     * convert it to the empty string).
+     *
+     * @return User|null
      */
     public function init()
     {
@@ -27,36 +38,38 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
         $bootstrap->bootstrap('Auth');
         $auth = $bootstrap->getResource('Auth');
         
-        $user = false;
+        // User should default to null because the ACL interprets null differently
+        // from other equivalents (false, empty string, etc.).
+        $user = null;
 
-        if ($auth->hasIdentity()) {
-            $userId = $auth->getIdentity();
-            // This extra database call seems unnecessary at face value, but it
-            // actually retrieves the entity metadata about the user as well as the
-            // username/role info that is already stored in the auth identity.
-            require_once 'User.php';
-            $bootstrap->bootstrap('Db');
-            $db = $bootstrap->getResource('Db');
-            try {
-                $user = $db->getTable('User')->find($userId);
-            } catch (Zend_Db_Statement_Exception $e) {
-                // Exceptions may be thrown because the database is out of sync
-                // with the code.  Suppress errors and skip authentication, but
-                // only until the database is properly upgraded.
-                if (Omeka_Db_Migration_Manager::getDefault()->dbNeedsUpgrade()) {
-                    $user = false;
-                } else {
-                    throw $e;
-                }
-            }
-            if (!$user) {
-                // If we can't retrieve the User from the database, it likely
-                // means that this user has been deleted.  In this case, do not
-                // allow the user to stay logged in.
-                $auth->clearIdentity();
-            }
-        } 
+        if (!$auth->hasIdentity()) {
+            return null;
+        }
 
+        $userIdentity = $auth->getIdentity();
+        $bootstrap->bootstrap('Db');
+        $db = $bootstrap->getResource('Db');
+        try {
+            // The auth mechanism stores the user integer ID as the identity.  
+            // This is done to avoid any confusion with legacy installations that 
+            // may have usernames consisting entirely of digits.
+            $user = $db->getTable('User')->find($userIdentity);
+        } catch (Zend_Db_Statement_Exception $e) {
+            // Exceptions may be thrown because the database is out of sync
+            // with the code.  Suppress errors and skip authentication, but
+            // only until the database is properly upgraded.
+            if (Omeka_Db_Migration_Manager::getDefault()->dbNeedsUpgrade()) {
+                $user = null;
+            } else {
+                throw $e;
+            }
+        }
+        if (!$user) {
+            // If we can't retrieve the User from the database, it likely
+            // means that this user has been deleted.  In this case, do not
+            // allow the user to stay logged in.
+            $auth->clearIdentity();
+        }
         return $user;
     }
 }

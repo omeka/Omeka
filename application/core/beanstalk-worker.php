@@ -68,7 +68,7 @@ if (!$pheanJob) {
     echo "Beanstalk worker timed out when reserving a job.";
     exit(0);
 }
-$core->bootstrap(array('Config', 'Db', 'Options', 'Jobs'));
+$core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Jobs', 'Storage'));
 $worker = new Omeka_Job_Worker_Beanstalk($pheanstalk, 
     Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
 $worker->work($pheanJob);

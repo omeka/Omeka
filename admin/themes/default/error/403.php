@@ -1,5 +1,7 @@
-<?php head(array('bodyclass'=>'error403 primary', 'title'=>'Forbidden')); ?>
-<h1><?php echo __('403: Forbidden'); ?></h1>
+<?php
+$pageTitle = __('403: Forbidden');
+head(array('bodyclass'=>'error403 primary', 'title'=>$pageTitle)); ?>
+<h1><?php echo $pageTitle; ?></h1>
 
 <div id="primary" class="file-forbidden">
 <?php echo flash(); ?>

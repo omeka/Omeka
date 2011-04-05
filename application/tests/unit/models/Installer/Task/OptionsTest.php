@@ -64,6 +64,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
+            'display_system_info'           => true,
         ));
         try {
             $task->install($this->db);
@@ -97,6 +98,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
+            'display_system_info'           => true,
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(

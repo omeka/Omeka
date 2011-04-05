@@ -16,12 +16,6 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
     
-    public function assertPreConditions()
-    {
-        // No one is logged in.
-        $this->assertFalse($this->core->getBootstrap()->currentUser);
-    }
-    
     public function testAutomaticRedirectToUpgrade()
     {
         set_option('omeka_version', '1.0');

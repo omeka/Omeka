@@ -89,7 +89,8 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         if(!$status) {
             throw new Omeka_Storage_Exception('Unable to store file.');
         }
-
+        
+        _log("Omeka_Storage_Adapter_ZendS3: Stored '$source' as '$objectName'.");
         unlink($source);
     }
 
@@ -109,6 +110,8 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         if(!$status) {
             throw new Omeka_Storage_Exception('Unable to move file.');
         }
+
+        _log("Omeka_Storage_Adapter_ZendS3: Moved '$sourceObject' to '$destObject'.");
     }
 
     /**
@@ -125,6 +128,8 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         if(!$status) {
             throw new Omeka_Storage_Exception('Unable to delete file.');
         }
+
+        _log("Omeka_Storage_Adapter_ZendS3: Removed object '$objectName'.");
     }
 
     /**

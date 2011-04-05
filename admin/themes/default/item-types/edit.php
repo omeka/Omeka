@@ -17,7 +17,7 @@
     </form>
     
     <?php if (has_permission('ItemTypes', 'delete')): ?>
-        <?php echo delete_button(null, 'delete-item', __('Delete this Item Type'), array('class' => 'delete-button delete-item-type')); ?>
+        <?php echo delete_button(null, 'delete-item-type', __('Delete this Item Type')); ?>
     <?php endif; ?>
 </div>
 <?php foot(); ?>

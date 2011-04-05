@@ -46,7 +46,9 @@ class Omeka_Migrations_DecoupleCollectorsTest extends Omeka_Test_AppTestCase
 
     public function tearDown()
     {
-        $this->db->query("DROP TABLE IF EXISTS `" . self::COLLECTIONS_TABLE . "`");
+        if ($this->db) {
+            $this->db->query("DROP TABLE IF EXISTS `" . self::COLLECTIONS_TABLE . "`");
+        }
         parent::tearDown();
     }
 }

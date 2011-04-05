@@ -1,9 +1,16 @@
 <?php 
+/**
+ * @copyright Center for History and New Media, 2011
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ */
+
 require_once HELPERS;
 
 /**
- * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
- * in helpers/StringFunctions.php
+ * Tests get_tags() in helpers/TagFunctions.php.
+ *
+ * @package Omeka
  */
 class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
 {   
@@ -32,7 +39,7 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
             $item = $this->_itemToTag;
         }
                 
-        $item->addTags($tagStrings, $user);            
+        $item->addTags($tagStrings, $user);
     }
     
     public function testGetTagsByDefaultAndWithNoTags()
@@ -82,8 +89,53 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
         }
     }
 
-    public function tearDown()
-    {        
-        parent::tearDown();
+    public function testGetTagsOnPublicItem()
+    {
+        /**
+         * Create a new public item, with three tags.
+         */
+        $item = new Item;
+        $item->public = 1;
+        $item->save();
+        $this->_addTags(array('Duck', 'Chicken', 'Goose'), $item);
+
+        /**
+         * Get tags for type=Item and public=true. Should return 3 tags, since
+         * our item is public.
+         */
+        $publicTags = get_tags(array('public' => true, 'type' => 'Item'));
+        $this->assertEquals(3, count($publicTags));
+
+        /**
+         * Get tags for type=Item and public=false. Should return 0 tags, since
+         * our item is public.
+         */
+        $nonPublicTags = get_tags(array('public' => false, 'type' => 'Item'));
+        $this->assertEquals(0, count($nonPublicTags));
+    }
+
+    public function testGetTagsOnNonPublicItem()
+    {
+        $this->_addTags(array('Duck', 'Chicken', 'Goose'));
+
+        // Should return 0 tags, since our item is not public.
+        $publicTags = get_tags(array('public' => true, 'type' => 'Item'));
+        $this->assertEquals(0, count($publicTags));
+
+        /**
+         * Get tags for type=Item and public=false. Should return 0 tags, since
+         * our item is not public and we're not logged in.
+         */
+        $nonPublicTags = get_tags(array('public' => false, 'type' => 'Item'));
+        $this->assertEquals(0, count($publicTags));
+
+        /**
+         * Get tags for type=Item and public=false, with an authenticated user.
+         * Should return 3 tags, since our item is not public and we are logged
+         * in.
+         */
+        $this->_authenticateUser($this->_getDefaultUser());
+        $nonPublicTagsAuth = get_tags(array('public' => false, 'type' => 'Item'));
+        $this->assertEquals(3, count($nonPublicTagsAuth));
     }
 }

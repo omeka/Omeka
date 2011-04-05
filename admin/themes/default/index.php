@@ -1,5 +1,7 @@
-<?php head(array('bodyclass'=>'index primary-secondary', 'title'=>__('Dashboard'))); ?>
-<h1><?php echo __('Dashboard'); ?></h1>
+<?php
+$pageTitle = __('Dashboard');
+head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
+<h1><?php echo $pageTitle;; ?></h1>
     <div id="primary">
         
         <?php // Retrieve the latest version of Omeka by pinging the Omeka server. ?>
@@ -52,7 +54,7 @@
                     </dd>
                 <?php endif; ?>
                 
-                <?php if(has_permission('super')): ?>
+                <?php if(has_permission('Settings', 'edit')): ?>
                     <dt class="site-settings"><a href="<?php echo html_escape(uri('settings')); ?>"><?php echo __('Settings'); ?></a></dt>
                     <dd class="site-settings">
                         <ul>

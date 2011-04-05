@@ -20,7 +20,7 @@
 <?php display_js(); ?>
 
 </head>
-<body<?php echo isset($bodyclass) ? ' class="'.$bodyclass.'"' : ''; ?>>
+<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
     <div class="hide"><a href="#content"><?php echo __('Skip Navigation'); ?></a></div>
     <div id="wrap">
         <div id="header">
@@ -29,13 +29,8 @@
             <div id="site-info">
                 <?php if (current_user()): ?>
                     <p id="welcome">
-                        <?php
-                        $currentUserName = html_escape(current_user()->first_name);
-                        $currentUserUrl = html_escape(uri('users/edit/'.current_user()->id));
-                        $currentUserLink = "<a href=\"$currentUserUrl\">$currentUserName</a>";
-                        ?>
-                        
-                        <?php echo __('Welcome, %s', $currentUserLink); ?> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></p>
+                        <?php $userLink = '<a href="'.html_escape(uri('users/edit/'.current_user()->id)) .'">'.html_escape(current_user()->first_name) .'</a>'; ?>
+                        <?php echo __('Welcome, %s', $userLink); ?> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></p>
                 <?php endif; ?>
                 <?php if (has_permission('Settings', 'edit')): ?>
                     <a href="<?php echo html_escape(uri('settings')); ?>" id="settings-link"><?php echo __('Settings'); ?></a>

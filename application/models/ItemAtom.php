@@ -54,7 +54,7 @@ class ItemAtom
     {
         $this->_atom['charset'] = 'UTF-8';
         $this->_atom['title'] = strip_tags(get_option('site_title'));
-        $this->_atom['link'] = abs_uri();
+        $this->_atom['link'] = xml_escape(__v()->serverUrl(isset($_SERVER['REQUEST_URI'])));
         $this->_atom['author'] = strip_tags(get_option('author'));
         $this->_atom['description'] = strip_tags(get_option('description'));
         $this->_atom['copyright'] = strip_tags(get_option('copyright'));

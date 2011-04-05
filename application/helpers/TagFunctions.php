@@ -35,7 +35,7 @@ function total_tags()
  * @param integer $limit The maximum number of recent tags to return
  * @return array
  **/
-function recent_tags($limit = 30) 
+function recent_tags($limit = 10) 
 {
 	return get_tags(array('recent'=>true), $limit);
 }
@@ -126,7 +126,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
 	}
 	
 	if (empty($tags)) {
-		$html = '<p>No tags are available.</p>';
+		$html = '<p>'. __('No tags are available.') .'</p>';
 		return $html;
 	} 
 	

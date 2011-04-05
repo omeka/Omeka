@@ -33,7 +33,6 @@ class ItemsController extends Omeka_Controller_Action
         'element-form' => array('POST'),
         'modify-tags' => array('POST'),
         'power-edit' => array('POST'),
-        'delete' => array('POST'),
         'change-type' => array('POST'),
     );
 
@@ -118,6 +117,13 @@ class ItemsController extends Omeka_Controller_Action
     protected function  _getDeleteSuccessMessage($record)
     {
         return __('The item was successfully deleted!');
+    }
+    
+    protected function _getDeleteConfirmMessage($record)
+    {
+        return __('This will delete the item and its associated metadata. It will '
+             . 'also delete all files and file metadata associated with this '
+             . 'item.');
     }
     
     public function addAction()

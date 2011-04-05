@@ -175,6 +175,7 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
         // need for method calls by default in the view partial.
         $elementSets = $this->_getElementsBySet();
         foreach ($elementSets as $setName => $elementsInSet) {
+            $setIsEmpty = true;
             foreach ($elementsInSet as $key => $element) {
                 $elementName = $element->name;
                 $elementsInSet[$key] = array();
@@ -185,13 +186,18 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
                 $elementsInSet[$key]['isEmpty'] = empty($elementTexts);
                 $elementsInSet[$key]['emptyText'] = html_escape($this->_emptyElementString);
                 $elementsInSet[$key]['texts'] = $elementTexts;
+                if ($setIsEmpty && !$elementsInSet[$key]['isEmpty']) {
+                    $setIsEmpty = false;
+                } 
             }
             $elementSets[$setName] = $elementsInSet;
             
             // We're done preparing the data for display, so display it.
+            if (!$setIsEmpty || $this->_showEmptyElements){
             $varsToInject = array('elementSets'=>$elementSets, 'setName'=>$setName, 
             'elementsInSet'=>$elementsInSet, 'record'=>$this->_record);
             $this->_loadViewPartial($varsToInject);
+            }
         }
     }
     
