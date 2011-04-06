@@ -1,4 +1,6 @@
 <?php 
+require_once dirname(__FILE__) . '/functions.php';
+
 // When displaying item metadata (or anything else that makes use of the 
 // 'html_escape' filter), make sure we escape entities correctly with UTF-8.
 add_filter('html_escape', 'utf8_htmlentities', 1);
@@ -12,5 +14,3 @@ add_filter('html_escape', 'nl2br', 2);
  **/
 add_filter(array('Display', 'Item', 'Dublin Core', 'Title'), 'show_untitled_items');
 
-
-include 'functions.php';
