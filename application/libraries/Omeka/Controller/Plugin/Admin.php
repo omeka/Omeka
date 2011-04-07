@@ -27,11 +27,13 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
      *
      * @var string
      */
-    protected $_adminWhitelist = array(array('controller' => 'users', 'action' => 'activate'), 
-                                       array('controller' => 'users', 'action' => 'login'),
-                                       array('controller' => 'users', 'action' => 'forgot-password'),
-                                       array('controller' => 'installer', 'action' => 'notify'),
-                                       array('controller' => 'error', 'action' => 'error'));
+    protected $_adminWhitelist = array(
+        array('controller' => 'users', 'action' => 'activate'),
+        array('controller' => 'users', 'action' => 'login'),
+        array('controller' => 'users', 'action' => 'forgot-password'),
+        array('controller' => 'installer', 'action' => 'notify'),
+        array('controller' => 'error', 'action' => 'error')
+    );
     
     /**
      * Direct requests to the admin interface.
@@ -59,12 +61,22 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
     {
         $action = $request->getActionName();
         $controller = $request->getControllerName();
+        $module = $request->getModuleName();
 
         $this->_adminWhitelist = apply_filters('admin_whitelist', $this->_adminWhitelist);
         
         $overrideLogin = false;
         foreach ($this->_adminWhitelist as $entry) {
-            if (($entry['controller'] == $controller) && ($entry['action'] == $action)) {
+            // Any whitelist entry that omits the module will be assumed to be
+            // talking about the default module.
+            if (!array_key_exists('module', $entry)) {
+                $entry['module'] = 'default';
+            }
+
+            if (($entry['module'] == $module)
+                && ($entry['controller'] == $controller)
+                && ($entry['action'] == $action)
+            ) {
                 $overrideLogin = true;
                 break;
             }
