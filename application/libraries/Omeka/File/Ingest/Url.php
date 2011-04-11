@@ -85,11 +85,20 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             throw new Omeka_File_Ingest_InvalidException("$source is not a valid URL.");
         }
 
-        $client = $this->_getHttpClient($source);
-        $response = $client->request('HEAD');
-        if ($response->isError()) {
+        try {
+            $client = $this->_getHttpClient($source);
+            $response = $client->request('HEAD');
+            $isError = $response->isError();
             $code = $response->getStatus();
-            throw new Omeka_File_Ingest_InvalidException("$source cannot be read. The server returned code $code.");
+            $msg = "The server returned code '$code'";
+        } catch (Zend_Http_Client_Exception $e) {
+            $isError = true;
+            $msg = $e->getMessage();
+        }
+
+        if ($isError) {
+            throw new Omeka_File_Ingest_InvalidException(
+                "'$source' cannot be read: " . $msg);
         }
     }
 }
