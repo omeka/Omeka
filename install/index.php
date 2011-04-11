@@ -29,6 +29,12 @@ $application->getBootstrap()->registerPluginResource('Zend_Application_Resource_
 $plugins = $application->getBootstrap()->getPluginResources();
 
 $application->getBootstrap()->bootstrap(array('FrontController', 'Layout'));
-if (APPLICATION_ENV !== 'testing') {
+if (APPLICATION_ENV === 'testing') {
+    return;
+}
+
+try {
     $application->run();
+} catch (Exception $e) {
+    echo '<pre>' . $e->getMessage() . '</pre>';exit;
 }
