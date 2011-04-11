@@ -87,3 +87,4 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             throw new Omeka_File_Ingest_InvalidException("$source cannot be read. The server returned code $code.");
         }
     }
+}
