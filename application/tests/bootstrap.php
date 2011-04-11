@@ -10,7 +10,7 @@
 define('APPLICATION_ENV', 'testing');
 
 ini_set('max_execution_time', 900);
-ini_set('memory_limit', '128M');
+ini_set('memory_limit', '256M');
 
 // Set the include path and all the constants.
 require_once (dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'paths.php');

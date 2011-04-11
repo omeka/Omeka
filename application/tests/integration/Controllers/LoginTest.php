@@ -45,6 +45,29 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $this->assertContains(UsersController::INVALID_LOGIN_MESSAGE, $this->getResponse()->sendResponse());
         self::dbChanged(false);
     }
+
+    public static function roles()
+    {
+        return array(
+            array('researcher'),
+            array('contributor'),
+            array('admin'),
+            array('super'),
+        );
+    }
+
+    /**
+     * @dataProvider roles
+     */
+    public function testLogout($role)
+    {
+        $user = $this->_getDefaultUser();
+        $user->role = $role;
+        $this->_authenticateUser($user);
+        $this->dispatch('/users/logout');
+        $this->assertController('users');
+        $this->assertAction('logout');
+    }
     
     private function _login($username, $password)
     {

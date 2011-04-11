@@ -129,7 +129,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
             $this->logger->__destruct();
         }    
         if ($this->db instanceof Omeka_Db) {
-            $this->db->closeConnection();
+            Omeka_Test_Resource_Db::setDbAdapter($this->db->getAdapter());
         }
         Zend_Registry::_unsetInstance();
         Omeka_Context::resetInstance();
