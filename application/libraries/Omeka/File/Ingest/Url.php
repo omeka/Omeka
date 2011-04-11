@@ -74,9 +74,14 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
      */
     protected function _validateSource($source, $info)
     {
-        $uri = Zend_Uri::factory($source);
+        try {
+            $uri = Zend_Uri::factory($source);
+            $uriIsValid = $uri->valid();
+        } catch (Zend_Uri_Exception $e) {
+            $uriIsValid = false;
+        }
 
-        if (!($uri && $uri->valid())) {
+        if (!($uri && $uriIsValid)) {
             throw new Omeka_File_Ingest_InvalidException("$source is not a valid URL.");
         }
 
