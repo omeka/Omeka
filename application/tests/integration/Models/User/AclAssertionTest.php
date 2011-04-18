@@ -19,6 +19,7 @@ class User_AclAssertionTest extends Omeka_Test_AppTestCase
     {
         release_object($this->super);
         release_object($this->admin);
+        parent::tearDown();
     }
 
     public static function aclProvider()
