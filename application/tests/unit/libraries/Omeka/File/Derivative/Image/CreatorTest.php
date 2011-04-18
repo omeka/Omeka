@@ -16,7 +16,7 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
 {
     public function setUp()
     {
-        $this->convertDir = '/opt/local/bin';
+        $this->convertDir = Zend_Registry::get('test_config')->paths->imagemagick;
         $this->invalidFile = '/foo/bar/baz.html';
         $this->validFilePath = dirname(__FILE__) . '/_files/valid-image.jpg';
         $this->validMimeType = 'image/jpeg';
