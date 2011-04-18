@@ -37,7 +37,7 @@
     <?php echo __v()->formHidden('item-type-id', $itemtype->id); ?>
 </fieldset>
 
-<?php echo __v()->formSubmit('element-form-submit', 'Add Element', array('class'=>'submit submit-medium')); ?>
+<?php echo __v()->formSubmit('element-form-submit', 'Add Element', array('class'=>'submit')); ?>
 
 
 </form>

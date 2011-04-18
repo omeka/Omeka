@@ -5,7 +5,7 @@
     <form method="post" action="">
         <?php include 'form.php';?>
         <div>
-            <input type="submit" name="submit" class="submit submit-medium" id="submit" value="Add Item Type" />
+            <input type="submit" name="submit" class="submit" id="submit" value="Add Item Type" />
         </div>
     </form>
 </div>

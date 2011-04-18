@@ -39,7 +39,7 @@
     <?php endforeach; ?>
     </div>
     <div>
-        <input type="submit" name="submit" class="submit submit-medium" id="submit" value="Switch Theme" />
+        <input type="submit" name="submit" class="submit" id="submit" value="Switch Theme" />
     </div>
 </form>
 

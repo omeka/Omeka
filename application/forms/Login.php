@@ -42,7 +42,6 @@ class Omeka_Form_Login extends Omeka_Form
                                   'isEmpty' => 'Password cannot be empty.'))))));
         $this->addElement('checkbox', 'remember', array('class'=>'checkbox', 'label'=>'Remember Me?'));
         $this->addDisplayGroup(array('username','password','remember'), 'login');
-        $this->addElement('submit', 'submit', array('label' => 'Log In', 
-                                                    'class' => 'submit-small submit'));
+        $this->addElement('submit', 'submit', array('label' => 'Log In'));
     }
 }

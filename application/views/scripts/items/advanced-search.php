@@ -157,7 +157,7 @@ $formAttributes['method'] = 'GET';
 
     <?php is_admin_theme() ? fire_plugin_hook('admin_append_to_advanced_search') : fire_plugin_hook('public_append_to_advanced_search'); ?>
     <div>
-        <input type="submit" class="submit submit-medium" name="submit_search" id="submit_search_advanced" value="Search" />
+        <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="Search" />
     </div>
 </form>
 

@@ -53,7 +53,7 @@ endif; ?>
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
 <fieldset>
-    <input type="submit" class="submit submit-medium" id="save-changes" name="submit" value="Save Changes" />
+    <input type="submit" class="submit" id="save-changes" name="submit" value="Save Changes" />
 </fieldset>
 </form>
 

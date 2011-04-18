@@ -16,7 +16,7 @@
     </div>
 </div>
 <div>
-    <input type="submit" name="submit" class="submit submit-medium" value="Delete Tag" />
+    <input type="submit" name="submit" class="submit" value="Delete Tag" />
 </div>
 </form>
 <?php else: ?>

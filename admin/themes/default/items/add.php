@@ -7,7 +7,7 @@
         <form method="post" enctype="multipart/form-data" id="item-form" action="">
             <?php include('form.php'); ?>
             <div>
-                <input type="submit" name="submit" class="submit submit-medium" id="add_item" value="Add Item" />
+                <input type="submit" name="submit" class="submit" id="add_item" value="Add Item" />
             </div>
         </form>
 </div>

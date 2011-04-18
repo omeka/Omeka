@@ -21,7 +21,7 @@
     </div>
     </fieldset>
     <div>
-    <input type="submit" class="submit submit-medium" name="submit" value="Activate"/>
+    <input type="submit" class="submit" name="submit" value="Activate"/>
     </div>
 </form>
 

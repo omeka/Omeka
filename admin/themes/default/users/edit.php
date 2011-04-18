@@ -14,7 +14,7 @@
 <div id="primary">
 <form method="post">
 <?php include('form.php'); ?>
-<input type="submit" name="submit" value="Save Changes" class="submit submit-medium" />
+<input type="submit" name="submit" value="Save Changes" class="submit" />
 </form>
 
 <?php echo $this->passwordForm; ?>
