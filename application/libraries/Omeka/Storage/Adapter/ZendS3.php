@@ -144,7 +144,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         $date = new Zend_Date();
         $date->add('10', Zend_Date::MINUTE);
 
-        $object = $this->_getObjectName($path);
+        $object = urlencode($this->_getObjectName($path));
 
         $accessKeyId = $this->_options[self::AWS_KEY_OPTION];
         $secretKey = $this->_options[self::AWS_SECRET_KEY_OPTION];
