@@ -185,6 +185,6 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
      */
     private function _getObjectName($path)
     {
-        return $this->_getBucketName() . '/' . $path;
+        return $this->_getBucketName() . '/' . urlencode($path);
     }
 }
