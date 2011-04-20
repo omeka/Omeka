@@ -42,7 +42,8 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
         
         if (!empty($config->debug->email)) {
             $bootstrap->bootstrap('Mail');            
-            $this->_addMailWriter($logger, (string)$config->debug->email);
+            $this->_addMailWriter($logger, (string)$config->debug->email,
+                $config->debug->emailLogPriority);
         }
         
         return $logger;
@@ -54,13 +55,21 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
      * @param Zend_Log $log
      * @param string $toEmail Email address of debug message recipient.
      */
-    private function _addMailWriter(Zend_Log $log, $toEmail)
+    private function _addMailWriter(Zend_Log $log, $toEmail, 
+        $filter = null)
     {
         $mailer = new Zend_Mail;
         $mailer->addTo($toEmail);
         $mailer->setFrom(get_option('administrator_email'));
         $logWriter = new Zend_Log_Writer_Mail($mailer);
         $logWriter->setSubjectPrependText('[' . get_option('site_title') . ']');
+        if ($filter) {
+            // Zend_Log::ERR, e.g.
+            if (defined($filter)) {
+                $filter = constant($filter);
+            }
+            $logWriter->addFilter($filter);
+        }
         $log->addWriter($logWriter);
     }
 }
