@@ -51,7 +51,8 @@ class CollectionTable extends Omeka_Db_Table
     {
         $select = parent::getSelect();
         
-        if($acl = Omeka_Context::getInstance()->getAcl()) {
+        $acl = Omeka_Context::getInstance()->acl;
+        if ($acl) {
             new CollectionPermissions($select, $acl);
         }
         

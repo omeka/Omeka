@@ -38,6 +38,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
     );
 
     protected $_themeName;
+    protected $_themeOptions;
     
     public function init()
     {
@@ -46,7 +47,6 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         
         $theme = Theme::getAvailable($themeName);
         $themeConfigIni = $theme->path . DIRECTORY_SEPARATOR . 'config.ini';
-        $themeOptionName = Theme::getOptionName($themeName);
 
         if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
 
@@ -69,6 +69,11 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 )
             );
 
+            if (!($themeConfigValues = $this->getThemeOptions())) {
+                $themeConfigValues = Theme::getOptions($themeName);
+                $this->setThemeOptions($themeConfigValues);
+            }
+            
             // configure all of the form elements
             $elements = $this->getElements();
             foreach($elements as $element) {
@@ -77,8 +82,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 }
             }        
 
-            // set all of the form element values
-            $themeConfigValues = Theme::getOptions($themeName);
+            // set all of the form element values            
             foreach($themeConfigValues as $key => $value) {
                 if ($this->getElement($key)) {
                     $this->$key->setValue($value);
@@ -97,6 +101,16 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         return $this->_themeName;
     }
 
+    public function setThemeOptions($themeOptions)
+    {
+        $this->_themeOptions = $themeOptions;
+    }
+
+    public function getThemeOptions()
+    {
+        return $this->_themeOptions;
+    }
+
     /**
      * Add appropriate validators, filters, and hidden elements for  a file
      * upload element.
@@ -106,7 +120,9 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
     private function _processFileElement($element)
     {
         $element->setDestination(Zend_Registry::get('storage')->getTempDir());
-        $fileName = get_theme_option($element->getName(), $this->getThemeName());
+
+        $options = $this->getThemeOptions();
+        $fileName = @$options[$element->getName()];
 
         // Add extension/mimetype filtering.
         if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) != '1') {

@@ -80,7 +80,7 @@ jQuery(document).ready(function () {
                     <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
                 </div>
                 <div>
-                    <input type="submit" class="submit submit-medium" name="modify_tags" value="Save Tags" id="tags-submit" />
+                    <input type="submit" class="submit" name="modify_tags" value="Save Tags" id="tags-submit" />
                 </div>
             </form>
         </div>

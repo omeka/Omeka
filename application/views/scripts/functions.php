@@ -102,6 +102,20 @@ function custom_header_image()
     return false;
 }
 
+function custom_header_background()
+{
+    if(function_exists('get_theme_option') && $headerBg = get_theme_option('Header Background')) {
+        $storage = Zend_Registry::get('storage');
+        $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
+        $html = "<style type=\"text/css\" media=\"screen\">"
+              . " #header {"
+              . "    background:transparent url('$headerBg') top left no-repeat;"
+              . "}"
+              . "</style>";
+        echo $html;
+    }
+}
+
 function custom_nav_items($navArray = array())
 {
     if (!$navArray) {

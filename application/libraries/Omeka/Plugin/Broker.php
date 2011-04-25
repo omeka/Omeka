@@ -64,6 +64,14 @@ class Omeka_Plugin_Broker
         } else {
             $currentPluginDirName = $this->getCurrentPluginDirName(); 
         }
+
+        // Null or empty plugin name leads to false negatives when 
+        // looking up callbacks.
+        if (!$currentPluginDirName) {
+            throw new RuntimeException("Cannot add a hook without an "
+                . "associated plugin namespace.");
+        }
+
         $this->_callbacks[$hook][$currentPluginDirName] = $callback;
     }
     

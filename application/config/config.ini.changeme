@@ -20,6 +20,10 @@ debug.profileDb = false
 ; Anything that would be logged will also be emailed to this address.
 debug.email = ""
 
+; Apply a priority filter to emailed log messages, e.g. don't send emails for
+; messages of lower priority than ERR.
+debug.emailLogPriority = Zend_Log::ERR
+
 ; Log SQL statements
 log.sql = false
 

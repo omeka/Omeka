@@ -88,7 +88,7 @@
             <?php if (has_permission($plugin, 'upgrade')): ?>
                 <form action="<?php echo html_escape(uri('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
                     <div>
-                        <button name="upgrade" type="submit" class="upgrade submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Upgrade</button>
+                        <button name="upgrade" type="submit" class="upgrade" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Upgrade</button>
                         <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
                     </div>
                 </form>
@@ -98,7 +98,7 @@
             <?php if (has_permission($plugin, 'activate')): ?>
                 <form action="<?php echo html_escape(uri('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
                     <div>
-                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?> submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>"><?php echo ($plugin->isActive()) ? 'Deactivate' : 'Activate'; ?></button>
+                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?>" value="<?php echo html_escape($plugin->getDirectoryName()); ?>"><?php echo ($plugin->isActive()) ? 'Deactivate' : 'Activate'; ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
                     </div>
                 </form>                
@@ -109,7 +109,7 @@
                 'controller'=>'plugins', 
                 'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
                 <div>
-                    <button name="uninstall" type="submit" class="uninstall submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Uninstall</button>
+                    <button name="uninstall" type="submit" class="uninstall" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Uninstall</button>
                     <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
                 </div>
             </form>                
@@ -118,7 +118,7 @@
     <?php if (has_permission($plugin, 'install')): ?>
         <form action="<?php echo html_escape(uri('plugins/install')); ?>" method="post" accept-charset="utf-8">
                 <div>
-                    <button name="install" type="submit" class="submit-medium" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Install</button>
+                    <button name="install" type="submit" class="install" value="<?php echo html_escape($plugin->getDirectoryName()); ?>">Install</button>
                     <input type="hidden" name="name" value="<?php echo html_escape( $plugin->getDirectoryName()); ?>" />
                 </div>
         </form> 

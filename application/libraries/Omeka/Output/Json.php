@@ -19,9 +19,9 @@
 class Omeka_Output_Json
 {
     /**
-     * JsonML XML stylesheet location
+     * JsonML XML stylesheet filename
      */
-    const JSONML_XSLT_URL = 'http://jsonml.org/JsonML.xslt';
+    const JSONML_XSLT_FILENAME = 'JsonML.xslt';
     
     /**
      * Convert omeka-xml output to JSON.
@@ -31,8 +31,10 @@ class Omeka_Output_Json
      */
     public static function toJson(Omeka_Output_Xml $omekaXml)
     {
+        $xsltPath = dirname(__FILE__) . '/' . self::JSONML_XSLT_FILENAME;
+
         $xsldoc = new DOMDocument();
-        $xsldoc->loadXML(file_get_contents(self::JSONML_XSLT_URL));
+        $xsldoc->load($xsltPath);
         
         $xsl = new XSLTProcessor();
         $xsl->importStyleSheet($xsldoc);

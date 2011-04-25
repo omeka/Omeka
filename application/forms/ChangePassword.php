@@ -84,8 +84,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         );
         $this->addElement('submit', 'submit',
             array(
-                'label'         => 'Save Password',
-                'class'         => 'submit submit-medium'
+                'label'         => 'Save Password'
             )
         );
         

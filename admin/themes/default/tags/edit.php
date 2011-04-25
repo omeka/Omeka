@@ -23,7 +23,7 @@
     </div>
 </div>
 <div>
-    <input type="submit" name="submit" class="submit submit-medium" value="Save Changes" />
+    <input type="submit" name="submit" class="submit" value="Save Changes" />
 </div>
 </form>
 <?php else: ?>

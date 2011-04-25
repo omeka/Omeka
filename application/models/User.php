@@ -184,15 +184,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         } else if (!$this->fieldIsUnique('username')) {
             $this->addError('username', "'{$this->username}' is already in use.  Please choose another username.");
         }
-        
-        // FIXME: This must be broken because 'password' property should never
-        // be plaintext.
-        // Validate the password
-        $pass = $this->password;
-        
-        if (strlen($pass) < self::PASSWORD_MIN_LENGTH) {
-            $this->addError('password', "Password must be longer than " . self::PASSWORD_MIN_LENGTH . " characters."); 
-        }
     }
     
     /**
