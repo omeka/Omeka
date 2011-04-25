@@ -414,7 +414,8 @@ class ItemTable extends Omeka_Db_Table
         $select = new Omeka_Db_Select($db->getAdapter());
         
         $select->from(array('i'=>$db->Item), array('i.*'));
-        if($acl = Omeka_Context::getInstance()->getAcl()) {
+        $acl = Omeka_Context::getInstance()->acl;
+        if ($acl) {
             new ItemPermissions($select, $acl);
         }
         

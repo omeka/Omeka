@@ -23,6 +23,10 @@ class CollectionPermissions
 {
     public function __construct(Omeka_Db_Select $sql, Omeka_Acl $acl)
     {
+        if (!$acl->has('Collections')) {
+            return;
+        }
+
         $db = Omeka_Context::getInstance()->getDb();
         
         $has_permission = $acl->checkUserPermission('Collections', 'showNotPublic');
