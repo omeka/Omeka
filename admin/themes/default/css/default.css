@@ -55,7 +55,7 @@ ul.errors {margin-bottom:0;}
 form {overflow:hidden; zoom:1;}
 div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     
-    label, div.label {font-size:1.2em; color:#444;font-weight:bold; margin-bottom:0.5em; text-align:left;display:block;width: 198px; float:left;}
+    label, div.label {font-size:1.2em; color:#444;font-weight:bold;text-align:left;display:block;width: 198px; float:left;}
     label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
         
     input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
@@ -148,7 +148,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     
     /* Changes the width of inputs depending on the layout */
         .vertical-nav .inputs {}
-        .vertical-nav .field label, .vertical-nav .field div.label {float:left; margin:0; width: 116px;}
+        .vertical-nav .field label, .vertical-nav .field div.label {float:left;width: 116px;}
         .vertical-nav #item-form .field .explanation, 
         .vertical-nav .field .hint,
         .vertical-nav .field .explanation {margin-left: 172px;}
@@ -768,7 +768,7 @@ body#login {width: 414px; margin: 54px auto;}
 
 body#login #site-title {margin-left:0; margin-bottom:0; margin-top:0; width:auto;}
 
-body#login h1 {background:transparent; font-size:2em;margin:0 0 1em; padding:0; display:inline;float:left;}
+body#login h1 {background:transparent; font-size:2em;margin:0 0 1em; padding:0;float:left;}
 body#login h2 {clear: both;}
 
 body#login .error, body#login .success {clear:both; margin-bottom:0.5em;}
@@ -779,7 +779,7 @@ body#login #header {width: 414px; padding:18px; margin:0 auto 0; }
 /* Content */
 body#login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1; float:none;}
 
-body#login #login-links {display:block; float:right; width: 70%; text-align:right;color:#999; margin-top: 1em;margin-bottom:0; font-size:1.1em;}
+body#login #login-links {display:block; float:right;text-align:right;color:#999; margin-top: 1em;margin-bottom:0; font-size:1.1em;}
     #login #login-links a {text-decoration:none; font-weight:bold; }
 
 body#login #content form {clear:both;}
@@ -791,9 +791,7 @@ body#login div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
 body#login .inputs {width: 259px;}
 body#login .inputs input {float:none;}
 
-body#login input.submit {float:right;margin-top:6px;margin-bottom:0;}
-
-body#login #back-to-login {text-align:left; float:left; width: 280px;margin-bottom:0;}
+body#login input.submit {margin-bottom:0;}
 
 /* Footer */
 body#login #footer {padding:18px; margin:0 auto;width: 414px;}
