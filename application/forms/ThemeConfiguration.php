@@ -58,6 +58,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
             $this->setConfig($configIni);
             $this->setAction('');
             $this->setAttrib('enctype', 'multipart/form-data');
+            $this->setAttrib('class', 'theme-configuration');
 
             // add the 'Save Changes' submit button                      
             $this->addElement(
