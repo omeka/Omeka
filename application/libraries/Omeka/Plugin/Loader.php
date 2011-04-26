@@ -150,7 +150,12 @@ class Omeka_Plugin_Loader
         
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
-            return;
+            $plugin->setActive(false);
+            if ($force) {
+                throw new Omeka_Plugin_Loader_Exception("The $pluginDirName plugin could not be loaded.");
+            } else {
+                return;
+            }
         }
 
         // If the current plugin is already on the waiting list, don't load it.
