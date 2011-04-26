@@ -42,7 +42,17 @@ function custom_show_item_metadata(array $options = array(), $item = null)
         $item = get_current_item();
     }
     if ($dcFieldsList = get_theme_option('display_dublin_core_fields')) {
+
+        $otherElementSets = array();
+
+        $elementSets = get_db()->getTable('ElementSet')->findForItems();
+        foreach ($elementSets as $set) {
+            if ($set->name == 'Dublin Core') continue;
+            $otherElementSets[] = $set->name;
+        }
+
         $html = '';
+        $html .= '<h2>Dublin Core</h2>';
         $dcFields = explode(',', $dcFieldsList);
         foreach ($dcFields as $field) {
             $field = trim($field);
@@ -58,7 +68,7 @@ function custom_show_item_metadata(array $options = array(), $item = null)
                 }
             }
         }
-        $html .= show_item_metadata(array('show_element_sets' => array('Item Type Metadata')));
+        $html .= show_item_metadata(array('show_element_sets' => $otherElementSets));
         return $html;
     } else {
         return show_item_metadata($options, $item); 
