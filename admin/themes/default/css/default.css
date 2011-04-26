@@ -41,7 +41,6 @@ blockquote:before, blockquote:after {
 /* == Components == */
 
 /* -- Misc Classes -- */
-.navigation {overflow:hidden; zoom:1;}
 .hide {width:0; height:0; position:absolute; left:-999em;}
 .error {background:#f1c8ba; color:#933; margin:1.5em 0; font-size:1.2em; padding:1.5em;}
 .field .error {clear:both;}
@@ -51,9 +50,31 @@ blockquote:before, blockquote:after {
 .errors {color:#933;}
 ul.errors {margin-bottom:0;}
 
+/* Clearing floats */
+.group:after,
+form:after,
+.field:after,
+.info-panel:after,
+#content:after,
+.primary-nav:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+*:first-child+html .group
+*:first-child+html form,
+*:first-child+html .field,
+*:first-child+html .info-panel,
+*:first-child+html #content,
+*:first-child+html .primary-nav {
+    min-height: 1px;
+}
+
 /* -- Form Components -- */
-form {overflow:hidden; zoom:1;}
-div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
+div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     
     label, div.label {font-size:1.2em; color:#444;font-weight:bold;text-align:left;display:block;width: 198px; float:left;}
     label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
@@ -103,11 +124,6 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     .dateinput input {margin-right: 3px;}
     
     #required-note {font-size: 0.6em; color: #777; display: block;}
-    
-    /* Buttons - different sizes, uses background images */
-    .submit-extrasmall {width: 46px;}
-    .submit-small {width: 70px;}
-    .submit-medium {width: 100px;}
 
     /* Configure button */
     .configure-button {
@@ -139,10 +155,6 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     .uninstall:hover, 
     .deactivate:hover {}
 
-    /* Replaces tooltips */
-    .field {
-        overflow:hidden; zoom:1;
-    }
     .field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
     #item-form .field .explanation, #editfile .field .explanation, .hint, .theme-configuration .field .explanation {margin-left:216px; clear:right;}
     
@@ -155,7 +167,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
             .vertical-nav .field .dateinput .hint {margin:0;}
         
         /* .input used to wrap input fields in items/add form */
-        .field .inputs {float:right; width: 594px; overflow:hidden; zoom:1;}
+        .field .inputs {float:right; width: 594px;}
         .vertical-nav .field .inputs {width: 440px;}
                 
 /* -- Layout -- */
@@ -195,7 +207,7 @@ div.field {overflow:hidden; zoom:1; position:relative; border-bottom:1px dotted 
     .horizontal-nav ul#section-nav li.current a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
 
 /* Side info panels */
-.info-panel {background:#fff;overflow:hidden;zoom:1; z-index:100;border:1px solid #d7d5c4;display:block;margin-bottom:18px; padding:18px 18px 1px; border-width: 0 0 3px;}
+.info-panel {background:#fff; z-index:100;border:1px solid #d7d5c4;display:block;margin-bottom:18px; padding:18px 18px 1px; border-width: 0 0 3px;}
     .info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif;font-size:1.2em;padding: 9px 18px; color: #fff; background: #467;}
     .info-panel h3 {font-size:1.2em; font-weight:bold; margin-bottom:0.5em;}
     .info-panel li {background:url("../images/bullet_blue.gif") 0 6px no-repeat; padding-left:20px;padding:7px 0 7px 20px;border-bottom:1px dotted #ddd;}
@@ -436,7 +448,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #upgrade-database-link:hover {background-color: #6B9CA8; border-color: #6B9CA8;}
 
 /* == Header == */
-#header {background:#251e16; padding-top: 0;clear:both;overflow:hidden; }
+#header {background:#251e16; padding-top: 0;clear:both;}
 
     #site-title {margin:18px 0;margin-left:36px;float:left; width: 20em;}
     #site-title a {text-decoration:none; color:#fff;}
@@ -454,7 +466,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     
     /* Primary Nav */
     #primary-nav-container {background:#382e22;padding-left:36px;clear:both;border-top:1px solid #777;}
-    .primary-nav {overflow:hidden;border-left:1px solid #d7d5c4;margin-bottom:0;font-size:1.1em;font-weight:normal;}
+    .primary-nav {border-left:1px solid #d7d5c4;margin-bottom:0;font-size:1.1em;font-weight:normal;}
         .primary-nav li {display:block; float:left; width: 125px;border-right:1px solid #d7d5c4;}
         .primary-nav a {text-decoration:none;display:block; float:left; text-indent:12px;color:#fafafa;width: 125px;padding: 8px 0 16px;background:#2E261C;}
         .primary-nav a:visited {color:#fafafa;}
@@ -469,20 +481,19 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #content h1 {margin:-18px 0 18px; padding:18px 0 0; margin-right:8em;}
     
     /* Homepage */
-        #getting-started dl {overflow:hidden;margin-bottom:18px; margin-left:0;display:block;}
+        #getting-started dl {margin-bottom:18px; margin-left:0;display:block;}
         #getting-started dl * {font-size:1em;}
             #getting-started a {text-decoration:none;}
             #getting-started dt {clear: both; border-bottom:1px dotted #ccc; font-size:1.4em; display:block; padding-bottom:8px;margin-bottom:9px;}
             #getting-started dl ul {float:left; width:252px;margin:0 0 18px; padding:0;}
             #getting-started dl li {margin:0 0 0.5em;}
-            #getting-started dd {overflow: hidden; display: inline;}
+            #getting-started dd { display: inline;}
             #getting-started dd p {float:right; width: 252px;padding:0; margin:0 0 18px;}
                 #getting-started p.help {clear:both; padding: 1em 0 0; border-top:1px dotted #ccc;}
 
         /* Info Panels - styles that enhance or override the component library styles */    
         #tag-cloud li, #tag-cloud li a {padding:0; border:none;background-image:none; display:inline;}
         #recent-items ul {margin-bottom:0;}
-        #recent-items ul a {overflow:hidden; }
         #recent-items #view-all-items a {display:block; text-decoration:none; background:url("../images/bullet_go.gif") 100% 6px no-repeat; width: 8em;float:right;padding:6px 18px; text-align:right;}
     
     /* Item Browse styles */
@@ -568,7 +579,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     
     /* Item add-edit styles */
     #public-featured {position:absolute; top:36px; right:0; text-align:right;}  
-        #public-featured .checkbox {text-align:right;float:none; overflow:hidden; display:inline;}
+        #public-featured .checkbox {text-align:right;float:none; display:inline;}
         #public-featured label, #public-featured input {display:inline; text-align:right;float:none; width: auto;}
         
             /* Elements specific to items-add form */
@@ -576,7 +587,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
             label.use-html { position:relative;float:left;padding-left: 16px;width: 8em;text-align:left; font-size:1.1em;margin:0;}
         
-            .input-block {clear:both;position:relative;overflow:hidden;}
+            .input-block {clear:both;position:relative;}
             
             label.use-html input {position:absolute; top:0; left:0; margin:0;float:none;padding:0;}
 
@@ -615,7 +626,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         
     #delete-file-link {float:left; position:absolute; bottom:20px; left: 18px;width: 200px;}
     /* Advanced Search Form */
-    .search-entry {margin-bottom:0px !important; overflow:hidden;}
+    .search-entry {margin-bottom:5px;}
+    .search-entry button {margin:0;}
+    .add_search {margin:0;}
     
     /* Tags Browse */
     .browse-tags #section-nav .nav-browse-tags a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
@@ -710,13 +723,13 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     .upgrade-plugin .upgrade, .plugin-load-error .upgrade {background-color: #369; border-color: #369;}
     
     /* Themes */
-    #themeswitch .themes {margin-right:-18px; overflow:hidden; margin-bottom:-18px;}
-    #themeswitch .theme {overflow:hidden;  margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;float:left; width: 296px;}
+    #themeswitch .themes {margin-right:-18px; margin-bottom:-18px;}
+    #themeswitch .theme {margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:18px; padding-bottom:18px;float:left; width: 296px;}
         #themeswitch .theme img {}
-        #themeswitch .theme .description {height: 150px; border:1px solid #d7d5c4; overflow:hidden;}
+        #themeswitch .theme .description {height: 150px; border:1px solid #d7d5c4;}
         #themeswitch label {float:none !important; text-align:left; font-size:1.2em;width: auto;}
 
-        #current-theme {background: #F2F1E8;clear:both; overflow:hidden; padding: 18px;margin-bottom:18px;}
+        #current-theme {background: #F2F1E8;clear:both; padding: 18px; margin-bottom:18px;}
         #current-theme img {border:6px solid #fff; float:right; margin-left:18px;}
         
         #current-theme .type {font-weight:bold;}
@@ -729,44 +742,19 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     /* System Information */
     .system-info pre#info-field {border: solid 1px gray; padding: 5px; font-family: monospace; font-size: 1.6em; word-wrap: break-word; white-space: pre-wrap;}
 /* == Footer == */
-#footer {clear:both; padding: 18px 0 1px;  overflow:hidden; margin:0 36px; width: 846px;background: #eae9db;}
-    #footer p, #footer ul {font-size:1.1em;margin:0 0 18px;}
+#footer {clear:both; padding: 18px 0; margin:0 36px; width: 846px;}
+    #footer p, #footer ul {font-size:1.1em;}
     #footer a {text-decoration:none; font-weight:bold; color: #c50;}
     #footer .primary-nav {float:right; width: 50%; text-align:right;}
     #footer p {float:left;}
     #footer p#system-info {float:right;}
     #footer .primary-nav li {display:inline;margin-left:1em;}
-    
-/* == Autocomplete (used for Scriptaculous Autocomplete) == */  
-div.autocomplete {
-  position:absolute;
-  width:250px;
-  background-color:white;
-  border:1px solid #888;
-  margin:0;
-  padding:0;
-}
-div.autocomplete ul {
-  list-style-type:none;
-  margin:0;
-  padding:0;
-}
-div.autocomplete ul li.selected { background-color: #ffb;}
-div.autocomplete ul li {
-  background-image: none;
-  list-style-type:none;
-  display:block;
-  margin:0;
-  padding:2px;
-  height:32px;
-  cursor:pointer;
-}
 
 /* == Login Page == */
 
 body#login {width: 414px; margin: 54px auto;}
 
-body#login #site-title {margin-left:0; margin-bottom:0; margin-top:0; width:auto;}
+body#login #site-title {margin:0; width: auto;}
 
 body#login h1 {background:transparent; font-size:2em;margin:0 0 1em; padding:0;float:left;}
 body#login h2 {clear: both;}
@@ -777,7 +765,7 @@ body#login .error, body#login .success {clear:both; margin-bottom:0.5em;}
 body#login #header {width: 414px; padding:18px; margin:0 auto 0; }
 
 /* Content */
-body#login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto;overflow:hidden; zoom:1; float:none;}
+body#login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto; float:none;}
 
 body#login #login-links {display:block; float:right;text-align:right;color:#999; margin-top: 1em;margin-bottom:0; font-size:1.1em;}
     #login #login-links a {text-decoration:none; font-weight:bold; }
