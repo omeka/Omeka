@@ -763,7 +763,7 @@ body#login .error, body#login .success {clear:both; margin-bottom:0.5em;}
 
 /* Header */
 body#login #header {width: 414px; padding:18px; margin:0 auto 0; }
-
+body#login #site-title {float:none;}
 /* Content */
 body#login #content {background:#fff; width: 414px;padding:18px; clear:both;margin:0 auto; float:none;}
 
