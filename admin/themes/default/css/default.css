@@ -724,6 +724,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         #current-theme .value {display:block; margin-bottom:18px;}
         body.themes .configure-button {padding: 4px 8px;}
         
+        .theme-configuration .field .submit {float:none !important; line-height:2em; margin-bottom:1em;}
+        .theme-configuration img {display:block;margin-top:1em; max-width: 80%; max-height: 300px;}
     /* System Information */
     .system-info pre#info-field {border: solid 1px gray; padding: 5px; font-family: monospace; font-size: 1.6em; word-wrap: break-word; white-space: pre-wrap;}
 /* == Footer == */

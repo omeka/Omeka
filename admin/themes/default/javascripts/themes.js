@@ -20,6 +20,7 @@ Omeka.Themes.createChangeFileButton = function (fileInputName) {
 
         fileInput = jQuery("#" + fileInputName);
         fileInput.show();
+        fileInput.parent().siblings('.explanation').show();
 
         fileNameDiv = jQuery("#x_hidden_file_" + fileInputName);
         fileNameDiv.hide();
@@ -37,17 +38,20 @@ jQuery(document).ready(function () {
         fileInputName = fileInput.attr("name");
 
         hiddenFile = jQuery("#hidden_file_" + fileInputName);
-        hiddenFileName = jQuery.trim(hiddenFile.attr("value"));
-        if (hiddenFileName != "") {
-            var fileNameDiv = jQuery(document.createElement('div'));
-            fileNameDiv.attr('id', 'x_hidden_file_' + fileInputName);
-            fileNameDiv.text(hiddenFileName);
+        hiddenFileUri = jQuery.trim(hiddenFile.attr("value"));
+        if (hiddenFileUri != "") {
+            var fileNameDiv = jQuery('<div class="theme-file" id="x_hidden_file_' + fileInputName + '"></div>');
+
+            var fileImgLink = jQuery('<a href="' + hiddenFileUri + '"><img src="' + hiddenFileUri + '" /></a>');
 
             var changeFileButton = Omeka.Themes.createChangeFileButton(fileInputName);
             fileNameDiv.append(changeFileButton);
 
+            fileNameDiv.append(fileImgLink);
+
             fileInput.after(fileNameDiv);
             fileInput.hide();
+            fileInput.parent().siblings('.explanation').hide();
         }
     });
 });
