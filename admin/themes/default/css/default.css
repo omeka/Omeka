@@ -49,6 +49,7 @@ blockquote:before, blockquote:after {
 .alert {background:#fff09e; font-size:1.2em; padding: 1.5em;margin-bottom:0.5em;}
 .tooltip {font-size:1.2em; line-height:1.5em;}
 .errors {color:#933;}
+ul.errors {margin-bottom:0;}
 
 /* -- Form Components -- */
 form {overflow:hidden; zoom:1;}
@@ -781,12 +782,12 @@ body#login #login-links {display:block; float:right; width: 70%; text-align:righ
 
 body#login #content form {clear:both;}
 body#login .textinput {float:right; width: 240px;}
-body#login #remember {margin-left: 12px; margin-top:0px;}
-body#login label {float:left; width: 118px; text-align:right;}
+body#login label {float:left; width: 100px; text-align:right; line-height:1.8;}
 body#login p.clear {clear:both;}
 
 body#login div.field {background: #F2F1EE; padding:18px;margin-bottom:1px;}
 body#login .inputs {width: 259px;}
+body#login .inputs input {float:none;}
 
 body#login input.submit {float:right;margin-top:6px;margin-bottom:0;}
 
