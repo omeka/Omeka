@@ -20,7 +20,7 @@
 
 <h2>Change Theme</h2>
 <form method="post" id="themeswitch" action="<?php echo $this->url(array('controller'=>'themes', 'action'=>'switch'), 'default'); ?>">
-    <div class="themes">
+    <div class="themes group">
     <?php foreach($themes as $theme): ?>
     <div class="theme<?php if($current == $theme) echo ' current-theme';?>">
         <div class="meta">
