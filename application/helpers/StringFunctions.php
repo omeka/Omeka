@@ -204,7 +204,8 @@ function text_to_id($text, $prepend=null, $delimiter='-')
  **/
 function url_to_link($str)
 {
-    $pattern = "((https?://)+[\w\d:#@%/;$()~_?\+-=\\\.&]*)";
-    $str = preg_replace($pattern, '<a href="\0">\0</a>', $str);
+    $pattern = "/(\bhttps?:\/\/\S+\b)/e";
+    $replace = '"<a href=\"".htmlspecialchars("$1")."\">$1</a>"';
+    $str = preg_replace($pattern, $replace, $str);
     return $str;
 }
