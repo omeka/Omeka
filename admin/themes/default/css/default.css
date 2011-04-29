@@ -75,7 +75,6 @@ form:after,
 
 /* -- Form Components -- */
 div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
-    
     label, div.label {font-size:1.2em; color:#444;font-weight:bold;text-align:left;display:block;width: 198px; float:left;}
     label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
         
@@ -303,13 +302,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     
     /* Headings */
     h1,#site-title {font-weight:normal; font-size:2.4em; margin-bottom:1em; line-height:1.5em;margin-right:12em;}
-    h2, legend {font-size:1.8em; font-weight:normal; line-height:1.2em; margin-bottom:1.2em;}
+    h2, legend {font-size:1.8em; font-weight:normal; line-height:1.2em; margin-bottom:1.2em;color:#467;}
     h3 {font-size:1.4em; line-height:1.2em; margin-bottom:0.4em;}
     h4 {font-size:1.2em; line-height:1.5em; font-weight:bold;}
     h5 {font-size:1.2em; line-height:1.5em; font-style:italic;}
     
     h1 {color:#a74c29;}
-    h2,form legend {color:#467;}
     
     h1, #site-title, h2,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
 
@@ -344,7 +342,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         tr.even {}
         tbody tr {border-top:1px dotted #d7d5c4;}
     table * {font-size:1em;margin:0;}
-            
+
+    legend {margin-bottom:0; padding-bottom:1.2em;}
+
     /* Form Buttons */
     #add-item, #save-changes, #edit-item {float:right; text-decoration:none;}
     #add-item:hover, #save-changes:hover {background-position:0 0 !important;cursor:pointer;}
