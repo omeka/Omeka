@@ -12,8 +12,7 @@
 require_once HELPERS;
 
 /**
- * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
- * in helpers/StringFunctions.php
+ * Tests tag_cloud() in application/helpers/TagFunctions.php.
  *
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
