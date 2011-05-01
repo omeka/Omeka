@@ -154,6 +154,11 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     .uninstall:hover, 
     .deactivate:hover {}
 
+    [disabled] {
+        background-color: #ccc !important;
+        border-color: #ccc !important;
+    }
+
     .field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
     #item-form .field .explanation, #editfile .field .explanation, .hint, .theme-configuration .field .explanation {margin-left:216px; clear:right;}
     
