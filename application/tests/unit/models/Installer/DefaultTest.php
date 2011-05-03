@@ -72,6 +72,7 @@ class Installer_DefaultTest extends PHPUnit_Framework_TestCase
             'per_page_public'               => Omeka_Form_Install::DEFAULT_PER_PAGE_PUBLIC, 
             'show_empty_elements'           => Omeka_Form_Install::DEFAULT_SHOW_EMPTY_ELEMENTS,
             'path_to_convert'               => '',
+            'tag_delimiter'                 => ',',
         ));
         $installer->setForm($this->form);
         $installer->install();

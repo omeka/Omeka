@@ -118,6 +118,7 @@ class Installer_Default implements InstallerInterface
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
             'display_system_info'           => true, 
+            'tag_delimiter'                 => ',',
         ));
         $task->install($this->_db);
     }
