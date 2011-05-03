@@ -17,6 +17,7 @@
  **/
 class SettingsController extends Omeka_Controller_Action
 {    
+    const DEFAULT_TAG_DELIMITER = ',';
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
     const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;

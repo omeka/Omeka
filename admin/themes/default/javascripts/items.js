@@ -140,7 +140,7 @@ Omeka.Items.addTagElement = function (tag, addImage, deleteImage) {
  * @param {string} deleteImage URL for delete button image.
  */
 Omeka.Items.addTags = function (tags, addImage, deleteImage) {
-    var newTags = tags.split(',');
+    var newTags = tags.split(Omeka.Items.tagDelimiter);
 
     // only add tags from the input box that are new
     var oldTags = jQuery('#my-tags-list input.remove_tag').map(function () {
@@ -202,9 +202,9 @@ Omeka.Items.updateTagsField = function () {
         }
     });
 
-    jQuery('#my-tags-to-add').val(myTagsToAdd.join(','));
-    jQuery('#my-tags-to-delete').val(myTagsToDelete.join(','));
-    jQuery('#other-tags-to-delete').val(otherTagsToDelete.join(','));
+    jQuery('#my-tags-to-add').val(myTagsToAdd.join(Omeka.Items.tagDelimiter));
+    jQuery('#my-tags-to-delete').val(myTagsToDelete.join(Omeka.Items.tagDelimiter));
+    jQuery('#other-tags-to-delete').val(otherTagsToDelete.join(Omeka.Items.tagDelimiter));
 };
 
 /**
@@ -240,7 +240,8 @@ Omeka.Items.enableTagRemoval = function (addImage, deleteImage) {
  */
 Omeka.Items.tagChoices = function (inputSelector, tagChoicesUrl) {
     function split(val) {
-        return val.split(/,\s*/);
+        var re = new RegExp(Omeka.Items.tagDelimiter + '\\s*');
+        return val.split(re);
     }
     function extractLast(term) {
         return split(term).pop();
@@ -267,7 +268,7 @@ Omeka.Items.tagChoices = function (inputSelector, tagChoicesUrl) {
             terms.push(ui.item.value);
             // add placeholder to get the comma-and-space at the end
             terms.push('');
-            this.value = terms.join(', ');
+            this.value = terms.join(Omeka.Items.tagDelimiter + ' ');
             return false;
         }
     });

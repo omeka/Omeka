@@ -10,6 +10,7 @@ jQuery(window).load(function () {
 
     var addImage = <?php echo js_escape(img('add.png')); ?>;
     var deleteImage = <?php echo js_escape(img('delete.gif')); ?>;
+    Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
     Omeka.Items.enableTagRemoval(addImage, deleteImage);
     Omeka.Items.makeFileWindow();
     Omeka.Items.tagChoices('#tags', <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);

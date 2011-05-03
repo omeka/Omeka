@@ -30,6 +30,7 @@ echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>
 //<![CDATA[
 jQuery(document).ready(function () {
     Omeka.Items.modifyTagsShow();
+    Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
     Omeka.Items.tagChoices('#tags-field', <?php echo js_escape(uri(array('controller' => 'tags', 'action' => 'autocomplete'), 'default')); ?>);
 });
 //]]>     

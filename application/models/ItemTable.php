@@ -171,7 +171,6 @@ class ItemTable extends Omeka_Db_Table
      *      ...
      *
      *
-     * @todo Should tag delimiter (,) be a site-wide setting?
      * @param Omeka_Db_Select
      * @param string|array A comma-delimited string or an array of tag names.
      * @return void
@@ -180,7 +179,7 @@ class ItemTable extends Omeka_Db_Table
     {   
         // Split the tags into an array if they aren't already     
         if (!is_array($tags)) {
-            $tags = explode(',', $tags);
+            $tags = explode(get_option('tag_delimiter'), $tags);
         }
         
         $db = $this->getDb();
@@ -248,7 +247,7 @@ class ItemTable extends Omeka_Db_Table
         $db = $this->getDb();
         
         if (!is_array($tags)){
-            $tags = explode(',', $tags);
+            $tags = explode(get_option('tag_delimiter'), $tags);
         }
         $subSelect = new Omeka_Db_Select;
         $subSelect->from(array('i'=>$db->Item), 'i.id')

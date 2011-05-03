@@ -82,7 +82,7 @@ class TagsController extends Omeka_Controller_Action
         $oldTagId = $_POST['old_tag'];
         
         //Explode and sanitize the new tags
-        $newTags = explode(',', $_POST['new_tag']);
+        $newTags = explode(get_option('tag_delimiter'), $_POST['new_tag']);
         foreach ($newTags as $k => $t) {
             $newTags[$k] = trim($t);
         }
