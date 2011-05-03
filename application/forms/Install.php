@@ -43,8 +43,37 @@ class Omeka_Form_Install extends Omeka_Form
         $this->addElement('password', 'password', array(
             'label' => 'Password',
             'description' => 'Must be at least 6 characters.', 
-            'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH))), 
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'options' => array(
+                    'messages' => array(
+                        'isEmpty' => 'Password is required.'
+                    )
+                )),
+                array('validator' => 'Confirmation', 'options' => array(
+                    'field' => 'password_confirm',
+                    'messages' => array(
+                        'notMatch' => "Typed passwords do not match.")
+                )),
+                array('validator' => 'StringLength', 'options' => array(
+                    'min' => User::PASSWORD_MIN_LENGTH,
+                    'messages' => array(
+                        'stringLengthTooShort' => "Password must be at least %min% characters in length.")
+                ))
+            ),
             'required' => true
+        ));
+        
+        $this->addElement('password', 'password_confirm', array(
+            'label' => 'Re-type the Password',
+            'description' => 'Confirm your password',
+            'required' => true,
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'options' => array(
+                    'messages' => array(
+                        'isEmpty' => 'Password confirmation is required.'
+                    )
+                ))
+            )
         ));
         
         $this->addElement('text', 'super_email', array(
@@ -147,7 +176,7 @@ class Omeka_Form_Install extends Omeka_Form
         ));
         
         $this->addDisplayGroup(
-            array('username', 'password', 'super_email'), 
+            array('username', 'password', 'password_confirm', 'super_email'), 
             'superuser_account', 
             array('legend' => 'Default Superuser Account')
         );

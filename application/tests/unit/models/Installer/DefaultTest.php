@@ -59,6 +59,7 @@ class Installer_DefaultTest extends PHPUnit_Framework_TestCase
         $this->form->setDefaults(array(
             'username' => 'foobar',
             'password' => 'foobar',
+            'password_confirm'  => 'foobar',
             'super_email' => 'foobar@example.com',
             'administrator_email'           => Omeka_Test_Resource_Db::SUPER_EMAIL, 
             'copyright'                     => Omeka_Test_Resource_Db::DEFAULT_COPYRIGHT, 
