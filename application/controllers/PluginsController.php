@@ -53,16 +53,13 @@ class PluginsController extends Omeka_Controller_Action
         if ($this->getRequest()->isPost()) {
             try {
                 $this->_pluginBroker->callHook('config', array($_POST), $plugin);
+                $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully configured!");
+                $this->redirect->goto('browse'); 
             } catch (Omeka_Validator_Exception $e) {
                 $this->flashValidationErrors($e);
-                $this->redirect->goto('config', null, null, array('name' => $plugin->getDirectoryName()));    
             }
-            
-            $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully configured!");
-            $this->redirect->goto('browse');   
-        } else {
-            $this->view->plugin = $plugin;
         }
+        $this->view->plugin = $plugin;
     }
     
     public function installAction()
