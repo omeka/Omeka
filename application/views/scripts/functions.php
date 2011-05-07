@@ -1,8 +1,8 @@
 <?php
 
-function utf8_htmlentities($value)
+function utf8_htmlspecialchars($value)
 {
-    return htmlentities($value, ENT_QUOTES, "UTF-8");
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
 function show_untitled_items($title)
