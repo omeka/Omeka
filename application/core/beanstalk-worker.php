@@ -32,8 +32,7 @@ $core = new Omeka_Core;
 
 function handle_exception($e)
 {
-    echo "Beanstalk worker error (" . get_class($e) . "): " . $e->getMessage() . 
-         PHP_EOL . $e->getTraceAsString() . PHP_EOL;
+    _log($e, Zend_Log::ERR);
     exit(1);
 }
 set_exception_handler('handle_exception');
@@ -68,7 +67,22 @@ if (!$pheanJob) {
     echo "Beanstalk worker timed out when reserving a job.";
     exit(0);
 }
-$core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Pluginbroker', 'Plugins', 'Jobs', 'Storage'));
+$core->bootstrap(array(
+    'Autoloader', 
+    'Config', 
+    'Db', 
+    'Options', 
+    'Pluginbroker', 
+    'Plugins', 
+    'Jobs', 
+    'Storage',
+    'Logger',
+));
+
+// Log all to stdout.
+$log = $core->getBootstrap()->logger;
+$log->addWriter(new Zend_Log_Writer_Stream('php://output'));
+
 $worker = new Omeka_Job_Worker_Beanstalk($pheanstalk, 
     Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
 $worker->work($pheanJob);
