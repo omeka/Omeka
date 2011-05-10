@@ -269,6 +269,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      */
     protected function getThemeOption($type)
     {
-        return @$this->_dbOptions[$type . '_theme'];
+        $themeOption = apply_filters($type . '_theme_name', @$this->_dbOptions[$type . '_theme']);
+        return $themeOption;
     }
 }
