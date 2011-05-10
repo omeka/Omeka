@@ -482,7 +482,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         .users .primary-nav li.nav-settings a {background:#eae9db; color: #333; font-weight:bold;}
         
 /* == Content == */
-#content { z-index:1000; margin-top:-1px; position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;float:left; clear:both;}
+#content { z-index:1000;position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;float:left; clear:both;}
     #content h1 {margin:-18px 0 18px; padding:18px 0 0; margin-right:8em;}
     
     /* Homepage */
@@ -697,7 +697,6 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     /* Plugins */
     #plugin-info {border-bottom:1px solid #d7d7c4;}
     .plugin-info .plugin-meta {font-size:11px; color: #999; font-style:normal;display:block;margin-bottom:0px;}
-    .plugin-load-error .plugin-meta {color: #900 !important;}
     .plugin-info p, .plugin-info .plugin-meta {margin-bottom:12px;}
     .plugin-info .plugin-title {margin-bottom:0px; font-size:14px; margin-top:0;font-weight:bold;}
     
@@ -711,8 +710,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #uninstall-confirm .submit {margin:-3px 0 0 !important; float:none !important;}
     
     .plugin-upgrade {color: #369; font-weight:bold; margin-top: 18px; font-size: 1.2em;}
-    .plugin-load-error {background:#f1c8ba; background: rgba(153, 0, 0, 0.25); color: #900; border-color:#fff !important;}
-    .plugin-load-error a {color:#900;}
+    .plugin-load-error {background:#f1c8ba; background: rgba(153, 0, 0, 0.25);}
+    .plugin-load-error, .plugin-load-error .plugin-meta, .plugin-load-error a {color: #900;}
     .plugin-load-error .plugin-info {
         filter:alpha(opacity=50);
         -moz-opacity:0.5;
