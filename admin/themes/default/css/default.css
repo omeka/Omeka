@@ -695,13 +695,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #sort-users-form .submit-form {display:inline;margin:0 0 0 6px; float:none;}
     
     /* Plugins */
-    #plugin-info {border-bottom:1px solid #d7d7c4;}
     .plugin-info .plugin-meta {font-size:11px; color: #999; font-style:normal;display:block;margin-bottom:0px;}
     .plugin-info p, .plugin-info .plugin-meta {margin-bottom:12px;}
     .plugin-info .plugin-title {margin-bottom:0px; font-size:14px; margin-top:0;font-weight:bold;}
     
     #plugin-info tbody td {border:none;}
-    #plugin-info tbody tr {border-top:1px solid #d7d7c4;}
+    #plugin-info tbody tr {border-top: none; border-bottom:1px solid #d7d7c4;}
     #plugin-info tbody tr.related-plugin-info, #plugin-info tbody tr.upgrade-plugin-notice {border:none;}
     #plugin-info button, #plugin-info .submit {font-size:11px; width: 80px; margin:0 0 6px 0 !important;}
     #plugin-info form {margin:0 !important; padding:0 !important;}
@@ -709,22 +708,15 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #uninstall-confirm {margin-bottom:0;}
     #uninstall-confirm .submit {margin:-3px 0 0 !important; float:none !important;}
     
-    .plugin-upgrade {color: #369; font-weight:bold; margin-top: 18px; font-size: 1.2em;}
-    .plugin-load-error {background:#f1c8ba; background: rgba(153, 0, 0, 0.25);}
-    .plugin-load-error, .plugin-load-error .plugin-meta, .plugin-load-error a {color: #900;}
-    .plugin-load-error .plugin-info {
-        filter:alpha(opacity=50);
-        -moz-opacity:0.5;
-        -khtml-opacity: 0.5;
-        opacity: 0.5;
-    }
+    .plugin-upgrade {color: #369; font-weight:bold; font-size: 1.2em;}
+
     .warnings {padding-bottom: 18px; color: #900;}
     .warnings strong {margin-bottom:0.6em;}
     .warnings ul {list-style:square; margin:0.6em 0 0 18px; font-size:12px;}
         .warnings li {margin-bottom:0em; line-height:1.3em;}
     /* -- Upgradable Plugins -- */
     tr.upgrade-plugin {background: #fff09e;background: rgba(255,240,150, 0.25);}
-    .upgrade-plugin .upgrade, .plugin-load-error .upgrade {background-color: #369; border-color: #369;}
+    .upgrade-plugin .upgrade {background-color: #369; border-color: #369;}
     
     /* Themes */
     #themeswitch .themes {margin-right:-18px; margin-bottom:-18px;}
