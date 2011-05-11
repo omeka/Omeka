@@ -8,12 +8,6 @@
     <?php if ($plugins): ?>
 
         <table id="plugin-info">
-            <thead>
-                <tr>
-                    <th>Plugin</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
             <tbody>
             <?php foreach($plugins as $pluginDirName => $plugin): ?>
                 <?php echo $this->partial('plugins/plugin-info.php', array('pluginDirName' => $pluginDirName, 'plugin' => $plugin, 'loader'=>$loader, 'versionCheck'=>$versionCheck)); ?>

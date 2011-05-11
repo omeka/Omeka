@@ -190,19 +190,7 @@ class PluginsController extends Omeka_Controller_Action
             $versionCheck = true;
         }
 
-        $noBootstrapPlugins = array();
-        foreach ($allPlugins as $plugin) {
-            if ( !$this->_pluginLoader->hasPluginBootstrap($plugin) ){
-                $noBootstrapPlugins[] = $plugin->getDisplayName();
-            }
-        }
 
-        if ($noBootstrapPlugins) {
-            $noBootstrapPluginsMsg = "The following plugins could not be loaded because "
-                          . "they are missing a 'plugin.php' file: "
-                          . implode($noBootstrapPlugins, ', ');
-            $this->flashError($noBootstrapPluginsMsg);
-        }
 
         $this->view->assign(array('plugins'=>$allPlugins, 'loader'=>$this->_pluginLoader, 'versionCheck'=>$versionCheck));
     }
