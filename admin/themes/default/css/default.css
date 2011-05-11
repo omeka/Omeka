@@ -92,7 +92,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         text-decoration:none;
         clear:both; 
         margin:9px 0;
-        background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
+        background: #6d8e1d url("../../../../application/views/scripts/images/glass-btn.png") repeat-x 0 50%; 
         float:right; 
         color:#fff !important;
         padding: 3px 6px;
@@ -117,8 +117,8 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         background-repeat:no-repeat;
     }
     
-    input.add-element {background-image:url("../images/add.png");}
-    input.remove-element {background-image:url("../images/delete.gif");}
+    input.add-element {background-image:url("../../../../application/views/scripts/images/add.png");}
+    input.remove-element {background-image:url("../../../../application/views/scripts/images/delete.gif");}
     
     .dateinput input {margin-right: 3px;}
     
@@ -133,7 +133,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         font-family:"Lucida Grande", Verdana, sans-serif;
         font-weight:bold;
         margin:9px 0;
-        background: #38c url("../images/glass-btn.png") repeat-x 0 50%; 
+        background: #38c url("../../../../application/views/scripts/images/glass-btn.png") repeat-x 0 50%; 
         padding: 4px 8px;
         width: 80px; 
         border:none; 
@@ -199,8 +199,8 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 /* -- Navigation -- */
 
 /* vertical-nav */
-.vertical-nav ul#section-nav {margin:0; padding:0;float:left; width: 198px;font-size:1.1em;margin-top:18px;background:transparent url("../images/list-border-tan.gif") bottom left repeat-x;}
-    .vertical-nav ul#section-nav a {text-decoration:none; display:block;padding:9px 9px 6px; color: #467;background:transparent url("../images/list-border-tan.gif") top left repeat-x;}
+.vertical-nav ul#section-nav {margin:0; padding:0;float:left; width: 198px;font-size:1.1em;margin-top:18px;background:transparent url("../../../../application/views/scripts/images/list-border-tan.gif") bottom left repeat-x;}
+    .vertical-nav ul#section-nav a {text-decoration:none; display:block;padding:9px 9px 6px; color: #467;background:transparent url("../../../../application/views/scripts/images/list-border-tan.gif") top left repeat-x;}
     .vertical-nav ul#section-nav a:hover {background-color:#f6f5e9;}
     .vertical-nav ul#section-nav li.current a, .vertical-nav ul#section-nav li a.active {background:#fff !important; font-weight:bold;color: #c60;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
 
@@ -214,7 +214,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 .info-panel {background:#fff; z-index:100;border:1px solid #d7d5c4;display:block;margin-bottom:18px; padding:18px 18px 1px; border-width: 0 0 3px;}
     .info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif;font-size:1.2em;padding: 9px 18px; color: #fff; background: #467;}
     .info-panel h3 {font-size:1.2em; font-weight:bold; margin-bottom:0.5em;}
-    .info-panel li {background:url("../images/bullet_blue.gif") 0 6px no-repeat; padding-left:20px;padding:7px 0 7px 20px;border-bottom:1px dotted #ddd;}
+    .info-panel li {background:url("../../../../application/views/scripts/images/bullet_blue.gif") 0 6px no-repeat; padding-left:20px;padding:7px 0 7px 20px;border-bottom:1px dotted #ddd;}
     .info-panel li a {text-decoration:none; display:block; color: #c60; }
     .info-panel li a:hover {color:#389;}
     .info-panel p, .info-panel ul, .info-panel ol {font-size:1.1em;}
@@ -258,31 +258,31 @@ table .edit, table .delete, table .researcher, table .super, table .admin, table
 
 .go,
 .next a
-{background-position:center right; text-align:right;background-repeat:no-repeat; padding:2px 18px 2px 0; text-decoration:none;background-image:url("../images/bullet_go.gif");}
+{background-position:center right; text-align:right;background-repeat:no-repeat; padding:2px 18px 2px 0; text-decoration:none;background-image:url("../../../../application/views/scripts/images/bullet_go.gif");}
 
-.previous a {background-image:url("../images/bullet_back.gif");}
-.next a {background-image:url("../images/bullet_go.gif");}
-.contributor {background-image:url("../images/user_red.gif");}
-.super {background-image:url("../images/user_suit.gif");}
-.admin {background-image:url("../images/user_orange.gif");}
-.researcher {background-image:url("../images/user_green.gif");}
-.default {background-image:url("../images/user_gray.gif");}
-.add-file {background-image:url("../images/disk_multiple.gif");}
-.add {background-image:url("../images/page_add.gif");}
-.delete, .delete-element {background-image:url("../images/delete.gif");}
-.error {background-image:url("../images/error.gif");}
-.success {background-image:url("../images/tick.gif");}
-.browse {background-image:url("../images/book_open.gif");}
-.add-collection {background-image:url("../images/folder_add.gif");}
-.browse-collections {background-image:url("../images/folder.gif");}
-.editsettings {background-image:url("../images/cog.gif");}
-.managethemes {background-image:url("../images/layout.gif");}
-.manageplugins {background-image:url("../images/plugin.gif");}
-.browse-users {background-image:url("../images/user_female.gif");}
-.add-user {background-image:url("../images/user_add.gif");}
-.edit-user {background-image:url("../images/pencil_go.gif");}
-.edit {background-image:url("../images/pencil_go.gif");}
-.browse-names {background-image:url("../images/group.gif");}
+.previous a {background-image:url("../../../../application/views/scripts/images/bullet_back.gif");}
+.next a {background-image:url("../../../../application/views/scripts/images/bullet_go.gif");}
+.contributor {background-image:url("../../../../application/views/scripts/images/user_red.gif");}
+.super {background-image:url("../../../../application/views/scripts/images/user_suit.gif");}
+.admin {background-image:url("../../../../application/views/scripts/images/user_orange.gif");}
+.researcher {background-image:url("../../../../application/views/scripts/images/user_green.gif");}
+.default {background-image:url("../../../../application/views/scripts/images/user_gray.gif");}
+.add-file {background-image:url("../../../../application/views/scripts/images/disk_multiple.gif");}
+.add {background-image:url("../../../../application/views/scripts/images/page_add.gif");}
+.delete, .delete-element {background-image:url("../../../../application/views/scripts/images/delete.gif");}
+.error {background-image:url("../../../../application/views/scripts/images/error.gif");}
+.success {background-image:url("../../../../application/views/scripts/images/tick.gif");}
+.browse {background-image:url("../../../../application/views/scripts/images/book_open.gif");}
+.add-collection {background-image:url("../../../../application/views/scripts/images/folder_add.gif");}
+.browse-collections {background-image:url("../../../../application/views/scripts/images/folder.gif");}
+.editsettings {background-image:url("../../../../application/views/scripts/images/cog.gif");}
+.managethemes {background-image:url("../../../../application/views/scripts/images/layout.gif");}
+.manageplugins {background-image:url("../../../../application/views/scripts/images/plugin.gif");}
+.browse-users {background-image:url("../../../../application/views/scripts/images/user_female.gif");}
+.add-user {background-image:url("../../../../application/views/scripts/images/user_add.gif");}
+.edit-user {background-image:url("../../../../application/views/scripts/images/pencil_go.gif");}
+.edit {background-image:url("../../../../application/views/scripts/images/pencil_go.gif");}
+.browse-names {background-image:url("../../../../application/views/scripts/images/group.gif");}
 
 #primary .item-file img,
 #primary .item-file object {
@@ -296,10 +296,10 @@ th.sorting {
 }
 
 th.desc {
-    background-image:url("../images/bullet_arrow_down.png");
+    background-image:url("../../../../application/views/scripts/images/bullet_arrow_down.png");
 }
 th.asc {
-    background-image:url("../images/bullet_arrow_up.png");
+    background-image:url("../../../../application/views/scripts/images/bullet_arrow_up.png");
 }
 
 /* == Global Styles == */
@@ -388,7 +388,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
             color:#fff !important;
             clear:both; 
             margin:0;
-            background: #6d8e1d url("../images/glass-btn.png") repeat-x 0 50%; 
+            background: #6d8e1d url("../../../../application/views/scripts/images/glass-btn.png") repeat-x 0 50%; 
             color:#fff;
             padding: 3px 6px;
             border:none; 
@@ -499,7 +499,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         /* Info Panels - styles that enhance or override the component library styles */    
         #tag-cloud li, #tag-cloud li a {padding:0; border:none;background-image:none; display:inline;}
         #recent-items ul {margin-bottom:0;}
-        #recent-items #view-all-items a {display:block; text-decoration:none; background:url("../images/bullet_go.gif") 100% 6px no-repeat; width: 8em;float:right;padding:6px 18px; text-align:right;}
+        #recent-items #view-all-items a {display:block; text-decoration:none; background:url("../../../../application/views/scripts/images/bullet_go.gif") 100% 6px no-repeat; width: 8em;float:right;padding:6px 18px; text-align:right;}
     
     /* Item Browse styles */
     
