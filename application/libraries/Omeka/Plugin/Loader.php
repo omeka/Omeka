@@ -150,7 +150,6 @@ class Omeka_Plugin_Loader
         
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
-            $plugin->setActive(false);
             if ($force) {
                 throw new Omeka_Plugin_Loader_Exception("The $pluginDirName plugin could not be loaded.");
             } else {
@@ -172,7 +171,6 @@ class Omeka_Plugin_Loader
             if (!($requiredPlugin = $this->getPlugin($requiredPluginDirName))) {
                 // If we can't find one of the required plugins, loading should
                 // fail.
-                $plugin->setActive(false);
                 if ($force) {
                     throw new Omeka_Plugin_Loader_Exception("The required plugin '$requiredPluginDirName' could not be found.");
                 } else {
