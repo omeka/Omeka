@@ -17,7 +17,7 @@
  * @subpackage FileParser
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: File.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: File.php 23772 2011-02-28 21:35:29Z ralph $
  */
 
 /** Zend_Pdf_FileParserDataSource */

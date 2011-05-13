@@ -30,7 +30,7 @@ require_once 'Zend/Form/Element/Multi.php';
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Radio.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Radio.php 23870 2011-04-23 22:39:12Z ramon $
  */
 class Zend_Form_Element_Radio extends Zend_Form_Element_Multi
 {
@@ -45,7 +45,7 @@ class Zend_Form_Element_Radio extends Zend_Form_Element_Multi
      *
      * Disables "for" attribute of label if label decorator enabled.
      *
-     * @return void
+     * @return Zend_Form_Element_Radio
      */
     public function loadDefaultDecorators()
     {

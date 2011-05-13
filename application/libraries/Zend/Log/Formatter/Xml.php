@@ -17,7 +17,7 @@
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Xml.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Xml.php 23980 2011-05-03 18:58:30Z ralph $
  */
 
 /** Zend_Log_Formatter_Abstract */
@@ -29,7 +29,7 @@ require_once 'Zend/Log/Formatter/Abstract.php';
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Xml.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Xml.php 23980 2011-05-03 18:58:30Z ralph $
  */
 class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
 {

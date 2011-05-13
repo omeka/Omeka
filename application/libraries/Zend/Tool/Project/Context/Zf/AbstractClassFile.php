@@ -17,8 +17,13 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: AbstractClassFile.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: AbstractClassFile.php 24027 2011-05-08 02:00:28Z adamlundrigan $
  */
+
+/**
+ * Zend_Tool_Project_Context_Filesystem_File
+ */
+require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project

@@ -35,7 +35,7 @@ require_once 'Zend/Text/Figlet.php';
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Figlet.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Figlet.php 23772 2011-02-28 21:35:29Z ralph $
  */
 class Zend_Captcha_Figlet extends Zend_Captcha_Word
 {

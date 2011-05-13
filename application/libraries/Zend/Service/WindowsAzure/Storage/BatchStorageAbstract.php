@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: BatchStorageAbstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: BatchStorageAbstract.php 23772 2011-02-28 21:35:29Z ralph $
  */
 
 /**
@@ -111,35 +111,35 @@ abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
     {
         return new Zend_Service_WindowsAzure_Storage_Batch($this, $this->getBaseUrl());
     }
-	
-	/**
-	 * Perform batch using Zend_Http_Client channel, combining all batch operations into one request
-	 *
-	 * @param array $operations Operations in batch
-	 * @param boolean $forTableStorage Is the request for table storage?
-	 * @param boolean $isSingleSelect Is the request a single select statement?
-	 * @param string $resourceType Resource type
-	 * @param string $requiredPermission Required permission
-	 * @return Zend_Http_Response
-	 */
-	public function performBatch($operations = array(), $forTableStorage = false, $isSingleSelect = false, $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ)
-	{
-	    // Generate boundaries
-	    $batchBoundary = 'batch_' . md5(time() . microtime());
-	    $changesetBoundary = 'changeset_' . md5(time() . microtime());
-	
-	    // Set headers
-	    $headers = array();
-	
-		// Add version header
-		$headers['x-ms-version'] = $this->_apiVersion;
-		
-		// Add dataservice headers
-		$headers['DataServiceVersion'] = '1.0;NetFx';
-		$headers['MaxDataServiceVersion'] = '1.0;NetFx';
-		
-		// Add content-type header
-		$headers['Content-Type'] = 'multipart/mixed; boundary=' . $batchBoundary;
+    
+    /**
+     * Perform batch using Zend_Http_Client channel, combining all batch operations into one request
+     *
+     * @param array $operations Operations in batch
+     * @param boolean $forTableStorage Is the request for table storage?
+     * @param boolean $isSingleSelect Is the request a single select statement?
+     * @param string $resourceType Resource type
+     * @param string $requiredPermission Required permission
+     * @return Zend_Http_Response
+     */
+    public function performBatch($operations = array(), $forTableStorage = false, $isSingleSelect = false, $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ)
+    {
+        // Generate boundaries
+        $batchBoundary = 'batch_' . md5(time() . microtime());
+        $changesetBoundary = 'changeset_' . md5(time() . microtime());
+    
+        // Set headers
+        $headers = array();
+    
+        // Add version header
+        $headers['x-ms-version'] = $this->_apiVersion;
+        
+        // Add dataservice headers
+        $headers['DataServiceVersion'] = '1.0;NetFx';
+        $headers['MaxDataServiceVersion'] = '1.0;NetFx';
+        
+        // Add content-type header
+        $headers['Content-Type'] = 'multipart/mixed; boundary=' . $batchBoundary;
 
         // Set path and query string
         $path           = '/$batch';
@@ -167,14 +167,14 @@ abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
                 foreach ($operations as $operation)
                 {
                     $rawData .= '--' . $changesetBoundary . "\n";
-                	$rawData .= 'Content-Type: application/http' . "\n";
-                	$rawData .= 'Content-Transfer-Encoding: binary' . "\n\n";
-                	$rawData .= $operation;
-        		}
-        		$rawData .= '--' . $changesetBoundary . '--' . "\n";
-    		    		
-    		$rawData .= '--' . $batchBoundary . '--';
-		}
+                    $rawData .= 'Content-Type: application/http' . "\n";
+                    $rawData .= 'Content-Transfer-Encoding: binary' . "\n\n";
+                    $rawData .= $operation;
+                }
+                $rawData .= '--' . $changesetBoundary . '--' . "\n";
+                        
+            $rawData .= '--' . $batchBoundary . '--';
+        }
 
         // Generate URL and sign request
         $requestUrl     = $this->_credentials->signRequestUrl($this->getBaseUrl() . $path . $queryString, $resourceType, $requiredPermission);

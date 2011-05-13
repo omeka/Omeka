@@ -17,7 +17,7 @@
  * @subpackage Zend_Translate_Adapter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Adapter.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Adapter.php 23962 2011-05-03 13:58:26Z adamlundrigan $
  */
 
 /**
@@ -211,6 +211,11 @@ abstract class Zend_Translate_Adapter {
             }
         } else if (!is_array($options)) {
             $options = array('content' => $options);
+        }
+        
+        if (!isset($options['content']) || empty($options['content'])) {
+            require_once 'Zend/Translate/Exception.php';
+            throw new Zend_Translate_Exception("Required option 'content' is missing");
         }
 
         $originate = null;
