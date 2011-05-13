@@ -168,12 +168,14 @@ define('ADMIN_BASE_URL', $adminPath);
 define('PUBLIC_BASE_URL', $publicPath);
 define('CURRENT_BASE_URL', $currentPath);    
 
-// Unfortunately we can't use the Zend_Loader instead, because it
-// throws warnings when it can't find a file. On the other hand,
-// Omeka::autoload() never tries to include the file if it doesn't
-// exist.
-require_once 'Omeka.php';
-spl_autoload_register(array('Omeka', 'autoload'));
+// Set up the Zend_Loader autoloader to work for all classes.
+// The Omeka namespace must be manually specified to avoid incompatibility with the
+// resource autoloader.
+require_once 'Zend/Loader/Autoloader.php';
+$autoloader = Zend_Loader_Autoloader::getInstance();
+$autoloader->registerNamespace('Omeka_');
+$autoloader->setFallbackAutoloader(true);
+$autoloader->suppressNotFoundWarnings(true);
 
 // Define application environment
 defined('APPLICATION_ENV')

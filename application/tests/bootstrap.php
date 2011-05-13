@@ -25,10 +25,6 @@ define('TEST_DIR', dirname(__FILE__));
 define('TEST_LIB_DIR', TEST_DIR . DIRECTORY_SEPARATOR . 'libraries');
 set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
 
-// Class loader (copied from Omeka_Core::initializeClassLoader()).
-require_once 'Omeka.php';
-spl_autoload_register(array('Omeka', 'autoload'));
-
 // THEME_DIR is the only constant defined by the bootstrap(s).
 // Redefine it here in order to prevent test errors that stem from not defining
 // this constant.
