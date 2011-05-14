@@ -13,105 +13,132 @@
  * @subpackage Models
  * @link http://en.wikipedia.org/wiki/Atom_(standard)
  * @link http://tools.ietf.org/html/rfc4287
- * @link http://framework.zend.com/manual/en/zend.feed.importing.html
  */
 class ItemAtom
 {
     /**
-     * @var array An array of Item records.
-     */
-    private $_items;
-    
-    /**
-     * @var array A Zend_Feed formatted array.
-     */
-    private $_atom = array();
-
-    /**
-     * @var Zend_Feed_Atom The Zend_Feed instance for Atom.
+     * @var DOMDocument
      */
     private $_feed;
     
     /**
-     * Build the Atom array and set the Zend_Feed_Atom instance.
+     * Build the Atom feed using DOM.
      * 
      * @param array $items An array of Item records.
      * @return void
      */
     public function __construct(array $items)
     {
-        $this->_items = $items;
-        $this->_buildAtom();
-        $this->_feed = Zend_Feed::importArray($this->_atom, 'atom');
-    }
-    
-    /**
-     * Builds atom:feed.
-     * 
-     * @return void
-     */
-    private function _buildAtom()
-    {
-        $this->_atom['charset'] = 'UTF-8';
-        $this->_atom['title'] = strip_tags(get_option('site_title'));
-        $this->_atom['link'] = xml_escape(__v()->serverUrl(isset($_SERVER['REQUEST_URI'])));
-        $this->_atom['author'] = strip_tags(get_option('author'));
-        $this->_atom['description'] = strip_tags(get_option('description'));
-        $this->_atom['copyright'] = strip_tags(get_option('copyright'));
-        $this->_atom['entries'] = $this->_buildEntries();
-    }
-    
-    /**
-     * Builds atom:entry.
-     * 
-     * @return array
-     */
-    private function _buildEntries()
-    {
-        $entries = array();
-
-        foreach ($this->_items as $item) {
-            $entries[] = array('title' => strip_tags(item('Dublin Core', 'Title', array('no_escape'=>true), $item)),
-                               'link' => abs_item_uri($item), 
-                               'description' => strip_tags(item('Dublin Core', 'Description', array('no_escape'=>true), $item)),
-                               'content' => show_item_metadata(array(), $item),
-                               'lastUpdate' => strtotime(item('Date Modified', null, array(), $item)),
-                               'category' => $this->_buildCategories($item), 
-                               'enclosure' => $this->_buildEnclosures($item));
+        $doc = new DOMDocument('1.0', 'UTF-8');
+        
+        // feed
+        $feedElement = $doc->createElement('feed');
+        $feedElement->setAttribute('xmlns', 'http://www.w3.org/2005/Atom');
+        
+        // feed/id
+        $feedIdElement = $doc->createElement('id');
+        $feedIdElement->appendChild($doc->createTextNode(__v()->serverUrl(isset($_SERVER['REQUEST_URI']))));
+        $feedElement->appendChild($feedIdElement);
+        
+        // feed/title
+        $feedTitleElement = $doc->createElement('title');
+        $feedTitleElement->appendChild($doc->createCDATASection(get_option('site_title')));
+        $feedElement->appendChild($feedTitleElement);
+        
+        // feed/subtitle
+        $feedSubtitleElement = $doc->createElement('subtitle');
+        $feedSubtitleElement->appendChild($doc->createCDATASection(get_option('description')));
+        $feedElement->appendChild($feedSubtitleElement);
+        
+        // feed/author/name
+        $feedAuthor = $doc->createElement('author');
+        $feedAuthorName = $doc->createElement('name');
+        $feedAuthorName->appendChild($doc->createCDATASection(get_option('author')));
+        $feedAuthor->appendChild($feedAuthorName);
+        $feedElement->appendChild($feedAuthor);
+        
+        // feed/rights
+        $feedRightsElement = $doc->createElement('rights');
+        $feedRightsElement->appendChild($doc->createCDATASection(get_option('copyright')));
+        $feedElement->appendChild($feedRightsElement);
+        
+        // feed/updated
+        $feedUpdated = $doc->createElement('updated', date(DATE_ATOM, time()));
+        $feedElement->appendChild($feedUpdated);
+        
+        // feed/generator
+        $feedGenerator = $doc->createElement('generator', 'Omeka');
+        $feedElement->appendChild($feedGenerator);
+        
+        // feed/link[rel=self]
+        $feedLinkSelfElement = $doc->createElement('link');
+        $feedLinkSelfElement->setAttribute('rel', 'self');
+        $feedLinkSelfElement->setAttribute('href', __v()->serverUrl(isset($_SERVER['REQUEST_URI'])));
+        $feedElement->appendChild($feedLinkSelfElement);
+        
+        // feed/link[rel=prev]
+        // [...]
+        
+        // feed/link[rel=next]
+        // [...]
+        
+        // feed/entry
+        foreach ($items as $item) {
+            $feedEntryElement = $doc->createElement('entry');
+            
+            // feed/entry/id
+            $feedEntryIdElement = $doc->createElement('id');
+            $feedEntryIdElement->appendChild($doc->createTextNode(abs_item_uri($item)));
+            $feedEntryElement->appendChild($feedEntryIdElement);
+            
+            // feed/entry/title
+            $feedEntryTitleElement = $doc->createElement('title');
+            $feedEntryTitleElement->appendChild($doc->createCDATASection(item('Dublin Core', 'Title', null, $item)));
+            $feedEntryElement->appendChild($feedEntryTitleElement);
+            
+            // feed/entry/summary
+            $feedEntrySummaryElement = $doc->createElement('summary');
+            $feedEntrySummaryElement->appendChild($doc->createCDATASection(item('Dublin Core', 'Description', null, $item)));
+            $feedEntryElement->appendChild($feedEntrySummaryElement);
+            
+            // feed/entry/updated
+            $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime(item('Date Modified', null, null, $item))));
+            $feedEntryElement->appendChild($feedEntryUpdated);
+            
+            // feed/entry/link[rel=alternate]
+            $feedEntryLinkAlternateElement = $doc->createElement('link');
+            $feedEntryLinkAlternateElement->setAttribute('rel', 'alternate');
+            $feedEntryLinkAlternateElement->setAttribute('href', abs_item_uri($item));
+            $feedEntryElement->appendChild($feedEntryLinkAlternateElement);
+            
+            // feed/entry/link[rel=enclosure]
+            foreach ($item->Files as $file) {
+                $feedEntryLinkEnclosureElement = $doc->createElement('link');
+                $feedEntryLinkEnclosureElement->setAttribute('rel', 'enclosure');
+                $feedEntryLinkEnclosureElement->setAttribute('href', $file->getWebPath());
+                $feedEntryLinkEnclosureElement->setAttribute('type', $file->mime_browser);
+                $feedEntryLinkEnclosureElement->setAttribute('length', $file->size);
+                $feedEntryElement->appendChild($feedEntryLinkEnclosureElement);
+            }
+            
+            // feed/entry/category
+            foreach ($item->Tags as $tag) {
+                $feedEntryCategoryElement = $doc->createElement('category');
+                $feedEntryCategoryElement->setAttribute('term', $tag->name);
+                $feedEntryElement->appendChild($feedEntryCategoryElement);
+            }
+            
+            // feed/entry/content
+            $feedEntryContentElement = $doc->createElement('content');
+            $feedEntryContentElement->appendChild($doc->createCDATASection(show_item_metadata(array(), $item)));
+            $feedEntryElement->appendChild($feedEntryContentElement);
+            
+            $feedElement->appendChild($feedEntryElement);
         }
-        return $entries;
-    }
-    
-    /**
-     * Builds atom:category.
-     * 
-     * @param Item $item An Item record.
-     * @return array
-     */
-    private function _buildCategories(Item $item)
-    {
-        $categories = array();
-        foreach ($item->Tags as $tag) {
-            $categories[] = array('term' => $tag->name ? $tag->name : '0 ');
-        }
-        return $categories;
-    }
-    
-    /**
-     * Builds atom:enclosure.
-     * 
-     * @param Item $item An Item record.
-     * @return array
-     */
-    private function _buildEnclosures(Item $item)
-    {
-        $enclosures = array();
-        foreach ($item->Files as $file) {
-            $enclosures[] = array('url' => $file->getWebPath(),
-                                  'type' => $file->mime_browser, 
-                                  'length' => $file->size);
-        }
-        return $enclosures;
+        
+        $doc->appendChild($feedElement);
+        
+        $this->_feed = $doc;
     }
     
     /**
