@@ -16,7 +16,7 @@
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: DbSelect.php 23854 2011-04-10 18:54:30Z ramon $
+ * @version    $Id: DbSelect.php 23855 2011-04-10 19:03:02Z ramon $
  */
 
 /**

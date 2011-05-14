@@ -17,7 +17,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mysql.php 23985 2011-05-03 20:07:37Z ralph $
+ * @version    $Id: Mysql.php 23986 2011-05-03 20:10:42Z ralph $
  */
 
 

@@ -18,7 +18,7 @@
  * @subpackage Photos
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Photos.php 23804 2011-03-16 00:53:14Z tjohns $
+ * @version    $Id: Photos.php 23805 2011-03-16 00:55:40Z tjohns $
  */
 
 /**

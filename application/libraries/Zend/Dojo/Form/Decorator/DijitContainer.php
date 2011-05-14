@@ -37,7 +37,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: DijitContainer.php 23772 2011-02-28 21:35:29Z ralph $
+ * @version    $Id: DijitContainer.php 23775 2011-03-01 17:25:24Z ralph $
  */
 abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorator_Abstract
 {

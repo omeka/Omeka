@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Translate
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Gettext.php 23903 2011-04-30 06:49:24Z adamlundrigan $
+ * @version    $Id: Gettext.php 23961 2011-05-03 11:20:34Z yoshida@zend.co.jp $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -133,7 +133,7 @@ class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
                 }
             }
         }
-        
+
         @fclose($this->_file);
 
         $this->_data[$locale][''] = trim($this->_data[$locale]['']);

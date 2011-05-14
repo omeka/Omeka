@@ -32,7 +32,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * @subpackage Plugins
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ErrorHandler.php 23772 2011-02-28 21:35:29Z ralph $
+ * @version    $Id: ErrorHandler.php 23775 2011-03-01 17:25:24Z ralph $
  */
 class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstract
 {

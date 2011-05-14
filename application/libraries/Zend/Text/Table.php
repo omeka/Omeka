@@ -16,7 +16,7 @@
  * @package   Zend_Text_Table
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Table.php 23856 2011-04-10 20:46:06Z ramon $
+ * @version   $Id: Table.php 23953 2011-05-03 05:47:39Z ralph $
  */
 
 /**

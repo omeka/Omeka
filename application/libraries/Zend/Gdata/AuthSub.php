@@ -18,7 +18,7 @@
  * @subpackage Gdata
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: AuthSub.php 24033 2011-05-11 02:31:11Z adamlundrigan $
+ * @version    $Id: AuthSub.php 23775 2011-03-01 17:25:24Z ralph $
  */
 
 /**
@@ -229,9 +229,9 @@ class Zend_Gdata_AuthSub
         if ($client == null) {
             $client = new Zend_Gdata_HttpClient();
         }
-        if (!$client instanceof Zend_Gdata_HttpClient) {
+        if (!$client instanceof Zend_Http_Client) {
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_HttpException('Client is not an instance of Zend_Gdata_HttpClient.');
+            throw new Zend_Gdata_App_HttpException('Client is not an instance of Zend_Http_Client.');
         }
         $useragent = 'Zend_Framework_Gdata/' . Zend_Version::VERSION;
         $client->setConfig(array(

@@ -41,7 +41,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Label.php 23941 2011-05-02 21:34:12Z adamlundrigan $
+ * @version    $Id: Label.php 23960 2011-05-03 10:58:52Z yoshida@zend.co.jp $
  */
 class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
 {

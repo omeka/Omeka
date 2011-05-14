@@ -16,7 +16,7 @@
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Reader.php 23902 2011-04-30 06:37:26Z adamlundrigan $
+ * @version    $Id: Reader.php 23975 2011-05-03 16:43:46Z ralph $
  */
 
 /**

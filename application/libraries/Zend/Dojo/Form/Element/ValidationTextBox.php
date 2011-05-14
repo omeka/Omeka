@@ -30,7 +30,7 @@ require_once 'Zend/Dojo/Form/Element/TextBox.php';
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ValidationTextBox.php 23928 2011-05-02 19:27:49Z matthew $
+ * @version    $Id: ValidationTextBox.php 23929 2011-05-02 19:28:33Z matthew $
  */
 class Zend_Dojo_Form_Element_ValidationTextBox extends Zend_Dojo_Form_Element_TextBox
 {

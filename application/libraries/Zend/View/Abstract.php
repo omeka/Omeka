@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 23991 2011-05-04 03:27:44Z ralph $
+ * @version    $Id: Abstract.php 23992 2011-05-04 03:32:01Z ralph $
  */
 
 /** @see Zend_Loader */

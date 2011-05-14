@@ -16,7 +16,7 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Isbn.php 23772 2011-02-28 21:35:29Z ralph $
+ * @version    $Id: Isbn.php 23775 2011-03-01 17:25:24Z ralph $
  */
 
 /**
@@ -45,7 +45,7 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::INVALID => "Invalid type given. String or integer expected",
-        self::NO_ISBN => "'%value%' is not a valid ISBN number",
+        self::NO_ISBN => "'%value%' is no valid ISBN number",
     );
 
     /**

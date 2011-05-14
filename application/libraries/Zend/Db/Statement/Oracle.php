@@ -17,7 +17,7 @@
  * @subpackage Statement
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Oracle.php 23917 2011-05-01 03:12:26Z adamlundrigan $
+ * @version    $Id: Oracle.php 23959 2011-05-03 10:45:47Z yoshida@zend.co.jp $
  */
 
 /**

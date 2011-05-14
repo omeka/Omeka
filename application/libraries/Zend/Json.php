@@ -16,7 +16,7 @@
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Json.php 23915 2011-04-30 21:16:00Z ezimuel $
+ * @version    $Id: Json.php 23973 2011-05-03 16:28:26Z ezimuel $
  */
 
 /**
