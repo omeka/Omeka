@@ -30,6 +30,7 @@ class ItemAtom
     public function __construct(array $items)
     {
         $doc = new DOMDocument('1.0', 'UTF-8');
+        $doc->formatOutput = true;
         
         // feed
         $feedElement = $doc->createElement('feed');
@@ -70,17 +71,30 @@ class ItemAtom
         $feedGenerator = $doc->createElement('generator', 'Omeka');
         $feedElement->appendChild($feedGenerator);
         
+        // Get the feed self/next/prev links.
+        $feedLinks = $this->_getFeedLinks($items);
+        
         // feed/link[rel=self]
         $feedLinkSelfElement = $doc->createElement('link');
         $feedLinkSelfElement->setAttribute('rel', 'self');
-        $feedLinkSelfElement->setAttribute('href', __v()->serverUrl(isset($_SERVER['REQUEST_URI'])));
+        $feedLinkSelfElement->setAttribute('href', $feedLinks['self']);
         $feedElement->appendChild($feedLinkSelfElement);
         
         // feed/link[rel=prev]
-        // [...]
+        if (isset($feedLinks['previous'])) {
+            $feedLinkPrevElement = $doc->createElement('link');
+            $feedLinkPrevElement->setAttribute('rel', 'previous');
+            $feedLinkPrevElement->setAttribute('href', $feedLinks['previous']);
+            $feedElement->appendChild($feedLinkPrevElement);
+        }
         
         // feed/link[rel=next]
-        // [...]
+        if (isset($feedLinks['next'])) {
+            $feedLinkNextElement = $doc->createElement('link');
+            $feedLinkNextElement->setAttribute('rel', 'next');
+            $feedLinkNextElement->setAttribute('href', $feedLinks['next']);
+            $feedElement->appendChild($feedLinkNextElement);
+        }
         
         // feed/entry
         foreach ($items as $item) {
@@ -130,6 +144,7 @@ class ItemAtom
             
             // feed/entry/content
             $feedEntryContentElement = $doc->createElement('content');
+            $feedEntryContentElement->setAttribute('type', 'html');
             $feedEntryContentElement->appendChild($doc->createCDATASection(show_item_metadata(array(), $item)));
             $feedEntryElement->appendChild($feedEntryContentElement);
             
@@ -139,6 +154,42 @@ class ItemAtom
         $doc->appendChild($feedElement);
         
         $this->_feed = $doc;
+    }
+    
+    /**
+     * Returns the URLs, if any, for rel=self|next|previous links.
+     * 
+     * @param array $items
+     * @return array
+     */
+    private function _getFeedLinks(array $items)
+    {
+        $feedLinks = array();
+        
+        // There is always a self link.
+        $feedLinks['self'] = __v()->serverUrl(isset($_SERVER['REQUEST_URI']));
+        
+        // If pagination is registered, assume item browse or search.
+        if (Zend_Registry::isRegistered('pagination')) {
+            $pagination = Zend_Registry::get('pagination');
+            if (($pagination['page'] * $pagination['per_page']) < $pagination['total_results']) {
+                $feedLinks['next'] = abs_uri(array('page' => $pagination['page'] + 1), 'default', $_GET);
+            }
+            if (1 < $pagination['page']) {
+                $feedLinks['previous'] = abs_uri(array('page' => $pagination['page'] - 1), 'default', $_GET);
+            }
+        
+        // If pagination is not registered, assume item show.
+        } else {
+            if ($itemNext = $items[0]->next()) {
+                $feedLinks['next'] = abs_item_uri($itemNext) . '?output=atom';
+            }
+            if ($itemPrev = $items[0]->previous()) {
+                $feedLinks['previous'] = abs_item_uri($itemPrev) . '?output=atom';
+            }
+        }
+        
+        return $feedLinks;
     }
     
     /**
