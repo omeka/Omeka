@@ -42,26 +42,36 @@ class ItemAtom
         $feedElement->appendChild($feedIdElement);
         
         // feed/title
+        if (!$feedTitle = get_option('site_title')) {
+            $feedTitle = 'Unknown';
+        }
         $feedTitleElement = $doc->createElement('title');
-        $feedTitleElement->appendChild($doc->createCDATASection(get_option('site_title')));
+        $feedTitleElement->appendChild($doc->createCDATASection($feedTitle));
         $feedElement->appendChild($feedTitleElement);
         
         // feed/subtitle
-        $feedSubtitleElement = $doc->createElement('subtitle');
-        $feedSubtitleElement->appendChild($doc->createCDATASection(get_option('description')));
-        $feedElement->appendChild($feedSubtitleElement);
+        if ($feedSubtitle = get_option('description')) {
+            $feedSubtitleElement = $doc->createElement('subtitle');
+            $feedSubtitleElement->appendChild($doc->createCDATASection($feedSubtitle));
+            $feedElement->appendChild($feedSubtitleElement);
+        }
         
         // feed/author/name
-        $feedAuthor = $doc->createElement('author');
-        $feedAuthorName = $doc->createElement('name');
-        $feedAuthorName->appendChild($doc->createCDATASection(get_option('author')));
-        $feedAuthor->appendChild($feedAuthorName);
-        $feedElement->appendChild($feedAuthor);
+        if (!$feedAuthorName = get_option('author')) {
+            $feedAuthorName = 'Unknown';
+        }
+        $feedAuthorElement = $doc->createElement('author');
+        $feedAuthorNameElement = $doc->createElement('name');
+        $feedAuthorNameElement->appendChild($doc->createCDATASection($feedAuthorName));
+        $feedAuthorElement->appendChild($feedAuthorNameElement);
+        $feedElement->appendChild($feedAuthorElement);
         
         // feed/rights
-        $feedRightsElement = $doc->createElement('rights');
-        $feedRightsElement->appendChild($doc->createCDATASection(get_option('copyright')));
-        $feedElement->appendChild($feedRightsElement);
+        if ($feedRights = get_option('copyright')) {
+            $feedRightsElement = $doc->createElement('rights');
+            $feedRightsElement->appendChild($doc->createCDATASection($feedRights));
+            $feedElement->appendChild($feedRightsElement);
+        }
         
         // feed/updated
         $feedUpdated = $doc->createElement('updated', date(DATE_ATOM, time()));
@@ -80,10 +90,18 @@ class ItemAtom
         $feedLinkSelfElement->setAttribute('href', $feedLinks['self']);
         $feedElement->appendChild($feedLinkSelfElement);
         
+        // feed/link[rel=first]
+        $feedLinkFirstElement = $doc->createElement('link');
+        $feedLinkFirstElement->setAttribute('rel', 'first');
+        $feedLinkFirstElement->setAttribute('type', 'application/atom+xml');
+        $feedLinkFirstElement->setAttribute('href', $feedLinks['first']);
+        $feedElement->appendChild($feedLinkFirstElement);
+        
         // feed/link[rel=prev]
         if (isset($feedLinks['previous'])) {
             $feedLinkPrevElement = $doc->createElement('link');
             $feedLinkPrevElement->setAttribute('rel', 'previous');
+            $feedLinkPrevElement->setAttribute('type', 'application/atom+xml');
             $feedLinkPrevElement->setAttribute('href', $feedLinks['previous']);
             $feedElement->appendChild($feedLinkPrevElement);
         }
@@ -92,9 +110,17 @@ class ItemAtom
         if (isset($feedLinks['next'])) {
             $feedLinkNextElement = $doc->createElement('link');
             $feedLinkNextElement->setAttribute('rel', 'next');
+            $feedLinkNextElement->setAttribute('type', 'application/atom+xml');
             $feedLinkNextElement->setAttribute('href', $feedLinks['next']);
             $feedElement->appendChild($feedLinkNextElement);
         }
+        
+        // feed/link[rel=last]
+        $feedLinkLastElement = $doc->createElement('link');
+        $feedLinkLastElement->setAttribute('rel', 'last');
+        $feedLinkLastElement->setAttribute('type', 'application/atom+xml');
+        $feedLinkLastElement->setAttribute('href', $feedLinks['last']);
+        $feedElement->appendChild($feedLinkLastElement);
         
         // feed/entry
         foreach ($items as $item) {
@@ -106,14 +132,19 @@ class ItemAtom
             $feedEntryElement->appendChild($feedEntryIdElement);
             
             // feed/entry/title
+            if (!$feedEntryTitle = item('Dublin Core', 'Title', null, $item)) {
+                $feedEntryTitle = 'Untitled';
+            }
             $feedEntryTitleElement = $doc->createElement('title');
-            $feedEntryTitleElement->appendChild($doc->createCDATASection(item('Dublin Core', 'Title', null, $item)));
+            $feedEntryTitleElement->appendChild($doc->createCDATASection($feedEntryTitle));
             $feedEntryElement->appendChild($feedEntryTitleElement);
             
             // feed/entry/summary
-            $feedEntrySummaryElement = $doc->createElement('summary');
-            $feedEntrySummaryElement->appendChild($doc->createCDATASection(item('Dublin Core', 'Description', null, $item)));
-            $feedEntryElement->appendChild($feedEntrySummaryElement);
+            if ($feedEntrySummary = item('Dublin Core', 'Description', null, $item)) {
+                $feedEntrySummaryElement = $doc->createElement('summary');
+                $feedEntrySummaryElement->appendChild($doc->createCDATASection($feedEntrySummary));
+                $feedEntryElement->appendChild($feedEntrySummaryElement);
+            }
             
             // feed/entry/updated
             $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime(item('Date Modified', null, null, $item))));
@@ -122,6 +153,7 @@ class ItemAtom
             // feed/entry/link[rel=alternate]
             $feedEntryLinkAlternateElement = $doc->createElement('link');
             $feedEntryLinkAlternateElement->setAttribute('rel', 'alternate');
+            $feedEntryLinkAlternateElement->setAttribute('type', 'text/html');
             $feedEntryLinkAlternateElement->setAttribute('href', abs_item_uri($item));
             $feedEntryElement->appendChild($feedEntryLinkAlternateElement);
             
@@ -172,20 +204,50 @@ class ItemAtom
         // If pagination is registered, assume item browse or search.
         if (Zend_Registry::isRegistered('pagination')) {
             $pagination = Zend_Registry::get('pagination');
-            if (($pagination['page'] * $pagination['per_page']) < $pagination['total_results']) {
-                $feedLinks['next'] = abs_uri(array('page' => $pagination['page'] + 1), 'default', $_GET);
+            
+            // Set the pagination information.
+            $paginator = Zend_Paginator::factory($pagination['total_results']);
+            $paginator->setCurrentPageNumber($pagination['page']);
+            $paginator->setItemCountPerPage($pagination['per_page']);
+            $pages = $paginator->getPages();
+            
+            // first
+            $feedLinks['first'] = abs_uri(array('page' => $pages->first), 'default', $_GET);
+            
+            // previous
+            if (isset($pages->previous)) {
+                $feedLinks['previous'] = abs_uri(array('page' => $pages->previous), 'default', $_GET);
             }
-            if (1 < $pagination['page']) {
-                $feedLinks['previous'] = abs_uri(array('page' => $pagination['page'] - 1), 'default', $_GET);
+            
+            // next
+            if (isset($pages->next)) {
+                $feedLinks['next'] = abs_uri(array('page' => $pages->next), 'default', $_GET);
             }
-        
+            
+            // last
+            $feedLinks['last'] = abs_uri(array('page' => $pages->last), 'default', $_GET);
+            
         // If pagination is not registered, assume item show.
         } else {
+            
+            // first
+            if ($itemFirst = get_db()->getTable('Item')->findFirst()) {
+                $feedLinks['first'] = abs_item_uri($itemFirst) . '?output=atom';
+            }
+            
+            // previous
+            if ($itemPrev = $items[0]->previous()) {
+                $feedLinks['previous'] = abs_item_uri($itemPrev) . '?output=atom';
+            }
+            
+            // next
             if ($itemNext = $items[0]->next()) {
                 $feedLinks['next'] = abs_item_uri($itemNext) . '?output=atom';
             }
-            if ($itemPrev = $items[0]->previous()) {
-                $feedLinks['previous'] = abs_item_uri($itemPrev) . '?output=atom';
+            
+            // last
+            if ($itemFirst = get_db()->getTable('Item')->findLast()) {
+                $feedLinks['last'] = abs_item_uri($itemFirst) . '?output=atom';
             }
         }
         

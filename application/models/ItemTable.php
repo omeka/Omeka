@@ -421,6 +421,32 @@ class ItemTable extends Omeka_Db_Table
         return $select;
     }
     
+    /**
+     * Return the first item accessible to the current user.
+     * 
+     * @return Item|null
+     */
+    public function findFirst()
+    {
+        $select = $this->getSelect();
+        $select->order('i.id ASC');
+        $select->limit(1);
+        return $this->fetchObject($select);
+    }
+    
+    /**
+     * Return the last item accessible to the current user.
+     * 
+     * @return Item|null
+     */
+    public function findLast()
+    {
+        $select = $this->getSelect();
+        $select->order('i.id DESC');
+        $select->limit(1);
+        return $this->fetchObject($select);
+    }
+    
     public function findPrevious($item)
     {
         return $this->findNearby($item, 'previous');
