@@ -26,3 +26,8 @@
 
 # For VIM
 *.swp
+
+# For Eclipse
+.buildpath
+.project
+.settings/
