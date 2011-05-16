@@ -57,7 +57,7 @@ class Omeka_Plugin_Mvc
         
         //Path must begin from within the plugin's directory
         
-        $path = $pluginDirName . DIRECTORY_SEPARATOR . $path;
+        $path = $pluginDirName . '/' . $path;
                 
         switch ($themeType) {
             case 'public':
@@ -103,7 +103,7 @@ class Omeka_Plugin_Mvc
      */
     public function addControllerDir($pluginDirName, $moduleName)
     {                
-        $contrDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'controllers';
+        $contrDir = PLUGIN_DIR . '/' . $pluginDirName . '/' . 'controllers';
         Zend_Controller_Front::getInstance()->addControllerDirectory($contrDir, $moduleName);
     }
     
@@ -125,15 +125,15 @@ class Omeka_Plugin_Mvc
      */
     public function addApplicationDirs($pluginDirName)
     {        
-        $baseDir = $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName;
+        $baseDir = $this->_basePath . '/' . $pluginDirName;
         
-        $modelDir      = $baseDir . DIRECTORY_SEPARATOR  . 'models';
-        $controllerDir = $baseDir . DIRECTORY_SEPARATOR  . 'controllers';
-        $librariesDir  = $baseDir . DIRECTORY_SEPARATOR  . 'libraries';
-        $viewsDir      = $baseDir . DIRECTORY_SEPARATOR  . 'views';
-        $adminDir      = $viewsDir . DIRECTORY_SEPARATOR . 'admin';
-        $publicDir     = $viewsDir . DIRECTORY_SEPARATOR . 'public';
-        $sharedDir     = $viewsDir . DIRECTORY_SEPARATOR . 'shared';
+        $modelDir      = $baseDir . '/models';
+        $controllerDir = $baseDir . '/controllers';
+        $librariesDir  = $baseDir . '/libraries';
+        $viewsDir      = $baseDir . '/views';
+        $adminDir      = $viewsDir . '/admin';
+        $publicDir     = $viewsDir . '/public';
+        $sharedDir     = $viewsDir . '/shared';
         
         //Add 'models' and 'libraries' directories to the include path
         if (file_exists($modelDir) && !$this->_hasIncludePath($modelDir)) {
@@ -152,15 +152,15 @@ class Omeka_Plugin_Mvc
         }
         
         if (file_exists($sharedDir)) {
-            $this->addThemeDir($pluginDirName, 'views' . DIRECTORY_SEPARATOR . 'shared', 'shared', $moduleName);
+            $this->addThemeDir($pluginDirName, 'views/shared', 'shared', $moduleName);
         }
         
         if (file_exists($adminDir)) {
-            $this->addThemeDir($pluginDirName, 'views' . DIRECTORY_SEPARATOR . 'admin', 'admin', $moduleName);
+            $this->addThemeDir($pluginDirName, 'views/admin', 'admin', $moduleName);
         }
 
         if (file_exists($publicDir)) {
-            $this->addThemeDir($pluginDirName, 'views' . DIRECTORY_SEPARATOR . 'public', 'public', $moduleName);
+            $this->addThemeDir($pluginDirName, 'views/public', 'public', $moduleName);
         }
     }
     

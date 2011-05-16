@@ -6,7 +6,7 @@
  * @package Omeka
  **/
 
-require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Url.php';
+require_once HELPER_DIR . '/Url.php';
 
 /**
  * 

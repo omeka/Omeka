@@ -93,7 +93,7 @@ class Omeka_Plugin_Ini
         if ($pluginDirName instanceof Plugin) {
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
-        return $this->_pluginsRootDir . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
+        return $this->_pluginsRootDir . '/' . $pluginDirName . '/' . 'plugin.ini';
     }
     
     /**

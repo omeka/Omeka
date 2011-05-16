@@ -6,7 +6,7 @@
  * @package Omeka
  */
 
-require_once FORM_DIR . DIRECTORY_SEPARATOR . 'Install.php';
+require_once FORM_DIR . '/Install.php';
 
 /**
  * 

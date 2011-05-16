@@ -244,7 +244,7 @@ class Omeka_Db_Migration_Manager
 	    if (!preg_match('/^\d{14}_(\w+)\.php$/', $filename, $match)) {
 	        throw new Omeka_Db_Migration_Exception("Migration file '$filename' does not follow proper naming conventions.");
 	    }
-        $filePath = $this->_migrationsDir . DIRECTORY_SEPARATOR . $filename;
+        $filePath = $this->_migrationsDir . '/' . $filename;
         require_once $filePath;
 	    $class = $match[1];
 	    if (!class_exists($class)) {

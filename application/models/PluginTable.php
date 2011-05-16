@@ -24,7 +24,7 @@ class PluginTable extends Omeka_Db_Table
         $plugins = $this->findAll();
         $pluginsWithIniFiles = array();
         foreach($plugins as $plugin) {
-            $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin->name . DIRECTORY_SEPARATOR . 'plugin.ini';
+            $path = PLUGIN_DIR . '/' . $plugin->name . '/plugin.ini';
             if (file_exists($path)) {
                 $pluginsWithIniFiles[] = $plugin;
             } 

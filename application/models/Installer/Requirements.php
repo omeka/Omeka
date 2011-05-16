@@ -105,7 +105,7 @@ class Installer_Requirements
     
     private function _checkHtaccessFilesExist()
     {
-        if (!file_exists(BASE_DIR . DIRECTORY_SEPARATOR . '.htaccess')) {
+        if (!file_exists(BASE_DIR . '/.htaccess')) {
             $header = 'Missing .htaccess File';
             $message = "Omeka's .htaccess file is missing. Please make sure this 
             file has been uploaded correctly and try again.";

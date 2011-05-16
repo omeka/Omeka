@@ -31,7 +31,7 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
             return;
         }
         
-        $logFile = LOGS_DIR.DIRECTORY_SEPARATOR . 'errors.log';
+        $logFile = LOGS_DIR . '/' . 'errors.log';
         
         if (!is_writable($logFile)) {
             throw new Exception('Error log file cannot be written to. Please give this file read/write permissions for the web server.');

@@ -36,7 +36,7 @@ class PluginTests extends PHPUnit_Framework_TestSuite
         $suite = new PHPUnit_Framework_TestSuite('Plugin Tests');
         $pluginTestDirs = array();
         foreach ($pluginDirIterator as $pluginDir) {
-            $pluginTestDir = PLUGIN_DIR . DIRECTORY_SEPARATOR . $pluginDir . DIRECTORY_SEPARATOR . 'tests'; 
+            $pluginTestDir = PLUGIN_DIR . '/' . $pluginDir . '/' . 'tests'; 
             if (!is_dir($pluginTestDir)) {
                 continue;
             }

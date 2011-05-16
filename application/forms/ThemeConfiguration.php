@@ -46,7 +46,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $themeName = $this->getThemeName();
         
         $theme = Theme::getAvailable($themeName);
-        $themeConfigIni = $theme->path . DIRECTORY_SEPARATOR . 'config.ini';
+        $themeConfigIni = $theme->path . '/config.ini';
 
         if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
 
@@ -161,7 +161,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $elementName = $element->getName();
         $fileName = $element->getFileName(null, false);
         $uploadedFileName = Theme::getUploadedFileName($this->getThemeName(), $elementName, $fileName);
-        $uploadedFilePath = $element->getDestination() . DIRECTORY_SEPARATOR . $uploadedFileName;
+        $uploadedFilePath = $element->getDestination() . '/' . $uploadedFileName;
         $element->addFilter('Rename', array('target' => $uploadedFilePath, 'overwrite' => true));
     }
 }

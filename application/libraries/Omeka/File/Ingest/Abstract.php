@@ -302,7 +302,7 @@ abstract class Omeka_File_Ingest_Abstract
             throw new Omeka_File_Ingest_Exception('Cannot write to the following directory: "'
                               . $dir . '"!');
         }
-        return $dir . DIRECTORY_SEPARATOR . $filename;
+        return $dir . '/' . $filename;
     }
     
     /**

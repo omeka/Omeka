@@ -301,7 +301,7 @@ class Omeka_Plugin_Loader
      */
     public function getPluginFilePath($pluginDirName)
     {
-        return $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.php';
+        return $this->_basePath . '/' . $pluginDirName . '/' . 'plugin.php';
     }
         
     /**

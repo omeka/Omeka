@@ -82,7 +82,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     public function appBootstrap()
     {        
         $this->core = new Omeka_Core('testing', array(
-            'config' => CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini'));
+            'config' => CONFIG_DIR . '/' . 'application.ini'));
         
         // No idea why we actually need to add the default routes.
         $this->frontController->getRouter()->addDefaultRoutes();
