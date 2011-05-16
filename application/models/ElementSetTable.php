@@ -37,14 +37,15 @@ class ElementSetTable extends Omeka_Db_Table
         return $this->fetchObjects($select);
     }
     
-    public function findForItems()
+    /**
+     * Find all element sets for Item record type. If the second param is set, 
+     * this will include all element sets that belong to the 'All' record type.
+     *
+     * @param boolean
+     */
+    public function findForItems($includeAll = true)
     {
-        $select = $this->getSelect();
-        $select->joinInner(array('rty'=>$this->getDb()->RecordType), 'rty.id = es.record_type_id', array());
-        $select->where('rty.name = "Item" OR rty.name = "All"');
-        // Exclude item-type by default?  
-        // $select->where('es.name != "Item Type"');
-        return $this->fetchObjects($select);
+        return $this->findByRecordType('Item', $includeAll);
     }
     
     public function findByName($name)

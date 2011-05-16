@@ -18,7 +18,7 @@
  * @subpackage Photos
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Photos.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Photos.php 23805 2011-03-16 00:55:40Z tjohns $
  */
 
 /**
@@ -58,8 +58,8 @@ require_once 'Zend/Gdata/Photos/PhotoFeed.php';
 class Zend_Gdata_Photos extends Zend_Gdata
 {
 
-    const PICASA_BASE_URI = 'http://picasaweb.google.com/data';
-    const PICASA_BASE_FEED_URI = 'http://picasaweb.google.com/data/feed';
+    const PICASA_BASE_URI = 'https://picasaweb.google.com/data';
+    const PICASA_BASE_FEED_URI = 'https://picasaweb.google.com/data/feed';
     const AUTH_SERVICE_NAME = 'lh2';
 
     /**

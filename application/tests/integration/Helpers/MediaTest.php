@@ -6,7 +6,7 @@
  * @package Omeka
  **/
 
-require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Media.php';
+require_once HELPER_DIR . '/Media.php';
 
 /**
  * 

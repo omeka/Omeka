@@ -38,7 +38,7 @@ class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
     public function init()
     {
         // Setup the ACL
-        include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
+        include CORE_DIR . '/' . 'acl.php';
         
         $this->_acl = $acl;
                 

@@ -35,8 +35,8 @@
         <tr>
             <th>Username</th>
             <th>Real Name</th>
+            <th>Email</th>
             <th>Role</th>
-            <th>Active?</th>
             <?php if (has_permission('Users', 'edit')): ?>
             <th>Edit</th>            
             <?php endif; ?>
@@ -50,8 +50,8 @@
         <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
             <td><?php echo html_escape($user->username);?></td>
             <td><?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?></td>
+            <td><?php echo html_escape($user->email); ?></td>
             <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape($user->role); ?></span></td>
-            <td><?php if($user->active):?>Active<?php else: ?>Not active<?php endif;?></td>
             <?php if (has_permission($user, 'edit')): ?>
             <td><?php echo link_to($user, 'edit', 'Edit', array('class'=>'edit')); ?></td>
             <?php endif; ?>     

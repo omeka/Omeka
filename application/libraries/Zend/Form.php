@@ -28,7 +28,7 @@ require_once 'Zend/Validate/Interface.php';
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Form.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Form.php 23950 2011-05-03 03:46:42Z ralph $
  */
 class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 {
@@ -1013,6 +1013,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * @param  string|Zend_Form_Element $element
      * @param  string $name
      * @param  array|Zend_Config $options
+     * @throws Zend_Form_Exception on invalid element
      * @return Zend_Form
      */
     public function addElement($element, $name = null, $options = null)
@@ -1050,6 +1051,9 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
             $this->_elements[$name] = $element;
             $this->_elements[$name]->addPrefixPaths($prefixPaths);
+        } else {
+            require_once 'Zend/Form/Exception.php';
+            throw new Zend_Form_Exception('Element must be specified by string or Zend_Form_Element instance');
         }
 
         $this->_order[$name] = $this->_elements[$name]->getOrder();
@@ -3276,7 +3280,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     /**
      * Load the default decorators
      *
-     * @return void
+     * @return Zend_Form
      */
     public function loadDefaultDecorators()
     {

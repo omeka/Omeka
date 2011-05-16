@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Slider.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Slider.php 23936 2011-05-02 20:06:46Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */
@@ -77,7 +77,7 @@ abstract class Zend_Dojo_View_Helper_Slider extends Zend_Dojo_View_Helper_Dijit
         }
 
         $content = '';
-        $params['value'] = $value;
+        $attribs['value'] = $value;
 
         if (!array_key_exists('onChange', $attribs)) {
             $attribs['onChange'] = "dojo.byId('" . $id . "').value = arguments[0];";

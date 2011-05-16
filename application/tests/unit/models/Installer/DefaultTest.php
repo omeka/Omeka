@@ -6,7 +6,7 @@
  * @package Omeka
  */
 
-require_once FORM_DIR . DIRECTORY_SEPARATOR . 'Install.php';
+require_once FORM_DIR . '/Install.php';
 
 /**
  * 
@@ -59,6 +59,7 @@ class Installer_DefaultTest extends PHPUnit_Framework_TestCase
         $this->form->setDefaults(array(
             'username' => 'foobar',
             'password' => 'foobar',
+            'password_confirm'  => 'foobar',
             'super_email' => 'foobar@example.com',
             'administrator_email'           => Omeka_Test_Resource_Db::SUPER_EMAIL, 
             'copyright'                     => Omeka_Test_Resource_Db::DEFAULT_COPYRIGHT, 
@@ -72,6 +73,7 @@ class Installer_DefaultTest extends PHPUnit_Framework_TestCase
             'per_page_public'               => Omeka_Form_Install::DEFAULT_PER_PAGE_PUBLIC, 
             'show_empty_elements'           => Omeka_Form_Install::DEFAULT_SHOW_EMPTY_ELEMENTS,
             'path_to_convert'               => '',
+            'tag_delimiter'                 => ',',
         ));
         $installer->setForm($this->form);
         $installer->install();

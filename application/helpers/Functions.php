@@ -65,7 +65,7 @@ function auto_discovery_link_tags() {
  **/
 function common($file, $vars = array(), $dir = 'common') 
 {
-    echo __v()->partial($dir . DIRECTORY_SEPARATOR . $file . '.php', $vars);
+    echo __v()->partial($dir . '/' . $file . '.php', $vars);
 }
 
 /**

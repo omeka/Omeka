@@ -119,8 +119,13 @@ class Taggable extends Omeka_Record_Mixin
      *              Returns false if $tags is empty. 
      *              Returns true if at least one tag in $tags is deleted.
      */
-    public function deleteTags($tags, $entityOrUser=null, $deleteAll=false, $delimiter=',')
+    public function deleteTags($tags, $entityOrUser=null, $deleteAll=false, $delimiter=null)
     {
+        // Set the tag_delimiter option if no delimiter was passed.
+        if (is_null($delimiter)) {
+            $delimiter = get_option('tag_delimiter');
+        }
+        
         if (!is_array($tags)) {
             $tags = $this->_getTagsFromString($tags, $delimiter);
         }
@@ -165,8 +170,12 @@ class Taggable extends Omeka_Record_Mixin
      * @param string $string A delimited string of tags
      * @return array An array of tag strings
      */
-    protected function _getTagsFromString($string, $delimiter=',')
+    protected function _getTagsFromString($string, $delimiter=null)
     {
+        // Set the tag_delimiter option if no delimiter was passed.
+        if (is_null($delimiter)) {
+            $delimiter = get_option('tag_delimiter');
+        }
         return array_diff(array_map('trim', explode($delimiter, $string)), array(''));
     }
     
@@ -177,7 +186,12 @@ class Taggable extends Omeka_Record_Mixin
      * @param Entity|User $entityOrUser The entity or user (in record form, for which a set of tags should be added)
      * @return void
      */    
-    public function addTags($tags, $entityOrUser, $delimiter=',') {
+    public function addTags($tags, $entityOrUser, $delimiter=null) {
+        // Set the tag_delimiter option if no delimiter was passed.
+        if (is_null($delimiter)) {
+            $delimiter = get_option('tag_delimiter');
+        }
+        
         if (!$this->record->id) {
             throw new Omeka_Record_Exception( 'A valid record ID # must be provided when tagging.' );
         }
@@ -200,7 +214,7 @@ class Taggable extends Omeka_Record_Mixin
             $tag = $this->tagTable->findOrNew(trim($tagName));
             
             if (!$tag->exists()) {
-                $tag->save();
+                $tag->forceSave();
             }
             
             $join = new Taggings;
@@ -217,8 +231,13 @@ class Taggable extends Omeka_Record_Mixin
      * Calculate the difference between a tag string and a set of tags
      * @return array Keys('removed','added')
      */
-    public function diffTagString($string, $tags=null, $delimiter=',')
+    public function diffTagString($string, $tags=null, $delimiter=null)
     {
+        // Set the tag_delimiter option if no delimiter was passed.
+        if (is_null($delimiter)) {
+            $delimiter = get_option('tag_delimiter');
+        }
+        
         if (!$tags) {
             $tags = $this->record->Tags;
         }
@@ -253,8 +272,13 @@ class Taggable extends Omeka_Record_Mixin
      * @param bool $deleteTags When a tag is designated for removal, this specifies whether to remove all instances of the tag or just for the current Entity
      * @return void
      */
-    public function applyTagString($string, $entity, $deleteTags = false, $delimiter=',')
+    public function applyTagString($string, $entity, $deleteTags = false, $delimiter=null)
     {
+        // Set the tag_delimiter option if no delimiter was passed.
+        if (is_null($delimiter)) {
+            $delimiter = get_option('tag_delimiter');
+        }
+        
         // add and remove taggings by entity for the record
         $tags = $this->entityTags($entity);
         $diff = $this->diffTagString($string, $tags, $delimiter);

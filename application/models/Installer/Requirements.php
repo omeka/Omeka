@@ -34,6 +34,7 @@ class Installer_Requirements
         $this->_checkExifModuleIsLoaded();
         $this->_checkModRewriteIsEnabled();
         $this->_checkArchiveStorageSetup();
+        $this->_checkFileinfoIsLoaded();
     }
     
     public function getErrorMessages()
@@ -104,7 +105,7 @@ class Installer_Requirements
     
     private function _checkHtaccessFilesExist()
     {
-        if (!file_exists(BASE_DIR . DIRECTORY_SEPARATOR . '.htaccess')) {
+        if (!file_exists(BASE_DIR . '/.htaccess')) {
             $header = 'Missing .htaccess File';
             $message = "Omeka's .htaccess file is missing. Please make sure this 
             file has been uploaded correctly and try again.";
@@ -187,4 +188,16 @@ class Installer_Requirements
         }
     }
     
+    private function _checkFileinfoIsLoaded()
+    {
+        if (!extension_loaded('fileinfo')) {
+            $header = '"fileinfo" module not loaded';
+            $message = "Without the "
+                     . "<a href=\"http://php.net/manual/en/book.fileinfo.php\"> "
+                     . "fileinfo module</a> loaded into PHP, the content type "
+                     . "and encoding of uploaded files about cannot be read. "
+                     . "The installer will disable file upload validation.";
+            $this->_warningMessages[] = compact('header', 'message');
+        }
+    }
 }

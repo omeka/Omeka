@@ -27,7 +27,7 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
         $directory = dirname($value);
         $newFilename = $this->renameFileForArchive($filename);
         
-        $targetPath = $directory . DIRECTORY_SEPARATOR . $newFilename;
+        $targetPath = $directory . '/' . $newFilename;
         $result = rename($value, $targetPath);
         
         return $targetPath;

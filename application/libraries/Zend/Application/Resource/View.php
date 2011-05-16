@@ -17,7 +17,7 @@
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: View.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: View.php 23992 2011-05-04 03:32:01Z ralph $
  */
 
 /**
@@ -77,6 +77,9 @@ class Zend_Application_Resource_View extends Zend_Application_Resource_ResourceA
             }
             if (isset($options['contentType'])) {
                 $this->_view->headMeta()->appendHttpEquiv('Content-Type', $options['contentType']);
+            }
+            if (isset($options['assign']) && is_array($options['assign'])) {
+                $this->_view->assign($options['assign']);
             }
         }
         return $this->_view;

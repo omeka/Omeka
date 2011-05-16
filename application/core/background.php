@@ -53,7 +53,7 @@ $processClass = $process->class;
 $processArgs = $process->getArguments();
 
 // Enable process logging.
-$logFile = LOGS_DIR . DIRECTORY_SEPARATOR . 'processes.log';
+$logFile = LOGS_DIR . '/processes.log';
 $logger = null;
 if ($core->getBootstrap()->getResource('Config')->log->processes && is_writable($logFile)) {
     // Set the writer.

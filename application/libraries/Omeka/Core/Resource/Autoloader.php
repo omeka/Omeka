@@ -10,7 +10,7 @@
 /**
  * An application resource for class autoloaders.
  *
- * Autoloading is also currently handled by {@link Omeka::autoload()}.
+ * Autoloading is also currently handled by Zend_Loader_Autoloader's fallback loader.
  * Note that this resource will not be loaded when using phased loading.
  *
  * @internal This implements Omeka internals and is not part of the public API.

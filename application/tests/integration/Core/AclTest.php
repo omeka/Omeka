@@ -23,7 +23,7 @@ class Core_AclTest extends PHPUnit_Framework_TestCase
      **/
     public function setUp()
     {
-        include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
+        include CORE_DIR . '/acl.php';
         $this->_acl = $acl;
     }
 

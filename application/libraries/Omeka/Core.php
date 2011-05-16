@@ -61,7 +61,7 @@ class Omeka_Core extends Zend_Application
         // instantiate Omeka_Core with no arguments.
         if (!$environment && !$options) {
             $environment = APPLICATION_ENV;
-            $options = CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini';
+            $options = CONFIG_DIR . '/' . 'application.ini';
         }
         parent::__construct($environment, $options);
         

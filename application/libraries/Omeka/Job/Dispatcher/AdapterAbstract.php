@@ -46,6 +46,16 @@ abstract class Omeka_Job_Dispatcher_AdapterAbstract implements Omeka_Job_Dispatc
     }
 
     /**
+     * Whether or not the given option has been set.
+     *
+     * @param string $name
+     */
+    public function hasOption($name)
+    {
+        return array_key_exists($name, $this->_options);
+    }
+
+    /**
      * Adapter implementations do not understand named queues by default, so 
      * this default implementation returns false.  Override this in subclasses 
      * to specify the correct behavior.

@@ -40,6 +40,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         'html_purifier_is_enabled',
         'html_purifier_allowed_html_elements',
         'html_purifier_allowed_html_attributes',
+        'tag_delimiter',
     );
     
     private $_options = array();

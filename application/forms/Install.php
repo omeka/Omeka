@@ -16,6 +16,7 @@
  **/
 class Omeka_Form_Install extends Omeka_Form
 {
+    const DEFAULT_TAG_DELIMITER = ',';
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
     const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
@@ -42,8 +43,37 @@ class Omeka_Form_Install extends Omeka_Form
         $this->addElement('password', 'password', array(
             'label' => 'Password',
             'description' => 'Must be at least 6 characters.', 
-            'validators' => array(array('StringLength', false, array(User::PASSWORD_MIN_LENGTH))), 
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'options' => array(
+                    'messages' => array(
+                        'isEmpty' => 'Password is required.'
+                    )
+                )),
+                array('validator' => 'Confirmation', 'options' => array(
+                    'field' => 'password_confirm',
+                    'messages' => array(
+                        'notMatch' => "Typed passwords do not match.")
+                )),
+                array('validator' => 'StringLength', 'options' => array(
+                    'min' => User::PASSWORD_MIN_LENGTH,
+                    'messages' => array(
+                        'stringLengthTooShort' => "Password must be at least %min% characters in length.")
+                ))
+            ),
             'required' => true
+        ));
+        
+        $this->addElement('password', 'password_confirm', array(
+            'label' => 'Re-type the Password',
+            'description' => 'Confirm your password',
+            'required' => true,
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'options' => array(
+                    'messages' => array(
+                        'isEmpty' => 'Password confirmation is required.'
+                    )
+                ))
+            )
         ));
         
         $this->addElement('text', 'super_email', array(
@@ -74,6 +104,21 @@ class Omeka_Form_Install extends Omeka_Form
         $this->addElement('text', 'author', array(
             'label' => 'Site Author Information'
         ));
+        
+        $this->addElement('text', 'tag_delimiter', array(
+            'label' => 'Tag Delimiter', 
+            'description' => 'Separate tags using this character(s).', 
+            'value' => self::DEFAULT_TAG_DELIMITER, 
+        ));
+        
+        // Allow the tag delimiter to be a whitespace character(s) (except for 
+        // new lines). The NotEmpty validator (and therefore the required flag) 
+        // considers spaces to be empty. Because of this we must set the 
+        // allowEmpty flag to false so Zend_Form_Element::isValid() passes an 
+        // "empty" value to the validators, and then, using the Regex validator, 
+        // match the value to a string containing one or more characters.
+        $this->getElement('tag_delimiter')->setAllowEmpty(false);
+        $this->getElement('tag_delimiter')->addValidator('regex', false, array('/^.+$/'));
         
         $this->addElement('text', 'fullsize_constraint', array(
             'label' => 'Fullsize Image Size',
@@ -131,14 +176,14 @@ class Omeka_Form_Install extends Omeka_Form
         ));
         
         $this->addDisplayGroup(
-            array('username', 'password', 'super_email'), 
+            array('username', 'password', 'password_confirm', 'super_email'), 
             'superuser_account', 
             array('legend' => 'Default Superuser Account')
         );
         
         $this->addDisplayGroup(
             array('administrator_email', 'site_title', 'description', 
-                  'copyright', 'author', 'fullsize_constraint', 
+                  'copyright', 'author', 'tag_delimiter', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
                   'per_page_admin', 'per_page_public', 'show_empty_elements', 
                   'path_to_convert'), 

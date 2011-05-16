@@ -41,7 +41,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Label.php 23779 2011-03-01 18:40:33Z matthew $
+ * @version    $Id: Label.php 23960 2011-05-03 10:58:52Z yoshida@zend.co.jp $
  */
 class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
 {
@@ -285,7 +285,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
     /**
      * Get label to render
      *
-     * @return void
+     * @return string
      */
     public function getLabel()
     {

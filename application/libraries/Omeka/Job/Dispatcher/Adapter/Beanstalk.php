@@ -22,6 +22,12 @@ class Omeka_Job_Dispatcher_Adapter_Beanstalk extends Omeka_Job_Dispatcher_Adapte
     private $_pheanstalk;
 
     /**
+     * Because of the potential for long-running imports (and the fact that 
+     * jobs are not idemopotent), TTR should be pretty high by default.
+     */
+    const DEFAULT_TTR = 3600;
+
+    /**
      * Beanstalk understands the concept of 'tubes' instead of named queues, so 
      * set the appropriate 'tube' to dispatch jobs.
      *
@@ -34,7 +40,12 @@ class Omeka_Job_Dispatcher_Adapter_Beanstalk extends Omeka_Job_Dispatcher_Adapte
 
     public function send($encodedJob, array $metadata)
     {
-        return $this->_pheanstalk()->put($encodedJob);
+        return $this->_pheanstalk()->put(
+            $encodedJob,
+            Pheanstalk::DEFAULT_PRIORITY,
+            Pheanstalk::DEFAULT_DELAY,
+            $this->getOption('ttr')
+        );
     }
 
     private function _pheanstalk()
@@ -43,5 +54,18 @@ class Omeka_Job_Dispatcher_Adapter_Beanstalk extends Omeka_Job_Dispatcher_Adapte
             $this->_pheanstalk = new Pheanstalk($this->getOption('host'));
         }
         return $this->_pheanstalk;
+    }
+
+    public function getOption($name)
+    {
+        switch ($name) {
+            case 'ttr':
+                if ($this->hasOption('ttr')) {
+                    return parent::getOption('ttr');
+                } else {
+                    return self::DEFAULT_TTR;
+                }
+        }
+        return parent::getOption($name);
     }
 }

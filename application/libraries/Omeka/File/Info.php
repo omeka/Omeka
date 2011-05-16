@@ -180,11 +180,9 @@ class Omeka_File_Info
                 $id3->Analyze($this->_filePath);
                 $this->_id3 = $id3;
             } catch (getid3_exception $e) {
-                // Ignore errors where the file format could not be determined.
-                if (strstr($e->getMessage(), 'Unable to determine file format')) {
-                    return false;
-                }
-                throw $e;
+                $message = $e->getMessage();
+                _log("getID3: $message");
+                return false;
             }        
         }
         return $this->_id3;

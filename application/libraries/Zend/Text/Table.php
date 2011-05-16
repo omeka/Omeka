@@ -16,7 +16,7 @@
  * @package   Zend_Text_Table
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Table.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version   $Id: Table.php 23953 2011-05-03 05:47:39Z ralph $
  */
 
 /**
@@ -341,6 +341,7 @@ class Zend_Text_Table
             }
 
             require_once 'Zend/Text/Table/Row.php';
+            require_once 'Zend/Text/Table/Column.php';
 
             $data   = $row;
             $row    = new Zend_Text_Table_Row();

@@ -17,7 +17,7 @@
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Client.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Client.php 23969 2011-05-03 14:48:31Z ralph $
  */
 
 
@@ -333,22 +333,33 @@ class Zend_XmlRpc_Client
                 if (!is_array($params)) {
                     $params = array($params);
                 }
-                foreach ($params as $key => $param) {
 
+                foreach ($params as $key => $param)
+                {
                     if ($param instanceof Zend_XmlRpc_Value) {
                         continue;
                     }
 
-                    $type = Zend_XmlRpc_Value::AUTO_DETECT_TYPE;
-                    foreach ($signatures as $signature) {
-                        if (!is_array($signature)) {
-                            continue;
+                    if (count($signatures) > 1) {
+                        $type = Zend_XmlRpc_Value::getXmlRpcTypeByValue($param);
+                        foreach ($signatures as $signature) {
+                            if (!is_array($signature)) {
+                                continue;
+                            }
+                            if (isset($signature['parameters'][$key])) {
+                                if ($signature['parameters'][$key] == $type) {
+                                    break;
+                                }
+                            }
                         }
+                    } elseif (isset($signatures[0]['parameters'][$key])) {
+                        $type = $signatures[0]['parameters'][$key];
+                    } else {
+                        $type = null;
+                    }
 
-                        if (isset($signature['parameters'][$key])) {
-                            $type = $signature['parameters'][$key];
-                            $type = in_array($type, $validTypes) ? $type : Zend_XmlRpc_Value::AUTO_DETECT_TYPE;
-                        }
+                    if (empty($type) || !in_array($type, $validTypes)) {
+                        $type = Zend_XmlRpc_Value::AUTO_DETECT_TYPE;
                     }
 
                     $params[$key] = Zend_XmlRpc_Value::getXmlRpcValue($param, $type);

@@ -18,7 +18,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
     
     public function setUp()
     {
-        if (!is_dir(PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . self::THEME)) {
+        if (!is_dir(PUBLIC_THEME_DIR . '/' . self::THEME)) {
             $this->markTestSkipped("Cannot test ThemesController without the '" . self::THEME . "' theme.");
         }
         parent::setUp();   

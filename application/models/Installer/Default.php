@@ -121,6 +121,7 @@ class Installer_Default implements InstallerInterface
             'html_purifier_is_enabled' => 1,
             'html_purifier_allowed_html_elements' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()),
             'html_purifier_allowed_html_attributes' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()),
+            'tag_delimiter'                 => ',',
         ));
         $task->install($this->_db);
     }

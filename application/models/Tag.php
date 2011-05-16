@@ -92,7 +92,7 @@ class Tag extends Omeka_Record {
      * 3) Loop through the new tags, loop through the joins and create a new one for each new tag
      * @return void
      */
-    public function rename($new_names, $user_id = null, $delimiter = ",") 
+    public function rename($new_names, $user_id = null) 
     {
         $joins = array();
         

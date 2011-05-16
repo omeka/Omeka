@@ -3,17 +3,6 @@ if (typeof Omeka === 'undefined') {
 }
 
 /**
- * Flash divs with the "alert" class.
- * Called on document.ready.
- */
-Omeka.alertBox = function () {
-    var alerts = jQuery('div.alert');
-    alerts.css('backgroundColor', 'white');
-    alerts.css('backgroundColor', '#ff9');
-    alerts.animate({backgroundColor: 'white'}, 1000);
-};
-
-/**
  * Add the TinyMCE WYSIWYG editor to a page.
  * Default is to add to all textareas.
  *
@@ -50,10 +39,6 @@ Omeka.wysiwyg = function (params) {
 
     tinyMCE.init(initParams);
 };
-
-// Flash "alert" divs.
-jQuery(window).load(Omeka.alertBox);
-
 
 jQuery(document).ready(function () {
     // Adds confirm dialog for delete buttons.

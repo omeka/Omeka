@@ -314,7 +314,7 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  */
 function add_mime_display_type($mimeTypes, $callback, array $options=array())
 {
-    require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Media.php';
+    require_once HELPER_DIR . '/' . 'Media.php';
     Omeka_View_Helper_Media::addMimeTypes($mimeTypes, $callback, $options);
 }
 

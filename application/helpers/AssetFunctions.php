@@ -201,7 +201,7 @@ function src($file, $dir=null, $ext = null)
         $file .= '.'.$ext;
     }
     if ($dir !== null) {
-        $file = $dir.DIRECTORY_SEPARATOR.$file;
+        $file = $dir. '/' .$file;
     }
     return web_path_to($file);
 }
@@ -220,8 +220,8 @@ function physical_path_to($file)
 
     foreach ($paths as $path) {
         list($physical, $web) = $path;
-        if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
-            return $physical . DIRECTORY_SEPARATOR . $file;
+        if(file_exists($physical . '/' . $file)) {
+            return $physical . '/' . $file;
         }
     }
     throw new Exception( "Could not find file '$file'!" );
@@ -239,7 +239,7 @@ function web_path_to($file)
     $paths = $view->getAssetPaths();
     foreach ($paths as $path) {
         list($physical, $web) = $path;
-        if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
+        if(file_exists($physical . '/' . $file)) {
             return $web . '/' . $file;
         }
     }

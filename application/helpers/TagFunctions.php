@@ -95,8 +95,13 @@ function item_tags_as_cloud($order = 'alpha', $tagsAreLinked = true, $item=null,
  * @param int|null $limit The maximum number of tags to return (get all of the tags if null)
  * @return string HTML
  **/
-function item_tags_as_string($delimiter = ', ', $order = 'alpha',  $tagsAreLinked = true, $item=null, $limit=null)
+function item_tags_as_string($delimiter = null, $order = 'alpha',  $tagsAreLinked = true, $item=null, $limit=null)
 {
+    // Set the tag_delimiter option if no delimiter was passed.
+    if (is_null($delimiter)) {
+        $delimiter = get_option('tag_delimiter') . ' ';
+    }
+    
     if (!$item) {
         $item = get_current_item();
     }
@@ -171,8 +176,13 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
  * @param string $delimiter ', ' (comma and whitespace) by default
  * @return string HTML
  **/
-function tag_string($recordOrTags = null, $link=null, $delimiter=', ')
+function tag_string($recordOrTags = null, $link=null, $delimiter=null)
 {
+    // Set the tag_delimiter option if no delimiter was passed.
+    if (is_null($delimiter)) {
+        $delimiter = get_option('tag_delimiter') . ' ';
+    }
+    
 	if (!$recordOrTags) {
 	    $recordOrTags = array();
 	}

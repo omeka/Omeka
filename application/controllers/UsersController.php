@@ -313,7 +313,7 @@ class UsersController extends Omeka_Controller_Action
     public function loginAction()
     {
         // require_once is necessary because lacking form autoloading.
-        require_once APP_DIR .DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR .'Login.php';
+        require_once APP_DIR . '/forms/Login.php';
         $loginForm = new Omeka_Form_Login;
         $loginForm = apply_filters('login_form', $loginForm);
         

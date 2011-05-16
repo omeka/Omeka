@@ -150,7 +150,11 @@ class Omeka_Plugin_Loader
         
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
-            return;
+            if ($force) {
+                throw new Omeka_Plugin_Loader_Exception("The $pluginDirName plugin could not be loaded.");
+            } else {
+                return;
+            }
         }
 
         // If the current plugin is already on the waiting list, don't load it.
@@ -297,7 +301,7 @@ class Omeka_Plugin_Loader
      */
     public function getPluginFilePath($pluginDirName)
     {
-        return $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.php';
+        return $this->_basePath . '/' . $pluginDirName . '/' . 'plugin.php';
     }
         
     /**

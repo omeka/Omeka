@@ -18,7 +18,7 @@
  * @subpackage Gbase
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Gbase.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Gbase.php 23805 2011-03-16 00:55:40Z tjohns $
  */
 
 /**
@@ -63,12 +63,12 @@ class Zend_Gdata_Gbase extends Zend_Gdata
     /**
      * Path to the customer items feeds on the Google Base server.
      */
-    const GBASE_ITEM_FEED_URI = 'http://www.google.com/base/feeds/items';
+    const GBASE_ITEM_FEED_URI = 'https://www.google.com/base/feeds/items';
 
     /**
      * Path to the snippets feeds on the Google Base server.
      */
-    const GBASE_SNIPPET_FEED_URI = 'http://www.google.com/base/feeds/snippets';
+    const GBASE_SNIPPET_FEED_URI = 'https://www.google.com/base/feeds/snippets';
 
     /**
      * Authentication service name for Google Base

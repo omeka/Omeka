@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ComboBox.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ComboBox.php 23931 2011-05-02 19:32:51Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */
@@ -100,6 +100,10 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
             return $html;
         }
 
+        // required for correct type casting in declerative mode 
+        if (isset($params['autocomplete'])) {
+            $params['autocomplete'] = ($params['autocomplete']) ? 'true' : 'false';
+        }
         // do as normal select
         $attribs = $this->_prepareDijit($attribs, $params, 'element');
         return $this->view->formSelect($id, $value, $attribs, $options);

@@ -67,7 +67,8 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'display_system_info'           => true,
             'html_purifier_is_enabled'      => '1',
             'html_purifier_allowed_html_elements'   => 'foo',
-            'html_purifier_allowed_html_attributes' => 'bar'          
+            'html_purifier_allowed_html_attributes' => 'bar',
+            'tag_delimiter'                 => ',',
         ));
         try {
             $task->install($this->db);
@@ -104,7 +105,8 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'display_system_info'           => true,
             'html_purifier_is_enabled'      => '1',
             'html_purifier_allowed_html_elements'   => 'foo',
-            'html_purifier_allowed_html_attributes' => 'bar'                
+            'html_purifier_allowed_html_attributes' => 'bar',
+            'tag_delimiter'                 => ',',
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(

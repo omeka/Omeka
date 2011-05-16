@@ -46,7 +46,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $themeName = $this->getThemeName();
         
         $theme = Theme::getAvailable($themeName);
-        $themeConfigIni = $theme->path . DIRECTORY_SEPARATOR . 'config.ini';
+        $themeConfigIni = $theme->path . '/config.ini';
 
         if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
 
@@ -58,6 +58,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
             $this->setConfig($configIni);
             $this->setAction('');
             $this->setAttrib('enctype', 'multipart/form-data');
+            $this->setAttrib('class', 'theme-configuration');
 
             // add the 'Save Changes' submit button                      
             $this->addElement(
@@ -123,6 +124,12 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
 
         $options = $this->getThemeOptions();
         $fileName = @$options[$element->getName()];
+        if ($fileName) {
+            $storage = Zend_Registry::get('storage');
+            $fileUri = $storage->getUri($storage->getPathByType($fileName, 'theme_uploads'));
+        } else {
+            $fileUri = null;
+        }
 
         // Add extension/mimetype filtering.
         if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) != '1') {
@@ -138,7 +145,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
 
         // add a hidden field to store whether already exists
         $hiddenElement = new Zend_Form_Element_Hidden(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $element->getName());
-        $hiddenElement->setValue($fileName);
+        $hiddenElement->setValue($fileUri);
         $hiddenElement->setDecorators(array('ViewHelper', 'Errors'));
         $hiddenElement->setIgnore(true);
         $this->addElement($hiddenElement);
@@ -154,7 +161,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $elementName = $element->getName();
         $fileName = $element->getFileName(null, false);
         $uploadedFileName = Theme::getUploadedFileName($this->getThemeName(), $elementName, $fileName);
-        $uploadedFilePath = $element->getDestination() . DIRECTORY_SEPARATOR . $uploadedFileName;
+        $uploadedFilePath = $element->getDestination() . '/' . $uploadedFileName;
         $element->addFilter('Rename', array('target' => $uploadedFilePath, 'overwrite' => true));
     }
 }

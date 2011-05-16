@@ -109,8 +109,8 @@ class Installer_Task_Schema implements Installer_TaskInterface
     public function useDefaultTables()
     {
         foreach ($this->_defaultTables as $tableName) {
-            $this->_tables[$tableName] = CORE_DIR . DIRECTORY_SEPARATOR 
-                . 'schema' . DIRECTORY_SEPARATOR . $tableName . '.sql';
+            $this->_tables[$tableName] = CORE_DIR . '/'
+                . 'schema' . '/' . $tableName . '.sql';
         }
     }
             

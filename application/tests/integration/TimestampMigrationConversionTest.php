@@ -17,7 +17,7 @@ class TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         $this->core = new Omeka_Core('testing', array(
-            'config' => CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini'));
+            'config' => CONFIG_DIR . '/' . 'application.ini'));
             
         $this->db = $this->core->getBootstrap()->bootstrap('Db')->db;
         

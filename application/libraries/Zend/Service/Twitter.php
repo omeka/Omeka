@@ -17,7 +17,7 @@
  * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Twitter.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Twitter.php 23877 2011-04-28 20:17:01Z ralph $
  */
 
 /**
@@ -362,6 +362,14 @@ class Zend_Service_Twitter extends Zend_Rest_Client
                 case 'page':
                     $_params['page'] = (int) $value;
                     break;
+                case 'max_id':
+                    $_params['max_id'] = $this->_validInteger($value);
+                    break;
+                case 'include_rts':
+                case 'trim_user':
+                case 'include_entities':
+                    $_params[strtolower($key)] = $value ? '1' : '0';
+                    break;                    
                 default:
                     break;
             }

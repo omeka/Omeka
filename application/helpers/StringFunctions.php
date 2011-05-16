@@ -194,3 +194,18 @@ function text_to_id($text, $prepend=null, $delimiter='-')
 	$prepend = (string) $prepend;
 	return !empty($prepend) ? join($delimiter, array($prepend, $id)) : $id;
 }
+
+/**
+ * Converts any URLs in a given string to links.
+ *
+ * @since 1.4
+ * @param string $str The string to be searched for URLs to convert to links.
+ * @return string
+ **/
+function url_to_link($str)
+{
+    $pattern = "/(\bhttps?:\/\/\S+\b)/e";
+    $replace = '"<a href=\"".htmlspecialchars("$1")."\">$1</a>"';
+    $str = preg_replace($pattern, $replace, $str);
+    return $str;
+}

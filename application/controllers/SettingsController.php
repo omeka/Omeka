@@ -17,6 +17,7 @@
  **/
 class SettingsController extends Omeka_Controller_Action
 {    
+    const DEFAULT_TAG_DELIMITER = ',';
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
     const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
@@ -86,7 +87,7 @@ class SettingsController extends Omeka_Controller_Action
             return false;
         }        
         // Append the binary to the given path.
-        $filePath = rtrim($dirToIm, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR 
+        $filePath = rtrim($dirToIm, '/') . '/' 
                   . Omeka_File_Derivative_Image_Creator::IMAGEMAGICK_COMMAND;
         
         //Make sure the file is executable
@@ -105,7 +106,7 @@ class SettingsController extends Omeka_Controller_Action
     
     private function _getForm()
     {
-        require_once APP_DIR . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'GeneralSettings.php';
+        require_once APP_DIR . '/forms/GeneralSettings.php';
         $form = new Omeka_Form_GeneralSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
         fire_plugin_hook('general_settings_form', $form);
