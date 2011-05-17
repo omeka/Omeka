@@ -97,8 +97,8 @@ function display_js($includeDefaults = true)
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
                        ->prependFile(src('jquery', $dir, 'js'));
         } else {
-            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js')
-                       ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js');
+            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js')
+                       ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js');
         }
     }
 
