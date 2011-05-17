@@ -34,6 +34,7 @@ class ItemsController extends Omeka_Controller_Action
         'modify-tags' => array('POST'),
         'power-edit' => array('POST'),
         'change-type' => array('POST'),
+        'batch-edit-save'   => array('POST'),
     );
 
     public function init() 
@@ -283,24 +284,43 @@ class ItemsController extends Omeka_Controller_Action
     ///// END AJAX ACTIONS /////
     
     /**
-     * Change the 'public' or 'featured' status of items
+     * Batch editing of Items. If this is an AJAX request, it will
+     * render the 'batch-edit' as a partial.
      * 
      * @return void
      **/
-    public function powerEditAction()
+    public function batchEditAction()
     {
-        /*POST in this format:
-                     items[1][public],
-                     items[1][featured],
-                    items[1][id],
-                    items[2]...etc
-        */
+        /**
+         * Only show this view as a partial if it's being pulled via
+         * XmlHttpRequest
+         */
+        $this->view->isPartial = $this->getRequest()->isXmlHttpRequest();
+        
+        $itemIds = $this->_getParam('items');
+        if (empty($itemIds)) {
+            $this->flashError('You must choose some items to batch edit.');
+            return $this->_helper->redirector->goto('browse', 'items');
+        }
+
+        $this->view->assign(compact('itemIds'));
+
+        $this->render('batch-edit');
+    }
+    
+    /**
+     * Processes batch edit information. Only accessible via POST.
+     * 
+     * @return void
+     **/
+    public function batchEditSaveAction()
+    {
         $errorMessage = null;
         if (!$this->isAllowed('makePublic')) {
             $errorMessage = 
                 'User is not allowed to modify visibility of items.';
         }
-            
+
         if (!$this->isAllowed('makeFeatured')) {
             $errorMessage = 
                 'User is not allowed to modify featured status of items.';
@@ -310,31 +330,16 @@ class ItemsController extends Omeka_Controller_Action
             return $this->_helper->redirector->goto('browse', 'items');
         }
 
-        if ($itemArray = $this->_getParam('items')) {
-                
-            foreach ($itemArray as $fields) {
-                
-                if (!array_key_exists('id', $fields) ||
-                    !array_key_exists('public', $fields) ||
-                    !array_key_exists('featured', $fields)
-                ) { 
-                    $this->flashError('Power-edit request was mal-formed!');
-                    return $this->_helper->redirector->goto('browse', 'items');
-                }
-                
-                $item = $this->findById($fields['id']);
-                $item->setPublic($fields['public']);
-                $item->setFeatured($fields['featured']);
-                $item->forceSave();
-            }
+        if ($itemIds = $this->_getParam('items')) {
+            $dispatcher = Zend_Registry::get('job_dispatcher');
+            $dispatcher->setQueueName('batchEditItems');
+            $metadata = $this->_getParam('metadata');
+            $delete = $this->_getParam('delete');
+            $dispatcher->send('Item_BatchEditJob', array('itemIds' => $itemIds, 'delete' => $delete, 'metadata'  => $metadata));
         }
-            
+
         $this->flashSuccess('The items were successfully changed!');
-        
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $this->_helper->redirector->gotoUrl($_SERVER['HTTP_REFERER']);
-        } else {
-            $this->_helper->redirector->goto('browse', 'items');
-        }
+
+        $this->_helper->redirector->goto('browse', 'items');
     }
 }
