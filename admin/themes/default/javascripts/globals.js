@@ -43,14 +43,11 @@ Omeka.wysiwyg = function (params) {
 jQuery(document).ready(function () {
     // Adds confirm dialog for delete buttons.
     jQuery('.delete-confirm').click(function () {
-        if (jQuery(this).is('input')) {
-            var url = jQuery(this).parents('form').attr('action');
-        } else if (jQuery(this).is('a')) {
-            var url = jQuery(this).attr('href');
-        }
-        jQuery.post(url, function (response){
-            jQuery(response).dialog({modal:true});
-        });
-        return false;
+		var url = jQuery(this).parents('form').attr('action');
+		jQuery.post(url, function (response){
+			jQuery(response).dialog({modal:true});
+		});
+		return false;
     });
+
 });

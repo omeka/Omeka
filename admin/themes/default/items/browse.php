@@ -1,164 +1,63 @@
 <?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 <h1>Browse Items (<?php echo total_results();?> total)</h1>
 <p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>">Add an Item</a></p>
+
+<?php if ( total_results() ): ?>
+
+<?php 
+$browseView = 'simple';
+if (isset($_GET['view']) && $_GET['view'] == 'detailed'):
+    $browseView = 'detailed';
+endif; ?>
+<ul id="section-nav" class="navigation <?php echo $browseView; ?>">
+<?php
+    $section_nav = array(
+        'List View' => current_uri(array('view'=>'simple')), 
+        'Detailed View' => current_uri(array('view'=>'detailed'))
+        );
+    
+    $section_nav = apply_filters('admin_navigation_items_browse', $section_nav, $items);
+                
+    echo nav($section_nav);
+?>
+</ul>
+<?php endif; ?>
+
 <div id="primary">
     <?php echo flash(); ?>
-    <?php if ( total_results() ): ?>
-    <script type="text/javascript">
-        jQuery(window).load(function() {
-
-            var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
-            var globalCheckbox = jQuery('table#items th:first-child').html('<input type="checkbox">').find('input');
-            var batchEditSubmit = jQuery('.batch-edit-option input');
-
-            jQuery('.item-details').hide();
-            jQuery('.action-links').prepend('<li class="details">Details</li>');
-
-            jQuery('tr.item').each(function() {
-                var itemDetails = jQuery(this).find('.item-details');
-                if (jQuery.trim(itemDetails.html()) != '') {
-                    jQuery(this).find('.details').css({'color': '#389', 'font-weight' : 'bold', 'cursor': 'pointer'}).click(function() {
-                        itemDetails.slideToggle('fast');
-                    });
-                }
-            });
-
-            /**
-             * Disable the batch submit button first, will be enabled once item
-             * checkboxes are checked.
-             */
-            batchEditSubmit.attr('disabled', 'disabled').click(function() {
-                var form = jQuery(this).parents('form');
-                var url = jQuery(form).attr('action');
-                var data = jQuery(form).serialize();
-                jQuery.get(
-                    url,
-                    data,
-                    function (response) {
-                        jQuery(response).dialog({
-                            'modal': true,
-                            'minWidth': '800',
-                            'title': 'Batch Edit Items'
-                        });
-                    }
-                );
-                return false;
-            });
-            
-            /**
-             * Check all the itemCheckboxes if the globalCheckbox is checked.
-             */
-            globalCheckbox.change(function() {
-                var check = jQuery(this).attr('checked');
-                itemCheckboxes.attr("checked", check);
-                checkBatchEditSubmitButton();
-            });
-
-            /**
-             * Unchecks the global checkbox if any of the itemCheckboxes are
-             * unchecked.
-             */
-            itemCheckboxes.change(function(){
-                if (!jQuery(this).attr("checked")) {
-                    globalCheckbox.attr("checked", false);
-                }
-                checkBatchEditSubmitButton();
-            });
-            
-            /**
-             * Function to check whether the batchEditSubmit button should be
-             * enabled. If any of the itemCheckboxes is checked, the
-             * batchEditSubmit button is enabled.
-             */
-            function checkBatchEditSubmitButton() {
-                var checked = false;
-                itemCheckboxes.each(function() {
-                    if (jQuery(this).attr("checked")) {
-                        checked = true;
-                    }
-                });
-                
-                if (checked) {
-                    batchEditSubmit.removeAttr('disabled');
-                } else {
-                    batchEditSubmit.attr('disabled', 'disabled');
-                }
-            }
-        });
-    </script>
+    <?php if ( total_results() ): ?>    
     <div id="browse-meta" class="group">
-        <ul id="items-sort" class="navigation">
-            <li><strong>Quick Filter</strong></li>
-        <?php
-            echo nav(array(
-                'All' => uri('items'),
-                'Public' => uri('items/browse?public=1'),
-                'Private' => uri('items/browse?public=0'),
-                'Featured' => uri('items/browse?featured=1')
-                ));
-        ?>
-        </ul>
     	<div id="simple-search-form">
+    	    <ul id="items-sort" class="navigation">
+            <?php
+                echo nav(array(
+                    'All' => uri('items'), 
+                    'Public' => uri('items/browse?public=1'),
+                    'Private' => uri('items/browse?public=0'),
+                    'Featured' => uri('items/browse?featured=1')
+                    ));
+            ?>
+            </ul>
     		<?php echo simple_search(); ?>
     		<?php echo link_to_advanced_search('Advanced Search', array('id' => 'advanced-search-link')); ?>
     	</div>
+
+        <div class="pagination"><?php echo pagination_links(); ?></div>
 	</div>
     
-<form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="get" accept-charset="utf-8">
-    <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
-    </div>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
-    <table id="items" class="simple" cellspacing="0" cellpadding="0">
-        <thead>
-            <tr>
-            <?php echo browse_headings(array(
-                'Select'    => null,
-                'Title' => 'Dublin Core,Title',
-                'Creator' => 'Dublin Core,Creator',
-                'Date Added' => 'added')); ?>
-            </tr>
-        </thead>
-        <tbody>
-    <?php $key = 0; ?>
+<form id="items-browse" action="<?php echo html_escape(uri('items/power-edit')); ?>" method="post" accept-charset="utf-8">
 
-    <?php while($item = loop_items()): ?>
-    <tr class="item <?php if(++$key%2==1) echo 'odd'; else echo 'even'; ?>">
-        <?php $id = item('id'); ?>
-        <td scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" /></td> 
-        <td class="item-info">
-            <span class="title"><?php echo link_to_item(); ?></span>
-            <ul class="action-links group">
-                <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
-                <li><?php echo link_to_item('Edit', array(), 'edit'); ?></li>
-                <?php endif; ?>
-                <?php if (has_permission('Items', 'delete')): ?>
-                <li><?php echo link_to_item('Delete', array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
-                <?php endif; ?>
-            </ul>
-            <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
-            <div class="item-details">
-                <?php echo snippet_by_word_count(item('Dublin Core', 'Description'), 40); ?>
-                <ul>
-                    <li><strong>Collection:</strong> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
-                    <li><strong>Tags:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo 'No Tags'; ?></li>
-                </ul>
-                <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
-            </div>
-        </td>
-        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>    
-        <td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
-    </tr>
-    <?php endwhile; ?>
-    </tbody>
-    </table>
-    <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
-    </div>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
+<fieldset id="view-choice">
+    <?php common("$browseView-view", compact('items'), 'items'); ?>
+</fieldset>
+<div class="pagination"><?php echo pagination_links(); ?></div>
+
+<fieldset>
+    <input type="submit" class="submit" id="save-changes" name="submit" value="Save Changes" />
+</fieldset>
 </form>
 
-<div id="output-formats">
+<div>
     <h2>Output Formats</h2>
     <?php echo output_format_list(false); ?>
 </div>
