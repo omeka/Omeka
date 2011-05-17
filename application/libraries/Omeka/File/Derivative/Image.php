@@ -76,7 +76,7 @@ class Omeka_File_Derivative_Image
         // Assert that this is both a valid path and a directory (cannot be a 
         // script).
         if (($cleanPath = realpath($rawPath)) && is_dir($cleanPath)) {
-            $imPath = rtrim($cleanPath, '/') . '/' . self::IMAGEMAGICK_COMMAND;
+            $imPath = rtrim($cleanPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_COMMAND;
             return $imPath;
         } else {
             throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');

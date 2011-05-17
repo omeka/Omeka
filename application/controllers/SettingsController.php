@@ -87,7 +87,7 @@ class SettingsController extends Omeka_Controller_Action
             return false;
         }        
         // Append the binary to the given path.
-        $filePath = rtrim($dirToIm, '/') . '/' 
+        $filePath = rtrim($dirToIm, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
                   . Omeka_File_Derivative_Image::IMAGEMAGICK_COMMAND;
         
         //Make sure the file is executable
