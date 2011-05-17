@@ -27,6 +27,9 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
         $this->db = $this->core->getBootstrap()->db;
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
+
+        // Hack: add_plugin_hook() still doesn't allow arbitrary namespaces.
+        $this->pluginbroker->setCurrentPluginDirName('__global__');
     }
     
     public function assertPreConditions()
