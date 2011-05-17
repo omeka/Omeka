@@ -20,6 +20,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
     const AWS_SECRET_KEY_OPTION = 'secretAccessKey';
     const REGION_OPTION = 'region';
     const BUCKET_OPTION = 'bucket';
+    const EXPIRATION_OPTION = 'expiration';
 
     /**
      * @var Zend_Service_Amazon_S3
@@ -79,10 +80,13 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
     {
         $objectName = $this->_getObjectName($dest);
 
-        // Currently, we need to set the objects to have public read
-        // access; Zend cannot generate URLs to give temporary access
-        // to private objects.
-        $meta = array(Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PRIVATE);
+        // If an expiration time is set, we're uploading private files
+        // and using signed URLs. If not, we're uploading public files.
+        if ($this->_getExpiration()) {
+            $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PRIVATE;
+        } else {
+            $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ;
+        }
             
         $status = $this->_s3->putFileStream($source, $objectName, $meta);
 
@@ -141,29 +145,35 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
      */
     public function getUri($path)
     {
-        $date = new Zend_Date();
-        $date->add('10', Zend_Date::MINUTE);
-
+        $endpoint = $this->_s3->getEndpoint();
         $object = urlencode($this->_getObjectName($path));
 
-        $accessKeyId = $this->_options[self::AWS_KEY_OPTION];
-        $secretKey = $this->_options[self::AWS_SECRET_KEY_OPTION];
+        $uri = "$endpoint/$object";
 
-        $expires = $date->getTimestamp();
-        $stringToSign = "GET\n\n\n$expires\n/$object";
+        if ($expiration = $this->_getExpiration()) {
+            $date = new Zend_Date();
+            $date->add($expiration, Zend_Date::MINUTE);
 
-        $signature = base64_encode(
-            Zend_Crypt_Hmac::compute($secretKey, 'sha1',
-                utf8_encode($stringToSign), Zend_Crypt_Hmac::BINARY));
+            $accessKeyId = $this->_options[self::AWS_KEY_OPTION];
+            $secretKey = $this->_options[self::AWS_SECRET_KEY_OPTION];
 
-        $query['AWSAccessKeyId'] = $accessKeyId;
-        $query['Expires'] = $expires;
-        $query['Signature'] = $signature;
+            $expires = $date->getTimestamp();
+            $stringToSign = "GET\n\n\n$expires\n/$object";
 
-        $queryString = http_build_query($query);
+            $signature = base64_encode(
+                Zend_Crypt_Hmac::compute($secretKey, 'sha1',
+                    utf8_encode($stringToSign), Zend_Crypt_Hmac::BINARY));
 
-        $endpoint = $this->_s3->getEndpoint();
-        return "$endpoint/$object?$queryString";
+            $query['AWSAccessKeyId'] = $accessKeyId;
+            $query['Expires'] = $expires;
+            $query['Signature'] = $signature;
+
+            $queryString = http_build_query($query);
+
+            $uri .= "?$queryString";
+        }
+
+        return $uri;
     }
 
     /**
@@ -186,5 +196,18 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
     private function _getObjectName($path)
     {
         return $this->_getBucketName() . '/' . $path;
+    }
+
+    /**
+     * Normalizes and returns the expiration time.
+     *
+     * Converts to integer and returns zero for all non-positive numbers.
+     *
+     * @return int
+     */
+    private function _getExpiration()
+    {
+        $expiration = (int) @$this->_options[self::EXPIRATION_OPTION];
+        return $expiration > 0 ? $expiration : 0;
     }
 }

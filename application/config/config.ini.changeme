@@ -59,8 +59,16 @@ mail.transport.type = "Sendmail"
 
 ; jobs.dispatcher = "Omeka_Job_Dispatcher_Adapter_Synchronous"
 
-; Sample S3 storage configuration
+; Sample S3 cloud storage configuration
+;
+; The accessKeyId, secretAccessKey, and bucket options are all required.
+; If the expiration option is set, files will be uploaded with "private"
+; access, and Omeka will generate URLs that are only valid for a limited
+; time.  If the expiration option is missing or left commented out,
+; uploaded files will always be publicly readable.
+;
 ; storage.adapter = "Omeka_Storage_Adapter_ZendS3"
 ; storage.adapterOptions.accessKeyId =
 ; storage.adapterOptions.secretAccessKey =
 ; storage.adapterOptions.bucket =
+; storage.adapterOptions.expiration = 10 ; URL expiration time (in minutes)
