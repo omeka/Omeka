@@ -72,3 +72,21 @@ mail.transport.type = "Sendmail"
 ; storage.adapterOptions.secretAccessKey =
 ; storage.adapterOptions.bucket =
 ; storage.adapterOptions.expiration = 10 ; URL expiration time (in minutes)
+
+; Secure Socket Layer support for Omeka.
+; Ensure that your server is properly configured before enabling this
+; setting. Choose one of the following:
+; 
+;   logins: 
+;       Enable SSL for login forms and login form submissions.
+; 
+;   sessions: 
+;       Enable for authenticated users to protect sessions.  Includes
+;       login forms.
+;
+;   always: 
+;       Enabled across the entire site.
+; ssl = "always"
+; ssl.login = 0         ; Enabled only for logins (users/login).
+; ssl.authSession = 0   ; Enabled for authenticated sessions.
+; ssl.all = 0           ; Enabled everywhere, all the time.

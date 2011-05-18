@@ -45,6 +45,16 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // Action helpers
         $this->getBootstrap()->bootstrap('Helpers');
 
+        if ($sslConfig = $this->getBootstrap()->config->ssl) {
+            $redirector = 
+                Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
+            $auth = $this->getBootstrap()->bootstrap('Auth')->auth;
+            $front->registerPlugin(
+                new Omeka_Controller_Plugin_Ssl((string)$sslConfig,
+                                                $redirector,
+                                                $auth));
+        }
+        
         return $front;
     }
 
