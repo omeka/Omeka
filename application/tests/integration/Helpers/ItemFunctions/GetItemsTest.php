@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Center for History and New Media, 2011
+ * @copyright Roy Rosenzweig Center for History and New Media, 2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -9,7 +9,7 @@
  * Test class for get_items() helper.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2011
+ * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
 class Omeka_Helper_GetItemsTest extends PHPUnit_Framework_TestCase
 {

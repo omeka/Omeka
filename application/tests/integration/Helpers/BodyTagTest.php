@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2011
+ * @copyright Roy Rosenzweig Center for History and New Media, 2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/

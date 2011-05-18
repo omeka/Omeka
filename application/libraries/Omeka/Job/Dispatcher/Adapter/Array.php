@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2011
+ * @copyright Roy Rosenzweig Center for History and New Media, 2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -13,7 +13,7 @@
  * code.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2011
+ * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
 class Omeka_Job_Dispatcher_Adapter_Array implements Omeka_Job_Dispatcher_Adapter
 {
