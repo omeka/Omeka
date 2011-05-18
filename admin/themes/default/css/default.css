@@ -92,21 +92,30 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         text-decoration:none;
         clear:both; 
         margin:9px 0;
-        background: #6d8e1d url("../../../../application/views/scripts/images/glass-btn.png") repeat-x 0 50%; 
+        background-color: #6d8e1d;
+        background-image: -webkit-gradient(linear,0% 0%, 0% 100%, color-stop(0, rgba(255, 255, 255, .05)), color-stop(0.5, rgba(255, 255, 255, .2)), color-stop(0.501, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0))
+        );
+        background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.05),rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 50.01%,rgba(255,255,255,0));
+        background-image: -moz-linear-gradient(top, rgba(255,255,255,0.05),rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 50.01%,rgba(255,255,255,0));
+        background-image: -o-linear-gradient(top, rgba(255,255,255,0.05),rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 50.01%,rgba(255,255,255,0));
+        background-image: -ms-linear-gradient(rgba(255,255,255,0.05),rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 50.01%,rgba(255,255,255,0));
+        background-image: linear-gradient(rgba(255,255,255,0.05),rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 50.01%,rgba(255,255,255,0));
+        text-shadow:-1px -1px 1px rgba(0,0,0,0.2);
         float:right; 
         color:#fff !important;
-        padding: 3px 6px;
+        padding: 4px 8px;
         border:none; 
         border:1px solid #6d8e1d;
         border-radius:6px;
         -webkit-border-radius:6px;
         -moz-border-radius:6px;
+        font-weight:bold;
     }
 
     .delete-button, .delete-confirm {background-color: #800 !important; border-color: #800 !important;float: none !important;}
     td .delete-confirm {margin: 0; padding: 1px 6px;}
 
-    input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;}
+    input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;text-shadow:none;}
     
     input.add-element,
     input.remove-element {
@@ -126,22 +135,10 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 
     /* Configure button */
     .configure-button {
-        text-align:center;
-        text-decoration:none;
-        color:#eee !important;
         font-size:11px;
-        font-family:"Lucida Grande", Verdana, sans-serif;
-        font-weight:bold;
-        margin:9px 0;
-        background: #38c url("../../../../application/views/scripts/images/glass-btn.png") repeat-x 0 50%; 
-        padding: 4px 8px;
+        background-color: #38c;
         width: 80px; 
-        border:none; 
-        border:1px solid #38c;
-        border-radius:4px;
-        -webkit-border-radius:4px;
-        -moz-border-radius:4px;
-        margin-bottom:12px;
+        border-color: #38c;
         margin-left:8px;
         float:none;
     }
@@ -383,19 +380,6 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
             display:inline !important;  
         }
         #simple-search-form #submit_search {
-            text-align:center;
-            text-decoration:none;
-            color:#fff !important;
-            clear:both; 
-            margin:0;
-            background: #6d8e1d url("../../../../application/views/scripts/images/glass-btn.png") repeat-x 0 50%; 
-            color:#fff;
-            padding: 3px 6px;
-            border:none; 
-            border:1px solid #6d8e1d;
-            border-radius:6px;
-            -webkit-border-radius:6px;
-            -moz-border-radius:6px;
             display:inline !important;
 			float:none;
         }
