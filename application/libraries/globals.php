@@ -675,7 +675,7 @@ function is_true($value)
 function get_theme_option($optionName, $themeName = null)
 {
     if (!$themeName) {
-        $themeName = get_option(Theme::PUBLIC_THEME_OPTION);
+        $themeName = Theme::getCurrentThemeName('public');
     }
     return Theme::getOption($themeName, $optionName);
 }
@@ -692,7 +692,7 @@ function get_theme_option($optionName, $themeName = null)
 function set_theme_option($optionName, $optionValue, $themeName = null)
 {
     if (!$themeName) {
-        $themeName = get_option(Theme::PUBLIC_THEME_OPTION);
+        $themeName = Theme::getCurrentThemeName('public');
     }
     return Theme::setOption($themeName, $optionName, $optionValue);
 }

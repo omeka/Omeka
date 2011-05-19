@@ -117,7 +117,22 @@ class Theme
         // If the theme has a config file, set hasConfig to true.
         $this->hasConfig = (file_exists($themeConfig) && is_readable($themeConfig));
     }
-    
+
+    /**
+     * Get the directory name of the current theme.
+     *
+     * @param string $type 'admin' or 'public', defaults to current type
+     * @return string
+     */
+    static public function getCurrentThemeName($type = null)
+    {
+        if ($type === null) {
+            $type = is_admin_theme() ? 'admin' : 'public';
+        }
+
+        return apply_filters($type . '_theme_name', get_option("{$type}_theme"));
+    }
+
     /**
      * Retrieve an available theme (or all themes).
      *
