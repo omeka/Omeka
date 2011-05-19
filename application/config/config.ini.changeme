@@ -86,7 +86,5 @@ mail.transport.type = "Sendmail"
 ;
 ;   always: 
 ;       Enabled across the entire site.
+;
 ; ssl = "always"
-; ssl.login = 0         ; Enabled only for logins (users/login).
-; ssl.authSession = 0   ; Enabled for authenticated sessions.
-; ssl.all = 0           ; Enabled everywhere, all the time.
