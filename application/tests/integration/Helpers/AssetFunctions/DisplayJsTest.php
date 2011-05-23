@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -11,7 +11,7 @@ require_once HELPERS;
  * Tests for the queue_js/display_js pair of helpers.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
 class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 {
@@ -24,8 +24,8 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     public function setUp()
     { 
         $this->externalDefaults = array(
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js',
-            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js'
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
+            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'
         );
         $this->internalDefaults = array(
             self::ASSET_PATH_ROOT . '/javascripts/jquery.js',

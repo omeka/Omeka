@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2011
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -11,7 +11,7 @@
  * in helpers/ItemFunctions.php
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2011
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2011
  */ 
 class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
 {

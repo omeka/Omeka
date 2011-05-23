@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -10,7 +10,7 @@
  * Validates files against a MIME type whitelist.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_Validate_File_MimeType extends Zend_Validate_File_MimeType
 {

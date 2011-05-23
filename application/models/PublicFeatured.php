@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -12,7 +12,7 @@
  *
  * @package Omeka
  * @subpackage Mixins
- * @copyright Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
 class PublicFeatured extends Omeka_Record_Mixin
 {

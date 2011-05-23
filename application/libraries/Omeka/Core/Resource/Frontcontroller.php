@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -13,7 +13,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Frontcontroller
 {
@@ -45,6 +45,16 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         // Action helpers
         $this->getBootstrap()->bootstrap('Helpers');
 
+        if ($sslConfig = $this->getBootstrap()->config->ssl) {
+            $redirector = 
+                Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
+            $auth = $this->getBootstrap()->bootstrap('Auth')->auth;
+            $front->registerPlugin(
+                new Omeka_Controller_Plugin_Ssl((string)$sslConfig,
+                                                $redirector,
+                                                $auth));
+        }
+        
         return $front;
     }
 }

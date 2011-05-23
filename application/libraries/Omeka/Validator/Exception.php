@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -14,7 +14,7 @@
  * in favor of built-in Zend Framework capabilities.
  * @see Omeka_Record::saveForm()
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Validator_Exception extends Exception
 {

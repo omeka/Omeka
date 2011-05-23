@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -10,7 +10,7 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class ItemTable extends Omeka_Db_Table
 {    
@@ -419,6 +419,32 @@ class ItemTable extends Omeka_Db_Table
         }
         
         return $select;
+    }
+    
+    /**
+     * Return the first item accessible to the current user.
+     * 
+     * @return Item|null
+     */
+    public function findFirst()
+    {
+        $select = $this->getSelect();
+        $select->order('i.id ASC');
+        $select->limit(1);
+        return $this->fetchObject($select);
+    }
+    
+    /**
+     * Return the last item accessible to the current user.
+     * 
+     * @return Item|null
+     */
+    public function findLast()
+    {
+        $select = $this->getSelect();
+        $select->order('i.id DESC');
+        $select->limit(1);
+        return $this->fetchObject($select);
     }
     
     public function findPrevious($item)
