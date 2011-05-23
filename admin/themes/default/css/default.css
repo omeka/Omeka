@@ -196,10 +196,11 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 /* -- Navigation -- */
 
 /* vertical-nav */
-.vertical-nav ul#section-nav {margin:0; padding:0;float:left; width: 198px;font-size:1.1em;margin-top:18px;background:transparent url("../../../../application/views/scripts/images/list-border-tan.gif") bottom left repeat-x;}
-    .vertical-nav ul#section-nav a {text-decoration:none; display:block;padding:9px 9px 6px; color: #467;background:transparent url("../../../../application/views/scripts/images/list-border-tan.gif") top left repeat-x;}
+.vertical-nav ul#section-nav {
+    margin:0; padding:0; float:left; width: 198px; font-size:1.1em; margin-top:18px; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(255,255,255,0.5);}
+    .vertical-nav ul#section-nav a {text-decoration:none; display:block; padding:9px 9px 6px; color: #467; border-bottom: 1px solid rgba(0,0,0,0.1); border-top: 1px solid rgba(255,255,255,0.5);}
     .vertical-nav ul#section-nav a:hover {background-color:#f6f5e9;}
-    .vertical-nav ul#section-nav li.current a, .vertical-nav ul#section-nav li a.active {background:#fff !important; font-weight:bold;color: #c60;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
+    .vertical-nav ul#section-nav li.current a, .vertical-nav ul#section-nav li a.active {background:#fff !important; font-weight:bold;color: #c60;border:1px solid #d7d5c4;border-width:0 0 1px 3px;}
 
 .horizontal-nav ul#section-nav {margin:0; padding:0;font-size:1.1em; padding:9px 0 12px;}
     .horizontal-nav ul#section-nav li {display:inline;}
