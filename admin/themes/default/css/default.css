@@ -126,8 +126,8 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         background-repeat:no-repeat;
     }
     
-    input.add-element {background-image:url("../../../../application/views/scripts/images/add.png");}
-    input.remove-element {background-image:url("../../../../application/views/scripts/images/delete.gif");}
+    input.add-element {background-image:url("../../../../application/views/scripts/images/silk-icons/add.png");}
+    input.remove-element {background-image:url("../../../../application/views/scripts/images/silk-icons/delete.png");}
     
     .dateinput input {margin-right: 3px;}
     
@@ -212,7 +212,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 .info-panel {background:#fff; z-index:100;border:1px solid #d7d5c4;display:block;margin-bottom:18px; padding:18px 18px 1px; border-width: 0 0 3px;}
     .info-panel h2 {margin:-18px -18px 18px; font-family:"Lucida Grande",Helvetica, Arial, sans-serif;font-size:1.2em;padding: 9px 18px; color: #fff; background: #467;}
     .info-panel h3 {font-size:1.2em; font-weight:bold; margin-bottom:0.5em;}
-    .info-panel li {background:url("../../../../application/views/scripts/images/bullet_blue.gif") 0 6px no-repeat; padding-left:20px;padding:7px 0 7px 20px;border-bottom:1px dotted #ddd;}
+    .info-panel li {background:url("../../../../application/views/scripts/images/silk-icons/bullet_blue.png") 0 6px no-repeat; padding-left:20px;padding:7px 0 7px 20px;border-bottom:1px dotted #ddd;}
     .info-panel li a {text-decoration:none; display:block; color: #c60; }
     .info-panel li a:hover {color:#389;}
     .info-panel p, .info-panel ul, .info-panel ol {font-size:1.1em;}
@@ -256,31 +256,31 @@ table .edit, table .delete, table .researcher, table .super, table .admin, table
 
 .go,
 .next a
-{background-position:center right; text-align:right;background-repeat:no-repeat; padding:2px 18px 2px 0; text-decoration:none;background-image:url("../../../../application/views/scripts/images/bullet_go.gif");}
+{background-position:center right; text-align:right;background-repeat:no-repeat; padding:2px 18px 2px 0; text-decoration:none;background-image:url("../../../../application/views/scripts/images/silk-icons/bullet_go.png");}
 
-.previous a {background-image:url("../../../../application/views/scripts/images/bullet_back.gif");}
-.next a {background-image:url("../../../../application/views/scripts/images/bullet_go.gif");}
-.contributor {background-image:url("../../../../application/views/scripts/images/user_red.gif");}
-.super {background-image:url("../../../../application/views/scripts/images/user_suit.gif");}
-.admin {background-image:url("../../../../application/views/scripts/images/user_orange.gif");}
-.researcher {background-image:url("../../../../application/views/scripts/images/user_green.gif");}
-.default {background-image:url("../../../../application/views/scripts/images/user_gray.gif");}
-.add-file {background-image:url("../../../../application/views/scripts/images/disk_multiple.gif");}
-.add {background-image:url("../../../../application/views/scripts/images/page_add.gif");}
-.delete, .delete-element {background-image:url("../../../../application/views/scripts/images/delete.gif");}
-.error {background-image:url("../../../../application/views/scripts/images/error.gif");}
-.success {background-image:url("../../../../application/views/scripts/images/tick.gif");}
-.browse {background-image:url("../../../../application/views/scripts/images/book_open.gif");}
-.add-collection {background-image:url("../../../../application/views/scripts/images/folder_add.gif");}
-.browse-collections {background-image:url("../../../../application/views/scripts/images/folder.gif");}
-.editsettings {background-image:url("../../../../application/views/scripts/images/cog.gif");}
-.managethemes {background-image:url("../../../../application/views/scripts/images/layout.gif");}
-.manageplugins {background-image:url("../../../../application/views/scripts/images/plugin.gif");}
-.browse-users {background-image:url("../../../../application/views/scripts/images/user_female.gif");}
-.add-user {background-image:url("../../../../application/views/scripts/images/user_add.gif");}
-.edit-user {background-image:url("../../../../application/views/scripts/images/pencil_go.gif");}
-.edit {background-image:url("../../../../application/views/scripts/images/pencil_go.gif");}
-.browse-names {background-image:url("../../../../application/views/scripts/images/group.gif");}
+.previous a {background-image:url("../../../../application/views/scripts/images/silk-icons/bullet_back.png");}
+.next a {background-image:url("../../../../application/views/scripts/images/silk-icons/bullet_go.png");}
+.contributor {background-image:url("../../../../application/views/scripts/images/silk-icons/user_red.png");}
+.super {background-image:url("../../../../application/views/scripts/images/silk-icons/user_suit.png");}
+.admin {background-image:url("../../../../application/views/scripts/images/silk-icons/user_orange.png");}
+.researcher {background-image:url("../../../../application/views/scripts/images/silk-icons/user_green.png");}
+.default {background-image:url("../../../../application/views/scripts/images/silk-icons/user_gray.png");}
+.add-file {background-image:url("../../../../application/views/scripts/images/silk-icons/disk_multiple.png");}
+.add {background-image:url("../../../../application/views/scripts/images/silk-icons/page_add.png");}
+.delete, .delete-element {background-image:url("../../../../application/views/scripts/images/silk-icons/delete.png");}
+.error {background-image:url("../../../../application/views/scripts/images/silk-icons/error.png");}
+.success {background-image:url("../../../../application/views/scripts/images/silk-icons/tick.png");}
+.browse {background-image:url("../../../../application/views/scripts/images/silk-icons/book_open.png");}
+.add-collection {background-image:url("../../../../application/views/scripts/images/silk-icons/folder_add.png");}
+.browse-collections {background-image:url("../../../../application/views/scripts/images/silk-icons/folder.png");}
+.editsettings {background-image:url("../../../../application/views/scripts/images/silk-icons/cog.png");}
+.managethemes {background-image:url("../../../../application/views/scripts/images/silk-icons/layout.png");}
+.manageplugins {background-image:url("../../../../application/views/scripts/images/silk-icons/plugin.png");}
+.browse-users {background-image:url("../../../../application/views/scripts/images/silk-icons/user_female.png");}
+.add-user {background-image:url("../../../../application/views/scripts/images/silk-icons/user_add.png");}
+.edit-user {background-image:url("../../../../application/views/scripts/images/silk-icons/pencil_go.png");}
+.edit {background-image:url("../../../../application/views/scripts/images/silk-icons/pencil_go.png");}
+.browse-names {background-image:url("../../../../application/views/scripts/images/silk-icons/group.png");}
 
 #primary .item-file img,
 #primary .item-file object {
@@ -294,10 +294,10 @@ th.sorting {
 }
 
 th.desc {
-    background-image:url("../../../../application/views/scripts/images/bullet_arrow_down.png");
+    background-image:url("../../../../application/views/scripts/images/silk-icons/bullet_arrow_down.png");
 }
 th.asc {
-    background-image:url("../../../../application/views/scripts/images/bullet_arrow_up.png");
+    background-image:url("../../../../application/views/scripts/images/silk-icons/bullet_arrow_up.png");
 }
 
 /* == Global Styles == */
@@ -484,7 +484,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         /* Info Panels - styles that enhance or override the component library styles */    
         #tag-cloud li, #tag-cloud li a {padding:0; border:none;background-image:none; display:inline;}
         #recent-items ul {margin-bottom:0;}
-        #recent-items #view-all-items a {display:block; text-decoration:none; background:url("../../../../application/views/scripts/images/bullet_go.gif") 100% 6px no-repeat; width: 8em;float:right;padding:6px 18px; text-align:right;}
+        #recent-items #view-all-items a {display:block; text-decoration:none; background:url("../../../../application/views/scripts/images/silk-icons/bullet_go.png") 100% 6px no-repeat; width: 8em;float:right;padding:6px 18px; text-align:right;}
     
     /* Item Browse styles */
     
