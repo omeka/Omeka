@@ -9,7 +9,7 @@
  
 //Define our resources/privileges in a flat list here
 $resources = array(
-    'Items'         =>  array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
+    'Items'         =>  array('add', 'edit', 'editSelf', 'editAll', 'delete', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
     'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
     'ElementSets'   =>  array('browse', 'delete'),
     'Files'         =>  array('edit','delete'),
@@ -74,5 +74,7 @@ $acl->deny(array(null, 'researcher', 'contributor', 'admin', 'super'), 'Users');
 // it to fail.
 $acl->allow(array('contributor', 'researcher', 'admin', 'super'), 'Users', null,
     new User_AclAssertion());
+$acl->allow(array('contributor', 'researcher', 'admin', 'super'),
+    'Items', array('edit', 'delete'), new Item_OwnershipAclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

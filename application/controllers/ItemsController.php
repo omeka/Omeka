@@ -95,8 +95,7 @@ class ItemsController extends Omeka_Controller_Action
             
             // If the user cannot edit any given item. Check if they can edit 
             // this specific item
-            if ($this->isAllowed('editAll') 
-                || ($this->isAllowed('editSelf') && $item->wasAddedBy($user))) {
+            if ($this->isAllowed('edit', $item)) {
                 return parent::editAction();    
             }
         }
@@ -145,8 +144,7 @@ class ItemsController extends Omeka_Controller_Action
             $item = $this->findById();
             
             // Permission check
-            if ($this->isAllowed('deleteAll') 
-                || ($this->isAllowed('deleteSelf') && $item->wasAddedBy($user))) {
+            if ($this->isAllowed('delete', $item)) {
                 return parent::deleteAction();
             }
         }

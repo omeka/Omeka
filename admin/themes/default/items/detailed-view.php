@@ -6,7 +6,7 @@
     
     <?php 
     // Note: this is duplicated elsewhere (items/show page).
-    if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
+    if (has_permission($item, 'edit')): ?>
     <p class="edit-item"><?php echo link_to_item('Edit', array('class'=>'edit'), 'edit'); ?></p>
     <?php endif; ?>
     
