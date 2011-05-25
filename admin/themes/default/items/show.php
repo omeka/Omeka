@@ -78,7 +78,7 @@ jQuery(document).ready(function () {
             <form id="tags-form" method="post" action="<?php echo html_escape(uri('items/modify-tags/')) ?>">
                 <div class="input">
                     <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id" />
-                    <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo html_escape(tag_string(current_user_tags_for_item())); ?>" />
+                    <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
                 </div>
                 <p id="add-tags-explanation">Separate tags with <?php echo settings('tag_delimiter'); ?></p>
                 <div>
