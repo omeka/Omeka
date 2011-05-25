@@ -235,6 +235,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 .delete,
 .delete-element,
 .error,
+.alert,
 .success,
 .edit,
 .browse,
@@ -268,7 +269,8 @@ table .edit, table .delete, table .researcher, table .super, table .admin, table
 .add-file {background-image:url("../../../../application/views/scripts/images/silk-icons/disk_multiple.png");}
 .add {background-image:url("../../../../application/views/scripts/images/silk-icons/page_add.png");}
 .delete, .delete-element {background-image:url("../../../../application/views/scripts/images/silk-icons/delete.png");}
-.error {background-image:url("../../../../application/views/scripts/images/silk-icons/error.png");}
+.error {background-image:url("../../../../application/views/scripts/images/silk-icons/exclamation.png");}
+.alert {background-image:url("../../../../application/views/scripts/images/silk-icons/error.png");}
 .success {background-image:url("../../../../application/views/scripts/images/silk-icons/tick.png");}
 .browse {background-image:url("../../../../application/views/scripts/images/silk-icons/book_open.png");}
 .add-collection {background-image:url("../../../../application/views/scripts/images/silk-icons/folder_add.png");}
