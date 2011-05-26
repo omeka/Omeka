@@ -66,7 +66,7 @@
         <p>There are no collections on this page.  <?php echo link_to('collections', null, 'View All Collections'); ?></p>
       <?php endif; ?> 
     <?php else: ?>
-        <p>There are no collections in your archive. Why don't you <?php echo link_to('collections', 'add', 'add one'); ?>?</p>
+        <p>There are no collections in your archive. <?php if (has_permission('Collections', 'add')): ?>Why don't you <?php echo link_to('collections', 'add', 'add one'); ?>?<?php endif; ?></p>
         
     <?php endif; ?>
     
