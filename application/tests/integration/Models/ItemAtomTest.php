@@ -1,16 +1,14 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
 
 /**
- * Test ItemRss2 model class.
+ * Tests for ItemAtom model class.
  *
  * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Model_ItemAtomTest extends Omeka_Test_AppTestCase
 {
