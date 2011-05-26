@@ -1,6 +1,8 @@
 <?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 <h1>Browse Items (<?php echo total_results();?> total)</h1>
+<?php if (has_permission('Items', 'add')): ?>
 <p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>">Add an Item</a></p>
+<?php endif; ?>
 
 <?php if ( total_results() ): ?>
 
