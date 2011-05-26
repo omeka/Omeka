@@ -87,7 +87,7 @@ class Omeka_Model_ItemAtomTest extends Omeka_Test_AppTestCase
                         'rel' => 'enclosure',
                         'type' => $mimeType,
                         'length' => $size,
-                        'href' => $file->getWebPath()
+                        'href' => $file->getWebPath('archive')
                     )
                 )
             )
