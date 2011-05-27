@@ -494,6 +494,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     .batch-edit-option {float:left; width: 48%;margin:0; display:block; line-height:2;}
     .batch-edit-option input {float:none !important; display:inline;margin:0;}
     
+    td.batch-edit-check {
+        width: 12px;
+    }
     tr.item .title {
     }
     tr.item .title a {
