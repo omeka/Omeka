@@ -113,9 +113,9 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         return array(
             array('/items/element-form', '_makeXmlHttpRequest'),
             array('/items/modify-tags'),
-            array('/items/power-edit'),
             array('/items/delete/1'),
             array('/items/change-type', '_makeXmlHttpRequest'),
+            array('/items/batch-edit-save'),
         );
     }
 
@@ -178,16 +178,10 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->assertNotContains(self::XSS_QUERY_STRING, $this->response->getBody());
     }
 
-    public function testSimpleBrowse()
+    public function testBrowse()
     {
         $this->dispatch('/items/browse');
-        $this->assertQueryContentContains("table td.title", Installer_Test::TEST_ITEM_TITLE);
-    }
-
-    public function testDetailedBrowse()
-    {
-        $this->dispatch('/items/browse?view=detailed');
-        $this->assertQueryContentContains("div.item", Installer_Test::TEST_ITEM_TITLE);
+        $this->assertQueryContentContains("table .title", Installer_Test::TEST_ITEM_TITLE);
     }
 
     public function testModifyTags()
@@ -198,55 +192,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('/items/modify-tags');
         $item = $this->db->getTable('Item')->find(1);
         $this->assertEquals("foobar", $item->Tags[0]->name);
-    }
-
-    public function testPowerEditNormalRequest()
-    {
-        $this->request->setPost(array(
-            'items' => array(
-                array(
-                    'id' => 1,
-                    'public' => 1,
-                    'featured' => 1,
-                )
-            )
-        ));
-        $this->request->setMethod('POST');
-        $this->dispatch('/items/power-edit');
-        $item = $this->db->getTable('Item')->find(1);
-        $this->assertTrue($item->isPublic());
-        $this->assertTrue($item->isFeatured());
-        $this->assertRedirectTo('/items/browse');
-    }
-
-    public static function powerEditPermissions()
-    {
-        return array(
-            array('makeFeatured', 'isFeatured'),
-            array('makePublic', 'isPublic'),
-        );
-    }
-
-    /**
-     * @dataProvider powerEditPermissions
-     */
-    public function testPowerEditPermissions($privilege, $checkMethod)
-    {
-        $item = $this->_addOneItem();
-        $this->acl->deny('super', 'Items', $privilege);
-        $this->request->setPost(array(
-            'items' => array(
-                array(
-                    'id' => $item->id,
-                    'public' => 1,
-                    'featured' => 1,
-                )
-            )
-        ));
-        $this->request->setMethod('POST');
-        $this->dispatch('/items/power-edit');
-        $item = $this->db->getTable('Item')->find($item->id);
-        $this->assertFalse($item->$checkMethod());
     }
 
     public function testElementFormXmlHttpRequest()
