@@ -82,7 +82,6 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         checked = true;
                     }
                 });
->>>>>>> .merge-right.r6444
                 
                 if (checked) {
                     batchEditSubmit.removeAttr('disabled');
@@ -113,7 +112,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 <form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="get" accept-charset="utf-8">
 <?php if (has_permission('Items', 'edit')): ?>
     <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+        <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
     </div>
 <?php endif; ?>
     <div class="pagination"><?php echo pagination_links(); ?></div>
@@ -121,7 +120,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
         <thead>
             <tr>
                 <?php if (has_permission('Items', 'edit')): ?>
-                <th id="batch-edit-heading">Select</th>
+                <th id="batch-edit-heading"><?php echo __('Select'); ?></th>
                 <?php endif; ?>
             <?php
             $browseHeadings['Title'] = 'Dublin Core,Title';
@@ -157,8 +156,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 ?>
                 <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
                 <ul>
-                    <li><strong>Collection:</strong> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
-                    <li><strong>Tags:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo 'No Tags'; ?></li>
+                    <li><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
+                    <li><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo 'No Tags'; ?></li>
                 </ul>
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
             </div>
@@ -171,7 +170,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
     </table>
     <?php if (has_permission('Items', 'edit')): ?>
     <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+        <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
     </div>
     <?php endif; ?>
     <div class="pagination"><?php echo pagination_links(); ?></div>

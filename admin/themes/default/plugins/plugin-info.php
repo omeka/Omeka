@@ -21,15 +21,13 @@
     $loadErrors = array();
     if (!$plugin->meetsOmekaMinimumVersion()):
         $minVersion = $plugin->getMinimumOmekaVersion();
-        $loadErrors[] = "This version of $displayName requires at least Omeka $minVersion.";
+        $loadErrors[] = __('This version of %1$s requires at least Omeka $minVersion.', $displayName, $minVersion);
     endif;
     if ($missingPluginNames):
-        $loadErrors[] = "$displayName requires the following plugins to be "
-                    . 'installed, activated, and loaded: '
-                    . implode(', ', $missingPluginNames);
+        $loadErrors[] = __('%1$s requires the following plugins to be installed, activated, and loaded: %2$s', html_escape($displayName), implode(', ', $missingPluginNames));
     endif;
     if (!$loader->hasPluginBootstrap($pluginDirName)):
-        $loadErrors[] = 'The plugin.php file is missing.';
+        $loadErrors[] = __('The plugin.php file is missing.');
     endif;
         
     $cannotLoad = !empty($loadErrors);
@@ -38,7 +36,7 @@
     <td>
     <?php if ($cannotLoad): ?>
         <div class="warnings">
-            <strong>The <?php echo html_escape($displayName); ?> plugin cannot be loaded for the following reasons:</strong>
+            <strong><?php echo __('The %s plugin cannot be loaded for the following reasons:', html_escape($displayName)); ?></strong>
             <ul>
             <?php foreach ($loadErrors as $error): ?>
                 <li><?php echo html_escape($error); ?></li>
@@ -47,7 +45,7 @@
         </div>
     <?php endif; ?>
     <?php if ($plugin->hasNewVersion()): ?>    
-        <p class="notice plugin-upgrade">You have a new version of <?php echo html_escape($displayName); ?>. Please upgrade!</p>
+        <p class="notice plugin-upgrade"><?php echo __('You have a new version of %s. Please upgrade!', html_escape($displayName)); ?></p>
     <?php endif; ?>
         <div class="plugin-info">
         <p class="plugin-title"><?php

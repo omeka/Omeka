@@ -297,7 +297,7 @@ class ItemsController extends Omeka_Controller_Action
         
         $itemIds = $this->_getParam('items');
         if (empty($itemIds)) {
-            $this->flashError('You must choose some items to batch edit.');
+            $this->flashError(__('You must choose some items to batch edit.'));
             return $this->_helper->redirector->goto('browse', 'items');
         }
 
@@ -326,29 +326,29 @@ class ItemsController extends Omeka_Controller_Action
                         
             if ($metadata && array_key_exists('public', $metadata) && !$this->isAllowed('makePublic')) {
                 $errorMessage = 
-                    'User is not allowed to modify visibility of items.';
+                    __('User is not allowed to modify visibility of items.');
             }
 
             if ($metadata && array_key_exists('featured', $metadata) && !$this->isAllowed('makeFeatured')) {
                 $errorMessage = 
-                    'User is not allowed to modify featured status of items.';
+                    __('User is not allowed to modify featured status of items.');
             }
             
             foreach ($itemIds as $id) {
                 if ($item = $this->getTable('Item')->find($id)) {
                     if ($delete && !$this->isAllowed('delete', $item)) {
-                        $errorMessage = 'User is not allowed to delete selected items.';
+                        $errorMessage = __('User is not allowed to delete selected items.');
                         break;
                     }
 
                     // Check to see if anything but 'tag'
                     if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$this->isAllowed('edit', $item)) {
-                        $errorMessage = 'User is not allowed to edit selected items.';
+                        $errorMessage = __('User is not allowed to edit selected items.');
                         break;
                     }
 
                     if ($metadata && array_key_exists('tags', $metadata) && !$this->isAllowed('tag', $item)) {
-                        $errorMessage = 'User is not allowed to tag selected items.';
+                        $errorMessage = __('User is not allowed to tag selected items.');
                         break;
                     }
                 }
@@ -360,7 +360,7 @@ class ItemsController extends Omeka_Controller_Action
                 $dispatcher = Zend_Registry::get('job_dispatcher');
                 $dispatcher->setQueueName('batchEditItems');
                 $dispatcher->send('Item_BatchEditJob', array('itemIds' => $itemIds, 'delete' => $delete, 'metadata'  => $metadata));
-                $this->flashSuccess('The items were successfully changed!');
+                $this->flashSuccess(__('The items were successfully changed!'));
             }
          }
 
