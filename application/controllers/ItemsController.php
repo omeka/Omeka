@@ -337,7 +337,7 @@ class ItemsController extends Omeka_Controller_Action
             foreach ($itemIds as $id) {
                 if ($item = $this->getTable('Item')->find($id)) {
                     if ($delete && !$this->isAllowed('delete', $item)) {
-                        $errorMessage = 'User is not allowed to delete selected items.'.current_user()->role;
+                        $errorMessage = 'User is not allowed to delete selected items.';
                         break;
                     }
 
