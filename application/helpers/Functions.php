@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage GeneralHelpers
@@ -65,7 +65,7 @@ function auto_discovery_link_tags() {
  **/
 function common($file, $vars = array(), $dir = 'common') 
 {
-    echo __v()->partial($dir . DIRECTORY_SEPARATOR . $file . '.php', $vars);
+    echo __v()->partial($dir . '/' . $file . '.php', $vars);
 }
 
 /**

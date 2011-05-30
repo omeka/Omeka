@@ -1,18 +1,18 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
 
-require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Url.php';
+require_once HELPER_DIR . '/Url.php';
 
 /**
  * 
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009
  **/
 class Omeka_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
 {

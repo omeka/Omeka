@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -15,7 +15,7 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */ 
 class Theme 
 {
@@ -38,7 +38,7 @@ class Theme
     public function setDirectoryName($dir)
     {
         // Define a hard theme path for the theme
-        $this->path = PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . $dir;
+        $this->path = PUBLIC_THEME_DIR . '/' . $dir;
         $this->directory = $dir;
     }
 
@@ -49,7 +49,7 @@ class Theme
      */
     public function getScriptPath()
     {
-        return PUBLIC_THEME_DIR . DIRECTORY_SEPARATOR . $this->directory;
+        return PUBLIC_THEME_DIR . '/' . $this->directory;
     }
 
     /**
@@ -70,7 +70,7 @@ class Theme
      */
     public function getScriptPathForPlugin($pluginModuleName)
     {
-        return $this->getScriptPath() . DIRECTORY_SEPARATOR . $pluginModuleName;
+        return $this->getScriptPath() . '/' . $pluginModuleName;
     }
 
     /**
@@ -88,7 +88,7 @@ class Theme
     {
         // Test to see if an image is available to present the user
         // when switching themes
-        $imageFile = $this->path . DIRECTORY_SEPARATOR . $fileName;
+        $imageFile = $this->path . '/' . $fileName;
         if (file_exists($imageFile) && is_readable($imageFile)) {
             $img = WEB_PUBLIC_THEME . '/' . $this->directory . '/' . $fileName;
             $this->image = $img;
@@ -97,7 +97,7 @@ class Theme
     
     public function setIni($fileName)
     {
-        $themeIni = $this->path . DIRECTORY_SEPARATOR . $fileName;
+        $themeIni = $this->path . '/' . $fileName;
         if (file_exists($themeIni) && is_readable($themeIni)) {
             $ini = new Zend_Config_Ini($themeIni, 'theme');
             foreach ($ini as $key => $value) {
@@ -112,12 +112,27 @@ class Theme
     public function setConfig($fileName)
     {
         // Get the theme's config file
-        $themeConfig = $this->path . DIRECTORY_SEPARATOR . $fileName;
+        $themeConfig = $this->path . '/' . $fileName;
         
         // If the theme has a config file, set hasConfig to true.
         $this->hasConfig = (file_exists($themeConfig) && is_readable($themeConfig));
     }
-    
+
+    /**
+     * Get the directory name of the current theme.
+     *
+     * @param string $type 'admin' or 'public', defaults to current type
+     * @return string
+     */
+    static public function getCurrentThemeName($type = null)
+    {
+        if ($type === null) {
+            $type = is_admin_theme() ? 'admin' : 'public';
+        }
+
+        return apply_filters($type . '_theme_name', get_option("{$type}_theme"));
+    }
+
     /**
      * Retrieve an available theme (or all themes).
      *

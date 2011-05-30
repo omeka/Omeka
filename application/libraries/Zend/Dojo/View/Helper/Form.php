@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Form.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Form.php 23927 2011-05-02 19:24:53Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */
@@ -68,10 +68,6 @@ class Zend_Dojo_View_Helper_Form extends Zend_Dojo_View_Helper_Dijit
             $attribs['name'] = $id;
         } else {
             $attribs['id'] = $id;
-        }
-
-        if (false === $content) {
-            $content = '';
         }
 
         $attribs = $this->_prepareDijit($attribs, array(), 'layout');

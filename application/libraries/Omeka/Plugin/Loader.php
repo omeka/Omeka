@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -16,7 +16,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_Plugin_Loader
 {
@@ -150,7 +150,11 @@ class Omeka_Plugin_Loader
         
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
-            return;
+            if ($force) {
+                throw new Omeka_Plugin_Loader_Exception("The $pluginDirName plugin could not be loaded.");
+            } else {
+                return;
+            }
         }
 
         // If the current plugin is already on the waiting list, don't load it.
@@ -297,7 +301,7 @@ class Omeka_Plugin_Loader
      */
     public function getPluginFilePath($pluginDirName)
     {
-        return $this->_basePath . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.php';
+        return $this->_basePath . '/' . $pluginDirName . '/' . 'plugin.php';
     }
         
     /**

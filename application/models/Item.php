@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
@@ -13,9 +13,9 @@
  *
  * @package Omeka
  * @subpackage Models
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Item extends Omeka_Record
+class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
 {        
     public $item_type_id;
     public $collection_id;
@@ -401,5 +401,17 @@ class Item extends Omeka_Record
         }
         
         $this->_files[] = $file;
+    }
+
+    /**
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * Identifies Item records as relating to the Items ACL resource.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'Items';
     }
 }

@@ -12,7 +12,7 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
             <tr>
                 <th><?php echo __('Type Name'); ?></th>
                 <th><?php echo __('Description'); ?></th>
-                <th><?php echo __('Total Number of Items'); ?></th>
+                <th><?php echo __('Total Items'); ?></th>
                 <?php if (has_permission('ItemTypes', 'edit')): ?>
                 <th><?php echo __('Edit?'); ?></th>
                 <?php endif; ?>

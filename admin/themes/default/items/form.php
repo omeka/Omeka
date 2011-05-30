@@ -8,8 +8,9 @@
 jQuery(window).load(function () {
     Omeka.Items.initializeTabs();
 
-    var addImage = <?php echo js_escape(img('add.png')); ?>;
-    var deleteImage = <?php echo js_escape(img('delete.gif')); ?>;
+    var addImage = <?php echo js_escape(img('silk-icons/add.png')); ?>;
+    var deleteImage = <?php echo js_escape(img('silk-icons/delete.png')); ?>;
+    Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
     Omeka.Items.enableTagRemoval(addImage, deleteImage);
     Omeka.Items.makeFileWindow();
     Omeka.Items.tagChoices('#tags', <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);

@@ -13,7 +13,7 @@ $application = new Zend_Application(
 
 if (APPLICATION_ENV !== 'testing') {
     $dbResource = new Omeka_Core_Resource_Db;
-    $dbResource->setinipath(BASE_DIR . DIRECTORY_SEPARATOR . 'db.ini');
+    $dbResource->setinipath(BASE_DIR . '/db.ini');
     $application->getBootstrap()->registerPluginResource($dbResource);   
 }
 
@@ -30,6 +30,12 @@ $application->getBootstrap()->registerPluginResource('Zend_Application_Resource_
 $plugins = $application->getBootstrap()->getPluginResources();
 
 $application->getBootstrap()->bootstrap(array('FrontController', 'Layout'));
-if (APPLICATION_ENV !== 'testing') {
+if (APPLICATION_ENV === 'testing') {
+    return;
+}
+
+try {
     $application->run();
+} catch (Exception $e) {
+    echo '<pre>' . $e->getMessage() . '</pre>';exit;
 }

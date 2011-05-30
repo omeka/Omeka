@@ -7,7 +7,7 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
     <form method="post" action="">
         <?php include 'form.php';?>
         <div>
-            <input type="submit" name="submit" class="submit submit-medium" id="submit" value="<?php echo __('Add Item Type'); ?>" />
+            <input type="submit" name="submit" class="submit" id="submit" value="<?php echo __('Add Item Type'); ?>" />
         </div>
     </form>
 </div>

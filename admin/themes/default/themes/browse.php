@@ -22,7 +22,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 
 <h2><?php echo __('Change Theme'); ?></h2>
 <form method="post" id="themeswitch" action="<?php echo $this->url(array('controller'=>'themes', 'action'=>'switch'), 'default'); ?>">
-    <div class="themes">
+    <div class="themes group">
     <?php foreach($themes as $theme): ?>
     <div class="theme<?php if($current == $theme) echo ' current-theme';?>">
         <div class="meta">
@@ -41,7 +41,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
     <?php endforeach; ?>
     </div>
     <div>
-        <input type="submit" name="submit" class="submit submit-medium" id="submit" value="<?php echo __('Switch Theme'); ?>" />
+        <input type="submit" name="submit" class="submit" id="submit" value="<?php echo __('Switch Theme'); ?>" />
     </div>
 </form>
 

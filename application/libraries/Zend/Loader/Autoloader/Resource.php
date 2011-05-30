@@ -16,7 +16,7 @@
  * @package    Zend_Loader
  * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Resource.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Resource.php 23860 2011-04-14 17:03:28Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -145,7 +145,12 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
         $namespace         = '';
 
         if (!empty($namespaceTopLevel)) {
-            $namespace = array_shift($segments);
+            $namespace = array();
+            $topLevelSegments = count(explode('_', $namespaceTopLevel));
+            for ($i = 0; $i < $topLevelSegments; $i++) {
+                $namespace[] = array_shift($segments);
+            }
+            $namespace = implode('_', $namespace);
             if ($namespace != $namespaceTopLevel) {
                 // wrong prefix? we're done
                 return false;

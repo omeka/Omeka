@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Editor.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Editor.php 23938 2011-05-02 20:13:50Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */
@@ -57,7 +57,14 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
         'fontSize' => 'FontChoice',
         'formatBlock' => 'FontChoice',
         'foreColor' => 'TextColor',
-        'hiliteColor' => 'TextColor'
+        'hiliteColor' => 'TextColor',
+        'enterKeyHandling' => 'EnterKeyHandling',
+        'fullScreen' => 'FullScreen',
+        'newPage' => 'NewPage',
+        'print' => 'Print',
+        'tabIndent' => 'TabIndent',
+        'toggleDir' => 'ToggleDir',
+        'viewSource' => 'ViewSource'
     );
 
     /**
@@ -114,8 +121,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
 
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 
-        $html  = '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
-        $html .= '<div' . $this->_htmlAttribs($attribs) . '>'
+        $html  = '<div' . $this->_htmlAttribs($attribs) . '>'
                . $value
                . "</div>\n";
 
@@ -125,6 +131,8 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
                . $this->view->formTextarea($hiddenId, $value, $attribs)
                . '</noscript>';
 
+        $html  .= '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
+        
         return $html;
     }
 
@@ -178,7 +186,11 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
 function() {
     var form = zend.findParentForm(dojo.byId('$hiddenId'));
     dojo.connect(form, 'submit', function(e) {
-        dojo.byId('$hiddenId').value = dijit.byId('$editorId').getValue(false);
+        var value = dijit.byId('$editorId').getValue(false);
+        if(dojo.isFF) {
+            value = value.replace(/<br _moz_editor_bogus_node="TRUE" \/>/, '');
+        }
+        dojo.byId('$hiddenId').value = value;
     });
 }
 EOJ;

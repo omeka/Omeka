@@ -17,7 +17,7 @@
     <form method="post" enctype="multipart/form-data" id="item-form" action="">
         <?php include 'form.php'; ?>
         <div>
-            <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit submit-medium'), __('Save Changes')); ?>
+            <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit'), __('Save Changes')); ?>
         </div>
     </form>
     <?php echo delete_button(null, 'delete-item', __('Delete this Item')); ?>

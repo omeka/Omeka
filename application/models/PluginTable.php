@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @subpackage Models
  * @author CHNM
@@ -12,7 +12,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class PluginTable extends Omeka_Db_Table
 {
@@ -24,7 +24,7 @@ class PluginTable extends Omeka_Db_Table
         $plugins = $this->findAll();
         $pluginsWithIniFiles = array();
         foreach($plugins as $plugin) {
-            $path = PLUGIN_DIR . DIRECTORY_SEPARATOR . $plugin->name . DIRECTORY_SEPARATOR . 'plugin.ini';
+            $path = PLUGIN_DIR . '/' . $plugin->name . '/plugin.ini';
             if (file_exists($path)) {
                 $pluginsWithIniFiles[] = $plugin;
             } 

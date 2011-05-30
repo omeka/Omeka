@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -14,7 +14,7 @@
  *
  * @uses Zend_Db_Adapter_Mysqli
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Db
 {
@@ -79,7 +79,21 @@ class Omeka_Db
         if (!method_exists($this->_conn, $m)) {
             throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
         }        
-        return call_user_func_array(array($this->_conn, $m), $a);
+        
+        try {
+            return call_user_func_array(array($this->_conn, $m), $a);
+            
+        // Zend_Db_Statement_Mysqli does not consider a connection that returns 
+        // a "MySQL server has gone away" error to be disconnected. Catch these 
+        // errors, close the connection, and reconnect, then retry the query.
+        } catch (Zend_Db_Statement_Mysqli_Exception $e) {
+            if (2006 == $e->getCode()) {
+                $this->_conn->closeConnection();
+                $this->_conn->getConnection();
+                return call_user_func_array(array($this->_conn, $m), $a);
+            }
+            throw $e;
+        }
     }
     
     /**

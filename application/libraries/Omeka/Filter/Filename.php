@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -10,7 +10,7 @@
  * Rename a file to make it suitable for inclusion in the Omeka archive.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_Filter_Filename implements Zend_Filter_Interface
 {
@@ -27,7 +27,7 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
         $directory = dirname($value);
         $newFilename = $this->renameFileForArchive($filename);
         
-        $targetPath = $directory . DIRECTORY_SEPARATOR . $newFilename;
+        $targetPath = $directory . '/' . $newFilename;
         $result = rename($value, $targetPath);
         
         return $targetPath;

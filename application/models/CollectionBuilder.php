@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
@@ -15,7 +15,7 @@
  * @access private
  * @package Omeka
  * @subpackage Models
- * @copyright Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
 class CollectionBuilder extends Omeka_Record_Builder
 {

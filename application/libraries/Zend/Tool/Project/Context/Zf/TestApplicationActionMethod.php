@@ -178,13 +178,14 @@ EOS;
             'name' => 'test' . ucfirst($actionParam) . 'Action',
             'body' => <<<EOS
 \$params = array('action' => '$actionParam', 'controller' => '$controllerParam', 'module' => '$moduleParam');
-\$url = \$this->url(\$this->urlizeOptions(\$params));
+\$urlParams = \$this->urlizeOptions(\$params);
+\$url = \$this->url(\$urlParams);
 \$this->dispatch(\$url);
 
 // assertions
-\$this->assertModule(\$params['module']);
-\$this->assertController(\$params['controller']);
-\$this->assertAction(\$params['action']);
+\$this->assertModule(\$urlParams['module']);
+\$this->assertController(\$urlParams['controller']);
+\$this->assertAction(\$urlParams['action']);
 $assert
 
 EOS

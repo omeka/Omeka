@@ -13,7 +13,7 @@
 <div id="primary">
     <form id="edit-item-type-form" method="post" action="">
         <?php include 'form.php';?>
-        <input type="submit" name="submit" value="<?php echo __('Save Changes'); ?>" class="submit submit-medium" />
+        <input type="submit" name="submit" value="<?php echo __('Save Changes'); ?>" class="submit" />
     </form>
     
     <?php if (has_permission('ItemTypes', 'delete')): ?>

@@ -37,8 +37,8 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         <tr>
             <th><?php echo __('Username') ?></th>
             <th><?php echo __('Real Name'); ?></th>
+            <th><?php echo __('Email'); ?></th>
             <th><?php echo __('Role'); ?></th>
-            <th><?php echo __('Active?'); ?></th>
             <?php if (has_permission('Users', 'edit')): ?>
             <th><?php echo __('Edit'); ?></th>            
             <?php endif; ?>
@@ -52,8 +52,8 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
             <td><?php echo html_escape($user->username);?></td>
             <td><?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?></td>
+            <td><?php echo html_escape($user->email); ?></td>
             <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape($user->role); ?></span></td>
-            <td><?php if($user->active):?><?php echo __('Active'); ?><?php else: ?><?php echo __('Not active'); ?><?php endif;?></td>
             <?php if (has_permission($user, 'edit')): ?>
             <td><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></td>
             <?php endif; ?>     

@@ -18,7 +18,7 @@
  * @subpackage Calendar
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Calendar.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Calendar.php 23805 2011-03-16 00:55:40Z tjohns $
  */
 
 /**
@@ -59,8 +59,8 @@ require_once 'Zend/Gdata/Calendar/ListEntry.php';
 class Zend_Gdata_Calendar extends Zend_Gdata
 {
 
-    const CALENDAR_FEED_URI = 'http://www.google.com/calendar/feeds';
-    const CALENDAR_EVENT_FEED_URI = 'http://www.google.com/calendar/feeds/default/private/full';
+    const CALENDAR_FEED_URI = 'https://www.google.com/calendar/feeds';
+    const CALENDAR_EVENT_FEED_URI = 'https://www.google.com/calendar/feeds/default/private/full';
     const AUTH_SERVICE_NAME = 'cl';
 
     protected $_defaultPostUri = self::CALENDAR_EVENT_FEED_URI;

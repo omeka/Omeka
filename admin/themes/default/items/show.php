@@ -13,7 +13,7 @@
 
 <h1 id="item-title"><?php echo $itemTitle; ?> <span class="view-public-page">[ <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>"><?php echo __('View Public Page'); ?></a> ]</span></h1>
 
-<?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
+<?php if (has_permission($item, 'edit')): ?>
 <p id="edit-item" class="edit-button"><?php 
 echo link_to_item(__('Edit this Item'), array('class'=>'edit'), 'edit'); ?></p>   
 <?php endif; ?>
@@ -30,6 +30,7 @@ echo link_to_item(__('Edit this Item'), array('class'=>'edit'), 'edit'); ?></p>
 //<![CDATA[
 jQuery(document).ready(function () {
     Omeka.Items.modifyTagsShow();
+    Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
     Omeka.Items.tagChoices('#tags-field', <?php echo js_escape(uri(array('controller' => 'tags', 'action' => 'autocomplete'), 'default')); ?>);
 });
 //]]>     
@@ -79,8 +80,9 @@ jQuery(document).ready(function () {
                     <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id" />
                     <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
                 </div>
+                <p id="add-tags-explanation">Separate tags with <?php echo settings('tag_delimiter'); ?></p>
                 <div>
-                    <input type="submit" class="submit submit-medium" name="modify_tags" value="<?php echo __('Save Tags'); ?>" id="tags-submit" />
+                    <input type="submit" class="submit" name="modify_tags" value="<?php echo __('Save Tags'); ?>" id="tags-submit" />
                 </div>
             </form>
         </div>

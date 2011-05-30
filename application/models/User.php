@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Models
@@ -11,7 +11,7 @@
 /**
  * @package Omeka
  * @subpackage Models
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class User extends Omeka_Record implements Zend_Acl_Resource_Interface, 
                                            Zend_Acl_Role_Interface
@@ -183,15 +183,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
             $this->addError('username', __("The username must be alphanumeric."));
         } else if (!$this->fieldIsUnique('username')) {
             $this->addError('username', __("'%s' is already in use. Please choose another username.", $this->username));
-        }
-        
-        // FIXME: This must be broken because 'password' property should never
-        // be plaintext.
-        // Validate the password
-        $pass = $this->password;
-        
-        if (strlen($pass) < self::PASSWORD_MIN_LENGTH) {
-            $this->addError('password', __("Password must be longer than %s characters.", self::PASSWORD_MIN_LENGTH)); 
         }
     }
     

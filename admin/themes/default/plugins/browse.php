@@ -10,12 +10,6 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
     <?php if ($plugins): ?>
 
         <table id="plugin-info">
-            <thead>
-                <tr>
-                    <th><?php echo __('Plugin'); ?></th>
-                    <th><?php echo __('Action'); ?></th>
-                </tr>
-            </thead>
             <tbody>
             <?php foreach($plugins as $pluginDirName => $plugin): ?>
                 <?php echo $this->partial('plugins/plugin-info.php', array('pluginDirName' => $pluginDirName, 'plugin' => $plugin, 'loader'=>$loader, 'versionCheck'=>$versionCheck)); ?>

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -14,14 +14,14 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Output_Json
 {
     /**
-     * JsonML XML stylesheet location
+     * JsonML XML stylesheet filename
      */
-    const JSONML_XSLT_URL = 'http://jsonml.org/JsonML.xslt';
+    const JSONML_XSLT_FILENAME = 'JsonML.xslt';
     
     /**
      * Convert omeka-xml output to JSON.
@@ -31,8 +31,10 @@ class Omeka_Output_Json
      */
     public static function toJson(Omeka_Output_Xml $omekaXml)
     {
+        $xsltPath = dirname(__FILE__) . '/' . self::JSONML_XSLT_FILENAME;
+
         $xsldoc = new DOMDocument();
-        $xsldoc->loadXML(file_get_contents(self::JSONML_XSLT_URL));
+        $xsldoc->load($xsltPath);
         
         $xsl = new XSLTProcessor();
         $xsl->importStyleSheet($xsldoc);

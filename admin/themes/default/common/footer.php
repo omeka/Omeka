@@ -1,5 +1,5 @@
 </div>
-<div id="footer">
+<div id="footer" class="group">
     <?php admin_plugin_footer(); ?>
     <p><a href="http://omeka.org" id="omeka-logo"><?php echo __('Powered by Omeka'); ?></a> | <a href="http://omeka.org/codex/"><?php echo __('Documentation'); ?></a> | <a href="http://omeka.org/forums/"><?php echo __('Support Forums'); ?></a></p>
     <p id="system-info">

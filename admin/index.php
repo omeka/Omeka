@@ -8,7 +8,7 @@
  * behavior).  
  *
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -21,7 +21,7 @@ define('ADMIN', true);
 include '../paths.php';
 
 // Define the admin theme directory path.
-define('THEME_DIR', ADMIN_DIR . DIRECTORY_SEPARATOR . $site['admin_theme']);
+define('THEME_DIR', ADMIN_DIR . '/' . $site['admin_theme']);
 
 $app = new Omeka_Core;
 // Configure the Theme bootstrap resource with the correct paths/URLs.

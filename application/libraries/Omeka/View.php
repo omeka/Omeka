@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -18,10 +18,12 @@
  * $this->item, for example.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_View extends Zend_View_Abstract
 {    
+    const THEME_HOOK_NAMESPACE = '__global__';
+
     /**
      * Maintains a key => value pairing corresponding to hard path => web path 
      * for possible assets for Omeka views.
@@ -127,13 +129,18 @@ class Omeka_View extends Zend_View_Abstract
         if ($this->_customScriptsLoaded) {
             return;
         }
-        
+
+        $pluginBroker = get_plugin_broker();
+        $tmpPluginDir = $pluginBroker->getCurrentPluginDirName();
+        $newPluginDir = $pluginBroker->setCurrentPluginDirName(
+            self::THEME_HOOK_NAMESPACE);
         foreach ($this->getScriptPaths() as $path) {
             $customScriptPath = $path . 'custom.php';
             if (file_exists($customScriptPath)) {
                 include $customScriptPath;
             }
         }
+        $pluginBroker->setCurrentPluginDirName($tmpPluginDir);
         $this->_customScriptsLoaded = true;
     }
     

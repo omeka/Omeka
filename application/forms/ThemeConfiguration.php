@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Forms
@@ -15,7 +15,7 @@
  * @access private
  * @package Omeka
  * @subpackage Forms
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  **/
 class Omeka_Form_ThemeConfiguration extends Omeka_Form
 {
@@ -38,6 +38,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
     );
 
     protected $_themeName;
+    protected $_themeOptions;
     
     public function init()
     {
@@ -45,8 +46,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $themeName = $this->getThemeName();
         
         $theme = Theme::getAvailable($themeName);
-        $themeConfigIni = $theme->path . DIRECTORY_SEPARATOR . 'config.ini';
-        $themeOptionName = Theme::getOptionName($themeName);
+        $themeConfigIni = $theme->path . '/config.ini';
 
         if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
 
@@ -58,6 +58,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
             $this->setConfig($configIni);
             $this->setAction('');
             $this->setAttrib('enctype', 'multipart/form-data');
+            $this->setAttrib('class', 'theme-configuration');
 
             // add the 'Save Changes' submit button                      
             $this->addElement(
@@ -69,6 +70,11 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 )
             );
 
+            if (!($themeConfigValues = $this->getThemeOptions())) {
+                $themeConfigValues = Theme::getOptions($themeName);
+                $this->setThemeOptions($themeConfigValues);
+            }
+            
             // configure all of the form elements
             $elements = $this->getElements();
             foreach($elements as $element) {
@@ -77,8 +83,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 }
             }        
 
-            // set all of the form element values
-            $themeConfigValues = Theme::getOptions($themeName);
+            // set all of the form element values            
             foreach($themeConfigValues as $key => $value) {
                 if ($this->getElement($key)) {
                     $this->$key->setValue($value);
@@ -97,6 +102,16 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         return $this->_themeName;
     }
 
+    public function setThemeOptions($themeOptions)
+    {
+        $this->_themeOptions = $themeOptions;
+    }
+
+    public function getThemeOptions()
+    {
+        return $this->_themeOptions;
+    }
+
     /**
      * Add appropriate validators, filters, and hidden elements for  a file
      * upload element.
@@ -106,7 +121,15 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
     private function _processFileElement($element)
     {
         $element->setDestination(Zend_Registry::get('storage')->getTempDir());
-        $fileName = get_theme_option($element->getName(), $this->getThemeName());
+
+        $options = $this->getThemeOptions();
+        $fileName = @$options[$element->getName()];
+        if ($fileName) {
+            $storage = Zend_Registry::get('storage');
+            $fileUri = $storage->getUri($storage->getPathByType($fileName, 'theme_uploads'));
+        } else {
+            $fileUri = null;
+        }
 
         // Add extension/mimetype filtering.
         if (get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) != '1') {
@@ -122,7 +145,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
 
         // add a hidden field to store whether already exists
         $hiddenElement = new Zend_Form_Element_Hidden(self::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $element->getName());
-        $hiddenElement->setValue($fileName);
+        $hiddenElement->setValue($fileUri);
         $hiddenElement->setDecorators(array('ViewHelper', 'Errors'));
         $hiddenElement->setIgnore(true);
         $this->addElement($hiddenElement);
@@ -138,7 +161,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         $elementName = $element->getName();
         $fileName = $element->getFileName(null, false);
         $uploadedFileName = Theme::getUploadedFileName($this->getThemeName(), $elementName, $fileName);
-        $uploadedFilePath = $element->getDestination() . DIRECTORY_SEPARATOR . $uploadedFileName;
+        $uploadedFilePath = $element->getDestination() . '/' . $uploadedFileName;
         $element->addFilter('Rename', array('target' => $uploadedFilePath, 'overwrite' => true));
     }
 }

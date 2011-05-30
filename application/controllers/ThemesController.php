@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -13,17 +13,10 @@
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  **/
 class ThemesController extends Omeka_Controller_Action
 {
-    const THEME_UPLOAD_TYPE = 'theme_uploads';
-
-    private $_themeOptions = array();
-    private $_formValues = array();
-    private $_themeName;
-    private $_form;
-         
     public function browseAction()
     {
         $themes = apply_filters('browse_themes', Theme::getAvailable());
@@ -69,96 +62,25 @@ class ThemesController extends Omeka_Controller_Action
     public function configAction()
     {                      
         // get the theme name and theme object
-        $this->_themeName = $this->_getParam('name');
-        $theme = Theme::getAvailable($this->_themeName);
+        $themeName = $this->_getParam('name');
+        $theme = Theme::getAvailable($themeName);
+        $themeOptions = Theme::getOptions($themeName);
         
         // get the configuration form        
-        $this->_form = new Omeka_Form_ThemeConfiguration(array('themeName' => $this->_themeName));
+        $form = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName));
                 
         // process the form if posted
         if ($this->getRequest()->isPost()) {
-            $elements = $this->_form->getElements();
-            foreach($elements as $element) {
-                if ($element instanceof Zend_Form_Element_File) {
-                    $this->_configFileElement($element);
-                }
-            }
+            $configHelper = new Omeka_Controller_Action_Helper_ThemeConfiguration;
 
-            // validate the form (note: this will populate the form with the post values)
-            if ($this->_form->isValid($_POST)) {
-                $this->_formValues = $this->_form->getValues();
-                $this->_themeOptions = Theme::getOptions($this->_themeName);
-                
-                foreach($elements as $element) {
-                    if ($element instanceof Zend_Form_Element_File) {                                                
-                        $this->_processFileElement($element);
-                    }
-                }
-                                
-                // set the theme options
-                Theme::setOptions($this->_themeName, $this->_formValues);
-                
+            if (($newOptions = $configHelper->processForm($form, $_POST, $themeOptions))) {
+                Theme::setOptions($themeName, $newOptions);
                 $this->flashSuccess(__('The theme settings were successfully saved!'));
                 $this->redirect->goto('browse');
             }
         }
         
-        $this->view->configForm = $this->_form;
+        $this->view->configForm = $form;
         $this->view->theme = $theme;
-        
-    }
-    
-    private function _configFileElement(Zend_Form_Element_File $element)
-    {
-        $elementName = $element->getName();
-        
-        // If file input's related  hidden input has a non-empty value, 
-        // then the user has NOT changed the file, so do NOT upload the file.
-        if (($hiddenElement = $this->_form->getElement(Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName))) {
-            $hiddenName = $hiddenElement->getName();
-            if (!empty($_POST[$hiddenName])) {
-                // Ignore the file input element
-                $element->setIgnore(true);
-            }
-        }
-    }
-    
-    private function _processFileElement(Zend_Form_Element_File $element)
-    {
-        $elementName = $element->getName();
-                
-        // set the theme option for the uploaded file to the file name
-        if ($element->getIgnore()) {
-            // set the form value to the old theme option
-            $this->_formValues[$elementName] = $this->_themeOptions[$elementName];
-        } else {
-            $path = $element->getFileName();
-            if (empty($path)) {
-                // Make sure null-like values are actually null when saved.
-                $newFile = null;
-            } else {
-                $storage = Zend_Registry::get('storage');             
-                $newFile = basename($path);
-                $storagePath = $storage->getPathByType($newFile, self::THEME_UPLOAD_TYPE);
-                $storage->store($path, $storagePath);
-            }
-
-            $this->_formValues[$elementName] = $newFile;
-            $this->_unlinkOldFile($element);
-        }
-    }
-
-    private function _unlinkOldFile(Zend_Form_Element_File $element)
-    {
-        // delete old file if it is not the same as the new file name
-        if (!isset($this->_themeOptions[$element->getName()])) {
-            return;
-        }
-        $oldFileName = $this->_themeOptions[$element->getName()];
-        if ($oldFileName != $newFileName) {
-            $storage = Zend_Registry::get('storage');
-            $storagePath = $storage->getPathByType($oldFileName, self::THEME_UPLOAD_TYPE);
-            $storage->delete($storagePath);
-        }
     }
 }

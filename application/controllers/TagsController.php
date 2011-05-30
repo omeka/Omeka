@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -13,7 +13,7 @@
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  **/
 class TagsController extends Omeka_Controller_Action
 {
@@ -82,7 +82,7 @@ class TagsController extends Omeka_Controller_Action
         $oldTagId = $_POST['old_tag'];
         
         //Explode and sanitize the new tags
-        $newTags = explode(',', $_POST['new_tag']);
+        $newTags = explode(get_option('tag_delimiter'), $_POST['new_tag']);
         foreach ($newTags as $k => $t) {
             $newTags[$k] = trim($t);
         }

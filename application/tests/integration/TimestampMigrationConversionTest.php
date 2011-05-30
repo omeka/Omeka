@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
@@ -10,14 +10,14 @@
  * 
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  **/
 class TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
 {
     public function setUp()
     {
         $this->core = new Omeka_Core('testing', array(
-            'config' => CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini'));
+            'config' => CONFIG_DIR . '/' . 'application.ini'));
             
         $this->db = $this->core->getBootstrap()->bootstrap('Db')->db;
         

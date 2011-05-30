@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -19,7 +19,7 @@ require_once APP_DIR . '/forms/Install.php';
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
@@ -35,6 +35,12 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     const DEFAULT_DESCRIPTION   = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
     
     private $_runInstaller = true;
+
+    /**
+     * Avoid issues with database connections not closing properly after each 
+     * test run.
+     */
+    private static $_cachedAdapter;
         
     /**
      * Load and initialize the database.
@@ -81,6 +87,21 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     public function setInstall($flag)
     {
         $this->_runInstaller = (boolean)$flag;
+    }
+
+    public function getDbAdapter()
+    {
+        if (self::$_cachedAdapter instanceof Zend_Db_Adapter_Abstract) {
+            $adapter = self::$_cachedAdapter;
+        } else {
+            $adapter = parent::getDbAdapter();
+        }
+        return $adapter;
+    }
+
+    public static function setDbAdapter(Zend_Db_Adapter_Abstract $dbAdapter)
+    {
+        self::$_cachedAdapter = $dbAdapter;
     }
     
     /**

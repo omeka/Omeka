@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -19,7 +19,7 @@
  * method should populate a new Acl instance with those settings and store
  * that Acl object in a session for quick access.
  * @package Omeka
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
 {
@@ -38,7 +38,7 @@ class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
     public function init()
     {
         // Setup the ACL
-        include CORE_DIR . DIRECTORY_SEPARATOR . 'acl.php';
+        include CORE_DIR . '/' . 'acl.php';
         
         $this->_acl = $acl;
                 

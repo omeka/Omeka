@@ -16,7 +16,7 @@
  * @package    Zend_Oauth
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Client.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Client.php 23983 2011-05-03 19:27:35Z ralph $
  */
 
 /** Zend_Oauth */
@@ -246,7 +246,8 @@ class Zend_Oauth_Client extends Zend_Http_Client
             $oauthHeaderValue = $this->getToken()->toHeader(
                 $this->getUri(true),
                 $this->_config,
-                $this->_getSignableParametersAsQueryString()
+                $this->_getSignableParametersAsQueryString(),
+                $this->getRealm()
             );
             $this->setHeaders('Authorization', $oauthHeaderValue);
         } elseif ($requestScheme == Zend_Oauth::REQUEST_SCHEME_POSTBODY) {

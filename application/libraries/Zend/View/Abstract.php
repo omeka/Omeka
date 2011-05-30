@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Abstract.php 23992 2011-05-04 03:32:01Z ralph $
  */
 
 /** @see Zend_Loader */
@@ -219,6 +219,14 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
         // LFI protection flag
         if (array_key_exists('lfiProtectionOn', $config)) {
             $this->setLfiProtection($config['lfiProtectionOn']);
+        }
+
+        if (array_key_exists('assign', $config)
+            && is_array($config['assign'])
+        ) {
+            foreach ($config['assign'] as $key => $value) {
+                $this->assign($key, $value);
+            }
         }
 
         $this->init();

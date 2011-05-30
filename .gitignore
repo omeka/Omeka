@@ -10,10 +10,6 @@
 /application/logs/errors.log
 /application/logs/processes.log
 
-# IMPORTANT: Ignore Zend/ when git cloning from SVN.  After full transition to 
-Git, Zend/ will be included in source so REMOVE THIS LINE.
-/application/libraries/Zend/
-
 # Plugins and themes
 /plugins/
 /themes/
@@ -30,3 +26,8 @@ Git, Zend/ will be included in source so REMOVE THIS LINE.
 
 # For VIM
 *.swp
+
+# For Eclipse
+.buildpath
+.project
+.settings/

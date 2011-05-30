@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -16,7 +16,7 @@
  * For information on how to dispatch jobs, see Omeka_Job_Dispatcher.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
 abstract class Omeka_JobAbstract implements Omeka_Job
 {

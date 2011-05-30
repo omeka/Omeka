@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -12,7 +12,7 @@
  *
  * @uses Omeka_Acl
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_Abstract
 {
@@ -82,25 +82,6 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         }    
     }
     	
-    /**
-     * Check whether an action is allowed.
-     * Throws an exception when not allowed.
-     *
-     * @param string $action
-     * @return void
-     */
-    protected function checkActionPermission($action)
-    {   
-        //Here is the permissions check for each action
-        try {
-            if(!$this->isAllowed($action)) {        
-                throw new Omeka_Controller_Exception_403();
-            }
-        } 
-        //Silence exceptions that occur when an action has no equivalent privilege in the ACL
-        catch (Zend_Acl_Exception $e) {}        
-    }
-    
     /**
      * Notifies whether the logged-in user has permission for a given resource/
      * privilege combination.

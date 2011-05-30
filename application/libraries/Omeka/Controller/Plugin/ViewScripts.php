@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -13,7 +13,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstract
 {
@@ -188,7 +188,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     protected function _addPathToView($scriptPath)
     {
         $view = $this->_getView();
-        $physicalPath = PLUGIN_DIR . DIRECTORY_SEPARATOR . $scriptPath;
+        $physicalPath = PLUGIN_DIR . '/' . $scriptPath;
         $webPath      = WEB_PLUGIN . '/' . $scriptPath;
         $view->addAssetPath($physicalPath, $webPath);
         $view->addScriptPath($physicalPath);
@@ -238,7 +238,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         
         $view = $this->_getView();
         if ($themeName = $this->getThemeOption($theme)) {
-            $scriptPath = $this->_baseThemePath . DIRECTORY_SEPARATOR . $themeName;
+            $scriptPath = $this->_baseThemePath . '/' . $themeName;
             $view->addScriptPath($scriptPath);
             $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName);            
         }
@@ -254,7 +254,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     {
         if (($themeName = $this->getThemeOption($theme))) {
             $view = $this->_getView();
-            $scriptPath = $this->_baseThemePath . DIRECTORY_SEPARATOR . $themeName . DIRECTORY_SEPARATOR . $pluginModuleName;
+            $scriptPath = $this->_baseThemePath . '/' . $themeName . '/' . $pluginModuleName;
             $view->addScriptPath($scriptPath);
             $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName . '/' . $pluginModuleName);
         }
@@ -269,6 +269,6 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      */
     protected function getThemeOption($type)
     {
-        return @$this->_dbOptions[$type . '_theme'];
+        return Theme::getCurrentThemeName($type);
     }
 }

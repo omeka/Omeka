@@ -25,7 +25,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
     </div>
 </div>
 <div>
-    <input type="submit" name="submit" class="submit submit-medium" value="<?php echo __('Save Changes'); ?>" />
+    <input type="submit" name="submit" class="submit" value="<?php echo __('Save Changes'); ?>" />
 </div>
 </form>
 <?php else: ?>

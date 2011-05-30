@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -10,7 +10,7 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class ItemTable extends Omeka_Db_Table
 {    
@@ -171,7 +171,6 @@ class ItemTable extends Omeka_Db_Table
      *      ...
      *
      *
-     * @todo Should tag delimiter (,) be a site-wide setting?
      * @param Omeka_Db_Select
      * @param string|array A comma-delimited string or an array of tag names.
      * @return void
@@ -180,7 +179,7 @@ class ItemTable extends Omeka_Db_Table
     {   
         // Split the tags into an array if they aren't already     
         if (!is_array($tags)) {
-            $tags = explode(',', $tags);
+            $tags = explode(get_option('tag_delimiter'), $tags);
         }
         
         $db = $this->getDb();
@@ -248,7 +247,7 @@ class ItemTable extends Omeka_Db_Table
         $db = $this->getDb();
         
         if (!is_array($tags)){
-            $tags = explode(',', $tags);
+            $tags = explode(get_option('tag_delimiter'), $tags);
         }
         $subSelect = new Omeka_Db_Select;
         $subSelect->from(array('i'=>$db->Item), 'i.id')
@@ -356,9 +355,6 @@ class ItemTable extends Omeka_Db_Table
             $this->filterByRange($select, $params['range']);
         }
         
-        //Fire a plugin hook to add clauses to the SELECT statement
-        fire_plugin_hook('item_browse_sql', $select, $params);
-        
         // Order items by recent. @since 11/7/07  ORDER BY must not be in the 
         // COUNT() query b/c it slows down
         if (isset($params['recent'])) {
@@ -414,11 +410,38 @@ class ItemTable extends Omeka_Db_Table
         $select = new Omeka_Db_Select($db->getAdapter());
         
         $select->from(array('i'=>$db->Item), array('i.*'));
-        if($acl = Omeka_Context::getInstance()->getAcl()) {
+        $acl = Omeka_Context::getInstance()->acl;
+        if ($acl) {
             new ItemPermissions($select, $acl);
         }
         
         return $select;
+    }
+    
+    /**
+     * Return the first item accessible to the current user.
+     * 
+     * @return Item|null
+     */
+    public function findFirst()
+    {
+        $select = $this->getSelect();
+        $select->order('i.id ASC');
+        $select->limit(1);
+        return $this->fetchObject($select);
+    }
+    
+    /**
+     * Return the last item accessible to the current user.
+     * 
+     * @return Item|null
+     */
+    public function findLast()
+    {
+        $select = $this->getSelect();
+        $select->order('i.id DESC');
+        $select->limit(1);
+        return $this->fetchObject($select);
     }
     
     public function findPrevious($item)

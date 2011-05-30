@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -14,7 +14,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_File_Info
 {
@@ -180,11 +180,9 @@ class Omeka_File_Info
                 $id3->Analyze($this->_filePath);
                 $this->_id3 = $id3;
             } catch (getid3_exception $e) {
-                // Ignore errors where the file format could not be determined.
-                if (strstr($e->getMessage(), 'Unable to determine file format')) {
-                    return false;
-                }
-                throw $e;
+                $message = $e->getMessage();
+                _log("getID3: $message");
+                return false;
             }        
         }
         return $this->_id3;

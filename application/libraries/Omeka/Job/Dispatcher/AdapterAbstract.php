@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -10,7 +10,7 @@
  * Abstract class for job dispatcher adapters.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
 abstract class Omeka_Job_Dispatcher_AdapterAbstract implements Omeka_Job_Dispatcher_Adapter
 {
@@ -43,6 +43,16 @@ abstract class Omeka_Job_Dispatcher_AdapterAbstract implements Omeka_Job_Dispatc
             throw new Omeka_Job_Dispatcher_Adapter_RequiredOptionException($name);
         }
         return $this->_options[$name];
+    }
+
+    /**
+     * Whether or not the given option has been set.
+     *
+     * @param string $name
+     */
+    public function hasOption($name)
+    {
+        return array_key_exists($name, $this->_options);
     }
 
     /**

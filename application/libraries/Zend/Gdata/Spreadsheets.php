@@ -18,7 +18,7 @@
  * @subpackage   Spreadsheets
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Spreadsheets.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Spreadsheets.php 23805 2011-03-16 00:55:40Z tjohns $
  */
 
 /**
@@ -94,8 +94,8 @@ require_once('Zend/Gdata/Spreadsheets/CellQuery.php');
  */
 class Zend_Gdata_Spreadsheets extends Zend_Gdata
 {
-    const SPREADSHEETS_FEED_URI = 'http://spreadsheets.google.com/feeds/spreadsheets';
-    const SPREADSHEETS_POST_URI = 'http://spreadsheets.google.com/feeds/spreadsheets/private/full';
+    const SPREADSHEETS_FEED_URI = 'https://spreadsheets.google.com/feeds/spreadsheets';
+    const SPREADSHEETS_POST_URI = 'https://spreadsheets.google.com/feeds/spreadsheets/private/full';
     const WORKSHEETS_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#worksheetsfeed';
     const LIST_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#listfeed';
     const CELL_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#cellsfeed';

@@ -3,17 +3,6 @@ if (typeof Omeka === 'undefined') {
 }
 
 /**
- * Flash divs with the "alert" class.
- * Called on document.ready.
- */
-Omeka.alertBox = function () {
-    var alerts = jQuery('div.alert');
-    alerts.css('backgroundColor', 'white');
-    alerts.css('backgroundColor', '#ff9');
-    alerts.animate({backgroundColor: 'white'}, 1000);
-};
-
-/**
  * Add the TinyMCE WYSIWYG editor to a page.
  * Default is to add to all textareas.
  *
@@ -51,18 +40,17 @@ Omeka.wysiwyg = function (params) {
     tinyMCE.init(initParams);
 };
 
-// Flash "alert" divs.
-jQuery(window).load(Omeka.alertBox);
-
-
 jQuery(document).ready(function () {
     // Adds confirm dialog for delete buttons.
     jQuery('.delete-confirm').click(function () {
-		var url = jQuery(this).parents('form').attr('action');
-		jQuery.post(url, function (response){
-			jQuery(response).dialog({modal:true});
-		});
-		return false;
+        if (jQuery(this).is('input')) {
+            var url = jQuery(this).parents('form').attr('action');
+        } else if (jQuery(this).is('a')) {
+            var url = jQuery(this).attr('href');
+        }
+        jQuery.post(url, function (response){
+            jQuery(response).dialog({modal:true});
+        });
+        return false;
     });
-
 });

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -13,7 +13,7 @@
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  **/
 class UsersController extends Omeka_Controller_Action
 {
@@ -285,7 +285,7 @@ class UsersController extends Omeka_Controller_Action
     public function loginAction()
     {
         // require_once is necessary because lacking form autoloading.
-        require_once APP_DIR .DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR .'Login.php';
+        require_once APP_DIR . '/forms/Login.php';
         $loginForm = new Omeka_Form_Login;
         $loginForm = apply_filters('login_form', $loginForm);
         
@@ -315,7 +315,7 @@ class UsersController extends Omeka_Controller_Action
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {
             if ($log = $this->_getLog()) {
-                $ip = @$_SERVER['REMOTE_ADDR'];
+                $ip = $this->getRequest()->getClientIp();
                 $log->info("Failed login attempt from '$ip'.");
             }
             $this->flashError($this->getLoginErrorMessages($authResult));

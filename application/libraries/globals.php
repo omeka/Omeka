@@ -5,7 +5,7 @@
  * to reduce coupling.
  *
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -314,7 +314,7 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  */
 function add_mime_display_type($mimeTypes, $callback, array $options=array())
 {
-    require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'Media.php';
+    require_once HELPER_DIR . '/' . 'Media.php';
     Omeka_View_Helper_Media::addMimeTypes($mimeTypes, $callback, $options);
 }
 
@@ -675,7 +675,7 @@ function is_true($value)
 function get_theme_option($optionName, $themeName = null)
 {
     if (!$themeName) {
-        $themeName = get_option(Theme::PUBLIC_THEME_OPTION);
+        $themeName = Theme::getCurrentThemeName('public');
     }
     return Theme::getOption($themeName, $optionName);
 }
@@ -692,7 +692,7 @@ function get_theme_option($optionName, $themeName = null)
 function set_theme_option($optionName, $optionValue, $themeName = null)
 {
     if (!$themeName) {
-        $themeName = get_option(Theme::PUBLIC_THEME_OPTION);
+        $themeName = Theme::getCurrentThemeName('public');
     }
     return Theme::setOption($themeName, $optionName, $optionValue);
 }

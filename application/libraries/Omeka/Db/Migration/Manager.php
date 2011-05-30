@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -15,7 +15,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Db_Migration_Manager
 {
@@ -244,7 +244,7 @@ class Omeka_Db_Migration_Manager
 	    if (!preg_match('/^\d{14}_(\w+)\.php$/', $filename, $match)) {
 	        throw new Omeka_Db_Migration_Exception("Migration file '$filename' does not follow proper naming conventions.");
 	    }
-        $filePath = $this->_migrationsDir . DIRECTORY_SEPARATOR . $filename;
+        $filePath = $this->_migrationsDir . '/' . $filename;
         require_once $filePath;
 	    $class = $match[1];
 	    if (!class_exists($class)) {

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -13,7 +13,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2009-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_Plugin_Ini
 {
@@ -93,7 +93,7 @@ class Omeka_Plugin_Ini
         if ($pluginDirName instanceof Plugin) {
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
-        return $this->_pluginsRootDir . DIRECTORY_SEPARATOR . $pluginDirName . DIRECTORY_SEPARATOR . 'plugin.ini';
+        return $this->_pluginsRootDir . '/' . $pluginDirName . '/' . 'plugin.ini';
     }
     
     /**

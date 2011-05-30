@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -18,7 +18,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
 {
@@ -137,6 +137,9 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         
         $html .= "<h2>Session Data</h2>";
         $html .= '<pre>' . print_r($_SESSION, true) . '</pre>';
+
+        $html .= "<h2>Server Data</h2>";
+        $html .= '<pre>' . print_r($_SERVER, true) . '</pre>';
         
         $currentRoute = $router->getCurrentRouteName();
         $routes = $router->getRoutes();

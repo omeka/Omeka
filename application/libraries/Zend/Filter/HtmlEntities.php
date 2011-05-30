@@ -16,7 +16,7 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: HtmlEntities.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: HtmlEntities.php 24011 2011-05-04 18:56:38Z matthew $
  */
 
 /**
@@ -197,6 +197,20 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
      */
     public function filter($value)
     {
-        return htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
+        $filtered = htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
+        if (strlen((string) $value) && !strlen($filtered)) {
+            if (!function_exists('iconv')) {
+                require_once 'Zend/Filter/Exception.php';
+                throw new Zend_Filter_Exception('Encoding mismatch has resulted in htmlentities errors');
+            }
+            $enc      = $this->getEncoding();
+            $value    = iconv('', $enc . '//IGNORE', (string) $value);
+            $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
+            if (!strlen($filtered)) {
+                require_once 'Zend/Filter/Exception.php';
+                throw new Zend_Filter_Exception('Encoding mismatch has resulted in htmlentities errors');
+            }
+        }
+        return $filtered;
     }
 }

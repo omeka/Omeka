@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  **/
@@ -10,7 +10,7 @@
  * Test logins.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  **/
 class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
 {    
@@ -44,6 +44,29 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $this->assertNotRedirect();
         $this->assertContains(UsersController::INVALID_LOGIN_MESSAGE, $this->getResponse()->sendResponse());
         self::dbChanged(false);
+    }
+
+    public static function roles()
+    {
+        return array(
+            array('researcher'),
+            array('contributor'),
+            array('admin'),
+            array('super'),
+        );
+    }
+
+    /**
+     * @dataProvider roles
+     */
+    public function testLogout($role)
+    {
+        $user = $this->_getDefaultUser();
+        $user->role = $role;
+        $this->_authenticateUser($user);
+        $this->dispatch('/users/logout');
+        $this->assertController('users');
+        $this->assertAction('logout');
     }
     
     private function _login($username, $password)

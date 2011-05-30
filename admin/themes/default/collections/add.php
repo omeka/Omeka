@@ -6,7 +6,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 <div id="primary">
 <form method="post">
 <?php include 'form.php';?>	
-<input type="submit" class="submit submit-medium" name="submit" value="<?php echo __('Save Collection'); ?>" />
+<input type="submit" class="submit" name="submit" value="<?php echo __('Save Collection'); ?>" />
 </form>
 </div>
 <?php foot(); ?>

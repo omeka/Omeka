@@ -22,7 +22,7 @@ head(array('title' => $pageTitle), $header); ?>
     </div>
     </fieldset>
     <div>
-    <input type="submit" class="submit submit-medium" name="submit" value="<?php echo __('Activate'); ?>"/>
+    <input type="submit" class="submit" name="submit" value="<?php echo __('Activate'); ?>"/>
     </div>
 </form>
 

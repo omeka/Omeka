@@ -2,7 +2,7 @@
 /**
  * Helper functions for accessing and using theme assets.
  * 
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage AssetHelpers
@@ -97,8 +97,8 @@ function display_js($includeDefaults = true)
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
                        ->prependFile(src('jquery', $dir, 'js'));
         } else {
-            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js')
-                       ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js');
+            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js')
+                       ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js');
         }
     }
 
@@ -201,7 +201,7 @@ function src($file, $dir=null, $ext = null)
         $file .= '.'.$ext;
     }
     if ($dir !== null) {
-        $file = $dir.DIRECTORY_SEPARATOR.$file;
+        $file = $dir. '/' .$file;
     }
     return web_path_to($file);
 }
@@ -220,8 +220,8 @@ function physical_path_to($file)
 
     foreach ($paths as $path) {
         list($physical, $web) = $path;
-        if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
-            return $physical . DIRECTORY_SEPARATOR . $file;
+        if(file_exists($physical . '/' . $file)) {
+            return $physical . '/' . $file;
         }
     }
     throw new Exception( __("Could not find file %s!",$file) );
@@ -239,7 +239,7 @@ function web_path_to($file)
     $paths = $view->getAssetPaths();
     foreach ($paths as $path) {
         list($physical, $web) = $path;
-        if(file_exists($physical . DIRECTORY_SEPARATOR . $file)) {
+        if(file_exists($physical . '/' . $file)) {
             return $web . '/' . $file;
         }
     }

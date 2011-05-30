@@ -14,6 +14,6 @@ head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header); ?>
         <?php echo $this->formText('email', @$_POST['email'], array('class'=>'textinput')); ?>
     </div>
 
-    <input type="submit" class="submit submit-small" value="<?php echo __('Submit'); ?>" />
+    <input type="submit" class="submit" value="<?php echo __('Submit'); ?>" />
 </form>
 <?php foot(array(), $footer); ?>

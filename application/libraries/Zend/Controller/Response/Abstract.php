@@ -16,7 +16,7 @@
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Abstract.php 23967 2011-05-03 14:31:55Z adamlundrigan $
  */
 
 /**
@@ -257,7 +257,9 @@ abstract class Zend_Controller_Response_Abstract
         }
 
         $key = array_search($headerRaw, $this->_headersRaw);
-        unset($this->_headersRaw[$key]);
+        if ($key !== false) {
+            unset($this->_headersRaw[$key]);
+        }
 
         return $this;
     }

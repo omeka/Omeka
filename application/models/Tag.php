@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -10,7 +10,7 @@
  * @package Omeka
  * @subpackage Models
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Tag extends Omeka_Record { 
     
@@ -92,7 +92,7 @@ class Tag extends Omeka_Record {
      * 3) Loop through the new tags, loop through the joins and create a new one for each new tag
      * @return void
      */
-    public function rename($new_names, $user_id = null, $delimiter = ",") 
+    public function rename($new_names, $user_id = null) 
     {
         $joins = array();
         

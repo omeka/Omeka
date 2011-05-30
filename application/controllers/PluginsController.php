@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -13,7 +13,7 @@
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  **/
 class PluginsController extends Omeka_Controller_Action
 {
@@ -53,16 +53,13 @@ class PluginsController extends Omeka_Controller_Action
         if ($this->getRequest()->isPost()) {
             try {
                 $this->_pluginBroker->callHook('config', array($_POST), $plugin);
+                $this->flashSuccess(__('The %s plugin was successfully configured!', $plugin->getDisplayName()));
+                $this->redirect->goto('browse'); 
             } catch (Omeka_Validator_Exception $e) {
                 $this->flashValidationErrors($e);
-                $this->redirect->goto('config', null, null, array('name' => $plugin->getDirectoryName()));    
             }
-            
-            $this->flashSuccess(__('The %s plugin was successfully configured!', $plugin->getDisplayName()));
-            $this->redirect->goto('browse');   
-        } else {
-            $this->view->plugin = $plugin;
         }
+        $this->view->plugin = $plugin;
     }
     
     public function installAction()
@@ -192,6 +189,9 @@ class PluginsController extends Omeka_Controller_Action
         } else {
             $versionCheck = true;
         }
+
+
+
         $this->view->assign(array('plugins'=>$allPlugins, 'loader'=>$this->_pluginLoader, 'versionCheck'=>$versionCheck));
     }
     

@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
@@ -12,11 +12,10 @@
 require_once HELPERS;
 
 /**
- * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
- * in helpers/StringFunctions.php
+ * Tests tag_cloud() in application/helpers/TagFunctions.php.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */ 
 class Omeka_Helper_TagFunctions_TagCloudTest extends PHPUnit_Framework_TestCase
 {       

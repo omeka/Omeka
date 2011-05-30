@@ -1,7 +1,7 @@
 <?php 
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
@@ -9,7 +9,7 @@
  
 //Define our resources/privileges in a flat list here
 $resources = array(
-    'Items'         =>  array('add','editSelf',  'editAll', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
+    'Items'         =>  array('add', 'batch-edit', 'edit', 'editSelf', 'editAll', 'delete', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
     'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
     'ElementSets'   =>  array('browse', 'delete'),
     'Files'         =>  array('edit','delete'),
@@ -36,7 +36,7 @@ $allowList = array(
     //Researchers can view items and collections that are not yet public
     array('researcher',array('Items', 'Collections'),array('showNotPublic')),
     //Contributors can add and tag items, edit or delete their own items, and see their items that are not public
-    array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
+    array('contributor', 'Items', array('tag', 'add', 'batch-edit', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
     //Non-authenticated users can access the upgrade script (for logistical reasons).
     array(null, 'Upgrade')
 ); 
@@ -74,5 +74,7 @@ $acl->deny(array(null, 'researcher', 'contributor', 'admin', 'super'), 'Users');
 // it to fail.
 $acl->allow(array('contributor', 'researcher', 'admin', 'super'), 'Users', null,
     new User_AclAssertion());
+$acl->allow(array('contributor', 'researcher', 'admin', 'super'),
+    'Items', array('edit', 'delete'), new Item_OwnershipAclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 ?>

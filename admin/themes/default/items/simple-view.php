@@ -44,7 +44,7 @@
         <?php echo hidden(array('name'=>"items[$id][id]"), $id); ?>
     </td>
     <td>
-    <?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
+    <?php if (has_permission($item, 'edit')): ?>
     <?php echo link_to_item(__('Edit'), array('class'=>'edit'), 'edit'); ?>
     <?php endif; ?>
     </td>

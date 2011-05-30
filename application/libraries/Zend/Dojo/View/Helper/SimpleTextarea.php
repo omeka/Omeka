@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: SimpleTextarea.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: SimpleTextarea.php 23925 2011-05-02 19:21:00Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */
@@ -31,7 +31,7 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: SimpleTextarea.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: SimpleTextarea.php 23925 2011-05-02 19:21:00Z matthew $
  */
 class Zend_Dojo_View_Helper_SimpleTextarea extends Zend_Dojo_View_Helper_Dijit
 {
@@ -65,7 +65,6 @@ class Zend_Dojo_View_Helper_SimpleTextarea extends Zend_Dojo_View_Helper_Dijit
             $attribs['id']    = $id;
         }
         $attribs['name']  = $id;
-        $attribs['type']  = $this->_elementType;
 
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 

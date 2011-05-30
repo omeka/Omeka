@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -22,7 +22,7 @@
  * @access private
  * @uses Omeka_Context
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Core extends Zend_Application
 {
@@ -61,7 +61,7 @@ class Omeka_Core extends Zend_Application
         // instantiate Omeka_Core with no arguments.
         if (!$environment && !$options) {
             $environment = APPLICATION_ENV;
-            $options = CONFIG_DIR . DIRECTORY_SEPARATOR . 'application.ini';
+            $options = CONFIG_DIR . '/' . 'application.ini';
         }
         parent::__construct($environment, $options);
         
@@ -179,6 +179,7 @@ class Omeka_Core extends Zend_Application
      */
     private function _displayErrorPage($e, $title = null)
     {
+        $displayErrors = (bool) ini_get('display_errors');
         header("HTTP/1.0 500 Internal Server Error");
 ?>
 <!DOCTYPE html>
@@ -190,10 +191,11 @@ class Omeka_Core extends Zend_Application
 </head>
 <body>
     <div id="content">
-        <h1><?php echo isset($title) ? $title : 'Omeka Has Encountered an Error'; ?></h1>
-        <?php if (is_string($e)): ?>
+        <h1><?php echo isset($title) && $displayErrors ? $title : 'Omeka Has Encountered an Error'; ?></h1>
+        <?php if ($displayErrors): ?>
+            <?php if (is_string($e)): ?>
             <p><?php echo nl2br($e); ?></p>
-        <?php else: ?>
+            <?php else: ?>
             <dl id="error-message">
                 <dt><?php echo get_class($e); ?></dt>   
                 <dd>
@@ -201,6 +203,11 @@ class Omeka_Core extends Zend_Application
                 </dd>
             </dl>
             <pre id="backtrace"><?php echo $e->getTraceAsString(); ?></pre>
+            <?php endif; ?>
+        <?php else: ?>
+            <p>To learn how to see more detailed information about this error, see the
+            Omeka Codex page on <a href="http://omeka.org/codex/Retrieving_error_messages">retrieving error messages</a>.
+            </p>
         <?php endif; ?>
     </div>
 </body>

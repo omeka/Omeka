@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
@@ -18,7 +18,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
 {
@@ -27,11 +27,13 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
      *
      * @var string
      */
-    protected $_adminWhitelist = array(array('controller' => 'users', 'action' => 'activate'), 
-                                       array('controller' => 'users', 'action' => 'login'),
-                                       array('controller' => 'users', 'action' => 'forgot-password'),
-                                       array('controller' => 'installer', 'action' => 'notify'),
-                                       array('controller' => 'error', 'action' => 'error'));
+    protected $_adminWhitelist = array(
+        array('controller' => 'users', 'action' => 'activate'),
+        array('controller' => 'users', 'action' => 'login'),
+        array('controller' => 'users', 'action' => 'forgot-password'),
+        array('controller' => 'installer', 'action' => 'notify'),
+        array('controller' => 'error', 'action' => 'error')
+    );
     
     /**
      * Direct requests to the admin interface.
@@ -57,21 +59,9 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $action = $request->getActionName();
-        $controller = $request->getControllerName();
-
         $this->_adminWhitelist = apply_filters('admin_whitelist', $this->_adminWhitelist);
-        
-        $overrideLogin = false;
-        foreach ($this->_adminWhitelist as $entry) {
-            if (($entry['controller'] == $controller) && ($entry['action'] == $action)) {
-                $overrideLogin = true;
-                break;
-            }
-        }
-        
-        // If we haven't overridden the need to login
-        if (!$overrideLogin) {
+
+        if ($this->_requireLogin($request)) {
         
             // Deal with the login stuff
             require_once 'Zend/Auth.php';
@@ -112,6 +102,41 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
     public function getAuth()
     {
         return Omeka_Context::getInstance()->getAuth();
+    }
+
+    /**
+     * Determine whether or not the request requires an authenticated 
+     * user.  
+     *
+     * @return boolean
+     */
+    private function _requireLogin($request)
+    {
+        $action = $request->getActionName();
+        $controller = $request->getControllerName();
+        $module = $request->getModuleName();
+
+        foreach ($this->_adminWhitelist as $entry) {
+            // Any whitelist entry that omits the module will be assumed to be
+            // talking about the default module.
+            if (!array_key_exists('module', $entry)) {
+                $entry['module'] = 'default';
+            }
+
+            $inWhitelist = ($entry['controller'] == $controller) 
+                        && ($entry['action'] == $action);
+
+            // Module name is not always defined in the request.
+            if ($module !== null) {
+                $inWhitelist = $inWhitelist && ($entry['module'] == $module);
+            }
+
+            if ($inWhitelist) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 

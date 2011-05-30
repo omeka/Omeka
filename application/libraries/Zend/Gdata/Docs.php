@@ -18,7 +18,7 @@
  * @subpackage Docs
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Docs.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Docs.php 23805 2011-03-16 00:55:40Z tjohns $
  */
 
 /**
@@ -59,10 +59,10 @@ require_once 'Zend/Gdata/App/Extension/Title.php';
 class Zend_Gdata_Docs extends Zend_Gdata
 {
 
-    const DOCUMENTS_LIST_FEED_URI = 'http://docs.google.com/feeds/documents/private/full';
-    const DOCUMENTS_FOLDER_FEED_URI = 'http://docs.google.com/feeds/folders/private/full';
-    const DOCUMENTS_CATEGORY_SCHEMA = 'http://schemas.google.com/g/2005#kind';
-    const DOCUMENTS_CATEGORY_TERM = 'http://schemas.google.com/docs/2007#folder';
+    const DOCUMENTS_LIST_FEED_URI = 'https://docs.google.com/feeds/documents/private/full';
+    const DOCUMENTS_FOLDER_FEED_URI = 'https://docs.google.com/feeds/folders/private/full';
+    const DOCUMENTS_CATEGORY_SCHEMA = 'https://schemas.google.com/g/2005#kind';
+    const DOCUMENTS_CATEGORY_TERM = 'https://schemas.google.com/docs/2007#folder';
     const AUTH_SERVICE_NAME = 'writely';
 
     protected $_defaultPostUri = self::DOCUMENTS_LIST_FEED_URI;
@@ -162,7 +162,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
      * @return Zend_Gdata_Docs_DocumentListEntry
      */
     public function getDoc($docId, $docType) {
-        $location = 'http://docs.google.com/feeds/documents/private/full/' .
+        $location = 'https://docs.google.com/feeds/documents/private/full/' .
             $docType . '%3A' . $docId;
         return $this->getDocumentListEntry($location);
     }
@@ -215,7 +215,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
      *         which are enumerated in SUPPORTED_FILETYPES.
      * @param string $uri (optional) The URL to which the upload should be
      *         made.
-     *         Example: 'http://docs.google.com/feeds/documents/private/full'.
+     *         Example: 'https://docs.google.com/feeds/documents/private/full'.
      * @return Zend_Gdata_Docs_DocumentListEntry The entry for the newly
      *         created Google Document.
      */
