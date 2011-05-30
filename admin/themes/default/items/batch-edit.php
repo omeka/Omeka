@@ -86,7 +86,7 @@ if (!$isPartial):
         <div class="field">
             <label for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
             <?php echo $this->formText('metadata[tags]', null, array('size' => 32, 'class' => 'textinput')); ?>
-            <p class="explanation"><?php echo __('Comma-separated list of tags to add to all checked items.'); ?></p>
+            <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', settings('tag_delimiter')); ?></p>
         </div>
     </fieldset>
     <?php if ($showItemFields): ?>
