@@ -61,6 +61,14 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
                                                           'a.href',
                                                           'a.title',
                                                           'a.target');
+    private static $_purifierConfig = array(
+        'Core.Encoding' => 'UTF-8',
+        'Cache.DefinitionImpl' => null, // Caching disabled
+        'Attr.AllowedFrameTargets' => array('_blank'),
+        'Core.Encoding' => 'UTF-8',
+        'HTML.TidyLevel' => 'none',
+    );
+
     /**
      * Filter the value
      * 
@@ -127,7 +135,7 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
      * @param string $tidyLevel Either 'none', 'light', 'medium', or 'heavy' See http://htmlpurifier.org/docs/enduser-tidy.html
      * @return HTMLPurifier 
      **/
-    public static function createHtmlPurifier($allowedHtmlElements=null, $allowedHtmlAttributes=null, $tidyLevel = 'none')
+    public static function createHtmlPurifier($allowedHtmlElements=null, $allowedHtmlAttributes=null)
     {
         // Require the HTML Purfier autoloader.
         require_once 'htmlpurifier/HTMLPurifier.auto.php';        
@@ -152,21 +160,17 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
 
         $purifierConfig = HTMLPurifier_Config::createDefault();
         
-        // Set the encoding to UTF-8
-        $purifierConfig->set('Core.Encoding', 'UTF-8');
-        
-        // Set the Tidy settings
-        $purifierConfig->set('HTML.TidyLevel', $tidyLevel);
-
         // Allow HTML tags. Setting this as NULL allows a subest of TinyMCE's 
         // valid_elements whitelist. Setting this as an empty string disallows 
         // all HTML elements.
         $purifierConfig->set('HTML.AllowedElements', implode(',', $allowedHtmlElements));
         $purifierConfig->set('HTML.AllowedAttributes', implode(',', $allowedHtmlAttributes));
+        foreach (self::$_purifierConfig as $key => $value) {
+            $purifierConfig->set($key, $value);
+        }
 
         // Disable caching.
-        $purifierConfig->set('Cache.DefinitionImpl', null);
-
+        //var_dump($purifierConfig->get('Attr.AllowedFrameTargets'));exit;
         // Get the purifier as a singleton.
         $purifier = HTMLPurifier::instance($purifierConfig);
                 
