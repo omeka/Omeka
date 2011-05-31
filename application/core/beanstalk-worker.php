@@ -54,7 +54,7 @@ function handle_signal($signal)
 pcntl_signal(SIGINT, "handle_signal");
 
 
-$core->bootstrap(array('Autoloader'));
+$core->bootstrap(array('Autoloader', 'Logger'));
 $host = isset($options->host) ? $options->host : '127.0.0.1';
 $port = isset($options->port) ? $options->port : 11300;
 $pheanstalk = new Pheanstalk("$host:$port");
@@ -81,7 +81,6 @@ $core->bootstrap(array(
     'Plugins', 
     'Jobs', 
     'Storage',
-    'Logger',
 ));
 
 // Log all to stdout.
