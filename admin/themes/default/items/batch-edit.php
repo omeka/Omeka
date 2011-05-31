@@ -89,6 +89,9 @@ if (!$isPartial):
             <p class="explanation">List of tags to add to all checked items, separated by <?php echo settings('tag_delimiter'); ?>.</p>
         </div>
     </fieldset>
+
+    <?php fire_plugin_hook('admin_append_to_items_batch_edit_form'); ?>
+
     <?php if ($showItemFields): ?>
     <fieldset style="width: 70%;">
         <legend>Delete Items</legend>

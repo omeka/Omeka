@@ -17,6 +17,7 @@ class Item_BatchEditJob extends Omeka_JobAbstract {
         if ($itemIds = $this->_options['itemIds']) {
             $delete = $this->_options['delete'];
             $metadata = $this->_options['metadata'];
+            $custom = $this->_options['custom'];
             
             foreach ($itemIds as $id) {
                 $item = $this->_getItem($id);
@@ -28,8 +29,8 @@ class Item_BatchEditJob extends Omeka_JobAbstract {
                             unset($metadata[$key]);
                         }
                     }
-                    
                     update_item($item, $metadata);
+                    fire_plugin_hook('items_batch_edit_custom', $item, $custom);
                 }
             }
         }
