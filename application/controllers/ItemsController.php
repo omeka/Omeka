@@ -354,6 +354,7 @@ class ItemsController extends Omeka_Controller_Action
                             $errorMessage = 'User is not allowed to tag selected items.';
                             break;
                         }
+                        release_object($item);
                     }
                 }
             }

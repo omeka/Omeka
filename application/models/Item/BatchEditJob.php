@@ -32,6 +32,7 @@ class Item_BatchEditJob extends Omeka_JobAbstract {
                     update_item($item, $metadata);
                     fire_plugin_hook('items_batch_edit_custom', $item, $custom);
                 }
+                release_object($item);
             }
         }
     }

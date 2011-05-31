@@ -34,6 +34,7 @@ if (!$isPartial):
                 $showItemFields = false;
             }
             $itemCheckboxes[$id] = item('Dublin Core', 'Title', null, $item);
+            release_object($item);
         }
         echo $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes); ?>
         </div>
