@@ -255,7 +255,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->dispatch('/items/batch-edit-save');
         $this->assertRedirectTo('/items/browse');
         $flash = new Omeka_Controller_Flash;
-        $this->assertContains("User is not allowed to edit selected items.", $flash->getMsg());
+        $this->assertContains("User is not allowed", $flash->getMsg());
     }
     
     /**

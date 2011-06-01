@@ -136,30 +136,30 @@ class Omeka_Plugin_Mvc
         $sharedDir     = $viewsDir . '/shared';
         
         //Add 'models' and 'libraries' directories to the include path
-        if (file_exists($modelDir) && !$this->_hasIncludePath($modelDir)) {
+        if (is_dir($modelDir) && !$this->_hasIncludePath($modelDir)) {
             set_include_path(get_include_path() . PATH_SEPARATOR . $modelDir );
         }
         
-        if (file_exists($librariesDir) && !$this->_hasIncludePath($librariesDir)) {
+        if (is_dir($librariesDir) && !$this->_hasIncludePath($librariesDir)) {
             set_include_path(get_include_path() . PATH_SEPARATOR . $librariesDir);
         }
         
         $moduleName = $this->_getModuleName($pluginDirName);
 
         //If the controller directory exists, add that 
-        if (file_exists($controllerDir)) {
+        if (is_dir($controllerDir)) {
             $this->addControllerDir($pluginDirName, $moduleName);   
         }
         
-        if (file_exists($sharedDir)) {
+        if (is_dir($sharedDir)) {
             $this->addThemeDir($pluginDirName, 'views/shared', 'shared', $moduleName);
         }
         
-        if (file_exists($adminDir)) {
+        if (is_dir($adminDir)) {
             $this->addThemeDir($pluginDirName, 'views/admin', 'admin', $moduleName);
         }
 
-        if (file_exists($publicDir)) {
+        if (is_dir($publicDir)) {
             $this->addThemeDir($pluginDirName, 'views/public', 'public', $moduleName);
         }
     }
