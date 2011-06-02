@@ -25,12 +25,12 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
     /**
      * Omeka-XML namespace URI.
      */
-    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v3';
+    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v4';
     
     /**
      * Omeka-XML XML Schema URI.
      */
-    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v3/omeka-xml-3-0.xsd';
+    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v4/omeka-xml-4-0.xsd';
     
     /**
      * This class' contextual record(s).
@@ -230,6 +230,11 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
             // elementContainer
             $elementContainerElement = $this->_createElement('elementContainer');
             foreach ($elementSet->elements as $elementId => $element) {
+                // Exif data may contain invalid XML characters. Avoid encoding 
+                // errors by skipping relevent elements.
+                if ('Omeka Image File' == $elementSet->name && ('Exif Array' == $element->name || 'Exif String' == $element->name)) {
+                    continue;
+                }
                 // element
                 $elementElement = $this->_createElement('element', null, $elementId);
                 $nameElement = $this->_createElement('name', $element->name, null, $elementElement);
@@ -341,6 +346,11 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $collectionElement = $this->_createElement('collection', null, $item->Collection->id);
         $nameElement = $this->_createElement('name', $item->Collection->name, null, $collectionElement);
         $descriptionElement = $this->_createElement('description', $item->Collection->description, null, $collectionElement);
+        $collectorContainerElement = $this->_createElement('collectorContainer');
+        foreach ($item->Collection->getCollectors() as $collector) {
+            $collectorElement = $this->_createElement('collector', $collector, null, $collectorContainerElement);
+        }
+        $collectionElement->appendChild($collectorContainerElement);
         $parentElement->appendChild($collectionElement);
     }
     
