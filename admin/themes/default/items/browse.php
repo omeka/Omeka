@@ -125,6 +125,7 @@
             <?php
             $browseHeadings['Title'] = 'Dublin Core,Title';
             $browseHeadings['Creator'] = 'Dublin Core,Creator';
+            $browseHeadings['Type']     = null;
             $browseHeadings['Date Added'] = 'added';
 
             echo browse_headings($browseHeadings); ?>
@@ -163,7 +164,10 @@
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
             </div>
         </td>
-        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>    
+        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>
+        <td><?php echo ($typeName = item('Item Type Name'))
+                    ? $typeName
+                    : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
         <td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
     </tr>
     <?php endwhile; ?>
