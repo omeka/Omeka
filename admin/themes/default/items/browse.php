@@ -178,7 +178,7 @@
                 ?>
                 <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
                 <ul>
-                    <li><strong>Collection:</strong> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
+                    <li><strong>Collection:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo 'No Collection'; ?></li>
                     <li><strong>Tags:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo 'No Tags'; ?></li>
                 </ul>
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
