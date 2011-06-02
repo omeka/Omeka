@@ -110,12 +110,14 @@
     </div>
     
 <form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="get" accept-charset="utf-8">
-<?php if (has_permission('Items', 'edit')): ?>
-    <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+    <div class="group">
+    <?php if (has_permission('Items', 'edit')): ?>
+        <div class="batch-edit-option">
+            <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+        </div>
+    <?php endif; ?>
+        <div class="pagination"><?php echo pagination_links(); ?></div>
     </div>
-<?php endif; ?>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
     <table id="items" class="simple" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -125,6 +127,7 @@
             <?php
             $browseHeadings['Title'] = 'Dublin Core,Title';
             $browseHeadings['Creator'] = 'Dublin Core,Creator';
+            $browseHeadings['Type']     = null;
             $browseHeadings['Date Added'] = 'added';
 
             echo browse_headings($browseHeadings); ?>
@@ -163,23 +166,28 @@
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
             </div>
         </td>
-        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>    
+        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>
+        <td><?php echo ($typeName = item('Item Type Name'))
+                    ? $typeName
+                    : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
         <td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
     </tr>
     <?php endwhile; ?>
     </tbody>
     </table>
+    <div class="group">
     <?php if (has_permission('Items', 'edit')): ?>
-    <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
-    </div>
+        <div class="batch-edit-option">
+            <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+        </div>
     <?php endif; ?>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
+        <div class="pagination"><?php echo pagination_links(); ?></div>
+    </div>
 </form>
 
 <div id="output-formats">
     <h2>Output Formats</h2>
-    <?php echo output_format_list(false); ?>
+    <?php echo output_format_list(false, ' · '); ?>
 </div>
 
 <?php elseif(!total_items()): ?>

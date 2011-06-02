@@ -314,6 +314,11 @@ th.sorting {
     padding-left: 15px;
 }
 
+th a:link {color: #c60 !important;}
+th a:visited {color: #c60;}
+th a:hover {color: #c90;}
+th a:active {color: #c90;}
+
 th.desc {
     background-image:url("../../../../application/views/scripts/images/silk-icons/bullet_arrow_down.png");
 }
@@ -358,10 +363,10 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     
     /* Tables */
     table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;border-bottom:1px solid #d7d5c4;}
-        thead th { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px;}
+        thead th { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px; white-space:nowrap;}
         tbody th { font-weight:bold;}
         
-        th,td {padding:0.75em;}
+        th,td {padding:0.75em; word-wrap: break-word;}
         tbody tr {padding:0.75em 0;}
         tr.even {}
         tbody tr {border-top:1px dotted #d7d5c4;}
@@ -485,10 +490,10 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     /* Item Browse styles */
     .browse-items .simple li.nav-list-view a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
     
-    .browse-items .pagination {float:right; width: 48%; clear:right; text-align:right !important; margin-bottom:1em;}
+    form#items-browse {margin-top:1em;}
+    .browse-items .pagination {float:right; width: 48%; clear:right; text-align:right !important;}
     .browse-items .pagination ul {text-align:right; margin:0; padding:0; line-height:2;}
-    #browse-meta {overflow:hidden;clear:both;}
-    table#items {width:100%; border-top:2px solid #d7d5c4; clear:both;} 
+    table#items {width:100%; border-top:2px solid #d7d5c4; margin-top: 1em;clear:both;} 
     .items #primary {clear:right;}
     
     .batch-edit-option {float:left; width: 48%;margin:0; display:block; line-height:2;}
@@ -497,7 +502,8 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     td.batch-edit-check {
         width: 12px;
     }
-    tr.item .title {
+    tr.item .item-info {
+        width: 50%;
     }
     tr.item .title a {
         text-decoration:none;
@@ -530,6 +536,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     tr.item .square-thumbnail img {
         max-width: 100%;
     }
+    
     /* Simple Search */
     #simple-search-form {
         padding:0;
@@ -597,6 +604,28 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 	#items-sort li:first-child:after {
 		content: ": ";
 		padding:0;
+	}
+	
+	#output-formats {
+	    clear:both;
+	    margin-top:2em;
+	}
+	
+	#output-formats h2 {
+	    display:inline;
+	    font-weight:bold;
+	    color: #666;
+	    font-size:1.2em;
+	    line-height: 1.5em;
+	    font-family:"Lucida Grande", Verdana, sans-serif;
+	}
+	
+	#output-formats h2:after {
+	    content:": ";
+	}
+	
+	#output-formats p {
+	    display:inline;
 	}
     /* Item show styles */
     
