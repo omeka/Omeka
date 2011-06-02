@@ -187,7 +187,7 @@
 
 <div id="output-formats">
     <h2>Output Formats</h2>
-    <?php echo output_format_list(false); ?>
+    <?php echo output_format_list(false, ' · '); ?>
 </div>
 
 <?php elseif(!total_items()): ?>
