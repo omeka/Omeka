@@ -20,6 +20,22 @@
                 }
             });
             
+            jQuery('#toggle-all-details').toggle(function(event) {
+                event.preventDefault();
+                jQuery('tr.item').each(function() {
+                    var itemDetails = jQuery(this).find('.item-details');
+                    itemDetails.slideDown('fast');
+                    jQuery('#toggle-all-details').text('Hide Details');
+                });
+            }, function(event) {
+                event.preventDefault();
+                jQuery('tr.item').each(function() {
+                    var itemDetails = jQuery(this).find('.item-details');
+                    itemDetails.slideUp('fast');
+                    jQuery('#toggle-all-details').text('Show Details');
+                });
+            });
+            
             var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
             var globalCheckbox = jQuery('th#batch-edit-heading').html('<input type="checkbox">').find('input');
             var batchEditSubmit = jQuery('.batch-edit-option input');
@@ -101,6 +117,8 @@
                 'Featured' => uri('items/browse?featured=1')
                 ));
         ?>
+            <li><strong>Toggle</strong></li>
+            <li><a href="#" id="toggle-all-details">Show Details</a></li>
         </ul>
         <div id="simple-search-form">
             <?php echo simple_search(); ?>
