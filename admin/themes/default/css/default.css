@@ -193,7 +193,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 /* -- Layout -- */
 
 #primary { background:#fff; padding:18px;border:1px solid #d7d5c4; border-width: 3px 0;}
-#secondary {}
+#secondary {margin-top: 3px;}
 #tertiary {background:#fff; padding: 18px; border:1px solid #d7d5c4; border-width: 3px 0;}
 
 /* .primary */
@@ -208,9 +208,6 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 .primary-secondary-tertiary #primary {float:left; width: 558px;}
 .primary-secondary-tertiary #secondary {float:right; width: 224px;}
 .primary-secondary-tertiary #tertiary {clear:both;}
-
-/* Secondary content */
-#secondary {}
 
 /* -- Navigation -- */
 
