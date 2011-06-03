@@ -20,20 +20,15 @@
                 }
             });
             
-            jQuery('#toggle-all-details').toggle(function(event) {
-                event.preventDefault();
-                jQuery('tr.item').each(function() {
-                    var itemDetails = jQuery(this).find('.item-details');
-                    itemDetails.slideDown('fast');
-                    jQuery('#toggle-all-details').text('Hide Details');
-                });
-            }, function(event) {
-                event.preventDefault();
-                jQuery('tr.item').each(function() {
-                    var itemDetails = jQuery(this).find('.item-details');
-                    itemDetails.slideUp('fast');
-                    jQuery('#toggle-all-details').text('Show Details');
-                });
+            // Toggle item details.
+            jQuery('#toggle-all-details').toggle(function(e) {
+                e.preventDefault();
+                jQuery(this).text('Hide Details');
+                jQuery('.item-details').slideDown('fast');
+            }, function(e) {
+                e.preventDefault();
+                jQuery(this).text('Show Details');
+                jQuery('.item-details').slideUp('fast');
             });
             
             var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
