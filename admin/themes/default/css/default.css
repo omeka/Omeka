@@ -555,21 +555,22 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 			margin:0;
         }
 
-    #items-sort,
+    #browse-meta ul,
 	#advanced-search-link {
 		font-size:1.1em;
 		margin:0;
 		padding:0;
-		line-height:1;
 	}
-	
-	#items-sort {
-		line-height:2;
+
+    #browse-meta-lists {
 		float:left;
 	}
+
+    #browse-meta-lists ul{
+        line-height:2;
+    }
 	
-	#items-sort a,
-	#advanced-search-link {
+	#browse-meta a {
 		text-decoration:none;
 		font-weight:bold;
 	}
@@ -579,22 +580,18 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 		text-align:right;
 		margin-top: 6px;
 	}
-		
-	#items-sort .navigation a {
-		text-decoration:none;	
-	}
 	
-	#items-sort li {
+	#browse-meta li {
 	    display:inline;
 	}
 	
-	#items-sort li:not(:last-child):after {
+	#browse-meta li:not(:last-child):after {
 		content: " · ";
 		color: #bbb;
 		padding:0 2px;
 	}
 	
-	#items-sort li:first-child:after {
+	#browse-meta li:first-child:after {
 		content: ": ";
 		padding:0;
 	}

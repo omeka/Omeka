@@ -19,6 +19,13 @@
                     });
                 }
             });
+
+            var toggleList = '<ul id="browse-toggles">'
+                           + '<li><strong>Toggle</strong></li>'
+                           + '<li><a href="#" id="toggle-all-details">Show Details</a></li>'
+                           + '</ul>';
+
+            jQuery('#items-sort').after(toggleList);
             
             // Toggle item details.
             jQuery('#toggle-all-details').toggle(function(e) {
@@ -102,19 +109,19 @@
         });
     </script>
     <div id="browse-meta" class="group">
-        <ul id="items-sort" class="navigation">
-            <li><strong>Quick Filter</strong></li>
-        <?php
-            echo nav(array(
-                'All' => uri('items'),
-                'Public' => uri('items/browse?public=1'),
-                'Private' => uri('items/browse?public=0'),
-                'Featured' => uri('items/browse?featured=1')
+        <div id="browse-meta-lists">
+            <ul id="items-sort" class="navigation">
+                <li><strong>Quick Filter</strong></li>
+            <?php
+                echo nav(array(
+                    'All' => uri('items'),
+                    'Public' => uri('items/browse?public=1'),
+                    'Private' => uri('items/browse?public=0'),
+                    'Featured' => uri('items/browse?featured=1')
                 ));
-        ?>
-            <li><strong>Toggle</strong></li>
-            <li><a href="#" id="toggle-all-details">Show Details</a></li>
-        </ul>
+            ?>
+            </ul>
+        </div>
         <div id="simple-search-form">
             <?php echo simple_search(); ?>
             <?php echo link_to_advanced_search('Advanced Search', array('id' => 'advanced-search-link')); ?>
