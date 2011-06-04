@@ -39,14 +39,40 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_Session
     private function _getSessionConfig()
     {
         $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap('Config');
+        $bootstrap->bootstrap(array('Config', 'Db'));
         $config = $bootstrap->getResource('Config');
         $sessionConfig = isset($config->session) 
                        ? $config->session->toArray()
                        : array();
         
-        if (!array_key_exists('name', $sessionConfig) || empty($sessionConfig['name'])) {
+        if (!array_key_exists('name', $sessionConfig) 
+            || empty($sessionConfig['name'])
+        ) {
             $sessionConfig['name'] = $this->_buildSessionName();
+        }
+
+        // Default is store sessions in the sessions table.
+        if (!array_key_exists('saveHandler', $sessionConfig)) {
+            $db = $bootstrap->db;
+            $hasSessionTable = (boolean)$db->fetchOne(
+                "SHOW TABLES LIKE '{$db->prefix}sessions'"
+            );
+            if ($hasSessionTable) {
+                $sessionConfig['saveHandler'] = array(
+                    'class' => "Omeka_Session_SaveHandler_DbTable",
+                    'options' => array(
+                        'name' => "omeka_sessions",
+                        'primary' => "id",
+                        'modifiedColumn' => "modified",
+                        'dataColumn' => "data",
+                        'lifetimeColumn' => "lifetime",
+                    ),
+                );
+            }
+        } else if (!$sessionConfig['saveHandler']){
+            // Set session.saveHandler = false to use the filesystem for storing
+            // sessions.
+            unset($sessionConfig['saveHandler']);
         }
 
         return $sessionConfig;
