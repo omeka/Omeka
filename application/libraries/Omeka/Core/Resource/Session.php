@@ -61,7 +61,7 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_Session
                 $sessionConfig['saveHandler'] = array(
                     'class' => "Omeka_Session_SaveHandler_DbTable",
                     'options' => array(
-                        'name' => "omeka_sessions",
+                        'name' => $db->prefix . "sessions",
                         'primary' => "id",
                         'modifiedColumn' => "modified",
                         'dataColumn' => "data",
