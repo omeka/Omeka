@@ -46,12 +46,11 @@ abstract class Omeka_JobAbstract implements Omeka_Job
      */
     private function _setOptions(array $options)
     {
+        $this->_options = $options;
         foreach ($options as $optionName => $optionValue) {
             $setMethodName = 'set' . ucwords($optionName);
             if (method_exists($this, $setMethodName)) {
                 $this->{$setMethodName}($optionValue);
-            } else {
-                $this->_options[$optionName] = $optionValue;
             }
         }
     }
