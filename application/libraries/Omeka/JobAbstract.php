@@ -65,4 +65,13 @@ abstract class Omeka_JobAbstract implements Omeka_Job
     {
         $this->_dispatcher = $dispatcher;
     }
+
+    /**
+     * Resend the job using the same options that were passed to the current 
+     * job.
+     */
+    public function resend()
+    {
+        return $this->_dispatcher->send(get_class($this), $this->_options);
+    }
 }
