@@ -13,7 +13,7 @@
 
 <h1 id="item-title"><?php echo $itemTitle; ?> <span class="view-public-page">[ <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>">View Public Page</a> ]</span></h1>
 
-<?php if (has_permission('Items', 'edit') or $item->wasAddedBy(current_user())): ?>
+<?php if (has_permission($item, 'edit')): ?>
 <p id="edit-item" class="edit-button"><?php 
 echo link_to_item('Edit this Item', array('class'=>'edit'), 'edit'); ?></p>   
 <?php endif; ?>
@@ -80,6 +80,7 @@ jQuery(document).ready(function () {
                     <input type="hidden" name="id" value="<?php echo item('id'); ?>" id="item-id" />
                     <input type="text" class="textinput" name="tags" id="tags-field" value="<?php echo tag_string(current_user_tags_for_item()); ?>" />
                 </div>
+                <p id="add-tags-explanation">Separate tags with <?php echo settings('tag_delimiter'); ?></p>
                 <div>
                     <input type="submit" class="submit" name="modify_tags" value="Save Tags" id="tags-submit" />
                 </div>

@@ -10,7 +10,7 @@
             <tr>
                 <th>Type Name</th>
                 <th>Description</th>
-                <th>Total Number of Items</th>
+                <th>Total Items</th>
                 <?php if (has_permission('ItemTypes', 'edit')): ?>
                 <th>Edit?</th>
                 <?php endif; ?>

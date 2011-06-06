@@ -34,7 +34,7 @@ $allowList = array(
     // Researchers can view items and collections that are not yet public
     array('researcher',array('Items', 'Collections'),array('showNotPublic')),
     // Contributors can add and tag items, edit or delete their own items, and see their items that are not public
-    array('contributor', 'Items', array('tag', 'add', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
+    array('contributor', 'Items', array('tag', 'add', 'batch-edit', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
     // Non-authenticated users can access the upgrade script (for logistical reasons).
     array(null, 'Upgrade')
 ); 
@@ -74,6 +74,8 @@ $acl->deny(array(null, 'researcher', 'contributor', 'admin', 'super'), 'Users');
 // it to fail.
 $acl->allow(array('contributor', 'researcher', 'admin', 'super'), 'Users', null,
     new User_AclAssertion());
+$acl->allow(array('contributor', 'researcher', 'admin', 'super'),
+    'Items', array('edit', 'delete'), new Item_OwnershipAclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
 
 // Because Users resource was denied to admins, it must be explicitly allowed here.

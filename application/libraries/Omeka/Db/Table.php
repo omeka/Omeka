@@ -318,6 +318,7 @@ class Omeka_Db_Table
             $this->applySorting($select, $sortField, $sortDir);
         }
         $this->applySearchFilters($select, $params);
+        $this->_fireBrowseSqlHook($select, $params);
         return $select;
     }
     
@@ -543,5 +544,17 @@ class Omeka_Db_Table
             return array($sortField, $dir);
         }
         return null;
+    }
+
+    /**
+     * Fires a hook to allow plugins to alter the SQL SELECT query.
+     *
+     * @param Zend_Db_Select $select
+     * @param array $params
+     */
+    private function _fireBrowseSqlHook($select, $params)
+    {
+        $modelName = Inflector::underscore($this->_target);
+        fire_plugin_hook("{$modelName}_browse_sql", $select, $params);
     }
 }

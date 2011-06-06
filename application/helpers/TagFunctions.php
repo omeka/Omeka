@@ -203,7 +203,7 @@ function tag_string($recordOrTags = null, $link=null, $delimiter=null)
 				$tagStrings[$key] = '<a href="' . html_escape($link.urlencode($tag['name'])) . '" rel="tag">'.html_escape($tag['name']).'</a>';
 			}
 		}
-	    $tagString = join($delimiter,$tagStrings);
+	    $tagString = join(html_escape($delimiter),$tagStrings);
 	}
 	return $tagString;
 }

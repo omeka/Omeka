@@ -355,9 +355,6 @@ class ItemTable extends Omeka_Db_Table
             $this->filterByRange($select, $params['range']);
         }
         
-        //Fire a plugin hook to add clauses to the SELECT statement
-        fire_plugin_hook('item_browse_sql', $select, $params);
-        
         // Order items by recent. @since 11/7/07  ORDER BY must not be in the 
         // COUNT() query b/c it slows down
         if (isset($params['recent'])) {

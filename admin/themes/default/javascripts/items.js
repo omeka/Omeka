@@ -240,7 +240,8 @@ Omeka.Items.enableTagRemoval = function (addImage, deleteImage) {
  */
 Omeka.Items.tagChoices = function (inputSelector, tagChoicesUrl) {
     function split(val) {
-        var re = new RegExp(Omeka.Items.tagDelimiter + '\\s*');
+        var escapedTagDelimiter = Omeka.Items.tagDelimiter.replace(/([.?*+^$[\]\\(){}-])/g, "\\$1");
+        var re = new RegExp(escapedTagDelimiter + '\\s*');
         return val.split(re);
     }
     function extractLast(term) {

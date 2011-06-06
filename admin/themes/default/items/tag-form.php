@@ -11,7 +11,7 @@
             <h3>Add Tags</h3>           
             <input type="text" name="tags" size="20" id="tags" class="textinput" value="" />
             <input type="button" name="add-tags-button" id="add-tags-button" value="Add Tags" />
-            <p id="add-tags-explanation">Separate tags with <?php echo get_option('tag_delimiter'); ?></p>
+            <p id="add-tags-explanation">Separate tags with <?php echo settings('tag_delimiter'); ?></p>
         </div>
         <div id="my-tags">
             <?php if ($myTags): ?>
@@ -23,13 +23,13 @@
                                                     $myTag->name,
                                                     array(
                                                         'id'    => 'my-undo-remove-tag-' . $myTag->id, 
-                                                        'src'   => img('add.png'),
+                                                        'src'   => img('silk-icons/add.png'),
                                                         'class' => 'undo_remove_tag')); 
                               echo __v()->formImage('remove-tag-' . $myTag->id,
                                                     $myTag->name,
                                                     array(
                                                         'id'    => 'my-remove-tag-' . $myTag->id, 
-                                                        'src'   => img('delete.gif'),
+                                                        'src'   => img('silk-icons/delete.png'),
                                                         'class' => 'remove_tag')); 
                               echo html_escape($myTag->name); ?>
                     </li>
@@ -47,12 +47,12 @@
                                 <?php echo __v()->formImage('undo-remove-tag-' . $otherTag->id, 
                                                             $otherTag->name,
                                                             array(
-                                                                'src'   => img('add.png'),
+                                                                'src'   => img('silk-icons/add.png'),
                                                                 'class' => 'undo_remove_tag')); 
                                       echo __v()->formImage('remove-tag-' . $otherTag->id,
                                                             $otherTag->name,
                                                             array(
-                                                                'src'   => img('delete.gif'),
+                                                                'src'   => img('silk-icons/delete.png'),
                                                                 'class' => 'remove_tag')); ?>
                             <?php endif; ?>
                             <?php echo html_escape($otherTag->name); ?>

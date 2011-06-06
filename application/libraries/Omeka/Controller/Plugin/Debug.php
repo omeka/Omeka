@@ -137,6 +137,9 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         
         $html .= "<h2>Session Data</h2>";
         $html .= '<pre>' . print_r($_SESSION, true) . '</pre>';
+
+        $html .= "<h2>Server Data</h2>";
+        $html .= '<pre>' . print_r($_SERVER, true) . '</pre>';
         
         $currentRoute = $router->getCurrentRouteName();
         $routes = $router->getRoutes();

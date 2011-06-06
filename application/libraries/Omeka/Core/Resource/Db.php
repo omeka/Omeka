@@ -76,6 +76,9 @@ class Omeka_Core_Resource_Db extends Zend_Application_Resource_Db
             $bootstrap->bootstrap('Logger');
             $db_obj->setLogger($bootstrap->getResource('Logger'));
         }
+
+        Zend_Db_Table_Abstract::setDefaultAdapter($dbh);
+
         return $db_obj;
     }
     
