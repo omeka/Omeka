@@ -83,6 +83,10 @@ $core->bootstrap(array(
     'Storage',
 ));
 
+// resend() must send jobs to the original queue by default.
+$jobDispatcher = Zend_Registry::get('job_dispatcher');
+$jobDispatcher->setQueueName($options->queue);
+
 // Log all to stdout.
 $log = $core->getBootstrap()->logger;
 $log->addWriter(new Zend_Log_Writer_Stream('php://output'));

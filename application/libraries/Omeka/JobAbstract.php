@@ -53,6 +53,8 @@ abstract class Omeka_JobAbstract implements Omeka_Job
                 $this->{$setMethodName}($optionValue);
             }
         }
+        unset($this->_options['jobDispatcher']);
+        unset($this->_options['db']);
     }
 
     public function setDb(Omeka_Db $db)
