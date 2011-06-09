@@ -19,21 +19,23 @@
                     });
                 }
             });
+
+            var toggleList = '<ul id="browse-toggles">'
+                           + '<li><strong>Toggle</strong></li>'
+                           + '<li><a href="#" id="toggle-all-details">Show Details</a></li>'
+                           + '</ul>';
+
+            jQuery('#items-sort').after(toggleList);
             
-            jQuery('#toggle-all-details').toggle(function(event) {
-                event.preventDefault();
-                jQuery('tr.item').each(function() {
-                    var itemDetails = jQuery(this).find('.item-details');
-                    itemDetails.slideDown('fast');
-                    jQuery('#toggle-all-details').text('Hide Details');
-                });
-            }, function(event) {
-                event.preventDefault();
-                jQuery('tr.item').each(function() {
-                    var itemDetails = jQuery(this).find('.item-details');
-                    itemDetails.slideUp('fast');
-                    jQuery('#toggle-all-details').text('Show Details');
-                });
+            // Toggle item details.
+            jQuery('#toggle-all-details').toggle(function(e) {
+                e.preventDefault();
+                jQuery(this).text('Hide Details');
+                jQuery('.item-details').slideDown('fast');
+            }, function(e) {
+                e.preventDefault();
+                jQuery(this).text('Show Details');
+                jQuery('.item-details').slideUp('fast');
             });
             
             var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
@@ -107,19 +109,19 @@
         });
     </script>
     <div id="browse-meta" class="group">
-        <ul id="items-sort" class="navigation">
-            <li><strong>Quick Filter</strong></li>
-        <?php
-            echo nav(array(
-                'All' => uri('items'),
-                'Public' => uri('items/browse?public=1'),
-                'Private' => uri('items/browse?public=0'),
-                'Featured' => uri('items/browse?featured=1')
+        <div id="browse-meta-lists">
+            <ul id="items-sort" class="navigation">
+                <li><strong>Quick Filter</strong></li>
+            <?php
+                echo nav(array(
+                    'All' => uri('items'),
+                    'Public' => uri('items/browse?public=1'),
+                    'Private' => uri('items/browse?public=0'),
+                    'Featured' => uri('items/browse?featured=1')
                 ));
-        ?>
-            <li><strong>Toggle</strong></li>
-            <li><a href="#" id="toggle-all-details">Show Details</a></li>
-        </ul>
+            ?>
+            </ul>
+        </div>
         <div id="simple-search-form">
             <?php echo simple_search(); ?>
             <?php echo link_to_advanced_search('Advanced Search', array('id' => 'advanced-search-link')); ?>

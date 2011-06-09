@@ -47,15 +47,10 @@ class Omeka_Core_Resource_Db extends Zend_Application_Resource_Db
             throw new Zend_Config_Exception('Your Omeka database configuration file has not been set up properly.  Please edit the configuration and reload this page.');
         }
         
-        $connectionParams = array('host'     => $dbIni->host,
-                                                'username' => $dbIni->username,
-                                                'password' => $dbIni->password,
-                                                'dbname'   => $dbIni->name);
-        
-        // 'port' parameter was introduced in 0.10, conditional check needed
-        // for backwards compatibility.
-        if (isset($dbIni->port)) {
-            $connectionParams['port'] = $dbIni->port;
+        $connectionParams = $dbIni->toArray();
+        // dbname aliased to 'name' for backwards-compatibility.
+        if (array_key_exists('name', $connectionParams)) {
+            $connectionParams['dbname'] = $connectionParams['name'];
         }
         
         $bootstrap = $this->getBootstrap();
