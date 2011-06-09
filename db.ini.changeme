@@ -13,6 +13,6 @@
 host     = "XXXXXXX"
 username = "XXXXXXX"
 password = "XXXXXXX"
-name     = "XXXXXXX"
+dbname   = "XXXXXXX"
 prefix   = "omeka_"
 ;port     = ""
