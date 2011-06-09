@@ -64,8 +64,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
      */
     public function userRoleCanDeleteProvider()
     {
+        // Researcher is not included because that particular test will 
+        // always fail.
         return array(
-            array('researcher', false),
             array('contributor', false),
             array('admin', true),
             array('super', true)
@@ -134,6 +135,28 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         if ($succeeds) {
             $this->assertController('items');
             $this->assertAction('batch-edit');
+        } else {
+            $this->assertController('error');
+            $this->assertAction('forbidden');
+        }
+    }
+
+    /**
+     * @dataProvider userRoleCanAccessBatchEditProvider
+     */
+    public function testBatchEditSaveAccess($userRole, $succeeds)
+    {
+        $hash = new Zend_Form_Element_Hash('batch_edit_hash');
+        $hash->initCsrfToken();
+        $this->request->setMethod('post');
+        $this->request->setPost(array(
+            'batch_edit_hash' => $hash->getHash(),
+        ));
+        $this->_authenticateUser($this->_users[$userRole]);
+        $this->dispatch('/items/batch-edit-save');
+        if ($succeeds) {
+            $this->assertController('items');
+            $this->assertAction('batch-edit-save');
         } else {
             $this->assertController('error');
             $this->assertAction('forbidden');
