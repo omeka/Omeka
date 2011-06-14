@@ -175,7 +175,7 @@ class Relatable extends Omeka_Record_Mixin
             'entity_id' => $entity_id,
             'relation_id' => $relation_id,
             'relationship_id' => $relationship_id,
-            'time' => new Zend_Db_Expr('NOW()'),
+            'time' => Zend_Date::now()->toString(Omeka_Record::DATE_FORMAT),
             'type' => $this->type
         ));
     }
