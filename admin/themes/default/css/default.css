@@ -112,7 +112,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         font-weight:bold;
     }
 
-    .delete-button, input.delete-confirm {background-color: #800 !important; border-color: #800 !important;float: none !important;}
+    .delete-button, input.delete-confirm, input.delete {background-color: #800 !important; border-color: #800 !important;float: none !important;}
     td .delete-confirm {margin: 0; padding: 1px 6px;}
 
     input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;text-shadow:none;}
