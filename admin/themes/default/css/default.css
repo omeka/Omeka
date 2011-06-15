@@ -542,7 +542,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     /* Simple Search */
     #simple-search-form {
         padding:0;
-        width: 232px;
+        width: 250px;
         float:right;
         margin:0 0 20px;
         clear:right;
