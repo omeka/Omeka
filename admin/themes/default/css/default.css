@@ -635,7 +635,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     .item-pagination a {text-decoration: none;}
     
     /* Item add-edit styles */
-    #public-featured {position:absolute; top:36px; right:0; text-align:right;}  
+    #delete-record-form {position:absolute; top:16px; right:0;}
+    .items #delete-record-form {top: 4px;}
+    #public-featured {position:absolute; top:50px; right:0; text-align:right;}
         #public-featured .checkbox {text-align:right;float:none; display:inline;}
         #public-featured label, #public-featured input {display:inline; text-align:right;float:none; width: auto;}
         
