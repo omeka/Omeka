@@ -147,7 +147,9 @@
             <?php
             $browseHeadings['Title'] = 'Dublin Core,Title';
             $browseHeadings['Creator'] = 'Dublin Core,Creator';
-            $browseHeadings['Type']     = null;
+            $browseHeadings['Type'] = null;
+            $browseHeadings['Public']  = 'public';
+            $browseHeadings['Featured'] = 'featured';
             $browseHeadings['Date Added'] = 'added';
 
             echo browse_headings($browseHeadings); ?>
@@ -190,6 +192,16 @@
         <td><?php echo ($typeName = item('Item Type Name'))
                     ? $typeName
                     : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
+        <td>
+        <?php if($item->public): ?>
+            <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="Public"/>
+        <?php endif; ?>
+        </td>
+        <td>
+        <?php if($item->featured): ?>
+            <img src="<?php echo img('silk-icons/star.png'); ?>" alt="Featured"/>
+        <?php endif; ?>
+        </td>
         <td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
     </tr>
     <?php endwhile; ?>
