@@ -35,7 +35,10 @@ blockquote:before, blockquote:after {
     content: "";
 }
 :focus {
-	outline:0;
+    outline: 0;
+    -moz-box-shadow: 0 0 8px 0 #c60;
+    -webkit-box-shadow: 0 0 8px 0 #c60;
+    box-shadow: 0 0 8px 0 #c60;
 }
 
 /* == Components == */
