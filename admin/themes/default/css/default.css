@@ -46,7 +46,7 @@ blockquote:before, blockquote:after {
 /* -- Misc Classes -- */
 .hide {width:0; height:0; position:absolute; left:-999em;}
 .error {background:#f1c8ba; color:#933; margin:1.5em 0; font-size:1.2em; padding:1.5em;}
-.field .error {clear:both;}
+.field .error {clear:both; background:transparent; margin:0; padding:0;}
 .success {background-color: #B9D5B9; color:#245525; font-size:1.2em;padding:1.5em;margin-bottom:1.5em;}
 .alert {background:#fff09e; font-size:1.2em; padding: 1.5em;margin-bottom:0.5em;}
 .tooltip {font-size:1.2em; line-height:1.5em;}
@@ -172,7 +172,8 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         .vertical-nav .field label, .vertical-nav .field div.label {float:left;width: 116px;}
         .vertical-nav #item-form .field .explanation, 
         .vertical-nav .field .hint,
-        .vertical-nav .field .explanation {margin-left: 172px;}
+        .vertical-nav .field .explanation,
+        .vertical-nav .field .error {margin-left: 172px;}
             .vertical-nav .field .dateinput .hint {margin:0;}
         
         /* .input used to wrap input fields in items/add form */
