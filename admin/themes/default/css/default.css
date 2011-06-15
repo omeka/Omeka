@@ -64,6 +64,11 @@ form:after,
     visibility: hidden;
 }
 
+/* Fix scrollbars on jQuery UI dialogs */
+.ui-dialog form:after {
+    content: none;
+}
+
 *:first-child+html .group
 *:first-child+html form,
 *:first-child+html .field,
