@@ -37,6 +37,20 @@ class UserTable extends Omeka_Db_Table
                                   "e.id = u.entity_id", array());
         return $select;
     }
+
+    /**
+     * Find an active User given that user's ID.
+     *
+     * Returns null if the user being requested is not active.
+     *
+     * @return User|null
+     */
+    public function findActiveById($id)
+    {
+        $select = $this->getSelectForFind($id);
+        $select->where('active = 1');
+        return $this->fetchObject($select);
+    }
     
     protected function _getColumnPairs()
     {
