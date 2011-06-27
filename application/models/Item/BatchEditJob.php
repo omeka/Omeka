@@ -25,7 +25,7 @@ class Item_BatchEditJob extends Omeka_JobAbstract {
                     $item->delete();
                 } else {
                     foreach ($metadata as $key => $value) {
-                        if (empty($value)) {
+                        if ($value === '') {
                             unset($metadata[$key]);
                         }
                     }
