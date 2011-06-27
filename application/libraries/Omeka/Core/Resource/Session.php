@@ -55,13 +55,13 @@ class Omeka_Core_Resource_Session extends Zend_Application_Resource_Session
         if (!array_key_exists('saveHandler', $sessionConfig)) {
             $db = $bootstrap->db;
             $hasSessionTable = (boolean)$db->fetchOne(
-                "SHOW TABLES LIKE '{$db->prefix}sessions'"
+                "SHOW TABLES LIKE '$db->Session'"
             );
             if ($hasSessionTable) {
                 $sessionConfig['saveHandler'] = array(
                     'class' => "Omeka_Session_SaveHandler_DbTable",
                     'options' => array(
-                        'name' => $db->prefix . "sessions",
+                        'name' => $db->Session,
                         'primary' => "id",
                         'modifiedColumn' => "modified",
                         'dataColumn' => "data",
