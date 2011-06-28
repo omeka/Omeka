@@ -7,19 +7,8 @@ if (!$isPartial):
 ?>
 <h1><?php echo $title; ?></h1>
 <div id="primary">
-    <script type="text/javascript">
-        jQuery(window).load(function(){
-            var otherFormElements = jQuery('#batch-edit-form select, #batch-edit-form input[type="text"]');
-            jQuery('input[name=delete]').change(function() {
-                if (this.checked) {
-                    otherFormElements.attr('disabled', 'disabled');
-                } else {
-                    otherFormElements.removeAttr('disabled');
-                }
-            });
-        });
-    </script>
 <?php endif; ?>
+<div title="<?php echo $title; ?>">
 <form id="batch-edit-form" action="<?php echo html_escape(uri('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <fieldset id="item-list" style="float:right; width: 28%;">
         <legend>Items</legend>
@@ -70,18 +59,26 @@ if (!$isPartial):
         <label for="metadata[item_type_id]">Item Type</label>
         <?php
         $itemTypeOptions = get_db()->getTable('ItemType')->findPairsForSelectForm();
-        $itemTypeOptions = array('' => 'Select Below ', 'null' => 'Remove Item Type') + $itemTypeOptions;
+        $itemTypeOptions = array('' => 'Select Below ') + $itemTypeOptions;
         echo $this->formSelect('metadata[item_type_id]', null, array(), $itemTypeOptions);
         ?>
+        <div class="batch-edit-remove">
+        <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
+        <label for="removeMetadata[item_type_id]" style="float:none;">Remove?</label>
+        </div>
         </div>
         
         <div class="field">
         <label for="metadata[collection_id]">Collection</label>
         <?php
         $collectionOptions = get_db()->getTable('Collection')->findPairsForSelectForm();
-        $collectionOptions = array('' => 'Select Below ', 'null' => 'Remove from Collection') + $collectionOptions;
+        $collectionOptions = array('' => 'Select Below ') + $collectionOptions;
         echo $this->formSelect('metadata[collection_id]', null, array(), $collectionOptions);
         ?>
+        <div class="batch-edit-remove">
+        <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
+        <label for="removeMetadata[collection_id]" style="float:none;">Remove?</label>
+        </div>
         </div>
 
         <div class="field">
@@ -112,6 +109,31 @@ if (!$isPartial):
     ?>
     <input type="submit" value="Save Changes">
 </form>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        var otherFormElements = jQuery('#item-fields select, #item-fields input');
+        var elementsToEnable;
+        jQuery('#delete').change(function() {
+            if (this.checked) {
+                elementsToEnable = otherFormElements.filter(':enabled');
+                alert(elementsToEnable.length);
+                otherFormElements.prop('disabled', true);
+            } else {
+                elementsToEnable.prop('disabled', false);
+            }
+        });
+        jQuery('input[name^="removeMetadata"]').change(function() {
+            var name = this.name.replace('removeMetadata', 'metadata');
+            var metadataElement = jQuery('[name="' + name + '"]');
+            if (this.checked) {
+                metadataElement.prop('disabled', true);
+            } else {
+                metadataElement.prop('disabled', false);
+            }
+        });
+    });
+</script>
 <?php if (!$isPartial): ?>
 </div>
 <?php foot(); ?>

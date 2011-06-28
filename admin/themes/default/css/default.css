@@ -500,6 +500,9 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     
     .batch-edit-option {float:left; width: 48%;margin:0; display:block; line-height:2;}
     .batch-edit-option input {float:none !important; display:inline;margin:0;}
+
+    .batch-edit-remove {margin-left:200px;}
+    .batch-edit-remove label {display:inline; float:none; width:auto;}
     
     td.batch-edit-check {
         width: 12px;
