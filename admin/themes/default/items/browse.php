@@ -45,18 +45,13 @@
              * Disable the batch submit button first, will be enabled once item
              * checkboxes are checked.
              */
-            batchEditSubmit.attr('disabled', 'disabled');
+            batchEditSubmit.prop('disabled', true);
             
             /**
              * Check all the itemCheckboxes if the globalCheckbox is checked.
              */
             globalCheckbox.change(function() {
-                var check = jQuery(this).attr('checked');
-                if (check) {
-                    itemCheckboxes.attr("checked", check);
-                } else {
-                    itemCheckboxes.attr("checked", false)
-                }
+                itemCheckboxes.prop('checked', !!this.checked);
                 checkBatchEditSubmitButton();
             });
 
@@ -65,8 +60,8 @@
              * unchecked.
              */
             itemCheckboxes.change(function(){
-                if (!jQuery(this).attr("checked")) {
-                    globalCheckbox.attr("checked", false);
+                if (!this.checked) {
+                    globalCheckbox.prop('checked', false);
                 }
                 checkBatchEditSubmitButton();
             });
@@ -79,16 +74,13 @@
             function checkBatchEditSubmitButton() {
                 var checked = false;
                 itemCheckboxes.each(function() {
-                    if (jQuery(this).attr("checked")) {
+                    if (this.checked) {
                         checked = true;
+                        return false;
                     }
                 });
                 
-                if (checked) {
-                    batchEditSubmit.removeAttr('disabled');
-                } else {
-                    batchEditSubmit.attr('disabled', 'disabled');
-                }
+                batchEditSubmit.prop('disabled', !checked);
             }
         });
     </script>

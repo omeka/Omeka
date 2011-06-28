@@ -124,12 +124,7 @@ if (!$isPartial):
         });
         jQuery('input[name^="removeMetadata"]').change(function() {
             var name = this.name.replace('removeMetadata', 'metadata');
-            var metadataElement = jQuery('[name="' + name + '"]');
-            if (this.checked) {
-                metadataElement.prop('disabled', true);
-            } else {
-                metadataElement.prop('disabled', false);
-            }
+            jQuery('[name="' + name + '"]').prop('disabled', !!this.checked);
         });
     });
 </script>
