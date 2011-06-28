@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%data_types` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+  `id` int unsigned NOT NULL auto_increment,
   `name` varchar(255) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`),

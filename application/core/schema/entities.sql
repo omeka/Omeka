@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%entities` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+  `id` int unsigned NOT NULL auto_increment,
   `first_name` text collate utf8_unicode_ci,
   `middle_name` text collate utf8_unicode_ci,
   `last_name` text collate utf8_unicode_ci,

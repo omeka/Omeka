@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%mime_element_set_lookup` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `element_set_id` int(10) unsigned NOT NULL,
+  `id` int unsigned NOT NULL auto_increment,
+  `element_set_id` int unsigned NOT NULL,
   `mime` varchar(255) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `mime` (`mime`)
