@@ -14,26 +14,26 @@ class Item_BatchEditJob extends Omeka_JobAbstract {
     
     public function perform()
     {
-        if ($itemIds = $this->_options['itemIds']) {
-            $delete = $this->_options['delete'];
-            $metadata = $this->_options['metadata'];
-            $custom = $this->_options['custom'];
-            
-            foreach ($itemIds as $id) {
-                $item = $this->_getItem($id);
-                if ($delete == '1') {
-                    $item->delete();
-                } else {
-                    foreach ($metadata as $key => $value) {
-                        if ($value === '') {
-                            unset($metadata[$key]);
-                        }
+        if (!($itemIds = $this->_options['itemIds'])) {
+            return;
+        }
+        $delete = $this->_options['delete'];
+        $metadata = $this->_options['metadata'];
+        $custom = $this->_options['custom'];
+        foreach ($itemIds as $id) {
+            $item = $this->_getItem($id);
+            if ($delete == '1') {
+                $item->delete();
+            } else {
+                foreach ($metadata as $key => $value) {
+                    if ($value === '') {
+                        unset($metadata[$key]);
                     }
-                    update_item($item, $metadata);
-                    fire_plugin_hook('items_batch_edit_custom', $item, $custom);
                 }
-                release_object($item);
+                update_item($item, $metadata);
+                fire_plugin_hook('items_batch_edit_custom', $item, $custom);
             }
+            release_object($item);
         }
     }
 
