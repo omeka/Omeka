@@ -117,7 +117,6 @@ if (!$isPartial):
         jQuery('#delete').change(function() {
             if (this.checked) {
                 elementsToEnable = otherFormElements.filter(':enabled');
-                alert(elementsToEnable.length);
                 otherFormElements.prop('disabled', true);
             } else {
                 elementsToEnable.prop('disabled', false);
