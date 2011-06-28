@@ -365,8 +365,15 @@ class ItemsController extends Omeka_Controller_Action
                 $this->flashError($errorMessage);
             } else {
                 $dispatcher = Zend_Registry::get('job_dispatcher');
-                $dispatcher->setQueueName('batchEditItems');
-                $dispatcher->send('Item_BatchEditJob', array('itemIds' => $itemIds, 'delete' => $delete, 'metadata'  => $metadata, 'custom' => $custom));
+                $dispatcher->send(
+                    'Item_BatchEditJob', 
+                    array(
+                        'itemIds' => $itemIds, 
+                        'delete' => $delete, 
+                        'metadata'  => $metadata, 
+                        'custom' => $custom
+                    )
+                );
                 $this->flashSuccess('The items were successfully changed!');
             }
          }

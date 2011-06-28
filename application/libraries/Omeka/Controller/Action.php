@@ -76,7 +76,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         // Zend_Controller_Action __construct finishes by running init()
         $init = parent::__construct($request, $response, $invokeArgs);
 
-        $response->setHeader('Content-Type', 'text/html; charset=utf-8');
+        $response->setHeader('Content-Type', 'text/html; charset=utf-8', true);
                 
         $this->redirect = $this->_helper->redirector;
         

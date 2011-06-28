@@ -85,7 +85,9 @@ $core->bootstrap(array(
 
 // resend() must send jobs to the original queue by default.
 $jobDispatcher = Zend_Registry::get('job_dispatcher');
-$jobDispatcher->setQueueName($options->queue);
+if ($options->queue) {
+    $jobDispatcher->setQueueName($options->queue);
+}
 
 // Log all to stdout.
 $log = $core->getBootstrap()->logger;

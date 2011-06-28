@@ -170,14 +170,12 @@ class Relatable extends Omeka_Record_Mixin
             throw new Omeka_Record_Exception( 'Relationship called '.$relationship . ' does not exist.' );
         }
         
-        $db = $this->getDb();        
-        return $db->insert('EntitiesRelations', array(
-            'entity_id' => $entity_id,
-            'relation_id' => $relation_id,
-            'relationship_id' => $relationship_id,
-            'time' => Zend_Date::now()->toString(Omeka_Record::DATE_FORMAT),
-            'type' => $this->type
-        ));
+        $er = new EntitiesRelations;
+        $er->entity_id = $entity_id;
+        $er->relation_id = $relation_id;
+        $er->relationship_id = $relationship_id;
+        $er->type = $this->type;
+        $er->forceSave();
     }
     
     public function removeRelatedTo($entity, $rel, $limit = null)

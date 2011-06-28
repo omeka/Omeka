@@ -102,7 +102,8 @@ class Omeka_View_Helper_Media
         'image'=>array(
             'imageSize'=>'square_thumbnail',
             'linkToFile'=>true,
-            'linkToMetadata'=>false
+            'linkToMetadata'=>false,
+            'imgAttributes' => array()
             ),
         'wmv'=>array(
             'width' => '320',
