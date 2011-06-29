@@ -45,34 +45,13 @@
              * Disable the batch submit button first, will be enabled once item
              * checkboxes are checked.
              */
-            batchEditSubmit.attr('disabled', 'disabled').click(function() {
-                var form = jQuery(this).parents('form');
-                var url = jQuery(form).attr('action');
-                var data = jQuery(form).serialize();
-                jQuery.get(
-                    url,
-                    data,
-                    function (response) {
-                        jQuery(response).dialog({
-                            'modal': true,
-                            'minWidth': '800',
-                            'title': 'Batch Edit Items'
-                        });
-                    }
-                );
-                return false;
-            });
+            batchEditSubmit.prop('disabled', true);
             
             /**
              * Check all the itemCheckboxes if the globalCheckbox is checked.
              */
             globalCheckbox.change(function() {
-                var check = jQuery(this).attr('checked');
-                if (check) {
-                    itemCheckboxes.attr("checked", check);
-                } else {
-                    itemCheckboxes.attr("checked", false)
-                }
+                itemCheckboxes.prop('checked', !!this.checked);
                 checkBatchEditSubmitButton();
             });
 
@@ -81,8 +60,8 @@
              * unchecked.
              */
             itemCheckboxes.change(function(){
-                if (!jQuery(this).attr("checked")) {
-                    globalCheckbox.attr("checked", false);
+                if (!this.checked) {
+                    globalCheckbox.prop('checked', false);
                 }
                 checkBatchEditSubmitButton();
             });
@@ -95,16 +74,13 @@
             function checkBatchEditSubmitButton() {
                 var checked = false;
                 itemCheckboxes.each(function() {
-                    if (jQuery(this).attr("checked")) {
+                    if (this.checked) {
                         checked = true;
+                        return false;
                     }
                 });
                 
-                if (checked) {
-                    batchEditSubmit.removeAttr('disabled');
-                } else {
-                    batchEditSubmit.attr('disabled', 'disabled');
-                }
+                batchEditSubmit.prop('disabled', !checked);
             }
         });
     </script>
@@ -129,7 +105,7 @@
 
     </div>
     
-<form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="get" accept-charset="utf-8">
+<form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
     <div class="group">
     <?php if (has_permission('Items', 'edit')): ?>
         <div class="batch-edit-option">

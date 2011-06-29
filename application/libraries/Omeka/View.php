@@ -131,16 +131,20 @@ class Omeka_View extends Zend_View_Abstract
         }
 
         $pluginBroker = get_plugin_broker();
-        $tmpPluginDir = $pluginBroker->getCurrentPluginDirName();
-        $newPluginDir = $pluginBroker->setCurrentPluginDirName(
-            self::THEME_HOOK_NAMESPACE);
+        if ($pluginBroker) {
+            $tmpPluginDir = $pluginBroker->getCurrentPluginDirName();
+            $newPluginDir = $pluginBroker->setCurrentPluginDirName(
+                self::THEME_HOOK_NAMESPACE);
+        }
         foreach ($this->getScriptPaths() as $path) {
             $customScriptPath = $path . 'custom.php';
             if (file_exists($customScriptPath)) {
                 include $customScriptPath;
             }
         }
-        $pluginBroker->setCurrentPluginDirName($tmpPluginDir);
+        if ($pluginBroker) {
+            $pluginBroker->setCurrentPluginDirName($tmpPluginDir);
+        }
         $this->_customScriptsLoaded = true;
     }
     
