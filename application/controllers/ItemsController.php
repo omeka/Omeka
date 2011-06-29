@@ -302,8 +302,6 @@ class ItemsController extends Omeka_Controller_Action
         }
 
         $this->view->assign(compact('itemIds'));
-
-        $this->render('batch-edit');
     }
     
     /**
@@ -321,8 +319,18 @@ class ItemsController extends Omeka_Controller_Action
 
         if ($itemIds = $this->_getParam('items')) {
             $metadata = $this->_getParam('metadata');
+            $removeMetadata = $this->_getParam('removeMetadata');
             $delete = $this->_getParam('delete');
             $custom = $this->_getParam('custom');
+
+            // Set metadata values to null for "removed" metadata keys.
+            if ($removeMetadata && is_array($removeMetadata)) {
+                foreach ($removeMetadata as $key => $value) {
+                    if($value) {
+                        $metadata[$key] = null;
+                    }
+                }
+            }
 
             $errorMessage = null;
                         
