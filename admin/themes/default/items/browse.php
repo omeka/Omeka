@@ -184,28 +184,17 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
     </table>
     <div class="group">
     <?php if (has_permission('Items', 'edit')): ?>
-<<<<<<< HEAD
-    <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
-    </div>
-=======
         <div class="batch-edit-option">
-            <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+            <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
         </div>
->>>>>>> master
     <?php endif; ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
     </div>
 </form>
 
 <div id="output-formats">
-<<<<<<< HEAD
     <h2><?php echo __('Output Formats'); ?></h2>
-    <?php echo output_format_list(false); ?>
-=======
-    <h2>Output Formats</h2>
     <?php echo output_format_list(false, ' · '); ?>
->>>>>>> master
 </div>
 
 <?php elseif(!total_items()): ?>
