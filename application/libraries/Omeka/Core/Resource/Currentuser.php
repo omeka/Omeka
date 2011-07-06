@@ -53,7 +53,7 @@ class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_Resource
             // The auth mechanism stores the user integer ID as the identity.  
             // This is done to avoid any confusion with legacy installations that 
             // may have usernames consisting entirely of digits.
-            $user = $db->getTable('User')->find($userIdentity);
+            $user = $db->getTable('User')->findActiveById($userIdentity);
         } catch (Zend_Db_Statement_Exception $e) {
             // Exceptions may be thrown because the database is out of sync
             // with the code.  Suppress errors and skip authentication, but

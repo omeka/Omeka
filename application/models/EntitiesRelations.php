@@ -35,9 +35,8 @@ class EntitiesRelations extends Omeka_Record
         }
     }
     
-    //@todo Move this to CURRENT_TIMESTAMP() SQL
     protected function beforeInsert()
     {
-        $this->time = date('YmdHis');
+        $this->time = Zend_Date::now()->toString(self::DATE_FORMAT);
     }
 }

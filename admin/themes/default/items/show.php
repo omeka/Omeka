@@ -18,12 +18,12 @@
 echo link_to_item(__('Edit this Item'), array('class'=>'edit'), 'edit'); ?></p>   
 <?php endif; ?>
 
-<ul class="item-pagination navigation">
+<ul class="item-pagination navigation group">
 <li id="previous-item" class="previous">
-    <?php echo link_to_previous_item(__('Previous')); ?>
+    <?php echo link_to_previous_item(); ?>
 </li>
 <li id="next-item" class="next">
-    <?php echo link_to_next_item(__('Next')); ?>
+    <?php echo link_to_next_item(); ?>
 </li>
 </ul>
 <script type="text/javascript" charset="utf-8">

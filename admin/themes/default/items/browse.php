@@ -20,6 +20,24 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     });
                 }
             });
+
+            var toggleList = '<ul id="browse-toggles">'
+                           + '<li><strong>Toggle</strong></li>'
+                           + '<li><a href="#" id="toggle-all-details">Show Details</a></li>'
+                           + '</ul>';
+
+            jQuery('#items-sort').after(toggleList);
+            
+            // Toggle item details.
+            jQuery('#toggle-all-details').toggle(function(e) {
+                e.preventDefault();
+                jQuery(this).text('Hide Details');
+                jQuery('.item-details').slideDown('fast');
+            }, function(e) {
+                e.preventDefault();
+                jQuery(this).text('Show Details');
+                jQuery('.item-details').slideUp('fast');
+            });
             
             var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
             var globalCheckbox = jQuery('th#batch-edit-heading').html('<input type="checkbox">').find('input');
@@ -28,34 +46,13 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
              * Disable the batch submit button first, will be enabled once item
              * checkboxes are checked.
              */
-            batchEditSubmit.attr('disabled', 'disabled').click(function() {
-                var form = jQuery(this).parents('form');
-                var url = jQuery(form).attr('action');
-                var data = jQuery(form).serialize();
-                jQuery.get(
-                    url,
-                    data,
-                    function (response) {
-                        jQuery(response).dialog({
-                            'modal': true,
-                            'minWidth': '800',
-                            'title': 'Batch Edit Items'
-                        });
-                    }
-                );
-                return false;
-            });
+            batchEditSubmit.prop('disabled', true);
             
             /**
              * Check all the itemCheckboxes if the globalCheckbox is checked.
              */
             globalCheckbox.change(function() {
-                var check = jQuery(this).attr('checked');
-                if (check) {
-                    itemCheckboxes.attr("checked", check);
-                } else {
-                    itemCheckboxes.attr("checked", false)
-                }
+                itemCheckboxes.prop('checked', !!this.checked);
                 checkBatchEditSubmitButton();
             });
 
@@ -64,8 +61,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
              * unchecked.
              */
             itemCheckboxes.change(function(){
-                if (!jQuery(this).attr("checked")) {
-                    globalCheckbox.attr("checked", false);
+                if (!this.checked) {
+                    globalCheckbox.prop('checked', false);
                 }
                 checkBatchEditSubmitButton();
             });
@@ -78,44 +75,45 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             function checkBatchEditSubmitButton() {
                 var checked = false;
                 itemCheckboxes.each(function() {
-                    if (jQuery(this).attr("checked")) {
+                    if (this.checked) {
                         checked = true;
+                        return false;
                     }
                 });
                 
-                if (checked) {
-                    batchEditSubmit.removeAttr('disabled');
-                } else {
-                    batchEditSubmit.attr('disabled', 'disabled');
-                }
+                batchEditSubmit.prop('disabled', !checked);
             }
         });
     </script>
     <div id="browse-meta" class="group">
-        <ul id="items-sort" class="navigation">
-            <li><strong>Quick Filter</strong></li>
+        <div id="browse-meta-lists">
+            <ul id="items-sort" class="navigation">
+                <li><strong>Quick Filter</strong></li>
             <?php
                 echo nav(array(
-                    __('All') => uri('items'), 
+                    __('All') => uri('items'),
                     __('Public') => uri('items/browse?public=1'),
                     __('Private') => uri('items/browse?public=0'),
                     __('Featured') => uri('items/browse?featured=1')
-                    ));
+                ));
             ?>
-        </ul>
+            </ul>
+        </div>
         <div id="simple-search-form">
             <?php echo simple_search(); ?>
     		<?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
         </div>
     </div>
     
-<form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="get" accept-charset="utf-8">
-<?php if (has_permission('Items', 'edit')): ?>
-    <div class="batch-edit-option">
-        <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
+<form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
+    <div class="group">
+    <?php if (has_permission('Items', 'edit')): ?>
+        <div class="batch-edit-option">
+            <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
+        </div>
+    <?php endif; ?>
+        <div class="pagination"><?php echo pagination_links(); ?></div>
     </div>
-<?php endif; ?>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
     <table id="items" class="simple" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -125,6 +123,9 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             <?php
             $browseHeadings['Title'] = 'Dublin Core,Title';
             $browseHeadings['Creator'] = 'Dublin Core,Creator';
+            $browseHeadings['Type'] = null;
+            $browseHeadings['Public']  = 'public';
+            $browseHeadings['Featured'] = 'featured';
             $browseHeadings['Date Added'] = 'added';
             echo browse_headings($browseHeadings); ?>
             </tr>
@@ -156,29 +157,55 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 ?>
                 <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
                 <ul>
-                    <li><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo 'No Collection'; ?></li>
+                    <li><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo 'No Collection'; ?></li>
                     <li><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo 'No Tags'; ?></li>
                 </ul>
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
             </div>
         </td>
-        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>    
+        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>
+        <td><?php echo ($typeName = item('Item Type Name'))
+                    ? $typeName
+                    : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
+        <td>
+        <?php if($item->public): ?>
+            <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="Public"/>
+        <?php endif; ?>
+        </td>
+        <td>
+        <?php if($item->featured): ?>
+            <img src="<?php echo img('silk-icons/star.png'); ?>" alt="Featured"/>
+        <?php endif; ?>
+        </td>
         <td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
     </tr>
     <?php endwhile; ?>
     </tbody>
     </table>
+    <div class="group">
     <?php if (has_permission('Items', 'edit')): ?>
+<<<<<<< HEAD
     <div class="batch-edit-option">
         <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
     </div>
+=======
+        <div class="batch-edit-option">
+            <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+        </div>
+>>>>>>> master
     <?php endif; ?>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
+        <div class="pagination"><?php echo pagination_links(); ?></div>
+    </div>
 </form>
 
 <div id="output-formats">
+<<<<<<< HEAD
     <h2><?php echo __('Output Formats'); ?></h2>
     <?php echo output_format_list(false); ?>
+=======
+    <h2>Output Formats</h2>
+    <?php echo output_format_list(false, ' · '); ?>
+>>>>>>> master
 </div>
 
 <?php elseif(!total_items()): ?>

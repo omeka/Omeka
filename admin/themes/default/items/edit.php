@@ -9,7 +9,7 @@
 ?>
 <?php head(array('title'=> $itemTitle, 'bodyclass'=>'items primary','content_class' => 'vertical-nav'));?>
 <h1><?php echo $itemTitle; ?></h1>
-
+<?php echo delete_button(null, 'delete-item', __('Delete this Item'), array(), 'delete-record-form'); ?>
 <?php include 'form-tabs.php'; // Definitions for all the tabs for the form. ?>
 
 <div id="primary">
@@ -20,8 +20,6 @@
             <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit'), __('Save Changes')); ?>
         </div>
     </form>
-    <?php echo delete_button(null, 'delete-item', __('Delete this Item')); ?>
-
 
 </div>
 

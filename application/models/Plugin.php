@@ -293,7 +293,7 @@ class Plugin extends Omeka_Record
      */
     public function setLinkUrl($link)
     {
-        if ( !parse_url($link, PHP_URL_SCHEME) ) {
+        if ( $link && !parse_url($link, PHP_URL_SCHEME) ) {
             $link = 'http://'.$link;
         }
         $this->_link = $link;

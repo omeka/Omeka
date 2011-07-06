@@ -18,7 +18,11 @@ require_once "Omeka/Core.php";
 declare(ticks = 1);
 
 // Set the command line arguments.
-$options = new Zend_Console_Getopt(array('queue|q=s' => 'Name of queue (tube) to use', 'host|h=s' => 'Beanstalk host IP'));
+$options = new Zend_Console_Getopt(array(
+    'queue|q=s' => 'Name of queue (tube) to use', 
+    'host|h=s' => 'Beanstalkd host IP',
+    'port|p-i' => 'Beanstalkd port',
+));
 
 try {
     $options->parse();
@@ -50,9 +54,10 @@ function handle_signal($signal)
 pcntl_signal(SIGINT, "handle_signal");
 
 
-$core->bootstrap(array('Autoloader'));
+$core->bootstrap(array('Autoloader', 'Logger'));
 $host = isset($options->host) ? $options->host : '127.0.0.1';
-$pheanstalk = new Pheanstalk($host);
+$port = isset($options->port) ? $options->port : 11300;
+$pheanstalk = new Pheanstalk("$host:$port");
 if (isset($options->queue) && $options->queue != 'default') {
     $pheanstalk->watch($options->queue)
                ->ignore('default');
@@ -76,8 +81,13 @@ $core->bootstrap(array(
     'Plugins', 
     'Jobs', 
     'Storage',
-    'Logger',
 ));
+
+// resend() must send jobs to the original queue by default.
+$jobDispatcher = Zend_Registry::get('job_dispatcher');
+if ($options->queue) {
+    $jobDispatcher->setQueueName($options->queue);
+}
 
 // Log all to stdout.
 $log = $core->getBootstrap()->logger;

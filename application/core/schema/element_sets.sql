@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%element_sets` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `record_type_id` int(10) unsigned NOT NULL,
+  `id` int unsigned NOT NULL auto_increment,
+  `record_type_id` int unsigned NOT NULL,
   `name` varchar(255) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`),

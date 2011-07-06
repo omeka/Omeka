@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%entity_relationships` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+  `id` int unsigned NOT NULL auto_increment,
   `name` text collate utf8_unicode_ci,
   `description` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`)

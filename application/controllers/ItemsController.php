@@ -302,8 +302,6 @@ class ItemsController extends Omeka_Controller_Action
         }
 
         $this->view->assign(compact('itemIds'));
-
-        $this->render('batch-edit');
     }
     
     /**
@@ -321,7 +319,19 @@ class ItemsController extends Omeka_Controller_Action
 
         if ($itemIds = $this->_getParam('items')) {
             $metadata = $this->_getParam('metadata');
+            $removeMetadata = $this->_getParam('removeMetadata');
             $delete = $this->_getParam('delete');
+            $custom = $this->_getParam('custom');
+
+            // Set metadata values to null for "removed" metadata keys.
+            if ($removeMetadata && is_array($removeMetadata)) {
+                foreach ($removeMetadata as $key => $value) {
+                    if($value) {
+                        $metadata[$key] = null;
+                    }
+                }
+            }
+
             $errorMessage = null;
                         
             if ($metadata && array_key_exists('public', $metadata) && !$this->isAllowed('makePublic')) {
@@ -333,33 +343,45 @@ class ItemsController extends Omeka_Controller_Action
                 $errorMessage = 
                     __('User is not allowed to modify featured status of items.');
             }
-            
-            foreach ($itemIds as $id) {
-                if ($item = $this->getTable('Item')->find($id)) {
-                    if ($delete && !$this->isAllowed('delete', $item)) {
-                        $errorMessage = __('User is not allowed to delete selected items.');
-                        break;
-                    }
 
-                    // Check to see if anything but 'tag'
-                    if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$this->isAllowed('edit', $item)) {
-                        $errorMessage = __('User is not allowed to edit selected items.');
-                        break;
-                    }
+            if (!$errorMessage) {
+                foreach ($itemIds as $id) {
+                    if ($item = $this->getTable('Item')->find($id)) {
+                        if ($delete && !$this->isAllowed('delete', $item)) {
+                            $errorMessage = __('User is not allowed to delete selected items.');
+                            break;
+                        }
 
-                    if ($metadata && array_key_exists('tags', $metadata) && !$this->isAllowed('tag', $item)) {
-                        $errorMessage = __('User is not allowed to tag selected items.');
-                        break;
+                        // Check to see if anything but 'tag'
+                        if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$this->isAllowed('edit', $item)) {
+                            $errorMessage = __('User is not allowed to edit selected items.');
+                            break;
+                        }
+
+                        if ($metadata && array_key_exists('tags', $metadata) && !$this->isAllowed('tag', $item)) {
+                            $errorMessage = __('User is not allowed to tag selected items.');
+                            break;
+                        }
+                        release_object($item);
                     }
                 }
             }
+
+            $errorMessage = apply_filters('items_batch_edit_error', $errorMessage, $metadata, $custom, $itemIds);
 
             if ($errorMessage) {
                 $this->flashError($errorMessage);
             } else {
                 $dispatcher = Zend_Registry::get('job_dispatcher');
-                $dispatcher->setQueueName('batchEditItems');
-                $dispatcher->send('Item_BatchEditJob', array('itemIds' => $itemIds, 'delete' => $delete, 'metadata'  => $metadata));
+                $dispatcher->send(
+                    'Item_BatchEditJob', 
+                    array(
+                        'itemIds' => $itemIds, 
+                        'delete' => $delete, 
+                        'metadata'  => $metadata, 
+                        'custom' => $custom
+                    )
+                );
                 $this->flashSuccess(__('The items were successfully changed!'));
             }
          }

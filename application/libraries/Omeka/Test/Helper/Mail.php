@@ -26,8 +26,11 @@ class Omeka_Test_Helper_Mail
      */
     public function __construct($path)
     {
-        if (!is_dir($path)) {
-            throw new RuntimeException('The mail path must be set in paths.maildir in the tests configuration.');
+        if (!is_dir($path) && !mkdir($path)) {
+            throw new RuntimeException(
+                'The mail path must be set in paths.maildir in '
+                . 'the tests configuration.'
+            );
         }
         
         if (!is_writable($path)) {

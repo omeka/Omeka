@@ -7,19 +7,8 @@ if (!$isPartial):
 ?>
 <h1><?php echo $title; ?></h1>
 <div id="primary">
-    <script type="text/javascript">
-        jQuery(window).load(function(){
-            var otherFormElements = jQuery('#batch-edit-form select, #batch-edit-form input[type="text"]');
-            jQuery('input[name=delete]').change(function() {
-                if (this.checked) {
-                    otherFormElements.attr('disabled', 'disabled');
-                } else {
-                    otherFormElements.removeAttr('disabled');
-                }
-            });
-        });
-    </script>
 <?php endif; ?>
+<div title="<?php echo $title; ?>">
 <form id="batch-edit-form" action="<?php echo html_escape(uri('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <fieldset id="item-list" style="float:right; width: 28%;">
         <legend><?php echo __('Items'); ?></legend>
@@ -34,6 +23,7 @@ if (!$isPartial):
                 $showItemFields = false;
             }
             $itemCheckboxes[$id] = item('Dublin Core', 'Title', null, $item);
+            release_object($item);
         }
         echo $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes); ?>
         </div>
@@ -69,18 +59,26 @@ if (!$isPartial):
         <label for="metadata[item_type_id]"><?php echo __('Item Type'); ?></label>
         <?php
         $itemTypeOptions = get_db()->getTable('ItemType')->findPairsForSelectForm();
-        $itemTypeOptions = array('' => __('Select Below'), 'null' => __('Remove Item Type')) + $itemTypeOptions;
+        $itemTypeOptions = array('' => __('Select Below')) + $itemTypeOptions;
         echo $this->formSelect('metadata[item_type_id]', null, array(), $itemTypeOptions);
         ?>
+        <div class="batch-edit-remove">
+        <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
+        <label for="removeMetadata[item_type_id]" style="float:none;">Remove?</label>
+        </div>
         </div>
         
         <div class="field">
         <label for="metadata[collection_id]"><?php echo __('Collection'); ?></label>
         <?php
         $collectionOptions = get_db()->getTable('Collection')->findPairsForSelectForm();
-        $collectionOptions = array('' => __('Select Below'), 'null' => __('Remove from Collection')) + $collectionOptions;
+        $collectionOptions = array('' => __('Select Below')) + $collectionOptions;
         echo $this->formSelect('metadata[collection_id]', null, array(), $collectionOptions);
         ?>
+        <div class="batch-edit-remove">
+        <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
+        <label for="removeMetadata[collection_id]" style="float:none;">Remove?</label>
+        </div>
         </div>
 
         <div class="field">
@@ -89,6 +87,9 @@ if (!$isPartial):
             <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', settings('tag_delimiter')); ?></p>
         </div>
     </fieldset>
+
+    <?php fire_plugin_hook('admin_append_to_items_batch_edit_form'); ?>
+
     <?php if ($showItemFields): ?>
     <fieldset style="width: 70%;">
         <legend><?php echo __('Delete Items'); ?></legend>
@@ -108,6 +109,25 @@ if (!$isPartial):
     ?>
     <input type="submit" value="<?php echo __('Save Changes'); ?>">
 </form>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        var otherFormElements = jQuery('#item-fields select, #item-fields input');
+        var elementsToEnable;
+        jQuery('#delete').change(function() {
+            if (this.checked) {
+                elementsToEnable = otherFormElements.filter(':enabled');
+                otherFormElements.prop('disabled', true);
+            } else {
+                elementsToEnable.prop('disabled', false);
+            }
+        });
+        jQuery('input[name^="removeMetadata"]').change(function() {
+            var name = this.name.replace('removeMetadata', 'metadata');
+            jQuery('[name="' + name + '"]').prop('disabled', !!this.checked);
+        });
+    });
+</script>
 <?php if (!$isPartial): ?>
 </div>
 <?php foot(); ?>

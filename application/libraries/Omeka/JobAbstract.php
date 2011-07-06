@@ -46,14 +46,15 @@ abstract class Omeka_JobAbstract implements Omeka_Job
      */
     private function _setOptions(array $options)
     {
+        $this->_options = $options;
         foreach ($options as $optionName => $optionValue) {
             $setMethodName = 'set' . ucwords($optionName);
             if (method_exists($this, $setMethodName)) {
                 $this->{$setMethodName}($optionValue);
-            } else {
-                $this->_options[$optionName] = $optionValue;
             }
         }
+        unset($this->_options['jobDispatcher']);
+        unset($this->_options['db']);
     }
 
     public function setDb(Omeka_Db $db)
@@ -64,5 +65,14 @@ abstract class Omeka_JobAbstract implements Omeka_Job
     public function setJobDispatcher(Omeka_Job_Dispatcher $dispatcher)
     {
         $this->_dispatcher = $dispatcher;
+    }
+
+    /**
+     * Resend the job using the same options that were passed to the current 
+     * job.
+     */
+    public function resend()
+    {
+        return $this->_dispatcher->send(get_class($this), $this->_options);
     }
 }

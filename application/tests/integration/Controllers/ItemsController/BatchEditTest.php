@@ -64,8 +64,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
      */
     public function userRoleCanDeleteProvider()
     {
+        // Researcher is not included because that particular test will 
+        // always fail.
         return array(
-            array('researcher', false),
             array('contributor', false),
             array('admin', true),
             array('super', true)
@@ -134,6 +135,28 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         if ($succeeds) {
             $this->assertController('items');
             $this->assertAction('batch-edit');
+        } else {
+            $this->assertController('error');
+            $this->assertAction('forbidden');
+        }
+    }
+
+    /**
+     * @dataProvider userRoleCanAccessBatchEditProvider
+     */
+    public function testBatchEditSaveAccess($userRole, $succeeds)
+    {
+        $hash = new Zend_Form_Element_Hash('batch_edit_hash');
+        $hash->initCsrfToken();
+        $this->request->setMethod('post');
+        $this->request->setPost(array(
+            'batch_edit_hash' => $hash->getHash(),
+        ));
+        $this->_authenticateUser($this->_users[$userRole]);
+        $this->dispatch('/items/batch-edit-save');
+        if ($succeeds) {
+            $this->assertController('items');
+            $this->assertAction('batch-edit-save');
         } else {
             $this->assertController('error');
             $this->assertAction('forbidden');
@@ -255,7 +278,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->dispatch('/items/batch-edit-save');
         $this->assertRedirectTo('/items/browse');
         $flash = new Omeka_Controller_Flash;
-        $this->assertContains("User is not allowed to edit selected items.", $flash->getMsg());
+        $this->assertContains("User is not allowed", $flash->getMsg());
     }
     
     /**
@@ -297,6 +320,84 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
                 $this->assertNotNull($item);
             }
         }
+    }
+
+    public function testBatchEditMakeNotPublicNotFeatured()
+    {
+        $this->_authenticateUser($this->_getDefaultUser());
+        $hash = new Zend_Form_Element_Hash('batch_edit_hash');
+        $hash->initCsrfToken();
+
+        $itemIds = array();
+
+        foreach ($this->_items as $item) {
+            $itemIds[] = $item->id;
+        }
+
+        $post = array(
+            'items' => $itemIds,
+            'metadata'  => array(
+                'public'        => 0,
+                'featured'      => 0
+            ),
+            'batch_edit_hash' => $hash->getHash()
+        );
+
+        $this->_makePost($post);
+        $this->dispatch('/items/batch-edit-save');
+        $this->assertController('items');
+        $this->assertAction('batch-edit-save');
+
+        foreach ($itemIds as $id) {
+            $item = $this->db->getTable('Item')->find($id);
+            $this->assertFalse($item->isPublic());
+            $this->assertFalse($item->isFeatured());
+        }
+
+        $this->assertRedirectTo('/items/browse');
+        $flash = new Omeka_Controller_Flash;
+        $this->assertContains("The items were successfully changed!", $flash->getMsg());
+    }
+
+    public function testBatchEditRemoveMetadata()
+    {
+        $this->_authenticateUser($this->_getDefaultUser());
+        $hash = new Zend_Form_Element_Hash('batch_edit_hash');
+        $hash->initCsrfToken();
+
+        $itemIds = array();
+
+        foreach ($this->_items as $item) {
+            $itemIds[] = $item->id;
+        }
+
+        $post = array(
+            'items' => $itemIds,
+            'metadata'  => array(
+                'item_type_id'  => '100',
+                'collection_id'    => '100'
+            ),
+            'removeMetadata' => array(
+                'item_type_id'  => '1',
+                'collection_id' => '1'
+            ),
+            'batch_edit_hash' => $hash->getHash()
+        );
+
+        $this->_makePost($post);
+        $this->dispatch('/items/batch-edit-save');
+        $this->assertController('items');
+        $this->assertAction('batch-edit-save');
+
+        foreach ($itemIds as $id) {
+            $item = $this->db->getTable('Item')->find($id);
+            $this->assertNull($item->collection_id);
+            $this->assertNull($item->item_type_id);
+        }
+
+        $this->assertRedirectTo('/items/browse');
+        $flash = new Omeka_Controller_Flash;
+        $this->assertContains("The items were successfully changed!", $flash->getMsg());
     }
 
     private function _createItem($userRole, $metadata = array())

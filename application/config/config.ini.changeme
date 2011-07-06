@@ -33,10 +33,20 @@ log.errors = false
 ; Log background processes
 log.processes = false
 
+; Session config. A list of available session configuration options can be 
+; found here:
+; http://framework.zend.com/manual/en/zend.session.global_session_management.html#zend.session.global_session_management.configuration_options
+; 
 session.name = ""
 
 ; Localization.
 ; translate.locale = ""
+
+
+; Sessions are now stored in the database by default. To revert to the older
+; method of storing session data in the filesystem, uncomment the 
+; following line.
+; session.saveHandler = ""
 
 ; Use internal JavaScripts. Uncomment the next line if this Omeka installation does not have web access.
 ; theme.useInternalJavascripts = true
