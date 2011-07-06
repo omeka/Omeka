@@ -1,0 +1,21 @@
+[submodule "plugins/ExhibitBuilder"]
+	path = plugins/ExhibitBuilder
+	url = git://github.com/omeka/plugin-ExhibitBuilder
+[submodule "plugins/SimplePages"]
+	path = plugins/SimplePages
+	url = git://github.com/omeka/plugin-SimplePages
+[submodule "themes/default"]
+	path = themes/default
+	url = git://github.com/omeka/theme-thanksroy
+[submodule "themes/minimalist"]
+	path = themes/minimalist
+	url = git://github.com/omeka/theme-minimalist
+[submodule "themes/rhythm"]
+	path = themes/rhythm
+	url = git://github.com/omeka/theme-rhythm
+[submodule "themes/seasons"]
+	path = themes/seasons
+	url = git://github.com/omeka/theme-seasons
+[submodule "plugins/Coins"]
+	path = plugins/Coins
+	url = git://github.com/omeka/plugin-Coins
