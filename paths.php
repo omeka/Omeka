@@ -122,6 +122,12 @@ function _define_web_root()
     // As $_SERVER['HTTP_HOST'] is user input, ensure it only contains 
     // characters allowed in hostnames.
     $base_url = $base_root .= '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
+
+    // Handle non-standard ports
+    $port = $_SERVER['SERVER_PORT'];
+    if (($base_root == 'http' && $port != '80') || ($base_root == 'https' && $port != '443')) {
+        $base_url .= ":$port";
+    }
     
     // $_SERVER['SCRIPT_NAME'] can, in contrast to $_SERVER['PHP_SELF'], not
     // be modified by a visitor.
@@ -187,4 +193,4 @@ if (APPLICATION_ENV == 'production') {
     assert_options(ASSERT_ACTIVE, 0);
 } else {
     assert_options(ASSERT_ACTIVE, 1);
-}     
+}
