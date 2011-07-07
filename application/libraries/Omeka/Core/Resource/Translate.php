@@ -22,8 +22,15 @@ class Omeka_Core_Resource_Translate extends Zend_Application_Resource_Translate 
      */
     public function init()
     {
-        $this->_setOptionsFromConfig();
-        return parent::init();
+        $config = $this->_getTranslateConfig();
+
+        // If no language is selected, don't load the Translate component.
+        if (isset($config['locale'])) {
+            $this->setOptions($config);
+            return parent::init();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -46,10 +53,4 @@ class Omeka_Core_Resource_Translate extends Zend_Application_Resource_Translate 
 
         return $translateConfig;
     }
-
-    private function _setOptionsFromConfig()
-    {
-        $this->setOptions($this->_getTranslateConfig());
-    }
-
 }
