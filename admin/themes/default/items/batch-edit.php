@@ -64,7 +64,7 @@ if (!$isPartial):
         ?>
         <div class="batch-edit-remove">
         <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
-        <label for="removeMetadata[item_type_id]" style="float:none;">Remove?</label>
+        <label for="removeMetadata[item_type_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
         </div>
         </div>
         
@@ -77,7 +77,7 @@ if (!$isPartial):
         ?>
         <div class="batch-edit-remove">
         <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
-        <label for="removeMetadata[collection_id]" style="float:none;">Remove?</label>
+        <label for="removeMetadata[collection_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
         </div>
         </div>
 

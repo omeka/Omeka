@@ -142,10 +142,10 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             <span class="title"><?php echo link_to_item(); ?></span>
             <ul class="action-links group">
                 <?php if (has_permission($item, 'edit')): ?>
-                <li><?php echo link_to_item('Edit', array(), 'edit'); ?></li>
+                <li><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></li>
                 <?php endif; ?>
                 <?php if (has_permission($item, 'delete')): ?>
-                <li><?php echo link_to_item('Delete', array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
+                <li><?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
                 <?php endif; ?>
             </ul>
             <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
@@ -157,8 +157,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 ?>
                 <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
                 <ul>
-                    <li><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo 'No Collection'; ?></li>
-                    <li><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo 'No Tags'; ?></li>
+                    <li><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></li>
+                    <li><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></li>
                 </ul>
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
             </div>
@@ -169,12 +169,12 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
         <td>
         <?php if($item->public): ?>
-            <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="Public"/>
+        <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="<?php echo __('Public'); ?>"/>
         <?php endif; ?>
         </td>
         <td>
         <?php if($item->featured): ?>
-            <img src="<?php echo img('silk-icons/star.png'); ?>" alt="Featured"/>
+        <img src="<?php echo img('silk-icons/star.png'); ?>" alt="<?php echo __('Featured'); ?>"/>
         <?php endif; ?>
         </td>
         <td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
