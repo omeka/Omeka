@@ -2,6 +2,7 @@
 $pageTitle = __('Browse Items');
 head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 <h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', total_results()); ?></h1>
+<?php if (has_permission('Items', 'add')): ?>
 <p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>"><?php echo __('Add an Item'); ?></a></p>
 <?php endif; ?>
 <div id="primary">
