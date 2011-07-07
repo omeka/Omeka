@@ -13,14 +13,23 @@
  */ 
 define('OMEKA_VERSION', '1.5-dev');
 
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV',
+        (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+
 // The name of the Item Type Metadata element set. This is used wherever it is 
 // important to distinguish this particular element set from other element sets.
 // @todo Localize this and other constants to avoid too many things in the 
 // global scope.
 define('ELEMENT_SET_ITEM_TYPE', 'Item Type Metadata');
 
-// Report all errors except E_NOTICE.
-error_reporting(E_ALL ^ E_NOTICE);
+if (APPLICATION_ENV == 'development') {
+    // Report strict in development.
+    error_reporting(E_ALL | E_STRICT);
+} else {
+    // Report all errors except E_NOTICE.
+    error_reporting(E_ALL ^ E_NOTICE);
+}
 
 // Workaround for PHP 5.3 behavior for timezones.
 // If date.timezone is not set, this will query the OS for the timezone
@@ -182,15 +191,3 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Omeka_');
 $autoloader->setFallbackAutoloader(true);
 $autoloader->suppressNotFoundWarnings(true);
-
-// Define application environment
-defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV',
-              (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
-                                         : 'production'));
-
-if (APPLICATION_ENV == 'production') {
-    assert_options(ASSERT_ACTIVE, 0);
-} else {
-    assert_options(ASSERT_ACTIVE, 1);
-}
