@@ -26,6 +26,7 @@ class Omeka_Core_Resource_Translate extends Zend_Application_Resource_Translate 
 
         // If no language is selected, don't load the Translate component.
         if (isset($config['locale'])) {
+            $config['content'] = LANGUAGES_DIR . "/{$config['locale']}.mo";
             $this->setOptions($config);
             return parent::init();
         } else {
@@ -47,8 +48,6 @@ class Omeka_Core_Resource_Translate extends Zend_Application_Resource_Translate 
                        ? $config->translate->toArray()
                        : array();
         
-        $translateConfig['content'] = LANGUAGES_DIR;
-        $translateConfig['scan'] = Zend_Translate::LOCALE_FILENAME;
         $translateConfig['disableNotices'] = true;
 
         return $translateConfig;
