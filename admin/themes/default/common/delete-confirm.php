@@ -1,6 +1,6 @@
 <?php
 $class = get_class($record);
-$pageTitle = __('Delete $s', Inflector::titleize($class));
+$pageTitle = __('Delete %s', Inflector::titleize($class));
 
 if (!$isPartial):
 head(array('title' => $pageTitle));
