@@ -17,7 +17,10 @@ if (!$isPartial):
         <?php 
         $itemCheckboxes = array();
         foreach ($itemIds as $id) {
-            $item = get_item_by_id($id);
+            if (!($item = get_item_by_id($id)) {
+                continue;
+            }
+
             $showItemFields = true;
             if (!has_permission($item, 'edit') || !has_permission($item, 'delete')) {
                 $showItemFields = false;
