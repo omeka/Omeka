@@ -17,7 +17,7 @@ if (!$isPartial):
         <?php 
         $itemCheckboxes = array();
         foreach ($itemIds as $id) {
-            if (!($item = get_item_by_id($id)) {
+            if (!($item = get_item_by_id($id))) {
                 continue;
             }
 
