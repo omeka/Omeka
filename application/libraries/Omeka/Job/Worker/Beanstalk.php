@@ -32,6 +32,14 @@ class Omeka_Job_Worker_Beanstalk
                     "Job factory returned null (should never happen)."
                 );
             }
+
+            if ($omekaJob instanceof Omeka_JobAbstract) {
+                $user = $omekaJob->getUser();
+                if ($user) {
+                    Omeka_Context::getInstance()->setCurrentUser($user);
+                }
+            }
+
             $omekaJob->perform();
 	        $this->_pheanstalk->delete($pJob);
         } catch (Zend_Db_Exception $e) {

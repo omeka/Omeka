@@ -43,6 +43,15 @@ class Omeka_Job_Factory
         if (!array_key_exists('options', $data)) {
             throw new Omeka_Job_Factory_MalformedJobException("No 'options' attribute was given in the message.");
         }
+
+        if (isset($this->_options['db']) && isset($data['createdBy'])) {
+            $user = $this->_options['db']->getTable('User')->find($data['createdBy']);
+            if (!$user) {
+                throw new Omeka_Job_Factory_MalformedJobException("The user that created this job does not exist.");
+            }
+            $data['options']['user'] = $user;
+        }
+
         return $this->build($data['className'], $data['options']);
     }
 
