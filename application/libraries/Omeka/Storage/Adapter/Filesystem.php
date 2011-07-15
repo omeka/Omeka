@@ -143,14 +143,14 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
     public function delete($path)
     {
         $absPath = $this->_getAbsPath($path);
-        if (!is_writable(dirname($absPath))) {
-            throw new Omeka_Storage_Exception('Unable to delete file (does not '
-                . 'exist or is not writable).');
-        }
-        $status = unlink($this->_getAbsPath($path));
+        $status = @unlink($absPath);
 
         if(!$status) {
-            throw new Omeka_Storage_Exception('Unable to delete file.');
+            if (file_exists($absPath)) {
+                throw new Omeka_Storage_Exception('Unable to delete file.');
+            } else {
+                _log("Omeka_Storage_Adapter_Filesystem: Tried to delete missing file '$path'.", Zend_Log::WARN);
+            }
         }
     }
 
