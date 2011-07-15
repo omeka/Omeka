@@ -348,7 +348,7 @@ class Plugin extends Omeka_Record
      */
     public function setActive($flag)
     {
-        $this->active = $flag;
+        $this->active = $flag ? '1' : '0';
         return $this;
     }
             

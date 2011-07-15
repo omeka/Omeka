@@ -46,7 +46,7 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
 
             $item = new Item;
             $item->public = 1;
-            $item->featured = $featured;
+            $item->featured = $featured ? '1' : '0';
             $item->addElementTextsByArray($elementTexts);
             $item->save();
         }
