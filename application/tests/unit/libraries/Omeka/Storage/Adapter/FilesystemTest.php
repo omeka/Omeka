@@ -107,10 +107,27 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testDelete()
+    {
+        $tempDir = sys_get_temp_dir();
+        $storage = new Omeka_Storage_Adapter_Filesystem(array(
+            'localDir' => $tempDir,
+        ));
+        $testFile = tempnam($tempDir, 'omeka_storage_filesystem_test');
+
+        $storage->delete(basename($testFile));
+        $this->assertFalse(file_exists($testFile));
+
+        try {
+            $storage->delete(basename($testFile));
+        } catch (Omeka_Storage_Exception $e) {
+            $this->fail('An exception was thrown for trying to delete a missing file');
+        }
+    }
+
     public static function notWritable()
     {
         return array(
-            array('delete', array(self::_getRandomFilename())),
             array('store', array(self::_getWritableFile(), 
                                  self::_getRandomFilename())),
             array('move', array(self::_getRandomFilename(),
