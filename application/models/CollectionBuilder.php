@@ -32,7 +32,7 @@ class CollectionBuilder extends Omeka_Record_Builder
     /**
      * Add collectors associated with the collection.
      */
-    protected function _beforeBuild()
+    protected function _beforeBuild(Omeka_Record $record)
     {
         $metadata = $this->getRecordMetadata();
         if (array_key_exists('collectors', $metadata)) {
