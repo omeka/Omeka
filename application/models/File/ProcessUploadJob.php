@@ -20,9 +20,14 @@ class File_ProcessUploadJob extends Omeka_JobAbstract
         // Extract the metadata.  This will have one side effect (aside from
         // adding the new metadata): it uses setMimeType() to reset the default
         // mime type for the file if applicable.
-        $file->extractMetadata();         
-        $file->createDerivatives();
-        $file->storeFiles();
+        try {
+            $file->extractMetadata();
+            $file->createDerivatives();
+            $file->storeFiles();
+        } catch (Exception $e) {
+            $file->delete();
+            throw $e;
+        }
     }
 
     private function _getFile()
