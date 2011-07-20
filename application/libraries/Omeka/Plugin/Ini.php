@@ -119,7 +119,8 @@ class Omeka_Plugin_Ini
             'setIniVersion'             => 'version',
             'setRequiredPlugins'        => 'required_plugins',
             'setOptionalPlugins'        => 'optional_plugins',
-            'setIniTags'                => 'tags'
+            'setIniTags'                => 'tags',
+            'setRequireOnce'            => 'require_once',
         );
                 
         foreach ($setters as $method => $iniField) {
