@@ -113,7 +113,7 @@ class ItemTypesController extends Omeka_Controller_Action
         foreach($elementsToSave as $elementToSave) {
             if ($elementToSave->id) {
                 if (in_array($elementToSave->id, $uniqueElementsToSaveIds)) {
-                    throw new Omeka_Record_Exception('The item type cannot have more than one "' . $elementToSave->name . '" element.');
+                    throw new Omeka_Validator_Exception('The item type cannot have more than one "' . $elementToSave->name . '" element.');
 	            } else {
 	                $uniqueElementsToSaveIds[] = $element->id;
 	            }
@@ -121,7 +121,7 @@ class ItemTypesController extends Omeka_Controller_Action
             
             if ($elementToSave->name) {
                 if (in_array($elementToSave->name, $uniqueElementsToSaveNames)) {
-                    throw new Omeka_Record_Exception('The item type cannot have more than one "' . $elementToSave->name . '" element.');
+                    throw new Omeka_Validator_Exception('The item type cannot have more than one "' . $elementToSave->name . '" element.');
                 } else {
                     $uniqueElementsToSaveNames[] = trim($elementToSave->name);
                 }
