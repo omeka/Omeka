@@ -102,7 +102,7 @@ class SystemInfoController extends Omeka_Controller_Action
         $info['Themes'] = array();
 
         foreach ($themes as $name => $theme) {
-            $themeInfo = $theme->version;
+            $themeInfo = @$theme->version;
 
             if ($name == $currentTheme) {
                 $themeInfo .= ' (current)';
