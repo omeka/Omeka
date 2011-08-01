@@ -175,23 +175,16 @@ class UsersController extends Omeka_Controller_Action
     public function addAction()
     {
         $user = new User();
-        $userForm = new Omeka_Form_User(array('user' => $user));
-        $this->view->userForm = $userForm;
-
-        if (!$this->getRequest()->isPost()) {
-            return;
-        }
-        if ($userForm->isValid($_POST)) {
-            try {
-                $user->saveForm($userForm->getValues());
+        try {
+            if ($user->saveForm($_POST)) {                
                 $this->sendActivationEmail($user);
                 $this->flashSuccess('The user "' . $user->username . '" was successfully added!');
-
+                                
                 //Redirect to the main user browse page
                 $this->redirect->goto('browse');
-            } catch (Omeka_Validator_Exception $e) {
-                $this->flashValidationErrors($e);
             }
+        } catch (Omeka_Validator_Exception $e) {
+            $this->flashValidationErrors($e);
         }
     }
 
@@ -205,8 +198,7 @@ class UsersController extends Omeka_Controller_Action
     public function editAction()
     {
         $success = false;
-        $user = $this->findById();
-        $userForm = new Omeka_Form_User(array('user' => $user));
+        $user = $this->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
 
@@ -218,12 +210,7 @@ class UsersController extends Omeka_Controller_Action
         }
         
         $this->view->passwordForm = $changePasswordForm;
-        $this->view->userForm = $userForm;
-        $this->view->user = $user;
-
-        if (!$this->getRequest()->isPost()) {
-            return;
-        }
+        $this->view->user = $user;        
         
         if (isset($_POST['new_password'])) {
             if ($changePasswordForm->isValid($_POST)) {
@@ -234,14 +221,13 @@ class UsersController extends Omeka_Controller_Action
                 $success = true;
             }
         } else {
-            if ($userForm->isValid($_POST)) {
-                try {
-                    $user->saveForm($userForm->getValues());
+            try {
+                if ($user->saveForm($_POST)) {
                     $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
                     $success = true;
-                } catch (Omeka_Validator_Exception $e) {
-                    $this->flashValidationErrors($e);
                 }
+            } catch (Omeka_Validator_Exception $e) {
+                $this->flashValidationErrors($e);
             }
         }
 
