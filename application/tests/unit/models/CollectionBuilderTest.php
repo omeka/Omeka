@@ -48,8 +48,8 @@ class CollectionBuilderTest extends PHPUnit_Framework_TestCase
         $collection = $this->builder->build();        
         $this->assertEquals('foobar', $collection->name);
         $this->assertEquals('foobar desc', $collection->description);
-        $this->assertEquals(true, $collection->public);
-        $this->assertEquals(false, $collection->featured);
+        $this->assertEquals("1", $collection->public);
+        $this->assertEquals("0", $collection->featured);
         $this->assertEquals(self::USER_ID, $collection->owner_id,
             "Collection's 'owner_id' column should have been set.");
     }
