@@ -167,6 +167,9 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     protected function beforeSave()
     {
         $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
+        $booleanFilter = new Omeka_Filter_Boolean();
+        $this->public = $booleanFilter->filter($this->public);
+        $this->featured = $booleanFilter->filter($this->featured);
     }
     
     /**
