@@ -252,4 +252,11 @@ class Collection extends Omeka_Record
     {
         $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
     }
+
+    protected function beforeSave()
+    {
+        $boolFilter = new Omeka_Filter_Boolean();
+        $this->featured = $boolFilter->filter($this->featured);
+        $this->public = $boolFilter->filter($this->public);
+    }
 }

@@ -30,6 +30,11 @@ abstract class Omeka_JobAbstract implements Omeka_Job
      */
     protected $_dispatcher;
 
+    /**
+     * @var User
+     */
+    protected $_user;
+
     protected $_options = array();
 
     public function __construct(array $options)
@@ -55,6 +60,7 @@ abstract class Omeka_JobAbstract implements Omeka_Job
         }
         unset($this->_options['jobDispatcher']);
         unset($this->_options['db']);
+        unset($this->_options['user']);
     }
 
     public function setDb(Omeka_Db $db)
@@ -65,6 +71,26 @@ abstract class Omeka_JobAbstract implements Omeka_Job
     public function setJobDispatcher(Omeka_Job_Dispatcher $dispatcher)
     {
         $this->_dispatcher = $dispatcher;
+    }
+
+    /**
+     * Set the given User object on the Job object.
+     *
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->_user = $user;
+    }
+
+    /**
+     * Get the User currently set on this Job, if any.
+     *
+     * @return User|null
+     */
+    public function getUser()
+    {
+        return $this->_user;
     }
 
     /**

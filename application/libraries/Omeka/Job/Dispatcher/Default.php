@@ -56,6 +56,11 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
         $this->_user = $user;
     }
 
+    public function getUser()
+    {
+        return $this->_user;
+    }
+
     /**
      * @param Omeka_Job_Dispatcher_Adapter $adapter
      */

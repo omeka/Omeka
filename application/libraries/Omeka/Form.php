@@ -37,6 +37,7 @@ class Omeka_Form extends Zend_Form
     public function init()
     {
         $this->addElementPrefixPath('Omeka_', 'Omeka/');
+        $this->addPrefixPath('Omeka_Form_Element', 'Omeka/Form/Element/', 'element');
         
         // set the default element decorators
         $this->setElementDecorators($this->getDefaultElementDecorators());

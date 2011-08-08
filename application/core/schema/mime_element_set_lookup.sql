@@ -6,37 +6,38 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%mime_element_set_lookup` (
   UNIQUE KEY `mime` (`mime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (1, 5, 'image/bmp');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (2, 5, 'image/gif');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (3, 5, 'image/ief');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (4, 5, 'image/jpeg');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (5, 5, 'image/pict');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (6, 5, 'image/pjpeg');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (7, 5, 'image/png');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (8, 5, 'image/tiff');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (9, 5, 'image/vnd.rn-realflash');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (10, 5, 'image/vnd.rn-realpix');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (11, 5, 'image/vnd.wap.wbmp');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (12, 5, 'image/x-icon');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (13, 5, 'image/x-jg');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (14, 5, 'image/x-jps');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (15, 5, 'image/x-niff');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (16, 5, 'image/x-pcx');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (17, 5, 'image/x-pict');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (18, 5, 'image/x-quicktime');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (19, 5, 'image/x-rgb');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (20, 5, 'image/x-tiff');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (21, 5, 'image/x-windows-bmp');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (22, 5, 'image/x-xbitmap');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (23, 5, 'image/x-xbm');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (24, 5, 'image/x-xpixmap');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (25, 5, 'image/x-xwd');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (26, 5, 'image/x-xwindowdump');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (27, 6, 'video/x-msvideo');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (28, 6, 'video/avi');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (29, 6, 'video/msvideo');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (30, 6, 'video/x-mpeg');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (31, 6, 'video/x-ms-asf');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (32, 6, 'video/mpeg');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (33, 6, 'video/quicktime');
-INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES (34, 6, 'video/x-ms-wmv');
+INSERT INTO `%PREFIX%mime_element_set_lookup` VALUES 
+(1, 5, 'image/bmp'),
+(2, 5, 'image/gif'),
+(3, 5, 'image/ief'),
+(4, 5, 'image/jpeg'),
+(5, 5, 'image/pict'),
+(6, 5, 'image/pjpeg'),
+(7, 5, 'image/png'),
+(8, 5, 'image/tiff'),
+(9, 5, 'image/vnd.rn-realflash'),
+(10, 5, 'image/vnd.rn-realpix'),
+(11, 5, 'image/vnd.wap.wbmp'),
+(12, 5, 'image/x-icon'),
+(13, 5, 'image/x-jg'),
+(14, 5, 'image/x-jps'),
+(15, 5, 'image/x-niff'),
+(16, 5, 'image/x-pcx'),
+(17, 5, 'image/x-pict'),
+(18, 5, 'image/x-quicktime'),
+(19, 5, 'image/x-rgb'),
+(20, 5, 'image/x-tiff'),
+(21, 5, 'image/x-windows-bmp'),
+(22, 5, 'image/x-xbitmap'),
+(23, 5, 'image/x-xbm'),
+(24, 5, 'image/x-xpixmap'),
+(25, 5, 'image/x-xwd'),
+(26, 5, 'image/x-xwindowdump'),
+(27, 6, 'video/x-msvideo'),
+(28, 6, 'video/avi'),
+(29, 6, 'video/msvideo'),
+(30, 6, 'video/x-mpeg'),
+(31, 6, 'video/x-ms-asf'),
+(32, 6, 'video/mpeg'),
+(33, 6, 'video/quicktime'),
+(34, 6, 'video/x-ms-wmv');

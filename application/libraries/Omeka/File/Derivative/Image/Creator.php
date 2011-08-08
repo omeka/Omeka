@@ -190,7 +190,7 @@ class Omeka_File_Derivative_Image_Creator
 	{	    
 	    $cmd = join(' ', array(
 	        escapeshellcmd($this->_cmdPath),
-	        escapeshellarg($origPath),
+	        escapeshellarg($origPath . '[0]'), // first page of multi-page images.
 	        $convertArgs,
 	        escapeshellarg($newPath)
 	    ));

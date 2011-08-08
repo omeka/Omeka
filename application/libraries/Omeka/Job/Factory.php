@@ -43,7 +43,8 @@ class Omeka_Job_Factory
         if (!array_key_exists('options', $data)) {
             throw new Omeka_Job_Factory_MalformedJobException("No 'options' attribute was given in the message.");
         }
-        return $this->build($data['className'], $data['options']);
+
+        return $this->build($data);
     }
 
     /**
@@ -52,12 +53,24 @@ class Omeka_Job_Factory
      * @param string $className
      * @param array $options
      */
-    public function build($className, array $options)
+    public function build($data)
     {
+        $className = $data['className'];
         if (!class_exists($className, true)) {
             throw new Omeka_Job_Factory_MissingClassException("Job class named $className does not exist.");
         }
-        $jobOptions = array_merge($options, $this->_options);
+        if (!isset($data['options'])) {
+            $data['options'] = array();
+        }
+        if (isset($this->_options['db']) && isset($data['createdBy'])) {
+            $user = $this->_options['db']->getTable('User')->find($data['createdBy']);
+            if (!$user) {
+                throw new Omeka_Job_Factory_MalformedJobException("The user that created this job does not exist.");
+            }
+            $data['options']['user'] = $user;
+        }
+
+        $jobOptions = array_merge($data['options'], $this->_options);
         return new $className($jobOptions);
     }
 }

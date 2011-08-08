@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%record_types` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `%PREFIX%record_types` VALUES (1, 'All', 'Elements, element sets, and element texts assigned to this record type relate to all possible records.');
-INSERT INTO `%PREFIX%record_types` VALUES (2, 'Item', 'Elements, element sets, and element texts assigned to this record type relate to item records.');
-INSERT INTO `%PREFIX%record_types` VALUES (3, 'File', 'Elements, element sets, and element texts assigned to this record type relate to file records.');
+INSERT INTO `%PREFIX%record_types` VALUES (1, 'All', 'Elements, element sets, and element texts assigned to this record type relate to all possible records.'),
+(2, 'Item', 'Elements, element sets, and element texts assigned to this record type relate to item records.'),
+(3, 'File', 'Elements, element sets, and element texts assigned to this record type relate to file records.');
