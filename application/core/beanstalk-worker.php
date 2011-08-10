@@ -81,6 +81,7 @@ $core->bootstrap(array(
     'Plugins', 
     'Jobs', 
     'Storage',
+    'Mail',
 ));
 
 // resend() must send jobs to the original queue by default.
