@@ -1,0 +1,12 @@
+RewriteEngine on
+
+#RewriteCond %{QUERY_STRING} ^tp=dirrect_download
+#RewriteRule .* - [L]
+
+RewriteCond %{REQUEST_URI}  !\/index\.html
+RewriteRule (.+) ../../plugins/DownloadLogger/get_file.php?fn=$1
+
+
+<Files index.html>
+Allow from all
+</Files>
