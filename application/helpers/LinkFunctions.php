@@ -37,7 +37,7 @@ function link_to($record, $action=null, $text='View', $props = array(), $queryPa
         $route = 'default';
         $urlOptions['controller'] = (string) $record;
         if($action) $urlOptions['action'] = (string) $action;
-        $url = uri($urlOptions, $route, $queryParams);
+        $url = uri($urlOptions, $route, $queryParams, true);
     }
 
     
@@ -78,9 +78,7 @@ function link_to_advanced_search($text = 'Advanced Search', $props = array(), $u
  **/
 function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
 {
-    // Set the link href to the items/browse page.
-    $linkProperties['href'] = uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
-    return "<a " . _tag_attributes($linkProperties) . ">$text</a>";
+    return link_to('items', 'browse', $text, $linkProperties, $browseParams);
 }
 
 /**
