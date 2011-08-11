@@ -47,15 +47,12 @@ function has_permission($resource, $privilege)
 {
 	$acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->acl;
 	$user = current_user();
-	if (!$user) {
-	    return false;
-	}
-	
-	// User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
 
 	if (is_string($resource)) {
 	   $resource = ucwords($resource);
 	}
+
+    // User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
 	return $acl->isAllowed($user, $resource, $privilege);
 }
 
