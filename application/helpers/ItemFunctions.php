@@ -215,7 +215,7 @@
          $item = get_current_item();
      }
      
-     return (!empty($item->collection_id) and (!$name or $item->Collection->name == $name) and ($item->Collection->public or has_permission('Collections', 'showNotPublic')));
+     return (!empty($item->Collection) and (!$name or $item->Collection->name == $name) and ($item->Collection->public or has_permission('Collections', 'showNotPublic')));
  }
 
  /**
