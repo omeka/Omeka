@@ -122,7 +122,11 @@ function current_user()
  */
 function get_db()
 {
-    return Omeka_Context::getInstance()->getDb();
+    $db = Omeka_Context::getInstance()->getDb();
+    if (!$db) {
+        throw new RuntimeException("Database not available!");
+    }
+    return $db;
 }
 
 /**
