@@ -365,7 +365,7 @@ abstract class Omeka_File_Ingest_Abstract
             }
         }
         if (!$isValid) {
-            throw new Omeka_File_Ingest_InvalidException(join(", ", array_values($validationErrors)));
+            throw new Omeka_File_Ingest_InvalidException(join("\n\n", array_values($validationErrors)));
         }
         return $isValid;
     }
