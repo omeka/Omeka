@@ -5,7 +5,7 @@
  * @package Omeka
  * @subpackage Forms
  * @access private
- **/
+ */
 
 /**
  * Configuration form for theme options
@@ -15,7 +15,7 @@
  * @package Omeka
  * @subpackage Forms
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
- **/
+ */
 class Omeka_Form_ThemeConfiguration extends Omeka_Form
 {
     const THEME_FILE_HIDDEN_FIELD_NAME_PREFIX = 'hidden_file_';

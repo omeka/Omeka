@@ -5,7 +5,7 @@
  * @license GNU Lesser General Public License <http://www.gnu.org/copyleft/lesser.html>
  * @since 0.1
  * @package Akelos
- **/
+ */
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 

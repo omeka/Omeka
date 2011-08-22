@@ -4,7 +4,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 /**
  * Retrieve metadata for files.
@@ -13,7 +13,7 @@
  * @access private
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
 {
     /**
@@ -27,7 +27,7 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
      * For internal file metadata, you do not supply an $elementName 
      * @param array $options
      * @return mixed
-     **/
+     */
     public function fileMetadata(File $file, 
                          $elementSetName, 
                          $elementName = null, 
@@ -44,7 +44,7 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
      * 
      * @param string
      * @return mixed
-     **/
+     */
     protected function _getRecordMetadata($record, $fieldName)
     {
         switch (strtolower($fieldName)) {

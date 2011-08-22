@@ -4,7 +4,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @subpackage Forms
- **/
+ */
 
 /**
  * 
@@ -12,7 +12,7 @@
  * @package Omeka
  * @subpackage Forms
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
- **/
+ */
 class Omeka_Form_Login extends Omeka_Form
 {
     public function init()

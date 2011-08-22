@@ -722,7 +722,7 @@ function get_user_roles()
  * @param string $elementSetName The name of the element set.
  * @param string $elementName The name of the element.
  * @return bool
- **/
+ */
 function element_exists($elementSetName, $elementName) {
     $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
     return (bool)$element;

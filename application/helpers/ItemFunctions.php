@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage ItemHelpers
- **/
+ */
  
  /**
   * @since 0.10
@@ -14,7 +14,7 @@
   * @uses get_current_item()
   * @param Item|null $item Check for this specific item record (current item if null).
   * @return array
-  **/
+  */
  function current_user_tags_for_item($item=null)
  {
      if (!$item) {
@@ -32,7 +32,7 @@
   * @param array $wrapperAttributes
   * @param Item|null $item Check for this specific item record (current item if null).
   * @return string HTML
-  **/
+  */
  function display_files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'), $item = null)
  {
      if(!$item) {
@@ -52,7 +52,7 @@
   * for an item, or it will display "You have no featured items." if there are 
   * none with images.
   * @return string HTML
-  **/
+  */
  function display_random_featured_item($withImage = null)
  {
      $html = '<h2>Featured Item</h2>';
@@ -66,7 +66,7 @@
   * @since 0.10
   * @throws Exception
   * @return Item
-  **/
+  */
  function get_current_item()
  {
      if (!($item = __v()->item)) {
@@ -88,7 +88,7 @@
   * @since 0.10
   * @param integer $itemId
   * @return Item|null
-  **/
+  */
  function get_item_by_id($itemId)
  {
      return get_db()->getTable('Item')->find($itemId);
@@ -107,7 +107,7 @@
   * @param array $params
   * @param integer $limit The maximum number of items to return.
   * @return array
-  **/
+  */
  function get_items($params = array(), $limit = 10)
  {
      return get_db()->getTable('Item')->findBy($params, $limit);
@@ -118,7 +118,7 @@
   * 
   * @since 0.10
   * @return array
-  **/
+  */
  function get_items_for_loop()
  {
      return __v()->items;
@@ -131,7 +131,7 @@
   * @since 0.10
   * @param Item|null Check for this specific item record (current item if null).
   * @return Item|null
-  **/
+  */
  function get_next_item($item=null)
  {
      if (!$item) {
@@ -145,7 +145,7 @@
   * @since 0.10
   * @param Item|null Check for this specific item record (current item if null).
   * @return Item|null
-  **/
+  */
  function get_previous_item($item=null)
  {
      if (!$item) {
@@ -159,7 +159,7 @@
   * 
   * @since 0.10
   * @return boolean
-  **/
+  */
  function has_items()
  {
      return (total_items() > 0);    
@@ -188,7 +188,7 @@
   * @param array $options
   * @param Item|null Check for this specific item record (current item if null).
   * @return string|array|null
-  **/
+  */
  function item($elementSetName, $elementName = null, $options = array(), $item = null)
  {
      if (!$item) {
@@ -206,7 +206,7 @@
   * any collection.
   * @param Item|null Check for this specific item record (current item if null).
   * @return boolean
-  **/
+  */
  function item_belongs_to_collection($name=null, $item=null)
  {
      //Dependency injection
@@ -226,7 +226,7 @@
   * @since  0.10
   * @param Item|null Check for this specific item record (current item if null).
   * @return string
-  **/
+  */
  function item_citation($item = null)
  {
      if(!$item) {
@@ -267,7 +267,7 @@
   * @param integer
   * @param Item|null Check for this specific item record (current item if null).
   * @return boolean
-  **/
+  */
  function item_field_uses_html($elementSetName, $elementName, $index=0, $item = null)
  {
      if (!$item) {
@@ -286,7 +286,7 @@
   * @param array $props
   * @param integer $index
   * @return string HTML
-  **/
+  */
  function item_fullsize($props = array(), $index = 0, $item = null)
  {
      return item_image('fullsize', $props, $index, $item);
@@ -300,7 +300,7 @@
   * @uses Item::hasFiles()
   * @param Item|null Check for this specific item record (current item if null).
   * @return boolean
-  **/
+  */
  function item_has_files($item=null)
  {
      if(!$item) {
@@ -313,7 +313,7 @@
   * @since 0.10
   * @param Item|null Check for this specific item record (current item if null).
   * @return boolean
-  **/
+  */
  function item_has_tags($item=null)
  {
      if(!$item) {
@@ -333,7 +333,7 @@
   * @param string|null $name
   * @param Item|null Check for this specific item record (current item if null).
   * @return boolean
-  **/
+  */
  function item_has_type($name = null, $item = null)
  {
      if(!$item) {
@@ -350,7 +350,7 @@
   * @since 0.10
   * @param Item|null Check for this specific item record (current item if null).
   * @return void
-  **/
+  */
  function item_has_thumbnail($item=null)
  {
      if(!$item) {
@@ -370,7 +370,7 @@
   * @param integer $index
   * @param Item|null Check for this specific item record (current item if null).
   * @return void
-  **/
+  */
  function item_image($imageType, $props = array(), $index = 0, $item = null)
  {
      if (!$item) {
@@ -393,7 +393,7 @@
   * @param array $props
   * @param string $formActionUri
   * @return string
-  **/	
+  */	
  function items_search_form($props=array(), $formActionUri = null) 
  {
      return __v()->partial('items/advanced-search.php', array('isPartial'=>true, 'formAttributes'=>$props, 'formActionUri'=>$formActionUri));
@@ -406,7 +406,7 @@
   * @param integer $index
   * @param Item $item The item to which the image belongs
   * @return string HTML
-  **/
+  */
  function item_square_thumbnail($props = array(), $index = 0, $item = null)
  {
      return item_image('square_thumbnail', $props, $index, $item);
@@ -423,7 +423,7 @@
   * the first file).
   * @param Item $item The item to which the image belongs  
   * @return string HTML
-  **/
+  */
  function item_thumbnail($props = array(), $index = 0, $item = null)
  {
      return item_image('thumbnail', $props, $index, $item);
@@ -462,7 +462,7 @@
   * @see loop_items()
   * @param Item
   * @return void
-  **/
+  */
  function set_current_item(Item $item)
  {
      $view = __v();
@@ -488,7 +488,7 @@
   * @param array $options Optional
   * @param Item|null Check for this specific item record (current item if null).
   * @return string|array
-  **/
+  */
  function show_item_metadata(array $options = array(), $item=null)
  {
      if (!$item) {
@@ -502,7 +502,7 @@
   * 
   * @param integer $num The maximum number of recent items to return
   * @return array
-  **/
+  */
  function recent_items($num = 10) 
  {
  	return get_db()->getTable('Item')->findBy(array('recent'=>true), $num);
@@ -527,7 +527,7 @@
   * Returns the total number of items
   *
   * @return integer
-  **/
+  */
  function total_items() 
  {	
  	return get_db()->getTable('Item')->count();

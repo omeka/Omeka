@@ -5,7 +5,7 @@
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
  * @access private
- **/
+ */
 
 /**
  * Helper that writes XHTML containing metadata about an item.
@@ -17,7 +17,7 @@
  * @subpackage Omeka_View_Helper
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadataList
 {
     /**
@@ -87,7 +87,7 @@ class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadat
      * 
      * @param array
      * @return void
-     **/
+     */
     protected function _loadViewPartial($vars = array())
     {
         return common('item-metadata', $vars, 'items');

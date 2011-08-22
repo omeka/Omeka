@@ -29,7 +29,7 @@ class CollectionTable extends Omeka_Db_Table
          *
          * ORDER BY id DESC works because MyISAM tables always increment IDs for new rows,
          * would not work with InnoDB because it assigns IDs of deleted records
-         ****************************/
+         ***************************/
          if (array_key_exists('recent', $params) && $params['recent'] === true) {             
              $select->order('c.id DESC');
          }        

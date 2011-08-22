@@ -47,7 +47,7 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
      * @param Item
      * @param string
      * @return mixed
-     **/
+     */
     protected function _getRecordMetadata($item, $specialValue)
     {
         switch (strtolower($specialValue)) {

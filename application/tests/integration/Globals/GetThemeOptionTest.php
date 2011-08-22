@@ -3,14 +3,14 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Test get_theme_option().
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Globals_GetThemeOptionTest extends PHPUnit_Framework_TestCase
 {   
     const THEME_NAME = 'foobar';

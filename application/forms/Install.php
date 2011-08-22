@@ -4,7 +4,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 /**
  * 
@@ -12,7 +12,7 @@
  * @access private
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class Omeka_Form_Install extends Omeka_Form
 {
     const DEFAULT_TAG_DELIMITER = ',';

@@ -5,7 +5,7 @@
  * @package Omeka
  * @subpackage Forms
  * @access private
- **/
+ */
 
 /**
  * Form for allowing a user to reset his/her password.
@@ -15,7 +15,7 @@
  * @package Omeka
  * @subpackage Forms
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Form_ResetPassword extends Omeka_Form
 {
     public function init()

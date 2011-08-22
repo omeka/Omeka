@@ -3,14 +3,14 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Test default ACL configuration.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Core_AclTest extends PHPUnit_Framework_TestCase
 {
     private $_acl;
@@ -19,7 +19,7 @@ class Core_AclTest extends PHPUnit_Framework_TestCase
      * Include the defined ACL, exactly the way Omeka loads it by default.
      * 
      * @return void
-     **/
+     */
     public function setUp()
     {
         include CORE_DIR . '/acl.php';

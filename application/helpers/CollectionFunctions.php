@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage CollectionHelpers
- **/
+ */
 
 /**
  * This is a similar interface to item(), except for accessing metadata about collections.
@@ -21,7 +21,7 @@
  * @param array $options
  * @param Collection|null $collection Check for this specific collection record (current collection if null).
  * @return string|array
- **/
+ */
 function collection($fieldName, $options=array(), $collection=null)
 {
     if (!$collection) {
@@ -83,7 +83,7 @@ function collection($fieldName, $options=array(), $collection=null)
  * 
  * @since 0.10
  * @return boolean
- **/
+ */
 function collection_has_collectors()
 {
     return get_current_collection()->hasCollectors();
@@ -94,7 +94,7 @@ function collection_has_collectors()
  * 
  * @since 0.10
  * @return boolean
- **/
+ */
 function collection_is_featured()
 {
     return get_current_collection()->featured;
@@ -105,7 +105,7 @@ function collection_is_featured()
  * 
  * @since 0.10
  * @return boolean
- **/
+ */
 function collection_is_public()
 {
     return get_current_collection()->public;
@@ -116,7 +116,7 @@ function collection_is_public()
  * 
  * @since 0.10
  * @return string
- **/
+ */
 function display_random_featured_collection()
 {
     $featuredCollection = random_featured_collection();
@@ -138,7 +138,7 @@ function display_random_featured_collection()
  * @see get_item_by_id()
  * @param integer
  * @return Collection|null
- **/
+ */
 function get_collection_by_id($collectionId)
 {
     return get_db()->getTable('Collection')->find($collectionId);
@@ -153,7 +153,7 @@ function get_collection_by_id($collectionId)
  * record.  Ideally theme writers won't have to interact with the actual object.
  * @access private
  * @return Collection
- **/
+ */
 function get_collection_for_item($item=null)
 {
     if (!$item) {
@@ -167,7 +167,7 @@ function get_collection_for_item($item=null)
  * @param array $params
  * @param integer $limit
  * @return array
- **/
+ */
 function get_collections($params = array(), $limit = 10)
 {
     return get_db()->getTable('Collection')->findBy($params, $limit);
@@ -178,7 +178,7 @@ function get_collections($params = array(), $limit = 10)
  * 
  * @since 0.10
  * @return array
- **/
+ */
 function get_collections_for_loop()
 {
     return __v()->collections;
@@ -187,7 +187,7 @@ function get_collections_for_loop()
 /**
  * @since 0.10
  * @return Collection|null
- **/
+ */
 function get_current_collection()
 {
     return __v()->collection;
@@ -198,7 +198,7 @@ function get_current_collection()
  * 
  * @since 0.10
  * @return boolean
- **/
+ */
 function has_collections()
 {
     return (total_collections() > 0);
@@ -210,7 +210,7 @@ function has_collections()
  * @since 1.0
  * @see has_items_for_loop()
  * @return boolean
- **/
+ */
 function has_collections_for_loop()
 {
     $view = __v();
@@ -235,7 +235,7 @@ function loop_collections()
  * @param integer $num
  * @param array $options Optional
  * @return Item|null
- **/
+ */
 function loop_items_in_collection($num = 10, $options = array())
 {
     // Cache this so we don't end up calling the DB query over and over again
@@ -260,7 +260,7 @@ function loop_items_in_collection($num = 10, $options = array())
  * @since 0.10
  * @param array $collections Set of Collection records to loop.
  * @return void
- **/
+ */
 function set_collections_for_loop($collections)
 {
     __v()->collections = $collections;
@@ -270,7 +270,7 @@ function set_collections_for_loop($collections)
  * @since 0.10
  * @param Collection
  * @return void
- **/
+ */
 function set_current_collection($collection)
 {
     __v()->collection = $collection;
@@ -281,7 +281,7 @@ function set_current_collection($collection)
  * 
  * @since 0.10
  * @return integer
- **/
+ */
 function total_items_in_collection()
 {
     return get_current_collection()->totalItems();
@@ -292,7 +292,7 @@ function total_items_in_collection()
  * 
  * @param integer $num The maximum number of recent collections to return
  * @return array
- **/
+ */
 function recent_collections($num = 10) 
 {
 	return get_collections(array('recent'=>true), $num);
@@ -302,7 +302,7 @@ function recent_collections($num = 10)
  * Returns a random featured collection.
  * 
  * @return Collection
- **/
+ */
 function random_featured_collection()
 {
     return get_db()->getTable('Collection')->findRandomFeatured();
@@ -312,7 +312,7 @@ function random_featured_collection()
  * Returns the total number of collection
  * 
  * @return integer
- **/
+ */
 function total_collections() 
 {
 	return get_db()->getTable('Collection')->count();

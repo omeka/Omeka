@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- **/
+ */
 class Omeka_Job_Dispatcher_Adapter_SynchronousTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

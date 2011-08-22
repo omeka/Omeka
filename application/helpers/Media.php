@@ -4,7 +4,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
- **/
+ */
  
 /**
  * View Helper for displaying files through Omeka.  
@@ -23,7 +23,7 @@
  * @subpackage Omeka_View_Helper
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_View_Helper_Media
 {   
     /**
@@ -34,7 +34,7 @@ class Omeka_View_Helper_Media
      * array('video/avi'=>'wmv');
      *
      * @var array
-     **/
+     */
     static protected $_callbacks = array(
         'application/ogg'   => 'audio',
         'audio/aac'         => 'audio',
@@ -92,7 +92,7 @@ class Omeka_View_Helper_Media
      * which are passed to the callback.
      *
      * @var array
-     **/
+     */
     static protected $_callbackOptions = array(
         'defaultDisplay'=>array(
             'linkToFile'=>true,
@@ -167,7 +167,7 @@ class Omeka_View_Helper_Media
      * @param callback Any valid callback.  This function should return a
      * string containing valid XHTML, which will be used to display the file.
      * @return void
-     **/
+     */
     public static function addMimeTypes($mimeTypes, $callback, array $defaultOptions = array())
     {
         //Create the keyed list of mimeType=>callback format, and merge it
@@ -197,7 +197,7 @@ class Omeka_View_Helper_Media
      * @param File
      * @param array
      * @return string HTML
-     **/
+     */
     public function defaultDisplay($file, array $options=array())
     {
         return $this->_linkToFile(null, $file, $options);   
@@ -219,7 +219,7 @@ class Omeka_View_Helper_Media
      * @param File
      * @param array
      * @return string
-     **/
+     */
     protected function _linkToFile($html = null, $file, $options)
     {
         if ($html === null) {
@@ -253,7 +253,7 @@ class Omeka_View_Helper_Media
      * @param array Options for customizing the display of images.  Current
      * options include: 'imageSize'
      * @return string HTML for display
-     **/
+     */
     public function image($file, array $options=array())
     {
         $html = '';
@@ -299,7 +299,7 @@ class Omeka_View_Helper_Media
      * @param File
      * @param array Options
      * @return string
-     **/ 
+     */ 
     public function wmv($file, array $options=array())
     {
         $path = html_escape($file->getWebPath('archive'));
@@ -326,7 +326,7 @@ class Omeka_View_Helper_Media
      * @param File
      * @param array Options
      * @return string
-     **/ 
+     */ 
     public function wma($file, array $options=array())
     {
         $path = html_escape($file->getWebPath('archive'));
@@ -416,7 +416,7 @@ class Omeka_View_Helper_Media
      *      'imgAttributes' => array, 
      *      'icons' => array.
      * @return string
-     **/
+     */
     public function icon($file, array $options=array())
     {
         $mimeType = $this->getMimeFromFile($file);
@@ -462,7 +462,7 @@ class Omeka_View_Helper_Media
      * @see Omeka_Plugin_Broker::addMediaAdapter()
      * @param mixed
      * @return array
-     **/
+     */
     protected function getDefaultOptions($callback)
     {
         $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
@@ -480,7 +480,7 @@ class Omeka_View_Helper_Media
      * @param callback Any valid callback that will display the HTML.
      * @param array Set of options passed to the rendering callback.
      * @return string HTML for displaying the file.
-     **/
+     */
     protected function getHtml($file, $renderer, array $options)
     {
         //Format the callback based on whether we can actually run it
@@ -502,7 +502,7 @@ class Omeka_View_Helper_Media
      * @param array Set of options passed by a theme writer to the customize
      * the display of any given callback.
      * @return string HTML
-     **/
+     */
     public function media($file, array $props=array(), $wrapperAttributes = array())
     {
         $mimeType = $this->getMimeFromFile($file);
@@ -612,7 +612,7 @@ class Omeka_View_Helper_Media
          * 2. file description
          * 3. file title 
          * 4. item title
-         **/
+         */
         $alt = '';            
         if (isset($props['alt'])) {
             $alt = $props['alt'];

@@ -3,14 +3,14 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * 
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
@@ -72,7 +72,7 @@ class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbst
      *  ));
      * 
      * @return void
-     **/    
+     */    
     private function initResponseContexts()
     {        
         Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
@@ -94,7 +94,7 @@ class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbst
      * Returns the default response contexts for Omeka.
      * 
      * @return array
-     **/
+     */
     static public function getDefaultResponseContexts()
     {
         return array(

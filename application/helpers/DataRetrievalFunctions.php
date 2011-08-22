@@ -4,13 +4,13 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage DataRetrievalHelpers
- **/
+ */
 
 /**
  * Returns the total number of results
  *
  * @return integer
- **/
+ */
 function total_results() 
 {
 	if(Zend_Registry::isRegistered('total_results')) {
@@ -27,7 +27,7 @@ function total_results()
  * @since 1.0
  * @return string|false The latest available version of Omeka, or false if the
  * request failed for some reason.
- **/
+ */
 function get_latest_omeka_version()
 {
     $omekaApiUri = 'http://api.omeka.org/latest-version';

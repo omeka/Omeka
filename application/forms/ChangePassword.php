@@ -5,7 +5,7 @@
  * @package Omeka
  * @subpackage Forms
  * @access private
- **/
+ */
 
 /**
  * Form for changing a user's password.
@@ -15,7 +15,7 @@
  * @package Omeka
  * @subpackage Forms
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
- **/
+ */
 class Omeka_Form_ChangePassword extends Omeka_Form
 {
     private $_user;

@@ -7,14 +7,14 @@
  * @author CHNM
  * @see Omeka_Controller_Action
  * @access private
- **/
+ */
 
 /**
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class ItemsController extends Omeka_Controller_Action
 {
     public $contexts = array(
@@ -63,7 +63,7 @@ class ItemsController extends Omeka_Controller_Action
      * This form can be loaded as a partial by calling items_search_form().
      * 
      * @return void
-     **/
+     */
     public function advancedSearchAction()
     {
         // Only show this form as a partial if it's being pulled via XmlHttpRequest
@@ -83,7 +83,7 @@ class ItemsController extends Omeka_Controller_Action
     /**
      * Adds an additional permissions check to the built-in edit action.
      * 
-     **/
+     */
     public function editAction()
     {
         // Get all the element sets that apply to the item.
@@ -156,7 +156,7 @@ class ItemsController extends Omeka_Controller_Action
      * Finds all tags associated with items (used for tag cloud)
      * 
      * @return void
-     **/
+     */
     public function tagsAction()
     {
         $params = array_merge($this->_getAllParams(), array('type'=>'Item'));
@@ -170,7 +170,7 @@ class ItemsController extends Omeka_Controller_Action
      * mechanism.
      * 
      * @return void
-     **/
+     */
     public function browseAction()
     {   
         $results = $this->_helper->searchItems();
@@ -178,7 +178,7 @@ class ItemsController extends Omeka_Controller_Action
         /** 
          * Now process the pagination
          * 
-         **/
+         */
         $paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
 
         //Serve up the pagination
@@ -219,7 +219,7 @@ class ItemsController extends Omeka_Controller_Action
     /**
      * Find or create an item for this mini-form
      *
-     **/
+     */
     public function changeTypeAction()
     {
         if ($id = $_POST['item_id']) {
@@ -236,7 +236,7 @@ class ItemsController extends Omeka_Controller_Action
      * Display the form for tags for a given item.
      * 
      * @return void
-     **/
+     */
     public function tagFormAction()
     {
         $item = $this->findById();
@@ -249,7 +249,7 @@ class ItemsController extends Omeka_Controller_Action
      * 'show' action.
      * 
      * @return void
-     **/
+     */
     public function modifyTagsAction()
     {
         $item = $this->findById();
@@ -285,7 +285,7 @@ class ItemsController extends Omeka_Controller_Action
      * render the 'batch-edit' as a partial.
      * 
      * @return void
-     **/
+     */
     public function batchEditAction()
     {
         /**
@@ -307,7 +307,7 @@ class ItemsController extends Omeka_Controller_Action
      * Processes batch edit information. Only accessible via POST.
      * 
      * @return void
-     **/
+     */
     public function batchEditSaveAction()
     {
         $hashParam = $this->_getParam('batch_edit_hash');

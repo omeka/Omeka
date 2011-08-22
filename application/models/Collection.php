@@ -154,7 +154,7 @@ class Collection extends Omeka_Record
      * 
      * @param string
      * @return boolean Was successful or not.
-     **/
+     */
     public function removeCollector($collector)
     {
         $collectors = $this->getCollectors();

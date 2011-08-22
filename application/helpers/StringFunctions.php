@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage StringHelpers
- **/
+ */
 
 /**
  * Escape the value to display properly as HTML.
@@ -57,7 +57,7 @@ function xml_escape($value)
  * @link http://us.php.net/manual/en/function.nl2br.php#73479
  * @param string $str
  * @return string
- **/
+ */
 function nls2p($str)
 {
   return str_replace('<p></p>', '', '<p>'
@@ -123,7 +123,7 @@ function snippet($text, $startPos, $endPos, $append = '…')
  * @param integer $maxWords
  * @param string $ellipsis Optional '...' by default.
  * @return string
- **/
+ */
 function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
 {
     // strip html tags from the text
@@ -183,7 +183,7 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
  * @param string $prepend Another string to prepend to the ID
  * @param string $delimiter The delimiter to use (- by default)
  * @return string
- **/
+ */
 function text_to_id($text, $prepend=null, $delimiter='-')
 {
 	$text = strtolower($text);
@@ -200,7 +200,7 @@ function text_to_id($text, $prepend=null, $delimiter='-')
  * @since 1.4
  * @param string $str The string to be searched for URLs to convert to links.
  * @return string
- **/
+ */
 function url_to_link($str)
 {
     $pattern = "/(\bhttps?:\/\/\S+\b)/e";

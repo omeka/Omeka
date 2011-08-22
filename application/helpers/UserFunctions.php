@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage UserHelpers
- **/
+ */
  
 /**
  * @since 0.10
@@ -15,7 +15,7 @@
  * @param array $params
  * @param integer $limit
  * @return array
- **/
+ */
 function get_users($params = array(), $limit = 10)
 {
     return get_db()->getTable('User')->findBy($params, $limit);
@@ -26,7 +26,7 @@ function get_users($params = array(), $limit = 10)
  * @see get_item_by_id()
  * @param integer
  * @return User|null
- **/
+ */
 function get_user_by_id($userId)
 {
     return get_db()->getTable('User')->find($userId);
@@ -41,7 +41,7 @@ function get_user_by_id($userId)
  * @param string|Zend_Acl_Resource_Interface
  * @param string|null
  * @return boolean
- **/
+ */
 function has_permission($resource, $privilege) 
 {
 	$acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->acl;
@@ -59,7 +59,7 @@ function has_permission($resource, $privilege)
  * Returns the total number of users
  * 
  * @return integer
- **/
+ */
 function total_users() 
 {
 	return get_db()->getTable('User')->count();
