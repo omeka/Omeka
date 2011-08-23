@@ -112,16 +112,23 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         float:right; 
         color:#fff !important;
         padding: 4px 8px;
-        border:none; 
-        border:1px solid #6d8e1d;
+        border: none;
         border-radius:6px;
         -webkit-border-radius:6px;
         -moz-border-radius:6px;
         font-weight:bold;
     }
 
-    .delete-button, input.delete-confirm, input.delete {background-color: #800 !important; border-color: #800 !important;float: none !important;}
-    td .delete-confirm {margin: 0; padding: 1px 6px;}
+    table button,
+    table .submit,
+    table input[type="submit"],
+    table .button {
+        margin: 0;
+        padding: 2px 6px;
+        float: none;
+    }
+
+    .delete-button, input.delete-confirm, input.delete {background-color: #800 !important; float: none !important;}
 
     input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;text-shadow:none;}
     
