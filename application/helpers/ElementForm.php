@@ -1,25 +1,24 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
- **/
+ */
 
 /**
  * Generate the form markup for entering element text metadata.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_View_Helper_ElementForm
 {
     /**
      * Element record to display the form for.
      *
      * @var Element
-     **/
+     */
     protected $_element;
     
     protected $_record;
@@ -88,7 +87,7 @@ class Omeka_View_Helper_ElementForm
      * How many form inputs to display for a given element.
      * 
      * @return integer
-     **/
+     */
     protected function _getFormFieldCount()
     {
         if ($this->_isPosted()) {
@@ -105,7 +104,7 @@ class Omeka_View_Helper_ElementForm
      * The name of the data type for this element (relates to how the element is displayed).
      * 
      * @return string
-     **/
+     */
     protected function _getElementDataType()
     {
         return $this->_element['data_type_name'];
@@ -115,7 +114,7 @@ class Omeka_View_Helper_ElementForm
      * @uses ActsAsElementText::getTextStringFromFormPost()
      * @param integer
      * @return mixed
-     **/
+     */
     protected function _getPostValueForField($index)
     {
         if (!$this->_isPosted()) {
@@ -155,7 +154,7 @@ class Omeka_View_Helper_ElementForm
      * 
      * @param integer
      * @return string
-     **/
+     */
     protected function _getValueForField($index)
     {        
         if ($this->_isPosted()) {
@@ -176,7 +175,7 @@ class Omeka_View_Helper_ElementForm
      * 
      * @param string
      * @return void
-     **/
+     */
     public function getElementTexts($index=null)
     {
         $texts = $this->_record->getTextsByElement($this->_element);
@@ -416,7 +415,7 @@ class Omeka_View_Helper_ElementForm
     /**
      * Zend Framework wants this.
      * 
-     **/
+     */
     public function setView(Zend_View_Interface $view)
     {
         $this->view = $view;

@@ -1,10 +1,9 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Assert whether or not a specific user is allowed access to that person's 
@@ -12,7 +11,7 @@
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class User_AclAssertion implements Zend_Acl_Assert_Interface
 {    
     private $_allowSelf = array(

@@ -1,10 +1,9 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_Test
- **/
+ */
 
 class Models_ThemeTest extends Omeka_Test_AppTestCase
 {       

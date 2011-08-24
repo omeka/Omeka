@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage LinkHelpers
- **/
+ */
 
 /**
  * Uses uri() to generate <a> tags for a given link.
@@ -23,7 +22,7 @@
  * @param array $props Attributes for the <a> tag
  * @param array $queryParams the parameters in the uri query
  * @return string HTML
- **/
+ */
 function link_to($record, $action=null, $text='View', $props = array(), $queryParams=array())
 {
     // If we're linking directly to a record, use the URI for that record.
@@ -37,7 +36,7 @@ function link_to($record, $action=null, $text='View', $props = array(), $queryPa
         $route = 'default';
         $urlOptions['controller'] = (string) $record;
         if($action) $urlOptions['action'] = (string) $action;
-        $url = uri($urlOptions, $route, $queryParams);
+        $url = uri($urlOptions, $route, $queryParams, true);
     }
 
     
@@ -54,7 +53,7 @@ function link_to($record, $action=null, $text='View', $props = array(), $queryPa
  * @param array $props Optional XHTML attributes for the link.
  * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
- **/
+ */
 function link_to_advanced_search($text = 'Advanced Search', $props = array(), $uri=null)
 {   
     if (!$uri) {
@@ -75,12 +74,10 @@ function link_to_advanced_search($text = 'Advanced Search', $props = array(), $u
  * array('collection' => 1) would build items/browse?collection=1 as the URL.
  * @param array $linkProperties Optional XHTML attributes for the link.
  * @return string HTML
- **/
+ */
 function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
 {
-    // Set the link href to the items/browse page.
-    $linkProperties['href'] = uri(array('controller'=>'items', 'action'=>'browse'), 'default', $browseParams);
-    return "<a " . _tag_attributes($linkProperties) . ">$text</a>";
+    return link_to('items', 'browse', $text, $linkProperties, $browseParams);
 }
 
 /**
@@ -94,7 +91,7 @@ function link_to_browse_items($text, $browseParams = array(), $linkProperties = 
  * @param array $props Optional XHTML attributes for the <a> tag.
  * @param string $action Optional 'show' by default.
  * @return string
- **/
+ */
 function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
 {
     return link_to_collection($text, $props, $action, get_collection_for_item());
@@ -148,7 +145,7 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
  * @param string
  * @param File
  * @return string
- **/
+ */
 function link_to_file_metadata($attributes = array(), $text = null, $file = null)
 {
     if (!$file) {
@@ -176,7 +173,7 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
  * @param Item Used for dependency injection testing or to use this function outside
  * the context of a loop.
  * @return string HTML
- **/
+ */
 function link_to_item($text = null, $props = array(), $action = 'show', $item=null)
 {
     if(!$item) {
@@ -211,7 +208,7 @@ function link_to_items_rss($text = 'RSS', $params=array())
  * @uses get_current_item()
  * @uses link_to()
  * @return string
- **/
+ */
 function link_to_next_item($text="Next Item &rarr;", $props=array())
 {
     $item = get_current_item();
@@ -223,7 +220,7 @@ function link_to_next_item($text="Next Item &rarr;", $props=array())
 /**
  * @see link_to_next_item()
  * @return string
- **/
+ */
 function link_to_previous_item($text="&larr; Previous Item", $props=array())
 {
     $item = get_current_item();
@@ -244,7 +241,7 @@ function link_to_previous_item($text="&larr; Previous Item", $props=array())
  * @param array $collectionObj Optional Collection record can be passed to this
  * to override the collection object retrieved by get_current_collection().
  * @return string
- **/
+ */
 function link_to_collection($text=null, $props=array(), $action='show', $collectionObj = null)
 {
     if (!$collectionObj) {
@@ -265,7 +262,7 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
  * @since 0.10 The text passed to this function will not be automatically escaped
  * with htmlentities(), which allows for passing images or other HTML in place of text.
  * @return string
- **/
+ */
 function link_to_home_page($text = null, $props = array())
 {
     if (!$text) {
@@ -280,7 +277,7 @@ function link_to_home_page($text = null, $props = array())
  * @since 0.10 Arguments follow the same pattern as link_to_home_page().
  * @see link_to_home_page()
  * @return string
- **/
+ */
 function link_to_admin_home_page($text = null, $props = array())
 {
     if (!$text) {
@@ -330,7 +327,7 @@ function link_to_admin_home_page($text = null, $props = array())
  * If null, it will display all the levels.
  *          
  * @return string HTML for the unordered list
- **/
+ */
 function nav(array $links, $maxDepth = 0) 
 {	
 	// Get the current uri from the request
@@ -400,7 +397,7 @@ function nav(array $links, $maxDepth = 0)
  *      'per_page' (integer) Number of results to display per page.  Default is
  * the 'per_page' key of the 'pagination' array.
  * @return string HTML for the pagination links.
- **/
+ */
 function pagination_links($options = array('scrolling_style' => null, 
                                      'partial_file'    => null, 
                                      'page_range'      => null, 
@@ -457,7 +454,7 @@ function pagination_links($options = array('scrolling_style' => null,
  * @param string|null $navType
  * @param integer|null $maxDepth
  * @return string HTML
- **/
+ */
 function public_nav(array $navArray, $navType=null, $maxDepth = 0)
 {
     if ($navType) {
@@ -477,7 +474,7 @@ function public_nav(array $navArray, $navType=null, $maxDepth = 0)
  * @param integer|null $maxDepth
  * @uses public_nav()
  * @return string
- **/
+ */
 function public_nav_main(array $navArray, $maxDepth = 0)
 {
     return public_nav($navArray, 'main', $maxDepth);
@@ -492,7 +489,7 @@ function public_nav_main(array $navArray, $maxDepth = 0)
  * @param integer|null $maxDepth
  * @uses public_nav()
  * @return string
- **/
+ */
 function public_nav_items(array $navArray, $maxDepth = 0)
 {
     return public_nav($navArray, 'items', $maxDepth);

@@ -1,17 +1,16 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 
 /**
  * Tests for body_tag() helper.
  *
  * @package Omeka
- **/
+ */
 class Omeka_Helper_BodyTagTest extends Omeka_Test_AppTestCase
 {
     public function testBodyTagWithAttributes()

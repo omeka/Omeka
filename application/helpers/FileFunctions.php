@@ -2,12 +2,11 @@
 /**
  * All File helper functions
  * 
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage FileHelpers
- **/
+ */
  
  /**
   * @see display_files()
@@ -17,7 +16,7 @@
   * @param array $wrapperAttributes Optional XHTML attributes for the div wrapper
   * for the displayed file.  Defaults to array('class'=>'item-file').
   * @return string HTML
-  **/
+  */
  function display_file($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
  {
      return display_files(array($file), $props, $wrapperAttributes);
@@ -36,7 +35,7 @@
   * displayed file.  If empty or null, this will not wrap the displayed file in a
   * div.
   * @return string HTML
-  **/
+  */
  function display_files($files, array $props = array(), $wrapperAttributes = array('class'=>'item-file')) 
  {
      require_once 'Media.php';
@@ -51,7 +50,7 @@
  /**
   * @since 0.10
   * @return File|null
-  **/
+  */
  function get_current_file()
  {
      return __v()->file;
@@ -66,7 +65,7 @@
   * @param array $options
   * @param File|null $file
   * @return mixed
-  **/
+  */
  function item_file($elementSetName, $elementName = null, $options = array(), $file = null)
  {
      if (!$file) {
@@ -79,7 +78,7 @@
   * @since 0.10
   * @param File
   * @return void
-  **/
+  */
  function set_current_file(File $file)
  {
      __v()->file = $file;
@@ -92,7 +91,7 @@
   * @param array $options Optional
   * @param File|null $file Optional
   * @return string|array
-  **/
+  */
  function show_file_metadata(array $options = array(), $file = null)
  {
      if (!$file) {
@@ -107,7 +106,7 @@
   * @since 1.1
   * @param integer $num The maximum number of recent files to return
   * @return array
-  **/
+  */
  function recent_files($num = 10) 
  {
      return get_files(array('recent'=>true), $num);
@@ -127,7 +126,7 @@
  * @param array $params
  * @param integer $limit
  * @return array
- **/
+ */
  function get_files($params = array(), $limit = 10)
  {
     return get_db()->getTable('File')->findBy($params, $limit);
@@ -138,7 +137,7 @@
  * 
  * @since 1.1
  * @return array
- **/
+ */
  function get_files_for_loop()
  {
     return __v()->files;
@@ -160,7 +159,7 @@
  * 
  * @since 1.1
  * @return boolean
- **/
+ */
  function has_files()
  {
     return (total_files() > 0);    

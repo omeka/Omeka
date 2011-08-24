@@ -1,6 +1,5 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -65,10 +64,10 @@ class ItemTable extends Omeka_Db_Table
         //Apply the simple or advanced search
         if (isset($params['search']) || isset($params['advanced_search'])) {
             $search = new ItemSearch($select);
-            if ($simpleTerms = $params['search']) {
+            if ($simpleTerms = @$params['search']) {
                 $search->simple($simpleTerms);
             }
-            if ($advancedTerms = $params['advanced_search']) {
+            if ($advancedTerms = @$params['advanced_search']) {
                 $search->advanced($advancedTerms);
             }
         }        

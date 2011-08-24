@@ -1,6 +1,5 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -28,12 +27,12 @@ class Collection extends Omeka_Record
     /**
      * @var string Description for the collection.
      */
-    public $description = '';
+    public $description;
     
     /**
      * @var array Strings containing the names of this collection's collectors.
      */
-    public $collectors = '';
+    public $collectors;
     
     /**
      * @var boolean Whether or not the collection is publicly accessible.
@@ -92,7 +91,9 @@ class Collection extends Omeka_Record
      */
     public function getCollectors()
     {
-        if (is_string($this->collectors)) {
+        if (!$this->collectors) {
+            return array();
+        } else if (is_string($this->collectors)) {
             if (trim($this->collectors) == '') {
                 return array();
             } else {
@@ -155,7 +156,7 @@ class Collection extends Omeka_Record
      * 
      * @param string
      * @return boolean Was successful or not.
-     **/
+     */
     public function removeCollector($collector)
     {
         $collectors = $this->getCollectors();

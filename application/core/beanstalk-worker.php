@@ -3,7 +3,6 @@
  * Bootstrap file for background processes.
  * 
  * @access private
- * @version $Id$
  * @package Omeka
  * @copyright Copyright (c) 2009 Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
@@ -81,6 +80,7 @@ $core->bootstrap(array(
     'Plugins', 
     'Jobs', 
     'Storage',
+    'Mail',
 ));
 
 // resend() must send jobs to the original queue by default.

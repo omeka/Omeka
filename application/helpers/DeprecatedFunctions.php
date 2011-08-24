@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage DeprecatedHelpers
- **/
+ */
 
 /**
  * @access private
@@ -26,7 +25,7 @@ function h($str, $allowedTags = "i|em|b|strong|del|span")
  * @deprecated
  * @param string
  * @return string
- **/
+ */
 function unescapeTags($matches) 
 {
     return str_replace( array("&gt;", "&lt;", "&quot;", "&amp;"), array(">", "<", "\"", "&"), $matches[0]);
@@ -37,7 +36,7 @@ function unescapeTags($matches)
  * @access private
  * @deprecated
  * @return integer
- **/
+ */
 function total_types() 
 {
 	return get_db()->getTable('Type')->count();

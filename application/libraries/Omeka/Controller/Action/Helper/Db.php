@@ -1,10 +1,9 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * An action helper replacement for the database-oriented methods that were baked
@@ -13,7 +12,7 @@
  * @since 2.0
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Abstract
 {
     /**
@@ -105,7 +104,7 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
      * @throws Omeka_Controller_Exception_404
      * @throws Omeka_Controller_Exception_403
      * @return Omeka_Record
-     **/
+     */
     public function findById($id = null, $table = null)
     {
         $id = (!$id) ? $this->getRequest()->getParam('id') : $id;

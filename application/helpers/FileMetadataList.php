@@ -1,11 +1,10 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 /**
  * Retrieve the list of all available metadata for a specific file.
@@ -14,7 +13,7 @@
  * @access private
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class Omeka_View_Helper_FileMetadataList extends Omeka_View_Helper_RecordMetadataList
 {
     
@@ -25,7 +24,7 @@ class Omeka_View_Helper_FileMetadataList extends Omeka_View_Helper_RecordMetadat
      * retrieved correctly for files.
      *
      * @var array
-     **/
+     */
     protected $_fileMimeTypeElementSets = array('Omeka Image File', 'Omeka Video File');
     
     public function fileMetadataList(File $file, array $options = array())

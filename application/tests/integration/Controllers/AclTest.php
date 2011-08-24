@@ -1,10 +1,9 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Test ACL integration with controllers.  
@@ -15,7 +14,7 @@
  * @package Omeka
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Controllers_AclTest extends Omeka_Test_AppTestCase
 {   
     protected $_isAdminTest = false;

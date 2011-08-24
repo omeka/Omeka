@@ -1,17 +1,16 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Adds a salt for all the user passwords in Omeka.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class addPasswordSalt extends Omeka_Db_Migration
 {
     

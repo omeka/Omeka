@@ -1,10 +1,9 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * 
@@ -13,7 +12,7 @@
  * global state is required for global functions in the API.
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class Omeka_GlobalFunctionsTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

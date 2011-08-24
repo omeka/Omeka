@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage FormHelpers
- **/
+ */
 
 /**
  * Generate attributes for XHTML tags.
@@ -17,7 +16,7 @@
  * the tag.
  * @param string $value
  * @return string
- **/
+ */
 function _tag_attributes($attributes, $value=null) 
 {
 
@@ -48,7 +47,7 @@ function _tag_attributes($attributes, $value=null)
  * @param mixed $attributes An array of attributes, or just the string id to be used in the 'for' attribute
  * @param string $text Text of the form label
  * @return string
- **/
+ */
 function label($attributes, $text) 
 {
     if (is_string($attributes)) {
@@ -74,7 +73,7 @@ function label($attributes, $text)
  * @param string|null $label
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string HTML for the form element
- **/	
+ */	
 function text($attributes, $default=null, $label = null, $labelAttributes = array())
 {
     $html = '';
@@ -100,7 +99,7 @@ function text($attributes, $default=null, $label = null, $labelAttributes = arra
  * @param string|null $label Optional
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label
  * @return string
- **/	
+ */	
 function password($attributes, $default=null, $label = null, $labelAttributes = array())
 {
     $html = '';
@@ -127,7 +126,7 @@ function password($attributes, $default=null, $label = null, $labelAttributes = 
  * @param string|null $label Optional
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label
  * @return string
- **/
+ */
 function select($attributes, $values = null, $default = null, $label=null, $labelAttributes = array())
 {   
     $html = '';
@@ -154,7 +153,7 @@ function select($attributes, $values = null, $default = null, $label=null, $labe
  * @param string|null $label Optional
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string
- **/
+ */
 function textarea($attributes, $default = null, $label = null, $labelAttributes = array())
 {		
 	$html = '';
@@ -178,7 +177,7 @@ function textarea($attributes, $default = null, $label = null, $labelAttributes 
  * @param string|null $default Optional
  * @param string $label_class Optional Defaults to 'radiolabel'.
  * @return string HTML
- **/	
+ */	
 function radio($attributes, array $values, $default = null, $label_class = 'radiolabel')
 {
     $attributes['label_class'] = $label_class;
@@ -193,7 +192,7 @@ function radio($attributes, array $values, $default = null, $label_class = 'radi
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param string $value
  * @return string
- **/	
+ */	
 function hidden($attributes, $value)
 {
 	$input = '<input type="hidden"';
@@ -217,7 +216,7 @@ function hidden($attributes, $value)
  * @param string|null $label Optional
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string
- **/	
+ */	
 function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $labelAttributes = array())
 {
     if ($checked !== null) {
@@ -239,7 +238,7 @@ function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $la
  * @param array $attributes XHTML attributes.
  * @param string $value Optional Defaults to 'Submit'.
  * @return string
- **/	
+ */	
 function submit($attributes, $value="Submit")
 {
     // This is a hack that makes this work.
@@ -261,7 +260,7 @@ function submit($attributes, $value="Submit")
  * to setting id="simple-search".
  * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
- **/	
+ */	
 function simple_search($buttonText = "Search", $formProperties=array('id'=>'simple-search'), $uri = null) 
 { 
     // Always post the 'items/browse' page by default (though can be overridden).
@@ -311,7 +310,7 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
  * @param Omeka_Record $record
  * @param array $options Optional
  * @return string HTML
- **/
+ */
 function display_form_input_for_element($element, $record, $options = array())
 {
     $html = '';
@@ -335,7 +334,7 @@ function display_form_input_for_element($element, $record, $options = array())
  * @param Omeka_Record $record 
  * @param string $elementSetName The name of the element set.
  * @return string
- **/
+ */
 function display_element_set_form($record, $elementSetName)
 {
     $elements = get_db()->getTable('Element')->findBySet($elementSetName);
@@ -352,7 +351,7 @@ function display_element_set_form($record, $elementSetName)
  * @deprecated deprecated since 1.2
  * @param string $field The name of the field to retrieve the error message for
  * @return string The error message wrapped in a div with class="error"
- **/
+ */
 function form_error($field)
 {
 	$flash = new Omeka_Controller_Flash;
@@ -386,7 +385,7 @@ function select_user($props = array(), $value=null, $label=null, $search = array
  * @param array
  * @param Item|null Check for this specific item record (current item if null).
  * @return string HTML for the form input.
- **/
+ */
 function select_item_type_for_item($props=array(), $item=null)
 {
     if (!$item) {
@@ -402,7 +401,7 @@ function select_item_type_for_item($props=array(), $item=null)
  * @param string|null $label Optional
  * @param array $search Optional
  * @return string
- **/
+ */
 function select_collection($props = array(), $value=null, $label=null, $search = array())
 {
     return _select_from_table('Collection', $props, $value, $label, $search);
@@ -416,7 +415,7 @@ function select_collection($props = array(), $value=null, $label=null, $search =
  * @param array $search Optional Search parameters for the data being displayed.
  * @see ElementTable::applySearchFilters()
  * @return string HTML
- **/
+ */
 function select_element($props = array(), $value = null, $label=null, $search = array('record_types'=>array('All')))
 {
     return _select_from_table('Element', $props, $value, $label, $search);
@@ -443,7 +442,7 @@ function select_entity($props = array(), $value = null, $label=null, $search = a
  * @param array
  * @param string Selected value
  * @return string HTML
- **/
+ */
 function select_item_type($props=array(), $value=null, $label=null)
 {
     return _select_from_table('ItemType', $props, $value, $label);	
@@ -460,7 +459,7 @@ function select_item_type($props=array(), $value=null, $label=null)
  * @param string|integer Optional value of the selected option.
  * @param string|null Optional Label for the form input.
  * @return string HTML
- **/
+ */
 function select_item_type_elements($props = array(), $value = null, $label = null)
 {
     $searchParams = array(
@@ -496,7 +495,7 @@ function select_data_types($props = array(), $value = null, $label = null)
  * @param array $searchParams Optional Search parameters to filter the list of
  * parameters that are displayed.
  * @return string HTML for a <select> input.
- **/
+ */
 function _select_from_table($tableClass, $props = array(), $value = null, $label = null, $searchParams = array())
 {
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);

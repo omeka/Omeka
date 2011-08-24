@@ -1,16 +1,15 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
- **/
+ */
 
 /**
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_View_Helper_Url extends Zend_View_Helper_Abstract
 {
     /**
@@ -62,7 +61,7 @@ class Omeka_View_Helper_Url extends Zend_View_Helper_Abstract
      * the route.
      * @param boolean $encode
      * @return string
-     **/
+     */
     public function url($options = array(), $name = null, array $queryParams=array(), $reset = false, $encode = true)
     {
         $url = '';

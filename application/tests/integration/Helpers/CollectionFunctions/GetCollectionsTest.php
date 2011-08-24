@@ -1,10 +1,9 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Need access to view helper functions.
@@ -19,7 +18,7 @@ require_once HELPERS;
  * 
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/ 
+ */ 
 class Helpers_CollectionFunctions_GetCollectionsTest extends PHPUnit_Framework_TestCase
 {   
     public function setUp()

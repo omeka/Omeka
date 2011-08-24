@@ -112,16 +112,23 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         float:right; 
         color:#fff !important;
         padding: 4px 8px;
-        border:none; 
-        border:1px solid #6d8e1d;
+        border: none;
         border-radius:6px;
         -webkit-border-radius:6px;
         -moz-border-radius:6px;
         font-weight:bold;
     }
 
-    .delete-button, input.delete-confirm, input.delete {background-color: #800 !important; border-color: #800 !important;float: none !important;}
-    td .delete-confirm {margin: 0; padding: 1px 6px;}
+    table button,
+    table .submit,
+    table input[type="submit"],
+    table .button {
+        margin: 0;
+        padding: 2px 6px;
+        float: none;
+    }
+
+    .delete-button, input.delete-confirm, input.delete {background-color: #800 !important; float: none !important;}
 
     input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;text-shadow:none;}
     
@@ -143,25 +150,20 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 
     /* Configure button */
     .configure-button {
-        font-size:11px;
         background-color: #38c;
-        width: 80px; 
-        border-color: #38c;
         margin-left:8px;
-        float:none;
     }
-    .configure-button:hover {background-color: #369;border-color:#369;color:#fff;}
+    .configure-button:hover {background-color: #369; color:#fff;}
 
     /* Plugins */
-    .uninstall {background-color: #800 !important; border-color: #800 !important;}
-    .deactivate {background-color:#c60 !important; border-color: #c60 !important;}
+    .uninstall {background-color: #800 !important;}
+    .deactivate {background-color:#c60 !important;}
         
     .uninstall:hover, 
     .deactivate:hover {}
 
     [disabled] {
         background-color: #ccc !important;
-        border-color: #ccc !important;
     }
 
     .field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
@@ -759,7 +761,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     #plugin-info tbody td {border:none;}
     #plugin-info tbody tr {border-top: none; border-bottom:1px solid #d7d7c4;}
     #plugin-info tbody tr.related-plugin-info, #plugin-info tbody tr.upgrade-plugin-notice {border:none;}
-    #plugin-info button, #plugin-info .submit {font-size:11px; width: 80px; margin:0 0 6px 0 !important;}
+    #plugin-info button, #plugin-info .submit, #plugin-info .button {font-size:11px; width: 80px; margin:0 0 6px 0 !important; padding: 4px 8px;}
     #plugin-info form {margin:0 !important; padding:0 !important;}
     
     #uninstall-confirm {margin-bottom:0;}

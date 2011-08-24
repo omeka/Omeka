@@ -2,12 +2,11 @@
 /**
  * All User helper functions
  * 
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage UserHelpers
- **/
+ */
  
 /**
  * @since 0.10
@@ -16,7 +15,7 @@
  * @param array $params
  * @param integer $limit
  * @return array
- **/
+ */
 function get_users($params = array(), $limit = 10)
 {
     return get_db()->getTable('User')->findBy($params, $limit);
@@ -27,7 +26,7 @@ function get_users($params = array(), $limit = 10)
  * @see get_item_by_id()
  * @param integer
  * @return User|null
- **/
+ */
 function get_user_by_id($userId)
 {
     return get_db()->getTable('User')->find($userId);
@@ -42,20 +41,17 @@ function get_user_by_id($userId)
  * @param string|Zend_Acl_Resource_Interface
  * @param string|null
  * @return boolean
- **/
+ */
 function has_permission($resource, $privilege) 
 {
 	$acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->acl;
 	$user = current_user();
-	if (!$user) {
-	    return false;
-	}
-	
-	// User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
 
 	if (is_string($resource)) {
 	   $resource = ucwords($resource);
 	}
+
+    // User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
 	return $acl->isAllowed($user, $resource, $privilege);
 }
 
@@ -63,7 +59,7 @@ function has_permission($resource, $privilege)
  * Returns the total number of users
  * 
  * @return integer
- **/
+ */
 function total_users() 
 {
 	return get_db()->getTable('User')->count();
