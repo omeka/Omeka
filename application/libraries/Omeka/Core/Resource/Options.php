@@ -1,6 +1,5 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -40,7 +39,8 @@ class Omeka_Core_Resource_Options extends Zend_Application_Resource_ResourceAbst
         } catch (Zend_Db_Statement_Exception $e) {
             if ($this->_installerRedirect) {
                 // Redirect to the install script.
-                header('Location: '.WEB_ROOT.'/install');
+                header('Location: '.WEB_ROOT.'/install/');
+                exit;
             } else {
                 throw $e;
             }

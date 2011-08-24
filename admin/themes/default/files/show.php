@@ -28,6 +28,7 @@
     <h3><?php echo __('Authentication'); ?></h3> 
     <div class="element-text"><?php echo item_file('Authentication'); ?></div>
     </div>
+    <?php fire_plugin_hook('admin_append_to_files_show_primary', $file); ?>
 </div><!--end primary-->
 <div id="secondary">
     
@@ -56,5 +57,6 @@
         </div>
     </div>
     
+    <?php fire_plugin_hook('admin_append_to_files_show_secondary', $file); ?>
 </div>
 <?php foot();?>

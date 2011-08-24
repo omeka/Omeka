@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -37,6 +36,7 @@ class Omeka_Form extends Zend_Form
     public function init()
     {
         $this->addElementPrefixPath('Omeka_', 'Omeka/');
+        $this->addPrefixPath('Omeka_Form_Element', 'Omeka/Form/Element/', 'element');
         
         // set the default element decorators
         $this->setElementDecorators($this->getDefaultElementDecorators());

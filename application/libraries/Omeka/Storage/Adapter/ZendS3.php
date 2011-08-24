@@ -130,10 +130,14 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         $status = $this->_s3->removeObject($objectName);
 
         if(!$status) {
-            throw new Omeka_Storage_Exception('Unable to delete file.');
+            if ($this->_s3->isObjectAvailable($objectName)) {
+                throw new Omeka_Storage_Exception('Unable to delete file.');
+            } else {
+                _log("Omeka_Storage_Adapter_ZendS3: Tried to delete missing object '$objectName'.", Zend_Log::WARN);
+            }
+        } else {
+            _log("Omeka_Storage_Adapter_ZendS3: Removed object '$objectName'.");
         }
-
-        _log("Omeka_Storage_Adapter_ZendS3: Removed object '$objectName'.");
     }
 
     /**

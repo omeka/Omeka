@@ -11,7 +11,7 @@ add_filter('html_escape', 'nl2br', 2);
 
 /**
  * If an item has a blank Dublin Core Title, use the string '[Untitled]' instead.
- **/
+ */
 add_filter(array('Display', 'Item', 'Dublin Core', 'Title'), 'show_untitled_items');
 
 add_plugin_hook('public_theme_header', 'custom_header_background');

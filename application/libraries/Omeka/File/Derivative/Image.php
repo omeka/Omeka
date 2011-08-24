@@ -155,7 +155,7 @@ class Omeka_File_Derivative_Image
 
             $new_path = dirname($old_path) . '/' . $type . '_' . $newFileName;
 
-            $old_path = escapeshellarg( $old_path );
+            $old_path = escapeshellarg( $old_path . '[0]');
             $new_path = escapeshellarg( $new_path );
 
             if (!$constraint) {

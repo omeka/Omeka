@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -353,20 +352,17 @@ abstract class Omeka_File_Ingest_Abstract
      */
     protected function _validateFile($filePath, $fileInfo)
     {
-        // Valid until proven otherwise.
-        $isValid = true;
         $validationErrors = array();
         foreach ($this->_validators as $validator) {
-            $isValid = $validator->isValid($filePath, $fileInfo);
             // Aggregate all the error messages.
-            if (!$isValid) {
+            if (!$validator->isValid($filePath, $fileInfo)) {
                 $errorMessages = $validator->getMessages();
                 $validationErrors += $errorMessages;
             }
         }
-        if (!$isValid) {
-            throw new Omeka_File_Ingest_InvalidException(join(", ", array_values($validationErrors)));
+        if (!empty($validationErrors)) {
+            throw new Omeka_File_Ingest_InvalidException(join("\n\n", array_values($validationErrors)));
         }
-        return $isValid;
+        return true;
     }
 }

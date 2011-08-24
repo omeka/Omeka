@@ -1,11 +1,10 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
- **/
+ */
  
 //Define our resources/privileges in a flat list here
 $resources = array(

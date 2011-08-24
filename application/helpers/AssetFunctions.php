@@ -194,7 +194,7 @@ function js($file, $dir = 'javascripts', $scriptaculousLibraries = array('effect
  * @param string|null   Directory that the file is contained in (optional)
  * @param string        File extension (optional)
  * @return string
- **/
+ */
 function src($file, $dir=null, $ext = null)
 {
     if ($ext !== null) {
@@ -212,7 +212,7 @@ function src($file, $dir=null, $ext = null)
  * @param string $file
  * @throws Exception
  * @return string
- **/
+ */
 function physical_path_to($file)
 {
     $view = __v();
@@ -232,7 +232,7 @@ function physical_path_to($file)
  *
  * @param string $file
  * @return string
- **/
+ */
 function web_path_to($file)
 {
     $view = __v();

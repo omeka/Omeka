@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -10,7 +9,6 @@
 /**
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -83,6 +81,12 @@ class Plugin extends Omeka_Record
      * the ini file.
      */
     protected $_iniTags = array();
+
+    /**
+     * @var boolean Flag to determine how to load the plugin.php for this 
+     * plugin (require_once vs. require).
+     */
+    protected $_requireOnce;
         
     protected function _validate()
     {
@@ -342,7 +346,7 @@ class Plugin extends Omeka_Record
      */
     public function setActive($flag)
     {
-        $this->active = $flag;
+        $this->active = $flag ? '1' : '0';
         return $this;
     }
             
@@ -428,5 +432,34 @@ class Plugin extends Omeka_Record
         // This means that the check will succeed for all sub-versions
         // of the declared version in plugin.ini.
         return !$this->getTestedUpToOmekaVersion() || version_compare($this->getTestedUpToOmekaVersion() . 'p', OMEKA_VERSION, '>=');
+    }
+
+    /**
+     * Set a flag to determine whether plugin.php may be reloaded repeatedly
+     * in the test environment.
+     *
+     * If set to true, plugin.php will be loaded via require_once. This is the
+     * default, and it is the only way that will work if functions and classes
+     * have been defined directly in plugin.php. 
+     *
+     * If set to false, plugin.php will be loaded via require. This allows 
+     * plugin writers to avoid duplicating executable logic from plugin.php
+     * in their tests. In order for this to work, plugin.php must contain only
+     * executable logic (no function or class definitions).
+     *
+     * @param boolean $flag
+     */
+    public function setRequireOnce($flag)
+    {
+        $this->_requireOnce = (boolean)$flag;
+    }
+
+    /**
+     * @see setRequireOnce()
+     * @return boolean
+     */
+    public function getRequireOnce()
+    {
+        return $this->_requireOnce;
     }
 }

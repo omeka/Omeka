@@ -1,24 +1,26 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Test themes controller.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
 {   
     const THEME = 'default';
     
     public function setUp()
     {
-        if (!is_dir(PUBLIC_THEME_DIR . '/' . self::THEME)) {
+        $themeDir = PUBLIC_THEME_DIR . '/' . self::THEME;
+        if (!is_dir($themeDir) 
+            || !file_exists($themeDir . '/config.ini')
+        ) {
             $this->markTestSkipped("Cannot test ThemesController without the '" . self::THEME . "' theme.");
         }
         parent::setUp();   

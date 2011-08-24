@@ -1,10 +1,9 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 require_once HELPERS;
 
@@ -13,7 +12,7 @@ require_once HELPERS;
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
- **/
+ */
 class Omeka_Helper_FormErrorTest extends PHPUnit_Framework_TestCase
 {
     

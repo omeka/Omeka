@@ -102,18 +102,18 @@
                     </div>
                 </form>                
             <?php endif; ?>
-        <?php endif; ?>   
-        <?php if (has_permission('Plugins', 'uninstall')): ?>
-            <form action="<?php echo html_escape(uri(array(
-                'controller'=>'plugins', 
-                'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
-                <div>
-                    <button name="uninstall" type="submit" class="uninstall"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Uninstall'); ?></button>
-                    <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
-                </div>
-            </form>                
-        <?php endif; ?>     
-<?php else: //The plugin has not been installed yet ?>
+            <?php if (has_permission('Plugins', 'uninstall')): ?>
+                <form action="<?php echo html_escape(uri(array(
+                    'controller'=>'plugins',
+                    'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
+                    <div>
+                        <button name="uninstall" type="submit" class="uninstall"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Uninstall'); ?></button>
+                        <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
+                    </div>
+                </form>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php else: //The plugin has not been installed yet ?>
     <?php if (has_permission('Plugins', 'install')): ?>
         <form action="<?php echo html_escape(uri('plugins/install')); ?>" method="post" accept-charset="utf-8">
                 <div>

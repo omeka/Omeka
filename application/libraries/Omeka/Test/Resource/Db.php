@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -75,7 +74,9 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     public function useTestConfig()
     {
         $this->setAdapter('Mysqli');
-        $this->setParams(Zend_Registry::get('test_config')->db->toArray());
+        $params = Zend_Registry::get('test_config')->db->toArray();
+        $params['driver_options']['MYSQLI_INIT_COMMAND'] = "SET SESSION sql_mode='STRICT_ALL_TABLES'";
+        $this->setParams($params);
     }
         
     /**

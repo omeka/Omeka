@@ -1,11 +1,10 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 /**
  * Handles all exceptions that are thrown in controllers.
@@ -16,7 +15,7 @@
  * @subpackage Controllers
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class ErrorController extends Omeka_Controller_Action
 {
     public function errorAction()
@@ -59,7 +58,7 @@ class ErrorController extends Omeka_Controller_Action
      * 
      * @param string
      * @return void
-     **/
+     */
     public function notFoundAction()
     {
         $this->getResponse()->setHttpResponseCode(404);
@@ -113,7 +112,7 @@ class ErrorController extends Omeka_Controller_Action
      * Check to see whether the error qualifies as a 404 error
      *
      * @return boolean
-     **/
+     */
     protected function is404(Exception $e, $handler)
     {
         return ($e instanceof Omeka_Controller_Exception_404 

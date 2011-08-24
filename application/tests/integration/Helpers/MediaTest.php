@@ -1,10 +1,9 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 require_once HELPER_DIR . '/Media.php';
 
@@ -13,7 +12,7 @@ require_once HELPER_DIR . '/Media.php';
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
- **/
+ */
 class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
 {
     private $mimeTypeCallbackFired = false;

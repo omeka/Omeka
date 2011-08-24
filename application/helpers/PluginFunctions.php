@@ -2,19 +2,18 @@
 /**
  * All Plugin helper functions
  * 
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage PluginHelpers
- **/
+ */
  
 /**
  * @since 0.10
  * @access private
  * @see admin_plugin_footer()
  * @return void
- **/
+ */
 function admin_plugin_footer()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -41,7 +40,7 @@ function admin_plugin_footer()
  * @since 0.10
  * @access private
  * @return void
- **/
+ */
 function admin_plugin_header()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -53,7 +52,7 @@ function admin_plugin_header()
  * 
  * @since 0.10
  * @return string
- **/
+ */
 function plugin_append_to_advanced_search()
 {
     return get_plugin_hook_output('public_append_to_advanced_search');
@@ -65,7 +64,7 @@ function plugin_append_to_advanced_search()
  * 
  * @since 0.10
  * @return string
- **/
+ */
 function plugin_append_to_items_browse_each()
 {
     return get_plugin_hook_output('public_append_to_items_browse_each');
@@ -76,7 +75,7 @@ function plugin_append_to_items_browse_each()
  * 
  * @since 0.10
  * @see plugin_append_to_items_browse_each()
- **/
+ */
 function plugin_append_to_items_browse()
 {
     return get_plugin_hook_output('public_append_to_items_browse');
@@ -96,7 +95,7 @@ function plugin_append_to_items_show()
 /**
  * @since 0.10
  * @see plugin_append_to_items_browse_each()
- **/
+ */
 function plugin_append_to_collections_browse_each()
 {
     return get_plugin_hook_output('public_append_to_collections_browse_each');
@@ -107,7 +106,7 @@ function plugin_append_to_collections_browse_each()
  * 
  * @since 0.10
  * @return string
- **/
+ */
 function plugin_append_to_collections_browse()
 {
     return get_plugin_hook_output('public_append_to_collections_browse');
@@ -118,7 +117,7 @@ function plugin_append_to_collections_browse()
  * 
  * @since 0.10
  * @return string
- **/
+ */
 function plugin_append_to_collections_show()
 {
     return get_plugin_hook_output('public_append_to_collections_show');
@@ -133,7 +132,7 @@ function plugin_append_to_collections_show()
  * @since 0.9
  * @see plugin_header()
  * @return void
- **/
+ */
 function plugin_footer() 
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -150,7 +149,7 @@ function plugin_footer()
  * 
  * @since 0.9
  * @return void
- **/
+ */
 function plugin_header() 
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -167,7 +166,7 @@ function plugin_header()
  * 
  * @since 1.4
  * @return void
- **/
+ */
 function plugin_body() 
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -184,7 +183,7 @@ function plugin_body()
  * 
  * @since 1.4
  * @return void
- **/
+ */
 function plugin_page_header() 
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -201,7 +200,7 @@ function plugin_page_header()
  * 
  * @since 1.4
  * @return void
- **/
+ */
 function plugin_page_content() 
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -211,7 +210,7 @@ function plugin_page_content()
 /**
  * @since 1.1
  * @see plugin_append_to_admin_site_info()
- **/
+ */
 function plugin_append_to_admin_site_info()
 {
     return get_plugin_hook_output('plugin_append_to_admin_site_info');

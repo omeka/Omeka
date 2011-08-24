@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 /**
  * @internal This implements Omeka internals and is not part of the public API.
@@ -14,7 +13,7 @@
  * @subpackage Controllers
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class SettingsController extends Omeka_Controller_Action
 {    
     const DEFAULT_TAG_DELIMITER = ',';
@@ -61,7 +60,7 @@ class SettingsController extends Omeka_Controller_Action
      *
      * @return boolean True if the command line return status is 0 when
      * attempting to run ImageMagick's convert utility, false otherwise.
-     **/
+     */
     public function checkImagemagickAction()
     {
         $imPath = $this->_getParam('path-to-convert');
@@ -77,7 +76,7 @@ class SettingsController extends Omeka_Controller_Action
      * 
      * @param string
      * @return boolean
-     **/
+     */
     private function _isValidImageMagickPath($dirToIm)
     {
         if (!realpath($dirToIm)) {

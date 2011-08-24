@@ -85,14 +85,30 @@ class Omeka_Job_FactoryTest extends PHPUnit_Framework_TestCase
     public function testBuildShortcutCreatesInstance()
     {
         $factory = new Omeka_Job_Factory(array('foo' => true));
-        $job = $factory->build('Omeka_Job_Mock', array('bar' => false));
+        $job = $factory->build(
+            array(
+                'className' => 'Omeka_Job_Mock', 
+                'bar' => false,
+            )
+        );
         $this->assertInstanceOf('Omeka_Job_Mock', $job);
     }
 
     public function testBuildShortcutPassesOptions()
     {
         $factory = new Omeka_Job_Factory(array('foo' => true));
-        $job = $factory->build('Omeka_Job_Mock', array('bar' => false));
-        $this->assertEquals(array('foo' => true, 'bar' => false), $job->getMiscOptions());
+        $job = $factory->build(
+            array(
+                'className' => 'Omeka_Job_Mock', 
+                'options' => array('bar' => false),
+            )
+        );
+        $this->assertEquals(
+            array(
+                'foo' => true, 
+                'bar' => false,
+            ), 
+            $job->getMiscOptions()
+        );
     }
 }

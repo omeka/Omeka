@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -112,5 +111,20 @@ class Omeka_Test_Helper_Mail
             throw new InvalidArgumentException("No mail exists at index: $index.");
         }
         return file_get_contents($mails[$index]);
+    }
+
+    /**
+     * The number of mails that have been sent.
+     */
+    public function count()
+    {
+        // Warning, ugly alert.
+        $count = 0;
+        foreach ($this->_getIterator() as $file) {
+            if ($this->_isMailFile($file)) {
+                $count++;
+            }
+        }
+        return $count;
     }
 }

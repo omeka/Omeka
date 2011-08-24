@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 /**
  * @internal This implements Omeka internals and is not part of the public API.
@@ -14,7 +13,7 @@
  * @subpackage Controllers
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class PluginsController extends Omeka_Controller_Action
 {
     public function init()
@@ -34,7 +33,7 @@ class PluginsController extends Omeka_Controller_Action
      * the plugin.
      *
      * @return void
-     **/
+     */
     public function configAction()
     {
         $plugin = $this->_getPluginByName();
@@ -94,7 +93,7 @@ class PluginsController extends Omeka_Controller_Action
      * Action to activate a plugin
      *
      * @return void
-     **/
+     */
     public function activateAction()
     {        
         $plugin = $this->_getPluginByName();
@@ -124,7 +123,7 @@ class PluginsController extends Omeka_Controller_Action
      * Action to deactivate a plugin
      *
      * @return void
-     **/
+     */
     public function deactivateAction()
     {
         $plugin = $this->_getPluginByName();
@@ -170,7 +169,7 @@ class PluginsController extends Omeka_Controller_Action
      * Action to browse plugins
      *
      * @return void
-     **/
+     */
     public function browseAction() 
     {
         // Get a list of all plugins currently processed by the system.      
@@ -199,7 +198,7 @@ class PluginsController extends Omeka_Controller_Action
      * Action to uninstall a plugin
      *
      * @return void
-     **/
+     */
     public function uninstallAction()
     {
         $plugin = $this->_getPluginByName();

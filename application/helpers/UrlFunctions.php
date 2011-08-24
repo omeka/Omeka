@@ -1,11 +1,10 @@
 <?php 
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage UrlHelpers
- **/
+ */
 
 /**
  * @since 0.10 Incorporates search parameters into the query string for the URI.
@@ -19,7 +18,7 @@
  * @param array $otherParams Optional set of query parameters to merge in to the 
  * default output feed URI query string.
  * @return string URI
- **/
+ */
 function items_output_uri($output="rss2", $otherParams = array()) {
     // Copy $_GET and filter out all the cruft.
     $queryParams = $_GET;
@@ -46,7 +45,7 @@ function items_output_uri($output="rss2", $otherParams = array()) {
  * @param string The name of a route to use to generate the URL (optional)
  * @param array Set of query parameters to append to the URL (optional)
  * @return string
- **/
+ */
 function uri($options=array(), $route=null, $queryParams=array(), $reset = false, $encode = true)
 {
     return __v()->url($options, $route, $queryParams, $reset, $encode);
@@ -58,7 +57,7 @@ function uri($options=array(), $route=null, $queryParams=array(), $reset = false
  * @since 0.9
  * @param array $params Optional Set of query parameters to append.
  * @return string
- **/
+ */
 function current_uri($params=array()) 
 {
 	//Grab everything before the ? of the query
@@ -85,7 +84,7 @@ function current_uri($params=array())
  * @param string $link URI.
  * @param Zend_Controller_Request_Http|null $req
  * @return boolean
- **/
+ */
 function is_current_uri($link, $req = null) {
 		
 	if(!$req) {
@@ -106,7 +105,7 @@ function is_current_uri($link, $req = null) {
 /**
  * @deprecated Since 1.3
  * @return string
- **/
+ */
 function file_download_uri(File $file, $format='archive')
 {
 	return file_display_uri($file, $format);
@@ -130,7 +129,7 @@ function file_display_uri(File $file, $format='fullsize')
  * @param string $action
  * @param string|null $controller Optional
  * @return string
- **/
+ */
 function record_uri(Omeka_Record $record, $action, $controller = null)
 {
     $options = array();
@@ -160,7 +159,7 @@ function record_uri(Omeka_Record $record, $action, $controller = null)
  * @uses record_uri()
  * @param Item|null Check for this specific item record (current item if null).
  * @return string URL
- **/
+ */
 function item_uri($action = 'show', $item=null)
 {
     if (!$item) {
@@ -177,7 +176,7 @@ function item_uri($action = 'show', $item=null)
  * @see admin_uri()
  * @param mixed
  * @return string
- **/
+ */
 function public_uri()
 {
     set_theme_base_uri('public');
@@ -192,7 +191,7 @@ function public_uri()
  * @see public_uri()
  * @param mixed
  * @return mixed
- **/
+ */
 function admin_uri()
 {
     set_theme_base_uri('admin');
@@ -212,7 +211,7 @@ function admin_uri()
  * @uses uri()
  * @param mixed
  * @return string HTML
- **/
+ */
 function abs_uri()
 {
     $args = func_get_args();
@@ -225,7 +224,7 @@ function abs_uri()
  * @since 0.10
  * @param Item|null Check for this specific item record (current item if null).
  * @return void
- **/
+ */
 function abs_item_uri($item = null)
 {
     if (!$item) {
@@ -241,7 +240,7 @@ function abs_item_uri($item = null)
  * @since 0.10
  * @param string
  * @return void
- **/
+ */
 function set_theme_base_uri($theme = null)
 {
     switch ($theme) {

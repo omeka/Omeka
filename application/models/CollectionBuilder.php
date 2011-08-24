@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -32,7 +31,7 @@ class CollectionBuilder extends Omeka_Record_Builder
     /**
      * Add collectors associated with the collection.
      */
-    protected function _beforeBuild()
+    protected function _beforeBuild(Omeka_Record $record)
     {
         $metadata = $this->getRecordMetadata();
         if (array_key_exists('collectors', $metadata)) {

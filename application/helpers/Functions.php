@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage GeneralHelpers
- **/
+ */
 
 /**
  * Retrieve the view object.  Should be used only to avoid function scope
@@ -14,7 +13,7 @@
  * @since 0.10
  * @access private
  * @return Omeka_View
- **/
+ */
 function __v()
 {
     return Zend_Registry::get('view');
@@ -24,7 +23,7 @@ function __v()
  * Simple math for determining whether a number is odd or even
  *
  * @return bool
- **/
+ */
 function is_odd($num)
 {
 	return $num & 1;
@@ -37,7 +36,7 @@ function is_odd($num)
  * @uses auto_discovery_link_tags()
  * @return string HTML
  * @deprecated since 1.4
- **/
+ */
 function auto_discovery_link_tag(){
 	return auto_discovery_link_tags();
 }
@@ -48,7 +47,7 @@ function auto_discovery_link_tag(){
  * @since 1.4
  * @uses items_output_uri()
  * @return string HTML
- **/
+ */
 function auto_discovery_link_tags() {
 	$html = '<link rel="alternate" type="application/rss+xml" title="'. __('Omeka RSS Feed') . '" href="'. html_escape(items_output_uri()) .'" />';
 	$html .= '<link rel="alternate" type="application/atom+xml" title="'. __('Omeka Atom Feed') .'" href="'. html_escape(items_output_uri('atom')) .'" />';
@@ -62,7 +61,7 @@ function auto_discovery_link_tags() {
  * @param array $vars A keyed array of variables to be extracted into the script
  * @param string $dir Defaults to 'common'
  * @return void
- **/
+ */
 function common($file, $vars = array(), $dir = 'common') 
 {
     echo __v()->partial($dir . '/' . $file . '.php', $vars);
@@ -75,7 +74,7 @@ function common($file, $vars = array(), $dir = 'common')
  * @param array Keyed array of variables
  * @param string $file Filename of header script (defaults to 'header')
  * @return void
- **/
+ */
 function head($vars = array(), $file = 'header') 
 {
 	common($file, $vars);
@@ -87,7 +86,7 @@ function head($vars = array(), $file = 'header')
  * @param array Keyed array of variables
  * @param string $file Filename of footer script (defaults to 'footer')
  * @return void
- **/
+ */
 function foot($vars = array(), $file = 'footer') {
 	common($file, $vars);
 }
@@ -98,7 +97,7 @@ function foot($vars = array(), $file = 'footer') {
  * @param boolean $wrap Whether or not to wrap the flashed message in a div
  * with an appropriate class ('success','error','alert')
  * @return string
- **/
+ */
 function flash($wrap=true)
 {
 	$flash = new Omeka_Controller_Flash;
@@ -137,7 +136,7 @@ function flash($wrap=true)
  * @uses get_option()
  * @since 0.9
  * @return string
- **/
+ */
 function settings($name) 
 {
 	$name = apply_filters("display_setting_$name", get_option($name));

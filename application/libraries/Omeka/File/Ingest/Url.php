@@ -79,6 +79,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             $uriIsValid = $uri->valid();
         } catch (Zend_Uri_Exception $e) {
             $uriIsValid = false;
+            $uri = false;
         }
 
         if (!($uri && $uriIsValid)) {

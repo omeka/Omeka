@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 /**
  * @internal This implements Omeka internals and is not part of the public API.
@@ -14,7 +13,7 @@
  * @subpackage Controllers
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- **/
+ */
 class ItemTypesController extends Omeka_Controller_Action
 {	
 	const ELEMENTS_TO_REMOVE = 'elements-to-remove';
@@ -113,7 +112,7 @@ class ItemTypesController extends Omeka_Controller_Action
         foreach($elementsToSave as $elementToSave) {
             if ($elementToSave->id) {
                 if (in_array($elementToSave->id, $uniqueElementsToSaveIds)) {
-                    throw new Omeka_Record_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
+                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
 	            } else {
 	                $uniqueElementsToSaveIds[] = $element->id;
 	            }
@@ -121,7 +120,7 @@ class ItemTypesController extends Omeka_Controller_Action
             
             if ($elementToSave->name) {
                 if (in_array($elementToSave->name, $uniqueElementsToSaveNames)) {
-                    throw new Omeka_Record_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
+                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
                 } else {
                     $uniqueElementsToSaveNames[] = trim($elementToSave->name);
                 }

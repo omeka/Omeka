@@ -1,11 +1,10 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage DataRetrievalHelpers
- **/
+ */
 
 /**
  * @since 0.10
@@ -23,7 +22,7 @@ function get_tags($params = array(), $limit = 10)
  * Returns the total number of tags
  * 
  * @return integer
- **/
+ */
 function total_tags() 
 {
 	return get_db()->getTable('Tag')->count();
@@ -34,7 +33,7 @@ function total_tags()
  * 
  * @param integer $limit The maximum number of recent tags to return
  * @return array
- **/
+ */
 function recent_tags($limit = 10) 
 {
 	return get_tags(array('recent'=>true), $limit);
@@ -67,7 +66,7 @@ function current_user_tags(Item $item)
  * @param Item|null $item Check for this specific item record (current item if null).
  * @param int|null $limit The maximum number of tags to return (get all of the tags if null)
  * @return string
- **/
+ */
 function item_tags_as_cloud($order = 'alpha', $tagsAreLinked = true, $item=null, $limit=null)
 {
     if (!$item) {
@@ -94,7 +93,7 @@ function item_tags_as_cloud($order = 'alpha', $tagsAreLinked = true, $item=null,
  * @param Item|null $item Check for this specific item record (current item if null).
  * @param int|null $limit The maximum number of tags to return (get all of the tags if null)
  * @return string HTML
- **/
+ */
 function item_tags_as_string($delimiter = null, $order = 'alpha',  $tagsAreLinked = true, $item=null, $limit=null)
 {
     // Set the tag_delimiter option if no delimiter was passed.
@@ -117,7 +116,7 @@ function item_tags_as_string($delimiter = null, $order = 'alpha',  $tagsAreLinke
  * @param string|null The URI to use in the link for each tag.  If none given,
  *      tags in the cloud will not be given links.
  * @return string HTML for the tag cloud
- **/
+ */
 function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
 {
 	if (!$recordOrTags) {
@@ -175,7 +174,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
  * @param string|null $link The URL to use for links to the tags (if null, tags aren't linked)
  * @param string $delimiter ', ' (comma and whitespace) by default
  * @return string HTML
- **/
+ */
 function tag_string($recordOrTags = null, $link=null, $delimiter=null)
 {
     // Set the tag_delimiter option if no delimiter was passed.

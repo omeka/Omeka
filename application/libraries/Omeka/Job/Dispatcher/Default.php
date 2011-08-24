@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
@@ -54,6 +53,11 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
     public function setUser($user)
     {
         $this->_user = $user;
+    }
+
+    public function getUser()
+    {
+        return $this->_user;
     }
 
     /**

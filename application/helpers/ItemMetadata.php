@@ -1,6 +1,5 @@
 <?php
 /**
- * @version $Id$
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
@@ -48,7 +47,7 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
      * @param Item
      * @param string
      * @return mixed
-     **/
+     */
     protected function _getRecordMetadata($item, $specialValue)
     {
         switch (strtolower($specialValue)) {
