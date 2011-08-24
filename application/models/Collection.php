@@ -27,12 +27,12 @@ class Collection extends Omeka_Record
     /**
      * @var string Description for the collection.
      */
-    public $description = '';
+    public $description;
     
     /**
      * @var array Strings containing the names of this collection's collectors.
      */
-    public $collectors = '';
+    public $collectors;
     
     /**
      * @var boolean Whether or not the collection is publicly accessible.
@@ -91,7 +91,9 @@ class Collection extends Omeka_Record
      */
     public function getCollectors()
     {
-        if (is_string($this->collectors)) {
+        if (!$this->collectors) {
+            return array();
+        } else if (is_string($this->collectors)) {
             if (trim($this->collectors) == '') {
                 return array();
             } else {
