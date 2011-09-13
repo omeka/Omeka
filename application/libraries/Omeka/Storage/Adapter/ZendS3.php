@@ -54,9 +54,13 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
         }
         
         $region = @$options[self::REGION_OPTION];
+
+        // Use Omeka_Http_Client to retry up to 3 times on timeouts
+        $client = new Omeka_Http_Client;
+        $client->setMaxRetries(3);
+        Zend_Service_Amazon_S3::setHttpClient($client);
         
         $this->_s3 = new Zend_Service_Amazon_S3($awsKey, $awsSecretKey, $region);
-        
     }
 
     public function setUp()
