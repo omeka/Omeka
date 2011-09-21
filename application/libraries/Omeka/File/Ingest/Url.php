@@ -20,15 +20,16 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
      *
      * @param array $fileInfo
      * @return string
-     */ 
+     */
     protected function _getOriginalFilename($fileInfo)
     {
         if (!($original = parent::_getOriginalFilename($fileInfo))) {
-            // Since the original file is from a URL, it is necessary to decode 
+            // Since the original file is from a URL, it is necessary to decode
             // the URL in case it has been encoded.
             $original = urldecode($fileInfo['source']);
+
         }
-        return $original;
+        return substr($original, 0, strrpos($original, '?'));
     }
 
     /**
@@ -59,7 +60,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             $client->setStream($destination);
             $client->request('GET');
         } catch (Zend_Http_Client_Exception $e) {
-            throw new Omeka_File_Ingest_Exception('Could not transfer the file from "' . $source 
+            throw new Omeka_File_Ingest_Exception('Could not transfer the file from "' . $source
                               . '" to "' . $destination . '"!');
         }
     }
@@ -101,5 +102,6 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             throw new Omeka_File_Ingest_InvalidException(
                 "'$source' cannot be read: " . $msg);
         }
+
     }
 }
