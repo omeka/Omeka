@@ -28,7 +28,13 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             // the URL in case it has been encoded.
             
             //gets rid of the query string, if it exists
-            $original = urldecode(substr($fileInfo['source'], 0, strpos($original, '?')));
+            $index = strpos($original, '?');
+            if($index) {
+                $original = urldecode(substr($fileInfo['source'], 0, $index));
+            } else {
+                $original = urldecode(substr($fileInfo['source']));
+            }
+            
         }
         return $original;
     }
