@@ -66,8 +66,9 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
             $client->setStream($destination);
             $response = $client->request('GET');
         } catch (Zend_Http_Client_Exception $e) {
-            throw new Omeka_File_Ingest_Exception('Could not transfer the file from "' . $source
-                              . '" to "' . $destination . '"!');
+            throw new Omeka_File_Ingest_Exception(
+                'Could not transfer the file from "' . $source
+                . '" to "' . $destination . '": ' . $e->getMessage());
         }
     
         if ($response->isError()) {
