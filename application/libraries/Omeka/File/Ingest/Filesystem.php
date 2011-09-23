@@ -65,10 +65,14 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
     protected function _transfer($source, $destination, array $info)
     {        
         if ($info['rename']) {
-            rename($source, $destination);
+            $result = rename($source, $destination);
         } else {
-            copy($source, $destination);
-        }        
+            $result = copy($source, $destination);
+        }
+
+        if (!$result) {
+            throw new Omeka_File_Ingest_Exception("Could not transfer \"$source\" to \"$destination\".");
+        }
     }
     
     /**
