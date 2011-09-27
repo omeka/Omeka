@@ -1,9 +1,8 @@
 <?php
 /**
- * @version $Id$
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @copyright Center for History and New Media, 2011
- * @package Omeka_Plugin
+ * @copyright Roy Rosenzweig Center for History and New Media, 2011
+ * @package Omeka
  */
 
 /**
@@ -12,8 +11,7 @@
  * Plugin authors may inherit from this class to aid in building their plugin
  * framework.
  *
- * @copyright Center for History and New Media, 2011
- * @package Omeka_Plugin
+ * @package Omeka
  */
 abstract class Omeka_Plugin_Abstract
 {
@@ -30,6 +28,8 @@ abstract class Omeka_Plugin_Abstract
      * Plugin authors should give an array containing hook names as values.
      * Each hook should have a corresponding, lowerCamelCased method defined in
      * the child class.
+     *
+     * @var array
      */
     protected $_hooks;
     
@@ -40,6 +40,7 @@ abstract class Omeka_Plugin_Abstract
      * Each filter should have a corresponding, lowerCamelCased method defined
      * in the child class.
      *
+     * @var array
      */
     protected $_filters;
     
@@ -55,6 +56,7 @@ abstract class Omeka_Plugin_Abstract
      *       'option_name4')
      * </code>
      *
+     * @var array
      */
     protected $_options;
     
@@ -67,6 +69,16 @@ abstract class Omeka_Plugin_Abstract
     public function __construct()
     {
         $this->_db = Omeka_Context::getInstance()->getDb();
+    }
+    
+    /**
+     * Set up the plugin to hook into Omeka.
+     *
+     * Adds the plugin's hooks and filters. Plugin writers must call this method
+     * after instantiating their plugin class.
+     */
+    public function setUp()
+    {
         $this->_addHooks();
         $this->_addFilters();
     }
