@@ -146,7 +146,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
             // add the scripts from the other modules
             $otherPluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs(null);
             foreach ($otherPluginScriptDirs as $otherPluginModuleName => $scriptPathSet) {
-                if ($otherPluginModuleName != $pluginModuleName && $scriptPathSet[$themeType]) {
+                if ($otherPluginModuleName != $pluginModuleName && isset($scriptPathSet[$themeType])) {
                     foreach ($scriptPathSet[$themeType] as $scriptPath) {
                         $this->_addPathToView($scriptPath);
                     }
