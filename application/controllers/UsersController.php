@@ -410,16 +410,19 @@ class UsersController extends Omeka_Controller_Action
     
     private function _getUserForm(User $user)
     {
+        $hasActiveElement = $user->exists()
+            && $this->_helper->acl->isAllowed('change-status', $user);
+
         $form = new Omeka_Form_User(array(
             'hasRoleElement'    => $this->_helper->acl->isAllowed('change-role', $user),
-            'hasActiveElement'  => $this->_helper->acl->isAllowed('change-status', $user),
+            'hasActiveElement'  => $hasActiveElement,
             'user'              => $user
         ));
         fire_plugin_hook('admin_append_to_users_form', $form, $user);
         return $form;
     }
 
-private function _getLog()
+    private function _getLog()
     {
         return $this->getInvokeArg('bootstrap')->logger;
     }
