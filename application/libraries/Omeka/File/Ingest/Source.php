@@ -120,41 +120,26 @@ abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_Abstract
     {        
         $fileSourcePath = $this->_getFileSource($fileInfo);
         $this->_validateSource($fileSourcePath, $fileInfo);
-                
-        // Create a temporary file in the default temporary directory and 
-        // return the path to it.  This can be used to validate the file on the
-        // local machine before putting it in the Omeka filesystem.
-        $tempDestination = tempnam(sys_get_temp_dir(), 'Omeka');
         
         // The final destination of the file (Omeka archive).
         $fileDestinationPath = $this->_getDestination($originalFilename);
         
         // Transfer to the temp directory.
-        $this->_transfer($fileSourcePath, $tempDestination, $fileInfo);
+        $this->_transfer($fileSourcePath, $fileDestinationPath, $fileInfo);
         
         // Adjust the file info array so that it works with the Zend Framework
         // validation.
         $fileInfo = $this->_addZendValidatorAttributes($fileInfo);
 
-        // If the transferred file is valid, put it in the Omeka archive.
+        // If the transferred file is invalid, delete it.
         try {
-            if ($this->_validateFile($tempDestination, $fileInfo)) {
-	            // Any reason why we wouldn't have copy permissions?
-	            if (copy($tempDestination, $fileDestinationPath)) {                
-	                // Delete the temporary file.
-	                unlink($tempDestination);
-	                return $fileDestinationPath;
-	            } else {
-	                throw new Omeka_File_Ingest_Exception(
-	                    'Cannot copy the ingested file from temp directory to ' .
-	                    'Omeka archive.');
-	            }
-	        }
-        // Catch and release.  But first get rid of the temporary file.
+            $this->_validateFile($fileDestinationPath, $fileInfo);
         } catch (Omeka_File_Ingest_InvalidException $e) {
-            unlink($tempDestination);
+            unlink($fileDestinationPath);
             throw $e;
-        }    
+        }
+        
+        return $fileDestinationPath;
     }
     
     /**

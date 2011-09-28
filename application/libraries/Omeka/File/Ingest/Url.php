@@ -20,13 +20,20 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
      *
      * @param array $fileInfo
      * @return string
-     */ 
+     */
     protected function _getOriginalFilename($fileInfo)
     {
         if (!($original = parent::_getOriginalFilename($fileInfo))) {
-            // Since the original file is from a URL, it is necessary to decode 
-            // the URL in case it has been encoded.
-            $original = urldecode($fileInfo['source']);
+            $url = $fileInfo['source'];
+            
+            //gets rid of the query string, if it exists
+            if ($index = strpos($url, '?')) {
+                $url = substr($url, 0, $index);
+            }
+
+            // Since the original file is from a URL, it is necessary to
+            // decode the URL in case it has been encoded.
+            $original = urldecode($url);
         }
         return $original;
     }
@@ -57,10 +64,18 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
         try {
             $client = $this->_getHttpClient($source);
             $client->setStream($destination);
-            $client->request('GET');
+            $response = $client->request('GET');
         } catch (Zend_Http_Client_Exception $e) {
-            throw new Omeka_File_Ingest_Exception('Could not transfer the file from "' . $source 
-                              . '" to "' . $destination . '"!');
+            throw new Omeka_File_Ingest_Exception(
+                'Could not transfer the file from "' . $source
+                . '" to "' . $destination . '": ' . $e->getMessage());
+        }
+    
+        if ($response->isError()) {
+            $code = $response->getStatus();
+            $msg = "The server returned code '$code'";
+            throw new Omeka_File_Ingest_Exception(
+                "'$source' cannot be read: " . $msg);
         }
     }
 
@@ -84,22 +99,6 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
 
         if (!($uri && $uriIsValid)) {
             throw new Omeka_File_Ingest_InvalidException("$source is not a valid URL.");
-        }
-
-        try {
-            $client = $this->_getHttpClient($source);
-            $response = $client->request('HEAD');
-            $isError = $response->isError();
-            $code = $response->getStatus();
-            $msg = "The server returned code '$code'";
-        } catch (Zend_Http_Client_Exception $e) {
-            $isError = true;
-            $msg = $e->getMessage();
-        }
-
-        if ($isError) {
-            throw new Omeka_File_Ingest_InvalidException(
-                "'$source' cannot be read: " . $msg);
         }
     }
 }

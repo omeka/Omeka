@@ -159,6 +159,19 @@ class Omeka_Form extends Zend_Form
         }
         return join($elementDelimiter, $errors);
     }
+
+    /**
+     * The logical counterpart to Zend_Form::getMessages(), this is clearly 
+     * missing from the interface.
+     *
+     * @param array $messages
+     */
+    public function setMessages(array $messages)
+    {
+        foreach ($messages as $element => $errors) {
+            $this->$element->addErrors($errors);
+        }
+    }
     
     /**
      * Specify whether or not to automatically apply Omeka-specific decorators
