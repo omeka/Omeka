@@ -174,6 +174,15 @@ class UsersController extends Omeka_Controller_Action
     public function addAction()
     {
         $user = new User();
+        
+        $form = $this->_getUserForm($user);
+        $form->setSubmitButtonText('Add User');
+        $this->view->form = $form;
+        
+        if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
+            return;
+        }
+        
         try {
             if ($user->saveForm($_POST)) {                
                 $this->sendActivationEmail($user);
@@ -210,7 +219,24 @@ class UsersController extends Omeka_Controller_Action
         
         $this->view->passwordForm = $changePasswordForm;
         $this->view->user = $user;        
+
+        $form = $this->_getUserForm($user);
+        $form->setSubmitButtonText('Save Changes');
+        $form->setDefaults(array(
+            'username' => $user->username,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'institution' => $user->institution,
+            'role' => $user->role,
+            'active' => $user->active
+        ));
+        $this->view->form = $form;
         
+        if (!$this->getRequest()->isPost()) {
+            return;
+        }
+
         if (isset($_POST['new_password'])) {
             if ($changePasswordForm->isValid($_POST)) {
                 $values = $changePasswordForm->getValues();
@@ -220,8 +246,11 @@ class UsersController extends Omeka_Controller_Action
                 $success = true;
             }
         } else {
+            if (!$form->isValid($_POST)) {
+                return;
+            }        
             try {
-                if ($user->saveForm($_POST)) {
+                if ($user->saveForm($form->getValues())) {
                     $this->flashSuccess('The user "' . $user->username . '" was successfully changed!');
                     $success = true;
                 }
@@ -292,7 +321,7 @@ class UsersController extends Omeka_Controller_Action
         if (!$this->getRequest()->isPost()) {
             return;            
         }    
-            
+
         if (($loginForm instanceof Zend_Form) && !$loginForm->isValid($_POST)) {
             return;
         }
@@ -304,11 +333,11 @@ class UsersController extends Omeka_Controller_Action
         $pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');
         // If there are no plugins filtering the login adapter, set the 
         // credentials for the default adapter.
-        if (!$pluginBroker->getFilters('login_adapter')) {
+        if (!$pluginBroker || !$pluginBroker->getFilters('login_adapter')) {
             $authAdapter->setIdentity($loginForm->getValue('username'))
                         ->setCredential($loginForm->getValue('password'));
         } else {
-            $authAdapter = apply_filters('login_adapter', $authAdapter, $loginForm);
+            $authAdapter = apply_filters('login_adapter', $authAdapter, $loginForm);   
         }
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {
@@ -336,7 +365,6 @@ class UsersController extends Omeka_Controller_Action
         } else {
             $this->redirect->gotoUrl('/');
         }
-        
     }
         
     /**
@@ -380,7 +408,18 @@ class UsersController extends Omeka_Controller_Action
         $this->redirect->gotoUrl('');
     }
     
-    private function _getLog()
+    private function _getUserForm(User $user)
+    {
+        $form = new Omeka_Form_User(array(
+            'hasRoleElement'    => $this->_helper->acl->isAllowed('change-role', $user),
+            'hasActiveElement'  => $this->_helper->acl->isAllowed('change-status', $user),
+            'user'              => $user
+        ));
+        fire_plugin_hook('admin_append_to_users_form', $form, $user);
+        return $form;
+    }
+
+private function _getLog()
     {
         return $this->getInvokeArg('bootstrap')->logger;
     }
