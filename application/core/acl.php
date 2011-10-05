@@ -51,10 +51,9 @@ $acl->addRole(new Zend_Acl_Role('super'));
 // Admins inherit privileges from super users.
 $acl->addRole(new Zend_Acl_Role('admin'), 'super');
 
-//Contributors and researchers do not inherit from the other roles.
-$acl->addRole(new Zend_Acl_Role('contributor'));
+// Contributors inherit researcher permissions.
 $acl->addRole(new Zend_Acl_Role('researcher'));
-
+$acl->addRole(new Zend_Acl_Role('contributor'), 'researcher');
 
 $acl->loadAllowList($allowList);
 
