@@ -235,6 +235,7 @@ function link_to_next_item($text=null, $props=array())
  * @see link_to_next_item()
  * @return string
  */
+function link_to_previous_item($text=null, $props=array())
 {
     if (!$text) {
         $text = __('&larr; Previous Item');
