@@ -103,9 +103,7 @@ class ItemSearch
             
             // This does not use Omeka_Db_Select b/c there is no conditional SQL
             // and it is easier to read without all the extra cruft.
-            $subQuery = "SELECT i.id FROM $db->Item i 
-                        LEFT JOIN $db->ElementText etx 
-                        ON etx.record_id = i.id
+            $subQuery = "SELECT etx.record_id FROM $db->ElementText etx
                         LEFT JOIN $db->RecordType rty
                         ON etx.record_type_id = rty.id
                         WHERE etx.text $predicate 

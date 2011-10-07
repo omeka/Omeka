@@ -15,11 +15,7 @@
 <?php if (has_permission($user, 'delete')): ?>
     <?php echo delete_button(null, 'delete-user', 'Delete this User', array(), 'delete-record-form'); ?>
 <?php endif; ?>
-<form method="post">
-<?php include('form.php'); ?>
-<input type="submit" name="submit" value="<?php echo __('Save Changes'); ?>" class="submit" />
-</form>
-
+<?php echo $this->form; ?>
 <?php echo $this->passwordForm; ?>
 </div>
 <?php foot();?>
