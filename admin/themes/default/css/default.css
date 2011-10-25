@@ -96,6 +96,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     .submit, 
     input[type="submit"],
     .button {
+        font-family:sans-serif;
         text-align:center;
         text-decoration:none;
         clear:both; 
@@ -789,7 +790,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         #current-theme .type {font-weight:bold;}
         
         #current-theme .value {display:block; margin-bottom:18px;}
-        body.themes .configure-button {padding: 4px 8px;}
+        body.themes .configure-button {font-size:.67em; margin:0;}
         
         .theme-configuration .field .submit {float:none !important; line-height:2em; margin-bottom:1em;}
         .theme-configuration img {display:block;margin-top:1em; max-width: 80%; max-height: 300px;}
