@@ -121,7 +121,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
             'attributes' => array(
                 'type' => 'text/javascript'
             ),
-            'content' => '/var window._jQuery =/'
+            'content' => '/window._jQuery =/'
         );
 
         $output = $this->_getJsOutput(false);
