@@ -134,7 +134,7 @@ function display_js($includeDefaults = true)
                        ->prependFile(src('prototype', $dir, 'js'));
         }
 
-        $headScript->prependScript('jQuery.noConflict();');
+        $headScript->prependScript('window._jQuery = jQuery.noConflict();');
         if ($useInternalJs) {
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
                        ->prependFile(src('jquery', $dir, 'js'));

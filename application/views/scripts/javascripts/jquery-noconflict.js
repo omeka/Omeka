@@ -1,1 +1,1 @@
-jQuery.noConflict();
+window._jQuery = jQuery.noConflict();
