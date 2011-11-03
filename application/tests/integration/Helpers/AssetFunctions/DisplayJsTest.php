@@ -78,7 +78,13 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testDefaults()
     {
-        $this->_assertScriptsIncluded($this->_getJsOutput(), $this->externalDefaults);
+        $output = $this->_getJsOutput();
+        $this->_assertScriptsIncluded($output, $this->externalDefaults);
+
+        // Have to use this since assertTag appears to drop the script contents 
+        // because it's in an HTML comment.
+        $this->assertRegExp('/window._jQuery = jQuery.noConflict/', $output,
+            'Default script tag caches jQuery object.');
     }
 
     public function testInternalDefaults()
