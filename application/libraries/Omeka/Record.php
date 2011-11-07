@@ -626,8 +626,8 @@ abstract class Omeka_Record implements ArrayAccess
         $query = "DELETE FROM $table WHERE {$table}.id = ? LIMIT 1";
         $this->getDb()->delete($table, 'id = '  . (int) $this->id);
         
-        $this->id = null;
         $this->runCallbacks('afterDelete');
+        $this->id = null;
     }
     
     /**
