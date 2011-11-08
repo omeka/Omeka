@@ -38,7 +38,7 @@ abstract class Omeka_Plugin_Abstract
      * Plugin filters.
      *
      * Plugin authors should give an array containing filter names as values.
-     * Each filter should have a corresponding filterLowerCamelCased() method 
+     * Each filter should have a corresponding filterCamelCased() method 
      * defined in the child class. E.g: the admin_navigation_main filter should 
      * have a corresponding filterAdminNavigationMain() method. 
      *
