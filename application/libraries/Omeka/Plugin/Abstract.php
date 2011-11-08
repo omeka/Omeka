@@ -26,9 +26,9 @@ abstract class Omeka_Plugin_Abstract
      * Plugin hooks.
      *
      * Plugin authors should give an array containing hook names as values.
-     * Each hook should have a corresponding lowerCamelCasedHook method defined 
+     * Each hook should have a corresponding hookCamelCased() method defined 
      * in the child class. E.g: the after_save_form_record hook should 
-     * have a corresponding afterSaveFormRecordHook() method.
+     * have a corresponding hookAfterSaveFormRecord() method.
      *
      * @var array
      */
@@ -38,9 +38,9 @@ abstract class Omeka_Plugin_Abstract
      * Plugin filters.
      *
      * Plugin authors should give an array containing filter names as values.
-     * Each filter should have a corresponding lowerCamelCasedFilter method 
+     * Each filter should have a corresponding filterLowerCamelCased() method 
      * defined in the child class. E.g: the admin_navigation_main filter should 
-     * have a corresponding adminNavigationMainFilter() method. 
+     * have a corresponding filterAdminNavigationMain() method. 
      *
      * @var array
      */
@@ -133,7 +133,7 @@ abstract class Omeka_Plugin_Abstract
             return;
         }
         foreach ($hookNames as $hookName) {
-            $functionName = Inflector::variablize($hookName) . 'Hook';
+            $functionName = 'hook' . Inflector::camelize($hookName);
             if (!is_callable(array($this, $functionName))) {
                 throw new Omeka_Plugin_Exception('Hook callback "' . $functionName . '" does not exist.');
             }
@@ -151,7 +151,7 @@ abstract class Omeka_Plugin_Abstract
             return;
         }
         foreach ($filterNames as $filterName) {
-            $functionName = Inflector::variablize($filterName) . 'Filter';
+            $functionName = 'filter' . Inflector::camelize($filterName);
             if (!is_callable(array($this, $functionName))) {
                 throw new Omeka_Plugin_Exception('Filter callback "' . $functionName . '" does not exist.');
             }
