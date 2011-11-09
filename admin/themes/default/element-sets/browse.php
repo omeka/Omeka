@@ -1,7 +1,7 @@
 <?php 
 $pageTitle = __('Browse Element Sets');
 head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
-<h1><?php echo $pageTitle; ?> <?php echo __('(%s  total)', $elementsets); ?></h1>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
 <?php common('settings-nav'); ?>
 
 <div id="primary">

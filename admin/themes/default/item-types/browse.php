@@ -1,7 +1,7 @@
 <?php 
 $pageTitle = __('Browse Item Types');
 head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
-<h1><?php echo $pageTitle; ?> <?php echo __('(%s  total)', $total_records); ?></h1>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
 <?php if (has_permission('ItemTypes', 'add')): ?>
 <p id="add-item-type" class="add-button"><?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add')); ?></p>
 <?php endif ?>

@@ -1,7 +1,7 @@
 <?php 
 $pageTitle = __('Browse Collections');
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
-<h1><?php echo $pageTitle; ?> <?php echo __('(%s  total)', $totalRecords); ?></h1>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
 <?php if (has_permission('Collections', 'add')): ?>
     <p id="add-collection" class="add-button"><a href="<?php echo html_escape(uri('collections/add')); ?>" class="add add-collection"><?php echo __('Add a Collection'); ?></a></p>
 <?php endif; ?>
