@@ -7,12 +7,11 @@
  * that Omeka loads the correct view scripts (and any other theme-specific
  * behavior).  
  *
- * @version $Id$
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  * @access private
- **/
+ */
 
 // Flag this as the admin theme. Used by _define_web_root() function in paths.php.
 define('ADMIN', true);

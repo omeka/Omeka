@@ -1,12 +1,11 @@
 <?php
 /**
- * Define constants for paths and other global metadata.
+ * Constants for paths and other global metadata.
  * 
- * @version $Id$
- * @copyright Roy Rosenzweig Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
  * Define the current version of Omeka.

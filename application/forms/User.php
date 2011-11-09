@@ -1,17 +1,15 @@
 <?php
 /**
- * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Edit form for Omeka users.
  *
  * @package Omeka
- * @copyright Center for History and New Media, 2007-2010
- **/
+ */
 class Omeka_Form_User extends Omeka_Form
 {    
     const ERROR_USERNAME_TAKEN = "This username is already in use.  Please choose another.";

@@ -1,17 +1,15 @@
 <?php
 /**
- * @version $Id$
- * @copyright Roy Rosenzweig Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2010-2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
 
 /**
- * 
+ * Tests for correct access to the upgrade controller.
  *
  * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2010
- **/
+ */
 class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
