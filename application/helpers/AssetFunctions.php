@@ -34,6 +34,22 @@ function queue_js($file, $dir = 'javascripts')
 }
 
 /**
+ * Declare a JavaScript string to be used on the page and included in
+ * the page's head.
+ *
+ * This needs to be called either before head() or in a plugin_header
+ * hook.
+ *
+ * @since 1.5
+ * @see display_js()
+ * @param string $string JavaScript string to include.
+ */
+function queue_js_string($string)
+{
+    __v()->headScript()->appendScript($string);
+}
+
+/**
  * Declare that a CSS file or files will be used on the page.
  * All "used" stylesheets will be included in the page's head.
  *
@@ -59,6 +75,32 @@ function queue_css($file, $media = 'all', $conditional = false, $dir = 'css')
         return;
     }
     __v()->headLink()->appendStylesheet(css($file, $dir), $media, $conditional);
+}
+
+/**
+ * Declare a CSS string to be used on the page and included in the
+ * page's head.
+ *
+ * This needs to be called either before head() or in a plugin_header
+ * hook.
+ *
+ * @since 1.5
+ * @see display_css
+ * @param string $string CSS string to include.
+ * @param string $media CSS media declaration, defaults to 'all'.
+ * @param string|bool $conditional Optional IE-style conditional comment,
+ *  used generally to include IE-specific styles. Defaults to false.
+ */
+function queue_css_string($string, $media = 'all', $conditional = false)
+{
+    $attrs = array();
+    if ($media) {
+        $attrs['media'] = $media;
+    }
+    if ($conditional) {
+        $attrs['conditional'] = $conditional;
+    }
+    __v()->headStyle()->appendStyle($string, $attrs);
 }
 
 /**
@@ -118,6 +160,7 @@ function display_js($includeDefaults = true)
 function display_css()
 {
     echo __v()->headLink();
+    echo __v()->headStyle();
 }
 
 /**

@@ -32,12 +32,15 @@ class FilesImages
         }
 
         // Extract IPTC data also if possible.
-        $this->iptc = $this->get_iptc_info($info["APP13"]);
+        if(isset($info['APP13'])) {
+            $this->iptc = $this->get_iptc_info($info["APP13"]);
+        }
+        
     }
 
-    private function get_iptc_info($info) 
+    private function get_iptc_info($info)
     {
-        $iptc_array = array();   
+        $iptc_array = array();
         if (function_exists('iptcparse')) {
             $iptc_match = array();
             $iptc_match['2#120'] = "caption";
@@ -96,7 +99,10 @@ class FilesImages
 
     public function getChannels()
     {
-        return $this->size['channels'];
+        if(isset($this->size['channels'])) {
+            return $this->size['channels'];
+        }
+        
     }
 
     public function getExifArray()
@@ -108,8 +114,8 @@ class FilesImages
 
     public function getExifString()
     {
-        if (!empty($this->exif)) {      
-            return $this->getEmbeddedMetadataString($this->exif); 
+        if (!empty($this->exif)) {
+            return $this->getEmbeddedMetadataString($this->exif);
         }
     }
 
@@ -123,7 +129,7 @@ class FilesImages
     public function getIPTCString()
     {
         if(!empty($this->iptc)) {
-            return $this->getEmbeddedMetadataString($this->iptc); 
+            return $this->getEmbeddedMetadataString($this->iptc);
         }
     }
     

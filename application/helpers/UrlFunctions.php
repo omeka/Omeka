@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
@@ -10,12 +10,12 @@
  * @since 0.10 Incorporates search parameters into the query string for the URI.
  * This enables auto_discovery_link_tag() to automatically discover the RSS feed
  * for any search.
- * @since 0.10 Adds a second argument so that extra query parameters can be used 
+ * @since 0.10 Adds a second argument so that extra query parameters can be used
  * to build the URI for the output feed.
  * @internal This filters query parameters via a blacklist instead of a whitelist,
  * because conceivably plugins could add extra fields to the advanced search.
  * @param string
- * @param array $otherParams Optional set of query parameters to merge in to the 
+ * @param array $otherParams Optional set of query parameters to merge in to the
  * default output feed URI query string.
  * @return string URI
  */
@@ -38,9 +38,9 @@ function items_output_uri($output="rss2", $otherParams = array()) {
 
 /**
  * Return a valid URL when given a set of options.
- * 
+ *
  * @uses Omeka_View_Helper_Url::url() See for details on usage.
- * @param string|array Either a string URL stub or a set of options for 
+ * @param string|array Either a string URL stub or a set of options for
  * building a URL from scratch.
  * @param string The name of a route to use to generate the URL (optional)
  * @param array Set of query parameters to append to the URL (optional)
@@ -48,7 +48,9 @@ function items_output_uri($output="rss2", $otherParams = array()) {
  */
 function uri($options=array(), $route=null, $queryParams=array(), $reset = false, $encode = true)
 {
-    return __v()->url($options, $route, $queryParams, $reset, $encode);
+    require_once HELPER_DIR . '/Url.php';
+    $urlHelper = new Omeka_View_Helper_Url;
+    return $urlHelper->url($options, $route, $queryParams, $reset, $encode);
 }
 
 /**
@@ -58,7 +60,7 @@ function uri($options=array(), $route=null, $queryParams=array(), $reset = false
  * @param array $params Optional Set of query parameters to append.
  * @return string
  */
-function current_uri($params=array()) 
+function current_uri($params=array())
 {
 	//Grab everything before the ? of the query
 	$request = Zend_Controller_Front::getInstance()->getRequest();
@@ -79,7 +81,7 @@ function current_uri($params=array())
 
 /**
  * Determine whether or not a given URI matches the current request URI.
- * 
+ *
  * @since 0.9
  * @param string $link URI.
  * @param Zend_Controller_Request_Http|null $req
@@ -123,7 +125,7 @@ function file_display_uri(File $file, $format='fullsize')
  * Given an Omeka_Record instance and the name of an action, this will generated
  * the URI for that record.  Used primarily by other theme helpers and most likely
  * not useful for theme writers.
- * 
+ *
  * @since 0.10
  * @param Omeka_Record $record
  * @param string $action
@@ -153,7 +155,7 @@ function record_uri(Omeka_Record $record, $action, $controller = null)
 
 /**
  * Retrieve a URL for the current item.
- * 
+ *
  * @since 0.10
  * @param string $action Action to link to for this item.  Default is 'show'.
  * @uses record_uri()
@@ -170,7 +172,7 @@ function item_uri($action = 'show', $item=null)
 
 /**
  * This behaves as uri() except it always provides a url to the public theme.
- * 
+ *
  * @since 0.10
  * @see uri()
  * @see admin_uri()
@@ -203,10 +205,10 @@ function admin_uri()
 
 /**
  * Generate an absolute URI.
- * 
+ *
  * Useful because Zend Framework's default URI helper generates relative URLs,
  * though absolute URIs are required in some contexts.
- * 
+ *
  * @since 0.10
  * @uses uri()
  * @param mixed
@@ -220,7 +222,7 @@ function abs_uri()
 
 /**
  * Generate an absolute URI to an item.  Primarily useful for generating permalinks.
- * 
+ *
  * @since 0.10
  * @param Item|null Check for this specific item record (current item if null).
  * @return void

@@ -213,8 +213,10 @@
      if(!$item) {
          $item = get_current_item();
      }
-     
-     return (!empty($item->Collection) and (!$name or $item->Collection->name == $name) and ($item->Collection->public or has_permission('Collections', 'showNotPublic')));
+
+     return (($collection = $item->Collection)
+         && (!$name || $collection->name == $name)
+         && ($collection->public || has_permission('Collections', 'showNotPublic')));
  }
 
  /**
