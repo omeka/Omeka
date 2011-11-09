@@ -1,1 +1,0 @@
-Release notes for Omeka can be seen at http://omeka.org/codex/Release_Notes

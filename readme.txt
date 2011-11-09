@@ -1,4 +1,4 @@
-The documents contained in these directories are part of Omeka.
+The files contained in these directories are part of Omeka.
 Copyright (C) 2008-2011 Roy Rosenzweig Center for History and New Media
 
 This program is free software: you can redistribute it and/or modify it under
@@ -13,15 +13,18 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Parts of Omeka include:
+Omeka includes:
 
-- Zend Framework <framework.zend.com>
-- getID3 <getid3.sourceforge.net>
-- jQuery <jquery.com>
-- jQuery UI <jqueryui.com>
-- TinyMCE <tinymce.moxiecode.com>
-- Prototype <prototypejs.org>
-- script.aculo.us <script.aculo.us>
-- Silk Icons <www.famfamfam.com/lab/icons/silk/>
+- Zend Framework <http://framework.zend.com>
+- getID3 <http://getid3.sourceforge.net>
+- jQuery <http://jquery.com>
+- jQuery UI <http://jqueryui.com>
+- TinyMCE <http://tinymce.moxiecode.com>
+- Prototype <http://prototypejs.org>
+- script.aculo.us <http://script.aculo.us>
+- Silk Icons <http://www.famfamfam.com/lab/icons/silk/>
 
 Use and modifications of these libraries must comply with their respective licenses.
+
+Release notes for Omeka are available at
+<http://omeka.org/codex/Release_Notes>.
