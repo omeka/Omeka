@@ -34,8 +34,8 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     const USERNAME_MAX_LENGTH = 30;
     const PASSWORD_MIN_LENGTH = 6;
     
-    const INVALID_EMAIL_ERROR_MSG = 'That email address is not valid.  A valid email address is required.';
-    const CLAIMED_EMAIL_ERROR_MSG = 'That email address has already been claimed by a different user.  Please notify an administrator if you feel this has been done in error.';
+    const INVALID_EMAIL_ERROR_MSG = "That email address is not valid.  A valid email address is required.";
+    const CLAIMED_EMAIL_ERROR_MSG = "That email address has already been claimed by a different user. Please notify an administrator if you feel this has been done in error.";
         
     protected $_related = array('Entity'=>'getEntity');
     
@@ -60,7 +60,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     {
         $entity = $this->getEntity();
         if (!($entity instanceof Entity)) {
-            throw new Omeka_Record_Exception("No Entity record available.");
+            throw new Omeka_Record_Exception(__("No Entity record available."));
         }
         if (isset($entity->$property)) {
             return $entity->$property;
@@ -72,7 +72,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     protected function beforeSave()
     {
         if (!$this->Entity) {
-            throw new Omeka_Record_Exception("No Entity record is available when saving this User.");
+            throw new Omeka_Record_Exception(__("No Entity record is available when saving this User."));
         }
         $this->Entity->save();
         $this->entity_id = $this->Entity->id;
@@ -89,10 +89,10 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
             $acl = Omeka_Context::getInstance()->getAcl();
             $currentUser = Omeka_Context::getInstance()->getCurrentUser();
             if ($post['role'] == 'super' && !$acl->isAllowed($currentUser, 'Users', 'makeSuperUser')) {
-                throw new Omeka_Validator_Exception( 'User may not change permissions to super-user' );
+                throw new Omeka_Validator_Exception( __('User may not change permissions to super-user') );
             }
             if (!$acl->isAllowed($currentUser, $this, 'change-role')) {
-                throw new Omeka_Validator_Exception('User may not change roles.');
+                throw new Omeka_Validator_Exception(__('User may not change roles.'));
             }
         } 
                 
@@ -150,38 +150,38 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
             // Either need first and last name (or institution name) to validate.
             if (trim($entity->institution) == '') {
                 if (trim($entity->first_name) == '' && trim($entity->last_name) == '') {
-                    $this->addError('institution', 'If a first name and last name are not provided, then an institution name is required.');
+                    $this->addError('institution', __('If a first name and last name are not provided, then an institution name is required.'));
                 } else {
                     if (trim($entity->first_name) == '') {
-                        $this->addError('first_name', 'A first name is required.' );
+                        $this->addError('first_name', __('A first name is required.'));
                     }
                     if (trim($entity->last_name) == '') {
-                        $this->addError('last_name', 'A last name is required.'); 
+                        $this->addError('last_name', __('A last name is required.')); 
                     }
                 }
             }
             
             if (!Zend_Validate::is($entity->email, 'EmailAddress')) {
-                $this->addError('email', self::INVALID_EMAIL_ERROR_MSG);
+                $this->addError('email', __(self::INVALID_EMAIL_ERROR_MSG));
             }
             
             if (!$this->emailIsUnique($entity->email)) {
-                $this->addError('email', self::CLAIMED_EMAIL_ERROR_MSG);            
+                $this->addError('email', __(self::CLAIMED_EMAIL_ERROR_MSG));            
             }                 
         }    
         
         //Validate the role
         if (trim($this->role) == '') {
-            $this->addError('role', 'The user must be assigned a role.');
+            $this->addError('role', __('The user must be assigned a role.'));
         }
         
         // Validate the username
         if (strlen($this->username) < self::USERNAME_MIN_LENGTH || strlen($this->username) > self::USERNAME_MAX_LENGTH) {
-            $this->addError('username', "The username '" . $this->username . "' must be between " . self::USERNAME_MIN_LENGTH .  " and " . self::USERNAME_MAX_LENGTH . " characters.");
+            $this->addError('username', __('The username "%1$s" must be between %2$s and %3$s characters.',$this->username, self::USERNAME_MIN_LENGTH, self::USERNAME_MAX_LENGTH));
         } else if (!Zend_Validate::is($this->username, 'Alnum')) {
-            $this->addError('username', "The username must be alphanumeric.");
+            $this->addError('username', __("The username must be alphanumeric."));
         } else if (!$this->fieldIsUnique('username')) {
-            $this->addError('username', "'{$this->username}' is already in use.  Please choose another username.");
+            $this->addError('username', __("'%s' is already in use. Please choose another username.", $this->username));
         }
     }
     

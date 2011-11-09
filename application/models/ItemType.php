@@ -80,11 +80,11 @@ class ItemType extends Omeka_Record
     {
         
         if (strlen($this->name) < self::ITEM_TYPE_NAME_MIN_CHARACTERS || strlen($this->name) > self::ITEM_TYPE_NAME_MAX_CHARACTERS) {
-            $this->addError('name', 'The item type name must have between ' . self::ITEM_TYPE_NAME_MIN_CHARACTERS .  ' and ' . self::ITEM_TYPE_NAME_MAX_CHARACTERS .  ' characters.');
+            $this->addError('name', __('The item type name must have between %1$s and %2$s characters.', self::ITEM_TYPE_NAME_MIN_CHARACTERS, self::ITEM_TYPE_NAME_MAX_CHARACTERS) );
         }
         
         if (!$this->fieldIsUnique('name')) {
-            $this->addError('name', 'The item type name must be unique.');
+            $this->addError('name', __('The item type name must be unique.'));
         }
     }
     
@@ -172,9 +172,9 @@ class ItemType extends Omeka_Record
         $joinRecordArray = $this->loadOrderedChildren();
         
         if (count($elementOrderingArray) > count($joinRecordArray)) {
-            throw new Omeka_Record_Exception('There are too many values in the element ordering array.');
+            throw new Omeka_Record_Exception(__('There are too many values in the element ordering array.'));
         } else if (count($elementOrderingArray) < count($joinRecordArray)) {
-            throw new Omeka_Record_Exception('There are too few values in the element ordering array.');
+            throw new Omeka_Record_Exception(__('There are too few values in the element ordering array.'));
         }
             
         // This is essentially voodoo magic.
@@ -218,7 +218,7 @@ class ItemType extends Omeka_Record
                     $elementsToSaveIds[] = $element->id;
             	}
             } else {
-            	throw new Omeka_Record_Exception('Invalid element data. To add elements, you must either pass an element objects or an array of element metadata.');
+            	throw new Omeka_Record_Exception(__('Invalid element data. To add elements, you must either pass an element objects or an array of element metadata.'));
             }
             if ($elementToSave) {
                 $elementsToSave[] = $elementToSave;
@@ -282,7 +282,7 @@ class ItemType extends Omeka_Record
     public function removeElement($element)
     {
     	if (!$this->exists()) {
-            throw new Omeka_Record_Exception('Cannot remove elements from an item type that is not persistent in the database!');
+            throw new Omeka_Record_Exception(__('Cannot remove elements from an item type that is not persistent in the database!'));
         }
         
         if ($element instanceof Element) {
@@ -291,7 +291,7 @@ class ItemType extends Omeka_Record
         	$elementId = $element;
             $element = $this->getTable('Element')->find($elementId);
             if (!$element) {
-            	throw new Omeka_Record_Exception('Cannot find element for id ' . $elementId);
+            	throw new Omeka_Record_Exception(__('Cannot find element with ID %s!', $elementId));
             }
         }
         
@@ -334,7 +334,7 @@ class ItemType extends Omeka_Record
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?', array($elementId, $this->id), true);
     
         if (!$iteJoin) {
-            throw new Omeka_Record_Exception('Item type does not contain an element with the ID = "' . $elementId . '"!');
+            throw new Omeka_Record_Exception(__('Item type does not contain an element with the ID %s!', $elementId));
         }
         $iteJoin->delete();
                
@@ -359,7 +359,7 @@ class ItemType extends Omeka_Record
         } else {
         	var_dump($element);
         	
-        	throw new Omeka_Record_Exception('Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element.');
+        	throw new Omeka_Record_Exception(__('Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element.'));
         }
     	$db = $this->getDb();
         $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?',

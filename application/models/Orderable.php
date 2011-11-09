@@ -98,11 +98,11 @@ class Orderable extends Omeka_Record_Mixin
     public function addChild(Omeka_Record $child)
     {
         if (!$this->record->exists()) {
-            throw new Omeka_Record_Exception('Cannot add a child to a record that does not exist yet!');
+            throw new Omeka_Record_Exception(__('Cannot add a child to a record that does not exist yet!'));
         }
         
         if (!($child instanceof $this->childClass)) {
-            throw new Omeka_Record_Exception('Child must be an instance of "'.$this->childClass.'"');
+            throw new Omeka_Record_Exception(__('Child must be an instance of "%s"', $this->childClass));
         }
         
         $fk = $this->childFk;

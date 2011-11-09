@@ -1,17 +1,16 @@
-<?php head(array('bodyclass'=>'error403 primary', 'title'=>'Forbidden')); ?>
-<h1>403: Forbidden</h1>
+<?php
+$pageTitle = __('403: Forbidden');
+head(array('bodyclass'=>'error403 primary', 'title'=>$pageTitle)); ?>
+<h1><?php echo $pageTitle; ?></h1>
 
 <div id="primary" class="file-forbidden">
 <?php echo flash(); ?>
-<p>Sorry,
-<?php if (($user = current_user()) && ($user instanceof User)): ?>
-    because of your current user level (&quot;<?php echo
-    html_escape(current_user()->role); ?>&quot;), you
-<?php else: ?>
-    you    
-<?php endif; ?>
-don't have permission to access this page. If you think you should have access
-to this page, contact the <a href="mailto:<?php echo
-settings('administrator_email'); ?>">site administrator</a>.</p>
+
+    <p><?php echo __('Sorry, you do not have permission to access this page.'); ?></p>
+    
+    <p><?php 
+    $siteAdministratorEmail = '<a href="mailto:'. settings('administrator_email') . '">' . __('site administrator') . '</a>';
+    echo __('If you think you should have permission, try contacting the %s.', $siteAdministratorEmail); ?>
+    </p>
 </div>
 <?php foot(); ?>

@@ -24,16 +24,16 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         
         $this->addElement('checkbox', File::DISABLE_DEFAULT_VALIDATION_OPTION,
             array(
-                'label' => 'Disable File Upload Validation',
+                'label' => __('Disable File Upload Validation'),
                 'checked' => get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION),
-                'description' => 'Check this field if you would like to allow any file to be uploaded to Omeka.'
+                'description' => __('Check this field if you would like to allow any file to be uploaded to Omeka.')
             )
         );
         
         $this->addElement('textarea', Omeka_Validate_File_Extension::WHITELIST_OPTION,
             array(
-                'label' => 'Allowed File Extensions',
-                'description' => 'List of allowed extensions for file uploads.',
+                'label' => __('Allowed File Extensions'),
+                'description' => __('List of allowed extensions for file uploads.'),
                 'value' => get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION),
                 'cols'=>50, 
                 'rows'=>5
@@ -42,8 +42,8 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         
         $this->addElement('textarea', Omeka_Validate_File_MimeType::WHITELIST_OPTION,
             array(
-                'label' => 'Allowed File Types',
-                'description' => 'List of allowed MIME types for file uploads',
+                'label' => __('Allowed File Types'),
+                'description' => __('List of allowed MIME types for file uploads'),
                 'value' => get_option(Omeka_Validate_File_MimeType::WHITELIST_OPTION),
                 'cols' => 50, 
                 'rows' => 5
@@ -52,22 +52,22 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         
         $this->addElement('text', Omeka_Captcha::PUBLIC_KEY_OPTION,
             array(
-                'label' => 'ReCaptcha Public Key',
-                'description' => 'Public key from recaptcha.net. Both this and the private key must be filled in to secure public forms.',
+                'label' => __('ReCaptcha Public Key'),
+                'description' => __('Public key from recaptcha.net. Both this and the private key must be filled in to secure public forms.'),
                 'value' => get_option(Omeka_Captcha::PUBLIC_KEY_OPTION)
             )
         );
 
         $this->addElement('text', Omeka_Captcha::PRIVATE_KEY_OPTION,
             array(
-                'label' => 'ReCaptcha Private Key',
-                'description' => 'Private key from recaptcha.net. Both this and the public key must be filled in to secure public forms.',
+                'label' => __('ReCaptcha Private Key'),
+                'description' => __('Private key from recaptcha.net. Both this and the public key must be filled in to secure public forms.'),
                 'value' => get_option(Omeka_Captcha::PRIVATE_KEY_OPTION)
             )
         );
         
         $this->addElement('submit', 'security_submit', array(
-            'label' => 'Save Changes'
+            'label' => __('Save Changes')
         ));
     }
 }

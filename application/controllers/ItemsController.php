@@ -105,24 +105,24 @@ class ItemsController extends Omeka_Controller_Action
     
     protected function _getAddSuccessMessage($record)
     {
-        return 'The item was successfully added!';        
+        return __('The item was successfully added!');        
     }
     
     protected function _getEditSuccessMessage($record)
     {
-        return 'The item was successfully changed!';
+        return __('The item was successfully changed!');
     }
 
     protected function  _getDeleteSuccessMessage($record)
     {
-        return 'The item was successfully deleted!';
+        return __('The item was successfully deleted!');
     }
     
     protected function _getDeleteConfirmMessage($record)
     {
-        return 'This will delete the item and its associated metadata. It will '
+        return __('This will delete the item and its associated metadata. It will '
              . 'also delete all files and file metadata associated with this '
-             . 'item.';
+             . 'item.');
     }
     
     public function addAction()
@@ -263,7 +263,7 @@ class ItemsController extends Omeka_Controller_Action
                 // Refresh the item.
                 $item = $this->findById();
             } else {
-                $this->flashError('User does not have permission to add tags.');
+                $this->flashError(__('User does not have permission to add tags.'));
             }
         }
         
@@ -296,7 +296,7 @@ class ItemsController extends Omeka_Controller_Action
         
         $itemIds = $this->_getParam('items');
         if (empty($itemIds)) {
-            $this->flashError('You must choose some items to batch edit.');
+            $this->flashError(__('You must choose some items to batch edit.'));
             return $this->_helper->redirector->goto('browse', 'items');
         }
 
@@ -335,30 +335,30 @@ class ItemsController extends Omeka_Controller_Action
                         
             if ($metadata && array_key_exists('public', $metadata) && !$this->isAllowed('makePublic')) {
                 $errorMessage = 
-                    'User is not allowed to modify visibility of items.';
+                    __('User is not allowed to modify visibility of items.');
             }
 
             if ($metadata && array_key_exists('featured', $metadata) && !$this->isAllowed('makeFeatured')) {
                 $errorMessage = 
-                    'User is not allowed to modify featured status of items.';
+                    __('User is not allowed to modify featured status of items.');
             }
 
             if (!$errorMessage) {
                 foreach ($itemIds as $id) {
                     if ($item = $this->getTable('Item')->find($id)) {
                         if ($delete && !$this->isAllowed('delete', $item)) {
-                            $errorMessage = 'User is not allowed to delete selected items.';
+                            $errorMessage = __('User is not allowed to delete selected items.');
                             break;
                         }
 
                         // Check to see if anything but 'tag'
                         if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$this->isAllowed('edit', $item)) {
-                            $errorMessage = 'User is not allowed to edit selected items.';
+                            $errorMessage = __('User is not allowed to edit selected items.');
                             break;
                         }
 
                         if ($metadata && array_key_exists('tags', $metadata) && !$this->isAllowed('tag', $item)) {
-                            $errorMessage = 'User is not allowed to tag selected items.';
+                            $errorMessage = __('User is not allowed to tag selected items.');
                             break;
                         }
                         release_object($item);
@@ -381,7 +381,7 @@ class ItemsController extends Omeka_Controller_Action
                         'custom' => $custom
                     )
                 );
-                $this->flashSuccess('The items were successfully changed!');
+                $this->flashSuccess(__('The items were successfully changed!'));
             }
          }
 

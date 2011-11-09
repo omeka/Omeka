@@ -281,8 +281,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     public function saveFiles()
     {
         if (!$this->exists()) {
-            throw new Omeka_Record_Exception("Files cannot be attached to an item that is "
-                                . "not persistent in the database!");
+            throw new Omeka_Record_Exception(__("Files cannot be attached to an item that is not persistent in the database!"));
         }
         
         foreach ($this->_files as $key => $file) {
@@ -396,12 +395,11 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     public function addFile(File $file)
     {
         if ($file->exists()) {
-            throw new Omeka_Record_Exception("Cannot add an existing file to an item!");
+            throw new Omeka_Record_Exception(__("Cannot add an existing file to an item!"));
         }
         
         if (!$file->isValid()) {
-            throw new Omeka_Record_Exception("File must be valid before it can be associated"
-                                . " with an item!");
+            throw new Omeka_Record_Exception(__("File must be valid before it can be associated with an item!"));
         }
         
         $this->_files[] = $file;

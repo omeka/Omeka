@@ -1,4 +1,5 @@
 <?php
+
     $displayName = $plugin->getDisplayName();
 
     $requiredPluginDirNames = $plugin->getRequiredPlugins();
@@ -20,15 +21,13 @@
     $loadErrors = array();
     if (!$plugin->meetsOmekaMinimumVersion()):
         $minVersion = $plugin->getMinimumOmekaVersion();
-        $loadErrors[] = "This version of $displayName requires at least Omeka $minVersion.";
+        $loadErrors[] = __('This version of %1$s requires at least Omeka $minVersion.', $displayName, $minVersion);
     endif;
     if ($missingPluginNames):
-        $loadErrors[] = "$displayName requires the following plugins to be "
-                    . 'installed, activated, and loaded: '
-                    . implode(', ', $missingPluginNames);
+        $loadErrors[] = __('%1$s requires the following plugins to be installed, activated, and loaded: %2$s', html_escape($displayName), implode(', ', $missingPluginNames));
     endif;
     if (!$loader->hasPluginBootstrap($pluginDirName)):
-        $loadErrors[] = 'The plugin.php file is missing.';
+        $loadErrors[] = __('The plugin.php file is missing.');
     endif;
         
     $cannotLoad = !empty($loadErrors);
@@ -37,7 +36,7 @@
     <td>
     <?php if ($cannotLoad): ?>
         <div class="warnings">
-            <strong>The <?php echo html_escape($displayName); ?> plugin cannot be loaded for the following reasons:</strong>
+            <strong><?php echo __('The %s plugin cannot be loaded for the following reasons:', html_escape($displayName)); ?></strong>
             <ul>
             <?php foreach ($loadErrors as $error): ?>
                 <li><?php echo html_escape($error); ?></li>
@@ -46,7 +45,7 @@
         </div>
     <?php endif; ?>
     <?php if ($plugin->hasNewVersion()): ?>    
-        <p class="notice plugin-upgrade">You have a new version of <?php echo html_escape($displayName); ?>. Please upgrade!</p>
+        <p class="notice plugin-upgrade"><?php echo __('You have a new version of %s. Please upgrade!', html_escape($displayName)); ?></p>
     <?php endif; ?>
         <div class="plugin-info">
         <p class="plugin-title"><?php
@@ -56,18 +55,18 @@
                 echo html_escape($displayName);
             endif; 
             if (has_permission('Plugins', 'config') && $plugin->hasConfig() ): ?>
-                <a href="<?php echo html_escape(uri('plugins/config', array('name'=>$plugin->getDirectoryName()))); ?>" class="configure-button button">Configure</a>
+                <a href="<?php echo html_escape(uri('plugins/config', array('name'=>$plugin->getDirectoryName()))); ?>" class="configure-button button"><?php echo __('Configure'); ?></a>
             <?php endif; ?>
         </p>
         
         <?php 
             $pluginMetadata = array();
             if ($plugin->getIniVersion()):
-                $pluginMetadata[] = 'Version ' . html_escape(trim($plugin->getIniVersion()));
+                $pluginMetadata[] = __('Version') . ' ' . html_escape(trim($plugin->getIniVersion()));
             endif;
         
             if ($plugin->getAuthor()):
-                $pluginMetadata[] = 'By ' . html_escape(trim($plugin->getAuthor()));
+                $pluginMetadata[] = __('By') . ' ' . html_escape(trim($plugin->getAuthor()));
             endif;
             if (!empty($pluginMetadata)): ?>
                 <p class="plugin-meta"><?php echo implode(' | ', $pluginMetadata); ?></p>
@@ -77,7 +76,7 @@
         <p class="plugin-description"><?php echo html_escape($pluginDescription); ?></p>
 	    <?php endif; ?>
 	    <?php if ($versionCheck && !$plugin->meetsOmekaTestedUpToVersion()): ?>
-            <p class="notice omeka-tested-up-to"><strong>Notice:</strong> This version of the '<?php echo html_escape($displayName); ?>' plugin has only been tested up to Omeka <?php echo html_escape($plugin->getTestedUpToOmekaVersion()); ?>. You are using version Omeka <?php echo OMEKA_VERSION; ?>.</p>
+            <p class="notice omeka-tested-up-to"><strong><?php echo __('Notice:'); ?></strong> <?php echo __('This version of %1$s has only been tested up to Omeka %2$s. You are using Omeka version %3$s', html_escape($displayName), html_escape($plugin->getTestedUpToOmekaVersion()), OMEKA_VERSION); ?>.</p>
         <?php endif; ?>
         </div>
     </td>
@@ -88,7 +87,7 @@
             <?php if (has_permission('Plugins', 'upgrade')): ?>
                 <form action="<?php echo html_escape(uri('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
                     <div>
-                        <button name="upgrade" type="submit" class="upgrade"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>>Upgrade</button>
+                        <button name="upgrade" type="submit" class="upgrade"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Upgrade'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
                     </div>
                 </form>
@@ -98,7 +97,7 @@
             <?php if (has_permission('Plugins', 'activate')): ?>
                 <form action="<?php echo html_escape(uri('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
                     <div>
-                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?>"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo ($plugin->isActive()) ? 'Deactivate' : 'Activate'; ?></button>
+                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?>"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo ($plugin->isActive()) ? __('Deactivate') : __('Activate'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
                     </div>
                 </form>                
@@ -108,7 +107,7 @@
                     'controller'=>'plugins',
                     'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
                     <div>
-                        <button name="uninstall" type="submit" class="uninstall"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>>Uninstall</button>
+                        <button name="uninstall" type="submit" class="uninstall"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Uninstall'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
                     </div>
                 </form>
@@ -118,7 +117,7 @@
     <?php if (has_permission('Plugins', 'install')): ?>
         <form action="<?php echo html_escape(uri('plugins/install')); ?>" method="post" accept-charset="utf-8">
                 <div>
-                    <button name="install" type="submit" class="install"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>>Install</button>
+                    <button name="install" type="submit" class="install"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Install'); ?></button>
                     <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
                 </div>
         </form> 

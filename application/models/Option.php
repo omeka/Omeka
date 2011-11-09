@@ -25,11 +25,11 @@ class Option extends Omeka_Record {
     protected function _validate()
     {
         if (empty($this->name)) {
-            $this->addError('name', 'Each option must have a name.');
+            $this->addError('name', __('Each option must have a unique name.'));
         }
         
         if (!$this->fieldIsUnique('name')) {
-            $this->addError('name', 'Each option must have a unique name.');
+            $this->addError('name', __('Each option must have a unique name.'));
         }
     }
 }

@@ -23,9 +23,9 @@ class ElementSetsController extends Omeka_Controller_Action
     
     protected function _getDeleteConfirmMessage($record)
     {
-        return 'This will delete the element set and all elements assigned to '
+        return __('This will delete the element set and all elements assigned to '
              . 'the element set. Items will lose all metadata that is specific '
-             . 'to this element set.';
+             . 'to this element set.');
     }
     /**
      * Can't add or edit element sets via the admin interface, so disable these

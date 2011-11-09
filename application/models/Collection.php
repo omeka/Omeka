@@ -104,7 +104,7 @@ class Collection extends Omeka_Record
                 return $collectors;
             }
         } else if (!is_array($this->collectors)) {
-            throw new RuntimeException("Collectors must be either a string or an array.");
+            throw new RuntimeException(__("Collectors must be either a string or an array."));
         }
     }
 
@@ -145,9 +145,8 @@ class Collection extends Omeka_Record
                 'min' => self::COLLECTION_NAME_MIN_CHARACTERS,
                 'max' => self::COLLECTION_NAME_MAX_CHARACTERS))
         ) {
-            $this->addError('name', 'The collection name must have between ' 
-             . self::COLLECTION_NAME_MIN_CHARACTERS .  ' and ' 
-             . self::COLLECTION_NAME_MAX_CHARACTERS .  ' characters.');
+            $this->addError('name', __('The collection name must have between %1$s and %2$s characters.', self::COLLECTION_NAME_MIN_CHARACTERS, 
+            self::COLLECTION_NAME_MAX_CHARACTERS));
         }
     }
     
@@ -196,7 +195,7 @@ class Collection extends Omeka_Record
         } else if ($collector instanceof Entity) {
             $collectorName = $collector->getName();
         } else {
-            throw new InvalidArgumentException("Argument passed to addCollector() must be a string or an instance of Entity.");
+            throw new InvalidArgumentException(__("Argument passed to addCollector() must be a string or an instance of Entity."));
         }
         $collectorName = trim($collectorName);
         if ($collectorName != '') {
@@ -228,7 +227,7 @@ class Collection extends Omeka_Record
     public function setAddedBy(User $user)
     {
         if (!$user->exists()) {
-            throw new RuntimeException("Cannot associate the collection with an unsaved user.");
+            throw new RuntimeException(__("Cannot associate the collection with an unsaved user."));
         }
         $this->owner_id = $user->id;
     }

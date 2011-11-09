@@ -138,7 +138,7 @@ class ItemBuilder extends Omeka_Record_Builder
         } else if ($currentUser = Omeka_Context::getInstance()->getCurrentUser()){
             $entity = $currentUser->Entity;
         } else {
-            throw new Omeka_Record_Builder_Exception("Cannot add tags to an item if no Entity is available to tag.");
+            throw new Omeka_Record_Builder_Exception(__("Cannot add tags to an item if no Entity is available to tag."));
         }
         $this->_record->addTags($metadata[self::TAGS], $entity);
     }
@@ -262,7 +262,7 @@ class ItemBuilder extends Omeka_Record_Builder
         // item will be saved as normally.
         if (array_key_exists(self::FILES, $this->_fileMetadata)) {
             if (!array_key_exists(self::FILE_TRANSFER_TYPE, $this->_fileMetadata)) {
-                throw new Omeka_Record_Builder_Exception("Must specify a file transfer type when attaching files to an item!");
+                throw new Omeka_Record_Builder_Exception(__("Must specify a file transfer type when attaching files to an item!"));
             }
             $this->addFiles(
                 $this->_fileMetadata[self::FILE_TRANSFER_TYPE], 

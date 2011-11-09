@@ -1,5 +1,5 @@
 <?php if ($item->Tags): ?>
-    <h3>All Tags</h3>
+    <h3><?php echo __('All Tags'); ?></h3>
     <ul class="tags">
             <?php foreach( $item->Tags as $key => $tag ): ?>
             <li class="tag">

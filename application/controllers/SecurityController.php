@@ -43,7 +43,7 @@ class SecurityController extends Omeka_Controller_Action
                     set_option($key, $value);
                 }
             }          
-            $this->flashSuccess("The security settings have been updated.");
+            $this->flashSuccess(__("The security settings have been updated."));
         }        
     }
     

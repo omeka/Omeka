@@ -1,13 +1,13 @@
-<h3>Edit Current Elements:</h3>
+<h3><?php echo __('Edit Current Elements'); ?></h3>
 <table width="100%">
     <thead>
         <tr>
-            <th>Element Name</th>
-            <th>Description</th>
-            <th>Data Type</th>
-            <th>Order</th>
+            <th><?php echo __('Element Name'); ?></th>
+            <th><?php echo __('Description'); ?></th>
+            <th><?php echo __('Data Type'); ?></th>
+            <th><?php echo __('Order'); ?></th>
             <?php if (has_permission('ItemTypes', 'delete-element')): ?>
-                <th>Remove?</th>
+                <th><?php echo __('Remove'); ?></th>
             <?php endif; ?>
         </tr>
     </thead>
@@ -21,7 +21,7 @@
                 <td class="element-order"><?php echo __v()->formText("element-order-". $element->id, $elementsOrder[$orderIndex], array('size'=>2)); ?></td>
                 
                 <?php if (has_permission('ItemTypes', 'delete-element')): ?>
-                <td><a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element">Remove</a></td>
+                <td><a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a></td>
                 <?php endif; ?>
             </tr>
             <?php $orderIndex++; ?>
@@ -56,7 +56,7 @@
     </tbody>
 </table>
 <p style="float:right;">
-<input type="radio" name="add-element-type" value="existing" checked="checked" />Existing
-<input type="radio" name="add-element-type" value="new" />New
-<button style="float:none; margin-left:10px;" id="add-element" name="add-element">Add Element</button>
+<input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?>
+<input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?>
+<button style="float:none; margin-left:10px;" id="add-element" name="add-element"><?php echo __('Add Element'); ?></button>
 </p>

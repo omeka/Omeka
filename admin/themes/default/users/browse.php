@@ -1,30 +1,32 @@
-<?php head(array('title'=>'Browse Users', 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
-<h1>Browse Users (<?php echo $total_records; ?> total)</h1>
+<?php
+$pageTitle = __('Browse Users');
+head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
 <?php if (has_permission('Users', 'add')): ?>
-    <p id="add-user" class="add-button"><?php echo link_to('users', 'add', 'Add a User', array('class'=>'add-user')); ?></p>    
+    <p id="add-user" class="add-button"><?php echo link_to('users', 'add', __('Add a User'), array('class'=>'add-user')); ?></p>    
 <?php endif; ?>
 <?php common('settings-nav'); ?>
 <div id="primary">
 <?php echo flash(); ?>
 <form action="<?php echo html_escape(current_uri()); ?>" id="sort-users-form" method="get" accept-charset="utf-8">
     <fieldset>
-        <p>Search Users:</p>
+        <p><?php echo __('Search Users'); ?>:</p>
         <?php echo $this->formSelect('role', @$_GET['role'], array(), 
-            array(''=>'Select Role') + get_user_roles()); ?>
+            array(''=>__('Select Role')) + get_user_roles()); ?>
         <?php echo $this->formSelect('active', @$_GET['active'], array(),
-            array(''=>'Select Status',  '1'=>'Active', '0'=>'Inactive')); ?>
+            array(''=>__('Select Status'),  '1'=>__('Active'), '0'=>__('Inactive'))); ?>
         <?php echo $this->formSelect('sort', @$_GET['sort'], array(),
-            array(  ''=>'Sort By', 
-                    'first_name'=>'First Name',
-                    'last_name'=>'Last Name',
-                    'institution'=>'Institution Name',
-                    'role'=>'Role',
-                    'username'=>'Username')); ?>
+            array(  ''=>__('Sort By'), 
+                    'first_name'=>__('First Name'),
+                    'last_name'=>__('Last Name'),
+                    'institution'=>__('Institution Name'),
+                    'role'=>__('Role'),
+                    'username'=>__('Username'))); ?>
         <?php echo $this->formSelect('sortOrder', @$_GET['sortOrder'], array(),
-            array( ''=>'Sort Order',
-                   'asc'=>'Ascending',
-                   'desc'=>'Descending')); ?>
-                   <input type="submit" class="submit-form" name="submit" value="Search" />
+            array( ''=>__('Sort Order'),
+                   'asc'=>__('Ascending'),
+                   'desc'=>__('Descending'))); ?>
+                   <input type="submit" class="submit-form" name="submit" value="<?php echo __('Search'); ?>" />
                    
     </fieldset>
 </form>
@@ -33,15 +35,15 @@
 <table id="users">
     <thead>
         <tr>
-            <th>Username</th>
-            <th>Real Name</th>
-            <th>Email</th>
-            <th>Role</th>
+            <th><?php echo __('Username') ?></th>
+            <th><?php echo __('Real Name'); ?></th>
+            <th><?php echo __('Email'); ?></th>
+            <th><?php echo __('Role'); ?></th>
             <?php if (has_permission('Users', 'edit')): ?>
-            <th>Edit</th>            
+            <th><?php echo __('Edit'); ?></th>            
             <?php endif; ?>
             <?php if (has_permission('Users', 'delete')): ?>
-            <th>Delete</th>          
+            <th><?php echo __('Delete'); ?></th>          
             <?php endif; ?>
         </tr>
     </thead>
@@ -53,7 +55,7 @@
             <td><?php echo html_escape($user->email); ?></td>
             <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape($user->role); ?></span></td>
             <?php if (has_permission($user, 'edit')): ?>
-            <td><?php echo link_to($user, 'edit', 'Edit', array('class'=>'edit')); ?></td>
+            <td><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></td>
             <?php endif; ?>     
             <?php if (has_permission($user, 'delete')): ?>
             <td><?php echo delete_button($user); ?></td>

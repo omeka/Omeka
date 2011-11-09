@@ -46,13 +46,13 @@ class PluginsController extends Omeka_Controller_Action
         // If we have no config form hook, forget it.
         if (!$this->_pluginBroker->getHook($plugin, 'config_form') 
          || !$this->_pluginBroker->getHook($plugin, 'config')) {
-            throw new RuntimeException("Error in configuring plugin named '" . $plugin->getDisplayName() . "': Missing config and/or config_form hook(s).");
+            throw new RuntimeException(__('Error in configuring plugin named "%s". Missing config and/or config_form hook(s).', $plugin->getDisplayName()));
         }
         
         if ($this->getRequest()->isPost()) {
             try {
                 $this->_pluginBroker->callHook('config', array($_POST), $plugin);
-                $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully configured!");
+                $this->flashSuccess(__('The %s plugin was successfully configured!', $plugin->getDisplayName()));
                 $this->redirect->goto('browse'); 
             } catch (Omeka_Validator_Exception $e) {
                 $this->flashValidationErrors($e);
@@ -67,13 +67,13 @@ class PluginsController extends Omeka_Controller_Action
         $plugin = $this->_getPluginByName(true);
     
         if ($plugin->isInstalled()) {
-            $this->flashError("'" . $plugin->getDisplayName() . "' plugin has already been installed.");
+            $this->flashError(__('The %s plugin has already been installed.', $plugin->getDisplayName()));
             $this->_helper->redirector->goto('browse');
         }
              
         try {
             $this->_pluginInstaller->install($plugin);
-            $this->flashSuccess("The '" . $plugin->getDisplayName() . "' plugin was successfully installed!");
+            $this->flashSuccess(__('The %s plugin was successfully installed!', $plugin->getDisplayName()));
             
             // Only redirect to the config form if there is a config hook for this plugin.
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
@@ -83,7 +83,7 @@ class PluginsController extends Omeka_Controller_Action
             // Taken from Plugin_Installer::install().  
             // "The '$pluginDirName' plugin cannot be installed because it requires other plugins to be installed, activated, and loaded. See below for details."
             
-            $this->flashError("The following error occurred while installing the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
+            $this->flashError(__("The following error occurred while installing the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage());
         }
         
         $this->_helper->redirector->goto('browse');
@@ -108,12 +108,12 @@ class PluginsController extends Omeka_Controller_Action
            // check to make sure the plugin can be loaded.
            try {
                $this->_pluginLoader->load($plugin, true);
-               $this->flashSuccess("The '" . $plugin->getDirectoryName() . "' plugin was successfully activated!");
+               $this->flashSuccess(__("The %s plugin was successfully activated!", $plugin->getDirectoryName()));
            } catch (Exception $e) {
-               $this->flashError("The '" . $plugin->getDirectoryName() . "' plugin was activated, but could not be loaded: " . $e->getMessage());
+               $this->flashError(__("The %s plugin was activated, but could not be loaded: ", $plugin->getDirectoryName()) . $e->getMessage());
            }
         } catch (Exception $e) {
-            $this->flashError("The following error occurred while activating the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
+            $this->flashError(__("The following error occurred while activating the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage());
         }
             
         $this->redirect->goto('browse');
@@ -134,9 +134,9 @@ class PluginsController extends Omeka_Controller_Action
         // Deactivate the plugin
         try {
            $this->_pluginInstaller->deactivate($plugin);
-           $this->flashSuccess("The '" . $plugin->getDirectoryName() . "' plugin was successfully deactivated!");
+           $this->flashSuccess(__("The %s plugin was successfully deactivated!", $plugin->getDirectoryName()));
         } catch (Exception $e) {
-            $this->flashError("The following error occurred while deactivating the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
+            $this->flashError(__("The following error occurred while deactivating the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage());
         }
             
         $this->redirect->goto('browse');
@@ -153,12 +153,12 @@ class PluginsController extends Omeka_Controller_Action
             try {
                 $this->_pluginInstaller->upgrade($plugin);
                 $pluginDisplayName = $plugin->getDisplayName();
-                $this->flashSuccess("The '$pluginDisplayName' plugin was successfully upgraded!");
+                $this->flashSuccess(__("The %s plugin was successfully upgraded!", $plugin->getDirectoryName()));
                 if ($this->_pluginBroker->getHook($plugin, 'config')) {
                     return $this->redirect->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
                 }
             } catch (Exception $e) {
-                $this->flashError("The following error occurred while upgrading the '$pluginDisplayName' plugin: " . $e->getMessage());
+                $this->flashError(__("The following error occurred while upgrading the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage());
             }
             
             $this->redirect->goto('browse');
@@ -216,7 +216,7 @@ class PluginsController extends Omeka_Controller_Action
         if (!$this->_getParam('confirm')) {
             
             if ($this->_getParam('uninstall-confirm')) {
-                $this->flashError("You must confirm the uninstall before proceeding.");
+                $this->flashError(__("You must confirm the uninstall before proceeding."));
             }
             
             // Call the append to uninstall message hook for the specific 
@@ -231,9 +231,9 @@ class PluginsController extends Omeka_Controller_Action
             // Attempt to uninstall the plugin.
             try {
                 $this->_pluginInstaller->uninstall($plugin);
-                $this->flashSuccess("The '" . $plugin->getDirectoryName() . "' plugin was successfully uninstalled!");
+                $this->flashSuccess(__("The %s plugin was successfully uninstalled!", $plugin->getDirectoryName()));
             } catch (Exception $e) {
-                $this->flashError("The following error occurred while uninstalling the '" . $plugin->getDirectoryName() . "' plugin: " . $e->getMessage());
+                $this->flashError(__("The following error occurred while uninstalling the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage());
                 $this->redirect->goto('browse');
             }
             $this->redirect->goto('browse');
@@ -260,7 +260,7 @@ class PluginsController extends Omeka_Controller_Action
     {
         $pluginDirName = (string) $this->_getParam('name');
         if (!$pluginDirName) {
-            $this->flashError("No plugin name given.");
+            $this->flashError(__("No plugin name given."));
             return false;
         }
         
@@ -273,7 +273,7 @@ class PluginsController extends Omeka_Controller_Action
         }
                     
         if (!$plugin) {
-            $this->flashError("The plugin '" . $pluginDirName . "' must be installed.");
+            $this->flashError(__("The plugin %s must be installed.", $pluginDirName));
             return false;
         }
         $this->_pluginIniReader->load($plugin);

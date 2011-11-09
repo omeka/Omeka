@@ -35,10 +35,10 @@ class ItemTypesController extends Omeka_Controller_Action
     
     protected function _getDeleteConfirmMessage($record)
     {
-        return 'This will delete the item type but will not delete the '
+        return __('This will delete the item type but will not delete the '
              . 'elements assigned to the item type. Items that are assigned to '
              . 'this item type will lose all metadata that is specific to the '
-             . 'item type.';
+             . 'item type.');
     }
     
     /**
@@ -55,7 +55,7 @@ class ItemTypesController extends Omeka_Controller_Action
         $itemType = new ItemType();
         try {
             if ($itemType->saveForm($_POST)) {
-                $this->flashSuccess('The item type "' . $itemType->name . '" was successfully added!  You may now add elements to your new item type.');
+                $this->flashSuccess(__('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name));
                 $this->_redirect("item-types/edit/{$itemType->id}");
             }
         } catch (Omeka_Validator_Exception $e) {
@@ -91,7 +91,7 @@ class ItemTypesController extends Omeka_Controller_Action
                         
             if ($itemType->saveForm($_POST)) {
             	$itemType->reorderElements($elementsOrder);
-                $this->flashSuccess('The item type was successfully changed!');
+                $this->flashSuccess(__('The item type "%s" was successfully changed!', $itemType->name));
                 $this->redirect->goto('show', null, null, array('id'=>$itemType->id));
             }
         } catch (Omeka_Validator_Exception $e) {
@@ -112,7 +112,7 @@ class ItemTypesController extends Omeka_Controller_Action
         foreach($elementsToSave as $elementToSave) {
             if ($elementToSave->id) {
                 if (in_array($elementToSave->id, $uniqueElementsToSaveIds)) {
-                    throw new Omeka_Validator_Exception('The item type cannot have more than one "' . $elementToSave->name . '" element.');
+                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
 	            } else {
 	                $uniqueElementsToSaveIds[] = $element->id;
 	            }
@@ -120,7 +120,7 @@ class ItemTypesController extends Omeka_Controller_Action
             
             if ($elementToSave->name) {
                 if (in_array($elementToSave->name, $uniqueElementsToSaveNames)) {
-                    throw new Omeka_Validator_Exception('The item type cannot have more than one "' . $elementToSave->name . '" element.');
+                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
                 } else {
                     $uniqueElementsToSaveNames[] = trim($elementToSave->name);
                 }

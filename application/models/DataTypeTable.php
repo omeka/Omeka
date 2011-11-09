@@ -28,7 +28,7 @@ class DataTypeTable extends Omeka_Db_Table
         $select = "SELECT d.id FROM $table d WHERE d.name = ?";
         $dataTypeId = $this->getDb()->fetchOne($select, array($dataTypeName));
         if (empty($dataTypeId)) {
-            throw new Omeka_Record_Exception('Cannot find id from DataType name: ' . $dataTypeName);
+            throw new Omeka_Record_Exception(__('Cannot find id from DataType name: %s', $dataTypeName));
         }
         return $dataTypeId;
     }

@@ -1,6 +1,8 @@
-<?php head(array('title'=>'404 Page Not Found')); ?>
+<?php
+$pageTitle = __('404 Page Not Found');
+head(array('title'=>$pageTitle)); ?>
 <div id="primary">
-    <h1>404 Page Not Found</h1>
-    <p>&#8220;<?php echo html_escape($badUri); ?>&#8221; is not a valid URL.</p>
+    <h1><?php echo $pageTitle; ?></h1>
+    <p><?php echo __('%s is not a valid URL.', html_escape($badUri)); ?></p>
 </div>
 <?php foot(); ?>

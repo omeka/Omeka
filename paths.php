@@ -66,6 +66,7 @@ $site['scripts']           = 'scripts';
 $site['migrations']        = 'migrations';
 $site['install']           = 'install';
 $site['theme_uploads']     = 'theme_uploads';
+$site['languages']         = 'languages';
 
 // Define directory path constants:
 define('BASE_DIR',         dirname(__FILE__));
@@ -86,12 +87,12 @@ define('CONFIG_DIR',       APP_DIR . '/' . $site['config']);
 define('LOGS_DIR',         APP_DIR . '/' . $site['logs']);
 define('VIEW_SCRIPTS_DIR', APP_DIR . '/' . $site['views'] . '/' . $site['scripts']);
 define('UPGRADE_DIR',      APP_DIR . '/' . $site['migrations']);
+define('LANGUAGES_DIR',    APP_DIR . '/' . $site['languages']);
 define('THUMBNAIL_DIR',        ARCHIVE_DIR . '/' . $site['thumbnails']);
 define('SQUARE_THUMBNAIL_DIR', ARCHIVE_DIR . '/' . $site['square_thumbnails']);
 define('FULLSIZE_DIR',         ARCHIVE_DIR . '/' . $site['fullsize']);
 define('FILES_DIR',            ARCHIVE_DIR . '/' . $site['files']);
 define('THEME_UPLOADS_DIR',    ARCHIVE_DIR . '/' . $site['theme_uploads']);
-
 
 define('BACKGROUND_BOOTSTRAP_PATH', CORE_DIR . '/background.php');
 

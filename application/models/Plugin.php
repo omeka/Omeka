@@ -91,7 +91,7 @@ class Plugin extends Omeka_Record
     protected function _validate()
     {
         if (empty($this->name)) {
-            $this->addError('name', 'Names of plugins must not be blank');
+            $this->addError('name', __('Names of plugins must not be blank'));
         }
     }
     

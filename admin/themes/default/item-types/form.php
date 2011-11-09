@@ -14,16 +14,16 @@ jQuery(document).ready(function () {
 <?php echo flash(); ?>
 
 <fieldset id="type-information">
-    <legend>Item Type Information <span id="required-note">* Required Fields</span></legend>
+    <legend><?php echo __('Item Type Information'); ?> <span id="required-note">* <?php echo __('Required Fields'); ?></span></legend>
     
     <div class="field">
-        <?php echo label(array('name'=>'name', 'class' => 'required'),'Name'); ?>
+        <?php echo label(array('name'=>'name', 'class' => 'required'), __('Name')); ?>
         <div class="inputs">
         <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name); ?>
         </div>
     </div>
     <div class="field">
-    <?php echo label('description', 'Description'); ?>
+    <?php echo label('description', __('Description')); ?>
         <div class="inputs">
         <?php echo $this->formTextarea('description', $itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
         </div>
@@ -32,7 +32,7 @@ jQuery(document).ready(function () {
 <?php if ($itemtype->exists()): ?>
 
 <fieldset id="type-elements">
-    <legend>Elements</legend>
+    <legend><?php echo __('Elements'); ?></legend>
     <div id="element-list">
         <?php echo $this->action('element-list', 'item-types', null, array('item-type-id' => $itemtype->id)); ?>
     </div>

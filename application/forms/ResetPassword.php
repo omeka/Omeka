@@ -25,17 +25,17 @@ class Omeka_Form_ResetPassword extends Omeka_Form
         $this->setAttrib('id', 'reset-password');
         
         $this->addElement('password', 'new_password', array(
-            'label' => 'Create a Password',
+            'label' => __('Create a Password'),
             'validators' => array(
                 array('validator' => 'NotEmpty', 'options' => array(
                     'messages' => array(
-                        'isEmpty' => 'Password is required.'
+                        'isEmpty' => __('Password is required.')
                     )
                 )),
                 array('validator' => 'Confirmation', 'options' => array(
                     'field' => 'new_password_confirm',
                     'messages' => array(
-                        'notMatch' => "Typed passwords do not match.")
+                        'notMatch' => __("Typed passwords do not match."))
                 )),
                 array('validator' => 'StringLength', 'options' => array(
                     'min' => User::PASSWORD_MIN_LENGTH,
@@ -46,7 +46,7 @@ class Omeka_Form_ResetPassword extends Omeka_Form
         ));
         
         $this->addElement('password', 'new_password_confirm', array(
-            'label' => 'Re-type the Password'
+            'label' => __('Re-type the Password')
         ));
         
         $this->addElement('submit', 'Submit');

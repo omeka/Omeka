@@ -1,7 +1,9 @@
-<?php head(array('title'=>'Browse Items','content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
-<h1>Browse Items (<?php echo total_results();?> total)</h1>
+<?php 
+$pageTitle = __('Browse Items');
+head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
+<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', total_results()); ?></h1>
 <?php if (has_permission('Items', 'add')): ?>
-<p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>">Add an Item</a></p>
+<p id="add-item" class="add-button"><a class="add" href="<?php echo html_escape(uri('items/add')); ?>"><?php echo __('Add an Item'); ?></a></p>
 <?php endif; ?>
 <div id="primary">
     <?php echo flash(); ?>
@@ -90,26 +92,25 @@
                 <li><strong>Quick Filter</strong></li>
             <?php
                 echo nav(array(
-                    'All' => uri('items'),
-                    'Public' => uri('items/browse?public=1'),
-                    'Private' => uri('items/browse?public=0'),
-                    'Featured' => uri('items/browse?featured=1')
+                    __('All') => uri('items'),
+                    __('Public') => uri('items/browse?public=1'),
+                    __('Private') => uri('items/browse?public=0'),
+                    __('Featured') => uri('items/browse?featured=1')
                 ));
             ?>
             </ul>
         </div>
         <div id="simple-search-form">
             <?php echo simple_search(); ?>
-            <?php echo link_to_advanced_search('Advanced Search', array('id' => 'advanced-search-link')); ?>
+    		<?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
         </div>
-
     </div>
     
 <form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
     <div class="group">
     <?php if (has_permission('Items', 'edit')): ?>
         <div class="batch-edit-option">
-            <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+            <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
         </div>
     <?php endif; ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
@@ -118,7 +119,7 @@
         <thead>
             <tr>
                 <?php if (has_permission('Items', 'edit')): ?>
-                <th id="batch-edit-heading">Select</th>
+                <th id="batch-edit-heading"><?php echo __('Select'); ?></th>
                 <?php endif; ?>
             <?php
             $browseHeadings['Title'] = 'Dublin Core,Title';
@@ -127,7 +128,6 @@
             $browseHeadings['Public']  = 'public';
             $browseHeadings['Featured'] = 'featured';
             $browseHeadings['Date Added'] = 'added';
-
             echo browse_headings($browseHeadings); ?>
             </tr>
         </thead>
@@ -143,10 +143,10 @@
             <span class="title"><?php echo link_to_item(); ?></span>
             <ul class="action-links group">
                 <?php if (has_permission($item, 'edit')): ?>
-                <li><?php echo link_to_item('Edit', array(), 'edit'); ?></li>
+                <li><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></li>
                 <?php endif; ?>
                 <?php if (has_permission($item, 'delete')): ?>
-                <li><?php echo link_to_item('Delete', array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
+                <li><?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
                 <?php endif; ?>
             </ul>
             <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
@@ -158,8 +158,8 @@
                 ?>
                 <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
                 <ul>
-                    <li><strong>Collection:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo 'No Collection'; ?></li>
-                    <li><strong>Tags:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo 'No Tags'; ?></li>
+                    <li><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></li>
+                    <li><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></li>
                 </ul>
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
             </div>
@@ -170,12 +170,12 @@
                     : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
         <td>
         <?php if($item->public): ?>
-            <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="Public"/>
+        <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="<?php echo __('Public'); ?>"/>
         <?php endif; ?>
         </td>
         <td>
         <?php if($item->featured): ?>
-            <img src="<?php echo img('silk-icons/star.png'); ?>" alt="Featured"/>
+        <img src="<?php echo img('silk-icons/star.png'); ?>" alt="<?php echo __('Featured'); ?>"/>
         <?php endif; ?>
         </td>
         <td><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></td>
@@ -186,7 +186,7 @@
     <div class="group">
     <?php if (has_permission('Items', 'edit')): ?>
         <div class="batch-edit-option">
-            <input type="submit" class="submit" name="submit" value="Edit Selected Items" />
+            <input type="submit" class="submit" name="submit" value="<?php echo __('Edit Selected Items'); ?>" />
         </div>
     <?php endif; ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
@@ -194,21 +194,21 @@
 </form>
 
 <div id="output-formats">
-    <h2>Output Formats</h2>
+    <h2><?php echo __('Output Formats'); ?></h2>
     <?php echo output_format_list(false, ' · '); ?>
 </div>
 
 <?php elseif(!total_items()): ?>
     <div id="no-items">
-    <p>There are no items in the archive yet.
+    <p><?php echo __('There are no items in the archive yet.'); ?>
     
     <?php if(has_permission('Items','add')): ?>
-          Why don&#8217;t you <?php echo link_to('items', 'add', 'add one'); ?>?</p>
+          <?php echo link_to('items', 'add', __('Add an Item.')); ?></p>
     <?php endif; ?>
 </div>
     
 <?php else: ?>
-    <p>The query searched <?php echo total_items(); ?> items and returned no results. Would you like to <?php echo link_to_advanced_search('refine your search'); ?>?</p>
+    <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
     
 <?php endif; ?>
 

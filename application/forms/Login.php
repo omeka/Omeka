@@ -22,25 +22,25 @@ class Omeka_Form_Login extends Omeka_Form
         $this->setMethod('post');
         $this->setAttrib('id', 'login-form');
         $this->addElement('text', 'username', array(
-            'label'     => 'Username',
+            'label'     => __('Username'),
             'required'  => true,
             'class' => 'textinput',
             'validators' => array(
                     array('validator'   => 'NotEmpty',
                           'options'     =>  array(
                               'messages' => array(
-                                  'isEmpty' => 'Username cannot be empty.'))))));
+                                  'isEmpty' => __('Username cannot be empty.')))))));
         $this->addElement('password', 'password', array(
-            'label'=>'Password',
+            'label'=>__('Password'),
             'required'  => true,
             'class' => 'textinput',
             'validators' => array(
                     array('validator'   => 'NotEmpty',
                           'options'     =>  array(
                               'messages' => array(
-                                  'isEmpty' => 'Password cannot be empty.'))))));
-        $this->addElement('checkbox', 'remember', array('class'=>'checkbox', 'label'=>'Remember Me?'));
+                                  'isEmpty' => __('Password cannot be empty.')))))));
+        $this->addElement('checkbox', 'remember', array('class'=>'checkbox', 'label'=>__('Remember Me?')));
         $this->addDisplayGroup(array('username','password','remember'), 'login');
-        $this->addElement('submit', 'submit', array('label' => 'Log In'));
+        $this->addElement('submit', 'submit', array('label' => __('Log In')));
     }
 }

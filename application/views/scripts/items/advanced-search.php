@@ -1,13 +1,14 @@
-<?php 
+<?php
+$pageTitle = __('Advanced Search');
 if (!$isPartial):
-    head(array('title' => 'Advanced Search', 
+    head(array('title' => $pageTitle, 
                'bodyclass' => 'advanced-search', 
                'bodyid' => 'advanced-search-page'));
 ?>
 <?php if(!is_admin_theme()): ?>
 <div id="primary">
 <?php endif; ?>
-<h1>Advanced Search</h1>
+<h1><?php echo $pageTitle; ?></h1>
 <?php if(is_admin_theme()): ?>
 <div id="primary">
 <?php endif; ?>
@@ -25,7 +26,7 @@ $formAttributes['method'] = 'GET';
 	
 <form <?php echo _tag_attributes($formAttributes); ?>>
 	<div id="search-keywords" class="field">    
-		<?php echo label('keyword-search','Search for Keywords'); ?>
+		<?php echo label('keyword-search', __('Search for Keywords')); ?>
 		<div class="inputs">
         <?php echo text(array(
                 'name' => 'search',
@@ -35,7 +36,7 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
     <div id="search-narrow-by-fields" class="field">
-        <div class="label">Narrow by Specific Fields</div>
+        <div class="label"><?php echo __('Narrow by Specific Fields'); ?></div>
         <div class="inputs">
         <?php 
         // If the form has been submitted, retain the number of search 
@@ -64,11 +65,11 @@ $formAttributes['method'] = 'GET';
                           'sort' => 'alphaBySet'));
                 echo select(
                     array('name' => "advanced[$i][type]"),
-                    array('contains' => 'contains', 
-                          'does not contain' => 'does not contain',
-                          'is exactly' => 'is exactly',
-                          'is empty' => 'is empty', 
-                          'is not empty' => 'is not empty'),
+                    array('contains' => __('contains'), 
+                          'does not contain' => __('does not contain'),
+                          'is exactly' => __('is exactly'),
+                          'is empty' => __('is empty'), 
+                          'is not empty' => __('is not empty')),
                     @$rows['type']
                 );
                 echo text(
@@ -79,11 +80,11 @@ $formAttributes['method'] = 'GET';
             </div>
     <?php endforeach; ?>
         </div>
-        <button type="button" class="add_search">Add a Field</button>
+        <button type="button" class="add_search"><?php echo __('Add a Field'); ?></button>
     </div>
 
         <div id="search-by-range" class="field">
-            <label for="range">Search by a range of ID#s (example: 1-4, 156, 79)</label>
+            <label for="range"><?php echo __('Search by a range of ID#s (example: 1-4, 156, 79)'); ?></label>
             <div class="inputs">
             <?php echo text(
                     array('name' => 'range', 
@@ -95,7 +96,7 @@ $formAttributes['method'] = 'GET';
 
         <div id="search-selects">
             <div class="field">
-                <?php echo label('collection-search', 'Search By Collection'); ?>
+                <?php echo label('collection-search', __('Search By Collection')); ?>
                 <div class="inputs"><?php 
                     echo select_collection(array(
                         'name' => 'collection', 
@@ -104,7 +105,7 @@ $formAttributes['method'] = 'GET';
                 </div>
             </div>
             <div class="field">
-                <?php echo label('item-type-search', 'Search By Type'); ?>
+                <?php echo label('item-type-search', __('Search By Type')); ?>
                 <div class="inputs"><?php 
                     echo select_item_type(array('name'=>'type', 'id'=>'item-type-search'), 
                         @$_REQUEST['type']); ?>
@@ -114,7 +115,7 @@ $formAttributes['method'] = 'GET';
 	<?php if(has_permission('Users', 'browse')): ?>
             <div class="field">
             <?php 			
-                echo label('user-search', 'Search By User');?>
+                echo label('user-search', __('Search By User'));?>
                 <div class="inputs"><?php 
                     echo select_user(array(
                             'name' => 'user', 
@@ -124,7 +125,7 @@ $formAttributes['method'] = 'GET';
             </div>
 	<?php endif; ?>
             <div class="field">
-                <?php echo label('tag-search', 'Search By Tags'); ?>
+                <?php echo label('tag-search', __('Search By Tags')); ?>
                 <div class="inputs"><?php 
                     echo text(array(
                         'name' => 'tags',
@@ -137,27 +138,27 @@ $formAttributes['method'] = 'GET';
 	</div>
     <?php if (has_permission('Items','showNotPublic')): ?>
     <div class="field">
-        <?php echo label('public','Public/Non-Public'); ?>
+        <?php echo label('public', __('Public/Non-Public')); ?>
         <div class="inputs">
             <?php echo select(array('name' => 'public', 'id' => 'public'), 
-                array('1' => 'Only Public Items', 
-                      '0' => 'Only Non-Public Items')); ?>
+                array('1' => __('Only Public Items'), 
+                      '0' => __('Only Non-Public Items'))); ?>
         </div>
     </div>
 
     <div class="field">
-        <?php echo label('featured','Featured/Non-Featured'); ?>
+        <?php echo label('featured', __('Featured/Non-Featured')); ?>
         <div class="inputs">
             <?php echo select(array('name' => 'featured', 'id' => 'featured'), 
-                array('1' => 'Only Featured Items', 
-                      '0' => 'Only Non-Featured Items')); ?>
+                array('1' => __('Only Featured Items'), 
+                      '0' => __('Only Non-Featured Items'))); ?>
         </div>
     </div>
     <?php endif; ?>
 
     <?php is_admin_theme() ? fire_plugin_hook('admin_append_to_advanced_search') : fire_plugin_hook('public_append_to_advanced_search'); ?>
     <div>
-        <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="Search" />
+        <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search'); ?>" />
     </div>
 </form>
 

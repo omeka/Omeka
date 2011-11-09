@@ -192,11 +192,11 @@ class Taggable extends Omeka_Record_Mixin
         }
         
         if (!$this->record->id) {
-            throw new Omeka_Record_Exception( 'A valid record ID # must be provided when tagging.' );
+            throw new Omeka_Record_Exception( __('A valid record ID # must be provided when tagging.') );
         }
         
         if (!$entityOrUser) {
-            throw new Omeka_Record_Exception( 'A valid entity or user must be provided when tagging.' );
+            throw new Omeka_Record_Exception( __('A valid entity or user must be provided when tagging.') );
         }
         
         if (!is_array($tags)) {

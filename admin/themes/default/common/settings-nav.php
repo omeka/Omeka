@@ -2,21 +2,22 @@
 <ul id="section-nav" class="navigation vertical">
 <?php 
     $navArray = array();
-    $navArray['General Settings'] = uri('settings');
+    
+    $navArray[__('General Settings')] = uri('settings');
     if (has_permission('Plugins', 'browse')) {
-        $navArray['Plugins'] = uri('plugins');
+        $navArray[__('Plugins')] = uri('plugins');
     }
     if (has_permission('Themes', 'browse')) {
-        $navArray['Themes'] = uri('themes');    
+        $navArray[__('Themes')] = uri('themes');    
     }
     if (has_permission('Users','browse')) {
-    	$navArray['Users'] = uri('users');
+    	$navArray[__('Users')] = uri('users');
     }
     if (has_permission('ElementSets', 'browse')) {
-        $navArray['Element Sets'] = uri('element-sets');
+        $navArray[__('Element Sets')] = uri('element-sets');
     }
     if (has_permission('Security', 'edit')) {
-        $navArray['Security Settings'] = uri('security');
+        $navArray[__('Security Settings')] = uri('security');
     }
 
 	echo nav(apply_filters('admin_navigation_settings', $navArray)); 

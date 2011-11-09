@@ -63,7 +63,7 @@ class ErrorController extends Omeka_Controller_Action
     {
         $this->getResponse()->setHttpResponseCode(404);
         if (!($e = $this->_getException())) {
-            $e = new Exception("Page not found.");
+            $e = new Exception(__("Page not found."));
         }
         $this->view->assign(array('badUri' => $this->getRequest()->getRequestUri(), 
                                   'e' => $e));
@@ -81,7 +81,7 @@ class ErrorController extends Omeka_Controller_Action
         $this->getResponse()->setHttpResponseCode(403);
         // Fake an exception if there isn't one in the request.
         if (!($e = $this->_getException())) {
-            $e = new Omeka_Controller_Exception_403("Access denied.");
+            $e = new Omeka_Controller_Exception_403(__("Access denied."));
         }
         $this->view->assign(array('e' => $e));
         

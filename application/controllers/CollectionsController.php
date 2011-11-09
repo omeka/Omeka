@@ -28,25 +28,25 @@ class CollectionsController extends Omeka_Controller_Action
     protected function _getAddSuccessMessage($record)
     {
         $collection = $record;
-        return 'The collection "' . $collection->name . '" was successfully added!';        
+        return __('The collection "%s" was successfully added!', $collection->name);        
     }
     
     protected function _getEditSuccessMessage($record)
     {
         $collection = $record;
-        return 'The collection "' . $collection->name . '" was successfully changed!';        
+        return __('The collection "%s" was successfully changed!', $collection->name);        
     }
     
     protected function _getDeleteSuccessMessage($record)
     {
         $collection = $record;
-        return 'The collection "' . $collection->name . '" was successfully deleted!';        
+        return __('The collection "%s" was successfully deleted!', $collection->name);        
     }
 
     protected function _getDeleteConfirmMessage($record)
     {
-        return 'This will delete the collection and its associated metadata. '
+        return __('This will delete the collection and its associated metadata. '
              . 'This will not delete any items in this collection, but will '
-             . 'delete the reference to this collection in each item.';
+             . 'delete the reference to this collection in each item.');
     }
 }

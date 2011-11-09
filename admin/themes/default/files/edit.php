@@ -5,7 +5,7 @@
     } else {
         $fileTitle = '';
     }
-    $fileTitle = 'Edit File #' . item_file('id') . $fileTitle;
+    $fileTitle = __('Edit File #%s', item_file('id')) . $fileTitle;
 ?>
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
 <?php echo js('files'); ?>
@@ -14,7 +14,7 @@
 
 <div id="primary">
 <?php if (has_permission('Files', 'delete')): ?>
-    <?php echo delete_button(null, 'delete-file', 'Delete this File', array(), 'delete-record-form'); ?>
+    <?php echo delete_button(null, 'delete-file', __('Delete this File'), array(), 'delete-record-form'); ?>
 <?php endif; ?>
 <?php echo flash(); ?>
 
@@ -24,12 +24,12 @@
 <form method="post" id="editfile" action="<?php echo html_escape(uri('files/edit/'.$file->id)); ?>" name="editFile">
 
 <fieldset>
-<legend>Dublin Core</legend>    
+<legend><?php echo __('Dublin Core'); ?></legend>    
 
 <?php echo display_element_set_form($file, 'Dublin Core'); ?>
 </fieldset>
 <fieldset>
-<legend>Format (Legacy) Metadata</legend>   
+<legend><?php echo __('Format (Legacy) Metadata'); ?></legend>   
 
 <?php echo display_element_set_form($file, 'Omeka Legacy File'); ?>
 
@@ -38,7 +38,7 @@
 <?php fire_plugin_hook('admin_append_to_files_form', $file); ?>
 
 <fieldset>
-<input type="submit" name="submit" class="submit" value="Save Changes" id="file_edit" />
+<input type="submit" name="submit" class="submit" value="<?php echo __('Save Changes'); ?>" id="file_edit" />
 </fieldset>
 
 </form>

@@ -775,3 +775,30 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
         return true;
     } 
 }
+
+/**
+ * Wrapper for Zend_Translate
+ *
+ * @since 1.4
+ * @param string The string to be translated.
+ * @return string The translated string.
+ */
+function __($string)
+{
+    try {
+        $translate = Zend_Registry::get('Zend_Translate');
+        $string = $translate->translate($string);
+    } catch (Zend_Exception $e) {
+        // Skip translation if we can't load Zend_Translate object.
+    }
+    
+    $args = func_get_args();
+    
+    array_shift($args);
+    
+    if (!empty($args)) {
+        return vsprintf($string, $args);
+    }
+    
+    return $string;
+}

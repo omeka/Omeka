@@ -39,6 +39,10 @@ log.processes = false
 ; 
 session.name = ""
 
+; Localization.
+; translate.locale = ""
+
+
 ; Sessions are now stored in the database by default. To revert to the older
 ; method of storing session data in the filesystem, uncomment the 
 ; following line.

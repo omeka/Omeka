@@ -32,7 +32,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         $this->setAttrib('id', 'change-password');
         $this->addElement('password', 'current_password',
             array(
-                'label'         => 'Current Password',
+                'label'         => __('Current Password'),
                 'required'      => true,
                 'class'         => 'textinput',
                 'errorMessages' => array(self::ERROR_CURRENT_PASSWORD_INVALID),
@@ -41,7 +41,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         
         $this->addElement('password', 'new_password',
             array(
-                'label'         => 'New Password',
+                'label'         => __('New Password'),
                 'required'      => true,
                 'class'         => 'textinput',
                 'validators'    => array(
@@ -75,7 +75,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         );
         $this->addElement('password', 'new_password_confirm',
             array(
-                'label'         => 'Repeat New Password',
+                'label'         => __('Repeat New Password'),
                 'required'      => true,
                 'class'         => 'textinput',
                 'errorMessages' => array(self::ERROR_NEW_PASSWORD_CONFIRM_REQUIRED)
@@ -83,7 +83,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         );
         $this->addElement('submit', 'submit',
             array(
-                'label'         => 'Save Password'
+                'label'         => __('Save Password')
             )
         );
         
@@ -92,7 +92,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                                      'new_password_confirm', 
                                      'submit'), 
                                'change_password', 
-                               array("legend" => "Change Password"));
+                               array("legend" => __("Change Password")));
     }
     
     public function setUser(User $user)

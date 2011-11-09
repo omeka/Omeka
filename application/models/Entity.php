@@ -34,11 +34,11 @@ class Entity extends Omeka_Record
     protected function _validate()
     {        
         if (!empty($this->email) && !Zend_Validate::is($this->email, 'EmailAddress')) {
-            $this->addError('email', 'The email address provided is not valid.');
+            $this->addError('email', __('The email address provided is not valid.'));
         }
                 
         if (empty($this->first_name) && empty($this->last_name) and empty($this->institution)) {
-            $this->addError('Name', 'The name for a person may not be completely blank.');
+            $this->addError('Name', __('The name for a person may not be completely blank.'));
         }
     }
     
@@ -131,7 +131,7 @@ class Entity extends Omeka_Record
     {
         try {
             if (!$this->exists() or !$entity->exists()) {
-                throw new Omeka_Record_Exception( 'Both of these Entities must be persistent in order to merge them.' );
+                throw new Omeka_Record_Exception( __('Both of these Entities must be persistent in order to merge them.') );
             }
             
             $db = $this->getDb();

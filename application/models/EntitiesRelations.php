@@ -26,11 +26,11 @@ class EntitiesRelations extends Omeka_Record
     protected function _validate()
     {
         if (empty($this->type)) {
-            $this->addError('Joins in the EntitiesRelations table must be given a polymorphic type');
+            $this->addError(__('Joins in the EntitiesRelations table must be given a polymorphic type'));
         }
         
         if (empty($this->relation_id) || empty($this->relationship_id)) {
-            $this->addError('Joins in the EntitiesRelations table must be filled out entirely');
+            $this->addError(__('Joins in the EntitiesRelations table must be filled out entirely'));
         }
     }
     

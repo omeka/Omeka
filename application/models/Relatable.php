@@ -155,7 +155,7 @@ class Relatable extends Omeka_Record_Mixin
         
         //If the entity_id is 0, die because that won't work
         if ($entity_id == 0) {
-            throw new Omeka_Record_Exception( 'Invalid entity provided!' );
+            throw new Omeka_Record_Exception( __('Invalid entity provided!') );
             
             //For now, fail silently because there's no use in bitching about it
             return false;
@@ -166,7 +166,7 @@ class Relatable extends Omeka_Record_Mixin
         $relationship_id = $this->getRelationshipId($relationship);
         
         if (!$relationship_id) {
-            throw new Omeka_Record_Exception( 'Relationship called '.$relationship . ' does not exist.' );
+            throw new Omeka_Record_Exception( __('Relationship called %s does not exist.', $relationship) );
         }
         
         $er = new EntitiesRelations;
@@ -219,7 +219,7 @@ class Relatable extends Omeka_Record_Mixin
         $id =  $this->record->id;
         
         if (!$id) {
-            throw new Omeka_Record_Exception('Record must exist before relations can be set.');
+            throw new Omeka_Record_Exception(__('Record must exist before relations can be set.'));
         }
         
         return $id;

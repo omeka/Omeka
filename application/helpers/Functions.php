@@ -49,8 +49,8 @@ function auto_discovery_link_tag(){
  * @return string HTML
  */
 function auto_discovery_link_tags() {
-	$html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="'. html_escape(items_output_uri()) .'" />';
-	$html .= '<link rel="alternate" type="application/atom+xml" title="Omeka Atom Feed" href="'. html_escape(items_output_uri('atom')) .'" />';
+	$html = '<link rel="alternate" type="application/rss+xml" title="'. __('Omeka RSS Feed') . '" href="'. html_escape(items_output_uri()) .'" />';
+	$html .= '<link rel="alternate" type="application/atom+xml" title="'. __('Omeka Atom Feed') .'" href="'. html_escape(items_output_uri('atom')) .'" />';
 	return $html;
 }
 
@@ -196,7 +196,7 @@ function loop_records($recordType, $records, $setCurrentRecordCallback=null)
         if (is_callable($setCurrentRecordCallback)) {
             call_user_func($setCurrentRecordCallback, $record);
         } else {
-            throw new Exception('Error: Invalid callback was provided for the loop.');
+            throw new Exception(__('Error: Invalid callback was provided for the loop.'));
         }
         
         return $record;

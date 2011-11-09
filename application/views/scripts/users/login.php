@@ -1,9 +1,11 @@
 <?php queue_js('login'); ?>
-<?php head(array('bodyclass' => 'login', 'title' => 'Log In'), $header); ?>
-<h1>Log In</h1>
+<?php
+$pageTitle = __('Log In');
+head(array('bodyclass' => 'login', 'title' => $pageTitle), $header); ?>
+<h1><?php echo $pageTitle; ?></h1>
 
 <p id="login-links">
-<span id="backtosite"><?php echo link_to_home_page('Go to Home Page'); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', 'Lost your password?'); ?></span>
+<span id="backtosite"><?php echo link_to_home_page(__('Go to Home Page')); ?></span>  |  <span id="forgotpassword"><?php echo link_to('users', 'forgot-password', __('Lost your password?')); ?></span>
 </p>
 
 <?php echo flash(); ?>

@@ -254,7 +254,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         }
         
         if (!array_key_exists($elementId, $this->_elementsById)) {
-            throw new Omeka_Record_Exception("Cannot find an element with an ID of '$elementId'!");
+            throw new Omeka_Record_Exception(__("Cannot find an element with an ID of '%s'!", $elementId));
         }
         
         return $this->_elementsById[$elementId];
@@ -311,21 +311,21 @@ class ActsAsElementText extends Omeka_Record_Mixin
             if (count($element) > 1) {
                 // If we have more than one element set with an element of that 
                 // name, return the first one.
-                debug('Element name is ambiguous!  There is more than one element set containing an element named "' . $elementName . '"!');
+                debug(__('Element name is ambiguous! There is more than one element set containing an element named "%s"!', $elementName));
                 return current($element);
             } else if(empty($element)) {
-                throw new Omeka_Record_Exception("There is no element named '$elementName'!");
+                throw new Omeka_Record_Exception(__('There is no element named "%s"!',$elementName));
             }
             // Grab the first element of the result array.
             $element = current($element);
         } else {
             $elements = $this->_elementsByNameAndSet[$elementName];
             if (!$elements) {
-                throw new Omeka_Record_Exception("There is no element named '$elementName'!");
+                throw new Omeka_Record_Exception(__('There is no element named "%s"!',$elementName));
             }
             $element = @$elements[$elementSetName];
             if (!$element) {
-                throw new Omeka_Record_Exception("There is no element named '$elementName' in the set named '$elementSetName'!");
+                throw new Omeka_Record_Exception(__('There is no element named "%1$s" in the set named "%2$s"!',$elementName, $elementSetName));
             }
         }
 
@@ -481,7 +481,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
                 $element = $this->getElementByNameAndSetName($elementName, $elementSetName);
                 foreach ($elementTexts as $elementText) {
                     if (!array_key_exists('text', $elementText)) {
-                        throw new Omeka_Record_Exception('Element texts are not formatted correctly!');
+                        throw new Omeka_Record_Exception(__('Element texts are not formatted correctly!'));
                     }
                     // Only add the element text if it's not empty.  There
                     // should be no empty element texts in the DB.
@@ -644,7 +644,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
             default:
                 // Elements should always have a default data type in the 
                 // database, even if plugins override the default behavior.
-                throw new Omeka_Record_Exception("Cannot process form input for element with data type '$elementDataType'!");
+                throw new Omeka_Record_Exception(__('Cannot process form input for element with data type "%s"!', $elementDataType));
                 break;
         }
     }
@@ -659,7 +659,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         foreach ($this->_textsToSave as $key => $textRecord) {
             if (!$this->_elementTextIsValid($textRecord)) {
                 $elementRecord = $this->getElementById($textRecord->element_id);
-                $errorMessage = "'$elementRecord->name' field has at least one invalid value!";
+                $errorMessage = __('The "%s" field has at least one invalid value!', $elementRecord->name);
                 $this->_record->addError($elementRecord->name, $errorMessage); 
             }
         }
@@ -692,7 +692,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
             // Even for plugins hooking into the validation, each element must
             // have one of these default data types.
             if (!array_key_exists($elementDataType, $validators)) {
-                throw new Omeka_Record_Exception("Cannot validate an element of data type '$elementDataType'!");
+                throw new Omeka_Record_Exception(__('Cannot validate an element of data type "%s"!', $elementDataType));
             }
             $validatorClass = $validators[$elementDataType];
             // Text and Tiny Text have no default validation so skip those.
@@ -732,7 +732,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
     public function saveElementTexts()
     {        
         if (!$this->_record->exists()) {
-            throw new Omeka_Record_Exception('Cannot save element text for records that are not yet persistent!');
+            throw new Omeka_Record_Exception(__('Cannot save element text for records that are not yet persistent!'));
         }
         
         // Delete all the elements that were displayed on the form before adding the new stuff.

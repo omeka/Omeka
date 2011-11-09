@@ -55,11 +55,11 @@ class Tag extends Omeka_Record {
     protected function _validate()
     {
         if (trim($this->name) == '') {
-            $this->addError('name', 'Tags must be given a name.');
+            $this->addError('name', __('Tags must be given a name.'));
         }
         
         if (!$this->fieldIsUnique('name')) {
-            $this->addError('name', 'That name is already taken for this tag.');
+            $this->addError('name', __('That name is already taken for this tag.'));
         }
     }
     

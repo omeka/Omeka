@@ -23,7 +23,7 @@
  * @param array $queryParams the parameters in the uri query
  * @return string HTML
  */
-function link_to($record, $action=null, $text='View', $props = array(), $queryParams=array())
+function link_to($record, $action=null, $text=null, $props = array(), $queryParams=array())
 {
     // If we're linking directly to a record, use the URI for that record.
     if($record instanceof Omeka_Record) {
@@ -38,7 +38,10 @@ function link_to($record, $action=null, $text='View', $props = array(), $queryPa
         if($action) $urlOptions['action'] = (string) $action;
         $url = uri($urlOptions, $route, $queryParams, true);
     }
-
+    
+    if (!$text) {
+        $text = __('View');
+    }
     
 	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
     
@@ -54,8 +57,12 @@ function link_to($record, $action=null, $text='View', $props = array(), $queryPa
  * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
-function link_to_advanced_search($text = 'Advanced Search', $props = array(), $uri=null)
-{   
+function link_to_advanced_search($text = null, $props = array(), $uri=null)
+{
+    if (!$text) {
+        $text = __('Advanced Search');
+    }
+    
     if (!$uri) {
         $uri = apply_filters('advanced_search_link_default_uri', uri('items/advanced-search'));
     }
@@ -195,8 +202,11 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
  * page, and array('foo'=>'bar') was passed as this argument, the new URI would be
  * items/browse?collection=1&foo=bar.
  */
-function link_to_items_rss($text = 'RSS', $params=array())
+function link_to_items_rss($text = null, $params=array())
 {	
+    if (!$text) {
+        $text = __('RSS');
+    }
 	return '<a href="' . html_escape(items_output_uri('rss2', $params)) . '" class="rss">' . $text . '</a>';
 }
 
@@ -209,8 +219,12 @@ function link_to_items_rss($text = 'RSS', $params=array())
  * @uses link_to()
  * @return string
  */
-function link_to_next_item($text="Next Item &rarr;", $props=array())
+function link_to_next_item($text=null, $props=array())
 {
+    if (!$text) {
+        $text = __("Next Item &rarr;");
+    }
+    
     $item = get_current_item();
 	if($next = $item->next()) {
 		return link_to($next, 'show', $text, $props);
@@ -221,8 +235,12 @@ function link_to_next_item($text="Next Item &rarr;", $props=array())
  * @see link_to_next_item()
  * @return string
  */
-function link_to_previous_item($text="&larr; Previous Item", $props=array())
+function link_to_previous_item($text=null, $props=array())
 {
+    if (!$text) {
+        $text = __('&larr; Previous Item');
+    }
+    
     $item = get_current_item();
 	if($previous = $item->previous()) {
 		return link_to($previous, 'show', $text, $props);
@@ -250,7 +268,7 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
     
     $collectionName = collection('name', array(), $collectionObj);
     
-	$text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : '[Untitled]'));
+	$text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : __('[Untitled]')));
 		
 	return link_to($collectionObj, $action, $text, $props);
 }
@@ -505,8 +523,11 @@ function public_nav_items(array $navArray, $maxDepth = 0)
  * items/browse?collection=1&foo=bar.
  * @param array $tagAttributes An array of tag attributes for the link.
  */
-function link_to_items_atom($text = 'Atom', $params=array(), $tagAttributes=array('class' => 'atom'))
+function link_to_items_atom($text = null, $params=array(), $tagAttributes=array('class' => 'atom'))
 {	
+    if (!$text) {
+        $text = __('Atom');
+    }
 	$tagAttributes['href'] = html_escape(items_output_uri('atom', $params));
 	return '<a ' . _tag_attributes($tagAttributes) . '>' . $text . '</a>';
 }

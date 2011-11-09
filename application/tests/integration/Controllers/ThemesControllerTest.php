@@ -38,7 +38,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('themes/config');
         $this->assertController('themes');
         $this->assertAction('config');
-        $this->assertQueryContentContains('h2', "Please Configure The \"$name\" Theme");
+        $this->assertQueryContentContains('h1', $name);
         $this->assertQuery('input#logo');
     }
         

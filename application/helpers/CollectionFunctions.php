@@ -55,7 +55,7 @@ function collection($fieldName, $options=array(), $collection=null)
             $text = $collection->getCollectors();
             break;
         default:
-            throw new Exception('"' . $fieldName . '" does not exist for collections!');
+            throw new Exception(__('%s does not exist for collections!', $fieldName));
             break;
     }
     
@@ -120,7 +120,7 @@ function collection_is_public()
 function display_random_featured_collection()
 {
     $featuredCollection = random_featured_collection();
-    $html = '<h2>Featured Collection</h2>';
+    $html = '<h2>' . __('Featured Collection') . '</h2>';
     if ($featuredCollection) {
         $html .= '<h3>' . link_to_collection($collectionTitle, array(), 'show', $featuredCollection) . '</h3>';
         if ($collectionDescription = collection('Description', array('snippet'=>150), $featuredCollection)) {
@@ -128,7 +128,7 @@ function display_random_featured_collection()
         }
         
     } else {
-        $html .= '<p>No featured collections are available.</p>';
+        $html .= '<p>' . __('No featured collections are available.') . '</p>';
     }
     return $html;
 }

@@ -34,13 +34,13 @@ jQuery(document).bind('omeka:elementformload', function () {
 <div id="public-featured">
     <?php if ( has_permission('Items', 'makePublic') ): ?>
         <div class="checkbox">
-            <label for="public">Public:</label> 
+            <label for="public"><?php echo __('Public'); ?>:</label> 
             <div class="checkbox"><?php echo checkbox(array('name'=>'public', 'id'=>'public'), $item->public); ?></div>
         </div>
     <?php endif; ?>
     <?php if ( has_permission('Items', 'makeFeatured') ): ?>
         <div class="checkbox">
-            <label for="featured">Featured:</label> 
+            <label for="featured"><?php echo __('Featured'); ?>:</label> 
             <div class="checkbox"><?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?></div>
         </div>
     <?php endif; ?>

@@ -116,11 +116,11 @@ class ElementSet extends Omeka_Record
     protected function _validate()
     {
         if (!$this->fieldIsUnique('name')) {
-            $this->addError('Name', 'Name of element set must be unique.');
+            $this->addError('Name', __('Name of element set must be unique.'));
         }
         
         if (empty($this->name)) {
-            $this->addError('Name', 'Name of element set must not be empty.');
+            $this->addError('Name', __('Name of element set must not be empty.'));
         }
     }
 }

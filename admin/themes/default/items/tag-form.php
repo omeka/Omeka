@@ -8,14 +8,14 @@
         <input type="hidden" name="my-tags-to-delete" size="30" id="my-tags-to-delete" value="" />
         <input type="hidden" name="other-tags-to-delete" size="30" id="other-tags-to-delete" value="" />
         <div id="add-tags">
-            <h3>Add Tags</h3>           
+            <h3><?php echo __('Add Tags'); ?></h3>           
             <input type="text" name="tags" size="20" id="tags" class="textinput" value="" />
-            <input type="button" name="add-tags-button" id="add-tags-button" value="Add Tags" />
-            <p id="add-tags-explanation">Separate tags with <?php echo settings('tag_delimiter'); ?></p>
+            <input type="button" name="add-tags-button" id="add-tags-button" value="<?php echo __('Add Tags'); ?>" />
+            <p id="add-tags-explanation"><?php echo __('Separate tags with %s', settings('tag_delimiter')); ?></p>
         </div>
         <div id="my-tags">
             <?php if ($myTags): ?>
-                <h3>My Tags</h3>
+                <h3><?php echo __('My Tags'); ?></h3>
                 <ul id="my-tags-list">
                     <?php foreach( $myTags as $myTag ): ?>
                     <li class="tag-delete">
@@ -39,7 +39,7 @@
         </div>
         <?php if ($otherTags): ?>
             <div id="other-tags">
-                <h3>All Tags</h3>
+                <h3><?php echo __('All Tags'); ?></h3>
                 <ul id="other-tags-list">
                     <?php foreach( $otherTags as $otherTag ): ?>
                         <li>

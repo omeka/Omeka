@@ -1,11 +1,12 @@
-<?php head(array('title'=>'Plugin Configuration', 'bodyclass'=>'plugins')); ?>
-
+<?php
+$pageTitle = __('Configure the &#8220;%s&#8221; Plugin', $plugin->getDisplayName());
+head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
+<h1><?php echo $pageTitle; ?></h1>
 <div id="primary">
     <?php echo flash(); ?>
-    <h2>Please Configure The '<?php echo html_escape($plugin->getDisplayName()); ?>' Plugin</h2>
     <form method="post">
         <?php echo $pluginBroker->callHook('config_form', array(), $plugin); ?>
-        <input type="submit" name="install_plugin" value="Save Changes" class="submit" />
+        <input type="submit" name="install_plugin" value="<?php echo __('Save Changes'); ?>" class="submit" />
     </form>
 </div>
 

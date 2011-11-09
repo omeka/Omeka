@@ -5,7 +5,7 @@
     } else {
         $userTitle = '';
     }
-    $userTitle = 'Edit User #' . $user->id . $userTitle;
+    $userTitle = __('Edit User #%s', $user->id) . $userTitle;
 ?>
 <?php head(array('title'=> $userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 <h1><?php echo $userTitle; ?></h1>

@@ -55,7 +55,7 @@ class UpgradeController extends Zend_Controller_Action
             $this->view->error = $e->getMessage();
             $this->view->trace = $e->getTraceAsString();
         } catch (Zend_Db_Exception $e) {
-            $this->view->error = "SQL error in migration: " . $e->getMessage();
+            $this->view->error = __("SQL error in migration: ") . $e->getMessage();
             $this->view->trace = $e->getTraceAsString();
         }
     }

@@ -130,7 +130,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
 	}
 	
 	if (empty($tags)) {
-		$html = '<p>No tags are available.</p>';
+		$html = '<p>'. __('No tags are available.') .'</p>';
 		return $html;
 	} 
 	

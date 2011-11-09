@@ -48,7 +48,7 @@ class TagsController extends Omeka_Controller_Action
                 } else {
                     $tag->deleteForEntity($user->Entity);
                 }
-                $this->flashSuccess("Tag named '{$tag->name}' was successfully deleted.");
+                $this->flashSuccess(__("Tag named '%s' was successfully deleted.", $tag->name));
             }
             
             $tags = $this->getTagsForAdministration();
@@ -61,7 +61,7 @@ class TagsController extends Omeka_Controller_Action
         $user = $this->getCurrentUser();
         
         if (!$user) {
-            throw new Exception( 'You have to be logged in to edit tags!' );
+            throw new Exception( __('You have to be logged in to edit tags!') );
         }
         
         $criteria = array('sort' => 'alpha');
@@ -98,7 +98,7 @@ class TagsController extends Omeka_Controller_Action
             } else {
                 $oldTag->rename($newTags, $user->id);
             }
-            $this->flashSuccess("Tag named '$oldName' was successfully renamed to '$newNames'.");
+            $this->flashSuccess(__('Tag named "%1$s" was successfully renamed to "%2$s".', $oldName, $newNames));
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
         } catch(Exception $e) {
@@ -125,7 +125,7 @@ class TagsController extends Omeka_Controller_Action
         }
         //Since tagType must correspond to a valid classname, this will barf an error on Injection attempts
         if (!class_exists($for)) {
-            throw new Exception('Invalid tagType given');
+            throw new Exception(__('Invalid tagType given'));
         }
         
         if($record = $this->_getParam('record')) {

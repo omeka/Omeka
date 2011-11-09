@@ -177,20 +177,20 @@ class Element extends Omeka_Record
     protected function _validate()
     {
         if (empty($this->name)) {
-            $this->addError('name', 'Name must not be empty!');
+            $this->addError('name', __('Name must not be empty!'));
         }
         
         if (empty($this->data_type_id)) {
-            $this->addError('data_type_id', 'Element must have a valid data type!');
+            $this->addError('data_type_id', __('Element must have a valid data type!'));
         }
         
         if (empty($this->record_type_id)) {
-            $this->addError('record_type_id', 'Element must have a valid record type!');
+            $this->addError('record_type_id', __('Element must have a valid record type!'));
         }
         
         // Check if the element set / element name combination already exists.
         if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
-            $this->addError('name', "'$this->name' already exists for element set #$this->element_set_id");
+            $this->addError('name', __('%1$s already exists for element set #%2$s', $this->name, $this->element_set_id) );
         }
     }
     
@@ -249,7 +249,7 @@ class Element extends Omeka_Record
     {
         $elementSet = $this->getDb()->getTable('ElementSet')->findBySql('name = ?', array($elementSetName), true);
         if (!$elementSet) {
-            throw new Omeka_Record_Exception("Cannot set element set ID: set named '$elementSetName' does not exist.");
+            throw new Omeka_Record_Exception(__('Cannot set element set ID: set named "%s" does not exist.', $elementSetName));
         }
         return $elementSet->id;
     }

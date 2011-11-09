@@ -29,7 +29,7 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
         $this->setAttrib('id', 'recover-password');
         
         $this->addElement('text', 'email', array(
-            'label' => 'Email',
+            'label' => __('Email'),
             'required' => true,
             'validators' => array(
                 array(
@@ -38,7 +38,7 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
                     'options' => array(
                         'messages' => array(
                             Zend_Validate_NotEmpty::IS_EMPTY => 
-                                'Email address is required.'
+                                __('Email address is required.')
                         )
                     )
                 ),
@@ -48,11 +48,11 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
                     'options' => array(
                         'messages' => array(
                             Zend_Validate_EmailAddress::INVALID =>
-                                'Invalid email address given.',
+                                __('Invalid email address given.'),
                             Zend_Validate_EmailAddress::INVALID_FORMAT => 
-                                'Invalid format given for email address.',
+                                __('Invalid format given for email address.'),
                             Zend_Validate_EmailAddress::INVALID_HOSTNAME   => 
-                                'Invalid hostname given for email address.',
+                                __('Invalid hostname given for email address.'),
                             //Zend_Validate_EmailAddress::INVALID_SEGMENT => '',
                             //Zend_Validate_EmailAddress::DOT_ATOM => '',
                             //Zend_Validate_EmailAddress::QUOTED_STRING => '', 
@@ -70,7 +70,7 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
                         'exclude' => $this->_getExcludeClause(),
                         'adapter' => $this->_db->getAdapter(),
                         'messages' => array(
-                            'noRecordFound' => "Invalid email address"
+                            'noRecordFound' => __("Invalid email address")
                         )
                     )
                 )    
