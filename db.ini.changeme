@@ -1,13 +1,13 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Database Configuration
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Database Configuration File ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
-; Omeka requires MySQL 5 to work properly.  To configure
-; your database, replace the X's with your specific settings.
-; If you're unsure about your database information, ask your
-; server administrator, or consult the codex
-; http://omeka.org/codex/configuring_omeka_database
+; Omeka requires MySQL 5 or newer.
 ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; To configure your database, replace the X's with your specific
+; settings. If you're unsure about your database information, ask
+; your server administrator, or consult the documentation at
+; <http://omeka.org/codex/Database_Configuration_File>.
 
 [database]
 host     = "XXXXXXX"
