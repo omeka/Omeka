@@ -36,13 +36,6 @@
 abstract class Omeka_File_Ingest_Abstract
 {
     /**
-     * Corresponds to the archive/ subdirectory where files are stored.
-     *
-     * @var string  
-     */
-    protected static $_archiveDirectory;
-    
-    /**
      * @var Item
      */
     protected $_item;
@@ -61,15 +54,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @see Omeka_File_Ingest_Abstract::addValidator()
      */
     private $_validators = array();
-            
-    public function __construct()
-    {
-        if (defined('FILES_DIR')) {
-            $this->_archiveDirectory = FILES_DIR;
-        }
-    }
 
-    
     /**
      * Set the item to use as a target when ingesting files.
      * 
