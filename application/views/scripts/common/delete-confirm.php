@@ -1,6 +1,6 @@
 <?php
 $class = get_class($record);
-$pageTitle = 'Delete ' . Inflector::titleize($class);
+$pageTitle = __('Delete %s', Inflector::titleize($class));
 
 if (!$isPartial):
 head(array('title' => $pageTitle));
@@ -9,7 +9,7 @@ head(array('title' => $pageTitle));
 <div id="primary">   
 <?php endif; ?>
 <div title="<?php echo $pageTitle; ?>">
-<h2>Are you sure?</h2>
+<h2><?php echo __('Are you sure?'); ?></h2>
 <?php echo nls2p(html_escape($confirmMessage)); ?>
 <?php echo $form; ?>
 </div>
