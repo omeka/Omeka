@@ -23,7 +23,7 @@ class Omeka_Core_Resource_Translate extends Zend_Application_Resource_Translate 
         $config = $this->_getTranslateConfig();
 
         // If no language is selected, don't load the Translate component.
-        if (isset($config['locale'])) {
+        if (isset($config['locale']) && $config['locale']) {
             $config['content'] = LANGUAGES_DIR . "/{$config['locale']}.mo";
             $this->setOptions($config);
             return parent::init();
