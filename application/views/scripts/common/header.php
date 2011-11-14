@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="<?php echo get_html_lang(); ?>">
 <head>
     <meta charset="utf-8">
     <?php if ( $description = settings('description')): ?>

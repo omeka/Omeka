@@ -802,3 +802,14 @@ function __($string)
     
     return $string;
 }
+
+function get_html_lang()
+{
+    try {
+        $locale = Zend_Registry::get('Zend_Locale');
+    } catch(Zend_Exception $e) {
+        return 'en-US';
+    }
+
+    return str_replace('_', '-', $locale->toString());
+}
