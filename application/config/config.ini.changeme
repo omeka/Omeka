@@ -215,7 +215,7 @@ mail.transport.type = "Sendmail"
 ; Localization ;
 ;;;;;;;;;;;;;;;;
 
-; translate.locale
+; locale
 ; The locale identifier used for translating and displaying Omeka.
 ; default: none
 ;
@@ -227,4 +227,4 @@ mail.transport.type = "Sendmail"
 ; The identifier must also have a corresponding .mo file in
 ; the application/languages directory.
 ;
-; translate.locale = ""
+; locale = ""
